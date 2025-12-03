@@ -1,62 +1,126 @@
 /**
  * M3 Expressive Slider Styles
  * Uses Material Design 3 Expressive design tokens
- *
- * Token Reference:
- * - Colors: var(--md-sys-color-primary-*), var(--md-sys-color-secondary-*), etc.
- * - Spacing: var(--md-sys-spacing-1) through var(--md-sys-spacing-32)
- * - Shapes: var(--md-sys-shape-corner-small), var(--md-sys-shape-corner-medium), etc.
- * - Elevation: var(--md-sys-elevation-level0) through var(--md-sys-elevation-level5)
- * - Motion: var(--md-sys-motion-duration-short1) through var(--md-sys-motion-duration-long4)
  */
 
 /* ===== BASE SLIDER STYLES ===== */
 .m3-slider {
   display: flex;
+  flex-direction: column;
+  gap: var(--md-sys-spacing-2);
+  width: 100%;
+}
+
+.m3-slider__label {
+  font-family: var(--md-sys-typescale-font-plain);
+  font-size: var(--md-sys-typescale-bodyMedium-size);
+  font-weight: var(--md-sys-typescale-weight-regular);
+  color: var(--md-sys-color-on-surface);
+}
+
+.m3-slider__container {
+  position: relative;
+  display: flex;
   align-items: center;
-  justify-content: center;
-  /* TODO: Add base styling */
-  transition: background-color var(--md-sys-motion-duration-short2) var(--md-sys-motion-easing-standard);
+  gap: var(--md-sys-spacing-2);
 }
 
-/* ===== VARIANT STYLES ===== */
-/* .m3-slider--variant1 {
-  TODO: Add variant styling
+.m3-slider__track {
+  position: relative;
+  flex: 1;
+  height: 4px;
+  background-color: var(--md-sys-color-surface-container);
+  border-radius: var(--md-sys-shape-corner-full);
+  overflow: hidden;
 }
 
-.m3-slider--variant2 {
-  TODO: Add variant styling
-} */
-
-/* ===== COLOR ROLES ===== */
-/* .m3-slider--primary {
-  color: var(--md-sys-color-primary-50);
-  background-color: var(--md-sys-color-primary-container);
+.m3-slider__fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background-color: var(--md-sys-color-primary-50);
+  border-radius: var(--md-sys-shape-corner-full);
+  transition: width var(--md-sys-motion-duration-short2) var(--md-sys-motion-easing-standard);
 }
 
-.m3-slider--secondary {
-  color: var(--md-sys-color-secondary-50);
-  background-color: var(--md-sys-color-secondary-container);
-} */
+.m3-slider--secondary .m3-slider__fill {
+  background-color: var(--md-sys-color-secondary-50);
+}
 
-/* ===== HOVER/ACTIVE/FOCUS STATES ===== */
-/* .m3-slider:hover {
+.m3-slider--tertiary .m3-slider__fill {
+  background-color: var(--md-sys-color-tertiary-50);
+}
+
+.m3-slider--error .m3-slider__fill {
+  background-color: var(--md-sys-color-error-50);
+}
+
+.m3-slider__input {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  outline: none;
+}
+
+.m3-slider__input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: var(--md-sys-shape-corner-full);
+  background-color: var(--md-sys-color-primary-50);
+  cursor: pointer;
+  border: 2px solid var(--md-sys-color-surface);
+  box-shadow: var(--md-sys-elevation-level1);
+  transition: transform var(--md-sys-motion-duration-short2) var(--md-sys-motion-easing-standard);
+}
+
+.m3-slider__input::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+}
+
+.m3-slider__input::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: var(--md-sys-shape-corner-full);
+  background-color: var(--md-sys-color-primary-50);
+  cursor: pointer;
+  border: 2px solid var(--md-sys-color-surface);
   box-shadow: var(--md-sys-elevation-level1);
 }
 
-.m3-slider:active {
-  transform: scale(0.98);
-} */
+.m3-slider--secondary .m3-slider__input::-webkit-slider-thumb,
+.m3-slider--secondary .m3-slider__input::-moz-range-thumb {
+  background-color: var(--md-sys-color-secondary-50);
+}
 
-/* ===== DISABLED STATE ===== */
-/* .m3-slider:disabled {
-  opacity: 0.38;
+.m3-slider--tertiary .m3-slider__input::-webkit-slider-thumb,
+.m3-slider--tertiary .m3-slider__input::-moz-range-thumb {
+  background-color: var(--md-sys-color-tertiary-50);
+}
+
+.m3-slider--error .m3-slider__input::-webkit-slider-thumb,
+.m3-slider--error .m3-slider__input::-moz-range-thumb {
+  background-color: var(--md-sys-color-error-50);
+}
+
+.m3-slider--disabled .m3-slider__input {
   cursor: not-allowed;
-} */
+  opacity: 0.38;
+}
 
-/* ===== RESPONSIVE ===== */
-/* @media (max-width: 600px) {
-  .m3-slider {
-    /* TODO: Mobile styles */
-  }
-} */
+.m3-slider__value {
+  min-width: 40px;
+  text-align: right;
+  font-family: var(--md-sys-typescale-font-plain);
+  font-size: var(--md-sys-typescale-bodyMedium-size);
+  font-weight: var(--md-sys-typescale-weight-medium);
+  color: var(--md-sys-color-on-surface);
+}

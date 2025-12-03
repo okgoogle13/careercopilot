@@ -1,7 +1,9 @@
 import { render, screen, waitFor, renderHook, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { jest } from '@jest/globals';
-import { Toast, ToastProps, ToastSeverity, useToast } from '../toast';
+import { Toast, ToastProps } from '@/components/custom/toast/Toast';
+import type { ToastSeverity } from '@/components/custom/toast/Toast';
+// Note: useToast hook may need to be created or imported from a different location
 import * as React from 'react';
 
 describe('M3 Toast', () => {

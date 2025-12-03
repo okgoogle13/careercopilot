@@ -15,20 +15,21 @@
  */
 
 import React from 'react';
+import './M3Card.css';
 
 export interface M3CardProps
   extends React.HTMLAttributes<HTMLDivElement> {
   /**
-   * [Add your variant prop]
-   * @default 'default'
+   * Elevation level (0-5)
+   * @default 'level0'
    */
-  // variant?: 'default' | 'variant2';
+  elevation?: 'level0' | 'level1' | 'level2' | 'level3' | 'level4' | 'level5';
 
   /**
-   * [Add your color prop]
-   * @default 'primary'
+   * If true, card is clickable (adds pointer cursor and hover elevation)
+   * @default false
    */
-  // color?: 'primary' | 'secondary' | 'tertiary' | 'error';
+  clickable?: boolean;
 
   /**
    * Component content
@@ -42,6 +43,7 @@ export interface M3CardProps
  * Example usage:
  * ```tsx
  * <M3Card>Content</M3Card>
+ * <M3Card elevation="level2" clickable>Clickable Card</M3Card>
  * ```
  */
 export const M3Card = React.forwardRef<
@@ -50,27 +52,32 @@ export const M3Card = React.forwardRef<
 >(
   (
     {
-      // variant = 'default',
-      // color = 'primary',
+      elevation = 'level0',
+      clickable = false,
       className = '',
       children,
+      role,
       ...props
     },
     ref
   ) => {
     const classNames = [
       'm3-card',
-      // `m3-card--${variant}`,
-      // `m3-card--${color}`,
+      `m3-card--elevation-${elevation}`,
+      clickable && 'm3-card--clickable',
       className,
     ]
       .filter(Boolean)
       .join(' ');
 
+    const cardRole = role || (clickable ? 'button' : undefined);
+
     return (
       <div
         ref={ref}
         className={classNames}
+        role={cardRole}
+        tabIndex={clickable ? 0 : undefined}
         {...props}
       >
         {children}

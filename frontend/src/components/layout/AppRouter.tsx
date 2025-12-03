@@ -42,6 +42,11 @@ const ElectricAlchemistTestKitchen = lazy(() =>
     default: m.ElectricAlchemistTestKitchen,
   }))
 );
+const M3IntegrationTestPage = lazy(() =>
+  import('@/pages/M3IntegrationTestPage').then((m) => ({
+    default: m.M3IntegrationTestPage,
+  }))
+);
 
 // Loading fallback using design system
 const LoadingFallback = () => (
@@ -74,7 +79,8 @@ function AppRouterContent() {
           path="/register"
           element={isAuthenticated ? <Navigate to="/dashboard" replace /> : <RegisterPage />}
         />
-        <Route path="/electric-alchemist" element={<AlchemistTestKitchen />} />
+        <Route path="/electric-alchemist" element={<ElectricAlchemistTestKitchen />} />
+        <Route path="/m3-integration-test" element={<M3IntegrationTestPage />} />
 
         {/* Default redirect */}
         <Route

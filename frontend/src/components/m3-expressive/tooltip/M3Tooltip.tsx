@@ -2,54 +2,44 @@
  * M3 Expressive Tooltip Component
  * Implements Material Design 3 feedback component with M3 styling
  *
- * Uses CSS variables from m3-design-tokens.css:
- * - Color: --md-sys-color-*
- * - Shape: --md-sys-shape-corner-*
- * - Motion: --md-sys-motion-*
- * - Typography: --md-sys-typescale-*
- * - Elevation: --md-sys-elevation-*
+ * Hover popover. Uses CSS variables from m3-design-tokens.css.
  */
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import './M3Tooltip.css';
 
-
-
-export interface M3TooltipProps extends React.divAttributes<HTMLDivElement> {
+export interface M3TooltipProps {
   /**
-   * The variant to use
-   * @default 'filled'
+   * Tooltip content/text
    */
-  variant?: 'filled' | 'outlined' | 'tonal';
+  title: string;
 
   /**
-   * The color role from M3 palette
-   * @default 'primary'
+   * Element that triggers the tooltip
    */
-  color?: 'primary' | 'secondary' | 'tertiary' | 'error';
+  children: React.ReactElement;
 
   /**
-   * The size of the component
-   * @default 'medium'
+   * Tooltip placement
+   * @default 'top'
    */
-  size?: 'small' | 'medium' | 'large';
+  placement?: 'top' | 'bottom' | 'left' | 'right';
 
   /**
-   * If true, component is disabled
+   * Delay before showing tooltip (ms)
+   * @default 0
+   */
+  delay?: number;
+
+  /**
+   * If true, tooltip is disabled
    * @default false
    */
   disabled?: boolean;
 
   /**
-   * Content of the component
-   */
-  children?: React.ReactNode;
-
-  /**
    * Custom className
    */
   className?: string;
-
-  
 }
 
 /**
@@ -57,49 +47,103 @@ export interface M3TooltipProps extends React.divAttributes<HTMLDivElement> {
  *
  * Example usage:
  * ```tsx
- * <M3Tooltip variant="filled" color="primary">
- *   Feedback Message
+ * <M3Tooltip title="Tooltip text">
+ *   <button>Hover me</button>
  * </M3Tooltip>
  * ```
  */
-export const M3Tooltip = React.forwardRef<HTMLDivElement, M3TooltipProps>(
-  (
-    {
-      variant = 'filled',
-      color = 'primary',
-      size = 'medium',
-      disabled = false,
-      children,
-      className = '',
-      
-      ...props
-    },
-    ref
-  ) => {
-    const classNames = [
-      'm3-tooltip',
-      `m3-tooltip--${variant}`,
-      `m3-tooltip--${color}`,
-      `m3-tooltip--${size}`,
-      disabled && 'm3-tooltip--disabled',
-      className,
-    ]
-      .filter(Boolean)
-      .join(' ');
+export const M3Tooltip: React.FC<M3TooltipProps> = ({
+  title,
+  children,
+  placement = 'top',
+  delay = 0,
+  disabled = false,
+  className = '',
+}) => {
+  const [visible, setVisible] = useState(false);
+  const [position, setPosition] = useState({ top: 0, left: 0 });
+  const triggerRef = useRef<HTMLElement>(null);
+  const tooltipRef = useRef<HTMLDivElement>(null);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-    return (
-      <div
-        ref={ref}
-        className={classNames}
-        disabled={disabled}
-        data-testid="m3-tooltip"
-        {...props}
-      >
-        {children}
-      </div>
-    );
-  }
-);
+  useEffect(() => {
+    if (visible && triggerRef.current && tooltipRef.current) {
+      const triggerRect = triggerRef.current.getBoundingClientRect();
+      const tooltipRect = tooltipRef.current.getBoundingClientRect();
+
+      let top = 0;
+      let left = 0;
+
+      switch (placement) {
+        case 'top':
+          top = triggerRect.top - tooltipRect.height - 8;
+          left = triggerRect.left + triggerRect.width / 2 - tooltipRect.width / 2;
+          break;
+        case 'bottom':
+          top = triggerRect.bottom + 8;
+          left = triggerRect.left + triggerRect.width / 2 - tooltipRect.width / 2;
+          break;
+        case 'left':
+          top = triggerRect.top + triggerRect.height / 2 - tooltipRect.height / 2;
+          left = triggerRect.left - tooltipRect.width - 8;
+          break;
+        case 'right':
+          top = triggerRect.top + triggerRect.height / 2 - tooltipRect.height / 2;
+          left = triggerRect.right + 8;
+          break;
+      }
+
+      setPosition({ top, left });
+    }
+  }, [visible, placement]);
+
+  const handleMouseEnter = () => {
+    if (disabled) return;
+    if (delay > 0) {
+      timeoutRef.current = setTimeout(() => setVisible(true), delay);
+    } else {
+      setVisible(true);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+    setVisible(false);
+  };
+
+  return (
+    <>
+      {React.cloneElement(children, {
+        ref: triggerRef,
+        onMouseEnter: handleMouseEnter,
+        onMouseLeave: handleMouseLeave,
+      })}
+      {visible && !disabled && (
+        <div
+          ref={tooltipRef}
+          className={[
+            'm3-tooltip',
+            `m3-tooltip--${placement}`,
+            className,
+          ]
+            .filter(Boolean)
+            .join(' ')}
+          style={{
+            position: 'fixed',
+            top: `${position.top}px`,
+            left: `${position.left}px`,
+            zIndex: 1300,
+          }}
+          role="tooltip"
+        >
+          {title}
+        </div>
+      )}
+    </>
+  );
+};
 
 M3Tooltip.displayName = 'M3Tooltip';
 

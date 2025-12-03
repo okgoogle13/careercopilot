@@ -1,83 +1,115 @@
 /**
- * M3 Expressive Timepicker Component
- * Implements Material Design 3 Timepicker for CareerCopilot
+ * M3 Expressive TimePicker Component
+ * Implements Material Design 3 TimePicker for CareerCopilot
  *
- * Uses CSS variables from m3-design-tokens.css:
- * - Color: --md-sys-color-*
- * - Shape: --md-sys-shape-corner-*
- * - Typography: --md-sys-typescale-*
- * - Spacing: --md-sys-spacing-*
- * - Motion: --md-sys-motion-*
- * - Elevation: --md-sys-elevation-*
+ * Time selection interface. Uses CSS variables from m3-design-tokens.css.
  *
  * NOTE: CSS styles (M3Timepicker.css) must be imported in the application root
  * or in pages that use this component.
  */
 
-import React from 'react';
+import React, { useState, useCallback } from 'react';
+import './M3Timepicker.css';
+import { M3Input } from '../input/M3Input';
 
-export interface M3TimepickerProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+export interface M3TimepickerProps {
   /**
-   * [Add your variant prop]
-   * @default 'default'
+   * Selected time value (HH:mm format)
    */
-  // variant?: 'default' | 'variant2';
-
-  /**
-   * [Add your color prop]
-   * @default 'primary'
-   */
-  // color?: 'primary' | 'secondary' | 'tertiary' | 'error';
+  value?: string;
 
   /**
-   * Component content
+   * Default value (uncontrolled)
    */
-  children?: React.ReactNode;
+  defaultValue?: string;
+
+  /**
+   * Change handler
+   */
+  onChange?: (time: string) => void;
+
+  /**
+   * If true, timepicker is disabled
+   * @default false
+   */
+  disabled?: boolean;
+
+  /**
+   * Label text
+   */
+  label?: string;
+
+  /**
+   * Helper text
+   */
+  helperText?: string;
+
+  /**
+   * If true, shows error state
+   * @default false
+   */
+  error?: boolean;
+
+  /**
+   * Custom className
+   */
+  className?: string;
 }
 
 /**
- * M3 Expressive Timepicker component using design tokens.
+ * M3 Expressive TimePicker component using design tokens.
  *
  * Example usage:
  * ```tsx
- * <M3Timepicker>Content</M3Timepicker>
+ * <M3Timepicker value="14:30" onChange={(time) => console.log(time)} />
  * ```
  */
-export const M3Timepicker = React.forwardRef<
-  HTMLDivElement,
-  M3TimepickerProps
->(
-  (
-    {
-      // variant = 'default',
-      // color = 'primary',
-      className = '',
-      children,
-      ...props
-    },
-    ref
-  ) => {
-    const classNames = [
-      'm3-timepicker',
-      // `m3-timepicker--${variant}`,
-      // `m3-timepicker--${color}`,
-      className,
-    ]
-      .filter(Boolean)
-      .join(' ');
+export const M3Timepicker: React.FC<M3TimepickerProps> = ({
+  value: controlledValue,
+  defaultValue,
+  onChange,
+  disabled = false,
+  label = 'Time',
+  helperText,
+  error = false,
+  className = '',
+}) => {
+  const [internalValue, setInternalValue] = useState(defaultValue || '');
+  const isControlled = controlledValue !== undefined;
+  const value = isControlled ? controlledValue : internalValue;
 
-    return (
-      <div
-        ref={ref}
-        className={classNames}
-        {...props}
-      >
-        {children}
-      </div>
-    );
-  }
-);
+  const handleChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const newValue = e.target.value;
+      if (!isControlled) {
+        setInternalValue(newValue);
+      }
+      onChange?.(newValue);
+    },
+    [isControlled, onChange]
+  );
+
+  const classNames = [
+    'm3-timepicker',
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
+
+  return (
+    <div className={classNames}>
+      <M3Input
+        type="time"
+        value={value}
+        onChange={handleChange}
+        disabled={disabled}
+        label={label}
+        helperText={helperText}
+        error={error}
+      />
+    </div>
+  );
+};
 
 M3Timepicker.displayName = 'M3Timepicker';
 

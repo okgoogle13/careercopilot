@@ -1,62 +1,56 @@
 /**
  * M3 Expressive Spinner Styles
  * Uses Material Design 3 Expressive design tokens
- *
- * Token Reference:
- * - Colors: var(--md-sys-color-primary-*), var(--md-sys-color-secondary-*), etc.
- * - Spacing: var(--md-sys-spacing-1) through var(--md-sys-spacing-32)
- * - Shapes: var(--md-sys-shape-corner-small), var(--md-sys-shape-corner-medium), etc.
- * - Elevation: var(--md-sys-elevation-level0) through var(--md-sys-elevation-level5)
- * - Motion: var(--md-sys-motion-duration-short1) through var(--md-sys-motion-duration-long4)
  */
 
 /* ===== BASE SPINNER STYLES ===== */
 .m3-spinner {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  /* TODO: Add base styling */
-  transition: background-color var(--md-sys-motion-duration-short2) var(--md-sys-motion-easing-standard);
+  display: inline-block;
+  position: relative;
 }
 
-/* ===== VARIANT STYLES ===== */
-/* .m3-spinner--variant1 {
-  TODO: Add variant styling
+.m3-spinner__circle {
+  border: 3px solid transparent;
+  border-top-color: var(--md-sys-color-primary-50);
+  border-radius: 50%;
+  animation: spinner-rotate 1s linear infinite;
 }
 
-.m3-spinner--variant2 {
-  TODO: Add variant styling
-} */
-
-/* ===== COLOR ROLES ===== */
-/* .m3-spinner--primary {
-  color: var(--md-sys-color-primary-50);
-  background-color: var(--md-sys-color-primary-container);
+.m3-spinner--small .m3-spinner__circle {
+  width: 24px;
+  height: 24px;
+  border-width: 2px;
 }
 
-.m3-spinner--secondary {
-  color: var(--md-sys-color-secondary-50);
-  background-color: var(--md-sys-color-secondary-container);
-} */
-
-/* ===== HOVER/ACTIVE/FOCUS STATES ===== */
-/* .m3-spinner:hover {
-  box-shadow: var(--md-sys-elevation-level1);
+.m3-spinner--medium .m3-spinner__circle {
+  width: 40px;
+  height: 40px;
+  border-width: 3px;
 }
 
-.m3-spinner:active {
-  transform: scale(0.98);
-} */
+.m3-spinner--large .m3-spinner__circle {
+  width: 56px;
+  height: 56px;
+  border-width: 4px;
+}
 
-/* ===== DISABLED STATE ===== */
-/* .m3-spinner:disabled {
-  opacity: 0.38;
-  cursor: not-allowed;
-} */
+.m3-spinner--secondary .m3-spinner__circle {
+  border-top-color: var(--md-sys-color-secondary-50);
+}
 
-/* ===== RESPONSIVE ===== */
-/* @media (max-width: 600px) {
-  .m3-spinner {
-    /* TODO: Mobile styles */
+.m3-spinner--tertiary .m3-spinner__circle {
+  border-top-color: var(--md-sys-color-tertiary-50);
+}
+
+.m3-spinner--error .m3-spinner__circle {
+  border-top-color: var(--md-sys-color-error-50);
+}
+
+@keyframes spinner-rotate {
+  0% {
+    transform: rotate(0deg);
   }
-} */
+  100% {
+    transform: rotate(360deg);
+  }
+}

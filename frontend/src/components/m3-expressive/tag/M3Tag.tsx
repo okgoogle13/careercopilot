@@ -2,38 +2,49 @@
  * M3 Expressive Tag Component
  * Implements Material Design 3 Tag for CareerCopilot
  *
- * Uses CSS variables from m3-design-tokens.css:
- * - Color: --md-sys-color-*
- * - Shape: --md-sys-shape-corner-*
- * - Typography: --md-sys-typescale-*
- * - Spacing: --md-sys-spacing-*
- * - Motion: --md-sys-motion-*
- * - Elevation: --md-sys-elevation-*
+ * Label/tag display component. Uses CSS variables from m3-design-tokens.css.
  *
  * NOTE: CSS styles (M3Tag.css) must be imported in the application root
  * or in pages that use this component.
  */
 
 import React from 'react';
+import './M3Tag.css';
 
-export interface M3TagProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+export interface M3TagProps {
   /**
-   * [Add your variant prop]
-   * @default 'default'
+   * Tag label text
    */
-  // variant?: 'default' | 'variant2';
+  label: string;
 
   /**
-   * [Add your color prop]
+   * Tag variant
+   * @default 'filled'
+   */
+  variant?: 'filled' | 'outlined';
+
+  /**
+   * Color role from M3 palette
    * @default 'primary'
    */
-  // color?: 'primary' | 'secondary' | 'tertiary' | 'error';
+  color?: 'primary' | 'secondary' | 'tertiary' | 'error' | 'success' | 'warning';
 
   /**
-   * Component content
+   * Size variant
+   * @default 'medium'
    */
-  children?: React.ReactNode;
+  size?: 'small' | 'medium' | 'large';
+
+  /**
+   * If true, tag is disabled
+   * @default false
+   */
+  disabled?: boolean;
+
+  /**
+   * Custom className
+   */
+  className?: string;
 }
 
 /**
@@ -41,43 +52,35 @@ export interface M3TagProps
  *
  * Example usage:
  * ```tsx
- * <M3Tag>Content</M3Tag>
+ * <M3Tag label="React" color="primary" />
+ * <M3Tag label="TypeScript" variant="outlined" />
  * ```
  */
-export const M3Tag = React.forwardRef<
-  HTMLDivElement,
-  M3TagProps
->(
-  (
-    {
-      // variant = 'default',
-      // color = 'primary',
-      className = '',
-      children,
-      ...props
-    },
-    ref
-  ) => {
-    const classNames = [
-      'm3-tag',
-      // `m3-tag--${variant}`,
-      // `m3-tag--${color}`,
-      className,
-    ]
-      .filter(Boolean)
-      .join(' ');
+export const M3Tag: React.FC<M3TagProps> = ({
+  label,
+  variant = 'filled',
+  color = 'primary',
+  size = 'medium',
+  disabled = false,
+  className = '',
+}) => {
+  const classNames = [
+    'm3-tag',
+    `m3-tag--${variant}`,
+    `m3-tag--${color}`,
+    `m3-tag--${size}`,
+    disabled && 'm3-tag--disabled',
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
 
-    return (
-      <div
-        ref={ref}
-        className={classNames}
-        {...props}
-      >
-        {children}
-      </div>
-    );
-  }
-);
+  return (
+    <span className={classNames} role="status" aria-label={label}>
+      {label}
+    </span>
+  );
+};
 
 M3Tag.displayName = 'M3Tag';
 
