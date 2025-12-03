@@ -1,4 +1,4 @@
-import * as admin from 'firebase-admin';
+ whicimport * as admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
 import {genkit} from '@genkit-ai/core';
 import {onFlow} from '@genkit-ai/firebase';
