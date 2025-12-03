@@ -1,6 +1,6 @@
 /**
  * M3 Expressive Sidebar Component
- * Implements Material Design 3 card surface with M3 styling
+ * Implements Material Design 3 navigation sidebar with M3 styling
  *
  * Uses CSS variables from m3-design-tokens.css:
  * - Color: --md-sys-color-*
@@ -9,47 +9,88 @@
  * - Typography: --md-sys-typescale-*
  * - Elevation: --md-sys-elevation-*
  */
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 import './M3Sidebar.css';
 
-
-
-export interface M3SidebarProps extends React.divAttributes<HTMLDivElement> {
+export interface M3SidebarNavItem {
   /**
-   * The variant to use
-   * @default 'filled'
+   * Unique identifier for the nav item
    */
-  variant?: 'filled' | 'elevated' | 'outlined';
+  id: string;
 
   /**
-   * The color role from M3 palette
-   * @default 'primary'
+   * Label text for the nav item
    */
-  color?: 'primary' | 'secondary' | 'tertiary' | 'error';
+  label: string;
 
   /**
-   * The size of the component
-   * @default 'medium'
+   * Icon element to display
    */
-  size?: 'small' | 'medium' | 'large';
+  icon?: React.ReactNode;
 
   /**
-   * If true, component is disabled
-   * @default false
+   * Path or href for navigation
+   */
+  path?: string;
+
+  /**
+   * If true, item is active
+   */
+  active?: boolean;
+
+  /**
+   * If true, item is disabled
    */
   disabled?: boolean;
 
   /**
-   * Content of the component
+   * Badge or notification count
    */
-  children?: React.ReactNode;
+  badge?: string | number;
+
+  /**
+   * Nested navigation items (for collapsible sections)
+   */
+  children?: M3SidebarNavItem[];
+
+  /**
+   * Custom data attributes
+   */
+  'data-testid'?: string;
+}
+
+export interface M3SidebarProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onClick'> {
+  /**
+   * Array of navigation items
+   */
+  items: M3SidebarNavItem[];
+
+  /**
+   * Currently active item ID
+   */
+  activeItemId?: string;
+
+  /**
+   * Callback when a nav item is clicked
+   */
+  onItemClick?: (item: M3SidebarNavItem, event: React.MouseEvent<HTMLButtonElement>) => void;
+
+  /**
+   * If true, sidebar is collapsed
+   * @default false
+   */
+  collapsed?: boolean;
+
+  /**
+   * Width of the sidebar
+   * @default '256px'
+   */
+  width?: string;
 
   /**
    * Custom className
    */
   className?: string;
-
-  
 }
 
 /**
@@ -57,46 +98,138 @@ export interface M3SidebarProps extends React.divAttributes<HTMLDivElement> {
  *
  * Example usage:
  * ```tsx
- * <M3Sidebar variant="filled" color="primary">
- *   Card Content
- * </M3Sidebar>
+ * <M3Sidebar
+ *   items={[
+ *     { id: 'home', label: 'Home', icon: <HomeIcon />, path: '/home' },
+ *     { id: 'settings', label: 'Settings', icon: <SettingsIcon />, path: '/settings' }
+ *   ]}
+ *   activeItemId="home"
+ *   onItemClick={(item) => navigate(item.path)}
+ * />
  * ```
  */
 export const M3Sidebar = React.forwardRef<HTMLDivElement, M3SidebarProps>(
   (
     {
-      variant = 'filled',
-      color = 'primary',
-      size = 'medium',
-      disabled = false,
-      children,
+      items,
+      activeItemId,
+      onItemClick,
+      collapsed = false,
+      width = '256px',
       className = '',
-      
       ...props
     },
     ref
   ) => {
+    const [expandedItems, setExpandedItems] = useState<Set<string>>(new Set());
+
+    const handleItemClick = useCallback(
+      (item: M3SidebarNavItem, event: React.MouseEvent<HTMLButtonElement>) => {
+        if (item.disabled) return;
+
+        // Toggle expanded state for items with children
+        if (item.children && item.children.length > 0) {
+          setExpandedItems((prev) => {
+            const next = new Set(prev);
+            if (next.has(item.id)) {
+              next.delete(item.id);
+            } else {
+              next.add(item.id);
+            }
+            return next;
+          });
+        }
+
+        onItemClick?.(item, event);
+      },
+      [onItemClick]
+    );
+
+    const handleKeyDown = useCallback(
+      (item: M3SidebarNavItem, event: React.KeyboardEvent<HTMLButtonElement>) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          handleItemClick(item, event as unknown as React.MouseEvent<HTMLButtonElement>);
+        }
+      },
+      [handleItemClick]
+    );
+
+    const renderNavItem = (item: M3SidebarNavItem, level: number = 0): React.ReactNode => {
+      const isActive = activeItemId === item.id || item.active;
+      const isExpanded = expandedItems.has(item.id);
+      const hasChildren = item.children && item.children.length > 0;
+
+      return (
+        <li key={item.id} className="m3-sidebar__nav-item">
+          <button
+            type="button"
+            className={[
+              'm3-sidebar__nav-button',
+              isActive && 'm3-sidebar__nav-button--active',
+              item.disabled && 'm3-sidebar__nav-button--disabled',
+              hasChildren && 'm3-sidebar__nav-button--has-children',
+              level > 0 && 'm3-sidebar__nav-button--nested',
+            ]
+              .filter(Boolean)
+              .join(' ')}
+            onClick={(e) => handleItemClick(item, e)}
+            onKeyDown={(e) => handleKeyDown(item, e)}
+            disabled={item.disabled}
+            aria-expanded={hasChildren ? isExpanded : undefined}
+            aria-current={isActive ? 'page' : undefined}
+            data-testid={item['data-testid'] || `m3-sidebar-item-${item.id}`}
+            data-level={level}
+          >
+            {item.icon && (
+              <span className="m3-sidebar__nav-icon" aria-hidden="true">
+                {item.icon}
+              </span>
+            )}
+            {!collapsed && (
+              <>
+                <span className="m3-sidebar__nav-label">{item.label}</span>
+                {item.badge !== undefined && (
+                  <span className="m3-sidebar__nav-badge">{item.badge}</span>
+                )}
+                {hasChildren && (
+                  <span className="m3-sidebar__nav-chevron" aria-hidden="true">
+                    {isExpanded ? '▼' : '▶'}
+                  </span>
+                )}
+              </>
+            )}
+          </button>
+          {hasChildren && isExpanded && !collapsed && (
+            <ul className="m3-sidebar__nav-list m3-sidebar__nav-list--nested">
+              {item.children!.map((child) => renderNavItem(child, level + 1))}
+            </ul>
+          )}
+        </li>
+      );
+    };
+
     const classNames = [
       'm3-sidebar',
-      `m3-sidebar--${variant}`,
-      `m3-sidebar--${color}`,
-      `m3-sidebar--${size}`,
-      disabled && 'm3-sidebar--disabled',
+      collapsed && 'm3-sidebar--collapsed',
       className,
     ]
       .filter(Boolean)
       .join(' ');
 
     return (
-      <div
+      <nav
         ref={ref}
         className={classNames}
-        disabled={disabled}
+        style={{ width: collapsed ? '64px' : width }}
+        aria-label="Main navigation"
         data-testid="m3-sidebar"
         {...props}
       >
-        {children}
-      </div>
+        <ul className="m3-sidebar__nav-list">
+          {items.map((item) => renderNavItem(item))}
+        </ul>
+      </nav>
     );
   }
 );
