@@ -1,0 +1,438 @@
+/**
+ * M3 Expressive Button Styles
+ * Uses Material Design 3 Expressive design tokens
+ *
+ * Implements 5 button variants:
+ * - Filled: Primary background with contrast text (emphasis)
+ * - Elevated: Filled with elevation shadow (high emphasis with depth)
+ * - Tonal: Subtle background with dark text (medium emphasis)
+ * - Outlined: Transparent with border (medium emphasis)
+ * - Text: Minimal style (low emphasis)
+ */
+
+/* ===== BASE BUTTON STYLES ===== */
+.m3-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--md-sys-spacing-2);
+  border: none;
+  border-radius: var(--md-sys-shape-corner-full);
+  font-family: var(--md-sys-typescale-font-plain);
+  font-size: var(--md-sys-typescale-labelLarge-size);
+  font-weight: var(--md-sys-typescale-weight-bold);
+  line-height: var(--md-sys-typescale-labelLarge-line-height);
+  letter-spacing: var(--md-sys-typescale-labelLarge-tracking);
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color var(--md-sys-motion-duration-short2) var(--md-sys-motion-easing-standard),
+              color var(--md-sys-motion-duration-short2) var(--md-sys-motion-easing-standard),
+              box-shadow var(--md-sys-motion-duration-short2) var(--md-sys-motion-easing-standard),
+              transform var(--md-sys-motion-duration-short1) var(--md-sys-motion-easing-standard);
+  user-select: none;
+  white-space: nowrap;
+  position: relative;
+  outline: none;
+}
+
+/* Focus state */
+.m3-button:focus-visible {
+  outline: 2px solid var(--md-sys-color-primary-50);
+  outline-offset: 2px;
+}
+
+/* ===== SIZE VARIANTS ===== */
+.m3-button--small {
+  height: 32px;
+  padding: 0 var(--md-sys-spacing-3);
+  font-size: var(--md-sys-typescale-labelSmall-size);
+}
+
+.m3-button--medium {
+  height: 40px;
+  padding: 0 var(--md-sys-spacing-6);
+}
+
+.m3-button--large {
+  height: 48px;
+  padding: 0 var(--md-sys-spacing-8);
+  font-size: var(--md-sys-typescale-labelLarge-size);
+}
+
+/* ===== FILLED VARIANT (High Emphasis) ===== */
+.m3-button--filled.m3-button--primary {
+  background-color: var(--md-sys-color-primary-50);
+  color: var(--md-sys-color-on-primary-50);
+}
+
+.m3-button--filled.m3-button--primary:hover:not(:disabled) {
+  background-color: var(--md-sys-color-primary-60);
+  box-shadow: var(--md-sys-elevation-level1);
+}
+
+.m3-button--filled.m3-button--primary:active:not(:disabled) {
+  background-color: var(--md-sys-color-primary-70);
+  box-shadow: none;
+  transform: scale(0.98);
+}
+
+.m3-button--filled.m3-button--secondary {
+  background-color: var(--md-sys-color-secondary-50);
+  color: var(--md-sys-color-on-secondary-50);
+}
+
+.m3-button--filled.m3-button--secondary:hover:not(:disabled) {
+  background-color: var(--md-sys-color-secondary-60);
+  box-shadow: var(--md-sys-elevation-level1);
+}
+
+.m3-button--filled.m3-button--secondary:active:not(:disabled) {
+  background-color: var(--md-sys-color-secondary-70);
+  box-shadow: none;
+  transform: scale(0.98);
+}
+
+.m3-button--filled.m3-button--tertiary {
+  background-color: var(--md-sys-color-tertiary-50);
+  color: var(--md-sys-color-on-tertiary-50);
+}
+
+.m3-button--filled.m3-button--tertiary:hover:not(:disabled) {
+  background-color: var(--md-sys-color-tertiary-60);
+  box-shadow: var(--md-sys-elevation-level1);
+}
+
+.m3-button--filled.m3-button--tertiary:active:not(:disabled) {
+  background-color: var(--md-sys-color-tertiary-70);
+  box-shadow: none;
+  transform: scale(0.98);
+}
+
+.m3-button--filled.m3-button--error {
+  background-color: var(--md-sys-color-error-50);
+  color: var(--md-sys-color-on-error-50);
+}
+
+.m3-button--filled.m3-button--error:hover:not(:disabled) {
+  background-color: var(--md-sys-color-error-60);
+  box-shadow: var(--md-sys-elevation-level1);
+}
+
+.m3-button--filled.m3-button--error:active:not(:disabled) {
+  background-color: var(--md-sys-color-error-70);
+  box-shadow: none;
+  transform: scale(0.98);
+}
+
+/* ===== ELEVATED VARIANT (High Emphasis with Depth) ===== */
+.m3-button--elevated {
+  box-shadow: var(--md-sys-elevation-level1);
+}
+
+.m3-button--elevated.m3-button--primary {
+  background-color: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-on-primary-container);
+}
+
+.m3-button--elevated.m3-button--primary:hover:not(:disabled) {
+  background-color: var(--md-sys-color-primary-60);
+  box-shadow: var(--md-sys-elevation-level2);
+}
+
+.m3-button--elevated.m3-button--primary:active:not(:disabled) {
+  background-color: var(--md-sys-color-primary-70);
+  box-shadow: var(--md-sys-elevation-level1);
+  transform: scale(0.98);
+}
+
+.m3-button--elevated.m3-button--secondary {
+  background-color: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+}
+
+.m3-button--elevated.m3-button--secondary:hover:not(:disabled) {
+  background-color: var(--md-sys-color-secondary-60);
+  box-shadow: var(--md-sys-elevation-level2);
+}
+
+.m3-button--elevated.m3-button--secondary:active:not(:disabled) {
+  background-color: var(--md-sys-color-secondary-70);
+  box-shadow: var(--md-sys-elevation-level1);
+  transform: scale(0.98);
+}
+
+.m3-button--elevated.m3-button--tertiary {
+  background-color: var(--md-sys-color-tertiary-container);
+  color: var(--md-sys-color-on-tertiary-container);
+}
+
+.m3-button--elevated.m3-button--tertiary:hover:not(:disabled) {
+  background-color: var(--md-sys-color-tertiary-60);
+  box-shadow: var(--md-sys-elevation-level2);
+}
+
+.m3-button--elevated.m3-button--tertiary:active:not(:disabled) {
+  background-color: var(--md-sys-color-tertiary-70);
+  box-shadow: var(--md-sys-elevation-level1);
+  transform: scale(0.98);
+}
+
+.m3-button--elevated.m3-button--error {
+  background-color: var(--md-sys-color-error-container);
+  color: var(--md-sys-color-on-error-container);
+}
+
+.m3-button--elevated.m3-button--error:hover:not(:disabled) {
+  background-color: var(--md-sys-color-error-60);
+  box-shadow: var(--md-sys-elevation-level2);
+}
+
+.m3-button--elevated.m3-button--error:active:not(:disabled) {
+  background-color: var(--md-sys-color-error-70);
+  box-shadow: var(--md-sys-elevation-level1);
+  transform: scale(0.98);
+}
+
+/* ===== TONAL VARIANT (Medium Emphasis, Subtle) ===== */
+.m3-button--tonal.m3-button--primary {
+  background-color: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-on-primary-container);
+}
+
+.m3-button--tonal.m3-button--primary:hover:not(:disabled) {
+  background-color: var(--md-sys-color-primary-90);
+  box-shadow: var(--md-sys-elevation-level1);
+}
+
+.m3-button--tonal.m3-button--primary:active:not(:disabled) {
+  background-color: var(--md-sys-color-primary-80);
+  box-shadow: none;
+  transform: scale(0.98);
+}
+
+.m3-button--tonal.m3-button--secondary {
+  background-color: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+}
+
+.m3-button--tonal.m3-button--secondary:hover:not(:disabled) {
+  background-color: var(--md-sys-color-secondary-90);
+  box-shadow: var(--md-sys-elevation-level1);
+}
+
+.m3-button--tonal.m3-button--secondary:active:not(:disabled) {
+  background-color: var(--md-sys-color-secondary-80);
+  box-shadow: none;
+  transform: scale(0.98);
+}
+
+.m3-button--tonal.m3-button--tertiary {
+  background-color: var(--md-sys-color-tertiary-container);
+  color: var(--md-sys-color-on-tertiary-container);
+}
+
+.m3-button--tonal.m3-button--tertiary:hover:not(:disabled) {
+  background-color: var(--md-sys-color-tertiary-90);
+  box-shadow: var(--md-sys-elevation-level1);
+}
+
+.m3-button--tonal.m3-button--tertiary:active:not(:disabled) {
+  background-color: var(--md-sys-color-tertiary-80);
+  box-shadow: none;
+  transform: scale(0.98);
+}
+
+.m3-button--tonal.m3-button--error {
+  background-color: var(--md-sys-color-error-container);
+  color: var(--md-sys-color-on-error-container);
+}
+
+.m3-button--tonal.m3-button--error:hover:not(:disabled) {
+  background-color: var(--md-sys-color-error-90);
+  box-shadow: var(--md-sys-elevation-level1);
+}
+
+.m3-button--tonal.m3-button--error:active:not(:disabled) {
+  background-color: var(--md-sys-color-error-80);
+  box-shadow: none;
+  transform: scale(0.98);
+}
+
+/* ===== OUTLINED VARIANT (Medium Emphasis, Border) ===== */
+.m3-button--outlined {
+  background-color: transparent;
+  border: 1px solid var(--md-sys-color-outline-variant);
+}
+
+.m3-button--outlined.m3-button--primary {
+  color: var(--md-sys-color-primary-50);
+  border-color: var(--md-sys-color-outline-variant);
+}
+
+.m3-button--outlined.m3-button--primary:hover:not(:disabled) {
+  background-color: var(--md-sys-color-primary-10);
+  box-shadow: var(--md-sys-elevation-level1);
+}
+
+.m3-button--outlined.m3-button--primary:active:not(:disabled) {
+  background-color: var(--md-sys-color-primary-20);
+  box-shadow: none;
+  transform: scale(0.98);
+}
+
+.m3-button--outlined.m3-button--secondary {
+  color: var(--md-sys-color-secondary-50);
+  border-color: var(--md-sys-color-outline-variant);
+}
+
+.m3-button--outlined.m3-button--secondary:hover:not(:disabled) {
+  background-color: var(--md-sys-color-secondary-10);
+  box-shadow: var(--md-sys-elevation-level1);
+}
+
+.m3-button--outlined.m3-button--secondary:active:not(:disabled) {
+  background-color: var(--md-sys-color-secondary-20);
+  box-shadow: none;
+  transform: scale(0.98);
+}
+
+.m3-button--outlined.m3-button--tertiary {
+  color: var(--md-sys-color-tertiary-50);
+  border-color: var(--md-sys-color-outline-variant);
+}
+
+.m3-button--outlined.m3-button--tertiary:hover:not(:disabled) {
+  background-color: var(--md-sys-color-tertiary-10);
+  box-shadow: var(--md-sys-elevation-level1);
+}
+
+.m3-button--outlined.m3-button--tertiary:active:not(:disabled) {
+  background-color: var(--md-sys-color-tertiary-20);
+  box-shadow: none;
+  transform: scale(0.98);
+}
+
+.m3-button--outlined.m3-button--error {
+  color: var(--md-sys-color-error-50);
+  border-color: var(--md-sys-color-error-50);
+}
+
+.m3-button--outlined.m3-button--error:hover:not(:disabled) {
+  background-color: var(--md-sys-color-error-10);
+  box-shadow: var(--md-sys-elevation-level1);
+}
+
+.m3-button--outlined.m3-button--error:active:not(:disabled) {
+  background-color: var(--md-sys-color-error-20);
+  box-shadow: none;
+  transform: scale(0.98);
+}
+
+/* ===== TEXT VARIANT (Low Emphasis) ===== */
+.m3-button--text {
+  background-color: transparent;
+  border: none;
+}
+
+.m3-button--text.m3-button--primary {
+  color: var(--md-sys-color-primary-50);
+}
+
+.m3-button--text.m3-button--primary:hover:not(:disabled) {
+  background-color: var(--md-sys-color-primary-10);
+}
+
+.m3-button--text.m3-button--primary:active:not(:disabled) {
+  background-color: var(--md-sys-color-primary-20);
+  transform: scale(0.98);
+}
+
+.m3-button--text.m3-button--secondary {
+  color: var(--md-sys-color-secondary-50);
+}
+
+.m3-button--text.m3-button--secondary:hover:not(:disabled) {
+  background-color: var(--md-sys-color-secondary-10);
+}
+
+.m3-button--text.m3-button--secondary:active:not(:disabled) {
+  background-color: var(--md-sys-color-secondary-20);
+  transform: scale(0.98);
+}
+
+.m3-button--text.m3-button--tertiary {
+  color: var(--md-sys-color-tertiary-50);
+}
+
+.m3-button--text.m3-button--tertiary:hover:not(:disabled) {
+  background-color: var(--md-sys-color-tertiary-10);
+}
+
+.m3-button--text.m3-button--tertiary:active:not(:disabled) {
+  background-color: var(--md-sys-color-tertiary-20);
+  transform: scale(0.98);
+}
+
+.m3-button--text.m3-button--error {
+  color: var(--md-sys-color-error-50);
+}
+
+.m3-button--text.m3-button--error:hover:not(:disabled) {
+  background-color: var(--md-sys-color-error-10);
+}
+
+.m3-button--text.m3-button--error:active:not(:disabled) {
+  background-color: var(--md-sys-color-error-20);
+  transform: scale(0.98);
+}
+
+/* ===== DISABLED STATE ===== */
+.m3-button--disabled {
+  opacity: 0.38;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ===== FULL WIDTH ===== */
+.m3-button--fullWidth {
+  width: 100%;
+}
+
+/* ===== ICON STYLES ===== */
+.m3-button__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.m3-button__icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.m3-button--small .m3-button__icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.m3-button--large .m3-button__icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* ===== LABEL STYLES ===== */
+.m3-button__label {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 600px) {
+  .m3-button--large {
+    height: 44px;
+    padding: 0 var(--md-sys-spacing-6);
+  }
+}
