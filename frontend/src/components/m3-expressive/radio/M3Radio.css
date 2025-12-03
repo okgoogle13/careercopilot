@@ -1,0 +1,258 @@
+/**
+ * M3 Expressive Radio Styles
+ * Uses Material Design 3 Expressive design tokens
+ *
+ * Token Reference:
+ * - Colors: var(--md-sys-color-primary-*), var(--md-sys-color-secondary-*), etc.
+ * - Spacing: var(--md-sys-spacing-1) through var(--md-sys-spacing-32)
+ * - Shapes: var(--md-sys-shape-corner-small), var(--md-sys-shape-corner-medium), etc.
+ * - Elevation: var(--md-sys-elevation-level0) through var(--md-sys-elevation-level5)
+ * - Motion: var(--md-sys-motion-duration-short1) through var(--md-sys-motion-duration-long4)
+ */
+
+/* ===== RADIO WRAPPER ===== */
+.m3-radio-wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--md-sys-spacing-2);
+  cursor: pointer;
+}
+
+.m3-radio-wrapper .m3-radio--disabled {
+  cursor: not-allowed;
+}
+
+/* ===== BASE RADIO STYLES ===== */
+.m3-radio {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  position: relative;
+  border: 2px solid var(--md-sys-color-outline-default);
+  border-radius: var(--md-sys-shape-corner-full);
+  background-color: transparent;
+  transition: border-color var(--md-sys-motion-duration-short1) var(--md-sys-motion-easing-standard),
+              transform var(--md-sys-motion-duration-short1) var(--md-sys-motion-easing-standard);
+  flex-shrink: 0;
+}
+
+/* Inner dot (appears when checked) */
+.m3-radio::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  width: 0;
+  height: 0;
+  border-radius: var(--md-sys-shape-corner-full);
+  background-color: currentColor;
+  transition: transform var(--md-sys-motion-duration-short1) var(--md-sys-motion-easing-standard),
+              width var(--md-sys-motion-duration-short1) var(--md-sys-motion-easing-standard),
+              height var(--md-sys-motion-duration-short1) var(--md-sys-motion-easing-standard);
+  pointer-events: none;
+}
+
+/* ===== SIZE VARIANTS ===== */
+.m3-radio--small {
+  width: 18px;
+  height: 18px;
+}
+
+.m3-radio--small::after {
+  width: 8px;
+  height: 8px;
+}
+
+.m3-radio--medium {
+  width: 20px;
+  height: 20px;
+}
+
+.m3-radio--medium::after {
+  width: 10px;
+  height: 10px;
+}
+
+.m3-radio--large {
+  width: 24px;
+  height: 24px;
+}
+
+.m3-radio--large::after {
+  width: 12px;
+  height: 12px;
+}
+
+/* ===== COLOR ROLES - UNSELECTED STATE ===== */
+.m3-radio--primary {
+  border-color: var(--md-sys-color-outline-default);
+}
+
+.m3-radio--secondary {
+  border-color: var(--md-sys-color-outline-default);
+}
+
+.m3-radio--tertiary {
+  border-color: var(--md-sys-color-outline-default);
+}
+
+.m3-radio--error {
+  border-color: var(--md-sys-color-error-50);
+}
+
+/* ===== CHECKED STATE ===== */
+.m3-radio--checked.m3-radio--primary {
+  border-color: var(--md-sys-color-primary-50);
+  color: var(--md-sys-color-primary-50);
+}
+
+.m3-radio--checked.m3-radio--primary::after {
+  transform: translate(-50%, -50%) scale(1);
+  background-color: var(--md-sys-color-primary-50);
+}
+
+.m3-radio--checked.m3-radio--secondary {
+  border-color: var(--md-sys-color-secondary-50);
+  color: var(--md-sys-color-secondary-50);
+}
+
+.m3-radio--checked.m3-radio--secondary::after {
+  transform: translate(-50%, -50%) scale(1);
+  background-color: var(--md-sys-color-secondary-50);
+}
+
+.m3-radio--checked.m3-radio--tertiary {
+  border-color: var(--md-sys-color-tertiary-50);
+  color: var(--md-sys-color-tertiary-50);
+}
+
+.m3-radio--checked.m3-radio--tertiary::after {
+  transform: translate(-50%, -50%) scale(1);
+  background-color: var(--md-sys-color-tertiary-50);
+}
+
+.m3-radio--checked.m3-radio--error {
+  border-color: var(--md-sys-color-error-50);
+  color: var(--md-sys-color-error-50);
+}
+
+.m3-radio--checked.m3-radio--error::after {
+  transform: translate(-50%, -50%) scale(1);
+  background-color: var(--md-sys-color-error-50);
+}
+
+/* ===== HOVER STATE ===== */
+.m3-radio:not(.m3-radio--disabled):hover {
+  border-color: var(--md-sys-color-primary-50);
+}
+
+.m3-radio--secondary:not(.m3-radio--disabled):hover {
+  border-color: var(--md-sys-color-secondary-50);
+}
+
+.m3-radio--tertiary:not(.m3-radio--disabled):hover {
+  border-color: var(--md-sys-color-tertiary-50);
+}
+
+.m3-radio--error:not(.m3-radio--disabled):hover {
+  border-color: var(--md-sys-color-error-60);
+}
+
+.m3-radio--checked:not(.m3-radio--disabled):hover {
+  border-color: var(--md-sys-color-primary-60);
+}
+
+.m3-radio--checked.m3-radio--secondary:not(.m3-radio--disabled):hover {
+  border-color: var(--md-sys-color-secondary-60);
+}
+
+.m3-radio--checked.m3-radio--tertiary:not(.m3-radio--disabled):hover {
+  border-color: var(--md-sys-color-tertiary-60);
+}
+
+.m3-radio--checked.m3-radio--error:not(.m3-radio--disabled):hover {
+  border-color: var(--md-sys-color-error-60);
+}
+
+/* ===== FOCUS STATE ===== */
+.m3-radio:focus-visible {
+  outline: 2px solid var(--md-sys-color-primary-50);
+  outline-offset: 2px;
+}
+
+.m3-radio--primary:focus-visible {
+  outline-color: var(--md-sys-color-primary-50);
+}
+
+.m3-radio--secondary:focus-visible {
+  outline-color: var(--md-sys-color-secondary-50);
+}
+
+.m3-radio--tertiary:focus-visible {
+  outline-color: var(--md-sys-color-tertiary-50);
+}
+
+.m3-radio--error:focus-visible {
+  outline-color: var(--md-sys-color-error-50);
+}
+
+/* ===== DISABLED STATE ===== */
+.m3-radio--disabled {
+  opacity: 0.38;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.m3-radio--disabled,
+.m3-radio--disabled:hover {
+  border-color: var(--md-sys-color-outline-default);
+  background-color: transparent;
+}
+
+.m3-radio--disabled.m3-radio--checked {
+  border-color: var(--md-sys-color-on-surface);
+  opacity: 0.38;
+}
+
+.m3-radio--disabled.m3-radio--checked::after {
+  background-color: var(--md-sys-color-on-surface);
+}
+
+/* ===== LABEL STYLES ===== */
+.m3-radio__label {
+  font-family: var(--md-sys-typescale-font-plain);
+  font-size: var(--md-sys-typescale-bodyLarge-size);
+  font-weight: var(--md-sys-typescale-weight-regular);
+  line-height: var(--md-sys-typescale-bodyLarge-line-height);
+  letter-spacing: var(--md-sys-typescale-bodyLarge-tracking);
+  color: var(--md-sys-color-on-surface);
+  cursor: pointer;
+  user-select: none;
+}
+
+.m3-radio-wrapper .m3-radio--disabled + .m3-radio__label {
+  cursor: not-allowed;
+  opacity: 0.38;
+}
+
+/* ===== ACTIVE/PRESSED STATE ===== */
+.m3-radio:active:not(.m3-radio--disabled) {
+  transform: scale(0.95);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 600px) {
+  .m3-radio--large {
+    width: 20px;
+    height: 20px;
+  }
+
+  .m3-radio--large::after {
+    width: 10px;
+    height: 10px;
+  }
+}
