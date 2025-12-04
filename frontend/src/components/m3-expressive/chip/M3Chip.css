@@ -168,7 +168,7 @@
 .m3-chip__avatar {
   width: 24px;
   height: 24px;
-  border-radius: 50%;
+  border-radius: var(--md-sys-shape-corner-full);
   overflow: hidden;
   margin-left: calc(var(--md-sys-spacing-2) * -1);
 }
@@ -202,7 +202,7 @@
   margin: 0;
   background: none;
   border: none;
-  border-radius: 50%;
+  border-radius: var(--md-sys-shape-corner-full);
   cursor: pointer;
   color: currentColor;
   opacity: 0.7;

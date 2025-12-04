@@ -7,8 +7,7 @@
 
 import React, { Component, type ErrorInfo, type ReactNode } from 'react';
 import { AlertTriangle, RefreshCw, Home } from 'lucide-react';
-import { Button } from '@/components/electric/button';
-import { Card } from '@/components';
+import { Button, Card } from '@/components/electric';
 
 interface Props {
   children: ReactNode;

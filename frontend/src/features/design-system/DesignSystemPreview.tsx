@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from '@/components/electric/button';
+import { Button } from '@/components';
 import { Card } from '@/components/electric';
 import { motion } from 'framer-motion';
 

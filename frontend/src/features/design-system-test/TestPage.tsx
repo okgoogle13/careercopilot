@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card } from '@/components/electric';
-import { Button } from '@/components/electric/button';
+import { Button } from '@/components';
 
 const TestPage = () => {
   return (

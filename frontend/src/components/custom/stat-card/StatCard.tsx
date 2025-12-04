@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card } from '../ui/card';
+import { Card } from '@/components/electric';
 
 export interface StatCardProps {
   title: string;

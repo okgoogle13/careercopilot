@@ -12,6 +12,7 @@ export * from './job-card';
 export * from './profile-card';
 
 // Advanced form components
+export * from './button';
 export * from './input';
 export * from './select';
 export * from './textarea';

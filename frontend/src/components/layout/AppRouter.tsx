@@ -9,16 +9,14 @@ import React, { lazy, Suspense } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
 import { ProtectedRoute } from '@/components/layout/ProtectedRoute';
-import { Card } from '@/components';
+import { Card } from '@/components/electric';
 
 // Auth pages - not lazy loaded since they're critical path
 import { LoginPage } from '@/pages/LoginPage';
 import { RegisterPage } from '@/pages/RegisterPage';
 
 // Lazy load page components
-const DashboardPage = lazy(() =>
-  import('@/pages/DashboardPage').then((m) => ({ default: m.DashboardPage }))
-);
+const DashboardPage = lazy(() => import('@/pages/DashboardPage'));
 const KscGeneratorPage = lazy(() =>
   import('@/pages/KscGeneratorPage').then((m) => ({ default: m.KscGeneratorPage }))
 );

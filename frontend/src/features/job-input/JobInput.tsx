@@ -6,7 +6,7 @@
 
 import React, { useState } from 'react';
 import { ArrowLeft, Link as LinkIcon, FileText, ExternalLink, Loader2 } from 'lucide-react';
-import { Button } from '@/components/electric/button';
+import { Button } from '@/components';
 import { Input } from '@/components/electric/input';
 import { Textarea } from '@/components/electric';
 import { Card } from '@/components';

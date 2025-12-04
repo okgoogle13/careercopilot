@@ -7,8 +7,7 @@
 
 import React from 'react';
 import { AlertCircle, RefreshCw } from 'lucide-react';
-import { Card } from '@/components';
-import { Button } from '@/components/electric/button';
+import { Card, Button } from '@/components/electric';
 
 export interface ErrorCardProps {
   title?: string;
