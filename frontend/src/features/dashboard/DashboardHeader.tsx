@@ -6,7 +6,7 @@
 
 import React from 'react';
 import { Plus, FileText, Briefcase } from 'lucide-react';
-import { Button } from '@/components/electric/button';
+import { Button } from '@/components';
 import { Card } from '@/components';
 
 interface DashboardHeaderProps {

@@ -6,7 +6,7 @@
 
 import React, { useState } from 'react';
 import { Upload, Linkedin, FileText, X, Check, ChevronLeft, ChevronRight } from 'lucide-react';
-import { ElectricButton as Button } from '@/components/electric/button';
+import { Button } from '@/components';
 import { ElectricCard as Card } from '@/components/electric/card';
 import { ElectricProgress as Progress } from '@/components/electric/progress';
 import { 

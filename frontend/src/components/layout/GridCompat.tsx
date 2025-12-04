@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { Grid as Grid, GridProps as ElectricGridProps } from '@/components';
+import { ElectricGrid, ElectricGridProps } from '@/components/electric';
 import { cn } from '@/lib/utils';
 
 export interface GridCompatProps extends Omit<ElectricGridProps, 'cols'> {
@@ -54,7 +54,7 @@ const GridCompat = React.forwardRef<HTMLDivElement, GridCompatProps>(
     }
 
     return (
-      <Grid
+      <ElectricGrid
         ref={ref}
         cols={cols}
         gap="md"
@@ -62,12 +62,13 @@ const GridCompat = React.forwardRef<HTMLDivElement, GridCompatProps>(
         {...props}
       >
         {children}
-      </Grid>
+      </ElectricGrid>
     );
   }
 );
 
 GridCompat.displayName = 'GridCompat';
 
+export { GridCompat };
 export default GridCompat;
 

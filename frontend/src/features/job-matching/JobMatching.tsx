@@ -6,7 +6,7 @@
 
 import React, { useState } from 'react';
 import { ArrowLeft, Sparkles, MapPin, DollarSign, Clock, ExternalLink, Heart, Star } from 'lucide-react';
-import { Button } from '@/components/electric/button';
+import { Button } from '@/components';
 import { Card } from '@/components';
 import { Badge } from '@/components/electric';
 import { Progress } from '@/components/electric';

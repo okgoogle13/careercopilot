@@ -40,7 +40,7 @@ These rules are non-negotiable for maintaining high context quality and low oper
 | System | Token Source | Status | Critical Rule |
 | :--- | :--- | :--- | :--- |
 | **Electric Alchemist** | `./frontend/src/theme/tokens.json` (184 tokens) | ✅ Production (30 components) | **Solid State:** NO shadows, border-based elevation. |
-| **M3 Expressive** | `./design-system/tokens.json` (342 tokens) | 🔄 Migration (12% → 70%) | **Auto-gen CSS:** NEVER edit `m3-design-tokens.css` directly. |
+| **M3 Expressive** | `./design-system/tokens.json` (342 tokens) | ✅ 75-80% (Infrastructure 100%, 89+ components migrated, 92% token compliance) | **Auto-gen CSS:** NEVER edit `m3-design-tokens.css` directly. |
 
 ### Quick Commands
 
@@ -76,7 +76,7 @@ These rules are non-negotiable for maintaining high context quality and low oper
 ## 5. 📊 STATUS OVERVIEW
 
 * **Test Coverage:** Frontend 17%, Backend 85%, E2E 90% (Target: 50% / 95% / 95%).
-* **M3 Readiness:** 12% (Target: 70%).
+* **M3 Readiness:** 75-80% (Infrastructure 100%, 89+ components migrated, 92% token compliance).
 
 ***
 

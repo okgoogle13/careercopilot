@@ -6,7 +6,7 @@
 
 import React from 'react';
 import { Bell, Plus, Search, Settings, User } from 'lucide-react';
-import { ElectricButton as Button } from '@/components/electric/button';
+import { Button } from '@/components';
 import { ElectricInput as Input } from '@/components/electric/input';
 import { cn } from '@/lib/utils';
 

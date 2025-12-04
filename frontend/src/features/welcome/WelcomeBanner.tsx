@@ -6,7 +6,7 @@
 
 import React from 'react';
 import { Sparkles, TrendingUp, Target, Clock } from 'lucide-react';
-import { Button } from '@/components/electric/button';
+import { Button } from '@/components';
 import { Card } from '@/components';
 import { Badge } from '@/components/electric';
 import { motion } from 'framer-motion';

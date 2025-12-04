@@ -6,7 +6,7 @@
 
 import React, { useState } from 'react';
 import { Briefcase, Mail, Loader2 } from 'lucide-react';
-import { Button } from '@/components/electric/button';
+import { Button } from '@/components';
 import { Textarea } from '@/components/electric';
 import { Card } from '@/components';
 import { Alert } from '@/components/electric';

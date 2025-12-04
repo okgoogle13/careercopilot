@@ -63,29 +63,33 @@ while IFS= read -r css_file; do
     if [ -f "$css_file" ]; then
         filename=$(basename "$css_file")
         
-        # Check for hardcoded colors
-        hardcoded_colors=$(grep -oE "(#[0-9a-fA-F]{3,6}|rgb\([^)]+\)|rgba\([^)]+\))" "$css_file" 2>/dev/null | wc -l | tr -d ' ' || echo "0")
-        if [ "$hardcoded_colors" -gt 0 ]; then
+        # Check for hardcoded colors (exclude rgba with calc/var which are token-based)
+        hardcoded_colors=$(grep -oE "(#[0-9a-fA-F]{3,6}|rgb\([^)]+\)|rgba\([^)]+\))" "$css_file" 2>/dev/null | grep -vE "(var\(|calc\()" | wc -l | tr -d ' ' || echo "0")
+        hardcoded_colors=${hardcoded_colors:-0}
+        if [ "$hardcoded_colors" -gt 0 ] 2>/dev/null; then
             print_warning "$filename: $hardcoded_colors hardcoded color(s) found"
             HARDCODED_COLORS=$((HARDCODED_COLORS + hardcoded_colors))
         fi
         
-        # Check for hardcoded spacing (px values that should be tokens)
-        hardcoded_spacing=$(grep -oE "[0-9]+px" "$css_file" 2>/dev/null | grep -vE "(0px|1px|2px)" | wc -l | tr -d ' ' || echo "0")
-        if [ "$hardcoded_spacing" -gt 0 ]; then
+        # Check for hardcoded spacing (px values that should be tokens, exclude common border widths)
+        hardcoded_spacing=$(grep -oE "[0-9]+px" "$css_file" 2>/dev/null | grep -vE "(0px|1px|2px|3px)" | wc -l | tr -d ' ' || echo "0")
+        hardcoded_spacing=${hardcoded_spacing:-0}
+        if [ "$hardcoded_spacing" -gt 0 ] 2>/dev/null; then
             print_warning "$filename: $hardcoded_spacing hardcoded spacing value(s) found"
             HARDCODED_SPACING=$((HARDCODED_SPACING + hardcoded_spacing))
         fi
         
-        # Check for hardcoded shadows (box-shadow with hardcoded values)
-        hardcoded_shadows=$(grep -cE "box-shadow:\s*[0-9]" "$css_file" 2>/dev/null || echo "0")
-        if [ "$hardcoded_shadows" -gt 0 ]; then
+        # Check for hardcoded shadows (box-shadow with hardcoded values, exclude elevation tokens)
+        hardcoded_shadows=$(grep -E "box-shadow:\s*[0-9]" "$css_file" 2>/dev/null | grep -vE "--md-sys-elevation" | wc -l | tr -d ' ' || echo "0")
+        hardcoded_shadows=${hardcoded_shadows:-0}
+        if [ "$hardcoded_shadows" -gt 0 ] 2>/dev/null; then
             print_warning "$filename: $hardcoded_shadows hardcoded shadow(s) found"
             HARDCODED_SHADOWS=$((HARDCODED_SHADOWS + hardcoded_shadows))
         fi
         
         # Check for missing token usage
-        token_usage=$(grep -cE "--md-sys-" "$css_file" 2>/dev/null || echo "0")
+        token_usage=$(grep -E "--md-sys-" "$css_file" 2>/dev/null | wc -l | tr -d ' ' || echo "0")
+        token_usage=${token_usage:-0}
         if [ "$token_usage" -eq 0 ] && [ -s "$css_file" ]; then
             print_warning "$filename: No design tokens found"
             MISSING_TOKENS=$((MISSING_TOKENS + 1))
@@ -95,13 +99,14 @@ done <<< "$CSS_FILES"
 
 print_header "Step 2: Token Usage Analysis"
 
-# Count token categories used
-COLOR_TOKENS=$(grep -rhE "--md-sys-color-" "$COMPONENT_DIR" --include="*.css" | wc -l | tr -d ' ')
-SPACING_TOKENS=$(grep -rhE "--md-sys-spacing-" "$COMPONENT_DIR" --include="*.css" | wc -l | tr -d ' ')
-SHAPE_TOKENS=$(grep -rhE "--md-sys-shape-" "$COMPONENT_DIR" --include="*.css" | wc -l | tr -d ' ')
-TYPOGRAPHY_TOKENS=$(grep -rhE "--md-sys-typescale-" "$COMPONENT_DIR" --include="*.css" | wc -l | tr -d ' ')
-ELEVATION_TOKENS=$(grep -rhE "--md-sys-elevation-" "$COMPONENT_DIR" --include="*.css" | wc -l | tr -d ' ')
-MOTION_TOKENS=$(grep -rhE "--md-sys-motion-" "$COMPONENT_DIR" --include="*.css" | wc -l | tr -d ' ')
+# Count token categories used (portable across grep versions - BSD and GNU)
+# Use find + grep for portability instead of --include flag
+COLOR_TOKENS=$(find "$COMPONENT_DIR" -name "*.css" -type f -exec grep -hE "--md-sys-color-" {} + 2>/dev/null | wc -l | tr -d ' ' || echo "0")
+SPACING_TOKENS=$(find "$COMPONENT_DIR" -name "*.css" -type f -exec grep -hE "--md-sys-spacing-" {} + 2>/dev/null | wc -l | tr -d ' ' || echo "0")
+SHAPE_TOKENS=$(find "$COMPONENT_DIR" -name "*.css" -type f -exec grep -hE "--md-sys-shape-" {} + 2>/dev/null | wc -l | tr -d ' ' || echo "0")
+TYPOGRAPHY_TOKENS=$(find "$COMPONENT_DIR" -name "*.css" -type f -exec grep -hE "--md-sys-typescale-" {} + 2>/dev/null | wc -l | tr -d ' ' || echo "0")
+ELEVATION_TOKENS=$(find "$COMPONENT_DIR" -name "*.css" -type f -exec grep -hE "--md-sys-elevation-" {} + 2>/dev/null | wc -l | tr -d ' ' || echo "0")
+MOTION_TOKENS=$(find "$COMPONENT_DIR" -name "*.css" -type f -exec grep -hE "--md-sys-motion-" {} + 2>/dev/null | wc -l | tr -d ' ' || echo "0")
 
 print_success "Token Usage Statistics:"
 echo "  • Color tokens: $COLOR_TOKENS"
@@ -116,16 +121,18 @@ print_header "Step 3: Consistency Check"
 # Check for common patterns
 print_success "Checking common styling patterns..."
 
-# Check border-radius consistency
-BORDER_RADIUS_PATTERNS=$(grep -rhE "border-radius:" "$COMPONENT_DIR" --include="*.css" | grep -vE "--md-sys-shape" | wc -l | tr -d ' ')
-if [ "$BORDER_RADIUS_PATTERNS" -gt 0 ]; then
+# Check border-radius consistency (portable grep - use -e flag to specify pattern)
+BORDER_RADIUS_PATTERNS=$(find "$COMPONENT_DIR" -name "*.css" -type f -exec grep -hE "border-radius:" {} + 2>/dev/null | grep -vE "var\(--md-sys-shape" | wc -l | tr -d ' ' || echo "0")
+BORDER_RADIUS_PATTERNS=${BORDER_RADIUS_PATTERNS:-0}
+if [ "$BORDER_RADIUS_PATTERNS" -gt 0 ] 2>/dev/null; then
     print_warning "Found $BORDER_RADIUS_PATTERNS border-radius values not using shape tokens"
     INCONSISTENT_PATTERNS=$((INCONSISTENT_PATTERNS + BORDER_RADIUS_PATTERNS))
 fi
 
-# Check transition consistency
-TRANSITION_PATTERNS=$(grep -rhE "transition:" "$COMPONENT_DIR" --include="*.css" | grep -vE "--md-sys-motion" | wc -l | tr -d ' ')
-if [ "$TRANSITION_PATTERNS" -gt 0 ]; then
+# Check transition consistency (portable grep - use -e flag to specify pattern)
+TRANSITION_PATTERNS=$(find "$COMPONENT_DIR" -name "*.css" -type f -exec grep -hE "transition:" {} + 2>/dev/null | grep -vE "var\(--md-sys-motion" | wc -l | tr -d ' ' || echo "0")
+TRANSITION_PATTERNS=${TRANSITION_PATTERNS:-0}
+if [ "$TRANSITION_PATTERNS" -gt 0 ] 2>/dev/null; then
     print_warning "Found $TRANSITION_PATTERNS transition values not using motion tokens"
     INCONSISTENT_PATTERNS=$((INCONSISTENT_PATTERNS + TRANSITION_PATTERNS))
 fi

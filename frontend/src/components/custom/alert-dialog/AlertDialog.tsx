@@ -9,7 +9,7 @@ import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { Button } from './Button/Button';
+import { Button } from '@/components/electric';
 
 export interface AlertDialogProps {
   open: boolean;

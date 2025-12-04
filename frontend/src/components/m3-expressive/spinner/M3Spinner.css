@@ -12,7 +12,7 @@
 .m3-spinner__circle {
   border: 3px solid transparent;
   border-top-color: var(--md-sys-color-primary-50);
-  border-radius: 50%;
+  border-radius: var(--md-sys-shape-corner-full);
   animation: spinner-rotate 1s linear infinite;
 }
 
