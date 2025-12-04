@@ -9,7 +9,7 @@ import { Card } from '@/components';
 import { Input } from '@/components/electric/input';
 import { Select } from '@/components/electric/select';
 import { Checkbox } from '@/components/electric';
-import { Button } from '@/components/electric/button';
+import { Button } from '@/components';
 import { Separator } from '@/components/electric';
 import { PageHeader } from '@/components/electric';
 

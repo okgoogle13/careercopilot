@@ -10,7 +10,7 @@
 
 import React from 'react';
 import { AppShell } from '@/components/layout/AppShell';
-import { Button } from '@/components/electric/button';
+import { Button } from '@/components';
 import { Card } from '@/components';
 import { X } from 'lucide-react';
 

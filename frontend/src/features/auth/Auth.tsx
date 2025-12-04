@@ -6,7 +6,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Button } from '@/components/electric/button';
+import { Button } from '@/components';
 import { Input } from '@/components/electric/input';
 import { Card } from '@/components';
 import { Separator } from '@/components/electric';

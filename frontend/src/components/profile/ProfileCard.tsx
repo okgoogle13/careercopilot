@@ -7,9 +7,7 @@
 
 import React from 'react';
 import { Edit, Trash2 } from 'lucide-react';
-import { Card } from '@/components';
-import { Avatar } from '@/components/electric';
-import { Button } from '@/components/electric/button';
+import { Card, Button, Avatar } from '@/components';
 import { cn } from '@/lib/utils';
 
 export interface ProfileCardProps {

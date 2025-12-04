@@ -15,7 +15,7 @@ import {
   AlertCircle,
   Trash2,
 } from 'lucide-react';
-import { Button, Badge, Popover, PopoverContent, PopoverTrigger } from '@/components';
+import { Button, Badge, Popover, PopoverContent, PopoverTrigger } from '@/components/electric';
 import { notificationService } from '@/api/notificationService';
 import type { Notification } from '@/api/notificationService';
 import { isApiError } from '@/types/api';

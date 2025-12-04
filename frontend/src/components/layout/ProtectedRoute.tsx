@@ -8,7 +8,7 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
-import { Card } from '@/components';
+import { Card } from '@/components/electric';
 
 export interface ProtectedRouteProps {
   children: React.ReactNode;

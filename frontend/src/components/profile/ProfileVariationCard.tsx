@@ -16,16 +16,13 @@ import {
   Tag,
 } from 'lucide-react';
 import { format } from 'date-fns';
-import { Card } from '@/components';
-import { Badge } from '@/components/electric';
-import { Button } from '@/components/electric/button';
-import { Progress } from '@/components/electric';
+import { Card, Badge, Button, Progress } from '@/components';
 import {
   DropdownMenu,
   DropdownMenuTrigger,
   DropdownMenuItem,
   DropdownMenuSeparator,
-} from '@/components/electric/DropdownMenu';
+} from '@/components/custom/dropdown-menu';
 import { cn } from '@/lib/utils';
 
 export interface ProfileVariationCardProps {

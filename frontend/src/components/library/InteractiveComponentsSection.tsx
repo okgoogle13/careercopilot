@@ -5,7 +5,7 @@
  */
 
 import React, { useState } from 'react';
-import { Button } from '@/components/electric/button';
+import { Button } from '@/components';
 import {
   Dialog,
   DialogContent,

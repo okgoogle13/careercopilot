@@ -7,7 +7,7 @@
 import React from 'react';
 import { TrendingUp, BookOpen, Target, Award } from 'lucide-react';
 import { Card } from '@/components';
-import { Button } from '@/components/electric/button';
+import { Button } from '@/components';
 
 export function CareerGrowthHub() {
   return (

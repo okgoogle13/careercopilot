@@ -6,7 +6,7 @@
 
 import React, { useState } from 'react';
 import { SwapHoriz, Download, Share } from 'lucide-react';
-import { Button } from '@/components/electric/button';
+import { Button } from '@/components';
 import { Card } from '@/components';
 import { Badge } from '@/components/electric';
 import { ATSScoreCircle } from '@/components/electric';
