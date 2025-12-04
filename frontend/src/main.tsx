@@ -40,7 +40,7 @@ document.head.appendChild(link);
 // Add M3 Expressive fonts
 const fontsLink = document.createElement('link');
 fontsLink.rel = 'stylesheet';
-fontsLink.href = 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap';
+fontsLink.href = 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap';
 document.head.appendChild(fontsLink);
 
 const root = document.getElementById('root');
