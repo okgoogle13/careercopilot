@@ -101,7 +101,8 @@
   /* ===== MOTION SYSTEM ===== */
   --md-sys-motion-easing-emphasizedDecelerate: cubic-bezier(0.05, 0.7, 0.1, 1.0);
   --md-sys-motion-easing-emphasizedAccelerate: cubic-bezier(0.3, 0.0, 0.8, 0.15);
-  --md-sys-motion-easing-standard: cubic-bezier(0.4, 0.0, 0.2, 1);
+  --md-sys-motion-easing-standard: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --md-sys-motion-easing-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
   --md-sys-motion-easing-linear: cubic-bezier(0, 0, 1, 1);
   --md-sys-motion-duration-short1: 50ms;
   --md-sys-motion-duration-short2: 100ms;
@@ -154,7 +155,7 @@
 
   /* ===== TYPOGRAPHY SYSTEM ===== */
   --md-sys-typescale-font-brand: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
-  --md-sys-typescale-font-plain: 'Inter Variable', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --md-sys-typescale-font-plain: 'Plus Jakarta Sans Variable', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --md-sys-typescale-font-code: 'JetBrains Mono', 'SF Mono', 'Consolas', 'Monaco', monospace;
   --md-sys-typescale-displayLarge-size: 57px;
   --md-sys-typescale-displayMedium-size: 45px;
@@ -186,10 +187,12 @@
   --md-sys-typescale-bodyLarge-line-height: 24px;
   --md-sys-typescale-bodyMedium-line-height: 20px;
   --md-sys-typescale-bodySmall-line-height: 16px;
+  --md-sys-typescale-weight-light: 300;
   --md-sys-typescale-weight-regular: 400;
   --md-sys-typescale-weight-medium: 500;
   --md-sys-typescale-weight-semibold: 600;
   --md-sys-typescale-weight-bold: 700;
+  --md-sys-typescale-weight-extrabold: 800;
   --md-sys-typescale-displayLarge-tracking: -0.25px;
   --md-sys-typescale-displayMedium-tracking: 0px;
   --md-sys-typescale-displaySmall-tracking: 0px;
