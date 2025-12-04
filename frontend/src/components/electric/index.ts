@@ -195,7 +195,7 @@ export type { ElectricAlertProps as AlertProps } from './alert';
 export { ElectricBreadcrumb as Breadcrumb } from './breadcrumb';
 export type { ElectricBreadcrumbProps as BreadcrumbProps, BreadcrumbItem } from './breadcrumb';
 
-export { ElectricCard as Card, PopOutGraphic } from './card';
+export { ElectricCard as Card } from './card';
 export type { ElectricCardProps as CardProps, PopOutGraphicProps } from './card';
 
 export { ElectricContainer as Container } from './container';
