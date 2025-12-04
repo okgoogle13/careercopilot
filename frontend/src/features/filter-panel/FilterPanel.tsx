@@ -10,7 +10,7 @@ import { Card } from '@/components';
 import { Checkbox } from '@/components/electric';
 import { RadioGroup, RadioGroupItem } from '@/components/electric';
 import { Slider } from '@/components/electric';
-import { Button } from '@/components/electric/button';
+import { Button } from '@/components';
 import { Separator } from '@/components/electric';
 
 interface FilterPanelProps {

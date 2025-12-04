@@ -6,8 +6,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Card } from './Card';
-import { Separator } from './Separator';
+import { Card } from '@/components/electric';
 import { cn } from '@/lib/utils';
 
 export interface TimelineItem {

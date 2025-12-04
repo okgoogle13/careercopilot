@@ -6,7 +6,7 @@
 
 import React, { useState } from 'react';
 import { X, Sparkles, Loader2, CheckCircle } from 'lucide-react';
-import { ElectricButton as Button } from '@/components/electric/button';
+import { Button } from '@/components';
 import { ElectricInput as Input } from '@/components/electric/input';
 import { ElectricTextarea as Textarea } from '@/components/electric/textarea';
 import * as Dialog from '@radix-ui/react-dialog';

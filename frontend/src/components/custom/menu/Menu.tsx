@@ -7,7 +7,7 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
-import { Card } from './Card';
+import { Card } from '@/components/electric';
 
 export interface MenuProps extends React.HTMLAttributes<HTMLDivElement> {
   open?: boolean;

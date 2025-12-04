@@ -68,7 +68,7 @@
 
 /* ===== VARIANT: CIRCULAR (Default) ===== */
 .m3-avatar--circular {
-  border-radius: 50%;
+  border-radius: var(--md-sys-shape-corner-full);
 }
 
 /* ===== VARIANT: ROUNDED ===== */

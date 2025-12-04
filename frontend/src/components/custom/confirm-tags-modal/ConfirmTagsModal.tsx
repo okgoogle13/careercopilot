@@ -6,7 +6,7 @@
 
 import React, { useState } from 'react';
 import { X, Check, Tag } from 'lucide-react';
-import { ElectricButton as Button } from '@/components/electric/button';
+import { Button } from '@/components';
 import { ElectricInput as Input } from '@/components/electric/input';
 import { ElectricBadge as Badge } from '@/components/electric/badge';
 import * as Dialog from '@radix-ui/react-dialog';

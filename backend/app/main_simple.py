@@ -28,6 +28,71 @@ app.add_middleware(
 )
 
 
+# ============================================================================
+# AUTH ENDPOINTS (Mock for Development)
+# ============================================================================
+
+@app.post("/api/v1/auth/login")
+async def login(credentials: dict):
+    """Mock login endpoint for development"""
+    email = credentials.get("email", "")
+    password = credentials.get("password", "")
+
+    if not email or not password:
+        return {"error": "Email and password required"}, 400
+
+    # Mock successful login for any credentials
+    return {
+        "user": {
+            "id": "user-123",
+            "email": email,
+            "name": email.split("@")[0].title(),
+            "role": "user"
+        },
+        "token": f"mock-token-{email}",
+        "accessToken": f"mock-token-{email}"
+    }
+
+
+@app.post("/api/v1/auth/register")
+async def register(user_data: dict):
+    """Mock registration endpoint for development"""
+    email = user_data.get("email", "")
+    password = user_data.get("password", "")
+
+    if not email or not password:
+        return {"error": "Email and password required"}, 400
+
+    # Mock successful registration
+    return {
+        "user": {
+            "id": "user-new-123",
+            "email": email,
+            "name": email.split("@")[0].title(),
+            "role": "user"
+        },
+        "token": f"mock-token-{email}",
+        "accessToken": f"mock-token-{email}"
+    }
+
+
+@app.post("/api/v1/auth/logout")
+async def logout():
+    """Mock logout endpoint for development"""
+    return {"message": "Logged out successfully"}
+
+
+@app.get("/api/v1/auth/me")
+async def get_current_user():
+    """Mock get current user endpoint for development"""
+    return {
+        "id": "user-123",
+        "email": "demo@careercopilot.com",
+        "name": "Demo User",
+        "role": "user"
+    }
+
+
 @app.get("/")
 async def root():
     return {

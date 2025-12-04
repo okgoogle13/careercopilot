@@ -5,7 +5,7 @@
 
 import * as React from 'react';
 import { cn } from '../../../lib/cn';
-import { Button } from '../button';
+import { ElectricButton } from '../button';
 
 export interface ElectricEmptyStateProps {
   icon?: React.ReactNode;
@@ -18,7 +18,7 @@ export interface ElectricEmptyStateProps {
   className?: string;
 }
 
-export const ElectricEmptyState: React.FC<EmptyStateProps> = ({
+export const ElectricEmptyState: React.FC<ElectricEmptyStateProps> = ({
   icon,
   title,
   description,
@@ -45,9 +45,9 @@ export const ElectricEmptyState: React.FC<EmptyStateProps> = ({
         </p>
       )}
       {action && (
-        <Button onClick={action.onClick} variant="tertiary">
+        <ElectricButton onClick={action.onClick} variant="tertiary">
           {action.label}
-        </Button>
+        </ElectricButton>
       )}
     </div>
   );
