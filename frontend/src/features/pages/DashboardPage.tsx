@@ -114,8 +114,8 @@ export function DashboardPage({
               <div className="inline-flex items-center justify-center w-20 h-20 rounded-card bg-primary-container/20 mb-4">
                 <Brain className="h-10 w-10 text-primary" />
               </div>
-              <h1 className="mb-4">Ready to Launch Your Career?</h1>
-              <p className="text-human text-on-surface-variant mb-8 max-w-md mx-auto">
+              <h1 className="text-3xl md:text-4xl font-bold mb-4">Ready to Launch Your Career?</h1>
+              <p className="text-human text-lg text-on-surface-variant mb-8 max-w-md mx-auto">
                 Create your first AI-optimized resume or cover letter to start landing more
                 interviews.
               </p>
@@ -138,10 +138,10 @@ export function DashboardPage({
           <Card variant="default" className="p-6 md:p-8">
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
               <div>
-                <h1 className="mb-2">Welcome back, {userName}!</h1>
-                <p className="text-human text-on-surface-variant mb-4">
-                  Ready to accelerate your career journey? Here&apos;s what&apos;s happening with your job search.
-                </p>
+              <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-2">Welcome back, {userName}!</h1>
+              <p className="text-human text-lg text-on-surface-variant mb-4">
+                Ready to accelerate your career journey? Here&apos;s what&apos;s happening with your job search.
+              </p>
                 <div className="flex flex-wrap gap-4">
                   <Button variant="default" onClick={onCreateProfile} className="px-6">
                     <FileText className="h-4 w-4 mr-2" />
@@ -164,7 +164,7 @@ export function DashboardPage({
           {/* Quick Actions Section */}
           <div>
             <div className="flex items-center justify-between mb-6">
-              <h2>Quick Actions</h2>
+              <h2 className="text-2xl font-bold">Quick Actions</h2>
             </div>
             <Grid cols={3} gap="lg">
               {/* Create Document Action */}
@@ -174,7 +174,7 @@ export function DashboardPage({
                     <FileText className="h-6 w-6 text-primary" />
                   </div>
                   <div className="flex-1">
-                    <h3 className="mb-2">Create New Document</h3>
+                    <h3 className="text-lg font-semibold mb-2">Create New Document</h3>
                     <p className="text-human text-sm text-on-surface-variant mb-4">
                       Generate an AI-optimized resume or cover letter tailored to your target role
                     </p>
@@ -192,7 +192,7 @@ export function DashboardPage({
                     <Target className="h-6 w-6 text-tertiary" />
                   </div>
                   <div className="flex-1">
-                    <h3 className="mb-2">Find Job Opportunities</h3>
+                    <h3 className="text-lg font-semibold mb-2">Find Job Opportunities</h3>
                     <p className="text-human text-sm text-on-surface-variant mb-4">
                       Discover jobs that match your skills and get AI-powered insights on each role
                     </p>
@@ -215,7 +215,7 @@ export function DashboardPage({
                     <TrendingUp className="h-6 w-6 text-secondary" />
                   </div>
                   <div className="flex-1">
-                    <h3 className="mb-2">Track Applications</h3>
+                    <h3 className="text-lg font-semibold mb-2">Track Applications</h3>
                     <p className="text-human text-sm text-on-surface-variant mb-4">
                       Monitor your job applications, interview schedules, and follow-up actions
                     </p>
@@ -236,7 +236,7 @@ export function DashboardPage({
           {/* Recent Profiles Section */}
           <div>
             <div className="flex items-center justify-between mb-6">
-              <h2>Your Profiles</h2>
+              <h2 className="text-2xl font-bold">Your Profiles</h2>
               {onCreateProfile && (
                 <Button variant="ghost" size="sm" onClick={onCreateProfile}>
                   <Plus className="h-4 w-4 mr-2" />
@@ -276,7 +276,7 @@ export function DashboardPage({
                   <Brain className="h-6 w-6 text-primary" />
                 </div>
                 <div>
-                  <h2>Job Search Intelligence</h2>
+                  <h2 className="text-xl font-bold">Job Search Intelligence</h2>
                   <p className="text-human text-sm text-on-surface-variant">
                     AI-powered insights and recommendations
                   </p>
