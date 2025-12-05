@@ -6,7 +6,7 @@
  */
 
 import type { Transition, Variants } from 'framer-motion';
-import tokens from '../theme/tokens.json';
+import tokens from '../../../design-system/tokens.json';
 
 /**
  * PHYSICS 1: TACTILE PRESS

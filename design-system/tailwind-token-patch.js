@@ -9,72 +9,87 @@ module.exports = {
       colors: {
         ...{
           "primary": "var(--sys-color-primary)",
-          "primary-light": "var(--sys-color-primary-light)",
-          "primary-dark": "var(--sys-color-primary-dark)",
-          "primary-contrast": "var(--sys-color-primary-contrast)",
           "secondary": "var(--sys-color-secondary)",
-          "secondary-light": "var(--sys-color-secondary-light)",
-          "secondary-dark": "var(--sys-color-secondary-dark)",
-          "secondary-contrast": "var(--sys-color-secondary-contrast)",
           "tertiary": "var(--sys-color-tertiary)",
-          "tertiary-light": "var(--sys-color-tertiary-light)",
-          "tertiary-dark": "var(--sys-color-tertiary-dark)",
-          "tertiary-contrast": "var(--sys-color-tertiary-contrast)",
           "error": "var(--sys-color-error)",
-          "error-light": "var(--sys-color-error-light)",
-          "error-dark": "var(--sys-color-error-dark)",
-          "error-contrast": "var(--sys-color-error-contrast)",
-          "success": "var(--sys-color-success)",
-          "success-light": "var(--sys-color-success-light)",
-          "success-dark": "var(--sys-color-success-dark)",
-          "warning": "var(--sys-color-warning)",
-          "warning-light": "var(--sys-color-warning-light)",
-          "warning-dark": "var(--sys-color-warning-dark)",
-          "info": "var(--sys-color-info)",
-          "info-light": "var(--sys-color-info-light)",
-          "info-dark": "var(--sys-color-info-dark)",
-          "text-primary": "var(--sys-color-text-primary)",
-          "text-secondary": "var(--sys-color-text-secondary)",
-          "text-disabled": "var(--sys-color-text-disabled)",
-          "bg-default": "var(--sys-color-bg-default)",
-          "bg-paper": "var(--sys-color-bg-paper)",
-          "bg-elevated": "var(--sys-color-bg-elevated)",
-          "divider": "var(--sys-color-divider)",
-          "action-active": "var(--sys-color-action-active)",
-          "action-hover": "var(--sys-color-action-hover)",
-          "action-selected": "var(--sys-color-action-selected)",
-          "action-disabled": "var(--sys-color-action-disabled)"
+          "surface": "var(--sys-color-surface)",
+          "outline": "var(--sys-color-outline)",
+          "background": "var(--sys-color-background)",
+          "onBackground": "var(--sys-color-onBackground)",
+          "shadow": "var(--sys-color-shadow)",
+          "scrim": "var(--sys-color-scrim)",
+          "inverseSurface": "var(--sys-color-inverseSurface)",
+          "inverseOnSurface": "var(--sys-color-inverseOnSurface)",
+          "inversePrimary": "var(--sys-color-inversePrimary)",
+          "disabled": "var(--sys-color-disabled)",
+          "seed": "var(--sys-color-seed)",
+          "neutral": "var(--sys-color-neutral)",
+          "neutralVariant": "var(--sys-color-neutralVariant)"
 }
       },
       spacing: {
         ...{
-          "_xs": "4px",
-          "_sm": "8px",
-          "_md": "16px",
-          "_lg": "24px",
-          "_xl": "32px",
-          "_2xl": "48px",
-          "_3xl": "64px"
+          "0": "0px",
+          "1": "4px",
+          "2": "8px",
+          "3": "12px",
+          "4": "16px",
+          "5": "20px",
+          "6": "24px",
+          "7": "28px",
+          "8": "32px",
+          "10": "40px",
+          "12": "48px",
+          "16": "64px",
+          "20": "80px",
+          "24": "96px",
+          "32": "128px"
 }
       },
       boxShadow: {
         ...{
-          "shadow-0": "none",
-          "shadow-1": "0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 2px rgba(0, 0, 0, 0.24)",
-          "shadow-2": "0px 3px 6px rgba(0, 0, 0, 0.15), 0px 2px 4px rgba(0, 0, 0, 0.12)",
-          "shadow-3": "0px 10px 20px rgba(0, 0, 0, 0.15), 0px 3px 6px rgba(0, 0, 0, 0.10)",
-          "shadow-4": "0px 15px 25px rgba(0, 0, 0, 0.15), 0px 5px 10px rgba(0, 0, 0, 0.05)",
-          "shadow-8": "0px 20px 40px rgba(0, 0, 0, 0.2)"
+          "popOutOffset": "-40px",
+          "zIndex": {
+                    "base": 1,
+                    "popOut": 20,
+                    "scrim": 39,
+                    "modal": 50,
+                    "tooltip": 60
+          },
+          "borderWidth": {
+                    "card": "1px",
+                    "cardHover": "2px",
+                    "modal": "3px"
+          },
+          "level0": "none",
+          "level1": "0px 1px 2px 0px rgba(0, 0, 0, 0.3), 0px 1px 3px 1px rgba(0, 0, 0, 0.15)",
+          "level2": "0px 1px 2px 0px rgba(0, 0, 0, 0.3), 0px 2px 6px 2px rgba(0, 0, 0, 0.15)",
+          "level3": "0px 4px 8px 3px rgba(0, 0, 0, 0.15), 0px 1px 3px 0px rgba(0, 0, 0, 0.3)",
+          "level4": "0px 6px 10px 4px rgba(0, 0, 0, 0.15), 0px 2px 3px 0px rgba(0, 0, 0, 0.3)",
+          "level5": "0px 8px 12px 6px rgba(0, 0, 0, 0.15), 0px 4px 4px 0px rgba(0, 0, 0, 0.3)"
 }
       },
       borderRadius: {
         ...{
-          "radius-none": "0px",
-          "radius-sm": "4px",
-          "radius-md": "8px",
-          "radius-lg": "12px",
-          "radius-xl": "16px",
-          "radius-full": "9999px"
+          "radius": {
+                    "card": "28px",
+                    "button": "24px",
+                    "badge": "8px",
+                    "asymmetric": "0 28px 28px 0"
+          },
+          "corner": {
+                    "none": "0px",
+                    "extraSmall": "4px",
+                    "small": "8px",
+                    "medium": "12px",
+                    "large": "16px",
+                    "extraLarge": "28px",
+                    "full": "9999px"
+          },
+          "family": {
+                    "rounded": "rounded",
+                    "cut": "cut"
+          }
 }
       },
       fontFamily: {
@@ -88,16 +103,7 @@ module.exports = {
 }
       },
       fontSize: {
-        ...{
-          "_xs": "0.75rem",
-          "_sm": "0.875rem",
-          "_base": "1rem",
-          "_lg": "1.125rem",
-          "_xl": "1.25rem",
-          "_2xl": "1.5rem",
-          "_3xl": "1.875rem",
-          "_4xl": "2.25rem"
-}
+        ...{}
       }
     }
   }
