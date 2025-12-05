@@ -1,9 +1,8 @@
 /**
  * ELECTRIC ALCHEMIST: POLY-BODY TYPOGRAPHY MATRIX
- * Version: 4.3 (Next.js Optimized)
- * 
- * Note: Fonts are now loaded via Next.js font optimization in fonts.ts
- * and injected via layout.tsx
+ * Version: 4.3
+ *
+ * Fonts are loaded via Google Fonts link tags in main.tsx
  */
 
 /* ============================================================================
