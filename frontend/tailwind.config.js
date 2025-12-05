@@ -1,4 +1,4 @@
-const tokens = require('./src/theme/tokens.json');
+const tokens = require('../design-system/tokens.json');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -14,40 +14,40 @@ module.exports = {
       /* --- COLORS --- */
       colors: {
         primary: {
-          DEFAULT: tokens.colors.primary.DEFAULT,
-          container: tokens.colors.primary.container,
-          'on-container': tokens.colors.primary.onContainer,
+          DEFAULT: tokens.color.primary.DEFAULT,
+          container: tokens.color.primary.container,
+          'on-container': tokens.color.primary.onContainer,
         },
         secondary: {
-          DEFAULT: tokens.colors.secondary.DEFAULT,
-          container: tokens.colors.secondary.container,
-          on: tokens.colors.secondary.on,
+          DEFAULT: tokens.color.secondary.DEFAULT,
+          container: tokens.color.secondary.container,
+          on: tokens.color.secondary.on,
         },
         tertiary: {
-          DEFAULT: tokens.colors.tertiary.DEFAULT,
-          container: tokens.colors.tertiary.container,
-          on: tokens.colors.tertiary.on,
+          DEFAULT: tokens.color.tertiary.DEFAULT,
+          container: tokens.color.tertiary.container,
+          on: tokens.color.tertiary.on,
         },
         error: {
-          DEFAULT: tokens.colors.error.DEFAULT,
-          container: tokens.colors.error.container,
-          on: tokens.colors.error.on,
+          DEFAULT: tokens.color.error.DEFAULT,
+          container: tokens.color.error.container,
+          on: tokens.color.error.on,
         },
         surface: {
-          DEFAULT: tokens.colors.surface.DEFAULT,
-          'container-low': tokens.colors.surface.containerLow,
-          container: tokens.colors.surface.container,
-          'container-high': tokens.colors.surface.containerHigh,
+          DEFAULT: tokens.color.surface.DEFAULT,
+          'container-low': tokens.color.surface.containerLow,
+          container: tokens.color.surface.container,
+          'container-high': tokens.color.surface.containerHigh,
         },
         outline: {
-          DEFAULT: tokens.colors.outline.DEFAULT,
-          variant: tokens.colors.outline.variant,
+          DEFAULT: tokens.color.outline.DEFAULT,
+          variant: tokens.color.outline.variant,
         },
         disabled: {
-          text: tokens.colors.disabled.text,
-          surface: tokens.colors.disabled.surface,
+          text: tokens.color.disabled.text,
+          surface: tokens.color.disabled.surface,
         },
-        seed: { shadow: tokens.colors.seed.shadow },
+        seed: { shadow: tokens.color.seed.shadow },
       },
 
       /* --- FONT FAMILY UTILITIES (Fallbacks only) --- */
@@ -130,7 +130,7 @@ module.exports = {
       const newUtilities = {
         // Dot Grid Background
         '.bg-dot-grid': {
-          backgroundColor: tokens.colors.surface.DEFAULT,
+          backgroundColor: tokens.color.surface.DEFAULT,
           backgroundImage: `radial-gradient(${tokens.texture.dotGrid.color} ${tokens.texture.dotGrid.dotSize}, transparent ${tokens.texture.dotGrid.dotSize})`,
           backgroundSize: `${tokens.texture.dotGrid.spacing} ${tokens.texture.dotGrid.spacing}`,
         },
