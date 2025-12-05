@@ -6,6 +6,7 @@ import os
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
 
 # Create the FastAPI app
 app = FastAPI(title="CareerCopilot API - Development", version="2.0.0-dev")
@@ -54,11 +55,25 @@ async def login(credentials: dict):
     }
 
 
+from pydantic import BaseModel
+
+class RegisterRequest(BaseModel):
+    email: str
+    password: str
+    name: str = ""
+    displayName: str = ""  # Accept both name and displayName
+    
+    class Config:
+        # Allow extra fields to be flexible
+        extra = "allow"
+
 @app.post("/api/v1/auth/register")
-async def register(user_data: dict):
+async def register(user_data: RegisterRequest):
     """Mock registration endpoint for development"""
-    email = user_data.get("email", "")
-    password = user_data.get("password", "")
+    email = user_data.email
+    password = user_data.password
+    # Accept either name or displayName
+    name = user_data.name or getattr(user_data, 'displayName', '') or email.split("@")[0].title()
 
     if not email or not password:
         return {"error": "Email and password required"}, 400
@@ -68,7 +83,7 @@ async def register(user_data: dict):
         "user": {
             "id": "user-new-123",
             "email": email,
-            "name": email.split("@")[0].title(),
+            "name": name,
             "role": "user"
         },
         "token": f"mock-token-{email}",
