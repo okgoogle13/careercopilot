@@ -79,11 +79,23 @@ if GENKIT_AVAILABLE and hasattr(genkit, 'get_plugin'):
                     genkit.init(plugins=[plugin])
 
 
-# Get model configuration
-model_config = get_ai_config().get_model_config("gemini-2.0-flash")
-if model_config is None:
-    raise RuntimeError("Failed to load model configuration")
-gemini_pro = cast(ModelConfigProtocol, model_config)
+# Get model configuration (lazy loading - only when needed)
+# This allows the backend to start even if AI config isn't fully set up
+_gemini_model_cache: Optional[ModelConfigProtocol] = None
+
+def get_gemini_model() -> ModelConfigProtocol:
+    """Get Gemini model configuration, loading it only when needed."""
+    global _gemini_model_cache
+    if _gemini_model_cache is None:
+        try:
+            model_config = get_ai_config().get_model_config("gemini-2.0-flash")
+            if model_config is None:
+                raise RuntimeError("Failed to load model configuration: gemini-2.0-flash not found")
+            _gemini_model_cache = cast(ModelConfigProtocol, model_config)
+        except Exception as e:
+            # Re-raise with context - this will only happen when the function is called
+            raise RuntimeError(f"Failed to load Gemini model configuration: {e}")
+    return _gemini_model_cache
 
 
 # Core Data Models
@@ -215,7 +227,7 @@ def analyze_resume_comprehensive(
             target_industry=target_industry or "General analysis",
         )
 
-        response = gemini_pro.generate(
+        response = get_gemini_model().generate(
             prompt,
             config={
                 "response_mime_type": "application/json",
@@ -262,7 +274,7 @@ def analyze_career_progression(
             ),
         )
 
-        response = gemini_pro.generate(
+        response = get_gemini_model().generate(
             prompt,
             config={
                 "response_mime_type": "application/json",
@@ -358,7 +370,7 @@ measurable actions for career advancement and market positioning.
 Respond with valid JSON matching the ResumeIntelligenceReport schema.
 """
 
-        response = gemini_pro.generate(
+        response = get_gemini_model().generate(
             prompt=prompt,
             config={"response_mime_type": "application/json"},
             output_schema=ResumeIntelligenceReport,
@@ -473,7 +485,7 @@ Provide specific, actionable guidance for successful career transition.
 Respond with valid JSON matching the SkillsGapAnalysis schema.
 """
 
-        response = gemini_pro.generate(
+        response = get_gemini_model().generate(
             prompt,
             config={
                 "response_mime_type": "application/json",

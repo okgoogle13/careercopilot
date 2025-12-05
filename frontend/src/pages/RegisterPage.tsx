@@ -104,7 +104,11 @@ export const RegisterPage: React.FC = () => {
     }
 
     try {
-      await register(formData.email, formData.password, formData.displayName);
+      await register({
+        email: formData.email,
+        password: formData.password,
+        displayName: formData.displayName
+      });
       announceToScreenReader('Registration successful. Redirecting to dashboard...', 'polite');
       navigate('/dashboard', { replace: true });
     } catch (err: any) {
