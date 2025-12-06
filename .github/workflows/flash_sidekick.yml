@@ -1,6 +1,7 @@
 name: Flash-Sidekick Dual-Engine Checks
 
 on:
+  workflow_dispatch:
   pull_request:
     branches: [ main, develop ]
 
