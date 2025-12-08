@@ -5,6 +5,10 @@ on:
   pull_request:
     branches: [ main, develop, chromebook ]
 
+permissions:
+  contents: read
+  pull-requests: write
+
 jobs:
   sidekick:
     runs-on: ubuntu-latest
@@ -51,19 +55,9 @@ jobs:
         id: idf_gen
         run: |
           . .venv/bin/activate
-          CONTENT=$(cat .github/workflows/flash_sidekick.yml)
-          REQUEST=$(cat <<EOF
-{
-  "method":"tools/call",
-  "id":2,
-  "params":{
-    "name":"generate_idf",
-    "arguments":{"code_content":"$CONTENT"}
-  }
-}
-EOF
-)
-          echo "$REQUEST" | python servers/flash_sidekick.py > idf_output.json
+          # Construct JSON safely using a python script to avoid heredoc/escaping issues
+          python -c "import json, sys; print(json.dumps({'method': 'tools/call', 'id': 2, 'params': {'name': 'generate_idf', 'arguments': {'code_content': open('.github/workflows/flash_sidekick.yml').read()}}}))" > request.json
+          cat request.json | python servers/flash_sidekick.py > idf_output.json
           cat idf_output.json
 
       - name: Publish fast summary as PR comment
