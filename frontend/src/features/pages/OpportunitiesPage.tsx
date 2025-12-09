@@ -5,7 +5,8 @@
  */
 
 import React from 'react';
-import { Container, Card, Button, Input, Grid } from '@/components';
+import { Container, Card, Input, Grid } from '@/components';
+import { Button } from '@/components/ui/button';
 import { JobCard } from '@/features/jobs/JobCard';
 
 export function OpportunitiesPage() {

@@ -11,7 +11,8 @@
  */
 
 import * as React from 'react';
-import { Button, Card, PopOutGraphic } from '../components/electric';
+import { Card, PopOutGraphic } from '../components/electric';
+import { Button } from '@/components/ui/button';
 
 export function ElectricAlchemistTestKitchen() {
   return (
@@ -96,7 +97,7 @@ export function ElectricAlchemistTestKitchen() {
           <Button variant="default" size="sm">
             Default Small
           </Button>
-          <Button variant="default" size="md">
+          <Button variant="default" size="default">
             Default Medium
           </Button>
           <Button variant="default" size="lg">
@@ -109,7 +110,7 @@ export function ElectricAlchemistTestKitchen() {
           <Button variant="secondary">Secondary</Button>
           <Button variant="outline">Outline</Button>
           <Button variant="ghost">Ghost</Button>
-          <Button variant="tertiary">Tertiary Accent</Button>
+          <Button variant="secondary">Tertiary Accent</Button>
         </div>
 
         <div className="mt-6">

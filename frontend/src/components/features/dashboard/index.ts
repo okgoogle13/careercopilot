@@ -4,5 +4,5 @@
  * Centralized exports for dashboard-related components.
  */
 
-exort { DashboardHeader } from './DashboardHeader';
+export { DashboardHeader } from './DashboardHeader';
 export type { DashboardHeaderProps } from './DashboardHeader';

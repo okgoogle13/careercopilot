@@ -28,7 +28,8 @@ import {
   Warning,
   Work,
 } from 'lucide-react';
-import { Container, Card, Button, Badge, Grid, Tabs, Progress, Alert } from '@/components';
+import { Container, Card, Badge, Grid, Tabs, Progress, Alert } from '@/components';
+import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
 interface AnalysisReport {
