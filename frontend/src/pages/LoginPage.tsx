@@ -9,11 +9,11 @@ import { useNavigate, Link as RouterLink } from 'react-router-dom';
 
 import { useAuth } from '../context/AuthContext';
 import { ariaLabels, announceToScreenReader } from '../utils/accessibility';
+import { Button } from '@/components/ui/button';
 import {
   Container,
   Card,
   Input,
-  Button,
   Alert,
   Skeleton,
 } from '../components/electric';

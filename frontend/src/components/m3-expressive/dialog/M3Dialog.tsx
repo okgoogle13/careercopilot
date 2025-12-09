@@ -11,7 +11,7 @@
 
 import React, { useEffect, useRef, useCallback } from 'react';
 import './M3Dialog.css';
-import { M3Button } from '../button/M3Button';
+import { Button } from '@/components/ui/button';
 
 export interface M3DialogProps {
   /**
@@ -217,21 +217,20 @@ export const M3Dialog: React.FC<M3DialogProps> = ({
           </div>
         )}
         <div className="m3-dialog__actions">
-          <M3Button
-            variant="text"
+          <Button
+            variant="ghost"
             onClick={handleCancel}
             className="m3-dialog__cancel"
           >
             {cancelLabel}
-          </M3Button>
-          <M3Button
-            variant="filled"
-            color={destructive ? 'error' : 'primary'}
+          </Button>
+          <Button
+            variant={destructive ? "destructive" : "default"}
             onClick={handleConfirm}
             className="m3-dialog__confirm"
           >
             {confirmLabel}
-          </M3Button>
+          </Button>
         </div>
       </div>
     </div>

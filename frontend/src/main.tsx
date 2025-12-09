@@ -2,14 +2,8 @@ import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 
-// M3 Expressive Design Tokens
-import './styles/m3-design-tokens.css';
-
-// Electric Alchemist Design System
-import './styles/electric-alchemist.css';
-
-// Global Accessibility Reset
-import './styles/a11y-reset.css';
+// M3 Expressive & Electric Alchemist Design System - Consolidated Source of Truth
+import './index.css';
 
 // import * as Sentry from '@sentry/react';
 import { AuthProvider } from './context/AuthContext';

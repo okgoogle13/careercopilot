@@ -10,7 +10,7 @@ import { Button } from '@/components';
 import { ElectricInput as Input } from '@/components/electric/input';
 import { cn } from '@/lib/utils';
 
-interface DashboardHeaderProps {
+export interface DashboardHeaderProps {
   userName?: string;
   unreadNotifications?: number;
   onSearch?: (query: string) => void;
@@ -24,11 +24,11 @@ interface DashboardHeaderProps {
 export function DashboardHeader({
   userName = 'User',
   unreadNotifications = 0,
-  onSearch = () => {},
-  onNewDocument = () => {},
-  onViewProfile = () => {},
-  onViewNotifications = () => {},
-  onViewSettings = () => {},
+  onSearch = () => { },
+  onNewDocument = () => { },
+  onViewProfile = () => { },
+  onViewNotifications = () => { },
+  onViewSettings = () => { },
   className,
 }: DashboardHeaderProps) {
   return (
@@ -40,7 +40,7 @@ export function DashboardHeader({
           <p className="text-sm text-on-surface-variant mt-1">
             Here's what's happening with your applications today
           </p>
-          
+
           <div className="mt-4 relative">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-on-surface-variant" />
             <Input
@@ -62,22 +62,22 @@ export function DashboardHeader({
               </span>
             )}
           </Button>
-          
+
           <Button variant="ghost" size="sm" onClick={onViewSettings} className="p-2">
             <Settings className="h-5 w-5" />
           </Button>
-          
+
           <Button variant="ghost" size="sm" onClick={onViewProfile} className="p-2">
             <User className="h-5 w-5" />
           </Button>
-          
+
           <Button onClick={onNewDocument} className="ml-2">
             <Plus className="h-4 w-4 mr-2" />
             New Document
           </Button>
         </div>
       </div>
-      
+
       {/* Stats bar */}
       <div className="bg-surface-container px-6 py-3 border-t border-outline-variant">
         <div className="flex items-center space-x-8">

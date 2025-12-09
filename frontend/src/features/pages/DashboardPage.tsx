@@ -16,7 +16,8 @@ import {
   Clock,
   CheckCircle,
 } from 'lucide-react';
-import { Container, Card, Button, Grid } from '@/components';
+import { Container, Card, Grid } from '@/components';
+import { Button } from '@/components/ui/button';
 import { ProfileCard, CreateProfileCard } from '@/components/profile';
 import { useAuth } from '@/context/AuthContext';
 
@@ -55,27 +56,27 @@ export function DashboardPage({
     isEmpty
       ? []
       : [
-          {
-            id: '1',
-            name: 'Nishant Dougall',
-            role: 'Community Support Worker',
-            lastUpdated: '2 days ago',
-            atsScore: 87,
-            status: 'active',
-            applications: 8,
-            avatarColor: 'primary',
-          },
-          {
-            id: '2',
-            name: 'Senior Developer',
-            role: 'React & TypeScript',
-            lastUpdated: '1 week ago',
-            atsScore: 92,
-            status: 'active',
-            applications: 5,
-            avatarColor: 'secondary',
-          },
-        ]
+        {
+          id: '1',
+          name: 'Nishant Dougall',
+          role: 'Community Support Worker',
+          lastUpdated: '2 days ago',
+          atsScore: 87,
+          status: 'active',
+          applications: 8,
+          avatarColor: 'primary',
+        },
+        {
+          id: '2',
+          name: 'Senior Developer',
+          role: 'React & TypeScript',
+          lastUpdated: '1 week ago',
+          atsScore: 92,
+          status: 'active',
+          applications: 5,
+          avatarColor: 'secondary',
+        },
+      ]
   );
 
   // Memoize expensive calculations
@@ -138,10 +139,10 @@ export function DashboardPage({
           <Card variant="default" className="p-6 md:p-8">
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
               <div>
-              <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-2">Welcome back, {userName}!</h1>
-              <p className="text-human text-lg text-on-surface-variant mb-4">
-                Ready to accelerate your career journey? Here&apos;s what&apos;s happening with your job search.
-              </p>
+                <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-2">Welcome back, {userName}!</h1>
+                <p className="text-human text-lg text-on-surface-variant mb-4">
+                  Ready to accelerate your career journey? Here&apos;s what&apos;s happening with your job search.
+                </p>
                 <div className="flex flex-wrap gap-4">
                   <Button variant="default" onClick={onCreateProfile} className="px-6">
                     <FileText className="h-4 w-4 mr-2" />
@@ -196,9 +197,9 @@ export function DashboardPage({
                     <p className="text-human text-sm text-on-surface-variant mb-4">
                       Discover jobs that match your skills and get AI-powered insights on each role
                     </p>
-                    <Button 
-                      variant="outline" 
-                      size="sm" 
+                    <Button
+                      variant="outline"
+                      size="sm"
                       onClick={onNavigateToOpportunities}
                       className="w-full"
                     >
@@ -219,9 +220,9 @@ export function DashboardPage({
                     <p className="text-human text-sm text-on-surface-variant mb-4">
                       Monitor your job applications, interview schedules, and follow-up actions
                     </p>
-                    <Button 
-                      variant="outline" 
-                      size="sm" 
+                    <Button
+                      variant="outline"
+                      size="sm"
                       onClick={onNavigateToApplications}
                       className="w-full"
                     >
@@ -262,8 +263,8 @@ export function DashboardPage({
           </div>
 
           {/* Job Search Intelligence Card */}
-          <Card 
-            variant="default" 
+          <Card
+            variant="default"
             className="p-6 md:p-8 border-2 border-primary/20 hover:border-primary/40 transition-colors"
             style={{
               transitionDuration: 'var(--motion-duration-short2, 200ms)',
