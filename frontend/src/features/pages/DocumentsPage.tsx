@@ -6,7 +6,8 @@
 
 import React from 'react';
 import { Plus, FileText, Filter } from 'lucide-react';
-import { Container, Card, Button, Input, Tabs, Grid } from '@/components';
+import { Container, Card, Input, Tabs, Grid } from '@/components';
+import { Button } from '@/components/ui/button';
 
 export function DocumentsPage() {
   const tabs = [

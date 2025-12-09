@@ -6,10 +6,9 @@
 
 import React, { useState } from 'react';
 import { Briefcase, Mail, Loader2 } from 'lucide-react';
-import { Button } from '@/components';
-import { Textarea } from '@/components/electric';
+import { Button } from '@/components/ui/button';
 import { Card } from '@/components';
-import { Alert } from '@/components/electric';
+import { Textarea, Alert } from '@/components/electric';
 import { prepareApplicationPackage, scanInboxForOpportunities } from '@/api/aiServices';
 
 export function DashboardStats() {
@@ -32,8 +31,7 @@ export function DashboardStats() {
         alert(
           `Application package prepared successfully!\n\nComponents generated: ${response.data.components_generated.join(
             ', '
-          )}\nJob Match Score: ${response.data.job_match_score}%\nApplication Strength: ${
-            response.data.application_strength
+          )}\nJob Match Score: ${response.data.job_match_score}%\nApplication Strength: ${response.data.application_strength
           }\nProcessing time: ${response.processing_time_seconds.toFixed(1)}s`
         );
         setJobDescription('');

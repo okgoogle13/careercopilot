@@ -5,7 +5,8 @@
  */
 
 import React from 'react';
-import { Container, Card, Grid, Button } from '@/components';
+import { Container, Card, Grid } from '@/components';
+import { Button } from '@/components/ui/button';
 import { FileText, Image, Video } from 'lucide-react';
 
 export function AssetLibraryPage() {
