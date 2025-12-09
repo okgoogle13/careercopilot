@@ -6,7 +6,8 @@
 
 import React from 'react';
 import { ArrowLeft } from 'lucide-react';
-import { Card, Button } from '@/components';
+import { Card } from '@/components';
+import { Button } from '@/components/ui/button';
 
 export interface TemplateSelectorProps {
   documentType: 'resume' | 'cover-letter' | 'selection-criteria';

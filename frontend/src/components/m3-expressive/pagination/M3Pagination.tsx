@@ -10,7 +10,7 @@
 
 import React, { useMemo } from 'react';
 import './M3Pagination.css';
-import { M3Button } from '../button/M3Button';
+import { Button } from '@/components/ui/button';
 
 export interface M3PaginationProps {
   /**
@@ -135,25 +135,23 @@ export const M3Pagination: React.FC<M3PaginationProps> = ({
     <nav className={classNames} aria-label="Pagination">
       <div className="m3-pagination__controls">
         {showFirstLast && (
-          <M3Button
-            variant="text"
-            color={color}
+          <Button
+            variant="ghost"
             onClick={() => handlePageChange(1)}
             disabled={page === 1}
             aria-label="First page"
           >
             ««
-          </M3Button>
+          </Button>
         )}
-        <M3Button
-          variant="text"
-          color={color}
+        <Button
+          variant="ghost"
           onClick={() => handlePageChange(page - 1)}
           disabled={page === 1}
           aria-label="Previous page"
         >
           ‹
-        </M3Button>
+        </Button>
 
         {pageNumbers.map((pageNum, index) => {
           if (pageNum === 'ellipsis') {
@@ -165,38 +163,35 @@ export const M3Pagination: React.FC<M3PaginationProps> = ({
           }
 
           return (
-            <M3Button
+            <Button
               key={pageNum}
-              variant={pageNum === page ? 'filled' : 'text'}
-              color={color}
+              variant={pageNum === page ? 'default' : 'ghost'}
               onClick={() => handlePageChange(pageNum)}
               aria-label={`Page ${pageNum}`}
               aria-current={pageNum === page ? 'page' : undefined}
             >
               {pageNum}
-            </M3Button>
+            </Button>
           );
         })}
 
-        <M3Button
-          variant="text"
-          color={color}
+        <Button
+          variant="ghost"
           onClick={() => handlePageChange(page + 1)}
           disabled={page === totalPages}
           aria-label="Next page"
         >
           ›
-        </M3Button>
+        </Button>
         {showFirstLast && (
-          <M3Button
-            variant="text"
-            color={color}
+          <Button
+            variant="ghost"
             onClick={() => handlePageChange(totalPages)}
             disabled={page === totalPages}
             aria-label="Last page"
           >
             »»
-          </M3Button>
+          </Button>
         )}
       </div>
     </nav>
