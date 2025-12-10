@@ -1,2 +1,2 @@
-export { AppLayout } from './AppLayout';
-export type { AppLayoutProps } from './AppLayout';
+export { AppShell as AppLayout } from '../AppShell';
+export type { AppShellProps as AppLayoutProps } from '../AppShell';
