@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 import { M3Dialog } from './M3Dialog';
-import { M3Button } from '../button/M3Button';
+import { Button } from '@/components/ui/button';
 
 /**
  * M3 Expressive Dialog Component
@@ -47,7 +47,7 @@ export const Default: Story = {
     const [open, setOpen] = useState(false);
     return (
       <>
-        <M3Button onClick={() => setOpen(true)}>Open Dialog</M3Button>
+        <Button onClick={() => setOpen(true)}>Open Dialog</Button>
         <M3Dialog
           open={open}
           onClose={() => setOpen(false)}
@@ -68,9 +68,9 @@ export const Destructive: Story = {
     const [open, setOpen] = useState(false);
     return (
       <>
-        <M3Button onClick={() => setOpen(true)} variant="filled" color="error">
+        <Button onClick={() => setOpen(true)} variant="destructive">
           Delete Item
-        </M3Button>
+        </Button>
         <M3Dialog
           open={open}
           onClose={() => setOpen(false)}
@@ -94,7 +94,7 @@ export const CustomLabels: Story = {
     const [open, setOpen] = useState(false);
     return (
       <>
-        <M3Button onClick={() => setOpen(true)}>Save Changes</M3Button>
+        <Button onClick={() => setOpen(true)}>Save Changes</Button>
         <M3Dialog
           open={open}
           onClose={() => setOpen(false)}
