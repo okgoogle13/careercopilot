@@ -6,10 +6,9 @@
 
 import React from 'react';
 import { Sparkles, TrendingUp, Target, Clock } from 'lucide-react';
-import { Button } from '@/components';
-import { Card } from '@/components';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/electric';
-import { motion } from 'framer-motion';
 
 interface WelcomeBannerProps {
   userName?: string;
@@ -170,8 +169,8 @@ export const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
                 </p>
               )}
               <div className="flex gap-1 flex-wrap mt-1">
-                <Badge variant="outline" size="sm">Resume updated recently</Badge>
-                <Badge variant="outline" size="sm">New job matches available</Badge>
+                <Badge variant="outline">Resume updated recently</Badge>
+                <Badge variant="outline">New job matches available</Badge>
               </div>
             </div>
           </div>
