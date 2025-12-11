@@ -11,8 +11,16 @@ interface CreateProfileCardProps {
 export const CreateProfileCard: React.FC<CreateProfileCardProps> = ({ onClick, className }) => {
     return (
         <Card
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => {
+                if (onClick && (e.key === 'Enter' || e.key === ' ')) {
+                    e.preventDefault();
+                    onClick();
+                }
+            }}
             className={cn(
-                "relative overflow-hidden border-2 border-dashed border-primary/20 bg-primary/5 hover:bg-primary/10 transition-colors cursor-pointer group flex flex-col items-center justify-center min-h-[280px]",
+                "relative overflow-hidden border-2 border-dashed border-primary/20 bg-primary/5 hover:bg-primary/10 transition-all duration-200 ease-in-out cursor-pointer group flex flex-col items-center justify-center min-h-[280px] hover:z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background active:scale-[0.98]",
                 className
             )}
             onClick={onClick}

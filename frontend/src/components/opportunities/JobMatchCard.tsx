@@ -54,7 +54,7 @@ export const JobMatchCard: React.FC<JobMatchCardProps> = ({
     };
 
     return (
-        <Card className={cn("overflow-hidden hover:shadow-md transition-shadow duration-300", className)}>
+        <Card className={cn("relative hover:z-10 overflow-hidden hover:shadow-md transition-shadow duration-300", className)}>
             <CardContent className="p-6 grid grid-cols-1 md:grid-cols-[1fr_200px] gap-6">
 
                 {/* Main Content */}

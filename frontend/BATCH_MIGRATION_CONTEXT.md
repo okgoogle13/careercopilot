@@ -25,16 +25,16 @@ Automate the propagation of visual stability fixes (Z-Index, Skeletons, Strict D
 ## OBJECTIVE
 Ensure that the visual stability established in Phase 1 extends to Keyboard (Focus) and Touch (Active) interactions.
 
-## REFERENCE STANDARDS (The "Electric Alchemist" Interaction Token)
+## REFERENCE STANDARDS (The "Electric Alchemist" Interaction Tokens)
 * **Focus State:** `focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background`
-    * *Why:* Matches the accessible, high-contrast theme.
+    * *Why:* Accessibility compliance that matches the high-contrast theme.
 * **Active/Click State:** `active:scale-[0.98]`
-    * *Why:* Provides "tactile" feedback that the click was registered (Antigravity physics).
-* **Transitions:** `transition-[transform,shadow,ring] duration-300 ease-[cubic-bezier(0.25,0.1,0.25,1.0)]` (Aligned with Button physics)
+    * *Why:* "Antigravity" physics—provides tactile feedback that the input was registered.
+* **Transitions:** `transition-all duration-200 ease-in-out`
     * *Why:* Unifies the speed of hover, focus, and active state changes.
 
 ## BATCH 3: INTERACTION & A11Y (Target List)
-*Target: Components from Phase 1 that are interactive.*
+*Target: Interactive Card Components stabilized in Phase 1.*
 1.  `src/components/applications/JobCard.tsx`
 2.  `src/components/documents/DocumentCard.tsx`
 3.  `src/components/dashboard/ActionCard.tsx`
