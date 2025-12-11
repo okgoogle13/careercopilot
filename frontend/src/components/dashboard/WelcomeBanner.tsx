@@ -72,9 +72,9 @@ export const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
   };
 
   return (
-    <Card className="overflow-hidden p-0">
+    <Card className="relative hover:z-10 overflow-hidden p-0">
       {/* Main Banner Section with Gradient */}
-      <div className="relative overflow-hidden bg-gradient-to-br from-primary via-primary-container to-secondary p-6 text-on-primary-container">
+      <div className="relative overflow-hidden bg-gradient-to-br from-primary via-primary-container to-secondary p-6 text-on-primary-container flex flex-col h-full">
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-10 pointer-events-none">
           <div className="absolute top-4 right-4 w-64 h-64 bg-white rounded-full blur-24" />
