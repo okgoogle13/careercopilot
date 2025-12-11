@@ -3,6 +3,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { MoreVertical, FileText, Download, Trash2, Edit } from 'lucide-react';
+import { Skeleton } from '@/components/ui/skeleton';
 import {
     DropdownMenu,
     DropdownMenuTrigger,
@@ -45,8 +46,10 @@ export const DocumentCard: React.FC<DocumentCardProps> = ({
 }) => {
     return (
         <Card
+            role="button"
+            tabIndex={0}
             className={cn(
-                "group hover:scale-[1.01] transition-transform duration-200 cursor-pointer overflow-hidden relative hover:z-10",
+                "group hover:scale-[1.01] transition-all duration-200 ease-in-out cursor-pointer overflow-hidden relative hover:z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background active:scale-[0.98]",
                 className
             )}
         >
@@ -59,7 +62,7 @@ export const DocumentCard: React.FC<DocumentCardProps> = ({
                     />
                 ) : (
                     <div className="flex flex-col items-center justify-center h-full text-muted-foreground space-y-2">
-                        <FileText className="h-12 w-12 opacity-20" />
+                        <Skeleton className="h-12 w-12 rounded-full" />
                     </div>
                 )}
 

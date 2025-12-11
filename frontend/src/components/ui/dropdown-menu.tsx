@@ -39,7 +39,7 @@ const DropdownMenuTrigger = React.forwardRef<
     React.ButtonHTMLAttributes<HTMLButtonElement> & { asChild?: boolean }
 >(({ className, children, asChild = false, ...props }, ref) => {
     const { isOpen, setIsOpen } = React.useContext(DropdownMenuContext)!
-    const Comp = asChild ? Slot : "button"
+    const Comp: React.ElementType = asChild ? Slot : "button";
 
     return (
         <Comp
@@ -102,17 +102,10 @@ const DropdownMenuItem = React.forwardRef<
 })
 DropdownMenuItem.displayName = "DropdownMenuItem"
 
-const DropdownMenuLabel = React.forwardRef<
-    HTMLDivElement,
-    React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-    <div
-        ref={ref}
-        className={cn("px-2 py-1.5 text-sm font-semibold", className)}
-        {...props}
-    />
-})
-DropdownMenuLabel.displayName = "DropdownMenuLabel"
+const DropdownMenuLabel = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(({ className, ...props }, ref) => (
+    <div ref={ref} className={cn("px-2 py-1.5 text-sm font-semibold", className)} {...props} />
+));
+DropdownMenuLabel.displayName = "DropdownMenuLabel";
 
 const DropdownMenuSeparator = React.forwardRef<
     HTMLDivElement,
@@ -123,7 +116,7 @@ const DropdownMenuSeparator = React.forwardRef<
         className={cn("-mx-1 my-1 h-px bg-muted", className)}
         {...props}
     />
-})
+));
 DropdownMenuSeparator.displayName = "DropdownMenuSeparator"
 
 export {

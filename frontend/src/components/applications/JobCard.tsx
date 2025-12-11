@@ -30,8 +30,16 @@ export const JobCard: React.FC<JobCardProps> = ({
 }) => {
     return (
         <Card
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => {
+                if (onClick && (e.key === 'Enter' || e.key === ' ')) {
+                    e.preventDefault();
+                    onClick();
+                }
+            }}
             className={cn(
-                "cursor-pointer transition-[transform,box-shadow,background-color] duration-300 ease-[cubic-bezier(0.25,0.1,0.25,1.0)] hover:scale-[1.01] active:scale-98 transform-gpu subpixel-antialiased group relative hover:z-10",
+                "cursor-pointer transition-all duration-200 ease-in-out hover:scale-[1.01] active:scale-[0.98] transform-gpu subpixel-antialiased group relative hover:z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background",
                 variant === 'compact' ? "p-4" : "p-6",
                 variant === 'featured' && "border-2 border-primary/20 bg-primary/5",
                 className

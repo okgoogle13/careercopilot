@@ -35,7 +35,7 @@ export const ActionCard: React.FC<ActionCardProps> = ({
     };
 
     return (
-        <Card className={cn("p-6 flex flex-col h-full", className)}>
+        <Card className={cn("relative hover:z-10 p-6 flex flex-col h-full", className)}>
             <div className="flex items-start justify-between mb-4">
                 <div className={cn("p-3 rounded-xl", getVariantStyles())}>
                     {React.cloneElement(icon as React.ReactElement, { className: "h-6 w-6" })}
@@ -53,7 +53,7 @@ export const ActionCard: React.FC<ActionCardProps> = ({
             <Button
                 variant="outline"
                 onClick={onAction}
-                className="w-full justify-between group"
+                className="w-full justify-between group transition-all duration-200 ease-in-out active:scale-[0.98]"
             >
                 {actionLabel}
                 <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
