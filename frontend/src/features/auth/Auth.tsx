@@ -6,16 +6,37 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Button } from '@/components';
-import { Input } from '@/components/electric/input';
+import { useAuth } from '@/context/AuthContext';
+import { useState } from 'react';
+import { Button, Input } from '@/components';
 import { Card } from '@/components';
-import { Separator } from '@/components/electric';
+import { Divider as Separator } from '@/components/electric';
 
 interface AuthProps {
   onLogin: () => void;
 }
 
 export function Auth({ onLogin }: AuthProps) {
+  const { login } = useAuth();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  const handleLogin = async () => {
+    setIsLoading(true);
+    setError('');
+    try {
+      await login({ email, password });
+      onLogin(); // Redirect or update parent state
+    } catch (err) {
+      setError('Login failed. Please check your credentials.');
+      console.error(err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center p-4 bg-surface">
       <div className="w-full max-w-md">
@@ -36,11 +57,31 @@ export function Auth({ onLogin }: AuthProps) {
           </h2>
 
           <div className="space-y-4">
-            <Input type="email" placeholder="you@example.com" label="Email" />
-            <Input type="password" placeholder="••••••••" label="Password" />
+            <div className="space-y-2">
+              <label className="text-human text-sm font-medium text-on-surface">Email</label>
+              <Input
+                type="email"
+                placeholder="you@example.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+            <div className="space-y-2">
+              <label className="text-human text-sm font-medium text-on-surface">Password</label>
+              <Input
+                type="password"
+                placeholder="••••••••"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
 
-            <Button onClick={onLogin} className="w-full" size="lg">
-              Sign In
+            {error && (
+              <div className="text-error text-sm text-center">{error}</div>
+            )}
+
+            <Button onClick={handleLogin} className="w-full" size="lg" disabled={isLoading}>
+              {isLoading ? 'Signing In...' : 'Sign In'}
             </Button>
 
             <div className="flex items-center gap-3 my-6">

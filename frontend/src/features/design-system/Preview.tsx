@@ -79,7 +79,7 @@ export const DesignSystemPreview = () => {
             </Card>
 
             {/* Card 2: Interactive with Tactile Press */}
-            <Card variant="interactive" className="border-primary/50">
+            <Card interactive={true} className="border-primary/50">
               <h3 className="text-hero text-2xl mb-2 text-primary">Tactile Press</h3>
               <p className="text-human text-on-surface-variant">
                 This card should physically press IN (scale 0.98) on hover.
@@ -88,7 +88,7 @@ export const DesignSystemPreview = () => {
 
             {/* Card 3: Pop-Out Graphic */}
             <Card
-              variant="interactive"
+              interactive={true}
               popOutGraphic={
                 <div className="w-16 h-16 bg-gradient-to-br from-tertiary to-seed-shadow rounded-xl flex items-center justify-center text-3xl text-on-surface">
                   <X size={24} />
@@ -124,7 +124,7 @@ export const DesignSystemPreview = () => {
         <section className="space-y-6">
           <h2 className="text-xl text-data text-outline">04. Comprehensive Typography</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <Card variant="interactive">
+            <Card interactive={true}>
               <div className="space-y-4">
                 <h3 className="text-hologram text-4xl">⚡ Hologram</h3>
                 <p className="text-human">
@@ -134,7 +134,7 @@ export const DesignSystemPreview = () => {
               </div>
             </Card>
 
-            <Card variant="interactive">
+            <Card interactive={true}>
               <div className="space-y-4">
                 <h3 className="text-hero text-4xl">Hero Display</h3>
                 <p className="text-human">
@@ -149,7 +149,7 @@ export const DesignSystemPreview = () => {
         {/* PHYSICS DEMO */}
         <section className="space-y-6">
           <h2 className="text-xl text-data text-outline">05. Physics Verification</h2>
-          <Card variant="interactive">
+          <Card interactive={true}>
             <div className="space-y-6">
               <p className="text-human">
                 Test the tactile press physics on all interactive elements:

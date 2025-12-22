@@ -1,13 +1,14 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { describe, it, expect, vi, beforeEach } from '@jest/globals';
+import { describe, it, expect, jest, beforeEach } from '@jest/globals';
+import '@testing-library/jest-dom';
 
-import { JobCard } from '../../features/JobCard';
+import { JobCard } from '../../JobCard';
 
 describe('JobCard', () => {
-  const mockOnSave = vi.fn();
-  const mockOnApply = vi.fn();
-  const mockOnViewDetails = vi.fn();
+  const mockOnSave = jest.fn();
+  const mockOnApply = jest.fn();
+  const mockOnViewDetails = jest.fn();
 
   const sampleJob = {
     id: '1',
@@ -42,7 +43,7 @@ describe('JobCard', () => {
   };
 
   beforeEach(() => {
-    vi.clearAllMocks();
+    jest.clearAllMocks();
   });
 
   describe('Component Rendering - Default Variant', () => {
@@ -227,7 +228,7 @@ describe('JobCard', () => {
       render(<JobCard job={sampleJob} onViewDetails={mockOnViewDetails} />);
 
       const card = screen.getByText('Senior Software Engineer').closest('[role="button"]') ||
-                   screen.getByText('Senior Software Engineer').closest('div[class*="MuiCard"]');
+        screen.getByText('Senior Software Engineer').closest('div[class*="MuiCard"]');
 
       if (card) {
         await user.click(card);
@@ -256,7 +257,7 @@ describe('JobCard', () => {
 
         // After click, should show filled bookmark
         expect(container.querySelector('[data-testid="BookmarkAddedIcon"]') ||
-               container.querySelector('[data-testid="BookmarkCheckIcon"]')).toBeInTheDocument();
+          container.querySelector('[data-testid="BookmarkCheckIcon"]')).toBeInTheDocument();
       }
     });
 
@@ -295,7 +296,7 @@ describe('JobCard', () => {
       render(<JobCard job={sampleJob} variant="compact" onViewDetails={mockOnViewDetails} />);
 
       const card = screen.getByText('Senior Software Engineer').closest('[role="button"]') ||
-                   screen.getByText('Senior Software Engineer').closest('div[class*="MuiCard"]');
+        screen.getByText('Senior Software Engineer').closest('div[class*="MuiCard"]');
 
       if (card) {
         await user.click(card);

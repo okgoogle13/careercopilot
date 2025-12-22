@@ -15,15 +15,29 @@ export interface AuthResponse {
 
 // 1. LOGIN
 export const login = async (credentials: any): Promise<AuthResponse> => {
-  // Replace with your actual endpoint
   const response = await axiosInstance.post('/auth/login', credentials);
-  return response.data;
+  const data = response.data;
+  // Map backend response to frontend shape
+  const user: User = {
+    id: data.user_id,
+    email: data.email,
+    name: data.name,
+    role: undefined,
+  };
+  return { user, token: data.access_token };
 };
 
 // 2. REGISTER
 export const register = async (userData: any): Promise<AuthResponse> => {
   const response = await axiosInstance.post('/auth/register', userData);
-  return response.data;
+  const data = response.data;
+  const user: User = {
+    id: data.user_id,
+    email: data.email,
+    name: data.name,
+    role: undefined,
+  };
+  return { user, token: data.access_token };
 };
 
 // 3. LOGOUT
@@ -38,7 +52,20 @@ export const logout = async (): Promise<void> => {
 // 4. GET PROFILE
 export const getCurrentUserProfile = async (): Promise<User> => {
   const response = await axiosInstance.get('/auth/me');
-  return response.data;
+  const data = response.data;
+  return {
+    id: data.user_id,
+    email: data.email,
+    name: data.name,
+    role: undefined,
+  };
+};
+
+// 5. GET ID TOKEN
+export const getIdToken = async (): Promise<string | null> => {
+  // Implementation depends on where you store the token
+  // For now, assuming localStorage or similar
+  return localStorage.getItem('auth_token');
 };
 
 // Default export for legacy compatibility if needed
@@ -46,7 +73,8 @@ const authService = {
   login,
   register,
   logout,
-  getCurrentUserProfile
+  getCurrentUserProfile,
+  getIdToken
 };
 
 export default authService;

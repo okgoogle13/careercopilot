@@ -20,7 +20,7 @@ export function AssetLibraryPage() {
 
         <Grid cols={4} gap="md">
           {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
-            <Card key={i} variant="interactive" className="p-6">
+            <Card key={i} interactive={true} className="p-6">
               <FileText className="h-12 w-12 text-primary mb-4" />
               <h3 className="text-hero text-lg font-semibold mb-2">Asset {i}</h3>
               <p className="text-data text-xs text-on-surface-variant">

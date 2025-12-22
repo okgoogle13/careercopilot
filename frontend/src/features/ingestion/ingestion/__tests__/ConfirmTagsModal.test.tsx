@@ -1,12 +1,13 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { describe, it, expect, vi, beforeEach } from '@jest/globals';
+import { describe, it, expect, jest, beforeEach } from '@jest/globals';
+import '@testing-library/jest-dom';
 
 import { ConfirmTagsModal } from '../../ConfirmTagsModal';
 
 describe('ConfirmTagsModal', () => {
-  const mockOnClose = vi.fn();
-  const mockOnSubmit = vi.fn();
+  const mockOnClose = jest.fn();
+  const mockOnSubmit = jest.fn();
 
   const mockData = {
     fileId: 'test-file-123',
@@ -19,7 +20,7 @@ describe('ConfirmTagsModal', () => {
   };
 
   beforeEach(() => {
-    vi.clearAllMocks();
+    jest.clearAllMocks();
   });
 
   describe('Component Rendering', () => {

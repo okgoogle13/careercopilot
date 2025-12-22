@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { AppLayout } from '@/components/layout/AppLayout';
 import { KanbanBoard, KanbanColumn } from '@/components/applications/KanbanBoard';
 import { Button } from '@/components/ui/button';
 import { Plus } from 'lucide-react';
@@ -47,28 +46,23 @@ export default function Applications() {
     const [columns, setColumns] = useState(initialColumns);
 
     return (
-        <AppLayout>
-            <div className="min-h-screen bg-surface p-6 md:p-8 flex flex-col h-full">
-                <div className="mx-auto w-full max-w-[1800px] flex-1 flex flex-col gap-8">
-
-                    {/* Header */}
-                    <div className="flex items-center justify-between">
-                        <div>
-                            <h1 className="text-3xl font-heading font-bold text-foreground">Applications</h1>
-                            <p className="text-muted-foreground font-body">Track and manage your job search progress.</p>
-                        </div>
-                        <Button>
-                            <Plus className="mr-2 h-4 w-4" />
-                            Add Application
-                        </Button>
-                    </div>
-
-                    {/* Kanban Board */}
-                    <div className="flex-1 overflow-hidden">
-                        <KanbanBoard columns={columns} />
-                    </div>
+        <div className="flex flex-col gap-8 h-full">
+            {/* Header */}
+            <div className="flex items-center justify-between">
+                <div>
+                    <h1 className="text-3xl font-heading font-bold text-white">Applications</h1>
+                    <p className="text-[#CAC4D0] font-body">Track and manage your job search progress.</p>
                 </div>
+                <Button className="bg-[#8A9A5B] hover:bg-[#9AB367] text-[#141218] font-bold">
+                    <Plus className="mr-2 h-4 w-4" />
+                    Add Application
+                </Button>
             </div>
-        </AppLayout>
+
+            {/* Kanban Board */}
+            <div className="flex-1 overflow-visible">
+                <KanbanBoard columns={columns} />
+            </div>
+        </div>
     );
 }

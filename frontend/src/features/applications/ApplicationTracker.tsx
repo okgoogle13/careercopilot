@@ -6,8 +6,7 @@
 
 import React, { useState } from 'react';
 import { X, ArrowLeft } from 'lucide-react';
-import { Button, Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components';
-import { TimelineView } from '@/components/electric';
+import { Button, Dialog } from '@/components';
 
 interface Application {
   id: string;
@@ -28,12 +27,12 @@ interface Application {
 interface TimelineEvent {
   id: string;
   type:
-    | 'application'
-    | 'interview'
-    | 'response'
-    | 'follow_up'
-    | 'offer'
-    | 'rejection';
+  | 'application'
+  | 'interview'
+  | 'response'
+  | 'follow_up'
+  | 'offer'
+  | 'rejection';
   title: string;
   description: string;
   date: string;
@@ -81,6 +80,19 @@ const sampleTimelineEvents: Record<string, TimelineEvent[]> = {
     },
   ],
 };
+
+// Placeholder for missing TimelineView
+const TimelineView = ({ applicationId, companyName, jobTitle, events, onEventEdit, onAddNote, onViewDocument }: any) => (
+  <div className="p-4 border rounded dashed border-outline-variant">
+    <h3 className="font-bold">Timeline Preview</h3>
+    <p>{companyName} - {jobTitle}</p>
+    <div className="mt-2">
+      {events.map((e: any) => (
+        <div key={e.id} className="text-sm">{e.date}: {e.title}</div>
+      ))}
+    </div>
+  </div>
+);
 
 export function ApplicationTracker({
   applications,
@@ -135,55 +147,32 @@ export function ApplicationTracker({
 
   return (
     <div className="w-full">
-      <Dialog open={showTimeline} onOpenChange={setShowTimeline}>
-        <DialogContent className="max-w-4xl max-h-[calc(100vh-64px)] bg-surface-container-low">
-          <DialogHeader>
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={handleCloseTimeline}
-                  className="p-2"
-                >
-                  <ArrowLeft className="h-4 w-4" />
-                </Button>
-                <DialogTitle className="text-hero text-lg font-semibold">
-                  Application Timeline
-                </DialogTitle>
-              </div>
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={handleCloseTimeline}
-                className="p-2"
-              >
-                <X className="h-4 w-4" />
-              </Button>
-            </div>
-          </DialogHeader>
+      <Dialog
+        open={showTimeline}
+        onClose={handleCloseTimeline}
+        title="Application Timeline"
+        className="max-w-4xl max-h-[calc(100vh-64px)]"
+      >
+        {selectedApplication && (
+          <div className="p-6">
+            <TimelineView
+              applicationId={selectedApplication.id}
+              companyName={selectedApplication.company}
+              jobTitle={selectedApplication.jobTitle}
+              events={timelineEvents}
+              onEventEdit={handleEventEdit}
+              onAddNote={handleAddNote}
+              onViewDocument={handleViewDocument}
+            />
+          </div>
+        )}
 
-          {selectedApplication && (
-            <div className="p-6">
-              <TimelineView
-                applicationId={selectedApplication.id}
-                companyName={selectedApplication.company}
-                jobTitle={selectedApplication.jobTitle}
-                events={timelineEvents}
-                onEventEdit={handleEventEdit}
-                onAddNote={handleAddNote}
-                onViewDocument={handleViewDocument}
-              />
-            </div>
-          )}
-
-          <DialogFooter>
-            <Button variant="outline" onClick={handleCloseTimeline}>
-              Close
-            </Button>
-            <Button variant="default">Add Event</Button>
-          </DialogFooter>
-        </DialogContent>
+        <div className="flex justify-end gap-2 p-6 pt-0">
+          <Button variant="outline" onClick={handleCloseTimeline}>
+            Close
+          </Button>
+          <Button variant="default">Add Event</Button>
+        </div>
       </Dialog>
     </div>
   );

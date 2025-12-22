@@ -14,9 +14,11 @@ if "/app/app" not in sys.path:
 # Ensure PORT environment variable is set correctly
 
 
+
 import firebase_admin
 from fastapi import FastAPI
 from fastapi.middleware.gzip import GZipMiddleware
+from fastapi.middleware.cors import CORSMiddleware
 from firebase_admin import credentials
 
 from app.api.router import api_router
@@ -24,6 +26,7 @@ from app.core.genkit_init import check_genkit_health, startup_genkit
 from app.core.loguru_config import configure_loguru, get_logger, log_security_event
 from app.core.monitoring import setup_prometheus_monitoring
 from app.core.secure_config import SecureSettings
+from app.core.database import init_database
 
 # Initialize secure configuration
 settings = SecureSettings()
@@ -41,6 +44,15 @@ app = FastAPI(
     version="1.1.0",
 )
 
+# Add CORS Middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173", "http://localhost:3000"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 # Add GZIP compression middleware for response compression
 # Compresses responses larger than 1000 bytes using gzip algorithm
 # Reduces bandwidth usage and improves response times for large payloads
@@ -50,11 +62,19 @@ app.add_middleware(GZipMiddleware, minimum_size=1000)
 if settings.ENV != "test":
     setup_prometheus_monitoring(app, environment=settings.ENV)
 
-
 @app.on_event("startup")
 def on_startup():
     """Initialize services when the application starts."""
     logger.info("Starting CareerCopilot API application", environment=settings.ENV)
+    
+    # Initialize Database (Create Tables)
+    try:
+        init_database()
+        logger.info("Database initialized successfully")
+    except Exception as e:
+        logger.error(f"Failed to initialize database: {e}")
+
+    # ... rest of startup ...
 
     # --- Firebase Initialization Logic ---
     try:

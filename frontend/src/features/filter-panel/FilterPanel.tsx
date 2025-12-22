@@ -8,10 +8,10 @@ import React, { useState } from 'react';
 import { X } from 'lucide-react';
 import { Card } from '@/components';
 import { Checkbox } from '@/components/electric';
-import { RadioGroup, RadioGroupItem } from '@/components/electric';
+import { ElectricRadioGroup as RadioGroup } from '@/components/electric';
 import { Slider } from '@/components/electric';
 import { Button } from '@/components';
-import { Separator } from '@/components/electric';
+import { Divider as Separator } from '@/components/electric';
 
 interface FilterPanelProps {
   onClose?: () => void;
@@ -139,14 +139,15 @@ export function FilterPanel({ onClose, onApply }: FilterPanelProps) {
           <RadioGroup
             name="experienceLevel"
             value={filters.experienceLevel}
-            onChange={(value) =>
+            onChange={(value: string) =>
               setFilters((prev) => ({ ...prev, experienceLevel: value }))
             }
-          >
-            <RadioGroupItem value="entry" label="Entry Level" />
-            <RadioGroupItem value="mid" label="Mid Level" />
-            <RadioGroupItem value="senior" label="Senior Level" />
-          </RadioGroup>
+            options={[
+              { value: 'entry', label: 'Entry Level' },
+              { value: 'mid', label: 'Mid Level' },
+              { value: 'senior', label: 'Senior Level' }
+            ]}
+          />
         </div>
 
         <Separator />
@@ -166,4 +167,3 @@ export function FilterPanel({ onClose, onApply }: FilterPanelProps) {
 }
 
 export default FilterPanel;
-
