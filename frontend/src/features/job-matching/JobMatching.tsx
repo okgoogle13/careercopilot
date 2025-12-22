@@ -119,7 +119,7 @@ export function JobMatching({ onBack }: JobMatchingProps) {
 
         <div className="space-y-4">
           {jobMatches.map((job) => (
-            <Card key={job.id} className="p-6" variant="interactive">
+            <Card key={job.id} className="p-6" interactive={true}>
               <div className="grid grid-cols-1 md:grid-cols-[1fr_300px] gap-6">
                 <div>
                   <div className="flex items-start justify-between mb-2">
@@ -146,7 +146,7 @@ export function JobMatching({ onBack }: JobMatchingProps) {
                           <Clock className="h-4 w-4" />
                           {job.postedDate}
                         </div>
-                        {job.isRemote && <Badge variant="secondary">Remote Available</Badge>}
+                        {job.isRemote && <Badge variant="outline">Remote Available</Badge>}
                       </div>
                     </div>
                   </div>

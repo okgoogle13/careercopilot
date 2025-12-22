@@ -6,7 +6,7 @@
  */
 
 import React, { useState, useCallback } from 'react';
-import { Person, Briefcase, ArrowLeft, ArrowRight, Sparkles, Loader2 } from 'lucide-react';
+import { User as Person, Briefcase, ArrowLeft, ArrowRight, Sparkles, Loader2 } from 'lucide-react';
 import { Container, Card, Button, Input, Textarea, Grid } from '@/components';
 import { cn } from '@/lib/utils';
 
@@ -64,22 +64,28 @@ export const ProfileEditor: React.FC<ProfileEditorProps> = ({ profile, onNext, o
               <h2 className="text-hero text-lg font-semibold">Personal Information</h2>
             </div>
             <div className="space-y-4">
-              <Input
-                label="Full Name"
-                value={formData.fullName}
-                onChange={handleFieldChange('fullName')}
-              />
-              <Input
-                label="Email"
-                type="email"
-                value={formData.email}
-                onChange={handleFieldChange('email')}
-              />
-              <Input
-                label="Phone"
-                value={formData.phone}
-                onChange={handleFieldChange('phone')}
-              />
+              <div className="space-y-2">
+                <label className="text-human text-sm font-medium text-on-surface">Full Name</label>
+                <Input
+                  value={formData.fullName}
+                  onChange={handleFieldChange('fullName')}
+                />
+              </div>
+              <div className="space-y-2">
+                <label className="text-human text-sm font-medium text-on-surface">Email</label>
+                <Input
+                  type="email"
+                  value={formData.email}
+                  onChange={handleFieldChange('email')}
+                />
+              </div>
+              <div className="space-y-2">
+                <label className="text-human text-sm font-medium text-on-surface">Phone</label>
+                <Input
+                  value={formData.phone}
+                  onChange={handleFieldChange('phone')}
+                />
+              </div>
             </div>
           </Card>
 
@@ -91,13 +97,15 @@ export const ProfileEditor: React.FC<ProfileEditorProps> = ({ profile, onNext, o
               <h2 className="text-hero text-lg font-semibold">Experience</h2>
             </div>
             <div className="space-y-4">
-              <Textarea
-                label="Professional Summary"
-                placeholder="Your summary..."
-                rows={4}
-                value={formData.summary}
-                onChange={handleFieldChange('summary')}
-              />
+              <div className="space-y-2">
+                <label className="text-human text-sm font-medium text-on-surface">Professional Summary</label>
+                <Textarea
+                  placeholder="Your summary..."
+                  rows={4}
+                  value={formData.summary}
+                  onChange={handleFieldChange('summary')}
+                />
+              </div>
               <Button
                 variant="outline"
                 size="sm"

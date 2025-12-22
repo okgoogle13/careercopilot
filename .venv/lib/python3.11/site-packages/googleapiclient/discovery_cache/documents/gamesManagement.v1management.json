@@ -15,7 +15,6 @@
 "description": "The Google Play Games Management API allows developers to manage resources from the Google Play Game service.",
 "discoveryVersion": "v1",
 "documentationLink": "https://developers.google.com/games/",
-"fullyEncodeReservedExpansion": true,
 "icons": {
 "x16": "http://www.google.com/images/icons/product/search-16.gif",
 "x32": "http://www.google.com/images/icons/product/search-32.gif"
@@ -472,7 +471,7 @@
 }
 }
 },
-"revision": "20251003",
+"revision": "20250320",
 "rootUrl": "https://gamesmanagement.googleapis.com/",
 "schemas": {
 "AchievementResetAllResponse": {

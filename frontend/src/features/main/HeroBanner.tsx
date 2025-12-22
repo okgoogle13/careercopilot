@@ -6,7 +6,7 @@
 
 import React from 'react';
 import { ArrowRight, Play } from 'lucide-react';
-import { Button } from '@/components';
+import { Button } from '@/components/ui/button';
 import { FeatureHighlights } from './FeatureHighlights';
 
 interface HeroBannerProps {
@@ -19,8 +19,9 @@ export function HeroBanner({ onGetStarted, onWatchDemo }: HeroBannerProps) {
     <div className="py-20">
       <div className="max-w-6xl mx-auto">
         {/* Main Hero Content */}
-        <div className="text-center mb-16">
-          <h1 className="text-hero text-4xl md:text-6xl font-bold mb-6">
+        <div className="text-center mb-16 bg-[var(--color-surface-container-low)] lg:p-12 p-8 rounded-leaf border border-[var(--color-border)] relative overflow-hidden">
+          <div className="absolute inset-0 bg-noise opacity-30 pointer-events-none"></div>
+          <h1 className="text-hero text-4xl md:text-6xl font-bold mb-6 relative z-10">
             Land Your Dream Job with AI
           </h1>
 

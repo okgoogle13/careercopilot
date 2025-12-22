@@ -14,21 +14,27 @@ afterEach(() => {
   cleanup();
 });
 
-// Mock Firebase config module to avoid import.meta issues
+// Mock Firebase
+jest.mock('firebase/auth', () => ({
+  getAuth: jest.fn(() => ({})),
+  onAuthStateChanged: jest.fn(() => jest.fn()),
+  signInWithEmailAndPassword: jest.fn(),
+  createUserWithEmailAndPassword: jest.fn(),
+  signOut: jest.fn(),
+  updateProfile: jest.fn(),
+  GoogleAuthProvider: jest.fn(),
+  GithubAuthProvider: jest.fn(),
+}));
+
+jest.mock('firebase/app', () => ({
+  initializeApp: jest.fn(),
+}));
 jest.mock('./firebase-config', () => ({
   auth: {
     currentUser: null,
-    signInWithEmailAndPassword: jest.fn(),
-    signOut: jest.fn(),
-    onAuthStateChanged: jest.fn(),
   },
-  db: {
-    collection: jest.fn(),
-    doc: jest.fn(),
-  },
-  storage: {
-    ref: jest.fn(),
-  },
+  db: {},
+  storage: {},
 }));
 
 // Mock window.matchMedia for Material-UI components
@@ -48,9 +54,9 @@ Object.defineProperty(window, 'matchMedia', {
 
 // Mock ResizeObserver
 class ResizeObserver {
-  observe() {}
-  unobserve() {}
-  disconnect() {}
+  observe() { }
+  unobserve() { }
+  disconnect() { }
 }
 
 window.ResizeObserver = ResizeObserver;

@@ -207,15 +207,15 @@ export const JobCard = memo<JobCardProps>(({
         {/* Header */}
         <div className="flex items-start justify-between mb-4">
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center">
+            <div className="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center shrink-0">
               {job.logoUrl ? (
                 <img
                   src={job.logoUrl}
                   alt={job.company}
-                  className="w-8 h-8 rounded-lg object-cover"
+                  className="w-8 h-8 rounded-lg object-cover shrink-0"
                 />
               ) : (
-                <Building2 className="h-6 w-6 text-on-surface-variant" />
+                <Building2 className="h-6 w-6 text-on-surface-variant shrink-0" />
               )}
             </div>
             <div>
@@ -227,7 +227,7 @@ export const JobCard = memo<JobCardProps>(({
                   <Shield className="h-4 w-4 text-secondary" />
                 )}
                 {job.sponsored && (
-                  <Badge variant="tertiary" className="text-xs">
+                  <Badge variant="outline" className="text-xs">
                     Sponsored
                   </Badge>
                 )}
@@ -321,7 +321,7 @@ export const JobCard = memo<JobCardProps>(({
             </h4>
             <div className="flex flex-wrap gap-1.5">
               {job.skills.slice(0, 6).map((skill, index) => (
-                <Badge key={index} variant="secondary" className="text-xs">
+                <Badge key={index} variant="outline" className="text-xs">
                   {skill}
                 </Badge>
               ))}

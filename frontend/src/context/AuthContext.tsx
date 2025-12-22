@@ -1,160 +1,159 @@
 /**
  * Authentication Context
- * Manages global authentication state and token persistence
- * PERFORMANCE OPTIMIZED: Memoized context value and callbacks
+ * Manages global authentication state via Firebase or Offline Mock
  */
 
-import type { ReactNode } from 'react';
-import React, { createContext, useContext, useState, useEffect, useCallback, useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { ReactNode, createContext, useContext, useState, useEffect, useCallback, useMemo } from 'react';
+import {
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  signOut as firebaseSignOut,
+  User as FirebaseUser,
+  updateProfile as firebaseUpdateProfile
+} from 'firebase/auth';
+import { auth } from '../firebase-config';
 
-import { 
-  login as authLogin, 
-  register as authRegister, 
-  logout as authLogout, 
-  getCurrentUserProfile,
-  User as AuthUser
-} from '@/api/authService';
-import { ApiResponse } from '../types/api';
-
-// These types are not defined in the new authService, so we define them here.
-type LoginCredentials = any;
-type RegisterData = any;
+// Define types locally since we aren't using the external service
+export interface User extends Partial<FirebaseUser> {
+  // Add any custom fields you expect on top of Firebase User if needed
+  role?: string;
+  email: string | null;
+  displayName: string | null;
+  uid: string;
+}
 
 interface AuthContextType {
-  user: AuthUser | null;
-  token: string | null;
-  isLoading: boolean;
-  isAuthenticated: boolean;
-  login: (credentials: LoginCredentials) => Promise<ApiResponse<{ user: AuthUser; accessToken: string }>>;
-  register: (data: RegisterData) => Promise<ApiResponse<{ user: AuthUser }>>;
-  logout: () => Promise<ApiResponse<null>>;
-  updateProfile: (updates: Partial<AuthUser>) => Promise<ApiResponse<{ user: AuthUser }>>;
-  initializeAuth: () => Promise<void>;
+  user: User | null;
+  loading: boolean;
+  login: (email: string, password: string) => Promise<void>;
+  register: (email: string, password: string, displayName: string) => Promise<void>;
+  logout: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
+const isOfflineMode = import.meta.env.VITE_OFFLINE_MODE === 'true';
+
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [user, setUser] = useState<AuthUser | null>(null);
-  const [token, setToken] = useState<string | null>(() => localStorage.getItem('access_token'));
-  const [isLoading, setIsLoading] = useState(true);
-  const navigate = useNavigate();
+  const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
 
-  // Save tokens to localStorage when they change
+  // Monitor auth state
   useEffect(() => {
-    if (token) {
-      localStorage.setItem('access_token', token);
-    } else {
-      localStorage.removeItem('access_token');
-    }
-  }, [token]);
-
-  // Initialize authentication state - memoized for stable reference
-  const initializeAuth = useCallback(async () => {
-    setIsLoading(true);
-    try {
-      const storedToken = localStorage.getItem('access_token');
-      if (storedToken) {
-        // Verify token is valid by fetching current user profile
-        const user = await getCurrentUserProfile();
-        setUser(user);
-        setToken(storedToken);
+    if (isOfflineMode) {
+      // Check local storage for mock session
+      const storedUser = localStorage.getItem('mockUser');
+      if (storedUser) {
+        setUser(JSON.parse(storedUser));
       }
-    } catch (error) {
-      console.error('Failed to initialize auth:', error);
-      setToken(null);
-      setUser(null);
-    } finally {
-      setIsLoading(false);
+      setLoading(false);
+      return;
+    }
+
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser as User);
+      setLoading(false);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  const login = useCallback(async (email: string, password: string) => {
+    if (isOfflineMode) {
+      if (email && password) { // Simple validation
+        const mockUser: User = {
+          uid: 'mock-user-123',
+          email,
+          displayName: 'Dev User',
+          emailVerified: true,
+          isAnonymous: false,
+          metadata: {},
+          providerData: [],
+          refreshToken: 'mock-token',
+          tenantId: null,
+          delete: async () => { },
+          getIdToken: async () => 'mock-jwt',
+          getIdTokenResult: async () => ({
+            token: 'mock-jwt',
+            signInProvider: 'password',
+            claims: {},
+            authTime: Date.now() / 1000,
+            issuedAtTime: Date.now() / 1000,
+            expirationTime: (Date.now() / 1000) + 3600,
+          }),
+          reload: async () => { },
+          toJSON: () => ({}),
+          role: 'user'
+        };
+        setUser(mockUser);
+        localStorage.setItem('mockUser', JSON.stringify(mockUser));
+        return;
+      }
+      throw new Error('Invalid credentials');
+    }
+    await signInWithEmailAndPassword(auth, email, password);
+  }, []);
+
+  const register = useCallback(async (email: string, password: string, displayName: string) => {
+    if (isOfflineMode) {
+      const mockUser: User = {
+        uid: 'mock-user-new-' + Date.now(),
+        email,
+        displayName: displayName || 'New Dev User',
+        emailVerified: true,
+        isAnonymous: false,
+        metadata: {},
+        providerData: [],
+        refreshToken: 'mock-token',
+        tenantId: null,
+        delete: async () => { },
+        getIdToken: async () => 'mock-jwt',
+        getIdTokenResult: async () => ({
+          token: 'mock-jwt',
+          signInProvider: 'password',
+          claims: {},
+          authTime: Date.now() / 1000,
+          issuedAtTime: Date.now() / 1000,
+          expirationTime: (Date.now() / 1000) + 3600,
+        }),
+        reload: async () => { },
+        toJSON: () => ({}),
+        role: 'user'
+      };
+      setUser(mockUser);
+      localStorage.setItem('mockUser', JSON.stringify(mockUser));
+      return;
+    }
+
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    if (displayName) {
+      await firebaseUpdateProfile(userCredential.user, { displayName });
+      // Force refresh user to get updated display name
+      setUser({ ...userCredential.user, displayName } as User);
     }
   }, []);
 
-  // Initialize auth on mount
-  useEffect(() => {
-    initializeAuth();
-  }, [initializeAuth]);
-
-  // Memoize login function
-  const login = useCallback(async (credentials: LoginCredentials) => {
-    setIsLoading(true);
-    try {
-      const { user, token } = await authLogin(credentials);
-      setToken(token);
-      setUser(user);
-      return { data: { user, accessToken: token }, status: 200, statusText: "OK", headers: {}, config: {} } as any;
-    } finally {
-      setIsLoading(false);
-    }
-  }, []);
-
-  // Memoize register function
-  const register = useCallback(async (data: RegisterData) => {
-    setIsLoading(true);
-    try {
-      const { user, token } = await authRegister(data);
-      // Optionally log in the user after registration
-      setToken(token);
-      setUser(user);
-      return { data: { user }, status: 200, statusText: "OK", headers: {}, config: {} } as any;
-    } finally {
-      setIsLoading(false);
-    }
-  }, []);
-
-  // Memoize logout function
   const logout = useCallback(async () => {
-    setIsLoading(true);
-    try {
-      await authLogout();
-      setToken(null);
+    if (isOfflineMode) {
       setUser(null);
-      navigate('/login');
-      return { data: null, status: 200, statusText: "OK", headers: {}, config: {} } as any;
-    } finally {
-      setIsLoading(false);
+      localStorage.removeItem('mockUser');
+      return;
     }
-  }, [navigate]);
-
-  // Memoize updateProfile function
-  const updateProfile = useCallback(async (updates: Partial<AuthUser>) => {
-    try {
-      // This would call your profile update endpoint
-      // const response = await profileService.updateProfile(updates);
-      // setUser((prev) => prev ? { ...prev, ...updates } as AuthUser : null);
-      // return response;
-      throw new Error('Update profile not implemented');
-    } catch (error) {
-      console.error('Failed to update profile:', error);
-      throw error;
-    }
+    await firebaseSignOut(auth);
   }, []);
 
-  // Memoize isAuthenticated calculation
-  const isAuthenticated = useMemo(
-    () => !!user && !!token,
-    [user, token]
-  );
-
-  // Memoize context value to prevent unnecessary re-renders
-  const contextValue = useMemo<AuthContextType>(
-    () => ({
-      user,
-      token,
-      isLoading,
-      isAuthenticated,
-      login,
-      register,
-      logout,
-      updateProfile,
-      initializeAuth,
-    }),
-    [user, token, isLoading, isAuthenticated, login, register, logout, updateProfile, initializeAuth]
-  );
+  const contextValue = useMemo(() => ({
+    user,
+    loading,
+    login,
+    register,
+    logout
+  }), [user, loading, login, register, logout]);
 
   return (
     <AuthContext.Provider value={contextValue}>
-      {!isLoading && children}
+      {children}
     </AuthContext.Provider>
   );
 };
@@ -167,14 +166,3 @@ export const useAuth = (): AuthContextType => {
   return context;
 };
 
-// Helper hook to check if user has required roles
-// Example usage: const hasAdminAccess = useHasRole(['admin']);
-export const useHasRole = (requiredRoles: string[] = []): boolean => {
-  const { user } = useAuth();
-  
-  if (!user || !requiredRoles.length) return false;
-  
-  // Assuming user.roles is an array of role strings
-  const userRoles = user.role ? [user.role] : [];
-  return requiredRoles.some(role => userRoles.includes(role));
-};

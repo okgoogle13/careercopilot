@@ -9,7 +9,7 @@ import { Briefcase, Mail, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components';
 import { Textarea, Alert } from '@/components/electric';
-import { prepareApplicationPackage, scanInboxForOpportunities } from '@/api/aiServices';
+import { prepareApplicationPackage, scanInboxForOpportunities } from '../../api/aiServices';
 
 export function DashboardStats() {
   const [jobDescription, setJobDescription] = useState('');
@@ -86,7 +86,7 @@ export function DashboardStats() {
           className="mb-4"
         />
         {applicationError && (
-          <Alert severity="error" className="mb-4">
+          <Alert variant="error" className="mb-4">
             {applicationError}
           </Alert>
         )}
@@ -122,7 +122,7 @@ export function DashboardStats() {
           Automatically scan your inbox for job opportunities and create calendar reminders.
         </p>
         {emailScanError && (
-          <Alert severity="error" className="mb-4">
+          <Alert variant="error" className="mb-4">
             {emailScanError}
           </Alert>
         )}

@@ -7,7 +7,7 @@
 import React from 'react';
 import { Plus, FileText, Briefcase } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Card } from '@/components';
+import { ElectricCard as Card } from '@/components/electric/card/ElectricCard';
 
 interface DashboardHeaderProps {
   userName?: string;
@@ -44,7 +44,7 @@ export function DashboardHeader({
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <Card className="p-6" variant="interactive">
+        <Card className="p-6" interactive={true}>
           <div className="flex items-center gap-4">
             <div className="p-3 bg-primary-container rounded-[16px]">
               <FileText className="h-6 w-6 text-on-primary-container" />
@@ -56,7 +56,7 @@ export function DashboardHeader({
           </div>
         </Card>
 
-        <Card className="p-6" variant="interactive">
+        <Card className="p-6" interactive={true}>
           <div className="flex items-center gap-4">
             <div className="p-3 bg-secondary-container rounded-[16px]">
               <Briefcase className="h-6 w-6 text-on-secondary" />
@@ -68,7 +68,7 @@ export function DashboardHeader({
           </div>
         </Card>
 
-        <Card className="p-6" variant="interactive">
+        <Card className="p-6" interactive={true}>
           <div className="flex items-center gap-4">
             <div className="p-3 bg-tertiary-container rounded-[16px]">
               <Briefcase className="h-6 w-6 text-on-tertiary" />

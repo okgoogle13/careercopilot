@@ -1,0 +1,33 @@
+Metadata-Version: 2.4
+Name: genkit-plugin-google-genai
+Version: 0.4.0
+Summary: Genkit Google GenAI Plugin
+Author: Google
+License: Apache-2.0
+License-File: LICENSE
+Classifier: Development Status :: 3 - Alpha
+Classifier: Environment :: Console
+Classifier: Environment :: Web Environment
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Classifier: Topic :: Software Development :: Libraries
+Requires-Python: >=3.10
+Requires-Dist: genkit
+Requires-Dist: google-cloud-aiplatform>=1.77.0
+Requires-Dist: google-genai>=1.7.0
+Requires-Dist: strenum>=0.4.15; python_version < '3.11'
+Requires-Dist: structlog>=25.2.0
+Description-Content-Type: text/markdown
+
+# Genkit Google AI plugin
+
+This Genkit plugin provides a set of tools and utilities for working with
+Google AI.

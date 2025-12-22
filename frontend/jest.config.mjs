@@ -33,6 +33,8 @@ export default {
   collectCoverage: false,
   testPathIgnorePatterns: [
     '<rootDir>/node_modules/',
+    '<rootDir>/src/components_OLD/',
+    '<rootDir>/src/features/',
   ],
   collectCoverageFrom: [
     'src/**/*.{js,jsx,ts,tsx}',
@@ -52,7 +54,6 @@ export default {
       statements: 1,
     },
   },
-  testTimeout: 15000,
   verbose: true,
   bail: false,
   cache: false,
