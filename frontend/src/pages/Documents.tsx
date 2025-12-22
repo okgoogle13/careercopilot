@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { AppLayout } from '@/components/layout/AppLayout';
 import { DocumentCard } from '@/components/documents/DocumentCard';
 import { DocumentFilters } from '@/components/documents/DocumentFilters';
 import { Button } from '@/components/ui/button';
@@ -30,52 +29,51 @@ export default function Documents() {
     const handleDownload = (id: string) => console.log('Download', id);
 
     return (
-        <AppLayout>
-            <div className="min-h-screen bg-surface p-6 md:p-8">
-                <div className="mx-auto max-w-[1600px] space-y-8">
+        <div className="relative">
+            {/* Header */}
+            <div className="mb-8">
+                <h1 className="text-5xl md:text-7xl font-extrabold mb-2 text-[#E6E1E5] tracking-tight leading-[1.1]">
+                    Your <span className="font-light italic text-[#D0BCFF]">Documents</span>
+                </h1>
+                <p className="text-[#CAC4D0]">Manage your career documents and generate tailored versions</p>
+            </div>
 
-                    {/* Header */}
-                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                        <div>
-                            <h1 className="text-3xl font-heading font-bold text-foreground">Documents</h1>
-                            <p className="text-muted-foreground font-body">Manage and organize your career documents.</p>
-                        </div>
-                        <Button>
-                            <Plus className="mr-2 h-4 w-4" />
-                            Create New Document
-                        </Button>
-                    </div>
-
-                    {/* Filters */}
+            <div className="flex justify-between items-center mb-6">
+                {/* Filters */}
+                <div className="flex-1">
                     <DocumentFilters
                         onSearch={setSearchQuery}
                         onFilterChange={setActiveFilter}
                         activeFilter={activeFilter}
                     />
-
-                    {/* Grid */}
-                    {filteredDocs.length > 0 ? (
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                            {filteredDocs.map((doc) => (
-                                <DocumentCard
-                                    key={doc.id}
-                                    {...doc}
-                                    onEdit={handleEdit}
-                                    onDelete={handleDelete}
-                                    onDownload={handleDownload}
-                                />
-                            ))}
-                        </div>
-                    ) : (
-                        <Card className="border-dashed py-12 text-center bg-surface-container/50">
-                            <CardContent>
-                                <p className="text-muted-foreground">No documents found matching your criteria.</p>
-                                <Button variant="link" onClick={() => { setSearchQuery(''); setActiveFilter('all'); }}>Clear filters</Button>
-                            </CardContent>
-                        </Card>
-                    )}
                 </div>
+                <Button className="ml-4">
+                    <Plus className="mr-2 h-4 w-4" />
+                    Create New
+                </Button>
             </div>
-        </AppLayout>
+
+            {/* Grid */}
+            {filteredDocs.length > 0 ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    {filteredDocs.map((doc) => (
+                        <DocumentCard
+                            key={doc.id}
+                            {...doc}
+                            onEdit={handleEdit}
+                            onDelete={handleDelete}
+                            onDownload={handleDownload}
+                        />
+                    ))}
+                </div>
+            ) : (
+                <Card className="border-dashed py-12 text-center bg-surface-container/50">
+                    <CardContent>
+                        <p className="text-muted-foreground">No documents found matching your criteria.</p>
+                        <Button variant="link" onClick={() => { setSearchQuery(''); setActiveFilter('all'); }}>Clear filters</Button>
+                    </CardContent>
+                </Card>
+            )}
+        </div>
     );
 }

@@ -22,7 +22,7 @@ export function CareerGrowthHub() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <Card className="p-6" variant="interactive">
+        <Card className="p-6" interactive={true}>
           <div className="flex items-start gap-4 mb-4">
             <div className="p-3 bg-primary-container rounded-[16px]">
               <BookOpen className="h-6 w-6 text-on-primary-container" />
@@ -41,7 +41,7 @@ export function CareerGrowthHub() {
           </div>
         </Card>
 
-        <Card className="p-6" variant="interactive">
+        <Card className="p-6" interactive={true}>
           <div className="flex items-start gap-4 mb-4">
             <div className="p-3 bg-secondary-container rounded-[16px]">
               <Target className="h-6 w-6 text-on-secondary" />
@@ -60,7 +60,7 @@ export function CareerGrowthHub() {
           </div>
         </Card>
 
-        <Card className="p-6" variant="interactive">
+        <Card className="p-6" interactive={true}>
           <div className="flex items-start gap-4 mb-4">
             <div className="p-3 bg-tertiary-container rounded-[16px]">
               <TrendingUp className="h-6 w-6 text-on-tertiary" />
@@ -79,7 +79,7 @@ export function CareerGrowthHub() {
           </div>
         </Card>
 
-        <Card className="p-6" variant="interactive">
+        <Card className="p-6" interactive={true}>
           <div className="flex items-start gap-4 mb-4">
             <div className="p-3 bg-primary-container rounded-[16px]">
               <Award className="h-6 w-6 text-on-primary-container" />

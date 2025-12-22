@@ -52,7 +52,7 @@ export const DocumentTypeSelector: React.FC<DocumentTypeSelectorProps> = ({
           {documentTypes.map((type) => (
             <Card
               key={type.id}
-              variant="interactive"
+              interactive={true}
               className="cursor-pointer h-full text-center"
               onClick={() =>
                 onSelect(type.id as 'resume' | 'cover-letter' | 'selection-criteria')

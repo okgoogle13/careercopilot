@@ -17,10 +17,22 @@ export function SettingsPage() {
         <Card variant="default" className="p-6">
           <h2 className="text-hero text-xl font-semibold mb-4">Profile Settings</h2>
           <div className="space-y-4">
-            <Input label="First Name" placeholder="John" />
-            <Input label="Last Name" placeholder="Doe" />
-            <Input label="Email" type="email" placeholder="john@example.com" />
-            <Textarea label="Bio" placeholder="Tell us about yourself..." />
+            <div className="space-y-2">
+              <label className="text-human text-sm font-medium text-on-surface">First Name</label>
+              <Input placeholder="John" />
+            </div>
+            <div className="space-y-2">
+              <label className="text-human text-sm font-medium text-on-surface">Last Name</label>
+              <Input placeholder="Doe" />
+            </div>
+            <div className="space-y-2">
+              <label className="text-human text-sm font-medium text-on-surface">Email</label>
+              <Input type="email" placeholder="john@example.com" />
+            </div>
+            <div className="space-y-2">
+              <label className="text-human text-sm font-medium text-on-surface">Bio</label>
+              <Textarea placeholder="Tell us about yourself..." />
+            </div>
           </div>
           <Button variant="default" className="mt-6">
             Save Changes
@@ -73,9 +85,18 @@ export function SettingsPage() {
         <Card variant="default" className="p-6">
           <h2 className="text-hero text-xl font-semibold mb-4">Security</h2>
           <div className="space-y-4">
-            <Input label="Current Password" type="password" />
-            <Input label="New Password" type="password" />
-            <Input label="Confirm New Password" type="password" />
+            <div className="space-y-2">
+              <label className="text-human text-sm font-medium text-on-surface">Current Password</label>
+              <Input type="password" />
+            </div>
+            <div className="space-y-2">
+              <label className="text-human text-sm font-medium text-on-surface">New Password</label>
+              <Input type="password" />
+            </div>
+            <div className="space-y-2">
+              <label className="text-human text-sm font-medium text-on-surface">Confirm New Password</label>
+              <Input type="password" />
+            </div>
             <Button variant="default">Update Password</Button>
           </div>
         </Card>

@@ -158,7 +158,7 @@ export const JobDetailCard: React.FC<JobDetailCardProps> = ({
           <h2 className="text-hero text-lg font-semibold mb-3">Required Skills</h2>
           <div className="flex flex-wrap gap-2">
             {job.skills.map((skill, index) => (
-              <Badge key={index} variant="secondary">
+              <Badge key={index} variant="outline">
                 {skill}
               </Badge>
             ))}

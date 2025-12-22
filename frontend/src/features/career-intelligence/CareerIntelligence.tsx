@@ -22,7 +22,7 @@ export function CareerIntelligence() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <Card className="p-6" variant="interactive">
+        <Card className="p-6" interactive={true}>
           <div className="flex items-start gap-4">
             <div className="p-3 bg-primary-container rounded-[16px]">
               <Brain className="h-6 w-6 text-on-primary-container" />
@@ -41,7 +41,7 @@ export function CareerIntelligence() {
           </div>
         </Card>
 
-        <Card className="p-6" variant="interactive">
+        <Card className="p-6" interactive={true}>
           <div className="flex items-start gap-4">
             <div className="p-3 bg-secondary-container rounded-[16px]">
               <BarChart3 className="h-6 w-6 text-on-secondary" />
@@ -60,7 +60,7 @@ export function CareerIntelligence() {
           </div>
         </Card>
 
-        <Card className="p-6" variant="interactive">
+        <Card className="p-6" interactive={true}>
           <div className="flex items-start gap-4">
             <div className="p-3 bg-tertiary-container rounded-[16px]">
               <Lightbulb className="h-6 w-6 text-on-tertiary" />
@@ -79,7 +79,7 @@ export function CareerIntelligence() {
           </div>
         </Card>
 
-        <Card className="p-6" variant="interactive">
+        <Card className="p-6" interactive={true}>
           <div className="flex items-start gap-4">
             <div className="p-3 bg-primary-container rounded-[16px]">
               <TrendingUp className="h-6 w-6 text-on-primary-container" />

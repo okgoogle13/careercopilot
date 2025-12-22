@@ -1,21 +1,18 @@
 
-# FIGMA MIGRATION STRATEGY: THE TRANSPLANT
-
 ## SOURCE TRUTH (Layout Only)
 * **Reference File:** `src/reference/FigmaDashboardLayout.tsx`
-* **Role:** Defines the grid structure, section hierarchy, spacing, and visual arrangement.
-* **Warning:** This file likely contains hardcoded `divs`, raw pixel values, and un-optimized components. **DO NOT COPY CODE VERBATIM.**
+* **Role:** Defines the specific "Bio-Glass" design, Hero Banner, Stats Grid, and "Gummy Bear" buttons.
+* **Warning:** Use the layout structure and specific visual tokens (gradients, shadows, glass effects) from this file.
 
 ## TARGET COMPONENT LIBRARY (The "Bricks")
-* **JobCard:** `src/components/applications/JobCard.tsx`
-* **DocumentCard:** `src/components/documents/DocumentCard.tsx`
-* **ActionCard:** `src/components/dashboard/ActionCard.tsx`
-* **CreateProfileCard:** `src/components/dashboard/CreateProfileCard.tsx`
-* **ProfileCard:** `src/components/dashboard/ProfileCard.tsx`
-* **JobMatchCard:** `src/components/opportunities/JobMatchCard.tsx`
+* **JobCard / JobMatchCard:** `src/components/applications/JobCard.tsx` (Use for the "ATS Profiles" grid items)
+* **DocumentCard:** `src/components/documents/DocumentCard.tsx` (If documents are shown)
+* **Stats Cards:** Refactor the raw `motion.div` stats into cleanly defined components if possible, or replicate the structure.
 
 ## EXECUTION RULES
-1.  **Structure:** Replicate the *layout* (CSS Grid/Flex) from the Reference File into `src/pages/ATSDashboard.tsx`.
-2.  **Substitution:** Wherever the Reference File shows a "Job Card" or "Document" placeholder, use our actual imported components (`JobCard`, `DocumentCard`).
-3.  **Stability:** Maintain the "Antigravity" physics. Do not wrap our optimized cards in extra `divs` unless necessary for the grid.
-4.  **Event Safety:** If the layout introduces clickable rows or overlays, ensure `e.stopPropagation()` is considered for nested actions (like the Dropdown inside DocumentCard).
+1.  **Layout Replication:** accurately recreate the "Hero Banner" (with its gradient and text styles), the "Stats Grid", and the "Quick Actions" bar (including the distinct "Gummy Bear" connect button style).
+2.  **Asset Handling:** If images (plantImage) are missing, use a placeholder or gradient.
+3.  **Substitution:** In the "Your Application Profiles" section, replace the raw `motion.div` mapping with our `JobCard` or `JobMatchCard` components.
+    *   *Note:* Ensure our cards fit the grid (grid-cols-3).
+4.  **Stability:** Ensure `relative` and `z-index` (Antigravity) are maintained, especially if adding `motion` wrappers.
+5.  **Motion:** The reference uses `motion/react`, but our project uses `framer-motion`. **Use `import { motion } from 'framer-motion'`**. Do not install new packages.

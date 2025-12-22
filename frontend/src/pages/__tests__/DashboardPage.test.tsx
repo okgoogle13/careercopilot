@@ -3,139 +3,117 @@ import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { DashboardPage } from '../DashboardPage';
 
+// Mock AuthContext to avoid import.meta issues in axiosConfig
+jest.mock('@/context/AuthContext', () => ({
+  useAuth: () => ({
+    user: { name: 'Test User' },
+    isAuthenticated: true,
+  }),
+}));
+
+// Mock framer-motion to avoid animation issues in jsdom
+jest.mock('framer-motion', () => ({
+  motion: {
+    div: ({ children, ...props }: any) => <div {...props}>{children}</div>,
+    button: ({ children, ...props }: any) => <button {...props}>{children}</button>,
+  },
+}));
+
 describe('DashboardPage', () => {
-  const mockOnCreateDocument = jest.fn();
-  const mockOnEditProfile = jest.fn();
+  const mockOnCreateProfile = jest.fn();
+  const mockOnViewAnalytics = jest.fn();
+  const mockOnNavigateToOpportunities = jest.fn();
 
   beforeEach(() => {
-    mockOnCreateDocument.mockClear();
-    mockOnEditProfile.mockClear();
+    jest.clearAllMocks();
   });
 
   describe('Empty State', () => {
     it('renders empty state when isEmpty is true', () => {
-      render(<DashboardPage isEmpty={true} onCreateDocument={mockOnCreateDocument} />);
+      render(
+        <DashboardPage
+          isEmpty={true}
+          onCreateProfile={mockOnCreateProfile}
+        />
+      );
 
-      expect(
-        screen.getByRole('heading', { name: /Welcome to CareerCopilot/i })
-      ).toBeInTheDocument();
-      expect(screen.getByText(/Create your first AI-powered resume/i)).toBeInTheDocument();
-      expect(
-        screen.getByRole('button', { name: /Create Your First Document/i })
-      ).toBeInTheDocument();
+      expect(screen.getByText(/Ready to Launch Your Career\?/i)).toBeInTheDocument();
+      // "Create Your First Document" button
+      const createButtons = screen.getAllByRole('button', { name: /Create Your First Document/i });
+      expect(createButtons.length).toBeGreaterThan(0);
     });
 
-    it('calls onCreateDocument when create button is clicked in empty state', async () => {
+    it('calls onCreateProfile when create button is clicked', async () => {
       const user = userEvent.setup();
-      render(<DashboardPage isEmpty={true} onCreateDocument={mockOnCreateDocument} />);
+      render(
+        <DashboardPage
+          isEmpty={true}
+          onCreateProfile={mockOnCreateProfile}
+        />
+      );
 
-      const createButton = screen.getByRole('button', { name: /Create Your First Document/i });
+      const createButton = screen.getAllByRole('button', { name: /Create Your First Document/i })[0];
       await user.click(createButton);
 
-      expect(mockOnCreateDocument).toHaveBeenCalledTimes(1);
-    });
-
-    it('displays supported document types in empty state', () => {
-      render(<DashboardPage isEmpty={true} />);
-
-      expect(screen.getByText(/AI Resume/i)).toBeInTheDocument();
-      const coverLetterElements = screen.getAllByText(/Cover Letter/i);
-      expect(coverLetterElements.length).toBeGreaterThan(0);
-      expect(screen.getByText(/Selection Criteria/i)).toBeInTheDocument();
+      expect(mockOnCreateProfile).toHaveBeenCalledTimes(1);
     });
   });
 
   describe('Dashboard with Content', () => {
-    it('renders the dashboard heading and main content', () => {
-      render(<DashboardPage />);
+    it('renders the welcome banner and stats', () => {
+      render(
+        <DashboardPage
+          onCreateProfile={mockOnCreateProfile}
+          onViewAnalytics={mockOnViewAnalytics}
+          onNavigateToOpportunities={mockOnNavigateToOpportunities}
+        />
+      );
 
-      expect(screen.getByRole('heading', { name: /^Dashboard$/i })).toBeInTheDocument();
-      expect(
-        screen.getByText(/Manage your profiles and track your job application progress/i)
-      ).toBeInTheDocument();
+      // Welcome Banner (checking for uppercase name logic in component)
+      // Component logic: userName.toUpperCase() -> "TEST USER"
+      expect(screen.getByText(/GOOD MORNING/i)).toBeInTheDocument();
+      expect(screen.getByText(/TEST/i)).toBeInTheDocument();
+
+      // Stats
+      // 8 + 5 = 13 active applications
+      expect(screen.getByText('13')).toBeInTheDocument();
+      expect(screen.getAllByText(/Active Applications/i).length).toBeGreaterThan(0);
+
+      // Other stats
+      expect(screen.getByText('2')).toBeInTheDocument();
+      expect(screen.getAllByText(/Offers Received/i).length).toBeGreaterThan(0);
+
+      expect(screen.getByText('45')).toBeInTheDocument();
+      expect(screen.getAllByText(/Connections/i).length).toBeGreaterThan(0);
     });
 
-    it('displays statistics cards with correct data', () => {
-      render(<DashboardPage />);
+    it('displays quick actions', () => {
+      render(
+        <DashboardPage
+          onCreateProfile={mockOnCreateProfile}
+          onViewAnalytics={mockOnViewAnalytics}
+          onNavigateToOpportunities={mockOnNavigateToOpportunities}
+        />
+      );
 
-      // Active Profiles stat
-      expect(screen.getByText(/^3$/)).toBeInTheDocument();
-      expect(screen.getByText(/Active Profiles/i)).toBeInTheDocument();
-
-      // Applications stat
-      expect(screen.getByText(/^8$/)).toBeInTheDocument();
-      expect(screen.getByText(/^Applications$/i)).toBeInTheDocument();
-
-      // ATS Score stat
-      const atsScoreElements = screen.getAllByText(/85%/);
-      expect(atsScoreElements.length).toBeGreaterThan(0);
-      expect(screen.getByText(/Avg ATS Score/i)).toBeInTheDocument();
-
-      // Response Rate stat
-      expect(screen.getByText(/12%/)).toBeInTheDocument();
-      expect(screen.getByText(/Response Rate/i)).toBeInTheDocument();
-    });
-
-    it('displays profile cards with correct information', () => {
-      render(<DashboardPage />);
-
-      const seniorDevElements = screen.getAllByText(/Senior Software Developer/i);
-      expect(seniorDevElements.length).toBeGreaterThan(0);
-      expect(screen.getByText(/Product Manager/i)).toBeInTheDocument();
-      expect(screen.getByText(/UX Designer/i)).toBeInTheDocument();
-      expect(screen.getByText(/Technology/i)).toBeInTheDocument();
-      expect(screen.getByText(/Product/i)).toBeInTheDocument();
-      expect(screen.getByText(/Design/i)).toBeInTheDocument();
-    });
-
-    it('displays recent activity section', () => {
-      render(<DashboardPage />);
-
-      expect(screen.getByRole('heading', { name: /Recent Activity/i })).toBeInTheDocument();
-      expect(screen.getByText(/Resume updated/i)).toBeInTheDocument();
-      expect(screen.getByText(/Application submitted/i)).toBeInTheDocument();
-      const atsAnalysisElements = screen.getAllByText(/ATS analysis/i);
-      expect(atsAnalysisElements.length).toBeGreaterThan(0);
-    });
-
-    it('displays quick actions section', () => {
-      render(<DashboardPage />);
-
-      expect(screen.getByRole('heading', { name: /Quick Actions/i })).toBeInTheDocument();
       expect(screen.getByRole('button', { name: /Create New Document/i })).toBeInTheDocument();
-      expect(screen.getByRole('button', { name: /Run ATS Analysis/i })).toBeInTheDocument();
-      expect(screen.getByRole('button', { name: /Find Job Opportunities/i })).toBeInTheDocument();
-    });
-
-    it('calls onCreateDocument when create document button is clicked', async () => {
-      const user = userEvent.setup();
-      render(<DashboardPage onCreateDocument={mockOnCreateDocument} />);
-
-      const createButtons = screen.getAllByRole('button', { name: /Create Document/i });
-      await user.click(createButtons[0]);
-
-      expect(mockOnCreateDocument).toHaveBeenCalledTimes(1);
-    });
-
-    it('displays Your Profiles section with View Analytics button', () => {
-      render(<DashboardPage />);
-
-      expect(screen.getByRole('heading', { name: /Your Profiles/i })).toBeInTheDocument();
       expect(screen.getByRole('button', { name: /View Analytics/i })).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: /BROWSE JOBS/i })).toBeInTheDocument();
     });
 
-    it('displays ATS scores for each profile', () => {
+    it('displays application profiles as Job Cards', () => {
       render(<DashboardPage />);
 
-      // Check for multiple instances of "ATS Score" text
-      const atsScoreElements = screen.getAllByText(/ATS Score/i);
-      expect(atsScoreElements.length).toBeGreaterThan(0);
+      // Profiles mock data: "Nishant Dougall" (role: "Community Support Worker")
+      // "Senior Developer" (role: "React & TypeScript")
+      expect(screen.getByText(/Nishant Dougall/i)).toBeInTheDocument();
+      expect(screen.getByText(/Community Support Worker/i)).toBeInTheDocument();
 
-      // Check for specific score percentages - using getAllByText since scores appear in multiple places
-      const score85Elements = screen.getAllByText(/85%/);
-      expect(score85Elements.length).toBeGreaterThan(0);
-      expect(screen.getByText(/92%/)).toBeInTheDocument();
-      expect(screen.getByText(/78%/)).toBeInTheDocument();
+      expect(screen.getByText(/Senior Developer/i)).toBeInTheDocument();
+      expect(screen.getByText(/React & TypeScript/i)).toBeInTheDocument();
+
+      // Check for "Create New Profile" brick
+      expect(screen.getByText(/Create New Profile/i)).toBeInTheDocument();
     });
   });
 });

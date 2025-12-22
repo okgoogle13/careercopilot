@@ -109,14 +109,12 @@
 "enum": [
 "CAPABILITY_UNSPECIFIED",
 "WOFF2",
-"VF",
-"FAMILY_TAGS"
+"VF"
 ],
 "enumDescriptions": [
 "Default means static ttf fonts.",
 "Use WOFF2(Compressed)instead of ttf.",
-"Prefer variable font files instead of static fonts instantiated at standard weights.",
-"Include tags that apply to the entire family in the response."
+"Prefer variable font files instead of static fonts instantiated at standard weights."
 ],
 "location": "query",
 "repeated": true,
@@ -168,7 +166,7 @@
 }
 }
 },
-"revision": "20250917",
+"revision": "20250121",
 "rootUrl": "https://webfonts.googleapis.com/",
 "schemas": {
 "Axis": {
@@ -188,22 +186,6 @@
 "tag": {
 "description": "tag name.",
 "type": "string"
-}
-},
-"type": "object"
-},
-"Tag": {
-"description": "Metadata for a tag.",
-"id": "Tag",
-"properties": {
-"name": {
-"description": "The name of the tag.",
-"type": "string"
-},
-"weight": {
-"description": "The weight of the tag.",
-"format": "float",
-"type": "number"
 }
 },
 "type": "object"
@@ -257,13 +239,6 @@
 "description": "The scripts supported by the font.",
 "items": {
 "type": "string"
-},
-"type": "array"
-},
-"tags": {
-"description": "The tags that apply to this family.",
-"items": {
-"$ref": "Tag"
 },
 "type": "array"
 },

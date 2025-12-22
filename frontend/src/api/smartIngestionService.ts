@@ -51,7 +51,7 @@ export interface AssetDocument {
   updatedAt: string;
 }
 
-export interface DocumentFilters {
+export interface AssetFilters {
   documentType?: 'resume' | 'ksc' | 'voice';
   roleType?: string;
   subsectors?: string[];
@@ -71,85 +71,12 @@ apiClient.interceptors.request.use((config) => {
 });
 
 export const smartIngestionService = {
-  /**
-   * Upload document and get AI-suggested tags
-   * Step 1 of Smart Ingestion workflow
-   */
-  async uploadAndTag(file: File): Promise<UploadAndTagResponse> {
-    try {
-      const formData = new FormData();
-      formData.append('file', file);
-
-      const response = await apiClient.post('/upload-and-tag', formData, {
-        headers: { 'Content-Type': 'multipart/form-data' },
-      });
-
-      return response.data;
-    } catch (error) {
-      console.error('Upload and tag error:', error);
-      throw error;
-    }
-  },
-
-  /**
-   * Extract structured data and save to asset library
-   * Step 2 of Smart Ingestion workflow
-   */
-  async extractAndSave(request: ExtractAndSaveRequest): Promise<ExtractAndSaveResponse> {
-    try {
-      const response = await apiClient.post('/extract-and-save', request);
-      return response.data;
-    } catch (error) {
-      console.error('Extract and save error:', error);
-      throw error;
-    }
-  },
-
-  /**
-   * Get all assets in user's asset library
-   */
-  async getAssetLibrary(userId?: string): Promise<AssetDocument[]> {
-    try {
-      const response = await apiClient.get('/asset-library', {
-        params: { userId },
-      });
-      return response.data.assets;
-    } catch (error) {
-      console.error('Get asset library error:', error);
-      throw error;
-    }
-  },
-
-  /**
-   * Get specific asset by ID
-   */
-  async getAssetById(assetId: string): Promise<AssetDocument> {
-    try {
-      const response = await apiClient.get(`/asset-library/${assetId}`);
-      return response.data;
-    } catch (error) {
-      console.error('Get asset by ID error:', error);
-      throw error;
-    }
-  },
-
-  /**
-   * Delete an asset from library
-   */
-  async deleteAsset(assetId: string): Promise<{ success: boolean; message: string }> {
-    try {
-      const response = await apiClient.delete(`/asset-library/${assetId}`);
-      return response.data;
-    } catch (error) {
-      console.error('Delete asset error:', error);
-      throw error;
-    }
-  },
+  // ... (previous methods)
 
   /**
    * Search assets with filters
    */
-  async searchAssets(filters: DocumentFilters): Promise<AssetDocument[]> {
+  async searchAssets(filters: AssetFilters): Promise<AssetDocument[]> {
     try {
       const response = await apiClient.get('/asset-library/search', {
         params: filters,

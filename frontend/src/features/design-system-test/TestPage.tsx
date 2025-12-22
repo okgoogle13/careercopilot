@@ -24,7 +24,7 @@ const TestPage = () => {
             <Button variant="ghost">Ghost</Button>
             <Button size="sm">Small Button</Button>
             <Button size="lg">Large Button</Button>
-            <Button variant="link">Link Button</Button>
+            <Button variant="ghost">Link Button (Ghost)</Button>
             <Button disabled>Disabled</Button>
           </div>
         </div>
@@ -42,7 +42,7 @@ const TestPage = () => {
             </Card>
 
             {/* Interactive Card */}
-            <Card variant="interactive">
+            <Card interactive={true}>
               <h3 className="text-hero text-xl mb-2">Interactive Card</h3>
               <p className="text-human">
                 This card has Tactile Press physics - try hovering and clicking to feel the press-in effect.
@@ -50,8 +50,8 @@ const TestPage = () => {
             </Card>
 
             {/* Card with Pop-out Graphic */}
-            <Card 
-              variant="interactive"
+            <Card
+              interactive={true}
               popOutGraphic={
                 <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center">
                   <span className="text-on-primary-container text-2xl">✦</span>
@@ -65,7 +65,7 @@ const TestPage = () => {
             </Card>
 
             {/* Data Card */}
-            <Card variant="interactive">
+            <Card interactive={true}>
               <h3 className="text-data text-sm uppercase tracking-wider mb-2">Metrics</h3>
               <div className="space-y-2">
                 <div className="flex justify-between">
@@ -80,7 +80,7 @@ const TestPage = () => {
             </Card>
 
             {/* Hologram Card */}
-            <Card variant="interactive">
+            <Card interactive={true}>
               <div className="text-center space-y-4">
                 <div className="text-hologram text-6xl">⚡</div>
                 <h3 className="text-hero text-xl">Power Mode</h3>
@@ -91,7 +91,7 @@ const TestPage = () => {
             </Card>
 
             {/* Content-heavy Card */}
-            <Card variant="interactive">
+            <Card interactive={true}>
               <h3 className="text-hero text-xl mb-3">Typography Test</h3>
               <div className="space-y-3">
                 <p className="text-human">
@@ -111,7 +111,7 @@ const TestPage = () => {
         {/* Combined Demo */}
         <div className="space-y-6">
           <h2 className="text-hero text-2xl">Combined Components</h2>
-          <Card variant="interactive">
+          <Card interactive={true}>
             <div className="space-y-4">
               <h3 className="text-hero text-xl">Dashboard Preview</h3>
               <p className="text-human">

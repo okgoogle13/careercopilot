@@ -46,7 +46,7 @@ export const TemplateSelector: React.FC<TemplateSelectorProps> = ({
         {filteredTemplates.map((template) => (
           <Card
             key={template.id}
-            variant="interactive"
+            interactive={true}
             className="cursor-pointer h-full flex flex-col"
             onClick={() => onSelectTemplate(template.id, template.type)}
           >

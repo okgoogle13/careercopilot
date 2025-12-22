@@ -19,7 +19,7 @@ export const DesignSystemPreview = () => {
           <h2 className="text-xl text-data text-outline">01. Poly-Body Matrix</h2>
           <div className="space-y-2 border-l-2 border-outline-variant pl-4">
             <p className="text-human text-lg">
-              <span className="text-tertiary">Tier 3 (Human):</span> The quick brown fox jumps over the lazy dog. 
+              <span className="text-tertiary">Tier 3 (Human):</span> The quick brown fox jumps over the lazy dog.
               (Roboto Serif, GRAD -25)
             </p>
             <p className="text-data text-lg text-secondary">
@@ -44,21 +44,21 @@ export const DesignSystemPreview = () => {
       <section className="space-y-6">
         <h2 className="text-xl text-data text-outline">03. Solid State Physics</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          
+
           {/* Card 1: Standard */}
           <Card>
             <h3 className="text-hero text-2xl mb-2">Static Node</h3>
             <p className="text-human text-on-surface/80">
-              Standard bento card with noise overlay and radial grid background. 
+              Standard bento card with noise overlay and radial grid background.
               Passive state.
             </p>
           </Card>
 
           {/* Card 2: Interactive */}
-          <Card variant="interactive" className="border-primary/50">
+          <Card interactive={true} className="border-primary/50">
             <h3 className="text-hero text-2xl mb-2 text-primary">Tactile Node</h3>
             <p className="text-human text-on-surface/80">
-              Hover over this card. It should physically press IN (scale 0.98), 
+              Hover over this card. It should physically press IN (scale 0.98),
               not lift up.
             </p>
             <div className="mt-4">
@@ -69,8 +69,8 @@ export const DesignSystemPreview = () => {
           </Card>
 
           {/* Card 3: Pop-Out */}
-          <Card 
-            variant="interactive" 
+          <Card
+            interactive={true}
             popOutGraphic={
               <div className="w-16 h-16 bg-gradient-to-br from-tertiary to-seed-shadow rounded-xl flex items-center justify-center text-3xl">
                 ⚡️
@@ -79,7 +79,7 @@ export const DesignSystemPreview = () => {
           >
             <h3 className="text-hero text-2xl mb-2">Pop-Out Node</h3>
             <p className="text-human text-on-surface/80">
-              The graphic above should float, rotate, and scale up when you hover 
+              The graphic above should float, rotate, and scale up when you hover
               over the card body.
             </p>
           </Card>
@@ -91,7 +91,7 @@ export const DesignSystemPreview = () => {
       <section className="space-y-6">
         <h2 className="text-xl text-data text-outline">04. Comprehensive Typography</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <Card variant="interactive">
+          <Card interactive={true}>
             <div className="space-y-4">
               <h3 className="text-hologram text-4xl">⚡ Hologram</h3>
               <p className="text-human">
@@ -99,8 +99,8 @@ export const DesignSystemPreview = () => {
               </p>
             </div>
           </Card>
-          
-          <Card variant="interactive">
+
+          <Card interactive={true}>
             <div className="space-y-4">
               <h3 className="text-hero text-4xl">Hero Display</h3>
               <p className="text-human">
@@ -114,7 +114,7 @@ export const DesignSystemPreview = () => {
       {/* PHYSICS DEMO */}
       <section className="space-y-6">
         <h2 className="text-xl text-data text-outline">05. Physics Verification</h2>
-        <Card variant="interactive">
+        <Card interactive={true}>
           <div className="space-y-6">
             <p className="text-human">
               Test the tactile press physics on all interactive elements:
