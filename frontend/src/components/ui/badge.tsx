@@ -1,123 +1,46 @@
-/**
- * ELECTRIC ALCHEMIST: BADGE COMPONENT
- *
- * Badge component with variants using design system tokens.
- * Uses rounded-[8px] for small items as per migration rules.
- */
-
-import React from 'react';
+import * as React from "react";
+import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from 'class-variance-authority';
-import { cn } from '@/lib/utils';
-import { X } from 'lucide-react';
+
+import { cn } from "./utils";
 
 const badgeVariants = cva(
-  [
-    'inline-flex items-center gap-1.5',
-    'text-ai font-ai text-xs font-medium',
-    'rounded-[8px]',
-    'border border-solid',
-    'transition-colors duration-150',
-  ],
+  "inline-flex items-center justify-center rounded-md border px-2 py-0.5 text-xs font-medium w-fit whitespace-nowrap shrink-0 [&>svg]:size-3 gap-1 [&>svg]:pointer-events-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive transition-[color,box-shadow] overflow-hidden",
   {
     variants: {
       variant: {
-        default: [
-          'bg-primary-container text-on-primary-container',
-          'border-primary-container',
-        ],
-        secondary: [
-          'bg-surface-container text-primary',
-          'border-outline-variant',
-        ],
-        destructive: [
-          'bg-error-container text-on-error',
-          'border-error-container',
-        ],
-        outline: [
-          'bg-transparent text-primary',
-          'border-outline-variant',
-        ],
-      },
-      size: {
-        sm: 'px-2 py-0.5 text-xs',
-        md: 'px-2.5 py-1 text-xs',
-        lg: 'px-3 py-1.5 text-sm',
+        default:
+          "border-transparent bg-primary text-primary-foreground [a&]:hover:bg-primary/90",
+        secondary:
+          "border-transparent bg-secondary text-secondary-foreground [a&]:hover:bg-secondary/90",
+        destructive:
+          "border-transparent bg-destructive text-white [a&]:hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
+        outline:
+          "text-foreground [a&]:hover:bg-accent [a&]:hover:text-accent-foreground",
       },
     },
     defaultVariants: {
-      variant: 'default',
-      size: 'md',
+      variant: "default",
     },
-  }
+  },
 );
 
-export interface BadgeProps
-  extends React.HTMLAttributes<HTMLSpanElement>,
-    VariantProps<typeof badgeVariants> {
-  /**
-   * Icon to display before text
-   */
-  startIcon?: React.ReactNode;
-  /**
-   * Icon to display after text
-   */
-  endIcon?: React.ReactNode;
-  /**
-   * If true, badge is clickable
-   */
-  clickable?: boolean;
-  /**
-   * Delete/close handler
-   */
-  onDelete?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+function Badge({
+  className,
+  variant,
+  asChild = false,
+  ...props
+}: React.ComponentProps<"span"> &
+  VariantProps<typeof badgeVariants> & { asChild?: boolean }) {
+  const Comp = asChild ? Slot : "span";
+
+  return (
+    <Comp
+      data-slot="badge"
+      className={cn(badgeVariants({ variant }), className)}
+      {...props}
+    />
+  );
 }
 
-export const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
-  (
-    {
-      variant,
-      size,
-      children,
-      className,
-      startIcon,
-      endIcon,
-      clickable = false,
-      onDelete,
-      ...props
-    },
-    ref
-  ) => {
-    return (
-      <span
-        ref={ref}
-        className={cn(badgeVariants({ variant, size }), className)}
-        role={clickable ? 'button' : undefined}
-        tabIndex={clickable ? 0 : undefined}
-        {...props}
-      >
-        {startIcon && (
-          <span className="inline-flex items-center">{startIcon}</span>
-        )}
-        <span>{children}</span>
-        {onDelete ? (
-          <button
-            type="button"
-            onClick={onDelete}
-            className="ml-1 rounded-full p-0.5 hover:bg-black/10 transition-colors"
-            aria-label="Remove"
-          >
-            <X className="h-3 w-3" />
-          </button>
-        ) : (
-          endIcon && (
-            <span className="inline-flex items-center">{endIcon}</span>
-          )
-        )}
-      </span>
-    );
-  }
-);
-
-Badge.displayName = 'Badge';
-
-export default Badge;
+export { Badge, badgeVariants };

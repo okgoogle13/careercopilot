@@ -6,11 +6,7 @@
 
 import React, { useState } from 'react';
 import { ArrowLeft, Link as LinkIcon, FileText, ExternalLink, Loader2 } from 'lucide-react';
-import { Button } from '@/components';
-import { Input } from '@/components/electric/input';
-import { Textarea } from '@/components/electric';
-import { Card } from '@/components';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/electric';
+import { Button, Card, ElectricInput as Input, ElectricTextarea as Textarea, Tabs } from '@/components/electric';
 import { motion } from 'framer-motion';
 
 interface JobInputProps {
@@ -66,73 +62,71 @@ export function JobInput({ documentType, onAnalyze, onBack }: JobInputProps) {
         </div>
 
         <Card className="p-8">
-          <Tabs value={activeTab} onValueChange={setActiveTab}>
-            <TabsList className="w-full mb-6">
-              <TabsTrigger value="url" className="flex items-center gap-2">
-                <LinkIcon className="h-4 w-4" />
-                Job URL
-              </TabsTrigger>
-              <TabsTrigger value="text" className="flex items-center gap-2">
-                <FileText className="h-4 w-4" />
-                Job Description
-              </TabsTrigger>
-            </TabsList>
-
-            <TabsContent value="url">
-              <div>
-                <label className="text-human text-base font-medium text-on-surface mb-2 block">
-                  Job Posting URL
-                </label>
-                <div className="relative">
-                  <Input
-                    type="url"
-                    placeholder="https://example.com/job-posting"
-                    value={jobUrl}
-                    onChange={(e) => setJobUrl(e.target.value)}
-                    className="pr-12"
-                  />
-                  <ExternalLink className="absolute right-4 top-1/2 -translate-y-1/2 h-5 w-5 text-on-surface-variant pointer-events-none" />
-                </div>
-                <p className="text-human text-sm text-on-surface-variant mt-2">
-                  We'll automatically extract the job requirements and qualifications
-                </p>
-              </div>
-
-              {jobUrl && (
-                <Card className="mt-4 p-4 border-outline">
-                  <p className="text-human text-sm text-on-surface">
-                    ✓ Valid job URL detected
-                  </p>
-                </Card>
-              )}
-            </TabsContent>
-
-            <TabsContent value="text">
-              <div>
-                <label className="text-human text-base font-medium text-on-surface mb-2 block">
-                  Job Description
-                </label>
-                <Textarea
-                  placeholder="Paste the complete job description here, including requirements, responsibilities, and qualifications..."
-                  value={jobDescription}
-                  onChange={(e) => setJobDescription(e.target.value)}
-                  rows={8}
-                  className="min-h-[200px]"
-                />
-                <p className="text-human text-sm text-on-surface-variant mt-2">
-                  {jobDescription.length}/50 characters minimum
-                </p>
-              </div>
-
-              {jobDescription.length >= 50 && (
-                <Card className="mt-4 p-4 border-outline">
-                  <p className="text-human text-sm text-on-surface">
-                    ✓ Job description looks good
-                  </p>
-                </Card>
-              )}
-            </TabsContent>
-          </Tabs>
+          <Tabs
+            defaultTab={activeTab}
+            onChange={setActiveTab}
+            tabs={[
+              {
+                id: 'url',
+                label: 'Job URL',
+                content: (
+                  <div>
+                    <label className="text-human text-base font-medium text-on-surface mb-2 block">
+                      Job Posting URL
+                    </label>
+                    <div className="relative">
+                      <Input
+                        type="url"
+                        placeholder="https://example.com/job-posting"
+                        value={jobUrl}
+                        onChange={(e) => setJobUrl(e.target.value)}
+                        className="pr-12"
+                      />
+                      <ExternalLink className="absolute right-4 top-1/2 -translate-y-1/2 h-5 w-5 text-on-surface-variant pointer-events-none" />
+                    </div>
+                    <p className="text-human text-sm text-on-surface-variant mt-2">
+                      We'll automatically extract the job requirements and qualifications
+                    </p>
+                    {jobUrl && (
+                      <Card className="mt-4 p-4 border-outline">
+                        <p className="text-human text-sm text-on-surface">
+                          ✓ Valid job URL detected
+                        </p>
+                      </Card>
+                    )}
+                  </div>
+                )
+              },
+              {
+                id: 'text',
+                label: 'Job Description',
+                content: (
+                  <div>
+                    <label className="text-human text-base font-medium text-on-surface mb-2 block">
+                      Job Description
+                    </label>
+                    <Textarea
+                      placeholder="Paste the complete job description here, including requirements, responsibilities, and qualifications..."
+                      value={jobDescription}
+                      onChange={(e) => setJobDescription(e.target.value)}
+                      rows={8}
+                      className="min-h-[200px]"
+                    />
+                    <p className="text-human text-sm text-on-surface-variant mt-2">
+                      {jobDescription.length}/50 characters minimum
+                    </p>
+                    {jobDescription.length >= 50 && (
+                      <Card className="mt-4 p-4 border-outline">
+                        <p className="text-human text-sm text-on-surface">
+                          ✓ Job description looks good
+                        </p>
+                      </Card>
+                    )}
+                  </div>
+                )
+              }
+            ]}
+          />
 
           <div className="flex justify-center mt-8">
             <Button

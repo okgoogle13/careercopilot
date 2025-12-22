@@ -5,12 +5,11 @@
  */
 
 import React, { useState } from 'react';
-import { SwapHoriz, Download, Share } from 'lucide-react';
+import { ArrowLeftRight, Download, Share } from 'lucide-react';
 import { Button } from '@/components';
 import { Card } from '@/components';
 import { Badge } from '@/components/electric';
-import { ATSScoreCircle } from '@/components/electric';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/electric';
+import { Tabs } from '@/components/electric';
 
 interface ProfileData {
   id: string;
@@ -108,7 +107,7 @@ export function ProfileComparison({
           {leftProfile.skills.map((skill, index) => (
             <Badge
               key={index}
-              variant={!rightProfile.skills.includes(skill) ? 'destructive' : 'default'}
+              variant={!rightProfile.skills.includes(skill) ? 'tertiary' : 'default'}
             >
               {skill}
             </Badge>
@@ -124,7 +123,7 @@ export function ProfileComparison({
           {rightProfile.skills.map((skill, index) => (
             <Badge
               key={index}
-              variant={!leftProfile.skills.includes(skill) ? 'secondary' : 'default'}
+              variant={!leftProfile.skills.includes(skill) ? 'outline' : 'default'}
             >
               {skill}
             </Badge>
@@ -184,6 +183,20 @@ export function ProfileComparison({
     </div>
   );
 
+  const renderOverview = () => (
+    <Card className="p-8 text-center bg-surface-container-low">
+      <p className="text-hero text-base text-on-surface-variant">
+        Select a section above to compare profile details
+      </p>
+    </Card>
+  );
+
+  const tabItems = [
+    { id: 'overview', label: 'Overview', content: renderOverview() },
+    { id: 'skills', label: 'Skills', content: renderSkillsComparison() },
+    { id: 'experience', label: 'Experience', content: renderExperienceComparison() },
+  ];
+
   return (
     <div className="w-full p-6">
       {/* Header */}
@@ -199,7 +212,7 @@ export function ProfileComparison({
 
         <div className="flex gap-2">
           <Button variant="outline" onClick={onSwapProfiles}>
-            <SwapHoriz className="h-4 w-4 mr-2" />
+            <ArrowLeftRight className="h-4 w-4 mr-2" />
             Swap Profiles
           </Button>
           <Button variant="outline">
@@ -243,7 +256,7 @@ export function ProfileComparison({
                   {leftProfile.activeApplications}
                 </p>
               </div>
-              <ATSScoreCircle score={leftProfile.atsScore} size="small" />
+              <div className="rounded-full bg-primary text-on-primary w-8 h-8 flex items-center justify-center font-bold text-sm">{leftProfile.atsScore}</div>
             </div>
             <p className="text-human text-xs text-on-surface-variant">
               Last updated: {leftProfile.lastUpdated}
@@ -279,7 +292,7 @@ export function ProfileComparison({
                   {rightProfile.activeApplications}
                 </p>
               </div>
-              <ATSScoreCircle score={rightProfile.atsScore} size="small" />
+              <div className="rounded-full bg-primary text-on-primary w-8 h-8 flex items-center justify-center font-bold text-sm">{rightProfile.atsScore}</div>
             </div>
             <p className="text-human text-xs text-on-surface-variant">
               Last updated: {rightProfile.lastUpdated}
@@ -289,26 +302,7 @@ export function ProfileComparison({
       </div>
 
       {/* Section Navigation */}
-      <Tabs value={selectedSection} onValueChange={setSelectedSection}>
-        <TabsList className="mb-6 border-b border-outline-variant pb-2">
-          {sections.map((section) => (
-            <TabsTrigger key={section.id} value={section.id}>
-              {section.label}
-            </TabsTrigger>
-          ))}
-        </TabsList>
-
-        {/* Section Content */}
-        <TabsContent value="skills">{renderSkillsComparison()}</TabsContent>
-        <TabsContent value="experience">{renderExperienceComparison()}</TabsContent>
-        <TabsContent value="overview">
-          <Card className="p-8 text-center bg-surface-container-low">
-            <p className="text-hero text-base text-on-surface-variant">
-              Select a section above to compare profile details
-            </p>
-          </Card>
-        </TabsContent>
-      </Tabs>
+      <Tabs tabs={tabItems} defaultTab={selectedSection} onChange={setSelectedSection} />
     </div>
   );
 }

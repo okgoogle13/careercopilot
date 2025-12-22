@@ -61,36 +61,36 @@ export const ProfileCardMUI: React.FC<ProfileCardMUIProps> = ({
       style={{
         padding: 'var(--sys-space-6)',
         borderRadius: 'var(--sys-shape-radius-card)',
-        backgroundColor: isSelected 
-          ? 'var(--sys-color-primary-container)' 
+        backgroundColor: isSelected
+          ? 'var(--sys-color-primary-container)'
           : 'var(--sys-color-surface-container)',
-        border: isSelected 
-          ? `2px solid var(--sys-color-primary)` 
+        border: isSelected
+          ? `2px solid var(--sys-color-primary)`
           : `1px solid var(--sys-color-outline-variant)`,
-        borderColor: isSelected 
-          ? 'var(--sys-color-primary)' 
+        borderColor: isSelected
+          ? 'var(--sys-color-primary)'
           : 'var(--sys-color-outline-variant)',
         transitionDuration: 'var(--sys-motion-duration-medium-2)',
         transitionTimingFunction: 'var(--sys-motion-easing-standard)',
       }}
     >
-      <div 
+      <div
         className="flex justify-between items-start"
         style={{ marginBottom: 'var(--sys-space-4)' }}
       >
-        <div 
+        <div
           className="flex items-center"
           style={{ gap: 'var(--sys-space-3)' }}
         >
-          <Avatar size="md" initials={initials} className={avatarColor} />
+          <Avatar size="md" fallback={initials} className={avatarColor} />
           <div>
-            <h3 
+            <h3
               style={{
                 fontFamily: 'var(--sys-typography-family-hero)',
                 fontSize: 'var(--sys-typography-size-headline-md)',
                 fontWeight: 600,
-                color: isSelected 
-                  ? 'var(--sys-color-primary-on-container)' 
+                color: isSelected
+                  ? 'var(--sys-color-primary-on-container)'
                   : 'var(--sys-color-surface-on)',
                 margin: 0,
                 marginBottom: 'var(--sys-space-2)',
@@ -98,7 +98,7 @@ export const ProfileCardMUI: React.FC<ProfileCardMUIProps> = ({
             >
               {name}
             </h3>
-            <p 
+            <p
               style={{
                 fontFamily: 'var(--sys-typography-family-data)',
                 fontSize: 'var(--sys-typography-size-body-sm)',
@@ -112,13 +112,13 @@ export const ProfileCardMUI: React.FC<ProfileCardMUIProps> = ({
             </p>
           </div>
         </div>
-        <Badge 
-          variant="default" 
+        <Badge
+          variant="default"
           className="font-semibold"
           style={{
             color: scoreColor,
-            backgroundColor: isSelected 
-              ? 'var(--sys-color-primary)' 
+            backgroundColor: isSelected
+              ? 'var(--sys-color-primary)'
               : 'var(--sys-color-surface-container-high)',
           }}
         >
@@ -127,11 +127,11 @@ export const ProfileCardMUI: React.FC<ProfileCardMUIProps> = ({
       </div>
 
       <div style={{ marginBottom: 'var(--sys-space-4)' }}>
-        <div 
+        <div
           className="flex justify-between items-center"
           style={{ marginBottom: 'var(--sys-space-2)' }}
         >
-          <span 
+          <span
             style={{
               fontFamily: 'var(--sys-typography-family-data)',
               fontSize: 'var(--sys-space-2)',
@@ -142,7 +142,7 @@ export const ProfileCardMUI: React.FC<ProfileCardMUIProps> = ({
           >
             ATS Score
           </span>
-          <span 
+          <span
             style={{
               fontFamily: 'var(--sys-typography-family-data)',
               fontSize: 'var(--sys-typography-size-body-sm)',
@@ -156,15 +156,15 @@ export const ProfileCardMUI: React.FC<ProfileCardMUIProps> = ({
         <Progress value={atsScore} />
       </div>
 
-      <div 
+      <div
         className="grid grid-cols-2"
-        style={{ 
+        style={{
           gap: 'var(--sys-space-3)',
           marginBottom: 'var(--sys-space-4)',
         }}
       >
-        <Card 
-          variant="default" 
+        <Card
+          variant="default"
           className="p-3 text-center"
           style={{
             padding: 'var(--sys-space-3)',
@@ -173,21 +173,21 @@ export const ProfileCardMUI: React.FC<ProfileCardMUIProps> = ({
             border: `1px solid var(--sys-color-outline-variant)`,
           }}
         >
-          <div 
+          <div
             className="flex items-center justify-center"
-            style={{ 
+            style={{
               gap: 'var(--sys-space-1)',
               marginBottom: 'var(--sys-space-1)',
             }}
           >
-            <Target 
-              style={{ 
+            <Target
+              style={{
                 height: 'var(--sys-space-3)',
                 width: 'var(--sys-space-3)',
                 color: 'var(--sys-color-primary)',
-              }} 
+              }}
             />
-            <span 
+            <span
               style={{
                 fontFamily: 'var(--sys-typography-family-data)',
                 fontSize: 'var(--sys-space-2)',
@@ -199,7 +199,7 @@ export const ProfileCardMUI: React.FC<ProfileCardMUIProps> = ({
               Applications
             </span>
           </div>
-          <p 
+          <p
             style={{
               fontFamily: 'var(--sys-typography-family-hero)',
               fontSize: 'var(--sys-typography-size-body-md)',
@@ -211,8 +211,8 @@ export const ProfileCardMUI: React.FC<ProfileCardMUIProps> = ({
             {activeApplications}
           </p>
         </Card>
-        <Card 
-          variant="default" 
+        <Card
+          variant="default"
           className="p-3 text-center"
           style={{
             padding: 'var(--sys-space-3)',
@@ -221,21 +221,21 @@ export const ProfileCardMUI: React.FC<ProfileCardMUIProps> = ({
             border: `1px solid var(--sys-color-outline-variant)`,
           }}
         >
-          <div 
+          <div
             className="flex items-center justify-center"
-            style={{ 
+            style={{
               gap: 'var(--sys-space-1)',
               marginBottom: 'var(--sys-space-1)',
             }}
           >
-            <TrendingUp 
-              style={{ 
+            <TrendingUp
+              style={{
                 height: 'var(--sys-space-3)',
                 width: 'var(--sys-space-3)',
                 color: 'var(--sys-color-primary)',
-              }} 
+              }}
             />
-            <span 
+            <span
               style={{
                 fontFamily: 'var(--sys-typography-family-data)',
                 fontSize: 'var(--sys-space-2)',
@@ -247,7 +247,7 @@ export const ProfileCardMUI: React.FC<ProfileCardMUIProps> = ({
               Potential
             </span>
           </div>
-          <p 
+          <p
             style={{
               fontFamily: 'var(--sys-typography-family-hero)',
               fontSize: 'var(--sys-typography-size-body-md)',
@@ -263,7 +263,7 @@ export const ProfileCardMUI: React.FC<ProfileCardMUIProps> = ({
 
       <div className="flex-1" />
 
-      <p 
+      <p
         style={{
           fontFamily: 'var(--sys-typography-family-data)',
           fontSize: 'var(--sys-space-2)',
@@ -278,47 +278,47 @@ export const ProfileCardMUI: React.FC<ProfileCardMUIProps> = ({
         Updated {lastUpdated}
       </p>
 
-      <div 
+      <div
         className="flex"
-        style={{ 
+        style={{
           gap: 'var(--sys-space-2)',
           paddingTop: 'var(--sys-space-3)',
           borderTop: `1px solid var(--sys-color-outline-variant)`,
         }}
       >
-        <Button 
-          variant="ghost" 
-          size="sm" 
-          onClick={onEdit} 
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={onEdit}
           className="flex-1"
           style={{
             color: 'var(--sys-color-surface-on)',
           }}
         >
-          <Edit 
-            style={{ 
+          <Edit
+            style={{
               height: 'var(--sys-space-4)',
               width: 'var(--sys-space-4)',
               marginRight: 'var(--sys-space-2)',
-            }} 
+            }}
           />
           Edit
         </Button>
-        <Button 
-          variant="ghost" 
-          size="sm" 
-          onClick={onDelete} 
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={onDelete}
           className="flex-1"
           style={{
             color: 'var(--sys-color-error)',
           }}
         >
-          <Trash2 
-            style={{ 
+          <Trash2
+            style={{
               height: 'var(--sys-space-4)',
               width: 'var(--sys-space-4)',
               marginRight: 'var(--sys-space-2)',
-            }} 
+            }}
           />
           Delete
         </Button>

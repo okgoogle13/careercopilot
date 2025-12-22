@@ -20,9 +20,8 @@ export { JobInput } from './job-input/JobInput';
 
 export { JobMatching } from './job-matching/JobMatching';
 
-export { Settings } from './settings/Settings';
-
-export { WelcomeBanner } from './welcome/WelcomeBanner';
+// export { Settings } from './settings/Settings';
+// export { WelcomeBanner } from './welcome/WelcomeBanner';
 
 export { ProfileComparison } from './profile/ProfileComparison';
 

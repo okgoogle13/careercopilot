@@ -3,17 +3,44 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter }
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Mail, Lock, ArrowRight, Loader2 } from 'lucide-react';
+import { Mail, Lock, ArrowRight, Loader2, AlertCircle } from 'lucide-react';
+import { useAuth } from '@/context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 export default function Auth() {
     const [isLogin, setIsLogin] = useState(true);
-    const [isLoading, setIsLoading] = useState(false);
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [error, setError] = useState<string | null>(null);
+
+    const { login, register, isLoading } = useAuth();
+    const navigate = useNavigate();
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        setIsLoading(true);
-        // Simulate auth
-        setTimeout(() => setIsLoading(false), 2000);
+        setError(null);
+
+        try {
+            if (isLogin) {
+                await login({ email, password });
+            } else {
+                await register({
+                    email,
+                    password,
+                    name: `${firstName} ${lastName}`.trim()
+                });
+            }
+            // Navigation is handled by AppRouter when isAuthenticated becomes true,
+            // or we can force it here just in case.
+            navigate('/dashboard');
+        } catch (err: any) {
+            console.error('Auth error:', err);
+            // Extract error message from API response if available
+            const message = err.response?.data?.detail || err.message || 'Authentication failed. Please try again.';
+            setError(message);
+        }
     };
 
     return (
@@ -37,15 +64,35 @@ export default function Auth() {
                 </CardHeader>
                 <CardContent>
                     <form onSubmit={handleSubmit} className="space-y-4">
+                        {/* Error Message */}
+                        {error && (
+                            <div className="bg-destructive/10 border border-destructive/20 text-destructive text-sm p-3 rounded-md flex items-center">
+                                <AlertCircle className="h-4 w-4 mr-2" />
+                                {error}
+                            </div>
+                        )}
+
                         {!isLogin && (
                             <div className="grid grid-cols-2 gap-4">
                                 <div className="space-y-2">
                                     <Label htmlFor="firstName">First Name</Label>
-                                    <Input id="firstName" placeholder="John" required />
+                                    <Input
+                                        id="firstName"
+                                        placeholder="John"
+                                        required={!isLogin}
+                                        value={firstName}
+                                        onChange={(e) => setFirstName(e.target.value)}
+                                    />
                                 </div>
                                 <div className="space-y-2">
                                     <Label htmlFor="lastName">Last Name</Label>
-                                    <Input id="lastName" placeholder="Doe" required />
+                                    <Input
+                                        id="lastName"
+                                        placeholder="Doe"
+                                        required={!isLogin}
+                                        value={lastName}
+                                        onChange={(e) => setLastName(e.target.value)}
+                                    />
                                 </div>
                             </div>
                         )}
@@ -53,7 +100,15 @@ export default function Auth() {
                             <Label htmlFor="email">Email</Label>
                             <div className="relative">
                                 <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                                <Input id="email" type="email" placeholder="name@example.com" className="pl-9" required />
+                                <Input
+                                    id="email"
+                                    type="email"
+                                    placeholder="name@example.com"
+                                    className="pl-9"
+                                    required
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                />
                             </div>
                         </div>
                         <div className="space-y-2">
@@ -63,7 +118,15 @@ export default function Auth() {
                             </div>
                             <div className="relative">
                                 <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                                <Input id="password" type="password" placeholder="••••••••" className="pl-9" required />
+                                <Input
+                                    id="password"
+                                    type="password"
+                                    placeholder="••••••••"
+                                    className="pl-9"
+                                    required
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                />
                             </div>
                         </div>
 
@@ -116,7 +179,10 @@ export default function Auth() {
                     <p className="text-sm text-muted-foreground">
                         {isLogin ? "Don't have an account? " : "Already have an account? "}
                         <button
-                            onClick={() => setIsLogin(!isLogin)}
+                            onClick={() => {
+                                setIsLogin(!isLogin);
+                                setError(null);
+                            }}
                             className="text-primary hover:underline font-medium focus:outline-none"
                         >
                             {isLogin ? 'Sign up' : 'Sign in'}
