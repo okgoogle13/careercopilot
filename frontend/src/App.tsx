@@ -50,7 +50,7 @@ const ProtectedLayout = () => {
   );
 };
 
-// Public Layout (Login/Register)
+// Public Layout (Login/Register/Landing)
 const PublicLayout = () => {
   return (
     <div className="min-h-screen bg-[#141218] relative">

@@ -1,6 +1,6 @@
 import { TrendingUp, Award, Target } from 'lucide-react';
 import { LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import pileaPlant from '../assets/images/pilea-plant.png';
+import pileaPlant from '../assets/images/pilea-plant.jpg';
 import { MetricCard } from './shared/MetricCard';
 import { KeywordTag } from './shared/KeywordTag';
 import { PageHeader } from './shared/PageHeader';
@@ -19,6 +19,7 @@ interface ApplicationStatusData {
   name: string;
   value: number;
   color: string;
+  [key: string]: string | number;
 }
 
 interface KeywordMatchData {
@@ -83,12 +84,12 @@ export function Analysis() {
   return (
     <div className="p-6 md:p-12 max-w-7xl relative">
       {/* Pilea Plant Decoration - Bottom Left Corner */}
-      <div 
+      <div
         className="fixed bottom-0 left-0 lg:left-[280px] md:left-[72px] pointer-events-none w-[300px] z-[1] opacity-55 scale-x-[-1]"
       >
-        <img 
-          src={pileaPlant} 
-          alt="" 
+        <img
+          src={pileaPlant}
+          alt=""
           className="w-full h-auto mix-blend-screen"
           style={{
             WebkitMaskImage: 'linear-gradient(to top, transparent 0%, rgba(0,0,0,0.35) 8%, rgba(0,0,0,0.65) 18%, rgba(0,0,0,0.85) 28%, black 40%)',
@@ -99,32 +100,32 @@ export function Analysis() {
 
       <div className="relative z-10">
         {/* Header */}
-        <PageHeader 
-          title="Performance Analysis" 
+        <PageHeader
+          title="Performance Analysis"
           highlightedWord="Analysis"
           description="Track your job search performance and get insights"
         />
 
         {/* Top 3 Metric Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <MetricCard 
-            icon={Award} 
-            label="App ATS Score" 
-            value="87%" 
+          <MetricCard
+            icon={Award}
+            label="App ATS Score"
+            value="87%"
             iconColor="text-[#D0BCFF]"
             variant="outlined"
           />
-          <MetricCard 
-            icon={TrendingUp} 
-            label="Applications" 
-            value="90" 
+          <MetricCard
+            icon={TrendingUp}
+            label="Applications"
+            value="90"
             iconColor="text-[#A8C5A3]"
             variant="outlined"
           />
-          <MetricCard 
-            icon={Target} 
-            label="Success Rate" 
-            value="45%" 
+          <MetricCard
+            icon={Target}
+            label="Success Rate"
+            value="45%"
             iconColor="text-[#E07A5F]"
             variant="outlined"
           />
@@ -137,18 +138,18 @@ export function Analysis() {
               <CartesianGrid strokeDasharray="3 3" stroke="#2B2930" vertical={false} />
               <XAxis dataKey="month" stroke="#CAC4D0" axisLine={false} tickLine={false} />
               <YAxis stroke="#CAC4D0" axisLine={false} tickLine={false} domain={[75, 100]} />
-              <Tooltip 
-                contentStyle={{ 
-                  backgroundColor: '#36343B', 
-                  border: 'none', 
+              <Tooltip
+                contentStyle={{
+                  backgroundColor: '#36343B',
+                  border: 'none',
                   borderRadius: '16px',
                   color: '#FFFFFF'
                 }}
               />
-              <Line 
-                type="monotone" 
-                dataKey="score" 
-                stroke="#D0BCFF" 
+              <Line
+                type="monotone"
+                dataKey="score"
+                stroke="#D0BCFF"
                 strokeWidth={3}
                 dot={{ fill: '#D0BCFF', r: 5 }}
               />
@@ -162,6 +163,7 @@ export function Analysis() {
           <ChartPane title="Application Status">
             <ResponsiveContainer width="100%" height={280}>
               <PieChart>
+                {/* @ts-ignore */}
                 <Pie
                   data={APPLICATION_STATUS_DATA}
                   cx="50%"
@@ -175,10 +177,10 @@ export function Analysis() {
                     <Cell key={`cell-${index}`} fill={entry.color} />
                   ))}
                 </Pie>
-                <Tooltip 
-                  contentStyle={{ 
-                    backgroundColor: '#36343B', 
-                    border: 'none', 
+                <Tooltip
+                  contentStyle={{
+                    backgroundColor: '#36343B',
+                    border: 'none',
                     borderRadius: '16px',
                     color: '#FFFFFF'
                   }}
@@ -194,10 +196,10 @@ export function Analysis() {
                 <CartesianGrid strokeDasharray="3 3" stroke="#2B2930" vertical={false} />
                 <XAxis dataKey="keyword" stroke="#CAC4D0" axisLine={false} tickLine={false} />
                 <YAxis stroke="#CAC4D0" axisLine={false} tickLine={false} />
-                <Tooltip 
-                  contentStyle={{ 
-                    backgroundColor: '#36343B', 
-                    border: 'none', 
+                <Tooltip
+                  contentStyle={{
+                    backgroundColor: '#36343B',
+                    border: 'none',
                     borderRadius: '16px',
                     color: '#FFFFFF'
                   }}

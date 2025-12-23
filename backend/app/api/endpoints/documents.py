@@ -11,7 +11,8 @@ import json
 import time
 from typing import Dict, Optional
 
-from fastapi import APIRouter, HTTPException, status
+from fastapi import APIRouter, HTTPException, status, Depends
+from app.core.dependencies import get_current_user
 from pydantic import BaseModel, Field
 
 # Import Genkit flows
@@ -234,10 +235,31 @@ async def generate_ksc_response(request: KSCRequest) -> KSCResponse:
         # Re-raise HTTP exceptions
         raise
     except Exception as e:
-        processing_time = time.time() - start_time
-        error_message = f"Failed to generate KSC response: {str(e)}"
-        print(f"❌ KSC response generation error: {error_message}")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=error_message,
         )
+
+
+@router.get("/", status_code=status.HTTP_200_OK)
+async def get_documents(current_user: Dict = Depends(get_current_user)):
+    """
+    Get all documents for the current user.
+    """
+    from app.core.db import db
+    
+    if not db:
+       # Fallback for "limited mode" without credentials
+       return []
+
+    try:
+        docs_ref = db.collection("users").document(current_user.uid).collection("documents")
+        docs = []
+        for doc in docs_ref.stream():
+            d = doc.to_dict()
+            d["id"] = doc.id
+            docs.append(d)
+        return docs
+    except Exception as e:
+        print(f"Error fetching documents: {e}")
+        return []

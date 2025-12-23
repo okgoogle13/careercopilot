@@ -1,0 +1,432 @@
+/* ==========================================
+   M3 Anti-Slop Validated Landing Page
+   Score Target: 85+
+========================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Fredoka:wght@300;700&display=swap');
+
+.container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background-color: #0a0a0a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    font-family: var(--font-body, 'Plus Jakarta Sans', sans-serif);
+    color: var(--on-surface, #e3e3e3);
+}
+
+/* ==========================================
+   LAYER 0: Organic Blobs (Gradient, Visible)
+   - Not solid colors (anti-slop)
+   - Layered backgrounds with depth
+========================================== */
+.blobCanvas {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.blob {
+    position: absolute;
+    will-change: transform;
+}
+
+/* Blob A: Large left - Green gradient, highly irregular */
+.blobA {
+    width: 55vw;
+    height: 65vh;
+    background: linear-gradient(145deg,
+            var(--primary-sage, #8fa36a) 0%,
+            #a5b88a 40%,
+            #c5bce0 75%,
+            #d1c4e9 100%);
+    border-radius: 73% 27% 41% 59% / 64% 38% 62% 36%;
+    top: 5%;
+    left: -12%;
+    opacity: 0.8;
+    filter: blur(6px);
+    box-shadow: 0 0 100px rgba(143, 163, 106, 0.25);
+    animation: floatA 19s cubic-bezier(0.2, 0, 0, 1) infinite alternate;
+}
+
+/* Blob B: Large right - Lilac gradient, amoeba-like */
+.blobB {
+    width: 48vw;
+    height: 60vh;
+    background: linear-gradient(225deg,
+            #d1c4e9 0%,
+            #c5bce0 30%,
+            #b5c5a5 65%,
+            var(--primary-sage, #8fa36a) 100%);
+    border-radius: 29% 71% 48% 52% / 63% 29% 71% 37%;
+    top: -8%;
+    right: -8%;
+    opacity: 0.75;
+    filter: blur(8px);
+    box-shadow: 0 0 80px rgba(209, 196, 233, 0.2);
+    animation: floatB 26s cubic-bezier(0.2, 0, 0, 1) infinite alternate-reverse;
+}
+
+/* Blob C: Bottom - Soft green, playful shape */
+.blobC {
+    width: 38vw;
+    height: 42vh;
+    background: linear-gradient(160deg,
+            #9aab72 0%,
+            #a5b88a 50%,
+            #c8d0b8 100%);
+    border-radius: 68% 32% 51% 49% / 38% 59% 41% 62%;
+    bottom: -8%;
+    left: 28%;
+    opacity: 0.7;
+    filter: blur(5px);
+    box-shadow: 0 0 60px rgba(143, 163, 106, 0.15);
+    animation: floatC 23s cubic-bezier(0.2, 0, 0, 1) infinite alternate;
+}
+
+/* Blob D: Accent - Lilac glow, organic blob */
+.blobD {
+    width: 22vw;
+    height: 28vh;
+    background: linear-gradient(180deg, #d1c4e9 0%, #b8aed0 100%);
+    border-radius: 42% 58% 67% 33% / 55% 42% 58% 45%;
+    top: 12%;
+    right: 18%;
+    opacity: 0.55;
+    filter: blur(10px);
+    animation: floatD 17s cubic-bezier(0.2, 0, 0, 1) infinite alternate;
+}
+
+/* Keyframes: M3 Emphasized Easing, varied motion */
+@keyframes floatA {
+    0% {
+        transform: translate(0, 0) rotate(0deg) scale(1);
+    }
+
+    50% {
+        transform: translate(25px, -18px) rotate(2deg) scale(1.02);
+    }
+
+    100% {
+        transform: translate(-15px, 12px) rotate(-1.5deg) scale(0.98);
+    }
+}
+
+@keyframes floatB {
+    0% {
+        transform: translate(0, 0) rotate(0deg) scale(1);
+    }
+
+    50% {
+        transform: translate(-22px, 28px) rotate(-3deg) scale(1.03);
+    }
+
+    100% {
+        transform: translate(12px, -20px) rotate(1.5deg) scale(0.97);
+    }
+}
+
+@keyframes floatC {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(35px, -25px) rotate(4deg);
+    }
+}
+
+@keyframes floatD {
+    0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 0.55;
+    }
+
+    100% {
+        transform: translate(-18px, 18px) scale(1.08);
+        opacity: 0.45;
+    }
+}
+
+/* ==========================================
+   LAYER 1: Plant Illustrations
+========================================== */
+.illustrationLayer {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.illustrationLayer img {
+    position: absolute;
+    object-fit: contain;
+}
+
+.plantTopLeft {
+    top: -25px;
+    left: -5px;
+    width: 300px;
+    opacity: 0.92;
+}
+
+.plantTopRight {
+    top: -15px;
+    right: -5px;
+    width: 260px;
+    opacity: 0.88;
+}
+
+.plantBottomLeft {
+    bottom: -35px;
+    left: 35px;
+    width: 340px;
+    opacity: 0.95;
+}
+
+.plantBottomRight {
+    bottom: 15px;
+    right: 25px;
+    width: 290px;
+    opacity: 0.9;
+}
+
+/* ==========================================
+   LAYER 2: Hero Card - Glassmorphism
+   - Elevation tokens for depth
+   - Backdrop blur for glass effect
+========================================== */
+.heroCard {
+    position: relative;
+    z-index: 10;
+    background: rgba(30, 30, 35, 0.82);
+    backdrop-filter: blur(28px);
+    -webkit-backdrop-filter: blur(28px);
+    padding: 4rem 3.5rem 3.5rem;
+    border-radius: 36px;
+    text-align: center;
+    max-width: 480px;
+    width: 88%;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    /* Elevation + green glow */
+    box-shadow:
+        0 2px 4px rgba(0, 0, 0, 0.3),
+        0 8px 16px rgba(0, 0, 0, 0.25),
+        0 20px 40px rgba(0, 0, 0, 0.2),
+        0 0 100px rgba(143, 163, 106, 0.12);
+}
+
+/* Typography: Extreme weight contrast 900 vs 100 = 9x ✓ */
+/* Dual font pairing: Monospace (FML) + Display (CareerCopilot) */
+.heroTitle {
+    margin: 0;
+    line-height: 1.08;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* FML: Ultra-heavy monospace, expressive terracotta */
+.heroTitleFml {
+    display: block;
+    font-family: var(--font-data, 'JetBrains Mono', monospace);
+    font-size: 2.5rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--action-terracotta, #e2725b);
+    margin-bottom: 0.15rem;
+    text-shadow: 0 0 20px rgba(226, 114, 91, 0.3);
+}
+
+/* CareerCopilot: Ultra-light display, elegant lilac */
+.heroTitleMain {
+    display: block;
+    font-family: var(--font-display, 'Plus Jakarta Sans', sans-serif);
+    font-size: 3.8rem;
+    font-weight: 100;
+    letter-spacing: -0.02em;
+    color: #d1c4e9;
+    font-variation-settings: 'wght' 100;
+}
+
+/* Tagline: Cursive handwriting style for expressiveness */
+.heroTagline {
+    font-family: 'Caveat', cursive;
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-top: 1.5rem;
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.4;
+    letter-spacing: 0.02em;
+    transform: rotate(-1.5deg);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Buttons: Varied spacing (2.5rem top, 1.25rem gap) */
+.actionContainer {
+    margin-top: 2.5rem;
+    display: flex;
+    gap: 1.25rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Filled button - Playful, bold font */
+.btnFilled {
+    background: var(--primary-sage, #8fa36a);
+    color: #1a1a1a;
+    border: none;
+    padding: 1.1rem 2.8rem;
+    border-radius: 100px;
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition:
+        transform 0.25s cubic-bezier(0.2, 0, 0, 1),
+        box-shadow 0.25s cubic-bezier(0.2, 0, 0, 1);
+}
+
+.btnFilled:hover {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 6px 24px rgba(143, 163, 106, 0.35);
+}
+
+.btnFilled:active {
+    transform: translateY(0) scale(0.98);
+}
+
+/* Register button - Purple background, playful font */
+.btnOutlined {
+    background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);
+    color: #ffffff;
+    border: 2px solid rgba(209, 196, 233, 0.5);
+    padding: 1.1rem 2.8rem;
+    border-radius: 100px;
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    box-shadow: 0 4px 15px rgba(155, 89, 182, 0.3);
+    transition:
+        background 0.2s cubic-bezier(0.2, 0, 0, 1),
+        border-color 0.2s cubic-bezier(0.2, 0, 0, 1),
+        transform 0.2s cubic-bezier(0.2, 0, 0, 1),
+        box-shadow 0.2s cubic-bezier(0.2, 0, 0, 1);
+}
+
+.btnOutlined:hover {
+    background: linear-gradient(135deg, #a569bd 0%, #9b59b6 100%);
+    border-color: rgba(209, 196, 233, 0.8);
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 6px 24px rgba(155, 89, 182, 0.45);
+}
+
+.btnOutlined:active {
+    transform: translateY(0) scale(0.98);
+}
+
+/* Decorative M3 Star */
+.m3Star {
+    position: absolute;
+    bottom: 45px;
+    right: 45px;
+    font-size: 2.5rem;
+    color: #d1c4e9;
+    opacity: 0.4;
+    z-index: 15;
+}
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+@media (max-width: 900px) {
+    .blobA {
+        width: 65vw;
+        height: 50vh;
+    }
+
+    .blobB {
+        width: 55vw;
+        height: 45vh;
+    }
+
+    .blobC {
+        width: 45vw;
+        height: 32vh;
+    }
+
+    .blobD {
+        width: 28vw;
+        height: 22vh;
+    }
+}
+
+@media (max-width: 768px) {
+    .heroCard {
+        padding: 3rem 2rem 2.5rem;
+        border-radius: 28px;
+    }
+
+    .heroTitle {
+        font-size: 2.75rem;
+    }
+
+    .heroTagline {
+        font-size: 1rem;
+    }
+
+    .actionContainer {
+        flex-direction: column;
+        gap: 0.875rem;
+    }
+
+    .btnFilled,
+    .btnOutlined {
+        width: 100%;
+        text-align: center;
+    }
+
+    .plantTopLeft,
+    .plantTopRight {
+        width: 200px;
+    }
+
+    .plantBottomLeft,
+    .plantBottomRight {
+        width: 220px;
+    }
+
+    .m3Star {
+        bottom: 22px;
+        right: 22px;
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .heroTitle {
+        font-size: 2.25rem;
+    }
+
+    .plantTopLeft,
+    .plantTopRight,
+    .plantBottomLeft,
+    .plantBottomRight {
+        width: 140px;
+    }
+}

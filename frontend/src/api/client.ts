@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { auth } from '../firebase-config';
+import { auth } from '../config/firebase';
 
 // Create generic Axios instance
 const api = axios.create({

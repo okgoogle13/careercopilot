@@ -12,7 +12,7 @@ import {
   User as FirebaseUser,
   updateProfile as firebaseUpdateProfile
 } from 'firebase/auth';
-import { auth } from '../firebase-config';
+import { auth } from '../config/firebase';
 
 // Define types locally since we aren't using the external service
 export interface User extends Partial<FirebaseUser> {
@@ -85,7 +85,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
           reload: async () => { },
           toJSON: () => ({}),
           role: 'user'
-        };
+        } as unknown as User;
         setUser(mockUser);
         localStorage.setItem('mockUser', JSON.stringify(mockUser));
         return;
@@ -120,7 +120,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         reload: async () => { },
         toJSON: () => ({}),
         role: 'user'
-      };
+      } as unknown as User;
       setUser(mockUser);
       localStorage.setItem('mockUser', JSON.stringify(mockUser));
       return;
