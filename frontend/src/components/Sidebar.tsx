@@ -11,8 +11,6 @@ const mainNavItems = [
   { path: '/ksc-generator', icon: Sparkles, label: 'KSC Generator' },
 ];
 
-
-
 export function Sidebar() {
   const location = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -80,12 +78,12 @@ export function Sidebar() {
                 to={item.path}
                 onClick={() => setIsMobileMenuOpen(false)}
                 className={`
-                  flex items-center gap-4 px-6 py-4 mb-2 transition-all font-medium
+                  flex items-center gap-4 px-6 py-4 mb-2 rounded-full transition-all font-medium
                   md:justify-center lg:justify-start
                   md:px-4 lg:px-6
                   ${isActive
-                    ? 'bg-[var(--color-primary)] text-[var(--color-primary-foreground)] rounded-leaf'
-                    : 'text-[var(--color-muted-foreground)] hover:bg-[var(--color-surface-container)] hover:text-[var(--color-foreground)] rounded-tech'
+                    ? 'bg-[var(--primary-sage)] text-[#141218]'
+                    : 'text-[#CAC4D0] hover:bg-[var(--surface-container)] hover:text-[#FFFFFF]'
                   }
                 `}
                 title={item.label}
@@ -98,7 +96,7 @@ export function Sidebar() {
         </nav>
 
         {/* User Profile */}
-        <div className="p-6 m-4 bg-[var(--surface-container)] rounded-[12px] md:p-3 md:m-2 lg:p-6 lg:m-4 flex-shrink-0">
+        <div className="p-6 m-4 bg-[var(--surface-container)] rounded-[28px] md:p-3 md:m-2 lg:p-6 lg:m-4 flex-shrink-0">
           <div className="flex items-center gap-3 md:flex-col lg:flex-row">
             <div className="w-10 h-10 rounded-full flex-shrink-0 bg-gradient-to-br from-[#E07A5F] to-[#D0BCFF]" />
             <div className="flex-1 md:hidden lg:block">
@@ -106,6 +104,13 @@ export function Sidebar() {
               <p className="text-xs text-[#CAC4D0] uppercase tracking-wider font-mono">Premium User</p>
             </div>
           </div>
+          <Link
+            to="/settings"
+            className="flex items-center justify-center mt-2 p-2 rounded-full hover:bg-white/5 md:hidden lg:flex"
+            title="Settings"
+          >
+            <Settings className="w-5 h-5 text-[#CAC4D0]" />
+          </Link>
         </div>
       </aside>
     </>

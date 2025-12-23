@@ -1,1 +1,0 @@
-export { ATSScoreCircle } from './ATSScoreCircle';

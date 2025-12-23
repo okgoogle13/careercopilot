@@ -21,7 +21,7 @@ export function NotFound() {
                     </div>
 
                     <h1 className="text-4xl md:text-5xl font-bold text-[#E6E1E5] mb-4">Lost in Space?</h1>
-                    <p className="text-[#CAC4D0] text-lg mb-10 leading-relaxed">
+                    <p className="text-lg text-[#CAC4D0] mb-10 leading-relaxed">
                         The page you are looking for has drifted into a black hole.<br className="hidden md:block" />
                         Don't worry, we can navigate you back to safety.
                     </p>

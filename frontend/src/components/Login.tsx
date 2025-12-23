@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
+import { Link } from 'react-router-dom';
 import { Input } from './ui/input';
 import { Button } from './ui/button';
 import { Alert } from './ui/alert';
@@ -11,34 +10,27 @@ export function Login() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const { login } = useAuth();
-  const navigate = useNavigate();
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError('');
-
-    try {
+    
+    // Mock login - in real app, this would call an API
+    setTimeout(() => {
       if (email && password) {
-        await login(email, password);
-        navigate('/dashboard');
+        window.location.href = '/dashboard';
       } else {
         setError('Please enter valid credentials');
+        setLoading(false);
       }
-    } catch (err: any) {
-      console.error(err);
-      setError(err.message || 'Failed to sign in');
-    } finally {
-      setLoading(false);
-    }
+    }, 1000);
   };
 
   return (
     <div className="min-h-screen bg-[#141218] flex items-center justify-center p-8">
       <div className="w-full max-w-md">
         {/* Card */}
-        <div
+        <div 
           className="bg-[#25232A] rounded-[28px] p-8"
           style={{
             backgroundImage: 'radial-gradient(circle, #E6DEFF 1px, transparent 1px)',
@@ -107,7 +99,7 @@ export function Login() {
           {/* Sign Up Link */}
           <div className="text-center mt-6">
             <p className="text-[#CAC4D0] text-sm">
-              Don&apos;t have an account?{' '}
+              Don't have an account?{' '}
               <Link to="/register" className="text-[#D0BCFF] hover:text-[#E6DDFF]">
                 Sign up
               </Link>
