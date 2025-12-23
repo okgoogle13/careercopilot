@@ -1,50 +1,44 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import * as z from 'zod';
-import { useAuth } from '../context/AuthContext';
+import { Link } from 'react-router-dom';
 import { Input } from './ui/input';
 import { Button } from './ui/button';
 import { Alert } from './ui/alert';
 
-const registerSchema = z.object({
-  displayName: z.string().min(2, 'Name must be at least 2 characters'),
-  email: z.string().email('Please enter a valid email'),
-  password: z.string().min(6, 'Password must be at least 6 characters'),
-  confirmPassword: z.string()
-}).refine((data) => data.password === data.confirmPassword, {
-  message: "Passwords don't match",
-  path: ["confirmPassword"],
-});
-
-type RegisterValues = z.infer<typeof registerSchema>;
-
 export function Register() {
-  const [authError, setAuthError] = useState('');
-  const { register: registerAuth } = useAuth();
-  const navigate = useNavigate();
+  const [displayName, setDisplayName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<RegisterValues>({
-    resolver: zodResolver(registerSchema),
-  });
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError('');
 
-  const onSubmit = async (data: RegisterValues) => {
-    setAuthError('');
-    try {
-      await registerAuth(data.email, data.password, data.displayName);
-      navigate('/dashboard');
-    } catch (err: any) {
-      console.error(err);
-      setAuthError(err.message || 'Failed to create account');
+    if (password !== confirmPassword) {
+      setError('Passwords do not match');
+      return;
     }
+
+    if (password.length < 6) {
+      setError('Password must be at least 6 characters');
+      return;
+    }
+
+    setLoading(true);
+    
+    // Mock registration - in real app, this would call an API
+    setTimeout(() => {
+      window.location.href = '/dashboard';
+    }, 1000);
   };
 
   return (
     <div className="min-h-screen bg-[#141218] flex items-center justify-center p-8">
       <div className="w-full max-w-md">
         {/* Card */}
-        <div
+        <div 
           className="bg-[#25232A] rounded-[28px] p-8"
           style={{
             backgroundImage: 'radial-gradient(circle, #E6DEFF 1px, transparent 1px)',
@@ -65,27 +59,26 @@ export function Register() {
           </div>
 
           {/* Error Alert */}
-          {authError && (
+          {error && (
             <Alert className="mb-6 bg-[#E07A5F]/20 border-[#E07A5F] text-[#E07A5F]">
-              {authError}
+              {error}
             </Alert>
           )}
 
           {/* Form */}
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-6">
             <div>
               <label className="block text-sm text-[#CAC4D0] mb-2" style={{ fontFamily: 'Roboto Flex, sans-serif', fontStretch: '50%', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
                 Display Name
               </label>
               <Input
                 type="text"
+                value={displayName}
+                onChange={(e) => setDisplayName(e.target.value)}
                 placeholder="Your Name"
                 className="bg-[#2B2930] border-[#49454F] text-[#E6E1E5] rounded-full h-12"
-                {...register('displayName')}
+                required
               />
-              {errors.displayName && (
-                <p className="text-[#E07A5F] text-sm mt-1">{errors.displayName.message}</p>
-              )}
             </div>
 
             <div>
@@ -94,13 +87,12 @@ export function Register() {
               </label>
               <Input
                 type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 placeholder="you@example.com"
                 className="bg-[#2B2930] border-[#49454F] text-[#E6E1E5] rounded-full h-12"
-                {...register('email')}
+                required
               />
-              {errors.email && (
-                <p className="text-[#E07A5F] text-sm mt-1">{errors.email.message}</p>
-              )}
             </div>
 
             <div>
@@ -109,13 +101,12 @@ export function Register() {
               </label>
               <Input
                 type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
                 className="bg-[#2B2930] border-[#49454F] text-[#E6E1E5] rounded-full h-12"
-                {...register('password')}
+                required
               />
-              {errors.password && (
-                <p className="text-[#E07A5F] text-sm mt-1">{errors.password.message}</p>
-              )}
             </div>
 
             <div>
@@ -124,21 +115,20 @@ export function Register() {
               </label>
               <Input
                 type="password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
                 placeholder="••••••••"
                 className="bg-[#2B2930] border-[#49454F] text-[#E6E1E5] rounded-full h-12"
-                {...register('confirmPassword')}
+                required
               />
-              {errors.confirmPassword && (
-                <p className="text-[#E07A5F] text-sm mt-1">{errors.confirmPassword.message}</p>
-              )}
             </div>
 
             <Button
               type="submit"
-              disabled={isSubmitting}
+              disabled={loading}
               className="w-full bg-[#D0BCFF] text-[#381E72] hover:bg-[#E6DDFF] rounded-full h-12"
             >
-              {isSubmitting ? 'Creating account...' : 'Create Account'}
+              {loading ? 'Creating account...' : 'Create Account'}
             </Button>
           </form>
 

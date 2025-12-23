@@ -34,8 +34,8 @@ export function Dashboard() {
   return (
     <div className="p-6 md:p-12 max-w-7xl">
       {/* Welcome Banner - Hero Card */}
-      <div
-        className="rounded-tl-[24px] rounded-tr-[48px] rounded-br-[24px] rounded-bl-[8px] p-8 md:p-12 mb-8 relative overflow-hidden min-h-[300px] md:min-h-[400px] bg-gradient-to-br from-[var(--surface-container-high)] to-[var(--surface-container)] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1)]"
+      <div 
+        className="rounded-[28px] p-8 md:p-12 mb-8 relative overflow-hidden min-h-[300px] md:min-h-[400px] bg-gradient-to-br from-[var(--surface-container-high)] to-[var(--surface-container)] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1)]"
       >
         {/* Content Layer */}
         <div className="relative z-10">
@@ -46,9 +46,9 @@ export function Dashboard() {
             You have 3 upcoming interviews this week.
           </p>
         </div>
-
+        
         {/* Plant Image Background with Seamless Blend */}
-        <div
+        <div 
           className="absolute bottom-0 left-0 right-0 h-[65%] pointer-events-none opacity-65 mix-blend-screen"
           style={{
             backgroundImage: `url(${plantImage})`,
@@ -63,28 +63,28 @@ export function Dashboard() {
 
       {/* Stats Grid - Using StatCard Component */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        <StatCard
-          icon={FileText}
-          value="8"
-          label="Active Applications"
-          iconColor="text-[#D0BCFF]"
+        <StatCard 
+          icon={FileText} 
+          value="8" 
+          label="Active Applications" 
+          iconColor="text-[#D0BCFF]" 
         />
-
-        <StatCard
+        
+        <StatCard 
           icon={() => (
             <svg className="w-12 h-12 text-[var(--primary-sage)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" />
             </svg>
-          )}
-          value="2"
-          label="Offers Received"
+          )} 
+          value="2" 
+          label="Offers Received" 
           iconColor="text-[var(--primary-sage)]"
         />
-
-        <StatCard
-          icon={TrendingUp}
-          value="45"
-          label="Connections"
+        
+        <StatCard 
+          icon={TrendingUp} 
+          value="45" 
+          label="Connections" 
           iconColor="text-[var(--action-terracotta)]"
         />
       </div>
@@ -92,14 +92,14 @@ export function Dashboard() {
       {/* Quick Actions - M3 Flat Buttons */}
       <div className="flex gap-4 mb-8 flex-wrap">
         {/* Glass Button */}
-        <button className="bg-black/50 backdrop-blur-[10px] text-[var(--on-surface)] border border-white/5 shadow-[inset_0_0_12px_rgba(255,255,255,0.05)] py-4 px-6 md:px-8 rounded-[12px] hover:bg-black/60 transition-all flex items-center justify-center gap-3 w-fit font-medium uppercase tracking-wider">
+        <button className="bg-black/50 backdrop-blur-[10px] text-[var(--on-surface)] border border-white/5 shadow-[inset_0_0_12px_rgba(255,255,255,0.05)] py-4 px-6 md:px-8 rounded-full hover:bg-black/60 transition-all flex items-center justify-center gap-3 w-fit font-medium uppercase tracking-wider">
           <Plus className="w-5 h-5" />
           <span className="hidden sm:inline">Create New Document</span>
           <span className="sm:hidden">New Doc</span>
         </button>
-
+        
         {/* Glass Button */}
-        <button className="bg-black/50 backdrop-blur-[10px] text-[var(--on-surface)] border border-white/5 shadow-[inset_0_0_12px_rgba(255,255,255,0.05)] py-4 px-6 md:px-8 rounded-[12px] hover:bg-black/60 transition-all uppercase tracking-wider font-medium">
+        <button className="bg-black/50 backdrop-blur-[10px] text-[var(--on-surface)] border border-white/5 shadow-[inset_0_0_12px_rgba(255,255,255,0.05)] py-4 px-6 md:px-8 rounded-full hover:bg-black/60 transition-all uppercase tracking-wider font-medium">
           View Analytics
         </button>
 
@@ -107,12 +107,12 @@ export function Dashboard() {
         <motion.button
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
-          transition={{
-            type: "spring",
-            stiffness: 400,
+          transition={{ 
+            type: "spring", 
+            stiffness: 400, 
             damping: 20
           }}
-          className="bg-[var(--surface-container-high)] text-[var(--primary-sage)] py-4 px-6 md:px-8 rounded-[12px] hover:bg-[var(--surface-bright)] transition-colors font-semibold uppercase tracking-wider flex items-center gap-3"
+          className="bg-[var(--surface-container-high)] text-[var(--primary-sage)] py-4 px-6 md:px-8 rounded-full hover:bg-[var(--surface-bright)] transition-colors font-semibold uppercase tracking-wider flex items-center gap-3"
         >
           <Plug className="w-5 h-5" />
           <span>CONNECT</span>
@@ -124,23 +124,23 @@ export function Dashboard() {
         <h3 className="mb-6 text-2xl md:text-3xl uppercase font-[800] tracking-tight text-[var(--on-surface)]">
           YOUR APPLICATION <span className="text-[var(--primary-sage)]">PROFILES</span>
         </h3>
-
+        
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {PROFILES.map((profile, idx) => (
-            <motion.div
-              key={idx}
-              whileHover={{
-                y: -4,
+            <motion.div 
+              key={idx} 
+              whileHover={{ 
+                y: -4, 
                 scale: 1.01,
                 boxShadow: "0 20px 40px -10px rgba(0, 0, 0, 0.6)"
               }}
-              transition={{
-                type: "spring",
-                stiffness: 200,
+              transition={{ 
+                type: "spring", 
+                stiffness: 200, 
                 damping: 25,
-                mass: 1
+                mass: 1 
               }}
-              className="bg-[var(--surface-container)] rounded-[12px] p-6 relative overflow-hidden shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1),inset_0_-1px_0_0_rgba(0,0,0,0.2),0_4px_24px_-1px_rgba(0,0,0,0.2)]"
+              className="bg-[var(--surface-container)] rounded-[28px] p-6 relative overflow-hidden shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1),inset_0_-1px_0_0_rgba(0,0,0,0.2),0_4px_24px_-1px_rgba(0,0,0,0.2)]"
               style={{
                 backgroundImage: noiseOverlay,
                 backgroundSize: '150px 150px'
@@ -166,7 +166,7 @@ export function Dashboard() {
                     px-4 py-2 rounded-full uppercase text-xs tracking-wider font-mono
                     ${profile.score >= 90 ? 'bg-[#8A9A5B]/20 text-[#8A9A5B]' :
                       profile.score >= 80 ? 'bg-[#E2725B]/20 text-[#E2725B]' :
-                        'bg-[#E2725B]/20 text-[#E2725B]'
+                      'bg-[#E2725B]/20 text-[#E2725B]'
                     }
                   `}>
                     {profile.status}

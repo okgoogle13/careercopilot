@@ -1,5 +1,8 @@
 import { createRoot } from 'react-dom/client';
 import { HelmetProvider } from 'react-helmet-async';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+const queryClient = new QueryClient();
 
 // Tailwind v4 with Electric Alchemist Design System
 import './index.css';
@@ -27,7 +30,9 @@ const root = document.getElementById('root');
 if (root) {
   createRoot(root).render(
     <HelmetProvider>
-      <App />
+      <QueryClientProvider client={queryClient}>
+        <App />
+      </QueryClientProvider>
     </HelmetProvider>
   );
 }
