@@ -12,21 +12,21 @@ export function StatCard({ icon: Icon, value, label, iconColor = 'text-[#D0BCFF]
   const noiseOverlay = `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E")`;
 
   const glassMotion = {
-    whileHover: { 
-      y: -4, 
+    whileHover: {
+      y: -4,
       scale: 1.01,
       boxShadow: "0 20px 40px -10px rgba(0, 0, 0, 0.6)"
     },
-    transition: { 
-      type: "spring", 
-      stiffness: 200, 
+    transition: {
+      type: "spring" as const,
+      stiffness: 200,
       damping: 25,
-      mass: 1 
+      mass: 1
     }
   };
 
   return (
-    <motion.div 
+    <motion.div
       className="bg-[var(--surface-container)] rounded-[28px] p-8 flex flex-col items-center justify-center relative overflow-hidden"
       {...glassMotion}
       style={{

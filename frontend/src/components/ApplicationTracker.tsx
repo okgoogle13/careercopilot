@@ -1,4 +1,4 @@
-import hangingPlant from '../assets/images/hanging-plant.png';
+import hangingPlant from '../assets/images/hanging-plant.jpg';
 import { PageHeader } from './shared/PageHeader';
 import { ApplicationCard } from './shared/ApplicationCard';
 
@@ -72,12 +72,12 @@ export function ApplicationTracker() {
   return (
     <div className="p-6 md:p-12 max-w-7xl relative">
       {/* Hanging Plant Decoration - Top Right Corner */}
-      <div 
+      <div
         className="absolute top-[-20px] right-0 pointer-events-none w-[320px] max-h-[800px] z-[5] opacity-60"
       >
-        <img 
-          src={hangingPlant} 
-          alt="" 
+        <img
+          src={hangingPlant}
+          alt=""
           className="w-full h-auto mix-blend-screen"
           style={{
             WebkitMaskImage: 'linear-gradient(to top, transparent 0%, rgba(0,0,0,0.35) 8%, rgba(0,0,0,0.65) 18%, rgba(0,0,0,0.85) 28%, black 40%)',
@@ -88,8 +88,8 @@ export function ApplicationTracker() {
 
       <div className="relative z-10">
         {/* Header */}
-        <PageHeader 
-          title="Application Tracker" 
+        <PageHeader
+          title="Application Tracker"
           highlightedWord="Tracker"
           description="Track your job applications through every stage"
         />

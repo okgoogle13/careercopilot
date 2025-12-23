@@ -1,14 +1,11 @@
-import path from 'path';
-import process from 'process';
-
 import { defineConfig, devices } from '@playwright/test';
 
 const isCI = !!process.env.CI;
-const baseURL = process.env.PLAYWRIGHT_BASE_URL || 'http://localhost:3000';
+const baseURL = process.env.PLAYWRIGHT_BASE_URL || 'http://localhost:5173';
 
 export default defineConfig({
   // Only look in the tests directory
-  testDir: path.join(__dirname, 'tests'),
+  testDir: './tests',
 
   // Only match .spec.js files
   testMatch: '**/*.spec.js',
@@ -61,13 +58,13 @@ export default defineConfig({
   webServer: isCI
     ? undefined
     : {
-        command: 'npm run preview',
-        port: 3000,
-        reuseExistingServer: !isCI,
-        timeout: 120000,
-        stdout: 'pipe',
-        stderr: 'pipe',
-      },
+      command: 'npm run preview',
+      port: 3000,
+      reuseExistingServer: !isCI,
+      timeout: 120000,
+      stdout: 'pipe',
+      stderr: 'pipe',
+    },
 
   reporter: [
     ['list'],
