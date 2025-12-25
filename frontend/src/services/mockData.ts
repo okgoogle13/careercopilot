@@ -1,4 +1,3 @@
-
 export interface Application {
   id: number | string;
   title: string;
@@ -88,7 +87,7 @@ export const MOCK_APPLICATIONS: Application[] = [
     currentStep: 3,
     steps: ['Applied', 'Screening', 'Interview', 'Offer', 'Accepted'],
     atsScore: 92,
-    atsStatus: 'Excellent'
+    atsStatus: 'Excellent',
   },
   {
     id: 2,
@@ -99,7 +98,7 @@ export const MOCK_APPLICATIONS: Application[] = [
     currentStep: 2,
     steps: ['Applied', 'Screening', 'Interview', 'Offer', 'Accepted'],
     atsScore: 85,
-    atsStatus: 'Good'
+    atsStatus: 'Good',
   },
   {
     id: 3,
@@ -110,7 +109,7 @@ export const MOCK_APPLICATIONS: Application[] = [
     currentStep: 1,
     steps: ['Applied', 'Screening', 'Interview', 'Offer', 'Accepted'],
     atsScore: 78,
-    atsStatus: 'Fair'
+    atsStatus: 'Fair',
   },
   {
     id: 4,
@@ -121,7 +120,7 @@ export const MOCK_APPLICATIONS: Application[] = [
     currentStep: 2,
     steps: ['Applied', 'Screening', 'Interview', 'Offer', 'Accepted'],
     atsScore: 88,
-    atsStatus: 'Good'
+    atsStatus: 'Good',
   },
 ];
 
@@ -132,7 +131,7 @@ export const MOCK_DOCUMENTS: Document[] = [
     type: 'resume',
     date: 'Updated 2 days ago',
     icon: '📄',
-    status: 'Ready'
+    status: 'Ready',
   },
   {
     id: 2,
@@ -140,7 +139,7 @@ export const MOCK_DOCUMENTS: Document[] = [
     type: 'cover',
     date: 'Updated 3 days ago',
     icon: '📝',
-    status: 'Draft'
+    status: 'Draft',
   },
   {
     id: 3,
@@ -148,7 +147,7 @@ export const MOCK_DOCUMENTS: Document[] = [
     type: 'resume',
     date: 'Updated 1 week ago',
     icon: '📄',
-    status: 'Ready'
+    status: 'Ready',
   },
   {
     id: 4,
@@ -156,7 +155,7 @@ export const MOCK_DOCUMENTS: Document[] = [
     type: 'resume',
     date: 'Updated 1 week ago',
     icon: '📄',
-    status: 'Review'
+    status: 'Review',
   },
   {
     id: 5,
@@ -164,7 +163,7 @@ export const MOCK_DOCUMENTS: Document[] = [
     type: 'cover',
     date: 'Updated 5 days ago',
     icon: '📝',
-    status: 'Draft'
+    status: 'Draft',
   },
   {
     id: 6,
@@ -172,7 +171,7 @@ export const MOCK_DOCUMENTS: Document[] = [
     type: 'cover',
     date: 'Updated 2 weeks ago',
     icon: '📝',
-    status: 'Ready'
+    status: 'Ready',
   },
   {
     id: 7,
@@ -180,7 +179,7 @@ export const MOCK_DOCUMENTS: Document[] = [
     type: 'ksc',
     date: 'Updated 4 days ago',
     icon: '📋',
-    status: 'Review'
+    status: 'Review',
   },
   {
     id: 8,
@@ -188,7 +187,7 @@ export const MOCK_DOCUMENTS: Document[] = [
     type: 'ksc',
     date: 'Updated 1 week ago',
     icon: '📋',
-    status: 'Ready'
+    status: 'Ready',
   },
 ];
 
@@ -196,7 +195,7 @@ export const MOCK_USER_STATS: UserStats = {
   activeApplications: 8,
   offersReceived: 2,
   connections: 45,
-  upcomingInterviews: 3
+  upcomingInterviews: 3,
 };
 
 export const MOCK_KSC_RESPONSES: KSCResponse[] = [];
@@ -224,12 +223,24 @@ export const MOCK_ANALYSIS_DATA: AnalysisData = {
     { keyword: 'Python', rate: 2 },
   ],
   matchedKeywords: [
-    'Community Support', 'Case Management', 'Communication', 'Market Health',
-    'Documentation', 'Accessibility', 'Accommodation', 'Data Monitoring'
+    'Community Support',
+    'Case Management',
+    'Communication',
+    'Market Health',
+    'Documentation',
+    'Accessibility',
+    'Accommodation',
+    'Data Monitoring',
   ],
   missingKeywords: [
-    'React.js', 'Typescript', 'Learning Programs', 'Node.js', 'Data Analysis', 'Jira', 'Mentorship'
-  ]
+    'React.js',
+    'Typescript',
+    'Learning Programs',
+    'Node.js',
+    'Data Analysis',
+    'Jira',
+    'Mentorship',
+  ],
 };
 
 export const MOCK_USER_PROFILE: UserProfile = {
@@ -244,22 +255,33 @@ export const MOCK_USER_PROFILE: UserProfile = {
       role: 'Senior Frontend Engineer',
       company: 'Tech Corp Inc.',
       date: '2022 - Present',
-      description: 'Leading the frontend architecture migration to React 18 and Next.js. Improved performance by 40%'
+      description:
+        'Leading the frontend architecture migration to React 18 and Next.js. Improved performance by 40%',
     },
     {
       role: 'Software Developer',
       company: 'StartUp Studio',
       date: '2020 - 2022',
-      description: 'Built and shipped 3 major products. Managed a team of 4 junior developers'
+      description: 'Built and shipped 3 major products. Managed a team of 4 junior developers',
     },
     {
       role: 'Junior Developer',
       company: 'Web Solutions',
       date: '2018 - 2020',
-      description: 'Full stack development using MERN stack. Implemented CI/CD pipelines'
-    }
+      description: 'Full stack development using MERN stack. Implemented CI/CD pipelines',
+    },
   ],
-  skills: ['React', 'TypeScript', 'Node.js', 'Tailwind', 'GraphQL', 'AWS', 'Python', 'Figma', 'PostgreSQL']
+  skills: [
+    'React',
+    'TypeScript',
+    'Node.js',
+    'Tailwind',
+    'GraphQL',
+    'AWS',
+    'Python',
+    'Figma',
+    'PostgreSQL',
+  ],
 };
 
 export const MOCK_OPPORTUNITIES: Opportunity[] = [
@@ -272,7 +294,8 @@ export const MOCK_OPPORTUNITIES: Opportunity[] = [
     salary: '$65k - $75k',
     salaryRange: '$65k - $75k',
     postedDate: '2 days ago',
-    description: 'Join our passionate team providing support to individuals with disabilities in community settings.',
+    description:
+      'Join our passionate team providing support to individuals with disabilities in community settings.',
     tags: ['Disability Support', 'Case Management', 'Mentoring'],
     isRemote: false,
     isFavorited: false,
@@ -286,9 +309,10 @@ export const MOCK_OPPORTUNITIES: Opportunity[] = [
     salary: '$60k - $70k',
     salaryRange: '$60k - $70k',
     postedDate: '5 days ago',
-    description: 'Support individuals with lived experience of mental health challenges in their recovery journey.',
+    description:
+      'Support individuals with lived experience of mental health challenges in their recovery journey.',
     tags: ['Mental Health', 'Peer Support', 'Group Facilitation'],
     isRemote: true,
     isFavorited: true,
-  }
+  },
 ];

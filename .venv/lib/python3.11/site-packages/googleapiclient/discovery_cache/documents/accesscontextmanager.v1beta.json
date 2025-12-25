@@ -29,14 +29,8 @@
   "parameters": {
     "$.xgafv": {
       "description": "V1 error format.",
-      "enum": [
-        "1",
-        "2"
-      ],
-      "enumDescriptions": [
-        "v1 error format",
-        "v2 error format"
-      ],
+      "enum": ["1", "2"],
+      "enumDescriptions": ["v1 error format", "v2 error format"],
       "location": "query",
       "type": "string"
     },
@@ -48,11 +42,7 @@
     "alt": {
       "default": "json",
       "description": "Data format for response.",
-      "enum": [
-        "json",
-        "media",
-        "proto"
-      ],
+      "enum": ["json", "media", "proto"],
       "enumDescriptions": [
         "Responses with Content-Type of application/json",
         "Media download with context-dependent Content-Type",
@@ -121,18 +111,14 @@
           "response": {
             "$ref": "Operation"
           },
-          "scopes": [
-            "https://www.googleapis.com/auth/cloud-platform"
-          ]
+          "scopes": ["https://www.googleapis.com/auth/cloud-platform"]
         },
         "delete": {
           "description": "Delete an AccessPolicy by resource name. The longrunning Operation will have a successful status once the AccessPolicy has been removed from long-lasting storage.",
           "flatPath": "v1beta/accessPolicies/{accessPoliciesId}",
           "httpMethod": "DELETE",
           "id": "accesscontextmanager.accessPolicies.delete",
-          "parameterOrder": [
-            "name"
-          ],
+          "parameterOrder": ["name"],
           "parameters": {
             "name": {
               "description": "Required. Resource name for the access policy to delete. Format `accessPolicies/{policy_id}`",
@@ -146,18 +132,14 @@
           "response": {
             "$ref": "Operation"
           },
-          "scopes": [
-            "https://www.googleapis.com/auth/cloud-platform"
-          ]
+          "scopes": ["https://www.googleapis.com/auth/cloud-platform"]
         },
         "get": {
           "description": "Get an AccessPolicy by name.",
           "flatPath": "v1beta/accessPolicies/{accessPoliciesId}",
           "httpMethod": "GET",
           "id": "accesscontextmanager.accessPolicies.get",
-          "parameterOrder": [
-            "name"
-          ],
+          "parameterOrder": ["name"],
           "parameters": {
             "name": {
               "description": "Required. Resource name for the access policy to get. Format `accessPolicies/{policy_id}`",
@@ -171,9 +153,7 @@
           "response": {
             "$ref": "AccessPolicy"
           },
-          "scopes": [
-            "https://www.googleapis.com/auth/cloud-platform"
-          ]
+          "scopes": ["https://www.googleapis.com/auth/cloud-platform"]
         },
         "list": {
           "description": "List all AccessPolicies under a container.",
@@ -203,18 +183,14 @@
           "response": {
             "$ref": "ListAccessPoliciesResponse"
           },
-          "scopes": [
-            "https://www.googleapis.com/auth/cloud-platform"
-          ]
+          "scopes": ["https://www.googleapis.com/auth/cloud-platform"]
         },
         "patch": {
           "description": "Update an AccessPolicy. The longrunning Operation from this RPC will have a successful status once the changes to the AccessPolicy have propagated to long-lasting storage. Syntactic and basic semantic errors will be returned in `metadata` as a BadRequest proto.",
           "flatPath": "v1beta/accessPolicies/{accessPoliciesId}",
           "httpMethod": "PATCH",
           "id": "accesscontextmanager.accessPolicies.patch",
-          "parameterOrder": [
-            "name"
-          ],
+          "parameterOrder": ["name"],
           "parameters": {
             "name": {
               "description": "Output only. Resource name of the `AccessPolicy`. Format: `accessPolicies/{policy_id}`",
@@ -237,9 +213,7 @@
           "response": {
             "$ref": "Operation"
           },
-          "scopes": [
-            "https://www.googleapis.com/auth/cloud-platform"
-          ]
+          "scopes": ["https://www.googleapis.com/auth/cloud-platform"]
         }
       },
       "resources": {
@@ -250,9 +224,7 @@
               "flatPath": "v1beta/accessPolicies/{accessPoliciesId}/accessLevels",
               "httpMethod": "POST",
               "id": "accesscontextmanager.accessPolicies.accessLevels.create",
-              "parameterOrder": [
-                "parent"
-              ],
+              "parameterOrder": ["parent"],
               "parameters": {
                 "parent": {
                   "description": "Required. Resource name for the access policy which owns this Access Level. Format: `accessPolicies/{policy_id}`",
@@ -269,18 +241,14 @@
               "response": {
                 "$ref": "Operation"
               },
-              "scopes": [
-                "https://www.googleapis.com/auth/cloud-platform"
-              ]
+              "scopes": ["https://www.googleapis.com/auth/cloud-platform"]
             },
             "delete": {
               "description": "Delete an Access Level by resource name. The longrunning operation from this RPC will have a successful status once the Access Level has been removed from long-lasting storage.",
               "flatPath": "v1beta/accessPolicies/{accessPoliciesId}/accessLevels/{accessLevelsId}",
               "httpMethod": "DELETE",
               "id": "accesscontextmanager.accessPolicies.accessLevels.delete",
-              "parameterOrder": [
-                "name"
-              ],
+              "parameterOrder": ["name"],
               "parameters": {
                 "name": {
                   "description": "Required. Resource name for the Access Level. Format: `accessPolicies/{policy_id}/accessLevels/{access_level_id}`",
@@ -294,26 +262,18 @@
               "response": {
                 "$ref": "Operation"
               },
-              "scopes": [
-                "https://www.googleapis.com/auth/cloud-platform"
-              ]
+              "scopes": ["https://www.googleapis.com/auth/cloud-platform"]
             },
             "get": {
               "description": "Get an Access Level by resource name.",
               "flatPath": "v1beta/accessPolicies/{accessPoliciesId}/accessLevels/{accessLevelsId}",
               "httpMethod": "GET",
               "id": "accesscontextmanager.accessPolicies.accessLevels.get",
-              "parameterOrder": [
-                "name"
-              ],
+              "parameterOrder": ["name"],
               "parameters": {
                 "accessLevelFormat": {
                   "description": "Whether to return `BasicLevels` in the Cloud Common Expression Language rather than as `BasicLevels`. Defaults to AS_DEFINED, where Access Levels are returned as `BasicLevels` or `CustomLevels` based on how they were created. If set to CEL, all Access Levels are returned as `CustomLevels`. In the CEL case, `BasicLevels` are translated to equivalent `CustomLevels`.",
-                  "enum": [
-                    "LEVEL_FORMAT_UNSPECIFIED",
-                    "AS_DEFINED",
-                    "CEL"
-                  ],
+                  "enum": ["LEVEL_FORMAT_UNSPECIFIED", "AS_DEFINED", "CEL"],
                   "enumDescriptions": [
                     "The format was not specified.",
                     "Uses the format the resource was defined in. BasicLevels are returned as BasicLevels, CustomLevels are returned as CustomLevels.",
@@ -334,26 +294,18 @@
               "response": {
                 "$ref": "AccessLevel"
               },
-              "scopes": [
-                "https://www.googleapis.com/auth/cloud-platform"
-              ]
+              "scopes": ["https://www.googleapis.com/auth/cloud-platform"]
             },
             "list": {
               "description": "List all Access Levels for an access policy.",
               "flatPath": "v1beta/accessPolicies/{accessPoliciesId}/accessLevels",
               "httpMethod": "GET",
               "id": "accesscontextmanager.accessPolicies.accessLevels.list",
-              "parameterOrder": [
-                "parent"
-              ],
+              "parameterOrder": ["parent"],
               "parameters": {
                 "accessLevelFormat": {
                   "description": "Whether to return `BasicLevels` in the Cloud Common Expression language, as `CustomLevels`, rather than as `BasicLevels`. Defaults to returning `AccessLevels` in the format they were defined.",
-                  "enum": [
-                    "LEVEL_FORMAT_UNSPECIFIED",
-                    "AS_DEFINED",
-                    "CEL"
-                  ],
+                  "enum": ["LEVEL_FORMAT_UNSPECIFIED", "AS_DEFINED", "CEL"],
                   "enumDescriptions": [
                     "The format was not specified.",
                     "Uses the format the resource was defined in. BasicLevels are returned as BasicLevels, CustomLevels are returned as CustomLevels.",
@@ -385,18 +337,14 @@
               "response": {
                 "$ref": "ListAccessLevelsResponse"
               },
-              "scopes": [
-                "https://www.googleapis.com/auth/cloud-platform"
-              ]
+              "scopes": ["https://www.googleapis.com/auth/cloud-platform"]
             },
             "patch": {
               "description": "Update an Access Level. The longrunning operation from this RPC will have a successful status once the changes to the Access Level have propagated to long-lasting storage. Access Levels containing errors will result in an error response for the first error encountered.",
               "flatPath": "v1beta/accessPolicies/{accessPoliciesId}/accessLevels/{accessLevelsId}",
               "httpMethod": "PATCH",
               "id": "accesscontextmanager.accessPolicies.accessLevels.patch",
-              "parameterOrder": [
-                "name"
-              ],
+              "parameterOrder": ["name"],
               "parameters": {
                 "name": {
                   "description": "Resource name for the `AccessLevel`. Format: `accessPolicies/{access_policy}/accessLevels/{access_level}`. The `access_level` component must begin with a letter, followed by alphanumeric characters or `_`. Its maximum length is 50 characters. After you create an `AccessLevel`, you cannot change its `name`.",
@@ -419,9 +367,7 @@
               "response": {
                 "$ref": "Operation"
               },
-              "scopes": [
-                "https://www.googleapis.com/auth/cloud-platform"
-              ]
+              "scopes": ["https://www.googleapis.com/auth/cloud-platform"]
             }
           }
         },
@@ -432,9 +378,7 @@
               "flatPath": "v1beta/accessPolicies/{accessPoliciesId}/servicePerimeters",
               "httpMethod": "POST",
               "id": "accesscontextmanager.accessPolicies.servicePerimeters.create",
-              "parameterOrder": [
-                "parent"
-              ],
+              "parameterOrder": ["parent"],
               "parameters": {
                 "parent": {
                   "description": "Required. Resource name for the access policy which owns this Service Perimeter. Format: `accessPolicies/{policy_id}`",
@@ -451,18 +395,14 @@
               "response": {
                 "$ref": "Operation"
               },
-              "scopes": [
-                "https://www.googleapis.com/auth/cloud-platform"
-              ]
+              "scopes": ["https://www.googleapis.com/auth/cloud-platform"]
             },
             "delete": {
               "description": "Delete a Service Perimeter by resource name. The longrunning operation from this RPC will have a successful status once the Service Perimeter has been removed from long-lasting storage.",
               "flatPath": "v1beta/accessPolicies/{accessPoliciesId}/servicePerimeters/{servicePerimetersId}",
               "httpMethod": "DELETE",
               "id": "accesscontextmanager.accessPolicies.servicePerimeters.delete",
-              "parameterOrder": [
-                "name"
-              ],
+              "parameterOrder": ["name"],
               "parameters": {
                 "name": {
                   "description": "Required. Resource name for the Service Perimeter. Format: `accessPolicies/{policy_id}/servicePerimeters/{service_perimeter_id}`",
@@ -476,18 +416,14 @@
               "response": {
                 "$ref": "Operation"
               },
-              "scopes": [
-                "https://www.googleapis.com/auth/cloud-platform"
-              ]
+              "scopes": ["https://www.googleapis.com/auth/cloud-platform"]
             },
             "get": {
               "description": "Get a Service Perimeter by resource name.",
               "flatPath": "v1beta/accessPolicies/{accessPoliciesId}/servicePerimeters/{servicePerimetersId}",
               "httpMethod": "GET",
               "id": "accesscontextmanager.accessPolicies.servicePerimeters.get",
-              "parameterOrder": [
-                "name"
-              ],
+              "parameterOrder": ["name"],
               "parameters": {
                 "name": {
                   "description": "Required. Resource name for the Service Perimeter. Format: `accessPolicies/{policy_id}/servicePerimeters/{service_perimeters_id}`",
@@ -501,18 +437,14 @@
               "response": {
                 "$ref": "ServicePerimeter"
               },
-              "scopes": [
-                "https://www.googleapis.com/auth/cloud-platform"
-              ]
+              "scopes": ["https://www.googleapis.com/auth/cloud-platform"]
             },
             "list": {
               "description": "List all Service Perimeters for an access policy.",
               "flatPath": "v1beta/accessPolicies/{accessPoliciesId}/servicePerimeters",
               "httpMethod": "GET",
               "id": "accesscontextmanager.accessPolicies.servicePerimeters.list",
-              "parameterOrder": [
-                "parent"
-              ],
+              "parameterOrder": ["parent"],
               "parameters": {
                 "pageSize": {
                   "description": "Number of Service Perimeters to include in the list. Default 100.",
@@ -537,18 +469,14 @@
               "response": {
                 "$ref": "ListServicePerimetersResponse"
               },
-              "scopes": [
-                "https://www.googleapis.com/auth/cloud-platform"
-              ]
+              "scopes": ["https://www.googleapis.com/auth/cloud-platform"]
             },
             "patch": {
               "description": "Update a Service Perimeter. The longrunning operation from this RPC will have a successful status once the changes to the Service Perimeter have propagated to long-lasting storage. Service Perimeter containing errors will result in an error response for the first error encountered.",
               "flatPath": "v1beta/accessPolicies/{accessPoliciesId}/servicePerimeters/{servicePerimetersId}",
               "httpMethod": "PATCH",
               "id": "accesscontextmanager.accessPolicies.servicePerimeters.patch",
-              "parameterOrder": [
-                "name"
-              ],
+              "parameterOrder": ["name"],
               "parameters": {
                 "name": {
                   "description": "Resource name for the `ServicePerimeter`. Format: `accessPolicies/{access_policy}/servicePerimeters/{service_perimeter}`. The `service_perimeter` component must begin with a letter, followed by alphanumeric characters or `_`. After you create a `ServicePerimeter`, you cannot change its `name`.",
@@ -571,9 +499,7 @@
               "response": {
                 "$ref": "Operation"
               },
-              "scopes": [
-                "https://www.googleapis.com/auth/cloud-platform"
-              ]
+              "scopes": ["https://www.googleapis.com/auth/cloud-platform"]
             }
           }
         }
@@ -586,9 +512,7 @@
           "flatPath": "v1beta/operations/{operationsId}",
           "httpMethod": "GET",
           "id": "accesscontextmanager.operations.get",
-          "parameterOrder": [
-            "name"
-          ],
+          "parameterOrder": ["name"],
           "parameters": {
             "name": {
               "description": "The name of the operation resource.",
@@ -602,9 +526,7 @@
           "response": {
             "$ref": "Operation"
           },
-          "scopes": [
-            "https://www.googleapis.com/auth/cloud-platform"
-          ]
+          "scopes": ["https://www.googleapis.com/auth/cloud-platform"]
         }
       }
     }
@@ -670,10 +592,7 @@
       "properties": {
         "combiningFunction": {
           "description": "How the `conditions` list should be combined to determine if a request is granted this `AccessLevel`. If AND is used, each `Condition` in `conditions` must be satisfied for the `AccessLevel` to be applied. If OR is used, at least one `Condition` in `conditions` must be satisfied for the `AccessLevel` to be applied. Default behavior is AND.",
-          "enum": [
-            "AND",
-            "OR"
-          ],
+          "enum": ["AND", "OR"],
           "enumDescriptions": [
             "All `Conditions` must be true for the `BasicLevel` to be true.",
             "If at least one `Condition` is true, then the `BasicLevel` is true."
@@ -751,12 +670,7 @@
         "allowedDeviceManagementLevels": {
           "description": "Allowed device management levels, an empty list allows all management levels.",
           "items": {
-            "enum": [
-              "MANAGEMENT_UNSPECIFIED",
-              "NONE",
-              "BASIC",
-              "COMPLETE"
-            ],
+            "enum": ["MANAGEMENT_UNSPECIFIED", "NONE", "BASIC", "COMPLETE"],
             "enumDescriptions": [
               "The device's management level is not specified or not known.",
               "The device is not managed.",
@@ -971,10 +885,7 @@
         },
         "perimeterType": {
           "description": "Perimeter type indicator. A single project is allowed to be a member of single regular perimeter, but multiple service perimeter bridges. A project cannot be a included in a perimeter bridge without being included in regular perimeter. For perimeter bridges, restricted/unrestricted service lists as well as access lists must be empty.",
-          "enum": [
-            "PERIMETER_TYPE_REGULAR",
-            "PERIMETER_TYPE_BRIDGE"
-          ],
+          "enum": ["PERIMETER_TYPE_REGULAR", "PERIMETER_TYPE_BRIDGE"],
           "enumDescriptions": [
             "Regular Perimeter. When no value is specified, the perimeter uses this type.",
             "Perimeter Bridge."

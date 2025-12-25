@@ -67,7 +67,10 @@ interface InventoryReport {
   unusedComponents: string[];
   mostUsedComponents: Array<{ name: string; count: number }>;
   recommendations: string[];
-  migrationSummary: Record<'migrated' | 'mixed' | 'not_migrated' | 'expressive' | 'unknown', number>;
+  migrationSummary: Record<
+    'migrated' | 'mixed' | 'not_migrated' | 'expressive' | 'unknown',
+    number
+  >;
   m3ExpressiveAdoption: {
     withDesignTokens: number;
     withThemeProvider: number;
@@ -91,8 +94,12 @@ function categorizeComponent(filePath: string): ComponentInfo['category'] {
     return 'layout';
   } else if (relativePath.startsWith('library/') || relativePath.startsWith('library\\')) {
     return 'library';
-  } else if (relativePath.startsWith('documents/') || relativePath.startsWith('documents\\') ||
-             relativePath.startsWith('document/') || relativePath.startsWith('document\\')) {
+  } else if (
+    relativePath.startsWith('documents/') ||
+    relativePath.startsWith('documents\\') ||
+    relativePath.startsWith('document/') ||
+    relativePath.startsWith('document\\')
+  ) {
     return 'documents';
   } else if (relativePath.startsWith('main/') || relativePath.startsWith('main\\')) {
     return 'main';
@@ -101,13 +108,20 @@ function categorizeComponent(filePath: string): ComponentInfo['category'] {
   return 'other';
 }
 
-function calculateComplexity(linesOfCode: number, dependencies: number): ComponentInfo['complexity'] {
+function calculateComplexity(
+  linesOfCode: number,
+  dependencies: number
+): ComponentInfo['complexity'] {
   if (linesOfCode < 50 && dependencies < 3) return 'simple';
   if (linesOfCode < 200 && dependencies < 10) return 'medium';
   return 'complex';
 }
 
-function findRelatedFiles(componentPath: string): { hasTests: boolean; hasStories: boolean; hasDocs: boolean } {
+function findRelatedFiles(componentPath: string): {
+  hasTests: boolean;
+  hasStories: boolean;
+  hasDocs: boolean;
+} {
   const dir = path.dirname(componentPath);
   const baseName = path.basename(componentPath, path.extname(componentPath));
 
@@ -124,15 +138,12 @@ function findRelatedFiles(componentPath: string): { hasTests: boolean; hasStorie
     path.join(dir, `${baseName}.stories.mdx`),
   ];
 
-  const docPatterns = [
-    path.join(dir, `${baseName}.md`),
-    path.join(dir, 'README.md'),
-  ];
+  const docPatterns = [path.join(dir, `${baseName}.md`), path.join(dir, 'README.md')];
 
   return {
-    hasTests: testPatterns.some(p => fs.existsSync(p)),
-    hasStories: storyPatterns.some(p => fs.existsSync(p)),
-    hasDocs: docPatterns.some(p => fs.existsSync(p)),
+    hasTests: testPatterns.some((p) => fs.existsSync(p)),
+    hasStories: storyPatterns.some((p) => fs.existsSync(p)),
+    hasDocs: docPatterns.some((p) => fs.existsSync(p)),
   };
 }
 
@@ -146,16 +157,17 @@ function analyzeComponents(): InventoryReport {
 
   console.log('Analyzing components...');
 
-  const componentFiles = project.getSourceFiles()
-    .filter(sf => {
-      const filePath = sf.getFilePath();
-      return filePath.includes('/components/') &&
-             filePath.endsWith('.tsx') &&
-             !filePath.includes('.test.') &&
-             !filePath.includes('.stories.') &&
-             !filePath.includes('node_modules') &&
-             !filePath.includes('/Figma UI Files/');
-    });
+  const componentFiles = project.getSourceFiles().filter((sf) => {
+    const filePath = sf.getFilePath();
+    return (
+      filePath.includes('/components/') &&
+      filePath.endsWith('.tsx') &&
+      !filePath.includes('.test.') &&
+      !filePath.includes('.stories.') &&
+      !filePath.includes('node_modules') &&
+      !filePath.includes('/Figma UI Files/')
+    );
+  });
 
   console.log(`Found ${componentFiles.length} component files`);
 
@@ -177,14 +189,14 @@ function analyzeComponents(): InventoryReport {
 
     // Count lines (excluding imports and blank lines)
     const text = sourceFile.getFullText();
-    const lines = text.split('\n').filter(line => {
+    const lines = text.split('\n').filter((line) => {
       const trimmed = line.trim();
       return trimmed.length > 0 && !trimmed.startsWith('import ') && !trimmed.startsWith('//');
     });
 
     // Get dependencies (imported modules)
     const dependencies: string[] = [];
-    sourceFile.getImportDeclarations().forEach(imp => {
+    sourceFile.getImportDeclarations().forEach((imp) => {
       const moduleSpecifier = imp.getModuleSpecifierValue();
       if (moduleSpecifier.startsWith('.') || moduleSpecifier.startsWith('@/')) {
         dependencies.push(moduleSpecifier);
@@ -193,28 +205,42 @@ function analyzeComponents(): InventoryReport {
 
     // Determine migration flags and M3 Expressive adoption
     const importDecls = sourceFile.getImportDeclarations();
-    const usesMUI = importDecls.some(imp => {
+    const usesMUI = importDecls.some((imp) => {
       const mod = imp.getModuleSpecifierValue();
       return mod.startsWith('@mui/material') || mod.startsWith('@mui/icons-material');
     });
-    const usesCustomUI = importDecls.some(imp => {
+    const usesCustomUI = importDecls.some((imp) => {
       const mod = imp.getModuleSpecifierValue();
       // local UI layer patterns
-      return mod.includes('/components/ui/') || mod.startsWith('../ui') || mod.startsWith('./ui') || mod.includes('src/components/ui/');
+      return (
+        mod.includes('/components/ui/') ||
+        mod.startsWith('../ui') ||
+        mod.startsWith('./ui') ||
+        mod.includes('src/components/ui/')
+      );
     });
 
     // M3 Expressive feature detection
-    const usesDesignTokens = text.includes('var(--') || text.includes('theme.palette') || text.includes('theme.spacing');
-    const usesThemeProvider = importDecls.some(imp => {
-      const mod = imp.getModuleSpecifierValue();
-      return mod.includes('@mui/material/styles') || mod.includes('ThemeProvider');
-    }) || text.includes('useTheme()') || text.includes('useTheme(');
-    const usesM3Components = importDecls.some(imp => {
+    const usesDesignTokens =
+      text.includes('var(--') || text.includes('theme.palette') || text.includes('theme.spacing');
+    const usesThemeProvider =
+      importDecls.some((imp) => {
+        const mod = imp.getModuleSpecifierValue();
+        return mod.includes('@mui/material/styles') || mod.includes('ThemeProvider');
+      }) ||
+      text.includes('useTheme()') ||
+      text.includes('useTheme(');
+    const usesM3Components = importDecls.some((imp) => {
       const mod = imp.getModuleSpecifierValue();
       // Check for common M3 components
-      return mod.includes('@mui/material/') && (
-        mod.includes('Card') || mod.includes('Button') || mod.includes('TextField') ||
-        mod.includes('Dialog') || mod.includes('AppBar') || mod.includes('Chip')
+      return (
+        mod.includes('@mui/material/') &&
+        (mod.includes('Card') ||
+          mod.includes('Button') ||
+          mod.includes('TextField') ||
+          mod.includes('Dialog') ||
+          mod.includes('AppBar') ||
+          mod.includes('Chip'))
       );
     });
 
@@ -266,11 +292,10 @@ function analyzeComponents(): InventoryReport {
   console.log('Analyzing imports and usage...');
 
   // Second pass: analyze all source files to find component usage
-  const allSourceFiles = project.getSourceFiles()
-    .filter(sf => {
-      const p = sf.getFilePath();
-      return !p.includes('node_modules') && !p.includes('/Figma UI Files/');
-    });
+  const allSourceFiles = project.getSourceFiles().filter((sf) => {
+    const p = sf.getFilePath();
+    return !p.includes('node_modules') && !p.includes('/Figma UI Files/');
+  });
 
   for (const sourceFile of allSourceFiles) {
     const imports = sourceFile.getImportDeclarations();
@@ -292,7 +317,7 @@ function analyzeComponents(): InventoryReport {
         ];
 
         for (const possiblePath of possiblePaths) {
-          const component = components.find(c => c.path === possiblePath);
+          const component = components.find((c) => c.path === possiblePath);
           if (component) {
             component.usageCount++;
             if (!component.importedBy.includes(sourceFile.getFilePath())) {
@@ -308,38 +333,45 @@ function analyzeComponents(): InventoryReport {
   console.log('Generating report...');
 
   // Generate statistics
-  const componentsByCategory = components.reduce((acc, c) => {
-    acc[c.category] = (acc[c.category] || 0) + 1;
-    return acc;
-  }, {} as Record<string, number>);
+  const componentsByCategory = components.reduce(
+    (acc, c) => {
+      acc[c.category] = (acc[c.category] || 0) + 1;
+      return acc;
+    },
+    {} as Record<string, number>
+  );
 
-  const unusedComponents = components
-    .filter(c => c.usageCount === 0)
-    .map(c => c.relativePath);
+  const unusedComponents = components.filter((c) => c.usageCount === 0).map((c) => c.relativePath);
 
   const mostUsedComponents = components
     .sort((a, b) => b.usageCount - a.usageCount)
     .slice(0, 10)
-    .map(c => ({ name: c.name, count: c.usageCount }));
+    .map((c) => ({ name: c.name, count: c.usageCount }));
 
   // Generate recommendations
   const recommendations: string[] = [];
 
-  const componentsWithoutTests = components.filter(c => !c.hasTests);
+  const componentsWithoutTests = components.filter((c) => !c.hasTests);
   if (componentsWithoutTests.length > 0) {
     recommendations.push(
       `${componentsWithoutTests.length} components lack test coverage. Consider adding tests for: ` +
-      componentsWithoutTests.slice(0, 5).map(c => c.name).join(', ') +
-      (componentsWithoutTests.length > 5 ? '...' : '')
+        componentsWithoutTests
+          .slice(0, 5)
+          .map((c) => c.name)
+          .join(', ') +
+        (componentsWithoutTests.length > 5 ? '...' : '')
     );
   }
 
-  const componentsWithoutStories = components.filter(c => c.isReusable && !c.hasStories);
+  const componentsWithoutStories = components.filter((c) => c.isReusable && !c.hasStories);
   if (componentsWithoutStories.length > 0) {
     recommendations.push(
       `${componentsWithoutStories.length} reusable components lack Storybook stories. Consider documenting: ` +
-      componentsWithoutStories.slice(0, 5).map(c => c.name).join(', ') +
-      (componentsWithoutStories.length > 5 ? '...' : '')
+        componentsWithoutStories
+          .slice(0, 5)
+          .map((c) => c.name)
+          .join(', ') +
+        (componentsWithoutStories.length > 5 ? '...' : '')
     );
   }
 
@@ -349,67 +381,87 @@ function analyzeComponents(): InventoryReport {
     );
   }
 
-  const complexComponents = components.filter(c => c.complexity === 'complex');
+  const complexComponents = components.filter((c) => c.complexity === 'complex');
   if (complexComponents.length > 0) {
     recommendations.push(
       `${complexComponents.length} components are marked as complex (>200 LOC or >10 dependencies). Consider refactoring: ` +
-      complexComponents.slice(0, 5).map(c => c.name).join(', ') +
-      (complexComponents.length > 5 ? '...' : '')
+        complexComponents
+          .slice(0, 5)
+          .map((c) => c.name)
+          .join(', ') +
+        (complexComponents.length > 5 ? '...' : '')
     );
   }
 
   // M3 Expressive specific recommendations
-  const mixedComponents = components.filter(c => c.migrationStatus === 'mixed');
+  const mixedComponents = components.filter((c) => c.migrationStatus === 'mixed');
   if (mixedComponents.length > 0) {
     recommendations.push(
       `${mixedComponents.length} components have mixed MUI/custom UI usage. Consolidate to pure MUI for M3 consistency: ` +
-      mixedComponents.slice(0, 5).map(c => c.name).join(', ') +
-      (mixedComponents.length > 5 ? '...' : '')
+        mixedComponents
+          .slice(0, 5)
+          .map((c) => c.name)
+          .join(', ') +
+        (mixedComponents.length > 5 ? '...' : '')
     );
   }
 
-  const notMigratedComponents = components.filter(c => c.migrationStatus === 'not_migrated');
+  const notMigratedComponents = components.filter((c) => c.migrationStatus === 'not_migrated');
   if (notMigratedComponents.length > 0) {
     recommendations.push(
       `${notMigratedComponents.length} components still use custom UI only. Migrate to Material UI components: ` +
-      notMigratedComponents.slice(0, 5).map(c => c.name).join(', ') +
-      (notMigratedComponents.length > 5 ? '...' : '')
+        notMigratedComponents
+          .slice(0, 5)
+          .map((c) => c.name)
+          .join(', ') +
+        (notMigratedComponents.length > 5 ? '...' : '')
     );
   }
 
   // Migration summary
-  const migrationSummary = components.reduce((acc, c) => {
-    acc[c.migrationStatus] = (acc[c.migrationStatus] || 0) + 1;
-    return acc;
-  }, {
-    migrated: 0,
-    mixed: 0,
-    not_migrated: 0,
-    expressive: 0,
-    unknown: 0,
-  } as Record<'migrated' | 'mixed' | 'not_migrated' | 'expressive' | 'unknown', number>);
+  const migrationSummary = components.reduce(
+    (acc, c) => {
+      acc[c.migrationStatus] = (acc[c.migrationStatus] || 0) + 1;
+      return acc;
+    },
+    {
+      migrated: 0,
+      mixed: 0,
+      not_migrated: 0,
+      expressive: 0,
+      unknown: 0,
+    } as Record<'migrated' | 'mixed' | 'not_migrated' | 'expressive' | 'unknown', number>
+  );
 
   // M3 Expressive adoption metrics
   const m3ExpressiveAdoption = {
-    withDesignTokens: components.filter(c => c.usesDesignTokens).length,
-    withThemeProvider: components.filter(c => c.usesThemeProvider).length,
-    withM3Components: components.filter(c => c.usesM3Components).length,
-    fullyExpressive: components.filter(c => c.migrationStatus === 'expressive').length,
+    withDesignTokens: components.filter((c) => c.usesDesignTokens).length,
+    withThemeProvider: components.filter((c) => c.usesThemeProvider).length,
+    withM3Components: components.filter((c) => c.usesM3Components).length,
+    fullyExpressive: components.filter((c) => c.migrationStatus === 'expressive').length,
   };
 
-  const migratedWithoutTokens = components.filter(c => c.migrationStatus === 'migrated' && !c.usesDesignTokens);
+  const migratedWithoutTokens = components.filter(
+    (c) => c.migrationStatus === 'migrated' && !c.usesDesignTokens
+  );
   if (migratedWithoutTokens.length > 0) {
     recommendations.push(
       `${migratedWithoutTokens.length} migrated components don't use design tokens. Adopt M3 Expressive theming: ` +
-      migratedWithoutTokens.slice(0, 5).map(c => c.name).join(', ') +
-      (migratedWithoutTokens.length > 5 ? '...' : '')
+        migratedWithoutTokens
+          .slice(0, 5)
+          .map((c) => c.name)
+          .join(', ') +
+        (migratedWithoutTokens.length > 5 ? '...' : '')
     );
   }
 
-  const fullyExpressivePercent = ((m3ExpressiveAdoption.fullyExpressive / components.length) * 100).toFixed(1);
+  const fullyExpressivePercent = (
+    (m3ExpressiveAdoption.fullyExpressive / components.length) *
+    100
+  ).toFixed(1);
   recommendations.push(
     `M3 Expressive Adoption: ${fullyExpressivePercent}% (${m3ExpressiveAdoption.fullyExpressive}/${components.length}) fully adopted. ` +
-    `Target: 80%+ for complete M3 Expressive migration.`
+      `Target: 80%+ for complete M3 Expressive migration.`
   );
 
   const report: InventoryReport = {

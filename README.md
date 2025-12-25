@@ -5,37 +5,41 @@
 ## 🚀 Quick Start
 
 1. **Clone the repository**
+
    ```bash
    git clone https://github.com/yourusername/careercopilot.git
    cd careercopilot
    ```
 
 2. **Install dependencies**
+
    ```bash
    # Install frontend dependencies
    cd frontend
    yarn install
-   
+
    # Install backend dependencies
    cd ../backend
    pip install -r requirements.txt
    ```
 
 3. **Start development servers**
+
    ```bash
    # Start frontend (in frontend directory)
    yarn dev
-   
+
    # Start backend (in backend directory)
    uvicorn app.main:app --reload
    ```
 
 4. **Run tests**
+
    ```bash
    # Frontend tests
    cd frontend
    yarn test
-   
+
    # Backend tests
    cd ../backend
    pytest
@@ -44,6 +48,7 @@
 ## ✨ Features
 
 ### Core Features
+
 - **AI-Powered Resume Builder**
   - Create and tailor your resume for specific job applications
   - Get AI-powered suggestions for improvement
@@ -61,6 +66,7 @@
   - Dark/light theme support
 
 ### Coming Soon
+
 - **Automated Application Filler**
   - Automatically fill out job applications
   - Save time on repetitive tasks
@@ -75,6 +81,7 @@
 CareerCopilot follows a modern, component-based architecture with a clear separation of concerns.
 
 ### Frontend
+
 - **Framework**: React 18 with TypeScript
 - **UI Library**: Material-UI v5
 - **State Management**: React Context API
@@ -87,12 +94,14 @@ CareerCopilot follows a modern, component-based architecture with a clear separa
 - **API Client**: Axios
 
 ### Backend
+
 - **Framework**: FastAPI (Python)
 - **Database**: Firestore
 - **Authentication**: Firebase Auth
 - **API**: RESTful API design
 
 ### Infrastructure
+
 - **Hosting**: Firebase Hosting
 - **Serverless**: Firebase Functions
 - **CI/CD**: GitHub Actions
@@ -101,42 +110,46 @@ CareerCopilot follows a modern, component-based architecture with a clear separa
 ## 🛠️ Technology Stack
 
 ### Frontend
-| Category           | Technology                          |
-|-------------------|-------------------------------------|
-| Framework         | React 18                            |
-| Language          | TypeScript                          |
-| UI Library        | Material-UI v5                      |
-| State Management  | React Context API                   |
-| Routing           | React Router v6                     |
-| Build Tool        | Vite                                |
-| Testing           | Jest, React Testing Library         |
-| E2E Testing       | Playwright                          |
-| Styling           | Emotion, Tailwind CSS               |
-| Form Handling     | React Hook Form                     |
-| API Client        | Axios                              |
+
+| Category         | Technology                  |
+| ---------------- | --------------------------- |
+| Framework        | React 18                    |
+| Language         | TypeScript                  |
+| UI Library       | Material-UI v5              |
+| State Management | React Context API           |
+| Routing          | React Router v6             |
+| Build Tool       | Vite                        |
+| Testing          | Jest, React Testing Library |
+| E2E Testing      | Playwright                  |
+| Styling          | Emotion, Tailwind CSS       |
+| Form Handling    | React Hook Form             |
+| API Client       | Axios                       |
 
 ### Backend
-| Category           | Technology                          |
-|-------------------|-------------------------------------|
-| Framework         | FastAPI (Python)                   |
-| Database          | Firestore                          |
-| Authentication    | Firebase Auth                      |
-| Caching           | Firestore                          |
-| Background Tasks  | Celery                             |
-| Testing           | Pytest                             |
+
+| Category         | Technology       |
+| ---------------- | ---------------- |
+| Framework        | FastAPI (Python) |
+| Database         | Firestore        |
+| Authentication   | Firebase Auth    |
+| Caching          | Firestore        |
+| Background Tasks | Celery           |
+| Testing          | Pytest           |
 
 ### DevOps
-| Category           | Technology                          |
-|-------------------|-------------------------------------|
-| CI/CD             | GitHub Actions                      |
-| Hosting           | Firebase Hosting & Functions       |
-| Monitoring        | Firebase Monitoring                |
-| Logging           | Google Cloud Logging               |
-| Error Tracking    | Sentry                             |
+
+| Category       | Technology                   |
+| -------------- | ---------------------------- |
+| CI/CD          | GitHub Actions               |
+| Hosting        | Firebase Hosting & Functions |
+| Monitoring     | Firebase Monitoring          |
+| Logging        | Google Cloud Logging         |
+| Error Tracking | Sentry                       |
 
 ## 📋 Prerequisites
 
 ### Development Environment
+
 - [Node.js](https://nodejs.org/) (v18 or later)
 - [Yarn](https://yarnpkg.com/) (v1.22.19 or later)
 - [Python](https://www.python.org/) (v3.11 or later)
@@ -144,6 +157,7 @@ CareerCopilot follows a modern, component-based architecture with a clear separa
 - [Docker](https://www.docker.com/) (for local development)
 
 ### Recommended Tools
+
 - [VS Code](https://code.visualstudio.com/)
   - Extensions:
     - ESLint
@@ -152,6 +166,7 @@ CareerCopilot follows a modern, component-based architecture with a clear separa
     - Material Icon Theme
 
 ### Environment Variables
+
 Create a `.env` file in the project root with the following variables:
 
 ```env

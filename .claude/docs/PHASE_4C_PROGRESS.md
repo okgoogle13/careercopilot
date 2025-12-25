@@ -9,6 +9,7 @@
 ## Completed Migrations (3)
 
 ### 1. Alert Component ✅
+
 - **File:** `frontend/src/components/Alert/Alert.tsx`
 - **Migration:** MUI Alert → M3Alert wrapper
 - **Changes:**
@@ -20,6 +21,7 @@
 - **Result:** 100% M3 compliance
 
 ### 2. Badge Component ✅
+
 - **File:** `frontend/src/components/badge/badge.tsx`
 - **Migration:** MUI Chip → M3Badge wrapper
 - **Changes:**
@@ -31,6 +33,7 @@
 - **Result:** 100% M3 compliance
 
 ### 3. Dialog Component ✅
+
 - **File:** `frontend/src/components/ui/Dialog/Dialog.tsx`
 - **Migration:** MUI Dialog → M3Dialog wrapper
 - **Changes:**
@@ -53,6 +56,7 @@
 ### HIGH PRIORITY: Modal Components (4 Remaining)
 
 #### ConfirmTagsModal (PENDING)
+
 - **Path:** `frontend/src/components/ConfirmTagsModal/ConfirmTagsModal.tsx`
 - **Complexity:** HIGH (form handling + validation)
 - **Requires:**
@@ -65,6 +69,7 @@
 - **Status:** Ready for migration
 
 #### ApplicationGeneratorModal (PENDING)
+
 - **Path:** `frontend/src/components/ApplicationGeneratorModal.tsx`
 - **Complexity:** HIGH (includes Stepper)
 - **Requires:**
@@ -77,6 +82,7 @@
 - **Status:** Ready for migration (Stepper implementation may be complex)
 
 #### SmartUploadModal (PENDING)
+
 - **Path:** `frontend/src/components/SmartUploadModal.tsx`
 - **Complexity:** MEDIUM
 - **Requires:**
@@ -89,6 +95,7 @@
 - **Status:** Ready for migration
 
 #### Toast Component (PENDING)
+
 - **Path:** `frontend/src/components/ui/Toast/Toast.tsx`
 - **Complexity:** MEDIUM (custom positioning)
 - **Requires:**
@@ -102,6 +109,7 @@
 ### MEDIUM PRIORITY: Form Components (2)
 
 #### M3Select (PENDING)
+
 - **Path:** `frontend/src/components/M3Select/M3Select.tsx`
 - **Complexity:** VERY HIGH (implementation, not just token replacement)
 - **Current Issue:** Incomplete - renders as <input>, not dropdown
@@ -110,6 +118,7 @@
 - **Status:** Deferred (too complex for Phase 4C)
 
 #### M3DatePicker (PENDING)
+
 - **Path:** `frontend/src/components/M3DatePicker/M3DatePicker.tsx`
 - **Complexity:** VERY HIGH (calendar implementation)
 - **Current Issue:** Incomplete - renders as <input>, not calendar
@@ -120,6 +129,7 @@
 ### LOW PRIORITY: Tooltip/Popover Enhancements (2)
 
 #### M3Tooltip (PENDING)
+
 - **Path:** `frontend/src/components/ui/M3Tooltip.tsx`
 - **Complexity:** MEDIUM (trigger logic + positioning)
 - **Requires:** Full tooltip implementation with trigger/positioning/animation
@@ -127,6 +137,7 @@
 - **Status:** Can be deferred
 
 #### M3Popover (PENDING)
+
 - **Path:** `frontend/src/components/ui/M3Popover.tsx`
 - **Complexity:** MEDIUM (trigger logic + positioning)
 - **Requires:** Full popover implementation with trigger/positioning/animation
@@ -136,6 +147,7 @@
 ### ELECTRIC ALCHEMIST (NOT Phase 4C)
 
 These use a different design system and should NOT be migrated to M3:
+
 - ElectricInput, ElectricCheckbox, ElectricRadioGroup, ElectricSwitch
 - ElectricDialog, ElectricAlert, ElectricBadge
 - ElectricTooltip, ElectricPopover
@@ -148,11 +160,13 @@ These use a different design system and should NOT be migrated to M3:
 Based on the user's explicit request to "finish phase 4 using frontend-migration skills," we should now:
 
 ### Option 1: Continue Manual Migration (Recommended for this session)
+
 **Timeline:** 2-3 hours
 **Covers:** ConfirmTagsModal, ApplicationGeneratorModal, SmartUploadModal, Toast (4 components)
 **Result:** 7/22 components migrated (31.8%)
 
 **Execution:**
+
 1. ✅ ConfirmTagsModal (40 min)
 2. ✅ ApplicationGeneratorModal (50 min)
 3. ✅ SmartUploadModal (30 min)
@@ -160,6 +174,7 @@ Based on the user's explicit request to "finish phase 4 using frontend-migration
 5. Validation & commit (10 min)
 
 ### Option 2: Use batch-migration-orchestrator Skill
+
 **When:** After completing Option 1 or deferring to next session
 **Scope:** Remaining components (M3Select, M3DatePicker, M3Tooltip, M3Popover, + any stragglers)
 **Time Saved:** 87% reduction in migration time (from 18-25 hours to 3-4 hours)
@@ -168,12 +183,12 @@ Based on the user's explicit request to "finish phase 4 using frontend-migration
 
 ## Bottlenecks & Risks
 
-| Issue | Impact | Mitigation |
-|-------|--------|-----------|
-| ApplicationGeneratorModal Stepper | HIGH | May need custom M3 stepper or keep current approach |
-| M3Select/DatePicker incomplete | MEDIUM | Defer to Phase 4D or use separate skill |
-| Tooltip/Popover skeleton | LOW | Can defer to Phase 4D |
-| Test updates | MEDIUM | Update tests after component migration |
+| Issue                             | Impact | Mitigation                                          |
+| --------------------------------- | ------ | --------------------------------------------------- |
+| ApplicationGeneratorModal Stepper | HIGH   | May need custom M3 stepper or keep current approach |
+| M3Select/DatePicker incomplete    | MEDIUM | Defer to Phase 4D or use separate skill             |
+| Tooltip/Popover skeleton          | LOW    | Can defer to Phase 4D                               |
+| Test updates                      | MEDIUM | Update tests after component migration              |
 
 ---
 
@@ -194,6 +209,7 @@ Based on the user's explicit request to "finish phase 4 using frontend-migration
 **Continue manual migration for Modal components (4 more), then use batch-migration-orchestrator for final cleanup.**
 
 This hybrid approach:
+
 - ✅ Completes most impactful components (modals first)
 - ✅ Maintains quality control (manual review for complex changes)
 - ✅ Prepares infrastructure for automated final pass
@@ -201,4 +217,3 @@ This hybrid approach:
 
 **Estimated time to complete Option 1:** 2.5-3 hours
 **Total Phase 4C components after Option 1:** 7/22 (31.8%)
-

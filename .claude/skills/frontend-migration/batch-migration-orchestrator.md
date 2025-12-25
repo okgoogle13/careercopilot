@@ -40,6 +40,7 @@ batch-migration-orchestrator --components components.txt --tokens design-system/
 ```
 
 **components.txt:**
+
 ```
 frontend/src/components/ui/Button/Button.tsx
 frontend/src/components/ui/Card/Card.tsx
@@ -49,6 +50,7 @@ frontend/src/components/ui/Dropdown/Dropdown.tsx
 ```
 
 **Output:**
+
 ```json
 {
   "total": 5,
@@ -107,15 +109,15 @@ done
 
 ```javascript
 function parseComponentList(filePath) {
-  const lines = readFileSync(filePath, 'utf-8').split('\n');
+  const lines = readFileSync(filePath, "utf-8").split("\n");
 
   return lines
-    .filter(line => line.trim() && !line.startsWith('#'))
-    .map(path => ({
+    .filter((line) => line.trim() && !line.startsWith("#"))
+    .map((path) => ({
       path: path.trim(),
-      name: basename(path, '.tsx'),
+      name: basename(path, ".tsx"),
       directory: dirname(path),
-      status: 'pending'
+      status: "pending",
     }));
 }
 ```
@@ -124,14 +126,9 @@ function parseComponentList(filePath) {
 
 ```javascript
 async function migrateComponent(component, tokens) {
-  const steps = [
-    'm3-layout-tokens',
-    'm3-visual-tokens',
-    'm3-typography-tokens',
-    'm3-interaction-tokens'
-  ];
+  const steps = ["m3-layout-tokens", "m3-visual-tokens", "m3-typography-tokens", "m3-interaction-tokens"];
 
-  let code = readFileSync(component.path, 'utf-8');
+  let code = readFileSync(component.path, "utf-8");
   let totalReplacements = 0;
   const stepResults = [];
 
@@ -146,13 +143,13 @@ async function migrateComponent(component, tokens) {
         skill,
         replacements: result.replacements,
         warnings: result.warnings,
-        status: 'success'
+        status: "success",
       });
     } catch (error) {
       stepResults.push({
         skill,
         error: error.message,
-        status: 'failed'
+        status: "failed",
       });
 
       throw new Error(`Failed at ${skill}: ${error.message}`);
@@ -162,7 +159,7 @@ async function migrateComponent(component, tokens) {
   return {
     code,
     totalReplacements,
-    stepResults
+    stepResults,
   };
 }
 ```
@@ -176,33 +173,33 @@ function validateMigration(originalCode, migratedCode, component) {
   // 1. Syntax validation
   try {
     parseTypeScript(migratedCode);
-    validations.push({ check: 'syntax', status: 'pass' });
+    validations.push({ check: "syntax", status: "pass" });
   } catch (error) {
-    validations.push({ check: 'syntax', status: 'fail', error: error.message });
+    validations.push({ check: "syntax", status: "fail", error: error.message });
   }
 
   // 2. Token usage validation
   const tokenCount = countTokenUsage(migratedCode);
   validations.push({
-    check: 'token-usage',
-    status: tokenCount > 0 ? 'pass' : 'fail',
-    count: tokenCount
+    check: "token-usage",
+    status: tokenCount > 0 ? "pass" : "fail",
+    count: tokenCount,
   });
 
   // 3. No hardcoded values remaining
   const hardcodedValues = detectHardcodedValues(migratedCode);
   validations.push({
-    check: 'hardcoded-values',
-    status: hardcodedValues.length === 0 ? 'pass' : 'fail',
-    violations: hardcodedValues
+    check: "hardcoded-values",
+    status: hardcodedValues.length === 0 ? "pass" : "fail",
+    violations: hardcodedValues,
   });
 
   // 4. WCAG compliance
   const wcagIssues = checkWCAG(migratedCode);
   validations.push({
-    check: 'wcag-compliance',
-    status: wcagIssues.length === 0 ? 'pass' : 'fail',
-    issues: wcagIssues
+    check: "wcag-compliance",
+    status: wcagIssues.length === 0 ? "pass" : "fail",
+    issues: wcagIssues,
   });
 
   return validations;
@@ -216,13 +213,13 @@ function generateBatchReport(results, duration) {
   const report = {
     summary: {
       total: results.length,
-      succeeded: results.filter(r => r.status === 'success').length,
-      failed: results.filter(r => r.status === 'failed').length,
+      succeeded: results.filter((r) => r.status === "success").length,
+      failed: results.filter((r) => r.status === "failed").length,
       totalReplacements: results.reduce((sum, r) => sum + (r.replacements || 0), 0),
-      duration: `${duration}min`
+      duration: `${duration}min`,
     },
     components: results,
-    timestamp: new Date().toISOString()
+    timestamp: new Date().toISOString(),
   };
 
   return report;
@@ -236,16 +233,19 @@ function generateBatchReport(results, duration) {
 ### Priority Levels
 
 **High Priority (Week 1):**
+
 - Button, Card, Input, Modal, Dropdown
 - Most frequently used, high visual impact
 - Estimated time: 10-15 minutes total (batch)
 
 **Medium Priority (Week 2):**
+
 - Form components, Navigation, Layout containers
 - Moderate usage, moderate impact
 - Estimated time: 30-40 minutes total (batch)
 
 **Low Priority (Week 3+):**
+
 - Utility components, rarely used components
 - Low usage, minimal impact
 - Estimated time: 60-80 minutes total (batch)
@@ -262,13 +262,7 @@ function generateBatchReport(results, duration) {
   "parallelism": 3,
   "timeout": "5min",
   "retries": 1,
-  "components": [
-    "frontend/src/components/ui/Button/Button.tsx",
-    "frontend/src/components/ui/Card/Card.tsx",
-    "frontend/src/components/ui/Input/Input.tsx",
-    "frontend/src/components/ui/Modal/Modal.tsx",
-    "frontend/src/components/ui/Dropdown/Dropdown.tsx"
-  ]
+  "components": ["frontend/src/components/ui/Button/Button.tsx", "frontend/src/components/ui/Card/Card.tsx", "frontend/src/components/ui/Input/Input.tsx", "frontend/src/components/ui/Modal/Modal.tsx", "frontend/src/components/ui/Dropdown/Dropdown.tsx"]
 }
 ```
 
@@ -323,8 +317,8 @@ function rollbackComponent(component, originalCode) {
 
   return {
     component: component.name,
-    action: 'rollback',
-    reason: 'migration-failed'
+    action: "rollback",
+    reason: "migration-failed",
   };
 }
 ```
@@ -462,11 +456,13 @@ echo "Launched $(wc -l < $COMPONENTS_FILE) parallel migration sessions"
 ## Succeeded Components (9)
 
 ### Button
+
 - **Replacements:** 42 (8 layout, 12 color, 6 typography, 4 editorial, 3 shape, 5 elevation, 2 icons, 2 motion)
 - **Duration:** 2.3 min
 - **Validations:** All passed ✓
 
 ### Card
+
 - **Replacements:** 38 (7 layout, 10 color, 8 typography, 3 editorial, 4 shape, 4 elevation, 1 icon, 1 motion)
 - **Duration:** 2.1 min
 - **Validations:** All passed ✓
@@ -474,6 +470,7 @@ echo "Launched $(wc -l < $COMPONENTS_FILE) parallel migration sessions"
 ## Failed Components (1)
 
 ### Dropdown
+
 - **Error:** Syntax error after m3-typography-classifier
 - **Duration:** 1.2 min
 - **Action Required:** Manual review needed
@@ -490,18 +487,21 @@ echo "Launched $(wc -l < $COMPONENTS_FILE) parallel migration sessions"
 ## Usage
 
 **As standalone skill:**
+
 ```bash
 # Pass component list file
 batch-migration-orchestrator --components high-priority.txt --tokens design-system/tokens-expressive.json
 ```
 
 **With Jules delegation:**
+
 ```bash
 # Launch parallel sessions
 ./scripts/launch-m3-batch-migration.sh high-priority.txt
 ```
 
 **Monitor progress:**
+
 ```bash
 # Watch real-time progress
 jules remote list | grep "M3 Migration"

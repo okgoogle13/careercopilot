@@ -1,6 +1,7 @@
 # Scripts Directory Cleanup Plan
 
 ## Executive Summary
+
 The `/scripts` directory contains 85+ scripts with significant duplication, redundancy, and obsolescence. This cleanup will reduce the directory by ~60% while maintaining all essential functionality.
 
 ## Categories of Issues Found
@@ -8,24 +9,28 @@ The `/scripts` directory contains 85+ scripts with significant duplication, redu
 ### 1. HIGH DUPLICATION (Immediate Action Required)
 
 #### Setup Scripts Redundancy:
+
 - `setup-secrets.sh` (6KB) - Unified secrets management
 - `setup-secure-credentials.sh` (6KB) - Overlaps with above
 - `setup-api-keys.sh` (5KB) - Subset of secrets setup
 - **Action**: Consolidate into single `setup-secrets.sh`
 
 #### Deployment Scripts Redundancy:
+
 - `deploy.sh` (8KB) - Main deployment script
 - `deploy-production.sh` (3KB) - Redundant wrapper
 - `deploy-staging.sh` (2KB) - Redundant wrapper
 - **Action**: Remove wrappers, enhance main script
 
 #### M3 Migration Scripts Overlap:
+
 - `migrate-to-m3.py` (9KB) - General migration
 - `migrate-component-m3.py` (8KB) - Component-specific
 - `batch-migrate-m3.sh` (3KB) - Batch coordinator
 - **Action**: Consolidate into unified migration system
 
 #### Firebase Scripts Overlap:
+
 - `setup-firebase.sh` (4KB) - Basic setup
 - `setup-careercopilot-firebase.sh` (14KB) - Comprehensive
 - `configure-firebase-permissions.sh` (6KB) - Subset
@@ -34,12 +39,14 @@ The `/scripts` directory contains 85+ scripts with significant duplication, redu
 ### 2. OBSOLETE SCRIPTS (Archive)
 
 #### Already Archived (26 scripts):
+
 - Grid migration scripts (MUI v7 migration completed)
 - Autofix scripts (issues resolved)
 - Personal automation scripts
 - **Status**: ✅ Already in `_archived/`
 
 #### Need Archiving:
+
 - `migrate_redis_to_firestore.py` (13KB) - Migration completed
 - `switch-to-development.sh` / `switch-to-production.sh` - Replaced by env vars
 - `cleanup-old-reports.sh` - One-time cleanup completed
@@ -48,6 +55,7 @@ The `/scripts` directory contains 85+ scripts with significant duplication, redu
 ### 3. VALIDATION SCRIPTS CONSOLIDATION
 
 #### Test/Validation Overlap:
+
 - `test-configuration.py` (17KB) - Comprehensive
 - `validate-environment.sh` (6KB) - Subset
 - `validate-secrets.sh` (16KB) - Overlaps with production validator
@@ -57,6 +65,7 @@ The `/scripts` directory contains 85+ scripts with significant duplication, redu
 ## Cleanup Actions
 
 ### Phase 1: Archive Obsolete Scripts
+
 ```bash
 # Move to _archived/
 mv migrate_redis_to_firestore.py _archived/
@@ -67,6 +76,7 @@ mv archive-stale-docs.sh _archived/
 ```
 
 ### Phase 2: Consolidate Setup Scripts
+
 ```bash
 # Keep: setup-secrets.sh (unified)
 # Archive: setup-secure-credentials.sh, setup-api-keys.sh
@@ -75,6 +85,7 @@ mv setup-api-keys.sh _archived/
 ```
 
 ### Phase 3: Consolidate Deployment Scripts
+
 ```bash
 # Keep: deploy.sh (enhanced)
 # Archive: deploy-production.sh, deploy-staging.sh
@@ -83,6 +94,7 @@ mv deploy-staging.sh _archived/
 ```
 
 ### Phase 4: Consolidate Firebase Scripts
+
 ```bash
 # Keep: setup-careercopilot-firebase.sh
 # Archive: setup-firebase.sh, configure-firebase-permissions.sh
@@ -91,6 +103,7 @@ mv configure-firebase-permissions.sh _archived/
 ```
 
 ### Phase 5: Consolidate Validation Scripts
+
 ```bash
 # Keep: test-configuration.py, production-secrets-validator.py
 # Archive: validate-environment.sh, validate-secrets.sh, test_firebase_secrets.py
@@ -102,12 +115,14 @@ mv test_firebase_secrets.py _archived/
 ## Expected Results
 
 ### Before Cleanup:
+
 - 85+ active scripts
 - ~500KB total
 - High confusion for developers
 - Maintenance overhead
 
 ### After Cleanup:
+
 - ~35 active scripts
 - ~200KB total (60% reduction)
 - Clear purpose for each script
@@ -123,6 +138,7 @@ mv test_firebase_secrets.py _archived/
 ## Consolidated Script Index
 
 ### Essential Scripts (Keep & Enhance):
+
 1. **deploy.sh** - Unified deployment (staging/production)
 2. **setup-secrets.sh** - Unified secrets management
 3. **test-configuration.py** - Comprehensive validation
@@ -133,6 +149,7 @@ mv test_firebase_secrets.py _archived/
 8. **vite-bundle-analyzer.sh** - Bundle analysis
 
 ### Specialized Scripts (Keep):
+
 - Component generators
 - Token builders
 - Migration tools

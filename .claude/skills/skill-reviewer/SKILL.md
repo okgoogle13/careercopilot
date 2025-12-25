@@ -38,12 +38,14 @@ The Skill Reviewer provides comprehensive quality assurance and improvement reco
 ### 1. Metadata Quality (20 points)
 
 **YAML Frontmatter**
+
 - ✅ Valid YAML syntax
 - ✅ Required fields present: `name`, `description`
 - ✅ Consistent naming (kebab-case, lowercase)
 - ✅ Description is one concise sentence
 
 **Naming Conventions**
+
 - ✅ Directory name matches skill name
 - ✅ Descriptive verb-based names (not "helper", "tool", "manager")
 - ✅ Clear intent without jargon
@@ -52,12 +54,14 @@ The Skill Reviewer provides comprehensive quality assurance and improvement reco
 ### 2. Documentation Quality (25 points)
 
 **Structure & Organization**
+
 - ✅ Clear heading hierarchy (H1 → H2 → H3)
 - ✅ Logical content flow
 - ✅ Proper use of formatting (bold, code, lists)
 - ✅ Consistent voice and tone
 
 **Content Completeness**
+
 - ✅ Purpose section present and clear
 - ✅ "When to Use" section with scenarios
 - ✅ Capabilities listed with specifics
@@ -66,6 +70,7 @@ The Skill Reviewer provides comprehensive quality assurance and improvement reco
 - ✅ Troubleshooting section for common issues
 
 **Clarity & Accessibility**
+
 - ✅ Jargon-free or well-explained
 - ✅ Active voice preferred
 - ✅ Concrete examples over abstract concepts
@@ -74,6 +79,7 @@ The Skill Reviewer provides comprehensive quality assurance and improvement reco
 ### 3. Structure & Organization (20 points)
 
 **File Organization**
+
 - ✅ SKILL.md in root of skill directory
 - ✅ `scripts/` subdirectory for automation (lowercase, if needed)
 - ✅ `references/` subdirectory for detailed docs (lowercase, if needed)
@@ -81,12 +87,14 @@ The Skill Reviewer provides comprehensive quality assurance and improvement reco
 - ✅ README.md for development notes (excluded from distribution)
 
 **Directory Conventions**
+
 - ✅ Lowercase directory names
 - ✅ No nested subdirectories in `references/`
 - ✅ Single-level organization
 - ✅ Consistent naming patterns
 
 **File Size Constraints**
+
 - ✅ SKILL.md under 500 lines (move excessive detail to `references/`)
 - ✅ Reference files over 100 lines have table of contents
 - ✅ Executable scripts have proper permissions (`chmod +x`)
@@ -94,18 +102,21 @@ The Skill Reviewer provides comprehensive quality assurance and improvement reco
 ### 4. Functionality & Coverage (20 points)
 
 **Scope & Capabilities**
+
 - ✅ Clear boundaries of what skill does/doesn't do
 - ✅ Realistic capability claims
 - ✅ No overpromising functionality
 - ✅ Dependencies clearly documented
 
 **Edge Cases & Error Handling**
+
 - ✅ Anticipated edge cases addressed
 - ✅ Error scenarios handled gracefully
 - ✅ Fallback strategies documented
 - ✅ Limitations explicitly stated
 
 **Practical Applicability**
+
 - ✅ Real-world usage scenarios covered
 - ✅ Examples are realistic and actionable
 - ✅ Step-by-step guides are complete
@@ -114,18 +125,21 @@ The Skill Reviewer provides comprehensive quality assurance and improvement reco
 ### 5. Guideline Compliance (15 points)
 
 **Anthropic Standards**
+
 - ✅ Follows official skill guidelines
 - ✅ Proper YAML syntax validation
 - ✅ Description includes "when to use" triggers
 - ✅ No auxiliary docs mixed with skill content
 
 **Project Standards**
+
 - ✅ Aligns with project conventions
 - ✅ Consistent with similar skills
 - ✅ Follows naming patterns
 - ✅ Uses established templates
 
 **Best Practices**
+
 - ✅ Clear value proposition
 - ✅ Appropriate scope (not too broad)
 - ✅ Progressive content disclosure
@@ -188,6 +202,7 @@ The Skill Reviewer provides comprehensive quality assurance and improvement reco
 **Skill Reviewed**: `jest-test-scaffolder`
 
 **Review Output**:
+
 ```
 # Skill Review: jest-test-scaffolder
 
@@ -248,10 +263,12 @@ The Skill Reviewer provides comprehensive quality assurance and improvement reco
 **Skill Reviewed**: `deployment-manager`
 
 **Edge Cases Identified**:
+
 ```markdown
 ## Missing Edge Case Coverage
 
 ### Unhandled Scenarios
+
 1. **Deployment Timeout**: No guidance on stuck deployments
 2. **Rollback Failures**: What if rollback fails?
 3. **Multi-Region**: Only documents single-region deployment
@@ -262,6 +279,7 @@ The Skill Reviewer provides comprehensive quality assurance and improvement reco
 8. **Network Interruptions**: Handling transient network failures
 
 ### Recommended Additions
+
 - Add deployment timeout configuration section
 - Document rollback procedures in detail
 - Include multi-region deployment guide
@@ -275,30 +293,35 @@ The Skill Reviewer provides comprehensive quality assurance and improvement reco
 **Skill Reviewed**: `component-builder`
 
 **Structure Improvements**:
+
 ```markdown
 ## Current Structure
 ```
+
 .claude/skills/component-builder/
 ├── SKILL.md (620 lines - exceeds 500 limit)
 └── README.md
+
 ```
 
 ## Recommended Structure
 ```
+
 .claude/skills/component-builder/
 ├── SKILL.md (380 lines - main overview)
 ├── README.md (development notes, not distributed)
 ├── references/
-│   ├── MATERIAL_DESIGN_3_TOKENS.md (detailed token reference)
-│   ├── COMPONENT_PATTERNS.md (advanced patterns, 150+ lines, includes TOC)
-│   └── TYPESCRIPT_SETUP.md (TypeScript configuration guide)
+│ ├── MATERIAL_DESIGN_3_TOKENS.md (detailed token reference)
+│ ├── COMPONENT_PATTERNS.md (advanced patterns, 150+ lines, includes TOC)
+│ └── TYPESCRIPT_SETUP.md (TypeScript configuration guide)
 ├── scripts/
-│   ├── generate-component.sh (executable)
-│   └── validate-m3-tokens.py (executable)
+│ ├── generate-component.sh (executable)
+│ └── validate-m3-tokens.py (executable)
 └── assets/
-    ├── component.tsx.template
-    ├── component.test.tsx.template
-    └── component.stories.tsx.template
+├── component.tsx.template
+├── component.test.tsx.template
+└── component.stories.tsx.template
+
 ```
 
 ## Benefits
@@ -312,6 +335,7 @@ The Skill Reviewer provides comprehensive quality assurance and improvement reco
 ## Best Practices
 
 ### For Skill Developers
+
 1. **Self-Review First**: Use this skill before distributing
 2. **Iterate Based on Feedback**: Implement recommendations progressively
 3. **Test Your Examples**: Verify all code snippets work
@@ -319,6 +343,7 @@ The Skill Reviewer provides comprehensive quality assurance and improvement reco
 5. **Version Your Skills**: Track changes and improvements
 
 ### For Skill Maintenance
+
 1. **Regular Audits**: Review skills quarterly
 2. **User Feedback**: Incorporate reports and suggestions
 3. **Update Examples**: Keep code samples current
@@ -326,6 +351,7 @@ The Skill Reviewer provides comprehensive quality assurance and improvement reco
 5. **Archive Old Skills**: Retire obsolete skills clearly
 
 ### For Skill Distribution
+
 1. **Pre-Release Review**: Score ≥80 before distribution
 2. **Document Dependencies**: List required tools/knowledge
 3. **Provide Feedback Mechanism**: How users report issues
@@ -335,6 +361,7 @@ The Skill Reviewer provides comprehensive quality assurance and improvement reco
 ## Scoring Guidelines
 
 ### Grade Scale
+
 - **A (90-100)**: Exceptional - Ready for distribution, exemplary quality
 - **B (80-89)**: Good - Ready for distribution, minor improvements suggested
 - **C (70-79)**: Satisfactory - Usable but needs improvements before wider sharing
@@ -342,6 +369,7 @@ The Skill Reviewer provides comprehensive quality assurance and improvement reco
 - **F (Below 60)**: Inadequate - Not ready for release, major rework required
 
 ### Minimum Distribution Standards
+
 - ✅ Score ≥ 80 (Grade B or higher)
 - ✅ All Priority 1 recommendations addressed
 - ✅ Comprehensive documentation
@@ -351,7 +379,9 @@ The Skill Reviewer provides comprehensive quality assurance and improvement reco
 ## Troubleshooting
 
 ### Issue: Score Below 80
+
 **Solution**:
+
 1. Address all Priority 1 recommendations first
 2. Add missing sections (troubleshooting, edge cases)
 3. Improve documentation clarity
@@ -359,7 +389,9 @@ The Skill Reviewer provides comprehensive quality assurance and improvement reco
 5. Iterate and re-review
 
 ### Issue: Unclear Recommendations
+
 **Solution**:
+
 1. Request specific examples
 2. Ask for comparison with high-scoring skill
 3. Discuss recommendations with team
@@ -367,7 +399,9 @@ The Skill Reviewer provides comprehensive quality assurance and improvement reco
 5. Request follow-up review after changes
 
 ### Issue: Scope Too Broad
+
 **Solution**:
+
 1. Break into smaller, focused skills
 2. Move advanced topics to references/
 3. Focus on core use case
@@ -393,6 +427,7 @@ The Skill Reviewer provides comprehensive quality assurance and improvement reco
 The Skill Reviewer provides systematic, objective evaluation of Claude Code skills across five key dimensions: metadata, documentation, structure, functionality, and guideline compliance. Use it to ensure skills meet professional standards, identify improvement opportunities, and maintain consistent quality across skill libraries.
 
 **Quick Checklist for High-Quality Skills:**
+
 - ✅ Score ≥ 80/100 (Grade B or higher)
 - ✅ Clear, concise description with "when to use"
 - ✅ Comprehensive documentation with examples

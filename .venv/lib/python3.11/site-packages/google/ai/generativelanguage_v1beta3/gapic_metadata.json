@@ -1,4 +1,4 @@
- {
+{
   "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
   "language": "python",
   "libraryPackage": "google.ai.generativelanguage_v1beta3",
@@ -11,14 +11,10 @@
           "libraryClient": "DiscussServiceClient",
           "rpcs": {
             "CountMessageTokens": {
-              "methods": [
-                "count_message_tokens"
-              ]
+              "methods": ["count_message_tokens"]
             },
             "GenerateMessage": {
-              "methods": [
-                "generate_message"
-              ]
+              "methods": ["generate_message"]
             }
           }
         },
@@ -26,14 +22,10 @@
           "libraryClient": "DiscussServiceAsyncClient",
           "rpcs": {
             "CountMessageTokens": {
-              "methods": [
-                "count_message_tokens"
-              ]
+              "methods": ["count_message_tokens"]
             },
             "GenerateMessage": {
-              "methods": [
-                "generate_message"
-              ]
+              "methods": ["generate_message"]
             }
           }
         },
@@ -41,14 +33,10 @@
           "libraryClient": "DiscussServiceClient",
           "rpcs": {
             "CountMessageTokens": {
-              "methods": [
-                "count_message_tokens"
-              ]
+              "methods": ["count_message_tokens"]
             },
             "GenerateMessage": {
-              "methods": [
-                "generate_message"
-              ]
+              "methods": ["generate_message"]
             }
           }
         }
@@ -60,39 +48,25 @@
           "libraryClient": "ModelServiceClient",
           "rpcs": {
             "CreateTunedModel": {
-              "methods": [
-                "create_tuned_model"
-              ]
+              "methods": ["create_tuned_model"]
             },
             "DeleteTunedModel": {
-              "methods": [
-                "delete_tuned_model"
-              ]
+              "methods": ["delete_tuned_model"]
             },
             "GetModel": {
-              "methods": [
-                "get_model"
-              ]
+              "methods": ["get_model"]
             },
             "GetTunedModel": {
-              "methods": [
-                "get_tuned_model"
-              ]
+              "methods": ["get_tuned_model"]
             },
             "ListModels": {
-              "methods": [
-                "list_models"
-              ]
+              "methods": ["list_models"]
             },
             "ListTunedModels": {
-              "methods": [
-                "list_tuned_models"
-              ]
+              "methods": ["list_tuned_models"]
             },
             "UpdateTunedModel": {
-              "methods": [
-                "update_tuned_model"
-              ]
+              "methods": ["update_tuned_model"]
             }
           }
         },
@@ -100,39 +74,25 @@
           "libraryClient": "ModelServiceAsyncClient",
           "rpcs": {
             "CreateTunedModel": {
-              "methods": [
-                "create_tuned_model"
-              ]
+              "methods": ["create_tuned_model"]
             },
             "DeleteTunedModel": {
-              "methods": [
-                "delete_tuned_model"
-              ]
+              "methods": ["delete_tuned_model"]
             },
             "GetModel": {
-              "methods": [
-                "get_model"
-              ]
+              "methods": ["get_model"]
             },
             "GetTunedModel": {
-              "methods": [
-                "get_tuned_model"
-              ]
+              "methods": ["get_tuned_model"]
             },
             "ListModels": {
-              "methods": [
-                "list_models"
-              ]
+              "methods": ["list_models"]
             },
             "ListTunedModels": {
-              "methods": [
-                "list_tuned_models"
-              ]
+              "methods": ["list_tuned_models"]
             },
             "UpdateTunedModel": {
-              "methods": [
-                "update_tuned_model"
-              ]
+              "methods": ["update_tuned_model"]
             }
           }
         },
@@ -140,39 +100,25 @@
           "libraryClient": "ModelServiceClient",
           "rpcs": {
             "CreateTunedModel": {
-              "methods": [
-                "create_tuned_model"
-              ]
+              "methods": ["create_tuned_model"]
             },
             "DeleteTunedModel": {
-              "methods": [
-                "delete_tuned_model"
-              ]
+              "methods": ["delete_tuned_model"]
             },
             "GetModel": {
-              "methods": [
-                "get_model"
-              ]
+              "methods": ["get_model"]
             },
             "GetTunedModel": {
-              "methods": [
-                "get_tuned_model"
-              ]
+              "methods": ["get_tuned_model"]
             },
             "ListModels": {
-              "methods": [
-                "list_models"
-              ]
+              "methods": ["list_models"]
             },
             "ListTunedModels": {
-              "methods": [
-                "list_tuned_models"
-              ]
+              "methods": ["list_tuned_models"]
             },
             "UpdateTunedModel": {
-              "methods": [
-                "update_tuned_model"
-              ]
+              "methods": ["update_tuned_model"]
             }
           }
         }
@@ -184,34 +130,22 @@
           "libraryClient": "PermissionServiceClient",
           "rpcs": {
             "CreatePermission": {
-              "methods": [
-                "create_permission"
-              ]
+              "methods": ["create_permission"]
             },
             "DeletePermission": {
-              "methods": [
-                "delete_permission"
-              ]
+              "methods": ["delete_permission"]
             },
             "GetPermission": {
-              "methods": [
-                "get_permission"
-              ]
+              "methods": ["get_permission"]
             },
             "ListPermissions": {
-              "methods": [
-                "list_permissions"
-              ]
+              "methods": ["list_permissions"]
             },
             "TransferOwnership": {
-              "methods": [
-                "transfer_ownership"
-              ]
+              "methods": ["transfer_ownership"]
             },
             "UpdatePermission": {
-              "methods": [
-                "update_permission"
-              ]
+              "methods": ["update_permission"]
             }
           }
         },
@@ -219,34 +153,22 @@
           "libraryClient": "PermissionServiceAsyncClient",
           "rpcs": {
             "CreatePermission": {
-              "methods": [
-                "create_permission"
-              ]
+              "methods": ["create_permission"]
             },
             "DeletePermission": {
-              "methods": [
-                "delete_permission"
-              ]
+              "methods": ["delete_permission"]
             },
             "GetPermission": {
-              "methods": [
-                "get_permission"
-              ]
+              "methods": ["get_permission"]
             },
             "ListPermissions": {
-              "methods": [
-                "list_permissions"
-              ]
+              "methods": ["list_permissions"]
             },
             "TransferOwnership": {
-              "methods": [
-                "transfer_ownership"
-              ]
+              "methods": ["transfer_ownership"]
             },
             "UpdatePermission": {
-              "methods": [
-                "update_permission"
-              ]
+              "methods": ["update_permission"]
             }
           }
         },
@@ -254,34 +176,22 @@
           "libraryClient": "PermissionServiceClient",
           "rpcs": {
             "CreatePermission": {
-              "methods": [
-                "create_permission"
-              ]
+              "methods": ["create_permission"]
             },
             "DeletePermission": {
-              "methods": [
-                "delete_permission"
-              ]
+              "methods": ["delete_permission"]
             },
             "GetPermission": {
-              "methods": [
-                "get_permission"
-              ]
+              "methods": ["get_permission"]
             },
             "ListPermissions": {
-              "methods": [
-                "list_permissions"
-              ]
+              "methods": ["list_permissions"]
             },
             "TransferOwnership": {
-              "methods": [
-                "transfer_ownership"
-              ]
+              "methods": ["transfer_ownership"]
             },
             "UpdatePermission": {
-              "methods": [
-                "update_permission"
-              ]
+              "methods": ["update_permission"]
             }
           }
         }
@@ -293,24 +203,16 @@
           "libraryClient": "TextServiceClient",
           "rpcs": {
             "BatchEmbedText": {
-              "methods": [
-                "batch_embed_text"
-              ]
+              "methods": ["batch_embed_text"]
             },
             "CountTextTokens": {
-              "methods": [
-                "count_text_tokens"
-              ]
+              "methods": ["count_text_tokens"]
             },
             "EmbedText": {
-              "methods": [
-                "embed_text"
-              ]
+              "methods": ["embed_text"]
             },
             "GenerateText": {
-              "methods": [
-                "generate_text"
-              ]
+              "methods": ["generate_text"]
             }
           }
         },
@@ -318,24 +220,16 @@
           "libraryClient": "TextServiceAsyncClient",
           "rpcs": {
             "BatchEmbedText": {
-              "methods": [
-                "batch_embed_text"
-              ]
+              "methods": ["batch_embed_text"]
             },
             "CountTextTokens": {
-              "methods": [
-                "count_text_tokens"
-              ]
+              "methods": ["count_text_tokens"]
             },
             "EmbedText": {
-              "methods": [
-                "embed_text"
-              ]
+              "methods": ["embed_text"]
             },
             "GenerateText": {
-              "methods": [
-                "generate_text"
-              ]
+              "methods": ["generate_text"]
             }
           }
         },
@@ -343,24 +237,16 @@
           "libraryClient": "TextServiceClient",
           "rpcs": {
             "BatchEmbedText": {
-              "methods": [
-                "batch_embed_text"
-              ]
+              "methods": ["batch_embed_text"]
             },
             "CountTextTokens": {
-              "methods": [
-                "count_text_tokens"
-              ]
+              "methods": ["count_text_tokens"]
             },
             "EmbedText": {
-              "methods": [
-                "embed_text"
-              ]
+              "methods": ["embed_text"]
             },
             "GenerateText": {
-              "methods": [
-                "generate_text"
-              ]
+              "methods": ["generate_text"]
             }
           }
         }

@@ -3,6 +3,7 @@
 **Role:** Validates design systems for WCAG compliance, aesthetic quality, and anti-slop detection
 
 **Expertise:**
+
 - WCAG AA/AAA color contrast validation
 - Aesthetic quality scoring (0-100 scale)
 - AI slop detection (generic patterns, timid contrasts, clichéd designs)
@@ -10,6 +11,7 @@
 - CSS variable generation from design tokens
 
 **When to Use:**
+
 - User asks: "Is my design WCAG compliant?"
 - User asks: "Check if this color palette is accessible"
 - User asks: "Does my design have generic AI slop?"
@@ -52,6 +54,7 @@
 ## Real-World Example: Aesthetic Quality Check
 
 **Design Audit Input:**
+
 ```json
 {
   "fonts": ["Inter", "sans-serif"],
@@ -64,6 +67,7 @@
 ```
 
 **Validation Output:**
+
 ```
 AESTHETIC QUALITY REPORT
 ========================
@@ -131,9 +135,9 @@ Given a design preset, auto-generate CSS variables:
 ```css
 :root {
   /* Colors (example) */
-  --sys-color-primary: #463CFB;
-  --sys-color-on-primary: #FFFFFF;
-  --sys-color-error: #B3261E;
+  --sys-color-primary: #463cfb;
+  --sys-color-on-primary: #ffffff;
+  --sys-color-error: #b3261e;
 
   /* Spacing (8px base grid) */
   --sys-spacing-xs: 4px;
@@ -143,7 +147,7 @@ Given a design preset, auto-generate CSS variables:
   --sys-spacing-xl: 32px;
 
   /* Typography */
-  --sys-typescale-display-large-font: 'Plus Jakarta Sans';
+  --sys-typescale-display-large-font: "Plus Jakarta Sans";
   --sys-typescale-display-large-size: 57px;
   --sys-typescale-display-large-weight: 700;
 
@@ -154,8 +158,8 @@ Given a design preset, auto-generate CSS variables:
 
   /* Elevation (box-shadow) */
   --sys-elevation-level0: 0;
-  --sys-elevation-level1: 0 1px 3px rgba(0,0,0,0.12);
-  --sys-elevation-level2: 0 3px 6px rgba(0,0,0,0.16);
+  --sys-elevation-level1: 0 1px 3px rgba(0, 0, 0, 0.12);
+  --sys-elevation-level2: 0 3px 6px rgba(0, 0, 0, 0.16);
 
   /* Motion */
   --sys-duration-short: 150ms;
@@ -181,11 +185,13 @@ Given a design preset, auto-generate CSS variables:
 ## Data Insights
 
 **Current Presets (as of 2025-11-21):**
+
 - Calm Confidence (professional, minimal)
 - Bold Energetic (vibrant, dynamic)
 - Vibrant Professional (creative, distinctive)
 
 **Validation Targets:**
+
 - Color contrast: 100% AA/AAA compliance
 - Typography: Expressive fonts with 3x+ contrast
 - Spacing: 8px base grid adherence
@@ -197,6 +203,7 @@ Given a design preset, auto-generate CSS variables:
 ## Integration Points
 
 Works with:
+
 - DesignSystemServer MCP
 - visual-design-director agent
 - design-systems-architect agent

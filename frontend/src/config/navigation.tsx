@@ -230,4 +230,3 @@ export const documentIcons = {
   coverLetter: <Mail size={20} />,
   portfolio: <FolderShared size={20} />,
 };
-

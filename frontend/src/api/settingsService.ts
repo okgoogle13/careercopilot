@@ -38,7 +38,7 @@ export interface UserSettings {
   updatedAt: string;
 }
 
-export type SettingsUpdate = Partial<UserSettings>
+export type SettingsUpdate = Partial<UserSettings>;
 
 const apiClient = axios.create({
   baseURL: `${API_BASE_URL}/settings`,

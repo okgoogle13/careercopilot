@@ -1,18 +1,26 @@
-import { BrowserRouter as Router, Routes, Route, Navigate, Outlet, useLocation } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+  Outlet,
+  useLocation,
+} from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Layout } from './components/Layout';
-import { Login } from './components/Login';
-import { Register } from './components/Register';
-import { Dashboard } from './components/Dashboard';
-import { ApplicationTracker } from './components/ApplicationTracker';
-import { Documents } from './components/Documents';
-import { Analysis } from './components/Analysis';
-import { Opportunities } from './components/Opportunities';
-import { KSCGenerator } from './components/KSCGenerator';
-import { Settings } from './components/Settings';
-import { LandingPage } from './components/LandingPage';
-import { ProfileView } from './components/ProfileView';
-import { NotFound } from './components/NotFound';
+import { Layout } from './layouts/Layout';
+import { Login } from './features/auth/Login';
+import { Register } from './features/auth/Register';
+import { Dashboard } from './features/dashboard/Dashboard';
+import { ApplicationTracker } from './features/applications/ApplicationTracker';
+import { Documents } from './features/documents/Documents';
+import { Analysis } from './features/analysis/Analysis';
+import { Opportunities } from './features/opportunities/Opportunities';
+import { KSCGenerator } from './features/ksc-generator/KSCGenerator';
+import { StyleGuide } from './features/style-guide/StyleGuide';
+import { Settings } from './features/settings/Settings';
+import { LandingPage } from './features/landing/LandingPage';
+import { ProfileView } from './features/profile/ProfileView';
+import { NotFound } from './features/not-found/NotFound';
 import { useAuth } from './context/AuthContext';
 import texturePattern from './assets/images/texture-pattern.png';
 
@@ -22,11 +30,20 @@ const ProtectedLayout = () => {
   const location = useLocation();
 
   if (loading) {
-    return <div className="min-h-screen bg-[#141218] flex items-center justify-center text-[#E6E1E5]">Loading...</div>;
+    return (
+      <div className="min-h-screen bg-[#141218] flex items-center justify-center text-[#E6E1E5]">
+        Loading...
+      </div>
+    );
   }
 
   if (!user) {
-    return <Navigate to="/login" replace />;
+    return (
+      <Navigate
+        to="/login"
+        replace
+      />
+    );
   }
 
   return (
@@ -38,8 +55,8 @@ const ProtectedLayout = () => {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0 }}
           transition={{
-            duration: 0.6,
-            ease: [0.2, 0.0, 0, 1.0]
+            duration: 0.5,
+            ease: [0.175, 0.885, 0.32, 1.275], // expressive-spring
           }}
           className="min-h-screen"
         >
@@ -60,7 +77,7 @@ const PublicLayout = () => {
         style={{
           backgroundImage: `url(${texturePattern})`,
           backgroundRepeat: 'repeat',
-          backgroundSize: 'auto'
+          backgroundSize: 'auto',
         }}
       />
       <div className="relative z-10">
@@ -76,22 +93,62 @@ export default function App() {
       <Routes>
         {/* Public Routes */}
         <Route element={<PublicLayout />}>
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="*" element={<NotFound />} />
+          <Route
+            path="/"
+            element={<LandingPage />}
+          />
+          <Route
+            path="/login"
+            element={<Login />}
+          />
+          <Route
+            path="/register"
+            element={<Register />}
+          />
+          <Route
+            path="*"
+            element={<NotFound />}
+          />
         </Route>
 
         {/* Protected Routes */}
         <Route element={<ProtectedLayout />}>
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/tracker" element={<ApplicationTracker />} />
-          <Route path="/documents" element={<Documents />} />
-          <Route path="/analysis" element={<Analysis />} />
-          <Route path="/opportunities" element={<Opportunities />} />
-          <Route path="/ksc-generator" element={<KSCGenerator />} />
-          <Route path="/settings" element={<Settings />} />
-          <Route path="/profile" element={<ProfileView />} />
+          <Route
+            path="/dashboard"
+            element={<Dashboard />}
+          />
+          <Route
+            path="/tracker"
+            element={<ApplicationTracker />}
+          />
+          <Route
+            path="/documents"
+            element={<Documents />}
+          />
+          <Route
+            path="/analysis"
+            element={<Analysis />}
+          />
+          <Route
+            path="/opportunities"
+            element={<Opportunities />}
+          />
+          <Route
+            path="/ksc-generator"
+            element={<KSCGenerator />}
+          />
+          <Route
+            path="/settings"
+            element={<Settings />}
+          />
+          <Route
+            path="/profile"
+            element={<ProfileView />}
+          />
+          <Route
+            path="/style-guide"
+            element={<StyleGuide />}
+          />
         </Route>
       </Routes>
     </Router>

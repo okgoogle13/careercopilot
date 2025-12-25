@@ -21,12 +21,14 @@ Activates strict routing enforcement for this session. When enabled, all task ro
 When strict routing is ON, I will:
 
 ✅ **Always follow the Routing Logic Table**
+
 - Code review → gemini-wrapper (never self-analyze)
 - Config lookup → configuration cache (never read raw files)
 - Flow questions → genkit (never read source files)
 - GitHub work → github MCP (never browse UI)
 
 ✅ **Refuse self-analysis**
+
 ```
 User: "Review this code"
 Response: "I will NOT analyze this myself.
@@ -35,6 +37,7 @@ Instead, I'm routing to gemini-wrapper.analyze_code()
 ```
 
 ✅ **Enforce priority-based routing**
+
 ```
 Priority 10: gemini-wrapper (analysis)
 Priority 9:  orchestrator + github (fallback/repo)
@@ -42,6 +45,7 @@ Priority 8-6: Local caches (lookups)
 ```
 
 ✅ **Calculate and report token savings**
+
 ```
 Expected token reduction: 40-99.1% per decision
 Combined savings: 80%+ on multi-step workflows
@@ -49,6 +53,7 @@ Annual ROI: $624+/year
 ```
 
 ✅ **Provide routing transparency**
+
 ```
 Before executing any task:
 1. Announce the task classification
@@ -85,24 +90,28 @@ Ready to execute [Method] on [Server]?
 ## Enforcement Rules
 
 ### Rule 1: Never Self-Analyze
+
 ```
 ❌ DO NOT: "In my analysis, I see the bug is..."
 ✅ DO: "Routing to gemini-wrapper.analyze_code() for expert analysis"
 ```
 
 ### Rule 2: Always Use Caches First
+
 ```
 ❌ DO NOT: "Looking at firebase.json in my context..."
 ✅ DO: "Checking configuration.get_environment() (94.9% savings)"
 ```
 
 ### Rule 3: Never Read Flow Files
+
 ```
 ❌ DO NOT: "Based on the flow code I can see..."
 ✅ DO: "Querying genkit.get_flow() for current state (99.1% savings)"
 ```
 
 ### Rule 4: Always Report Savings
+
 ```
 ❌ DO NOT: "Here's what I think..."
 ✅ DO: "Expected savings: 67% (gemini-wrapper analysis)"
@@ -111,18 +120,22 @@ Ready to execute [Method] on [Server]?
 ## Session Behavior
 
 ### When ON:
+
 - Every task gets routed to optimal server
 - Refuse self-analysis for covered task types
 - Report all token savings
 - Strict adherence to delegationStrategy
 
 ### When OFF:
+
 - Use best judgment (may include self-analysis)
 - Report recommended routing optionally
 - Normal conversational mode
 
 ### Status Command:
+
 Shows current enforcement level:
+
 ```
 ROUTING ENFORCEMENT STATUS
 ──────────────────────────────────────
@@ -136,6 +149,7 @@ Session Token Budget: [X tokens remaining]
 ## Examples of Strict Routing in Action
 
 ### Example 1: Code Review Request
+
 ```
 User: "Review this code for performance issues"
 
@@ -149,6 +163,7 @@ TOKEN SAVINGS: 55% (vs Claude self-analysis)
 ```
 
 ### Example 2: Config Lookup
+
 ```
 User: "What's our Firebase configuration?"
 
@@ -162,6 +177,7 @@ TOKEN SAVINGS: 94.9% (vs reading raw files)
 ```
 
 ### Example 3: Error Diagnosis (Multi-Step)
+
 ```
 User: "Why is my Genkit flow timing out?"
 
@@ -180,6 +196,7 @@ COMBINED SAVINGS: 75%+
 ## Configuration
 
 Routing rules come from:
+
 - **~/.mcp.json** → `delegationStrategy` object
 - **Analysis Routing** → gemini-wrapper (Priority 10)
 - **Cache Routing** → documentation/configuration (Priority 8-7)

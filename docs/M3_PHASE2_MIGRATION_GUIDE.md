@@ -9,6 +9,7 @@
 Phase 2 unblocks form-heavy features by migrating foundational input/selection components that **every form in the app depends on**.
 
 **Phase 1 Prerequisites:** Must complete before starting Phase 2
+
 - ✅ M3Button (reference implementation)
 - ✅ M3Input (foundation)
 - ✅ M3Sidebar (navigation)
@@ -33,16 +34,16 @@ python3 scripts/scaffold-m3-component.py Select Checkbox Radio TextArea Switch
 
 ## 📊 Timeline & Token Cost
 
-| Step | Task | Duration | Token Cost | Blocker |
-|------|------|----------|-----------|---------|
-| **1** | Scaffold 5 components | 2 min | ~500 tokens | None |
-| **2** | Cursor AI: Select | 45 min | ~18K tokens | Blocks TextArea |
-| **3** | Cursor AI: Checkbox | 30 min | ~12K tokens | None |
-| **4** | Cursor AI: Radio | 30 min | ~12K tokens | None |
-| **5** | Cursor AI: TextArea | 30 min | ~14K tokens | Depends on Select |
-| **6** | Cursor AI: Switch | 20 min | ~10K tokens | None |
-| **7** | Batch validation | 30 sec | ~500 tokens | None |
-| **TOTAL** | **Phase 2 Done** | **~3 hours** | **~67K tokens** | — |
+| Step      | Task                  | Duration     | Token Cost      | Blocker           |
+| --------- | --------------------- | ------------ | --------------- | ----------------- |
+| **1**     | Scaffold 5 components | 2 min        | ~500 tokens     | None              |
+| **2**     | Cursor AI: Select     | 45 min       | ~18K tokens     | Blocks TextArea   |
+| **3**     | Cursor AI: Checkbox   | 30 min       | ~12K tokens     | None              |
+| **4**     | Cursor AI: Radio      | 30 min       | ~12K tokens     | None              |
+| **5**     | Cursor AI: TextArea   | 30 min       | ~14K tokens     | Depends on Select |
+| **6**     | Cursor AI: Switch     | 20 min       | ~10K tokens     | None              |
+| **7**     | Batch validation      | 30 sec       | ~500 tokens     | None              |
+| **TOTAL** | **Phase 2 Done**      | **~3 hours** | **~67K tokens** | —                 |
 
 **vs. Sequential Manual:** 12 hours, ~220K tokens
 **Savings:** 75% faster ⚡ | 70% fewer tokens 💰
@@ -51,15 +52,16 @@ python3 scripts/scaffold-m3-component.py Select Checkbox Radio TextArea Switch
 
 ## 📝 Component Breakdown
 
-| Component | Type | Complexity | Dependencies | Est. Time |
-|-----------|------|-----------|--------------|-----------|
-| **Select** | Dropdown | ⚠️ High | None (standalone) | 45 min |
-| **TextArea** | Text Input | ⚠️ Medium | Needs Select pattern | 30 min |
-| **Checkbox** | Toggle Input | ✅ Low | None | 30 min |
-| **Radio** | Toggle Input | ✅ Low | None | 30 min |
-| **Switch** | Toggle Input | ✅ Low | None | 20 min |
+| Component    | Type         | Complexity | Dependencies         | Est. Time |
+| ------------ | ------------ | ---------- | -------------------- | --------- |
+| **Select**   | Dropdown     | ⚠️ High    | None (standalone)    | 45 min    |
+| **TextArea** | Text Input   | ⚠️ Medium  | Needs Select pattern | 30 min    |
+| **Checkbox** | Toggle Input | ✅ Low     | None                 | 30 min    |
+| **Radio**    | Toggle Input | ✅ Low     | None                 | 30 min    |
+| **Switch**   | Toggle Input | ✅ Low     | None                 | 20 min    |
 
 **Execution Order:**
+
 1. Start with **Select** (highest complexity, can run in parallel with Checkbox/Radio)
 2. Then **TextArea** (depends on Select pattern)
 3. Parallel: **Checkbox**, **Radio**, **Switch**
@@ -88,6 +90,7 @@ python3 scripts/scaffold-m3-component.py Select Checkbox Radio TextArea Switch
 ```
 
 **What You Get:**
+
 - ✅ 5 TypeScript component files with TODO comments
 - ✅ 5 CSS templates with token placeholders
 - ✅ 5 test scaffolds with test categories
@@ -431,6 +434,7 @@ After all 5 components are done by Cursor, run:
 ```
 
 This runs:
+
 1. ✅ Token validation
 2. ✅ Build (yarn build)
 3. ✅ Linting (yarn lint:fix)
@@ -438,6 +442,7 @@ This runs:
 5. ✅ Generates summary
 
 **Expected Output:**
+
 ```
 ════════════════════════════════════════
 Step 1/5: Token System Validation
@@ -471,16 +476,19 @@ Checked components:
 ## 💡 Reference Materials
 
 **Button (M3 Reference Implementation):**
+
 - `frontend/src/components/m3-expressive/button/M3Button.tsx` (component pattern)
 - `frontend/src/components/m3-expressive/button/M3Button.css` (token usage)
 - `frontend/src/components/m3-expressive/button/M3Button.test.tsx` (test pattern)
 - `frontend/src/components/m3-expressive/button/M3Button.stories.tsx` (storybook pattern)
 
 **Phase 1 References (if available):**
+
 - `frontend/src/components/m3-expressive/input/` (input pattern)
 - `frontend/src/components/m3-expressive/sidebar/` (variant pattern)
 
 **Design System:**
+
 - `frontend/src/styles/m3-design-tokens.css` (all available tokens)
 - `.claude/docs/CURSOR_AI_M3_MIGRATION_PROMPT.md` (complete migration guide, Part 5 for issues)
 
@@ -513,6 +521,7 @@ M3 Migration Progress:
 ## 🎯 What to Do If Something Breaks
 
 ### "yarn build fails"
+
 1. Check the error message (usually missing token reference or syntax error)
 2. Give Cursor the error message with file/line context
 3. Likely causes:
@@ -521,11 +530,13 @@ M3 Migration Progress:
    - TypeScript type error in props interface
 
 ### "Tests fail"
+
 1. Check which test failed and the assertion
 2. Look at M3Button tests for patterns on similar issues
 3. Have Cursor fix the test logic or component implementation
 
 ### "Token not found"
+
 ```bash
 # Find available tokens
 grep "md-sys-color" frontend/src/styles/m3-design-tokens.css | head -20
@@ -572,6 +583,7 @@ grep "md-sys-color-" frontend/src/styles/m3-design-tokens.css | head -30
 ## 📚 Next Steps
 
 After Phase 2 is complete:
+
 1. Phase 3 becomes unblocked (can migrate all dependent components)
 2. See `docs/M3_PHASE3_MIGRATION_GUIDE.md` for strategic approach
 3. You'll have 10 reference implementations (Button + 4 Phase 1 + 5 Phase 2)
@@ -581,4 +593,3 @@ After Phase 2 is complete:
 
 **Last Updated:** 2025-12-03
 **Status:** ✅ Ready for Phase 2 Migration (pending Phase 1 completion)
-

@@ -33,11 +33,11 @@
 
 ### MCP Skills: Production-Ready ✅
 
-| Skill | Score | Status | Issues |
-|-------|-------|--------|--------|
-| mcp-genkit-flows-skill | 92/100 | ✅ Excellent | Minor: 26 flows documented |
+| Skill                   | Score  | Status       | Issues                            |
+| ----------------------- | ------ | ------------ | --------------------------------- |
+| mcp-genkit-flows-skill  | 92/100 | ✅ Excellent | Minor: 26 flows documented        |
 | mcp-configuration-skill | 88/100 | ✅ Excellent | Minor: 84 scripts not categorized |
-| mcp-documentation-skill | 90/100 | ✅ Excellent | Minor: hardcoded counts |
+| mcp-documentation-skill | 90/100 | ✅ Excellent | Minor: hardcoded counts           |
 
 **Recommendation:** No changes needed. All three are production-ready.
 
@@ -46,12 +46,14 @@
 ### Validation Infrastructure: Needs Consolidation 🔴
 
 **Issues Found:**
+
 - 35+ overlapping health checks
 - 255 lines of duplicate code
 - 5 undetected configuration conflicts
 - 3 validators with inconsistent logic
 
 **Example Conflict:**
+
 ```
 Firebase Project ID sources:
 - Secret Manager: careercopilot-468811
@@ -85,6 +87,7 @@ Firebase Project ID sources:
 **Eliminate 120 lines of duplicate code**
 
 Create: `scripts/validation_lib.py`
+
 - 15+ reusable validation functions
 - Single source of truth
 - Consistent error messages
@@ -100,6 +103,7 @@ Update 3 validators to use validation_lib
 **Eliminate 40 lines of duplicate code**
 
 Create: `scripts/secret_manager_lib.py`
+
 - Unified client with consistent error handling
 - Both validators reuse same code
 
@@ -114,6 +118,7 @@ Update 2 validators to use it
 **Detect 5 configuration conflicts**
 
 Create: `scripts/config_resolver.py`
+
 - Multi-source config resolution
 - Cross-validation for mismatches
 - Documents fallback order
@@ -154,6 +159,7 @@ Integrate into test-configuration.py
 ### 🔴 Issue 2: Firebase Project ID Mismatches Undetected
 
 **Example:**
+
 ```
 Secret Manager:  careercopilot-468811
 Env Variable:    careercopilot-staging
@@ -173,6 +179,7 @@ Result:          UNDETECTED CONFLICT! 🚨
 **Target:** 80+ lines, comprehensive
 
 **Coverage Gaps:**
+
 - No capabilities list
 - No troubleshooting section
 - No usage examples
@@ -185,6 +192,7 @@ Result:          UNDETECTED CONFLICT! 🚨
 ## Code Consolidation Impact
 
 ### Before Streamlining
+
 ```
 Total LOC: 951
 Duplicate Code: 255 lines
@@ -194,6 +202,7 @@ SKILL.md Quality: 35/100
 ```
 
 ### After Streamlining
+
 ```
 Total LOC: 1,100 (+149 new utilities)
 Duplicate Code: 0 lines (-100%)
@@ -207,9 +216,11 @@ SKILL.md Quality: 80/100 (+129%)
 ## How to Execute
 
 ### Option 1: Manual Implementation
+
 Use the prompts in `GEMINI_PROMPTS_HEALTH_CHECK.md` with Claude or Gemini Code Assist.
 
 **Steps:**
+
 1. Open GEMINI_PROMPTS_HEALTH_CHECK.md
 2. Copy Prompt 1 (Fix skill docs)
 3. Paste into Claude/Gemini
@@ -222,7 +233,9 @@ Use the prompts in `GEMINI_PROMPTS_HEALTH_CHECK.md` with Claude or Gemini Code A
 ---
 
 ### Option 2: Phased Approach (Recommended)
+
 Execute phases in order:
+
 - **Week 1:** Phase 0 (Quick wins)
 - **Week 2:** Phase 1-2 (Core consolidation)
 - **Week 3:** Phase 3-4 (Testing & verification)
@@ -232,18 +245,21 @@ Execute phases in order:
 ## Risk Assessment
 
 ### Phase 0: Very Low Risk ✅
+
 - Documentation improvements only
 - One command syntax fix
 - No code changes
 - Easy to revert if needed
 
 ### Phase 1-2: Low Risk ✅
+
 - Refactoring (no behavior changes)
 - All validators still work the same
 - Add verification tests
 - Full regression test coverage
 
 ### Phase 3: Low-Medium Risk ⚠️
+
 - Cross-validation is NEW functionality
 - May detect existing misconfigurations
 - Better to know problems before deployment
@@ -254,6 +270,7 @@ Execute phases in order:
 ## Testing Strategy
 
 ### Before Any Changes
+
 ```bash
 # Get baseline
 python3 scripts/production-secrets-validator.py > baseline_secrets.txt
@@ -262,6 +279,7 @@ ENABLE_GENKIT_FLOWS=true python3 verify_genkit.py > baseline_genkit.txt
 ```
 
 ### After Each Phase
+
 ```bash
 # Verify output unchanged
 python3 scripts/production-secrets-validator.py > new_secrets.txt
@@ -272,6 +290,7 @@ diff baseline_config.txt new_config.txt  # Should be identical
 ```
 
 ### Integration Testing
+
 ```bash
 # Run all validators together (project health check)
 python3 scripts/production-secrets-validator.py && \
@@ -284,29 +303,34 @@ ENABLE_GENKIT_FLOWS=true python3 verify_genkit.py
 ## Success Criteria
 
 ### Phase 0 Complete ✅
+
 - project-health-checker skill: ≥80/100 score
 - verify_genkit.py command fixed
 - All documentation sections added
 
 ### Phase 1 Complete ✅
+
 - validation_lib.py created with 15+ validators
 - All 3 validators using validation_lib
 - No duplicate validation code remains
 - Output identical to baseline
 
 ### Phase 2 Complete ✅
+
 - secret_manager_lib.py created
 - Both validators using SecretManagerClient
 - No duplicate client initialization code
 - Error handling centralized
 
 ### Phase 3 Complete ✅
+
 - config_resolver.py created
 - Cross-validation integrated
 - Misconfigurations detected (5 conflict types)
 - test-configuration.py reports conflicts
 
 ### Phase 4 Complete ✅
+
 - All validators tested and verified
 - No regressions introduced
 - No duplicate code remains
@@ -338,16 +362,19 @@ scripts/
 ## Next Steps
 
 ### Immediate (This Week)
+
 1. ✅ Review this document and summary
 2. ✅ Review GEMINI_PROMPTS_HEALTH_CHECK.md
 3. ⬜ Execute Prompts 1-2 (Phase 0 Quick Wins)
 
 ### Short-Term (Next 2 Weeks)
+
 4. ⬜ Execute Prompts 3-6 (Phase 1)
 5. ⬜ Execute Prompts 7-9 (Phase 2)
 6. ⬜ Execute Prompts 10-11 (Phase 3)
 
 ### Testing & Deployment
+
 7. ⬜ Execute Prompts 12-13 (Verification)
 8. ⬜ Deploy changes
 9. ⬜ Update CI/CD to run health checks
@@ -388,14 +415,14 @@ All documents created in `.claude/docs/`:
 
 ## Success Metrics
 
-| Metric | Before | After | Improvement |
-|--------|--------|-------|-------------|
-| Duplicate Code | 255 lines | 0 lines | -100% |
-| Shared Utilities | 0 | 3 modules | +300% |
-| Reusable Functions | 0 | 15+ | New |
-| Conflicts Detected | 0 | 5 types | Risk mitigation |
-| SKILL Quality | 35/100 | 80/100 | +129% |
-| Code Maintainability | Low | High | Significant |
+| Metric               | Before    | After     | Improvement     |
+| -------------------- | --------- | --------- | --------------- |
+| Duplicate Code       | 255 lines | 0 lines   | -100%           |
+| Shared Utilities     | 0         | 3 modules | +300%           |
+| Reusable Functions   | 0         | 15+       | New             |
+| Conflicts Detected   | 0         | 5 types   | Risk mitigation |
+| SKILL Quality        | 35/100    | 80/100    | +129%           |
+| Code Maintainability | Low       | High      | Significant     |
 
 ---
 

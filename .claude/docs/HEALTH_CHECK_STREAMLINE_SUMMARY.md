@@ -2,10 +2,10 @@
 
 ## MCP Skills Review
 
-| Skill | Score | Status | Issues |
-|-------|-------|--------|--------|
-| **mcp-genkit-flows-skill** | 92/100 | ✅ Production Ready | Minor: 26 flows mentioned but only ~8 documented |
-| **mcp-configuration-skill** | 88/100 | ✅ Production Ready | Minor: 84 scripts not categorized; env config not detailed |
+| Skill                       | Score  | Status              | Issues                                                         |
+| --------------------------- | ------ | ------------------- | -------------------------------------------------------------- |
+| **mcp-genkit-flows-skill**  | 92/100 | ✅ Production Ready | Minor: 26 flows mentioned but only ~8 documented               |
+| **mcp-configuration-skill** | 88/100 | ✅ Production Ready | Minor: 84 scripts not categorized; env config not detailed     |
 | **mcp-documentation-skill** | 90/100 | ✅ Production Ready | Minor: agent/skill counts hardcoded (should be auto-generated) |
 
 **Conclusion:** All three MCP skills are excellent. No changes needed.
@@ -35,13 +35,13 @@
 
 ### 5 Conflicts Detected
 
-| Conflict | Script 1 | Script 2 | Risk |
-|----------|----------|----------|------|
-| **Gemini Key Validation** | `len > 20` (strict) | No length check (lenient) | Different validation levels |
-| **JWT Secret Strength** | Only length | Length + default + algorithm | Inconsistent security checks |
-| **Firebase Project ID** | Secret Manager | Env vars | .firebaserc | **Mismatched configs undetected** |
-| **Database URL Scope** | Format only | Connectivity test | Completely ignored | **Missing validation** |
-| **Env Vars Checked** | None | GCP_PROJECT_ID, GOOGLE_CLOUD_PROJECT | GCP_PROJECT_ID, FIREBASE_PROJECT_ID | **Inconsistent coverage** |
+| Conflict                  | Script 1            | Script 2                             | Risk                                |
+| ------------------------- | ------------------- | ------------------------------------ | ----------------------------------- | --------------------------------- |
+| **Gemini Key Validation** | `len > 20` (strict) | No length check (lenient)            | Different validation levels         |
+| **JWT Secret Strength**   | Only length         | Length + default + algorithm         | Inconsistent security checks        |
+| **Firebase Project ID**   | Secret Manager      | Env vars                             | .firebaserc                         | **Mismatched configs undetected** |
+| **Database URL Scope**    | Format only         | Connectivity test                    | Completely ignored                  | **Missing validation**            |
+| **Env Vars Checked**      | None                | GCP_PROJECT_ID, GOOGLE_CLOUD_PROJECT | GCP_PROJECT_ID, FIREBASE_PROJECT_ID | **Inconsistent coverage**         |
 
 ---
 
@@ -53,6 +53,7 @@
 **Status: Not production-ready due to inadequate documentation**
 
 **Issues:**
+
 1. Only 12 lines - missing all core sections
 2. Step 4 has wrong command: `python3 verify_genkit.py`
    - **Should be:** `ENABLE_GENKIT_FLOWS=true python3 verify_genkit.py`
@@ -61,6 +62,7 @@
 5. No "Capabilities" list
 
 **Fix (3-4 hours):**
+
 - Add comprehensive documentation sections
 - Fix verify_genkit.py command syntax
 - Document what gets checked by each validator
@@ -91,6 +93,7 @@ Move duplicate validators into shared module:
 ```
 
 **Impact:**
+
 - Eliminates 120 lines of duplicate code
 - Single source of truth for validation rules
 - Consistent error messages across all 3 scripts
@@ -113,6 +116,7 @@ class SecretManagerClient:
 ```
 
 **Impact:**
+
 - Eliminates duplicate client initialization (40 lines)
 - Both production-secrets-validator.py and test-configuration.py reuse same code
 - Centralized error handling for PermissionDenied, NotFound
@@ -137,6 +141,7 @@ class ConfigResolver:
 ```
 
 **Impact:**
+
 - Detects when Firebase project IDs don't match across sources
 - Catches deployment errors (e.g., wrong project for environment)
 - Single source of truth for config resolution
@@ -159,6 +164,7 @@ class ValidationReport:
 ```
 
 **Impact:**
+
 - Consistent output format across all 3 validators
 - Enables parallel execution with aggregated results
 - JSON/Markdown export for CI/CD
@@ -182,6 +188,7 @@ scripts = config.list_scripts()  # Cached, faster
 ```
 
 **Impact:**
+
 - 90% token savings (via mcp-documentation-skill)
 - Leverage 73% parallel speedup (via mcp-configuration-skill)
 - Unified caching layer
@@ -192,14 +199,14 @@ scripts = config.list_scripts()  # Cached, faster
 
 ## Implementation Timeline
 
-| Phase | Task | Hours | Dependencies |
-|-------|------|-------|--------------|
-| **Phase 0** | Fix project-health-checker skill docs | 3-4 | None |
-| **Phase 1** | Create validation_lib.py | 3-4 | None |
-| **Phase 2** | Create secret_manager_lib.py | 2-3 | Phase 1 |
-| **Phase 3** | Create config_resolver.py | 2-3 | Phase 1, 2 |
-| **Phase 4** | Unified validation_report.py | 2 | Phase 1 |
-| **Phase 5** | MCP integration wrapper | 3-4 | Phase 1-4 |
+| Phase       | Task                                  | Hours | Dependencies |
+| ----------- | ------------------------------------- | ----- | ------------ |
+| **Phase 0** | Fix project-health-checker skill docs | 3-4   | None         |
+| **Phase 1** | Create validation_lib.py              | 3-4   | None         |
+| **Phase 2** | Create secret_manager_lib.py          | 2-3   | Phase 1      |
+| **Phase 3** | Create config_resolver.py             | 2-3   | Phase 1, 2   |
+| **Phase 4** | Unified validation_report.py          | 2     | Phase 1      |
+| **Phase 5** | MCP integration wrapper               | 3-4   | Phase 1-4    |
 
 **Total:** 15-22 hours over 2-3 weeks
 
@@ -221,13 +228,13 @@ scripts = config.list_scripts()  # Cached, faster
 
 ### Code Metrics
 
-| Metric | Before | After | Reduction |
-|--------|--------|-------|-----------|
-| Duplicate Code | 255 lines | 0 lines | -100% |
-| Total LOC | 951 | 1,100 | +149 (new utilities) |
-| Shared Functions | 0 | 15+ | More reusable |
-| Validation Conflicts | 5 undetected | 5 detected | Risk mitigation |
-| SKILL.md Quality | 35/100 | 80/100 | +129% |
+| Metric               | Before       | After      | Reduction            |
+| -------------------- | ------------ | ---------- | -------------------- |
+| Duplicate Code       | 255 lines    | 0 lines    | -100%                |
+| Total LOC            | 951          | 1,100      | +149 (new utilities) |
+| Shared Functions     | 0            | 15+        | More reusable        |
+| Validation Conflicts | 5 undetected | 5 detected | Risk mitigation      |
+| SKILL.md Quality     | 35/100       | 80/100     | +129%                |
 
 ### Benefits
 
@@ -246,11 +253,13 @@ scripts = config.list_scripts()  # Cached, faster
 ### Issue 1: verify_genkit.py Command is Wrong
 
 **Current (incorrect):**
+
 ```bash
 python3 verify_genkit.py
 ```
 
 **Should be:**
+
 ```bash
 ENABLE_GENKIT_FLOWS=true python3 verify_genkit.py
 ```
@@ -265,6 +274,7 @@ ENABLE_GENKIT_FLOWS=true python3 verify_genkit.py
 ### Issue 2: Firebase Project ID Not Cross-Validated
 
 **Current Problem:**
+
 - Secret Manager says: `firebase-project-id=careercopilot-468811`
 - Environment says: `FIREBASE_PROJECT_ID=careercopilot-staging`
 - .firebaserc says: `careercopilot-468811`

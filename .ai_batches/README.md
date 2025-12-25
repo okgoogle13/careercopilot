@@ -9,6 +9,7 @@ This directory contains batch-specific instructions for parallel M3 component mi
 ## Available Batches (Ready for Delegation)
 
 ### 🟢 Batch 5: Feedback Components
+
 - **File:** `BATCH_5_INSTRUCTIONS.md`
 - **Difficulty:** Easy (85% automation)
 - **Time:** 2.5 hours
@@ -17,6 +18,7 @@ This directory contains batch-specific instructions for parallel M3 component mi
 - **Status:** ⏳ Available
 
 ### 🟢 Batch 6: Utility Components
+
 - **File:** `BATCH_6_INSTRUCTIONS.md`
 - **Difficulty:** Easiest (90% automation)
 - **Time:** 2 hours
@@ -25,6 +27,7 @@ This directory contains batch-specific instructions for parallel M3 component mi
 - **Status:** ⏳ Available
 
 ### 🟢 Batch 8: Layout Components
+
 - **File:** `BATCH_8_INSTRUCTIONS.md`
 - **Difficulty:** Easiest (90% automation)
 - **Time:** 1.5 hours (fastest!)
@@ -47,23 +50,24 @@ This directory contains batch-specific instructions for parallel M3 component mi
 
 ## Batch Status Tracking
 
-| Batch | Components | Difficulty | Time | Status | Agent |
-|-------|-----------|------------|------|--------|-------|
-| 1 | Progress, SearchInput, Textarea | Easy | 2.5h | ✅ Complete | Lead Agent |
-| 2 | Select, DatePicker | Hard | 3h | 🔄 In Progress | Lead Agent |
-| 3 | ActionCard, ProfileCard, JobCard | Mod-Hard | 4h | ⏳ Available | - |
-| 4 | Tabs, Breadcrumb, Sidebar | Moderate | 3.5h | ⏳ Available | - |
-| 5 | Alert, Skeleton, EmptyState | Easy | 2.5h | ⏳ **AVAILABLE** | - |
-| 6 | Avatar, Tooltip, Popover, Separator | Easiest | 2h | ⏳ **AVAILABLE** | - |
-| 7 | Checkbox, RadioGroup, Switch, Slider | Moderate | 3h | ⏳ Available | - |
-| 8 | Container, Grid, Divider | Easiest | 1.5h | ⏳ **AVAILABLE** | - |
-| 9 | TBD | TBD | TBD | ⏳ Pending | - |
+| Batch | Components                           | Difficulty | Time | Status           | Agent      |
+| ----- | ------------------------------------ | ---------- | ---- | ---------------- | ---------- |
+| 1     | Progress, SearchInput, Textarea      | Easy       | 2.5h | ✅ Complete      | Lead Agent |
+| 2     | Select, DatePicker                   | Hard       | 3h   | 🔄 In Progress   | Lead Agent |
+| 3     | ActionCard, ProfileCard, JobCard     | Mod-Hard   | 4h   | ⏳ Available     | -          |
+| 4     | Tabs, Breadcrumb, Sidebar            | Moderate   | 3.5h | ⏳ Available     | -          |
+| 5     | Alert, Skeleton, EmptyState          | Easy       | 2.5h | ⏳ **AVAILABLE** | -          |
+| 6     | Avatar, Tooltip, Popover, Separator  | Easiest    | 2h   | ⏳ **AVAILABLE** | -          |
+| 7     | Checkbox, RadioGroup, Switch, Slider | Moderate   | 3h   | ⏳ Available     | -          |
+| 8     | Container, Grid, Divider             | Easiest    | 1.5h | ⏳ **AVAILABLE** | -          |
+| 9     | TBD                                  | TBD        | TBD  | ⏳ Pending       | -          |
 
 ---
 
 ## Prerequisites
 
 Before starting ANY batch:
+
 1. ✅ Read `M3_DELEGATION_GUIDE.md` (parent directory)
 2. ✅ Verify git branch: `claude/m3-expressive-tokens-014XmAiA4Rd8N6ucn9JDEJuz`
 3. ✅ Ensure clean working tree: `git status`
@@ -97,10 +101,7 @@ If you're new to this project, start with easiest batches first:
 2. **Batch 6** (Utility) - 2 hours, 90% automation, simple logic
 3. **Batch 5** (Feedback) - 2.5 hours, 85% automation, moderate logic
 
-Then progress to moderate batches:
-4. **Batch 7** (Form Controls)
-5. **Batch 4** (Navigation)
-6. **Batch 3** (Cards)
+Then progress to moderate batches: 4. **Batch 7** (Form Controls) 5. **Batch 4** (Navigation) 6. **Batch 3** (Cards)
 
 ---
 
@@ -118,6 +119,7 @@ Then progress to moderate batches:
 ## Quality Standards
 
 All batches must meet:
+
 - ✅ 100% M3 token usage (zero hardcoded colors/sizes)
 - ✅ TypeScript strict mode compliance
 - ✅ WCAG AA accessibility (4.5:1 contrast)
@@ -139,6 +141,7 @@ All batches must meet:
 ## Questions?
 
 Refer to `M3_DELEGATION_GUIDE.md` for:
+
 - Complete workflow walkthrough
 - M3 token quick reference
 - Common pitfalls & solutions

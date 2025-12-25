@@ -4,12 +4,12 @@
 
 **Last Updated:** 2025-11-14
 
-| Layer | Current Coverage | Target | Status |
-|-------|-----------------|--------|---------|
-| **Frontend Components** | 17% (22/128 components tested) | 50% | 🟡 Needs Improvement |
-| **Backend APIs** | 85% (comprehensive pytest coverage) | 95% | 🟢 Good |
-| **E2E Flows** | 90% (7 Playwright tests, 722 lines) | 95% | 🟢 Good |
-| **Storybook Documentation** | 2.3% (3/128 components) | 40% | 🔴 Critical |
+| Layer                       | Current Coverage                    | Target | Status               |
+| --------------------------- | ----------------------------------- | ------ | -------------------- |
+| **Frontend Components**     | 17% (22/128 components tested)      | 50%    | 🟡 Needs Improvement |
+| **Backend APIs**            | 85% (comprehensive pytest coverage) | 95%    | 🟢 Good              |
+| **E2E Flows**               | 90% (7 Playwright tests, 722 lines) | 95%    | 🟢 Good              |
+| **Storybook Documentation** | 2.3% (3/128 components)             | 40%    | 🔴 Critical          |
 
 ## Testing Skills & Tools
 
@@ -18,12 +18,14 @@
 **Purpose:** Generate React component and hook tests with auto-detected props
 
 **Capabilities:**
+
 - Generate component tests using `@testing-library/react` + `userEvent` patterns
 - Auto-detect component props and generate test cases
 - Include edge case coverage and accessibility tests
 - Templates: `component.test.tsx.tpl`, `hook.test.tsx.tpl`
 
 **Usage:**
+
 ```bash
 "Use jest-test-scaffolder to create tests for Button component"
 "Generate hook tests for useUserData hook"
@@ -34,12 +36,14 @@
 **Purpose:** Generate backend integration tests with comprehensive scenarios
 
 **Capabilities:**
+
 - Generate tests for success, validation, auth, and error scenarios
 - Mock Firebase Auth and Genkit flows
 - Include performance assertions and load testing
 - Database transaction testing
 
 **Usage:**
+
 ```bash
 "Use api-integration-test-scaffolder to create tests for user endpoints"
 "Generate integration tests for notification system"
@@ -50,12 +54,14 @@
 **Purpose:** Generate `.stories.tsx` files with variant stories and interaction tests
 
 **Capabilities:**
+
 - Auto-extract component names and props
 - Generate variant stories for different states
 - Include interaction tests and accessibility checks
 - Auto-generate controls and documentation
 
 **Usage:**
+
 ```bash
 "Use storybook-scaffolder to create stories for Card component"
 "Generate interaction tests for Form components"
@@ -66,6 +72,7 @@
 **Purpose:** Generate Playwright E2E tests for user journeys
 
 **Capabilities:**
+
 - Generate end-to-end tests for critical user flows
 - Include mobile and desktop variants
 - Performance and accessibility testing
@@ -74,6 +81,7 @@
 **Reference:** `.claude/skills/webapp-testing/REFERENCE/careercopilot-selectors.md`
 
 **Usage:**
+
 ```bash
 "Use webapp-testing to create E2E tests for user registration flow"
 "Generate Playwright tests for job search functionality"
@@ -84,12 +92,14 @@
 **Purpose:** Orchestrate test generation for all layers with coverage analysis
 
 **Capabilities:**
+
 - Coordinates test generation across frontend, backend, and E2E
 - Integrates with fullstack-integration-specialist for API testing
 - Provides coverage analysis and gap identification
 - Manages test suite optimization and maintenance
 
 **Integration:**
+
 - Works with `test-runner` for execution
 - Collaborates with `code-reviewer` for quality assurance
 - Uses `frontend-backend-mapper` for integration testing
@@ -206,12 +216,14 @@ tests/
 ### Frontend Coverage Goals
 
 **Priority Components (High Impact):**
+
 1. Authentication components (Login, Register, Profile)
 2. Core UI components (Button, Card, Form, Modal)
 3. Business logic components (JobCard, SearchResults, Dashboard)
 4. Navigation components (Header, Sidebar, Breadcrumb)
 
 **Coverage Targets:**
+
 - **Critical Path Components:** 90%+
 - **UI Components:** 80%+
 - **Utility Functions:** 95%+
@@ -219,12 +231,14 @@ tests/
 ### Backend Coverage Goals
 
 **Priority Areas:**
+
 1. Authentication and authorization
 2. Core business logic (job matching, recommendations)
 3. Database operations and transactions
 4. External API integrations
 
 **Coverage Targets:**
+
 - **API Endpoints:** 95%+
 - **Business Logic:** 90%+
 - **Database Operations:** 85%+
@@ -232,6 +246,7 @@ tests/
 ### E2E Coverage Goals
 
 **Critical User Journeys:**
+
 1. User registration and login
 2. Job search and application
 3. Profile management
@@ -239,6 +254,7 @@ tests/
 5. Admin dashboard operations
 
 **Coverage Targets:**
+
 - **Critical Paths:** 100%
 - **Secondary Flows:** 80%+
 - **Edge Cases:** 60%+
@@ -248,16 +264,18 @@ tests/
 ### Fixtures and Mocks
 
 **Frontend Fixtures:**
+
 ```typescript
 // __tests__/fixtures/user.ts
 export const mockUser = {
-  id: 'test-user-123',
-  email: 'test@example.com',
-  name: 'Test User'
+  id: "test-user-123",
+  email: "test@example.com",
+  name: "Test User",
 };
 ```
 
 **Backend Fixtures:**
+
 ```python
 # tests/fixtures/user_data.py
 TEST_USER = {
@@ -270,6 +288,7 @@ TEST_USER = {
 ### Database State Management
 
 **Test Database Setup:**
+
 - Use separate test database
 - Clean state between tests
 - Seed with consistent test data
@@ -280,6 +299,7 @@ TEST_USER = {
 ### GitHub Actions Integration
 
 **Test Pipeline:**
+
 1. **Linting and Formatting** - Fast feedback
 2. **Unit Tests** - Frontend and backend
 3. **Integration Tests** - API contracts
@@ -287,6 +307,7 @@ TEST_USER = {
 5. **Coverage Reports** - Quality gates
 
 **Quality Gates:**
+
 - Frontend coverage > 50%
 - Backend coverage > 85%
 - All critical tests must pass
@@ -295,12 +316,14 @@ TEST_USER = {
 ### Performance Testing
 
 **Frontend Performance:**
+
 - Bundle size analysis
 - Lighthouse CI integration
 - Component render performance
 - Memory leak detection
 
 **Backend Performance:**
+
 - API response time benchmarks
 - Database query optimization
 - Load testing for critical endpoints
@@ -311,18 +334,21 @@ TEST_USER = {
 ### Common Issues
 
 **Flaky Tests:**
+
 - Identify race conditions
 - Improve test isolation
 - Add proper waits and timeouts
 - Use deterministic test data
 
 **Slow Tests:**
+
 - Optimize database operations
 - Use test doubles for external services
 - Parallelize test execution
 - Implement test caching
 
 **Coverage Gaps:**
+
 - Identify untested code paths
 - Prioritize critical business logic
 - Use mutation testing for quality

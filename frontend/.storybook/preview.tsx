@@ -1,96 +1,77 @@
 import type { Preview } from '@storybook/react';
-import { ThemeProvider } from '@mui/material/styles';
-import { CssBaseline } from '@mui/material';
-import React from 'react';
-import { lightTheme, darkTheme } from '../src/theme/theme';
+import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
+import { CssBaseline, ThemeProvider } from '@mui/material';
+import theme from '../src/theme/theme';
 
-// Import global styles
-import '../src/styles/theme-tokens.css';
-import '../src/styles/enhanced-theme.css';
-import '../src/styles/theme-utility-classes.css';
+// Define environment interface
+interface EnvironmentConfig {
+  API_URL: string;
+  FRONTEND_URLS: string[];
+  FRONTEND_URL: string;
+}
 
-// Custom viewport configurations
-const customViewports = {
-  mobileS: {
-    name: 'Mobile S',
-    styles: {
-      width: '320px',
-      height: '568px',
-    },
+// Environment variables
+const ENV: Record<string, EnvironmentConfig> = {
+  STAGING: {
+    API_URL: 'https://us-central1-careercopilot-staging.cloudfunctions.net/api',
+    FRONTEND_URLS: [
+      'https://careercopilot-staging.web.app',
+      'https://careercopilot-staging.firebaseapp.com'
+    ],
+    FRONTEND_URL: 'https://careercopilot-staging.web.app', // Default staging URL
   },
-  mobileM: {
-    name: 'Mobile M',
-    styles: {
-      width: '375px',
-      height: '667px',
-    },
+  PRODUCTION: {
+    API_URL: 'https://us-central1-careercopilot-468811.cloudfunctions.net/api',
+    FRONTEND_URLS: [
+      'https://careercopilot-468811.web.app',
+      'https://careercopilot-468811.firebaseapp.com'
+    ],
+    FRONTEND_URL: 'https://careercopilot-468811.web.app', // Default production URL
   },
-  mobileL: {
-    name: 'Mobile L',
-    styles: {
-      width: '425px',
-      height: '812px',
-    },
-  },
-  tablet: {
-    name: 'Tablet',
-    styles: {
-      width: '768px',
-      height: '1024px',
-    },
-  },
-  laptop: {
-    name: 'Laptop',
-    styles: {
-      width: '1024px',
-      height: '768px',
-    },
-  },
-  desktop: {
-    name: 'Desktop',
-    styles: {
-      width: '1440px',
-      height: '1024px',
-    },
+  DEVELOPMENT: {
+    API_URL: 'http://localhost:5001/api',
+    FRONTEND_URLS: ['http://localhost:3000'],
+    FRONTEND_URL: 'http://localhost:3000',
   },
 };
 
+// Set the environment based on STORYBOOK_ENV or default to development
+const ENV_NAME = (process.env.STORYBOOK_ENV || 'development') as keyof typeof ENV;
+const ENV_CONFIG = ENV[ENV_NAME] || ENV.DEVELOPMENT;
+
+// Set environment variables for stories
+process.env.VITE_API_URL = ENV_CONFIG.API_URL;
+process.env.VITE_FRONTEND_URL = ENV_CONFIG.FRONTEND_URL;
+
 const preview: Preview = {
   parameters: {
-    // Global parameters
     actions: { argTypesRegex: '^on[A-Z].*' },
     controls: {
-      expanded: true,
       matchers: {
         color: /(background|color)$/i,
         date: /Date$/,
       },
-      sort: 'requiredFirst',
+      expanded: true,
     },
-    // Documentation
-    docs: {
-      toc: true,
-      source: {
-        state: 'open', // Default state for source code panel
-      },
-    },
-    // Viewport
     viewport: {
-      viewports: customViewports,
+      viewports: INITIAL_VIEWPORTS,
       defaultViewport: 'responsive',
     },
-    // Backgrounds
     backgrounds: {
       default: 'light',
       values: [
-        { name: 'light', value: lightTheme.palette.background.default },
-        { name: 'dark', value: darkTheme.palette.background.default },
-        { name: 'paper', value: lightTheme.palette.background.paper },
+        { name: 'light', value: '#f8f9fa' },
+        { name: 'dark', value: '#212529' },
       ],
     },
-    // Layout
-    layout: 'centered',
-    // A11y
+    options: {
+      storySort: {
+        order: ['Documentation', 'Components', 'Features', 'Pages', '*'],
+      },
+    },
+    chromatic: {
+      disable: process.env.NODE_ENV !== 'production',
+    },
     a11y: {
       config: {
         rules: [
@@ -100,45 +81,16 @@ const preview: Preview = {
           },
         ],
       },
-      test: 'todo',
-    },
-    // Performance
-    options: {
-      storySort: {
-        order: ['Introduction', 'Documentation', 'Components', 'Pages', 'Features'],
-        method: 'alphabetical',
-      },
     },
   },
-  // Global decorators
   decorators: [
-    (Story, context) => {
-      const theme = context.globals.theme === 'dark' ? darkTheme : lightTheme;
-
-      return React.createElement(
-        ThemeProvider,
-        { theme },
-        React.createElement(CssBaseline),
-        React.createElement(Story)
-      );
-    },
+    (Story) => (
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Story />
+      </ThemeProvider>
+    )
   ],
-  // Global types
-  globalTypes: {
-    theme: {
-      description: 'Global theme for components',
-      defaultValue: 'light',
-      toolbar: {
-        title: 'Theme',
-        icon: 'paintbrush',
-        items: [
-          { value: 'light', title: 'Light', icon: 'sun' },
-          { value: 'dark', title: 'Dark', icon: 'moon' },
-        ],
-        dynamicTitle: true,
-      },
-    },
-  },
 };
 
 export default preview;

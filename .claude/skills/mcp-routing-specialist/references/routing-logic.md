@@ -43,23 +43,24 @@
 
 ### By Task Intent
 
-| Intent | Keywords | Delegate To | Savings | Method |
-|--------|----------|-------------|---------|--------|
-| **Code Analysis** | review, audit, check, bugs, issues, quality | Gemini | 40-55% | `analyze_code()` |
-| **Code Improvement** | refactor, improve, optimize, clean, better | Gemini | 35% | `refactoring_suggestions()` |
-| **System Design** | architecture, design, structure, pattern | Gemini | 45% | `architecture_analysis()` |
-| **Performance** | slow, bottleneck, latency, optimize | Gemini | 55% | `optimization_analysis()` |
-| **Error Diagnosis** | error, failing, crash, bug, debug | Gemini | 50% | `error_diagnosis()` |
-| **Config Info** | config, setting, env, variable, firebase | Cache | 94.9% | `get_environment()` |
-| **Doc Info** | doc, guide, how-to, reference, CLAUDE | Cache | 93.3% | `search_docs()` |
-| **Flow Status** | flow, execution, run, schema, genkit | Genkit | 99.1% | `get_flow()` |
-| **GitHub Work** | PR, issue, branch, merge, repository | GitHub | 80% | GitHub methods |
+| Intent               | Keywords                                    | Delegate To | Savings | Method                      |
+| -------------------- | ------------------------------------------- | ----------- | ------- | --------------------------- |
+| **Code Analysis**    | review, audit, check, bugs, issues, quality | Gemini      | 40-55%  | `analyze_code()`            |
+| **Code Improvement** | refactor, improve, optimize, clean, better  | Gemini      | 35%     | `refactoring_suggestions()` |
+| **System Design**    | architecture, design, structure, pattern    | Gemini      | 45%     | `architecture_analysis()`   |
+| **Performance**      | slow, bottleneck, latency, optimize         | Gemini      | 55%     | `optimization_analysis()`   |
+| **Error Diagnosis**  | error, failing, crash, bug, debug           | Gemini      | 50%     | `error_diagnosis()`         |
+| **Config Info**      | config, setting, env, variable, firebase    | Cache       | 94.9%   | `get_environment()`         |
+| **Doc Info**         | doc, guide, how-to, reference, CLAUDE       | Cache       | 93.3%   | `search_docs()`             |
+| **Flow Status**      | flow, execution, run, schema, genkit        | Genkit      | 99.1%   | `get_flow()`                |
+| **GitHub Work**      | PR, issue, branch, merge, repository        | GitHub      | 80%     | GitHub methods              |
 
 ---
 
 ### By User Phrase
 
 #### Analysis Tasks (→ Gemini)
+
 - "Review this code"
 - "Find bugs in this function"
 - "Refactor this to be cleaner"
@@ -69,6 +70,7 @@
 - "Why is this slow?"
 
 #### Lookup Tasks (→ Cache)
+
 - "What's the config?"
 - "Show me the documentation"
 - "What's in CLAUDE.md?"
@@ -77,12 +79,14 @@
 - "What's the Firebase config?"
 
 #### Flow Tasks (→ Genkit)
+
 - "Run this flow"
 - "Check the flow status"
 - "What's the flow schema?"
 - "List available flows"
 
 #### Repository Tasks (→ GitHub)
+
 - "Show me the latest PR"
 - "List open issues"
 - "Read this file from the repo"
@@ -104,16 +108,19 @@ Priority 4: Claude (Self) - ONLY if no other option
 ### Example Conflicts
 
 **Scenario 1: "Tell me about our genkit flows"**
+
 - Could be: Documentation lookup OR Genkit execution
 - Resolution: Genkit server (Priority 1, specialized)
 - Method: `genkit.list_flows()`
 
 **Scenario 2: "Analyze the Firebase configuration"**
+
 - Could be: Configuration lookup OR Analysis
 - Resolution: Configuration server first (cache), then Gemini if analysis needed
 - Methods: `configuration.get_environment()` → `gemini.optimization_analysis()`
 
 **Scenario 3: "What's the best way to structure this code?"**
+
 - Could be: Documentation lookup OR Architecture analysis
 - Resolution: Gemini server (Priority 3, analysis)
 - Method: `gemini.architecture_analysis()`
@@ -177,6 +184,7 @@ Total: 85%+ combined savings
 ### When it's unclear, ask:
 
 **Format:**
+
 ```
 "I have multiple routing options. Should I:
 1. [Option A] via [Server] (Savings: X%)
@@ -187,6 +195,7 @@ Shall I proceed?"
 ```
 
 **Example:**
+
 ```
 "I can either:
 1. Search our documentation cache (93.3% savings)
@@ -202,13 +211,13 @@ Shall I proceed?"
 
 ### ❌ Anti-Patterns to Avoid
 
-| Anti-Pattern | Why Bad | Correct Routing |
-|--------------|---------|-----------------|
-| Analyze code yourself when Gemini available | Wastes context | Use gemini.analyze_code() |
-| Read raw files when cache exists | Misses 93% savings | Use cache server |
-| Manually debug when Gemini can help | 50% savings lost | Use gemini.error_diagnosis() |
-| Execute flow without genkit | Misses 99% savings | Use genkit.execute_flow() |
-| Read GitHub UI when MCP available | Wastes token budget | Use github MCP |
+| Anti-Pattern                                | Why Bad             | Correct Routing              |
+| ------------------------------------------- | ------------------- | ---------------------------- |
+| Analyze code yourself when Gemini available | Wastes context      | Use gemini.analyze_code()    |
+| Read raw files when cache exists            | Misses 93% savings  | Use cache server             |
+| Manually debug when Gemini can help         | 50% savings lost    | Use gemini.error_diagnosis() |
+| Execute flow without genkit                 | Misses 99% savings  | Use genkit.execute_flow()    |
+| Read GitHub UI when MCP available           | Wastes token budget | Use github MCP               |
 
 ---
 
@@ -217,6 +226,7 @@ Shall I proceed?"
 ### Example: Code Review
 
 **Wrong approach (❌):**
+
 ```
 You: Read code + self-analyze + suggest fixes
 Tokens used: 1,200 tokens (expensive)
@@ -224,6 +234,7 @@ Savings: 0%
 ```
 
 **Right approach (✅):**
+
 ```
 Step 1: gemini.analyze_code(code)
 Tokens: 400 tokens (via Gemini)
@@ -233,6 +244,7 @@ Savings: 66% vs Claude
 ### Example: Configuration Query
 
 **Wrong approach (❌):**
+
 ```
 You: Read firebase.json + parse + explain
 Tokens used: 5,000+ tokens
@@ -240,6 +252,7 @@ Savings: 0%
 ```
 
 **Right approach (✅):**
+
 ```
 Step 1: configuration.get_environment("firebase")
 Tokens: 78 tokens (cached)
@@ -249,6 +262,7 @@ Savings: 98%
 ### Example: Multi-Step Task
 
 **Wrong approach (❌):**
+
 ```
 You: Read docs + read config + analyze all
 Tokens: 8,000+ tokens
@@ -256,6 +270,7 @@ Savings: 0%
 ```
 
 **Right approach (✅):**
+
 ```
 Step 1: documentation.search_docs("optimization")
 Tokens: 341 tokens (cached)
@@ -277,6 +292,7 @@ Savings: 92%+ vs doing it manually
 ### Scenario 1: "Why is my Genkit flow timing out?"
 
 **Correct Routing:**
+
 ```
 Classification: Error diagnosis (compound)
 
@@ -296,6 +312,7 @@ Combined: 75%+ token reduction
 ### Scenario 2: "Refactor this function for performance"
 
 **Correct Routing:**
+
 ```
 Classification: Code analysis + refactoring
 
@@ -308,6 +325,7 @@ Why? Gemini-1.5-Flash is optimized for code analysis
 ### Scenario 3: "What's our configuration strategy?"
 
 **Correct Routing:**
+
 ```
 Classification: Lookup + analysis
 

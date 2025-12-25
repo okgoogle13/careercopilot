@@ -19,12 +19,13 @@ Use this as a reference when prompting Cursor AI or other AI coding assistants t
 
 ### 1.1 Project Architecture Context
 
-```markdown
+````markdown
 # CareerCopilot Component Migration Context
 
 ## Current System Architecture
 
 **Frontend Stack:**
+
 - React 18.2.0 + TypeScript 5.0+
 - Vite build system
 - Design Systems:
@@ -34,6 +35,7 @@ Use this as a reference when prompting Cursor AI or other AI coding assistants t
 ## Component Namespaces
 
 Three-namespace strategy:
+
 1. `/components/electric/` - Production Electric Alchemist components
 2. `/components/m3-expressive/` - M3 Expressive components (migration target)
 3. `/components/custom/` - Domain-specific components
@@ -43,6 +45,7 @@ Three-namespace strategy:
 **Token Source:** `frontend/src/styles/m3-design-tokens.css` (auto-generated)
 
 **Token Structure:**
+
 ```css
 --md-sys-color-{role}-{tone}     /* Primary, secondary, tertiary, error, neutral */
 --md-sys-color-surface-*          /* Surface variations */
@@ -52,10 +55,12 @@ Three-namespace strategy:
 --md-sys-motion-*                 /* Duration & easing */
 --md-sys-elevation-*              /* Shadow system (5 levels) */
 ```
+````
 
 ## Validation
 
 Run `python3 ./scripts/validate-design-tokens.py` to verify token system integrity.
+
 ```
 
 ---
@@ -101,13 +106,15 @@ This section documents the **complete, tested migration** of the Button componen
 
 Create these files:
 ```
+
 frontend/src/components/m3-expressive/button/
-├── M3Button.tsx           # React component
-├── M3Button.css           # Styling with tokens
-├── M3Button.stories.tsx   # Storybook documentation
-├── M3Button.test.tsx      # 37 comprehensive tests
-└── index.ts               # Export
-```
+├── M3Button.tsx # React component
+├── M3Button.css # Styling with tokens
+├── M3Button.stories.tsx # Storybook documentation
+├── M3Button.test.tsx # 37 comprehensive tests
+└── index.ts # Export
+
+````
 
 #### Step 2: TypeScript Component (M3Button.tsx)
 
@@ -230,11 +237,12 @@ export const M3Button = React.forwardRef<
 M3Button.displayName = 'M3Button';
 
 export default M3Button;
-```
+````
 
 #### Step 3: CSS Module Styling (M3Button.css)
 
 **Key Principles:**
+
 - ✅ Use BEM naming: `.m3-button`, `.m3-button--variant`, `.m3-button__element`
 - ✅ All colors use `var(--md-sys-color-*)` tokens
 - ✅ All spacing uses `var(--md-sys-spacing-*)` tokens
@@ -265,6 +273,7 @@ export default M3Button;
 ```
 
 **Variants to Implement:**
+
 1. **filled** - Solid background (highest emphasis)
 2. **elevated** - Filled with elevation shadow
 3. **tonal** - Subtle background (medium emphasis)
@@ -274,6 +283,7 @@ export default M3Button;
 #### Step 4: Testing (M3Button.test.tsx)
 
 **Coverage Checklist:**
+
 - ✅ 37 comprehensive tests (all passing)
 - ✅ Basic rendering tests
 - ✅ Variant property tests
@@ -288,6 +298,7 @@ export default M3Button;
 - ✅ HTML attribute forwarding
 
 **Run Tests:**
+
 ```bash
 yarn test --testPathPattern="M3Button"
 # Output: Test Suites: 1 passed, 1 total
@@ -297,6 +308,7 @@ yarn test --testPathPattern="M3Button"
 #### Step 5: Storybook Documentation (M3Button.stories.tsx)
 
 **What to Include:**
+
 - ✅ Default story
 - ✅ All variants demo
 - ✅ All sizes demo
@@ -308,6 +320,7 @@ yarn test --testPathPattern="M3Button"
 - ✅ Interactive demo with onClick
 
 **View in Storybook:**
+
 ```bash
 yarn storybook
 # Navigate to: M3 Expressive > Button
@@ -316,14 +329,16 @@ yarn storybook
 #### Step 6: Export & Integration
 
 Create `index.ts`:
+
 ```typescript
-export { M3Button, type M3ButtonProps } from './M3Button';
+export { M3Button, type M3ButtonProps } from "./M3Button";
 ```
 
 Import CSS at app level:
+
 ```typescript
 // In frontend/src/app/layout.tsx or your root component
-import '@/components/m3-expressive/button/M3Button.css';
+import "@/components/m3-expressive/button/M3Button.css";
 ```
 
 ---
@@ -417,6 +432,7 @@ Available M3 tokens:
 Use this checklist for each component migration:
 
 ### Pre-Migration
+
 - [ ] Read current component implementation
 - [ ] Identify all variants (color, size, style)
 - [ ] List all dependencies
@@ -424,6 +440,7 @@ Use this checklist for each component migration:
 - [ ] Validate design tokens exist for target colors
 
 ### Implementation
+
 - [ ] Create TypeScript component file
 - [ ] Create CSS module with token-based styling
 - [ ] Create comprehensive test suite (20+ tests)
@@ -433,6 +450,7 @@ Use this checklist for each component migration:
 - [ ] Verify no direct CSS imports in component
 
 ### Testing & Validation
+
 - [ ] All tests pass: `yarn test --testPathPattern="M3[ComponentName]"`
 - [ ] Build succeeds: `yarn build`
 - [ ] Linting passes: `yarn lint:fix`
@@ -441,6 +459,7 @@ Use this checklist for each component migration:
 - [ ] Token validation passes: `python3 ./scripts/validate-design-tokens.py`
 
 ### Documentation & Integration
+
 - [ ] Add component to m3-expressive/index.ts
 - [ ] Import CSS in application root
 - [ ] Update component migration tracker
@@ -451,42 +470,50 @@ Use this checklist for each component migration:
 ## Part 5: Common Issues & Solutions
 
 ### Issue 1: CSS Import Fails in Tests
+
 **Problem:** Jest can't resolve CSS module in tests
 **Solution:** Remove direct CSS import from component:
+
 ```typescript
 // ❌ DON'T DO THIS
-import './M3Button.css';  // Fails in tests
+import "./M3Button.css"; // Fails in tests
 
 // ✅ DO THIS
 // Import CSS at app level instead
 // frontend/src/app/layout.tsx
-import '@/components/m3-expressive/button/M3Button.css';
+import "@/components/m3-expressive/button/M3Button.css";
 ```
 
 ### Issue 2: Token Not Found
+
 **Problem:** `var(--md-sys-color-foo)` is undefined
 **Solution:** Check m3-design-tokens.css for correct token name:
+
 ```bash
 grep "md-sys-color" frontend/src/styles/m3-design-tokens.css | head -20
 ```
 
 ### Issue 3: Contrast Ratio Warnings
+
 **Problem:** Validation warns about WCAG contrast
 **Solution:** This is a palette design issue, not a component issue. Either:
+
 1. Adjust token values in design-system/tokens.json
 2. Use different tone combinations (e.g., primary-50 instead of primary-60)
 
 ### Issue 4: Component Imports from Wrong Namespace
+
 **Problem:** Components mixing Electric and M3 tokens
 **Solution:** NEVER mix namespaces in one component:
+
 ```typescript
 // ❌ WRONG
-import { ElectricButton } from '@/components/electric';
-import { M3Chip } from '@/components/m3-expressive';
+import { ElectricButton } from "@/components/electric";
+import { M3Chip } from "@/components/m3-expressive";
 
 // ✅ RIGHT - Choose one system per page/feature
-import { M3Button } from '@/components/m3-expressive';
-import { M3Chip } from '@/components/m3-expressive';
+import { M3Button } from "@/components/m3-expressive";
+import { M3Chip } from "@/components/m3-expressive";
 ```
 
 ---
@@ -495,14 +522,14 @@ import { M3Chip } from '@/components/m3-expressive';
 
 **Button Component Migration Results:**
 
-| Metric | Result |
-| ------ | ------ |
-| Component Size | 3.2 KB (minified) |
-| CSS Size | 8.1 KB (uncompressed) |
-| Test Coverage | 37 tests, 100% pass rate |
-| Build Time | < 100ms |
-| Accessibility Score | 100 (WCAG AA) |
-| Browser Support | Modern (Chrome, Firefox, Safari, Edge) |
+| Metric              | Result                                 |
+| ------------------- | -------------------------------------- |
+| Component Size      | 3.2 KB (minified)                      |
+| CSS Size            | 8.1 KB (uncompressed)                  |
+| Test Coverage       | 37 tests, 100% pass rate               |
+| Build Time          | < 100ms                                |
+| Accessibility Score | 100 (WCAG AA)                          |
+| Browser Support     | Modern (Chrome, Firefox, Safari, Edge) |
 
 ---
 
@@ -511,6 +538,7 @@ import { M3Chip } from '@/components/m3-expressive';
 After Button migration is complete:
 
 1. **Validate Success**
+
    ```bash
    # Run all checks
    yarn test --testPathPattern="M3Button"

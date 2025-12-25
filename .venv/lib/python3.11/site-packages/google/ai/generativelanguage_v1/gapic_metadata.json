@@ -1,4 +1,4 @@
- {
+{
   "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
   "language": "python",
   "libraryPackage": "google.ai.generativelanguage_v1",
@@ -11,29 +11,19 @@
           "libraryClient": "GenerativeServiceClient",
           "rpcs": {
             "BatchEmbedContents": {
-              "methods": [
-                "batch_embed_contents"
-              ]
+              "methods": ["batch_embed_contents"]
             },
             "CountTokens": {
-              "methods": [
-                "count_tokens"
-              ]
+              "methods": ["count_tokens"]
             },
             "EmbedContent": {
-              "methods": [
-                "embed_content"
-              ]
+              "methods": ["embed_content"]
             },
             "GenerateContent": {
-              "methods": [
-                "generate_content"
-              ]
+              "methods": ["generate_content"]
             },
             "StreamGenerateContent": {
-              "methods": [
-                "stream_generate_content"
-              ]
+              "methods": ["stream_generate_content"]
             }
           }
         },
@@ -41,29 +31,19 @@
           "libraryClient": "GenerativeServiceAsyncClient",
           "rpcs": {
             "BatchEmbedContents": {
-              "methods": [
-                "batch_embed_contents"
-              ]
+              "methods": ["batch_embed_contents"]
             },
             "CountTokens": {
-              "methods": [
-                "count_tokens"
-              ]
+              "methods": ["count_tokens"]
             },
             "EmbedContent": {
-              "methods": [
-                "embed_content"
-              ]
+              "methods": ["embed_content"]
             },
             "GenerateContent": {
-              "methods": [
-                "generate_content"
-              ]
+              "methods": ["generate_content"]
             },
             "StreamGenerateContent": {
-              "methods": [
-                "stream_generate_content"
-              ]
+              "methods": ["stream_generate_content"]
             }
           }
         },
@@ -71,29 +51,19 @@
           "libraryClient": "GenerativeServiceClient",
           "rpcs": {
             "BatchEmbedContents": {
-              "methods": [
-                "batch_embed_contents"
-              ]
+              "methods": ["batch_embed_contents"]
             },
             "CountTokens": {
-              "methods": [
-                "count_tokens"
-              ]
+              "methods": ["count_tokens"]
             },
             "EmbedContent": {
-              "methods": [
-                "embed_content"
-              ]
+              "methods": ["embed_content"]
             },
             "GenerateContent": {
-              "methods": [
-                "generate_content"
-              ]
+              "methods": ["generate_content"]
             },
             "StreamGenerateContent": {
-              "methods": [
-                "stream_generate_content"
-              ]
+              "methods": ["stream_generate_content"]
             }
           }
         }
@@ -105,14 +75,10 @@
           "libraryClient": "ModelServiceClient",
           "rpcs": {
             "GetModel": {
-              "methods": [
-                "get_model"
-              ]
+              "methods": ["get_model"]
             },
             "ListModels": {
-              "methods": [
-                "list_models"
-              ]
+              "methods": ["list_models"]
             }
           }
         },
@@ -120,14 +86,10 @@
           "libraryClient": "ModelServiceAsyncClient",
           "rpcs": {
             "GetModel": {
-              "methods": [
-                "get_model"
-              ]
+              "methods": ["get_model"]
             },
             "ListModels": {
-              "methods": [
-                "list_models"
-              ]
+              "methods": ["list_models"]
             }
           }
         },
@@ -135,14 +97,10 @@
           "libraryClient": "ModelServiceClient",
           "rpcs": {
             "GetModel": {
-              "methods": [
-                "get_model"
-              ]
+              "methods": ["get_model"]
             },
             "ListModels": {
-              "methods": [
-                "list_models"
-              ]
+              "methods": ["list_models"]
             }
           }
         }

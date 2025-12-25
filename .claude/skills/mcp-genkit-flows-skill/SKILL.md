@@ -9,6 +9,7 @@ tags: [mcp, genkit, ai-flows, orchestration, caching]
 **Purpose:** High-speed Genkit AI flow execution via GenKitFlowRegistry MCP server, enabling result memoization and reducing token usage by 70-90% through intelligent caching.
 
 **When to Use:**
+
 - User asks: "Generate KSC responses for this job"
 - User asks: "Create a cover letter"
 - User asks: "Analyze this resume"
@@ -20,12 +21,14 @@ tags: [mcp, genkit, ai-flows, orchestration, caching]
 ## Capabilities
 
 ### 1. List Available Flows
+
 ```
 method: list_flows
 Returns: All 26 Genkit flows with categories and schemas
 ```
 
 ### 2. Get Flow Details
+
 ```
 method: get_flow
 params: {flow_name: string}
@@ -34,6 +37,7 @@ Returns: Flow schema, inputs, outputs, and description
 ```
 
 ### 3. Execute Flow
+
 ```
 method: execute_flow
 params: {
@@ -46,6 +50,7 @@ Returns: Flow result (cached if seen before)
 ```
 
 ### 4. Cache Statistics
+
 ```
 method: cache_stats
 Returns: Hit rate, misses, cached entries, performance metrics
@@ -53,6 +58,7 @@ Expected: 90%+ cache hit rate
 ```
 
 ### 5. Full Index
+
 ```
 method: index
 Returns: Complete flow registry with statistics
@@ -64,6 +70,7 @@ Returns: Complete flow registry with statistics
 **Startup:** <2s | Expected cache hit rate: 90%+
 
 **Cached Flows:** 26 total, including:
+
 - KSC generation workflows
 - Resume analysis flows
 - Cover letter generation
@@ -80,6 +87,7 @@ Returns: Complete flow registry with statistics
 **Scenario:** 100 users request KSC responses for the same job posting
 
 **Without Memoization (Token Cost: 200,000):**
+
 ```
 100 requests for same job
 ├─ 100 Gemini API calls
@@ -90,6 +98,7 @@ Total: 200,000 tokens, 5 minutes
 ```
 
 **With GenKitFlowRegistry MCP (Token Cost: 11,900):**
+
 ```
 100 requests for same job
 ├─ 1 Gemini API call (first request)
@@ -112,25 +121,30 @@ Savings: 94% tokens ✅, 99% time ✅
 ## Flow Categories
 
 **Document Processing:**
+
 - resume_analysis - Analyze and score resumes
 - cover_letter_generation - Create tailored cover letters
 - ksc_response_generation - Generate KSC responses
 
 **Job Matching:**
+
 - job_matching_pipeline - Match users to job postings
 - skill_analysis - Extract and match skills
 
 **Application Management:**
+
 - application_workflow - Handle job application lifecycle
 - interview_preparation - Generate interview prep materials
 
 **Content Generation:**
+
 - email_composition - Generate professional emails
 - summary_generation - Create profile summaries
 
 ## Integration Points
 
 Works seamlessly with:
+
 - `mcp-documentation-skill` - For flow documentation
 - `mcp-configuration-skill` - For environment-specific flow parameters
 - Frontend AI Services (generateKscResponses, generateCoverLetter)

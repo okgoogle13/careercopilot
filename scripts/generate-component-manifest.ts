@@ -8,8 +8,8 @@
  * Usage: node scripts/generate-component-manifest.ts [--output manifest.json]
  */
 
-import * as fs from 'fs';
-import * as path from 'path';
+import * as fs from "fs";
+import * as path from "path";
 
 interface ComponentMetadata {
   name: string;
@@ -19,10 +19,10 @@ interface ComponentMetadata {
   hasTest: boolean;
   hasStories: boolean;
   hasCss: boolean;
-  exportType: 'default' | 'named' | 'mixed' | 'unknown';
+  exportType: "default" | "named" | "mixed" | "unknown";
   usesmui: boolean;
   usesTailwind: boolean;
-  complexity: 'low' | 'medium' | 'high' | 'unknown';
+  complexity: "low" | "medium" | "high" | "unknown";
   migrationReady: boolean;
   issues: string[];
   dependencies: string[];
@@ -42,10 +42,10 @@ interface Manifest {
   };
 }
 
-const COMPONENTS_DIR = path.join(process.cwd(), 'frontend/src/components');
-const OUTPUT_FILE = process.argv.includes('--output')
-  ? process.argv[process.argv.indexOf('--output') + 1]
-  : 'component-manifest.json';
+const COMPONENTS_DIR = path.join(process.cwd(), "frontend/src/components");
+const OUTPUT_FILE = process.argv.includes("--output")
+  ? process.argv[process.argv.indexOf("--output") + 1]
+  : "component-manifest.json";
 
 /**
  * Recursively find all component files
@@ -60,12 +60,12 @@ function findComponentFiles(dir: string): string[] {
       const fullPath = path.join(currentDir, entry.name);
 
       if (entry.isDirectory()) {
-        if (!['__tests__', '__mocks__', 'node_modules'].includes(entry.name)) {
+        if (!["__tests__", "__mocks__", "node_modules"].includes(entry.name)) {
           walk(fullPath);
         }
-      } else if (entry.isFile() && entry.name.endsWith('.tsx')) {
+      } else if (entry.isFile() && entry.name.endsWith(".tsx")) {
         // Skip test and story files
-        if (!entry.name.includes('.test.') && !entry.name.includes('.stories.')) {
+        if (!entry.name.includes(".test.") && !entry.name.includes(".stories.")) {
           files.push(fullPath);
         }
       }
@@ -80,78 +80,80 @@ function findComponentFiles(dir: string): string[] {
  * Analyze a component file for metadata
  */
 function analyzeComponent(filePath: string): ComponentMetadata {
-  const content = fs.readFileSync(filePath, 'utf-8');
+  const content = fs.readFileSync(filePath, "utf-8");
   const dir = path.dirname(filePath);
-  const fileName = path.basename(filePath, '.tsx');
+  const fileName = path.basename(filePath, ".tsx");
   const relativePath = path.relative(COMPONENTS_DIR, filePath);
-  const category = relativePath.split('/')[0] || 'root';
+  const category = relativePath.split("/")[0] || "root";
 
   const issues: string[] = [];
 
   // Check for index file
-  const hasIndex = fs.existsSync(path.join(dir, 'index.ts')) ||
-                   fs.existsSync(path.join(dir, 'index.tsx'));
-  if (!hasIndex) issues.push('missing-index');
+  const hasIndex =
+    fs.existsSync(path.join(dir, "index.ts")) || fs.existsSync(path.join(dir, "index.tsx"));
+  if (!hasIndex) issues.push("missing-index");
 
   // Check for test file
   const hasTest = fs.existsSync(path.join(dir, `${fileName}.test.tsx`));
-  if (!hasTest) issues.push('missing-test');
+  if (!hasTest) issues.push("missing-test");
 
   // Check for stories file
   const hasStories = fs.existsSync(path.join(dir, `${fileName}.stories.tsx`));
-  if (!hasStories) issues.push('missing-storybook');
+  if (!hasStories) issues.push("missing-storybook");
 
   // Check for CSS file
-  const hasCss = fs.existsSync(path.join(dir, `${fileName}.css`)) ||
-                 fs.existsSync(path.join(dir, `${fileName}.module.css`));
+  const hasCss =
+    fs.existsSync(path.join(dir, `${fileName}.css`)) ||
+    fs.existsSync(path.join(dir, `${fileName}.module.css`));
 
   // Detect export type
-  let exportType: ComponentMetadata['exportType'] = 'unknown';
+  let exportType: ComponentMetadata["exportType"] = "unknown";
   const hasDefaultExport = /export\s+default/.test(content);
   const hasNamedExport = /export\s+(function|const|interface)/.test(content);
 
-  if (hasDefaultExport && hasNamedExport) exportType = 'mixed';
-  else if (hasDefaultExport) exportType = 'default';
-  else if (hasNamedExport) exportType = 'named';
+  if (hasDefaultExport && hasNamedExport) exportType = "mixed";
+  else if (hasDefaultExport) exportType = "default";
+  else if (hasNamedExport) exportType = "named";
 
-  if (exportType === 'unknown' || exportType === 'mixed') {
-    issues.push('inconsistent-exports');
+  if (exportType === "unknown" || exportType === "mixed") {
+    issues.push("inconsistent-exports");
   }
 
   // Detect MUI usage
   const usesmui = /from\s+['"]@mui\//.test(content);
 
   // Detect Tailwind usage
-  const usesTailwind = /className\s*=\s*['"`]/.test(content) &&
-                       /(text-|bg-|flex|grid|p-|m-|w-|h-)/.test(content);
+  const usesTailwind =
+    /className\s*=\s*['"`]/.test(content) && /(text-|bg-|flex|grid|p-|m-|w-|h-)/.test(content);
 
   // Estimate complexity (basic heuristic)
-  const lines = content.split('\n').length;
+  const lines = content.split("\n").length;
   const hooks = (content.match(/use[A-Z]\w+/g) || []).length;
-  let complexity: ComponentMetadata['complexity'] = 'unknown';
+  let complexity: ComponentMetadata["complexity"] = "unknown";
 
-  if (lines < 100 && hooks < 3) complexity = 'low';
-  else if (lines < 300 && hooks < 7) complexity = 'medium';
-  else if (lines >= 300 || hooks >= 7) complexity = 'high';
+  if (lines < 100 && hooks < 3) complexity = "low";
+  else if (lines < 300 && hooks < 7) complexity = "medium";
+  else if (lines >= 300 || hooks >= 7) complexity = "high";
 
   // Check for PascalCase directory
   const dirName = path.basename(dir);
   if (/^[A-Z]/.test(dirName) && dirName !== fileName) {
-    issues.push('pascalcase-directory');
+    issues.push("pascalcase-directory");
   }
 
   // Extract dependencies (imports)
   const importMatches = content.matchAll(/import\s+.*?from\s+['"]([^'"]+)['"]/g);
   const dependencies = Array.from(importMatches)
-    .map(match => match[1])
-    .filter(dep => !dep.startsWith('.') && !dep.startsWith('@/')); // Only external deps
+    .map((match) => match[1])
+    .filter((dep) => !dep.startsWith(".") && !dep.startsWith("@/")); // Only external deps
 
   // Try to extract props interface
   const propsMatch = content.match(/interface\s+(\w+Props)\s*{/);
   const propsInterface = propsMatch ? propsMatch[1] : undefined;
 
   // Determine migration readiness
-  const migrationReady = hasIndex && hasTest && exportType === 'named' && !/pascalcase-directory/.test(issues.join());
+  const migrationReady =
+    hasIndex && hasTest && exportType === "named" && !/pascalcase-directory/.test(issues.join());
 
   return {
     name: fileName,
@@ -176,11 +178,11 @@ function analyzeComponent(filePath: string): ComponentMetadata {
  * Generate the full manifest
  */
 function generateManifest(): Manifest {
-  console.log('🔍 Scanning components...');
+  console.log("🔍 Scanning components...");
   const componentFiles = findComponentFiles(COMPONENTS_DIR);
   console.log(`Found ${componentFiles.length} component files`);
 
-  console.log('📊 Analyzing components...');
+  console.log("📊 Analyzing components...");
   const components = componentFiles.map(analyzeComponent);
 
   // Calculate summary statistics
@@ -206,7 +208,7 @@ function generateManifest(): Manifest {
 
   return {
     generated: new Date().toISOString(),
-    version: '1.0.0',
+    version: "1.0.0",
     totalComponents: components.length,
     readinessScore,
     components,
@@ -222,7 +224,7 @@ function generateManifest(): Manifest {
  * Main execution
  */
 function main() {
-  console.log('🚀 Component Manifest Generator\n');
+  console.log("🚀 Component Manifest Generator\n");
 
   if (!fs.existsSync(COMPONENTS_DIR)) {
     console.error(`❌ Components directory not found: ${COMPONENTS_DIR}`);
@@ -231,18 +233,18 @@ function main() {
 
   const manifest = generateManifest();
 
-  console.log('\n📋 Manifest Summary:');
+  console.log("\n📋 Manifest Summary:");
   console.log(`Total Components: ${manifest.totalComponents}`);
   console.log(`Readiness Score: ${manifest.readinessScore}%`);
   console.log(`Ready: ${manifest.summary.byReadiness.ready}`);
   console.log(`Not Ready: ${manifest.summary.byReadiness.notReady}`);
 
-  console.log('\n📊 By Category:');
+  console.log("\n📊 By Category:");
   for (const [category, count] of Object.entries(manifest.summary.byCategory)) {
     console.log(`  ${category}: ${count}`);
   }
 
-  console.log('\n⚠️  Common Issues:');
+  console.log("\n⚠️  Common Issues:");
   for (const [issue, count] of Object.entries(manifest.summary.issuesSummary)) {
     console.log(`  ${issue}: ${count}`);
   }
@@ -252,7 +254,7 @@ function main() {
   console.log(`\n✅ Manifest written to: ${outputPath}`);
 
   // Also create a summary markdown report
-  const mdOutputPath = outputPath.replace('.json', '-summary.md');
+  const mdOutputPath = outputPath.replace(".json", "-summary.md");
   const mdContent = generateMarkdownSummary(manifest);
   fs.writeFileSync(mdOutputPath, mdContent);
   console.log(`✅ Summary report written to: ${mdOutputPath}`);
@@ -264,49 +266,50 @@ function main() {
 function generateMarkdownSummary(manifest: Manifest): string {
   const lines: string[] = [];
 
-  lines.push('# Component Manifest Summary\n');
+  lines.push("# Component Manifest Summary\n");
   lines.push(`**Generated:** ${manifest.generated}`);
   lines.push(`**Total Components:** ${manifest.totalComponents}`);
   lines.push(`**Readiness Score:** ${manifest.readinessScore}%\n`);
 
-  lines.push('## Readiness Breakdown\n');
+  lines.push("## Readiness Breakdown\n");
   lines.push(`- ✅ Ready for Migration: ${manifest.summary.byReadiness.ready}`);
   lines.push(`- ❌ Not Ready: ${manifest.summary.byReadiness.notReady}\n`);
 
-  lines.push('## Components by Category\n');
+  lines.push("## Components by Category\n");
   for (const [category, count] of Object.entries(manifest.summary.byCategory)) {
     lines.push(`- **${category}**: ${count} components`);
   }
-  lines.push('');
+  lines.push("");
 
-  lines.push('## Common Issues\n');
+  lines.push("## Common Issues\n");
   for (const [issue, count] of Object.entries(manifest.summary.issuesSummary)) {
     const percentage = Math.round((count / manifest.totalComponents) * 100);
     lines.push(`- **${issue}**: ${count} (${percentage}%)`);
   }
-  lines.push('');
+  lines.push("");
 
-  lines.push('## Not Ready Components\n');
-  const notReady = manifest.components.filter(c => !c.migrationReady);
-  for (const component of notReady.slice(0, 20)) { // First 20
+  lines.push("## Not Ready Components\n");
+  const notReady = manifest.components.filter((c) => !c.migrationReady);
+  for (const component of notReady.slice(0, 20)) {
+    // First 20
     lines.push(`### ${component.name}`);
     lines.push(`**Path:** \`${component.path}\``);
     lines.push(`**Category:** ${component.category}`);
-    lines.push(`**Issues:** ${component.issues.join(', ')}`);
-    lines.push('');
+    lines.push(`**Issues:** ${component.issues.join(", ")}`);
+    lines.push("");
   }
 
   if (notReady.length > 20) {
     lines.push(`\n*...and ${notReady.length - 20} more components*\n`);
   }
 
-  lines.push('---');
-  lines.push('\n**Next Steps:**');
-  lines.push('1. Address common issues (missing tests, missing index files)');
-  lines.push('2. Standardize component structure');
-  lines.push('3. Re-run manifest generator to track progress');
+  lines.push("---");
+  lines.push("\n**Next Steps:**");
+  lines.push("1. Address common issues (missing tests, missing index files)");
+  lines.push("2. Standardize component structure");
+  lines.push("3. Re-run manifest generator to track progress");
 
-  return lines.join('\n');
+  return lines.join("\n");
 }
 
 // Run the script
