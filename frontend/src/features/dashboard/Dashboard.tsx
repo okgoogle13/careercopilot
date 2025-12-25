@@ -19,9 +19,9 @@ interface Profile {
 // ============================================================================
 
 const PROFILES: Profile[] = [
-  { name: 'Senior Software Engineer', company: 'TechCorp', score: 92, status: 'Excellent' },
-  { name: 'UX Designer', company: 'DesignHub', score: 85, status: 'Good' },
-  { name: 'Product Manager', company: 'StartupXYZ', score: 78, status: 'Fair' },
+  { name: 'Child Protection Caseworker (VIC)', company: 'Dept of Families (DFFH)', score: 95, status: 'Interview' },
+  { name: 'Clinical Social Worker', company: 'Headspace National', score: 88, status: 'Applied' },
+  { name: 'Mental Health Practitioner (NDIS)', company: 'Uniting Vic.Tas', score: 82, status: 'Saved' },
 ];
 
 // ============================================================================
@@ -98,38 +98,24 @@ export function Dashboard() {
       {/* Stats Grid - Using StatCard Component */}
       <motion.div variants={item} className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         <StatCard
-          icon={FileText}
-          value="8"
-          label="Active Applications"
-          iconColor="text-tertiary"
-        />
-
-        <StatCard
-          icon={() => (
-            <svg
-              className="w-12 h-12 text-primary"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"
-              />
-            </svg>
-          )}
-          value="2"
-          label="Offers Received"
+          icon={() => <span className="text-2xl">🛡️</span>}
+          value="Verified"
+          label="WWCC Status"
           iconColor="text-primary"
         />
 
         <StatCard
-          icon={TrendingUp}
-          value="45"
-          label="Connections"
+          icon={() => <span className="text-2xl">📚</span>}
+          value="12/20"
+          label="AASW CPD Hours"
           iconColor="text-secondary"
+        />
+
+        <StatCard
+          icon={() => <span className="text-2xl">⚕️</span>}
+          value="Active"
+          label="Medicare Provider"
+          iconColor="text-tertiary"
         />
       </motion.div>
 
