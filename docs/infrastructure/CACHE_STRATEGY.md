@@ -9,6 +9,7 @@ CareerCopilot has successfully migrated from Redis to Firestore for caching. Thi
 ✅ **COMPLETED** - Redis to Firestore migration finished successfully.
 
 ### Migration Details
+
 - **Original Script**: `migrate_redis_to_firestore.py` (now archived)
 - **Migration Date**: November 2025
 - **Status**: Full migration completed, Redis dependencies removed
@@ -40,6 +41,7 @@ CareerCopilot has successfully migrated from Redis to Firestore for caching. Thi
 ## Cache Usage Patterns
 
 ### 1. API Response Caching
+
 ```python
 # Backend implementation
 from app.core.cache import get_cache, set_cache
@@ -52,6 +54,7 @@ await set_cache(f"api:{endpoint}:{params_hash}", data, ttl=3600)
 ```
 
 ### 2. Session Caching
+
 ```python
 # User session data
 session_key = f"session:{user_id}"
@@ -59,6 +62,7 @@ session_data = await get_cache(session_key)
 ```
 
 ### 3. Configuration Caching
+
 ```python
 # Firebase config and other static data
 config_key = "firebase:config"
@@ -68,6 +72,7 @@ config = await get_cache(config_key, ttl=86400)  # 24 hours
 ## Performance Characteristics
 
 ### Firestore vs Redis
+
 - **Latency**: ~5-10ms additional latency vs Redis
 - **Scalability**: Better horizontal scaling
 - **Cost**: Pay-per-operation model
@@ -75,6 +80,7 @@ config = await get_cache(config_key, ttl=86400)  # 24 hours
 - **Integration**: Native Firebase integration
 
 ### Optimization Strategies
+
 1. **Batch Operations**: Use batch writes for multiple cache updates
 2. **Indexing**: Proper indexes on cache collection
 3. **TTL Management**: Efficient cleanup of expired documents
@@ -83,6 +89,7 @@ config = await get_cache(config_key, ttl=86400)  # 24 hours
 ## Cache Configuration
 
 ### Environment Variables
+
 ```bash
 # Cache configuration
 CACHE_TTL_DEFAULT=3600
@@ -91,6 +98,7 @@ CACHE_CLEANUP_INTERVAL=300
 ```
 
 ### Backend Settings
+
 ```python
 # app/core/cache.py
 CACHE_SETTINGS = {
@@ -104,6 +112,7 @@ CACHE_SETTINGS = {
 ## Monitoring and Debugging
 
 ### Cache Metrics
+
 ```python
 # Monitor cache performance
 cache_stats = {
@@ -116,6 +125,7 @@ cache_stats = {
 ```
 
 ### Debug Tools
+
 ```bash
 # View cache contents
 python3 scripts/debug-cache.py --list
@@ -130,18 +140,21 @@ python3 scripts/debug-cache.py --stats
 ## Best Practices
 
 ### 1. Cache Key Design
+
 - Use consistent naming conventions
 - Include namespace prefixes
 - Hash large keys
 - Avoid special characters
 
 ### 2. TTL Management
+
 - Set appropriate TTL for data type
 - Use shorter TTL for volatile data
 - Longer TTL for static configuration
 - Implement cache warming strategies
 
 ### 3. Error Handling
+
 - Graceful degradation on cache failures
 - Retry logic for transient errors
 - Fallback to direct data source

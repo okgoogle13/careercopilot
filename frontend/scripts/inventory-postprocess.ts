@@ -29,7 +29,10 @@ interface InventoryReport {
   totalComponents: number;
   componentsByCategory: Record<string, number>;
   components: ComponentInfo[];
-  migrationSummary?: Record<'migrated' | 'mixed' | 'not_migrated' | 'expressive' | 'unknown', number>;
+  migrationSummary?: Record<
+    'migrated' | 'mixed' | 'not_migrated' | 'expressive' | 'unknown',
+    number
+  >;
 }
 
 function toCSV<T extends Record<string, any>>(rows: T[], headers?: string[]) {
@@ -41,7 +44,7 @@ function toCSV<T extends Record<string, any>>(rows: T[], headers?: string[]) {
     }
     return s;
   };
-  return [cols.join(','), ...rows.map(r => cols.map(c => esc(r[c])).join(','))].join('\n');
+  return [cols.join(','), ...rows.map((r) => cols.map((c) => esc(r[c])).join(','))].join('\n');
 }
 
 function main() {
@@ -55,33 +58,64 @@ function main() {
   const comps = report.components;
 
   // Filters
-  const nonDemo = comps.filter(c => !c.isDemo);
+  const nonDemo = comps.filter((c) => !c.isDemo);
   const essential = nonDemo
-    .filter(c => ['ui', 'layout', 'features'].includes(c.category))
+    .filter((c) => ['ui', 'layout', 'features'].includes(c.category))
     .sort((a, b) => b.usageCount - a.usageCount);
 
   const niceToHave = nonDemo
-    .filter(c => c.isReusable ? c.usageCount <= 1 : (['library', 'documents', 'main'].includes(c.category) || c.usageCount <= 1))
+    .filter((c) =>
+      c.isReusable
+        ? c.usageCount <= 1
+        : ['library', 'documents', 'main'].includes(c.category) || c.usageCount <= 1
+    )
     .sort((a, b) => b.usageCount - a.usageCount);
 
-  const migrationBreakdownOverall = nonDemo.reduce((acc, c) => {
-    acc[c.migrationStatus] = (acc[c.migrationStatus] ?? 0) + 1;
-    return acc;
-  }, { migrated: 0, mixed: 0, not_migrated: 0, expressive: 0, unknown: 0 } as Record<string, number>);
+  const migrationBreakdownOverall = nonDemo.reduce(
+    (acc, c) => {
+      acc[c.migrationStatus] = (acc[c.migrationStatus] ?? 0) + 1;
+      return acc;
+    },
+    { migrated: 0, mixed: 0, not_migrated: 0, expressive: 0, unknown: 0 } as Record<string, number>
+  );
 
   const migrationByCategory: Record<string, Record<string, number>> = {};
   for (const c of nonDemo) {
-    migrationByCategory[c.category] = migrationByCategory[c.category] || { migrated: 0, mixed: 0, not_migrated: 0, expressive: 0, unknown: 0 };
+    migrationByCategory[c.category] = migrationByCategory[c.category] || {
+      migrated: 0,
+      mixed: 0,
+      not_migrated: 0,
+      expressive: 0,
+      unknown: 0,
+    };
     migrationByCategory[c.category][c.migrationStatus]++;
   }
 
-  const topNotMigrated = nonDemo.filter(c => c.migrationStatus === 'not_migrated').sort((a,b) => b.usageCount - a.usageCount).slice(0, 50);
-  const topMixed = nonDemo.filter(c => c.migrationStatus === 'mixed').sort((a,b) => b.usageCount - a.usageCount).slice(0, 50);
+  const topNotMigrated = nonDemo
+    .filter((c) => c.migrationStatus === 'not_migrated')
+    .sort((a, b) => b.usageCount - a.usageCount)
+    .slice(0, 50);
+  const topMixed = nonDemo
+    .filter((c) => c.migrationStatus === 'mixed')
+    .sort((a, b) => b.usageCount - a.usageCount)
+    .slice(0, 50);
 
   // Write JSONs
   fs.writeFileSync(path.join(OUT_DIR, 'essential.json'), JSON.stringify(essential, null, 2));
   fs.writeFileSync(path.join(OUT_DIR, 'nice-to-have.json'), JSON.stringify(niceToHave, null, 2));
-  fs.writeFileSync(path.join(OUT_DIR, 'migration-breakdown.json'), JSON.stringify({ overall: migrationBreakdownOverall, byCategory: migrationByCategory, topNotMigrated, topMixed }, null, 2));
+  fs.writeFileSync(
+    path.join(OUT_DIR, 'migration-breakdown.json'),
+    JSON.stringify(
+      {
+        overall: migrationBreakdownOverall,
+        byCategory: migrationByCategory,
+        topNotMigrated,
+        topMixed,
+      },
+      null,
+      2
+    )
+  );
 
   // Write CSVs (selected fields)
   const pick = (c: ComponentInfo) => ({
@@ -108,7 +142,7 @@ function main() {
     migrationSummary: migrationBreakdownOverall,
     topEssential: essential.slice(0, 20).map(pick),
     topNotMigrated: topNotMigrated.slice(0, 20).map(pick),
-    topMixed: topMixed.slice(0, 20).map(pick)
+    topMixed: topMixed.slice(0, 20).map(pick),
   };
   fs.writeFileSync(path.join(OUT_DIR, 'summary.json'), JSON.stringify(summary, null, 2));
 

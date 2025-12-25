@@ -73,8 +73,10 @@ system_prompt: |
 This skill audits a described user flow against Nielsen's 10 Usability Heuristics and provides actionable recommendations for failed heuristics.
 
 ## Agent Call
+
 Called by: `ux-accessibility-lead`
 Input: `$COMPONENT_NAME`, `$USER_FLOW`
 
 ## Output
+
 Returns a JSON object listing only the failed heuristics and specific recommendations for fixing them, or an error object.

@@ -482,7 +482,7 @@ define(['exports'], function (exports) {
     value,
     // Need general type to do check later.
     expectedClass,
-     
+
     details
   ) => {
     const error = new WorkboxError('not-array-of-class', details);
@@ -800,9 +800,8 @@ define(['exports'], function (exports) {
       // See https://github.com/Microsoft/TypeScript/issues/28357#issuecomment-436484705
       self.addEventListener('message', (event) => {
         // event.data is type 'any'
-         
+
         if (event.data && event.data.type === 'CACHE_URLS') {
-           
           const { payload } = event.data;
           {
             logger.debug(`Caching URLs from the window`, payload.urlsToCache);
@@ -994,7 +993,7 @@ define(['exports'], function (exports) {
       for (const route of routes) {
         let params;
         // route.match returns type any, not possible to change right now.
-         
+
         const matchResult = route.match({
           url,
           sameOrigin,
@@ -1015,16 +1014,12 @@ define(['exports'], function (exports) {
             }
           }
           // See https://github.com/GoogleChrome/workbox/issues/2079
-           
+
           params = matchResult;
           if (Array.isArray(params) && params.length === 0) {
             // Instead of passing an empty array in as params, use undefined.
             params = undefined;
-          } else if (
-            matchResult.constructor === Object &&
-             
-            Object.keys(matchResult).length === 0
-          ) {
+          } else if (matchResult.constructor === Object && Object.keys(matchResult).length === 0) {
             // Instead of passing an empty object in as params, use undefined.
             params = undefined;
           } else if (typeof matchResult === 'boolean') {
@@ -1435,11 +1430,11 @@ define(['exports'], function (exports) {
     constructor({ precacheController }) {
       this.cacheKeyWillBeUsed = async ({ request, params }) => {
         // Params is type any, can't change right now.
-         
+
         const cacheKey =
           (params === null || params === void 0 ? void 0 : params.cacheKey) ||
           this._precacheController.getCacheKeyForURL(request.url);
-         
+
         return cacheKey
           ? new Request(cacheKey, {
               headers: request.headers,
@@ -2131,7 +2126,7 @@ define(['exports'], function (exports) {
               request: effectiveRequest,
               event: this.event,
               // params has a type any can't change right now.
-              params: this.params,  
+              params: this.params,
             })
           );
         }
@@ -2884,7 +2879,7 @@ define(['exports'], function (exports) {
      */
     install(event) {
       // waitUntil returns Promise<any>
-       
+
       return waitUntil(event, async () => {
         const installReportPlugin = new PrecacheInstallReportPlugin();
         this.strategy.plugins.push(installReportPlugin);
@@ -2930,7 +2925,7 @@ define(['exports'], function (exports) {
      */
     activate(event) {
       // waitUntil returns Promise<any>
-       
+
       return waitUntil(event, async () => {
         const cache = await self.caches.open(this.strategy.cacheName);
         const currentlyCachedRequests = await cache.keys();

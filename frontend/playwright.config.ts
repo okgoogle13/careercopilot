@@ -1,14 +1,14 @@
 import { defineConfig, devices } from '@playwright/test';
 
 const isCI = !!process.env.CI;
-const baseURL = process.env.PLAYWRIGHT_BASE_URL || 'http://localhost:5173';
+const baseURL = process.env.PLAYWRIGHT_BASE_URL || 'http://localhost:3001';
 
 export default defineConfig({
   // Only look in the tests directory
   testDir: './tests',
 
   // Only match .spec.js files
-  testMatch: '**/*.spec.js',
+  testMatch: '**/*.spec.{js,ts}',
 
   // Explicitly ignore everything outside tests directory
   testIgnore: [
@@ -59,7 +59,7 @@ export default defineConfig({
     ? undefined
     : {
       command: 'npm run preview',
-      port: 3000,
+      port: 3001,
       reuseExistingServer: !isCI,
       timeout: 120000,
       stdout: 'pipe',

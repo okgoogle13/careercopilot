@@ -8,6 +8,7 @@
 ## 🎯 Overview
 
 After completing all 32 Phase 3 components, this guide helps you:
+
 1. Review all components for visual consistency
 2. Adjust spacing, colors, shadows if needed
 3. Compare against M3 design spec
@@ -22,6 +23,7 @@ After completing all 32 Phase 3 components, this guide helps you:
 **Check:** All components use M3 design tokens
 
 **Verification:**
+
 ```bash
 # Run token consistency check
 ./scripts/verify-m3-token-consistency.sh
@@ -31,6 +33,7 @@ python3 scripts/generate-m3-styling-report.py
 ```
 
 **What to Look For:**
+
 - ✅ All colors use `--md-sys-color-*` tokens
 - ✅ All spacing uses `--md-sys-spacing-*` tokens
 - ✅ All border-radius uses `--md-sys-shape-*` tokens
@@ -39,6 +42,7 @@ python3 scripts/generate-m3-styling-report.py
 - ✅ All transitions use `--md-sys-motion-*` tokens
 
 **Common Issues:**
+
 - ❌ Hardcoded hex colors (`#FF5733`)
 - ❌ Hardcoded pixel values (`16px`, `24px`)
 - ❌ Hardcoded shadows (`box-shadow: 0 2px 4px rgba(0,0,0,0.1)`)
@@ -52,16 +56,19 @@ python3 scripts/generate-m3-styling-report.py
 **Check:** Consistent spacing across all components
 
 **M3 Spacing Scale:**
+
 - `--md-sys-spacing-1` through `--md-sys-spacing-32`
 - Common values: 4, 8, 12, 16, 24, 32
 
 **Review Points:**
+
 - [ ] Component padding uses consistent spacing tokens
 - [ ] Gap between elements uses spacing tokens
 - [ ] Margins use spacing tokens
 - [ ] No arbitrary spacing values
 
 **Tools:**
+
 ```bash
 # Find hardcoded spacing
 grep -rE "[0-9]+px" frontend/src/components/m3-expressive --include="*.css" | grep -vE "(0px|1px|2px)"
@@ -72,6 +79,7 @@ grep -rE "[0-9]+px" frontend/src/components/m3-expressive --include="*.css" | gr
 **Check:** Colors follow M3 color system
 
 **M3 Color Roles:**
+
 - Primary: `--md-sys-color-primary-*`
 - Secondary: `--md-sys-color-secondary-*`
 - Tertiary: `--md-sys-color-tertiary-*`
@@ -80,12 +88,14 @@ grep -rE "[0-9]+px" frontend/src/components/m3-expressive --include="*.css" | gr
 - On-Surface: `--md-sys-color-on-surface-*`
 
 **Review Points:**
+
 - [ ] All colors use M3 color tokens
 - [ ] Color roles are used consistently (primary for actions, error for errors)
 - [ ] No hardcoded colors
 - [ ] Proper contrast ratios (WCAG AA minimum)
 
 **Tools:**
+
 ```bash
 # Find hardcoded colors
 grep -rE "(#[0-9a-fA-F]{3,6}|rgb\(|rgba\()" frontend/src/components/m3-expressive --include="*.css"
@@ -96,6 +106,7 @@ grep -rE "(#[0-9a-fA-F]{3,6}|rgb\(|rgba\()" frontend/src/components/m3-expressiv
 **Check:** Elevation levels are consistent
 
 **M3 Elevation Levels:**
+
 - `--md-sys-elevation-level0` through `--md-sys-elevation-level5`
 - Level 0: No shadow (flat)
 - Level 1: Subtle shadow (cards at rest)
@@ -104,12 +115,14 @@ grep -rE "(#[0-9a-fA-F]{3,6}|rgb\(|rgba\()" frontend/src/components/m3-expressiv
 - Level 4-5: Very strong (overlays)
 
 **Review Points:**
+
 - [ ] Cards use appropriate elevation (level 1-2)
 - [ ] Modals use level 3
 - [ ] Hover states increase elevation by 1 level
 - [ ] No hardcoded shadow values
 
 **Tools:**
+
 ```bash
 # Find hardcoded shadows
 grep -rE "box-shadow:\s*[0-9]" frontend/src/components/m3-expressive --include="*.css"
@@ -120,6 +133,7 @@ grep -rE "box-shadow:\s*[0-9]" frontend/src/components/m3-expressive --include="
 **Check:** Typography follows M3 type scale
 
 **M3 Type Scale:**
+
 - Display: `--md-sys-typescale-display-*`
 - Headline: `--md-sys-typescale-headline-*`
 - Title: `--md-sys-typescale-title-*`
@@ -127,6 +141,7 @@ grep -rE "box-shadow:\s*[0-9]" frontend/src/components/m3-expressive --include="
 - Label: `--md-sys-typescale-label-*`
 
 **Review Points:**
+
 - [ ] Headers use headline/title tokens
 - [ ] Body text uses body tokens
 - [ ] Labels use label tokens
@@ -137,6 +152,7 @@ grep -rE "box-shadow:\s*[0-9]" frontend/src/components/m3-expressive --include="
 ### 3. Component-Specific Reviews
 
 #### Layout Components (Batch 1)
+
 - [ ] **M3Card**: Elevation, padding, border-radius consistent
 - [ ] **M3Modal**: Z-index, backdrop, elevation correct
 - [ ] **M3Dialog**: More compact than Modal, proper elevation
@@ -144,6 +160,7 @@ grep -rE "box-shadow:\s*[0-9]" frontend/src/components/m3-expressive --include="
 - [ ] **M3Accordion**: Border, spacing between items
 
 #### Navigation Components (Batch 2)
+
 - [ ] **M3Menu**: Dropdown positioning, elevation
 - [ ] **M3TabBar**: Active indicator, spacing
 - [ ] **M3Breadcrumb**: Separator styling, spacing
@@ -152,6 +169,7 @@ grep -rE "box-shadow:\s*[0-9]" frontend/src/components/m3-expressive --include="
 - [ ] **M3BottomNavigation**: Mobile spacing, icon sizes
 
 #### Data Display Components (Batch 3)
+
 - [ ] **M3Table**: Row spacing, header styling
 - [ ] **M3List**: Item spacing, divider styling
 - [ ] **M3DataGrid**: Cell padding, border styling
@@ -161,6 +179,7 @@ grep -rE "box-shadow:\s*[0-9]" frontend/src/components/m3-expressive --include="
 - [ ] **M3Progress**: Bar height, track colors
 
 #### Feedback Components (Batch 4)
+
 - [ ] **M3Alert**: Severity colors, icon spacing
 - [ ] **M3Toast**: Position, animation timing
 - [ ] **M3Snackbar**: Bottom positioning, action button spacing
@@ -170,6 +189,7 @@ grep -rE "box-shadow:\s*[0-9]" frontend/src/components/m3-expressive --include="
 - [ ] **M3Skeleton**: Animation, width/height tokens
 
 #### Advanced Forms (Batch 5)
+
 - [ ] **M3DatePicker**: Calendar spacing, day button sizes
 - [ ] **M3TimePicker**: Input styling consistency
 - [ ] **M3Slider**: Track height, thumb size
@@ -182,30 +202,39 @@ grep -rE "box-shadow:\s*[0-9]" frontend/src/components/m3-expressive --include="
 ## 🔧 Tools & Scripts
 
 ### 1. Token Consistency Checker
+
 ```bash
 ./scripts/verify-m3-token-consistency.sh
 ```
+
 **Output:** Lists components with missing tokens or hardcoded values
 
 ### 2. Styling Report Generator
+
 ```bash
 python3 scripts/generate-m3-styling-report.py
 ```
-**Output:** 
+
+**Output:**
+
 - JSON report: `m3-styling-report.json`
 - Console summary with issues and recommendations
 
 ### 3. Visual Inspection Page
+
 ```bash
 # Navigate to integration test page
 http://localhost:3000/m3-integration-test
 ```
+
 **Purpose:** Visual inspection of all components together
 
 ### 4. Storybook Review
+
 ```bash
 yarn storybook
 ```
+
 **Purpose:** Review components in isolation with all variants
 
 ---
@@ -213,6 +242,7 @@ yarn storybook
 ## 📊 M3 Design Spec Reference
 
 ### Spacing Scale
+
 ```
 --md-sys-spacing-1: 4px
 --md-sys-spacing-2: 8px
@@ -223,6 +253,7 @@ yarn storybook
 ```
 
 ### Shape Tokens
+
 ```
 --md-sys-shape-corner-none: 0
 --md-sys-shape-corner-small: 4px
@@ -232,6 +263,7 @@ yarn storybook
 ```
 
 ### Elevation Levels
+
 ```
 --md-sys-elevation-level0: none
 --md-sys-elevation-level1: subtle (cards)
@@ -242,6 +274,7 @@ yarn storybook
 ```
 
 ### Motion Durations
+
 ```
 --md-sys-motion-duration-short1: 50ms
 --md-sys-motion-duration-short2: 100ms
@@ -256,15 +289,17 @@ yarn storybook
 ## 🎨 Common Fixes
 
 ### Fix Hardcoded Colors
+
 ```css
 /* Before */
-background-color: #6200EE;
+background-color: #6200ee;
 
 /* After */
 background-color: var(--md-sys-color-primary-50);
 ```
 
 ### Fix Hardcoded Spacing
+
 ```css
 /* Before */
 padding: 16px 24px;
@@ -274,15 +309,17 @@ padding: var(--md-sys-spacing-4) var(--md-sys-spacing-6);
 ```
 
 ### Fix Hardcoded Shadows
+
 ```css
 /* Before */
-box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
 /* After */
 box-shadow: var(--md-sys-elevation-level1);
 ```
 
 ### Fix Hardcoded Border Radius
+
 ```css
 /* Before */
 border-radius: 8px;
@@ -296,6 +333,7 @@ border-radius: var(--md-sys-shape-corner-medium);
 ## 📈 Review Process
 
 ### Step 1: Automated Analysis (15 min)
+
 ```bash
 # Run all analysis tools
 ./scripts/verify-m3-token-consistency.sh
@@ -303,24 +341,28 @@ python3 scripts/generate-m3-styling-report.py
 ```
 
 ### Step 2: Visual Review (30-45 min)
+
 1. Open Storybook: `yarn storybook`
 2. Review each component category
 3. Check variants, states, sizes
 4. Note any visual inconsistencies
 
 ### Step 3: Cross-Component Review (30 min)
+
 1. Open integration test page
 2. Review components working together
 3. Check spacing between components
 4. Verify color harmony
 
 ### Step 4: Fix Issues (1-2 hours)
+
 1. Prioritize by severity
 2. Fix hardcoded values first
 3. Adjust spacing/colors as needed
 4. Re-run analysis to verify
 
 ### Step 5: Final Verification (15 min)
+
 ```bash
 # Re-run all checks
 ./scripts/verify-m3-token-consistency.sh
@@ -333,6 +375,7 @@ yarn test
 ## ✅ Success Criteria
 
 **Styling Fine-Tuning is Complete When:**
+
 - ✅ All components use design tokens (100%)
 - ✅ No hardcoded colors, spacing, or shadows
 - ✅ Visual consistency across all components
@@ -374,4 +417,3 @@ After completing styling fine-tuning:
 
 **Last Updated:** 2025-01-XX  
 **Status:** ✅ Ready for Styling Fine-Tuning
-

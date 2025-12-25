@@ -15,21 +15,10 @@ afterEach(() => {
 });
 
 // Mock Firebase
-jest.mock('firebase/auth', () => ({
-  getAuth: jest.fn(() => ({})),
-  onAuthStateChanged: jest.fn(() => jest.fn()),
-  signInWithEmailAndPassword: jest.fn(),
-  createUserWithEmailAndPassword: jest.fn(),
-  signOut: jest.fn(),
-  updateProfile: jest.fn(),
-  GoogleAuthProvider: jest.fn(),
-  GithubAuthProvider: jest.fn(),
-}));
-
-jest.mock('firebase/app', () => ({
-  initializeApp: jest.fn(),
-}));
-jest.mock('./firebase-config', () => ({
+// Mock Firebase (using manual mocks in __mocks__)
+jest.mock('firebase/auth');
+jest.mock('firebase/app');
+jest.mock('./config/firebase', () => ({
   auth: {
     currentUser: null,
   },
@@ -62,27 +51,35 @@ class ResizeObserver {
 window.ResizeObserver = ResizeObserver;
 
 // Mock next/navigation
-jest.mock('next/navigation', () => ({
-  useRouter: () => ({
-    push: jest.fn(),
-    replace: jest.fn(),
-    prefetch: jest.fn(),
+jest.mock(
+  'next/navigation',
+  () => ({
+    useRouter: () => ({
+      push: jest.fn(),
+      replace: jest.fn(),
+      prefetch: jest.fn(),
+    }),
+    useSearchParams: () => ({
+      get: jest.fn(),
+    }),
+    usePathname: () => '/',
   }),
-  useSearchParams: () => ({
-    get: jest.fn(),
-  }),
-  usePathname: () => '/',
-}), { virtual: true });
+  { virtual: true }
+);
 
 // Mock next-auth/react
-jest.mock('next-auth/react', () => ({
-  useSession: jest.fn(() => ({
-    data: null,
-    status: 'unauthenticated',
-  })),
-  signIn: jest.fn(),
-  signOut: jest.fn(),
-}), { virtual: true });
+jest.mock(
+  'next-auth/react',
+  () => ({
+    useSession: jest.fn(() => ({
+      data: null,
+      status: 'unauthenticated',
+    })),
+    signIn: jest.fn(),
+    signOut: jest.fn(),
+  }),
+  { virtual: true }
+);
 
 // Mock console methods to reduce test noise
 const consoleError = console.error;
@@ -90,7 +87,10 @@ const consoleWarn = console.warn;
 
 beforeAll(() => {
   console.error = (message) => {
-    if (typeof message !== 'string' || !message.includes('ReactDOM.render is no longer supported')) {
+    if (
+      typeof message !== 'string' ||
+      !message.includes('ReactDOM.render is no longer supported')
+    ) {
       consoleError(message);
     }
   };

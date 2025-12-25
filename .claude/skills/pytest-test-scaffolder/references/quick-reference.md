@@ -5,6 +5,7 @@
 ## Quick Test Generation
 
 ### Endpoint Test (FastAPI)
+
 ```python
 def test_get_profile(client, mock_firestore):
     response = client.get("/api/profile")
@@ -13,6 +14,7 @@ def test_get_profile(client, mock_firestore):
 ```
 
 ### Service Test
+
 ```python
 def test_create_user_service(mock_firestore):
     result = UserService.create({"name": "Test"})
@@ -21,6 +23,7 @@ def test_create_user_service(mock_firestore):
 ```
 
 ### Async Test
+
 ```python
 @pytest.mark.asyncio
 async def test_async_function(mock_genkit):
@@ -30,13 +33,13 @@ async def test_async_function(mock_genkit):
 
 ## Common Fixtures
 
-| Fixture | Purpose |
-|---------|---------|
-| `client` | FastAPI TestClient for endpoint testing |
-| `mock_firestore` | Firestore database mock |
-| `mock_firebase_auth` | Firebase auth mock |
-| `mock_genkit` | Genkit AI service mock |
-| `monkeypatch` | pytest built-in for patching |
+| Fixture              | Purpose                                 |
+| -------------------- | --------------------------------------- |
+| `client`             | FastAPI TestClient for endpoint testing |
+| `mock_firestore`     | Firestore database mock                 |
+| `mock_firebase_auth` | Firebase auth mock                      |
+| `mock_genkit`        | Genkit AI service mock                  |
+| `monkeypatch`        | pytest built-in for patching            |
 
 ## Run Tests
 
@@ -60,13 +63,13 @@ pytest -m "not ai_services"  # Exclude AI service tests
 
 ## Test Response Codes
 
-| Code | Meaning | Test Pattern |
-|------|---------|--------------|
-| 200 | Success | `assert response.status_code == 200` |
-| 422 | Validation error | `assert response.status_code == 422` |
-| 401 | Unauthorized | `assert response.status_code == 401` |
-| 404 | Not found | `assert response.status_code == 404` |
-| 500 | Server error | `with pytest.raises(Exception)` |
+| Code | Meaning          | Test Pattern                         |
+| ---- | ---------------- | ------------------------------------ |
+| 200  | Success          | `assert response.status_code == 200` |
+| 422  | Validation error | `assert response.status_code == 422` |
+| 401  | Unauthorized     | `assert response.status_code == 401` |
+| 404  | Not found        | `assert response.status_code == 404` |
+| 500  | Server error     | `with pytest.raises(Exception)`      |
 
 ## Markers
 

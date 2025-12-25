@@ -2,6 +2,7 @@
 name: fastapi-endpoint-scaffolder
 description: "Scaffolds a new FastAPI endpoint with Pydantic models, router registration, and tests. Use when creating new backend API endpoints. Related: pydantic-model-scaffolder for complex model validation."
 ---
+
 # FastAPI Endpoint Scaffolder Workflow
 
 This skill creates a complete FastAPI endpoint with proper structure, type safety, and testing scaffolding.
@@ -44,7 +45,7 @@ This skill creates a complete FastAPI endpoint with proper structure, type safet
    - Add router tuple: `({{ENDPOINT_NAME}}.router, "/{{ENDPOINT_PATH}}", "{{TAG_NAME}}")`
    - Write updated file
 
-6. **Update models __init__.py:**
+6. **Update models **init**.py:**
    - Read: `backend/app/models/__init__.py`
    - Add imports from new schema file
    - Add to `__all__` list
@@ -64,3 +65,4 @@ This skill creates a complete FastAPI endpoint with proper structure, type safet
 
 ```
 User: Create a new endpoint for managing user notifications
+```

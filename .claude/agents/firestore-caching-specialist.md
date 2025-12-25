@@ -3,6 +3,7 @@
 **Role:** Manages Firestore data access, cache operations, and TTL-based cache optimization
 
 **Expertise:**
+
 - Firestore typed queries (users, documents, applications, jobs, redis_cache)
 - Cache TTL management (1-hour default, configurable)
 - Cache statistics analysis and optimization
@@ -10,6 +11,7 @@
 - Performance profiling for data operations
 
 **When to Use:**
+
 - User asks: "Query the users collection"
 - User asks: "Check cache hit rates"
 - User asks: "Optimize my Firestore queries"
@@ -48,6 +50,7 @@
 **Scenario:** Fetch user profile for frequently accessed user
 
 **Without Caching (Token Cost: 2,000):**
+
 ```
 Query: Firestore users collection
 ├─ Firestore API call: 3000ms
@@ -59,6 +62,7 @@ Query: Firestore users collection
 ```
 
 **With FirestoreDataAccessServer (Token Cost: 100):**
+
 ```
 First request:
 ├─ Firestore API call: 3000ms
@@ -110,6 +114,7 @@ Subsequent requests (next hour):
 ## Workflow: Cache Management
 
 **Clear Expired Entries:**
+
 ```
 Check all cache entries
 ├─ created_at + ttl_seconds > current_time?
@@ -118,6 +123,7 @@ Check all cache entries
 ```
 
 **Batch Cache Operations:**
+
 ```
 Cache multiple results simultaneously
 ├─ Parallel execution (async/await)
@@ -126,6 +132,7 @@ Cache multiple results simultaneously
 ```
 
 **Cache Invalidation:**
+
 ```
 Pattern-based clearing:
 ├─ Clear all user:123:* entries
@@ -202,6 +209,7 @@ Pattern-based clearing:
 ## Integration Points
 
 Works with:
+
 - FirestoreDataAccessServer MCP
 - mcp-orchestrator agent
 - Backend Genkit flows
@@ -226,18 +234,21 @@ Works with:
 ## Performance Characteristics
 
 **First Request (Cache Miss):**
+
 - Firestore query: ~2000-3000ms
 - Parse results: ~100-500ms
 - Cache write: ~50-100ms
 - Total: ~2200-3600ms
 
 **Subsequent Requests (Cache Hit):**
+
 - Cache lookup: ~10-50ms
 - Validation check: ~5-20ms
 - Return result: ~5-20ms
 - Total: ~20-90ms
 
 **Average (95% hit rate):**
+
 - 1 miss at 3000ms + 99 hits at 50ms = 3000 + 4950 = 7950ms per 100 requests
 - Average per request: ~80ms
 - Speedup vs. always querying: 37x faster
@@ -247,6 +258,7 @@ Works with:
 ## Monitoring & Alerting
 
 **Alert Conditions:**
+
 - Cache hit rate drops below 80%
 - Response time exceeds 500ms
 - Expired entries accumulate (>1000)
@@ -254,6 +266,7 @@ Works with:
 - Firestore quota exhaustion approaching
 
 **Dashboard Metrics:**
+
 - Real-time hit rate (last hour)
 - Peak hit rate (all time)
 - Average response time trends

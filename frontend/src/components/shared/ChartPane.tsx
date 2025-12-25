@@ -8,20 +8,20 @@ interface ChartPaneProps {
 
 export function ChartPane({ title, children, className = '' }: ChartPaneProps) {
   return (
-    <div className={`bg-[#25232A] rounded-[28px] p-8 relative overflow-hidden ${className}`}>
+    <div className={`bg-surface-container rounded-tech p-8 relative overflow-hidden border border-outline-variant shadow-elevation-1 ${className}`}>
       {/* Dotted Grid Background Pattern */}
-      <div 
-        className="absolute inset-0 pointer-events-none opacity-10"
+      <div
+        className="absolute inset-0 pointer-events-none opacity-30"
         style={{
-          backgroundImage: 'radial-gradient(circle, #E6DEFF 1px, transparent 1px)',
+          backgroundImage: 'radial-gradient(circle, var(--sys-color-primary) 1px, transparent 1px)',
           backgroundSize: '20px 20px',
-          backgroundPosition: '0 0'
+          backgroundPosition: '0 0',
         }}
       />
-      
+
       {/* Content */}
       <div className="relative z-10">
-        <h4 className="text-[#E6E1E5] mb-6 font-semibold">{title}</h4>
+        <h4 className="text-on-surface mb-6 font-bold text-title-large">{title}</h4>
         {children}
       </div>
     </div>

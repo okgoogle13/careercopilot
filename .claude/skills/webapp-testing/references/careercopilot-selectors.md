@@ -1,4 +1,5 @@
 # 'careercopilot' App Key Selectors
+
 # Use these stable data-testid selectors for Playwright tests
 
 - **Resume Upload Button:** `[data-testid="resume-upload-button"]`

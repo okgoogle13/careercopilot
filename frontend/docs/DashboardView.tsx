@@ -1,13 +1,5 @@
 import React from 'react';
-import {
-  Box,
-  Typography,
-  Button,
-  Grid,
-  Card,
-  CardContent,
-  alpha,
-} from '@mui/material';
+import { Box, Typography, Button, Grid, Card, CardContent, alpha } from '@mui/material';
 import {
   FileText,
   Target,
@@ -95,7 +87,16 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         bgcolor: 'background.default',
       }}
     >
-      <Box sx={{ maxWidth: 1400, mx: 'auto', p: { xs: 3, md: 6 }, display: 'flex', flexDirection: 'column', gap: 6 }}>
+      <Box
+        sx={{
+          maxWidth: 1400,
+          mx: 'auto',
+          p: { xs: 3, md: 6 },
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 6,
+        }}
+      >
         {/* Welcome Banner */}
         <WelcomeBanner
           userName="Nishant"
@@ -106,15 +107,28 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
 
         {/* Quick Actions Grid */}
         <Box>
-          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 3 }}>
-            <Typography variant="h5" sx={{ fontWeight: 600 }}>
+          <Box
+            sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 3 }}
+          >
+            <Typography
+              variant="h5"
+              sx={{ fontWeight: 600 }}
+            >
               Quick Actions
             </Typography>
           </Box>
 
-          <Grid container spacing={3}>
+          <Grid
+            container
+            spacing={3}
+          >
             {/* Create Document Action */}
-            <Grid item xs={12} md={6} lg={4}>
+            <Grid
+              item
+              xs={12}
+              md={6}
+              lg={4}
+            >
               <ActionCard
                 title="Create New Document"
                 description="Generate an AI-optimized resume or cover letter tailored to your target role"
@@ -134,7 +148,12 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
             </Grid>
 
             {/* Find Opportunities */}
-            <Grid item xs={12} md={6} lg={4}>
+            <Grid
+              item
+              xs={12}
+              md={6}
+              lg={4}
+            >
               <ActionCard
                 title="Find Job Opportunities"
                 description="Discover jobs that match your skills and get AI-powered insights on each role"
@@ -150,7 +169,12 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
             </Grid>
 
             {/* Track Applications */}
-            <Grid item xs={12} md={6} lg={4}>
+            <Grid
+              item
+              xs={12}
+              md={6}
+              lg={4}
+            >
               <ActionCard
                 title="Track Applications"
                 description="Monitor your job applications, interview schedules, and follow-up actions"
@@ -171,8 +195,13 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
 
         {/* Recent Documents */}
         <Box>
-          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 3 }}>
-            <Typography variant="h5" sx={{ fontWeight: 600 }}>
+          <Box
+            sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 3 }}
+          >
+            <Typography
+              variant="h5"
+              sx={{ fontWeight: 600 }}
+            >
               Recent Documents
             </Typography>
             <Button
@@ -189,9 +218,18 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
             </Button>
           </Box>
 
-          <Grid container spacing={3}>
+          <Grid
+            container
+            spacing={3}
+          >
             {mockDocuments.map((doc) => (
-              <Grid item xs={12} md={6} lg={4} key={doc.id}>
+              <Grid
+                item
+                xs={12}
+                md={6}
+                lg={4}
+                key={doc.id}
+              >
                 <DocumentCard
                   document={doc}
                   onEdit={() => console.log('Edit', doc.id)}
@@ -222,7 +260,9 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
             },
           }}
         >
-          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 4 }}>
+          <Box
+            sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 4 }}
+          >
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
               <Box
                 sx={{
@@ -236,23 +276,43 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                   boxShadow: (theme) => theme.customShadows.glowAurora,
                 }}
               >
-                <Brain size={24} color="#A78BFA" />
+                <Brain
+                  size={24}
+                  color="#A78BFA"
+                />
               </Box>
               <Box>
-                <Typography variant="h6" sx={{ fontWeight: 600 }}>
+                <Typography
+                  variant="h6"
+                  sx={{ fontWeight: 600 }}
+                >
                   Job Search Intelligence
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
+                <Typography
+                  variant="body2"
+                  color="text.secondary"
+                >
                   AI-powered insights and recommendations
                 </Typography>
               </Box>
             </Box>
-            <Sparkles size={20} color="#F472B6" />
+            <Sparkles
+              size={20}
+              color="#F472B6"
+            />
           </Box>
 
           {/* Stats Grid */}
-          <Grid container spacing={2}>
-            <Grid item xs={12} sm={6} md={3}>
+          <Grid
+            container
+            spacing={2}
+          >
+            <Grid
+              item
+              xs={12}
+              sm={6}
+              md={3}
+            >
               <Card
                 sx={{
                   p: 3,
@@ -268,21 +328,38 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                 }}
               >
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
-                  <Target size={16} color="#A78BFA" />
-                  <Typography variant="body2" color="text.secondary">
+                  <Target
+                    size={16}
+                    color="#A78BFA"
+                  />
+                  <Typography
+                    variant="body2"
+                    color="text.secondary"
+                  >
                     Applications
                   </Typography>
                 </Box>
-                <Typography variant="h4" sx={{ fontWeight: 700, mb: 0.5 }}>
+                <Typography
+                  variant="h4"
+                  sx={{ fontWeight: 700, mb: 0.5 }}
+                >
                   {profileData.activeApplications}
                 </Typography>
-                <Typography variant="caption" color="text.secondary">
+                <Typography
+                  variant="caption"
+                  color="text.secondary"
+                >
                   Active this month
                 </Typography>
               </Card>
             </Grid>
 
-            <Grid item xs={12} sm={6} md={3}>
+            <Grid
+              item
+              xs={12}
+              sm={6}
+              md={3}
+            >
               <Card
                 sx={{
                   p: 3,
@@ -298,21 +375,38 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                 }}
               >
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
-                  <Clock size={16} color="#F472B6" />
-                  <Typography variant="body2" color="text.secondary">
+                  <Clock
+                    size={16}
+                    color="#F472B6"
+                  />
+                  <Typography
+                    variant="body2"
+                    color="text.secondary"
+                  >
                     Interviews
                   </Typography>
                 </Box>
-                <Typography variant="h4" sx={{ fontWeight: 700, mb: 0.5 }}>
+                <Typography
+                  variant="h4"
+                  sx={{ fontWeight: 700, mb: 0.5 }}
+                >
                   {profileData.interviewsScheduled}
                 </Typography>
-                <Typography variant="caption" color="text.secondary">
+                <Typography
+                  variant="caption"
+                  color="text.secondary"
+                >
                   Scheduled
                 </Typography>
               </Card>
             </Grid>
 
-            <Grid item xs={12} sm={6} md={3}>
+            <Grid
+              item
+              xs={12}
+              sm={6}
+              md={3}
+            >
               <Card
                 sx={{
                   p: 3,
@@ -328,21 +422,38 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                 }}
               >
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
-                  <CheckCircle size={16} color="#A78BFA" />
-                  <Typography variant="body2" color="text.secondary">
+                  <CheckCircle
+                    size={16}
+                    color="#A78BFA"
+                  />
+                  <Typography
+                    variant="body2"
+                    color="text.secondary"
+                  >
                     Response Rate
                   </Typography>
                 </Box>
-                <Typography variant="h4" sx={{ fontWeight: 700, mb: 0.5 }}>
+                <Typography
+                  variant="h4"
+                  sx={{ fontWeight: 700, mb: 0.5 }}
+                >
                   67%
                 </Typography>
-                <Typography variant="caption" color="text.secondary">
+                <Typography
+                  variant="caption"
+                  color="text.secondary"
+                >
                   +12% this week
                 </Typography>
               </Card>
             </Grid>
 
-            <Grid item xs={12} sm={6} md={3}>
+            <Grid
+              item
+              xs={12}
+              sm={6}
+              md={3}
+            >
               <Card
                 sx={{
                   p: 3,
@@ -358,15 +469,27 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                 }}
               >
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
-                  <TrendingUp size={16} color="#F472B6" />
-                  <Typography variant="body2" color="text.secondary">
+                  <TrendingUp
+                    size={16}
+                    color="#F472B6"
+                  />
+                  <Typography
+                    variant="body2"
+                    color="text.secondary"
+                  >
                     Avg ATS Score
                   </Typography>
                 </Box>
-                <Typography variant="h4" sx={{ fontWeight: 700, mb: 0.5 }}>
+                <Typography
+                  variant="h4"
+                  sx={{ fontWeight: 700, mb: 0.5 }}
+                >
                   85%
                 </Typography>
-                <Typography variant="caption" color="text.secondary">
+                <Typography
+                  variant="caption"
+                  color="text.secondary"
+                >
                   Excellent
                 </Typography>
               </Card>

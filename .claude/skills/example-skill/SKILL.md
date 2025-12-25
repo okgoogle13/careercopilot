@@ -13,6 +13,7 @@ tags:
 This is a reference implementation showing YAML best practices.
 
 ## Features
+
 - Clean, consistent formatting
 - Proper indentation (2 spaces)
 - Clear section organization

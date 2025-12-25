@@ -16,7 +16,7 @@
  * ```
  */
 
-import {RuntimeOptions} from 'firebase-functions';
+import { RuntimeOptions } from "firebase-functions";
 
 /**
  * Lightweight API operations (CRUD, simple Firestore queries)
@@ -29,8 +29,8 @@ import {RuntimeOptions} from 'firebase-functions';
  * Memory usage: 30-80MB
  */
 export const lightweightApi: RuntimeOptions = {
-  region: 'us-central1',
-  memory: '128MB',
+  region: "us-central1",
+  memory: "128MB",
   timeoutSeconds: 10,
   maxInstances: 100,
 };
@@ -46,8 +46,8 @@ export const lightweightApi: RuntimeOptions = {
  * Memory usage: 80-150MB
  */
 export const mediumApi: RuntimeOptions = {
-  region: 'us-central1',
-  memory: '256MB',
+  region: "us-central1",
+  memory: "256MB",
   timeoutSeconds: 30,
   maxInstances: 50,
 };
@@ -63,8 +63,8 @@ export const mediumApi: RuntimeOptions = {
  * Memory usage: 150-400MB
  */
 export const heavyApi: RuntimeOptions = {
-  region: 'us-central1',
-  memory: '512MB',
+  region: "us-central1",
+  memory: "512MB",
   timeoutSeconds: 60,
   maxInstances: 10,
 };
@@ -82,8 +82,8 @@ export const heavyApi: RuntimeOptions = {
  * Note: Set minInstances: 1 during peak hours to reduce cold starts
  */
 export const aiProcessing: RuntimeOptions = {
-  region: 'us-central1',
-  memory: '1GB',
+  region: "us-central1",
+  memory: "1GB",
   timeoutSeconds: 180,
   maxInstances: 5,
   minInstances: 0, // Change to 1 during peak hours (9am-5pm)
@@ -99,8 +99,8 @@ export const aiProcessing: RuntimeOptions = {
  * Memory usage: 100-200MB
  */
 export const userCleanup: RuntimeOptions = {
-  region: 'us-central1',
-  memory: '256MB',
+  region: "us-central1",
+  memory: "256MB",
   timeoutSeconds: 60,
   maxInstances: 10,
 };
@@ -115,8 +115,8 @@ export const userCleanup: RuntimeOptions = {
  * Memory usage: 200-500MB
  */
 export const backgroundTask: RuntimeOptions = {
-  region: 'us-central1',
-  memory: '512MB',
+  region: "us-central1",
+  memory: "512MB",
   timeoutSeconds: 120,
   maxInstances: 10,
   minInstances: 0,
@@ -143,7 +143,7 @@ export const RUNTIME_CONFIGS = {
  */
 export function createCustomConfig(
   baseConfig: RuntimeOptions,
-  overrides: Partial<RuntimeOptions>
+  overrides: Partial<RuntimeOptions>,
 ): RuntimeOptions {
   return {
     ...baseConfig,

@@ -1,4 +1,4 @@
- {
+{
   "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
   "language": "python",
   "libraryPackage": "google.ai.generativelanguage_v1alpha",
@@ -11,29 +11,19 @@
           "libraryClient": "CacheServiceClient",
           "rpcs": {
             "CreateCachedContent": {
-              "methods": [
-                "create_cached_content"
-              ]
+              "methods": ["create_cached_content"]
             },
             "DeleteCachedContent": {
-              "methods": [
-                "delete_cached_content"
-              ]
+              "methods": ["delete_cached_content"]
             },
             "GetCachedContent": {
-              "methods": [
-                "get_cached_content"
-              ]
+              "methods": ["get_cached_content"]
             },
             "ListCachedContents": {
-              "methods": [
-                "list_cached_contents"
-              ]
+              "methods": ["list_cached_contents"]
             },
             "UpdateCachedContent": {
-              "methods": [
-                "update_cached_content"
-              ]
+              "methods": ["update_cached_content"]
             }
           }
         },
@@ -41,29 +31,19 @@
           "libraryClient": "CacheServiceAsyncClient",
           "rpcs": {
             "CreateCachedContent": {
-              "methods": [
-                "create_cached_content"
-              ]
+              "methods": ["create_cached_content"]
             },
             "DeleteCachedContent": {
-              "methods": [
-                "delete_cached_content"
-              ]
+              "methods": ["delete_cached_content"]
             },
             "GetCachedContent": {
-              "methods": [
-                "get_cached_content"
-              ]
+              "methods": ["get_cached_content"]
             },
             "ListCachedContents": {
-              "methods": [
-                "list_cached_contents"
-              ]
+              "methods": ["list_cached_contents"]
             },
             "UpdateCachedContent": {
-              "methods": [
-                "update_cached_content"
-              ]
+              "methods": ["update_cached_content"]
             }
           }
         },
@@ -71,29 +51,19 @@
           "libraryClient": "CacheServiceClient",
           "rpcs": {
             "CreateCachedContent": {
-              "methods": [
-                "create_cached_content"
-              ]
+              "methods": ["create_cached_content"]
             },
             "DeleteCachedContent": {
-              "methods": [
-                "delete_cached_content"
-              ]
+              "methods": ["delete_cached_content"]
             },
             "GetCachedContent": {
-              "methods": [
-                "get_cached_content"
-              ]
+              "methods": ["get_cached_content"]
             },
             "ListCachedContents": {
-              "methods": [
-                "list_cached_contents"
-              ]
+              "methods": ["list_cached_contents"]
             },
             "UpdateCachedContent": {
-              "methods": [
-                "update_cached_content"
-              ]
+              "methods": ["update_cached_content"]
             }
           }
         }
@@ -105,14 +75,10 @@
           "libraryClient": "DiscussServiceClient",
           "rpcs": {
             "CountMessageTokens": {
-              "methods": [
-                "count_message_tokens"
-              ]
+              "methods": ["count_message_tokens"]
             },
             "GenerateMessage": {
-              "methods": [
-                "generate_message"
-              ]
+              "methods": ["generate_message"]
             }
           }
         },
@@ -120,14 +86,10 @@
           "libraryClient": "DiscussServiceAsyncClient",
           "rpcs": {
             "CountMessageTokens": {
-              "methods": [
-                "count_message_tokens"
-              ]
+              "methods": ["count_message_tokens"]
             },
             "GenerateMessage": {
-              "methods": [
-                "generate_message"
-              ]
+              "methods": ["generate_message"]
             }
           }
         },
@@ -135,14 +97,10 @@
           "libraryClient": "DiscussServiceClient",
           "rpcs": {
             "CountMessageTokens": {
-              "methods": [
-                "count_message_tokens"
-              ]
+              "methods": ["count_message_tokens"]
             },
             "GenerateMessage": {
-              "methods": [
-                "generate_message"
-              ]
+              "methods": ["generate_message"]
             }
           }
         }
@@ -154,24 +112,16 @@
           "libraryClient": "FileServiceClient",
           "rpcs": {
             "CreateFile": {
-              "methods": [
-                "create_file"
-              ]
+              "methods": ["create_file"]
             },
             "DeleteFile": {
-              "methods": [
-                "delete_file"
-              ]
+              "methods": ["delete_file"]
             },
             "GetFile": {
-              "methods": [
-                "get_file"
-              ]
+              "methods": ["get_file"]
             },
             "ListFiles": {
-              "methods": [
-                "list_files"
-              ]
+              "methods": ["list_files"]
             }
           }
         },
@@ -179,24 +129,16 @@
           "libraryClient": "FileServiceAsyncClient",
           "rpcs": {
             "CreateFile": {
-              "methods": [
-                "create_file"
-              ]
+              "methods": ["create_file"]
             },
             "DeleteFile": {
-              "methods": [
-                "delete_file"
-              ]
+              "methods": ["delete_file"]
             },
             "GetFile": {
-              "methods": [
-                "get_file"
-              ]
+              "methods": ["get_file"]
             },
             "ListFiles": {
-              "methods": [
-                "list_files"
-              ]
+              "methods": ["list_files"]
             }
           }
         },
@@ -204,24 +146,16 @@
           "libraryClient": "FileServiceClient",
           "rpcs": {
             "CreateFile": {
-              "methods": [
-                "create_file"
-              ]
+              "methods": ["create_file"]
             },
             "DeleteFile": {
-              "methods": [
-                "delete_file"
-              ]
+              "methods": ["delete_file"]
             },
             "GetFile": {
-              "methods": [
-                "get_file"
-              ]
+              "methods": ["get_file"]
             },
             "ListFiles": {
-              "methods": [
-                "list_files"
-              ]
+              "methods": ["list_files"]
             }
           }
         }
@@ -233,39 +167,25 @@
           "libraryClient": "GenerativeServiceClient",
           "rpcs": {
             "BatchEmbedContents": {
-              "methods": [
-                "batch_embed_contents"
-              ]
+              "methods": ["batch_embed_contents"]
             },
             "BidiGenerateContent": {
-              "methods": [
-                "bidi_generate_content"
-              ]
+              "methods": ["bidi_generate_content"]
             },
             "CountTokens": {
-              "methods": [
-                "count_tokens"
-              ]
+              "methods": ["count_tokens"]
             },
             "EmbedContent": {
-              "methods": [
-                "embed_content"
-              ]
+              "methods": ["embed_content"]
             },
             "GenerateAnswer": {
-              "methods": [
-                "generate_answer"
-              ]
+              "methods": ["generate_answer"]
             },
             "GenerateContent": {
-              "methods": [
-                "generate_content"
-              ]
+              "methods": ["generate_content"]
             },
             "StreamGenerateContent": {
-              "methods": [
-                "stream_generate_content"
-              ]
+              "methods": ["stream_generate_content"]
             }
           }
         },
@@ -273,39 +193,25 @@
           "libraryClient": "GenerativeServiceAsyncClient",
           "rpcs": {
             "BatchEmbedContents": {
-              "methods": [
-                "batch_embed_contents"
-              ]
+              "methods": ["batch_embed_contents"]
             },
             "BidiGenerateContent": {
-              "methods": [
-                "bidi_generate_content"
-              ]
+              "methods": ["bidi_generate_content"]
             },
             "CountTokens": {
-              "methods": [
-                "count_tokens"
-              ]
+              "methods": ["count_tokens"]
             },
             "EmbedContent": {
-              "methods": [
-                "embed_content"
-              ]
+              "methods": ["embed_content"]
             },
             "GenerateAnswer": {
-              "methods": [
-                "generate_answer"
-              ]
+              "methods": ["generate_answer"]
             },
             "GenerateContent": {
-              "methods": [
-                "generate_content"
-              ]
+              "methods": ["generate_content"]
             },
             "StreamGenerateContent": {
-              "methods": [
-                "stream_generate_content"
-              ]
+              "methods": ["stream_generate_content"]
             }
           }
         },
@@ -313,39 +219,25 @@
           "libraryClient": "GenerativeServiceClient",
           "rpcs": {
             "BatchEmbedContents": {
-              "methods": [
-                "batch_embed_contents"
-              ]
+              "methods": ["batch_embed_contents"]
             },
             "BidiGenerateContent": {
-              "methods": [
-                "bidi_generate_content"
-              ]
+              "methods": ["bidi_generate_content"]
             },
             "CountTokens": {
-              "methods": [
-                "count_tokens"
-              ]
+              "methods": ["count_tokens"]
             },
             "EmbedContent": {
-              "methods": [
-                "embed_content"
-              ]
+              "methods": ["embed_content"]
             },
             "GenerateAnswer": {
-              "methods": [
-                "generate_answer"
-              ]
+              "methods": ["generate_answer"]
             },
             "GenerateContent": {
-              "methods": [
-                "generate_content"
-              ]
+              "methods": ["generate_content"]
             },
             "StreamGenerateContent": {
-              "methods": [
-                "stream_generate_content"
-              ]
+              "methods": ["stream_generate_content"]
             }
           }
         }
@@ -357,39 +249,25 @@
           "libraryClient": "ModelServiceClient",
           "rpcs": {
             "CreateTunedModel": {
-              "methods": [
-                "create_tuned_model"
-              ]
+              "methods": ["create_tuned_model"]
             },
             "DeleteTunedModel": {
-              "methods": [
-                "delete_tuned_model"
-              ]
+              "methods": ["delete_tuned_model"]
             },
             "GetModel": {
-              "methods": [
-                "get_model"
-              ]
+              "methods": ["get_model"]
             },
             "GetTunedModel": {
-              "methods": [
-                "get_tuned_model"
-              ]
+              "methods": ["get_tuned_model"]
             },
             "ListModels": {
-              "methods": [
-                "list_models"
-              ]
+              "methods": ["list_models"]
             },
             "ListTunedModels": {
-              "methods": [
-                "list_tuned_models"
-              ]
+              "methods": ["list_tuned_models"]
             },
             "UpdateTunedModel": {
-              "methods": [
-                "update_tuned_model"
-              ]
+              "methods": ["update_tuned_model"]
             }
           }
         },
@@ -397,39 +275,25 @@
           "libraryClient": "ModelServiceAsyncClient",
           "rpcs": {
             "CreateTunedModel": {
-              "methods": [
-                "create_tuned_model"
-              ]
+              "methods": ["create_tuned_model"]
             },
             "DeleteTunedModel": {
-              "methods": [
-                "delete_tuned_model"
-              ]
+              "methods": ["delete_tuned_model"]
             },
             "GetModel": {
-              "methods": [
-                "get_model"
-              ]
+              "methods": ["get_model"]
             },
             "GetTunedModel": {
-              "methods": [
-                "get_tuned_model"
-              ]
+              "methods": ["get_tuned_model"]
             },
             "ListModels": {
-              "methods": [
-                "list_models"
-              ]
+              "methods": ["list_models"]
             },
             "ListTunedModels": {
-              "methods": [
-                "list_tuned_models"
-              ]
+              "methods": ["list_tuned_models"]
             },
             "UpdateTunedModel": {
-              "methods": [
-                "update_tuned_model"
-              ]
+              "methods": ["update_tuned_model"]
             }
           }
         },
@@ -437,39 +301,25 @@
           "libraryClient": "ModelServiceClient",
           "rpcs": {
             "CreateTunedModel": {
-              "methods": [
-                "create_tuned_model"
-              ]
+              "methods": ["create_tuned_model"]
             },
             "DeleteTunedModel": {
-              "methods": [
-                "delete_tuned_model"
-              ]
+              "methods": ["delete_tuned_model"]
             },
             "GetModel": {
-              "methods": [
-                "get_model"
-              ]
+              "methods": ["get_model"]
             },
             "GetTunedModel": {
-              "methods": [
-                "get_tuned_model"
-              ]
+              "methods": ["get_tuned_model"]
             },
             "ListModels": {
-              "methods": [
-                "list_models"
-              ]
+              "methods": ["list_models"]
             },
             "ListTunedModels": {
-              "methods": [
-                "list_tuned_models"
-              ]
+              "methods": ["list_tuned_models"]
             },
             "UpdateTunedModel": {
-              "methods": [
-                "update_tuned_model"
-              ]
+              "methods": ["update_tuned_model"]
             }
           }
         }
@@ -481,34 +331,22 @@
           "libraryClient": "PermissionServiceClient",
           "rpcs": {
             "CreatePermission": {
-              "methods": [
-                "create_permission"
-              ]
+              "methods": ["create_permission"]
             },
             "DeletePermission": {
-              "methods": [
-                "delete_permission"
-              ]
+              "methods": ["delete_permission"]
             },
             "GetPermission": {
-              "methods": [
-                "get_permission"
-              ]
+              "methods": ["get_permission"]
             },
             "ListPermissions": {
-              "methods": [
-                "list_permissions"
-              ]
+              "methods": ["list_permissions"]
             },
             "TransferOwnership": {
-              "methods": [
-                "transfer_ownership"
-              ]
+              "methods": ["transfer_ownership"]
             },
             "UpdatePermission": {
-              "methods": [
-                "update_permission"
-              ]
+              "methods": ["update_permission"]
             }
           }
         },
@@ -516,34 +354,22 @@
           "libraryClient": "PermissionServiceAsyncClient",
           "rpcs": {
             "CreatePermission": {
-              "methods": [
-                "create_permission"
-              ]
+              "methods": ["create_permission"]
             },
             "DeletePermission": {
-              "methods": [
-                "delete_permission"
-              ]
+              "methods": ["delete_permission"]
             },
             "GetPermission": {
-              "methods": [
-                "get_permission"
-              ]
+              "methods": ["get_permission"]
             },
             "ListPermissions": {
-              "methods": [
-                "list_permissions"
-              ]
+              "methods": ["list_permissions"]
             },
             "TransferOwnership": {
-              "methods": [
-                "transfer_ownership"
-              ]
+              "methods": ["transfer_ownership"]
             },
             "UpdatePermission": {
-              "methods": [
-                "update_permission"
-              ]
+              "methods": ["update_permission"]
             }
           }
         },
@@ -551,34 +377,22 @@
           "libraryClient": "PermissionServiceClient",
           "rpcs": {
             "CreatePermission": {
-              "methods": [
-                "create_permission"
-              ]
+              "methods": ["create_permission"]
             },
             "DeletePermission": {
-              "methods": [
-                "delete_permission"
-              ]
+              "methods": ["delete_permission"]
             },
             "GetPermission": {
-              "methods": [
-                "get_permission"
-              ]
+              "methods": ["get_permission"]
             },
             "ListPermissions": {
-              "methods": [
-                "list_permissions"
-              ]
+              "methods": ["list_permissions"]
             },
             "TransferOwnership": {
-              "methods": [
-                "transfer_ownership"
-              ]
+              "methods": ["transfer_ownership"]
             },
             "UpdatePermission": {
-              "methods": [
-                "update_permission"
-              ]
+              "methods": ["update_permission"]
             }
           }
         }
@@ -590,9 +404,7 @@
           "libraryClient": "PredictionServiceClient",
           "rpcs": {
             "Predict": {
-              "methods": [
-                "predict"
-              ]
+              "methods": ["predict"]
             }
           }
         },
@@ -600,9 +412,7 @@
           "libraryClient": "PredictionServiceAsyncClient",
           "rpcs": {
             "Predict": {
-              "methods": [
-                "predict"
-              ]
+              "methods": ["predict"]
             }
           }
         },
@@ -610,9 +420,7 @@
           "libraryClient": "PredictionServiceClient",
           "rpcs": {
             "Predict": {
-              "methods": [
-                "predict"
-              ]
+              "methods": ["predict"]
             }
           }
         }
@@ -624,104 +432,64 @@
           "libraryClient": "RetrieverServiceClient",
           "rpcs": {
             "BatchCreateChunks": {
-              "methods": [
-                "batch_create_chunks"
-              ]
+              "methods": ["batch_create_chunks"]
             },
             "BatchDeleteChunks": {
-              "methods": [
-                "batch_delete_chunks"
-              ]
+              "methods": ["batch_delete_chunks"]
             },
             "BatchUpdateChunks": {
-              "methods": [
-                "batch_update_chunks"
-              ]
+              "methods": ["batch_update_chunks"]
             },
             "CreateChunk": {
-              "methods": [
-                "create_chunk"
-              ]
+              "methods": ["create_chunk"]
             },
             "CreateCorpus": {
-              "methods": [
-                "create_corpus"
-              ]
+              "methods": ["create_corpus"]
             },
             "CreateDocument": {
-              "methods": [
-                "create_document"
-              ]
+              "methods": ["create_document"]
             },
             "DeleteChunk": {
-              "methods": [
-                "delete_chunk"
-              ]
+              "methods": ["delete_chunk"]
             },
             "DeleteCorpus": {
-              "methods": [
-                "delete_corpus"
-              ]
+              "methods": ["delete_corpus"]
             },
             "DeleteDocument": {
-              "methods": [
-                "delete_document"
-              ]
+              "methods": ["delete_document"]
             },
             "GetChunk": {
-              "methods": [
-                "get_chunk"
-              ]
+              "methods": ["get_chunk"]
             },
             "GetCorpus": {
-              "methods": [
-                "get_corpus"
-              ]
+              "methods": ["get_corpus"]
             },
             "GetDocument": {
-              "methods": [
-                "get_document"
-              ]
+              "methods": ["get_document"]
             },
             "ListChunks": {
-              "methods": [
-                "list_chunks"
-              ]
+              "methods": ["list_chunks"]
             },
             "ListCorpora": {
-              "methods": [
-                "list_corpora"
-              ]
+              "methods": ["list_corpora"]
             },
             "ListDocuments": {
-              "methods": [
-                "list_documents"
-              ]
+              "methods": ["list_documents"]
             },
             "QueryCorpus": {
-              "methods": [
-                "query_corpus"
-              ]
+              "methods": ["query_corpus"]
             },
             "QueryDocument": {
-              "methods": [
-                "query_document"
-              ]
+              "methods": ["query_document"]
             },
             "UpdateChunk": {
-              "methods": [
-                "update_chunk"
-              ]
+              "methods": ["update_chunk"]
             },
             "UpdateCorpus": {
-              "methods": [
-                "update_corpus"
-              ]
+              "methods": ["update_corpus"]
             },
             "UpdateDocument": {
-              "methods": [
-                "update_document"
-              ]
+              "methods": ["update_document"]
             }
           }
         },
@@ -729,104 +497,64 @@
           "libraryClient": "RetrieverServiceAsyncClient",
           "rpcs": {
             "BatchCreateChunks": {
-              "methods": [
-                "batch_create_chunks"
-              ]
+              "methods": ["batch_create_chunks"]
             },
             "BatchDeleteChunks": {
-              "methods": [
-                "batch_delete_chunks"
-              ]
+              "methods": ["batch_delete_chunks"]
             },
             "BatchUpdateChunks": {
-              "methods": [
-                "batch_update_chunks"
-              ]
+              "methods": ["batch_update_chunks"]
             },
             "CreateChunk": {
-              "methods": [
-                "create_chunk"
-              ]
+              "methods": ["create_chunk"]
             },
             "CreateCorpus": {
-              "methods": [
-                "create_corpus"
-              ]
+              "methods": ["create_corpus"]
             },
             "CreateDocument": {
-              "methods": [
-                "create_document"
-              ]
+              "methods": ["create_document"]
             },
             "DeleteChunk": {
-              "methods": [
-                "delete_chunk"
-              ]
+              "methods": ["delete_chunk"]
             },
             "DeleteCorpus": {
-              "methods": [
-                "delete_corpus"
-              ]
+              "methods": ["delete_corpus"]
             },
             "DeleteDocument": {
-              "methods": [
-                "delete_document"
-              ]
+              "methods": ["delete_document"]
             },
             "GetChunk": {
-              "methods": [
-                "get_chunk"
-              ]
+              "methods": ["get_chunk"]
             },
             "GetCorpus": {
-              "methods": [
-                "get_corpus"
-              ]
+              "methods": ["get_corpus"]
             },
             "GetDocument": {
-              "methods": [
-                "get_document"
-              ]
+              "methods": ["get_document"]
             },
             "ListChunks": {
-              "methods": [
-                "list_chunks"
-              ]
+              "methods": ["list_chunks"]
             },
             "ListCorpora": {
-              "methods": [
-                "list_corpora"
-              ]
+              "methods": ["list_corpora"]
             },
             "ListDocuments": {
-              "methods": [
-                "list_documents"
-              ]
+              "methods": ["list_documents"]
             },
             "QueryCorpus": {
-              "methods": [
-                "query_corpus"
-              ]
+              "methods": ["query_corpus"]
             },
             "QueryDocument": {
-              "methods": [
-                "query_document"
-              ]
+              "methods": ["query_document"]
             },
             "UpdateChunk": {
-              "methods": [
-                "update_chunk"
-              ]
+              "methods": ["update_chunk"]
             },
             "UpdateCorpus": {
-              "methods": [
-                "update_corpus"
-              ]
+              "methods": ["update_corpus"]
             },
             "UpdateDocument": {
-              "methods": [
-                "update_document"
-              ]
+              "methods": ["update_document"]
             }
           }
         },
@@ -834,104 +562,64 @@
           "libraryClient": "RetrieverServiceClient",
           "rpcs": {
             "BatchCreateChunks": {
-              "methods": [
-                "batch_create_chunks"
-              ]
+              "methods": ["batch_create_chunks"]
             },
             "BatchDeleteChunks": {
-              "methods": [
-                "batch_delete_chunks"
-              ]
+              "methods": ["batch_delete_chunks"]
             },
             "BatchUpdateChunks": {
-              "methods": [
-                "batch_update_chunks"
-              ]
+              "methods": ["batch_update_chunks"]
             },
             "CreateChunk": {
-              "methods": [
-                "create_chunk"
-              ]
+              "methods": ["create_chunk"]
             },
             "CreateCorpus": {
-              "methods": [
-                "create_corpus"
-              ]
+              "methods": ["create_corpus"]
             },
             "CreateDocument": {
-              "methods": [
-                "create_document"
-              ]
+              "methods": ["create_document"]
             },
             "DeleteChunk": {
-              "methods": [
-                "delete_chunk"
-              ]
+              "methods": ["delete_chunk"]
             },
             "DeleteCorpus": {
-              "methods": [
-                "delete_corpus"
-              ]
+              "methods": ["delete_corpus"]
             },
             "DeleteDocument": {
-              "methods": [
-                "delete_document"
-              ]
+              "methods": ["delete_document"]
             },
             "GetChunk": {
-              "methods": [
-                "get_chunk"
-              ]
+              "methods": ["get_chunk"]
             },
             "GetCorpus": {
-              "methods": [
-                "get_corpus"
-              ]
+              "methods": ["get_corpus"]
             },
             "GetDocument": {
-              "methods": [
-                "get_document"
-              ]
+              "methods": ["get_document"]
             },
             "ListChunks": {
-              "methods": [
-                "list_chunks"
-              ]
+              "methods": ["list_chunks"]
             },
             "ListCorpora": {
-              "methods": [
-                "list_corpora"
-              ]
+              "methods": ["list_corpora"]
             },
             "ListDocuments": {
-              "methods": [
-                "list_documents"
-              ]
+              "methods": ["list_documents"]
             },
             "QueryCorpus": {
-              "methods": [
-                "query_corpus"
-              ]
+              "methods": ["query_corpus"]
             },
             "QueryDocument": {
-              "methods": [
-                "query_document"
-              ]
+              "methods": ["query_document"]
             },
             "UpdateChunk": {
-              "methods": [
-                "update_chunk"
-              ]
+              "methods": ["update_chunk"]
             },
             "UpdateCorpus": {
-              "methods": [
-                "update_corpus"
-              ]
+              "methods": ["update_corpus"]
             },
             "UpdateDocument": {
-              "methods": [
-                "update_document"
-              ]
+              "methods": ["update_document"]
             }
           }
         }
@@ -943,24 +631,16 @@
           "libraryClient": "TextServiceClient",
           "rpcs": {
             "BatchEmbedText": {
-              "methods": [
-                "batch_embed_text"
-              ]
+              "methods": ["batch_embed_text"]
             },
             "CountTextTokens": {
-              "methods": [
-                "count_text_tokens"
-              ]
+              "methods": ["count_text_tokens"]
             },
             "EmbedText": {
-              "methods": [
-                "embed_text"
-              ]
+              "methods": ["embed_text"]
             },
             "GenerateText": {
-              "methods": [
-                "generate_text"
-              ]
+              "methods": ["generate_text"]
             }
           }
         },
@@ -968,24 +648,16 @@
           "libraryClient": "TextServiceAsyncClient",
           "rpcs": {
             "BatchEmbedText": {
-              "methods": [
-                "batch_embed_text"
-              ]
+              "methods": ["batch_embed_text"]
             },
             "CountTextTokens": {
-              "methods": [
-                "count_text_tokens"
-              ]
+              "methods": ["count_text_tokens"]
             },
             "EmbedText": {
-              "methods": [
-                "embed_text"
-              ]
+              "methods": ["embed_text"]
             },
             "GenerateText": {
-              "methods": [
-                "generate_text"
-              ]
+              "methods": ["generate_text"]
             }
           }
         },
@@ -993,24 +665,16 @@
           "libraryClient": "TextServiceClient",
           "rpcs": {
             "BatchEmbedText": {
-              "methods": [
-                "batch_embed_text"
-              ]
+              "methods": ["batch_embed_text"]
             },
             "CountTextTokens": {
-              "methods": [
-                "count_text_tokens"
-              ]
+              "methods": ["count_text_tokens"]
             },
             "EmbedText": {
-              "methods": [
-                "embed_text"
-              ]
+              "methods": ["embed_text"]
             },
             "GenerateText": {
-              "methods": [
-                "generate_text"
-              ]
+              "methods": ["generate_text"]
             }
           }
         }

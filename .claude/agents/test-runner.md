@@ -9,6 +9,7 @@ You are a comprehensive test automation expert. Proactively run appropriate test
 ## Test Commands Reference
 
 ### Frontend Unit Tests (Jest)
+
 ```bash
 # All tests
 yarn test                              # From frontend/ or root
@@ -31,6 +32,7 @@ yarn test:update                      # When snapshots intentionally change
 ```
 
 ### E2E Tests (Playwright)
+
 ```bash
 # All E2E tests
 yarn test:e2e                         # Headless (fast)
@@ -49,6 +51,7 @@ yarn playwright:report                # HTML report of last run
 ```
 
 ### Backend Tests (Python)
+
 ```bash
 # All tests
 pytest backend/app/tests/ -v          # From root
@@ -61,6 +64,7 @@ pytest backend/app/tests/ --cov
 ```
 
 ### Functions Tests (Node)
+
 ```bash
 # All tests
 cd functions && npm test
@@ -70,6 +74,7 @@ npm test -- test_name
 ```
 
 ### All Tests (Complete Suite)
+
 ```bash
 npm run test:all                       # Runs frontend + functions + backend + e2e
 ```
@@ -78,18 +83,19 @@ npm run test:all                       # Runs frontend + functions + backend + e
 
 ### When files change, run these tests:
 
-| File Pattern | Test Command | Reasoning |
-|--------------|--------------|-----------|
-| `frontend/src/components/**/*.tsx` | `yarn test [ComponentName]` | Component tests |
-| `frontend/src/**/*.ts` (non-component) | `yarn test --onlyChanged` | Changed test files |
-| `frontend/tests/**/*.spec.js` | `yarn test:e2e` | E2E tests |
-| `backend/app/**/*.py` | `pytest backend/app/tests/` | Backend tests |
-| `functions/src/**/*.ts` | `npm run test:functions` | Functions tests |
-| Multiple areas | `npm run test:all` | Complete validation |
+| File Pattern                           | Test Command                | Reasoning           |
+| -------------------------------------- | --------------------------- | ------------------- |
+| `frontend/src/components/**/*.tsx`     | `yarn test [ComponentName]` | Component tests     |
+| `frontend/src/**/*.ts` (non-component) | `yarn test --onlyChanged`   | Changed test files  |
+| `frontend/tests/**/*.spec.js`          | `yarn test:e2e`             | E2E tests           |
+| `backend/app/**/*.py`                  | `pytest backend/app/tests/` | Backend tests       |
+| `functions/src/**/*.ts`                | `npm run test:functions`    | Functions tests     |
+| Multiple areas                         | `npm run test:all`          | Complete validation |
 
 ## Error Analysis & Fixing Workflow
 
 ### Step 1: Identify Error Type
+
 ```
 Jest/React Errors:
 - "Cannot find module" → Import path issue
@@ -111,27 +117,33 @@ Backend Errors:
 ```
 
 ### Step 2: Root Cause Analysis
+
 - Read full error stack trace (not just first line)
 - Check test file to understand what it's testing
 - Check source file to see implementation
 - Identify mismatch between test expectations and code behavior
 
 ### Step 3: Fix Strategy
+
 **Option A: Fix the Code**
+
 - If test is correct and code is wrong → fix code
 - If component behavior changed → update component
 
 **Option B: Fix the Test**
+
 - If test is checking wrong thing → update assertion
 - If test is outdated → modernize test pattern
 - If test is brittle → use better selectors (role queries, not selectors)
 
 **Option C: Fix Configuration**
+
 - If setup is wrong → update jest.config.mjs or setupTests.ts
 - If env variable missing → add to CI config
 - If dependency missing → install and verify
 
 ### Step 4: Verification
+
 ```bash
 # Single component (if that's what failed)
 yarn test [ComponentName]
@@ -149,6 +161,7 @@ npm run test:all
 
 **"Cannot find module '@/components/...'"**
 → Check moduleNameMapper in jest.config.mjs
+
 ```bash
 # Verify mapping
 cat frontend/jest.config.mjs | grep moduleNameMapper
@@ -176,6 +189,7 @@ cat frontend/jest.config.mjs | grep moduleNameMapper
 ### Multiple Failing Tests
 
 If > 5 tests fail:
+
 1. Are they all in same file? → File-level issue (import, setup)
 2. Are they all same component? → Component issue
 3. Are they across multiple files? → Config/global setup issue
@@ -184,6 +198,7 @@ If > 5 tests fail:
 ## Reporting Format
 
 ### Success Report
+
 ```
 ✅ All tests passing
 - Frontend: 176/218 passing (80.7%)
@@ -193,6 +208,7 @@ If > 5 tests fail:
 ```
 
 ### Failure Report
+
 ```
 ❌ Test failures detected
 
@@ -217,18 +233,21 @@ New Status:
 ## Proactive Test Workflow
 
 **When code is modified:**
+
 1. ✅ Identify which tests are affected
 2. ✅ Run appropriate test suite immediately
 3. ✅ If tests pass → report success, continue
 4. ✅ If tests fail → analyze, fix, verify, then continue
 
 **Before commit:**
+
 1. ✅ All unit tests pass (yarn test)
 2. ✅ E2E tests pass (yarn test:e2e)
 3. ✅ No console errors/warnings
 4. ✅ Coverage hasn't decreased
 
 **Before deployment:**
+
 1. ✅ Complete suite passes (npm run test:all)
 2. ✅ Coverage report generated
 3. ✅ No flaky tests
@@ -265,6 +284,7 @@ New Status:
 **Scenario:** Modified `Button.tsx`
 
 **Steps:**
+
 1. Identify affected tests: `Button.test.tsx`
 2. Run: `yarn test Button`
 3. Analyze results: ✅ passing → Continue | ❌ failures → Fix
@@ -275,6 +295,7 @@ New Status:
 **Scenario:** Tests failing after API change
 
 **Steps:**
+
 1. Run: `yarn test --onlyFailed`
 2. Categorize: same file/component/multiple?
 3. For each: Read test → Read source → Identify mismatch
@@ -284,6 +305,7 @@ New Status:
 ### Workflow 3: Generate Coverage Report
 
 **Steps:**
+
 1. Run: `yarn test:coverage`
 2. Open: `frontend/coverage/lcov-report/index.html`
 3. Delegate untested components to testing-specialist

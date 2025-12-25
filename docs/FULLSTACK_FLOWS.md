@@ -114,12 +114,14 @@ sequenceDiagram
 ```
 
 **Performance:**
+
 - **Cache HIT:** 50ms response time (~95% faster)
 - **Cache MISS:** 8-15 seconds (includes LLM call)
 - **Cost per request (uncached):** $0.0008-0.0015
 - **Cost savings with cache:** ~90%
 
 **Data Transformations:**
+
 1. Frontend: `{ criterion: string, jobDescription: string, userProfile?: {} }` → camelCase
 2. API Endpoint: Converts to snake_case → `{ user_profile: dict, ksc_statement: str }`
 3. Flow: Generates JSON → `{ situation, task, action, result }`
@@ -167,6 +169,7 @@ sequenceDiagram
 ```
 
 **Performance:**
+
 - **Cache HIT:** 80ms
 - **Cache MISS:** 10-20 seconds
 - **Cost per request (uncached):** $0.0015-0.0025
@@ -210,11 +213,13 @@ sequenceDiagram
 ```
 
 **Performance:**
+
 - **Processing time:** 5-10 seconds (no caching currently)
 - **Cost per request:** $0.002-0.004
 - **Cache opportunity:** ⚠️ HIGH (same resume+job = same score)
 
 **Components:**
+
 - Keyword analysis (internal)
 - Semantic analysis (Gemini API)
 - Formatting analysis (internal)
@@ -267,6 +272,7 @@ sequenceDiagram
 ```
 
 **Performance:**
+
 - **Total processing time:** 30-60 seconds (parallel execution)
 - **Components generated:** 2-3 documents (resume, cover letter, optional KSC)
 - **Cost per package:** $0.01-0.02
@@ -309,6 +315,7 @@ sequenceDiagram
 ```
 
 **Performance:**
+
 - **Processing time:** 2-5 seconds
 - **Cost per extraction:** $0.0001-0.0003 (ultra-fast model)
 - **Cache opportunity:** ⚠️ MEDIUM (URLs can change, but text is cacheable)
@@ -319,63 +326,63 @@ sequenceDiagram
 
 ### Analysis Flows (5 flows)
 
-| Flow Name | Frontend Caller | Backend Endpoint | Caching | Purpose |
-|-----------|----------------|------------------|---------|---------|
-| `atsScoring` | `analysisService.getATSScore()` | `POST /api/v1/analysis/ats-score` | ❌ No | ATS resume scoring |
-| `analyze_job_match_detailed` | `analysisService.getJobMatching()` | `POST /api/v1/analysis/job-matching` | ❌ No | Job compatibility analysis |
-| `optimize_content_for_job` | `analysisService.getContentOptimization()` | `POST /api/v1/analysis/content-optimization` | ❌ No | Content optimization |
-| `generate_resume_intelligence_report` | `analysisService.getResumeIntelligence()` | `POST /api/v1/analysis/resume-intelligence` | ❌ No | Resume intelligence |
-| `analyze_career_progression` | *(Internal to resume intelligence)* | N/A | ❌ No | Career trajectory analysis |
+| Flow Name                             | Frontend Caller                            | Backend Endpoint                             | Caching | Purpose                    |
+| ------------------------------------- | ------------------------------------------ | -------------------------------------------- | ------- | -------------------------- |
+| `atsScoring`                          | `analysisService.getATSScore()`            | `POST /api/v1/analysis/ats-score`            | ❌ No   | ATS resume scoring         |
+| `analyze_job_match_detailed`          | `analysisService.getJobMatching()`         | `POST /api/v1/analysis/job-matching`         | ❌ No   | Job compatibility analysis |
+| `optimize_content_for_job`            | `analysisService.getContentOptimization()` | `POST /api/v1/analysis/content-optimization` | ❌ No   | Content optimization       |
+| `generate_resume_intelligence_report` | `analysisService.getResumeIntelligence()`  | `POST /api/v1/analysis/resume-intelligence`  | ❌ No   | Resume intelligence        |
+| `analyze_career_progression`          | _(Internal to resume intelligence)_        | N/A                                          | ❌ No   | Career trajectory analysis |
 
 ### Document Generation Flows (3 flows)
 
-| Flow Name | Frontend Caller | Backend Endpoint | Caching | Purpose |
-|-----------|----------------|------------------|---------|---------|
-| `generateKscResponse` | `aiServices.generateSingleKscResponse()` | `POST /api/v1/documents/generate-ksc-response` | ✅ Yes | KSC STAR responses |
-| `generate_tailored_cover_letter` | `documentService.generateCoverLetter()` | `POST /api/v1/documents/generate-cover-letter` | ✅ Yes | Cover letter generation |
-| `generate_tailored_resume` | *(Internal to workflows)* | N/A | ❌ No | Resume tailoring |
+| Flow Name                        | Frontend Caller                          | Backend Endpoint                               | Caching | Purpose                 |
+| -------------------------------- | ---------------------------------------- | ---------------------------------------------- | ------- | ----------------------- |
+| `generateKscResponse`            | `aiServices.generateSingleKscResponse()` | `POST /api/v1/documents/generate-ksc-response` | ✅ Yes  | KSC STAR responses      |
+| `generate_tailored_cover_letter` | `documentService.generateCoverLetter()`  | `POST /api/v1/documents/generate-cover-letter` | ✅ Yes  | Cover letter generation |
+| `generate_tailored_resume`       | _(Internal to workflows)_                | N/A                                            | ❌ No   | Resume tailoring        |
 
 ### Workflow Orchestration Flows (2 flows)
 
-| Flow Name | Frontend Caller | Backend Endpoint | Caching | Purpose |
-|-----------|----------------|------------------|---------|---------|
-| `generate_application_package` | `workflowService.generateApplicationPackage()` | `POST /api/v1/workflows/generate-application` | ❌ No | One-click application |
-| `scan_inbox_for_opportunities` | `aiServices.scanInboxForOpportunities()` | `POST /api/v1/workflows/scan-email-opportunities` | ❌ No | Email job scanning |
+| Flow Name                      | Frontend Caller                                | Backend Endpoint                                  | Caching | Purpose               |
+| ------------------------------ | ---------------------------------------------- | ------------------------------------------------- | ------- | --------------------- |
+| `generate_application_package` | `workflowService.generateApplicationPackage()` | `POST /api/v1/workflows/generate-application`     | ❌ No   | One-click application |
+| `scan_inbox_for_opportunities` | `aiServices.scanInboxForOpportunities()`       | `POST /api/v1/workflows/scan-email-opportunities` | ❌ No   | Email job scanning    |
 
 ### Job Analysis Flows (4 flows)
 
-| Flow Name | Frontend Caller | Backend Endpoint | Caching | Purpose |
-|-----------|----------------|------------------|---------|---------|
-| `extract_job_listing_details_flow` | `jobService.extractJobFromUrl/Text()` | `POST /api/v1/jobs/extract-from-text` | ❌ No | Job detail extraction |
-| `advanced_job_analysis_flow` | `jobService.advancedJobAnalysis()` | `POST /api/v1/jobs/advanced-analysis` | ❌ No | Deep job analysis |
-| `analyze_job_description` | *(Internal)* | N/A | ❌ No | Job description parsing |
-| `compare_resume_to_job` | *(Internal)* | N/A | ❌ No | Resume-job matching |
+| Flow Name                          | Frontend Caller                       | Backend Endpoint                      | Caching | Purpose                 |
+| ---------------------------------- | ------------------------------------- | ------------------------------------- | ------- | ----------------------- |
+| `extract_job_listing_details_flow` | `jobService.extractJobFromUrl/Text()` | `POST /api/v1/jobs/extract-from-text` | ❌ No   | Job detail extraction   |
+| `advanced_job_analysis_flow`       | `jobService.advancedJobAnalysis()`    | `POST /api/v1/jobs/advanced-analysis` | ❌ No   | Deep job analysis       |
+| `analyze_job_description`          | _(Internal)_                          | N/A                                   | ❌ No   | Job description parsing |
+| `compare_resume_to_job`            | _(Internal)_                          | N/A                                   | ❌ No   | Resume-job matching     |
 
 ### Smart Ingestion Flows (4 flows)
 
-| Flow Name | Frontend Caller | Backend Endpoint | Caching | Purpose |
-|-----------|----------------|------------------|---------|---------|
-| `contextTaggerFlow` | *(Backend ingestion)* | N/A | ❌ No | Document tagging |
-| `resumeExtractorFlow` | *(Backend ingestion)* | N/A | ❌ No | Resume entity extraction |
-| `kscExtractorFlow` | *(Backend ingestion)* | N/A | ❌ No | KSC criteria extraction |
-| `voiceProfileExtractorFlow` | *(Backend ingestion)* | N/A | ❌ No | Writing voice analysis |
+| Flow Name                   | Frontend Caller       | Backend Endpoint | Caching | Purpose                  |
+| --------------------------- | --------------------- | ---------------- | ------- | ------------------------ |
+| `contextTaggerFlow`         | _(Backend ingestion)_ | N/A              | ❌ No   | Document tagging         |
+| `resumeExtractorFlow`       | _(Backend ingestion)_ | N/A              | ❌ No   | Resume entity extraction |
+| `kscExtractorFlow`          | _(Backend ingestion)_ | N/A              | ❌ No   | KSC criteria extraction  |
+| `voiceProfileExtractorFlow` | _(Backend ingestion)_ | N/A              | ❌ No   | Writing voice analysis   |
 
 ### Email & Calendar Flows (3 flows)
 
-| Flow Name | Frontend Caller | Backend Endpoint | Caching | Purpose |
-|-----------|----------------|------------------|---------|---------|
-| `scanEmailsForJobOpportunities` | *(Internal to email workflow)* | N/A | ❌ No | Email job detection |
-| `createCalendarEvent` | *(Internal to email workflow)* | N/A | ❌ No | Calendar task creation |
-| `sendNewOpportunityNotification` | *(Internal)* | N/A | ❌ No | Push notifications |
+| Flow Name                        | Frontend Caller                | Backend Endpoint | Caching | Purpose                |
+| -------------------------------- | ------------------------------ | ---------------- | ------- | ---------------------- |
+| `scanEmailsForJobOpportunities`  | _(Internal to email workflow)_ | N/A              | ❌ No   | Email job detection    |
+| `createCalendarEvent`            | _(Internal to email workflow)_ | N/A              | ❌ No   | Calendar task creation |
+| `sendNewOpportunityNotification` | _(Internal)_                   | N/A              | ❌ No   | Push notifications     |
 
 ### Content Optimization Flows (4 flows)
 
-| Flow Name | Frontend Caller | Backend Endpoint | Caching | Purpose |
-|-----------|----------------|------------------|---------|---------|
-| `optimize_linkedin_profile` | *(Not exposed yet)* | N/A | ❌ No | LinkedIn optimization |
-| `analyze_personal_branding` | *(Not exposed yet)* | N/A | ❌ No | Brand analysis |
-| `optimize_existing_cover_letter` | *(Not exposed yet)* | N/A | ❌ No | Cover letter refinement |
-| `create_multi_format_cover_letter_suite` | *(Not exposed yet)* | N/A | ❌ No | Multi-format letters |
+| Flow Name                                | Frontend Caller     | Backend Endpoint | Caching | Purpose                 |
+| ---------------------------------------- | ------------------- | ---------------- | ------- | ----------------------- |
+| `optimize_linkedin_profile`              | _(Not exposed yet)_ | N/A              | ❌ No   | LinkedIn optimization   |
+| `analyze_personal_branding`              | _(Not exposed yet)_ | N/A              | ❌ No   | Brand analysis          |
+| `optimize_existing_cover_letter`         | _(Not exposed yet)_ | N/A              | ❌ No   | Cover letter refinement |
+| `create_multi_format_cover_letter_suite` | _(Not exposed yet)_ | N/A              | ❌ No   | Multi-format letters    |
 
 ---
 
@@ -383,17 +390,19 @@ sequenceDiagram
 
 ### Currently Cached Flows (2/25 = 8%)
 
-| Flow | Cache Key | TTL | Estimated Savings |
-|------|-----------|-----|-------------------|
-| `generateKscResponse` | `prompt_hash + model_params` | 1 hour | 90% cost, 95% time |
+| Flow                             | Cache Key                    | TTL    | Estimated Savings  |
+| -------------------------------- | ---------------------------- | ------ | ------------------ |
+| `generateKscResponse`            | `prompt_hash + model_params` | 1 hour | 90% cost, 95% time |
 | `generate_tailored_cover_letter` | `prompt_hash + model_params` | 1 hour | 90% cost, 98% time |
 
 **Cache Implementation:**
+
 - **Backend:** `FirestoreCache` (Firestore collection: `redis_cache`)
 - **Strategy:** Prompt hash + model parameters
 - **Fallback:** Graceful degradation if Firestore unavailable
 
 **Cache Hit Rate (Estimated):**
+
 - KSC responses: 60-70% (same job descriptions reused)
 - Cover letters: 40-50% (similar jobs for same candidates)
 
@@ -401,13 +410,13 @@ sequenceDiagram
 
 ### High-Priority Caching Opportunities
 
-| Flow | Frontend Usage | Cache Value | Implementation Complexity |
-|------|----------------|-------------|---------------------------|
-| `atsScoring` | **HIGH** (every resume analysis) | **VERY HIGH** | Low (same resume+job = same score) |
-| `extract_job_listing_details_flow` | **HIGH** (job imports) | **HIGH** | Medium (URLs expire, text is stable) |
-| `analyze_job_match_detailed` | **MEDIUM** (job matching) | **HIGH** | Low (deterministic scoring) |
-| `generate_resume_intelligence_report` | **MEDIUM** (resume uploads) | **MEDIUM** | Low (same resume = same report) |
-| `optimize_content_for_job` | **MEDIUM** (optimization requests) | **MEDIUM** | Medium (content varies) |
+| Flow                                  | Frontend Usage                     | Cache Value   | Implementation Complexity            |
+| ------------------------------------- | ---------------------------------- | ------------- | ------------------------------------ |
+| `atsScoring`                          | **HIGH** (every resume analysis)   | **VERY HIGH** | Low (same resume+job = same score)   |
+| `extract_job_listing_details_flow`    | **HIGH** (job imports)             | **HIGH**      | Medium (URLs expire, text is stable) |
+| `analyze_job_match_detailed`          | **MEDIUM** (job matching)          | **HIGH**      | Low (deterministic scoring)          |
+| `generate_resume_intelligence_report` | **MEDIUM** (resume uploads)        | **MEDIUM**    | Low (same resume = same report)      |
+| `optimize_content_for_job`            | **MEDIUM** (optimization requests) | **MEDIUM**    | Medium (content varies)              |
 
 **Recommendation:** Add caching to `atsScoring` and `extract_job_listing_details_flow` first (highest ROI).
 
@@ -417,15 +426,16 @@ sequenceDiagram
 
 ### Firestore Collections Used
 
-| Collection | Purpose | Accessed By | Documents |
-|------------|---------|-------------|-----------|
-| `users` | User profiles | All authenticated endpoints | ~1K-10K |
-| `users/{uid}/documents` | User documents (resumes, cover letters) | Document management | ~10-100 per user |
-| `users/{uid}/opportunities` | Job opportunities | Job tracking | ~50-500 per user |
-| `users/{uid}/assetLibrary` | Asset storage | Document uploads | ~20-200 per user |
-| `redis_cache` | LLM response caching | 2 flows (generateKscResponse, cover_letter) | ~1K-10K (with TTL cleanup) |
+| Collection                  | Purpose                                 | Accessed By                                 | Documents                  |
+| --------------------------- | --------------------------------------- | ------------------------------------------- | -------------------------- |
+| `users`                     | User profiles                           | All authenticated endpoints                 | ~1K-10K                    |
+| `users/{uid}/documents`     | User documents (resumes, cover letters) | Document management                         | ~10-100 per user           |
+| `users/{uid}/opportunities` | Job opportunities                       | Job tracking                                | ~50-500 per user           |
+| `users/{uid}/assetLibrary`  | Asset storage                           | Document uploads                            | ~20-200 per user           |
+| `redis_cache`               | LLM response caching                    | 2 flows (generateKscResponse, cover_letter) | ~1K-10K (with TTL cleanup) |
 
 **Cache Cleanup:**
+
 - Automatic TTL expiration (1 hour default)
 - Manual cleanup via `clear_pattern()` and `clear_all()`
 - Stats tracking via `get_stats()`
@@ -439,11 +449,13 @@ sequenceDiagram
 #### 1. Cache ATS Scoring Flow (60-75% cost reduction)
 
 **Current State:**
+
 - Every resume analysis = new LLM call ($0.002-0.004)
 - No caching implemented
 - Same resume+job analyzed multiple times
 
 **Optimization:**
+
 ```python
 # Add caching to atsScoring flow
 @simple_genkit_flow(output_schema=AtsResult)
@@ -457,6 +469,7 @@ async def atsScoring(resumeText: str, jobDescription: str, user_id: str) -> AtsR
 ```
 
 **Expected Savings:**
+
 - Cost: 70% reduction (~$0.0006 per cached request vs $0.003 uncached)
 - Time: 95% faster (200ms vs 5-10s)
 - Annual savings (1000 users, 10 analyses/user): **$20-30**
@@ -466,15 +479,18 @@ async def atsScoring(resumeText: str, jobDescription: str, user_id: str) -> AtsR
 #### 2. Cache Job Extraction Flow (50-60% cost reduction)
 
 **Current State:**
+
 - Every job URL extraction = new LLM call ($0.0001-0.0003)
 - Ultra-fast model already used (gemini-1.5-flash-8b)
 - Same job URLs extracted multiple times (job boards reposted)
 
 **Optimization:**
+
 - Cache by URL for 24 hours (job postings change daily)
 - Cache by text hash for 7 days (text is more stable)
 
 **Expected Savings:**
+
 - Cost: 60% reduction
 - Time: 90% faster (300ms vs 2-5s)
 - Annual savings (5000 extractions/month): **$5-10**
@@ -484,11 +500,13 @@ async def atsScoring(resumeText: str, jobDescription: str, user_id: str) -> AtsR
 #### 3. Batch Processing for Application Packages (30-40% time reduction)
 
 **Current State:**
+
 - Sequential flow execution (resume → cover letter → KSC)
 - Total time: 30-60 seconds
 - Sub-flows independently cacheable
 
 **Optimization:**
+
 ```python
 # Use parallel execution with asyncio
 async def generate_application_package(...):
@@ -501,6 +519,7 @@ async def generate_application_package(...):
 ```
 
 **Expected Improvement:**
+
 - Time: 40% faster (18-36s vs 30-60s)
 - User experience significantly better
 - No cost savings (same LLM calls)
@@ -511,12 +530,12 @@ async def generate_application_package(...):
 
 **4. Unused Flow Detection**
 
-| Flow | Frontend Caller | Status | Action |
-|------|----------------|--------|--------|
-| `optimize_linkedin_profile` | None found | ❌ Unused | Consider removing or expose in UI |
-| `analyze_personal_branding` | None found | ❌ Unused | Consider removing or expose in UI |
-| `create_multi_format_cover_letter_suite` | None found | ❌ Unused | Consider removing or expose in UI |
-| `optimize_existing_cover_letter` | None found | ❌ Unused | Consider removing or expose in UI |
+| Flow                                     | Frontend Caller | Status    | Action                            |
+| ---------------------------------------- | --------------- | --------- | --------------------------------- |
+| `optimize_linkedin_profile`              | None found      | ❌ Unused | Consider removing or expose in UI |
+| `analyze_personal_branding`              | None found      | ❌ Unused | Consider removing or expose in UI |
+| `create_multi_format_cover_letter_suite` | None found      | ❌ Unused | Consider removing or expose in UI |
+| `optimize_existing_cover_letter`         | None found      | ❌ Unused | Consider removing or expose in UI |
 
 **Recommendation:** Remove or document for future use to reduce codebase complexity.
 
@@ -525,6 +544,7 @@ async def generate_application_package(...):
 **5. Smart Model Selection Audit**
 
 Current model usage analysis:
+
 - **Ultra-fast (flash-8b):** Job extraction ✅ Correct
 - **Balanced (2.0-flash):** KSC, cover letter ✅ Correct
 - **Premium (1.5-pro):** ATS semantic analysis ✅ Correct
@@ -535,14 +555,14 @@ Current model usage analysis:
 
 ## Performance Metrics Summary
 
-| Metric | Current Value | Target | Gap |
-|--------|--------------|--------|-----|
-| **Flows with caching** | 2/25 (8%) | 10/25 (40%) | +8 flows needed |
-| **Average response time (cached)** | 50-80ms | < 100ms | ✅ On target |
-| **Average response time (uncached)** | 5-20s | < 10s | ⚠️ Needs improvement |
-| **Cache hit rate** | 50-60% | 70-80% | Increase by exposing more cacheable flows |
-| **Cost per LLM request** | $0.0001-0.004 | Minimize via caching | Implement ATS caching |
-| **Estimated monthly AI cost** | ~$50-100 (1000 users) | < $30 with caching | ⚠️ High priority |
+| Metric                               | Current Value         | Target               | Gap                                       |
+| ------------------------------------ | --------------------- | -------------------- | ----------------------------------------- |
+| **Flows with caching**               | 2/25 (8%)             | 10/25 (40%)          | +8 flows needed                           |
+| **Average response time (cached)**   | 50-80ms               | < 100ms              | ✅ On target                              |
+| **Average response time (uncached)** | 5-20s                 | < 10s                | ⚠️ Needs improvement                      |
+| **Cache hit rate**                   | 50-60%                | 70-80%               | Increase by exposing more cacheable flows |
+| **Cost per LLM request**             | $0.0001-0.004         | Minimize via caching | Implement ATS caching                     |
+| **Estimated monthly AI cost**        | ~$50-100 (1000 users) | < $30 with caching   | ⚠️ High priority                          |
 
 ---
 
@@ -550,13 +570,13 @@ Current model usage analysis:
 
 ### Frontend ↔ Backend Integration
 
-| Service | Endpoints Covered | Missing Endpoints | Health Score |
-|---------|-------------------|-------------------|--------------|
-| `aiServices.ts` | 9/9 exposed | None | ✅ 100% |
-| `analysisService.ts` | 5/5 exposed | None | ✅ 100% |
-| `documentService.ts` | 4/4 exposed | None | ✅ 100% |
-| `jobService.ts` | 6/6 exposed | None | ✅ 100% |
-| `workflowService.ts` | 4/4 exposed | None | ✅ 100% |
+| Service              | Endpoints Covered | Missing Endpoints | Health Score |
+| -------------------- | ----------------- | ----------------- | ------------ |
+| `aiServices.ts`      | 9/9 exposed       | None              | ✅ 100%      |
+| `analysisService.ts` | 5/5 exposed       | None              | ✅ 100%      |
+| `documentService.ts` | 4/4 exposed       | None              | ✅ 100%      |
+| `jobService.ts`      | 6/6 exposed       | None              | ✅ 100%      |
+| `workflowService.ts` | 4/4 exposed       | None              | ✅ 100%      |
 
 **Overall Integration Health:** ✅ **Excellent** (28/28 endpoints correctly mapped)
 
@@ -564,13 +584,13 @@ Current model usage analysis:
 
 ### Backend ↔ Genkit Integration
 
-| Endpoint | Genkit Flow | Integration Status |
-|----------|-------------|-------------------|
-| `POST /api/v1/analysis/ats-score` | `atsScoring` | ✅ Correct |
-| `POST /api/v1/documents/generate-ksc-response` | `generateKscResponse` | ✅ Correct |
-| `POST /api/v1/documents/generate-cover-letter` | `generate_tailored_cover_letter` | ✅ Correct |
-| `POST /api/v1/workflows/generate-application` | `generate_application_package` | ✅ Correct |
-| `POST /api/v1/jobs/extract-from-text` | `extract_job_listing_details_flow` | ✅ Correct |
+| Endpoint                                       | Genkit Flow                        | Integration Status |
+| ---------------------------------------------- | ---------------------------------- | ------------------ |
+| `POST /api/v1/analysis/ats-score`              | `atsScoring`                       | ✅ Correct         |
+| `POST /api/v1/documents/generate-ksc-response` | `generateKscResponse`              | ✅ Correct         |
+| `POST /api/v1/documents/generate-cover-letter` | `generate_tailored_cover_letter`   | ✅ Correct         |
+| `POST /api/v1/workflows/generate-application`  | `generate_application_package`     | ✅ Correct         |
+| `POST /api/v1/jobs/extract-from-text`          | `extract_job_listing_details_flow` | ✅ Correct         |
 
 **Overall Backend-Genkit Health:** ✅ **Excellent** (all flows correctly wired)
 
@@ -611,6 +631,7 @@ Current model usage analysis:
 ## Conclusion
 
 **Summary:**
+
 - **Total flows documented:** 25+
 - **Flows with caching:** 2 (8% coverage)
 - **Top cost-saving opportunity:** Add caching to ATS scoring (70% savings)
@@ -618,6 +639,7 @@ Current model usage analysis:
 - **Estimated annual savings with full caching:** **$50-100** (50-70% reduction)
 
 **Key Recommendations:**
+
 1. Prioritize caching for `atsScoring` and `extract_job_listing_details_flow`
 2. Enable parallel execution in application package workflow
 3. Remove or document unused flows

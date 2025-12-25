@@ -71,7 +71,7 @@ const formatRelativeTime = (date: Date | string): string => {
   const then = typeof date === 'string' ? new Date(date) : date;
   const diffMs = now.getTime() - then.getTime();
   const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-  
+
   if (diffDays === 0) return 'today';
   if (diffDays === 1) return '1 day ago';
   if (diffDays < 7) return `${diffDays} days ago`;
@@ -179,7 +179,16 @@ export const DocumentCard: React.FC<DocumentCardProps> = ({
             {/* Document Info */}
             <Box sx={{ flex: 1, minWidth: 0 }}>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 0.5 }}>
-                <Typography variant="body2" sx={{ fontWeight: 600, flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                <Typography
+                  variant="body2"
+                  sx={{
+                    fontWeight: 600,
+                    flex: 1,
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                    whiteSpace: 'nowrap',
+                  }}
+                >
                   {document.title}
                 </Typography>
                 <Chip
@@ -199,7 +208,10 @@ export const DocumentCard: React.FC<DocumentCardProps> = ({
                   }}
                 />
               </Box>
-              <Typography variant="caption" color="text.secondary">
+              <Typography
+                variant="caption"
+                color="text.secondary"
+              >
                 Modified {formatRelativeTime(document.lastModified)} • v{document.version}
               </Typography>
             </Box>
@@ -215,13 +227,16 @@ export const DocumentCard: React.FC<DocumentCardProps> = ({
                       document.atsScore >= 80
                         ? 'success.main'
                         : document.atsScore >= 60
-                        ? 'warning.main'
-                        : 'error.main',
+                          ? 'warning.main'
+                          : 'error.main',
                   }}
                 >
                   {document.atsScore}
                 </Typography>
-                <Typography variant="caption" color="text.secondary">
+                <Typography
+                  variant="caption"
+                  color="text.secondary"
+                >
                   ATS
                 </Typography>
               </Box>
@@ -263,7 +278,14 @@ export const DocumentCard: React.FC<DocumentCardProps> = ({
       >
         <CardContent sx={{ flex: 1, p: 3 }}>
           {/* Header */}
-          <Box sx={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', mb: 2 }}>
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'flex-start',
+              justifyContent: 'space-between',
+              mb: 2,
+            }}
+          >
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
               <Box
                 sx={{
@@ -310,7 +332,10 @@ export const DocumentCard: React.FC<DocumentCardProps> = ({
             </IconButton>
           </Box>
 
-          <Typography variant="h6" sx={{ fontWeight: 600, mb: 1.5 }}>
+          <Typography
+            variant="h6"
+            sx={{ fontWeight: 600, mb: 1.5 }}
+          >
             {document.title}
           </Typography>
 
@@ -329,14 +354,30 @@ export const DocumentCard: React.FC<DocumentCardProps> = ({
                 },
               }}
             />
-            <Chip label={`v${document.version}`} size="small" variant="outlined" />
-            {document.template && <Chip label={document.template} size="small" variant="outlined" />}
+            <Chip
+              label={`v${document.version}`}
+              size="small"
+              variant="outlined"
+            />
+            {document.template && (
+              <Chip
+                label={document.template}
+                size="small"
+                variant="outlined"
+              />
+            )}
           </Box>
 
-          <Typography variant="caption" color="text.secondary" sx={{ display: 'block', mb: 2 }}>
-            {document.type.replace('-', ' ').toUpperCase()} • Created {formatDate(document.createdDate)}
+          <Typography
+            variant="caption"
+            color="text.secondary"
+            sx={{ display: 'block', mb: 2 }}
+          >
+            {document.type.replace('-', ' ').toUpperCase()} • Created{' '}
+            {formatDate(document.createdDate)}
             {document.fileSize && ` • ${document.fileSize}`}
-            {document.pageCount && ` • ${document.pageCount} page${document.pageCount > 1 ? 's' : ''}`}
+            {document.pageCount &&
+              ` • ${document.pageCount} page${document.pageCount > 1 ? 's' : ''}`}
           </Typography>
 
           {/* Document Thumbnail/Preview */}
@@ -360,8 +401,15 @@ export const DocumentCard: React.FC<DocumentCardProps> = ({
               />
             ) : (
               <Box sx={{ textAlign: 'center' }}>
-                <FileText size={48} style={{ opacity: 0.3 }} />
-                <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
+                <FileText
+                  size={48}
+                  style={{ opacity: 0.3 }}
+                />
+                <Typography
+                  variant="body2"
+                  color="text.secondary"
+                  sx={{ mt: 1 }}
+                >
                   {document.type.replace('-', ' ')}
                 </Typography>
               </Box>
@@ -381,7 +429,10 @@ export const DocumentCard: React.FC<DocumentCardProps> = ({
                 mb: 2,
               }}
             >
-              <Typography variant="body2" sx={{ fontWeight: 600 }}>
+              <Typography
+                variant="body2"
+                sx={{ fontWeight: 600 }}
+              >
                 ATS Score
               </Typography>
               <Typography
@@ -396,16 +447,16 @@ export const DocumentCard: React.FC<DocumentCardProps> = ({
                       document.atsScore! >= 80
                         ? theme.palette.success.main
                         : document.atsScore! >= 60
-                        ? theme.palette.warning.main
-                        : theme.palette.error.main,
+                          ? theme.palette.warning.main
+                          : theme.palette.error.main,
                       0.1
                     ),
                   color:
                     document.atsScore >= 80
                       ? 'success.main'
                       : document.atsScore >= 60
-                      ? 'warning.main'
-                      : 'error.main',
+                        ? 'warning.main'
+                        : 'error.main',
                 }}
               >
                 {document.atsScore}%
@@ -417,38 +468,71 @@ export const DocumentCard: React.FC<DocumentCardProps> = ({
           {document.tags && document.tags.length > 0 && (
             <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5, mb: 2 }}>
               {document.tags.slice(0, 3).map((tag, index) => (
-                <Chip key={index} label={tag} size="small" />
+                <Chip
+                  key={index}
+                  label={tag}
+                  size="small"
+                />
               ))}
               {document.tags.length > 3 && (
-                <Chip label={`+${document.tags.length - 3} more`} size="small" variant="outlined" />
+                <Chip
+                  label={`+${document.tags.length - 3} more`}
+                  size="small"
+                  variant="outlined"
+                />
               )}
             </Box>
           )}
 
           {/* Metrics */}
           {document.metrics && (
-            <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 1, textAlign: 'center' }}>
+            <Box
+              sx={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(3, 1fr)',
+                gap: 1,
+                textAlign: 'center',
+              }}
+            >
               <Box>
-                <Typography variant="body2" sx={{ fontWeight: 600 }}>
+                <Typography
+                  variant="body2"
+                  sx={{ fontWeight: 600 }}
+                >
                   {document.metrics.views}
                 </Typography>
-                <Typography variant="caption" color="text.secondary">
+                <Typography
+                  variant="caption"
+                  color="text.secondary"
+                >
                   Views
                 </Typography>
               </Box>
               <Box>
-                <Typography variant="body2" sx={{ fontWeight: 600 }}>
+                <Typography
+                  variant="body2"
+                  sx={{ fontWeight: 600 }}
+                >
                   {document.metrics.downloads}
                 </Typography>
-                <Typography variant="caption" color="text.secondary">
+                <Typography
+                  variant="caption"
+                  color="text.secondary"
+                >
                   Downloads
                 </Typography>
               </Box>
               <Box>
-                <Typography variant="body2" sx={{ fontWeight: 600 }}>
+                <Typography
+                  variant="body2"
+                  sx={{ fontWeight: 600 }}
+                >
                   {document.metrics.applications}
                 </Typography>
-                <Typography variant="caption" color="text.secondary">
+                <Typography
+                  variant="caption"
+                  color="text.secondary"
+                >
                   Applications
                 </Typography>
               </Box>
@@ -498,7 +582,10 @@ export const DocumentCard: React.FC<DocumentCardProps> = ({
             onView?.(document.id);
           }}
         >
-          <Eye size={16} style={{ marginRight: 8 }} />
+          <Eye
+            size={16}
+            style={{ marginRight: 8 }}
+          />
           View
         </MenuItem>
         <MenuItem
@@ -507,7 +594,10 @@ export const DocumentCard: React.FC<DocumentCardProps> = ({
             onEdit?.(document.id);
           }}
         >
-          <Edit3 size={16} style={{ marginRight: 8 }} />
+          <Edit3
+            size={16}
+            style={{ marginRight: 8 }}
+          />
           Edit
         </MenuItem>
         <MenuItem
@@ -516,7 +606,10 @@ export const DocumentCard: React.FC<DocumentCardProps> = ({
             onDownload?.(document.id);
           }}
         >
-          <Download size={16} style={{ marginRight: 8 }} />
+          <Download
+            size={16}
+            style={{ marginRight: 8 }}
+          />
           Download
         </MenuItem>
         <Divider />
@@ -526,7 +619,10 @@ export const DocumentCard: React.FC<DocumentCardProps> = ({
             onShare?.(document.id);
           }}
         >
-          <Share2 size={16} style={{ marginRight: 8 }} />
+          <Share2
+            size={16}
+            style={{ marginRight: 8 }}
+          />
           Share
         </MenuItem>
         <MenuItem
@@ -535,7 +631,10 @@ export const DocumentCard: React.FC<DocumentCardProps> = ({
             onDuplicate?.(document.id);
           }}
         >
-          <Copy size={16} style={{ marginRight: 8 }} />
+          <Copy
+            size={16}
+            style={{ marginRight: 8 }}
+          />
           Duplicate
         </MenuItem>
         <Divider />
@@ -546,7 +645,10 @@ export const DocumentCard: React.FC<DocumentCardProps> = ({
           }}
           sx={{ color: 'error.main' }}
         >
-          <Trash2 size={16} style={{ marginRight: 8 }} />
+          <Trash2
+            size={16}
+            style={{ marginRight: 8 }}
+          />
           Delete
         </MenuItem>
       </Menu>

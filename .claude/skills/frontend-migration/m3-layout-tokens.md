@@ -23,20 +23,20 @@ This skill is Step 1 in the 8-step M3 migration protocol. It:
 
 The M3 Expressive spacing system uses a 12-stop scale based on 4px increments:
 
-| Token | Value | Use Case |
-|-------|-------|----------|
-| `--sys-space-0` | 0px | No spacing |
-| `--sys-space-1` | 4px | Extra tight spacing, icon padding |
-| `--sys-space-2` | 8px | Tight spacing, compact UI |
-| `--sys-space-3` | 12px | Small spacing, button padding |
-| `--sys-space-4` | 16px | Base spacing, card padding |
-| `--sys-space-5` | 20px | Medium spacing |
-| `--sys-space-6` | 24px | Large spacing, section padding |
-| `--sys-space-7` | 28px | Extra large spacing |
-| `--sys-space-8` | 32px | Container padding |
-| `--sys-space-10` | 40px | Section margins |
-| `--sys-space-12` | 48px | Large section spacing |
-| `--sys-space-16` | 64px | Extra large section spacing |
+| Token            | Value | Use Case                          |
+| ---------------- | ----- | --------------------------------- |
+| `--sys-space-0`  | 0px   | No spacing                        |
+| `--sys-space-1`  | 4px   | Extra tight spacing, icon padding |
+| `--sys-space-2`  | 8px   | Tight spacing, compact UI         |
+| `--sys-space-3`  | 12px  | Small spacing, button padding     |
+| `--sys-space-4`  | 16px  | Base spacing, card padding        |
+| `--sys-space-5`  | 20px  | Medium spacing                    |
+| `--sys-space-6`  | 24px  | Large spacing, section padding    |
+| `--sys-space-7`  | 28px  | Extra large spacing               |
+| `--sys-space-8`  | 32px  | Container padding                 |
+| `--sys-space-10` | 40px  | Section margins                   |
+| `--sys-space-12` | 48px  | Large section spacing             |
+| `--sys-space-16` | 64px  | Extra large section spacing       |
 
 ---
 
@@ -60,8 +60,9 @@ const styles = {
 ```
 
 **Regex:**
+
 ```javascript
-/(padding|paddingTop|paddingRight|paddingBottom|paddingLeft):\s*['"]?(\d+)px['"]?/g
+/(padding|paddingTop|paddingRight|paddingBottom|paddingLeft):\s*['"]?(\d+)px['"]?/g;
 ```
 
 ### Pattern 2: Margin Values
@@ -77,8 +78,9 @@ const styles = {
 ```
 
 **Regex:**
+
 ```javascript
-/(margin|marginTop|marginRight|marginBottom|marginLeft):\s*['"]?(\d+)px['"]?/g
+/(margin|marginTop|marginRight|marginBottom|marginLeft):\s*['"]?(\d+)px['"]?/g;
 ```
 
 ### Pattern 3: Gap Values (Flexbox/Grid)
@@ -96,6 +98,7 @@ const styles = {
 ```
 
 **Regex:**
+
 ```javascript
 /(gap|rowGap|columnGap):\s*['"]?(\d+)px['"]?/g
 /spacing=\{(\d+)\}/g
@@ -113,7 +116,7 @@ function extractSpacingValue(match) {
   const value = parseInt(match.match(/\d+/)[0], 10);
 
   // Handle compound values (e.g., "16px 24px")
-  const values = match.match(/\d+/g).map(v => parseInt(v, 10));
+  const values = match.match(/\d+/g).map((v) => parseInt(v, 10));
 
   return values;
 }
@@ -123,26 +126,24 @@ function extractSpacingValue(match) {
 
 ```javascript
 const spacingScale = {
-  0: 'var(--sys-space-0)',
-  4: 'var(--sys-space-1)',
-  8: 'var(--sys-space-2)',
-  12: 'var(--sys-space-3)',
-  16: 'var(--sys-space-4)',
-  20: 'var(--sys-space-5)',
-  24: 'var(--sys-space-6)',
-  28: 'var(--sys-space-7)',
-  32: 'var(--sys-space-8)',
-  40: 'var(--sys-space-10)',
-  48: 'var(--sys-space-12)',
-  64: 'var(--sys-space-16)'
+  0: "var(--sys-space-0)",
+  4: "var(--sys-space-1)",
+  8: "var(--sys-space-2)",
+  12: "var(--sys-space-3)",
+  16: "var(--sys-space-4)",
+  20: "var(--sys-space-5)",
+  24: "var(--sys-space-6)",
+  28: "var(--sys-space-7)",
+  32: "var(--sys-space-8)",
+  40: "var(--sys-space-10)",
+  48: "var(--sys-space-12)",
+  64: "var(--sys-space-16)",
 };
 
 function mapToSpacingToken(value) {
   // Find closest token
   const scaleValues = [0, 4, 8, 12, 16, 20, 24, 28, 32, 40, 48, 64];
-  const closest = scaleValues.reduce((prev, curr) =>
-    Math.abs(curr - value) < Math.abs(prev - value) ? curr : prev
-  );
+  const closest = scaleValues.reduce((prev, curr) => (Math.abs(curr - value) < Math.abs(prev - value) ? curr : prev));
 
   return spacingScale[closest];
 }
@@ -153,10 +154,10 @@ function mapToSpacingToken(value) {
 ```javascript
 function mapCompoundSpacing(values) {
   // Map each value separately
-  const tokens = values.map(v => mapToSpacingToken(v));
+  const tokens = values.map((v) => mapToSpacingToken(v));
 
   // Reconstruct compound value
-  return tokens.join(' ');
+  return tokens.join(" ");
 }
 
 // Example:
@@ -255,9 +256,9 @@ marginTop: 'calc(-1 * var(--sys-space-4))'
 ```javascript
 // If value doesn't match scale exactly, round to nearest
 function roundToNearestToken(value) {
-  if (value <= 2) return 'var(--sys-space-0)';
-  if (value <= 6) return 'var(--sys-space-1)';
-  if (value <= 10) return 'var(--sys-space-2)';
+  if (value <= 2) return "var(--sys-space-0)";
+  if (value <= 6) return "var(--sys-space-1)";
+  if (value <= 10) return "var(--sys-space-2)";
   // ... etc
 
   // Warn about non-standard values
@@ -269,16 +270,16 @@ function roundToNearestToken(value) {
 
 ```tsx
 // ✅ Keep as-is (not part of spacing system)
-padding: '5%'
-margin: '10% auto'
+padding: "5%";
+margin: "10% auto";
 ```
 
 ### Case 4: Auto Values
 
 ```tsx
 // ✅ Keep as-is
-margin: '0 auto'
-padding: 'auto'
+margin: "0 auto";
+padding: "auto";
 ```
 
 ---
@@ -288,6 +289,7 @@ padding: 'auto'
 ### Example 1: Card Component
 
 **Before:**
+
 ```tsx
 const ProfileCard = styled.div`
   padding: 24px;
@@ -310,6 +312,7 @@ const ProfileCard = styled.div`
 ```
 
 **After:**
+
 ```tsx
 const ProfileCard = styled.div`
   padding: var(--sys-space-6);
@@ -334,33 +337,39 @@ const ProfileCard = styled.div`
 ### Example 2: Form Layout
 
 **Before:**
+
 ```tsx
-<Box sx={{
-  padding: '32px',
-  '& .form-field': {
-    marginBottom: '20px'
-  },
-  '& .button-group': {
-    gap: '12px',
-    marginTop: '28px'
-  }
-}}>
+<Box
+  sx={{
+    padding: "32px",
+    "& .form-field": {
+      marginBottom: "20px",
+    },
+    "& .button-group": {
+      gap: "12px",
+      marginTop: "28px",
+    },
+  }}
+>
   {/* Form content */}
 </Box>
 ```
 
 **After:**
+
 ```tsx
-<Box sx={{
-  padding: 'var(--sys-space-8)',
-  '& .form-field': {
-    marginBottom: 'var(--sys-space-5)'
-  },
-  '& .button-group': {
-    gap: 'var(--sys-space-3)',
-    marginTop: 'var(--sys-space-7)'
-  }
-}}>
+<Box
+  sx={{
+    padding: "var(--sys-space-8)",
+    "& .form-field": {
+      marginBottom: "var(--sys-space-5)",
+    },
+    "& .button-group": {
+      gap: "var(--sys-space-3)",
+      marginTop: "var(--sys-space-7)",
+    },
+  }}
+>
   {/* Form content */}
 </Box>
 ```
@@ -368,26 +377,32 @@ const ProfileCard = styled.div`
 ### Example 3: Responsive Spacing
 
 **Before:**
+
 ```tsx
-<Container sx={{
-  padding: { xs: '16px', sm: '24px', md: '32px' },
-  margin: { xs: '12px', md: '24px' }
-}} />
+<Container
+  sx={{
+    padding: { xs: "16px", sm: "24px", md: "32px" },
+    margin: { xs: "12px", md: "24px" },
+  }}
+/>
 ```
 
 **After:**
+
 ```tsx
-<Container sx={{
-  padding: {
-    xs: 'var(--sys-space-4)',
-    sm: 'var(--sys-space-6)',
-    md: 'var(--sys-space-8)'
-  },
-  margin: {
-    xs: 'var(--sys-space-3)',
-    md: 'var(--sys-space-6)'
-  }
-}} />
+<Container
+  sx={{
+    padding: {
+      xs: "var(--sys-space-4)",
+      sm: "var(--sys-space-6)",
+      md: "var(--sys-space-8)",
+    },
+    margin: {
+      xs: "var(--sys-space-3)",
+      md: "var(--sys-space-6)",
+    },
+  }}
+/>
 ```
 
 ---
@@ -440,16 +455,18 @@ const ProfileCard = styled.div`
 ## Usage
 
 **As standalone skill:**
+
 ```bash
 # Pass component file path
 m3-layout-refactor --file frontend/src/components/ui/Card/Card.tsx
 ```
 
 **Within m3-migration-architect (Step 1):**
+
 ```javascript
-const layoutRefactoredCode = await runSkill('m3-layout-refactor', {
+const layoutRefactoredCode = await runSkill("m3-layout-refactor", {
   code: originalCode,
-  tokens: tokensExpressive
+  tokens: tokensExpressive,
 });
 ```
 

@@ -74,6 +74,7 @@ These components don't exist yet - tests need to be updated or components create
 ## 🚀 Quick Fix Commands
 
 ### Find Component Locations
+
 ```bash
 # Find any component
 find frontend/src -name "ComponentName.*" -type f
@@ -85,6 +86,7 @@ find frontend/src -name "ImportWizard.*"
 ```
 
 ### Fix Import Paths
+
 ```bash
 # Use absolute paths for consistency
 # Change: import { Component } from '../Component';
@@ -92,6 +94,7 @@ find frontend/src -name "ImportWizard.*"
 ```
 
 ### Test Individual Files
+
 ```bash
 # Test one file at a time
 yarn test SettingsPage
@@ -109,6 +112,7 @@ yarn test ProfileGrid
 **Target:** < 25 failed tests
 
 **Remaining Work:**
+
 - 9-11 import path fixes
 - 6 missing component investigations
 - 1 navigation config fix
@@ -126,4 +130,3 @@ yarn test ProfileGrid
 
 **Last Updated:** 2025-01-XX  
 **Next Review:** After fixing 5-10 more import issues
-

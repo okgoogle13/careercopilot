@@ -45,7 +45,7 @@ export const logout = async (): Promise<void> => {
   try {
     await axiosInstance.post('/auth/logout');
   } catch (error) {
-    console.error("Logout failed", error);
+    console.error('Logout failed', error);
   }
 };
 
@@ -74,7 +74,7 @@ const authService = {
   register,
   logout,
   getCurrentUserProfile,
-  getIdToken
+  getIdToken,
 };
 
 export default authService;
