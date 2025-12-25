@@ -6,7 +6,9 @@
   "module": "dist/esm/index.js",
   "types": "dist/index.d.ts",
   "sideEffects": false,
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsc -p tsconfig.json && tsc -p tsconfig.esm.json",
     "dev": "tsc -w -p tsconfig.json",
