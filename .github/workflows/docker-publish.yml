@@ -23,9 +23,9 @@ on:
           - dockerhub
 
 env:
-  # GCP Configuration
+  # GCP Configuration (using Artifact Registry)
   GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
-  GCR_REGISTRY: gcr.io/${{ secrets.GCP_PROJECT_ID }}/careercopilot
+  GCR_REGISTRY: us-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/careercopilot/careercopilot
   
   # Docker Hub Configuration
   DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
@@ -61,10 +61,10 @@ jobs:
         with:
           credentials_json: ${{ secrets.GCP_SA_KEY }}
       
-      - name: Configure Docker for GCR
+      - name: Configure Docker for Artifact Registry
         if: github.event.inputs.registry == 'gcr.io' || github.ref == 'refs/heads/main' || github.ref == 'refs/heads/chromebook' || github.ref == 'refs/heads/develop'
         run: |
-          gcloud auth configure-docker gcr.io
+          gcloud auth configure-docker us-docker.pkg.dev
       
       - name: Build and Push to GCR
         if: github.event.inputs.registry == 'gcr.io' || github.ref == 'refs/heads/main' || github.ref == 'refs/heads/chromebook' || github.ref == 'refs/heads/develop'
