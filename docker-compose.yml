@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  careercopilot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      # Explicitly set platform for Intel iMac compatibility
+      # Change to linux/arm64 for Apple Silicon
+      platforms:
+        - linux/amd64
+
+    image: careercopilot-dev:latest
+    container_name: careercopilot_dev
+
+    # Pass environment variables for MCP tools and Firebase
+    environment:
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - GITHUB_TOKEN=${GITHUB_TOKEN}
+      - GEMINI_MODEL=models/gemini-2.5-flash-lite
+      - GEMINI_PRO_MODEL=models/gemini-2.5-pro
+      - CHROME_BIN=/ms-playwright/chromium-1091/chrome-linux/chrome
+      - NODE_ENV=development
+      # Firebase emulator settings (if needed)
+      - FIRESTORE_EMULATOR_HOST=localhost:8080
+      - FIREBASE_AUTH_EMULATOR_HOST=localhost:9099
+
+    # Mount project directory with exclusions for cross-platform safety
+    volumes:
+      - .:/app
+      # Exclude platform-specific binaries
+      - /app/.venv
+      - /app/node_modules
+      - /app/frontend/node_modules
+      - /app/functions/node_modules
+      # Exclude build artifacts
+      - /app/dist
+      - /app/build
+      - /app/frontend/dist
+
+    # Expose development server ports
+    ports:
+      - "5173:5173" # Vite dev server
+      - "5001:5001" # Firebase Functions emulator
+      - "8080:8080" # Firestore emulator
+      - "9099:9099" # Firebase Auth emulator
+      - "6006:6006" # Storybook
+
+    # Keep container running for interactive development
+    command: tail -f /dev/null
+
+    # Enable for better terminal experience
+    stdin_open: true
+    tty: true
