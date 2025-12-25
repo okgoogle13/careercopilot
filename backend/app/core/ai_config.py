@@ -370,6 +370,18 @@ class AIConfigManager:
                 supports_streaming=True,
                 supports_function_calling=True,
             ),
+            "gemini-1.5-pro": ModelConfig(
+                name="gemini-1.5-pro",
+                provider=AIProvider.GOOGLE_AI,
+                model_type=AIModelType.TEXT_GENERATION,
+                model_id="gemini-1.5-pro",
+                max_tokens=8192,
+                temperature=0.7,
+                cost_per_1k_tokens={"input": 0.0035, "output": 0.0105},
+                context_window=2000000,
+                supports_streaming=True,
+                supports_function_calling=True,
+            ),
             "claude-3-5-sonnet": ModelConfig(
                 name="claude-3-5-sonnet",
                 provider=AIProvider.ANTHROPIC,
