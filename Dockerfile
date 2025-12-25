@@ -26,9 +26,8 @@ COPY frontend/package.json ./frontend/
 COPY functions/package.json ./functions/
 
 # Install dependencies using Yarn Berry
-# --immutable ensures lockfile is not modified
-# --inline-builds runs lifecycle scripts during install
-RUN yarn install --immutable --inline-builds
+# Use --frozen-lockfile to respect lockfile but allow peer dependency warnings
+RUN yarn install --frozen-lockfile
 
 # Copy the rest of the application source
 COPY . .
