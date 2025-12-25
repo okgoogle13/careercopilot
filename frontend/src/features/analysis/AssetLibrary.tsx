@@ -18,29 +18,13 @@ export function AssetLibrary() {
       {/* Header */}
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1
-            style={{
-              fontSize: '4.5rem',
-              lineHeight: '1.1',
-              fontFamily: 'Roboto Flex, sans-serif',
-              fontWeight: '800',
-              fontStretch: '150%',
-              color: 'var(--sys-color-on-surface)',
-            }}
-          >
+          <h1 className="text-display-large font-display font-black tracking-tight text-on-surface leading-tight">
             Asset{' '}
-            <span
-              style={{
-                fontFamily: 'Roboto Serif, serif',
-                fontStyle: 'italic',
-                fontWeight: '300',
-                color: 'var(--sys-color-primary)',
-              }}
-            >
+            <span className="font-serif italic font-light text-primary">
               Library
             </span>
           </h1>
-          <p className="text-on-surface-variant mt-2">Store and manage your career documents and media</p>
+          <p className="text-on-surface-variant mt-2 text-body-large">Store and manage your career documents and media</p>
         </div>
         <Button className="bg-primary-container text-on-primary-container hover:bg-primary-container/80 rounded-pebble px-8 h-12 flex items-center gap-2">
           <Upload className="w-5 h-5" />
@@ -70,15 +54,7 @@ export function AssetLibrary() {
             <h4 className="text-on-surface mb-2 truncate">{asset.name}</h4>
 
             {/* Upload Time */}
-            <p
-              className="text-on-surface-variant text-xs mb-4"
-              style={{
-                fontFamily: 'Roboto Flex, sans-serif',
-                fontStretch: '50%',
-                textTransform: 'uppercase',
-                letterSpacing: '0.04em',
-              }}
-            >
+            <p className="text-on-surface-variant text-xs mb-4 font-body uppercase tracking-wider opacity-70">
               {asset.uploadedAt}
             </p>
 
