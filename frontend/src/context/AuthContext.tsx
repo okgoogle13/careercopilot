@@ -3,14 +3,22 @@
  * Manages global authentication state via Firebase or Offline Mock
  */
 
-import { ReactNode, createContext, useContext, useState, useEffect, useCallback, useMemo } from 'react';
+import {
+  ReactNode,
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  useCallback,
+  useMemo,
+} from 'react';
 import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   signOut as firebaseSignOut,
   User as FirebaseUser,
-  updateProfile as firebaseUpdateProfile
+  updateProfile as firebaseUpdateProfile,
 } from 'firebase/auth';
 import { auth } from '../config/firebase';
 
@@ -33,7 +41,16 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-const isOfflineMode = import.meta.env.VITE_OFFLINE_MODE === 'true';
+// Safe access for test environment
+const getEnv = () => {
+  try {
+    return import.meta.env || {};
+  } catch {
+    return {};
+  }
+};
+
+const isOfflineMode = getEnv().VITE_OFFLINE_MODE === 'true';
 
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
@@ -61,7 +78,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   const login = useCallback(async (email: string, password: string) => {
     if (isOfflineMode) {
-      if (email && password) { // Simple validation
+      if (email && password) {
+        // Simple validation
         const mockUser: User = {
           uid: 'mock-user-123',
           email,
@@ -80,11 +98,11 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
             claims: {},
             authTime: Date.now() / 1000,
             issuedAtTime: Date.now() / 1000,
-            expirationTime: (Date.now() / 1000) + 3600,
+            expirationTime: Date.now() / 1000 + 3600,
           }),
           reload: async () => { },
           toJSON: () => ({}),
-          role: 'user'
+          role: 'user',
         } as unknown as User;
         setUser(mockUser);
         localStorage.setItem('mockUser', JSON.stringify(mockUser));
@@ -115,11 +133,11 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
           claims: {},
           authTime: Date.now() / 1000,
           issuedAtTime: Date.now() / 1000,
-          expirationTime: (Date.now() / 1000) + 3600,
+          expirationTime: Date.now() / 1000 + 3600,
         }),
         reload: async () => { },
         toJSON: () => ({}),
-        role: 'user'
+        role: 'user',
       } as unknown as User;
       setUser(mockUser);
       localStorage.setItem('mockUser', JSON.stringify(mockUser));
@@ -143,19 +161,18 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     await firebaseSignOut(auth);
   }, []);
 
-  const contextValue = useMemo(() => ({
-    user,
-    loading,
-    login,
-    register,
-    logout
-  }), [user, loading, login, register, logout]);
-
-  return (
-    <AuthContext.Provider value={contextValue}>
-      {children}
-    </AuthContext.Provider>
+  const contextValue = useMemo(
+    () => ({
+      user,
+      loading,
+      login,
+      register,
+      logout,
+    }),
+    [user, loading, login, register, logout]
   );
+
+  return <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>;
 };
 
 export const useAuth = (): AuthContextType => {
@@ -165,4 +182,3 @@ export const useAuth = (): AuthContextType => {
   }
   return context;
 };
-
