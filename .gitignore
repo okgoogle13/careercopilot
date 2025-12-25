@@ -109,3 +109,4 @@ claude-artifact-runner/
 /.ai_reports/
 .archive_legacy/
 .venv/
+test-results/
