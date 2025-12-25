@@ -17,9 +17,8 @@ RUN apt-get update && apt-get install -y \
 # Enable Corepack for Yarn Berry (v4)
 RUN corepack enable && corepack prepare yarn@4.10.3 --activate
 
-# Copy Yarn configuration files
+# Copy Yarn configuration
 COPY .yarnrc.yml ./
-COPY .yarn/releases ./.yarn/releases
 
 # Copy package manager files (for better layer caching)
 COPY package.json yarn.lock ./
