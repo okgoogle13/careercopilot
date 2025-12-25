@@ -42,7 +42,7 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 // Safe access for test environment
-const getEnv = () => {
+const getEnv = (): any => {
   try {
     return import.meta.env || {};
   } catch {
