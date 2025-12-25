@@ -33,7 +33,6 @@ export default [
       'react-hooks/rules-of-hooks': 'error',
       'react-hooks/exhaustive-deps': 'warn',
       'react/react-in-jsx-scope': 'off',
-      // 'no-restricted-syntax': [
       //   'error',
       //   {
       //     'selector': "JSXAttribute[name='className']",
@@ -41,9 +40,29 @@ export default [
       //   },
       // ],
     },
+    settings: {
+      react: {
+        version: 'detect',
+      },
+    },
   },
   {
-    ignores: ['src/components_OLD/**', 'src/assets_OLD/**', 'dist/**', 'node_modules/**', 'src/features/**', 'src/pages/**', 'src/reference/**', 'tests/**', 'scripts/**', 'packages/**', 'docs/**', 'functions/**', 'dev-dist/**', '__mocks__/**'],
+    ignores: [
+      'src/components_OLD/**',
+      'src/assets_OLD/**',
+      'dist/**',
+      'node_modules/**',
+      'src/features/**',
+      'src/pages/**',
+      'src/reference/**',
+      'tests/**',
+      'scripts/**',
+      'packages/**',
+      'docs/**',
+      'functions/**',
+      'dev-dist/**',
+      '__mocks__/**',
+    ],
   },
   {
     files: ['**/__tests__/**/*.{js,jsx,ts,tsx}', '**/*.test.{js,jsx,ts,tsx}', 'src/setupTests.ts'],
@@ -67,7 +86,10 @@ export default [
       'no-undef': 'off', // TypeScript handles this
       'react/prop-types': 'off', // TypeScript handles this
       'no-unused-vars': 'off', // TypeScript handles this
-      '@typescript-eslint/no-unused-vars': ['warn', { 'argsIgnorePattern': '^_', 'varsIgnorePattern': '^_' }],
+      '@typescript-eslint/no-unused-vars': [
+        'warn',
+        { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
+      ],
     },
   },
 ];

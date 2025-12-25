@@ -71,7 +71,8 @@ export const uploadAndTagFile = async (
       // Handle network/API errors
       const axiosError = error as AxiosError;
       throw new ApiServiceError(
-        (axiosError.response?.data as any)?.message || 'An unexpected error occurred during file upload.',
+        (axiosError.response?.data as any)?.message ||
+          'An unexpected error occurred during file upload.',
         axiosError.response?.status || 500,
         axiosError.response?.data
       );
@@ -109,7 +110,8 @@ export const extractAndSaveData = async (
       // Handle network/API errors
       const axiosError = error as AxiosError;
       throw new ApiServiceError(
-        (axiosError.response?.data as any)?.message || 'An unexpected error occurred while saving data.',
+        (axiosError.response?.data as any)?.message ||
+          'An unexpected error occurred while saving data.',
         axiosError.response?.status || 500,
         axiosError.response?.data
       );

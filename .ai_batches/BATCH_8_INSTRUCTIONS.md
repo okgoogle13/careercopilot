@@ -1,12 +1,14 @@
 # Batch 8: Layout Components - Delegation Instructions
 
 ## Assignment Details
+
 - **Difficulty:** Easiest (90% automation)
 - **Time Estimate:** 1.5 hours
 - **Components:** 3 (Container, Grid, Divider)
 - **Ideal for:** Junior AI agents or parallel execution
 
 ## Your Mission
+
 Migrate 3 layout components. These are almost entirely CSS work with minimal logic!
 
 ---
@@ -14,20 +16,24 @@ Migrate 3 layout components. These are almost entirely CSS work with minimal log
 ## Component 1: M3Container
 
 ### Generate Base
+
 ```bash
 python3 scripts/generate-m3-component.py --name="Container" --type="card" --output="frontend/src/components/ui"
 ```
 
 ### Customization Required (20 min)
+
 1. **Add max-width variants:**
+
    ```typescript
    export interface M3ContainerProps {
-     maxWidth?: 'sm' | 'md' | 'lg' | 'xl' | false;
+     maxWidth?: "sm" | "md" | "lg" | "xl" | false;
      children: React.ReactNode;
    }
    ```
 
 2. **Add responsive max-widths in CSS:**
+
    ```css
    .m3-container {
      width: 100%;
@@ -66,6 +72,7 @@ python3 scripts/generate-m3-component.py --name="Container" --type="card" --outp
    ```
 
 ### Storybook Stories
+
 - All Max Widths (sm, md, lg, xl)
 - No Max Width (full width)
 - With Content Inside
@@ -76,12 +83,15 @@ python3 scripts/generate-m3-component.py --name="Container" --type="card" --outp
 ## Component 2: M3Grid
 
 ### Generate Base
+
 ```bash
 python3 scripts/generate-m3-component.py --name="Grid" --type="card" --output="frontend/src/components/ui"
 ```
 
 ### Customization Required (40 min)
+
 1. **Add 12-column grid system:**
+
    ```typescript
    export interface M3GridProps {
      container?: boolean;
@@ -96,6 +106,7 @@ python3 scripts/generate-m3-component.py --name="Grid" --type="card" --output="f
    ```
 
 2. **Add grid CSS with breakpoints:**
+
    ```css
    .m3-grid-container {
      display: grid;
@@ -120,61 +131,99 @@ python3 scripts/generate-m3-component.py --name="Grid" --type="card" --output="f
    }
 
    /* Grid items - mobile first (xs) */
-   .m3-grid-item--xs-1 { grid-column: span 1; }
-   .m3-grid-item--xs-2 { grid-column: span 2; }
-   .m3-grid-item--xs-3 { grid-column: span 3; }
-   .m3-grid-item--xs-4 { grid-column: span 4; }
-   .m3-grid-item--xs-6 { grid-column: span 6; }
-   .m3-grid-item--xs-12 { grid-column: span 12; }
+   .m3-grid-item--xs-1 {
+     grid-column: span 1;
+   }
+   .m3-grid-item--xs-2 {
+     grid-column: span 2;
+   }
+   .m3-grid-item--xs-3 {
+     grid-column: span 3;
+   }
+   .m3-grid-item--xs-4 {
+     grid-column: span 4;
+   }
+   .m3-grid-item--xs-6 {
+     grid-column: span 6;
+   }
+   .m3-grid-item--xs-12 {
+     grid-column: span 12;
+   }
 
    /* Tablet breakpoint (sm: 640px) */
    @media (min-width: 640px) {
-     .m3-grid-item--sm-1 { grid-column: span 1; }
-     .m3-grid-item--sm-2 { grid-column: span 2; }
-     .m3-grid-item--sm-3 { grid-column: span 3; }
-     .m3-grid-item--sm-4 { grid-column: span 4; }
-     .m3-grid-item--sm-6 { grid-column: span 6; }
-     .m3-grid-item--sm-12 { grid-column: span 12; }
+     .m3-grid-item--sm-1 {
+       grid-column: span 1;
+     }
+     .m3-grid-item--sm-2 {
+       grid-column: span 2;
+     }
+     .m3-grid-item--sm-3 {
+       grid-column: span 3;
+     }
+     .m3-grid-item--sm-4 {
+       grid-column: span 4;
+     }
+     .m3-grid-item--sm-6 {
+       grid-column: span 6;
+     }
+     .m3-grid-item--sm-12 {
+       grid-column: span 12;
+     }
    }
 
    /* Desktop breakpoint (md: 768px) */
    @media (min-width: 768px) {
-     .m3-grid-item--md-1 { grid-column: span 1; }
-     .m3-grid-item--md-2 { grid-column: span 2; }
-     .m3-grid-item--md-3 { grid-column: span 3; }
-     .m3-grid-item--md-4 { grid-column: span 4; }
-     .m3-grid-item--md-6 { grid-column: span 6; }
-     .m3-grid-item--md-12 { grid-column: span 12; }
+     .m3-grid-item--md-1 {
+       grid-column: span 1;
+     }
+     .m3-grid-item--md-2 {
+       grid-column: span 2;
+     }
+     .m3-grid-item--md-3 {
+       grid-column: span 3;
+     }
+     .m3-grid-item--md-4 {
+       grid-column: span 4;
+     }
+     .m3-grid-item--md-6 {
+       grid-column: span 6;
+     }
+     .m3-grid-item--md-12 {
+       grid-column: span 12;
+     }
    }
 
    /* Large desktop (lg: 1024px) */
    @media (min-width: 1024px) {
-     .m3-grid-item--lg-1 { grid-column: span 1; }
-     .m3-grid-item--lg-2 { grid-column: span 2; }
-     .m3-grid-item--lg-3 { grid-column: span 3; }
-     .m3-grid-item--lg-4 { grid-column: span 4; }
-     .m3-grid-item--lg-6 { grid-column: span 6; }
-     .m3-grid-item--lg-12 { grid-column: span 12; }
+     .m3-grid-item--lg-1 {
+       grid-column: span 1;
+     }
+     .m3-grid-item--lg-2 {
+       grid-column: span 2;
+     }
+     .m3-grid-item--lg-3 {
+       grid-column: span 3;
+     }
+     .m3-grid-item--lg-4 {
+       grid-column: span 4;
+     }
+     .m3-grid-item--lg-6 {
+       grid-column: span 6;
+     }
+     .m3-grid-item--lg-12 {
+       grid-column: span 12;
+     }
    }
    ```
 
 3. **Add className builder:**
    ```typescript
-   const gridClasses = [
-     container && 'm3-grid-container',
-     container && spacing && `m3-grid-container--spacing-${spacing}`,
-     item && 'm3-grid-item',
-     item && xs && `m3-grid-item--xs-${xs}`,
-     item && sm && `m3-grid-item--sm-${sm}`,
-     item && md && `m3-grid-item--md-${md}`,
-     item && lg && `m3-grid-item--lg-${lg}`,
-     className,
-   ]
-     .filter(Boolean)
-     .join(' ');
+   const gridClasses = [container && "m3-grid-container", container && spacing && `m3-grid-container--spacing-${spacing}`, item && "m3-grid-item", item && xs && `m3-grid-item--xs-${xs}`, item && sm && `m3-grid-item--sm-${sm}`, item && md && `m3-grid-item--md-${md}`, item && lg && `m3-grid-item--lg-${lg}`, className].filter(Boolean).join(" ");
    ```
 
 ### Storybook Stories
+
 - Basic 3-Column Layout
 - Responsive (12 cols on mobile, 6 on tablet, 4 on desktop)
 - All Spacing Variants
@@ -188,20 +237,24 @@ python3 scripts/generate-m3-component.py --name="Grid" --type="card" --output="f
 **Note:** This is almost identical to Batch 6's M3Separator. If Batch 6 is already complete, you can skip this or create as an alias.
 
 ### Generate Base
+
 ```bash
 python3 scripts/generate-m3-component.py --name="Divider" --type="card" --output="frontend/src/components/ui"
 ```
 
 ### Customization Required (15 min)
+
 1. **Add orientation and variant:**
+
    ```typescript
    export interface M3DividerProps {
-     orientation?: 'horizontal' | 'vertical';
-     variant?: 'full' | 'inset' | 'middle';
+     orientation?: "horizontal" | "vertical";
+     variant?: "full" | "inset" | "middle";
    }
    ```
 
 2. **Add CSS variants:**
+
    ```css
    .m3-divider {
      border: none;
@@ -233,6 +286,7 @@ python3 scripts/generate-m3-component.py --name="Divider" --type="card" --output
    ```
 
 ### Storybook Stories
+
 - Horizontal (full, inset, middle)
 - Vertical
 - In List (inset variant)
@@ -243,6 +297,7 @@ python3 scripts/generate-m3-component.py --name="Divider" --type="card" --output
 ## Validation Checklist
 
 Before committing:
+
 - [ ] Container: All max-width variants work
 - [ ] Grid: 12-column system responsive across breakpoints
 - [ ] Grid: Spacing variants (1, 2, 4, 6) render correctly
@@ -253,6 +308,7 @@ Before committing:
 - [ ] Storybook stories interactive
 
 ## Commit Command
+
 ```bash
 git add -A
 git commit -m "feat: Complete M3 Batch 8 - Layout components (Container, Grid, Divider)
@@ -283,6 +339,7 @@ git push -u origin claude/m3-expressive-tokens-014XmAiA4Rd8N6ucn9JDEJuz
 ```
 
 ## Expected Completion
+
 - Time: 1.5 hours (fastest batch!)
 - Components: 3/3
 - Quality: 100% M3 compliance

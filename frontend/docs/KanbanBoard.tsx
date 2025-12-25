@@ -159,7 +159,9 @@ const ApplicationCardComponent: React.FC<{
               >
                 {card.jobTitle}
               </Typography>
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5, color: 'text.secondary' }}>
+              <Box
+                sx={{ display: 'flex', alignItems: 'center', gap: 0.5, color: 'text.secondary' }}
+              >
                 <Building2 size={12} />
                 <Typography variant="caption">{card.company}</Typography>
               </Box>
@@ -179,29 +181,57 @@ const ApplicationCardComponent: React.FC<{
         {/* Details */}
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-            <MapPin size={12} color="#928F99" />
-            <Typography variant="caption" color="text.secondary" sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+            <MapPin
+              size={12}
+              color="#928F99"
+            />
+            <Typography
+              variant="caption"
+              color="text.secondary"
+              sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}
+            >
               {card.location}
             </Typography>
           </Box>
           {card.salary && (
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-              <DollarSign size={12} color="#928F99" />
-              <Typography variant="caption" color="text.secondary">
+              <DollarSign
+                size={12}
+                color="#928F99"
+              />
+              <Typography
+                variant="caption"
+                color="text.secondary"
+              >
                 {card.salary}
               </Typography>
             </Box>
           )}
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-            <Calendar size={12} color="#928F99" />
-            <Typography variant="caption" color="text.secondary">
+            <Calendar
+              size={12}
+              color="#928F99"
+            />
+            <Typography
+              variant="caption"
+              color="text.secondary"
+            >
               Applied {new Date(card.appliedDate).toLocaleDateString()}
             </Typography>
           </Box>
         </Box>
 
         {/* Footer */}
-        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', pt: 1, borderTop: 1, borderColor: 'outline.variant' }}>
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            pt: 1,
+            borderTop: 1,
+            borderColor: 'outline.variant',
+          }}
+        >
           <Chip
             label={`${card.priority.toUpperCase()} PRIORITY`}
             size="small"
@@ -293,13 +323,21 @@ const KanbanColumnComponent: React.FC<{
                 width: 32,
                 height: 32,
                 borderRadius: 2,
-                bgcolor: (theme) => alpha(theme.palette[column.color as 'primary' | 'secondary' | 'tertiary' | 'error']?.main || theme.palette.primary.main, 0.1),
+                bgcolor: (theme) =>
+                  alpha(
+                    theme.palette[column.color as 'primary' | 'secondary' | 'tertiary' | 'error']
+                      ?.main || theme.palette.primary.main,
+                    0.1
+                  ),
                 color: `${column.color}.main`,
               }}
             >
               <IconComponent size={18} />
             </Box>
-            <Typography variant="body1" sx={{ fontWeight: 600 }}>
+            <Typography
+              variant="body1"
+              sx={{ fontWeight: 600 }}
+            >
               {column.title}
             </Typography>
           </Box>
@@ -309,7 +347,12 @@ const KanbanColumnComponent: React.FC<{
             sx={{
               height: 24,
               fontWeight: 700,
-              bgcolor: (theme) => alpha(theme.palette[column.color as 'primary' | 'secondary' | 'tertiary' | 'error']?.main || theme.palette.primary.main, 0.1),
+              bgcolor: (theme) =>
+                alpha(
+                  theme.palette[column.color as 'primary' | 'secondary' | 'tertiary' | 'error']
+                    ?.main || theme.palette.primary.main,
+                  0.1
+                ),
               color: `${column.color}.main`,
             }}
           />
@@ -449,10 +492,16 @@ export const KanbanBoard: React.FC = () => {
       }}
     >
       <Box sx={{ mb: 4 }}>
-        <Typography variant="h4" sx={{ fontWeight: 700, mb: 1 }}>
+        <Typography
+          variant="h4"
+          sx={{ fontWeight: 700, mb: 1 }}
+        >
           Application Tracker
         </Typography>
-        <Typography variant="body2" color="text.secondary">
+        <Typography
+          variant="body2"
+          color="text.secondary"
+        >
           Manage your job applications with drag-and-drop simplicity
         </Typography>
       </Box>

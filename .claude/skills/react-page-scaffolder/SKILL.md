@@ -2,6 +2,7 @@
 name: react-page-scaffolder
 description: "Creates a complete React page directory (page.tsx, index.ts, styles.css) with routing integration. Use when asked to create a new page, view, or route handler that combines components and layouts."
 ---
+
 # React Page Scaffolder Workflow
 
 1.  Ask the user for the new page name in `PascalCase` (e.g., `UserProfile`).

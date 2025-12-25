@@ -17,6 +17,7 @@ The M3 Expressive Infrastructure enables **automated component migration** from 
 ### 1. Foundation Skills (3 Total)
 
 #### m3-expressive-color-system
+
 - **Location:** `.claude/skills/design-skills/m3-expressive-color-system.md`
 - **Purpose:** Generate complete HCT-based tonal palettes
 - **Output:** 78 colors (6 palettes × 13 stops) + 30+ semantic color roles
@@ -27,6 +28,7 @@ The M3 Expressive Infrastructure enables **automated component migration** from 
   - Dynamic chroma adjustment
 
 #### m3-motion-token-generator
+
 - **Location:** `.claude/skills/design-skills/m3-motion-token-generator.md`
 - **Purpose:** Generate motion duration and easing tokens
 - **Output:** 16 duration tokens (50ms-1000ms) + 10 easing curves
@@ -36,6 +38,7 @@ The M3 Expressive Infrastructure enables **automated component migration** from 
   - Enter/exit animation patterns
 
 #### component-audit-scanner
+
 - **Location:** `.claude/skills/design-skills/component-audit-scanner.md`
 - **Purpose:** Scan all 128 components for M3 violations
 - **Output:** Priority migration list with time estimates
@@ -52,6 +55,7 @@ The M3 Expressive Infrastructure enables **automated component migration** from 
 ### 2. Design Presets (3 Total)
 
 #### Vibrant Professional
+
 - **File:** `.claude/presets/vibrant-professional.json`
 - **Colors:** Teal (#00897B), Coral (#FF6F61), Purple (#7C4DFF)
 - **Typography:** Plus Jakarta Sans + Inter
@@ -59,6 +63,7 @@ The M3 Expressive Infrastructure enables **automated component migration** from 
 - **Use Cases:** SaaS platforms, productivity tools
 
 #### Bold & Energetic
+
 - **File:** `.claude/presets/bold-energetic.json`
 - **Colors:** Magenta (#E91E63), Cyan (#00BCD4), Lime (#CDDC39)
 - **Typography:** Montserrat + Nunito
@@ -66,6 +71,7 @@ The M3 Expressive Infrastructure enables **automated component migration** from 
 - **Use Cases:** Creative platforms, design tools
 
 #### Calm Confidence
+
 - **File:** `.claude/presets/calm-confidence.json`
 - **Colors:** Navy (#1A237E), Lavender (#9FA8DA), Orange (#FF7043)
 - **Typography:** Poppins + Open Sans
@@ -77,6 +83,7 @@ The M3 Expressive Infrastructure enables **automated component migration** from 
 ### 3. Enhanced Agents (1 Enhanced)
 
 #### design-systems-architect (v2.0.0)
+
 - **File:** `.claude/agents/design-systems-architect.md`
 - **Purpose:** Orchestrate complete M3 Expressive token generation
 - **Workflow:** 10-step process from aestheticPreferences → frontend assets
@@ -93,6 +100,7 @@ The M3 Expressive Infrastructure enables **automated component migration** from 
 ### 4. M3 Migration Skills (8 Total)
 
 #### Step 1: m3-layout-refactor
+
 - **File:** `.claude/skills/frontend-migration/m3-layout-refactor.md`
 - **Purpose:** Replace hardcoded spacing with M3 spacing tokens
 - **Tokens:** 12-stop scale (space-0 to space-16: 0px-64px)
@@ -104,6 +112,7 @@ The M3 Expressive Infrastructure enables **automated component migration** from 
   - Material-UI spacing prop
 
 #### Step 2: m3-color-themer
+
 - **File:** `.claude/skills/frontend-migration/m3-color-themer.md`
 - **Purpose:** Replace hardcoded colors with M3 color tokens
 - **Tokens:** 78 palette colors + 30+ semantic roles
@@ -116,6 +125,7 @@ The M3 Expressive Infrastructure enables **automated component migration** from 
   - Preserves opacity
 
 #### Step 3: m3-typography-classifier
+
 - **File:** `.claude/skills/frontend-migration/m3-typography-classifier.md`
 - **Purpose:** Replace hardcoded typography with type scale tokens
 - **Tokens:** 13 type scales (display, headline, title, body, label)
@@ -127,6 +137,7 @@ The M3 Expressive Infrastructure enables **automated component migration** from 
   - Font size approximation
 
 #### Step 4: m3-editorial-stylist
+
 - **File:** `.claude/skills/frontend-migration/m3-editorial-stylist.md`
 - **Purpose:** Apply M3 editorial styling conventions
 - **Conventions:** Text alignment, letter spacing, text transform, truncation
@@ -138,6 +149,7 @@ The M3 Expressive Infrastructure enables **automated component migration** from 
   - RTL language support
 
 #### Step 5: m3-shape-refactor
+
 - **File:** `.claude/skills/frontend-migration/m3-shape-refactor.md`
 - **Purpose:** Replace hardcoded border-radius with shape tokens
 - **Tokens:** 7 corner radii (none, extra-small, small, medium, large, extra-large, full)
@@ -149,6 +161,7 @@ The M3 Expressive Infrastructure enables **automated component migration** from 
   - Per-corner variations
 
 #### Step 6: m3-elevation-refactor
+
 - **File:** `.claude/skills/frontend-migration/m3-elevation-refactor.md`
 - **Purpose:** Replace hardcoded box-shadow with elevation tokens
 - **Tokens:** 6 elevation levels (level-0 to level-5)
@@ -160,6 +173,7 @@ The M3 Expressive Infrastructure enables **automated component migration** from 
   - Elevation hierarchy validation
 
 #### Step 7: m3-icon-replacer
+
 - **File:** `.claude/skills/frontend-migration/m3-icon-replacer.md`
 - **Purpose:** Update icon usage to M3 standards
 - **Standards:** 3 sizes (20px small, 24px medium, 40px large)
@@ -171,6 +185,7 @@ The M3 Expressive Infrastructure enables **automated component migration** from 
   - Material Symbols migration
 
 #### Step 8: m3-motion-applier (FINAL)
+
 - **File:** `.claude/skills/frontend-migration/m3-motion-applier.md`
 - **Purpose:** Replace hardcoded transitions/animations with motion tokens
 - **Tokens:** 16 duration tokens + 10 easing curves
@@ -263,41 +278,46 @@ The M3 Expressive Infrastructure enables **automated component migration** from 
 
 ## Token Counts
 
-| Token Type | Count | Example |
-|------------|-------|---------|
-| **Color Tokens** | 108 | 78 palette colors + 30 semantic roles |
-| **Spacing Tokens** | 12 | space-0 to space-16 |
-| **Typography Tokens** | 39 | 13 scales × 3 properties (size, weight, lineHeight) |
-| **Shape Tokens** | 7 | corner-none to corner-full |
-| **Elevation Tokens** | 6 | level-0 to level-5 |
-| **Motion Tokens** | 26 | 16 durations + 10 easing curves |
-| **TOTAL** | **198** | Complete M3 Expressive token system |
+| Token Type            | Count   | Example                                             |
+| --------------------- | ------- | --------------------------------------------------- |
+| **Color Tokens**      | 108     | 78 palette colors + 30 semantic roles               |
+| **Spacing Tokens**    | 12      | space-0 to space-16                                 |
+| **Typography Tokens** | 39      | 13 scales × 3 properties (size, weight, lineHeight) |
+| **Shape Tokens**      | 7       | corner-none to corner-full                          |
+| **Elevation Tokens**  | 6       | level-0 to level-5                                  |
+| **Motion Tokens**     | 26      | 16 durations + 10 easing curves                     |
+| **TOTAL**             | **198** | Complete M3 Expressive token system                 |
 
 ---
 
 ## Benefits
 
 ### 1. Consistency (100%)
+
 - All 128 components use same token system
 - No hardcoded values anywhere
 - Semantic naming (primary, surface, on-surface)
 
 ### 2. Speed (87% Faster)
+
 - Manual: 15-20 minutes per component
 - Automated: 2-3 minutes per component
 - Batch processing: Parallel execution
 
 ### 3. Maintainability
+
 - Single source of truth (tokens-expressive.json)
 - Zero-touch theme changes (update tokens only)
 - Automated WCAG validation
 
 ### 4. Accessibility
+
 - Enforced WCAG AA contrast (4.5:1 minimum)
 - prefers-reduced-motion support
 - Semantic icon labels (aria-label, title)
 
 ### 5. Developer Experience
+
 - Comprehensive documentation (5,000+ lines)
 - Clear before/after examples
 - Edge case handling
@@ -308,16 +328,19 @@ The M3 Expressive Infrastructure enables **automated component migration** from 
 ## Next Steps
 
 ### Immediate (Week 1)
+
 1. ✅ Complete all 8 M3 migration skills
 2. ⏳ Create batch-migration-orchestrator skill
 3. ⏳ Migrate high-priority components (Button, Card, Input)
 
 ### Short-Term (Week 2-4)
+
 4. Migrate remaining UI components (29 total)
 5. Migrate Library components (15 total)
 6. Generate design system documentation
 
 ### Long-Term (Month 2+)
+
 7. Migrate all 128 components
 8. Performance optimization
 9. Storybook integration

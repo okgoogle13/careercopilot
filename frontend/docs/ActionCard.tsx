@@ -9,14 +9,7 @@ import {
   LinearProgress,
   alpha,
 } from '@mui/material';
-import {
-  LucideIcon,
-  ArrowRight,
-  Clock,
-  CheckCircle,
-  AlertCircle,
-  Zap,
-} from 'lucide-react';
+import { LucideIcon, ArrowRight, Clock, CheckCircle, AlertCircle, Zap } from 'lucide-react';
 
 export interface ActionCardProps {
   title: string;
@@ -78,7 +71,11 @@ export const ActionCard: React.FC<ActionCardProps> = ({
 
   const getVariantBg = () => {
     const variantColor = getVariantColor();
-    return (theme: any) => alpha(theme.palette[variant as keyof typeof theme.palette]?.main || theme.palette.primary.main, 0.1);
+    return (theme: any) =>
+      alpha(
+        theme.palette[variant as keyof typeof theme.palette]?.main || theme.palette.primary.main,
+        0.1
+      );
   };
 
   const getPriorityColor = () => {
@@ -99,11 +96,26 @@ export const ActionCard: React.FC<ActionCardProps> = ({
   const getStatusIcon = () => {
     switch (status) {
       case 'completed':
-        return <CheckCircle size={16} color="#86EFAC" />;
+        return (
+          <CheckCircle
+            size={16}
+            color="#86EFAC"
+          />
+        );
       case 'in-progress':
-        return <Clock size={16} color="#F472B6" />;
+        return (
+          <Clock
+            size={16}
+            color="#F472B6"
+          />
+        );
       case 'blocked':
-        return <AlertCircle size={16} color="#FFB4AB" />;
+        return (
+          <AlertCircle
+            size={16}
+            color="#FFB4AB"
+          />
+        );
       default:
         return null;
     }
@@ -137,10 +149,16 @@ export const ActionCard: React.FC<ActionCardProps> = ({
         background: (theme) =>
           variant !== 'default'
             ? `linear-gradient(135deg, ${alpha(
-                (theme.palette[variant as 'primary' | 'secondary' | 'tertiary' | 'error'] || theme.palette.primary).main,
+                (
+                  theme.palette[variant as 'primary' | 'secondary' | 'tertiary' | 'error'] ||
+                  theme.palette.primary
+                ).main,
                 0.05
               )}, ${alpha(
-                (theme.palette[variant as 'primary' | 'secondary' | 'tertiary' | 'error'] || theme.palette.primary).main,
+                (
+                  theme.palette[variant as 'primary' | 'secondary' | 'tertiary' | 'error'] ||
+                  theme.palette.primary
+                ).main,
                 0.1
               )})`
             : theme.palette.surface.container,
@@ -148,7 +166,10 @@ export const ActionCard: React.FC<ActionCardProps> = ({
           variant !== 'default'
             ? (theme) =>
                 alpha(
-                  (theme.palette[variant as 'primary' | 'secondary' | 'tertiary' | 'error'] || theme.palette.primary).main,
+                  (
+                    theme.palette[variant as 'primary' | 'secondary' | 'tertiary' | 'error'] ||
+                    theme.palette.primary
+                  ).main,
                   0.3
                 )
             : 'outline.variant',
@@ -166,7 +187,14 @@ export const ActionCard: React.FC<ActionCardProps> = ({
       <CardContent sx={{ flex: 1, display: 'flex', flexDirection: 'column', p: 3 }}>
         {/* Header */}
         <Box sx={{ mb: 3 }}>
-          <Box sx={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', mb: 2 }}>
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'flex-start',
+              justifyContent: 'space-between',
+              mb: 2,
+            }}
+          >
             {/* Icon and AI Badge */}
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
               <Box
@@ -183,7 +211,7 @@ export const ActionCard: React.FC<ActionCardProps> = ({
               >
                 <Icon size={24} />
               </Box>
-              
+
               {aiPowered && (
                 <Chip
                   icon={<Zap size={12} />}
@@ -215,21 +243,31 @@ export const ActionCard: React.FC<ActionCardProps> = ({
                   }}
                 />
               )}
-              
+
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                 {getStatusIcon()}
-                <Typography variant="caption" sx={{ color: getPriorityColor(), fontWeight: 600 }}>
+                <Typography
+                  variant="caption"
+                  sx={{ color: getPriorityColor(), fontWeight: 600 }}
+                >
                   {getStatusText()}
                 </Typography>
               </Box>
             </Box>
           </Box>
 
-          <Typography variant="h6" sx={{ fontWeight: 600, mb: 1 }}>
+          <Typography
+            variant="h6"
+            sx={{ fontWeight: 600, mb: 1 }}
+          >
             {title}
           </Typography>
-          
-          <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.6 }}>
+
+          <Typography
+            variant="body2"
+            color="text.secondary"
+            sx={{ lineHeight: 1.6 }}
+          >
             {description}
           </Typography>
         </Box>
@@ -237,11 +275,19 @@ export const ActionCard: React.FC<ActionCardProps> = ({
         {/* Progress Bar */}
         {progress !== undefined && (
           <Box sx={{ mb: 3 }}>
-            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 1 }}>
-              <Typography variant="caption" color="text.secondary">
+            <Box
+              sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 1 }}
+            >
+              <Typography
+                variant="caption"
+                color="text.secondary"
+              >
                 Progress
               </Typography>
-              <Typography variant="caption" sx={{ fontWeight: 600 }}>
+              <Typography
+                variant="caption"
+                sx={{ fontWeight: 600 }}
+              >
                 {progress}%
               </Typography>
             </Box>
@@ -272,11 +318,20 @@ export const ActionCard: React.FC<ActionCardProps> = ({
             }}
           >
             {metadata.map((item, index) => (
-              <Box key={index} sx={{ textAlign: 'center' }}>
-                <Typography variant="h6" sx={{ fontWeight: 700 }}>
+              <Box
+                key={index}
+                sx={{ textAlign: 'center' }}
+              >
+                <Typography
+                  variant="h6"
+                  sx={{ fontWeight: 700 }}
+                >
                   {item.value}
                 </Typography>
-                <Typography variant="caption" color="text.secondary">
+                <Typography
+                  variant="caption"
+                  color="text.secondary"
+                >
                   {item.label}
                 </Typography>
               </Box>
@@ -288,7 +343,10 @@ export const ActionCard: React.FC<ActionCardProps> = ({
         {estimatedTime && (
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 3 }}>
             <Clock size={16} />
-            <Typography variant="body2" color="text.secondary">
+            <Typography
+              variant="body2"
+              color="text.secondary"
+            >
               Estimated time: {estimatedTime}
             </Typography>
           </Box>
@@ -341,8 +399,14 @@ export const ActionCard: React.FC<ActionCardProps> = ({
             }}
           >
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-              <AlertCircle size={16} color="#FFB4AB" />
-              <Typography variant="body2" color="error.main">
+              <AlertCircle
+                size={16}
+                color="#FFB4AB"
+              />
+              <Typography
+                variant="body2"
+                color="error.main"
+              >
                 This action is currently unavailable. Complete prerequisites first.
               </Typography>
             </Box>
@@ -362,8 +426,14 @@ export const ActionCard: React.FC<ActionCardProps> = ({
             }}
           >
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-              <CheckCircle size={16} color="#86EFAC" />
-              <Typography variant="body2" sx={{ color: 'success.main' }}>
+              <CheckCircle
+                size={16}
+                color="#86EFAC"
+              />
+              <Typography
+                variant="body2"
+                sx={{ color: 'success.main' }}
+              >
                 Task completed successfully!
               </Typography>
             </Box>

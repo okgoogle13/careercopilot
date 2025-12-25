@@ -61,9 +61,7 @@
       "importedBy": [
         "/home/user/careercopilot/frontend/src/components/features/demo/ComponentLibrary.tsx"
       ],
-      "exports": [
-        "CardComponentsSection"
-      ],
+      "exports": ["CardComponentsSection"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
@@ -94,9 +92,7 @@
       "importedBy": [
         "/home/user/careercopilot/frontend/src/components/features/demo/ComponentLibrary.tsx"
       ],
-      "exports": [
-        "DisplayComponentsSection"
-      ],
+      "exports": ["DisplayComponentsSection"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
@@ -128,9 +124,7 @@
       "importedBy": [
         "/home/user/careercopilot/frontend/src/components/features/demo/ComponentLibrary.tsx"
       ],
-      "exports": [
-        "FormComponentsSection"
-      ],
+      "exports": ["FormComponentsSection"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
@@ -164,20 +158,13 @@
       "importedBy": [
         "/home/user/careercopilot/frontend/src/components/features/demo/ComponentLibrary.tsx"
       ],
-      "exports": [
-        "InteractiveComponentsSection"
-      ],
+      "exports": ["InteractiveComponentsSection"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
       "linesOfCode": 116,
       "complexity": "medium",
-      "dependencies": [
-        "../ui/alert-dialog",
-        "../ui/dialog",
-        "../ui/popover",
-        "./ComponentDemo"
-      ],
+      "dependencies": ["../ui/alert-dialog", "../ui/dialog", "../ui/popover", "./ComponentDemo"],
       "isReusable": true,
       "usesMUI": true,
       "usesCustomUI": true,
@@ -196,20 +183,13 @@
       "importedBy": [
         "/home/user/careercopilot/frontend/src/components/features/demo/ComponentLibrary.tsx"
       ],
-      "exports": [
-        "LayoutComponentsSection"
-      ],
+      "exports": ["LayoutComponentsSection"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
       "linesOfCode": 55,
       "complexity": "medium",
-      "dependencies": [
-        "../ui/label",
-        "../ui/separator",
-        "../ui/skeleton",
-        "./ComponentDemo"
-      ],
+      "dependencies": ["../ui/label", "../ui/separator", "../ui/skeleton", "./ComponentDemo"],
       "isReusable": true,
       "usesMUI": true,
       "usesCustomUI": true,
@@ -228,18 +208,13 @@
       "importedBy": [
         "/home/user/careercopilot/frontend/src/components/features/dashboard/dashboard/ProfileGrid.tsx"
       ],
-      "exports": [
-        "ProfileVariationCard",
-        "ProfileVariationGrid"
-      ],
+      "exports": ["ProfileVariationCard", "ProfileVariationGrid"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
       "linesOfCode": 304,
       "complexity": "complex",
-      "dependencies": [
-        "../ui/badge"
-      ],
+      "dependencies": ["../ui/badge"],
       "isReusable": true,
       "usesMUI": true,
       "usesCustomUI": true,
@@ -256,9 +231,7 @@
       "category": "other",
       "usageCount": 0,
       "importedBy": [],
-      "exports": [
-        "JobSearch"
-      ],
+      "exports": ["JobSearch"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
@@ -287,18 +260,13 @@
       "category": "library",
       "usageCount": 0,
       "importedBy": [],
-      "exports": [
-        "KeywordTag",
-        "KeywordTagGroup"
-      ],
+      "exports": ["KeywordTag", "KeywordTagGroup"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
       "linesOfCode": 209,
       "complexity": "complex",
-      "dependencies": [
-        "../ui/badge"
-      ],
+      "dependencies": ["../ui/badge"],
       "isReusable": true,
       "usesMUI": true,
       "usesCustomUI": true,
@@ -315,17 +283,13 @@
       "category": "library",
       "usageCount": 0,
       "importedBy": [],
-      "exports": [
-        "TemplateCard"
-      ],
+      "exports": ["TemplateCard"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
       "linesOfCode": 214,
       "complexity": "complex",
-      "dependencies": [
-        "../ui/badge"
-      ],
+      "dependencies": ["../ui/badge"],
       "isReusable": true,
       "usesMUI": true,
       "usesCustomUI": true,
@@ -342,17 +306,13 @@
       "category": "main",
       "usageCount": 0,
       "importedBy": [],
-      "exports": [
-        "JobSearchStatus"
-      ],
+      "exports": ["JobSearchStatus"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
       "linesOfCode": 134,
       "complexity": "medium",
-      "dependencies": [
-        "../ui/StatCard"
-      ],
+      "dependencies": ["../ui/StatCard"],
       "isReusable": false,
       "usesMUI": true,
       "usesCustomUI": true,

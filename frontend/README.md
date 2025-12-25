@@ -1,6 +1,8 @@
 # Career Copilot Frontend
 
-Career Copilot is an AI-powered career management platform built with modern web technologies. This repository contains the frontend application built with React, TypeScript, and Material-UI.
+Career Copilot is an AI-powered career management platform built with modern web
+technologies. This repository contains the frontend application built with
+React, TypeScript, and Material-UI.
 
 ## Features
 
@@ -28,14 +30,17 @@ Career Copilot is an AI-powered career management platform built with modern web
 ## Getting Started
 
 1. **Install Dependencies**
+
    ```bash
    yarn install
    ```
 
 2. **Start Development Server**
+
    ```bash
    yarn dev
    ```
+
    This will start the development server at `http://localhost:3000`
 
 3. **Build for Production**
@@ -69,7 +74,8 @@ src/
 
 ## UI Components
 
-We use Material-UI (MUI) as our component library. All custom components are built on top of MUI components for consistency and accessibility.
+We use Material-UI (MUI) as our component library. All custom components are
+built on top of MUI components for consistency and accessibility.
 
 ### Component Development
 
@@ -96,6 +102,7 @@ We use Vitest and React Testing Library for testing our components.
 - **E2E Tests**: Test complete user flows (coming soon)
 
 To run tests:
+
 ```bash
 yarn test
 ```
@@ -108,7 +115,8 @@ yarn test
 
 ## Design System
 
-- **Design Files**: [Figma](https://www.figma.com/design/OQizDLqM9Y3qitGXiabkAv/Career-Copilot)
+- **Design Files**:
+  [Figma](https://www.figma.com/design/OQizDLqM9Y3qitGXiabkAv/Career-Copilot)
 - **Colors**: Use theme colors from MUI
 - **Typography**: Use MUI's typography system
 

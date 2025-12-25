@@ -25,13 +25,17 @@ import App from './App';
 //   replaysOnErrorSampleRate: 1.0,
 // });
 
+import { AuthProvider } from './context/AuthContext';
+
 const root = document.getElementById('root');
 
 if (root) {
   createRoot(root).render(
     <HelmetProvider>
       <QueryClientProvider client={queryClient}>
-        <App />
+        <AuthProvider>
+          <App />
+        </AuthProvider>
       </QueryClientProvider>
     </HelmetProvider>
   );

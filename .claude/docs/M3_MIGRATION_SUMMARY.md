@@ -1,4 +1,5 @@
 # Material Design 3 Migration - Executive Summary & Quick Reference
+
 ---
 
 ## Current State Overview
@@ -15,6 +16,7 @@
 - **m3-design-system-generator** - Unified token generation (150+ tokens), WCAG validation, CSS variables
 
 ### Component Distribution (Audit as of 2025-11-28)
+
 ```
 ✅ M3 Token-Based:        30 components (Complete)
 ⏳ Hybrid/Incomplete:     86 components (Partial M3, needs finishing)
@@ -34,8 +36,10 @@
 
 **Primary Tool:** `m3-design-system-generator`
 ```
+
 Request: "Generate complete M3 design system with 150+ tokens"
 Output: tokens.json + CSS variables + Tailwind patch + WCAG report
+
 ```
 
 **Tasks:**
@@ -63,13 +67,16 @@ Output: tokens.json + CSS variables + Tailwind patch + WCAG report
 
 **Process:**
 ```
+
 Ask Claude: "Migrate Button, Input, Select, Navbar, Sidebar to M3 Expressive"
 batch-migration-orchestrator will:
-  1. Apply m3-layout-tokens (spacing, sizing)
-  2. Apply m3-visual-tokens (colors, elevation, shape)
-  3. Apply m3-typography-tokens (if needed)
-  4. Apply m3-interaction-tokens (motion, icon sizes)
-  5. Validate compliance
+
+1. Apply m3-layout-tokens (spacing, sizing)
+2. Apply m3-visual-tokens (colors, elevation, shape)
+3. Apply m3-typography-tokens (if needed)
+4. Apply m3-interaction-tokens (motion, icon sizes)
+5. Validate compliance
+
 ```
 
 **Unlocks:** 45+ dependent components
@@ -89,9 +96,11 @@ batch-migration-orchestrator will:
 
 **Process:**
 ```
+
 Ask Claude: "Migrate AppShell, Dialog, PageHeader, Toast to M3 Expressive"
 Tools will apply all 4 migration steps automatically
-```
+
+````
 
 **Unlocks:** All app layouts and user flows
 **Progress:** 35% → 60%
@@ -151,9 +160,10 @@ const StyledBox = styled(Box)(({ theme }) => ({
   padding: theme.spacing(2),                         // ❌ Spacing unit
   margin: '12px',                                    // ❌ Magic number
 }));
-```
+````
 
 ### After: M3 Tokens (New Way)
+
 ```typescript
 const TokenBox = () => (
   <Box sx={{
@@ -166,6 +176,7 @@ const TokenBox = () => (
 ```
 
 ### Key Changes
+
 - Replace `theme.palette.*` with `var(--sys-color-*)`
 - Convert spacing to pixel multiples of 4 (4px, 8px, 12px, 16px, 24px, 32px)
 - Use proper `<Typography>` component instead of styled divs
@@ -176,6 +187,7 @@ const TokenBox = () => (
 ## Token Reference (Most Common)
 
 ### Colors
+
 ```
 Primary:          var(--sys-color-primary)
 On Primary:       var(--sys-color-on-primary)
@@ -190,6 +202,7 @@ On Background:    var(--sys-color-on-background)
 ```
 
 ### Spacing Grid (4px base)
+
 ```
 4px   = spacing 1x
 8px   = spacing 2x
@@ -200,6 +213,7 @@ On Background:    var(--sys-color-on-background)
 ```
 
 ### Typography Variants
+
 ```
 <Typography variant="h1" />   - Display Large
 <Typography variant="h2" />   - Display Medium

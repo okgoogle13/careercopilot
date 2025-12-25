@@ -38,7 +38,7 @@ export interface AssetDocument {
   name: string;
   documentType: 'resume' | 'ksc' | 'voice';
   extractedData: Record<string, any>;
-  tags: string[];  // Changed from ContextTags to string[]
+  tags: string[]; // Changed from ContextTags to string[]
   metadata: {
     fileName: string;
     fileType: string;

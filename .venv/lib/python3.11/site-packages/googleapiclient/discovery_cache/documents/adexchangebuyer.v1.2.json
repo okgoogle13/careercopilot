@@ -29,12 +29,8 @@
     "alt": {
       "default": "json",
       "description": "Data format for the response.",
-      "enum": [
-        "json"
-      ],
-      "enumDescriptions": [
-        "Responses with Content-Type of application/json"
-      ],
+      "enum": ["json"],
+      "enumDescriptions": ["Responses with Content-Type of application/json"],
       "location": "query",
       "type": "string"
     },
@@ -78,9 +74,7 @@
           "description": "Gets one account by ID.",
           "httpMethod": "GET",
           "id": "adexchangebuyer.accounts.get",
-          "parameterOrder": [
-            "id"
-          ],
+          "parameterOrder": ["id"],
           "parameters": {
             "id": {
               "description": "The account id",
@@ -94,9 +88,7 @@
           "response": {
             "$ref": "Account"
           },
-          "scopes": [
-            "https://www.googleapis.com/auth/adexchange.buyer"
-          ]
+          "scopes": ["https://www.googleapis.com/auth/adexchange.buyer"]
         },
         "list": {
           "description": "Retrieves the authenticated user's list of accounts.",
@@ -106,17 +98,13 @@
           "response": {
             "$ref": "AccountsList"
           },
-          "scopes": [
-            "https://www.googleapis.com/auth/adexchange.buyer"
-          ]
+          "scopes": ["https://www.googleapis.com/auth/adexchange.buyer"]
         },
         "patch": {
           "description": "Updates an existing account. This method supports patch semantics.",
           "httpMethod": "PATCH",
           "id": "adexchangebuyer.accounts.patch",
-          "parameterOrder": [
-            "id"
-          ],
+          "parameterOrder": ["id"],
           "parameters": {
             "id": {
               "description": "The account id",
@@ -133,17 +121,13 @@
           "response": {
             "$ref": "Account"
           },
-          "scopes": [
-            "https://www.googleapis.com/auth/adexchange.buyer"
-          ]
+          "scopes": ["https://www.googleapis.com/auth/adexchange.buyer"]
         },
         "update": {
           "description": "Updates an existing account.",
           "httpMethod": "PUT",
           "id": "adexchangebuyer.accounts.update",
-          "parameterOrder": [
-            "id"
-          ],
+          "parameterOrder": ["id"],
           "parameters": {
             "id": {
               "description": "The account id",
@@ -160,9 +144,7 @@
           "response": {
             "$ref": "Account"
           },
-          "scopes": [
-            "https://www.googleapis.com/auth/adexchange.buyer"
-          ]
+          "scopes": ["https://www.googleapis.com/auth/adexchange.buyer"]
         }
       }
     },
@@ -172,10 +154,7 @@
           "description": "Gets the status for a single creative. A creative will be available 30-40 minutes after submission.",
           "httpMethod": "GET",
           "id": "adexchangebuyer.creatives.get",
-          "parameterOrder": [
-            "accountId",
-            "buyerCreativeId"
-          ],
+          "parameterOrder": ["accountId", "buyerCreativeId"],
           "parameters": {
             "accountId": {
               "description": "The id for the account that will serve this creative.",
@@ -195,9 +174,7 @@
           "response": {
             "$ref": "Creative"
           },
-          "scopes": [
-            "https://www.googleapis.com/auth/adexchange.buyer"
-          ]
+          "scopes": ["https://www.googleapis.com/auth/adexchange.buyer"]
         },
         "insert": {
           "description": "Submit a new creative.",
@@ -210,9 +187,7 @@
           "response": {
             "$ref": "Creative"
           },
-          "scopes": [
-            "https://www.googleapis.com/auth/adexchange.buyer"
-          ]
+          "scopes": ["https://www.googleapis.com/auth/adexchange.buyer"]
         },
         "list": {
           "description": "Retrieves a list of the authenticated user's active creatives. A creative will be available 30-40 minutes after submission.",
@@ -234,11 +209,7 @@
             },
             "statusFilter": {
               "description": "When specified, only creatives having the given status are returned.",
-              "enum": [
-                "approved",
-                "disapproved",
-                "not_checked"
-              ],
+              "enum": ["approved", "disapproved", "not_checked"],
               "enumDescriptions": [
                 "Creatives which have been approved.",
                 "Creatives which have been disapproved.",
@@ -252,9 +223,7 @@
           "response": {
             "$ref": "CreativesList"
           },
-          "scopes": [
-            "https://www.googleapis.com/auth/adexchange.buyer"
-          ]
+          "scopes": ["https://www.googleapis.com/auth/adexchange.buyer"]
         }
       }
     }
@@ -353,9 +322,7 @@
         },
         "accountId": {
           "annotations": {
-            "required": [
-              "adexchangebuyer.creatives.insert"
-            ]
+            "required": ["adexchangebuyer.creatives.insert"]
           },
           "description": "Account id.",
           "format": "int32",
@@ -371,9 +338,7 @@
         },
         "advertiserName": {
           "annotations": {
-            "required": [
-              "adexchangebuyer.creatives.insert"
-            ]
+            "required": ["adexchangebuyer.creatives.insert"]
           },
           "description": "The name of the company being advertised in the creative.",
           "type": "string"
@@ -398,18 +363,14 @@
         },
         "buyerCreativeId": {
           "annotations": {
-            "required": [
-              "adexchangebuyer.creatives.insert"
-            ]
+            "required": ["adexchangebuyer.creatives.insert"]
           },
           "description": "A buyer-specific id identifying the creative in this ad.",
           "type": "string"
         },
         "clickThroughUrl": {
           "annotations": {
-            "required": [
-              "adexchangebuyer.creatives.insert"
-            ]
+            "required": ["adexchangebuyer.creatives.insert"]
           },
           "description": "The set of destination urls for the snippet.",
           "items": {
@@ -488,9 +449,7 @@
         },
         "height": {
           "annotations": {
-            "required": [
-              "adexchangebuyer.creatives.insert"
-            ]
+            "required": ["adexchangebuyer.creatives.insert"]
           },
           "description": "Ad height.",
           "format": "int32",
@@ -555,9 +514,7 @@
         },
         "width": {
           "annotations": {
-            "required": [
-              "adexchangebuyer.creatives.insert"
-            ]
+            "required": ["adexchangebuyer.creatives.insert"]
           },
           "description": "Ad width.",
           "format": "int32",

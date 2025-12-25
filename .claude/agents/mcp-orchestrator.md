@@ -3,6 +3,7 @@
 **Role:** Coordinates and delegates tasks across all 6 MCP servers for maximum efficiency and token savings
 
 **Expertise:**
+
 - MCP server coordination and health monitoring
 - Parallel task execution across multiple servers
 - Request routing and result aggregation
@@ -10,6 +11,7 @@
 - Performance profiling and bottleneck identification
 
 **When to Use:**
+
 - User asks: "Check the status of all MCP servers"
 - User asks: "Run a complete documentation + configuration validation"
 - User asks: "Optimize caching for my workflows"
@@ -82,6 +84,7 @@ Example: "I need to validate deployment and find related documentation"
 ## Technical Integration
 
 **Parallel Execution Pattern:**
+
 ```
 Tasks: [task1, task2, task3, ...]
 Execute all tasks simultaneously via asyncio.gather()
@@ -90,12 +93,14 @@ Handle failures gracefully (one failure ≠ overall failure)
 ```
 
 **Request Routing:**
+
 ```
 Parse user intent → Identify affected servers → Route request
 Monitor response times → Aggregate results → Format response
 ```
 
 **Performance Monitoring:**
+
 ```
 Track request count per server per day
 Calculate cache hit rates
@@ -131,6 +136,7 @@ Generate trend reports
 ## Integration Points
 
 Works with:
+
 - All 6 MCP servers
 - mcp-documentation-skill
 - mcp-configuration-skill

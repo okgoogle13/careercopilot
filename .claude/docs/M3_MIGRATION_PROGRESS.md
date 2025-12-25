@@ -13,15 +13,18 @@
 ## Completed
 
 **Phase 1: Foundation** ✅
+
 - M3 token mapping complete (78 tokens)
 - Migration checklist created
 - Component template established
 
 **Phase 2: Quick Wins** ✅
+
 - Sidebar.tsx migrated
 - Pattern validation complete
 
 **Phase 3: High-Impact** ✅
+
 - Navbar.tsx: Search bar colors → M3 surface tokens
 - Sidebar.tsx: All colors → M3 tokens
 - JobCard.tsx: Color helpers → theme palette
@@ -29,6 +32,7 @@
 - AppLayout.tsx: Badges → M3 tokens
 
 **Phase 4A: Layout Components** ✅
+
 - AppLayout.tsx: `action.selected` → `surface.containerHigh`
 - button.tsx: Ghost/outline hover → M3 tokens
 - AnimatedDropdown.tsx: Menu hover → M3 tokens
@@ -36,6 +40,7 @@
 - SmartUploadModal.tsx: Upload area → M3 tokens
 
 **Phase 4B: Color Value Migrations** ✅
+
 - LoadingSpinners.tsx: #a855f7 → #A78BFA (primary)
 - ATSScoreCircle.tsx (both): Score colors → theme tokens
   - Score ≥80: primary.main
@@ -45,6 +50,7 @@
 ## Remaining (Phase 4C-E)
 
 **~75 components with minor color/spacing fixes:**
+
 - Form components (input, select, etc.)
 - Data display (tables, lists, cards)
 - Feature components (jobs, documents, career)
@@ -63,6 +69,7 @@
 ## Next Phase 5
 
 **Cleanup:**
+
 - Remove 18 deprecated components from `_deprecated/` folder
 - Final visual regression testing
 - Accessibility audit (WCAG AA compliance)
@@ -86,6 +93,7 @@
 ## Ready for Handoff
 
 The M3 migration is well-established and ready for:
+
 1. Parallel batch migrations (Phase 4C-E)
 2. Final cleanup and testing (Phase 5)
 3. Full deployment by end of December

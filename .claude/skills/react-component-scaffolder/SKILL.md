@@ -6,6 +6,7 @@ deprecated: true
 deprecated_message: "This skill is deprecated. Use the 'component-builder' skill instead, which generates production-grade, M3-compliant React components with token-aware styling and accessibility features."
 replacement: component-builder
 ---
+
 # React Component Scaffolder (DEPRECATED)
 
 ⚠️ **This skill is deprecated and should no longer be used.**
@@ -13,6 +14,7 @@ replacement: component-builder
 ## Why Deprecated?
 
 The `component-builder` skill is the recommended replacement. It provides:
+
 - **Production-grade** components with best practices
 - **M3 Expressive** design token compliance
 - **Token-aware** styling (no hardcoded values)
@@ -25,12 +27,14 @@ The `component-builder` skill is the recommended replacement. It provides:
 When asked to "create a component", use **`component-builder`** instead:
 
 **Old way:**
+
 ```
 User: Create a Button component
 Assistant: Uses react-component-scaffolder
 ```
 
 **New way:**
+
 ```
 User: Create a Button component
 Assistant: Uses component-builder (M3-compliant)

@@ -8,6 +8,7 @@
 ---
 
 ## Phase 1 Goal
+
 Migrate 5 foundation components that unblock 30+ dependent components.
 
 ---
@@ -15,6 +16,7 @@ Migrate 5 foundation components that unblock 30+ dependent components.
 ## Priority Components (Do in This Order)
 
 ### Task 1: Migrate Button Component ⭐ HIGHEST PRIORITY
+
 - **Location:** `frontend/src/components/ui/button/`
 - **Impact:** 18 imports across codebase
 - **Current State:** `styled(MuiButton)` with `theme.palette.*`
@@ -22,6 +24,7 @@ Migrate 5 foundation components that unblock 30+ dependent components.
 - **Estimated Effort:** 4 hours
 
 **Checklist:**
+
 - [ ] Read current implementation
 - [ ] Read M3-compliant reference (check `profile/` or `library/` components)
 - [ ] Identify all `theme.palette.*` references
@@ -33,6 +36,7 @@ Migrate 5 foundation components that unblock 30+ dependent components.
 - [ ] Create PR with changes
 
 **M3 Token Reference:**
+
 ```
 Primary: var(--sys-color-primary)
 On Primary: var(--sys-color-on-primary)
@@ -45,6 +49,7 @@ On Error: var(--sys-color-on-error)
 ---
 
 ### Task 2: Migrate Input Component ⭐ HIGH PRIORITY
+
 - **Location:** `frontend/src/components/ui/input/`
 - **Impact:** 12 imports (blocks all forms)
 - **Current State:** `useTheme()`, `theme.palette.*`, `theme.spacing()`
@@ -52,6 +57,7 @@ On Error: var(--sys-color-on-error)
 - **Estimated Effort:** 4 hours
 
 **Checklist:**
+
 - [ ] Read current implementation
 - [ ] Find all `useTheme()` calls and remove
 - [ ] Replace `theme.palette.*` with M3 tokens
@@ -64,6 +70,7 @@ On Error: var(--sys-color-on-error)
 ---
 
 ### Task 3: Migrate Sidebar Component
+
 - **Location:** `frontend/src/components/layout/`
 - **Impact:** 5 imports (main navigation)
 - **Current State:** MUI styled components
@@ -71,10 +78,11 @@ On Error: var(--sys-color-on-error)
 - **Estimated Effort:** 3 hours
 
 **Checklist:**
+
 - [ ] Identify layout structure and styling
 - [ ] Replace MUI styled components with Box + M3 tokens
 - [ ] Update spacing (4px grid)
-- [ ] Update colors (var(--sys-color-*))
+- [ ] Update colors (var(--sys-color-\*))
 - [ ] Test navigation functionality
 - [ ] Run `yarn lint:fix && yarn build`
 - [ ] Create PR with changes
@@ -82,6 +90,7 @@ On Error: var(--sys-color-on-error)
 ---
 
 ### Task 4: Migrate Navbar Component
+
 - **Location:** `frontend/src/components/layout/`
 - **Impact:** 5 imports (top navigation)
 - **Current State:** MUI theme patterns
@@ -89,6 +98,7 @@ On Error: var(--sys-color-on-error)
 - **Estimated Effort:** 3 hours
 
 **Checklist:**
+
 - [ ] Identify navigation bar structure
 - [ ] Replace MUI patterns with M3 tokens
 - [ ] Update spacing and colors
@@ -99,6 +109,7 @@ On Error: var(--sys-color-on-error)
 ---
 
 ### Task 5: Migrate AppShell Component
+
 - **Location:** `frontend/src/components/layout/`
 - **Impact:** 5 imports (page wrapper)
 - **Current State:** MUI layout patterns
@@ -106,6 +117,7 @@ On Error: var(--sys-color-on-error)
 - **Estimated Effort:** 2 hours
 
 **Checklist:**
+
 - [ ] Identify layout wrapper structure
 - [ ] Replace MUI layout patterns
 - [ ] Update spacing (4px grid)
@@ -118,11 +130,13 @@ On Error: var(--sys-color-on-error)
 ## Reference Components (Use as Examples)
 
 These components are 100% M3-compliant and can be used as reference:
+
 - `frontend/src/components/profile/*` (ProfileEditor, ImportWizard)
 - `frontend/src/components/library/*` (all components)
 - `frontend/src/components/main/*` (Dashboard, FeatureHighlights)
 
 **What to look for in references:**
+
 - ✅ No `useTheme()` calls
 - ✅ No `styled()` from MUI
 - ✅ No `theme.palette.*`
@@ -149,6 +163,7 @@ These components are 100% M3-compliant and can be used as reference:
 ## Validation Commands
 
 **Run these before creating PR:**
+
 ```bash
 # Type check
 yarn build
@@ -169,23 +184,28 @@ yarn dev
 ## PR Template
 
 Each PR should include:
+
 ```markdown
 ## Component(s) Migrated
+
 - [Component Name]
 
 ## Changes Summary
+
 - Removed `theme.palette.*`
 - Replaced with `var(--sys-color-*)`
 - Updated spacing to 4px grid
 - Removed `useTheme()` calls
 
 ## Testing
+
 - [ ] Tested on [page names]
 - [ ] Build passes
 - [ ] Linting passes
 - [ ] No visual regressions
 
 ## M3 Compliance Checklist
+
 - [ ] No `useTheme()` calls
 - [ ] No `styled()` wrappers
 - [ ] All colors use tokens
@@ -197,6 +217,7 @@ Each PR should include:
 ## Next Phase (After Phase 1)
 
 Once these 5 components are done:
+
 - **30+ dependent components will be unblocked**
 - Progress jumps from 13.9% → ~25%
 - Phase 2 begins: Forms & Navigation components (5 more components)
@@ -206,9 +227,10 @@ Once these 5 components are done:
 ## Questions or Blockers?
 
 If you encounter issues:
+
 1. Check M3 token reference above
 2. Look at reference components (profile/, library/)
-3. Check existing M3* components that were partially done
+3. Check existing M3\* components that were partially done
 4. Consult M3_EXPRESSIVE_INFRASTRUCTURE.md for token system details
 
 ---

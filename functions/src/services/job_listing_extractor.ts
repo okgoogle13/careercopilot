@@ -1,13 +1,13 @@
-import * as admin from 'firebase-admin';
-import * as firebase from 'firebase-admin/firestore';
-import {genkit} from '@genkit-ai/core';
-import {defineFlow} from '@genkit-ai/flow';
-import {JobListing} from '../types/job_listing';
-import {FirebaseVectorSearch} from '../lib/firebase_vector_search';
-import https from 'https';
+import * as admin from "firebase-admin";
+import * as firebase from "firebase-admin/firestore";
+import { genkit } from "@genkit-ai/core";
+import { defineFlow } from "@genkit-ai/flow";
+import { JobListing } from "../types/job_listing";
+import { FirebaseVectorSearch } from "../lib/firebase_vector_search";
+import https from "https";
 
 // Configure Genkit to use the default model
-const model = genkit.model('gemini-pro');
+const model = genkit.model("gemini-pro");
 
 export class JobListingExtractor {
   private vectorSearch: FirebaseVectorSearch<JobListing>;
@@ -15,7 +15,7 @@ export class JobListingExtractor {
 
   constructor() {
     this.db = admin.firestore();
-    this.vectorSearch = new FirebaseVectorSearch<JobListing>('job_listings');
+    this.vectorSearch = new FirebaseVectorSearch<JobListing>("job_listings");
   }
 
   /**
@@ -23,35 +23,35 @@ export class JobListingExtractor {
    */
   extract = defineFlow(
     {
-      name: 'extractJobListing',
+      name: "extractJobListing",
       inputSchema: {
-        type: 'object',
+        type: "object",
         properties: {
-          source: {type: 'string'},
+          source: { type: "string" },
           options: {
-            type: 'object',
+            type: "object",
             properties: {
-              extractSkills: {type: 'boolean', default: true},
-              extractSalary: {type: 'boolean', default: true},
-              extractLocation: {type: 'boolean', default: true},
+              extractSkills: { type: "boolean", default: true },
+              extractSalary: { type: "boolean", default: true },
+              extractLocation: { type: "boolean", default: true },
             },
           },
         },
       },
       outputSchema: {
-        type: 'object',
+        type: "object",
         properties: {
-          job: {$ref: 'JobListing'},
-          metadata: {type: 'object'},
+          job: { $ref: "JobListing" },
+          metadata: { type: "object" },
         },
       },
     },
     async ({
       source,
-      options = {extractSkills: true, extractSalary: true, extractLocation: true},
+      options = { extractSkills: true, extractSalary: true, extractLocation: true },
     }) => {
-      const text = typeof source === 'string' ? source : await this.fetchUrl(source.url);
-      
+      const text = typeof source === "string" ? source : await this.fetchUrl(source.url);
+
       // Basic job listing extraction
       const jobListing: JobListing = {
         id: this.generateId(),
@@ -61,7 +61,7 @@ export class JobListingExtractor {
         skills: options.extractSkills ? this.extractSkills(text) : [],
         salary: options.extractSalary ? this.extractSalary(text) : undefined,
         location: options.extractLocation ? this.extractLocation(text) : undefined,
-        source: typeof source === 'string' ? 'text' : source.url,
+        source: typeof source === "string" ? "text" : source.url,
         createdAt: admin.firestore.FieldValue.serverTimestamp(),
       };
 
@@ -70,25 +70,23 @@ export class JobListingExtractor {
       await this.vectorSearch.upsert(jobListing.id, embedding, jobListing);
 
       return jobListing;
-    }
-  )
+    },
+  );
 
   /**
    * Find similar job listings
    */
-  async findSimilar(
-    data: {
-      query: string | JobListing;
-      limit?: number;
-      minScore?: number;
-      filters?: Record<string, unknown>;
-    }
-  ): Promise<Array<{ job: JobListing; score: number }>> {
+  async findSimilar(data: {
+    query: string | JobListing;
+    limit?: number;
+    minScore?: number;
+    filters?: Record<string, unknown>;
+  }): Promise<Array<{ job: JobListing; score: number }>> {
     // Use Genkit's semantic search
     const queryEmbedding = await this.generateEmbedding({
-      title: typeof data.query === 'string' ? data.query : data.query.title || '',
-      description: typeof data.query === 'string' ? data.query : data.query.description || '',
-      company: typeof data.query === 'string' ? '' : data.query.company || '',
+      title: typeof data.query === "string" ? data.query : data.query.title || "",
+      description: typeof data.query === "string" ? data.query : data.query.description || "",
+      company: typeof data.query === "string" ? "" : data.query.company || "",
     });
 
     const results = await this.vectorSearch.search(queryEmbedding, {
@@ -96,7 +94,7 @@ export class JobListingExtractor {
       minScore: data.minScore,
       filters: data.filters,
     });
-    return results.map(({id: _id, score, metadata}) => ({
+    return results.map(({ id: _id, score, metadata }) => ({
       job: metadata,
       score,
     }));
@@ -104,59 +102,77 @@ export class JobListingExtractor {
 
   private async fetchUrl(url: string): Promise<string> {
     return new Promise<string>((resolve, reject) => {
-      https.get(url, (res) => {
-        if (res.statusCode && res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
-          // Follow simple redirects
-          return this.fetchUrl(res.headers.location).then(resolve).catch(reject);
-        }
-        if (!res.statusCode || res.statusCode >= 400) {
-          reject(new Error(`Failed to fetch URL: ${url} (status: ${res.statusCode || 'unknown'})`));
-          return;
-        }
-        const chunks: Buffer[] = [];
-        res.on('data', (chunk) => chunks.push(chunk));
-        res.on('end', () => resolve(Buffer.concat(chunks).toString('utf8')));
-        res.on('error', reject);
-      }).on('error', reject);
+      https
+        .get(url, (res) => {
+          if (
+            res.statusCode &&
+            res.statusCode >= 300 &&
+            res.statusCode < 400 &&
+            res.headers.location
+          ) {
+            // Follow simple redirects
+            return this.fetchUrl(res.headers.location).then(resolve).catch(reject);
+          }
+          if (!res.statusCode || res.statusCode >= 400) {
+            reject(
+              new Error(`Failed to fetch URL: ${url} (status: ${res.statusCode || "unknown"})`),
+            );
+            return;
+          }
+          const chunks: Buffer[] = [];
+          res.on("data", (chunk) => chunks.push(chunk));
+          res.on("end", () => resolve(Buffer.concat(chunks).toString("utf8")));
+          res.on("error", reject);
+        })
+        .on("error", reject);
     });
   }
 
   private extractTitle(text: string): string {
     // Simple title extraction - can be enhanced with NLP
-    const lines = text.split('\n').filter(line => line.trim().length > 0);
-    return lines[0] || 'Untitled Position';
+    const lines = text.split("\n").filter((line) => line.trim().length > 0);
+    return lines[0] || "Untitled Position";
   }
 
   private extractCompany(text: string): string {
     // Simple company extraction - can be enhanced with NLP
     const companyRegex = /(?:at|from|by)\s+([A-Z][a-zA-Z0-9\s&,.]+?)(?:,|\n|$)/i;
     const match = text.match(companyRegex);
-    return match ? match[1].trim() : 'Unknown Company';
+    return match ? match[1].trim() : "Unknown Company";
   }
 
   private extractSkills(text: string): string[] {
     // Simple skill extraction - can be enhanced with NLP
     const skills = [
-      'JavaScript', 'TypeScript', 'React', 'Node.js', 'Python',
-      'Java', 'AWS', 'Docker', 'Kubernetes', 'SQL', 'NoSQL'
+      "JavaScript",
+      "TypeScript",
+      "React",
+      "Node.js",
+      "Python",
+      "Java",
+      "AWS",
+      "Docker",
+      "Kubernetes",
+      "SQL",
+      "NoSQL",
     ];
-    
-    return skills.filter(skill => 
-      new RegExp(`\\b${skill}\\b`, 'i').test(text)
-    );
+
+    return skills.filter((skill) => new RegExp(`\\b${skill}\\b`, "i").test(text));
   }
 
-  private extractSalary(text: string): { min?: number; max?: number; currency?: string } | undefined {
+  private extractSalary(
+    text: string,
+  ): { min?: number; max?: number; currency?: string } | undefined {
     // Simple salary extraction - can be enhanced with NLP
     const salaryRegex = /\$([0-9,]+)(?:\s*-\s*\$?([0-9,]+))?/;
     const match = text.match(salaryRegex);
-    
+
     if (!match) return undefined;
-    
+
     return {
-      min: parseInt(match[1].replace(/,/g, '')),
-      max: match[2] ? parseInt(match[2].replace(/,/g, '')) : undefined,
-      currency: '$'
+      min: parseInt(match[1].replace(/,/g, "")),
+      max: match[2] ? parseInt(match[2].replace(/,/g, "")) : undefined,
+      currency: "$",
     };
   }
 
@@ -167,15 +183,19 @@ export class JobListingExtractor {
     return match ? match[0] : undefined;
   }
 
-  private async generateEmbedding(job: { title: string; description: string; company?: string }): Promise<number[]> {
-    const text = `${job.title} ${job.company || ''} ${job.description}`.trim();
-    
+  private async generateEmbedding(job: {
+    title: string;
+    description: string;
+    company?: string;
+  }): Promise<number[]> {
+    const text = `${job.title} ${job.company || ""} ${job.description}`.trim();
+
     // Use Genkit to generate embeddings
     const response = await model.embed({
       content: text,
-      taskType: 'retrieval_document',
+      taskType: "retrieval_document",
     });
-    
+
     return response.embedding;
   }
 
@@ -183,7 +203,7 @@ export class JobListingExtractor {
     let hash = 0;
     for (let i = 0; i < str.length; i++) {
       const char = str.charCodeAt(i);
-      hash = ((hash << 5) - hash) + char;
+      hash = (hash << 5) - hash + char;
       hash = hash & hash; // Convert to 32bit integer
     }
     return Math.abs(hash);
@@ -192,10 +212,10 @@ export class JobListingExtractor {
   private normalizeVector(vector: number[]): number[] {
     const norm = Math.sqrt(vector.reduce((sum, val) => sum + val * val, 0));
     if (norm === 0) return vector;
-    return vector.map(val => val / norm);
+    return vector.map((val) => val / norm);
   }
 
   private generateId(): string {
-    return this.db.collection('_').doc().id;
+    return this.db.collection("_").doc().id;
   }
 }

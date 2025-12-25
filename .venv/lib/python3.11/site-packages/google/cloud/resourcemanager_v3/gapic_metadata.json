@@ -1,4 +1,4 @@
- {
+{
   "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
   "language": "python",
   "libraryPackage": "google.cloud.resourcemanager_v3",
@@ -11,59 +11,37 @@
           "libraryClient": "FoldersClient",
           "rpcs": {
             "CreateFolder": {
-              "methods": [
-                "create_folder"
-              ]
+              "methods": ["create_folder"]
             },
             "DeleteFolder": {
-              "methods": [
-                "delete_folder"
-              ]
+              "methods": ["delete_folder"]
             },
             "GetFolder": {
-              "methods": [
-                "get_folder"
-              ]
+              "methods": ["get_folder"]
             },
             "GetIamPolicy": {
-              "methods": [
-                "get_iam_policy"
-              ]
+              "methods": ["get_iam_policy"]
             },
             "ListFolders": {
-              "methods": [
-                "list_folders"
-              ]
+              "methods": ["list_folders"]
             },
             "MoveFolder": {
-              "methods": [
-                "move_folder"
-              ]
+              "methods": ["move_folder"]
             },
             "SearchFolders": {
-              "methods": [
-                "search_folders"
-              ]
+              "methods": ["search_folders"]
             },
             "SetIamPolicy": {
-              "methods": [
-                "set_iam_policy"
-              ]
+              "methods": ["set_iam_policy"]
             },
             "TestIamPermissions": {
-              "methods": [
-                "test_iam_permissions"
-              ]
+              "methods": ["test_iam_permissions"]
             },
             "UndeleteFolder": {
-              "methods": [
-                "undelete_folder"
-              ]
+              "methods": ["undelete_folder"]
             },
             "UpdateFolder": {
-              "methods": [
-                "update_folder"
-              ]
+              "methods": ["update_folder"]
             }
           }
         },
@@ -71,59 +49,37 @@
           "libraryClient": "FoldersAsyncClient",
           "rpcs": {
             "CreateFolder": {
-              "methods": [
-                "create_folder"
-              ]
+              "methods": ["create_folder"]
             },
             "DeleteFolder": {
-              "methods": [
-                "delete_folder"
-              ]
+              "methods": ["delete_folder"]
             },
             "GetFolder": {
-              "methods": [
-                "get_folder"
-              ]
+              "methods": ["get_folder"]
             },
             "GetIamPolicy": {
-              "methods": [
-                "get_iam_policy"
-              ]
+              "methods": ["get_iam_policy"]
             },
             "ListFolders": {
-              "methods": [
-                "list_folders"
-              ]
+              "methods": ["list_folders"]
             },
             "MoveFolder": {
-              "methods": [
-                "move_folder"
-              ]
+              "methods": ["move_folder"]
             },
             "SearchFolders": {
-              "methods": [
-                "search_folders"
-              ]
+              "methods": ["search_folders"]
             },
             "SetIamPolicy": {
-              "methods": [
-                "set_iam_policy"
-              ]
+              "methods": ["set_iam_policy"]
             },
             "TestIamPermissions": {
-              "methods": [
-                "test_iam_permissions"
-              ]
+              "methods": ["test_iam_permissions"]
             },
             "UndeleteFolder": {
-              "methods": [
-                "undelete_folder"
-              ]
+              "methods": ["undelete_folder"]
             },
             "UpdateFolder": {
-              "methods": [
-                "update_folder"
-              ]
+              "methods": ["update_folder"]
             }
           }
         },
@@ -131,59 +87,37 @@
           "libraryClient": "FoldersClient",
           "rpcs": {
             "CreateFolder": {
-              "methods": [
-                "create_folder"
-              ]
+              "methods": ["create_folder"]
             },
             "DeleteFolder": {
-              "methods": [
-                "delete_folder"
-              ]
+              "methods": ["delete_folder"]
             },
             "GetFolder": {
-              "methods": [
-                "get_folder"
-              ]
+              "methods": ["get_folder"]
             },
             "GetIamPolicy": {
-              "methods": [
-                "get_iam_policy"
-              ]
+              "methods": ["get_iam_policy"]
             },
             "ListFolders": {
-              "methods": [
-                "list_folders"
-              ]
+              "methods": ["list_folders"]
             },
             "MoveFolder": {
-              "methods": [
-                "move_folder"
-              ]
+              "methods": ["move_folder"]
             },
             "SearchFolders": {
-              "methods": [
-                "search_folders"
-              ]
+              "methods": ["search_folders"]
             },
             "SetIamPolicy": {
-              "methods": [
-                "set_iam_policy"
-              ]
+              "methods": ["set_iam_policy"]
             },
             "TestIamPermissions": {
-              "methods": [
-                "test_iam_permissions"
-              ]
+              "methods": ["test_iam_permissions"]
             },
             "UndeleteFolder": {
-              "methods": [
-                "undelete_folder"
-              ]
+              "methods": ["undelete_folder"]
             },
             "UpdateFolder": {
-              "methods": [
-                "update_folder"
-              ]
+              "methods": ["update_folder"]
             }
           }
         }
@@ -195,29 +129,19 @@
           "libraryClient": "OrganizationsClient",
           "rpcs": {
             "GetIamPolicy": {
-              "methods": [
-                "get_iam_policy"
-              ]
+              "methods": ["get_iam_policy"]
             },
             "GetOrganization": {
-              "methods": [
-                "get_organization"
-              ]
+              "methods": ["get_organization"]
             },
             "SearchOrganizations": {
-              "methods": [
-                "search_organizations"
-              ]
+              "methods": ["search_organizations"]
             },
             "SetIamPolicy": {
-              "methods": [
-                "set_iam_policy"
-              ]
+              "methods": ["set_iam_policy"]
             },
             "TestIamPermissions": {
-              "methods": [
-                "test_iam_permissions"
-              ]
+              "methods": ["test_iam_permissions"]
             }
           }
         },
@@ -225,29 +149,19 @@
           "libraryClient": "OrganizationsAsyncClient",
           "rpcs": {
             "GetIamPolicy": {
-              "methods": [
-                "get_iam_policy"
-              ]
+              "methods": ["get_iam_policy"]
             },
             "GetOrganization": {
-              "methods": [
-                "get_organization"
-              ]
+              "methods": ["get_organization"]
             },
             "SearchOrganizations": {
-              "methods": [
-                "search_organizations"
-              ]
+              "methods": ["search_organizations"]
             },
             "SetIamPolicy": {
-              "methods": [
-                "set_iam_policy"
-              ]
+              "methods": ["set_iam_policy"]
             },
             "TestIamPermissions": {
-              "methods": [
-                "test_iam_permissions"
-              ]
+              "methods": ["test_iam_permissions"]
             }
           }
         },
@@ -255,29 +169,19 @@
           "libraryClient": "OrganizationsClient",
           "rpcs": {
             "GetIamPolicy": {
-              "methods": [
-                "get_iam_policy"
-              ]
+              "methods": ["get_iam_policy"]
             },
             "GetOrganization": {
-              "methods": [
-                "get_organization"
-              ]
+              "methods": ["get_organization"]
             },
             "SearchOrganizations": {
-              "methods": [
-                "search_organizations"
-              ]
+              "methods": ["search_organizations"]
             },
             "SetIamPolicy": {
-              "methods": [
-                "set_iam_policy"
-              ]
+              "methods": ["set_iam_policy"]
             },
             "TestIamPermissions": {
-              "methods": [
-                "test_iam_permissions"
-              ]
+              "methods": ["test_iam_permissions"]
             }
           }
         }
@@ -289,59 +193,37 @@
           "libraryClient": "ProjectsClient",
           "rpcs": {
             "CreateProject": {
-              "methods": [
-                "create_project"
-              ]
+              "methods": ["create_project"]
             },
             "DeleteProject": {
-              "methods": [
-                "delete_project"
-              ]
+              "methods": ["delete_project"]
             },
             "GetIamPolicy": {
-              "methods": [
-                "get_iam_policy"
-              ]
+              "methods": ["get_iam_policy"]
             },
             "GetProject": {
-              "methods": [
-                "get_project"
-              ]
+              "methods": ["get_project"]
             },
             "ListProjects": {
-              "methods": [
-                "list_projects"
-              ]
+              "methods": ["list_projects"]
             },
             "MoveProject": {
-              "methods": [
-                "move_project"
-              ]
+              "methods": ["move_project"]
             },
             "SearchProjects": {
-              "methods": [
-                "search_projects"
-              ]
+              "methods": ["search_projects"]
             },
             "SetIamPolicy": {
-              "methods": [
-                "set_iam_policy"
-              ]
+              "methods": ["set_iam_policy"]
             },
             "TestIamPermissions": {
-              "methods": [
-                "test_iam_permissions"
-              ]
+              "methods": ["test_iam_permissions"]
             },
             "UndeleteProject": {
-              "methods": [
-                "undelete_project"
-              ]
+              "methods": ["undelete_project"]
             },
             "UpdateProject": {
-              "methods": [
-                "update_project"
-              ]
+              "methods": ["update_project"]
             }
           }
         },
@@ -349,59 +231,37 @@
           "libraryClient": "ProjectsAsyncClient",
           "rpcs": {
             "CreateProject": {
-              "methods": [
-                "create_project"
-              ]
+              "methods": ["create_project"]
             },
             "DeleteProject": {
-              "methods": [
-                "delete_project"
-              ]
+              "methods": ["delete_project"]
             },
             "GetIamPolicy": {
-              "methods": [
-                "get_iam_policy"
-              ]
+              "methods": ["get_iam_policy"]
             },
             "GetProject": {
-              "methods": [
-                "get_project"
-              ]
+              "methods": ["get_project"]
             },
             "ListProjects": {
-              "methods": [
-                "list_projects"
-              ]
+              "methods": ["list_projects"]
             },
             "MoveProject": {
-              "methods": [
-                "move_project"
-              ]
+              "methods": ["move_project"]
             },
             "SearchProjects": {
-              "methods": [
-                "search_projects"
-              ]
+              "methods": ["search_projects"]
             },
             "SetIamPolicy": {
-              "methods": [
-                "set_iam_policy"
-              ]
+              "methods": ["set_iam_policy"]
             },
             "TestIamPermissions": {
-              "methods": [
-                "test_iam_permissions"
-              ]
+              "methods": ["test_iam_permissions"]
             },
             "UndeleteProject": {
-              "methods": [
-                "undelete_project"
-              ]
+              "methods": ["undelete_project"]
             },
             "UpdateProject": {
-              "methods": [
-                "update_project"
-              ]
+              "methods": ["update_project"]
             }
           }
         },
@@ -409,59 +269,37 @@
           "libraryClient": "ProjectsClient",
           "rpcs": {
             "CreateProject": {
-              "methods": [
-                "create_project"
-              ]
+              "methods": ["create_project"]
             },
             "DeleteProject": {
-              "methods": [
-                "delete_project"
-              ]
+              "methods": ["delete_project"]
             },
             "GetIamPolicy": {
-              "methods": [
-                "get_iam_policy"
-              ]
+              "methods": ["get_iam_policy"]
             },
             "GetProject": {
-              "methods": [
-                "get_project"
-              ]
+              "methods": ["get_project"]
             },
             "ListProjects": {
-              "methods": [
-                "list_projects"
-              ]
+              "methods": ["list_projects"]
             },
             "MoveProject": {
-              "methods": [
-                "move_project"
-              ]
+              "methods": ["move_project"]
             },
             "SearchProjects": {
-              "methods": [
-                "search_projects"
-              ]
+              "methods": ["search_projects"]
             },
             "SetIamPolicy": {
-              "methods": [
-                "set_iam_policy"
-              ]
+              "methods": ["set_iam_policy"]
             },
             "TestIamPermissions": {
-              "methods": [
-                "test_iam_permissions"
-              ]
+              "methods": ["test_iam_permissions"]
             },
             "UndeleteProject": {
-              "methods": [
-                "undelete_project"
-              ]
+              "methods": ["undelete_project"]
             },
             "UpdateProject": {
-              "methods": [
-                "update_project"
-              ]
+              "methods": ["update_project"]
             }
           }
         }
@@ -473,24 +311,16 @@
           "libraryClient": "TagBindingsClient",
           "rpcs": {
             "CreateTagBinding": {
-              "methods": [
-                "create_tag_binding"
-              ]
+              "methods": ["create_tag_binding"]
             },
             "DeleteTagBinding": {
-              "methods": [
-                "delete_tag_binding"
-              ]
+              "methods": ["delete_tag_binding"]
             },
             "ListEffectiveTags": {
-              "methods": [
-                "list_effective_tags"
-              ]
+              "methods": ["list_effective_tags"]
             },
             "ListTagBindings": {
-              "methods": [
-                "list_tag_bindings"
-              ]
+              "methods": ["list_tag_bindings"]
             }
           }
         },
@@ -498,24 +328,16 @@
           "libraryClient": "TagBindingsAsyncClient",
           "rpcs": {
             "CreateTagBinding": {
-              "methods": [
-                "create_tag_binding"
-              ]
+              "methods": ["create_tag_binding"]
             },
             "DeleteTagBinding": {
-              "methods": [
-                "delete_tag_binding"
-              ]
+              "methods": ["delete_tag_binding"]
             },
             "ListEffectiveTags": {
-              "methods": [
-                "list_effective_tags"
-              ]
+              "methods": ["list_effective_tags"]
             },
             "ListTagBindings": {
-              "methods": [
-                "list_tag_bindings"
-              ]
+              "methods": ["list_tag_bindings"]
             }
           }
         },
@@ -523,24 +345,16 @@
           "libraryClient": "TagBindingsClient",
           "rpcs": {
             "CreateTagBinding": {
-              "methods": [
-                "create_tag_binding"
-              ]
+              "methods": ["create_tag_binding"]
             },
             "DeleteTagBinding": {
-              "methods": [
-                "delete_tag_binding"
-              ]
+              "methods": ["delete_tag_binding"]
             },
             "ListEffectiveTags": {
-              "methods": [
-                "list_effective_tags"
-              ]
+              "methods": ["list_effective_tags"]
             },
             "ListTagBindings": {
-              "methods": [
-                "list_tag_bindings"
-              ]
+              "methods": ["list_tag_bindings"]
             }
           }
         }
@@ -552,19 +366,13 @@
           "libraryClient": "TagHoldsClient",
           "rpcs": {
             "CreateTagHold": {
-              "methods": [
-                "create_tag_hold"
-              ]
+              "methods": ["create_tag_hold"]
             },
             "DeleteTagHold": {
-              "methods": [
-                "delete_tag_hold"
-              ]
+              "methods": ["delete_tag_hold"]
             },
             "ListTagHolds": {
-              "methods": [
-                "list_tag_holds"
-              ]
+              "methods": ["list_tag_holds"]
             }
           }
         },
@@ -572,19 +380,13 @@
           "libraryClient": "TagHoldsAsyncClient",
           "rpcs": {
             "CreateTagHold": {
-              "methods": [
-                "create_tag_hold"
-              ]
+              "methods": ["create_tag_hold"]
             },
             "DeleteTagHold": {
-              "methods": [
-                "delete_tag_hold"
-              ]
+              "methods": ["delete_tag_hold"]
             },
             "ListTagHolds": {
-              "methods": [
-                "list_tag_holds"
-              ]
+              "methods": ["list_tag_holds"]
             }
           }
         },
@@ -592,19 +394,13 @@
           "libraryClient": "TagHoldsClient",
           "rpcs": {
             "CreateTagHold": {
-              "methods": [
-                "create_tag_hold"
-              ]
+              "methods": ["create_tag_hold"]
             },
             "DeleteTagHold": {
-              "methods": [
-                "delete_tag_hold"
-              ]
+              "methods": ["delete_tag_hold"]
             },
             "ListTagHolds": {
-              "methods": [
-                "list_tag_holds"
-              ]
+              "methods": ["list_tag_holds"]
             }
           }
         }
@@ -616,49 +412,31 @@
           "libraryClient": "TagKeysClient",
           "rpcs": {
             "CreateTagKey": {
-              "methods": [
-                "create_tag_key"
-              ]
+              "methods": ["create_tag_key"]
             },
             "DeleteTagKey": {
-              "methods": [
-                "delete_tag_key"
-              ]
+              "methods": ["delete_tag_key"]
             },
             "GetIamPolicy": {
-              "methods": [
-                "get_iam_policy"
-              ]
+              "methods": ["get_iam_policy"]
             },
             "GetNamespacedTagKey": {
-              "methods": [
-                "get_namespaced_tag_key"
-              ]
+              "methods": ["get_namespaced_tag_key"]
             },
             "GetTagKey": {
-              "methods": [
-                "get_tag_key"
-              ]
+              "methods": ["get_tag_key"]
             },
             "ListTagKeys": {
-              "methods": [
-                "list_tag_keys"
-              ]
+              "methods": ["list_tag_keys"]
             },
             "SetIamPolicy": {
-              "methods": [
-                "set_iam_policy"
-              ]
+              "methods": ["set_iam_policy"]
             },
             "TestIamPermissions": {
-              "methods": [
-                "test_iam_permissions"
-              ]
+              "methods": ["test_iam_permissions"]
             },
             "UpdateTagKey": {
-              "methods": [
-                "update_tag_key"
-              ]
+              "methods": ["update_tag_key"]
             }
           }
         },
@@ -666,49 +444,31 @@
           "libraryClient": "TagKeysAsyncClient",
           "rpcs": {
             "CreateTagKey": {
-              "methods": [
-                "create_tag_key"
-              ]
+              "methods": ["create_tag_key"]
             },
             "DeleteTagKey": {
-              "methods": [
-                "delete_tag_key"
-              ]
+              "methods": ["delete_tag_key"]
             },
             "GetIamPolicy": {
-              "methods": [
-                "get_iam_policy"
-              ]
+              "methods": ["get_iam_policy"]
             },
             "GetNamespacedTagKey": {
-              "methods": [
-                "get_namespaced_tag_key"
-              ]
+              "methods": ["get_namespaced_tag_key"]
             },
             "GetTagKey": {
-              "methods": [
-                "get_tag_key"
-              ]
+              "methods": ["get_tag_key"]
             },
             "ListTagKeys": {
-              "methods": [
-                "list_tag_keys"
-              ]
+              "methods": ["list_tag_keys"]
             },
             "SetIamPolicy": {
-              "methods": [
-                "set_iam_policy"
-              ]
+              "methods": ["set_iam_policy"]
             },
             "TestIamPermissions": {
-              "methods": [
-                "test_iam_permissions"
-              ]
+              "methods": ["test_iam_permissions"]
             },
             "UpdateTagKey": {
-              "methods": [
-                "update_tag_key"
-              ]
+              "methods": ["update_tag_key"]
             }
           }
         },
@@ -716,49 +476,31 @@
           "libraryClient": "TagKeysClient",
           "rpcs": {
             "CreateTagKey": {
-              "methods": [
-                "create_tag_key"
-              ]
+              "methods": ["create_tag_key"]
             },
             "DeleteTagKey": {
-              "methods": [
-                "delete_tag_key"
-              ]
+              "methods": ["delete_tag_key"]
             },
             "GetIamPolicy": {
-              "methods": [
-                "get_iam_policy"
-              ]
+              "methods": ["get_iam_policy"]
             },
             "GetNamespacedTagKey": {
-              "methods": [
-                "get_namespaced_tag_key"
-              ]
+              "methods": ["get_namespaced_tag_key"]
             },
             "GetTagKey": {
-              "methods": [
-                "get_tag_key"
-              ]
+              "methods": ["get_tag_key"]
             },
             "ListTagKeys": {
-              "methods": [
-                "list_tag_keys"
-              ]
+              "methods": ["list_tag_keys"]
             },
             "SetIamPolicy": {
-              "methods": [
-                "set_iam_policy"
-              ]
+              "methods": ["set_iam_policy"]
             },
             "TestIamPermissions": {
-              "methods": [
-                "test_iam_permissions"
-              ]
+              "methods": ["test_iam_permissions"]
             },
             "UpdateTagKey": {
-              "methods": [
-                "update_tag_key"
-              ]
+              "methods": ["update_tag_key"]
             }
           }
         }
@@ -770,49 +512,31 @@
           "libraryClient": "TagValuesClient",
           "rpcs": {
             "CreateTagValue": {
-              "methods": [
-                "create_tag_value"
-              ]
+              "methods": ["create_tag_value"]
             },
             "DeleteTagValue": {
-              "methods": [
-                "delete_tag_value"
-              ]
+              "methods": ["delete_tag_value"]
             },
             "GetIamPolicy": {
-              "methods": [
-                "get_iam_policy"
-              ]
+              "methods": ["get_iam_policy"]
             },
             "GetNamespacedTagValue": {
-              "methods": [
-                "get_namespaced_tag_value"
-              ]
+              "methods": ["get_namespaced_tag_value"]
             },
             "GetTagValue": {
-              "methods": [
-                "get_tag_value"
-              ]
+              "methods": ["get_tag_value"]
             },
             "ListTagValues": {
-              "methods": [
-                "list_tag_values"
-              ]
+              "methods": ["list_tag_values"]
             },
             "SetIamPolicy": {
-              "methods": [
-                "set_iam_policy"
-              ]
+              "methods": ["set_iam_policy"]
             },
             "TestIamPermissions": {
-              "methods": [
-                "test_iam_permissions"
-              ]
+              "methods": ["test_iam_permissions"]
             },
             "UpdateTagValue": {
-              "methods": [
-                "update_tag_value"
-              ]
+              "methods": ["update_tag_value"]
             }
           }
         },
@@ -820,49 +544,31 @@
           "libraryClient": "TagValuesAsyncClient",
           "rpcs": {
             "CreateTagValue": {
-              "methods": [
-                "create_tag_value"
-              ]
+              "methods": ["create_tag_value"]
             },
             "DeleteTagValue": {
-              "methods": [
-                "delete_tag_value"
-              ]
+              "methods": ["delete_tag_value"]
             },
             "GetIamPolicy": {
-              "methods": [
-                "get_iam_policy"
-              ]
+              "methods": ["get_iam_policy"]
             },
             "GetNamespacedTagValue": {
-              "methods": [
-                "get_namespaced_tag_value"
-              ]
+              "methods": ["get_namespaced_tag_value"]
             },
             "GetTagValue": {
-              "methods": [
-                "get_tag_value"
-              ]
+              "methods": ["get_tag_value"]
             },
             "ListTagValues": {
-              "methods": [
-                "list_tag_values"
-              ]
+              "methods": ["list_tag_values"]
             },
             "SetIamPolicy": {
-              "methods": [
-                "set_iam_policy"
-              ]
+              "methods": ["set_iam_policy"]
             },
             "TestIamPermissions": {
-              "methods": [
-                "test_iam_permissions"
-              ]
+              "methods": ["test_iam_permissions"]
             },
             "UpdateTagValue": {
-              "methods": [
-                "update_tag_value"
-              ]
+              "methods": ["update_tag_value"]
             }
           }
         },
@@ -870,49 +576,31 @@
           "libraryClient": "TagValuesClient",
           "rpcs": {
             "CreateTagValue": {
-              "methods": [
-                "create_tag_value"
-              ]
+              "methods": ["create_tag_value"]
             },
             "DeleteTagValue": {
-              "methods": [
-                "delete_tag_value"
-              ]
+              "methods": ["delete_tag_value"]
             },
             "GetIamPolicy": {
-              "methods": [
-                "get_iam_policy"
-              ]
+              "methods": ["get_iam_policy"]
             },
             "GetNamespacedTagValue": {
-              "methods": [
-                "get_namespaced_tag_value"
-              ]
+              "methods": ["get_namespaced_tag_value"]
             },
             "GetTagValue": {
-              "methods": [
-                "get_tag_value"
-              ]
+              "methods": ["get_tag_value"]
             },
             "ListTagValues": {
-              "methods": [
-                "list_tag_values"
-              ]
+              "methods": ["list_tag_values"]
             },
             "SetIamPolicy": {
-              "methods": [
-                "set_iam_policy"
-              ]
+              "methods": ["set_iam_policy"]
             },
             "TestIamPermissions": {
-              "methods": [
-                "test_iam_permissions"
-              ]
+              "methods": ["test_iam_permissions"]
             },
             "UpdateTagValue": {
-              "methods": [
-                "update_tag_value"
-              ]
+              "methods": ["update_tag_value"]
             }
           }
         }

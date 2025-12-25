@@ -32,7 +32,7 @@ export interface ProfileCreate {
   }>;
 }
 
-export type ProfileUpdate = Partial<ProfileCreate>
+export type ProfileUpdate = Partial<ProfileCreate>;
 
 export interface Profile extends ProfileCreate {
   id: string;

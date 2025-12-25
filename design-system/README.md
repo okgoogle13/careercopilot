@@ -38,25 +38,28 @@ design-system/
 
 Three font families for distinct purposes:
 
-| Font | Role | Usage |
-|------|------|-------|
-| **Roboto Flex** | Structure | UI elements, navigation, labels, data |
-| **Roboto Serif** | Content | AI responses, resumes, cover letters |
-| **Syne** | Magic | AI insight headers, breakthrough moments |
+| Font             | Role      | Usage                                    |
+| ---------------- | --------- | ---------------------------------------- |
+| **Roboto Flex**  | Structure | UI elements, navigation, labels, data    |
+| **Roboto Serif** | Content   | AI responses, resumes, cover letters     |
+| **Syne**         | Magic     | AI insight headers, breakthrough moments |
 
 **Expressive Feature:** Roboto Flex uses variable font axes (`wdth`, `GRAD`) to create "breathing" text on hover.
 
 ### 2. Color System (Material 3 Dark)
 
 **Core Colors:**
+
 - Primary: `#C4BFFF` (Soft Electric Purple)
 - Secondary: `#56DBBE` (Mint)
 - Tertiary: `#FFAEDC` (Bubblegum Pink)
 
 **Background:**
+
 - Deep Space: `#16131E` (Tinted Violet - not pure black!)
 
 **Surface Containers:**
+
 - Lowest: `#0F0D13`
 - Low: `#1D1B22`
 - Default: `#211F26`
@@ -65,23 +68,23 @@ Three font families for distinct purposes:
 
 ### 3. Shape System
 
-| Token | Value | Usage |
-|-------|-------|-------|
-| `shape-md` | 12px | Inputs, chips |
-| `shape-lg` | 24px | Standard cards |
-| `shape-ai` | 28px 28px 4px 28px | AI chat bubbles (asymmetric) |
-| `shape-magic` | polygon(...) | Starburst badges |
+| Token         | Value              | Usage                        |
+| ------------- | ------------------ | ---------------------------- |
+| `shape-md`    | 12px               | Inputs, chips                |
+| `shape-lg`    | 24px               | Standard cards               |
+| `shape-ai`    | 28px 28px 4px 28px | AI chat bubbles (asymmetric) |
+| `shape-magic` | polygon(...)       | Starburst badges             |
 
 **Special:** The `shape-ai` asymmetric radius (sharp bottom-right corner) visually differentiates AI content.
 
 ### 4. Motion System
 
-| Token | Easing | Duration | Usage |
-|-------|--------|----------|-------|
-| `emphasized` | cubic-bezier(0.2, 0, 0, 1) | 400ms | Liquid physics |
-| `standard` | cubic-bezier(0.4, 0, 0.2, 1) | 300ms | Standard transitions |
-| `decelerated` | cubic-bezier(0, 0, 0.2, 1) | 250ms | Enter animations |
-| `accelerated` | cubic-bezier(0.4, 0, 1, 1) | 200ms | Exit animations |
+| Token         | Easing                       | Duration | Usage                |
+| ------------- | ---------------------------- | -------- | -------------------- |
+| `emphasized`  | cubic-bezier(0.2, 0, 0, 1)   | 400ms    | Liquid physics       |
+| `standard`    | cubic-bezier(0.4, 0, 0.2, 1) | 300ms    | Standard transitions |
+| `decelerated` | cubic-bezier(0, 0, 0.2, 1)   | 250ms    | Enter animations     |
+| `accelerated` | cubic-bezier(0.4, 0, 1, 1)   | 200ms    | Exit animations      |
 
 ---
 
@@ -92,36 +95,43 @@ Three font families for distinct purposes:
 The `tokens.json` file is the source of truth for all design decisions.
 
 **Build CSS from Tokens:**
+
 ```bash
 # Generate CSS custom properties
 ./scripts/update-design-system.sh
 ```
 
 This creates:
+
 - `frontend/src/styles/authentic-intelligence-theme.css` - CSS variables
 - (Optional) Tailwind config patches
 
 ### Using in React Components
 
 **1. Import the theme CSS:**
+
 ```tsx
 // In your App.tsx or main entry point
-import './styles/authentic-intelligence-theme.css';
+import "./styles/authentic-intelligence-theme.css";
 ```
 
 **2. Use CSS variables:**
+
 ```tsx
-<div style={{
-  backgroundColor: 'var(--color-surface-container-high)',
-  color: 'var(--color-on-surface)',
-  borderRadius: 'var(--shape-lg)',
-  padding: 'var(--spacing-lg)'
-}}>
+<div
+  style={{
+    backgroundColor: "var(--color-surface-container-high)",
+    color: "var(--color-on-surface)",
+    borderRadius: "var(--shape-lg)",
+    padding: "var(--spacing-lg)",
+  }}
+>
   Content
 </div>
 ```
 
 **3. Use utility classes:**
+
 ```tsx
 <div className="intelligence-card">
   <h2 className="font-magic">AI Insight</h2>
@@ -136,14 +146,12 @@ import './styles/authentic-intelligence-theme.css';
 ```tsx
 <div className="intelligence-card">
   <h4 className="card-title">AI Generated Insight</h4>
-  <p className="card-body">
-    This card has an asymmetric shape and gradient border
-    to visually signal AI-generated content.
-  </p>
+  <p className="card-body">This card has an asymmetric shape and gradient border to visually signal AI-generated content.</p>
 </div>
 ```
 
 Features:
+
 - Asymmetric border radius (`shape-ai`)
 - Purple-to-Pink gradient border
 - Uses "Magic" font (Syne) for title
@@ -152,9 +160,7 @@ Features:
 #### Breathing Typography
 
 ```tsx
-<h1 className="breathing-text">
-  Hover over me to see the type "breathe"
-</h1>
+<h1 className="breathing-text">Hover over me to see the type "breathe"</h1>
 ```
 
 The text expands (`wdth`: 110 → 120) and gets heavier (`GRAD`: 0 → 50) on hover.
@@ -229,6 +235,7 @@ python3 scripts/validate-design-tokens.py
 ```
 
 Checks:
+
 - JSON schema validity
 - WCAG color contrast compliance
 - Required token presence
@@ -240,6 +247,7 @@ Checks:
 ```
 
 Generates:
+
 - CSS custom properties (`:root` variables)
 - Tailwind config patches (optional)
 - Design token documentation
@@ -248,7 +256,7 @@ Generates:
 
 ```tsx
 // frontend/src/App.tsx
-import './styles/authentic-intelligence-theme.css';
+import "./styles/authentic-intelligence-theme.css";
 ```
 
 ---
@@ -257,18 +265,19 @@ import './styles/authentic-intelligence-theme.css';
 
 ### When to Use Each Font
 
-| Scenario | Font Family | Rationale |
-|----------|-------------|-----------|
-| Navigation menus | Roboto Flex (Structure) | Efficient, scannable |
-| Button labels | Roboto Flex (Structure) | Clear, actionable |
-| Resume content | Roboto Serif (Content) | Professional, readable |
-| AI chat responses | Roboto Serif (Content) | Warm, human-like |
-| "Perfect match!" alerts | Syne (Magic) | Celebratory, attention-grabbing |
-| Feature announcements | Syne (Magic) | Bold, memorable |
+| Scenario                | Font Family             | Rationale                       |
+| ----------------------- | ----------------------- | ------------------------------- |
+| Navigation menus        | Roboto Flex (Structure) | Efficient, scannable            |
+| Button labels           | Roboto Flex (Structure) | Clear, actionable               |
+| Resume content          | Roboto Serif (Content)  | Professional, readable          |
+| AI chat responses       | Roboto Serif (Content)  | Warm, human-like                |
+| "Perfect match!" alerts | Syne (Magic)            | Celebratory, attention-grabbing |
+| Feature announcements   | Syne (Magic)            | Bold, memorable                 |
 
 ### When to Use Asymmetric Shapes
 
 Use `shape-ai` (asymmetric radius) for:
+
 - AI chat bubbles
 - AI-generated content cards
 - AI insight panels
@@ -279,6 +288,7 @@ Use `shape-ai` (asymmetric radius) for:
 ### When to Use Gradient Borders
 
 Apply `.intelligence-card` class for:
+
 - AI analysis results
 - Confidence scores
 - Smart recommendations
@@ -292,13 +302,14 @@ Apply `.intelligence-card` class for:
 
 All color combinations meet **WCAG AA** standards:
 
-| Foreground | Background | Contrast Ratio | Grade |
-|------------|------------|----------------|-------|
-| `onPrimary` | `primary` | 4.9:1 | AA ✅ |
-| `onSurface` | `surface` | 13.2:1 | AAA ✅ |
-| `onSecondary` | `secondary` | 7.1:1 | AAA ✅ |
+| Foreground    | Background  | Contrast Ratio | Grade  |
+| ------------- | ----------- | -------------- | ------ |
+| `onPrimary`   | `primary`   | 4.9:1          | AA ✅  |
+| `onSurface`   | `surface`   | 13.2:1         | AAA ✅ |
+| `onSecondary` | `secondary` | 7.1:1          | AAA ✅ |
 
 Run validation:
+
 ```bash
 python3 scripts/validate-design-tokens.py --wcag
 ```
@@ -308,16 +319,19 @@ python3 scripts/validate-design-tokens.py --wcag
 ## 📚 Resources
 
 ### Design Files
+
 - **Tokens:** `design-system/tokens.json`
 - **CSS:** `frontend/src/styles/authentic-intelligence-theme.css`
 - **Visual Test:** `claude-artifact-runner/outputs/artifact.html`
 
 ### Scripts
+
 - **Validate:** `scripts/validate-design-tokens.py`
 - **Build:** `scripts/build-design-tokens.py`
 - **Update:** `scripts/update-design-system.sh`
 
 ### Documentation
+
 - **Design Brief:** `/design-brief.md` (original specification)
 - **CLAUDE.md:** Design system commands and workflows
 
@@ -361,6 +375,7 @@ open claude-artifact-runner/outputs/artifact.html
 ## 📞 Support
 
 For questions about the design system:
+
 - See `CLAUDE.md` for detailed commands
 - Check `docs/DESIGN_SYSTEM.md` for Material 3 guidelines
 - Review `scripts/validate-design-tokens.py` for token requirements

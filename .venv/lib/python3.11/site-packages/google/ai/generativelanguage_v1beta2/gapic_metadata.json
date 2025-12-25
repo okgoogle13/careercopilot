@@ -1,4 +1,4 @@
- {
+{
   "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
   "language": "python",
   "libraryPackage": "google.ai.generativelanguage_v1beta2",
@@ -11,14 +11,10 @@
           "libraryClient": "DiscussServiceClient",
           "rpcs": {
             "CountMessageTokens": {
-              "methods": [
-                "count_message_tokens"
-              ]
+              "methods": ["count_message_tokens"]
             },
             "GenerateMessage": {
-              "methods": [
-                "generate_message"
-              ]
+              "methods": ["generate_message"]
             }
           }
         },
@@ -26,14 +22,10 @@
           "libraryClient": "DiscussServiceAsyncClient",
           "rpcs": {
             "CountMessageTokens": {
-              "methods": [
-                "count_message_tokens"
-              ]
+              "methods": ["count_message_tokens"]
             },
             "GenerateMessage": {
-              "methods": [
-                "generate_message"
-              ]
+              "methods": ["generate_message"]
             }
           }
         },
@@ -41,14 +33,10 @@
           "libraryClient": "DiscussServiceClient",
           "rpcs": {
             "CountMessageTokens": {
-              "methods": [
-                "count_message_tokens"
-              ]
+              "methods": ["count_message_tokens"]
             },
             "GenerateMessage": {
-              "methods": [
-                "generate_message"
-              ]
+              "methods": ["generate_message"]
             }
           }
         }
@@ -60,14 +48,10 @@
           "libraryClient": "ModelServiceClient",
           "rpcs": {
             "GetModel": {
-              "methods": [
-                "get_model"
-              ]
+              "methods": ["get_model"]
             },
             "ListModels": {
-              "methods": [
-                "list_models"
-              ]
+              "methods": ["list_models"]
             }
           }
         },
@@ -75,14 +59,10 @@
           "libraryClient": "ModelServiceAsyncClient",
           "rpcs": {
             "GetModel": {
-              "methods": [
-                "get_model"
-              ]
+              "methods": ["get_model"]
             },
             "ListModels": {
-              "methods": [
-                "list_models"
-              ]
+              "methods": ["list_models"]
             }
           }
         },
@@ -90,14 +70,10 @@
           "libraryClient": "ModelServiceClient",
           "rpcs": {
             "GetModel": {
-              "methods": [
-                "get_model"
-              ]
+              "methods": ["get_model"]
             },
             "ListModels": {
-              "methods": [
-                "list_models"
-              ]
+              "methods": ["list_models"]
             }
           }
         }
@@ -109,14 +85,10 @@
           "libraryClient": "TextServiceClient",
           "rpcs": {
             "EmbedText": {
-              "methods": [
-                "embed_text"
-              ]
+              "methods": ["embed_text"]
             },
             "GenerateText": {
-              "methods": [
-                "generate_text"
-              ]
+              "methods": ["generate_text"]
             }
           }
         },
@@ -124,14 +96,10 @@
           "libraryClient": "TextServiceAsyncClient",
           "rpcs": {
             "EmbedText": {
-              "methods": [
-                "embed_text"
-              ]
+              "methods": ["embed_text"]
             },
             "GenerateText": {
-              "methods": [
-                "generate_text"
-              ]
+              "methods": ["generate_text"]
             }
           }
         },
@@ -139,14 +107,10 @@
           "libraryClient": "TextServiceClient",
           "rpcs": {
             "EmbedText": {
-              "methods": [
-                "embed_text"
-              ]
+              "methods": ["embed_text"]
             },
             "GenerateText": {
-              "methods": [
-                "generate_text"
-              ]
+              "methods": ["generate_text"]
             }
           }
         }

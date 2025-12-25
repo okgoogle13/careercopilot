@@ -15,6 +15,7 @@ This document summarizes the M3 Expressive infrastructure enhancements aligned w
 ## M3 Expressive Aesthetic Principles
 
 Material 3 Expressive is designed to feel:
+
 - **Vibrant & Dynamic** - Rich, nuanced color palettes with personalized color generation
 - **Playful & Energetic** - Moving beyond flat UI to incorporate visual depth and personality
 - **Emotionally Impactful** - Typography, color, and motion that foster human connection
@@ -22,6 +23,7 @@ Material 3 Expressive is designed to feel:
 - **Distinctive** - Creative, unexpected choices that avoid predictable patterns
 
 **Core Visual Characteristics:**
+
 1. **Vibrant Color** - Richer palettes, dynamic color generation, 40+ tonal shades
 2. **Soft, Rounded Shapes with Intent** - Contrasting shapes (rounded + sharp) for visual tension
 3. **Expressive Typography** - Variable fonts, extreme weight contrasts (100 vs 900)
@@ -33,11 +35,13 @@ Material 3 Expressive is designed to feel:
 ## New M3 Expressive Skills (4 Total)
 
 ### 1. m3-expressive-typography-enhancer
+
 **Location:** `.claude/skills/design-skills/m3-expressive-typography-enhancer.md`
 
 **Purpose:** Elevate typography beyond basic token replacement with variable fonts and extreme contrasts.
 
 **Key Features:**
+
 - Variable font integration (font-variation-settings, fluid weight transitions)
 - Extreme weight contrasts (100 vs 900, not 400 vs 600)
 - Extreme size contrasts (3x+ ratio: 57px vs 12px)
@@ -46,12 +50,15 @@ Material 3 Expressive is designed to feel:
 - Expressive font pairing (display + monospace, serif + geometric)
 
 **Forbidden Fonts:**
+
 - ❌ Inter, Roboto, Open Sans, Arial, Helvetica, Lato, system fonts (alone)
 
 **Recommended Fonts:**
+
 - ✅ Plus Jakarta Sans Variable, Poppins, Montserrat, Sora, Playfair Display
 
 **Validation Rules:**
+
 - Weight contrast ≥ 3x (not < 1.5x)
 - Size contrast ≥ 3x (not < 2x)
 - High-contrast font pairing (not monotone)
@@ -60,11 +67,13 @@ Material 3 Expressive is designed to feel:
 ---
 
 ### 2. m3-spring-motion-choreography
+
 **Location:** `.claude/skills/design-skills/m3-spring-motion-choreography.md`
 
 **Purpose:** Create physics-based "alive" animations with spring easing and choreographed page loads.
 
 **Key Features:**
+
 - Spring-based physics (not predefined curves)
 - Choreographed page loads (staggered reveals with animation-delay)
 - High-impact moments (focus on one orchestrated entrance)
@@ -72,16 +81,19 @@ Material 3 Expressive is designed to feel:
 - Accessibility support (prefers-reduced-motion)
 
 **Spring Easing Curves:**
+
 - `expressive-spring` - cubic-bezier(0.175, 0.885, 0.32, 1.275) - 12.75% overshoot
 - `expressive-bounce` - cubic-bezier(0.68, -0.55, 0.265, 1.55) - 55% overshoot
 
 **Choreography Patterns:**
+
 - Page load: Header (0ms) → Hero (100ms) → Content (200ms) → Footer (800ms)
 - List items: Cascade in with 60-150ms stagger
 - Modals: Scale in with spring (400ms)
 - Notifications: Bounce in/out with physics
 
 **Anti-Patterns:**
+
 - ❌ Linear/ease-in-out easing (use spring physics)
 - ❌ All content appears instantly (use staggered reveals)
 - ❌ No animation-delay (add choreography)
@@ -89,11 +101,13 @@ Material 3 Expressive is designed to feel:
 ---
 
 ### 3. m3-atmospheric-backgrounds
+
 **Location:** `.claude/skills/design-skills/m3-atmospheric-backgrounds.md`
 
 **Purpose:** Create depth and atmosphere through layered gradients and geometric patterns (not flat solids).
 
 **Key Features:**
+
 - Layered gradients (multi-stop, radial + linear combinations)
 - Geometric patterns (grid, dots, stripes, organic blobs)
 - Contextual effects (match aesthetic: playful, professional, elegant)
@@ -101,17 +115,20 @@ Material 3 Expressive is designed to feel:
 - Performance (CSS-only, no heavy images)
 
 **Pattern Library:**
+
 - **Mesh Gradient** - 4+ radial gradients at different positions
 - **Noise Texture** - SVG-based subtle grain
 - **Isometric Grid** - Diagonal lines at 60deg/-60deg
 - **Aurora Effect** - Animated gradient shift
 
 **Anti-Patterns:**
+
 - ❌ Solid background colors (use layered gradients)
 - ❌ Flat surfaces (add depth with patterns)
 - ❌ Background images (use pure CSS)
 
 **Validation Rules:**
+
 - At least 2 layers for depth
 - Opacity values ≤ 0.20 (subtle, not overpowering)
 - CSS-only solutions (GPU-accelerated)
@@ -119,11 +136,13 @@ Material 3 Expressive is designed to feel:
 ---
 
 ### 4. m3-anti-slop-validator
+
 **Location:** `.claude/skills/design-skills/m3-anti-slop-validator.md`
 
 **Purpose:** Detect and prevent generic "AI slop" aesthetics with automated quality scoring.
 
 **Key Features:**
+
 - Detects generic fonts (Inter, Roboto, Arial, system fonts)
 - Identifies clichéd colors (purple gradients on white, generic Material Blue)
 - Spots flat layouts (solid backgrounds, no elevation, uniform spacing)
@@ -133,29 +152,34 @@ Material 3 Expressive is designed to feel:
 **Forbidden Patterns:**
 
 **Typography:**
+
 - ❌ Inter, Roboto, Arial, Helvetica (alone, without distinctive display font)
 - ❌ Timid weight contrast (400 vs 500 = 1.25x)
 - ❌ Timid size contrast (24px vs 16px = 1.5x)
 - ❌ Monotone font pairing (same family for display/body)
 
 **Color:**
+
 - ❌ Purple gradients on white (#7C4DFF → #9C27B0 on #FFFFFF)
 - ❌ Generic Material Blue (#2196F3, #1976D2)
 - ❌ Timid saturation (average < 30%)
 - ❌ Evenly distributed colors (no dominant color)
 
 **Layout:**
+
 - ❌ Solid background colors (no gradients, no patterns)
 - ❌ Flat surfaces (no elevation, no layering)
 - ❌ Uniform spacing (all gaps identical)
 - ❌ Static components (no hover states)
 
 **Motion:**
+
 - ❌ Linear/ease-in-out easing (use spring physics)
 - ❌ No page-load choreography
 - ❌ No staggered reveals
 
 **Aesthetic Quality Score:**
+
 - **90-100 (Grade A):** Excellent M3 Expressive design
 - **80-89 (Grade B):** Good quality, minor improvements possible
 - **70-79 (Grade C):** Acceptable, needs typography/color work
@@ -167,9 +191,11 @@ Material 3 Expressive is designed to feel:
 ## Enhanced Agents (3 Updated)
 
 ### 1. visual-design-director (v1.2.0)
+
 **Location:** `.claude/agents/visual-design-director.md`
 
 **Enhancements:**
+
 - Added M3 Expressive Anti-Slop Rules section (CRITICAL)
 - Forbidden patterns explicitly listed (typography, color, layout, motion)
 - Required M3 Expressive elements checklist
@@ -177,6 +203,7 @@ Material 3 Expressive is designed to feel:
 - Aesthetic quality score requirement (≥ 80)
 
 **New Validation Workflow:**
+
 1. Define initial aestheticPreferences
 2. Run m3-anti-slop-validator (mental check against rules)
 3. If violations detected, revise aestheticPreferences
@@ -185,9 +212,11 @@ Material 3 Expressive is designed to feel:
 ---
 
 ### 2. design-systems-architect (v2.0.0)
+
 **Location:** `.claude/agents/design-systems-architect.md`
 
 **Enhancements:**
+
 - Updated token generation workflow to use 4 new M3 Expressive skills
 - Sequential skill execution:
   1. m3-expressive-color-system (HCT tonal palettes)
@@ -199,6 +228,7 @@ Material 3 Expressive is designed to feel:
 - Saves to `design-system/tokens-expressive.json` (new file)
 
 **New Output:**
+
 - 200+ tokens (up from ~150)
 - Variable font support
 - Spring motion tokens (16 duration, 10 easing)
@@ -208,9 +238,11 @@ Material 3 Expressive is designed to feel:
 ---
 
 ### 3. m3-migration-architect (v2.0.0)
+
 **Location:** `.claude/agents/m3-migration-architect.md`
 
 **Enhancements:**
+
 - Extended protocol from 8 steps to 12 steps
 - Added Step 4: m3-expressive-typography-enhancer
 - Added Step 10: m3-spring-motion-choreography
@@ -218,12 +250,14 @@ Material 3 Expressive is designed to feel:
 - Added Step 12: m3-anti-slop-validator (final validation)
 
 **New Success Criteria:**
+
 - All 12 steps completed (not 8)
 - Aesthetic quality score ≥ 80
 - No forbidden patterns detected
 - M3 Expressive elements present
 
 **Updated Protocol:**
+
 1. Layout (m3-layout-refactor)
 2. Color (m3-color-themer)
 3. Typography Basic (m3-typography-classifier)
@@ -242,30 +276,35 @@ Material 3 Expressive is designed to feel:
 ## M3 Expressive Principles (Quick Reference)
 
 ### Typography
+
 - **Variable Fonts:** Plus Jakarta Sans Variable, Poppins, Montserrat Variable, Sora Variable
 - **Weight Contrast:** 100 vs 900 (9x), not 400 vs 600 (1.5x)
 - **Size Contrast:** 57px vs 12px (4.75x), not 24px vs 16px (1.5x)
 - **Font Pairing:** Display + monospace, serif + geometric sans (high contrast)
 
 ### Color
+
 - **Vibrant Palettes:** 40-80% saturation (not < 30%)
 - **Tonal Shades:** 40+ tonal stops (13 per palette × 6 palettes)
 - **Dynamic Color:** HCT color space (perceptually uniform)
 - **Dominant Color:** Cohesive aesthetic with sharp accents (not evenly distributed)
 
 ### Motion
+
 - **Spring Physics:** expressive-spring (12.75% overshoot), expressive-bounce (55% overshoot)
 - **Choreographed Page Loads:** Staggered reveals with animation-delay (100-150ms increments)
 - **"Alive" Interactions:** Buttons bounce on press, cards react to hover
 - **Accessibility:** prefers-reduced-motion support (always)
 
 ### Background
+
 - **Layered Gradients:** Multi-stop radial + linear combinations (≥ 2 layers)
 - **Geometric Patterns:** Grid, dots, stripes, organic blobs
 - **Atmospheric Effects:** Mesh gradients, aurora effects, noise texture
 - **Performance:** CSS-only (no images), GPU-accelerated
 
 ### Anti-Slop Rules
+
 - **No Generic Fonts:** Inter, Roboto, Arial (alone)
 - **No Purple Gradients:** On white backgrounds
 - **No Flat Layouts:** Solid colors without gradients
@@ -277,6 +316,7 @@ Material 3 Expressive is designed to feel:
 ## Migration from Standard M3 to M3 Expressive
 
 **Before (M3 Standard):**
+
 ```json
 {
   "typography": {
@@ -298,6 +338,7 @@ Material 3 Expressive is designed to feel:
 ```
 
 **After (M3 Expressive):**
+
 ```json
 {
   "typography": {
@@ -351,11 +392,7 @@ Material 3 Expressive is designed to feel:
     }
   },
   "background": {
-    "layered": [
-      "radial-gradient(circle at 20% 20%, rgba(0, 137, 123, 0.08), transparent 50%)",
-      "linear-gradient(135deg, rgba(255, 111, 97, 0.05), transparent)",
-      "#FAFAFA"
-    ]
+    "layered": ["radial-gradient(circle at 20% 20%, rgba(0, 137, 123, 0.08), transparent 50%)", "linear-gradient(135deg, rgba(255, 111, 97, 0.05), transparent)", "#FAFAFA"]
   }
 }
 ```
@@ -480,17 +517,20 @@ careercopilot/
 ## Summary of Changes
 
 **4 New Skills:**
+
 1. m3-expressive-typography-enhancer (variable fonts, extreme contrasts)
 2. m3-spring-motion-choreography (spring physics, page-load orchestration)
 3. m3-atmospheric-backgrounds (layered gradients, geometric patterns)
 4. m3-anti-slop-validator (aesthetic quality scoring)
 
 **3 Enhanced Agents:**
+
 1. visual-design-director (anti-slop rules, validation workflow)
 2. design-systems-architect (M3 Expressive token generation)
 3. m3-migration-architect (12-step protocol with validation)
 
 **Key Principles:**
+
 - **Vibrant & Dynamic** - Rich colors, 40+ tonal shades
 - **Playful & Energetic** - Spring physics, choreographed animations
 - **Emotionally Impactful** - Variable fonts, extreme contrasts

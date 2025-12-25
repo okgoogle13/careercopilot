@@ -19,6 +19,7 @@ All Claude Code agents have been configured with specific Claude models based on
 These agents handle tasks with clear, deterministic patterns where speed and cost efficiency are prioritized.
 
 #### 1. **code-reviewer** - `haiku`
+
 - **Task Complexity**: Low to Medium
 - **Rationale**: Code review follows a consistent checklist. Once patterns are identified, a lighter model can effectively validate against known issues.
 - **Checklist-based review**:
@@ -32,6 +33,7 @@ These agents handle tasks with clear, deterministic patterns where speed and cos
 - **When Haiku Struggles**: Complex architectural decisions, nuanced security analysis
 
 #### 2. **test-runner** - `haiku`
+
 - **Task Complexity**: Low to Medium
 - **Rationale**: Test execution and failure analysis follow known patterns. Haiku can identify common test failures and simple fixes.
 - **Typical Tasks**:
@@ -49,6 +51,7 @@ These agents handle tasks with clear, deterministic patterns where speed and cos
 These agents handle tasks requiring sophisticated reasoning, planning, and architectural decisions.
 
 #### 1. **ai-agent-specialist** - `sonnet`
+
 - **Task Complexity**: Very High
 - **Rationale**: Designing multi-agent systems (crewAI) requires:
   - Deep understanding of agent roles and dependencies
@@ -63,6 +66,7 @@ These agents handle tasks requiring sophisticated reasoning, planning, and archi
 - **Why Sonnet**: Requires sophisticated reasoning about system design and complex interdependencies
 
 #### 2. **debugger** - `sonnet`
+
 - **Task Complexity**: Very High
 - **Rationale**: Root cause analysis requires:
   - Understanding error patterns across the entire system
@@ -78,6 +82,7 @@ These agents handle tasks requiring sophisticated reasoning, planning, and archi
 - **Why Sonnet**: Debugging complex issues requires sophisticated reasoning and broad system knowledge
 
 #### 3. **devops-specialist** - `sonnet`
+
 - **Task Complexity**: Very High
 - **Rationale**: DevOps decisions affect the entire system and require:
   - Understanding CI/CD pipeline architecture
@@ -93,6 +98,7 @@ These agents handle tasks requiring sophisticated reasoning, planning, and archi
 - **Why Sonnet**: Infrastructure and deployment decisions have broad implications requiring careful reasoning
 
 #### 4. **frontend-specialist** - `sonnet`
+
 - **Task Complexity**: Very High
 - **Rationale**: Frontend architecture requires:
   - Component hierarchy planning
@@ -109,6 +115,7 @@ These agents handle tasks requiring sophisticated reasoning, planning, and archi
 - **Why Sonnet**: Architectural decisions in frontend require deep understanding of React patterns, accessibility, and design systems
 
 #### 5. **security-analyst** - `sonnet`
+
 - **Task Complexity**: Very High
 - **Rationale**: Security analysis requires:
   - Threat modeling and vulnerability identification
@@ -139,6 +146,7 @@ Total Estimated Monthly Overhead:                                           ~$0.
 ```
 
 **Key Point**: Using Haiku for simple tasks while reserving Sonnet for complex reasoning provides:
+
 - **30-40% cost reduction** vs. using Sonnet for all agents
 - **Better performance** (faster responses for simple tasks)
 - **Same quality** for appropriate task complexity
@@ -189,15 +197,15 @@ system_prompt: |
 
 ### Current Configuration Summary
 
-| Agent | Model | Complexity | Primary Use |
-|-------|-------|-----------|-------------|
-| code-reviewer | haiku | Low-Medium | Code quality validation |
-| test-runner | haiku | Low-Medium | Test execution & simple fixes |
-| ai-agent-specialist | sonnet | Very High | Multi-agent system design |
-| debugger | sonnet | Very High | Root cause analysis |
-| devops-specialist | sonnet | Very High | CI/CD & deployment |
-| frontend-specialist | sonnet | Very High | UI architecture & planning |
-| security-analyst | sonnet | Very High | Vulnerability scanning |
+| Agent               | Model  | Complexity | Primary Use                   |
+| ------------------- | ------ | ---------- | ----------------------------- |
+| code-reviewer       | haiku  | Low-Medium | Code quality validation       |
+| test-runner         | haiku  | Low-Medium | Test execution & simple fixes |
+| ai-agent-specialist | sonnet | Very High  | Multi-agent system design     |
+| debugger            | sonnet | Very High  | Root cause analysis           |
+| devops-specialist   | sonnet | Very High  | CI/CD & deployment            |
+| frontend-specialist | sonnet | Very High  | UI architecture & planning    |
+| security-analyst    | sonnet | Very High  | Vulnerability scanning        |
 
 ---
 
@@ -205,15 +213,15 @@ system_prompt: |
 
 ### Response Time Comparison
 
-| Agent | Model | Typical Response Time | Cost per Call |
-|-------|-------|----------------------|----------------|
-| code-reviewer | Haiku | 3-5s | ~$0.001 |
-| test-runner | Haiku | 5-10s | ~$0.002 |
-| debugger | Sonnet | 8-15s | ~$0.010 |
-| devops-specialist | Sonnet | 10-20s | ~$0.015 |
-| frontend-specialist | Sonnet | 10-15s | ~$0.012 |
+| Agent               | Model  | Typical Response Time | Cost per Call |
+| ------------------- | ------ | --------------------- | ------------- |
+| code-reviewer       | Haiku  | 3-5s                  | ~$0.001       |
+| test-runner         | Haiku  | 5-10s                 | ~$0.002       |
+| debugger            | Sonnet | 8-15s                 | ~$0.010       |
+| devops-specialist   | Sonnet | 10-20s                | ~$0.015       |
+| frontend-specialist | Sonnet | 10-15s                | ~$0.012       |
 
-*Note: Times vary based on task complexity and code base size*
+_Note: Times vary based on task complexity and code base size_
 
 ---
 
@@ -224,6 +232,7 @@ When creating a new agent, follow these steps:
 ### 1. Assess Task Complexity
 
 Ask yourself:
+
 - Is this task **deterministic and pattern-based**? → Haiku
 - Does this require **sophisticated reasoning and planning**? → Sonnet
 - Is this a **critical system decision** affecting architecture? → Sonnet
@@ -246,7 +255,7 @@ cp .claude/agents/template.md .claude/agents/new-agent.md
 ---
 name: new-agent
 description: What this agent does
-model: haiku  # or sonnet, based on complexity assessment
+model: haiku # or sonnet, based on complexity assessment
 tools: List, Of, Tools
 system_prompt: |
   Detailed instructions for the agent...
@@ -262,12 +271,14 @@ Update this guide with the new agent's complexity assessment and model choice.
 ## Performance Optimization Tips
 
 ### For Haiku Agents
+
 - Keep tasks focused and well-defined
 - Provide clear patterns in system prompt
 - Use specific, constrained tool sets
 - Break complex tasks into simpler subtasks
 
 ### For Sonnet Agents
+
 - Leverage broad reasoning capabilities
 - Ask for architectural considerations
 - Request comprehensive analysis
@@ -280,11 +291,13 @@ Update this guide with the new agent's complexity assessment and model choice.
 ### When to Reconsider Model Assignment
 
 **Upgrade Haiku → Sonnet if:**
+
 - Agent consistently fails on edge cases
 - Reasoning quality is insufficient
 - Output lacks depth or misses important considerations
 
 **Downgrade Sonnet → Haiku if:**
+
 - Agent is overcomplicating simple tasks
 - Task performance plateaus despite model capability
 - Cost exceeds value delivered
@@ -292,6 +305,7 @@ Update this guide with the new agent's complexity assessment and model choice.
 ### Tracking Agent Performance
 
 Monitor:
+
 1. Response quality relative to task complexity
 2. Cost per invocation
 3. Error rates and failure patterns

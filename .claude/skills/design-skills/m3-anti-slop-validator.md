@@ -24,6 +24,7 @@ This skill enforces M3 Expressive aesthetic standards by:
 ### 1. Generic Fonts (Forbidden List)
 
 **Forbidden Fonts (Without Distinctive Pairing):**
+
 - ❌ **Inter** (alone)
 - ❌ **Roboto** (corporate, overused)
 - ❌ **Open Sans** (generic, dated)
@@ -34,10 +35,11 @@ This skill enforces M3 Expressive aesthetic standards by:
 - ❌ **Segoe UI** (Windows default)
 
 **Detection Logic:**
+
 ```typescript
 interface FontViolation {
   fontFamily: string;
-  severity: 'critical' | 'warning';
+  severity: "critical" | "warning";
   location: string;
   suggestion: string;
 }
@@ -46,20 +48,20 @@ function detectGenericFonts(code: string): FontViolation[] {
   const violations: FontViolation[] = [];
 
   const forbiddenFonts = [
-    { name: 'Inter', severity: 'critical' as const, alternative: 'Plus Jakarta Sans Variable' },
-    { name: 'Roboto', severity: 'critical' as const, alternative: 'Poppins' },
-    { name: 'Open Sans', severity: 'critical' as const, alternative: 'Nunito' },
-    { name: 'Arial', severity: 'critical' as const, alternative: 'Montserrat' },
-    { name: 'Helvetica', severity: 'critical' as const, alternative: 'Sora Variable' },
-    { name: 'Lato', severity: 'warning' as const, alternative: 'Plus Jakarta Sans' },
-    { name: '-apple-system', severity: 'critical' as const, alternative: 'Plus Jakarta Sans Variable' },
-    { name: 'BlinkMacSystemFont', severity: 'critical' as const, alternative: 'Plus Jakarta Sans Variable' },
-    { name: 'system-ui', severity: 'critical' as const, alternative: 'Plus Jakarta Sans Variable' },
-    { name: 'Segoe UI', severity: 'critical' as const, alternative: 'Poppins' }
+    { name: "Inter", severity: "critical" as const, alternative: "Plus Jakarta Sans Variable" },
+    { name: "Roboto", severity: "critical" as const, alternative: "Poppins" },
+    { name: "Open Sans", severity: "critical" as const, alternative: "Nunito" },
+    { name: "Arial", severity: "critical" as const, alternative: "Montserrat" },
+    { name: "Helvetica", severity: "critical" as const, alternative: "Sora Variable" },
+    { name: "Lato", severity: "warning" as const, alternative: "Plus Jakarta Sans" },
+    { name: "-apple-system", severity: "critical" as const, alternative: "Plus Jakarta Sans Variable" },
+    { name: "BlinkMacSystemFont", severity: "critical" as const, alternative: "Plus Jakarta Sans Variable" },
+    { name: "system-ui", severity: "critical" as const, alternative: "Plus Jakarta Sans Variable" },
+    { name: "Segoe UI", severity: "critical" as const, alternative: "Poppins" },
   ];
 
   forbiddenFonts.forEach(({ name, severity, alternative }) => {
-    const regex = new RegExp(`fontFamily:\\s*['"]([^'"]*${name}[^'"]*)['"]`, 'gi');
+    const regex = new RegExp(`fontFamily:\\s*['"]([^'"]*${name}[^'"]*)['"]`, "gi");
     const matches = code.matchAll(regex);
 
     for (const match of matches) {
@@ -71,7 +73,7 @@ function detectGenericFonts(code: string): FontViolation[] {
           fontFamily: match[1],
           severity,
           location: `Line ${getLineNumber(code, match.index)}`,
-          suggestion: `Replace '${name}' with '${alternative}' for a more distinctive, expressive aesthetic.`
+          suggestion: `Replace '${name}' with '${alternative}' for a more distinctive, expressive aesthetic.`,
         });
       }
     }
@@ -81,22 +83,9 @@ function detectGenericFonts(code: string): FontViolation[] {
 }
 
 function hasDistinctiveDisplayFont(code: string): boolean {
-  const distinctiveFonts = [
-    'Plus Jakarta Sans',
-    'Poppins',
-    'Montserrat',
-    'Sora',
-    'Playfair Display',
-    'Crimson Pro',
-    'Bricolage Grotesque',
-    'Space Grotesk',
-    'JetBrains Mono',
-    'Fira Code'
-  ];
+  const distinctiveFonts = ["Plus Jakarta Sans", "Poppins", "Montserrat", "Sora", "Playfair Display", "Crimson Pro", "Bricolage Grotesque", "Space Grotesk", "JetBrains Mono", "Fira Code"];
 
-  return distinctiveFonts.some(font =>
-    code.toLowerCase().includes(font.toLowerCase())
-  );
+  return distinctiveFonts.some((font) => code.toLowerCase().includes(font.toLowerCase()));
 }
 ```
 
@@ -105,16 +94,18 @@ function hasDistinctiveDisplayFont(code: string): boolean {
 ### 2. Clichéd Colors (Purple Gradient Syndrome)
 
 **Forbidden Color Patterns:**
+
 - ❌ **Purple gradient on white** (#7C4DFF → #9C27B0 on #FFFFFF)
 - ❌ **Generic blue** (#2196F3, #1976D2 - Material Blue)
 - ❌ **Timid palettes** (all colors < 20% saturation)
 - ❌ **Evenly distributed colors** (no dominant color, 5+ colors with equal weight)
 
 **Detection Logic:**
+
 ```typescript
 interface ColorViolation {
   pattern: string;
-  severity: 'critical' | 'warning';
+  severity: "critical" | "warning";
   colors: string[];
   suggestion: string;
 }
@@ -123,23 +114,22 @@ function detectClichedColors(tokens: DesignTokens): ColorViolation[] {
   const violations: ColorViolation[] = [];
 
   // Check for purple gradient on white
-  if (isPurpleGradient(tokens.color.primary, tokens.color.secondary) &&
-      isWhiteish(tokens.color.surface)) {
+  if (isPurpleGradient(tokens.color.primary, tokens.color.secondary) && isWhiteish(tokens.color.surface)) {
     violations.push({
-      pattern: 'Purple gradient on white',
-      severity: 'critical',
+      pattern: "Purple gradient on white",
+      severity: "critical",
       colors: [tokens.color.primary, tokens.color.secondary, tokens.color.surface],
-      suggestion: 'Use vibrant, personalized color palette (teal/coral, magenta/cyan, navy/lavender). Avoid clichéd purple gradients.'
+      suggestion: "Use vibrant, personalized color palette (teal/coral, magenta/cyan, navy/lavender). Avoid clichéd purple gradients.",
     });
   }
 
   // Check for generic Material Blue
   if (isGenericBlue(tokens.color.primary)) {
     violations.push({
-      pattern: 'Generic Material Blue',
-      severity: 'warning',
+      pattern: "Generic Material Blue",
+      severity: "warning",
       colors: [tokens.color.primary],
-      suggestion: 'Use distinctive color like teal (#00897B), magenta (#E91E63), or navy (#1A237E).'
+      suggestion: "Use distinctive color like teal (#00897B), magenta (#E91E63), or navy (#1A237E).",
     });
   }
 
@@ -147,20 +137,20 @@ function detectClichedColors(tokens: DesignTokens): ColorViolation[] {
   const averageSaturation = calculateAverageSaturation(tokens.color);
   if (averageSaturation < 20) {
     violations.push({
-      pattern: 'Timid, desaturated palette',
-      severity: 'warning',
+      pattern: "Timid, desaturated palette",
+      severity: "warning",
       colors: Object.values(tokens.color),
-      suggestion: 'Increase color saturation for M3 Expressive. Use vibrant, emotionally impactful colors (40-80% saturation).'
+      suggestion: "Increase color saturation for M3 Expressive. Use vibrant, emotionally impactful colors (40-80% saturation).",
     });
   }
 
   // Check for evenly distributed colors (no dominant color)
   if (hasEvenlyDistributedColors(tokens.color)) {
     violations.push({
-      pattern: 'No dominant color (evenly distributed)',
-      severity: 'warning',
+      pattern: "No dominant color (evenly distributed)",
+      severity: "warning",
       colors: Object.values(tokens.color),
-      suggestion: 'Commit to a cohesive aesthetic with dominant colors and sharp accents (not evenly distributed).'
+      suggestion: "Commit to a cohesive aesthetic with dominant colors and sharp accents (not evenly distributed).",
     });
   }
 
@@ -172,21 +162,16 @@ function isPurpleGradient(color1: string, color2: string): boolean {
   const purple2 = parseColor(color2);
 
   // Check if both colors are in purple hue range (270-330 degrees)
-  return (
-    purple1.hue >= 270 && purple1.hue <= 330 &&
-    purple2.hue >= 270 && purple2.hue <= 330
-  );
+  return purple1.hue >= 270 && purple1.hue <= 330 && purple2.hue >= 270 && purple2.hue <= 330;
 }
 
 function isGenericBlue(color: string): boolean {
-  const genericBlues = ['#2196F3', '#1976D2', '#1E88E5', '#42A5F5'];
-  return genericBlues.some(blue =>
-    color.toUpperCase() === blue.toUpperCase()
-  );
+  const genericBlues = ["#2196F3", "#1976D2", "#1E88E5", "#42A5F5"];
+  return genericBlues.some((blue) => color.toUpperCase() === blue.toUpperCase());
 }
 
 function calculateAverageSaturation(colorPalette: Record<string, string>): number {
-  const saturations = Object.values(colorPalette).map(color => {
+  const saturations = Object.values(colorPalette).map((color) => {
     const hsl = parseColorToHSL(color);
     return hsl.saturation;
   });
@@ -200,16 +185,18 @@ function calculateAverageSaturation(colorPalette: Record<string, string>): numbe
 ### 3. Flat Layouts (No Depth)
 
 **Forbidden Layout Patterns:**
+
 - ❌ **Solid background colors** (no gradients, no patterns)
 - ❌ **No elevation** (all elements at same z-level)
 - ❌ **No layering** (single-layer components)
 - ❌ **Uniform spacing** (all gaps identical, no rhythm)
 
 **Detection Logic:**
+
 ```typescript
 interface LayoutViolation {
   pattern: string;
-  severity: 'critical' | 'warning';
+  severity: "critical" | "warning";
   location: string;
   suggestion: string;
 }
@@ -220,30 +207,30 @@ function detectFlatLayouts(code: string, tokens: DesignTokens): LayoutViolation[
   // Check for solid backgrounds (no gradients)
   if (hasSolidBackgrounds(code) && !hasLayeredBackgrounds(code)) {
     violations.push({
-      pattern: 'Solid background (no gradients or patterns)',
-      severity: 'critical',
-      location: 'Background styling',
-      suggestion: 'Use layered gradients, geometric patterns, or atmospheric effects for depth. See m3-atmospheric-backgrounds skill.'
+      pattern: "Solid background (no gradients or patterns)",
+      severity: "critical",
+      location: "Background styling",
+      suggestion: "Use layered gradients, geometric patterns, or atmospheric effects for depth. See m3-atmospheric-backgrounds skill.",
     });
   }
 
   // Check for lack of elevation
   if (!usesElevationTokens(code, tokens)) {
     violations.push({
-      pattern: 'No elevation tokens (flat surfaces)',
-      severity: 'warning',
-      location: 'Component styling',
-      suggestion: 'Apply elevation tokens (var(--sys-elevation-level2)) for depth and visual hierarchy.'
+      pattern: "No elevation tokens (flat surfaces)",
+      severity: "warning",
+      location: "Component styling",
+      suggestion: "Apply elevation tokens (var(--sys-elevation-level2)) for depth and visual hierarchy.",
     });
   }
 
   // Check for uniform spacing (no rhythm)
   if (hasUniformSpacing(code)) {
     violations.push({
-      pattern: 'Uniform spacing (no visual rhythm)',
-      severity: 'warning',
-      location: 'Spacing/layout',
-      suggestion: 'Use varied spacing scales for rhythm (e.g., 8px, 16px, 24px, 40px - not all 16px).'
+      pattern: "Uniform spacing (no visual rhythm)",
+      severity: "warning",
+      location: "Spacing/layout",
+      suggestion: "Use varied spacing scales for rhythm (e.g., 8px, 16px, 24px, 40px - not all 16px).",
     });
   }
 
@@ -291,6 +278,7 @@ function hasUniformSpacing(code: string): boolean {
 ### 4. Predictable Patterns (Cookie-Cutter Designs)
 
 **Forbidden Design Patterns:**
+
 - ❌ **Same font family for display and body** (Roboto/Roboto)
 - ❌ **Timid weight contrasts** (400 vs 500 - ratio < 1.5x)
 - ❌ **Timid size contrasts** (24px vs 16px - ratio < 2x)
@@ -298,10 +286,11 @@ function hasUniformSpacing(code: string): boolean {
 - ❌ **Generic button styles** (flat, no depth, no spring motion)
 
 **Detection Logic:**
+
 ```typescript
 interface PatternViolation {
   pattern: string;
-  severity: 'critical' | 'warning';
+  severity: "critical" | "warning";
   suggestion: string;
 }
 
@@ -311,9 +300,9 @@ function detectPredictablePatterns(code: string, tokens: DesignTokens): PatternV
   // Check for monotone font pairing
   if (hasMonotoneFontPairing(tokens.typography)) {
     violations.push({
-      pattern: 'Monotone font pairing (same family for display/body)',
-      severity: 'critical',
-      suggestion: 'Use high-contrast font pairing (display + monospace, serif + geometric sans). See m3-expressive-typography-enhancer skill.'
+      pattern: "Monotone font pairing (same family for display/body)",
+      severity: "critical",
+      suggestion: "Use high-contrast font pairing (display + monospace, serif + geometric sans). See m3-expressive-typography-enhancer skill.",
     });
   }
 
@@ -322,8 +311,8 @@ function detectPredictablePatterns(code: string, tokens: DesignTokens): PatternV
   if (weightContrast < 1.5) {
     violations.push({
       pattern: `Timid weight contrast (${weightContrast.toFixed(2)}x)`,
-      severity: 'critical',
-      suggestion: 'Use extreme weight contrasts (100 vs 900 = 9x, not 400 vs 500 = 1.25x).'
+      severity: "critical",
+      suggestion: "Use extreme weight contrasts (100 vs 900 = 9x, not 400 vs 500 = 1.25x).",
     });
   }
 
@@ -332,17 +321,17 @@ function detectPredictablePatterns(code: string, tokens: DesignTokens): PatternV
   if (sizeContrast < 2) {
     violations.push({
       pattern: `Timid size contrast (${sizeContrast.toFixed(2)}x)`,
-      severity: 'warning',
-      suggestion: 'Use extreme size contrasts (57px vs 12px = 4.75x, not 24px vs 16px = 1.5x).'
+      severity: "warning",
+      suggestion: "Use extreme size contrasts (57px vs 12px = 4.75x, not 24px vs 16px = 1.5x).",
     });
   }
 
   // Check for lack of hover states
   if (!hasHoverStates(code)) {
     violations.push({
-      pattern: 'No hover states (static components)',
-      severity: 'warning',
-      suggestion: 'Add spring-physics hover effects (translateY, scale, shadow) for "alive" interactions.'
+      pattern: "No hover states (static components)",
+      severity: "warning",
+      suggestion: 'Add spring-physics hover effects (translateY, scale, shadow) for "alive" interactions.',
     });
   }
 
@@ -350,12 +339,18 @@ function detectPredictablePatterns(code: string, tokens: DesignTokens): PatternV
 }
 
 function hasMonotoneFontPairing(typography: TypographyTokens): boolean {
-  const displayFamily = typography.display?.fontFamily || '';
-  const bodyFamily = typography.body?.fontFamily || '';
+  const displayFamily = typography.display?.fontFamily || "";
+  const bodyFamily = typography.body?.fontFamily || "";
 
   // Extract font name (ignore 'Variable' suffix)
-  const displayName = displayFamily.split(',')[0].replace(/['"\s]/g, '').replace('Variable', '');
-  const bodyName = bodyFamily.split(',')[0].replace(/['"\s]/g, '').replace('Variable', '');
+  const displayName = displayFamily
+    .split(",")[0]
+    .replace(/['"\s]/g, "")
+    .replace("Variable", "");
+  const bodyName = bodyFamily
+    .split(",")[0]
+    .replace(/['"\s]/g, "")
+    .replace("Variable", "");
 
   return displayName === bodyName;
 }
@@ -371,8 +366,8 @@ function calculateWeightContrast(typography: TypographyTokens): number {
 }
 
 function calculateSizeContrast(typography: TypographyTokens): number {
-  const displaySize = parseFloat(typography.display?.fontSize || '24px');
-  const bodySize = parseFloat(typography.body?.fontSize || '16px');
+  const displaySize = parseFloat(typography.display?.fontSize || "24px");
+  const bodySize = parseFloat(typography.body?.fontSize || "16px");
 
   const max = Math.max(displaySize, bodySize);
   const min = Math.min(displaySize, bodySize);
@@ -401,14 +396,11 @@ interface AestheticScore {
     layout: number; // 0-25
     interaction: number; // 0-25
   };
-  grade: 'A' | 'B' | 'C' | 'D' | 'F';
+  grade: "A" | "B" | "C" | "D" | "F";
   recommendation: string;
 }
 
-function calculateAestheticQuality(
-  code: string,
-  tokens: DesignTokens
-): AestheticScore {
+function calculateAestheticQuality(code: string, tokens: DesignTokens): AestheticScore {
   const typographyScore = scoreTypography(code, tokens);
   const colorScore = scoreColor(tokens);
   const layoutScore = scoreLayout(code, tokens);
@@ -416,17 +408,13 @@ function calculateAestheticQuality(
 
   const total = typographyScore + colorScore + layoutScore + interactionScore;
 
-  const grade =
-    total >= 90 ? 'A' :
-    total >= 80 ? 'B' :
-    total >= 70 ? 'C' :
-    total >= 60 ? 'D' : 'F';
+  const grade = total >= 90 ? "A" : total >= 80 ? "B" : total >= 70 ? "C" : total >= 60 ? "D" : "F";
 
   const recommendation = getRecommendation(total, {
     typography: typographyScore,
     color: colorScore,
     layout: layoutScore,
-    interaction: interactionScore
+    interaction: interactionScore,
   });
 
   return {
@@ -435,10 +423,10 @@ function calculateAestheticQuality(
       typography: typographyScore,
       color: colorScore,
       layout: layoutScore,
-      interaction: interactionScore
+      interaction: interactionScore,
     },
     grade,
-    recommendation
+    recommendation,
   };
 }
 
@@ -519,15 +507,15 @@ function scoreInteraction(code: string): number {
 
 function getRecommendation(total: number, breakdown: Record<string, number>): string {
   if (total >= 90) {
-    return 'Excellent! This design demonstrates strong M3 Expressive principles with distinctive aesthetics.';
+    return "Excellent! This design demonstrates strong M3 Expressive principles with distinctive aesthetics.";
   } else if (total >= 80) {
-    return 'Good aesthetic quality. Minor improvements possible in lower-scoring areas.';
+    return "Good aesthetic quality. Minor improvements possible in lower-scoring areas.";
   } else if (total >= 70) {
-    return 'Acceptable design. Focus on improving typography and color for more impact.';
+    return "Acceptable design. Focus on improving typography and color for more impact.";
   } else if (total >= 60) {
-    return 'Below M3 Expressive standards. Review anti-slop violations and apply remediation.';
+    return "Below M3 Expressive standards. Review anti-slop violations and apply remediation.";
   } else {
-    return 'CRITICAL: Generic AI slop detected. Complete redesign recommended using M3 Expressive skills.';
+    return "CRITICAL: Generic AI slop detected. Complete redesign recommended using M3 Expressive skills.";
   }
 }
 ```
@@ -579,13 +567,7 @@ function getRecommendation(total: number, breakdown: Record<string, number>): st
       }
     }
   ],
-  "remediationSteps": [
-    "1. Replace Inter with Plus Jakarta Sans Variable (m3-expressive-typography-enhancer)",
-    "2. Use vibrant color palette: teal (#00897B) + coral (#FF6F61) + purple (#7C4DFF)",
-    "3. Add layered background gradients (m3-atmospheric-backgrounds)",
-    "4. Apply elevation tokens for depth (var(--sys-elevation-level2))",
-    "5. Add spring-physics hover effects (m3-spring-motion-choreography)"
-  ]
+  "remediationSteps": ["1. Replace Inter with Plus Jakarta Sans Variable (m3-expressive-typography-enhancer)", "2. Use vibrant color palette: teal (#00897B) + coral (#FF6F61) + purple (#7C4DFF)", "3. Add layered background gradients (m3-atmospheric-backgrounds)", "4. Apply elevation tokens for depth (var(--sys-elevation-level2))", "5. Add spring-physics hover effects (m3-spring-motion-choreography)"]
 }
 ```
 
@@ -594,6 +576,7 @@ function getRecommendation(total: number, breakdown: Record<string, number>): st
 ## Usage
 
 **Standalone Skill:**
+
 ```bash
 # Validate aesthetic quality and detect AI slop
 m3-anti-slop-validator \
@@ -603,15 +586,16 @@ m3-anti-slop-validator \
 ```
 
 **Within Design Systems Architect:**
+
 ```javascript
 // Run after all M3 migrations to validate final output
-const validation = await runSkill('m3-anti-slop-validator', {
+const validation = await runSkill("m3-anti-slop-validator", {
   code: finalCode,
-  tokens: tokensExpressive
+  tokens: tokensExpressive,
 });
 
 if (validation.aestheticQuality.total < 80) {
-  console.warn('⚠️ Low aesthetic quality score. Review violations.');
+  console.warn("⚠️ Low aesthetic quality score. Review violations.");
 }
 ```
 

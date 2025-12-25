@@ -2,6 +2,7 @@
 name: frontend-backend-mapper
 description: "Analyzes and maps frontend API calls to backend endpoints. Detects missing endpoints, unused endpoints, and integration gaps. Optional: trace complete data flows to database and design tokens. Related: api-contract-validator for detailed type analysis."
 ---
+
 # Frontend-Backend Mapper Workflow
 
 This skill analyzes the integration between frontend API services and backend endpoints to ensure complete coverage. It can optionally trace complete data flows including database operations and design token usage.
@@ -101,33 +102,33 @@ Generated: 2025-01-06T12:00:00Z
 
 ### ✅ MAPPED INTEGRATIONS (35)
 
-| Frontend Function | HTTP Method | Backend Endpoint | Genkit Flow |
-|-------------------|-------------|------------------|-------------|
-| `generateKscResponses()` | POST | `/api/v1/ksc/generate` | `generateKscResponse` |
-| `getAtsScore()` | POST | `/api/v1/analysis/ats-score` | `atsScoring` |
-| ... |
+| Frontend Function        | HTTP Method | Backend Endpoint             | Genkit Flow           |
+| ------------------------ | ----------- | ---------------------------- | --------------------- |
+| `generateKscResponses()` | POST        | `/api/v1/ksc/generate`       | `generateKscResponse` |
+| `getAtsScore()`          | POST        | `/api/v1/analysis/ats-score` | `atsScoring`          |
+| ...                      |
 
 ### ❌ MISSING BACKEND ENDPOINTS (10)
 
-| Frontend Function | Expected Endpoint | Priority | Impact |
-|-------------------|-------------------|----------|--------|
-| `sendWelcomeEmail()` | POST `/api/v1/email/welcome` | HIGH | Broken feature |
-| `getUserAnalytics()` | GET `/api/v1/analytics/user` | MEDIUM | Missing data |
-| ... |
+| Frontend Function    | Expected Endpoint            | Priority | Impact         |
+| -------------------- | ---------------------------- | -------- | -------------- |
+| `sendWelcomeEmail()` | POST `/api/v1/email/welcome` | HIGH     | Broken feature |
+| `getUserAnalytics()` | GET `/api/v1/analytics/user` | MEDIUM   | Missing data   |
+| ...                  |
 
 ### ❌ UNUSED BACKEND ENDPOINTS (3)
 
-| Endpoint | Last Used | Recommendation |
-|----------|-----------|----------------|
-| GET `/api/v1/admin/legacy-reports` | Never | Consider deprecating |
-| ... |
+| Endpoint                           | Last Used | Recommendation       |
+| ---------------------------------- | --------- | -------------------- |
+| GET `/api/v1/admin/legacy-reports` | Never     | Consider deprecating |
+| ...                                |
 
 ### ⚠️ TYPE MISMATCHES (5)
 
-| Integration | Issue | Fix |
-|-------------|-------|-----|
+| Integration                     | Issue                                                                              | Fix                |
+| ------------------------------- | ---------------------------------------------------------------------------------- | ------------------ |
 | `analysisService.getAtsScore()` | Frontend uses `resumeText` (camelCase), backend expects `resume_text` (snake_case) | Standardize casing |
-| ... |
+| ...                             |
 ```
 
 ### Visual Diagram

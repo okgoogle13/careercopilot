@@ -53,7 +53,7 @@ axiosInstance.interceptors.response.use(
 
           return axiosInstance(originalRequest);
         }
-      } catch (refreshError) {
+      } catch {
         // Refresh failed, redirect to login
         localStorage.removeItem('access_token');
         localStorage.removeItem('refresh_token');

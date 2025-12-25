@@ -17,6 +17,7 @@ python3 .claude/scripts/init-skill.py database-migrator --path .claude/skills
 ### Generated Structure
 
 **What it creates:**
+
 - `SKILL.md` - Main skill definition with YAML frontmatter and workflow
 - `README.md` - Development notes and guidelines
 - `scripts/` - Directory for automation scripts (bash, python)
@@ -67,11 +68,13 @@ python3 .claude/scripts/package-skill.py .claude/skills/my-skill dist/
 ### Description Examples
 
 **Good Description:**
+
 ```yaml
 description: "Runs or writes Playwright tests for the webapp. Use when asked to 'run playwright' or 'write a new e2e test'."
 ```
 
 **Needs Improvement:**
+
 ```yaml
 description: "Example skill demonstrating YAML best practices"
 # Missing: When to use this skill!
@@ -86,7 +89,7 @@ See `docs/INTEGRATION_ARCHITECTURAL_GUIDE.md` for full stack integration details
 ### Key Skills
 
 - `fastapi-endpoint-scaffolder` - Create new FastAPI endpoints
-- `pydantic-model-scaffolder` - Create type-safe Pydantic models  
+- `pydantic-model-scaffolder` - Create type-safe Pydantic models
 - `api-contract-validator` - Validate TypeScript ↔ Pydantic contracts
 - `frontend-backend-mapper` - Analyze integration health
 
@@ -99,7 +102,7 @@ See `docs/INTEGRATION_ARCHITECTURAL_GUIDE.md` for full stack integration details
 # Validate integration
 "Use api-contract-validator to check all API contracts"
 
-# Map integrations  
+# Map integrations
 "Use frontend-backend-mapper to analyze integration health"
 ```
 
@@ -114,12 +117,12 @@ See `docs/INTEGRATION_ARCHITECTURAL_GUIDE.md` for full stack integration details
 
 ### Validation Metrics
 
-| Metric | Current | Target |
-|--------|---------|--------|
-| Skills Passing Validation | 19/20 | 20/20 |
-| Average Skill Length | 450 lines | < 500 lines |
-| Skills with TOC | 8/10 | 10/10 |
-| Executable Scripts | 95% | 100% |
+| Metric                    | Current   | Target      |
+| ------------------------- | --------- | ----------- |
+| Skills Passing Validation | 19/20     | 20/20       |
+| Average Skill Length      | 450 lines | < 500 lines |
+| Skills with TOC           | 8/10      | 10/10       |
+| Executable Scripts        | 95%       | 100%        |
 
 ## Tooling Scripts
 
@@ -213,6 +216,7 @@ The validation tool performs the following automated checks:
    - Validate special characters
 
 2. **File Permission Issues**
+
    ```bash
    # Fix script permissions
    chmod +x .claude/skills/*/scripts/*
@@ -239,6 +243,7 @@ python3 -c "import yaml; yaml.safe_load(open('.claude/skills/my-skill/SKILL.md')
 ## Best Practices Summary
 
 ### Do's
+
 - ✅ Keep descriptions specific with usage triggers
 - ✅ Use progressive disclosure for complex content
 - ✅ Maintain single-level reference structure
@@ -247,6 +252,7 @@ python3 -c "import yaml; yaml.safe_load(open('.claude/skills/my-skill/SKILL.md')
 - ✅ Test skills thoroughly before packaging
 
 ### Don'ts
+
 - ❌ Write vague descriptions without usage context
 - ❌ Create nested reference directories
 - ❌ Include auxiliary documentation in packages

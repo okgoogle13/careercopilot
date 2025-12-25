@@ -21,6 +21,7 @@
 ## ✅ Phase 1: Automated Fixes (30 min)
 
 ### Step 1: Fix Hardcoded Spacing
+
 ```bash
 # Review what will be changed
 grep -rE "\b(4|8|12|16|20|24|28|32|48|64)px\b" frontend/src/components/m3-expressive --include="*.css" | head -20
@@ -40,6 +41,7 @@ find frontend/src/components/m3-expressive -name "*.bak" -delete
 ---
 
 ### Step 2: Fix Hardcoded Colors
+
 ```bash
 # Find hardcoded colors
 grep -rE "(#[0-9a-fA-F]{3,6}|rgb\(|rgba\()" frontend/src/components/m3-expressive --include="*.css"
@@ -56,6 +58,7 @@ grep -rE "(#[0-9a-fA-F]{3,6}|rgb\(|rgba\()" frontend/src/components/m3-expressiv
 ---
 
 ### Step 3: Fix Hardcoded Shadows
+
 ```bash
 # Find hardcoded shadows
 grep -rE "box-shadow:\s*[0-9]" frontend/src/components/m3-expressive --include="*.css"
@@ -73,6 +76,7 @@ grep -rE "box-shadow:\s*[0-9]" frontend/src/components/m3-expressive --include="
 ### Component Categories to Review
 
 #### Layout Components
+
 - [ ] **M3Card** - Padding, elevation, border-radius
 - [ ] **M3Modal** - Backdrop, elevation, spacing
 - [ ] **M3Dialog** - Compact spacing, elevation
@@ -80,6 +84,7 @@ grep -rE "box-shadow:\s*[0-9]" frontend/src/components/m3-expressive --include="
 - [ ] **M3Accordion** - Item spacing, borders
 
 #### Navigation Components
+
 - [ ] **M3Menu** - Dropdown spacing, elevation
 - [ ] **M3TabBar** - Tab spacing, indicator
 - [ ] **M3Breadcrumb** - Separator, spacing
@@ -88,6 +93,7 @@ grep -rE "box-shadow:\s*[0-9]" frontend/src/components/m3-expressive --include="
 - [ ] **M3BottomNavigation** - Icon sizes, spacing
 
 #### Data Display Components
+
 - [ ] **M3Table** - Row height, cell padding
 - [ ] **M3List** - Item spacing, dividers
 - [ ] **M3DataGrid** - Cell padding, borders
@@ -97,6 +103,7 @@ grep -rE "box-shadow:\s*[0-9]" frontend/src/components/m3-expressive --include="
 - [ ] **M3Progress** - Bar height, track
 
 #### Feedback Components
+
 - [ ] **M3Alert** - Severity colors, icon spacing
 - [ ] **M3Toast** - Position, animation
 - [ ] **M3Snackbar** - Bottom spacing, actions
@@ -106,6 +113,7 @@ grep -rE "box-shadow:\s*[0-9]" frontend/src/components/m3-expressive --include="
 - [ ] **M3Skeleton** - Animation, dimensions
 
 #### Advanced Forms
+
 - [ ] **M3DatePicker** - Calendar spacing, day buttons
 - [ ] **M3TimePicker** - Input consistency
 - [ ] **M3Slider** - Track height, thumb size
@@ -118,6 +126,7 @@ grep -rE "box-shadow:\s*[0-9]" frontend/src/components/m3-expressive --include="
 ## ✅ Phase 3: Cross-Component Comparison (30 min)
 
 ### Spacing Consistency Check
+
 - [ ] All buttons have consistent padding
 - [ ] All inputs have consistent height
 - [ ] All cards have consistent padding
@@ -125,6 +134,7 @@ grep -rE "box-shadow:\s*[0-9]" frontend/src/components/m3-expressive --include="
 - [ ] All lists have consistent item spacing
 
 ### Color Consistency Check
+
 - [ ] Primary actions use primary color
 - [ ] Error states use error color
 - [ ] Success states use appropriate color
@@ -132,6 +142,7 @@ grep -rE "box-shadow:\s*[0-9]" frontend/src/components/m3-expressive --include="
 - [ ] Hover states use consistent colors
 
 ### Elevation Consistency Check
+
 - [ ] Cards use level 1-2
 - [ ] Modals use level 3
 - [ ] Hover states increase by 1 level
@@ -142,11 +153,13 @@ grep -rE "box-shadow:\s*[0-9]" frontend/src/components/m3-expressive --include="
 ## ✅ Phase 4: M3 Design Spec Comparison (30 min)
 
 ### Reference Materials
+
 - **M3 Design Spec:** https://m3.material.io/
 - **Token Reference:** `docs/M3_DESIGN_SPEC_REFERENCE.md`
 - **Design Tokens:** `frontend/src/styles/m3-design-tokens.css`
 
 ### Comparison Points
+
 - [ ] Component sizes match M3 spec
 - [ ] Spacing follows M3 4px grid
 - [ ] Colors match M3 color system
@@ -159,23 +172,27 @@ grep -rE "box-shadow:\s*[0-9]" frontend/src/components/m3-expressive --include="
 ## 🔧 Tools Available
 
 ### 1. Token Consistency Checker
+
 ```bash
 ./scripts/verify-m3-token-consistency.sh
 ```
 
 ### 2. Styling Report Generator
+
 ```bash
 python3 scripts/generate-m3-styling-report.py
 # Output: m3-styling-report.json
 ```
 
 ### 3. Hardcoded Spacing Fixer
+
 ```bash
 ./scripts/fix-hardcoded-spacing.sh
 # Creates backups, fixes common spacing values
 ```
 
 ### 4. Visual Inspection
+
 ```bash
 # Storybook
 yarn storybook
@@ -189,18 +206,21 @@ yarn storybook
 ## 📋 Review Workflow
 
 ### Day 1: Automated Fixes
+
 1. Run spacing fixer script
 2. Review and commit changes
 3. Fix remaining hardcoded colors
 4. Fix hardcoded shadows
 
 ### Day 2: Visual Review
+
 1. Open Storybook
 2. Review each component category
 3. Note visual inconsistencies
 4. Create fix list
 
 ### Day 3: Implementation
+
 1. Fix identified issues
 2. Re-run analysis tools
 3. Verify visual consistency
@@ -211,6 +231,7 @@ yarn storybook
 ## ✅ Success Criteria
 
 **Styling Fine-Tuning Complete When:**
+
 - ✅ All hardcoded values replaced with tokens
 - ✅ Visual consistency across all components
 - ✅ Components match M3 design spec
@@ -222,12 +243,12 @@ yarn storybook
 
 ## 📊 Progress Tracking
 
-| Phase | Status | Time | Issues Fixed |
-|-------|--------|------|--------------|
-| Phase 1: Automated Fixes | ⏳ Pending | 30 min | ~200 |
-| Phase 2: Visual Review | ⏳ Pending | 1 hour | TBD |
-| Phase 3: Cross-Component | ⏳ Pending | 30 min | TBD |
-| Phase 4: Spec Comparison | ⏳ Pending | 30 min | TBD |
+| Phase                    | Status     | Time   | Issues Fixed |
+| ------------------------ | ---------- | ------ | ------------ |
+| Phase 1: Automated Fixes | ⏳ Pending | 30 min | ~200         |
+| Phase 2: Visual Review   | ⏳ Pending | 1 hour | TBD          |
+| Phase 3: Cross-Component | ⏳ Pending | 30 min | TBD          |
+| Phase 4: Spec Comparison | ⏳ Pending | 30 min | TBD          |
 
 **Total Estimated Time:** 2.5 hours
 
@@ -244,4 +265,3 @@ yarn storybook
 
 **Last Updated:** 2025-01-XX  
 **Status:** ✅ Ready to begin styling fine-tuning
-

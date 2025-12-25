@@ -1,0 +1,57 @@
+{
+  "mcpServers": {
+    "orchestrator": {
+      "command": "python3",
+      "args": [
+        "/home/njd/careercopilot/careercopilot-1/servers/mcp-claude-orchestrator/mcp_claude_orchestrator.py"
+      ]
+    },
+    "gemini": {
+      "command": "python3",
+      "args": [
+        "/home/njd/careercopilot/careercopilot-1/servers/mcp-gemini-wrapper/mcp_gemini_wrapper.py"
+      ],
+      "env": {
+        "GEMINI_API_KEY": "your-api-key-here",
+        "GEMINI_MODEL": "gemini-3-pro-preview",
+        "_comment": "Set GEMINI_API_KEY in your shell environment before launching Claude Desktop, or replace 'your-api-key-here' with your actual key"
+      }
+    },
+    "documentation": {
+      "command": "python3",
+      "args": [
+        "/home/njd/careercopilot/careercopilot-1/.claude/mcp-servers/documentation-server.py"
+      ]
+    },
+    "configuration": {
+      "command": "python3",
+      "args": [
+        "/home/njd/careercopilot/careercopilot-1/.claude/mcp-servers/configuration-server.py"
+      ]
+    },
+    "genkit": {
+      "command": "python3",
+      "args": [
+        "/home/njd/careercopilot/careercopilot-1/.claude/mcp-servers/genkit-server.py"
+      ]
+    },
+    "contract-validator": {
+      "command": "python3",
+      "args": [
+        "/home/njd/careercopilot/careercopilot-1/.claude/mcp-servers/contract-validator-server.py"
+      ]
+    },
+    "design-system": {
+      "command": "python3",
+      "args": [
+        "/home/njd/careercopilot/careercopilot-1/.claude/mcp-servers/design-system-server.py"
+      ]
+    },
+    "firestore": {
+      "command": "python3",
+      "args": [
+        "/home/njd/careercopilot/careercopilot-1/.claude/mcp-servers/firestore-server.py"
+      ]
+    }
+  }
+}
