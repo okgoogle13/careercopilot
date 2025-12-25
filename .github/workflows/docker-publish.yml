@@ -56,18 +56,18 @@ jobs:
       # Google Cloud Registry (GCR) Flow
       # ============================================
       - name: Authenticate to Google Cloud
-        if: github.event.inputs.registry == 'gcr.io' || github.ref == 'refs/heads/main'
+        if: github.event.inputs.registry == 'gcr.io' || github.ref == 'refs/heads/main' || github.ref == 'refs/heads/chromebook' || github.ref == 'refs/heads/develop'
         uses: google-github-actions/auth@v2
         with:
           credentials_json: ${{ secrets.GCP_SA_KEY }}
       
       - name: Configure Docker for GCR
-        if: github.event.inputs.registry == 'gcr.io' || github.ref == 'refs/heads/main'
+        if: github.event.inputs.registry == 'gcr.io' || github.ref == 'refs/heads/main' || github.ref == 'refs/heads/chromebook' || github.ref == 'refs/heads/develop'
         run: |
           gcloud auth configure-docker gcr.io
       
       - name: Build and Push to GCR
-        if: github.event.inputs.registry == 'gcr.io' || github.ref == 'refs/heads/main'
+        if: github.event.inputs.registry == 'gcr.io' || github.ref == 'refs/heads/main' || github.ref == 'refs/heads/chromebook' || github.ref == 'refs/heads/develop'
         uses: docker/build-push-action@v5
         with:
           context: .
