@@ -1,4 +1,5 @@
-import { TrendingUp, Award, Target } from 'lucide-react';
+import { useState } from 'react';
+import { TrendingUp, Award, Target, Sparkles, Download } from 'lucide-react';
 import {
   LineChart,
   Line,
@@ -13,11 +14,17 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from 'recharts';
+import { toast } from 'sonner';
 import pileaPlant from '../../assets/images/pilea-plant.jpg';
 import { MetricCard } from '../../components/shared/MetricCard';
 import { KeywordTag } from '../../components/shared/KeywordTag';
 import { PageHeader } from '../../components/shared/PageHeader';
 import { ChartPane } from '../../components/shared/ChartPane';
+import { ImpactEnhancements } from '../../components/shared/ImpactEnhancements';
+import { Button } from '../../components/ui/button';
+import { Textarea } from '../../components/ui/textarea';
+import { useAnalysis } from '../../hooks/useAnalysis';
+import { exportToPdf } from '../../utils/exportEngine';
 
 // ============================================================================
 // TYPE DEFINITIONS
@@ -62,6 +69,7 @@ const CHART_COLORS = {
   surface: '#1C1B1F',   // surface-container-low
   onSurface: '#E6E1E5', // neutral-90
   grid: '#484649',      // neutral-30
+  heroHighlight: '#D0BCFF', // Electric Violet for hero moment
 };
 
 const APPLICATION_STATUS_DATA: ApplicationStatusData[] = [
@@ -107,8 +115,59 @@ const MISSING_KEYWORDS: string[] = [
 // ============================================================================
 
 export function Analysis() {
+  const { analyzeDocument, analyzing, result } = useAnalysis();
+  const [documentText, setDocumentText] = useState('');
+  const [jobDescription, setJobDescription] = useState('');
+  const [showInputs, setShowInputs] = useState(true);
+
+  const handleAnalyze = async () => {
+    if (!documentText || !jobDescription) {
+      toast.error('Please provide both resume and job description');
+      return;
+    }
+
+    toast.promise(
+      analyzeDocument(documentText, jobDescription),
+      {
+        loading: 'Analyzing with 4-Quadrant Intelligence...',
+        success: 'Analysis complete! Check your scores below.',
+        error: 'Analysis failed. Please try again.',
+      }
+    );
+    setShowInputs(false);
+  };
+
+  const handleDownloadAnalysis = async () => {
+    try {
+      await exportToPdf('analysis-content', 'Career_Analysis_Report.pdf');
+      toast.success('Analysis report downloaded!');
+    } catch (error) {
+      toast.error('Failed to download PDF');
+    }
+  };
+
+  // Get scores from result or use defaults
+  const scores = result?.score || {
+    overall: 87,
+    hardSkills: 85,
+    softSkills: 78,
+    impact: 92,
+    atsReadability: 88,
+  };
+
+  // Determine hero quadrant (highest score)
+  const quadrantScores = [
+    { name: 'Hard Skills', value: scores.hardSkills },
+    { name: 'Soft Skills', value: scores.softSkills },
+    { name: 'Impact', value: scores.impact },
+    { name: 'ATS', value: scores.atsReadability },
+  ];
+  const heroQuadrant = quadrantScores.reduce((max, q) =>
+    q.value > max.value ? q : max
+  );
+
   return (
-    <div className="p-6 md:p-12 max-w-7xl relative animate-in fade-in zoom-in-95 duration-500 ease-spring">
+    <div id="analysis-content" className="p-6 md:p-12 max-w-7xl relative animate-in fade-in zoom-in-95 duration-500 ease-spring">
       {/* Pilea Plant Decoration - Bottom Left Corner */}
       <div className="fixed bottom-0 left-0 lg:left-[280px] md:left-[72px] pointer-events-none w-[300px] z-[1] opacity-55 scale-x-[-1]">
         <img
@@ -125,35 +184,100 @@ export function Analysis() {
       </div>
 
       <div className="relative z-10">
-        {/* Header */}
-        <PageHeader
-          title="Performance Analysis"
-          highlightedWord="Analysis"
-          description="Track your job search performance and get insights"
-        />
+        {/* Header with Actions */}
+        <div className="flex items-center justify-between mb-8">
+          <PageHeader
+            title="Performance Analysis"
+            highlightedWord="Analysis"
+            description="AI-powered 4-Quadrant Intelligence System"
+          />
+          <Button
+            onClick={handleDownloadAnalysis}
+            variant="outline"
+            className="rounded-pebble px-6"
+          >
+            <Download className="w-4 h-4 mr-2" />
+            Export PDF
+          </Button>
+        </div>
 
-        {/* Top 3 Metric Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        {/* Intelligence Trigger UI */}
+        {showInputs && (
+          <div className="bg-surface-container rounded-leaf p-8 border border-outline-variant shadow-elevation-1 mb-8">
+            <div className="flex items-center gap-3 mb-6">
+              <Sparkles className="w-6 h-6 text-primary" />
+              <h2 className="text-title-large font-bold text-on-surface">
+                Run Intelligence Audit
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label className="block text-label-large font-bold text-on-surface mb-3">
+                  Your Resume / Profile
+                </label>
+                <Textarea
+                  value={documentText}
+                  onChange={(e) => setDocumentText(e.target.value)}
+                  placeholder="Paste your resume content here..."
+                  className="min-h-[200px] bg-surface-container-high rounded-tech"
+                />
+              </div>
+              <div>
+                <label className="block text-label-large font-bold text-on-surface mb-3">
+                  Target Job Description
+                </label>
+                <Textarea
+                  value={jobDescription}
+                  onChange={(e) => setJobDescription(e.target.value)}
+                  placeholder="Paste the job description here..."
+                  className="min-h-[200px] bg-surface-container-high rounded-tech"
+                />
+              </div>
+            </div>
+
+            <div className="flex justify-end mt-6">
+              <Button
+                onClick={handleAnalyze}
+                disabled={analyzing}
+                className="bg-primary-container text-on-primary-container hover:bg-primary hover:text-on-primary rounded-pebble px-8 h-12 font-bold"
+              >
+                <Sparkles className="w-5 h-5 mr-2" />
+                {analyzing ? 'Analyzing...' : 'Analyze with AI'}
+              </Button>
+            </div>
+          </div>
+        )}
+
+        {/* 4-Quadrant Metric Cards with Hero Highlighting */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
           <MetricCard
             icon={Award}
-            label="App ATS Score"
-            value="87%"
-            iconColor="text-primary"
-            variant="outlined"
+            label="Hard Skills Match"
+            value={`${scores.hardSkills}%`}
+            iconColor={heroQuadrant.name === 'Hard Skills' ? 'text-[#D0BCFF]' : 'text-primary'}
+            variant={heroQuadrant.name === 'Hard Skills' ? 'filled' : 'outlined'}
           />
           <MetricCard
             icon={TrendingUp}
-            label="Applications"
-            value="90"
-            iconColor="text-secondary"
-            variant="outlined"
+            label="Soft Skills & Verbs"
+            value={`${scores.softSkills}%`}
+            iconColor={heroQuadrant.name === 'Soft Skills' ? 'text-[#D0BCFF]' : 'text-secondary'}
+            variant={heroQuadrant.name === 'Soft Skills' ? 'filled' : 'outlined'}
           />
           <MetricCard
             icon={Target}
-            label="Success Rate"
-            value="45%"
-            iconColor="text-tertiary"
-            variant="outlined"
+            label="Quantifiable Impact"
+            value={`${scores.impact}%`}
+            iconColor={heroQuadrant.name === 'Impact' ? 'text-[#D0BCFF]' : 'text-tertiary'}
+            variant={heroQuadrant.name === 'Impact' ? 'filled' : 'outlined'}
+          />
+          <MetricCard
+            icon={Award}
+            label="ATS Readability"
+            value={`${scores.atsReadability}%`}
+            iconColor={heroQuadrant.name === 'ATS' ? 'text-[#D0BCFF]' : 'text-error'}
+            variant={heroQuadrant.name === 'ATS' ? 'filled' : 'outlined'}
           />
         </div>
 
@@ -326,6 +450,13 @@ export function Analysis() {
             </div>
           </div>
         </ChartPane>
+
+        {/* Impact Enhancements Section - The Quantifier */}
+        {result?.quantifiers && result.quantifiers.length > 0 && (
+          <div className="mt-8">
+            <ImpactEnhancements suggestions={result.quantifiers} />
+          </div>
+        )}
       </div>
     </div>
   );

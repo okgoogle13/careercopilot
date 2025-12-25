@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Search, FileText, Calendar } from 'lucide-react';
+import { Search, FileText, Calendar, Download } from 'lucide-react';
+import { exportToPdf } from '../../utils/exportEngine';
 import snakePlant from '../../assets/images/snake-plant.png';
 import { PageHeader } from '../../components/shared/PageHeader';
 
@@ -212,15 +213,39 @@ interface DocumentCardProps {
 }
 
 function DocumentCard({ document }: DocumentCardProps) {
+  const handleDownload = async (e: React.MouseEvent) => {
+    e.stopPropagation();
+    try {
+      // Generate unique ID for the document card
+      const elementId = `document-card-${document.id}`;
+      const fileName = `${document.name.replace(/\s+/g, '_')}.pdf`;
+      await exportToPdf(elementId, fileName);
+    } catch (error) {
+      console.error('Failed to download PDF:', error);
+    }
+  };
+
   return (
-    <div className="bg-surface-container-low border border-outline-variant rounded-leaf p-6 hover:bg-surface-container hover:border-primary hover:scale-[1.02] hover:shadow-elevation-2 transition-all duration-medium-1 ease-spring cursor-pointer group backdrop-blur-md">
+    <div
+      id={`document-card-${document.id}`}
+      className="bg-surface-container-low border border-outline-variant rounded-leaf p-6 hover:bg-surface-container hover:border-primary hover:scale-[1.02] hover:shadow-elevation-2 transition-all duration-medium-1 ease-spring cursor-pointer group backdrop-blur-md relative"
+    >
       <div className="w-12 h-12 bg-surface-container-high rounded-tech flex items-center justify-center text-2xl mb-4 group-hover:bg-primary-container group-hover:text-on-primary-container transition-colors">
         {document.icon}
       </div>
       <h4 className="text-on-surface mb-2 font-bold text-title-medium">{document.name}</h4>
-      <div className="flex items-center gap-2 text-on-surface-variant">
-        <Calendar className="w-4 h-4" />
-        <span className="uppercase tracking-wide text-label-small font-mono">{document.date}</span>
+      <div className="flex items-center justify-between gap-2">
+        <div className="flex items-center gap-2 text-on-surface-variant">
+          <Calendar className="w-4 h-4" />
+          <span className="uppercase tracking-wide text-label-small font-mono">{document.date}</span>
+        </div>
+        <button
+          onClick={handleDownload}
+          className="p-2 rounded-pebble bg-secondary-container text-on-secondary-container hover:bg-secondary hover:text-on-secondary transition-all opacity-0 group-hover:opacity-100"
+          title="Download as PDF"
+        >
+          <Download className="w-4 h-4" />
+        </button>
       </div>
     </div>
   );
