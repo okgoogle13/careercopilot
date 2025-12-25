@@ -9,6 +9,7 @@ import {
   Settings,
   Menu,
   X,
+  FolderOpen,
 } from 'lucide-react';
 import { useState } from 'react';
 
@@ -19,6 +20,7 @@ const mainNavItems = [
   { path: '/analysis', icon: BarChart3, label: 'Analysis' },
   { path: '/opportunities', icon: Briefcase, label: 'Opportunities' },
   { path: '/ksc-generator', icon: Sparkles, label: 'KSC Generator' },
+  { path: '/asset-library', icon: FolderOpen, label: 'Asset Library' },
 ];
 
 export function Sidebar() {
