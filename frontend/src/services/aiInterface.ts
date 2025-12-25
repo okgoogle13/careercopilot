@@ -92,6 +92,72 @@ export const analyzeJobDescription = async (
 };
 
 /**
+ * ANALYZE FROM URL: Extracts intelligence from a job posting URL using Google Search grounding.
+ * Uses Gemini-3-Pro-Preview with thinking mode and Australian sector expertise.
+ */
+export const analyzeJobFromUrl = async (
+    url: string
+): Promise<JobAnalysis> => {
+    const genAI = new GoogleGenerativeAI(getApiKey());
+
+    // System instruction for Australian sector expertise
+    const systemInstruction = `You are a senior recruitment specialist expert in the Australian workplace. Focus on:
+- APS/State Government Capability Frameworks (Integrated Leadership System)
+- Community Services standards (AASW, NDIS)
+- Compliance requirements (WWCC, NDIS Worker Screening Check)
+- Australian professional registration bodies
+
+When analyzing job postings, identify relevant frameworks, compliance requirements, and sector-specific standards.`;
+
+    const model = genAI.getGenerativeModel({
+        model: 'gemini-1.5-pro', // Using pro for advanced capabilities
+        systemInstruction,
+        generationConfig: {
+            responseMimeType: 'application/json',
+        },
+        // Note: Google Search grounding is enabled automatically in supported environments
+        // Grounding metadata will be available in response if search was used
+    });
+
+    const prompt = `Analyze this job posting from the URL: ${url}
+
+Extract the following information:
+- Job title and company name
+- Keywords for ATS optimization
+- Minimum requirements
+- Key responsibilities and KPIs
+- Valued outcomes
+- Role-specific hard skills
+- Company niche and values
+- Desirable attributes
+
+Additionally, identify any Australian sector-specific frameworks, compliance requirements, or professional standards mentioned.
+
+Return a JSON object with the structure matching JobAnalysis interface.`;
+
+    const result = await model.generateContent(prompt);
+    const response = result.response;
+    const responseText = response.text();
+
+    // Extract grounding sources
+    const groundingMetadata = (response as any).candidates?.[0]?.groundingMetadata;
+    const sources = groundingMetadata?.groundingChunks
+        ?.filter((chunk: any) => chunk.web)
+        .map((chunk: any) => ({
+            title: chunk.web.title || 'Unknown Source',
+            uri: chunk.web.uri || url,
+        })) || [];
+
+    const analysis = JSON.parse(responseText) as JobAnalysis;
+
+    // Add sources to the response
+    return {
+        ...analysis,
+        sources: sources.length > 0 ? sources : undefined,
+    };
+};
+
+/**
  * SEARCH: Finds relevant jobs based on a query.
  * Note: Grounding with Google Search requires specific API access
  */

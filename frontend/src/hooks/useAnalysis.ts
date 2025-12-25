@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 import type { AuditResponse, JobAnalysis, UserProfile } from '../types/intelligence';
-import { analyzeJobDescription, generateIntelligencePackage } from '../services/aiInterface';
+import { analyzeJobDescription, analyzeJobFromUrl, generateIntelligencePackage } from '../services/aiInterface';
 import { EXPERT_RESUME_AUDITOR_PROMPT } from '../services/prompts';
 
 /**
@@ -60,6 +60,20 @@ export function useAnalysis() {
             return analysis;
         } catch (error) {
             console.error('Job analysis failed:', error);
+            throw error;
+        }
+    }, []);
+
+    /**
+     * Analyze Job from URL - Extract intelligence with Google Search grounding
+     */
+    const analyzeJobUrl = useCallback(async (url: string): Promise<JobAnalysis> => {
+        try {
+            const analysis = await analyzeJobFromUrl(url);
+            setJobAnalysis(analysis);
+            return analysis;
+        } catch (error) {
+            console.error('Job URL analysis failed:', error);
             throw error;
         }
     }, []);
@@ -175,6 +189,7 @@ export function useAnalysis() {
     return {
         analyzeDocument,
         analyzeJob,
+        analyzeJobUrl,
         analyzing,
         result,
         jobAnalysis,
