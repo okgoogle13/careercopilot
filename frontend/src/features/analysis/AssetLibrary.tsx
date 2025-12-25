@@ -38,12 +38,6 @@ export function AssetLibrary() {
           <div
             key={asset.id}
             className="bg-surface-container rounded-tech p-6 hover:bg-surface-container-high transition-all cursor-pointer group shadow-elevation-1 hover:shadow-elevation-2"
-            style={{
-              backgroundImage: 'radial-gradient(circle, var(--sys-color-primary) 1px, transparent 1px)',
-              backgroundSize: '20px 20px',
-              backgroundBlendMode: 'overlay',
-              backgroundPosition: '0 0',
-            }}
           >
             {/* Icon */}
             <div className="flex items-center justify-center mb-4">
