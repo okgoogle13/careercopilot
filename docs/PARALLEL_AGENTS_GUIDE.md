@@ -29,11 +29,11 @@ CareerCopilot uses multiple approaches for parallel execution:
 
 ### When to Use Each Approach
 
-| Approach | Use Case | Example |
-|----------|----------|---------|
-| **AsyncIO (asyncio.gather)** | Independent tasks that can run simultaneously | Analyzing multiple job postings |
-| **Dependency-Based** | Tasks with prerequisites | Market analysis needs job data first |
-| **Multi-Instance** | Large-scale batch processing | Generating tests for 66 components |
+| Approach                     | Use Case                                      | Example                              |
+| ---------------------------- | --------------------------------------------- | ------------------------------------ |
+| **AsyncIO (asyncio.gather)** | Independent tasks that can run simultaneously | Analyzing multiple job postings      |
+| **Dependency-Based**         | Tasks with prerequisites                      | Market analysis needs job data first |
+| **Multi-Instance**           | Large-scale batch processing                  | Generating tests for 66 components   |
 
 ---
 
@@ -57,10 +57,10 @@ async def analyze_jobs_parallel(job_ids: List[str]) -> List[Dict[str, Any]]:
     """Analyze multiple jobs in parallel"""
     # Create tasks for all jobs
     tasks = [analyze_job(job_id) for job_id in job_ids]
-    
+
     # Run all tasks in parallel
     results = await asyncio.gather(*tasks)
-    
+
     return results
 
 # Usage
@@ -74,20 +74,20 @@ results = await analyze_jobs_parallel(job_ids)
 async def analyze_jobs_with_error_handling(job_ids: List[str]) -> List[Dict[str, Any]]:
     """Analyze jobs with graceful error handling"""
     tasks = [analyze_job(job_id) for job_id in job_ids]
-    
+
     # return_exceptions=True prevents one failure from stopping all tasks
     results = await asyncio.gather(*tasks, return_exceptions=True)
-    
+
     # Process results and handle errors
     successful_results = []
     errors = []
-    
+
     for i, result in enumerate(results):
         if isinstance(result, Exception):
             errors.append({"job_id": job_ids[i], "error": str(result)})
         else:
             successful_results.append(result)
-    
+
     return {
         "successful": successful_results,
         "errors": errors,
@@ -104,10 +104,10 @@ from asyncio import TaskGroup
 async def analyze_jobs_with_taskgroup(job_ids: List[str]) -> List[Dict[str, Any]]:
     """Use TaskGroup for better error handling and cancellation"""
     results = []
-    
+
     async with TaskGroup() as tg:
         tasks = [tg.create_task(analyze_job(job_id)) for job_id in job_ids]
-    
+
     # All tasks completed successfully if we reach here
     results = [task.result() for task in tasks]
     return results
@@ -119,14 +119,14 @@ async def analyze_jobs_with_taskgroup(job_ids: List[str]) -> List[Dict[str, Any]
 async def analyze_jobs_with_limit(job_ids: List[str], max_concurrent: int = 5) -> List[Dict[str, Any]]:
     """Limit number of concurrent tasks to avoid overwhelming resources"""
     semaphore = asyncio.Semaphore(max_concurrent)
-    
+
     async def analyze_with_semaphore(job_id: str):
         async with semaphore:
             return await analyze_job(job_id)
-    
+
     tasks = [analyze_with_semaphore(job_id) for job_id in job_ids]
     results = await asyncio.gather(*tasks)
-    
+
     return results
 ```
 
@@ -144,18 +144,18 @@ import asyncio
 
 class ParallelOrchestrator:
     """Run multiple independent agents in parallel"""
-    
+
     def __init__(self, agents: List[BaseAgent]):
         self.agents = agents
-    
+
     async def run_parallel(self, context: Dict[str, Any]) -> Dict[str, Any]:
         """Execute all agents simultaneously"""
         # Create tasks for all agents
         tasks = [agent.execute(context) for agent in self.agents]
-        
+
         # Run all in parallel
         results = await asyncio.gather(*tasks, return_exceptions=True)
-        
+
         # Collect results
         agent_results = {}
         for agent, result in zip(self.agents, results):
@@ -169,7 +169,7 @@ class ParallelOrchestrator:
                     "status": "completed",
                     "data": result
                 }
-        
+
         return {
             "execution_mode": "parallel",
             "agents_run": len(self.agents),
@@ -185,13 +185,13 @@ async def run_job_analysis():
         SkillTrendAgent(),
         CompanyResearchAgent()
     ]
-    
+
     orchestrator = ParallelOrchestrator(agents)
     results = await orchestrator.run_parallel({
         "user_id": "user_123",
         "search_criteria": {"role": "Software Engineer", "location": "Melbourne"}
     })
-    
+
     return results
 ```
 
@@ -202,36 +202,36 @@ This is the pattern used in `backend/app/agents/orchestrator.py`. Some agents de
 ```python
 class DependencyOrchestrator:
     """Execute agents respecting dependencies, parallelizing when possible"""
-    
+
     def __init__(self, agents: Dict[str, BaseAgent]):
         self.agents = agents
-    
+
     async def run_with_dependencies(self, context: Dict[str, Any]) -> Dict[str, Any]:
         """Execute agents in dependency order, parallelizing independent agents"""
         completed_agents = []
         results = {}
-        
+
         # Build dependency graph
         dependency_graph = self._build_dependency_graph()
-        
+
         # Execute in waves (each wave contains agents that can run in parallel)
         while len(completed_agents) < len(self.agents):
             # Find agents that can run now
             ready_agents = self._get_ready_agents(completed_agents)
-            
+
             if not ready_agents:
                 raise RuntimeError("Circular dependency detected or no agents ready")
-            
+
             # Run all ready agents in parallel
             agent_context = self._prepare_context(context, results)
             tasks = [
-                self.agents[agent_id].execute(agent_context) 
+                self.agents[agent_id].execute(agent_context)
                 for agent_id in ready_agents
             ]
-            
+
             # Execute this wave
             wave_results = await asyncio.gather(*tasks, return_exceptions=True)
-            
+
             # Process results
             for agent_id, result in zip(ready_agents, wave_results):
                 if isinstance(result, Exception):
@@ -239,13 +239,13 @@ class DependencyOrchestrator:
                 else:
                     results[agent_id] = result
                     completed_agents.append(agent_id)
-        
+
         return {
             "execution_mode": "dependency_based",
             "agents_completed": completed_agents,
             "results": results
         }
-    
+
     def _get_ready_agents(self, completed: List[str]) -> List[str]:
         """Get agents whose dependencies are satisfied"""
         ready = []
@@ -253,14 +253,14 @@ class DependencyOrchestrator:
             if agent_id not in completed and agent.can_run(completed):
                 ready.append(agent_id)
         return ready
-    
+
     def _prepare_context(self, base_context: Dict, results: Dict) -> Dict:
         """Prepare context with results from completed agents"""
         context = base_context.copy()
         for agent_id, result in results.items():
             context[f"{agent_id}_results"] = result
         return context
-    
+
     def _build_dependency_graph(self) -> Dict[str, List[str]]:
         """Build dependency graph for visualization"""
         graph = {}
@@ -276,7 +276,7 @@ Process many items in parallel, then aggregate results.
 ```python
 class MapReduceOrchestrator:
     """Process items in parallel (map), then aggregate (reduce)"""
-    
+
     async def map_reduce(
         self,
         items: List[Any],
@@ -286,7 +286,7 @@ class MapReduceOrchestrator:
     ) -> Any:
         """
         Map-reduce pattern for parallel processing
-        
+
         Args:
             items: List of items to process
             map_fn: Async function to process each item
@@ -295,23 +295,23 @@ class MapReduceOrchestrator:
         """
         # Map phase (parallel)
         semaphore = asyncio.Semaphore(max_concurrent)
-        
+
         async def map_with_semaphore(item):
             async with semaphore:
                 return await map_fn(item)
-        
+
         tasks = [map_with_semaphore(item) for item in items]
         mapped_results = await asyncio.gather(*tasks, return_exceptions=True)
-        
+
         # Filter out errors
         successful_results = [
-            r for r in mapped_results 
+            r for r in mapped_results
             if not isinstance(r, Exception)
         ]
-        
+
         # Reduce phase (sequential)
         final_result = reduce_fn(successful_results)
-        
+
         return {
             "total_items": len(items),
             "successful": len(successful_results),
@@ -322,23 +322,23 @@ class MapReduceOrchestrator:
 # Example: Analyze 100 job postings in parallel, then rank them
 async def analyze_and_rank_jobs(job_ids: List[str]):
     orchestrator = MapReduceOrchestrator()
-    
+
     async def analyze_job(job_id: str):
         # Analyze individual job
         return await job_analysis_agent.analyze(job_id)
-    
+
     def rank_jobs(analyses: List[Dict]):
         # Aggregate and rank
         sorted_jobs = sorted(analyses, key=lambda x: x['score'], reverse=True)
         return sorted_jobs[:10]  # Top 10
-    
+
     result = await orchestrator.map_reduce(
         items=job_ids,
         map_fn=analyze_job,
         reduce_fn=rank_jobs,
         max_concurrent=20
     )
-    
+
     return result
 ```
 
@@ -364,13 +364,13 @@ def create_component_batches(components: List[str], num_batches: int = 8) -> Lis
     """Split components into balanced batches"""
     batch_size = len(components) // num_batches
     batches = []
-    
+
     for i in range(num_batches):
         start_idx = i * batch_size
         end_idx = start_idx + batch_size if i < num_batches - 1 else len(components)
-        
+
         batch_components = components[start_idx:end_idx]
-        
+
         batches.append({
             "batch_id": i + 1,
             "batch_name": f"Batch {i + 1}",
@@ -379,7 +379,7 @@ def create_component_batches(components: List[str], num_batches: int = 8) -> Lis
             "estimated_tests": len(batch_components) * 15,  # ~15 tests per component
             "expected_duration_minutes": len(batch_components) * 8  # ~8 min per component
         })
-    
+
     return batches
 
 # Example usage
@@ -404,10 +404,10 @@ for batch in batches:
 def generate_delegation_prompt(batch: Dict) -> str:
     """Generate prompt for Jules instance"""
     components_list = "\n".join([
-        f"  {i+1}. {comp}" 
+        f"  {i+1}. {comp}"
         for i, comp in enumerate(batch['components'])
     ])
-    
+
     prompt = f"""
 You are testing Batch {batch['batch_id']} of React components for CareerCopilot.
 
@@ -450,7 +450,7 @@ TIMELINE:
 - Expected completion: {batch['expected_duration_minutes']} minutes
 - Report results when complete
 """
-    
+
     return prompt
 
 # Save prompts
@@ -464,6 +464,7 @@ for batch in batches:
 #### Step 3: Execute in Parallel
 
 **Manual Execution:**
+
 1. Open 8 separate Claude/Jules instances
 2. Copy prompt from `.ai_batches/batch_N_prompt.txt` into each instance
 3. Monitor progress across all instances
@@ -481,7 +482,7 @@ from mcp_client import MCPClient  # Your MCP client
 async def run_batch_on_jules(batch_id: int, prompt: str) -> Dict:
     """Run a single batch on a Jules instance via MCP"""
     client = MCPClient(instance_id=f"jules_{batch_id}")
-    
+
     try:
         result = await client.send_prompt(prompt)
         return {
@@ -499,20 +500,20 @@ async def run_batch_on_jules(batch_id: int, prompt: str) -> Dict:
 async def run_all_batches_parallel(batches: List[Dict]) -> List[Dict]:
     """Run all batches in parallel across multiple Jules instances"""
     tasks = []
-    
+
     for batch in batches:
         # Load prompt for this batch
         prompt_file = f".ai_batches/batch_{batch['batch_id']}_prompt.txt"
         with open(prompt_file, 'r') as f:
             prompt = f.read()
-        
+
         # Create task for this batch
         task = run_batch_on_jules(batch['batch_id'], prompt)
         tasks.append(task)
-    
+
     # Run all batches in parallel
     results = await asyncio.gather(*tasks, return_exceptions=True)
-    
+
     return results
 
 # Execute
@@ -534,7 +535,7 @@ def consolidate_batch_results(batch_results: List[Dict]) -> Dict:
     total_passed = 0
     total_failed = 0
     all_failures = []
-    
+
     for result in batch_results:
         if result['status'] == 'completed':
             batch_data = result['result']
@@ -543,9 +544,9 @@ def consolidate_batch_results(batch_results: List[Dict]) -> Dict:
             total_passed += batch_data.get('tests_passed', 0)
             total_failed += batch_data.get('tests_failed', 0)
             all_failures.extend(batch_data.get('failures', []))
-    
+
     pass_rate = (total_passed / total_tests * 100) if total_tests > 0 else 0
-    
+
     return {
         "summary": {
             "total_batches": len(batch_results),
@@ -563,7 +564,7 @@ def consolidate_batch_results(batch_results: List[Dict]) -> Dict:
 def analyze_common_failures(failures: List[Dict]) -> List[Dict]:
     """Identify patterns in failures"""
     failure_patterns = {}
-    
+
     for failure in failures:
         error_type = failure.get('error_type', 'unknown')
         if error_type not in failure_patterns:
@@ -571,18 +572,18 @@ def analyze_common_failures(failures: List[Dict]) -> List[Dict]:
                 "count": 0,
                 "examples": []
             }
-        
+
         failure_patterns[error_type]["count"] += 1
         if len(failure_patterns[error_type]["examples"]) < 3:
             failure_patterns[error_type]["examples"].append(failure)
-    
+
     # Sort by frequency
     sorted_patterns = sorted(
         failure_patterns.items(),
         key=lambda x: x[1]["count"],
         reverse=True
     )
-    
+
     return [
         {
             "error_type": error_type,
@@ -618,10 +619,10 @@ semaphore = asyncio.Semaphore(MAX_CONCURRENT_AI_CALLS)
 async def robust_parallel_execution(tasks: List[callable]) -> Dict:
     """Execute tasks with comprehensive error handling"""
     results = await asyncio.gather(*tasks, return_exceptions=True)
-    
+
     successful = []
     failed = []
-    
+
     for i, result in enumerate(results):
         if isinstance(result, Exception):
             failed.append({
@@ -631,7 +632,7 @@ async def robust_parallel_execution(tasks: List[callable]) -> Dict:
             })
         else:
             successful.append(result)
-    
+
     return {
         "successful_count": len(successful),
         "failed_count": len(failed),
@@ -649,13 +650,13 @@ from tqdm.asyncio import tqdm
 async def process_with_progress(items: List[Any], process_fn: callable):
     """Process items with progress bar"""
     tasks = [process_fn(item) for item in items]
-    
+
     # Use tqdm for progress tracking
     results = []
     for coro in tqdm.as_completed(tasks, total=len(tasks)):
         result = await coro
         results.append(result)
-    
+
     return results
 ```
 
@@ -684,13 +685,13 @@ logger = logging.getLogger(__name__)
 async def execute_with_metrics(agent: BaseAgent, context: Dict) -> Dict:
     """Execute agent with detailed metrics logging"""
     start_time = time.time()
-    
+
     logger.info(f"Starting agent: {agent.name}")
-    
+
     try:
         result = await agent.execute(context)
         duration = time.time() - start_time
-        
+
         logger.info(
             f"Agent {agent.name} completed in {duration:.2f}s",
             extra={
@@ -699,12 +700,12 @@ async def execute_with_metrics(agent: BaseAgent, context: Dict) -> Dict:
                 "status": "success"
             }
         )
-        
+
         return result
-        
+
     except Exception as e:
         duration = time.time() - start_time
-        
+
         logger.error(
             f"Agent {agent.name} failed after {duration:.2f}s: {e}",
             extra={
@@ -714,7 +715,7 @@ async def execute_with_metrics(agent: BaseAgent, context: Dict) -> Dict:
                 "error": str(e)
             }
         )
-        
+
         raise
 ```
 
@@ -735,10 +736,10 @@ async def fan_out_fan_in(items: List[Any]) -> Dict:
     # Fan-out
     tasks = [process_item(item) for item in items]
     results = await asyncio.gather(*tasks)
-    
+
     # Fan-in
     aggregated = aggregate_results(results)
-    
+
     return aggregated
 ```
 
@@ -750,10 +751,10 @@ Chain multiple processing stages:
 async def pipeline(data: Any, stages: List[callable]) -> Any:
     """Process data through multiple stages"""
     result = data
-    
+
     for stage in stages:
         result = await stage(result)
-    
+
     return result
 
 # Example: Job processing pipeline
@@ -764,7 +765,7 @@ async def process_job(job_data: Dict) -> Dict:
         calculate_match_score,
         generate_application_materials
     ]
-    
+
     return await pipeline(job_data, stages)
 ```
 
@@ -783,7 +784,7 @@ async def retry_with_backoff(
         except Exception as e:
             if attempt == max_retries - 1:
                 raise
-            
+
             delay = base_delay * (2 ** attempt)
             logger.warning(f"Attempt {attempt + 1} failed, retrying in {delay}s: {e}")
             await asyncio.sleep(delay)
@@ -798,6 +799,7 @@ async def retry_with_backoff(
 **Cause:** Trying to use `asyncio.run()` inside an already-running event loop.
 
 **Solution:**
+
 ```python
 # Instead of:
 result = asyncio.run(my_async_function())
@@ -815,6 +817,7 @@ result = loop.run_until_complete(my_async_function())
 **Cause:** Using sequential `await` instead of `gather()`.
 
 **Problem:**
+
 ```python
 # This runs sequentially (slow)
 result1 = await task1()
@@ -823,6 +826,7 @@ result3 = await task3()
 ```
 
 **Solution:**
+
 ```python
 # This runs in parallel (fast)
 results = await asyncio.gather(task1(), task2(), task3())
@@ -833,17 +837,18 @@ results = await asyncio.gather(task1(), task2(), task3())
 **Cause:** Creating too many tasks at once.
 
 **Solution:** Use semaphore or process in batches:
+
 ```python
 async def process_in_batches(items: List[Any], batch_size: int = 100):
     """Process items in batches to control memory"""
     results = []
-    
+
     for i in range(0, len(items), batch_size):
         batch = items[i:i + batch_size]
         batch_tasks = [process_item(item) for item in batch]
         batch_results = await asyncio.gather(*batch_tasks)
         results.extend(batch_results)
-    
+
     return results
 ```
 
@@ -852,17 +857,18 @@ async def process_in_batches(items: List[Any], batch_size: int = 100):
 **Cause:** All tasks waiting for the slowest one in `gather()`.
 
 **Solution:** Use `as_completed()` to process results as they finish:
+
 ```python
 async def process_as_completed(tasks: List[callable]):
     """Process results as they complete, don't wait for all"""
     results = []
-    
+
     for coro in asyncio.as_completed(tasks):
         result = await coro
         # Process result immediately
         results.append(result)
         logger.info(f"Completed {len(results)}/{len(tasks)} tasks")
-    
+
     return results
 ```
 
@@ -871,15 +877,18 @@ async def process_as_completed(tasks: List[callable]):
 ## References
 
 ### Related Documentation
+
 - `backend/app/agents/orchestrator.py` - Production agent orchestration
 - `.claude/skills/task-delegator/SKILL.md` - Multi-instance delegation
 - `SKILL_AGENT_MATRIX.md` - Agent and skill relationships
 
 ### Python AsyncIO Resources
+
 - [Python AsyncIO Documentation](https://docs.python.org/3/library/asyncio.html)
 - [Real Python AsyncIO Guide](https://realpython.com/async-io-python/)
 
 ### CareerCopilot Examples
+
 - **Parallel Job Analysis:** `JobScoutAgent` analyzing multiple jobs
 - **Dependency-Based:** `MarketAnalystAgent` depends on `JobScoutAgent`
 - **Multi-Instance:** Test generation across 8 Jules instances
@@ -943,6 +952,7 @@ python scripts/consolidate_batch_results.py
 ---
 
 **Next Steps:**
+
 1. Review `backend/app/agents/orchestrator.py` for production examples
 2. Experiment with `asyncio.gather()` for simple parallel tasks
 3. Implement dependency-based orchestration for complex workflows

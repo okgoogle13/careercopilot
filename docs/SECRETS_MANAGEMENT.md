@@ -78,35 +78,35 @@ cd backend && python -m uvicorn app.main:app --reload
 
 ### Critical Secrets (Required for Production)
 
-| Secret ID | Description | Format | Environment Variable |
-|-----------|-------------|--------|---------------------|
-| `gemini-api-key` | Google Gemini API Key | `AIzaSy...` | `GEMINI_API_KEY` |
-| `anthropic-api-key` | Anthropic Claude API Key | `sk-ant-api03-...` | `ANTHROPIC_API_KEY` |
-| `openai-api-key` | OpenAI API Key | `sk-proj-...` | `OPENAI_API_KEY` |
-| `jwt-secret-key` | JWT Secret Key | Min 32 chars | `JWT_SECRET_KEY` |
-| `database-url` | Database Connection | `postgresql://...` | `DATABASE_URL` |
-| `aws-access-key-id` | AWS Access Key ID | 20 chars | `AWS_ACCESS_KEY_ID` |
-| `aws-secret-access-key` | AWS Secret Access Key | 40 chars | `AWS_SECRET_ACCESS_KEY` |
-| `ses-sender-email` | SES Verified Email | email address | `SES_SENDER_EMAIL` |
+| Secret ID               | Description              | Format             | Environment Variable    |
+| ----------------------- | ------------------------ | ------------------ | ----------------------- |
+| `gemini-api-key`        | Google Gemini API Key    | `AIzaSy...`        | `GEMINI_API_KEY`        |
+| `anthropic-api-key`     | Anthropic Claude API Key | `sk-ant-api03-...` | `ANTHROPIC_API_KEY`     |
+| `openai-api-key`        | OpenAI API Key           | `sk-proj-...`      | `OPENAI_API_KEY`        |
+| `jwt-secret-key`        | JWT Secret Key           | Min 32 chars       | `JWT_SECRET_KEY`        |
+| `database-url`          | Database Connection      | `postgresql://...` | `DATABASE_URL`          |
+| `aws-access-key-id`     | AWS Access Key ID        | 20 chars           | `AWS_ACCESS_KEY_ID`     |
+| `aws-secret-access-key` | AWS Secret Access Key    | 40 chars           | `AWS_SECRET_ACCESS_KEY` |
+| `ses-sender-email`      | SES Verified Email       | email address      | `SES_SENDER_EMAIL`      |
 
 ### GitHub Secrets (CI/CD)
 
-| Secret | Purpose | Environment |
-|--------|---------|-------------|
-| `GCP_PROJECT_ID` | Production GCP project | Repository |
-| `GCP_STAGING_PROJECT_ID` | Staging GCP project | Staging Env |
-| `FIREBASE_SERVICE_ACCOUNT_CAREERCOPILOT` | Production Firebase | Repository |
-| `FIREBASE_SERVICE_ACCOUNT_CAREERCOPILOT_STAGING` | Staging Firebase | Staging Env |
-| `TC_CLOUD_TOKEN` | Testcontainers Cloud | Repository |
-| `CODECOV_TOKEN` | Code coverage (optional) | Repository |
+| Secret                                           | Purpose                  | Environment |
+| ------------------------------------------------ | ------------------------ | ----------- |
+| `GCP_PROJECT_ID`                                 | Production GCP project   | Repository  |
+| `GCP_STAGING_PROJECT_ID`                         | Staging GCP project      | Staging Env |
+| `FIREBASE_SERVICE_ACCOUNT_CAREERCOPILOT`         | Production Firebase      | Repository  |
+| `FIREBASE_SERVICE_ACCOUNT_CAREERCOPILOT_STAGING` | Staging Firebase         | Staging Env |
+| `TC_CLOUD_TOKEN`                                 | Testcontainers Cloud     | Repository  |
+| `CODECOV_TOKEN`                                  | Code coverage (optional) | Repository  |
 
 ### Optional Secrets
 
-| Secret | Description | Purpose |
-|--------|-------------|---------|
-| `perplexity-api-key` | Perplexity AI API | Search augmentation |
-| `redis-password` | Redis password | Caching (if used) |
-| `GOOGLE_OAUTH_CLIENT_ID_*` | OAuth clients | Authentication |
+| Secret                     | Description       | Purpose             |
+| -------------------------- | ----------------- | ------------------- |
+| `perplexity-api-key`       | Perplexity AI API | Search augmentation |
+| `redis-password`           | Redis password    | Caching (if used)   |
+| `GOOGLE_OAUTH_CLIENT_ID_*` | OAuth clients     | Authentication      |
 
 ---
 
@@ -115,11 +115,13 @@ cd backend && python -m uvicorn app.main:app --reload
 ### GitHub Secrets Setup
 
 **Automated Setup:**
+
 ```bash
 ./scripts/setup-secrets.sh github production
 ```
 
 **Manual Setup:**
+
 ```bash
 # Install GitHub CLI
 brew install gh
@@ -133,6 +135,7 @@ gh secret set GCP_PROJECT_ID --body "careercopilot-468811"
 ```
 
 **Environment-Specific Secrets:**
+
 - **Repository Level**: Base secrets for all environments
 - **Staging Environment**: Staging-specific secrets
 - **Production Environment**: Production secrets with protection rules
@@ -140,11 +143,13 @@ gh secret set GCP_PROJECT_ID --body "careercopilot-468811"
 ### Google Cloud Secret Manager Setup
 
 **Automated Setup:**
+
 ```bash
 ./scripts/setup-secrets.sh gcp production
 ```
 
 **Manual Setup:**
+
 ```bash
 # Set project
 gcloud config set project careercopilot-468811
@@ -164,11 +169,13 @@ gcloud secrets add-iam-policy-binding SECRET_NAME \
 ### AWS SES Configuration
 
 **Setup for Both Platforms:**
+
 ```bash
 ./scripts/setup-secrets.sh aws-ses all
 ```
 
 **Manual Verification:**
+
 ```bash
 # Check AWS SES verification
 aws ses get-identity-verification-attributes --identities your-email@gmail.com
@@ -215,12 +222,12 @@ gcloud projects add-iam-policy-binding careercopilot-468811 \
 
 ### 4. Regular Rotation
 
-| Secret Type | Rotation Frequency |
-|-------------|-------------------|
-| API Keys | Every 90 days |
-| Database Passwords | Every 180 days |
-| JWT Secrets | Every 365 days |
-| Service Account Keys | Every 90 days |
+| Secret Type          | Rotation Frequency |
+| -------------------- | ------------------ |
+| API Keys             | Every 90 days      |
+| Database Passwords   | Every 180 days     |
+| JWT Secrets          | Every 365 days     |
+| Service Account Keys | Every 90 days      |
 
 ### 5. Monitoring and Auditing
 
@@ -242,20 +249,23 @@ grep -r "sk-" . --exclude-dir=.git --exclude-dir=node_modules
 ### If Secrets Are Compromised
 
 1. **Immediate Revocation**:
+
    ```bash
    # GitHub
    gh secret delete SECRET_NAME
-   
+
    # GCP
    gcloud secrets versions delete VERSION_ID --secret=SECRET_NAME
    ```
 
 2. **Generate New Secrets**:
+
    ```bash
    ./scripts/setup-secrets.sh all production --from-env
    ```
 
 3. **Update All Environments**:
+
    ```bash
    ./scripts/validate-secrets.sh all production
    ```
@@ -268,6 +278,7 @@ grep -r "sk-" . --exclude-dir=.git --exclude-dir=node_modules
 ### If Secrets Are Accidentally Committed
 
 1. **Remove from Repository**:
+
    ```bash
    git filter-branch --force --index-filter \
      'git rm --cached --ignore-unmatch path/to/secret' \
@@ -275,6 +286,7 @@ grep -r "sk-" . --exclude-dir=.git --exclude-dir=node_modules
    ```
 
 2. **Force Push**:
+
    ```bash
    git push origin --force --all
    ```
@@ -334,6 +346,7 @@ git grep -i "sk-\|aiza\|gocsp" -- :!*.md :!*.txt
 
 **Cause**: Service account lacks proper permissions  
 **Solution**:
+
 ```bash
 SERVICE_ACCOUNT="careercopilot-backend@careercopilot-468811.iam.gserviceaccount.com"
 gcloud secrets add-iam-policy-binding SECRET_NAME \
@@ -345,6 +358,7 @@ gcloud secrets add-iam-policy-binding SECRET_NAME \
 
 **Cause**: Secret not set at correct environment level  
 **Solution**:
+
 ```bash
 # Check repository level
 gh secret list --repo okgoogle13/careercopilot
@@ -357,6 +371,7 @@ gh secret list --repo okgoogle13/careercopilot --env staging
 
 **Cause**: Gmail not verified or sandbox mode  
 **Solution**:
+
 ```bash
 # Check verification status
 aws ses get-identity-verification-attributes --identities your-email@gmail.com
@@ -369,6 +384,7 @@ aws ses request-production-access
 
 **Cause**: Expired or rotated API keys  
 **Solution**:
+
 ```bash
 # Validate all secrets
 ./scripts/validate-secrets.sh all production
@@ -421,12 +437,12 @@ python3 scripts/test-configuration.py
 
 ## 📞 Emergency Contacts
 
-| Service | Action | Contact |
-|---------|--------|---------|
-| GitHub | Revoke secrets | GitHub Security Settings |
-| Google Cloud | Revoke credentials | GCP Console → IAM |
-| AWS | Revoke access keys | AWS IAM Console |
-| Firebase | Revoke service accounts | Firebase Console |
+| Service      | Action                  | Contact                  |
+| ------------ | ----------------------- | ------------------------ |
+| GitHub       | Revoke secrets          | GitHub Security Settings |
+| Google Cloud | Revoke credentials      | GCP Console → IAM        |
+| AWS          | Revoke access keys      | AWS IAM Console          |
+| Firebase     | Revoke service accounts | Firebase Console         |
 
 ---
 

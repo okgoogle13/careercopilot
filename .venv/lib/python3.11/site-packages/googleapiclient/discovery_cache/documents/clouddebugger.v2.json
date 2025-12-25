@@ -32,14 +32,8 @@
   "parameters": {
     "$.xgafv": {
       "description": "V1 error format.",
-      "enum": [
-        "1",
-        "2"
-      ],
-      "enumDescriptions": [
-        "v1 error format",
-        "v2 error format"
-      ],
+      "enum": ["1", "2"],
+      "enumDescriptions": ["v1 error format", "v2 error format"],
       "location": "query",
       "type": "string"
     },
@@ -51,11 +45,7 @@
     "alt": {
       "default": "json",
       "description": "Data format for response.",
-      "enum": [
-        "json",
-        "media",
-        "proto"
-      ],
+      "enum": ["json", "media", "proto"],
       "enumDescriptions": [
         "Responses with Content-Type of application/json",
         "Media download with context-dependent Content-Type",
@@ -140,9 +130,7 @@
                   "flatPath": "v2/controller/debuggees/{debuggeeId}/breakpoints",
                   "httpMethod": "GET",
                   "id": "clouddebugger.controller.debuggees.breakpoints.list",
-                  "parameterOrder": [
-                    "debuggeeId"
-                  ],
+                  "parameterOrder": ["debuggeeId"],
                   "parameters": {
                     "agentId": {
                       "description": "Identifies the agent. This is the ID returned in the RegisterDebuggee response.",
@@ -180,10 +168,7 @@
                   "flatPath": "v2/controller/debuggees/{debuggeeId}/breakpoints/{id}",
                   "httpMethod": "PUT",
                   "id": "clouddebugger.controller.debuggees.breakpoints.update",
-                  "parameterOrder": [
-                    "debuggeeId",
-                    "id"
-                  ],
+                  "parameterOrder": ["debuggeeId", "id"],
                   "parameters": {
                     "debuggeeId": {
                       "description": "Required. Identifies the debuggee being debugged.",
@@ -261,10 +246,7 @@
                   "flatPath": "v2/debugger/debuggees/{debuggeeId}/breakpoints/{breakpointId}",
                   "httpMethod": "DELETE",
                   "id": "clouddebugger.debugger.debuggees.breakpoints.delete",
-                  "parameterOrder": [
-                    "debuggeeId",
-                    "breakpointId"
-                  ],
+                  "parameterOrder": ["debuggeeId", "breakpointId"],
                   "parameters": {
                     "breakpointId": {
                       "description": "Required. ID of the breakpoint to delete.",
@@ -298,10 +280,7 @@
                   "flatPath": "v2/debugger/debuggees/{debuggeeId}/breakpoints/{breakpointId}",
                   "httpMethod": "GET",
                   "id": "clouddebugger.debugger.debuggees.breakpoints.get",
-                  "parameterOrder": [
-                    "debuggeeId",
-                    "breakpointId"
-                  ],
+                  "parameterOrder": ["debuggeeId", "breakpointId"],
                   "parameters": {
                     "breakpointId": {
                       "description": "Required. ID of the breakpoint to get.",
@@ -335,16 +314,11 @@
                   "flatPath": "v2/debugger/debuggees/{debuggeeId}/breakpoints",
                   "httpMethod": "GET",
                   "id": "clouddebugger.debugger.debuggees.breakpoints.list",
-                  "parameterOrder": [
-                    "debuggeeId"
-                  ],
+                  "parameterOrder": ["debuggeeId"],
                   "parameters": {
                     "action.value": {
                       "description": "Only breakpoints with the specified action will pass the filter.",
-                      "enum": [
-                        "CAPTURE",
-                        "LOG"
-                      ],
+                      "enum": ["CAPTURE", "LOG"],
                       "enumDescriptions": [
                         "Capture stack frame and variables and update the breakpoint. The data is only captured once. After that the breakpoint is set in a final state.",
                         "Log each breakpoint hit. The breakpoint remains active until deleted or expired."
@@ -399,9 +373,7 @@
                   "flatPath": "v2/debugger/debuggees/{debuggeeId}/breakpoints/set",
                   "httpMethod": "POST",
                   "id": "clouddebugger.debugger.debuggees.breakpoints.set",
-                  "parameterOrder": [
-                    "debuggeeId"
-                  ],
+                  "parameterOrder": ["debuggeeId"],
                   "parameters": {
                     "canaryOption": {
                       "description": "The canary option set by the user upon setting breakpoint.",
@@ -458,12 +430,7 @@
       "properties": {
         "kind": {
           "description": "The alias kind.",
-          "enum": [
-            "ANY",
-            "FIXED",
-            "MOVABLE",
-            "OTHER"
-          ],
+          "enum": ["ANY", "FIXED", "MOVABLE", "OTHER"],
           "enumDescriptions": [
             "Do not use.",
             "Git tag",
@@ -485,10 +452,7 @@
       "properties": {
         "action": {
           "description": "Action that the agent should perform when the code at the breakpoint location is hit.",
-          "enum": [
-            "CAPTURE",
-            "LOG"
-          ],
+          "enum": ["CAPTURE", "LOG"],
           "enumDescriptions": [
             "Capture stack frame and variables and update the breakpoint. The data is only captured once. After that the breakpoint is set in a final state.",
             "Log each breakpoint hit. The breakpoint remains active until deleted or expired."
@@ -549,11 +513,7 @@
         },
         "logLevel": {
           "description": "Indicates the severity of the log. Only relevant when action is `LOG`.",
-          "enum": [
-            "INFO",
-            "WARNING",
-            "ERROR"
-          ],
+          "enum": ["INFO", "WARNING", "ERROR"],
           "enumDescriptions": [
             "Information log message.",
             "Warning log message.",

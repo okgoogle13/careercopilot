@@ -67,7 +67,7 @@ const formatRelativeTime = (date: Date | string): string => {
   const then = typeof date === 'string' ? new Date(date) : date;
   const diffMs = now.getTime() - then.getTime();
   const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-  
+
   if (diffDays === 0) return 'today';
   if (diffDays === 1) return '1 day ago';
   if (diffDays < 7) return `${diffDays} days ago`;
@@ -100,7 +100,7 @@ export const JobCard: React.FC<JobCardProps> = ({
     if (!job.salary) return null;
     const { min, max, currency, period } = job.salary;
     const periodText = period === 'hourly' ? '/hr' : '/year';
-    
+
     if (min === max) {
       return `${currency}${min.toLocaleString()}${periodText}`;
     }
@@ -146,24 +146,43 @@ export const JobCard: React.FC<JobCardProps> = ({
           <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             <Box sx={{ flex: 1, minWidth: 0 }}>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 0.5 }}>
-                <Typography variant="body2" sx={{ fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                <Typography
+                  variant="body2"
+                  sx={{
+                    fontWeight: 600,
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                    whiteSpace: 'nowrap',
+                  }}
+                >
                   {job.title}
                 </Typography>
-                {job.verified && <Shield size={16} color="#60a5fa" />}
+                {job.verified && (
+                  <Shield
+                    size={16}
+                    color="#60a5fa"
+                  />
+                )}
               </Box>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, color: 'text.secondary' }}>
                 <Building size={12} />
-                <Typography variant="caption" sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                <Typography
+                  variant="caption"
+                  sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}
+                >
                   {job.company}
                 </Typography>
                 <Typography variant="caption">•</Typography>
                 <MapPin size={12} />
-                <Typography variant="caption" sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                <Typography
+                  variant="caption"
+                  sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}
+                >
                   {job.location}
                 </Typography>
               </Box>
             </Box>
-            
+
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, ml: 2 }}>
               {job.aiMatch && (
                 <Chip
@@ -219,7 +238,9 @@ export const JobCard: React.FC<JobCardProps> = ({
     >
       <CardContent sx={{ flex: 1, p: 3 }}>
         {/* Header */}
-        <Box sx={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', mb: 2 }}>
+        <Box
+          sx={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', mb: 2 }}
+        >
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
             <Box
               sx={{
@@ -233,17 +254,30 @@ export const JobCard: React.FC<JobCardProps> = ({
               }}
             >
               {job.logoUrl ? (
-                <img src={job.logoUrl} alt={job.company} style={{ width: 32, height: 32, borderRadius: 8 }} />
+                <img
+                  src={job.logoUrl}
+                  alt={job.company}
+                  style={{ width: 32, height: 32, borderRadius: 8 }}
+                />
               ) : (
                 <Building size={24} />
               )}
             </Box>
             <Box>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                <Typography variant="body2" sx={{ fontWeight: 600 }} color="text.secondary">
+                <Typography
+                  variant="body2"
+                  sx={{ fontWeight: 600 }}
+                  color="text.secondary"
+                >
                   {job.company}
                 </Typography>
-                {job.verified && <Shield size={16} color="#60a5fa" />}
+                {job.verified && (
+                  <Shield
+                    size={16}
+                    color="#60a5fa"
+                  />
+                )}
                 {job.sponsored && (
                   <Chip
                     label="Sponsored"
@@ -257,7 +291,10 @@ export const JobCard: React.FC<JobCardProps> = ({
                   />
                 )}
               </Box>
-              <Typography variant="caption" color="text.secondary">
+              <Typography
+                variant="caption"
+                color="text.secondary"
+              >
                 {job.industry} • {job.companySize}
               </Typography>
             </Box>
@@ -279,12 +316,15 @@ export const JobCard: React.FC<JobCardProps> = ({
                 >
                   {job.aiMatch.score}%
                 </Typography>
-                <Typography variant="caption" color="text.secondary">
+                <Typography
+                  variant="caption"
+                  color="text.secondary"
+                >
                   AI Match
                 </Typography>
               </Box>
             )}
-            
+
             <IconButton
               size="small"
               onClick={handleSave}
@@ -297,28 +337,40 @@ export const JobCard: React.FC<JobCardProps> = ({
           </Box>
         </Box>
 
-        <Typography variant="h6" sx={{ fontWeight: 600, mb: 2 }}>
+        <Typography
+          variant="h6"
+          sx={{ fontWeight: 600, mb: 2 }}
+        >
           {job.title}
         </Typography>
 
         <Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 2, mb: 2 }}>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
             <MapPin size={16} />
-            <Typography variant="body2" color="text.secondary">
+            <Typography
+              variant="body2"
+              color="text.secondary"
+            >
               {job.location}
             </Typography>
           </Box>
-          
+
           {job.salary && (
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
               <DollarSign size={16} />
-              <Typography variant="body2" color="text.secondary">
+              <Typography
+                variant="body2"
+                color="text.secondary"
+              >
                 {formatSalary()}
               </Typography>
             </Box>
           )}
-          
-          <Typography variant="body2" color="text.secondary">
+
+          <Typography
+            variant="body2"
+            color="text.secondary"
+          >
             Posted {formatRelativeTime(job.postedDate)}
           </Typography>
         </Box>
@@ -341,7 +393,11 @@ export const JobCard: React.FC<JobCardProps> = ({
 
         {/* Job Type & Experience Level */}
         <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, mb: 3 }}>
-          <Chip label={job.type.replace('-', ' ').toUpperCase()} size="small" variant="outlined" />
+          <Chip
+            label={job.type.replace('-', ' ').toUpperCase()}
+            size="small"
+            variant="outlined"
+          />
           <Chip
             label={`${job.experienceLevel.toUpperCase()} LEVEL`}
             size="small"
@@ -367,15 +423,26 @@ export const JobCard: React.FC<JobCardProps> = ({
         {/* Skills */}
         {job.skills.length > 0 && (
           <Box sx={{ mb: 3 }}>
-            <Typography variant="body2" sx={{ fontWeight: 600, mb: 1 }}>
+            <Typography
+              variant="body2"
+              sx={{ fontWeight: 600, mb: 1 }}
+            >
               Required Skills
             </Typography>
             <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
               {job.skills.slice(0, 6).map((skill, index) => (
-                <Chip key={index} label={skill} size="small" />
+                <Chip
+                  key={index}
+                  label={skill}
+                  size="small"
+                />
               ))}
               {job.skills.length > 6 && (
-                <Chip label={`+${job.skills.length - 6} more`} size="small" variant="outlined" />
+                <Chip
+                  label={`+${job.skills.length - 6} more`}
+                  size="small"
+                  variant="outlined"
+                />
               )}
             </Box>
           </Box>
@@ -394,12 +461,21 @@ export const JobCard: React.FC<JobCardProps> = ({
             }}
           >
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
-              <Zap size={16} color="#A78BFA" />
-              <Typography variant="body2" sx={{ fontWeight: 600, color: 'primary.main' }}>
+              <Zap
+                size={16}
+                color="#A78BFA"
+              />
+              <Typography
+                variant="body2"
+                sx={{ fontWeight: 600, color: 'primary.main' }}
+              >
                 Why this matches you
               </Typography>
             </Box>
-            <Box component="ul" sx={{ m: 0, pl: 2, '& li': { mb: 0.5 } }}>
+            <Box
+              component="ul"
+              sx={{ m: 0, pl: 2, '& li': { mb: 0.5 } }}
+            >
               {job.aiMatch.reasons.slice(0, 3).map((reason, index) => (
                 <Box
                   component="li"
@@ -411,8 +487,15 @@ export const JobCard: React.FC<JobCardProps> = ({
                     listStyle: 'none',
                   }}
                 >
-                  <Star size={12} color="#A78BFA" style={{ marginTop: 4, flexShrink: 0 }} />
-                  <Typography variant="caption" color="text.secondary">
+                  <Star
+                    size={12}
+                    color="#A78BFA"
+                    style={{ marginTop: 4, flexShrink: 0 }}
+                  />
+                  <Typography
+                    variant="caption"
+                    color="text.secondary"
+                  >
                     {reason}
                   </Typography>
                 </Box>
@@ -446,7 +529,7 @@ export const JobCard: React.FC<JobCardProps> = ({
             Apply Now
           </Button>
         )}
-        
+
         <Button
           variant="outlined"
           endIcon={<ExternalLink size={16} />}

@@ -24,114 +24,79 @@ This skill implements M3 Expressive background principles:
 ### 1. Layered Gradients (Not Flat Solids)
 
 **Anti-Pattern (Boring, Flat):**
+
 ```css
 /* ❌ Solid color - no depth */
 .page-background {
-  background-color: #FFFFFF;
+  background-color: #ffffff;
 }
 ```
 
 **M3 Expressive (Layered Depth):**
+
 ```css
 /* ✅ Multi-layer gradient - atmospheric */
 .page-background {
   background:
     /* Layer 1: Subtle radial gradient (top-left glow) */
-    radial-gradient(
-      circle at 20% 20%,
-      rgba(var(--sys-color-primary-rgb), 0.08) 0%,
-      transparent 50%
-    ),
-    /* Layer 2: Diagonal gradient (depth) */
-    linear-gradient(
-      135deg,
-      rgba(var(--sys-color-secondary-rgb), 0.03) 0%,
-      transparent 50%,
-      rgba(var(--sys-color-tertiary-rgb), 0.05) 100%
-    ),
-    /* Layer 3: Base color */
-    var(--sys-color-surface);
+    radial-gradient(circle at 20% 20%, rgba(var(--sys-color-primary-rgb), 0.08) 0%, transparent 50%),
+    /* Layer 2: Diagonal gradient (depth) */ linear-gradient(135deg, rgba(var(--sys-color-secondary-rgb), 0.03) 0%, transparent 50%, rgba(var(--sys-color-tertiary-rgb), 0.05) 100%),
+    /* Layer 3: Base color */ var(--sys-color-surface);
 }
 ```
 
 **Gradient Complexity Levels:**
 
-| Level | Layers | Opacity | Use Case |
-|-------|--------|---------|----------|
-| Subtle | 2 | 0.03-0.05 | Business apps, SaaS platforms |
-| Moderate | 3-4 | 0.05-0.10 | Creative tools, social apps |
-| Bold | 5+ | 0.10-0.20 | Marketing sites, landing pages |
+| Level    | Layers | Opacity   | Use Case                       |
+| -------- | ------ | --------- | ------------------------------ |
+| Subtle   | 2      | 0.03-0.05 | Business apps, SaaS platforms  |
+| Moderate | 3-4    | 0.05-0.10 | Creative tools, social apps    |
+| Bold     | 5+     | 0.10-0.20 | Marketing sites, landing pages |
 
 ---
 
 ### 2. Geometric Patterns (Visual Texture)
 
 **Grid Pattern (Subtle Tech Aesthetic):**
+
 ```css
 .background-grid {
   background-color: var(--sys-color-surface);
   background-image:
     /* Vertical lines */
-    linear-gradient(
-      90deg,
-      rgba(var(--sys-color-on-surface-rgb), 0.02) 1px,
-      transparent 1px
-    ),
-    /* Horizontal lines */
-    linear-gradient(
-      0deg,
-      rgba(var(--sys-color-on-surface-rgb), 0.02) 1px,
-      transparent 1px
-    );
+    linear-gradient(90deg, rgba(var(--sys-color-on-surface-rgb), 0.02) 1px, transparent 1px),
+    /* Horizontal lines */ linear-gradient(0deg, rgba(var(--sys-color-on-surface-rgb), 0.02) 1px, transparent 1px);
   background-size: 40px 40px;
 }
 ```
 
 **Dot Pattern (Playful, Textured):**
+
 ```css
 .background-dots {
   background-color: var(--sys-color-surface);
-  background-image: radial-gradient(
-    circle,
-    rgba(var(--sys-color-primary-rgb), 0.08) 1px,
-    transparent 1px
-  );
+  background-image: radial-gradient(circle, rgba(var(--sys-color-primary-rgb), 0.08) 1px, transparent 1px);
   background-size: 24px 24px;
 }
 ```
 
 **Diagonal Stripes (Dynamic, Energetic):**
+
 ```css
 .background-stripes {
-  background:
-    repeating-linear-gradient(
-      45deg,
-      var(--sys-color-surface) 0px,
-      var(--sys-color-surface) 20px,
-      rgba(var(--sys-color-primary-rgb), 0.02) 20px,
-      rgba(var(--sys-color-primary-rgb), 0.02) 40px
-    );
+  background: repeating-linear-gradient(45deg, var(--sys-color-surface) 0px, var(--sys-color-surface) 20px, rgba(var(--sys-color-primary-rgb), 0.02) 20px, rgba(var(--sys-color-primary-rgb), 0.02) 40px);
 }
 ```
 
 **Organic Blob (Soft, Premium):**
+
 ```css
 .background-organic {
   background:
     /* Blob 1: Top-right */
-    radial-gradient(
-      ellipse 800px 600px at 80% 10%,
-      rgba(var(--sys-color-primary-rgb), 0.10),
-      transparent
-    ),
-    /* Blob 2: Bottom-left */
-    radial-gradient(
-      ellipse 600px 800px at 20% 90%,
-      rgba(var(--sys-color-secondary-rgb), 0.08),
-      transparent
-    ),
-    /* Base */
-    var(--sys-color-surface);
+    radial-gradient(ellipse 800px 600px at 80% 10%, rgba(var(--sys-color-primary-rgb), 0.1), transparent),
+    /* Blob 2: Bottom-left */ radial-gradient(ellipse 600px 800px at 20% 90%, rgba(var(--sys-color-secondary-rgb), 0.08), transparent),
+    /* Base */ var(--sys-color-surface);
 }
 ```
 
@@ -140,78 +105,47 @@ This skill implements M3 Expressive background principles:
 ### 3. Contextual Effects (Match Aesthetic)
 
 #### Playful & Energetic (Social Apps)
+
 ```css
 .background-playful {
   background:
     /* Bold gradient overlay */
-    linear-gradient(
-      135deg,
-      rgba(233, 30, 99, 0.15) 0%,   /* Magenta */
-      rgba(0, 188, 212, 0.15) 100%  /* Cyan */
-    ),
-    /* Dot pattern */
-    radial-gradient(
-      circle,
-      rgba(205, 220, 57, 0.10) 2px, /* Lime */
-      transparent 2px
-    ),
-    /* Base */
-    #FFFFFF;
-  background-size: auto, 32px 32px;
+    linear-gradient(135deg, rgba(233, 30, 99, 0.15) 0%, /* Magenta */ rgba(0, 188, 212, 0.15) 100% /* Cyan */),
+    /* Dot pattern */ radial-gradient(circle, rgba(205, 220, 57, 0.1) 2px, /* Lime */ transparent 2px),
+    /* Base */ #ffffff;
+  background-size:
+    auto,
+    32px 32px;
 }
 ```
 
 #### Confident & Professional (SaaS Platforms)
+
 ```css
 .background-professional {
   background:
     /* Subtle radial glow (top-left) */
-    radial-gradient(
-      circle at 15% 15%,
-      rgba(0, 137, 123, 0.06) 0%,   /* Teal */
-      transparent 40%
-    ),
-    /* Fine grid pattern */
-    linear-gradient(
-      90deg,
-      rgba(0, 0, 0, 0.015) 1px,
-      transparent 1px
-    ),
-    linear-gradient(
-      0deg,
-      rgba(0, 0, 0, 0.015) 1px,
-      transparent 1px
-    ),
-    /* Base */
-    #FAFAFA;
-  background-size: auto, 48px 48px, 48px 48px;
+    radial-gradient(circle at 15% 15%, rgba(0, 137, 123, 0.06) 0%, /* Teal */ transparent 40%),
+    /* Fine grid pattern */ linear-gradient(90deg, rgba(0, 0, 0, 0.015) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(0, 0, 0, 0.015) 1px, transparent 1px),
+    /* Base */ #fafafa;
+  background-size:
+    auto,
+    48px 48px,
+    48px 48px;
 }
 ```
 
 #### Elegant & Premium (Lifestyle Brands)
+
 ```css
 .background-elegant {
   background:
     /* Soft organic blobs */
-    radial-gradient(
-      ellipse 1000px 800px at 70% 20%,
-      rgba(159, 168, 218, 0.08) 0%,  /* Lavender */
-      transparent 60%
-    ),
-    radial-gradient(
-      ellipse 800px 1000px at 30% 80%,
-      rgba(255, 112, 67, 0.06) 0%,   /* Orange */
-      transparent 60%
-    ),
-    /* Subtle texture */
-    repeating-linear-gradient(
-      0deg,
-      transparent 0px,
-      rgba(0, 0, 0, 0.01) 1px,
-      transparent 2px
-    ),
-    /* Base */
-    #FDFBFF;
+    radial-gradient(ellipse 1000px 800px at 70% 20%, rgba(159, 168, 218, 0.08) 0%, /* Lavender */ transparent 60%),
+    radial-gradient(ellipse 800px 1000px at 30% 80%, rgba(255, 112, 67, 0.06) 0%, /* Orange */ transparent 60%),
+    /* Subtle texture */ repeating-linear-gradient(0deg, transparent 0px, rgba(0, 0, 0, 0.01) 1px, transparent 2px),
+    /* Base */ #fdfbff;
 }
 ```
 
@@ -220,49 +154,30 @@ This skill implements M3 Expressive background principles:
 ### 4. Depth & Atmosphere (Layered Surfaces)
 
 **Hero Section (Dramatic Depth):**
+
 ```css
 .hero-background {
   position: relative;
   background:
     /* Layer 1: Top glow */
-    radial-gradient(
-      ellipse 1200px 600px at 50% 0%,
-      rgba(var(--sys-color-primary-rgb), 0.12),
-      transparent 60%
-    ),
-    /* Layer 2: Diagonal sweep */
-    linear-gradient(
-      120deg,
-      rgba(var(--sys-color-secondary-rgb), 0.08) 0%,
-      transparent 40%,
-      rgba(var(--sys-color-tertiary-rgb), 0.10) 100%
-    ),
-    /* Layer 3: Grid pattern */
-    linear-gradient(
-      90deg,
-      rgba(var(--sys-color-on-surface-rgb), 0.02) 1px,
-      transparent 1px
-    ),
-    linear-gradient(
-      0deg,
-      rgba(var(--sys-color-on-surface-rgb), 0.02) 1px,
-      transparent 1px
-    ),
-    /* Base */
-    var(--sys-color-surface);
-  background-size: auto, auto, 64px 64px, 64px 64px;
+    radial-gradient(ellipse 1200px 600px at 50% 0%, rgba(var(--sys-color-primary-rgb), 0.12), transparent 60%),
+    /* Layer 2: Diagonal sweep */ linear-gradient(120deg, rgba(var(--sys-color-secondary-rgb), 0.08) 0%, transparent 40%, rgba(var(--sys-color-tertiary-rgb), 0.1) 100%),
+    /* Layer 3: Grid pattern */ linear-gradient(90deg, rgba(var(--sys-color-on-surface-rgb), 0.02) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(var(--sys-color-on-surface-rgb), 0.02) 1px, transparent 1px),
+    /* Base */ var(--sys-color-surface);
+  background-size:
+    auto,
+    auto,
+    64px 64px,
+    64px 64px;
 }
 
 /* Optional: Animated gradient shift */
 .hero-background::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(
-    circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-    rgba(var(--sys-color-primary-rgb), 0.08),
-    transparent 40%
-  );
+  background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(var(--sys-color-primary-rgb), 0.08), transparent 40%);
   opacity: 0;
   transition: opacity 600ms var(--sys-motion-easing-expressive);
   pointer-events: none;
@@ -274,26 +189,17 @@ This skill implements M3 Expressive background principles:
 ```
 
 **Card Backgrounds (Subtle Elevation):**
+
 ```css
 .card-elevated {
   background:
-    /* Subtle gradient for depth */
-    linear-gradient(
-      135deg,
-      rgba(var(--sys-color-surface-bright-rgb), 1) 0%,
-      rgba(var(--sys-color-surface-rgb), 1) 100%
-    );
+    /* Subtle gradient for depth */ linear-gradient(135deg, rgba(var(--sys-color-surface-bright-rgb), 1) 0%, rgba(var(--sys-color-surface-rgb), 1) 100%);
   box-shadow: var(--sys-elevation-level2);
 }
 
 .card-elevated:hover {
   background:
-    /* Brighter gradient on hover */
-    linear-gradient(
-      135deg,
-      rgba(var(--sys-color-surface-bright-rgb), 1) 0%,
-      rgba(var(--sys-color-surface-container-high-rgb), 1) 100%
-    );
+    /* Brighter gradient on hover */ linear-gradient(135deg, rgba(var(--sys-color-surface-bright-rgb), 1) 0%, rgba(var(--sys-color-surface-container-high-rgb), 1) 100%);
   box-shadow: var(--sys-elevation-level3);
   transition:
     background 300ms var(--sys-motion-easing-expressive),
@@ -306,24 +212,25 @@ This skill implements M3 Expressive background principles:
 ### 5. Performance Optimization (CSS-Only)
 
 **Anti-Pattern (Heavy Images):**
+
 ```css
 /* ❌ Requires HTTP request, large file size */
 .background {
-  background-image: url('/images/background-texture.png');
+  background-image: url("/images/background-texture.png");
 }
 ```
 
 **M3 Expressive (Pure CSS):**
+
 ```css
 /* ✅ No HTTP request, lightweight */
 .background {
-  background:
-    radial-gradient(circle, rgba(0, 137, 123, 0.08), transparent),
-    linear-gradient(135deg, rgba(255, 111, 97, 0.05), transparent);
+  background: radial-gradient(circle, rgba(0, 137, 123, 0.08), transparent), linear-gradient(135deg, rgba(255, 111, 97, 0.05), transparent);
 }
 ```
 
 **GPU Acceleration for Animations:**
+
 ```css
 .animated-background {
   /* Use transform/opacity for GPU acceleration */
@@ -332,14 +239,10 @@ This skill implements M3 Expressive background principles:
 }
 
 .animated-background::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(
-    circle at 50% 50%,
-    rgba(var(--sys-color-primary-rgb), 0.10),
-    transparent 60%
-  );
+  background: radial-gradient(circle at 50% 50%, rgba(var(--sys-color-primary-rgb), 0.1), transparent 60%);
   transform: scale(1); /* GPU-accelerated property */
   opacity: 0.5; /* GPU-accelerated property */
   animation: pulse 4s ease-in-out infinite;
@@ -347,7 +250,8 @@ This skill implements M3 Expressive background principles:
 }
 
 @keyframes pulse {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(1);
     opacity: 0.5;
   }
@@ -366,12 +270,7 @@ This skill implements M3 Expressive background principles:
 
 ```css
 .mesh-gradient {
-  background:
-    radial-gradient(at 20% 30%, rgba(var(--sys-color-primary-rgb), 0.15), transparent 50%),
-    radial-gradient(at 80% 20%, rgba(var(--sys-color-secondary-rgb), 0.12), transparent 50%),
-    radial-gradient(at 60% 70%, rgba(var(--sys-color-tertiary-rgb), 0.10), transparent 50%),
-    radial-gradient(at 30% 80%, rgba(var(--sys-color-primary-rgb), 0.08), transparent 50%),
-    var(--sys-color-surface);
+  background: radial-gradient(at 20% 30%, rgba(var(--sys-color-primary-rgb), 0.15), transparent 50%), radial-gradient(at 80% 20%, rgba(var(--sys-color-secondary-rgb), 0.12), transparent 50%), radial-gradient(at 60% 70%, rgba(var(--sys-color-tertiary-rgb), 0.1), transparent 50%), radial-gradient(at 30% 80%, rgba(var(--sys-color-primary-rgb), 0.08), transparent 50%), var(--sys-color-surface);
 }
 ```
 
@@ -384,7 +283,7 @@ This skill implements M3 Expressive background principles:
 }
 
 .noise-texture::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
@@ -400,21 +299,8 @@ This skill implements M3 Expressive background principles:
   background-color: var(--sys-color-surface);
   background-image:
     /* Diagonal lines (60deg) */
-    repeating-linear-gradient(
-      60deg,
-      transparent 0px,
-      rgba(var(--sys-color-primary-rgb), 0.02) 1px,
-      transparent 2px,
-      transparent 40px
-    ),
-    /* Diagonal lines (-60deg) */
-    repeating-linear-gradient(
-      -60deg,
-      transparent 0px,
-      rgba(var(--sys-color-primary-rgb), 0.02) 1px,
-      transparent 2px,
-      transparent 40px
-    );
+    repeating-linear-gradient(60deg, transparent 0px, rgba(var(--sys-color-primary-rgb), 0.02) 1px, transparent 2px, transparent 40px),
+    /* Diagonal lines (-60deg) */ repeating-linear-gradient(-60deg, transparent 0px, rgba(var(--sys-color-primary-rgb), 0.02) 1px, transparent 2px, transparent 40px);
 }
 ```
 
@@ -424,30 +310,16 @@ This skill implements M3 Expressive background principles:
 .aurora-effect {
   background:
     /* Aurora wave 1 */
-    linear-gradient(
-      110deg,
-      transparent 0%,
-      rgba(var(--sys-color-primary-rgb), 0.12) 30%,
-      rgba(var(--sys-color-secondary-rgb), 0.10) 50%,
-      rgba(var(--sys-color-tertiary-rgb), 0.08) 70%,
-      transparent 100%
-    ),
-    /* Aurora wave 2 (offset) */
-    linear-gradient(
-      70deg,
-      transparent 0%,
-      rgba(var(--sys-color-tertiary-rgb), 0.08) 20%,
-      rgba(var(--sys-color-primary-rgb), 0.10) 40%,
-      transparent 60%
-    ),
-    /* Base */
-    var(--sys-color-surface);
+    linear-gradient(110deg, transparent 0%, rgba(var(--sys-color-primary-rgb), 0.12) 30%, rgba(var(--sys-color-secondary-rgb), 0.1) 50%, rgba(var(--sys-color-tertiary-rgb), 0.08) 70%, transparent 100%),
+    /* Aurora wave 2 (offset) */ linear-gradient(70deg, transparent 0%, rgba(var(--sys-color-tertiary-rgb), 0.08) 20%, rgba(var(--sys-color-primary-rgb), 0.1) 40%, transparent 60%),
+    /* Base */ var(--sys-color-surface);
   background-size: 200% 200%;
   animation: aurora-shift 10s ease-in-out infinite;
 }
 
 @keyframes aurora-shift {
-  0%, 100% {
+  0%,
+  100% {
     background-position: 0% 50%;
   }
   50% {
@@ -516,6 +388,7 @@ This skill implements M3 Expressive background principles:
 ## Usage
 
 **Standalone Skill:**
+
 ```bash
 # Generate atmospheric background for component
 m3-atmospheric-backgrounds \
@@ -526,13 +399,14 @@ m3-atmospheric-backgrounds \
 ```
 
 **Within Design Systems Architect:**
+
 ```javascript
-const atmosphericBg = await runSkill('m3-atmospheric-backgrounds', {
+const atmosphericBg = await runSkill("m3-atmospheric-backgrounds", {
   aestheticPreferences: {
-    style: 'confident-professional',
-    colorPalette: { primary: '#00897B', secondary: '#FF6F61' }
+    style: "confident-professional",
+    colorPalette: { primary: "#00897B", secondary: "#FF6F61" },
   },
-  complexity: 'moderate'
+  complexity: "moderate",
 });
 ```
 

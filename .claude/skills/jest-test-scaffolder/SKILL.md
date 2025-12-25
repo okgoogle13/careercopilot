@@ -2,6 +2,7 @@
 name: jest-test-scaffolder
 description: "Scaffolds Jest unit tests for React components and hooks. Use when creating tests for frontend components."
 ---
+
 # Jest Test Scaffolder Workflow
 
 This skill creates comprehensive unit tests for React components using Jest, React Testing Library, and user-event.
@@ -64,8 +65,8 @@ When testing custom React hooks:
 1. **Use template:** `.claude/skills/jest-test-scaffolder/templates/hook.test.tsx.tpl`
 2. **Use `@testing-library/react` renderHook:**
    ```typescript
-   import { renderHook, act } from '@testing-library/react';
-   import { useCustomHook } from './useCustomHook';
+   import { renderHook, act } from "@testing-library/react";
+   import { useCustomHook } from "./useCustomHook";
    ```
 3. **Test hook behavior:**
    - Initial state
@@ -147,6 +148,7 @@ Test coverage:
 ## Pattern Matching
 
 This skill follows the existing test pattern from:
+
 - `src/components/ui/Button/__tests__/Button.test.tsx` (36 lines, 3 tests)
 - Uses `describe` and `it` blocks
 - Uses `screen.getByRole` for queries
@@ -184,6 +186,7 @@ This skill follows the existing test pattern from:
 ## Jest vs Vitest
 
 This skill uses **Jest** (not Vitest):
+
 - `jest.fn()` instead of `vi.fn()`
 - `jest.mock()` instead of `vi.mock()`
 - `jest.spyOn()` instead of `vi.spyOn()`

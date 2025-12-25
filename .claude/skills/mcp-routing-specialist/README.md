@@ -21,6 +21,7 @@ mcp-routing-specialist/
 ## Key Concepts
 
 ### The Problem
+
 - Claude Sonnet is expensive ($15/MTok input, $60/MTok output)
 - Gemini-1.5-Flash is 90% cheaper
 - Local caches are 93-99% more efficient
@@ -28,6 +29,7 @@ mcp-routing-specialist/
 - **Right decision:** Route analysis to Gemini, cache lookups to local servers
 
 ### The Solution
+
 - Define explicit routing rules in `delegationStrategy`
 - Create a skill that enforces those rules
 - Measure token savings per decision
@@ -36,12 +38,14 @@ mcp-routing-specialist/
 ## How the Skill Works
 
 ### For Users
+
 1. User asks a question (e.g., "Review this code")
 2. Skill matches to Routing Logic Table
 3. Skill recommends delegation target (e.g., gemini-wrapper)
 4. Skill executes the delegation or asks for confirmation
 
 ### For Claude Code Developers
+
 - Reference SKILL.md when deciding which server to call
 - Use the Decision Tree for quick lookups
 - Follow the Critical Rules (DO/DO NOT)
@@ -50,13 +54,16 @@ mcp-routing-specialist/
 ## Implementation Notes
 
 ### Why This Skill Exists
+
 The `.mcp.json` file contains a `delegationStrategy` object, but **Claude cannot read config files at runtime**. This skill makes the strategy actionable by:
+
 1. Documenting the strategy in human-readable format
 2. Providing clear routing tables and examples
 3. Defining explicit rules (DO/DO NOT)
 4. Offering a decision tree for quick reference
 
 ### Integration Points
+
 - **~/.mcp.json:** Source of truth for routing strategy
 - **gemini-wrapper.py:** Provides 7 analysis methods
 - **documentation-server.py:** Provides cache lookups
@@ -65,6 +72,7 @@ The `.mcp.json` file contains a `delegationStrategy` object, but **Claude cannot
 - **github MCP:** Provides repository operations
 
 ### Token Savings Impact
+
 ```
 Single Decisions:
   • Use Gemini for code review: 40-55% savings
@@ -80,6 +88,7 @@ Multi-Step Workflows:
 ## Usage in Claude Code
 
 ### Scenario 1: User asks for code review
+
 ```
 User: "Review my authentication service"
 
@@ -91,6 +100,7 @@ My decision process:
 ```
 
 ### Scenario 2: User asks for configuration
+
 ```
 User: "What's the Firebase configuration?"
 
@@ -102,6 +112,7 @@ My decision process:
 ```
 
 ### Scenario 3: User asks for multi-step help
+
 ```
 User: "Why is my Genkit flow timing out?"
 
@@ -115,6 +126,7 @@ My decision process:
 ## Development Workflow
 
 ### Adding New Routing Rules
+
 1. Update `~/.mcp.json` with new server or method
 2. Add corresponding row to Routing Logic Table in SKILL.md
 3. Update Decision Tree with new branch
@@ -122,6 +134,7 @@ My decision process:
 5. Document token impact in "Token Impact Summary" section
 
 ### Adding New MCP Server
+
 1. Register in `~/.mcp.json` with priority
 2. Add server-specific section in SKILL.md (like "gemini-wrapper (Priority 10)")
 3. Document all methods available
@@ -129,7 +142,9 @@ My decision process:
 5. Update combined strategy sections
 
 ### Testing Routing Decisions
+
 Use the "Routing Test" section to verify:
+
 - User asks: "Why is my Genkit flow failing?"
 - Expected routing: genkit server → gemini-wrapper
 - Verify: Token savings calculation is accurate

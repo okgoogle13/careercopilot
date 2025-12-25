@@ -19,8 +19,8 @@ CareerCopilot uses AWS Simple Email Service (SES) for email notifications after 
 
 ### 1.1 Email Identity Status
 
-| Identity | Type | Status | Region |
-|----------|------|--------|---------|
+| Identity           | Type          | Status      | Region    |
+| ------------------ | ------------- | ----------- | --------- |
 | `[verified-gmail]` | Email Address | ✅ Verified | us-east-1 |
 
 ### 1.2 Required DNS Records
@@ -29,11 +29,11 @@ CareerCopilot uses AWS Simple Email Service (SES) for email notifications after 
 
 ### 1.3 Authentication Configuration
 
-| Method | Status | Notes |
-|--------|--------|-------|
-| **SPF** | N/A | Email-based verification |
-| **DKIM** | N/A | Email-based verification |
-| **DMARC** | N/A | Email-based verification |
+| Method    | Status | Notes                    |
+| --------- | ------ | ------------------------ |
+| **SPF**   | N/A    | Email-based verification |
+| **DKIM**  | N/A    | Email-based verification |
+| **DMARC** | N/A    | Email-based verification |
 
 ### 1.4 Production Access
 
@@ -47,12 +47,12 @@ CareerCopilot uses AWS Simple Email Service (SES) for email notifications after 
 
 ### 2.1 Required Credentials
 
-| Secret | Format | Source |
-|--------|--------|--------|
-| `AWS_ACCESS_KEY_ID` | 20 characters | AWS IAM User |
-| `AWS_SECRET_ACCESS_KEY` | 40 characters | AWS IAM User |
-| `SES_SENDER_EMAIL` | email address | Verified Gmail |
-| `AWS_REGION` | string | `us-east-1` |
+| Secret                  | Format        | Source         |
+| ----------------------- | ------------- | -------------- |
+| `AWS_ACCESS_KEY_ID`     | 20 characters | AWS IAM User   |
+| `AWS_SECRET_ACCESS_KEY` | 40 characters | AWS IAM User   |
+| `SES_SENDER_EMAIL`      | email address | Verified Gmail |
+| `AWS_REGION`            | string        | `us-east-1`    |
 
 ### 2.2 Google Cloud Secret Manager Setup
 
@@ -65,11 +65,13 @@ chmod +x scripts/setup-aws-ses-secrets.sh
 ```
 
 **Secret Names**:
+
 - `aws-access-key-id`
-- `aws-secret-access-key` 
+- `aws-secret-access-key`
 - `ses-sender-email`
 
 **Service Account Access**:
+
 ```bash
 # Grant Cloud Run access to secrets
 SERVICE_ACCOUNT="$(gcloud run services describe backend --region=us-central1 --format='value(spec.template.spec.serviceAccountName)')"
@@ -98,6 +100,7 @@ chmod +x scripts/setup-aws-ses-github-secrets.sh
 ```
 
 **Secret Names**:
+
 - `AWS_ACCESS_KEY_ID`
 - `AWS_SECRET_ACCESS_KEY`
 - `SES_SENDER_EMAIL`
@@ -108,6 +111,7 @@ chmod +x scripts/setup-aws-ses-github-secrets.sh
 **Command**: `python3 scripts/production-secrets-validator.py`
 
 **Expected Output**:
+
 ```
 ✅ aws-access-key-id: Valid
 ✅ aws-secret-access-key: Valid
@@ -120,39 +124,42 @@ chmod +x scripts/setup-aws-ses-github-secrets.sh
 
 ### 3.1 Migration Summary
 
-| Aspect | Previous | Current |
-|--------|----------|---------|
-| **Provider** | SendGrid | AWS SES |
-| **Cost** | $19.95/month (or 3k limit) | $0/month (62k limit) |
-| **Domain Required** | Yes | No (Gmail verification) |
-| **Library** | `sendgrid` | `boto3` |
+| Aspect              | Previous                   | Current                 |
+| ------------------- | -------------------------- | ----------------------- |
+| **Provider**        | SendGrid                   | AWS SES                 |
+| **Cost**            | $19.95/month (or 3k limit) | $0/month (62k limit)    |
+| **Domain Required** | Yes                        | No (Gmail verification) |
+| **Library**         | `sendgrid`                 | `boto3`                 |
 
 ### 3.2 Implementation Details
 
 **Email Service Module**: `backend/app/services/email_service.py`
+
 - AWS SES client initialization
 - HTML email support
 - Error handling for SES exceptions
 - Environment-based configuration
 
 **Configuration Module**: `backend/app/core/secure_config.py`
+
 - Loads AWS credentials from Secret Manager
 - Environment fallback for local development
 - Type-safe configuration management
 
 **Notification Flow**: `backend/app/genkit_flows/notifier.py`
+
 - Uses email service for job opportunity notifications
 - Maintains existing HTML email templates
 - Improved error logging and tracking
 
 ### 3.3 Environment Variables
 
-| Variable | Required | Example |
-|----------|----------|---------|
-| `AWS_ACCESS_KEY_ID` | Yes | `AKIAIOSFODNN7EXAMPLE` |
-| `AWS_SECRET_ACCESS_KEY` | Yes | `wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY` |
-| `AWS_REGION` | No (defaults) | `us-east-1` |
-| `SES_SENDER_EMAIL` | Yes | `your-email@gmail.com` |
+| Variable                | Required      | Example                                    |
+| ----------------------- | ------------- | ------------------------------------------ |
+| `AWS_ACCESS_KEY_ID`     | Yes           | `AKIAIOSFODNN7EXAMPLE`                     |
+| `AWS_SECRET_ACCESS_KEY` | Yes           | `wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY` |
+| `AWS_REGION`            | No (defaults) | `us-east-1`                                |
+| `SES_SENDER_EMAIL`      | Yes           | `your-email@gmail.com`                     |
 
 ### 3.4 Usage in Code
 
@@ -180,6 +187,7 @@ result = send_email(
 ### 4.2 Monitoring
 
 **AWS SES Console** → Account dashboard → Sending statistics
+
 - Track delivery rates
 - Monitor bounce/complaint rates
 - Watch quota usage
@@ -197,12 +205,12 @@ result = send_email(
 
 ### 5.1 Common Issues
 
-| Issue | Cause | Solution |
-|-------|-------|----------|
-| "Email address not verified" | Gmail not verified in SES | Verify email in AWS SES Console |
-| "Access Denied" | Invalid IAM credentials | Regenerate access key, update secrets |
-| "Daily sending limit exceeded" | Sandbox mode | Request production access |
-| Email not received | Spam filter | Check junk folder, verify recipient |
+| Issue                          | Cause                     | Solution                              |
+| ------------------------------ | ------------------------- | ------------------------------------- |
+| "Email address not verified"   | Gmail not verified in SES | Verify email in AWS SES Console       |
+| "Access Denied"                | Invalid IAM credentials   | Regenerate access key, update secrets |
+| "Daily sending limit exceeded" | Sandbox mode              | Request production access             |
+| Email not received             | Spam filter               | Check junk folder, verify recipient   |
 
 ### 5.2 Debug Commands
 
@@ -247,11 +255,11 @@ pip-compile backend/requirements.in
 
 ### 6.2 Script Details
 
-| Script | Purpose | Platform |
-|--------|---------|----------|
-| `setup-aws-ses-secrets.sh` | Google Cloud Secret Manager | Production |
-| `setup-aws-ses-github-secrets.sh` | GitHub Secrets | CI/CD |
-| `production-secrets-validator.py` | Validate all secrets | All environments |
+| Script                            | Purpose                     | Platform         |
+| --------------------------------- | --------------------------- | ---------------- |
+| `setup-aws-ses-secrets.sh`        | Google Cloud Secret Manager | Production       |
+| `setup-aws-ses-github-secrets.sh` | GitHub Secrets              | CI/CD            |
+| `production-secrets-validator.py` | Validate all secrets        | All environments |
 
 ---
 

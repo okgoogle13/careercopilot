@@ -16,7 +16,7 @@ apiClient.interceptors.request.use(
   async (config) => {
     // Skip adding auth header for public endpoints
     const publicEndpoints = ['/auth/login', '/auth/register'];
-    if (publicEndpoints.some(endpoint => config.url?.includes(endpoint))) {
+    if (publicEndpoints.some((endpoint) => config.url?.includes(endpoint))) {
       return config;
     }
 
@@ -42,8 +42,8 @@ apiClient.interceptors.response.use(
           data: response.data.data,
           message: response.data.message,
           success: response.data.success ?? true,
-          timestamp: response.data.timestamp || new Date().toISOString()
-        }
+          timestamp: response.data.timestamp || new Date().toISOString(),
+        },
       };
     }
     return response;
@@ -137,17 +137,11 @@ export const handleApiError = (error: unknown): ApiError => {
     }
   } else if (error instanceof Error) {
     // General error
-    return createErrorResponse(
-      'UNKNOWN_ERROR',
-      error.message || 'An unknown error occurred'
-    );
+    return createErrorResponse('UNKNOWN_ERROR', error.message || 'An unknown error occurred');
   }
 
   // Fallback for unknown error types
-  return createErrorResponse(
-    'UNKNOWN_ERROR',
-    'An unknown error occurred'
-  );
+  return createErrorResponse('UNKNOWN_ERROR', 'An unknown error occurred');
 };
 
 /**

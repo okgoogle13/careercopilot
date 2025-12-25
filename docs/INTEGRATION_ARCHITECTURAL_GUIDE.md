@@ -13,7 +13,7 @@
 CareerCopilot operates as a **four-tier architecture** with strict type safety and AI-powered workflows:
 
 1. **Frontend Layer** (React + TypeScript) - User interface and client-side logic
-2. **API Gateway** (FastAPI + Pydantic) - Request validation and routing  
+2. **API Gateway** (FastAPI + Pydantic) - Request validation and routing
 3. **AI Orchestration** (Genkit Flows) - AI model coordination and business logic
 4. **Data Persistence** (Firestore + Vector Search) - Structured data and semantic search
 
@@ -41,13 +41,13 @@ graph TD
     F -->|Similarity Results| C
     C -->|Structured Response| B
     B -->|Typed Response| A
-    
+
     subgraph "Type Safety Layer"
         G[TypeScript Interfaces]
         H[Pydantic Models]
         I[Genkit Schemas]
     end
-    
+
     A -.->|camelCase| G
     B -.->|snake_case| H
     C -.->|Union Types| I
@@ -57,13 +57,13 @@ graph TD
 
 #### Frontend ↔ Backend Contract
 
-| TypeScript (Frontend) | Pydantic (Backend) | Transformation Rule |
-|---------------------|-------------------|-------------------|
-| `userId` | `user_id` | camelCase → snake_case |
-| `createdAt` | `created_at` | camelCase → snake_case |
-| `jobDescription` | `job_description` | camelCase → snake_case |
-| `resumeContent` | `resume_content` | camelCase → snake_case |
-| `applicationStatus` | `application_status` | camelCase → snake_case |
+| TypeScript (Frontend) | Pydantic (Backend)   | Transformation Rule    |
+| --------------------- | -------------------- | ---------------------- |
+| `userId`              | `user_id`            | camelCase → snake_case |
+| `createdAt`           | `created_at`         | camelCase → snake_case |
+| `jobDescription`      | `job_description`    | camelCase → snake_case |
+| `resumeContent`       | `resume_content`     | camelCase → snake_case |
+| `applicationStatus`   | `application_status` | camelCase → snake_case |
 
 **Critical Rule:** All field names MUST follow this convention. Use Pydantic aliases for backward compatibility:
 
@@ -85,21 +85,21 @@ The `api-contract-validator` skill enforces type safety:
 
 ### Component Mapping Table
 
-| Frontend API Service | Function | HTTP Method | Backend Endpoint | Genkit Flow | Status |
-|---------------------|----------|-------------|-----------------|-------------|---------|
-| **aiServices.ts** | generateKscResponses | POST | `/api/v1/ksc/generate` | `ksc_generator` | ❌ MISSING |
-| **aiServices.ts** | generateCoverLetter | POST | `/api/v1/cover-letters/generate` | `cover_letter_generator` | ❌ MISSING |
-| **aiServices.ts** | generateTailoredResume | POST | `/api/v1/resumes/tailored` | `resume_analyzer` | ❌ MISSING |
-| **aiServices.ts** | prepareApplicationPackage | POST | `/api/v1/workflows/generate-application` | `application_preparation_workflow` | ✅ MAPPED |
-| **analysisService.ts** | getATSScore | POST | `/api/v1/analysis/ats-score` | `ats_scoring` | ✅ MAPPED |
-| **analysisService.ts** | analyzeDocument | POST | `/api/v1/analysis/analyze-document` | `document_generator` | ❌ MISSING |
-| **documentService.ts** | generateCoverLetter | POST | `/api/v1/documents/generate-cover-letter` | `smart_cover_letter_system` | ✅ MAPPED |
-| **documentService.ts** | generateKSCResponse | POST | `/api/v1/documents/generate-ksc-response` | `ksc_generator` | ✅ MAPPED |
-| **jobService.ts** | extractJobFromUrl | POST | `/api/v1/jobs/extract-from-url` | `job_listing_extractor` | ✅ MAPPED |
-| **jobService.ts** | extractJobFromText | POST | `/api/v1/jobs/extract-from-text` | `job_listing_extractor` | ✅ MAPPED |
-| **authService.ts** | login | POST | `/api/v1/auth/login` | Firebase Auth | ✅ MAPPED |
-| **authService.ts** | register | POST | `/api/v1/auth/register` | Firebase Auth | ✅ MAPPED |
-| **authService.ts** | getCurrentUser | GET | `/api/v1/auth/me` | Firebase Auth | ✅ MAPPED |
+| Frontend API Service   | Function                  | HTTP Method | Backend Endpoint                          | Genkit Flow                        | Status     |
+| ---------------------- | ------------------------- | ----------- | ----------------------------------------- | ---------------------------------- | ---------- |
+| **aiServices.ts**      | generateKscResponses      | POST        | `/api/v1/ksc/generate`                    | `ksc_generator`                    | ❌ MISSING |
+| **aiServices.ts**      | generateCoverLetter       | POST        | `/api/v1/cover-letters/generate`          | `cover_letter_generator`           | ❌ MISSING |
+| **aiServices.ts**      | generateTailoredResume    | POST        | `/api/v1/resumes/tailored`                | `resume_analyzer`                  | ❌ MISSING |
+| **aiServices.ts**      | prepareApplicationPackage | POST        | `/api/v1/workflows/generate-application`  | `application_preparation_workflow` | ✅ MAPPED  |
+| **analysisService.ts** | getATSScore               | POST        | `/api/v1/analysis/ats-score`              | `ats_scoring`                      | ✅ MAPPED  |
+| **analysisService.ts** | analyzeDocument           | POST        | `/api/v1/analysis/analyze-document`       | `document_generator`               | ❌ MISSING |
+| **documentService.ts** | generateCoverLetter       | POST        | `/api/v1/documents/generate-cover-letter` | `smart_cover_letter_system`        | ✅ MAPPED  |
+| **documentService.ts** | generateKSCResponse       | POST        | `/api/v1/documents/generate-ksc-response` | `ksc_generator`                    | ✅ MAPPED  |
+| **jobService.ts**      | extractJobFromUrl         | POST        | `/api/v1/jobs/extract-from-url`           | `job_listing_extractor`            | ✅ MAPPED  |
+| **jobService.ts**      | extractJobFromText        | POST        | `/api/v1/jobs/extract-from-text`          | `job_listing_extractor`            | ✅ MAPPED  |
+| **authService.ts**     | login                     | POST        | `/api/v1/auth/login`                      | Firebase Auth                      | ✅ MAPPED  |
+| **authService.ts**     | register                  | POST        | `/api/v1/auth/register`                   | Firebase Auth                      | ✅ MAPPED  |
+| **authService.ts**     | getCurrentUser            | GET         | `/api/v1/auth/me`                         | Firebase Auth                      | ✅ MAPPED  |
 
 **Integration Health:** 21.4% (18/84 endpoints mapped)
 
@@ -114,10 +114,10 @@ The `api-contract-validator` skill enforces type safety:
 ```typescript
 // Frontend: aiServices.ts
 export const generateCoverLetter = async (request: CoverLetterRequest) => {
-  const response = await fetch('/api/v1/cover-letters/generate', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(request)
+  const response = await fetch("/api/v1/cover-letters/generate", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(request),
   });
   return response.json();
 };
@@ -138,13 +138,13 @@ async def generate_cover_letter(
         job_description=request.jobDescription,
         resume_content=request.resumeContent
     )
-    
+
     # Genkit flow execution
     result = await flow_runner.run_flow(
         flow_name="smart_cover_letter_system",
         input_data=flow_request.dict()
     )
-    
+
     return CoverLetterResponse(
         coverLetter=result["cover_letter"],
         metadata=result["metadata"]
@@ -161,14 +161,14 @@ def smart_cover_letter_system(flow_request: CoverLetterFlowRequest) -> dict:
     cached_result = cache.get(f"cover_letter:{flow_request.hash}")
     if cached_result:
         return cached_result
-    
+
     # Generate cover letter using Gemini
     response = ai.generate({
         "model": "gemini-pro",
         "prompt": build_cover_letter_prompt(flow_request),
         "config": {"temperature": 0.7}
     })
-    
+
     result = {
         "cover_letter": response.text,
         "metadata": {
@@ -177,7 +177,7 @@ def smart_cover_letter_system(flow_request: CoverLetterFlowRequest) -> dict:
             "user_id": flow_request.user_id
         }
     }
-    
+
     # Cache for 1 hour
     cache.set(f"cover_letter:{flow_request.hash}", result, ttl=3600)
     return result
@@ -196,11 +196,11 @@ async def store_document(document: DocumentCreate) -> DocumentResponse:
         'created_at': firestore.SERVER_TIMESTAMP,
         'updated_at': firestore.SERVER_TIMESTAMP
     })
-    
+
     # Vector embedding for semantic search
     embedding = await generate_embedding(document.content)
     await vector_store.upsert(doc_ref.id, embedding)
-    
+
     return DocumentResponse(id=doc_ref.id, **document.dict())
 ```
 
@@ -217,7 +217,7 @@ The `api-contract-validator` skill provides automated validation:
   "issues": [
     {
       "type": "field_name_mismatch",
-      "frontend": "jobDescription", 
+      "frontend": "jobDescription",
       "backend": "job_description",
       "severity": "medium",
       "fix": "Add Pydantic alias: Field(alias='jobDescription')"
@@ -245,13 +245,13 @@ The `api-contract-validator` skill provides automated validation:
 
 #### Key Metrics
 
-| Metric | Target | Current Status |
-|--------|--------|----------------|
-| API Response Time | <500ms | 320ms average |
-| Genkit Flow Latency | <2s | 1.2s average |
-| Type Validation Pass Rate | 100% | 95.3% |
-| Integration Coverage | 80% | 21.4% |
-| Cache Hit Rate | 60% | 42% |
+| Metric                    | Target | Current Status |
+| ------------------------- | ------ | -------------- |
+| API Response Time         | <500ms | 320ms average  |
+| Genkit Flow Latency       | <2s    | 1.2s average   |
+| Type Validation Pass Rate | 100%   | 95.3%          |
+| Integration Coverage      | 80%    | 21.4%          |
+| Cache Hit Rate            | 60%    | 42%            |
 
 #### Health Check Endpoints
 
@@ -299,20 +299,20 @@ async def test_cover_letter_generation_flow():
     # Test frontend → backend → Genkit → Firestore
     user = await create_test_user()
     job_data = create_test_job_listing()
-    
+
     # Frontend request
     response = await client.post("/api/v1/cover-letters/generate", json={
         "jobDescription": job_data.description,
         "resumeContent": user.resume_content
     })
-    
+
     assert response.status_code == 200
     result = response.json()
-    
+
     # Verify Genkit flow execution
     assert "coverLetter" in result
     assert len(result["coverLetter"]) > 100
-    
+
     # Verify Firestore storage
     doc = await db.collection('documents').where('type', '==', 'cover_letter').get()
     assert len(doc) == 1
@@ -328,12 +328,12 @@ async def get_current_user(token: str = Header(...)) -> User:
     try:
         decoded = auth.verify_id_token(token)
         user_id = decoded['uid']
-        
+
         # Get user from Firestore
         user_doc = await db.collection('users').document(user_id).get()
         if not user_doc.exists:
             raise HTTPException(401, "User not found")
-            
+
         return User(id=user_id, **user_doc.to_dict())
     except Exception:
         raise HTTPException(401, "Invalid authentication")
@@ -407,11 +407,13 @@ async def get_current_user(token: str = Header(...)) -> User:
 #### 1. Type Mismatch Errors
 
 **Symptom:** 422 Validation Error from FastAPI
+
 ```
 {"detail": [{"loc": ["body", "jobDescription"], "msg": "field required"}]}
 ```
 
 **Solution:**
+
 ```bash
 # Run contract validator
 python3 -m claude.skills.api-contract-validator
@@ -423,11 +425,13 @@ python3 -m claude.skills.api-contract-validator
 #### 2. Genkit Flow Timeouts
 
 **Symptom:** 504 Gateway Timeout
+
 ```
 {"error": "Genkit flow execution timed out"}
 ```
 
 **Solution:**
+
 ```bash
 # Check Genkit configuration
 ENABLE_GENKIT_FLOWS=true python3 verify_genkit.py
@@ -439,11 +443,13 @@ python3 scripts/check-genkit-config.py
 #### 3. Authentication Failures
 
 **Symptom:** 401 Unauthorized
+
 ```
 {"detail": "Invalid authentication"}
 ```
 
 **Solution:**
+
 ```bash
 # Verify Firebase configuration
 GOOGLE_CLOUD_PROJECT=careercopilot-468811 python3 scripts/fetch-firebase-config.py
@@ -473,7 +479,7 @@ python3 -m claude.skills.api-integration-test-scaffolder cover_letter_generation
 ## References
 
 - **Complete Agent Reference:** `docs/architecture/AGENT_SYSTEM_REFERENCE.md`
-- **Skill Matrix:** `docs/architecture/SKILL_AGENT_MATRIX.md` 
+- **Skill Matrix:** `docs/architecture/SKILL_AGENT_MATRIX.md`
 - **Integration Mapping:** `docs/INTEGRATION_MAP.md`
 - **Backend Architecture:** `docs/architecture/BACKEND_REFACTORING_SUMMARY.md`
 - **API Contract Validation:** `docs/API_CONTRACT_VALIDATION.md` (generated)
@@ -486,7 +492,7 @@ python3 -m claude.skills.api-integration-test-scaffolder cover_letter_generation
 For integration issues or questions:
 
 1. **Use `fullstack-integration-specialist` agent** for complex integration problems
-2. **Use `debugger` agent** for error troubleshooting  
+2. **Use `debugger` agent** for error troubleshooting
 3. **Use `api-contract-validator` skill** for type safety issues
 4. **Check `docs/INTEGRATION_MAP.md`** for current integration status
 

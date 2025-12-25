@@ -2,6 +2,7 @@
 name: deployment-manager
 description: "Deploys the project to staging or production using this project's scripts. Use when asked to 'deploy' or 'push to staging'."
 ---
+
 # Deployment Manager Workflow
 
 1.  Ask the user for the target environment (e.g., `staging`, `production`, `frontend`).

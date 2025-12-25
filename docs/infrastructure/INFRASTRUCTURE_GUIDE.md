@@ -76,6 +76,7 @@ deactivate                  # Deactivate
 **Location**: `frontend/src/api/aiServices.ts`
 
 **Available Services:**
+
 - `generateKscResponses(jobDescription)` - Generate Key Selection Criteria responses
 - `detectKscCriteria(jobDescription)` - Detect KSC criteria from job descriptions
 - `generateSingleKscResponse(criterion, jobDescription, userProfile?)` - Generate single KSC response
@@ -83,6 +84,7 @@ deactivate                  # Deactivate
 - `generateTailoredResume(jobDescription, userProfileId)` - Generate personalized resumes
 
 **Components:**
+
 - `CoverLetterGenerator.tsx` - Interactive cover letter generation with tone selection
 - `TailoredResumeGenerator.tsx` - Resume generation with job description tailoring
 - Both components include full API integration, loading states, and error handling
@@ -144,6 +146,7 @@ python3 scripts/test-configuration.py  # Validate environment configuration
 **Location**: `.github/workflows/ci.yml`
 
 **Features:**
+
 - Parallel test execution: Frontend (Jest), Backend (pytest), E2E (Playwright)
 - Coverage reporting to Codecov
 - Security scanning (Bandit, CodeQL)

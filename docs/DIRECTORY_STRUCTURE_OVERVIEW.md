@@ -197,28 +197,33 @@
 ## Key Directory Analysis
 
 ### **Core Application Structure**
+
 - **`backend/`** - Python FastAPI application with Genkit AI flows
 - **`frontend/`** - React TypeScript application with Material-UI components
 - **`functions/`** - Firebase Cloud Functions
 - **`docs/`** - Centralized documentation (newly organized)
 
 ### **Development & Infrastructure**
+
 - **`scripts/`** - Automation and deployment scripts
 - **`.claude/`** - AI agent and skill definitions
 - **`.github/`** - CI/CD workflows and actions
 - **`monitoring/`** - Grafana dashboards and datasources
 
 ### **Component Architecture**
+
 - **`frontend/src/components/electric/`** - Electric Alchemist design system components (20+ components)
 - **`frontend/src/components/features/`** - Feature-specific components (10+ features)
 - **`frontend/src/components/ui/`** - Reusable UI primitives
 
 ### **Testing & Quality**
+
 - **`frontend/tests/`** - Frontend test suites
 - **`backend/app/tests/`** - Backend test suites
 - **`tests/`** - Project-wide test configurations
 
 ### **Data & Storage**
+
 - **`data/cache/`** - AI operations cache
 - **`backups/`** - Component consolidation backups
 - **`verified_backups/`** - Safety backup snapshots
@@ -228,6 +233,7 @@
 ## Excluded Directories
 
 The following directories were excluded from this view for clarity:
+
 - `.git/` - Git version control
 - `node_modules/` - Node.js dependencies
 - `dist/` - Build outputs

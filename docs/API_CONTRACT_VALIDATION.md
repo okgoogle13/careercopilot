@@ -33,13 +33,15 @@ This report analyzes type contracts between TypeScript interfaces (frontend) and
 #### 1. **AI Services - KSC Generation**
 
 **Frontend Interface:** `KscGenerationRequest` (aiServices.ts)
+
 ```typescript
 {
-  job_description: string;  // snake_case
+  job_description: string; // snake_case
 }
 ```
 
 **Backend Model:** ❌ **MISSING** - No corresponding Pydantic model found
+
 ```python
 # Expected in backend/app/models/schemas.py:
 class GenerateKscRequest(BaseModel):
@@ -53,6 +55,7 @@ class GenerateKscRequest(BaseModel):
 **Fix Options:**
 
 **Option A - Backend (Add Pydantic Model):**
+
 ```python
 # backend/app/models/schemas.py
 class GenerateKscRequest(BaseModel):
@@ -65,10 +68,11 @@ class GenerateKscResponse(BaseModel):
 ```
 
 **Option B - Frontend (Match existing backend):**
+
 ```typescript
 // If backend expects camelCase:
 export interface KscGenerationRequest {
-  jobDescription: string;  // Change to camelCase
+  jobDescription: string; // Change to camelCase
 }
 ```
 
@@ -77,14 +81,16 @@ export interface KscGenerationRequest {
 #### 2. **AI Services - Cover Letter Generation**
 
 **Frontend Interface:** `generateCoverLetter()` request (aiServices.ts:215-218)
+
 ```typescript
 {
-  jobDescription: string;  // camelCase
+  jobDescription: string; // camelCase
   tone: string;
 }
 ```
 
 **Backend Model:** ❌ **MISSING** - No Pydantic model defined
+
 ```python
 # Expected model:
 class GenerateCoverLetterRequest(BaseModel):
@@ -96,6 +102,7 @@ class GenerateCoverLetterRequest(BaseModel):
 **Affected Endpoint:** `POST /api/v1/cover-letters/generate`
 
 **Fix:**
+
 ```python
 # backend/app/models/schemas.py
 class CoverLetterRequest(BaseModel):
@@ -112,14 +119,16 @@ class CoverLetterResponse(BaseModel):
 #### 3. **AI Services - Application Package**
 
 **Frontend Interface:** `ApplicationPackageRequest` (aiServices.ts:277-280)
+
 ```typescript
 {
-  job_description: string;  // snake_case
+  job_description: string; // snake_case
   user_profile: Record<string, unknown>;
 }
 ```
 
 **Backend Model:** `GenerateApplicationRequest` (workflows.py:37-44)
+
 ```python
 class GenerateApplicationRequest(BaseModel):
     job_description: str  # snake_case ✅
@@ -130,15 +139,16 @@ class GenerateApplicationRequest(BaseModel):
 **Impact:** 🟡 **WARNING** - Backend expects non-empty dict, frontend may send placeholder
 
 **Fix (Frontend):**
+
 ```typescript
 // aiServices.ts - Replace hardcoded profile with actual user data
 export async function prepareApplicationPackage(
   jobDescription: string,
-  userProfile: UserProfile  // Pass actual profile instead of empty object
+  userProfile: UserProfile, // Pass actual profile instead of empty object
 ): Promise<ApplicationPackageResponse> {
   const requestBody: ApplicationPackageRequest = {
     job_description: jobDescription.trim(),
-    user_profile: userProfile,  // Use real data
+    user_profile: userProfile, // Use real data
   };
   // ...
 }
@@ -149,6 +159,7 @@ export async function prepareApplicationPackage(
 #### 4. **Analysis Service - ATS Score**
 
 **Frontend Interface:** `ATSScoreResponse` (analysisService.ts:10-21)
+
 ```typescript
 {
   score: number;  // camelCase field name
@@ -165,6 +176,7 @@ export async function prepareApplicationPackage(
 ```
 
 **Backend Model:** `ATSScoreResponse` (schemas.py:148-162)
+
 ```python
 class ATSScoreResponse(BaseModel):
     overallScore: int  # 🔴 MISMATCH: "overallScore" vs "score"
@@ -179,6 +191,7 @@ class ATSScoreResponse(BaseModel):
 **Fix Options:**
 
 **Option A - Backend (Add Pydantic Aliases):**
+
 ```python
 class ATSScoreResponse(BaseModel):
     overall_score: int = Field(..., alias="score")  # Accept "score" from frontend
@@ -191,16 +204,18 @@ class ATSScoreResponse(BaseModel):
 ```
 
 **Option B - Frontend (Match Backend):**
+
 ```typescript
 export interface ATSScoreResponse {
-  overallScore: number;  // Match backend
-  categories: Array<{    // Match backend structure
+  overallScore: number; // Match backend
+  categories: Array<{
+    // Match backend structure
     name: string;
     score: number;
-    status: 'good' | 'warning' | 'poor';
+    status: "good" | "warning" | "poor";
     suggestions: string[];
   }>;
-  matched_keywords: string[];  // Use snake_case
+  matched_keywords: string[]; // Use snake_case
   missing_keywords: string[];
   recommendations?: string[];
 }
@@ -211,17 +226,19 @@ export interface ATSScoreResponse {
 #### 5. **Smart Ingestion - Upload and Tag**
 
 **Frontend Interface:** `UploadAndTagResponse` (smartIngestionService.ts:16-22)
+
 ```typescript
 {
-  suggestedTags: ContextTags;  // camelCase
-  fileId: string;  // camelCase
-  fileName: string;  // camelCase
-  fileType: string;  // camelCase
-  fileSizeBytes: number;  // camelCase
+  suggestedTags: ContextTags; // camelCase
+  fileId: string; // camelCase
+  fileName: string; // camelCase
+  fileType: string; // camelCase
+  fileSizeBytes: number; // camelCase
 }
 ```
 
 **Backend Model:** `UploadAndTagResponse` (ingestion_schemas.py:39-65)
+
 ```python
 class UploadAndTagResponse(BaseModel):
     suggestedTags: SuggestedTags  # ✅ camelCase matches
@@ -238,6 +255,7 @@ class UploadAndTagResponse(BaseModel):
 #### 6. **Smart Ingestion - Asset Document**
 
 **Frontend Interface:** `AssetDocument` (smartIngestionService.ts:36-52)
+
 ```typescript
 {
   id: string;
@@ -252,6 +270,7 @@ class UploadAndTagResponse(BaseModel):
 ```
 
 **Backend Model:** `AssetDocument` (asset_library_schema.py:81-123)
+
 ```python
 class AssetDocument(BaseModel):
     documentType: Literal["resume", "ksc", "voice"]  # ✅ Matches
@@ -268,12 +287,13 @@ class AssetDocument(BaseModel):
 **Missing Fields:** Frontend lacks `userId`, `schemaVersion`; Backend lacks `id`, `name`
 
 **Fix (Frontend):**
+
 ```typescript
 export interface AssetDocument {
-  id: string;  // Keep for frontend use
-  documentType: 'resume' | 'ksc' | 'voice';
+  id: string; // Keep for frontend use
+  documentType: "resume" | "ksc" | "voice";
   extractedData: Record<string, any>;
-  tags: ContextTags;  // 🔧 FIX: Change from string[] to ContextTags
+  tags: ContextTags; // 🔧 FIX: Change from string[] to ContextTags
   metadata: {
     fileName: string;
     fileType: string;
@@ -281,10 +301,10 @@ export interface AssetDocument {
     storageUri: string;
     fileSizeBytes?: number;
   };
-  schemaVersion: string;  // 🔧 ADD
+  schemaVersion: string; // 🔧 ADD
   createdAt: string;
   updatedAt: string;
-  userId: string;  // 🔧 ADD
+  userId: string; // 🔧 ADD
 }
 ```
 
@@ -293,6 +313,7 @@ export interface AssetDocument {
 #### 7. **Profile Service - Profile Create**
 
 **Frontend Interface:** `ProfileCreate` (profileService.ts:10-33)
+
 ```typescript
 {
   name: string;
@@ -312,11 +333,13 @@ export interface AssetDocument {
 
 **Impact:** 🔴 **BREAKING** - Endpoint likely doesn't exist or uses different schema
 **Affected Endpoints:**
+
 - `POST /api/v1/profiles/`
 - `GET /api/v1/profiles/`
 - `PUT /api/v1/profiles/{profileId}`
 
 **Fix (Backend):**
+
 ```python
 # backend/app/models/profile_schemas.py (NEW FILE)
 class SkillsGroup(BaseModel):
@@ -359,6 +382,7 @@ class ProfileResponse(ProfileCreate):
 #### 8. **Application Service - Application Create**
 
 **Frontend Interface:** `ApplicationCreate` (applicationService.ts:71-81)
+
 ```typescript
 {
   jobTitle: string;  // camelCase
@@ -379,6 +403,7 @@ class ProfileResponse(ProfileCreate):
 **Affected Endpoints:** `POST /api/v1/applications/`
 
 **Fix (Backend):**
+
 ```python
 # backend/app/models/application_schemas.py (NEW FILE)
 class DocumentReferences(BaseModel):
@@ -421,6 +446,7 @@ class ApplicationResponse(BaseModel):
 #### 9. **Job Service - Job Listing**
 
 **Frontend Interface:** `JobListing` (jobService.ts:10-23)
+
 ```typescript
 {
   id: string;
@@ -439,6 +465,7 @@ class ApplicationResponse(BaseModel):
 ```
 
 **Backend Model:** `JobListingDetails` (schemas.py:230-261) - **PARTIAL MISMATCH**
+
 ```python
 class JobListingDetails(BaseModel):
     due_date: Optional[str] = None  # 🟡 "due_date" vs "deadline"
@@ -457,6 +484,7 @@ class JobListingDetails(BaseModel):
 **Recommendation:** Create separate models or use proper mapping layer
 
 **Fix (Backend - Add Complete Job Listing Model):**
+
 ```python
 # backend/app/models/job_schemas.py (NEW FILE)
 class SalaryRange(BaseModel):
@@ -499,8 +527,11 @@ class JobListingCreate(BaseModel):
 #### 10. **Casing Inconsistency - Email Workflow**
 
 **Frontend:** `EmailScanRequest` (aiServices.ts:383-385)
+
 ```typescript
-{ user_id: string }  // snake_case
+{
+  user_id: string;
+} // snake_case
 ```
 
 **Backend:** ❌ **MISSING** model, but endpoint exists (workflows.py:190-248)
@@ -516,6 +547,7 @@ class JobListingCreate(BaseModel):
 **Backend:** `PersonalInfo` in both `schemas.py` and `master_profile_schema.py`
 
 **Schemas:**
+
 - `schemas.py:124-130` - Basic contact info (phone, location, linkedIn optional)
 - `master_profile_schema.py:18-37` - Extended contact info (summary required, portfolio optional)
 
@@ -530,6 +562,7 @@ class JobListingCreate(BaseModel):
 **Backend:** Mix of `datetime` and `str` types
 
 **Examples:**
+
 - `Application.createdAt: string` → `created_at: datetime`
 - `Profile.createdAt: string` → `created_at: datetime`
 - `AssetDocument.uploadDate: string` → `upload_date: datetime`
@@ -565,28 +598,29 @@ class JobListingCreate(BaseModel):
 
 ### TypeScript → Python Type Conversions
 
-| TypeScript | Pydantic | Notes |
-|------------|----------|-------|
-| `string` | `str` | ✅ Direct mapping |
-| `number` | `int` or `float` | ⚠️ Frontend doesn't distinguish int/float |
-| `boolean` | `bool` | ✅ Direct mapping |
-| `string[]` | `List[str]` | ✅ Direct mapping |
-| `Array<T>` | `List[T]` | ✅ Direct mapping |
-| `Record<string, any>` | `Dict[str, Any]` | ✅ Direct mapping |
-| `'a' \| 'b' \| 'c'` | `Literal["a", "b", "c"]` | ✅ Direct mapping |
-| `T \| undefined` | `Optional[T]` | ✅ Direct mapping |
-| `T?` (optional) | `Optional[T] = None` | ✅ Direct mapping |
+| TypeScript            | Pydantic                 | Notes                                     |
+| --------------------- | ------------------------ | ----------------------------------------- |
+| `string`              | `str`                    | ✅ Direct mapping                         |
+| `number`              | `int` or `float`         | ⚠️ Frontend doesn't distinguish int/float |
+| `boolean`             | `bool`                   | ✅ Direct mapping                         |
+| `string[]`            | `List[str]`              | ✅ Direct mapping                         |
+| `Array<T>`            | `List[T]`                | ✅ Direct mapping                         |
+| `Record<string, any>` | `Dict[str, Any]`         | ✅ Direct mapping                         |
+| `'a' \| 'b' \| 'c'`   | `Literal["a", "b", "c"]` | ✅ Direct mapping                         |
+| `T \| undefined`      | `Optional[T]`            | ✅ Direct mapping                         |
+| `T?` (optional)       | `Optional[T] = None`     | ✅ Direct mapping                         |
 
 ### Case Conversion Patterns
 
-| Frontend (TypeScript) | Backend (Python) | Pydantic Solution |
-|-----------------------|------------------|-------------------|
-| `camelCase` | `snake_case` | Use `Field(..., alias="camelCase")` |
-| `userId` | `user_id` | `Field(..., alias="userId")` |
-| `jobDescription` | `job_description` | `Field(..., alias="jobDescription")` |
-| `createdAt` | `created_at` | `Field(..., alias="createdAt")` |
+| Frontend (TypeScript) | Backend (Python)  | Pydantic Solution                    |
+| --------------------- | ----------------- | ------------------------------------ |
+| `camelCase`           | `snake_case`      | Use `Field(..., alias="camelCase")`  |
+| `userId`              | `user_id`         | `Field(..., alias="userId")`         |
+| `jobDescription`      | `job_description` | `Field(..., alias="jobDescription")` |
+| `createdAt`           | `created_at`      | `Field(..., alias="createdAt")`      |
 
 **Recommended Pydantic Config:**
+
 ```python
 class BaseAPIModel(BaseModel):
     class Config:
@@ -868,24 +902,24 @@ jobs:
 
 ## Appendix: Complete Contract Inventory
 
-| Frontend Interface | Backend Model | Status | Priority |
-|--------------------|---------------|--------|----------|
-| `KscGenerationRequest` | ❌ Missing | 🔴 BREAKING | 🔥 URGENT |
-| `CoverLetterRequest` | ❌ Missing | 🔴 BREAKING | 🔥 URGENT |
-| `ATSScoreResponse` | ⚠️ Mismatch | 🔴 BREAKING | 🔥 URGENT |
-| `AssetDocument` | ⚠️ Type Mismatch | 🔴 BREAKING | 🔥 URGENT |
-| `UploadAndTagResponse` | ✅ `UploadAndTagResponse` | ✅ VALID | - |
-| `ExtractAndSaveRequest` | ✅ `ExtractAndSaveRequest` | ✅ VALID | - |
-| `ContextTags` | ✅ `ContextTags` | ✅ VALID | - |
-| `ApplicationPackageRequest` | ✅ `GenerateApplicationRequest` | 🟡 WARNING | 🟡 MEDIUM |
-| `ProfileCreate` | ❌ Missing | 🔴 BREAKING | 🟠 HIGH |
-| `ProfileUpdate` | ❌ Missing | 🔴 BREAKING | 🟠 HIGH |
-| `ApplicationCreate` | ❌ Missing | 🔴 BREAKING | 🟠 HIGH |
-| `ApplicationUpdate` | ❌ Missing | 🔴 BREAKING | 🟠 HIGH |
-| `JobListing` | ⚠️ `JobListingDetails` (partial) | 🔴 BREAKING | 🟠 HIGH |
-| `JobMatchingResult` | ❌ Missing | 🟡 WARNING | 🟡 MEDIUM |
-| `DocumentAnalysis` | ❌ Missing | 🟡 WARNING | 🟡 MEDIUM |
-| `EmailScanRequest` | ❌ Missing | 🟡 WARNING | 🟡 MEDIUM |
+| Frontend Interface          | Backend Model                    | Status      | Priority  |
+| --------------------------- | -------------------------------- | ----------- | --------- |
+| `KscGenerationRequest`      | ❌ Missing                       | 🔴 BREAKING | 🔥 URGENT |
+| `CoverLetterRequest`        | ❌ Missing                       | 🔴 BREAKING | 🔥 URGENT |
+| `ATSScoreResponse`          | ⚠️ Mismatch                      | 🔴 BREAKING | 🔥 URGENT |
+| `AssetDocument`             | ⚠️ Type Mismatch                 | 🔴 BREAKING | 🔥 URGENT |
+| `UploadAndTagResponse`      | ✅ `UploadAndTagResponse`        | ✅ VALID    | -         |
+| `ExtractAndSaveRequest`     | ✅ `ExtractAndSaveRequest`       | ✅ VALID    | -         |
+| `ContextTags`               | ✅ `ContextTags`                 | ✅ VALID    | -         |
+| `ApplicationPackageRequest` | ✅ `GenerateApplicationRequest`  | 🟡 WARNING  | 🟡 MEDIUM |
+| `ProfileCreate`             | ❌ Missing                       | 🔴 BREAKING | 🟠 HIGH   |
+| `ProfileUpdate`             | ❌ Missing                       | 🔴 BREAKING | 🟠 HIGH   |
+| `ApplicationCreate`         | ❌ Missing                       | 🔴 BREAKING | 🟠 HIGH   |
+| `ApplicationUpdate`         | ❌ Missing                       | 🔴 BREAKING | 🟠 HIGH   |
+| `JobListing`                | ⚠️ `JobListingDetails` (partial) | 🔴 BREAKING | 🟠 HIGH   |
+| `JobMatchingResult`         | ❌ Missing                       | 🟡 WARNING  | 🟡 MEDIUM |
+| `DocumentAnalysis`          | ❌ Missing                       | 🟡 WARNING  | 🟡 MEDIUM |
+| `EmailScanRequest`          | ❌ Missing                       | 🟡 WARNING  | 🟡 MEDIUM |
 
 **Total Contracts:** 36
 **Valid:** 15 (42%)

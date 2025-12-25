@@ -2,6 +2,7 @@
 name: pydantic-model-scaffolder
 description: "Scaffolds Pydantic models for request/response validation with advanced validation rules. Use for complex data models. Related: fastapi-endpoint-scaffolder for quick endpoint creation."
 ---
+
 # Pydantic Model Scaffolder Workflow
 
 This skill creates type-safe Pydantic models with validation, documentation, and examples.
@@ -34,7 +35,7 @@ This skill creates type-safe Pydantic models with validation, documentation, and
      - `{{EXAMPLE}}` - Example data for documentation
    - Write to: `backend/app/models/{{model_name_snake}}_schemas.py`
 
-4. **Update models __init__.py:**
+4. **Update models **init**.py:**
    - Read: `backend/app/models/__init__.py`
    - Add import statement for new model
    - Add to `__all__` list
@@ -57,18 +58,21 @@ This skill creates type-safe Pydantic models with validation, documentation, and
 ## Model Types
 
 ### Request Model
+
 - Used for incoming API requests
 - Strict validation
 - Required fields enforced
 - Examples for OpenAPI docs
 
 ### Response Model
+
 - Used for API responses
 - May include computed fields
 - Documentation for frontend
 - Consistent structure
 
 ### Database Model
+
 - Used for Firestore/database operations
 - May include timestamps
 - Conversion methods (to_dict, from_dict)

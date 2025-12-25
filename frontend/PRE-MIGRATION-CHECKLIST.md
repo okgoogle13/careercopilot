@@ -1,6 +1,7 @@
 # Pre-Migration Checklist
 
-**Before starting the frontend cleanup and migration, verify all prerequisites are met.**
+**Before starting the frontend cleanup and migration, verify all prerequisites
+are met.**
 
 ---
 
@@ -27,10 +28,12 @@
 ## 📊 Analysis Complete
 
 - [ ] **Component Inventory Generated**
+
   ```bash
   cd frontend
   npx ts-node scripts/component-inventory.ts
   ```
+
   - [ ] `component-inventory.json` exists
   - [ ] Reviewed component categories
   - [ ] Identified reusable vs feature-specific components
@@ -48,18 +51,22 @@
 ## 🔧 Tools Verified
 
 - [ ] **TypeScript & ts-morph**
+
   ```bash
   yarn add -D ts-morph
   ```
+
   - [ ] ts-morph installed (version 27.0.0+)
   - [ ] TypeScript compilation works
   - [ ] tsconfig.json valid
 
 - [ ] **Scripts Executable**
+
   ```bash
   chmod +x frontend/scripts/component-inventory.ts
   chmod +x frontend/scripts/safe-migrate-component.ts
   ```
+
   - [ ] Scripts have execute permissions
   - [ ] ts-node available
   - [ ] Scripts run without errors
@@ -68,6 +75,7 @@
   ```bash
   git --version
   ```
+
   - [ ] Git installed and working
   - [ ] `git mv` command available
   - [ ] Git history preserved
@@ -77,24 +85,30 @@
 ## 🧪 Testing Infrastructure
 
 - [ ] **Test Suite Running**
+
   ```bash
   yarn test
   ```
+
   - [ ] All tests currently pass
   - [ ] No flaky tests
   - [ ] Test timeout configured (15s)
 
 - [ ] **TypeScript Check**
+
   ```bash
   yarn typecheck
   ```
+
   - [ ] No TypeScript errors
   - [ ] All types resolve correctly
 
 - [ ] **Build Success**
+
   ```bash
   yarn build
   ```
+
   - [ ] Build completes without errors
   - [ ] No warnings (or acceptable warnings documented)
 
@@ -102,6 +116,7 @@
   ```bash
   yarn storybook
   ```
+
   - [ ] Storybook starts successfully
   - [ ] All stories load
   - [ ] No console errors
@@ -157,17 +172,17 @@
 
 **Before proceeding with ANY migration:**
 
-| Criterion | Status | Notes |
-|-----------|--------|-------|
-| All infrastructure checks pass | ⬜ | |
-| Component inventory generated | ⬜ | |
-| Tools verified and working | ⬜ | |
-| Tests all passing | ⬜ | |
-| Build successful | ⬜ | |
-| Backup created and pushed | ⬜ | |
-| Team informed | ⬜ | |
-| First component selected | ⬜ | |
-| Rollback plan understood | ⬜ | |
+| Criterion                      | Status | Notes |
+| ------------------------------ | ------ | ----- |
+| All infrastructure checks pass | ⬜     |       |
+| Component inventory generated  | ⬜     |       |
+| Tools verified and working     | ⬜     |       |
+| Tests all passing              | ⬜     |       |
+| Build successful               | ⬜     |       |
+| Backup created and pushed      | ⬜     |       |
+| Team informed                  | ⬜     |       |
+| First component selected       | ⬜     |       |
+| Rollback plan understood       | ⬜     |       |
 
 **If ALL boxes checked ✅ → PROCEED with migration**
 

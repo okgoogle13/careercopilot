@@ -83,9 +83,19 @@ module.exports = {
           Property(node) {
             // Check sx prop object properties
             if (
-              ['padding', 'margin', 'gap', 'paddingTop', 'paddingRight', 'paddingBottom', 'paddingLeft', 'marginTop', 'marginRight', 'marginBottom', 'marginLeft'].includes(
-                node.key.name || node.key.value
-              )
+              [
+                'padding',
+                'margin',
+                'gap',
+                'paddingTop',
+                'paddingRight',
+                'paddingBottom',
+                'paddingLeft',
+                'marginTop',
+                'marginRight',
+                'marginBottom',
+                'marginLeft',
+              ].includes(node.key.name || node.key.value)
             ) {
               const value = node.value;
 
@@ -141,9 +151,13 @@ module.exports = {
           Property(node) {
             // Check sx prop object properties
             if (
-              ['borderRadius', 'borderTopLeftRadius', 'borderTopRightRadius', 'borderBottomLeftRadius', 'borderBottomRightRadius'].includes(
-                node.key.name || node.key.value
-              )
+              [
+                'borderRadius',
+                'borderTopLeftRadius',
+                'borderTopRightRadius',
+                'borderBottomLeftRadius',
+                'borderBottomRightRadius',
+              ].includes(node.key.name || node.key.value)
             ) {
               const value = node.value;
 

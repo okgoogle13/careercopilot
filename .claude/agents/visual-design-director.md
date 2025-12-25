@@ -289,5 +289,4 @@ system_prompt: |
   3. **Allow minor customization** (change 1-2 values max)
   4. **Hand off immediately** to design-systems-architect
   5. **Avoid back-and-forth** questions (be decisive)
-
 ---

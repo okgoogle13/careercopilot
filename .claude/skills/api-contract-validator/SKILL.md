@@ -2,6 +2,7 @@
 name: api-contract-validator
 description: "Validates type contracts between TypeScript interfaces and Pydantic models. Detects field mismatches and type inconsistencies. Related: frontend-backend-mapper for endpoint discovery."
 ---
+
 # API Contract Validator Workflow
 
 This skill ensures type safety and consistency between frontend TypeScript interfaces and backend Pydantic models.
@@ -49,7 +50,7 @@ This skill ensures type safety and consistency between frontend TypeScript inter
 
 ## Validation Report Structure
 
-```markdown
+````markdown
 # API Contract Validation Report
 
 Generated: 2025-01-06T12:00:00Z
@@ -66,11 +67,11 @@ Generated: 2025-01-06T12:00:00Z
 
 ### ✅ VALID CONTRACTS (22)
 
-| Contract Name | Frontend | Backend | Status |
-|---------------|----------|---------|--------|
-| `ATSScoreRequest` | aiServices.ts | analysis_schemas.py | ✅ Perfect match |
-| `UserProfile` | profileService.ts | schemas.py | ✅ Perfect match |
-| ... |
+| Contract Name     | Frontend          | Backend             | Status           |
+| ----------------- | ----------------- | ------------------- | ---------------- |
+| `ATSScoreRequest` | aiServices.ts     | analysis_schemas.py | ✅ Perfect match |
+| `UserProfile`     | profileService.ts | schemas.py          | ✅ Perfect match |
+| ...               |
 
 ### 🔴 BREAKING MISMATCHES (2)
 
@@ -79,12 +80,14 @@ Generated: 2025-01-06T12:00:00Z
 **Location:** `notificationService.ts` ↔ `notification_schemas.py`
 
 **Issues:**
+
 - Field type mismatch: `frequency` is `string` in TS but `int` in Python
 - Missing required field: `user_id` required in backend but not sent from frontend
 
 **Impact:** 🔴 API calls will fail with 422 validation errors
 
 **Fix (Frontend):**
+
 ```typescript
 // notificationService.ts
 interface NotificationPreferences {
@@ -93,8 +96,10 @@ interface NotificationPreferences {
   // ... other fields
 }
 ```
+````
 
 **Fix (Backend - Alternative):**
+
 ```python
 # notification_schemas.py
 class NotificationPreferencesRequest(BaseModel):
@@ -112,6 +117,7 @@ class NotificationPreferencesRequest(BaseModel):
 **Recommendation:** Standardize on one casing style
 
 **Example:**
+
 ```typescript
 // Frontend (camelCase)
 interface JobListing {
@@ -126,6 +132,7 @@ class JobListingResponse(BaseModel):
 ```
 
 **Recommendation:** Add Pydantic alias config:
+
 ```python
 class JobListingResponse(BaseModel):
     job_title: str = Field(alias="jobTitle")
@@ -137,15 +144,16 @@ class JobListingResponse(BaseModel):
 
 ## Type Mapping Reference
 
-| TypeScript | Python (Pydantic) | Compatible |
-|------------|-------------------|------------|
-| `string` | `str` | ✅ |
-| `number` | `int`, `float` | ✅ |
-| `boolean` | `bool` | ✅ |
-| `string[]` | `List[str]` | ✅ |
-| `Date` | `datetime` | ⚠️ Needs serialization |
-| `any` | `Any` | ⚠️ Avoid if possible |
-| `T \| null` | `Optional[T]` | ✅ |
+| TypeScript  | Python (Pydantic) | Compatible             |
+| ----------- | ----------------- | ---------------------- |
+| `string`    | `str`             | ✅                     |
+| `number`    | `int`, `float`    | ✅                     |
+| `boolean`   | `bool`            | ✅                     |
+| `string[]`  | `List[str]`       | ✅                     |
+| `Date`      | `datetime`        | ⚠️ Needs serialization |
+| `any`       | `Any`             | ⚠️ Avoid if possible   |
+| `T \| null` | `Optional[T]`     | ✅                     |
+
 ```
 
 ## Usage Tips
@@ -155,3 +163,4 @@ class JobListingResponse(BaseModel):
 - Fix breaking issues immediately
 - Schedule non-breaking fixes for next sprint
 - Use validator output for API documentation
+```

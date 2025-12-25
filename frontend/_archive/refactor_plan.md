@@ -1,12 +1,15 @@
 # Frontend Cleanup & Restructuring Plan
 
-This plan outlines the steps to clean up unused files and refactor the frontend directory structure for better scalability and maintainability. Execute each phase in the specified order.
+This plan outlines the steps to clean up unused files and refactor the frontend
+directory structure for better scalability and maintainability. Execute each
+phase in the specified order.
 
 ---
 
 ### Phase 1: Immediate Deletion (Low-Risk Cleanup)
 
-Delete the following files and directories from the repository root and `src/` folder. They are backups, migration artifacts, or unused scripts.
+Delete the following files and directories from the repository root and `src/`
+folder. They are backups, migration artifacts, or unused scripts.
 
 **Delete from root:**
 
@@ -30,23 +33,31 @@ Delete the following files and directories from the repository root and `src/` f
 
 ### Phase 2: Legacy UI Component Removal
 
-The `src/components/ui` directory contains a mix of old and new MUI-based components. This phase removes the old library.
+The `src/components/ui` directory contains a mix of old and new MUI-based
+components. This phase removes the old library.
 
-1.  **Delete Legacy Components:** For every component that has a `-mui.tsx` counterpart, delete the original file.
-    - **Example:** Delete `src/components/ui/button.tsx` because `button-mui.tsx` exists. Delete `card.tsx`, `dialog.tsx`, `input.tsx`, `badge.tsx`, etc.
+1.  **Delete Legacy Components:** For every component that has a `-mui.tsx`
+    counterpart, delete the original file.
+    - **Example:** Delete `src/components/ui/button.tsx` because
+      `button-mui.tsx` exists. Delete `card.tsx`, `dialog.tsx`, `input.tsx`,
+      `badge.tsx`, etc.
 
-2.  **Rename MUI Components:** Rename all `*-mui.tsx` files to remove the `-mui` suffix.
+2.  **Rename MUI Components:** Rename all `*-mui.tsx` files to remove the `-mui`
+    suffix.
     - **Example:** Rename `button-mui.tsx` to `button.tsx`.
-    - **Result:** `src/components/ui` should now only contain the pure, renamed MUI components.
+    - **Result:** `src/components/ui` should now only contain the pure, renamed
+      MUI components.
 
 3.  **Delete Legacy Storybook Files:**
-    - Delete `src/stories/page.css`, `src/stories/button.css`, `src/stories/header.css`.
+    - Delete `src/stories/page.css`, `src/stories/button.css`,
+      `src/stories/header.css`.
 
 ---
 
 ### Phase 3: Directory Restructuring
 
-Create the new folder structure inside `src/components/` to group components by type and feature.
+Create the new folder structure inside `src/components/` to group components by
+type and feature.
 
 1.  **Create New Directories:**
     - `src/components/layout`
@@ -67,7 +78,9 @@ Move existing components from their current locations into the new structure.
     - `src/components/layout/PageHeader.tsx`
 
 2.  **Move to `src/components/features/opportunities/`:**
-    - `src/components/features/opportunities/KanbanBoard.tsx.wip` (Note: This component is a work in progress and has been temporarily disabled in `ApplicationTracker.tsx`.)
+    - `src/components/features/opportunities/KanbanBoard.tsx.wip` (Note: This
+      component is a work in progress and has been temporarily disabled in
+      `ApplicationTracker.tsx`.)
     - `src/components/career/FilterPanel.tsx`
     - `src/components/career/JobCard.tsx`
 
@@ -84,5 +97,6 @@ Move existing components from their current locations into the new structure.
 
 ### Phase 5: Update All Import Paths
 
-After all files have been moved, perform a project-wide find-and-replace to fix all broken import paths. Ensure the application compiles and runs without import errors. This is the final and most critical step.
-a
+After all files have been moved, perform a project-wide find-and-replace to fix
+all broken import paths. Ensure the application compiles and runs without import
+errors. This is the final and most critical step. a

@@ -2,11 +2,7 @@
   "compilerOptions": {
     "target": "ES2020",
     "useDefineForClassFields": true,
-    "lib": [
-      "ES2020",
-      "DOM",
-      "DOM.Iterable"
-    ],
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
     "moduleResolution": "bundler",
@@ -21,21 +17,11 @@
     "esModuleInterop": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "./src/*"
-      ]
+      "@/*": ["./src/*"]
     },
-    "types": [
-      "node",
-      "jest",
-      "vite/client"
-    ]
+    "types": ["node", "jest", "vite/client"]
   },
-  "include": [
-    "src",
-    "**/*.ts",
-    "**/*.tsx"
-  ],
+  "include": ["src", "**/*.ts", "**/*.tsx"],
   "exclude": [
     "node_modules",
     "dist",

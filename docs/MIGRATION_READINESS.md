@@ -11,6 +11,7 @@
 The CareerCopilot frontend codebase requires significant preparation before M3 migration automation can proceed. Current readiness score is **12%**, with critical gaps in component structure, testing, and documentation.
 
 ### Current State
+
 - **126 components** across 27 directories
 - **18%** have proper index exports
 - **17%** have test coverage
@@ -41,6 +42,7 @@ The following M3 migration skills are in development and will require a prepared
 **Problem:** Only 18% of components have proper directory structure.
 
 **Required Structure:**
+
 ```
 components/
   ComponentName/
@@ -51,6 +53,7 @@ components/
 ```
 
 **Action Required:**
+
 - [ ] Create `scripts/standardize-component-structure.sh` to automate restructuring
 - [ ] Migrate 121 components to standard structure
 - [ ] Add index exports for all components
@@ -60,12 +63,14 @@ components/
 **Problem:** Mixed PascalCase/kebab-case directory names.
 
 **Issues Detected:**
+
 - `features/Analysis` vs `features/opportunities` (inconsistent case)
 - `features/Ksc` AND `features/KSC` (duplicate directories!)
 - `Documents` vs `documents`
 - `ui/Button` vs other lowercase directories
 
 **Action Required:**
+
 - [ ] Consolidate `features/Ksc` and `features/KSC` (duplicates)
 - [ ] Standardize all directories to kebab-case
 - [ ] Update all imports in codebase
@@ -76,6 +81,7 @@ components/
 **Problem:** Only 17% test coverage (22/126 components tested).
 
 **Action Required:**
+
 - [ ] Generate tests for 104 untested components using `jest-test-scaffolder` skill
 - [ ] Prioritize complex components (forms, data visualization, AI features)
 - [ ] Add test utilities for common patterns
@@ -86,6 +92,7 @@ components/
 **Problem:** Only 2% have Storybook stories (3/126 components).
 
 **Action Required:**
+
 - [ ] Generate stories for all reusable components using `storybook-scaffolder` skill
 - [ ] Focus on UI library components first (29 components in `ui/`)
 - [ ] Add interaction tests for complex components
@@ -114,6 +121,7 @@ export function ActionCard({ ... }) {
 ```
 
 **Action Required:**
+
 - [ ] Add JSDoc metadata to all 126 components
 - [ ] Create metadata validation script
 - [ ] Generate component manifest JSON for tooling
@@ -124,12 +132,14 @@ export function ActionCard({ ... }) {
 **Problem:** Mixed default/named exports across codebase.
 
 **Current State:**
+
 - Some components use `export default`
 - Some use `export function ComponentName`
 - Some have no index.ts barrel exports
 - Import statements are inconsistent
 
 **Action Required:**
+
 - [ ] Audit all exports (default vs named)
 - [ ] Standardize to named exports + barrel files
 - [ ] Update all import statements
@@ -140,6 +150,7 @@ export function ActionCard({ ... }) {
 ## Migration Readiness Checklist
 
 ### Phase 1: Foundation (Week 1)
+
 - [ ] Run component structure audit (`scripts/audit-component-structure.sh`)
 - [ ] Create component inventory manifest
 - [ ] Consolidate duplicate directories (Ksc/KSC)
@@ -147,24 +158,28 @@ export function ActionCard({ ... }) {
 - [ ] Create import migration map
 
 ### Phase 2: Structure (Week 2)
+
 - [ ] Restructure all components to standard format
 - [ ] Add index.ts barrel exports to all components
 - [ ] Update all imports to use barrel exports
 - [ ] Validate TypeScript compilation
 
 ### Phase 3: Testing (Week 2-3)
+
 - [ ] Generate Jest tests for all untested components
 - [ ] Generate Storybook stories for UI library
 - [ ] Run test suite and achieve 50% coverage
 - [ ] Set up coverage gates in CI/CD
 
 ### Phase 4: Metadata (Week 3)
+
 - [ ] Add JSDoc metadata to all components
 - [ ] Generate component manifest JSON
 - [ ] Create metadata validation script
 - [ ] Document custom patterns and edge cases
 
 ### Phase 5: Validation (Week 4)
+
 - [ ] Run pre-migration validation script
 - [ ] Verify all components have required structure
 - [ ] Verify TypeScript strict mode compliance
@@ -215,6 +230,7 @@ export function ActionCard({ ... }) {
 ## Component Inventory by Category
 
 ### UI Components (29 files)
+
 **Location:** `frontend/src/components/ui/`
 **Readiness:** LOW (most missing tests/stories)
 
@@ -224,6 +240,7 @@ export function ActionCard({ ... }) {
 - Others need standardization
 
 ### Library Components (15 files)
+
 **Location:** `frontend/src/components/library/`
 **Readiness:** VERY LOW (no tests, no stories, no index files)
 
@@ -234,6 +251,7 @@ export function ActionCard({ ... }) {
 - Others...
 
 ### Feature Components
+
 **Location:** `frontend/src/components/features/`
 **Readiness:** LOW
 
@@ -245,10 +263,12 @@ export function ActionCard({ ... }) {
 - demo
 
 ### Career Components
+
 **Location:** `frontend/src/components/career/`
 **Readiness:** MEDIUM (has some tests)
 
 ### Documents Components
+
 **Location:** `frontend/src/components/Documents/`
 **Readiness:** LOW
 **Issue:** PascalCase directory name
@@ -258,12 +278,14 @@ export function ActionCard({ ... }) {
 ## TypeScript Configuration
 
 ### Current Config
+
 - ✅ Strict mode enabled
 - ✅ Path aliases configured (`@/*`)
 - ⚠️ `noUnusedLocals` disabled (should enable after cleanup)
 - ⚠️ `noUnusedParameters` disabled (should enable after cleanup)
 
 ### Recommended Changes
+
 ```json
 {
   "compilerOptions": {
@@ -294,17 +316,20 @@ For the M3 migration skills to work seamlessly, each component must:
 ## Risk Assessment
 
 ### High Risk Issues
+
 1. **Duplicate directories** (Ksc/KSC) - may cause import conflicts
 2. **No component metadata** - automation will make assumptions
 3. **Low test coverage** - high risk of breaking changes going undetected
 4. **Inconsistent naming** - automation may miss components
 
 ### Medium Risk Issues
+
 1. **Mixed export patterns** - some automation may not find exports
 2. **No Storybook coverage** - visual regressions won't be caught
 3. **Disabled strict TypeScript rules** - type errors may surface
 
 ### Low Risk Issues
+
 1. **No CSS files** (using MUI/Tailwind) - good for migration
 2. **TypeScript already in use** - easier to validate changes
 

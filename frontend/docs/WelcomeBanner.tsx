@@ -1,19 +1,6 @@
 import React from 'react';
-import {
-  Card,
-  CardContent,
-  Typography,
-  Button,
-  Box,
-  Chip,
-  alpha,
-} from '@mui/material';
-import {
-  Sparkles,
-  TrendingUp,
-  Target,
-  Clock,
-} from 'lucide-react';
+import { Card, CardContent, Typography, Button, Box, Chip, alpha } from '@mui/material';
+import { Sparkles, TrendingUp, Target, Clock } from 'lucide-react';
 
 interface WelcomeBannerProps {
   userName?: string;
@@ -34,7 +21,7 @@ const formatRelativeTime = (date: Date | string): string => {
   const then = typeof date === 'string' ? new Date(date) : date;
   const diffMs = now.getTime() - then.getTime();
   const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-  
+
   if (diffDays === 0) return 'today';
   if (diffDays === 1) return '1 day ago';
   if (diffDays < 7) return `${diffDays} days ago`;
@@ -58,21 +45,21 @@ export const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
 
   const getMotivationalMessage = () => {
     if (!profileData) return 'Ready to accelerate your career journey?';
-    
+
     const { activeApplications, interviewsScheduled } = profileData;
-    
+
     if (interviewsScheduled > 0) {
       return `You have ${interviewsScheduled} interview${interviewsScheduled > 1 ? 's' : ''} coming up. You've got this! 🚀`;
     }
-    
+
     if (activeApplications > 5) {
       return "You're actively pursuing multiple opportunities. Keep the momentum going! 💪";
     }
-    
+
     if (activeApplications > 0) {
       return "Great progress on your job search. Let's optimize your approach! ⭐";
     }
-    
+
     return "Ready to kickstart your career journey? Let's build something amazing! ✨";
   };
 
@@ -152,7 +139,10 @@ export const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
               {/* Welcome Content */}
               <Box sx={{ flex: 1 }}>
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
-                  <Sparkles size={20} color="white" />
+                  <Sparkles
+                    size={20}
+                    color="white"
+                  />
                   <Typography
                     variant="body2"
                     sx={{
@@ -164,7 +154,7 @@ export const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
                     {getGreeting()}, {userName}!
                   </Typography>
                 </Box>
-                
+
                 <Typography
                   variant="h4"
                   sx={{
@@ -176,7 +166,7 @@ export const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
                 >
                   {getMotivationalMessage()}
                 </Typography>
-                
+
                 <Typography
                   variant="body1"
                   sx={{
@@ -185,15 +175,20 @@ export const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
                     mb: 3,
                   }}
                 >
-                  Your AI-powered career companion is here to help you land your dream job. 
-                  Let's review your progress and plan your next moves.
+                  Your AI-powered career companion is here to help you land your dream job. Let's
+                  review your progress and plan your next moves.
                 </Typography>
 
                 {/* Quick Stats */}
                 {profileData && (
                   <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2, mt: 4 }}>
                     <Chip
-                      icon={<Target size={16} color="white" />}
+                      icon={
+                        <Target
+                          size={16}
+                          color="white"
+                        />
+                      }
                       label={`${profileData.activeApplications} Active Applications`}
                       sx={{
                         bgcolor: 'rgba(255, 255, 255, 0.1)',
@@ -206,7 +201,12 @@ export const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
                       }}
                     />
                     <Chip
-                      icon={<TrendingUp size={16} color="white" />}
+                      icon={
+                        <TrendingUp
+                          size={16}
+                          color="white"
+                        />
+                      }
                       label={`${profileData.totalApplications} Total Applications`}
                       sx={{
                         bgcolor: 'rgba(255, 255, 255, 0.1)',
@@ -220,7 +220,12 @@ export const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
                     />
                     {profileData.interviewsScheduled > 0 && (
                       <Chip
-                        icon={<Clock size={16} color="white" />}
+                        icon={
+                          <Clock
+                            size={16}
+                            color="white"
+                          />
+                        }
                         label={`${profileData.interviewsScheduled} Interviews Scheduled`}
                         sx={{
                           bgcolor: 'rgba(255, 255, 255, 0.1)',
@@ -313,24 +318,42 @@ export const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
             {/* Recent Activity */}
             <Box>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 2 }}>
-                <Clock size={16} color="#A78BFA" />
-                <Typography variant="h6" sx={{ fontWeight: 600 }}>
+                <Clock
+                  size={16}
+                  color="#A78BFA"
+                />
+                <Typography
+                  variant="h6"
+                  sx={{ fontWeight: 600 }}
+                >
                   Recent Activity
                 </Typography>
               </Box>
               <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
                 {profileData?.lastActivity ? (
-                  <Typography variant="body2" color="text.secondary">
+                  <Typography
+                    variant="body2"
+                    color="text.secondary"
+                  >
                     Last active {formatRelativeTime(profileData.lastActivity)}
                   </Typography>
                 ) : (
-                  <Typography variant="body2" color="text.secondary">
+                  <Typography
+                    variant="body2"
+                    color="text.secondary"
+                  >
                     Welcome back! Ready to make progress today?
                   </Typography>
                 )}
                 <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap', mt: 1 }}>
-                  <Chip label="Resume updated recently" size="small" />
-                  <Chip label="New job matches available" size="small" />
+                  <Chip
+                    label="Resume updated recently"
+                    size="small"
+                  />
+                  <Chip
+                    label="New job matches available"
+                    size="small"
+                  />
                 </Box>
               </Box>
             </Box>
@@ -338,15 +361,24 @@ export const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
             {/* Recent Achievements */}
             <Box>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 2 }}>
-                <Sparkles size={16} color="#F472B6" />
-                <Typography variant="h6" sx={{ fontWeight: 600 }}>
+                <Sparkles
+                  size={16}
+                  color="#F472B6"
+                />
+                <Typography
+                  variant="h6"
+                  sx={{ fontWeight: 600 }}
+                >
                   Recent Achievements
                 </Typography>
               </Box>
               <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
                 {profileData?.recentAchievements ? (
                   profileData.recentAchievements.map((achievement, index) => (
-                    <Box key={index} sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+                    <Box
+                      key={index}
+                      sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}
+                    >
                       <Box
                         sx={{
                           width: 8,
@@ -355,7 +387,10 @@ export const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
                           borderRadius: '50%',
                         }}
                       />
-                      <Typography variant="body2" color="text.secondary">
+                      <Typography
+                        variant="body2"
+                        color="text.secondary"
+                      >
                         {achievement}
                       </Typography>
                     </Box>
@@ -371,7 +406,10 @@ export const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
                           borderRadius: '50%',
                         }}
                       />
-                      <Typography variant="body2" color="text.secondary">
+                      <Typography
+                        variant="body2"
+                        color="text.secondary"
+                      >
                         Profile setup completed
                       </Typography>
                     </Box>
@@ -384,7 +422,10 @@ export const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
                           borderRadius: '50%',
                         }}
                       />
-                      <Typography variant="body2" color="text.secondary">
+                      <Typography
+                        variant="body2"
+                        color="text.secondary"
+                      >
                         First resume created
                       </Typography>
                     </Box>

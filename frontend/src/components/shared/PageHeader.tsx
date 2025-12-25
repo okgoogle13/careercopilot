@@ -5,11 +5,11 @@ interface PageHeaderProps {
   className?: string;
 }
 
-export function PageHeader({ 
-  title, 
-  highlightedWord, 
+export function PageHeader({
+  title,
+  highlightedWord,
   description,
-  className = ''
+  className = '',
 }: PageHeaderProps) {
   const renderTitle = () => {
     if (!highlightedWord) {
@@ -20,7 +20,7 @@ export function PageHeader({
     return (
       <>
         {parts[0]}
-        <span className="text-[#D0BCFF] italic font-light">{highlightedWord}</span>
+        <span className="text-primary italic font-light">{highlightedWord}</span>
         {parts[1]}
       </>
     );
@@ -28,12 +28,10 @@ export function PageHeader({
 
   return (
     <div className={`mb-8 ${className}`}>
-      <h2 className="mb-2 text-[4.5rem] leading-[1.1] font-[800] text-[#E6E1E5] uppercase tracking-tight">
+      <h2 className="mb-2 text-display-large leading-tight font-black text-on-surface uppercase tracking-tight">
         {renderTitle()}
       </h2>
-      {description && (
-        <p className="text-[#CAC4D0] text-base">{description}</p>
-      )}
+      {description && <p className="text-on-surface-variant text-body-large">{description}</p>}
     </div>
   );
 }

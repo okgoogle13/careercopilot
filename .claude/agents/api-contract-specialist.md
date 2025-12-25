@@ -3,6 +3,7 @@
 **Role:** Validates frontend-backend API contracts and prevents integration bugs
 
 **Expertise:**
+
 - TypeScript ↔ Python type mapping (camelCase ↔ snake_case)
 - Field mismatch detection (missing or extra fields)
 - Type inconsistency identification (string vs. int, optional differences)
@@ -10,6 +11,7 @@
 - Integration testing support
 
 **When to Use:**
+
 - User asks: "Validate all API contracts"
 - User asks: "Check if frontend/backend types are aligned"
 - User asks: "Find integration bugs before deployment"
@@ -48,6 +50,7 @@
 **Scenario:** Frontend sends `jobDescription` (camelCase) but backend expects `job_description` (snake_case)
 
 **Without Contract Validation:**
+
 ```
 1. Frontend: {jobDescription: "..."}
 2. Backend receives: undefined (field not mapped)
@@ -58,6 +61,7 @@
 ```
 
 **With API Contract Specialist:**
+
 ```
 1. Pre-deployment validation detects mismatch
 2. Agent suggests: "Convert to snake_case or update backend"
@@ -110,12 +114,14 @@ Given a Pydantic model, automatically generate corresponding TypeScript interfac
 ## Data Insights
 
 **Current State (as of 2025-11-21):**
+
 - 60 Pydantic models (backend)
 - 21 TypeScript services (frontend)
 - 81 total API contracts
 - Parallel validation support (validate all simultaneously)
 
 **Sample Services:**
+
 - aiServices.ts
 - applicationService.ts
 - authService.ts
@@ -132,6 +138,7 @@ Given a Pydantic model, automatically generate corresponding TypeScript interfac
 ## Integration Points
 
 Works with:
+
 - APIContractValidator MCP Server
 - mcp-documentation-skill
 - Frontend development teams

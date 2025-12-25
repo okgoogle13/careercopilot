@@ -29,6 +29,7 @@ The CareerCopilot application uses **Firestore-backed caching** (not Redis) to r
 **Collection:** `redis_cache` (Firestore collection, despite the name)
 
 **Features:**
+
 - ✅ TTL-based automatic expiration
 - ✅ Graceful fallback when Firestore unavailable
 - ✅ SHA256 key hashing for safe document IDs
@@ -49,6 +50,7 @@ The CareerCopilot application uses **Firestore-backed caching** (not Redis) to r
 ```
 
 **Performance Metrics:**
+
 - **Cache HIT:** ~15ms (Firestore read latency)
 - **Cache MISS:** ~2-5s (LLM API call + Firestore write)
 - **Cost Savings:** $0.002/request (cached) vs $0.03-0.05/request (LLM)
@@ -82,6 +84,7 @@ async def get_llm_response(prompt: str, model: str, ...) -> str:
 ```
 
 **Usage in Genkit Flows:**
+
 - ✅ Cover letter generation (cached)
 - ✅ Resume optimization (cached)
 - ✅ Keyword extraction (cached)
@@ -95,20 +98,22 @@ async def get_llm_response(prompt: str, model: str, ...) -> str:
 ### Current Savings (Estimated)
 
 **Assumptions:**
+
 - Average LLM request cost: $0.03-0.05
 - Cache hit rate (production): 50-60% (typical)
 - Daily API calls: 1,000 requests
 
 **Monthly Cost Comparison:**
 
-| Scenario | Cache Hit Rate | Monthly Calls | LLM Calls | Cache Hits | Cost (LLM) | Cost (Firestore) | **Total** | **Savings** |
-|----------|----------------|---------------|-----------|------------|------------|------------------|-----------|-------------|
-| No Cache | 0% | 30,000 | 30,000 | 0 | $900-1,500 | $0 | **$900-1,500** | — |
-| Low Hit Rate | 30% | 30,000 | 21,000 | 9,000 | $630-1,050 | $18 | **$648-1,068** | $252-432 (28%) |
-| Medium Hit Rate | 50% | 30,000 | 15,000 | 15,000 | $450-750 | $30 | **$480-780** | $420-720 (47%) |
-| High Hit Rate | 70% | 30,000 | 9,000 | 21,000 | $270-450 | $42 | **$312-492** | $588-1,008 (67%) |
+| Scenario        | Cache Hit Rate | Monthly Calls | LLM Calls | Cache Hits | Cost (LLM) | Cost (Firestore) | **Total**      | **Savings**      |
+| --------------- | -------------- | ------------- | --------- | ---------- | ---------- | ---------------- | -------------- | ---------------- |
+| No Cache        | 0%             | 30,000        | 30,000    | 0          | $900-1,500 | $0               | **$900-1,500** | —                |
+| Low Hit Rate    | 30%            | 30,000        | 21,000    | 9,000      | $630-1,050 | $18              | **$648-1,068** | $252-432 (28%)   |
+| Medium Hit Rate | 50%            | 30,000        | 15,000    | 15,000     | $450-750   | $30              | **$480-780**   | $420-720 (47%)   |
+| High Hit Rate   | 70%            | 30,000        | 9,000     | 21,000     | $270-450   | $42              | **$312-492**   | $588-1,008 (67%) |
 
 **Firestore Costs:**
+
 - Read: $0.036 per 100,000 reads (~$0.0004/read)
 - Write: $0.108 per 100,000 writes (~$0.001/write)
 - Negligible compared to LLM costs
@@ -259,10 +264,12 @@ cache_key = _generate_cache_key(_normalize_prompt(prompt), model, ...)
 ### Current State
 
 **Monitoring Endpoints:**
+
 - ✅ `/monitoring/cache/stats` - Cache statistics (hits, misses, size)
 - ✅ `/monitoring/ai/costs` - AI cost tracking
 
 **Missing:**
+
 - ⚠️ No historical cache metrics (time-series data)
 - ⚠️ No alerts for low hit rates
 - ⚠️ No cache size monitoring (Firestore document count)
@@ -298,6 +305,7 @@ cache_key = _generate_cache_key(_normalize_prompt(prompt), model, ...)
 **Location:** `backend/tests/test_cache_system.py`
 
 **Coverage:**
+
 - ✅ Cache miss and set operations
 - ✅ Cache key consistency
 - ✅ TTL expiration
@@ -338,6 +346,7 @@ def test_cache_write_latency():
 ### Current Collection: `redis_cache`
 
 **Configuration:**
+
 - **Region:** us-central1 (same as backend)
 - **TTL Field:** `expires_at` (manual expiration check)
 - **Indexing:** None (sequential scans for cleanup)
@@ -354,6 +363,7 @@ gcloud firestore fields ttls update expires_at \
 ```
 
 **Impact:**
+
 - ✅ Automatic expired document deletion (no manual cleanup)
 - ✅ Reduced storage costs
 - ✅ Improved query performance
@@ -391,15 +401,15 @@ gcloud firestore indexes composite create \
 
 ### ⚠️ Improvement Opportunities (Priority Order)
 
-| Priority | Action Item | Impact | Effort | Savings |
-|----------|-------------|--------|--------|---------|
-| 🔥 HIGH | Enable Firestore TTL field policy | Auto-cleanup | 5 min | Storage costs |
-| 🔥 HIGH | Add composite index for queries | 10x faster stats | 5 min | Performance |
-| 🔥 HIGH | Differentiate TTL by operation type | +10-15% hit rate | 2-3 hrs | +$80-120/mo |
-| 🟠 MEDIUM | Add Prometheus cache metrics | Real-time monitoring | 2-3 hrs | Visibility |
-| 🟠 MEDIUM | Implement cache warming | Reduced cold starts | 4-5 hrs | UX improvement |
-| 🟡 LOW | Normalize prompts for better hits | +5-10% hit rate | 1-2 hrs | +$40-60/mo |
-| 🟡 LOW | Add performance regression tests | Prevent degradation | 2-3 hrs | Quality |
+| Priority  | Action Item                         | Impact               | Effort  | Savings        |
+| --------- | ----------------------------------- | -------------------- | ------- | -------------- |
+| 🔥 HIGH   | Enable Firestore TTL field policy   | Auto-cleanup         | 5 min   | Storage costs  |
+| 🔥 HIGH   | Add composite index for queries     | 10x faster stats     | 5 min   | Performance    |
+| 🔥 HIGH   | Differentiate TTL by operation type | +10-15% hit rate     | 2-3 hrs | +$80-120/mo    |
+| 🟠 MEDIUM | Add Prometheus cache metrics        | Real-time monitoring | 2-3 hrs | Visibility     |
+| 🟠 MEDIUM | Implement cache warming             | Reduced cold starts  | 4-5 hrs | UX improvement |
+| 🟡 LOW    | Normalize prompts for better hits   | +5-10% hit rate      | 1-2 hrs | +$40-60/mo     |
+| 🟡 LOW    | Add performance regression tests    | Prevent degradation  | 2-3 hrs | Quality        |
 
 **Total Estimated Additional Savings:** +$120-180/month (with optimizations)
 **Total Effort:** 12-16 hours

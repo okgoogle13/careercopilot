@@ -1,20 +1,12 @@
 import React from 'react';
-import {
-  Card,
-  CardContent,
-  Typography,
-  Box,
-  Button,
-  Chip,
-  alpha,
-} from '@mui/material';
+import { Card, CardContent, Typography, Box, Button, Chip, alpha } from '@mui/material';
 import { Sparkles as SparklesIcon } from 'lucide-react';
 
 /**
  * Example Migrated Component
- * 
+ *
  * This shows how a Tailwind-based component is converted to MUI.
- * 
+ *
  * BEFORE (Tailwind):
  * <div className="glass-bg backdrop-blur-md rounded-xl p-6 border border-glass hover:border-primary transition-all">
  *   <div className="flex items-center gap-2 mb-4">
@@ -90,8 +82,7 @@ export const ExampleMigratedCard: React.FC<ExampleMigratedCardProps> = ({
                 fontWeight: 600,
                 background: (theme) => alpha(theme.palette.tertiary.main, 0.2),
                 color: 'tertiary.main',
-                border: (theme) =>
-                  `1px solid ${alpha(theme.palette.tertiary.main, 0.3)}`,
+                border: (theme) => `1px solid ${alpha(theme.palette.tertiary.main, 0.3)}`,
               }}
             />
           )}
@@ -128,12 +119,10 @@ export const ExampleMigratedCard: React.FC<ExampleMigratedCardProps> = ({
 
 /**
  * Example with Aurora Gradient Border
- * 
+ *
  * This shows how to create the signature Aurora gradient border effect
  */
-export const ExampleAuroraBorderCard: React.FC<ExampleMigratedCardProps> = (
-  props
-) => {
+export const ExampleAuroraBorderCard: React.FC<ExampleMigratedCardProps> = (props) => {
   return (
     <Box
       sx={{
@@ -152,7 +141,7 @@ export const ExampleAuroraBorderCard: React.FC<ExampleMigratedCardProps> = (
 
 /**
  * Example Grid Layout
- * 
+ *
  * Shows how to create a responsive grid of cards
  */
 import { Grid } from '@mui/material';
@@ -177,9 +166,18 @@ export const ExampleCardGrid: React.FC = () => {
   ];
 
   return (
-    <Grid container spacing={3}>
+    <Grid
+      container
+      spacing={3}
+    >
       {cards.map((card, index) => (
-        <Grid item xs={12} md={6} lg={4} key={index}>
+        <Grid
+          item
+          xs={12}
+          md={6}
+          lg={4}
+          key={index}
+        >
           <ExampleMigratedCard {...card} />
         </Grid>
       ))}
