@@ -27,6 +27,20 @@ export interface JobAnalysis {
     companyNicheAndValues: string[];
     /** Personality traits or "nice-to-have" experiences */
     desirableAttributes: string[];
+    /** Verified sources from Google Search grounding */
+    sources?: GroundingSource[];
+    /** Australian sector-specific insights (APS, AASW, NDIS, WWCC) */
+    sectorInsights?: {
+        framework?: string; // e.g., "APS Integrated Leadership System"
+        compliance?: string[]; // e.g., ["WWCC Required", "NDIS Screening"]
+        standards?: string[]; // e.g., ["AASW Code of Ethics"]
+    };
+}
+
+/** Grounding source from Google Search */
+export interface GroundingSource {
+    title: string;
+    uri: string;
 }
 
 /** 
