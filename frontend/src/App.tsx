@@ -21,6 +21,7 @@ import { StyleGuide } from './features/style-guide/StyleGuide';
 import { Settings } from './features/settings/Settings';
 import { LandingPage } from './features/landing/LandingPage';
 import { ProfileView } from './features/profile/ProfileView';
+import { AssetLibrary } from './features/analysis/AssetLibrary';
 import { NotFound } from './features/not-found/NotFound';
 import { useAuth } from './context/AuthContext';
 import texturePattern from './assets/images/texture-pattern.png';
@@ -151,6 +152,10 @@ export default function App() {
           <Route
             path="/profile"
             element={<ProfileView />}
+          />
+          <Route
+            path="/asset-library"
+            element={<AssetLibrary />}
           />
           <Route
             path="/style-guide"

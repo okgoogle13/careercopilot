@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { TrendingUp, Award, Target, Sparkles, Download } from 'lucide-react';
+import { TrendingUp, Award, Target, Sparkles, Download, ExternalLink, Link2 } from 'lucide-react';
 import {
   LineChart,
   Line,
@@ -115,10 +115,33 @@ const MISSING_KEYWORDS: string[] = [
 // ============================================================================
 
 export function Analysis() {
-  const { analyzeDocument, analyzing, result } = useAnalysis();
+  const { analyzeDocument, analyzeJobUrl, analyzing, result, jobAnalysis } = useAnalysis();
   const [documentText, setDocumentText] = useState('');
   const [jobDescription, setJobDescription] = useState('');
+  const [jobUrl, setJobUrl] = useState('');
   const [showInputs, setShowInputs] = useState(true);
+  const [loadingJobUrl, setLoadingJobUrl] = useState(false);
+
+  const handleAnalyzeJobUrl = async () => {
+    if (!jobUrl) {
+      toast.error('Please provide a job URL');
+      return;
+    }
+
+    setLoadingJobUrl(true);
+    try {
+      const analysis = await analyzeJobUrl(jobUrl);
+      toast.success('Job analysis complete! Verified sources extracted.');
+      // Auto-populate job description from analysis
+      setJobDescription(analysis.keywords.join(', ') + '\n\n' +
+        'Requirements: ' + analysis.minimumRequirements.join(', '));
+    } catch (error) {
+      toast.error('Failed to analyze job URL. Please try again.');
+      console.error(error);
+    } finally {
+      setLoadingJobUrl(false);
+    }
+  };
 
   const handleAnalyze = async () => {
     if (!documentText || !jobDescription) {
@@ -209,6 +232,32 @@ export function Analysis() {
               <h2 className="text-title-large font-bold text-on-surface">
                 Run Intelligence Audit
               </h2>
+            </div>
+
+            {/* Job URL Intelligence Extractor */}
+            <div className="mb-6 bg-surface-container-low rounded-tech p-6 border border-outline">
+              <label className="block text-label-large font-bold text-on-surface mb-3">
+                🔗 Job URL (Optional - Australian Sector Intelligence)
+              </label>
+              <div className="flex gap-3">
+                <input
+                  type="url"
+                  value={jobUrl}
+                  onChange={(e) => setJobUrl(e.target.value)}
+                  placeholder="https://seek.com.au/job/..."
+                  className="flex-1 bg-surface-container-high rounded-tech px-4 py-3 text-on-surface border border-outline-variant focus:border-primary focus:outline-none"
+                />
+                <Button
+                  onClick={handleAnalyzeJobUrl}
+                  disabled={loadingJobUrl || !jobUrl}
+                  className="bg-secondary-container text-on-secondary-container hover:bg-secondary hover:text-on-secondary rounded-pebble px-6 font-bold"
+                >
+                  {loadingJobUrl ? 'Extracting...' : 'Extract Intelligence'}
+                </Button>
+              </div>
+              <p className="text-body-small text-on-surface-variant mt-2">
+                Automatically extract keywords, requirements, and Australian sector compliance (APS, AASW, WWCC, NDIS) from job posting URLs.
+              </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -450,6 +499,88 @@ export function Analysis() {
             </div>
           </div>
         </ChartPane>
+
+        {/* Verified Sources - Citations from Google Search Grounding */}
+        {jobAnalysis?.sources && jobAnalysis.sources.length > 0 && (
+          <div className="mt-8 bg-surface-container rounded-tech p-8 border border-outline-variant shadow-elevation-1">
+            <div className="flex items-center gap-3 mb-6">
+              <Link2 className="w-6 h-6 text-tertiary" />
+              <h2 className="text-title-large font-bold text-on-surface">
+                Verified Sources
+              </h2>
+            </div>
+
+            <p className="text-body-medium text-on-surface-variant mb-6">
+              These sources were automatically discovered via Google Search grounding and verified for Australian sector compliance.
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {jobAnalysis.sources.map((source, index) => (
+                <a
+                  key={index}
+                  href={source.uri}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-surface-container-low rounded-tech p-4 border border-outline hover:border-primary hover:bg-surface-container transition-all duration-short-2 ease-spring group"
+                >
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="flex-1">
+                      <h3 className="text-body-large font-bold text-on-surface group-hover:text-primary mb-2">
+                        {source.title}
+                      </h3>
+                      <p className="text-body-small text-on-surface-variant truncate">
+                        {source.uri}
+                      </p>
+                    </div>
+                    <ExternalLink className="w-4 h-4 text-on-surface-variant group-hover:text-primary flex-shrink-0 mt-1" />
+                  </div>
+                </a>
+              ))}
+            </div>
+
+            {/* Australian Sector Insights */}
+            {jobAnalysis.sectorInsights && (
+              <div className="mt-6 bg-tertiary-container/20 rounded-pebble p-4 border-l-4 border-tertiary">
+                <h4 className="text-label-large font-bold text-on-tertiary-container mb-3">
+                  🇦🇺 Australian Sector Intelligence
+                </h4>
+
+                {jobAnalysis.sectorInsights.framework && (
+                  <div className="mb-2">
+                    <span className="text-label-small font-bold text-on-tertiary-container uppercase tracking-wider">
+                      Framework:
+                    </span>
+                    <span className="text-body-medium text-on-tertiary-container ml-2">
+                      {jobAnalysis.sectorInsights.framework}
+                    </span>
+                  </div>
+                )}
+
+                {jobAnalysis.sectorInsights.compliance && jobAnalysis.sectorInsights.compliance.length > 0 && (
+                  <div className="mb-2">
+                    <span className="text-label-small font-bold text-on-tertiary-container uppercase tracking-wider">
+                      Compliance:
+                    </span>
+                    <span className="text-body-medium text-on-tertiary-container ml-2">
+                      {jobAnalysis.sectorInsights.compliance.join(', ')}
+                    </span>
+                  </div>
+                )}
+
+                {jobAnalysis.sectorInsights.standards && jobAnalysis.sectorInsights.standards.length > 0 && (
+                  <div>
+                    <span className="text-label-small font-bold text-on-tertiary-container uppercase tracking-wider">
+                      Standards:
+                    </span>
+                    <span className="text-body-medium text-on-tertiary-container ml-2">
+                      {jobAnalysis.sectorInsights.standards.join(', ')}
+                    </span>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        )}
 
         {/* Impact Enhancements Section - The Quantifier */}
         {result?.quantifiers && result.quantifiers.length > 0 && (
