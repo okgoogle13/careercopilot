@@ -1,5 +1,8 @@
 import { useState } from 'react';
-import { TrendingUp, Award, Target, Sparkles, Download, ExternalLink, Link2 } from 'lucide-react';
+import {
+  TrendingUp, Award, Target, Sparkles, Download, ExternalLink, Link2,
+  Loader2, Shield, CheckCircle2, BookOpen, AlertCircle
+} from 'lucide-react';
 import {
   LineChart,
   Line,
@@ -119,12 +122,28 @@ export function Analysis() {
   const [documentText, setDocumentText] = useState('');
   const [jobDescription, setJobDescription] = useState('');
   const [jobUrl, setJobUrl] = useState('');
+  const [urlError, setUrlError] = useState('');
   const [showInputs, setShowInputs] = useState(true);
   const [loadingJobUrl, setLoadingJobUrl] = useState(false);
+
+  const validateUrl = (url: string) => {
+    try {
+      new URL(url);
+      setUrlError('');
+      return true;
+    } catch {
+      setUrlError('Please enter a valid URL (e.g., https://seek.com.au/job/...)');
+      return false;
+    }
+  };
 
   const handleAnalyzeJobUrl = async () => {
     if (!jobUrl) {
       toast.error('Please provide a job URL');
+      return;
+    }
+
+    if (!validateUrl(jobUrl)) {
       return;
     }
 
@@ -243,18 +262,42 @@ export function Analysis() {
                 <input
                   type="url"
                   value={jobUrl}
-                  onChange={(e) => setJobUrl(e.target.value)}
+                  onChange={(e) => {
+                    setJobUrl(e.target.value);
+                    if (urlError) setUrlError('');
+                  }}
                   placeholder="https://seek.com.au/job/..."
-                  className="flex-1 bg-surface-container-high rounded-tech px-4 py-3 text-on-surface border border-outline-variant focus:border-primary focus:outline-none"
+                  className={`flex-1 bg-surface-container-high rounded-tech px-4 py-3 text-on-surface border focus:outline-none ${urlError ? 'border-tertiary focus:border-tertiary' : 'border-outline-variant focus:border-primary'}`}
                 />
                 <Button
                   onClick={handleAnalyzeJobUrl}
                   disabled={loadingJobUrl || !jobUrl}
-                  className="bg-secondary-container text-on-secondary-container hover:bg-secondary hover:text-on-secondary rounded-pebble px-6 font-bold"
+                  className="bg-secondary-container text-on-secondary-container hover:bg-secondary hover:text-on-secondary rounded-pebble px-6 font-bold min-w-[180px]"
                 >
-                  {loadingJobUrl ? 'Extracting...' : 'Extract Intelligence'}
+                  {loadingJobUrl ? (
+                    <>
+                      <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                      Extracting...
+                    </>
+                  ) : (
+                    'Extract Intelligence'
+                  )}
                 </Button>
               </div>
+              {urlError && (
+                <p className="text-tertiary text-label-small mt-2 flex items-center gap-1">
+                  <AlertCircle className="w-3 h-3" />
+                  {urlError}
+                </p>
+              )}
+              {jobAnalysis && jobUrl && !urlError && !loadingJobUrl && (
+                <div className="flex items-center gap-2 mt-2 text-secondary">
+                  <CheckCircle2 className="w-4 h-4" />
+                  <span className="text-label-small font-bold">
+                    Intelligence extracted successfully
+                  </span>
+                </div>
+              )}
               <p className="text-body-small text-on-surface-variant mt-2">
                 Automatically extract keywords, requirements, and Australian sector compliance (APS, AASW, WWCC, NDIS) from job posting URLs.
               </p>
@@ -501,7 +544,7 @@ export function Analysis() {
         </ChartPane>
 
         {/* Verified Sources - Citations from Google Search Grounding */}
-        {jobAnalysis?.sources && jobAnalysis.sources.length > 0 && (
+        {jobAnalysis?.sources && (
           <div className="mt-8 bg-surface-container rounded-tech p-8 border border-outline-variant shadow-elevation-1">
             <div className="flex items-center gap-3 mb-6">
               <Link2 className="w-6 h-6 text-tertiary" />
@@ -510,38 +553,59 @@ export function Analysis() {
               </h2>
             </div>
 
-            <p className="text-body-medium text-on-surface-variant mb-6">
-              These sources were automatically discovered via Google Search grounding and verified for Australian sector compliance.
-            </p>
+            {jobAnalysis.sources.length > 0 ? (
+              <>
+                <p className="text-body-medium text-on-surface-variant mb-6">
+                  These sources were automatically discovered via Google Search grounding and verified for Australian sector compliance.
+                </p>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {jobAnalysis.sources.map((source, index) => (
-                <a
-                  key={index}
-                  href={source.uri}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bg-surface-container-low rounded-tech p-4 border border-outline hover:border-primary hover:bg-surface-container transition-all duration-short-2 ease-spring group"
-                >
-                  <div className="flex items-start justify-between gap-3">
-                    <div className="flex-1">
-                      <h3 className="text-body-large font-bold text-on-surface group-hover:text-primary mb-2">
-                        {source.title}
-                      </h3>
-                      <p className="text-body-small text-on-surface-variant truncate">
-                        {source.uri}
-                      </p>
-                    </div>
-                    <ExternalLink className="w-4 h-4 text-on-surface-variant group-hover:text-primary flex-shrink-0 mt-1" />
-                  </div>
-                </a>
-              ))}
-            </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {jobAnalysis.sources.map((source, index) => (
+                    <a
+                      key={index}
+                      href={source.uri}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="bg-surface-container-low rounded-tech p-4 border border-outline hover:border-primary hover:bg-surface-container transition-all duration-short-2 ease-spring group block"
+                    >
+                      <div className="flex items-start justify-between gap-3">
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2 mb-2">
+                            <span className="px-2 py-1 rounded-pebble bg-primary-container text-on-primary-container text-label-small font-bold">
+                              {source.uri.includes('seek.com.au') ? 'SEEK' :
+                                source.uri.includes('linkedin.com') ? 'LinkedIn' :
+                                  source.uri.includes('.gov.au') ? 'Government' : 'Web'}
+                            </span>
+                          </div>
+                          <h3 className="text-body-large font-bold text-on-surface group-hover:text-primary mb-2 line-clamp-2">
+                            {source.title}
+                          </h3>
+                          <p className="text-body-small text-on-surface-variant truncate">
+                            {source.uri}
+                          </p>
+                        </div>
+                        <ExternalLink className="w-4 h-4 text-on-surface-variant group-hover:text-primary flex-shrink-0 mt-1" />
+                      </div>
+                    </a>
+                  ))}
+                </div>
+              </>
+            ) : (
+              <div className="text-center py-6 bg-surface-container-low rounded-tech border border-outline-variant border-dashed">
+                <Link2 className="w-12 h-12 text-on-surface-variant mx-auto mb-4 opacity-50" />
+                <h3 className="text-title-medium font-bold text-on-surface mb-2">
+                  No Verified Sources Found
+                </h3>
+                <p className="text-body-medium text-on-surface-variant max-w-md mx-auto">
+                  Google Search grounding analyzed the URL but couldn't verify specific external citations.
+                </p>
+              </div>
+            )}
 
             {/* Australian Sector Insights */}
             {jobAnalysis.sectorInsights && (
               <div className="mt-6 bg-tertiary-container/20 rounded-pebble p-4 border-l-4 border-tertiary">
-                <h4 className="text-label-large font-bold text-on-tertiary-container mb-3">
+                <h4 className="text-label-large font-bold text-on-tertiary-container mb-3 flex items-center gap-2">
                   🇦🇺 Australian Sector Intelligence
                 </h4>
 
