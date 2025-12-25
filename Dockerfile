@@ -26,8 +26,7 @@ COPY frontend/package.json ./frontend/
 COPY functions/package.json ./functions/
 
 # Install dependencies using Yarn Berry
-# Use --frozen-lockfile to respect lockfile but allow peer dependency warnings
-RUN yarn install --frozen-lockfile
+RUN yarn install
 
 # Copy the rest of the application source
 COPY . .
