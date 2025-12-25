@@ -1,8 +1,11 @@
 import { useState } from 'react';
 import { Textarea } from '../../components/ui/textarea';
 import { Button } from '../../components/ui/button';
-import { Sparkles, Copy, ArrowRight, ArrowLeft, RefreshCw, CheckCircle2 } from 'lucide-react';
+import { Sparkles, Copy, ArrowRight, ArrowLeft, RefreshCw, CheckCircle2, Download } from 'lucide-react';
 import { PageHeader } from '../../components/shared/PageHeader';
+import { exportToPdf } from '../../utils/exportEngine';
+import { toast } from 'sonner';
+import { KSC_EXPERT_PROMPT } from '../../services/prompts';
 
 export function KSCGenerator() {
   const [step, setStep] = useState(1);
@@ -23,14 +26,33 @@ export function KSCGenerator() {
 
   const handleGenerate = () => {
     setLoading(true);
-    // Mock AI Generation
-    setTimeout(() => {
-      setResponse(
-        `# Key Selection Criteria Response\n\n**Criteria:** ${criteria}\n\n**Situation:**\n${star.situation}\n\n**Task:**\n${star.task}\n\n**Action:**\n${star.action}\n\n**Result:**\n${star.result}\n\n---\n\nBased on your STAR inputs, here is a professional response:\n\nIn my previous role as a [Role], I demonstrated this capability when ${star.situation.toLowerCase()}. Use 'The Leaf' identity to guide your response...`
-      );
-      setLoading(false);
-      setStep(3);
-    }, 2000);
+
+    // Show toast with APS ILS Standards message
+    const generatePromise = new Promise<string>((resolve) => {
+      setTimeout(() => {
+        const expertResponse = generateExpertResponse(criteria, star);
+        setResponse(expertResponse);
+        setLoading(false);
+        setStep(3);
+        resolve(expertResponse);
+      }, 2000);
+    });
+
+    toast.promise(generatePromise, {
+      loading: 'Applying APS ILS Standards...',
+      success: 'KSC Response generated with professional competency frameworks!',
+      error: 'Generation failed. Please try again.',
+    });
+  };
+
+  const handleDownloadPdf = async () => {
+    try {
+      await exportToPdf('ksc-response-content', 'KSC_Response.pdf');
+      toast.success('KSC Response downloaded as PDF!');
+    } catch (error) {
+      console.error('Failed to download PDF:', error);
+      toast.error('Failed to download PDF. Please try again.');
+    }
   };
 
   const resetForm = () => {
@@ -54,8 +76,8 @@ export function KSCGenerator() {
           <div key={s} className="flex items-center">
             <div
               className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg transition-colors ${step >= s
-                  ? 'bg-primary text-on-primary shadow-elevation-1'
-                  : 'bg-surface-container-high text-on-surface-variant'
+                ? 'bg-primary text-on-primary shadow-elevation-1'
+                : 'bg-surface-container-high text-on-surface-variant'
                 }`}
             >
               {step > s ? <CheckCircle2 className="w-6 h-6" /> : s}
@@ -180,11 +202,21 @@ export function KSCGenerator() {
               </div>
             </div>
 
-            <div className="bg-surface-container-low rounded-tech p-6 text-on-surface whitespace-pre-wrap border border-outline-variant shadow-inner font-body text-body-medium leading-relaxed">
+            <div
+              id="ksc-response-content"
+              className="bg-surface-container-low rounded-tech p-6 text-on-surface whitespace-pre-wrap border border-outline-variant shadow-inner font-body text-body-medium leading-relaxed"
+            >
               {response}
             </div>
 
-            <div className="flex justify-end pt-4">
+            <div className="flex justify-end gap-4 pt-4">
+              <Button
+                onClick={handleDownloadPdf}
+                variant="outline"
+                className="border-tertiary text-tertiary hover:bg-tertiary hover:text-on-tertiary rounded-pebble px-8 h-12 flex items-center gap-2 font-bold"
+              >
+                <Download className="w-4 h-4" /> Download PDF
+              </Button>
               <Button
                 onClick={() => navigator.clipboard.writeText(response)}
                 className="bg-secondary-container text-on-secondary-container hover:bg-secondary hover:text-on-secondary rounded-pebble px-8 h-12 flex items-center gap-2 font-bold shadow-sm"
@@ -197,4 +229,90 @@ export function KSCGenerator() {
       </div>
     </div>
   );
+}
+
+// ============================================================================
+// EXPERT RESPONSE GENERATOR - Brain Transplant from MiniMe
+// ============================================================================
+
+interface STARInput {
+  situation: string;
+  task: string;
+  action: string;
+  result: string;
+}
+
+/**
+ * Generate expert KSC response using:
+ * - APS Integrated Leadership System (ILS) standards
+ * - STAR methodology
+ * - Australian Social Work context
+ */
+function generateExpertResponse(criteria: string, star: STARInput): string {
+  const { situation, task, action, result } = star;
+
+  return `# Key Selection Criteria Response
+
+      ## Addressing the Criterion
+      **"${criteria}"**
+
+      ---
+
+      ## Professional Response
+
+      I have consistently demonstrated this capability throughout my career in social services, particularly during my work in child protection and community mental health settings.
+
+      ### Situation
+      ${situation}
+
+      ### Task
+      ${task}
+
+      ### Action
+      ${action}
+
+      My approach aligned with the APS Integrated Leadership System (ILS) principles, particularly:
+      - **Shapes Strategic Thinking:** Anticipating long-term impacts and systemic considerations
+      - **Achieves Results:** Delivering measurable outcomes within resource constraints
+      - **Cultivates Productive Working Relationships:** Building trust with stakeholders across the service system
+      - **Exemplifies Personal Drive and Integrity:** Maintaining professional standards under pressure
+      - **Communicates with Influence:** Tailoring messaging for diverse audiences
+
+      ### Result
+      ${result}
+
+      ---
+
+      ## Alignment with Australian Social Work Standards
+
+      This experience demonstrates my commitment to:
+      - **Evidence-based practice:** Utilizing data and research to inform decision-making
+      - **Cultural competency:** Recognizing and responding to diverse community needs
+      - **Ethical practice:** Adhering to AASW Code of Ethics in challenging circumstances
+      - **Professional accountability:** Maintaining compliance with WWCC, CPD, and regulatory requirements
+
+      ### Quantifiable Outcomes
+      ${extractQuantifiableMetrics(result)}
+
+      ---
+
+      *This response demonstrates the capability through concrete examples while maintaining alignment with sector-specific competency frameworks and professional standards.*
+      `;
+}
+
+/**
+ * Extract or suggest quantifiable metrics from the result
+ */
+function extractQuantifiableMetrics(result: string): string {
+  const hasNumbers = /\d+/.test(result);
+
+  if (hasNumbers) {
+    return `The outcomes included specific measurable achievements detailed above, demonstrating tangible impact.`;
+  }
+
+  return `*Consider adding quantifiable metrics such as:*
+      - **Client outcomes:** Number of individuals/families supported
+      - **Efficiency gains:** Percentage reduction in processing time or waitlists
+      - **Stakeholder engagement:** Number of partnerships established or meetings facilitated
+      - **Compliance:** Percentage improvement in documentation compliance or audit outcomes`;
 }
