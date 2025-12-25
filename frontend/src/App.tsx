@@ -7,6 +7,7 @@ import {
   useLocation,
 } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Toaster } from 'sonner';
 import { Layout } from './layouts/Layout';
 import { Login } from './features/auth/Login';
 import { Register } from './features/auth/Register';
@@ -90,6 +91,12 @@ const PublicLayout = () => {
 export default function App() {
   return (
     <Router>
+      <Toaster
+        position="top-right"
+        theme="dark"
+        richColors
+        expand
+      />
       <Routes>
         {/* Public Routes */}
         <Route element={<PublicLayout />}>
