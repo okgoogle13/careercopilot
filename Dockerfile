@@ -1,30 +1,48 @@
-# Stage 1: Build the application
-FROM node:18-alpine AS builder
+# Multi-platform Dockerfile for CareerCopilot
+# Supports: linux/amd64 (Intel iMac, Chromebook) and linux/arm64 (Apple Silicon)
+# Base: Playwright image with Node.js 18+ and browsers pre-installed
 
+FROM mcr.microsoft.com/playwright:v1.41.0-jammy
+
+# Set working directory
 WORKDIR /app
 
-# Copy package files and install dependencies
-COPY package*.json ./
-RUN npm install
+# Install Python 3 and venv (required for Flash Sidekick MCP server)
+RUN apt-get update && apt-get install -y \
+    python3 \
+    python3-pip \
+    python3-venv \
+    && rm -rf /var/lib/apt/lists/*
 
-# Copy the rest of the application source code
+# Enable Corepack for Yarn Berry (v4)
+RUN corepack enable && corepack prepare yarn@4.10.3 --activate
+
+# Copy Yarn configuration files
+COPY .yarnrc.yml ./
+COPY .yarn/releases ./.yarn/releases
+
+# Copy package manager files (for better layer caching)
+COPY package.json yarn.lock ./
+COPY frontend/package.json ./frontend/
+COPY functions/package.json ./functions/
+
+# Install dependencies using Yarn Berry
+# --immutable ensures lockfile is not modified
+# --inline-builds runs lifecycle scripts during install
+RUN yarn install --immutable --inline-builds
+
+# Copy the rest of the application source
 COPY . .
 
-# Build the application
-RUN npm run build
+# Create Python virtual environment and install Sidekick dependencies
+RUN python3 -m venv .venv && \
+    .venv/bin/pip install --upgrade pip && \
+    .venv/bin/pip install google-generativeai
 
-# Stage 2: Create the final, production-ready image
-FROM node:18-alpine
+# Expose ports
+# 5173: Vite dev server (frontend)
+# 5001: Firebase Functions emulator
+EXPOSE 5173 5001
 
-WORKDIR /usr/src/app
-
-# Only copy the built application from the 'builder' stage
-COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/package.json ./package.json
-
-# Expose the port the app runs on
-EXPOSE 3000
-
-# The command to run the application
-CMD [ "node", "dist/main.js" ]
+# Default command (can be overridden in docker-compose)
+CMD ["/bin/bash"]
