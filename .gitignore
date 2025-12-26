@@ -110,3 +110,11 @@ claude-artifact-runner/
 .archive_legacy/
 .venv/
 test-results/
+
+# Local Environments and Logs
+backend/venv/
+*.txt
+*.xml
+playwright-report/
+test-results/
+

@@ -23,6 +23,7 @@ import { LandingPage } from './features/landing/LandingPage';
 import { ProfileView } from './features/profile/ProfileView';
 import { AssetLibrary } from './features/analysis/AssetLibrary';
 import { NotFound } from './features/not-found/NotFound';
+import { IngestionPage } from './pages/IngestionPage';
 import { useAuth } from './context/AuthContext';
 import texturePattern from './assets/images/texture-pattern.png';
 
@@ -156,6 +157,10 @@ export default function App() {
           <Route
             path="/asset-library"
             element={<AssetLibrary />}
+          />
+          <Route
+            path="/career/ingest"
+            element={<IngestionPage />}
           />
           <Route
             path="/style-guide"

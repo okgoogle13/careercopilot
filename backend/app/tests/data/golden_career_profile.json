@@ -1,0 +1,53 @@
+{
+  "personal_info": {
+    "full_name": "Jane Doe",
+    "email": "jane@example.com",
+    "phone": "+61 400 000 000",
+    "location": "Sydney, NSW",
+    "links": [
+      "http://linkedin.com/in/janedoe"
+    ]
+  },
+  "career_profile_summary": [
+    "Experienced software engineer",
+    "Specialist in scalable backend systems"
+  ],
+  "target_titles": [
+    "Senior Data Engineer",
+    "Backend Tech Lead"
+  ],
+  "entries": [
+    {
+      "entry_id": "entry-1",
+      "entry_type": "Work Experience",
+      "organization": "Tech Corp",
+      "role": "Senior Engineer",
+      "start_date": "2020-01",
+      "end_date": "Present",
+      "location": "Sydney",
+      "core_responsibilities": "Led team of 5 engineers to maintain core platform.",
+      "subtype_tags": [
+        "Leadership"
+      ]
+    }
+  ],
+  "achievements": [
+    {
+      "achievement_id": "ach-1",
+      "entry_id": "entry-1",
+      "original_text": "Optimized API latency by 50% using Redis caching",
+      "action_verb": "Optimized",
+      "noun_task": "API latency",
+      "metric": "50%",
+      "strategy": "Redis caching",
+      "outcome": "Improved user experience",
+      "skills_used": [
+        "Redis",
+        "API",
+        "Python"
+      ],
+      "subtype_tags": [],
+      "needs_review_flag": false
+    }
+  ]
+}

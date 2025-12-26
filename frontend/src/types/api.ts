@@ -1,82 +1,121 @@
-/**
- * Standard API response structure for successful responses
- * @template T - Type of the data payload
- */
-export interface ApiResponse<T = any> {
-  /** The actual data payload */
-  data: T;
+export type SkillProficiency = "Novice" | "Competent" | "Proficient" | "Expert" | "Master";
 
-  /** Optional success message */
-  message?: string;
-
-  /** Indicates if the request was successful */
-  success: boolean;
-
-  /** ISO timestamp of when the response was generated */
-  timestamp: string;
+export enum WorkType {
+  REMOTE = "Remote",
+  HYBRID = "Hybrid",
+  ONSITE = "On-site",
+  ANY = "Any"
 }
 
-/**
- * Standard API error response structure
- */
-export interface ApiError {
-  /** Machine-readable error code */
-  code: string;
-
-  /** Human-readable error message */
-  message: string;
-
-  /** Optional additional error details */
-  details?: any;
-
-  /** Optional validation errors */
-  errors?: Record<string, string[]>;
+export interface PersonalInformation {
+  FullName: string;
+  Phone: string;
+  Email: string;
+  Location: string;
+  Portfolio_Website_URLs: string[];
 }
 
-/**
- * Type guard to check if an object is an ApiError
- * @param error - The object to check
- */
-export function isApiError(error: any): error is ApiError {
-  return error && typeof error === 'object' && 'code' in error && 'message' in error;
+export interface JobPreferences {
+  Target_Roles: string[];
+  Min_Salary?: number;
+  Preferred_Locations: string[];
+  Work_Type: WorkType;
+  Relocation_Open: boolean;
+  Notice_Period?: string;
+  Industry_Preferences?: string[];
 }
 
-/**
- * Creates a standardized success response
- * @param data - The data to include in the response
- * @param message - Optional success message
- */
-export function createSuccessResponse<T>(data: T, message?: string): ApiResponse<T> {
-  return {
-    data,
-    message,
-    success: true,
-    timestamp: new Date().toISOString(),
-  };
+export interface CareerProfile {
+  Target_Titles: string[];
+  Master_Summary_Points: string[];
+  Job_Preferences?: JobPreferences;
 }
 
-/**
- * Creates a standardized error response
- * @param code - Error code
- * @param message - Error message
- * @param details - Optional additional error details
- */
-export function createErrorResponse(code: string, message: string, details?: any): ApiError {
-  return {
-    code,
-    message,
-    details,
-  };
+export interface MasterSkill {
+  Skill_Name: string;
+  Category: string;
+  Subtype: string[];
+  Proficiency?: SkillProficiency;
+  Years_Experience?: number;
+  Last_Used_Year?: string;
 }
 
-/**
- * Creates a standardized validation error response
- * @param errors - Object containing validation errors
- */
-export function createValidationError(errors: Record<string, string[]>): ApiError {
-  return {
-    code: 'VALIDATION_ERROR',
-    message: 'Validation failed',
-    errors,
-  };
+export enum EntryType {
+  WORK_EXPERIENCE = "Work Experience",
+  PROJECT = "Project",
+  EDUCATION = "Education",
+  CERTIFICATION = "Certification",
+  VOLUNTEER = "Volunteer",
+}
+
+export interface CareerEntry {
+  Entry_ID: string;
+  Entry_Type: EntryType;
+  Organization: string;
+  Role: string;
+  StartDate: string;
+  EndDate: string;
+  Location: string;
+  Core_Responsibilities_Scope: string;
+  Subtype_Tags: string[];
+  Embedding?: number[]; // Vector embedding for RAG retrieval
+}
+
+export interface AchievementSuggestions {
+  Action_Verb?: string;
+  Noun_Task?: string;
+  Metric?: string;
+  Strategy?: string;
+  Outcome?: string;
+}
+
+export interface StructuredAchievement {
+  Achievement_ID: string;
+  Entry_ID: string;
+  Original_Text: string;
+  Action_Verb: string;
+  Noun_Task: string;
+  Metric: string;
+  Strategy: string;
+  Outcome: string;
+  Skills_Used: string[];
+  Tools_Used: string[];
+  Subtype_Tags: string[];
+  Needs_Review_Flag: boolean;
+  Embedding?: number[]; // Vector embedding for RAG retrieval
+  Improvement_Suggestions?: AchievementSuggestions;
+}
+
+export interface KSCImprovementSuggestions {
+  Situation?: string;
+  Task?: string;
+  Action?: string;
+  Result?: string;
+}
+
+export interface KSCResponse {
+  KSC_ID: string;
+  KSC_Prompt: string;
+  Situation: string;
+  Task: string;
+  Action: string;
+  Result: string;
+  Skills_Used: string[];
+  Subtype_Tags: string[];
+  Original_Text: string;
+  Needs_Review_Flag: boolean;
+  STAR_Feedback: string;
+  Linked_Entry_ID?: string;
+  Linked_Achievement_IDs?: string[];
+  Embedding?: number[]; // Vector embedding for RAG retrieval
+  Improvement_Suggestions: KSCImprovementSuggestions;
+}
+
+export interface CareerDatabase {
+  Personal_Information: PersonalInformation;
+  Career_Profile: CareerProfile;
+  Master_Skills_Inventory: MasterSkill[];
+  Career_Entries: CareerEntry[];
+  Structured_Achievements: StructuredAchievement[];
+  KSC_Responses: KSCResponse[];
 }

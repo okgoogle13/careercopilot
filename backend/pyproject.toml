@@ -44,6 +44,8 @@ dependencies = [
     "google-auth",
     "pdfplumber",
     "pypdfium2",
+    "pypdf",
+    "defusedxml",
     "beautifulsoup4",
     "jinja2",
     "spacy",
