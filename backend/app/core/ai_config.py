@@ -260,7 +260,7 @@ class AIConfigManager:
         # Load provider credentials from environment
         env_credentials: Dict[AIProvider, Dict[str, Any]] = {
             AIProvider.GOOGLE_AI: {
-                "api_key": os.getenv("GOOGLE_AI_API_KEY"),
+                "api_key": os.getenv("GOOGLE_AI_API_KEY") or os.getenv("GEMINI_API_KEY"),
                 "project_id": os.getenv("GOOGLE_CLOUD_PROJECT"),
             },
             AIProvider.ANTHROPIC: {"api_key": os.getenv("ANTHROPIC_API_KEY")},
