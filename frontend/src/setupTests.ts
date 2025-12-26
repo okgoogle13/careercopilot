@@ -6,6 +6,23 @@ import '@testing-library/jest-dom';
 import { jest } from '@jest/globals';
 import { cleanup } from '@testing-library/react';
 
+// Mock import.meta for Vite compatibility
+(global as any).import = {
+  meta: {
+    env: {
+      VITE_API_URL: 'http://localhost:8000',
+      VITE_FIREBASE_API_KEY: 'test-api-key',
+      VITE_FIREBASE_AUTH_DOMAIN: 'test.firebaseapp.com',
+      VITE_FIREBASE_PROJECT_ID: 'test-project',
+      VITE_FIREBASE_STORAGE_BUCKET: 'test.appspot.com',
+      VITE_FIREBASE_MESSAGING_SENDER_ID: '123456789',
+      VITE_FIREBASE_APP_ID: '1:123456789:web:abcdef',
+      DEV: true,
+      MODE: 'test',
+    },
+  },
+};
+
 // Make jest available globally
 (global as any).jest = jest;
 
