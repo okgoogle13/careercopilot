@@ -57,7 +57,8 @@ def mock_db():
 @pytest.fixture
 def mock_get_current_user():
     """Fixture to mock the get_current_user dependency."""
-    return lambda: {"uid": "test_user_id"}
+    from types import SimpleNamespace
+    return lambda: SimpleNamespace(uid="test_user_id", email="test@example.com")
 
 
 @pytest.fixture
@@ -70,6 +71,11 @@ def client(monkeypatch, mock_db, mock_get_current_user):
 
     # Monkeypatch the db variable in the db module
     monkeypatch.setattr(db_module, "db", mock_db)
+    
+    # Also patch the user_profile_service db instance
+    from app.services.user_profile_service import user_profile_service
+    user_profile_service.db = mock_db
+
     app.dependency_overrides[get_current_user] = mock_get_current_user
 
     with TestClient(app) as tc:

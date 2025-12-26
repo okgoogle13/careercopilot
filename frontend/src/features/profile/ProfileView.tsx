@@ -1,6 +1,10 @@
+import { useState } from 'react';
 import { Briefcase, Calendar, MapPin, Mail, Link as LinkIcon, Edit3 } from 'lucide-react';
+import ResumeUploader from './ResumeUploader';
 
 export function ProfileView() {
+  const [careerData, setCareerData] = useState<any>(null);
+
   return (
     <div className="max-w-5xl mx-auto pb-12 w-full">
       {/* Banner */}
@@ -43,29 +47,49 @@ export function ProfileView() {
           {/* Main Column - Timeline */}
           <div className="lg:col-span-2 space-y-8">
             <section className="bg-[var(--surface-container)] rounded-3xl p-8 border border-white/5 shadow-sm">
+              <ResumeUploader onUploadSuccess={setCareerData} />
+            </section>
+
+            <section className="bg-[var(--surface-container)] rounded-3xl p-8 border border-white/5 shadow-sm">
               <h2 className="text-xl font-bold text-on-surface mb-6 flex items-center gap-2">
-                <Briefcase className="w-5 h-5 text-primary" /> Experience
+                <Briefcase className="w-5 h-5 text-primary" />
+                {careerData ? 'Extracted Career Path' : 'Experience'}
               </h2>
 
               <div className="space-y-8 relative before:absolute before:left-2 before:top-2 before:bottom-2 before:w-0.5 before:bg-[#49454F]">
-                <TimelineItem
-                  role="Senior Frontend Engineer"
-                  company="Tech Corp Inc."
-                  date="2022 - Present"
-                  description="Leading the frontend architecture migration to React 18 and Next.js. Improved performance by 40%."
-                />
-                <TimelineItem
-                  role="Software Developer"
-                  company="StartUp Studio"
-                  date="2020 - 2022"
-                  description="Built and shipped 3 major products. Managed a team of 4 junior developers."
-                />
-                <TimelineItem
-                  role="Junior Developer"
-                  company="Web Solutions"
-                  date="2018 - 2020"
-                  description="Full stack development using MERN stack. Implemented CI/CD pipelines."
-                />
+                {careerData && careerData.entries && careerData.entries.length > 0 ? (
+                  careerData.entries.map((entry: any, index: number) => (
+                    <TimelineItem
+                      key={index}
+                      role={entry.title}
+                      company={entry.employer}
+                      date={entry.start_date ? `${entry.start_date} - ${entry.end_date || 'Present'}` : 'Date Unknown'}
+                      description={entry.description}
+                      achievements={entry.achievements_derived}
+                    />
+                  ))
+                ) : (
+                  <>
+                    <TimelineItem
+                      role="Senior Frontend Engineer"
+                      company="Tech Corp Inc."
+                      date="2022 - Present"
+                      description="Leading the frontend architecture migration to React 18 and Next.js. Improved performance by 40%."
+                    />
+                    <TimelineItem
+                      role="Software Developer"
+                      company="StartUp Studio"
+                      date="2020 - 2022"
+                      description="Built and shipped 3 major products. Managed a team of 4 junior developers."
+                    />
+                    <TimelineItem
+                      role="Junior Developer"
+                      company="Web Solutions"
+                      date="2018 - 2020"
+                      description="Full stack development using MERN stack. Implemented CI/CD pipelines."
+                    />
+                  </>
+                )}
               </div>
             </section>
           </div>
@@ -75,7 +99,7 @@ export function ProfileView() {
             <div className="bg-[var(--surface-container)] rounded-3xl p-6 border border-white/5 shadow-sm">
               <h3 className="text-lg font-bold text-[#E6E1E5] mb-4">Skills</h3>
               <div className="flex flex-wrap gap-2">
-                {[
+                {(careerData?.skills || [
                   'React',
                   'TypeScript',
                   'Node.js',
@@ -85,7 +109,7 @@ export function ProfileView() {
                   'Python',
                   'Figma',
                   'PostgreSQL',
-                ].map((skill) => (
+                ]).map((skill: string) => (
                   <span
                     key={skill}
                     className="px-3 py-1 bg-surface-container-high rounded-lg text-sm text-primary font-mono border border-white/5 hover:border-primary/50 transition-colors cursor-default"
@@ -149,11 +173,13 @@ function TimelineItem({
   company,
   date,
   description,
+  achievements,
 }: {
   role: string;
   company: string;
   date: string;
-  description: string;
+  description?: string;
+  achievements?: string[];
 }) {
   return (
     <div className="pl-8 relative group">
@@ -166,7 +192,18 @@ function TimelineItem({
           <Calendar className="w-3 h-3" /> {date}
         </span>
       </div>
-      <p className="text-on-surface-variant leading-relaxed text-sm">{description}</p>
+      {description && (
+        <p className="text-on-surface-variant leading-relaxed text-sm mb-2">{description}</p>
+      )}
+      {achievements && achievements.length > 0 && (
+        <ul className="list-disc list-outside ml-4 space-y-1">
+          {achievements.map((item, index) => (
+            <li key={index} className="text-on-surface-variant text-sm pl-1 marker:text-primary/70">
+              {item}
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }
