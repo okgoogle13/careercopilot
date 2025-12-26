@@ -118,3 +118,6 @@ backend/venv/
 playwright-report/
 test-results/
 
+
+# Legacy Archive (Pre-Flight Cleanup)
+_archive_legacy/

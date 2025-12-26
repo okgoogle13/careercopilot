@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
 """
 MCP Flash Sidekick - Dual-Engine Utility Agent
-----------------------------------------------
-Designed for Google Antigravity.
-1. Fast Engine (Flash-Lite): Summarization, IDFs.
+Capabilities:
+1. Fast Engine (Flash-Lite 2.5): Summarization, IDFs.
 2. Smart Engine (Pro 2.5): Complex reasoning.
 """
 import json, os, sys, logging
@@ -28,9 +27,9 @@ class FlashSidekickServer:
         self.api_key = os.getenv("GEMINI_API_KEY", "")
         self.initialized = False
         
-        # Fast Engine Candidates (Priority: Flash-Lite)
+        # Fast Engine Candidates (Priority: Flash-Lite 2.5)
         env_fast = os.getenv("GEMINI_MODEL")
-        self.fast_candidates = ["models/gemini-2.5-flash-lite", "models/gemini-1.5-flash"]
+        self.fast_candidates = ["models/gemini-2.5-flash-lite", "models/gemini-1.5-flash", "models/gemini-1.5-flash-002"]
         if env_fast and env_fast not in self.fast_candidates: self.fast_candidates.insert(0, env_fast)
             
         # Smart Engine Candidates (Priority: Pro 2.5)
@@ -48,6 +47,7 @@ class FlashSidekickServer:
     def _get_working_model(self, candidates):
         for model_name in candidates:
             try:
+                # Basic instantiation check
                 model = genai.GenerativeModel(model_name)
                 return model, model_name
             except: continue
