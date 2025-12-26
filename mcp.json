@@ -1,7 +1,6 @@
 {
   "name": "careercopilot-tools",
-  "version": "2.0.0",
-  "runtime": "python",
+  "version": "1.3.0",
   "servers": {
     "flash-sidekick": {
       "command": ".venv/bin/python3",

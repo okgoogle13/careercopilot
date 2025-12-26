@@ -1,8 +1,9 @@
 #!/bin/bash
+
 # ======================================================
-# CareerCopilot: Chromebook Fresh Start (Dual-Engine)
-# Optimized for: Google Antigravity on Linux (Debian)
-# Features: Clean Archive, Venv, Dual-Engine, Full MCP
+# CareerCopilot: Universal MCP Setup (Sync)
+# Machines: Chromebook (Linux) & iMac (MacOS)
+# Features: Dual-Engine Sidekick + Playwright + Docker + GitHub
 # ======================================================
 
 # Colors
@@ -10,82 +11,85 @@ GREEN='\033[0;32m'
 BLUE='\033[0;34m'
 YELLOW='\033[1;33m'
 RED='\033[0;31m'
-NC='\033[0m'
+NC='\033[0m' # No Color
 
-echo -e "${BLUE}Initiating CareerCopilot Fresh Start for Nishant...${NC}"
+echo -e "${BLUE}Syncing CareerCopilot Environment for Nishant...${NC}"
 
-# 1. PATH DEFINITIONS
+# 1. Detect OS & Set Paths
+OS_TYPE=$(uname)
 PROJECT_ROOT=$(pwd)
 SERVERS_DIR="$PROJECT_ROOT/servers"
 VENV_DIR="$PROJECT_ROOT/.venv"
-ARCHIVE_DIR="$PROJECT_ROOT/_legacy_archive_$(date +%Y%m%d_%H%M%S)"
-ANTIGRAVITY_CONFIG_DIR="$HOME/.gemini/antigravity"
+ARCHIVE_DIR="$PROJECT_ROOT/_legacy_archive"
 
+echo -e "Detected OS: ${YELLOW}$OS_TYPE${NC}"
 echo -e "Project Root: ${YELLOW}$PROJECT_ROOT${NC}"
 
-# 2. SYSTEM DEPENDENCIES (Chromebook/Debian specific)
-echo -e "\n${BLUE}Checking System Dependencies...${NC}"
-
-# Ensure Python and venv exist
-if ! dpkg -s python3-venv >/dev/null 2>&1; then
-    echo -e "${YELLOW}Installing python3-venv...${NC}"
-    sudo apt-get update && sudo apt-get install -y python3-venv python3-pip
+# Define Config Paths based on OS
+if [[ "$OS_TYPE" == "Darwin" ]]; then
+    # --- MAC OS CONFIGURATION ---
+    ANTIGRAVITY_CONFIG_DIR="$HOME/Library/Application Support/Google/Antigravity"
+    ANTIGRAVITY_FALLBACK="$HOME/.gemini/antigravity"
+    CURSOR_CONFIG="$HOME/Library/Application Support/Cursor/User/globalStorage/cursor.mcp/mcp_config.json"
+    
+    if ! command -v brew &> /dev/null; then
+        echo -e "${YELLOW}Warning: Homebrew not found. Ensure python3/node are installed.${NC}"
+    fi
+else
+    # --- LINUX / CHROMEBOOK CONFIGURATION ---
+    ANTIGRAVITY_CONFIG_DIR="$HOME/.gemini/antigravity"
+    CURSOR_CONFIG="$HOME/.config/Cursor/User/globalStorage/cursor.mcp/mcp_config.json"
 fi
 
-# Ensure Node/NPM exists (for GitHub/Playwright/Docker MCPs)
-if ! command -v npm &> /dev/null; then
-    echo -e "${RED}Node.js is missing. Please install Node (v18+) for MCP tools.${NC}"
-    echo "Run: sudo apt install nodejs npm"
+# 2. CLEANUP LEGACY SERVERS
+echo -e "\n${BLUE}Cleaning up legacy files...${NC}"
+if [ ! -d "$ARCHIVE_DIR" ]; then mkdir -p "$ARCHIVE_DIR"; fi
+
+LEGACY_FILES=(
+    "servers/mcp-gemini-wrapper" "servers/mcp_gemini_wrapper.py"
+    "servers/mcp-resilience-router" "servers/mcp-claude-skills"
+    "servers/documentation-server.py" "servers/configuration-server.py"
+    "servers/genkit-server.py" "servers/typecheck-server.py"
+    ".claude/mcp-servers/documentation-server.py"
+)
+
+for file in "${LEGACY_FILES[@]}"; do
+    if [ -e "$file" ]; then
+        mv "$file" "$ARCHIVE_DIR/"
+        echo -e "  Archived: ${YELLOW}$file${NC}"
+    fi
+done
+
+# 3. PYTHON ENVIRONMENT (VENV)
+echo -e "\n${BLUE}Syncing Python Environment...${NC}"
+
+if ! command -v python3 &> /dev/null; then
+    echo -e "${RED}Error: python3 not found.${NC}"
     exit 1
 fi
 
-# 3. CLEANUP & ARCHIVE
-echo -e "\n${BLUE}Archiving old configuration...${NC}"
-mkdir -p "$ARCHIVE_DIR"
-
-# Move old server files if they exist to clear the path
-if [ -d "servers" ]; then
-    # Only move if not empty
-    if [ "$(ls -A servers)" ]; then
-        cp -r servers/* "$ARCHIVE_DIR/" 2>/dev/null
-        rm -rf servers/*
-        echo -e "  Cleaned ${YELLOW}servers/${NC} directory."
-    fi
-fi
-
-# Move old manifest if exists
-if [ -f "mcp.json" ]; then
-    mv mcp.json "$ARCHIVE_DIR/"
-    echo -e "  Archived ${YELLOW}mcp.json${NC}."
-fi
-
-# 4. PYTHON VIRTUAL ENVIRONMENT
-echo -e "\n${BLUE}Configuring Python Environment...${NC}"
 if [ ! -d "$VENV_DIR" ]; then
+    echo -e "Creating .venv..."
     python3 -m venv "$VENV_DIR"
-    echo -e "  Created .venv"
 fi
 
-# Path to the isolated python executable
+# Select Python Executable
 VENV_PYTHON="$VENV_DIR/bin/python3"
 
-# Install Sidekick dependencies
+echo -e "Installing dependencies..."
 "$VENV_PYTHON" -m pip install --upgrade pip --quiet
 "$VENV_PYTHON" -m pip install google-generativeai --quiet
 
-echo -e "${GREEN}✓ Python environment ready.${NC}"
+# 4. GENERATE SERVER CODE (Dual-Engine Logic)
+if [ ! -d "$SERVERS_DIR" ]; then mkdir -p "$SERVERS_DIR"; fi
 
-# 5. GENERATE FLASH SIDEKICK (Dual-Engine)
 echo -e "\n${BLUE}Generating Flash Sidekick (Dual-Engine)...${NC}"
-mkdir -p "$SERVERS_DIR"
-
 cat << 'EOF' > "$SERVERS_DIR/flash_sidekick.py"
 #!/usr/bin/env python3
 """
 MCP Flash Sidekick - Dual-Engine Utility Agent
-----------------------------------------------
-Designed for Google Antigravity.
-1. Fast Engine (Flash-Lite): Summarization, IDFs.
+Capabilities:
+1. Fast Engine (Flash-Lite 2.5): Summarization, IDFs.
 2. Smart Engine (Pro 2.5): Complex reasoning.
 """
 import json, os, sys, logging
@@ -110,9 +114,9 @@ class FlashSidekickServer:
         self.api_key = os.getenv("GEMINI_API_KEY", "")
         self.initialized = False
         
-        # Fast Engine Candidates (Priority: Flash-Lite)
+        # Fast Engine Candidates (Priority: Flash-Lite 2.5)
         env_fast = os.getenv("GEMINI_MODEL")
-        self.fast_candidates = ["models/gemini-2.5-flash-lite", "models/gemini-1.5-flash"]
+        self.fast_candidates = ["models/gemini-2.5-flash-lite", "models/gemini-1.5-flash", "models/gemini-1.5-flash-002"]
         if env_fast and env_fast not in self.fast_candidates: self.fast_candidates.insert(0, env_fast)
             
         # Smart Engine Candidates (Priority: Pro 2.5)
@@ -130,6 +134,7 @@ class FlashSidekickServer:
     def _get_working_model(self, candidates):
         for model_name in candidates:
             try:
+                # Basic instantiation check
                 model = genai.GenerativeModel(model_name)
                 return model, model_name
             except: continue
@@ -206,15 +211,9 @@ if __name__ == "__main__":
 EOF
 chmod +x "$SERVERS_DIR/flash_sidekick.py"
 
-# 6. GENERATE ANTIGRAVITY CONFIG (The "Killer Feature" Setup)
-# We inject Docker, Playwright, and GitHub directly here.
-echo -e "\n${BLUE}Configuring Antigravity MCP...${NC}"
-
-if [ ! -d "$ANTIGRAVITY_CONFIG_DIR" ]; then
-    mkdir -p "$ANTIGRAVITY_CONFIG_DIR"
-fi
-
-cat << EOF > "$ANTIGRAVITY_CONFIG_DIR/mcp_config.json"
+# 5. GENERATE JSON CONFIG CONTENT
+# Includes Flash-Sidekick, GitHub, Playwright, and Docker
+MCP_JSON_CONTENT=$(cat <<EOF
 {
   "mcpServers": {
     "flash-sidekick": {
@@ -225,36 +224,63 @@ cat << EOF > "$ANTIGRAVITY_CONFIG_DIR/mcp_config.json"
         "GEMINI_MODEL": "models/gemini-2.5-flash-lite",
         "GEMINI_PRO_MODEL": "models/gemini-2.5-pro"
       },
-      "description": "Dual-Engine Assistant (Fast/Smart)."
+      "description": "Dual-Engine Assistant (Fast/Smart)"
     },
     "github": {
       "command": "npx",
       "args": ["-y", "@modelcontextprotocol/server-github"],
       "env": { "GITHUB_TOKEN": "\${GITHUB_TOKEN}" },
-      "description": "Git repository management."
+      "description": "Git repository management"
     },
     "playwright": {
       "command": "npx",
       "args": ["-y", "@modelcontextprotocol/server-playwright"],
       "env": {},
-      "description": "Browser automation for testing web apps."
+      "description": "Browser automation (Visual testing)"
     },
     "docker": {
       "command": "npx",
       "args": ["-y", "@modelcontextprotocol/server-docker"],
       "env": {},
-      "description": "Manage Docker containers and images."
+      "description": "Container management"
     }
   }
 }
 EOF
+)
 
-# 7. GENERATE PORTABLE MANIFEST
+# 6. APPLY CONFIGURATIONS TO IDEs
+
+# Helper function
+write_config() {
+    local path="$1"
+    local dir=$(dirname "$path")
+    if [ ! -d "$dir" ]; then mkdir -p "$dir"; fi
+    echo "$MCP_JSON_CONTENT" > "$path"
+    echo -e "${GREEN}✓ Updated:${NC} $path"
+}
+
+echo -e "\n${BLUE}Applying Configs...${NC}"
+
+# Antigravity Logic (Mac vs Linux)
+if [ -d "$ANTIGRAVITY_CONFIG_DIR" ] || [[ "$OS_TYPE" == "Linux" ]]; then
+    write_config "$ANTIGRAVITY_CONFIG_DIR/mcp_config.json"
+elif [ -d "$ANTIGRAVITY_FALLBACK" ]; then
+    write_config "$ANTIGRAVITY_FALLBACK/mcp_config.json"
+fi
+
+# Cursor Logic
+if [ -d "$(dirname "$CURSOR_CONFIG")" ]; then
+    write_config "$CURSOR_CONFIG"
+else
+    echo -e "${YELLOW}Cursor config not found (Skipped).${NC}"
+fi
+
+# 7. GENERATE PORTABLE MANIFEST (For repo tracking)
 cat << EOF > "$PROJECT_ROOT/mcp.json"
 {
   "name": "careercopilot-tools",
-  "version": "2.0.0",
-  "runtime": "python",
+  "version": "1.3.0",
   "servers": {
     "flash-sidekick": {
       "command": ".venv/bin/python3",
@@ -267,10 +293,11 @@ cat << EOF > "$PROJECT_ROOT/mcp.json"
   }
 }
 EOF
+echo -e "${GREEN}✓ Created portable mcp.json${NC}"
 
-echo -e "\n${GREEN}======================================${NC}"
-echo -e "${GREEN}Fresh Start Complete!${NC}"
-echo -e "${GREEN}======================================${NC}"
+echo -e "\n${BLUE}======================================${NC}"
+echo -e "Setup Complete for $OS_TYPE"
+echo -e "${BLUE}======================================${NC}"
 echo -e "1. Restart Antigravity."
-echo -e "2. Ensure GEMINI_API_KEY and GITHUB_TOKEN are in your ~/.bashrc"
-echo -e "3. Playwright/Docker servers will install on first run."
+echo -e "2. Ensure API Keys (GEMINI/GITHUB) are in your env."
+echo -e "3. Playwright/Docker tools are now registered."
