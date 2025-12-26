@@ -3,8 +3,12 @@
   "compilerOptions": {
     /* Base Options */
     "target": "ES2020",
-    "module": "ESNext",
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "commonjs",
+    "lib": [
+      "ES2020",
+      "DOM",
+      "DOM.Iterable"
+    ],
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
@@ -15,7 +19,6 @@
     "allowJs": true,
     "checkJs": false,
     "noEmit": true,
-
     /* Strict Type-Checking Options */
     "strict": true,
     "noImplicitAny": false, // More lenient for tests
@@ -33,19 +36,22 @@
     "noUncheckedIndexedAccess": true,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
-
     /* JSX Support */
     "jsx": "react-jsx",
     "jsxImportSource": "@emotion/react",
-
     /* Paths and Modules */
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"],
-      "@/test-utils": ["./src/test-utils"],
-      "@/mocks": ["./src/mocks"]
+      "@/*": [
+        "./src/*"
+      ],
+      "@/test-utils": [
+        "./src/test-utils"
+      ],
+      "@/mocks": [
+        "./src/mocks"
+      ]
     },
-
     /* Type Checking */
     "types": [
       "jest",
@@ -57,13 +63,14 @@
       "@playwright/test",
       "vite/client"
     ],
-    "typeRoots": ["./node_modules/@types", "./src/types"],
-
+    "typeRoots": [
+      "./node_modules/@types",
+      "./src/types"
+    ],
     /* Source Maps */
     "sourceMap": true,
     "inlineSources": true,
     "inlineSourceMap": true,
-
     /* Module Resolution */
     "allowImportingTsExtensions": true,
     "allowUmdGlobalAccess": true,
