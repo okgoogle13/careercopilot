@@ -22,6 +22,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from firebase_admin import credentials
 
 from app.api.router import api_router
+from app.api.routes.career import router as career_router
+from app.api.routes.ingestion import router as ingestion_router
 from app.core.genkit_init import check_genkit_health, startup_genkit
 from app.core.loguru_config import configure_loguru, get_logger, log_security_event
 from app.core.monitoring import setup_prometheus_monitoring
@@ -112,6 +114,8 @@ def on_startup():
 
 # Include the main API router
 app.include_router(api_router, prefix="/api")
+app.include_router(career_router, prefix="/api/career", tags=["Career Database"])
+app.include_router(ingestion_router, prefix="/api/v1", tags=["Career Ingestion"])
 
 
 @app.get("/", tags=["Root"])

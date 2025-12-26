@@ -52,13 +52,13 @@ try:
     from genkit.plugins import google_genai
     GENKIT_AVAILABLE = True
 except ImportError:
+    GENKIT_AVAILABLE = False
     import logging
     logger = logging.getLogger(__name__)
     logger.info(f"Genkit available: {GENKIT_AVAILABLE}")
     genkit = None  # type: ignore[assignment]
     ai = None  # type: ignore[assignment]
     google_genai = None  # type: ignore[assignment]
-    GENKIT_AVAILABLE = False
 
 # Initialize genkit flow decorator
 genkit_flow: Any = getattr(genkit, "flow", _noop_flow) if GENKIT_AVAILABLE else _noop_flow
