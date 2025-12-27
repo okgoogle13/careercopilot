@@ -9,6 +9,7 @@
 ## Test Overview
 
 Created test files with intentional issues to validate that the enhanced auto-fix workflow correctly:
+
 1. Detects and fixes TypeScript issues
 2. Detects and fixes Python formatting issues
 3. Detects and reports M3 token violations
@@ -19,21 +20,22 @@ Created test files with intentional issues to validate that the enhanced auto-fi
 ## Test Files Created
 
 ### 1. TypeScript Test File
+
 **Location:** `frontend/src/test-autofix/TestComponent.tsx`
 
 #### Intentional Issues
 
-| Issue Type | Count | Auto-fixable? | Example |
-|------------|-------|---------------|---------|
-| **Unused imports** | 4 | ✅ Yes | `Dialog, TextField, IconButton, formatDate` |
-| **Import organization** | Yes | ✅ Yes | React imports mixed with MUI imports |
-| **Unused variables** | 2 | ✅ Yes | `unusedVariable`, `unusedCallback` |
-| **M3 color violations** | 4 | ⚠️ Manual | `#1976d2`, `#ffffff`, `#333333` |
-| **M3 spacing violations** | 5 | ⚠️ Manual | `padding: '16px'`, `margin: '8px'` |
-| **M3 shape violations** | 2 | ⚠️ Manual | `borderRadius: '4px'` |
-| **M3 shadow violations** | 1 | ⚠️ Manual | `boxShadow: '0px 2px 4px...'` |
-| **ESLint: missing deps** | 1 | ⚠️ Manual | `useEffect` missing `title` dependency |
-| **ESLint: no return type** | 1 | ⚠️ Manual | `handleClick` missing return type |
+| Issue Type                 | Count | Auto-fixable? | Example                                     |
+| -------------------------- | ----- | ------------- | ------------------------------------------- |
+| **Unused imports**         | 4     | ✅ Yes        | `Dialog, TextField, IconButton, formatDate` |
+| **Import organization**    | Yes   | ✅ Yes        | React imports mixed with MUI imports        |
+| **Unused variables**       | 2     | ✅ Yes        | `unusedVariable`, `unusedCallback`          |
+| **M3 color violations**    | 4     | ⚠️ Manual     | `#1976d2`, `#ffffff`, `#333333`             |
+| **M3 spacing violations**  | 5     | ⚠️ Manual     | `padding: '16px'`, `margin: '8px'`          |
+| **M3 shape violations**    | 2     | ⚠️ Manual     | `borderRadius: '4px'`                       |
+| **M3 shadow violations**   | 1     | ⚠️ Manual     | `boxShadow: '0px 2px 4px...'`               |
+| **ESLint: missing deps**   | 1     | ⚠️ Manual     | `useEffect` missing `title` dependency      |
+| **ESLint: no return type** | 1     | ⚠️ Manual     | `handleClick` missing return type           |
 
 **Total Issues:** 20
 **Auto-fixable:** 7 (35%)
@@ -42,31 +44,34 @@ Created test files with intentional issues to validate that the enhanced auto-fi
 #### Expected Auto-Fixes
 
 **1. Unused Import Removal:**
+
 ```typescript
 // Before
-import { Dialog, TextField, IconButton } from '@mui/material';  // Unused
-import { formatDate } from '../../utils/dateUtils';  // Unused
+import { Dialog, TextField, IconButton } from "@mui/material"; // Unused
+import { formatDate } from "../../utils/dateUtils"; // Unused
 
 // After (auto-fixed)
 // Both lines removed
 ```
 
 **2. Import Organization:**
+
 ```typescript
 // Before
-import React, { useState, useEffect, useMemo, useCallback } from 'react';
-import { Button, Card } from '@mui/material';
-import axios from 'axios';
+import React, { useState, useEffect, useMemo, useCallback } from "react";
+import { Button, Card } from "@mui/material";
+import axios from "axios";
 
 // After (auto-fixed)
-import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 
-import axios from 'axios';
+import axios from "axios";
 
-import { Button, Card } from '@mui/material';
+import { Button, Card } from "@mui/material";
 ```
 
 **3. Unused Variable Removal (ESLint):**
+
 ```typescript
 // Before
 const unusedVariable = 'This should be removed';
@@ -81,9 +86,10 @@ const unusedCallback = useCallback(() => {...}, []);
 ```markdown
 🎨 **M3 Design Token Compliance Check**
 
-⚠️  This PR contains hardcoded color or spacing values.
+⚠️ This PR contains hardcoded color or spacing values.
 
 **Detected Violations:**
+
 - 4 hardcoded colors (should use `var(--sys-color-*)`)
 - 5 hardcoded spacing values (should use `var(--sys-space-*)`)
 - 2 hardcoded border-radius (should use `var(--sys-shape-radius-*)`)
@@ -95,19 +101,20 @@ const unusedCallback = useCallback(() => {...}, []);
 ---
 
 ### 2. Python Test File
+
 **Location:** `backend/test_autofix_validation.py`
 
 #### Intentional Issues
 
-| Issue Type | Count | Auto-fixable? | Example |
-|------------|-------|---------------|---------|
-| **Black: line too long** | 3 | ✅ Yes | `process_user_data` signature |
-| **Black: missing spaces** | 10+ | ✅ Yes | `items:List[Dict[str,Any]]` |
-| **Black: inconsistent indentation** | 1 | ✅ Yes | `config` dictionary |
-| **Black: missing blank lines** | 2 | ✅ Yes | Between class methods |
-| **isort: wrong import order** | Yes | ✅ Yes | Local imports before stdlib |
-| **autoflake: unused imports** | 3 | ✅ Yes | `defaultdict, Counter, OrderedDict` |
-| **autoflake: unused variables** | 2 | ⚠️ Detected | `unused_constant`, `unused_helper_function` |
+| Issue Type                          | Count | Auto-fixable? | Example                                     |
+| ----------------------------------- | ----- | ------------- | ------------------------------------------- |
+| **Black: line too long**            | 3     | ✅ Yes        | `process_user_data` signature               |
+| **Black: missing spaces**           | 10+   | ✅ Yes        | `items:List[Dict[str,Any]]`                 |
+| **Black: inconsistent indentation** | 1     | ✅ Yes        | `config` dictionary                         |
+| **Black: missing blank lines**      | 2     | ✅ Yes        | Between class methods                       |
+| **isort: wrong import order**       | Yes   | ✅ Yes        | Local imports before stdlib                 |
+| **autoflake: unused imports**       | 3     | ✅ Yes        | `defaultdict, Counter, OrderedDict`         |
+| **autoflake: unused variables**     | 2     | ⚠️ Detected   | `unused_constant`, `unused_helper_function` |
 
 **Total Issues:** 20+
 **Auto-fixable:** 18+ (90%)
@@ -116,6 +123,7 @@ const unusedCallback = useCallback(() => {...}, []);
 #### Expected Auto-Fixes
 
 **1. Black: Line Length:**
+
 ```python
 # Before
 def process_user_data(user_id: str, user_name: str, user_email: str, user_phone: str, user_address: str, user_city: str, user_country: str):
@@ -143,6 +151,7 @@ def process_user_data(
 ```
 
 **2. Black: Spacing:**
+
 ```python
 # Before
 def calculate_total(items:List[Dict[str,Any]])->float:
@@ -154,6 +163,7 @@ def calculate_total(items: List[Dict[str, Any]]) -> float:
 ```
 
 **3. isort: Import Organization:**
+
 ```python
 # Before
 import os
@@ -185,6 +195,7 @@ from app.services.auth import AuthService
 ```
 
 **4. autoflake: Unused Imports:**
+
 ```python
 # Before
 from collections import defaultdict, Counter, OrderedDict  # All unused
@@ -264,6 +275,7 @@ git diff backend/test_autofix_validation.py
 ### After Auto-Fix Runs:
 
 #### TypeScript File Changes:
+
 ```diff
 - import { Dialog, TextField, IconButton } from '@mui/material';  // Unused
 - import { formatDate } from '../../utils/dateUtils';  // Unused
@@ -276,6 +288,7 @@ git diff backend/test_autofix_validation.py
 ```
 
 #### Python File Changes:
+
 ```diff
 + # All imports alphabetically organized
 + # Stdlib → Third-party → Local
@@ -285,6 +298,7 @@ git diff backend/test_autofix_validation.py
 ```
 
 #### PR Comments Posted:
+
 1. **Auto-fix summary:**
    - ✅ Fixed TypeScript: Removed unused imports, organized imports
    - ✅ Fixed ESLint: Applied auto-fixable linting rules
@@ -343,12 +357,14 @@ git diff backend/test_autofix_validation.py
 ## Metrics to Collect
 
 ### Auto-Fix Performance:
+
 - **Total execution time:** Target < 3 minutes
 - **Issues detected:** Count by type
 - **Issues fixed:** Count by type
 - **Fix success rate:** % of issues fixed without errors
 
 ### M3 Compliance Detection:
+
 - **Violations detected:** By category (color, spacing, shape, elevation)
 - **False positive rate:** % of flagged items that are valid
 - **Detection accuracy:** % of actual violations caught
@@ -376,11 +392,13 @@ git diff backend/test_autofix_validation.py
 ## Test Files Summary
 
 ### frontend/src/test-autofix/TestComponent.tsx
+
 - **Size:** ~90 lines
 - **Issues:** 20 total (7 auto-fixable, 13 manual)
 - **Purpose:** Validate TypeScript auto-fix and M3 detection
 
 ### backend/test_autofix_validation.py
+
 - **Size:** ~110 lines
 - **Issues:** 20+ total (18+ auto-fixable, 2 manual)
 - **Purpose:** Validate Python auto-fix (black, isort, autoflake)

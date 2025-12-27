@@ -68,8 +68,10 @@ system_prompt: |
 This skill analyzes a provided image using Vision to identify visual design flaws and recommend improvements.
 
 ## Agent Call
+
 Called by: `visual-design-director`
 Input: `$IMAGE_CONTEXT` (and an image)
 
 ## Output
+
 Returns a JSON object with a design critique, broken down by area (Layout, Hierarchy, etc.), or an error object.

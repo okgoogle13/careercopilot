@@ -4,10 +4,10 @@ from app.core.ai_config import AIModelType, AIProvider, get_ai_config
 def test_get_model_config_returns_model():
     config = get_ai_config()
     # Test with a model that exists in the default configuration
-    model = config.get_model_config("gpt-4o-mini")
+    model = config.get_model_config("gemini-2.5-flash")
     assert model is not None
-    assert model.name == "gpt-4o-mini"
-    assert model.provider == AIProvider.OPENAI
+    assert model.name == "gemini-2.5-flash"
+    assert model.provider == AIProvider.GOOGLE_AI
     assert model.model_type == AIModelType.TEXT_GENERATION
 
 
@@ -18,13 +18,20 @@ def test_get_service_config_returns_service():
     assert service.primary_model in config.models
 
 
-def test_validate_configuration_no_errors():
-    config = get_ai_config()
+def test_validate_configuration_no_errors(monkeypatch):
+    # Mock environment variables to ensure credentials exist
+    monkeypatch.setenv("GOOGLE_AI_API_KEY", "test-key")
+    monkeypatch.setenv("ANTHROPIC_API_KEY", "test-key")
+    
+    # Reload config to pick up env vars
+    from app.core.ai_config import reload_ai_config
+    config = reload_ai_config()
+    
     issues = config.validate_configuration()
     # The method returns a list of issues directly
     assert isinstance(issues, list)
-    # With default config, there should be no validation issues
-    assert len(issues) == 0
+    # With default config and mocked keys, there should be no validation issues
+    assert len(issues) == 0, f"Found validation issues: {issues}"
 
 
 def test_reload_ai_config_does_not_crash():

@@ -12,18 +12,18 @@ This skill enforces the **Cost & Token Optimization Strategy** to prevent misuse
 
 ## Routing Logic Table
 
-| User Request Type | ❌ Do NOT Use | ✅ MUST Delegate To | Priority | Token Impact |
-|---|---|---|---|---|
-| **Code Review / Audits** | Claude (Self-analyze) | `gemini-wrapper.analyze_code()` | HIGH | 40-55% savings |
-| **Error Diagnosis / Root Cause** | Claude (Debug) | `gemini-wrapper.error_diagnosis()` | HIGH | 50% savings |
-| **Refactoring Suggestions** | Claude (Suggest) | `gemini-wrapper.refactoring_suggestions()` | MEDIUM | 35% savings |
-| **Architecture Analysis** | Claude (Analyze) | `gemini-wrapper.architecture_analysis()` | MEDIUM | 45% savings |
-| **Performance Optimization** | Claude (Optimize) | `gemini-wrapper.optimization_analysis()` | MEDIUM | 55% savings |
-| **Configuration Lookup** | Raw file reads | `configuration` server | HIGH | 94.9% savings |
-| **Documentation Lookup** | Load CLAUDE.md | `documentation` server | HIGH | 93.3% savings |
-| **Flow Execution/Schema** | Read src/ files | `genkit` server | CRITICAL | 99.1% savings |
-| **GitHub Issues/PRs/Files** | Browse UI | `github` server | HIGH | 80% savings |
-| **Factual Queries** | Contextual knowledge | `documentation` server | MEDIUM | 93.3% savings |
+| User Request Type                | ❌ Do NOT Use         | ✅ MUST Delegate To                        | Priority | Token Impact   |
+| -------------------------------- | --------------------- | ------------------------------------------ | -------- | -------------- |
+| **Code Review / Audits**         | Claude (Self-analyze) | `gemini-wrapper.analyze_code()`            | HIGH     | 40-55% savings |
+| **Error Diagnosis / Root Cause** | Claude (Debug)        | `gemini-wrapper.error_diagnosis()`         | HIGH     | 50% savings    |
+| **Refactoring Suggestions**      | Claude (Suggest)      | `gemini-wrapper.refactoring_suggestions()` | MEDIUM   | 35% savings    |
+| **Architecture Analysis**        | Claude (Analyze)      | `gemini-wrapper.architecture_analysis()`   | MEDIUM   | 45% savings    |
+| **Performance Optimization**     | Claude (Optimize)     | `gemini-wrapper.optimization_analysis()`   | MEDIUM   | 55% savings    |
+| **Configuration Lookup**         | Raw file reads        | `configuration` server                     | HIGH     | 94.9% savings  |
+| **Documentation Lookup**         | Load CLAUDE.md        | `documentation` server                     | HIGH     | 93.3% savings  |
+| **Flow Execution/Schema**        | Read src/ files       | `genkit` server                            | CRITICAL | 99.1% savings  |
+| **GitHub Issues/PRs/Files**      | Browse UI             | `github` server                            | HIGH     | 80% savings    |
+| **Factual Queries**              | Contextual knowledge  | `documentation` server                     | MEDIUM   | 93.3% savings  |
 
 ---
 
@@ -32,25 +32,32 @@ This skill enforces the **Cost & Token Optimization Strategy** to prevent misuse
 When a task comes in, execute this 4-step procedure:
 
 ### Step 1: Analyze the Task
+
 Identify the core intent:
+
 - Is this **analysis** (code review, debugging, optimization)?
 - Is this **lookup** (config, docs, facts)?
 - Is this **execution** (run a flow, query Firestore)?
 - Is this **repository work** (PR, issue, file read)?
 
 ### Step 2: Consult the Routing Table
+
 Match the task type to the table above. Determine:
+
 - ✅ MUST delegate to: [Server Name]
 - ❌ Do NOT use: [Self-analysis]
 - Token savings: [X%]
 
 ### Step 3: Formulate the Delegation
+
 Draft the exact request to send to the selected MCP server:
+
 - Include all necessary context (code, logs, config)
 - Use the appropriate method name
 - Format params as JSON
 
 ### Step 4: Execute
+
 - **If path is clear:** Call the MCP server immediately
 - **If unsure:** State "Recommended route: [Server] because [Reason]. Shall I proceed?"
 
@@ -59,11 +66,13 @@ Draft the exact request to send to the selected MCP server:
 ## Routing Examples
 
 ### Example 1: Code Review Request
+
 **User:** "Review this React component for bugs"
 
 **Analysis:** Code review = analysis task
 **Table Lookup:** Code Review → `gemini-wrapper`
 **Delegation:**
+
 ```
 Method: gemini-wrapper.analyze_code()
 Params: {
@@ -71,32 +80,38 @@ Params: {
   "language": "typescript"
 }
 ```
+
 **Result:** 40-55% token savings vs Claude self-analysis
 
 ---
 
 ### Example 2: Configuration Query
+
 **User:** "What's the Firebase config?"
 
 **Analysis:** Configuration lookup = factual query
 **Table Lookup:** Configuration Lookup → `configuration` server
 **Delegation:**
+
 ```
 Method: configuration.get_environment()
 Params: {
   "env": "production"
 }
 ```
+
 **Result:** 94.9% token savings (cache hit)
 
 ---
 
 ### Example 3: Error Diagnosis
+
 **User:** "Why is my Genkit flow timing out?"
 
 **Analysis:** Error diagnosis = analysis task
 **Table Lookup:** Error Diagnosis → `gemini-wrapper`
 **Delegation Plan:**
+
 1. First check `genkit` server for flow status (diagnostic info)
 2. Send error logs + context to `gemini-wrapper.error_diagnosis()`
 3. Gemini analyzes root cause
@@ -106,10 +121,12 @@ Params: {
 ---
 
 ### Example 4: Documentation + Analysis (Combined)
+
 **User:** "What's our caching strategy and how can we optimize it?"
 
 **Analysis:** Two-part: lookup + analysis
 **Routing Plan:**
+
 1. **Phase 1 (Lookup):** `documentation.search_docs(query="cache")`
    - Get cached docs about caching (93.3% savings)
 2. **Phase 2 (Analysis):** `gemini-wrapper.optimization_analysis(perf_data)`
@@ -121,6 +138,7 @@ Params: {
 ## Critical Rules
 
 ### ❌ DO NOT
+
 - ❌ Do NOT analyze code yourself when `gemini-wrapper` is available
 - ❌ Do NOT read raw files (firebase.json, CLAUDE.md) when cache servers exist
 - ❌ Do NOT execute flows yourself when `genkit` server can execute + memoize
@@ -128,6 +146,7 @@ Params: {
 - ❌ Do NOT attempt error diagnosis without Gemini delegation
 
 ### ✅ DO
+
 - ✅ Always check the Routing Logic Table first
 - ✅ Always delegate analysis to Gemini (40-55% cheaper)
 - ✅ Always use cache servers for lookups (93-99% savings)
@@ -140,6 +159,7 @@ Params: {
 ## MCP Server Methods
 
 ### gemini-wrapper (Priority 10)
+
 **Analysis-heavy delegation**
 
 ```python
@@ -166,6 +186,7 @@ gemini-wrapper.delegate_to_gemini(prompt, system_prompt=None)
 ```
 
 ### documentation (Priority 8)
+
 **93.3% token savings cache**
 
 ```python
@@ -181,6 +202,7 @@ documentation.get_skills()
 ```
 
 ### configuration (Priority 7)
+
 **94.9% token savings cache**
 
 ```python
@@ -195,6 +217,7 @@ configuration.validate_all()
 ```
 
 ### genkit (Priority 6)
+
 **99.1% token savings cache**
 
 ```python
@@ -209,6 +232,7 @@ genkit.execute_flow(flow_name, inputs)
 ```
 
 ### github (Priority 9)
+
 **Repository management**
 
 ```python
@@ -249,13 +273,13 @@ User asks a question
 
 ## Token Impact Summary
 
-| Server | Task Type | Savings | Method Count |
-|--------|-----------|---------|--------------|
-| gemini-wrapper | Analysis | 40-55% | 7 methods |
-| documentation | Factual | 93.3% | 5 methods |
-| configuration | Config | 94.9% | 4 methods |
-| genkit | Execution | 99.1% | 4 methods |
-| github | Repository | 80% | 10+ methods |
+| Server         | Task Type  | Savings | Method Count |
+| -------------- | ---------- | ------- | ------------ |
+| gemini-wrapper | Analysis   | 40-55%  | 7 methods    |
+| documentation  | Factual    | 93.3%   | 5 methods    |
+| configuration  | Config     | 94.9%   | 4 methods    |
+| genkit         | Execution  | 99.1%   | 4 methods    |
+| github         | Repository | 80%     | 10+ methods  |
 
 **Combined Strategy:** 80%+ token reduction in production workflows
 
@@ -264,6 +288,7 @@ User asks a question
 ## When to Use This Skill
 
 ✅ **Use when:**
+
 - User asks for code review, debugging, or optimization advice
 - User requests configuration or documentation information
 - User wants to run a Genkit flow
@@ -272,6 +297,7 @@ User asks a question
 - You need to optimize token usage
 
 ❌ **Don't use when:**
+
 - Task is trivial and doesn't warrant server delegation
 - User explicitly asks "use your own judgment" without analysis
 - Server is not available/disabled in ~/.mcp.json
@@ -291,6 +317,7 @@ User asks a question
 **User asks:** "Why is my Genkit flow failing to optimize?"
 
 **Correct routing response:**
+
 ```
 Task Analysis: Error diagnosis + optimization = 2-part delegation
 
@@ -306,6 +333,7 @@ Expected Token Savings: 99.1% (Part 1) + 50% (Part 2) = 80%+ combined
 ```
 
 **What I will NOT do:**
+
 - ❌ Read flow files myself (bypass genkit cache)
 - ❌ Analyze error logs without Gemini (waste context)
 - ❌ Suggest fixes without root cause analysis

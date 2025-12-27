@@ -2,6 +2,7 @@
 name: api-integration-test-scaffolder
 description: "Generates integration tests for frontend → backend → Genkit flow connections. Use when creating E2E API tests."
 ---
+
 # API Integration Test Scaffolder Workflow
 
 This skill creates comprehensive integration tests that validate the complete data flow from frontend to backend to AI flows.

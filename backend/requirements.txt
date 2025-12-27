@@ -89,6 +89,8 @@ cymem==2.0.11
     #   preshed
     #   spacy
     #   thinc
+defusedxml==0.7.1
+    # via -r requirements.in
 deprecated==1.2.18
     # via limits
 distro==1.9.0
@@ -397,6 +399,8 @@ pyjwt[crypto]==2.10.1
     #   firebase-admin
 pyparsing==3.2.3
     # via httplib2
+pypdf==5.1.0
+    # via -r requirements.in
 pypdfium2==4.30.0
     # via
     #   -r requirements.in

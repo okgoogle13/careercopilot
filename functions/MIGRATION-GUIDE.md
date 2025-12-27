@@ -26,35 +26,35 @@ This guide documents the migration from Google Cloud Vertex AI to Firebase AI fo
 ### Extracting Job Listings
 
 ```typescript
-import { getFunctions, httpsCallable } from 'firebase/functions';
+import { getFunctions, httpsCallable } from "firebase/functions";
 
 const functions = getFunctions();
-const extractJobListing = httpsCallable(functions, 'extractJobListing');
+const extractJobListing = httpsCallable(functions, "extractJobListing");
 
 // Extract from text
 const result = await extractJobListing({
-  source: 'Job Title at Company\nDescription...',
+  source: "Job Title at Company\nDescription...",
 });
 
 // Or from URL
 const result = await extractJobListing({
-  source: { url: 'https://example.com/job-posting' },
+  source: { url: "https://example.com/job-posting" },
 });
 ```
 
 ### Finding Similar Listings
 
 ```typescript
-const findSimilarListings = httpsCallable(functions, 'findSimilarListings');
+const findSimilarListings = httpsCallable(functions, "findSimilarListings");
 
 const results = await findSimilarListings({
-  query: 'Software Engineer position',
+  query: "Software Engineer position",
   limit: 5,
   minScore: 0.7,
   filters: {
-    'metadata.jobType': 'full-time',
-    'metadata.isRemote': true
-  }
+    "metadata.jobType": "full-time",
+    "metadata.isRemote": true,
+  },
 });
 ```
 

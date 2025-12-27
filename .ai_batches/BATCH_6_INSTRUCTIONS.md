@@ -1,12 +1,14 @@
 # Batch 6: Utility Components - Delegation Instructions
 
 ## Assignment Details
+
 - **Difficulty:** Easiest (90% automation)
 - **Time Estimate:** 2 hours
 - **Components:** 4 (Avatar, Tooltip, Popover, Separator)
 - **Ideal for:** Junior AI agents or parallel execution
 
 ## Your Mission
+
 Migrate 4 simple utility components. These are the easiest components in the entire migration!
 
 ---
@@ -14,22 +16,26 @@ Migrate 4 simple utility components. These are the easiest components in the ent
 ## Component 1: M3Avatar
 
 ### Generate Base
+
 ```bash
 python3 scripts/generate-m3-component.py --name="Avatar" --type="feedback" --output="frontend/src/components/ui"
 ```
 
 ### Customization Required (20 min)
+
 1. **Add image support:**
+
    ```typescript
    export interface M3AvatarProps {
      src?: string;
      alt?: string;
-     size?: 'small' | 'medium' | 'large';
+     size?: "small" | "medium" | "large";
      fallback?: string; // Initials like "JD"
    }
    ```
 
 2. **Add image loading logic:**
+
    ```typescript
    const [imageError, setImageError] = useState(false);
 
@@ -48,6 +54,7 @@ python3 scripts/generate-m3-component.py --name="Avatar" --type="feedback" --out
    ```
 
 3. **Add size variants in CSS:**
+
    ```css
    .m3-avatar--small {
      width: 32px;
@@ -69,6 +76,7 @@ python3 scripts/generate-m3-component.py --name="Avatar" --type="feedback" --out
    ```
 
 ### Storybook Stories
+
 - With Image
 - With Fallback Initials
 - All Sizes
@@ -79,21 +87,25 @@ python3 scripts/generate-m3-component.py --name="Avatar" --type="feedback" --out
 ## Component 2: M3Tooltip
 
 ### Generate Base
+
 ```bash
 python3 scripts/generate-m3-component.py --name="Tooltip" --type="feedback" --output="frontend/src/components/ui"
 ```
 
 ### Customization Required (30 min)
+
 1. **Add positioning props:**
+
    ```typescript
    export interface M3TooltipProps {
      content: React.ReactNode;
-     placement?: 'top' | 'bottom' | 'left' | 'right';
+     placement?: "top" | "bottom" | "left" | "right";
      children: React.ReactElement;
    }
    ```
 
 2. **Add hover logic:**
+
    ```typescript
    const [isVisible, setIsVisible] = useState(false);
 
@@ -106,6 +118,7 @@ python3 scripts/generate-m3-component.py --name="Tooltip" --type="feedback" --ou
    ```
 
 3. **Add positioning CSS:**
+
    ```css
    .m3-tooltip {
      position: absolute;
@@ -131,6 +144,7 @@ python3 scripts/generate-m3-component.py --name="Tooltip" --type="feedback" --ou
    ```
 
 ### Storybook Stories
+
 - All Placements (top, bottom, left, right)
 - Long Content
 - With Button
@@ -141,12 +155,15 @@ python3 scripts/generate-m3-component.py --name="Tooltip" --type="feedback" --ou
 ## Component 3: M3Popover
 
 ### Generate Base
+
 ```bash
 python3 scripts/generate-m3-component.py --name="Popover" --type="feedback" --output="frontend/src/components/ui"
 ```
 
 ### Customization Required (35 min)
+
 1. **Add controlled open state:**
+
    ```typescript
    export interface M3PopoverProps {
      open: boolean;
@@ -157,6 +174,7 @@ python3 scripts/generate-m3-component.py --name="Popover" --type="feedback" --ou
    ```
 
 2. **Add click-outside handler:**
+
    ```typescript
    const popoverRef = useRef<HTMLDivElement>(null);
 
@@ -168,18 +186,19 @@ python3 scripts/generate-m3-component.py --name="Popover" --type="feedback" --ou
      };
 
      if (open) {
-       document.addEventListener('mousedown', handleClickOutside);
+       document.addEventListener("mousedown", handleClickOutside);
      }
 
      return () => {
-       document.removeEventListener('mousedown', handleClickOutside);
+       document.removeEventListener("mousedown", handleClickOutside);
      };
    }, [open, onClose]);
    ```
 
 3. **Add portal and positioning:**
+
    ```tsx
-   import { createPortal } from 'react-dom';
+   import { createPortal } from "react-dom";
 
    if (!open) return null;
 
@@ -196,11 +215,12 @@ python3 scripts/generate-m3-component.py --name="Popover" --type="feedback" --ou
          {children}
        </div>
      </div>,
-     document.body
+     document.body,
    );
    ```
 
 ### Storybook Stories
+
 - Basic Popover
 - With Menu Items
 - Click Outside to Close
@@ -211,19 +231,23 @@ python3 scripts/generate-m3-component.py --name="Popover" --type="feedback" --ou
 ## Component 4: M3Separator (Divider)
 
 ### Generate Base
+
 ```bash
 python3 scripts/generate-m3-component.py --name="Separator" --type="card" --output="frontend/src/components/ui"
 ```
 
 ### Customization Required (15 min - EASIEST!)
+
 1. **Add orientation:**
+
    ```typescript
    export interface M3SeparatorProps {
-     orientation?: 'horizontal' | 'vertical';
+     orientation?: "horizontal" | "vertical";
    }
    ```
 
 2. **Add simple CSS:**
+
    ```css
    .m3-separator {
      border: none;
@@ -244,6 +268,7 @@ python3 scripts/generate-m3-component.py --name="Separator" --type="card" --outp
    ```
 
 ### Storybook Stories
+
 - Horizontal
 - Vertical
 - In Card Layout
@@ -254,6 +279,7 @@ python3 scripts/generate-m3-component.py --name="Separator" --type="card" --outp
 ## Validation Checklist
 
 Before committing:
+
 - [ ] Avatar: Image loads, fallback shows on error
 - [ ] Tooltip: Shows on hover/focus, positions correctly
 - [ ] Popover: Opens/closes, click-outside works
@@ -263,6 +289,7 @@ Before committing:
 - [ ] All Storybook stories work
 
 ## Commit Command
+
 ```bash
 git add -A
 git commit -m "feat: Complete M3 Batch 6 - Utility components (Avatar, Tooltip, Popover, Separator)
@@ -296,6 +323,7 @@ git push -u origin claude/m3-expressive-tokens-014XmAiA4Rd8N6ucn9JDEJuz
 ```
 
 ## Expected Completion
+
 - Time: 2 hours (fastest batch!)
 - Components: 4/4
 - Quality: 100% M3 compliance

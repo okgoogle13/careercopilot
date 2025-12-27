@@ -79,7 +79,10 @@ class ComponentMigrator {
     console.log(`${prefix} ${message}`);
   }
 
-  private async runCommand(command: string, description: string): Promise<{ stdout: string; stderr: string }> {
+  private async runCommand(
+    command: string,
+    description: string
+  ): Promise<{ stdout: string; stderr: string }> {
     if (this.config.verbose) {
       this.log(`Running: ${command}`, 'info');
     }
@@ -146,8 +149,9 @@ class ComponentMigrator {
   private async updateImports(oldPath: string, newPackagePath: string): Promise<void> {
     this.log('Updating import paths...', 'info');
 
-    const sourceFiles = this.project.getSourceFiles()
-      .filter(sf => !sf.getFilePath().includes('node_modules'));
+    const sourceFiles = this.project
+      .getSourceFiles()
+      .filter((sf) => !sf.getFilePath().includes('node_modules'));
 
     let updatedCount = 0;
 
@@ -164,13 +168,9 @@ class ComponentMigrator {
           const resolvedPath = path.resolve(currentDir, moduleSpecifier);
 
           // Check if it resolves to our component
-          const possibleOldPaths = [
-            oldPath,
-            oldPath.replace('.tsx', ''),
-            path.dirname(oldPath),
-          ];
+          const possibleOldPaths = [oldPath, oldPath.replace('.tsx', ''), path.dirname(oldPath)];
 
-          if (possibleOldPaths.some(p => resolvedPath.startsWith(p))) {
+          if (possibleOldPaths.some((p) => resolvedPath.startsWith(p))) {
             // Update to use package import
             imp.setModuleSpecifier(`@careercopilot/ui`);
             fileModified = true;
@@ -235,7 +235,11 @@ class ComponentMigrator {
     }
   }
 
-  private generateRollbackScript(componentPath: string, targetPath: string, relatedFiles: string[]): string {
+  private generateRollbackScript(
+    componentPath: string,
+    targetPath: string,
+    relatedFiles: string[]
+  ): string {
     const commands = [
       '#!/bin/bash',
       '# Rollback script for component migration',
@@ -248,7 +252,7 @@ class ComponentMigrator {
       `git mv "${targetPath}" "${componentPath}"`,
       '',
       '# Restore import paths',
-      ...this.result.updatedFiles.map(file => `git checkout HEAD -- "${file}"`),
+      ...this.result.updatedFiles.map((file) => `git checkout HEAD -- "${file}"`),
       '',
       '# Remove package export',
       `git checkout HEAD -- "${path.join(FRONTEND_DIR, 'packages/ui/src/index.ts')}"`,
@@ -285,7 +289,7 @@ class ComponentMigrator {
       this.log(`Found ${relatedFiles.length} files to migrate`, 'success');
 
       if (this.config.verbose) {
-        relatedFiles.forEach(file => {
+        relatedFiles.forEach((file) => {
           console.log(`  - ${path.relative(FRONTEND_DIR, file)}`);
         });
       }
@@ -308,10 +312,7 @@ class ComponentMigrator {
         const target = path.join(targetDir, fileName);
 
         if (!this.config.dryRun) {
-          await this.runCommand(
-            `git mv "${file}" "${target}"`,
-            `Moving ${fileName}`
-          );
+          await this.runCommand(`git mv "${file}" "${target}"`, `Moving ${fileName}`);
         }
 
         this.log(`Moved: ${fileName}`, 'success');
@@ -335,7 +336,11 @@ class ComponentMigrator {
       }
 
       // Step 8: Generate rollback script
-      this.result.rollbackScript = this.generateRollbackScript(componentPath, targetPath, relatedFiles);
+      this.result.rollbackScript = this.generateRollbackScript(
+        componentPath,
+        targetPath,
+        relatedFiles
+      );
 
       if (!this.config.dryRun) {
         const rollbackPath = path.join(FRONTEND_DIR, `rollback-${this.config.componentName}.sh`);
@@ -385,24 +390,30 @@ Example:
 
   if (!result.success) {
     console.error('\n❌ Migration failed:');
-    result.errors.forEach(error => console.error(`  - ${error}`));
+    result.errors.forEach((error) => console.error(`  - ${error}`));
     process.exit(1);
   }
 
   console.log('\n📊 Migration Summary:');
   console.log(`  Component: ${config.componentName}`);
-  console.log(`  Files moved: ${result.componentPath ? path.relative(FRONTEND_DIR, result.componentPath) : 'N/A'}`);
-  console.log(`  New location: ${result.newPath ? path.relative(FRONTEND_DIR, result.newPath) : 'N/A'}`);
+  console.log(
+    `  Files moved: ${result.componentPath ? path.relative(FRONTEND_DIR, result.componentPath) : 'N/A'}`
+  );
+  console.log(
+    `  New location: ${result.newPath ? path.relative(FRONTEND_DIR, result.newPath) : 'N/A'}`
+  );
   console.log(`  Imports updated: ${result.updatedFiles.length} files`);
 
   console.log('\n✅ Next steps:');
   console.log('  1. Review the changes: git status');
   console.log('  2. Test the application: yarn dev');
-  console.log('  3. Commit the changes: git add . && git commit -m "migrate: move ComponentName to @careercopilot/ui"');
+  console.log(
+    '  3. Commit the changes: git add . && git commit -m "migrate: move ComponentName to @careercopilot/ui"'
+  );
   console.log(`  4. If issues occur, rollback: ./rollback-${config.componentName}.sh`);
 }
 
-main().catch(error => {
+main().catch((error) => {
   console.error('Fatal error:', error);
   process.exit(1);
 });

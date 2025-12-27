@@ -463,6 +463,18 @@ class AIInteraction(Base):
         index=True,
         comment="Reference to the user who initiated the interaction",
     )
+    
+    application_id: Mapped[Optional[str]] = mapped_column(
+        String(36),
+        ForeignKey("applications.id", ondelete="CASCADE"),
+        nullable=True,
+        index=True,
+        comment="Reference to the application associated with this interaction",
+    )
+    
+    application: Mapped[Optional["Application"]] = relationship(
+        "Application", back_populates="interactions", lazy="selectin"
+    )
 
     # Model and performance metrics
     model_used: Mapped[Optional[str]] = mapped_column(
@@ -506,7 +518,6 @@ class AIInteraction(Base):
     # Table configuration
     __table_args__ = (
         # Indexes for common query patterns
-        Index("ix_ai_interactions_user_id", "user_id"),
         Index("ix_ai_interactions_created_at", "created_at"),
         Index("ix_ai_interactions_operation_type", "operation_type"),
         Index("ix_ai_interactions_success", "success"),
@@ -615,7 +626,6 @@ class AgentSession(Base):
     # Table configuration
     __table_args__ = (
         # Indexes for common query patterns
-        Index("ix_agent_sessions_user_id", "user_id"),
         Index("ix_agent_sessions_status", "status"),
         Index("ix_agent_sessions_type_status", "session_type", "status"),
         Index("ix_agent_sessions_created_at", "created_at"),
@@ -756,7 +766,6 @@ class Cache(Base):
     __tablename__ = "cache"
     __table_args__ = (
         Index("idx_cache_operation_user", "operation_type", "user_id"),
-        Index("idx_cache_expiry", "expires_at"),
     )
 
     key: Mapped[str] = mapped_column(

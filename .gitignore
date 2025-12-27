@@ -108,3 +108,16 @@ claude-artifact-runner/
 # Jules Delegation Protocol Output Reports
 /.ai_reports/
 .archive_legacy/
+.venv/
+test-results/
+
+# Local Environments and Logs
+backend/venv/
+*.txt
+*.xml
+playwright-report/
+test-results/
+
+
+# Legacy Archive (Pre-Flight Cleanup)
+_archive_legacy/

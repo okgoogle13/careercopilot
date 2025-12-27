@@ -9,6 +9,7 @@ tags: [mcp, automation, configuration, devops, scripts]
 **Purpose:** High-speed automation script management and environment configuration via ConfigurationRegistry MCP server, enabling parallel validation and reducing token usage by 60-80%.
 
 **When to Use:**
+
 - User asks: "Validate this deployment configuration"
 - User asks: "What scripts are available?"
 - User asks: "Check if all required environment variables are set"
@@ -20,6 +21,7 @@ tags: [mcp, automation, configuration, devops, scripts]
 ## Capabilities
 
 ### 1. List Available Scripts
+
 ```
 method: list_scripts
 params: {pattern?: string}
@@ -29,6 +31,7 @@ Returns: All 84 scripts indexed from scripts/, backend/scripts/, .claude/scripts
 ```
 
 ### 2. Get Environment Configuration
+
 ```
 method: get_environment
 params: {env: "development" | "staging" | "production"}
@@ -37,6 +40,7 @@ Returns: Environment-specific configuration with required secrets
 ```
 
 ### 3. Parallel Environment Validation
+
 ```
 method: validate_all
 Returns: Parallel validation of dev, staging, and production
@@ -44,6 +48,7 @@ Speedup: 73% faster than sequential validation
 ```
 
 ### 4. Render Environment Template
+
 ```
 method: render_template
 params: {env: string, template: string}
@@ -52,6 +57,7 @@ Returns: Rendered environment template with variables substituted
 ```
 
 ### 5. Full Index
+
 ```
 method: index
 Returns: Complete configuration index with statistics
@@ -63,6 +69,7 @@ Returns: Complete configuration index with statistics
 **Startup:** <1s | Parallel validation: 73% speedup (30s → 8s)
 
 **Indexed Resources:**
+
 - 84 automation scripts from:
   - scripts/ (60+ files)
   - backend/scripts/ (15+ files)
@@ -78,6 +85,7 @@ Returns: Complete configuration index with statistics
 ## Real-World Example: Deployment Validation
 
 **Without MCP (Token Cost: 1,500, Time: 30s):**
+
 ```
 User: "Validate all environments"
 Claude reads: scripts/*.sh (3,000 tokens)
@@ -92,6 +100,7 @@ Total: 6,500 tokens, 30+ seconds
 ```
 
 **With Configuration MCP (Token Cost: 500, Time: 8s):**
+
 ```
 User: "Validate all environments"
 Claude: Calls validate_all()
@@ -112,6 +121,7 @@ Savings: 85% tokens ✅, 73% time ✅
 ## Integration Points
 
 Works seamlessly with:
+
 - `mcp-documentation-skill` - For script documentation
 - `mcp-genkit-flows-skill` - For environment-specific flow execution
 - Deployment automation tasks

@@ -22,10 +22,7 @@
       "/home/user/careercopilot/frontend/src/components/features/opportunities/InterviewPrep.tsx",
       "/home/user/careercopilot/frontend/src/components/features/opportunities/JobMatching.tsx"
     ],
-    "exports": [
-      "BadgeProps",
-      "Badge"
-    ],
+    "exports": ["BadgeProps", "Badge"],
     "hasTests": true,
     "hasStories": false,
     "hasDocs": false,
@@ -71,9 +68,7 @@
     "hasDocs": false,
     "linesOfCode": 57,
     "complexity": "medium",
-    "dependencies": [
-      "@/lib/utils"
-    ],
+    "dependencies": ["@/lib/utils"],
     "isReusable": true,
     "usesMUI": true,
     "usesCustomUI": false,
@@ -97,10 +92,7 @@
       "/home/user/careercopilot/frontend/src/components/features/demo/MUITest.tsx",
       "/home/user/careercopilot/frontend/src/components/features/opportunities/JobInput.tsx"
     ],
-    "exports": [
-      "InputProps",
-      "Input"
-    ],
+    "exports": ["InputProps", "Input"],
     "hasTests": true,
     "hasStories": false,
     "hasDocs": false,
@@ -129,10 +121,7 @@
       "/home/user/careercopilot/frontend/src/components/features/opportunities/JobInput.tsx",
       "/home/user/careercopilot/frontend/src/components/features/dashboard/dashboard/DashboardStats.tsx"
     ],
-    "exports": [
-      "TextareaProps",
-      "Textarea"
-    ],
+    "exports": ["TextareaProps", "Textarea"],
     "hasTests": false,
     "hasStories": false,
     "hasDocs": false,
@@ -160,10 +149,7 @@
       "/home/user/careercopilot/frontend/src/components/library/LayoutComponentsSection.tsx",
       "/home/user/careercopilot/frontend/src/components/features/demo/AnimatedShowcase.tsx"
     ],
-    "exports": [
-      "LabelProps",
-      "Label"
-    ],
+    "exports": ["LabelProps", "Label"],
     "hasTests": false,
     "hasStories": false,
     "hasDocs": false,
@@ -189,10 +175,7 @@
       "/home/user/careercopilot/frontend/src/components/career/JobSearch.tsx",
       "/home/user/careercopilot/frontend/src/components/features/opportunities/FilterPanel.test.tsx"
     ],
-    "exports": [
-      "FilterPanel",
-      "JobFilters"
-    ],
+    "exports": ["FilterPanel", "JobFilters"],
     "hasTests": true,
     "hasStories": false,
     "hasDocs": false,
@@ -219,10 +202,7 @@
       "/home/user/careercopilot/frontend/src/components/features/opportunities/CareerIntelligence.tsx",
       "/home/user/careercopilot/frontend/src/components/features/opportunities/JobMatching.tsx"
     ],
-    "exports": [
-      "ProgressProps",
-      "Progress"
-    ],
+    "exports": ["ProgressProps", "Progress"],
     "hasTests": false,
     "hasStories": false,
     "hasDocs": false,
@@ -293,10 +273,7 @@
       "/home/user/careercopilot/frontend/src/components/features/Analysis/ATSAnalysisDashboard.tsx",
       "/home/user/careercopilot/frontend/src/components/features/demo/MUITest.tsx"
     ],
-    "exports": [
-      "ButtonProps",
-      "Button"
-    ],
+    "exports": ["ButtonProps", "Button"],
     "hasTests": false,
     "hasStories": false,
     "hasDocs": false,
@@ -322,10 +299,7 @@
       "/home/user/careercopilot/frontend/src/components/ui/Button/Button.stories.tsx",
       "/home/user/careercopilot/frontend/src/components/ui/Button/Button.test.tsx"
     ],
-    "exports": [
-      "ButtonProps",
-      "default"
-    ],
+    "exports": ["ButtonProps", "default"],
     "hasTests": true,
     "hasStories": true,
     "hasDocs": false,
@@ -351,10 +325,7 @@
       "/home/user/careercopilot/frontend/src/components/library/FormComponentsSection.tsx",
       "/home/user/careercopilot/frontend/src/components/ui/checkbox.test.tsx"
     ],
-    "exports": [
-      "CheckboxProps",
-      "Checkbox"
-    ],
+    "exports": ["CheckboxProps", "Checkbox"],
     "hasTests": true,
     "hasStories": false,
     "hasDocs": false,
@@ -423,11 +394,7 @@
       "/home/user/careercopilot/frontend/src/components/ui/feedback/ToastContext.tsx",
       "/home/user/careercopilot/frontend/src/components/ui/feedback/__tests__/Toast.test.tsx"
     ],
-    "exports": [
-      "ToastProps",
-      "Toast",
-      "default"
-    ],
+    "exports": ["ToastProps", "Toast", "default"],
     "hasTests": false,
     "hasStories": false,
     "hasDocs": false,
@@ -453,11 +420,7 @@
       "/home/user/careercopilot/frontend/src/components/ui/loading/FullPageLoading.tsx",
       "/home/user/careercopilot/frontend/src/components/ui/loading/__tests__/LoadingSpinner.test.tsx"
     ],
-    "exports": [
-      "LoadingSpinnerProps",
-      "LoadingSpinner",
-      "default"
-    ],
+    "exports": ["LoadingSpinnerProps", "LoadingSpinner", "default"],
     "hasTests": false,
     "hasStories": false,
     "hasDocs": false,
@@ -483,10 +446,7 @@
       "/home/user/careercopilot/frontend/src/components/library/LayoutComponentsSection.tsx",
       "/home/user/careercopilot/frontend/src/components/features/demo/ComponentUsageGuide.tsx"
     ],
-    "exports": [
-      "SeparatorProps",
-      "Separator"
-    ],
+    "exports": ["SeparatorProps", "Separator"],
     "hasTests": false,
     "hasStories": false,
     "hasDocs": false,
@@ -512,10 +472,7 @@
       "/home/user/careercopilot/frontend/src/components/library/FormComponentsSection.tsx",
       "/home/user/careercopilot/frontend/src/components/features/dashboard/Settings.tsx"
     ],
-    "exports": [
-      "SwitchProps",
-      "Switch"
-    ],
+    "exports": ["SwitchProps", "Switch"],
     "hasTests": false,
     "hasStories": false,
     "hasDocs": false,
@@ -541,13 +498,7 @@
       "/home/user/careercopilot/frontend/src/components/features/opportunities/CareerGrowthHub.tsx",
       "/home/user/careercopilot/frontend/src/components/features/opportunities/JobInput.tsx"
     ],
-    "exports": [
-      "Tabs",
-      "TabsList",
-      "TabsTrigger",
-      "TabsContent",
-      "default"
-    ],
+    "exports": ["Tabs", "TabsList", "TabsTrigger", "TabsContent", "default"],
     "hasTests": false,
     "hasStories": false,
     "hasDocs": false,
@@ -604,13 +555,8 @@
     "relativePath": "components/features/Analysis/ATSAnalysisDashboard.tsx",
     "category": "features",
     "usageCount": 1,
-    "importedBy": [
-      "/home/user/careercopilot/frontend/src/pages/ATSAnalysisPage.tsx"
-    ],
-    "exports": [
-      "ATSAnalysisDashboard",
-      "AnalysisResult"
-    ],
+    "importedBy": ["/home/user/careercopilot/frontend/src/pages/ATSAnalysisPage.tsx"],
+    "exports": ["ATSAnalysisDashboard", "AnalysisResult"],
     "hasTests": false,
     "hasStories": false,
     "hasDocs": false,
@@ -637,21 +583,14 @@
     "relativePath": "components/features/auth/Auth.tsx",
     "category": "features",
     "usageCount": 1,
-    "importedBy": [
-      "/home/user/careercopilot/frontend/src/components/features/auth/Auth.test.tsx"
-    ],
-    "exports": [
-      "Auth"
-    ],
+    "importedBy": ["/home/user/careercopilot/frontend/src/components/features/auth/Auth.test.tsx"],
+    "exports": ["Auth"],
     "hasTests": true,
     "hasStories": false,
     "hasDocs": false,
     "linesOfCode": 109,
     "complexity": "medium",
-    "dependencies": [
-      "../../ui/input",
-      "../common/CareerCopilotLogo"
-    ],
+    "dependencies": ["../../ui/input", "../common/CareerCopilotLogo"],
     "isReusable": false,
     "usesMUI": true,
     "usesCustomUI": false,
@@ -670,9 +609,7 @@
     "importedBy": [
       "/home/user/careercopilot/frontend/src/components/features/dashboard/Dashboard.tsx"
     ],
-    "exports": [
-      "DashboardHeader"
-    ],
+    "exports": ["DashboardHeader"],
     "hasTests": false,
     "hasStories": false,
     "hasDocs": false,
@@ -697,18 +634,13 @@
     "importedBy": [
       "/home/user/careercopilot/frontend/src/components/features/dashboard/Dashboard.tsx"
     ],
-    "exports": [
-      "DashboardStats"
-    ],
+    "exports": ["DashboardStats"],
     "hasTests": false,
     "hasStories": false,
     "hasDocs": false,
     "linesOfCode": 201,
     "complexity": "complex",
-    "dependencies": [
-      "../../../../api/aiServices",
-      "../../../ui/textarea"
-    ],
+    "dependencies": ["../../../../api/aiServices", "../../../ui/textarea"],
     "isReusable": false,
     "usesMUI": true,
     "usesCustomUI": false,
@@ -727,9 +659,7 @@
     "importedBy": [
       "/home/user/careercopilot/frontend/src/components/features/dashboard/Dashboard.tsx"
     ],
-    "exports": [
-      "ProfileGrid"
-    ],
+    "exports": ["ProfileGrid"],
     "hasTests": false,
     "hasStories": false,
     "hasDocs": false,
@@ -795,20 +725,13 @@
     "importedBy": [
       "/home/user/careercopilot/frontend/src/components/features/opportunities/CareerGrowthHub.test.tsx"
     ],
-    "exports": [
-      "CareerGrowthHub"
-    ],
+    "exports": ["CareerGrowthHub"],
     "hasTests": true,
     "hasStories": false,
     "hasDocs": false,
     "linesOfCode": 468,
     "complexity": "complex",
-    "dependencies": [
-      "./FeatureCard",
-      "../../ui/tabs",
-      "../../ui/tooltip",
-      "../../ui/badge"
-    ],
+    "dependencies": ["./FeatureCard", "../../ui/tabs", "../../ui/tooltip", "../../ui/badge"],
     "isReusable": false,
     "usesMUI": true,
     "usesCustomUI": false,
@@ -827,18 +750,13 @@
     "importedBy": [
       "/home/user/careercopilot/frontend/src/components/features/opportunities/CareerIntelligence.test.tsx"
     ],
-    "exports": [
-      "CareerIntelligence"
-    ],
+    "exports": ["CareerIntelligence"],
     "hasTests": true,
     "hasStories": false,
     "hasDocs": false,
     "linesOfCode": 559,
     "complexity": "complex",
-    "dependencies": [
-      "../../ui/badge",
-      "../../ui/progress"
-    ],
+    "dependencies": ["../../ui/badge", "../../ui/progress"],
     "isReusable": false,
     "usesMUI": true,
     "usesCustomUI": false,
@@ -857,9 +775,7 @@
     "importedBy": [
       "/home/user/careercopilot/frontend/src/components/features/opportunities/CareerGrowthHub.tsx"
     ],
-    "exports": [
-      "FeatureCard"
-    ],
+    "exports": ["FeatureCard"],
     "hasTests": false,
     "hasStories": false,
     "hasDocs": false,
@@ -884,18 +800,13 @@
     "importedBy": [
       "/home/user/careercopilot/frontend/src/components/features/opportunities/InterviewPrep.test.tsx"
     ],
-    "exports": [
-      "InterviewPrep"
-    ],
+    "exports": ["InterviewPrep"],
     "hasTests": true,
     "hasStories": false,
     "hasDocs": false,
     "linesOfCode": 579,
     "complexity": "complex",
-    "dependencies": [
-      "../../ui/badge",
-      "../../ui/textarea"
-    ],
+    "dependencies": ["../../ui/badge", "../../ui/textarea"],
     "isReusable": false,
     "usesMUI": true,
     "usesCustomUI": false,
@@ -911,14 +822,8 @@
     "relativePath": "components/features/opportunities/JobCard.tsx",
     "category": "features",
     "usageCount": 1,
-    "importedBy": [
-      "/home/user/careercopilot/frontend/src/components/career/JobSearch.tsx"
-    ],
-    "exports": [
-      "JobCardProps",
-      "JobCard",
-      "default"
-    ],
+    "importedBy": ["/home/user/careercopilot/frontend/src/components/career/JobSearch.tsx"],
+    "exports": ["JobCardProps", "JobCard", "default"],
     "hasTests": false,
     "hasStories": false,
     "hasDocs": false,
@@ -940,13 +845,8 @@
     "relativePath": "components/layout/AppLayout.tsx",
     "category": "layout",
     "usageCount": 1,
-    "importedBy": [
-      "/home/user/careercopilot/frontend/src/components/layout/AppLayout.stories.tsx"
-    ],
-    "exports": [
-      "AppLayout",
-      "default"
-    ],
+    "importedBy": ["/home/user/careercopilot/frontend/src/components/layout/AppLayout.stories.tsx"],
+    "exports": ["AppLayout", "default"],
     "hasTests": false,
     "hasStories": true,
     "hasDocs": false,
@@ -968,14 +868,8 @@
     "relativePath": "components/layout/AppShell.tsx",
     "category": "layout",
     "usageCount": 1,
-    "importedBy": [
-      "/home/user/careercopilot/frontend/src/App.tsx"
-    ],
-    "exports": [
-      "AppShellProps",
-      "AppShell",
-      "default"
-    ],
+    "importedBy": ["/home/user/careercopilot/frontend/src/App.tsx"],
+    "exports": ["AppShellProps", "AppShell", "default"],
     "hasTests": false,
     "hasStories": false,
     "hasDocs": false,
@@ -997,20 +891,14 @@
     "relativePath": "components/layout/NavigationItem.tsx",
     "category": "layout",
     "usageCount": 1,
-    "importedBy": [
-      "/home/user/careercopilot/frontend/src/components/layout/Navbar.tsx"
-    ],
-    "exports": [
-      "NavigationItem"
-    ],
+    "importedBy": ["/home/user/careercopilot/frontend/src/components/layout/Navbar.tsx"],
+    "exports": ["NavigationItem"],
     "hasTests": false,
     "hasStories": false,
     "hasDocs": false,
     "linesOfCode": 81,
     "complexity": "medium",
-    "dependencies": [
-      "../../config/navigation"
-    ],
+    "dependencies": ["../../config/navigation"],
     "isReusable": false,
     "usesMUI": true,
     "usesCustomUI": false,
@@ -1029,11 +917,7 @@
     "importedBy": [
       "/home/user/careercopilot/frontend/src/components/layout/PageHeader.stories.tsx"
     ],
-    "exports": [
-      "PageHeader",
-      "PageHeaderPresets",
-      "default"
-    ],
+    "exports": ["PageHeader", "PageHeaderPresets", "default"],
     "hasTests": false,
     "hasStories": true,
     "hasDocs": false,
@@ -1119,13 +1003,8 @@
     "relativePath": "components/ui/EmptyState.tsx",
     "category": "ui",
     "usageCount": 1,
-    "importedBy": [
-      "/home/user/careercopilot/frontend/src/components/career/JobSearch.tsx"
-    ],
-    "exports": [
-      "EmptyStateProps",
-      "EmptyState"
-    ],
+    "importedBy": ["/home/user/careercopilot/frontend/src/components/career/JobSearch.tsx"],
+    "exports": ["EmptyStateProps", "EmptyState"],
     "hasTests": false,
     "hasStories": false,
     "hasDocs": false,
@@ -1150,11 +1029,7 @@
     "importedBy": [
       "/home/user/careercopilot/frontend/src/components/ui/feedback/__tests__/Dialog.test.tsx"
     ],
-    "exports": [
-      "DialogProps",
-      "DialogRef",
-      "default"
-    ],
+    "exports": ["DialogProps", "DialogRef", "default"],
     "hasTests": false,
     "hasStories": false,
     "hasDocs": false,
@@ -1179,12 +1054,7 @@
     "importedBy": [
       "/home/user/careercopilot/frontend/src/components/ui/feedback/__tests__/EmptyState.test.tsx"
     ],
-    "exports": [
-      "EmptyStateProps",
-      "EmptyState",
-      "NoResultsFound",
-      "ErrorState"
-    ],
+    "exports": ["EmptyStateProps", "EmptyState", "NoResultsFound", "ErrorState"],
     "hasTests": false,
     "hasStories": false,
     "hasDocs": false,
@@ -1209,19 +1079,13 @@
     "importedBy": [
       "/home/user/careercopilot/frontend/src/components/ui/feedback/__tests__/ToastContext.test.tsx"
     ],
-    "exports": [
-      "ToastProvider",
-      "useToast",
-      "default"
-    ],
+    "exports": ["ToastProvider", "useToast", "default"],
     "hasTests": false,
     "hasStories": false,
     "hasDocs": false,
     "linesOfCode": 117,
     "complexity": "medium",
-    "dependencies": [
-      "./Toast"
-    ],
+    "dependencies": ["./Toast"],
     "isReusable": true,
     "usesMUI": true,
     "usesCustomUI": false,
@@ -1237,9 +1101,7 @@
     "relativePath": "components/ui/layout.tsx",
     "category": "ui",
     "usageCount": 1,
-    "importedBy": [
-      "/home/user/careercopilot/frontend/src/components/features/demo/MUITest.tsx"
-    ],
+    "importedBy": ["/home/user/careercopilot/frontend/src/components/features/demo/MUITest.tsx"],
     "exports": [
       "LayoutContainerProps",
       "LayoutContainer",
@@ -1259,10 +1121,7 @@
     "hasDocs": false,
     "linesOfCode": 98,
     "complexity": "medium",
-    "dependencies": [
-      "./card",
-      "./card"
-    ],
+    "dependencies": ["./card", "./card"],
     "isReusable": true,
     "usesMUI": true,
     "usesCustomUI": false,
@@ -1281,18 +1140,13 @@
     "importedBy": [
       "/home/user/careercopilot/frontend/src/components/ui/loading/__tests__/FullPageLoading.test.tsx"
     ],
-    "exports": [
-      "FullPageLoading",
-      "default"
-    ],
+    "exports": ["FullPageLoading", "default"],
     "hasTests": false,
     "hasStories": false,
     "hasDocs": false,
     "linesOfCode": 63,
     "complexity": "medium",
-    "dependencies": [
-      "./LoadingSpinner"
-    ],
+    "dependencies": ["./LoadingSpinner"],
     "isReusable": true,
     "usesMUI": true,
     "usesCustomUI": false,
@@ -1311,10 +1165,7 @@
     "importedBy": [
       "/home/user/careercopilot/frontend/src/components/ui/loading/__tests__/LoadingSkeleton.test.tsx"
     ],
-    "exports": [
-      "LoadingSkeleton",
-      "default"
-    ],
+    "exports": ["LoadingSkeleton", "default"],
     "hasTests": false,
     "hasStories": false,
     "hasDocs": false,
@@ -1336,13 +1187,8 @@
     "relativePath": "components/ui/LoadingState.tsx",
     "category": "ui",
     "usageCount": 1,
-    "importedBy": [
-      "/home/user/careercopilot/frontend/src/components/career/JobSearch.tsx"
-    ],
-    "exports": [
-      "LoadingStateProps",
-      "LoadingState"
-    ],
+    "importedBy": ["/home/user/careercopilot/frontend/src/components/career/JobSearch.tsx"],
+    "exports": ["LoadingStateProps", "LoadingState"],
     "hasTests": false,
     "hasStories": false,
     "hasDocs": false,
@@ -1399,12 +1245,7 @@
     "importedBy": [
       "/home/user/careercopilot/frontend/src/components/library/FormComponentsSection.tsx"
     ],
-    "exports": [
-      "RadioGroupProps",
-      "RadioGroup",
-      "RadioGroupItemProps",
-      "RadioGroupItem"
-    ],
+    "exports": ["RadioGroupProps", "RadioGroup", "RadioGroupItemProps", "RadioGroupItem"],
     "hasTests": false,
     "hasStories": false,
     "hasDocs": false,
@@ -1429,10 +1270,7 @@
     "importedBy": [
       "/home/user/careercopilot/frontend/src/components/library/LayoutComponentsSection.tsx"
     ],
-    "exports": [
-      "SkeletonProps",
-      "Skeleton"
-    ],
+    "exports": ["SkeletonProps", "Skeleton"],
     "hasTests": false,
     "hasStories": false,
     "hasDocs": false,
@@ -1457,10 +1295,7 @@
     "importedBy": [
       "/home/user/careercopilot/frontend/src/components/library/FormComponentsSection.tsx"
     ],
-    "exports": [
-      "SliderProps",
-      "Slider"
-    ],
+    "exports": ["SliderProps", "Slider"],
     "hasTests": false,
     "hasStories": false,
     "hasDocs": false,
@@ -1482,13 +1317,8 @@
     "relativePath": "components/ui/StatCard.tsx",
     "category": "ui",
     "usageCount": 1,
-    "importedBy": [
-      "/home/user/careercopilot/frontend/src/components/main/JobSearchStatus.tsx"
-    ],
-    "exports": [
-      "StatCardProps",
-      "StatCard"
-    ],
+    "importedBy": ["/home/user/careercopilot/frontend/src/components/main/JobSearchStatus.tsx"],
+    "exports": ["StatCardProps", "StatCard"],
     "hasTests": false,
     "hasStories": false,
     "hasDocs": false,
@@ -1511,9 +1341,7 @@
     "category": "features",
     "usageCount": 0,
     "importedBy": [],
-    "exports": [
-      "ATSScoreCircle"
-    ],
+    "exports": ["ATSScoreCircle"],
     "hasTests": false,
     "hasStories": false,
     "hasDocs": false,
@@ -1536,9 +1364,7 @@
     "category": "features",
     "usageCount": 0,
     "importedBy": [],
-    "exports": [
-      "Dashboard"
-    ],
+    "exports": ["Dashboard"],
     "hasTests": false,
     "hasStories": false,
     "hasDocs": false,
@@ -1566,18 +1392,13 @@
     "category": "features",
     "usageCount": 0,
     "importedBy": [],
-    "exports": [
-      "Settings"
-    ],
+    "exports": ["Settings"],
     "hasTests": false,
     "hasStories": false,
     "hasDocs": false,
     "linesOfCode": 454,
     "complexity": "complex",
-    "dependencies": [
-      "../../ui/input",
-      "../../ui/switch"
-    ],
+    "dependencies": ["../../ui/input", "../../ui/switch"],
     "isReusable": false,
     "usesMUI": true,
     "usesCustomUI": false,
@@ -1594,18 +1415,13 @@
     "category": "features",
     "usageCount": 0,
     "importedBy": [],
-    "exports": [
-      "AnimatedShowcase"
-    ],
+    "exports": ["AnimatedShowcase"],
     "hasTests": false,
     "hasStories": false,
     "hasDocs": false,
     "linesOfCode": 677,
     "complexity": "complex",
-    "dependencies": [
-      "../../ui/label",
-      "./AnimatedComponents"
-    ],
+    "dependencies": ["../../ui/label", "./AnimatedComponents"],
     "isReusable": false,
     "usesMUI": true,
     "usesCustomUI": false,
@@ -1622,9 +1438,7 @@
     "category": "features",
     "usageCount": 0,
     "importedBy": [],
-    "exports": [
-      "CardShowcase"
-    ],
+    "exports": ["CardShowcase"],
     "hasTests": false,
     "hasStories": false,
     "hasDocs": false,
@@ -1652,9 +1466,7 @@
     "category": "features",
     "usageCount": 0,
     "importedBy": [],
-    "exports": [
-      "ComponentLibrary"
-    ],
+    "exports": ["ComponentLibrary"],
     "hasTests": false,
     "hasStories": false,
     "hasDocs": false,
@@ -1687,19 +1499,13 @@
     "category": "features",
     "usageCount": 0,
     "importedBy": [],
-    "exports": [
-      "ComponentUsageGuide"
-    ],
+    "exports": ["ComponentUsageGuide"],
     "hasTests": false,
     "hasStories": false,
     "hasDocs": false,
     "linesOfCode": 465,
     "complexity": "complex",
-    "dependencies": [
-      "../../ui/badge",
-      "../../ui/card",
-      "../../ui/separator"
-    ],
+    "dependencies": ["../../ui/badge", "../../ui/card", "../../ui/separator"],
     "isReusable": false,
     "usesMUI": true,
     "usesCustomUI": false,
@@ -1716,9 +1522,7 @@
     "category": "features",
     "usageCount": 0,
     "importedBy": [],
-    "exports": [
-      "MUITest"
-    ],
+    "exports": ["MUITest"],
     "hasTests": false,
     "hasStories": false,
     "hasDocs": false,
@@ -1749,9 +1553,7 @@
     "category": "features",
     "usageCount": 0,
     "importedBy": [],
-    "exports": [
-      "StateDemoShowcase"
-    ],
+    "exports": ["StateDemoShowcase"],
     "hasTests": false,
     "hasStories": false,
     "hasDocs": false,
@@ -1780,19 +1582,13 @@
     "category": "features",
     "usageCount": 0,
     "importedBy": [],
-    "exports": [
-      "JobInput"
-    ],
+    "exports": ["JobInput"],
     "hasTests": false,
     "hasStories": false,
     "hasDocs": false,
     "linesOfCode": 282,
     "complexity": "complex",
-    "dependencies": [
-      "../../ui/input",
-      "../../ui/tabs",
-      "../../ui/textarea"
-    ],
+    "dependencies": ["../../ui/input", "../../ui/tabs", "../../ui/textarea"],
     "isReusable": false,
     "usesMUI": true,
     "usesCustomUI": false,
@@ -1809,18 +1605,13 @@
     "category": "features",
     "usageCount": 0,
     "importedBy": [],
-    "exports": [
-      "JobMatching"
-    ],
+    "exports": ["JobMatching"],
     "hasTests": false,
     "hasStories": false,
     "hasDocs": false,
     "linesOfCode": 420,
     "complexity": "complex",
-    "dependencies": [
-      "../../ui/badge",
-      "../../ui/progress"
-    ],
+    "dependencies": ["../../ui/badge", "../../ui/progress"],
     "isReusable": false,
     "usesMUI": true,
     "usesCustomUI": false,
@@ -1837,19 +1628,13 @@
     "category": "layout",
     "usageCount": 0,
     "importedBy": [],
-    "exports": [
-      "default"
-    ],
+    "exports": ["default"],
     "hasTests": false,
     "hasStories": false,
     "hasDocs": false,
     "linesOfCode": 337,
     "complexity": "complex",
-    "dependencies": [
-      "../../config/navigation",
-      "./NavigationItem",
-      "../NotificationCenter"
-    ],
+    "dependencies": ["../../config/navigation", "./NavigationItem", "../NotificationCenter"],
     "isReusable": false,
     "usesMUI": true,
     "usesCustomUI": false,
@@ -1866,9 +1651,7 @@
     "category": "layout",
     "usageCount": 0,
     "importedBy": [],
-    "exports": [
-      "Sidebar"
-    ],
+    "exports": ["Sidebar"],
     "hasTests": false,
     "hasStories": false,
     "hasDocs": false,
@@ -1891,12 +1674,7 @@
     "category": "ui",
     "usageCount": 0,
     "importedBy": [],
-    "exports": [
-      "BreadcrumbItem",
-      "BreadcrumbsProps",
-      "Breadcrumbs",
-      "default"
-    ],
+    "exports": ["BreadcrumbItem", "BreadcrumbsProps", "Breadcrumbs", "default"],
     "hasTests": false,
     "hasStories": false,
     "hasDocs": false,
@@ -1919,11 +1697,7 @@
     "category": "ui",
     "usageCount": 0,
     "importedBy": [],
-    "exports": [
-      "DatePickerProps",
-      "DatePicker",
-      "default"
-    ],
+    "exports": ["DatePickerProps", "DatePicker", "default"],
     "hasTests": false,
     "hasStories": false,
     "hasDocs": false,
@@ -1946,11 +1720,7 @@
     "category": "ui",
     "usageCount": 0,
     "importedBy": [],
-    "exports": [
-      "ErrorBoundaryProps",
-      "ErrorBoundary",
-      "withErrorBoundary"
-    ],
+    "exports": ["ErrorBoundaryProps", "ErrorBoundary", "withErrorBoundary"],
     "hasTests": false,
     "hasStories": false,
     "hasDocs": false,
@@ -1973,12 +1743,7 @@
     "category": "ui",
     "usageCount": 0,
     "importedBy": [],
-    "exports": [
-      "Skeleton",
-      "CardSkeleton",
-      "TextSkeleton",
-      "AvatarSkeleton"
-    ],
+    "exports": ["Skeleton", "CardSkeleton", "TextSkeleton", "AvatarSkeleton"],
     "hasTests": false,
     "hasStories": false,
     "hasDocs": false,
@@ -2001,10 +1766,7 @@
     "category": "ui",
     "usageCount": 0,
     "importedBy": [],
-    "exports": [
-      "GridCompatProps",
-      "default"
-    ],
+    "exports": ["GridCompatProps", "default"],
     "hasTests": false,
     "hasStories": false,
     "hasDocs": false,
@@ -2027,11 +1789,7 @@
     "category": "ui",
     "usageCount": 0,
     "importedBy": [],
-    "exports": [
-      "SearchInputProps",
-      "SearchInput",
-      "default"
-    ],
+    "exports": ["SearchInputProps", "SearchInput", "default"],
     "hasTests": false,
     "hasStories": false,
     "hasDocs": false,
@@ -2054,12 +1812,7 @@
     "category": "ui",
     "usageCount": 0,
     "importedBy": [],
-    "exports": [
-      "SelectOption",
-      "SelectProps",
-      "Select",
-      "default"
-    ],
+    "exports": ["SelectOption", "SelectProps", "Select", "default"],
     "hasTests": false,
     "hasStories": false,
     "hasDocs": false,
@@ -2126,13 +1879,7 @@
     "category": "ui",
     "usageCount": 0,
     "importedBy": [],
-    "exports": [
-      "ToastSeverity",
-      "ToastProps",
-      "Toast",
-      "useToast",
-      "default"
-    ],
+    "exports": ["ToastSeverity", "ToastProps", "Toast", "useToast", "default"],
     "hasTests": false,
     "hasStories": false,
     "hasDocs": false,

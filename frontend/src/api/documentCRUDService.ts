@@ -68,10 +68,7 @@ export const documentCRUDService = {
   /**
    * Upload/create document
    */
-  async uploadDocument(
-    file: File,
-    metadata: Partial<Document>
-  ): Promise<Document> {
+  async uploadDocument(file: File, metadata: Partial<Document>): Promise<Document> {
     try {
       const formData = new FormData();
       formData.append('file', file);
@@ -118,10 +115,7 @@ export const documentCRUDService = {
   /**
    * Update document
    */
-  async updateDocument(
-    documentId: string,
-    updates: DocumentUpdate
-  ): Promise<Document> {
+  async updateDocument(documentId: string, updates: DocumentUpdate): Promise<Document> {
     try {
       const response = await apiClient.put(`/${documentId}`, updates);
       return response.data;
@@ -147,10 +141,7 @@ export const documentCRUDService = {
   /**
    * Create document version
    */
-  async createVersion(
-    documentId: string,
-    versionData: Partial<Document>
-  ): Promise<Document> {
+  async createVersion(documentId: string, versionData: Partial<Document>): Promise<Document> {
     try {
       const response = await apiClient.post(`/${documentId}/versions`, versionData);
       return response.data;
@@ -178,9 +169,7 @@ export const documentCRUDService = {
    */
   async restoreVersion(documentId: string, versionId: string): Promise<Document> {
     try {
-      const response = await apiClient.post(
-        `/${documentId}/versions/${versionId}/restore`
-      );
+      const response = await apiClient.post(`/${documentId}/versions/${versionId}/restore`);
       return response.data;
     } catch (error) {
       console.error('Restore version error:', error);
@@ -210,10 +199,7 @@ export const documentCRUDService = {
   /**
    * Duplicate document
    */
-  async duplicateDocument(
-    documentId: string,
-    newName?: string
-  ): Promise<Document> {
+  async duplicateDocument(documentId: string, newName?: string): Promise<Document> {
     try {
       const response = await apiClient.post(`/${documentId}/duplicate`, {
         newName,

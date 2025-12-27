@@ -10,11 +10,13 @@
 ## ✅ Fixed Tests (5 total)
 
 ### Round 1 Fixes (3 tests)
+
 1. ✅ **M3Multiselect** - Multiple elements with same text
-2. ✅ **M3Datepicker** - Date comparison logic  
+2. ✅ **M3Datepicker** - Date comparison logic
 3. ✅ **ATSScoreCircle** - Score format, size, prop names
 
 ### Round 2 Fixes (2 tests)
+
 4. ✅ **SettingsPage.test.tsx** - Fixed import path
    - Changed: `import { SettingsPage } from '../SettingsPage'`
    - To: `import { SettingsPage } from '@/features/pages/SettingsPage'`
@@ -24,6 +26,7 @@
    - To: `import { DocumentsPage } from '@/features/pages/DocumentsPage'`
 
 ### Round 3 Fixes (2 tests - in progress)
+
 6. ✅ **toast.test.tsx** - Fixed import path
    - Changed: `import { Toast } from '../toast'`
    - To: `import { Toast } from '@/components/custom/toast/Toast'`
@@ -37,22 +40,28 @@
 ## 🔧 Remaining Issues (~31 failed tests)
 
 ### Category A: Missing Components (6 tests)
+
 Components don't exist - need to find or create:
+
 - ProfileGrid
-- ConfirmTagsModal  
+- ConfirmTagsModal
 - ProfileEditor
 - ApplicationGeneratorModal
 - ImportWizard
 - DashboardHeader
 
 ### Category B: Import Path Fixes (5 tests)
+
 Need to find correct paths:
+
 - JobCard (jobs feature)
 - JobCard (opportunities feature)
 - Navigation config (Navbar test - may already be mocked)
 
 ### Category C: Logic/Assertion Failures (~20 tests)
+
 These are likely:
+
 - Component behavior mismatches
 - Test expectations vs actual implementation
 - Timing/async issues
@@ -62,13 +71,13 @@ These are likely:
 
 ## 📊 Progress Metrics
 
-| Metric | Value |
-|--------|-------|
-| **Starting Failures** | 39 |
-| **Fixed** | 5 |
-| **Remaining** | ~34 |
-| **Success Rate** | 12.8% fixed |
-| **Target** | < 25 failures |
+| Metric                | Value         |
+| --------------------- | ------------- |
+| **Starting Failures** | 39            |
+| **Fixed**             | 5             |
+| **Remaining**         | ~34           |
+| **Success Rate**      | 12.8% fixed   |
+| **Target**            | < 25 failures |
 
 ---
 
@@ -94,6 +103,7 @@ These are likely:
 ## 📝 Files Modified
 
 ### Test Files Fixed:
+
 - `frontend/src/components/m3-expressive/multiselect/M3Multiselect.test.tsx`
 - `frontend/src/components/m3-expressive/datepicker/M3Datepicker.test.tsx`
 - `frontend/src/components/m3-expressive/datepicker/M3Datepicker.tsx`
@@ -104,6 +114,7 @@ These are likely:
 - `frontend/src/pages/__tests__/AnalysisPage.test.tsx`
 
 ### Component Files Fixed:
+
 - `frontend/src/components/custom/keyword-tag/KeywordTag.tsx`
 - `frontend/src/components/features/CareerIntelligence/CareerIntelligence.test.tsx`
 - `frontend/src/mui-components/__tests__/ProfileCard.test.tsx`
@@ -113,6 +124,7 @@ These are likely:
 ## 🚀 Verification
 
 Run tests to verify fixes:
+
 ```bash
 cd frontend
 yarn test

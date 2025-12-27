@@ -5,7 +5,7 @@
 
 // Authentication
 export * from './authService';
-export { authService } from './authService';
+export { default as authService } from './authService';
 
 // Smart Ingestion
 export * from './smartIngestionService';

@@ -1,12 +1,14 @@
 # Batch 5: Feedback Components - Delegation Instructions
 
 ## Assignment Details
+
 - **Difficulty:** Easy (85% automation)
 - **Time Estimate:** 2.5 hours
 - **Components:** 3 (Alert, Skeleton, EmptyState)
 - **Ideal for:** Mid-level AI agents
 
 ## Your Mission
+
 Migrate 3 feedback components from legacy styling to M3 Expressive design system.
 
 ---
@@ -14,17 +16,21 @@ Migrate 3 feedback components from legacy styling to M3 Expressive design system
 ## Component 1: M3Alert
 
 ### Generate Base
+
 ```bash
 python3 scripts/generate-m3-component.py --name="Alert" --type="feedback" --output="frontend/src/components/ui"
 ```
 
 ### Customization Required (30 min)
+
 1. **Add severity variants:**
+
    ```typescript
    severity?: 'info' | 'success' | 'warning' | 'error';
    ```
 
 2. **Add severity-specific colors in CSS:**
+
    ```css
    .m3-alert--info {
      background-color: var(--md-sys-color-primary-95);
@@ -48,6 +54,7 @@ python3 scripts/generate-m3-component.py --name="Alert" --type="feedback" --outp
    ```
 
 3. **Add close button:**
+
    ```typescript
    onClose?: () => void;
 
@@ -67,6 +74,7 @@ python3 scripts/generate-m3-component.py --name="Alert" --type="feedback" --outp
    ```
 
 4. **Add icon slot:**
+
    ```typescript
    icon?: React.ReactNode;
 
@@ -75,6 +83,7 @@ python3 scripts/generate-m3-component.py --name="Alert" --type="feedback" --outp
    ```
 
 ### Storybook Stories
+
 - Primary (default info)
 - All Severities (info, success, warning, error)
 - With Close Button
@@ -86,20 +95,25 @@ python3 scripts/generate-m3-component.py --name="Alert" --type="feedback" --outp
 ## Component 2: M3Skeleton
 
 ### Generate Base
+
 ```bash
 python3 scripts/generate-m3-component.py --name="Skeleton" --type="feedback" --output="frontend/src/components/ui"
 ```
 
 ### Customization Required (25 min)
+
 1. **Add shape variants:**
+
    ```typescript
    variant?: 'text' | 'rectangular' | 'circular';
    ```
 
 2. **Add animation:**
+
    ```css
    @keyframes m3-skeleton-pulse {
-     0%, 100% {
+     0%,
+     100% {
        opacity: 1;
      }
      50% {
@@ -108,12 +122,7 @@ python3 scripts/generate-m3-component.py --name="Skeleton" --type="feedback" --o
    }
 
    .m3-skeleton {
-     background: linear-gradient(
-       90deg,
-       var(--md-sys-color-neutral-90) 0%,
-       var(--md-sys-color-neutral-95) 50%,
-       var(--md-sys-color-neutral-90) 100%
-     );
+     background: linear-gradient(90deg, var(--md-sys-color-neutral-90) 0%, var(--md-sys-color-neutral-95) 50%, var(--md-sys-color-neutral-90) 100%);
      background-size: 200% 100%;
      animation: m3-skeleton-shimmer 1.5s ease-in-out infinite;
    }
@@ -129,6 +138,7 @@ python3 scripts/generate-m3-component.py --name="Skeleton" --type="feedback" --o
    ```
 
 3. **Add width/height props:**
+
    ```typescript
    width?: string | number;
    height?: string | number;
@@ -141,6 +151,7 @@ python3 scripts/generate-m3-component.py --name="Skeleton" --type="feedback" --o
    ```
 
 ### Storybook Stories
+
 - Text (single line)
 - Text (multiple lines)
 - Rectangular (avatar + text)
@@ -152,12 +163,15 @@ python3 scripts/generate-m3-component.py --name="Skeleton" --type="feedback" --o
 ## Component 3: M3EmptyState
 
 ### Generate Base
+
 ```bash
 python3 scripts/generate-m3-component.py --name="EmptyState" --type="feedback" --output="frontend/src/components/ui"
 ```
 
 ### Customization Required (20 min)
+
 1. **Add structured content:**
+
    ```typescript
    export interface M3EmptyStateProps {
      illustration?: React.ReactNode;
@@ -168,24 +182,18 @@ python3 scripts/generate-m3-component.py --name="EmptyState" --type="feedback" -
    ```
 
 2. **Add layout structure:**
+
    ```tsx
    <div className="m3-empty-state">
-     {illustration && (
-       <div className="m3-empty-state__illustration">
-         {illustration}
-       </div>
-     )}
+     {illustration && <div className="m3-empty-state__illustration">{illustration}</div>}
      <h3 className="m3-empty-state__title">{title}</h3>
-     {description && (
-       <p className="m3-empty-state__description">{description}</p>
-     )}
-     {action && (
-       <div className="m3-empty-state__action">{action}</div>
-     )}
+     {description && <p className="m3-empty-state__description">{description}</p>}
+     {action && <div className="m3-empty-state__action">{action}</div>}
    </div>
    ```
 
 3. **Add centered layout CSS:**
+
    ```css
    .m3-empty-state {
      display: flex;
@@ -217,6 +225,7 @@ python3 scripts/generate-m3-component.py --name="EmptyState" --type="feedback" -
    ```
 
 ### Storybook Stories
+
 - Basic (title only)
 - With Description
 - With Illustration
@@ -228,6 +237,7 @@ python3 scripts/generate-m3-component.py --name="EmptyState" --type="feedback" -
 ## Validation Checklist
 
 Before committing:
+
 - [ ] All components compile without TypeScript errors
 - [ ] All components use 100% M3 tokens (no hardcoded colors)
 - [ ] All Storybook stories render correctly
@@ -236,6 +246,7 @@ Before committing:
 - [ ] Responsive (test at 375px, 768px, 1440px)
 
 ## Commit Command
+
 ```bash
 git add -A
 git commit -m "feat: Complete M3 Batch 5 - Feedback components (Alert, Skeleton, EmptyState)
@@ -263,6 +274,7 @@ git push -u origin claude/m3-expressive-tokens-014XmAiA4Rd8N6ucn9JDEJuz
 ```
 
 ## Expected Completion
+
 - Time: 2.5 hours
 - Components: 3/3
 - Quality: 100% M3 compliance

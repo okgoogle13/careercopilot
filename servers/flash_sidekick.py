@@ -1,177 +1,137 @@
 #!/usr/bin/env python3
 """
-MCP Flash Sidekick - Dual-Engine Implementation
---------------------------------------------
-Provides two model engines:
-* Fast engine (Gemini Flash Lite) for quick summarization.
-* Smart engine (Gemini Pro) for higher‑quality IDF generation.
+MCP Flash Sidekick - Dual-Engine Utility Agent
+Optimized for high-speed startup to avoid Antigravity timeouts.
 """
+import warnings
+warnings.filterwarnings("ignore")
 
-import json
-import os
-import sys
-import logging
+import json, os, sys, logging
 from typing import Dict, Any
 
-# Configure logging
+# Log to tmp to avoid permission issues
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - [Sidekick] - %(levelname)s - %(message)s',
-    handlers=[
-        logging.FileHandler('/tmp/mcp-flash-sidekick.log'),
-        logging.StreamHandler(sys.stderr)
-    ]
+    handlers=[logging.FileHandler('/tmp/mcp-flash-sidekick.log')]
 )
 logger = logging.getLogger("FlashSidekick")
 
-try:
-    import google.generativeai as genai
-    GENAI_AVAILABLE = True
-except ImportError:
-    GENAI_AVAILABLE = False
-    logger.warning("google-generativeai not installed. Run: pip install google-generativeai")
+# Lazy Loading Infrastructure
+_genai = None
+_genai_loaded = False
+
+def _load_genai():
+    global _genai, _genai_loaded
+    if not _genai_loaded:
+        try:
+            import contextlib, io
+            with contextlib.redirect_stderr(io.StringIO()):
+                import google.generativeai as genai_module
+            _genai = genai_module
+            _genai_loaded = True
+        except Exception as e:
+            logger.error(f"Failed to load genai: {e}")
+            _genai_loaded = True
+    return _genai
 
 class FlashSidekickServer:
     def __init__(self):
-        # API key
-        self.api_key = os.getenv("GEMINI_API_KEY", "")
-        # Model names – can be overridden via env vars.
-        self.fast_model_name = os.getenv("GEMINI_MODEL", "models/gemini-2.5-flash-lite")
-        self.pro_model_name = os.getenv("GEMINI_PRO_MODEL", "models/gemini-2.5-pro")
-        # Model instances & init flags
-        self.fast_model = None
-        self.pro_model = None
-        self.fast_initialized = False
-        self.pro_initialized = False
+        self.gemini_key = os.getenv("GEMINI_API_KEY", "")
+        self.initialized = False
+        self._models_cache = {}
+        
+        # Fast Engine Candidates
+        env_fast = os.getenv("GEMINI_MODEL")
+        self.fast_candidates = ["models/gemini-2.5-flash-lite", "models/gemini-1.5-flash"]
+        if env_fast and env_fast not in self.fast_candidates: self.fast_candidates.insert(0, env_fast)
+            
+        # Smart Engine Candidates
+        env_pro = os.getenv("GEMINI_PRO_MODEL")
+        self.pro_candidates = ["models/gemini-2.5-pro", "models/gemini-exp-1206", "models/gemini-1.5-pro"]
+        if env_pro and env_pro not in self.pro_candidates: self.pro_candidates.insert(0, env_pro)
 
-        if GENAI_AVAILABLE and self.api_key:
+    def _ensure_genai(self):
+        genai = _load_genai()
+        if not self.initialized and genai and self.gemini_key:
             try:
-                genai.configure(api_key=self.api_key)
-                self._initialize_model(self.fast_model_name, kind="fast")
-                self._initialize_model(self.pro_model_name, kind="pro")
+                genai.configure(api_key=self.gemini_key)
+                self.initialized = True
             except Exception as e:
-                logger.error(f"Failed to configure Gemini client: {e}")
-        else:
-            logger.warning("Missing API Key or google-generativeai library.")
+                logger.error(f"Config failed: {e}")
+        return genai
 
-    def _initialize_model(self, model_name: str, kind: str):
-        """Attempt to create a GenerativeModel for the given name.
-        `kind` is either "fast" or "pro" and determines which attribute to set.
-        """
+    def _get_model(self, candidates):
+        genai = self._ensure_genai()
+        if not genai: return None
+        for name in candidates:
+            if name in self._models_cache: return self._models_cache[name]
+            try:
+                model = genai.GenerativeModel(name)
+                self._models_cache[name] = model
+                return model
+            except: continue
+        return None
+
+    def _call_gemini(self, engine_type, prompt, sys_instruct=""):
+        model = self._get_model(self.pro_candidates if engine_type == "pro" else self.fast_candidates)
+        if not model: return {"content": "Error: Model unavailable."}
         try:
-            logger.info(f"Initializing {kind} model: {model_name}")
-            model = genai.GenerativeModel(model_name)
-            # Simple ping to verify access.
-            model.generate_content("Ping")
-            if kind == "fast":
-                self.fast_model = model
-                self.fast_initialized = True
-                logger.info(f"Fast model ready: {model_name}")
-            else:
-                self.pro_model = model
-                self.pro_initialized = True
-                logger.info(f"Pro model ready: {model_name}")
-        except Exception as e:
-            logger.warning(f"Failed to init {kind} model {model_name}: {e}")
+            full = f"System: {sys_instruct}\n\nUser: {prompt}"
+            resp = model.generate_content(full)
+            return {"content": resp.text if resp else "No response."}
+        except Exception as e: return {"content": f"Error: {str(e)}"}
 
-    def _call(self, model, prompt: str, system_instruction: str = "") -> Dict[str, Any]:
-        """Run a generation request against a given model."""
-        try:
-            full_prompt = f"System Instruction: {system_instruction}\n\nTask: {prompt}"
-            response = model.generate_content(full_prompt)
-            text = response.text if response else "No response."
-            return {"content": text, "meta": {"model": model.model_name}}
-        except Exception as e:
-            logger.error(f"Generation error ({model.model_name}): {e}")
-            return {"content": f"Error: {str(e)}"}
-
-    # ---------------------------------------------------------------------
-    # Public tool implementations
-    # ---------------------------------------------------------------------
-    def quick_summarize(self, text: str) -> str:
-        """Fast summarization using the Flash Lite model."""
-        if not self.fast_initialized:
-            return "Fast model not available."
-        result = self._call(self.fast_model, text, "Summarize concisely.")
-        return result.get("content", "")
-
-    def generate_idf(self, code_content: str) -> str:
-        """High‑quality IDF generation using the Pro model."""
-        if not self.pro_initialized:
-            return "Pro model not available."
-        prompt = f"""
-        Extract a Python Interface Definition (IDF) from the code below.
-        Rules:
-        1. Keep all class definitions.
-        2. Keep method signatures with type hints.
-        3. Keep docstrings.
-        4. Replace method bodies with '...'.
-        5. Omit imports unless required for type hints.
-
-        Code:
-        {code_content}
-        """
-        result = self._call(self.pro_model, prompt, "Parse Python code for IDF.")
-        return result.get("content", "")
-
-    def list_tools(self) -> list:
+    def list_tools(self):
         return [
-            {
-                "name": "quick_summarize",
-                "description": "Fast summarization using Gemini Flash Lite.",
-                "inputSchema": {
-                    "type": "object",
-                    "properties": {"text": {"type": "string"}},
-                    "required": ["text"]
-                }
-            },
-            {
-                "name": "generate_idf",
-                "description": "High‑quality IDF generation using Gemini Pro.",
-                "inputSchema": {
-                    "type": "object",
-                    "properties": {"code_content": {"type": "string"}},
-                    "required": ["code_content"]
-                }
-            }
+            {"name": "quick_summarize", "description": "Fast (Flash-Lite): Summarize text.", "inputSchema": {"type": "object", "properties": {"text": {"type": "string"}}, "required": ["text"]}},
+            {"name": "generate_idf", "description": "Fast (Flash-Lite): Generate Python IDF.", "inputSchema": {"type": "object", "properties": {"code": {"type": "string"}}, "required": ["code"]}},
+            {"name": "consult_pro", "description": "Smart (Pro 2.5): Deep reasoning/coding.", "inputSchema": {"type": "object", "properties": {"query": {"type": "string"}, "context": {"type": "string"}}, "required": ["query"]}}
         ]
 
-def handle_request(server: FlashSidekickServer, line: str):
+    def call_tool(self, name, args):
+        if name == "quick_summarize": res = self._call_gemini("fast", args.get("text",""), "Summarize concisely.")
+        elif name == "generate_idf": res = self._call_gemini("fast", args.get("code",""), "Extract signatures only.")
+        elif name == "consult_pro": res = self._call_gemini("pro", args.get("query",""), f"Context: {args.get('context','')}. Analyze deeply as a Senior Engineer.")
+        else: return []
+        return [{"type": "text", "text": res.get("content", "")}]
+
+def handle_request(server, line):
     try:
-        request = json.loads(line)
-        method = request.get("method")
-        if method == "tools/list":
-            return {"result": {"tools": server.list_tools()}}
+        req = json.loads(line)
+        method = req.get("method")
+        req_id = req.get("id")
+        
+        # Build JSON-RPC 2.0 response
+        resp = {"jsonrpc": "2.0", "id": req_id}
+        
+        if method == "initialize":
+            resp["result"] = {
+                "protocolVersion": "2024-11-05",
+                "capabilities": {"tools": {}},
+                "serverInfo": {"name": "sidekick-dual", "version": "3.1.0"}
+            }
+        elif method == "tools/list":
+            resp["result"] = {"tools": server.list_tools()}
         elif method == "tools/call":
-            params = request.get("params", {})
-            name = params.get("name")
-            args = params.get("arguments", {})
-            if name == "quick_summarize":
-                content = server.quick_summarize(args.get("text", ""))
-            elif name == "generate_idf":
-                content = server.generate_idf(args.get("code_content", ""))
-            else:
-                return {"error": {"code": -32601, "message": "Method not found"}}
-            return {"result": {"content": [{"type": "text", "text": content}]}}
-        elif method == "initialize":
-            return {"result": {"protocolVersion": "0.1.0", "capabilities": {"tools": {}}, "serverInfo": {"name": "flash-sidekick", "version": "1.0.0"}}}
-        elif method == "notifications/initialized":
-            return {}
+            content = server.call_tool(req["params"]["name"], req["params"]["arguments"])
+            resp["result"] = {"content": content}
         else:
-            return {"error": {"code": -32601, "message": "Method not found"}}
+            return None
+            
+        return resp
     except Exception as e:
-        return {"error": {"code": -32603, "message": str(e)}}
+        logger.error(f"Error: {e}")
+        return None
 
 if __name__ == "__main__":
     server = FlashSidekickServer()
     while True:
         try:
             line = sys.stdin.readline()
-            if not line:
-                break
-            response = handle_request(server, line)
-            if response:
-                print(json.dumps(response))
+            if not line: break
+            resp = handle_request(server, line)
+            if resp: 
+                print(json.dumps(resp))
                 sys.stdout.flush()
-        except Exception:
-            break
+        except: break

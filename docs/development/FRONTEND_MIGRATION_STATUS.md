@@ -16,12 +16,14 @@ The frontend cleanup and migration plan has been **thoroughly reviewed and corre
 ### Phase 1: Infrastructure Fixes (COMPLETED)
 
 #### 1.1 Workspace Configuration ✅
+
 - **Issue**: `packages/ui` not registered in root workspace
 - **Fix**: Added `"frontend/packages/*"` to root `package.json` workspaces
 - **File**: `/package.json` (lines 7-11)
 - **Verification**: Run `yarn install` to verify workspace resolution
 
 #### 1.2 Theme Duplication Resolved ✅
+
 - **Issue**: Two conflicting theme files (363 lines vs 306 lines)
 - **Decision**: Keep `frontend/src/theme/theme.ts` as canonical theme
 - **Fix**: Updated `packages/ui/src/theme/theme.ts` to re-export main theme
@@ -33,6 +35,7 @@ The frontend cleanup and migration plan has been **thoroughly reviewed and corre
 #### 1.3 Safe Migration Tools Created ✅
 
 **Component Inventory Script**:
+
 - **File**: `frontend/scripts/component-inventory.ts`
 - **Purpose**: Generate accurate list of all components with usage analysis
 - **Features**:
@@ -47,6 +50,7 @@ The frontend cleanup and migration plan has been **thoroughly reviewed and corre
   ```
 
 **Safe Component Migration Script**:
+
 - **File**: `frontend/scripts/safe-migrate-component.ts`
 - **Purpose**: Migrate single component with full safety checks
 - **Features**:
@@ -56,6 +60,7 @@ The frontend cleanup and migration plan has been **thoroughly reviewed and corre
   - Creates rollback script
   - Dry-run mode available
 - **Usage**:
+
   ```bash
   # Dry run first
   npx ts-node scripts/safe-migrate-component.ts Button --dry-run
@@ -67,6 +72,7 @@ The frontend cleanup and migration plan has been **thoroughly reviewed and corre
 ### Phase 2: Documentation Created (COMPLETED)
 
 #### 2.1 Safe Migration Plan ✅
+
 - **File**: `frontend/MIGRATION-PLAN-SAFE.md`
 - **Contents**:
   - Complete safe migration strategy
@@ -77,6 +83,7 @@ The frontend cleanup and migration plan has been **thoroughly reviewed and corre
   - Success criteria
 
 #### 2.2 Pre-Migration Checklist ✅
+
 - **File**: `frontend/PRE-MIGRATION-CHECKLIST.md`
 - **Contents**:
   - Infrastructure readiness checks
@@ -89,13 +96,14 @@ The frontend cleanup and migration plan has been **thoroughly reviewed and corre
 
 ## ❌ Original Scripts - DO NOT USE
 
-| Script | Status | Issues |
-|--------|--------|--------|
-| `scripts/move-to-ui.ts` | ❌ BROKEN | Assumes non-existent components, no import updates |
-| `scripts/cleanup-redundant.ts` | ❌ DANGEROUS | Deletes 48+ active files, no rollback |
-| `scripts/cleanup-frontend.ts` | ⚠️ MISLEADING | Read-only but results inaccurate |
+| Script                         | Status        | Issues                                             |
+| ------------------------------ | ------------- | -------------------------------------------------- |
+| `scripts/move-to-ui.ts`        | ❌ BROKEN     | Assumes non-existent components, no import updates |
+| `scripts/cleanup-redundant.ts` | ❌ DANGEROUS  | Deletes 48+ active files, no rollback              |
+| `scripts/cleanup-frontend.ts`  | ⚠️ MISLEADING | Read-only but results inaccurate                   |
 
 **These scripts would cause**:
+
 - Deletion of 48+ active component files
 - Loss of ALL test files (`.test.tsx`)
 - Loss of ALL story files (`.stories.tsx`)
@@ -126,6 +134,7 @@ frontend/src/components/
 ```
 
 **Key Findings**:
+
 - Only **Button** is properly structured for migration
 - Most components listed in original scripts **don't exist**
 - **48+ active files** in ui/ and library/ directories
@@ -216,6 +225,7 @@ npx ts-node scripts/safe-migrate-component.ts Button --dry-run --verbose
 ### Step 6: Decide Go/No-Go
 
 Use `PRE-MIGRATION-CHECKLIST.md` to verify:
+
 - ✅ All infrastructure checks pass
 - ✅ Component inventory reviewed
 - ✅ Tools verified
@@ -247,6 +257,7 @@ Based on typical structure, recommended order:
 ### What NOT to Migrate
 
 Keep these in `src/components/`:
+
 - Feature-specific components (`features/` directory)
 - Page-specific layouts
 - Complex integrated components
@@ -272,15 +283,15 @@ Migration is successful when:
 
 ## ⏱️ Estimated Timeline
 
-| Phase | Duration | Status |
-|-------|----------|--------|
-| **Preparation** | 2 days | ✅ COMPLETE |
-| **Enhanced Scripts** | 1 day | ✅ COMPLETE |
-| Initial Analysis | 1 day | 📋 NEXT |
-| Component Migration | 10-15 days | ⏳ PENDING |
-| Feature Reorganization | 3-5 days | ⏳ PENDING |
-| Cleanup & Verification | 2-3 days | ⏳ PENDING |
-| **TOTAL** | **~3-4 weeks** | **In Progress** |
+| Phase                  | Duration       | Status          |
+| ---------------------- | -------------- | --------------- |
+| **Preparation**        | 2 days         | ✅ COMPLETE     |
+| **Enhanced Scripts**   | 1 day          | ✅ COMPLETE     |
+| Initial Analysis       | 1 day          | 📋 NEXT         |
+| Component Migration    | 10-15 days     | ⏳ PENDING      |
+| Feature Reorganization | 3-5 days       | ⏳ PENDING      |
+| Cleanup & Verification | 2-3 days       | ⏳ PENDING      |
+| **TOTAL**              | **~3-4 weeks** | **In Progress** |
 
 ---
 
@@ -296,34 +307,38 @@ Migration is successful when:
 
 ### Common Issues & Solutions
 
-| Issue | Solution |
-|-------|----------|
-| Import not updated | Run safe-migrate-component again |
-| Tests fail | Check rollback script, revert changes |
-| TypeScript errors | Verify package exports updated |
-| Component not found | Run component-inventory to locate |
-| Build fails | Check for circular dependencies |
+| Issue               | Solution                              |
+| ------------------- | ------------------------------------- |
+| Import not updated  | Run safe-migrate-component again      |
+| Tests fail          | Check rollback script, revert changes |
+| TypeScript errors   | Verify package exports updated        |
+| Component not found | Run component-inventory to locate     |
+| Build fails         | Check for circular dependencies       |
 
 ---
 
 ## 📁 Key Files Reference
 
 ### Configuration
+
 - `/package.json` - Root workspace config (✅ fixed)
 - `frontend/packages/ui/package.json` - UI package config
 - `frontend/tsconfig.json` - TypeScript configuration
 
 ### Theme
+
 - `frontend/src/theme/theme.ts` - **CANONICAL THEME** (363 lines)
 - `frontend/packages/ui/src/theme/theme.ts` - Re-exports main theme
 
 ### Scripts
+
 - `frontend/scripts/component-inventory.ts` - ✅ Safe analysis tool
 - `frontend/scripts/safe-migrate-component.ts` - ✅ Safe migration tool
 - `frontend/scripts/move-to-ui.ts` - ❌ DO NOT USE
 - `frontend/scripts/cleanup-redundant.ts` - ❌ DO NOT USE
 
 ### Documentation
+
 - `frontend/MIGRATION-PLAN-SAFE.md` - **Main migration guide**
 - `frontend/PRE-MIGRATION-CHECKLIST.md` - Go/No-Go checklist
 - `frontend/MIGRATION-STATUS.md` - This file (status tracking)
@@ -334,6 +349,7 @@ Migration is successful when:
 ## ✅ Sign-Off
 
 ### Infrastructure Review
+
 - [x] Workspace configuration fixed
 - [x] Theme duplication resolved
 - [x] Safe migration tools created
@@ -341,6 +357,7 @@ Migration is successful when:
 - [x] Original script issues documented
 
 ### Ready for Migration
+
 - [ ] Component inventory run
 - [ ] First component selected
 - [ ] Backup branch created

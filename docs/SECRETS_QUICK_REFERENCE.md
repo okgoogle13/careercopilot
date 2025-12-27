@@ -7,6 +7,7 @@ Fast commands for common secrets operations.
 ## 🚀 Setup Commands
 
 ### All Platforms
+
 ```bash
 ./scripts/setup-secrets.sh                    # All platforms, production, interactive
 ./scripts/setup-secrets.sh all staging        # All platforms, staging
@@ -14,6 +15,7 @@ Fast commands for common secrets operations.
 ```
 
 ### Platform-Specific
+
 ```bash
 ./scripts/setup-secrets.sh github production  # GitHub secrets only
 ./scripts/setup-secrets.sh gcp production     # GCP secrets only
@@ -21,6 +23,7 @@ Fast commands for common secrets operations.
 ```
 
 ### Environment-Specific
+
 ```bash
 ./scripts/setup-secrets.sh all development    # Development environment
 ./scripts/setup-secrets.sh all staging        # Staging environment
@@ -28,6 +31,7 @@ Fast commands for common secrets operations.
 ```
 
 ### Setup Modes
+
 ```bash
 ./scripts/setup-secrets.sh all prod interactive  # Interactive prompts (default)
 ./scripts/setup-secrets.sh all prod from-env      # From environment variables
@@ -39,6 +43,7 @@ Fast commands for common secrets operations.
 ## 🔍 Validation Commands
 
 ### Comprehensive Validation
+
 ```bash
 ./scripts/validate-secrets.sh                 # Validate all secrets
 ./scripts/validate-secrets.sh all production  # Validate production secrets
@@ -46,6 +51,7 @@ Fast commands for common secrets operations.
 ```
 
 ### Platform-Specific Validation
+
 ```bash
 ./scripts/validate-secrets.sh github staging  # Validate GitHub staging secrets
 ./scripts/validate-secrets.sh gcp production  # Validate GCP production secrets
@@ -57,18 +63,21 @@ Fast commands for common secrets operations.
 ## 🛠️ Specialized Scripts
 
 ### AWS SES (Email Service)
+
 ```bash
 ./scripts/setup-aws-ses-secrets.sh          # AWS SES to GCP Secret Manager
 ./scripts/setup-aws-ses-github-secrets.sh   # AWS SES to GitHub Secrets
 ```
 
 ### Production Validation
+
 ```bash
 python3 scripts/production-secrets-validator.py    # Python validator
 python3 scripts/production-secrets-validator.py --checklist  # Generate checklist
 ```
 
 ### Local Development
+
 ```bash
 ./scripts/setup-secrets.sh                # Interactive local setup
 python3 scripts/test-configuration.py   # Validate local config
@@ -79,6 +88,7 @@ python3 scripts/test-configuration.py   # Validate local config
 ## 📋 Common Workflows
 
 ### New Developer Setup
+
 ```bash
 # 1. Local development setup
 ./scripts/setup-secrets.sh
@@ -91,6 +101,7 @@ cd backend && python -m uvicorn app.main:app --reload
 ```
 
 ### Production Deployment
+
 ```bash
 # 1. Validate all secrets
 ./scripts/validate-secrets.sh all production
@@ -106,6 +117,7 @@ cd backend && python -m uvicorn app.main:app --reload
 ```
 
 ### Staging Deployment
+
 ```bash
 # 1. Setup staging secrets
 ./scripts/setup-secrets.sh all staging
@@ -118,6 +130,7 @@ cd backend && python -m uvicorn app.main:app --reload
 ```
 
 ### AWS SES Setup
+
 ```bash
 # 1. Setup AWS SES for all platforms
 ./scripts/setup-secrets.sh aws-ses all
@@ -134,6 +147,7 @@ python3 -c "from backend.app.services.email_service import send_email; print(sen
 ## 🔧 Environment Variables
 
 ### For from-env Mode
+
 ```bash
 # GitHub Secrets
 export GEMINI_API_KEY="your-gemini-key"
@@ -158,6 +172,7 @@ export GCP_STAGING_PROJECT_ID="careercopilot-staging"
 ## 🚨 Emergency Commands
 
 ### Revoke All GitHub Secrets
+
 ```bash
 gh secret delete GEMINI_API_KEY
 gh secret delete OPENAI_API_KEY
@@ -168,6 +183,7 @@ gh secret delete SES_SENDER_EMAIL
 ```
 
 ### Revoke GCP Secrets
+
 ```bash
 gcloud secrets delete gemini-api-key --quiet
 gcloud secrets delete openai-api-key --quiet
@@ -178,6 +194,7 @@ gcloud secrets delete ses-sender-email --quiet
 ```
 
 ### Quick Health Check
+
 ```bash
 ./scripts/validate-secrets.sh all production
 ```

@@ -28,27 +28,29 @@ Instantly get the optimal MCP server routing for any task. Use this command to e
 
 ## Routing Logic (Enforced)
 
-| Task Type | Routes To | Savings |
-|-----------|-----------|---------|
-| Code analysis/review | gemini-wrapper | 40-55% |
-| Error diagnosis | gemini-wrapper | 50% |
-| Refactoring suggestions | gemini-wrapper | 35% |
-| Architecture analysis | gemini-wrapper | 45% |
-| Performance optimization | gemini-wrapper | 55% |
-| Configuration lookup | configuration | 94.9% |
-| Documentation lookup | documentation | 93.3% |
-| Flow execution | genkit | 99.1% |
-| GitHub PR/issue | github | 80% |
+| Task Type                | Routes To      | Savings |
+| ------------------------ | -------------- | ------- |
+| Code analysis/review     | gemini-wrapper | 40-55%  |
+| Error diagnosis          | gemini-wrapper | 50%     |
+| Refactoring suggestions  | gemini-wrapper | 35%     |
+| Architecture analysis    | gemini-wrapper | 45%     |
+| Performance optimization | gemini-wrapper | 55%     |
+| Configuration lookup     | configuration  | 94.9%   |
+| Documentation lookup     | documentation  | 93.3%   |
+| Flow execution           | genkit         | 99.1%   |
+| GitHub PR/issue          | github         | 80%     |
 
 ## Key Rules (ENFORCED)
 
 ✅ **DO:**
+
 - Delegate analysis to Gemini (40-55% cheaper)
 - Use cache servers for lookups (93-99% savings)
 - Combine routes for multi-step tasks (80%+ total)
 - Report token savings in your response
 
 ❌ **DO NOT:**
+
 - Analyze code yourself when Gemini available
 - Read raw files when cache servers exist
 - Execute flows without genkit server
@@ -73,29 +75,35 @@ User Task Arrives
 ## Server Details
 
 **Priority 10: gemini-wrapper**
+
 - Model: gemini-1.5-flash
 - Methods: analyze_code, refactoring_suggestions, error_diagnosis, architecture_analysis, optimization_analysis, documentation_insights, explain_text
 - Use for: Analysis, optimization, insights
 
 **Priority 9: claude-orchestrator**
+
 - Methods: health_check_all, execute_batch
 - Use for: Fallback, multi-step orchestration
 
 **Priority 9: github**
+
 - Methods: read_file, list_issues, get_pull_request
 - Use for: Repository operations
 
 **Priority 8: documentation**
+
 - Savings: 93.3%
 - Methods: search_docs, get_docs, get_agents, get_skills
 - Use for: Documentation lookups, factual queries
 
 **Priority 7: configuration**
+
 - Savings: 94.9%
 - Methods: get_environment, list_scripts, validate_all
 - Use for: Config lookups, script discovery
 
 **Priority 6: genkit**
+
 - Savings: 99.1%
 - Methods: list_flows, get_flow, execute_flow
 - Use for: Flow execution and caching
@@ -130,16 +138,19 @@ PROCEED? [Yes/No/Ask for confirmation]
 ## Token Savings Examples
 
 **Single Decision:**
+
 - Code review: 1,200 tokens → 400 tokens (67% savings)
 - Config lookup: 5,000 tokens → 78 tokens (98% savings)
 
 **Multi-Step Workflow:**
+
 - Config lookup + analysis: 5,000 → 600 (88% savings)
 - Error diagnosis + fix: 2,000 + 1,500 → 800 (73% savings)
 
 ## Configuration Source
 
 Routing rules are defined in `~/.mcp.json` under:
+
 - `delegationStrategy.analysisRouting` (Gemini tasks)
 - `delegationStrategy.cacheFirstRouting` (Cache tasks)
 - `mcpServers[].priority` (Server priority order)
@@ -151,6 +162,7 @@ See `.claude/skills/mcp-routing-specialist/SKILL.md` for full documentation.
 This command enforces the MCP Routing Specialist skill and uses the delegationStrategy from your project configuration.
 
 **Reference Documents:**
+
 - Routing Specialist Skill: `.claude/skills/mcp-routing-specialist/SKILL.md`
 - Verification Tests: `.claude/docs/ROUTING_VERIFICATION_TEST.md`
 - Quick Reference: `.claude/docs/ROUTING_QUICK_REFERENCE.md`

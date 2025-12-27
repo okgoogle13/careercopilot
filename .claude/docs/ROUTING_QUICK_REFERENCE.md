@@ -6,12 +6,12 @@
 
 ## The 4 Magic Rules
 
-| When User Asks | DO THIS | Savings | Method |
-|---|---|---|---|
-| **"Review/audit this code"** | Route to **Gemini** | 40-55% | `analyze_code()` |
-| **"What's the config/docs?"** | Route to **Cache** | 93-99% | `get_environment()` / `search_docs()` |
-| **"Why is flow failing?"** | Route to **Genkit** + **Gemini** | 75%+ | `get_flow()` + `error_diagnosis()` |
-| **"Optimize/refactor this"** | Route to **Gemini** | 35-55% | `refactoring_suggestions()` / `optimization_analysis()` |
+| When User Asks                | DO THIS                          | Savings | Method                                                  |
+| ----------------------------- | -------------------------------- | ------- | ------------------------------------------------------- |
+| **"Review/audit this code"**  | Route to **Gemini**              | 40-55%  | `analyze_code()`                                        |
+| **"What's the config/docs?"** | Route to **Cache**               | 93-99%  | `get_environment()` / `search_docs()`                   |
+| **"Why is flow failing?"**    | Route to **Genkit** + **Gemini** | 75%+    | `get_flow()` + `error_diagnosis()`                      |
+| **"Optimize/refactor this"**  | Route to **Gemini**              | 35-55%  | `refactoring_suggestions()` / `optimization_analysis()` |
 
 ---
 
@@ -47,6 +47,7 @@ Priority 6:  genkit              ← Flows (99.1% savings)
 ## Methods You Can Call
 
 ### Gemini Wrapper (Analysis)
+
 ```
 analyze_code(code, language="python")
 refactoring_suggestions(code, language="python")
@@ -58,6 +59,7 @@ explain_text(text)
 ```
 
 ### Documentation Cache
+
 ```
 search_docs(query)
 get_docs(key)
@@ -66,6 +68,7 @@ get_skills()
 ```
 
 ### Configuration Cache
+
 ```
 get_environment(env="production")
 list_scripts()
@@ -73,6 +76,7 @@ validate_all()
 ```
 
 ### Genkit Cache
+
 ```
 list_flows()
 get_flow(flow_name)
@@ -80,6 +84,7 @@ execute_flow(flow_name, inputs)
 ```
 
 ### GitHub MCP
+
 ```
 read_file(path)
 list_issues()
@@ -90,13 +95,13 @@ get_pull_request(number)
 
 ## Token Savings Cheat Sheet
 
-| Task Type | No Routing | With Routing | Savings |
-|-----------|-----------|---|---|
-| Code review | 1,200 | 400 (Gemini) | **67%** |
-| Config lookup | 5,000 | 78 (cache) | **98%** |
-| Error diagnosis | 2,000 | 500 (Gemini) | **75%** |
-| Flow execution | 3,000 | 20 (genkit) | **99%** |
-| Combined task | 8,000 | 1,200 (mixed) | **85%** |
+| Task Type       | No Routing | With Routing  | Savings |
+| --------------- | ---------- | ------------- | ------- |
+| Code review     | 1,200      | 400 (Gemini)  | **67%** |
+| Config lookup   | 5,000      | 78 (cache)    | **98%** |
+| Error diagnosis | 2,000      | 500 (Gemini)  | **75%** |
+| Flow execution  | 3,000      | 20 (genkit)   | **99%** |
+| Combined task   | 8,000      | 1,200 (mixed) | **85%** |
 
 ---
 
@@ -123,15 +128,19 @@ get_pull_request(number)
 ## Example Responses
 
 ### Code Review
+
 > "I'll use Gemini-1.5-Flash to review your code (40-55% cheaper than Claude analysis)."
 
 ### Configuration Query
+
 > "I'll check our cached configuration (94.9% savings vs reading raw files)."
 
 ### Error Diagnosis
+
 > "I'll check the Genkit flow status, then delegate error analysis to Gemini for diagnosis (75%+ savings)."
 
 ### Multi-Step Task
+
 > "I'll look up the documentation (93.3%), then use Gemini to optimize (55%), for 85%+ combined savings."
 
 ---
@@ -148,17 +157,18 @@ get_pull_request(number)
 
 ## Key Files to Reference
 
-| File | Purpose | Bookmarks |
-|------|---------|-----------|
+| File                                             | Purpose                       | Bookmarks           |
+| ------------------------------------------------ | ----------------------------- | ------------------- |
 | `.claude/skills/mcp-routing-specialist/SKILL.md` | Full routing table & protocol | Routing Logic Table |
-| `.claude/docs/ROUTING_VERIFICATION_TEST.md` | Real examples | Test Cases 1-7 |
-| `.claude/docs/ROUTING_QUICK_REFERENCE.md` | This file | Quick lookup |
+| `.claude/docs/ROUTING_VERIFICATION_TEST.md`      | Real examples                 | Test Cases 1-7      |
+| `.claude/docs/ROUTING_QUICK_REFERENCE.md`        | This file                     | Quick lookup        |
 
 ---
 
 ## Success Metrics
 
 After deploying MCP routing, you should see:
+
 - ✅ 80%+ token reduction in production workflows
 - ✅ $624+/year cost savings
 - ✅ 4x faster response times for cache hits

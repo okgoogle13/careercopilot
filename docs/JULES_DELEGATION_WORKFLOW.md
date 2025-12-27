@@ -9,6 +9,7 @@
 ## Overview
 
 This document provides the complete end-to-end workflow for delegating complex testing tasks to Jules, including:
+
 1. **Task Preparation** - Creating Jules-compliant tasks
 2. **Protocol Compliance** - Following the Jules Delegation Protocol
 3. **Batch Launch** - Executing batches in parallel
@@ -23,11 +24,11 @@ This standard defines the **non-negotiable input requirements** for task delegat
 
 ### 1.1 🎯 Task Execution Rules (Non-Negotiable)
 
-| ID | Rule | Description |
-| :--- | :--- | :--- |
-| **R1** | **Asynchronous Mode** | All tasks are assumed to run in **asynchronous, autonomous mode**. No real-time interaction is expected during execution (use MCP for that). |
-| **R2** | **Relative Paths** | All file references in the `SCOPE_AND_TESTS` block **MUST** use relative paths (starting with `./`). |
-| **R3** | **Single Line Format** | The task command **MUST** be written on a single continuous line for script compatibility. |
+| ID     | Rule                   | Description                                                                                                                                     |
+| :----- | :--------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------- |
+| **R1** | **Asynchronous Mode**  | All tasks are assumed to run in **asynchronous, autonomous mode**. No real-time interaction is expected during execution (use MCP for that).    |
+| **R2** | **Relative Paths**     | All file references in the `SCOPE_AND_TESTS` block **MUST** use relative paths (starting with `./`).                                            |
+| **R3** | **Single Line Format** | The task command **MUST** be written on a single continuous line for script compatibility.                                                      |
 | **R4** | **Plan Approval Hook** | The task is **defaulted to require human approval** of the generated plan unless the `AUTO_APPROVE` flag is explicitly included in the command. |
 
 ### 1.2 📝 Structured Task Command Format
@@ -35,29 +36,30 @@ This standard defines the **non-negotiable input requirements** for task delegat
 The task line uses four mandatory, colon-separated blocks to ensure clarity and full context.
 
 **Template (Single Line):**
+
 ```
 JADS_TASK: [CONTEXT] : [GOAL] : [SCOPE_AND_TESTS] : [OUTPUT_REPORT]
 ```
 
 **Block Details:**
 
-| Block | Purpose | Mandatory Contents | Example |
-| :--- | :--- | :--- | :--- |
-| **CONTEXT** | **Why** the task is needed (business reason). | Must reference a **unique ID** (e.g., GitHub Issue ID, JIRA ticket). | `ISSUE_1234: Bugfix for null pointer` |
-| **GOAL** | **What** the final outcome must be. | Must specify the **exact functional change** expected. | `Implement JWT token refresh logic and pass all existing tests.` |
-| **SCOPE_AND_TESTS** | **Where** to focus and **How** to validate. | A list of files/directories to examine, plus the **test validation command**. | `SCOPE: ./auth/ \| TEST: Run 'npm test' in auth dir.` |
-| **OUTPUT_REPORT** | **Audit requirement** for history. | A mandatory instruction for the final report file location. | `REPORT: Generate detailed markdown to /.ai_reports/Task_1234_report.md` |
+| Block               | Purpose                                       | Mandatory Contents                                                            | Example                                                                  |
+| :------------------ | :-------------------------------------------- | :---------------------------------------------------------------------------- | :----------------------------------------------------------------------- |
+| **CONTEXT**         | **Why** the task is needed (business reason). | Must reference a **unique ID** (e.g., GitHub Issue ID, JIRA ticket).          | `ISSUE_1234: Bugfix for null pointer`                                    |
+| **GOAL**            | **What** the final outcome must be.           | Must specify the **exact functional change** expected.                        | `Implement JWT token refresh logic and pass all existing tests.`         |
+| **SCOPE_AND_TESTS** | **Where** to focus and **How** to validate.   | A list of files/directories to examine, plus the **test validation command**. | `SCOPE: ./auth/ \| TEST: Run 'npm test' in auth dir.`                    |
+| **OUTPUT_REPORT**   | **Audit requirement** for history.            | A mandatory instruction for the final report file location.                   | `REPORT: Generate detailed markdown to /.ai_reports/Task_1234_report.md` |
 
 ### 1.3 🛠️ Operational Workflow
 
 This section details how to execute the JADS tasks using the command line interface (CLI).
 
-| Step | Command/Action | Notes |
-| :--- | :--- | :--- |
-| **Batch Launch** | `bash -c 'grep "^JADS_TASK:" jads_tasks.txt \| while IFS= read -r line; do jules remote new --repo . --session "$line"; done'` | Launches all JADS-compliant tasks in batch mode. |
-| **Monitoring** | `jules remote list --session \| awk '/^JADS_TASK:/ {session_id = $2; status = $4; full_prompt = ""; for (i = 5; i <= NF; i++) full_prompt = full_prompt $i " "; if (match(full_prompt, /REPORT: ([^ ]+)/, arr)) { print session_id, status, arr[1] } else { print session_id, status, "REPORT_PATH_UNKNOWN" }}'` | Extracts the **Session ID**, **Status**, and the final **Report Path** for easy human/script review. |
-| **Plan Approval** | `jules task approve --id=task_abc123` | **MANDATORY** action to approve the plan posted by Jules before execution begins (unless `AUTO_APPROVE` was used). |
-| **Status Details** | `jules task status --id=task_abc123` | Use to inspect the detailed status, logs, and execution plan of a single task. |
+| Step               | Command/Action                                                                                                                                                                                                                                                                                                   | Notes                                                                                                              |
+| :----------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------- |
+| **Batch Launch**   | `bash -c 'grep "^JADS_TASK:" jads_tasks.txt \| while IFS= read -r line; do jules remote new --repo . --session "$line"; done'`                                                                                                                                                                                   | Launches all JADS-compliant tasks in batch mode.                                                                   |
+| **Monitoring**     | `jules remote list --session \| awk '/^JADS_TASK:/ {session_id = $2; status = $4; full_prompt = ""; for (i = 5; i <= NF; i++) full_prompt = full_prompt $i " "; if (match(full_prompt, /REPORT: ([^ ]+)/, arr)) { print session_id, status, arr[1] } else { print session_id, status, "REPORT_PATH_UNKNOWN" }}'` | Extracts the **Session ID**, **Status**, and the final **Report Path** for easy human/script review.               |
+| **Plan Approval**  | `jules task approve --id=task_abc123`                                                                                                                                                                                                                                                                            | **MANDATORY** action to approve the plan posted by Jules before execution begins (unless `AUTO_APPROVE` was used). |
+| **Status Details** | `jules task status --id=task_abc123`                                                                                                                                                                                                                                                                             | Use to inspect the detailed status, logs, and execution plan of a single task.                                     |
 
 ### 1.4 Legacy Format Support
 
@@ -78,6 +80,7 @@ Before launching batches, verify:
 - [ ] **All components listed** (complete component names, not abbreviated)
 
 ### Validation Script
+
 ```bash
 # Count tasks that are properly formatted
 grep "^JADS_TASK:" jads_tasks.txt | wc -l
@@ -96,11 +99,13 @@ grep "^JADS_TASK:" jads_tasks.txt | wc -l
 ### 3.1 Fixed Launch Command
 
 **JADS v1.0 Command**:
+
 ```bash
 bash -c 'grep "^JADS_TASK:" jads_tasks.txt | while IFS= read -r line; do jules remote new --repo . --session "$line"; done'
 ```
 
 **Or simplified** (if using plain bash):
+
 ```bash
 cat jads_tasks.txt | while IFS= read -r line; do
   [ "$line" != "${line#JADS_TASK:}" ] && jules remote new --repo . --session "$line"
@@ -110,6 +115,7 @@ done
 ### 3.2 Launch Verification
 
 After launching, verify all sessions exist:
+
 ```bash
 # Should show 8 sessions with "Planning" status
 jules remote list --session | grep "^.*JADS_TASK:" | wc -l
@@ -157,6 +163,7 @@ Launch (t=0s)     → Planning (next 5-10 min) → Running (30-60 min) → Compl
 ### 4.3 Batch Ordering by Complexity & Speed
 
 **Fastest to Slowest**:
+
 1. **Batch 4** (Card, Paper, etc) - 5-10 min (simplest, highest pass rate)
 2. **Batch 1** (Dialog, Toast, etc) - 10-15 min
 3. **Batch 2** (LoadingSpinner, etc) - 10-15 min
@@ -221,6 +228,7 @@ jules remote pull --session 7401566218163211110
 ### 6.1 Success Criteria
 
 **Per Batch**:
+
 - [ ] Report file exists
 - [ ] Result = SUCCESS
 - [ ] Test count ≥ 90 (15×6 components minimum)
@@ -228,6 +236,7 @@ jules remote pull --session 7401566218163211110
 - [ ] All relative paths in report
 
 **Overall (Week 2)**:
+
 - [ ] All 8 batches completed
 - [ ] All 8 report files exist
 - [ ] Total tests ≥ 720 (8 batches × 90 tests)
@@ -255,19 +264,19 @@ done | awk '{sum += $1; count++} END {printf "Avg: %.1f%%\n", sum/count}'
 
 ### 6.3 Expected Results (Week 2)
 
-| Metric | Expected | Range | Notes |
-|--------|----------|-------|-------|
-| Total Tests | 900 | 720-1,200 | 15-25 per component |
-| Total Components | 48 | 42-54 | 6-7 per batch |
-| Avg Pass Rate | 68% | 50%-85% | Weighted by complexity |
-| Batch 1 Pass Rate | 80%+ | Feedback components |
-| Batch 2 Pass Rate | 70%+ | Loading components |
-| Batch 3 Pass Rate | 65%+ | Navigation (routing) |
-| Batch 4 Pass Rate | 85%+ | Surfaces (simplest) |
-| Batch 5 Pass Rate | 70%+ | Common (context) |
-| Batch 6 Pass Rate | 65%+ | Library (interactions) |
-| Batch 7 Pass Rate | 60%+ | Forms (complex logic) |
-| Batch 8 Pass Rate | 50%+ | Career (AI mocking) |
+| Metric            | Expected | Range                  | Notes                  |
+| ----------------- | -------- | ---------------------- | ---------------------- |
+| Total Tests       | 900      | 720-1,200              | 15-25 per component    |
+| Total Components  | 48       | 42-54                  | 6-7 per batch          |
+| Avg Pass Rate     | 68%      | 50%-85%                | Weighted by complexity |
+| Batch 1 Pass Rate | 80%+     | Feedback components    |
+| Batch 2 Pass Rate | 70%+     | Loading components     |
+| Batch 3 Pass Rate | 65%+     | Navigation (routing)   |
+| Batch 4 Pass Rate | 85%+     | Surfaces (simplest)    |
+| Batch 5 Pass Rate | 70%+     | Common (context)       |
+| Batch 6 Pass Rate | 65%+     | Library (interactions) |
+| Batch 7 Pass Rate | 60%+     | Forms (complex logic)  |
+| Batch 8 Pass Rate | 50%+     | Career (AI mocking)    |
 
 ---
 
@@ -276,6 +285,7 @@ done | awk '{sum += $1; count++} END {printf "Avg: %.1f%%\n", sum/count}'
 ### Issue: Batch stuck in "Planning" for >5 minutes
 
 **Diagnosis**:
+
 ```bash
 # Check if Jules is responsive
 jules remote list --session | head -3
@@ -285,6 +295,7 @@ jules remote logs --session [SESSION_ID] | tail -20
 ```
 
 **Solution**:
+
 ```bash
 # Cancel stuck batch
 jules remote cancel --session [SESSION_ID]
@@ -296,6 +307,7 @@ jules remote new --repo . --session "[Task line from tasks.txt]"
 ### Issue: Very low pass rate (<50%) on batch
 
 **Diagnosis**:
+
 ```bash
 # Check batch report for specific failures
 cat .ai_reports/[Component]_report.md | grep -A 5 "Pending Actions"
@@ -305,6 +317,7 @@ jules remote logs --session [SESSION_ID] | grep -i error
 ```
 
 **Resolution**:
+
 - Document blockers in report's Pending Actions
 - Plan targeted fixes for Week 2 refinement
 - Move forward with next batch (parallel approach)
@@ -312,6 +325,7 @@ jules remote logs --session [SESSION_ID] | grep -i error
 ### Issue: Report file missing but batch shows "Completed"
 
 **Diagnosis**:
+
 ```bash
 # Verify batch is truly complete
 jules remote list --session | grep [SESSION_ID]
@@ -321,6 +335,7 @@ jules remote pull --session [SESSION_ID]
 ```
 
 **Solution**:
+
 - Manually create report file based on batch logs
 - Extract test count from batch output
 - Manually calculate pass rate if needed
@@ -416,10 +431,12 @@ For future Jules delegations:
 ---
 
 **Reference**:
+
 - Jules Protocol: `CLAUDE.md` lines 575-643
 - Launch Commands: `CLAUDE.md` lines 645-688
 - Monitoring Guide: `.ai_reports/BATCH_MONITORING_GUIDE.md`
 - This Workflow: `.ai_reports/JULES_DELEGATION_WORKFLOW.md`
 
 **Version History**:
+
 - v1.0 (Nov 14, 2025): Initial comprehensive workflow documentation

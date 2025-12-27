@@ -32,6 +32,7 @@ Consolidates 3 design generator skills + WCAG validation into 1 unified workflow
 ### Step 1: Parse Aesthetic Preferences
 
 **Input Example:**
+
 ```json
 {
   "style": "vibrant, minimal",
@@ -54,12 +55,14 @@ Consolidates 3 design generator skills + WCAG validation into 1 unified workflow
 ### Step 2: Generate Color Tokens (M3 Expressive)
 
 **Process:**
+
 1. Extract base colors (primary, secondary, tertiary, neutral, error)
 2. Generate 13 tonal variants per color using HCT color space
 3. Map to semantic roles: on-primary, on-secondary, surface, surface-variant, etc.
 4. Create 78+ total color tokens
 
 **Output:**
+
 ```json
 {
   "color": {
@@ -86,11 +89,13 @@ Consolidates 3 design generator skills + WCAG validation into 1 unified workflow
 ### Step 3: Generate Motion Tokens
 
 **Process:**
+
 1. Define 16 duration scales (50ms → 1000ms)
 2. Define 10 easing functions (standard, emphasized, spring, bounce)
 3. Create animation patterns (fadeIn, slideUp, scaleDown, etc.)
 
 **Output:**
+
 ```json
 {
   "motion": {
@@ -116,12 +121,14 @@ Consolidates 3 design generator skills + WCAG validation into 1 unified workflow
 ### Step 4: Generate Base Tokens
 
 **Process:**
+
 1. Shape tokens: 7 corner radii (0px → 9999px)
 2. Spacing scale: 12-stop grid (0px → 64px) at 4px increments
 3. Elevation levels: 6 shadow depths mapped to Material Design
 4. Typography scales: 13 semantic type scales with variable fonts
 
 **Output:**
+
 ```json
 {
   "shape": {
@@ -155,6 +162,7 @@ Consolidates 3 design generator skills + WCAG validation into 1 unified workflow
 ### Step 5: WCAG Validation
 
 **Process:**
+
 1. Check all text+background color pairs
 2. Verify minimum contrast ratios:
    - AA Small Text: 4.5:1
@@ -163,6 +171,7 @@ Consolidates 3 design generator skills + WCAG validation into 1 unified workflow
 3. Generate accessibility report
 
 **Output:**
+
 ```json
 {
   "wcag_validation": {
@@ -189,6 +198,7 @@ Consolidates 3 design generator skills + WCAG validation into 1 unified workflow
 ### Step 6: Output Assets
 
 **Files Generated:**
+
 1. `design-system/tokens-expressive.json` - Complete token system
 2. `frontend/src/theme/design-tokens.css` - CSS variables
 3. `design-system/tailwind-token-patch.js` - Tailwind config patch
@@ -202,6 +212,7 @@ Consolidates 3 design generator skills + WCAG validation into 1 unified workflow
 **User Request:** "Create design system with vibrant, minimal aesthetic"
 
 **Visual Design Director Output:**
+
 ```json
 {
   "style": "vibrant, minimal",
@@ -230,17 +241,13 @@ Consolidates 3 design generator skills + WCAG validation into 1 unified workflow
 6. ✅ **Output assets** - Generate 5 files
 
 **Final Output:**
+
 ```json
 {
   "status": "success",
   "tokens_generated": 200,
   "wcag_status": "AAA",
-  "files_created": [
-    "design-system/tokens-expressive.json",
-    "frontend/src/theme/design-tokens.css",
-    "design-system/tailwind-token-patch.js",
-    "design-system/WCAG_VALIDATION_REPORT.md"
-  ],
+  "files_created": ["design-system/tokens-expressive.json", "frontend/src/theme/design-tokens.css", "design-system/tailwind-token-patch.js", "design-system/WCAG_VALIDATION_REPORT.md"],
   "aesthetic_score": 92,
   "recommended_actions": []
 }
@@ -250,15 +257,15 @@ Consolidates 3 design generator skills + WCAG validation into 1 unified workflow
 
 ## Token Counts (Complete System)
 
-| Category | Count | Details |
-|----------|-------|---------|
-| **Color** | 78+ | 5 palettes × 13 tones + semantic roles |
-| **Motion** | 26 | 16 durations + 10 easing functions |
-| **Shape** | 7 | Corner radii scales |
-| **Spacing** | 12 | 4px-based grid |
-| **Elevation** | 6 | Shadow depth levels |
-| **Typography** | 13 | Type scales + variable font settings |
-| **Total** | 150+ | Production-ready design system |
+| Category       | Count | Details                                |
+| -------------- | ----- | -------------------------------------- |
+| **Color**      | 78+   | 5 palettes × 13 tones + semantic roles |
+| **Motion**     | 26    | 16 durations + 10 easing functions     |
+| **Shape**      | 7     | Corner radii scales                    |
+| **Spacing**    | 12    | 4px-based grid                         |
+| **Elevation**  | 6     | Shadow depth levels                    |
+| **Typography** | 13    | Type scales + variable font settings   |
+| **Total**      | 150+  | Production-ready design system         |
 
 ---
 
@@ -291,6 +298,7 @@ Consolidates 3 design generator skills + WCAG validation into 1 unified workflow
 ## Progressive Disclosure
 
 **Detailed algorithms moved to references:**
+
 - `COLOR_GENERATION_ALGORITHM.md` - HCT color space calculations
 - `MOTION_PHYSICS.md` - Spring physics, easing curves, choreography
 - `WCAG_CONTRAST_CALCULATION.md` - Contrast ratio formulas
