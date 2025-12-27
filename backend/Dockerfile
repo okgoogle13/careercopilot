@@ -19,13 +19,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends curl && rm -rf 
 COPY requirements.txt .
 
 # Install production dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt defusedxml pypdf
 
-# ===== Test Stage =====
-# This stage includes test-specific dependencies
-FROM base AS test
+# ===== Development Stage =====
+# This stage includes dev/test dependencies and supports hot-reload
+FROM base AS development
 
-# Install additional dependencies for testing
+# Install additional dependencies for development/testing
 RUN pip install --no-cache-dir \
     "pytest>=8.0.0" \
     "pytest-cov>=4.1.0" \
@@ -36,17 +36,25 @@ RUN pip install --no-cache-dir \
     "flake8>=7.0.0" \
     "bandit>=1.7.6" \
     "black>=24.0.0" \
-    "prometheus-client>=0.19.0"
+    "prometheus-client>=0.19.0" \
+    "uvicorn>=0.29.0"
 
 # Copy the rest of the application code
 COPY . .
 
+# Default command for development (overrideable)
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8080", "--reload"]
+
+# ===== Test Stage =====
+# This stage includes test-specific dependencies
+FROM development AS test
+
 # Default command for running tests
 CMD ["python", "-m", "pytest", "app/tests/", "-v", "--tb=short", "--maxfail=5", "--disable-warnings", "--cov=app", "--cov-report=xml", "--cov-report=html:htmlcov"]
 
-# ===== Final/Production Stage =====
+# ===== Production Stage =====
 # Start from the clean base stage
-FROM base AS final
+FROM base AS production
 
 # Copy the application code
 COPY . .
