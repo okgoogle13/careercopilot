@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { Textarea } from '../../components/ui/textarea';
-import { Button } from '../../components/ui/button';
+import { Textarea } from '@careercopilot/ui';
+import { Button } from '@careercopilot/ui';
 import { Sparkles, Copy, ArrowRight, ArrowLeft, RefreshCw, CheckCircle2, Download } from 'lucide-react';
 import { PageHeader } from '../../components/shared/PageHeader';
 import { exportToPdf } from '../../utils/exportEngine';
@@ -167,7 +167,7 @@ export function KSCGenerator() {
             <div className="flex justify-between pt-4">
               <Button
                 onClick={handleBack}
-                variant="ghost"
+                variant="text"
                 className="text-on-surface-variant hover:text-on-surface rounded-pebble px-6"
               >
                 <ArrowLeft className="w-4 h-4 mr-2" /> Back
@@ -194,7 +194,7 @@ export function KSCGenerator() {
               <div className="flex gap-2">
                 <Button
                   onClick={resetForm}
-                  variant="ghost"
+                  variant="text"
                   className="text-on-surface-variant hover:text-error rounded-pebble"
                 >
                   <RefreshCw className="w-4 h-4 mr-2" /> New
@@ -212,7 +212,7 @@ export function KSCGenerator() {
             <div className="flex justify-end gap-4 pt-4">
               <Button
                 onClick={handleDownloadPdf}
-                variant="outline"
+                variant="outlined"
                 className="border-tertiary text-tertiary hover:bg-tertiary hover:text-on-tertiary rounded-pebble px-8 h-12 flex items-center gap-2 font-bold"
               >
                 <Download className="w-4 h-4" /> Download PDF

@@ -1621,11 +1621,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@careercopilot/ui@workspace:frontend/packages/ui":
+"@careercopilot/ui@npm:*, @careercopilot/ui@workspace:frontend/packages/ui":
   version: 0.0.0-use.local
   resolution: "@careercopilot/ui@workspace:frontend/packages/ui"
   dependencies:
     "@babel/core": "npm:^7.23.0"
+    "@radix-ui/react-dialog": "npm:^1.0.0"
+    "@radix-ui/react-slot": "npm:^1.0.0"
     "@storybook/addon-a11y": "npm:^8.1.11"
     "@storybook/addon-docs": "npm:^8.1.11"
     "@storybook/addon-essentials": "npm:^8.1.11"
@@ -1643,10 +1645,14 @@ __metadata:
     "@typescript-eslint/eslint-plugin": "npm:^7.3.1"
     "@typescript-eslint/parser": "npm:^7.3.1"
     "@vitejs/plugin-react": "npm:^3.1.0"
+    class-variance-authority: "npm:^0.7.0"
+    clsx: "npm:^2.1.1"
     eslint: "npm:^8.57.0"
     eslint-plugin-react: "npm:^7.33.2"
     eslint-plugin-react-hooks: "npm:^4.6.0"
     eslint-plugin-storybook: "npm:^0.8.0"
+    lucide-react: "npm:^0.263.1"
+    tailwind-merge: "npm:^3.4.0"
     typescript: "npm:^5.3.3"
     vite: "npm:^4.3.9"
   peerDependencies:
@@ -6465,7 +6471,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@radix-ui/react-dialog@npm:1.1.15, @radix-ui/react-dialog@npm:^1.1.1, @radix-ui/react-dialog@npm:^1.1.15, @radix-ui/react-dialog@npm:^1.1.6":
+"@radix-ui/react-dialog@npm:1.1.15, @radix-ui/react-dialog@npm:^1.0.0, @radix-ui/react-dialog@npm:^1.1.1, @radix-ui/react-dialog@npm:^1.1.15, @radix-ui/react-dialog@npm:^1.1.6":
   version: 1.1.15
   resolution: "@radix-ui/react-dialog@npm:1.1.15"
   dependencies:
@@ -7328,7 +7334,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@radix-ui/react-slot@npm:1.2.4, @radix-ui/react-slot@npm:^1.2.4":
+"@radix-ui/react-slot@npm:1.2.4, @radix-ui/react-slot@npm:^1.0.0, @radix-ui/react-slot@npm:^1.2.4":
   version: 1.2.4
   resolution: "@radix-ui/react-slot@npm:1.2.4"
   dependencies:
@@ -12324,6 +12330,7 @@ __metadata:
     "@babel/core": "npm:^7.24.7"
     "@babel/preset-env": "npm:^7.24.7"
     "@babel/preset-react": "npm:^7.24.1"
+    "@careercopilot/ui": "npm:*"
     "@emotion/react": "npm:^11.11.4"
     "@emotion/styled": "npm:^11.11.5"
     "@eslint/js": "npm:^9.16.0"
@@ -12731,7 +12738,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"class-variance-authority@npm:^0.7.1":
+"class-variance-authority@npm:^0.7.0, class-variance-authority@npm:^0.7.1":
   version: 0.7.1
   resolution: "class-variance-authority@npm:0.7.1"
   dependencies:
@@ -20137,6 +20144,15 @@ __metadata:
     is-number: "npm:^2.1.0"
     through2: "npm:^2.0.1"
   checksum: 10c0/eea1ebfaa501258403ceb8b9cc19598a8c0d0adcc976bb679151b9c3d2d8860e209c0ae3f308821420ae709f27ff46a03c7f6e29eb3c48b9a157dd5ae43028dc
+  languageName: node
+  linkType: hard
+
+"lucide-react@npm:^0.263.1":
+  version: 0.263.1
+  resolution: "lucide-react@npm:0.263.1"
+  peerDependencies:
+    react: ^16.5.1 || ^17.0.0 || ^18.0.0
+  checksum: 10c0/ce4b0cb79cb689d0bf6293dba132d83850407a42de49bc589e65eeb99d8ec773946fe96b23bdd6f8941b2dfa0540050b8b73226d80589704745e7e55cc0706e1
   languageName: node
   linkType: hard
 

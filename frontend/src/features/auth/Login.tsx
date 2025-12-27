@@ -4,9 +4,9 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { useAuth } from '../../context/AuthContext';
-import { Input } from '../../components/ui/input';
-import { Button } from '../../components/ui/button';
-import { Alert } from '../../components/ui/alert';
+import { Input } from '@careercopilot/ui';
+import { Button } from '@careercopilot/ui';
+import { Alert } from '@careercopilot/ui';
 
 const loginSchema = z.object({
   email: z.string().email('Please enter a valid email'),

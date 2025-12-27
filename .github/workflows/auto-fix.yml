@@ -1,17 +1,7 @@
-# .github/workflows/auto-fix.yml
-name: Auto Fix Linting Issues
+# .github/workflows/auto-fix-enhanced.yml
+name: Enhanced Auto Fix (TypeScript + Linting)
 
 on:
-  push:
-    branches: [develop, main]
-    paths:
-      - 'frontend/src/**'
-      - 'backend/**'
-      - 'functions/src/**'
-      - '.github/workflows/auto-fix.yml'
-      - 'yarn.lock'
-      - 'package.json'
-      - '!backend/migrations/**'
   pull_request:
     branches: [develop, main]
     paths:
@@ -20,32 +10,54 @@ on:
       - 'functions/src/**'
       - '!backend/migrations/**'
   workflow_dispatch:
+    inputs:
+      fix_type:
+        description: 'Type of fixes to apply'
+        required: false
+        default: 'all'
+        type: choice
+        options:
+          - all
+          - typescript
+          - linting
+          - formatting
+          - storybook
 
 permissions:
   contents: write
   pull-requests: write
+  checks: write
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 env:
-  PYTHON_VERSION: "3.12"
-  NODE_VERSION: "18"
+  PYTHON_VERSION: "3.13"
+  NODE_VERSION: "20"  # Standards established in CI.yml
 
 jobs:
-  auto-fix:
-    name: Auto Fix Code Issues
+  auto-fix-enhanced:
+    name: Enhanced Auto Fix
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, '[skip auto-fix]')"
+
     steps:
       - name: Checkout repository
-        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+        uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: ${{ env.PYTHON_VERSION }}
           cache: "pip"
+
       - name: Enable Corepack for Yarn 4+
         run: corepack enable
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
@@ -53,94 +65,193 @@ jobs:
           cache: "yarn"
           cache-dependency-path: "yarn.lock"
 
+      # ============================================================
+      # PYTHON AUTO-FIXES
+      # ============================================================
       - name: Install Python formatting tools
+        if: github.event.inputs.fix_type == 'all' || github.event.inputs.fix_type == 'formatting' || github.event_name == 'pull_request'
         run: |
           python -m pip install --upgrade pip
           pip install black==24.3.0 isort==5.13.2 flake8==7.0.0 autoflake==2.3.1
 
+      - name: Apply Python formatting fixes
+        if: github.event.inputs.fix_type == 'all' || github.event.inputs.fix_type == 'formatting' || github.event_name == 'pull_request'
+        run: |
+          echo "🐍 Applying Python formatting fixes..."
+          black backend/ --line-length=100 || true
+          isort backend/ --profile=black --line-length=100 || true
+          autoflake --remove-all-unused-imports --remove-unused-variables --in-place --recursive backend/ || true
+          echo "✅ Python formatting complete"
+
+      # ============================================================
+      # TYPESCRIPT AUTO-FIXES
+      # ============================================================
       - name: Install Node dependencies
         run: YARN_ENABLE_IMMUTABLE_INSTALLS=false yarn install
 
-      - name: Check for changes needed
-        id: changes
+      - name: Run TypeScript auto-fix (unused imports, organize imports)
+        if: github.event.inputs.fix_type == 'all' || github.event.inputs.fix_type == 'typescript' || github.event_name == 'pull_request'
         run: |
-          echo "Checking if auto-fixes are needed..."
-          CHANGES_NEEDED=false
+          echo "🔷 Running TypeScript auto-fixes..."
 
-          # Check Python files
-          if ! black --check backend/ --line-length=100 --quiet; then
-            echo "Python formatting changes needed"
-            CHANGES_NEEDED=true
-          elif ! isort --check-only backend/ --profile=black --line-length=100 --quiet; then
-            echo "Python import sorting changes needed"
-            CHANGES_NEEDED=true
+          # Create a Node.js script to fix TypeScript issues using ts-morph
+          cat > ts-autofix.mjs << 'EOFSCRIPT'
+          import { Project } from 'ts-morph';
+          import { existsSync } from 'fs';
+
+          async function fixTypeScriptIssues() {
+            if (!existsSync('./frontend/tsconfig.json')) {
+              console.error('❌ tsconfig.json not found in frontend/');
+              return;
+            }
+
+            const project = new Project({
+              tsConfigFilePath: './frontend/tsconfig.json',
+            });
+
+            const sourceFiles = project.getSourceFiles();
+            let fixedCount = 0;
+
+            for (const sourceFile of sourceFiles) {
+              const filePath = sourceFile.getFilePath();
+
+              if (filePath.includes('node_modules') || 
+                  filePath.includes('/dist/') || 
+                  filePath.includes('.test.')) {
+                continue;
+              }
+
+              sourceFile.fixUnusedIdentifiers();
+              sourceFile.organizeImports({
+                ensureNewLineAtEndOfFile: true,
+              });
+
+              await sourceFile.save();
+              fixedCount++;
+            }
+
+            console.log(`\n✅ Fixed ${fixedCount} TypeScript files`);
+          }
+
+          fixTypeScriptIssues().catch(console.error);
+          EOFSCRIPT
+
+          node ts-autofix.mjs || echo "⚠️  TypeScript auto-fix encountered issues (non-blocking)"
+          echo "✅ TypeScript auto-fix complete"
+
+      # ============================================================
+      # ESLINT AUTO-FIXES
+      # ============================================================
+      - name: Apply ESLint auto-fixes
+        if: github.event.inputs.fix_type == 'all' || github.event.inputs.fix_type == 'linting' || github.event_name == 'pull_request'
+        run: |
+          echo "🔧 Applying ESLint fixes..."
+          yarn workspace careercopilot-frontend lint:fix || echo "⚠️  ESLint auto-fix encountered issues (non-blocking)"
+          yarn workspace functions lint:fix || echo "⚠️  Functions lint auto-fix encountered issues (non-blocking)"
+          echo "✅ ESLint fixes complete"
+
+      # ============================================================
+      # PRETTIER AUTO-FIXES
+      # ============================================================
+      - name: Apply Prettier formatting
+        if: github.event.inputs.fix_type == 'all' || github.event.inputs.fix_type == 'formatting' || github.event_name == 'pull_request'
+        run: |
+          echo "💅 Applying Prettier formatting..."
+          yarn workspace careercopilot-frontend format || true
+          echo "✅ Prettier formatting complete"
+
+      # ============================================================
+      # STORYBOOK AUTOMATION
+      # ============================================================
+      - name: Check for missing stories
+        id: storybook-check
+        if: github.event.inputs.fix_type == 'all' || github.event.inputs.fix_type == 'storybook' || github.event_name == 'pull_request'
+        run: |
+          echo "📚 Scanning for components without stories..."
+          MISSING_STORIES=0
+          for component in frontend/src/components/ui/*.tsx; do
+            if [[ "$component" == *"utils.ts"* ]] || [[ "$component" == *"index.ts"* ]]; then continue; fi
+            filename=$(basename -- "$component")
+            basename="${filename%.*}"
+            if [ ! -f "frontend/src/components/ui/${basename}.stories.tsx" ]; then
+              echo "⚠️  Missing story for: ${basename}"
+              MISSING_STORIES=$((MISSING_STORIES + 1))
+            fi
+          done
+          echo "missing_count=$MISSING_STORIES" >> $GITHUB_OUTPUT
+          if [ $MISSING_STORIES -gt 0 ]; then
+            echo "::warning::$MISSING_STORIES components are missing Storybook stories."
           fi
 
-          # Check frontend files (using workspace commands)
-          if ! yarn workspace careercopilot-frontend lint --quiet 2>/dev/null; then
-            echo "ESLint fixes needed"
-            CHANGES_NEEDED=true
-          elif ! yarn workspace careercopilot-frontend format:check --quiet 2>/dev/null; then
-            echo "Prettier formatting needed"
-            CHANGES_NEEDED=true
-          fi
+      # ============================================================
+      # ELECTRIC ALCHEMIST / M3 TOKEN COMPLIANCE
+      # ============================================================
+      - name: Check Electric Alchemist Token Compliance
+        id: design-check
+        run: |
+          echo "🎨 Checking Electric Alchemist token compliance..."
 
-          # Check functions files
-          if ! yarn workspace functions lint --silent; then
-            echo "Functions linting fixes needed"
-            CHANGES_NEEDED=true
-          fi
+          # Improved check: look for hardcoded hex codes AND non-tokenized CSS vars
+          # Exceptions: black/white and valid design tokens
+          HARDCODED_COLORS=$(grep -rnE "color:\s*#[0-9a-fA-F]{3,6}" frontend/src/ --include="*.tsx" --include="*.css" | grep -v "000" | grep -v "fff" | wc -l)
+          RAW_PIXELS=$(grep -rnE "(padding|margin|gap|border-radius):\s*[0-9]{2,}px" frontend/src/ --include="*.tsx" --include="*.css" | wc -l)
 
-          if [[ "$CHANGES_NEEDED" == "true" ]]; then
-            echo "changes_needed=true" >> $GITHUB_OUTPUT
+          echo "❌ Found $HARDCODED_COLORS hardcoded color values"
+          echo "❌ Found $RAW_PIXELS large hardcoded pixel values (>10px)"
+
+          if [ $HARDCODED_COLORS -gt 0 ] || [ $RAW_PIXELS -gt 0 ]; then
+            echo "violations=true" >> $GITHUB_OUTPUT
           else
-            echo "changes_needed=false" >> $GITHUB_OUTPUT
+            echo "violations=false" >> $GITHUB_OUTPUT
           fi
 
-      - name: Apply Python formatting fixes
-        if: steps.changes.outputs.changes_needed == 'true'
-        run: |
-          echo "Applying Python formatting fixes..."
-          black backend/ --line-length=100
-          isort backend/ --profile=black --line-length=100
-          autoflake --remove-all-unused-imports --remove-unused-variables --in-place --recursive backend/
-          echo "Python formatting complete"
-
-      - name: Apply Frontend formatting fixes
-        if: steps.changes.outputs.changes_needed == 'true'
-        run: |
-          echo "Applying Frontend formatting fixes..."
-          yarn workspace careercopilot-frontend format
-          yarn workspace careercopilot-frontend lint:fix
-          echo "Frontend formatting complete"
-
-      - name: Apply Functions linting fixes
-        if: steps.changes.outputs.changes_needed == 'true'
-        run: |
-          echo "Applying Functions linting fixes..."
-          yarn workspace functions lint:fix
+      # ============================================================
+      # COMMIT CHANGES
+      # ============================================================
       - name: Check for changes
         id: git-check
         run: |
-          if ! git diff --quiet; then
-            echo "changes_made=true" >> $GITHUB_OUTPUT
-          fi
+          git diff --exit-code || echo "changes_made=true" >> $GITHUB_OUTPUT
+
       - name: Commit and push changes
         if: steps.git-check.outputs.changes_made == 'true'
         run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action Auto-Fix"
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "GitHub Actions Auto-Fix Bot"
           git add .
-          git commit -m "style(auto): Apply formatting and linting fixes [skip ci]"
+          git commit -m "style(auto): Apply Electric Alchemist auto-fixes [skip ci]" \
+            -m "Applied standard formatting and linting for TS, Python, and CSS."
           git push
+
+      # ============================================================
+      # PR NOTIFICATIONS
+      # ============================================================
       - name: Comment on PR
-        if: github.event_name == 'pull_request' && steps.git-check.outputs.changes_made == 'true'
+        if: github.event_name == 'pull_request' && (steps.git-check.outputs.changes_made == 'true' || steps.design-check.outputs.violations == 'true' || steps.storybook-check.outputs.missing_count > 0)
         uses: actions/github-script@v7
         with:
           script: |
+            const changes = '${{ steps.git-check.outputs.changes_made }}' === 'true';
+            const designViolations = '${{ steps.design-check.outputs.violations }}' === 'true';
+            const missingStories = parseInt('${{ steps.storybook-check.outputs.missing_count }}' || '0');
+
+            let body = '🤖 **Auto-fix Workflow Summary**\n\n';
+            
+            if (changes) {
+              body += '✅ **Applied Fixed:** Standardized code formatting and linting.\n';
+            }
+
+            if (designViolations) {
+              body += '⚠️  **Design System Non-Compliance:** Found hardcoded colors or sizing. Please use **Electric Alchemist** tokens (e.g., `var(--sys-color-primary)`).\n';
+            }
+
+            if (missingStories > 0) {
+              body += `📚 **Storybook Gap:** Found ${missingStories} components without stories. Automated documentation is recommended.\n`;
+            }
+
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: '**Auto-fix applied!** I automatically fixed linting and formatting issues.',
+              body: body,
             });

@@ -25,7 +25,7 @@ export const useCareerIngestion = (): UseCareerIngestionResult => {
             });
 
             // Get auth token if available
-            const token = user ? await user.getIdToken() : null;
+            const token = user?.getIdToken ? await user.getIdToken() : null;
             const headers: Record<string, string> = {};
             if (token) {
                 headers['Authorization'] = `Bearer ${token}`;

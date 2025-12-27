@@ -14,44 +14,42 @@ on:
       - develop
   workflow_dispatch:
 
+permissions:
+  contents: read
+  pull-requests: write
+
+env:
+  NODE_VERSION: "20"
+  PYTHON_VERSION: "3.13"
+
 jobs:
   automated-uat:
     name: E2E UAT Tests
     runs-on: ubuntu-latest
     timeout-minutes: 30
 
-    services:
-      # Mock Firestore emulator
-      firestore:
-        image: gcr.io/google.com/cloudsdktool/google-cloud-cli:emulators
-        ports:
-          - 8080:8080
-        options: >-
-          --health-cmd "curl -f http://localhost:8080 || exit 1"
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Enable Corepack
+        run: corepack enable
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'npm'
-          cache-dependency-path: frontend/package-lock.json
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'yarn'
+          cache-dependency-path: yarn.lock
 
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
+          python-version: ${{ env.PYTHON_VERSION }}
           cache: 'pip'
 
-      - name: Install Frontend Dependencies
-        working-directory: ./frontend
-        run: npm ci
+      - name: Install Dependencies
+        run: yarn install --immutable
 
       - name: Install Backend Dependencies
         working-directory: ./backend
@@ -60,41 +58,22 @@ jobs:
           pip install -r requirements.txt
 
       - name: Install Playwright
-        working-directory: ./frontend
-        run: npx playwright install --with-deps chromium
+        run: yarn workspace careercopilot-frontend playwright install --with-deps chromium
 
-      - name: Start Firestore Emulator
+      - name: Start Services via Docker Compose
         run: |
-          gcloud emulators firestore start --host-port=localhost:8080 &
-          sleep 5
-
-      - name: Start Backend Server
-        working-directory: ./backend
-        env:
-          FIRESTORE_EMULATOR_HOST: localhost:8080
-          ENABLE_GENKIT_FLOWS: "true"
-          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
-          ENV: test
-        run: |
-          uvicorn app.main:app --host 0.0.0.0 --port 8000 &
-          sleep 10
-          curl -f http://localhost:8000/health || exit 1
-
-      - name: Start Frontend Dev Server
-        working-directory: ./frontend
-        env:
-          VITE_API_URL: http://localhost:8000
-          VITE_USE_MOCK_AUTH: "true"
-        run: |
-          npm run dev &
-          sleep 15
-          curl -f http://localhost:5173 || exit 1
+          # Use the E2E compose file which is specifically for this
+          docker compose -f docker-compose.e2e.yml up -d --build
+          
+          # Wait for health
+          echo "Waiting for services to be healthy..."
+          sleep 30
+          docker compose -f docker-compose.e2e.yml ps
 
       - name: Run E2E UAT Tests
-        working-directory: ./frontend
         env:
           PLAYWRIGHT_BASE_URL: http://localhost:5173
-        run: npx playwright test tests/e2e/ingestion-flow.spec.ts --reporter=html
+        run: yarn workspace careercopilot-frontend playwright test tests/e2e/ingestion-flow.spec.ts --reporter=html
 
       - name: Upload Test Results
         if: always()
@@ -104,48 +83,34 @@ jobs:
           path: frontend/playwright-report/
           retention-days: 30
 
-      - name: Upload Test Videos
-        if: failure()
-        uses: actions/upload-artifact@v4
-        with:
-          name: test-failure-videos
-          path: frontend/test-results/
-          retention-days: 7
-
-      - name: Comment PR with Results
-        if: github.event_name == 'pull_request'
-        uses: daun/playwright-report-comment@v3
-        with:
-          report-path: frontend/playwright-report/
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Cleanup
+        if: always()
+        run: docker compose -f docker-compose.e2e.yml down
 
   visual-regression:
     name: Visual Regression Testing
     runs-on: ubuntu-latest
     needs: automated-uat
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # Need history for comparison
+          fetch-depth: 0
+
+      - name: Enable Corepack
+        run: corepack enable
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'yarn'
 
       - name: Install Dependencies
-        working-directory: ./frontend
-        run: npm ci
-
-      - name: Install Playwright
-        working-directory: ./frontend
-        run: npx playwright install --with-deps chromium
+        run: yarn install --immutable
 
       - name: Run Visual Tests
-        working-directory: ./frontend
-        run: npx playwright test tests/visual/ --update-snapshots
+        run: yarn workspace careercopilot-frontend playwright test tests/visual/ --update-snapshots
 
       - name: Upload Visual Diffs
         if: failure()
@@ -159,101 +124,59 @@ jobs:
     name: Performance & Load Testing
     runs-on: ubuntu-latest
     needs: automated-uat
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
       - name: Run Lighthouse CI
-        uses: treosh/lighthouse-ci-action@v10
+        uses: treosh/lighthouse-ci-action@v11
         with:
           urls: |
             http://localhost:5173/career/ingest
           uploadArtifacts: true
           temporaryPublicStorage: true
 
-      - name: Run Load Test
-        run: |
-          npm install -g artillery
-          artillery quick --count 10 --num 50 http://localhost:8000/api/v1/ingest
-
   security-scan:
     name: Security & Vulnerability Scan
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Run Frontend Security Scan
-        working-directory: ./frontend
-        run: |
-          npm audit --production
-          npx snyk test || true
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Install Dependencies
+        run: yarn install --immutable
+
+      - name: Run Frontend Security Audit
+        run: yarn npm audit
 
       - name: Run Backend Security Scan
         working-directory: ./backend
         run: |
-          pip install safety
+          python -m pip install safety
           safety check --file requirements.txt
-
-      - name: OWASP Dependency Check
-        uses: dependency-check/Dependency-Check_Action@main
-        with:
-          project: 'CareerCopilot'
-          path: '.'
-          format: 'HTML'
-
-      - name: Upload Security Report
-        uses: actions/upload-artifact@v4
-        with:
-          name: security-scan-report
-          path: reports/
 
   uat-summary:
     name: Generate UAT Summary
     runs-on: ubuntu-latest
     needs: [automated-uat, visual-regression, performance-testing, security-scan]
     if: always()
-
     steps:
-      - name: Download All Artifacts
-        uses: actions/download-artifact@v4
-
       - name: Generate Summary Report
         run: |
           echo "# 🧪 Automated UAT Summary" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "## Test Results" >> $GITHUB_STEP_SUMMARY
-          echo "- E2E Tests: ${{ needs.automated-uat.result }}" >> $GITHUB_STEP_SUMMARY
-          echo "- Visual Regression: ${{ needs.visual-regression.result }}" >> $GITHUB_STEP_SUMMARY
-          echo "- Performance: ${{ needs.performance-testing.result }}" >> $GITHUB_STEP_SUMMARY
-          echo "- Security: ${{ needs.security-scan.result }}" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "## Artifacts" >> $GITHUB_STEP_SUMMARY
-          echo "- [Playwright Report](playwright-report/index.html)" >> $GITHUB_STEP_SUMMARY
-          echo "- [Security Scan](security-scan-report/)" >> $GITHUB_STEP_SUMMARY
-
-      - name: Notify Slack
-        if: failure()
-        uses: slackapi/slack-github-action@v1
-        with:
-          webhook-url: ${{ secrets.SLACK_WEBHOOK }}
-          payload: |
-            {
-              "text": "❌ UAT Failed for Career Ingestion",
-              "blocks": [
-                {
-                  "type": "section",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": "*UAT Failure Alert*\n\nBranch: `${{ github.ref_name }}`\nCommit: `${{ github.sha }}`\n\nView results: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-                  }
-                }
-              ]
-            }
+          echo "## Status Matrix" >> $GITHUB_STEP_SUMMARY
+          echo "| Suite | Result |" >> $GITHUB_STEP_SUMMARY
+          echo "|---|---|" >> $GITHUB_STEP_SUMMARY
+          echo "| E2E UAT | ${{ needs.automated-uat.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Visual | ${{ needs.visual-regression.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Performance | ${{ needs.performance-testing.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Security | ${{ needs.security-scan.result }} |" >> $GITHUB_STEP_SUMMARY

@@ -7,11 +7,11 @@
 
 import React from 'react';
 import { Edit, Trash2, Target, TrendingUp } from 'lucide-react';
-import { ElectricCard as Card } from '@/components/electric/card/ElectricCard';
-import { ElectricButton as Button } from '@/components/electric/button/ElectricButton';
-import { ElectricBadge as Badge } from '@/components/electric/badge/ElectricBadge';
-import { ElectricAvatar as Avatar } from '@/components/electric/avatar/ElectricAvatar';
-import { ElectricProgress as Progress } from '@/components/electric/progress/ElectricProgress';
+import { Card } from '@careercopilot/ui';
+import { Button } from '@careercopilot/ui';
+import { Badge } from '@careercopilot/ui';
+import { Avatar, AvatarFallback } from '@careercopilot/ui';
+import { Progress } from '@careercopilot/ui';
 import { cn } from '@/lib/utils';
 
 export interface Profile {
@@ -60,8 +60,7 @@ export const ProfileCardMUI: React.FC<ProfileCardMUIProps> = ({
 
   return (
     <Card
-      variant={isSelected ? 'hero' : 'default'}
-      className={cn('h-full flex flex-col transition-all')}
+      className={cn('h-full flex flex-col transition-all', isSelected && 'ring-2 ring-primary')}
       style={{
         padding: 'var(--sys-space-6)',
         borderRadius: 'var(--sys-shape-radius-card)',
@@ -86,7 +85,9 @@ export const ProfileCardMUI: React.FC<ProfileCardMUIProps> = ({
           className="flex items-center"
           style={{ gap: 'var(--sys-space-3)' }}
         >
-          <Avatar size="md" initials={initials} className={avatarColor} />
+          <Avatar className={cn("size-12", avatarColor)}>
+            <AvatarFallback>{initials}</AvatarFallback>
+          </Avatar>
           <div>
             <h3
               style={{
@@ -168,7 +169,6 @@ export const ProfileCardMUI: React.FC<ProfileCardMUIProps> = ({
         }}
       >
         <Card
-          variant="default"
           className="p-3 text-center"
           style={{
             padding: 'var(--sys-space-3)',
@@ -216,7 +216,6 @@ export const ProfileCardMUI: React.FC<ProfileCardMUIProps> = ({
           </p>
         </Card>
         <Card
-          variant="default"
           className="p-3 text-center"
           style={{
             padding: 'var(--sys-space-3)',
@@ -291,8 +290,8 @@ export const ProfileCardMUI: React.FC<ProfileCardMUIProps> = ({
         }}
       >
         <Button
-          variant="ghost"
-          size="sm"
+          variant="text"
+          size="small"
           onClick={onEdit}
           className="flex-1"
           style={{
@@ -309,8 +308,8 @@ export const ProfileCardMUI: React.FC<ProfileCardMUIProps> = ({
           Edit
         </Button>
         <Button
-          variant="ghost"
-          size="sm"
+          variant="text"
+          size="small"
           onClick={onDelete}
           className="flex-1"
           style={{

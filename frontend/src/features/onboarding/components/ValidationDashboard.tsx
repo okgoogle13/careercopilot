@@ -24,9 +24,9 @@ import {
     Undo,
     Redo,
 } from '@mui/icons-material';
-import { CareerDatabase, StructuredAchievement, KSCResponse } from '../../types/api';
-import { EditableField } from '../../components/shared/EditableField';
-import { StatusChip } from '../../components/shared/StatusChip';
+import { CareerDatabase, StructuredAchievement, KSCResponse } from '../../../types/api';
+import { EditableField } from '../../../components/shared/EditableField';
+import { StatusChip } from '../../../components/shared/StatusChip';
 
 interface ValidationDashboardProps {
     data: CareerDatabase;
@@ -39,8 +39,8 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
     const [historyIndex, setHistoryIndex] = useState(0);
     const [snackbarMessage, setSnackbarMessage] = useState<string>('');
 
-    const flaggedAchievements = localData.Structured_Achievements.filter((a) => a.Needs_Review_Flag);
-    const flaggedKSCs = localData.KSC_Responses.filter((k) => k.Needs_Review_Flag);
+    const flaggedAchievements = localData.Structured_Achievements.filter((a: StructuredAchievement) => a.Needs_Review_Flag);
+    const flaggedKSCs = localData.KSC_Responses.filter((k: KSCResponse) => k.Needs_Review_Flag);
 
     // Keyboard shortcuts
     useEffect(() => {
@@ -96,7 +96,7 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
     const handleAchievementUpdate = (achievementId: string, field: string, value: string) => {
         const updated = {
             ...localData,
-            Structured_Achievements: localData.Structured_Achievements.map((ach) =>
+            Structured_Achievements: localData.Structured_Achievements.map((ach: StructuredAchievement) =>
                 ach.Achievement_ID === achievementId ? { ...ach, [field]: value } : ach
             ),
         };
@@ -108,7 +108,7 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
     const handleKSCUpdate = (kscId: string, field: string, value: string) => {
         const updated = {
             ...localData,
-            KSC_Responses: localData.KSC_Responses.map((ksc) =>
+            KSC_Responses: localData.KSC_Responses.map((ksc: KSCResponse) =>
                 ksc.KSC_ID === kscId ? { ...ksc, [field]: value } : ksc
             ),
         };
@@ -122,7 +122,7 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
         let appliedCount = 0;
 
         // Apply all achievement suggestions
-        updated.Structured_Achievements = updated.Structured_Achievements.map((ach) => {
+        updated.Structured_Achievements = updated.Structured_Achievements.map((ach: StructuredAchievement) => {
             if (ach.Improvement_Suggestions) {
                 appliedCount++;
                 return {
@@ -139,7 +139,7 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
         });
 
         // Apply all KSC suggestions
-        updated.KSC_Responses = updated.KSC_Responses.map((ksc) => {
+        updated.KSC_Responses = updated.KSC_Responses.map((ksc: KSCResponse) => {
             if (ksc.Improvement_Suggestions) {
                 appliedCount++;
                 return {
@@ -366,7 +366,7 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
                     <EditableField
                         label="Full Name"
                         value={localData.Personal_Information.FullName}
-                        onSave={(val) => {
+                        onSave={(val: string) => {
                             const updated = { ...localData, Personal_Information: { ...localData.Personal_Information, FullName: val } };
                             setLocalData(updated);
                             onUpdate(updated);
@@ -375,7 +375,7 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
                     <EditableField
                         label="Email"
                         value={localData.Personal_Information.Email}
-                        onSave={(val) => {
+                        onSave={(val: string) => {
                             const updated = { ...localData, Personal_Information: { ...localData.Personal_Information, Email: val } };
                             setLocalData(updated);
                             onUpdate(updated);
@@ -405,7 +405,7 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
                 </AccordionSummary>
                 <AccordionDetails>
                     <Stack spacing={3} divider={<Divider sx={{ borderColor: 'var(--sys-color-outline-variant)' }} />}>
-                        {localData.Structured_Achievements.map((achievement) => (
+                        {localData.Structured_Achievements.map((achievement: StructuredAchievement) => (
                             <Box key={achievement.Achievement_ID}>
                                 <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 2 }}>
                                     <Typography variant="subtitle2" sx={{ color: 'var(--sys-color-on-surface-variant)' }}>
@@ -418,21 +418,21 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
                                     label="Original Text"
                                     value={achievement.Original_Text}
                                     multiline
-                                    onSave={(val) => handleAchievementUpdate(achievement.Achievement_ID, 'Original_Text', val)}
+                                    onSave={(val: string) => handleAchievementUpdate(achievement.Achievement_ID, 'Original_Text', val)}
                                 />
 
                                 <EditableField
                                     label="Action Verb"
                                     value={achievement.Action_Verb}
                                     suggestion={achievement.Improvement_Suggestions?.Action_Verb}
-                                    onSave={(val) => handleAchievementUpdate(achievement.Achievement_ID, 'Action_Verb', val)}
+                                    onSave={(val: string) => handleAchievementUpdate(achievement.Achievement_ID, 'Action_Verb', val)}
                                 />
 
                                 <EditableField
                                     label="Metric"
                                     value={achievement.Metric}
                                     suggestion={achievement.Improvement_Suggestions?.Metric}
-                                    onSave={(val) => handleAchievementUpdate(achievement.Achievement_ID, 'Metric', val)}
+                                    onSave={(val: string) => handleAchievementUpdate(achievement.Achievement_ID, 'Metric', val)}
                                 />
 
                                 <EditableField
@@ -440,7 +440,7 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
                                     value={achievement.Outcome}
                                     suggestion={achievement.Improvement_Suggestions?.Outcome}
                                     multiline
-                                    onSave={(val) => handleAchievementUpdate(achievement.Achievement_ID, 'Outcome', val)}
+                                    onSave={(val: string) => handleAchievementUpdate(achievement.Achievement_ID, 'Outcome', val)}
                                 />
                             </Box>
                         ))}
@@ -469,7 +469,7 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
                     </AccordionSummary>
                     <AccordionDetails>
                         <Stack spacing={3} divider={<Divider sx={{ borderColor: 'var(--sys-color-outline-variant)' }} />}>
-                            {localData.KSC_Responses.map((ksc) => (
+                            {localData.KSC_Responses.map((ksc: KSCResponse) => (
                                 <Box key={ksc.KSC_ID}>
                                     <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 2 }}>
                                         <Typography variant="subtitle2" sx={{ color: 'var(--sys-color-on-surface-variant)' }}>
@@ -492,7 +492,7 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
                                         value={ksc.Situation}
                                         suggestion={ksc.Improvement_Suggestions.Situation}
                                         multiline
-                                        onSave={(val) => handleKSCUpdate(ksc.KSC_ID, 'Situation', val)}
+                                        onSave={(val: string) => handleKSCUpdate(ksc.KSC_ID, 'Situation', val)}
                                     />
 
                                     <EditableField
@@ -500,7 +500,7 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
                                         value={ksc.Result}
                                         suggestion={ksc.Improvement_Suggestions.Result}
                                         multiline
-                                        onSave={(val) => handleKSCUpdate(ksc.KSC_ID, 'Result', val)}
+                                        onSave={(val: string) => handleKSCUpdate(ksc.KSC_ID, 'Result', val)}
                                     />
                                 </Box>
                             ))}
