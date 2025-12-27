@@ -11,6 +11,14 @@ class CloudStorageClient:
             bucket_name: Optional override for bucket name. Defaults to production bucket.
         """
         self.bucket_name = bucket_name or "careercopilot-468811.firebasestorage.app"
+        
+        # Check if running in test environment
+        if os.getenv("ENV") == "test" or os.getenv("ENVIRONMENT") == "test":
+            from unittest.mock import MagicMock
+            self.client = MagicMock()
+            self.bucket = MagicMock()
+            return
+
         # Initialize client with explicit region
         self.client: Client = storage.Client()
         # Get bucket with explicit location check

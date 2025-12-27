@@ -159,10 +159,10 @@ async def register_user(
         # User already exists or validation error
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
     except Exception as e:
-        logger.error(f"Registration failed for {request.email}: {e}")
+        logger.exception(f"Registration failed for {request.email}")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="Registration failed due to internal error",
+            detail=f"Registration failed: {str(e)}",
         )
 
 
@@ -197,10 +197,10 @@ async def login_user(request: UserLoginRequest, db: Session = Depends(get_db)) -
     except HTTPException:
         raise
     except Exception as e:
-        logger.error(f"Login failed for {request.email}: {e}")
+        logger.exception(f"Login failed for {request.email}")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="Login failed due to internal error",
+            detail=f"Login failed: {str(e)}",
         )
 
 
@@ -225,12 +225,18 @@ async def logout_user(token: str) -> Dict[str, str]:
         )
 
 
+class RefreshTokenRequest(BaseModel):
+    """Request model for token refresh"""
+    refreshToken: str
+
+
 @router.post("/refresh", response_model=TokenResponse)
-async def refresh_token(current_token: str, db: Session = Depends(get_db)) -> TokenResponse:
+async def refresh_token(request: RefreshTokenRequest, db: Session = Depends(get_db)) -> TokenResponse:
     """
     Refresh user access token.
     """
     try:
+        current_token = request.refreshToken
         # Verify current token
         payload = auth_manager.verify_token(current_token)
         if not payload:

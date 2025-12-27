@@ -26,6 +26,7 @@ This skill enhances M3 typography with M3 Expressive principles:
 **Why:** Variable fonts enable smooth animations between weights, creating "alive" typography that responds to user interactions.
 
 **Recommended Variable Fonts:**
+
 - **Plus Jakarta Sans** (Weight: 200-800, modern, professional)
 - **Poppins** (Weight: 100-900, elegant, versatile)
 - **Montserrat** (Weight: 100-900, bold, geometric)
@@ -33,20 +34,22 @@ This skill enhances M3 typography with M3 Expressive principles:
 - **Inter Variable** (Weight: 100-900, only if paired with distinctive display font)
 
 **Font Variation Settings:**
+
 ```css
 /* Enable variable font features */
 .expressive-heading {
-  font-family: 'Plus Jakarta Sans Variable', sans-serif;
-  font-variation-settings: 'wght' 800; /* Weight axis */
+  font-family: "Plus Jakarta Sans Variable", sans-serif;
+  font-variation-settings: "wght" 800; /* Weight axis */
   transition: font-variation-settings 300ms var(--sys-motion-easing-expressive);
 }
 
 .expressive-heading:hover {
-  font-variation-settings: 'wght' 900; /* Subtle weight shift on hover */
+  font-variation-settings: "wght" 900; /* Subtle weight shift on hover */
 }
 ```
 
 **Token Structure:**
+
 ```json
 {
   "typography": {
@@ -71,6 +74,7 @@ This skill enhances M3 typography with M3 Expressive principles:
 ### 2. Extreme Weight Contrasts (Not Boring)
 
 **Anti-Pattern (Boring):**
+
 ```tsx
 // ❌ Timid contrast - no visual impact
 <h1 style={{ fontWeight: 400 }}>Heading</h1>
@@ -79,6 +83,7 @@ This skill enhances M3 typography with M3 Expressive principles:
 ```
 
 **M3 Expressive (Dramatic):**
+
 ```tsx
 // ✅ Extreme contrast - 9x difference
 <h1 style={{
@@ -99,15 +104,16 @@ This skill enhances M3 typography with M3 Expressive principles:
 
 **Extreme Weight Guidelines:**
 
-| Element | Weight | Purpose | Example |
-|---------|--------|---------|---------|
-| Hero Display | 100-200 | Ultra-light elegance | Landing page headlines |
-| Display Emphasis | 800-900 | Bold confidence | Call-to-action headings |
-| Body Text (Light) | 300 | Refined, editorial | Long-form content |
-| Body Text (Heavy) | 700 | Confidence, trust | Key statistics, pricing |
-| Micro-copy | 900 | High-impact labels | Badges, tags, status |
+| Element           | Weight  | Purpose              | Example                 |
+| ----------------- | ------- | -------------------- | ----------------------- |
+| Hero Display      | 100-200 | Ultra-light elegance | Landing page headlines  |
+| Display Emphasis  | 800-900 | Bold confidence      | Call-to-action headings |
+| Body Text (Light) | 300     | Refined, editorial   | Long-form content       |
+| Body Text (Heavy) | 700     | Confidence, trust    | Key statistics, pricing |
+| Micro-copy        | 900     | High-impact labels   | Badges, tags, status    |
 
 **Size Contrast (3x+ Rule):**
+
 ```tsx
 // ❌ Boring size contrast (1.5x)
 <h1 style={{ fontSize: '24px' }}>Heading</h1>
@@ -125,6 +131,7 @@ This skill enhances M3 typography with M3 Expressive principles:
 Typography conveys personality. Map type choices to emotional goals:
 
 #### Playful & Energetic
+
 ```json
 {
   "display": {
@@ -144,6 +151,7 @@ Typography conveys personality. Map type choices to emotional goals:
 **Use for:** Creative platforms, social apps, youth products
 
 #### Confident & Professional
+
 ```json
 {
   "display": {
@@ -162,6 +170,7 @@ Typography conveys personality. Map type choices to emotional goals:
 **Use for:** SaaS platforms, productivity tools, business apps
 
 #### Elegant & Premium
+
 ```json
 {
   "display": {
@@ -180,6 +189,7 @@ Typography conveys personality. Map type choices to emotional goals:
 **Use for:** Wellness apps, luxury platforms, lifestyle brands
 
 #### Tech-Forward & Unique
+
 ```json
 {
   "display": {
@@ -202,6 +212,7 @@ Typography conveys personality. Map type choices to emotional goals:
 ### 4. Anti-Slop Validation (Reject Generic Fonts)
 
 **FORBIDDEN FONTS (Generic AI Slop):**
+
 - ❌ **Inter** (alone, without distinctive display font)
 - ❌ **Roboto** (corporate, boring, overused)
 - ❌ **Open Sans** (generic, dated)
@@ -211,22 +222,18 @@ Typography conveys personality. Map type choices to emotional goals:
 - ❌ **Lato** (clichéd)
 
 **Validation Rules:**
+
 ```javascript
 function validateTypography(fontFamily) {
-  const forbiddenFonts = [
-    'inter', 'roboto', 'open sans', 'arial', 'helvetica',
-    'lato', '-apple-system', 'blinkmacsystemfont', 'system-ui'
-  ];
+  const forbiddenFonts = ["inter", "roboto", "open sans", "arial", "helvetica", "lato", "-apple-system", "blinkmacsystemfont", "system-ui"];
 
-  const isForbidden = forbiddenFonts.some(forbidden =>
-    fontFamily.toLowerCase().includes(forbidden)
-  );
+  const isForbidden = forbiddenFonts.some((forbidden) => fontFamily.toLowerCase().includes(forbidden));
 
   if (isForbidden && !hasDistinctiveDisplayFont()) {
     return {
       valid: false,
       error: `Generic font detected: ${fontFamily}. Use distinctive fonts like Plus Jakarta Sans, Poppins, Montserrat, or Sora.`,
-      suggestion: getAlternativeFont(fontFamily)
+      suggestion: getAlternativeFont(fontFamily),
     };
   }
 
@@ -235,14 +242,14 @@ function validateTypography(fontFamily) {
 
 function getAlternativeFont(genericFont) {
   const alternatives = {
-    'inter': 'Plus Jakarta Sans Variable',
-    'roboto': 'Poppins',
-    'open sans': 'Nunito',
-    'arial': 'Montserrat',
-    'helvetica': 'Sora Variable'
+    inter: "Plus Jakarta Sans Variable",
+    roboto: "Poppins",
+    "open sans": "Nunito",
+    arial: "Montserrat",
+    helvetica: "Sora Variable",
   };
 
-  return alternatives[genericFont.toLowerCase()] || 'Plus Jakarta Sans Variable';
+  return alternatives[genericFont.toLowerCase()] || "Plus Jakarta Sans Variable";
 }
 ```
 
@@ -253,6 +260,7 @@ function getAlternativeFont(genericFont) {
 **Pairing Principle:** High contrast = interesting. Avoid monotone pairings.
 
 #### Anti-Pattern (Boring, Monotone):
+
 ```json
 // ❌ Same font family, barely different weights
 {
@@ -264,24 +272,29 @@ function getAlternativeFont(genericFont) {
 #### M3 Expressive (High Contrast):
 
 **Display + Monospace:**
+
 ```json
 {
   "display": "'Plus Jakarta Sans Variable', sans-serif",
   "body": "'JetBrains Mono', monospace"
 }
 ```
+
 **Use for:** Developer tools, code editors, tech platforms
 
 **Serif + Geometric Sans:**
+
 ```json
 {
   "display": "'Playfair Display', serif",
   "body": "'Poppins', sans-serif"
 }
 ```
+
 **Use for:** Editorial, publishing, content platforms
 
 **Variable Font Across Weights:**
+
 ```json
 {
   "display": {
@@ -294,15 +307,18 @@ function getAlternativeFont(genericFont) {
   }
 }
 ```
+
 **Use for:** Creative platforms, social apps (weight contrast creates hierarchy)
 
 **Code + Editorial:**
+
 ```json
 {
   "display": "'Fira Code', monospace",
   "body": "'Crimson Pro', serif"
 }
 ```
+
 **Use for:** Documentation, technical writing, knowledge bases
 
 ---
@@ -329,8 +345,9 @@ function getAlternativeFont(genericFont) {
 ```
 
 **Regex Detection:**
+
 ```javascript
-/(fontFamily):\s*['"]?(Roboto|Inter|Open Sans|Arial|Helvetica|system-ui)[^'"]*['"]?/g
+/(fontFamily):\s*['"]?(Roboto|Inter|Open Sans|Arial|Helvetica|system-ui)[^'"]*['"]?/g;
 ```
 
 ### Pattern 2: Detect Timid Weight Contrasts (Auto-Fix)
@@ -356,6 +373,7 @@ function getAlternativeFont(genericFont) {
 ```
 
 **Detection Logic:**
+
 ```javascript
 function detectTimidContrast(headingWeight, bodyWeight) {
   const contrastRatio = Math.max(headingWeight, bodyWeight) / Math.min(headingWeight, bodyWeight);
@@ -365,9 +383,9 @@ function detectTimidContrast(headingWeight, bodyWeight) {
       isTimid: true,
       suggestion: {
         heading: headingWeight > bodyWeight ? 800 : 100,
-        body: headingWeight > bodyWeight ? 300 : 700
+        body: headingWeight > bodyWeight ? 300 : 700,
       },
-      message: `Contrast ratio ${contrastRatio.toFixed(2)}x is too timid. Aim for 3x+ (e.g., 100 vs 900).`
+      message: `Contrast ratio ${contrastRatio.toFixed(2)}x is too timid. Aim for 3x+ (e.g., 100 vs 900).`,
     };
   }
 
@@ -379,18 +397,21 @@ function detectTimidContrast(headingWeight, bodyWeight) {
 
 ```tsx
 // ✅ Add variable font support
-<Typography sx={{
-  fontFamily: 'var(--sys-type-display-family-variable)',
-  fontVariationSettings: 'var(--sys-type-display-variation-settings)',
-  transition: 'font-variation-settings var(--sys-motion-duration-medium-2) var(--sys-motion-easing-expressive)',
+<Typography
+  sx={{
+    fontFamily: "var(--sys-type-display-family-variable)",
+    fontVariationSettings: "var(--sys-type-display-variation-settings)",
+    transition: "font-variation-settings var(--sys-motion-duration-medium-2) var(--sys-motion-easing-expressive)",
 
-  '&:hover': {
-    fontVariationSettings: "'wght' 900" // Increase weight on hover
-  }
-}} />
+    "&:hover": {
+      fontVariationSettings: "'wght' 900", // Increase weight on hover
+    },
+  }}
+/>
 ```
 
 **Token Structure:**
+
 ```json
 {
   "typography": {
@@ -414,24 +435,28 @@ function detectTimidContrast(headingWeight, bodyWeight) {
 ```tsx
 const PlayfulTypography = () => (
   <>
-    <h1 style={{
-      fontFamily: "'Montserrat Variable', sans-serif",
-      fontWeight: 900, // Heavy, bold
-      fontSize: '45px', // display-medium
-      letterSpacing: '0.02em', // Open tracking
-      textTransform: 'uppercase',
-      background: 'linear-gradient(90deg, #E91E63, #00BCD4)',
-      WebkitBackgroundClip: 'text',
-      WebkitTextFillColor: 'transparent'
-    }}>
+    <h1
+      style={{
+        fontFamily: "'Montserrat Variable', sans-serif",
+        fontWeight: 900, // Heavy, bold
+        fontSize: "45px", // display-medium
+        letterSpacing: "0.02em", // Open tracking
+        textTransform: "uppercase",
+        background: "linear-gradient(90deg, #E91E63, #00BCD4)",
+        WebkitBackgroundClip: "text",
+        WebkitTextFillColor: "transparent",
+      }}
+    >
       Let's Create!
     </h1>
-    <p style={{
-      fontFamily: "'Nunito', sans-serif",
-      fontWeight: 400,
-      fontSize: '16px',
-      color: 'var(--sys-color-on-surface)'
-    }}>
+    <p
+      style={{
+        fontFamily: "'Nunito', sans-serif",
+        fontWeight: 400,
+        fontSize: "16px",
+        color: "var(--sys-color-on-surface)",
+      }}
+    >
       Join the community and start building.
     </p>
   </>
@@ -443,22 +468,26 @@ const PlayfulTypography = () => (
 ```tsx
 const ConfidentTypography = () => (
   <>
-    <h1 style={{
-      fontFamily: "'Plus Jakarta Sans Variable', sans-serif",
-      fontWeight: 800,
-      fontSize: '57px', // display-large
-      letterSpacing: '-0.01em', // Tight for authority
-      color: 'var(--sys-color-primary)'
-    }}>
+    <h1
+      style={{
+        fontFamily: "'Plus Jakarta Sans Variable', sans-serif",
+        fontWeight: 800,
+        fontSize: "57px", // display-large
+        letterSpacing: "-0.01em", // Tight for authority
+        color: "var(--sys-color-primary)",
+      }}
+    >
       Scale Your Business
     </h1>
-    <p style={{
-      fontFamily: "'Inter Variable', sans-serif",
-      fontWeight: 400,
-      fontSize: '16px',
-      lineHeight: '24px',
-      color: 'var(--sys-color-on-surface-variant)'
-    }}>
+    <p
+      style={{
+        fontFamily: "'Inter Variable', sans-serif",
+        fontWeight: 400,
+        fontSize: "16px",
+        lineHeight: "24px",
+        color: "var(--sys-color-on-surface-variant)",
+      }}
+    >
       Enterprise-grade tools for modern teams.
     </p>
   </>
@@ -470,22 +499,26 @@ const ConfidentTypography = () => (
 ```tsx
 const ElegantTypography = () => (
   <>
-    <h1 style={{
-      fontFamily: "'Poppins', serif",
-      fontWeight: 300, // Light for sophistication
-      fontSize: '45px',
-      letterSpacing: '0.03em', // Wide tracking for luxury
-      color: 'var(--sys-color-primary)'
-    }}>
+    <h1
+      style={{
+        fontFamily: "'Poppins', serif",
+        fontWeight: 300, // Light for sophistication
+        fontSize: "45px",
+        letterSpacing: "0.03em", // Wide tracking for luxury
+        color: "var(--sys-color-primary)",
+      }}
+    >
       Wellness Reimagined
     </h1>
-    <p style={{
-      fontFamily: "'Open Sans', sans-serif",
-      fontWeight: 400,
-      fontSize: '14px',
-      lineHeight: '20px',
-      color: 'var(--sys-color-on-surface-variant)'
-    }}>
+    <p
+      style={{
+        fontFamily: "'Open Sans', sans-serif",
+        fontWeight: 400,
+        fontSize: "14px",
+        lineHeight: "20px",
+        color: "var(--sys-color-on-surface-variant)",
+      }}
+    >
       Discover inner peace through guided meditation.
     </p>
   </>
@@ -542,6 +575,7 @@ const ElegantTypography = () => (
 ## Usage
 
 **Standalone Skill:**
+
 ```bash
 # Enhance typography with M3 Expressive principles
 m3-expressive-typography-enhancer \
@@ -551,12 +585,13 @@ m3-expressive-typography-enhancer \
 ```
 
 **Within Design Systems Architect:**
+
 ```javascript
 // Called after m3-typography-classifier
-const expressiveTypography = await runSkill('m3-expressive-typography-enhancer', {
+const expressiveTypography = await runSkill("m3-expressive-typography-enhancer", {
   code: typographyClassifiedCode,
   tokens: tokensExpressive,
-  emotionalTone: 'playful-energetic'
+  emotionalTone: "playful-energetic",
 });
 ```
 

@@ -1,110 +1,221 @@
-/**
- * ELECTRIC ALCHEMIST: SETTINGS FEATURE
- *
- * Settings page with form controls and design system tokens.
- */
-
-import React, { useState } from 'react';
-import { Card } from '@/components';
-import { Input } from '@/components/electric/input';
-import { Select } from '@/components/electric/select';
-import { Checkbox } from '@/components/electric';
-import { Button } from '@/components';
-import { Separator } from '@/components/electric';
-import { PageHeader } from '@/components/electric';
+import { useState } from 'react';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@careercopilot/ui';
+import { Input } from '@careercopilot/ui';
+import { Textarea } from '@careercopilot/ui';
+import { Button } from '@careercopilot/ui';
+import { Switch } from '@careercopilot/ui';
+import { PageHeader } from '../../components/shared/PageHeader';
 
 export function Settings() {
-  const [settings, setSettings] = useState({
-    email: '',
-    notifications: true,
-    theme: 'dark',
-    language: 'en',
-  });
+  const [firstName, setFirstName] = useState('Nishant');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('nishant@example.com');
+  const [bio, setBio] = useState('');
+  const [darkMode, setDarkMode] = useState(true);
+  const [emailNotifications, setEmailNotifications] = useState(true);
+  const [applicationUpdates, setApplicationUpdates] = useState(true);
+  const [jobMatches, setJobMatches] = useState(false);
 
-  const handleSave = () => {
-    // Save settings logic
-    console.log('Settings saved:', settings);
+  // Reusable card style
+  const cardStyle = {
+    backgroundImage: 'radial-gradient(circle, var(--sys-color-primary) 1px, transparent 1px)',
+    backgroundSize: '20px 20px',
+    backgroundBlendMode: 'overlay',
+    backgroundPosition: '0 0',
   };
 
   return (
-    <div className="min-h-screen bg-surface">
+    <div className="p-6 md:p-12 max-w-5xl mx-auto animate-in fade-in zoom-in-95 duration-500 ease-spring">
+      {/* Header */}
       <PageHeader
         title="Settings"
-        description="Manage your account settings and preferences"
-        onBack={() => window.history.back()}
+        description="Manage your account preferences and settings"
       />
 
-      <div className="max-w-4xl mx-auto p-6 space-y-6">
-        {/* Account Settings */}
-        <Card className="p-6">
-          <h2 className="text-hero text-xl font-semibold text-on-surface mb-4">
-            Account Settings
-          </h2>
-          <div className="space-y-4">
-            <Input
-              label="Email"
-              type="email"
-              value={settings.email}
-              onChange={(e) => setSettings((prev) => ({ ...prev, email: e.target.value }))}
-              placeholder="your@email.com"
-            />
-            <Button variant="outline" size="sm">
-              Change Password
-            </Button>
-          </div>
-        </Card>
+      {/* Tabs */}
+      <Tabs
+        defaultValue="profile"
+        className="w-full"
+      >
+        <TabsList className="bg-surface-container border border-outline-variant mb-8 p-1 rounded-tech h-auto shadow-sm">
+          {['Profile', 'Preferences', 'Notifications', 'Security'].map((tab) => (
+            <TabsTrigger
+              key={tab}
+              value={tab.toLowerCase()}
+              className="rounded-pebble data-[state=active]:bg-primary-container data-[state=active]:text-on-primary-container data-[state=active]:shadow-sm text-on-surface-variant hover:text-on-surface transition-all px-6 py-2 ease-spring duration-300"
+            >
+              {tab}
+            </TabsTrigger>
+          ))}
+        </TabsList>
 
-        {/* Preferences */}
-        <Card className="p-6">
-          <h2 className="text-hero text-xl font-semibold text-on-surface mb-4">
-            Preferences
-          </h2>
-          <div className="space-y-4">
-            <Select
-              label="Theme"
-              options={[
-                { label: 'Dark', value: 'dark' },
-                { label: 'Light', value: 'light' },
-                { label: 'System', value: 'system' },
-              ]}
-              value={settings.theme}
-              onChange={(e) =>
-                setSettings((prev) => ({ ...prev, theme: e.target.value }))
-              }
-            />
-            <Select
-              label="Language"
-              options={[
-                { label: 'English', value: 'en' },
-                { label: 'Spanish', value: 'es' },
-                { label: 'French', value: 'fr' },
-              ]}
-              value={settings.language}
-              onChange={(e) =>
-                setSettings((prev) => ({ ...prev, language: e.target.value }))
-              }
-            />
-            <Checkbox
-              label="Enable email notifications"
-              checked={settings.notifications}
-              onChange={(e) =>
-                setSettings((prev) => ({ ...prev, notifications: e.target.checked }))
-              }
-            />
-          </div>
-        </Card>
+        {/* Profile Tab */}
+        <TabsContent value="profile">
+          <div
+            className="bg-surface-container rounded-tech p-8 border border-outline-variant shadow-elevation-1"
+            style={cardStyle}
+          >
+            <h3 className="text-on-surface mb-6 text-headline-small font-bold">Profile Settings</h3>
+            <div className="space-y-6">
+              <div className="grid grid-cols-2 gap-6">
+                <div>
+                  <label className="block text-sm text-on-surface-variant mb-2 font-medium">First Name</label>
+                  <Input
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                    className="bg-surface-container-high border-outline-variant text-on-surface rounded-pebble h-12 focus:ring-primary focus:border-primary transition-all ease-spring"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm text-on-surface-variant mb-2 font-medium">Last Name</label>
+                  <Input
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
+                    className="bg-surface-container-high border-outline-variant text-on-surface rounded-pebble h-12 focus:ring-primary focus:border-primary transition-all ease-spring"
+                  />
+                </div>
+              </div>
 
-        {/* Actions */}
-        <div className="flex justify-end gap-3">
-          <Button variant="outline" onClick={() => window.history.back()}>
-            Cancel
-          </Button>
-          <Button onClick={handleSave}>Save Changes</Button>
-        </div>
-      </div>
+              <div>
+                <label className="block text-sm text-on-surface-variant mb-2 font-medium">Email</label>
+                <Input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="bg-surface-container-high border-outline-variant text-on-surface rounded-pebble h-12 focus:ring-primary focus:border-primary transition-all ease-spring"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm text-on-surface-variant mb-2 font-medium">Bio</label>
+                <Textarea
+                  value={bio}
+                  onChange={(e) => setBio(e.target.value)}
+                  placeholder="Tell us about yourself..."
+                  rows={4}
+                  className="bg-surface-container-high border-outline-variant text-on-surface rounded-tech focus:ring-primary focus:border-primary resize-none transition-all ease-spring"
+                />
+              </div>
+
+              <Button className="bg-primary text-on-primary hover:bg-primary/90 rounded-gem px-8 h-12 shadow-sm hover:shadow-elevation-1 transition-all ease-spring">
+                Save Changes
+              </Button>
+            </div>
+          </div>
+        </TabsContent>
+
+        {/* Preferences Tab */}
+        <TabsContent value="preferences">
+          <div
+            className="bg-surface-container rounded-tech p-8 border border-outline-variant shadow-elevation-1"
+            style={cardStyle}
+          >
+            <h3 className="text-on-surface mb-6 text-headline-small font-bold">Preferences</h3>
+            <div className="space-y-6">
+              <div className="flex items-center justify-between py-4 border-b border-outline-variant">
+                <div>
+                  <p className="text-on-surface font-medium">Dark Mode</p>
+                  <p className="text-sm text-on-surface-variant">Use dark theme throughout the app</p>
+                </div>
+                <Switch
+                  checked={darkMode}
+                  onCheckedChange={setDarkMode}
+                />
+              </div>
+
+              <div className="flex items-center justify-between py-4 border-b border-outline-variant">
+                <div>
+                  <p className="text-on-surface font-medium">Email Notifications</p>
+                  <p className="text-sm text-on-surface-variant">Receive email updates and notifications</p>
+                </div>
+                <Switch
+                  checked={emailNotifications}
+                  onCheckedChange={setEmailNotifications}
+                />
+              </div>
+            </div>
+          </div>
+        </TabsContent>
+
+        {/* Notifications Tab */}
+        <TabsContent value="notifications">
+          <div
+            className="bg-surface-container rounded-tech p-8 border border-outline-variant shadow-elevation-1"
+            style={cardStyle}
+          >
+            <h3 className="text-on-surface mb-6 text-headline-small font-bold">Notification Settings</h3>
+            <div className="space-y-6">
+              <div className="flex items-center justify-between py-4 border-b border-outline-variant">
+                <div>
+                  <p className="text-on-surface font-medium">Application Updates</p>
+                  <p className="text-sm text-on-surface-variant">
+                    Get notified about application status changes
+                  </p>
+                </div>
+                <Switch
+                  checked={applicationUpdates}
+                  onCheckedChange={setApplicationUpdates}
+                />
+              </div>
+
+              <div className="flex items-center justify-between py-4 border-b border-outline-variant">
+                <div>
+                  <p className="text-on-surface font-medium">Job Matches</p>
+                  <p className="text-sm text-on-surface-variant">
+                    Receive notifications for matching job opportunities
+                  </p>
+                </div>
+                <Switch
+                  checked={jobMatches}
+                  onCheckedChange={setJobMatches}
+                />
+              </div>
+            </div>
+          </div>
+        </TabsContent>
+
+        {/* Security Tab */}
+        <TabsContent value="security">
+          <div
+            className="bg-surface-container rounded-tech p-8 border border-outline-variant shadow-elevation-1"
+            style={cardStyle}
+          >
+            <h3 className="text-on-surface mb-6 text-headline-small font-bold">Security Settings</h3>
+            <div className="space-y-6">
+              <div>
+                <label className="block text-sm text-on-surface-variant mb-2 font-medium">Current Password</label>
+                <Input
+                  type="password"
+                  placeholder="••••••••"
+                  className="bg-surface-container-high border-outline-variant text-on-surface rounded-pebble h-12 focus:ring-primary focus:border-primary transition-all ease-spring"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm text-on-surface-variant mb-2 font-medium">New Password</label>
+                <Input
+                  type="password"
+                  placeholder="••••••••"
+                  className="bg-surface-container-high border-outline-variant text-on-surface rounded-pebble h-12 focus:ring-primary focus:border-primary transition-all ease-spring"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm text-on-surface-variant mb-2 font-medium">Confirm New Password</label>
+                <Input
+                  type="password"
+                  placeholder="••••••••"
+                  className="bg-surface-container-high border-outline-variant text-on-surface rounded-pebble h-12 focus:ring-primary focus:border-primary transition-all ease-spring"
+                />
+              </div>
+
+              <Button className="bg-primary text-on-primary hover:bg-primary/90 rounded-gem px-8 h-12 shadow-sm hover:shadow-elevation-1 transition-all ease-spring">
+                Update Password
+              </Button>
+            </div>
+          </div>
+        </TabsContent>
+      </Tabs>
     </div>
   );
 }
-
-export default Settings;
-

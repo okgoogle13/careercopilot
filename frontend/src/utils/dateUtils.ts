@@ -9,7 +9,7 @@ export const formatDate = (date: Date | string): string => {
   return d.toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
-    day: 'numeric'
+    day: 'numeric',
   });
 };
 
@@ -19,7 +19,7 @@ export const getRelativeTime = (date: Date | string): string => {
   const now = new Date();
   const diffMs = now.getTime() - d.getTime();
   const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-  
+
   if (diffDays === 0) return 'Today';
   if (diffDays === 1) return 'Yesterday';
   if (diffDays < 7) return `${diffDays} days ago`;
@@ -40,5 +40,5 @@ export const isRecent = (date: Date | string, days: number = 7): boolean => {
 export default {
   formatDate,
   getRelativeTime,
-  isRecent
+  isRecent,
 };

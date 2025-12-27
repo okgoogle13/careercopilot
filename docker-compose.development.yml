@@ -13,40 +13,81 @@ services:
       POSTGRES_DB: careercopilot_dev
       POSTGRES_USER: dev_user
       POSTGRES_PASSWORD: dev_password
-      POSTGRES_HOST_AUTH_METHOD: md5
     volumes:
       - postgres_dev_data:/var/lib/postgresql/data
     ports:
-      - "5433:5432"  # Different port to avoid conflicts
+      - "5433:5432"
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U dev_user -d careercopilot_dev"]
-      interval: 30s
-      timeout: 10s
+      interval: 10s
+      timeout: 5s
       retries: 5
     networks:
       - careercopilot-dev-network
     restart: unless-stopped
 
   # Development Backend with hot reload
-  backend-dev:
+  backend:
     build:
       context: ./backend
       dockerfile: Dockerfile
       target: development
     container_name: careercopilot-dev-backend
     environment:
-      # Database configuration
-      DATABASE_URL: postgresql://dev_user:dev_password@postgres:5433/careercopilot_dev
-      # Other environment variables as needed
+      - DATABASE_URL=postgresql://dev_user:dev_password@postgres:5432/careercopilot_dev
+      - PORT=8080
+      - ENV=development
     volumes:
       - ./backend:/app
     ports:
-      - "8080:8080"  # Different port to avoid conflicts
+      - "8080:8080"
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
+    networks:
+      - careercopilot-dev-network
+    restart: unless-stopped
+
+  # Development Frontend with hot reload
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      target: development
+    container_name: careercopilot-dev-frontend
+    environment:
+      - VITE_API_URL=http://localhost:8080
+      - NODE_ENV=development
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+    networks:
+      - careercopilot-dev-network
+    restart: unless-stopped
+
+  # Storybook Component Library
+  storybook:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      target: development
+    container_name: careercopilot-storybook
+    command: npm run storybook -- --host
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    ports:
+      - "6006:6006"
     networks:
       - careercopilot-dev-network
     restart: unless-stopped
 
 volumes:
   postgres_dev_data:
+

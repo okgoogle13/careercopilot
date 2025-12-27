@@ -3,6 +3,7 @@
 ## Firestore Mocking Patterns
 
 ### Basic Firestore Mock
+
 ```python
 from unittest.mock import MagicMock, AsyncMock
 import pytest
@@ -32,6 +33,7 @@ def test_user_service_with_firestore(mock_firestore):
 ```
 
 ### Firestore Write Operations
+
 ```python
 def test_create_user_firestore_write(mock_firestore):
     """Test Firestore document creation."""
@@ -45,6 +47,7 @@ def test_create_user_firestore_write(mock_firestore):
 ```
 
 ### Firestore Query Operations
+
 ```python
 def test_list_users_firestore_query(mock_firestore):
     """Test Firestore query execution."""
@@ -63,6 +66,7 @@ def test_list_users_firestore_query(mock_firestore):
 ```
 
 ### Firestore Transaction Mock
+
 ```python
 @pytest.fixture
 def mock_firestore_transaction(monkeypatch):
@@ -88,6 +92,7 @@ def test_transfer_points_transaction(mock_firestore_transaction):
 ## Firebase Authentication Mocking
 
 ### Auth Token Mock
+
 ```python
 @pytest.fixture
 def mock_firebase_auth(monkeypatch):
@@ -112,6 +117,7 @@ def test_endpoint_with_auth(client, mock_firebase_auth):
 ```
 
 ### Auth Error Handling
+
 ```python
 def test_endpoint_invalid_token(client, mock_firebase_auth):
     """Test invalid token rejection."""
@@ -128,6 +134,7 @@ def test_endpoint_invalid_token(client, mock_firebase_auth):
 ## Genkit Flow Mocking
 
 ### Basic Genkit Mock
+
 ```python
 @pytest.fixture
 def mock_genkit(monkeypatch):
@@ -155,6 +162,7 @@ async def test_ai_service_execution(mock_genkit):
 ```
 
 ### Genkit Error Handling
+
 ```python
 @pytest.mark.asyncio
 @pytest.mark.ai_services
@@ -173,6 +181,7 @@ async def test_genkit_rate_limit(mock_genkit):
 ## Pydantic Model Validation Testing
 
 ### Validation Error Testing
+
 ```python
 from pydantic import BaseModel, Field, ValidationError
 import pytest
@@ -203,6 +212,7 @@ def test_user_model_valid():
 ## FastAPI TestClient Setup
 
 ### Basic Client Fixture
+
 ```python
 from fastapi.testclient import TestClient
 from app.main import app
@@ -219,6 +229,7 @@ def test_endpoint_get_request(client):
 ```
 
 ### Client with Auth
+
 ```python
 @pytest.fixture
 def authenticated_client(client, monkeypatch):
@@ -240,6 +251,7 @@ def test_protected_endpoint(authenticated_client):
 ## Async Function Testing
 
 ### Basic Async Test
+
 ```python
 @pytest.mark.asyncio
 async def test_async_database_call(monkeypatch):
@@ -259,6 +271,7 @@ async def test_async_database_call(monkeypatch):
 ## Test Markers & Organization
 
 ### Test Categories
+
 ```python
 import pytest
 
@@ -282,6 +295,7 @@ def test_auth_required(client):
 ```
 
 Run specific categories:
+
 ```bash
 pytest -m smoke              # Only smoke tests
 pytest -m integration        # Only integration tests

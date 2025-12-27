@@ -6,7 +6,8 @@ the one-click application package generation and email task workflows.
 """
 
 import traceback
-from typing import Any, Dict, Optional, TypedDict, Union
+from typing import Any, Dict, Optional, Union
+from typing_extensions import TypedDict
 
 from fastapi import APIRouter, HTTPException, status
 from fastapi.responses import JSONResponse

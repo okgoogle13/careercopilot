@@ -2,8 +2,7 @@
 
 ---
 
-description: Run multiple agents in parallel using the DependencyOrchestrator
----
+## description: Run multiple agents in parallel using the DependencyOrchestrator
 
 ## Prerequisites
 
@@ -14,9 +13,11 @@ description: Run multiple agents in parallel using the DependencyOrchestrator
 ## Steps
 
 1. **Create a Python script** to invoke the orchestrator.
+
    ```bash
    # File: scripts/run_parallel_agents.py
    ```
+
    ```python
    import asyncio
    from backend.app.agents.orchestrator import AgentOrchestrator, BaseAgent
@@ -49,9 +50,11 @@ description: Run multiple agents in parallel using the DependencyOrchestrator
    ```
 
 2. **Execute the script**.
+
    ```bash
    python scripts/run_parallel_agents.py
    ```
+
    The orchestrator will:
    - Run `JobScoutAgent` first (no dependencies).
    - Once `JobScoutAgent` finishes, `MarketAnalystAgent` and `ApplicationAgent` will start **in parallel** because both depend only on `job_scout`.
@@ -93,11 +96,11 @@ description: Run multiple agents in parallel using the DependencyOrchestrator
 
 ## Troubleshooting
 
-| Symptom | Likely Cause | Fix |
-|---------|---------------|-----|
-| Only one agent runs | Dependencies not declared correctly | Ensure `self.dependencies` list is accurate in the agent's `__init__` |
-| High CPU usage | Too many concurrent agents | Reduce concurrency with a semaphore (see above) |
-| Session not saved | Database connection pool exhausted | Increase pool size in `SQLALCHEMY_DATABASE_URL` or close idle sessions |
+| Symptom             | Likely Cause                        | Fix                                                                    |
+| ------------------- | ----------------------------------- | ---------------------------------------------------------------------- |
+| Only one agent runs | Dependencies not declared correctly | Ensure `self.dependencies` list is accurate in the agent's `__init__`  |
+| High CPU usage      | Too many concurrent agents          | Reduce concurrency with a semaphore (see above)                        |
+| Session not saved   | Database connection pool exhausted  | Increase pool size in `SQLALCHEMY_DATABASE_URL` or close idle sessions |
 
 ---
 

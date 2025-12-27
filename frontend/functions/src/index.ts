@@ -13,8 +13,8 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '');
 // Zod schema for resume validation
 const resumeSchema = z.object({
   personalInfo: z.object({
-    name: z.string().min(1, "Name is required"),
-    email: z.string().email("Invalid email address"),
+    name: z.string().min(1, 'Name is required'),
+    email: z.string().email('Invalid email address'),
     phone: z.string().optional(),
     location: z.string().optional(),
     summary: z.string().optional(),
@@ -27,7 +27,7 @@ const resumeSchema = z.object({
       company: z.string(),
       location: z.string().optional(),
       startDate: z.string(),
-      endDate: z.string().or(z.literal("Present")),
+      endDate: z.string().or(z.literal('Present')),
       responsibilities: z.array(z.string()),
       achievements: z.array(z.string()).optional(),
       skillsUsed: z.array(z.string()).optional(),
@@ -59,21 +59,28 @@ const resumeSchema = z.object({
       endDate: z.string().optional(),
     })
   ),
-  certifications: z.array(
-    z.object({
-      name: z.string(),
-      issuer: z.string(),
-      dateEarned: z.string(),
-      expirationDate: z.string().optional(),
-      credentialId: z.string().optional(),
-      credentialUrl: z.string().url().optional(),
-    })
-  ).optional(),
+  certifications: z
+    .array(
+      z.object({
+        name: z.string(),
+        issuer: z.string(),
+        dateEarned: z.string(),
+        expirationDate: z.string().optional(),
+        credentialId: z.string().optional(),
+        credentialUrl: z.string().url().optional(),
+      })
+    )
+    .optional(),
 });
 
 type ResumeData = z.infer<typeof resumeSchema>;
 
-async function extractAndStructureData(bucket: any, name: string, userId: string, fileId: string): Promise<ResumeData> {
+async function extractAndStructureData(
+  bucket: any,
+  name: string,
+  userId: string,
+  fileId: string
+): Promise<ResumeData> {
   // Download the file from Storage and extract its raw text.
   const file = bucket.file(name);
   const [fileContent] = await file.download();
@@ -94,11 +101,11 @@ async function extractAndStructureData(bucket: any, name: string, userId: string
   const result = await model.generateContent(prompt);
   const response = await result.response;
   const text = response.text();
-  
+
   // Parses the Gemini API's JSON response.
   const jsonMatch = text.match(/```(?:json)?\n([\s\S]*?)\n```/) || [null, text];
   const jsonString = jsonMatch[1] || text;
-  
+
   return JSON.parse(jsonString);
 }
 
@@ -152,14 +159,17 @@ export const processUploadedResume = functions.storage.object().onFinalize(async
     return null;
   } catch (error) {
     console.error(`Error processing resume ${fileId}:`, error);
-    
-    await docRef.set({
-      status: 'failed',
-      error: error instanceof Error ? error.message : 'Unknown error',
-      errorDetails: JSON.stringify(error, Object.getOwnPropertyNames(error)),
-      failedAt: admin.firestore.FieldValue.serverTimestamp(),
-    }, { merge: true });
-    
+
+    await docRef.set(
+      {
+        status: 'failed',
+        error: error instanceof Error ? error.message : 'Unknown error',
+        errorDetails: JSON.stringify(error, Object.getOwnPropertyNames(error)),
+        failedAt: admin.firestore.FieldValue.serverTimestamp(),
+      },
+      { merge: true }
+    );
+
     return null;
   }
 });

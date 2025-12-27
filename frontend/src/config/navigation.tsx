@@ -9,14 +9,14 @@ import React from 'react';
 import {
   Home,
   FolderOpen,
-  CloudUpload,
+  UploadCloud,
   FileText,
   Mail,
   History,
   Wrench,
   Edit,
   Search,
-  Handshake,
+  HelpingHand,
   Mic,
   TrendingUp,
   GraduationCap,
@@ -40,7 +40,7 @@ import {
   Share2,
   Sliders,
   FileText as Article,
-  FolderShared,
+  Folder as FolderShared,
 } from 'lucide-react';
 
 export interface NavItem {
@@ -74,7 +74,7 @@ export const mainNavigation: NavItem[] = [
       {
         id: 'upload-new',
         label: 'Upload New',
-        icon: <CloudUpload size={18} />,
+        icon: <UploadCloud size={18} />,
         path: '/documents/upload',
       },
       {
@@ -121,7 +121,7 @@ export const mainNavigation: NavItem[] = [
       {
         id: 'job-matching',
         label: 'Job Matching',
-        icon: <Handshake size={18} />,
+        icon: <HelpingHand size={18} />,
         path: '/career-tools/job-matching',
         description: 'AI-powered job recommendations',
       },
@@ -230,4 +230,3 @@ export const documentIcons = {
   coverLetter: <Mail size={20} />,
   portfolio: <FolderShared size={20} />,
 };
-

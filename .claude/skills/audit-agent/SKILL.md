@@ -23,6 +23,7 @@ This skill performs comprehensive security and code quality audits across your c
 ## When to Use
 
 This skill is automatically invoked when you ask:
+
 - "Run a security audit"
 - "Check for vulnerabilities"
 - "Audit the codebase"
@@ -32,24 +33,28 @@ This skill is automatically invoked when you ask:
 ## Audit Process
 
 ### 1. Security Scan
+
 - Checks for hardcoded secrets (API keys, passwords)
 - Identifies SQL injection vulnerabilities
 - Detects XSS vulnerabilities
 - Reviews authentication/authorization patterns
 
 ### 2. Dependency Audit
+
 - Scans `package.json`, `requirements.txt`, `go.mod`
 - Checks for known CVEs
 - Reports outdated packages
 - Suggests safe upgrade paths
 
 ### 3. Code Quality
+
 - Identifies unused imports/variables
 - Detects code duplication
 - Measures cyclomatic complexity
 - Reviews error handling patterns
 
 ### 4. Report Generation
+
 - Creates detailed audit report
 - Prioritizes findings by severity (Critical, High, Medium, Low)
 - Provides remediation steps
@@ -58,19 +63,23 @@ This skill is automatically invoked when you ask:
 ## Example Usage
 
 **User Request:**
+
 > "Run a security audit on the backend API"
 
 **Skill Actions:**
+
 1. Scans `backend/` directory for security issues
 2. Audits Python dependencies in `requirements.txt`
 3. Checks FastAPI endpoints for common vulnerabilities
 4. Generates comprehensive report with findings
 
 **Output Format:**
+
 ```markdown
 # Security Audit Report
 
 ## Summary
+
 - 🔴 Critical: 2
 - 🟠 High: 5
 - 🟡 Medium: 8
@@ -79,12 +88,14 @@ This skill is automatically invoked when you ask:
 ## Critical Findings
 
 ### 1. Hardcoded API Key Detected
+
 **File:** `backend/app/config.py:23`
 **Issue:** API key hardcoded in source code
 **Risk:** Credential exposure if code is leaked
 **Fix:** Move to environment variable or Secret Manager
 
 ### 2. SQL Injection Vulnerability
+
 **File:** `backend/app/api/users.py:45`
 **Issue:** Unsanitized user input in SQL query
 **Risk:** Database compromise
@@ -94,6 +105,7 @@ This skill is automatically invoked when you ask:
 ## Configuration
 
 No configuration required. The skill automatically:
+
 - Detects project type (Python, Node.js, Go, etc.)
 - Selects appropriate scanners
 - Adapts to codebase structure

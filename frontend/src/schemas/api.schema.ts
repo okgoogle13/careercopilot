@@ -6,12 +6,11 @@ import { contextTagsSchema } from './asset.schema'; // Import from our new asset
  * Corresponds to Pydantic's SuggestedTags.
  */
 export const suggestedTagsSchema = z.object({
-  roleType: z.string().describe("AI-suggested primary role type"),
-  subsectors: z.array(z.string()).default([]).describe("AI-suggested industry subsectors"),
-  confidence: z.number().min(0).max(1).default(0).describe("Confidence score for the suggestions"),
+  roleType: z.string().describe('AI-suggested primary role type'),
+  subsectors: z.array(z.string()).default([]).describe('AI-suggested industry subsectors'),
+  confidence: z.number().min(0).max(1).default(0).describe('Confidence score for the suggestions'),
 });
 export type SuggestedTags = z.infer<typeof suggestedTagsSchema>;
-
 
 /**
  * Response from the /upload-and-tag endpoint.
@@ -26,7 +25,6 @@ export const uploadAndTagResponseSchema = z.object({
 });
 export type UploadAndTagResponse = z.infer<typeof uploadAndTagResponseSchema>;
 
-
 /**
  * Request body for the /extract-and-save endpoint.
  * Corresponds to Pydantic's ExtractAndSaveRequest.
@@ -34,29 +32,27 @@ export type UploadAndTagResponse = z.infer<typeof uploadAndTagResponseSchema>;
 export const extractAndSaveRequestSchema = z.object({
   fileId: z.string(),
   confirmedTags: contextTagsSchema,
-  documentType: z.enum(["resume", "ksc", "voice"]),
+  documentType: z.enum(['resume', 'ksc', 'voice']),
 });
 export type ExtractAndSaveRequest = z.infer<typeof extractAndSaveRequestSchema>;
-
 
 /**
  * Response from the /extract-and-save endpoint.
  * Corresponds to Pydantic's ExtractAndSaveResponse.
  */
 export const extractAndSaveResponseSchema = z.object({
-  status: z.enum(["success", "error"]),
+  status: z.enum(['success', 'error']),
   assetId: z.string(),
   message: z.string(),
 });
 export type ExtractAndSaveResponse = z.infer<typeof extractAndSaveResponseSchema>;
-
 
 /**
  * Standard error response for ingestion endpoints.
  * Corresponds to Pydantic's IngestionErrorResponse.
  */
 export const ingestionErrorResponseSchema = z.object({
-  status: z.literal("error").default("error"),
+  status: z.literal('error').default('error'),
   error: z.string(),
   message: z.string(),
   details: z.record(z.any()).default({}),

@@ -2,7 +2,9 @@
 
 ## ⚠️ IMPORTANT: DO NOT USE ORIGINAL SCRIPTS
 
-The original migration scripts in this directory have **critical issues** that would cause:
+The original migration scripts in this directory have **critical issues** that
+would cause:
+
 - Data loss (deletion of 48+ active component files)
 - Test/story file deletion
 - Application breakage
@@ -171,6 +173,7 @@ git commit -m "migrate: move Button to @careercopilot/ui"
 After UI components migrated:
 
 1. **Review features directory structure**
+
    ```bash
    ls -la src/components/features/
    ```
@@ -237,18 +240,18 @@ yarn preview
 
 ### Safe Scripts ✅
 
-| Script | Purpose | Safety |
-|--------|---------|--------|
-| `component-inventory.ts` | Generate accurate component list | ✅ Read-only |
-| `safe-migrate-component.ts` | Migrate single component safely | ✅ Full rollback |
+| Script                      | Purpose                          | Safety           |
+| --------------------------- | -------------------------------- | ---------------- |
+| `component-inventory.ts`    | Generate accurate component list | ✅ Read-only     |
+| `safe-migrate-component.ts` | Migrate single component safely  | ✅ Full rollback |
 
 ### Unsafe Scripts ❌ DO NOT USE
 
-| Script | Issues | Status |
-|--------|--------|--------|
-| `move-to-ui.ts` | Assumes non-existent components, no import updates | ❌ BROKEN |
-| `cleanup-redundant.ts` | Deletes active files, no safety checks | ❌ DANGEROUS |
-| `cleanup-frontend.ts` | Analysis only (safe but incomplete) | ⚠️ Misleading results |
+| Script                 | Issues                                             | Status                |
+| ---------------------- | -------------------------------------------------- | --------------------- |
+| `move-to-ui.ts`        | Assumes non-existent components, no import updates | ❌ BROKEN             |
+| `cleanup-redundant.ts` | Deletes active files, no safety checks             | ❌ DANGEROUS          |
+| `cleanup-frontend.ts`  | Analysis only (safe but incomplete)                | ⚠️ Misleading results |
 
 ---
 
@@ -303,15 +306,15 @@ npx ts-node scripts/safe-migrate-component.ts --help
 
 ## Realistic Timeline
 
-| Phase | Duration | Notes |
-|-------|----------|-------|
-| Preparation | ✅ Complete | Workspace config, theme resolution |
-| Enhanced Scripts | ✅ Complete | Inventory and migration tools ready |
-| Initial Analysis | 1 day | Run inventory, plan migration order |
-| Component Migration | 10-15 days | 2-3 components/day, ~35 total |
-| Feature Reorganization | 3-5 days | Consolidate features directory |
-| Cleanup & Verification | 2-3 days | Archive deprecated, full testing |
-| **Total** | **~3-4 weeks** | With safety buffer |
+| Phase                  | Duration       | Notes                               |
+| ---------------------- | -------------- | ----------------------------------- |
+| Preparation            | ✅ Complete    | Workspace config, theme resolution  |
+| Enhanced Scripts       | ✅ Complete    | Inventory and migration tools ready |
+| Initial Analysis       | 1 day          | Run inventory, plan migration order |
+| Component Migration    | 10-15 days     | 2-3 components/day, ~35 total       |
+| Feature Reorganization | 3-5 days       | Consolidate features directory      |
+| Cleanup & Verification | 2-3 days       | Archive deprecated, full testing    |
+| **Total**              | **~3-4 weeks** | With safety buffer                  |
 
 ---
 
@@ -415,4 +418,5 @@ If you encounter issues:
 4. Consult this document's troubleshooting section
 5. Create a backup before attempting fixes
 
-**Remember**: Migrate incrementally, test thoroughly, and always have a rollback plan.
+**Remember**: Migrate incrementally, test thoroughly, and always have a rollback
+plan.

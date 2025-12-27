@@ -274,7 +274,7 @@ export async function generateTailoredResume(
 }
 
 // Types for Application Package API
-export interface ApplicationPackageRequest {
+export interface LegacyApplicationPackageRequest {
   job_description: string;
   user_profile: Record<string, unknown>;
 }
@@ -357,7 +357,7 @@ export async function prepareApplicationPackage(
       experience_level: 'mid_level', // User's experience level
     };
 
-    const requestBody: ApplicationPackageRequest = {
+    const requestBody: LegacyApplicationPackageRequest = {
       job_description: jobDescription.trim(),
       user_profile: userProfile,
     };

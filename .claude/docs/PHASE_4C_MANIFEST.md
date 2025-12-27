@@ -13,6 +13,7 @@ Phase 4C targets 22 form and utility components for M3 migration. First batch (A
 ## Migrated Components (2)
 
 ### ✅ Alert
+
 - **Path:** `frontend/src/components/Alert/Alert.tsx`
 - **Status:** MIGRATED
 - **Changes:** MUI Alert wrapper → M3Alert wrapper
@@ -21,6 +22,7 @@ Phase 4C targets 22 form and utility components for M3 migration. First batch (A
 - **Test Status:** Pending update
 
 ### ✅ Badge
+
 - **Path:** `frontend/src/components/badge/badge.tsx`
 - **Status:** MIGRATED
 - **Changes:** MUI Chip wrapper → M3Badge wrapper
@@ -35,6 +37,7 @@ Phase 4C targets 22 form and utility components for M3 migration. First batch (A
 ### HIGH PRIORITY: Dialog & Modal Components (5)
 
 #### 1. Dialog (Core Modal)
+
 - **Path:** `frontend/src/components/ui/Dialog/Dialog.tsx`
 - **Current:** MUI Dialog wrapper with custom styling
 - **Target:** M3Dialog wrapper
@@ -50,6 +53,7 @@ Phase 4C targets 22 form and utility components for M3 migration. First batch (A
   7. Map theme.spacing() calls to M3 spacing tokens
 
 **Key Issues to Fix:**
+
 - `color: theme.palette.grey[500]` (line 253) → M3 token
 - `theme.spacing()` for padding/margins → M3 spacing tokens
 - MUI SxProps → M3 CSS classes
@@ -57,6 +61,7 @@ Phase 4C targets 22 form and utility components for M3 migration. First batch (A
 ---
 
 #### 2. ConfirmTagsModal
+
 - **Path:** `frontend/src/components/ConfirmTagsModal/ConfirmTagsModal.tsx`
 - **Current:** MUI Dialog with form controls
 - **Target:** M3Dialog with M3 form components
@@ -71,6 +76,7 @@ Phase 4C targets 22 form and utility components for M3 migration. First batch (A
   6. Update all theme.spacing() and color references
 
 **Key Issues to Fix:**
+
 - Form validation styling
 - Radio group layout and spacing
 - Error message styling
@@ -78,6 +84,7 @@ Phase 4C targets 22 form and utility components for M3 migration. First batch (A
 ---
 
 #### 3. ApplicationGeneratorModal
+
 - **Path:** `frontend/src/components/ApplicationGeneratorModal.tsx`
 - **Current:** MUI Dialog with stepper and chip
 - **Target:** M3Dialog with M3 stepper and badge
@@ -92,6 +99,7 @@ Phase 4C targets 22 form and utility components for M3 migration. First batch (A
   6. Update all token references
 
 **Key Issues to Fix:**
+
 - Stepper component (MUI Stepper → custom M3 stepper)
 - LinearProgress styling
 - Chip/Badge layout
@@ -99,6 +107,7 @@ Phase 4C targets 22 form and utility components for M3 migration. First batch (A
 ---
 
 #### 4. SmartUploadModal
+
 - **Path:** `frontend/src/components/SmartUploadModal.tsx`
 - **Current:** MUI Dialog with upload area
 - **Target:** M3Dialog with M3Alert
@@ -113,6 +122,7 @@ Phase 4C targets 22 form and utility components for M3 migration. First batch (A
   6. Update all token references
 
 **Key Issues to Fix:**
+
 - Alert styling
 - Layout/spacing
 - Button grouping
@@ -120,6 +130,7 @@ Phase 4C targets 22 form and utility components for M3 migration. First batch (A
 ---
 
 #### 5. Toast (Notification)
+
 - **Path:** `frontend/src/components/ui/Toast/Toast.tsx`
 - **Current:** MUI Snackbar + Alert
 - **Target:** M3Toast (custom component) + M3Alert
@@ -133,6 +144,7 @@ Phase 4C targets 22 form and utility components for M3 migration. First batch (A
   5. Update ToastContext if needed
 
 **Key Issues to Fix:**
+
 - Snackbar positioning → CSS positioning classes
 - Animation/transition tokens
 - Duration/easing tokens
@@ -142,6 +154,7 @@ Phase 4C targets 22 form and utility components for M3 migration. First batch (A
 ### MEDIUM PRIORITY: Form Components (2)
 
 #### 6. M3Select (Incomplete)
+
 - **Path:** `frontend/src/components/M3Select/M3Select.tsx`
 - **Current:** Incomplete - renders as <input> not dropdown
 - **Target:** Full M3 Select dropdown component
@@ -155,6 +168,7 @@ Phase 4C targets 22 form and utility components for M3 migration. First batch (A
   - CSS file exists but incomplete
 
 **Implementation Needs:**
+
 - Proper <select> or custom dropdown rendering
 - Options list with M3 styling
 - Value selection logic
@@ -164,6 +178,7 @@ Phase 4C targets 22 form and utility components for M3 migration. First batch (A
 ---
 
 #### 7. M3DatePicker (Incomplete)
+
 - **Path:** `frontend/src/components/M3DatePicker/M3DatePicker.tsx`
 - **Current:** Incomplete - renders as <input> not calendar
 - **Target:** Full M3 DatePicker with calendar UI
@@ -177,6 +192,7 @@ Phase 4C targets 22 form and utility components for M3 migration. First batch (A
   - CSS file incomplete
 
 **Implementation Needs:**
+
 - Calendar grid rendering
 - Month/year navigation
 - Date selection logic
@@ -189,6 +205,7 @@ Phase 4C targets 22 form and utility components for M3 migration. First batch (A
 ### LOW PRIORITY: Tooltip/Popover Enhancements (2)
 
 #### 8. M3Tooltip (Skeleton)
+
 - **Path:** `frontend/src/components/ui/M3Tooltip.tsx`
 - **Current:** Skeleton - just styled div
 - **Target:** Full Tooltip with trigger and positioning
@@ -205,6 +222,7 @@ Phase 4C targets 22 form and utility components for M3 migration. First batch (A
 ---
 
 #### 9. M3Popover (Skeleton)
+
 - **Path:** `frontend/src/components/ui/M3Popover.tsx`
 - **Current:** Skeleton - just styled div
 - **Target:** Full Popover with trigger and positioning
@@ -223,10 +241,12 @@ Phase 4C targets 22 form and utility components for M3 migration. First batch (A
 ## Execution Strategy
 
 ### Batch 1: Dialog & Modal Components (High Priority)
+
 **Expected Time:** 3-4 hours
 **Components:** Dialog, ConfirmTagsModal, ApplicationGeneratorModal, SmartUploadModal, Toast
 
 **Orchestration Approach:**
+
 1. Use `batch-migration-orchestrator` to coordinate all 8 frontend-migration skills
 2. Skills will process in sequence:
    - m3-layout-refactor: Handle spacing/layout
@@ -240,19 +260,23 @@ Phase 4C targets 22 form and utility components for M3 migration. First batch (A
 3. Manual review and testing after batch completion
 
 ### Batch 2: Form Components (Lower Priority)
+
 **Expected Time:** 3-4 hours
 **Components:** M3Select completion, M3DatePicker completion
 
 **Approach:**
+
 - These require implementation (not just token replacement)
 - May need custom component development
 - Consider deferring to Phase 4D if time-constrained
 
 ### Batch 3: Tooltip/Popover Enhancements
+
 **Expected Time:** 2-3 hours
 **Components:** M3Tooltip completion, M3Popover completion
 
 **Approach:**
+
 - Build out trigger logic and positioning
 - Add animations with M3 motion tokens
 - Comprehensive accessibility testing
@@ -282,6 +306,7 @@ After each component migration:
 ## Success Criteria
 
 **Phase 4C Complete When:**
+
 - ✅ 22 components migrated to M3
 - ✅ 0 hardcoded colors/spacing values
 - ✅ 100% M3 token compliance
@@ -294,12 +319,12 @@ After each component migration:
 
 ## Risk Mitigation
 
-| Risk | Probability | Impact | Mitigation |
-|------|-------------|--------|-----------|
-| Select/DatePicker complexity | Medium | Medium | Defer implementation to Phase 4D if needed |
-| Modal state management issues | Low | Medium | Comprehensive state testing |
-| Responsive design breaks | Low | Medium | Test all breakpoints (xs, sm, md, lg, xl) |
-| Animation performance | Low | Low | Use GPU-accelerated CSS transforms only |
+| Risk                          | Probability | Impact | Mitigation                                 |
+| ----------------------------- | ----------- | ------ | ------------------------------------------ |
+| Select/DatePicker complexity  | Medium      | Medium | Defer implementation to Phase 4D if needed |
+| Modal state management issues | Low         | Medium | Comprehensive state testing                |
+| Responsive design breaks      | Low         | Medium | Test all breakpoints (xs, sm, md, lg, xl)  |
+| Animation performance         | Low         | Low    | Use GPU-accelerated CSS transforms only    |
 
 ---
 
@@ -320,4 +345,3 @@ After each component migration:
 - **Batch 3 (Tooltip/Popover):** 0.5 days (or defer)
 - **Validation & Testing:** 1 day
 - **Total Phase 4C:** 3-4 days
-

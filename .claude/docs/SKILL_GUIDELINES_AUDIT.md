@@ -60,6 +60,7 @@ Your skill infrastructure is well-structured and follows most best practices. Ke
 **Issue:** Using `REFERENCE/` instead of lowercase `references/`
 
 **Affected Skills:** 5 skills
+
 - webapp-testing
 - figma-to-page
 - figma-to-component
@@ -67,6 +68,7 @@ Your skill infrastructure is well-structured and follows most best practices. Ke
 - deployment-manager
 
 **Official Guideline:**
+
 > Bundled resources should use lowercase directory names: `scripts/`, `references/`, `assets/`
 
 **Impact:** Medium - Inconsistent with official conventions, may cause issues with tooling
@@ -80,6 +82,7 @@ Your skill infrastructure is well-structured and follows most best practices. Ke
 **Issue:** No `init-skill.py` or `package-skill.py` scripts available
 
 **Official Guideline:**
+
 > Use `scripts/init_skill.py` to create skeleton directory with template SKILL.md
 > Use `scripts/package_skill.py` to validate structure and create distributable .skill files
 
@@ -96,11 +99,13 @@ Your skill infrastructure is well-structured and follows most best practices. Ke
 **Current Examples:**
 
 **Good Example:**
+
 ```yaml
 description: "Runs or writes Playwright tests for the 'careercopilot' webapp. Use when asked to 'run playwright' or 'write a new e2e test'."
 ```
 
 **Could Be Enhanced:**
+
 ```yaml
 # Current
 description: "Example skill demonstrating YAML best practices"
@@ -110,6 +115,7 @@ description: "Example skill demonstrating YAML best practices. Use when learning
 ```
 
 **Affected Skills:**
+
 - example-skill
 - component-builder
 - project-health-checker
@@ -128,11 +134,13 @@ description: "Example skill demonstrating YAML best practices. Use when learning
 **Location:** `.claude/skills/frontend-migration/*.md` (8 files, 5,036 lines total)
 
 **Official Guideline:**
+
 > Skills should be directories with SKILL.md, not standalone markdown files
 
 **Impact:** Low - They work but don't follow standard structure
 
 **Fix:** Convert to proper skill directories:
+
 ```
 frontend-migration/
   m3-layout-refactor/
@@ -151,6 +159,7 @@ frontend-migration/
 **Example:** `react-component-scaffolder` has inline script logic
 
 **Official Guideline:**
+
 > `scripts/` — Executable code (Python/Bash) for deterministic, repetitive tasks
 
 **Impact:** Low - Works but less reusable
@@ -163,25 +172,26 @@ frontend-migration/
 
 ### Skill-by-Skill Breakdown
 
-| Skill Name | SKILL.md Lines | References | Compliance | Notes |
-|------------|----------------|------------|------------|-------|
-| task-delegator | 375 | 0 | ✅ 100% | Well-structured |
-| jest-test-scaffolder | 197 | 0 | ✅ 100% | Comprehensive examples |
-| component-builder | 160 | 0 | ⚠️ 90% | Description could be enhanced |
-| api-contract-validator | 157 | 0 | ✅ 100% | Excellent documentation |
-| frontend-backend-mapper | 148 | 0 | ✅ 100% | Clear workflow |
-| pdf (document-skills) | 104 | 0 | ✅ 100% | Good structure |
-| pydantic-model-scaffolder | 100 | 0 | ✅ 100% | Concise and clear |
-| api-integration-test-scaffolder | 95 | 0 | ✅ 100% | Well-defined steps |
-| fastapi-endpoint-scaffolder | 65 | 0 | ✅ 100% | Good examples |
-| example-skill | 34 | 2 | ⚠️ 80% | REFERENCE→references, enhance description |
-| webapp-testing | 19 | 1 | ⚠️ 85% | REFERENCE→references |
-| deployment-manager | 12 | 1 | ⚠️ 85% | REFERENCE→references |
-| react-component-scaffolder | 11 | 0 | ⚠️ 90% | Inline script could be extracted |
+| Skill Name                      | SKILL.md Lines | References | Compliance | Notes                                     |
+| ------------------------------- | -------------- | ---------- | ---------- | ----------------------------------------- |
+| task-delegator                  | 375            | 0          | ✅ 100%    | Well-structured                           |
+| jest-test-scaffolder            | 197            | 0          | ✅ 100%    | Comprehensive examples                    |
+| component-builder               | 160            | 0          | ⚠️ 90%     | Description could be enhanced             |
+| api-contract-validator          | 157            | 0          | ✅ 100%    | Excellent documentation                   |
+| frontend-backend-mapper         | 148            | 0          | ✅ 100%    | Clear workflow                            |
+| pdf (document-skills)           | 104            | 0          | ✅ 100%    | Good structure                            |
+| pydantic-model-scaffolder       | 100            | 0          | ✅ 100%    | Concise and clear                         |
+| api-integration-test-scaffolder | 95             | 0          | ✅ 100%    | Well-defined steps                        |
+| fastapi-endpoint-scaffolder     | 65             | 0          | ✅ 100%    | Good examples                             |
+| example-skill                   | 34             | 2          | ⚠️ 80%     | REFERENCE→references, enhance description |
+| webapp-testing                  | 19             | 1          | ⚠️ 85%     | REFERENCE→references                      |
+| deployment-manager              | 12             | 1          | ⚠️ 85%     | REFERENCE→references                      |
+| react-component-scaffolder      | 11             | 0          | ⚠️ 90%     | Inline script could be extracted          |
 
 ### M3 Migration Skills (Special Case)
 
 Located in `.claude/skills/frontend-migration/`:
+
 - m3-layout-refactor.md (460 lines)
 - m3-color-themer.md (530 lines)
 - m3-typography-classifier.md (626 lines)
@@ -253,12 +263,14 @@ done
 ### Phase 2: Automation Tooling (3-4 hours)
 
 Create `.claude/scripts/init-skill.py`:
+
 - Generate skill directory structure
 - Create template SKILL.md with frontmatter
 - Create `scripts/`, `references/`, `assets/` subdirectories
 - Include example templates
 
 Create `.claude/scripts/package-skill.py`:
+
 - Validate YAML frontmatter
 - Check for required fields (name, description)
 - Validate reference depth (no nesting)
@@ -269,6 +281,7 @@ Create `.claude/scripts/package-skill.py`:
 ### Phase 3: M3 Migration Restructure (6-8 hours)
 
 Convert M3 migration skills to directory structure:
+
 ```
 frontend-migration/
   m3-layout-refactor/
@@ -338,4 +351,3 @@ After implementing fixes, validate:
 7. ⬜ Document new workflow in CLAUDE.md
 
 **Estimated Total Effort:** 10-14 hours across all phases
-

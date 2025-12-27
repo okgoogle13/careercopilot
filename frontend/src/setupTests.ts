@@ -6,6 +6,23 @@ import '@testing-library/jest-dom';
 import { jest } from '@jest/globals';
 import { cleanup } from '@testing-library/react';
 
+// Mock import.meta for Vite compatibility
+(global as any).import = {
+  meta: {
+    env: {
+      VITE_API_URL: 'http://localhost:8000',
+      VITE_FIREBASE_API_KEY: 'test-api-key',
+      VITE_FIREBASE_AUTH_DOMAIN: 'test.firebaseapp.com',
+      VITE_FIREBASE_PROJECT_ID: 'test-project',
+      VITE_FIREBASE_STORAGE_BUCKET: 'test.appspot.com',
+      VITE_FIREBASE_MESSAGING_SENDER_ID: '123456789',
+      VITE_FIREBASE_APP_ID: '1:123456789:web:abcdef',
+      DEV: true,
+      MODE: 'test',
+    },
+  },
+};
+
 // Make jest available globally
 (global as any).jest = jest;
 
@@ -14,21 +31,16 @@ afterEach(() => {
   cleanup();
 });
 
-// Mock Firebase config module to avoid import.meta issues
-jest.mock('./firebase-config', () => ({
+// Mock Firebase
+// Mock Firebase (using manual mocks in __mocks__)
+jest.mock('firebase/auth');
+jest.mock('firebase/app');
+jest.mock('./config/firebase', () => ({
   auth: {
     currentUser: null,
-    signInWithEmailAndPassword: jest.fn(),
-    signOut: jest.fn(),
-    onAuthStateChanged: jest.fn(),
   },
-  db: {
-    collection: jest.fn(),
-    doc: jest.fn(),
-  },
-  storage: {
-    ref: jest.fn(),
-  },
+  db: {},
+  storage: {},
 }));
 
 // Mock window.matchMedia for Material-UI components
@@ -48,35 +60,43 @@ Object.defineProperty(window, 'matchMedia', {
 
 // Mock ResizeObserver
 class ResizeObserver {
-  observe() {}
-  unobserve() {}
-  disconnect() {}
+  observe() { }
+  unobserve() { }
+  disconnect() { }
 }
 
 window.ResizeObserver = ResizeObserver;
 
 // Mock next/navigation
-jest.mock('next/navigation', () => ({
-  useRouter: () => ({
-    push: jest.fn(),
-    replace: jest.fn(),
-    prefetch: jest.fn(),
+jest.mock(
+  'next/navigation',
+  () => ({
+    useRouter: () => ({
+      push: jest.fn(),
+      replace: jest.fn(),
+      prefetch: jest.fn(),
+    }),
+    useSearchParams: () => ({
+      get: jest.fn(),
+    }),
+    usePathname: () => '/',
   }),
-  useSearchParams: () => ({
-    get: jest.fn(),
-  }),
-  usePathname: () => '/',
-}), { virtual: true });
+  { virtual: true }
+);
 
 // Mock next-auth/react
-jest.mock('next-auth/react', () => ({
-  useSession: jest.fn(() => ({
-    data: null,
-    status: 'unauthenticated',
-  })),
-  signIn: jest.fn(),
-  signOut: jest.fn(),
-}), { virtual: true });
+jest.mock(
+  'next-auth/react',
+  () => ({
+    useSession: jest.fn(() => ({
+      data: null,
+      status: 'unauthenticated',
+    })),
+    signIn: jest.fn(),
+    signOut: jest.fn(),
+  }),
+  { virtual: true }
+);
 
 // Mock console methods to reduce test noise
 const consoleError = console.error;
@@ -84,7 +104,10 @@ const consoleWarn = console.warn;
 
 beforeAll(() => {
   console.error = (message) => {
-    if (typeof message !== 'string' || !message.includes('ReactDOM.render is no longer supported')) {
+    if (
+      typeof message !== 'string' ||
+      !message.includes('ReactDOM.render is no longer supported')
+    ) {
       consoleError(message);
     }
   };

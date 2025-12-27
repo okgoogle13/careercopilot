@@ -13,6 +13,7 @@
 **Pattern:** `Cannot find module '../ComponentName'`
 
 **Affected Files:**
+
 1. `ProfileGrid.test.tsx` → Cannot find `../ProfileGrid`
 2. `ConfirmTagsModal.test.tsx` → Cannot find `../../ConfirmTagsModal`
 3. `JobCard.test.tsx` (jobs) → Cannot find `../../features/JobCard`
@@ -25,12 +26,14 @@
 10. `JobCard.test.tsx` (opportunities) → Cannot find `../JobCard`
 11. `DashboardHeader.test.tsx` → Cannot find `../dashboard/DashboardHeader`
 
-**Root Cause:** 
+**Root Cause:**
+
 - Components may have been moved/renamed
 - Import paths are incorrect
 - Components may not exist yet
 
 **Fix Strategy:**
+
 1. Find actual component location using `glob_file_search`
 2. Update import path to match actual location
 3. Use absolute paths (`@/...`) when possible for consistency
@@ -42,13 +45,16 @@
 **Pattern:** `Configuration error: Could not locate module`
 
 **Affected Files:**
+
 1. `DocumentsPage.test.tsx` → `@/components/documentsPage` mapping issue
 
-**Root Cause:** 
+**Root Cause:**
+
 - Jest moduleNameMapper configuration issue
 - Path alias not configured correctly
 
 **Fix Strategy:**
+
 1. Check `jest.config.mjs` for `moduleNameMapper`
 2. Verify path alias configuration
 3. Update import to use correct alias or relative path
@@ -60,13 +66,16 @@
 **Pattern:** `Cannot find module '../../../config/navigation'`
 
 **Affected Files:**
+
 1. `Navbar.test.tsx` → Missing navigation config
 
-**Root Cause:** 
+**Root Cause:**
+
 - Navigation config file doesn't exist or moved
 - Test needs mock/stub
 
 **Fix Strategy:**
+
 1. Create navigation config mock in test
 2. Or find actual navigation config location
 3. Update import path
@@ -76,6 +85,7 @@
 ## 🔧 Quick Fix Commands
 
 ### Find Component Locations
+
 ```bash
 # Find a component
 find frontend/src -name "ProfileGrid.tsx" -o -name "ProfileGrid.ts"
@@ -84,6 +94,7 @@ find frontend/src -name "JobCard.tsx" -o -name "JobCard.ts"
 ```
 
 ### Fix Import Paths
+
 ```bash
 # Example: Fix ProfileGrid import
 # 1. Find actual location
@@ -104,12 +115,14 @@ find frontend/src -name "ProfileGrid.*"
 **Expected Fixes:** 11 test suites
 
 **Steps:**
+
 1. For each failing test:
    - Find actual component location
    - Update import path
    - Verify test runs
 
 **Files to Fix:**
+
 - [ ] `ProfileGrid.test.tsx`
 - [ ] `ConfirmTagsModal.test.tsx`
 - [ ] `JobCard.test.tsx` (jobs)
@@ -128,6 +141,7 @@ find frontend/src -name "ProfileGrid.*"
 **Expected Fixes:** 1-2 test suites
 
 **Steps:**
+
 1. Check `jest.config.mjs` for path mappings
 2. Fix DocumentsPage import
 3. Verify configuration
@@ -138,6 +152,7 @@ find frontend/src -name "ProfileGrid.*"
 **Expected Fixes:** 1 test suite
 
 **Steps:**
+
 1. Create navigation config mock
 2. Or find actual config location
 3. Update test
@@ -158,6 +173,7 @@ find frontend/src -name "ProfileGrid.*"
 ## 🚀 Next Steps
 
 1. **Run systematic fixes:**
+
    ```bash
    # Fix one test at a time
    yarn test ProfileGrid
@@ -166,6 +182,7 @@ find frontend/src -name "ProfileGrid.*"
    ```
 
 2. **Verify fixes:**
+
    ```bash
    yarn test
    ```
@@ -187,4 +204,3 @@ find frontend/src -name "ProfileGrid.*"
 
 **Last Updated:** 2025-01-XX  
 **Status:** Analysis complete - Ready for systematic fixes
-

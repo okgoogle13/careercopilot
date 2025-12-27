@@ -1,4 +1,4 @@
- # Firestore Optimization Analysis & Recommendations
+# Firestore Optimization Analysis & Recommendations
 
 **Date:** 2025-11-07
 **Project:** CareerCopilot
@@ -24,14 +24,14 @@ CareerCopilot uses Firebase Cloud Firestore for data storage, caching, and user 
 
 ### Collection Mapping
 
-| Collection | Purpose | Doc Count Est. | Write Freq. | Read Freq. | Size/Doc | Status |
-|------------|---------|----------------|------------|-----------|----------|--------|
-| `redis_cache` | LLM response caching | 10K-50K | Medium | High | 2KB | ✅ Active |
-| `user_profiles` | User account data | 1K | Low | High | 10KB | ✅ Active |
-| `job_applications` | Application tracking | 5K-10K | Medium | Medium | 5KB | ✅ Active |
-| `documents` | Resume/cover letter storage | 2K-5K | Medium | Medium | 8KB | ✅ Active |
-| `workflows` | AI workflow state | 5K-20K | High | High | 3KB | ✅ Active |
-| `jobs` | Job listing cache | 1K-5K | Low | Medium | 7KB | ⚠️ Legacy? |
+| Collection         | Purpose                     | Doc Count Est. | Write Freq. | Read Freq. | Size/Doc | Status     |
+| ------------------ | --------------------------- | -------------- | ----------- | ---------- | -------- | ---------- |
+| `redis_cache`      | LLM response caching        | 10K-50K        | Medium      | High       | 2KB      | ✅ Active  |
+| `user_profiles`    | User account data           | 1K             | Low         | High       | 10KB     | ✅ Active  |
+| `job_applications` | Application tracking        | 5K-10K         | Medium      | Medium     | 5KB      | ✅ Active  |
+| `documents`        | Resume/cover letter storage | 2K-5K          | Medium      | Medium     | 8KB      | ✅ Active  |
+| `workflows`        | AI workflow state           | 5K-20K         | High        | High       | 3KB      | ✅ Active  |
+| `jobs`             | Job listing cache           | 1K-5K          | Low         | Medium     | 7KB      | ⚠️ Legacy? |
 
 ### Collection Details
 
@@ -40,6 +40,7 @@ CareerCopilot uses Firebase Cloud Firestore for data storage, caching, and user 
 **Purpose:** Cache LLM API responses to reduce cost and latency
 
 **Document Structure:**
+
 ```json
 {
   "value": {
@@ -53,11 +54,13 @@ CareerCopilot uses Firebase Cloud Firestore for data storage, caching, and user 
 ```
 
 **Current Statistics:**
+
 - Estimated documents: 10K-50K (depends on cache hit rate)
 - Average doc size: 2KB
 - Estimated monthly storage: 20-100MB ($0.04-0.18/month)
 
 **Optimization Opportunities:**
+
 1. **Enable TTL field policy** (auto-delete expired documents)
 2. **Add composite index** for `expires_at` + `created_at`
 3. **Implement cache warming** (pre-populate common queries)
@@ -73,6 +76,7 @@ CareerCopilot uses Firebase Cloud Firestore for data storage, caching, and user 
 **Purpose:** Store user profile information, preferences, settings
 
 **Document Structure:**
+
 ```json
 {
   "user_id": "...",
@@ -87,11 +91,13 @@ CareerCopilot uses Firebase Cloud Firestore for data storage, caching, and user 
 ```
 
 **Current Statistics:**
+
 - Estimated documents: 1K (active users)
 - Average doc size: 10KB
 - Estimated monthly storage: 10MB ($0.018/month)
 
 **Optimization Opportunities:**
+
 1. **Add composite index** for `created_at` (for user cohort analysis)
 2. **Denormalize skills** (currently array = slow filtering)
 3. **Move profile_image to Cloud Storage** (reduce document size)
@@ -107,6 +113,7 @@ CareerCopilot uses Firebase Cloud Firestore for data storage, caching, and user 
 **Purpose:** Store user job application history and status
 
 **Document Structure:**
+
 ```json
 {
   "user_id": "...",
@@ -122,11 +129,13 @@ CareerCopilot uses Firebase Cloud Firestore for data storage, caching, and user 
 ```
 
 **Current Statistics:**
+
 - Estimated documents: 5K-10K
 - Average doc size: 5KB
 - Estimated monthly storage: 25-50MB ($0.045-0.09/month)
 
 **Optimization Opportunities:**
+
 1. **Add composite indexes:**
    - `user_id` + `status` (filter by status)
    - `user_id` + `applied_date` (timeline queries)
@@ -145,6 +154,7 @@ CareerCopilot uses Firebase Cloud Firestore for data storage, caching, and user 
 **Purpose:** Store generated/uploaded documents
 
 **Document Structure:**
+
 ```json
 {
   "user_id": "...",
@@ -159,11 +169,13 @@ CareerCopilot uses Firebase Cloud Firestore for data storage, caching, and user 
 ```
 
 **Current Statistics:**
+
 - Estimated documents: 2K-5K
 - Average doc size: 8KB (content stored in Firestore)
 - Estimated monthly storage: 16-40MB ($0.03-0.07/month)
 
 **Optimization Opportunities:**
+
 1. **Move content to Cloud Storage** (Firestore holds only metadata)
 2. **Add composite index** for `user_id` + `document_type`
 3. **Implement TTL for drafts** (auto-delete after 30 days)
@@ -180,6 +192,7 @@ CareerCopilot uses Firebase Cloud Firestore for data storage, caching, and user 
 **Purpose:** Track multi-step AI workflow execution state
 
 **Document Structure:**
+
 ```json
 {
   "user_id": "...",
@@ -194,11 +207,13 @@ CareerCopilot uses Firebase Cloud Firestore for data storage, caching, and user 
 ```
 
 **Current Statistics:**
+
 - Estimated documents: 5K-20K (high volume due to Genkit flows)
 - Average doc size: 3KB
 - Estimated monthly storage: 15-60MB ($0.03-0.11/month)
 
 **Optimization Opportunities:**
+
 1. **Enable TTL policy** (auto-delete completed workflows after 7 days)
 2. **Add composite index** for `user_id` + `status` + `created_at`
 3. **Archive old workflows** (move to separate collection after 30 days)
@@ -215,19 +230,20 @@ CareerCopilot uses Firebase Cloud Firestore for data storage, caching, and user 
 ### Current Monthly Costs (Estimated)
 
 **Assumptions:**
+
 - 1,000 active users
 - Average 10 reads/user/day = 10K reads/day = 300K reads/month
 - Average 2 writes/user/day = 2K writes/day = 60K writes/month
 - Storage: ~200MB total
 
-| Operation | Count/Month | Unit Cost | Monthly Cost |
-|-----------|------------|-----------|--------------|
-| **Reads** | 300,000 | $0.036/100K | $10.80 |
-| **Writes** | 60,000 | $0.108/100K | $6.48 |
-| **Deletes** | 10,000 | $0.108/100K | $1.08 |
-| **Storage** | 200 GB-months | $0.18/GB | $36.00 |
-| **Indexes** | 12 indexes | $0.25/100K ops | $1.50 |
-| **TOTAL** | — | — | **$55.86/month** |
+| Operation   | Count/Month   | Unit Cost      | Monthly Cost     |
+| ----------- | ------------- | -------------- | ---------------- |
+| **Reads**   | 300,000       | $0.036/100K    | $10.80           |
+| **Writes**  | 60,000        | $0.108/100K    | $6.48            |
+| **Deletes** | 10,000        | $0.108/100K    | $1.08            |
+| **Storage** | 200 GB-months | $0.18/GB       | $36.00           |
+| **Indexes** | 12 indexes    | $0.25/100K ops | $1.50            |
+| **TOTAL**   | —             | —              | **$55.86/month** |
 
 ---
 
@@ -235,14 +251,14 @@ CareerCopilot uses Firebase Cloud Firestore for data storage, caching, and user 
 
 With all optimizations implemented:
 
-| Optimization | Savings | Implementation |
-|--------------|---------|-----------------|
-| Enable TTL (auto-delete cache) | -50% reads = -$5.40 | 10 min |
-| Add composite indexes | -30% reads = -$3.24 | 1 hour |
-| Move large docs to Cloud Storage | -40% storage = -$14.40 | 4-5 hours |
-| Archive old workflows | -50% storage = -$18.00 | 2-3 hours |
-| Query optimization (pagination) | -20% reads = -$2.16 | 2 hours |
-| **TOTAL SAVINGS** | **-$43.20/month (77%)** | **10-15 hours** |
+| Optimization                     | Savings                 | Implementation  |
+| -------------------------------- | ----------------------- | --------------- |
+| Enable TTL (auto-delete cache)   | -50% reads = -$5.40     | 10 min          |
+| Add composite indexes            | -30% reads = -$3.24     | 1 hour          |
+| Move large docs to Cloud Storage | -40% storage = -$14.40  | 4-5 hours       |
+| Archive old workflows            | -50% storage = -$18.00  | 2-3 hours       |
+| Query optimization (pagination)  | -20% reads = -$2.16     | 2 hours         |
+| **TOTAL SAVINGS**                | **-$43.20/month (77%)** | **10-15 hours** |
 
 **Optimized Monthly Cost: $12.66** (vs $55.86 current)
 
@@ -281,6 +297,7 @@ With all optimizations implemented:
    - **Effort:** 1-2 hours (update query logic)
    - **ROI:** Significant UX improvement + cost reduction
    - **Pattern:**
+
      ```python
      # Before: Returns all 100 documents
      docs = db.collection("job_applications").where("user_id", "==", user_id).stream()
@@ -294,6 +311,7 @@ With all optimizations implemented:
    - **Effort:** 3-4 hours (migrate document content)
    - **ROI:** Significant storage reduction
    - **Pattern:**
+
      ```python
      # Firestore: Store only metadata
      {
@@ -392,6 +410,7 @@ documents:
 ### Indexes to REMOVE ❌
 
 (Review existing indexes via Firebase Console)
+
 - Any single-field indexes (Firestore creates these automatically)
 - Indexes on low-cardinality fields (status, type)
 - Unused indexes (check query logs)
@@ -566,7 +585,7 @@ ORDER BY monthly_cost DESC;
 ```yaml
 alerts:
   - name: "Firestore Cost Spike"
-    threshold: "$75/month"  # Current: $55.86
+    threshold: "$75/month" # Current: $55.86
     action: "Investigate query patterns"
 
   - name: "High Read Rate"
