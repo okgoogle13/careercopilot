@@ -5,12 +5,18 @@
  */
 
 import React, { useState } from 'react';
-import { SwapHoriz, Download, Share } from 'lucide-react';
-import { Button } from '@/components';
-import { Card } from '@/components';
-import { Badge } from '@/components/electric';
-import { ATSScoreCircle } from '@/components/custom';
-import { Tabs } from '@/components/electric';
+import { ArrowLeftRight as SwapHoriz, Download, Share } from 'lucide-react';
+import { Button } from '@careercopilot/ui';
+import { Card } from '@careercopilot/ui';
+import { Badge } from '@careercopilot/ui';
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@careercopilot/ui';
+
+// Mock component to satisfy build until custom components are migrated
+const ATSScoreCircle = ({ score, size }: { score: number; size?: string }) => (
+  <div className={`p-2 rounded-full border-2 border-primary flex items-center justify-center font-bold ${size === 'small' ? 'w-10 h-10 text-xs' : 'w-20 h-20 text-lg'}`}>
+    {score}
+  </div>
+);
 
 interface ProfileData {
   id: string;
@@ -207,11 +213,11 @@ export function ProfileComparison({
         </div>
 
         <div className="flex gap-2">
-          <Button variant="outline" onClick={onSwapProfiles}>
+          <Button variant="outlined" onClick={onSwapProfiles}>
             <SwapHoriz className="h-4 w-4 mr-2" />
             Swap Profiles
           </Button>
-          <Button variant="outline">
+          <Button variant="outlined">
             <Download className="h-4 w-4 mr-2" />
             Export Comparison
           </Button>
@@ -229,7 +235,7 @@ export function ProfileComparison({
             <h3 className="text-hero text-base font-medium text-on-surface">
               Profile Version 1
             </h3>
-            <Button variant="outline" size="sm" onClick={() => onProfileSelect?.('left')}>
+            <Button variant="outlined" size="small" onClick={() => onProfileSelect?.('left')}>
               Change Profile
             </Button>
           </div>
@@ -265,7 +271,7 @@ export function ProfileComparison({
             <h3 className="text-hero text-base font-medium text-on-surface">
               Profile Version 2
             </h3>
-            <Button variant="outline" size="sm" onClick={() => onProfileSelect?.('right')}>
+            <Button variant="outlined" size="small" onClick={() => onProfileSelect?.('right')}>
               Change Profile
             </Button>
           </div>
@@ -298,10 +304,24 @@ export function ProfileComparison({
       </div>
 
       {/* Section Navigation */}
-      <Tabs
-        tabs={tabs}
-        defaultTab="overview"
-      />
+      <Tabs defaultValue="overview" className="w-full">
+        <TabsList className="mb-6">
+          {tabs.map((tab) => (
+            <TabsTrigger
+              key={tab.id}
+              value={tab.id}
+              disabled={tab.disabled}
+            >
+              {tab.label}
+            </TabsTrigger>
+          ))}
+        </TabsList>
+        {tabs.map((tab) => (
+          <TabsContent key={tab.id} value={tab.id}>
+            {tab.content}
+          </TabsContent>
+        ))}
+      </Tabs>
     </div>
   );
 }

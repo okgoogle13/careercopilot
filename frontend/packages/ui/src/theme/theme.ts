@@ -17,5 +17,5 @@
  */
 
 // Re-export the main application theme
-export { default } from '../../../src/theme/theme';
-export * from '../../../src/theme/theme';
+export { default } from '../../../../src/theme/theme';
+export * from '../../../../src/theme/theme';

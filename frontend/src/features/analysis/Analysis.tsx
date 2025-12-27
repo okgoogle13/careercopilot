@@ -24,8 +24,8 @@ import { KeywordTag } from '../../components/shared/KeywordTag';
 import { PageHeader } from '../../components/shared/PageHeader';
 import { ChartPane } from '../../components/shared/ChartPane';
 import { ImpactEnhancements } from '../../components/shared/ImpactEnhancements';
-import { Button } from '../../components/ui/button';
-import { Textarea } from '../../components/ui/textarea';
+import { Button } from '@careercopilot/ui';
+import { Textarea } from '@careercopilot/ui';
 import { useAnalysis } from '../../hooks/useAnalysis';
 import { exportToPdf } from '../../utils/exportEngine';
 
@@ -235,7 +235,7 @@ export function Analysis() {
           />
           <Button
             onClick={handleDownloadAnalysis}
-            variant="outline"
+            variant="outlined"
             className="rounded-pebble px-6"
           >
             <Download className="w-4 h-4 mr-2" />

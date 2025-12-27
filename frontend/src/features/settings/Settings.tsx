@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../components/ui/tabs';
-import { Input } from '../../components/ui/input';
-import { Textarea } from '../../components/ui/textarea';
-import { Button } from '../../components/ui/button';
-import { Switch } from '../../components/ui/switch';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@careercopilot/ui';
+import { Input } from '@careercopilot/ui';
+import { Textarea } from '@careercopilot/ui';
+import { Button } from '@careercopilot/ui';
+import { Switch } from '@careercopilot/ui';
 import { PageHeader } from '../../components/shared/PageHeader';
 
 export function Settings() {

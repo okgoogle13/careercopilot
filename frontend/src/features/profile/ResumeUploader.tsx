@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Upload, FileText, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { Button } from '@/components/ui/button'; // Assuming shadcn button exists
+import { Button } from '@careercopilot/ui'; // Assuming shadcn button exists
 
 import { useAuth } from '@/context/AuthContext';
 
@@ -50,7 +50,7 @@ export default function ResumeUploader({ onUploadSuccess }: ResumeUploaderProps)
             const formData = new FormData();
             formData.append('files', file);
 
-            const token = user ? await user.getIdToken() : null;
+            const token = user?.getIdToken ? await user.getIdToken() : null;
             const headers: Record<string, string> = {};
             if (token) {
                 headers['Authorization'] = `Bearer ${token}`;
@@ -166,7 +166,7 @@ export default function ResumeUploader({ onUploadSuccess }: ResumeUploaderProps)
                             <p className="text-title-medium font-bold text-green-700">
                                 Analysis Complete!
                             </p>
-                            <Button className="mt-6" variant="outline" onClick={(e) => { e.stopPropagation(); setStatus('idle'); }}>
+                            <Button className="mt-6" variant="outlined" onClick={(e) => { e.stopPropagation(); setStatus('idle'); }}>
                                 Upload Another
                             </Button>
                         </motion.div>
@@ -188,7 +188,7 @@ export default function ResumeUploader({ onUploadSuccess }: ResumeUploaderProps)
                             <p className="text-body-medium text-on-error-container mt-2 mb-4">
                                 {errorMessage}
                             </p>
-                            <Button variant="default" onClick={(e) => { e.stopPropagation(); setStatus('idle'); }}>
+                            <Button variant="contained" onClick={(e) => { e.stopPropagation(); setStatus('idle'); }}>
                                 Try Again
                             </Button>
                         </motion.div>

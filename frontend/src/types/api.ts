@@ -1,3 +1,37 @@
+export interface ApiResponse<T = any> {
+  data: T;
+  message?: string;
+  success: boolean;
+  timestamp: string;
+}
+
+export interface ApiError {
+  code: string;
+  message: string;
+  details?: any;
+}
+
+export const isApiError = (error: any): error is ApiError => {
+  return (
+    error !== null &&
+    typeof error === 'object' &&
+    'code' in error &&
+    'message' in error
+  );
+};
+
+export const createErrorResponse = (
+  code: string,
+  message: string,
+  details?: any
+): ApiError => {
+  return {
+    code,
+    message,
+    details,
+  };
+};
+
 export type SkillProficiency = "Novice" | "Competent" | "Proficient" | "Expert" | "Master";
 
 export enum WorkType {

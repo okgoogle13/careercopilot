@@ -245,17 +245,39 @@ resolve issues**
 
 ### Component Migration Priority
 
-Based on typical structure, recommended order:
+**Overall Progress: 26 of ~56 components migrated (~46%)**
 
-1. **Button** (test case - already structured)
-2. **Card** (commonly used)
-3. **Input / TextField** (forms)
-4. **Dialog / Modal** (overlays)
-5. **Alert / Snackbar** (feedback)
-6. **Progress / Skeleton** (loading states)
-7. Other UI components as identified in inventory
+#### ✅ Migrated to `@careercopilot/ui` (26 components):
 
-**Migration Rate**: 2-3 components per day (safe, tested pace)
+**MUI-based:**
+- [x] Button
+
+**Form Elements:**
+- [x] Input, Textarea, Checkbox, Label, Select, Switch, Slider, Radio-group
+
+**Layout & Structure:**
+- [x] Card, Separator, Skeleton, Accordion, Scroll-area
+
+**Feedback & Indicators:**
+- [x] Alert, Badge, Progress, Tooltip
+
+**Navigation & Menus:**
+- [x] Tabs, Breadcrumb, Dropdown-menu
+
+**Overlays & Modals:**
+- [x] Dialog, Sheet, Popover, Hover-card
+
+**Profile & Display:**
+- [x] Avatar
+
+#### ⏳ Remaining in `src/components/ui` (30 components):
+- alert-dialog, aspect-ratio, button (legacy), calendar, carousel, chart
+- collapsible, command, context-menu, drawer, form, icon-badge
+- input-otp, keyword-tag, menubar, metric-card, navigation-menu
+- page-header, pagination, resizable, sidebar, sonner, stat-card
+- table, toggle, toggle-group, utils
+
+**Migration Rate**: Batch migration with automated tools
 
 ### What NOT to Migrate
 
