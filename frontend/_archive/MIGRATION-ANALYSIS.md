@@ -1,24 +1,27 @@
 # Frontend Component Migration Analysis
 
-**Generated:** 2025-11-02
-**Status:** ✅ Infrastructure Ready, Analysis Complete
+**Generated:** 2025-11-02 **Status:** ✅ Infrastructure Ready, Analysis Complete
 **Total Components Analyzed:** 265
 
 ---
 
 ## Executive Summary
 
-The component inventory analysis has been completed successfully. The frontend codebase contains:
+The component inventory analysis has been completed successfully. The frontend
+codebase contains:
 
 - **32 UI components** in `src/components/ui/`
 - **13 library components** in `src/components/library/`
 - **167 "other" components** (mostly in "Figma UI Files" - not part of main app)
-- **38 feature components**, **5 layout components**, **5 main components**, **5 document components**
+- **38 feature components**, **5 layout components**, **5 main components**, **5
+  document components**
 
 ### Key Findings
 
-1. ✅ **Infrastructure is ready** for migration (workspace configured, theme resolved, scripts created)
-2. ⚠️ **Only 1 component** (Button) has both tests and stories - proper migration candidate
+1. ✅ **Infrastructure is ready** for migration (workspace configured, theme
+   resolved, scripts created)
+2. ⚠️ **Only 1 component** (Button) has both tests and stories - proper
+   migration candidate
 3. ⚠️ **262 components lack test coverage** (98.9%)
 4. ⚠️ **114 components appear unused** (43%)
 5. ⚠️ **98 components are complex** (>200 LOC or >10 dependencies)
@@ -30,6 +33,7 @@ The component inventory analysis has been completed successfully. The frontend c
 ### Tier 1: Immediate Migration Candidates (1 component)
 
 **Button** - The ONLY component with tests AND stories
+
 - **Location:** `src/components/ui/Button/Button.tsx`
 - **Usage:** 2 direct usages
 - **Tests:** ✅ Has tests
@@ -48,7 +52,8 @@ These components are heavily used but **lack tests and stories**:
 5. **progress** - 7 usages - `src/components/ui/progress.tsx`
 6. **button** (lowercase) - 6 usages - `src/components/ui/button.tsx`
 
-**⚠️ Critical Requirement:** These components **MUST have tests written BEFORE migration** to prevent breaking changes.
+**⚠️ Critical Requirement:** These components **MUST have tests written BEFORE
+migration** to prevent breaking changes.
 
 ### Tier 3: Medium-Usage UI Components (10 components)
 
@@ -95,7 +100,8 @@ These are **demonstration components**, not reusable UI:
 - UsageGuidelinesSection
 - DemoLinksSection
 
-**Action:** Keep in `src/components/library/` - they showcase UI components, not standalone components.
+**Action:** Keep in `src/components/library/` - they showcase UI components, not
+standalone components.
 
 ### Potentially Reusable Library Components (3)
 
@@ -103,7 +109,8 @@ These are **demonstration components**, not reusable UI:
 2. **ATSScoreCircle** - 1 usage - Career-specific visualization
 3. **KeywordTag** - 0 usages - Unused, consider removing
 
-**Recommendation:** Keep ComponentDemo as utility. Evaluate ATSScoreCircle for feature components. Remove KeywordTag.
+**Recommendation:** Keep ComponentDemo as utility. Evaluate ATSScoreCircle for
+feature components. Remove KeywordTag.
 
 ---
 
@@ -114,13 +121,15 @@ These are **demonstration components**, not reusable UI:
 **Goal:** Validate migration process with single well-tested component
 
 1. **Migrate Button component** (has tests + stories)
-   - Run dry-run: `npx ts-node scripts/safe-migrate-component.ts Button --dry-run`
+   - Run dry-run:
+     `npx ts-node scripts/safe-migrate-component.ts Button --dry-run`
    - Execute migration: `npx ts-node scripts/safe-migrate-component.ts Button`
    - Verify all tests pass
    - Verify Storybook loads
    - Document any issues
 
 **Success Criteria:**
+
 - ✅ Button migrated to `@careercopilot/ui`
 - ✅ All imports updated automatically
 - ✅ Tests pass
@@ -132,6 +141,7 @@ These are **demonstration components**, not reusable UI:
 **Goal:** Migrate high-usage components after adding test coverage
 
 **Step 1: Write Tests First** (1-2 weeks)
+
 1. badge (21 usages) - Write comprehensive tests
 2. input (9 usages) - Write form integration tests
 3. card (8 usages) - Write layout and variant tests
@@ -140,6 +150,7 @@ These are **demonstration components**, not reusable UI:
 6. button (lowercase, 6 usages) - Merge with Button or deprecate
 
 **Step 2: Migrate with Verification** (1-2 weeks)
+
 - Migrate badge → Verify → Commit
 - Migrate input → Verify → Commit
 - Migrate card → Verify → Commit
@@ -151,10 +162,12 @@ These are **demonstration components**, not reusable UI:
 ### Phase 3: Medium-Usage Components (2-3 weeks)
 
 Migrate remaining UI components with moderate usage:
+
 - tooltip, skeleton, label, avatar, dialog, tabs
 - separator, switch, slider, checkbox, popover, radio-group
 
 **Approach:**
+
 1. Write basic tests
 2. Migrate component
 3. Verify functionality
@@ -227,17 +240,20 @@ describe('Badge', () => {
 ### Simple Components (<50 LOC, <3 dependencies)
 
 Fastest to migrate:
+
 - badge, checkbox, label, separator, alert-dialog
 
 ### Medium Components (50-200 LOC, 3-10 dependencies)
 
 Require careful testing:
+
 - button, card, input, textarea, progress
 - avatar, dialog, tabs, switch, tooltip
 
 ### Complex Components (>200 LOC, >10 dependencies)
 
 Highest risk, thorough testing required:
+
 - dropdown-menu (if migrated)
 - Any components with >10 external dependencies
 
@@ -294,7 +310,8 @@ yarn storybook         # Verify Storybook loads
 
 ### Medium Risk ⚠️
 
-- **High-usage components** (badge, input, card) - require comprehensive tests first
+- **High-usage components** (badge, input, card) - require comprehensive tests
+  first
 - **Components with external dependencies** - verify dependency compatibility
 
 ### High Risk ❌
@@ -324,14 +341,14 @@ yarn storybook         # Verify Storybook loads
 
 ## Timeline Estimate
 
-| Phase | Duration | Components | Status |
-|-------|----------|------------|--------|
-| **Infrastructure Setup** | 2 days | N/A | ✅ COMPLETE |
-| **Phase 1: Validation** | 1 week | 1 (Button) | 📋 READY |
-| **Phase 2: High-Priority + Tests** | 3-4 weeks | 6 components | ⏳ PENDING |
-| **Phase 3: Medium-Usage** | 2-3 weeks | 10 components | ⏳ PENDING |
-| **Phase 4: Cleanup** | 1 week | Optimization | ⏳ PENDING |
-| **TOTAL** | **7-9 weeks** | **17 components** | **In Progress** |
+| Phase                              | Duration      | Components        | Status          |
+| ---------------------------------- | ------------- | ----------------- | --------------- |
+| **Infrastructure Setup**           | 2 days        | N/A               | ✅ COMPLETE     |
+| **Phase 1: Validation**            | 1 week        | 1 (Button)        | 📋 READY        |
+| **Phase 2: High-Priority + Tests** | 3-4 weeks     | 6 components      | ⏳ PENDING      |
+| **Phase 3: Medium-Usage**          | 2-3 weeks     | 10 components     | ⏳ PENDING      |
+| **Phase 4: Cleanup**               | 1 week        | Optimization      | ⏳ PENDING      |
+| **TOTAL**                          | **7-9 weeks** | **17 components** | **In Progress** |
 
 ---
 
@@ -340,6 +357,7 @@ yarn storybook         # Verify Storybook loads
 ### Immediate Actions (This Week)
 
 1. **Migrate Button component** (validation run)
+
    ```bash
    npx ts-node scripts/safe-migrate-component.ts Button --dry-run
    npx ts-node scripts/safe-migrate-component.ts Button
@@ -375,8 +393,10 @@ yarn storybook         # Verify Storybook loads
 
 ### Key Documents
 
-- **[MIGRATION-PLAN-SAFE.md](MIGRATION-PLAN-SAFE.md)** - Complete safe migration guide
-- **[PRE-MIGRATION-CHECKLIST.md](PRE-MIGRATION-CHECKLIST.md)** - Go/No-Go checklist
+- **[MIGRATION-PLAN-SAFE.md](MIGRATION-PLAN-SAFE.md)** - Complete safe migration
+  guide
+- **[PRE-MIGRATION-CHECKLIST.md](PRE-MIGRATION-CHECKLIST.md)** - Go/No-Go
+  checklist
 - **[MIGRATION-STATUS.md](MIGRATION-STATUS.md)** - Current status tracking
 - **component-inventory.json** - Detailed component analysis
 
@@ -388,6 +408,7 @@ yarn storybook         # Verify Storybook loads
 ### Help
 
 If issues arise:
+
 1. Check rollback script: `./rollback-ComponentName.sh`
 2. Review migration logs
 3. Run inventory again to verify state
@@ -396,7 +417,5 @@ If issues arise:
 
 ---
 
-**Last Updated:** 2025-11-02
-**Prepared by:** AI Analysis System
-**Reviewed by:** Pending
-**Approved for Migration:** Pending
+**Last Updated:** 2025-11-02 **Prepared by:** AI Analysis System **Reviewed
+by:** Pending **Approved for Migration:** Pending

@@ -11,10 +11,10 @@ The application uses Firebase Cloud Firestore for caching instead of Redis, prov
 
 ### Core Components
 
-| Component | Location | Purpose |
-|-----------|----------|---------|
-| **Cache Service** | `backend/app/core/firestore_cache.py` | Firestore-backed cache implementation |
-| **LLM Cache** | `backend/app/ai/llm_service.py` | Uses Firestore cache for LLM responses |
+| Component            | Location                               | Purpose                                |
+| -------------------- | -------------------------------------- | -------------------------------------- |
+| **Cache Service**    | `backend/app/core/firestore_cache.py`  | Firestore-backed cache implementation  |
+| **LLM Cache**        | `backend/app/ai/llm_service.py`        | Uses Firestore cache for LLM responses |
 | **Cache Middleware** | `backend/app/core/cache_middleware.py` | Automatic cache cleanup and monitoring |
 
 ### Features

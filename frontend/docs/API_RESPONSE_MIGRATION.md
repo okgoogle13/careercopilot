@@ -1,6 +1,7 @@
 # API Response Standardization Migration Guide
 
-This guide outlines the changes needed to update components to work with the new standardized API response format.
+This guide outlines the changes needed to update components to work with the new
+standardized API response format.
 
 ## Changes to API Responses
 
@@ -30,16 +31,21 @@ interface ApiResponse<T> {
 ## Example Updates
 
 ### Before
+
 ```typescript
 const { data: jobs, total } = await jobService.fetchJobListings();
 ```
 
 ### After
+
 ```typescript
-const { data: { jobs, total } } = await jobService.fetchJobListings(params);
+const {
+  data: { jobs, total },
+} = await jobService.fetchJobListings(params);
 ```
 
 ### Error Handling Before
+
 ```typescript
 try {
   const result = await someService.someMethod();
@@ -50,6 +56,7 @@ try {
 ```
 
 ### Error Handling After
+
 ```typescript
 try {
   const { data } = await someService.someMethod();
@@ -84,10 +91,16 @@ try {
 ## Common Issues and Solutions
 
 ### Issue: Type errors after update
-**Solution**: Make sure to import the correct types from the services and update your component props/interfaces accordingly.
+
+**Solution**: Make sure to import the correct types from the services and update
+your component props/interfaces accordingly.
 
 ### Issue: Cannot destructure property 'data' of undefined
-**Solution**: Ensure you're properly handling the case where the API response might be undefined or null.
+
+**Solution**: Ensure you're properly handling the case where the API response
+might be undefined or null.
 
 ### Issue: Error handling not working as expected
-**Solution**: Update your error handling to work with the new `ApiError` interface which includes `code`, `message`, and optional `details`.
+
+**Solution**: Update your error handling to work with the new `ApiError`
+interface which includes `code`, `message`, and optional `details`.

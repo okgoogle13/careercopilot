@@ -72,12 +72,12 @@ def configure_loguru(
         # Debug file with rotation
         logger.add(
             f"{log_dir}/debug.log",
-            format=json_format,
+            format=simple_format,
             level="DEBUG",
             rotation="10 MB",
             retention="7 days",
             compression="gz",
-            serialize=True,
+            serialize=False,
         )
 
     elif environment == "staging":
@@ -86,7 +86,7 @@ def configure_loguru(
             sys.stdout,
             format=json_format,
             level="INFO",
-            serialize=True,
+            serialize=False,
         )
 
         # Application log with rotation
@@ -97,7 +97,7 @@ def configure_loguru(
             rotation="50 MB",
             retention="14 days",
             compression="gz",
-            serialize=True,
+            serialize=False,
         )
 
         # Error log for critical issues
@@ -108,7 +108,7 @@ def configure_loguru(
             rotation="10 MB",
             retention="30 days",
             compression="gz",
-            serialize=True,
+            serialize=False,
         )
 
     elif environment == "production":
@@ -117,7 +117,7 @@ def configure_loguru(
             sys.stdout,
             format=json_format,
             level="INFO",
-            serialize=True,
+            serialize=False,
         )
 
         # Error-only file log for production
@@ -128,7 +128,7 @@ def configure_loguru(
             rotation="10 MB",
             retention="90 days",
             compression="gz",
-            serialize=True,
+            serialize=False,
         )
 
         # Critical issues log
@@ -139,7 +139,7 @@ def configure_loguru(
             rotation="5 MB",
             retention="1 year",
             compression="gz",
-            serialize=True,
+            serialize=False,
         )
 
     # Log the configuration

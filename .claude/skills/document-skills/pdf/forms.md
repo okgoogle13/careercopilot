@@ -2,14 +2,15 @@
 
 This document provides a specialized prompt template for extracting structured data from forms (e.g., invoices, tax forms, applications) using the `pdf-text-extractor` skill.
 
-For best results, you *must* provide a JSON schema in your prompt. This tells the model *what* to look for and *how* to format the output.
+For best results, you _must_ provide a JSON schema in your prompt. This tells the model _what_ to look for and _how_ to format the output.
 
 ## Agent Prompt Template
 
 When you need to extract key-value data from a form, instruct the `pdf-text-extractor` skill using a prompt like this.
 
 **Agent's Prompt to the Skill ($PROMPT):**
-```
+
+````
 Extract the following fields from the attached invoice (invoice-123.pdf) and return them as JSON.
 
 Here is the JSON schema to follow:
@@ -28,8 +29,9 @@ Here is the JSON schema to follow:
     }
   ]
 }
-```
-```
+````
+
+````
 
 ## Expected Skill Output
 
@@ -66,4 +68,4 @@ The `pdf-text-extractor` skill will return a JSON object where the `output` key 
     }
   ]
 }
-```
+````

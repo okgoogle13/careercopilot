@@ -10,58 +10,64 @@
 ## Color System (78 Tokens)
 
 ### Primary Colors
+
 ```css
---sys-color-primary: #A78BFA;
---sys-color-on-primary: #1E1B4B;
---sys-color-primary-container: #7C3AED;
---sys-color-on-primary-container: #EDE9FE;
+--sys-color-primary: #a78bfa;
+--sys-color-on-primary: #1e1b4b;
+--sys-color-primary-container: #7c3aed;
+--sys-color-on-primary-container: #ede9fe;
 ```
 
 ### Secondary Colors
+
 ```css
---sys-color-secondary: #C9C3DC;
---sys-color-on-secondary: #312E41;
+--sys-color-secondary: #c9c3dc;
+--sys-color-on-secondary: #312e41;
 --sys-color-secondary-container: #474459;
---sys-color-on-secondary-container: #F8F7FA;
+--sys-color-on-secondary-container: #f8f7fa;
 ```
 
 ### Tertiary Colors
+
 ```css
---sys-color-tertiary: #F472B6;
+--sys-color-tertiary: #f472b6;
 --sys-color-on-tertiary: #831843;
---sys-color-tertiary-container: #EC4899;
---sys-color-on-tertiary-container: #FCE7F3;
+--sys-color-tertiary-container: #ec4899;
+--sys-color-on-tertiary-container: #fce7f3;
 ```
 
 ### Error Colors
+
 ```css
---sys-color-error: #FFB4AB;
+--sys-color-error: #ffb4ab;
 --sys-color-on-error: #690005;
---sys-color-error-container: #93000A;
---sys-color-on-error-container: #FFCAC0;
+--sys-color-error-container: #93000a;
+--sys-color-on-error-container: #ffcac0;
 ```
 
 ### Surface & Background Colors
+
 ```css
 --sys-color-surface: #131318;
---sys-color-on-surface: #F8FAFC;
---sys-color-surface-variant: #1F1F23;
---sys-color-on-surface-variant: #E2E8F0;
+--sys-color-on-surface: #f8fafc;
+--sys-color-surface-variant: #1f1f23;
+--sys-color-on-surface-variant: #e2e8f0;
 
---sys-color-surface-container-lowest: #0A0A0E;
---sys-color-surface-container-low: #18181D;
---sys-color-surface-container: #1E1E23;
+--sys-color-surface-container-lowest: #0a0a0e;
+--sys-color-surface-container-low: #18181d;
+--sys-color-surface-container: #1e1e23;
 --sys-color-surface-container-high: #262629;
---sys-color-surface-container-highest: #2E2E32;
+--sys-color-surface-container-highest: #2e2e32;
 
 --sys-color-background: #131318;
---sys-color-on-background: #F8FAFC;
+--sys-color-on-background: #f8fafc;
 ```
 
 ### Outline Colors
+
 ```css
---sys-color-outline: #928F99;
---sys-color-outline-variant: #48464F;
+--sys-color-outline: #928f99;
+--sys-color-outline-variant: #48464f;
 ```
 
 ---
@@ -69,6 +75,7 @@
 ## Typography System (13 Scales)
 
 ### Display Styles
+
 ```css
 --sys-typescale-display-large: 57px, 700, 64px;
 --sys-typescale-display-medium: 45px, 700, 52px;
@@ -76,6 +83,7 @@
 ```
 
 ### Headline Styles
+
 ```css
 --sys-typescale-headline-large: 32px, 700, 40px;
 --sys-typescale-headline-medium: 28px, 700, 36px;
@@ -83,6 +91,7 @@
 ```
 
 ### Title Styles
+
 ```css
 --sys-typescale-title-large: 22px, 700, 28px;
 --sys-typescale-title-medium: 16px, 700, 24px;
@@ -90,6 +99,7 @@
 ```
 
 ### Body Styles
+
 ```css
 --sys-typescale-body-large: 16px, 400, 24px;
 --sys-typescale-body-medium: 14px, 400, 20px;
@@ -127,44 +137,45 @@
 
 ```css
 --sys-elevation-level0: none;
---sys-elevation-level1: 0px 1px 2px rgba(0,0,0,0.3), 0px 1px 3px rgba(0,0,0,0.12);
---sys-elevation-level2: 0px 2px 4px rgba(0,0,0,0.3), 0px 2px 6px rgba(0,0,0,0.12);
---sys-elevation-level3: 0px 4px 8px rgba(0,0,0,0.3), 0px 4px 12px rgba(0,0,0,0.12);
---sys-elevation-level4: 0px 6px 12px rgba(0,0,0,0.3), 0px 8px 16px rgba(0,0,0,0.12);
---sys-elevation-level5: 0px 8px 16px rgba(0,0,0,0.3), 0px 12px 24px rgba(0,0,0,0.12);
+--sys-elevation-level1: 0px 1px 2px rgba(0, 0, 0, 0.3), 0px 1px 3px rgba(0, 0, 0, 0.12);
+--sys-elevation-level2: 0px 2px 4px rgba(0, 0, 0, 0.3), 0px 2px 6px rgba(0, 0, 0, 0.12);
+--sys-elevation-level3: 0px 4px 8px rgba(0, 0, 0, 0.3), 0px 4px 12px rgba(0, 0, 0, 0.12);
+--sys-elevation-level4: 0px 6px 12px rgba(0, 0, 0, 0.3), 0px 8px 16px rgba(0, 0, 0, 0.12);
+--sys-elevation-level5: 0px 8px 16px rgba(0, 0, 0, 0.3), 0px 12px 24px rgba(0, 0, 0, 0.12);
 ```
 
 ---
 
 ## Common Color Replacements
 
-| Old Pattern | New M3 Token |
-|-------------|--------------|
-| `theme.palette.primary.main` | `var(--sys-color-primary)` |
-| `theme.palette.secondary.main` | `var(--sys-color-secondary)` |
-| `theme.palette.error.main` | `var(--sys-color-error)` |
+| Old Pattern                        | New M3 Token                  |
+| ---------------------------------- | ----------------------------- |
+| `theme.palette.primary.main`       | `var(--sys-color-primary)`    |
+| `theme.palette.secondary.main`     | `var(--sys-color-secondary)`  |
+| `theme.palette.error.main`         | `var(--sys-color-error)`      |
 | `theme.palette.background.default` | `var(--sys-color-background)` |
-| Text on primary | `var(--sys-color-on-primary)` |
-| Text on surface | `var(--sys-color-on-surface)` |
+| Text on primary                    | `var(--sys-color-on-primary)` |
+| Text on surface                    | `var(--sys-color-on-surface)` |
 
 ---
 
 ## Common Spacing Replacements
 
-| Old Pattern | New M3 Token |
-|-------------|--------------|
-| `4px` | No token (raw) |
-| `8px` | `var(--sys-spacing-2)` |
-| `12px` | `var(--sys-spacing-3)` |
-| `16px` | `var(--sys-spacing-4)` |
-| `24px` | `var(--sys-spacing-6)` |
-| `32px` | `var(--sys-spacing-8)` |
+| Old Pattern | New M3 Token           |
+| ----------- | ---------------------- |
+| `4px`       | No token (raw)         |
+| `8px`       | `var(--sys-spacing-2)` |
+| `12px`      | `var(--sys-spacing-3)` |
+| `16px`      | `var(--sys-spacing-4)` |
+| `24px`      | `var(--sys-spacing-6)` |
+| `32px`      | `var(--sys-spacing-8)` |
 
 ---
 
 ## Component Token Mapping Examples
 
 ### Button
+
 ```typescript
 <Button sx={{
   backgroundColor: 'var(--sys-color-primary)',
@@ -177,6 +188,7 @@
 ```
 
 ### Card
+
 ```typescript
 <Card sx={{
   backgroundColor: 'var(--sys-color-surface-container)',
@@ -188,6 +200,7 @@
 ```
 
 ### Typography
+
 ```typescript
 <Typography sx={{
   fontSize: '16px',

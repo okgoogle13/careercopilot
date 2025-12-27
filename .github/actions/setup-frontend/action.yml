@@ -81,7 +81,7 @@ runs:
       working-directory: frontend
       run: |
         echo "🧪 Running Jest unit tests..."
-        npm run test:ci || echo "⚠️  Some tests failed but continuing..."
+        npm run test:ci
         echo "✅ Unit tests completed"
 
 

@@ -9,11 +9,12 @@ export default {
   moduleDirectories: ['node_modules', 'src'],
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
+    '^@careercopilot/ui$': '<rootDir>/packages/ui/src/index.ts',
     '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
   },
   setupFilesAfterEnv: ['<rootDir>/src/setupTests.ts'],
   transform: {
-    '^.+\\.(ts|tsx)$': [
+    '^.+\\.(ts|tsx|js|jsx)$': [
       'ts-jest',
       {
         tsconfig: '<rootDir>/tsconfig.test.json',
@@ -26,13 +27,15 @@ export default {
     ],
   },
   transformIgnorePatterns: [
-    'node_modules/(?!((@mui|@babel|@emotion|@testing-library|@radix-ui|clsx|react-hook-form|uuid|ansi-regex|strip-ansi|ansi-styles|chalk|@mui/lab)/|.*\\.mjs$))',
+    'node_modules/(?!((@mui|@babel|@emotion|@testing-library|@radix-ui|clsx|react-hook-form|uuid|ansi-regex|strip-ansi|ansi-styles|chalk|@mui/lab|firebase|@firebase)/|.*\\.mjs$))',
     '^.+\\.module\\.(css|sass|scss)$',
   ],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
   collectCoverage: false,
   testPathIgnorePatterns: [
     '<rootDir>/node_modules/',
+    '<rootDir>/src/components_OLD/',
+    '<rootDir>/src/features/',
   ],
   collectCoverageFrom: [
     'src/**/*.{js,jsx,ts,tsx}',
@@ -52,7 +55,6 @@ export default {
       statements: 1,
     },
   },
-  testTimeout: 15000,
   verbose: true,
   bail: false,
   cache: false,

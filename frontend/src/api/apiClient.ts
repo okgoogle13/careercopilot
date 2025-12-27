@@ -16,7 +16,7 @@ apiClient.interceptors.request.use(
   async (config) => {
     // Skip adding auth header for public endpoints
     const publicEndpoints = ['/auth/login', '/auth/register'];
-    if (publicEndpoints.some(endpoint => config.url?.includes(endpoint))) {
+    if (publicEndpoints.some((endpoint) => config.url?.includes(endpoint))) {
       return config;
     }
 
@@ -42,19 +42,19 @@ apiClient.interceptors.response.use(
           data: response.data.data,
           message: response.data.message,
           success: response.data.success ?? true,
-          timestamp: response.data.timestamp || new Date().toISOString()
-        }
+          timestamp: response.data.timestamp || new Date().toISOString(),
+        },
       };
     }
     return response;
   },
   async (error: AxiosError) => {
     const originalRequest = error.config as any;
-    
+
     // Handle token expiration (401) and retry once
     if (error.response?.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
-      
+
       try {
         // Try to refresh token if refresh token endpoint exists
         const response = await axios.post(
@@ -62,7 +62,7 @@ apiClient.interceptors.response.use(
           {},
           { withCredentials: true }
         );
-        
+
         const { accessToken } = response.data;
         // Update the token in your auth context or storage
         // Then retry the original request
@@ -74,7 +74,7 @@ apiClient.interceptors.response.use(
         return Promise.reject(refreshError);
       }
     }
-    
+
     // Handle other errors
     if (error.response) {
       // The request was made and the server responded with a status code
@@ -84,7 +84,7 @@ apiClient.interceptors.response.use(
         data: error.response.data,
         headers: error.response.headers,
       });
-      
+
       // You can add custom error handling based on status codes
       if (error.response.status === 403) {
         // Handle forbidden access
@@ -103,7 +103,7 @@ apiClient.interceptors.response.use(
       // Something happened in setting up the request that triggered an Error
       console.error('Request setup error:', error.message);
     }
-    
+
     return Promise.reject(error);
   }
 );
@@ -114,15 +114,15 @@ export { apiClient };
  * Handles API errors consistently and returns an ApiError object
  */
 export const handleApiError = (error: unknown): ApiError => {
-  if (axios.isAxiosError<ApiError>(error)) {
+  if (axios.isAxiosError(error)) {
     if (error.response) {
       // Server responded with a status other than 200 range
       const { data, status, statusText } = error.response;
-      
+
       if (isApiError(data)) {
         return data;
       }
-      
+
       return createErrorResponse(
         `HTTP_${status}`,
         data?.message || statusText || 'An error occurred',
@@ -137,17 +137,11 @@ export const handleApiError = (error: unknown): ApiError => {
     }
   } else if (error instanceof Error) {
     // General error
-    return createErrorResponse(
-      'UNKNOWN_ERROR',
-      error.message || 'An unknown error occurred'
-    );
+    return createErrorResponse('UNKNOWN_ERROR', error.message || 'An unknown error occurred');
   }
-  
+
   // Fallback for unknown error types
-  return createErrorResponse(
-    'UNKNOWN_ERROR',
-    'An unknown error occurred'
-  );
+  return createErrorResponse('UNKNOWN_ERROR', 'An unknown error occurred');
 };
 
 /**

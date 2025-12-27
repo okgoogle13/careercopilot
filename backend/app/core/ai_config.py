@@ -260,7 +260,7 @@ class AIConfigManager:
         # Load provider credentials from environment
         env_credentials: Dict[AIProvider, Dict[str, Any]] = {
             AIProvider.GOOGLE_AI: {
-                "api_key": os.getenv("GOOGLE_AI_API_KEY"),
+                "api_key": os.getenv("GOOGLE_AI_API_KEY") or os.getenv("GEMINI_API_KEY"),
                 "project_id": os.getenv("GOOGLE_CLOUD_PROJECT"),
             },
             AIProvider.ANTHROPIC: {"api_key": os.getenv("ANTHROPIC_API_KEY")},
@@ -367,6 +367,18 @@ class AIConfigManager:
                 temperature=0.7,
                 cost_per_1k_tokens={"input": 0.000075, "output": 0.0003},
                 context_window=1000000,
+                supports_streaming=True,
+                supports_function_calling=True,
+            ),
+            "gemini-1.5-pro": ModelConfig(
+                name="gemini-1.5-pro",
+                provider=AIProvider.GOOGLE_AI,
+                model_type=AIModelType.TEXT_GENERATION,
+                model_id="gemini-1.5-pro",
+                max_tokens=8192,
+                temperature=0.7,
+                cost_per_1k_tokens={"input": 0.0035, "output": 0.0105},
+                context_window=2000000,
                 supports_streaming=True,
                 supports_function_calling=True,
             ),

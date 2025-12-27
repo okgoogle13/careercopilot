@@ -9,6 +9,7 @@ tags: [mcp, documentation, architecture, reference]
 **Purpose:** High-speed documentation lookups using the CodebaseDocumentation MCP server, reducing token usage by 90% per request.
 
 **When to Use:**
+
 - User asks: "What's the deployment process?"
 - User asks: "How does the KSC flow work?"
 - User asks: "What agents are available?"
@@ -20,6 +21,7 @@ tags: [mcp, documentation, architecture, reference]
 ## Capabilities
 
 ### 1. Search Documentation
+
 ```
 method: search_docs
 params: {query: string}
@@ -29,6 +31,7 @@ Returns: Matching documentation sections with context
 ```
 
 ### 2. Get Full Documentation
+
 ```
 method: get_docs
 params: {section: string}
@@ -38,18 +41,21 @@ Returns: Full section content with metadata
 ```
 
 ### 3. List Available Agents
+
 ```
 method: get_agents
 Returns: All 16 agent definitions with descriptions
 ```
 
 ### 4. List Available Skills
+
 ```
 method: get_skills
 Returns: All 21 skill definitions with descriptions
 ```
 
 ### 5. Full Index
+
 ```
 method: index
 Returns: Complete documentation index with statistics
@@ -61,16 +67,18 @@ Returns: Complete documentation index with statistics
 **Startup:** <500ms | Response: <50ms | 42 files cached
 
 **Cached Resources:**
+
 - CLAUDE.md (40 KB, main instructions)
-- 16 agent definitions (.claude/agents/*.md)
-- 21 skill definitions (.claude/skills/*/SKILL.md)
-- Documentation files (.claude/docs/*.md)
+- 16 agent definitions (.claude/agents/\*.md)
+- 21 skill definitions (.claude/skills/\*/SKILL.md)
+- Documentation files (.claude/docs/\*.md)
 
 **Indexing:** Full-text search with inverted word index
 
 ## Real-World Example
 
 **Without MCP (Token Cost: 5,000):**
+
 ```
 User: "What's the deployment process?"
 Claude reads: CLAUDE.md (40KB, 5,000 tokens)
@@ -80,6 +88,7 @@ Total: 10,000 tokens
 ```
 
 **With Documentation MCP (Token Cost: 500):**
+
 ```
 User: "What's the deployment process?"
 Claude: Calls search_docs("deployment")
@@ -98,6 +107,7 @@ Savings: 90% ✅
 ## Integration Points
 
 Works seamlessly with:
+
 - `mcp-configuration-skill` - For automation scripts
 - `mcp-genkit-flows-skill` - For flow documentation
 - Any agent or subagent needing reference material

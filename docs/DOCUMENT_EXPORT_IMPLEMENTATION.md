@@ -135,12 +135,12 @@ pytest backend/app/tests/integration/test_document_export.py::test_export_cover_
 
 ### Bandwidth Optimization
 
-| Component | Size | Savings |
-|-----------|------|---------|
-| Cover Letter (text) | 3-5 KB | Original |
-| Signed URL | 200 bytes | 97% reduction |
-| 100 exports | 300-500 KB | 97% reduction |
-| **Total/month** | **30-50 MB** | **300-500 MB saved** |
+| Component           | Size         | Savings              |
+| ------------------- | ------------ | -------------------- |
+| Cover Letter (text) | 3-5 KB       | Original             |
+| Signed URL          | 200 bytes    | 97% reduction        |
+| 100 exports         | 300-500 KB   | 97% reduction        |
+| **Total/month**     | **30-50 MB** | **300-500 MB saved** |
 
 ---
 
@@ -163,6 +163,7 @@ pytest backend/app/tests/integration/test_document_export.py::test_export_cover_
 ```
 
 **Advantages:**
+
 - Smallest file size (text compression)
 - Self-documenting metadata
 - Easy to parse in client
@@ -180,6 +181,7 @@ pip install reportlab
 ```
 
 **Future implementation:**
+
 ```python
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
@@ -202,6 +204,7 @@ pip install python-docx
 ```
 
 **Future implementation:**
+
 ```python
 from docx import Document
 
@@ -216,6 +219,7 @@ def _generate_docx_content(content: str, title: str) -> bytes:
 ### TXT (Plain Text)
 
 **Simple text export without metadata:**
+
 ```
 Senior Software Engineer - Cover Letter
 
@@ -231,6 +235,7 @@ Senior Software Engineer - Cover Letter
 Export a cover letter with signed download URL.
 
 **Request:**
+
 ```json
 {
   "content": "Dear Hiring Manager...",
@@ -242,6 +247,7 @@ Export a cover letter with signed download URL.
 ```
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -260,6 +266,7 @@ Export a cover letter with signed download URL.
 Export a resume with signed URL.
 
 **Request:**
+
 ```json
 {
   "content": { "name": "John Doe", "email": "..." },
@@ -275,6 +282,7 @@ Export a resume with signed URL.
 Export KSC (STAR format) response.
 
 **Request:**
+
 ```json
 {
   "response_data": {
@@ -295,6 +303,7 @@ Export KSC (STAR format) response.
 Export complete application package.
 
 **Request:**
+
 ```json
 {
   "package_data": { ... },
@@ -311,6 +320,7 @@ Export complete application package.
 Check export service health.
 
 **Response:**
+
 ```json
 {
   "status": "ok",
@@ -345,6 +355,7 @@ gs://careercopilot-468811/
 ```
 
 **Path Format:**
+
 ```
 exports/{user_id}/{document_type}/{timestamp}.{format}
 ```
@@ -373,12 +384,14 @@ Metadata:
 Valid range: **1 to 168 hours** (1 week)
 
 **Defaults:**
+
 - Cover letters: 24 hours
 - Resumes: 24 hours
 - KSC responses: 24 hours
 - Application packages: 24 hours (30 days in cache)
 
 **Examples:**
+
 ```python
 # 1 hour (immediate download)
 expiration_hours=1.0
@@ -451,6 +464,7 @@ async def generate_and_export(
 ```
 
 **Benefits:**
+
 - No large content in API response
 - Client can download directly from Cloud Storage
 - Audit trail in Cloud Storage metadata
@@ -526,12 +540,12 @@ pytest backend/app/tests/integration/test_document_export.py \
 
 ### Common Errors
 
-| Error | Cause | Solution |
-|-------|-------|----------|
-| `Invalid format: xyz` | Unsupported file format | Use: json, pdf, docx, txt |
-| `Failed to export` | Cloud Storage unavailable | Retry in 30 seconds |
-| `Storage unavailable` | Network issue | Check Cloud Storage connection |
-| `Signed URL generation failed` | Invalid blob path | Verify storage path format |
+| Error                          | Cause                     | Solution                       |
+| ------------------------------ | ------------------------- | ------------------------------ |
+| `Invalid format: xyz`          | Unsupported file format   | Use: json, pdf, docx, txt      |
+| `Failed to export`             | Cloud Storage unavailable | Retry in 30 seconds            |
+| `Storage unavailable`          | Network issue             | Check Cloud Storage connection |
+| `Signed URL generation failed` | Invalid blob path         | Verify storage path format     |
 
 ### Error Response Example
 
@@ -620,6 +634,7 @@ pip install reportlab
 ```
 
 Convert JSON exports to formatted PDFs with:
+
 - Professional typography
 - Proper spacing and margins
 - Embedded fonts
@@ -636,6 +651,7 @@ Generate Word documents for editing in Microsoft Office.
 ### 3. ZIP Archive Export
 
 Batch export multiple documents as ZIP:
+
 ```
 application_package.zip
 ├── resume.json
@@ -646,6 +662,7 @@ application_package.zip
 ### 4. Automatic Cleanup
 
 Delete expired files after 30 days:
+
 ```python
 # Run daily job
 for file in list_expired_files():
@@ -655,6 +672,7 @@ for file in list_expired_files():
 ### 5. Email Delivery
 
 Send download link via email:
+
 ```python
 send_email(
     to=user.email,
@@ -666,6 +684,7 @@ send_email(
 ### 6. Download Analytics
 
 Track:
+
 - How many documents exported per user
 - Popular export formats
 - Average file sizes
@@ -680,6 +699,7 @@ Track:
 **Cause:** Cloud Storage authentication issue
 
 **Solution:**
+
 ```bash
 # Check credentials
 gcloud auth list
@@ -696,6 +716,7 @@ gcloud projects get-iam-policy careercopilot-468811
 **Cause:** Large file size or network latency
 
 **Solution:**
+
 - Check file size: `result.file_size_bytes`
 - Monitor Cloud Storage latency
 - Consider async file generation
@@ -705,6 +726,7 @@ gcloud projects get-iam-policy careercopilot-468811
 **Cause:** Expiration set to 1 hour or less
 
 **Solution:**
+
 ```python
 # Increase expiration
 expiration_hours=168.0  # 7 days

@@ -13,7 +13,7 @@
 2. ✅ **M3Datepicker** - Date comparison logic
 3. ✅ **ATSScoreCircle** - Format, size, props
 4. ✅ **SettingsPage** - Import path
-5. ✅ **DocumentsPage** - Import path  
+5. ✅ **DocumentsPage** - Import path
 6. ✅ **AnalysisPage** - Import path
 7. ✅ **toast.test.tsx** - Import path (partial - useToast hook may need implementation)
 
@@ -22,13 +22,15 @@
 ## 📋 Remaining Work
 
 ### High Priority (Import Fixes - ~5 tests)
+
 These are quick wins - just need to find correct paths:
 
 - [ ] JobCard (jobs feature) - Find location
-- [ ] JobCard (opportunities feature) - Find location  
+- [ ] JobCard (opportunities feature) - Find location
 - [ ] Navigation config (Navbar) - May already be mocked ✅
 
 ### Medium Priority (Missing Components - ~6 tests)
+
 Components need to be found or created:
 
 - [ ] ProfileGrid
@@ -39,6 +41,7 @@ Components need to be found or created:
 - [ ] DashboardHeader
 
 ### Low Priority (Logic/Assertion - ~20 tests)
+
 These require deeper investigation:
 
 - Component behavior mismatches
@@ -51,6 +54,7 @@ These require deeper investigation:
 ## 🎯 Recommended Next Actions
 
 1. **Quick Wins (30 min):**
+
    ```bash
    # Find and fix remaining import paths
    find frontend/src -name "JobCard.*"
@@ -58,6 +62,7 @@ These require deeper investigation:
    ```
 
 2. **Component Discovery (1 hour):**
+
    ```bash
    # Find all missing components
    find frontend/src -name "ProfileGrid.*"
@@ -83,4 +88,3 @@ These require deeper investigation:
 ---
 
 **Status:** ✅ Good progress - 5-7 tests fixed, clear path forward
-

@@ -41,35 +41,33 @@ When asked to create tests for a component:
 
 ```typescript
 // Step 1: Read component file
-const componentPath = 'src/components/ui/Button/Button.tsx';
+const componentPath = "src/components/ui/Button/Button.tsx";
 const componentCode = await readFile(componentPath);
 
 // Step 2: Analyze component
 const analysis = {
-  name: 'Button',
-  props: ['children', 'onClick', 'disabled', 'variant', 'size'],
-  events: ['onClick'],
-  states: ['disabled', 'loading'],
-  role: 'button',
+  name: "Button",
+  props: ["children", "onClick", "disabled", "variant", "size"],
+  events: ["onClick"],
+  states: ["disabled", "loading"],
+  role: "button",
   isM3Component: true, // Uses design tokens
 };
 
 // Step 3: Generate test using jest-test-scaffolder skill
-const testPath = 'src/components/ui/Button/__tests__/Button.test.tsx';
+const testPath = "src/components/ui/Button/__tests__/Button.test.tsx";
 await generateTest({
-  template: analysis.isM3Component
-    ? 'component-m3.test.tsx.tpl'
-    : 'component.test.tsx.tpl',
+  template: analysis.isM3Component ? "component-m3.test.tsx.tpl" : "component.test.tsx.tpl",
   placeholders: {
     COMPONENT_NAME: analysis.name,
-    COMPONENT_PATH: '../Button',
+    COMPONENT_PATH: "../Button",
     COMPONENT_ROLE: analysis.role,
-    DEFAULT_PROPS: "children=\"Click me\"",
+    DEFAULT_PROPS: 'children="Click me"',
     HAS_EVENT_HANDLERS: true,
-    EVENT_NAME: 'click',
-    EVENT_HANDLER: 'Click',
-    EVENT_PROP: 'onClick',
-    USER_ACTION: 'click',
+    EVENT_NAME: "click",
+    EVENT_HANDLER: "Click",
+    EVENT_PROP: "onClick",
+    USER_ACTION: "click",
     HAS_DISABLED_STATE: true,
     IS_M3_COMPONENT: true,
   },
@@ -77,7 +75,7 @@ await generateTest({
 });
 
 // Step 4: Run tests and verify
-await runTests('yarn test Button');
+await runTests("yarn test Button");
 
 // Step 5: Report results
 console.log(`✅ Generated tests for Button component`);
@@ -93,23 +91,24 @@ When asked to improve coverage for multiple components:
 ```typescript
 // Step 1: Analyze coverage
 const coverage = await analyzeCoverage();
-const untestedComponents = coverage.filter(c => c.coverage < 50);
+const untestedComponents = coverage.filter((c) => c.coverage < 50);
 
 // Step 2: Prioritize by impact
 const prioritized = prioritizeByImpact(untestedComponents);
 
 // Step 3: Use task-delegator for parallel generation
-await task-delegator.delegateTasks({
-  tasks: prioritized.map(component => ({
-    description: `Generate tests for ${component.name}`,
-    skill: 'jest-test-scaffolder',
-    args: { componentPath: component.path },
-  })),
-  concurrency: 5,
-});
+(await task) -
+  delegator.delegateTasks({
+    tasks: prioritized.map((component) => ({
+      description: `Generate tests for ${component.name}`,
+      skill: "jest-test-scaffolder",
+      args: { componentPath: component.path },
+    })),
+    concurrency: 5,
+  });
 
 // Step 4: Validate all generated tests
-await test-runner.runAll();
+(await test) - runner.runAll();
 
 // Step 5: Report progress
 reportCoverageImprovement({
@@ -127,14 +126,10 @@ For M3-compliant components, ensure tests verify token usage:
 // Verify test includes M3 token compliance checks
 const testContent = await readFile(testPath);
 
-const hasM3Tests = [
-  testContent.includes('ThemeProvider'),
-  testContent.includes('M3 Design Token compliance'),
-  testContent.includes('uses design tokens for styling'),
-].every(Boolean);
+const hasM3Tests = [testContent.includes("ThemeProvider"), testContent.includes("M3 Design Token compliance"), testContent.includes("uses design tokens for styling")].every(Boolean);
 
 if (!hasM3Tests && component.isM3Component) {
-  console.warn('⚠️  Component uses M3 tokens but tests missing token validation');
+  console.warn("⚠️  Component uses M3 tokens but tests missing token validation");
   // Regenerate with M3 template
   await regenerateWithM3Template(component);
 }
@@ -143,18 +138,22 @@ if (!hasM3Tests && component.isM3Component) {
 ## Integration with Other Agents
 
 ### With testing-specialist
+
 - **You:** Generate specific test files
 - **testing-specialist:** Overall QA strategy, coverage targets, test patterns
 
 ### With test-runner
+
 - **You:** Create test files
 - **test-runner:** Execute tests, report failures, fix broken tests
 
 ### With code-reviewer
+
 - **You:** Generate tests
 - **code-reviewer:** Review test quality, ensure best practices
 
 ### With frontend-specialist
+
 - **You:** Generate tests for new components
 - **frontend-specialist:** Build components, ensure testability
 
