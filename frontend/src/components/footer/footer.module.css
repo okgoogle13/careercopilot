@@ -1,8 +1,0 @@
-.footer {
-  padding: var(--sys-space-6, 24px);
-  background-color: var(--sys-color-surface-variant, #f5f0fe);
-  border-top: 1px solid var(--sys-color-outline-variant, #cac4d0);
-  display: flex;
-  flex-direction: column;
-  gap: var(--sys-space-4, 16px);
-}

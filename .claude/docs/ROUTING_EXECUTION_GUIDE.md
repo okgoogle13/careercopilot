@@ -9,11 +9,13 @@
 ## Quick Start (30 Seconds)
 
 ### Option 1: Use the Slash Command
+
 ```bash
 /route review this react component for performance
 ```
 
 Expected response:
+
 ```
 ROUTING DECISION
 ═══════════════════════════════════════
@@ -31,6 +33,7 @@ Shall I proceed?
 ```
 
 ### Option 2: Enable Strict Enforcement
+
 ```bash
 /enforce-routing on
 ```
@@ -42,11 +45,13 @@ From now on, all tasks automatically route to optimal servers without asking.
 ## How It Works: Step-by-Step
 
 ### Task Arrives
+
 ```
 User: "Review this code"
 ```
 
 ### Step 1: Classification
+
 ```
 Is this analysis? YES ✅
 → Type: Code Analysis
@@ -54,6 +59,7 @@ Is this analysis? YES ✅
 ```
 
 ### Step 2: Routing Lookup
+
 ```
 Consult Routing Logic Table:
 Code Review → gemini-wrapper ✅
@@ -62,6 +68,7 @@ Savings: 40-55%
 ```
 
 ### Step 3: Calculate Impact
+
 ```
 Without Routing (Claude self-analysis):
   • Your context: Code + analysis prompt
@@ -76,6 +83,7 @@ With Routing (Gemini delegation):
 ```
 
 ### Step 4: Execute
+
 ```
 → gemini-wrapper.analyze_code(code, language="typescript")
 → Return results with token savings report
@@ -88,6 +96,7 @@ With Routing (Gemini delegation):
 ### Example 1: Code Review
 
 **You ask:**
+
 ```
 "Review this authentication function for security issues"
 ```
@@ -118,6 +127,7 @@ EXECUTING: gemini-wrapper.analyze_code(code, language="python")
 ### Example 2: Configuration Query
 
 **You ask:**
+
 ```
 "What's the Firebase configuration?"
 ```
@@ -148,6 +158,7 @@ EXECUTING: configuration.get_environment(env="production")
 ### Example 3: Error Diagnosis (Multi-Step)
 
 **You ask:**
+
 ```
 "Why is my Genkit flow timing out?"
 ```
@@ -186,6 +197,7 @@ EXECUTING:
 ### Example 4: Documentation + Optimization
 
 **You ask:**
+
 ```
 "What's our caching strategy and how can we improve it?"
 ```
@@ -268,6 +280,7 @@ Your Task Arrives
 ### ❌ Anti-Pattern 1: Self-Analysis When Gemini Available
 
 **WRONG:**
+
 ```
 User: "Review this code"
 Response: "Looking at your code, I see several issues:
@@ -277,6 +290,7 @@ Response: "Looking at your code, I see several issues:
 ```
 
 **RIGHT:**
+
 ```
 User: "Review this code"
 Response: "I'll route to gemini-wrapper for expert code review.
@@ -289,6 +303,7 @@ Executing: gemini-wrapper.analyze_code()
 ### ❌ Anti-Pattern 2: Reading Raw Files
 
 **WRONG:**
+
 ```
 User: "What's the Firebase config?"
 Response: "Looking at firebase.json in my context:
@@ -300,6 +315,7 @@ Response: "Looking at firebase.json in my context:
 ```
 
 **RIGHT:**
+
 ```
 User: "What's the Firebase config?"
 Response: "Checking configuration cache (94.9% savings)...
@@ -311,6 +327,7 @@ Executing: configuration.get_environment(env="production")
 ### ❌ Anti-Pattern 3: Skipping Routing
 
 **WRONG:**
+
 ```
 User: "Optimize this algorithm"
 Response: "Here's my optimization:
@@ -319,6 +336,7 @@ Response: "Here's my optimization:
 ```
 
 **RIGHT:**
+
 ```
 User: "Optimize this algorithm"
 Response: "Routing to gemini-wrapper for performance analysis.
@@ -332,16 +350,17 @@ Executing: gemini-wrapper.optimization_analysis()
 
 ## Token Savings Cheat Sheet
 
-| Task | Without Routing | With Routing | Savings |
-|------|---|---|---|
-| Code review | 1,200 tokens | 400 tokens | **67%** |
-| Config lookup | 5,000 tokens | 78 tokens | **98%** |
-| Error diagnosis | 2,000 tokens | 500 tokens | **75%** |
-| Flow execution | 3,000 tokens | 20 tokens | **99%** |
-| Doc lookup | 5,100 tokens | 341 tokens | **93%** |
-| Multi-step (config+analysis) | 8,000 tokens | 600 tokens | **92%** |
+| Task                         | Without Routing | With Routing | Savings |
+| ---------------------------- | --------------- | ------------ | ------- |
+| Code review                  | 1,200 tokens    | 400 tokens   | **67%** |
+| Config lookup                | 5,000 tokens    | 78 tokens    | **98%** |
+| Error diagnosis              | 2,000 tokens    | 500 tokens   | **75%** |
+| Flow execution               | 3,000 tokens    | 20 tokens    | **99%** |
+| Doc lookup                   | 5,100 tokens    | 341 tokens   | **93%** |
+| Multi-step (config+analysis) | 8,000 tokens    | 600 tokens   | **92%** |
 
 **Annual Impact (20 developers, 20 work days):**
+
 - Phase 1-3 Baseline: 271.7M tokens/year
 - With Routing: 312M+ tokens/year (+ 15% efficiency)
 - Cost Savings: $624+/year
@@ -385,12 +404,14 @@ Before going into production, confirm:
 ## Next Steps
 
 1. **Load the commands:**
+
    ```bash
    /route
    /enforce-routing on
    ```
 
 2. **Test with your first question:**
+
    ```
    Ask any task-related question
    → Watch the routing decision

@@ -6,56 +6,58 @@ This file serves as the definitive index to all project standards, agents, and a
 
 ## 1. 🏗️ CORE ARCHITECTURE & STACK
 
-* **Frontend:** React 18.2.0 + TypeScript 5.0+ (Vite). Styling: Material-UI v5.18, Emotion, Tailwind CSS.
-* **Backend:** Python (FastAPI/Genkit) and Firebase Functions (Node.js 20).
-* **Database/Cache:** Firebase Cloud Firestore (Primary DB and cache collection `redis_cache`).
-* **Primary Region:** `us-central1` for all infrastructure (Functions, Firestore, Cloud Run).
-* **Type Safety:** **CRITICAL**: Type consistency **MUST** be maintained across the full stack (TS interfaces ↔ Pydantic models).
+- **Frontend:** React 18.2.0 + TypeScript 5.0+ (Vite). Styling: Material-UI v5.18, Emotion, Tailwind CSS.
+- **Backend:** Python (FastAPI/Genkit) and Firebase Functions (Node.js 20).
+- **Database/Cache:** Firebase Cloud Firestore (Primary DB and cache collection `redis_cache`).
+- **Primary Region:** `us-central1` for all infrastructure (Functions, Firestore, Cloud Run).
+- **Type Safety:** **CRITICAL**: Type consistency **MUST** be maintained across the full stack (TS interfaces ↔ Pydantic models).
 
 ## 2. 🤖 AI AGENTS & SKILLS INDEX (The Automation Layer)
 
 Use these skills and agents for all automation and complex task execution.
 
 ### Agents (Orchestrators)
-| Agent Name | Expertise | Index File | When to Use |
-| :--- | :--- | :--- | :--- |
-| **fullstack-integration-specialist** | Full stack feature planning & debugging. | `.claude/agents/fullstack-integration-specialist.md` | Integration issues, new feature planning. |
-| **m3-migration-architect** | Orchestrates 12-step M3 Expressive migration. | `.claude/agents/m3-migration-architect.md` | Component migration to M3 Expressive. |
-| **testing-specialist** | Coordinates all test generation and coverage analysis. | *(Implicit, references skills)* | Generating new tests or analyzing coverage. |
-| **Visual Design Director** | Defines aesthetic direction, M3 Anti-Slop validation. | `.claude/agents/visual-design-director.md` | Defining design tokens or auditing aesthetics. |
+
+| Agent Name                           | Expertise                                              | Index File                                           | When to Use                                    |
+| :----------------------------------- | :----------------------------------------------------- | :--------------------------------------------------- | :--------------------------------------------- |
+| **fullstack-integration-specialist** | Full stack feature planning & debugging.               | `.claude/agents/fullstack-integration-specialist.md` | Integration issues, new feature planning.      |
+| **m3-migration-architect**           | Orchestrates 12-step M3 Expressive migration.          | `.claude/agents/m3-migration-architect.md`           | Component migration to M3 Expressive.          |
+| **testing-specialist**               | Coordinates all test generation and coverage analysis. | _(Implicit, references skills)_                      | Generating new tests or analyzing coverage.    |
+| **Visual Design Director**           | Defines aesthetic direction, M3 Anti-Slop validation.  | `.claude/agents/visual-design-director.md`           | Defining design tokens or auditing aesthetics. |
 
 ### Skill Libraries (Full Index in Dedicated File)
-* **Full Skill Index & Capabilities:** `.claude/docs/SKILL_AGENT_MATRIX.md` (See this for all 30+ skills).
-* **Key Skill Sets:**
-    * **Scaffolding:** `fastapi-endpoint-scaffolder`, `pydantic-model-scaffolder` 
-    * **Testing:** `jest-test-scaffolder`, `api-integration-test-scaffolder` 
-    * **M3 Expressive:** `m3-spring-motion-choreography`, `m3-anti-slop-validator` (All details in `SKILL_AGENT_MATRIX.md`)
+
+- **Full Skill Index & Capabilities:** `.claude/docs/SKILL_AGENT_MATRIX.md` (See this for all 30+ skills).
+- **Key Skill Sets:**
+  - **Scaffolding:** `fastapi-endpoint-scaffolder`, `pydantic-model-scaffolder`
+  - **Testing:** `jest-test-scaffolder`, `api-integration-test-scaffolder`
+  - **M3 Expressive:** `m3-spring-motion-choreography`, `m3-anti-slop-validator` (All details in `SKILL_AGENT_MATRIX.md`)
 
 ## 3. ⚙️ WORKFLOW & COMMAND REFERENCES
 
-| Area | Quick Start Script / Index | Detailed Documentation |
-| :--- | :--- | :--- |
-| **Deployment** | `./scripts/deploy.sh` (staging/production) | `docs/DEPLOYMENT_WORKFLOW.md` |
-| **Secrets Setup** | `./scripts/setup-secrets.sh` (local dev) | `docs/SECRETS_MANAGEMENT.md` |
-| **Linting/Formatting**| `yarn lint:fix` (auto-fix) | `.vscode/settings.json` (Auto-fix on save) |
-| **Email Service** | `AWS_SES_QUICK_START.md` | `docs/AWS_SES_SETUP.md` |
-| **M3 Prep Steps** | `./scripts/prepare-for-migration.sh` | `docs/MIGRATION_READINESS.md` |
-| **Jules Delegation** | `cat tasks.txt \| while ...` (Launch all) | `docs/JULES_PROTOCOL.md` |
+| Area                   | Quick Start Script / Index                 | Detailed Documentation                     |
+| :--------------------- | :----------------------------------------- | :----------------------------------------- |
+| **Deployment**         | `./scripts/deploy.sh` (staging/production) | `docs/DEPLOYMENT_WORKFLOW.md`              |
+| **Secrets Setup**      | `./scripts/setup-secrets.sh` (local dev)   | `docs/SECRETS_MANAGEMENT.md`               |
+| **Linting/Formatting** | `yarn lint:fix` (auto-fix)                 | `.vscode/settings.json` (Auto-fix on save) |
+| **Email Service**      | `AWS_SES_QUICK_START.md`                   | `docs/AWS_SES_SETUP.md`                    |
+| **M3 Prep Steps**      | `./scripts/prepare-for-migration.sh`       | `docs/MIGRATION_READINESS.md`              |
+| **Jules Delegation**   | `cat tasks.txt \| while ...` (Launch all)  | `docs/JULES_PROTOCOL.md`                   |
 
 ## 4. 🛑 CRITICAL CONSTRAINTS & DEVELOPMENT GUIDELINES
 
-* **Paths:** All paths must be **relative** (start with `./`).
-* **Commit Messages:** **MUST** use Conventional Commits (e.g., `feat:`, `fix:`, `chore:`).
-* **Testing:** Frontend (Jest), Backend (pytest), E2E (Playwright). **NEVER** merge without passing CI.
-* **M3 Anti-Slop:** Aesthetic score **MUST** be $\geq 80$. Do not use generic fonts (Inter, Roboto, Arial).
-* **Error Handling:** All async functions **MUST** include robust `try...catch` blocks.
+- **Paths:** All paths must be **relative** (start with `./`).
+- **Commit Messages:** **MUST** use Conventional Commits (e.g., `feat:`, `fix:`, `chore:`).
+- **Testing:** Frontend (Jest), Backend (pytest), E2E (Playwright). **NEVER** merge without passing CI.
+- **M3 Anti-Slop:** Aesthetic score **MUST** be $\geq 80$. Do not use generic fonts (Inter, Roboto, Arial).
+- **Error Handling:** All async functions **MUST** include robust `try...catch` blocks.
 
 ## 5. 📊 Status & Reports
 
-* **Test Coverage:** Frontend 17%, Backend 85%, E2E 90% (Target: 50% / 95% / 95%).
-* **M3 Readiness:** 12% (Target: 70%).
-* **Full Audit Report:** `.claude/docs/SKILL_GUIDELINES_AUDIT.md` (Compliance 95%).
-* **Integration Health Report:** `docs/INTEGRATION_MAP.md` (Generated by `frontend-backend-mapper` skill).
+- **Test Coverage:** Frontend 17%, Backend 85%, E2E 90% (Target: 50% / 95% / 95%).
+- **M3 Readiness:** 12% (Target: 70%).
+- **Full Audit Report:** `.claude/docs/SKILL_GUIDELINES_AUDIT.md` (Compliance 95%).
+- **Integration Health Report:** `docs/INTEGRATION_MAP.md` (Generated by `frontend-backend-mapper` skill).
 
 ```bash
 # For Production Deployment:
@@ -105,6 +107,7 @@ The project includes automation scripts for creating and validating Claude Code 
 ### Skill Creation Tool
 
 **Initialize a New Skill:**
+
 ```bash
 python3 .claude/scripts/init-skill.py <skill-name> [--path <output-directory>]
 
@@ -114,6 +117,7 @@ python3 .claude/scripts/init-skill.py database-migrator --path .claude/skills
 ```
 
 **What it creates:**
+
 - `SKILL.md` - Main skill definition with YAML frontmatter and workflow
 - `README.md` - Development notes and guidelines
 - `scripts/` - Directory for automation scripts (bash, python)
@@ -123,6 +127,7 @@ python3 .claude/scripts/init-skill.py database-migrator --path .claude/skills
 ### Skill Validation & Packaging Tool
 
 **Validate a Skill:**
+
 ```bash
 python3 .claude/scripts/package-skill.py <path/to/skill> [--validate-only]
 
@@ -132,6 +137,7 @@ python3 .claude/scripts/package-skill.py .claude/skills/my-skill dist/
 ```
 
 **Validation Checks:**
+
 - ✅ SKILL.md exists with valid YAML frontmatter
 - ✅ Required fields: `name`, `description`
 - ✅ Description includes "when to use" triggers
@@ -143,6 +149,7 @@ python3 .claude/scripts/package-skill.py .claude/skills/my-skill dist/
 - ✅ Scripts are executable (`chmod +x`)
 
 **Package Output:**
+
 - Creates `.skill` file (zip format) ready for distribution
 - Excludes README.md and auxiliary documentation
 - Includes only essential skill resources
@@ -150,6 +157,7 @@ python3 .claude/scripts/package-skill.py .claude/skills/my-skill dist/
 ### Skill Development Best Practices
 
 **Structure Guidelines:**
+
 1. **Keep SKILL.md concise** - Under 500 lines, move detailed content to `references/`
 2. **Progressive disclosure** - Load content in layers (metadata → SKILL.md → references)
 3. **Single-level references** - All reference files directly in `references/`, no nesting
@@ -158,11 +166,13 @@ python3 .claude/scripts/package-skill.py .claude/skills/my-skill dist/
 6. **Clear descriptions** - Include both functionality and "when to use" triggers
 
 **Example Description (Good):**
+
 ```yaml
 description: "Runs or writes Playwright tests for the webapp. Use when asked to 'run playwright' or 'write a new e2e test'."
 ```
 
 **Example Description (Needs Improvement):**
+
 ```yaml
 description: "Example skill demonstrating YAML best practices"
 # Missing: When to use this skill!
@@ -171,6 +181,7 @@ description: "Example skill demonstrating YAML best practices"
 ### Skill Audit Report
 
 A comprehensive audit of all skills against official guidelines is available at:
+
 - **Audit Report**: `.claude/docs/SKILL_GUIDELINES_AUDIT.md`
 - **Compliance Status**: 95% (19/20 skills passing validation)
 - **Last Audit**: 2025-11-18
@@ -180,6 +191,7 @@ A comprehensive audit of all skills against official guidelines is available at:
 ### Backend API Scaffolding (NEW - 2025-01-06)
 
 **FastAPI Endpoint Scaffolding:**
+
 - **Skill**: `fastapi-endpoint-scaffolder` - Create new FastAPI endpoints with Pydantic models, tests, and router registration
 - **Location**: `.claude/skills/fastapi-endpoint-scaffolder/`
 - **Capabilities**:
@@ -191,6 +203,7 @@ A comprehensive audit of all skills against official guidelines is available at:
   - Standard error handling patterns
 
 **Pydantic Model Scaffolding:**
+
 - **Skill**: `pydantic-model-scaffolder` - Create type-safe Pydantic models for API data validation
 - **Location**: `.claude/skills/pydantic-model-scaffolder/`
 - **Capabilities**:
@@ -203,6 +216,7 @@ A comprehensive audit of all skills against official guidelines is available at:
 ### Frontend-Backend Integration Analysis (NEW - 2025-01-06)
 
 **Integration Mapping:**
+
 - **Skill**: `frontend-backend-mapper` - Analyze and map frontend API calls to backend endpoints
 - **Location**: `.claude/skills/frontend-backend-mapper/`
 - **Capabilities**:
@@ -218,6 +232,7 @@ A comprehensive audit of all skills against official guidelines is available at:
   - **Optional `--include-design-tokens` flag**: Audit component design token compliance (M3 migration)
 
 **API Contract Validation:**
+
 - **Skill**: `api-contract-validator` - Validate type contracts between TypeScript and Pydantic
 - **Location**: `.claude/skills/api-contract-validator/`
 - **Capabilities**:
@@ -230,6 +245,7 @@ A comprehensive audit of all skills against official guidelines is available at:
   - Distinguish breaking vs non-breaking changes
 
 **Integration Test Scaffolding:**
+
 - **Skill**: `api-integration-test-scaffolder` - Generate E2E integration tests
 - **Location**: `.claude/skills/api-integration-test-scaffolder/`
 - **Capabilities**:
@@ -243,6 +259,7 @@ A comprehensive audit of all skills against official guidelines is available at:
 ### Fullstack Integration Analysis & Planning (NEW - 2025-01-06)
 
 **Fullstack Integration Specialist:**
+
 - **Subagent**: `fullstack-integration-specialist` - Expert orchestrator for full-stack feature development
 - **Location**: `.claude/agents/fullstack-integration-specialist.md`
 - **Expertise**:
@@ -262,6 +279,7 @@ A comprehensive audit of all skills against official guidelines is available at:
 ### Quick Start: Backend API Development
 
 **Create New Endpoint:**
+
 ```bash
 # Use the fastapi-endpoint-scaffolder skill
 # Ask Claude: "Create a new endpoint for user notifications"
@@ -273,6 +291,7 @@ A comprehensive audit of all skills against official guidelines is available at:
 ```
 
 **Validate Integration:**
+
 ```bash
 # Use the frontend-backend-mapper skill
 # Ask Claude: "Map all frontend-backend integrations"
@@ -280,6 +299,7 @@ A comprehensive audit of all skills against official guidelines is available at:
 ```
 
 **Check Type Safety:**
+
 ```bash
 # Use the api-contract-validator skill
 # Ask Claude: "Validate all API contracts"
@@ -287,6 +307,7 @@ A comprehensive audit of all skills against official guidelines is available at:
 ```
 
 **Document Complete Flows:**
+
 ```bash
 # Use the frontend-backend-mapper skill with optional flags
 # Ask Claude: "Map the KSC generation flow with database and token tracing"
@@ -308,38 +329,46 @@ A comprehensive audit of all skills against official guidelines is available at:
 ### Testing Skills
 
 **Jest Test Scaffolder** (`jest-test-scaffolder`)
+
 - Generate React component and hook tests with auto-detected props
 - Use `@testing-library/react` + `userEvent` patterns, edge case coverage
 - Templates: `component.test.tsx.tpl`, `hook.test.tsx.tpl`
 
 **API Integration Test Scaffolder** (`api-integration-test-scaffolder`)
+
 - Generate backend integration tests with success, validation, auth, error scenarios
 - Mock Firebase Auth and Genkit flows, performance assertions
 
 **Storybook Scaffolder** (`storybook-scaffolder`)
+
 - Generate `.stories.tsx` files with variant stories and interaction tests
 - Auto-extract component names and props
 
 **Webapp Testing** (`webapp-testing`)
+
 - Generate Playwright E2E tests for user journeys
 - Reference: `.claude/skills/webapp-testing/REFERENCE/careercopilot-selectors.md`
 
 **Testing Specialist Subagent** (`testing-specialist`)
+
 - Orchestrates test generation for all layers with coverage analysis
 - Integrates with fullstack-integration-specialist, test-runner, code-reviewer
 
 ### Test Commands
 
 **Frontend (Jest):**
+
 - `yarn test` - Run all tests
 - `yarn test:watch` - Watch mode
 - `yarn test:coverage` - Generate coverage report
 
 **Backend (pytest):**
+
 - `pytest backend/app/tests/` - Run all tests
 - `pytest backend/app/tests/ --cov` - With coverage
 
 **E2E (Playwright):**
+
 - `yarn test:e2e` - Run all E2E tests
 - `yarn test:e2e:headed` - With browser UI
 
@@ -371,15 +400,18 @@ jules remote status --session [batch-name]
 ## Frontend Development & Build Commands
 
 **Development:**
+
 - `yarn dev` - Start Vite development server
 - `yarn storybook` - Start Storybook development server
 
 **Building & Validation:**
+
 - `yarn build` - TypeScript compilation + Vite production build
 - `yarn preview` - Preview production build locally
 - `yarn build-storybook` - Build Storybook for production
 
 **Linting & Formatting:**
+
 - `yarn lint` - Run ESLint (entire project)
 - `yarn lint:fix` - Auto-fix ESLint issues
 - `yarn lint:ci` - CI-friendly linting
@@ -388,6 +420,7 @@ jules remote status --session [batch-name]
 - Pre-commit hooks enabled via `husky`
 
 **Deployment Readiness:**
+
 - `./scripts/frontend-deployment-readiness.sh` - Full TypeScript, build, tests, linting, security validation
 - `./scripts/typescript-check.sh` - TypeScript type checking
 - `./scripts/vite-bundle-analyzer.sh` - Bundle analysis and optimization
@@ -409,6 +442,7 @@ The project is preparing for automated Material Design 3 (M3) migration. Migrati
 ### Migration Preparation Commands
 
 **Quick Start (All-in-One):**
+
 ```bash
 ./scripts/prepare-for-migration.sh
 # Interactive script that runs all preparation steps in order
@@ -418,12 +452,14 @@ The project is preparing for automated Material Design 3 (M3) migration. Migrati
 **Individual Steps:**
 
 1. **Audit Current Structure:**
+
    ```bash
    ./scripts/audit-component-structure.sh
    # Analyzes component structure and generates readiness report
    ```
 
 2. **Consolidate Duplicate Directories:**
+
    ```bash
    ./scripts/consolidate-duplicate-dirs.sh
    # Merges Ksc/KSC, renames PascalCase dirs to kebab-case
@@ -431,6 +467,7 @@ The project is preparing for automated Material Design 3 (M3) migration. Migrati
    ```
 
 3. **Standardize Component Structure:**
+
    ```bash
    ./scripts/standardize-component-structure.sh --dry-run  # Preview
    ./scripts/standardize-component-structure.sh           # Apply
@@ -439,6 +476,7 @@ The project is preparing for automated Material Design 3 (M3) migration. Migrati
    ```
 
 4. **Generate Component Manifest:**
+
    ```bash
    node scripts/generate-component-manifest.ts
    # Creates component-manifest.json for automation tools
@@ -499,18 +537,21 @@ The project includes a comprehensive **Design Wing** infrastructure for creating
 ### Design Agents (3 Total)
 
 **Visual Design Director** (`visual-design-director`)
+
 - Senior Art Director who defines aesthetic direction and visual vibe
 - Analyzes design references and creates `aestheticPreferences` JSON
 - Orchestrates design critique using vision analysis
 - Hands off complete aesthetic specifications to Design Systems Architect
 
 **Design Systems Architect** (`design-systems-architect`)
+
 - Design Operations specialist who translates aesthetics into tokenized systems
 - Receives aesthetic preferences and generates complete token system
 - Validates color contrast against WCAG AA/AAA standards
 - Builds frontend assets (CSS variables, Tailwind configuration)
 
 **UX & Accessibility Lead** (`ux-accessibility-lead`)
+
 - User advocate who audits designs for accessibility and usability
 - Validates WCAG compliance, focus states, and keyboard navigation
 - Audits user flows against Nielsen's 10 Usability Heuristics
@@ -519,11 +560,13 @@ The project includes a comprehensive **Design Wing** infrastructure for creating
 ### Design Skills (4 + PDF Multimodal Skills)
 
 **Design Skills:**
+
 - `design-critique-vision` - Analyzes screenshots for visual quality, hierarchy, spacing, and contrast
 - `m3-design-system-generator` - Complete design token generation (colors, motion, base tokens + WCAG validation)
 - `ux-heuristic-audit` - Audits user flows against Nielsen's 10 Usability Heuristics
 
 **Document Skills (PDF Multimodal):**
+
 - `pdf-text-extractor` - Extract text, summarize, answer questions, or parse forms from PDF documents
 - Includes specialized guides: `forms.md` (structured form extraction), `reference.md` (usage patterns)
 
@@ -597,6 +640,7 @@ The project includes a complete **M3 Expressive Design System migration infrastr
 **Location:** `.claude/agents/m3-migration-architect.md`
 
 **Capabilities:**
+
 - Complete stack migration (MUI v5 → M3 Expressive)
 - Orchestrates all 8 frontend-migration skills sequentially
 - Ensures 100% token replacement (no hardcoded values)
@@ -609,7 +653,9 @@ The project includes a complete **M3 Expressive Design System migration infrastr
 **Location:** `.claude/skills/frontend-migration/`
 
 #### Batch Migration Orchestrator
+
 **Skill:** `batch-migration-orchestrator` (539 lines)
+
 - Parallel component migration coordinator
 - Manages multi-component migrations
 - Orchestrates 4-step migration protocol (layout → visual → typography → interaction)
@@ -664,6 +710,7 @@ The project now includes **4 new M3 Expressive skills** and **3 enhanced agents*
 ### M3 Expressive Principles
 
 Material 3 Expressive creates interfaces that feel:
+
 - **Vibrant & Dynamic** - Rich, personalized color palettes (40+ tonal shades)
 - **Playful & Energetic** - Spring-based physics, choreographed animations
 - **Emotionally Impactful** - Variable fonts, extreme weight contrasts (100 vs 900)
@@ -675,9 +722,11 @@ Material 3 Expressive creates interfaces that feel:
 **Location:** `.claude/skills/design-skills/`
 
 #### 1. m3-expressive-typography-enhancer
+
 **Purpose:** Variable fonts, extreme weight contrasts, emotional tone mapping
 
 **Key Features:**
+
 - Variable font integration (font-variation-settings)
 - Extreme weight contrasts (100 vs 900, not 400 vs 600)
 - Extreme size contrasts (3x+ ratio: 57px vs 12px)
@@ -688,9 +737,11 @@ Material 3 Expressive creates interfaces that feel:
 **Recommended:** Plus Jakarta Sans Variable, Poppins, Montserrat, Sora
 
 #### 2. m3-spring-motion-choreography
+
 **Purpose:** Physics-based animations with spring easing and choreographed page loads
 
 **Key Features:**
+
 - Spring-based physics (expressive-spring, expressive-bounce)
 - Choreographed page loads (staggered reveals with animation-delay)
 - High-impact moments (focus on orchestrated entrance)
@@ -698,13 +749,16 @@ Material 3 Expressive creates interfaces that feel:
 - Accessibility support (prefers-reduced-motion)
 
 **Spring Easing:**
+
 - `expressive-spring` - cubic-bezier(0.175, 0.885, 0.32, 1.275) - 12.75% overshoot
 - `expressive-bounce` - cubic-bezier(0.68, -0.55, 0.265, 1.55) - 55% overshoot
 
 #### 3. m3-atmospheric-backgrounds
+
 **Purpose:** Layered gradients, geometric patterns, atmospheric depth (not flat solids)
 
 **Key Features:**
+
 - Layered gradients (multi-stop, radial + linear)
 - Geometric patterns (grid, dots, stripes, organic blobs)
 - Contextual effects (playful, professional, elegant)
@@ -713,9 +767,11 @@ Material 3 Expressive creates interfaces that feel:
 **Pattern Library:** Mesh gradient, noise texture, isometric grid, aurora effect
 
 #### 4. m3-anti-slop-validator
+
 **Purpose:** Detect and prevent generic "AI slop" aesthetics with quality scoring
 
 **Key Features:**
+
 - Detects generic fonts (Inter, Roboto, Arial)
 - Identifies clichéd colors (purple gradients on white, generic Material Blue)
 - Spots flat layouts (solid backgrounds, no elevation)
@@ -723,6 +779,7 @@ Material 3 Expressive creates interfaces that feel:
 - Aesthetic quality score (0-100, Grade A-F)
 
 **Forbidden Patterns:**
+
 - ❌ Generic fonts (Inter, Roboto, Arial alone)
 - ❌ Purple gradients on white (#7C4DFF → #9C27B0 on #FFFFFF)
 - ❌ Timid weight contrast (400 vs 500 = 1.25x)
@@ -735,7 +792,9 @@ Material 3 Expressive creates interfaces that feel:
 ### Enhanced Agents (3 Updated)
 
 #### 1. visual-design-director (v1.2.0)
+
 **Enhancements:**
+
 - Added M3 Expressive Anti-Slop Rules section (CRITICAL)
 - Forbidden patterns explicitly listed
 - Required M3 Expressive elements checklist
@@ -743,7 +802,9 @@ Material 3 Expressive creates interfaces that feel:
 - Aesthetic quality score requirement (≥ 80)
 
 #### 2. design-systems-architect (v2.0.0)
+
 **Enhancements:**
+
 - Updated to use 4 new M3 Expressive skills
 - Sequential skill execution workflow
 - Validation includes m3-anti-slop-validator
@@ -751,7 +812,9 @@ Material 3 Expressive creates interfaces that feel:
 - Generates 200+ tokens (up from ~150)
 
 #### 3. m3-migration-architect (v2.0.0)
+
 **Enhancements:**
+
 - Extended from 8-step to 12-step protocol
 - Added Step 4: m3-expressive-typography-enhancer
 - Added Step 10: m3-spring-motion-choreography
@@ -762,30 +825,35 @@ Material 3 Expressive creates interfaces that feel:
 ### M3 Expressive Quick Reference
 
 **Typography:**
+
 - Variable fonts (Plus Jakarta Sans Variable, Poppins, Montserrat, Sora)
 - Weight contrast ≥ 3x (100 vs 900, not 400 vs 600)
 - Size contrast ≥ 3x (57px vs 12px, not 24px vs 16px)
 - High-contrast pairing (display + monospace, serif + geometric)
 
 **Color:**
+
 - Vibrant palettes (40-80% saturation)
 - Tonal shades (40+ stops per palette)
 - HCT color space (perceptually uniform)
 - Dominant color with sharp accents
 
 **Motion:**
+
 - Spring physics (expressive-spring, expressive-bounce)
 - Choreographed page loads (staggered 100-150ms)
 - "Alive" interactions (bounce on press, react to hover)
 - prefers-reduced-motion support
 
 **Background:**
+
 - Layered gradients (≥ 2 layers)
 - Geometric patterns (grid, dots, organic)
 - Atmospheric effects (mesh, aurora, noise)
 - CSS-only, GPU-accelerated
 
 **Anti-Slop:**
+
 - No generic fonts (Inter, Roboto, Arial alone)
 - No purple gradients on white
 - No flat layouts (solid colors)
@@ -795,6 +863,7 @@ Material 3 Expressive creates interfaces that feel:
 ### Quick Start: M3 Expressive
 
 **Create Design System:**
+
 ```bash
 # User: "Create a design system with vibrant, confident aesthetic"
 # Visual Design Director defines aestheticPreferences
@@ -804,6 +873,7 @@ Material 3 Expressive creates interfaces that feel:
 ```
 
 **Migrate Component:**
+
 ```bash
 # User: "Migrate the Button component to M3 Expressive"
 # m3-migration-architect executes 12-step protocol
@@ -812,6 +882,7 @@ Material 3 Expressive creates interfaces that feel:
 ```
 
 **Validate Design:**
+
 ```bash
 # User: "Check if my design has generic AI slop"
 # m3-anti-slop-validator detects violations
@@ -948,12 +1019,14 @@ Options:
 ### Test Infrastructure
 
 **Configuration:**
+
 - `frontend/jest.config.mjs` - Jest ES module config with ts-jest
 - `frontend/playwright.config.ts` - Playwright E2E configuration
 - `backend/pytest.ini`, `backend/pyproject.toml` - Backend test config
 - `frontend/src/setupTests.ts` - Firebase mocks, Material-UI theme, ResizeObserver
 
 **CI/CD Pipeline** (`.github/workflows/ci.yml`):
+
 - Parallel test execution: Frontend (Jest), Backend (pytest), E2E (Playwright)
 - Coverage reporting to Codecov
 - Security scanning (Bandit, CodeQL)

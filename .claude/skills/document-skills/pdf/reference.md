@@ -35,7 +35,8 @@ This is the most powerful feature. Provide a JSON schema in your prompt to get s
 **See `forms.md` for a detailed example.**
 
 **Prompt ($PROMPT):** "Extract the 'Education' and 'Work Experience' sections from this resume. Return the data in this JSON format:
-```json
+
+````json
 {
   "education": [
     { "degree": "...", "school": "...", "year": "..." }
@@ -47,3 +48,4 @@ This is the most powerful feature. Provide a JSON schema in your prompt to get s
 ```"
 
 **Output:** The `output` key will contain `extractedFormFields` matching your JSON schema.
+````

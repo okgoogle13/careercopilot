@@ -1,81 +1,95 @@
-import path from 'path';
-import process from 'process';
-
 import { defineConfig, devices } from '@playwright/test';
 
-const isCI = !!process.env.CI;
-const baseURL = process.env.PLAYWRIGHT_BASE_URL || 'http://localhost:3000';
-
+/**
+ * Playwright Configuration for Career Copilot UAT
+ * See https://playwright.dev/docs/test-configuration
+ */
 export default defineConfig({
-  // Only look in the tests directory
-  testDir: path.join(__dirname, 'tests'),
+  testDir: './tests/e2e',
 
-  // Only match .spec.js files
-  testMatch: '**/*.spec.js',
+  /* Maximum time one test can run for */
+  timeout: 90 * 1000,
 
-  // Explicitly ignore everything outside tests directory
-  testIgnore: [
-    '**/node_modules/**',
-    '**/src/**',
-    '**/dist/**',
-    '**/__tests__/**',
-    '**/*.test.ts',
-    '**/*.test.tsx',
-    '**/*.test.js',
+  /* Run tests in files in parallel */
+  fullyParallel: true,
+
+  /* Fail the build on CI if you accidentally left test.only in the source code */
+  forbidOnly: !!process.env.CI,
+
+  /* Retry on CI only */
+  retries: process.env.CI ? 2 : 0,
+
+  /* Opt out of parallel tests on CI */
+  workers: process.env.CI ? 1 : undefined,
+
+  /* Reporter to use */
+  reporter: [
+    ['html', { outputFolder: 'playwright-report' }],
+    ['json', { outputFile: 'test-results/results.json' }],
+    ['junit', { outputFile: 'test-results/junit.xml' }],
+    ['list'],
   ],
 
-  // Per-test timeout
-  timeout: 120000,
-  // Global timeout for the entire playwright run
-  globalTimeout: 600000,
-  retries: process.env.CI ? 1 : 0,
-
-  // Run tests in parallel
-  fullyParallel: false,
-  workers: 1,
-
+  /* Shared settings for all the projects below */
   use: {
-    baseURL,
-    trace: 'on-first-retry',
-    screenshot: 'only-on-failure',
+    /* Base URL to use in actions like `await page.goto('/')` */
+    baseURL: process.env.PLAYWRIGHT_BASE_URL || 'http://localhost:5173',
+
+    /* Collect trace when retrying the failed test */
+    trace: 'retain-on-failure',
+
+    /* Record video on failure */
     video: 'retain-on-failure',
-    // Lower timeouts to surface issues faster in CI
-    navigationTimeout: 15000,
-    actionTimeout: 10000,
+
+    /* Take screenshot on failure */
+    screenshot: 'only-on-failure',
+
+    /* Authentication state */
+    storageState: process.env.VITE_USE_MOCK_AUTH ? undefined : 'tests/auth/user.json',
+
+    /* Viewport */
+    viewport: { width: 1280, height: 720 },
   },
 
+  /* Configure projects for major browsers */
   projects: [
     {
       name: 'chromium',
-      use: {
-        ...devices['Desktop Chrome'],
-        // Use headless mode
-        launchOptions: {
-          args: ['--no-sandbox', '--disable-setuid-sandbox'],
-        },
-      },
+      use: { ...devices['Desktop Chrome'] },
+    },
+
+    {
+      name: 'firefox',
+      use: { ...devices['Desktop Firefox'] },
+    },
+
+    {
+      name: 'webkit',
+      use: { ...devices['Desktop Safari'] },
+    },
+
+    /* Test against mobile viewports */
+    {
+      name: 'Mobile Chrome',
+      use: { ...devices['Pixel 5'] },
+    },
+    {
+      name: 'Mobile Safari',
+      use: { ...devices['iPhone 12'] },
+    },
+
+    /* Test against branded browsers */
+    {
+      name: 'Microsoft Edge',
+      use: { ...devices['Desktop Edge'], channel: 'msedge' },
     },
   ],
 
-  // When running in CI, services are started via docker-compose. Avoid starting a Vite preview server to prevent port conflicts.
-  webServer: isCI
-    ? undefined
-    : {
-        command: 'npm run preview',
-        port: 3000,
-        reuseExistingServer: !isCI,
-        timeout: 120000,
-        stdout: 'pipe',
-        stderr: 'pipe',
-      },
-
-  reporter: [
-    ['list'],
-    ['html', { outputFolder: 'playwright-report', open: 'never' }],
-    ['json', { outputFile: 'test-results/results.json' }],
-  ],
-
-  expect: {
-    timeout: 10000,
+  /* Run your local dev server before starting the tests */
+  webServer: process.env.CI ? undefined : {
+    command: 'npm run dev',
+    url: 'http://localhost:5173',
+    reuseExistingServer: !process.env.CI,
+    timeout: 120 * 1000,
   },
 });

@@ -63,3 +63,7 @@ opencensus-ext-stackdriver
 
 # Task Queues
 celery
+
+# Document Intelligence
+pypdf
+defusedxml

@@ -5,8 +5,8 @@ import { z } from 'zod';
 // ============================================================================
 
 export const personalInfoSchema = z.object({
-  name: z.string().min(1, "Full name is required"),
-  email: z.string().email("Invalid email address"),
+  name: z.string().min(1, 'Full name is required'),
+  email: z.string().email('Invalid email address'),
   phone: z.string().optional().nullable(),
   location: z.string().optional().nullable(),
   summary: z.string(),
@@ -73,13 +73,12 @@ export const masterCareerProfileSchema = z.object({
 });
 export type MasterCareerProfile = z.infer<typeof masterCareerProfileSchema>;
 
-
 // ============================================================================
 // Schemas from asset_library_schema.py
 // ============================================================================
 
 export const contextTagsSchema = z.object({
-  roleType: z.string().min(1, "Role type is required"),
+  roleType: z.string().min(1, 'Role type is required'),
   subsectors: z.array(z.string()).default([]),
 });
 export type ContextTags = z.infer<typeof contextTagsSchema>;
@@ -103,30 +102,29 @@ export const voiceProfileSchema = z.object({
 export type VoiceProfile = z.infer<typeof voiceProfileSchema>;
 
 export const assetDocumentSchema = z.object({
-  documentType: z.enum(["resume", "ksc", "voice"]),
+  documentType: z.enum(['resume', 'ksc', 'voice']),
   extractedData: z.record(z.any()), // Generic base, refined in discriminated union
   tags: contextTagsSchema,
   metadata: assetMetadataSchema,
-  schemaVersion: z.string().default("v4"),
+  schemaVersion: z.string().default('v4'),
   createdAt: z.string().datetime(),
   updatedAt: z.string().datetime(),
   userId: z.string(),
 });
 export type AssetDocument = z.infer<typeof assetDocumentSchema>;
 
-
 // ============================================================================
 // Typed Convenience Schemas
 // ============================================================================
 
 export const resumeAssetSchema = assetDocumentSchema.extend({
-  documentType: z.literal("resume"),
+  documentType: z.literal('resume'),
   extractedData: masterCareerProfileSchema,
 });
 export type ResumeAsset = z.infer<typeof resumeAssetSchema>;
 
 export const kscAssetSchema = assetDocumentSchema.extend({
-  documentType: z.literal("ksc"),
+  documentType: z.literal('ksc'),
   extractedData: z.object({
     keySelectionCriteriaExamples: z.array(keySelectionCriteriaExampleSchema).optional(),
   }),
@@ -134,7 +132,7 @@ export const kscAssetSchema = assetDocumentSchema.extend({
 export type KSCAsset = z.infer<typeof kscAssetSchema>;
 
 export const voiceAssetSchema = assetDocumentSchema.extend({
-  documentType: z.literal("voice"),
+  documentType: z.literal('voice'),
   extractedData: voiceProfileSchema,
 });
 export type VoiceAsset = z.infer<typeof voiceAssetSchema>;
@@ -143,7 +141,7 @@ export type VoiceAsset = z.infer<typeof voiceAssetSchema>;
  * A discriminated union to handle different asset types safely in TypeScript.
  * This is the primary type you should use when consuming asset data on the frontend.
  */
-export const typedAssetDocumentSchema = z.discriminatedUnion("documentType", [
+export const typedAssetDocumentSchema = z.discriminatedUnion('documentType', [
   resumeAssetSchema,
   kscAssetSchema,
   voiceAssetSchema,

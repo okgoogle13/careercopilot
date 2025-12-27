@@ -2,8 +2,7 @@
 
 ---
 
-description: Run build and all test suites in parallel for the CareerCopilot monorepo
----
+## description: Run build and all test suites in parallel for the CareerCopilot monorepo
 
 ## Overview
 
@@ -27,14 +26,17 @@ This workflow demonstrates how to execute the **build** step and **all test suit
 ## Steps
 
 1. **Install dependencies**
+
    ```bash
    yarn install   # installs workspace packages and dev deps (including npm-run-all)
    ```
 
 2. **Run the combined parallel workflow**
+
    ```bash
    npm run build-and-test:parallel
    ```
+
    - `build` runs the monorepo build (frontend + functions).
    - `test:all:parallel` spawns four test processes concurrently:
      - `test:frontend`
@@ -44,6 +46,7 @@ This workflow demonstrates how to execute the **build** step and **all test suit
    - Output from each task is prefixed with its name, making logs easy to follow.
 
 3. **CI Integration (GitHub Actions example)**
+
    ```yaml
    name: Build & Test Parallel
    on: [push, pull_request]
@@ -56,12 +59,13 @@ This workflow demonstrates how to execute the **build** step and **all test suit
          - name: Set up Node
            uses: actions/setup-node@v4
            with:
-             node-version: '20'
+             node-version: "20"
          - name: Install dependencies
            run: yarn install
          - name: Run parallel build & tests
            run: npm run build-and-test:parallel
    ```
+
    This CI job will fail fast if any of the parallel tasks exit with a non‑zero status.
 
 ## Why Parallel?

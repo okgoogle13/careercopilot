@@ -24,6 +24,7 @@ This skill implements M3 Expressive motion principles:
 ### 1. Spring Physics (Not Linear Curves)
 
 **Anti-Pattern (Boring, Mechanical):**
+
 ```css
 /* ❌ Predefined curve - feels robotic */
 .element {
@@ -32,6 +33,7 @@ This skill implements M3 Expressive motion principles:
 ```
 
 **M3 Expressive (Spring Physics):**
+
 ```css
 /* ✅ Spring physics - feels alive */
 .element {
@@ -47,18 +49,19 @@ This skill implements M3 Expressive motion principles:
 
 **Spring Easing Curves:**
 
-| Curve | Bezier | Overshoot | Use Case |
-|-------|--------|-----------|----------|
-| `expressive-spring` | (0.175, 0.885, 0.32, 1.275) | 12.75% | Subtle bounce (buttons, cards) |
-| `expressive-bounce` | (0.68, -0.55, 0.265, 1.55) | 55% | Playful bounce (notifications, badges) |
-| `emphasized-decelerate` | (0.05, 0.7, 0.1, 1) | 0% | Smooth deceleration (page enters) |
-| `emphasized-accelerate` | (0.3, 0, 0.8, 0.15) | 0% | Confident acceleration (page exits) |
+| Curve                   | Bezier                      | Overshoot | Use Case                               |
+| ----------------------- | --------------------------- | --------- | -------------------------------------- |
+| `expressive-spring`     | (0.175, 0.885, 0.32, 1.275) | 12.75%    | Subtle bounce (buttons, cards)         |
+| `expressive-bounce`     | (0.68, -0.55, 0.265, 1.55)  | 55%       | Playful bounce (notifications, badges) |
+| `emphasized-decelerate` | (0.05, 0.7, 0.1, 1)         | 0%        | Smooth deceleration (page enters)      |
+| `emphasized-accelerate` | (0.3, 0, 0.8, 0.15)         | 0%        | Confident acceleration (page exits)    |
 
 ---
 
 ### 2. Choreographed Page Loads (Staggered Reveals)
 
 **Anti-Pattern (All-At-Once Load):**
+
 ```tsx
 // ❌ Everything appears instantly - no delight
 <div className="page-content">
@@ -70,17 +73,19 @@ This skill implements M3 Expressive motion principles:
 ```
 
 **M3 Expressive (Orchestrated Sequence):**
+
 ```tsx
 // ✅ Staggered entrance with animation-delay
 <div className="page-content">
-  <Header className="animate-enter" style={{ animationDelay: '0ms' }} />
-  <Hero className="animate-enter" style={{ animationDelay: '100ms' }} />
-  <Features className="animate-enter" style={{ animationDelay: '200ms' }} />
-  <Footer className="animate-enter" style={{ animationDelay: '300ms' }} />
+  <Header className="animate-enter" style={{ animationDelay: "0ms" }} />
+  <Hero className="animate-enter" style={{ animationDelay: "100ms" }} />
+  <Features className="animate-enter" style={{ animationDelay: "200ms" }} />
+  <Footer className="animate-enter" style={{ animationDelay: "300ms" }} />
 </div>
 ```
 
 **CSS Animation:**
+
 ```css
 @keyframes enter {
   from {
@@ -109,6 +114,7 @@ This skill implements M3 Expressive motion principles:
 ```
 
 **Stagger Delay Formula:**
+
 ```javascript
 function calculateStaggerDelay(index, baseDelay = 100, maxDelay = 500) {
   // Limit total stagger to avoid long waits
@@ -117,7 +123,7 @@ function calculateStaggerDelay(index, baseDelay = 100, maxDelay = 500) {
 }
 
 // Example: 5 items with 100ms stagger
-[0, 100, 200, 300, 400] // Total: 400ms
+[0, 100, 200, 300, 400]; // Total: 400ms
 ```
 
 ---
@@ -133,41 +139,29 @@ const DashboardPage = () => {
   return (
     <div className="dashboard">
       {/* Act 1: Header slides in from top (100ms) */}
-      <Header
-        className="choreograph-slide-down"
-        style={{ animationDelay: '0ms' }}
-      />
+      <Header className="choreograph-slide-down" style={{ animationDelay: "0ms" }} />
 
       {/* Act 2: Hero fades up with spring (300ms) */}
-      <HeroStats
-        className="choreograph-fade-up-spring"
-        style={{ animationDelay: '100ms' }}
-      />
+      <HeroStats className="choreograph-fade-up-spring" style={{ animationDelay: "100ms" }} />
 
       {/* Act 3: Cards cascade in (staggered by 80ms each) */}
       <div className="card-grid">
         {cards.map((card, index) => (
-          <Card
-            key={card.id}
-            className="choreograph-scale-in"
-            style={{ animationDelay: `${200 + index * 80}ms` }}
-          >
+          <Card key={card.id} className="choreograph-scale-in" style={{ animationDelay: `${200 + index * 80}ms` }}>
             {card.content}
           </Card>
         ))}
       </div>
 
       {/* Act 4: Footer fades in after all content (800ms) */}
-      <Footer
-        className="choreograph-fade-in"
-        style={{ animationDelay: '800ms' }}
-      />
+      <Footer className="choreograph-fade-in" style={{ animationDelay: "800ms" }} />
     </div>
   );
 };
 ```
 
 **CSS Choreography Keyframes:**
+
 ```css
 /* Act 1: Slide down */
 @keyframes slide-down {
@@ -237,6 +231,7 @@ const DashboardPage = () => {
 ### 4. "Alive" Interactions (Physics-Based Reactions)
 
 **Button Press (Spring Reaction):**
+
 ```css
 .button-expressive {
   transition:
@@ -257,15 +252,13 @@ const DashboardPage = () => {
 ```
 
 **Notification Bounce (Dismiss Gesture):**
+
 ```tsx
 const NotificationToast = () => {
   const [isDismissing, setIsDismissing] = useState(false);
 
   return (
-    <div
-      className={`notification ${isDismissing ? 'dismissing' : ''}`}
-      onClick={() => setIsDismissing(true)}
-    >
+    <div className={`notification ${isDismissing ? "dismissing" : ""}`} onClick={() => setIsDismissing(true)}>
       <p>New message received!</p>
     </div>
   );
@@ -305,6 +298,7 @@ const NotificationToast = () => {
 ```
 
 **Card Hover (Magnetic Effect):**
+
 ```css
 .card-magnetic {
   transition:
@@ -348,20 +342,21 @@ const NotificationToast = () => {
 ```
 
 **React Hook for Motion Preference:**
+
 ```tsx
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 function usePrefersReducedMotion() {
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
     setPrefersReducedMotion(mediaQuery.matches);
 
     const handleChange = () => setPrefersReducedMotion(mediaQuery.matches);
-    mediaQuery.addEventListener('change', handleChange);
+    mediaQuery.addEventListener("change", handleChange);
 
-    return () => mediaQuery.removeEventListener('change', handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
   }, []);
 
   return prefersReducedMotion;
@@ -371,13 +366,7 @@ function usePrefersReducedMotion() {
 const MyComponent = () => {
   const reducedMotion = usePrefersReducedMotion();
 
-  return (
-    <div
-      className={reducedMotion ? 'no-animation' : 'animate-bounce'}
-    >
-      Content
-    </div>
-  );
+  return <div className={reducedMotion ? "no-animation" : "animate-bounce"}>Content</div>;
 };
 ```
 
@@ -391,11 +380,7 @@ const MyComponent = () => {
 const FeatureList = ({ features }) => (
   <ul className="feature-list">
     {features.map((feature, index) => (
-      <li
-        key={feature.id}
-        className="feature-item choreograph-cascade"
-        style={{ animationDelay: `${index * 60}ms` }}
-      >
+      <li key={feature.id} className="feature-item choreograph-cascade" style={{ animationDelay: `${index * 60}ms` }}>
         {feature.title}
       </li>
     ))}
@@ -426,32 +411,20 @@ const FeatureList = ({ features }) => (
 const Hero = () => (
   <section className="hero">
     {/* Layer 1: Background fades in (0ms) */}
-    <div
-      className="hero-background choreograph-fade"
-      style={{ animationDelay: '0ms' }}
-    />
+    <div className="hero-background choreograph-fade" style={{ animationDelay: "0ms" }} />
 
     {/* Layer 2: Heading slides up (200ms) */}
-    <h1
-      className="hero-heading choreograph-slide-up"
-      style={{ animationDelay: '200ms' }}
-    >
+    <h1 className="hero-heading choreograph-slide-up" style={{ animationDelay: "200ms" }}>
       Welcome to CareerCopilot
     </h1>
 
     {/* Layer 3: Subheading fades in (400ms) */}
-    <p
-      className="hero-subheading choreograph-fade"
-      style={{ animationDelay: '400ms' }}
-    >
+    <p className="hero-subheading choreograph-fade" style={{ animationDelay: "400ms" }}>
       Your AI-powered career assistant
     </p>
 
     {/* Layer 4: CTA button bounces in (600ms) */}
-    <button
-      className="hero-cta choreograph-bounce"
-      style={{ animationDelay: '600ms' }}
-    >
+    <button className="hero-cta choreograph-bounce" style={{ animationDelay: "600ms" }}>
       Get Started
     </button>
   </section>
@@ -586,6 +559,7 @@ const TabPanel = ({ activeTab, children }) => (
 ## Usage
 
 **Standalone Skill:**
+
 ```bash
 # Apply spring motion choreography to component
 m3-spring-motion-choreography \
@@ -595,11 +569,12 @@ m3-spring-motion-choreography \
 ```
 
 **Within M3 Migration Architect (Step 8):**
+
 ```javascript
-const motionChoreographed = await runSkill('m3-spring-motion-choreography', {
+const motionChoreographed = await runSkill("m3-spring-motion-choreography", {
   code: elevationRefactoredCode,
-  motionPattern: 'spring-physics',
-  choreographyType: 'staggered-cascade'
+  motionPattern: "spring-physics",
+  choreographyType: "staggered-cascade",
 });
 ```
 

@@ -64,7 +64,7 @@
         "median": 0.012,
         "std": 0.008,
         "min": 0.005,
-        "max": 0.040
+        "max": 0.04
       },
       "unit": "seconds",
       "threshold": 0.05,

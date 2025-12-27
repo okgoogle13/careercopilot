@@ -26,12 +26,14 @@ The project is preparing for automated Material Design 3 (M3) migration. Migrati
 #### Individual Steps
 
 1. **Audit Current Structure:**
+
    ```bash
    ./scripts/audit-component-structure.sh
    # Analyzes component structure and generates readiness report
    ```
 
 2. **Consolidate Duplicate Directories:**
+
    ```bash
    ./scripts/consolidate-duplicate-dirs.sh
    # Merges Ksc/KSC, renames PascalCase dirs to kebab-case
@@ -39,6 +41,7 @@ The project is preparing for automated Material Design 3 (M3) migration. Migrati
    ```
 
 3. **Standardize Component Structure:**
+
    ```bash
    ./scripts/standardize-component-structure.sh --dry-run  # Preview
    ./scripts/standardize-component-structure.sh           # Apply
@@ -47,6 +50,7 @@ The project is preparing for automated Material Design 3 (M3) migration. Migrati
    ```
 
 4. **Generate Component Manifest:**
+
    ```bash
    node scripts/generate-component-manifest.ts
    # Creates component-manifest.json for automation tools
@@ -113,11 +117,13 @@ The project includes a comprehensive **Design Wing** infrastructure for creating
 **Role:** Senior Art Director who defines aesthetic direction and visual vibe
 
 **Capabilities:**
+
 - Analyzes design references and creates `aestheticPreferences` JSON
 - Orchestrates design critique using vision analysis
 - Hands off complete aesthetic specifications to Design Systems Architect
 
 **When to Use:**
+
 - Define visual direction for new features
 - Analyze design references and mood boards
 - Create aesthetic specifications
@@ -127,11 +133,13 @@ The project includes a comprehensive **Design Wing** infrastructure for creating
 **Role:** Design Operations specialist who translates aesthetics into tokenized systems
 
 **Capabilities:**
+
 - Receives aesthetic preferences and generates complete token system
 - Validates color contrast against WCAG AA/AAA standards
 - Builds frontend assets (CSS variables, Tailwind configuration)
 
 **When to Use:**
+
 - Convert aesthetic preferences into design tokens
 - Generate complete design system from specifications
 - Ensure accessibility compliance
@@ -141,11 +149,13 @@ The project includes a comprehensive **Design Wing** infrastructure for creating
 **Role:** User advocate who audits designs for accessibility and usability
 
 **Capabilities:**
+
 - Validates WCAG compliance, focus states, and keyboard navigation
 - Audits user flows against Nielsen's 10 Usability Heuristics
 - Provides actionable remediation recommendations
 
 **When to Use:**
+
 - Audit designs for accessibility compliance
 - Validate user flows and usability
 - Ensure WCAG AA/AAA standards compliance
@@ -278,14 +288,14 @@ The project includes a comprehensive **Design Wing** infrastructure for creating
   /* System Colors */
   --sys-color-primary: #1976d2;
   --sys-color-on-primary: #ffffff;
-  
+
   /* Typography */
   --sys-typescale-headline-large: 32px / 40px;
   --sys-font-weight-hero: var(--font-weight-hero);
-  
+
   /* Motion */
   --sys-motion-duration-medium-2: 300ms;
-  --sys-motion-easing-standard: cubic-bezier(0.2, 0.0, 0.0, 1.0);
+  --sys-motion-easing-standard: cubic-bezier(0.2, 0, 0, 1);
 }
 ```
 
@@ -297,19 +307,19 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'sys-primary': 'var(--sys-color-primary)',
-        'sys-on-primary': 'var(--sys-color-on-primary)',
+        "sys-primary": "var(--sys-color-primary)",
+        "sys-on-primary": "var(--sys-color-on-primary)",
       },
       fontFamily: {
-        'hero': ['var(--font-family-hero)'],
-        'human': ['var(--font-family-human)'],
+        hero: ["var(--font-family-hero)"],
+        human: ["var(--font-family-human)"],
       },
       animationDuration: {
-        'medium-2': 'var(--sys-motion-duration-medium-2)',
+        "medium-2": "var(--sys-motion-duration-medium-2)",
       },
     },
   },
-}
+};
 ```
 
 ### Best Practices

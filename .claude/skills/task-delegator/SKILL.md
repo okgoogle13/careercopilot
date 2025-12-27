@@ -20,6 +20,7 @@ This skill coordinates parallel execution of test generation across 8 Jules inst
 ### Phase 1: Preparation (Days 1-2)
 
 **Step 1: Prepare Batch Configuration**
+
 - Create 8 component batch lists (10-13 components each)
 - Document batch characteristics:
   - Component count
@@ -28,12 +29,14 @@ This skill coordinates parallel execution of test generation across 8 Jules inst
   - Special considerations (API mocks, Context, Portal, etc.)
 
 **Step 2: Create Delegation Instructions**
+
 - Generate prompt template for each batch
 - Include component list with full paths
 - Include success metrics and validation steps
 - Include error handling and fallback procedures
 
 **Step 3: Prepare Execution Environment**
+
 - Verify jest-test-scaffolder skill is available
 - Verify test-runner agent is configured
 - Set up result consolidation process
@@ -42,6 +45,7 @@ This skill coordinates parallel execution of test generation across 8 Jules inst
 ### Phase 2: Batch Configuration
 
 **Batch 1: UI Components (Feedback)**
+
 - Components: Dialog, Toast, EmptyState, Popover, Snackbar, Alert, Skeleton
 - Count: 10-12 components
 - Task: Generate tests with Material-UI theme setup
@@ -49,6 +53,7 @@ This skill coordinates parallel execution of test generation across 8 Jules inst
 - Expected: 150-200 tests, 80%+ pass rate
 
 **Batch 2: UI Components (Loading)**
+
 - Components: LoadingSpinner, FullPageLoading, LoadingSkeleton, LinearProgress, CircularProgress
 - Count: 8-10 components
 - Task: Generate tests with Portal and positioning
@@ -56,6 +61,7 @@ This skill coordinates parallel execution of test generation across 8 Jules inst
 - Expected: 100-150 tests, 70%+ pass rate
 
 **Batch 3: UI Components (Navigation)**
+
 - Components: Sidebar, Navbar, Breadcrumbs, Tabs, Stepper, Pagination
 - Count: 10-12 components
 - Task: Generate tests with routing awareness
@@ -63,6 +69,7 @@ This skill coordinates parallel execution of test generation across 8 Jules inst
 - Expected: 150-200 tests, 65%+ pass rate (routing complexity)
 
 **Batch 4: UI Components (Surfaces)**
+
 - Components: Card, Paper, Container, Grid, Box, Panel
 - Count: 8-10 components
 - Task: Generate basic render and variant tests
@@ -70,6 +77,7 @@ This skill coordinates parallel execution of test generation across 8 Jules inst
 - Expected: 120-150 tests, 85%+ pass rate
 
 **Batch 5: Common Components**
+
 - Components: Header, Footer, Layout, PageWrapper, Sidebar, NavBar
 - Count: 8-10 components
 - Task: Generate tests with composition and layout
@@ -77,6 +85,7 @@ This skill coordinates parallel execution of test generation across 8 Jules inst
 - Expected: 120-150 tests, 70%+ pass rate
 
 **Batch 6: Library Components**
+
 - Components: Modal, Dropdown, Tooltip, Menu, Popover, DatePicker
 - Count: 10-12 components
 - Task: Generate tests with user interactions
@@ -84,6 +93,7 @@ This skill coordinates parallel execution of test generation across 8 Jules inst
 - Expected: 150-200 tests, 65%+ pass rate
 
 **Batch 7: Feature Components**
+
 - Components: Forms, FormGroup, FormControl, Inputs, Buttons, SelectField
 - Count: 10-12 components
 - Task: Generate tests with form interactions
@@ -91,6 +101,7 @@ This skill coordinates parallel execution of test generation across 8 Jules inst
 - Expected: 150-200 tests, 60%+ pass rate (complexity)
 
 **Batch 8: Career-Specific Components**
+
 - Components: KSCGenerator, TailoredResumeGenerator, CoverLetterGenerator, ApplicationTracker
 - Count: 10-12 components
 - Task: Generate tests with API service mocks
@@ -150,6 +161,7 @@ SUCCESS METRICS:
 ## Execution Steps (Days 3-4)
 
 **Step 1: Launch Jules Instances (Simultaneous)**
+
 ```
 Deploy 8 Jules instances at the same time:
 - Instance 1: Batch 1 (Feedback components)
@@ -163,12 +175,14 @@ Deploy 8 Jules instances at the same time:
 ```
 
 **Step 2: Monitor Execution**
+
 - Track progress per batch
 - Watch for early blockers
 - Capture metrics: tests generated, pass rate, failures
 - Document issues for Day 5 remediation
 
 **Step 3: Capture Results**
+
 - Save test files generated per batch
 - Record pass/fail metrics
 - Identify pattern blockers (e.g., "Portal not supported in jsdom")
@@ -177,12 +191,14 @@ Deploy 8 Jules instances at the same time:
 ## Consolidation Steps (Day 5)
 
 **Step 1: Merge Results**
+
 - Collect test files from 8 batches
 - Verify no duplicate testing
 - Organize by component directory
 - Commit batches to git
 
 **Step 2: Validate with test-runner**
+
 ```
 Run in parallel:
 yarn test:ci          # Full test suite with coverage
@@ -191,6 +207,7 @@ npm run test:all      # All layers (frontend + e2e + backend)
 ```
 
 **Step 3: Fix High-Impact Failures**
+
 - Analyze failures from each batch
 - Identify common patterns:
   - Jest configuration issues
@@ -200,12 +217,14 @@ npm run test:all      # All layers (frontend + e2e + backend)
 - Prioritize fixes: Quick wins first (30 minutes)
 
 **Step 4: Document Patterns**
+
 - What worked well (high pass rate patterns)
 - What needs special handling (Portal, Context, etc.)
 - Reusable patterns for Week 2
 - Update test-runner agent with new patterns
 
 **Step 5: Generate Metrics Report**
+
 ```
 WEEK 1 SUMMARY:
 - Components tested: 66 (up from 10)
@@ -233,6 +252,7 @@ LESSONS LEARNED:
 ## Quality Checkpoints
 
 ### Per-Batch Checkpoint (During Days 3-4)
+
 - ✅ Component count matches batch config
 - ✅ Tests generated for all components
 - ✅ Test files in correct locations
@@ -240,6 +260,7 @@ LESSONS LEARNED:
 - ✅ Blockers identified early
 
 ### Consolidation Checkpoint (Day 5)
+
 - ✅ All 8 batches completed
 - ✅ No duplicate tests
 - ✅ Git history clean (8 commits, one per batch)
@@ -248,6 +269,7 @@ LESSONS LEARNED:
 - ✅ Patterns documented
 
 ### Week 1 Success Checkpoint
+
 - ✅ 66 components tested (up from 10)
 - ✅ 800-1200 tests generated
 - ✅ 53% coverage achieved (exceeded target)
@@ -260,21 +282,25 @@ LESSONS LEARNED:
 ### Common Batch Issues
 
 **Issue: "Cannot find module" during test run**
+
 - Cause: Component import path incorrect or component doesn't exist
 - Solution: Verify component exists at path, check import in generated test
 - Action: Fix import path in test file
 
 **Issue: "Theme provider missing" error**
+
 - Cause: Material-UI component needs ThemeProvider wrapper
 - Solution: jest-test-scaffolder should handle this automatically
 - Action: Verify setupTests.ts has ThemeProvider mock, add if missing
 
 **Issue: "Portal is not supported" error**
+
 - Cause: jsdom doesn't support React Portals
 - Solution: Use snapshot test or skip positioning assertions
 - Action: Document as "Portal components need jsdom workaround"
 
 **Issue: High failure rate on entire batch**
+
 - Cause: Systemic issue (bad batch config, bad component list, jest config)
 - Solution: Stop batch, diagnose root cause, fix, restart
 - Action: Flag for Day 5 investigation before scaling
@@ -282,6 +308,7 @@ LESSONS LEARNED:
 ### Recovery Procedures
 
 **If a batch fails midway:**
+
 1. Stop Jules instance for that batch
 2. Investigate root cause (single component vs systemic)
 3. Fix in staging environment
@@ -289,12 +316,14 @@ LESSONS LEARNED:
 5. Document fix for other batches
 
 **If multiple batches show same error:**
+
 1. Stop all instances
 2. Diagnose: Is it jest config? setupTests.ts? jest-test-scaffolder?
 3. Fix at source (not in individual batches)
 4. Restart all instances with updated configuration
 
 **If pass rate is very low (< 40%) on first run:**
+
 1. Expected: 60-70% initial pass rate
 2. If lower: May indicate component implementation bugs (not test bugs)
 3. Action: Flag for Week 2 investigation with testing-specialist
@@ -303,6 +332,7 @@ LESSONS LEARNED:
 ## Metrics to Track
 
 ### Per Batch (Update continuously)
+
 - Components assigned: [Number]
 - Components completed: [Number]
 - Tests generated: [Number]
@@ -312,6 +342,7 @@ LESSONS LEARNED:
 - Special issues: [List]
 
 ### Daily (End of Days 1-2, 3-4, 5)
+
 ```
 Date: [Day]
 Batches active: [Number]
@@ -323,6 +354,7 @@ Progress to target: [Z%]
 ```
 
 ### Weekly (End of Week 1)
+
 ```
 Week 1 Summary:
 - Starting coverage: 8.1% (10 components)
@@ -336,12 +368,14 @@ Week 1 Summary:
 ## Success Indicators
 
 ### Immediate (During Execution)
+
 - ✅ 8 Jules instances launch simultaneously on Day 3
 - ✅ Each batch progresses independently
 - ✅ Metrics captured per batch in real-time
 - ✅ Issues documented for consolidation
 
 ### Short-term (Day 5 Consolidation)
+
 - ✅ 66 components tested across 8 batches
 - ✅ 800-1200 tests generated
 - ✅ 50%+ pass rate achieved (exceeds target)
@@ -349,6 +383,7 @@ Week 1 Summary:
 - ✅ Reusable patterns documented
 
 ### Long-term (Beyond Week 1)
+
 - ✅ Patterns proven and documented for future scaling
 - ✅ Week 2 fixes bring pass rate to 90%+
 - ✅ 70+ components (56% coverage) by end of Week 2
@@ -358,16 +393,19 @@ Week 1 Summary:
 ## References
 
 **Related Skills:**
+
 - jest-test-scaffolder: Component test generation
 - test-runner: Test execution and validation
 - testing-specialist: Complex component testing
 
 **Documentation:**
+
 - FAST_TRACK_DELEGATION_STRATEGY.md: Complete strategy overview
 - TEST_RUNNER_GUIDE.md: Test command reference
 - CLAUDE.md: Accelerated coverage improvement strategy
 
 **Timeline:**
+
 - Days 1-2: Preparation
 - Days 3-4: Execution (8 parallel batches)
 - Day 5: Consolidation and validation

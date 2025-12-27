@@ -63,6 +63,7 @@ Generates comprehensive unit tests for Python backend code using pytest with Pyd
 ## Test Categories
 
 ### Endpoint Tests
+
 ```python
 # Happy path: Valid request → 200 response
 def test_create_user_success(client, monkeypatch):
@@ -88,6 +89,7 @@ def test_get_user_not_found(client):
 ```
 
 ### Service Tests
+
 ```python
 # Mock Firestore for service tests
 @pytest.fixture
@@ -103,6 +105,7 @@ def test_service_with_firestore(mock_firestore):
 ```
 
 ### Genkit Flow Tests
+
 ```python
 # Mock Genkit responses
 @pytest.fixture
@@ -119,6 +122,7 @@ async def test_genkit_flow_execution(mock_genkit):
 ```
 
 ### Async Function Tests
+
 ```python
 @pytest.mark.asyncio
 async def test_async_database_query(client, monkeypatch):
@@ -133,6 +137,7 @@ async def test_async_database_query(client, monkeypatch):
 ## Fixtures & Mocking
 
 See `references/backend-test-patterns.md` for:
+
 - Firestore mocking patterns
 - Firebase Auth mocking
 - Genkit flow mocking
@@ -143,6 +148,7 @@ See `references/backend-test-patterns.md` for:
 ## Template Files
 
 Templates located in `.claude/skills/pytest-test-scaffolder/templates/`:
+
 - `endpoint.test.py.tpl` - FastAPI endpoint tests
 - `service.test.py.tpl` - Service/utility tests
 - `async.test.py.tpl` - Async function tests

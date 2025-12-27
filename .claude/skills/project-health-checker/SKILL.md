@@ -2,6 +2,7 @@
 name: project-health-checker
 description: "Quick diagnostic tool (30s) running validation and health checks. Use for fast status checks. Related: audit-agent for comprehensive security and code quality audits."
 ---
+
 # Project Health Check Workflow
 
 1.  Inform the user you are starting the full project health check.

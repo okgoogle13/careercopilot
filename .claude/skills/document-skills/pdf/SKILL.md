@@ -2,7 +2,7 @@
 name: pdf-text-extractor
 description: "Extracts text content from one or more PDF documents."
 version: 1.0.0
-tags: [ "pdf", "text-extraction", "vision", "multimodal" ]
+tags: ["pdf", "text-extraction", "vision", "multimodal"]
 config:
   enabled: true
   timeout: 120s
@@ -97,8 +97,10 @@ system_prompt: |
 This skill uses Claude's multimodal (vision) capabilities to read and process PDF documents. It can be used for full text extraction, summarization, Q&A, or structured data extraction.
 
 ## Agent Call
+
 Called by: `doc-processor-agent` (or any other agent)
 Input: `$PROMPT` (what to do) and one or more PDF files.
 
 ## Output
+
 Returns a JSON object containing the processed output for each document, or an error object.

@@ -1,5 +1,5 @@
 import type { StorybookConfig } from '@storybook/react-vite';
-import { dirname, join, resolve } from 'path';
+import { dirname, resolve } from 'path';
 import { fileURLToPath } from 'url';
 import { mergeConfig } from 'vite';
 
@@ -27,9 +27,7 @@ const config: StorybookConfig = {
     name: '@storybook/react-vite',
     options: {},
   },
-  features: {
-    storyStoreV7: true,
-  },
+  features: {},
   core: {
     disableTelemetry: true,
   },
@@ -64,7 +62,7 @@ const config: StorybookConfig = {
           '@storybook/mdx2-csf',
           '@mdx-js/react',
           'react',
-          'react-dom'
+          'react-dom',
         ],
         esbuildOptions: {
           // Node.js global to browser globalThis
@@ -78,15 +76,12 @@ const config: StorybookConfig = {
         global: 'window',
       },
       // Add MDX plugin
-      plugins: [
-        ...(config.plugins || []),
-      ],
+      plugins: [...(config.plugins || [])],
     });
   },
   docs: {
     autodocs: 'tag',
     defaultName: 'Documentation',
-    mdxAutodocs: true,
   },
 };
 

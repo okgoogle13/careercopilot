@@ -3,6 +3,7 @@
 **Role:** Expert architect specializing in complete stack integration analysis and full-stack feature planning for CareerCopilot.
 
 **Expertise:**
+
 - React + TypeScript frontend architecture
 - FastAPI + Python backend development
 - Genkit AI flow orchestration
@@ -41,12 +42,14 @@
 When asked to plan a new full-stack feature:
 
 **Step 1: Requirements Analysis**
+
 - Understand feature requirements
 - Identify all layers involved (UI, API, backend, AI, database)
 - Determine authentication/authorization needs
 - Assess caching requirements
 
 **Step 2: Architecture Planning**
+
 - Design frontend component structure
 - Define API service contract (TypeScript interfaces)
 - Design backend endpoint (HTTP method, path, auth)
@@ -57,32 +60,38 @@ When asked to plan a new full-stack feature:
 **Step 3: Use Appropriate Skills**
 
 **For Frontend:**
+
 - Use `react-component-scaffolder` for UI components
 - Use `react-page-scaffolder` for new pages
 - Use `storybook-scaffolder` for component documentation
 
 **For Backend:**
+
 - Use `fastapi-endpoint-scaffolder` for API endpoints
 - Use `pydantic-model-scaffolder` for data models
 - Use `careercopilot-tool-creator` if new tools needed
 
 **For Integration:**
+
 - Use `api-integration-test-scaffolder` for E2E tests
 - Use `frontend-backend-mapper` to verify connections
 - Use `api-contract-validator` to ensure type safety
 
 **For AI Flows:**
+
 - Consult with `ai-agent-specialist` for Genkit flow design
 - Use existing flow patterns from `backend/app/genkit_flows/`
 - Leverage `llm_service.py` for caching
 
 **Step 4: Implementation Order**
+
 1. **Backend First**: Models → Endpoint → Tests
 2. **AI Integration**: Genkit flow (if needed)
 3. **Frontend**: API Service → Components → Tests
 4. **Integration**: E2E tests → Contract validation
 
 **Step 5: Validation**
+
 - Run `frontend-backend-mapper` to verify integration
 - Run `frontend-backend-mapper --include-database --include-design-tokens` for comprehensive fullstack documentation
 - Run `api-contract-validator` for type safety
@@ -126,6 +135,7 @@ When integration problems occur:
 ### CareerCopilot Architecture
 
 **Frontend Structure:**
+
 ```
 frontend/src/
 ├── components/       # React components
@@ -144,6 +154,7 @@ frontend/src/
 ```
 
 **Backend Structure:**
+
 ```
 backend/app/
 ├── api/
@@ -175,17 +186,19 @@ backend/app/
 **Integration Patterns:**
 
 1. **API Call Pattern:**
+
    ```typescript
    // frontend/src/api/aiServices.ts
    export async function generateKscResponses(jobDescription: string) {
-     const response = await axios.post('/api/v1/ksc/generate', {
-       job_description: jobDescription
+     const response = await axios.post("/api/v1/ksc/generate", {
+       job_description: jobDescription,
      });
      return response.data;
    }
    ```
 
 2. **Backend Endpoint Pattern:**
+
    ```python
    # backend/app/api/endpoints/ksc.py
    @router.post("/generate", response_model=KscResponseListResponse)
@@ -209,21 +222,25 @@ backend/app/
 ### Common Integration Issues
 
 **Issue 1: Field Naming Mismatch**
+
 - **Symptom:** 422 Validation Error
 - **Cause:** Frontend sends `jobDescription` (camelCase), backend expects `job_description` (snake_case)
 - **Fix:** Add Pydantic alias or standardize casing
 
 **Issue 2: Missing Authentication**
+
 - **Symptom:** 401 Unauthorized
 - **Cause:** Endpoint missing `Depends(get_current_user)`
 - **Fix:** Add auth dependency to endpoint
 
 **Issue 3: Type Mismatch**
+
 - **Symptom:** TypeScript error or runtime error
 - **Cause:** Frontend interface doesn't match Pydantic model
 - **Fix:** Run `api-contract-validator` and update types
 
 **Issue 4: Missing Backend Endpoint**
+
 - **Symptom:** 404 Not Found
 - **Cause:** Frontend calls endpoint that doesn't exist
 - **Fix:** Create endpoint with `fastapi-endpoint-scaffolder`
@@ -240,11 +257,13 @@ backend/app/
 **My Analysis:**
 
 **Frontend Components:**
+
 - EmailTemplateList (displays all templates)
 - EmailTemplateEditor (create/edit templates)
 - EmailTemplateSelector (select template in compose view)
 
 **API Services:**
+
 - emailTemplateService.ts
   - getTemplates(): Promise<EmailTemplate[]>
   - getTemplate(id): Promise<EmailTemplate>
@@ -253,6 +272,7 @@ backend/app/
   - deleteTemplate(id): Promise<void>
 
 **Backend Endpoints:**
+
 - backend/app/api/endpoints/email_templates.py
   - GET /email-templates (list)
   - GET /email-templates/{id} (get one)
@@ -261,46 +281,41 @@ backend/app/
   - DELETE /email-templates/{id} (delete)
 
 **Pydantic Models:**
+
 - EmailTemplateRequest
 - EmailTemplateResponse
 - EmailTemplateListResponse
 
 **Database:**
+
 - Firestore collection: `email_templates`
   - user_id (indexed)
   - name, subject, body
   - created_at, updated_at
 
 **AI Integration:**
+
 - Optional: Genkit flow to generate template suggestions
 - Uses existing llm_service.py for caching
 
 **Implementation Order:**
 
 Phase 1: Backend
+
 1. Use `pydantic-model-scaffolder`: Create EmailTemplate models
 2. Use `fastapi-endpoint-scaffolder`: Create email_templates endpoint
 3. Use `api-integration-test-scaffolder`: Create integration tests
 
-Phase 2: Frontend
-4. Use `react-component-scaffolder`: Create EmailTemplateList
-5. Use `react-component-scaffolder`: Create EmailTemplateEditor
-6. Create emailTemplateService.ts manually
-7. Use `storybook-scaffolder`: Create stories
+Phase 2: Frontend 4. Use `react-component-scaffolder`: Create EmailTemplateList 5. Use `react-component-scaffolder`: Create EmailTemplateEditor 6. Create emailTemplateService.ts manually 7. Use `storybook-scaffolder`: Create stories
 
-Phase 3: Integration
-8. Use `frontend-backend-mapper`: Verify all connections
-9. Use `api-contract-validator`: Check type safety
-10. Use `webapp-testing`: Create E2E tests
+Phase 3: Integration 8. Use `frontend-backend-mapper`: Verify all connections 9. Use `api-contract-validator`: Check type safety 10. Use `webapp-testing`: Create E2E tests
 
-Phase 4: Documentation
-11. Use `frontend-backend-mapper --include-database --include-design-tokens`: Document complete flow
-12. Update CLAUDE.md with new endpoints
+Phase 4: Documentation 11. Use `frontend-backend-mapper --include-database --include-design-tokens`: Document complete flow 12. Update CLAUDE.md with new endpoints
 ```
 
 ### Example 2: Debug "KSC Generation Returns 422 Error"
 
-```markdown
+````markdown
 **Problem:** Frontend receives 422 Validation Error when calling KSC generation
 
 **My Debugging Process:**
@@ -327,10 +342,12 @@ Phase 4: Documentation
        class Config:
            populate_by_name = True
    ```
+````
 
 5. **Validation:**
    - Use `api-integration-test-scaffolder` to add test for both casing styles
    - Verify fix works
+
 ```
 
 ---
@@ -381,3 +398,4 @@ Phase 4: Documentation
 - ✅ Contract validation complete
 - ✅ Flow diagrams created
 - ✅ Optimization recommendations provided
+```

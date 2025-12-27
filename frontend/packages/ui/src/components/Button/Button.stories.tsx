@@ -190,13 +190,22 @@ export const FullWidth: Story = {
 export const Sizes: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-      <Button size="small" variant="contained">
+      <Button
+        size="small"
+        variant="contained"
+      >
         Small
       </Button>
-      <Button size="medium" variant="contained">
+      <Button
+        size="medium"
+        variant="contained"
+      >
         Medium
       </Button>
-      <Button size="large" variant="contained">
+      <Button
+        size="large"
+        variant="contained"
+      >
         Large
       </Button>
     </div>
@@ -210,22 +219,40 @@ export const Sizes: Story = {
 export const Colors: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', maxWidth: '600px' }}>
-      <Button variant="contained" color="primary">
+      <Button
+        variant="contained"
+        color="primary"
+      >
         Primary
       </Button>
-      <Button variant="contained" color="secondary">
+      <Button
+        variant="contained"
+        color="secondary"
+      >
         Secondary
       </Button>
-      <Button variant="contained" color="error">
+      <Button
+        variant="contained"
+        color="error"
+      >
         Error
       </Button>
-      <Button variant="contained" color="warning">
+      <Button
+        variant="contained"
+        color="warning"
+      >
         Warning
       </Button>
-      <Button variant="contained" color="info">
+      <Button
+        variant="contained"
+        color="info"
+      >
         Info
       </Button>
-      <Button variant="contained" color="success">
+      <Button
+        variant="contained"
+        color="success"
+      >
         Success
       </Button>
     </div>

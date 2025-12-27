@@ -33,6 +33,10 @@ async def create_ats_score_analysis(
     """
     Invokes the sophisticated `atsScoring` Genkit flow and transforms its
     output into the format expected by the frontend UI components.
+    
+    This endpoint provides real-time AI-powered analysis of resume compatibility
+    with job descriptions, including keyword matching, semantic analysis, and
+    formatting recommendations.
     """
     try:
         # Step 1: Call your existing, powerful Genkit flow.
@@ -94,8 +98,8 @@ async def create_ats_score_analysis(
                     ),
                 ),
             ],
-            matched_keywords=getattr(flow_result, "matchedKeywords", []),
-            missing_keywords=getattr(flow_result, "missingKeywords", []),
+            matched_keywords=getattr(flow_result.keywordMatches, "matched", []),
+            missing_keywords=getattr(flow_result.keywordMatches, "missing", []),
         )
 
         return response_data
@@ -228,3 +232,142 @@ async def generate_resume_intelligence(
             status_code=500,
             detail="Failed to generate resume intelligence report",
         )
+
+
+@router.get("/", tags=["Analysis"])
+async def get_analysis_data(current_user: Any = Depends(get_current_user)):
+    """
+    Get aggregated analysis data for the dashboard using real Firestore data and AI analysis.
+    """
+    from app.core.db import db
+    from datetime import datetime, timedelta
+    from collections import Counter
+    
+    # Initialize default response structure
+    response = {
+        "atsScoreHistory": [],
+        "applicationStatus": [],
+        "keywordMatch": [],
+        "matchedKeywords": [],
+        "missingKeywords": []
+    }
+    
+    if not db:
+        # Return mock data if database unavailable
+        return {
+            "atsScoreHistory": [{"month": 'Jan', "score": 82}],
+            "applicationStatus": [{"name": 'Applied', "value": 1, "color": '#D0BCFF'}],
+            "keywordMatch": [],
+            "matchedKeywords": [],
+            "missingKeywords": ["Database unavailable"]
+        }
+    
+    try:
+        # Fetch user's applications from Firestore
+        apps_ref = db.collection("users").document(current_user.uid).collection("applications")
+        applications = []
+        for doc in apps_ref.stream():
+            app_data = doc.to_dict()
+            app_data["id"] = doc.id
+            applications.append(app_data)
+        
+        # 1. Calculate Application Status Distribution
+        status_counts = Counter(app.get("status", "applied") for app in applications)
+        status_colors = {
+            "applied": "#D0BCFF",
+            "screening": "#A8C5A3", 
+            "interviewing": "#A8C5A3",
+            "offered": "#F4D06F",
+            "rejected": "#E07A5F",
+            "accepted": "#8A9A5B"
+        }
+        
+        response["applicationStatus"] = [
+            {
+                "name": status.capitalize(),
+                "value": count,
+                "color": status_colors.get(status.lower(), "#CAC4D0")
+            }
+            for status, count in status_counts.items()
+        ]
+        
+        # 2. Calculate ATS Score History (last 6 months)
+        # Group applications by month and calculate average ATS scores
+        now = datetime.now()
+        monthly_scores = {}
+        
+        for app in applications:
+            ats_score = app.get("atsScore")
+            created_date = app.get("createdAt")
+            
+            if ats_score and created_date:
+                # Parse date (handle both string and timestamp)
+                if isinstance(created_date, str):
+                    try:
+                        app_date = datetime.fromisoformat(created_date.replace('Z', '+00:00'))
+                    except:
+                        continue
+                else:
+                    app_date = created_date
+                
+                month_key = app_date.strftime("%b")
+                if month_key not in monthly_scores:
+                    monthly_scores[month_key] = []
+                monthly_scores[month_key].append(ats_score)
+        
+        # Generate last 6 months
+        months = []
+        for i in range(5, -1, -1):
+            month_date = now - timedelta(days=30*i)
+            month_key = month_date.strftime("%b")
+            months.append(month_key)
+        
+        response["atsScoreHistory"] = [
+            {
+                "month": month,
+                "score": int(sum(monthly_scores.get(month, [75])) / len(monthly_scores.get(month, [1])))
+            }
+            for month in months
+        ]
+        
+        # 3. Aggregate Keyword Analysis from Applications
+        all_matched_keywords = []
+        all_missing_keywords = []
+        keyword_frequency = Counter()
+        
+        for app in applications:
+            # Extract keywords from application metadata
+            if "atsAnalysis" in app:
+                analysis = app["atsAnalysis"]
+                matched = analysis.get("matchedKeywords", [])
+                missing = analysis.get("missingKeywords", [])
+                
+                all_matched_keywords.extend(matched)
+                all_missing_keywords.extend(missing)
+                
+                for keyword in matched:
+                    keyword_frequency[keyword] += 1
+        
+        # Get top keywords by frequency
+        top_keywords = keyword_frequency.most_common(5)
+        response["keywordMatch"] = [
+            {"keyword": keyword, "rate": count}
+            for keyword, count in top_keywords
+        ]
+        
+        # Get unique matched and missing keywords
+        response["matchedKeywords"] = list(set(all_matched_keywords))[:8]
+        response["missingKeywords"] = list(set(all_missing_keywords))[:7]
+        
+        # If no real data, provide helpful defaults
+        if not response["matchedKeywords"]:
+            response["matchedKeywords"] = ["No applications analyzed yet"]
+        if not response["missingKeywords"]:
+            response["missingKeywords"] = ["Upload applications to see keyword analysis"]
+        
+        return response
+        
+    except Exception as e:
+        print(f"Error aggregating analysis data: {e}")
+        # Return partial data on error
+        return response

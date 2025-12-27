@@ -11,7 +11,13 @@ import json
 import time
 from typing import Dict, Optional
 
-from fastapi import APIRouter, HTTPException, status
+from fastapi import APIRouter, HTTPException, status, Depends, UploadFile, File, Form
+from fastapi.responses import FileResponse
+import shutil
+import tempfile
+import os
+from app.services.doc_intelligence import DocumentIntelligenceService
+from app.core.dependencies import get_current_user
 from pydantic import BaseModel, Field
 
 # Import Genkit flows
@@ -234,10 +240,76 @@ async def generate_ksc_response(request: KSCRequest) -> KSCResponse:
         # Re-raise HTTP exceptions
         raise
     except Exception as e:
-        processing_time = time.time() - start_time
-        error_message = f"Failed to generate KSC response: {str(e)}"
-        print(f"❌ KSC response generation error: {error_message}")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=error_message,
         )
+
+
+@router.get("/", status_code=status.HTTP_200_OK)
+async def get_documents(current_user: Dict = Depends(get_current_user)):
+    """
+    Get all documents for the current user.
+    """
+    from app.core.db import db
+    
+    if not db:
+       # Fallback for "limited mode" without credentials
+       return []
+
+    try:
+        docs_ref = db.collection("users").document(current_user.uid).collection("documents")
+        docs = []
+        for doc in docs_ref.stream():
+            d = doc.to_dict()
+            d["id"] = doc.id
+            docs.append(d)
+        return docs
+    except Exception as e:
+        print(f"Error fetching documents: {e}")
+        return []
+
+@router.post("/process/redline")
+async def redline_document(file: UploadFile = File(...), edits: str = Form(...)):
+    """
+    Apply tracked changes (redlines) to a DOCX file.
+    
+    Args:
+        file: The DOCX file to process.
+        edits: A JSON string representing a list of edits. 
+               Example: '[{"original": "old text", "replacement": "new text"}]'
+    """
+    service = DocumentIntelligenceService()
+    
+    # Create temp files
+    with tempfile.NamedTemporaryFile(delete=False, suffix=".docx") as input_tmp:
+        shutil.copyfileobj(file.file, input_tmp)
+        input_path = input_tmp.name
+    
+    output_path = input_path.replace(".docx", "_redlined.docx")
+    
+    try:
+        try:
+            edits_list = json.loads(edits)
+        except json.JSONDecodeError:
+            raise HTTPException(status_code=400, detail="Invalid JSON for edits")
+
+        success = service.apply_redlines_to_docx(input_path, output_path, edits_list)
+        
+        if not success:
+             raise HTTPException(status_code=500, detail="Redlining failed")
+             
+        return FileResponse(
+            output_path, 
+            media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document", 
+            filename=f"redlined_{file.filename}"
+        )
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+    finally:
+        # Minimal cleanup: input file only, keep output for serving (OS eventually cleans /tmp)
+        if os.path.exists(input_path):
+            os.unlink(input_path)

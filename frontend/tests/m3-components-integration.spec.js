@@ -49,7 +49,7 @@ test.describe('M3 Components Integration E2E', () => {
   test('should navigate between tabs and update content', async ({ page }) => {
     // Click on Details tab
     await page.getByText('Details').click();
-    
+
     // Verify tab is active (implementation dependent)
     const detailsTab = page.getByText('Details');
     await expect(detailsTab).toBeVisible();
@@ -58,13 +58,13 @@ test.describe('M3 Components Integration E2E', () => {
   test('should open and close modal', async ({ page }) => {
     // Open modal
     await page.getByRole('button', { name: 'Open Modal' }).click();
-    
+
     // Verify modal content
     await expect(page.getByText('Modal Content')).toBeVisible();
-    
+
     // Close modal
     await page.getByRole('button', { name: 'Close' }).click();
-    
+
     // Verify modal is closed
     await expect(page.getByText('Modal Content')).not.toBeVisible();
   });
@@ -72,7 +72,7 @@ test.describe('M3 Components Integration E2E', () => {
   test('should interact with table pagination', async ({ page }) => {
     // Verify table is visible
     await expect(page.getByText('Project Alpha')).toBeVisible();
-    
+
     // If pagination exists, interact with it
     const nextButton = page.getByLabelText(/next/i);
     if (await nextButton.isVisible()) {
@@ -83,10 +83,10 @@ test.describe('M3 Components Integration E2E', () => {
   test('should display tooltip on hover', async ({ page }) => {
     const button = page.getByRole('button', { name: 'Hover me' });
     await button.hover();
-    
+
     // Wait for tooltip to appear
     await page.waitForTimeout(500);
-    
+
     // Verify tooltip text (implementation dependent)
     const tooltip = page.getByText('This is a tooltip');
     // Tooltip may or may not be visible depending on implementation
@@ -96,10 +96,10 @@ test.describe('M3 Components Integration E2E', () => {
     const autocomplete = page.getByLabelText('Search');
     await autocomplete.click();
     await autocomplete.fill('app');
-    
+
     // Wait for filtered results
     await page.waitForTimeout(300);
-    
+
     // Verify filtered option appears
     await expect(page.getByText('Apple')).toBeVisible();
   });
@@ -107,12 +107,11 @@ test.describe('M3 Components Integration E2E', () => {
   test('should select multiple items in multiselect', async ({ page }) => {
     const multiselect = page.getByLabelText('Tags');
     await multiselect.click();
-    
+
     // Select first option
     await page.getByText('Tag 1').click();
-    
+
     // Verify chip appears
     await expect(page.getByText('Tag 1')).toBeVisible();
   });
 });
-

@@ -1,4 +1,4 @@
-import { storage } from '../firebase-config';
+import { storage } from '../config/firebase';
 import { ref, uploadBytesResumable, getDownloadURL, deleteObject, listAll } from 'firebase/storage';
 
 export const uploadFile = async (file: File, path: string) => {

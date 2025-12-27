@@ -9,6 +9,7 @@
 Phase 3 migrates all dependent components now that foundation (Phase 1) and forms (Phase 2) are complete. With 30+ components to migrate, we use a **batch-based scaffolding strategy** to minimize manual work and token cost.
 
 **Phase 1 & 2 Prerequisites:** Must complete before starting Phase 3
+
 - ✅ Phase 1: Button, Input, Sidebar, Navbar, AppShell (foundation)
 - ✅ Phase 2: Select, Checkbox, Radio, TextArea, Switch (forms)
 
@@ -19,37 +20,47 @@ Phase 3 migrates all dependent components now that foundation (Phase 1) and form
 Phase 3 components are grouped by dependency and feature area:
 
 ### Group A: Layout & Containers (5 components) — **Start First**
+
 ```
 M3Card, M3Modal, M3Dialog, M3Drawer, M3Accordion
 ```
+
 **Why first:** These are layout primitives; many Phase 3 components depend on them.
 **Estimated time:** 3-4 hours (scaffold + 5x Cursor work)
 
 ### Group B: Navigation & Menus (6 components) — **Start with Group A**
+
 ```
 M3Menu, M3TabBar, M3Breadcrumb, M3Stepper, M3Pagination, M3BottomNavigation
 ```
+
 **Why next:** Used in layout and page structure.
 **Estimated time:** 4-5 hours
 
 ### Group C: Data Display (8 components) — **Start with Group A**
+
 ```
 M3Table, M3List, M3ListItem, M3DataGrid, M3Badge, M3Chip, M3Tag, M3Progress
 ```
+
 **Why parallel with B:** Data display doesn't block other components.
 **Estimated time:** 5-6 hours
 
 ### Group D: Feedback & Status (7 components) — **Parallel with B & C**
+
 ```
 M3Alert, M3Toast, M3Tooltip, M3Snackbar, M3Loader, M3Spinner, M3Skeleton
 ```
+
 **Why parallel:** Self-contained feedback components.
 **Estimated time:** 4-5 hours
 
 ### Group E: Advanced Forms (6 components) — **After Group A**
+
 ```
 M3DatePicker, M3TimePicker, M3Slider, M3RangeSlider, M3Autocomplete, M3MultiSelect
 ```
+
 **Why later:** Depends on Select pattern (Phase 2) + Modal/Popover (Group A).
 **Estimated time:** 5-6 hours
 
@@ -86,15 +97,15 @@ Total: ~15 hours elapsed (not cumulative)
 
 ## 📈 Token Cost & Savings Analysis
 
-| Batch | Components | Duration | Token Cost | Parallelizable |
-|-------|-----------|----------|-----------|---|
-| **Batch 1** | 5 (Layout) | 3.5h | ~55K | Solo |
-| **Batch 2** | 6 (Navigation) | 4.5h | ~68K | After Batch 1 |
-| **Batch 3** | 8 (Data Display) | 5.5h | ~92K | Parallel with 2 |
-| **Batch 4** | 7 (Feedback) | 4.5h | ~76K | Parallel with 5 |
-| **Batch 5** | 6 (Advanced Forms) | 5.5h | ~93K | After Batch 1 |
-| **Validation** | All batches | 30s | ~1K | Final |
-| **TOTAL** | **32 components** | **~15 hours** | **~385K tokens** | ✅ Parallelizable |
+| Batch          | Components         | Duration      | Token Cost       | Parallelizable    |
+| -------------- | ------------------ | ------------- | ---------------- | ----------------- |
+| **Batch 1**    | 5 (Layout)         | 3.5h          | ~55K             | Solo              |
+| **Batch 2**    | 6 (Navigation)     | 4.5h          | ~68K             | After Batch 1     |
+| **Batch 3**    | 8 (Data Display)   | 5.5h          | ~92K             | Parallel with 2   |
+| **Batch 4**    | 7 (Feedback)       | 4.5h          | ~76K             | Parallel with 5   |
+| **Batch 5**    | 6 (Advanced Forms) | 5.5h          | ~93K             | After Batch 1     |
+| **Validation** | All batches        | 30s           | ~1K              | Final             |
+| **TOTAL**      | **32 components**  | **~15 hours** | **~385K tokens** | ✅ Parallelizable |
 
 **vs. Sequential Manual:** 40+ hours, ~1.2M tokens
 **Savings:** 63% faster ⚡ | 68% fewer tokens 💰
@@ -104,6 +115,7 @@ Total: ~15 hours elapsed (not cumulative)
 ## 🚀 Batch 1: Layout & Containers (3.5 hours)
 
 ### Components
+
 ```
 M3Card, M3Modal, M3Dialog, M3Drawer, M3Accordion
 ```
@@ -324,6 +336,7 @@ python3 scripts/scaffold-m3-component.py Card Modal Dialog Drawer Accordion
 **Start after Batch 1 completes** (or in parallel if you have resources)
 
 ### Components
+
 ```
 M3Menu, M3TabBar, M3Breadcrumb, M3Stepper, M3Pagination, M3BottomNavigation
 ```
@@ -344,12 +357,14 @@ python3 scripts/scaffold-m3-component.py Menu TabBar Breadcrumb Stepper Paginati
 **Cursor Prompts Template (6 components):**
 
 Each Cursor prompt should follow this structure:
+
 - Reference M3Select (dropdown/menu pattern from Phase 2)
 - Reference M3Navbar (navigation pattern from Phase 1)
 - Implement required props/states
 - Minimum test count
 
 **Estimated breakdown:**
+
 - M3Menu: 45 min (~15K tokens) - complex dropdown
 - M3TabBar: 40 min (~13K tokens) - tab selection
 - M3Breadcrumb: 30 min (~10K tokens) - simple list
@@ -366,6 +381,7 @@ Each Cursor prompt should follow this structure:
 **Start in parallel with Batch 2** (high independence)
 
 ### Components
+
 ```
 M3Table, M3List, M3ListItem, M3DataGrid, M3Badge, M3Chip, M3Tag, M3Progress
 ```
@@ -384,6 +400,7 @@ python3 scripts/scaffold-m3-component.py Table List ListItem DataGrid Badge Chip
 ```
 
 **Complexity Breakdown:**
+
 - **High Complexity (1+ hour each):**
   - M3Table: Sorting, pagination integration, header/footer
   - M3DataGrid: Table variant with inline editing
@@ -407,6 +424,7 @@ python3 scripts/scaffold-m3-component.py Table List ListItem DataGrid Badge Chip
 **Start in parallel with Batch 2 & 3** (completely independent)
 
 ### Components
+
 ```
 M3Alert, M3Toast, M3Tooltip, M3Snackbar, M3Loader, M3Spinner, M3Skeleton
 ```
@@ -425,6 +443,7 @@ python3 scripts/scaffold-m3-component.py Alert Toast Tooltip Snackbar Loader Spi
 ```
 
 **Complexity Breakdown:**
+
 - **Medium (30-40 min each):**
   - M3Alert: Container with icon and variants (success, warning, error, info)
   - M3Toast: Auto-dismiss notification
@@ -445,6 +464,7 @@ python3 scripts/scaffold-m3-component.py Alert Toast Tooltip Snackbar Loader Spi
 **Start after Batch 1 completes** (depends on Modal, Select)
 
 ### Components
+
 ```
 M3DatePicker, M3TimePicker, M3Slider, M3RangeSlider, M3Autocomplete, M3MultiSelect
 ```
@@ -463,6 +483,7 @@ python3 scripts/scaffold-m3-component.py DatePicker TimePicker Slider RangeSlide
 ```
 
 **Complexity Breakdown:**
+
 - **Very High (1+ hour each):**
   - M3DatePicker: Calendar widget + input
   - M3Slider: Touch-enabled range input
@@ -494,6 +515,7 @@ After all batches complete, run comprehensive validation:
 ```
 
 **Expected Output:**
+
 ```
 ════════════════════════════════════════
 Validation Summary
@@ -545,11 +567,13 @@ M3 Migration Progress:
 ### "Should I parallelize batches?"
 
 **YES if:**
+
 - You have multiple team members OR
 - You have sufficient token budget (~385K tokens total)
 - You want to finish in ~15 hours vs 25 hours
 
 **Parallel Timeline:**
+
 ```
 Batch 1 (Layout): Week 1, 3.5h
 ├─ Batch 2 (Nav): Week 1 + 1 day, 4.5h [starts after 1]
@@ -560,6 +584,7 @@ Batch 1 (Layout): Week 1, 3.5h
 ```
 
 **NO if:**
+
 - Solo developer
 - Limited token budget
 - Sequential execution acceptable
@@ -570,14 +595,17 @@ Batch 1 (Layout): Week 1, 3.5h
 ## 💡 Reference Materials
 
 **Phase 1 & 2 Reference Implementations:**
+
 - Button, Input, Select, Checkbox, Radio, TextArea, Switch (10 components)
 - Use as patterns for similar components in Phase 3
 
 **Design System:**
+
 - `frontend/src/styles/m3-design-tokens.css` (all tokens)
 - `docs/design/M3_EXPRESSIVE_DESIGN_SYSTEM.md` (token documentation)
 
 **Migration Guides:**
+
 - `.claude/docs/CURSOR_AI_M3_MIGRATION_PROMPT.md` (complete reference)
 - `docs/M3_BATCH_MIGRATION_GUIDE.md` (Phase 1 reference)
 - `docs/M3_PHASE2_MIGRATION_GUIDE.md` (Phase 2 reference)
@@ -607,27 +635,30 @@ yarn test --testPathPattern="M3Card"
 
 ## ⏱️ Expected Timeline Summary
 
-| Scenario | Timeline | Token Cost | Notes |
-|----------|----------|-----------|-------|
-| **Sequential** | 25 hours | 385K | Safe, predictable |
-| **Parallel (2 batches)** | 18 hours | 385K | Batches 2+3 run together |
-| **Parallel (all)** | 15 hours | 385K | Requires team coordination |
+| Scenario                 | Timeline | Token Cost | Notes                      |
+| ------------------------ | -------- | ---------- | -------------------------- |
+| **Sequential**           | 25 hours | 385K       | Safe, predictable          |
+| **Parallel (2 batches)** | 18 hours | 385K       | Batches 2+3 run together   |
+| **Parallel (all)**       | 15 hours | 385K       | Requires team coordination |
 
 ---
 
 ## 🚨 Common Issues & Solutions
 
 ### "Token budget is tight"
+
 - Scaffold all components first (saves ~30% on manual typing)
 - Use references aggressively (copy patterns from Phase 1/2)
 - Combine multiple components per Cursor prompt if very similar
 
 ### "Some component is significantly different"
+
 - Break it into smaller prompts
 - Ask Cursor to reference the closest Phase 1/2 component
 - Test incrementally rather than all-at-once
 
 ### "Build fails on many components simultaneously"
+
 - Validate batch by batch, not all at once
 - This helps isolate token/CSS issues
 - Use `yarn test --testPathPattern="M3Component"` to debug individually
@@ -647,28 +678,29 @@ yarn test --testPathPattern="M3Card"
    - Review all components for visual consistency
    - Adjust spacing, colors, shadows if needed
    - Compare against M3 design spec
-   
+
    **Tools Available:**
    - `scripts/analyze-m3-styling-consistency.sh` - Consistency analyzer
    - `scripts/generate-m3-styling-report.py` - Detailed styling report
    - `scripts/fix-hardcoded-spacing.sh` - Automated spacing fixer
    - `docs/M3_STYLING_FINE_TUNING_GUIDE.md` - Complete guide
    - `docs/M3_DESIGN_SPEC_REFERENCE.md` - Token reference
-   
+
    **Current Status:**
    - 2,015 tokens in use (excellent!)
    - 193 hardcoded spacing values to fix
    - 6 hardcoded colors to fix
    - 1 hardcoded shadow to fix
-   
+
    **Quick Start:**
+
    ```bash
    # Generate report
    python3 scripts/generate-m3-styling-report.py
-   
+
    # Fix spacing (automated)
    ./scripts/fix-hardcoded-spacing.sh
-   
+
    # Visual review
    yarn storybook
    ```
@@ -688,4 +720,3 @@ yarn test --testPathPattern="M3Card"
 **Last Updated:** 2025-12-03
 **Status:** ✅ Ready for Phase 3 (pending Phase 1 & 2 completion)
 **Estimated Completion:** ~15-25 hours after Phase 2 finish
-
