@@ -14,9 +14,9 @@ import {
     ListItemText,
 } from '@mui/material';
 import { CloudUpload, CheckCircle, InsertDriveFile, Psychology } from '@mui/icons-material';
-import { useCareerIngestion } from '../../hooks/useCareerIngestion';
-import { ValidationDashboard } from '../onboarding/components/ValidationDashboard';
-import { CareerDatabase } from '../../types/api';
+import { useCareerIngestion } from '../hooks/useCareerIngestion';
+import { ValidationDashboard } from '../features/onboarding/components/ValidationDashboard';
+import { CareerDatabase } from '../types/api';
 
 type UploadStage = 'idle' | 'uploading' | 'extracting' | 'processing' | 'embedding' | 'complete';
 

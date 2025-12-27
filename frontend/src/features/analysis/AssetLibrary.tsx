@@ -1,5 +1,5 @@
 import { FileText, Upload, Download, Trash2 } from 'lucide-react';
-import { Button } from '../../components/ui/button';
+import { Button } from '@careercopilot/ui';
 
 export function AssetLibrary() {
   const assets = [
