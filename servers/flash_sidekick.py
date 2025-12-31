@@ -121,17 +121,26 @@ def handle_request(server, line):
             
         return resp
     except Exception as e:
-        logger.error(f"Error: {e}")
+        logger.error(f"Error handling request: {e}", exc_info=True)
+        sys.stderr.write(f"Server Error: {e}\n")
         return None
 
 if __name__ == "__main__":
+    # Server starting
     server = FlashSidekickServer()
     while True:
         try:
             line = sys.stdin.readline()
             if not line: break
+            
             resp = handle_request(server, line)
             if resp: 
                 print(json.dumps(resp))
                 sys.stdout.flush()
-        except: break
+            else:
+                pass
+        except KeyboardInterrupt:
+            break
+        except Exception as e:
+            sys.stderr.write(f"Fatal Loop Error: {e}\n")
+            break

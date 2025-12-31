@@ -302,6 +302,11 @@ class JobListingDetails(BaseModel):
         default_factory=list,
         description="A list of relevant community service subsectors this role operates in.",
     )
+    location: Optional[str] = Field(None, description="The location, suburb, or region of the role.")
+    key_responsibilities: List[str] = Field(
+        default_factory=list,
+        description="A list of key duties, tasks, or responsibilities associated with the role.",
+    )
 
 
 class JobListingTextRequest(BaseModel):

@@ -55,20 +55,17 @@ def init_genkit() -> bool:
         logger.info("Genkit already initialized")
         return True
 
-    # Configure API key from environment or Secret Manager
-    api_key = os.getenv("GEMINI_API_KEY")
-    if not api_key:
-        # Try to fetch from Google Cloud Secret Manager
-        try:
-            from google.cloud import secretmanager
-            client = secretmanager.SecretManagerServiceClient()
-            project_id = os.getenv("GOOGLE_CLOUD_PROJECT", "careercopilot-468811")
-            secret_name = f"projects/{project_id}/secrets/gemini-api-key/versions/latest"
-            response = client.access_secret_version(request={"name": secret_name})
-            api_key = response.payload.data.decode("UTF-8").strip()
-            logger.info("Retrieved GEMINI_API_KEY from Google Cloud Secret Manager")
-        except Exception as e:
-            logger.warning(f"Could not fetch API key from Secret Manager: {str(e)}")
+    # Configure API key from centralized secret manager
+    try:
+        from app.core.secret_manager import get_secret
+        api_key = get_secret("GEMINI_API_KEY")
+        if api_key:
+            logger.info("Successfully retrieved GEMINI_API_KEY")
+    except Exception as e:
+        # Fallback to direct env check if secret manager fails or is not available
+        api_key = os.getenv("GEMINI_API_KEY")
+        if not api_key:
+            logger.warning(f"Could not fetch API key: {str(e)}")
             logger.warning("GEMINI_API_KEY not set. Some AI features will be disabled.")
             return False
 

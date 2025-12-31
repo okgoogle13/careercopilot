@@ -53,7 +53,13 @@ class SecureSettings(BaseSettings):
 
     def __init__(self, **kwargs: Any) -> None:
         super().__init__(**kwargs)
-        # Override with secure values for production
+        # Handle ENVIRONMENT alias
+        if "ENVIRONMENT" in kwargs:
+            self.ENV = kwargs["ENVIRONMENT"]
+        elif os.getenv("ENVIRONMENT"):
+            self.ENV = os.getenv("ENVIRONMENT", "development")
+
+        # Override with secure values for production or staging
         if SECRET_MANAGER_AVAILABLE and self.ENV in ["production", "staging"]:
             try:
                 self.SECRET_KEY = get_secret_key()
@@ -172,9 +178,10 @@ class SecureSettings(BaseSettings):
 
             # Then try to get values from secret manager
             try:
-                # Only try to get secrets in production or if explicitly enabled
+                # Only try to get secrets in production/staging or if explicitly enabled
+                current_env = settings.get("ENV") or settings.get("ENVIRONMENT")
                 if (
-                    settings.get("ENV") == "production"
+                    current_env in ["production", "staging"]
                     or settings.get("USE_SECRET_MANAGER", "").lower() == "true"
                 ):
                     # Get database URL from secret manager

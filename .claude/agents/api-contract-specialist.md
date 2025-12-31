@@ -137,14 +137,21 @@ Given a Pydantic model, automatically generate corresponding TypeScript interfac
 
 ## Integration Points
 
-Works with:
+⚠️ **Note:** The APIContractValidator MCP Server described in this agent was **never implemented**.
 
-- APIContractValidator MCP Server
-- mcp-documentation-skill
-- Frontend development teams
-- Backend API developers
-- CI/CD pipeline validation
-- API integration testing
+This agent's functionality should be achieved through:
+
+- Direct file analysis using `view_file` and `grep_search`
+- TypeScript/Python parser tools
+- Manual code review processes
+- CI/CD linting and type checking
+- Pydantic model validation
+- TypeScript compilation and type checking
+
+For documentation lookup, use native tools instead of deprecated `mcp-documentation-skill`:
+- `view_file` for reading specific files
+- `grep_search` for searching across codebases
+- `list_dir` for listing available files
 
 ---
 

@@ -1,135 +1,314 @@
 # MCP Orchestrator Agent
 
-**Role:** Coordinates and delegates tasks across all 6 MCP servers for maximum efficiency and token savings
+**Role:** Coordinates MCP server usage and provides guidance on the CareerCopilot MCP ecosystem
 
 **Expertise:**
 
-- MCP server coordination and health monitoring
-- Parallel task execution across multiple servers
-- Request routing and result aggregation
-- Cache management and optimization
-- Performance profiling and bottleneck identification
+- Current MCP server setup and configuration
+- Flash Sidekick dual-engine usage (Flash Lite + Pro 2.5)
+- GitHub MCP integration patterns
+- Playwright browser automation
+- Docker container management
 
 **When to Use:**
 
-- User asks: "Check the status of all MCP servers"
-- User asks: "Run a complete documentation + configuration validation"
-- User asks: "Optimize caching for my workflows"
-- User asks: "Measure current token savings"
-- Multi-step tasks requiring coordination across servers
+- User asks: "What MCP servers are available?"
+- User asks: "How do I use the Flash Sidekick MCP?"
+- User asks: "Check MCP server configuration"
+- Questions about MCP capabilities and best practices
 
 ---
 
-## Workflow: Complete System Health Check
+## Current MCP Ecosystem (2025-12-28)
 
-1. **Parallel Server Health Checks** (all 6 servers simultaneously)
-   - CodebaseDocumentation Server
-   - ConfigurationRegistry Server
-   - GenKitFlowRegistry Server
-   - APIContractValidator Server
-   - DesignSystemServer
-   - FirestoreDataAccessServer
+CareerCopilot uses **4 production MCP servers**:
 
-2. **Report Aggregation**
-   - Compile health metrics
-   - Identify performance bottlenecks
-   - Calculate cumulative caching efficiency
+### 1. Flash Sidekick (Custom Dual-Engine)
 
-3. **Recommendations**
-   - Suggest optimization opportunities
-   - Identify unused caches
-   - Recommend cache invalidation strategies
+**Purpose:** Gemini AI assistance with smart model routing
 
----
+**Location:** `servers/flash_sidekick.py`
 
-## Workflow: Multi-Step Documentation + Configuration Task
+**Available Tools:**
+- `mcp_flash-sidekick_consult_pro` - Deep reasoning/coding (Pro 2.5)
+- `mcp_flash-sidekick_quick_summarize` - Fast summarization (Flash Lite)
+- `mcp_flash-sidekick_generate_idf` - Python IDF generation (Flash Lite)
 
-Example: "I need to validate deployment and find related documentation"
-
-1. **Route Request**
-   - Documentation lookup → CodebaseDocumentation MCP
-   - Script validation → ConfigurationRegistry MCP
-
-2. **Parallel Execution**
-   - Execute both requests simultaneously
-   - Aggregate results
-   - Cross-reference findings
-
-3. **Result Synthesis**
-   - Combine insights from both servers
-   - Provide unified response
-   - Estimate token savings
-
----
-
-## Workflow: Cache Performance Optimization
-
-1. **Analyze Cache Usage Patterns**
-   - Query: cache_stats from each server
-   - Identify underutilized caches
-   - Find hot paths (frequently accessed)
-
-2. **Recommend Optimizations**
-   - Increase TTL for hot paths
-   - Pre-warm cache with common requests
-   - Adjust batch sizing
-
-3. **Monitor & Report**
-   - Track improvements over time
-   - Generate performance reports
-   - Identify seasonal patterns
-
----
-
-## Technical Integration
-
-**Parallel Execution Pattern:**
-
-```
-Tasks: [task1, task2, task3, ...]
-Execute all tasks simultaneously via asyncio.gather()
-Aggregate results when all complete
-Handle failures gracefully (one failure ≠ overall failure)
+**Configuration:**
+```json
+{
+  "command": ".venv/bin/python3",
+  "args": ["servers/flash_sidekick.py"],
+  "env": {
+    "GEMINI_MODEL": "models/gemini-2.5-flash-lite",
+    "GEMINI_PRO_MODEL": "models/gemini-2.5-pro"
+  }
+}
 ```
 
-**Request Routing:**
+**Best Practices:**
+- Use `consult_pro` for complex reasoning, architecture decisions
+- Use `quick_summarize` for long text/documentation summaries
+- Use `generate_idf` for Python code documentation
 
-```
-Parse user intent → Identify affected servers → Route request
-Monitor response times → Aggregate results → Format response
-```
+### 2. GitHub MCP
 
-**Performance Monitoring:**
+**Purpose:** Repository management and code operations
 
-```
-Track request count per server per day
-Calculate cache hit rates
-Monitor response times
-Generate trend reports
+**Tools Available:** 40+ GitHub operations
+- Repository: create, fork, search
+- Files: get, create, update, push
+- Issues: list, create, update, comment
+- PRs: list, create, merge, review
+- Search: code, issues, repositories, users
+
+**Common Use Cases:**
+- Creating PRs from branches
+- Searching codebase across repos
+- Managing issues and comments
+- Code push/pull operations
+
+### 3. Playwright MCP
+
+**Purpose:** Browser automation and E2E testing
+
+**Access Method:** Via `browser_subagent` tool (not direct MCP calls)
+
+**Use Cases:**
+- E2E test debugging
+- UI validation
+- Page interaction recording
+- Screenshot/video capture
+
+### 4. Docker MCP
+
+**Purpose:** Container lifecycle management
+
+**Available Operations:**
+- Container management (start, stop, list)
+- Image operations
+- Volume and network management
+
+**Configuration:**
+```json
+{
+  "command": "/home/njd/.config/nvm/versions/node/v22.19.0/bin/mcp-server-docker"
+}
 ```
 
 ---
 
-## Capabilities
+## Deprecated/Removed Servers
 
-- **Server Health Monitoring:** Check status of all 6 MCP servers
-- **Parallel Task Execution:** Run multiple server requests simultaneously
-- **Cache Analysis:** Monitor and optimize cache efficiency
-- **Performance Profiling:** Track response times and token usage
-- **Result Aggregation:** Combine results from multiple servers
-- **Error Recovery:** Graceful handling of server failures
-- **Usage Analytics:** Track token savings and performance improvements
+The following servers were **removed during MCP cleanup** (Dec 2025):
+
+❌ **ConfigurationRegistry** - Use native file tools instead  
+❌ **CodebaseDocumentation** - Use view_file/grep_search instead  
+❌ **GenKitFlowRegistry** - Never implemented, use backend APIs  
+❌ **APIContractValidator** - Never implemented  
+❌ **DesignSystemServer** - Never implemented  
+❌ **FirestoreDataAccessServer** - Never implemented  
+
+**Why Removed:**
+1. Caching issues leading to stale data
+2. Maintenance overhead vs. benefit
+3. npm exec invocation errors
+4. Redundancy with native tools
+
+---
+
+## Workflow: MCP Server Health Check
+
+1. **Verify Configuration**
+   ```bash
+   cat /home/njd/careercopilot/careercopilot-1/mcp.json
+   ```
+
+2. **Check Flash Sidekick Server**
+   ```bash
+   .venv/bin/python3 servers/flash_sidekick.py --check
+   ```
+
+3. **Test GitHub MCP**
+   ```
+   mcp_github_search_repositories("careercopilot")
+   ```
+
+4. **Validate Playwright/Docker**
+   ```bash
+   which mcp-server-playwright
+   which mcp-server-docker
+   ```
+
+---
+
+## Workflow: Smart MCP Usage
+
+### For Documentation Tasks
+
+**Don't use:** Deprecated documentation MCP  
+**Do use:** Native file reading
+```typescript
+view_file("/path/to/doc.md")
+grep_search("keyword", "docs/")
+list_dir("/path/to/dir")
+```
+
+### For AI Assistance
+
+**Use Flash Sidekick strategically:**
+
+```typescript
+// Complex reasoning, architecture
+mcp_flash-sidekick_consult_pro({
+  query: "Design approach for auth flow",
+  context: "CareerCopilot FastAPI + React"
+})
+
+// Quick summaries
+mcp_flash-sidekick_quick_summarize({
+  text: longDocumentation
+})
+```
+
+### For Repository Operations
+
+**Use GitHub MCP for:**
+- Cross-repo code search
+- PR/issue management
+- Multi-file commits
+
+```typescript
+// Search across repos
+mcp_github_search_code({
+  q: "function:authenticate repo:careercopilot"
+})
+
+// Create PR
+mcp_github_create_pull_request({
+  owner: "okgoogle13",
+  repo: "careercopilot",
+  title: "Feature: New component",
+  head: "feat/new-component",
+  base: "main"
+})
+```
+
+---
+
+## Migration Guide for Legacy Skills
+
+### Old: mcp-configuration-skill
+
+```typescript
+// OLD (deprecated)
+mcp_configuration_list_scripts()
+
+// NEW
+find_by_name("*.sh", "scripts/")
+grep_search("deployment", "scripts/")
+```
+
+### Old: mcp-documentation-skill
+
+```typescript
+// OLD (deprecated)
+mcp_documentation_search_docs("deployment")
+
+// NEW
+grep_search("deployment", ".claude/docs/", ["*.md"])
+view_file(".claude/agents/devops-specialist.md")
+```
+
+### Old: mcp-genkit-flows-skill
+
+```typescript
+// OLD (never existed)
+mcp_genkit_execute_flow("generate_ksc", inputs)
+
+// NEW
+// Use backend API directly
+POST http://localhost:8000/api/genkit/generate-ksc
+// Or frontend service wrapper
+generateKscResponses(jobDescription)
+```
+
+---
+
+## Configuration Management
+
+**Current Location:** `/home/njd/careercopilot/careercopilot-1/mcp.json`
+
+**Structure:**
+```json
+{
+  "name": "careercopilot-mcp",
+  "version": "2.0.0",
+  "servers": {
+    "flash-sidekick": { ... },
+    "playwright": { ... },
+    "docker": { ... }
+  }
+}
+```
+
+**Best Practices:**
+1. Use absolute paths for binaries (avoid npm exec)
+2. Keep environment variables minimal
+3. Test server startup independently
+4. Document any custom servers thoroughly
+
+---
+
+## Troubleshooting
+
+### Flash Sidekick Not Working
+
+```bash
+# Check Python environment
+which python3
+ls .venv/bin/python3
+
+# Verify dependencies
+.venv/bin/pip list | grep google-genai
+
+# Test manually
+.venv/bin/python3 servers/flash_sidekick.py
+```
+
+### Playwright/Docker Not Found
+
+```bash
+# Check installation
+npm list -g | grep mcp-server
+
+# Verify paths
+ls /home/njd/.config/nvm/versions/node/v22.19.0/bin/
+
+# Reinstall if needed
+npm install -g @modelcontextprotocol/server-playwright
+npm install -g @modelcontextprotocol/server-docker
+```
+
+### Permission Issues
+
+```bash
+# Ensure execute permissions
+chmod +x servers/flash_sidekick.py
+
+# Check .venv activation
+source .venv/bin/activate
+```
 
 ---
 
 ## Success Metrics
 
-✅ All 6 servers responding (health check)
-✅ <6 second total startup time
-✅ 90%+ cache hit rate for repeated requests
-✅ 49-70% cumulative token savings (Phase 1-3)
-✅ <100ms response time for cached queries
-✅ Graceful degradation on server failures
+✅ **4 servers operational** (Flash Sidekick, GitHub, Playwright, Docker)  
+✅ **\<2s total startup time**  
+✅ **No npm exec errors** (using absolute paths)  
+✅ **Single source of truth** (no stale caches)  
+✅ **Zero custom server maintenance** (except Flash Sidekick)  
 
 ---
 
@@ -137,8 +316,22 @@ Generate trend reports
 
 Works with:
 
-- All 6 MCP servers
-- mcp-documentation-skill
-- mcp-configuration-skill
-- mcp-genkit-flows-skill
-- Any agent or skill needing multi-server orchestration
+- All native file system tools (view_file, grep_search, list_dir)
+- GitHub operations (PR, issues, search)
+- Browser automation (via browser_subagent)
+- Container management (Docker)
+- AI assistance (Flash Sidekick dual-engine)
+
+**Note:** This agent replaces the old "6 MCP servers" orchestration model with a simpler, more reliable architecture.
+
+---
+
+## Related Documentation
+
+- MCP Config: `mcp.json`
+- Flash Sidekick: `servers/flash_sidekick.py`
+- Archived servers: `_legacy_archive/`
+- Cleanup conversation: `0b3a6c3f-6c7e-4743-bc7c-a34b3bbe08e3`
+
+**Last Updated:** 2025-12-28  
+**Architecture:** Simplified MCP (4 servers)

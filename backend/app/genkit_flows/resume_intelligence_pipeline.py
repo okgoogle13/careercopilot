@@ -66,17 +66,9 @@ genkit_flow: Any = getattr(genkit, "flow", _noop_flow) if GENKIT_AVAILABLE else 
 # Load environment variables
 load_dotenv()
 
-# Initialize genkit with Google AI plugin if available
-if GENKIT_AVAILABLE and hasattr(genkit, 'get_plugin'):
-    if not genkit.get_plugin("googleai") and google_genai and hasattr(google_genai, 'init'):
-        api_key = os.getenv("GEMINI_API_KEY")
-        if api_key:
-            # Initialize genkit with Google AI plugin
-            init_func = getattr(google_genai, 'init', None)
-            if init_func and callable(init_func):
-                plugin = init_func(api_key=api_key)
-                if hasattr(genkit, 'init') and callable(genkit.init):
-                    genkit.init(plugins=[plugin])
+# Initialize genkit using centralized initialization
+from app.core.genkit_init import init_genkit
+init_genkit()
 
 
 # Get model configuration (lazy loading - only when needed)

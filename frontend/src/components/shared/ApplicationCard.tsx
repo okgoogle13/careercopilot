@@ -9,6 +9,8 @@ interface ApplicationCardProps {
   className?: string;
 }
 
+import { StatusBadge } from '../ui/StatusBadge';
+
 export function ApplicationCard({
   title,
   company,
@@ -30,14 +32,21 @@ export function ApplicationCard({
             {location} • Applied {appliedDate}
           </p>
         </div>
-        {onUpdateStatus && (
-          <button
-            onClick={onUpdateStatus}
-            className="bg-surface-container-high px-6 py-2 rounded-full text-on-surface hover:bg-surface-bright transition-all"
-          >
-            Update Status
-          </button>
-        )}
+        <div className="flex flex-col items-end gap-3">
+          <StatusBadge
+            label={steps[currentStep]}
+            variant={getStatusVariant(steps[currentStep])}
+            showDot
+          />
+          {onUpdateStatus && (
+            <button
+              onClick={onUpdateStatus}
+              className="bg-surface-container-high px-6 py-2 rounded-full text-on-surface hover:bg-surface-bright transition-all"
+            >
+              Update Status
+            </button>
+          )}
+        </div>
       </div>
 
       {/* Stepper Section */}
@@ -66,4 +75,12 @@ export function ApplicationCard({
       </div>
     </div>
   );
+}
+
+function getStatusVariant(status: string): 'primary' | 'secondary' | 'tertiary' | 'neutral' {
+  const norm = status.toLowerCase();
+  if (norm.includes('offer') || norm.includes('accepted')) return 'tertiary'; // Celebration mode (Pink)
+  if (norm.includes('interview') || norm.includes('screening')) return 'secondary'; // Active progress (Teal)
+  if (norm.includes('applied')) return 'primary'; // Initial state (Indigo)
+  return 'neutral';
 }
