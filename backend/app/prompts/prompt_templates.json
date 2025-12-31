@@ -5,7 +5,10 @@
     "category": "ats_scoring",
     "version": "1.0",
     "template": "Compare the resume against the job description.\nProvide a semantic similarity score from 0-100 and a brief explanation.\nResume: \"{resume_text}\"\nJob Description: \"{job_description}\"",
-    "parameters": ["resume_text", "job_description"],
+    "parameters": [
+      "resume_text",
+      "job_description"
+    ],
     "output_format": "structured_json",
     "metadata": {
       "created_at": "2024-09-11",
@@ -13,14 +16,16 @@
       "usage_count": 0
     }
   },
-
   "comprehensive_resume_analysis": {
     "name": "Comprehensive Resume Analysis",
     "description": "Performs detailed resume analysis with scoring and recommendations",
     "category": "resume_intelligence",
     "version": "1.0",
     "template": "As an expert resume analyst and career strategist, perform a comprehensive analysis\nof this resume. Provide detailed scoring, insights, and actionable recommendations.\n\nRESUME CONTENT:\n{resume_content}\n\nTARGET INDUSTRY: {target_industry}\n\nCOMPREHENSIVE ANALYSIS REQUIREMENTS:\n1. Overall Quality Scoring (0-100 scale):\n   - ATS compatibility and parsing friendliness\n   - Human readability and visual appeal\n   - Achievement impact and quantification\n\n2. Section-by-Section Analysis:\n   - Score each resume section (contact, summary, experience, education, skills)\n   - Identify strengths and improvement areas per section\n\n3. Experience Deep Dive:\n   - Analyze each role for impact and achievement\n   - Score responsibilities vs achievements balance\n   - Assess skill demonstration and career progression\n\n4. Skills Assessment:\n   - Categorize skills by proficiency level\n   - Evaluate market demand for each skill\n   - Identify skill gaps and growth opportunities\n\n5. Strategic Recommendations:\n   - Immediate quick-win improvements\n   - Long-term strategic positioning advice\n   - Industry alignment and competitive positioning\n\n6. Market Readiness:\n   - How competitive this resume is in current market\n   - Unique differentiators and value propositions\n   - Positioning advice for target roles\n\nSCORING CRITERIA:\n- 90-100: Exceptional, market-leading resume\n- 80-89: Strong, competitive resume\n- 70-79: Good foundation, some improvements needed\n- 60-69: Average, significant improvements required\n- 50-59: Below average, major restructuring needed\n- Below 50: Poor quality, comprehensive rewrite required\n\nFocus on actionable, specific feedback that leads to measurable improvements.\nRespond with valid JSON matching the ResumeAnalysisResult schema.",
-    "parameters": ["resume_content", "target_industry"],
+    "parameters": [
+      "resume_content",
+      "target_industry"
+    ],
     "output_format": "structured_json",
     "metadata": {
       "created_at": "2024-09-11",
@@ -28,14 +33,16 @@
       "usage_count": 0
     }
   },
-
   "career_progression_analysis": {
     "name": "Career Progression Analysis",
     "description": "Analyzes career trajectory and provides advancement strategy",
     "category": "resume_intelligence",
     "version": "1.0",
     "template": "As a senior career strategist, analyze the career progression patterns in this resume\nand provide strategic guidance for continued advancement.\n\nRESUME CONTENT:\n{resume_content}\n\nCAREER GOALS: {career_goals}\n\nCAREER PROGRESSION ANALYSIS:\n1. Trajectory Assessment:\n   - Analyze progression of roles, titles, and responsibilities\n   - Identify upward, lateral, or unclear progression patterns\n   - Score overall career growth trajectory (0-100)\n\n2. Skill Evolution Analysis:\n   - Track how skills developed across roles\n   - Identify skill-building patterns and strategic development\n   - Map skills growth to career advancement\n\n3. Gap and Opportunity Identification:\n   - Identify career gaps or inconsistencies\n   - Spot opportunities for stronger positioning\n   - Highlight missing experiences for target advancement\n\n4. Growth Pattern Recognition:\n   - Identify patterns of professional development\n   - Recognize strategic career moves and decisions\n   - Analyze risk-taking and growth mindset evidence\n\n5. Future Trajectory Planning:\n   - Predict logical next career moves\n   - Identify roles that build on current foundation\n   - Suggest strategic skill development priorities\n\n6. Advancement Positioning:\n   - How to position for next-level opportunities\n   - Leverage current experience for advancement\n   - Bridge gaps between current role and aspirations\n\nProvide strategic, actionable guidance for continued career growth and positioning.\nRespond with valid JSON matching the CareerProgressionAnalysis schema.",
-    "parameters": ["resume_content", "career_goals"],
+    "parameters": [
+      "resume_content",
+      "career_goals"
+    ],
     "output_format": "structured_json",
     "metadata": {
       "created_at": "2024-09-11",
@@ -43,7 +50,6 @@
       "usage_count": 0
     }
   },
-
   "ksc_star_response": {
     "name": "KSC STAR Response Generation",
     "description": "Generates STAR methodology responses for Key Selection Criteria",
@@ -65,7 +71,6 @@
       "usage_count": 0
     }
   },
-
   "tailored_cover_letter_simple": {
     "name": "Tailored Cover Letter (Simple)",
     "description": "Generates a simple tailored cover letter with voice profile matching",
@@ -84,7 +89,6 @@
       "usage_count": 0
     }
   },
-
   "tailored_cover_letter_advanced": {
     "name": "Tailored Cover Letter (Advanced)",
     "description": "Generates a comprehensive cover letter with detailed analysis and customization",
@@ -106,14 +110,16 @@
       "usage_count": 0
     }
   },
-
   "ksc_simple_response": {
     "name": "KSC Simple Response Generation",
     "description": "Generates simple STAR methodology responses for Key Selection Criteria",
     "category": "ksc_generation",
     "version": "1.0",
     "template": "As an expert career coach and a master of the STAR interview technique, your task is to generate a response for a Key Selection Criterion (KSC).\n\n**Objective:**\n1. Analyze the following Key Selection Criterion: \"{ksc_statement}\".\n2. Search through the provided user profile data to find the most relevant real-world example of this skill or experience.\n3. Using that single, most relevant example, write a comprehensive response that is strictly formatted using the STAR methodology (Situation, Task, Action, Result).\n4. The final output must be a JSON object with four keys: \"situation\", \"task\", \"action\", and \"result\".\n\n**User Profile Data:**\n```json\n{user_profile_data}\n```\n\nNow, generate the STAR response based on the user's experience.",
-    "parameters": ["ksc_statement", "user_profile_data"],
+    "parameters": [
+      "ksc_statement",
+      "user_profile_data"
+    ],
     "output_format": "structured_json",
     "metadata": {
       "created_at": "2024-09-11",
@@ -121,14 +127,15 @@
       "usage_count": 0
     }
   },
-
   "job_description_analysis": {
     "name": "Job Description Analysis",
     "description": "Analyzes job descriptions to extract key information and requirements",
     "category": "job_analysis",
     "version": "1.0",
     "template": "Analyze the following job description and extract the key information in a structured JSON format.\nThe JSON object should include the following fields:\n- job_title (string)\n- key_skills (list of strings)\n- required_qualifications (list of strings)\n- company_culture_summary (string)\n\nJob Description:\n{job_description}",
-    "parameters": ["job_description"],
+    "parameters": [
+      "job_description"
+    ],
     "output_format": "structured_json",
     "metadata": {
       "created_at": "2024-09-11",
@@ -136,14 +143,16 @@
       "usage_count": 0
     }
   },
-
   "resume_job_comparison": {
     "name": "Resume to Job Comparison",
     "description": "Compares a resume against job analysis data and provides detailed feedback",
     "category": "resume_analysis",
     "version": "1.0",
     "template": "As an expert career coach, analyze the provided resume against the structured job analysis data. Your goal is to provide a detailed comparison and actionable feedback.\n\nIMPORTANT: You must respond ONLY with a valid JSON object. No additional text or explanations.\n\nThe output must be a valid JSON object with the following structure:\n- \"match_score\": An integer between 0 and 100 representing how well the resume matches the job.\n- \"matching_skills\": A list of skills found in both the resume and the job's key skills.\n- \"missing_skills\": A list of key skills required for the job that are not found in the resume.\n- \"improvement_suggestions\": A list of specific, actionable suggestions for the user to improve their resume for this job.\n\nResume Text:\n{resume_text}\n\nJob Analysis Data:\n{job_analysis_data}",
-    "parameters": ["resume_text", "job_analysis_data"],
+    "parameters": [
+      "resume_text",
+      "job_analysis_data"
+    ],
     "output_format": "structured_json",
     "metadata": {
       "created_at": "2024-09-11",
@@ -151,14 +160,15 @@
       "usage_count": 0
     }
   },
-
   "email_job_extraction": {
     "name": "Email Job Details Extraction",
     "description": "Extracts structured job information from email content",
     "category": "email_processing",
     "version": "1.0",
     "template": "Analyze the following email content and extract structured information about a job opportunity.\nThe output must be a valid JSON object with the fields: \"company\", \"title\", \"deadline\" (in YYYY-MM-DD format), and \"source_url\".\nIf any field is not present, use a value of null.\nIf no clear job opportunity is found, return an empty JSON object {}.\n\nEmail Content:\n---\n{email_content}\n---",
-    "parameters": ["email_content"],
+    "parameters": [
+      "email_content"
+    ],
     "output_format": "structured_json",
     "metadata": {
       "created_at": "2024-09-11",
@@ -166,17 +176,17 @@
       "usage_count": 0
     }
   },
-
   "job_listing_extractor": {
     "name": "Job Listing Extractor",
     "description": "Extracts structured details from a job listing's text content.",
     "category": "job_analysis",
     "version": "1.0",
-    "template": "Your task is to act as an expert recruitment assistant and extract the following specific pieces of information from the provided job description text. If a piece of information is not present, you must return null for that field for strings or an empty array for lists.\n\n1.  **Due Date**: The closing date for applications.\n2.  **Company Name**: The name of the organization hiring for the role.\n3.  **Role Title**: The official title of the position.\n4.  **Hiring Manager**: The name of the hiring manager or main contact person.\n5.  **Hiring Manager's Contact**: Any contact details provided for the hiring manager.\n6.  **Essential Criteria**: Skills/qualifications stated as 'essential', 'required', etc.\n7.  **Desirable Criteria**: Skills/qualifications stated as 'desirable', 'preferred', etc.\n8.  **Role Type**: Classify the role as 'Frontline/Support', 'PM/Delivery', or 'Other'.\n9.  **Subsectors**: Identify relevant community service subsectors like 'Homelessness', 'AOD', 'Mental Health'.\n\nPlease provide the output in the specified JSON format.\n\nJob Description Text:\n---\n{job_listing_text}\n---",
-    "parameters": ["job_listing_text"],
+    "template": "Your task is to act as an expert recruitment assistant and extract the following specific pieces of information from the provided job description text. If a piece of information is not present, you must return null for that field for strings or an empty array for lists.\n\n1.  **Due Date**: The closing date for applications.\n2.  **Company Name**: The name of the organization hiring for the role.\n3.  **Role Title**: The official title of the position.\n4.  **Hiring Manager**: The name of the hiring manager or main contact person.\n5.  **Hiring Manager's Contact**: Any contact details provided for the hiring manager.\n6.  **Essential Criteria**: Skills/qualifications stated as 'essential', 'required', etc.\n7.  **Desirable Criteria**: Skills/qualifications stated as 'desirable', 'preferred', etc.\n8.  **Role Type**: Classify the role as 'Frontline/Support', 'PM/Delivery', or 'Other'.\n9.  **Subsectors**: Identify relevant community service subsectors like 'Homelessness', 'AOD', 'Mental Health'.\n10. **Location**: The location, suburb, or region of the role.\n11. **Key Responsibilities**: A list of key duties, tasks, or responsibilities associated with the role.\n\nPlease provide the output in the specified JSON format.\n\nJob Description Text:\n---\n{job_listing_text}\n---",
+    "parameters": [
+      "job_listing_text"
+    ],
     "output_format": "structured_json"
   },
-
   "job_listing_advanced_analysis": {
     "name": "Job Listing Advanced Analysis",
     "description": "Performs an advanced analysis on structured job details based on a user's request.",
