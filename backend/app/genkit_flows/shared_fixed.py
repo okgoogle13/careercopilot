@@ -14,11 +14,16 @@ from pydantic import BaseModel
 def initialize_google_ai():
     """Initialize Google AI plugin with error handling"""
     try:
-        api_key = os.getenv("GEMINI_API_KEY")
+        from app.core.secret_manager import get_secret
+        api_key = get_secret("GEMINI_API_KEY")
         if not api_key:
-            raise ValueError("GEMINI_API_KEY not found in environment")
+            api_key = os.getenv("GEMINI_API_KEY")
+        
+        if not api_key:
+            raise ValueError("GEMINI_API_KEY not found in environment or Secret Manager")
 
         # Initialize the GoogleAI plugin
+        # Note: Depending on genkit version, this might vary
         google_ai_plugin = google_genai.GoogleAI()
         google_ai_plugin.initialize(api_key=api_key)
 
@@ -27,9 +32,9 @@ def initialize_google_ai():
         print(f"Warning: Failed to initialize Google AI plugin: {e}")
         return False
 
-
 # Initialize on import
 _google_ai_initialized = initialize_google_ai()
+
 
 # Get the Gemini 1.5 Pro model constant
 GEMINI_1_5_PRO = google_genai.models.gemini.GEMINI_1_5_PRO

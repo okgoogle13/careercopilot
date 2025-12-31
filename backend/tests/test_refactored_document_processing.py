@@ -27,7 +27,7 @@ from app.core.file_upload_decorators import (
 )
 
 
-class TestModel(BaseModel):
+class DocumentTestModel(BaseModel):
     """Test model for document processing."""
 
     test_field: str = ""
@@ -107,10 +107,10 @@ class TestGenericDocumentProcessing:
         result = await process_document(
             file_content="Test content",
             prompt_template=PromptTemplates.RESUME_ANALYSIS,
-            response_model=TestModel,
+            response_model=DocumentTestModel,
         )
 
-        assert isinstance(result, TestModel)
+        assert isinstance(result, DocumentTestModel)
         assert result.test_field == "test value"
         assert "Python" in result.skills
 
@@ -120,7 +120,7 @@ class TestGenericDocumentProcessing:
             await process_document(
                 file_content="",
                 prompt_template=PromptTemplates.RESUME_ANALYSIS,
-                response_model=TestModel,
+                response_model=DocumentTestModel,
             )
 
     async def test_process_document_short_content(self):
@@ -129,7 +129,7 @@ class TestGenericDocumentProcessing:
             await process_document(
                 file_content="Hi",
                 prompt_template=PromptTemplates.RESUME_ANALYSIS,
-                response_model=TestModel,
+                response_model=DocumentTestModel,
             )
 
     def test_prompt_template_formatting(self):

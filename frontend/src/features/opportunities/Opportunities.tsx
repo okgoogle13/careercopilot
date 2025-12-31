@@ -1,90 +1,158 @@
-import { Settings } from 'lucide-react';
-import fiddleLeafFig from '../../assets/images/fiddle-leaf-fig.jpg';
+import { useState } from 'react';
+import { Settings, Search, Briefcase, MapPin, ExternalLink, Sparkles } from 'lucide-react';
 import { PageHeader } from '../../components/shared/PageHeader';
 
+interface ScoutResponse {
+  found_links: string[];
+  message: string;
+}
+
 export function Opportunities() {
+  const [query, setQuery] = useState('Social Worker');
+  const [location, setLocation] = useState('Melbourne');
+  const [isLoading, setIsLoading] = useState(false);
+  const [results, setResults] = useState<string[]>([]);
+  const [scoutMessage, setScoutMessage] = useState('');
+
+  const handleScout = async () => {
+    setIsLoading(true);
+    setScoutMessage('');
+    setResults([]);
+
+    try {
+      const response = await fetch('http://localhost:8000/api/v1/job-scout/search', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ query, location }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Scout failed');
+      }
+
+      const data: ScoutResponse = await response.json();
+      setResults(data.found_links);
+      setScoutMessage(data.message);
+    } catch (error) {
+      console.error(error);
+      setScoutMessage('Failed to scout jobs. Ensure backend is running.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const noiseOverlay = `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E")`;
 
   return (
     <div className="p-6 md:p-12 max-w-7xl animate-in fade-in zoom-in-95 duration-500 ease-spring">
-      {/* Header */}
       <PageHeader
-        title="Job Opportunities"
+        title="Job Scout"
         highlightedWord="Opportunities"
-        description="Curated opportunities that match your profile"
+        description="Autonomous agent finding hidden jobs across the web."
       />
 
-      {/* Filter Bar Pane */}
+      {/* Scout Controls */}
       <div
-        className="mb-8 rounded-tech p-4 flex items-center gap-4 bg-surface-container relative overflow-hidden border border-outline-variant"
-        style={{
-          backgroundImage: noiseOverlay,
-        }}
+        className="mb-8 rounded-tech p-6 bg-surface-container relative overflow-hidden border border-outline-variant shadow-elevation-1"
+        style={{ backgroundImage: noiseOverlay }}
       >
-        <span className="ml-4 text-on-surface-variant text-label-medium uppercase tracking-wider font-mono">
-          Quick Filters:
-        </span>
-        <div className="flex flex-wrap gap-3">
-          {['Remote Only', 'Full-time', 'Tech Industry', 'Senior Level', '$100k+', 'Equity'].map(
-            (filter) => (
-              <button
-                key={filter}
-                className="px-6 py-2 bg-surface-dim rounded-pebble text-on-surface hover:bg-surface-bright hover:text-primary transition-all duration-short-2 ease-spring border border-transparent hover:border-primary/30 text-body-medium font-medium"
-              >
-                {filter}
-              </button>
-            )
-          )}
+        <div className="flex flex-col md:flex-row gap-4 items-end">
+          <div className="flex-1 space-y-2 w-full">
+            <label className="text-label-medium text-on-surface-variant font-medium flex items-center gap-2">
+              <Briefcase className="w-4 h-4" /> Role / Keyword
+            </label>
+            <input
+              type="text"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              className="w-full bg-surface-container-high border-outline border rounded-md p-3 text-on-surface focus:ring-2 focus:ring-primary outline-none transition-all"
+              placeholder="e.g. Case Manager"
+            />
+          </div>
+
+          <div className="flex-1 space-y-2 w-full">
+            <label className="text-label-medium text-on-surface-variant font-medium flex items-center gap-2">
+              <MapPin className="w-4 h-4" /> Location
+            </label>
+            <input
+              type="text"
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+              className="w-full bg-surface-container-high border-outline border rounded-md p-3 text-on-surface focus:ring-2 focus:ring-primary outline-none transition-all"
+              placeholder="e.g. Melbourne, Australia"
+            />
+          </div>
+
+          <button
+            onClick={handleScout}
+            disabled={isLoading}
+            className={`
+              h-[50px] px-8 rounded-full font-bold uppercase tracking-wide shadow-lg transition-all flex items-center gap-2
+              ${isLoading ? 'bg-surface-disabled text-on-surface-disabled cursor-not-allowed' : 'bg-primary text-on-primary hover:scale-105 active:scale-95'}
+            `}
+          >
+            {isLoading ? (
+              <>
+                <Sparkles className="w-4 h-4 animate-spin" /> Scouting...
+              </>
+            ) : (
+              <>
+                <Search className="w-4 h-4" /> Start Scout
+              </>
+            )}
+          </button>
         </div>
       </div>
 
-      {/* Empty State - Growth Garden - HERO CARD */}
-      <div
-        className="rounded-gem p-16 flex flex-col items-center justify-center relative overflow-hidden shadow-elevation-1"
-        style={{
-          minHeight: '600px',
-          backgroundColor: '#2C2C2C', // Keeping dark neutral base for the "garden" feel but could map to surface-container-lowest
-          backgroundImage: noiseOverlay,
-        }}
-      >
-        {/* Bio-Glass Frosted Edge Effect */}
-        <div className="absolute inset-0 pointer-events-none rounded-gem ring-1 ring-white/10 shadow-[inset_0_0_20px_rgba(255,255,255,0.02)]" />
-
-        {/* Fiddle Leaf Fig Centerpiece - Growing out of container */}
-        <div
-          className="absolute inset-0 flex items-end justify-center pointer-events-none"
-          style={{
-            zIndex: 1,
-          }}
-        >
-          <img
-            src={fiddleLeafFig}
-            alt=""
-            className="w-auto h-[550px] object-cover translate-y-12"
-            style={{
-              mixBlendMode: 'normal',
-              opacity: 0.9,
-              maskImage: 'linear-gradient(to top, black 0%, black 80%, transparent 100%)',
-            }}
-          />
-        </div>
-
-        {/* Text Content - Floating above plant */}
-        <div className="text-center mb-8 relative z-10 bg-surface-container-low/60 backdrop-blur-md p-8 rounded-leaf border border-outline-variant shadow-elevation-2 max-w-xl">
-          <h3 className="text-on-surface mb-4 text-display-small font-black uppercase tracking-tight">
-            No opportunities yet
-          </h3>
-          <p className="text-on-surface-variant text-body-large">
-            We're searching for the perfect opportunities that match your skills and preferences.
-            Adjust your search filters to help us find the best matches for you.
+      {/* Results Area */}
+      <div className="space-y-4">
+        {scoutMessage && (
+          <p className="text-body-medium text-on-surface-variant mb-4 font-mono">
+            {'>'} {scoutMessage}
           </p>
-        </div>
+        )}
 
-        {/* Action Button - Terracotta Pill */}
-        <button className="px-8 py-3 rounded-pebble hover:bg-error-container hover:text-on-error-container transition-all flex items-center gap-2 text-sm relative z-10 bg-tertiary text-on-tertiary font-bold uppercase tracking-wide shadow-lg hover:scale-105 active:scale-95 duration-300 ease-spring">
-          <Settings className="w-4 h-4" />
-          <span>Adjust Search Filters</span>
-        </button>
+        {results.length > 0 ? (
+          <div className="grid grid-cols-1 gap-4">
+            {results.map((link, index) => (
+              <div
+                key={index}
+                className="p-6 bg-surface-container-low rounded-lg border border-outline-variant hover:border-primary/50 transition-colors group relative overflow-hidden"
+              >
+                <div className="absolute top-0 left-0 w-1 h-full bg-secondary opacity-0 group-hover:opacity-100 transition-opacity" />
+                <h3 className="text-title-medium font-bold text-on-surface truncate mb-1">
+                  Job Match #{index + 1}
+                </h3>
+                <a
+                  href={link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-primary text-body-medium hover:underline flex items-center gap-2 break-all"
+                >
+                  <ExternalLink className="w-4 h-4" />
+                  {link}
+                </a>
+                <div className="mt-3 flex gap-2">
+                  <span className="text-label-small bg-surface-container-high px-2 py-1 rounded text-on-surface-variant">
+                    Detected via Search
+                  </span>
+                  <span className="text-label-small bg-tertiary-container px-2 py-1 rounded text-on-tertiary-container">
+                    Analysis Pending
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          !isLoading && (
+            <div className="text-center py-20 opacity-50">
+              <Sparkles className="w-12 h-12 mx-auto mb-4 text-outline" />
+              <p className="text-headline-small text-outline">Ready to find your next role.</p>
+            </div>
+          )
+        )}
       </div>
     </div>
   );

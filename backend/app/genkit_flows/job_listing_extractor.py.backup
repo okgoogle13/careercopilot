@@ -45,27 +45,35 @@ JOB_EXTRACTOR_PROMPT = PROMPTS["job_listing_extractor"]["template"]
 ADVANCED_ANALYSIS_PROMPT = PROMPTS["job_listing_advanced_analysis"]["template"]
 
 
-from app.services.playwright_service import scrape_url_sync
-
 def _scrape_url_content(url: str) -> str:
     """
-    Scrapes the text content from a given URL using Playwright (via MCP).
+    Scrapes the text content from a given URL.
 
     Args:
         url: The URL to scrape.
 
     Returns:
-        The cleaned text/HTML content of the page.
+        The cleaned text content of the page.
 
     Raises:
-        IOError: If the scraping fails.
+        HTTPError: If the URL cannot be fetched.
     """
     try:
-        # Use the Playwright MCP Service to handle JS-rendered pages
-        content = scrape_url_sync(url)
-        return content
-    except Exception as e:
-        print(f"Error scraping URL {url} with Playwright: {e}")
+        response = requests.get(url, timeout=10)
+        response.raise_for_status()
+        soup = BeautifulSoup(response.content, "html.parser")
+        # Remove script and style elements
+        for script_or_style in soup(["script", "style"]):
+            script_or_style.decompose()
+        # Get text and clean it up
+        text = soup.get_text()
+        lines = (line.strip() for line in text.splitlines())
+        chunks = (phrase.strip() for line in lines for phrase in line.split("  "))
+        text = "\n".join(chunk for chunk in chunks if chunk)
+        return text
+    except requests.exceptions.RequestException as e:
+        print(f"Error scraping URL {url}: {e}")
+        # Re-raise as a more generic exception to be caught by the flow's error handling
         raise IOError(f"Failed to retrieve content from the URL: {url}") from e
 
 

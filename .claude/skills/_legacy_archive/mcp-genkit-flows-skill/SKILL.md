@@ -141,14 +141,37 @@ Savings: 94% tokens ✅, 99% time ✅
 - email_composition - Generate professional emails
 - summary_generation - Create profile summaries
 
+## Implementation Status
+
+⚠️ **NOTE**: This skill describes a GenKitFlowRegistry MCP server that was **never implemented** in the codebase. The `genkit-server.py` file does not exist.
+
+### Current Genkit Integration
+
+Genkit flows are currently accessed via:
+- **Direct Backend Calls**: FastAPI endpoints in `backend/app/api/`
+- **Genkit Flows Directory**: `backend/app/genkit_flows/`
+- **Frontend Services**: Direct HTTP calls to backend endpoints
+
+### Migration Note
+
+If you need to execute Genkit flows:
+1. Use backend API endpoints directly
+2. Call flows via the backend's Genkit initialization
+3. Access via frontend AI service wrappers
+
+The described MCP caching layer does not currently exist.
+
 ## Integration Points
 
-Works seamlessly with:
+Works with:
 
-- `mcp-documentation-skill` - For flow documentation
-- `mcp-configuration-skill` - For environment-specific flow parameters
-- Frontend AI Services (generateKscResponses, generateCoverLetter)
-- Backend Genkit initialization
+- Backend Genkit flows (`backend/app/genkit_flows/`)
+- Frontend AI Services (`generateKscResponses`, `generateCoverLetter`)
+- FastAPI endpoints for flow execution
+- Firebase/Firestore for data persistence
+
+**Note**: The `mcp-documentation-skill` and `mcp-configuration-skill` referenced below are deprecated.
+
 
 ## Performance Characteristics
 
