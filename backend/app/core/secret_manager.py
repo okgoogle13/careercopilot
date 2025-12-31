@@ -57,9 +57,15 @@ def get_secret(
 
     # If not in environment, try Secret Manager
     if not project_id:
-        project_id = os.getenv("GOOGLE_CLOUD_PROJECT")
-        if not project_id:
-            raise RuntimeError("GOOGLE_CLOUD_PROJECT environment variable is not set")
+        project_id = os.getenv("GOOGLE_CLOUD_PROJECT") or os.getenv("GCP_PROJECT_ID")
+        current_env = os.getenv("ENV") or os.getenv("ENVIRONMENT", "development")
+        if not project_id and current_env not in ["production", "staging"]:
+            # Don't crash in dev if not found
+            pass
+        elif not project_id:
+            raise RuntimeError(
+                "Neither GOOGLE_CLOUD_PROJECT nor GCP_PROJECT_ID environment variable is set"
+            )
 
     # Build the secret version name
     name = f"projects/{project_id}/secrets/{secret_id}/versions/{version}"

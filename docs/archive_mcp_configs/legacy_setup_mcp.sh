@@ -326,7 +326,7 @@ MCP_JSON_CONTENT=$(cat <<EOF
       "command": "$VENV_PYTHON",
       "args": ["$SERVERS_DIR/flash_sidekick.py"],
       "env": {
-        "GEMINI_API_KEY": "AIzaSyDuCsnEtxxgUCVilracX3PRRKjmheaQQS0",
+        "GEMINI_API_KEY": "${GEMINI_API_KEY}",
         "GEMINI_MODEL": "models/gemini-2.5-flash-lite",
         "GEMINI_PRO_MODEL": "models/gemini-2.5-pro"
       },
