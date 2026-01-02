@@ -15,7 +15,7 @@ import {
     DropdownMenuRadioGroup,
     DropdownMenuRadioItem,
 } from './dropdown-menu';
-import { Button } from './button';
+import { Button } from '../shadcn-button/button';
 import { User, Settings, CreditCard, LogOut, Mail, MessageSquare, Plus, PlusCircle, UserPlus, Github, LifeBuoy, Cloud } from 'lucide-react';
 import { useState } from 'react';
 

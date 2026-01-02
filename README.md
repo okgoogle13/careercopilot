@@ -27,6 +27,24 @@
 
 ## 🚀 Quick Start Guide
 
+### **🎯 One-Click Launch (v1.0)**
+
+```bash
+# That's it! One command starts everything:
+python3 run_copilot.py
+```
+
+**What happens:**
+- ✅ Environment checks run automatically
+- ✅ Backend API starts (http://localhost:8000)
+- ✅ Frontend UI starts (http://localhost:5173)
+- ✅ Browser opens to job queue
+- ✅ Press Ctrl+C to stop everything
+
+**See [`USER_MANUAL.md`](USER_MANUAL.md) for complete setup guide.**
+
+---
+
 ### 1. Prerequisites
 - Node.js v18+ & npm
 - Python 3.12+ & pip

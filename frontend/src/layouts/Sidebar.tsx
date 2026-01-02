@@ -10,6 +10,7 @@ import {
   Menu,
   X,
   FolderOpen,
+  Inbox,
 } from 'lucide-react';
 import { useState } from 'react';
 
@@ -19,6 +20,7 @@ const mainNavItems = [
   { path: '/documents', icon: FileText, label: 'Documents' },
   { path: '/analysis', icon: BarChart3, label: 'Analysis' },
   { path: '/opportunities', icon: Briefcase, label: 'Opportunities' },
+  { path: '/job-queue', icon: Inbox, label: 'Job Queue' },
   { path: '/ksc-generator', icon: Sparkles, label: 'KSC Generator' },
   { path: '/asset-library', icon: FolderOpen, label: 'Asset Library' },
 ];

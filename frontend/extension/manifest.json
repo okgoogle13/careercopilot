@@ -1,0 +1,19 @@
+{
+    "manifest_version": 3,
+    "name": "CareerCopilot Clipper",
+    "version": "1.0",
+    "description": "One-click save from Seek, Jora, and EthicalJobs to CareerCopilot.",
+    "permissions": [
+        "activeTab",
+        "scripting"
+    ],
+    "action": {
+        "default_popup": "popup.html"
+    },
+    "host_permissions": [
+        "http://localhost:8000/*",
+        "https://www.seek.com.au/*",
+        "https://www.ethicaljobs.com.au/*",
+        "https://au.jora.com/*"
+    ]
+}
