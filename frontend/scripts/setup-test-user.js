@@ -21,6 +21,7 @@ const __dirname = dirname(__filename);
 
 // Load environment variables
 dotenv.config({ path: join(__dirname, '../.env') });
+console.log('Debug: API Key loaded:', process.env.VITE_FIREBASE_API_KEY ? 'Yes (starts with ' + process.env.VITE_FIREBASE_API_KEY.substring(0, 4) + ')' : 'No');
 
 const firebaseConfig = {
   apiKey: process.env.VITE_FIREBASE_API_KEY,

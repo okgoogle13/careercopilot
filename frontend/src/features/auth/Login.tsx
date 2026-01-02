@@ -72,6 +72,32 @@ export function Login() {
             </Alert>
           )}
 
+          {/* Guest Access Button */}
+          <div className="mb-6">
+            <Button
+              type="button"
+              onClick={() => navigate('/dashboard?demo=true')}
+              className="w-full bg-surface-container-high text-secondary border-2 border-secondary hover:bg-secondary/10 rounded-pebble h-12 font-bold uppercase tracking-wide shadow-sm hover:shadow-elevation-1 transition-all ease-spring"
+            >
+              🔍 Explore as Guest
+            </Button>
+            <p className="text-center text-xs text-on-surface-variant mt-2">
+              No account needed • Full access to job search
+            </p>
+          </div>
+
+          {/* Divider */}
+          <div className="relative mb-6">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-outline-variant"></div>
+            </div>
+            <div className="relative flex justify-center text-sm">
+              <span className="px-4 bg-surface-container text-on-surface-variant uppercase tracking-wider text-xs font-bold">
+                Or sign in
+              </span>
+            </div>
+          </div>
+
           {/* Form */}
           <form
             onSubmit={handleSubmit(onSubmit)}

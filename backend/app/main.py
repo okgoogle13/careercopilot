@@ -25,6 +25,7 @@ from app.api.router import api_router
 from app.api.routes.career import router as career_router
 from app.api.routes.ingestion import router as ingestion_router
 from app.api.endpoints.job_scout import router as job_scout_router
+from app.api import ingest
 from app.core.genkit_init import check_genkit_health, startup_genkit
 from app.core.loguru_config import configure_loguru, get_logger, log_security_event
 from app.core.monitoring import setup_prometheus_monitoring
@@ -118,6 +119,7 @@ app.include_router(api_router, prefix="/api")
 app.include_router(career_router, prefix="/api/career", tags=["Career Database"])
 app.include_router(ingestion_router, prefix="/api/v1", tags=["Career Ingestion"])
 app.include_router(job_scout_router, prefix="/api/v1/job-scout", tags=["Job Scout"])
+app.include_router(ingest.router, prefix="/api/ingest", tags=["Ingestion"])
 
 
 @app.get("/", tags=["Root"])

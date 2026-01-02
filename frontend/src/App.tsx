@@ -24,6 +24,7 @@ import { ProfileView } from './features/profile/ProfileView';
 import { AssetLibrary } from './features/analysis/AssetLibrary';
 import { NotFound } from './features/not-found/NotFound';
 import { IngestionPage } from './pages/IngestionPage';
+import { JobQueue } from './pages/JobQueue';
 import { useAuth } from './context/AuthContext';
 import texturePattern from './assets/images/texture-pattern.png';
 
@@ -31,6 +32,10 @@ import texturePattern from './assets/images/texture-pattern.png';
 const ProtectedLayout = () => {
   const { user, loading } = useAuth();
   const location = useLocation();
+
+  // Check for demo/guest mode
+  const searchParams = new URLSearchParams(location.search);
+  const isDemoMode = searchParams.get('demo') === 'true';
 
   if (loading) {
     return (
@@ -40,7 +45,8 @@ const ProtectedLayout = () => {
     );
   }
 
-  if (!user) {
+  // Allow access if authenticated OR in demo mode
+  if (!user && !isDemoMode) {
     return (
       <Navigate
         to="/login"
@@ -161,6 +167,10 @@ export default function App() {
           <Route
             path="/career/ingest"
             element={<IngestionPage />}
+          />
+          <Route
+            path="/job-queue"
+            element={<JobQueue />}
           />
           <Route
             path="/style-guide"
