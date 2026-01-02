@@ -64,11 +64,13 @@ export function Opportunities() {
               <Briefcase className="w-4 h-4" /> Role / Keyword
             </label>
             <input
-              type="text"
+              type="search"
+              name="jobSearch"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               className="w-full bg-surface-container-high border-outline border rounded-md p-3 text-on-surface focus:ring-2 focus:ring-primary outline-none transition-all"
-              placeholder="e.g. Case Manager"
+              placeholder="e.g. Software Engineer, Case Manager"
+              aria-label="Job search query"
             />
           </div>
 
@@ -119,7 +121,7 @@ export function Opportunities() {
             {results.map((link, index) => (
               <div
                 key={index}
-                className="p-6 bg-surface-container-low rounded-lg border border-outline-variant hover:border-primary/50 transition-colors group relative overflow-hidden"
+                className="p-6 bg-surface-container-low rounded-pebble border border-outline-variant hover:border-primary/50 transition-colors group relative overflow-hidden shadow-elevation-1 hover:shadow-elevation-2"
               >
                 <div className="absolute top-0 left-0 w-1 h-full bg-secondary opacity-0 group-hover:opacity-100 transition-opacity" />
                 <h3 className="text-title-medium font-bold text-on-surface truncate mb-1">

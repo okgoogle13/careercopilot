@@ -121,3 +121,4 @@ test-results/
 
 # Legacy Archive (Pre-Flight Cleanup)
 _archive_legacy/
+credentials.json

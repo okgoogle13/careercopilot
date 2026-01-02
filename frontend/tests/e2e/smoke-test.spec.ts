@@ -1,6 +1,8 @@
 import { test, expect } from '@playwright/test';
 
 test.describe('Smoke Test', () => {
+    test.use({ storageState: { cookies: [], origins: [] } });
+
     test('should load landing page and navigate to login', async ({ page }) => {
         // Verify landing page
         await page.goto('/');
