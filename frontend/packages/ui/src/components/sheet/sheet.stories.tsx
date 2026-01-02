@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Sheet, SheetTrigger, SheetContent, SheetHeader, SheetTitle, SheetDescription, SheetFooter, SheetClose } from './sheet';
-import { Button } from './button';
+import { Button } from '../shadcn-button/button';
 import { Menu, Settings, User, Bell } from 'lucide-react';
 
 const meta: Meta<typeof Sheet> = {

@@ -1,0 +1,16 @@
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "noEmit": false,
+        "module": "commonjs",
+        "outDir": "dist",
+        "rootDir": "src",
+        "declaration": true
+    },
+    "exclude": [
+        "node_modules",
+        "dist",
+        "**/*.stories.tsx",
+        "**/*.test.tsx"
+    ]
+}

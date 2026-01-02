@@ -6,13 +6,13 @@ import { VariantProps, cva } from 'class-variance-authority';
 import { PanelLeftIcon } from 'lucide-react';
 
 import { useIsMobile } from './use-mobile';
-import { cn } from './utils';
-import { Button } from './button';
-import { Input } from '@careercopilot/ui';
-import { Separator } from '@careercopilot/ui';
-import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from '@careercopilot/ui';
-import { Skeleton } from '@careercopilot/ui';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@careercopilot/ui';
+import { cn } from '../../lib/utils';
+import { Button } from '../shadcn-button/button';
+import { Input } from '../input/input';
+import { Separator } from '../separator/separator';
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from '../sheet/sheet';
+import { Skeleton } from '../skeleton/skeleton';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../tooltip/tooltip';
 
 const SIDEBAR_COOKIE_NAME = 'sidebar_state';
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;

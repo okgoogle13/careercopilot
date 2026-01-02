@@ -11,6 +11,22 @@ interface ApplicationCardProps {
 
 import { StatusBadge } from '../ui/StatusBadge';
 
+/**
+ * ApplicationCard - M3 Compliant Job Application Tracker Card
+ * 
+ * Displays job application information with a multi-step progress indicator.
+ * Built using Material Design 3 Electric Alchemist design tokens.
+ * 
+ * **M3 Design Token Usage:**
+ * - Shape: `--sys-shape-pebble` (20px 20px 32px 32px) - Friendly organic corners
+ * - Elevation: `--sys-elevation-level1` → `--sys-elevation-level2` on hover
+ * - Spacing: `--sys-space-xl` (32px) for card padding
+ * - Motion: `--sys-motion-duration-medium-1` (250ms) with spring easing
+ * - Colors: M3 semantic color roles (surface-container, primary-container, etc.)
+ * 
+ * @param {ApplicationCardProps} props - Component properties
+ * @returns {JSX.Element} Rendered application card
+ */
 export function ApplicationCard({
   title,
   company,
@@ -22,7 +38,7 @@ export function ApplicationCard({
   className = '',
 }: ApplicationCardProps) {
   return (
-    <div className={`bg-surface-container rounded-xl p-8 border border-outline-variant shadow-elevation-1 hover:shadow-elevation-2 transition-all duration-medium-1 ease-spring ${className}`}>
+    <div className={`bg-surface-container rounded-pebble p-space-xl border border-outline-variant shadow-elevation-1 hover:shadow-elevation-2 transition-all duration-medium-1 ease-spring ${className}`}>
       {/* Header Section */}
       <div className="flex items-start justify-between mb-12">
         <div className="flex-1">

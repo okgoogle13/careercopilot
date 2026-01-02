@@ -2865,3 +2865,281 @@
   syntax: "*";
   inherits: false
 }
+
+/* ============================================================================
+ * M3 DESIGN SYSTEM UTILITIES
+ * Material Design 3 Electric Alchemist Theme
+ * ========================================================================== */
+
+/* Elevation Shadows */
+.shadow-elevation-1 {
+  box-shadow: var(--sys-elevation-level1);
+}
+
+.shadow-elevation-2 {
+  box-shadow: var(--sys-elevation-level2);
+}
+
+.shadow-elevation-3 {
+  box-shadow: var(--sys-elevation-level3);
+}
+
+.shadow-elevation-4 {
+  box-shadow: var(--sys-elevation-level4);
+}
+
+.shadow-elevation-5 {
+  box-shadow: var(--sys-elevation-level5);
+}
+
+/* Elevation Glows (Interactive States) */
+.shadow-glow-primary {
+  box-shadow: var(--sys-elevation-glow-primary);
+}
+
+.shadow-glow-secondary {
+  box-shadow: var(--sys-elevation-glow-secondary);
+}
+
+.hover\:shadow-elevation-1:hover {
+  box-shadow: var(--sys-elevation-level1);
+}
+
+.hover\:shadow-elevation-2:hover {
+  box-shadow: var(--sys-elevation-level2);
+}
+
+.hover\:shadow-elevation-3:hover {
+  box-shadow: var(--sys-elevation-level3);
+}
+
+.hover\:shadow-glow-primary:hover {
+  box-shadow: var(--sys-elevation-glow-primary);
+}
+
+/* Organic Shape System */
+.rounded-leaf {
+  border-radius: var(--sys-shape-leaf);
+}
+
+.rounded-tech {
+  border-radius: var(--sys-shape-tech);
+}
+
+.rounded-pebble {
+  border-radius: var(--sys-shape-pebble);
+}
+
+.rounded-gem {
+  border-radius: var(--sys-shape-gem);
+}
+
+.rounded-flow-l {
+  border-radius: var(--sys-shape-flow-l);
+}
+
+.rounded-flow-r {
+  border-radius: var(--sys-shape-flow-r);
+}
+
+/* Motion Durations */
+.duration-short-1 {
+  transition-duration: var(--sys-motion-duration-short-1);
+}
+
+.duration-short-2 {
+  transition-duration: var(--sys-motion-duration-short-2);
+}
+
+.duration-medium-1 {
+  transition-duration: var(--sys-motion-duration-medium-1);
+}
+
+.duration-medium-2 {
+  transition-duration: var(--sys-motion-duration-medium-2);
+}
+
+.duration-long-1 {
+  transition-duration: var(--sys-motion-duration-long-1);
+}
+
+.duration-long-2 {
+  transition-duration: var(--sys-motion-duration-long-2);
+}
+
+.duration-extra-long-1 {
+  transition-duration: var(--sys-motion-duration-extra-long-1);
+}
+
+.duration-extra-long-4 {
+  transition-duration: var(--sys-motion-duration-extra-long-4);
+}
+
+/* Motion Easing */
+.ease-spring {
+  transition-timing-function: var(--sys-motion-easing-expressive-spring);
+}
+
+.ease-bounce {
+  transition-timing-function: var(--sys-motion-easing-expressive-bounce);
+}
+
+.ease-emphasized {
+  transition-timing-function: var(--sys-motion-easing-emphasized);
+}
+
+.ease-emphasized-decelerate {
+  transition-timing-function: var(--sys-motion-easing-emphasized-decelerate);
+}
+
+.ease-emphasized-accelerate {
+  transition-timing-function: var(--sys-motion-easing-emphasized-accelerate);
+}
+
+/* Typography Scale */
+.text-display-large {
+  font-size: var(--sys-type-display-large-size);
+  line-height: var(--sys-type-display-large-line-height);
+  letter-spacing: var(--sys-type-display-large-tracking);
+  font-family: var(--sys-type-display-family);
+}
+
+.text-display-medium {
+  font-size: var(--sys-type-display-medium-size);
+  line-height: var(--sys-type-display-medium-line-height);
+  font-family: var(--sys-type-display-family);
+}
+
+.text-display-small {
+  font-size: var(--sys-type-display-small-size);
+  line-height: var(--sys-type-display-small-line-height);
+  font-family: var(--sys-type-display-family);
+}
+
+.text-headline-large {
+  font-size: var(--sys-type-headline-large-size);
+  line-height: var(--sys-type-headline-large-line-height);
+  font-family: var(--sys-type-display-family);
+}
+
+.text-title-large {
+  font-size: var(--sys-type-title-large-size);
+  line-height: var(--sys-type-title-large-line-height);
+  font-family: var(--sys-type-body-family);
+}
+
+.text-body-large {
+  font-size: var(--sys-type-body-large-size);
+  line-height: var(--sys-type-body-large-line-height);
+  font-family: var(--sys-type-body-family);
+}
+
+.text-body-medium {
+  font-size: var(--sys-type-body-medium-size);
+  line-height: var(--sys-type-body-medium-line-height);
+  font-family: var(--sys-type-body-family);
+}
+
+.text-label-small {
+  font-size: 11px;
+  line-height: 16px;
+  font-family: var(--sys-type-body-family);
+  font-weight: var(--sys-type-weight-medium);
+}
+
+.text-label-medium {
+  font-size: 12px;
+  line-height: 16px;
+  font-family: var(--sys-type-body-family);
+  font-weight: var(--sys-type-weight-medium);
+}
+
+.text-label-large {
+  font-size: 14px;
+  line-height: 20px;
+  font-family: var(--sys-type-body-family);
+  font-weight: var(--sys-type-weight-medium);
+}
+
+/* M3 Spacing Scale */
+.p-space-xs {
+  padding: var(--sys-space-xs);
+}
+
+.p-space-sm {
+  padding: var(--sys-space-sm);
+}
+
+.p-space-md {
+  padding: var(--sys-space-md);
+}
+
+.p-space-lg {
+  padding: var(--sys-space-lg);
+}
+
+.p-space-xl {
+  padding: var(--sys-space-xl);
+}
+
+.p-space-2xl {
+  padding: var(--sys-space-2xl);
+}
+
+.p-space-3xl {
+  padding: var(--sys-space-3xl);
+}
+
+.gap-space-xs {
+  gap: var(--sys-space-xs);
+}
+
+.gap-space-sm {
+  gap: var(--sys-space-sm);
+}
+
+.gap-space-md {
+  gap: var(--sys-space-md);
+}
+
+.gap-space-lg {
+  gap: var(--sys-space-lg);
+}
+
+.gap-space-xl {
+  gap: var(--sys-space-xl);
+}
+/* ====================================================================== */
+/* Mobile Responsive Refinements for M3 Organic Shapes                   */
+/* ====================================================================== */
+/* Scale down asymmetric border-radius values for better proportions     */
+/* on small screens (iPhone, Android phones)                             */
+/* ====================================================================== */
+
+@media (max-width: 640px) {
+  /* Pebble - most commonly used, scale down for mobile */
+  .rounded-pebble {
+    border-radius: 16px 16px 24px 24px;
+  }
+  
+  /* Gem - icon badges, reduce for small screens */
+  .rounded-gem {
+    border-radius: 28px 6px 28px 6px;
+  }
+  
+  /* Leaf - moderate reduction */
+  .rounded-leaf {
+    border-radius: 24px 10px 24px 10px;
+  }
+  
+  /* Flow shapes - moderate reduction */
+  .rounded-flow-l {
+    border-radius: 28px 28px 28px 12px;
+  }
+  
+  .rounded-flow-r {
+    border-radius: 28px 28px 12px 28px;
+  }
+  
+  /* Tech shape - keep as is, works well on mobile */
+}
