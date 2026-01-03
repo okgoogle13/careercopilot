@@ -312,7 +312,7 @@ export function JobQueue() {
                         elevation={4}
                         padding="none"
                         className="max-w-3xl w-full mx-4 max-h-[80vh] flex flex-col"
-                        onClick={(e) => e.stopPropagation()}
+                        onClick={(e: React.MouseEvent) => e.stopPropagation()}
                     >
                         {/* Dialog Header */}
                         <div className="flex justify-between items-start p-6 border-b border-outline-variant">

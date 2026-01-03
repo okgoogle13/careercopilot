@@ -24,7 +24,7 @@ export interface M3CardProps {
     className?: string;
 
     /** Click handler */
-    onClick?: () => void;
+    onClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
 
     /** Accessible role (default: 'article') */
     role?: string;
@@ -106,7 +106,7 @@ export function M3Card({
             onClick={onClick}
             role={role}
             tabIndex={onClick ? 0 : undefined}
-            onKeyDown={onClick ? (e) => e.key === 'Enter' && onClick() : undefined}
+            onKeyDown={onClick ? (e) => e.key === 'Enter' && onClick(e as any) : undefined}
         >
             {children}
         </div>
