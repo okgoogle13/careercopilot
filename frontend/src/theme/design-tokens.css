@@ -58,6 +58,36 @@
   --ref-palette-tertiary-95: #FFF8FB;
   --ref-palette-tertiary-100: #FFFFFF;
 
+  /* Error Tones (Red) */
+  --ref-palette-error-0: #000000;
+  --ref-palette-error-10: #410E0B;
+  --ref-palette-error-20: #601410;
+  --ref-palette-error-30: #8C1D18;
+  --ref-palette-error-40: #B3261E;
+  /* Base - Material Red */
+  --ref-palette-error-50: #DC362E;
+  --ref-palette-error-60: #E46962;
+  --ref-palette-error-70: #EC928E;
+  --ref-palette-error-80: #F2B8B5;
+  --ref-palette-error-90: #F9DEDC;
+  --ref-palette-error-95: #FCEEEE;
+  --ref-palette-error-100: #FFFFFF;
+
+  /* Warning Tones (Amber) */
+  --ref-palette-warning-0: #000000;
+  --ref-palette-warning-10: #3E2723;
+  --ref-palette-warning-20: #5D4037;
+  --ref-palette-warning-30: #78350F;
+  --ref-palette-warning-40: #F59E0B;
+  /* Base - Amber */
+  --ref-palette-warning-50: #FBBF24;
+  --ref-palette-warning-60: #FCD34D;
+  --ref-palette-warning-70: #FDE68A;
+  --ref-palette-warning-80: #FEF3C7;
+  --ref-palette-warning-90: #FEF9E7;
+  --ref-palette-warning-95: #FFFBF0;
+  --ref-palette-warning-100: #FFFFFF;
+
   /* Neutral Tones (Slate/Void) */
   --ref-palette-neutral-0: #000000;
   --ref-palette-neutral-4: #0A0A0A;
@@ -90,6 +120,16 @@
   --sys-color-on-tertiary: var(--ref-palette-tertiary-20);
   --sys-color-tertiary-container: var(--ref-palette-tertiary-30);
   --sys-color-on-tertiary-container: var(--ref-palette-tertiary-90);
+
+  --sys-color-error: var(--ref-palette-error-80);
+  --sys-color-on-error: var(--ref-palette-error-20);
+  --sys-color-error-container: var(--ref-palette-error-30);
+  --sys-color-on-error-container: var(--ref-palette-error-90);
+
+  --sys-color-warning: var(--ref-palette-warning-80);
+  --sys-color-on-warning: var(--ref-palette-warning-30);
+  --sys-color-warning-container: var(--ref-palette-warning-40);
+  --sys-color-on-warning-container: var(--ref-palette-warning-90);
 
   --sys-color-background: var(--ref-palette-neutral-6);
   --sys-color-on-background: var(--ref-palette-neutral-90);

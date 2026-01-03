@@ -1,21 +1,9 @@
 import { useState, useEffect } from 'react';
-import {
-    Card,
-    CardContent,
-    Typography,
-    Chip,
-    Button,
-    Grid,
-    Box,
-    CircularProgress,
-    Alert,
-    Dialog,
-    DialogTitle,
-    DialogContent,
-    DialogActions,
-    IconButton
-} from '@mui/material';
+import { CircularProgress } from '@mui/material';
 import { PageHeader } from '../components/shared/PageHeader';
+import { M3Card, M3CardHeader, M3CardContent, M3CardActions } from '../components/ui/M3Card';
+import { M3Button, M3IconButton } from '../components/ui/M3Button';
+import { StatusBadge } from '../components/ui/StatusBadge/StatusBadge';
 import { Sparkles, ExternalLink, CheckCircle, Clock, Play, FileText, Copy, X } from 'lucide-react';
 
 interface JobQueueItem {
@@ -31,21 +19,34 @@ interface JobQueueItem {
 const statusConfig = {
     pending_analysis: {
         label: 'Pending Analysis',
-        color: 'warning' as const,
+        variant: 'neutral' as const,
         icon: Clock,
     },
     ready_to_apply: {
         label: 'Ready to Apply',
-        color: 'success' as const,
+        variant: 'secondary' as const,
         icon: CheckCircle,
     },
     applied: {
         label: 'Applied',
-        color: 'default' as const,
+        variant: 'primary' as const,
         icon: CheckCircle,
     },
 };
 
+/**
+ * JobQueue Page - M3 Refactored
+ * 
+ * Displays clipped jobs from the browser extension with AI analysis capabilities.
+ * Now using M3-compliant components (M3Card, M3Button, StatusBadge) instead of MUI defaults.
+ * 
+ * **M3 Compliance:**
+ * - ✅ M3Card with pebble shape variant
+ * - ✅ M3Button with filled/outlined/text variants
+ * - ✅ StatusBadge with semantic color tokens
+ * - ✅ M3 spacing and typography scale
+ * - ✅ M3 motion with spring easing
+ */
 export function JobQueue() {
     const [jobs, setJobs] = useState<JobQueueItem[]>([]);
     const [loading, setLoading] = useState(true);
@@ -165,14 +166,9 @@ export function JobQueue() {
 
     if (loading) {
         return (
-            <Box sx={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                minHeight: '50vh'
-            }}>
+            <div className="flex justify-center items-center min-h-screen">
                 <CircularProgress />
-            </Box>
+            </div>
         );
     }
 
@@ -184,196 +180,190 @@ export function JobQueue() {
                 description="Jobs clipped from your browser extension, ready for analysis"
             />
 
+            {/* Error Alert - M3 Styled */}
             {error && (
-                <Alert severity="error" sx={{ mb: 3 }}>
-                    {error}
-                </Alert>
+                <div
+                    className="mb-6 p-4 rounded-pebble bg-error-container text-on-error-container border border-error"
+                    role="alert"
+                >
+                    <p className="font-medium">{error}</p>
+                </div>
             )}
 
+            {/* Empty State */}
             {jobs.length === 0 && !error ? (
-                <Box sx={{
-                    textAlign: 'center',
-                    py: 10,
-                    opacity: 0.6
-                }}>
-                    <Sparkles className="w-16 h-16 mx-auto mb-4 opacity-50" />
-                    <Typography variant="h5" gutterBottom>
+                <div className="text-center py-20 opacity-60">
+                    <Sparkles className="w-16 h-16 mx-auto mb-4 opacity-50 text-on-surface-variant" />
+                    <h3 className="text-headline-large mb-2 text-on-surface">
                         No jobs in queue
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
+                    </h3>
+                    <p className="text-body-large text-on-surface-variant">
                         Use the Chrome extension to clip jobs from Seek, Jora, or EthicalJobs
-                    </Typography>
-                </Box>
+                    </p>
+                </div>
             ) : (
-                <Grid container spacing={3}>
+                /* Job Cards Grid */
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {jobs.map((job) => {
                         const StatusIcon = statusConfig[job.status].icon;
+                        const isAnalyzing = analyzingJobId === job.id;
+                        const isDrafting = draftingJobId === job.id;
 
                         return (
-                            <Grid item xs={12} md={6} lg={4} key={job.id}>
-                                <Card
-                                    sx={{
-                                        height: '100%',
-                                        display: 'flex',
-                                        flexDirection: 'column',
-                                        transition: 'all 0.2s ease-in-out',
-                                        '&:hover': {
-                                            transform: 'translateY(-4px)',
-                                            boxShadow: 4,
-                                        },
-                                        bgcolor: 'background.paper',
-                                        borderRadius: 2,
-                                    }}
-                                >
-                                    <CardContent sx={{ flexGrow: 1, p: 3 }}>
-                                        {/* Status Chip */}
-                                        <Box sx={{ mb: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                                            <Chip
-                                                icon={<StatusIcon className="w-4 h-4" />}
-                                                label={statusConfig[job.status].label}
-                                                color={statusConfig[job.status].color}
-                                                size="small"
-                                            />
-                                            <Typography variant="caption" color="text.secondary">
-                                                {formatDate(job.date_clipped)}
-                                            </Typography>
-                                        </Box>
+                            <M3Card
+                                key={job.id}
+                                variant="pebble"
+                                elevation={1}
+                                hoverable
+                                padding="lg"
+                                className="flex flex-col h-full"
+                            >
+                                {/* Card Header with Status Badge */}
+                                <div className="flex justify-between items-start mb-4">
+                                    <StatusBadge
+                                        label={statusConfig[job.status].label}
+                                        variant={statusConfig[job.status].variant}
+                                        showDot
+                                    />
+                                    <span className="text-label-small font-mono text-on-surface-variant uppercase tracking-wide">
+                                        {formatDate(job.date_clipped)}
+                                    </span>
+                                </div>
 
-                                        {/* Job Info */}
-                                        <Typography
-                                            variant="h6"
-                                            gutterBottom
-                                            sx={{
-                                                fontWeight: 700,
-                                                color: 'text.primary',
-                                                mb: 1
-                                            }}
-                                        >
-                                            {job.title}
-                                        </Typography>
+                                {/* Job Title & Company */}
+                                <div className="mb-4 flex-1">
+                                    <h3 className="text-title-large font-bold text-on-surface mb-2">
+                                        {job.title}
+                                    </h3>
+                                    <p className="text-body-large text-on-surface-variant italic">
+                                        {job.company}
+                                    </p>
 
-                                        <Typography
-                                            variant="body2"
-                                            color="text.secondary"
-                                            sx={{ mb: 2 }}
-                                        >
-                                            {job.company}
-                                        </Typography>
-
-                                        {/* Notes */}
-                                        {job.notes && (
-                                            <Typography
-                                                variant="body2"
-                                                sx={{
-                                                    p: 1.5,
-                                                    bgcolor: 'action.hover',
-                                                    borderRadius: 1,
-                                                    fontStyle: 'italic',
-                                                    mb: 2
-                                                }}
-                                            >
+                                    {/* Notes (if present) */}
+                                    {job.notes && (
+                                        <div className="mt-3 p-3 bg-surface-container-high rounded-tech">
+                                            <p className="text-body-medium text-on-surface-variant italic">
                                                 "{job.notes}"
-                                            </Typography>
-                                        )}
+                                            </p>
+                                        </div>
+                                    )}
+                                </div>
 
-                                        {/* Actions */}
-                                        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, mt: 'auto' }}>
-                                            {/* Analyze Button */}
-                                            <Button
-                                                variant="contained"
-                                                size="small"
-                                                startIcon={analyzingJobId === job.id ? <CircularProgress size={16} color="inherit" /> : <Play className="w-4 h-4" />}
-                                                onClick={() => handleAnalyze(job.id)}
-                                                disabled={job.status !== 'pending_analysis' || analyzingJobId === job.id}
-                                                fullWidth
-                                                sx={{
-                                                    bgcolor: 'primary.main',
-                                                    '&:hover': {
-                                                        bgcolor: 'primary.dark',
-                                                    },
-                                                }}
-                                            >
-                                                {analyzingJobId === job.id ? 'Analyzing...' : 'Analyze with JobScout'}
-                                            </Button>
+                                {/* Action Buttons */}
+                                <div className="flex flex-col gap-2 mt-auto">
+                                    {/* Analyze Button */}
+                                    <M3Button
+                                        variant="filled"
+                                        color="primary"
+                                        fullWidth
+                                        size="medium"
+                                        startIcon={isAnalyzing ? undefined : <Play className="w-4 h-4" />}
+                                        onClick={() => handleAnalyze(job.id)}
+                                        disabled={job.status !== 'pending_analysis' || isAnalyzing}
+                                        loading={isAnalyzing}
+                                    >
+                                        {isAnalyzing ? 'Analyzing...' : 'Analyze with JobScout'}
+                                    </M3Button>
 
-                                            {/* Draft Application Button - Only show if analyzed */}
-                                            {job.status === 'ready_to_apply' && (
-                                                <Button
-                                                    variant="contained"
-                                                    size="small"
-                                                    color="secondary"
-                                                    startIcon={draftingJobId === job.id ? <CircularProgress size={16} color="inherit" /> : <FileText className="w-4 h-4" />}
-                                                    onClick={() => handleDraft(job.id, job.title, job.company)}
-                                                    disabled={draftingJobId === job.id}
-                                                    fullWidth
-                                                >
-                                                    {draftingJobId === job.id ? 'Drafting...' : 'Draft Application'}
-                                                </Button>
-                                            )}
+                                    {/* Draft Application Button - Only if analyzed */}
+                                    {job.status === 'ready_to_apply' && (
+                                        <M3Button
+                                            variant="filled"
+                                            color="secondary"
+                                            fullWidth
+                                            size="medium"
+                                            startIcon={isDrafting ? undefined : <FileText className="w-4 h-4" />}
+                                            onClick={() => handleDraft(job.id, job.title, job.company)}
+                                            disabled={isDrafting}
+                                            loading={isDrafting}
+                                        >
+                                            {isDrafting ? 'Drafting...' : 'Draft Application'}
+                                        </M3Button>
+                                    )}
 
-                                            {/* View Job Button */}
-                                            <Button
-                                                variant="outlined"
-                                                size="small"
-                                                href={job.url}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                startIcon={<ExternalLink className="w-4 h-4" />}
-                                                fullWidth
-                                            >
-                                                View Job
-                                            </Button>
-                                        </Box>
-                                    </CardContent>
-                                </Card>
-                            </Grid>
+                                    {/* View Job Button */}
+                                    <M3Button
+                                        variant="outlined"
+                                        color="primary"
+                                        fullWidth
+                                        size="medium"
+                                        startIcon={<ExternalLink className="w-4 h-4" />}
+                                        href={job.url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        View Job
+                                    </M3Button>
+                                </div>
+                            </M3Card>
                         );
                     })}
-                </Grid>
+                </div>
             )}
 
-            {/* Cover Letter Dialog */}
-            <Dialog
-                open={showCoverLetterDialog}
-                onClose={handleCloseCoverLetterDialog}
-                maxWidth="md"
-                fullWidth
-            >
-                <DialogTitle sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <Box>
-                        <Typography variant="h6">Cover Letter</Typography>
-                        {coverLetterJob && (
-                            <Typography variant="body2" color="text.secondary">
-                                {coverLetterJob.title} at {coverLetterJob.company}
-                            </Typography>
-                        )}
-                    </Box>
-                    <IconButton onClick={handleCloseCoverLetterDialog} size="small">
-                        <X className="w-5 h-5" />
-                    </IconButton>
-                </DialogTitle>
-                <DialogContent dividers>
-                    <Box sx={{
-                        whiteSpace: 'pre-wrap',
-                        fontFamily: 'monospace',
-                        fontSize: '0.9rem',
-                        lineHeight: 1.6,
-                        p: 2,
-                        bgcolor: 'background.default',
-                        borderRadius: 1
-                    }}>
-                        {coverLetter}
-                    </Box>
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleCopy} startIcon={<Copy className="w-4 h-4" />} variant="contained">
-                        {copied ? 'Copied!' : 'Copy to Clipboard'}
-                    </Button>
-                    <Button onClick={handleCloseCoverLetterDialog} variant="outlined">
-                        Close
-                    </Button>
-                </DialogActions>
-            </Dialog>
+            {/* Cover Letter Dialog - M3 Styled */}
+            {showCoverLetterDialog && (
+                <div
+                    className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm"
+                    onClick={handleCloseCoverLetterDialog}
+                >
+                    <M3Card
+                        variant="tech"
+                        elevation={4}
+                        padding="none"
+                        className="max-w-3xl w-full mx-4 max-h-[80vh] flex flex-col"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        {/* Dialog Header */}
+                        <div className="flex justify-between items-start p-6 border-b border-outline-variant">
+                            <div>
+                                <h2 className="text-headline-large font-bold text-on-surface">
+                                    Cover Letter
+                                </h2>
+                                {coverLetterJob && (
+                                    <p className="text-body-large text-on-surface-variant mt-1">
+                                        {coverLetterJob.title} at {coverLetterJob.company}
+                                    </p>
+                                )}
+                            </div>
+                            <M3IconButton
+                                icon={<X className="w-5 h-5" />}
+                                ariaLabel="Close dialog"
+                                onClick={handleCloseCoverLetterDialog}
+                                size="medium"
+                            />
+                        </div>
+
+                        {/* Dialog Content */}
+                        <div className="p-6 overflow-y-auto flex-1">
+                            <div className="bg-surface-container-high p-4 rounded-tech">
+                                <pre className="text-body-medium text-on-surface whitespace-pre-wrap font-mono">
+                                    {coverLetter}
+                                </pre>
+                            </div>
+                        </div>
+
+                        {/* Dialog Actions */}
+                        <div className="flex justify-end gap-3 p-6 border-t border-outline-variant">
+                            <M3Button
+                                variant="filled"
+                                color="primary"
+                                startIcon={<Copy className="w-4 h-4" />}
+                                onClick={handleCopy}
+                            >
+                                {copied ? 'Copied!' : 'Copy to Clipboard'}
+                            </M3Button>
+                            <M3Button
+                                variant="outlined"
+                                color="primary"
+                                onClick={handleCloseCoverLetterDialog}
+                            >
+                                Close
+                            </M3Button>
+                        </div>
+                    </M3Card>
+                </div>
+            )}
         </div>
     );
 }
