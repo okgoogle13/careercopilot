@@ -53,6 +53,8 @@
     "packages",
     "eslint.config.ts",
     "vite.config.ts",
-    "playwright.config.ts"
+    "playwright.config.ts",
+    "**/*.stories.tsx",
+    "**/*.stories.ts"
   ]
 }

@@ -160,7 +160,11 @@ export function M3Alert({
                         ariaLabel="Close alert"
                         onClick={onClose}
                         size="small"
-                        color={severity === 'success' ? 'secondary' : severity}
+                        color={
+                            severity === 'success' ? 'secondary' :
+                                severity === 'info' ? 'primary' :
+                                    severity
+                        }
                     />
                 </div>
             )}
