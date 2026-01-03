@@ -60,7 +60,7 @@ export function Login() {
               <span className="text-3xl">🦄</span>
             </div>
             <h1 className="text-display-medium font-display font-black text-on-surface mb-2">
-              Career <span className="text-primary italic font-light font-serif">Copilot</span>
+              Career<span className="text-primary italic font-light ml-2">Copilot</span>
             </h1>
             <p className="text-on-surface-variant text-body-large">Sign in to your account</p>
           </div>

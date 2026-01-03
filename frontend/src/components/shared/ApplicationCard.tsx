@@ -18,10 +18,10 @@ import { StatusBadge } from '../ui/StatusBadge';
  * Built using Material Design 3 Electric Alchemist design tokens.
  * 
  * **M3 Design Token Usage:**
- * - Shape: `--sys-shape-pebble` (20px 20px 32px 32px) - Friendly organic corners
- * - Elevation: `--sys-elevation-level1` → `--sys-elevation-level2` on hover
- * - Spacing: `--sys-space-xl` (32px) for card padding
- * - Motion: `--sys-motion-duration-medium-1` (250ms) with spring easing
+ * - Shape: `rounded-pebble` → `--sys-shape-pebble` (20px 20px 32px 32px) - Organic asymmetric corners ✅
+ * - Elevation: `shadow-elevation-1` → `shadow-elevation-2` on hover (M3 depth levels)
+ * - Spacing: `p-space-xl` (32px) for card padding
+ * - Motion: `duration-medium-1` (250ms) with `ease-spring` (expressive cubic-bezier)
  * - Colors: M3 semantic color roles (surface-container, primary-container, etc.)
  * 
  * @param {ApplicationCardProps} props - Component properties
