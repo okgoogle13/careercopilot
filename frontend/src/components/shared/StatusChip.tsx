@@ -8,6 +8,14 @@ interface StatusChipProps {
     size?: 'small' | 'medium';
 }
 
+/**
+ * StatusChip - M3-Compliant Status Indicator
+ * 
+ * **M3 Design Token Usage:**
+ * - Warning state: Uses M3 `warning-container` semantic tokens
+ * - Validated state: Uses M3 `secondary-container` semantic tokens
+ * - Typography: M3 font family via CSS variable
+ */
 export const StatusChip: React.FC<StatusChipProps> = ({
     needsReview,
     label,
@@ -20,11 +28,12 @@ export const StatusChip: React.FC<StatusChipProps> = ({
                 label={label || 'Needs Review'}
                 size={size}
                 sx={{
-                    bgcolor: '#fbbf24', // Amber warning
-                    color: '#78350f', // Dark amber text
+                    bgcolor: 'var(--sys-color-warning-container)', // ✅ M3 token
+                    color: 'var(--sys-color-on-warning-container)', // ✅ M3 token
+                    fontFamily: 'var(--sys-type-body-family)',
                     fontWeight: 600,
                     '& .MuiChip-icon': {
-                        color: '#78350f',
+                        color: 'var(--sys-color-on-warning-container)',
                     },
                 }}
             />
@@ -37,8 +46,9 @@ export const StatusChip: React.FC<StatusChipProps> = ({
             label={label || 'Validated'}
             size={size}
             sx={{
-                bgcolor: 'var(--sys-color-secondary-container)', // Green/Teal
-                color: 'var(--sys-color-on-secondary-container)',
+                bgcolor: 'var(--sys-color-secondary-container)', // ✅ M3 token
+                color: 'var(--sys-color-on-secondary-container)', // ✅ M3 token
+                fontFamily: 'var(--sys-type-body-family)',
                 fontWeight: 600,
                 '& .MuiChip-icon': {
                     color: 'var(--sys-color-on-secondary-container)',
@@ -47,3 +57,4 @@ export const StatusChip: React.FC<StatusChipProps> = ({
         />
     );
 };
+
