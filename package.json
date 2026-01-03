@@ -30,9 +30,7 @@
     "pathe": "2.0.3",
     "sirv": "3.0.2",
     "@joshwooding/vite-plugin-react-docgen-typescript": "0.6.2",
-    "@storybook/builder-vite": "10.0.2",
-    "react": "19.1.1",
-    "react-dom": "19.1.1"
+    "@storybook/builder-vite": "10.0.2"
   },
   "scripts": {
     "prepare": "husky || true",
@@ -126,7 +124,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
-    "date-fns": "^4.1.0",
+    "date-fns": "^3.6.0",
     "embla-carousel-react": "^8.6.0",
     "eslint": "^9.6.0",
     "framer-motion": "^12.23.26",
