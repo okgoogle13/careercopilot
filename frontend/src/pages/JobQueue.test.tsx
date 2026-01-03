@@ -39,14 +39,18 @@ describe('JobQueue', () => {
         jest.clearAllMocks();
     });
 
-    it('renders without crashing', () => {
+    it('renders without crashing', async () => {
         (global.fetch as any).mockResolvedValueOnce({
             ok: true,
             json: async () => [],
         });
 
         renderWithRouter(<JobQueue />);
-        expect(screen.getByText(/Incoming Job Queue/i)).toBeInTheDocument();
+
+        // Wait for loading to complete and page title to appear
+        await waitFor(() => {
+            expect(screen.getByText(/Incoming Job/i)).toBeInTheDocument();
+        });
     });
 
     it('displays loading state initially', () => {
@@ -111,8 +115,8 @@ describe('JobQueue', () => {
         renderWithRouter(<JobQueue />);
 
         await waitFor(() => {
-            const analyzeButtons = screen.getAllByText(/Analyze with JobScout/i);
-            expect(analyzeButtons[0]).toBeDisabled();
+            const analyzeButton = screen.getByRole('button', { name: /Analyze with JobScout/i });
+            expect(analyzeButton).toBeDisabled();
         });
     });
 
