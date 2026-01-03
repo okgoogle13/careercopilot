@@ -1,10 +1,9 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import { JobQueue } from './JobQueue';
 
 // Mock fetch globally
-global.fetch = vi.fn();
+global.fetch = jest.fn();
 
 const mockJobs = [
     {
@@ -37,7 +36,7 @@ const renderWithRouter = (component: React.ReactElement) => {
 
 describe('JobQueue', () => {
     beforeEach(() => {
-        vi.clearAllMocks();
+        jest.clearAllMocks();
     });
 
     it('renders without crashing', () => {
@@ -118,7 +117,7 @@ describe('JobQueue', () => {
     });
 
     it('displays job notes when provided', async () => {
-        (global.fetch as any).mockResolvedValue On({
+        (global.fetch as any).mockResolvedValueOnce({
             ok: true,
             json: async () => [mockJobs[0]],
         });
