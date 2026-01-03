@@ -6,17 +6,36 @@ interface MetricCardProps {
   value: string | number;
   iconColor?: string;
   variant?: 'outlined' | 'filled';
+  hoverable?: boolean;
   className?: string;
 }
 
+/**
+ * MetricCard - M3 Compliant Metric Display Component
+ * 
+ * Displays key metrics with icon, label, and value in a compact card format.
+ * Enhanced with M3 elevation and motion for visual hierarchy.
+ * 
+ * **M3 Design Token Usage:**
+ * - Shape: `rounded-tech` (24px 4px 24px 20px) - Precision aesthetic
+ * - Elevation: `shadow-elevation-1` → `shadow-elevation-2` on hover
+ * - Motion: M3 spring easing for smooth transitions
+ * - Colors: Semantic surface tokens
+ * - Typography: M3 display scale for values, mono font for data
+ */
 export function MetricCard({
   icon: Icon,
   label,
   value,
   iconColor = 'text-primary',
   variant = 'outlined',
+  hoverable = true,
   className = '',
 }: MetricCardProps) {
+  const elevationClasses = hoverable
+    ? 'shadow-elevation-1 hover:shadow-elevation-2 hover:-translate-y-1'
+    : '';
+
   return (
     <div
       className={`
@@ -25,6 +44,8 @@ export function MetricCard({
           ? 'bg-transparent border border-outline'
           : 'bg-surface-container'
         }
+      ${elevationClasses}
+      transition-all duration-medium-1 ease-spring
       ${className}
     `}
     >
