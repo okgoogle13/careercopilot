@@ -1,10 +1,13 @@
 import { useState, useEffect } from 'react';
 import { CircularProgress } from '@mui/material';
 import { PageHeader } from '../components/shared/PageHeader';
+import { M3ErrorAlert } from '../components/shared/M3ErrorAlert';
 import { M3Card, M3CardHeader, M3CardContent, M3CardActions } from '../components/ui/M3Card';
 import { M3Button, M3IconButton } from '../components/ui/M3Button';
 import { StatusBadge } from '../components/ui/StatusBadge/StatusBadge';
 import { Sparkles, ExternalLink, CheckCircle, Clock, Play, FileText, Copy, X } from 'lucide-react';
+import { API_ENDPOINTS } from '../config/api';
+import { toast } from 'sonner';
 
 interface JobQueueItem {
     id: string;
@@ -65,7 +68,7 @@ export function JobQueue() {
     const fetchJobs = async () => {
         try {
             setLoading(true);
-            const response = await fetch('http://localhost:8000/api/ingest/queue');
+            const response = await fetch(API_ENDPOINTS.jobQueue);
 
             if (!response.ok) {
                 throw new Error('Failed to fetch job queue');
@@ -86,7 +89,7 @@ export function JobQueue() {
         try {
             setAnalyzingJobId(jobId);
 
-            const response = await fetch(`http://localhost:8000/api/ingest/${jobId}/analyze`, {
+            const response = await fetch(API_ENDPOINTS.analyzeJob(jobId), {
                 method: 'POST',
             });
 
@@ -101,9 +104,14 @@ export function JobQueue() {
             // Refresh the jobs list to show updated data
             await fetchJobs();
 
+            // Success feedback
+            toast.success('Job analyzed successfully! Ready to draft application.');
+
         } catch (err) {
             console.error('Error analyzing job:', err);
-            setError(err instanceof Error ? err.message : 'Failed to analyze job');
+            const errorMsg = err instanceof Error ? err.message : 'Failed to analyze job';
+            setError(errorMsg);
+            toast.error(errorMsg);
         } finally {
             setAnalyzingJobId(null);
         }
@@ -114,7 +122,7 @@ export function JobQueue() {
             setDraftingJobId(jobId);
             setError(null);
 
-            const response = await fetch(`http://localhost:8000/api/ingest/${jobId}/draft`, {
+            const response = await fetch(API_ENDPOINTS.draftCoverLetter(jobId), {
                 method: 'POST',
             });
 
@@ -131,9 +139,14 @@ export function JobQueue() {
             setCoverLetterJob({ title: jobTitle, company: company });
             setShowCoverLetterDialog(true);
 
+            // Success feedback
+            toast.success('Cover letter generated! Review and copy when ready.');
+
         } catch (err) {
             console.error('Error drafting cover letter:', err);
-            setError(err instanceof Error ? err.message : 'Failed to generate cover letter');
+            const errorMsg = err instanceof Error ? err.message : 'Failed to generate cover letter';
+            setError(errorMsg);
+            toast.error(errorMsg);
         } finally {
             setDraftingJobId(null);
         }
@@ -180,14 +193,14 @@ export function JobQueue() {
                 description="Jobs clipped from your browser extension, ready for analysis"
             />
 
-            {/* Error Alert - M3 Styled */}
+            {/* Error Alert - M3 Styled with Retry */}
             {error && (
-                <div
-                    className="mb-6 p-4 rounded-pebble bg-error-container text-on-error-container border border-error"
-                    role="alert"
-                >
-                    <p className="font-medium">{error}</p>
-                </div>
+                <M3ErrorAlert
+                    message={error}
+                    onRetry={fetchJobs}
+                    onDismiss={() => setError(null)}
+                    retryLabel="Retry Loading"
+                />
             )}
 
             {/* Empty State */}
