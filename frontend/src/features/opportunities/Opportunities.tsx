@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Settings, Search, Briefcase, MapPin, ExternalLink, Sparkles } from 'lucide-react';
 import { PageHeader } from '../../components/shared/PageHeader';
+import { API_ENDPOINTS } from '../../config/api';
 
 interface ScoutResponse {
   found_links: string[];
@@ -20,7 +21,7 @@ export function Opportunities() {
     setResults([]);
 
     try {
-      const response = await fetch('http://localhost:8000/api/v1/job-scout/search', {
+      const response = await fetch(API_ENDPOINTS.jobScoutSearch, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
