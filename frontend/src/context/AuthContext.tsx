@@ -68,12 +68,23 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       return;
     }
 
+    // CRITICAL FIX: Set a timeout to prevent infinite loading
+    // If Firebase doesn't respond in 2 seconds (likely misconfigured), assume no user
+    const timeoutId = setTimeout(() => {
+      console.warn('Firebase auth initialization timeout - assuming no user');
+      setLoading(false);
+    }, 2000);
+
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      clearTimeout(timeoutId); // Clear timeout if auth responds
       setUser(currentUser as User);
       setLoading(false);
     });
 
-    return () => unsubscribe();
+    return () => {
+      clearTimeout(timeoutId);
+      unsubscribe();
+    };
   }, []);
 
   const login = useCallback(async (email: string, password: string) => {
