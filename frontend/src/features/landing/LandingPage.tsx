@@ -76,6 +76,13 @@ export function LandingPage(): React.ReactElement {
           >
             Register
           </Link>
+          <Link
+            to="/dashboard?demo=true"
+            className={styles.btnOutlined}
+            style={{ opacity: 0.8 }}
+          >
+            Explore as Guest
+          </Link>
         </div>
       </main>
 
