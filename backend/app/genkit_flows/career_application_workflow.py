@@ -471,29 +471,32 @@ def _extract_company_name(job_description: str) -> Optional[str]:
     """Extract company name from job description using simple heuristics."""
     # This is a simplified implementation - could be enhanced with NLP
     lines = job_description.split("\n")[:10]  # Check first 10 lines
-
+    keywords = ["company:", "employer:", "organization:"]
+    
     for line in lines:
-        if any(keyword in line.lower() for keyword in ["company:", "employer:", "organization:"]):
-            # Extract text after the keyword
-            for keyword in ["company:", "employer:", "organization:"]:
-                if keyword in line.lower():
-                    company = line.lower().split(keyword)[1].strip()
-                    return company.split()[0].title() if company else None
-
+        line_lower = line.lower()
+        # Check which keyword is present and extract immediately
+        for keyword in keywords:
+            if keyword in line_lower:
+                company = line_lower.split(keyword, 1)[1].strip()
+                return company.split()[0].title() if company else None
+    
     return None
 
 
 def _extract_job_role(job_description: str) -> str:
     """Extract job role/title from job description."""
     lines = job_description.split("\n")[:5]  # Check first 5 lines
-
+    keywords = ["position:", "role:", "title:"]
+    
     for line in lines:
-        if any(keyword in line.lower() for keyword in ["position:", "role:", "title:"]):
-            for keyword in ["position:", "role:", "title:"]:
-                if keyword in line.lower():
-                    role = line.lower().split(keyword)[1].strip()
-                    return role.title() if role else "Software Engineer"
-
+        line_lower = line.lower()
+        # Check which keyword is present and extract immediately
+        for keyword in keywords:
+            if keyword in line_lower:
+                role = line_lower.split(keyword, 1)[1].strip()
+                return role.title() if role else "Software Engineer"
+    
     # Default fallback
     return "Professional Role"
 
@@ -508,34 +511,35 @@ def _detect_ksc_criteria(job_description: str) -> List[str]:
         "must have",
         "essential requirements",
     ]
-
+    
     criteria = []
-
+    job_desc_lower = job_description.lower()
+    
     # Simple detection - look for numbered lists or bullet points after KSC keywords
-    if any(keyword in job_description.lower() for keyword in ksc_keywords):
+    if any(keyword in job_desc_lower for keyword in ksc_keywords):
         lines = job_description.split("\n")
         in_criteria_section = False
-
+        
         for line in lines:
-            line = line.strip()
-
+            line_stripped = line.strip()
+            line_lower = line_stripped.lower()
+            
             # Start of criteria section
-            if any(keyword in line.lower() for keyword in ksc_keywords):
+            if any(keyword in line_lower for keyword in ksc_keywords):
                 in_criteria_section = True
                 continue
-
+            
             # End of criteria section (empty line or new section)
-            if in_criteria_section and (not line or line.lower().startswith("desirable")):
+            if in_criteria_section and (not line_stripped or line_lower.startswith("desirable")):
                 break
-
+            
             # Extract criteria (numbered or bulleted items)
-            if in_criteria_section and (
-                line.startswith(("1.", "2.", "3.", "4.", "5.", "•", "-", "*")) or line[0].isdigit()
-            ):
-                criterion = line.lstrip("0123456789.-•* ").strip()
-                if len(criterion) > 20:  # Filter out very short items
-                    criteria.append(criterion)
-
+            if in_criteria_section and line_stripped:
+                if line_stripped[0].isdigit() or line_stripped.startswith(("•", "-", "*")):
+                    criterion = line_stripped.lstrip("0123456789.-•* ").strip()
+                    if len(criterion) > 20:  # Filter out very short items
+                        criteria.append(criterion)
+    
     return criteria[:5]  # Limit to 5 criteria
 
 

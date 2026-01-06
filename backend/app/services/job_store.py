@@ -97,11 +97,11 @@ class FirestoreJobStore:
             List[dict]: List of job dictionaries with IDs included
         """
         if not self.db:
-            # Return from in-memory storage
-            jobs = list(self._memory_store.values())
-            # Filter by user if specified
+            # Return from in-memory storage - convert dict values to list only when needed
             if user_id:
-                jobs = [j for j in jobs if j.get('user_id') == user_id]
+                jobs = [j for j in self._memory_store.values() if j.get('user_id') == user_id]
+            else:
+                jobs = list(self._memory_store.values())
             logger.debug(f"[JobStore] Retrieved {len(jobs)} jobs from in-memory storage")
             return jobs[:limit]
         
@@ -132,9 +132,10 @@ class FirestoreJobStore:
         except Exception as e:
             logger.error(f"[JobStore] Failed to retrieve jobs from Firestore: {e}")
             # Fallback to in-memory on error
-            jobs = list(self._memory_store.values())
             if user_id:
-                jobs = [j for j in jobs if j.get('user_id') == user_id]
+                jobs = [j for j in self._memory_store.values() if j.get('user_id') == user_id]
+            else:
+                jobs = list(self._memory_store.values())
             logger.warning(f"[JobStore] Fell back to in-memory storage, returning {len(jobs)} jobs")
             return jobs[:limit]
     
