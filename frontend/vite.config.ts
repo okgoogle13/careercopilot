@@ -30,10 +30,18 @@ export default defineConfig({
         }
         warn(warning);
       },
+      output: {
+        manualChunks: undefined,
+      },
     },
   },
   optimizeDeps: {
     include: ['react', 'react-dom', 'react-router-dom', '@careercopilot/ui'],
+  },
+  preview: {
+    port: 5173,
+    strictPort: true,
+    host: '0.0.0.0',
   },
   clearScreen: false,
   logLevel: 'info',

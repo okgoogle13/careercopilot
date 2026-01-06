@@ -78,9 +78,9 @@ jobs:
         if: github.event.inputs.fix_type == 'all' || github.event.inputs.fix_type == 'formatting' || github.event_name == 'pull_request'
         run: |
           echo "🐍 Applying Python formatting fixes..."
-          black backend/ --line-length=100 || true
-          isort backend/ --profile=black --line-length=100 || true
-          autoflake --remove-all-unused-imports --remove-unused-variables --in-place --recursive backend/ || true
+          black backend/ --line-length=100
+          isort backend/ --profile=black --line-length=100
+          autoflake --remove-all-unused-imports --remove-unused-variables --in-place --recursive backend/
           echo "✅ Python formatting complete"
 
       # ============================================================
@@ -136,7 +136,7 @@ jobs:
           fixTypeScriptIssues().catch(console.error);
           EOFSCRIPT
 
-          node ts-autofix.mjs || echo "⚠️  TypeScript auto-fix encountered issues (non-blocking)"
+          node ts-autofix.mjs
           echo "✅ TypeScript auto-fix complete"
 
       # ============================================================
@@ -146,8 +146,8 @@ jobs:
         if: github.event.inputs.fix_type == 'all' || github.event.inputs.fix_type == 'linting' || github.event_name == 'pull_request'
         run: |
           echo "🔧 Applying ESLint fixes..."
-          yarn workspace careercopilot-frontend lint:fix || echo "⚠️  ESLint auto-fix encountered issues (non-blocking)"
-          yarn workspace functions lint:fix || echo "⚠️  Functions lint auto-fix encountered issues (non-blocking)"
+          yarn workspace careercopilot-frontend lint:fix
+          yarn workspace functions lint:fix
           echo "✅ ESLint fixes complete"
 
       # ============================================================
@@ -157,7 +157,7 @@ jobs:
         if: github.event.inputs.fix_type == 'all' || github.event.inputs.fix_type == 'formatting' || github.event_name == 'pull_request'
         run: |
           echo "💅 Applying Prettier formatting..."
-          yarn workspace careercopilot-frontend format || true
+          yarn workspace careercopilot-frontend format
           echo "✅ Prettier formatting complete"
 
       # ============================================================

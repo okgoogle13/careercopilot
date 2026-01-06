@@ -62,5 +62,9 @@ COPY . .
 # Expose the port the app runs on
 EXPOSE 8080
 
+# Add health check for production deployment monitoring
+HEALTHCHECK --interval=30s --timeout=3s --start-period=10s \
+    CMD curl -f http://localhost:8080/health || exit 1
+
 # Command to run the application
 ENTRYPOINT ["/app/start.sh"]

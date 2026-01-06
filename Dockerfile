@@ -1,8 +1,8 @@
 # Multi-platform Dockerfile for CareerCopilot
 # Supports: linux/amd64 (Intel iMac, Chromebook) and linux/arm64 (Apple Silicon)
-# Base: Playwright image with Node.js 18+ and browsers pre-installed
+# Base: Playwright image with Node.js 20 and browsers pre-installed
 
-FROM mcr.microsoft.com/playwright:v1.41.0-jammy
+FROM mcr.microsoft.com/playwright:v1.42.1-jammy
 
 # Set working directory
 WORKDIR /app
