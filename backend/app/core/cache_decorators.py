@@ -5,6 +5,7 @@ Provides easy-to-use decorators for caching AI function results
 """
 
 import functools
+import inspect
 import logging
 from datetime import timedelta
 from typing import Any, Callable, Dict, List, Optional, TypeVar, cast
@@ -48,8 +49,6 @@ def cached_ai_operation(
                     user_id = kwargs[user_id_param]
                 else:
                     # Try to find user_id in args based on function signature
-                    import inspect
-
                     sig = inspect.signature(func)
                     param_names = list(sig.parameters.keys())
                     if user_id_param in param_names:

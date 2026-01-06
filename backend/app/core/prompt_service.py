@@ -156,7 +156,7 @@ class PromptService:
 
     def list_categories(self) -> List[str]:
         """List all available categories"""
-        return list(set(template.category for template in self._templates.values()))
+        return list({template.category for template in self._templates.values()})
 
     def format_prompt(self, template_id: str, **kwargs: Any) -> str:
         """Format a prompt template with the provided parameters"""
