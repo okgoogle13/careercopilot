@@ -7,7 +7,7 @@ Main API router that includes all endpoint modules.
 from fastapi import APIRouter
 
 # Import endpoint modules
-from .endpoints import analysis, auth, config, documents, workflows, applications, opportunities
+from .endpoints import analysis, auth, config, documents, workflows, applications, opportunities, chrome_extension
 from .routers import ingestion
 
 api_router = APIRouter()
@@ -22,6 +22,7 @@ routers = [
     (ingestion.router, "/ingestion", "Smart Ingestion"),
     (applications.router, "/applications", "Applications"),
     (opportunities.router, "/opportunities", "Opportunities"),
+    (chrome_extension.router, "/chrome-extension", "Chrome Extension"),
 ]
 
 # Include all routers

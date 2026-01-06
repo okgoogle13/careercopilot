@@ -238,7 +238,7 @@ class JobOpportunity(BaseModel):
 
     id: str
     userId: str
-    source: Literal["gmail", "manual"]
+    source: Literal["gmail", "manual", "chrome_extension"]
     title: str
     company: str
     description: str

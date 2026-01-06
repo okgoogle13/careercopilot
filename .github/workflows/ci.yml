@@ -52,6 +52,7 @@ jobs:
       firestore_rules: ${{ steps.filter.outputs.firestore_rules }}
       e2e: ${{ steps.filter.outputs.e2e }}
       performance: ${{ steps.filter.outputs.performance }}
+      extension: ${{ steps.filter.outputs.extension }}
     if: github.event_name != 'workflow_dispatch'
     steps:
       - name: Checkout
@@ -82,6 +83,8 @@ jobs:
               - 'docker-compose.e2e.yml'
             performance:
               - *backend-paths
+            extension:
+              - 'chrome-extension/**'
 
   codeql:
     name: CodeQL Security Analysis
@@ -155,6 +158,36 @@ jobs:
         with:
           name: frontend-dist
           path: frontend/dist/
+          retention-days: 1
+
+  extension-build:
+    name: Extension Build
+    runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch' || needs.changes.outputs.extension == 'true'
+    needs: [changes]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          # No cache here as we don't have a lockfile committed yet? 
+          # Assuming user committed lockfile. If not, npm install will generate one.
+      - name: Install dependencies
+        working-directory: chrome-extension
+        run: npm ci || npm install
+      - name: Type check
+        working-directory: chrome-extension
+        run: npm run type-check --if-present
+      - name: Build extension
+        working-directory: chrome-extension
+        run: npm run build
+      - name: Upload extension artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: chrome-extension-dist
+          path: chrome-extension/dist/
           retention-days: 1
 
   backend-static-checks:
@@ -436,7 +469,8 @@ jobs:
         backend-tests,
         functions,
         e2e-tests,
-        test-firestore-rules
+        test-firestore-rules,
+        extension-build
       ]
     timeout-minutes: 5
     permissions:
@@ -453,6 +487,7 @@ jobs:
           if [[ "${{ needs.functions.result }}" == "failure" ]]; then exit 1; fi
           if [[ "${{ needs.e2e-tests.result }}" == "failure" ]]; then exit 1; fi
           if [[ "${{ needs.test-firestore-rules.result }}" == "failure" ]]; then exit 1; fi
+          if [[ "${{ needs.extension-build.result }}" == "failure" ]]; then exit 1; fi
           echo " All required quality checks passed (or were skipped)!"
       - name: PR comment on failure
         if: failure() && github.event_name == 'pull_request'
@@ -468,6 +503,7 @@ jobs:
             if ('${{ needs.functions.result }}' === 'failure') failedJobs.push('Functions Tests');
             if ('${{ needs.e2e-tests.result }}' === 'failure') failedJobs.push('E2E Tests');
             if ('${{ needs.test-firestore-rules.result }}' === 'failure') failedJobs.push('Firestore Rules Tests');
+            if ('${{ needs.extension-build.result }}' === 'failure') failedJobs.push('Chrome Extension Build');
             const failedList = failedJobs.map(job => `-  ${job}`).join('\n');
             const comment = `**Quality Gate Failed**\n\nThe following test suites failed:\n\n${failedList}\n\nPlease review the [workflow run](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}) and fix the issues.`;
             github.rest.issues.createComment({

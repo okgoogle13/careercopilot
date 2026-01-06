@@ -102,6 +102,7 @@ export function Login() {
           <form
             onSubmit={handleSubmit(onSubmit)}
             className="space-y-6"
+            noValidate
           >
             <div>
               <label htmlFor="email" className="block text-sm text-on-surface-variant mb-2 font-medium uppercase tracking-wider">
@@ -112,10 +113,12 @@ export function Login() {
                 type="email"
                 placeholder="you@example.com"
                 className="bg-surface-container-high border-outline-variant text-on-surface rounded-tech h-12 focus:ring-primary focus:border-primary"
+                aria-invalid={errors.email ? 'true' : 'false'}
+                aria-describedby={errors.email ? 'email-error' : undefined}
                 {...register('email')}
               />
               {errors.email && (
-                <p className="text-error text-sm mt-1">{errors.email.message}</p>
+                <p id="email-error" role="alert" className="text-error text-sm mt-1">{errors.email.message}</p>
               )}
             </div>
 
@@ -128,10 +131,12 @@ export function Login() {
                 type="password"
                 placeholder="••••••••"
                 className="bg-surface-container-high border-outline-variant text-on-surface rounded-tech h-12 focus:ring-primary focus:border-primary"
+                aria-invalid={errors.password ? 'true' : 'false'}
+                aria-describedby={errors.password ? 'password-error' : undefined}
                 {...register('password')}
               />
               {errors.password && (
-                <p className="text-error text-sm mt-1">{errors.password.message}</p>
+                <p id="password-error" role="alert" className="text-error text-sm mt-1">{errors.password.message}</p>
               )}
             </div>
 
