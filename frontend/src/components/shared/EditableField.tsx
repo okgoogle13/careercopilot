@@ -68,6 +68,7 @@ export const EditableField: React.FC<EditableFieldProps> = ({
                 />
                 <Stack direction="row" spacing={1} sx={{ mt: 1 }}>
                     <IconButton
+                        aria-label="save"
                         size="small"
                         onClick={handleSave}
                         sx={{
@@ -79,6 +80,7 @@ export const EditableField: React.FC<EditableFieldProps> = ({
                         <Check fontSize="small" />
                     </IconButton>
                     <IconButton
+                        aria-label="cancel"
                         size="small"
                         onClick={handleCancel}
                         sx={{
@@ -149,6 +151,7 @@ export const EditableField: React.FC<EditableFieldProps> = ({
                     </Typography>
                 </Box>
                 <IconButton
+                    aria-label="edit"
                     size="small"
                     onClick={() => setIsEditing(true)}
                     sx={{

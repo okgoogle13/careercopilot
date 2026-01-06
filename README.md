@@ -8,6 +8,7 @@
 - **Validation Dashboard**: Review and edit AI-extracted career data with "Electric Alchemist" UI.
 - **Dual-Engine AI**: Leveraging Gemini Flash 2.5 (Speed) and Pro 2.5 (Reasoning).
 - **Automated UAT**: Full end-to-end testing suite with Playwright.
+- **Chrome Extension**: Intelligent job capture with auto-deadline extraction and calendar reminders.
 
 ## 🏗️ Architecture
 
@@ -22,6 +23,10 @@
 - **AI Orchestration**: Google Genkit + Gemini 2.5
 - **Database**: Firestore (NoSQL)
 - **Auth**: Firebase Authentication
+
+### Chrome Extension (`/chrome-extension`)
+- **Core**: React, Vite, CRXJS
+- **Features**: Universal Scraper, Resume Context, AI Analysis, Calendar Integration
 
 ---
 
@@ -95,6 +100,14 @@ uvicorn app.main:app --reload
 cd frontend
 npm run dev
 # App running at http://localhost:5173
+```
+
+**Terminal 3 (Chrome Extension):**
+```bash
+cd chrome-extension
+npm run dev
+# Load unpacked from 'chrome-extension/dist' in chrome://extensions
+```
 ```
 
 ### Option B: Docker Compose

@@ -1,4 +1,4 @@
-#!/home/njd/careercopilot/careercopilot-1/.venv/bin/python3
+#!/Users/okgoogle13/.gemini/antigravity/playground/primordial-quasar/.venv/bin/python3
 """Extract pdf structure in XML format"""
 
 import logging
