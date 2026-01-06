@@ -23,77 +23,79 @@ const themeOptions: ThemeOptions = {
     palette: {
         mode: 'dark',
 
-        // Primary: Electric Indigo
+        // Primary: Sage Green #B4D8AE
         primary: {
-            main: 'var(--sys-color-primary)',
-            light: 'var(--ref-palette-primary-60)',
-            dark: 'var(--ref-palette-primary-40)',
-            contrastText: 'var(--sys-color-on-primary)',
+            main: '#B4D8AE',
+            light: '#6B8F5A',
+            dark: '#3D5C2A',
+            contrastText: '#1D3314',
         },
 
-        // Secondary: Neon Teal
+        // Secondary: Soft Coral #FDCFC4
         secondary: {
-            main: 'var(--sys-color-secondary)',
-            light: 'var(--ref-palette-secondary-60)',
-            dark: 'var(--ref-palette-secondary-40)',
-            contrastText: 'var(--sys-color-on-secondary)',
+            main: '#FDCFC4',
+            light: '#C0877A',
+            dark: '#7E493D',
+            contrastText: '#47241E',
         },
 
-        // Tertiary: Hot Pink (MUI doesn't have tertiary, map to info)
+        // Tertiary: Lavender #E2D0F7
+        // MUI doesn't have tertiary, map to info
         info: {
-            main: 'var(--sys-color-tertiary)',
-            light: 'var(--ref-palette-tertiary-60)',
-            dark: 'var(--ref-palette-tertiary-40)',
-            contrastText: 'var(--sys-color-on-tertiary)',
+            main: '#E2D0F7',
+            light: '#A896CD',
+            dark: '#5E4182',
+            contrastText: '#301E4A',
         },
 
-        // Error: M3 Red
+        // Error: M3 Red #F2B8B5
         error: {
-            main: 'var(--sys-color-error)',
-            light: 'var(--ref-palette-error-60)',
-            dark: 'var(--ref-palette-error-40)',
-            contrastText: 'var(--sys-color-on-error)',
+            main: '#F2B8B5',
+            light: '#E46962',
+            dark: '#B3261E',
+            contrastText: '#601410',
         },
 
-        // Warning: Amber
+        // Warning: Amber #FEF3C7
         warning: {
-            main: 'var(--sys-color-warning)',
-            light: 'var(--ref-palette-warning-60)',
-            dark: 'var(--ref-palette-warning-40)',
-            contrastText: 'var(--sys-color-on-warning)',
+            main: '#FEF3C7',
+            light: '#FCD34D',
+            dark: '#F59E0B',
+            contrastText: '#78350F',
         },
 
-        // Success: Use Secondary (Teal) for success states
+        // Success: Use Secondary (Teal/Coral) for success states
+        // Consistent with design system preference
         success: {
-            main: 'var(--sys-color-secondary)',
-            light: 'var(--ref-palette-secondary-70)',
-            dark: 'var(--ref-palette-secondary-30)',
-            contrastText: 'var(--sys-color-on-secondary)',
+            main: '#FDCFC4',
+            light: '#E5B3A4',
+            dark: '#62362D',
+            contrastText: '#2B1410',
         },
 
         // Background & Surface
         background: {
-            default: 'var(--sys-color-background)',
-            paper: 'var(--sys-color-surface-container)',
+            default: '#121212', // sys-color-background
+            paper: '#1E1E1E',   // sys-color-surface-container
         },
 
         // Text
         text: {
-            primary: 'var(--sys-color-on-surface)',
-            secondary: 'var(--sys-color-on-surface-variant)',
-            disabled: 'var(--ref-palette-neutral-50)',
+            primary: '#E6E1E5',   // sys-color-on-surface
+            secondary: '#AEA9B4', // sys-color-on-surface-variant
+            disabled: '#79747E',  // ref-palette-neutral-50
         },
 
         // Dividers & Borders
-        divider: 'var(--sys-color-outline-variant)',
+        divider: '#484649', // sys-color-outline-variant
 
         // Action states
         action: {
-            active: 'var(--sys-color-primary)',
-            hover: 'var(--sys-color-surface-container-high)',
-            selected: 'var(--sys-color-surface-container-highest)',
-            disabled: 'var(--ref-palette-neutral-30)',
-            disabledBackground: 'var(--ref-palette-neutral-17)',
+            active: '#B4D8AE',     // sys-color-primary
+            hover: '#2B2C30',      // sys-color-surface-container-high
+            selected: '#303135',   // sys-color-surface-container-highest
+            disabled: '#484649',   // ref-palette-neutral-30
+            disabledBackground: '#2B2C30', // ref-palette-neutral-17
         },
     },
 

@@ -29,7 +29,7 @@ export interface JobOpportunity {
   title: string;
   company: string;
   description: string;
-  source: 'email' | 'manual';
+  source: 'email' | 'manual' | 'chrome_extension';
   foundAt: string;
   deadline?: string;
 }

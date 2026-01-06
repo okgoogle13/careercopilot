@@ -1,4 +1,4 @@
-#!/home/njd/careercopilot/careercopilot-1/.venv/bin/python3
+#!/Users/okgoogle13/.gemini/antigravity/playground/primordial-quasar/.venv/bin/python3
 """A command line tool for extracting text and images from PDF and
 output it to plain text, html, xml or tags.
 """
