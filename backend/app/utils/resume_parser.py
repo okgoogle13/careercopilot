@@ -89,7 +89,7 @@ class OptimizedResumeParser:
                 experience=self._extract_experience(doc, resume_text),
                 contact_info=self._extract_contact_info(doc, resume_text),
                 sections=self._extract_sections(resume_text),
-                word_count=len([token for token in doc if not token.is_space]),
+                word_count=sum(1 for token in doc if not token.is_space),
                 sentence_count=len(list(doc.sents)),
                 parsing_time_ms=round((time.time() - start_time) * 1000, 2),
             )
@@ -129,16 +129,16 @@ class OptimizedResumeParser:
     def _extract_entities(self, doc: Any) -> Dict[str, List[str]]:
         """Extract named entities by category."""
         entities = {}
-
+        
         for ent in doc.ents:
             if ent.label_ not in entities:
                 entities[ent.label_] = []
             entities[ent.label_].append(ent.text)
-
+        
         # Remove duplicates and sort
         for label in entities:
-            entities[label] = sorted(list(set(entities[label])))
-
+            entities[label] = sorted(set(entities[label]))
+        
         return entities
 
     def _extract_education(self, doc: Any, text: str) -> List[Dict[str, str]]:
