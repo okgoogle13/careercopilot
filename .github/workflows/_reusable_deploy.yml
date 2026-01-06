@@ -52,10 +52,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           echo "Downloading frontend artifact from CI run ${{ inputs.ci-run-id }}"
-          gh run download ${{ inputs.ci-run-id }} --name frontend-dist --dir frontend/dist || {
-            echo "::warning::Failed to download frontend artifact, will build locally"
-            mkdir -p frontend/dist
-          }
+          gh run download ${{ inputs.ci-run-id }} --name frontend-dist --dir frontend/dist || exit 1
 
       - name: Enable Corepack
         run: corepack enable

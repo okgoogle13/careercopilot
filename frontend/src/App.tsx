@@ -98,7 +98,12 @@ const PublicLayout = () => {
 
 export default function App() {
   return (
-    <Router>
+    <Router
+      future={{
+        v7_startTransition: true,
+        v7_relativeSplatPath: true,
+      }}
+    >
       <Toaster
         position="top-right"
         theme="dark"
