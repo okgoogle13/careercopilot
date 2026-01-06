@@ -35,9 +35,26 @@
   --color-on-tertiary: var(--sys-color-on-tertiary);
   --color-on-tertiary-container: var(--sys-color-on-tertiary-container);
 
+  --color-error: var(--sys-color-error);
+  --color-error-foreground: var(--sys-color-on-error);
+  --color-error-container: var(--sys-color-error-container);
+  --color-on-error: var(--sys-color-on-error);
+  --color-on-error-container: var(--sys-color-on-error-container);
+
+  --color-warning: var(--sys-color-warning);
+  --color-warning-foreground: var(--sys-color-on-warning);
+  --color-warning-container: var(--sys-color-warning-container);
+  --color-on-warning: var(--sys-color-on-warning);
+  --color-on-warning-container: var(--sys-color-on-warning-container);
+
   --color-surface: var(--sys-color-surface);
   --color-surface-dim: var(--sys-color-surface-dim);
   --color-surface-bright: var(--sys-color-surface-bright);
+  --color-surface-container: var(--sys-color-surface-container);
+  --color-surface-container-low: var(--sys-color-surface-container-low);
+  --color-surface-container-high: var(--sys-color-surface-container-high);
+  --color-surface-container-highest: var(--sys-color-surface-container-highest);
+  --color-surface-container-lowest: var(--sys-color-surface-container-lowest);
   --color-on-surface: var(--sys-color-on-surface);
   --color-on-surface-variant: var(--sys-color-on-surface-variant);
 
@@ -52,8 +69,8 @@
   --color-muted-foreground: var(--sys-color-on-surface-variant);
   --color-accent: var(--sys-color-secondary-container);
   --color-accent-foreground: var(--sys-color-on-secondary-container);
-  --color-destructive: var(--ref-palette-tertiary-40);
-  --color-destructive-foreground: var(--ref-palette-tertiary-100);
+  --color-destructive: var(--sys-color-error);
+  --color-destructive-foreground: var(--sys-color-on-error);
   --color-border: var(--sys-color-outline-variant);
   --color-input: var(--sys-color-outline);
   --color-ring: var(--sys-color-primary);
@@ -493,34 +510,15 @@
     outline-color: color-mix(in oklab, oklch(.708 0 0) 50%, transparent);
   }
 
-  body {
-    background-color: oklch(1 0 0);
-    color: oklch(.145 0 0);
-  }
 
-  :root {
-    --surface-dim: #121212;
-    --surface-container-low: #1e1e1e;
-    --surface-container: #2c2c2c;
-    --surface-container-high: #383838;
-    --surface-bright: #444;
-    --primary-sage: #8a9a5b;
-    --action-terracotta: #e2725b;
-    --on-surface: #e3e3e3;
-    --on-surface-variant: #c4c7c5;
-    --outline: #444746;
-    --radius-pane: 28px;
-    --radius-card: 12px;
-    --spacing-gap: 32px;
-    --font-display: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-    --font-body: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-    --font-data: "JetBrains Mono", "SF Mono", "Monaco", "Cascadia Code", "Courier New", monospace;
-  }
+
+  /* Legacy fallbacks removed - now using Electric Alchemist tokens from design-tokens.css */
+  /* Color values are defined via --sys-color-* variables in @theme layer above */
 
   body {
-    background-color: var(--surface-dim);
-    color: var(--on-surface);
-    font-family: var(--font-body);
+    background-color: var(--sys-color-surface);
+    color: var(--sys-color-on-surface);
+    font-family: var(--sys-type-body-family);
     font-variation-settings: "wght" 400;
     margin: 0;
     padding: 0;
@@ -528,25 +526,25 @@
   }
 
   .tier-display {
-    font-family: var(--font-display);
+    font-family: var(--sys-type-display-family);
     font-variation-settings: "wght" 800;
     letter-spacing: -.02em;
     line-height: 110%;
   }
 
   .tier-body {
-    font-family: var(--font-body);
+    font-family: var(--sys-type-body-family);
     font-variation-settings: "wght" 400;
     line-height: 160%;
   }
 
   .tier-body-strong {
-    font-family: var(--font-body);
+    font-family: var(--sys-type-body-family);
     font-variation-settings: "wght" 700;
   }
 
   .tier-data {
-    font-family: var(--font-data);
+    font-family: var(--sys-type-mono-family);
     text-transform: uppercase;
     letter-spacing: .05em;
     font-size: .75rem;
@@ -554,7 +552,7 @@
   }
 
   .tier-hero {
-    font-family: var(--font-display);
+    font-family: var(--sys-type-display-family);
     font-variation-settings: "wght" 800;
     text-transform: uppercase;
     letter-spacing: -.02em;
@@ -562,7 +560,7 @@
   }
 
   .tier-human {
-    font-family: var(--font-body);
+    font-family: var(--sys-type-body-family);
     font-variation-settings: "wght" 400;
     line-height: 160%;
   }
@@ -3109,6 +3107,7 @@
 .gap-space-xl {
   gap: var(--sys-space-xl);
 }
+
 /* ====================================================================== */
 /* Mobile Responsive Refinements for M3 Organic Shapes                   */
 /* ====================================================================== */
@@ -3117,29 +3116,30 @@
 /* ====================================================================== */
 
 @media (max-width: 640px) {
+
   /* Pebble - most commonly used, scale down for mobile */
   .rounded-pebble {
     border-radius: 16px 16px 24px 24px;
   }
-  
+
   /* Gem - icon badges, reduce for small screens */
   .rounded-gem {
     border-radius: 28px 6px 28px 6px;
   }
-  
+
   /* Leaf - moderate reduction */
   .rounded-leaf {
     border-radius: 24px 10px 24px 10px;
   }
-  
+
   /* Flow shapes - moderate reduction */
   .rounded-flow-l {
     border-radius: 28px 28px 28px 12px;
   }
-  
+
   .rounded-flow-r {
     border-radius: 28px 28px 12px 28px;
   }
-  
+
   /* Tech shape - keep as is, works well on mobile */
 }
