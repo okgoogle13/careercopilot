@@ -18,6 +18,33 @@ from app.core.nlp_model_manager import get_spacy_model, load_spacy_model
 logger = logging.getLogger(__name__)
 
 
+# Pre-compile regex patterns for better performance
+EMAIL_PATTERN = re.compile(r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b")
+PHONE_PATTERN = re.compile(r"(?:\+?1[-.\s]?)?\(?([0-9]{3})\)?[-.\s]?([0-9]{3})[-.\s]?([0-9]{4})")
+LINKEDIN_PATTERN = re.compile(r"linkedin\.com/in/([A-Za-z0-9-]+)", re.IGNORECASE)
+GITHUB_PATTERN = re.compile(r"github\.com/([A-Za-z0-9-]+)", re.IGNORECASE)
+
+# Pre-compile section patterns
+SECTION_PATTERNS = {
+    "summary": re.compile(
+        r"(?i)(summary|objective|profile)[\s:]*([^\n]+(?:\n[^\n]+)*?)(?=\n\s*[A-Z][^:\n]*:|\n\s*$)",
+        re.MULTILINE | re.DOTALL
+    ),
+    "experience": re.compile(
+        r"(?i)(experience|employment|work history)[\s:]*([^\n]+(?:\n[^\n]+)*?)(?=\n\s*[A-Z][^:\n]*:|\n\s*$)",
+        re.MULTILINE | re.DOTALL
+    ),
+    "education": re.compile(
+        r"(?i)(education|academic)[\s:]*([^\n]+(?:\n[^\n]+)*?)(?=\n\s*[A-Z][^:\n]*:|\n\s*$)",
+        re.MULTILINE | re.DOTALL
+    ),
+    "skills": re.compile(
+        r"(?i)(skills|competencies|expertise)[\s:]*([^\n]+(?:\n[^\n]+)*?)(?=\n\s*[A-Z][^:\n]*:|\n\s*$)",
+        re.MULTILINE | re.DOTALL
+    ),
+}
+
+
 @dataclass
 class ResumeParseResult:
     """Structured result from resume parsing."""
@@ -177,48 +204,35 @@ class OptimizedResumeParser:
         return experience
 
     def _extract_contact_info(self, doc: Any, text: str) -> Dict[str, Optional[str]]:
-        """Extract contact information."""
+        """Extract contact information using pre-compiled patterns."""
         contact = {"email": None, "phone": None, "linkedin": None, "github": None}
 
-        # Email pattern
-        email_pattern = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
-        email_match = re.search(email_pattern, text)
+        # Use pre-compiled patterns for better performance
+        email_match = EMAIL_PATTERN.search(text)
         if email_match:
             contact["email"] = email_match.group()
 
-        # Phone pattern
-        phone_pattern = r"(?:\+?1[-.\s]?)?\(?([0-9]{3})\)?[-.\s]?([0-9]{3})[-.\s]?([0-9]{4})"
-        phone_match = re.search(phone_pattern, text)
+        phone_match = PHONE_PATTERN.search(text)
         if phone_match:
             contact["phone"] = phone_match.group()
 
-        # LinkedIn pattern
-        linkedin_pattern = r"linkedin\.com/in/([A-Za-z0-9-]+)"
-        linkedin_match = re.search(linkedin_pattern, text, re.IGNORECASE)
+        linkedin_match = LINKEDIN_PATTERN.search(text)
         if linkedin_match:
             contact["linkedin"] = linkedin_match.group()
 
-        # GitHub pattern
-        github_pattern = r"github\.com/([A-Za-z0-9-]+)"
-        github_match = re.search(github_pattern, text, re.IGNORECASE)
+        github_match = GITHUB_PATTERN.search(text)
         if github_match:
             contact["github"] = github_match.group()
 
         return contact
 
     def _extract_sections(self, text: str) -> Dict[str, str]:
-        """Extract different sections of the resume."""
+        """Extract different sections of the resume using pre-compiled patterns."""
         sections = {}
 
-        section_patterns = {
-            "summary": r"(?i)(summary|objective|profile)[\s:]*([^\n]+(?:\n[^\n]+)*?)(?=\n\s*[A-Z][^:\n]*:|\n\s*$)",
-            "experience": r"(?i)(experience|employment|work history)[\s:]*([^\n]+(?:\n[^\n]+)*?)(?=\n\s*[A-Z][^:\n]*:|\n\s*$)",
-            "education": r"(?i)(education|academic)[\s:]*([^\n]+(?:\n[^\n]+)*?)(?=\n\s*[A-Z][^:\n]*:|\n\s*$)",
-            "skills": r"(?i)(skills|competencies|expertise)[\s:]*([^\n]+(?:\n[^\n]+)*?)(?=\n\s*[A-Z][^:\n]*:|\n\s*$)",
-        }
-
-        for section_name, pattern in section_patterns.items():
-            match = re.search(pattern, text, re.MULTILINE | re.DOTALL)
+        # Use pre-compiled patterns for better performance
+        for section_name, pattern in SECTION_PATTERNS.items():
+            match = pattern.search(text)
             if match:
                 sections[section_name] = match.group(2).strip()
 
