@@ -64,7 +64,7 @@ test.describe('Responsive M3 Design Audit', () => {
             }
 
             // Check guest button
-            const guestButton = page.locator('button:has-text("Explore as Guest")').first();
+            const guestButton = page.locator(':has-text("Explore as Guest")').first();
             if (await guestButton.isVisible()) {
                 const buttonStyles = await guestButton.evaluate((el) => {
                     const computed = window.getComputedStyle(el);
