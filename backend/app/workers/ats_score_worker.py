@@ -1,6 +1,6 @@
 import logging
 
-from app.ai_operations.ats_scoring import ats_scorer
+from app.bridges.legacy_wrapper import ats_scorer
 from app.core.db import db
 from app.core.enhanced_ai_error_handling import (
     AIOperationContext,

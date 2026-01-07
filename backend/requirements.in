@@ -32,8 +32,6 @@ PyJWT
 google-auth
 
 # Document processing
-pdfplumber
-pypdfium2
 # sentence-transformers  # Temporarily disabled due to torch dependency conflicts
 beautifulsoup4
 jinja2

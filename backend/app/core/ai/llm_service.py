@@ -1,4 +1,4 @@
-# backend/app/ai/llm_service.py
+# backend/app/core/ai/llm_service.py
 
 import hashlib
 import json

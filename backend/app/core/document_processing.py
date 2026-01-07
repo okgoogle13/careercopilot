@@ -339,7 +339,7 @@ Format your response as a JSON object with the following structure:
 # Convenience functions for common operations
 async def process_resume(resume_text: str, config: Optional[Dict[str, Any]] = None) -> Any:
     """Process a resume using the standard resume analysis template."""
-    from app.ai.resume_service import ResumeAnalysisResult
+    from app.schemas.resume import ResumeAnalysisResult
 
     return await process_document(
         file_content=resume_text,
