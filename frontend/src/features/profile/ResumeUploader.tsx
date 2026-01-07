@@ -68,7 +68,6 @@ export default function ResumeUploader({ onUploadSuccess }: ResumeUploaderProps)
             }
 
             const data = await response.json();
-            console.log('Ingest Result:', data);
             setStatus('success');
 
             if (onUploadSuccess) {
