@@ -8,8 +8,6 @@ const API_BASE_URL = envApiUrl.includes('/api') ? envApiUrl : `${envApiUrl}/api`
 
 // Debug logging (remove in production)
 if (metaEnv?.DEV) {
-  console.log('[axiosConfig] API_BASE_URL:', API_BASE_URL);
-  console.log('[axiosConfig] VITE_API_URL:', metaEnv?.VITE_API_URL);
 }
 
 export const axiosInstance = axios.create({

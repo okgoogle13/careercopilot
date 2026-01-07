@@ -99,7 +99,6 @@ export function JobQueue() {
             }
 
             const result = await response.json();
-            console.log('Analysis result:', result);
 
             // Refresh the jobs list to show updated data
             await fetchJobs();
@@ -132,7 +131,6 @@ export function JobQueue() {
             }
 
             const result = await response.json();
-            console.log('Draft result:', result);
 
             // Show the cover letter in a dialog
             setCoverLetter(result.data.cover_letter);
