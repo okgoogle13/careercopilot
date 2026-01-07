@@ -2,8 +2,8 @@
 // Centralized API base URL configuration to support multiple environments
 
 export const API_BASE_URL =
-    import.meta.env.VITE_API_BASE_URL ||
-    (import.meta.env.MODE === 'production'
+    (import.meta.env && import.meta.env.VITE_API_BASE_URL) ||
+    (import.meta.env && import.meta.env.MODE === 'production'
         ? 'https://api.careercopilot.app' // Update with actual production URL
         : 'http://localhost:8000');
 
@@ -49,13 +49,13 @@ export function buildUrl(baseUrl: string, params?: Record<string, string | numbe
  * Environment information (useful for debugging)
  */
 export const ENV_INFO = {
-    mode: import.meta.env.MODE,
-    isDevelopment: import.meta.env.DEV,
-    isProduction: import.meta.env.PROD,
+    mode: import.meta.env ? import.meta.env.MODE : 'development',
+    isDevelopment: import.meta.env ? import.meta.env.DEV : true,
+    isProduction: import.meta.env ? import.meta.env.PROD : false,
     apiBaseUrl: API_BASE_URL,
 } as const;
 
 // Log environment info in development
 if (ENV_INFO.isDevelopment) {
-    console.log('[API Config]', ENV_INFO);
+    // console.log('[API Config]', ENV_INFO);
 }

@@ -67,7 +67,7 @@ export const IngestionPage: React.FC = () => {
     };
 
     const handleDataUpdate = (updatedData: CareerDatabase) => {
-        setCareerData(updatedData);
+        // console.log('Updated career data:', updatedData);
         // TODO: Persist to backend with PATCH /api/v1/career-database
         console.log('Updated career data:', updatedData);
     };
