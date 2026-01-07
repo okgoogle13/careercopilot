@@ -1,9 +1,10 @@
 import { useState, useCallback } from 'react';
-import { CareerDatabase } from '../types/api';
-import { useAuth } from '../context/AuthContext';
+import { CareerDatabase } from '@/types/api';
+import { useAuth } from '@/context/AuthContext';
 
 interface UseCareerIngestionResult {
     submitDocuments: (files: File[]) => Promise<CareerDatabase>;
+    updateCareerDatabase: (data: CareerDatabase) => Promise<CareerDatabase>;
     isLoading: boolean;
     error: string | null;
 }
@@ -55,8 +56,46 @@ export const useCareerIngestion = (): UseCareerIngestionResult => {
         }
     }, [user]);
 
+    const updateCareerDatabase = useCallback(async (data: CareerDatabase): Promise<CareerDatabase> => {
+        setIsLoading(true);
+        setError(null);
+
+        try {
+            // Get auth token if available
+            const token = user?.getIdToken ? await user.getIdToken() : null;
+            const headers: Record<string, string> = {
+                'Content-Type': 'application/json',
+            };
+            if (token) {
+                headers['Authorization'] = `Bearer ${token}`;
+            }
+
+            const response = await fetch('/api/v1/career-database', {
+                method: 'PATCH',
+                body: JSON.stringify(data),
+                headers: headers,
+            });
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(`Update failed: ${errorText || response.statusText}`);
+            }
+
+            const responseData = await response.json();
+            return responseData as CareerDatabase;
+
+        } catch (err) {
+            const message = err instanceof Error ? err.message : 'An unknown error occurred during update.';
+            setError(message);
+            throw err;
+        } finally {
+            setIsLoading(false);
+        }
+    }, [user]);
+
     return {
         submitDocuments,
+        updateCareerDatabase,
         isLoading,
         error,
     };
