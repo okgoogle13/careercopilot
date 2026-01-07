@@ -1,28 +1,19 @@
-"""
-ATS Scoring Operations
-
-Service layer for ATS analysis that delegates to the comprehensive
-genkit flow implementation while providing a clean API interface.
-"""
-
 import logging
 from typing import Any, Dict, List, Optional
 
 from app.core.cache_decorators import cached_ai_operation
 from app.core.input_validation import InputSanitizer, InputValidationError
 from app.core.monitoring import monitor_performance
+from app.genkit_flows.ats_scoring import atsScoring
+from app.schemas.legacy_migration import ATSScoringInput
 
 logger = logging.getLogger(__name__)
 
-
 class ATSScorer:
-    """Service layer for ATS scoring that delegates to genkit flow implementation"""
-
-    def __init__(self):
-        # Import the working genkit flow
-        from app.genkit_flows.ats_scoring import atsScoring
-
-        self.ats_flow = atsScoring
+    """
+    Bridge wrapper for legacy ATS scoring calls.
+    Maintains the exact signature expected by the worker but delegates to Genkit flow.
+    """
 
     @monitor_performance("ats_comprehensive_scoring")
     @cached_ai_operation("ats_scoring", user_id_param="user_id")
@@ -46,34 +37,34 @@ class ATSScorer:
             dict: Complete ATS analysis with scores and recommendations
         """
         try:
-            # Input validation
-            if not resume_text or not isinstance(resume_text, str):
-                raise InputValidationError("Resume text is required and must be a string")
+            # 1. Validate Input using strict Pydantic model
+            input_data = ATSScoringInput(
+                user_id=user_id,
+                resume_text=resume_text,
+                job_description=job_description,
+                profile_keywords=profile_keywords
+            )
 
-            if not job_description or not isinstance(job_description, str):
-                raise InputValidationError("Job description is required and must be a string")
+            # 2. Sanitize (Legacy behavior)
+            sanitized_resume = InputSanitizer.sanitize_text_input(input_data.resume_text)
+            sanitized_job_desc = InputSanitizer.sanitize_text_input(input_data.job_description)
 
-            # Sanitize inputs
-            sanitized_resume = InputSanitizer.sanitize_text_input(resume_text)
-            sanitized_job_desc = InputSanitizer.sanitize_text_input(job_description)
-
-            # Sanitize profile keywords if provided
             sanitized_keywords = None
-            if profile_keywords:
+            if input_data.profile_keywords:
                 sanitized_keywords = [
                     InputSanitizer.sanitize_text_input(kw).sanitized_content
-                    for kw in profile_keywords
+                    for kw in input_data.profile_keywords
                 ]
 
-            # Delegate to the genkit flow implementation
-            result = await self.ats_flow(
+            # 3. Call Genkit Flow
+            result = await atsScoring(
                 resumeText=sanitized_resume.sanitized_content,
                 jobDescription=sanitized_job_desc.sanitized_content,
                 profileKeywords=sanitized_keywords,
-                user_id=user_id,
+                user_id=input_data.user_id,
             )
 
-            # Convert Pydantic model to dict for consistency
+            # 4. Convert back to Dict (Legacy requirement)
             if hasattr(result, "model_dump"):
                 result_dict = result.model_dump()
             elif hasattr(result, "dict"):
@@ -82,20 +73,18 @@ class ATSScorer:
                 result_dict = dict(result) if hasattr(result, "__dict__") else result
 
             logger.info(
-                f"ATS analysis completed for user {user_id}",
+                f"ATS analysis completed via Bridge for user {user_id}",
                 extra={
                     "user_id": user_id,
                     "overall_score": result_dict.get("overallScore", 0),
-                    "keywords_count": len(profile_keywords) if profile_keywords else 0,
                 },
             )
 
             return result_dict
 
         except Exception as e:
-            logger.error(f"Error in ATS analysis for user {user_id}: {str(e)}")
+            logger.error(f"Error in ATS analysis Bridge for user {user_id}: {str(e)}")
             raise
 
-
-# Global instance
+# Global instance for import compatibility
 ats_scorer = ATSScorer()
