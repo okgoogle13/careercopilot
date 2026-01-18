@@ -55,8 +55,10 @@ if ! git rev-parse --verify "$BASE_BRANCH" >/dev/null 2>&1; then
 fi
 
 if ! git rev-parse --verify "$BASE_BRANCH" >/dev/null 2>&1; then
-    echo -e "${RED}❌ Error: Neither 'develop' nor 'main' branch exists${NC}"
-    exit 1
+    # Fall back to current branch
+    BASE_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+    echo -e "${YELLOW}⚠️  Warning: Neither 'develop' nor 'main' exists, using current branch: $BASE_BRANCH${NC}"
+    echo ""
 fi
 
 echo -e "🌿 Base branch: ${GREEN}$BASE_BRANCH${NC}"

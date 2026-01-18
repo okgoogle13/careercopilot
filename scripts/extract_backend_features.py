@@ -75,7 +75,13 @@ def get_base_branch() -> str:
         if result:
             return branch
     
-    print("❌ Error: Neither 'develop' nor 'main' branch exists", file=sys.stderr)
+    # Fall back to current branch
+    current = run_git_command(['git', 'rev-parse', '--abbrev-ref', 'HEAD'])
+    if current:
+        print(f"⚠️ Warning: Neither 'develop' nor 'main' exists, using current branch: {current}", file=sys.stderr)
+        return current
+    
+    print("❌ Error: Could not determine base branch", file=sys.stderr)
     sys.exit(1)
 
 
