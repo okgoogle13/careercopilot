@@ -95,7 +95,7 @@ console.log('Firebase configuration validated successfully')
 ### Build Test
 
 ```bash
-yarn build
+npm run build
 # ✅ Build successful with updated configuration
 # ✅ Real API key embedded in production bundle
 # ✅ No demo keys found in build output
