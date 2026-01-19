@@ -148,7 +148,7 @@ else
         log_info "Attempting to fix auto-fixable issues..."
 
         # Run ESLint with TypeScript rules to fix some issues
-        if yarn lint:fix; then
+        if npm run lint:fix; then
             log_success "ESLint fixes applied"
 
             # Re-run type checking to see if any errors were resolved
