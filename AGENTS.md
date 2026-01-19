@@ -32,9 +32,43 @@ We are currently migrating from `backend/app/ai_operations/` to `backend/app/gen
 
 **Critical Directories:**
 - `backend/app/genkit_flows`: **(NEW)** All new AI logic goes here.
+  - **NEW: `resume_optimizer.py`** - AI-powered keyword integration for ATS optimization
+  - **NEW: `company_analyzer.py`** - Company website scraping and analysis
 - `backend/app/ai_operations`: **(DEPRECATED)** Do not add new code here.
 - `backend/app/bridges`: **(ADAPTERS)** Compatibility layer for legacy workers.
 - `backend/app/workers`: Background jobs (Handle `ats_score_worker.py` with extreme care).
+
+**New Genkit Flows (2026-01-19):**
+
+### Resume Optimizer Flow
+**File:** `backend/app/genkit_flows/resume_optimizer.py`  
+**Purpose:** Automatically integrate missing keywords into resumes for ATS optimization  
+**Inputs:**
+- `resumeText` (str): Original resume content
+- `missingKeywords` (List[str]): Keywords to integrate
+- `jobDescription` (str): Target job description
+- `company_keywords` (List[str], optional): Company-specific keywords
+- `company_tone` (str, optional): Company communication style
+
+**Output:** `OptimizedResume` (Pydantic model with `resume_text` field)  
+**Model:** Gemini Pro (temperature: 0.2)  
+**Key Constraint:** No fabrication - only enhances existing experience
+
+### Company Analyzer Flow
+**File:** `backend/app/genkit_flows/company_analyzer.py`  
+**Purpose:** Extract company keywords and tone from website for targeted optimization  
+**Inputs:**
+- `url` (str): Company website URL
+
+**Output:** `CompanyAnalysis` (Pydantic model with `company_keywords` and `company_tone`)  
+**Dependencies:** BeautifulSoup4, requests  
+**Model:** Gemini Pro (temperature: 0.2)  
+**Features:** Scrapes first 4000 chars, graceful error handling
+
+**API Integration:**
+- Endpoint: `POST /api/v1/analysis/optimize-resume`
+- Handler: `backend/app/api/endpoints/analysis.py::optimize_resume()`
+- Flow: ATS Scoring → Optional Company Analysis → Resume Optimization
 
 ---
 
