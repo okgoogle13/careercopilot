@@ -1,13 +1,24 @@
 {
     "mcpServers": {
-        "flash-sidekick": {
-            "command": "/home/njd/careercopilot/careercopilot-1/.venv/bin/python3",
+        "flash-sidekick-fast": {
+            "command": "/Users/okgoogle13/Desktop/careercopilot/.venv/bin/python3",
             "args": [
-                "/home/njd/careercopilot/careercopilot-1/servers/flash_sidekick.py"
+                "/Users/okgoogle13/Desktop/careercopilot/servers/flash_sidekick_fast.py"
+            ],
+            "env": {
+                "GEMINI_MODEL": "models/gemini-2.5-flash-lite"
+            },
+            "disabled": false,
+            "autoApprove": []
+        },
+        "flash-sidekick": {
+            "command": "/Users/okgoogle13/Desktop/careercopilot/.venv/bin/python3",
+            "args": [
+                "/Users/okgoogle13/Desktop/careercopilot/servers/flash_sidekick.py"
             ],
             "env": {
                 "GEMINI_MODEL": "models/gemini-2.5-flash-lite",
-                "GEMINI_PRO_MODEL": "models/gemini-2.5-pro"
+                "GEMINI_PRO_MODEL": "models/gemini-3-pro-preview"
             },
             "disabled": false,
             "autoApprove": []
@@ -22,9 +33,19 @@
             "autoApprove": []
         },
         "docker": {
-            "command": "/home/njd/careercopilot/careercopilot-1/.venv/bin/python3",
+            "command": "/Users/okgoogle13/Desktop/careercopilot/.venv/bin/python3",
             "args": [
-                "/home/njd/careercopilot/careercopilot-1/servers/docker_mcp.py"
+                "/Users/okgoogle13/Desktop/careercopilot/servers/docker_mcp.py"
+            ],
+            "disabled": false,
+            "autoApprove": []
+        },
+        "filesystem": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "@modelcontextprotocol/server-filesystem",
+                "/Users/okgoogle13/Desktop/careercopilot"
             ],
             "disabled": false,
             "autoApprove": []

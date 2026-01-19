@@ -14,7 +14,7 @@ import {
   MOCK_USER_PROFILE,
   MOCK_OPPORTUNITIES,
 } from './mockData';
-import { auth } from '../config/firebase';
+import { supabase } from '../config/supabase';
 
 // Configuration
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080/api';
@@ -32,8 +32,8 @@ let kscResponses = [...MOCK_KSC_RESPONSES];
 
 const getAuthToken = async () => {
   if (import.meta.env.DEV) return 'dev-token';
-  const user = auth.currentUser;
-  return user ? await user.getIdToken() : '';
+  const { data } = await supabase.auth.getSession();
+  return data.session?.access_token || '';
 };
 
 export const mockApi = {

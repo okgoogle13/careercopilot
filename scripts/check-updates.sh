@@ -6,7 +6,7 @@ echo "🔍 Checking for outdated dependencies..."
 # Check frontend dependencies
 echo "\n📦 Frontend Dependencies:"
 cd frontend
-npx npm-check-updates
+yarn dlx npm-check-updates
 cd ..
 
 # Check backend Python dependencies
@@ -16,5 +16,5 @@ pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1 | xargs -n1
 cd ..
 
 echo "\n✅ Update check complete!"
-echo "\nTo update frontend dependencies, run: cd frontend && npx npm-check-updates -u && npm install"
+echo "\nTo update frontend dependencies, run: cd frontend && yarn dlx npm-check-updates -u && yarn install"
 echo "To update backend dependencies, update requirements.in and run: cd backend && pip-compile requirements.in"
