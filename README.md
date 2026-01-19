@@ -5,7 +5,9 @@
 ## ✨ Key Features
 
 - **Profile Ingestion Engine**: Upload PDFs/IDFs, extract data via Google Genkit, and structure career history.
-- **Validation Dashboard**: Review and edit AI-extracted career data with "Electric Alchemist" UI.
+- **Resume Optimizer** ✨ NEW: AI-powered keyword integration for ATS optimization with company-specific tailoring.
+- **Company Analyzer** ✨ NEW: Analyze company websites to extract keywords and communication tone for targeted resumes.
+- **Validation Dashboard**: Review and edit AI-extracted career data with Northcote Curio M3 Expressive UI.
 - **Dual-Engine AI**: Leveraging Gemini Flash 2.5 (Speed) and Pro 2.5 (Reasoning).
 - **Automated UAT**: Full end-to-end testing suite with Playwright.
 - **Chrome Extension**: Intelligent job capture with auto-deadline extraction and calendar reminders.
@@ -14,7 +16,8 @@
 
 ### Frontend (`/frontend`)
 - **Core**: React 18, TypeScript, Vite
-- **UI System**: Material-UI (MUI v5) + "Electric Alchemist" Theme
+- **UI System**: Material-UI (MUI v5) + Northcote Curio M3 Expressive Design System
+- **Design Tokens**: Sage Green, Soft Coral, Lavender palette with organic shapes and spring motion
 - **State**: React Context + Hooks
 - **Testing**: Playwright (E2E), Vitest (Unit)
 
@@ -80,6 +83,39 @@ npm install
 ### 3. Environment Config
 Create `.env` files in `backend/` and `frontend/` (see `.env.example`).
 **Required Keys:** `GEMINI_API_KEY`, `FIREBASE_CREDENTIALS`
+
+---
+
+## 🎯 New Features: Resume Optimization
+
+### Resume Optimizer
+**Automatically optimize your resume for ATS systems with AI-powered keyword integration.**
+
+**How to Use:**
+1. Navigate to `/analysis` in the app
+2. Paste your resume text
+3. Paste the job description
+4. (Optional) Add company website URL for targeted optimization
+5. Click "Analyze Resume" to see ATS score and missing keywords
+6. Click "✨ Auto-Tailor Resume" to get optimized version
+
+**Features:**
+- ✅ Natural keyword integration (no fabrication)
+- ✅ Company-specific tone matching
+- ✅ ATS score analysis with breakdown
+- ✅ Missing vs matched keyword visualization
+- ✅ Copy-to-clipboard functionality
+
+**Powered by:**
+- Google Gemini Pro (AI optimization)
+- BeautifulSoup4 (company website scraping)
+- Genkit (AI flow orchestration)
+
+**Design:**
+- Northcote Curio M3 Expressive design system
+- Organic shapes (Pebble, Tech archetypes)
+- Spring motion effects
+- Sage Green + Soft Coral palette
 
 ---
 
