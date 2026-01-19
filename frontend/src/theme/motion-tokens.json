@@ -1,0 +1,385 @@
+{
+    "$schema": "https://design-tokens.org/schema.json",
+    "name": "Northcote Curio Motion Library",
+    "version": "1.0.0",
+    "description": "Comprehensive motion token library quantifying 'Viscous Breeze' physics for Gallery and Laboratory modes",
+    "motion": {
+        "physics": {
+            "$description": "Spring physics parameters for natural, physics-based animations",
+            "gallery": {
+                "stiffness": {
+                    "$value": 500,
+                    "$type": "number",
+                    "$description": "Gallery mode spring stiffness — gentle, expressive"
+                },
+                "damping": {
+                    "$value": 27,
+                    "$type": "number",
+                    "$description": "Gallery mode damping — allows overshoot, air resistance"
+                },
+                "mass": {
+                    "$value": 1,
+                    "$type": "number",
+                    "$description": "Default mass for all animations"
+                },
+                "velocity": {
+                    "$value": 0,
+                    "$type": "number",
+                    "$description": "Initial velocity"
+                }
+            },
+            "laboratory": {
+                "stiffness": {
+                    "$value": 800,
+                    "$type": "number",
+                    "$description": "Laboratory mode spring stiffness — precise, controlled"
+                },
+                "damping": {
+                    "$value": 40,
+                    "$type": "number",
+                    "$description": "Laboratory mode damping — minimal overshoot, clinical precision"
+                },
+                "mass": {
+                    "$value": 1,
+                    "$type": "number",
+                    "$description": "Default mass for all animations"
+                },
+                "velocity": {
+                    "$value": 0,
+                    "$type": "number",
+                    "$description": "Initial velocity"
+                }
+            }
+        },
+        "easing": {
+            "$description": "Cubic bezier easing curves for different motion personalities",
+            "viscous": {
+                "$value": "cubic-bezier(0.34, 1.56, 0.64, 1)",
+                "$type": "cubicBezier",
+                "$description": "Viscous Breeze — Gallery mode primary, gentle overshoot"
+            },
+            "precise": {
+                "$value": "cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+                "$type": "cubicBezier",
+                "$description": "Laboratory mode — no overshoot, controlled"
+            },
+            "settle": {
+                "$value": "cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+                "$type": "cubicBezier",
+                "$description": "Finding rest position, smooth deceleration"
+            },
+            "snap": {
+                "$value": "cubic-bezier(0.4, 0, 0.2, 1)",
+                "$type": "cubicBezier",
+                "$description": "Quick, decisive movements"
+            },
+            "elastic": {
+                "$value": "cubic-bezier(0.68, -0.55, 0.265, 1.55)",
+                "$type": "cubicBezier",
+                "$description": "Pronounced bounce — Gallery mode accents only"
+            },
+            "linear": {
+                "$value": "linear",
+                "$type": "cubicBezier",
+                "$description": "Reduced motion fallback"
+            }
+        },
+        "duration": {
+            "$description": "Semantic duration scale for consistent timing",
+            "instant": {
+                "$value": "100ms",
+                "$type": "duration",
+                "$description": "Micro-interactions, immediate feedback"
+            },
+            "fast": {
+                "$value": "180ms",
+                "$type": "duration",
+                "$description": "Hover states, focus rings, quick transitions"
+            },
+            "standard": {
+                "$value": "280ms",
+                "$type": "duration",
+                "$description": "Button press, typography bloom, standard interactions"
+            },
+            "moderate": {
+                "$value": "450ms",
+                "$type": "duration",
+                "$description": "Card lift, panel slide, moderate complexity"
+            },
+            "slow": {
+                "$value": "600ms",
+                "$type": "duration",
+                "$description": "Mode transition, page change, complex choreography"
+            },
+            "deliberate": {
+                "$value": "900ms",
+                "$type": "duration",
+                "$description": "Hero animations, entrance moments"
+            }
+        },
+        "interactions": {
+            "$description": "Pre-defined interaction patterns for common UI elements",
+            "hover": {
+                "card": {
+                    "transform": {
+                        "$value": "translateY(-4px)",
+                        "$type": "string"
+                    },
+                    "shadow": {
+                        "$value": "0 8px 40px rgba(20, 18, 16, 0.6), 0 2px 8px rgba(0, 0, 0, 0.25)",
+                        "$type": "shadow"
+                    },
+                    "duration": {
+                        "$value": "{motion.duration.standard}",
+                        "$type": "duration"
+                    },
+                    "easing": {
+                        "$value": "{motion.easing.viscous}",
+                        "$type": "cubicBezier"
+                    }
+                },
+                "button": {
+                    "scale": {
+                        "$value": "1.02",
+                        "$type": "number"
+                    },
+                    "shadow": {
+                        "$value": "0 0 40px rgba(212, 168, 75, 0.15)",
+                        "$type": "shadow"
+                    },
+                    "duration": {
+                        "$value": "{motion.duration.fast}",
+                        "$type": "duration"
+                    },
+                    "easing": {
+                        "$value": "{motion.easing.viscous}",
+                        "$type": "cubicBezier"
+                    }
+                },
+                "link": {
+                    "color": {
+                        "$value": "{color.primary.wattleGlow}",
+                        "$type": "color"
+                    },
+                    "underlineOffset": {
+                        "$value": "4px",
+                        "$type": "dimension"
+                    },
+                    "duration": {
+                        "$value": "{motion.duration.fast}",
+                        "$type": "duration"
+                    },
+                    "easing": {
+                        "$value": "{motion.easing.settle}",
+                        "$type": "cubicBezier"
+                    }
+                }
+            },
+            "press": {
+                "button": {
+                    "scale": {
+                        "$value": "0.98",
+                        "$type": "number"
+                    },
+                    "shadow": {
+                        "$value": "0 2px 8px rgba(20, 18, 16, 0.4)",
+                        "$type": "shadow"
+                    },
+                    "duration": {
+                        "$value": "{motion.duration.instant}",
+                        "$type": "duration"
+                    },
+                    "easing": {
+                        "$value": "{motion.easing.snap}",
+                        "$type": "cubicBezier"
+                    }
+                },
+                "chip": {
+                    "scale": {
+                        "$value": "0.95",
+                        "$type": "number"
+                    },
+                    "opacity": {
+                        "$value": "0.8",
+                        "$type": "number"
+                    },
+                    "duration": {
+                        "$value": "{motion.duration.instant}",
+                        "$type": "duration"
+                    },
+                    "easing": {
+                        "$value": "{motion.easing.snap}",
+                        "$type": "cubicBezier"
+                    }
+                }
+            },
+            "focus": {
+                "input": {
+                    "ring": {
+                        "$value": "0 0 0 3px rgba(212, 168, 75, 0.3)",
+                        "$type": "shadow"
+                    },
+                    "borderColor": {
+                        "$value": "{color.primary.wattleGold}",
+                        "$type": "color"
+                    },
+                    "duration": {
+                        "$value": "{motion.duration.fast}",
+                        "$type": "duration"
+                    },
+                    "easing": {
+                        "$value": "{motion.easing.settle}",
+                        "$type": "cubicBezier"
+                    }
+                },
+                "button": {
+                    "ring": {
+                        "$value": "0 0 0 3px rgba(212, 168, 75, 0.3)",
+                        "$type": "shadow"
+                    },
+                    "duration": {
+                        "$value": "{motion.duration.fast}",
+                        "$type": "duration"
+                    },
+                    "easing": {
+                        "$value": "{motion.easing.settle}",
+                        "$type": "cubicBezier"
+                    }
+                }
+            },
+            "drag": {
+                "card": {
+                    "scale": {
+                        "$value": "1.05",
+                        "$type": "number"
+                    },
+                    "opacity": {
+                        "$value": "0.9",
+                        "$type": "number"
+                    },
+                    "shadow": {
+                        "$value": "0 16px 48px rgba(20, 18, 16, 0.7)",
+                        "$type": "shadow"
+                    },
+                    "easing": {
+                        "$value": "{motion.easing.viscous}",
+                        "$type": "cubicBezier"
+                    }
+                },
+                "modal": {
+                    "scale": {
+                        "$value": "0.95",
+                        "$type": "number"
+                    },
+                    "backdropBlur": {
+                        "$value": "8px",
+                        "$type": "dimension"
+                    },
+                    "easing": {
+                        "$value": "{motion.easing.settle}",
+                        "$type": "cubicBezier"
+                    }
+                }
+            },
+            "scroll": {
+                "parallax": {
+                    "speed": {
+                        "$value": "0.5",
+                        "$type": "number",
+                        "$description": "Parallax scroll speed multiplier"
+                    },
+                    "easing": {
+                        "$value": "{motion.easing.linear}",
+                        "$type": "cubicBezier"
+                    }
+                },
+                "reveal": {
+                    "opacity": {
+                        "from": {
+                            "$value": "0",
+                            "$type": "number"
+                        },
+                        "to": {
+                            "$value": "1",
+                            "$type": "number"
+                        }
+                    },
+                    "transform": {
+                        "from": {
+                            "$value": "translateY(24px)",
+                            "$type": "string"
+                        },
+                        "to": {
+                            "$value": "translateY(0)",
+                            "$type": "string"
+                        }
+                    },
+                    "duration": {
+                        "$value": "{motion.duration.moderate}",
+                        "$type": "duration"
+                    },
+                    "easing": {
+                        "$value": "{motion.easing.settle}",
+                        "$type": "cubicBezier"
+                    }
+                }
+            }
+        },
+        "modeSpecific": {
+            "$description": "Mode-specific motion overrides",
+            "gallery": {
+                "defaultEasing": {
+                    "$value": "{motion.easing.viscous}",
+                    "$type": "cubicBezier"
+                },
+                "defaultDuration": {
+                    "$value": "{motion.duration.standard}",
+                    "$type": "duration"
+                },
+                "allowOvershoot": {
+                    "$value": true,
+                    "$type": "boolean"
+                }
+            },
+            "laboratory": {
+                "defaultEasing": {
+                    "$value": "{motion.easing.precise}",
+                    "$type": "cubicBezier"
+                },
+                "defaultDuration": {
+                    "$value": "{motion.duration.fast}",
+                    "$type": "duration"
+                },
+                "allowOvershoot": {
+                    "$value": false,
+                    "$type": "boolean"
+                }
+            }
+        },
+        "accessibility": {
+            "$description": "Reduced motion support for accessibility",
+            "reducedMotion": {
+                "duration": {
+                    "$value": "50ms",
+                    "$type": "duration",
+                    "$description": "Minimal duration for reduced motion"
+                },
+                "easing": {
+                    "$value": "{motion.easing.linear}",
+                    "$type": "cubicBezier",
+                    "$description": "Linear easing for reduced motion"
+                },
+                "disableTransforms": {
+                    "$value": true,
+                    "$type": "boolean",
+                    "$description": "Disable scale/rotate transforms"
+                },
+                "disableParallax": {
+                    "$value": true,
+                    "$type": "boolean",
+                    "$description": "Disable parallax effects"
+                }
+            }
+        }
+    }
+}

@@ -90,10 +90,10 @@ if [[ ! -f "package.json" ]]; then
     exit 1
 fi
 
-# 1. Check Node.js and yarn versions
+# 1. Check Node.js and npm versions
 log_info "Checking Node.js and package manager versions..."
 node --version
-yarn --version
+npm --version
 if command -v yarn &> /dev/null; then
     yarn --version
 fi
@@ -105,7 +105,7 @@ if [[ ! -d "node_modules" ]] || [[ "package.json" -nt "node_modules" ]]; then
     if command -v yarn &> /dev/null; then
         yarn install --frozen-lockfile
     else
-        yarn install --immutable
+        npm ci
     fi
 else
     log_success "Dependencies are up to date"
@@ -113,7 +113,7 @@ fi
 
 # 3. TypeScript type checking
 log_info "Running TypeScript type checking..."
-if yarn type-check; then
+if npm run type-check; then
     log_success "TypeScript type checking passed"
 else
     log_error "TypeScript type checking failed"
@@ -122,16 +122,16 @@ fi
 
 # 4. Code formatting check
 log_info "Checking code formatting..."
-if yarn format:check; then
+if npm run format:check; then
     log_success "Code formatting is correct"
 else
-    log_warning "Code formatting issues found. Run 'yarn format' to fix."
+    log_warning "Code formatting issues found. Run 'npm run format' to fix."
 fi
 
 # 5. Linting (if not skipped)
 if [[ "$SKIP_LINT" == false ]]; then
     log_info "Running ESLint checks..."
-    if yarn lint:ci; then
+    if npm run lint:ci; then
         log_success "Linting passed"
     else
         log_error "Linting failed"
@@ -144,7 +144,7 @@ fi
 # 6. Tests (if not skipped)
 if [[ "$SKIP_TESTS" == false ]]; then
     log_info "Running unit tests..."
-    if yarn test; then
+    if npm run test; then
         log_success "Unit tests passed"
     else
         log_error "Unit tests failed"
@@ -154,7 +154,7 @@ if [[ "$SKIP_TESTS" == false ]]; then
     # E2E tests (if Playwright is available)
     if command -v npx playwright --version &> /dev/null; then
         log_info "Running E2E tests..."
-        if yarn test:e2e; then
+        if npm run test:e2e; then
             log_success "E2E tests passed"
         else
             log_warning "E2E tests failed or skipped"
@@ -171,10 +171,10 @@ if [[ "$SKIP_BUILD" == false ]]; then
     log_info "Running production build..."
 
     # Clean previous build
-    yarn clean 2>/dev/null || true
+    npm run clean 2>/dev/null || true
 
     # Build for production
-    if yarn build; then
+    if npm run build; then
         log_success "Production build successful"
 
         # Check if dist directory exists and has content
@@ -225,14 +225,14 @@ if [[ "$BUNDLE_ANALYZE" == true ]]; then
     log_info "Running bundle analysis..."
 
     # Build with analyze mode if supported
-    if yarn build -- --mode=analyze 2>/dev/null; then
+    if npm run build -- --mode=analyze 2>/dev/null; then
         log_success "Bundle analysis build completed"
     else
         log_warning "Bundle analysis mode not supported, running standard build"
     fi
 
     # Generate bundle analysis report
-    if yarn bundle-analysis; then
+    if npm run bundle-analysis; then
         log_success "Bundle analysis completed"
     else
         log_warning "Bundle analysis script not available"
@@ -243,10 +243,10 @@ fi
 log_info "Running basic security checks..."
 
 # Check for vulnerable dependencies
-if yarn yarn audit --audit-level=moderate; then
+if npm audit --audit-level=moderate; then
     log_success "No moderate or high security vulnerabilities found"
 else
-    log_warning "Security vulnerabilities detected. Run 'yarn yarn audit --audit-level=moderate' to resolve."
+    log_warning "Security vulnerabilities detected. Run 'npm audit fix' to resolve."
 fi
 
 # Check for common security issues in build output
