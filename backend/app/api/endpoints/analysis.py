@@ -10,6 +10,8 @@ from app.genkit_flows.ats_scoring import AtsResult, atsScoring
 from app.genkit_flows.flow_decorator import run_flow_async
 from app.genkit_flows.resume_intelligence_pipeline import generate_resume_intelligence_report
 from app.genkit_flows.smart_content_optimizer import optimize_content_for_job
+from app.genkit_flows.resume_optimizer import optimizeResume, OptimizedResume
+from app.genkit_flows.company_analyzer import analyze_company_website, CompanyAnalysis
 from app.models import ATSScoreResponse, CategoryScore
 
 router = APIRouter()
@@ -131,6 +133,15 @@ class ResumeIntelligenceRequest(BaseModel):
     experience_level: str = "mid_level"
 
 
+class OptimizeResumeRequest(BaseModel):
+    job_description: str
+    company_url: Optional[str] = None
+
+
+class OptimizeResumeResponse(BaseModel):
+    optimized_text: str
+
+
 @router.post(
     "/job-matching",
     summary="Advanced Job Compatibility Analysis",
@@ -231,6 +242,95 @@ async def generate_resume_intelligence(
         raise HTTPException(
             status_code=500,
             detail="Failed to generate resume intelligence report",
+        )
+
+
+@router.post(
+    "/optimize-resume",
+    response_model=OptimizeResumeResponse,
+    summary="Optimize Resume with AI",
+    tags=["Analysis"],
+)
+async def optimize_resume(
+    request: OptimizeResumeRequest = Body(...),
+    current_user: Any = Depends(get_current_user),
+) -> OptimizeResumeResponse:
+    """
+    Optimize a resume by incorporating missing keywords based on a job description.
+    Optionally analyzes company website for targeted optimization.
+    
+    This endpoint:
+    1. Runs ATS scoring to identify missing keywords
+    2. Optionally scrapes and analyzes company website (if URL provided)
+    3. Uses AI to naturally integrate keywords and match company tone
+    
+    Returns optimized resume text.
+    """
+    try:
+        # For now, we'll need resume text from request
+        # In production, this would fetch from Firestore document
+        # TODO: Add document_id parameter and fetch from Firestore
+        
+        # Placeholder: Using resume_text from request for now
+        resume_text = request.job_description  # TEMP: Replace with actual resume fetch
+        
+        # Step 1: Run ATS scoring to find missing keywords
+        ats_result: AtsResult = await run_flow_async(
+            atsScoring,
+            **{
+                "resumeText": resume_text,
+                "jobDescription": request.job_description,
+                "user_id": getattr(current_user, "uid", None),
+            },
+        )
+
+        missing_keywords = getattr(
+            getattr(ats_result, "keywordMatches", None), "missing", []
+        )
+        
+        if not missing_keywords or len(missing_keywords) == 0:
+            raise HTTPException(
+                status_code=400,
+                detail="No missing keywords found. Your resume is already well-aligned!",
+            )
+
+        # Step 2: Optional company analysis
+        company_analysis_result: Optional[CompanyAnalysis] = None
+        if request.company_url:
+            try:
+                company_analysis_result = await run_flow_async(
+                    analyze_company_website,
+                    **{"url": request.company_url},
+                )
+            except (ConnectionError, ValueError) as e:
+                print(f"Warning: Company analysis failed: {e}")
+                # Continue without company analysis
+
+        # Step 3: Run optimizer flow
+        optimizer_args = {
+            "resumeText": resume_text,
+            "missingKeywords": missing_keywords,
+            "jobDescription": request.job_description,
+        }
+        
+        if company_analysis_result:
+            optimizer_args["company_keywords"] = company_analysis_result.company_keywords
+            optimizer_args["company_tone"] = company_analysis_result.company_tone
+
+        optimized_result: OptimizedResume = await run_flow_async(
+            optimizeResume,
+            **optimizer_args,
+        )
+
+        return OptimizeResumeResponse(optimized_text=optimized_result.resume_text)
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        print(f"Resume optimization error: {e}")
+        raise HTTPException(
+            status_code=500,
+            detail=f"An unexpected error occurred during resume optimization: {str(e)}",
         )
 
 
