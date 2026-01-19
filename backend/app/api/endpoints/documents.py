@@ -32,7 +32,8 @@ router = APIRouter()
 # ============================================================================
 
 from app.core.database import get_db
-from app.models.database import User, UserAsset
+from app.models.database import User
+from app.models.user_asset import UserAsset
 from sqlalchemy.orm import Session
 
 @router.get("/", status_code=status.HTTP_200_OK)
