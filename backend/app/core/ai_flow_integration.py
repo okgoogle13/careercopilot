@@ -7,7 +7,7 @@ into existing flows with minimal code changes.
 
 import logging
 from functools import wraps
-from typing import Any, Callable, Dict, Optional, Type, TypeVar
+from typing import Any, Callable, Dict, Optional, Type, TypeVar, get_origin
 
 from .ai_error_handling import AIError, AIErrorType
 from .ai_response_validation import (
@@ -181,19 +181,31 @@ def create_fallback_response(
         # Generic fallback - try to create with minimal data
         try:
             # Get required fields and provide default values
-            required_fields = {}
-            for field_name, field_info in schema_class.__fields__.items():
-                if field_info.required:
-                    if field_info.type_ == str:
-                        required_fields[field_name] = error_message
-                    elif field_info.type_ == float:
-                        required_fields[field_name] = 0.0
-                    elif field_info.type_ == int:
-                        required_fields[field_name] = 0
-                    elif field_info.type_ == list:
-                        required_fields[field_name] = []
-                    elif field_info.type_ == dict:
-                        required_fields[field_name] = {}
+            required_fields: Dict[str, Any] = {}
+            fields = getattr(schema_class, "model_fields", schema_class.__fields__)
+
+            for field_name, field_info in fields.items():
+                if hasattr(field_info, "is_required"):
+                    is_required = field_info.is_required()
+                    annotation = field_info.annotation
+                else:
+                    is_required = field_info.required
+                    annotation = field_info.type_
+
+                if not is_required:
+                    continue
+
+                origin = get_origin(annotation)
+                if annotation == str:
+                    required_fields[field_name] = error_message
+                elif annotation == float:
+                    required_fields[field_name] = 0.0
+                elif annotation == int:
+                    required_fields[field_name] = 0
+                elif annotation == list or origin == list:
+                    required_fields[field_name] = []
+                elif annotation == dict or origin == dict:
+                    required_fields[field_name] = {}
 
             return schema_class(**required_fields)
         except Exception:

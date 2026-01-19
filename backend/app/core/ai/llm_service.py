@@ -2,111 +2,104 @@
 
 import hashlib
 import json
-from typing import Dict
+from typing import Any, Dict
 
 from app.core.loguru_config import get_logger
 from app.core.ai_config import get_ai_config
-from app.core.firestore_cache import get_firestore_cache
+from app.core.genkit_init import is_genkit_enabled
+from app.core.database import SessionLocal
+from app.genkit_flows.llm_service import generate_llm_response
+from app.schemas.ai import LlmRequest, LlmResponse
+from app.services.cache_store import SQLAlchemyCacheStore
 
 logger = get_logger(__name__)
 
-# Initialize Firestore cache
-cache = get_firestore_cache()
+def get_cache_store() -> SQLAlchemyCacheStore:
+    """Helper to get a cache store with a fresh DB session."""
+    return SQLAlchemyCacheStore(SessionLocal())
+
+def _build_cache_key(request: LlmRequest) -> str:
+    request_payload = request.model_dump(mode="json", exclude_none=True)
+    param_str = json.dumps(request_payload, sort_keys=True)
+    key_material = param_str.encode("utf-8")
+    return f"llm:{hashlib.sha256(key_material).hexdigest()[:16]}"
 
 
-def get_llm_response(prompt: str, model_params: dict) -> dict:
+async def get_llm_response(request: LlmRequest) -> LlmResponse:
     """
-    Gets a response from an LLM, using Firestore cache to avoid redundant calls.
+    Gets a response from an LLM using Genkit, with SQLAlchemy-backed cache.
 
     Args:
-        prompt: The input prompt for the LLM
-        model_params: Dictionary containing model configuration
+        request: Structured request payload for the LLM call
 
     Returns:
-        Dictionary containing the LLM response
+        Structured response payload
     """
-    # Create a stable cache key
-    param_str = json.dumps(model_params, sort_keys=True)
-    key_material = (prompt + param_str).encode("utf-8")
-    cache_key = f"llm:{hashlib.sha256(key_material).hexdigest()[:16]}"
+    cache_key = _build_cache_key(request)
+    operation_type = request.service_name or request.task_type or "llm_generic"
+    user_id = request.user_id
 
-    # 1. Check Firestore cache first
+    # 1. Check SQL cache first
+    cache = get_cache_store()
     try:
         cached_result = cache.get(cache_key)
         if cached_result:
-            logger.info("Cache HIT", cache_key=cache_key, prompt_length=len(prompt))
-            return cached_result
+            logger.info(f"Cache HIT for {cache_key}")
+            cached_response = LlmResponse.model_validate(cached_result)
+            return cached_response.model_copy(update={"cached": True})
     except Exception as e:
-        logger.error("Cache read error", error=str(e))
+        logger.error(f"Cache read error: {e}")
 
-    # 2. If miss, call the actual LLM API and cache the result
-    logger.info(
-        "Cache MISS - calling LLM API",
-        cache_key=cache_key,
-        model=model_params.get("model"),
-    )
+    # 2. Check if Genkit is enabled
+    if not is_genkit_enabled():
+        logger.warning("Genkit flows are disabled, using mock response")
+        return LlmResponse(
+            content=f"[MOCK] Genkit disabled. Prompt: {request.prompt[:30]}",
+            model_used="mock",
+            cached=False,
+            metadata={"operation_type": operation_type, "genkit_disabled": True},
+        )
 
-    # This would be replaced with actual Genkit AI API call
-    # For now, using placeholder response
-    result = {
-        "response": f"LLM response for prompt: {prompt[:50]}...",
-        "model": model_params.get("model", "unknown"),
-        "tokens_used": len(prompt.split()) * 1.3,  # Rough estimate
-        "cached": False,
-    }
+    # 3. Call Genkit model via flow
+    logger.info(f"Cache MISS - calling Genkit for {operation_type}")
 
-    # Cache the result in Firestore
     try:
-        # Determine TTL from AI service config when available
-        cache_ttl = 3600
+        response = await generate_llm_response(request)
+
+        # 4. Cache the result
         try:
-            service_name = (
-                model_params.get("service_name")
-                or model_params.get("task_type")
+            cache_ttl = 3600
+            svc_config = get_ai_config().get_service_config(operation_type)
+            if svc_config:
+                cache_ttl = svc_config.cache_ttl_seconds
+
+            cache.set(
+                key=cache_key,
+                value=response.model_dump(mode="json"),
+                operation_type=operation_type,
+                ttl_seconds=cache_ttl,
+                user_id=user_id,
             )
-            if service_name:
-                svc = get_ai_config().get_service_config(service_name)
-                if svc and getattr(svc, "cache_enabled", True):
-                    cache_ttl = int(getattr(svc, "cache_ttl_seconds", cache_ttl))
-        except Exception as e:
-            logger.warning("Failed to resolve per-flow cache TTL", error=str(e))
-        cache.set(cache_key, result, cache_ttl)
-        logger.info("Response cached", cache_key=cache_key, ttl=cache_ttl)
-    except Exception as e:
-        logger.error("Cache write error", error=str(e))
+            logger.info(f"Response cached for {cache_key}")
+        except Exception as cache_err:
+            logger.error(f"Cache write error: {cache_err}")
 
-    return result
+        return response
 
+    except Exception as ai_err:
+        logger.error(f"AI Generation failed: {ai_err}")
+        return LlmResponse(
+            content="Error generating response",
+            model_used=request.model_name,
+            cached=False,
+            error=str(ai_err),
+        )
 
 def clear_cache_pattern(pattern: str = "llm:") -> int:
-    """
-    Clear cached LLM responses matching a pattern.
+    """Clear cached LLM responses matching a pattern."""
+    return get_cache_store().clear_pattern(pattern)
 
-    Args:
-        pattern: Key pattern prefix to match (default: all LLM cache with "llm:" prefix)
-
-    Returns:
-        Number of keys deleted
-    """
-    try:
-        deleted = cache.clear_pattern(pattern)
-        if deleted > 0:
-            logger.info("Cache cleared", pattern=pattern, keys_deleted=deleted)
-        return deleted
-    except Exception as e:
-        logger.error("Cache clear error", error=str(e), pattern=pattern)
-        return 0
-
-
-def get_cache_stats() -> Dict[str, int]:
-    """
-    Get cache statistics from Firestore.
-
-    Returns:
-        Dictionary with cache statistics
-    """
-    try:
-        return cache.get_stats()
-    except Exception as e:
-        logger.error("Cache stats error", error=str(e))
-        return {"status": "error", "error": str(e)}
+def get_cache_stats() -> Dict[str, Any]:
+    """Get cache statistics."""
+    # Placeholder as SQLAlchemyCacheStore doesn't have get_stats yet
+    return {"status": "ok", "backend": "sqlalchemy"}

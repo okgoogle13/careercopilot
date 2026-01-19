@@ -19,17 +19,17 @@ cp package.json package.json.bak
 
 # Update package.json with the latest versions
 echo -e "\n${YELLOW}Updating Node.js dependencies...${NC}"
-npx npm-check-updates -u
+yarn dlx npm-check-updates -u
 
 # Install the updated dependencies
 if [ -f "package-lock.json" ]; then
   rm package-lock.json
 fi
-npm install
+yarn install
 
 # Run tests to ensure everything still works
 echo -e "\n${YELLOW}Running frontend tests...${NC}
-npm test
+yarn test
 
 # Update backend Python dependencies
 echo -e "\n${GREEN}🔄 Updating backend dependencies...${NC}"

@@ -11,7 +11,7 @@ interface ResumeUploaderProps {
 }
 
 export default function ResumeUploader({ onUploadSuccess }: ResumeUploaderProps) {
-    const { user } = useAuth();
+    const { session } = useAuth();
     const [isDragging, setIsDragging] = useState(false);
     const [status, setStatus] = useState<'idle' | 'uploading' | 'success' | 'error'>('idle');
     const [errorMessage, setErrorMessage] = useState('');
@@ -50,7 +50,7 @@ export default function ResumeUploader({ onUploadSuccess }: ResumeUploaderProps)
             const formData = new FormData();
             formData.append('files', file);
 
-            const token = user?.getIdToken ? await user.getIdToken() : null;
+            const token = session?.access_token || null;
             const headers: Record<string, string> = {};
             if (token) {
                 headers['Authorization'] = `Bearer ${token}`;

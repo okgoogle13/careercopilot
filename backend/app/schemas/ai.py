@@ -1,0 +1,74 @@
+from typing import Any, Dict, List, Optional
+from pydantic import BaseModel, Field, model_validator
+from datetime import datetime
+
+class AIRequestModel(BaseModel):
+    """Modernized AI request structure for Genkit flows"""
+    prompt: str = Field(..., description="The input prompt for the AI")
+    service_name: str = Field(..., description="Name of the service requesting AI")
+    user_id: str = Field(..., description="ID of the user requesting AI")
+    model_name: str = Field("gemini-2.0-flash", description="AI model to use")
+    temperature: float = Field(0.7, ge=0.0, le=2.0)
+    max_tokens: int = Field(1000, gt=0)
+    context: Dict[str, Any] = Field(default_factory=dict)
+    system_prompt: Optional[str] = None
+
+class AIResponseModel(BaseModel):
+    """Standardized AI response structure for Genkit flows"""
+    content: str = Field(..., description="The generated AI content")
+    model_used: str = Field(..., description="The exact model used for generation")
+    tokens_used: Dict[str, int] = Field(default_factory=lambda: {"input": 0, "output": 0})
+    response_time_ms: float = Field(0.0)
+    cached: bool = Field(False)
+    metadata: Dict[str, Any] = Field(default_factory=dict)
+    timestamp: datetime = Field(default_factory=datetime.utcnow)
+
+class SalaryAnalysisResponse(BaseModel):
+    salary_range: str
+    negotiation_tips: List[str]
+    market_comparison: str
+
+class SkillsAnalysisResponse(BaseModel):
+    top_skills: List[Dict[str, Any]]
+    trending_skills: List[str]
+    development_plan: List[str]
+
+class InterviewPrepResponse(BaseModel):
+    questions: List[str]
+    suggested_answers: List[str]
+    candidate_questions: List[str]
+
+class CompanyResearchResponse(BaseModel):
+    talking_points: List[str]
+    application_strategy: str
+
+class CareerIntelligenceRequest(BaseModel):
+    prompt_type: str = Field(..., description="Type of prompt (salary_analysis, skills_analysis, etc.)")
+    task_prompt: str = Field(..., description="Specific task description")
+    user_id: str = Field(..., description="User ID")
+    context_data: Dict[str, Any] = Field(default_factory=dict)
+
+
+class LlmRequest(BaseModel):
+    """Structured input for the Genkit-backed LLM service."""
+
+    prompt: str = Field(..., description="The input prompt for the LLM")
+    service_name: Optional[str] = Field(None, description="Service invoking the LLM")
+    task_type: Optional[str] = Field(None, description="Task type for routing or caching")
+    user_id: Optional[str] = Field(None, description="User identifier for caching context")
+    model_name: str = Field("gemini-2.0-flash", description="Preferred model name")
+    temperature: float = Field(0.7, ge=0.0, le=2.0)
+    max_tokens: int = Field(1000, gt=0)
+    context: Dict[str, Any] = Field(default_factory=dict)
+    system_prompt: Optional[str] = None
+
+
+class LlmResponse(BaseModel):
+    """Structured output from the Genkit-backed LLM service."""
+
+    content: str = Field(..., description="Generated model output")
+    model_used: str = Field(..., description="Actual model used for generation")
+    tokens_used: float = Field(0.0, description="Estimated tokens used")
+    cached: bool = Field(False, description="Whether the response was served from cache")
+    metadata: Dict[str, Any] = Field(default_factory=dict)
+    error: Optional[str] = Field(None, description="Error details if generation failed")

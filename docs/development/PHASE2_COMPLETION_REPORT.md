@@ -118,15 +118,15 @@ import { ThemePreview } from "../components";
 | No console errors about missing modules    | ✅ **PASS** | Clean build output           |
 | Components render without undefined errors | ✅ **PASS** | Successful deployment        |
 | No circular dependency warnings            | ✅ **PASS** | Clean TypeScript compilation |
-| Clean npm install with no peer warnings    | ✅ **PASS** | All deps properly declared   |
+| Clean yarn install with no peer warnings    | ✅ **PASS** | All deps properly declared   |
 
 ## 🔍 Testing Protocol Results
 
 ### Build Testing
 
 ```bash
-npm install    # ✅ No dependency warnings
-npm run build  # ✅ Clean compilation (1.91s)
+yarn install    # ✅ No dependency warnings
+yarn build  # ✅ Clean compilation (1.91s)
 ```
 
 ### Production Build Analysis

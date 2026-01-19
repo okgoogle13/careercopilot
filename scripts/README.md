@@ -453,8 +453,8 @@ python3 scripts/test-configuration.py
 
 ```bash
 ./scripts/lint-autofix.sh
-npm run build
-npm run test
+yarn build
+yarn test
 ```
 
 ### Before Production Deployment

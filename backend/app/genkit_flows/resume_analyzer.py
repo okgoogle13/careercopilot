@@ -1,22 +1,19 @@
 import json
+import logging
+from typing import Dict, Any
 
 from app.core.genkit_init import get_model
 from app.core.prompt_service import format_prompt
-from app.genkit_flows.flow_decorator import simple_genkit_flow
+from app.genkit_flows.flow_decorator import async_genkit_flow
 
+logger = logging.getLogger(__name__)
 
-@simple_genkit_flow()
-def compare_resume_to_job(resume_text: str, job_analysis_data: dict) -> dict:
+@async_genkit_flow()
+async def compare_resume_to_job(resume_text: str, job_analysis_data: dict) -> str:
     """
-    Acts as an expert career coach to compare a resume to a job analysis.
-
-    Args:
-        resume_text: Raw resume content from user
-        job_analysis_data: Structured job analysis data
-
-    Returns:
-        dict: Structured analysis with match score and recommendations
+    Acts as an expert career coach to compare a resume to a job analysis using Genkit.
     """
+    logger.info("Running compare_resume_to_job flow")
 
     # Use the centralized prompt service
     prompt = format_prompt(
@@ -26,17 +23,18 @@ def compare_resume_to_job(resume_text: str, job_analysis_data: dict) -> dict:
     )
 
     # Generate the response using the centralized model
-    # Model availability is guaranteed by the decorator
     model = get_model()
+    if not model:
+        raise RuntimeError("Genkit model not available")
 
-    response = model.generate(
+    response = await model.generate(
         prompt=prompt,
         config={
             "response_mime_type": "application/json",
         },
     )
 
-    return response.output()
-
-
-# Flow is automatically registered by the @simple_genkit_flow decorator
+    output = response.output()
+    if isinstance(output, str):
+        return output
+    return json.dumps(output)

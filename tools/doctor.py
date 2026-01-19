@@ -116,7 +116,7 @@ def main():
     print_check(status, msg)
     if status == '❌':
         critical_errors.append("Frontend dependencies not installed")
-        print(f"   {Colors.YELLOW}→ Run: cd frontend && npm install{Colors.END}")
+        print(f"   {Colors.YELLOW}→ Run: cd frontend && yarn install{Colors.END}")
     
     # 3. Backend virtual environment
     venv_path = ".venv/bin/python"

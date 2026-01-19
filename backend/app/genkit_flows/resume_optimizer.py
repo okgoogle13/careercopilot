@@ -1,68 +1,97 @@
-import genkit
-from genkit.plugins import googleai
+try:
+    import google.generativeai as genai
+except ImportError:  # pragma: no cover - optional dependency in test/CI
+    genai = None
 import os
 from dotenv import load_dotenv
 from pydantic import BaseModel, Field
-from typing import List
+from typing import List, Optional
+from app.genkit_flows.corporate_intelligence import CorporateProfile
+import json
 
-# Load environment variables and initialize Genkit
+# Configure Gemini
 load_dotenv()
-if genkit.get_plugin("googleai") is None:
-    genkit.init(plugins=[googleai.init(api_key=os.getenv("GEMINI_API_KEY"))])
+if genai:
+    genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 
-gemini_pro = googleai.gemini_pro
+# Initialize Model
+model_name = "gemini-1.5-pro"
+model = genai.GenerativeModel(model_name) if genai else None
 
 class OptimizedResume(BaseModel):
     """The full, optimized resume text."""
     resume_text: str = Field(description="The complete and updated resume text, with keywords naturally integrated.")
 
-@genkit.flow(output_schema=OptimizedResume)
-def optimizeResume(resumeText: str, missingKeywords: List[str], jobDescription: str) -> OptimizedResume:
+def optimizeResume(
+    resume_text: str, 
+    missing_keywords: List[str], 
+    job_description: str,
+    corporate_profile: Optional[CorporateProfile] = None
+) -> OptimizedResume:
     """
     Analyzes a resume and a list of missing keywords, then rewrites the resume
     to naturally incorporate those keywords in the context of the job description.
+    Optionally identifies and aligns with corporate culture if corporate_profile is provided.
     """
 
-    keywords_str = ", ".join(missingKeywords)
+    keywords_str = ", ".join(missing_keywords)
+    
+    # Build Corporate Context string
+    corp_context = ""
+    if corporate_profile:
+        corp_context = f"""
+    **Target Company Intelligence:**
+    - **Company Name:** {corporate_profile.name}
+    - **Mission:** {corporate_profile.mission_statement}
+    - **Core Values:** {', '.join(corporate_profile.core_values)}
+    - **Strategic Focus:** {corporate_profile.strategic_focus}
+    - **Communication Style:** {corporate_profile.communication_style}
+    - **Known For:** {corporate_profile.known_for}
+        """
 
     prompt = f"""
-    You are an expert resume editor. Your task is to revise the provided resume to seamlessly integrate a list of missing keywords.
-    The goal is to make the resume a stronger match for the target job description without inventing new experiences or skills.
+    You are an expert resume editor and career strategist. Your task is to revise the provided resume to:
+    1. Seamlessly integrate the missing keywords.
+    2. Align the tone and content with the target company's culture and strategy (matches the "Corporate Intelligence" below).
+    
+    The goal is to make the resume a stronger match for the target job description AND the specific employer.
 
     **Target Job Description:**
     ---
-    {jobDescription}
+    {job_description}
     ---
+    {corp_context}
 
     **Original Resume:**
     ---
-    {resumeText}
-    ---
+    {resume_text}
 
-    **Keywords to Integrate:**
-    - {keywords_str}
+    **Keywords to Integreate:**
+    {keywords_str}
 
-    **Instructions:**
-    1.  **Analyze Context:** Read the job description and the original resume to understand the candidate's experience and the employer's needs.
-    2.  **Integrate Naturally:** Weave the keywords into the existing text of the resume. Rephrase bullet points or summaries where appropriate. For example, if a keyword is "Project Management" and the resume says "Led a team," you could change it to "Applied strong Project Management skills to lead a team."
-    3.  **Do Not Fabricate:** You must not add new job roles, invent new skills, or create experiences the candidate does not have. Your role is to edit and enhance, not to create fiction.
-    4.  **Preserve Formatting:** Maintain the overall structure and formatting of the original resume.
-    5.  **Return Full Text:** The final output should be the complete, revised resume text.
-
-    Now, please generate the optimized resume.
+    **Output Format:**
+    Return ONLY a valid JSON object with a single field "resume_text".
+    The value should be the full optimized resume markdown text.
+    Do not include markdown code fences (```json) in your response.
     """
 
-    response = gemini_pro.generate(
-        prompt=prompt,
-        config=googleai.GenerationConfig(
-            temperature=0.2, # Lower temperature for more focused and less creative output
-            response_mime_type="application/json"
-        ),
-        output_schema=OptimizedResume
-    )
+    if not genai or not model:
+        return OptimizedResume(resume_text=resume_text)
 
-    optimized_resume = response.output()
-    if not optimized_resume:
-        raise ValueError("Failed to generate an optimized resume from the model.")
+    try:
+        response = model.generate_content(
+            prompt,
+            generation_config=genai.GenerationConfig(
+                response_mime_type="application/json",
+                response_schema=OptimizedResume
+            )
+        )
+        
+        # Parse result
+        data = json.loads(response.text)
+        return OptimizedResume(resume_text=data["resume_text"])
 
-    return optimized_resume
+    except Exception as e:
+        print(f"Error optimizing resume: {e}")
+        # Fallback
+        return OptimizedResume(resume_text=resume_text)

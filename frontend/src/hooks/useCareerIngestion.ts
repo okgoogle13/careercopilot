@@ -12,7 +12,7 @@ interface UseCareerIngestionResult {
 export const useCareerIngestion = (): UseCareerIngestionResult => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
-    const { user } = useAuth();
+    const { session } = useAuth();
 
     const submitDocuments = useCallback(async (files: File[]): Promise<CareerDatabase> => {
         setIsLoading(true);
@@ -26,7 +26,7 @@ export const useCareerIngestion = (): UseCareerIngestionResult => {
             });
 
             // Get auth token if available
-            const token = user?.getIdToken ? await user.getIdToken() : null;
+            const token = session?.access_token || null;
             const headers: Record<string, string> = {};
             if (token) {
                 headers['Authorization'] = `Bearer ${token}`;
@@ -54,7 +54,7 @@ export const useCareerIngestion = (): UseCareerIngestionResult => {
         } finally {
             setIsLoading(false);
         }
-    }, [user]);
+    }, [session]);
 
     const updateCareerDatabase = useCallback(async (data: CareerDatabase): Promise<CareerDatabase> => {
         setIsLoading(true);
@@ -62,7 +62,7 @@ export const useCareerIngestion = (): UseCareerIngestionResult => {
 
         try {
             // Get auth token if available
-            const token = user?.getIdToken ? await user.getIdToken() : null;
+            const token = session?.access_token || null;
             const headers: Record<string, string> = {
                 'Content-Type': 'application/json',
             };
@@ -91,7 +91,7 @@ export const useCareerIngestion = (): UseCareerIngestionResult => {
         } finally {
             setIsLoading(false);
         }
-    }, [user]);
+    }, [session]);
 
     return {
         submitDocuments,

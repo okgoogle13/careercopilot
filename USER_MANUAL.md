@@ -41,7 +41,7 @@ Press `Ctrl+C` to stop everything.
 Before using CareerCopilot, ensure you have:
 
 1. **Python 3.10+** installed
-2. **Node.js 18+** and npm installed
+2. **Node.js 18+** and Yarn 4 installed
 3. **Your resume** prepared in Markdown format
 
 ### Step 1: Install Dependencies
@@ -54,7 +54,7 @@ pip install -r backend/requirements.txt
 
 # Install Node dependencies
 cd frontend
-npm install
+yarn install
 cd ..
 ```
 
@@ -264,7 +264,7 @@ python tools/doctor.py
 nano user_profile/resume.md  # Add your resume
 
 # 2. Missing node_modules
-cd frontend && npm install && cd ..
+cd frontend && yarn install && cd ..
 
 # 3. Missing virtual environment
 python -m venv .venv
@@ -297,21 +297,21 @@ cd backend
 
 #### "Frontend failed to start"
 
-**Symptoms:** Error about npm or node_modules
+**Symptoms:** Error about yarn or node_modules
 
 **Solutions:**
 ```bash
 # 1. Reinstall dependencies
 cd frontend
 rm -rf node_modules package-lock.json
-npm install
+yarn install
 
 # 2. Check Node version
 node --version  # Should be 18+
-npm --version
+yarn --version
 
 # 3. Try running manually
-npm run dev
+yarn dev
 # Read error message
 ```
 
@@ -415,7 +415,7 @@ uvicorn app.main:app --reload --port 8000
 
 # Terminal 2: Frontend
 cd frontend
-npm run dev
+yarn dev
 
 # Open browser manually:
 # http://localhost:5173/job-queue
@@ -446,7 +446,7 @@ curl http://localhost:8000/api/ingest/storage/status
 
 **Frontend logs:**
 - Browser console (F12 → Console tab)
-- Or terminal if running `npm run dev` manually
+- Or terminal if running `yarn dev` manually
 
 **Common log patterns:**
 - `✓` - Success

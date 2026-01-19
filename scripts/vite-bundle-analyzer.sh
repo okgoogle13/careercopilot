@@ -87,9 +87,9 @@ fi
 log_info "Checking for bundle analysis tools..."
 
 # Check if rollup-plugin-analyzer is available
-if ! npm list rollup-plugin-analyzer &>/dev/null; then
+if ! yarn list --pattern rollup-plugin-analyzer | grep -q "rollup-plugin-analyzer"; then
     log_info "Installing bundle analysis dependencies..."
-    npm install --save-dev rollup-plugin-analyzer vite-bundle-analyzer
+    yarn add -D rollup-plugin-analyzer vite-bundle-analyzer
 fi
 
 # Build with analysis (unless analyze-only is specified)
@@ -97,7 +97,7 @@ if [[ "$ANALYZE_ONLY" == false ]]; then
     log_info "Building with bundle analysis enabled..."
 
     # Clean previous build
-    npm run clean 2>/dev/null || rm -rf "$OUTPUT_DIR"
+    yarn clean 2>/dev/null || rm -rf "$OUTPUT_DIR"
 
     # Create a temporary vite config for analysis
     cat > vite.config.analyze.ts << 'EOF'
@@ -350,10 +350,10 @@ log_info "Total bundle size: $TOTAL_SIZE"
 # Provide quick optimization tips
 echo ""
 log_info "💡 Quick Tips:"
-echo "  • Use 'npm run build -- --mode=analyze' for detailed Rollup analysis"
+echo "  • Use 'yarn build -- --mode=analyze' for detailed Rollup analysis"
 echo "  • Consider implementing route-based code splitting"
 echo "  • Optimize images with tools like squoosh or imagemin"
-echo "  • Use 'npm run bundle-analysis' for custom analysis scripts"
+echo "  • Use 'yarn bundle-analysis' for custom analysis scripts"
 echo "  • Enable gzip compression on your server"
 
 log_success "Bundle analysis completed! 📊"
