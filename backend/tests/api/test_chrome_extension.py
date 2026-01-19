@@ -1,20 +1,38 @@
 import pytest
-from unittest.mock import MagicMock, patch
+from unittest.mock import MagicMock, patch, AsyncMock
 from fastapi.testclient import TestClient
 from app.main import app
-from app.api.endpoints.chrome_extension import JobPostingData
+from app.schemas.chrome_extension import JobAnalysisOutput
+from app.core.dependencies import get_current_user
+from app.core.database import get_db
 
 client = TestClient(app)
 
-@pytest.fixture
-def mock_ai_client():
-    with patch("app.api.endpoints.chrome_extension.get_ai_client") as mock:
-        yield mock
+class DummyUser:
+    id = "user-123"
+
+@pytest.fixture(autouse=True)
+def override_dependencies():
+    def _get_current_user():
+        return DummyUser()
+
+    def _get_db():
+        db = MagicMock()
+
+        def _refresh(obj):
+            obj.id = "test_job_id"
+
+        db.refresh.side_effect = _refresh
+        return db
+
+    app.dependency_overrides[get_current_user] = _get_current_user
+    app.dependency_overrides[get_db] = _get_db
+    yield
+    app.dependency_overrides = {}
 
 @pytest.fixture
-def mock_firestore():
-    with patch("app.api.endpoints.chrome_extension.db") as mock:
-        mock.collection.return_value.document.return_value.collection.return_value.add.return_value = (None, MagicMock(id="test_job_id"))
+def mock_analyze_flow():
+    with patch("app.api.endpoints.chrome_extension.analyzeJobPostingFlow", new_callable=AsyncMock) as mock:
         yield mock
 
 @pytest.fixture
@@ -27,22 +45,17 @@ def mock_background_tasks():
     with patch("fastapi.BackgroundTasks.add_task") as mock:
         yield mock
 
-def test_analyze_job_posting_success(mock_ai_client, mock_firestore, mock_background_tasks):
-    # Mock AI response
-    mock_ai_instance = MagicMock()
-    mock_ai_instance.generate_text.return_value.content = """
-    ## Analysis
-    This is a great job.
-    
-    ```json
-    {
-        "deadline": "2023-12-31",
-        "match_score": 90,
-        "is_remote": true
-    }
-    ```
-    """
-    mock_ai_client.return_value = mock_ai_instance
+def test_analyze_job_posting_success(mock_analyze_flow, mock_background_tasks):
+    mock_analyze_flow.return_value = JobAnalysisOutput(
+        overall_fit_score=88,
+        matching_qualifications=["Python", "FastAPI"],
+        gaps_and_development_areas=["Kubernetes"],
+        key_selling_points=["Systems thinking"],
+        application_strategy="Focus on platform experience.",
+        deadline="2023-12-31",
+        is_remote=True,
+        match_score=90,
+    )
 
     payload = {
         "title": "Software Engineer",
@@ -61,11 +74,7 @@ def test_analyze_job_posting_success(mock_ai_client, mock_firestore, mock_backgr
     assert data["job_saved"] is True
     assert data["deadline_found"] == "2023-12-31"
     
-    # Verify AI was called
-    mock_ai_instance.generate_text.assert_called_once()
-    
-    # Verify Firestore save
-    mock_firestore.collection.assert_called()
+    mock_analyze_flow.assert_called_once()
     
     # Verify background task specifically for calendar creation is queued
     # Note: Logic in endpoint puts _create_calendar_entry into background tasks
@@ -76,21 +85,17 @@ def test_analyze_job_posting_success(mock_ai_client, mock_firestore, mock_backgr
     # Wait, FastAPI BackgroundTasks are injected. 
     # Ideally we mock the wrapper _create_calendar_entry or verify add_task usage.
     
-def test_analyze_job_posting_no_deadline(mock_ai_client, mock_firestore, mock_background_tasks):
-    # Mock AI response without deadline
-    mock_ai_instance = MagicMock()
-    mock_ai_instance.generate_text.return_value.content = """
-    ## Analysis
-    Good job.
-    
-    ```json
-    {
-        "deadline": null,
-        "match_score": 80
-    }
-    ```
-    """
-    mock_ai_client.return_value = mock_ai_instance
+def test_analyze_job_posting_no_deadline(mock_analyze_flow, mock_background_tasks):
+    mock_analyze_flow.return_value = JobAnalysisOutput(
+        overall_fit_score=75,
+        matching_qualifications=["APIs"],
+        gaps_and_development_areas=["Testing"],
+        key_selling_points=["Delivery"],
+        application_strategy="Emphasize reliability.",
+        deadline=None,
+        is_remote=False,
+        match_score=80,
+    )
 
     payload = {
         "title": "Software Engineer",
@@ -107,19 +112,20 @@ def test_analyze_job_posting_no_deadline(mock_ai_client, mock_firestore, mock_ba
     # Using TestClient usually executes background tasks unless verified otherwise.
     # But here we assume no calendar event task should be added if no deadline.
     
-def test_analyze_job_posting_ai_failure(mock_ai_client):
+def test_analyze_job_posting_ai_failure():
     # Mock AI failure
-    mock_ai_client.return_value.generate_text.side_effect = Exception("AI Error")
+    with patch("app.api.endpoints.chrome_extension.analyzeJobPostingFlow", new_callable=AsyncMock) as mock:
+        mock.side_effect = Exception("AI Error")
 
-    payload = {
-        "title": "Software Engineer",
-        "description": "Job...",
-        "url": "https://example.com"
-    }
+        payload = {
+            "title": "Software Engineer",
+            "description": "Job...",
+            "url": "https://example.com"
+        }
 
-    response = client.post("/api/chrome-extension/analyze", json=payload)
+        response = client.post("/api/chrome-extension/analyze", json=payload)
 
-    assert response.status_code == 200
-    data = response.json()
-    assert data["success"] is False
-    assert "Failed to analyze job" in data["markdown_analysis"]
+        assert response.status_code == 200
+        data = response.json()
+        assert data["success"] is False
+        assert "Failed to analyze job" in data["markdown_analysis"]

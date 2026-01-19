@@ -3,9 +3,14 @@ import logging
 import os
 from functools import lru_cache
 
-from google.api_core.exceptions import NotFound
-from google.cloud import secretmanager
-from google.oauth2 import service_account
+try:
+    from google.api_core.exceptions import NotFound
+    from google.cloud import secretmanager
+    from google.oauth2 import service_account
+except ImportError:  # pragma: no cover - optional dependency in test/CI
+    NotFound = Exception
+    secretmanager = None
+    service_account = None
 
 logger = logging.getLogger(__name__)
 
@@ -15,6 +20,10 @@ GCP_PROJECT_ID = os.getenv("GCP_PROJECT_ID", "careercopilot-468811")
 
 def _get_secret_manager_client():
     """Initialize Secret Manager client with proper authentication."""
+    if secretmanager is None:
+        logger.warning("Google Secret Manager dependencies not available")
+        return None
+
     try:
         # Try to use service account credentials from environment
         credentials_json = os.getenv("GOOGLE_APPLICATION_CREDENTIALS_JSON")
@@ -47,6 +56,8 @@ def save_user_secret(user_id: str, secret_name: str, secret_value: str) -> str:
     """
     if not GCP_PROJECT_ID:
         raise ValueError("GCP_PROJECT_ID environment variable not set.")
+    if client is None:
+        raise RuntimeError("Secret Manager client is not available")
 
     secret_id = f"careercopilot-{secret_name}-{user_id}"
 
@@ -74,6 +85,8 @@ def get_user_secret(user_id: str, secret_name: str, version: str = "latest") -> 
     """
     if not GCP_PROJECT_ID:
         raise ValueError("GCP_PROJECT_ID environment variable not set.")
+    if client is None:
+        raise RuntimeError("Secret Manager client is not available")
 
     secret_id = f"careercopilot-{secret_name}-{user_id}"
     name = f"projects/{GCP_PROJECT_ID}/secrets/{secret_id}/versions/{version}"
@@ -87,6 +100,8 @@ def delete_user_secret(user_id: str, secret_name: str):
     """
     if not GCP_PROJECT_ID:
         raise ValueError("GCP_PROJECT_ID environment variable not set.")
+    if client is None:
+        raise RuntimeError("Secret Manager client is not available")
 
     secret_id = f"careercopilot-{secret_name}-{user_id}"
     secret_path = client.secret_path(GCP_PROJECT_ID, secret_id)

@@ -1,7 +1,11 @@
 from datetime import datetime, timedelta
 
-from google.oauth2.credentials import Credentials
-from googleapiclient.discovery import build
+try:
+    from google.oauth2.credentials import Credentials
+    from googleapiclient.discovery import build
+except ImportError:  # pragma: no cover - optional dependency in test/CI
+    Credentials = None
+    build = None
 
 from app.core.database import SessionLocal
 from app.core.secrets import get_user_secret
@@ -13,6 +17,9 @@ async def createCalendarEvent(user_id: str, opportunity_data: dict) -> str:
     """
     Creates a Google Calendar event for a job application deadline.
     """
+    if not Credentials or not build:
+        raise Exception("Google API dependencies are not installed.")
+
     creds_json = get_user_secret(user_id, "google_credentials")
     if not creds_json:
         raise Exception("User has not authenticated with Google.")
