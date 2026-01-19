@@ -12,7 +12,7 @@
 
 ### Production Build Results ✅ OPTIMIZED
 
-**Build Output** (from `yarn build`):
+**Build Output** (from `npm run build`):
 
 ```
 dist/index.html                              0.69 kB │ gzip:   0.36 kB

@@ -18,7 +18,7 @@ cd ..
 
 # Functions linting
 echo "📁 Functions: Running ESLint auto-fix..."
-if cd functions && yarn lint:fix; then
+if cd functions && npm run lint:fix; then
     echo "✅ Functions ESLint auto-fix completed"
 else
     echo "❌ Functions ESLint auto-fix failed"
