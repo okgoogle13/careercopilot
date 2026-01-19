@@ -2,7 +2,10 @@ import os
 from typing import List, Dict, Optional, Literal
 from pydantic import BaseModel
 from dotenv import load_dotenv
-import google.generativeai as genai
+try:
+    import google.generativeai as genai
+except ImportError:  # pragma: no cover - optional dependency in test/CI
+    genai = None
 from sqlalchemy import select
 from app.core.database import get_db_session
 from app.models.document_embedding import DocumentEmbedding
@@ -10,7 +13,8 @@ from app.models.document_embedding import DocumentEmbedding
 load_dotenv()
 
 # Configure Google AI for Embeddings
-genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
+if genai:
+    genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 
 class CareerArtifact(BaseModel):
     content: str
@@ -33,6 +37,8 @@ class VectorStore:
         """Generates embeddings using Gemini API."""
         if not texts:
             return []
+        if not genai:
+            raise RuntimeError("Google Generative AI library not installed")
         
         results = genai.embed_content(
             model=self.embedding_model,
@@ -43,6 +49,8 @@ class VectorStore:
 
     def _generate_query_embedding(self, text: str) -> List[float]:
         """Generates embedding for a single query."""
+        if not genai:
+            raise RuntimeError("Google Generative AI library not installed")
         result = genai.embed_content(
             model=self.embedding_model,
             content=text,

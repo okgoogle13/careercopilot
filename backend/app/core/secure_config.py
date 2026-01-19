@@ -9,10 +9,10 @@ import os
 from typing import Any, Dict, Optional, Tuple, cast
 
 from pydantic import validator
-from pydantic_settings import BaseSettings
-
-from pydantic import validator
-from pydantic_settings import BaseSettings
+try:
+    from pydantic_settings import BaseSettings
+except ImportError:  # pragma: no cover - optional dependency in test/CI
+    from pydantic import BaseModel as BaseSettings
 
 # Try to import the secret manager, but don't fail if not available
 try:

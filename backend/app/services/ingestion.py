@@ -1,8 +1,14 @@
 import os
 from typing import List, Literal
 from pydantic import BaseModel
-from pdfminer.high_level import extract_text
-import docx
+try:
+    from pdfminer.high_level import extract_text
+except ImportError:  # pragma: no cover - optional dependency in test/CI
+    extract_text = None
+try:
+    import docx
+except ImportError:  # pragma: no cover - optional dependency in test/CI
+    docx = None
 from app.services.vector_store import VectorStore, CareerArtifact
 import io
 
@@ -52,10 +58,14 @@ class IngestionService:
         print(f"Successfully processed {filename} into {len(chunks)} chunks.")
 
     def _parse_pdf(self, file_content: bytes) -> str:
+        if not extract_text:
+            raise RuntimeError("pdfminer.six not installed")
         with io.BytesIO(file_content) as f:
             return extract_text(f)
 
     def _parse_docx(self, file_content: bytes) -> str:
+        if not docx:
+            raise RuntimeError("python-docx not installed")
         with io.BytesIO(file_content) as f:
             doc = docx.Document(f)
             return "\n".join([para.text for para in doc.paragraphs])
