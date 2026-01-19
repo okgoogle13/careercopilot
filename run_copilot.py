@@ -157,12 +157,12 @@ def start_frontend():
     # Check if node_modules exists
     if not (Path("frontend") / "node_modules").exists():
         print(f"{Colors.RED}❌ Frontend dependencies not installed!{Colors.END}")
-        print(f"{Colors.YELLOW}   Run: cd frontend && npm install{Colors.END}")
+        print(f"{Colors.YELLOW}   Run: cd frontend && yarn install{Colors.END}")
         return False
     
     try:
         frontend = subprocess.Popen(
-            ["npm", "run", "dev"],
+            ["yarn", "dev"],
             cwd="frontend",
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
@@ -184,7 +184,7 @@ def start_frontend():
         return True
         
     except FileNotFoundError:
-        print(f"{Colors.RED}❌ npm not found! Please install Node.js{Colors.END}")
+        print(f"{Colors.RED}❌ yarn not found! Please install Node.js and Yarn{Colors.END}")
         return False
     except Exception as e:
         print(f"{Colors.RED}❌ Failed to start frontend: {e}{Colors.END}")

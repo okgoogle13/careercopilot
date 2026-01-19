@@ -1,290 +1,124 @@
-"""
-backend/app/services/job_store.py
-----------------------------------
-Firestore-backed job storage service with in-memory fallback.
-Provides persistent storage for job queue with graceful degradation.
-"""
+
 import logging
 from datetime import datetime
 from typing import Dict, List, Optional
-from firebase_admin import firestore
-
-from app.core.firebase_config import get_firestore_client
+from fastapi import Depends
+from sqlalchemy.orm import Session
+from app.models.database import Job
+from app.core.database import get_db
 
 logger = logging.getLogger(__name__)
 
-
-class FirestoreJobStore:
+class SQLAlchemyJobStore:
     """
-    Job storage service using Firestore with in-memory fallback.
-    
-    Features:
-    - Persistent storage in Firestore
-    - Automatic fallback to in-memory storage if Firestore unavailable
-    - Thread-safe operations
-    - Automatic timestamp management
+    Job storage service using SQLAlchemy (PostgreSQL/Supabase).
+    Replaces FirestoreJobStore.
     """
     
-    def __init__(self, collection_name: str = "jobs"):
+    def __init__(self, db: Session):
         """
-        Initialize the job store.
-        
-        Args:
-            collection_name: Name of the Firestore collection (default: "jobs")
+        Initialize the job store with a DB session.
         """
-        self.db = get_firestore_client()
-        self.collection = collection_name
+        self.db = db
         
-        # In-memory fallback storage
-        self._memory_store: Dict[str, dict] = {}
-        self._memory_counter = 0
-        
-        # Log initialization mode
-        if self.db:
-            logger.info(f"[JobStore] Initialized with Firestore (collection: {collection_name})")
-        else:
-            logger.warning("[JobStore] Firestore unavailable. Using in-memory storage (data will not persist)")
-    
     async def add_job(self, job_data: dict) -> str:
         """
         Add a new job to storage.
-        
-        Args:
-            job_data: Job information dictionary
-            
-        Returns:
-            str: Job ID (Firestore document ID or generated ID)
         """
+        # Ensure user_id is present
+        if 'user_id' not in job_data:
+            raise ValueError("user_id is required to add a job")
+            
         # Add timestamp if not present
         if 'date_clipped' not in job_data:
             job_data['date_clipped'] = datetime.utcnow().isoformat()
         
-        if not self.db:
-            # Fallback to in-memory storage
-            self._memory_counter += 1
-            job_id = str(self._memory_counter)
-            job_data['id'] = job_id
-            self._memory_store[job_id] = job_data
-            logger.debug(f"[JobStore] Added job {job_id} to in-memory storage")
-            return job_id
+        # Map fields to Job model
+        # Note: Firestore used camelCase/snake_case mix, SQLAlchemy model uses snake_case
+        job = Job(
+            user_id=job_data.get('user_id'),
+            title=job_data.get('title', 'Unknown Title'),
+            company=job_data.get('company', 'Unknown Company'),
+            location=job_data.get('location'),
+            description=job_data.get('description'),
+            requirements=job_data.get('requirements', []),
+            preferred_qualifications=job_data.get('preferred_qualifications', []),
+            skill_requirements=job_data.get('skill_requirements', []),
+            salary_min=job_data.get('salary_min'),
+            salary_max=job_data.get('salary_max'),
+            salary_text=job_data.get('salary_text'),
+            job_type=job_data.get('job_type'),
+            experience_level=job_data.get('experience_level'),
+            remote_ok=job_data.get('remote_ok', False),
+            application_url=job_data.get('application_url'),
+            source=job_data.get('source'),
+            source_id=job_data.get('source_id'),
+            url=job_data.get('url'),
+            posted_date=datetime.fromisoformat(job_data['posted_date']) if job_data.get('posted_date') else None,
+            job_metadata=job_data.get('metadata', {}),
+            match_score=job_data.get('match_score'),
+            analysis_summary=job_data.get('analysis_summary')
+        )
         
-        try:
-            # Add to Firestore
-            update_time, doc_ref = self.db.collection(self.collection).add(job_data)
-            job_id = doc_ref.id
-            logger.info(f"[JobStore] Added job {job_id} to Firestore at {update_time}")
-            return job_id
-            
-        except Exception as e:
-            logger.error(f"[JobStore] Failed to add job to Firestore: {e}")
-            # Fallback to in-memory on Firestore error
-            self._memory_counter += 1
-            job_id = f"mem_{self._memory_counter}"
-            job_data['id'] = job_id
-            self._memory_store[job_id] = job_data
-            logger.warning(f"[JobStore] Fell back to in-memory storage for job {job_id}")
-            return job_id
+        self.db.add(job)
+        self.db.commit()
+        self.db.refresh(job)
+        
+        logger.info(f"[JobStore] Added job {job.id} to PostgreSQL")
+        return str(job.id)
     
     async def get_all_jobs(self, user_id: Optional[str] = None, limit: int = 100) -> List[dict]:
         """
-        Retrieve all jobs, optionally filtered by user.
-        
-        Args:
-            user_id: Optional user ID to filter jobs
-            limit: Maximum number of jobs to return (default: 100)
-            
-        Returns:
-            List[dict]: List of job dictionaries with IDs included
+        Retrieve all jobs.
         """
-        if not self.db:
-            # Return from in-memory storage - convert dict values to list only when needed
-            if user_id:
-                jobs = [j for j in self._memory_store.values() if j.get('user_id') == user_id]
-            else:
-                jobs = list(self._memory_store.values())
-            logger.debug(f"[JobStore] Retrieved {len(jobs)} jobs from in-memory storage")
-            return jobs[:limit]
+        query = self.db.query(Job)
+        if user_id:
+            query = query.filter(Job.user_id == user_id)
+            
+        query = query.order_by(Job.created_at.desc()).limit(limit)
+        jobs = query.all()
         
-        try:
-            # Query Firestore
-            query = self.db.collection(self.collection)
-            
-            # Filter by user if specified
-            if user_id:
-                query = query.where('user_id', '==', user_id)
-            
-            # Order by newest first
-            query = query.order_by('date_clipped', direction=firestore.Query.DESCENDING)
-            query = query.limit(limit)
-            
-            # Execute query
-            docs = query.stream()
-            
-            jobs = []
-            for doc in docs:
-                job = doc.to_dict()
-                job['id'] = doc.id
-                jobs.append(job)
-            
-            logger.info(f"[JobStore] Retrieved {len(jobs)} jobs from Firestore")
-            return jobs
-            
-        except Exception as e:
-            logger.error(f"[JobStore] Failed to retrieve jobs from Firestore: {e}")
-            # Fallback to in-memory on error
-            if user_id:
-                jobs = [j for j in self._memory_store.values() if j.get('user_id') == user_id]
-            else:
-                jobs = list(self._memory_store.values())
-            logger.warning(f"[JobStore] Fell back to in-memory storage, returning {len(jobs)} jobs")
-            return jobs[:limit]
+        return [job.to_dict() for job in jobs]
     
     async def get_job(self, job_id: str) -> Optional[dict]:
         """
         Retrieve a specific job by ID.
-        
-        Args:
-            job_id: Job ID to retrieve
-            
-        Returns:
-            Optional[dict]: Job data with ID included, or None if not found
         """
-        if not self.db:
-            # Get from in-memory storage
-            job = self._memory_store.get(job_id)
-            if job:
-                logger.debug(f"[JobStore] Retrieved job {job_id} from in-memory storage")
-            return job
-        
-        try:
-            # Get from Firestore
-            doc = self.db.collection(self.collection).document(job_id).get()
-            
-            if doc.exists:
-                data = doc.to_dict()
-                data['id'] = doc.id
-                logger.info(f"[JobStore] Retrieved job {job_id} from Firestore")
-                return data
-            else:
-                logger.warning(f"[JobStore] Job {job_id} not found in Firestore")
-                return None
-                
-        except Exception as e:
-            logger.error(f"[JobStore] Failed to retrieve job {job_id} from Firestore: {e}")
-            # Fallback to in-memory
-            job = self._memory_store.get(job_id)
-            if job:
-                logger.warning(f"[JobStore] Fell back to in-memory storage for job {job_id}")
-            return job
+        job = self.db.query(Job).filter(Job.id == job_id).first()
+        return job.to_dict() if job else None
     
     async def update_job(self, job_id: str, updates: dict) -> bool:
         """
         Update a job with new data.
-        
-        Args:
-            job_id: Job ID to update
-            updates: Dictionary of fields to update
-            
-        Returns:
-            bool: True if update successful, False otherwise
         """
-        # Add update timestamp
-        updates['updated_at'] = datetime.utcnow().isoformat()
-        
-        if not self.db:
-            # Update in-memory storage
-            if job_id in self._memory_store:
-                self._memory_store[job_id].update(updates)
-                logger.debug(f"[JobStore] Updated job {job_id} in in-memory storage")
-                return True
-            else:
-                logger.warning(f"[JobStore] Job {job_id} not found in in-memory storage")
-                return False
-        
-        try:
-            # Update in Firestore
-            self.db.collection(self.collection).document(job_id).update(updates)
-            logger.info(f"[JobStore] Updated job {job_id} in Firestore")
-            return True
-            
-        except Exception as e:
-            logger.error(f"[JobStore] Failed to update job {job_id} in Firestore: {e}")
-            # Fallback to in-memory
-            if job_id in self._memory_store:
-                self._memory_store[job_id].update(updates)
-                logger.warning(f"[JobStore] Fell back to in-memory storage for updating job {job_id}")
-                return True
+        job = self.db.query(Job).filter(Job.id == job_id).first()
+        if not job:
             return False
+            
+        for key, value in updates.items():
+            if hasattr(job, key):
+                setattr(job, key, value)
+            elif key == 'metadata':
+                job.job_metadata = value
+                
+        self.db.commit()
+        return True
     
     async def delete_job(self, job_id: str) -> bool:
         """
         Delete a job from storage.
-        
-        Args:
-            job_id: Job ID to delete
-            
-        Returns:
-            bool: True if deletion successful, False otherwise
         """
-        if not self.db:
-            # Delete from in-memory storage
-            if job_id in self._memory_store:
-                del self._memory_store[job_id]
-                logger.debug(f"[JobStore] Deleted job {job_id} from in-memory storage")
-                return True
+        job = self.db.query(Job).filter(Job.id == job_id).first()
+        if not job:
             return False
-        
-        try:
-            # Delete from Firestore
-            self.db.collection(self.collection).document(job_id).delete()
-            logger.info(f"[JobStore] Deleted job {job_id} from Firestore")
-            return True
             
-        except Exception as e:
-            logger.error(f"[JobStore] Failed to delete job {job_id} from Firestore: {e}")
-            # Fallback to in-memory
-            if job_id in self._memory_store:
-                del self._memory_store[job_id]
-                logger.warning(f"[JobStore] Fell back to in-memory storage for deleting job {job_id}")
-                return True
-            return False
-    
-    def get_storage_mode(self) -> str:
-        """
-        Get the current storage mode.
-        
-        Returns:
-            str: Either "firestore" or "in-memory"
-        """
-        return "firestore" if self.db else "in-memory"
-    
-    def get_stats(self) -> dict:
-        """
-        Get storage statistics.
-        
-        Returns:
-            dict: Storage statistics
-        """
-        return {
-            "mode": self.get_storage_mode(),
-            "collection": self.collection if self.db else "N/A",
-            "in_memory_count": len(self._memory_store),
-            "firestore_available": self.db is not None
-        }
+        self.db.delete(job)
+        self.db.commit()
+        return True
 
+# Helper for dependency injection
+def get_job_store(db: Session = Depends(get_db)) -> SQLAlchemyJobStore:
+    return SQLAlchemyJobStore(db)
 
-# Singleton instance
-_job_store: Optional[FirestoreJobStore] = None
-
-
-def get_job_store() -> FirestoreJobStore:
-    """
-    Get or create the singleton job store instance.
-    
-    Returns:
-        FirestoreJobStore: Job store instance
-    """
-    global _job_store
-    if _job_store is None:
-        _job_store = FirestoreJobStore()
-    return _job_store
+# Note: The singleton pattern with global _job_store is harder with DB sessions.
+# Recommended to use get_job_store as a FastAPI dependency.

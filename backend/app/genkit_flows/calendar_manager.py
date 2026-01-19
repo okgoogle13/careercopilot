@@ -3,8 +3,9 @@ from datetime import datetime, timedelta
 from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
 
-from app.core.db import db
+from app.core.database import SessionLocal
 from app.core.secrets import get_user_secret
+from app.models.database import Application
 
 
 # Removed @genkit.flow()
@@ -37,11 +38,11 @@ async def createCalendarEvent(user_id: str, opportunity_data: dict) -> str:
         f"{opportunity_data.get('title')} position. Good luck!",
         "start": {
             "date": deadline_date.isoformat(),
-            "timeZone": "America/Los_Angeles",  # Or use a user-specific timezone
+            "timeZone": "UTC",
         },
         "end": {
             "date": (deadline_date + timedelta(days=1)).isoformat(),
-            "timeZone": "America/Los_Angeles",
+            "timeZone": "UTC",
         },
         "reminders": {
             "useDefault": False,
@@ -54,11 +55,19 @@ async def createCalendarEvent(user_id: str, opportunity_data: dict) -> str:
 
     created_event = service.events().insert(calendarId="primary", body=event).execute()
 
-    # Save the event ID to the opportunity document in Firestore for future reference
+    # Save the event ID to the opportunity in Database
     opportunity_id = opportunity_data.get("id")
     if opportunity_id:
-        await db.collection("users").document(user_id).collection("opportunities").document(
-            opportunity_id
-        ).set({"calendar_event_id": created_event.get("id")}, merge=True)
+        db = SessionLocal()
+        try:
+            application = db.query(Application).filter(Application.id == opportunity_id).first()
+            if application:
+                # Store in metadata for now as we don't have a dedicated column for calendar_event_id
+                meta = application.application_metadata.copy() if application.application_metadata else {}
+                meta["calendar_event_id"] = created_event.get("id")
+                application.application_metadata = meta
+                db.commit()
+        finally:
+            db.close()
 
     return created_event.get("id")

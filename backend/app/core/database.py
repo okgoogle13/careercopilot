@@ -17,13 +17,14 @@ from app.models.database import Base
 logger = logging.getLogger(__name__)
 
 
+
 class DatabaseConfig:
     """Database configuration management"""
 
     def __init__(self):
         self.database_url = self._get_database_url()
         self.is_sqlite = "sqlite" in self.database_url
-        self.is_postgresql = "postgresql" in self.database_url
+        self.is_postgresql = "postgresql" in self.database_url or "postgres" in self.database_url
 
         # Engine configuration
         engine_kwargs = {
@@ -36,11 +37,13 @@ class DatabaseConfig:
                 {"poolclass": StaticPool, "connect_args": {"check_same_thread": False}}
             )
         elif self.is_postgresql:
+            # Pooling settings for Postgres (Supabase)
             engine_kwargs.update(
                 {
                     "pool_size": int(os.getenv("DB_POOL_SIZE", "5")),
                     "max_overflow": int(os.getenv("DB_MAX_OVERFLOW", "10")),
                     "pool_timeout": int(os.getenv("DB_POOL_TIMEOUT", "30")),
+                    "pool_recycle": int(os.getenv("DB_POOL_RECYCLE", "1800")),
                 }
             )
 
@@ -63,22 +66,17 @@ class DatabaseConfig:
     def _get_database_url(self) -> str:
         """Determine database URL based on environment"""
 
-        # Check for explicit database URL
+        # Check for explicit database URL (e.g. Supabase Connection String)
         if db_url := os.getenv("DATABASE_URL"):
+            # Ensure it uses the correct driver for SQLAlchemy if needed
+            # (Supabase usually provides postgresql:// which implies psycopg2 or similar)
             return db_url
 
-        # Check for PostgreSQL connection parameters
-        if all(os.getenv(key) for key in ["DB_HOST", "DB_NAME", "DB_USER", "DB_PASSWORD"]):
-            host = os.getenv("DB_HOST")
-            port = os.getenv("DB_PORT", "5432")
-            name = os.getenv("DB_NAME")
-            user = os.getenv("DB_USER")
-            password = os.getenv("DB_PASSWORD")
-            return f"postgresql://{user}:{password}@{host}:{port}/{name}"
-
-        # Default to SQLite for development
-        db_path = os.getenv("SQLITE_DB_PATH", "data/careercopilot.db")
-        os.makedirs(os.path.dirname(db_path), exist_ok=True)
+        # Fallback to local SQLite for offline dev
+        db_path = os.getenv("SQLITE_DB_PATH", "./app.db")
+        # Ensure directory exists if path contains directories
+        if os.path.dirname(db_path):
+            os.makedirs(os.path.dirname(db_path), exist_ok=True)
         return f"sqlite:///{db_path}"
 
     def create_tables(self):
@@ -102,6 +100,9 @@ class DatabaseConfig:
 
 # Global database configuration
 db_config = DatabaseConfig()
+
+# Expose session factory for direct use (e.g. in tests)
+SessionLocal = db_config.SessionLocal
 
 
 def get_db() -> Generator[Session, None, None]:
@@ -148,9 +149,7 @@ def check_database_health() -> dict:
                 "status": "healthy",
                 "database_type": "sqlite" if db_config.is_sqlite else "postgresql",
                 "url": (
-                    db_config.database_url.split("@")[-1]
-                    if "@" in db_config.database_url
-                    else db_config.database_url
+                    "***"  # Mask URL for security in logs/responses
                 ),
             }
     except Exception as e:

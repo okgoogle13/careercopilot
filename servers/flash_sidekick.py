@@ -84,9 +84,9 @@ class FlashSidekickServer:
 
     def list_tools(self):
         return [
-            {"name": "quick_summarize", "description": "Fast (Flash-Lite): Summarize text.", "inputSchema": {"type": "object", "properties": {"text": {"type": "string"}}, "required": ["text"]}},
-            {"name": "generate_idf", "description": "Fast (Flash-Lite): Generate Python IDF.", "inputSchema": {"type": "object", "properties": {"code": {"type": "string"}}, "required": ["code"]}},
-            {"name": "consult_pro", "description": "Smart (Pro 2.5): Deep reasoning/coding.", "inputSchema": {"type": "object", "properties": {"query": {"type": "string"}, "context": {"type": "string"}}, "required": ["query"]}}
+            {"name": "quick_summarize", "description": "Token-saver: Use for long inputs, bulk summarization, or routine transforms. Avoid for creative design or code review (keep in Claude).", "inputSchema": {"type": "object", "properties": {"text": {"type": "string"}}, "required": ["text"]}},
+            {"name": "generate_idf", "description": "Token-saver: Use for code extraction/IDF generation on large files. Avoid for creative design or code review (keep in Claude).", "inputSchema": {"type": "object", "properties": {"code": {"type": "string"}}, "required": ["code"]}},
+            {"name": "consult_pro", "description": "Gemini 3 Pro: Use for large/complex tasks to preserve Claude tokens. Avoid for creative design or code review (keep in Claude).", "inputSchema": {"type": "object", "properties": {"query": {"type": "string"}, "context": {"type": "string"}}, "required": ["query"]}}
         ]
 
     def call_tool(self, name, args):

@@ -1,7 +1,27 @@
 # Frontend Migration Status
 
-**Last Updated**: 2025-11-02
-**Status**: ✅ **PREPARATION COMPLETE - READY FOR MIGRATION**
+**Last Updated**: 2026-01-19
+**Status**: ⚠️ **INVENTORY COMPLETE - MIGRATION QUEUE REQUIRED**
+
+---
+
+## 🔍 Latest Inventory Snapshot (2026-01-19)
+
+**Command:** `cd frontend && npx ts-node scripts/component-inventory.ts`
+
+**Results Summary**
+- Total components: 56
+- By category: `ui` 15, `other` 41
+- Top used components: PageHeader (8), M3Button (3), KeywordTag (2), ApplicationCard (1), ChartPane (1)
+- Unused components: 43
+- Migration status: migrated 5, not_migrated 2, unknown 49, expressive 0
+- Expressive adoption: 0% fully adopted (0/56)
+
+**Immediate Actions**
+1) Generate migration queue from top 20 used components
+2) Identify which “other” components should remain feature-scoped
+3) Add stories for reusable components missing Storybook coverage
+4) Use `docs/development/FRONTEND_MIGRATION_QUEUE.md` as the working list
 
 ---
 

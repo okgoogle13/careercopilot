@@ -117,5 +117,5 @@ kit._
     file.
 - [ ] **Task: Create CI Workflow**
   - **File:** `.github/workflows/ci.yml`
-  - **Action:** Create a workflow to run `npm install`, `npm run lint`,
-    `npm run test`, and `npm run build` on push.
+  - **Action:** Create a workflow to run `yarn install`, `yarn lint`,
+    `yarn test`, and `yarn build` on push.

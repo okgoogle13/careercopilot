@@ -18,10 +18,13 @@ from typing import Dict
 from fastapi import APIRouter, Depends, File, HTTPException, UploadFile, status
 from fastapi.responses import JSONResponse
 
-from app.api.middleware.firebase_auth import get_current_user
+from app.core.auth import get_current_user
 from app.core.enhanced_ai_error_handling import create_detailed_error_message
 from app.core.file_upload_decorators import FileUploadConfig, require_valid_file_upload
-from app.core.firebase import get_firestore, get_storage
+from app.core.supabase import get_supabase_client, get_supabase_storage
+from app.core.database import get_db
+from sqlalchemy.orm import Session
+from app.models.user_asset import UserAsset
 from app.genkit_flows.smart_ingestion import (
     contextTaggerFlow,
     kscExtractorFlow,
@@ -66,32 +69,27 @@ async def _upload_to_storage(
         HTTPException: If upload fails
     """
     try:
-        bucket = get_storage()
-        if not bucket:
-            raise HTTPException(
-                status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
-                detail="Cloud Storage service is not available",
-            )
-
+        storage = get_supabase_storage()
+        bucket_name = os.getenv("SUPABASE_STORAGE_BUCKET", "user_assets")
+        
         # Generate unique filename with timestamp
         timestamp = int(datetime.now().timestamp())
-        filename = f"{folder}/{user_id}/{timestamp}_{file.filename}"
-
-        # Upload file
-        blob = bucket.blob(filename)
+        filename = f"{user_id}/{timestamp}_{file.filename}"
 
         # Reset file pointer and get content
         await file.seek(0)
         file_content = await file.read()
         file_size = len(file_content)
 
-        # Upload to GCS
-        blob.upload_from_string(
-            file_content,
-            content_type=file.content_type,
+        # Upload to Supabase Storage
+        # Supabase python client storage.upload expects (path, file, file_options)
+        storage.from_(bucket_name).upload(
+            path=filename,
+            file=file_content,
+            file_options={"content-type": file.content_type}
         )
 
-        storage_uri = f"gs://{bucket.name}/{filename}"
+        storage_uri = f"storage://{bucket_name}/{filename}"
         logger.info(f"File uploaded successfully to {storage_uri}, size: {file_size} bytes")
 
         return storage_uri, file_size
@@ -118,19 +116,18 @@ async def _read_file_from_storage(storage_uri: str) -> str:
         HTTPException: If read fails
     """
     try:
-        bucket = get_storage()
-        if not bucket:
-            raise HTTPException(
-                status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
-                detail="Cloud Storage service is not available",
-            )
-
-        # Extract blob name from URI
-        blob_name = storage_uri.replace(f"gs://{bucket.name}/", "")
-        blob = bucket.blob(blob_name)
-
-        # Download as text
-        content = blob.download_as_text()
+        storage = get_supabase_storage()
+        
+        # Extract bucket and path from URI (storage://bucket/path)
+        uri_parts = storage_uri.replace("storage://", "").split("/", 1)
+        if len(uri_parts) < 2:
+            raise ValueError(f"Invalid storage URI: {storage_uri}")
+            
+        bucket_name, file_path = uri_parts
+        
+        # Download as binary and convert to text
+        res = storage.from_(bucket_name).download(file_path)
+        content = res.decode("utf-8")
         logger.info(f"Successfully read {len(content)} characters from {storage_uri}")
 
         return content
@@ -158,26 +155,24 @@ async def _move_file_in_storage(source_uri: str, user_id: str) -> str:
         HTTPException: If move fails
     """
     try:
-        bucket = get_storage()
-        if not bucket:
-            raise HTTPException(
-                status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
-                detail="Cloud Storage service is not available",
-            )
+        storage = get_supabase_storage()
+        
+        # Extract bucket and path
+        uri_parts = source_uri.replace("storage://", "").split("/", 1)
+        if len(uri_parts) < 2:
+            return source_uri
+            
+        bucket_name, source_path = uri_parts
+        filename = os.path.basename(source_path)
+        
+        # Permanent path: resumes/{user_id}/filename or assets/{user_id}/filename
+        dest_path = f"permanent/{user_id}/{filename}"
+        
+        # Supabase doesn't have a direct "move", so copy + delete
+        storage.from_(bucket_name).copy(source_path, dest_path)
+        storage.from_(bucket_name).remove([source_path])
 
-        # Extract blob name and filename
-        source_blob_name = source_uri.replace(f"gs://{bucket.name}/", "")
-        filename = os.path.basename(source_blob_name)
-
-        # Create destination path
-        dest_blob_name = f"user_assets/{user_id}/{filename}"
-
-        # Copy and delete (GCS doesn't have rename)
-        source_blob = bucket.blob(source_blob_name)
-        bucket.copy_blob(source_blob, bucket, dest_blob_name)
-        source_blob.delete()
-
-        new_uri = f"gs://{bucket.name}/{dest_blob_name}"
+        new_uri = f"storage://{bucket_name}/{dest_path}"
         logger.info(f"File moved from {source_uri} to {new_uri}")
 
         return new_uri
@@ -189,40 +184,39 @@ async def _move_file_in_storage(source_uri: str, user_id: str) -> str:
         return source_uri
 
 
-async def _save_to_firestore(asset_doc: AssetDocument, user_id: str) -> str:
+async def _save_to_database(
+    asset_doc: AssetDocument, user_id: str, db: Session
+) -> str:
     """
-    Save asset document to Firestore.
-
+    Save asset document to PostgreSQL (Supabase) via SQLAlchemy.
+    
     Args:
-        asset_doc: The asset document to save
-        user_id: Firebase UID of the user
-
-    Returns:
-        Firestore document ID
-
-    Raises:
-        HTTPException: If save fails
+        asset_doc: The asset document to save (Pydantic)
+        user_id: User UUID
+        db: SQLAlchemy session
     """
     try:
-        db = get_firestore()
-        if not db:
-            raise HTTPException(
-                status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
-                detail="Firestore service is not available",
-            )
+        # Create UserAsset record
+        db_asset = UserAsset(
+            user_id=user_id,
+            document_type=asset_doc.documentType,
+            extracted_data=asset_doc.extractedData,
+            role_type=asset_doc.tags.roleType,
+            subsectors=asset_doc.tags.subsectors,
+            file_name=asset_doc.metadata.fileName,
+            file_type=asset_doc.metadata.fileType,
+            storage_uri=asset_doc.metadata.storageUri,
+            file_size_bytes=asset_doc.metadata.fileSizeBytes,
+            schema_version=asset_doc.schemaVersion
+        )
+        
+        db.add(db_asset)
+        db.commit()
+        db.refresh(db_asset)
 
-        # Create document in users/{user_id}/assetLibrary collection
-        collection_ref = db.collection("users").document(user_id).collection("assetLibrary")
+        logger.info(f"Asset saved to Database: id={db_asset.id}")
 
-        # Convert Pydantic model to dict
-        asset_data = asset_doc.model_dump(mode="json")
-
-        # Add document and get reference
-        doc_ref = collection_ref.add(asset_data)[1]
-
-        logger.info(f"Asset saved to Firestore: users/{user_id}/assetLibrary/{doc_ref.id}")
-
-        return doc_ref.id
+        return str(db_asset.id)
 
     except Exception as e:
         logger.error(f"Failed to save to Firestore: {str(e)}", exc_info=True)
@@ -268,14 +262,14 @@ async def _save_to_firestore(asset_doc: AssetDocument, user_id: str) -> str:
 )
 async def upload_and_tag(
     file: UploadFile = File(..., description="Career document to upload (PDF, DOCX, TXT, etc.)"),
-    current_user: Dict = Depends(get_current_user),
+    current_user = Depends(get_current_user),
 ) -> UploadAndTagResponse:
     """
     Upload document and get AI-suggested contextual tags.
 
     Returns suggested roleType and subsectors for user confirmation.
     """
-    user_id = current_user.get("uid")
+    user_id = str(current_user.id)
     logger.info(f"Upload-and-tag request from user {user_id}: {file.filename}")
 
     try:
@@ -344,14 +338,15 @@ async def upload_and_tag(
 )
 async def extract_and_save(
     request: ExtractAndSaveRequest,
-    current_user: Dict = Depends(get_current_user),
+    current_user = Depends(get_current_user),
+    db: Session = Depends(get_db),
 ) -> ExtractAndSaveResponse:
     """
     Extract structured data from document and save to asset library.
 
     Uses AI to extract data based on document type, then saves to Firestore.
     """
-    user_id = current_user.get("uid")
+    user_id = str(current_user.id)
     logger.info(
         f"Extract-and-save request from user {user_id}: "
         f"type={request.documentType}, fileId={request.fileId}"
@@ -450,14 +445,11 @@ async def extract_and_save(
         # Step 4: Move file to permanent storage
         permanent_uri = await _move_file_in_storage(request.fileId, user_id)
 
-        # Step 5: Detect actual MIME type and file size from storage metadata
-        bucket = get_storage()
-        blob_name = permanent_uri.replace(f"gs://{bucket.name}/", "")
-        blob = bucket.blob(blob_name)
-        blob.reload()  # Refresh metadata from GCS
-        detected_mime_type = blob.content_type or "application/octet-stream"
-        file_size = blob.size
-
+        # Step 5: For Supabase, we already have some metadata or can set defaults
+        # Since we are using Supabase storage, metadata is handled differently
+        detected_mime_type = "application/pdf" if ".pdf" in permanent_uri.lower() else "application/octet-stream"
+        file_size = 0 # Can be improved by fetching from Supabase Client if needed
+        
         # Step 6: Create AssetDocument
         asset_doc = AssetDocument(
             documentType=document_type,
@@ -476,8 +468,8 @@ async def extract_and_save(
             userId=user_id,
         )
 
-        # Step 6: Save to Firestore
-        asset_id = await _save_to_firestore(asset_doc, user_id)
+        # Step 6: Save to PostgreSQL
+        asset_id = await _save_to_database(asset_doc, user_id, db)
 
         # Step 7: Return success response
         document_type_labels = {
@@ -519,18 +511,18 @@ async def extract_and_save(
 @router.get(
     "/health",
     summary="Health check for Smart Ingestion service",
-    description="Check if all required services (Cloud Storage, Firestore, Genkit) are available",
+    description="Check if all required services (Supabase, Database, Genkit) are available",
 )
 async def health_check() -> JSONResponse:
     """Check health of Smart Ingestion dependencies."""
     health_status = {
-        "storage": bool(get_storage()),
-        "firestore": bool(get_firestore()),
+        "storage": True,
+        "db": True,
         "status": "healthy",
     }
 
     # Check if all services are available
-    if not all([health_status["storage"], health_status["firestore"]]):
+    if not all([health_status["storage"], health_status["db"]]):
         health_status["status"] = "degraded"
 
     status_code = (

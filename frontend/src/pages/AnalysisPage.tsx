@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { Box, Typography, TextField, Button, Card, Alert, CircularProgress, Chip } from '@mui/material';
+import { EvidenceUploader } from '@/components/EvidenceUploader';
+import { Box, Typography, TextField, Button, Card, Alert, CircularProgress, Chip, Divider, Avatar } from '@mui/material';
 import { toast } from 'sonner';
+import { Sparkles, Building, Globe, Target, MessageCircle, Heart } from 'lucide-react';
 
 interface AtsResult {
     overallScore: number;
@@ -14,18 +16,42 @@ interface AtsResult {
     missing_keywords: string[];
 }
 
-interface OptimizedResult {
-    optimized_text: string;
+interface CorporateProfile {
+    name: string;
+    mission_statement: string;
+    core_values: string[];
+    strategic_focus: string;
+    communication_style: string;
+    known_for: string;
+}
+
+interface StrategyResult {
+    job_details: any;
+    corporate_profile: CorporateProfile | null;
+    optimized_resume: {
+        resume_text: string;
+    };
+    strategy_summary: string;
+    gap_analysis?: {
+        missing_skills: string[];
+        evidence_found: string[];
+        strategy_advice: string;
+    };
 }
 
 export const AnalysisPage: React.FC = () => {
+    // Inputs
+    const [jobUrl, setJobUrl] = useState('');
     const [jobDescription, setJobDescription] = useState('');
-    const [companyUrl, setCompanyUrl] = useState('');
     const [resumeText, setResumeText] = useState('');
+
+    // Results
     const [atsResult, setAtsResult] = useState<AtsResult | null>(null);
-    const [optimizedResume, setOptimizedResume] = useState<string | null>(null);
+    const [strategyResult, setStrategyResult] = useState<StrategyResult | null>(null);
+
+    // Loading States
     const [isAnalyzing, setIsAnalyzing] = useState(false);
-    const [isOptimizing, setIsOptimizing] = useState(false);
+    const [isGeneratingStrategy, setIsGeneratingStrategy] = useState(false);
 
     const handleAnalysis = async () => {
         if (!resumeText || !jobDescription) {
@@ -35,7 +61,6 @@ export const AnalysisPage: React.FC = () => {
 
         setIsAnalyzing(true);
         setAtsResult(null);
-        setOptimizedResume(null);
 
         try {
             const response = await fetch('/api/v1/analysis/ats-score', {
@@ -60,34 +85,43 @@ export const AnalysisPage: React.FC = () => {
         }
     };
 
-    const handleOptimize = async () => {
-        if (!jobDescription) {
-            toast.error('Please run analysis first');
+    const handleHolisticStrategy = async () => {
+        if (!jobUrl || !resumeText) {
+            toast.error('Please provide a Job URL and Resume Text');
             return;
         }
 
-        setIsOptimizing(true);
+        setIsGeneratingStrategy(true);
+        setStrategyResult(null);
 
         try {
-            const response = await fetch('/api/v1/analysis/optimize-resume', {
+            const response = await fetch('/api/v1/analysis/strategy', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    job_description: jobDescription,
-                    company_url: companyUrl || undefined
+                    job_url: jobUrl,
+                    resume_text: resumeText,
+                    missing_keywords: atsResult?.missing_keywords || []
                 })
             });
 
-            if (!response.ok) throw new Error('Optimization failed');
+            if (!response.ok) throw new Error('Strategy Generation failed');
 
-            const result: OptimizedResult = await response.json();
-            setOptimizedResume(result.optimized_text);
-            toast.success('Resume optimized!');
+            const result = await response.json();
+            setStrategyResult(result);
+            toast.success('Strategy Generated!');
+
+            // Auto-fill JD if scraping worked
+            if (result.job_details) {
+                const jdText = `Company: ${result.corporate_profile?.name || 'Unknown'}\nRole: ${result.job_details.role_title}\nTasks: ${(result.job_details.key_responsibilities || []).join(', ')}`;
+                setJobDescription(jdText);
+            }
+
         } catch (error) {
-            toast.error('Optimization failed. Please try again.');
+            toast.error('Strategy generation failed. Please check the URL.');
             console.error(error);
         } finally {
-            setIsOptimizing(false);
+            setIsGeneratingStrategy(false);
         }
     };
 
@@ -100,11 +134,20 @@ export const AnalysisPage: React.FC = () => {
                     mb: 4,
                     fontWeight: 'var(--sys-type-weight-bold)',
                     color: 'var(--sys-color-on-surface)',
-                    fontFamily: 'var(--sys-type-display-family)'
+                    fontFamily: 'var(--sys-type-display-family)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 2
                 }}
             >
-                Resume Analysis & Optimization
+                <Sparkles size={32} color="var(--sys-color-primary)" />
+                Application Intelligence
             </Typography>
+
+            {/* NEW: Evidence Uploader */}
+            <Box sx={{ mb: 4 }}>
+                <EvidenceUploader />
+            </Box>
 
             {/* Input Section */}
             <Card sx={{
@@ -115,8 +158,22 @@ export const AnalysisPage: React.FC = () => {
                 backgroundColor: 'var(--sys-color-surface-container-low)'
             }}>
                 <Typography variant="h6" sx={{ mb: 2, color: 'var(--sys-color-primary)' }}>
-                    Step 1: Enter Your Information
+                    Step 1: Input Details
                 </Typography>
+
+                <TextField
+                    fullWidth
+                    label="Job Listing URL (Recommended for Deep Research)"
+                    placeholder="https://linkedin.com/jobs/view/..."
+                    value={jobUrl}
+                    onChange={(e) => setJobUrl(e.target.value)}
+                    sx={{
+                        mb: 3,
+                        '& .MuiOutlinedInput-root': {
+                            borderRadius: 'var(--sys-shape-corner-large)',
+                        }
+                    }}
+                />
 
                 <TextField
                     fullWidth
@@ -134,204 +191,197 @@ export const AnalysisPage: React.FC = () => {
                     }}
                 />
 
+                <Box sx={{ display: 'flex', gap: 2, alignItems: 'center', mb: 2 }}>
+                    <div className="h-px bg-outline-variant flex-1"></div>
+                    <span className="text-on-surface-variant text-sm font-bold opacity-50">OR MANUAL ENTRY</span>
+                    <div className="h-px bg-outline-variant flex-1"></div>
+                </Box>
+
                 <TextField
                     fullWidth
                     multiline
-                    rows={6}
-                    label="Job Description"
+                    rows={4}
+                    label="Manual Job Description"
                     value={jobDescription}
                     onChange={(e) => setJobDescription(e.target.value)}
-                    placeholder="Paste the job description here..."
+                    placeholder="Paste job description if URL is not available..."
                     sx={{
                         mb: 2,
+                        opacity: jobUrl ? 0.6 : 1,
                         '& .MuiOutlinedInput-root': {
                             borderRadius: 'var(--sys-shape-corner-large)',
                         }
                     }}
                 />
 
-                <TextField
-                    fullWidth
-                    label="Company Website (Optional)"
-                    placeholder="https://company.com"
-                    value={companyUrl}
-                    onChange={(e) => setCompanyUrl(e.target.value)}
-                    helperText="Add company URL for targeted optimization with company-specific keywords and tone"
-                    sx={{
-                        mb: 3,
-                        '& .MuiOutlinedInput-root': {
-                            borderRadius: 'var(--sys-shape-corner-large)',
-                        }
-                    }}
-                />
-
-                <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
+                <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', mt: 2 }}>
                     <Button
                         variant="contained"
+                        onClick={handleHolisticStrategy}
+                        disabled={isGeneratingStrategy || !jobUrl || !resumeText}
+                        sx={{
+                            borderRadius: 'var(--sys-shape-corner-full)',
+                            px: 4,
+                            py: 1.5,
+                            backgroundColor: 'var(--sys-color-tertiary)',
+                            color: 'var(--sys-color-on-tertiary)',
+                            transition: 'all 0.2s',
+                            '&:hover': {
+                                transform: 'scale(1.02)',
+                                backgroundColor: 'var(--sys-color-tertiary-container)',
+                            }
+                        }}
+                    >
+                        {isGeneratingStrategy ? <CircularProgress size={24} color="inherit" /> : '🚀 Generate Holistic Strategy'}
+                    </Button>
+
+                    <Button
+                        variant="outlined"
                         onClick={handleAnalysis}
                         disabled={isAnalyzing || !resumeText || !jobDescription}
                         sx={{
                             borderRadius: 'var(--sys-shape-corner-full)',
                             px: 4,
                             py: 1.5,
-                            backgroundColor: 'var(--sys-color-primary)',
-                            transition: 'all var(--sys-motion-duration-medium-1) var(--sys-motion-easing-expressive-spring)',
+                            borderColor: 'var(--sys-color-outline)',
+                            color: 'var(--sys-color-on-surface)',
                             '&:hover': {
-                                transform: 'scale(1.02)',
-                                backgroundColor: 'var(--sys-color-primary-container)',
+                                backgroundColor: 'var(--sys-color-surface-container-high)',
                             }
                         }}
                     >
-                        {isAnalyzing ? <CircularProgress size={24} /> : 'Analyze Resume'}
+                        {isAnalyzing ? <CircularProgress size={24} /> : 'Quick ATS Check'}
                     </Button>
-
-                    {atsResult && (
-                        <Button
-                            variant="contained"
-                            color="secondary"
-                            onClick={handleOptimize}
-                            disabled={isOptimizing}
-                            sx={{
-                                borderRadius: 'var(--sys-shape-corner-full)',
-                                px: 4,
-                                py: 1.5,
-                                backgroundColor: 'var(--sys-color-secondary)',
-                                transition: 'all var(--sys-motion-duration-medium-1) var(--sys-motion-easing-expressive-spring)',
-                                '&:hover': {
-                                    transform: 'scale(1.02)',
-                                    backgroundColor: 'var(--sys-color-secondary-container)',
-                                }
-                            }}
-                        >
-                            {isOptimizing ? <CircularProgress size={24} /> : '✨ Auto-Tailor Resume'}
-                        </Button>
-                    )}
                 </Box>
-            </Card>
+            </Card >
 
-            {/* Results Section */}
-            {atsResult && (
-                <Card sx={{
-                    p: 3,
-                    mb: 3,
-                    borderRadius: 'var(--sys-shape-pebble)',
-                    boxShadow: 'var(--sys-elevation-level2)',
-                    backgroundColor: 'var(--sys-color-surface-container)'
-                }}>
-                    <Typography variant="h5" sx={{ mb: 2, color: 'var(--sys-color-on-surface)' }}>
-                        ATS Analysis Results
-                    </Typography>
+            {/* Strategy Results */}
+            {
+                strategyResult && strategyResult.corporate_profile && (
+                    <Box sx={{ mb: 4, animation: 'fadeIn 0.5s ease-out' }}>
 
-                    <Box sx={{ mb: 3 }}>
-                        <Typography variant="h2" sx={{
-                            color: atsResult.overallScore >= 80 ? 'var(--sys-color-tertiary)' :
-                                atsResult.overallScore >= 60 ? 'var(--sys-color-secondary)' :
-                                    'var(--sys-color-error)',
-                            fontWeight: 'var(--sys-type-weight-bold)'
-                        }}>
-                            {atsResult.overallScore}%
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                            Overall ATS Score
-                        </Typography>
-                    </Box>
-
-                    {atsResult.missing_keywords && atsResult.missing_keywords.length > 0 && (
-                        <Alert
-                            severity="warning"
-                            sx={{
-                                mb: 2,
-                                borderRadius: 'var(--sys-shape-corner-large)',
-                            }}
-                        >
-                            <Typography variant="subtitle2" sx={{ mb: 1 }}>
-                                Missing Keywords ({atsResult.missing_keywords.length})
-                            </Typography>
-                            <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
-                                {atsResult.missing_keywords.map((keyword, idx) => (
-                                    <Chip
-                                        key={idx}
-                                        label={keyword}
-                                        size="small"
-                                        sx={{
-                                            backgroundColor: 'var(--sys-color-error-container)',
-                                            color: 'var(--sys-color-on-error-container)'
-                                        }}
-                                    />
-                                ))}
-                            </Box>
+                        {/* Strategy Summary Banner */}
+                        <Alert icon={<Target className="w-5 h-5" />} severity="info" sx={{ mb: 3, borderRadius: '16px' }}>
+                            <Typography variant="subtitle2" fontWeight="bold">Strategy Applied</Typography>
+                            {strategyResult.strategy_summary}
                         </Alert>
-                    )}
 
-                    {atsResult.matched_keywords && atsResult.matched_keywords.length > 0 && (
-                        <Box sx={{ mb: 2 }}>
-                            <Typography variant="subtitle2" sx={{ mb: 1, color: 'var(--sys-color-tertiary)' }}>
-                                Matched Keywords ({atsResult.matched_keywords.length})
-                            </Typography>
-                            <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
-                                {atsResult.matched_keywords.slice(0, 10).map((keyword, idx) => (
-                                    <Chip
-                                        key={idx}
-                                        label={keyword}
-                                        size="small"
-                                        sx={{
-                                            backgroundColor: 'var(--sys-color-tertiary-container)',
-                                            color: 'var(--sys-color-on-tertiary-container)'
-                                        }}
-                                    />
-                                ))}
-                            </Box>
-                        </Box>
-                    )}
-                </Card>
-            )}
-
-            {/* Optimized Resume Section */}
-            {optimizedResume && (
-                <Card sx={{
-                    p: 3,
-                    borderRadius: 'var(--sys-shape-tech)',
-                    boxShadow: 'var(--sys-elevation-level3)',
-                    backgroundColor: 'var(--sys-color-surface-container-high)'
-                }}>
-                    <Typography variant="h5" sx={{ mb: 2, color: 'var(--sys-color-primary)' }}>
-                        ✨ Optimized Resume
-                    </Typography>
-                    <Typography
-                        component="pre"
-                        sx={{
-                            whiteSpace: 'pre-wrap',
-                            fontFamily: 'var(--sys-type-body-family)',
-                            fontSize: 'var(--sys-type-body-large-size)',
-                            lineHeight: 1.6,
-                            color: 'var(--sys-color-on-surface)',
-                            backgroundColor: 'var(--sys-color-surface)',
-                            p: 3,
-                            borderRadius: 'var(--sys-shape-corner-large)',
+                        {/* Corporate Intelligence Card */}
+                        <Card sx={{
+                            p: 0,
+                            mb: 3,
+                            borderRadius: '24px',
+                            overflow: 'hidden',
+                            boxShadow: 'var(--sys-elevation-level2)',
+                            backgroundColor: 'var(--sys-color-surface-container)',
                             border: '1px solid var(--sys-color-outline-variant)'
-                        }}
-                    >
-                        {optimizedResume}
-                    </Typography>
+                        }}>
+                            <Box sx={{
+                                p: 3,
+                                background: 'linear-gradient(135deg, var(--sys-color-primary-container) 0%, var(--sys-color-surface-container) 100%)',
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: 2
+                            }}>
+                                <Building className="w-8 h-8 text-primary" />
+                                <Box>
+                                    <Typography variant="h5" fontWeight="bold" color="var(--sys-color-on-surface)">
+                                        {strategyResult.corporate_profile.name}
+                                    </Typography>
+                                    <Typography variant="caption" sx={{ opacity: 0.7, letterSpacing: '0.05em', textTransform: 'uppercase' }}>
+                                        Corporate Intelligence
+                                    </Typography>
+                                </Box>
+                            </Box>
 
-                    <Box sx={{ mt: 3, display: 'flex', gap: 2 }}>
-                        <Button
-                            variant="outlined"
-                            onClick={() => {
-                                navigator.clipboard.writeText(optimizedResume);
-                                toast.success('Copied to clipboard!');
-                            }}
+                            <Box sx={{ p: 3, display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 3 }}>
+
+                                {/* Mission */}
+                                <Box>
+                                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1, color: 'var(--sys-color-tertiary)' }}>
+                                        <Globe size={18} />
+                                        <Typography variant="subtitle2" fontWeight="bold">Mission</Typography>
+                                    </Box>
+                                    <Typography variant="body2" color="text.secondary">
+                                        {strategyResult.corporate_profile.mission_statement}
+                                    </Typography>
+                                </Box>
+
+                                {/* Communication Style */}
+                                <Box>
+                                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1, color: 'var(--sys-color-secondary)' }}>
+                                        <MessageCircle size={18} />
+                                        <Typography variant="subtitle2" fontWeight="bold">Communication Style</Typography>
+                                    </Box>
+                                    <Chip label={strategyResult.corporate_profile.communication_style} size="small" sx={{ bgcolor: 'var(--sys-color-secondary-container)' }} />
+                                </Box>
+
+                                {/* Values */}
+                                <Box sx={{ gridColumn: '1 / -1' }}>
+                                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1, color: 'var(--sys-color-error)' }}>
+                                        <Heart size={18} />
+                                        <Typography variant="subtitle2" fontWeight="bold">Core Values</Typography>
+                                    </Box>
+                                    <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
+                                        {strategyResult.corporate_profile.core_values.map((val, idx) => (
+                                            <Chip key={idx} label={val} size="small" variant="outlined" />
+                                        ))}
+                                    </Box>
+                                </Box>
+                            </Box>
+                        </Card>
+                    </Box>
+                )
+            }
+
+            {/* Results Section (ATS or Strategy Optimized Resume) */}
+            {
+                (strategyResult || atsResult) && (
+                    <Card sx={{
+                        p: 3,
+                        borderRadius: 'var(--sys-shape-tech)',
+                        boxShadow: 'var(--sys-elevation-level3)',
+                        backgroundColor: 'var(--sys-color-surface-container-high)'
+                    }}>
+                        <Typography variant="h5" sx={{ mb: 2, color: 'var(--sys-color-primary)' }}>
+                            ✨ Optimized Resume
+                        </Typography>
+                        <Typography
+                            component="pre"
                             sx={{
-                                borderRadius: 'var(--sys-shape-corner-full)',
-                                borderColor: 'var(--sys-color-primary)',
-                                color: 'var(--sys-color-primary)'
+                                whiteSpace: 'pre-wrap',
+                                fontFamily: 'var(--sys-type-body-family)',
+                                fontSize: 'var(--sys-type-body-large-size)',
+                                lineHeight: 1.6,
+                                color: 'var(--sys-color-on-surface)',
+                                backgroundColor: 'var(--sys-color-surface)',
+                                p: 3,
+                                borderRadius: 'var(--sys-shape-corner-large)',
+                                border: '1px solid var(--sys-color-outline-variant)'
                             }}
                         >
-                            📋 Copy to Clipboard
-                        </Button>
-                    </Box>
-                </Card>
-            )}
-        </Box>
+                            {strategyResult ? strategyResult.optimized_resume.resume_text : ''}
+                        </Typography>
+
+                        <Box sx={{ mt: 3, display: 'flex', gap: 2 }}>
+                            <Button
+                                variant="outlined"
+                                onClick={() => {
+                                    navigator.clipboard.writeText(strategyResult ? strategyResult.optimized_resume.resume_text : '');
+                                    toast.success('Copied to clipboard!');
+                                }}
+                                sx={{
+                                    borderRadius: 'var(--sys-shape-corner-full)',
+                                    borderColor: 'var(--sys-color-primary)',
+                                    color: 'var(--sys-color-primary)'
+                                }}
+                            >
+                                📋 Copy to Clipboard
+                            </Button>
+                        </Box>
+                    </Card>
+                )
+            }
+        </Box >
     );
 };
