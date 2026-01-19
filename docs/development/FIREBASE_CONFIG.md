@@ -65,7 +65,7 @@ Please update your .env file with real Firebase credentials.
 
 ### 3. Verify Configuration
 
-1. Start the development server: `npm run dev`
+1. Start the development server: `yarn dev`
 2. Check browser console for Firebase initialization messages
 3. Verify no configuration errors appear
 

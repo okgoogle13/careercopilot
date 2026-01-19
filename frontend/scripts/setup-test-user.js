@@ -81,7 +81,7 @@ async function setupTestUser() {
         console.log('📝 Next steps:');
         console.log('  1. Copy .env.test.example to .env.test');
         console.log('  2. Update TEST_USER_EMAIL and TEST_USER_PASSWORD in .env.test');
-        console.log('  3. Run: npm run test:e2e\n');
+        console.log('  3. Run: yarn test:e2e\n');
       } catch (createError) {
         console.error('❌ Failed to create test user:', createError.message);
         process.exit(1);

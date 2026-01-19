@@ -14,9 +14,44 @@ from datetime import datetime, timezone
 from functools import wraps
 from typing import Any, Callable, Dict, List, Optional
 
-import psutil
+try:
+    import psutil
+except ImportError:  # pragma: no cover - optional dependency in CI/test envs
+    psutil = None
 from fastapi import FastAPI, Request, Response
-from prometheus_client import CONTENT_TYPE_LATEST, REGISTRY, Counter, Histogram, generate_latest
+try:
+    from prometheus_client import (
+        CONTENT_TYPE_LATEST,
+        REGISTRY,
+        Counter,
+        Histogram,
+        generate_latest,
+    )
+except ImportError:  # pragma: no cover - optional dependency in CI/test envs
+    CONTENT_TYPE_LATEST = "text/plain"
+
+    class _NoopMetric:
+        def __init__(self, *args, **kwargs):
+            pass
+
+        def labels(self, **kwargs):
+            return self
+
+        def inc(self, amount: int = 1):
+            return None
+
+        def observe(self, value: float):
+            return None
+
+    class _NoopRegistry:
+        _collector_to_names = {}
+
+    REGISTRY = _NoopRegistry()
+    Counter = _NoopMetric
+    Histogram = _NoopMetric
+
+    def generate_latest(_registry):
+        return b""
 from starlette.middleware.base import BaseHTTPMiddleware
 
 logger = logging.getLogger(__name__)
@@ -435,6 +470,10 @@ class SystemMonitor:
 
     async def _collect_system_metrics(self):
         """Collect system resource metrics"""
+        if psutil is None:
+            logger.debug("psutil not available; skipping system metrics collection")
+            return
+
         try:
             # CPU metrics
             cpu_percent = psutil.cpu_percent(interval=1)

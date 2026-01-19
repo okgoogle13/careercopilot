@@ -160,6 +160,17 @@ jobs:
           path: frontend/dist/
           retention-days: 1
 
+  docs-policy:
+    name: Docs Policy Check
+    runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch' || github.event_name == 'push' || github.event_name == 'pull_request'
+    needs: [changes]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Run docs policy check
+        run: ./scripts/check-docs.sh
+
   extension-build:
     name: Extension Build
     runs-on: ubuntu-latest

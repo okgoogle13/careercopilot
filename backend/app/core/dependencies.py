@@ -1,86 +1,48 @@
 """
-dependencies.py (Refactore)
+dependencies.py
 
 FastAPI dependencies for authentication, authorization, and data access.
+Now using Supabase-aligned auth.
 """
 
-import os
+import logging
+from typing import Optional
+from fastapi import Depends, Request
+from sqlalchemy.orm import Session
 
-import firebase_admin
-from fastapi import Depends, HTTPException, Request, status
-from fastapi.security import OAuth2PasswordBearer
-from firebase_admin import auth
+from app.core.database import get_db
+from app.core.auth import get_current_user as supabase_get_current_user
+from app.core.auth import get_current_user_optional as supabase_get_current_user_optional
+from app.models.database import User
+from app.services.cache_store import SQLAlchemyCacheStore
 
-from app.core.db import db  # Assuming your Firestore client is here
-from app.models import User  # Import the new User model
+logger = logging.getLogger(__name__)
 
-# Standard OAuth2 scheme pointing to a conceptual token URL
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
-
-
-def get_current_user(token: str = Depends(oauth2_scheme)) -> User:
+def get_current_user(user: User = Depends(supabase_get_current_user)) -> User:
     """
-    Validates the Firebase JWT token and returns the authenticated user model.
-    This is the primary authentication dependency for all protected endpoints.
-
-    Raises:
-        HTTPException(401): If the token is invalid, expired, or not provided.
+    Dependency to get current authenticated user.
+    Proxies to the Supabase auth implementation in app.core.auth.
     """
-    # RETAINED: Development bypass for easy local testing
-    if os.getenv("ENV", "development") == "development" and token in [
-        "dev-token",
-        "fallback-token-dev",
-    ]:
-        return User(uid="dev-user-123", email="developer@example.com", name="Development User")
+    return user
 
-    # CRITICAL FIX: Ensure Firebase app is initialized before verifying tokens.
-    # This check now assumes initialization happens at startup.
-    if not firebase_admin._apps:
-        raise HTTPException(
-            status_code=500,
-            detail="Firebase is not initialized on the server. Authentication is unavailable.",
-        )
-
-    # CRITICAL FIX: Correctly handle authentication errors.
-    # Any exception here means the token is invalid and the user is unauthorized.
-    try:
-        decoded_token = auth.verify_id_token(token)
-        return User(
-            uid=decoded_token.get("uid"),
-            email=decoded_token.get("email"),
-            name=decoded_token.get("name"),
-        )
-    except Exception as e:
-        # Instead of returning a fake user, we raise a 401 Unauthorized error.
-        # This is the secure and standard way to handle failed authentication.
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail=f"Invalid authentication credentials: {e}",
-            headers={"WWW-Authenticate": "Bearer"},
-        )
-
+def get_current_user_optional(user: Optional[User] = Depends(supabase_get_current_user_optional)) -> Optional[User]:
+    """
+    Optional authentication dependency.
+    """
+    return user
 
 def get_current_user_with_state(
     request: Request, current_user: User = Depends(get_current_user)
 ) -> User:
     """
-    RETAINED & IMPROVED: Enhanced dependency that validates the user AND sets
-    the user UID in request.state for use by other dependencies like rate limiters.
+    Enhanced dependency that validates the user AND sets
+    the user UID in request.state for use by other dependencies.
     """
-    request.state.user_uid = current_user.uid
+    request.state.user_uid = current_user.id
     return current_user
 
-
-async def get_user_document_from_firestore(
-    document_id: str, current_user: User = Depends(get_current_user)
-) -> dict:
+def get_cache(db: Session = Depends(get_db)) -> SQLAlchemyCacheStore:
     """
-    RETAINED & IMPROVED: Fetches a user-owned document from Firestore and handles
-    not-found errors, now using the Pydantic User model for type safety.
+    Dependency to get the SQLAlchemy cache store.
     """
-    uid = current_user.uid
-    doc_ref = db.collection("users").document(uid).collection("documents").document(document_id)
-    doc = await doc_ref.get()
-    if not doc.exists:
-        raise HTTPException(status_code=404, detail="Document not found")
-    return doc.to_dict()
+    return SQLAlchemyCacheStore(db)

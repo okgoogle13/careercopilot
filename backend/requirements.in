@@ -7,7 +7,7 @@ pydantic-settings
 python-multipart
 
 # Firebase and Google Cloud essentials
-firebase-admin
+
 google-api-python-client
 google-cloud-storage
 google-cloud-secret-manager
@@ -16,6 +16,8 @@ google-cloud-secret-manager
 sqlalchemy
 psycopg2-binary
 alembic
+pgvector
+supabase
 
 # Core AI Integration - Essential only
 anthropic
@@ -26,7 +28,6 @@ genkit-plugin-google-genai
 
 # Authentication
 python-jose[cryptography]
-passlib[bcrypt]
 email-validator
 PyJWT
 google-auth
@@ -65,3 +66,4 @@ celery
 # Document Intelligence
 pypdf
 defusedxml
+python-docx

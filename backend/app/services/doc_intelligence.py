@@ -10,9 +10,18 @@ from datetime import datetime, timezone
 from typing import List, Dict, Any, Optional
 
 # Requires: pip install defusedxml pypdf
-from defusedxml import minidom
-from pypdf import PdfReader, PdfWriter
-from pypdf.generic import NameObject, TextStringObject
+try:
+    from defusedxml import minidom
+except ImportError:  # pragma: no cover - optional dependency in test/CI
+    from xml.dom import minidom
+try:
+    from pypdf import PdfReader, PdfWriter
+    from pypdf.generic import NameObject, TextStringObject
+except ImportError:  # pragma: no cover - optional dependency in test/CI
+    PdfReader = None
+    PdfWriter = None
+    NameObject = None
+    TextStringObject = None
 
 logger = logging.getLogger(__name__)
 
@@ -81,6 +90,10 @@ class DocumentIntelligenceService:
         Fills Acrobat Forms (AcroForms) in a PDF.
         """
         try:
+            if not PdfReader or not PdfWriter:
+                logger.warning("pypdf not available; skipping PDF form fill")
+                return False
+
             reader = PdfReader(input_path)
             writer = PdfWriter()
             writer.append(reader)

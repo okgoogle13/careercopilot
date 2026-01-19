@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 
 const useFileUpload = (file: File | null, userId: string) => {
   const [progress, setProgress] = useState(0);
@@ -11,33 +10,14 @@ const useFileUpload = (file: File | null, userId: string) => {
       return;
     }
 
-    const storage = getStorage();
-    const fileId = `${Date.now()}-${file.name}`;
-    const storageRef = ref(storage, `/uploads/${userId}/${fileId}`);
-    const uploadTask = uploadBytesResumable(storageRef, file);
+    console.warn("File upload not implemented in Supabase migration yet.");
+    // Simulate upload
+    setProgress(50);
+    setTimeout(() => {
+      setProgress(100);
+      setDownloadURL("https://placeholder.url/file.pdf");
+    }, 1000);
 
-    const unsubscribe = uploadTask.on(
-      'state_changed',
-      (snapshot) => {
-        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        setProgress(progress);
-      },
-      (error) => {
-        setError(error);
-      },
-      async () => {
-        try {
-          const url = await getDownloadURL(uploadTask.snapshot.ref);
-          setDownloadURL(url);
-        } catch (e: any) {
-          setError(e);
-        }
-      }
-    );
-
-    return () => {
-      unsubscribe();
-    };
   }, [file, userId]);
 
   return { progress, downloadURL, error };

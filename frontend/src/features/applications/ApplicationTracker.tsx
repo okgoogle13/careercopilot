@@ -64,6 +64,7 @@ const APPLICATIONS: Application[] = [
 // ============================================================================
 
 export function ApplicationTracker() {
+  const handleUpdateStatus = (applicationId: number) => {
     // console.log('Update status for application:', applicationId);
     // TODO: Replace with actual API call
     console.log('Update status for application:', applicationId);
