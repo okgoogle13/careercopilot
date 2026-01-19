@@ -25,6 +25,7 @@ import { AssetLibrary } from './features/analysis/AssetLibrary';
 import { NotFound } from './features/not-found/NotFound';
 import { IngestionPage } from './pages/IngestionPage';
 import { JobQueue } from './pages/JobQueue';
+import { AnalysisPage } from './pages/AnalysisPage';
 import { useAuth } from './context/AuthContext';
 import texturePattern from './assets/images/texture-pattern.png';
 
@@ -147,7 +148,7 @@ export default function App() {
           />
           <Route
             path="/analysis"
-            element={<Analysis />}
+            element={<AnalysisPage />}
           />
           <Route
             path="/opportunities"
