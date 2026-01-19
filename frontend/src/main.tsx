@@ -5,8 +5,8 @@ import { ThemeProvider } from '@mui/material/styles';
 
 const queryClient = new QueryClient();
 
-// Tailwind v4 with Electric Alchemist Design System
-import './index.css';
+// Northcote Curio consolidated theme
+import './theme/northcote.css';
 
 // M3 Theme for MUI components
 import { m3Theme } from './theme/mui-theme';
