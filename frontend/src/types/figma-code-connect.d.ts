@@ -13,6 +13,7 @@ declare module '@figma/code-connect' {
     enum: <T extends string>(name: string, options: Record<string, T>) => T;
     string: (name: string) => string;
     boolean: (name: string) => boolean;
+    children: (name: string) => React.ReactNode;
   }
 
   const figma: FigmaApi;

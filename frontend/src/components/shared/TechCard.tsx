@@ -1,0 +1,1 @@
+export { TechCard } from '../../features/analysis/TechCard';
