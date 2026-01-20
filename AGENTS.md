@@ -7,6 +7,9 @@
 1.  **Strict Typing:** ALL internal data exchange must use Pydantic models (Python) or Zod schemas (TS). Never suggest raw dictionaries.
 2.  **Genkit First:** When refactoring AI logic, always prefer a `genkit_flows` implementation over standalone scripts.
 3.  **Destructive Safety:** NEVER delete code referenced by `backend/app/workers/ats_score_worker.py` without implementing a "Bridge/Wrapper" first.
+4.  **Project Standardization:** Follow the rules in `docs/CONTRIBUTING.md` and `docs/AI_RULES.md`.
+    - **No Root Clutter:** Reports go to `docs/inbox/`.
+    - **Feature Check:** New components go to `src/features/<name>/components/`.
 
 ---
 

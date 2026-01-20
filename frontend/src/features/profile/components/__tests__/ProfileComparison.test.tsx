@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, it, expect, beforeEach } from '@jest/globals';
 
-import ProfileComparison from '../../../features/profile/ProfileComparison';
+import ProfileComparison from '../ProfileComparison';
 
 describe('ProfileComparison', () => {
   const mockOnProfileSelect = jest.fn();
