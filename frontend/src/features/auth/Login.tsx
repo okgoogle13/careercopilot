@@ -30,11 +30,14 @@ export function Login() {
       navigate('/dashboard');
     } catch (err: any) {
       console.error('Login error:', err);
-      // Handle Firebase errors or generic errors
-      if (err.code === 'auth/invalid-credential') {
+      // Supabase returns error messages, not codes
+      const message = err?.message || '';
+      if (message.includes('Invalid login credentials') || message.includes('invalid_credentials')) {
         setAuthError('Invalid email or password.');
+      } else if (message.includes('Email not confirmed')) {
+        setAuthError('Please verify your email before signing in.');
       } else {
-        setAuthError('Failed to sign in. Please try again.');
+        setAuthError(err?.message || 'Failed to sign in. Please try again.');
       }
     }
   };
