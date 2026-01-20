@@ -1,5 +1,5 @@
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import React, { useEffect, useMemo } from 'react';
+import { motion, useMotionValue, useSpring, useTransform, type MotionValue } from 'framer-motion';
+import React, { useEffect } from 'react';
 
 // --- Blob Configuration ---
 interface BlobConfig {
@@ -69,6 +69,46 @@ const BLOB_CONFIGS: BlobConfig[] = [
 // Spring physics for the mouse interaction
 const MOUSE_SPRING_CONFIG = { damping: 25, stiffness: 120, mass: 0.5 };
 
+interface PlasmaBlobProps {
+    blob: BlobConfig;
+    smoothX: MotionValue<number>;
+    smoothY: MotionValue<number>;
+}
+
+const PlasmaBlob = ({ blob, smoothX, smoothY }: PlasmaBlobProps) => {
+    const x = useTransform(smoothX, (val) => val * blob.mouseMultiplier.x);
+    const y = useTransform(smoothY, (val) => val * blob.mouseMultiplier.y);
+
+    return (
+        <motion.div
+            style={{ x, y }}
+            className="absolute top-0 left-0 w-full h-full pointer-events-none"
+        >
+            <motion.div
+                className={`absolute rounded-full ${blob.size}`}
+                style={{
+                    left: blob.initialPosition.x,
+                    top: blob.initialPosition.y,
+                    backgroundColor: blob.color,
+                    opacity: 0.85,
+                }}
+                animate={{
+                    x: blob.animationPath.x,
+                    y: blob.animationPath.y,
+                    scale: [1, 1.15, 0.9, 1.1, 1],
+                }}
+                transition={{
+                    duration: blob.duration,
+                    delay: blob.delay,
+                    repeat: Infinity,
+                    repeatType: 'reverse',
+                    ease: 'easeInOut',
+                }}
+            />
+        </motion.div>
+    );
+};
+
 export const PlasmaBackground = () => {
     // --- Interactive Mouse Setup ---
     const mouseX = useMotionValue(0);
@@ -90,15 +130,6 @@ export const PlasmaBackground = () => {
         window.addEventListener('mousemove', handleMouseMove);
         return () => window.removeEventListener('mousemove', handleMouseMove);
     }, [mouseX, mouseY]);
-
-    // Create transforms for each blob based on their mouseMultiplier
-    const transforms = useMemo(() => {
-        return BLOB_CONFIGS.map((blob) => ({
-            x: useTransform(smoothX, (val) => val * blob.mouseMultiplier.x),
-            y: useTransform(smoothY, (val) => val * blob.mouseMultiplier.y),
-        }));
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
 
     return (
         <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
@@ -130,37 +161,8 @@ export const PlasmaBackground = () => {
                 className="absolute inset-0"
                 style={{ filter: 'url(#plasma-goo)' }}
             >
-                {BLOB_CONFIGS.map((blob, index) => (
-                    <motion.div
-                        key={blob.id}
-                        style={{
-                            x: transforms[index].x,
-                            y: transforms[index].y,
-                        }}
-                        className="absolute top-0 left-0 w-full h-full pointer-events-none"
-                    >
-                        <motion.div
-                            className={`absolute rounded-full ${blob.size}`}
-                            style={{
-                                left: blob.initialPosition.x,
-                                top: blob.initialPosition.y,
-                                backgroundColor: blob.color,
-                                opacity: 0.85,
-                            }}
-                            animate={{
-                                x: blob.animationPath.x,
-                                y: blob.animationPath.y,
-                                scale: [1, 1.15, 0.9, 1.1, 1],
-                            }}
-                            transition={{
-                                duration: blob.duration,
-                                delay: blob.delay,
-                                repeat: Infinity,
-                                repeatType: 'reverse',
-                                ease: 'easeInOut',
-                            }}
-                        />
-                    </motion.div>
+                {BLOB_CONFIGS.map((blob) => (
+                    <PlasmaBlob key={blob.id} blob={blob} smoothX={smoothX} smoothY={smoothY} />
                 ))}
             </div>
 

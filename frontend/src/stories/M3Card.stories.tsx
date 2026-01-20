@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { M3Card, M3CardHeader, M3CardContent, M3CardActions } from '../components/ui/M3Card';
 import { M3Button } from '../components/ui/M3Button';
-import { Briefcase, MapPin, Calendar, Star, MoreVertical } from 'lucide-react';
+import { Briefcase, Calendar, Star } from 'lucide-react';
 
 const meta: Meta<typeof M3Card> = {
     title: 'M3 Components/Card',

@@ -30,7 +30,7 @@ export const GalleryShell: React.FC<{ children?: React.ReactNode }> = ({ childre
         if (viewParam && viewParam !== currentView) {
             setCurrentView(viewParam);
         }
-    }, [viewParam]);
+    }, [viewParam, currentView]);
 
     const handleViewChange = (view: string) => {
         const newView = view as GalleryView;

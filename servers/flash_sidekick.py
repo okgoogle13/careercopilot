@@ -63,7 +63,11 @@ class FlashSidekickServer:
 
     def _load_project_rules(self):
         """Standardization: Try to load AI_RULES.md from docs"""
-        rules_path = os.path.join(os.getcwd(), 'docs', 'AI_RULES.md')
+        # Resolve path relative to THIS script file (servers/flash_sidekick.py -> project_root/docs/AI_RULES.md)
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        project_root = os.path.dirname(script_dir)
+        rules_path = os.path.join(project_root, 'docs', 'AI_RULES.md')
+        
         if os.path.exists(rules_path):
             try:
                 with open(rules_path, 'r') as f:

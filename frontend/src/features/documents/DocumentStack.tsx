@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { TechCard } from '@/features/analysis/TechCard';
 import { FileText, Upload, MoreVertical, FileCode, FileType, CheckCircle, Clock } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { NorthcoteButton } from '@/components/ui/NorthcoteButton';
@@ -73,7 +72,7 @@ export const DocumentStack: React.FC = () => {
                         Manage your source materials. Upload resumes, cover letters, and raw career data.
                     </p>
                 </div>
-                <NorthcoteButton variant="default" size="default" mode="laboratory" className="gap-2">
+                <NorthcoteButton variant="primary" size="md" className="gap-2">
                     <Upload className="w-4 h-4" />
                     Upload Document
                 </NorthcoteButton>
@@ -84,7 +83,10 @@ export const DocumentStack: React.FC = () => {
                 {documents.map((doc) => {
                     const Icon = getIcon(doc.type);
                     return (
-                        <TechCard key={doc.id} className="p-4 flex items-center gap-6 group hover:bg-surface-laboratory-slate-smoke-low/50 transition-colors">
+                        <div
+                            key={doc.id}
+                            className="p-4 flex items-center gap-6 rounded-[var(--radius-stone)] border border-outline-variant/30 bg-surface-laboratory-slate-smoke-low/20 group hover:bg-surface-laboratory-slate-smoke-low/50 transition-colors"
+                        >
                             {/* Icon Container */}
                             <div className="w-12 h-12 rounded-[var(--radius-stone)] bg-surface-laboratory-slate-smoke-highest flex items-center justify-center border border-outline-variant/30">
                                 <Icon className="w-6 h-6 text-on-surface-parchment opacity-70" />
@@ -134,7 +136,7 @@ export const DocumentStack: React.FC = () => {
                                     <MoreVertical className="w-5 h-5" />
                                 </button>
                             </div>
-                        </TechCard>
+                        </div>
                     );
                 })}
             </div>
