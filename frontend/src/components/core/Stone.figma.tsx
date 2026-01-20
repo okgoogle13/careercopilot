@@ -3,6 +3,14 @@ import React from "react";
 import { Stone } from "./Stone";
 import figma from "@figma/code-connect";
 
+type StoneExampleProps = {
+    mode: "gallery" | "laboratory";
+    elevation: "flat" | "raised" | "floating";
+    hasHeader: boolean;
+    hasFooter: boolean;
+    content: string;
+};
+
 /**
  * -- FIGMA CODE CONNECT --
  * Component: Stone (Container)
@@ -27,7 +35,7 @@ figma.connect(
             hasFooter: figma.boolean("Show Footer"),
             content: figma.string("Content Text"),
         },
-        example: ({ mode, elevation, hasHeader, hasFooter, content }) => (
+        example: ({ mode, elevation, hasHeader, hasFooter, content }: StoneExampleProps) => (
             <Stone mode={mode} elevation={elevation}
                 header={hasHeader ? <h3>Header</h3> : undefined}
                 footer={hasFooter ? <button>Action</button> : undefined}
