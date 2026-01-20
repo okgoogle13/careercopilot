@@ -50,6 +50,9 @@ class FlashSidekickServer:
         self.initialized = False
         self._models_cache = {}
         
+        # Response size limiting (MCP has 1MB hard limit)
+        self.max_response_size = int(os.getenv("MAX_RESPONSE_SIZE", "900000"))  # 900KB default
+        
         # Fast Engine Candidates
         env_fast = os.getenv("GEMINI_MODEL")
         self.fast_candidates = ["models/gemini-2.5-flash-lite", "models/gemini-1.5-flash"]
@@ -59,6 +62,23 @@ class FlashSidekickServer:
         env_pro = os.getenv("GEMINI_PRO_MODEL")
         self.pro_candidates = ["models/gemini-2.5-pro", "models/gemini-exp-1206", "models/gemini-1.5-pro"]
         if env_pro and env_pro not in self.pro_candidates: self.pro_candidates.insert(0, env_pro)
+
+    def _truncate_if_needed(self, content: str) -> str:
+        """Truncate response to stay under MCP size limits"""
+        content_bytes = content.encode('utf-8')
+        if len(content_bytes) <= self.max_response_size:
+            return content
+        
+        # Calculate safe truncation point (leave room for truncation message)
+        truncation_msg = "\n\n[... Response truncated due to MCP 1MB size limit. Consider using pagination or requesting specific sections ...]"
+        safe_size = self.max_response_size - len(truncation_msg.encode('utf-8')) - 100  # Extra buffer
+        
+        # Truncate at character boundary (not mid-UTF8 sequence)
+        truncated = content_bytes[:safe_size].decode('utf-8', errors='ignore')
+        
+        logger.warning(f"Response truncated from {len(content_bytes)} to {safe_size} bytes")
+        return truncated + truncation_msg
+
 
     def _ensure_genai(self):
         genai = _load_genai()
@@ -120,7 +140,13 @@ class FlashSidekickServer:
         elif name == "generate_idf": res = self._call_gemini("fast", args.get("code",""), f"Extract signatures only.") # Keep IDF strict/clean
         elif name == "consult_pro": res = self._call_gemini("pro", args.get("query",""), f"Context: {args.get('context','')}. Analyze deeply as a Senior Engineer.{rules}")
         else: return []
-        return [{"type": "text", "text": res.get("content", "")}]
+        
+        # Apply size limiting to prevent MCP errors
+        content = res.get("content", "")
+        truncated_content = self._truncate_if_needed(content)
+        
+        return [{"type": "text", "text": truncated_content}]
+
 
 def handle_request(server, line):
     try:
