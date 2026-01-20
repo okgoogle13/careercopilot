@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { EvidenceUploader } from '@/components/EvidenceUploader';
+import { EvidenceUploader } from '@/features/ingestion/components/EvidenceUploader';
 import { Box, Typography, TextField, Button, Card, Alert, CircularProgress, Chip, Divider, Avatar } from '@mui/material';
 import { toast } from 'sonner';
 import { Sparkles, Building, Globe, Target, MessageCircle, Heart } from 'lucide-react';
