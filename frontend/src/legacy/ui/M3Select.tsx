@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, forwardRef } from 'react';
+import React, { useState, useRef, useEffect, forwardRef, useCallback } from 'react';
 import { ChevronDown, Check } from 'lucide-react';
 
 export interface M3SelectOption {
@@ -98,6 +98,13 @@ export const M3Select = forwardRef<HTMLButtonElement, M3SelectProps>(({
         }
     }, [isOpen]);
 
+    const handleSelect = useCallback((optionValue: string) => {
+        onChange?.(optionValue);
+        setIsOpen(false);
+        setIsFloating(true);
+        setFocusedIndex(-1);
+    }, [onChange]);
+
     // Keyboard navigation
     useEffect(() => {
         const handleKeyDown = (event: KeyboardEvent) => {
@@ -128,17 +135,10 @@ export const M3Select = forwardRef<HTMLButtonElement, M3SelectProps>(({
             document.addEventListener('keydown', handleKeyDown);
             return () => document.removeEventListener('keydown', handleKeyDown);
         }
-    }, [isOpen, focusedIndex, options]);
+    }, [isOpen, focusedIndex, options, handleSelect]);
 
     const selectedOption = options.find(opt => opt.value === value);
     const displayHelperText = errorMessage || helperText;
-
-    const handleSelect = (optionValue: string) => {
-        onChange?.(optionValue);
-        setIsOpen(false);
-        setIsFloating(true);
-        setFocusedIndex(-1);
-    };
 
     const handleToggle = () => {
         if (!disabled) {
