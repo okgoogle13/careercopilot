@@ -10,13 +10,9 @@ import json, os, sys, logging
 from typing import Dict, Any
 try:
     from dotenv import load_dotenv
-    # Explicitly load .env from project root
-    script_dir = os.path.dirname(os.path.abspath(__file__))
-    project_root = os.path.dirname(script_dir)
-    env_path = os.path.join(project_root, '.env')
-    load_dotenv(env_path)
-except ImportError:
-    pass
+    root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    load_dotenv(os.path.join(root, '.env'))
+except: pass
 
 # Log to tmp to avoid permission issues
 logging.basicConfig(
