@@ -3,6 +3,16 @@ import React from "react";
 import { Pebble } from "./Pebble";
 import figma from "@figma/code-connect";
 
+type PebbleExampleProps = {
+    variant: "primary" | "secondary" | "ghost" | "destructive";
+    size: "sm" | "md" | "lg";
+    children: React.ReactNode;
+    isLoading: boolean;
+    disabled: boolean;
+    iconLeft: boolean;
+    iconRight: boolean;
+};
+
 /**
  * -- FIGMA CODE CONNECT --
  * Component: Pebble (Action)
@@ -31,7 +41,7 @@ figma.connect(
             iconLeft: figma.boolean("Icon Left"),
             iconRight: figma.boolean("Icon Right"),
         },
-        example: ({ variant, size, children, isLoading, disabled, iconLeft, iconRight }) => (
+        example: ({ variant, size, children, isLoading, disabled, iconLeft, iconRight }: PebbleExampleProps) => (
             <Pebble
                 variant={variant}
                 size={size}

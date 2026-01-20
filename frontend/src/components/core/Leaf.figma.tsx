@@ -3,6 +3,13 @@ import React from "react";
 import { Leaf } from "./Leaf";
 import figma from "@figma/code-connect";
 
+type LeafExampleProps = {
+    role: "hero" | "title" | "body" | "data";
+    children: React.ReactNode;
+    label?: string;
+    as?: "h1" | "h2" | "p" | "code" | "div";
+};
+
 /**
  * -- FIGMA CODE CONNECT --
  * Component: Leaf (Typography)
@@ -29,7 +36,7 @@ figma.connect(
                 Div: "div"
             }),
         },
-        example: ({ role, children, label, as }) => (
+        example: ({ role, children, label, as }: LeafExampleProps) => (
             <Leaf role={role} label={label} as={as}>
                 {children}
             </Leaf>
