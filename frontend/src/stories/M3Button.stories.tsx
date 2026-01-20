@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { M3Button } from '../components/ui/M3Button';
-import { Play, Settings, Download, Send, Trash2 } from 'lucide-react';
+import { Download, Send, Trash2 } from 'lucide-react';
 
 const meta: Meta<typeof M3Button> = {
     title: 'M3 Components/Button',

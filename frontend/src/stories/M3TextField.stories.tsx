@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { M3TextField, M3TextArea } from '../components/ui/M3TextField';
-import { Search, Mail, Lock, User, AlertCircle } from 'lucide-react';
+import { Mail, Lock, AlertCircle } from 'lucide-react';
 
 const meta: Meta<typeof M3TextField> = {
     title: 'M3 Components/TextField',

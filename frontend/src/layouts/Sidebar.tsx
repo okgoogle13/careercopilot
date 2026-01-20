@@ -5,7 +5,6 @@ import {
   BarChart3,
   Briefcase,
   ClipboardList,
-  Sparkles,
   Settings,
   Menu,
   X,

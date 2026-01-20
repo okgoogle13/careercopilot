@@ -1,5 +1,5 @@
 import React from 'react';
-import { renderHook, act, waitFor } from '@testing-library/react';
+import { renderHook, act } from '@testing-library/react';
 import { useCareerIngestion } from './useCareerIngestion';
 import { CareerDatabase } from '../types/api';
 import { AuthContext } from '../context/AuthContext';
@@ -110,7 +110,7 @@ describe('useCareerIngestion', () => {
         await act(async () => {
             try {
                 await result.current.updateCareerDatabase(mockCareerData);
-            } catch (e) {
+            } catch {
                 // Expected error
             }
         });

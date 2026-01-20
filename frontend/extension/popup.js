@@ -1,3 +1,5 @@
+/* global chrome */
+
 document.getElementById('saveBtn').addEventListener('click', async () => {
   const status = document.getElementById('status');
   const notes = document.getElementById('notes').value;
