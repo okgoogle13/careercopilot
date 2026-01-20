@@ -39,7 +39,7 @@ export function ImpactEnhancements({ suggestions }: ImpactEnhancementsProps) {
                                 Original
                             </span>
                             <p className="text-body-large text-on-surface-variant line-through opacity-60 mt-1">
-                                "{suggestion.original}"
+                                &ldquo;{suggestion.original}&rdquo;
                             </p>
                         </div>
 

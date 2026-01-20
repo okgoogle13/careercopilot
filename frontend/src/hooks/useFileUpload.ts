@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 const useFileUpload = (file: File | null, userId: string) => {
   const [progress, setProgress] = useState(0);
   const [downloadURL, setDownloadURL] = useState<string | null>(null);
-  const [error, setError] = useState<Error | null>(null);
+  const [error] = useState<Error | null>(null);
 
   useEffect(() => {
     if (!file || !userId) {

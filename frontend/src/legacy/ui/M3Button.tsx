@@ -65,7 +65,7 @@ export interface M3ButtonProps
 }
 
 const M3Button = React.forwardRef<HTMLButtonElement, M3ButtonProps>(
-    ({ className, variant, size, asChild = false, ...props }, ref) => {
+    ({ className, variant, size, asChild: _asChild = false, ...props }, ref) => {
         const { mode } = useMode();
 
         // Shape logic: Gallery = Organic, Lab = Precise

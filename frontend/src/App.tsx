@@ -14,7 +14,6 @@ import { Register } from './features/auth/Register';
 import { Dashboard } from './features/dashboard/Dashboard';
 import { ApplicationTracker } from './features/applications/ApplicationTracker';
 import { Documents } from './features/documents/Documents';
-import { Analysis } from './features/analysis/Analysis';
 import { Opportunities } from './features/opportunities/Opportunities';
 import { KSCGenerator } from './features/ksc-generator/KSCGenerator';
 import { StyleGuide } from './features/style-guide/StyleGuide';

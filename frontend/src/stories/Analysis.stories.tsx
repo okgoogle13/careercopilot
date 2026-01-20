@@ -47,7 +47,7 @@ export const Analyzing: Story = {
 export const AnalysisComplete: Story = {
     // In this state, we rely on the mock data hardcoded in the component
     // but we can simulate the "results visible" state by mocking the analyze callback.
-    play: async ({ canvasElement }) => {
+    play: async () => {
         // We could simulate clicking the analyze button here to show the results transition
     }
 };
