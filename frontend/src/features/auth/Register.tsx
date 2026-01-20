@@ -36,10 +36,14 @@ export function Register() {
       navigate('/dashboard');
     } catch (err: any) {
       console.error('Registration error:', err);
-      if (err.code === 'auth/email-already-in-use') {
+      // Supabase returns error messages, not codes
+      const message = err?.message || '';
+      if (message.includes('already registered') || message.includes('already been registered')) {
         setAuthError('Email is already in use.');
+      } else if (message.includes('Password should be')) {
+        setAuthError('Password must be at least 6 characters.');
       } else {
-        setAuthError('Failed to create account. Please try again.');
+        setAuthError(err?.message || 'Failed to create account. Please try again.');
       }
     }
   };
