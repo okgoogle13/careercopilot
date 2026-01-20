@@ -1,20 +1,19 @@
-# Curer Copilot - Contribution Guidelines
+# Career Copilot - Contribution Guidelines
 
 Welcome to the team! To keep our codebase clean and scalable, please adhere to the following rules.
 
 ## 📂 Directory Structure
 We use a **strict** hierarchy to prevent root clutter and "component soup".
 
-- **`src/features/<feature-name>`**: self-contained modules.
-  - If a component is *only* used for the "Profile" page, it belongs in `src/features/profile/components`.
-  - Do NOT put feature-specific code in the global `src/components` folder.
-- **`src/components/ui`**: Dumb, atomic UI elements (Buttons, Inputs, Cards). 
+- **`frontend/src/features/<feature-name>`**: self-contained modules.
+  - If a component is *only* used for the "Profile" page, it belongs in `frontend/src/features/profile/components`.
+  - Do NOT put feature-specific code in the global `frontend/src/components` folder.
+- **`frontend/src/components/ui`**: Dumb, atomic UI elements (Buttons, Inputs, Cards). 
   - These should have NO business logic or domain knowledge.
-- **`src/components/shared`**: Domain-aware components used across multiple features (e.g., `UserAvatar`).
-- **`docs/project/`**: All project management files.
-  - `active/`: Current timelines, plans, and trackers.
-  - `archive/`: Old audits, logs, and completed plans.
-  - `inbox/`: **Drop location for all AI-generated reports.**
+- **`frontend/src/components/shared`**: Domain-aware components used across multiple features (e.g., `UserAvatar`).
+- **`docs/`**: Documentation and project management files.
+  - `docs/inbox/`: **Drop location for all AI-generated reports.**
+  - `docs/project/`: Plans, timelines, and trackers (active + archive).
 
 ## 📝 Naming Conventions
 - **Directories**: `kebab-case` (e.g., `user-profile`, `job-queue`)
