@@ -20,7 +20,7 @@ import { KSCGenerator } from './features/ksc-generator/KSCGenerator';
 import { StyleGuide } from './features/style-guide/StyleGuide';
 import { Settings } from './features/settings/Settings';
 import { LandingPage } from './features/landing/LandingPage';
-import { ProfileView } from './features/profile/ProfileView';
+import { ProfileView } from './features/profile/components/ProfileView';
 import { AssetLibrary } from './features/analysis/AssetLibrary';
 import { NotFound } from './features/not-found/NotFound';
 import { IngestionPage } from './pages/IngestionPage';

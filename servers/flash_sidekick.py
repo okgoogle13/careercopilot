@@ -61,6 +61,17 @@ class FlashSidekickServer:
                 logger.error(f"Config failed: {e}")
         return genai
 
+    def _load_project_rules(self):
+        """Standardization: Try to load AI_RULES.md from docs"""
+        rules_path = os.path.join(os.getcwd(), 'docs', 'AI_RULES.md')
+        if os.path.exists(rules_path):
+            try:
+                with open(rules_path, 'r') as f:
+                    return f"\n\n=== PROJECT RULES (from docs/AI_RULES.md) ===\n{f.read()}\n============================================\n"
+            except:
+                return ""
+        return ""
+
     def _get_model(self, candidates):
         genai = self._ensure_genai()
         if not genai: return None
@@ -90,9 +101,10 @@ class FlashSidekickServer:
         ]
 
     def call_tool(self, name, args):
-        if name == "quick_summarize": res = self._call_gemini("fast", args.get("text",""), "Summarize concisely.")
-        elif name == "generate_idf": res = self._call_gemini("fast", args.get("code",""), "Extract signatures only.")
-        elif name == "consult_pro": res = self._call_gemini("pro", args.get("query",""), f"Context: {args.get('context','')}. Analyze deeply as a Senior Engineer.")
+        rules = self._load_project_rules()
+        if name == "quick_summarize": res = self._call_gemini("fast", args.get("text",""), f"Summarize concisely.{rules}")
+        elif name == "generate_idf": res = self._call_gemini("fast", args.get("code",""), f"Extract signatures only.") # Keep IDF strict/clean
+        elif name == "consult_pro": res = self._call_gemini("pro", args.get("query",""), f"Context: {args.get('context','')}. Analyze deeply as a Senior Engineer.{rules}")
         else: return []
         return [{"type": "text", "text": res.get("content", "")}]
 

@@ -29,6 +29,7 @@
     "@vitest/ui": "^4.0.6",
     "pathe": "2.0.3",
     "sirv": "3.0.2",
+    "ts-api-utils": "^2.4.0",
     "@joshwooding/vite-plugin-react-docgen-typescript": "0.6.2",
     "@storybook/builder-vite": "10.0.2"
   },
