@@ -9,7 +9,7 @@
 3.  **Destructive Safety:** NEVER delete code referenced by `backend/app/workers/ats_score_worker.py` without implementing a "Bridge/Wrapper" first.
 4.  **Project Standardization:** Follow the rules in `docs/CONTRIBUTING.md` and `docs/AI_RULES.md`.
     - **No Root Clutter:** Reports go to `docs/inbox/`.
-    - **Feature Check:** New components go to `src/features/<name>/components/`.
+    - **Feature Check:** New components go to `frontend/src/features/<name>/components/`.
 
 ---
 
