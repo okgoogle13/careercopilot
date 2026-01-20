@@ -11,9 +11,9 @@ Copy and paste this into your AI assistant (Claude, ChatGPT, Codex, etc.) at the
 >     - New plans/reports -> `docs/inbox/`
 >     - Status updates -> Edit `docs/CURRENT_STATUS.md`
 > 2.  **FEATURE-FIRST ARCHITECTURE**:
->     - Check `src/features/` before creating a new component.
->     - If a component belongs to a feature (e.g., Profile), put it in `src/features/profile/components/`.
->     - Only generic UI goes in `src/components/ui/`.
+>     - Check `frontend/src/features/` before creating a new component.
+>     - If a component belongs to a feature (e.g., Profile), put it in `frontend/src/features/profile/components/`.
+>     - Only generic UI goes in `frontend/src/components/ui/`.
 > 3.  **STRICT NAMING**:
 >     - Folders: `kebab-case`
 >     - Components: `PascalCase`
@@ -29,5 +29,5 @@ Copy and paste this into your AI assistant (Claude, ChatGPT, Codex, etc.) at the
 
 ### For Component Creation
 - Ask yourself: "Is this component unique to one page?"
-  - **Yes**: Put it in `src/features/<page>/components/`.
-  - **No**: Is it business logic? `src/components/shared/`. Is it a dumb UI element? `src/components/ui/`.
+  - **Yes**: Put it in `frontend/src/features/<page>/components/`.
+  - **No**: Is it business logic? `frontend/src/components/shared/`. Is it a dumb UI element? `frontend/src/components/ui/`.
