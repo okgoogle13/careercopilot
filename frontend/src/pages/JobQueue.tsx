@@ -4,7 +4,7 @@ import { PageHeader } from '../components/shared/PageHeader';
 import { M3ErrorAlert } from '../components/shared/M3ErrorAlert';
 import { M3Card, M3CardHeader, M3CardContent, M3CardActions } from '../components/ui/M3Card';
 import { M3Button, M3IconButton } from '../components/ui/M3Button';
-import { StatusBadge } from '../components/ui/StatusBadge/StatusBadge';
+import { StatusBadge, type StatusBadgeVariant } from '../components/ui/StatusBadge/StatusBadge';
 import { Sparkles, ExternalLink, CheckCircle, Clock, Play, FileText, Copy, X } from 'lucide-react';
 import { API_ENDPOINTS } from '../config/api';
 import { toast } from 'sonner';
@@ -19,7 +19,7 @@ interface JobQueueItem {
     notes?: string;
 }
 
-const statusConfig = {
+const statusConfig: Record<JobQueueItem['status'], { label: string; variant: StatusBadgeVariant; icon: typeof Clock }> = {
     pending_analysis: {
         label: 'Pending Analysis',
         variant: 'neutral' as const,
@@ -27,12 +27,12 @@ const statusConfig = {
     },
     ready_to_apply: {
         label: 'Ready to Apply',
-        variant: 'secondary' as const,
+        variant: 'info' as const,
         icon: CheckCircle,
     },
     applied: {
         label: 'Applied',
-        variant: 'primary' as const,
+        variant: 'success' as const,
         icon: CheckCircle,
     },
 };
