@@ -21,8 +21,6 @@ export interface NorthcoteButtonProps extends Omit<HTMLMotionProps<'button'>, 'r
  * - Organic asymmetry (Pebble/Leaf shapes)
  * - Motion tokens for transitions
  * - WCAG 2.1 Level AA accessibility
- * 
- * Reference: M3TextField.tsx (100% compliant)
  */
 export const NorthcoteButton = React.forwardRef<HTMLButtonElement, NorthcoteButtonProps>(
     ({ variant = 'primary', size = 'md', className, children, disabled, startIcon, endIcon, loading, ...props }, ref) => {

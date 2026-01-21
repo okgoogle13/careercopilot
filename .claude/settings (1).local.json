@@ -1,0 +1,36 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//Applications/**)",
+      "Bash(git add:*)",
+      "Bash(git reset:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(yarn clean)",
+      "Bash(./scripts/test-deployment.sh:*)",
+      "Bash(../scripts/test-deployment.sh:*)",
+      "Bash(yarn install)",
+      "Bash(git restore:*)",
+      "Bash(python -m flake8:*)",
+      "Bash(python -m pytest app/tests/test_prompt_service.py -v)",
+      "Bash(python:*)",
+      "Bash(ENABLE_GENKIT_FLOWS=false python -m pytest app/tests/api/test_ksc_integration.py::test_ksc_generation_endpoint -v)",
+      "Bash(ENABLE_GENKIT_FLOWS=false python -c \"\n# Test that the API can import with our changes\nimport sys\nsys.path.append(''.'')\n\ntry:\n    from app.api.endpoints.analysis import router\n    print(''✓ Analysis API endpoint imports successfully'')\n    \n    from app.genkit_flows.flow_decorator import run_flow_async, run_flow\n    print(''✓ Flow runner utilities import successfully'')\n    \n    print(''All API compatibility maintained!'')\n    \nexcept ImportError as e:\n    print(f''Import error: {e}'')\n    sys.exit(1)\nexcept Exception as e:\n    print(f''Other error: {e}'')\n    sys.exit(1)\n\")",
+      "Bash(grep:*)",
+      "Bash(find:*)",
+      "Bash(npx eslint:*)",
+      "Bash(npx lint-staged:*)",
+      "Bash(yarn dev)",
+      "Bash(open http://localhost:3000)",
+      "Bash(curl:*)",
+      "Bash(npm install:*)",
+      "Read(//Users/okgoogle13/Downloads/**)",
+      "Bash(mkdir:*)",
+      "Bash(npm run build:*)",
+      "Bash(npx tsc:*)",
+      "Bash(npm run dev:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
