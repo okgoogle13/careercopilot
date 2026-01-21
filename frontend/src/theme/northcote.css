@@ -1,7 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Bodoni:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1;1,9..144,100..900,0..100,0..1&family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=JetBrains+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&family=Roboto+Flex:opsz,wght,GRAD,XTRA@8..144,100..1000,-200..150,323..603&display=swap');
+
 /**
- * M3 Expressive Design Tokens - CareerCopilot
- * Aesthetic: Plant-themed, Organic, Professional
- * Based on Figma Design Specifications
+ * Northcote Curio Design Tokens - CareerCopilot
+ * Aesthetic: Organic, High-Contrast, Professional
+ * Theme: Gallery (Expressive) & Laboratory (Restrained)
  */
 
 :root {
@@ -298,7 +300,9 @@
   /* Glows */
   --sys-elevation-glow-primary: 0 0 15px rgba(160, 197, 141, 0.4);
   --sys-elevation-glow-secondary: 0 0 15px rgba(253, 207, 196, 0.4);
-}/**
+}
+
+/**
  * ═══════════════════════════════════════════════════════════════════════════
  * NORTHCOTE CURIO TYPOGRAPHY - THE FEDERATION STACK
  * Victorian Naturalist Field Station Design System V2.0
@@ -316,7 +320,7 @@
  * ═══════════════════════════════════════════════════════════════════════════
  */
 
-@import url('https://fonts.googleapis.com/css2?family=Libre+Bodoni:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1;1,9..144,100..900,0..100,0..1&family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=JetBrains+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&family=Roboto+Flex:opsz,wght,GRAD,XTRA@8..144,100..1000,-200..150,323..603&display=swap');
+
 
 @tailwind base;
 @tailwind components;
@@ -392,12 +396,16 @@
 
 @layer base {
   body {
-    @apply bg-specimen-night text-parchment font-field-note overflow-x-hidden;
+    background-color: var(--color-specimen-night);
+    color: var(--color-parchment);
+    font-family: 'Work Sans', sans-serif;
+    overflow-x: hidden;
     font-variation-settings:
       'opsz' var(--leaf-opsz),
       'GRAD' var(--leaf-grad),
       'XTRA' var(--leaf-xtra);
   }
+
 
   /* ═══════════════════════════════════════════════════════════════════════
      NORTHCOTE CURIO BASE STYLES
@@ -405,47 +413,76 @@
      ═══════════════════════════════════════════════════════════════════════ */
 
   h1 {
-    @apply font-proclamation text-display-lg font-bold tracking-tighter leading-none;
+    font-family: 'Libre Bodoni', serif;
+    font-size: var(--sys-type-display-large-size);
+    line-height: var(--sys-type-display-large-line-height);
+    font-weight: var(--sys-type-weight-bold);
+    letter-spacing: var(--sys-type-display-large-tracking);
   }
 
   h2 {
-    @apply font-bloom text-headline-lg font-semibold leading-tight;
+    font-family: 'Fraunces', serif;
+    font-size: var(--sys-type-headline-large-size);
+    line-height: var(--sys-type-headline-large-line-height);
+    font-weight: var(--sys-type-weight-medium);
   }
 
   h3 {
-    @apply font-bloom text-headline-md font-semibold leading-snug;
+    font-family: 'Fraunces', serif;
+    font-size: 32px;
+    line-height: 40px;
+    font-weight: var(--sys-type-weight-medium);
   }
 
   h4 {
-    @apply font-bloom text-headline-sm font-semibold leading-snug;
+    font-family: 'Fraunces', serif;
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: var(--sys-type-weight-medium);
   }
 
   h5 {
-    @apply font-field-note text-title-lg font-semibold;
+    font-family: 'Work Sans', sans-serif;
+    font-size: var(--sys-type-title-large-size);
+    line-height: var(--sys-type-title-large-line-height);
+    font-weight: var(--sys-type-weight-medium);
   }
 
   h6 {
-    @apply font-field-note text-title-md font-semibold;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: var(--sys-type-weight-medium);
   }
 
   p {
-    @apply font-field-note text-body-lg text-flannel-flower;
+    font-family: 'Work Sans', sans-serif;
+    font-size: var(--sys-type-body-large-size);
+    line-height: var(--sys-type-body-large-line-height);
+    color: var(--color-flannel-flower);
   }
 
   small,
   .text-small {
-    @apply font-field-note text-body-sm;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 14px;
+    line-height: 20px;
   }
 
   code,
   pre {
-    @apply font-annotation text-label-md tracking-wider;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.1em;
   }
 
   /* BUTTON BASE */
   button,
   .btn {
-    @apply font-field-note font-semibold text-body-md transition-all duration-300 ease-viscous-breeze;
+    font-family: 'Work Sans', sans-serif;
+    font-weight: var(--sys-type-weight-medium);
+    font-size: var(--sys-type-body-medium-size);
+    transition: all var(--duration-standard) var(--ease-viscous-breeze);
   }
 
 
@@ -476,7 +513,11 @@
      ═══════════════════════════════════════════════════════════════════════ */
 
   .tech-card {
-    @apply bg-surface-container rounded-3xl border border-white/5 relative overflow-hidden;
+    background-color: var(--sys-color-surface-container);
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
+    overflow: hidden;
     background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
     background-size: 24px 24px;
   }
@@ -488,20 +529,19 @@
   .text-hero,
   .text-proclamation {
     font-family: 'Libre Bodoni', 'Playfair Display', serif;
-    font-weight: 700;
+    font-weight: var(--sys-type-weight-bold);
     font-stretch: condensed;
-    letter-spacing: -0.03em;
-    line-height: 110%;
-    color: #F5F0E8;
-    /* Parchment */
+    letter-spacing: var(--sys-type-display-large-tracking);
+    line-height: var(--sys-type-display-large-line-height);
+    color: var(--color-parchment);
   }
 
   .text-proclamation-large {
     font-family: 'Libre Bodoni', 'Playfair Display', serif;
-    font-weight: 900;
+    font-weight: var(--sys-type-weight-black);
     font-stretch: condensed;
-    letter-spacing: -0.03em;
-    line-height: 100%;
+    letter-spacing: var(--sys-type-display-large-tracking);
+    line-height: var(--sys-type-display-large-line-height);
     text-transform: uppercase;
   }
 
@@ -512,13 +552,13 @@
   .text-title,
   .text-bloom {
     font-family: 'Fraunces', serif;
-    font-weight: 500;
+    font-weight: var(--sys-type-weight-medium);
     font-variation-settings:
       'SOFT' 50,
       'WONK' 1,
       'wght' 500;
-    line-height: 130%;
-    color: rgba(255, 255, 255, 0.9);
+    line-height: var(--sys-type-headline-large-line-height);
+    color: var(--on-surface-parchment-dim);
   }
 
   /* Bloom Soft (maximum native irregularity) */
@@ -527,7 +567,7 @@
     font-variation-settings:
       'SOFT' 100,
       'WONK' 1,
-      'wght' 400;
+      'wght' var(--sys-type-weight-regular);
     font-style: italic;
   }
 
@@ -537,9 +577,8 @@
     font-variation-settings:
       'SOFT' 50,
       'WONK' 1,
-      'wght' 700;
-    color: #D4A84B;
-    /* Wattle Gold */
+      'wght' var(--sys-type-weight-bold);
+    color: var(--color-wattle-gold);
   }
 
   /* Bloom Laboratory (Restrained) */
@@ -558,21 +597,21 @@
   .text-body,
   .text-field-note {
     font-family: 'Work Sans', sans-serif;
-    font-weight: 400;
-    line-height: 150%;
-    color: rgba(255, 255, 255, 0.9);
+    font-weight: var(--sys-type-weight-regular);
+    line-height: var(--sys-type-body-large-line-height);
+    color: var(--on-surface-parchment-dim);
   }
 
   .text-field-note-medium {
     font-family: 'Work Sans', sans-serif;
-    font-weight: 500;
-    line-height: 140%;
+    font-weight: var(--sys-type-weight-medium);
+    line-height: var(--sys-type-body-medium-line-height);
   }
 
   .text-field-note-bold {
     font-family: 'Work Sans', sans-serif;
-    font-weight: 600;
-    line-height: 140%;
+    font-weight: var(--sys-type-weight-bold);
+    line-height: var(--sys-type-body-medium-line-height);
   }
 
   /* ═══════════════════════════════════════════════════════════════════════
@@ -583,16 +622,16 @@
   .text-mono,
   .text-annotation {
     font-family: 'JetBrains Mono', ui-monospace, monospace;
-    font-weight: 500;
+    font-weight: var(--sys-type-weight-medium);
     letter-spacing: 0.1em;
     text-transform: uppercase;
     font-size: 0.75rem;
-    color: rgba(255, 255, 255, 0.6);
+    color: var(--on-surface-variant);
   }
 
   .text-mono-large {
     font-family: 'JetBrains Mono', ui-monospace, monospace;
-    font-weight: 700;
+    font-weight: var(--sys-type-weight-bold);
     font-size: 3rem;
     letter-spacing: -0.02em;
   }
@@ -608,11 +647,11 @@
 
   .banksia-proclamation {
     font-family: 'Libre Bodoni', 'Playfair Display', serif;
-    font-weight: 900;
+    font-weight: var(--sys-type-weight-black);
     font-stretch: condensed;
-    letter-spacing: -0.03em;
-    line-height: 100%;
-    color: #FFFFFF;
+    letter-spacing: var(--sys-type-display-large-tracking);
+    line-height: var(--sys-type-display-large-line-height);
+    color: var(--color-parchment);
     text-transform: uppercase;
   }
 
@@ -621,9 +660,8 @@
     font-variation-settings:
       'SOFT' 50,
       'WONK' 1,
-      'wght' 600;
-    color: #D4A84B;
-    /* Wattle Gold */
+      'wght' var(--sys-type-weight-bold);
+    color: var(--color-wattle-gold);
     transform: rotate(4deg);
     position: absolute;
     /* Positioning is context-dependent — set top/left/right per usage */
@@ -635,14 +673,14 @@
 
   .btn-pebble {
     font-family: 'Work Sans', sans-serif;
-    font-weight: 600;
-    border-radius: 20px 20px 32px 32px;
-    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    font-weight: var(--sys-type-weight-bold);
+    border-radius: var(--radius-pebble);
+    transition: all var(--duration-standard) var(--ease-viscous-breeze);
   }
 
   .btn-pebble:hover {
     transform: translateY(-4px) scale(1.02);
-    box-shadow: 0 16px 48px rgba(212, 168, 75, 0.4);
+    box-shadow: var(--elevation-shadow-glow-gold);
   }
 
   /* ═══════════════════════════════════════════════════════════════════════
@@ -672,5 +710,31 @@
     padding: 2px 4px;
     font-size: 10px;
     position: absolute;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════════
+     CURIO NOTIFICATION SYSTEM (Toasts)
+     ═══════════════════════════════════════════════════════════════════════ */
+  .curio-toast {
+    background: var(--color-specimen-night) !important;
+    border: 1px solid rgba(240, 234, 214, 0.15) !important;
+    border-radius: var(--radius-pebble) !important;
+    color: var(--color-parchment) !important;
+    box-shadow: var(--shadow-elevated) !important;
+    font-family: 'Work Sans', sans-serif !important;
+    backdrop-filter: blur(12px) !important;
+    padding: var(--spacing-lg) !important;
+  }
+
+  .curio-toast.success {
+    border-left: 4px solid var(--ref-palette-primary-60) !important;
+  }
+
+  .curio-toast.error {
+    border-left: 4px solid var(--ref-palette-error-60) !important;
+  }
+
+  .curio-toast.warning {
+    border-left: 4px solid var(--ref-palette-warning-60) !important;
   }
 }

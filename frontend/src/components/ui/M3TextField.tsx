@@ -126,34 +126,24 @@ export const M3TextField = forwardRef<HTMLInputElement, M3TextFieldProps>(({
         },
     };
 
-    // Variant-specific classes
-    const variantClasses = {
-        outlined: {
-            container: `
-        border-2 
-        ${error ? 'border-error' : 'border-outline-variant'}
-        ${isFocused && !error ? 'border-primary ring-2 ring-primary/20' : ''}
-        ${!disabled && !error && !isFocused ? 'hover:border-outline' : ''}
-        bg-surface-container
-      `,
-        },
-        filled: {
-            container: `
-        border-b-2
-        ${error ? 'border-b-error' : 'border-b-outline-variant'}
-        ${isFocused && !error ? 'border-b-primary' : ''}
-        ${!disabled && !error && !isFocused ? 'hover:border-b-outline' : ''}
-        bg-surface-container-high shadow-elevation-1
-      `,
-        },
+    // Variant-specific styles (Northcote Curio)
+    const containerStyle = {
+        borderRadius: 'var(--radius-leaf)',
+        backgroundColor: variant === 'filled' ? 'rgba(44, 39, 35, 0.4)' : 'transparent',
+        border: '2px solid',
+        borderColor: error
+            ? 'var(--color-waratah-crimson)'
+            : isFocused
+                ? 'var(--color-wattle-gold)'
+                : 'var(--color-eucalypt-smoke-base)',
+        color: 'var(--color-parchment)',
+        transition: 'all var(--duration-standard) var(--ease-viscous-breeze)',
     };
 
     const containerClasses = `
-    ${variantClasses[variant].container}
     ${fullWidth ? 'w-full' : 'w-auto'}
     ${disabled ? 'opacity-50 cursor-not-allowed' : ''}
-    rounded-tech
-    transition-all duration-medium-1 ease-spring
+    ${isFocused && !error ? 'shadow-[0_0_15px_rgba(212,168,75,0.2)]' : ''}
     ${containerClassName}
   `;
 
@@ -161,11 +151,11 @@ export const M3TextField = forwardRef<HTMLInputElement, M3TextFieldProps>(({
     ${sizeClasses[size].input}
     w-full
     bg-transparent
-    text-on-surface
-    placeholder:text-on-surface-variant
+    text-inherit
+    placeholder:opacity-50
     focus:outline-none
     disabled:cursor-not-allowed
-    font-body
+    font-field-note
     ${className}
   `;
 
@@ -177,22 +167,23 @@ export const M3TextField = forwardRef<HTMLInputElement, M3TextFieldProps>(({
             {/* Label */}
             {label && (
                 <label className={`
-          mb-2 text-label-large font-medium
-          ${error ? 'text-error' : 'text-on-surface'}
+          mb-2 text-sm font-medium transition-colors duration-200
+          ${error ? 'text-[var(--color-waratah-crimson)]' : 'text-[var(--color-flannel-flower)]'}
+          ${isFocused && !error ? 'text-[var(--color-wattle-gold)]' : ''}
         `}>
                     {label}
-                    {required && <span className="text-error ml-1">*</span>}
+                    {required && <span className="text-[var(--color-waratah-crimson)] ml-1">*</span>}
                 </label>
             )}
 
             {/* Input Container */}
-            <div className={containerClasses}>
+            <div className={containerClasses} style={containerStyle}>
                 <div className="flex items-center gap-2">
                     {/* Start Adornment */}
                     {startAdornment && (
                         <div className={`
-              flex-shrink-0 ${sizeClasses[size].adornment}
-              ${error ? 'text-error' : 'text-on-surface-variant'}
+              flex-shrink-0 ml-3 ${sizeClasses[size].adornment}
+              ${error ? 'text-[var(--color-waratah-crimson)]' : 'text-[var(--color-flannel-flower-dark)]'}
             `}>
                             {startAdornment}
                         </div>
@@ -216,8 +207,8 @@ export const M3TextField = forwardRef<HTMLInputElement, M3TextFieldProps>(({
                     {/* End Adornment */}
                     {endAdornment && (
                         <div className={`
-              flex-shrink-0 ${sizeClasses[size].adornment}
-              ${error ? 'text-error' : 'text-on-surface-variant'}
+              flex-shrink-0 mr-3 ${sizeClasses[size].adornment}
+              ${error ? 'text-[var(--color-waratah-crimson)]' : 'text-[var(--color-flannel-flower-dark)]'}
             `}>
                             {endAdornment}
                         </div>
@@ -232,8 +223,8 @@ export const M3TextField = forwardRef<HTMLInputElement, M3TextFieldProps>(({
                         <p
                             id={`${props.id}-helper-text`}
                             className={`
-                text-label-small
-                ${error ? 'text-error' : 'text-on-surface-variant'}
+                text-xs
+                ${error ? 'text-[var(--color-waratah-crimson)]' : 'text-[var(--color-flannel-flower-dark)]'}
               `}
                         >
                             {displayHelperText}
@@ -242,8 +233,8 @@ export const M3TextField = forwardRef<HTMLInputElement, M3TextFieldProps>(({
 
                     {showCounter && maxLength && (
                         <p className={`
-              text-label-small
-              ${charCount > maxLength ? 'text-error' : 'text-on-surface-variant'}
+              text-xs
+              ${charCount > maxLength ? 'text-[var(--color-waratah-crimson)]' : 'text-[var(--color-flannel-flower-dark)]'}
               ml-auto
             `}>
                             {charCount}/{maxLength}
@@ -301,21 +292,17 @@ export const M3TextArea = forwardRef<HTMLTextAreaElement, M3TextAreaProps>(({
         props.onChange?.(e);
     };
 
-    const variantClasses = {
-        outlined: `
-      border-2 
-      ${error ? 'border-error' : 'border-outline-variant'}
-      ${isFocused && !error ? 'border-primary ring-2 ring-primary/20' : ''}
-      ${!disabled && !error && !isFocused ? 'hover:border-outline' : ''}
-      bg-surface-container
-    `,
-        filled: `
-      border-b-2
-      ${error ? 'border-b-error' : 'border-b-outline-variant'}
-      ${isFocused && !error ? 'border-b-primary' : ''}
-      ${!disabled && !error && !isFocused ? 'hover:border-b-outline' : ''}
-      bg-surface-container-high shadow-elevation-1
-    `,
+    const containerStyle = {
+        borderRadius: 'var(--radius-leaf)',
+        backgroundColor: variant === 'filled' ? 'rgba(44, 39, 35, 0.4)' : 'transparent',
+        border: '2px solid',
+        borderColor: error
+            ? 'var(--color-waratah-crimson)'
+            : isFocused
+                ? 'var(--color-wattle-gold)'
+                : 'var(--color-eucalypt-smoke-base)',
+        color: 'var(--color-parchment)',
+        transition: 'all var(--duration-standard) var(--ease-viscous-breeze)',
     };
 
     const showError = error && errorMessage;
@@ -325,30 +312,31 @@ export const M3TextArea = forwardRef<HTMLTextAreaElement, M3TextAreaProps>(({
         <div className={`flex flex-col ${fullWidth ? 'w-full' : 'w-auto'}`}>
             {label && (
                 <label className={`
-          mb-2 text-label-large font-medium
-          ${error ? 'text-error' : 'text-on-surface'}
+          mb-2 text-sm font-medium transition-colors duration-200
+          ${error ? 'text-[var(--color-waratah-crimson)]' : 'text-[var(--color-flannel-flower)]'}
+          ${isFocused && !error ? 'text-[var(--color-wattle-gold)]' : ''}
         `}>
                     {label}
-                    {required && <span className="text-error ml-1">*</span>}
+                    {required && <span className="text-[var(--color-waratah-crimson)] ml-1">*</span>}
                 </label>
             )}
 
             <textarea
                 ref={ref}
                 rows={rows}
+                style={containerStyle}
                 className={`
-          ${variantClasses[variant]}
           ${fullWidth ? 'w-full' : 'w-auto'}
           ${disabled ? 'opacity-50 cursor-not-allowed' : ''}
-          rounded-tech
           px-4 py-3
           text-base
           bg-transparent
-          text-on-surface
-          placeholder:text-on-surface-variant
+          text-inherit
+          placeholder:opacity-50
           focus:outline-none
           resize-vertical
-          transition-all duration-medium-1 ease-spring
+          font-field-note
+          ${isFocused && !error ? 'shadow-[0_0_15px_rgba(212,168,75,0.2)]' : ''}
           ${containerClassName}
           ${className}
         `}
@@ -369,8 +357,8 @@ export const M3TextArea = forwardRef<HTMLTextAreaElement, M3TextAreaProps>(({
                         <p
                             id={`${props.id}-helper-text`}
                             className={`
-                text-label-small
-                ${error ? 'text-error' : 'text-on-surface-variant'}
+                text-xs
+                ${error ? 'text-[var(--color-waratah-crimson)]' : 'text-[var(--color-flannel-flower-dark)]'}
               `}
                         >
                             {displayHelperText}
@@ -379,8 +367,8 @@ export const M3TextArea = forwardRef<HTMLTextAreaElement, M3TextAreaProps>(({
 
                     {showCounter && maxLength && (
                         <p className={`
-              text-label-small
-              ${charCount > maxLength ? 'text-error' : 'text-on-surface-variant'}
+              text-xs
+              ${charCount > maxLength ? 'text-[var(--color-waratah-crimson)]' : 'text-[var(--color-flannel-flower-dark)]'}
               ml-auto
             `}>
                             {charCount}/{maxLength}

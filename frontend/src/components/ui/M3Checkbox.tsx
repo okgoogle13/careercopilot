@@ -94,49 +94,42 @@ export const M3Checkbox = forwardRef<HTMLInputElement, M3CheckboxProps>(({
             <div className={`
         relative flex-shrink-0
         w-5 h-5
-        rounded-tech
         border-2
         ${error
-                    ? 'border-error'
+                    ? 'border-[var(--color-waratah-crimson)]'
                     : isChecked
-                        ? 'border-primary bg-primary'
-                        : 'border-outline-variant'
+                        ? 'border-[var(--color-wattle-gold)] bg-[var(--color-wattle-gold)]'
+                        : 'border-[var(--color-eucalypt-smoke-base)]'
                 }
-        ${!disabled && !isChecked ? 'hover:border-outline' : ''}
-        ${!disabled && isChecked && !error ? 'hover:brightness-110' : ''}
-        transition-all duration-medium-1 ease-spring
+        ${!disabled && !isChecked ? 'hover:border-[var(--color-flannel-flower)]' : ''}
+        transition-all duration-standard var(--ease-viscous-breeze)
         ${className}
-      `}>
+      `}
+                style={{ borderRadius: 'var(--radius-seed)' }}
+            >
                 {/* Checkmark or Dash Icon */}
                 {isChecked && (
                     <div className="absolute inset-0 flex items-center justify-center">
                         {indeterminate ? (
                             <Minus className={`
                 w-3.5 h-3.5
-                ${error ? 'text-on-error' : 'text-on-primary'}
+                ${error ? 'text-on-error' : 'text-[var(--color-specimen-night)]'}
               `} />
                         ) : (
                             <Check className={`
                 w-3.5 h-3.5
-                ${error ? 'text-on-error' : 'text-on-primary'}
+                ${error ? 'text-on-error' : 'text-[var(--color-specimen-night)]'}
               `} />
                         )}
                     </div>
                 )}
-
-                {/* Focus Ring */}
-                <div className={`
-          absolute -inset-1
-          rounded-tech
-          ${!disabled ? 'focus-within:ring-2 focus-within:ring-primary/20' : ''}
-        `} />
             </div>
 
             {/* Label */}
             {label && (
                 <span className={`
-          text-body-large
-          ${error ? 'text-error' : 'text-on-surface'}
+          text-sm font-field-note font-medium
+          ${error ? 'text-[var(--color-waratah-crimson)]' : 'text-[var(--color-parchment)]'}
           select-none
         `}>
                     {label}
@@ -151,8 +144,6 @@ M3Checkbox.displayName = 'M3Checkbox';
 
 /**
  * M3Radio - Material Design 3 Compliant Radio Button
- * 
- * Radio button variant using circular shape instead of box.
  */
 export interface M3RadioProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type'> {
     label?: string;
@@ -192,13 +183,13 @@ export const M3Radio = forwardRef<HTMLInputElement, M3RadioProps>(({
         rounded-full
         border-2
         ${error
-                    ? 'border-error'
+                    ? 'border-[var(--color-waratah-crimson)]'
                     : checked
-                        ? 'border-primary'
-                        : 'border-outline-variant'
+                        ? 'border-[var(--color-wattle-gold)]'
+                        : 'border-[var(--color-eucalypt-smoke-base)]'
                 }
-        ${!disabled && !checked ? 'hover:border-outline' : ''}
-        transition-all duration-medium-1 ease-spring
+        ${!disabled && !checked ? 'hover:border-[var(--color-flannel-flower)]' : ''}
+        transition-all duration-standard var(--ease-viscous-breeze)
         ${className}
       `}>
                 {/* Inner Dot */}
@@ -209,26 +200,18 @@ export const M3Radio = forwardRef<HTMLInputElement, M3RadioProps>(({
                         <div className={`
               w-2.5 h-2.5
              rounded-full
-              ${error ? 'bg-error' : 'bg-primary'}
-              transition-transform duration-medium-1 ease-spring
+              ${error ? 'bg-[var(--color-waratah-crimson)]' : 'bg-[var(--color-wattle-gold)]'}
               scale-100
             `} />
                     </div>
                 )}
-
-                {/* Focus Ring */}
-                <div className={`
-          absolute -inset-1
-          rounded-full
-          ${!disabled ? 'focus-within:ring-2 focus-within:ring-primary/20' : ''}
-        `} />
             </div>
 
             {/* Label */}
             {label && (
                 <span className={`
-          text-body-large
-          ${error ? 'text-error' : 'text-on-surface'}
+          text-sm font-field-note font-medium
+          ${error ? 'text-[var(--color-waratah-crimson)]' : 'text-[var(--color-parchment)]'}
           select-none
         `}>
                     {label}

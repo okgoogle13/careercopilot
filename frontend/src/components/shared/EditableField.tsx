@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
-import { Box, TextField, Typography, IconButton, Chip, Stack } from '@mui/material';
-import { Edit, Check, Close, AutoAwesome } from '@mui/icons-material';
+import {
+    M3TextField,
+    M3IconButton
+} from '@/components/ui';
+import { Edit, Check, X, Sparkles } from 'lucide-react';
 
 interface EditableFieldProps {
     label: string;
@@ -41,129 +44,75 @@ export const EditableField: React.FC<EditableFieldProps> = ({
 
     if (isEditing) {
         return (
-            <Box sx={{ mb: 2 }}>
-                <Typography variant="caption" sx={{ color: 'var(--sys-color-on-surface-variant)', mb: 0.5, display: 'block' }}>
+            <div className="mb-6 animate-in fade-in slide-in-from-top-1 duration-300">
+                <label className="font-annotation text-[10px] uppercase tracking-widest text-[var(--color-flannel-flower-dark)] mb-2 block">
                     {label}
-                </Typography>
-                <TextField
+                </label>
+                <M3TextField
                     fullWidth
                     multiline={multiline}
-                    rows={multiline ? 3 : 1}
+                    rows={multiline ? 4 : 1}
                     value={editValue}
                     onChange={(e) => setEditValue(e.target.value)}
-                    sx={{
-                        '& .MuiOutlinedInput-root': {
-                            bgcolor: 'var(--sys-color-surface-container)',
-                            '& fieldset': {
-                                borderColor: 'var(--sys-color-outline-variant)',
-                            },
-                            '&:hover fieldset': {
-                                borderColor: 'var(--sys-color-primary)',
-                            },
-                            '&.Mui-focused fieldset': {
-                                borderColor: 'var(--sys-color-primary)',
-                            },
-                        },
-                    }}
+                    variant="filled"
+                    className="mb-3"
                 />
-                <Stack direction="row" spacing={1} sx={{ mt: 1 }}>
-                    <IconButton
-                        aria-label="save"
-                        size="small"
+                <div className="flex items-center gap-3">
+                    <M3IconButton
+                        icon={<Check className="w-4 h-4" />}
+                        ariaLabel="save"
                         onClick={handleSave}
-                        sx={{
-                            bgcolor: 'var(--sys-color-primary-container)',
-                            color: 'var(--sys-color-on-primary-container)',
-                            '&:hover': { bgcolor: 'var(--sys-color-primary)' },
-                        }}
-                    >
-                        <Check fontSize="small" />
-                    </IconButton>
-                    <IconButton
-                        aria-label="cancel"
-                        size="small"
+                        variant="standard"
+                        size="medium"
+                        className="bg-[var(--color-wattle-gold)]/20 text-[var(--color-wattle-gold)] hover:bg-[var(--color-wattle-gold)] hover:text-white"
+                    />
+                    <M3IconButton
+                        icon={<X className="w-4 h-4" />}
+                        ariaLabel="cancel"
                         onClick={handleCancel}
-                        sx={{
-                            bgcolor: 'var(--sys-color-surface-container-high)',
-                            color: 'var(--sys-color-on-surface)',
-                            '&:hover': { bgcolor: 'var(--sys-color-surface-container-highest)' },
-                        }}
-                    >
-                        <Close fontSize="small" />
-                    </IconButton>
+                        variant="standard"
+                        size="medium"
+                        className="bg-white/5 text-[var(--color-flannel-flower-dark)] hover:bg-white/10"
+                    />
+
                     {suggestion && (
-                        <Chip
-                            icon={<AutoAwesome sx={{ fontSize: 16 }} />}
-                            label="Apply AI Suggestion"
+                        <button
                             onClick={handleApplySuggestion}
-                            size="small"
-                            sx={{
-                                bgcolor: 'var(--sys-color-tertiary-container)',
-                                color: 'var(--sys-color-on-tertiary-container)',
-                                fontWeight: 600,
-                                '&:hover': {
-                                    bgcolor: 'var(--sys-color-tertiary)',
-                                    color: 'var(--sys-color-on-tertiary)',
-                                },
-                            }}
-                        />
+                            className="flex items-center gap-2 px-4 py-2 bg-[var(--color-eucalypt-smoke-base)]/10 text-[var(--color-eucalypt-smoke-base)] rounded-full text-xs font-bold hover:bg-[var(--color-eucalypt-smoke-base)] hover:text-white transition-all duration-300 border border-[var(--color-eucalypt-smoke-base)]/20"
+                        >
+                            <Sparkles className="w-3 h-3" />
+                            Seed AI Suggestion
+                        </button>
                     )}
-                </Stack>
+                </div>
+
                 {suggestion && (
-                    <Typography
-                        variant="caption"
-                        sx={{
-                            color: 'var(--sys-color-on-surface-variant)',
-                            fontStyle: 'italic',
-                            mt: 1,
-                            display: 'block',
-                        }}
-                    >
-                        💡 Suggestion: {suggestion}
-                    </Typography>
+                    <div className="mt-4 p-3 bg-[var(--color-wattle-gold)]/5 border border-[var(--color-wattle-gold)]/10 rounded-[var(--radius-stone)]">
+                        <p className="font-field-note text-xs text-[var(--color-wattle-gold)]/70 italic leading-relaxed">
+                            💡 Concept: {suggestion}
+                        </p>
+                    </div>
                 )}
-            </Box>
+            </div>
         );
     }
 
     return (
-        <Box
-            sx={{
-                mb: 2,
-                p: 1.5,
-                borderRadius: 'var(--sys-shape-corner-small)',
-                bgcolor: 'var(--sys-color-surface-container-low)',
-                border: '1px solid var(--sys-color-outline-variant)',
-                transition: 'all 0.2s var(--sys-motion-easing-standard)',
-                '&:hover': {
-                    borderColor: 'var(--sys-color-primary)',
-                    bgcolor: 'var(--sys-color-surface-container)',
-                },
-            }}
+        <div
+            className="group mb-4 p-4 rounded-[var(--radius-pebble)] bg-white/5 border border-white/5 hover:border-[var(--color-wattle-gold)]/30 hover:bg-white/10 transition-all duration-300 cursor-pointer"
+            onClick={() => setIsEditing(true)}
         >
-            <Stack direction="row" justifyContent="space-between" alignItems="flex-start">
-                <Box sx={{ flex: 1 }}>
-                    <Typography variant="caption" sx={{ color: 'var(--sys-color-on-surface-variant)', mb: 0.5, display: 'block' }}>
+            <div className="flex justify-between items-start gap-4">
+                <div className="flex-1">
+                    <span className="font-annotation text-[9px] uppercase tracking-widest text-[var(--color-flannel-flower-dark)] mb-1 block group-hover:text-[var(--color-wattle-gold)] transition-colors">
                         {label}
-                    </Typography>
-                    <Typography variant={variant} sx={{ color: 'var(--sys-color-on-surface)' }}>
-                        {value || '(Not provided)'}
-                    </Typography>
-                </Box>
-                <IconButton
-                    aria-label="edit"
-                    size="small"
-                    onClick={() => setIsEditing(true)}
-                    sx={{
-                        color: 'var(--sys-color-primary)',
-                        '&:hover': {
-                            bgcolor: 'var(--sys-color-primary-container)',
-                        },
-                    }}
-                >
-                    <Edit fontSize="small" />
-                </IconButton>
-            </Stack>
-        </Box>
+                    </span>
+                    <p className={`font-field-note text-[var(--color-parchment)]/90 leading-relaxed ${variant === 'h6' ? 'text-lg font-bold' : 'text-base'}`}>
+                        {value || <span className="text-[var(--color-flannel-flower-dark)]/50 italic">(Empty Field)</span>}
+                    </p>
+                </div>
+                <Edit className="w-4 h-4 text-[var(--color-flannel-flower-dark)] opacity-30 group-hover:opacity-100 group-hover:text-[var(--color-wattle-gold)] transition-all" />
+            </div>
+        </div>
     );
 };
