@@ -63,60 +63,77 @@ export function M3Card({
     onClick,
     role = 'article',
 }: M3CardProps) {
-    // Map variant to M3 shape token
-    const shapeClasses: Record<M3CardVariant, string> = {
-        pebble: 'rounded-pebble', // 20px 20px 32px 32px - Friendly organic
-        tech: 'rounded-tech',     // 24px 4px 24px 20px - Precision
-        leaf: 'rounded-leaf',     // 32px 12px 32px 12px - Growth motif
-        gem: 'rounded-gem',       // 40px 8px 40px 8px - Highlight
+    // Map variant to Northcote Curio shape tokens
+    const shapeStyles: Record<M3CardVariant, React.CSSProperties> = {
+        pebble: { borderRadius: 'var(--radius-pebble)' },
+        tech: { borderRadius: 'var(--radius-stone)' },
+        leaf: { borderRadius: 'var(--radius-leaf)' },
+        gem: { borderRadius: 'var(--radius-pebble)' }, // Consolidating gem to pebble for consistency
     };
 
-    // Map padding to M3 spacing tokens
+    // Map padding to Northcote spacing tokens
     const paddingClasses: Record<M3CardPadding, string> = {
         none: '',
-        sm: 'p-space-md',   // 16px
-        md: 'p-space-lg',   // 24px
-        lg: 'p-space-xl',   // 32px
-        xl: 'p-space-2xl',  // 48px
+        sm: 'p-[var(--spacing-sm)]',
+        md: 'p-[var(--spacing-md)]',
+        lg: 'p-[var(--spacing-lg)]',
+        xl: 'p-[var(--spacing-xl)]',
     };
 
-    // M3 elevation classes
-    const elevationClass = elevation > 0 ? `shadow-elevation-${elevation}` : '';
-    const hoverElevationClass = hoverable && elevation < 5
-        ? `hover:shadow-elevation-${Math.min(elevation + 1, 5)}`
-        : '';
+    // Northcote elevation mapping
+    const getShadow = (lev: M3CardElevation) => {
+        if (lev === 0) return 'none';
+        if (lev === 1) return 'var(--shadow-subtle)';
+        if (lev === 2) return 'var(--shadow-standard)';
+        if (lev === 3) return 'var(--shadow-elevated)';
+        return 'var(--shadow-maximum)';
+    };
 
-    // Interactive styles
-    const interactiveClasses = onClick
-        ? 'cursor-pointer active:scale-[0.98]'
-        : '';
+    const [isHovered, setIsHovered] = React.useState(false);
+
+    const cardStyle: React.CSSProperties = {
+        ...shapeStyles[variant],
+        backgroundColor: 'var(--color-specimen-night)',
+        border: '1px solid rgba(240, 234, 214, 0.1)',
+        boxShadow: getShadow(isHovered && hoverable ? (Math.min(elevation + 1, 5) as M3CardElevation) : elevation),
+        transition: 'all var(--duration-standard) var(--ease-viscous-breeze)',
+        position: 'relative',
+        overflow: 'hidden',
+        ...(isHovered && hoverable ? { transform: 'translateY(-4px)' } : {}),
+        ...(onClick ? { cursor: 'pointer' } : {}),
+    };
 
     return (
         <div
+            style={cardStyle}
             className={`
-        bg-surface-container border border-outline-variant
-        ${shapeClasses[variant]}
         ${paddingClasses[padding]}
-        ${elevationClass}
-        ${hoverElevationClass}
-        ${interactiveClasses}
-        transition-all duration-medium-1 ease-spring
+        ${onClick ? 'active:scale-[0.98]' : ''}
         ${className}
       `}
+            onMouseEnter={() => hoverable && setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
             onClick={onClick}
             role={role}
             tabIndex={onClick ? 0 : undefined}
             onKeyDown={onClick ? (e) => e.key === 'Enter' && onClick(e as any) : undefined}
         >
-            {children}
+            {/* Background texture pattern if in tech variant */}
+            {variant === 'tech' && (
+                <div
+                    className="absolute inset-0 opacity-[0.03] pointer-events-none"
+                    style={{ backgroundImage: 'radial-gradient(var(--color-parchment) 1px, transparent 1px)', backgroundSize: '16px 16px' }}
+                />
+            )}
+            <div className="relative z-10">
+                {children}
+            </div>
         </div>
     );
 }
 
 /**
  * M3CardHeader - Semantic header section for M3Card
- * 
- * Provides consistent styling for card headers with optional icon/badge.
  */
 export interface M3CardHeaderProps {
     title: string;
@@ -135,18 +152,18 @@ export function M3CardHeader({
 }: M3CardHeaderProps) {
     return (
         <div className={`flex items-start justify-between mb-4 ${className}`}>
-            <div className="flex items-start gap-3 flex-1">
+            <div className="flex items-start gap-4 flex-1">
                 {icon && (
-                    <div className="flex-shrink-0 mt-1">
+                    <div className="flex-shrink-0 mt-1 text-[var(--color-wattle-gold)]">
                         {icon}
                     </div>
                 )}
                 <div className="flex-1 min-w-0">
-                    <h3 className="text-headline-large font-bold text-on-surface mb-1">
+                    <h3 className="font-bloom text-2xl font-bold text-[var(--color-parchment)] mb-1">
                         {title}
                     </h3>
                     {subtitle && (
-                        <p className="text-body-large text-on-surface-variant">
+                        <p className="text-sm text-[var(--color-flannel-flower-dark)] font-field-note font-medium">
                             {subtitle}
                         </p>
                     )}

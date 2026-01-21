@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-01-20T11:43:41.587Z",
+  "generatedAt": "2026-01-20T21:01:25.710Z",
   "totalComponents": 172,
   "componentsByCategory": {
     "layout": 19,
@@ -2263,8 +2263,8 @@
       "usesCustomUI": false,
       "usesLegacyM3": false,
       "isDemo": false,
-      "migrationStatus": "unknown",
-      "usesDesignTokens": false,
+      "migrationStatus": "migrated",
+      "usesDesignTokens": true,
       "usesModeSystem": false
     },
     {
@@ -2896,8 +2896,9 @@
       "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/NorthcoteButton.tsx",
       "relativePath": "src/components/ui/NorthcoteButton.tsx",
       "category": "ui",
-      "usageCount": 10,
+      "usageCount": 11,
       "importedBy": [
+        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/analysis/AssetLibrary.tsx",
         "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/applications/ApplicationCard.tsx",
         "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/auth/Login.tsx",
         "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/auth/Register.tsx",
@@ -2916,7 +2917,7 @@
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
-      "linesOfCode": 150,
+      "linesOfCode": 148,
       "complexity": "medium",
       "dependencies": [
         "../../lib/utils",
@@ -2925,9 +2926,9 @@
       "isReusable": true,
       "usesMUI": false,
       "usesCustomUI": false,
-      "usesLegacyM3": true,
+      "usesLegacyM3": false,
       "isDemo": false,
-      "migrationStatus": "mixed",
+      "migrationStatus": "migrated",
       "usesDesignTokens": true,
       "usesModeSystem": true
     },
@@ -3069,12 +3070,14 @@
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
-      "linesOfCode": 61,
+      "linesOfCode": 66,
       "complexity": "medium",
-      "dependencies": [],
+      "dependencies": [
+        "../../components/ui/NorthcoteButton"
+      ],
       "isReusable": false,
       "usesMUI": false,
-      "usesCustomUI": false,
+      "usesCustomUI": true,
       "usesLegacyM3": false,
       "isDemo": false,
       "migrationStatus": "migrated",
@@ -3264,7 +3267,7 @@
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
-      "linesOfCode": 147,
+      "linesOfCode": 150,
       "complexity": "medium",
       "dependencies": [
         "../../context/AuthContext",
@@ -3294,7 +3297,7 @@
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
-      "linesOfCode": 152,
+      "linesOfCode": 155,
       "complexity": "medium",
       "dependencies": [
         "../../context/AuthContext",
@@ -5251,7 +5254,7 @@
   "mostUsedComponents": [
     {
       "name": "NorthcoteButton",
-      "count": 10
+      "count": 11
     },
     {
       "name": "button",
@@ -5295,21 +5298,21 @@
     "67 reusable components lack Storybook stories. Consider documenting: NorthcoteButton, button, PageHeader, M3Button, Pebble...",
     "85 components appear unused. Consider archiving or removing them.",
     "24 components are marked as complex (>200 LOC or >10 dependencies). Consider refactoring: M3Button, AnalysisPage, IngestionPage, JobQueue, Documents...",
-    "17 components mix Northcote Curio tokens with legacy MUI/M3 usage. Consolidate to Curio-only: NorthcoteButton, AnalysisPage, JobQueue, M3ErrorAlert, M3Card...",
+    "16 components mix Northcote Curio tokens with legacy MUI/M3 usage. Consolidate to Curio-only: AnalysisPage, JobQueue, M3ErrorAlert, M3Card, TechCard...",
     "16 components still rely on legacy MUI/M3 without Curio tokens. Migrate to Northcote Curio: M3Button, Button, IngestionPage, EditableField, StatusChip...",
-    "Northcote Curio Adoption: 44.2% (76/172) fully adopted. Target: 80%+ for complete Curio migration."
+    "Northcote Curio Adoption: 45.3% (78/172) fully adopted. Target: 80%+ for complete Curio migration."
   ],
   "migrationSummary": {
-    "migrated": 76,
-    "mixed": 17,
+    "migrated": 78,
+    "mixed": 16,
     "not_migrated": 16,
-    "unknown": 63
+    "unknown": 62
   },
   "curioAdoption": {
-    "withCurioTokens": 93,
+    "withCurioTokens": 94,
     "withModeSystem": 13,
     "legacyMUI": 8,
-    "legacyM3": 26,
-    "fullyCurio": 76
+    "legacyM3": 25,
+    "fullyCurio": 78
   }
 }
