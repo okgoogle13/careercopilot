@@ -133,6 +133,19 @@ export function M3Select({
         }
     };
 
+    const buttonStyle: React.CSSProperties = {
+        borderRadius: 'var(--radius-stone)',
+        backgroundColor: 'rgba(44, 39, 35, 0.4)',
+        border: '2px solid',
+        borderColor: error
+            ? 'var(--color-waratah-crimson)'
+            : isOpen
+                ? 'var(--color-wattle-gold)'
+                : 'var(--color-eucalypt-smoke-base)',
+        color: 'var(--color-parchment)',
+        transition: 'all var(--duration-standard) var(--ease-viscous-breeze)',
+    };
+
     return (
         <div
             ref={containerRef}
@@ -141,45 +154,39 @@ export function M3Select({
             {/* Label */}
             {label && (
                 <label className={`
-          mb-2 text-label-large font-medium
-          ${error ? 'text-error' : 'text-on-surface'}
+          mb-2 text-sm font-medium transition-colors duration-200
+          ${error ? 'text-[var(--color-waratah-crimson)]' : 'text-[var(--color-flannel-flower)]'}
+          ${isOpen && !error ? 'text-[var(--color-wattle-gold)]' : ''}
         `}>
                     {label}
-                    {required && <span className="text-error ml-1">*</span>}
+                    {required && <span className="text-[var(--color-waratah-crimson)] ml-1">*</span>}
                 </label>
             )}
 
             {/* Select Button */}
             <button
                 type="button"
+                style={buttonStyle}
                 className={`
           ${fullWidth ? 'w-full' : 'w-auto min-w-[200px]'}
           px-4 py-3
           flex items-center justify-between gap-3
-          rounded-tech
-          border-2
-          ${error ? 'border-error' : 'border-outline-variant'}
-          ${isOpen && !error ? 'border-primary ring-2 ring-primary/20' : ''}
-          ${!disabled && !error && !isOpen ? 'hover:border-outline' : ''}
-          ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}
-          bg-surface-container
-          text-on-surface
-          transition-all duration-medium-1 ease-spring
+          ${isOpen && !error ? 'shadow-[0_0_15px_rgba(212,168,75,0.2)]' : ''}
+          ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:border-[var(--color-flannel-flower-dark)]'}
           ${className}
         `}
                 onClick={() => !disabled && setIsOpen(!isOpen)}
                 disabled={disabled}
                 aria-haspopup="listbox"
                 aria-expanded={isOpen}
-                aria-labelledby={label ? `${label}-label` : undefined}
             >
-                <span className={selectedOption ? 'text-on-surface' : 'text-on-surface-variant'}>
+                <span className={selectedOption ? 'text-[var(--color-parchment)]' : 'text-[var(--color-flannel-flower-dark)]'}>
                     {selectedOption ? selectedOption.label : placeholder}
                 </span>
                 <ChevronDown
                     className={`
-            w-5 h-5 text-on-surface-variant
-            transition-transform duration-medium-1 ease-spring
+            w-5 h-5 text-[var(--color-flannel-flower-dark)]
+            transition-transform duration-300
             ${isOpen ? 'rotate-180' : 'rotate-0'}
           `}
                 />
@@ -189,19 +196,17 @@ export function M3Select({
             {isOpen && (
                 <div
                     ref={dropdownRef}
-                    className={`
-            absolute top-full left-0 right-0 mt-2
-            rounded-pebble
-            bg-surface-container-high
-            border border-outline-variant
-            shadow-elevation-3
-            overflow-hidden
-            z-50
-            animate-in fade-in slide-in-from-top-2 duration-200
-          `}
+                    className="absolute top-full left-0 right-0 mt-3 z-50 overflow-hidden"
+                    style={{
+                        borderRadius: 'var(--radius-pebble)',
+                        backgroundColor: 'var(--color-specimen-night)',
+                        border: '1px solid var(--color-eucalypt-smoke-base)',
+                        boxShadow: 'var(--shadow-maximum)',
+                        animation: 'fadeIn 0.2s ease-out'
+                    }}
                     role="listbox"
                 >
-                    <div className="max-h-60 overflow-y-auto">
+                    <div className="max-h-64 overflow-y-auto">
                         {options.map((option) => {
                             const isSelected = option.value === value;
                             const isDisabled = option.disabled || disabled;
@@ -216,16 +221,16 @@ export function M3Select({
                     px-4 py-3
                     flex items-center justify-between gap-2
                     cursor-pointer
-                    ${isSelected ? 'bg-primary-container text-on-primary-container' : 'text-on-surface'}
-                    ${isDisabled ? 'opacity-50 cursor-not-allowed' : 'hover:bg-surface-container-highest'}
-                    transition-colors duration-short-2
+                    ${isSelected ? 'bg-white/10 text-[var(--color-wattle-gold)]' : 'text-[var(--color-parchment)]'}
+                    ${isDisabled ? 'opacity-50 cursor-not-allowed' : 'hover:bg-white/5'}
+                    transition-colors duration-150
                   `}
                                     onClick={() => !isDisabled && handleSelect(option.value)}
                                     onKeyDown={(e) => !isDisabled && handleKeyDown(e, option.value)}
                                 >
-                                    <span>{option.label}</span>
+                                    <span className="font-field-note">{option.label}</span>
                                     {isSelected && (
-                                        <Check className="w-5 h-5 flex-shrink-0" />
+                                        <Check className="w-5 h-5 flex-shrink-0 text-[var(--color-wattle-gold)]" />
                                     )}
                                 </div>
                             );
@@ -237,8 +242,8 @@ export function M3Select({
             {/* Helper Text / Error Message */}
             {displayHelperText && (
                 <p className={`
-          mt-1 px-1 text-label-small
-          ${error ? 'text-error' : 'text-on-surface-variant'}
+          mt-1 px-1 text-xs
+          ${error ? 'text-[var(--color-waratah-crimson)]' : 'text-[var(--color-flannel-flower-dark)]'}
         `}>
                     {displayHelperText}
                 </p>

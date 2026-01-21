@@ -1,8 +1,17 @@
 import React, { useState } from 'react';
 import { EvidenceUploader } from '@/features/ingestion/components/EvidenceUploader';
-import { Box, Typography, TextField, Button, Card, Alert, CircularProgress, Chip, Divider, Avatar } from '@mui/material';
-import { toast } from 'sonner';
-import { Sparkles, Building, Globe, Target, MessageCircle, Heart } from 'lucide-react';
+import {
+    M3Button,
+    M3Card,
+    M3CardHeader,
+    M3CardContent,
+    M3Alert,
+    M3TextField,
+    M3TextArea,
+    StatusBadge
+} from '@/components/ui';
+import { m3Toast } from '@/utils/toast';
+import { Sparkles, Building, Globe, Target, MessageCircle, Heart, Copy } from 'lucide-react';
 
 interface AtsResult {
     overallScore: number;
@@ -55,7 +64,7 @@ export const AnalysisPage: React.FC = () => {
 
     const handleAnalysis = async () => {
         if (!resumeText || !jobDescription) {
-            toast.error('Please enter both resume text and job description');
+            m3Toast.error('Incomplete Details', 'Please enter both resume text and job description');
             return;
         }
 
@@ -76,9 +85,9 @@ export const AnalysisPage: React.FC = () => {
 
             const result = await response.json();
             setAtsResult(result);
-            toast.success('Analysis complete!');
+            m3Toast.success('Success', 'ATS Analysis complete!');
         } catch (error) {
-            toast.error('Analysis failed. Please try again.');
+            m3Toast.error('Error', 'Analysis failed. Please try again.');
             console.error(error);
         } finally {
             setIsAnalyzing(false);
@@ -87,7 +96,7 @@ export const AnalysisPage: React.FC = () => {
 
     const handleHolisticStrategy = async () => {
         if (!jobUrl || !resumeText) {
-            toast.error('Please provide a Job URL and Resume Text');
+            m3Toast.error('Action Required', 'Please provide a Job URL and Resume Text');
             return;
         }
 
@@ -109,16 +118,15 @@ export const AnalysisPage: React.FC = () => {
 
             const result = await response.json();
             setStrategyResult(result);
-            toast.success('Strategy Generated!');
+            m3Toast.success('Done', 'Holistic Strategy Generated!');
 
-            // Auto-fill JD if scraping worked
             if (result.job_details) {
                 const jdText = `Company: ${result.corporate_profile?.name || 'Unknown'}\nRole: ${result.job_details.role_title}\nTasks: ${(result.job_details.key_responsibilities || []).join(', ')}`;
                 setJobDescription(jdText);
             }
 
         } catch (error) {
-            toast.error('Strategy generation failed. Please check the URL.');
+            m3Toast.error('Failure', 'Strategy generation failed. Please check the URL.');
             console.error(error);
         } finally {
             setIsGeneratingStrategy(false);
@@ -126,262 +134,185 @@ export const AnalysisPage: React.FC = () => {
     };
 
     return (
-        <Box sx={{ p: 4, maxWidth: 1400, mx: 'auto' }}>
+        <div className="p-8 max-w-[1400px] mx-auto min-h-screen bg-[var(--color-specimen-night)]">
             {/* Header */}
-            <Typography
-                variant="h3"
-                sx={{
-                    mb: 4,
-                    fontWeight: 'var(--sys-type-weight-bold)',
-                    color: 'var(--sys-color-on-surface)',
-                    fontFamily: 'var(--sys-type-display-family)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 2
-                }}
-            >
-                <Sparkles size={32} color="var(--sys-color-primary)" />
-                Application Intelligence
-            </Typography>
+            <header className="mb-10 flex items-center gap-4">
+                <div className="w-16 h-16 rounded-full bg-[var(--color-wattle-gold)]/10 flex items-center justify-center border border-[var(--color-wattle-gold)]/30">
+                    <Sparkles className="w-8 h-8 text-[var(--color-wattle-gold)]" />
+                </div>
+                <div>
+                    <h1 className="font-bloom text-5xl font-bold text-[var(--color-parchment)] tracking-tight">
+                        Application Intelligence
+                    </h1>
+                    <p className="font-field-note text-[var(--color-flannel-flower-dark)] mt-1">
+                        Synthesize corporate strategy with tactical resume optimization.
+                    </p>
+                </div>
+            </header>
 
-            {/* NEW: Evidence Uploader */}
-            <Box sx={{ mb: 4 }}>
+            {/* Evidence Uploader Segment */}
+            <section className="mb-10">
                 <EvidenceUploader />
-            </Box>
+            </section>
 
-            {/* Input Section */}
-            <Card sx={{
-                p: 3,
-                mb: 3,
-                borderRadius: 'var(--sys-shape-pebble)',
-                boxShadow: 'var(--sys-elevation-level1)',
-                backgroundColor: 'var(--sys-color-surface-container-low)'
-            }}>
-                <Typography variant="h6" sx={{ mb: 2, color: 'var(--sys-color-primary)' }}>
-                    Step 1: Input Details
-                </Typography>
+            {/* Input Intelligence Card */}
+            <M3Card variant="tech" padding="lg" elevation={2} className="mb-8 border-[var(--color-eucalypt-smoke-base)]/20">
+                <h2 className="font-bloom text-2xl font-bold text-[var(--color-wattle-gold)] mb-6 flex items-center gap-2">
+                    <Target className="w-6 h-6" /> Step 1: Tactical Inputs
+                </h2>
 
-                <TextField
-                    fullWidth
-                    label="Job Listing URL (Recommended for Deep Research)"
-                    placeholder="https://linkedin.com/jobs/view/..."
-                    value={jobUrl}
-                    onChange={(e) => setJobUrl(e.target.value)}
-                    sx={{
-                        mb: 3,
-                        '& .MuiOutlinedInput-root': {
-                            borderRadius: 'var(--sys-shape-corner-large)',
-                        }
-                    }}
-                />
-
-                <TextField
-                    fullWidth
-                    multiline
-                    rows={6}
-                    label="Resume Text"
-                    value={resumeText}
-                    onChange={(e) => setResumeText(e.target.value)}
-                    placeholder="Paste your resume content here..."
-                    sx={{
-                        mb: 2,
-                        '& .MuiOutlinedInput-root': {
-                            borderRadius: 'var(--sys-shape-corner-large)',
-                        }
-                    }}
-                />
-
-                <Box sx={{ display: 'flex', gap: 2, alignItems: 'center', mb: 2 }}>
-                    <div className="h-px bg-outline-variant flex-1"></div>
-                    <span className="text-on-surface-variant text-sm font-bold opacity-50">OR MANUAL ENTRY</span>
-                    <div className="h-px bg-outline-variant flex-1"></div>
-                </Box>
-
-                <TextField
-                    fullWidth
-                    multiline
-                    rows={4}
-                    label="Manual Job Description"
-                    value={jobDescription}
-                    onChange={(e) => setJobDescription(e.target.value)}
-                    placeholder="Paste job description if URL is not available..."
-                    sx={{
-                        mb: 2,
-                        opacity: jobUrl ? 0.6 : 1,
-                        '& .MuiOutlinedInput-root': {
-                            borderRadius: 'var(--sys-shape-corner-large)',
-                        }
-                    }}
-                />
-
-                <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', mt: 2 }}>
-                    <Button
-                        variant="contained"
-                        onClick={handleHolisticStrategy}
-                        disabled={isGeneratingStrategy || !jobUrl || !resumeText}
-                        sx={{
-                            borderRadius: 'var(--sys-shape-corner-full)',
-                            px: 4,
-                            py: 1.5,
-                            backgroundColor: 'var(--sys-color-tertiary)',
-                            color: 'var(--sys-color-on-tertiary)',
-                            transition: 'all 0.2s',
-                            '&:hover': {
-                                transform: 'scale(1.02)',
-                                backgroundColor: 'var(--sys-color-tertiary-container)',
-                            }
-                        }}
-                    >
-                        {isGeneratingStrategy ? <CircularProgress size={24} color="inherit" /> : '🚀 Generate Holistic Strategy'}
-                    </Button>
-
-                    <Button
+                <div className="space-y-6">
+                    <M3TextField
+                        fullWidth
+                        label="Job Listing URL"
+                        placeholder="https://linkedin.com/jobs/view/..."
+                        value={jobUrl}
+                        onChange={(e) => setJobUrl(e.target.value)}
                         variant="outlined"
-                        onClick={handleAnalysis}
-                        disabled={isAnalyzing || !resumeText || !jobDescription}
-                        sx={{
-                            borderRadius: 'var(--sys-shape-corner-full)',
-                            px: 4,
-                            py: 1.5,
-                            borderColor: 'var(--sys-color-outline)',
-                            color: 'var(--sys-color-on-surface)',
-                            '&:hover': {
-                                backgroundColor: 'var(--sys-color-surface-container-high)',
-                            }
-                        }}
-                    >
-                        {isAnalyzing ? <CircularProgress size={24} /> : 'Quick ATS Check'}
-                    </Button>
-                </Box>
-            </Card >
+                    />
 
-            {/* Strategy Results */}
-            {
-                strategyResult && strategyResult.corporate_profile && (
-                    <Box sx={{ mb: 4, animation: 'fadeIn 0.5s ease-out' }}>
+                    <M3TextArea
+                        fullWidth
+                        rows={6}
+                        label="Primary Resume Content"
+                        value={resumeText}
+                        onChange={(e) => setResumeText(e.target.value)}
+                        placeholder="Paste the raw text of your current resume..."
+                    />
 
-                        {/* Strategy Summary Banner */}
-                        <Alert icon={<Target className="w-5 h-5" />} severity="info" sx={{ mb: 3, borderRadius: '16px' }}>
-                            <Typography variant="subtitle2" fontWeight="bold">Strategy Applied</Typography>
-                            {strategyResult.strategy_summary}
-                        </Alert>
+                    <div className="flex items-center gap-4 py-2">
+                        <div className="h-0.5 bg-white/5 flex-1"></div>
+                        <span className="text-[var(--color-flannel-flower-dark)] text-xs font-annotation font-bold tracking-widest opacity-40 uppercase">OR Manual Context</span>
+                        <div className="h-0.5 bg-white/5 flex-1"></div>
+                    </div>
 
-                        {/* Corporate Intelligence Card */}
-                        <Card sx={{
-                            p: 0,
-                            mb: 3,
-                            borderRadius: '24px',
-                            overflow: 'hidden',
-                            boxShadow: 'var(--sys-elevation-level2)',
-                            backgroundColor: 'var(--sys-color-surface-container)',
-                            border: '1px solid var(--sys-color-outline-variant)'
-                        }}>
-                            <Box sx={{
-                                p: 3,
-                                background: 'linear-gradient(135deg, var(--sys-color-primary-container) 0%, var(--sys-color-surface-container) 100%)',
-                                display: 'flex',
-                                alignItems: 'center',
-                                gap: 2
-                            }}>
-                                <Building className="w-8 h-8 text-primary" />
-                                <Box>
-                                    <Typography variant="h5" fontWeight="bold" color="var(--sys-color-on-surface)">
-                                        {strategyResult.corporate_profile.name}
-                                    </Typography>
-                                    <Typography variant="caption" sx={{ opacity: 0.7, letterSpacing: '0.05em', textTransform: 'uppercase' }}>
-                                        Corporate Intelligence
-                                    </Typography>
-                                </Box>
-                            </Box>
+                    <M3TextArea
+                        fullWidth
+                        rows={4}
+                        label="Supplemental Job Description"
+                        value={jobDescription}
+                        onChange={(e) => setJobDescription(e.target.value)}
+                        placeholder="Use this if the URL research is unavailable..."
+                        className={jobUrl ? 'opacity-60' : ''}
+                    />
 
-                            <Box sx={{ p: 3, display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 3 }}>
-
-                                {/* Mission */}
-                                <Box>
-                                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1, color: 'var(--sys-color-tertiary)' }}>
-                                        <Globe size={18} />
-                                        <Typography variant="subtitle2" fontWeight="bold">Mission</Typography>
-                                    </Box>
-                                    <Typography variant="body2" color="text.secondary">
-                                        {strategyResult.corporate_profile.mission_statement}
-                                    </Typography>
-                                </Box>
-
-                                {/* Communication Style */}
-                                <Box>
-                                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1, color: 'var(--sys-color-secondary)' }}>
-                                        <MessageCircle size={18} />
-                                        <Typography variant="subtitle2" fontWeight="bold">Communication Style</Typography>
-                                    </Box>
-                                    <Chip label={strategyResult.corporate_profile.communication_style} size="small" sx={{ bgcolor: 'var(--sys-color-secondary-container)' }} />
-                                </Box>
-
-                                {/* Values */}
-                                <Box sx={{ gridColumn: '1 / -1' }}>
-                                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1, color: 'var(--sys-color-error)' }}>
-                                        <Heart size={18} />
-                                        <Typography variant="subtitle2" fontWeight="bold">Core Values</Typography>
-                                    </Box>
-                                    <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
-                                        {strategyResult.corporate_profile.core_values.map((val, idx) => (
-                                            <Chip key={idx} label={val} size="small" variant="outlined" />
-                                        ))}
-                                    </Box>
-                                </Box>
-                            </Box>
-                        </Card>
-                    </Box>
-                )
-            }
-
-            {/* Results Section (ATS or Strategy Optimized Resume) */}
-            {
-                (strategyResult || atsResult) && (
-                    <Card sx={{
-                        p: 3,
-                        borderRadius: 'var(--sys-shape-tech)',
-                        boxShadow: 'var(--sys-elevation-level3)',
-                        backgroundColor: 'var(--sys-color-surface-container-high)'
-                    }}>
-                        <Typography variant="h5" sx={{ mb: 2, color: 'var(--sys-color-primary)' }}>
-                            ✨ Optimized Resume
-                        </Typography>
-                        <Typography
-                            component="pre"
-                            sx={{
-                                whiteSpace: 'pre-wrap',
-                                fontFamily: 'var(--sys-type-body-family)',
-                                fontSize: 'var(--sys-type-body-large-size)',
-                                lineHeight: 1.6,
-                                color: 'var(--sys-color-on-surface)',
-                                backgroundColor: 'var(--sys-color-surface)',
-                                p: 3,
-                                borderRadius: 'var(--sys-shape-corner-large)',
-                                border: '1px solid var(--sys-color-outline-variant)'
-                            }}
+                    <div className="flex flex-wrap gap-4 pt-4">
+                        <M3Button
+                            variant="filled"
+                            color="tertiary"
+                            onClick={handleHolisticStrategy}
+                            disabled={isGeneratingStrategy || !jobUrl || !resumeText}
+                            loading={isGeneratingStrategy}
+                            size="large"
+                            className="px-8"
                         >
-                            {strategyResult ? strategyResult.optimized_resume.resume_text : ''}
-                        </Typography>
+                            🚀 Generate Strategy
+                        </M3Button>
 
-                        <Box sx={{ mt: 3, display: 'flex', gap: 2 }}>
-                            <Button
-                                variant="outlined"
-                                onClick={() => {
-                                    navigator.clipboard.writeText(strategyResult ? strategyResult.optimized_resume.resume_text : '');
-                                    toast.success('Copied to clipboard!');
-                                }}
-                                sx={{
-                                    borderRadius: 'var(--sys-shape-corner-full)',
-                                    borderColor: 'var(--sys-color-primary)',
-                                    color: 'var(--sys-color-primary)'
-                                }}
-                            >
-                                📋 Copy to Clipboard
-                            </Button>
-                        </Box>
-                    </Card>
-                )
-            }
-        </Box >
+                        <M3Button
+                            variant="outlined"
+                            onClick={handleAnalysis}
+                            disabled={isAnalyzing || !resumeText || !jobDescription}
+                            loading={isAnalyzing}
+                            size="large"
+                            className="px-8"
+                        >
+                            Quick ATS Check
+                        </M3Button>
+                    </div>
+                </div>
+            </M3Card>
+
+            {/* Intelligence Insights */}
+            {strategyResult && strategyResult.corporate_profile && (
+                <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                    <M3Alert severity="info" variant="tonal" title="Strategy Summary">
+                        {strategyResult.strategy_summary}
+                    </M3Alert>
+
+                    <M3Card variant="pebble" padding="none" className="overflow-hidden border border-[var(--color-eucalypt-smoke-base)]/20">
+                        <div className="p-8 bg-gradient-to-br from-[var(--ref-palette-primary-90)] to-transparent flex items-center gap-6 border-b border-white/5">
+                            <div className="w-16 h-16 rounded-full bg-white/5 border border-white/10 flex items-center justify-center">
+                                <Building className="w-8 h-8 text-[var(--color-wattle-gold)]" />
+                            </div>
+                            <div>
+                                <h3 className="font-bloom text-3xl font-bold text-[var(--color-parchment)]">
+                                    {strategyResult.corporate_profile.name}
+                                </h3>
+                                <div className="text-[var(--color-flannel-flower-dark)] text-xs font-annotation tracking-widest uppercase mt-1">
+                                    Corporate Intelligence Report
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="p-8 grid grid-cols-1 md:grid-cols-2 gap-10">
+                            <div>
+                                <h4 className="flex items-center gap-2 font-bloom text-xl text-[var(--color-flannel-flower)] mb-3">
+                                    <Globe className="w-5 h-5" /> Our Mission
+                                </h4>
+                                <p className="font-field-note text-[var(--color-parchment)]/80 leading-relaxed">
+                                    {strategyResult.corporate_profile.mission_statement}
+                                </p>
+                            </div>
+
+                            <div>
+                                <h4 className="flex items-center gap-2 font-bloom text-xl text-[var(--color-flannel-flower)] mb-3">
+                                    <MessageCircle className="w-5 h-5" /> Professional Voice
+                                </h4>
+                                <StatusBadge
+                                    label={strategyResult.corporate_profile.communication_style}
+                                    variant="info"
+                                    showDot
+                                />
+                            </div>
+
+                            <div className="md:col-span-2">
+                                <h4 className="flex items-center gap-2 font-bloom text-xl text-[var(--color-flannel-flower)] mb-4">
+                                    <Heart className="w-5 h-5" /> Foundational Values
+                                </h4>
+                                <div className="flex flex-wrap gap-2">
+                                    {strategyResult.corporate_profile.core_values.map((val, idx) => (
+                                        <StatusBadge
+                                            key={idx}
+                                            label={val}
+                                            variant="neutral"
+                                            mode="laboratory"
+                                        />
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    </M3Card>
+                </div>
+            )}
+
+            {/* Results Output */}
+            {(strategyResult || atsResult) && (
+                <div className="mt-8 animate-in fade-in slide-in-from-bottom-6 duration-700">
+                    <M3Card variant="tech" padding="lg" elevation={4} className="bg-[var(--color-specimen-night)] border-[var(--color-wattle-gold)]/20">
+                        <M3CardHeader
+                            title="✨ Optimized Output"
+                            subtitle="Strategic resume ready for submission."
+                            icon={<Sparkles className="w-6 h-6" />}
+                            action={
+                                <M3Button
+                                    variant="outlined"
+                                    onClick={() => {
+                                        navigator.clipboard.writeText(strategyResult ? strategyResult.optimized_resume.resume_text : '');
+                                        m3Toast.success('Copied', 'Resume text copied to clipboard');
+                                    }}
+                                    startIcon={<Copy className="w-4 h-4" />}
+                                >
+                                    Copy
+                                </M3Button>
+                            }
+                        />
+                        <div className="mt-6 font-field-note text-base text-[var(--color-parchment)]/90 bg-white/5 p-8 rounded-[var(--radius-stone)] border border-white/5 whitespace-pre-wrap leading-relaxed shadow-inner">
+                            {strategyResult ? strategyResult.optimized_resume.resume_text : 'No data generated.'}
+                        </div>
+                    </M3Card>
+                </div>
+            )}
+        </div>
     );
 };

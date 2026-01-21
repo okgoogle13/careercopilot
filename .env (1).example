@@ -1,0 +1,43 @@
+# Google Cloud / Firebase
+FIREBASE_PROJECT_ID=careercopilot-468811
+GOOGLE_CLOUD_PROJECT=careercopilot-468811
+GOOGLE_APPLICATION_CREDENTIALS=functions/service-account.json
+FIRESTORE_REGION=us-central1
+FIREBASE_HOSTING_SITE=careercopilot-468811
+
+FIREBASE_STORAGE_BUCKET=careercopilot-468811.appspot.com
+
+# Auth
+AUTHORIZED_USER_EMAIL=
+AUTHORIZED_USER_UID=
+
+# AI Keys (leave blank, fill in after setup)
+GEMINI_API_KEY=
+OPENAI_API_KEY=
+ANTHROPIC_API_KEY=
+PERPLEXITY_API_KEY=
+
+# Vector DB
+PINECONE_API_KEY=
+PINECONE_ENVIRONMENT=
+PINECONE_INDEX_NAME=
+
+# Search APIs
+SERP_API_KEY=
+
+# Environment
+ENVIRONMENT=development
+LOG_LEVEL=DEBUG
+
+# ATS Defaults
+ATS_KEYWORD_WEIGHT=0.45
+ATS_SEMANTIC_WEIGHT=0.35
+ATS_FORMATTING_WEIGHT=0.20
+ATS_PASS_THRESHOLD=75
+
+# Default Context
+DEFAULT_LOCATION="Northcote, VIC, Australia"
+DEFAULT_INDUSTRIES="Community Services, Social Work, Advocacy"
+
+# Allowed Upload Types
+ALLOWED_FILE_TYPES=".pdf,.docx,.doc,.txt"

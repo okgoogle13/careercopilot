@@ -105,12 +105,11 @@ export function M3Button({
     target,
     rel,
 }: M3ButtonProps) {
-    // Base classes for all variants
+    // Base classes for Northcote Curio buttons
     const baseClasses = [
         'inline-flex items-center justify-center gap-2',
-        'rounded-full font-medium',
-        'transition-all duration-medium-1 ease-spring',
-        'focus:outline-none focus:ring-2 focus:ring-offset-2',
+        'font-bold',
+        'transition-all duration-300',
         disabled || loading ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer',
         fullWidth ? 'w-full' : '',
     ].join(' ');
@@ -122,51 +121,47 @@ export function M3Button({
         large: 'px-8 py-4 text-lg',
     };
 
-    // Variant and color-specific classes
-    const variantClasses: Record<M3ButtonVariant, Record<M3ButtonColor, string>> = {
-        filled: {
-            primary: 'bg-primary text-on-primary hover:brightness-110 focus:ring-primary shadow-elevation-1 hover:shadow-elevation-2',
-            secondary: 'bg-secondary text-on-secondary hover:brightness-110 focus:ring-secondary shadow-elevation-1 hover:shadow-elevation-2',
-            tertiary: 'bg-tertiary text-on-tertiary hover:brightness-110 focus:ring-tertiary shadow-elevation-1 hover:shadow-elevation-2',
-            error: 'bg-error text-on-error hover:brightness-110 focus:ring-error shadow-elevation-1 hover:shadow-elevation-2',
-            warning: 'bg-warning text-on-warning hover:brightness-110 focus:ring-warning shadow-elevation-1 hover:shadow-elevation-2',
-        },
-        elevated: {
-            primary: 'bg-primary text-on-primary hover:brightness-110 focus:ring-primary shadow-elevation-2 hover:shadow-elevation-3',
-            secondary: 'bg-secondary text-on-secondary hover:brightness-110 focus:ring-secondary shadow-elevation-2 hover:shadow-elevation-3',
-            tertiary: 'bg-tertiary text-on-tertiary hover:brightness-110 focus:ring-tertiary shadow-elevation-2 hover:shadow-elevation-3',
-            error: 'bg-error text-on-error hover:brightness-110 focus:ring-error shadow-elevation-2 hover:shadow-elevation-3',
-            warning: 'bg-warning text-on-warning hover:brightness-110 focus:ring-warning shadow-elevation-2 hover:shadow-elevation-3',
-        },
-        outlined: {
-            primary: 'border-2 border-primary text-primary hover:bg-primary hover:text-on-primary focus:ring-primary',
-            secondary: 'border-2 border-secondary text-secondary hover:bg-secondary hover:text-on-secondary focus:ring-secondary',
-            tertiary: 'border-2 border-tertiary text-tertiary hover:bg-tertiary hover:text-on-tertiary focus:ring-tertiary',
-            error: 'border-2 border-error text-error hover:bg-error hover:text-on-error focus:ring-error',
-            warning: 'border-2 border-warning text-warning hover:bg-warning hover:text-on-warning focus:ring-warning',
-        },
-        tonal: {
-            primary: 'bg-primary-container text-on-primary-container hover:brightness-110 focus:ring-primary',
-            secondary: 'bg-secondary-container text-on-secondary-container hover:brightness-110 focus:ring-secondary',
-            tertiary: 'bg-tertiary-container text-on-tertiary-container hover:brightness-110 focus:ring-tertiary',
-            error: 'bg-error-container text-on-error-container hover:brightness-110 focus:ring-error',
-            warning: 'bg-warning-container text-on-warning-container hover:brightness-110 focus:ring-warning',
-        },
-        text: {
-            primary: 'text-primary hover:bg-primary-container focus:ring-primary',
-            secondary: 'text-secondary hover:bg-secondary-container focus:ring-secondary',
-            tertiary: 'text-tertiary hover:bg-tertiary-container focus:ring-tertiary',
-            error: 'text-error hover:bg-error-container focus:ring-error',
-            warning: 'text-warning hover:bg-warning-container focus:ring-warning',
-        },
+    // Northcote Curio Variant & Color Mapping
+    const getVariantStyles = () => {
+        const styles: React.CSSProperties = {
+            borderRadius: 'var(--radius-pebble)',
+            transition: 'all var(--duration-standard) var(--ease-viscous-breeze)',
+        };
+
+        if (variant === 'filled') {
+            styles.backgroundColor = `var(--ref-palette-${color}-40)`;
+            styles.color = `var(--ref-palette-${color}-100)`;
+            styles.boxShadow = 'var(--shadow-subtle)';
+        } else if (variant === 'tonal') {
+            styles.backgroundColor = `var(--ref-palette-${color}-90)`;
+            styles.color = `var(--ref-palette-${color}-10)`;
+        } else if (variant === 'outlined') {
+            styles.border = `2px solid var(--ref-palette-${color}-40)`;
+            styles.color = `var(--ref-palette-${color}-40)`;
+            styles.backgroundColor = 'transparent';
+        } else if (variant === 'elevated') {
+            styles.backgroundColor = `var(--ref-palette-${color}-40)`;
+            styles.color = `var(--ref-palette-${color}-100)`;
+            styles.boxShadow = 'var(--shadow-elevated)';
+        } else { // text
+            styles.backgroundColor = 'transparent';
+            styles.color = `var(--ref-palette-${color}-40)`;
+        }
+
+        return styles;
     };
 
-    // Hover scale effect (except when disabled/loading)
-    const hoverClasses = disabled || loading
-        ? ''
-        : 'hover:scale-[1.02] active:scale-[0.98]';
+    const hoverStyle: React.CSSProperties = disabled || loading ? {} : {
+        transform: 'translateY(-4px) scale(1.02)',
+        boxShadow: color === 'primary' ? 'var(--elevation-shadow-glow-gold)' : 'var(--shadow-elevated)',
+    };
 
-    const combinedClasses = `${baseClasses} ${sizeClasses[size]} ${variantClasses[variant][color]} ${hoverClasses} ${className}`;
+    const [isHovered, setIsHovered] = React.useState(false);
+
+    const combinedStyle = {
+        ...getVariantStyles(),
+        ...(isHovered ? hoverStyle : {}),
+    };
 
     // Loading spinner
     const loadingSpinner = (
@@ -201,23 +196,28 @@ export function M3Button({
         </>
     );
 
-    // Render as link if href is provided
+    // Render logic
+    const commonProps = {
+        style: combinedStyle,
+        className: `${baseClasses} ${sizeClasses[size]} ${className}`,
+        onMouseEnter: () => !disabled && !loading && setIsHovered(true),
+        onMouseLeave: () => setIsHovered(false),
+        'aria-disabled': disabled || loading,
+    };
+
     if (href) {
         return (
             <a
                 href={href}
                 target={target}
                 rel={rel || (target === '_blank' ? 'noopener noreferrer' : undefined)}
-                className={combinedClasses}
-                aria-disabled={disabled || loading}
+                {...commonProps}
                 onClick={(e) => {
                     if (disabled || loading) {
                         e.preventDefault();
                         return;
                     }
-                    if (onClick) {
-                        onClick(e as any);
-                    }
+                    if (onClick) onClick(e as any);
                 }}
             >
                 {content}
@@ -225,15 +225,13 @@ export function M3Button({
         );
     }
 
-    // Render as button
     return (
         <button
             type={type}
-            className={combinedClasses}
+            {...commonProps}
             disabled={disabled || loading}
             onClick={onClick}
             aria-busy={loading}
-            aria-disabled={disabled}
         >
             {content}
         </button>
