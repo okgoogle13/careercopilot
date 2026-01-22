@@ -156,13 +156,13 @@ export const AnalysisPage: React.FC = () => {
             </section>
 
             {/* Input Intelligence Card */}
-            <M3Card variant="tech" padding="lg" elevation={2} className="mb-8 border-[var(--color-eucalypt-smoke-base)]/20">
+            <Stone variant="tech" padding="lg" elevation={2} className="mb-8 border-[var(--color-eucalypt-smoke-base)]/20">
                 <h2 className="font-bloom text-2xl font-bold text-[var(--color-wattle-gold)] mb-6 flex items-center gap-2">
                     <Target className="w-6 h-6" /> Step 1: Tactical Inputs
                 </h2>
 
                 <div className="space-y-6">
-                    <M3TextField
+                    <Lens
                         fullWidth
                         label="Job Listing URL"
                         placeholder="https://linkedin.com/jobs/view/..."
@@ -197,7 +197,7 @@ export const AnalysisPage: React.FC = () => {
                     />
 
                     <div className="flex flex-wrap gap-4 pt-4">
-                        <M3Button
+                        <Pebble
                             variant="filled"
                             color="tertiary"
                             onClick={handleHolisticStrategy}
@@ -207,9 +207,9 @@ export const AnalysisPage: React.FC = () => {
                             className="px-8"
                         >
                             🚀 Generate Strategy
-                        </M3Button>
+                        </Pebble>
 
-                        <M3Button
+                        <Pebble
                             variant="outlined"
                             onClick={handleAnalysis}
                             disabled={isAnalyzing || !resumeText || !jobDescription}
@@ -218,19 +218,19 @@ export const AnalysisPage: React.FC = () => {
                             className="px-8"
                         >
                             Quick ATS Check
-                        </M3Button>
+                        </Pebble>
                     </div>
                 </div>
-            </M3Card>
+            </Stone>
 
             {/* Intelligence Insights */}
             {strategyResult && strategyResult.corporate_profile && (
                 <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
-                    <M3Alert severity="info" variant="tonal" title="Strategy Summary">
+                    <Signal severity="info" variant="tonal" title="Strategy Summary">
                         {strategyResult.strategy_summary}
-                    </M3Alert>
+                    </Signal>
 
-                    <M3Card variant="pebble" padding="none" className="overflow-hidden border border-[var(--color-eucalypt-smoke-base)]/20">
+                    <Stone variant="pebble" padding="none" className="overflow-hidden border border-[var(--color-eucalypt-smoke-base)]/20">
                         <div className="p-8 bg-gradient-to-br from-[var(--ref-palette-primary-90)] to-transparent flex items-center gap-6 border-b border-white/5">
                             <div className="w-16 h-16 rounded-full bg-white/5 border border-white/10 flex items-center justify-center">
                                 <Building className="w-8 h-8 text-[var(--color-wattle-gold)]" />
@@ -282,20 +282,20 @@ export const AnalysisPage: React.FC = () => {
                                 </div>
                             </div>
                         </div>
-                    </M3Card>
+                    </Stone>
                 </div>
             )}
 
             {/* Results Output */}
             {(strategyResult || atsResult) && (
                 <div className="mt-8 animate-in fade-in slide-in-from-bottom-6 duration-700">
-                    <M3Card variant="tech" padding="lg" elevation={4} className="bg-[var(--color-specimen-night)] border-[var(--color-wattle-gold)]/20">
-                        <M3CardHeader
+                    <Stone variant="tech" padding="lg" elevation={4} className="bg-[var(--color-specimen-night)] border-[var(--color-wattle-gold)]/20">
+                        <StoneHeader
                             title="✨ Optimized Output"
                             subtitle="Strategic resume ready for submission."
                             icon={<Sparkles className="w-6 h-6" />}
                             action={
-                                <M3Button
+                                <Pebble
                                     variant="outlined"
                                     onClick={() => {
                                         navigator.clipboard.writeText(strategyResult ? strategyResult.optimized_resume.resume_text : '');
@@ -304,13 +304,13 @@ export const AnalysisPage: React.FC = () => {
                                     startIcon={<Copy className="w-4 h-4" />}
                                 >
                                     Copy
-                                </M3Button>
+                                </Pebble>
                             }
                         />
                         <div className="mt-6 font-field-note text-base text-[var(--color-parchment)]/90 bg-white/5 p-8 rounded-[var(--radius-stone)] border border-white/5 whitespace-pre-wrap leading-relaxed shadow-inner">
                             {strategyResult ? strategyResult.optimized_resume.resume_text : 'No data generated.'}
                         </div>
-                    </M3Card>
+                    </Stone>
                 </div>
             )}
         </div>

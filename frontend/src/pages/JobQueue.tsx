@@ -197,7 +197,7 @@ export function JobQueue() {
                         const isDrafting = draftingJobId === job.id;
 
                         return (
-                            <M3Card
+                            <Stone
                                 key={job.id}
                                 variant="tech"
                                 elevation={1}
@@ -234,7 +234,7 @@ export function JobQueue() {
                                 </div>
 
                                 <div className="flex flex-col gap-3 mt-auto">
-                                    <M3Button
+                                    <Pebble
                                         variant="filled"
                                         color="primary"
                                         fullWidth
@@ -245,10 +245,10 @@ export function JobQueue() {
                                         loading={isAnalyzing}
                                     >
                                         {isAnalyzing ? 'Analyzing' : 'Analyze Intelligence'}
-                                    </M3Button>
+                                    </Pebble>
 
                                     {job.status === 'ready_to_apply' && (
-                                        <M3Button
+                                        <Pebble
                                             variant="filled"
                                             color="secondary"
                                             fullWidth
@@ -259,10 +259,10 @@ export function JobQueue() {
                                             loading={isDrafting}
                                         >
                                             {isDrafting ? 'Drafting' : 'Synthesize Letter'}
-                                        </M3Button>
+                                        </Pebble>
                                     )}
 
-                                    <M3Button
+                                    <Pebble
                                         variant="text"
                                         color="primary"
                                         fullWidth
@@ -274,15 +274,15 @@ export function JobQueue() {
                                         className="opacity-70 hover:opacity-100"
                                     >
                                         Inspect Source
-                                    </M3Button>
+                                    </Pebble>
                                 </div>
-                            </M3Card>
+                            </Stone>
                         );
                     })}
                 </div>
             )}
 
-            <M3Modal
+            <Cabinet
                 open={showCoverLetterDialog}
                 onClose={() => setShowCoverLetterDialog(false)}
                 title="Strategic Cover Letter"
@@ -305,23 +305,23 @@ export function JobQueue() {
                     </div>
 
                     <div className="flex justify-end gap-3 pt-4">
-                        <M3Button
+                        <Pebble
                             variant="outlined"
                             onClick={() => setShowCoverLetterDialog(false)}
                         >
                             Refine Later
-                        </M3Button>
-                        <M3Button
+                        </Pebble>
+                        <Pebble
                             variant="filled"
                             color="primary"
                             startIcon={<Copy className="w-4 h-4" />}
                             onClick={handleCopy}
                         >
                             {copied ? 'Copied' : 'Secure to Clipboard'}
-                        </M3Button>
+                        </Pebble>
                     </div>
                 </div>
-            </M3Modal>
+            </Cabinet>
         </div>
     );
 }

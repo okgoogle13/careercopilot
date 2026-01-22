@@ -1,6 +1,6 @@
 import React from 'react';
 
-export interface M3BadgeProps {
+export interface SeedProps {
     /** Badge content (number or small string) */
     content?: React.ReactNode;
     /** Semantic color theme */
@@ -24,7 +24,7 @@ export interface M3BadgeProps {
  * 
  * An organic badge overlay for icons and components.
  */
-export const M3Badge: React.FC<M3BadgeProps> = ({
+export const M3Badge: React.FC<SeedProps> = ({
     content,
     color = 'error',
     size = 'medium',
