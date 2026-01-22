@@ -96,7 +96,7 @@ export const M3TextField = forwardRef<HTMLInputElement, M3TextFieldProps>(({
     };
 
     // Size-specific classes
-    const sizeClasses: Record<M3TextFieldSize, { input: string; adornment: string }> = {
+    const sizeClasses: Record<LensSize, { input: string; adornment: string }> = {
         small: {
             input: 'px-3 py-2 text-sm',
             adornment: 'text-sm',
@@ -359,7 +359,7 @@ export const M3TextArea = forwardRef<HTMLTextAreaElement, M3TextAreaProps>(({
         props.onChange?.(e);
     };
 
-    const sizeClasses: Record<M3TextFieldSize, string> = {
+    const sizeClasses: Record<LensSize, string> = {
         small: 'px-3 py-2 text-sm',
         medium: 'px-4 py-3 text-base',
         large: 'px-5 py-4 text-lg',

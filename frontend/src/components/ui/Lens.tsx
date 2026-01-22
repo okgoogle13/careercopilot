@@ -1,9 +1,9 @@
 import React, { forwardRef } from 'react';
 
-export type M3TextFieldVariant = 'filled' | 'outlined';
-export type M3TextFieldSize = 'small' | 'medium' | 'large';
+export type LensVariant = 'filled' | 'outlined';
+export type LensSize = 'small' | 'medium' | 'large';
 
-export interface M3TextFieldProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'> {
+export interface LensProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'> {
     /** Input label */
     label?: string;
 
@@ -17,10 +17,10 @@ export interface M3TextFieldProps extends Omit<React.InputHTMLAttributes<HTMLInp
     errorMessage?: string;
 
     /** Visual variant */
-    variant?: M3TextFieldVariant;
+    variant?: LensVariant;
 
     /** Input size */
-    size?: M3TextFieldSize;
+    size?: LensSize;
 
     /** Start adornment (icon or text) */
     startAdornment?: React.ReactNode;
@@ -60,28 +60,28 @@ export interface M3TextFieldProps extends Omit<React.InputHTMLAttributes<HTMLInp
  * 
  * @example
  * ```tsx
- * <M3TextField
+ * <Lens
  *   label="Email"
  *   type="email"
  *   placeholder="you@example.com"
  *   helperText="We'll never share your email"
  * />
  * 
- * <M3TextField
+ * <Lens
  *   label="Password"
  *   type="password"
  *   error
  *   errorMessage="Password must be at least 8 characters"
  * />
  * 
- * <M3TextField
+ * <Lens
  *   label="Search"
  *   startAdornment={<SearchIcon />}
  *   variant="filled"
  * />
  * ```
  */
-export const M3TextField = forwardRef<HTMLInputElement, M3TextFieldProps>(({
+export const Lens = forwardRef<HTMLInputElement, LensProps>(({
     label,
     helperText,
     error = false,
@@ -111,7 +111,7 @@ export const M3TextField = forwardRef<HTMLInputElement, M3TextFieldProps>(({
     };
 
     // Size-specific classes
-    const sizeClasses: Record<M3TextFieldSize, { input: string; adornment: string }> = {
+    const sizeClasses: Record<LensSize, { input: string; adornment: string }> = {
         small: {
             input: 'px-3 py-2 text-sm',
             adornment: 'text-sm',
@@ -246,7 +246,7 @@ export const M3TextField = forwardRef<HTMLInputElement, M3TextFieldProps>(({
     );
 });
 
-M3TextField.displayName = 'M3TextField';
+Lens.displayName = 'Lens';
 
 /**
  * M3TextArea - Multi-line text input variant
@@ -258,7 +258,7 @@ export interface M3TextAreaProps extends Omit<React.TextareaHTMLAttributes<HTMLT
     helperText?: string;
     error?: boolean;
     errorMessage?: string;
-    variant?: M3TextFieldVariant;
+    variant?: LensVariant;
     fullWidth?: boolean;
     showCounter?: boolean;
     containerClassName?: string;

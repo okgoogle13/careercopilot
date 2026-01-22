@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { M3Alert } from '../components/ui/M3Alert';
+import { Signal } from '../components/ui/M3Alert';
 
 const meta: Meta<typeof M3Alert> = {
     title: 'M3 Components/Alert',
@@ -62,10 +62,10 @@ export const ErrorState: Story = {
 export const AllTypes: Story = {
     render: () => (
         <div className="flex flex-col gap-4">
-            <M3Alert severity="info" title="Info">Informational message container.</M3Alert>
-            <M3Alert severity="success" title="Success">Successful operation feedback.</M3Alert>
-            <M3Alert severity="warning" title="Warning">Potential issue found in your application.</M3Alert>
-            <M3Alert severity="error" title="Error">Critical failure in the ingestion pipeline.</M3Alert>
+            <Signal severity="info" title="Info">Informational message container.</Signal>
+            <Signal severity="success" title="Success">Successful operation feedback.</Signal>
+            <Signal severity="warning" title="Warning">Potential issue found in your application.</Signal>
+            <Signal severity="error" title="Error">Critical failure in the ingestion pipeline.</Signal>
         </div>
     ),
 };
@@ -73,9 +73,9 @@ export const AllTypes: Story = {
 export const Variants: Story = {
     render: () => (
         <div className="flex flex-col gap-4">
-            <M3Alert variant="filled" severity="info">Filled (High Emphasis)</M3Alert>
-            <M3Alert variant="tonal" severity="info">Tonal (Medium Emphasis)</M3Alert>
-            <M3Alert variant="outlined" severity="info">Outlined (Low Emphasis)</M3Alert>
+            <Signal variant="filled" severity="info">Filled (High Emphasis)</Signal>
+            <Signal variant="tonal" severity="info">Tonal (Medium Emphasis)</Signal>
+            <Signal variant="outlined" severity="info">Outlined (Low Emphasis)</Signal>
         </div>
     ),
 };
