@@ -4,7 +4,7 @@ import {
     M3Card,
     M3Alert,
 } from '@/components/ui';
-import { M3Accordion } from '@/components/ui/M3Accordion';
+import { Vessel } from '@/components/ui/M3Accordion';
 import {
     Person,
     Work,
@@ -175,46 +175,46 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
                     </div>
 
                     <div className="flex flex-wrap gap-3">
-                        <M3Button
+                        <Pebble
                             variant="outlined"
                             startIcon={<Undo2 className="w-4 h-4" />}
                             onClick={handleUndo}
                             disabled={historyIndex === 0}
                         >
                             Undo
-                        </M3Button>
-                        <M3Button
+                        </Pebble>
+                        <Pebble
                             variant="outlined"
                             startIcon={<Redo2 className="w-4 h-4" />}
                             onClick={handleRedo}
                             disabled={historyIndex === history.length - 1}
                         >
                             Redo
-                        </M3Button>
+                        </Pebble>
                         {(flaggedAchievements.length > 0 || flaggedKSCs.length > 0) && (
-                            <M3Button
+                            <Pebble
                                 variant="filled"
                                 color="secondary"
                                 startIcon={<Sparkles className="w-4 h-4" />}
                                 onClick={handleApplyAllSuggestions}
                             >
                                 Apply AI Suggestions
-                            </M3Button>
+                            </Pebble>
                         )}
-                        <M3Button
+                        <Pebble
                             variant="filled"
                             color="primary"
                             startIcon={<Download className="w-4 h-4" />}
                             onClick={handleDownloadJSON}
                         >
                             Export Vector
-                        </M3Button>
+                        </Pebble>
                     </div>
                 </header>
 
                 {/* Summary Metrics */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-                    <M3Card variant="tech" padding="lg" className="flex items-center gap-6 border-l-4 border-l-[var(--color-wattle-gold)]">
+                    <Stone variant="tech" padding="lg" className="flex items-center gap-6 border-l-4 border-l-[var(--color-wattle-gold)]">
                         <Trophy className="w-10 h-10 text-[var(--color-wattle-gold)]" />
                         <div>
                             <span className="font-bloom text-3xl font-bold text-[var(--color-parchment)] block">
@@ -222,9 +222,9 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
                             </span>
                             <span className="font-annotation text-[10px] uppercase tracking-widest text-[var(--color-flannel-flower-dark)]">Tactical Achievements</span>
                         </div>
-                    </M3Card>
+                    </Stone>
 
-                    <M3Card variant="tech" padding="lg" className="flex items-center gap-6 border-l-4 border-l-[var(--color-eucalypt-smoke-base)]">
+                    <Stone variant="tech" padding="lg" className="flex items-center gap-6 border-l-4 border-l-[var(--color-eucalypt-smoke-base)]">
                         <BrainCircuit className="w-10 h-10 text-[var(--color-eucalypt-smoke-base)]" />
                         <div>
                             <span className="font-bloom text-3xl font-bold text-[var(--color-parchment)] block">
@@ -232,9 +232,9 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
                             </span>
                             <span className="font-annotation text-[10px] uppercase tracking-widest text-[var(--color-flannel-flower-dark)]">Core Competencies</span>
                         </div>
-                    </M3Card>
+                    </Stone>
 
-                    <M3Card
+                    <Stone
                         variant="tech"
                         padding="lg"
                         className={`flex items-center gap-6 border-l-4 ${flaggedAchievements.length + flaggedKSCs.length > 0 ? 'border-l-orange-500 bg-orange-500/5' : 'border-l-[var(--color-eucalypt-smoke-base)]'}`}
@@ -246,23 +246,23 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
                             </span>
                             <span className="font-annotation text-[10px] uppercase tracking-widest text-[var(--color-flannel-flower-dark)]">Audit Flags</span>
                         </div>
-                    </M3Card>
+                    </Stone>
                 </div>
 
                 {/* Conflict/Audit Alert */}
                 {(flaggedAchievements.length > 0 || flaggedKSCs.length > 0) && (
-                    <M3Alert severity="warning" variant="tonal" className="mb-10">
+                    <Signal severity="warning" variant="tonal" className="mb-10">
                         <div className="flex flex-col gap-1">
                             <span className="font-bold">Attention Required: {flaggedAchievements.length + flaggedKSCs.length} Tactical Weaknesses Identified.</span>
                             <span className="text-sm opacity-80">AI auditing has identified entries with insufficient metrics or vague situational context. Refinement is recommended before production use.</span>
                         </div>
-                    </M3Alert>
+                    </Signal>
                 )}
 
                 {/* Detailed Sections */}
                 <div className="space-y-6">
                     {/* Personal Context */}
-                    <M3Accordion
+                    <Vessel
                         title="Personal Context"
                         icon={<Person className="w-5 h-5" />}
                         defaultExpanded
@@ -287,10 +287,10 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
                                 }}
                             />
                         </div>
-                    </M3Accordion>
+                    </Vessel>
 
                     {/* Achievements */}
-                    <M3Accordion
+                    <Vessel
                         title={`Structured Achievements (${localData.Structured_Achievements.length})`}
                         icon={<Trophy className="w-5 h-5" />}
                         defaultExpanded
@@ -341,11 +341,11 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
                                 </div>
                             ))}
                         </div>
-                    </M3Accordion>
+                    </Vessel>
 
                     {/* Competency Modules (KSC) */}
                     {localData.KSC_Responses.length > 0 && (
-                        <M3Accordion
+                        <Vessel
                             title={`Competency Modules (${localData.KSC_Responses.length})`}
                             icon={<Work className="w-5 h-5" />}
                         >
@@ -390,7 +390,7 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
                                     </div>
                                 ))}
                             </div>
-                        </M3Accordion>
+                        </Vessel>
                     )}
                 </div>
 

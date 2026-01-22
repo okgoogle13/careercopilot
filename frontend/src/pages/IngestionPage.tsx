@@ -85,7 +85,7 @@ export const IngestionPage: React.FC = () => {
 
     return (
         <div className="min-h-screen bg-[var(--color-specimen-night)] flex items-center justify-center p-6 bg-gradient-to-b from-transparent to-[var(--color-wattle-gold)]/5">
-            <M3Card
+            <Stone
                 variant="tech"
                 padding="lg"
                 elevation={4}
@@ -106,9 +106,9 @@ export const IngestionPage: React.FC = () => {
 
                 {/* Error State */}
                 {error && (
-                    <M3Alert severity="error" variant="tonal" className="mb-6">
+                    <Signal severity="error" variant="tonal" className="mb-6">
                         {error}
-                    </M3Alert>
+                    </Signal>
                 )}
 
                 {/* File Upload Zone */}
@@ -130,7 +130,7 @@ export const IngestionPage: React.FC = () => {
                     />
 
                     <label htmlFor="file-upload" className="cursor-pointer">
-                        <M3Button
+                        <Pebble
                             variant="outlined"
                             component="span"
                             startIcon={<CloudUpload className="w-5 h-5" />}
@@ -138,7 +138,7 @@ export const IngestionPage: React.FC = () => {
                             className="pointer-events-none"
                         >
                             Select Documents
-                        </M3Button>
+                        </Pebble>
                     </label>
 
                     {selectedFiles.length > 0 && (
@@ -160,7 +160,7 @@ export const IngestionPage: React.FC = () => {
                 </div>
 
                 {/* Synthesis Trigger */}
-                <M3Button
+                <Pebble
                     fullWidth
                     variant="filled"
                     color="primary"
@@ -171,7 +171,7 @@ export const IngestionPage: React.FC = () => {
                     className="h-16 text-lg font-bloom"
                 >
                     {isLoading ? getStageMessage() : 'Initialize Synthesis'}
-                </M3Button>
+                </Pebble>
 
                 {/* Progress Visualization */}
                 {isLoading && (
@@ -200,7 +200,7 @@ export const IngestionPage: React.FC = () => {
                         <strong className="text-[var(--color-parchment)]">Technical Note:</strong> Our inference engine uses Gemini 1.5 Pro to derive structured professional vectors. Processing may take a few moments as we harvest semantic embeddings.
                     </p>
                 </div>
-            </M3Card>
+            </Stone>
         </div>
     );
 };
