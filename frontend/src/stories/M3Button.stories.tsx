@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { M3Button } from '../components/ui/M3Button';
+import { Pebble } from '../components/ui/M3Button';
 import { Download, Send, Trash2 } from 'lucide-react';
 
 const meta: Meta<typeof M3Button> = {
@@ -100,22 +100,22 @@ export const AllVariants: Story = {
     render: () => (
         <div className="flex flex-col gap-8">
             <div className="flex flex-wrap gap-4">
-                <M3Button variant="filled">Filled</M3Button>
-                <M3Button variant="elevated">Elevated</M3Button>
-                <M3Button variant="tonal">Tonal</M3Button>
-                <M3Button variant="outlined">Outlined</M3Button>
-                <M3Button variant="text">Text</M3Button>
+                <Pebble variant="filled">Filled</Pebble>
+                <Pebble variant="elevated">Elevated</Pebble>
+                <Pebble variant="tonal">Tonal</Pebble>
+                <Pebble variant="outlined">Outlined</Pebble>
+                <Pebble variant="text">Text</Pebble>
             </div>
             <div className="flex flex-wrap gap-4">
-                <M3Button color="secondary">Secondary</M3Button>
-                <M3Button color="tertiary">Tertiary</M3Button>
-                <M3Button color="error">Error</M3Button>
-                <M3Button color="warning">Warning</M3Button>
+                <Pebble color="secondary">Secondary</Pebble>
+                <Pebble color="tertiary">Tertiary</Pebble>
+                <Pebble color="error">Error</Pebble>
+                <Pebble color="warning">Warning</Pebble>
             </div>
             <div className="flex flex-wrap items-center gap-4">
-                <M3Button size="small">Small</M3Button>
-                <M3Button size="medium">Medium</M3Button>
-                <M3Button size="large">Large</M3Button>
+                <Pebble size="small">Small</Pebble>
+                <Pebble size="medium">Medium</Pebble>
+                <Pebble size="large">Large</Pebble>
             </div>
         </div>
     ),

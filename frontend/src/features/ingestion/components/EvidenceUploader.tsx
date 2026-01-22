@@ -53,7 +53,7 @@ export const EvidenceUploader: React.FC = () => {
     ];
 
     return (
-        <M3Card
+        <Stone
             variant="tech"
             padding="none"
             className="border-2 border-dashed border-[var(--color-eucalypt-smoke-base)]/30 bg-transparent overflow-hidden"
@@ -74,7 +74,7 @@ export const EvidenceUploader: React.FC = () => {
 
             <div className="px-6 pb-6 flex gap-4 items-center flex-wrap">
                 <div className="min-w-[220px]">
-                    <M3Select
+                    <Jar
                         options={documentOptions}
                         value={selectedType}
                         onChange={(e) => setSelectedType(e.target.value as SourceType)}
@@ -92,7 +92,7 @@ export const EvidenceUploader: React.FC = () => {
                 />
 
                 <label htmlFor="file-upload">
-                    <M3Button
+                    <Pebble
                         variant="filled"
                         color="secondary"
                         onClick={() => { }} // Controlled by label/input
@@ -102,9 +102,9 @@ export const EvidenceUploader: React.FC = () => {
                         className="h-[56px] px-8"
                     >
                         {isUploading ? 'Synthesizing...' : 'Seed Intelligence'}
-                    </M3Button>
+                    </Pebble>
                 </label>
             </div>
-        </M3Card>
+        </Stone>
     );
 };

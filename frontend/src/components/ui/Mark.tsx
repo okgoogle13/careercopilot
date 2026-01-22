@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react';
 import { Check, Minus } from 'lucide-react';
 
-export interface M3CheckboxProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type'> {
+export interface MarkProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type'> {
     /** Checkbox label */
     label?: string;
 
@@ -36,22 +36,22 @@ export interface M3CheckboxProps extends Omit<React.InputHTMLAttributes<HTMLInpu
  * 
  * @example
  * ```tsx
- * <M3Checkbox label="I agree to terms and conditions" />
+ * <Mark label="I agree to terms and conditions" />
  * 
- * <M3Checkbox
+ * <Mark
  *   label="Subscribe to newsletter"
  *   checked={subscribed}
  *   onChange={(e) => setSubscribed(e.target.checked)}
  * />
  * 
- * <M3Checkbox
+ * <Mark
  *   label="Select all"
  *   indeterminate={someSelected && !allSelected}
  *   checked={allSelected}
  * />
  * ```
  */
-export const M3Checkbox = forwardRef<HTMLInputElement, M3CheckboxProps>(({
+export const Mark = forwardRef<HTMLInputElement, MarkProps>(({
     label,
     error = false,
     indeterminate = false,
@@ -139,7 +139,7 @@ export const M3Checkbox = forwardRef<HTMLInputElement, M3CheckboxProps>(({
     );
 });
 
-M3Checkbox.displayName = 'M3Checkbox';
+Mark.displayName = 'Mark';
 
 
 /**

@@ -7,7 +7,7 @@ export interface M3SelectOption {
     disabled?: boolean;
 }
 
-export interface M3SelectProps {
+export interface JarProps {
     /** Select label */
     label?: string;
 
@@ -60,7 +60,7 @@ export interface M3SelectProps {
  * 
  * @example
  * ```tsx
- * <M3Select
+ * <Jar
  *   label="Country"
  *   options={[
  *     { value: 'au', label: 'Australia' },
@@ -84,7 +84,7 @@ export function M3Select({
     required = false,
     fullWidth = false,
     className = '',
-}: M3SelectProps) {
+}: JarProps) {
     const [isOpen, setIsOpen] = useState(false);
     const containerRef = useRef<HTMLDivElement>(null);
     const dropdownRef = useRef<HTMLDivElement>(null);
