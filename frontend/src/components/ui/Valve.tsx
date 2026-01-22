@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
 
-export interface M3SwitchProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type' | 'size'> {
+export interface ValveProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type' | 'size'> {
     /** Label for the switch */
     label?: string;
     /** Size variant */
@@ -18,7 +18,7 @@ export interface M3SwitchProps extends Omit<React.InputHTMLAttributes<HTMLInputE
  * 
  * An organic, viscous-motion toggle switch.
  */
-export const M3Switch = forwardRef<HTMLInputElement, M3SwitchProps>(({
+export const Valve = forwardRef<HTMLInputElement, ValveProps>(({
     label,
     size = 'medium',
     color = 'primary',
@@ -105,4 +105,4 @@ export const M3Switch = forwardRef<HTMLInputElement, M3SwitchProps>(({
     );
 });
 
-M3Switch.displayName = 'M3Switch';
+Valve.displayName = 'Valve';

@@ -1,21 +1,21 @@
 import React from 'react';
 
-export type M3ButtonVariant = 'filled' | 'outlined' | 'text' | 'elevated' | 'tonal';
+export type PebbleVariant = 'filled' | 'outlined' | 'text' | 'elevated' | 'tonal';
 export type M3ButtonColor = 'primary' | 'secondary' | 'tertiary' | 'error' | 'warning';
-export type M3ButtonSize = 'small' | 'medium' | 'large';
+export type PebbleSize = 'small' | 'medium' | 'large';
 
-export interface M3ButtonProps {
+export interface PebbleProps {
     /** Button label */
     children: React.ReactNode;
 
     /** Visual style variant */
-    variant?: M3ButtonVariant;
+    variant?: PebbleVariant;
 
     /** Semantic color theme */
     color?: M3ButtonColor;
 
     /** Button size */
-    size?: M3ButtonSize;
+    size?: PebbleSize;
 
     /** Start icon */
     startIcon?: React.ReactNode;
@@ -73,17 +73,17 @@ export interface M3ButtonProps {
  * 
  * @example
  * ```tsx
- * <M3Button variant="filled" color="primary" startIcon={<PlayIcon />}>
+ * <Pebble variant="filled" color="primary" startIcon={<PlayIcon />}>
  *   Get Started
- * </M3Button>
+ * </Pebble>
  * 
- * <M3Button variant="outlined" color="secondary" loading>
+ * <Pebble variant="outlined" color="secondary" loading>
  *   Loading...
- * </M3Button>
+ * </Pebble>
  * 
- * <M3Button variant="text" href="/docs" target="_blank">
+ * <Pebble variant="text" href="/docs" target="_blank">
  *   Learn More
- * </M3Button>
+ * </Pebble>
  * ```
  * 
  * @see frontend/src/theme/design-tokens.css - M3 token definitions
@@ -104,7 +104,7 @@ export function M3Button({
     href,
     target,
     rel,
-}: M3ButtonProps) {
+}: PebbleProps) {
     // Base classes for Northcote Curio buttons
     const baseClasses = [
         'inline-flex items-center justify-center gap-2',
@@ -115,7 +115,7 @@ export function M3Button({
     ].join(' ');
 
     // Size-specific classes
-    const sizeClasses: Record<M3ButtonSize, string> = {
+    const sizeClasses: Record<PebbleSize, string> = {
         small: 'px-4 py-2 text-sm',
         medium: 'px-6 py-3 text-base',
         large: 'px-8 py-4 text-lg',
@@ -254,7 +254,7 @@ export interface M3IconButtonProps {
     color?: M3ButtonColor;
 
     /** Button size */
-    size?: M3ButtonSize;
+    size?: PebbleSize;
 
     /** Disabled state */
     disabled?: boolean;
@@ -275,13 +275,13 @@ export function M3IconButton({
     onClick,
     className = '',
 }: M3IconButtonProps) {
-    const sizeClasses: Record<M3ButtonSize, string> = {
+    const sizeClasses: Record<PebbleSize, string> = {
         small: 'w-8 h-8',
         medium: 'w-10 h-10',
         large: 'w-12 h-12',
     };
 
-    const colorClasses: Record<M3ButtonColor, string> = {
+    const colorClasses: Record<PebbleColor, string> = {
         primary: 'text-primary hover:bg-primary-container',
         secondary: 'text-secondary hover:bg-secondary-container',
         tertiary: 'text-tertiary hover:bg-tertiary-container',
