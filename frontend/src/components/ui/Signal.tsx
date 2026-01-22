@@ -3,14 +3,14 @@ import { AlertCircle, CheckCircle, Info, AlertTriangle, X } from 'lucide-react';
 import { M3IconButton } from './M3Button';
 
 export type M3AlertSeverity = 'success' | 'info' | 'warning' | 'error';
-export type M3AlertVariant = 'filled' | 'outlined' | 'tonal';
+export type SignalVariant = 'filled' | 'outlined' | 'tonal';
 
-export interface M3AlertProps {
+export interface SignalProps {
     /** Alert severity/type */
     severity?: M3AlertSeverity;
 
     /** Visual variant */
-    variant?: M3AlertVariant;
+    variant?: SignalVariant;
 
     /** Alert title */
     title?: string;
@@ -74,7 +74,7 @@ export function M3Alert({
     children,
     onClose,
     className = '',
-}: M3AlertProps) {
+}: SignalProps) {
     // Icon mapping
     const icons: Record<SignalSeverity, React.ComponentType<{ className?: string }>> = {
         success: CheckCircle,
@@ -85,82 +85,71 @@ export function M3Alert({
 
     const Icon = icons[severity];
 
-    // Color configurations
-    const severityConfig: Record<SignalSeverity, {
-        filled: string;
-        tonal: string;
-        outlined: string;
-        icon: string;
-    }> = {
-        success: {
-            filled: 'bg-secondary text-on-secondary border-secondary',
-            tonal: 'bg-secondary-container text-on-secondary-container border-secondary',
-            outlined: 'bg-transparent text-on-surface border-secondary',
-            icon: 'text-secondary',
-        },
-        info: {
-            filled: 'bg-primary text-on-primary border-primary',
-            tonal: 'bg-primary-container text-on-primary-container border-primary',
-            outlined: 'bg-transparent text-on-surface border-primary',
-            icon: 'text-primary',
-        },
-        warning: {
-            filled: 'bg-warning text-on-warning border-warning',
-            tonal: 'bg-warning-container text-on-warning-container border-warning',
-            outlined: 'bg-transparent text-on-surface border-warning',
-            icon: 'text-warning',
-        },
-        error: {
-            filled: 'bg-error text-on-error border-error',
-            tonal: 'bg-error-container text-on-error-container border-error',
-            outlined: 'bg-transparent text-on-surface border-error',
-            icon: 'text-error',
-        },
-    };
+    // Northcote Curio Color Configurations
+    const getSeverityStyles = (): React.CSSProperties => {
+        const styles: React.CSSProperties = {
+            borderRadius: 'var(--radius-pebble)',
+            transition: 'all var(--duration-standard) var(--ease-viscous-breeze)',
+            border: '2px solid',
+        };
 
-    const config = severityConfig[severity];
-    const colorClasses = config[variant];
-    const iconColor = variant === 'outlined' ? config.icon : '';
+        const colorMap: Record<SignalSeverity, string> = {
+            success: 'secondary', // Coral
+            info: 'primary',    // Sage
+            warning: 'warning',  // Gold
+            error: 'error',      // Crimson
+        };
+
+        const baseColor = colorMap[severity];
+
+        if (variant === 'filled') {
+            styles.backgroundColor = `var(--ref-palette-${baseColor}-40)`;
+            styles.color = `var(--ref-palette-${baseColor}-100)`;
+            styles.borderColor = `var(--ref-palette-${baseColor}-50)`;
+        } else if (variant === 'tonal') {
+            styles.backgroundColor = `var(--ref-palette-${baseColor}-90)`;
+            styles.color = `var(--ref-palette-${baseColor}-10)`;
+            styles.borderColor = `var(--ref-palette-${baseColor}-80)`;
+        } else { // outlined
+            styles.backgroundColor = 'transparent';
+            styles.color = 'var(--color-parchment)';
+            styles.borderColor = `var(--ref-palette-${baseColor}-40)`;
+        }
+
+        return styles;
+    };
 
     return (
         <div
             role="alert"
+            style={getSeverityStyles()}
             className={`
-        ${colorClasses}
-        rounded-pebble
-        border-2
         p-4
-        flex gap-3
+        flex gap-4
         shadow-elevation-1
         ${className}
       `}
         >
             {/* Icon */}
             <div className="flex-shrink-0 mt-0.5">
-                <Icon className={`w-5 h-5 ${iconColor}`} />
+                <Icon className="w-6 h-6" />
             </div>
 
             {/* Content */}
             <div className="flex-1 min-w-0">
                 {title && (
-                    <h4
-                        className="text-title-large mb-1"
-                        style={{
-                            fontWeight: 'var(--sys-type-weight-display)',
-                            fontVariationSettings: "var(--sys-type-axes-authoritative)",
-                        }}
-                    >
+                    <h4 className="font-bloom text-xl font-bold mb-1">
                         {title}
                     </h4>
                 )}
-                <div className="text-body-large">
+                <div className="font-field-note text-base leading-relaxed opacity-90">
                     {children}
                 </div>
             </div>
 
             {/* Close Button */}
             {onClose && (
-                <div className="flex-shrink-0">
+                <div className="flex-shrink-0 -mt-1 -mr-1">
                     <M3IconButton
                         icon={<X className="w-4 h-4" />}
                         ariaLabel="Close alert"
@@ -180,18 +169,10 @@ export function M3Alert({
 
 /**
  * M3AlertTitle - Semantic title component for alerts
- * 
- * Use when you need more control over alert title styling.
  */
 export function M3AlertTitle({ children }: { children: React.ReactNode }) {
     return (
-        <h4
-            className="text-title-large mb-1"
-            style={{
-                fontWeight: 'var(--sys-type-weight-display)',
-                fontVariationSettings: "var(--sys-type-axes-authoritative)",
-            }}
-        >
+        <h4 className="font-bloom text-xl font-bold mb-1">
             {children}
         </h4>
     );
@@ -199,12 +180,10 @@ export function M3AlertTitle({ children }: { children: React.ReactNode }) {
 
 /**
  * M3AlertDescription - Semantic description component for alerts
- * 
- * Use when you need more control over alert message styling.
  */
 export function M3AlertDescription({ children }: { children: React.ReactNode }) {
     return (
-        <div className="text-body-large">
+        <div className="font-field-note text-base leading-relaxed opacity-90">
             {children}
         </div>
     );

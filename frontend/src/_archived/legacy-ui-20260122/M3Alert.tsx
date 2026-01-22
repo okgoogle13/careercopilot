@@ -50,21 +50,21 @@ export interface M3AlertProps {
  * 
  * @example
  * ```tsx
- * <M3Alert severity="success">
+ * <Signal severity="success">
  *   Your changes have been saved successfully!
- * </M3Alert>
+ * </Signal>
  * 
- * <M3Alert
+ * <Signal
  *   severity="error"
  *   title="Error"
  *   onClose={() => setError(null)}
  * >
  *   Failed to upload file. Please try again.
- * </M3Alert>
+ * </Signal>
  * 
- * <M3Alert severity="warning" variant="outlined">
+ * <Signal severity="warning" variant="outlined">
  *   This action cannot be undone.
- * </M3Alert>
+ * </Signal>
  * ```
  */
 export function M3Alert({
@@ -76,7 +76,7 @@ export function M3Alert({
     className = '',
 }: M3AlertProps) {
     // Icon mapping
-    const icons: Record<M3AlertSeverity, React.ComponentType<{ className?: string }>> = {
+    const icons: Record<SignalSeverity, React.ComponentType<{ className?: string }>> = {
         success: CheckCircle,
         info: Info,
         warning: AlertTriangle,
@@ -85,71 +85,82 @@ export function M3Alert({
 
     const Icon = icons[severity];
 
-    // Northcote Curio Color Configurations
-    const getSeverityStyles = (): React.CSSProperties => {
-        const styles: React.CSSProperties = {
-            borderRadius: 'var(--radius-pebble)',
-            transition: 'all var(--duration-standard) var(--ease-viscous-breeze)',
-            border: '2px solid',
-        };
-
-        const colorMap: Record<M3AlertSeverity, string> = {
-            success: 'secondary', // Coral
-            info: 'primary',    // Sage
-            warning: 'warning',  // Gold
-            error: 'error',      // Crimson
-        };
-
-        const baseColor = colorMap[severity];
-
-        if (variant === 'filled') {
-            styles.backgroundColor = `var(--ref-palette-${baseColor}-40)`;
-            styles.color = `var(--ref-palette-${baseColor}-100)`;
-            styles.borderColor = `var(--ref-palette-${baseColor}-50)`;
-        } else if (variant === 'tonal') {
-            styles.backgroundColor = `var(--ref-palette-${baseColor}-90)`;
-            styles.color = `var(--ref-palette-${baseColor}-10)`;
-            styles.borderColor = `var(--ref-palette-${baseColor}-80)`;
-        } else { // outlined
-            styles.backgroundColor = 'transparent';
-            styles.color = 'var(--color-parchment)';
-            styles.borderColor = `var(--ref-palette-${baseColor}-40)`;
-        }
-
-        return styles;
+    // Color configurations
+    const severityConfig: Record<SignalSeverity, {
+        filled: string;
+        tonal: string;
+        outlined: string;
+        icon: string;
+    }> = {
+        success: {
+            filled: 'bg-secondary text-on-secondary border-secondary',
+            tonal: 'bg-secondary-container text-on-secondary-container border-secondary',
+            outlined: 'bg-transparent text-on-surface border-secondary',
+            icon: 'text-secondary',
+        },
+        info: {
+            filled: 'bg-primary text-on-primary border-primary',
+            tonal: 'bg-primary-container text-on-primary-container border-primary',
+            outlined: 'bg-transparent text-on-surface border-primary',
+            icon: 'text-primary',
+        },
+        warning: {
+            filled: 'bg-warning text-on-warning border-warning',
+            tonal: 'bg-warning-container text-on-warning-container border-warning',
+            outlined: 'bg-transparent text-on-surface border-warning',
+            icon: 'text-warning',
+        },
+        error: {
+            filled: 'bg-error text-on-error border-error',
+            tonal: 'bg-error-container text-on-error-container border-error',
+            outlined: 'bg-transparent text-on-surface border-error',
+            icon: 'text-error',
+        },
     };
+
+    const config = severityConfig[severity];
+    const colorClasses = config[variant];
+    const iconColor = variant === 'outlined' ? config.icon : '';
 
     return (
         <div
             role="alert"
-            style={getSeverityStyles()}
             className={`
+        ${colorClasses}
+        rounded-pebble
+        border-2
         p-4
-        flex gap-4
+        flex gap-3
         shadow-elevation-1
         ${className}
       `}
         >
             {/* Icon */}
             <div className="flex-shrink-0 mt-0.5">
-                <Icon className="w-6 h-6" />
+                <Icon className={`w-5 h-5 ${iconColor}`} />
             </div>
 
             {/* Content */}
             <div className="flex-1 min-w-0">
                 {title && (
-                    <h4 className="font-bloom text-xl font-bold mb-1">
+                    <h4
+                        className="text-title-large mb-1"
+                        style={{
+                            fontWeight: 'var(--sys-type-weight-display)',
+                            fontVariationSettings: "var(--sys-type-axes-authoritative)",
+                        }}
+                    >
                         {title}
                     </h4>
                 )}
-                <div className="font-field-note text-base leading-relaxed opacity-90">
+                <div className="text-body-large">
                     {children}
                 </div>
             </div>
 
             {/* Close Button */}
             {onClose && (
-                <div className="flex-shrink-0 -mt-1 -mr-1">
+                <div className="flex-shrink-0">
                     <M3IconButton
                         icon={<X className="w-4 h-4" />}
                         ariaLabel="Close alert"
@@ -169,10 +180,18 @@ export function M3Alert({
 
 /**
  * M3AlertTitle - Semantic title component for alerts
+ * 
+ * Use when you need more control over alert title styling.
  */
 export function M3AlertTitle({ children }: { children: React.ReactNode }) {
     return (
-        <h4 className="font-bloom text-xl font-bold mb-1">
+        <h4
+            className="text-title-large mb-1"
+            style={{
+                fontWeight: 'var(--sys-type-weight-display)',
+                fontVariationSettings: "var(--sys-type-axes-authoritative)",
+            }}
+        >
             {children}
         </h4>
     );
@@ -180,10 +199,12 @@ export function M3AlertTitle({ children }: { children: React.ReactNode }) {
 
 /**
  * M3AlertDescription - Semantic description component for alerts
+ * 
+ * Use when you need more control over alert message styling.
  */
 export function M3AlertDescription({ children }: { children: React.ReactNode }) {
     return (
-        <div className="font-field-note text-base leading-relaxed opacity-90">
+        <div className="text-body-large">
             {children}
         </div>
     );

@@ -1,15 +1,15 @@
 import React from 'react';
 
-export type M3CardVariant = 'pebble' | 'tech' | 'leaf' | 'gem';
+export type StoneVariant = 'pebble' | 'tech' | 'leaf' | 'gem';
 export type M3CardElevation = 0 | 1 | 2 | 3 | 4 | 5;
 export type M3CardPadding = 'none' | 'sm' | 'md' | 'lg' | 'xl';
 
-export interface M3CardProps {
+export interface StoneProps {
     /** Card content */
     children: React.ReactNode;
 
     /** M3 shape variant */
-    variant?: M3CardVariant;
+    variant?: StoneVariant;
 
     /** M3 elevation level (0-5) */
     elevation?: M3CardElevation;
@@ -45,10 +45,10 @@ export interface M3CardProps {
  * 
  * @example
  * ```tsx
- * <M3Card variant="pebble" elevation={1} padding="lg" hoverable>
+ * <Stone variant="pebble" elevation={1} padding="lg" hoverable>
  *   <h3 className="text-headline-large">Card Title</h3>
  *   <p className="text-body-large">Card content goes here</p>
- * </M3Card>
+ * </Stone>
  * ```
  * 
  * @see frontend/src/theme/design-tokens.css - M3 token definitions
@@ -62,9 +62,9 @@ export function M3Card({
     className = '',
     onClick,
     role = 'article',
-}: M3CardProps) {
+}: StoneProps) {
     // Map variant to Northcote Curio shape tokens
-    const shapeStyles: Record<M3CardVariant, React.CSSProperties> = {
+    const shapeStyles: Record<StoneVariant, React.CSSProperties> = {
         pebble: { borderRadius: 'var(--radius-pebble)' },
         tech: { borderRadius: 'var(--radius-stone)' },
         leaf: { borderRadius: 'var(--radius-leaf)' },
@@ -72,7 +72,7 @@ export function M3Card({
     };
 
     // Map padding to Northcote spacing tokens
-    const paddingClasses: Record<M3CardPadding, string> = {
+    const paddingClasses: Record<StonePadding, string> = {
         none: '',
         sm: 'p-[var(--spacing-sm)]',
         md: 'p-[var(--spacing-md)]',

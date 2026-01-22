@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { M3Card } from './M3Card';
+import { Stone } from './M3Card';
 import { cn } from '@/lib/utils';
 import { useMode } from '@/hooks/use-mode';
 
@@ -25,7 +25,7 @@ const MetricCard = React.forwardRef<HTMLDivElement, MetricCardProps>(
                 : 'text-secondary-flannel-flower';
 
         return (
-            <M3Card
+            <Stone
                 ref={ref}
                 className={cn('p-6 flex flex-col justify-between h-full min-h-[160px]', className)}
                 {...props}
@@ -51,7 +51,7 @@ const MetricCard = React.forwardRef<HTMLDivElement, MetricCardProps>(
                         </div>
                     )}
                 </div>
-            </M3Card>
+            </Stone>
         );
     }
 );
