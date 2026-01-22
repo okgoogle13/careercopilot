@@ -92,7 +92,7 @@ export const NorthcoteButton = React.forwardRef<HTMLButtonElement, NorthcoteButt
                 ref={ref}
                 className={cn(
                     // Base styles
-                    'font-bold uppercase tracking-wide', // Removed font-field-note to use Roboto Flex override
+                    'font-bold uppercase tracking-wide', // Uses Federation Typography Stack
                     'transition-colors duration-[var(--duration-fast)]', // Removed generic transition-all to let motion handle physics
                     'disabled:opacity-50 disabled:cursor-not-allowed',
 
@@ -117,7 +117,7 @@ export const NorthcoteButton = React.forwardRef<HTMLButtonElement, NorthcoteButt
                     borderRadius: mode === 'gallery'
                         ? 'var(--radius-pebble)'
                         : 'var(--radius-stone)',
-                    fontFamily: "'Roboto Flex', 'Work Sans', sans-serif",
+                    fontFamily: "var(--font-family-field-note)",
                     fontVariationSettings: "'wght' 600, 'GRAD' var(--grad, 0), 'XTRA' 468",
                 } as any}
                 whileHover={
