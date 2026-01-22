@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { M3Card, M3CardHeader, M3CardContent, M3CardActions } from '../components/ui/M3Card';
-import { M3Button } from '../components/ui/M3Button';
+import { Pebble } from '../components/ui/M3Button';
 import { Briefcase, Calendar, Star } from 'lucide-react';
 
 const meta: Meta<typeof M3Card> = {
@@ -34,18 +34,18 @@ export const Default: Story = {
         elevation: 1,
         children: (
             <>
-                <M3CardHeader
+                <StoneHeader
                     title="Job Description"
                     subtitle="Senior Software Engineer - Google"
                     icon={<Briefcase className="text-primary" />}
                     action={<Star size={20} className="text-warning" />}
                 />
-                <M3CardContent>
+                <StoneContent>
                     Full-stack development using React, Node.js and GCP. Experience with distributed systems and high-scale applications required.
                 </M3CardContent>
-                <M3CardActions>
-                    <M3Button variant="text" color="secondary">Later</M3Button>
-                    <M3Button variant="filled">Apply Now</M3Button>
+                <StoneActions>
+                    <Pebble variant="text" color="secondary">Later</Pebble>
+                    <Pebble variant="filled">Apply Now</Pebble>
                 </M3CardActions>
             </>
         ),
@@ -59,12 +59,12 @@ export const TechVariant: Story = {
         hoverable: true,
         children: (
             <>
-                <M3CardHeader
+                <StoneHeader
                     title="Analytical Report"
                     subtitle="Match Score: 92%"
                     icon={<Star className="text-tertiary" />}
                 />
-                <M3CardContent>
+                <StoneContent>
                     Your profile is highly compatible with this role. Recommended areas to highlight: Microservices architecture and Kubernetes.
                 </M3CardContent>
             </>
@@ -85,7 +85,7 @@ export const LeafVariant: Story = {
                 <p className="text-body-medium text-on-surface-variant mb-4">
                     Jan 15, 2026 at 10:00 AM PST
                 </p>
-                <M3Button variant="outlined" fullWidth>Add to Calendar</M3Button>
+                <Pebble variant="outlined" fullWidth>Add to Calendar</Pebble>
             </div>
         ),
     },
@@ -101,7 +101,7 @@ export const GemVariant: Story = {
                     <h4 className="text-label-large font-bold">Priority Update</h4>
                     <p className="text-body-small">New application status available</p>
                 </div>
-                <M3Button variant="tonal" size="small">View</M3Button>
+                <Pebble variant="tonal" size="small">View</Pebble>
             </div>
         ),
     },
@@ -110,18 +110,18 @@ export const GemVariant: Story = {
 export const AllShapes: Story = {
     render: () => (
         <div className="grid grid-cols-2 gap-8">
-            <M3Card variant="pebble">
+            <Stone variant="pebble">
                 <p className="font-bold text-center">Pebble (Default)</p>
-            </M3Card>
-            <M3Card variant="tech">
+            </Stone>
+            <Stone variant="tech">
                 <p className="font-bold text-center">Tech (Precision)</p>
-            </M3Card>
-            <M3Card variant="leaf">
+            </Stone>
+            <Stone variant="leaf">
                 <p className="font-bold text-center">Leaf (Growth)</p>
-            </M3Card>
-            <M3Card variant="gem">
+            </Stone>
+            <Stone variant="gem">
                 <p className="font-bold text-center">Gem (Highlight)</p>
-            </M3Card>
+            </Stone>
         </div>
     ),
 };

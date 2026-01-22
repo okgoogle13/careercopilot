@@ -48,7 +48,7 @@ export const EditableField: React.FC<EditableFieldProps> = ({
                 <label className="font-annotation text-[10px] uppercase tracking-widest text-[var(--color-flannel-flower-dark)] mb-2 block">
                     {label}
                 </label>
-                <M3TextField
+                <Lens
                     fullWidth
                     multiline={multiline}
                     rows={multiline ? 4 : 1}
