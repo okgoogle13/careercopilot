@@ -50,21 +50,21 @@ export interface M3AlertProps {
  * 
  * @example
  * ```tsx
- * <M3Alert severity="success">
+ * <Signal severity="success">
  *   Your changes have been saved successfully!
- * </M3Alert>
+ * </Signal>
  * 
- * <M3Alert
+ * <Signal
  *   severity="error"
  *   title="Error"
  *   onClose={() => setError(null)}
  * >
  *   Failed to upload file. Please try again.
- * </M3Alert>
+ * </Signal>
  * 
- * <M3Alert severity="warning" variant="outlined">
+ * <Signal severity="warning" variant="outlined">
  *   This action cannot be undone.
- * </M3Alert>
+ * </Signal>
  * ```
  */
 export function M3Alert({
@@ -76,7 +76,7 @@ export function M3Alert({
     className = '',
 }: M3AlertProps) {
     // Icon mapping
-    const icons: Record<M3AlertSeverity, React.ComponentType<{ className?: string }>> = {
+    const icons: Record<SignalSeverity, React.ComponentType<{ className?: string }>> = {
         success: CheckCircle,
         info: Info,
         warning: AlertTriangle,
@@ -86,7 +86,7 @@ export function M3Alert({
     const Icon = icons[severity];
 
     // Color configurations
-    const severityConfig: Record<M3AlertSeverity, {
+    const severityConfig: Record<SignalSeverity, {
         filled: string;
         tonal: string;
         outlined: string;

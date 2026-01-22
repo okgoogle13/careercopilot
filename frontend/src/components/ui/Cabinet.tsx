@@ -2,9 +2,9 @@ import React, { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { X } from 'lucide-react';
 import { M3IconButton } from './M3Button';
-import { M3Card } from './M3Card';
+import { Stone } from './M3Card';
 
-export interface M3ModalProps {
+export interface CabinetProps {
     /** Show/hide modal */
     open: boolean;
     /** Close handler */
@@ -26,7 +26,7 @@ export interface M3ModalProps {
  * 
  * A semantic modal using M3Card logic and viscous motion.
  */
-export const M3Modal: React.FC<M3ModalProps> = ({
+export const M3Modal: React.FC<CabinetProps> = ({
     open,
     onClose,
     title,
@@ -77,7 +77,7 @@ export const M3Modal: React.FC<M3ModalProps> = ({
 
             {/* Modal Container */}
             <div className={`relative w-full ${maxWidthClasses[maxWidth]} animate-in zoom-in-95 slide-in-from-bottom-4 duration-300`}>
-                <M3Card
+                <Stone
                     variant={variant}
                     padding="none"
                     elevation={5}
@@ -102,7 +102,7 @@ export const M3Modal: React.FC<M3ModalProps> = ({
                     <div className={`max-h-[80vh] overflow-y-auto ${padding === 'none' ? '' : 'p-6'}`}>
                         {children}
                     </div>
-                </M3Card>
+                </Stone>
             </div>
         </div>,
         document.body

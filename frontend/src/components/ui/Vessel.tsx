@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 
-interface M3AccordionProps {
+interface VesselProps {
     title: React.ReactNode;
     icon?: React.ReactNode;
     children: React.ReactNode;
@@ -9,7 +9,7 @@ interface M3AccordionProps {
     className?: string;
 }
 
-export const M3Accordion: React.FC<M3AccordionProps> = ({
+export const M3Accordion: React.FC<VesselProps> = ({
     title,
     icon,
     children,

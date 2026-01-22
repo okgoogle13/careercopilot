@@ -3,14 +3,14 @@ import { AlertCircle, CheckCircle, Info, AlertTriangle, X } from 'lucide-react';
 import { M3IconButton } from './M3Button';
 
 export type M3AlertSeverity = 'success' | 'info' | 'warning' | 'error';
-export type M3AlertVariant = 'filled' | 'outlined' | 'tonal';
+export type SignalVariant = 'filled' | 'outlined' | 'tonal';
 
-export interface M3AlertProps {
+export interface SignalProps {
     /** Alert severity/type */
     severity?: M3AlertSeverity;
 
     /** Visual variant */
-    variant?: M3AlertVariant;
+    variant?: SignalVariant;
 
     /** Alert title */
     title?: string;
@@ -50,21 +50,21 @@ export interface M3AlertProps {
  * 
  * @example
  * ```tsx
- * <M3Alert severity="success">
+ * <Signal severity="success">
  *   Your changes have been saved successfully!
- * </M3Alert>
+ * </Signal>
  * 
- * <M3Alert
+ * <Signal
  *   severity="error"
  *   title="Error"
  *   onClose={() => setError(null)}
  * >
  *   Failed to upload file. Please try again.
- * </M3Alert>
+ * </Signal>
  * 
- * <M3Alert severity="warning" variant="outlined">
+ * <Signal severity="warning" variant="outlined">
  *   This action cannot be undone.
- * </M3Alert>
+ * </Signal>
  * ```
  */
 export function M3Alert({
@@ -74,9 +74,9 @@ export function M3Alert({
     children,
     onClose,
     className = '',
-}: M3AlertProps) {
+}: SignalProps) {
     // Icon mapping
-    const icons: Record<M3AlertSeverity, React.ComponentType<{ className?: string }>> = {
+    const icons: Record<SignalSeverity, React.ComponentType<{ className?: string }>> = {
         success: CheckCircle,
         info: Info,
         warning: AlertTriangle,
@@ -93,7 +93,7 @@ export function M3Alert({
             border: '2px solid',
         };
 
-        const colorMap: Record<M3AlertSeverity, string> = {
+        const colorMap: Record<SignalSeverity, string> = {
             success: 'secondary', // Coral
             info: 'primary',    // Sage
             warning: 'warning',  // Gold

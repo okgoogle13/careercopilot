@@ -1,5 +1,5 @@
 import { AlertCircle, RefreshCw } from 'lucide-react';
-import { M3Button } from '../ui/M3Button';
+import { Pebble } from '../ui/M3Button';
 
 interface ErrorAlertProps {
     message: string;
@@ -54,7 +54,7 @@ export function M3ErrorAlert({
             {(onRetry || onDismiss) && (
                 <div className="flex gap-2 flex-shrink-0">
                     {onRetry && (
-                        <M3Button
+                        <Pebble
                             variant="outlined"
                             color="primary"
                             size="small"
@@ -63,11 +63,11 @@ export function M3ErrorAlert({
                             className="border-error text-on-error-container hover:bg-error/10"
                         >
                             {retryLabel}
-                        </M3Button>
+                        </Pebble>
                     )}
 
                     {onDismiss && (
-                        <M3Button
+                        <Pebble
                             variant="text"
                             color="primary"
                             size="small"
@@ -75,7 +75,7 @@ export function M3ErrorAlert({
                             className="text-on-error-container hover:bg-error/10"
                         >
                             Dismiss
-                        </M3Button>
+                        </Pebble>
                     )}
                 </div>
             )}
