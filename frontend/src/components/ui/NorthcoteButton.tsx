@@ -21,6 +21,8 @@ export interface NorthcoteButtonProps extends Omit<HTMLMotionProps<'button'>, 'r
  * - Organic asymmetry (Pebble/Leaf shapes)
  * - Motion tokens for transitions
  * - WCAG 2.1 Level AA accessibility
+ * 
+ * Reference: M3TextField.tsx (100% compliant)
  */
 export const NorthcoteButton = React.forwardRef<HTMLButtonElement, NorthcoteButtonProps>(
     ({ variant = 'primary', size = 'md', className, children, disabled, startIcon, endIcon, loading, ...props }, ref) => {
@@ -92,7 +94,7 @@ export const NorthcoteButton = React.forwardRef<HTMLButtonElement, NorthcoteButt
                 ref={ref}
                 className={cn(
                     // Base styles
-                    'font-bold uppercase tracking-wide', // Uses Federation Typography Stack
+                    'font-bold uppercase tracking-wide', // Removed font-field-note to use Roboto Flex override
                     'transition-colors duration-[var(--duration-fast)]', // Removed generic transition-all to let motion handle physics
                     'disabled:opacity-50 disabled:cursor-not-allowed',
 
@@ -117,7 +119,7 @@ export const NorthcoteButton = React.forwardRef<HTMLButtonElement, NorthcoteButt
                     borderRadius: mode === 'gallery'
                         ? 'var(--radius-pebble)'
                         : 'var(--radius-stone)',
-                    fontFamily: "var(--font-family-field-note)",
+                    fontFamily: "'Roboto Flex', 'Work Sans', sans-serif",
                     fontVariationSettings: "'wght' 600, 'GRAD' var(--grad, 0), 'XTRA' 468",
                 } as any}
                 whileHover={

@@ -33,7 +33,7 @@ export interface PebbleProps {
     loading?: boolean;
 
     /** Click handler */
-    onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+    onClick?: (event: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => void;
 
     /** Button type */
     type?: 'button' | 'submit' | 'reset';
@@ -49,44 +49,18 @@ export interface PebbleProps {
 
     /** Link rel */
     rel?: string;
+
+    /** React Component to use (optional fallback) */
+    component?: any;
 }
 
 /**
- * M3Button - Material Design 3 Compliant Button Component
- * 
- * A comprehensive button component using the Electric Alchemist M3 design system.
- * Supports all M3 button variants with proper semantic colors, motion, and accessibility.
- * 
- * **M3 Design Token Usage:**
- * - Shape: pill shape using `rounded-full` token
- * - Colors: Semantic M3 color roles (primary, secondary, tertiary, error, warning)
- * - Motion: Spring easing with subtle scale on hover/active
- * - Typography: M3 label-large scale with proper font weight
- * - Elevation: Shadow elevation for filled/elevated variants
- * 
- * **Variants:**
- * - `filled`: High emphasis (default), colored background
- * - `outlined`: Medium emphasis, outlined with border
- * - `text`: Low emphasis, no background
- * - `elevated`: Filled with elevation shadow
- * - `tonal`: Medium emphasis, tonal container background
- * 
- * @example
- * ```tsx
- * <Pebble variant="filled" color="primary" startIcon={<PlayIcon />}>
- *   Get Started
- * </Pebble>
- * 
- * <Pebble variant="outlined" color="secondary" loading>
- *   Loading...
- * </Pebble>
- * 
- * <Pebble variant="text" href="/docs" target="_blank">
- *   Learn More
- * </Pebble>
- * ```
- * 
- * @see frontend/src/theme/design-tokens.css - M3 token definitions
+ * M3Button - Material Design 3 Compliant Button (Pebble)
+ *
+ * Features:
+ * - Organic pebble shape (rounded-pebble)
+ * - M3 design tokens for states and colors
+ * - Dynamic hover & active micro-animations
  */
 export function M3Button({
     children,
@@ -240,7 +214,7 @@ export function M3Button({
 
 /**
  * M3IconButton - Icon-only M3 Button variant
- * 
+ *
  * Specialized button for icon-only actions (e.g., close, menu, more).
  */
 export interface M3IconButtonProps {
@@ -255,6 +229,9 @@ export interface M3IconButtonProps {
 
     /** Button size */
     size?: PebbleSize;
+
+    /** Visual style variant */
+    variant?: 'standard' | 'filled' | 'tonal' | 'outlined';
 
     /** Disabled state */
     disabled?: boolean;
@@ -271,6 +248,7 @@ export function M3IconButton({
     ariaLabel,
     color = 'primary',
     size = 'medium',
+    variant = 'standard',
     disabled = false,
     onClick,
     className = '',
@@ -281,7 +259,7 @@ export function M3IconButton({
         large: 'w-12 h-12',
     };
 
-    const colorClasses: Record<PebbleColor, string> = {
+    const colorClasses: Record<M3ButtonColor, string> = {
         primary: 'text-primary hover:bg-primary-container',
         secondary: 'text-secondary hover:bg-secondary-container',
         tertiary: 'text-tertiary hover:bg-tertiary-container',
@@ -295,18 +273,19 @@ export function M3IconButton({
             className={`
         inline-flex items-center justify-center
         rounded-full
+        transition-all duration-300
         ${sizeClasses[size]}
         ${colorClasses[color]}
         ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:scale-110 active:scale-95'}
-        transition-all duration-medium-1 ease-spring
-        focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-${color}
         ${className}
       `}
-            disabled={disabled}
             onClick={onClick}
+            disabled={disabled}
             aria-label={ariaLabel}
         >
             {icon}
         </button>
     );
 }
+
+export { M3Button as Pebble };

@@ -1,20 +1,16 @@
-import { useState, useEffect } from 'react';
-import { PageHeader } from '../components/shared/PageHeader';
-import { M3ErrorAlert } from '../components/shared/M3ErrorAlert';
 import {
-    M3Card,
-    M3CardHeader,
-    M3CardContent,
-    M3CardActions,
-    M3Button,
-    M3IconButton,
-    M3Modal,
+    Cabinet,
+    Pebble,
     StatusBadge,
+    Stone,
     type StatusBadgeVariant
 } from '@/components/ui';
-import { Sparkles, ExternalLink, CheckCircle, Clock, Play, FileText, Copy, X } from 'lucide-react';
-import { API_ENDPOINTS } from '../config/api';
 import { m3Toast } from '@/utils/toast';
+import { CheckCircle, Clock, Copy, ExternalLink, FileText, Play, Sparkles } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { M3ErrorAlert } from '../components/shared/M3ErrorAlert';
+import { PageHeader } from '../components/shared/PageHeader';
+import { API_ENDPOINTS } from '../config/api';
 
 interface JobQueueItem {
     id: string;

@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
+import React, { useState } from 'react';
 
-interface VesselProps {
+export interface VesselProps {
     title: React.ReactNode;
     icon?: React.ReactNode;
     children: React.ReactNode;
@@ -45,3 +45,7 @@ export const M3Accordion: React.FC<VesselProps> = ({
         </div>
     );
 };
+
+export { M3Accordion as Vessel };
+
+M3Accordion.displayName = 'Vessel';

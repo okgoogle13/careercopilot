@@ -96,7 +96,7 @@ export const M3TextField = forwardRef<HTMLInputElement, M3TextFieldProps>(({
     };
 
     // Size-specific classes
-    const sizeClasses: Record<LensSize, { input: string; adornment: string }> = {
+    const sizeClasses: Record<M3TextFieldSize, { input: string; adornment: string }> = {
         small: {
             input: 'px-3 py-2 text-sm',
             adornment: 'text-sm',
@@ -116,7 +116,7 @@ export const M3TextField = forwardRef<HTMLInputElement, M3TextFieldProps>(({
         gallery: {
             container: {
                 outlined: `
-                    border-2 
+                    border-2
                     ${error ? 'border-tertiary-waratah-crimson' : 'border-primary-wattle-gold/80'}
                     ${isFocused && !error ? 'border-primary-wattle-gold ring-2 ring-primary-wattle-gold/30' : ''}
                     bg-surface-gallery-eucalypt-smoke
@@ -143,7 +143,7 @@ export const M3TextField = forwardRef<HTMLInputElement, M3TextFieldProps>(({
         laboratory: {
             container: {
                 outlined: `
-                    border-2 
+                    border-2
                     ${error ? 'border-tertiary-waratah-crimson' : 'border-outline-variant'}
                     ${isFocused && !error ? 'border-primary-wattle-gold ring-2 ring-primary-wattle-gold/20' : ''}
                     ${!disabled && !error && !isFocused ? 'hover:border-outline' : ''}
@@ -359,7 +359,7 @@ export const M3TextArea = forwardRef<HTMLTextAreaElement, M3TextAreaProps>(({
         props.onChange?.(e);
     };
 
-    const sizeClasses: Record<LensSize, string> = {
+    const sizeClasses: Record<M3TextFieldSize, string> = {
         small: 'px-3 py-2 text-sm',
         medium: 'px-4 py-3 text-base',
         large: 'px-5 py-4 text-lg',
@@ -368,7 +368,7 @@ export const M3TextArea = forwardRef<HTMLTextAreaElement, M3TextAreaProps>(({
     const themeVariants = {
         gallery: {
             container: `
-                border-2 
+                border-2
                 ${error ? 'border-tertiary-waratah-crimson' : 'border-primary-wattle-gold/80'}
                 ${isFocused && !error ? 'border-primary-wattle-gold ring-2 ring-primary-wattle-gold/30' : ''}
                 bg-surface-gallery-eucalypt-smoke
@@ -383,7 +383,7 @@ export const M3TextArea = forwardRef<HTMLTextAreaElement, M3TextAreaProps>(({
         },
         laboratory: {
             container: `
-                border-2 
+                border-2
                 ${error ? 'border-tertiary-waratah-crimson' : 'border-outline-variant'}
                 ${isFocused && !error ? 'border-primary-wattle-gold ring-2 ring-primary-wattle-gold/20' : ''}
                 bg-surface-shared-specimen-night/50 backdrop-blur-sm

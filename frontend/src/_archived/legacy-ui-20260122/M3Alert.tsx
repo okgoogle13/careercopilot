@@ -1,5 +1,5 @@
+import { AlertCircle, AlertTriangle, CheckCircle, Info, X } from 'lucide-react';
 import React from 'react';
-import { AlertCircle, CheckCircle, Info, AlertTriangle, X } from 'lucide-react';
 import { M3IconButton } from './M3Button';
 
 export type M3AlertSeverity = 'success' | 'info' | 'warning' | 'error';
@@ -27,33 +27,33 @@ export interface M3AlertProps {
 
 /**
  * M3Alert - Material Design 3 Compliant Alert Component
- * 
+ *
  * Displays important messages with semantic color coding and icons.
  * Features organic M3 shapes and proper accessibility.
- * 
+ *
  * **M3 Design Token Usage:**
  * - Shape: `rounded-pebble` (friendly organic)
  * - Colors: M3 semantic color roles (error, warning, info, success→secondary)
  * - Typography: M3 title + body scales
  * - Elevation: Subtle shadow for prominence
- * 
+ *
  * **Severity Types:**
  * - `success`: Green/teal - successful operations
  * - `info`: Primary blue/indigo - informational messages
  * - `warning`: Amber - caution/attention needed
  * - `error`: Red - errors/critical issues
- * 
+ *
  * **Variants:**
  * - `filled`: Colored background (high emphasis)
  * - `tonal`: Container background (medium emphasis)
  * - `outlined`: Border only (low emphasis)
- * 
+ *
  * @example
  * ```tsx
  * <Signal severity="success">
  *   Your changes have been saved successfully!
  * </Signal>
- * 
+ *
  * <Signal
  *   severity="error"
  *   title="Error"
@@ -61,7 +61,7 @@ export interface M3AlertProps {
  * >
  *   Failed to upload file. Please try again.
  * </Signal>
- * 
+ *
  * <Signal severity="warning" variant="outlined">
  *   This action cannot be undone.
  * </Signal>
@@ -76,7 +76,7 @@ export function M3Alert({
     className = '',
 }: M3AlertProps) {
     // Icon mapping
-    const icons: Record<SignalSeverity, React.ComponentType<{ className?: string }>> = {
+    const icons: Record<M3AlertSeverity, React.ComponentType<{ className?: string }>> = {
         success: CheckCircle,
         info: Info,
         warning: AlertTriangle,
@@ -86,7 +86,7 @@ export function M3Alert({
     const Icon = icons[severity];
 
     // Color configurations
-    const severityConfig: Record<SignalSeverity, {
+    const severityConfig: Record<M3AlertSeverity, {
         filled: string;
         tonal: string;
         outlined: string;
@@ -180,7 +180,7 @@ export function M3Alert({
 
 /**
  * M3AlertTitle - Semantic title component for alerts
- * 
+ *
  * Use when you need more control over alert title styling.
  */
 export function M3AlertTitle({ children }: { children: React.ReactNode }) {
@@ -199,7 +199,7 @@ export function M3AlertTitle({ children }: { children: React.ReactNode }) {
 
 /**
  * M3AlertDescription - Semantic description component for alerts
- * 
+ *
  * Use when you need more control over alert message styling.
  */
 export function M3AlertDescription({ children }: { children: React.ReactNode }) {
