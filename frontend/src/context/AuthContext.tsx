@@ -1,23 +1,40 @@
 /**
  * Authentication Context
- * Manages global authentication state via Supabase
+ * Manages global authentication state via Firebase or Offline Mock
  */
 
 import {
-  ReactNode,
-  createContext,
-  useContext,
-  useState,
-  useEffect,
-  useCallback,
-  useMemo,
+    User as FirebaseUser,
+    createUserWithEmailAndPassword,
+    signOut as firebaseSignOut,
+    updateProfile as firebaseUpdateProfile,
+    onAuthStateChanged,
+    signInWithEmailAndPassword,
+} from 'firebase/auth';
+import {
+    ReactNode,
+    createContext,
+    useCallback,
+    useContext,
+    useEffect,
+    useMemo,
+    useState,
 } from 'react';
-import { User, Session } from '@supabase/supabase-js';
-import { supabase } from '../config/supabase';
+import { auth } from '../config/firebase';
+
+// Define types locally since we aren't using the external service
+export interface User extends Partial<FirebaseUser> {
+  // Add any custom fields you expect on top of Firebase User if needed
+  role?: string;
+  email: string | null;
+  displayName: string | null;
+  uid: string;
+  access_token?: string | null;
+}
 
 interface AuthContextType {
   user: User | null;
-  session: Session | null;
+  session: User | null; // Alias for legacy usage
   loading: boolean;
   login: (email: string, password: string) => Promise<void>;
   register: (email: string, password: string, displayName: string) => Promise<void>;
@@ -26,67 +43,147 @@ interface AuthContextType {
 
 export const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
+// Safe access for test environment
+const getEnv = (): any => {
+  try {
+    return import.meta.env || {};
+  } catch {
+    return {};
+  }
+};
+
+const isOfflineMode = getEnv().VITE_OFFLINE_MODE === 'true';
+
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
-  const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
 
   // Monitor auth state
   useEffect(() => {
-    // Check active session
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-      setUser(session?.user ?? null);
+    if (isOfflineMode) {
+      // Check local storage for mock session
+      const storedUser = localStorage.getItem('mockUser');
+      if (storedUser) {
+        setUser(JSON.parse(storedUser));
+      }
+      setLoading(false);
+      return;
+    }
+
+    // CRITICAL FIX: Set a timeout to prevent infinite loading
+    // If Firebase doesn't respond in 2 seconds (likely misconfigured), assume no user
+    const timeoutId = setTimeout(() => {
+      console.warn('Firebase auth initialization timeout - assuming no user');
+      setLoading(false);
+    }, 2000);
+
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      clearTimeout(timeoutId); // Clear timeout if auth responds
+      setUser(currentUser as User);
       setLoading(false);
     });
 
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event: string, session: Session | null) => {
-      setSession(session);
-      setUser(session?.user ?? null);
-      setLoading(false);
-    });
-
-    return () => subscription.unsubscribe();
+    return () => {
+      clearTimeout(timeoutId);
+      unsubscribe();
+    };
   }, []);
 
   const login = useCallback(async (email: string, password: string) => {
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
-    if (error) throw error;
+    if (isOfflineMode) {
+      if (email && password) {
+        // Simple validation
+        const mockUser: User = {
+          uid: 'mock-user-123',
+          email,
+          displayName: 'Dev User',
+          emailVerified: true,
+          isAnonymous: false,
+          metadata: {},
+          providerData: [],
+          refreshToken: 'mock-token',
+          tenantId: null,
+          delete: async () => { },
+          getIdToken: async () => 'mock-jwt',
+          getIdTokenResult: async () => ({
+            token: 'mock-jwt',
+            signInProvider: 'password',
+            claims: {},
+            authTime: Date.now() / 1000,
+            issuedAtTime: Date.now() / 1000,
+            expirationTime: Date.now() / 1000 + 3600,
+          }),
+          reload: async () => { },
+          toJSON: () => ({}),
+          role: 'user',
+        } as unknown as User;
+        setUser(mockUser);
+        localStorage.setItem('mockUser', JSON.stringify(mockUser));
+        return;
+      }
+      throw new Error('Invalid credentials');
+    }
+    await signInWithEmailAndPassword(auth, email, password);
   }, []);
 
   const register = useCallback(async (email: string, password: string, displayName: string) => {
-    const { error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        data: {
-          display_name: displayName,
-        },
-      },
-    });
-    if (error) throw error;
+    if (isOfflineMode) {
+      const mockUser: User = {
+        uid: 'mock-user-new-' + Date.now(),
+        email,
+        displayName: displayName || 'New Dev User',
+        emailVerified: true,
+        isAnonymous: false,
+        metadata: {},
+        providerData: [],
+        refreshToken: 'mock-token',
+        tenantId: null,
+        delete: async () => { },
+        getIdToken: async () => 'mock-jwt',
+        getIdTokenResult: async () => ({
+          token: 'mock-jwt',
+          signInProvider: 'password',
+          claims: {},
+          authTime: Date.now() / 1000,
+          issuedAtTime: Date.now() / 1000,
+          expirationTime: Date.now() / 1000 + 3600,
+        }),
+        reload: async () => { },
+        toJSON: () => ({}),
+        role: 'user',
+      } as unknown as User;
+      setUser(mockUser);
+      localStorage.setItem('mockUser', JSON.stringify(mockUser));
+      return;
+    }
+
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    if (displayName) {
+      await firebaseUpdateProfile(userCredential.user, { displayName });
+      // Force refresh user to get updated display name
+      setUser({ ...userCredential.user, displayName } as User);
+    }
   }, []);
 
   const logout = useCallback(async () => {
-    const { error } = await supabase.auth.signOut();
-    if (error) throw error;
+    if (isOfflineMode) {
+      setUser(null);
+      localStorage.removeItem('mockUser');
+      return;
+    }
+    await firebaseSignOut(auth);
   }, []);
 
   const contextValue = useMemo(
     () => ({
       user,
-      session,
+      session: user,
       loading,
       login,
       register,
       logout,
     }),
-    [user, session, loading, login, register, logout]
+    [user, loading, login, register, logout]
   );
 
   return <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>;

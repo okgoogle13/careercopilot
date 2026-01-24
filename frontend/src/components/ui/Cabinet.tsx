@@ -1,30 +1,36 @@
+import { X } from 'lucide-react';
 import React, { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
-import { X } from 'lucide-react';
-import { M3IconButton } from './M3Button';
-import { Stone } from './M3Card';
+import { M3IconButton } from './Pebble';
+import { Stone as M3Card } from './Stone';
 
 export interface CabinetProps {
     /** Show/hide modal */
     open: boolean;
+
     /** Close handler */
     onClose: () => void;
+
     /** Modal title */
     title?: string;
+
     /** Modal content */
     children: React.ReactNode;
-    /** Max width class (Tailwind) */
-    maxWidth?: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'full';
-    /** organic variant */
-    variant?: 'pebble' | 'tech' | 'leaf';
-    /** Content padding */
-    padding?: 'none' | 'sm' | 'md' | 'lg';
+
+    /** Max width of the modal */
+    maxWidth?: 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+
+    /** Visual variant - Northcote Curio compatible */
+    variant?: 'tech' | 'organic' | 'standard';
 }
 
 /**
- * M3Modal - Northcote Curio Overlay
- * 
- * A semantic modal using M3Card logic and viscous motion.
+ * M3Modal - Material 3 Compliant Modal (Cabinet)
+ *
+ * Features:
+ * - Managed focus and ESC key support
+ * - M3 design tokens for shape, color, and elevation
+ * - Northcote Curio design variants
  */
 export const M3Modal: React.FC<CabinetProps> = ({
     open,
@@ -32,24 +38,24 @@ export const M3Modal: React.FC<CabinetProps> = ({
     title,
     children,
     maxWidth = 'md',
-    variant = 'tech',
-    padding = 'lg',
+    variant = 'standard',
 }) => {
-    const overlayRef = useRef<HTMLDivElement>(null);
+    const modalRef = useRef<HTMLDivElement>(null);
 
-    // Handle ESC key
     useEffect(() => {
-        const handleEsc = (e: KeyboardEvent) => {
+        const handleEscape = (e: KeyboardEvent) => {
             if (e.key === 'Escape') onClose();
         };
+
         if (open) {
-            document.addEventListener('keydown', handleEsc);
+            document.addEventListener('keydown', handleEscape);
             document.body.style.overflow = 'hidden';
-            return () => {
-                document.removeEventListener('keydown', handleEsc);
-                document.body.style.overflow = 'unset';
-            };
         }
+
+        return () => {
+            document.removeEventListener('keydown', handleEscape);
+            document.body.style.overflow = 'unset';
+        };
     }, [open, onClose]);
 
     if (!open) return null;
@@ -60,51 +66,44 @@ export const M3Modal: React.FC<CabinetProps> = ({
         lg: 'max-w-lg',
         xl: 'max-w-xl',
         '2xl': 'max-w-2xl',
-        full: 'max-w-[95vw]',
     };
 
     return createPortal(
-        <div
-            className="fixed inset-0 z-[100] flex items-center justify-center p-4 animate-in fade-in duration-300"
-            role="presentation"
-        >
-            {/* Backdrop */}
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-300">
             <div
-                className="absolute inset-0 bg-[var(--color-specimen-night)]/80 backdrop-blur-sm"
+                className="fixed inset-0"
                 onClick={onClose}
-                aria-hidden="true"
             />
+            <M3Card
+                variant={variant === 'tech' ? 'tech' : 'pebble'}
+                elevation={4}
+                padding="none"
+                className={`relative w-full ${maxWidthClasses[maxWidth]} shadow-2xl animate-in zoom-in-95 duration-300`}
+            >
+                {/* Header */}
+                <div className="flex items-center justify-between p-6 border-b border-white/5">
+                    {title ? (
+                        <h3 className="font-bloom text-2xl font-bold text-[var(--color-parchment)]">
+                            {title}
+                        </h3>
+                    ) : <div />}
+                    <M3IconButton
+                        icon={<X className="w-5 h-5" />}
+                        ariaLabel="Close modal"
+                        onClick={onClose}
+                        size="medium"
+                        className="hover:rotate-90 transition-transform duration-300"
+                    />
+                </div>
 
-            {/* Modal Container */}
-            <div className={`relative w-full ${maxWidthClasses[maxWidth]} animate-in zoom-in-95 slide-in-from-bottom-4 duration-300`}>
-                <Stone
-                    variant={variant}
-                    padding="none"
-                    elevation={5}
-                    className="overflow-visible"
-                >
-                    {/* Header */}
-                    <div className="flex items-center justify-between p-6 border-b border-white/10">
-                        {title && (
-                            <h2 className="font-bloom text-2xl font-bold text-[var(--color-parchment)]">
-                                {title}
-                            </h2>
-                        )}
-                        <M3IconButton
-                            icon={<X className="w-5 h-5" />}
-                            onClick={onClose}
-                            ariaLabel="Close Modal"
-                            variant="text"
-                        />
-                    </div>
-
-                    {/* Content */}
-                    <div className={`max-h-[80vh] overflow-y-auto ${padding === 'none' ? '' : 'p-6'}`}>
-                        {children}
-                    </div>
-                </Stone>
-            </div>
+                {/* Content */}
+                <div className="p-8">
+                    {children}
+                </div>
+            </M3Card>
         </div>,
         document.body
     );
 };
+
+export { M3Modal as Cabinet };

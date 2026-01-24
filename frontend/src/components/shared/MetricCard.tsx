@@ -1,4 +1,5 @@
 import { LucideIcon } from 'lucide-react';
+import React from 'react';
 
 interface MetricCardProps {
   icon: LucideIcon;
@@ -12,16 +13,6 @@ interface MetricCardProps {
 
 /**
  * MetricCard - M3 Compliant Metric Display Component
- * 
- * Displays key metrics with icon, label, and value in a compact card format.
- * Enhanced with M3 elevation and motion for visual hierarchy.
- * 
- * **M3 Design Token Usage:**
- * - Shape: `rounded-tech` (24px 4px 24px 20px) - Precision aesthetic
- * - Elevation: `shadow-elevation-1` → `shadow-elevation-2` on hover
- * - Motion: M3 spring easing for smooth transitions
- * - Colors: Semantic surface tokens
- * - Typography: M3 display scale for values, mono font for data
  */
 export function MetricCard({
   icon: Icon,
@@ -51,7 +42,6 @@ export function MetricCard({
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Subtle background pattern for Laboratory feel */}
       <div
         className="absolute inset-0 opacity-[0.02] pointer-events-none"
         style={{ backgroundImage: 'radial-gradient(var(--color-parchment) 1px, transparent 1px)', backgroundSize: '12px 12px' }}
