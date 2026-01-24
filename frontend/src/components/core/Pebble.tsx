@@ -1,60 +1,92 @@
-import * as React from 'react';
-import { cn } from '../../lib/utils';
 
-export type PebbleVariant = 'primary' | 'secondary' | 'ghost' | 'destructive';
-export type PebbleSize = 'sm' | 'md' | 'lg';
+import React from 'react';
+import { cn } from '../../lib/utils';
+import { Loader2 } from 'lucide-react';
 
 export interface PebbleProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: PebbleVariant;
-  size?: PebbleSize;
-  isLoading?: boolean;
-  iconLeft?: React.ReactNode;
-  iconRight?: React.ReactNode;
+    /**
+     * The visual style variant.
+     * - Primary: Wattle Gold (Action)
+     * - Secondary: Surface Elevated (Navigation/Option)
+     * - Ghost: Transparent (Subtle)
+     * - Destructive: Waratah Crimson (Danger)
+     */
+    variant?: 'primary' | 'secondary' | 'ghost' | 'destructive';
+
+    /**
+     * The size of the pebble.
+     */
+    size?: 'sm' | 'md' | 'lg';
+
+    /**
+     * Optional icon to display before the label.
+     */
+    iconLeft?: React.ReactNode;
+
+    /**
+     * Optional icon to display after the label.
+     */
+    iconRight?: React.ReactNode;
+
+    /**
+     * If true, shows a spinner and disables interaction.
+     */
+    isLoading?: boolean;
 }
 
-const variantClasses: Record<PebbleVariant, string> = {
-  primary: 'bg-primary-wattle-gold text-primary-on-primary',
-  secondary: 'bg-surface-gallery-eucalypt-smoke-high text-secondary-flannel-flower border border-secondary-flannel-flower',
-  ghost: 'bg-transparent text-secondary-flannel-flower border border-secondary-flannel-dim',
-  destructive: 'bg-tertiary-waratah-crimson text-on-surface-parchment',
-};
+/**
+ * **THE PEBBLE**
+ * 
+ * A smooth, organically shaped action element.
+ * Corresponds to the 'Leaf' (Primary) and 'Pebble' (Container) shapes in Northcote Curio.
+ * 
+ * @example
+ * <Pebble variant="primary" onClick={doSomething}>Click Me</Pebble>
+ */
+export const Pebble = React.forwardRef<HTMLButtonElement, PebbleProps>(
+    ({
+        className,
+        variant = 'primary',
+        size = 'md',
+        isLoading,
+        iconLeft,
+        iconRight,
+        children,
+        disabled,
+        ...props
+    }, ref) => {
 
-const sizeClasses: Record<PebbleSize, string> = {
-  sm: 'h-9 px-3 text-sm',
-  md: 'h-11 px-4 text-base',
-  lg: 'h-12 px-6 text-lg',
-};
+        // Base structural classes (Layout & Physics)
+        const baseStyles = "inline-flex items-center justify-center font-body font-medium transition-all duration-short ease-viscous disabled:opacity-50 disabled:pointer-events-none ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2";
 
-export const Pebble: React.FC<PebbleProps> = ({
-  variant = 'primary',
-  size = 'md',
-  isLoading = false,
-  iconLeft,
-  iconRight,
-  className,
-  children,
-  disabled,
-  type = 'button',
-  ...props
-}) => (
-  <button
-    type={type}
-    className={cn(
-      'inline-flex items-center justify-center gap-2 rounded-[var(--radius-pebble)] font-semibold transition-colors',
-      'disabled:cursor-not-allowed disabled:opacity-50',
-      variantClasses[variant],
-      sizeClasses[size],
-      className
-    )}
-    disabled={disabled || isLoading}
-    {...props}
-  >
-    {isLoading ? (
-      <span className="block h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
-    ) : iconLeft ? (
-      <span className="flex items-center">{iconLeft}</span>
-    ) : null}
-    <span>{children}</span>
-    {!isLoading && iconRight ? <span className="flex items-center">{iconRight}</span> : null}
-  </button>
+        // Token-mapped variants (The Skin comes from tokens.json via tailwind config)
+        const variants = {
+            primary: "bg-primary text-primary-foreground hover:bg-primary-bright hover:-translate-y-0.5 shadow-ink-rest hover:shadow-glow-gold rounded-leaf",
+            secondary: "bg-surface-elevated text-secondary border border-white/10 hover:bg-surface-elevated/80 hover:text-primary hover:-translate-y-0.5 shadow-sm rounded-pebble",
+            ghost: "hover:bg-surface-elevated hover:text-primary rounded-petal",
+            destructive: "bg-accent text-white hover:bg-accent-dim rounded-leaf shadow-ink-rest",
+        };
+
+        const sizes = {
+            sm: "h-8 px-3 text-xs",
+            md: "h-10 px-5 py-2 text-sm",
+            lg: "h-12 px-8 text-base",
+        };
+
+        return (
+            <button
+                ref={ref}
+                className={cn(baseStyles, variants[variant], sizes[size], className)}
+                disabled={disabled || isLoading}
+                {...props}
+            >
+                {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                {!isLoading && iconLeft && <span className="mr-2">{iconLeft}</span>}
+                {children}
+                {!isLoading && iconRight && <span className="ml-2">{iconRight}</span>}
+            </button>
+        );
+    }
 );
+
+Pebble.displayName = "Pebble";

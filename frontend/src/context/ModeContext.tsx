@@ -1,34 +1,43 @@
-import * as React from 'react';
+import React, { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 
-export type Mode = 'gallery' | 'laboratory';
+export type AppMode = 'gallery' | 'laboratory';
+export type Mode = AppMode;
 
-export interface ModeContextValue {
-  mode: Mode;
-  setMode: (mode: Mode) => void;
-  toggleMode: () => void;
+export interface ModeContextType {
+    mode: AppMode;
+    setMode: (mode: AppMode) => void;
+    toggleMode: () => void;
 }
 
-const ModeContext = React.createContext<ModeContextValue | undefined>(undefined);
+export type ModeContextValue = ModeContextType;
 
-export const ModeProvider: React.FC<{
-  initialMode?: Mode;
-  children: React.ReactNode;
-}> = ({ initialMode = 'gallery', children }) => {
-  const [mode, setMode] = React.useState<Mode>(initialMode);
+const ModeContext = createContext<ModeContextType | undefined>(undefined);
 
-  const toggleMode = React.useCallback(() => {
-    setMode((current) => (current === 'gallery' ? 'laboratory' : 'gallery'));
-  }, []);
+export const ModeProvider: React.FC<{ children: ReactNode; initialMode?: AppMode }> = ({
+    children,
+    initialMode = 'laboratory'
+}) => {
+    const [mode, setMode] = useState<AppMode>(initialMode);
 
-  const value = React.useMemo(() => ({ mode, setMode, toggleMode }), [mode, toggleMode]);
+    const toggleMode = () => {
+        setMode((prev) => (prev === 'gallery' ? 'laboratory' : 'gallery'));
+    };
 
-  return <ModeContext.Provider value={value}>{children}</ModeContext.Provider>;
+    useEffect(() => {
+        document.body.dataset.mode = mode;
+    }, [mode]);
+
+    return (
+        <ModeContext.Provider value={{ mode, setMode, toggleMode }}>
+            {children}
+        </ModeContext.Provider>
+    );
 };
 
-export const useMode = (): ModeContextValue => {
-  const context = React.useContext(ModeContext);
-  if (context) return context;
-  return { mode: 'gallery', setMode: () => {}, toggleMode: () => {} };
+export const useMode = (): ModeContextType => {
+    const context = useContext(ModeContext);
+    if (context === undefined) {
+        throw new Error('useMode must be used within a ModeProvider');
+    }
+    return context;
 };
-
-export { ModeContext };

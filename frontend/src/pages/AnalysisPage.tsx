@@ -1,17 +1,16 @@
-import React, { useState } from 'react';
-import { EvidenceUploader } from '@/features/ingestion/components/EvidenceUploader';
 import {
-    M3Button,
-    M3Card,
-    M3CardHeader,
-    M3CardContent,
-    M3Alert,
-    M3TextField,
+    Lens,
     M3TextArea,
-    StatusBadge
+    Pebble,
+    Signal,
+    StatusBadge,
+    Stone,
+    M3CardHeader as StoneHeader
 } from '@/components/ui';
+import { EvidenceUploader } from '@/features/ingestion/components/EvidenceUploader';
 import { m3Toast } from '@/utils/toast';
-import { Sparkles, Building, Globe, Target, MessageCircle, Heart, Copy } from 'lucide-react';
+import { Building, Copy, Globe, Heart, MessageCircle, Sparkles, Target } from 'lucide-react';
+import React, { useState } from 'react';
 
 interface AtsResult {
     overallScore: number;
@@ -167,7 +166,7 @@ export const AnalysisPage: React.FC = () => {
                         label="Job Listing URL"
                         placeholder="https://linkedin.com/jobs/view/..."
                         value={jobUrl}
-                        onChange={(e) => setJobUrl(e.target.value)}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setJobUrl(e.target.value)}
                         variant="outlined"
                     />
 
@@ -176,7 +175,7 @@ export const AnalysisPage: React.FC = () => {
                         rows={6}
                         label="Primary Resume Content"
                         value={resumeText}
-                        onChange={(e) => setResumeText(e.target.value)}
+                        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setResumeText(e.target.value)}
                         placeholder="Paste the raw text of your current resume..."
                     />
 
@@ -191,7 +190,7 @@ export const AnalysisPage: React.FC = () => {
                         rows={4}
                         label="Supplemental Job Description"
                         value={jobDescription}
-                        onChange={(e) => setJobDescription(e.target.value)}
+                        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setJobDescription(e.target.value)}
                         placeholder="Use this if the URL research is unavailable..."
                         className={jobUrl ? 'opacity-60' : ''}
                     />

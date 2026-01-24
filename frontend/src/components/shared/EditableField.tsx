@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
 import {
-    M3TextField,
+    Lens,
     M3IconButton
 } from '@/components/ui';
-import { Edit, Check, X, Sparkles } from 'lucide-react';
+import { Check, Edit, Sparkles, X } from 'lucide-react';
+import React, { useState } from 'react';
 
 interface EditableFieldProps {
     label: string;
@@ -50,19 +50,17 @@ export const EditableField: React.FC<EditableFieldProps> = ({
                 </label>
                 <Lens
                     fullWidth
-                    multiline={multiline}
-                    rows={multiline ? 4 : 1}
                     value={editValue}
-                    onChange={(e) => setEditValue(e.target.value)}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => setEditValue(e.target.value)}
                     variant="filled"
                     className="mb-3"
+                    {...(multiline ? { rows: 4 } : {})}
                 />
                 <div className="flex items-center gap-3">
                     <M3IconButton
                         icon={<Check className="w-4 h-4" />}
                         ariaLabel="save"
                         onClick={handleSave}
-                        variant="standard"
                         size="medium"
                         className="bg-[var(--color-wattle-gold)]/20 text-[var(--color-wattle-gold)] hover:bg-[var(--color-wattle-gold)] hover:text-white"
                     />
@@ -70,7 +68,6 @@ export const EditableField: React.FC<EditableFieldProps> = ({
                         icon={<X className="w-4 h-4" />}
                         ariaLabel="cancel"
                         onClick={handleCancel}
-                        variant="standard"
                         size="medium"
                         className="bg-white/5 text-[var(--color-flannel-flower-dark)] hover:bg-white/10"
                     />

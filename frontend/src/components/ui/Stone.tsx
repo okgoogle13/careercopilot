@@ -2,7 +2,7 @@ import React from 'react';
 
 export type StoneVariant = 'pebble' | 'tech' | 'leaf' | 'gem';
 export type M3CardElevation = 0 | 1 | 2 | 3 | 4 | 5;
-export type M3CardPadding = 'none' | 'sm' | 'md' | 'lg' | 'xl';
+export type StonePadding = 'none' | 'sm' | 'md' | 'lg' | 'xl';
 
 export interface StoneProps {
     /** Card content */
@@ -18,7 +18,7 @@ export interface StoneProps {
     hoverable?: boolean;
 
     /** Padding size using M3 spacing scale */
-    padding?: M3CardPadding;
+    padding?: StonePadding;
 
     /** Additional CSS classes */
     className?: string;
@@ -31,27 +31,7 @@ export interface StoneProps {
 }
 
 /**
- * M3Card - Material Design 3 Compliant Card Component
- * 
- * A flexible card component using the Electric Alchemist M3 design system.
- * Provides organic shapes, proper elevation, and semantic theming.
- * 
- * **M3 Design Token Usage:**
- * - Shape: Choose from pebble (friendly), tech (precision), leaf (growth), or gem (highlight)
- * - Elevation: Uses M3 shadow system (shadow-elevation-0 through shadow-elevation-5)
- * - Spacing: M3 spacing scale (p-space-sm through p-space-xl)
- * - Colors: Semantic surface tokens (surface-container, outline-variant)
- * - Motion: M3 spring easing for smooth hover transitions
- * 
- * @example
- * ```tsx
- * <Stone variant="pebble" elevation={1} padding="lg" hoverable>
- *   <h3 className="text-headline-large">Card Title</h3>
- *   <p className="text-body-large">Card content goes here</p>
- * </Stone>
- * ```
- * 
- * @see frontend/src/theme/design-tokens.css - M3 token definitions
+ * M3Card - Material Design 3 Compliant Card Component (Stone)
  */
 export function M3Card({
     children,
@@ -180,8 +160,6 @@ export function M3CardHeader({
 
 /**
  * M3CardContent - Semantic content section for M3Card
- * 
- * Provides consistent spacing and typography for card body content.
  */
 export interface M3CardContentProps {
     children: React.ReactNode;
@@ -201,8 +179,6 @@ export function M3CardContent({
 
 /**
  * M3CardActions - Semantic actions section for M3Card
- * 
- * Provides consistent styling for card action buttons.
  */
 export interface M3CardActionsProps {
     children: React.ReactNode;
@@ -228,3 +204,5 @@ export function M3CardActions({
         </div>
     );
 }
+
+export { M3Card as Stone };

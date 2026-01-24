@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
 import {
-    M3Button,
-    M3Card,
-    M3Select,
-    M3IconButton
+    Jar,
+    Pebble,
+    Stone
 } from '@/components/ui';
-import { UploadCloud, FileText, ChevronDown } from 'lucide-react';
 import { m3Toast } from '@/utils/toast';
+import { FileText, UploadCloud } from 'lucide-react';
+import React, { useState } from 'react';
 
 const API_BASE_URL = '/api';
 
@@ -77,7 +76,7 @@ export const EvidenceUploader: React.FC = () => {
                     <Jar
                         options={documentOptions}
                         value={selectedType}
-                        onChange={(e) => setSelectedType(e.target.value as SourceType)}
+                        onChange={(val: string) => setSelectedType(val as SourceType)}
                         label="Knowledge Domain"
                     />
                 </div>

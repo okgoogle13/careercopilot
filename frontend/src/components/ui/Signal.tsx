@@ -1,119 +1,104 @@
-import React from 'react';
-import { AlertCircle, CheckCircle, Info, AlertTriangle, X } from 'lucide-react';
-import { M3IconButton } from './M3Button';
+import {
+    AlertCircle,
+    AlertTriangle,
+    CheckCircle,
+    Info,
+    X
+} from 'lucide-react';
+import React, { useState } from 'react';
+import { M3IconButton } from './Pebble';
 
-export type M3AlertSeverity = 'success' | 'info' | 'warning' | 'error';
-export type SignalVariant = 'filled' | 'outlined' | 'tonal';
+export type SignalSeverity = 'info' | 'success' | 'warning' | 'error';
 
 export interface SignalProps {
-    /** Alert severity/type */
-    severity?: M3AlertSeverity;
-
-    /** Visual variant */
-    variant?: SignalVariant;
-
     /** Alert title */
     title?: string;
 
-    /** Alert message */
-    children: React.ReactNode;
+    /** Severity level */
+    severity?: 'info' | 'success' | 'warning' | 'error';
 
-    /** Show close button */
+    /** Visual variant */
+    variant?: 'filled' | 'outlined' | 'tonal';
+
+    /** Whether alert is dismissible */
     onClose?: () => void;
+
+    /** Actions to show in alert */
+    action?: React.ReactNode;
+
+    /** Alert icon (overrides default based on severity) */
+    icon?: React.ReactNode;
+
+    /** Alert content */
+    children: React.ReactNode;
 
     /** Additional CSS classes */
     className?: string;
+
+    /** Full width alert */
+    fullWidth?: boolean;
 }
 
+export type M3AlertSeverity = 'info' | 'success' | 'warning' | 'error';
+export type SignalVariant = 'filled' | 'outlined' | 'tonal';
+
 /**
- * M3Alert - Material Design 3 Compliant Alert Component
- * 
- * Displays important messages with semantic color coding and icons.
- * Features organic M3 shapes and proper accessibility.
- * 
- * **M3 Design Token Usage:**
- * - Shape: `rounded-pebble` (friendly organic)
- * - Colors: M3 semantic color roles (error, warning, info, success→secondary)
- * - Typography: M3 title + body scales
- * - Elevation: Subtle shadow for prominence
- * 
- * **Severity Types:**
- * - `success`: Green/teal - successful operations
- * - `info`: Primary blue/indigo - informational messages
- * - `warning`: Amber - caution/attention needed
- * - `error`: Red - errors/critical issues
- * 
- * **Variants:**
- * - `filled`: Colored background (high emphasis)
- * - `tonal`: Container background (medium emphasis)
- * - `outlined`: Border only (low emphasis)
- * 
- * @example
- * ```tsx
- * <Signal severity="success">
- *   Your changes have been saved successfully!
- * </Signal>
- * 
- * <Signal
- *   severity="error"
- *   title="Error"
- *   onClose={() => setError(null)}
- * >
- *   Failed to upload file. Please try again.
- * </Signal>
- * 
- * <Signal severity="warning" variant="outlined">
- *   This action cannot be undone.
- * </Signal>
- * ```
+ * M3Alert - Material Design 3 Compliant Alert (Signal)
  */
 export function M3Alert({
+    title,
     severity = 'info',
     variant = 'tonal',
-    title,
-    children,
     onClose,
+    action,
+    icon,
+    children,
     className = '',
+    fullWidth = true,
 }: SignalProps) {
-    // Icon mapping
-    const icons: Record<SignalSeverity, React.ComponentType<{ className?: string }>> = {
-        success: CheckCircle,
+    const [isVisible, setIsVisible] = useState(true);
+
+    if (!isVisible) return null;
+
+    const handleClose = () => {
+        setIsVisible(false);
+        onClose?.();
+    };
+
+    const icons: Record<M3AlertSeverity, React.ComponentType<{ className?: string }>> = {
         info: Info,
+        success: CheckCircle,
         warning: AlertTriangle,
         error: AlertCircle,
     };
 
-    const Icon = icons[severity];
+    const IconComponent = icon || icons[severity];
 
-    // Northcote Curio Color Configurations
-    const getSeverityStyles = (): React.CSSProperties => {
+    const getStyles = () => {
         const styles: React.CSSProperties = {
-            borderRadius: 'var(--radius-pebble)',
+            borderRadius: 'var(--radius-stone)',
             transition: 'all var(--duration-standard) var(--ease-viscous-breeze)',
-            border: '2px solid',
         };
 
-        const colorMap: Record<SignalSeverity, string> = {
-            success: 'secondary', // Coral
-            info: 'primary',    // Sage
-            warning: 'warning',  // Gold
-            error: 'error',      // Crimson
+        const colorMap: Record<M3AlertSeverity, string> = {
+            info: 'primary',
+            success: 'secondary',
+            warning: 'warning',
+            error: 'error',
         };
 
-        const baseColor = colorMap[severity];
+        const color = colorMap[severity];
 
         if (variant === 'filled') {
-            styles.backgroundColor = `var(--ref-palette-${baseColor}-40)`;
-            styles.color = `var(--ref-palette-${baseColor}-100)`;
-            styles.borderColor = `var(--ref-palette-${baseColor}-50)`;
-        } else if (variant === 'tonal') {
-            styles.backgroundColor = `var(--ref-palette-${baseColor}-90)`;
-            styles.color = `var(--ref-palette-${baseColor}-10)`;
-            styles.borderColor = `var(--ref-palette-${baseColor}-80)`;
-        } else { // outlined
+            styles.backgroundColor = `var(--ref-palette-${color}-40)`;
+            styles.color = `var(--ref-palette-${color}-100)`;
+        } else if (variant === 'outlined') {
+            styles.border = `1px solid var(--ref-palette-${color}-50)`;
+            styles.color = `var(--ref-palette-${color}-50)`;
             styles.backgroundColor = 'transparent';
-            styles.color = 'var(--color-parchment)';
-            styles.borderColor = `var(--ref-palette-${baseColor}-40)`;
+        } else { // tonal
+            styles.backgroundColor = `var(--ref-palette-${color}-90)`;
+            styles.color = `var(--ref-palette-${color}-10)`;
         }
 
         return styles;
@@ -121,70 +106,49 @@ export function M3Alert({
 
     return (
         <div
-            role="alert"
-            style={getSeverityStyles()}
+            style={getStyles()}
             className={`
-        p-4
-        flex gap-4
-        shadow-elevation-1
-        ${className}
-      `}
+                relative p-4 flex gap-4 animate-in fade-in slide-in-from-top-2 duration-300
+                ${fullWidth ? 'w-full' : 'w-auto'}
+                ${className}
+            `}
+            role="alert"
         >
-            {/* Icon */}
             <div className="flex-shrink-0 mt-0.5">
-                <Icon className="w-6 h-6" />
+                {typeof IconComponent === 'function' ? <IconComponent className="w-5 h-5" /> : IconComponent}
             </div>
 
-            {/* Content */}
-            <div className="flex-1 min-w-0">
-                {title && (
-                    <h4 className="font-bloom text-xl font-bold mb-1">
-                        {title}
-                    </h4>
-                )}
-                <div className="font-field-note text-base leading-relaxed opacity-90">
+            <div className="flex-grow">
+                {title && <h4 className="font-bold mb-1 font-bloom">{title}</h4>}
+                <div className="font-field-note text-sm leading-relaxed">
                     {children}
                 </div>
             </div>
 
-            {/* Close Button */}
-            {onClose && (
-                <div className="flex-shrink-0 -mt-1 -mr-1">
-                    <M3IconButton
-                        icon={<X className="w-4 h-4" />}
-                        ariaLabel="Close alert"
-                        onClick={onClose}
-                        size="small"
-                        color={
-                            severity === 'success' ? 'secondary' :
-                                severity === 'info' ? 'primary' :
-                                    severity
-                        }
-                    />
+            {(action || onClose) && (
+                <div className="flex-shrink-0 flex items-start gap-2 -mt-1 -mr-1">
+                    {action}
+                    {onClose && (
+                        <M3IconButton
+                            icon={<X className="w-4 h-4" />}
+                            ariaLabel="Close alert"
+                            onClick={handleClose}
+                            size="small"
+                        />
+                    )}
                 </div>
             )}
         </div>
     );
 }
 
-/**
- * M3AlertTitle - Semantic title component for alerts
- */
-export function M3AlertTitle({ children }: { children: React.ReactNode }) {
-    return (
-        <h4 className="font-bloom text-xl font-bold mb-1">
-            {children}
-        </h4>
-    );
-}
+// Exporting aliases for index compatibility
+export const M3AlertTitle: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+    <h4 className="font-bold mb-1 font-bloom">{children}</h4>
+);
 
-/**
- * M3AlertDescription - Semantic description component for alerts
- */
-export function M3AlertDescription({ children }: { children: React.ReactNode }) {
-    return (
-        <div className="font-field-note text-base leading-relaxed opacity-90">
-            {children}
-        </div>
-    );
-}
+export const M3AlertDescription: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+    <div className="font-field-note text-sm leading-relaxed">{children}</div>
+);
+
+export { M3Alert as Signal };

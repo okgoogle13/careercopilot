@@ -1,8 +1,8 @@
-import * as React from 'react';
+import { useMode } from '@/hooks/use-mode';
+import { cn } from '@/lib/utils';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { motion } from 'framer-motion';
-import { cn } from '@/lib/utils';
-import { useMode } from '@/hooks/use-mode';
+import * as React from 'react';
 
 const cardVariants = cva(
     'relative overflow-hidden transition-all duration-300',
@@ -91,4 +91,5 @@ const M3Card = React.forwardRef<HTMLDivElement, M3CardProps>(
 );
 M3Card.displayName = 'M3Card';
 
-export { M3Card, cardVariants };
+export { cardVariants, M3Card };
+export const Stone = M3Card;
