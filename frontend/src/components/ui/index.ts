@@ -1,40 +1,35 @@
-/**
- * M3 Component Library - Electric Alchemist Design System
- * 
- * Exports all M3-compliant UI components for the CareerCopilot application.
- * All components use design tokens from frontend/src/theme/design-tokens.css
- */
+export { M3Modal as Cabinet, M3Modal } from './Cabinet';
+export type { CabinetProps } from './Cabinet';
 
-// Core Interaction Components
-export { M3Button, M3IconButton } from './M3Button';
-export type { M3ButtonProps, M3ButtonVariant, M3ButtonColor, M3ButtonSize, M3IconButtonProps } from './M3Button';
+export { M3Select as Jar, M3Select } from './Jar';
+export type { JarProps, M3SelectOption } from './Jar';
 
-export { M3Switch } from './M3Switch';
-export type { M3SwitchProps } from './M3Switch';
+export { Lens, M3TextArea } from './Lens';
+export type { LensProps, LensSize, LensVariant } from './Lens';
 
-export { M3Checkbox, M3Radio } from './M3Checkbox';
-export type { M3CheckboxProps, M3RadioProps } from './M3Checkbox';
+export { M3IconButton, Pebble } from './Pebble';
+export type { M3ButtonColor, PebbleProps, PebbleSize, PebbleVariant } from './Pebble';
 
-export { M3Select } from './M3Select';
-export type { M3SelectProps, M3SelectOption } from './M3Select';
+export { M3Alert, M3AlertDescription, M3AlertTitle, M3Alert as Signal } from './Signal';
+export type { SignalProps, SignalSeverity } from './Signal';
 
-// Data Entry & Layout Components
-export { M3TextField, M3TextArea } from './M3TextField';
-export type { M3TextFieldProps, M3TextFieldVariant, M3TextFieldSize, M3TextAreaProps } from './M3TextField';
+export { StatusBadge } from './StatusBadge';
+export type { StatusBadgeProps, StatusBadgeVariant } from './StatusBadge';
 
-export { M3Card, M3CardHeader, M3CardContent, M3CardActions } from './M3Card';
-export type { M3CardProps, M3CardVariant, M3CardElevation, M3CardPadding, M3CardHeaderProps, M3CardContentProps, M3CardActionsProps } from './M3Card';
+export { M3Card, M3CardActions, M3CardContent, M3CardHeader, M3Card as Stone } from './Stone';
+export type { M3CardActionsProps, M3CardContentProps, M3CardElevation, M3CardHeaderProps, StonePadding as M3CardPadding, StoneProps, StoneVariant } from './Stone';
 
-// Overlays & Messaging
-export { M3Modal } from './M3Modal';
-export type { M3ModalProps } from './M3Modal';
+export { M3Accordion, M3Accordion as Vessel } from './Vessel';
+export type { VesselProps } from './Vessel';
 
-export { M3Alert, M3AlertTitle, M3AlertDescription } from './M3Alert';
-export type { M3AlertProps, M3AlertSeverity, M3AlertVariant } from './M3Alert';
+export { M3Badge, M3Badge as Seed } from './Seed';
+export type { SeedProps } from './Seed';
 
-export { M3Badge } from './M3Badge';
-export type { M3BadgeProps } from './M3Badge';
+export { NorthcoteButton } from './NorthcoteButton';
+export type { NorthcoteButtonProps } from './NorthcoteButton';
 
-// Shared/Semantic Utilities
-export { StatusBadge } from './StatusBadge/StatusBadge';
-export type { StatusBadgeProps, StatusBadgeVariant } from './StatusBadge/StatusBadge';
+export { AuroraHeader } from './AuroraHeader';
+export { Mark } from './Mark';
+export { NativeAnchor } from './NativeAnchor';
+export { SplitHeader } from './SplitHeader';
+export { Valve } from './Valve';

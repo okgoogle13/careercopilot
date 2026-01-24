@@ -40,24 +40,24 @@ export interface LensProps extends Omit<React.InputHTMLAttributes<HTMLInputEleme
 
 /**
  * M3TextField - Material Design 3 Compliant Text Input
- * 
+ *
  * A comprehensive text input component using the Electric Alchemist M3 design system.
  * Supports filled and outlined variants with proper M3 states and validation.
- * 
+ *
  * **M3 Design Token Usage:**
  * - Shape: `rounded-tech` (M3 medium shape) for inputs
  * - Colors: M3 semantic color roles with state layers
  * - Typography: M3 body-large for input text
  * - Motion: Smooth transitions for focus/hover states
  * - Elevation: Subtle elevation for filled variant
- * 
+ *
  * **States:**
  * - Default: Outlined with subtle border
  * - Hover: Border color intensifies
  * - Focus: Primary color accent with ring
  * - Error: Error color with error message
  * - Disabled: Reduced opacity
- * 
+ *
  * @example
  * ```tsx
  * <Lens
@@ -66,14 +66,14 @@ export interface LensProps extends Omit<React.InputHTMLAttributes<HTMLInputEleme
  *   placeholder="you@example.com"
  *   helperText="We'll never share your email"
  * />
- * 
+ *
  * <Lens
  *   label="Password"
  *   type="password"
  *   error
  *   errorMessage="Password must be at least 8 characters"
  * />
- * 
+ *
  * <Lens
  *   label="Search"
  *   startAdornment={<SearchIcon />}
@@ -250,7 +250,7 @@ Lens.displayName = 'Lens';
 
 /**
  * M3TextArea - Multi-line text input variant
- * 
+ *
  * Same API as M3TextField but renders a textarea for multi-line input.
  */
 export interface M3TextAreaProps extends Omit<React.TextareaHTMLAttributes<HTMLTextAreaElement>, 'size'> {

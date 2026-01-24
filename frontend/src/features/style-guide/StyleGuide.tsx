@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import { PageHeader } from '../../components/shared/PageHeader';
 import { Button } from '@careercopilot/ui';
+import { Cpu, Gem, Leaf, Shapes } from 'lucide-react';
+import { useState } from 'react';
 import { KeywordTag } from '../../components/shared/KeywordTag';
-import { Leaf, Cpu, Shapes, Gem } from 'lucide-react';
+import { PageHeader } from '../../components/shared/PageHeader';
 
 export function StyleGuide() {
     const [activeTab, setActiveTab] = useState('shapes');
@@ -33,7 +33,7 @@ export function StyleGuide() {
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
                     {/* Card: The Leaf */}
-                    <div className="p-8 bg-surface-container rounded-leaf border border-outline-variant shadow-elevation-1 relative overflow-hidden group 
+                    <div className="p-8 bg-surface-container rounded-leaf border border-outline-variant shadow-elevation-1 relative overflow-hidden group
                         transition-all duration-300 ease-spring hover:shadow-elevation-3 hover:-translate-y-1 hover:scale-[1.01]">
                         <div className="absolute top-4 right-4 bg-primary-container p-2 rounded-pebble group-hover:rotate-12 transition-transform duration-500 ease-spring">
                             <Leaf className="w-5 h-5 text-on-primary-container" />
@@ -48,7 +48,7 @@ export function StyleGuide() {
                     </div>
 
                     {/* Card: The Tech-Edge */}
-                    <div className="p-8 bg-surface-container rounded-tech border border-outline-variant shadow-elevation-1 relative overflow-hidden group 
+                    <div className="p-8 bg-surface-container rounded-tech border border-outline-variant shadow-elevation-1 relative overflow-hidden group
                         transition-all duration-300 ease-spring hover:shadow-elevation-3 hover:-translate-y-1 hover:scale-[1.01]">
                         <div className="absolute top-4 right-4 bg-secondary-container p-2 rounded-sm group-hover:-rotate-12 transition-transform duration-500 ease-spring">
                             <Cpu className="w-5 h-5 text-on-secondary-container" />
@@ -63,11 +63,11 @@ export function StyleGuide() {
                     </div>
 
                     {/* Card: The Pebble (Interactive Elements) */}
-                    <div className="p-8 bg-surface-container rounded-pebble border border-outline-variant shadow-elevation-1 
+                    <div className="p-8 bg-surface-container rounded-pebble border border-outline-variant shadow-elevation-1
                         transition-all duration-300 ease-spring hover:shadow-elevation-2">
                         <h3 className="text-headline-small font-bold mb-6">The Pebble</h3>
                         <div className="flex flex-wrap gap-4 items-center">
-                            <Button className="rounded-pebble bg-primary text-on-primary px-6 py-6 h-auto text-lg 
+                            <Button className="rounded-pebble bg-primary text-on-primary px-6 py-6 h-auto text-lg
                                 transition-transform active:scale-95 hover:scale-105 ease-spring">
                                 Spring Button
                             </Button>
@@ -163,4 +163,3 @@ export function StyleGuide() {
         </div>
     );
 }
-

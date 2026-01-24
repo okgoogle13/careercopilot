@@ -1,26 +1,26 @@
-import React, { useState, useEffect, useCallback } from 'react';
 import {
-    M3Button,
-    M3Card,
-    M3Alert,
+    Pebble,
+    Signal,
+    Stone,
+    Vessel
 } from '@/components/ui';
-import { Vessel } from '@/components/ui/M3Accordion';
+import { m3Toast } from '@/utils/toast';
 import {
-    Person,
-    Work,
-    Trophy,
+    AlertTriangle,
     BrainCircuit,
-    Sparkles,
+    Briefcase,
     Download,
-    Undo2,
     Redo2,
     ShieldCheck,
-    AlertTriangle,
+    Sparkles,
+    Trophy,
+    Undo2,
+    User,
 } from 'lucide-react';
-import { CareerDatabase, StructuredAchievement, KSCResponse } from '../../../types/api';
+import React, { useCallback, useEffect, useState } from 'react';
 import { EditableField } from '../../../components/shared/EditableField';
 import { StatusChip } from '../../../components/shared/StatusChip';
-import { m3Toast } from '@/utils/toast';
+import { CareerDatabase, KSCResponse, StructuredAchievement } from '../../../types/api';
 
 interface ValidationDashboardProps {
     data: CareerDatabase;
@@ -264,7 +264,7 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
                     {/* Personal Context */}
                     <Vessel
                         title="Personal Context"
-                        icon={<Person className="w-5 h-5" />}
+                        icon={<User className="w-5 h-5" />}
                         defaultExpanded
                     >
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
@@ -347,7 +347,7 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
                     {localData.KSC_Responses.length > 0 && (
                         <Vessel
                             title={`Competency Modules (${localData.KSC_Responses.length})`}
-                            icon={<Work className="w-5 h-5" />}
+                            icon={<Briefcase className="w-5 h-5" />}
                         >
                             <div className="space-y-12 mt-8">
                                 {localData.KSC_Responses.map((ksc: KSCResponse, idx: number) => (

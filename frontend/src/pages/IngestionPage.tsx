@@ -1,15 +1,14 @@
-import React, { useState } from 'react';
 import {
-    M3Button,
-    M3Card,
-    M3Alert,
-    StatusBadge
+    Pebble,
+    Signal,
+    Stone
 } from '@/components/ui';
-import { CloudUpload, CheckCircle, FileText, BrainCircuit, Loader2 } from 'lucide-react';
-import { useCareerIngestion } from '@/hooks/useCareerIngestion';
 import { ValidationDashboard } from '@/features/onboarding/components/ValidationDashboard';
+import { useCareerIngestion } from '@/hooks/useCareerIngestion';
 import { CareerDatabase } from '@/types/api';
 import { m3Toast } from '@/utils/toast';
+import { BrainCircuit, CheckCircle, CloudUpload, FileText } from 'lucide-react';
+import React, { useState } from 'react';
 
 type UploadStage = 'idle' | 'uploading' | 'extracting' | 'processing' | 'embedding' | 'complete';
 
@@ -132,7 +131,6 @@ export const IngestionPage: React.FC = () => {
                     <label htmlFor="file-upload" className="cursor-pointer">
                         <Pebble
                             variant="outlined"
-                            component="span"
                             startIcon={<CloudUpload className="w-5 h-5" />}
                             disabled={isLoading}
                             className="pointer-events-none"
