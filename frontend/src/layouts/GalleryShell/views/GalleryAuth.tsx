@@ -9,7 +9,7 @@ export const GalleryAuth: React.FC = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5 }}
             >
-                <h2 className="font-bloom text-3xl text-primary-wattle-gold mb-4">Authentication</h2>
+                <h2 className="font-bloom text-3xl text-wattle-gold mb-4">Authentication</h2>
                 <p className="font-field-note text-secondary-flannel-flower opacity-80 mb-6">
                     [Placeholder] Secure entry to the collection.
                 </p>

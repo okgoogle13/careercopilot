@@ -4,7 +4,7 @@ export const SidePanel: React.FC = () => {
     return (
         <div className="h-full flex flex-col">
             <div className="p-4 border-b border-surface-laboratory-slate-smoke-highest">
-                <h3 className="font-bloom text-lg text-primary-wattle-gold">Context</h3>
+                <h3 className="font-bloom text-lg text-wattle-gold">Context</h3>
             </div>
             <div className="p-4 flex-1 overflow-y-auto">
                 <div className="p-4 border border-dashed border-secondary-flannel-dim rounded-lg text-secondary-flannel-dim text-sm font-annotation text-center opacity-60">

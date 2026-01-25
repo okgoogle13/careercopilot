@@ -46,7 +46,7 @@ Implemented dynamic shell switching in `src/App.tsx`:
 - **Branch:** `northcote-restoration`
 - **Backup:** `pre-northcote-backup` (Created and pushed to origin)
 - **Primary Commit:** `8b4800956` (Restoration)
-- **Integration Commit:** `[TBD]` (To be updated after final commit)
+- **Integration Commit:** `5dedc474c` (Final Architecture Sync)
 
 ## Next Steps
 1. **Component Migration:** Gradually port existing functional components into the Northcote design system.

@@ -8,7 +8,7 @@ export const GalleryKanban: React.FC = () => <div className="p-8 text-center">Ka
 export const GalleryPlaceholders: React.FC = () => (
     <div className="w-full h-full flex items-center justify-center p-12 text-secondary-flannel-dim">
         <div className="max-w-md text-center space-y-2">
-            <h2 className="font-bloom text-2xl text-primary-parchment">Gallery Placeholders</h2>
+            <h2 className="font-bloom text-2xl text-parchment">Gallery Placeholders</h2>
             <p className="text-sm font-field-note">
                 Placeholder view awaiting curated specimens and gallery content.
             </p>
