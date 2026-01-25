@@ -10,7 +10,7 @@ export const GalleryOnboarding: React.FC = () => {
                 transition={{ duration: 0.5 }}
                 className="max-w-2xl bg-surface-specimen-night-light p-8 rounded-[var(--radius-leaf)] border border-primary-wattle-gold/10"
             >
-                <h2 className="font-proclamation text-4xl text-primary-parchment mb-4">Welcome, Naturalist.</h2>
+                <h2 className="font-proclamation text-4xl text-parchment mb-4">Welcome, Naturalist.</h2>
                 <p className="font-field-note text-secondary-flannel-flower text-lg mb-8 leading-relaxed">
                     [Placeholder] Guided onboarding flow to initialize your collection parameters.
                 </p>

@@ -54,7 +54,7 @@ export const DocumentStack: React.FC = () => {
 
     const getStatusColor = (status: Document['status']) => {
         switch (status) {
-            case 'analyzed': return 'text-primary-wattle-gold';
+            case 'analyzed': return 'text-wattle-gold';
             case 'pending': return 'text-secondary-flannel';
             case 'draft': return 'text-tertiary-waratah';
         }
@@ -112,7 +112,7 @@ export const DocumentStack: React.FC = () => {
                                 {doc.score && (
                                     <div className="flex flex-col items-end">
                                         <div className="text-label-small uppercase text-secondary-flannel-dim font-bold">ATS Score</div>
-                                        <div className={cn("text-title-large font-bold", doc.score > 70 ? "text-primary-wattle-gold" : "text-tertiary-waratah")}>
+                                        <div className={cn("text-title-large font-bold", doc.score > 70 ? "text-wattle-gold" : "text-tertiary-waratah")}>
                                             {doc.score}
                                         </div>
                                     </div>

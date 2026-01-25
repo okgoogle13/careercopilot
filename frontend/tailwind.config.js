@@ -31,6 +31,7 @@ export default {
         bloom: ['"Fraunces"', ...defaultTheme.fontFamily.serif],
         'field-note': ['"Work Sans"', ...defaultTheme.fontFamily.sans],
         annotation: ['"JetBrains Mono"', ...defaultTheme.fontFamily.mono],
+        curator: ['"Caveat"', 'cursive'],
       },
 
       // ═══════════════════════════════════════════════════════════════════════
@@ -48,12 +49,8 @@ export default {
         white: t.onSurface.parchment.value, // Parchment instead of white
 
         // Core Botanic Families
-        specimen: {
-          night: t.surface.shared.specimenNight.value,
-          surface: t.surface.shared.specimenNight.value,
-          // Mapping Shadcn 'surface' tokens
-          DEFAULT: t.surface.shared.specimenNight.value,
-        },
+        'specimen-night': t.surface.shared.specimenNight.value,
+        'specimen-night-light': t.surface.shared.specimenNightLight && t.surface.shared.specimenNightLight.value || '#2C2925',
 
         wattle: {
           vault: t.primary.wattleShadow.value, // Fallback
@@ -63,6 +60,7 @@ export default {
           bloom: t.primary.wattleBloom.value,
           container: t.primary.wattleGoldContainer.value,
         },
+        'wattle-gold': t.primary.wattleGold.value,
 
         waratah: {
           stem: t.tertiary.waratahStem.value,
@@ -72,6 +70,7 @@ export default {
           bloom: t.tertiary.waratahBloom.value,
           container: t.tertiary.waratahContainer.value,
         },
+        'waratah-crimson': t.tertiary.waratahCrimson.value,
 
         eucalypt: {
           night: t.surface.shared.specimenNight.value,
@@ -88,6 +87,7 @@ export default {
           light: t.secondary.flannelFaint.value,
           bloom: t.secondary.flannelFaint.value,
         },
+        'flannel-flower': t.secondary.flannelFlower.value,
 
         parchment: t.onSurface.parchment.value,
 
@@ -131,6 +131,7 @@ export default {
       },
 
       fontSize: {
+        'display-hero': ['120px', { lineHeight: '1.0', fontWeight: '100', letterSpacing: '-0.04em' }],
         'display-lg': ['240px', { lineHeight: '1.1', fontWeight: '700', letterSpacing: '-2px' }],
         'display-md': ['160px', { lineHeight: '1.1', fontWeight: '700', letterSpacing: '-1px' }],
         'display-sm': ['96px', { lineHeight: '1.2', fontWeight: '600' }],

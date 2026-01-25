@@ -39,14 +39,14 @@ export const NorthcoteButton = React.forwardRef<HTMLButtonElement, NorthcoteButt
         const variantStyles = {
             primary: {
                 gallery: {
-                    background: 'bg-primary-wattle-gold',
+                    background: 'bg-wattle-gold',
                     text: 'text-primary-on-primary',
                     hover: 'hover:bg-primary-wattle-glow',
                     shadow: 'shadow-sm hover:shadow-[var(--elevation-shadow-glow-gold)]',
                     border: '',
                 },
                 laboratory: {
-                    background: 'bg-primary-wattle-gold',
+                    background: 'bg-wattle-gold',
                     text: 'text-primary-on-primary',
                     hover: 'hover:bg-primary-wattle-glow',
                     shadow: 'shadow-sm hover:shadow-[var(--elevation-shadow-hover)]',

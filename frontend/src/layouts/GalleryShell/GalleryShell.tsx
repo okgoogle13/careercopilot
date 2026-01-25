@@ -52,7 +52,7 @@ export const GalleryShell: React.FC<{ children?: React.ReactNode }> = ({ childre
 
     return (
         <ModeProvider initialMode="gallery">
-            <div className="relative min-h-screen w-full overflow-hidden bg-surface-specimen-night-base text-on-surface-parchment font-field-note antialiased selection:bg-primary-wattle-gold selection:text-surface-specimen-night-base">
+            <div className="relative min-h-screen w-full overflow-hidden bg-surface-specimen-night-base text-on-surface-parchment font-field-note antialiased selection:bg-wattle-gold selection:text-surface-specimen-night-base">
 
                 {/* Atmospheric Effects */}
                 <Fireflies count={20} />
@@ -67,7 +67,7 @@ export const GalleryShell: React.FC<{ children?: React.ReactNode }> = ({ childre
                 <main className="relative z-10 w-full min-h-screen pt-20 pb-32 overflow-y-auto">
                     {/* Quick Link back to Lab (Dev only) */}
                     <div className="fixed top-4 right-4 z-50 opacity-50 hover:opacity-100 transition-opacity">
-                        <Link to="/lab" className="text-xs font-annotation text-secondary-flannel-dim hover:text-primary-wattle-gold">Switch to Laboratory →</Link>
+                        <Link to="/lab" className="text-xs font-annotation text-secondary-flannel-dim hover:text-wattle-gold">Switch to Laboratory →</Link>
                     </div>
 
                     {children || renderView()}

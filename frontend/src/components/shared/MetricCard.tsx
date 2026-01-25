@@ -5,6 +5,7 @@ interface MetricCardProps {
   icon: LucideIcon;
   label: string;
   value: string | number;
+  annotation?: string;
   iconColor?: string;
   variant?: 'outlined' | 'filled';
   hoverable?: boolean;
@@ -12,12 +13,13 @@ interface MetricCardProps {
 }
 
 /**
- * MetricCard - M3 Compliant Metric Display Component
+ * MetricCard - Northcote Curio V3.1 Metric Display Component
  */
 export function MetricCard({
   icon: Icon,
   label,
   value,
+  annotation,
   iconColor = 'text-[var(--color-wattle-gold)]',
   variant = 'outlined',
   hoverable = true,
@@ -52,13 +54,21 @@ export function MetricCard({
           <div className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center border border-white/10">
             <Icon className={`w-5 h-5 ${iconColor}`} />
           </div>
-          <span className="text-[var(--on-surface-parchment-dim)] text-[0.7rem] font-annotation font-medium tracking-widest uppercase">
+          <span className="text-[0.7rem] font-annotation font-medium tracking-widest uppercase opacity-70">
             {label}
           </span>
         </div>
-        <p className="text-3xl font-mono text-[var(--color-parchment)] tabular-nums tracking-tight">
-          {value}
-        </p>
+
+        <div className="flex items-baseline gap-2">
+          <p className="text-3xl font-annotation font-black text-on-surface shadow-layered-wattle">
+            {value}
+          </p>
+          {annotation && (
+            <span className="text-curator-annotation rotate-quirky-ccw text-xs transform -translate-y-2 translate-x-1">
+              {annotation}
+            </span>
+          )}
+        </div>
       </div>
     </div>
   );

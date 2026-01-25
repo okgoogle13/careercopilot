@@ -12,7 +12,7 @@ export const GalleryKanban: React.FC = () => {
 
     return (
         <div className="relative z-20 w-full h-full overflow-x-auto p-8 no-scrollbar">
-            <h2 className="font-bloom text-2xl text-primary-parchment mb-6 sticky left-0">Application Tracker</h2>
+            <h2 className="font-bloom text-2xl text-parchment mb-6 sticky left-0">Application Tracker</h2>
             <div className="flex gap-6 min-w-max pb-8 h-[calc(100%-4rem)]">
                 {columns.map((col) => {
                     const colApps = getColumnApplications(col);
@@ -40,7 +40,7 @@ export const GalleryKanban: React.FC = () => {
                                             className="group cursor-pointer relative"
                                         >
                                             <div className="flex flex-col gap-2">
-                                                <h4 className="font-bloom text-lg text-primary-parchment group-hover:text-primary-wattle-gold transition-colors">{app.role}</h4>
+                                                <h4 className="font-bloom text-lg text-parchment group-hover:text-wattle-gold transition-colors">{app.role}</h4>
                                                 <div className="text-sm font-body text-secondary-flannel-flower">{app.company}</div>
 
                                                 <div className="flex items-center gap-3 mt-2 text-xs text-secondary-flannel-dim font-annotation">
@@ -57,8 +57,8 @@ export const GalleryKanban: React.FC = () => {
                                                 {app.status === 'Offer' && (
                                                     <div className="absolute top-2 right-2">
                                                         <span className="flex h-3 w-3">
-                                                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-wattle-gold opacity-75"></span>
-                                                            <span className="relative inline-flex rounded-full h-3 w-3 bg-primary-wattle-gold"></span>
+                                                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-wattle-gold opacity-75"></span>
+                                                            <span className="relative inline-flex rounded-full h-3 w-3 bg-wattle-gold"></span>
                                                         </span>
                                                     </div>
                                                 )}

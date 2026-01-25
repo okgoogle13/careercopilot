@@ -27,7 +27,7 @@ const TechCard = React.forwardRef<HTMLDivElement, TechCardProps>(
 
         const levelColors = {
             beginner: mode === 'gallery' ? 'text-status-gallery-ghost-gum' : 'text-status-laboratory-clinical-sage',
-            intermediate: mode === 'gallery' ? 'text-primary-wattle-gold' : 'text-primary-wattle-gold',
+            intermediate: mode === 'gallery' ? 'text-wattle-gold' : 'text-wattle-gold',
             advanced: mode === 'gallery' ? 'text-status-gallery-banksia-orange' : 'text-status-gallery-banksia-orange',
             expert: mode === 'gallery' ? 'text-tertiary-waratah-crimson' : 'text-status-laboratory-clinical-alert',
         };
@@ -77,7 +77,7 @@ const TechCard = React.forwardRef<HTMLDivElement, TechCardProps>(
                         <div className="flex items-center gap-3">
                             {icon && (
                                 <motion.div
-                                    className="text-primary-wattle-gold"
+                                    className="text-wattle-gold"
                                     whileHover={{ scale: 1.1, rotate: 5 }}
                                     transition={{ type: "spring", stiffness: 400, damping: 20 }}
                                 >
