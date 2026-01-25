@@ -29,10 +29,10 @@ export const GalleryLanding: React.FC = () => {
                     </div>
                 </motion.div>
 
-                <span className="font-annotation text-primary-wattle-gold tracking-[0.2em] text-sm uppercase mb-4 block">
+                <span className="font-annotation text-wattle-gold tracking-[0.2em] text-sm uppercase mb-4 block">
                     Northcote Curio
                 </span>
-                <h1 className="font-proclamation text-6xl md:text-8xl text-primary-parchment mb-6 leading-tight">
+                <h1 className="font-proclamation text-6xl md:text-8xl text-parchment mb-6 leading-tight">
                     Victorian<br />Naturalist
                 </h1>
                 <p className="font-field-note text-secondary-flannel-flower text-lg max-w-xl mx-auto mb-10 opacity-80 leading-relaxed">

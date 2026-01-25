@@ -65,11 +65,11 @@ export const M3Checkbox = forwardRef<HTMLInputElement, M3CheckboxProps>(({
                 ${error
                     ? 'border-tertiary-waratah-crimson'
                     : isChecked
-                        ? 'border-primary-wattle-gold bg-primary-wattle-gold'
+                        ? 'border-primary-wattle-gold bg-wattle-gold'
                         : 'border-primary-wattle-gold/60'
                 }
                 ${!disabled && !isChecked ? 'hover:border-primary-wattle-gold' : ''}
-                ${!disabled && isChecked && !error ? 'hover:bg-primary-wattle-gold/90' : ''}
+                ${!disabled && isChecked && !error ? 'hover:bg-wattle-gold/90' : ''}
             `,
             label: error ? 'text-tertiary-waratah-crimson' : 'text-on-surface-parchment',
             iconColor: error ? 'text-on-error' : 'text-specimen-night',
@@ -80,11 +80,11 @@ export const M3Checkbox = forwardRef<HTMLInputElement, M3CheckboxProps>(({
                 ${error
                     ? 'border-tertiary-waratah-crimson'
                     : isChecked
-                        ? 'border-primary-wattle-gold bg-primary-wattle-gold'
+                        ? 'border-primary-wattle-gold bg-wattle-gold'
                         : 'border-outline-variant'
                 }
                 ${!disabled && !isChecked ? 'hover:border-outline' : ''}
-                ${!disabled && isChecked && !error ? 'hover:bg-primary-wattle-gold/90' : ''}
+                ${!disabled && isChecked && !error ? 'hover:bg-wattle-gold/90' : ''}
             `,
             label: error ? 'text-tertiary-waratah-crimson' : 'text-on-surface-parchment',
             iconColor: error ? 'text-on-error' : 'text-specimen-night',
@@ -186,7 +186,7 @@ export const M3Radio = forwardRef<HTMLInputElement, M3RadioProps>(({
                 }
                 ${!disabled && !checked ? 'hover:border-primary-wattle-gold' : ''}
             `,
-            dot: error ? 'bg-tertiary-waratah-crimson' : 'bg-primary-wattle-gold',
+            dot: error ? 'bg-tertiary-waratah-crimson' : 'bg-wattle-gold',
             label: error ? 'text-tertiary-waratah-crimson' : 'text-on-surface-parchment',
         },
         laboratory: {
@@ -199,7 +199,7 @@ export const M3Radio = forwardRef<HTMLInputElement, M3RadioProps>(({
                 }
                 ${!disabled && !checked ? 'hover:border-outline' : ''}
             `,
-            dot: error ? 'bg-tertiary-waratah-crimson' : 'bg-primary-wattle-gold',
+            dot: error ? 'bg-tertiary-waratah-crimson' : 'bg-wattle-gold',
             label: error ? 'text-tertiary-waratah-crimson' : 'text-on-surface-parchment',
         },
     };

@@ -61,7 +61,7 @@ export function Login() {
               <span className="text-3xl">🦄</span>
             </div>
             <h1 className="text-display-large-gallery font-bloom font-black text-on-surface-parchment mb-2">
-              Career<span className="text-primary-wattle-gold italic font-light ml-2">Copilot</span>
+              Career<span className="text-wattle-gold italic font-light ml-2">Copilot</span>
             </h1>
             <p className="text-on-surface-variant text-body-large">Sign in to your account</p>
           </div>
@@ -159,7 +159,7 @@ export function Login() {
               Don&apos;t have an account?{' '}
               <Link
                 to="/register"
-                className="text-primary-wattle-gold hover:text-primary-wattle-glow font-bold hover:underline underline-offset-4"
+                className="text-wattle-gold hover:text-primary-wattle-glow font-bold hover:underline underline-offset-4"
               >
                 Sign up
               </Link>
