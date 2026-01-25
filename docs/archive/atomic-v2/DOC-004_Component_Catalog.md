@@ -1,4 +1,4 @@
-# DOC-004: Component Catalog ("The Cabinet")
+-# DOC-004: Component Catalog ("The Cabinet")
 
 **Document ID:** DOC-004-CATALOG
 **Version:** 2.0 (Northcote Curio Edition)
@@ -191,4 +191,3 @@ When a user hovers over a Job Card in Gallery Mode, trigger a **three-phase casc
 4. **Meaningful duration** (600ms+, not instant)
 
 This creates the sensation of **natural unfolding**, not mechanical state changes.
-

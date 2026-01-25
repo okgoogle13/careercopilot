@@ -43,7 +43,7 @@ export function MetricCard({
       rounded-stone p-6
       ${variant === 'outlined'
           ? 'bg-transparent border border-flannel-flower/10'
-          : 'bg-specimen-night'
+          : 'bg-[var(--color-specimen-night)]'
         }
       ${elevationClasses}
       transition-all duration-300 ease-viscous-breeze
@@ -52,7 +52,7 @@ export function MetricCard({
     >
       <div className="flex items-center gap-3 mb-3">
         <motion.div
-          className="w-10 h-10 bg-specimen-night-light rounded-seed flex items-center justify-center text-wattle-gold"
+          className="w-10 h-10 bg-[var(--color-specimen-night)]-light rounded-seed flex items-center justify-center text-wattle-gold"
           whileHover={{ scale: 1.05 }}
           transition={{ type: 'spring', stiffness: 500, damping: 27 }}
         >

@@ -1,9 +1,9 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { useGalleryData } from '@/hooks/useGalleryData';
-import { GlassLeafCard } from '@/features/gallery/GlassLeafCard';
-import { Briefcase, TrendingUp, Sparkles } from 'lucide-react';
 import { Pebble } from '@/components/core/Pebble';
+import { GlassLeafCard } from '@/features/gallery/GlassLeafCard';
+import { useGalleryData } from '@/hooks/useGalleryData';
+import { motion } from 'framer-motion';
+import { Briefcase, Sparkles, TrendingUp } from 'lucide-react';
+import React from 'react';
 
 export const GalleryFeed: React.FC = () => {
     const { feed, isLoading } = useGalleryData();
@@ -24,8 +24,11 @@ export const GalleryFeed: React.FC = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4 }}
             >
-                <div className="flex items-center justify-between mb-8">
-                    <h2 className="font-bloom text-2xl text-primary-parchment">Opportunity Feed</h2>
+                <div className="flex items-baseline justify-between mb-8">
+                    <div className="flex items-baseline gap-4">
+                        <h2 className="text-bloom-ultra text-3xl">Opportunity Feed</h2>
+                        <span className="text-curator-annotation hidden md:inline-block">→ explore your future</span>
+                    </div>
                     <div className="flex items-center gap-2">
                         <span className="w-2 h-2 rounded-full bg-status-gallery-alive-green animate-pulse" />
                         <div className="text-secondary-flannel-dim font-annotation text-xs tracking-widest">LIVE FEED</div>
@@ -49,7 +52,7 @@ export const GalleryFeed: React.FC = () => {
                                 <GlassLeafCard className="flex items-start gap-6 group">
                                     {/* Icon / Avatar Area */}
                                     <div className="shrink-0 relative">
-                                        <div className="w-12 h-12 rounded-full bg-surface-gallery-glass-medium border border-white/10 flex items-center justify-center text-primary-wattle-gold">
+                                        <div className="w-12 h-12 rounded-full bg-surface-gallery-glass-medium border border-white/10 flex items-center justify-center text-wattle-gold">
                                             {getIcon(item.type)}
                                         </div>
                                         {/* Decorative connect line */}
@@ -62,7 +65,7 @@ export const GalleryFeed: React.FC = () => {
                                     <div className="flex-1 min-w-0">
                                         <div className="flex justify-between items-start">
                                             <div>
-                                                <h3 className="font-bloom text-xl text-primary-parchment group-hover:text-primary-wattle-gold transition-colors">
+                                                <h3 className="text-bloom-gallery text-xl transition-colors">
                                                     {item.title}
                                                 </h3>
                                                 <p className="text-sm font-annotation text-secondary-flannel-flower mt-1">
@@ -71,7 +74,7 @@ export const GalleryFeed: React.FC = () => {
                                             </div>
                                             {item.meta?.matchScore && (
                                                 <div className="text-right">
-                                                    <div className="text-2xl font-proclamation text-primary-wattle-gold">
+                                                    <div className="text-2xl font-proclamation text-wattle-gold shadow-wattle-offset">
                                                         {item.meta.matchScore}%
                                                     </div>
                                                     <div className="text-[10px] uppercase tracking-wider text-secondary-flannel-dim">Match</div>

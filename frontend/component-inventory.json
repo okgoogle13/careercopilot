@@ -1,15 +1,15 @@
 {
-  "generatedAt": "2026-01-20T21:01:25.710Z",
-  "totalComponents": 172,
+  "generatedAt": "2026-01-25T07:05:31.243Z",
+  "totalComponents": 171,
   "componentsByCategory": {
     "layout": 19,
     "pages": 3,
     "core": 6,
     "components": 5,
     "shared": 16,
-    "ui": 19,
+    "ui": 23,
     "features": 35,
-    "legacy": 16,
+    "legacy": 11,
     "ui_package": 53
   },
   "components": [
@@ -1745,7 +1745,7 @@
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
-      "linesOfCode": 39,
+      "linesOfCode": 33,
       "complexity": "simple",
       "dependencies": [
         "./Leaf"
@@ -1769,15 +1769,14 @@
         "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/core/Leaf.figma.tsx"
       ],
       "exports": [
-        "LeafRole",
         "LeafProps",
         "Leaf"
       ],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
-      "linesOfCode": 33,
-      "complexity": "simple",
+      "linesOfCode": 66,
+      "complexity": "medium",
       "dependencies": [
         "../../lib/utils"
       ],
@@ -1801,8 +1800,8 @@
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
-      "linesOfCode": 50,
-      "complexity": "medium",
+      "linesOfCode": 41,
+      "complexity": "simple",
       "dependencies": [
         "./Pebble"
       ],
@@ -1826,15 +1825,13 @@
         "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/GalleryShell/views/GalleryFeed.tsx"
       ],
       "exports": [
-        "PebbleVariant",
-        "PebbleSize",
         "PebbleProps",
         "Pebble"
       ],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
-      "linesOfCode": 53,
+      "linesOfCode": 75,
       "complexity": "medium",
       "dependencies": [
         "../../lib/utils"
@@ -1859,7 +1856,7 @@
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
-      "linesOfCode": 40,
+      "linesOfCode": 33,
       "complexity": "simple",
       "dependencies": [
         "./Stone"
@@ -1883,16 +1880,14 @@
         "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/core/Stone.figma.tsx"
       ],
       "exports": [
-        "StoneMode",
-        "StoneElevation",
         "StoneProps",
         "Stone"
       ],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
-      "linesOfCode": 40,
-      "complexity": "simple",
+      "linesOfCode": 65,
+      "complexity": "medium",
       "dependencies": [
         "../../lib/utils"
       ],
@@ -2002,7 +1997,7 @@
       "hasTests": false,
       "hasStories": true,
       "hasDocs": false,
-      "linesOfCode": 96,
+      "linesOfCode": 94,
       "complexity": "medium",
       "dependencies": [
         "../ui/StatusBadge"
@@ -2083,16 +2078,18 @@
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
-      "linesOfCode": 159,
+      "linesOfCode": 103,
       "complexity": "medium",
-      "dependencies": [],
+      "dependencies": [
+        "@/components/ui"
+      ],
       "isReusable": true,
-      "usesMUI": true,
-      "usesCustomUI": false,
-      "usesLegacyM3": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "usesLegacyM3": true,
       "isDemo": false,
-      "migrationStatus": "not_migrated",
-      "usesDesignTokens": false,
+      "migrationStatus": "mixed",
+      "usesDesignTokens": true,
       "usesModeSystem": false
     },
     {
@@ -2192,10 +2189,10 @@
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
-      "linesOfCode": 77,
+      "linesOfCode": 59,
       "complexity": "medium",
       "dependencies": [
-        "../ui/M3Button"
+        "../ui"
       ],
       "isReusable": true,
       "usesMUI": false,
@@ -2221,7 +2218,7 @@
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
-      "linesOfCode": 59,
+      "linesOfCode": 67,
       "complexity": "medium",
       "dependencies": [],
       "isReusable": true,
@@ -2255,7 +2252,7 @@
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
-      "linesOfCode": 34,
+      "linesOfCode": 49,
       "complexity": "simple",
       "dependencies": [],
       "isReusable": true,
@@ -2360,16 +2357,18 @@
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
-      "linesOfCode": 53,
-      "complexity": "medium",
-      "dependencies": [],
+      "linesOfCode": 24,
+      "complexity": "simple",
+      "dependencies": [
+        "../ui/StatusBadge/StatusBadge"
+      ],
       "isReusable": true,
-      "usesMUI": true,
-      "usesCustomUI": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
       "usesLegacyM3": false,
       "isDemo": false,
-      "migrationStatus": "not_migrated",
-      "usesDesignTokens": false,
+      "migrationStatus": "migrated",
+      "usesDesignTokens": true,
       "usesModeSystem": false
     },
     {
@@ -2509,6 +2508,36 @@
       "usesModeSystem": false
     },
     {
+      "name": "Cabinet",
+      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/Cabinet.tsx",
+      "relativePath": "src/components/ui/Cabinet.tsx",
+      "category": "ui",
+      "usageCount": 0,
+      "importedBy": [],
+      "exports": [
+        "CabinetProps",
+        "M3Modal",
+        "Cabinet"
+      ],
+      "hasTests": false,
+      "hasStories": false,
+      "hasDocs": false,
+      "linesOfCode": 89,
+      "complexity": "medium",
+      "dependencies": [
+        "./Pebble",
+        "./Stone"
+      ],
+      "isReusable": true,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "usesLegacyM3": true,
+      "isDemo": false,
+      "migrationStatus": "mixed",
+      "usesDesignTokens": true,
+      "usesModeSystem": false
+    },
+    {
       "name": "chart",
       "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/chart.tsx",
       "relativePath": "src/components/ui/chart.tsx",
@@ -2572,19 +2601,19 @@
       "usageCount": 0,
       "importedBy": [],
       "exports": [
-        "useFormField",
         "Form",
-        "FormItem",
-        "FormLabel",
         "FormControl",
         "FormDescription",
+        "FormField",
+        "FormItem",
+        "FormLabel",
         "FormMessage",
-        "FormField"
+        "useFormField"
       ],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
-      "linesOfCode": 126,
+      "linesOfCode": 125,
       "complexity": "medium",
       "dependencies": [
         "./utils"
@@ -2594,8 +2623,8 @@
       "usesCustomUI": false,
       "usesLegacyM3": false,
       "isDemo": false,
-      "migrationStatus": "unknown",
-      "usesDesignTokens": false,
+      "migrationStatus": "migrated",
+      "usesDesignTokens": true,
       "usesModeSystem": false
     },
     {
@@ -2650,153 +2679,21 @@
       "usesModeSystem": false
     },
     {
-      "name": "M3Alert",
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/M3Alert.tsx",
-      "relativePath": "src/components/ui/M3Alert.tsx",
-      "category": "ui",
-      "usageCount": 0,
-      "importedBy": [],
-      "exports": [
-        "M3Alert",
-        "M3AlertTitle",
-        "M3AlertDescription",
-        "M3AlertSeverity",
-        "M3AlertVariant",
-        "M3AlertProps"
-      ],
-      "hasTests": false,
-      "hasStories": false,
-      "hasDocs": false,
-      "linesOfCode": 178,
-      "complexity": "medium",
-      "dependencies": [
-        "./M3Button"
-      ],
-      "isReusable": true,
-      "usesMUI": false,
-      "usesCustomUI": false,
-      "usesLegacyM3": true,
-      "isDemo": false,
-      "migrationStatus": "mixed",
-      "usesDesignTokens": true,
-      "usesModeSystem": false
-    },
-    {
-      "name": "M3Button",
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/M3Button.tsx",
-      "relativePath": "src/components/ui/M3Button.tsx",
-      "category": "ui",
-      "usageCount": 3,
-      "importedBy": [
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/pages/JobQueue.tsx",
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/shared/M3ErrorAlert.tsx",
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/M3Alert.tsx"
-      ],
-      "exports": [
-        "M3Button",
-        "M3IconButton",
-        "M3ButtonVariant",
-        "M3ButtonColor",
-        "M3ButtonSize",
-        "M3ButtonProps",
-        "M3IconButtonProps"
-      ],
-      "hasTests": false,
-      "hasStories": false,
-      "hasDocs": false,
-      "linesOfCode": 270,
-      "complexity": "complex",
-      "dependencies": [],
-      "isReusable": true,
-      "usesMUI": false,
-      "usesCustomUI": false,
-      "usesLegacyM3": true,
-      "isDemo": false,
-      "migrationStatus": "not_migrated",
-      "usesDesignTokens": false,
-      "usesModeSystem": false
-    },
-    {
-      "name": "M3Card",
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/M3Card.tsx",
-      "relativePath": "src/components/ui/M3Card.tsx",
-      "category": "ui",
-      "usageCount": 1,
-      "importedBy": [
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/pages/JobQueue.tsx"
-      ],
-      "exports": [
-        "M3Card",
-        "M3CardHeader",
-        "M3CardContent",
-        "M3CardActions",
-        "M3CardVariant",
-        "M3CardElevation",
-        "M3CardPadding",
-        "M3CardProps",
-        "M3CardHeaderProps",
-        "M3CardContentProps",
-        "M3CardActionsProps"
-      ],
-      "hasTests": false,
-      "hasStories": false,
-      "hasDocs": false,
-      "linesOfCode": 187,
-      "complexity": "medium",
-      "dependencies": [],
-      "isReusable": true,
-      "usesMUI": false,
-      "usesCustomUI": false,
-      "usesLegacyM3": true,
-      "isDemo": false,
-      "migrationStatus": "mixed",
-      "usesDesignTokens": true,
-      "usesModeSystem": false
-    },
-    {
-      "name": "M3Checkbox",
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/M3Checkbox.tsx",
-      "relativePath": "src/components/ui/M3Checkbox.tsx",
-      "category": "ui",
-      "usageCount": 0,
-      "importedBy": [],
-      "exports": [
-        "M3CheckboxProps",
-        "M3Checkbox",
-        "M3RadioProps",
-        "M3Radio"
-      ],
-      "hasTests": false,
-      "hasStories": false,
-      "hasDocs": false,
-      "linesOfCode": 218,
-      "complexity": "complex",
-      "dependencies": [],
-      "isReusable": true,
-      "usesMUI": false,
-      "usesCustomUI": false,
-      "usesLegacyM3": true,
-      "isDemo": false,
-      "migrationStatus": "not_migrated",
-      "usesDesignTokens": false,
-      "usesModeSystem": false
-    },
-    {
-      "name": "M3Select",
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/M3Select.tsx",
-      "relativePath": "src/components/ui/M3Select.tsx",
+      "name": "Jar",
+      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/Jar.tsx",
+      "relativePath": "src/components/ui/Jar.tsx",
       "category": "ui",
       "usageCount": 0,
       "importedBy": [],
       "exports": [
         "M3Select",
         "M3SelectOption",
-        "M3SelectProps"
+        "JarProps"
       ],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
-      "linesOfCode": 218,
+      "linesOfCode": 222,
       "complexity": "complex",
       "dependencies": [],
       "isReusable": true,
@@ -2809,24 +2706,24 @@
       "usesModeSystem": false
     },
     {
-      "name": "M3TextField",
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/M3TextField.tsx",
-      "relativePath": "src/components/ui/M3TextField.tsx",
+      "name": "Lens",
+      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/Lens.tsx",
+      "relativePath": "src/components/ui/Lens.tsx",
       "category": "ui",
       "usageCount": 0,
       "importedBy": [],
       "exports": [
-        "M3TextFieldVariant",
-        "M3TextFieldSize",
-        "M3TextFieldProps",
-        "M3TextField",
+        "LensVariant",
+        "LensSize",
+        "LensProps",
+        "Lens",
         "M3TextAreaProps",
         "M3TextArea"
       ],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
-      "linesOfCode": 356,
+      "linesOfCode": 344,
       "complexity": "complex",
       "dependencies": [],
       "isReusable": true,
@@ -2834,8 +2731,36 @@
       "usesCustomUI": false,
       "usesLegacyM3": true,
       "isDemo": false,
-      "migrationStatus": "not_migrated",
-      "usesDesignTokens": false,
+      "migrationStatus": "mixed",
+      "usesDesignTokens": true,
+      "usesModeSystem": false
+    },
+    {
+      "name": "Mark",
+      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/Mark.tsx",
+      "relativePath": "src/components/ui/Mark.tsx",
+      "category": "ui",
+      "usageCount": 0,
+      "importedBy": [],
+      "exports": [
+        "MarkProps",
+        "Mark",
+        "M3RadioProps",
+        "M3Radio"
+      ],
+      "hasTests": false,
+      "hasStories": false,
+      "hasDocs": false,
+      "linesOfCode": 203,
+      "complexity": "complex",
+      "dependencies": [],
+      "isReusable": true,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "usesLegacyM3": true,
+      "isDemo": false,
+      "migrationStatus": "mixed",
+      "usesDesignTokens": true,
       "usesModeSystem": false
     },
     {
@@ -2917,7 +2842,7 @@
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
-      "linesOfCode": 148,
+      "linesOfCode": 150,
       "complexity": "medium",
       "dependencies": [
         "../../lib/utils",
@@ -2926,11 +2851,106 @@
       "isReusable": true,
       "usesMUI": false,
       "usesCustomUI": false,
-      "usesLegacyM3": false,
+      "usesLegacyM3": true,
       "isDemo": false,
-      "migrationStatus": "migrated",
+      "migrationStatus": "mixed",
       "usesDesignTokens": true,
       "usesModeSystem": true
+    },
+    {
+      "name": "Pebble",
+      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/Pebble.tsx",
+      "relativePath": "src/components/ui/Pebble.tsx",
+      "category": "ui",
+      "usageCount": 2,
+      "importedBy": [
+        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/Cabinet.tsx",
+        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/Signal.tsx"
+      ],
+      "exports": [
+        "M3Button",
+        "M3IconButton",
+        "PebbleVariant",
+        "M3ButtonColor",
+        "PebbleSize",
+        "PebbleProps",
+        "M3IconButtonProps",
+        "Pebble"
+      ],
+      "hasTests": false,
+      "hasStories": false,
+      "hasDocs": false,
+      "linesOfCode": 242,
+      "complexity": "complex",
+      "dependencies": [],
+      "isReusable": true,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "usesLegacyM3": true,
+      "isDemo": false,
+      "migrationStatus": "mixed",
+      "usesDesignTokens": true,
+      "usesModeSystem": false
+    },
+    {
+      "name": "Seed",
+      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/Seed.tsx",
+      "relativePath": "src/components/ui/Seed.tsx",
+      "category": "ui",
+      "usageCount": 0,
+      "importedBy": [],
+      "exports": [
+        "SeedProps",
+        "M3Badge"
+      ],
+      "hasTests": false,
+      "hasStories": false,
+      "hasDocs": false,
+      "linesOfCode": 67,
+      "complexity": "medium",
+      "dependencies": [],
+      "isReusable": true,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "usesLegacyM3": true,
+      "isDemo": false,
+      "migrationStatus": "mixed",
+      "usesDesignTokens": true,
+      "usesModeSystem": false
+    },
+    {
+      "name": "Signal",
+      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/Signal.tsx",
+      "relativePath": "src/components/ui/Signal.tsx",
+      "category": "ui",
+      "usageCount": 0,
+      "importedBy": [],
+      "exports": [
+        "M3Alert",
+        "SignalSeverity",
+        "SignalProps",
+        "M3AlertSeverity",
+        "SignalVariant",
+        "M3AlertTitle",
+        "M3AlertDescription",
+        "Signal"
+      ],
+      "hasTests": false,
+      "hasStories": false,
+      "hasDocs": false,
+      "linesOfCode": 123,
+      "complexity": "medium",
+      "dependencies": [
+        "./Pebble"
+      ],
+      "isReusable": true,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "usesLegacyM3": true,
+      "isDemo": false,
+      "migrationStatus": "mixed",
+      "usesDesignTokens": true,
+      "usesModeSystem": false
     },
     {
       "name": "SplitHeader",
@@ -2965,7 +2985,7 @@
       "category": "ui",
       "usageCount": 2,
       "importedBy": [
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/pages/JobQueue.tsx",
+        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/shared/StatusChip.tsx",
         "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/applications/ApplicationCard.tsx"
       ],
       "exports": [
@@ -2977,7 +2997,7 @@
       "hasTests": true,
       "hasStories": false,
       "hasDocs": false,
-      "linesOfCode": 144,
+      "linesOfCode": 97,
       "complexity": "medium",
       "dependencies": [],
       "isReusable": true,
@@ -2987,7 +3007,45 @@
       "isDemo": false,
       "migrationStatus": "migrated",
       "usesDesignTokens": true,
-      "usesModeSystem": true
+      "usesModeSystem": false
+    },
+    {
+      "name": "Stone",
+      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/Stone.tsx",
+      "relativePath": "src/components/ui/Stone.tsx",
+      "category": "ui",
+      "usageCount": 1,
+      "importedBy": [
+        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/Cabinet.tsx"
+      ],
+      "exports": [
+        "M3Card",
+        "M3CardHeader",
+        "M3CardContent",
+        "M3CardActions",
+        "StoneVariant",
+        "M3CardElevation",
+        "StonePadding",
+        "StoneProps",
+        "M3CardHeaderProps",
+        "M3CardContentProps",
+        "M3CardActionsProps",
+        "Stone"
+      ],
+      "hasTests": false,
+      "hasStories": false,
+      "hasDocs": false,
+      "linesOfCode": 181,
+      "complexity": "medium",
+      "dependencies": [],
+      "isReusable": true,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "usesLegacyM3": true,
+      "isDemo": false,
+      "migrationStatus": "mixed",
+      "usesDesignTokens": true,
+      "usesModeSystem": false
     },
     {
       "name": "table",
@@ -3019,6 +3077,59 @@
       "isDemo": false,
       "migrationStatus": "unknown",
       "usesDesignTokens": false,
+      "usesModeSystem": false
+    },
+    {
+      "name": "Valve",
+      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/Valve.tsx",
+      "relativePath": "src/components/ui/Valve.tsx",
+      "category": "ui",
+      "usageCount": 0,
+      "importedBy": [],
+      "exports": [
+        "ValveProps",
+        "Valve"
+      ],
+      "hasTests": false,
+      "hasStories": false,
+      "hasDocs": false,
+      "linesOfCode": 96,
+      "complexity": "medium",
+      "dependencies": [],
+      "isReusable": true,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "usesLegacyM3": true,
+      "isDemo": false,
+      "migrationStatus": "mixed",
+      "usesDesignTokens": true,
+      "usesModeSystem": false
+    },
+    {
+      "name": "Vessel",
+      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/Vessel.tsx",
+      "relativePath": "src/components/ui/Vessel.tsx",
+      "category": "ui",
+      "usageCount": 0,
+      "importedBy": [],
+      "exports": [
+        "VesselProps",
+        "M3Accordion",
+        "Vessel"
+      ],
+      "hasTests": false,
+      "hasStories": false,
+      "hasDocs": false,
+      "linesOfCode": 44,
+      "complexity": "simple",
+      "dependencies": [],
+      "isReusable": true,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "usesLegacyM3": true,
+      "isDemo": false,
+      "migrationStatus": "mixed",
+      "usesDesignTokens": true,
       "usesModeSystem": false
     },
     {
@@ -3379,7 +3490,7 @@
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
-      "linesOfCode": 193,
+      "linesOfCode": 199,
       "complexity": "medium",
       "dependencies": [],
       "isReusable": false,
@@ -3387,8 +3498,8 @@
       "usesCustomUI": false,
       "usesLegacyM3": false,
       "isDemo": false,
-      "migrationStatus": "unknown",
-      "usesDesignTokens": false,
+      "migrationStatus": "migrated",
+      "usesDesignTokens": true,
       "usesModeSystem": false
     },
     {
@@ -3576,16 +3687,19 @@
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
-      "linesOfCode": 86,
+      "linesOfCode": 92,
       "complexity": "medium",
-      "dependencies": [],
+      "dependencies": [
+        "@/components/ui",
+        "@/utils/toast"
+      ],
       "isReusable": false,
-      "usesMUI": true,
-      "usesCustomUI": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
       "usesLegacyM3": false,
       "isDemo": false,
-      "migrationStatus": "not_migrated",
-      "usesDesignTokens": false,
+      "migrationStatus": "migrated",
+      "usesDesignTokens": true,
       "usesModeSystem": false
     },
     {
@@ -3635,12 +3749,12 @@
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
-      "linesOfCode": 79,
+      "linesOfCode": 82,
       "complexity": "medium",
       "dependencies": [
         "./LandingPage.module.css",
-        "../../assets/images/monstera.jpg",
         "../../assets/images/fiddle_leaf.jpg",
+        "../../assets/images/monstera.jpg",
         "../../assets/images/pilea.jpg",
         "../../assets/images/snake_plant.png"
       ],
@@ -3695,20 +3809,22 @@
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
-      "linesOfCode": 484,
+      "linesOfCode": 367,
       "complexity": "complex",
       "dependencies": [
-        "../../../types/api",
+        "@/components/ui",
+        "@/utils/toast",
         "../../../components/shared/EditableField",
-        "../../../components/shared/StatusChip"
+        "../../../components/shared/StatusChip",
+        "../../../types/api"
       ],
       "isReusable": false,
-      "usesMUI": true,
+      "usesMUI": false,
       "usesCustomUI": true,
       "usesLegacyM3": false,
       "isDemo": false,
-      "migrationStatus": "not_migrated",
-      "usesDesignTokens": false,
+      "migrationStatus": "migrated",
+      "usesDesignTokens": true,
       "usesModeSystem": false
     },
     {
@@ -4023,8 +4139,8 @@
       "linesOfCode": 149,
       "complexity": "medium",
       "dependencies": [
-        "../../components/shared/PageHeader",
-        "../../components/shared/KeywordTag"
+        "../../components/shared/KeywordTag",
+        "../../components/shared/PageHeader"
       ],
       "isReusable": false,
       "usesMUI": false,
@@ -4195,12 +4311,12 @@
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
-      "linesOfCode": 105,
+      "linesOfCode": 108,
       "complexity": "medium",
       "dependencies": [
-        "@/hooks/useGalleryData",
+        "@/components/core/Pebble",
         "@/features/gallery/GlassLeafCard",
-        "@/components/core/Pebble"
+        "@/hooks/useGalleryData"
       ],
       "isReusable": false,
       "usesMUI": false,
@@ -4592,39 +4708,6 @@
       "usesModeSystem": false
     },
     {
-      "name": "alert-dialog",
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/legacy/ui/alert-dialog.tsx",
-      "relativePath": "src/legacy/ui/alert-dialog.tsx",
-      "category": "legacy",
-      "usageCount": 0,
-      "importedBy": [],
-      "exports": [
-        "AlertDialog",
-        "AlertDialogTrigger",
-        "AlertDialogContent",
-        "AlertDialogHeader",
-        "AlertDialogFooter",
-        "AlertDialogTitle",
-        "AlertDialogDescription",
-        "AlertDialogAction",
-        "AlertDialogCancel"
-      ],
-      "hasTests": false,
-      "hasStories": false,
-      "hasDocs": false,
-      "linesOfCode": 9,
-      "complexity": "simple",
-      "dependencies": [],
-      "isReusable": false,
-      "usesMUI": false,
-      "usesCustomUI": false,
-      "usesLegacyM3": true,
-      "isDemo": false,
-      "migrationStatus": "not_migrated",
-      "usesDesignTokens": false,
-      "usesModeSystem": false
-    },
-    {
       "name": "AuroraHeader",
       "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/legacy/ui/AuroraHeader.tsx",
       "relativePath": "src/legacy/ui/AuroraHeader.tsx",
@@ -4651,61 +4734,6 @@
       "migrationStatus": "mixed",
       "usesDesignTokens": true,
       "usesModeSystem": true
-    },
-    {
-      "name": "button.figma",
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/legacy/ui/button.figma.tsx",
-      "relativePath": "src/legacy/ui/button.figma.tsx",
-      "category": "legacy",
-      "usageCount": 0,
-      "importedBy": [],
-      "exports": [],
-      "hasTests": false,
-      "hasStories": false,
-      "hasDocs": false,
-      "linesOfCode": 39,
-      "complexity": "simple",
-      "dependencies": [
-        "./button"
-      ],
-      "isReusable": false,
-      "usesMUI": false,
-      "usesCustomUI": false,
-      "usesLegacyM3": true,
-      "isDemo": false,
-      "migrationStatus": "not_migrated",
-      "usesDesignTokens": false,
-      "usesModeSystem": false
-    },
-    {
-      "name": "button",
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/legacy/ui/button.tsx",
-      "relativePath": "src/legacy/ui/button.tsx",
-      "category": "legacy",
-      "usageCount": 1,
-      "importedBy": [
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/legacy/ui/button.figma.tsx"
-      ],
-      "exports": [
-        "Button",
-        "buttonVariants"
-      ],
-      "hasTests": false,
-      "hasStories": false,
-      "hasDocs": false,
-      "linesOfCode": 47,
-      "complexity": "simple",
-      "dependencies": [
-        "./utils"
-      ],
-      "isReusable": false,
-      "usesMUI": false,
-      "usesCustomUI": false,
-      "usesLegacyM3": true,
-      "isDemo": false,
-      "migrationStatus": "mixed",
-      "usesDesignTokens": true,
-      "usesModeSystem": false
     },
     {
       "name": "chart",
@@ -4754,40 +4782,6 @@
       "linesOfCode": 3,
       "complexity": "simple",
       "dependencies": [],
-      "isReusable": false,
-      "usesMUI": false,
-      "usesCustomUI": false,
-      "usesLegacyM3": true,
-      "isDemo": false,
-      "migrationStatus": "not_migrated",
-      "usesDesignTokens": false,
-      "usesModeSystem": false
-    },
-    {
-      "name": "form",
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/legacy/ui/form.tsx",
-      "relativePath": "src/legacy/ui/form.tsx",
-      "category": "legacy",
-      "usageCount": 0,
-      "importedBy": [],
-      "exports": [
-        "useFormField",
-        "Form",
-        "FormItem",
-        "FormLabel",
-        "FormControl",
-        "FormDescription",
-        "FormMessage",
-        "FormField"
-      ],
-      "hasTests": false,
-      "hasStories": false,
-      "hasDocs": false,
-      "linesOfCode": 126,
-      "complexity": "medium",
-      "dependencies": [
-        "./utils"
-      ],
       "isReusable": false,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -4874,17 +4868,18 @@
       ],
       "exports": [
         "M3CardProps",
+        "cardVariants",
         "M3Card",
-        "cardVariants"
+        "Stone"
       ],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
-      "linesOfCode": 80,
+      "linesOfCode": 81,
       "complexity": "medium",
       "dependencies": [
-        "@/lib/utils",
-        "@/hooks/use-mode"
+        "@/hooks/use-mode",
+        "@/lib/utils"
       ],
       "isReusable": false,
       "usesMUI": false,
@@ -5038,38 +5033,6 @@
       "usesModeSystem": true
     },
     {
-      "name": "table",
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/legacy/ui/table.tsx",
-      "relativePath": "src/legacy/ui/table.tsx",
-      "category": "legacy",
-      "usageCount": 0,
-      "importedBy": [],
-      "exports": [
-        "Table",
-        "TableHeader",
-        "TableBody",
-        "TableFooter",
-        "TableRow",
-        "TableHead",
-        "TableCell",
-        "TableCaption"
-      ],
-      "hasTests": false,
-      "hasStories": false,
-      "hasDocs": false,
-      "linesOfCode": 40,
-      "complexity": "simple",
-      "dependencies": [],
-      "isReusable": false,
-      "usesMUI": false,
-      "usesCustomUI": false,
-      "usesLegacyM3": true,
-      "isDemo": false,
-      "migrationStatus": "not_migrated",
-      "usesDesignTokens": false,
-      "usesModeSystem": false
-    },
-    {
       "name": "AnalysisPage",
       "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/pages/AnalysisPage.tsx",
       "relativePath": "src/pages/AnalysisPage.tsx",
@@ -5084,15 +5047,17 @@
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
-      "linesOfCode": 342,
+      "linesOfCode": 276,
       "complexity": "complex",
       "dependencies": [
-        "@/features/ingestion/components/EvidenceUploader"
+        "@/components/ui",
+        "@/features/ingestion/components/EvidenceUploader",
+        "@/utils/toast"
       ],
       "isReusable": false,
-      "usesMUI": true,
-      "usesCustomUI": false,
-      "usesLegacyM3": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "usesLegacyM3": true,
       "isDemo": false,
       "migrationStatus": "mixed",
       "usesDesignTokens": true,
@@ -5113,20 +5078,22 @@
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
-      "linesOfCode": 279,
-      "complexity": "complex",
+      "linesOfCode": 176,
+      "complexity": "medium",
       "dependencies": [
-        "@/hooks/useCareerIngestion",
+        "@/components/ui",
         "@/features/onboarding/components/ValidationDashboard",
-        "@/types/api"
+        "@/hooks/useCareerIngestion",
+        "@/types/api",
+        "@/utils/toast"
       ],
       "isReusable": false,
-      "usesMUI": true,
-      "usesCustomUI": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
       "usesLegacyM3": false,
       "isDemo": false,
-      "migrationStatus": "not_migrated",
-      "usesDesignTokens": false,
+      "migrationStatus": "migrated",
+      "usesDesignTokens": true,
       "usesModeSystem": false
     },
     {
@@ -5144,18 +5111,17 @@
       "hasTests": true,
       "hasStories": false,
       "hasDocs": false,
-      "linesOfCode": 329,
+      "linesOfCode": 286,
       "complexity": "complex",
       "dependencies": [
-        "../components/shared/PageHeader",
+        "@/components/ui",
+        "@/utils/toast",
         "../components/shared/M3ErrorAlert",
-        "../components/ui/M3Card",
-        "../components/ui/M3Button",
-        "../components/ui/StatusBadge/StatusBadge",
+        "../components/shared/PageHeader",
         "../config/api"
       ],
       "isReusable": false,
-      "usesMUI": true,
+      "usesMUI": false,
       "usesCustomUI": true,
       "usesLegacyM3": true,
       "isDemo": false,
@@ -5177,18 +5143,22 @@
     "src/components/shared/TechCard.figma.tsx",
     "src/components/TestCard/TestCard.tsx",
     "src/components/ui/button.tsx",
+    "src/components/ui/Cabinet.tsx",
     "src/components/ui/chart.tsx",
     "src/components/ui/collapsible.tsx",
     "src/components/ui/form.tsx",
     "src/components/ui/HaeckelIcon.tsx",
     "src/components/ui/icon-badge.tsx",
-    "src/components/ui/M3Alert.tsx",
-    "src/components/ui/M3Checkbox.tsx",
-    "src/components/ui/M3Select.tsx",
-    "src/components/ui/M3TextField.tsx",
+    "src/components/ui/Jar.tsx",
+    "src/components/ui/Lens.tsx",
+    "src/components/ui/Mark.tsx",
     "src/components/ui/metric-card.tsx",
+    "src/components/ui/Seed.tsx",
+    "src/components/ui/Signal.tsx",
     "src/components/ui/SplitHeader.tsx",
     "src/components/ui/table.tsx",
+    "src/components/ui/Valve.tsx",
+    "src/components/ui/Vessel.tsx",
     "src/features/analysis/Analysis.tsx",
     "src/features/analysis/AuditDial.tsx",
     "src/features/analysis/ImpactEnhancements.tsx",
@@ -5200,19 +5170,15 @@
     "src/features/style-guide/M3ExpressiveComponents.tsx",
     "src/layouts/GalleryShell/GalleryShell.tsx",
     "src/layouts/LaboratoryShell/LayoutShell.tsx",
-    "src/legacy/ui/alert-dialog.tsx",
     "src/legacy/ui/AuroraHeader.tsx",
-    "src/legacy/ui/button.figma.tsx",
     "src/legacy/ui/chart.tsx",
     "src/legacy/ui/collapsible.tsx",
-    "src/legacy/ui/form.tsx",
     "src/legacy/ui/M3Alert.tsx",
     "src/legacy/ui/M3Checkbox.tsx",
     "src/legacy/ui/M3Select.tsx",
     "src/legacy/ui/M3TextField.tsx",
     "src/legacy/ui/metric-card.tsx",
     "src/legacy/ui/MetricCard.tsx",
-    "src/legacy/ui/table.tsx",
     "src/components/atomic/tabs/Tabs.tsx",
     "src/components/electric/tabs/ElectricTabs.tsx",
     "src/features/dashboard/components/JobCard.tsx",
@@ -5265,15 +5231,15 @@
       "count": 8
     },
     {
-      "name": "M3Button",
-      "count": 3
-    },
-    {
       "name": "Pebble",
       "count": 2
     },
     {
       "name": "KeywordTag",
+      "count": 2
+    },
+    {
+      "name": "Pebble",
       "count": 2
     },
     {
@@ -5294,25 +5260,25 @@
     }
   ],
   "recommendations": [
-    "170 components lack test coverage. Consider adding tests for: NorthcoteButton, button, PageHeader, M3Button, Pebble...",
-    "67 reusable components lack Storybook stories. Consider documenting: NorthcoteButton, button, PageHeader, M3Button, Pebble...",
+    "169 components lack test coverage. Consider adding tests for: NorthcoteButton, button, PageHeader, Pebble, KeywordTag...",
+    "71 reusable components lack Storybook stories. Consider documenting: NorthcoteButton, button, PageHeader, Pebble, KeywordTag...",
     "85 components appear unused. Consider archiving or removing them.",
-    "24 components are marked as complex (>200 LOC or >10 dependencies). Consider refactoring: M3Button, AnalysisPage, IngestionPage, JobQueue, Documents...",
-    "16 components mix Northcote Curio tokens with legacy MUI/M3 usage. Consolidate to Curio-only: AnalysisPage, JobQueue, M3ErrorAlert, M3Card, TechCard...",
-    "16 components still rely on legacy MUI/M3 without Curio tokens. Migrate to Northcote Curio: M3Button, Button, IngestionPage, EditableField, StatusChip...",
-    "Northcote Curio Adoption: 45.3% (78/172) fully adopted. Target: 80%+ for complete Curio migration."
+    "23 components are marked as complex (>200 LOC or >10 dependencies). Consider refactoring: Pebble, AnalysisPage, JobQueue, Documents, KSCGenerator...",
+    "24 components mix Northcote Curio tokens with legacy MUI/M3 usage. Consolidate to Curio-only: NorthcoteButton, Pebble, AnalysisPage, JobQueue, EditableField...",
+    "4 components still rely on legacy MUI/M3 without Curio tokens. Migrate to Northcote Curio: Button, chart, collapsible, metric-card",
+    "Northcote Curio Adoption: 48.5% (83/171) fully adopted. Target: 80%+ for complete Curio migration."
   ],
   "migrationSummary": {
-    "migrated": 78,
-    "mixed": 16,
-    "not_migrated": 16,
-    "unknown": 62
+    "migrated": 83,
+    "mixed": 24,
+    "not_migrated": 4,
+    "unknown": 60
   },
   "curioAdoption": {
-    "withCurioTokens": 94,
-    "withModeSystem": 13,
-    "legacyMUI": 8,
-    "legacyM3": 25,
-    "fullyCurio": 78
+    "withCurioTokens": 107,
+    "withModeSystem": 12,
+    "legacyMUI": 1,
+    "legacyM3": 27,
+    "fullyCurio": 83
   }
 }

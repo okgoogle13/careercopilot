@@ -165,8 +165,8 @@ export const M3Select = forwardRef<HTMLButtonElement, M3SelectProps>(({
                 rounded-[8px_12px_6px_10px]
             `,
             option: {
-                selected: 'bg-primary-wattle-gold/20 text-on-surface-parchment',
-                hover: 'hover:bg-primary-wattle-gold/10',
+                selected: 'bg-wattle-gold/20 text-on-surface-parchment',
+                hover: 'hover:bg-wattle-gold/10',
             },
             label: {
                 base: 'text-on-surface-parchment',
@@ -190,7 +190,7 @@ export const M3Select = forwardRef<HTMLButtonElement, M3SelectProps>(({
                 radius-stone
             `,
             option: {
-                selected: 'bg-primary-wattle-gold/15 text-on-surface-parchment',
+                selected: 'bg-wattle-gold/15 text-on-surface-parchment',
                 hover: 'hover:bg-surface-shared-specimen-night',
             },
             label: {
@@ -298,7 +298,7 @@ export const M3Select = forwardRef<HTMLButtonElement, M3SelectProps>(({
                                         flex items-center justify-between gap-2
                                         font-field-note
                                         ${isSelected ? currentTheme.option.selected : 'text-on-surface-parchment'}
-                                        ${isFocused && !isDisabled ? 'bg-primary-wattle-gold/10' : ''}
+                                        ${isFocused && !isDisabled ? 'bg-wattle-gold/10' : ''}
                                         ${isDisabled ? 'opacity-50 cursor-not-allowed' : `cursor-pointer ${currentTheme.option.hover}`}
                                         transition-colors duration-fast ease-viscous
                                     `}
@@ -307,7 +307,7 @@ export const M3Select = forwardRef<HTMLButtonElement, M3SelectProps>(({
                                 >
                                     <span>{option.label}</span>
                                     {isSelected && (
-                                        <Check className="w-5 h-5 flex-shrink-0 text-primary-wattle-gold" />
+                                        <Check className="w-5 h-5 flex-shrink-0 text-wattle-gold" />
                                     )}
                                 </div>
                             );

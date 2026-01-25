@@ -2,6 +2,8 @@ interface PageHeaderProps {
   title: string;
   highlightedWord?: string;
   description?: string;
+  annotation?: string;
+  cursiveAnnotation?: boolean;
   className?: string;
 }
 
@@ -9,6 +11,8 @@ export function PageHeader({
   title,
   highlightedWord,
   description,
+  annotation,
+  cursiveAnnotation = true,
   className = '',
 }: PageHeaderProps) {
   const renderTitle = () => {
@@ -20,18 +24,31 @@ export function PageHeader({
     return (
       <>
         {parts[0]}
-        <span className="text-primary-wattle-gold italic font-light font-bloom-soft">{highlightedWord}</span>
+        <span className="text-secondary-waratah-crimson cursive text-curator-large px-1">{highlightedWord}</span>
         {parts[1]}
       </>
     );
   };
 
   return (
-    <div className={`mb-8 ${className}`}>
-      <h2 className="mb-2 text-display-large-gallery font-bloom font-black text-on-surface-parchment uppercase tracking-tight">
+    <div className={`mb-8 ${className} flex flex-col items-start`}>
+      <h2 className="mb-2 text-bloom-ultra text-3xl md:text-4xl uppercase tracking-tight">
         {renderTitle()}
       </h2>
-      {description && <p className="text-on-surface-variant text-body-large-gallery font-field-note">{description}</p>}
+
+      {annotation && (
+        <div className="mb-2">
+          <span className={cursiveAnnotation ? "text-curator-annotation rotate-quirky-ccw" : "text-annotation-data"}>
+            → {annotation}
+          </span>
+        </div>
+      )}
+
+      {description && (
+        <p className="text-on-surface-variant text-lg font-field-note italic opacity-80">
+          {description}
+        </p>
+      )}
     </div>
   );
 }

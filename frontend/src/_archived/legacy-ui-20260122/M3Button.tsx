@@ -31,7 +31,7 @@ const buttonVariants = cva(
             {
                 mode: 'gallery',
                 variant: 'primary',
-                class: 'bg-primary-wattle-gold text-surface-specimen-night hover:bg-primary-wattle-glow border border-transparent',
+                class: 'bg-wattle-gold text-surface-specimen-night hover:bg-primary-wattle-glow border border-transparent',
             },
             {
                 mode: 'gallery',
@@ -42,7 +42,7 @@ const buttonVariants = cva(
             {
                 mode: 'laboratory',
                 variant: 'primary',
-                class: 'bg-primary-wattle-gold text-surface-specimen-night hover:bg-primary-wattle-glow rounded-sm',
+                class: 'bg-wattle-gold text-surface-specimen-night hover:bg-primary-wattle-glow rounded-sm',
             },
             {
                 mode: 'laboratory',

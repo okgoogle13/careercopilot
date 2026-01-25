@@ -45,7 +45,7 @@ const SplitHeader: React.FC<SplitHeaderProps> = ({
                 {/* Top Layer: Bloom (Fraunces with WONK) */}
                 <motion.span
                     className={cn(
-                        "font-bloom absolute text-primary-wattle-gold",
+                        "font-bloom absolute text-wattle-gold",
                         mode === 'gallery' ? 'text-5xl md:text-6xl' : 'text-4xl md:text-5xl'
                     )}
                     style={{
