@@ -146,7 +146,7 @@ As an expert career coach and talent acquisition specialist, perform a comprehen
 Analyze how well this candidate fits the job opportunity across multiple dimensions.
 
 CANDIDATE PROFILE:
-{json.dumps(sanitized_profile, indent=2)}
+{json.dumps(sanitized_profile, separators=(\',\', \':\'))}
 
 JOB DESCRIPTION:
 {sanitized_job.sanitized_content}
@@ -234,10 +234,10 @@ As an expert career strategist, rank these job opportunities for the candidate f
 Consider overall fit, success probability, career growth potential, and strategic value.
 
 CANDIDATE PROFILE:
-{json.dumps(sanitized_profile, indent=2)}
+{json.dumps(sanitized_profile, separators=(\',\', \':\'))}
 
 JOB OPPORTUNITIES:
-{json.dumps(sanitized_jobs, indent=2)}
+{json.dumps(sanitized_jobs, separators=(\',\', \':\'))}
 
 RANKING CRITERIA:
 1. Overall match quality (skills, experience, background)
@@ -316,7 +316,7 @@ As a career strategist and market analyst, analyze this candidate's competitive 
 for their target role in the specified market.
 
 CANDIDATE PROFILE:
-{json.dumps(sanitized_profile, indent=2)}
+{json.dumps(sanitized_profile, separators=(\',\', \':\'))}
 
 TARGET ROLE: {sanitized_role.sanitized_content}
 LOCATION/MARKET: {sanitized_location.sanitized_content}

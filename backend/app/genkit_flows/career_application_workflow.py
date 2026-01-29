@@ -303,13 +303,13 @@ As an expert resume writer and career strategist, create a tailored version of t
 optimized specifically for the target job opportunity.
 
 ORIGINAL RESUME INTELLIGENCE ANALYSIS:
-{json.dumps(resume_intelligence.resume_analysis.dict(), indent=2)}
+{json.dumps(resume_intelligence.resume_analysis.dict(), separators=(\',\', \':\'))}
 
 JOB DESCRIPTION:
 {job_description}
 
 USER PROFILE:
-{json.dumps(user_profile, indent=2)}
+{json.dumps(user_profile, separators=(\',\', \':\'))}
 
 RESUME TAILORING REQUIREMENTS:
 

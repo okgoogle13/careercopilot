@@ -65,12 +65,10 @@
       "Bash(pip3 install:*)",
       "Bash(/bin/bash:*)",
       "Bash(git fetch:*)",
-      "Bash(git pull:*)",
-      "Bash(for srv in documentation genkit contract-validator configuration design-system firestore)",
-      "Bash(do echo \"Testing: $srv-server.py\")"
+      "Bash(git pull:*)"
     ],
     "deny": [],
     "ask": []
   },
-  "outputStyle": "default"
+  "outputStyle": "compact"
 }
