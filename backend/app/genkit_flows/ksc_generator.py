@@ -27,7 +27,7 @@ async def generateKscResponse(user_profile_data: dict, ksc_statement: str) -> ST
     prompt = format_prompt(
         "ksc_simple_response",
         ksc_statement=ksc_statement,
-        user_profile_data=json.dumps(user_profile_data, indent=2),
+        user_profile_data=json.dumps(user_profile_data, separators=(',', ':')),
     )
 
     # Generate the response using Genkit model

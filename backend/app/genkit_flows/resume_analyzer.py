@@ -19,7 +19,7 @@ async def compare_resume_to_job(resume_text: str, job_analysis_data: dict) -> st
     prompt = format_prompt(
         "resume_job_comparison",
         resume_text=resume_text,
-        job_analysis_data=json.dumps(job_analysis_data, indent=2),
+        job_analysis_data=json.dumps(job_analysis_data, separators=(',', ':')),
     )
 
     # Generate the response using the centralized model

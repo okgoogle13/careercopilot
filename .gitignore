@@ -118,7 +118,11 @@ backend/venv/
 playwright-report/
 test-results/
 
+# Claude Code auto-memory
+.claude/auto-memory/dirty-files
 
 # Legacy Archive (Pre-Flight Cleanup)
 _archive_legacy/
 credentials.json
+# Archived Configs
+*.archived-*
