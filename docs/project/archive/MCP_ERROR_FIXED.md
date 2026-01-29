@@ -177,7 +177,7 @@ import google.genai as genai
 ### 3. Set Environment Variable Properly
 Add to `~/.zshrc`:
 ```bash
-export GEMINI_API_KEY="AIzaSyDuCsnEtxxgUCVilracX3PRRKjmheaQQS0"
+export GEMINI_API_KEY="[REDACTED]"
 ```
 
 Then update MCP config to use `${GEMINI_API_KEY}` instead of hardcoded value.

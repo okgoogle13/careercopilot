@@ -1,291 +1,92 @@
+
 import React from 'react';
+import { cn } from '../../lib/utils';
+import { Loader2 } from 'lucide-react';
 
-export type PebbleVariant = 'filled' | 'outlined' | 'text' | 'elevated' | 'tonal';
-export type M3ButtonColor = 'primary' | 'secondary' | 'tertiary' | 'error' | 'warning';
-export type PebbleSize = 'small' | 'medium' | 'large';
+export interface PebbleProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+    /**
+     * The visual style variant.
+     * - Primary: Wattle Gold (Action)
+     * - Secondary: Surface Elevated (Navigation/Option)
+     * - Ghost: Transparent (Subtle)
+     * - Destructive: Waratah Crimson (Danger)
+     */
+    variant?: 'primary' | 'secondary' | 'ghost' | 'destructive';
 
-export interface PebbleProps {
-    /** Button label */
-    children: React.ReactNode;
+    /**
+     * The size of the pebble.
+     */
+    size?: 'sm' | 'md' | 'lg';
 
-    /** Visual style variant */
-    variant?: PebbleVariant;
+    /**
+     * Optional icon to display before the label.
+     */
+    iconLeft?: React.ReactNode;
 
-    /** Semantic color theme */
-    color?: M3ButtonColor;
+    /**
+     * Optional icon to display after the label.
+     */
+    iconRight?: React.ReactNode;
 
-    /** Button size */
-    size?: PebbleSize;
-
-    /** Start icon */
-    startIcon?: React.ReactNode;
-
-    /** End icon */
-    endIcon?: React.ReactNode;
-
-    /** Full width button */
-    fullWidth?: boolean;
-
-    /** Disabled state */
-    disabled?: boolean;
-
-    /** Loading state (shows spinner) */
-    loading?: boolean;
-
-    /** Click handler */
-    onClick?: (event: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => void;
-
-    /** Button type */
-    type?: 'button' | 'submit' | 'reset';
-
-    /** Additional CSS classes */
-    className?: string;
-
-    /** Link href (renders as <a>) */
-    href?: string;
-
-    /** Link target */
-    target?: string;
-
-    /** Link rel */
-    rel?: string;
-
-    /** React Component to use (optional fallback) */
-    component?: any;
+    /**
+     * If true, shows a spinner and disables interaction.
+     */
+    isLoading?: boolean;
 }
 
 /**
- * M3Button - Material Design 3 Compliant Button (Pebble)
- *
- * Features:
- * - Organic pebble shape (rounded-pebble)
- * - M3 design tokens for states and colors
- * - Dynamic hover & active micro-animations
+ * **THE PEBBLE**
+ * 
+ * A smooth, organically shaped action element.
+ * Corresponds to the 'Leaf' (Primary) and 'Pebble' (Container) shapes in Northcote Curio.
+ * 
+ * @example
+ * <Pebble variant="primary" onClick={doSomething}>Click Me</Pebble>
  */
-export function M3Button({
-    children,
-    variant = 'filled',
-    color = 'primary',
-    size = 'medium',
-    startIcon,
-    endIcon,
-    fullWidth = false,
-    disabled = false,
-    loading = false,
-    onClick,
-    type = 'button',
-    className = '',
-    href,
-    target,
-    rel,
-}: PebbleProps) {
-    // Base classes for Northcote Curio buttons
-    const baseClasses = [
-        'inline-flex items-center justify-center gap-2',
-        'font-bold',
-        'transition-all duration-300',
-        disabled || loading ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer',
-        fullWidth ? 'w-full' : '',
-    ].join(' ');
+export const Pebble = React.forwardRef<HTMLButtonElement, PebbleProps>(
+    ({
+        className,
+        variant = 'primary',
+        size = 'md',
+        isLoading,
+        iconLeft,
+        iconRight,
+        children,
+        disabled,
+        ...props
+    }, ref) => {
 
-    // Size-specific classes
-    const sizeClasses: Record<PebbleSize, string> = {
-        small: 'px-4 py-2 text-sm',
-        medium: 'px-6 py-3 text-base',
-        large: 'px-8 py-4 text-lg',
-    };
+        // Base structural classes (Layout & Physics)
+        const baseStyles = "inline-flex items-center justify-center font-body font-medium transition-all duration-short ease-viscous disabled:opacity-50 disabled:pointer-events-none ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2";
 
-    // Northcote Curio Variant & Color Mapping
-    const getVariantStyles = () => {
-        const styles: React.CSSProperties = {
-            borderRadius: 'var(--radius-pebble)',
-            transition: 'all var(--duration-standard) var(--ease-viscous-breeze)',
+        // Token-mapped variants (The Skin comes from tokens.json via tailwind config)
+        const variants = {
+            primary: "bg-primary text-primary-foreground hover:bg-primary-bright hover:-translate-y-0.5 shadow-ink-rest hover:shadow-glow-gold rounded-leaf",
+            secondary: "bg-surface-elevated text-secondary border border-white/10 hover:bg-surface-elevated/80 hover:text-primary hover:-translate-y-0.5 shadow-sm rounded-pebble",
+            ghost: "hover:bg-surface-elevated hover:text-primary rounded-petal",
+            destructive: "bg-accent text-white hover:bg-accent-dim rounded-leaf shadow-ink-rest",
         };
 
-        if (variant === 'filled') {
-            styles.backgroundColor = `var(--ref-palette-${color}-40)`;
-            styles.color = `var(--ref-palette-${color}-100)`;
-            styles.boxShadow = 'var(--shadow-subtle)';
-        } else if (variant === 'tonal') {
-            styles.backgroundColor = `var(--ref-palette-${color}-90)`;
-            styles.color = `var(--ref-palette-${color}-10)`;
-        } else if (variant === 'outlined') {
-            styles.border = `2px solid var(--ref-palette-${color}-40)`;
-            styles.color = `var(--ref-palette-${color}-40)`;
-            styles.backgroundColor = 'transparent';
-        } else if (variant === 'elevated') {
-            styles.backgroundColor = `var(--ref-palette-${color}-40)`;
-            styles.color = `var(--ref-palette-${color}-100)`;
-            styles.boxShadow = 'var(--shadow-elevated)';
-        } else { // text
-            styles.backgroundColor = 'transparent';
-            styles.color = `var(--ref-palette-${color}-40)`;
-        }
+        const sizes = {
+            sm: "h-8 px-3 text-xs",
+            md: "h-10 px-5 py-2 text-sm",
+            lg: "h-12 px-8 text-base",
+        };
 
-        return styles;
-    };
-
-    const hoverStyle: React.CSSProperties = disabled || loading ? {} : {
-        transform: 'translateY(-4px) scale(1.02)',
-        boxShadow: color === 'primary' ? 'var(--elevation-shadow-glow-gold)' : 'var(--shadow-elevated)',
-    };
-
-    const [isHovered, setIsHovered] = React.useState(false);
-
-    const combinedStyle = {
-        ...getVariantStyles(),
-        ...(isHovered ? hoverStyle : {}),
-    };
-
-    // Loading spinner
-    const loadingSpinner = (
-        <svg
-            className="animate-spin h-5 w-5"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-        >
-            <circle
-                className="opacity-25"
-                cx="12"
-                cy="12"
-                r="10"
-                stroke="currentColor"
-                strokeWidth="4"
-            />
-            <path
-                className="opacity-75"
-                fill="currentColor"
-                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-            />
-        </svg>
-    );
-
-    // Button content
-    const content = (
-        <>
-            {loading ? loadingSpinner : startIcon}
-            <span>{children}</span>
-            {!loading && endIcon}
-        </>
-    );
-
-    // Render logic
-    const commonProps = {
-        style: combinedStyle,
-        className: `${baseClasses} ${sizeClasses[size]} ${className}`,
-        onMouseEnter: () => !disabled && !loading && setIsHovered(true),
-        onMouseLeave: () => setIsHovered(false),
-        'aria-disabled': disabled || loading,
-    };
-
-    if (href) {
         return (
-            <a
-                href={href}
-                target={target}
-                rel={rel || (target === '_blank' ? 'noopener noreferrer' : undefined)}
-                {...commonProps}
-                onClick={(e) => {
-                    if (disabled || loading) {
-                        e.preventDefault();
-                        return;
-                    }
-                    if (onClick) onClick(e as any);
-                }}
+            <button
+                ref={ref}
+                className={cn(baseStyles, variants[variant], sizes[size], className)}
+                disabled={disabled || isLoading}
+                {...props}
             >
-                {content}
-            </a>
+                {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                {!isLoading && iconLeft && <span className="mr-2">{iconLeft}</span>}
+                {children}
+                {!isLoading && iconRight && <span className="ml-2">{iconRight}</span>}
+            </button>
         );
     }
+);
 
-    return (
-        <button
-            type={type}
-            {...commonProps}
-            disabled={disabled || loading}
-            onClick={onClick}
-            aria-busy={loading}
-        >
-            {content}
-        </button>
-    );
-}
-
-/**
- * M3IconButton - Icon-only M3 Button variant
- *
- * Specialized button for icon-only actions (e.g., close, menu, more).
- */
-export interface M3IconButtonProps {
-    /** Icon element */
-    icon: React.ReactNode;
-
-    /** Accessible label */
-    ariaLabel: string;
-
-    /** Color theme */
-    color?: M3ButtonColor;
-
-    /** Button size */
-    size?: PebbleSize;
-
-    /** Visual style variant */
-    variant?: 'standard' | 'filled' | 'tonal' | 'outlined';
-
-    /** Disabled state */
-    disabled?: boolean;
-
-    /** Click handler */
-    onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
-
-    /** Additional CSS classes */
-    className?: string;
-}
-
-export function M3IconButton({
-    icon,
-    ariaLabel,
-    color = 'primary',
-    size = 'medium',
-    variant = 'standard',
-    disabled = false,
-    onClick,
-    className = '',
-}: M3IconButtonProps) {
-    const sizeClasses: Record<PebbleSize, string> = {
-        small: 'w-8 h-8',
-        medium: 'w-10 h-10',
-        large: 'w-12 h-12',
-    };
-
-    const colorClasses: Record<M3ButtonColor, string> = {
-        primary: 'text-primary hover:bg-primary-container',
-        secondary: 'text-secondary hover:bg-secondary-container',
-        tertiary: 'text-tertiary hover:bg-tertiary-container',
-        error: 'text-error hover:bg-error-container',
-        warning: 'text-warning hover:bg-warning-container',
-    };
-
-    return (
-        <button
-            type="button"
-            className={`
-        inline-flex items-center justify-center
-        rounded-full
-        transition-all duration-300
-        ${sizeClasses[size]}
-        ${colorClasses[color]}
-        ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:scale-110 active:scale-95'}
-        ${className}
-      `}
-            onClick={onClick}
-            disabled={disabled}
-            aria-label={ariaLabel}
-        >
-            {icon}
-        </button>
-    );
-}
-
-export { M3Button as Pebble };
+Pebble.displayName = "Pebble";

@@ -1,208 +1,82 @@
+
 import React from 'react';
+import { cn } from '../../lib/utils';
 
-export type StoneVariant = 'pebble' | 'tech' | 'leaf' | 'gem';
-export type M3CardElevation = 0 | 1 | 2 | 3 | 4 | 5;
-export type StonePadding = 'none' | 'sm' | 'md' | 'lg' | 'xl';
+export interface StoneProps extends React.HTMLAttributes<HTMLDivElement> {
+    /**
+     * The mode context for the card.
+     * - Gallery: Warm glass, organic borders (Northcote)
+     * - Laboratory: Cool slate, technical borders (Curio)
+     */
+    mode?: 'gallery' | 'laboratory';
 
-export interface StoneProps {
-    /** Card content */
-    children: React.ReactNode;
+    /**
+     * Elevation level.
+     * - Flat: No shadow, border only
+     * - Raised: Standard Ink Pool shadow
+     * - Floating: Deep shadow for modals/popovers
+     */
+    elevation?: 'flat' | 'raised' | 'floating';
 
-    /** M3 shape variant */
-    variant?: StoneVariant;
+    /**
+     * Optional header content.
+     */
+    header?: React.ReactNode;
 
-    /** M3 elevation level (0-5) */
-    elevation?: M3CardElevation;
-
-    /** Enable hover elevation increase */
-    hoverable?: boolean;
-
-    /** Padding size using M3 spacing scale */
-    padding?: StonePadding;
-
-    /** Additional CSS classes */
-    className?: string;
-
-    /** Click handler */
-    onClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
-
-    /** Accessible role (default: 'article') */
-    role?: string;
+    /**
+     * Optional footer content.
+     */
+    footer?: React.ReactNode;
 }
 
 /**
- * M3Card - Material Design 3 Compliant Card Component (Stone)
+ * **THE STONE**
+ * 
+ * The fundamental container unit.
+ * Maps to 'Stone' (borderRadius) and 'Glassmorphism' (background/blur) tokens.
  */
-export function M3Card({
-    children,
-    variant = 'pebble',
-    elevation = 1,
-    hoverable = false,
-    padding = 'lg',
-    className = '',
-    onClick,
-    role = 'article',
-}: StoneProps) {
-    // Map variant to Northcote Curio shape tokens
-    const shapeStyles: Record<StoneVariant, React.CSSProperties> = {
-        pebble: { borderRadius: 'var(--radius-pebble)' },
-        tech: { borderRadius: 'var(--radius-stone)' },
-        leaf: { borderRadius: 'var(--radius-leaf)' },
-        gem: { borderRadius: 'var(--radius-pebble)' }, // Consolidating gem to pebble for consistency
-    };
+export const Stone = React.forwardRef<HTMLDivElement, StoneProps>(
+    ({ className, mode = 'gallery', elevation = 'raised', header, footer, children, ...props }, ref) => {
 
-    // Map padding to Northcote spacing tokens
-    const paddingClasses: Record<StonePadding, string> = {
-        none: '',
-        sm: 'p-[var(--spacing-sm)]',
-        md: 'p-[var(--spacing-md)]',
-        lg: 'p-[var(--spacing-lg)]',
-        xl: 'p-[var(--spacing-xl)]',
-    };
+        // Base structural classes
+        const baseStyles = "relative overflow-hidden transition-all duration-medium ease-settle backdrop-blur-xl border border-white/5";
 
-    // Northcote elevation mapping
-    const getShadow = (lev: M3CardElevation) => {
-        if (lev === 0) return 'none';
-        if (lev === 1) return 'var(--shadow-subtle)';
-        if (lev === 2) return 'var(--shadow-standard)';
-        if (lev === 3) return 'var(--shadow-elevated)';
-        return 'var(--shadow-maximum)';
-    };
+        // Mode-specific styles (The Skin)
+        const modes = {
+            gallery: "bg-surface-container/80 rounded-stone dark:border-white/10",
+            laboratory: "bg-surface-elevated/90 rounded-stone border-white/5 bg-grid-major", // Lab gets the grid texture
+        };
 
-    const [isHovered, setIsHovered] = React.useState(false);
+        const elevations = {
+            flat: "shadow-none",
+            raised: "shadow-ink-rest hover:shadow-ink-hover",
+            floating: "shadow-2xl hover:translate-y-0",
+        };
 
-    const cardStyle: React.CSSProperties = {
-        ...shapeStyles[variant],
-        backgroundColor: 'var(--color-specimen-night)',
-        border: '1px solid rgba(240, 234, 214, 0.1)',
-        boxShadow: getShadow(isHovered && hoverable ? (Math.min(elevation + 1, 5) as M3CardElevation) : elevation),
-        transition: 'all var(--duration-standard) var(--ease-viscous-breeze)',
-        position: 'relative',
-        overflow: 'hidden',
-        ...(isHovered && hoverable ? { transform: 'translateY(-4px)' } : {}),
-        ...(onClick ? { cursor: 'pointer' } : {}),
-    };
-
-    return (
-        <div
-            style={cardStyle}
-            className={`
-        ${paddingClasses[padding]}
-        ${onClick ? 'active:scale-[0.98]' : ''}
-        ${className}
-      `}
-            onMouseEnter={() => hoverable && setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-            onClick={onClick}
-            role={role}
-            tabIndex={onClick ? 0 : undefined}
-            onKeyDown={onClick ? (e) => e.key === 'Enter' && onClick(e as any) : undefined}
-        >
-            {/* Background texture pattern if in tech variant */}
-            {variant === 'tech' && (
-                <div
-                    className="absolute inset-0 opacity-[0.03] pointer-events-none"
-                    style={{ backgroundImage: 'radial-gradient(var(--color-parchment) 1px, transparent 1px)', backgroundSize: '16px 16px' }}
-                />
-            )}
-            <div className="relative z-10">
-                {children}
-            </div>
-        </div>
-    );
-}
-
-/**
- * M3CardHeader - Semantic header section for M3Card
- */
-export interface M3CardHeaderProps {
-    title: string;
-    subtitle?: string;
-    icon?: React.ReactNode;
-    action?: React.ReactNode;
-    className?: string;
-}
-
-export function M3CardHeader({
-    title,
-    subtitle,
-    icon,
-    action,
-    className = '',
-}: M3CardHeaderProps) {
-    return (
-        <div className={`flex items-start justify-between mb-4 ${className}`}>
-            <div className="flex items-start gap-4 flex-1">
-                {icon && (
-                    <div className="flex-shrink-0 mt-1 text-[var(--color-wattle-gold)]">
-                        {icon}
+        return (
+            <div
+                ref={ref}
+                className={cn(baseStyles, modes[mode], elevations[elevation], className)}
+                {...props}
+            >
+                {header && (
+                    <div className="px-6 py-4 border-b border-white/5 bg-white/5">
+                        {header}
                     </div>
                 )}
-                <div className="flex-1 min-w-0">
-                    <h3 className="font-bloom text-2xl font-bold text-[var(--color-parchment)] mb-1">
-                        {title}
-                    </h3>
-                    {subtitle && (
-                        <p className="text-sm text-[var(--color-flannel-flower-dark)] font-field-note font-medium">
-                            {subtitle}
-                        </p>
-                    )}
+
+                <div className="p-6">
+                    {children}
                 </div>
+
+                {footer && (
+                    <div className="px-6 py-4 border-t border-white/5 bg-black/20">
+                        {footer}
+                    </div>
+                )}
             </div>
-            {action && (
-                <div className="flex-shrink-0 ml-4">
-                    {action}
-                </div>
-            )}
-        </div>
-    );
-}
+        );
+    }
+);
 
-/**
- * M3CardContent - Semantic content section for M3Card
- */
-export interface M3CardContentProps {
-    children: React.ReactNode;
-    className?: string;
-}
-
-export function M3CardContent({
-    children,
-    className = '',
-}: M3CardContentProps) {
-    return (
-        <div className={`text-body-large text-on-surface ${className}`}>
-            {children}
-        </div>
-    );
-}
-
-/**
- * M3CardActions - Semantic actions section for M3Card
- */
-export interface M3CardActionsProps {
-    children: React.ReactNode;
-    align?: 'left' | 'right' | 'center' | 'between';
-    className?: string;
-}
-
-export function M3CardActions({
-    children,
-    align = 'right',
-    className = '',
-}: M3CardActionsProps) {
-    const alignClasses: Record<typeof align, string> = {
-        left: 'justify-start',
-        right: 'justify-end',
-        center: 'justify-center',
-        between: 'justify-between',
-    };
-
-    return (
-        <div className={`flex items-center gap-2 mt-4 ${alignClasses[align]} ${className}`}>
-            {children}
-        </div>
-    );
-}
-
-export { M3Card as Stone };
+Stone.displayName = "Stone";
