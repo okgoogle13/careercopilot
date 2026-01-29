@@ -47,7 +47,7 @@ Updated `~/.gemini/antigravity/mcp_config.json` to include the actual API key va
       "command": "/Users/okgoogle13/.gemini/antigravity/playground/primordial-quasar/.venv/bin/python3",
       "args": ["/Users/okgoogle13/.gemini/antigravity/playground/primordial-quasar/servers/flash_sidekick.py"],
       "env": {
-        "GEMINI_API_KEY": "AIzaSyDuCsnEtxxgUCVilracX3PRRKjmheaQQS0",
+        "GEMINI_API_KEY": "[REDACTED]",
         "GEMINI_MODEL": "gemini-1.5-flash"
       }
     },
@@ -74,7 +74,7 @@ Try using the `quick_summarize` or `generate_idf` tools from flash-sidekick.
 ### Option 1: System-Wide Environment Variable (More Secure)
 Add to `~/.zshrc`:
 ```bash
-export GEMINI_API_KEY="AIzaSyDuCsnEtxxgUCVilracX3PRRKjmheaQQS0"
+export GEMINI_API_KEY="[REDACTED]"
 ```
 
 Then update MCP config back to:
@@ -96,7 +96,7 @@ Then update MCP config back to:
 
 ### Option 2: launchctl (Mac-Specific)
 ```bash
-launchctl setenv GEMINI_API_KEY "AIzaSyDuCsnEtxxgUCVilracX3PRRKjmheaQQS0"
+launchctl setenv GEMINI_API_KEY "[REDACTED]"
 ```
 
 **Advantages:**
@@ -114,7 +114,7 @@ If Antigravity supports a `.env` file for MCP servers, create:
 ```
 With:
 ```
-GEMINI_API_KEY=AIzaSyDuCsnEtxxgUCVilracX3PRRKjmheaQQS0
+GEMINI_API_KEY=[REDACTED]
 ```
 
 ## ⚠️ Additional Issues Found
@@ -172,7 +172,7 @@ tail -f /tmp/mcp-flash-sidekick.log
 .venv/bin/python3 -c "
 import os
 import google.generativeai as genai
-genai.configure(api_key='AIzaSyDuCsnEtxxgUCVilracX3PRRKjmheaQQS0')
+genai.configure(api_key='[REDACTED]')
 model = genai.GenerativeModel('gemini-1.5-flash')
 response = model.generate_content('Hello')
 print('API Key Valid:', bool(response.text))

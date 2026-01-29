@@ -172,7 +172,7 @@ Check these common issues:
    # Test API key directly
    curl -H "Content-Type: application/json" \
         -d '{"contents":[{"parts":[{"text":"Hello"}]}]}' \
-        "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=AIzaSyDuCsnEtxxgUCVilracX3PRRKjmheaQQS0"
+        "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=[REDACTED]"
    ```
 
 2. **Python Environment Issues**
