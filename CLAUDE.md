@@ -4,46 +4,57 @@
 
 ## Stack
 
-| Layer | Tech |
-|-------|------|
-| Frontend | React 18 + TS + Vite + Tailwind v4 |
-| State | Zustand + TanStack Query |
-| Backend | FastAPI + SQLAlchemy + Genkit |
-| Cloud | GCP us-central1 · Firebase · Cloud Run |
-| Design | **Northcote Curio** (M3 Expressive) |
+| Layer    | Tech                                   |
+| -------- | -------------------------------------- |
+| Frontend | React 18 + TS + Vite + Tailwind v4     |
+| State    | Zustand + TanStack Query               |
+| Backend  | FastAPI + SQLAlchemy + Genkit          |
+| Cloud    | GCP us-central1 · Firebase · Cloud Run |
+| Design   | **Northcote Curio** (M3 Expressive)    |
 
-## MCP Task Routing
+## MCP Task Routing ⚠️ MANDATORY
+
+> [!CAUTION]
+> These are **mandatory** routing rules. Violating them exhausts your token budget.
 
 Route computationally expensive or bulk tasks to **flash-sidekick** to preserve context window.
 
-| Task Type | Route To | Tool |
-|-----------|----------|------|
-| Summarize large files/text | `flash-sidekick` | `quick_summarize` |
-| Code quality analysis | `flash-sidekick` | `analyze_code_quality` |
-| Generate unit tests | `flash-sidekick` | `generate_unit_tests` |
-| Generate docstrings | `flash-sidekick` | `generate_docstrings` |
-| Batch file analysis | `flash-sidekick` | `batch_file_analysis` |
-| Extract dependencies | `flash-sidekick` | `extract_dependencies` |
-| Complex research queries | `flash-sidekick` | `consult_pro` (Gemini Pro) |
-| Web research with citations | `flash-sidekick` | `web_research_synthesis` |
-| Refactoring suggestions | `flash-sidekick` | `suggest_refactoring` |
+| Task Type                   | Route To         | Tool                       |
+| --------------------------- | ---------------- | -------------------------- |
+| Summarize large files/text  | `flash-sidekick` | `quick_summarize`          |
+| Code quality analysis       | `flash-sidekick` | `analyze_code_quality`     |
+| Generate unit tests         | `flash-sidekick` | `generate_unit_tests`      |
+| Generate docstrings         | `flash-sidekick` | `generate_docstrings`      |
+| Batch file analysis         | `flash-sidekick` | `batch_file_analysis`      |
+| Extract dependencies        | `flash-sidekick` | `extract_dependencies`     |
+| Complex research queries    | `flash-sidekick` | `consult_pro` (Gemini Pro) |
+| Web research with citations | `flash-sidekick` | `web_research_synthesis`   |
+| Refactoring suggestions     | `flash-sidekick` | `suggest_refactoring`      |
 
 **Keep in Claude** (requires creative judgment):
+
 - UI/UX design decisions
 - Code architecture
 - Design system compliance audits
 - Component implementation with Northcote Curio tokens
 
+### Session Budget
+
+- **Target**: < 150K tokens per complex task
+- **Action at 75%**: Stop, summarize, propose new session
+- **Forbidden**: Sequential reads of 5+ files, unbatched greps
+
 ## Design System: Northcote Curio
 
 Victorian naturalist field station aesthetic. Dual modes:
 
-| Mode | Context | Typography | Wallpaper Opacity |
-|------|---------|------------|-------------------|
-| **Gallery** | User-facing, emotional | Fraunces SOFT=100 WONK=1, Caveat OK | 0.65+ |
-| **Laboratory** | Tools, clinical | Fraunces SOFT=20 WONK=0, NO cursive | 0.05 |
+| Mode           | Context                | Typography                          | Wallpaper Opacity |
+| -------------- | ---------------------- | ----------------------------------- | ----------------- |
+| **Gallery**    | User-facing, emotional | Fraunces SOFT=100 WONK=1, Caveat OK | 0.65+             |
+| **Laboratory** | Tools, clinical        | Fraunces SOFT=20 WONK=0, NO cursive | 0.05              |
 
 **Anti-Slop Protocol** (strictly enforced):
+
 - ❌ Inter, Roboto, Arial
 - ❌ Uniform border-radius
 - ❌ Purple gradients
@@ -72,19 +83,21 @@ pytest backend/app/tests/
 
 ## File Patterns
 
-| Pattern | Location |
-|---------|----------|
-| Components | `frontend/src/components/{Name}/{Name}.tsx` |
-| Pages | `frontend/src/pages/{name}/index.tsx` |
-| API routes | `backend/app/api/endpoints/{resource}.py` |
-| Services | `backend/app/services/{name}_service.py` |
-| Genkit flows | `backend/app/genkit_flows/{flow_name}.py` |
-| Design tokens | `design-system/tokens.json` |
+| Pattern       | Location                                    |
+| ------------- | ------------------------------------------- |
+| Components    | `frontend/src/components/{Name}/{Name}.tsx` |
+| Pages         | `frontend/src/pages/{name}/index.tsx`       |
+| API routes    | `backend/app/api/endpoints/{resource}.py`   |
+| Services      | `backend/app/services/{name}_service.py`    |
+| Genkit flows  | `backend/app/genkit_flows/{flow_name}.py`   |
+| Design tokens | `design-system/tokens.json`                 |
 
 ## Component Template
 
 ```tsx
-interface Props { /* typed */ }
+interface Props {
+  /* typed */
+}
 
 export const Component: React.FC<Props> = ({ ...props }) => {
   return <div className="/* Tailwind tokens only */">{/* */}</div>;
@@ -114,4 +127,5 @@ ENABLE_GENKIT_FLOWS=true
 - GCP: us-central1
 
 ---
-*Token-efficient by design. Route bulk work to sidekicks.*
+
+_Token-efficient by design. Route bulk work to sidekicks._

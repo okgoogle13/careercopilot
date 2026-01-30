@@ -7,6 +7,7 @@ Career Copilot is an AI-powered job application assistant built with React, Fast
 ## Quick Commands
 
 ### Testing & Validation
+
 ```bash
 # Run all tests
 cd frontend && yarn test
@@ -22,6 +23,7 @@ cd backend && ruff check --fix backend/
 ```
 
 ### Backend AI Agents
+
 ```bash
 # Run specific agent tests
 pytest backend/app/tests/agents/test_document_generator.py -v
@@ -34,6 +36,7 @@ uvicorn backend.app.main:app --reload
 ```
 
 ### Frontend Components
+
 ```bash
 # Test specific component
 cd frontend && yarn test DocumentGeneration.test.tsx
@@ -46,6 +49,7 @@ cd frontend && npx playwright test
 ```
 
 ### Deployment
+
 ```bash
 # Pre-flight checks
 ./scripts/test-deployment.sh
@@ -67,19 +71,19 @@ cd frontend && npx playwright test
 
 ## Key Technologies
 
-| Layer | Tech | Rationale |
-|-------|------|-----------|
-| AI Orchestration | Google Genkit | Native Gemini 1.5 integration, multi-model support |
-| LLM – High Volume | Gemini 1.5 Flash | Document generation, ATS optimization, parsing |
-| LLM – Complex Analysis | Gemini 1.5 Pro | Company research, multi-step workflows, QA |
-| Document Parsing | Langextract | Structured resume/document extraction |
-| Backend API | FastAPI | Type safety, async-first, auto OpenAPI docs |
-| Frontend | React 18 + TS | Component-driven, strict typing, Northcote design tokens |
-| State Management | Zustand | Lightweight, no boilerplate |
-| Data Fetching | TanStack Query | Server state, caching, sync |
-| Data Persistence | Firestore | Real-time, Firebase auth integration |
-| File Storage | Cloud Storage | Scalable uploads and generated document storage |
-| Hosting | Cloud Run (backend), Firebase Hosting (frontend) | Serverless, auto-scaling |
+| Layer                  | Tech                                             | Rationale                                                |
+| ---------------------- | ------------------------------------------------ | -------------------------------------------------------- |
+| AI Orchestration       | Google Genkit                                    | Native Gemini 1.5 integration, multi-model support       |
+| LLM – High Volume      | Gemini 1.5 Flash                                 | Document generation, ATS optimization, parsing           |
+| LLM – Complex Analysis | Gemini 1.5 Pro                                   | Company research, multi-step workflows, QA               |
+| Document Parsing       | Langextract                                      | Structured resume/document extraction                    |
+| Backend API            | FastAPI                                          | Type safety, async-first, auto OpenAPI docs              |
+| Frontend               | React 18 + TS                                    | Component-driven, strict typing, Northcote design tokens |
+| State Management       | Zustand                                          | Lightweight, no boilerplate                              |
+| Data Fetching          | TanStack Query                                   | Server state, caching, sync                              |
+| Data Persistence       | Firestore                                        | Real-time, Firebase auth integration                     |
+| File Storage           | Cloud Storage                                    | Scalable uploads and generated document storage          |
+| Hosting                | Cloud Run (backend), Firebase Hosting (frontend) | Serverless, auto-scaling                                 |
 
 ## Project Structure
 
@@ -117,6 +121,7 @@ design-system/
 ## Standards & Patterns
 
 ### Do
+
 - ✅ Use Firebase v9 modular SDK (`import { doc } from 'firebase/firestore'`)
 - ✅ Use Google Genkit for all AI workflows via `@define_flow` decorators
 - ✅ Route high-volume tasks to Gemini 1.5 Flash (document generation, ATS scoring, parsing)
@@ -132,6 +137,7 @@ design-system/
 - ✅ Use environment variables for API keys, model configs, and secrets
 
 ### Don't
+
 - ❌ Do NOT use Firebase v8 legacy SDK
 - ❌ Do NOT hard-code API keys or secrets in code
 - ❌ Do NOT create monolithic agents—keep to single responsibility
@@ -146,6 +152,7 @@ design-system/
 ## Git Workflow & Safety Boundaries
 
 ### ✅ Always OK (no permission needed)
+
 - Read files, run tests, type check, lint, format
 - Analyze code quality, create documentation
 - Run backend/frontend dev servers locally
@@ -155,6 +162,7 @@ design-system/
 - Create feature branches and commits (with clear messages)
 
 ### 🤔 Ask First
+
 - Install new npm/pip dependencies
 - Modify Firebase security rules or Firestore indexes
 - Change Genkit flow structure or AI model selection
@@ -165,6 +173,7 @@ design-system/
 - Make breaking changes to API contracts
 
 ### 🚫 Never
+
 - **Commit secrets, API keys, credentials** (CRITICAL – check `.gitignore` for `.env.local`, `credentials.json`, `.firebase-key`)
 - Modify `.gitignore` to allow secret files (defeats security)
 - Force-push to `main` or `develop` (destroys history and collaboration)
@@ -177,13 +186,47 @@ design-system/
 - Log sensitive data (PII, API keys, auth tokens) to console or files
 
 **Security Gotchas**:
+
 - Pre-commit hooks verify no secrets leak; if hook fails, fix issues and recommit (never skip with `--no-verify`)
 - Genkit flows inherit Firebase context; always validate user ownership of data before returning results
 - Firestore security rules are the primary defense; misconfigured rules expose user data to public read
 
+## Token Efficiency & MCP Delegation
+
+### Flash Sidekick Mandatory Routing
+
+For tasks involving bulk data, ALWAYS delegate to flash-sidekick MCP server:
+
+| Operation           | Direct (Claude) Cost | Delegated (Flash) Cost | Savings |
+| ------------------- | -------------------- | ---------------------- | ------- |
+| Read 10 files       | ~50K tokens          | ~2K tokens             | 96%     |
+| Grep + read matches | ~30K tokens          | ~1K tokens             | 97%     |
+| Generate tests      | ~20K tokens          | ~1K tokens             | 95%     |
+
+### Delegation Rules (Enforced)
+
+```python
+# Pseudo-code for agent behavior
+if file_lines > 500:
+    use flash_sidekick.quick_summarize(file)
+elif files_to_analyze > 3:
+    use flash_sidekick.batch_file_analysis(files)
+elif task == "code_quality":
+    use flash_sidekick.analyze_code_quality(code)
+elif task == "git_history":
+    use flash_sidekick.consult_pro(query)
+```
+
+### Session Budget Protocol
+
+1. **Start of session**: Estimate task complexity
+2. **At 75% budget**: Stop, summarize progress, propose continuation
+3. **Never**: Push through expensive operations to "finish"
+
 ## API Contracts
 
 ### Document Generation
+
 ```python
 # POST /api/resumes/tailored
 Request:
@@ -213,6 +256,7 @@ Response:
 ```
 
 ### AI Analysis
+
 ```python
 # POST /api/analysis/ats-score
 Request: { "resume": str, "job_description": str }
@@ -229,6 +273,7 @@ Response:
 ```
 
 ### Resume Parsing
+
 ```python
 # POST /api/documents/parse
 Request: FormData with file upload
@@ -296,26 +341,33 @@ async def generate_resume(input_data: dict) -> dict:
 ## Code Examples
 
 ### Good: Focused Agent with Error Handling
+
 See [backend/app/agents/document_generator.py](backend/app/agents/document_generator.py) for the reference pattern. One clear responsibility, standardized I/O, proper error handling.
 
 ### Good: API Route
+
 See [backend/app/api/endpoints/resumes.py](backend/app/api/endpoints/resumes.py). Async FastAPI endpoint calling Genkit flow, input validation, response serialization.
 
 ### Good: React Component with Northcote Tokens
+
 See [frontend/src/components/DocumentGeneration/DocumentGeneration.tsx](frontend/src/components/DocumentGeneration/DocumentGeneration.tsx). Uses design tokens, no hardcoded colors, TypeScript strict mode, integrates TanStack Query.
 
 ### Good: useAuth Hook
+
 See [frontend/src/hooks/useAuth.ts](frontend/src/hooks/useAuth.ts). Wraps Firebase auth, updates Zustand state, handles token refresh.
 
 ### Bad: Direct Firestore in Component
+
 ❌ Avoid fetching Firestore directly in React components. Routes allow centralized auth, error handling, logging.
 
 ### Bad: Monolithic Agent
+
 ❌ Avoid agents doing document generation + ATS analysis + parsing. Each should have one responsibility.
 
 ## Testing
 
 ### Unit Tests - Backend Agents
+
 ```python
 # backend/app/tests/agents/test_document_generator.py
 import pytest
@@ -333,16 +385,19 @@ async def test_generate_resume_success():
 ```
 
 ### Unit Tests - React Components
+
 ```bash
 cd frontend && yarn test DocumentGeneration.test.tsx --coverage
 ```
 
 ### E2E Tests
+
 ```bash
 cd frontend && npx playwright test tests/e2e/document-workflow.spec.ts
 ```
 
 ### Firebase Emulator for Security Rules
+
 ```bash
 firebase emulators:start
 # Tests run against local emulator, no live data affected
@@ -379,6 +434,7 @@ Include timing in agent metadata for monitoring.
 ## Agent & Codex Compatibility
 
 This AGENTS.md file is compatible with:
+
 - **GitHub Copilot** – Provides context for Copilot chat and inline suggestions
 - **OpenAI Codex** – Structured per Codex AGENTS.md conventions with environment setup, testing, and style guidance
 - **Claude Code** – Full AI agent support with boundary specifications and workflow documentation
@@ -389,12 +445,14 @@ This AGENTS.md file is compatible with:
 ## Domain Knowledge: Community Services
 
 Target users transitioning into:
+
 - Social work roles
 - Community services positions
 - Government/public sector jobs
 - Nonprofit organizations
 
 Key document requirements:
+
 - **KSC (Key Selection Criteria)** responses for government job applications
 - **Mission-aligned language** for nonprofit applications
 - **STAR methodology** for behavioral examples (Situation, Task, Action, Result)
@@ -404,6 +462,7 @@ Key document requirements:
 ## Code Style & Conventions
 
 ### Python Backend
+
 - **Formatter**: Ruff format (configured in `pyproject.toml`)
 - **Linter**: Ruff check (replace legacy Black/Flake8)
 - **Type checking**: mypy strict mode
@@ -412,6 +471,7 @@ Key document requirements:
 - **Error handling**: Always return standardized `{"success": bool, "error": str}` responses
 
 ### TypeScript Frontend
+
 - **Mode**: `tsconfig.json: "strict": true` (required, no `any` types)
 - **Formatter**: Prettier (configured in `.prettierrc`)
 - **Linter**: ESLint with TypeScript parser
@@ -421,6 +481,7 @@ Key document requirements:
 - **File naming**: PascalCase for components, camelCase for utilities
 
 ### Genkit Flows
+
 - **Naming convention**: `@define_flow(name="snake_case_flow_name")`
 - **Input validation**: Always validate input_data schema first
 - **Model selection**: Default to Gemini 1.5 Flash; escalate to Pro for complex reasoning
@@ -428,15 +489,18 @@ Key document requirements:
 - **Response format**: Always return standardized response with `success`, `content`, `confidence_score`, `metadata`
 
 ### Firebase & Security
+
 - **SDK version**: Firebase v9 modular SDK only (no legacy SDK)
 - **Auth**: Always check `request.auth != null` before user operations
 - **Firestore queries**: Never expose raw queries from frontend (use API layer)
 - **Secrets**: Store in Google Cloud Secret Manager or `.env.local` (never commit)
 
 ### Commit Messages
+
 Format: `<type>(<scope>): <description>`
 
 Examples:
+
 - `feat(agents): Add KSC generator flow for government applications`
 - `fix(frontend): Correct ATS score calculation in analysis component`
 - `refactor(backend): Simplify resume parsing with Langextract`
@@ -448,6 +512,7 @@ Types: `feat`, `fix`, `refactor`, `test`, `docs`, `chore`, `ci`
 ## Development Workflow
 
 ### Local Setup
+
 ```bash
 # Install all dependencies
 ./scripts/setup-everything.sh
@@ -466,6 +531,7 @@ uvicorn backend.app.main:app --reload
 ```
 
 ### Incremental Development
+
 ```bash
 # Run specific agent tests while developing
 pytest backend/app/tests/agents/test_document_generator.py -v --tb=short
@@ -478,6 +544,7 @@ yarn lint:fix
 ```
 
 ### Before Submitting PR
+
 ```bash
 # Full validation
 ./scripts/test-deployment.sh
@@ -492,27 +559,30 @@ git diff HEAD --name-only | xargs git check-attr filter
 ## Firestore & Cloud Storage
 
 ### Collection Structure
+
 - `/users/{uid}/profiles/{profileId}` — User profiles (skills, experience)
 - `/users/{uid}/documents/{docId}` — Generated resumes, cover letters
 - `/users/{uid}/jobs/{jobId}` — Saved job opportunities
 - `/templates/` — Document templates (global, admin-writable)
 
 ### Cloud Storage Paths
+
 - `/users/{uid}/uploads/` — User-uploaded documents
 - `/users/{uid}/generated/` — AI-generated documents
 - `/templates/` — Template assets and previews
 
 ### Security Rules
+
 - All user data requires authentication (`request.auth != null`)
 - Users can only access their own data (`request.auth.uid == resource.data.userId`)
 - Templates are publicly readable, admin-writable only
 
 ## Genkit Model Selection
 
-| Model | Use Case | Speed | Cost | Quality |
-|-------|----------|-------|------|---------|
-| Gemini 1.5 Flash | Document generation, ATS, keyword extraction | < 5s | Low | Good |
-| Gemini 1.5 Pro | Company research, strategy, QA | 10-20s | High | Excellent |
+| Model            | Use Case                                     | Speed  | Cost | Quality   |
+| ---------------- | -------------------------------------------- | ------ | ---- | --------- |
+| Gemini 1.5 Flash | Document generation, ATS, keyword extraction | < 5s   | Low  | Good      |
+| Gemini 1.5 Pro   | Company research, strategy, QA               | 10-20s | High | Excellent |
 
 **Rule of thumb**: Default to Flash. Escalate to Pro only for complex reasoning or multi-step workflows.
 
@@ -534,12 +604,14 @@ LANGEXTRACT_API_KEY=<your-key>
 ## Deployment
 
 ### Staging
+
 ```bash
 ./scripts/deploy.sh staging
 # https://careercopilot-staging.web.app
 ```
 
 ### Production
+
 ```bash
 ./scripts/deploy.sh production
 # https://careercopilot-468811.web.app
