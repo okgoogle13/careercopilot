@@ -44,41 +44,43 @@ Career Copilot architectural planning guide for AI agents and developers. This d
 
 ### Technology Decisions & Rationale
 
-| Component | Choice | Why | Alternative Considered |
-|-----------|--------|-----|------------------------|
-| **Frontend Framework** | React 18 | Large ecosystem, component reusability, TypeScript support | Vue, Svelte |
-| **Build Tool** | Vite | Lightning-fast HMR, ES6 modules, minimal config | Webpack, Turbopack |
-| **State Management** | Zustand | Minimal boilerplate, no prop drilling, easy testing | Redux, Recoil, Jotai |
-| **Server State** | TanStack Query | Built-in caching, sync, background refetch | Redux, custom hooks |
-| **Backend API** | FastAPI | Type-safe (Pydantic), auto OpenAPI docs, async-first | Django, Flask |
-| **AI Orchestration** | Google Genkit | Multi-model support, streaming, structured output | LangChain, direct API |
-| **LLM (High Volume)** | Gemini 1.5 Flash | 50x cheaper than Pro, < 5s latency, sufficient quality | GPT-4o, Claude 3.5 |
-| **LLM (Complex)** | Gemini 1.5 Pro | Advanced reasoning, multi-step workflows, QA | GPT-4 Turbo, Claude Opus |
-| **Document Parsing** | Langextract | Structured extraction, resume-specific patterns | PyPDF2, pdfplumber |
-| **Data Persistence** | Firestore | Real-time updates, Firebase auth integration, scalability | PostgreSQL, MongoDB |
-| **File Storage** | Cloud Storage | Native Firebase integration, resume versioning | S3, local filesystem |
-| **Hosting** | Cloud Run + Firebase | Managed, serverless, automatic scaling, cost-effective | EC2, Heroku, Railway |
-| **Design System** | Northcote Curio | Distinctive, botanical aesthetic, M3 compliant | Material Design, Shadcn |
+| Component              | Choice               | Why                                                        | Alternative Considered   |
+| ---------------------- | -------------------- | ---------------------------------------------------------- | ------------------------ |
+| **Frontend Framework** | React 18             | Large ecosystem, component reusability, TypeScript support | Vue, Svelte              |
+| **Build Tool**         | Vite                 | Lightning-fast HMR, ES6 modules, minimal config            | Webpack, Turbopack       |
+| **State Management**   | Zustand              | Minimal boilerplate, no prop drilling, easy testing        | Redux, Recoil, Jotai     |
+| **Server State**       | TanStack Query       | Built-in caching, sync, background refetch                 | Redux, custom hooks      |
+| **Backend API**        | FastAPI              | Type-safe (Pydantic), auto OpenAPI docs, async-first       | Django, Flask            |
+| **AI Orchestration**   | Google Genkit        | Multi-model support, streaming, structured output          | LangChain, direct API    |
+| **LLM (High Volume)**  | Gemini 1.5 Flash     | 50x cheaper than Pro, < 5s latency, sufficient quality     | GPT-4o, Claude 3.5       |
+| **LLM (Complex)**      | Gemini 1.5 Pro       | Advanced reasoning, multi-step workflows, QA               | GPT-4 Turbo, Claude Opus |
+| **Document Parsing**   | Langextract          | Structured extraction, resume-specific patterns            | PyPDF2, pdfplumber       |
+| **Data Persistence**   | Firestore            | Real-time updates, Firebase auth integration, scalability  | PostgreSQL, MongoDB      |
+| **File Storage**       | Cloud Storage        | Native Firebase integration, resume versioning             | S3, local filesystem     |
+| **Hosting**            | Cloud Run + Firebase | Managed, serverless, automatic scaling, cost-effective     | EC2, Heroku, Railway     |
+| **Design System**      | Northcote Curio      | Distinctive, botanical aesthetic, M3 compliant             | Material Design, Shadcn  |
 
 ---
 
 ## Core Data Models
 
 ### User Profile
+
 ```typescript
 interface UserProfile {
-  id: string;              // Firestore document ID
-  uid: string;             // Firebase auth UID
+  id: string; // Firestore document ID
+  uid: string; // Firebase auth UID
   name: string;
   email: string;
   phone?: string;
-  summary?: string;        // Professional summary
+  summary?: string; // Professional summary
   experience: Experience[];
   skills: string[];
   education: Education[];
   certifications?: Certification[];
-  voiceProfile?: {         // Derived from documents
-    tone: string;          // "formal" | "conversational" | "technical"
+  voiceProfile?: {
+    // Derived from documents
+    tone: string; // "formal" | "conversational" | "technical"
     keyStrengths: string[];
   };
   createdAt: Timestamp;
@@ -87,14 +89,15 @@ interface UserProfile {
 ```
 
 ### Generated Document
+
 ```typescript
 interface GeneratedDocument {
   id: string;
   uid: string;
   profileId: string;
-  jobId?: string;          // If for specific job
+  jobId?: string; // If for specific job
   type: "resume" | "cover_letter" | "ksc";
-  content: string;         // Markdown or plain text
+  content: string; // Markdown or plain text
   metadata: {
     generatedAt: Timestamp;
     model: "gemini-1.5-flash" | "gemini-1.5-pro";
@@ -103,15 +106,16 @@ interface GeneratedDocument {
     confidenceScore: number; // 0-1
   };
   atsScore?: {
-    score: number;         // 0-100
+    score: number; // 0-100
     missingKeywords: string[];
     suggestions: string[];
   };
-  storagePath: string;     // Cloud Storage path to PDF
+  storagePath: string; // Cloud Storage path to PDF
 }
 ```
 
 ### Job Opportunity
+
 ```typescript
 interface JobOpportunity {
   id: string;
@@ -140,10 +144,12 @@ interface JobOpportunity {
 ### Request/Response Patterns
 
 **All requests** include:
+
 - `Content-Type: application/json` (or `multipart/form-data` for file uploads)
 - `Authorization: Bearer <firebase-token>` (validated server-side)
 
 **All responses** follow:
+
 ```json
 {
   "success": boolean,
@@ -157,6 +163,7 @@ interface JobOpportunity {
 ```
 
 **Error codes**:
+
 - `400` – Validation error (missing fields, invalid type)
 - `401` – Unauthenticated (expired token, missing auth)
 - `403` – Unauthorized (accessing other user's data)
@@ -167,6 +174,7 @@ interface JobOpportunity {
 ### Pagination
 
 Large lists use cursor-based pagination:
+
 ```bash
 GET /api/documents?limit=20&after=<cursor>
 
@@ -294,6 +302,7 @@ async def generate_document(input_data: dict) -> dict:
 ### Model Selection Strategy
 
 **Use Gemini 1.5 Flash (default)**:
+
 - Document generation (resume, cover letter)
 - ATS optimization and scoring
 - Keyword extraction
@@ -301,6 +310,7 @@ async def generate_document(input_data: dict) -> dict:
 - Parsing with Langextract
 
 **Escalate to Gemini 1.5 Pro** when:
+
 - Multi-step reasoning (company research → tailored strategy)
 - Complex analysis (comparing 5+ job requirements)
 - Quality assurance of Flash output
@@ -308,6 +318,7 @@ async def generate_document(input_data: dict) -> dict:
 - User explicitly requests "premium" analysis
 
 **Decision logic**:
+
 ```python
 def choose_model(task_type: str, complexity: str) -> str:
     if task_type in ["generation", "parsing", "ats"]:
@@ -323,27 +334,30 @@ def choose_model(task_type: str, complexity: str) -> str:
 
 ### Target Response Times
 
-| Operation | Target | Achieved | Strategy |
-|-----------|--------|----------|----------|
-| Resume generation | < 30s | ~15-20s | Stream + cache templates |
-| ATS analysis | < 10s | ~5-8s | Incremental scoring |
-| Document parsing | < 15s | ~8-12s | Parallel processing |
-| Profile CRUD | < 2s | ~500ms | Firestore indexes |
-| API response | < 500ms | ~200ms | Response compression |
+| Operation         | Target  | Achieved | Strategy                 |
+| ----------------- | ------- | -------- | ------------------------ |
+| Resume generation | < 30s   | ~15-20s  | Stream + cache templates |
+| ATS analysis      | < 10s   | ~5-8s    | Incremental scoring      |
+| Document parsing  | < 15s   | ~8-12s   | Parallel processing      |
+| Profile CRUD      | < 2s    | ~500ms   | Firestore indexes        |
+| API response      | < 500ms | ~200ms   | Response compression     |
 
 ### Caching Strategy
 
 **Client-side (TanStack Query)**:
+
 - Cache generated documents for 1 hour
 - Revalidate on user profile update
 - Stale-while-revalidate for ATS scores
 
 **Server-side (Genkit)**:
+
 - Cache resume templates (global, 7 days)
 - Cache user voice profile (per user, 30 days)
 - No caching for AI generation (freshness > speed)
 
 **Database**:
+
 - Firestore indexes on `uid`, `createdAt`, `type`
 - Composite index for `uid + createdAt` queries
 - No full-text search (Cloud Search planned Q2 2026)
@@ -371,6 +385,7 @@ def choose_model(task_type: str, complexity: str) -> str:
 ### Authorization Rules
 
 **Firestore Security Rules**:
+
 ```javascript
 rules_version = '2';
 service cloud.firestore {
@@ -407,6 +422,7 @@ service cloud.firestore {
 ## Roadmap & Future Enhancements
 
 ### Q1 2026
+
 - [ ] Encryption at rest (Firestore field-level encryption)
 - [ ] GDPR data export endpoint
 - [ ] Cover letter generation with company research (Pro model)
@@ -414,6 +430,7 @@ service cloud.firestore {
 - [ ] Resume versioning (track edits over time)
 
 ### Q2 2026
+
 - [ ] Full-text search (Cloud Search integration)
 - [ ] Job matching algorithm (vector similarity)
 - [ ] Interview prep module (mock Q&A)
@@ -421,6 +438,7 @@ service cloud.firestore {
 - [ ] Portfolio integration
 
 ### Q3 2026
+
 - [ ] Mobile app (React Native)
 - [ ] LinkedIn profile sync (import/export)
 - [ ] Real-time collaboration (multiple profiles)
@@ -428,6 +446,7 @@ service cloud.firestore {
 - [ ] Email notifications for job matches
 
 ### Future (Q4 2026+)
+
 - Multi-language support (Spanish, French, Chinese)
 - Voice resume (audio upload + transcription)
 - Video interview coaching
@@ -446,10 +465,12 @@ service cloud.firestore {
 4. **Northcote identity** – Distinctive design, not generic Bootstrap/Material
 5. **Test everything** – Unit tests, integration tests, e2e tests before merge
 6. **Document decisions** – Why, not just what; update this file as you learn
+7. **Token-efficient AI** – Default to Flash Sidekick for bulk operations. Never read 500+ line files directly. Batch multi-file analysis. Session budget: 150K tokens.
 
 ### Definition of Done
 
 A feature is "done" when:
+
 - [ ] Code written and peer-reviewed
 - [ ] Unit tests written and passing
 - [ ] Integration tests passing
@@ -498,11 +519,13 @@ async def good_flow(input_data: dict):
 ### AI Model Limitations
 
 **Gemini 1.5 Flash**:
+
 - Context window: 1M tokens (plenty for resumes)
 - JSON output less reliable than text
 - Temperature > 1.0 causes less diverse output
 
 **Langextract**:
+
 - Assumes Western resume format
 - May fail on non-English PDFs
 - Returns partial data on parsing error (handle gracefully)
@@ -553,6 +576,7 @@ if not profile:
 **Date**: 2025-10-15
 **Decision**: Use Northcote Curio (botanical aesthetic) over Material Design 3
 **Rationale**:
+
 - Distinctive brand identity (not generic Material)
 - Australian botanical palette aligns with community services ethos
 - Supports dual modes (Gallery for users, Laboratory for tools)
@@ -565,6 +589,7 @@ if not profile:
 **Date**: 2025-09-20
 **Decision**: Use Google Genkit over LangChain for AI orchestration
 **Rationale**:
+
 - Native Gemini 1.5 integration (no wrapper overhead)
 - Cleaner streaming syntax
 - Built-in structured output support
@@ -578,6 +603,7 @@ if not profile:
 **Date**: 2025-08-05
 **Decision**: Use Zustand for global state over Redux
 **Rationale**:
+
 - Minimal boilerplate (Redux verbose for this scale)
 - Zustand + TanStack Query covers 99% of state needs
 - Easier for new team members to understand
