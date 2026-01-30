@@ -50,7 +50,7 @@
       "Bash(./scripts/prepare-for-migration.sh:*)",
       "Bash(yes:*)",
       "Bash(script -q -c \"(printf ''''y\\n'''' ; sleep 1; printf ''''y\\n'''' ; sleep 1; printf ''''y\\n'''' ; sleep 1; printf ''''y\\n'''' ; sleep 1; printf ''''y\\n'''') | ./scripts/prepare-for-migration.sh --auto-commit\" /dev/null)",
-      "Bash(bash -c '(printf """"y\\n""""; sleep 0.5; printf """"y\\n""""; sleep 0.5; printf """"y\\n""""; sleep 0.5; printf """"y\\n""""; sleep 0.5; printf """"y\\n"""") | ./scripts/prepare-for-migration.sh --auto-commit')",
+      "Bash(bash -c \\\"(printf \\\\\\\"y\\\\n\\\\\\\"; sleep 0.5; printf \\\\\\\"y\\\\n\\\\\\\"; sleep 0.5; printf \\\\\\\"y\\\\n\\\\\\\"; sleep 0.5; printf \\\\\\\"y\\\\n\\\\\\\"; sleep 0.5; printf \\\\\\\"y\\\\n\\\\\\\") | ./scripts/prepare-for-migration.sh --auto-commit\\\")",
       "Bash(/tmp/run-migration.sh:*)",
       "Bash(git merge:*)",
       "Bash(git checkout:*)",
@@ -65,10 +65,29 @@
       "Bash(pip3 install:*)",
       "Bash(/bin/bash:*)",
       "Bash(git fetch:*)",
-      "Bash(git pull:*)"
+      "Bash(git pull:*)",
+      "Bash(claude:*)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:agents.md)"
     ],
     "deny": [],
     "ask": []
   },
-  "outputStyle": "compact"
+  "outputStyle": "compact",
+  "customInstructions": "# TOKEN OPTIMIZATION & DESIGN SYSTEM FOR CLAUDE CODE\n\n## FLASH-SIDEKICK TOKEN OPTIMIZATION\n\n**Core Principle:** Preserve Claude Haiku/Opus tokens by routing expensive operations to Gemini Flash via flash-sidekick.\n\n### When to Use Flash-Sidekick (via Task tool)\n\n1. **Large File Summarization (>10KB)**\n   - Task(subagent_type='general-purpose', prompt='Summarize [file]')\n   - Saves ~97% of tokens vs. reading directly\n\n2. **Code Quality Analysis**\n   - Task(subagent_type='general-purpose', prompt='Analyze code quality of [files]')\n   - Use for: complexity, maintainability, security checks\n\n3. **Multi-File Analysis (3+ files)**\n   - Task(subagent_type='general-purpose', prompt='Analyze these files: [list]')\n   - Better than sequential Read calls\n\n4. **Documentation Generation**\n   - Task for READMEs, API docs, docstrings\n   - Heavy generation task—offload to Gemini\n\n5. **Refactoring Suggestions**\n   - Task for analyzing codebase patterns\n   - Complex analysis task\n\n6. **Web Research with Citations**\n   - Task(subagent_type='general-purpose') for synthesis\n   - Preserves Claude context for decision-making\n\n### Filesystem MCP Usage (Read/Edit/Write)\n\n**ONLY use when:**\n- File size < 5KB (configs, small utilities)\n- Need to edit specific lines\n- Creating new files\n- Listing directories\n- Quick boolean checks (exists? valid?)\n\n**Decision:** If file > 5KB and you're analyzing it, use Task+flash-sidekick instead.\n\n## DESIGN-SYSTEM-SIDEKICK (Northcote Curio Validation)\n\n**Use for design work:**\n1. **validate_asset_compliance** → Check Figma exports, DALL-E outputs against Northcote scorecard\n   - Validates: typography distinctiveness, botanical palette adherence, asymmetric layouts\n   - Input: asset_id, optional image_path\n2. **generate_implementation_package** → Create component implementation scaffolding from validated assets\n   - Generates: React scaffolds, design tokens, CSS specs\n   - Input: asset_id, asset_metadata\n\n**Token Savings:** Offloads Gemini Vision analysis, reducing Claude tokens for visual validation.\n\n### When to Invoke\n- After creating design assets (Figma, DALL-E, wireframes)\n- Before implementing components in React\n- To ensure Northcote Curio compliance (Gallery or Laboratory mode)\n- To auto-generate component scaffolding with tokens\n\n## Token Budget & Ratios\n\n- Session budget: ~200K Claude tokens\n- Target ratio: Flash-sidekick:Filesystem = 2:1 or higher\n- Example: For 10 tasks, use flash-sidekick for 6-7, filesystem for 2-3\n\n## Reference\n\nSee: .claude/mcp-usage-policy.md for detailed decision matrix.",
+  "mcpUsagePolicy": {
+    "preferFlashSidekick": true,
+    "rules": [
+      "For files >10KB, ALWAYS use flash-sidekick tools (quick_summarize, analyze_code_quality) instead of filesystem read",
+      "For analyzing multiple files, ALWAYS use batch_file_analysis instead of sequential reads",
+      "For code documentation generation, ALWAYS use create_readme or generate_api_docs",
+      "For code quality analysis, ALWAYS use analyze_code_quality with json_mode",
+      "For web research, ALWAYS use web_research_synthesis with search grounding",
+      "Filesystem MCP should only be used for: small configs (<5KB), editing specific lines, creating files, listing directories"
+    ],
+    "thresholds": {
+      "fileSizeLimit": 10240,
+      "batchFileCount": 3
+    }
+  }
 }
