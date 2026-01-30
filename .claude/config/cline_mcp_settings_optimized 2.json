@@ -1,0 +1,66 @@
+{
+  "mcpServers": {
+    "flash-sidekick": {
+      "command": "/Users/okgoogle13/Desktop/careercopilot/.venv/bin/python3",
+      "args": [
+        "/Users/okgoogle13/Desktop/careercopilot/servers/flash_sidekick.py"
+      ],
+      "description": "Gemini 2.5 Pro/Flash for token-efficient code analysis, docs, batch ops"
+    },
+    "playwright": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-playwright"
+      ],
+      "env": {
+        "PLAYWRIGHT_BROWSERS_PATH": "0"
+      }
+    },
+    "github": {
+      "command": "/Users/okgoogle13/.nvm/versions/node/v20.19.5/bin/npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-github"
+      ],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "REDACTED_GITHUB_PAT"
+      }
+    },
+    "git": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-git"
+      ]
+    },
+    "docker": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-server-docker"
+      ]
+    },
+    "perplexity-ask": {
+      "command": "/Users/okgoogle13/.nvm/versions/node/v20.19.5/bin/npx",
+      "args": [
+        "-y",
+        "@jschuller/perplexity-mcp"
+      ],
+      "env": {
+        "PERPLEXITY_API_KEY": "${PERPLEXITY_API_KEY}"
+      },
+      "description": "Perplexity AI for alternative web research"
+    },
+    "genkit": {
+      "command": "/usr/bin/env",
+      "args": [
+        "-u",
+        "NODE_OPTIONS",
+        "/Users/okgoogle13/.nvm/versions/node/v20.19.5/bin/node",
+        "/Users/okgoogle13/Desktop/careercopilot/functions/node_modules/.bin/tsx",
+        "/Users/okgoogle13/Desktop/careercopilot/functions/src/mcp_server.ts"
+      ]
+    }
+  }
+}
