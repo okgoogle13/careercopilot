@@ -1683,6 +1683,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@chromatic-com/storybook@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "@chromatic-com/storybook@npm:5.0.0"
+  dependencies:
+    "@neoconfetti/react": "npm:^1.0.0"
+    chromatic: "npm:^13.3.4"
+    filesize: "npm:^10.0.12"
+    jsonfile: "npm:^6.1.0"
+    strip-ansi: "npm:^7.1.0"
+  peerDependencies:
+    storybook: ^0.0.0-0 || ^10.1.0 || ^10.1.0-0 || ^10.2.0-0 || ^10.3.0-0
+  checksum: 10c0/8e4dcba6c70b2943a5b68fd3d690084328844d757fffccef26adebf1eadfc3b0d2fee80280e57c40d6897dee3ab9c6c202de46eb1de39991d316df5e36b4fe89
+  languageName: node
+  linkType: hard
+
 "@colors/colors@npm:1.5.0":
   version: 1.5.0
   resolution: "@colors/colors@npm:1.5.0"
@@ -4384,6 +4399,13 @@ __metadata:
     "@emnapi/runtime": "npm:^1.7.1"
     "@tybys/wasm-util": "npm:^0.10.1"
   checksum: 10c0/04d57b67e80736e41fe44674a011878db0a8ad893f4d44abb9d3608debb7c174224cba2796ed5b0c1d367368159f3ca6be45f1c59222f70e32ddc880f803d447
+  languageName: node
+  linkType: hard
+
+"@neoconfetti/react@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "@neoconfetti/react@npm:1.0.0"
+  checksum: 10c0/dfa487965b69f88b39562ccd910114cd68b00a90c7eb79cfb1a483c7ac717b720f9f095e5aea13cef8a9b9bea05533d380ddff5e44d3bc3f7dc4d5c66716765c
   languageName: node
   linkType: hard
 
@@ -7974,6 +7996,31 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@storybook/addon-vitest@npm:^10.2.3":
+  version: 10.2.3
+  resolution: "@storybook/addon-vitest@npm:10.2.3"
+  dependencies:
+    "@storybook/global": "npm:^5.0.0"
+    "@storybook/icons": "npm:^2.0.1"
+  peerDependencies:
+    "@vitest/browser": ^3.0.0 || ^4.0.0
+    "@vitest/browser-playwright": ^4.0.0
+    "@vitest/runner": ^3.0.0 || ^4.0.0
+    storybook: ^10.2.3
+    vitest: ^3.0.0 || ^4.0.0
+  peerDependenciesMeta:
+    "@vitest/browser":
+      optional: true
+    "@vitest/browser-playwright":
+      optional: true
+    "@vitest/runner":
+      optional: true
+    vitest:
+      optional: true
+  checksum: 10c0/5faad4ec39f6e8ab39427506a05338ecdef1dac65642640bf892b32487505919cd7a42040c1d6268779e2c9e1a03b8bfb6504f91aa7f898ff0088a3945968d01
+  languageName: node
+  linkType: hard
+
 "@storybook/api@npm:^7.0.2":
   version: 7.6.21
   resolution: "@storybook/api@npm:7.6.21"
@@ -8489,6 +8536,16 @@ __metadata:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0-beta
     react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0-beta
   checksum: 10c0/bbec9201a78a730195f9cf377b15856dc414a54d04e30d16c379d062425cc617bfd0d6586ba1716012cfbdab461f0c9693a6a52920f9bd09c7b4291fb116f59c
+  languageName: node
+  linkType: hard
+
+"@storybook/icons@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "@storybook/icons@npm:2.0.1"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+  checksum: 10c0/df2bbf1a5b50f12ab1bf78cae6de4dbf7c49df0e3a5f845553b51b20adbe8386a09fd172ea60342379f9284bb528cba2d0e2659cae6eb8d015cf92c8b32f1222
   languageName: node
   linkType: hard
 
@@ -12493,6 +12550,7 @@ __metadata:
     "@babel/preset-env": "npm:^7.24.7"
     "@babel/preset-react": "npm:^7.24.1"
     "@careercopilot/ui": "npm:*"
+    "@chromatic-com/storybook": "npm:^5.0.0"
     "@emotion/react": "npm:^11.11.4"
     "@emotion/styled": "npm:^11.11.5"
     "@eslint/js": "npm:^9.16.0"
@@ -12537,6 +12595,7 @@ __metadata:
     "@storybook/addon-onboarding": "npm:^8.1.11"
     "@storybook/addon-styling": "npm:^2.0.0"
     "@storybook/addon-themes": "npm:^8.1.11"
+    "@storybook/addon-vitest": "npm:^10.2.3"
     "@storybook/blocks": "npm:^8.1.11"
     "@storybook/builder-vite": "npm:^7.6.21"
     "@storybook/core-events": "npm:^8.1.11"
@@ -12870,7 +12929,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chromatic@npm:^13.3.5":
+"chromatic@npm:^13.3.4, chromatic@npm:^13.3.5":
   version: 13.3.5
   resolution: "chromatic@npm:13.3.5"
   peerDependencies:
@@ -16027,6 +16086,13 @@ __metadata:
   dependencies:
     minimatch: "npm:^5.0.1"
   checksum: 10c0/426b1de3944a3d153b053f1c0ebfd02dccd0308a4f9e832ad220707a6d1f1b3c9784d6cadf6b2f68f09a57565f63ebc7bcdc913ccf8012d834f472c46e596f41
+  languageName: node
+  linkType: hard
+
+"filesize@npm:^10.0.12":
+  version: 10.1.6
+  resolution: "filesize@npm:10.1.6"
+  checksum: 10c0/9a196d64da4e947b8c0d294be09a3dfa7a634434a1fc5fb3465f1c9acc1237ea0363f245ba6e24477ea612754d942bc964d86e0e500905a72e9e0e17ae1bbdbc
   languageName: node
   linkType: hard
 
@@ -19841,7 +19907,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jsonfile@npm:^6.0.1":
+"jsonfile@npm:^6.0.1, jsonfile@npm:^6.1.0":
   version: 6.2.0
   resolution: "jsonfile@npm:6.2.0"
   dependencies:
