@@ -7997,16 +7997,53 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/builder-vite@npm:10.0.2":
-  version: 10.0.2
-  resolution: "@storybook/builder-vite@npm:10.0.2"
+"@storybook/builder-vite@npm:8.6.15":
+  version: 8.6.15
+  resolution: "@storybook/builder-vite@npm:8.6.15"
   dependencies:
-    "@storybook/csf-plugin": "npm:10.0.2"
+    "@storybook/csf-plugin": "npm:8.6.15"
+    browser-assert: "npm:^1.2.1"
     ts-dedent: "npm:^2.0.0"
   peerDependencies:
-    storybook: ^10.0.2
-    vite: ^5.0.0 || ^6.0.0 || ^7.0.0
-  checksum: 10c0/a93bbb763c1f5d47b7b6c36f9225ca9a1f9f70c9f07c7b4ee61dd97f77a676b7d31c5c27b6ca48bb237fbaed626f592653380c2999bf9ae48be1071c0c007acf
+    storybook: ^8.6.15
+    vite: ^4.0.0 || ^5.0.0 || ^6.0.0
+  checksum: 10c0/ccddca6e9372f56f737a9587c5d16b03652c7cadf80dc80397ebe72e6b566f5abc7898db414d41ad4246d8e06c9a838d6548adb73608954b5230061909c2e348
+  languageName: node
+  linkType: hard
+
+"@storybook/builder-vite@npm:^7.6.21":
+  version: 7.6.21
+  resolution: "@storybook/builder-vite@npm:7.6.21"
+  dependencies:
+    "@storybook/channels": "npm:7.6.21"
+    "@storybook/client-logger": "npm:7.6.21"
+    "@storybook/core-common": "npm:7.6.21"
+    "@storybook/csf-plugin": "npm:7.6.21"
+    "@storybook/node-logger": "npm:7.6.21"
+    "@storybook/preview": "npm:7.6.21"
+    "@storybook/preview-api": "npm:7.6.21"
+    "@storybook/types": "npm:7.6.21"
+    "@types/find-cache-dir": "npm:^3.2.1"
+    browser-assert: "npm:^1.2.1"
+    es-module-lexer: "npm:^0.9.3"
+    express: "npm:^4.17.3"
+    find-cache-dir: "npm:^3.0.0"
+    fs-extra: "npm:^11.1.0"
+    magic-string: "npm:^0.30.0"
+    rollup: "npm:^2.25.0 || ^3.3.0"
+  peerDependencies:
+    "@preact/preset-vite": "*"
+    typescript: ">= 4.3.x"
+    vite: ^3.0.0 || ^4.0.0 || ^5.0.0
+    vite-plugin-glimmerx: "*"
+  peerDependenciesMeta:
+    "@preact/preset-vite":
+      optional: true
+    typescript:
+      optional: true
+    vite-plugin-glimmerx:
+      optional: true
+  checksum: 10c0/e2b836db1db62f788577f9f13d393b53b8003a1aa7710256da502611c1309294d92f5d241495dc2980d062d12b76a9ddd7390da5fa63adeb04c65b01fe06aafd
   languageName: node
   linkType: hard
 
@@ -8270,27 +8307,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/csf-plugin@npm:10.0.2":
-  version: 10.0.2
-  resolution: "@storybook/csf-plugin@npm:10.0.2"
+"@storybook/csf-plugin@npm:7.6.21":
+  version: 7.6.21
+  resolution: "@storybook/csf-plugin@npm:7.6.21"
   dependencies:
-    unplugin: "npm:^2.3.5"
-  peerDependencies:
-    esbuild: "*"
-    rollup: "*"
-    storybook: ^10.0.2
-    vite: "*"
-    webpack: "*"
-  peerDependenciesMeta:
-    esbuild:
-      optional: true
-    rollup:
-      optional: true
-    vite:
-      optional: true
-    webpack:
-      optional: true
-  checksum: 10c0/422823c3635c5bab48a258d8f6e7dadf02484afdfb48b08005be962d8bb5b4c8f507f3d68b79523ff11901178a7e913f98c047ec7aced5bcdf47a846c2bcd66f
+    "@storybook/csf-tools": "npm:7.6.21"
+    unplugin: "npm:^1.3.1"
+  checksum: 10c0/0679f6fa3a400de546690955905db2592b25e01df71963f04281d69bd7bd04adbdeb4698da6ae5dc5327683c8add1c4ae1696ef25aee2703139ce2a8bc09e6a5
   languageName: node
   linkType: hard
 
@@ -8301,6 +8324,17 @@ __metadata:
     "@storybook/csf-tools": "npm:8.1.11"
     unplugin: "npm:^1.3.1"
   checksum: 10c0/47fbffd265cdb4d003ba31beda0e8eba9103418289122a06cc8385f7e81f3143873638e33ff78fe47989d08e6438092b1dd1b7f375955f99faebf84688ac417e
+  languageName: node
+  linkType: hard
+
+"@storybook/csf-plugin@npm:8.6.15":
+  version: 8.6.15
+  resolution: "@storybook/csf-plugin@npm:8.6.15"
+  dependencies:
+    unplugin: "npm:^1.3.1"
+  peerDependencies:
+    storybook: ^8.6.15
+  checksum: 10c0/9968c241f9469a2a7306450273f6530e7b9229e8066b1763cda8919b397e064e5ef45c0a2f71f1f52232727ff100ae9a0c9f0c72ef917f5c34f6d5311e46287b
   languageName: node
   linkType: hard
 
@@ -8547,6 +8581,13 @@ __metadata:
     ts-dedent: "npm:^2.0.0"
     util-deprecate: "npm:^1.0.2"
   checksum: 10c0/94b14b0dd4092cfe1c2736a66a7d2b49c4ff3b1b4e38e7c0cde46dd2a8962275152dede89e0aac4e7e8fb6a2cbdd32e7f88d2ecfb0a535e6e80f70149b2a63f0
+  languageName: node
+  linkType: hard
+
+"@storybook/preview@npm:7.6.21":
+  version: 7.6.21
+  resolution: "@storybook/preview@npm:7.6.21"
+  checksum: 10c0/c87affeed425125921ffa1f37bc7cd3d1074ef26daa6daac2d35233106b687afac37ca2e1a472412c413eaccaaf623ea5b1edb1777b4be04f1a4f091dc057468
   languageName: node
   linkType: hard
 
@@ -12567,7 +12608,6 @@ __metadata:
     "@storybook/addon-links": "npm:^8.1.11"
     "@storybook/addon-onboarding": "npm:^8.1.11"
     "@storybook/blocks": "npm:^8.1.11"
-    "@storybook/builder-vite": "npm:^7.6.21"
     "@storybook/core-server": "npm:^7.6.21"
     "@storybook/jest": "npm:^0.2.3"
     "@storybook/react": "npm:^8.1.11"
@@ -12582,6 +12622,7 @@ __metadata:
     "@typescript-eslint/parser": "npm:^8.0.0"
     "@vitest/browser-playwright": "npm:^4.0.0"
     "@vitest/coverage-v8": "npm:^4.0.0"
+    chromatic: "npm:^13.3.5"
     class-variance-authority: "npm:^0.7.1"
     clean-jsdoc-theme: "npm:^4.3.0"
     clsx: "npm:^2.1.1"
@@ -12755,6 +12796,25 @@ __metadata:
   version: 3.0.0
   resolution: "chownr@npm:3.0.0"
   checksum: 10c0/43925b87700f7e3893296c8e9c56cc58f926411cce3a6e5898136daaf08f08b9a8eb76d37d3267e707d0dcc17aed2e2ebdf5848c0c3ce95cf910a919935c1b10
+  languageName: node
+  linkType: hard
+
+"chromatic@npm:^13.3.5":
+  version: 13.3.5
+  resolution: "chromatic@npm:13.3.5"
+  peerDependencies:
+    "@chromatic-com/cypress": ^0.*.* || ^1.0.0
+    "@chromatic-com/playwright": ^0.*.* || ^1.0.0
+  peerDependenciesMeta:
+    "@chromatic-com/cypress":
+      optional: true
+    "@chromatic-com/playwright":
+      optional: true
+  bin:
+    chroma: dist/bin.js
+    chromatic: dist/bin.js
+    chromatic-cli: dist/bin.js
+  checksum: 10c0/58b3d7984db000f8c7b605788569a24c3f3cd41bb6b2d3a94f18acc9ff11ce6c6881f795c8390a94ff721ccfcf8a2d7942e78a54a1f70294a7b3d35ccc382154
   languageName: node
   linkType: hard
 
@@ -14596,6 +14656,13 @@ __metadata:
     iterator.prototype: "npm:^1.1.5"
     safe-array-concat: "npm:^1.1.3"
   checksum: 10c0/1ced8abf845a45e660dd77b5f3a64358421df70e4a0bd1897d5ddfefffed8409a6a2ca21241b9367e639df9eca74abc1c678b3020bffe6bee1f1826393658ddb
+  languageName: node
+  linkType: hard
+
+"es-module-lexer@npm:^0.9.3":
+  version: 0.9.3
+  resolution: "es-module-lexer@npm:0.9.3"
+  checksum: 10c0/be77d73aee709fdc68d22b9938da81dfee3bc45e8d601629258643fe5bfdab253d6e2540035e035cfa8cf52a96366c1c19b46bcc23b4507b1d44e5907d2e7f6c
   languageName: node
   linkType: hard
 
@@ -24439,6 +24506,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"rollup@npm:^2.25.0 || ^3.3.0, rollup@npm:^3.27.1":
+  version: 3.29.5
+  resolution: "rollup@npm:3.29.5"
+  dependencies:
+    fsevents: "npm:~2.3.2"
+  dependenciesMeta:
+    fsevents:
+      optional: true
+  bin:
+    rollup: dist/bin/rollup
+  checksum: 10c0/a1fa26f21f0d6cf93b6d05ea284ad5854905b585f28a14c27d439b0f9b859cba13ea25f376303d86770e59b4686bedc52b4706e57442514f0414c6fd3c5b8e71
+  languageName: node
+  linkType: hard
+
 "rollup@npm:^2.79.2":
   version: 2.79.2
   resolution: "rollup@npm:2.79.2"
@@ -24450,20 +24531,6 @@ __metadata:
   bin:
     rollup: dist/bin/rollup
   checksum: 10c0/bc3746c988d903c2211266ddc539379d53d92689b9cc5c2b4e3ae161689de9af491957a567c629b6cc81f48d0928a7591fc4c383fba68a48d2966c9fb8a2bce9
-  languageName: node
-  linkType: hard
-
-"rollup@npm:^3.27.1":
-  version: 3.29.5
-  resolution: "rollup@npm:3.29.5"
-  dependencies:
-    fsevents: "npm:~2.3.2"
-  dependenciesMeta:
-    fsevents:
-      optional: true
-  bin:
-    rollup: dist/bin/rollup
-  checksum: 10c0/a1fa26f21f0d6cf93b6d05ea284ad5854905b585f28a14c27d439b0f9b859cba13ea25f376303d86770e59b4686bedc52b4706e57442514f0414c6fd3c5b8e71
   languageName: node
   linkType: hard
 
@@ -26894,18 +26961,6 @@ __metadata:
     acorn: "npm:^8.14.0"
     webpack-virtual-modules: "npm:^0.6.2"
   checksum: 10c0/dd5f8c5727d0135847da73cf03fb199107f1acf458167034886fda3405737dab871ad3926431b4f70e1e82cdac482ac1383cea4019d782a68515c8e3e611b6cc
-  languageName: node
-  linkType: hard
-
-"unplugin@npm:^2.3.5":
-  version: 2.3.11
-  resolution: "unplugin@npm:2.3.11"
-  dependencies:
-    "@jridgewell/remapping": "npm:^2.3.5"
-    acorn: "npm:^8.15.0"
-    picomatch: "npm:^4.0.3"
-    webpack-virtual-modules: "npm:^0.6.2"
-  checksum: 10c0/273c1eab0eca4470c7317428689295c31dbe8ab0b306504de9f03cd20c156debb4131bef24b27ac615862958c5dd950a3951d26c0723ea774652ab3624149cff
   languageName: node
   linkType: hard
 

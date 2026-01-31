@@ -15,6 +15,8 @@ import time
 from concurrent.futures import ThreadPoolExecutor
 from collections import deque
 from typing import Dict, Any, List, Optional
+import sentry_sdk
+
 
 # --- Configuration & Logging ---
 
@@ -35,6 +37,17 @@ logging.basicConfig(
     handlers=[logging.FileHandler('/tmp/mcp-flash-sidekick.log')]
 )
 logger = logging.getLogger("FlashSidekick")
+
+# Initialize Sentry
+if os.getenv("SENTRY_DSN"):
+    sentry_sdk.init(
+        dsn=os.getenv("SENTRY_DSN"),
+        send_default_pii=True,
+        traces_sample_rate=1.0,
+        profiles_sample_rate=1.0,
+        environment=os.getenv("ENV", "development"),
+    )
+    logger.info("Sentry SDK initialized")
 
 # Lazy Loading Infrastructure
 _genai = None
@@ -333,6 +346,11 @@ class AsyncFlashSidekickServer:
                 "name": "generate_integration_tests",
                 "description": "Generate E2E/Integration test scaffolding.",
                 "inputSchema": {"type": "object", "properties": {"code": {"type": "string"}}, "required": ["code"]}
+            },
+            {
+                "name": "trigger_error",
+                "description": "Intentional error to verify Sentry integration.",
+                "inputSchema": {"type": "object", "properties": {}}
             }
         ]
 
@@ -427,6 +445,11 @@ class AsyncFlashSidekickServer:
 
         elif name == "generate_integration_tests":
             content = await self._call_gemini_async("pro", args.get("code",""), f"Generate E2E integration test scenarios.{rules}")
+
+        elif name == "trigger_error":
+            logger.error("Triggering intentional ZeroDivisionError for Sentry verification")
+            division_by_zero = 1 / 0
+            content = "This should not be reached"
 
         else:
             return []
