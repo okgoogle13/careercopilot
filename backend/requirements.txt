@@ -575,4 +575,4 @@ zipp==3.23.0
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools
 duckduckgo-search==5.3.0
-sentry-sdk[fastapi]
+sentry-sdk[fastapi]==2.51.0
