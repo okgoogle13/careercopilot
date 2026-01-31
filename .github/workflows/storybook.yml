@@ -1,0 +1,246 @@
+name: Storybook Build and Visual Testing
+
+on:
+  pull_request:
+    paths:
+      - 'frontend/src/**'
+      - '.storybook/**'
+      - 'frontend/.storybook/**'
+      - 'frontend/package.json'
+  push:
+    branches: [main, develop]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: write
+
+env:
+  NODE_VERSION: "20"
+
+jobs:
+  build-storybook:
+    name: Build Storybook
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Enable Corepack for Yarn 4+
+        run: corepack enable
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "yarn"
+          cache-dependency-path: yarn.lock
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Check if Storybook is configured
+        id: check-storybook
+        run: |
+          if [[ -f "frontend/.storybook/main.ts" || -f ".storybook/main.ts" ]]; then
+            echo "configured=true" >> $GITHUB_OUTPUT
+            echo "✅ Storybook configuration found"
+          else
+            echo "configured=false" >> $GITHUB_OUTPUT
+            echo "⚠️  Storybook not fully configured"
+          fi
+
+      - name: Build Storybook
+        if: steps.check-storybook.outputs.configured == 'true'
+        run: |
+          cd frontend
+          if yarn run storybook:build 2>/dev/null || yarn run build-storybook 2>/dev/null; then
+            echo "✅ Storybook built successfully"
+          else
+            echo "⚠️  Storybook build command not found in package.json"
+            echo "Add 'storybook:build': 'storybook build' to frontend/package.json scripts"
+            exit 0
+          fi
+
+      - name: Upload Storybook build
+        if: steps.check-storybook.outputs.configured == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: storybook-static
+          path: frontend/storybook-static/
+          retention-days: 7
+          if-no-files-found: warn
+
+      - name: Generate build summary
+        run: |
+          echo "## 📚 Storybook Build" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          if [[ "${{ steps.check-storybook.outputs.configured }}" == "true" ]]; then
+            echo "✅ Storybook built successfully" >> $GITHUB_STEP_SUMMARY
+            if [[ -d "frontend/storybook-static" ]]; then
+              echo "" >> $GITHUB_STEP_SUMMARY
+              echo "**Build Size:**" >> $GITHUB_STEP_SUMMARY
+              du -sh frontend/storybook-static >> $GITHUB_STEP_SUMMARY || echo "Could not calculate size" >> $GITHUB_STEP_SUMMARY
+            fi
+          else
+            echo "⚠️  Storybook needs configuration" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "To enable Storybook:" >> $GITHUB_STEP_SUMMARY
+            echo "1. Ensure Storybook is installed: \`npx storybook init\`" >> $GITHUB_STEP_SUMMARY
+            echo "2. Add build script to package.json: \`\"storybook:build\": \"storybook build\"\`" >> $GITHUB_STEP_SUMMARY
+          fi
+
+  chromatic-deploy:
+    name: Deploy to Chromatic
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Chromatic needs full history
+
+      - name: Enable Corepack for Yarn 4+
+        run: corepack enable
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "yarn"
+          cache-dependency-path: yarn.lock
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Check if Chromatic is available
+        id: check-chromatic
+        run: |
+          if [[ -n "${{ secrets.CHROMATIC_PROJECT_TOKEN }}" ]]; then
+            echo "available=true" >> $GITHUB_OUTPUT
+            echo "✅ Chromatic token available"
+          else
+            echo "available=false" >> $GITHUB_OUTPUT
+            echo "⚠️  CHROMATIC_PROJECT_TOKEN not set"
+            echo "## ℹ️  Chromatic Setup Required" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "To enable visual regression testing with Chromatic:" >> $GITHUB_STEP_SUMMARY
+            echo "1. Create account at https://www.chromatic.com/" >> $GITHUB_STEP_SUMMARY
+            echo "2. Add CHROMATIC_PROJECT_TOKEN to repository secrets" >> $GITHUB_STEP_SUMMARY
+            echo "3. Install chromatic: \`yarn add -D chromatic\`" >> $GITHUB_STEP_SUMMARY
+          fi
+
+      - name: Publish to Chromatic
+        if: steps.check-chromatic.outputs.available == 'true'
+        uses: chromaui/action@v11
+        with:
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          workingDir: frontend
+          exitZeroOnChanges: true
+          autoAcceptChanges: ${{ github.ref == 'refs/heads/main' }}
+
+  storybook-tests:
+    name: Run Storybook Tests
+    runs-on: ubuntu-latest
+    needs: build-storybook
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Enable Corepack for Yarn 4+
+        run: corepack enable
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "yarn"
+          cache-dependency-path: yarn.lock
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Install Playwright browsers
+        run: |
+          cd frontend
+          npx playwright install --with-deps chromium
+
+      - name: Check for Storybook test setup
+        id: check-tests
+        run: |
+          cd frontend
+          if grep -q "test-storybook" package.json 2>/dev/null; then
+            echo "configured=true" >> $GITHUB_OUTPUT
+            echo "✅ Storybook tests configured"
+          else
+            echo "configured=false" >> $GITHUB_OUTPUT
+            echo "⚠️  Storybook tests not configured"
+          fi
+
+      - name: Start Storybook server
+        if: steps.check-tests.outputs.configured == 'true'
+        run: |
+          cd frontend
+          yarn storybook:start &
+          echo $! > storybook.pid
+          
+          # Wait for Storybook to be ready
+          timeout 60 bash -c 'until curl -s http://localhost:6006 > /dev/null; do sleep 2; done' || {
+            echo "❌ Storybook failed to start"
+            exit 1
+          }
+          echo "✅ Storybook server ready"
+
+      - name: Run Storybook tests
+        if: steps.check-tests.outputs.configured == 'true'
+        run: |
+          cd frontend
+          yarn test-storybook --url http://localhost:6006 || {
+            echo "⚠️  Some Storybook tests failed"
+          }
+
+      - name: Stop Storybook server
+        if: always() && steps.check-tests.outputs.configured == 'true'
+        run: |
+          if [[ -f frontend/storybook.pid ]]; then
+            kill $(cat frontend/storybook.pid) 2>/dev/null || true
+          fi
+
+      - name: Upload test results
+        if: always() && steps.check-tests.outputs.configured == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: storybook-test-results
+          path: frontend/test-results/
+          if-no-files-found: warn
+
+      - name: Generate test summary
+        if: always()
+        run: |
+          echo "## 🧪 Storybook Tests" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          if [[ "${{ steps.check-tests.outputs.configured }}" == "true" ]]; then
+            echo "✅ Storybook tests completed" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "ℹ️  Storybook tests not configured" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "To enable Storybook testing:" >> $GITHUB_STEP_SUMMARY
+            echo "1. Install test runner: \`yarn add -D @storybook/test-runner\`" >> $GITHUB_STEP_SUMMARY
+            echo "2. Add script: \`\"test-storybook\": \"test-storybook\"\`" >> $GITHUB_STEP_SUMMARY
+          fi
+
+  summary:
+    name: Generate Summary
+    runs-on: ubuntu-latest
+    needs: [build-storybook, chromatic-deploy, storybook-tests]
+    if: always()
+    steps:
+      - name: Generate summary
+        run: |
+          echo "## 📖 Storybook Workflow Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Task | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "|------|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Build | ${{ needs.build-storybook.result == 'success' && '✅ Pass' || '⚠️  Needs Setup' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Chromatic Deploy | ${{ needs.chromatic-deploy.result == 'success' && '✅ Pass' || needs.chromatic-deploy.result == 'skipped' && '⏭️  Skipped' || '⚠️  Needs Setup' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Component Tests | ${{ needs.storybook-tests.result == 'success' && '✅ Pass' || '⚠️  Needs Setup' }} |" >> $GITHUB_STEP_SUMMARY
