@@ -1,6 +1,6 @@
 # M3 Anti-Slop Validator
 
-**Purpose:** Detect and prevent generic "AI slop" aesthetics (Inter, Roboto, purple gradients, flat layouts, predictable patterns).
+**Purpose:** Detect and prevent generic "AI slop" aesthetics (purple gradients, flat layouts, predictable patterns).
 
 **Input:** Component file path + design tokens + aesthetic preferences
 **Output:** Validation report with aesthetic quality score and remediation recommendations
