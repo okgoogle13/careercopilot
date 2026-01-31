@@ -12672,7 +12672,7 @@ __metadata:
     react-dropzone: "npm:^14.2.3"
     react-helmet-async: "npm:^2.0.4"
     react-hook-form: "npm:^7.69.0"
-    react-is: "npm:^19.2.3"
+    react-is: "npm:^18.3.1"
     react-resizable-panels: "npm:^2.1.9"
     react-router-dom: "npm:^6.23.1"
     recharts: "npm:^3.6.0"
@@ -23694,7 +23694,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-is@npm:^19.0.0, react-is@npm:^19.2.3":
+"react-is@npm:^19.0.0":
   version: 19.2.4
   resolution: "react-is@npm:19.2.4"
   checksum: 10c0/477a7cfc900f24194606e315fa353856a3a13487ea8eca841678817cad4daef64339ea0d1e84e58459fc75dbe0d9ba00bb0cc626db3d07e0cf31edc64cb4fa37
