@@ -2,7 +2,7 @@
 """
 MCP Design System Sidekick - Northcote Curio Validation & Asset Orchestration
 
-Specialized MCP server bridging Claude Desktop's creative direction with 
+Specialized MCP server bridging Claude Desktop's creative direction with
 programmatic asset validation and implementation synthesis.
 """
 
@@ -14,6 +14,7 @@ import json
 import os
 import sys
 import logging
+import sentry_sdk
 
 try:
     from dotenv import load_dotenv
@@ -30,11 +31,20 @@ logging.basicConfig(
 )
 logger = logging.getLogger("DesignSystemSidekick")
 
+# Initialize Sentry
+if os.getenv("SENTRY_DSN"):
+    sentry_sdk.init(
+        dsn=os.getenv("SENTRY_DSN"),
+        send_default_pii=True,
+        environment=os.getenv("ENV", "development"),
+    )
+    logger.info("Sentry SDK initialized")
+
 class DesignSystemSidekickServer:
     def __init__(self):
         self.gemini_key = os.getenv("GEMINI_API_KEY", "")
         logger.info("Design System Sidekick initialized")
-        
+
     def list_tools(self):
         return [
             {
@@ -62,7 +72,7 @@ class DesignSystemSidekickServer:
                 }
             }
         ]
-    
+
     async def call_tool(self, name, args):
         result = {
             "tool": name,
@@ -76,7 +86,7 @@ async def handle_request(server, line):
     try:
         req = json.loads(line)
         resp = {"jsonrpc": "2.0", "id": req.get("id")}
-        
+
         if req.get("method") == "initialize":
             resp["result"] = {
                 "protocolVersion": "2024-11-05",
@@ -102,12 +112,12 @@ async def main():
     server = DesignSystemSidekickServer()
     logger.info("Server started")
     loop = asyncio.get_event_loop()
-    
+
     while True:
         try:
             line = await loop.run_in_executor(None, sys.stdin.readline)
             if not line: break
-            
+
             resp = await handle_request(server, line)
             if resp:
                 print(json.dumps(resp))
