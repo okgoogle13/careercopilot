@@ -1,32 +1,32 @@
+import { AnimatePresence, motion } from 'framer-motion';
 import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
   Navigate,
   Outlet,
+  Route,
+  BrowserRouter as Router,
+  Routes,
   useLocation,
 } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
 import { Toaster } from 'sonner';
-import { Layout } from './layouts/Layout';
+import texturePattern from './assets/images/texture-pattern.png';
+import { useAuth } from './context/AuthContext';
+import { AssetLibrary } from './features/analysis/AssetLibrary';
+import { ApplicationTracker } from './features/applications/ApplicationTracker';
 import { Login } from './features/auth/Login';
 import { Register } from './features/auth/Register';
 import { Dashboard } from './features/dashboard/Dashboard';
-import { ApplicationTracker } from './features/applications/ApplicationTracker';
 import { Documents } from './features/documents/Documents';
-import { Opportunities } from './features/opportunities/Opportunities';
 import { KSCGenerator } from './features/ksc-generator/KSCGenerator';
-import { StyleGuide } from './features/style-guide/StyleGuide';
-import { Settings } from './features/settings/Settings';
 import { LandingPage } from './features/landing/LandingPage';
-import { ProfileView } from './features/profile/components/ProfileView';
-import { AssetLibrary } from './features/analysis/AssetLibrary';
 import { NotFound } from './features/not-found/NotFound';
+import { Opportunities } from './features/opportunities/Opportunities';
+import { ProfileView } from './features/profile/components/ProfileView';
+import { Settings } from './features/settings/Settings';
+import { StyleGuide } from './features/style-guide/StyleGuide';
+import { Layout } from './layouts/Layout';
+import { AnalysisPage } from './pages/AnalysisPage';
 import { IngestionPage } from './pages/IngestionPage';
 import { JobQueue } from './pages/JobQueue';
-import { AnalysisPage } from './pages/AnalysisPage';
-import { useAuth } from './context/AuthContext';
-import texturePattern from './assets/images/texture-pattern.png';
 
 // Protected Layout with animations
 const ProtectedLayout = () => {
@@ -90,6 +90,29 @@ const PublicLayout = () => {
         }}
       />
       <div className="relative z-10">
+        {/* Temporary Sentry Test Button */}
+        {import.meta.env.DEV && (
+          <button
+            onClick={() => {
+              throw new Error('Sentry Frontend Test Error');
+            }}
+            style={{
+              position: 'fixed',
+              bottom: '20px',
+              right: '20px',
+              padding: '10px',
+              background: '#D0BCFE',
+              color: '#381E72',
+              borderRadius: '8px',
+              zIndex: 9999,
+              cursor: 'pointer',
+              fontWeight: 'bold',
+              border: 'none',
+            }}
+          >
+            Trigger Sentry Error
+          </button>
+        )}
         <Outlet />
       </div>
     </div>
