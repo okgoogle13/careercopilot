@@ -1,11 +1,11 @@
-import { Meta, Story, Canvas } from '@storybook/addon-docs';
+import { Meta, Story, Canvas } from '@storybook/blocks';
 import { useState } from 'react';
 import { Button, Box, Stack, Typography } from '@mui/material';
 import { Toast } from '../components/ui/feedback/Toast';
 import { ToastProvider, useToast } from '../components/ui/feedback/ToastContext';
 
-<Meta 
-  title="Components/Feedback/Toast" 
+<Meta
+  title="Components/Feedback/Toast"
   component={Toast}
   parameters={{
     layout: 'centered',
@@ -32,8 +32,8 @@ function Example() {
   return (
     <>
       <Button onClick={() => setOpen(true)}>Show Toast</Button>
-      <Toast 
-        open={open} 
+      <Toast
+        open={open}
         onClose={() => setOpen(false)}
         message="This is a toast message"
       />
@@ -51,7 +51,7 @@ function Example() {
     {() => {
       const [open, setOpen] = useState(false);
       const [severity, setSeverity] = useState('info');
-      
+
       const showToast = (type) => {
         setSeverity(type);
         setOpen(true);
@@ -93,7 +93,7 @@ function Example() {
     {() => {
       const [open, setOpen] = useState(false);
       const [position, setPosition] = useState('bottom-center');
-      
+
       const positions = {
         'top-left': { vertical: 'top', horizontal: 'left' },
         'top-center': { vertical: 'top', horizontal: 'center' },
@@ -107,7 +107,7 @@ function Example() {
         <Stack spacing={3}>
           <Stack direction="row" spacing={2} flexWrap="wrap" gap={1}>
             {Object.entries(positions).map(([key, value]) => (
-              <Button 
+              <Button
                 key={key}
                 variant="outlined"
                 onClick={() => {
@@ -138,7 +138,7 @@ function Example() {
   <Story name="With Actions">
     {() => {
       const [open, setOpen] = useState(false);
-      
+
       const handleAction = () => {
         alert('Action clicked!');
         setOpen(false);
@@ -154,8 +154,8 @@ function Example() {
             onClose={() => setOpen(false)}
             message="Item moved to trash"
             action={
-              <Button 
-                color="inherit" 
+              <Button
+                color="inherit"
                 size="small"
                 onClick={handleAction}
               >
