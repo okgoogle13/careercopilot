@@ -181,6 +181,10 @@ export default function App() {
             element={<KSCGenerator />}
           />
           <Route
+            path="/cover-letter-generator"
+            element={<CoverLetterGenerator />}
+          />
+          <Route
             path="/settings"
             element={<Settings />}
           />
