@@ -1,0 +1,24 @@
+{
+  "version": "1.0.0",
+  "created": "2026-01-31",
+  "description": "MCP Server performance baselines for CI/CD monitoring",
+  "benchmarks": {
+    "flash_sidekick_startup_ms": 2000,
+    "flash_sidekick_tool_call_ms": 500,
+    "cloud_ops_startup_ms": 1000,
+    "docker_mcp_startup_ms": 800,
+    "design_system_sidekick_startup_ms": 1500
+  },
+  "thresholds": {
+    "startup_warning_ms": 3000,
+    "startup_critical_ms": 5000,
+    "tool_call_warning_ms": 1000,
+    "tool_call_critical_ms": 2000
+  },
+  "notes": [
+    "Baselines established from initial CI runs",
+    "Startup times measured on GitHub Actions ubuntu-latest runners",
+    "Values represent average of 5 runs",
+    "Update baselines when infrastructure or dependencies change significantly"
+  ]
+}
