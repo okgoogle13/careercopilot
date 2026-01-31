@@ -174,6 +174,20 @@ _Victorian Day -> Cyberpunk Night._
 
 ---
 
+## Typography-Voice Alignment
+
+Typography tiers reinforce the voice tier system defined in [DOC-006](file:///Users/okgoogle13/Desktop/careercopilot/docs/archive/atomic-v2/DOC-006_Voice_and_Microcopy.md):
+
+| Typography Tier           | Font                      | Voice Tier                      | Copy Style                  |
+| :------------------------ | :------------------------ | :------------------------------ | :-------------------------- |
+| **Workhorse (Lora)**      | Primary body/UI           | Tier 1 (Functional)             | Clear, direct labels        |
+| **Expressive (Fraunces)** | Display headers           | Tier 2-3 (Contextual/Character) | Playful, Victorian          |
+| **Accent (Script/Color)** | Annotations, celebrations | Tier 3 (Character)              | Flourishes, "human" touches |
+
+**Rule**: If the typography is Workhorse (Lora/Work Sans), the copy should be Tier 1 (functional). Personality flourishes belong with Expressive typography.
+
+---
+
 ## Checklist for Implementation
 
 1.  **Load Variable Files**: Ensure `Fraunces[SOFT,WONK,opsz,wght].woff2` and `Lora[wght].woff2` are loaded.

@@ -1,10 +1,9 @@
-import type { Preview } from '@storybook/react';
 import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
+import type { Preview } from '@storybook/react';
 import { BrowserRouter } from 'react-router-dom';
-import { CssBaseline, ThemeProvider } from '@mui/material';
 import { AuthProvider } from '../src/context/AuthContext';
-import theme from '../src/theme/theme';
 import '../src/index.css';
+import '../src/theme/northcote.css';
 
 const preview: Preview = {
   parameters: {
@@ -48,19 +47,19 @@ const preview: Preview = {
     (Story) => (
       <BrowserRouter>
         <AuthProvider>
-          <ThemeProvider theme={theme}>
-            <CssBaseline />
-            <div style={{
+          <div
+            style={{
               backgroundColor: '#121212',
               minHeight: '100vh',
-              padding: '20px'
-            }}>
-              <Story />
-            </div>
-          </ThemeProvider>
+              padding: '20px',
+              color: '#E6E1E5',
+            }}
+          >
+            <Story />
+          </div>
         </AuthProvider>
       </BrowserRouter>
-    )
+    ),
   ],
 };
 
