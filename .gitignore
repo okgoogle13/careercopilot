@@ -126,3 +126,4 @@ _archive_legacy/
 credentials.json
 # Archived Configs
 *.archived-*
+setup-ci-secrets.sh
