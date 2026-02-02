@@ -1,9 +1,11 @@
 import { LucideIcon } from 'lucide-react';
+import React from 'react';
 
 interface MetricCardProps {
   icon: LucideIcon;
   label: string;
   value: string | number;
+  annotation?: string;
   iconColor?: string;
   variant?: 'outlined' | 'filled';
   hoverable?: boolean;
@@ -11,53 +13,63 @@ interface MetricCardProps {
 }
 
 /**
- * MetricCard - M3 Compliant Metric Display Component
- * 
- * Displays key metrics with icon, label, and value in a compact card format.
- * Enhanced with M3 elevation and motion for visual hierarchy.
- * 
- * **M3 Design Token Usage:**
- * - Shape: `rounded-tech` (24px 4px 24px 20px) - Precision aesthetic
- * - Elevation: `shadow-elevation-1` → `shadow-elevation-2` on hover
- * - Motion: M3 spring easing for smooth transitions
- * - Colors: Semantic surface tokens
- * - Typography: M3 display scale for values, mono font for data
+ * MetricCard - Northcote Curio V3.1 Metric Display Component
  */
 export function MetricCard({
   icon: Icon,
   label,
   value,
-  iconColor = 'text-primary',
+  annotation,
+  iconColor = 'text-[var(--color-wattle-gold)]',
   variant = 'outlined',
   hoverable = true,
   className = '',
 }: MetricCardProps) {
-  const elevationClasses = hoverable
-    ? 'shadow-elevation-1 hover:shadow-elevation-2 hover:-translate-y-1'
-    : '';
+  const [isHovered, setIsHovered] = React.useState(false);
+
+  const cardStyle: React.CSSProperties = {
+    borderRadius: 'var(--radius-stone)',
+    padding: 'var(--spacing-lg)',
+    backgroundColor: variant === 'filled' ? 'var(--color-specimen-night)' : 'transparent',
+    border: '1px solid rgba(240, 234, 214, 0.1)',
+    transition: 'all var(--duration-standard) var(--ease-viscous-breeze)',
+    boxShadow: isHovered && hoverable ? 'var(--shadow-standard)' : 'var(--shadow-subtle)',
+    transform: isHovered && hoverable ? 'translateY(-4px)' : 'none',
+  };
 
   return (
     <div
-      className={`
-      rounded-tech p-6
-      ${variant === 'outlined'
-          ? 'bg-transparent border border-outline'
-          : 'bg-surface-container'
-        }
-      ${elevationClasses}
-      transition-all duration-medium-1 ease-spring
-      ${className}
-    `}
+      style={cardStyle}
+      className={`relative overflow-hidden ${className}`}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="flex items-center gap-3 mb-3">
-        <div className="w-10 h-10 bg-surface-container-high rounded-full flex items-center justify-center">
-          <Icon className={`w-5 h-5 ${iconColor}`} />
+      <div
+        className="absolute inset-0 opacity-[0.02] pointer-events-none"
+        style={{ backgroundImage: 'radial-gradient(var(--color-parchment) 1px, transparent 1px)', backgroundSize: '12px 12px' }}
+      />
+
+      <div className="relative z-10">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center border border-white/10">
+            <Icon className={`w-5 h-5 ${iconColor}`} />
+          </div>
+          <span className="text-[0.7rem] font-annotation font-medium tracking-widest uppercase opacity-70">
+            {label}
+          </span>
         </div>
-        <span className="text-on-surface-variant uppercase tracking-[0.04em] text-[0.7rem] font-mono">
-          {label}
-        </span>
+
+        <div className="flex items-baseline gap-2">
+          <p className="text-3xl font-annotation font-black text-on-surface shadow-layered-wattle">
+            {value}
+          </p>
+          {annotation && (
+            <span className="text-curator-annotation rotate-quirky-ccw text-xs transform -translate-y-2 translate-x-1">
+              {annotation}
+            </span>
+          )}
+        </div>
       </div>
-      <p className="text-display-small text-on-surface font-mono tabular-nums">{value}</p>
     </div>
   );
 }

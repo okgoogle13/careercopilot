@@ -329,12 +329,21 @@ class Application(Base):
         index=True,
         comment="Reference to the user who owns this application",
     )
-    job_id: Mapped[str] = mapped_column(
+    job_id: Mapped[Optional[str]] = mapped_column(
         String(36),
         ForeignKey("jobs.id", ondelete="CASCADE"),
-        nullable=False,
+        nullable=True,
         index=True,
-        comment="Reference to the job being applied to",
+        comment="Reference to the job being applied to (if exists)",
+    )
+    job_title: Mapped[Optional[str]] = mapped_column(
+        String(255), nullable=True, comment="Job title (for manual entries)"
+    )
+    company_name: Mapped[Optional[str]] = mapped_column(
+        String(255), nullable=True, comment="Company name (for manual entries)"
+    )
+    job_description: Mapped[Optional[str]] = mapped_column(
+        Text, nullable=True, comment="Job description (for manual entries)"
     )
     status: Mapped[str] = mapped_column(
         String(50),

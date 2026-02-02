@@ -1,0 +1,56 @@
+{
+  "project": "Northcote Curio Design System",
+  "version": "1.0",
+  "last_audit": "2026-02-01",
+  "assets": {
+    "backgrounds": {
+      "asset_01_wallpaper": {
+        "status": "READY",
+        "file": "wallpaper_master.png",
+        "desc": "The Curio Wallpaper (Gallery Master)",
+        "source": "Gemini Asset 1"
+      },
+      "asset_03_parchment": {
+        "status": "READY",
+        "file": "parchment_master.png",
+        "desc": "Laboratory Grid Texture",
+        "source": "Gemini Asset 3"
+      }
+    },
+    "botanicals": {
+      "asset_02_kookaburra": {
+        "status": "READY",
+        "file": "kookaburra_master.png",
+        "desc": "The Sentry Kookaburra (Mascot)",
+        "source": "Archive (94/100)"
+      },
+      "asset_04_wattle": {
+        "status": "MISSING",
+        "desc": "Wattle Branch Base",
+        "source": "Claude Archive (90/100)"
+      },
+      "asset_09_waratah": {
+        "status": "READY",
+        "file": "waratah_hero_master.png",
+        "desc": "Waratah Hero Closeup",
+        "source": "Claude Archive (92/100)"
+      }
+    },
+    "icons": {
+      "asset_07_navigators": {
+        "status": "READY",
+        "file": "navigators_master.png",
+        "desc": "Compass, Loupe, Caliper",
+        "source": "Gemini Asset 7"
+      }
+    },
+    "ui": {
+      "asset_06_spinner": {
+        "status": "READY",
+        "file": "banksia_spinner_master.png",
+        "desc": "Banksia Geometric Spinner",
+        "source": "Gemini Asset 6"
+      }
+    }
+  }
+}

@@ -1,8 +1,8 @@
-import { Lightbulb, ArrowRight } from 'lucide-react';
+import { ArrowRight, Lightbulb } from 'lucide-react';
 import type { QuantifierSuggestion } from '../../hooks/useAnalysis';
 
 interface ImpactEnhancementsProps {
-    suggestions: QuantifierSuggestion[];
+  suggestions: QuantifierSuggestion[];
 }
 
 /**
@@ -10,84 +10,84 @@ interface ImpactEnhancementsProps {
  * Displays Google XYZ Formula rewrites with contextual explanations
  */
 export function ImpactEnhancements({ suggestions }: ImpactEnhancementsProps) {
-    if (suggestions.length === 0) {
-        return null;
-    }
+  if (suggestions.length === 0) {
+    return null;
+  }
 
-    return (
-        <div className="bg-surface-container rounded-tech p-8 border border-outline-variant shadow-elevation-1">
-            <div className="flex items-center gap-3 mb-6">
-                <Lightbulb className="w-6 h-6 text-tertiary" />
-                <h2 className="text-title-large font-bold text-on-surface">
-                    Impact Enhancements
-                </h2>
+  return (
+    <div className="bg-[var(--color-specimen-night-light)] rounded-stone p-8 border border-white/10 shadow-elevation-1">
+      <div className="flex items-center gap-3 mb-6">
+        <Lightbulb className="w-6 h-6 text-[var(--color-wattle-gold)]" />
+        <h2 className="text-3xl font-bloom text-[var(--color-parchment)]">Impact Enhancements</h2>
+      </div>
+
+      <p className="text-field-note text-[var(--color-flannel-flower-dark)] mb-6">
+        Strategic rewrites using the <strong>Google XYZ Formula</strong>: Accomplished [X] as
+        measured by [Y], by doing [Z]
+      </p>
+
+      <div className="space-y-6">
+        {suggestions.map((suggestion, index) => (
+          <div
+            key={index}
+            className="bg-[var(--color-specimen-night-dark)] rounded-pebble p-6 border border-white/5"
+          >
+            {/* Original Text */}
+            <div className="mb-4">
+              <span className="text-[10px] text-[var(--color-flannel-flower-dark)] uppercase tracking-widest font-annotation">
+                Original
+              </span>
+              <p className="text-[15px] text-[var(--color-flannel-flower-dark)] line-through opacity-60 mt-1">
+                &ldquo;{suggestion.original}&rdquo;
+              </p>
             </div>
 
-            <p className="text-body-medium text-on-surface-variant mb-6">
-                Strategic rewrites using the <strong>Google XYZ Formula</strong>: Accomplished [X] as measured by [Y], by doing [Z]
-            </p>
-
-            <div className="space-y-6">
-                {suggestions.map((suggestion, index) => (
-                    <div
-                        key={index}
-                        className="bg-surface-container-low rounded-pebble p-6 border border-outline"
-                    >
-                        {/* Original Text */}
-                        <div className="mb-4">
-                            <span className="text-label-small text-on-surface-variant uppercase tracking-wider font-mono">
-                                Original
-                            </span>
-                            <p className="text-body-large text-on-surface-variant line-through opacity-60 mt-1">
-                                "{suggestion.original}"
-                            </p>
-                        </div>
-
-                        {/* Arrow Indicator */}
-                        <div className="flex items-center gap-2 mb-4">
-                            <ArrowRight className="w-5 h-5 text-primary" />
-                            <span className="text-label-medium text-primary font-bold">
-                                ENHANCED
-                            </span>
-                        </div>
-
-                        {/* Suggested Rewrite */}
-                        <div className="mb-4">
-                            <p className="text-body-large font-bold text-[#8A9A5B]">
-                                {suggestion.suggestion}
-                            </p>
-                        </div>
-
-                        {/* Contextual Why */}
-                        {suggestion.contextualWhy && (
-                            <div className="bg-tertiary-container/20 rounded-pebble p-4 border-l-4 border-tertiary">
-                                <span className="text-label-small text-on-tertiary-container uppercase tracking-wider font-bold">
-                                    💡 Why This Works:
-                                </span>
-                                <p className="text-body-medium text-on-tertiary-container mt-2">
-                                    {suggestion.contextualWhy}
-                                </p>
-                            </div>
-                        )}
-
-                        {/* Type Badge */}
-                        <div className="mt-4">
-                            <span
-                                className={`inline-flex px-3 py-1 rounded-pebble text-label-small font-bold ${suggestion.type === 'number'
-                                        ? 'bg-primary-container text-on-primary-container'
-                                        : suggestion.type === 'percentage'
-                                            ? 'bg-secondary-container text-on-secondary-container'
-                                            : suggestion.type === 'scale'
-                                                ? 'bg-tertiary-container text-on-tertiary-container'
-                                                : 'bg-error-container text-on-error-container'
-                                    }`}
-                            >
-                                {suggestion.type.toUpperCase()}
-                            </span>
-                        </div>
-                    </div>
-                ))}
+            {/* Arrow Indicator */}
+            <div className="flex items-center gap-2 mb-4">
+              <ArrowRight className="w-5 h-5 text-[var(--color-wattle-gold)]" />
+              <span className="text-[11px] text-[var(--color-wattle-gold)] font-bold tracking-tighter">
+                ENHANCED
+              </span>
             </div>
-        </div>
-    );
+
+            {/* Suggested Rewrite */}
+            <div className="mb-4">
+              <p className="text-lg font-bold text-[var(--color-parchment)] leading-relaxed">
+                {suggestion.suggestion}
+              </p>
+            </div>
+
+            {/* Contextual Why */}
+            {suggestion.contextualWhy && (
+              <div className="bg-[var(--color-eucalypt-smoke-base)]/20 rounded-pebble p-4 border-l-4 border-[var(--color-eucalypt-smoke-base)]">
+                <span className="text-[10px] text-[var(--color-flannel-flower)] uppercase tracking-wider font-bold">
+                  💡 Why This Works:
+                </span>
+                <p className="text-sm text-[var(--color-flannel-flower)]/80 mt-2 font-field-note">
+                  {suggestion.contextualWhy}
+                </p>
+              </div>
+            )}
+
+            {/* Type Badge */}
+            <div className="mt-4">
+              <span
+                className={`inline-flex px-3 py-1 rounded-full text-[10px] font-bold tracking-wider ${
+                  suggestion.type === 'number'
+                    ? 'bg-[var(--color-wattle-gold)]/10 text-[var(--color-wattle-gold)]'
+                    : suggestion.type === 'percentage'
+                      ? 'bg-blue-500/10 text-blue-400'
+                      : suggestion.type === 'scale'
+                        ? 'bg-purple-500/10 text-purple-400'
+                        : 'bg-[var(--color-waratah-crimson)]/10 text-[var(--color-waratah-crimson)]'
+                }`}
+              >
+                {suggestion.type.toUpperCase()}
+              </span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 }

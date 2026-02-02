@@ -10,7 +10,40 @@ import sys
 from pathlib import Path
 from typing import Any, Optional
 
-from loguru import logger
+try:
+    from loguru import logger
+except ImportError:  # pragma: no cover - optional dependency in test/CI
+    import logging
+
+    class _LoguruFallback:
+        def __init__(self):
+            self._logger = logging.getLogger("careercopilot")
+
+        def add(self, *args, **kwargs):
+            return None
+
+        def remove(self, *args, **kwargs):
+            return None
+
+        def bind(self, **kwargs):
+            return self
+
+        def debug(self, *args, **kwargs):
+            return self._logger.debug(*args, **kwargs)
+
+        def info(self, *args, **kwargs):
+            return self._logger.info(*args, **kwargs)
+
+        def warning(self, *args, **kwargs):
+            return self._logger.warning(*args, **kwargs)
+
+        def error(self, *args, **kwargs):
+            return self._logger.error(*args, **kwargs)
+
+        def exception(self, *args, **kwargs):
+            return self._logger.exception(*args, **kwargs)
+
+    logger = _LoguruFallback()
 
 
 def configure_loguru(

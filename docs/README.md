@@ -1,107 +1,77 @@
-🚀 CareerCopilot
+# CareerCopilot Documentation
 
-> An AI-powered platform to help you manage your career search, built with a modern web stack.
+> **Last updated**: 2026-01-31
 
-## 🏗️ Architecture
+---
 
-- Frontend: React 19, TypeScript, Vite, Tailwind CSS
-- Backend: Python, FastAPI, SQLAlchemy
-- Database: PostgreSQL
-- Cloud Functions: Firebase Functions
-- AI/ML: Google AI Platform
-- Infrastructure: Docker, Google Cloud Platform, Firebase
+## Quick Links
 
-## 📁 Project Structure
+| Category             | Entry Point                                    |
+| -------------------- | ---------------------------------------------- |
+| 🎨 **Design System** | [design/00-overview.md](design/00-overview.md) |
+| 🏗️ **Architecture**  | [architecture/](architecture/)                 |
+| 📖 **Guides**        | [guides/](guides/)                             |
+| 📊 **Reports**       | [reports/](reports/)                           |
+| 📁 **Archive**       | [\_archive/](_archive/)                        |
 
-The repository is organized as a monorepo with distinct packages for each part of the application.
-careercopilot/
-├── 📱 frontend/ # The React single-page application (Vite + React 19)
-├── 🐍 backend/ # The Python FastAPI server and database logic
-├── ⚡ functions/ # Serverless functions for background tasks
-├── 📚 docs/ # Project documentation
-└── 🛠️ scripts/ # Helper scripts for development
+---
 
-## 🚀 Quick Start
+## Design System (Northcote Curio)
 
-Prerequisites
+The visual and interaction language for CareerCopilot — a Victorian naturalist's field station.
 
-- Node.js (v18+) & Yarn (v4+)
-- Python (v3.12+) & Pip
-- Docker & Docker Compose
-- Firebase CLI & Google Cloud SDK
+| Doc                                      | Description                                   |
+| ---------------------------------------- | --------------------------------------------- |
+| [00-overview](design/00-overview.md)     | Master context, core directives, mode duality |
+| [01-tokens](design/01-tokens.md)         | Colors, radii, motion physics                 |
+| [02-typography](design/02-typography.md) | Font stack, variable axes, size contrast      |
+| [03-components](design/03-components.md) | Pebble, Stone, Lens, Seed patterns            |
+| [04-voice](design/04-voice.md)           | Microcopy, tier system, forbidden phrases     |
+| [05-assets](design/05-assets.md)         | Asset manifest, naming conventions            |
+| [06-wireframes](design/06-wireframes.md) | Page specifications for all 11 screens        |
 
-### Local Development Setup
+---
 
-1. **Clone the repository**:
+## Architecture
 
-   ```bash
-   git clone <your-repo-url>
-   cd careercopilot
-   ```
+| Doc                                                              | Description                   |
+| ---------------------------------------------------------------- | ----------------------------- |
+| [AGENT_SYSTEM_REFERENCE](architecture/AGENT_SYSTEM_REFERENCE.md) | AI agent configuration        |
+| [BACKEND_STRUCTURE](architecture/BACKEND_STRUCTURE.md)           | Backend services overview     |
+| [PROJECT_KNOWLEDGE_BASE](architecture/PROJECT_KNOWLEDGE_BASE.md) | Comprehensive project context |
 
-2. **Install frontend dependencies**:
+---
 
-   ```bash
-   cd frontend-v2
-   yarn install
-   ```
+## Project Management
 
-3. **Install backend dependencies**:
+| Location                           | Purpose                    |
+| ---------------------------------- | -------------------------- |
+| [project/active/](project/active/) | Current roadmaps and plans |
+| [project/weekly/](project/weekly/) | Weekly tracker logs        |
 
-   ```bash
-   cd ../backend
-   pip install -r requirements.txt
-   ```
+---
 
-4. **Set up environment variables**:
-   - Copy `.env.example` to `.env` in both frontend-v2 and backend directories
-   - Update the values as needed
+## Folder Structure
 
-5. **Launch services**:
+```
+docs/
+├── design/           # Northcote Curio design system (source of truth)
+├── architecture/     # System architecture
+├── guides/           # How-to guides
+├── project/          # Project management
+│   ├── active/       # Current plans
+│   └── weekly/       # Weekly logs
+├── reports/          # Generated test/audit reports
+└── _archive/         # Deprecated docs (date-prefixed)
+```
 
-   ```bash
-   # In one terminal (backend)
-   cd backend
-   uvicorn main:app --reload
+---
 
-   # In another terminal (frontend)
-   cd frontend-v2
-   yarn dev
-   ```
+## Naming Conventions
 
-6. **Access the applications**:
-   - Frontend: http://localhost:5173
-   - Backend API Docs: http://localhost:8000/docs
-
-## 🔧 Configuration
-
-Copy the example environment files and fill in your local configuration details.
-
-- Frontend: cp frontend/.env.example frontend/.env
-- Backend: cp backend/.env.example backend/.env
-
-## 🛠️ Tech Stack & Key Libraries
-
-Frontend
-
-- UI Framework: React 19
-- Styling: Tailwind CSS with Radix UI for accessible components
-- Build Tool: Vite
-- Routing: React Router
-- Forms: React Hook Form with Zod for validation
-- Testing: Jest, React Testing Library & Playwright
-  Backend
-- Framework: FastAPI for high-performance APIs
-- Database ORM: SQLAlchemy
-- Schema Migrations: Alembic
-- Authentication: Firebase Authentication
-- Data Validation: Pydantic
-- Testing: Pytest
-  Cloud Functions
-- Runtime: Firebase Functions v2 on Node.js 20
-- Language: TypeScript
-- Secrets Management: Firebase Secret Manager
-
-## 📄 License
-
-This is a private project and is not licensed for reuse or distribution.
+| Rule                               | Example                    |
+| ---------------------------------- | -------------------------- |
+| Lowercase kebab-case               | `design-tokens.md`         |
+| Numbered prefix for ordered docs   | `01-tokens.md`             |
+| Date prefix for temporal docs      | `2026-01-31_weekly-log.md` |
+| Underscore prefix for meta folders | `_archive/`                |

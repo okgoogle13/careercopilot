@@ -171,7 +171,7 @@ src/
 
 ```bash
 cd frontend
-npm run dev
+yarn dev
 # Navigate to: http://localhost:5173/electric-alchemist
 ```
 

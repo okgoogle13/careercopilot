@@ -239,7 +239,7 @@ As a personal branding strategist and career coach, analyze the consistency and 
 of this candidate's personal brand across their career materials.
 
 CONTENT TO ANALYZE:
-{json.dumps(content_sections, indent=2)}
+{json.dumps(content_sections, separators=(\',\', \':\'))}
 
 PERSONAL BRANDING ANALYSIS:
 1. Assess current brand strength and clarity

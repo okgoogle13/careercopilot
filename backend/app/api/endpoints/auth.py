@@ -11,8 +11,8 @@ from pydantic import BaseModel, EmailStr
 from sqlalchemy.orm import Session
 
 from app.core.auth import auth_manager, create_user_token, get_current_user, session_manager
+from app.models.user_asset import UserAsset
 from app.core.database import get_db
-from app.core.firebase import get_firestore
 from app.genkit_flows.smart_ingestion import voiceProfileExtractorFlow
 from app.models.asset_library_schema import AssetDocument, AssetMetadata, ContextTags
 from app.models.database import User
@@ -112,30 +112,21 @@ async def register_user(
                     user_id=user.id,
                 )
 
-                # Save to Firestore assetLibrary
-                db_firebase = get_firestore()
-                collection_ref = (
-                    db_firebase.collection("users").document(user.id).collection("assetLibrary")
+                # Save to PostgreSQL (Supabase) via SQLAlchemy
+                db_asset = UserAsset(
+                    user_id=user.id,
+                    document_type="voice",
+                    extracted_data=voice_profile.model_dump(mode="json"),
+                    role_type="General",
+                    subsectors=[],
+                    file_name="registration_writing_sample.txt",
+                    file_type="text/plain",
+                    storage_uri=f"registration/{user.id}/onboarding_voice_sample",
+                    file_size_bytes=len(combined_text),
+                    schema_version="v4"
                 )
-
-                asset_doc = AssetDocument(
-                    documentType="voice",
-                    extractedData=voice_profile.model_dump(mode="json"),
-                    tags=ContextTags(roleType="General", subsectors=[]),
-                    metadata=AssetMetadata(
-                        fileName="registration_writing_sample.txt",
-                        fileType="text/plain",
-                        uploadDate=datetime.now(),
-                        storageUri=f"registration/{user.id}/onboarding_voice_sample",
-                        fileSizeBytes=len(combined_text),
-                    ),
-                    schemaVersion="v4",
-                    createdAt=datetime.now(),
-                    updatedAt=datetime.now(),
-                    userId=user.id,
-                )
-
-                collection_ref.add(asset_doc.model_dump(mode="json"))
+                db.add(db_asset)
+                db.commit()
 
                 voice_profile_created = True
                 response.voice_profile_created = True
@@ -285,7 +276,7 @@ async def get_current_user_info(
 
 @router.post("/voice-profile", response_model=Dict[str, str])
 async def create_voice_profile(
-    documents: List[str], current_user: User = Depends(get_current_user)
+    documents: List[str], current_user: User = Depends(get_current_user), db: Session = Depends(get_db)
 ) -> Dict[str, str]:
     """
     Create or update voice profile for existing user using voiceProfileExtractorFlow.
@@ -309,30 +300,21 @@ async def create_voice_profile(
             user_id=current_user.id,
         )
 
-        # Save to Firestore assetLibrary
-        db_firebase = get_firestore()
-        collection_ref = (
-            db_firebase.collection("users").document(current_user.id).collection("assetLibrary")
+        # Save to PostgreSQL (Supabase) via SQLAlchemy
+        db_asset = UserAsset(
+            user_id=current_user.id,
+            document_type="voice",
+            extracted_data=voice_profile.model_dump(mode="json"),
+            role_type="General",
+            subsectors=[],
+            file_name="voice_profile_update.txt",
+            file_type="text/plain",
+            storage_uri=f"voice_profiles/{current_user.id}/update_{datetime.now().timestamp()}",
+            file_size_bytes=len(combined_text),
+            schema_version="v4"
         )
-
-        asset_doc = AssetDocument(
-            documentType="voice",
-            extractedData=voice_profile.model_dump(mode="json"),
-            tags=ContextTags(roleType="General", subsectors=[]),
-            metadata=AssetMetadata(
-                fileName="voice_profile_update.txt",
-                fileType="text/plain",
-                uploadDate=datetime.now(),
-                storageUri=f"voice_profiles/{current_user.id}/update_{datetime.now().timestamp()}",
-                fileSizeBytes=len(combined_text),
-            ),
-            schemaVersion="v4",
-            createdAt=datetime.now(),
-            updatedAt=datetime.now(),
-            userId=current_user.id,
-        )
-
-        collection_ref.add(asset_doc.model_dump(mode="json"))
+        db.add(db_asset)
+        db.commit()
 
         logger.info(f"Voice profile created successfully for user: {current_user.email}")
 

@@ -1,0 +1,164 @@
+FilePath,ExportedComponents,LOC,UsesTokens,HasStory,HasTests,ImportCount,LastCommit,CommitHash
+frontend/src/legacy/ui/form.tsx,,155,no,no,no,71,2026-01-20,389b02e251ab7db009dc8fe7ed8b225e8fd778d0
+frontend/src/components/ui/form.tsx,,155,no,no,no,71,2026-01-03,6ae77210604acfa92ae7e98fa0b5b9fbee09e104
+frontend/src/legacy/ui/button.tsx,,56,no,no,no,53,2026-01-20,389b02e251ab7db009dc8fe7ed8b225e8fd778d0
+frontend/src/components/ui/button.tsx,,56,no,yes,no,53,2025-12-25,db7e79f44bb3edf5df91c4afeab0a01ed435c365
+frontend/src/App.tsx,DefaultExport,188,no,no,no,45,2026-01-20,c3be1b4e640e37e829cd4dfca62e741f62f7bf14
+frontend/src/features/analysis/Analysis.tsx,Analysis,658,no,no,no,26,2025-12-27,dc3a7c2ec840bc2e7ac1aaba5bcd3bed17a93d2a
+frontend/src/main.tsx,,27,no,no,no,19,2026-01-21,6866600fb0551012c5442caf48a6c7921bb6787a
+frontend/src/features/settings/Settings.tsx,Settings,221,yes,no,no,18,2025-12-27,dc3a7c2ec840bc2e7ac1aaba5bcd3bed17a93d2a
+frontend/src/legacy/ui/M3Button.tsx,M3ButtonProps; M3IconButton; M3IconButtonProps,145,yes,no,no,15,2026-01-20,c3be1b4e640e37e829cd4dfca62e741f62f7bf14
+frontend/src/_archived/legacy-ui-20260122/M3Button.tsx,M3ButtonProps; M3IconButton; M3IconButtonProps,145,yes,no,no,15,2026-01-22,eaf3d6c6d27bb600544621df33d5c0ca3e51f53d
+frontend/src/components/ui/Pebble.tsx,M3Button; M3ButtonColor; M3IconButton; M3IconButtonProps; PebbleProps; PebbleSize; PebbleVariant,312,yes,no,no,15,2026-01-22,17c6dcce58b8ed95e955c66acc867f1655dcb262
+frontend/src/components/core/Pebble.tsx,Pebble; PebbleProps; PebbleSize; PebbleVariant,60,yes,no,no,15,2026-01-20,815c3fc48c2cc4397490b9c73c076f44bc794fde
+frontend/src/features/dashboard/Dashboard.tsx,Dashboard,223,no,no,no,14,2026-01-06,73a33a6941d09154b2c3692e02b19a9e4786076c
+frontend/src/features/documents/Documents.tsx,Document; DocumentTab; DocumentType; Documents,261,no,no,no,12,2025-12-25,8378febb4297676fba7cfaf84e90f1b2b0b99e14
+frontend/src/legacy/ui/M3Card.tsx,M3CardProps,94,yes,no,no,12,2026-01-20,389b02e251ab7db009dc8fe7ed8b225e8fd778d0
+frontend/src/legacy/ui/table.tsx,Table; TableBody; TableCaption; TableCell; TableFooter; TableHead; TableHeader; TableRow,52,no,no,no,12,2026-01-20,389b02e251ab7db009dc8fe7ed8b225e8fd778d0
+frontend/src/_archived/legacy-ui-20260122/M3Card.tsx,M3CardProps,94,yes,no,no,12,2026-01-22,eaf3d6c6d27bb600544621df33d5c0ca3e51f53d
+frontend/src/components/ui/table.tsx,Table; TableBody; TableCaption; TableCell; TableFooter; TableHead; TableHeader; TableRow,52,no,yes,no,12,2026-01-20,c3be1b4e640e37e829cd4dfca62e741f62f7bf14
+frontend/src/components/ui/NorthcoteButton.tsx,NorthcoteButton; NorthcoteButtonProps,171,yes,no,no,11,2026-01-22,987c88427052cfc33c30a9beab26d7c41a6c7fbd
+frontend/src/components/ui/Stone.tsx,M3Card; M3CardActions; M3CardActionsProps; M3CardContent; M3CardContentProps; M3CardElevation; M3CardHeader; M3CardHeaderProps; M3CardPadding; StoneProps; StoneVariant,230,yes,no,no,10,2026-01-22,17c6dcce58b8ed95e955c66acc867f1655dcb262
+frontend/src/components/ui/StatusBadge/StatusBadge.tsx,StatusBadge; StatusBadgeMode; StatusBadgeProps; StatusBadgeVariant,111,yes,no,yes,10,2026-01-21,6866600fb0551012c5442caf48a6c7921bb6787a
+frontend/src/components/core/Stone.tsx,Stone; StoneElevation; StoneMode; StoneProps,47,yes,no,no,10,2026-01-20,815c3fc48c2cc4397490b9c73c076f44bc794fde
+frontend/src/context/AuthContext.tsx,AuthContext; AuthProvider,101,no,no,yes,9,2026-01-19,89bb9f9ea1259958bd779b7959720add7c9d9e6c
+frontend/src/features/analysis/MetricCard.tsx,MetricCard,68,no,no,no,9,2026-01-20,389b02e251ab7db009dc8fe7ed8b225e8fd778d0
+frontend/src/legacy/ui/MetricCard.tsx,,60,no,no,no,9,2026-01-22,17c6dcce58b8ed95e955c66acc867f1655dcb262
+frontend/src/components/shared/PageHeader.tsx,PageHeader,37,no,no,no,9,2026-01-21,6866600fb0551012c5442caf48a6c7921bb6787a
+frontend/src/components/shared/MetricCard.tsx,MetricCard,75,yes,no,no,9,2026-01-21,6866600fb0551012c5442caf48a6c7921bb6787a
+frontend/src/utils/toast.tsx,,39,yes,no,no,8,2026-01-21,6866600fb0551012c5442caf48a6c7921bb6787a
+frontend/src/components/core/Leaf.tsx,Leaf; LeafProps; LeafRole,40,no,no,no,8,2026-01-20,815c3fc48c2cc4397490b9c73c076f44bc794fde
+frontend/src/layouts/Layout.tsx,Layout,21,no,yes,no,8,2026-01-06,73a33a6941d09154b2c3692e02b19a9e4786076c
+frontend/src/config/navigation.tsx,NavItem,232,no,no,no,7,2025-12-25,db7e79f44bb3edf5df91c4afeab0a01ed435c365
+frontend/src/features/opportunities/Opportunities.tsx,Opportunities,162,no,no,no,7,2026-01-04,9c458107c24d862d194d872e03e3cffe1b4e3406
+frontend/src/legacy/ui/M3Alert.tsx,M3Alert; M3AlertDescription; M3AlertProps; M3AlertSeverity; M3AlertTitle; M3AlertVariant,211,yes,no,no,7,2026-01-22,17c6dcce58b8ed95e955c66acc867f1655dcb262
+frontend/src/_archived/legacy-ui-20260122/M3Alert.tsx,M3Alert; M3AlertDescription; M3AlertProps; M3AlertSeverity; M3AlertTitle; M3AlertVariant,211,yes,no,no,7,2026-01-22,17c6dcce58b8ed95e955c66acc867f1655dcb262
+frontend/src/components/ui/Mark.tsx,M3Radio; M3RadioProps; Mark; MarkProps,224,yes,no,no,7,2026-01-22,17c6dcce58b8ed95e955c66acc867f1655dcb262
+frontend/src/context/ModeContext.tsx,Mode; ModeContextValue; ModeProvider,34,no,no,no,6,2026-01-20,389b02e251ab7db009dc8fe7ed8b225e8fd778d0
+frontend/src/features/context/ModeContext.tsx,ModeProvider,41,no,no,no,6,2026-01-20,79f548b9f5322b5fc16cc35e9277bb82e5dbe713
+frontend/src/features/auth/Login.tsx,Login,172,yes,no,no,6,2026-01-21,5f53b91a2fc4357254af66601ec057b0251b17d8
+frontend/src/legacy/ui/M3TextField.tsx,M3TextArea; M3TextAreaProps; M3TextField; M3TextFieldMode; M3TextFieldProps; M3TextFieldSize; M3TextFieldVariant,487,no,no,no,6,2026-01-22,17c6dcce58b8ed95e955c66acc867f1655dcb262
+frontend/src/_archived/legacy-ui-20260122/M3TextField.tsx,M3TextArea; M3TextAreaProps; M3TextField; M3TextFieldMode; M3TextFieldProps; M3TextFieldSize; M3TextFieldVariant,487,no,no,no,6,2026-01-22,17c6dcce58b8ed95e955c66acc867f1655dcb262
+frontend/src/components/ui/Signal.tsx,M3Alert; M3AlertDescription; M3AlertSeverity; M3AlertTitle; SignalProps; SignalVariant,190,yes,no,no,6,2026-01-22,17c6dcce58b8ed95e955c66acc867f1655dcb262
+frontend/src/features/applications/ApplicationCard.tsx,ApplicationCard,117,yes,no,no,5,2026-01-20,389b02e251ab7db009dc8fe7ed8b225e8fd778d0
+frontend/src/legacy/ui/M3Select.tsx,M3Select; M3SelectMode; M3SelectOption; M3SelectProps,334,no,no,no,5,2026-01-20,c3be1b4e640e37e829cd4dfca62e741f62f7bf14
+frontend/src/_archived/legacy-ui-20260122/M3Select.tsx,M3Select; M3SelectMode; M3SelectOption; M3SelectProps,334,no,no,no,5,2026-01-22,eaf3d6c6d27bb600544621df33d5c0ca3e51f53d
+frontend/src/components/ui/Lens.tsx,Lens; LensProps; LensSize; LensVariant; M3TextArea; M3TextAreaProps,383,yes,no,no,5,2026-01-22,17c6dcce58b8ed95e955c66acc867f1655dcb262
+frontend/src/components/shared/ApplicationCard.tsx,ApplicationCard,102,no,yes,no,5,2026-01-20,815c3fc48c2cc4397490b9c73c076f44bc794fde
+frontend/src/components/atomic/tabs/Tabs.tsx,Tab; Tabs; TabsProps,98,no,no,no,5,2026-01-20,a2e2a58c8619b204268775bcfb4bf181ec4dfa88
+frontend/src/layouts/Sidebar.tsx,Sidebar,139,yes,no,no,5,2026-01-20,c3be1b4e640e37e829cd4dfca62e741f62f7bf14
+frontend/src/features/gallery/IconBadge.tsx,IconBadge,46,yes,no,no,4,2026-01-20,389b02e251ab7db009dc8fe7ed8b225e8fd778d0
+frontend/src/legacy/ui/M3Checkbox.tsx,M3Checkbox; M3CheckboxMode; M3CheckboxProps; M3Radio; M3RadioProps,267,no,no,no,4,2026-01-20,389b02e251ab7db009dc8fe7ed8b225e8fd778d0
+frontend/src/_archived/legacy-ui-20260122/M3Checkbox.tsx,M3Checkbox; M3CheckboxMode; M3CheckboxProps; M3Radio; M3RadioProps,267,no,no,no,4,2026-01-22,eaf3d6c6d27bb600544621df33d5c0ca3e51f53d
+frontend/src/components/shared/IconBadge.tsx,IconBadge,42,no,no,no,4,2025-12-25,db7e79f44bb3edf5df91c4afeab0a01ed435c365
+frontend/src/features/analysis/TechCard.tsx,,141,yes,no,no,3,2026-01-20,a2e2a58c8619b204268775bcfb4bf181ec4dfa88
+frontend/src/features/auth/Register.tsx,Register,178,yes,no,no,3,2026-01-21,5f53b91a2fc4357254af66601ec057b0251b17d8
+frontend/src/features/ksc-generator/KSCGenerator.tsx,KSCGenerator,318,no,no,no,3,2025-12-27,dc3a7c2ec840bc2e7ac1aaba5bcd3bed17a93d2a
+frontend/src/legacy/ui/chart.tsx,ChartContainer; ChartLegend; ChartLegendContent; ChartTooltip; ChartTooltipContent,7,no,no,no,3,2026-01-20,389b02e251ab7db009dc8fe7ed8b225e8fd778d0
+frontend/src/components/ui/chart.tsx,ChartContainer; ChartLegend; ChartLegendContent; ChartTooltip; ChartTooltipContent,7,no,yes,no,3,2026-01-03,6ae77210604acfa92ae7e98fa0b5b9fbee09e104
+frontend/src/components/shared/KeywordTag.tsx,KeywordTag,22,no,no,no,3,2025-12-25,db7e79f44bb3edf5df91c4afeab0a01ed435c365
+frontend/src/pages/JobQueue.tsx,JobQueue,327,yes,no,yes,3,2026-01-22,17c6dcce58b8ed95e955c66acc867f1655dcb262
+frontend/src/features/landing/LandingPage.tsx,LandingPage,94,no,no,no,2,2026-01-04,9c458107c24d862d194d872e03e3cffe1b4e3406
+frontend/src/features/analysis/ImpactEnhancements.tsx,ImpactEnhancements,93,yes,no,no,2,2026-01-20,389b02e251ab7db009dc8fe7ed8b225e8fd778d0
+frontend/src/features/gallery/GlassLeafCard.tsx,,103,yes,no,no,2,2026-01-20,389b02e251ab7db009dc8fe7ed8b225e8fd778d0
+frontend/src/features/documents/DocumentStack.tsx,DocumentStack,152,yes,no,no,2,2026-01-20,c3be1b4e640e37e829cd4dfca62e741f62f7bf14
+frontend/src/legacy/ui/AuroraHeader.tsx,AuroraHeader,113,yes,no,no,2,2026-01-20,389b02e251ab7db009dc8fe7ed8b225e8fd778d0
+frontend/src/components/ui/Jar.tsx,JarProps; M3Select; M3SelectOption,253,yes,no,no,2,2026-01-22,17c6dcce58b8ed95e955c66acc867f1655dcb262
+frontend/src/components/ui/NativeAnchor.tsx,NativeAnchor,131,no,no,no,2,2026-01-20,389b02e251ab7db009dc8fe7ed8b225e8fd778d0
+frontend/src/components/ui/Seed.tsx,M3Badge; SeedProps,74,yes,no,no,2,2026-01-22,17c6dcce58b8ed95e955c66acc867f1655dcb262
+frontend/src/components/ui/AuroraHeader.tsx,AuroraHeader,116,no,no,no,2,2026-01-20,a2e2a58c8619b204268775bcfb4bf181ec4dfa88
+frontend/src/components/shared/ImpactEnhancements.tsx,ImpactEnhancements,93,no,no,no,2,2026-01-20,c3be1b4e640e37e829cd4dfca62e741f62f7bf14
+frontend/src/components/shared/M3ErrorAlert.tsx,M3ErrorAlert,84,no,no,no,2,2026-01-22,17c6dcce58b8ed95e955c66acc867f1655dcb262
+frontend/src/components/shared/ChartPane.tsx,ChartPane,29,yes,no,no,2,2025-12-25,db7e79f44bb3edf5df91c4afeab0a01ed435c365
+frontend/src/layouts/GalleryShell/views/GalleryOnboarding.tsx,GalleryOnboarding,25,yes,no,no,2,2026-01-20,389b02e251ab7db009dc8fe7ed8b225e8fd778d0
+frontend/src/layouts/GalleryShell/views/GalleryAuth.tsx,GalleryAuth,22,yes,no,no,2,2026-01-20,389b02e251ab7db009dc8fe7ed8b225e8fd778d0
+frontend/src/layouts/GalleryShell/views/GalleryFeed.tsx,GalleryFeed,119,yes,no,no,2,2026-01-20,389b02e251ab7db009dc8fe7ed8b225e8fd778d0
+frontend/src/layouts/GalleryShell/views/GalleryDashboard.tsx,GalleryDashboard,25,yes,no,no,2,2026-01-20,389b02e251ab7db009dc8fe7ed8b225e8fd778d0
+frontend/src/layouts/GalleryShell/views/GalleryKanban.tsx,GalleryKanban,83,no,no,no,2,2026-01-20,389b02e251ab7db009dc8fe7ed8b225e8fd778d0
+frontend/src/pages/IngestionPage.tsx,IngestionPage,206,yes,no,no,2,2026-01-22,17c6dcce58b8ed95e955c66acc867f1655dcb262
+frontend/src/features/ingestion/components/EvidenceUploader.tsx,EvidenceUploader,110,yes,no,no,1,2026-01-22,17c6dcce58b8ed95e955c66acc867f1655dcb262
+frontend/src/features/analysis/AssetLibrary.tsx,AssetLibrary,74,yes,no,no,1,2026-01-21,6866600fb0551012c5442caf48a6c7921bb6787a
+frontend/src/features/not-found/NotFound.tsx,NotFound,40,no,no,no,1,2025-12-25,e41633643351d09bd8721cd644d7df17bc39edaf
+frontend/src/features/profile/components/ProfileView.tsx,ProfileView,230,yes,no,no,1,2026-01-20,5faf77d0d4db0cabb53416d0bedbf26dffcf7107
+frontend/src/features/profile/components/ProfileComparison.tsx,ProfileComparison,330,no,no,yes,1,2026-01-20,5faf77d0d4db0cabb53416d0bedbf26dffcf7107
+frontend/src/features/profile/components/ResumeUploader.tsx,DefaultExport,199,no,no,no,1,2026-01-20,5faf77d0d4db0cabb53416d0bedbf26dffcf7107
+frontend/src/features/sandbox/EcosystemSandbox.tsx,Archetype; EcosystemSandbox,70,no,no,no,1,2026-01-20,389b02e251ab7db009dc8fe7ed8b225e8fd778d0
+frontend/src/features/sandbox/components/SplitEditor.tsx,SplitEditor,162,no,no,no,1,2026-01-20,389b02e251ab7db009dc8fe7ed8b225e8fd778d0
+frontend/src/features/sandbox/components/EvidenceSidebar.tsx,EvidenceSidebar,91,no,no,no,1,2026-01-20,389b02e251ab7db009dc8fe7ed8b225e8fd778d0
+frontend/src/features/applications/ApplicationTracker.tsx,Application; ApplicationTracker,121,no,no,no,1,2026-01-19,89bb9f9ea1259958bd779b7959720add7c9d9e6c
+frontend/src/features/style-guide/StyleGuide.tsx,StyleGuide,165,no,no,no,1,2025-12-27,dc3a7c2ec840bc2e7ac1aaba5bcd3bed17a93d2a
+frontend/src/features/onboarding/components/ValidationDashboard.tsx,ValidationDashboard,407,yes,no,no,1,2026-01-22,17c6dcce58b8ed95e955c66acc867f1655dcb262
+frontend/src/legacy/ui/collapsible.tsx,Collapsible; CollapsibleContent; CollapsibleTrigger,5,no,no,no,1,2026-01-20,389b02e251ab7db009dc8fe7ed8b225e8fd778d0
+frontend/src/components/ui/icon-badge.tsx,IconBadge,3,no,yes,no,1,2026-01-03,6ae77210604acfa92ae7e98fa0b5b9fbee09e104
+frontend/src/components/ui/Cabinet.tsx,CabinetProps; M3Modal,110,yes,no,no,1,2026-01-22,17c6dcce58b8ed95e955c66acc867f1655dcb262
+frontend/src/components/ui/SplitHeader.tsx,SplitHeader,67,no,no,no,1,2026-01-20,a2e2a58c8619b204268775bcfb4bf181ec4dfa88
+frontend/src/components/ui/collapsible.tsx,Collapsible; CollapsibleContent; CollapsibleTrigger,5,no,yes,no,1,2026-01-03,6ae77210604acfa92ae7e98fa0b5b9fbee09e104
+frontend/src/components/ui/Vessel.tsx,M3Accordion,47,yes,no,no,1,2026-01-22,17c6dcce58b8ed95e955c66acc867f1655dcb262
+frontend/src/components/shared/StatCard.tsx,StatCard,54,yes,no,no,1,2025-12-25,db7e79f44bb3edf5df91c4afeab0a01ed435c365
+frontend/src/components/shared/StatusChip.tsx,StatusChip,29,no,no,no,1,2026-01-21,6866600fb0551012c5442caf48a6c7921bb6787a
+frontend/src/components/shared/SplitHeader.tsx,,95,no,no,no,1,2026-01-20,389b02e251ab7db009dc8fe7ed8b225e8fd778d0
+frontend/src/components/shared/EditableField.tsx,EditableField,118,yes,no,no,1,2026-01-22,17c6dcce58b8ed95e955c66acc867f1655dcb262
+frontend/src/components/layouts/GardenLayout.tsx,GardenLayout,64,no,no,no,1,2026-01-20,389b02e251ab7db009dc8fe7ed8b225e8fd778d0
+frontend/src/layouts/GalleryShell/components/GalleryDock.tsx,GalleryDock,52,yes,no,no,1,2026-01-20,389b02e251ab7db009dc8fe7ed8b225e8fd778d0
+frontend/src/layouts/GalleryShell/components/Fireflies.tsx,Fireflies,87,no,no,no,1,2026-01-20,389b02e251ab7db009dc8fe7ed8b225e8fd778d0
+frontend/src/layouts/GalleryShell/views/GalleryLanding.tsx,GalleryLanding,51,no,no,no,1,2026-01-20,389b02e251ab7db009dc8fe7ed8b225e8fd778d0
+frontend/src/layouts/LaboratoryShell/components/MainCanvas.tsx,MainCanvas,30,no,no,no,1,2026-01-20,389b02e251ab7db009dc8fe7ed8b225e8fd778d0
+frontend/src/layouts/LaboratoryShell/components/GlobalHeader.tsx,GlobalHeader,52,no,no,no,1,2026-01-20,389b02e251ab7db009dc8fe7ed8b225e8fd778d0
+frontend/src/layouts/LaboratoryShell/components/SidePanel.tsx,SidePanel,16,no,no,no,1,2026-01-20,389b02e251ab7db009dc8fe7ed8b225e8fd778d0
+frontend/src/layouts/LaboratoryShell/components/NavRail.tsx,NavRail,39,no,no,no,1,2026-01-20,389b02e251ab7db009dc8fe7ed8b225e8fd778d0
+frontend/src/layouts/LaboratoryShell/components/anchors/DocumentStackAnchor.tsx,DocumentStackAnchor,50,no,no,no,1,2026-01-20,389b02e251ab7db009dc8fe7ed8b225e8fd778d0
+frontend/src/layouts/LaboratoryShell/components/anchors/AnalysisAnchor.tsx,AnalysisAnchor,129,no,no,no,1,2026-01-20,389b02e251ab7db009dc8fe7ed8b225e8fd778d0
+frontend/src/pages/AnalysisPage.tsx,AnalysisPage,318,yes,no,no,1,2026-01-22,17c6dcce58b8ed95e955c66acc867f1655dcb262
+frontend/src/context/AuthContext.test.tsx,,159,no,no,no,0,2025-12-25,5a614a8ad1c7b791867e5054db248a8df01108d1
+frontend/src/features/ingestion/components/DropZone.tsx,DropZone,155,no,no,no,0,2026-01-20,389b02e251ab7db009dc8fe7ed8b225e8fd778d0
+frontend/src/features/analysis/AuditDial.tsx,AuditDial,118,no,no,no,0,2026-01-20,389b02e251ab7db009dc8fe7ed8b225e8fd778d0
+frontend/src/features/dashboard/components/JobCard.tsx,JobCard,113,no,no,no,0,2026-01-20,389b02e251ab7db009dc8fe7ed8b225e8fd778d0
+frontend/src/features/profile/components/ProfileCardMUI.tsx,Profile; ProfileCardMUI; ProfileCardMUIProps,333,yes,no,no,0,2026-01-20,5faf77d0d4db0cabb53416d0bedbf26dffcf7107
+frontend/src/features/profile/components/__tests__/ProfileComparison.test.tsx,,396,no,no,no,0,2026-01-20,5faf77d0d4db0cabb53416d0bedbf26dffcf7107
+frontend/src/features/style-guide/M3ExpressiveComponents.tsx,AxisVisualizer; MorphPreviewer; SlopAuditor,402,no,no,no,0,2026-01-20,389b02e251ab7db009dc8fe7ed8b225e8fd778d0
+frontend/src/features/editor/components/EvidenceCard.tsx,EvidenceCard,110,no,no,no,0,2026-01-20,389b02e251ab7db009dc8fe7ed8b225e8fd778d0
+frontend/src/legacy/ui/button.figma.tsx,,44,no,no,no,0,2026-01-20,389b02e251ab7db009dc8fe7ed8b225e8fd778d0
+frontend/src/components/ui/button.stories.tsx,Default; Destructive; Ghost; IconOnly; Large; Link; Outline; Secondary; Small; WithIcon,101,no,no,no,0,2026-01-20,c3be1b4e640e37e829cd4dfca62e741f62f7bf14
+frontend/src/components/ui/icon-badge.stories.tsx,Custom; Default; Large; Small,52,no,no,no,0,2025-12-27,dc3a7c2ec840bc2e7ac1aaba5bcd3bed17a93d2a
+frontend/src/components/ui/metric-card.stories.tsx,CustomColor; Filled; HighValue; Outlined,50,no,no,no,0,2025-12-27,dc3a7c2ec840bc2e7ac1aaba5bcd3bed17a93d2a
+frontend/src/components/ui/Valve.tsx,Valve; ValveProps,108,yes,no,no,0,2026-01-22,17c6dcce58b8ed95e955c66acc867f1655dcb262
+frontend/src/components/ui/collapsible.stories.tsx,Default,46,no,no,no,0,2026-01-20,c3be1b4e640e37e829cd4dfca62e741f62f7bf14
+frontend/src/components/ui/table.stories.tsx,Applications; Default,116,no,no,no,0,2025-12-27,dc3a7c2ec840bc2e7ac1aaba5bcd3bed17a93d2a
+frontend/src/components/ui/chart.stories.tsx,DefaultBarChart; SingleMetric,78,yes,no,no,0,2025-12-27,dc3a7c2ec840bc2e7ac1aaba5bcd3bed17a93d2a
+frontend/src/components/ui/HaeckelIcon.tsx,HaeckelIcon; HaeckelIconProps,49,no,no,no,0,2026-01-20,acac6013b48c2ffbbc2fe4874d1dd8356b248dc9
+frontend/src/components/ui/StatusBadge/StatusBadge.test.tsx,,29,no,no,no,0,2025-12-31,f4b4e418c2505300fa0acd8a2db7d7e30e2bb7fe
+frontend/src/components/core/Stone.figma.tsx,,47,no,no,no,0,2026-01-20,815c3fc48c2cc4397490b9c73c076f44bc794fde
+frontend/src/components/core/Pebble.figma.tsx,,57,no,no,no,0,2026-01-20,815c3fc48c2cc4397490b9c73c076f44bc794fde
+frontend/src/components/core/Leaf.figma.tsx,,45,no,no,no,0,2026-01-20,815c3fc48c2cc4397490b9c73c076f44bc794fde
+frontend/src/components/shared/CodePreview.tsx,CodePreview,36,no,no,no,0,2026-01-20,389b02e251ab7db009dc8fe7ed8b225e8fd778d0
+frontend/src/components/shared/TechCard.figma.tsx,,26,no,no,no,0,2026-01-20,389b02e251ab7db009dc8fe7ed8b225e8fd778d0
+frontend/src/components/shared/ApplicationCard.stories.tsx,Applied; CustomSteps; Interview; Offer; Screening; WithoutUpdateButton,116,no,no,no,0,2026-01-02,e4deda72959feb738e372a23712328b8c19350dd
+frontend/src/components/shared/PlasmaBackground.tsx,PlasmaBackground,188,no,no,no,0,2026-01-20,c3be1b4e640e37e829cd4dfca62e741f62f7bf14
+frontend/src/components/figma/ImageWithFallback.tsx,ImageWithFallback,39,no,no,no,0,2025-12-25,db7e79f44bb3edf5df91c4afeab0a01ed435c365
+frontend/src/components/electric/tabs/ElectricTabs.tsx,ElectricTabs; ElectricTabsProps; Tab,98,no,no,no,0,2025-12-27,29e58e34188fc01044755e1ed6eb92d428b5ec16
+frontend/src/components/TestCard/TestCard.tsx,TestCard; TestCardProps,36,no,no,no,0,2025-12-27,dc3a7c2ec840bc2e7ac1aaba5bcd3bed17a93d2a
+frontend/src/stories/Documents.stories.tsx,Default; MobileView; TabletView,31,no,no,no,0,2026-01-07,0e6d2b428a1a95167b1a5264778cc57fd6467a33
+frontend/src/stories/KSCGenerator.stories.tsx,MobileWizard; Step1_Initial; Step2_STAR; Step3_Generated,40,no,no,no,0,2026-01-07,0e6d2b428a1a95167b1a5264778cc57fd6467a33
+frontend/src/stories/M3TextField.stories.tsx,ErrorState; Filled; InputSizes; Outlined; TextArea; WithCounter; WithIcons,94,no,no,no,0,2026-01-22,17c6dcce58b8ed95e955c66acc867f1655dcb262
+frontend/src/stories/Settings.stories.tsx,Default; MobileSettings; TabletSettings,31,no,no,no,0,2026-01-07,0e6d2b428a1a95167b1a5264778cc57fd6467a33
+frontend/src/stories/MetricCard.stories.tsx,ActiveUsers; Default; GridDisplay; RetentionRate; TimeSaved,70,no,no,no,0,2026-01-07,0e6d2b428a1a95167b1a5264778cc57fd6467a33
+frontend/src/stories/LandingPage.stories.tsx,Default; MobileView,23,no,no,no,0,2026-01-07,0e6d2b428a1a95167b1a5264778cc57fd6467a33
+frontend/src/stories/M3Card.stories.tsx,AllShapes; Default; GemVariant; LeafVariant; TechVariant,127,no,no,no,0,2026-01-22,17c6dcce58b8ed95e955c66acc867f1655dcb262
+frontend/src/stories/Dashboard.stories.tsx,AnimatedEntry; Default; MobileView; TabletView,61,no,no,no,0,2026-01-20,c3be1b4e640e37e829cd4dfca62e741f62f7bf14
+frontend/src/stories/M3ErrorAlert.stories.tsx,Default; FullFeatured; LongMessage; WithRetry,48,no,no,no,0,2026-01-07,0e6d2b428a1a95167b1a5264778cc57fd6467a33
+frontend/src/stories/M3Select.stories.tsx,Default; Disabled; ErrorState; FullWidth; SelectedValue; WithHelperText,99,no,no,no,0,2026-01-22,17c6dcce58b8ed95e955c66acc867f1655dcb262
+frontend/src/stories/ApplicationCard.stories.tsx,CustomSteps; Initial; Interviewing; OfferReceived,61,no,no,no,0,2026-01-07,0e6d2b428a1a95167b1a5264778cc57fd6467a33
+frontend/src/stories/M3Checkbox.stories.tsx,Checkbox; Indeterminate; MixedStates; RadioButtons; SelectionError,73,no,no,no,0,2026-01-22,17c6dcce58b8ed95e955c66acc867f1655dcb262
+frontend/src/stories/AuthPages.stories.tsx,LoginPage; MobileLogin; RegisterPage,27,no,no,no,0,2026-01-07,0e6d2b428a1a95167b1a5264778cc57fd6467a33
+frontend/src/stories/M3Alert.stories.tsx,AllTypes; ErrorState; Info; Success; Variants; Warning,81,no,no,no,0,2026-01-22,17c6dcce58b8ed95e955c66acc867f1655dcb262
+frontend/src/stories/IngestionPage.stories.tsx,ErrorState; Idle; LoadingStages; SelectedFiles; ValidationStep,150,no,no,no,0,2026-01-20,c3be1b4e640e37e829cd4dfca62e741f62f7bf14
+frontend/src/stories/M3Button.stories.tsx,AllVariants; Elevated; ErrorState; Filled; Loading; Outlined; Text; Tonal; WithIcons,122,no,no,no,0,2026-01-22,17c6dcce58b8ed95e955c66acc867f1655dcb262
+frontend/src/stories/Opportunities.stories.tsx,Default; ErrorState; ResultsFound; Scouting,63,no,no,no,0,2026-01-07,0e6d2b428a1a95167b1a5264778cc57fd6467a33
+frontend/src/stories/StatusBadge.stories.tsx,AllVariants; Default; Outline; Primary; Secondary; Tertiary,69,no,no,no,0,2026-01-07,0e6d2b428a1a95167b1a5264778cc57fd6467a33
+frontend/src/stories/JobQueue.stories.tsx,ActionStates; Default; Empty; ErrorState; Loading,132,no,no,no,0,2026-01-07,0e6d2b428a1a95167b1a5264778cc57fd6467a33
+frontend/src/stories/Analysis.stories.tsx,AnalysisComplete; Analyzing; InitialState; MobileView; WithVerifiedSources,65,no,no,no,0,2026-01-20,c3be1b4e640e37e829cd4dfca62e741f62f7bf14
+frontend/src/layouts/Layout.stories.tsx,DashboardMock; EmptyPage,67,no,no,no,0,2025-12-27,dc3a7c2ec840bc2e7ac1aaba5bcd3bed17a93d2a
+frontend/src/layouts/GalleryShell/GalleryShell.tsx,GalleryShell,79,no,no,no,0,2026-01-20,c3be1b4e640e37e829cd4dfca62e741f62f7bf14
+frontend/src/layouts/GalleryShell/views/GalleryPlaceholders.tsx,GalleryAuth; GalleryDashboard; GalleryKanban; GalleryOnboarding; GalleryPlaceholders,19,no,no,no,0,2026-01-20,c3be1b4e640e37e829cd4dfca62e741f62f7bf14
+frontend/src/layouts/LaboratoryShell/LayoutShell.tsx,LayoutShell,46,no,no,no,0,2026-01-20,389b02e251ab7db009dc8fe7ed8b225e8fd778d0
+frontend/src/pages/JobQueue.test.tsx,,192,no,no,no,0,2026-01-03,87c29c7a4921cd5255089e13eea722e42f61d865
