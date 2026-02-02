@@ -1,4 +1,4 @@
-import { Meta, Story, Canvas } from '@storybook/addon-docs';
+import { Meta, Story, Canvas } from '@storybook/blocks';
 import { useState, useRef } from 'react';
 import { Button, Typography, Box, TextField, Stack, Divider } from '@mui/material';
 import Dialog, { DialogRef } from '../components/ui/feedback/Dialog';
@@ -6,7 +6,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import SaveIcon from '@mui/icons-material/Save';
 import CloseIcon from '@mui/icons-material/Close';
 
-<Meta 
+<Meta
   title="Components/Feedback/Dialog"
   component={Dialog}
   parameters={{
@@ -57,7 +57,7 @@ function Example() {
   <Story name="Basic">
     {() => {
       const [open, setOpen] = useState(false);
-      
+
       return (
         <>
           <Button variant="contained" onClick={() => setOpen(true)}>
@@ -82,7 +82,7 @@ function Example() {
     {() => {
       const [open, setOpen] = useState(false);
       const [name, setName] = useState('');
-      
+
       return (
         <>
           <Button variant="contained" onClick={() => setOpen(true)}>
@@ -132,12 +132,12 @@ function Example() {
   <Story name="Confirmation">
     {() => {
       const [open, setOpen] = useState(false);
-      
+
       return (
         <>
-          <Button 
-            variant="outlined" 
-            color="error" 
+          <Button
+            variant="outlined"
+            color="error"
             startIcon={<DeleteIcon />}
             onClick={() => setOpen(true)}
           >
@@ -173,11 +173,11 @@ function Example() {
   <Story name="Fullscreen">
     {() => {
       const [open, setOpen] = useState(false);
-      
+
       return (
         <>
-          <Button 
-            variant="contained" 
+          <Button
+            variant="contained"
             onClick={() => setOpen(true)}
           >
             Open Fullscreen Dialog
@@ -211,11 +211,11 @@ function Example() {
   <Story name="Scrollable">
     {() => {
       const [open, setOpen] = useState(false);
-      
+
       return (
         <>
-          <Button 
-            variant="contained" 
+          <Button
+            variant="contained"
             onClick={() => setOpen(true)}
           >
             Open Scrollable Dialog
@@ -250,11 +250,11 @@ function Example() {
   <Story name="With useRef">
     {() => {
       const dialogRef = useRef<DialogRef>(null);
-      
+
       return (
         <>
-          <Button 
-            variant="contained" 
+          <Button
+            variant="contained"
             onClick={() => dialogRef.current?.open()}
           >
             Open Dialog with Ref
@@ -296,10 +296,10 @@ function Example() {
 | disableEscapeKeyDown | boolean | false | Whether to disable closing the dialog with the escape key |
 | divider | boolean | true | Whether to show a divider between the title and content |
 | variant | 'default' \| 'fullscreen' \| 'scrollable' | 'default' | The variant of the dialog |
-| sx | SxProps<Theme> | - | Additional styles for the dialog |
-| contentSx | SxProps<Theme> | - | Additional styles for the dialog content |
-| titleSx | SxProps<Theme> | - | Additional styles for the dialog title |
-| actionsSx | SxProps<Theme> | - | Additional styles for the dialog actions |
+| sx | `SxProps<Theme>` | - | Additional styles for the dialog |
+| contentSx | `SxProps<Theme>` | - | Additional styles for the dialog content |
+| titleSx | `SxProps<Theme>` | - | Additional styles for the dialog title |
+| actionsSx | `SxProps<Theme>` | - | Additional styles for the dialog actions |
 
 ## Methods (when using ref)
 

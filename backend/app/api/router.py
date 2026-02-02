@@ -8,7 +8,7 @@ from fastapi import APIRouter
 
 # Import endpoint modules
 # Import endpoint modules
-from .endpoints import analysis, config, documents, workflows, opportunities, applications, chrome_extension
+from .endpoints import analysis, config, documents, workflows, opportunities, applications, chrome_extension, genkit
 # from .routers import ingestion
 
 api_router = APIRouter()
@@ -24,6 +24,7 @@ routers = [
     (applications.router, "/applications", "Applications"),
     (opportunities.router, "/opportunities", "Opportunities"),
     (chrome_extension.router, "/chrome-extension", "Chrome Extension"),
+    (genkit.router, "/genkit", "Genkit AI"),
 ]
 
 # Include all routers
