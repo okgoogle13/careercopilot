@@ -1,0 +1,73 @@
+{
+  "collection": "Northcote Curio Collection",
+  "timestamp": "2026-02-02T14:21:20.835727",
+  "total_assets": 11,
+  "assets": [
+    {
+      "asset_id": "ASSET-01",
+      "original": "Asset-1-wallpaper.png",
+      "new_name": "northcote-curio_asset-asset-01_multi-specimen-plate_wallpaper_1792x1024.png",
+      "path": "ASSET-01/northcote-curio_asset-asset-01_multi-specimen-plate_wallpaper_1792x1024.png"
+    },
+    {
+      "asset_id": "ASSET-02",
+      "original": "Asset-2-Sentry.png",
+      "new_name": "northcote-curio_asset-asset-02_kookaburra_sentry-mascot_1024x1024.png",
+      "path": "ASSET-02/northcote-curio_asset-asset-02_kookaburra_sentry-mascot_1024x1024.png"
+    },
+    {
+      "asset_id": "ASSET-03",
+      "original": "Asset-3-Parchment.jpg",
+      "new_name": "northcote-curio_asset-asset-03_scientific-grid_parchment-texture_1024x1024.jpg",
+      "path": "ASSET-03/northcote-curio_asset-asset-03_scientific-grid_parchment-texture_1024x1024.jpg"
+    },
+    {
+      "asset_id": "ASSET-04",
+      "original": "Generated Image February 02, 2026 - 11_43AM.jpeg",
+      "new_name": "northcote-curio_asset-asset-04_banksia-serrata_sentinel-pod_1024x1024.jpeg",
+      "path": "ASSET-04/northcote-curio_asset-asset-04_banksia-serrata_sentinel-pod_1024x1024.jpeg"
+    },
+    {
+      "asset_id": "ASSET-05",
+      "original": "Generated Image February 02, 2026 - 11_54AM.jpeg",
+      "new_name": "northcote-curio_asset-asset-05_aboriginal-grinding-stone_arrernte_1024x1024.jpeg",
+      "path": "ASSET-05/northcote-curio_asset-asset-05_aboriginal-grinding-stone_arrernte_1024x1024.jpeg"
+    },
+    {
+      "asset_id": "ASSET-05-V1",
+      "original": "Generated Image February 02, 2026 - 11_43AM (1).jpeg",
+      "new_name": "northcote-curio_asset-asset-05-v1_lithic-pendant_rejected-v1_1024x1024.jpeg",
+      "path": "ASSET-05/northcote-curio_asset-asset-05-v1_lithic-pendant_rejected-v1_1024x1024.jpeg"
+    },
+    {
+      "asset_id": "ASSET-06",
+      "original": "Generated Image February 02, 2026 - 12_46PM.jpeg",
+      "new_name": "northcote-curio_asset-asset-06_radiolaria-hexacontium_bone-cage_1024x1024.jpeg",
+      "path": "ASSET-06/northcote-curio_asset-asset-06_radiolaria-hexacontium_bone-cage_1024x1024.jpeg"
+    },
+    {
+      "asset_id": "ASSET-07",
+      "original": "Generated Image February 02, 2026 - 1_03PM (3).jpeg",
+      "new_name": "northcote-curio_asset-asset-07_aseroe-rubra_starfish-cage_1024x1024.jpeg",
+      "path": "ASSET-07/northcote-curio_asset-asset-07_aseroe-rubra_starfish-cage_1024x1024.jpeg"
+    },
+    {
+      "asset_id": "ASSET-08",
+      "original": "Generated Image February 02, 2026 - 1_03PM (2).jpeg",
+      "new_name": "northcote-curio_asset-asset-08_pteropus-wing_natures-clockwork_1024x1024.jpeg",
+      "path": "ASSET-08/northcote-curio_asset-asset-08_pteropus-wing_natures-clockwork_1024x1024.jpeg"
+    },
+    {
+      "asset_id": "ASSET-09",
+      "original": "Generated Image February 02, 2026 - 1_03PM (1).jpeg",
+      "new_name": "northcote-curio_asset-asset-09_platygyra-coral_organic-labyrinth_1024x1024.jpeg",
+      "path": "ASSET-09/northcote-curio_asset-asset-09_platygyra-coral_organic-labyrinth_1024x1024.jpeg"
+    },
+    {
+      "asset_id": "ASSET-10",
+      "original": "Generated Image February 02, 2026 - 1_03PM.jpeg",
+      "new_name": "northcote-curio_asset-asset-10_coelopleurus-test_imperial-crown_1024x1024.jpeg",
+      "path": "ASSET-10/northcote-curio_asset-asset-10_coelopleurus-test_imperial-crown_1024x1024.jpeg"
+    }
+  ]
+}
