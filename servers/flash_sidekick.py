@@ -15,6 +15,15 @@ import time
 from concurrent.futures import ThreadPoolExecutor
 from collections import deque
 from typing import Dict, Any, List, Optional
+import sentry_sdk
+
+try:
+    from azure.ai.inference.aio import ChatCompletionsClient
+    from azure.core.credentials import AzureKeyCredential
+except ImportError:
+    ChatCompletionsClient = None
+    AzureKeyCredential = None
+
 
 # --- Configuration & Logging ---
 
@@ -35,6 +44,17 @@ logging.basicConfig(
     handlers=[logging.FileHandler('/tmp/mcp-flash-sidekick.log')]
 )
 logger = logging.getLogger("FlashSidekick")
+
+# Initialize Sentry
+if os.getenv("SENTRY_DSN"):
+    sentry_sdk.init(
+        dsn=os.getenv("SENTRY_DSN"),
+        send_default_pii=True,
+        traces_sample_rate=1.0,
+        profiles_sample_rate=1.0,
+        environment=os.getenv("ENV", "development"),
+    )
+    logger.info("Sentry SDK initialized")
 
 # Lazy Loading Infrastructure
 _genai = None
@@ -94,6 +114,10 @@ class RateLimiter:
 class AsyncFlashSidekickServer:
     def __init__(self):
         self.gemini_key = os.getenv("GEMINI_API_KEY", "")
+        self.github_token = os.getenv("GITHUB_TOKEN", os.getenv("GH_TOKEN", ""))
+        self.initialized = False
+        self._models_cache = {}
+
         self.initialized = False
         self._models_cache = {}
         self.executor = ThreadPoolExecutor(max_workers=10) # Parallel processing limit
@@ -191,6 +215,32 @@ class AsyncFlashSidekickServer:
             except: continue
         return None
 
+    async def _call_gh_models_async(self, prompt, sys_instruct="", json_mode=False):
+        """Fallback to GitHub Models if Gemini fails."""
+        if not ChatCompletionsClient or not self.github_token:
+            return "Error: GitHub Models fallback not configured (missing GITHUB_TOKEN or dependency)."
+
+        try:
+            async with ChatCompletionsClient(
+                endpoint="https://models.github.ai/inference",
+                credential=AzureKeyCredential(self.github_token),
+            ) as client:
+                messages = []
+                if sys_instruct:
+                    messages.append({"role": "system", "content": sys_instruct})
+                messages.append({"role": "user", "content": prompt})
+
+                response = await client.complete(
+                    messages=messages,
+                    model="openai/gpt-4.1-mini"
+                )
+                content = response.choices[0].message.content
+                return f"[OpenAI GitHub Models Fallback]\n{content}"
+        except Exception as e:
+            logger.error(f"GitHub Models fallback failed: {e}")
+            sentry_sdk.capture_exception(e)
+            return f"Error: GitHub Models fallback failed: {str(e)}"
+
     async def _call_gemini_async(self, engine_type, prompt, sys_instruct="", use_search=False, json_mode=False):
         await self.rate_limiter.acquire()
 
@@ -198,7 +248,7 @@ class AsyncFlashSidekickServer:
 
         def blocking_call():
             model = self._get_model(self.pro_candidates if engine_type == "pro" else self.fast_candidates)
-            if not model: return "Error: Model unavailable."
+            if not model: return None # Signal failure to fallback
             try:
                 full = f"System: {sys_instruct}\n\nUser: {prompt}"
 
@@ -226,9 +276,18 @@ class AsyncFlashSidekickServer:
                                  text += f"- [{i+1}] {chunk.web.title}: {chunk.web.uri}\n"
 
                 return text
-            except Exception as e: return f"Error: {str(e)}"
+            except Exception as e:
+                logger.error(f"Gemini call failed: {e}")
+                return None # Signal failure to fallback
 
-        return await loop.run_in_executor(self.executor, blocking_call)
+        result = await loop.run_in_executor(self.executor, blocking_call)
+
+        if result is None:
+            logger.warning(f"Gemini failed, falling back to GitHub Models for prompt: {prompt[:50]}...")
+            sentry_sdk.capture_message(f"Gemini failed, falling back to GitHub Models", level="warning")
+            return await self._call_gh_models_async(prompt, sys_instruct, json_mode)
+
+        return result
 
     # --- Tool Definitions ---
 
@@ -333,6 +392,11 @@ class AsyncFlashSidekickServer:
                 "name": "generate_integration_tests",
                 "description": "Generate E2E/Integration test scaffolding.",
                 "inputSchema": {"type": "object", "properties": {"code": {"type": "string"}}, "required": ["code"]}
+            },
+            {
+                "name": "trigger_error",
+                "description": "Intentional error to verify Sentry integration.",
+                "inputSchema": {"type": "object", "properties": {}}
             }
         ]
 
@@ -427,6 +491,11 @@ class AsyncFlashSidekickServer:
 
         elif name == "generate_integration_tests":
             content = await self._call_gemini_async("pro", args.get("code",""), f"Generate E2E integration test scenarios.{rules}")
+
+        elif name == "trigger_error":
+            logger.error("Triggering intentional ZeroDivisionError for Sentry verification")
+            division_by_zero = 1 / 0
+            content = "This should not be reached"
 
         else:
             return []

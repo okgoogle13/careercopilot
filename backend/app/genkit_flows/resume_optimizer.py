@@ -1,97 +1,136 @@
-try:
-    import google.generativeai as genai
-except ImportError:  # pragma: no cover - optional dependency in test/CI
-    genai = None
-import os
-from dotenv import load_dotenv
+"""
+resume_optimizer.py
+
+Genkit flow for optimizing resumes by naturally integrating missing keywords
+from ATS analysis without fabricating experience or skills.
+
+Modernized to use async patterns and current Genkit architecture.
+"""
+
 from pydantic import BaseModel, Field
 from typing import List, Optional
-from app.genkit_flows.corporate_intelligence import CorporateProfile
+from app.genkit_flows.flow_decorator import async_genkit_flow
+from app.core.genkit_init import get_model
+import logging
 import json
 
-# Configure Gemini
-load_dotenv()
-if genai:
-    genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
+logger = logging.getLogger(__name__)
 
-# Initialize Model
-model_name = "gemini-1.5-pro"
-model = genai.GenerativeModel(model_name) if genai else None
 
 class OptimizedResume(BaseModel):
-    """The full, optimized resume text."""
-    resume_text: str = Field(description="The complete and updated resume text, with keywords naturally integrated.")
+    """The full, optimized resume text with keywords naturally integrated."""
 
-def optimizeResume(
-    resume_text: str, 
-    missing_keywords: List[str], 
-    job_description: str,
-    corporate_profile: Optional[CorporateProfile] = None
+    resume_text: str = Field(
+        description="The complete and updated resume text, with keywords naturally integrated."
+    )
+    keywords_integrated: List[str] = Field(
+        default_factory=list,
+        description="List of keywords that were successfully integrated into the resume."
+    )
+
+
+@async_genkit_flow(
+    name="optimize_resume",
+    output_schema=OptimizedResume
+)
+async def optimize_resume(
+    resume_text: str,
+    missing_keywords: List[str],
+    job_description: str
 ) -> OptimizedResume:
     """
     Analyzes a resume and a list of missing keywords, then rewrites the resume
     to naturally incorporate those keywords in the context of the job description.
-    Optionally identifies and aligns with corporate culture if corporate_profile is provided.
+
+    This flow enhances ATS scores by integrating relevant keywords while maintaining
+    authenticity and avoiding fabrication of experience.
+
+    Args:
+        resume_text: The original resume text
+        missing_keywords: List of keywords identified as missing by ATS analysis
+        job_description: The target job description for context
+
+    Returns:
+        OptimizedResume: The enhanced resume with keywords naturally integrated
+
+    Example:
+        result = await optimize_resume(
+            resume_text="Software Engineer with 5 years experience...",
+            missing_keywords=["Project Management", "Agile", "Python"],
+            job_description="We're looking for a Senior Software Engineer..."
+        )
     """
+
+    if not missing_keywords:
+        logger.info("No missing keywords to integrate, returning original resume")
+        return OptimizedResume(
+            resume_text=resume_text,
+            keywords_integrated=[]
+        )
 
     keywords_str = ", ".join(missing_keywords)
-    
-    # Build Corporate Context string
-    corp_context = ""
-    if corporate_profile:
-        corp_context = f"""
-    **Target Company Intelligence:**
-    - **Company Name:** {corporate_profile.name}
-    - **Mission:** {corporate_profile.mission_statement}
-    - **Core Values:** {', '.join(corporate_profile.core_values)}
-    - **Strategic Focus:** {corporate_profile.strategic_focus}
-    - **Communication Style:** {corporate_profile.communication_style}
-    - **Known For:** {corporate_profile.known_for}
-        """
 
     prompt = f"""
-    You are an expert resume editor and career strategist. Your task is to revise the provided resume to:
-    1. Seamlessly integrate the missing keywords.
-    2. Align the tone and content with the target company's culture and strategy (matches the "Corporate Intelligence" below).
-    
-    The goal is to make the resume a stronger match for the target job description AND the specific employer.
+You are an expert resume editor. Your task is to revise the provided resume to seamlessly integrate a list of missing keywords.
+The goal is to make the resume a stronger match for the target job description without inventing new experiences or skills.
 
-    **Target Job Description:**
-    ---
-    {job_description}
-    ---
-    {corp_context}
+**Target Job Description:**
+---
+{job_description}
+---
 
-    **Original Resume:**
-    ---
-    {resume_text}
+**Original Resume:**
+---
+{resume_text}
+---
 
-    **Keywords to Integreate:**
-    {keywords_str}
+**Keywords to Integrate:**
+- {keywords_str}
 
-    **Output Format:**
-    Return ONLY a valid JSON object with a single field "resume_text".
-    The value should be the full optimized resume markdown text.
-    Do not include markdown code fences (```json) in your response.
-    """
+**Instructions:**
+1. **Analyze Context:** Read the job description and the original resume to understand the candidate's experience and the employer's needs.
+2. **Integrate Naturally:** Weave the keywords into the existing text of the resume. Rephrase bullet points or summaries where appropriate. For example, if a keyword is "Project Management" and the resume says "Led a team," you could change it to "Applied strong Project Management skills to lead a team."
+3. **Do Not Fabricate:** You must not add new job roles, invent new skills, or create experiences the candidate does not have. Your role is to edit and enhance, not to create fiction.
+4. **Preserve Formatting:** Maintain the overall structure and formatting of the original resume.
+5. **Track Integration:** Note which keywords you successfully integrated.
 
-    if not genai or not model:
-        return OptimizedResume(resume_text=resume_text)
+**Output Format:**
+Return a JSON object with:
+- resume_text: The complete, revised resume text
+- keywords_integrated: Array of keywords that were successfully integrated
+
+Now, please generate the optimized resume.
+"""
 
     try:
-        response = model.generate_content(
-            prompt,
-            generation_config=genai.GenerationConfig(
-                response_mime_type="application/json",
-                response_schema=OptimizedResume
-            )
+        model = get_model()
+        if not model:
+            raise RuntimeError("Genkit model not available")
+
+        # Generate optimized resume using the model
+        response = model.generate(
+            prompt=prompt,
+            generation_config={
+                "temperature": 0.2,  # Lower temperature for focused, less creative output
+                "response_mime_type": "application/json"
+            }
         )
-        
-        # Parse result
-        data = json.loads(response.text)
-        return OptimizedResume(resume_text=data["resume_text"])
+
+        # Parse the response
+        if hasattr(response, 'text'):
+            result_data = json.loads(response.text)
+
+            return OptimizedResume(
+                resume_text=result_data.get("resume_text", resume_text),
+                keywords_integrated=result_data.get("keywords_integrated", missing_keywords)
+            )
+        else:
+            raise ValueError("Failed to generate an optimized resume from the model")
 
     except Exception as e:
-        print(f"Error optimizing resume: {e}")
-        # Fallback
-        return OptimizedResume(resume_text=resume_text)
+        logger.error(f"Resume optimization failed: {str(e)}", exc_info=True)
+        # Return original resume on failure
+        return OptimizedResume(
+            resume_text=resume_text,
+            keywords_integrated=[]
+        )

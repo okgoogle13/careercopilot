@@ -46,16 +46,18 @@ ADVANCED_ANALYSIS_PROMPT = PROMPTS["job_listing_advanced_analysis"]["template"]
 
 
 from app.services.playwright_service import scrape_url_sync
+from app.services.document_extractor import extract_documents_from_page
 
 def _scrape_url_content(url: str) -> str:
     """
     Scrapes the text content from a given URL using Playwright (via MCP).
+    Also detects and extracts text from any PDF or Word documents linked on the page.
 
     Args:
         url: The URL to scrape.
 
     Returns:
-        The cleaned text/HTML content of the page.
+        The cleaned text/HTML content of the page, plus any extracted document content.
 
     Raises:
         IOError: If the scraping fails.
@@ -63,6 +65,17 @@ def _scrape_url_content(url: str) -> str:
     try:
         # Use the Playwright MCP Service to handle JS-rendered pages
         content = scrape_url_sync(url)
+
+        # Try to extract any attached documents (PDF/Word)
+        try:
+            document_text = extract_documents_from_page(content, url)
+            if document_text:
+                print(f"✅ Extracted text from attached documents")
+                content = content + "\n\n" + document_text
+        except Exception as e:
+            # Don't fail the whole scrape if document extraction fails
+            print(f"⚠️ Document extraction failed (non-critical): {e}")
+
         return content
     except Exception as e:
         print(f"Error scraping URL {url} with Playwright: {e}")
@@ -105,7 +118,12 @@ def extract_job_listing_details_flow(source: Union[str, dict]) -> JobListingDeta
         config={"temperature": 0.1},
     )
 
-    return response.output
+    # Preserve the full description for AI features
+    result = response.output
+    result.full_description = text_content
+
+    return result
+
 
 
 @flow(name="advanced_job_analysis_flow")
