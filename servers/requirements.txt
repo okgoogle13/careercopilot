@@ -1,0 +1,20 @@
+# MCP Server Dependencies
+# This file contains all dependencies required for the MCP servers in this directory
+
+# Core MCP
+mcp>=0.9.0
+
+# LLM Providers
+anthropic>=0.40.0
+google-generativeai>=0.8.0
+openai>=1.50.0
+azure-ai-inference>=1.0.0
+
+# Infrastructure & Utilities
+docker>=7.0.0
+python-dotenv>=1.0.0
+sentry-sdk>=2.0.0
+
+# Additional utilities used by MCP servers
+requests>=2.31.0
+pydantic>=2.0.0
