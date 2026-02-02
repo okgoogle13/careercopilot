@@ -14,31 +14,42 @@ Asset preparation is **Victorian specimen preparation**. We exaggerate radial sy
 
 ---
 
+## Canonical Source of Truth
+
+The **Primary Asset Registry** for all production tools and agents is:
+👉 [northcote-curio-manifest.json](file:///Users/okgoogle13/Desktop/careercopilot/assets/northcote-curio-manifest.json)
+
+For detailed prompting logic and aesthetic compliance, refer to:
+👉 [Asset Generation Prompting Strategy.md](file:///Users/okgoogle13/Desktop/careercopilot/Asset%20Generation%20Prompting%20Strategy.md)
+
+---
+
 ## Master Asset Registry
 
 ### Phase 1: Foundation Assets
 
-| Asset                                | Category  | Mode       | Score  | Status         |
-| :----------------------------------- | :-------- | :--------- | :----- | :------------- |
-| **Asset 1: The Curio Wallpaper**     | `plate`   | Gallery    | 94/100 | ✅ Validated   |
-| **Asset 2: The Sentry (Kookaburra)** | `fauna`   | Gallery    | 94/100 | ✅ Validated   |
-| **Asset 3: Laboratory Parchment**    | `texture` | Laboratory | -      | 🔄 In Progress |
+| Asset                                 | Category  | Mode    | Role       | Status         |
+| :------------------------------------ | :-------- | :------ | :--------- | :------------- |
+| **Asset 1: The Curio Wallpaper**      | `plate`   | Gallery | Background | ✅ Refined     |
+| **Asset 2: The Sentry Kookaburra**    | `fauna`   | Gallery | Mascot     | ✅ Refined     |
+| **Asset 3: Nocturnal Canopy Pattern** | `texture` | Gallery | Secondary  | 🔄 In Progress |
 
-### Phase 2: Specimen Series (Verticals)
+### Phase 2: Specimen Series (Anatomical Extremes)
 
-| Asset                               | Category   | Mode    | Score  | Status       |
-| :---------------------------------- | :--------- | :------ | :----- | :----------- |
-| **Asset 4: Eucalyptus & Echidna**   | `specimen` | Gallery | 90/100 | ✅ Validated |
-| **Asset 5: Wattle & Jewel Beetle**  | `specimen` | Gallery | -      | ⏳ Pending   |
-| **Asset 7: The Navigators (Icons)** | `ui`       | Both    | -      | ⏳ Pending   |
+| Asset                              | Category   | Mode    | Scale   | Status     |
+| :--------------------------------- | :--------- | :------ | :------ | :--------- |
+| **Asset 4: Wattle & Jewel Beetle** | `specimen` | Gallery | Primary | ⏳ Pending |
+| **Asset 5: Eucalyptus & Echidna**  | `specimen` | Gallery | Primary | ✅ Refined |
+| **Asset 9: Waratah Hero Closeup**  | `plate`    | Gallery | Hero    | ⏳ Pending |
 
-### Phase 3: UI & Enrichment
+### Phase 3: Utility & Enrichment
 
-| Asset                                  | Category  | Mode    | Score  | Status       |
-| :------------------------------------- | :-------- | :------ | :----- | :----------- |
-| **Asset 6: Banksia Geometric Spinner** | `ui`      | Both    | -      | ⏳ Pending   |
-| **Asset 8: Nocturnal Garden Tile**     | `texture` | Gallery | -      | ⏳ Pending   |
-| **Asset 9: Banksia Pot Still Life**    | `plate`   | Gallery | 92/100 | ✅ Validated |
+| Asset                                   | Category | Mode       | Use Case   | Status     |
+| :-------------------------------------- | :------- | :--------- | :--------- | :--------- |
+| **Asset 6: Banksia Pot & Stromatolite** | `plate`  | Gallery    | Still Life | ⏳ Pending |
+| **Asset 7: Firefly Sprite**             | `ui`     | Gallery    | Animation  | ⏳ Pending |
+| **Asset 8: Fossil Verification Mark**   | `ui`     | Laboratory | Stamp      | ⏳ Pending |
+| **Asset 10: Banksia Geometric Spinner** | `ui`     | Both       | Loading    | ⏳ Pending |
 
 ---
 
@@ -82,4 +93,4 @@ All filenames must follow the machine-readable format:
 ---
 
 **Last Updated**: 2026-02-01
-**Target Architecture**: Google AI Studio / Nano Banana Pro
+**Target Architecture**: Gemini 2.0+ / Design Flash Sidekick MCP
