@@ -1,0 +1,59 @@
+[allowlist]
+  description = "Allowlist for false positives and test data"
+
+  # Ignore common false positive paths
+  paths = [
+    '''node_modules/''',
+    '''\.yarn/''',
+    '''\.git/''',
+    '''\.venv/''',
+    '''venv/''',
+    '''__pycache__/''',
+    '''dist/''',
+    '''build/''',
+    '''coverage/''',
+    '''.pytest_cache/''',
+    '''test-results/''',
+    '''playwright-report/''',
+    '''storybook-static/''',
+    '''\.next/''',
+    '''\.turbo/''',
+    '''package-lock.json''',
+    '''yarn.lock''',
+    '''pnpm-lock.yaml''',
+  ]
+
+  # Ignore example/test secrets
+  regexes = [
+    '''EXAMPLE_''',
+    '''TEST_''',
+    '''MOCK_''',
+    '''DEMO_''',
+    '''PLACEHOLDER_''',
+    '''YOUR_.*_HERE''',
+    '''sk-proj-.*example''',
+    '''ghp_.*example''',
+  ]
+
+  # Ignore specific known safe patterns
+  stopwords = [
+    '''commit''',
+    '''password''',
+    '''secret''',
+  ]
+
+[allowlist.commits]
+  # Add specific commit SHAs to ignore if needed
+  # Example: "abc123def456"
+
+[[rules]]
+  description = "Generic API Key"
+  id = "generic-api-key"
+  regex = '''(?i)(api[_-]?key|apikey|api[_-]?token)[\s]*[=:>][\s]*['"]?([a-zA-Z0-9_\-]{20,})['"]?'''
+
+  [[rules.allowlist]]
+    regexes = [
+      '''EXAMPLE''',
+      '''TEST''',
+      '''PLACEHOLDER''',
+    ]

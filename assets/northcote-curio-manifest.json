@@ -1,0 +1,236 @@
+{
+  "project": "Northcote Curio",
+  "version": "2.1.0",
+  "last_updated": "2026-02-02",
+  "strategy": "Path B (Complete Replacement)",
+  "assets": [
+    {
+      "id": "ASSET-1",
+      "name": "The Curio Wallpaper",
+      "category": "plate",
+      "subject": "Wunderkammer Composition",
+      "motif_type": "both",
+      "priority": "CRITICAL",
+      "status": "refined",
+      "compliance_target": 95,
+      "file_path": "/assets/plates/northcote-curio-wallpaper-v2.jpg",
+      "mode": "gallery",
+      "intended_context": "Main application background, landing page hero",
+      "interactive_grid_profile": {
+        "snap_points": [
+          "center",
+          "upper-right",
+          "lower-left"
+        ],
+        "safe_zones": [
+          "upper-left-200x200",
+          "lower-right-150x150"
+        ],
+        "annotation_targets": [
+          "Waratah Fig. 4",
+          "Frill-neck Fig. 11",
+          "Molt Fig. 14"
+        ]
+      }
+    },
+    {
+      "id": "ASSET-2",
+      "name": "The Sentry Kookaburra",
+      "category": "fauna",
+      "subject": "Dacelo novaeguineae",
+      "motif_type": "anatomical",
+      "priority": "CRITICAL",
+      "status": "refined",
+      "compliance_target": 95,
+      "file_path": "/assets/fauna/northcote-sentry-kookaburra.jpg",
+      "mode": "gallery",
+      "intended_context": "Avatar, mascot, character-driven storytelling",
+      "interactive_grid_profile": {
+        "snap_points": [
+          "center"
+        ],
+        "safe_zones": [
+          "diagonal-bottom-right"
+        ],
+        "annotation_targets": [
+          "Crown",
+          "Beak",
+          "Plumage Detail"
+        ]
+      }
+    },
+    {
+      "id": "ASSET-3",
+      "name": "Nocturnal Canopy Pattern",
+      "category": "texture",
+      "subject": "Botanical Silhouettes",
+      "motif_type": "geometric",
+      "priority": "HIGH",
+      "status": "in-progress",
+      "file_path": "/assets/textures/northcote-canopy-pattern.jpg",
+      "mode": "gallery",
+      "intended_context": "Repeating CSS background for content sections",
+      "interactive_grid_profile": {
+        "snap_points": [],
+        "safe_zones": [],
+        "annotation_targets": []
+      }
+    },
+    {
+      "id": "ASSET-4",
+      "name": "Wattle Branch with Jewel Beetle",
+      "category": "specimen",
+      "subject": "Acacia pycnantha + Sternocera",
+      "motif_type": "both",
+      "priority": "HIGH",
+      "status": "pending",
+      "file_path": "/assets/specimens/northcote-wattle-beetle.png",
+      "mode": "gallery",
+      "intended_context": "Sidebar decoration, detailed botanical study",
+      "interactive_grid_profile": {
+        "snap_points": [
+          "beetle-carapace",
+          "wattle-bloom-cluster"
+        ],
+        "safe_zones": [],
+        "annotation_targets": [
+          "Mandibles",
+          "Elytra",
+          "Pollen Sacks"
+        ]
+      }
+    },
+    {
+      "id": "ASSET-5",
+      "name": "Eucalyptus with Echidna Spine Array",
+      "category": "specimen",
+      "subject": "Eucalyptus + Tachyglossus",
+      "motif_type": "both",
+      "priority": "CRITICAL",
+      "status": "refined",
+      "compliance_target": 95,
+      "file_path": "/assets/specimens/northcote-eucalyptus-echidna.png",
+      "mode": "both",
+      "intended_context": "LaboratoryMode primary specimen, interactive anatomy",
+      "interactive_grid_profile": {
+        "snap_points": [
+          "spine-root",
+          "spine-tip",
+          "leaf-midrib"
+        ],
+        "safe_zones": [
+          "upper-left-120x120"
+        ],
+        "annotation_targets": [
+          "Modified Keratin",
+          "Reticulate Venation",
+          "Episodic Growth Bands"
+        ]
+      }
+    },
+    {
+      "id": "ASSET-6",
+      "name": "Banksia Pot with Shell and Stromatolite",
+      "category": "plate",
+      "subject": "Temporal Deep Time",
+      "motif_type": "geometric",
+      "priority": "MEDIUM",
+      "status": "pending",
+      "file_path": "/assets/plates/northcote-temporal-still-life.jpg",
+      "mode": "gallery",
+      "intended_context": "Footer atmospheric piece, deep time context",
+      "interactive_grid_profile": {
+        "snap_points": [
+          "shell-vertex",
+          "stromatolite-banding"
+        ],
+        "safe_zones": [],
+        "annotation_targets": [
+          "Fibonacci Vortex",
+          "Precambrian Silt"
+        ]
+      }
+    },
+    {
+      "id": "ASSET-7",
+      "name": "Firefly Sprite",
+      "category": "ui",
+      "subject": "Atmospheric Glow",
+      "motif_type": "geometric",
+      "priority": "LOW",
+      "status": "pending",
+      "file_path": "/assets/ui/northcote-firefly-sprite.png",
+      "mode": "gallery",
+      "intended_context": "Dynamic floating animation for visual delight",
+      "interactive_grid_profile": {
+        "snap_points": [
+          "glow-center"
+        ],
+        "safe_zones": [],
+        "annotation_targets": []
+      }
+    },
+    {
+      "id": "ASSET-8",
+      "name": "Fossil Impression Verification Mark",
+      "category": "ui",
+      "subject": "Glossopteris Fossil",
+      "motif_type": "geometric",
+      "priority": "MEDIUM",
+      "status": "pending",
+      "file_path": "/assets/ui/northcote-verification-stamp.png",
+      "mode": "laboratory",
+      "intended_context": "Success state indicator, authentication seal",
+      "interactive_grid_profile": {
+        "snap_points": [
+          "center"
+        ],
+        "safe_zones": [],
+        "annotation_targets": [
+          "Reticulate Venation"
+        ]
+      }
+    },
+    {
+      "id": "ASSET-9",
+      "name": "Waratah Hero Closeup",
+      "category": "plate",
+      "subject": "Telopea speciosissima",
+      "motif_type": "geometric",
+      "priority": "HIGH",
+      "status": "pending",
+      "file_path": "/assets/plates/northcote-waratah-hero.jpg",
+      "mode": "gallery",
+      "intended_context": "Section divider, high-impact botanical divider",
+      "interactive_grid_profile": {
+        "snap_points": [
+          "center"
+        ],
+        "safe_zones": [],
+        "annotation_targets": [
+          "Florets",
+          "Involucral Bracts"
+        ]
+      }
+    },
+    {
+      "id": "ASSET-10",
+      "name": "Banksia Geometric Cross-Section",
+      "category": "ui",
+      "subject": "Loading Spinner Pattern",
+      "motif_type": "geometric",
+      "priority": "MEDIUM",
+      "status": "pending",
+      "file_path": "/assets/ui/northcote-banksia-spinner.png",
+      "mode": "both",
+      "intended_context": "SVG/CSS rotating loading state",
+      "interactive_grid_profile": {
+        "snap_points": [
+          "axis"
+        ],
+        "safe_zones": [],
+        "annotation_targets": []
+      }
+    }
+  ]
+}
