@@ -30,8 +30,7 @@
     "pathe": "2.0.3",
     "sirv": "3.0.2",
     "ts-api-utils": "^2.4.0",
-    "@joshwooding/vite-plugin-react-docgen-typescript": "0.6.2",
-    "@storybook/builder-vite": "10.0.2"
+    "@joshwooding/vite-plugin-react-docgen-typescript": "0.6.2"
   },
   "scripts": {
     "prepare": "husky || true",
@@ -148,7 +147,6 @@
     "@storybook/addon-links": "^8.1.11",
     "@storybook/addon-onboarding": "^8.1.11",
     "@storybook/blocks": "^8.1.11",
-    "@storybook/builder-vite": "^7.6.21",
     "@storybook/core-server": "^7.6.21",
     "@storybook/jest": "^0.2.3",
     "@storybook/react": "^8.1.11",
@@ -163,6 +161,7 @@
     "@typescript-eslint/parser": "^8.0.0",
     "@vitest/browser-playwright": "^4.0.0",
     "@vitest/coverage-v8": "^4.0.0",
+    "chromatic": "^13.3.5",
     "clean-jsdoc-theme": "^4.3.0",
     "husky": "^9.0.11",
     "jsdoc": "^4.0.3",

@@ -13,6 +13,9 @@ if "/app/app" not in sys.path:
 
 # Ensure PORT environment variable is set correctly
 
+import sentry_sdk
+from sentry_sdk.integrations.fastapi import FastApiIntegration
+from sentry_sdk.integrations.starlette import StarletteIntegration
 
 from fastapi import FastAPI
 from fastapi.middleware.gzip import GZipMiddleware
@@ -38,6 +41,20 @@ configure_loguru(environment=settings.ENV, log_dir="logs", service_name="careerc
 
 # Get application logger
 logger = get_logger(__name__)
+
+# Initialize Sentry
+if os.getenv("SENTRY_DSN"):
+    sentry_sdk.init(
+        dsn=os.getenv("SENTRY_DSN"),
+        integrations=[
+            StarletteIntegration(transaction_style="endpoint"),
+            FastApiIntegration(at_exit=True),
+        ],
+        send_default_pii=True,
+        traces_sample_rate=1.0,
+        profiles_sample_rate=1.0,
+        environment=os.getenv("ENV", "development"),
+    )
 
 # Create the FastAPI app instance
 app = FastAPI(
@@ -71,7 +88,7 @@ if settings.ENV != "test":
 def on_startup():
     """Initialize services when the application starts."""
     logger.info("Starting CareerCopilot API application", environment=settings.ENV)
-    
+
     # Initialize Database (Create Tables)
     try:
         init_database()
@@ -105,3 +122,9 @@ async def read_root():
 @app.get("/health", tags=["Health"])
 async def health_check():
     return {"api_status": "ok", "genkit_status": check_genkit_health()}
+
+
+@app.get("/api/v1/debug-sentry", tags=["Debug"])
+async def trigger_error():
+    division_by_zero = 1 / 0
+    return {"message": "You should not see this"}
