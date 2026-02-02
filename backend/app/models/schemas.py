@@ -307,6 +307,11 @@ class JobListingDetails(BaseModel):
         default_factory=list,
         description="A list of key duties, tasks, or responsibilities associated with the role.",
     )
+    full_description: Optional[str] = Field(
+        None,
+        description="The complete, unprocessed job description text for use with AI features.",
+    )
+
 
 
 class JobListingTextRequest(BaseModel):
