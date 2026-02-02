@@ -33,7 +33,7 @@ try:
     script_dir = os.path.dirname(os.path.abspath(__file__))
     project_root = os.path.dirname(script_dir)
     env_path = os.path.join(project_root, '.env')
-    load_dotenv(env_path)
+    load_dotenv(env_path, override=True)
 except ImportError:
     pass
 
@@ -232,7 +232,7 @@ class AsyncFlashSidekickServer:
 
                 response = await client.complete(
                     messages=messages,
-                    model="openai/gpt-4.1-mini"
+                    model="gpt-4o-mini"
                 )
                 content = response.choices[0].message.content
                 return f"[OpenAI GitHub Models Fallback]\n{content}"
