@@ -16,6 +16,7 @@ backend/.env
 backend/.env.*
 frontend/.env.production
 frontend/.env.staging
+.sentryclirc
 
 # Firebase service account keys (CRITICAL: NEVER commit these)
 *-service-account-key.json
@@ -124,5 +125,12 @@ test-results/
 # Legacy Archive (Pre-Flight Cleanup)
 _archive_legacy/
 credentials.json
+
+# Branch consolidation output files
+branch_analysis.json
+branch_analysis_output.txt
+consolidation_log.txt
+
 # Archived Configs
 *.archived-*
+setup-ci-secrets.sh
