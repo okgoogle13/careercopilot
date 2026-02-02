@@ -57,8 +57,37 @@ This master setup script handles:
 - **`migrate-to-m3.py`** - M3 Expressive migration
 - **`batch-migrate-m3.sh`** - Batch M3 migration
 
+### 🌿 Branch Consolidation Scripts
+
+Scripts for analyzing and consolidating feature branches:
+
+- **`analyze_branches.sh`** - Quick branch analysis showing backend vs frontend changes
+- **`extract_backend_features.py`** - Detailed branch scoring with value categorization (HIGH/MEDIUM/LOW)
+- **`cherry_pick_backend.sh`** - Interactive tool to extract backend-only commits from branches
+
+**Documentation:**
+- See `docs/CONSOLIDATION_PLAN.md` for comprehensive 4-phase consolidation strategy
+- See `.github/BRANCH_CLEANUP_CHECKLIST.md` for detailed tracking checklist
+
+**Usage:**
+```bash
+# Step 1: Analyze all branches
+./scripts/analyze_branches.sh
+
+# Step 2: Generate detailed value scoring
+python3 scripts/extract_backend_features.py
+# Creates branch_analysis.json with recommendations
+
+# Step 3: Cherry-pick backend code from a specific branch
+./scripts/cherry_pick_backend.sh branch-name
+# Interactive prompts for each commit
+```
+
 ### 📊 Analysis Scripts
 
+- **`analyze_branches.sh`** - Branch consolidation analysis (backend vs frontend files)
+- **`extract_backend_features.py`** - Detailed branch value scoring and recommendations
+- **`cherry_pick_backend.sh`** - Interactive backend-only cherry-pick helper
 - **`vite-bundle-analyzer.sh`** - Bundle size analysis
 - **`audit-component-structure.sh`** - Component structure audit
 - **`audit-hardcoded-values.sh`** - Hardcoded values audit
