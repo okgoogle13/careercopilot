@@ -33,10 +33,10 @@ R = TypeVar('R')
 # Protocol for model configuration
 class ModelConfigProtocol(Protocol):
     """Protocol for model configuration."""
-    
+
     def generate(self, prompt: str, **kwargs: Any) -> Any:
         ...
-        
+
 # Type for genkit flow
 def _noop_flow(*args: Any, **kwargs: Any) -> Callable[[Callable[P, R]], Callable[P, R]]:
     """No-op flow decorator for when genkit is not available."""
@@ -53,7 +53,7 @@ except ImportError:
     class _DummyGenkit:
         def __getattr__(self, name: str) -> Any:
             return _noop_flow
-    
+
     genkit = _DummyGenkit()  # type: ignore[assignment]
     google_genai = None  # type: ignore[assignment]
     GENKIT_AVAILABLE = False
@@ -78,7 +78,7 @@ except Exception as e:
     print(f"Warning: Failed to initialize genkit with Google AI plugin: {e}")
 
 # Get model configuration
-model_config = get_ai_config().get_model_config("gemini-2.0-flash")
+model_config = get_ai_config().get_model_config("gemini-3.0-flash")
 if model_config is None:
     raise RuntimeError("Failed to load model configuration")
 
@@ -89,7 +89,7 @@ gemini_pro = cast(ModelConfigProtocol, model_config)
 # Data Models
 class ApplicationPackage(BaseModel):
     """Represents a complete job application package."""
-    
+
     tailored_resume: Dict[str, Any] = Field(
         default_factory=dict,
         description="Optimized resume content and analysis"
@@ -144,10 +144,10 @@ def detect_ksc_requirements(job_description: str) -> KscDetectionResult:
             raise InputValidationError("Job description is required and must be a string")
 
         sanitized_job = InputSanitizer.sanitize_text_input(job_description)
-        
+
         if not gemini_pro:
             raise RuntimeError("Model configuration not available")
-            
+
         if not hasattr(gemini_pro, 'generate'):
             raise RuntimeError("Model configuration does not support generation")
 
@@ -193,15 +193,15 @@ Respond with valid JSON matching the KscDetectionResult schema.
             config={"response_mime_type": "application/json"},
             output_schema=KscDetectionResult,
         )
-        
+
         # Ensure the response has the expected output method
         if not hasattr(response, 'output') or not callable(response.output):
             raise RuntimeError("Invalid response from model: missing output method")
-            
+
         result = response.output()
         if not isinstance(result, KscDetectionResult):
             raise TypeError(f"Expected KscDetectionResult, got {type(result).__name__}")
-            
+
         return result
 
     except Exception as e:
@@ -437,7 +437,7 @@ Respond with a JSON object containing these strategic insights.
 @genkit_flow  # type: ignore[call-arg]
 @with_ai_error_handling()
 def assess_application_readiness(
-    user_profile: Dict[str, Any], 
+    user_profile: Dict[str, Any],
     job_description: str
 ) -> Dict[str, Any]:
     """

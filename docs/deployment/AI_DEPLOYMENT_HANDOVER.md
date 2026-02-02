@@ -27,7 +27,7 @@
 
 - Updated `.env.production` with AI settings:
   - Genkit environment variables
-  - AI model configuration (Gemini 1.5 Pro as default)
+  - AI model configuration (Gemini 3.0 Pro as default)
   - Vertex AI project settings
   - Feature flags for AI capabilities
 

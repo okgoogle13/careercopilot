@@ -46,7 +46,7 @@ except ImportError:
 
     genkit_flow = _noop_flow
 
-gemini_pro = get_ai_config().get_model_config("gemini-2.0-flash")
+gemini_pro = get_ai_config().get_model_config("gemini-3.0-flash")
 
 
 class TailoredResumeResult(BaseModel):
@@ -472,7 +472,7 @@ def _extract_company_name(job_description: str) -> Optional[str]:
     # This is a simplified implementation - could be enhanced with NLP
     lines = job_description.split("\n")[:10]  # Check first 10 lines
     keywords = ["company:", "employer:", "organization:"]
-    
+
     for line in lines:
         line_lower = line.lower()
         # Check which keyword is present and extract immediately
@@ -480,7 +480,7 @@ def _extract_company_name(job_description: str) -> Optional[str]:
             if keyword in line_lower:
                 company = line_lower.split(keyword, 1)[1].strip()
                 return company.split()[0].title() if company else None
-    
+
     return None
 
 
@@ -488,7 +488,7 @@ def _extract_job_role(job_description: str) -> str:
     """Extract job role/title from job description."""
     lines = job_description.split("\n")[:5]  # Check first 5 lines
     keywords = ["position:", "role:", "title:"]
-    
+
     for line in lines:
         line_lower = line.lower()
         # Check which keyword is present and extract immediately
@@ -496,7 +496,7 @@ def _extract_job_role(job_description: str) -> str:
             if keyword in line_lower:
                 role = line_lower.split(keyword, 1)[1].strip()
                 return role.title() if role else "Software Engineer"
-    
+
     # Default fallback
     return "Professional Role"
 
@@ -511,35 +511,35 @@ def _detect_ksc_criteria(job_description: str) -> List[str]:
         "must have",
         "essential requirements",
     ]
-    
+
     criteria = []
     job_desc_lower = job_description.lower()
-    
+
     # Simple detection - look for numbered lists or bullet points after KSC keywords
     if any(keyword in job_desc_lower for keyword in ksc_keywords):
         lines = job_description.split("\n")
         in_criteria_section = False
-        
+
         for line in lines:
             line_stripped = line.strip()
             line_lower = line_stripped.lower()
-            
+
             # Start of criteria section
             if any(keyword in line_lower for keyword in ksc_keywords):
                 in_criteria_section = True
                 continue
-            
+
             # End of criteria section (empty line or new section)
             if in_criteria_section and (not line_stripped or line_lower.startswith("desirable")):
                 break
-            
+
             # Extract criteria (numbered or bulleted items)
             if in_criteria_section and line_stripped:
                 if line_stripped[0].isdigit() or line_stripped.startswith(("•", "-", "*")):
                     criterion = line_stripped.lstrip("0123456789.-•* ").strip()
                     if len(criterion) > 20:  # Filter out very short items
                         criteria.append(criterion)
-    
+
     return criteria[:5]  # Limit to 5 criteria
 
 

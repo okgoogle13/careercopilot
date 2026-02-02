@@ -213,7 +213,7 @@ export const IngestionPage: React.FC = () => {
           <BrainCircuit className="w-6 h-6 text-[var(--ref-palette-primary-60)] shrink-0" />
           <p className="font-field-note text-xs text-[var(--color-parchment)]/70 leading-relaxed">
             <strong className="text-[var(--color-parchment)]">Technical Note:</strong> Our inference
-            engine uses Gemini 1.5 Pro to derive structured professional vectors. Processing may
+            engine uses Gemini 3.0 Pro to derive structured professional vectors. Processing may
             take a few moments as we harvest semantic embeddings.
           </p>
         </div>
