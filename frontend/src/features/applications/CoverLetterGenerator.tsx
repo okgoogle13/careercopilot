@@ -23,6 +23,8 @@ export function CoverLetterGenerator() {
   const [loading, setLoading] = useState(false);
 
   // Form State
+  const [jobUrl, setJobUrl] = useState('');
+  const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [jobDescription, setJobDescription] = useState('');
   const [companyName, setCompanyName] = useState('');
   const [companyValues, setCompanyValues] = useState('');
@@ -33,6 +35,37 @@ export function CoverLetterGenerator() {
 
   const handleNext = () => setStep((prev) => prev + 1);
   const handleBack = () => setStep((prev) => prev - 1);
+
+  const handleAnalyzeUrl = async () => {
+    if (!jobUrl) return;
+    setIsAnalyzing(true);
+    try {
+      const result = await genkitApi.analyzeJobFromUrl({ url: jobUrl });
+
+      if (result.analysis_success) {
+        setJobDescription(
+          result.job_details.full_description || result.job_details.key_responsibilities.join('\n')
+        );
+
+        if (result.job_details.company_name) {
+          setCompanyName(result.job_details.company_name);
+        }
+
+        if (result.company_context?.core_values?.length) {
+          setCompanyValues(result.company_context.core_values.join(', '));
+        }
+
+        toast.success('Job details extracted successfully!');
+      } else {
+        toast.error('Could not extract details from this URL.');
+      }
+    } catch (error) {
+      console.error('Analysis failed:', error);
+      toast.error('Failed to analyze URL. Please check the link.');
+    } finally {
+      setIsAnalyzing(false);
+    }
+  };
 
   const handleGenerate = async () => {
     setLoading(true);
@@ -127,6 +160,49 @@ export function CoverLetterGenerator() {
             <div className="flex items-center gap-2 mb-2">
               <FileText className="text-primary w-6 h-6" />
               <h2 className="text-title-large font-bold text-on-surface">Job Details</h2>
+            </div>
+
+            {/* URL Import Section */}
+            <div className="p-4 bg-secondary-container/20 rounded-tech border border-secondary-container">
+              <label className="block text-on-surface mb-2 text-label-large font-bold">
+                Import from URL (Optional)
+              </label>
+              <div className="flex gap-2">
+                <Input
+                  value={jobUrl}
+                  onChange={(e) => setJobUrl(e.target.value)}
+                  placeholder="Paste job listing URL (e.g. LinkedIn, Seek, Indeed)..."
+                  className="bg-surface"
+                />
+                <Button
+                  onClick={handleAnalyzeUrl}
+                  disabled={!jobUrl || isAnalyzing}
+                  className="bg-secondary-container text-on-secondary-container hover:bg-secondary hover:text-on-secondary whitespace-nowrap"
+                >
+                  {isAnalyzing ? (
+                    <>
+                      <RefreshCw className="w-4 h-4 mr-2 animate-spin" /> Scanning...
+                    </>
+                  ) : (
+                    <>
+                      <Sparkles className="w-4 h-4 mr-2" /> Auto-Fill
+                    </>
+                  )}
+                </Button>
+              </div>
+              <p className="text-body-small text-on-surface-variant mt-2">
+                Scanning a URL will automatically fill the job description and company details
+                below.
+              </p>
+            </div>
+
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center">
+                <span className="w-full border-t border-outline-variant" />
+              </div>
+              <div className="relative flex justify-center text-xs uppercase">
+                <span className="bg-surface px-2 text-on-surface-variant">Or paste manually</span>
+              </div>
             </div>
 
             <div>
