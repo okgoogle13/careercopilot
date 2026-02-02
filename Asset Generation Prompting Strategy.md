@@ -147,4 +147,4 @@ Before approving any generated image, confirm:
 ---
 
 **Last Updated**: 2026-02-02
-**Target Architecture**: Gemini 2.0+ / Design Flash Sidekick MCP
+**Target Architecture**: Gemini 3.0+ / Design Flash Sidekick MCP

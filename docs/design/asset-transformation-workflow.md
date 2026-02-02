@@ -6,7 +6,7 @@ This workflow defines the process of moving an image from generation (AI Studio)
 
 ## 1. Generation Phase
 
-- **Tool**: Gemini 2.1 Pro / Design Flash Sidekick MCP.
+- **Tool**: Gemini 3.0 Pro / Design Flash Sidekick MCP.
 - **Rules**:
   - Apply Universal System Instructions (Immutable Laws).
   - Ensure background is `#1A1714` (The Void).

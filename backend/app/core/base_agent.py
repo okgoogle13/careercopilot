@@ -162,7 +162,7 @@ class BaseAgent(ABC):
         self,
         prompt: str,
         context: Optional[Dict] = None,
-        model: str = "gemini-2.0-flash",
+        model: str = "gemini-3.0-flash",
         temperature: float = 0.7,
     ) -> str:
         """Generate AI response with caching support using unified AIPromptBuilder"""

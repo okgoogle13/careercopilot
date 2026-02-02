@@ -6,7 +6,7 @@ from pydantic import BaseModel, Field
 from app.core.genkit_init import get_model
 from app.genkit_flows.flow_decorator import async_genkit_flow
 from app.schemas.ai import (
-    CareerIntelligenceRequest, 
+    CareerIntelligenceRequest,
     AIResponseModel,
     SalaryAnalysisResponse,
     SkillsAnalysisResponse,
@@ -19,7 +19,7 @@ logger = logging.getLogger(__name__)
 def _build_system_context(request: CareerIntelligenceRequest) -> str:
     """Build standardized system context from request data"""
     career_context = request.context_data.get("career_context", {})
-    
+
     trans_from = career_context.get("transition_from", "Finance")
     trans_to = career_context.get("transition_to", "Social Work")
     location = career_context.get("location", "Australia")
@@ -65,13 +65,13 @@ async def careerIntelligenceFlow(request: CareerIntelligenceRequest) -> AIRespon
     Replaces legacy AIPromptBuilder and LLMService direct calls.
     """
     logger.info(f"Executing careerIntelligenceFlow for user {request.user_id}, type {request.prompt_type}")
-    
+
     model = get_model()
     if not model:
         raise RuntimeError("Genkit model not initialized")
 
     system_context = _build_system_context(request)
-    
+
     # Inject additional context
     context_str = ""
     if job_ctx := request.context_data.get("job_context"):
@@ -108,7 +108,7 @@ REQUIREMENTS:
 
     import time
     start_time = time.time()
-    
+
     try:
         if output_schema:
             response = await model.generate(
@@ -125,10 +125,10 @@ REQUIREMENTS:
                 content = str(response)
 
         duration = (time.time() - start_time) * 1000
-        
+
         return AIResponseModel(
             content=content,
-            model_used=getattr(model, "model_name", "gemini-2.0-flash"),
+            model_used=getattr(model, "model_name", "gemini-3.0-flash"),
             response_time_ms=duration,
             metadata={"prompt_type": request.prompt_type}
         )

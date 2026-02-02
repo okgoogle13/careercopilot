@@ -472,7 +472,7 @@ class AIInteraction(Base):
         index=True,
         comment="Reference to the user who initiated the interaction",
     )
-    
+
     application_id: Mapped[Optional[str]] = mapped_column(
         String(36),
         ForeignKey("applications.id", ondelete="CASCADE"),
@@ -480,7 +480,7 @@ class AIInteraction(Base):
         index=True,
         comment="Reference to the application associated with this interaction",
     )
-    
+
     application: Mapped[Optional["Application"]] = relationship(
         "Application", back_populates="interactions", lazy="selectin"
     )
@@ -489,7 +489,7 @@ class AIInteraction(Base):
     model_used: Mapped[Optional[str]] = mapped_column(
         String(100),
         nullable=True,
-        comment="Identifier of the AI model used (e.g., 'gpt-4', 'claude-2')",
+        comment="Identifier of the AI model used (e.g., 'gemini-3.0-flash', 'gemini-2.5-pro')",
     )
     tokens_used: Mapped[Optional[int]] = mapped_column(
         Integer,

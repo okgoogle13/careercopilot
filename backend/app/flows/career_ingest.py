@@ -6,12 +6,12 @@ from app.schemas.career import CareerDatabase
 # --- THE ARCHITECT PROMPT ---
 INGESTION_PROMPT = """
 You are the CareerCopilot Data Architect.
-Analyze the provided raw career documents. 
+Analyze the provided raw career documents.
 Extract, merge, and structure the data into a strict JSON database.
 
 CORE INSTRUCTIONS:
 1. **Deduplication**: If the same role appears in multiple file segments, merge them into one entry.
-2. **Achievement Structuring**: 
+2. **Achievement Structuring**:
    - Rewrite EVERY bullet point into the "Action + Noun + Metric + Strategy + Outcome" format.
    - If a metric is missing, use 'X' (e.g., "improved efficiency by X%").
    - Set 'needs_review_flag' to True if you used 'X'.
@@ -47,12 +47,11 @@ def conditional_flow(name):
 async def ingest_career_docs(input_data: IngestInput) -> CareerDatabase:
     """
     Ingests raw text and returns a structured CareerDatabase.
-    Uses Gemini 1.5 Flash for high-speed, free-tier compliant processing.
     """
-    # If in test mode, we might not have ai initialized or configured, 
-    # but the function body is mocked in tests anyway.
+    # If in test mode, we might not have ai initialized or configured,
+    # Get the Gemini 3.0 Pro model constants anyway.
     # However, if called without mock in strict mode, ensure we use ai.generate safely
-    
+
     response = await ai.generate(
         prompt=INGESTION_PROMPT.replace("{{raw_text}}", input_data.raw_text),
         output_schema=CareerDatabase,

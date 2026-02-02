@@ -15,7 +15,6 @@ export interface UserSettings {
   defaultLocation?: string;
   targetIndustries?: string[];
   apiKeys?: {
-    openai?: string;
     custom?: Record<string, string>;
   };
   integrations?: {

@@ -10,7 +10,7 @@ This module implements the core AI extraction logic for the Smart Ingestion feat
 3. KSC Extractor - Extracts Key Selection Criteria examples and related skills
 4. Voice Profile Extractor - Analyzes writing style, tone, and vocabulary
 
-All flows use gemini-1.5-pro for structured JSON output and large context windows.
+All flows use gemini-3.0-pro for structured JSON output and large context windows.
 """
 
 import logging

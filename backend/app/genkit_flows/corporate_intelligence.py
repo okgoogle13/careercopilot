@@ -14,7 +14,7 @@ load_dotenv()
 if genai:
     genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 
-model = genai.GenerativeModel("gemini-1.5-pro") if genai else None
+model = genai.GenerativeModel("gemini-3.0-pro") if genai else None
 
 class CorporateProfile(BaseModel):
     """Structured intelligence about a company."""
@@ -31,11 +31,11 @@ def research_company(company_name: str) -> CorporateProfile:
     Uses Perplexity API (via SearchService) to gather and synthesize context.
     """
     search_service = SearchService()
-    
+
     # 1. Gather Deep Research from Perplexity
     # This returns a high-quality synthesis directly
     research_summary = search_service.research_company(company_name)
-    
+
     if not research_summary:
         # Fallback if API fails or key missing
         return CorporateProfile(
@@ -62,9 +62,9 @@ def research_company(company_name: str) -> CorporateProfile:
     prompt = f"""
     You are a Data Structuring Specialist.
     I have a detailed research summary about **{company_name}**.
-    
+
     Your job is to extract specific fields from this summary into a JSON structure.
-    
+
     **Research Summary:**
     ---
     {research_summary}
