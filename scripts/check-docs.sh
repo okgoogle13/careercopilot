@@ -12,14 +12,14 @@ if [[ "$BAD_ROOT_DOCS" != "0" ]]; then
   exit 1
 fi
 
-BAD_NAMES=$(find "$ROOT/docs" -type f -name "*.md" | grep -v "/archive/" | grep -E " " || true)
+BAD_NAMES=$(find "$ROOT/docs" -type f -name "*.md" | grep -v -E "/(archive|_archive|archive_legacy_reports)/" | grep -E " " || true)
 if [[ -n "$BAD_NAMES" ]]; then
   echo "FAIL: Found docs with spaces in filename:"
   echo "$BAD_NAMES"
   exit 1
 fi
 
-BAD_CASE=$(find "$ROOT/docs" -type f -name "*.md" | grep -v "/archive/" | grep -E "[A-Z]" || true)
+BAD_CASE=$(find "$ROOT/docs" -type f -name "*.md" | grep -v -E "/(archive|_archive|archive_legacy_reports)/" | grep -E "[A-Z]" || true)
 if [[ -n "$BAD_CASE" ]]; then
   echo "FAIL: Found docs with uppercase letters in filename (use kebab-case):"
   echo "$BAD_CASE"

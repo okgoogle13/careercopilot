@@ -48,13 +48,14 @@ CareerCopilot is a curated digital workspace where a user's professional history
 
 ## Architecture Summary
 
-| Layer         | Technology                                      |
-| ------------- | ----------------------------------------------- |
-| Frontend      | React 19 + Tailwind CSS (with curio tokens)     |
-| Design Engine | CSS Variables for mode switching                |
-| Backend       | Supabase (PostgreSQL + JSONB)                   |
-| Intelligence  | Google Gemini 1.5 Pro via Genkit                |
-| Testing       | Playwright (E2E), Storybook (visual regression) |
+| Layer         | Technology                                       |
+| ------------- | ------------------------------------------------ |
+| Frontend      | React 19 + Tailwind CSS (with curio tokens)      |
+| Design Engine | CSS Variables for mode switching                 |
+| Backend       | Supabase (PostgreSQL + JSONB)                    |
+| Primary Intel | **Gemini 2.1 Pro via Design Flash Sidekick MCP** |
+| Review Intel  | Claude 3.7 / 4.5 (Historical / Optional Review)  |
+| Testing       | Playwright (E2E), Storybook (visual regression)  |
 
 ---
 

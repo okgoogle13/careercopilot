@@ -12,6 +12,8 @@ class DocumentEmbedding(Base, BaseMixin):
     Replaces local ChromaDB.
     """
     __tablename__ = "document_embeddings"
+    __table_args__ = {'extend_existing': True}
+
 
     user_id = Column(String, ForeignKey("users.id"), nullable=False, index=True)
     content = Column(String, nullable=False)
@@ -21,5 +23,5 @@ class DocumentEmbedding(Base, BaseMixin):
     else:
         embedding = Column(JSON)
     metadata_json = Column(JSON, default=dict)
-    
+
     # Optional: Add HNSW index in migration (handled via raw SQL usually)
