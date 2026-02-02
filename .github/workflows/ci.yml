@@ -608,6 +608,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Download frontend artifact
+        if: needs.frontend-build.result == 'success'
         uses: actions/download-artifact@v4
         with:
           name: frontend-dist
@@ -655,7 +656,7 @@ jobs:
         if: failure()
         uses: actions/upload-artifact@v4
         with:
-          name: playwright-traces-${{ matrix.browser }}-${{ matrix.shard }}
+          name: playwright-traces-${{ matrix.browser }}-shard-${{ strategy.job-index }}
           path: frontend/test-results/
           retention-days: 7
 
@@ -663,7 +664,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: playwright-report-${{ matrix.browser }}-${{ matrix.shard }}
+          name: playwright-report-${{ matrix.browser }}-shard-${{ strategy.job-index }}
           path: frontend/playwright-report/
           retention-days: 7
           if-no-files-found: warn
