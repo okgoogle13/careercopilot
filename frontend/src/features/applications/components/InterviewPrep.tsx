@@ -1,6 +1,6 @@
-import { Lens } from '@/components/ui/Lens';
+import { LensArea } from '@/components/ui/Lens';
 import { Pebble } from '@/components/ui/Pebble';
-import { Seed } from '@/components/ui/Seed';
+import { StatusBadge } from '@/components/ui/StatusBadge/StatusBadge';
 import { Stone } from '@/components/ui/Stone';
 import { ArrowLeft, Loader2, MessageSquare, Mic, MicOff, RotateCcw, Sparkles } from 'lucide-react';
 import React, { useState } from 'react';
@@ -87,16 +87,16 @@ const sampleQuestions: Question[] = [
   },
 ];
 
-const getDifficultyColor = (difficulty: string) => {
+const getDifficultyVariant = (difficulty: string): 'success' | 'warning' | 'error' | 'neutral' => {
   switch (difficulty) {
     case 'Easy':
-      return 'var(--color-leaf-base)';
+      return 'success';
     case 'Medium':
-      return 'var(--color-wattle-base)';
+      return 'warning';
     case 'Hard':
-      return 'var(--color-flower-base)';
+      return 'error';
     default:
-      return 'var(--color-text-tertiary)';
+      return 'neutral';
   }
 };
 
@@ -143,7 +143,7 @@ export const InterviewPrep: React.FC<InterviewPrepProps> = ({ onBack }) => {
         <div className="mb-8">
           <Pebble
             variant="ghost"
-            icon={ArrowLeft}
+            iconLeft={<ArrowLeft size={16} />}
             onClick={onBack}
             className="mb-6"
           >
@@ -173,7 +173,7 @@ export const InterviewPrep: React.FC<InterviewPrepProps> = ({ onBack }) => {
               {questionCategories.map((category) => (
                 <Stone
                   key={category.id}
-                  variant="flat"
+                  elevation="flat"
                   className="cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:border-[var(--color-leaf-base)] group"
                   onClick={() => handleSelectCategory(category.id)}
                 >
@@ -206,32 +206,26 @@ export const InterviewPrep: React.FC<InterviewPrepProps> = ({ onBack }) => {
                 <div className="p-6">
                   <div className="flex justify-between items-start mb-6">
                     <div className="flex flex-wrap gap-2">
-                      <Seed
+                      <StatusBadge
                         label={currentQuestion.type}
                         variant="neutral"
                         className="capitalize"
                       />
-                      <Seed
+                      <StatusBadge
                         label={currentQuestion.category}
                         variant="neutral"
                         className="border-dashed"
                       />
-                      <Seed
+                      <StatusBadge
                         label={currentQuestion.difficulty}
-                        variant="neutral"
-                        icon={Sparkles} // Just an example icon
+                        variant={getDifficultyVariant(currentQuestion.difficulty)}
                         className="font-semibold"
-                        // Custom styling to match difficulty colors nicely
-                        style={{
-                          color: getDifficultyColor(currentQuestion.difficulty),
-                          borderColor: 'currentColor',
-                        }}
                       />
                     </div>
                     <Pebble
                       variant="ghost"
-                      size="small"
-                      icon={RotateCcw}
+                      size="sm"
+                      iconLeft={<RotateCcw size={14} />}
                       onClick={handleNewQuestion}
                     >
                       New Question
@@ -250,8 +244,8 @@ export const InterviewPrep: React.FC<InterviewPrepProps> = ({ onBack }) => {
                       </span>
                       <Pebble
                         variant={isRecording ? 'secondary' : 'ghost'}
-                        size="small"
-                        icon={isRecording ? MicOff : Mic}
+                        size="sm"
+                        iconLeft={isRecording ? <MicOff size={16} /> : <Mic size={16} />}
                         onClick={toggleRecording}
                         className={
                           isRecording
@@ -262,7 +256,7 @@ export const InterviewPrep: React.FC<InterviewPrepProps> = ({ onBack }) => {
                         {isRecording ? 'Stop Recording' : 'Voice Answer'}
                       </Pebble>
                     </div>
-                    <Lens
+                    <LensArea
                       value={userAnswer}
                       onChange={(e) => setUserAnswer(e.target.value)}
                       placeholder="Type or record your answer here..."
@@ -300,7 +294,16 @@ export const InterviewPrep: React.FC<InterviewPrepProps> = ({ onBack }) => {
               <Pebble
                 variant="primary"
                 className="w-full justify-center py-4 text-lg"
-                icon={isGeneratingTips ? Loader2 : Sparkles}
+                iconLeft={
+                  isGeneratingTips ? (
+                    <Loader2
+                      className="animate-spin"
+                      size={20}
+                    />
+                  ) : (
+                    <Sparkles size={20} />
+                  )
+                }
                 onClick={handleGenerateTips}
                 disabled={isGeneratingTips || !userAnswer}
               >

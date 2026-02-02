@@ -3,11 +3,25 @@ import { ValidationDashboard } from '@/features/onboarding/components/Validation
 import { useCareerIngestion } from '@/hooks/useCareerIngestion';
 import { CareerDatabase } from '@/types/api';
 import { m3Toast } from '@/utils/toast';
-import { BrainCircuit, CheckCircle, CloudUpload, FileText } from 'lucide-react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { CheckCircle, FileText, Fingerprint, Microscope } from 'lucide-react';
 import React, { useState } from 'react';
+
+// Laboratory Assets
+import naturesClockwork from '../assets/specimens/natures_clockwork.jpg';
+import paperGrain from '../assets/textures/paper-grain.png';
 
 type UploadStage = 'idle' | 'uploading' | 'extracting' | 'processing' | 'embedding' | 'complete';
 
+/**
+ * CareerCopilot Ingestion Page ("The Mulch / Specimen Tray")
+ *
+ * V3.1 Laboratory Mode Implementation:
+ * ✓ ASSET-08 Verification Stamp Integration
+ * ✓ Texture-Laboratory-Parchment overlay
+ * ✓ Skeleton Etch Motif metaphors
+ * ✓ Clinical palette restricted to Obsidian/Parchment/Wattle
+ */
 export const IngestionPage: React.FC = () => {
   const { submitDocuments, updateCareerDatabase, isLoading, error } = useCareerIngestion();
   const [careerData, setCareerData] = useState<CareerDatabase | null>(null);
@@ -45,12 +59,12 @@ export const IngestionPage: React.FC = () => {
       setUploadStage('complete');
       setProgress(100);
       setCareerData(result);
-      m3Toast.success('Ingestion Complete', 'Your professional vector has been updated.');
+      m3Toast.success('Ingestion Complete', 'Specimen data archived successfully.');
     } catch (err) {
       console.error('Upload failed:', err);
       setUploadStage('idle');
       setProgress(0);
-      m3Toast.error('Ingestion Failed', 'Please verify your files and try again.');
+      m3Toast.error('Ingestion Failed', 'A biological error occurred during extraction.');
     }
   };
 
@@ -75,37 +89,65 @@ export const IngestionPage: React.FC = () => {
   const getStageMessage = (): string => {
     switch (uploadStage) {
       case 'uploading':
-        return 'Uploading payloads...';
+        return 'Depositing Payloads...';
       case 'extracting':
-        return 'Harvesting semantic text...';
+        return 'Harvesting Semantic DNA...';
       case 'processing':
-        return 'Generating tactical insights...';
+        return 'Analyzing Career Specimen...';
       case 'embedding':
-        return 'Mapping professional vector...';
+        return 'Mapping Professional Vector...';
       case 'complete':
-        return 'Synthesis complete!';
+        return 'Extraction Complete.';
       default:
         return '';
     }
   };
 
   return (
-    <div className="min-h-screen bg-[var(--color-specimen-night)] flex items-center justify-center p-6 bg-gradient-to-b from-transparent to-[var(--color-wattle-gold)]/5">
+    <div className="min-h-screen bg-specimen-night-darkest flex items-center justify-center p-6 relative overflow-hidden">
+      {/* Texture Layer: Laboratory Parchment */}
+      <div
+        className="absolute inset-0 opacity-5 pointer-events-none mix-blend-overlay"
+        style={{ backgroundImage: `url(${paperGrain})`, backgroundRepeat: 'repeat' }}
+      />
+
+      {/* Background Motifs */}
+      <div className="absolute top-10 left-10 w-64 h-64 grayscale opacity-10 pointer-events-none border border-flannel-flower/20 rounded-full" />
+      <div className="absolute bottom-10 right-10 w-96 h-96 grayscale opacity-5 pointer-events-none border-l border-t border-flannel-flower/20 rounded-tl-[120px]" />
+
       <Stone
         mode="laboratory"
-        elevation="raised"
-        className="max-w-2xl w-full border border-[var(--color-eucalypt-smoke-base)]/30 shadow-2xl"
+        elevation="floating"
+        className="max-w-2xl w-full border-2 border-flannel-flower/5 shadow-maximum relative z-10"
       >
-        {/* Header */}
-        <header className="text-center mb-10">
-          <div className="w-20 h-20 bg-[var(--color-wattle-gold)]/10 rounded-full flex items-center justify-center mx-auto mb-6 border border-[var(--color-wattle-gold)]/20 shadow-inner">
-            <BrainCircuit className="w-10 h-10 text-[var(--color-wattle-gold)]" />
+        {/* Verification Stamp Shadowplay (ASSET-08) */}
+        <AnimatePresence>
+          {uploadStage === 'complete' && (
+            <motion.div
+              initial={{ scale: 2, opacity: 0, rotate: -20 }}
+              animate={{ scale: 1, opacity: 0.15, rotate: -15 }}
+              className="absolute top-10 right-10 w-48 h-48 pointer-events-none"
+            >
+              <img
+                src={naturesClockwork}
+                alt="Verified"
+                className="w-full h-full object-contain rounded-full border-4 border-wattle-gold"
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Header: Clinical Focus */}
+        <header className="text-center mb-12">
+          <div className="w-24 h-24 bg-wattle-gold/5 rounded-stone flex items-center justify-center mx-auto mb-6 border border-wattle-gold/10 relative">
+            <div className="absolute inset-0 animate-pulse border border-wattle-gold/5 rounded-stone scale-110" />
+            <Microscope className="w-12 h-12 text-wattle-gold" />
           </div>
-          <h1 className="text-4xl font-bold text-[var(--color-parchment)] tracking-tight">
-            Career DNA Ingestion
+          <h1 className="text-5xl font-bloom font-bold text-parchment tracking-tighter uppercase">
+            Specimen Ingestion
           </h1>
-          <p className="text-lg text-[var(--color-flannel-flower-dark)] mt-2">
-            Upload your resume and artifacts to seed the AI strategy engine.
+          <p className="font-annotation text-xs text-flannel-flower-dark mt-3 tracking-[0.3em] uppercase opacity-60">
+            [ PHASE.01: SEMANTIC_EXTRACTION ]
           </p>
         </header>
 
@@ -114,19 +156,19 @@ export const IngestionPage: React.FC = () => {
           <Signal
             severity="error"
             variant="tonal"
-            className="mb-6"
+            className="mb-8 border-l-4"
           >
-            {error}
+            <span className="font-annotation uppercase text-[10px] mr-2">Core Fault:</span> {error}
           </Signal>
         )}
 
-        {/* File Upload Zone */}
+        {/* File Ingestion Zone (The Mulch) */}
         <div
           className={`
-                        border-2 border-dashed rounded-pebble p-10 text-center mb-8
-                        transition-all duration-300 var(--ease-viscous-breeze)
-                        ${isLoading ? 'opacity-50 border-white/5' : 'border-[var(--color-eucalypt-smoke-base)]/40 hover:border-[var(--color-wattle-gold)] hover:bg-white/5'}
-                    `}
+            border-2 border-dashed rounded-stone p-12 text-center mb-10
+            transition-all duration-500 var(--ease-viscous-breeze)
+            ${isLoading ? 'opacity-30 border-parchment/5 grayscale' : 'border-flannel-flower/20 hover:border-wattle-gold/50 hover:bg-white/[0.02]'}
+          `}
         >
           <input
             accept=".pdf,.docx,.txt"
@@ -140,37 +182,44 @@ export const IngestionPage: React.FC = () => {
 
           <label
             htmlFor="file-upload"
-            className="cursor-pointer"
+            className="cursor-pointer group"
           >
+            <div className="mb-6 flex justify-center">
+              <Fingerprint
+                className={`w-12 h-12 transition-colors duration-500 ${isLoading ? 'text-parchment/10' : 'text-flannel-flower group-hover:text-wattle-gold'}`}
+              />
+            </div>
             <Pebble
-              variant="ghost"
-              iconLeft={<CloudUpload className="w-5 h-5" />}
+              variant="secondary"
               disabled={isLoading}
-              className="pointer-events-none"
-              size="md"
+              className="pointer-events-none font-bold tracking-widest uppercase text-xs"
+              size="sm"
             >
-              Select Documents
+              Deposit Payloads
             </Pebble>
+            <p className="mt-4 font-annotation text-[9px] text-flannel-flower/40 uppercase tracking-tighter">
+              PDF / DOCX / TEXT specimens accepted
+            </p>
           </label>
 
           {selectedFiles.length > 0 && (
-            <div className="mt-8 space-y-3">
+            <div className="mt-10 space-y-3">
               {selectedFiles.map((file, idx) => (
-                <div
+                <motion.div
+                  initial={{ x: -10, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
                   key={idx}
-                  className="flex items-center gap-3 p-3 bg-white/5 rounded-stone border border-white/5"
+                  className="flex items-center gap-4 p-4 bg-white/[0.02] rounded-stone border border-flannel-flower/10"
                 >
-                  <FileText className="w-5 h-5 text-[var(--color-wattle-gold)]" />
+                  <FileText className="w-4 h-4 text-wattle-gold/50" />
                   <div className="text-left flex-grow">
-                    <div className="text-sm font-field-note text-[var(--color-parchment)]">
-                      {file.name}
-                    </div>
-                    <div className="text-[10px] font-annotation text-[var(--color-flannel-flower-dark)] uppercase tracking-widest">
-                      {(file.size / 1024).toFixed(1)} KB payload
+                    <div className="text-xs font-field-note text-parchment/80">{file.name}</div>
+                    <div className="text-[10px] font-annotation text-flannel-flower-dark uppercase tracking-widest">
+                      Payload: {Math.round(file.size / 1024)} KB
                     </div>
                   </div>
-                  <CheckCircle className="w-4 h-4 text-[var(--color-eucalypt-smoke-base)]/40" />
-                </div>
+                  <CheckCircle className="w-3 h-3 text-eucalypt-smoke" />
+                </motion.div>
               ))}
             </div>
           )}
@@ -182,42 +231,48 @@ export const IngestionPage: React.FC = () => {
           onClick={handleUpload}
           disabled={isLoading || selectedFiles.length === 0}
           isLoading={isLoading}
-          size="md"
-          className="w-full h-16 text-lg"
+          size="lg"
+          className="w-full h-20 text-xl font-black rounded-stone"
         >
-          {isLoading ? getStageMessage() : 'Initialize Synthesis'}
+          {isLoading ? getStageMessage() : 'Initialize Harvesting'}
         </Pebble>
 
-        {/* Progress Visualization */}
+        {/* Clinical Progress Visualization */}
         {isLoading && (
-          <div className="mt-8 transition-all animate-in fade-in slide-in-from-top-2">
-            <div className="w-full bg-white/5 h-2 rounded-full overflow-hidden border border-white/5 shadow-inner">
-              <div
-                className="bg-[var(--color-wattle-gold)] h-full transition-all duration-500 var(--ease-viscous-breeze) shadow-[0_0_10px_var(--color-wattle-gold)/50]"
-                style={{ width: `${progress}%` }}
-              />
-            </div>
-            <div className="flex justify-between items-center mt-3">
-              <span className="font-annotation text-[10px] text-[var(--color-flannel-flower-dark)] tracking-tighter uppercase">
-                Extraction in progress...
+          <div className="mt-10 transition-all animate-in fade-in slide-in-from-top-4">
+            <div className="flex justify-between items-center mb-3">
+              <span className="font-annotation text-[10px] text-flannel-flower-dark tracking-[0.2em] uppercase">
+                Extraction Protocol In Progress
               </span>
-              <span className="font-annotation text-[10px] text-[var(--color-wattle-gold)] font-bold">
+              <span className="font-annotation text-[10px] text-wattle-gold font-bold">
                 {progress}%
               </span>
+            </div>
+            <div className="w-full bg-specimen-night-darkest h-1.5 rounded-full overflow-hidden border border-white/5">
+              <motion.div
+                className="bg-wattle-gold h-full shadow-[0_0_15px_rgba(212,168,75,0.4)]"
+                initial={{ width: 0 }}
+                animate={{ width: `${progress}%` }}
+                transition={{ duration: 0.5, ease: 'linear' }}
+              />
             </div>
           </div>
         )}
 
-        {/* Laboratory Notice */}
-        <div className="mt-10 p-4 bg-[var(--ref-palette-primary-90)]/10 rounded-[var(--radius-stone)] border border-[var(--ref-palette-primary-90)]/20 flex gap-4">
-          <BrainCircuit className="w-6 h-6 text-[var(--ref-palette-primary-60)] shrink-0" />
-          <p className="font-field-note text-xs text-[var(--color-parchment)]/70 leading-relaxed">
-            <strong className="text-[var(--color-parchment)]">Technical Note:</strong> Our inference
-            engine uses Gemini 3.0 Pro to derive structured professional vectors. Processing may
-            take a few moments as we harvest semantic embeddings.
+        {/* Laboratory Technical Audit */}
+        <div className="mt-12 p-6 bg-specimen-night/40 rounded-stone border border-flannel-flower/10 flex gap-5">
+          <Microscope className="w-8 h-8 text-wattle-gold/40 shrink-0" />
+          <p className="font-field-note text-[11px] text-parchment/50 leading-relaxed italic">
+            <strong className="text-parchment font-annotation uppercase tracking-wider not-italic">
+              Clinical Audit:
+            </strong>{' '}
+            Professional vectors are extracted via Gemini 3.0 Pro. This process mandates biological
+            time for semantic harvesting. Do not terminate terminal session during synthesis.
           </p>
         </div>
       </Stone>
     </div>
   );
 };
+
+export default IngestionPage;

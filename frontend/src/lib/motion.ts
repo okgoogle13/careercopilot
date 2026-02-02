@@ -1,7 +1,7 @@
 /**
- * ELECTRIC ALCHEMIST: MOTION PRESETS
+ * NORTHCOTE CURIO: MOTION PRESETS
  *
- * Framer Motion configuration presets for the Electric Alchemist
+ * Framer Motion configuration presets for the Northcote Curio
  * design system physics.
  */
 
