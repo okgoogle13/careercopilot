@@ -2,9 +2,10 @@ import json
 
 from pydantic import BaseModel
 
-from app.core.ai.model_dispatcher import dispatch_llm_call
 from app.core.prompt_service import format_prompt
-from app.genkit_flows.flow_decorator import simple_genkit_flow
+from app.core.genkit_init import get_model
+from app.genkit_flows.flow_decorator import async_genkit_flow
+from app.core.monitoring import monitor_performance
 
 
 # Define the structured output model using Pydantic
@@ -15,8 +16,9 @@ class STAR_Response(BaseModel):
     result: str
 
 
-@simple_genkit_flow(output_schema=STAR_Response)
-def generateKscResponse(user_profile_data: dict, ksc_statement: str) -> STAR_Response:
+@async_genkit_flow(output_schema=STAR_Response)
+@monitor_performance("ksc_generator")
+async def generateKscResponse(user_profile_data: dict, ksc_statement: str) -> STAR_Response:
     """
     Acts as an expert career coach to generate a STAR response for a KSC statement.
     """
@@ -25,32 +27,22 @@ def generateKscResponse(user_profile_data: dict, ksc_statement: str) -> STAR_Res
     prompt = format_prompt(
         "ksc_simple_response",
         ksc_statement=ksc_statement,
-        user_profile_data=json.dumps(user_profile_data, indent=2),
+        user_profile_data=json.dumps(user_profile_data, separators=(',', ':')),
     )
 
-    # Generate the response using the AI dispatcher for cost optimization
-    response = dispatch_llm_call(
-        task_type="resume_optimization",  # KSC responses are medium complexity
+    # Generate the response using Genkit model
+    model = get_model()
+    response = await model.generate(
         prompt=prompt,
-        response_format="json",
-        temperature=0.5,
+        config={
+            "response_mime_type": "application/json",
+            "temperature": 0.5,
+        },
+        output_schema=STAR_Response
     )
 
-    # Parse and return structured response
-    import json
-
-    content = response.get("content", "{}")
-    try:
-        parsed_data = json.loads(content)
-        return STAR_Response(**parsed_data)
-    except (json.JSONDecodeError, TypeError):
-        # Fallback for malformed responses
-        return STAR_Response(
-            situation="Error parsing response",
-            task="Error parsing response",
-            action="Error parsing response",
-            result="Error parsing response",
-        )
+    # Return structured response
+    return await response.output()
 
 
-# Flow is automatically registered by the @simple_genkit_flow decorator
+# Flow is automatically registered by the @async_genkit_flow decorator

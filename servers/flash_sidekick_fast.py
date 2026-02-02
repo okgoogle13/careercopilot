@@ -81,7 +81,7 @@ class FlashSidekickServer:
         return [
             {
                 "name": "quick_summarize",
-                "description": "Fast: Summarize text using Gemini Flash",
+                "description": "Token-saver: Use for long inputs, bulk summarization, or routine transforms. Avoid for creative design or code review (keep in Claude).",
                 "inputSchema": {
                     "type": "object",
                     "properties": {"text": {"type": "string"}},
@@ -90,7 +90,7 @@ class FlashSidekickServer:
             },
             {
                 "name": "generate_idf",
-                "description": "Fast: Generate Python interface definition",
+                "description": "Token-saver: Use for code extraction/IDF generation on large files. Avoid for creative design or code review (keep in Claude).",
                 "inputSchema": {
                     "type": "object",
                     "properties": {"code": {"type": "string"}},
@@ -125,24 +125,27 @@ def handle_request(server, line):
     try:
         req = json.loads(line)
         method = req.get("method")
+        req_id = req.get("id")
         
         if method == "initialize":
             # Fast response - no API calls
             return {
+                "jsonrpc": "2.0",
+                "id": req_id,
                 "result": {
-                    "protocolVersion": "0.1.0",
+                    "protocolVersion": "2024-11-05",
                     "capabilities": {"tools": {}},
-                    "serverInfo": {"name": "flash-sidekick", "version": "3.0-fast"}
+                    "serverInfo": {"name": "flash-sidekick-fast", "version": "3.0-fast"}
                 }
             }
         elif method == "tools/list":
             # Fast response - no API calls
-            return {"result": {"tools": server.list_tools()}}
+            return {"jsonrpc": "2.0", "id": req_id, "result": {"tools": server.list_tools()}}
         elif method == "tools/call":
             # Lazy loads model on first call
             params = req.get("params", {})
             result = server.call_tool(params.get("name"), params.get("arguments", {}))
-            return {"result": {"content": result}}
+            return {"jsonrpc": "2.0", "id": req_id, "result": {"content": result}}
         
         return {}
     except Exception as e:

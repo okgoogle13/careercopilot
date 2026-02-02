@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { M3TextField, M3TextArea } from '../components/ui/M3TextField';
-import { Search, Mail, Lock, User, AlertCircle } from 'lucide-react';
+import { Mail, Lock, AlertCircle } from 'lucide-react';
 
 const meta: Meta<typeof M3TextField> = {
     title: 'M3 Components/TextField',
@@ -86,9 +86,9 @@ export const TextArea: StoryObj<typeof M3TextArea> = {
 export const InputSizes: Story = {
     render: () => (
         <div className="flex flex-col gap-6 w-80">
-            <M3TextField label="Small" size="small" placeholder="Small input" />
-            <M3TextField label="Medium" size="medium" placeholder="Medium input" />
-            <M3TextField label="Large" size="large" placeholder="Large input" />
+            <Lens label="Small" size="small" placeholder="Small input" />
+            <Lens label="Medium" size="medium" placeholder="Medium input" />
+            <Lens label="Large" size="large" placeholder="Large input" />
         </div>
     ),
 };

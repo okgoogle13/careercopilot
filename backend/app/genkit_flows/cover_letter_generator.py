@@ -33,8 +33,8 @@ def generate_tailored_cover_letter(
     # Use the prompt service to format the template
     prompt = format_prompt(
         "tailored_cover_letter_simple",
-        base_profile_data=json.dumps(base_profile_data, indent=2),
-        job_analysis_data=json.dumps(job_analysis_data, indent=2),
+        base_profile_data=json.dumps(base_profile_data, separators=(',', ':')),
+        job_analysis_data=json.dumps(job_analysis_data, separators=(',', ':')),
         voice_profile_section=voice_profile_section,
     )
 

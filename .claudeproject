@@ -1,0 +1,16 @@
+{
+  "name": "CareerCopilot",
+  "description": "AI-powered job application assistant for community services roles",
+  "documentContext": [
+    "README.md",
+    "CLAUDE.md",
+    "agents.md",
+    "plans.md",
+    "DOCUMENTATION.md"
+  ],
+  "settings": {
+    "primaryGuide": "agents.md",
+    "architectureGuide": "plans.md",
+    "navigationGuide": "DOCUMENTATION.md"
+  }
+}

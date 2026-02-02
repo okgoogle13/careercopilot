@@ -1,5 +1,5 @@
-import { Plus, FileText, Gift, TrendingUp } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { FileText, Gift, Plus, TrendingUp } from 'lucide-react';
 
 // ============================================================================
 // TYPE DEFINITIONS
@@ -68,12 +68,15 @@ export function Dashboard() {
         className="rounded-[24px] p-8 md:p-12 mb-8 relative overflow-hidden min-h-[280px] bg-surface-container-high shadow-lg"
       >
         {/* Content Layer */}
-        <div className="relative z-10">
-          <h1 className="mb-3 text-[48px] md:text-[64px] leading-none text-on-surface uppercase font-black tracking-tight">
-            GOOD MORNING, <span className="text-tertiary">NISHANT</span>!
+        <div className="relative z-10 flex flex-col items-start">
+          <h1 className="mb-1 text-proclamation-large text-[42px] md:text-[56px] leading-none">
+            GOOD MORNING, <span className="text-wattle-gold">NISHANT</span>!
           </h1>
-          <p className="text-on-surface text-lg max-w-lg font-medium">
-            You have 3 upcoming interviews this week.
+          <div className="mb-4">
+            <span className="text-curator-annotation rotate-quirky-ccw">→ you have 3 upcoming interviews this week</span>
+          </div>
+          <p className="text-on-surface/80 text-lg max-w-lg font-field-note italic">
+            "The field station is alive with data today."
           </p>
         </div>
 
@@ -97,9 +100,9 @@ export function Dashboard() {
           style={{ backgroundImage: dottedPattern }}
         >
           <div className="relative z-10">
-            <FileText className="w-12 h-12 text-tertiary mb-4" />
-            <p className="text-[64px] font-black text-on-surface tabular-nums leading-none mb-2">8</p>
-            <p className="text-on-surface-variant uppercase text-xs tracking-widest font-mono">
+            <FileText className="w-12 h-12 text-wattle-gold mb-4" />
+            <p className="text-[64px] font-annotation font-black text-on-surface leading-none mb-2">8</p>
+            <p className="text-on-surface-variant uppercase text-xs tracking-widest font-annotation">
               ACTIVE APPLICATIONS
             </p>
           </div>
@@ -163,9 +166,12 @@ export function Dashboard() {
 
       {/* Application Profiles - Figma Spec */}
       <motion.div variants={item} className="mb-8">
-        <h3 className="mb-6 text-[32px] uppercase font-black tracking-tight text-on-surface">
-          YOUR APPLICATION <span className="text-primary">PROFILES</span>
-        </h3>
+        <div className="flex items-baseline gap-4 mb-6">
+          <h3 className="text-bloom-ultra text-3xl uppercase">
+            YOUR APPLICATION <span className="text-wattle-gold">PROFILES</span>
+          </h3>
+          <span className="text-curator-annotation hidden md:inline-block">→ specimen list</span>
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {PROFILES.map((profile, idx) => (

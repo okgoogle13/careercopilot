@@ -325,10 +325,10 @@ As a senior career intelligence analyst, synthesize this resume analysis data
 into a comprehensive strategic intelligence report with actionable insights.
 
 RESUME ANALYSIS DATA:
-{json.dumps(resume_analysis.dict(), indent=2)}
+{json.dumps(resume_analysis.dict(), separators=(\',\', \':\'))}
 
 CAREER PROGRESSION DATA:
-{json.dumps(career_progression.dict(), indent=2)}
+{json.dumps(career_progression.dict(), separators=(\',\', \':\'))}
 
 CONTEXT:
 - Target Industry: {target_industry or "General"}

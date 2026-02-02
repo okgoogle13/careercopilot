@@ -130,6 +130,8 @@ class TestAIConfigManager:
         """Test configuration validation"""
         monkeypatch.delenv("GOOGLE_CLOUD_PROJECT", raising=False)
         monkeypatch.delenv("GOOGLE_AI_API_KEY", raising=False)
+        monkeypatch.delenv("GEMINI_API_KEY", raising=False)
+        monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
         config_manager = AIConfigManager(temp_config_file)
 
         # Should pass validation with test config

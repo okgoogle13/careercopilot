@@ -1,8 +1,8 @@
 """
-Workflows API Endpoints
+Workflows API Endpoints (Revised for Supabase Alignment)
 
-FastAPI endpoints for orchestrated workflow operations including
-the one-click application package generation and email task workflows.
+FastAPI endpoints for orchestrated workflow operations.
+Legcay Genkit workflows are currently disabled due to 0.4.0 migration.
 """
 
 import traceback
@@ -13,11 +13,17 @@ from fastapi import APIRouter, HTTPException, status
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field
 
-# Import workflow functions
-from app.genkit_flows.career_application_workflow import (
-    ApplicationPackageResult,
-    generate_application_package,
-)
+# Legacy Genkit flows disabled
+# from app.genkit_flows.career_application_workflow import (
+#     ApplicationPackageResult,
+#     generate_application_package,
+# )
+
+class ApplicationPackageResult(BaseModel):
+    success: bool
+    components_generated: list
+    processing_time_seconds: float
+    error_details: list
 
 # Temporarily disabled due to syntax error in email_task_workflow.py
 # from app.genkit_flows.email_task_workflow import WorkflowResult as EmailWorkflowResult
@@ -34,11 +40,7 @@ class EmailWorkflowResult(TypedDict, total=False):
 scan_inbox_for_opportunities: Optional[Any] = None  # Placeholder for async function
 
 
-# Import middleware for authentication (if available)
-try:
-    from app.api.middleware.firebase_auth import verify_id_token as verify_firebase_token
-except ImportError:
-    verify_firebase_token = None
+# Authentication handled by get_current_user dependency in main router
 
 router = APIRouter()
 
@@ -82,189 +84,32 @@ class ScanEmailResponse(BaseModel):
     "/generate-application",
     response_model=GenerateApplicationResponse,
     summary="Generate Complete Application Package",
-    description="""
-    One-Click Application Workflow: Generates a complete job application package
-    including tailored resume, personalized cover letter, and KSC responses.
-
-    This endpoint orchestrates multiple AI services to create:
-    - Resume intelligence analysis and tailored resume optimization
-    - Smart cover letter with company research integration
-    - Key Selection Criteria (KSC) responses using STAR methodology
-    - Application strategy and interview preparation recommendations
-
-    The process typically takes 30-60 seconds depending on the complexity
-    of the job description and user profile.
-    """,
 )
 async def create_application_package(request: GenerateApplicationRequest) -> GenerateApplicationResponse:
     """
     Generate a complete job application package using AI-powered workflows.
-
-    This endpoint chains together multiple specialized AI flows:
-    1. Resume Intelligence Pipeline - analyzes and optimizes resume
-    2. Smart Cover Letter System - generates personalized cover letter
-    3. KSC Generator - creates STAR responses for selection criteria
-    4. Application Strategy - provides strategic recommendations
-
-    Args:
-        request: Job description and user profile data
-
-    Returns:
-        Complete application package with all generated components
-
-    Raises:
-        HTTPException: If validation fails or generation encounters errors
+    DISABLED: Currently unavailable during Genkit 0.4.0 migration.
     """
-    try:
-        # Input validation
-        if not request.job_description or len(request.job_description.strip()) < 50:
-            raise HTTPException(
-                status_code=status.HTTP_400_BAD_REQUEST,
-                detail="Job description must be at least 50 characters long",
-            )
-
-        if not request.user_profile or not isinstance(request.user_profile, dict):
-            raise HTTPException(
-                status_code=status.HTTP_400_BAD_REQUEST,
-                detail="User profile must be a non-empty dictionary",
-            )
-
-        # Check for required profile fields
-        required_fields = ["resume_content", "skills", "experience"]
-        missing_fields = [
-            field
-            for field in required_fields
-            if field not in request.user_profile or not request.user_profile[field]
-        ]
-
-        if len(missing_fields) == len(required_fields):
-            raise HTTPException(
-                status_code=status.HTTP_400_BAD_REQUEST,
-                detail="User profile must contain at least one of: resume_content, skills, or experience",
-            )
-
-        # Generate application package
-        print("Starting application package generation...")
-        result = await generate_application_package(
-            job_description=request.job_description, user_profile=request.user_profile
-        )
-
-        # Prepare response
-        if result.success:
-            response = GenerateApplicationResponse(
-                success=True,
-                data=result,
-                message=f"Application package generated successfully with {len(result.components_generated)} components",
-                processing_time_seconds=result.processing_time_seconds,
-            )
-            print("✓ Application package generated successfully")
-        else:
-            response = GenerateApplicationResponse(
-                success=False,
-                data=result,
-                message=f"Partial generation completed. Errors: {'; '.join(result.error_details)}",
-                processing_time_seconds=result.processing_time_seconds,
-            )
-            print("⚠ Partial application package generated with errors")
-
-        return response
-
-    except HTTPException:
-        raise
-    except Exception as e:
-        print(f"✗ Application package generation failed: {str(e)}")
-        print(traceback.format_exc())
-
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Application package generation failed: {str(e)}",
-        )
+    raise HTTPException(
+        status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+        detail="Application package generation is temporarily disabled for upgrade.",
+    )
 
 
 @router.post(
     "/scan-email-opportunities",
     response_model=ScanEmailResponse,
     summary="Scan Email for Job Opportunities",
-    description="""
-    Email Scanning & Task Generation Workflow: Scans user's email for job opportunities,
-    analyzes job matches, and creates calendar tasks for high-scoring opportunities.
-
-    This endpoint orchestrates:
-    - Email scanning for job opportunities from common recruiting platforms
-    - Advanced job matching analysis against user profile
-    - Calendar task creation for opportunities scoring above 80%
-    - Comprehensive reporting of processing results
-
-    Requires user to have Google OAuth credentials configured for email and calendar access.
-    """,
 )
 async def scan_email_for_opportunities(request: ScanEmailRequest) -> ScanEmailResponse:
     """
-    Scan user's email for job opportunities and create tasks for high-scoring matches.
-
-    This workflow:
-    1. Scans unread emails from job platforms (Greenhouse, Lever, etc.)
-    2. Extracts job details using AI analysis
-    3. Scores job compatibility against user profile
-    4. Creates calendar tasks for jobs scoring above 80%
-    5. Returns comprehensive workflow results
-
-    Args:
-        request: User ID for email scanning
-
-    Returns:
-        Email scanning results with opportunity processing details
-
-    Raises:
-        HTTPException: If validation fails or scanning encounters errors
+    Scan user's email for job opportunities.
+    DISABLED: Layout placeholder.
     """
-    try:
-        # Input validation
-        if not request.user_id or not request.user_id.strip():
-            raise HTTPException(
-                status_code=status.HTTP_400_BAD_REQUEST, detail="User ID is required"
-            )
-
-        # Execute email scanning workflow (guard placeholder)
-        print(f"Starting email scanning for user: {request.user_id}")
-        if scan_inbox_for_opportunities is None:
-            raise HTTPException(
-                status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
-                detail="Email scanning workflow is temporarily unavailable",
-            )
-        result: EmailWorkflowResult = await scan_inbox_for_opportunities(request.user_id)
-
-        # Prepare response
-        if bool(result.get("success", False)):
-            response = ScanEmailResponse(
-                success=True,
-                data=result,
-                message=(
-                    f"Email scan completed. Found {result.get('total_opportunities_found', 0)} "
-                    f"opportunities, created {result.get('tasks_created', 0)} tasks"
-                ),
-            )
-            print("✓ Email scanning completed successfully")
-        else:
-            response = ScanEmailResponse(
-                success=False,
-                data=result,
-                message=f"Email scanning failed: {result.get('error_message', 'Unknown error')}",
-            )
-            print(f"✗ Email scanning failed: {result.get('error_message', 'Unknown error')}")
-
-        return response
-
-    except HTTPException:
-        raise
-    except Exception as e:
-        print(f"✗ Email scanning failed: {str(e)}")
-        print(traceback.format_exc())
-
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Email scanning failed: {str(e)}",
-        )
+    raise HTTPException(
+        status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+        detail="Email scanning is temporarily disabled.",
+    )
 
 
 @router.get(
@@ -275,48 +120,15 @@ async def scan_email_for_opportunities(request: ScanEmailRequest) -> ScanEmailRe
 async def workflow_health_check() -> Dict[str, Any]:
     """
     Check the health of workflow services and dependencies.
-
-    Returns:
-        Health status of workflow components
     """
-    try:
-        # Check if Genkit flows are available
-        genkit_available = True
-        try:
-            pass
-        except Exception:
-            genkit_available = False
-
-        # Check AI model availability
-        ai_available = True
-        try:
-            from app.core.ai_config import get_ai_config
-
-            get_ai_config().get_model_config("gemini-2.0-flash")
-        except Exception:
-            ai_available = False
-
-        health_status = {
-            "service": "workflows",
-            "status": "healthy" if genkit_available and ai_available else "degraded",
-            "components": {
-                "genkit_flows": "available" if genkit_available else "unavailable",
-                "ai_models": "available" if ai_available else "unavailable",
-            },
-            "endpoints": [
-                "/workflows/generate-application",
-                "/workflows/scan-email-opportunities",
-                "/workflows/health",
-            ],
+    return {
+        "service": "workflows",
+        "status": "maintenance",
+        "components": {
+            "genkit_flows": "disabled",
+            "ai_models": "available",
         }
-
-        return health_status
-
-    except Exception as e:
-        raise HTTPException(
-            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
-            detail=f"Health check failed: {str(e)}",
-        )
+    }
 
 
 # Optional: Workflow status endpoint for long-running operations
@@ -326,23 +138,8 @@ async def workflow_health_check() -> Dict[str, Any]:
     description="Get the status of a running or completed workflow (future enhancement)",
 )
 async def get_workflow_status(workflow_id: str) -> JSONResponse:
-    """Get the status of a workflow by ID.
-
-    Get the status of a workflow by ID.
-
-    This is a placeholder for future implementation of async workflow tracking.
-    Currently returns a not implemented response.
-    """
+    """Get the status of a workflow by ID."""
     return JSONResponse(
         status_code=status.HTTP_501_NOT_IMPLEMENTED,
         content={"detail": "Workflow status tracking not yet implemented"},
     )
-
-
-# Error handlers could be added here for specific workflow exceptions
-# @router.exception_handler(SpecificWorkflowException)
-# async def workflow_exception_handler(request: Request, exc: SpecificWorkflowException):
-#     return JSONResponse(
-#         status_code=422,
-#         content={"message": f"Workflow error: {str(exc)}"}
-#     )

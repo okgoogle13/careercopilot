@@ -61,8 +61,8 @@ def main():
 
     # Define the secrets to create
     secrets = {
-        # Database
-        "DATABASE_URL": "sqlite:///data/careercopilot-dev.db",
+        # Database (Supabase PostgreSQL)
+        "DATABASE_URL": "postgresql://postgres:your-password@db.your-project.supabase.co:5432/postgres",
         # Authentication
         "SECRET_KEY": "generate-a-secure-secret-key-here",
         "ALGORITHM": "HS256",

@@ -59,12 +59,15 @@ charset-normalizer==3.4.3
     # via
     #   pdfminer-six
     #   requests
+chromadb==0.4.24
+    # via -r requirements.in
 click==8.2.1
     # via
     #   celery
     #   click-didyoumean
     #   click-plugins
     #   click-repl
+    #   chromadb
     #   typer
     #   uvicorn
 click-didyoumean==0.3.1
@@ -571,3 +574,8 @@ zipp==3.23.0
 
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools
+duckduckgo-search==5.3.0
+sentry-sdk[fastapi]==2.51.0
+openai==1.55.3
+azure-ai-inference==1.0.0b6
+python-docx==1.1.2

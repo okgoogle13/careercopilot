@@ -1,22 +1,21 @@
+
 """
-User profile service for Firestore operations.
-Handles creation, reading, and updating of user profiles in Firestore.
+User profile service for SQLAlchemy operations.
+Handles creation, reading, and updating of user profiles in PostgreSQL.
 """
 
 import logging
-from datetime import datetime
 from typing import Any, Dict, Optional
-
-from ..core.firebase import get_firestore
+from sqlalchemy.orm import Session
+from ..models.database import User
 
 logger = logging.getLogger(__name__)
 
-
 class UserProfileService:
-    """Service for managing user profiles in Firestore."""
+    """Service for managing user profiles in PostgreSQL."""
 
-    def __init__(self):
-        self.db = get_firestore()
+    def __init__(self, db: Session):
+        self.db = db
 
     async def create_user_profile(
         self,
@@ -27,66 +26,36 @@ class UserProfileService:
         **additional_fields,
     ) -> Dict[str, Any]:
         """
-        Create a new user profile in Firestore.
-
-        Args:
-            user_id: Unique identifier for the user
-            email: User's email address
-            name: User's display name
-            location: User's location (optional)
-            **additional_fields: Additional profile data
-
-        Returns:
-            Dict containing the created profile data
-
-        Raises:
-            Exception: If profile creation fails
+        Create a new user profile in PostgreSQL.
         """
-        if not self.db:
-            raise Exception("Firestore client not initialized")
-
         try:
-            profile_data = {
-                "email": email,
-                "name": name,
-                "location": location,
-                "created_at": datetime.utcnow(),
-                "updated_at": datetime.utcnow(),
-                **additional_fields,
-            }
-
-            # Create the user document in Firestore
-            user_ref = self.db.collection("users").document(user_id)
-            user_ref.set(profile_data)
+            user = User(
+                id=user_id,
+                email=email,
+                name=name,
+                location=location,
+                **additional_fields
+            )
+            self.db.add(user)
+            self.db.commit()
+            self.db.refresh(user)
 
             logger.info(f"Created user profile for {user_id}")
-
-            # Return the profile data with the ID
-            return {"id": user_id, **profile_data}
+            return user.to_dict()
 
         except Exception as e:
             logger.error(f"Failed to create user profile for {user_id}: {str(e)}")
+            self.db.rollback()
             raise
 
     async def get_user_profile(self, user_id: str) -> Optional[Dict[str, Any]]:
         """
-        Retrieve a user profile from Firestore.
-
-        Args:
-            user_id: Unique identifier for the user
-
-        Returns:
-            Dict containing the user profile data or None if not found
+        Retrieve a user profile from PostgreSQL.
         """
-        if not self.db:
-            raise Exception("Firestore client not initialized")
-
         try:
-            user_ref = self.db.collection("users").document(user_id)
-            doc = user_ref.get()
-
-            if doc.exists:
-                return {"id": user_id, **doc.to_dict()}
+            user = self.db.query(User).filter(User.id == user_id).first()
+            if user:
+                return user.to_dict()
             return None
 
         except Exception as e:
@@ -97,57 +66,42 @@ class UserProfileService:
         self, user_id: str, update_data: Dict[str, Any]
     ) -> Dict[str, Any]:
         """
-        Update a user profile in Firestore.
-
-        Args:
-            user_id: Unique identifier for the user
-            update_data: Data to update
-
-        Returns:
-            Dict containing the updated profile data
+        Update a user profile in PostgreSQL.
         """
-        if not self.db:
-            raise Exception("Firestore client not initialized")
-
         try:
-            update_data["updated_at"] = datetime.utcnow()
+            user = self.db.query(User).filter(User.id == user_id).first()
+            if not user:
+                raise Exception(f"User {user_id} not found")
 
-            user_ref = self.db.collection("users").document(user_id)
-            user_ref.set(update_data, merge=True)
+            for key, value in update_data.items():
+                if hasattr(user, key):
+                    setattr(user, key, value)
+
+            self.db.commit()
+            self.db.refresh(user)
 
             logger.info(f"Updated user profile for {user_id}")
-
-            # Return the updated profile
-            return await self.get_user_profile(user_id)
+            return user.to_dict()
 
         except Exception as e:
             logger.error(f"Failed to update user profile for {user_id}: {str(e)}")
+            self.db.rollback()
             raise
 
     async def delete_user_profile(self, user_id: str) -> bool:
         """
-        Delete a user profile from Firestore.
-
-        Args:
-            user_id: Unique identifier for the user
-
-        Returns:
-            True if deletion was successful
+        Delete a user profile from PostgreSQL.
         """
-        if not self.db:
-            raise Exception("Firestore client not initialized")
-
         try:
-            user_ref = self.db.collection("users").document(user_id)
-            user_ref.delete()
-
-            logger.info(f"Deleted user profile for {user_id}")
-            return True
+            user = self.db.query(User).filter(User.id == user_id).first()
+            if user:
+                self.db.delete(user)
+                self.db.commit()
+                logger.info(f"Deleted user profile for {user_id}")
+                return True
+            return False
 
         except Exception as e:
             logger.error(f"Failed to delete user profile for {user_id}: {str(e)}")
+            self.db.rollback()
             raise
-
-
-# Global instance
-user_profile_service = UserProfileService()

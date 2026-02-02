@@ -27,6 +27,9 @@ from .schemas import (
     VoiceProfile,
     VoiceProfileResponse,
 )
+from .user import User as DBUser
+from .user_asset import UserAsset
+from .document_embedding import DocumentEmbedding
 
 __all__ = [
     "AIRecommendationsResponse",

@@ -54,7 +54,7 @@ export const TabletView: Story = {
  * refactor it, but currently shows the full animated dashboard.
  */
 export const AnimatedEntry: Story = {
-    play: async ({ canvasElement }) => {
+    play: async () => {
         // This provides a hook for future interaction testing
         // or to verify that motion elements have triggered.
     },

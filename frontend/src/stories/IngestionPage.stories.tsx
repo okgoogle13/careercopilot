@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { IngestionPage } from '../pages/IngestionPage';
-import { EntryType, WorkType } from '../types/api';
+import { EntryType } from '../types/api';
 
 const meta: Meta<typeof IngestionPage> = {
     title: 'Pages/IngestionPage',

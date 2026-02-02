@@ -5,8 +5,13 @@ import shutil
 import sys
 from typing import Optional
 
-from mcp import ClientSession, StdioServerParameters
-from mcp.client.stdio import stdio_client
+try:
+    from mcp import ClientSession, StdioServerParameters
+    from mcp.client.stdio import stdio_client
+except ImportError:  # pragma: no cover - optional dependency in test/CI
+    ClientSession = None
+    StdioServerParameters = None
+    stdio_client = None
 
 class PlaywrightService:
     """
@@ -26,7 +31,9 @@ class PlaywrightService:
         Navigates to a URL and returns the page content (HTML text).
         Uses the 'Playwright_navigate' and 'Playwright_get_visible_text' tools.
         """
-        
+        if not ClientSession or not StdioServerParameters or not stdio_client:
+            raise RuntimeError("MCP Playwright client not installed")
+
         server_params = StdioServerParameters(
             command=self.server_command,
             args=self.server_args,

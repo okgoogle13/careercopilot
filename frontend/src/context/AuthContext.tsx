@@ -4,22 +4,22 @@
  */
 
 import {
-  ReactNode,
-  createContext,
-  useContext,
-  useState,
-  useEffect,
-  useCallback,
-  useMemo,
-} from 'react';
-import {
-  onAuthStateChanged,
-  signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
-  signOut as firebaseSignOut,
-  User as FirebaseUser,
-  updateProfile as firebaseUpdateProfile,
+    User as FirebaseUser,
+    createUserWithEmailAndPassword,
+    signOut as firebaseSignOut,
+    updateProfile as firebaseUpdateProfile,
+    onAuthStateChanged,
+    signInWithEmailAndPassword,
 } from 'firebase/auth';
+import {
+    ReactNode,
+    createContext,
+    useCallback,
+    useContext,
+    useEffect,
+    useMemo,
+    useState,
+} from 'react';
 import { auth } from '../config/firebase';
 
 // Define types locally since we aren't using the external service
@@ -29,10 +29,12 @@ export interface User extends Partial<FirebaseUser> {
   email: string | null;
   displayName: string | null;
   uid: string;
+  access_token?: string | null;
 }
 
 interface AuthContextType {
   user: User | null;
+  session: User | null; // Alias for legacy usage
   loading: boolean;
   login: (email: string, password: string) => Promise<void>;
   register: (email: string, password: string, displayName: string) => Promise<void>;
@@ -175,6 +177,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const contextValue = useMemo(
     () => ({
       user,
+      session: user,
       loading,
       login,
       register,

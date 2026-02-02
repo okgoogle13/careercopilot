@@ -1,4 +1,4 @@
-import { Meta, Story, Canvas } from '@storybook/addon-docs';
+import { Meta, Story, Canvas } from '@storybook/blocks';
 import { Skeleton } from '../components/ui/feedback/Skeleton';
 import { Stack, Box } from '@mui/material';
 
@@ -98,16 +98,16 @@ You can customize the appearance of the Skeleton using the `sx` prop:
 <Canvas>
   <Story name="Custom Styling">
     <Stack spacing={2}>
-      <Skeleton 
-        variant="rectangular" 
-        width={200} 
-        height={100} 
-        sx={{ 
+      <Skeleton
+        variant="rectangular"
+        width={200}
+        height={100}
+        sx={{
           bgcolor: 'primary.main',
           '&:after': {
             background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent)'
           }
-        }} 
+        }}
       />
     </Stack>
   </Story>
@@ -137,7 +137,7 @@ You can customize the appearance of the Skeleton using the `sx` prop:
   <Story name="Loading State Example">
     {() => {
       const isLoading = true; // This would come from your component's state
-      
+
       if (isLoading) {
         return (
           <Stack spacing={2}>
@@ -148,7 +148,7 @@ You can customize the appearance of the Skeleton using the `sx` prop:
           </Stack>
         );
       }
-      
+
       return (
         <div>
           <h2>Loaded Content</h2>

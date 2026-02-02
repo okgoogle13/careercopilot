@@ -111,9 +111,9 @@ class ApplicationPackageResult(BaseModel):
     error_details: List[str] = Field(default_factory=list, description="Any errors encountered")
 
 
-@genkit_flow(output_schema=ApplicationPackageResult)
-@with_ai_error_handling()
-def generate_application_package(
+@async_genkit_flow(output_schema=ApplicationPackageResult)
+@monitor_performance("career_application_workflow")
+async def generate_application_package(
     job_description: str, user_profile: Dict
 ) -> ApplicationPackageResult:
     """
@@ -173,7 +173,7 @@ def generate_application_package(
                 )
 
             if resume_content:
-                result.resume_intelligence = generate_resume_intelligence_report(
+                result.resume_intelligence = await generate_resume_intelligence_report(
                     resume_content=resume_content,
                     target_industry=sanitized_profile.get("target_industry"),
                     career_goals=sanitized_profile.get("career_goals"),
@@ -196,7 +196,7 @@ def generate_application_package(
             job_role = _extract_job_role(sanitized_job_desc.sanitized_content)
 
             if company_name:
-                result.company_research = research_company_for_application(
+                result.company_research = await research_company_for_application(
                     company_name=company_name, industry=industry, job_role=job_role
                 )
                 result.components_generated.append("company_research")
@@ -212,7 +212,7 @@ def generate_application_package(
         print("Step 3: Creating tailored resume...")
         try:
             if result.resume_intelligence:
-                result.tailored_resume = _generate_tailored_resume(
+                result.tailored_resume = await _generate_tailored_resume(
                     sanitized_job_desc.sanitized_content,
                     sanitized_profile,
                     result.resume_intelligence,
@@ -231,7 +231,7 @@ def generate_application_package(
         try:
             company_info = result.company_research.dict() if result.company_research else None
 
-            result.cover_letter = generate_smart_cover_letter(
+            result.cover_letter = await generate_smart_cover_letter(
                 candidate_profile=sanitized_profile,
                 job_description=sanitized_job_desc.sanitized_content,
                 company_info=company_info,
@@ -251,7 +251,7 @@ def generate_application_package(
             ksc_criteria = _detect_ksc_criteria(sanitized_job_desc.sanitized_content)
 
             if ksc_criteria:
-                result.ksc_responses = _generate_ksc_responses(ksc_criteria, sanitized_profile)
+                result.ksc_responses = await _generate_ksc_responses(ksc_criteria, sanitized_profile)
                 result.components_generated.append("ksc_responses")
                 print(f"✓ Generated {len(ksc_criteria)} KSC responses")
             else:
@@ -291,7 +291,7 @@ def generate_application_package(
         return result
 
 
-def _generate_tailored_resume(
+async def _generate_tailored_resume(
     job_description: str,
     user_profile: Dict,
     resume_intelligence: ResumeIntelligenceReport,
@@ -303,13 +303,13 @@ As an expert resume writer and career strategist, create a tailored version of t
 optimized specifically for the target job opportunity.
 
 ORIGINAL RESUME INTELLIGENCE ANALYSIS:
-{json.dumps(resume_intelligence.resume_analysis.dict(), indent=2)}
+{json.dumps(resume_intelligence.resume_analysis.dict(), separators=(\',\', \':\'))}
 
 JOB DESCRIPTION:
 {job_description}
 
 USER PROFILE:
-{json.dumps(user_profile, indent=2)}
+{json.dumps(user_profile, separators=(\',\', \':\'))}
 
 RESUME TAILORING REQUIREMENTS:
 
@@ -367,7 +367,7 @@ Respond with valid JSON matching the structure expected for tailored resume resu
     )
 
 
-def _generate_ksc_responses(ksc_criteria: List[str], user_profile: Dict) -> KSCResponsesResult:
+async def _generate_ksc_responses(ksc_criteria: List[str], user_profile: Dict) -> KSCResponsesResult:
     """Generate STAR responses for detected KSC criteria."""
 
     generated_responses = []
@@ -375,7 +375,7 @@ def _generate_ksc_responses(ksc_criteria: List[str], user_profile: Dict) -> KSCR
 
     for criterion in ksc_criteria[:5]:  # Limit to 5 criteria to avoid timeout
         try:
-            response = generateKscResponse(user_profile_data=user_profile, ksc_statement=criterion)
+            response = await generateKscResponse(user_profile_data=user_profile, ksc_statement=criterion)
             generated_responses.append({criterion: response})
         except Exception as e:
             print(f"Failed to generate KSC response for '{criterion}': {str(e)}")
