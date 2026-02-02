@@ -1,4 +1,4 @@
-import { Button, Textarea } from '@careercopilot/ui';
+import { Button, Input, Textarea } from '@careercopilot/ui';
 import {
   ArrowLeft,
   ArrowRight,
@@ -20,6 +20,8 @@ export function KSCGenerator() {
   const [loading, setLoading] = useState(false);
 
   // Form State
+  const [jobUrl, setJobUrl] = useState('');
+  const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [criteria, setCriteria] = useState('');
   const [star, setStar] = useState({
     situation: '',
@@ -31,6 +33,34 @@ export function KSCGenerator() {
 
   const handleNext = () => setStep((prev) => prev + 1);
   const handleBack = () => setStep((prev) => prev - 1);
+
+  const handleAnalyzeUrl = async () => {
+    if (!jobUrl) return;
+    setIsAnalyzing(true);
+    try {
+      const result = await genkitApi.analyzeJobFromUrl({ url: jobUrl });
+
+      if (result.analysis_success) {
+        if (result.job_details.essential_criteria?.length) {
+          setCriteria(result.job_details.essential_criteria.join('\n\n'));
+          toast.success('Selection criteria extracted successfully!');
+        } else if (result.job_details.full_description) {
+          // Fallback to full description if no specific criteria found
+          setCriteria(result.job_details.full_description);
+          toast.success('Job description extracted (please manually refine criteria)');
+        } else {
+          toast.error('No criteria found. Please enter manually.');
+        }
+      } else {
+        toast.error('Could not extract details from this URL.');
+      }
+    } catch (error) {
+      console.error('Analysis failed:', error);
+      toast.error('Failed to analyze URL. Please check the link.');
+    } finally {
+      setIsAnalyzing(false);
+    }
+  };
 
   const handleGenerate = async () => {
     setLoading(true);
@@ -115,12 +145,58 @@ export function KSCGenerator() {
 
       {/* Main Card */}
       <div className="bg-surface-container rounded-leaf p-8 border border-outline-variant shadow-elevation-1 relative overflow-hidden">
-        {/* Step 1: Selection Criteria */}
+        {/* Step 1: Criteria Input */}
         {step === 1 && (
           <div className="space-y-6 animate-in slide-in-from-right-8 duration-300">
+            <h2 className="text-title-large font-bold text-on-surface">
+              Target Selection Criteria
+            </h2>
+
+            {/* URL Import Section */}
+            <div className="p-4 bg-secondary-container/20 rounded-tech border border-secondary-container">
+              <label className="block text-on-surface mb-2 text-label-large font-bold">
+                Import from URL (Optional)
+              </label>
+              <div className="flex gap-2">
+                <Input
+                  value={jobUrl}
+                  onChange={(e) => setJobUrl(e.target.value)}
+                  placeholder="Paste job listing URL..."
+                  className="bg-surface"
+                />
+                <Button
+                  onClick={handleAnalyzeUrl}
+                  disabled={!jobUrl || isAnalyzing}
+                  className="bg-secondary-container text-on-secondary-container hover:bg-secondary hover:text-on-secondary whitespace-nowrap"
+                >
+                  {isAnalyzing ? (
+                    <>
+                      <RefreshCw className="w-4 h-4 mr-2 animate-spin" /> Scanning...
+                    </>
+                  ) : (
+                    <>
+                      <Sparkles className="w-4 h-4 mr-2" /> Extract Criteria
+                    </>
+                  )}
+                </Button>
+              </div>
+              <p className="text-body-small text-on-surface-variant mt-2">
+                We'll automatically find and extract the key selection criteria from the job page.
+              </p>
+            </div>
+
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center">
+                <span className="w-full border-t border-outline-variant" />
+              </div>
+              <div className="relative flex justify-center text-xs uppercase">
+                <span className="bg-surface px-2 text-on-surface-variant">Or enter manually</span>
+              </div>
+            </div>
+
             <div>
               <label className="block text-on-surface mb-3 text-label-large font-bold">
-                Step 1: Paste Selection Criteria
+                Paste Selection Criteria
               </label>
               <Textarea
                 value={criteria}

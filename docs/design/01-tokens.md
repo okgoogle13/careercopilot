@@ -72,6 +72,20 @@ On hover, elements don't just change color — they _inflate_:
 
 ---
 
+## Typography (The Scribe's Tools)
+
+_A curated collection of typefaces, each with a distinct role in storytelling._
+
+| Token                | Font Family                     | Usage                          | Weight/Axes              |
+| -------------------- | ------------------------------- | ------------------------------ | ------------------------ |
+| **The Proclamation** | Libre Bodoni / Playfair Display | Gallery headers, hero moments  | Condensed, high-contrast |
+| **The Annotation**   | Crimson Text                    | Figure labels, documentation   | 400                      |
+| **The Bloom**        | Fraunces Variable               | Sub-headers, emotional accents | Variable axes            |
+| **The Field Note**   | Work Sans                       | Body text, UI elements         | 400 / 600                |
+| **The Data**         | JetBrains Mono                  | Laboratory data, JSON output   | 500                      |
+
+---
+
 ## Dual Atmosphere (Mode Switching)
 
 ### Gallery Mode (Wonder)
@@ -86,3 +100,35 @@ On hover, elements don't just change color — they _inflate_:
 - **Lighting**: "Inspection Lamp" — even, flat
 - **Motifs**: Anatomical — grid lines, skeletal sketches, brass instruments
 - **Rule**: **NO FLOWERS**
+
+---
+
+## Metadata Tokens (Asset Classification)
+
+| Category               | Tokens                                                        |
+| ---------------------- | ------------------------------------------------------------- |
+| **Motif Types**        | `anatomical`, `geometric`                                     |
+| **Translucency Bands** | `opaque`, `translucent` (40-60%), `diaphanous` (60-80%)       |
+| **Scale Hierarchy**    | `primary` (12-20cm), `secondary` (8-12cm), `tertiary` (2-8cm) |
+
+---
+
+## Laboratory Grid & Annotation System
+
+_Technical specifications for the interactive scientific inspection layer._
+
+| Token                       | Value                       | Usage                                     |
+| --------------------------- | --------------------------- | ----------------------------------------- |
+| **Grid Unit (Primary)**     | `10mm` (100px)              | Major structural snap points              |
+| **Grid Unit (Secondary)**   | `1mm` (10px)                | Minor detail alignment                    |
+| **Snap Tolerance**          | `4px`                       | Interaction magnet radius                 |
+| **Leader Line Weight**      | `0.5pt`                     | Minimalist connection for labels          |
+| **Data Point Radius**       | `2px`                       | Anchor points on specimens                |
+| **Annotation Gap**          | `12px`                      | Offset distance between text and specimen |
+| **Laboratory Grid Color**   | `rgba(168, 160, 151, 0.15)` | Faint grid lines using `--color-muted`    |
+| **Instructional Highlight** | `rgba(212, 168, 75, 0.4)`   | Active snap hover state                   |
+
+---
+
+**Last Updated**: 2026-02-02
+**Target Architecture**: Gemini 2.0+ / Design Flash Sidekick MCP
