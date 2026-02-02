@@ -1,0 +1,201 @@
+name: MCP Server Benchmarks
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'servers/**'
+  schedule:
+    # Run weekly on Monday at 3am UTC
+    - cron: '0 3 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  PYTHON_VERSION: "3.13"
+  BENCHMARK_RUNS: 5
+
+jobs:
+  benchmark-flash-sidekick:
+    name: Benchmark Flash-Sidekick Startup
+    runs-on: ubuntu-latest
+    environment: staging
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install anthropic google-generativeai
+
+      - name: Benchmark startup time
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY_STAGING }}
+        run: |
+          echo "⏱️  Benchmarking Flash-Sidekick startup time ($BENCHMARK_RUNS runs)..."
+          
+          cd servers
+          total_time=0
+          
+          for i in $(seq 1 $BENCHMARK_RUNS); do
+            echo "Run $i/$BENCHMARK_RUNS..."
+            start=$(date +%s%N)
+            
+            timeout 30s python3 -c "
+          import sys
+          sys.path.insert(0, '.')
+          try:
+              import flash_sidekick
+              print('Import successful')
+          except Exception as e:
+              print(f'Error: {e}')
+              sys.exit(1)
+            " || true
+            
+            end=$(date +%s%N)
+            duration=$(( (end - start) / 1000000 ))  # Convert to milliseconds
+            echo "  Duration: ${duration}ms"
+            total_time=$((total_time + duration))
+          done
+          
+          avg_time=$((total_time / BENCHMARK_RUNS))
+          echo "📊 Average startup time: ${avg_time}ms"
+          
+          # Create results JSON
+          mkdir -p benchmark-results
+          cat > benchmark-results/flash-sidekick.json <<EOF
+          {
+            "benchmark": "flash-sidekick-startup",
+            "runs": $BENCHMARK_RUNS,
+            "average_ms": $avg_time,
+            "timestamp": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
+            "commit": "${{ github.sha }}",
+            "branch": "${{ github.ref_name }}"
+          }
+          EOF
+
+      - name: Load baseline performance
+        id: baseline
+        run: |
+          if [[ -f .github/baselines/mcp_performance.json ]]; then
+            baseline=$(jq -r '.benchmarks.flash_sidekick_startup_ms' .github/baselines/mcp_performance.json)
+            echo "baseline=$baseline" >> $GITHUB_OUTPUT
+            echo "📏 Baseline: ${baseline}ms"
+          else
+            echo "baseline=2000" >> $GITHUB_OUTPUT
+            echo "⚠️  No baseline found, using default: 2000ms"
+          fi
+
+      - name: Compare with baseline
+        run: |
+          current=$(jq -r '.average_ms' benchmark-results/flash-sidekick.json)
+          baseline=${{ steps.baseline.outputs.baseline }}
+          
+          echo "## ⏱️  Flash-Sidekick Performance" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Metric | Value |" >> $GITHUB_STEP_SUMMARY
+          echo "|--------|-------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Current Average | ${current}ms |" >> $GITHUB_STEP_SUMMARY
+          echo "| Baseline | ${baseline}ms |" >> $GITHUB_STEP_SUMMARY
+          
+          if [[ $current -lt $baseline ]]; then
+            improvement=$(( ((baseline - current) * 100) / baseline ))
+            echo "| Status | ✅ ${improvement}% faster |" >> $GITHUB_STEP_SUMMARY
+          elif [[ $current -gt $((baseline + 500)) ]]; then
+            regression=$(( ((current - baseline) * 100) / baseline ))
+            echo "| Status | ⚠️  ${regression}% slower |" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "| Status | ✅ Within acceptable range |" >> $GITHUB_STEP_SUMMARY
+          fi
+
+      - name: Upload benchmark results
+        uses: actions/upload-artifact@v4
+        with:
+          name: mcp-benchmark-results
+          path: benchmark-results/
+          retention-days: 30
+
+  benchmark-cloud-ops:
+    name: Benchmark Cloud Ops Startup
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Benchmark startup time
+        run: |
+          echo "⏱️  Benchmarking Cloud Ops startup time ($BENCHMARK_RUNS runs)..."
+          
+          cd servers
+          total_time=0
+          
+          for i in $(seq 1 $BENCHMARK_RUNS); do
+            echo "Run $i/$BENCHMARK_RUNS..."
+            start=$(date +%s%N)
+            
+            python3 -c "
+          import sys
+          sys.path.insert(0, '.')
+          try:
+              import cloud_ops
+          except Exception as e:
+              print(f'Error: {e}')
+              sys.exit(1)
+            "
+            
+            end=$(date +%s%N)
+            duration=$(( (end - start) / 1000000 ))
+            echo "  Duration: ${duration}ms"
+            total_time=$((total_time + duration))
+          done
+          
+          avg_time=$((total_time / BENCHMARK_RUNS))
+          echo "📊 Average startup time: ${avg_time}ms"
+          
+          mkdir -p benchmark-results
+          cat > benchmark-results/cloud-ops.json <<EOF
+          {
+            "benchmark": "cloud-ops-startup",
+            "runs": $BENCHMARK_RUNS,
+            "average_ms": $avg_time,
+            "timestamp": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
+            "commit": "${{ github.sha }}",
+            "branch": "${{ github.ref_name }}"
+          }
+          EOF
+
+      - name: Load baseline and compare
+        run: |
+          current=$(jq -r '.average_ms' benchmark-results/cloud-ops.json)
+          baseline=1000  # Default baseline
+          
+          if [[ -f .github/baselines/mcp_performance.json ]]; then
+            baseline=$(jq -r '.benchmarks.cloud_ops_startup_ms' .github/baselines/mcp_performance.json)
+          fi
+          
+          echo "## ⏱️  Cloud Ops Performance" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Metric | Value |" >> $GITHUB_STEP_SUMMARY
+          echo "|--------|-------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Current Average | ${current}ms |" >> $GITHUB_STEP_SUMMARY
+          echo "| Baseline | ${baseline}ms |" >> $GITHUB_STEP_SUMMARY
+
+      - name: Upload benchmark results
+        uses: actions/upload-artifact@v4
+        with:
+          name: cloud-ops-benchmark-results
+          path: benchmark-results/
+          retention-days: 30
