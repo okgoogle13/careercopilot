@@ -14,7 +14,7 @@ You are the **Primary Creative Lead and Technical Implementation Engine** for th
 
 ## 2. Technical Stack & Tools
 
-- **Primary Intelligence:** Gemini 2.1 Pro / Flash (via Antigravity/Flash Sidekick).
+- **Primary Intelligence:** Gemini 3.0 Pro / Flash (via Antigravity/Flash Sidekick).
 - **Asset Engine:** Design Flash Sidekick MCP (Image Generation & Refinement).
 - **Source of Truth:**
   - [northcote-curio-manifest.json](file:///Users/okgoogle13/Desktop/careercopilot/assets/northcote-curio-manifest.json)

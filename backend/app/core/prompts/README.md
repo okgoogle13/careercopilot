@@ -2,13 +2,14 @@
 
 ## Overview
 
-The **CI Auditor** module provides AI-powered pre-deployment code reviews for the CareerCopilot platform. It automatically detects redundancy (DRY violations), build/deployment risks, and performance bottlenecks using large language models (Gemini 2.0 Flash).
+The **CI Auditor** module provides AI-powered pre-deployment code reviews for the CareerCopilot platform. It automatically detects redundancy (DRY violations), build/deployment risks, and performance bottlenecks using large language models (Gemini 3.0 Flash).
 
 **Key Features**:
-- ✅ **Structured Output**: Type-safe Pydantic schemas ensure consistent, parseable responses  
-- ✅ **Production-Focused**: Prioritizes deployment blockers over stylistic nitpicks  
-- ✅ **Actionable Feedback**: Provides line numbers, example code, and concrete fix instructions  
-- ✅ **Multi-Mode**: Full audit, quick scan, and scheduled review modes  
+
+- ✅ **Structured Output**: Type-safe Pydantic schemas ensure consistent, parseable responses
+- ✅ **Production-Focused**: Prioritizes deployment blockers over stylistic nitpicks
+- ✅ **Actionable Feedback**: Provides line numbers, example code, and concrete fix instructions
+- ✅ **Multi-Mode**: Full audit, quick scan, and scheduled review modes
 
 ---
 
@@ -117,20 +118,24 @@ class CIAuditResponse(BaseModel):
       "fix": "Use `import.meta.env.VITE_API_URL`"
     }
   ],
-  "redundancy_report": [{
-    "file": "Login.tsx",
-    "lines": "50-150",
-    "severity": "medium",
-    "pattern": "Repeated design tokens in inline className",
-    "suggestion": "Extract to CSS modules"
-  }],
-  "optimization_wins": [{
-    "file": "useCareerIngestion.ts",
-    "lines": "28",
-    "type": "performance",
-    "improvement": "Prefetch auth token on mount instead of on submit",
-    "estimated_impact": "Reduces latency by ~300ms"
-  }],
+  "redundancy_report": [
+    {
+      "file": "Login.tsx",
+      "lines": "50-150",
+      "severity": "medium",
+      "pattern": "Repeated design tokens in inline className",
+      "suggestion": "Extract to CSS modules"
+    }
+  ],
+  "optimization_wins": [
+    {
+      "file": "useCareerIngestion.ts",
+      "lines": "28",
+      "type": "performance",
+      "improvement": "Prefetch auth token on mount instead of on submit",
+      "estimated_impact": "Reduces latency by ~300ms"
+    }
+  ],
   "summary": {
     "total_critical": 1,
     "total_refactoring": 1,
@@ -157,18 +162,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Get changed files
         id: changed-files
         uses: tj-actions/changed-files@v44
-      
+
       - name: Run CI Audit
         run: |
           python backend/examples/ci_audit_example.py \
             ${{ steps.changed-files.outputs.all_changed_files }}
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-      
+
       - name: Post results as PR comment
         if: always()
         uses: actions/github-script@v7
@@ -227,15 +232,15 @@ def weekly_codebase_audit():
         "backend/Dockerfile",
         "frontend/package.json"
     ]
-    
+
     request = CodeAuditRequest(
         file_paths=critical_files,
         deployment_target="Cloud Run"
     )
-    
+
     # Run audit
     result = perform_audit(request)
-    
+
     # Send Slack notification
     if result.has_blockers():
         slack_webhook.post(result.to_markdown())
@@ -248,9 +253,10 @@ def weekly_codebase_audit():
 ### System Prompt Design
 
 The system prompt establishes:
+
 1. **Persona**: Principal DevOps Engineer with 15+ years experience
-2. **Mission**: Ruthless pre-deployment code audits  
-3. **Rules**: Be specific, actionable, prioritize safety  
+2. **Mission**: Ruthless pre-deployment code audits
+3. **Rules**: Be specific, actionable, prioritize safety
 4. **Anti-patterns**: What NOT to do (superficial reviews, "looks good" feedback)
 
 ### Review Prompt Structure
@@ -301,11 +307,11 @@ GITHUB_TOKEN=ghp_...
 
 ### Model Selection
 
-| Use Case | Model | Rationale |
-|----------|-------|-----------|
-| Full PR audit | `gemini-2.0-flash` | Best balance of quality and speed (~5s response) |
-| Quick pre-commit | `gemini-2.0-flash-lite` | Ultra-fast (<2s), good for basic checks |
-| Deep analysis | `gemini-2.0-pro` | Highest quality, use for critical releases |
+| Use Case         | Model              | Rationale                                        |
+| ---------------- | ------------------ | ------------------------------------------------ |
+| Full PR audit    | `gemini-3.0-flash` | Best balance of quality and speed (~5s response) |
+| Quick pre-commit | `gemini-3.0-flash` | Ultra-fast (<2s), good for basic checks          |
+| Deep analysis    | `gemini-2.5-pro`   | Highest quality, use for critical releases       |
 
 ---
 
@@ -326,7 +332,7 @@ def test_system_prompt_includes_persona():
 def test_review_prompt_includes_all_sections():
     request = CodeAuditRequest(file_paths=["test.ts"])
     prompt = CIAuditorPrompts.build_review_prompt(request)
-    
+
     assert "DRY Violations" in prompt
     assert "CI/CD & Build Integrity" in prompt
     assert "Performance & Logic" in prompt
@@ -341,9 +347,9 @@ async def test_full_audit_flow():
         file_paths=["examples/bad_code.ts"],
         tech_stack="TypeScript"
     )
-    
+
     result = await perform_audit(request)
-    
+
     assert isinstance(result, CIAuditResponse)
     assert result.summary.total_critical >= 0
 ```
@@ -352,14 +358,14 @@ async def test_full_audit_flow():
 
 ## Performance Benchmarks
 
-| Scenario | Files | Avg Time | Model | Cost (approx) |
-|----------|-------|----------|-------|---------------|
-| Single file audit | 1 | 2-4s | flash-lite | $0.0001 |
-| PR review (5 files) | 5 | 5-8s | flash | $0.0005 |
-| Full codebase (20 files) | 20 | 15-25s | flash | $0.002 |
-| Quick scan (pre-commit) | 3 | 1-2s | flash-lite | $0.00005 |
+| Scenario                 | Files | Avg Time | Model      | Cost (approx) |
+| ------------------------ | ----- | -------- | ---------- | ------------- |
+| Single file audit        | 1     | 2-4s     | flash-lite | $0.0001       |
+| PR review (5 files)      | 5     | 5-8s     | flash      | $0.0005       |
+| Full codebase (20 files) | 20    | 15-25s   | flash      | $0.002        |
+| Quick scan (pre-commit)  | 3     | 1-2s     | flash-lite | $0.00005      |
 
-*Costs based on Gemini API pricing as of Jan 2025. Your mileage may vary.*
+_Costs based on Gemini API pricing as of Jan 2025. Your mileage may vary._
 
 ---
 
@@ -403,17 +409,17 @@ class CriticalIssue(BaseModel):
 
 ### Issue: "Invalid JSON response from LLM"
 
-**Cause**: LLM didn't follow the output schema.  
+**Cause**: LLM didn't follow the output schema.
 **Fix**: Use Genkit's `output_schema` parameter to enforce compliance.
 
 ### Issue: "Audit is too slow (>30s)"
 
-**Cause**: Processing too many files or using heavy model.  
+**Cause**: Processing too many files or using heavy model.
 **Fix**: Switch to `flash-lite` or split into batches.
 
 ### Issue: "Too many false positives"
 
-**Cause**: Prompt may be too aggressive or context-incomplete.  
+**Cause**: Prompt may be too aggressive or context-incomplete.
 **Fix**: Add specific code context about your project's conventions in the system prompt.
 
 ---

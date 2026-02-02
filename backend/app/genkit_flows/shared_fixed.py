@@ -18,7 +18,7 @@ def initialize_google_ai():
         api_key = get_secret("GEMINI_API_KEY")
         if not api_key:
             api_key = os.getenv("GEMINI_API_KEY")
-        
+
         if not api_key:
             raise ValueError("GEMINI_API_KEY not found in environment or Secret Manager")
 
@@ -36,7 +36,7 @@ def initialize_google_ai():
 _google_ai_initialized = initialize_google_ai()
 
 
-# Get the Gemini 1.5 Pro model constant
+# Get the Gemini 3.0 Pro model constant
 GEMINI_1_5_PRO = google_genai.models.gemini.GEMINI_1_5_PRO
 
 

@@ -99,7 +99,7 @@
 ### 3.3 AI/ML Technology
 
 - **Firebase Genkit** for AI workflow orchestration
-- **Google Gemini 2.0+** (via Design Flash Sidekick) as Primary Intelligence
+- **Google Gemini 3.0+** (via Design Flash Sidekick) as Primary Intelligence
 - **Google LangExtract** for structured information extraction
 - **Anthropic Claude** as Secondary Reviewer / Historical Context
 
@@ -381,7 +381,7 @@ POST /api/jobs/apply
 ### 6.2 AI Service Integration
 
 - **Firebase Genkit**: Primary AI workflow orchestration
-- **Google Gemini 2.0+** (via Design Flash Sidekick): Primary creative and implementation engine
+- **Google Gemini 3.0+** (via Design Flash Sidekick): Primary creative and implementation engine
 - **Anthropic Claude API**: Secondary reasoning, archival reference, and optional review
 
 ### 6.3 Third-Party Integrations

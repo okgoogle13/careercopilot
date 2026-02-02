@@ -125,7 +125,7 @@ def get_app_secret(secret_name: str, version: str = "latest") -> str:
     Retrieve an application-level secret from Google Secret Manager with caching.
 
     Args:
-        secret_name: Name of the secret (e.g., 'openai-api-key')
+        secret_name: Name of the secret (e.g., 'gemini-api-key')
         version: Version of the secret (default: 'latest')
 
     Returns:
@@ -173,7 +173,6 @@ def get_database_config() -> dict:
 def get_ai_api_keys() -> dict:
     """Get all AI service API keys from secrets."""
     return {
-        "openai": get_app_secret("openai-api-key"),
         "anthropic": get_app_secret("anthropic-api-key"),
         "gemini": get_app_secret("gemini-api-key"),
         "perplexity": (
