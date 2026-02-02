@@ -1,18 +1,14 @@
 /**
- * ELECTRIC ALCHEMIST: PROFILE CARD (MUI Replacement)
+ * NORTHCOTE CURIO: PROFILE CARD (MUI Replacement)
  *
- * Profile card component using Electric Alchemist Design System v4.4.
+ * Profile card component using Northcote Curio Design System v4.4.
  * Refactored to use CSS variables from unified design tokens.
  */
 
-import React from 'react';
-import { Edit, Trash2, Target, TrendingUp } from 'lucide-react';
-import { Card } from '@careercopilot/ui';
-import { Button } from '@careercopilot/ui';
-import { Badge } from '@careercopilot/ui';
-import { Avatar, AvatarFallback } from '@careercopilot/ui';
-import { Progress } from '@careercopilot/ui';
 import { cn } from '@/lib/utils';
+import { Avatar, AvatarFallback, Badge, Button, Card, Progress } from '@careercopilot/ui';
+import { Edit, Target, Trash2, TrendingUp } from 'lucide-react';
+import React from 'react';
 
 export interface Profile {
   id: string;
@@ -70,9 +66,7 @@ export const ProfileCardMUI: React.FC<ProfileCardMUIProps> = ({
         border: isSelected
           ? `2px solid var(--sys-color-primary)`
           : `1px solid var(--sys-color-outline-variant)`,
-        borderColor: isSelected
-          ? 'var(--sys-color-primary)'
-          : 'var(--sys-color-outline-variant)',
+        borderColor: isSelected ? 'var(--sys-color-primary)' : 'var(--sys-color-outline-variant)',
         transitionDuration: 'var(--sys-motion-duration-medium-2)',
         transitionTimingFunction: 'var(--sys-motion-easing-standard)',
       }}
@@ -85,7 +79,7 @@ export const ProfileCardMUI: React.FC<ProfileCardMUIProps> = ({
           className="flex items-center"
           style={{ gap: 'var(--sys-space-3)' }}
         >
-          <Avatar className={cn("size-12", avatarColor)}>
+          <Avatar className={cn('size-12', avatarColor)}>
             <AvatarFallback>{initials}</AvatarFallback>
           </Avatar>
           <div>

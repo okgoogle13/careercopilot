@@ -1,8 +1,8 @@
+import { Calendar, Download, FileText, Search } from 'lucide-react';
 import { useState } from 'react';
-import { Search, FileText, Calendar, Download } from 'lucide-react';
-import { exportToPdf } from '../../utils/exportEngine';
-import snakePlant from '../../assets/images/snake-plant.png';
+import organicLabyrinth from '../../assets/specimens/organic-labyrinth.jpg';
 import { PageHeader } from '../../components/shared/PageHeader';
+import { exportToPdf } from '../../utils/exportEngine';
 
 // ============================================================================
 // TYPE DEFINITIONS
@@ -109,18 +109,12 @@ export function Documents() {
 
   return (
     <div className="p-6 md:p-12 max-w-7xl relative animate-in fade-in zoom-in-95 duration-500 ease-spring">
-      {/* Snake Plant Decoration - Bottom Right Corner */}
-      <div className="fixed bottom-0 right-0 pointer-events-none w-[380px] z-[1] opacity-55">
+      {/* Northcote Motif Decoration - Bottom Right Corner */}
+      <div className="fixed bottom-0 right-0 pointer-events-none w-[480px] z-[1] opacity-20 grayscale brightness-125 mix-blend-screen overflow-hidden rounded-full blur-3xl translate-x-1/4 translate-y-1/4">
         <img
-          src={snakePlant}
+          src={organicLabyrinth}
           alt=""
-          className="w-full h-auto mix-blend-screen"
-          style={{
-            WebkitMaskImage:
-              'linear-gradient(to top, transparent 0%, rgba(0,0,0,0.35) 8%, rgba(0,0,0,0.65) 18%, rgba(0,0,0,0.85) 28%, black 40%)',
-            maskImage:
-              'linear-gradient(to top, transparent 0%, rgba(0,0,0,0.35) 8%, rgba(0,0,0,0.65) 18%, rgba(0,0,0,0.85) 28%, black 40%)',
-          }}
+          className="w-full h-auto"
         />
       </div>
 
@@ -237,7 +231,9 @@ function DocumentCard({ document }: DocumentCardProps) {
       <div className="flex items-center justify-between gap-2">
         <div className="flex items-center gap-2 text-on-surface-variant">
           <Calendar className="w-4 h-4" />
-          <span className="uppercase tracking-wide text-label-small font-mono">{document.date}</span>
+          <span className="uppercase tracking-wide text-label-small font-mono">
+            {document.date}
+          </span>
         </div>
         <button
           onClick={handleDownload}
@@ -255,7 +251,9 @@ function EmptyState() {
   return (
     <div className="bg-surface-container rounded-leaf p-16 flex flex-col items-center justify-center border border-dashed border-outline">
       <FileText className="w-16 h-16 text-outline mb-4" />
-      <p className="text-on-surface-variant text-center text-body-large">No documents found in this category</p>
+      <p className="text-on-surface-variant text-center text-body-large">
+        No documents found in this category
+      </p>
     </div>
   );
 }

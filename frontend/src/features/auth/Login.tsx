@@ -1,10 +1,15 @@
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import * as z from 'zod';
-import { useAuth } from '../../context/AuthContext';
+import { motion } from 'framer-motion';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { Link, useNavigate } from 'react-router-dom';
+import { z } from 'zod';
 import { NorthcoteButton } from '../../components/ui/NorthcoteButton';
+import { useAuth } from '../../context/AuthContext';
+
+// Northcote Assets
+import specimenGrid from '../../assets/specimens/leaf-fern.png'; // Using available specimen
+import parchmentGrid from '../../assets/textures/paper-grain.png'; // Using available texture
 
 const loginSchema = z.object({
   email: z.string().email('Please enter a valid email'),
@@ -18,7 +23,11 @@ export function Login() {
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<LoginValues>({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<LoginValues>({
     resolver: zodResolver(loginSchema),
   });
 
@@ -26,119 +35,102 @@ export function Login() {
     setAuthError('');
     try {
       await login(data.email, data.password);
-      // Login successful, redirect to dashboard
-      navigate('/dashboard');
+      navigate('/onboarding'); // Redirect to onboarding first
     } catch (err: any) {
       console.error('Login error:', err);
-      // Supabase returns error messages, not codes
-      const message = err?.message || '';
-      if (message.includes('Invalid login credentials') || message.includes('invalid_credentials')) {
-        setAuthError('Invalid email or password.');
-      } else if (message.includes('Email not confirmed')) {
-        setAuthError('Please verify your email before signing in.');
-      } else {
-        setAuthError(err?.message || 'Failed to sign in. Please try again.');
-      }
+      setAuthError(err?.message || 'Failed to sign in. Please try again.');
     }
   };
 
   return (
-    <div className="min-h-screen bg-surface-specimen-night-base flex items-center justify-center p-8 animate-in fade-in duration-500">
-      <div className="w-full max-w-md">
-        {/* Card */}
-        <div
-          className="bg-surface-gallery-eucalypt-smoke rounded-[var(--radius-stone)] p-8 shadow-[var(--elevation-shadow-rest)] border border-outline-variant"
-          style={{
-            backgroundImage: 'radial-gradient(circle, var(--sys-color-primary) 1px, transparent 1px)',
-            backgroundSize: '20px 20px',
-            backgroundBlendMode: 'overlay',
-            backgroundPosition: '0 0',
-          }}
+    <div className="min-h-screen bg-specimen-night-darkest flex items-center justify-center p-8 animate-in fade-in duration-500 relative overflow-hidden">
+      {/* Atmosphere Layer */}
+      <div
+        className="absolute inset-0 opacity-10 pointer-events-none"
+        style={{ backgroundImage: `url(${parchmentGrid})`, backgroundRepeat: 'repeat' }}
+      />
+
+      <div className="w-full max-w-md relative z-10">
+        {/* The Entry Gate (Gallery Glass) */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="bg-eucalypt-smoke/80 backdrop-blur-xl rounded-stone p-10 border border-flannel-flower/10 shadow-maximum overflow-hidden relative"
         >
+          {/* Compass Motif Decoration */}
+          <div className="absolute top-[-40px] right-[-40px] w-32 h-32 opacity-20 pointer-events-none">
+            <img
+              src={specimenGrid}
+              alt=""
+              className="animate-spin-slow"
+              style={{ animationDuration: '60s' }}
+            />
+          </div>
+
           {/* Header */}
-          <div className="text-center mb-8">
-            <div className="w-16 h-16 bg-gradient-to-br from-primary-wattle-gold-container to-primary-wattle-gold-container rounded-[var(--radius-pebble)] flex items-center justify-center mx-auto mb-4 shadow-[var(--elevation-shadow-rest)]">
-              <span className="text-3xl">🦄</span>
-            </div>
-            <h1 className="text-display-large-gallery font-bloom font-black text-on-surface-parchment mb-2">
-              Career<span className="text-wattle-gold italic font-light ml-2">Copilot</span>
-            </h1>
-            <p className="text-on-surface-variant text-body-large">Sign in to your account</p>
+          <div className="text-center mb-10">
+            <h1 className="text-6xl text-bloom-ultra text-wattle-gold mb-2">Entry Gate</h1>
+            <p className="text-curator-accent text-flannel-flower opacity-70">
+              Begin your botanical assessment
+            </p>
           </div>
 
           {/* Error Alert */}
           {authError && (
-            <div className="mb-6 p-4 rounded-[var(--radius-pebble)] bg-error-container text-on-error-container border-error/20 font-medium">
-              {authError}
-            </div>
-          )}
-
-          {/* Guest Access Button */}
-          <div className="mb-6">
-            <NorthcoteButton
-              variant="secondary"
-              size="lg"
-              onClick={() => navigate('/dashboard?demo=true')}
-              className="w-full"
+            <motion.div
+              initial={{ x: -10, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              className="mb-8 p-4 rounded-pebble bg-waratah-crimson/20 text-waratah-crimson border border-waratah-crimson/30 font-annotation text-xs"
             >
-              🔍 Explore as Guest
-            </NorthcoteButton>
-            <p className="text-center text-xs text-on-surface-variant mt-2">
-              No account needed • Full access to job search
-            </p>
-          </div>
-
-          {/* Divider */}
-          <div className="relative mb-6">
-            <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-outline-variant"></div>
-            </div>
-            <div className="relative flex justify-center text-sm">
-              <span className="px-4 bg-surface-gallery-eucalypt-smoke text-on-surface-parchment-dim uppercase tracking-wider text-xs font-bold">
-                Or sign in
-              </span>
-            </div>
-          </div>
+              ⚠️ [FAILED_AUTH]: {authError}
+            </motion.div>
+          )}
 
           {/* Form */}
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="space-y-6"
+            className="space-y-8"
             noValidate
           >
-            <div>
-              <label htmlFor="email" className="block text-sm text-secondary-flannel-flower mb-2 font-medium uppercase tracking-wider">
-                Email
+            <div className="group">
+              <label
+                htmlFor="email"
+                className="block text-xs text-wattle-gold mb-3 font-annotation tracking-widest uppercase"
+              >
+                Field Investigator ID (Email)
               </label>
               <input
                 id="email"
                 type="email"
-                placeholder="you@example.com"
-                className="w-full px-4 bg-surface-gallery-eucalypt-smoke-high border border-outline-variant text-on-surface-parchment rounded-[var(--radius-stone)] h-12 focus:outline-none focus:ring-2 focus:ring-primary-wattle-gold focus:border-primary-wattle-gold transition-colors"
-                aria-invalid={errors.email ? 'true' : 'false'}
-                aria-describedby={errors.email ? 'email-error' : undefined}
+                placeholder="investigator@station.net"
+                className="w-full px-6 bg-specimen-night/50 border border-flannel-flower/20 text-parchment rounded-stone h-14 focus:outline-none focus:border-wattle-gold focus:ring-1 focus:ring-wattle-gold transition-all duration-300 font-field-note"
                 {...register('email')}
               />
               {errors.email && (
-                <p id="email-error" role="alert" className="text-error text-sm mt-1">{errors.email.message}</p>
+                <p className="text-waratah-crimson text-[10px] mt-2 font-annotation uppercase">
+                  {errors.email.message}
+                </p>
               )}
             </div>
 
-            <div>
-              <label htmlFor="password" className="block text-sm text-secondary-flannel-flower mb-2 font-medium uppercase tracking-wider">
-                Password
+            <div className="group">
+              <label
+                htmlFor="password"
+                className="block text-xs text-wattle-gold mb-3 font-annotation tracking-widest uppercase"
+              >
+                Access Keychain (Password)
               </label>
               <input
                 id="password"
                 type="password"
                 placeholder="••••••••"
-                className="w-full px-4 bg-surface-gallery-eucalypt-smoke-high border border-outline-variant text-on-surface-parchment rounded-[var(--radius-stone)] h-12 focus:outline-none focus:ring-2 focus:ring-primary-wattle-gold focus:border-primary-wattle-gold transition-colors"
-                aria-invalid={errors.password ? 'true' : 'false'}
-                aria-describedby={errors.password ? 'password-error' : undefined}
+                className="w-full px-6 bg-specimen-night/50 border border-flannel-flower/20 text-parchment rounded-stone h-14 focus:outline-none focus:border-wattle-gold focus:ring-1 focus:ring-wattle-gold transition-all duration-300 font-field-note"
                 {...register('password')}
               />
               {errors.password && (
-                <p id="password-error" role="alert" className="text-error text-sm mt-1">{errors.password.message}</p>
+                <p className="text-waratah-crimson text-[10px] mt-2 font-annotation uppercase">
+                  {errors.password.message}
+                </p>
               )}
             </div>
 
@@ -147,25 +139,28 @@ export function Login() {
               size="lg"
               type="submit"
               disabled={isSubmitting}
-              className="w-full"
+              className="w-full mt-4"
             >
-              {isSubmitting ? 'Signing in...' : 'Sign In'}
+              {isSubmitting ? 'Validating...' : 'Authenticate'}
             </NorthcoteButton>
           </form>
 
-          {/* Sign Up Link */}
-          <div className="text-center mt-6">
-            <p className="text-on-surface-variant text-sm">
-              Don&apos;t have an account?{' '}
-              <Link
-                to="/register"
-                className="text-wattle-gold hover:text-primary-wattle-glow font-bold hover:underline underline-offset-4"
-              >
-                Sign up
-              </Link>
-            </p>
+          {/* Helper Links */}
+          <div className="flex justify-between items-center mt-10 pt-6 border-t border-flannel-flower/10">
+            <Link
+              to="/register"
+              className="text-curator-accent text-sm text-flannel-flower hover:text-wattle-gold transition-colors"
+            >
+              New Prospect? Register.
+            </Link>
+            <button
+              onClick={() => navigate('/dashboard?demo=true')}
+              className="text-annotation text-[9px] text-flannel-flower/40 hover:text-flannel-flower uppercase tracking-tighter"
+            >
+              Guest Clearance
+            </button>
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   );

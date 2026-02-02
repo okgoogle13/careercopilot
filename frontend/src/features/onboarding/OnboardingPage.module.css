@@ -1,0 +1,95 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4rem 2rem;
+  background-color: var(--color-specimen-night);
+  color: var(--color-parchment);
+  overflow-y: auto;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.header h1 {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  color: var(--color-wattle-gold);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  max-width: 900px;
+  width: 100%;
+}
+
+.leafCard {
+  background: rgba(44, 39, 35, 0.4);
+  border: 1px solid rgba(230, 225, 214, 0.1);
+  border-radius: var(--radius-leaf);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  cursor: pointer;
+  transition: all var(--duration-standard) var(--ease-viscous-breeze);
+}
+
+.leafCard:hover {
+  transform: translateY(-8px) scale(1.02);
+  background: rgba(44, 39, 35, 0.6);
+  border-color: var(--color-wattle-gold);
+  box-shadow: var(--shadow-elevated);
+}
+
+.leafCard.selected {
+  background: rgba(212, 168, 75, 0.1);
+  border-color: var(--color-wattle-gold);
+  box-shadow: 0 0 40px rgba(212, 168, 75, 0.2);
+  transform: scale(1.05);
+}
+
+.iconWrapper {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.8;
+  transition: opacity var(--duration-fast);
+}
+
+.leafCard:hover .iconWrapper,
+.leafCard.selected .iconWrapper {
+  opacity: 1;
+}
+
+.iconWrapper img {
+  max-width: 100%;
+  max-height: 100%;
+  filter: sepia(1) saturate(2) hue-rotate(-10deg); /* Wattle-gold-ish filter */
+}
+
+.footer {
+  margin-top: 5rem;
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

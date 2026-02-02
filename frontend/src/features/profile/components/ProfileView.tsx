@@ -1,92 +1,160 @@
+import { Pebble, StatusBadge, Stone } from '@/components/ui';
+import { motion } from 'framer-motion';
+import {
+  Archive,
+  Award,
+  Briefcase,
+  Edit3,
+  Fingerprint,
+  Link as LinkIcon,
+  Mail,
+  MapPin,
+} from 'lucide-react';
 import { useState } from 'react';
-import { Briefcase, Calendar, MapPin, Mail, Link as LinkIcon, Edit3 } from 'lucide-react';
 import ResumeUploader from './ResumeUploader';
 
+// Assets
+import starfishCage from '../../../assets/specimens/starfish-cage.jpg';
+import wallpaper from '../../../assets/textures/wallpaper.png';
+
+/**
+ * CareerCopilot Profile View ("The Specimen Archive")
+ *
+ * V3.1 Gallery Mode View implementation.
+ */
 export function ProfileView() {
   const [careerData, setCareerData] = useState<any>(null);
 
   return (
-    <div className="max-w-5xl mx-auto pb-12 w-full">
-      {/* Banner */}
-      <div className="h-48 md:h-64 rounded-3xl bg-gradient-to-r from-[#21005D] to-[#381E72] overflow-hidden relative shadow-lg">
-        <div className="absolute inset-0 bg-[url('/texture-pattern.png')] opacity-30 mix-blend-overlay" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#141218] via-transparent to-transparent opacity-60" />
+    <div className="min-h-screen bg-specimen-night relative overflow-hidden pb-12 w-full">
+      {/* Background Layer */}
+      <div
+        className="absolute inset-0 opacity-10 pointer-events-none mix-blend-soft-light"
+        style={{
+          backgroundImage: `url(${wallpaper})`,
+          backgroundSize: 'cover',
+          backgroundAttachment: 'fixed',
+        }}
+      />
+
+      {/* Hero Banner Section */}
+      <div className="h-64 md:h-80 relative overflow-hidden">
+        <img
+          src={starfishCage}
+          alt="Specimen Archive"
+          className="w-full h-full object-cover brightness-50 contrast-125 saturate-50"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-specimen-night via-specimen-night/40 to-transparent" />
+
+        {/* Subtle Motion Bloom */}
+        <motion.div
+          animate={{ opacity: [0.1, 0.2, 0.1] }}
+          transition={{ duration: 5, repeat: Infinity }}
+          className="absolute top-0 right-0 w-[500px] h-[500px] bg-wattle-gold/10 blur-3xl pointer-events-none"
+        />
       </div>
 
-      <div className="px-4 md:px-8 relative -mt-16 md:-mt-24 z-10">
+      <div className="max-w-6xl mx-auto px-6 relative -mt-32 z-10">
         {/* Header Section */}
-        <div className="flex flex-col md:flex-row items-end gap-6 mb-8">
-          <div className="w-32 h-32 md:w-40 md:h-40 rounded-pebble border-4 border-background bg-gradient-to-br from-tertiary-container to-primary-container shadow-2xl flex items-center justify-center text-4xl transform transition-transform hover:scale-105 cursor-pointer">
-            🧑‍💻
-          </div>
-          <div className="flex-1 pb-2 text-center md:text-left">
-            <h1 className="text-3xl md:text-4xl font-extrabold text-on-surface mb-2 tracking-tight">
-              Nishant J.
+        <div className="flex flex-col md:flex-row items-end gap-8 mb-12">
+          <motion.div
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            className="w-40 h-40 md:w-52 md:h-52 rounded-full border-8 border-specimen-night bg-bark-light/10 shadow-glow-gold overflow-hidden relative group cursor-pointer"
+          >
+            <div className="absolute inset-0 flex items-center justify-center text-6xl group-hover:scale-110 transition-transform">
+              🧑‍💻
+            </div>
+            <div className="absolute inset-0 bg-wattle-gold/5 blur-[40px] opacity-0 group-hover:opacity-100 transition-opacity" />
+          </motion.div>
+
+          <div className="flex-1 pb-4 text-center md:text-left">
+            <div className="flex items-center justify-center md:justify-start gap-3 mb-2">
+              <span className="font-annotation text-[10px] text-wattle-gold uppercase tracking-[0.4em] opacity-60">
+                IDENTIFIER: NJD_08
+              </span>
+              <StatusBadge
+                label="ACTIVE"
+                variant="success"
+                showDot
+              />
+            </div>
+            <h1 className="font-bloom text-5xl md:text-7xl font-black text-parchment tracking-tighter uppercase leading-none mb-4">
+              Nishant <span className="text-wattle-gold">Dougall</span>
             </h1>
-            <p className="text-lg text-primary font-medium tracking-wide">
-              Senior Full Stack Engineer
-            </p>
-            <div className="flex flex-wrap justify-center md:justify-start gap-4 mt-4 text-on-surface-variant text-sm">
-              <span className="flex items-center gap-1">
-                <MapPin className="w-4 h-4 text-primary" /> San Francisco, CA
+
+            <div className="flex flex-wrap justify-center md:justify-start gap-6 text-flannel-flower text-xs font-annotation uppercase tracking-widest opacity-80">
+              <span className="flex items-center gap-2">
+                <MapPin className="w-3.5 h-3.5 text-wattle-gold" /> San Francisco, CL
               </span>
-              <span className="flex items-center gap-1">
-                <Mail className="w-4 h-4 text-primary" /> nishant@example.com
+              <span className="flex items-center gap-2">
+                <Mail className="w-3.5 h-3.5 text-wattle-gold" /> nishant@arch.ive
               </span>
-              <span className="flex items-center gap-1">
-                <LinkIcon className="w-4 h-4 text-primary" /> github.com/nishant
+              <span className="flex items-center gap-2">
+                <LinkIcon className="w-3.5 h-3.5 text-wattle-gold" /> CC_NODE_691
               </span>
             </div>
           </div>
-          <button className="flex items-center gap-2 bg-primary-container text-on-primary-container px-6 py-2.5 rounded-pebble font-bold hover:bg-primary hover:text-on-primary transition-all shadow-md active:scale-95">
-            <Edit3 className="w-4 h-4" /> Edit Profile
-          </button>
+
+          <div className="pb-4">
+            <Pebble
+              variant="primary"
+              size="lg"
+              className="px-10 font-bold uppercase tracking-widest shadow-lg"
+            >
+              <Edit3 className="w-4 h-4 mr-2" /> RECALIBRATE
+            </Pebble>
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Main Column - Timeline */}
-          <div className="lg:col-span-2 space-y-8">
-            <section className="bg-[var(--surface-container)] rounded-3xl p-8 border border-white/5 shadow-sm">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+          {/* Main Column - Career Strata */}
+          <div className="lg:col-span-8 space-y-12">
+            <Stone
+              mode="gallery"
+              elevation="raised"
+              className="p-10 border-flannel-flower/10 bg-specimen-night/40 backdrop-blur-md"
+            >
               <ResumeUploader onUploadSuccess={setCareerData} />
-            </section>
+            </Stone>
 
-            <section className="bg-[var(--surface-container)] rounded-3xl p-8 border border-white/5 shadow-sm">
-              <h2 className="text-xl font-bold text-on-surface mb-6 flex items-center gap-2">
-                <Briefcase className="w-5 h-5 text-primary" />
-                {careerData ? 'Extracted Career Path' : 'Experience'}
-              </h2>
+            <section className="space-y-8">
+              <div className="flex items-baseline gap-4">
+                <h2 className="font-bloom text-3xl font-bold text-parchment uppercase tracking-tight flex items-center gap-3">
+                  <Briefcase className="w-6 h-6 text-wattle-gold" />
+                  STRATUM <span className="text-wattle-gold">CHRONOLOGY</span>
+                </h2>
+                <div className="flex-1 h-px bg-flannel-flower/10" />
+              </div>
 
-              <div className="space-y-8 relative before:absolute before:left-2 before:top-2 before:bottom-2 before:w-0.5 before:bg-[#49454F]">
+              <div className="space-y-4">
                 {careerData && careerData.entries && careerData.entries.length > 0 ? (
                   careerData.entries.map((entry: any, index: number) => (
                     <TimelineItem
                       key={index}
                       role={entry.title}
                       company={entry.employer}
-                      date={entry.start_date ? `${entry.start_date} - ${entry.end_date || 'Present'}` : 'Date Unknown'}
+                      date={
+                        entry.start_date
+                          ? `${entry.start_date} - ${entry.end_date || 'Present'}`
+                          : 'Date Unknown'
+                      }
                       description={entry.description}
-                      achievements={entry.achievements_derived}
                     />
                   ))
                 ) : (
                   <>
                     <TimelineItem
-                      role="Senior Frontend Engineer"
+                      role="Senior Full Stack Engineer"
                       company="Tech Corp Inc."
-                      date="2022 - Present"
-                      description="Leading the frontend architecture migration to React 18 and Next.js. Improved performance by 40%."
+                      date="2022 - PRESENT"
+                      description="Leading the archive migration to high-fidelity synthesis models. Improved extraction throughput by 40%."
                     />
                     <TimelineItem
-                      role="Software Developer"
+                      role="Metadata Architect"
                       company="StartUp Studio"
                       date="2020 - 2022"
-                      description="Built and shipped 3 major products. Managed a team of 4 junior developers."
-                    />
-                    <TimelineItem
-                      role="Junior Developer"
-                      company="Web Solutions"
-                      date="2018 - 2020"
-                      description="Full stack development using MERN stack. Implemented CI/CD pipelines."
+                      description="Designed core taxonomies for career data ingestion. Managed a team of 4 specimen auditors."
                     />
                   </>
                 )}
@@ -94,72 +162,86 @@ export function ProfileView() {
             </section>
           </div>
 
-          {/* Sidebar Column - Skills & Badges */}
-          <div className="space-y-6">
-            <div className="bg-[var(--surface-container)] rounded-3xl p-6 border border-white/5 shadow-sm">
-              <h3 className="text-lg font-bold text-[#E6E1E5] mb-4">Skills</h3>
+          {/* Sidebar Column - Traits & Filaments */}
+          <div className="lg:col-span-4 space-y-8">
+            <Stone
+              mode="gallery"
+              elevation="floating"
+              className="p-8 border-flannel-flower/10 bg-specimen-night/20"
+            >
+              <div className="flex items-center gap-3 mb-6">
+                <Fingerprint className="w-5 h-5 text-wattle-gold" />
+                <h3 className="font-annotation text-[10px] font-bold text-parchment uppercase tracking-[0.3em]">
+                  Extracted Filaments
+                </h3>
+              </div>
               <div className="flex flex-wrap gap-2">
-                {(careerData?.skills || [
-                  'React',
-                  'TypeScript',
-                  'Node.js',
-                  'Tailwind',
-                  'GraphQL',
-                  'AWS',
-                  'Python',
-                  'Figma',
-                  'PostgreSQL',
-                ]).map((skill: string) => (
-                  <span
+                {(
+                  careerData?.skills || [
+                    'React.tsx',
+                    'TypeScript',
+                    'Neural.sys',
+                    'Tailwind',
+                    'GraphQL',
+                    'Specimen.Audit',
+                    'Python',
+                    'Archival.Design',
+                  ]
+                ).map((skill: string) => (
+                  <div
                     key={skill}
-                    className="px-3 py-1 bg-surface-container-high rounded-lg text-sm text-primary font-mono border border-white/5 hover:border-primary/50 transition-colors cursor-default"
+                    className="bg-flannel-flower/5 text-flannel-flower border border-flannel-flower/20 font-mono text-[9px] uppercase tracking-widest px-3 py-1 rounded-full"
                   >
                     {skill}
-                  </span>
+                  </div>
                 ))}
               </div>
-            </div>
+            </Stone>
 
-            <div className="bg-[var(--surface-container)] rounded-3xl p-6 border border-white/5 shadow-sm">
-              <h3 className="text-lg font-bold text-[#E6E1E5] mb-4">Badges</h3>
+            <Stone
+              mode="gallery"
+              elevation="floating"
+              className="p-8 border-flannel-flower/10 bg-specimen-night/20"
+            >
+              <div className="flex items-center gap-3 mb-6">
+                <Award className="w-5 h-5 text-wattle-gold" />
+                <h3 className="font-annotation text-[10px] font-bold text-parchment uppercase tracking-[0.3em]">
+                  Validation Badges
+                </h3>
+              </div>
               <div className="grid grid-cols-3 gap-4">
                 <Badge
-                  title="Early Adopter"
                   emoji="🚀"
-                  bg="from-amber-500/20 to-orange-500/20"
-                  border="border-amber-500/30"
+                  title="Early Adopter"
                 />
                 <Badge
-                  title="Code Ninja"
                   emoji="💻"
-                  bg="from-blue-500/20 to-indigo-500/20"
-                  border="border-blue-500/30"
+                  title="Systems Architect"
                 />
                 <Badge
-                  title="Bug Hunter"
-                  emoji="🐛"
-                  bg="from-emerald-500/20 to-green-500/20"
-                  border="border-emerald-500/30"
+                  emoji="🔍"
+                  title="Forensic Auditor"
                 />
                 <Badge
-                  title="Mentor"
                   emoji="🎓"
-                  bg="from-purple-500/20 to-pink-500/20"
-                  border="border-purple-500/30"
+                  title="Scientific Lead"
                 />
                 <Badge
-                  title="Writer"
-                  emoji="✍️"
-                  bg="from-rose-500/20 to-red-500/20"
-                  border="border-rose-500/30"
-                />
-                <Badge
-                  title="Team Player"
                   emoji="🤝"
-                  bg="from-cyan-500/20 to-teal-500/20"
-                  border="border-cyan-500/30"
+                  title="Collaborative Hub"
+                />
+                <Badge
+                  emoji="🏺"
+                  title="Archivist"
                 />
               </div>
+            </Stone>
+
+            <div className="p-6 border border-flannel-flower/5 rounded-2xl bg-wattle-gold/5 flex flex-col items-center text-center">
+              <Archive className="w-8 h-8 text-wattle-gold mb-4 opacity-40" />
+              <p className="font-field-note text-sm text-parchment opacity-60 italic leading-relaxed">
+                "This record is synchronized with the primary Curio node."
+              </p>
             </div>
           </div>
         </div>
@@ -173,58 +255,47 @@ function TimelineItem({
   company,
   date,
   description,
-  achievements,
 }: {
   role: string;
   company: string;
   date: string;
   description?: string;
-  achievements?: string[];
 }) {
   return (
-    <div className="pl-8 relative group">
-      <div className="absolute left-0 top-1.5 w-4 h-4 rounded-full bg-background border-2 border-primary group-hover:bg-primary transition-colors" />
-      <h3 className="text-lg font-bold text-on-surface">{role}</h3>
-      <div className="flex items-center gap-2 text-sm text-on-surface-variant mb-2">
-        <span className="font-semibold">{company}</span>
-        <span>•</span>
-        <span className="flex items-center gap-1">
-          <Calendar className="w-3 h-3" /> {date}
+    <Stone
+      mode="gallery"
+      elevation="flat"
+      className="p-6 border-flannel-flower/5 bg-white/5 hover:border-wattle-gold/20 transition-all group overflow-hidden relative"
+    >
+      <div className="absolute inset-y-0 left-0 w-1 bg-wattle-gold opacity-20 group-hover:opacity-100 transition-opacity" />
+      <div className="flex justify-between items-start mb-2">
+        <h3 className="font-bloom text-xl font-bold text-parchment uppercase tracking-tight">
+          {role}
+        </h3>
+        <span className="font-mono text-[9px] text-wattle-gold opacity-60 tracking-widest uppercase">
+          {date}
         </span>
       </div>
+      <p className="font-annotation text-[10px] text-wattle-gold uppercase tracking-[0.2em] mb-4 opacity-80">
+        {company}
+      </p>
       {description && (
-        <p className="text-on-surface-variant leading-relaxed text-sm mb-2">{description}</p>
+        <p className="font-field-note text-sm text-flannel-flower italic opacity-70 leading-relaxed">
+          {description}
+        </p>
       )}
-      {achievements && achievements.length > 0 && (
-        <ul className="list-disc list-outside ml-4 space-y-1">
-          {achievements.map((item, index) => (
-            <li key={index} className="text-on-surface-variant text-sm pl-1 marker:text-primary/70">
-              {item}
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
+    </Stone>
   );
 }
 
-function Badge({
-  title,
-  emoji,
-  bg,
-  border,
-}: {
-  title: string;
-  emoji: string;
-  bg: string;
-  border: string;
-}) {
+function Badge({ emoji, title }: { emoji: string; title: string }) {
   return (
     <div
-      className={`aspect-square rounded-2xl bg-gradient-to-br ${bg} border ${border} flex items-center justify-center text-3xl hover:scale-110 transition-transform cursor-help`}
+      className="aspect-square rounded-full bg-bark-light/5 border border-flannel-flower/10 flex items-center justify-center text-2xl hover:bg-wattle-gold/10 hover:border-wattle-gold/30 transition-all cursor-help relative group"
       title={title}
     >
       {emoji}
+      <div className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-wattle-gold opacity-0 group-hover:opacity-100 transition-opacity" />
     </div>
   );
 }

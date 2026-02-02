@@ -1,5 +1,5 @@
 import { Pebble } from '@/components/ui/Pebble';
-import { Seed } from '@/components/ui/Seed';
+import { StatusBadge } from '@/components/ui/StatusBadge/StatusBadge';
 import { Stone } from '@/components/ui/Stone';
 import {
   AlertCircle,
@@ -231,8 +231,8 @@ const TimelineEventComponent: React.FC<TimelineEventComponentProps> = ({
       {/* Event Content */}
       <div className="flex-1">
         <Stone
-          variant={isLatest ? 'glass' : 'flat'}
-          className={`${isLatest ? 'border-[var(--color-leaf-base)] shadow-lg' : ''}`}
+          elevation={isLatest ? 'raised' : 'flat'}
+          className={`${isLatest ? 'border-[var(--color-leaf-base)]' : ''}`}
         >
           <div className="p-4">
             {/* Header */}
@@ -255,10 +255,10 @@ const TimelineEventComponent: React.FC<TimelineEventComponentProps> = ({
                   <span>{formatTimestamp(event.timestamp)}</span>
                 </div>
               </div>
-              <Seed
+              <StatusBadge
                 label={event.status.replace('-', ' ').toUpperCase()}
                 variant="neutral"
-                className={`${statusClass} border border-current opacity-90`}
+                className={`${statusClass} opacity-90`}
               />
             </div>
 
@@ -337,7 +337,7 @@ const TimelineEventComponent: React.FC<TimelineEventComponentProps> = ({
                           </h4>
                           <div className="flex flex-wrap gap-2">
                             {event.details.documents.map((doc, i) => (
-                              <Seed
+                              <StatusBadge
                                 key={i}
                                 label={doc}
                                 variant="neutral"
@@ -405,7 +405,7 @@ export const TimelineView: React.FC<TimelineViewProps> = ({
             {onBack && (
               <Pebble
                 variant="ghost"
-                icon={ArrowLeft}
+                iconLeft={<ArrowLeft size={16} />}
                 onClick={onBack}
               >
                 Back
@@ -425,7 +425,7 @@ export const TimelineView: React.FC<TimelineViewProps> = ({
           </div>
           <Pebble
             variant="primary"
-            icon={Plus}
+            iconLeft={<Plus size={16} />}
             onClick={handleAddEvent}
           >
             Add Event
@@ -487,7 +487,7 @@ export const TimelineView: React.FC<TimelineViewProps> = ({
               </p>
               <Pebble
                 variant="secondary"
-                icon={Plus}
+                iconLeft={<Plus size={16} />}
                 onClick={handleAddEvent}
               >
                 Add First Event
