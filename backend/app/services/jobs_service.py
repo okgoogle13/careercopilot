@@ -11,7 +11,7 @@ class JobsService:
     async def compare_resume_to_job_and_save(db, uid, document_id, job_description_text):
         try:
             # Step A: Analyze the job description
-            job_analysis_str = await analyze_job_description.run(job_description_text)
+            job_analysis_str = await analyze_job_description(job_description_text)
             job_analysis_data = json.loads(job_analysis_str)
 
             # Step B: Fetch the user's resume text from Firestore
@@ -27,7 +27,7 @@ class JobsService:
                 raise HTTPException(status_code=400, detail="Resume has no extracted text.")
 
             # Step C: Compare the resume to the job analysis
-            comparison_result_str = await compare_resume_to_job.run(
+            comparison_result_str = await compare_resume_to_job(
                 resume_text=resume_text, job_analysis_data=job_analysis_data
             )
             comparison_result = json.loads(comparison_result_str)

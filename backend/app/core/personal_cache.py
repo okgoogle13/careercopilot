@@ -165,6 +165,10 @@ class PersonalCache:
             logger.error(f"Error clearing expired cache: {e}")
             return 0
 
+    async def cleanup_expired(self) -> int:
+        """Alias for clear_expired for compatibility with cache middleware"""
+        return await self.clear_expired()
+
     async def _clear_expired_in_directory(self, directory: Path) -> int:
         """Clear expired files in a specific directory"""
         cleared_count = 0

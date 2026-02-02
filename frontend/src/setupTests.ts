@@ -31,17 +31,7 @@ afterEach(() => {
   cleanup();
 });
 
-// Mock Firebase
-// Mock Firebase (using manual mocks in __mocks__)
-jest.mock('firebase/auth');
-jest.mock('firebase/app');
-jest.mock('./config/firebase', () => ({
-  auth: {
-    currentUser: null,
-  },
-  db: {},
-  storage: {},
-}));
+// Mock Firebase - REMOVED
 
 // Mock window.matchMedia for Material-UI components
 Object.defineProperty(window, 'matchMedia', {

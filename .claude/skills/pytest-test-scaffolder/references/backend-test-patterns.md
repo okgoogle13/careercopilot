@@ -89,46 +89,36 @@ def test_transfer_points_transaction(mock_firestore_transaction):
     assert mock_firestore_transaction.update.call_count == 2
 ```
 
-## Firebase Authentication Mocking
+## Authentication Mocking (SQLAlchemy + JWT)
 
 ### Auth Token Mock
 
 ```python
 @pytest.fixture
-def mock_firebase_auth(monkeypatch):
-    """Mock Firebase auth verification."""
-    from firebase_admin import auth
+def mock_get_current_user(monkeypatch):
+    """Mock get_current_user dependency."""
+    from app.models.database import User
+    
+    user = User(
+        id="test-user-123",
+        email="test@example.com",
+        name="Test User"
+    )
+    
+    async def mock_return(*args, **kwargs):
+        return user
+        
+    monkeypatch.setattr("app.core.auth.get_current_user", mock_return)
+    return user
 
-    mock_auth = MagicMock()
-    mock_auth.verify_id_token.return_value = {
-        "uid": "test-user-123",
-        "email": "test@example.com"
-    }
-    monkeypatch.setattr("app.core.firebase_auth", mock_auth)
-    return mock_auth
-
-def test_endpoint_with_auth(client, mock_firebase_auth):
+def test_endpoint_with_auth(client, mock_get_current_user):
     """Test endpoint with authentication."""
+    # When mocking the dependency directly, the header isn't strictly needed 
+    # but good for realism if middleware checks it
     headers = {"Authorization": "Bearer test-token"}
     response = client.get("/api/profile", headers=headers)
 
     assert response.status_code == 200
-    mock_firebase_auth.verify_id_token.assert_called_once()
-```
-
-### Auth Error Handling
-
-```python
-def test_endpoint_invalid_token(client, mock_firebase_auth):
-    """Test invalid token rejection."""
-    from firebase_admin.auth import InvalidIdTokenError
-
-    mock_firebase_auth.verify_id_token.side_effect = InvalidIdTokenError("Invalid token")
-
-    headers = {"Authorization": "Bearer invalid-token"}
-    response = client.get("/api/profile", headers=headers)
-
-    assert response.status_code == 401
 ```
 
 ## Genkit Flow Mocking

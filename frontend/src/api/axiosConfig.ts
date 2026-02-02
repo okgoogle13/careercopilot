@@ -6,10 +6,6 @@ const metaEnv = import.meta.env;
 const envApiUrl = metaEnv?.VITE_API_URL || 'http://localhost:8000';
 const API_BASE_URL = envApiUrl.includes('/api') ? envApiUrl : `${envApiUrl}/api`;
 
-// Debug logging (remove in production)
-if (metaEnv?.DEV) {
-}
-
 export const axiosInstance = axios.create({
   baseURL: API_BASE_URL,
   headers: {

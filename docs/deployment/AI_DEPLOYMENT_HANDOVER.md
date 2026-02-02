@@ -149,7 +149,7 @@ Located in `backend/app/genkit_flows/`:
 
 ```bash
 # AI Configuration
-GEMINI_API_KEY=AIzaSyDtSTUenRUaSvTC1Kvyi4ZPxlWLWegTlMI
+GEMINI_API_KEY=[REDACTED]
 OPENAI_API_KEY=sk-proj-dU-hIGOAQDpWDGo3Urrq0F7K8CfHfFg3nU47t...
 ANTHROPIC_API_KEY=sk-ant-api03-3_b3PD3IhKkOJ6c_sFkNPRrXqhjY...
 

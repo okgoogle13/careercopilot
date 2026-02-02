@@ -1,16 +1,16 @@
 'use client';
 
-import * as React from 'react';
 import * as LabelPrimitive from '@radix-ui/react-label';
 import { Slot } from '@radix-ui/react-slot';
+import * as React from 'react';
 import {
-  Controller,
-  FormProvider,
-  useFormContext,
-  useFormState,
-  type ControllerProps,
-  type FieldPath,
-  type FieldValues,
+    Controller,
+    FormProvider,
+    useFormContext,
+    useFormState,
+    type ControllerProps,
+    type FieldPath,
+    type FieldValues,
 } from 'react-hook-form';
 
 import { cn } from './utils';
@@ -89,7 +89,11 @@ function FormLabel({ className, ...props }: React.ComponentProps<typeof LabelPri
     <LabelPrimitive.Root
       data-slot="form-label"
       data-error={!!error}
-      className={cn('data-[error=true]:text-destructive', className)}
+      className={cn(
+        'text-sm font-field-note font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70',
+        error ? 'text-[var(--color-waratah-crimson)]' : 'text-[var(--color-flannel-flower)]',
+        className
+      )}
       htmlFor={formItemId}
       {...props}
     />
@@ -117,7 +121,7 @@ function FormDescription({ className, ...props }: React.ComponentProps<'p'>) {
     <p
       data-slot="form-description"
       id={formDescriptionId}
-      className={cn('text-muted-foreground text-sm', className)}
+      className={cn('text-[var(--color-flannel-flower-dark)] text-xs font-field-note font-medium opacity-70', className)}
       {...props}
     />
   );
@@ -135,7 +139,7 @@ function FormMessage({ className, ...props }: React.ComponentProps<'p'>) {
     <p
       data-slot="form-message"
       id={formMessageId}
-      className={cn('text-destructive text-sm', className)}
+      className={cn('text-[var(--color-waratah-crimson)] text-xs font-field-note font-semibold animate-in fade-in slide-in-from-top-1 duration-standard', className)}
       {...props}
     >
       {body}
@@ -144,12 +148,7 @@ function FormMessage({ className, ...props }: React.ComponentProps<'p'>) {
 }
 
 export {
-  useFormField,
-  Form,
-  FormItem,
-  FormLabel,
-  FormControl,
-  FormDescription,
-  FormMessage,
-  FormField,
+    Form, FormControl,
+    FormDescription, FormField, FormItem,
+    FormLabel, FormMessage, useFormField
 };

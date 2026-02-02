@@ -1,96 +1,111 @@
 import React from 'react';
-import { Box, Typography } from '@mui/material';
 
-export type StatusBadgeVariant = 'primary' | 'secondary' | 'tertiary' | 'neutral' | 'outline';
+export type StatusBadgeVariant = 'success' | 'warning' | 'error' | 'info' | 'neutral';
+export type StatusBadgeMode = 'gallery' | 'laboratory';
 
 export interface StatusBadgeProps {
     /** The text label to display */
     label: string;
-    /** Visual style variant */
+    /** Semantic status variant */
     variant?: StatusBadgeVariant;
+    /** Theme mode: Gallery (warm, botanical) or Laboratory (clinical, precise) */
+    mode?: StatusBadgeMode;
     /** Optional dot indicator */
     showDot?: boolean;
+    /** Additional CSS classes */
+    className?: string;
 }
 
+/**
+ * StatusBadge - Northcote Curio Status Indicator
+ *
+ * Supports both Gallery (warm, botanical) and Laboratory (clinical, precise) modes.
+ *
+ * **Northcote Token Usage:**
+ * - Typography: `font-annotation` (Uppercase, tracked)
+ * - Color: Semantic status colors (success, warning, error, info)
+ * - Shape: `radius-seed` (Organic asymmetry for badges)
+ * - Motion: `ease-viscous` (Hover animation)
+ *
+ * **Variants:**
+ * - success: Ghost Gum (green)
+ * - warning: Banksia (orange)
+ * - error: Waratah Crimson (red)
+ * - info: Wattle Gold (yellow)
+ * - neutral: Flannel Flower (gray)
+ */
 export const StatusBadge: React.FC<StatusBadgeProps> = ({
     label,
     variant = 'neutral',
+    mode = 'gallery',
     showDot = false,
+    className = '',
 }) => {
-    // Map variants to specific design tokens
-    const variantStyles = {
-        primary: {
-            bgcolor: 'var(--sys-color-primary-container)',
-            color: 'var(--sys-color-on-primary-container)',
-            border: '1px solid transparent',
-            dotColor: 'var(--sys-color-primary)',
-        },
-        secondary: {
-            bgcolor: 'var(--sys-color-secondary-container)',
-            color: 'var(--sys-color-on-secondary-container)',
-            border: '1px solid transparent',
-            dotColor: 'var(--sys-color-secondary)',
-        },
-        tertiary: {
-            bgcolor: 'var(--sys-color-tertiary-container)',
-            color: 'var(--sys-color-on-tertiary-container)',
-            border: '1px solid transparent',
-            dotColor: 'var(--sys-color-tertiary)',
-        },
-        neutral: {
-            bgcolor: 'var(--sys-color-surface-container-high)',
-            color: 'var(--sys-color-on-surface)',
-            border: '1px solid transparent',
-            dotColor: 'var(--sys-color-outline)',
-        },
-        outline: {
-            bgcolor: 'transparent',
-            color: 'var(--sys-color-on-surface-variant)',
-            border: '1px solid var(--sys-color-outline-variant)',
-            dotColor: 'var(--sys-color-primary)',
-        },
+    // Northcote Curio Palette Mappings
+    const getVariantStyles = () => {
+        const colorMap: Record<StatusBadgeVariant, string> = {
+            success: 'primary',    // Sage (Botanical)
+            warning: 'warning',    // Gold (Highlight)
+            error: 'error',        // Crimson (Alert)
+            info: 'secondary',     // Coral (Dynamic)
+            neutral: 'neutral',    // Charcoal (Recessed)
+        };
+
+        const base = colorMap[variant];
+
+        // Mode-aware colors using palette tokens
+        const styles = {
+            bg: `var(--ref-palette-${base}-90)`,
+            text: `var(--on-${base}-container)`,
+            dot: `var(--ref-palette-${base}-40)`,
+            border: `var(--ref-palette-${base}-80)`,
+        };
+
+        // Dark mode overrides (Laboratory/Gallery root is deep charcoal)
+        // Adjusting for high contrast on dark backgrounds
+        if (base === 'neutral') {
+            styles.bg = 'rgba(230, 225, 214, 0.1)';
+            styles.text = 'var(--color-flannel-flower)';
+            styles.dot = 'var(--color-flannel-flower-dark)';
+            styles.border = 'rgba(230, 225, 214, 0.2)';
+        } else if (base === 'warning') {
+            styles.text = 'var(--color-wattle-gold)';
+            styles.bg = 'rgba(212, 168, 75, 0.15)';
+            styles.border = 'rgba(212, 168, 75, 0.3)';
+            styles.dot = 'var(--color-wattle-gold)';
+        }
+
+        return styles;
     };
 
-    const currentStyle = variantStyles[variant];
+    const currentStyle = getVariantStyles();
 
     return (
-        <Box
-            sx={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '8px',
-                px: '12px',
-                py: '4px',
-                borderRadius: 'var(--sys-shape-corner-full)',
-                ...currentStyle,
-                transition: 'all var(--sys-motion-duration-short-2) var(--sys-motion-easing-expressive-spring)',
-                '&:hover': {
-                    filter: 'brightness(1.1)',
-                    transform: 'scale(1.02)',
-                },
+        <div
+            className={`
+                inline-flex items-center gap-2
+                px-3 py-1
+                border
+                transition-all duration-300 var(--ease-viscous-breeze)
+                hover:scale-105 hover:brightness-110
+                ${className}
+            `}
+            style={{
+                borderRadius: 'var(--radius-seed)',
+                backgroundColor: currentStyle.bg,
+                color: currentStyle.text,
+                borderColor: currentStyle.border,
             }}
         >
             {showDot && (
-                <Box
-                    sx={{
-                        width: '8px',
-                        height: '8px',
-                        borderRadius: '50%',
-                        bgcolor: currentStyle.dotColor,
-                    }}
+                <div
+                    className="w-2 h-2 rounded-full"
+                    style={{ backgroundColor: currentStyle.dot }}
                 />
             )}
-            <Typography
-                variant="body2" // Using body2 as label-small equivalent
-                sx={{
-                    fontWeight: 'var(--sys-type-weight-medium)',
-                    fontSize: '0.8125rem', // ~13px
-                    lineHeight: 1,
-                    fontFamily: 'var(--sys-type-body-family)',
-                }}
-            >
+            <span className="text-xs font-annotation font-bold tracking-widest uppercase">
                 {label}
-            </Typography>
-        </Box>
+            </span>
+        </div>
     );
 };

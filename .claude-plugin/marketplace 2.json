@@ -1,0 +1,16 @@
+{
+  "name": "careercopilot-plugin",
+  "version": "1.0.0",
+  "source": {
+    "source": "url",
+    "url": "https://github.com/okgoogle13/careercopilot.git",
+    "branch": "main"
+  },
+  "description": "AI-powered career assistant for resume, cover letters, KSC responses, and job applications",
+  "categories": ["productivity", "ai-assistant", "career-development"],
+  "keywords": ["resume", "cover-letter", "job-application", "career", "ai", "ksc", "ats"],
+  "author": "Career Copilot Team",
+  "license": "MIT",
+  "repository": "https://github.com/okgoogle13/careercopilot.git",
+  "homepage": "https://careercopilot.web.app"
+}

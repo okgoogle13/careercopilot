@@ -1,24 +1,24 @@
 #!/usr/bin/env ts-node
 /**
- * Component Inventory Generator - Material Design 3 Expressive Edition
+ * Component Inventory Generator - Northcote Curio Edition
  *
  * This script analyzes the frontend codebase to generate an accurate inventory
- * of all components, their usage patterns, and Material Design 3 (Expressive) migration status.
+ * of all components, their usage patterns, and Northcote Curio migration status.
  *
  * Features:
  * - Uses TypeScript AST analysis via ts-morph for accuracy
  * - Detects all import patterns (default, named, dynamic)
- * - Tracks component dependencies and M3 migration status
+ * - Tracks component dependencies and Northcote Curio migration status
  * - Identifies test/story file coverage
  * - Categorizes components by type
- * - Analyzes M3 Expressive adoption (design tokens, theme provider, MUI components)
+ * - Analyzes Northcote Curio adoption (token usage, mode system, legacy usage)
  * - Generates detailed JSON report with migration recommendations
  *
- * Migration Status Detection:
- * - 'migrated': Uses MUI components only (no custom UI wrapper components)
- * - 'mixed': Uses both MUI and custom UI components (needs consolidation)
- * - 'not_migrated': Uses only custom UI components (needs M3 migration)
- * - 'expressive': Fully adopted M3 Expressive with design tokens
+ * Migration Status Detection (Northcote Curio):
+ * - 'migrated': Uses Curio tokens/mode system, no legacy MUI/M3 dependencies
+ * - 'mixed': Uses Curio tokens/mode system alongside legacy MUI/M3
+ * - 'not_migrated': Uses legacy MUI/M3 without Curio tokens
+ * - 'unknown': No clear Curio or legacy signals detected
  *
  * Usage:
  *   npx ts-node scripts/component-inventory.ts
@@ -38,7 +38,17 @@ interface ComponentInfo {
   name: string;
   path: string;
   relativePath: string;
-  category: 'ui' | 'features' | 'layout' | 'library' | 'documents' | 'main' | 'other';
+  category:
+    | 'ui'
+    | 'shared'
+    | 'core'
+    | 'components'
+    | 'features'
+    | 'layout'
+    | 'pages'
+    | 'legacy'
+    | 'ui_package'
+    | 'other';
   usageCount: number;
   importedBy: string[];
   exports: string[];
@@ -51,12 +61,12 @@ interface ComponentInfo {
   isReusable: boolean;
   usesMUI: boolean;
   usesCustomUI: boolean;
+  usesLegacyM3: boolean;
   isDemo: boolean;
-  migrationStatus: 'migrated' | 'mixed' | 'not_migrated' | 'expressive' | 'unknown';
-  // M3 Expressive specific fields
+  migrationStatus: 'migrated' | 'mixed' | 'not_migrated' | 'unknown';
+  // Northcote Curio specific fields
   usesDesignTokens: boolean;
-  usesThemeProvider: boolean;
-  usesM3Components: boolean;
+  usesModeSystem: boolean;
 }
 
 interface InventoryReport {
@@ -68,42 +78,51 @@ interface InventoryReport {
   mostUsedComponents: Array<{ name: string; count: number }>;
   recommendations: string[];
   migrationSummary: Record<
-    'migrated' | 'mixed' | 'not_migrated' | 'expressive' | 'unknown',
+    'migrated' | 'mixed' | 'not_migrated' | 'unknown',
     number
   >;
-  m3ExpressiveAdoption: {
-    withDesignTokens: number;
-    withThemeProvider: number;
-    withM3Components: number;
-    fullyExpressive: number;
+  curioAdoption: {
+    withCurioTokens: number;
+    withModeSystem: number;
+    legacyMUI: number;
+    legacyM3: number;
+    fullyCurio: number;
   };
 }
 
 const FRONTEND_DIR = path.join(__dirname, '..');
 const SRC_DIR = path.join(FRONTEND_DIR, 'src');
-const COMPONENTS_DIR = path.join(SRC_DIR, 'components');
+const UI_PACKAGE_DIR = path.join(FRONTEND_DIR, 'packages', 'ui', 'src', 'components');
+const COMPONENT_ROOTS = [
+  path.join(SRC_DIR, 'components'),
+  path.join(SRC_DIR, 'features'),
+  path.join(SRC_DIR, 'layouts'),
+  path.join(SRC_DIR, 'pages'),
+  path.join(SRC_DIR, 'legacy'),
+  UI_PACKAGE_DIR,
+];
+
+function normalizePath(value: string): string {
+  return value.split(path.sep).join('/');
+}
+
+function isWithinRoot(filePath: string, rootDir: string): boolean {
+  const relative = path.relative(rootDir, filePath);
+  return !!relative && !relative.startsWith('..') && !path.isAbsolute(relative);
+}
 
 function categorizeComponent(filePath: string): ComponentInfo['category'] {
-  const relativePath = path.relative(COMPONENTS_DIR, filePath);
+  const relativePath = normalizePath(path.relative(FRONTEND_DIR, filePath));
 
-  if (relativePath.startsWith('ui/') || relativePath.startsWith('ui\\')) {
-    return 'ui';
-  } else if (relativePath.startsWith('features/') || relativePath.startsWith('features\\')) {
-    return 'features';
-  } else if (relativePath.startsWith('layout/') || relativePath.startsWith('layout\\')) {
-    return 'layout';
-  } else if (relativePath.startsWith('library/') || relativePath.startsWith('library\\')) {
-    return 'library';
-  } else if (
-    relativePath.startsWith('documents/') ||
-    relativePath.startsWith('documents\\') ||
-    relativePath.startsWith('document/') ||
-    relativePath.startsWith('document\\')
-  ) {
-    return 'documents';
-  } else if (relativePath.startsWith('main/') || relativePath.startsWith('main\\')) {
-    return 'main';
-  }
+  if (relativePath.startsWith('packages/ui/src/components/')) return 'ui_package';
+  if (relativePath.startsWith('src/legacy/')) return 'legacy';
+  if (relativePath.startsWith('src/layouts/')) return 'layout';
+  if (relativePath.startsWith('src/pages/')) return 'pages';
+  if (relativePath.startsWith('src/features/')) return 'features';
+  if (relativePath.startsWith('src/components/ui/')) return 'ui';
+  if (relativePath.startsWith('src/components/shared/')) return 'shared';
+  if (relativePath.startsWith('src/components/core/')) return 'core';
+  if (relativePath.startsWith('src/components/')) return 'components';
 
   return 'other';
 }
@@ -155,17 +174,21 @@ function analyzeComponents(): InventoryReport {
     skipAddingFilesFromTsConfig: false,
   });
 
+  if (fs.existsSync(UI_PACKAGE_DIR)) {
+    project.addSourceFilesAtPaths(path.join(UI_PACKAGE_DIR, '**/*.tsx'));
+  }
+
   console.log('Analyzing components...');
 
   const componentFiles = project.getSourceFiles().filter((sf) => {
     const filePath = sf.getFilePath();
     return (
-      filePath.includes('/components/') &&
       filePath.endsWith('.tsx') &&
       !filePath.includes('.test.') &&
       !filePath.includes('.stories.') &&
       !filePath.includes('node_modules') &&
-      !filePath.includes('/Figma UI Files/')
+      !filePath.includes('/Figma UI Files/') &&
+      COMPONENT_ROOTS.some((root) => isWithinRoot(filePath, root))
     );
   });
 
@@ -177,7 +200,7 @@ function analyzeComponents(): InventoryReport {
   // First pass: collect all components
   for (const sourceFile of componentFiles) {
     const filePath = sourceFile.getFilePath();
-    const relativePath = path.relative(SRC_DIR, filePath);
+    const relativePath = path.relative(FRONTEND_DIR, filePath);
     const componentName = path.basename(filePath, '.tsx');
 
     // Get exported names
@@ -203,7 +226,7 @@ function analyzeComponents(): InventoryReport {
       }
     });
 
-    // Determine migration flags and M3 Expressive adoption
+    // Determine migration flags and Northcote Curio adoption
     const importDecls = sourceFile.getImportDeclarations();
     const usesMUI = importDecls.some((imp) => {
       const mod = imp.getModuleSpecifierValue();
@@ -214,48 +237,52 @@ function analyzeComponents(): InventoryReport {
       // local UI layer patterns
       return (
         mod.includes('/components/ui/') ||
+        mod.includes('/components/shared/') ||
+        mod.includes('/components/core/') ||
+        mod.includes('/legacy/') ||
         mod.startsWith('../ui') ||
         mod.startsWith('./ui') ||
-        mod.includes('src/components/ui/')
+        mod.includes('src/components/ui/') ||
+        mod.startsWith('@/components/') ||
+        mod.startsWith('@/legacy/')
       );
     });
 
-    // M3 Expressive feature detection
-    const usesDesignTokens =
-      text.includes('var(--') || text.includes('theme.palette') || text.includes('theme.spacing');
-    const usesThemeProvider =
+    const usesLegacyM3 =
+      filePath.includes(`${path.sep}legacy${path.sep}`) ||
       importDecls.some((imp) => {
         const mod = imp.getModuleSpecifierValue();
-        return mod.includes('@mui/material/styles') || mod.includes('ThemeProvider');
+        return mod.includes('/legacy/') || mod.includes('m3-') || mod.includes('/m3');
       }) ||
-      text.includes('useTheme()') ||
-      text.includes('useTheme(');
-    const usesM3Components = importDecls.some((imp) => {
-      const mod = imp.getModuleSpecifierValue();
-      // Check for common M3 components
-      return (
-        mod.includes('@mui/material/') &&
-        (mod.includes('Card') ||
-          mod.includes('Button') ||
-          mod.includes('TextField') ||
-          mod.includes('Dialog') ||
-          mod.includes('AppBar') ||
-          mod.includes('Chip'))
-      );
-    });
+      /\bM3[A-Z]/.test(text);
+
+    const curioTokenPattern =
+      /(wattle|waratah|eucalypt|flannel|parchment|specimen|pebble|stone|northcote|curio|banksia|bottlebrush|gum|fern|sentry|gallery|laboratory|slate)/i;
+    const usesDesignTokens =
+      curioTokenPattern.test(text) ||
+      /--(radius|elevation|duration|motion|surface|color)-/i.test(text);
+
+    const usesModeSystem =
+      text.includes('useMode') ||
+      text.includes('ModeContext') ||
+      text.includes("mode === 'gallery'") ||
+      text.includes('mode === "gallery"') ||
+      text.includes("mode === 'laboratory'") ||
+      text.includes('mode === "laboratory"');
 
     const isDemo = filePath.includes('Figma UI Files');
     let migrationStatus: ComponentInfo['migrationStatus'] = 'unknown';
 
-    // Determine migration status with M3 Expressive detection
-    if (usesMUI && !usesCustomUI && usesDesignTokens && usesThemeProvider) {
-      migrationStatus = 'expressive'; // Fully adopted M3 Expressive
-    } else if (usesMUI && !usesCustomUI) {
-      migrationStatus = 'migrated'; // Uses MUI but may not fully use design tokens
-    } else if (usesMUI && usesCustomUI) {
-      migrationStatus = 'mixed'; // Mixed usage, needs consolidation
-    } else if (!usesMUI && usesCustomUI) {
-      migrationStatus = 'not_migrated'; // Still using custom UI only
+    // Determine migration status with Northcote Curio detection
+    const usesCurioSignals = usesDesignTokens || usesModeSystem;
+    const usesLegacy = usesMUI || usesLegacyM3;
+
+    if (usesCurioSignals && !usesLegacy) {
+      migrationStatus = 'migrated';
+    } else if (usesCurioSignals && usesLegacy) {
+      migrationStatus = 'mixed';
+    } else if (!usesCurioSignals && usesLegacy) {
+      migrationStatus = 'not_migrated';
     }
 
     const { hasTests, hasStories, hasDocs } = findRelatedFiles(filePath);
@@ -275,14 +302,14 @@ function analyzeComponents(): InventoryReport {
       linesOfCode: lines.length,
       complexity: calculateComplexity(lines.length, dependencies.length),
       dependencies,
-      isReusable: category === 'ui' || category === 'library',
+      isReusable: category === 'ui' || category === 'shared' || category === 'core' || category === 'ui_package',
       usesMUI,
       usesCustomUI,
+      usesLegacyM3,
       isDemo,
       migrationStatus,
       usesDesignTokens,
-      usesThemeProvider,
-      usesM3Components,
+      usesModeSystem,
     };
 
     components.push(component);
@@ -303,27 +330,35 @@ function analyzeComponents(): InventoryReport {
     for (const imp of imports) {
       const moduleSpecifier = imp.getModuleSpecifierValue();
 
-      // Resolve relative imports
+      const possibleResolvedPaths: string[] = [];
+
       if (moduleSpecifier.startsWith('.')) {
         const currentDir = path.dirname(sourceFile.getFilePath());
-        const resolvedPath = path.resolve(currentDir, moduleSpecifier);
+        possibleResolvedPaths.push(path.resolve(currentDir, moduleSpecifier));
+      } else if (moduleSpecifier.startsWith('@/')) {
+        possibleResolvedPaths.push(path.join(SRC_DIR, moduleSpecifier.replace(/^@\//, '')));
+      } else if (moduleSpecifier.startsWith('src/')) {
+        possibleResolvedPaths.push(path.join(SRC_DIR, moduleSpecifier.replace(/^src\//, '')));
+      }
 
-        // Try with extensions
-        const possiblePaths = [
-          resolvedPath + '.tsx',
-          resolvedPath + '.ts',
-          resolvedPath + '/index.tsx',
-          resolvedPath + '/index.ts',
-        ];
+      if (possibleResolvedPaths.length > 0) {
+        for (const resolvedPath of possibleResolvedPaths) {
+          const withExtensions = [
+            resolvedPath + '.tsx',
+            resolvedPath + '.ts',
+            resolvedPath + '/index.tsx',
+            resolvedPath + '/index.ts',
+          ];
 
-        for (const possiblePath of possiblePaths) {
-          const component = components.find((c) => c.path === possiblePath);
-          if (component) {
-            component.usageCount++;
-            if (!component.importedBy.includes(sourceFile.getFilePath())) {
-              component.importedBy.push(sourceFile.getFilePath());
+          for (const possiblePath of withExtensions) {
+            const component = components.find((c) => c.path === possiblePath);
+            if (component) {
+              component.usageCount++;
+              if (!component.importedBy.includes(sourceFile.getFilePath())) {
+                component.importedBy.push(sourceFile.getFilePath());
+              }
+              break;
             }
-            break;
           }
         }
       }
@@ -393,11 +428,11 @@ function analyzeComponents(): InventoryReport {
     );
   }
 
-  // M3 Expressive specific recommendations
+  // Northcote Curio specific recommendations
   const mixedComponents = components.filter((c) => c.migrationStatus === 'mixed');
   if (mixedComponents.length > 0) {
     recommendations.push(
-      `${mixedComponents.length} components have mixed MUI/custom UI usage. Consolidate to pure MUI for M3 consistency: ` +
+      `${mixedComponents.length} components mix Northcote Curio tokens with legacy MUI/M3 usage. Consolidate to Curio-only: ` +
         mixedComponents
           .slice(0, 5)
           .map((c) => c.name)
@@ -409,7 +444,7 @@ function analyzeComponents(): InventoryReport {
   const notMigratedComponents = components.filter((c) => c.migrationStatus === 'not_migrated');
   if (notMigratedComponents.length > 0) {
     recommendations.push(
-      `${notMigratedComponents.length} components still use custom UI only. Migrate to Material UI components: ` +
+      `${notMigratedComponents.length} components still rely on legacy MUI/M3 without Curio tokens. Migrate to Northcote Curio: ` +
         notMigratedComponents
           .slice(0, 5)
           .map((c) => c.name)
@@ -428,17 +463,17 @@ function analyzeComponents(): InventoryReport {
       migrated: 0,
       mixed: 0,
       not_migrated: 0,
-      expressive: 0,
       unknown: 0,
-    } as Record<'migrated' | 'mixed' | 'not_migrated' | 'expressive' | 'unknown', number>
+    } as Record<'migrated' | 'mixed' | 'not_migrated' | 'unknown', number>
   );
 
-  // M3 Expressive adoption metrics
-  const m3ExpressiveAdoption = {
-    withDesignTokens: components.filter((c) => c.usesDesignTokens).length,
-    withThemeProvider: components.filter((c) => c.usesThemeProvider).length,
-    withM3Components: components.filter((c) => c.usesM3Components).length,
-    fullyExpressive: components.filter((c) => c.migrationStatus === 'expressive').length,
+  // Northcote Curio adoption metrics
+  const curioAdoption = {
+    withCurioTokens: components.filter((c) => c.usesDesignTokens).length,
+    withModeSystem: components.filter((c) => c.usesModeSystem).length,
+    legacyMUI: components.filter((c) => c.usesMUI).length,
+    legacyM3: components.filter((c) => c.usesLegacyM3).length,
+    fullyCurio: components.filter((c) => c.migrationStatus === 'migrated').length,
   };
 
   const migratedWithoutTokens = components.filter(
@@ -446,7 +481,7 @@ function analyzeComponents(): InventoryReport {
   );
   if (migratedWithoutTokens.length > 0) {
     recommendations.push(
-      `${migratedWithoutTokens.length} migrated components don't use design tokens. Adopt M3 Expressive theming: ` +
+      `${migratedWithoutTokens.length} migrated components lack Curio tokens. Add Northcote token classes/vars: ` +
         migratedWithoutTokens
           .slice(0, 5)
           .map((c) => c.name)
@@ -455,13 +490,13 @@ function analyzeComponents(): InventoryReport {
     );
   }
 
-  const fullyExpressivePercent = (
-    (m3ExpressiveAdoption.fullyExpressive / components.length) *
+  const fullyCurioPercent = (
+    (curioAdoption.fullyCurio / components.length) *
     100
   ).toFixed(1);
   recommendations.push(
-    `M3 Expressive Adoption: ${fullyExpressivePercent}% (${m3ExpressiveAdoption.fullyExpressive}/${components.length}) fully adopted. ` +
-      `Target: 80%+ for complete M3 Expressive migration.`
+    `Northcote Curio Adoption: ${fullyCurioPercent}% (${curioAdoption.fullyCurio}/${components.length}) fully adopted. ` +
+      `Target: 80%+ for complete Curio migration.`
   );
 
   const report: InventoryReport = {
@@ -473,7 +508,7 @@ function analyzeComponents(): InventoryReport {
     mostUsedComponents,
     recommendations,
     migrationSummary,
-    m3ExpressiveAdoption,
+    curioAdoption,
   };
 
   return report;
@@ -498,18 +533,18 @@ function main() {
       console.log(`  ${category}: ${count}`);
     });
 
-    console.log(`\n=== M3 Migration Status ===`);
-    console.log(`Expressive (Fully Adopted): ${report.migrationSummary.expressive}`);
-    console.log(`Migrated (MUI Only): ${report.migrationSummary.migrated}`);
-    console.log(`Mixed (MUI + Custom UI): ${report.migrationSummary.mixed}`);
-    console.log(`Not Migrated (Custom UI Only): ${report.migrationSummary.not_migrated}`);
+    console.log(`\n=== Northcote Curio Migration Status ===`);
+    console.log(`Migrated (Curio Only): ${report.migrationSummary.migrated}`);
+    console.log(`Mixed (Curio + Legacy): ${report.migrationSummary.mixed}`);
+    console.log(`Not Migrated (Legacy Only): ${report.migrationSummary.not_migrated}`);
     console.log(`Unknown: ${report.migrationSummary.unknown}`);
 
-    console.log(`\n=== M3 Expressive Adoption ===`);
-    console.log(`Components with Design Tokens: ${report.m3ExpressiveAdoption.withDesignTokens}`);
-    console.log(`Components with Theme Provider: ${report.m3ExpressiveAdoption.withThemeProvider}`);
-    console.log(`Components with M3 Components: ${report.m3ExpressiveAdoption.withM3Components}`);
-    console.log(`Fully Expressive: ${report.m3ExpressiveAdoption.fullyExpressive}`);
+    console.log(`\n=== Curio Adoption ===`);
+    console.log(`Components with Curio Tokens: ${report.curioAdoption.withCurioTokens}`);
+    console.log(`Components with Mode System: ${report.curioAdoption.withModeSystem}`);
+    console.log(`Legacy MUI Usage: ${report.curioAdoption.legacyMUI}`);
+    console.log(`Legacy M3 Usage: ${report.curioAdoption.legacyM3}`);
+    console.log(`Fully Curio: ${report.curioAdoption.fullyCurio}`);
 
     console.log(`\nUnused Components: ${report.unusedComponents.length}`);
     console.log(`\nTop 5 Most Used:`);

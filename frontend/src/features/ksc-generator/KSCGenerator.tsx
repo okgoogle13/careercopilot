@@ -1,11 +1,19 @@
+import { Button, Textarea } from '@careercopilot/ui';
+import {
+  ArrowLeft,
+  ArrowRight,
+  CheckCircle2,
+  Copy,
+  Download,
+  RefreshCw,
+  Sparkles,
+} from 'lucide-react';
 import { useState } from 'react';
-import { Textarea } from '@careercopilot/ui';
-import { Button } from '@careercopilot/ui';
-import { Sparkles, Copy, ArrowRight, ArrowLeft, RefreshCw, CheckCircle2, Download } from 'lucide-react';
-import { PageHeader } from '../../components/shared/PageHeader';
-import { exportToPdf } from '../../utils/exportEngine';
 import { toast } from 'sonner';
-import { KSC_EXPERT_PROMPT } from '../../services/prompts';
+import { PageHeader } from '../../components/shared/PageHeader';
+import { api } from '../../services/api';
+import { genkitApi } from '../../services/genkit';
+import { exportToPdf } from '../../utils/exportEngine';
 
 export function KSCGenerator() {
   const [step, setStep] = useState(1);
@@ -17,32 +25,40 @@ export function KSCGenerator() {
     situation: '',
     task: '',
     action: '',
-    result: ''
+    result: '',
   });
   const [response, setResponse] = useState('');
 
   const handleNext = () => setStep((prev) => prev + 1);
   const handleBack = () => setStep((prev) => prev - 1);
 
-  const handleGenerate = () => {
+  const handleGenerate = async () => {
     setLoading(true);
 
-    // Show toast with APS ILS Standards message
-    const generatePromise = new Promise<string>((resolve) => {
-      setTimeout(() => {
-        const expertResponse = generateExpertResponse(criteria, star);
-        setResponse(expertResponse);
-        setLoading(false);
-        setStep(3);
-        resolve(expertResponse);
-      }, 2000);
-    });
+    try {
+      const userProfile = await api.getUserProfile();
 
-    toast.promise(generatePromise, {
-      loading: 'Applying APS ILS Standards...',
-      success: 'KSC Response generated with professional competency frameworks!',
-      error: 'Generation failed. Please try again.',
-    });
+      const generatePromise = genkitApi
+        .generateKSCResponse(criteria, star, userProfile)
+        .then((refinedStar) => {
+          return generateExpertResponse(criteria, refinedStar);
+        });
+
+      toast.promise(generatePromise, {
+        loading: 'Applying APS ILS Standards...',
+        success: 'KSC Response generated with professional competency frameworks!',
+        error: 'Generation failed. Please try again.',
+      });
+
+      const finalResponse = await generatePromise;
+      setResponse(finalResponse);
+      setStep(3);
+    } catch (error) {
+      console.error('KSC Generation Error:', error);
+      toast.error('Generation failed. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleDownloadPdf = async () => {
@@ -73,19 +89,24 @@ export function KSCGenerator() {
       {/* Progress Stepper */}
       <div className="flex items-center justify-center mb-8 gap-4">
         {[1, 2, 3].map((s) => (
-          <div key={s} className="flex items-center">
+          <div
+            key={s}
+            className="flex items-center"
+          >
             <div
-              className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg transition-colors ${step >= s
-                ? 'bg-primary text-on-primary shadow-elevation-1'
-                : 'bg-surface-container-high text-on-surface-variant'
-                }`}
+              className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg transition-colors ${
+                step >= s
+                  ? 'bg-primary text-on-primary shadow-elevation-1'
+                  : 'bg-surface-container-high text-on-surface-variant'
+              }`}
             >
               {step > s ? <CheckCircle2 className="w-6 h-6" /> : s}
             </div>
             {s < 3 && (
               <div
-                className={`w-12 h-1 mx-2 rounded-full ${step > s ? 'bg-primary' : 'bg-surface-container-high'
-                  }`}
+                className={`w-12 h-1 mx-2 rounded-full ${
+                  step > s ? 'bg-primary' : 'bg-surface-container-high'
+                }`}
               />
             )}
           </div>

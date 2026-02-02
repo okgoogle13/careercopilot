@@ -1,4 +1,4 @@
-import { Meta, Story, Canvas } from '@storybook/addon-docs';
+import { Meta, Story, Canvas } from '@storybook/blocks';
 import { EmptyState } from '../components/ui/feedback/EmptyState';
 import { Button, Box, Typography } from '@mui/material';
 import InboxIcon from '@mui/icons-material/Inbox';
@@ -175,7 +175,7 @@ You can fully customize the appearance using the `sx` prop:
     {() => {
       const hasItems = false; // This would come from your component's state
       const isLoading = false; // This would come from your component's state
-      
+
       if (isLoading) {
         return (
           <Box sx={{ p: 3 }}>
@@ -183,7 +183,7 @@ You can fully customize the appearance using the `sx` prop:
           </Box>
         );
       }
-      
+
       if (!hasItems) {
         return (
           <EmptyState
@@ -198,7 +198,7 @@ You can fully customize the appearance using the `sx` prop:
           />
         );
       }
-      
+
       return (
         <Box sx={{ p: 3, border: '1px dashed', borderColor: 'divider', borderRadius: 1 }}>
           <Typography>Your content would be displayed here</Typography>

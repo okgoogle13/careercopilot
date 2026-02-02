@@ -304,11 +304,45 @@ class AIClientManager:
             self.clients[AIProvider.ANTHROPIC] = AnthropicClient(self.config_manager)
 
         if not self.clients:
-            raise ValueError("No AI provider credentials found in configuration")
+                raise ValueError("No AI provider credentials found in configuration")
 
     @monitor_performance("ai_text_generation")
     async def generate_text(self, request: AIRequest) -> AIResponse:
         """Generate text using the appropriate model and provider"""
+        
+        # 1. Try Genkit awareness if enabled
+        from app.core.genkit_init import get_model, is_genkit_enabled
+        if is_genkit_enabled():
+            model = get_model()
+            if model:
+                try:
+                    start_time = time.time()
+                    logger.info(f"Using Genkit for service: {request.service_name}")
+                    
+                    # Simple prompt merge for general requests
+                    full_prompt = request.prompt
+                    if request.system_prompt:
+                        full_prompt = f"{request.system_prompt}\n\n{request.prompt}"
+
+                    # Note: Using generic model.generate here. 
+                    # Specific flows should be called directly where possible.
+                    response = await model.generate(prompt=full_prompt)
+                    duration = (time.time() - start_time) * 1000
+                    
+                    # Standardized response
+                    return AIResponse(
+                        content=response.text,
+                        model_used="genkit-primary",
+                        provider="googleai",
+                        tokens_used={"input": 0, "output": 0},
+                        response_time_ms=duration,
+                        cached=False,
+                        cost_estimate=0.0,
+                        metadata={"genkit": True},
+                        request_id=f"genkit_{int(start_time)}"
+                    )
+                except Exception as e:
+                    logger.warning(f"Genkit managed generation failed: {e}. Falling back to legacy provider logic.")
 
         # Get service configuration
         service_config = self.config_manager.get_service_config(request.service_name)

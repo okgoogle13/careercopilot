@@ -3,7 +3,6 @@
 ## Problem Statement
 
 **Before Optimization:**
-
 - spaCy model (`en_core_web_sm`) was loaded from disk inside the `parse_resume` function
 - This operation is resource-intensive and occurs every time a file is uploaded and parsed
 - **Performance Impact:** ~2000-3000ms per request
@@ -11,7 +10,6 @@
 - **CPU Impact:** Excessive I/O and initialization overhead
 
 **After Optimization:**
-
 - Model is loaded once at application startup using a singleton pattern
 - All subsequent requests reuse the same cached model object
 - **Performance Improvement:** ~20-50ms per request (50-100x faster!)
@@ -60,18 +58,17 @@ async def app_lifespan(app: FastAPI):
 
 ## Performance Benchmarks
 
-| Metric                  | Before Optimization    | After Optimization        | Improvement    |
-| ----------------------- | ---------------------- | ------------------------- | -------------- |
-| **Average Parse Time**  | 2500ms                 | 35ms                      | **71x faster** |
-| **First Request**       | 2500ms                 | 2500ms (one-time preload) | Same           |
-| **Subsequent Requests** | 2500ms each            | 35ms each                 | **71x faster** |
-| **Memory Usage**        | Variable (load/unload) | Constant (~150MB)         | Stable         |
-| **CPU Usage**           | High (repeated I/O)    | Low (cached access)       | 90% reduction  |
+| Metric | Before Optimization | After Optimization | Improvement |
+|--------|-------------------|-------------------|------------|
+| **Average Parse Time** | 2500ms | 35ms | **71x faster** |
+| **First Request** | 2500ms | 2500ms (one-time preload) | Same |
+| **Subsequent Requests** | 2500ms each | 35ms each | **71x faster** |
+| **Memory Usage** | Variable (load/unload) | Constant (~150MB) | Stable |
+| **CPU Usage** | High (repeated I/O) | Low (cached access) | 90% reduction |
 
 ### Real-world Impact
 
 **For 1000 resume parses per day:**
-
 - **Before:** 2,500,000ms (41.7 minutes) total processing time
 - **After:** 35,000ms (0.58 minutes) + one-time preload
 - **Time Saved:** 41.1 minutes per day per 1000 requests
@@ -161,7 +158,6 @@ python test_nlp_optimization.py
 ```
 
 Expected output:
-
 ```
 🚀 Testing WITH optimization (cached model)...
   Run 1: 32.45ms (234 words, 15 skills)
@@ -217,10 +213,10 @@ load_spacy_model("en_core_web_sm", force_reload=True)
 
 ### Environment Variables
 
-| Variable             | Default            | Description                         |
-| -------------------- | ------------------ | ----------------------------------- |
-| `ENABLE_NLP_PRELOAD` | `"true"`           | Enable/disable NLP model preloading |
-| `SPACY_MODEL_NAME`   | `"en_core_web_sm"` | spaCy model to load                 |
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `ENABLE_NLP_PRELOAD` | `"true"` | Enable/disable NLP model preloading |
+| `SPACY_MODEL_NAME` | `"en_core_web_sm"` | spaCy model to load |
 
 ### Production Deployment
 
@@ -238,13 +234,11 @@ ENV ENABLE_NLP_PRELOAD=true
 ### Common Issues
 
 1. **Model Not Found Error**
-
    ```bash
    python -m spacy download en_core_web_sm
    ```
 
 2. **Import Error (spaCy not installed)**
-
    ```bash
    pip install spacy
    ```
@@ -277,7 +271,6 @@ print(f"Model loading took: {load_time:.2f}ms")
 ### Migrating Existing Code
 
 **Before (Slow):**
-
 ```python
 import spacy
 
@@ -288,7 +281,6 @@ def parse_resume(text):
 ```
 
 **After (Fast):**
-
 ```python
 from app.utils.resume_parser import parse_resume_optimized
 
@@ -300,7 +292,6 @@ def parse_resume(text):
 ### API Endpoint Migration
 
 **Before:**
-
 ```python
 @app.post("/parse-resume")
 async def parse_resume_endpoint(resume: str):
@@ -310,7 +301,6 @@ async def parse_resume_endpoint(resume: str):
 ```
 
 **After:**
-
 ```python
 @app.post("/parse-resume")
 async def parse_resume_endpoint(resume: str):
