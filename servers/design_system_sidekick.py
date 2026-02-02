@@ -32,7 +32,7 @@ try:
     from dotenv import load_dotenv
     script_dir = os.path.dirname(os.path.abspath(__file__))
     project_root = os.path.dirname(script_dir)
-    load_dotenv(os.path.join(project_root, '.env'))
+    load_dotenv(os.path.join(project_root, '.env'), override=True)
 except ImportError:
     pass
 
@@ -53,9 +53,9 @@ if os.getenv("SENTRY_DSN"):
     logger.info("Sentry SDK initialized")
 
 GEMINI_VISION_CANDIDATES = [
-    os.getenv("GEMINI_VISION_MODEL_PRIMARY", "gemini-3-pro-image-preview"),  # Nano Banana Pro
-    os.getenv("GEMINI_VISION_MODEL_FALLBACK", "gemini-2.5-flash-image"),     # 2.5 Flash Image
-    "gemini-1.5-pro",
+    os.getenv("GEMINI_VISION_MODEL_PRIMARY", "gemini-2.0-flash"),     # Nano Banana / 2.0 Flash
+    os.getenv("GEMINI_VISION_MODEL_FALLBACK", "gemini-flash-latest"),     # 1.5/2.5 Flash
+    "gemini-2.0-flash-lite",
 ]
 
 class DesignSystemSidekickServer:
@@ -66,7 +66,8 @@ class DesignSystemSidekickServer:
         # Initialize Gemini
         if self.gemini_key:
             genai.configure(api_key=self.gemini_key)
-            self.gemini_model = genai.GenerativeModel('gemini-1.5-flash')
+            # Use 2.0-flash as primary for this project config
+            self.gemini_model = genai.GenerativeModel('gemini-2.0-flash')
         else:
             self.gemini_model = None
 
@@ -159,7 +160,7 @@ class DesignSystemSidekickServer:
             def sync_gh_call():
                 return client.complete(
                     messages=messages,
-                    model="openai/gpt-4.1-mini"
+                    model="gpt-4o-mini"
                 )
 
             loop = asyncio.get_event_loop()
@@ -201,7 +202,7 @@ class DesignSystemSidekickServer:
                 def sync_gh_text_call():
                     return client.complete(
                         messages=[{"role": "user", "content": prompt}],
-                        model="openai/gpt-4.1-mini"
+                        model="gpt-4o-mini"
                     )
 
                 loop = asyncio.get_event_loop()
