@@ -57,10 +57,10 @@ export const MixedStates: StoryObj<typeof M3Checkbox> = {
         <div className="flex flex-col gap-6">
             <div className="flex flex-col gap-2">
                 <h3 className="text-title-medium">Checkbox Variants</h3>
-                <M3Checkbox label="Default Checkout" />
-                <M3Checkbox label="Checked" checked />
-                <M3Checkbox label="Disabled" disabled />
-                <M3Checkbox label="Disabled Checked" disabled checked />
+                <Mark label="Default Checkout" />
+                <Mark label="Checked" checked />
+                <Mark label="Disabled" disabled />
+                <Mark label="Disabled Checked" disabled checked />
             </div>
             <div className="flex flex-col gap-2">
                 <h3 className="text-title-medium">Radio Variants</h3>

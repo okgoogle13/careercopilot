@@ -4,9 +4,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { useAuth } from '../../context/AuthContext';
-import { Input } from '@careercopilot/ui';
-import { Button } from '@careercopilot/ui';
-import { Alert } from '@careercopilot/ui';
+import { NorthcoteButton } from '../../components/ui/NorthcoteButton';
 
 const loginSchema = z.object({
   email: z.string().email('Please enter a valid email'),
@@ -32,21 +30,24 @@ export function Login() {
       navigate('/dashboard');
     } catch (err: any) {
       console.error('Login error:', err);
-      // Handle Firebase errors or generic errors
-      if (err.code === 'auth/invalid-credential') {
+      // Supabase returns error messages, not codes
+      const message = err?.message || '';
+      if (message.includes('Invalid login credentials') || message.includes('invalid_credentials')) {
         setAuthError('Invalid email or password.');
+      } else if (message.includes('Email not confirmed')) {
+        setAuthError('Please verify your email before signing in.');
       } else {
-        setAuthError('Failed to sign in. Please try again.');
+        setAuthError(err?.message || 'Failed to sign in. Please try again.');
       }
     }
   };
 
   return (
-    <div className="min-h-screen bg-surface flex items-center justify-center p-8 animate-in fade-in duration-500">
+    <div className="min-h-screen bg-surface-specimen-night-base flex items-center justify-center p-8 animate-in fade-in duration-500">
       <div className="w-full max-w-md">
         {/* Card */}
         <div
-          className="bg-surface-container rounded-tech p-8 shadow-elevation-1 border border-outline-variant"
+          className="bg-surface-gallery-eucalypt-smoke rounded-[var(--radius-stone)] p-8 shadow-[var(--elevation-shadow-rest)] border border-outline-variant"
           style={{
             backgroundImage: 'radial-gradient(circle, var(--sys-color-primary) 1px, transparent 1px)',
             backgroundSize: '20px 20px',
@@ -56,31 +57,32 @@ export function Login() {
         >
           {/* Header */}
           <div className="text-center mb-8">
-            <div className="w-16 h-16 bg-gradient-to-br from-primary-container to-secondary-container rounded-gem flex items-center justify-center mx-auto mb-4 shadow-elevation-1">
+            <div className="w-16 h-16 bg-gradient-to-br from-primary-wattle-gold-container to-primary-wattle-gold-container rounded-[var(--radius-pebble)] flex items-center justify-center mx-auto mb-4 shadow-[var(--elevation-shadow-rest)]">
               <span className="text-3xl">🦄</span>
             </div>
-            <h1 className="text-display-medium font-display font-black text-on-surface mb-2">
-              Career<span className="text-primary italic font-light ml-2">Copilot</span>
+            <h1 className="text-display-large-gallery font-bloom font-black text-on-surface-parchment mb-2">
+              Career<span className="text-wattle-gold italic font-light ml-2">Copilot</span>
             </h1>
             <p className="text-on-surface-variant text-body-large">Sign in to your account</p>
           </div>
 
           {/* Error Alert */}
           {authError && (
-            <Alert className="mb-6 bg-error-container text-on-error-container border-error/20 font-medium">
+            <div className="mb-6 p-4 rounded-[var(--radius-pebble)] bg-error-container text-on-error-container border-error/20 font-medium">
               {authError}
-            </Alert>
+            </div>
           )}
 
           {/* Guest Access Button */}
           <div className="mb-6">
-            <Button
-              type="button"
+            <NorthcoteButton
+              variant="secondary"
+              size="lg"
               onClick={() => navigate('/dashboard?demo=true')}
-              className="w-full bg-surface-container-high text-secondary border-2 border-secondary hover:bg-secondary/10 rounded-pebble h-12 font-bold uppercase tracking-wide shadow-sm hover:shadow-elevation-1 transition-all ease-spring"
+              className="w-full"
             >
               🔍 Explore as Guest
-            </Button>
+            </NorthcoteButton>
             <p className="text-center text-xs text-on-surface-variant mt-2">
               No account needed • Full access to job search
             </p>
@@ -92,7 +94,7 @@ export function Login() {
               <div className="w-full border-t border-outline-variant"></div>
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="px-4 bg-surface-container text-on-surface-variant uppercase tracking-wider text-xs font-bold">
+              <span className="px-4 bg-surface-gallery-eucalypt-smoke text-on-surface-parchment-dim uppercase tracking-wider text-xs font-bold">
                 Or sign in
               </span>
             </div>
@@ -105,14 +107,14 @@ export function Login() {
             noValidate
           >
             <div>
-              <label htmlFor="email" className="block text-sm text-on-surface-variant mb-2 font-medium uppercase tracking-wider">
+              <label htmlFor="email" className="block text-sm text-secondary-flannel-flower mb-2 font-medium uppercase tracking-wider">
                 Email
               </label>
-              <Input
+              <input
                 id="email"
                 type="email"
                 placeholder="you@example.com"
-                className="bg-surface-container-high border-outline-variant text-on-surface rounded-tech h-12 focus:ring-primary focus:border-primary"
+                className="w-full px-4 bg-surface-gallery-eucalypt-smoke-high border border-outline-variant text-on-surface-parchment rounded-[var(--radius-stone)] h-12 focus:outline-none focus:ring-2 focus:ring-primary-wattle-gold focus:border-primary-wattle-gold transition-colors"
                 aria-invalid={errors.email ? 'true' : 'false'}
                 aria-describedby={errors.email ? 'email-error' : undefined}
                 {...register('email')}
@@ -123,14 +125,14 @@ export function Login() {
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-sm text-on-surface-variant mb-2 font-medium uppercase tracking-wider">
+              <label htmlFor="password" className="block text-sm text-secondary-flannel-flower mb-2 font-medium uppercase tracking-wider">
                 Password
               </label>
-              <Input
+              <input
                 id="password"
                 type="password"
                 placeholder="••••••••"
-                className="bg-surface-container-high border-outline-variant text-on-surface rounded-tech h-12 focus:ring-primary focus:border-primary"
+                className="w-full px-4 bg-surface-gallery-eucalypt-smoke-high border border-outline-variant text-on-surface-parchment rounded-[var(--radius-stone)] h-12 focus:outline-none focus:ring-2 focus:ring-primary-wattle-gold focus:border-primary-wattle-gold transition-colors"
                 aria-invalid={errors.password ? 'true' : 'false'}
                 aria-describedby={errors.password ? 'password-error' : undefined}
                 {...register('password')}
@@ -140,13 +142,15 @@ export function Login() {
               )}
             </div>
 
-            <Button
+            <NorthcoteButton
+              variant="primary"
+              size="lg"
               type="submit"
               disabled={isSubmitting}
-              className="w-full bg-primary text-on-primary hover:bg-primary/90 rounded-pebble h-12 font-bold uppercase tracking-wide shadow-sm hover:shadow-elevation-1 transition-all ease-spring"
+              className="w-full"
             >
               {isSubmitting ? 'Signing in...' : 'Sign In'}
-            </Button>
+            </NorthcoteButton>
           </form>
 
           {/* Sign Up Link */}
@@ -155,7 +159,7 @@ export function Login() {
               Don&apos;t have an account?{' '}
               <Link
                 to="/register"
-                className="text-primary hover:text-primary/80 font-bold hover:underline underline-offset-4"
+                className="text-wattle-gold hover:text-primary-wattle-glow font-bold hover:underline underline-offset-4"
               >
                 Sign up
               </Link>

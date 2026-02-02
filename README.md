@@ -5,8 +5,10 @@
 ## ✨ Key Features
 
 - **Profile Ingestion Engine**: Upload PDFs/IDFs, extract data via Google Genkit, and structure career history.
-- **Validation Dashboard**: Review and edit AI-extracted career data with "Electric Alchemist" UI.
-- **Dual-Engine AI**: Leveraging Gemini Flash 2.5 (Speed) and Pro 2.5 (Reasoning).
+- **Resume Optimizer** ✨ NEW: AI-powered keyword integration for ATS optimization with company-specific tailoring.
+- **Company Analyzer** ✨ NEW: Analyze company websites to extract keywords and communication tone for targeted resumes.
+- **Validation Dashboard**: Review and edit AI-extracted career data with Northcote Curio M3 Expressive UI.
+- **Dual-Engine AI**: Leveraging Gemini Flash (Speed) and Gemini Pro (Reasoning).
 - **Automated UAT**: Full end-to-end testing suite with Playwright.
 - **Chrome Extension**: Intelligent job capture with auto-deadline extraction and calendar reminders.
 
@@ -14,9 +16,10 @@
 
 ### Frontend (`/frontend`)
 - **Core**: React 18, TypeScript, Vite
-- **UI System**: Material-UI (MUI v5) + "Electric Alchemist" Theme
+- **UI System**: Material-UI (MUI v5) + Northcote Curio M3 Expressive Design System
+- **Design Tokens**: Northcote Curio token system (color, shape, elevation, motion)
 - **State**: React Context + Hooks
-- **Testing**: Playwright (E2E), Vitest (Unit)
+- **Testing**: Playwright (E2E), Jest (Unit)
 
 ### Backend (`/backend`)
 - **Core**: FastAPI (Python 3.12+)
@@ -51,7 +54,7 @@ python3 run_copilot.py
 ---
 
 ### 1. Prerequisites
-- Node.js v18+ & npm
+- Node.js v18+ & Yarn 4
 - Python 3.12+ & pip
 - Docker Desktop (Optional, for containerized run)
 
@@ -74,12 +77,45 @@ pip install -r requirements.txt
 **Frontend Setup:**
 ```bash
 cd frontend
-npm install
+yarn install
 ```
 
 ### 3. Environment Config
 Create `.env` files in `backend/` and `frontend/` (see `.env.example`).
 **Required Keys:** `GEMINI_API_KEY`, `FIREBASE_CREDENTIALS`
+
+---
+
+## 🎯 New Features: Resume Optimization
+
+### Resume Optimizer
+**Automatically optimize your resume for ATS systems with AI-powered keyword integration.**
+
+**How to Use:**
+1. Navigate to `/analysis` in the app
+2. Paste your resume text
+3. Paste the job description
+4. (Optional) Add company website URL for targeted optimization
+5. Click "Analyze Resume" to see ATS score and missing keywords
+6. Click "✨ Auto-Tailor Resume" to get optimized version
+
+**Features:**
+- ✅ Natural keyword integration (no fabrication)
+- ✅ Company-specific tone matching
+- ✅ ATS score analysis with breakdown
+- ✅ Missing vs matched keyword visualization
+- ✅ Copy-to-clipboard functionality
+
+**Powered by:**
+- Google Gemini Pro (AI optimization)
+- BeautifulSoup4 (company website scraping)
+- Genkit (AI flow orchestration)
+
+**Design:**
+- Northcote Curio M3 Expressive design system
+- Organic shapes (Pebble, Tech archetypes)
+- Spring motion effects
+- Sage Green + Soft Coral palette
 
 ---
 
@@ -98,14 +134,14 @@ uvicorn app.main:app --reload
 **Terminal 2 (Frontend):**
 ```bash
 cd frontend
-npm run dev
+yarn dev
 # App running at http://localhost:5173
 ```
 
 **Terminal 3 (Chrome Extension):**
 ```bash
 cd chrome-extension
-npm run dev
+yarn dev
 # Load unpacked from 'chrome-extension/dist' in chrome://extensions
 ```
 ```
@@ -125,7 +161,7 @@ We use Playwright for full verification of the Ingestion Flow.
 ```bash
 # Run all UAT scenarios
 cd frontend
-npx playwright test
+yarn test:e2e
 
 # Run specific test
 npx playwright test -g "UAT-004"
@@ -137,7 +173,7 @@ npx playwright test -g "UAT-004"
 cd backend && pytest
 
 # Frontend
-cd frontend && npm run test
+cd frontend && yarn test
 ```
 
 ---
@@ -165,7 +201,7 @@ careercopilot/
 ## 🤝 Contributing
 1. Create a feature branch (`feat/new-thing`)
 2. Commit changes
-3. Run UAT tests (`npm run test:e2e`)
+3. Run UAT tests (`yarn test:e2e`)
 4. Open a Pull Request
 
 ---

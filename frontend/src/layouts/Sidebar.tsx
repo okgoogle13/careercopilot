@@ -1,18 +1,17 @@
-import { Link, useLocation } from 'react-router-dom';
 import {
-  Home,
-  FileText,
   BarChart3,
   Briefcase,
   ClipboardList,
-  Sparkles,
-  Settings,
-  Menu,
-  X,
+  FileText,
   FolderOpen,
+  Home,
   Inbox,
+  Menu,
+  Settings,
+  X,
 } from 'lucide-react';
 import { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
 const mainNavItems = [
   { path: '/dashboard', icon: Home, label: 'Dashboard' },
@@ -20,7 +19,8 @@ const mainNavItems = [
   { path: '/documents', icon: FileText, label: 'Documents' },
   { path: '/analysis', icon: BarChart3, label: 'Analysis' },
   { path: '/opportunities', icon: Briefcase, label: 'Opportunities' },
-  { path: '/job-queue', icon: Inbox, label: 'KSC Generator' },
+  { path: '/cover-letter-generator', icon: Sparkles, label: 'Cover Letter Genius' },
+  { path: '/ksc-generator', icon: Inbox, label: 'KSC Generator' },
   { path: '/asset-library', icon: FolderOpen, label: 'Asset Library' },
 ];
 
@@ -58,12 +58,12 @@ export function Sidebar() {
           bg-surface-container-low flex flex-col z-40
           transition-all duration-300
           border-r border-outline-variant
-          
+
           /* Mobile: Modal drawer */
           fixed inset-y-0 left-0
           ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}
           w-[240px]
-          
+
           /* Desktop: Standard Drawer */
           lg:relative lg:translate-x-0 lg:w-[240px]
         `}
@@ -94,19 +94,24 @@ export function Sidebar() {
                 onClick={() => setIsMobileMenuOpen(false)}
                 className={`
                   flex items-center gap-3 px-4 py-3 mb-2 transition-all duration-200 font-medium
-                  ${isActive
-                    ? 'shadow-md'
-                    : 'text-on-surface-variant hover:bg-surface-container hover:text-on-surface'
+                  ${
+                    isActive
+                      ? 'shadow-md'
+                      : 'text-on-surface-variant hover:bg-surface-container hover:text-on-surface'
                   }
                 `}
                 title={item.label}
-                style={isActive ? {
-                  backgroundColor: 'var(--sys-color-nav-active-container)',
-                  color: 'var(--sys-color-on-nav-active)',
-                  borderRadius: 'var(--sys-shape-corner-extra-large)'
-                } : {
-                  borderRadius: 'var(--sys-shape-corner-large)'
-                }}
+                style={
+                  isActive
+                    ? {
+                        backgroundColor: 'var(--sys-color-nav-active-container)',
+                        color: 'var(--sys-color-on-nav-active)',
+                        borderRadius: 'var(--sys-shape-corner-extra-large)',
+                      }
+                    : {
+                        borderRadius: 'var(--sys-shape-corner-large)',
+                      }
+                }
               >
                 <Icon className="w-5 h-5 flex-shrink-0" />
                 <span className="text-sm">{item.label}</span>

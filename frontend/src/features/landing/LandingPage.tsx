@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import styles from './LandingPage.module.css';
 
 // Plant assets
-import monstera from '../../assets/images/monstera.jpg';
 import fiddleLeaf from '../../assets/images/fiddle_leaf.jpg';
+import monstera from '../../assets/images/monstera.jpg';
 import pilea from '../../assets/images/pilea.jpg';
 import snakePlant from '../../assets/images/snake_plant.png';
 
@@ -57,11 +57,15 @@ export function LandingPage(): React.ReactElement {
 
       {/* LAYER 2: Hero Card */}
       <main className={styles.heroCard}>
-        <h1 className={styles.heroTitle}>
-          <span className={styles.heroTitleFml}>(FML)</span>
-          <span className={styles.heroTitleMain}>CareerCopilot</span>
-        </h1>
-        <p className={styles.heroTagline}>Stop procrastinating and get a job ya knob</p>
+        <div className="hero-cursive-mix">
+          <span className="proclamation">Career</span>
+          <span className="cursive">Copilot</span>
+        </div>
+
+        <p className={styles.heroTagline}>Your AI-powered career companion</p>
+        <div className="mt-4">
+          <span className="text-curator-annotation">→ powered by botanical intelligence</span>
+        </div>
 
         <div className={styles.actionContainer}>
           <Link

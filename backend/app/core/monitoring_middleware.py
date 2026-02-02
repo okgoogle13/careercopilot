@@ -453,16 +453,17 @@ class HealthCheckMiddleware(BaseHTTPMiddleware):
     async def _check_database(self) -> Dict[str, Any]:
         """Check database connectivity"""
         try:
-            # Import and test Firestore connection
-            from app.core.db import db
-
-            # Simple test - get a non-existent document (should not raise error)
-            test_doc = db.collection("health_check").document("test")
-            test_doc.get()  # Firestore get() is synchronous, not async
-
-            return {"healthy": True, "service": "firestore"}
+            from app.core.database import SessionLocal
+            from sqlalchemy import text
+            
+            db = SessionLocal()
+            try:
+                db.execute(text("SELECT 1"))
+                return {"healthy": True, "service": "postgresql"}
+            finally:
+                db.close()
         except Exception as e:
-            return {"healthy": False, "service": "firestore", "error": str(e)}
+            return {"healthy": False, "service": "postgresql", "error": str(e)}
 
     async def _check_cache(self) -> Dict[str, Any]:
         """Check cache system health"""

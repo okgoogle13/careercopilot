@@ -3,7 +3,7 @@
    Score Target: 85+
 ========================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Fredoka:wght@300;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Fredoka:wght@300..700&display=swap');
 
 .container {
     position: relative;
@@ -14,7 +14,7 @@
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    font-family: var(--font-body, 'Plus Jakarta Sans', sans-serif);
+    font-family: var(--font-field-note, sans-serif);
     color: var(--on-surface, #e3e3e3);
 }
 
@@ -235,7 +235,7 @@
 /* FML: Ultra-heavy monospace, expressive terracotta */
 .heroTitleFml {
     display: block;
-    font-family: var(--font-data, 'JetBrains Mono', monospace);
+    font-family: var(--font-annotation, monospace);
     font-size: 2.5rem;
     font-weight: 900;
     letter-spacing: 0.08em;
@@ -248,7 +248,7 @@
 /* CareerCopilot: Ultra-light display, elegant lilac */
 .heroTitleMain {
     display: block;
-    font-family: var(--font-display, 'Plus Jakarta Sans', sans-serif);
+    font-family: var(--font-proclamation, serif);
     font-size: 3.8rem;
     font-weight: 100;
     letter-spacing: -0.02em;
@@ -258,7 +258,7 @@
 
 /* Tagline: Cursive handwriting style for expressiveness */
 .heroTagline {
-    font-family: 'Caveat', cursive;
+    font-family: var(--font-curator, cursive);
     font-size: 1.6rem;
     font-weight: 700;
     margin-top: 1.5rem;

@@ -1,46 +1,26 @@
+
 import os
-from google.cloud import storage
-from google.cloud.storage import Bucket, Client
+import logging
 from typing import Optional, Dict, Any, Tuple
+from datetime import datetime
+from app.core.supabase import get_supabase_storage
+
+logger = logging.getLogger(__name__)
 
 class CloudStorageClient:
+    """Supabase Storage implementation of the Cloud Storage client.
+    Replaces Google Cloud Storage implementation.
+    """
+    
     def __init__(self, bucket_name: Optional[str] = None):
-        """Initialize with explicit bucket name or fall back to production bucket.
+        """Initialize with Supabase bucket name.
         
         Args:
-            bucket_name: Optional override for bucket name. Defaults to production bucket.
+            bucket_name: Optional override for bucket name. Defaults to SUPABASE_STORAGE_BUCKET.
         """
-        self.bucket_name = bucket_name or "careercopilot-468811.firebasestorage.app"
+        self.bucket_name = bucket_name or os.getenv("SUPABASE_STORAGE_BUCKET", "user_assets")
+        self.storage = get_supabase_storage()
         
-        # Check if running in test environment
-        if os.getenv("ENV") == "test" or os.getenv("ENVIRONMENT") == "test":
-            from unittest.mock import MagicMock
-            self.client = MagicMock()
-            self.bucket = MagicMock()
-            return
-
-        # Initialize client with explicit region
-        self.client: Client = storage.Client()
-        # Get bucket with explicit location check
-        self.bucket: Bucket = self.client.bucket(self.bucket_name)
-        self._ensure_bucket_region()
-        
-    def _ensure_bucket_region(self):
-        """Ensure the bucket is in us-central1 region."""
-        try:
-            # Force a refresh of bucket metadata
-            self.bucket.reload()
-            location = self.bucket.location.lower()
-            if location != 'us-central1':
-                raise ValueError(
-                    f"Bucket {self.bucket_name} is in {location} but must be in us-central1. "
-                    "Please recreate the bucket in us-central1."
-                )
-        except Exception as e:
-            if "Not Found" in str(e):
-                raise ValueError(f"Bucket {self.bucket_name} does not exist or is not accessible.") from e
-            raise
-
     def upload_file(
         self,
         file_content: bytes,
@@ -49,88 +29,59 @@ class CloudStorageClient:
         metadata: Optional[Dict[str, str]] = None,
         cache_control: str = 'public, max-age=3600'
     ) -> str:
-        """Uploads a file to the bucket and returns its URI.
+        """Uploads a file to Supabase bucket and returns its URI.
         
         Args:
             file_content: The file content to upload
             destination_blob_name: The path/name of the blob in the bucket
             content_type: The MIME type of the file
-            metadata: Optional metadata to attach to the blob
-            cache_control: Cache-Control header value (default: 1 hour public cache)
+            metadata: Optional metadata to attach (Supabase metadata handled via options)
+            cache_control: Cache-Control header value
             
         Returns:
-            The full gs:// URI of the uploaded file
+            The internal storage:// URI of the uploaded file
         """
-        # Normalize blob name (remove leading/trailing slashes)
         destination_blob_name = destination_blob_name.strip('/')
-        blob = self.bucket.blob(destination_blob_name)
         
-        # Set metadata if provided
-        if metadata:
-            blob.metadata = metadata
-            
-        # Set cache control for web delivery
-        blob.cache_control = cache_control
+        # Supabase options
+        file_options = {
+            "content-type": content_type,
+            "cache-control": cache_control,
+        }
         
-        # Upload with content type and metadata
-        blob.upload_from_string(
-            file_content,
-            content_type=content_type,
-            predefined_acl='projectPrivate'  # Default to project private
+        # Metadata in Supabase is typically handled via a separate DB table if extensive, 
+        # but ‘upsert’ flag can be passed in options.
+        
+        self.storage.from_(self.bucket_name).upload(
+            path=destination_blob_name,
+            file=file_content,
+            file_options=file_options
         )
         
-        return f"gs://{self.bucket_name}/{destination_blob_name}"
+        logger.info(f"File uploaded to Supabase Storage: {self.bucket_name}/{destination_blob_name}")
+        return f"storage://{self.bucket_name}/{destination_blob_name}"
 
     def download_file(self, source_blob_name: str) -> Tuple[bytes, Dict[str, Any]]:
-        """Downloads a blob from the bucket.
-        
-        Args:
-            source_blob_name: The path/name of the blob to download
-            
-        Returns:
-            A tuple of (file_content, metadata_dict)
+        """Downloads a blob from the Supabase bucket.
         """
-        # Normalize blob name
         source_blob_name = source_blob_name.strip('/')
-        blob = self.bucket.blob(source_blob_name)
+        res = self.storage.from_(self.bucket_name).download(source_blob_name)
         
-        # Download content
-        content = blob.download_as_bytes()
-        
-        # Return content and metadata
-        return content, {
-            'content_type': blob.content_type,
-            'metadata': blob.metadata or {},
-            'size': blob.size,
-            'updated': blob.updated,
-            'md5_hash': blob.md5_hash,
-            'cache_control': blob.cache_control,
-            'content_encoding': blob.content_encoding,
-            'storage_class': blob.storage_class
+        # Supabase download returns bytes. Metadata is NOT returned with download.
+        # Minimal metadata dictionary for compatibility
+        return res, {
+            'content_type': 'application/octet-stream', # Supabase storage-js doesn't return this in simple download
+            'size': len(res)
         }
 
     def delete_file(self, blob_name: str) -> bool:
-        """Deletes a blob from the bucket.
-        
-        Args:
-            blob_name: The path/name of the blob to delete
-            
-        Returns:
-            bool: True if deleted, False if not found
-            
-        Raises:
-            google.cloud.exceptions.GoogleCloudError: For other errors
+        """Deletes a blob from the Supabase bucket.
         """
-        from google.cloud.exceptions import NotFound
-        
-        # Normalize blob name
         blob_name = blob_name.strip('/')
-        blob = self.bucket.blob(blob_name)
-        
         try:
-            blob.delete()
+            self.storage.from_(self.bucket_name).remove([blob_name])
             return True
-        except NotFound:
+        except Exception:
             return False
             
     def generate_signed_url(
@@ -140,44 +91,22 @@ class CloudStorageClient:
         method: str = 'GET',
         content_type: Optional[str] = None
     ) -> str:
-        """Generate a signed URL for a blob.
-        
-        Args:
-            blob_name: The path/name of the blob
-            expiration_hours: Number of hours until the URL expires
-            method: HTTP method allowed (GET, PUT, DELETE, etc.)
-            content_type: Optional content type required for upload URLs
-            
-        Returns:
-            A signed URL string
+        """Generate a signed URL for a Supabase blob.
         """
-        from datetime import timedelta
-        
-        # Normalize blob name
         blob_name = blob_name.strip('/')
-        blob = self.bucket.blob(blob_name)
+        expires_in_seconds = int(expiration_hours * 3600)
         
-        # Generate signed URL
-        url = blob.generate_signed_url(
-            expiration=timedelta(hours=expiration_hours),
-            method=method.upper(),
-            version='v4',
-            content_type=content_type
+        res = self.storage.from_(self.bucket_name).create_signed_url(
+            path=blob_name,
+            expires_in=expires_in_seconds
         )
-        return url
+        # res looks like {'signedURL': '...'} or {'signedUrl': '...'}
+        return res.get('signedURL') or res.get('signedUrl', "")
         
     def get_public_url(self, blob_name: str) -> str:
-        """Get the public URL for a blob (if public access is enabled).
-        
-        Args:
-            blob_name: The path/name of the blob
-                
-        Returns:
-            The public URL for the blob
+        """Get the public URL for a blob.
         """
         blob_name = blob_name.strip('/')
-        return f"https://storage.googleapis.com/{self.bucket_name}/{blob_name}"
-
-
+        return self.storage.from_(self.bucket_name).get_public_url(blob_name)
 
 cloud_storage_client = CloudStorageClient()

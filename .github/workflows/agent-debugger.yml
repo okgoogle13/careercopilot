@@ -1,0 +1,33 @@
+name: CI Failure Copilot
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+  actions: read # Required to read workflow logs
+
+on:
+  workflow_run:
+    workflows:
+      ["CI - Build and Test", "Enhanced Auto Fix (TypeScript + Linting)"]
+    types:
+      - completed
+
+jobs:
+  analyze-failure:
+    runs-on: ubuntu-latest
+    if: github.event.workflow_run.conclusion == 'failure'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Analyze Failure with Claude
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          additional_permissions: |
+            actions: read
+          claude_args: |
+            --max-turns 4
+            --model claude-3-7-sonnet-20250219
+            --prompt "Analyze the failed workflow run (ID: ${{ github.event.workflow_run.id }}) details and logs. Identify the root cause of the failure. If it is a code issue, propose a fix or creating a patch PR. If it is a transient issue, suggest re-running. Post your findings as a comment on the PR associated with this run (if any), or as an issue if no PR exists."

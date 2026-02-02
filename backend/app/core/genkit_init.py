@@ -147,7 +147,7 @@ def is_genkit_enabled() -> bool:
     Returns:
         bool: True if Genkit flows are enabled
     """
-    return os.getenv("ENABLE_GENKIT_FLOWS", "false").lower() == "true"
+    return os.getenv("ENABLE_GENKIT_FLOWS", "true").lower() == "true"
 
 
 def check_genkit_health() -> Dict[str, Any]:

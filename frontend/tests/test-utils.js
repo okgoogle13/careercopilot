@@ -18,7 +18,7 @@ export function skipIfServerUnavailable(testFunction, testName) {
       console.log(
         `⚠️  Skipping test "${testName}" - Server not available at ${process.env.PLAYWRIGHT_BASE_URL || 'http://localhost:3000'}`
       );
-      console.log(`   To run this test, start the dev server with: npm run dev`);
+      console.log(`   To run this test, start the dev server with: yarn dev`);
       return; // Skip the test
     }
 

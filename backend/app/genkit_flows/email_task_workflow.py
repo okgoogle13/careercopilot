@@ -12,8 +12,9 @@ from pydantic import BaseModel, Field
 
 from app.core.ai_config import get_ai_config
 from app.core.ai_error_handling import with_ai_error_handling
-from app.core.db import db
+from app.core.database import SessionLocal
 from app.core.input_validation import InputSanitizer, InputValidationError
+from app.models.database import User
 
 from .advanced_job_matching import analyze_job_match_detailed
 from .calendar_manager import createCalendarEvent
@@ -238,34 +239,28 @@ async def _process_opportunity(
 
 async def _get_user_profile(user_id: str) -> Dict:
     """
-    Retrieve user profile from Firestore for job matching.
-
-    Args:
-        user_id: User identifier
-
-    Returns:
-        Dict: User profile data or default structure if not found
+    Retrieve user profile from Database for job matching.
     """
+    db = SessionLocal()
     try:
-        user_ref = db.collection("users").document(user_id)
-        user_doc = await user_ref.get()
+        user = db.query(User).filter(User.id == user_id).first()
 
-        if not user_doc.exists:
+        if not user:
             print(f"User profile not found for {user_id}, using default profile")
             return _get_default_user_profile()
 
-        user_data = user_doc.to_dict()
+        user_data = user.to_dict()
 
         # Extract relevant profile information for job matching
         profile = {
-            "current_role": user_data.get("current_position", ""),
-            "years_experience": user_data.get("years_of_experience", 0),
-            "skills": user_data.get("skills", []),
-            "education": user_data.get("education", []),
+            "current_role": user_data.get("career_transition_from", ""),
+            "years_experience": 5, # Default since we don't have years_of_experience in User anymore
+            "skills": user_data.get("target_roles", []),
+            "education": [],
             "preferred_location": user_data.get("location", ""),
-            "work_preferences": user_data.get("work_preferences", []),
-            "achievements": user_data.get("achievements", []),
-            "career_goals": user_data.get("career_goals", ""),
+            "work_preferences": [],
+            "achievements": [],
+            "career_goals": user_data.get("career_transition_to", ""),
         }
 
         return profile
@@ -273,6 +268,8 @@ async def _get_user_profile(user_id: str) -> Dict:
     except Exception as e:
         print(f"Failed to retrieve user profile: {str(e)}")
         return _get_default_user_profile()
+    finally:
+        db.close()
 
 
 def _get_default_user_profile() -> Dict:

@@ -9,23 +9,18 @@ interface ApplicationCardProps {
   className?: string;
 }
 
-import { StatusBadge } from '../ui/StatusBadge';
+import { StatusBadge, type StatusBadgeVariant } from '../ui/StatusBadge';
 
 /**
- * ApplicationCard - M3 Compliant Job Application Tracker Card
- * 
+ * ApplicationCard - Northcote Curio V3.1 Job Application Tracker Card
+ *
  * Displays job application information with a multi-step progress indicator.
- * Built using Material Design 3 Electric Alchemist design tokens.
- * 
- * **M3 Design Token Usage:**
- * - Shape: `rounded-pebble` → `--sys-shape-pebble` (20px 20px 32px 32px) - Organic asymmetric corners ✅
- * - Elevation: `shadow-elevation-1` → `shadow-elevation-2` on hover (M3 depth levels)
- * - Spacing: `p-space-xl` (32px) for card padding
- * - Motion: `duration-medium-1` (250ms) with `ease-spring` (expressive cubic-bezier)
- * - Colors: M3 semantic color roles (surface-container, primary-container, etc.)
- * 
- * @param {ApplicationCardProps} props - Component properties
- * @returns {JSX.Element} Rendered application card
+ *
+ * **Northcote Curio V3.1 Usage:**
+ * - Shape: `rounded-pebble` → Organic asymmetric corners ✅
+ * - Elevation: `shadow-standard` → `shadow-maximum` on hover
+ * - Typography: `text-bloom-gallery` (SOFT=100) for titles
+ * - Annotations: `text-curator-annotation` for curator notes
  */
 export function ApplicationCard({
   title,
@@ -38,15 +33,18 @@ export function ApplicationCard({
   className = '',
 }: ApplicationCardProps) {
   return (
-    <div className={`bg-surface-container rounded-pebble p-space-xl border border-outline-variant shadow-elevation-1 hover:shadow-elevation-2 transition-all duration-medium-1 ease-spring ${className}`}>
+    <div className={`bg-surface-container rounded-pebble p-space-xl border border-outline-variant shadow-standard hover:shadow-maximum transition-all duration-300 ease-viscous-breeze ${className}`}>
       {/* Header Section */}
-      <div className="flex items-start justify-between mb-12">
+      <div className="flex items-start justify-between mb-8">
         <div className="flex-1">
-          <h3 className="text-on-surface mb-1 text-headline-large font-bold">{title}</h3>
-          <p className="text-on-surface-variant text-title-large italic">{company}</p>
-          <p className="text-on-surface-variant mt-2 uppercase tracking-wide text-label-small font-mono">
-            {location} • Applied {appliedDate}
-          </p>
+          <h3 className="text-bloom-gallery text-xl mb-1">{title}</h3>
+          <p className="text-on-surface-variant font-field-note italic text-lg">{company}</p>
+          <div className="flex items-center gap-2 mt-2">
+            <span className="text-curator-annotation text-sm">→ {location}</span>
+            <span className="text-on-surface-variant/50 text-[10px] font-annotation uppercase tracking-widest pl-2">
+              Applied {appliedDate}
+            </span>
+          </div>
         </div>
         <div className="flex flex-col items-end gap-3">
           <StatusBadge
@@ -57,9 +55,9 @@ export function ApplicationCard({
           {onUpdateStatus && (
             <button
               onClick={onUpdateStatus}
-              className="bg-surface-container-high px-6 py-2 rounded-full text-on-surface hover:bg-surface-bright transition-all"
+              className="bg-surface-container-high px-6 py-2 rounded-full text-on-surface hover:bg-surface-bright transition-all font-field-note text-sm uppercase tracking-wide"
             >
-              Update Status
+              Update
             </button>
           )}
         </div>
@@ -93,10 +91,10 @@ export function ApplicationCard({
   );
 }
 
-function getStatusVariant(status: string): 'primary' | 'secondary' | 'tertiary' | 'neutral' {
+function getStatusVariant(status: string): StatusBadgeVariant {
   const norm = status.toLowerCase();
-  if (norm.includes('offer') || norm.includes('accepted')) return 'tertiary'; // Celebration mode (Pink)
-  if (norm.includes('interview') || norm.includes('screening')) return 'secondary'; // Active progress (Teal)
-  if (norm.includes('applied')) return 'primary'; // Initial state (Indigo)
+  if (norm.includes('offer') || norm.includes('accepted')) return 'success';
+  if (norm.includes('interview') || norm.includes('screening')) return 'info';
+  if (norm.includes('applied')) return 'warning';
   return 'neutral';
 }

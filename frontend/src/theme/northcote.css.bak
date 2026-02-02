@@ -1,0 +1,714 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Bodoni:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1;1,9..144,100..900,0..100,0..1&family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=JetBrains+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&family=Roboto+Flex:opsz,wght,GRAD,XTRA@8..144,100..1000,-200..150,323..603&display=swap');
+
+/**
+ * Northcote Curio Design Tokens - CareerCopilot
+ * Aesthetic: Organic, High-Contrast, Professional
+ * Theme: Gallery (Expressive) & Laboratory (Restrained)
+ */
+
+:root {
+  /* ========================================================================
+   * COLOR PALETTE - M3 Expressive (Figma Spec)
+   * Primary: Sage Green (Pill indicator, Connect button)
+   * Secondary: Soft Coral/Peach (Create button)
+   * Tertiary: Lavender/Lilac (Name highlight)
+   * Surface: Deep Charcoal (#121212)
+   * ======================================================================== */
+
+  /* Primary Tones (Sage Green / Muted Mint) */
+  --ref-palette-primary-0: #000000;
+  --ref-palette-primary-10: #0F1F0B;
+  --ref-palette-primary-20: #1D3314;
+  --ref-palette-primary-30: #2D471F;
+  --ref-palette-primary-40: #3D5C2A;
+  --ref-palette-primary-50: #527542;
+  /* Sage Green Base */
+  --ref-palette-primary-60: #6B8F5A;
+  --ref-palette-primary-70: #85AA73;
+  --ref-palette-primary-80: #B4D8AE;
+  --ref-palette-primary-90: #BCE0A8;
+  --ref-palette-primary-95: #D8F0C4;
+  --ref-palette-primary-100: #FFFFFF;
+
+  /* Secondary Tones (Soft Coral/Peach) */
+  --ref-palette-secondary-0: #000000;
+  --ref-palette-secondary-10: #2B1410;
+  --ref-palette-secondary-20: #47241E;
+  --ref-palette-secondary-30: #62362D;
+  --ref-palette-secondary-40: #7E493D;
+  --ref-palette-secondary-50: #A4715E;
+  /* Coral Base */
+  --ref-palette-secondary-60: #C0877A;
+  --ref-palette-secondary-70: #E5B3A4;
+  --ref-palette-secondary-80: #FDCFC4;
+  --ref-palette-secondary-90: #FFE6DD;
+  --ref-palette-secondary-95: #FFF3EF;
+  --ref-palette-secondary-100: #FFFFFF;
+
+  /* Tertiary Tones (Lavender/Lilac) */
+  --ref-palette-tertiary-0: #000000;
+  --ref-palette-tertiary-10: #1A0F2E;
+  --ref-palette-tertiary-20: #301E4A;
+  --ref-palette-tertiary-30: #472F66;
+  --ref-palette-tertiary-40: #5E4182;
+  --ref-palette-tertiary-50: #8B7AB8;
+  /* Lavender Base */
+  --ref-palette-tertiary-60: #A896CD;
+  --ref-palette-tertiary-70: #C5B2E2;
+  --ref-palette-tertiary-80: #E2D0F7;
+  --ref-palette-tertiary-90: #F5EAFF;
+  --ref-palette-tertiary-95: #FBF7FF;
+  --ref-palette-tertiary-100: #FFFFFF;
+
+  /* Error Tones */
+  --ref-palette-error-0: #000000;
+  --ref-palette-error-10: #410E0B;
+  --ref-palette-error-20: #601410;
+  --ref-palette-error-30: #8C1D18;
+  --ref-palette-error-40: #B3261E;
+  --ref-palette-error-50: #DC362E;
+  --ref-palette-error-60: #E46962;
+  --ref-palette-error-70: #EC928E;
+  --ref-palette-error-80: #F2B8B5;
+  --ref-palette-error-90: #F9DEDC;
+  --ref-palette-error-95: #FCEEEE;
+  --ref-palette-error-100: #FFFFFF;
+
+  /* Warning Tones (Golden/Amber) */
+  --ref-palette-warning-0: #000000;
+  --ref-palette-warning-10: #3E2723;
+  --ref-palette-warning-20: #5D4037;
+  --ref-palette-warning-30: #78350F;
+  --ref-palette-warning-40: #F59E0B;
+  --ref-palette-warning-50: #FBBF24;
+  --ref-palette-warning-60: #FCD34D;
+  --ref-palette-warning-70: #FDE68A;
+  --ref-palette-warning-80: #FEF3C7;
+  --ref-palette-warning-90: #FEF9E7;
+  --ref-palette-warning-95: #FFFBF0;
+  --ref-palette-warning-100: #FFFFFF;
+
+  /* Neutral Tones (Deep Charcoal/Black) */
+  --ref-palette-neutral-0: #000000;
+  --ref-palette-neutral-4: #0A0A0A;
+  --ref-palette-neutral-6: #121212;
+  /* Surface base - Figma spec */
+  --ref-palette-neutral-10: #1C1B1F;
+  --ref-palette-neutral-12: #1E1E1E;
+  --ref-palette-neutral-17: #2B2C30;
+  --ref-palette-neutral-22: #303135;
+  --ref-palette-neutral-24: #38393E;
+  --ref-palette-neutral-30: #484649;
+  --ref-palette-neutral-50: #79747E;
+  --ref-palette-neutral-70: #AEA9B4;
+  --ref-palette-neutral-87: #E0E0E0;
+  --ref-palette-neutral-90: #E6E1E5;
+  --ref-palette-neutral-95: #F4EFF4;
+  --ref-palette-neutral-98: #FDF8FD;
+  --ref-palette-neutral-100: #FFFFFF;
+
+  /* System Color Roles (Dark Theme - M3 Expressive) */
+  --sys-color-primary: var(--ref-palette-primary-80);
+  /* Sage green for pills/buttons */
+  --sys-color-on-primary: var(--ref-palette-primary-20);
+  --sys-color-primary-container: var(--ref-palette-primary-50);
+  --sys-color-on-primary-container: var(--ref-palette-primary-100);
+
+  --sys-color-secondary: var(--ref-palette-secondary-80);
+  /* Coral for Create button */
+  --sys-color-on-secondary: var(--ref-palette-secondary-20);
+  --sys-color-secondary-container: var(--ref-palette-secondary-50);
+  --sys-color-on-secondary-container: var(--ref-palette-secondary-100);
+
+  --sys-color-tertiary: var(--ref-palette-tertiary-80);
+  /* Lavender for name highlight */
+  --sys-color-on-tertiary: var(--ref-palette-tertiary-20);
+  --sys-color-tertiary-container: var(--ref-palette-tertiary-50);
+  --sys-color-on-tertiary-container: var(--ref-palette-tertiary-100);
+
+  --sys-color-error: var(--ref-palette-error-80);
+  --sys-color-on-error: var(--ref-palette-error-20);
+  --sys-color-error-container: var(--ref-palette-error-30);
+  --sys-color-on-error-container: var(--ref-palette-error-90);
+
+  --sys-color-warning: var(--ref-palette-warning-80);
+  --sys-color-on-warning: var(--ref-palette-warning-30);
+  --sys-color-warning-container: var(--ref-palette-warning-40);
+  --sys-color-on-warning-container: var(--ref-palette-warning-90);
+
+  --sys-color-background: var(--ref-palette-neutral-6);
+  --sys-color-on-background: var(--ref-palette-neutral-90);
+  --sys-color-surface: var(--ref-palette-neutral-6);
+  /* #121212 - Figma spec */
+  --sys-color-surface-dim: var(--ref-palette-neutral-6);
+  --sys-color-surface-bright: var(--ref-palette-neutral-24);
+  --sys-color-surface-container-lowest: var(--ref-palette-neutral-4);
+  --sys-color-surface-container-low: var(--ref-palette-neutral-10);
+  --sys-color-surface-container: var(--ref-palette-neutral-12);
+  --sys-color-surface-container-high: var(--ref-palette-neutral-17);
+  --sys-color-surface-container-highest: var(--ref-palette-neutral-22);
+  --sys-color-on-surface: var(--ref-palette-neutral-90);
+  --sys-color-on-surface-variant: var(--ref-palette-neutral-70);
+  --sys-color-outline: var(--ref-palette-neutral-50);
+  --sys-color-outline-variant: var(--ref-palette-neutral-30);
+
+  /* Helper RGB values for rgba() usage */
+  --sys-color-primary-rgb: 180, 216, 174;
+  /* Sage green */
+  --sys-color-secondary-rgb: 253, 207, 196;
+  /* Soft coral */
+  --sys-color-tertiary-rgb: 226, 208, 247;
+  /* Lavender */
+  --sys-color-surface-rgb: 18, 18, 18;
+  --sys-color-on-surface-rgb: 230, 225, 229;
+
+  /* Navigation State Colors (Semantic) */
+  --sys-color-nav-active-container: var(--ref-palette-primary-80);
+  /* Sage green for active nav pill */
+  --sys-color-on-nav-active: var(--ref-palette-primary-20);
+  /* Dark green text on active nav */
+  --sys-color-nav-inactive: var(--ref-palette-neutral-70);
+  /* Muted text for inactive nav */
+
+  /* ========================================================================
+   * MOTION (Expressive Physics)
+   * ======================================================================== */
+
+  /* Durations */
+  --sys-motion-duration-short-1: 50ms;
+  --sys-motion-duration-short-2: 100ms;
+  --sys-motion-duration-medium-1: 250ms;
+  --sys-motion-duration-medium-2: 400ms;
+  --sys-motion-duration-long-1: 500ms;
+  --sys-motion-duration-long-2: 600ms;
+  --sys-motion-duration-extra-long-1: 700ms;
+  --sys-motion-duration-extra-long-4: 1000ms;
+
+  /* Easing curves */
+  --sys-motion-easing-linear: cubic-bezier(0, 0, 1, 1);
+  --sys-motion-easing-standard: cubic-bezier(0.2, 0, 0, 1);
+  --sys-motion-easing-standard-accelerate: cubic-bezier(0.3, 0, 1, 1);
+  --sys-motion-easing-standard-decelerate: cubic-bezier(0, 0, 0, 1);
+
+  /* Expressive Easing (Spring-like) */
+  --sys-motion-easing-emphasized: cubic-bezier(0.2, 0, 0, 1);
+  --sys-motion-easing-emphasized-accelerate: cubic-bezier(0.3, 0, 0.8, 0.15);
+  --sys-motion-easing-emphasized-decelerate: cubic-bezier(0.05, 0.7, 0.1, 1.0);
+
+  /* True Spring Physics Approximations */
+  --sys-motion-easing-expressive-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --sys-motion-easing-expressive-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+  /* ========================================================================
+   * TYPOGRAPHY (M3 Expressive)
+   * Font: Plus Jakarta Sans (Variable)
+   * ======================================================================== */
+
+  --sys-type-display-family: 'Plus Jakarta Sans', sans-serif;
+  --sys-type-body-family: 'Plus Jakarta Sans', sans-serif;
+  --sys-type-mono-family: 'JetBrains Mono', monospace;
+
+  /* Extreme Weights */
+  --sys-type-weight-thin: 100;
+  --sys-type-weight-light: 300;
+  --sys-type-weight-regular: 400;
+  --sys-type-weight-medium: 500;
+  --sys-type-weight-bold: 700;
+  --sys-type-weight-heavy: 800;
+  --sys-type-weight-black: 900;
+
+  /* Scales */
+  --sys-type-display-large-size: 57px;
+  --sys-type-display-large-line-height: 64px;
+  --sys-type-display-large-tracking: -0.25px;
+
+  --sys-type-display-medium-size: 45px;
+  --sys-type-display-medium-line-height: 52px;
+
+  --sys-type-display-small-size: 36px;
+  --sys-type-display-small-line-height: 44px;
+
+  --sys-type-headline-large-size: 32px;
+  --sys-type-headline-large-line-height: 40px;
+
+  --sys-type-title-large-size: 22px;
+  --sys-type-title-large-line-height: 28px;
+
+  --sys-type-body-large-size: 16px;
+  --sys-type-body-large-line-height: 24px;
+
+  --sys-type-body-medium-size: 14px;
+  --sys-type-body-medium-line-height: 20px;
+
+  /* ========================================================================
+   * SPACING (Grid System)
+   * Based on M3 4px/8px grid system
+   * ======================================================================== */
+
+  --sys-space-0: 0;
+  --sys-space-xs: 4px;
+  --sys-space-sm: 8px;
+  --sys-space-md: 16px;
+  --sys-space-lg: 24px;
+  --sys-space-xl: 32px;
+  --sys-space-2xl: 48px;
+  --sys-space-3xl: 64px;
+
+  /* ========================================================================
+   * SHAPE & ELEVATION
+   * ======================================================================== */
+
+  /* Expressive Shape System - Organic Archetypes */
+
+  /* 1. The Leaf (Growth) */
+  --sys-shape-leaf: 32px 12px 32px 12px;
+
+  /* 2. The Tech-Edge (Precision) */
+  --sys-shape-tech: 24px 4px 24px 20px;
+
+  /* 3. The Pebble (Friendly) */
+  --sys-shape-pebble: 20px 20px 32px 32px;
+
+  /* 4. The Gem (Highlight) */
+  --sys-shape-gem: 40px 8px 40px 8px;
+
+  /* 5. The Flow (Motion - Left/Right) */
+  --sys-shape-flow-l: 32px 12px 12px 12px;
+  --sys-shape-flow-r: 12px 32px 12px 12px;
+
+  /* System Shape Scale (Expressive) */
+  --sys-shape-corner-details: 4px;
+  /* tiny details */
+  --sys-shape-corner-small: 8px;
+  /* functional elements */
+  --sys-shape-corner-medium: 12px;
+  /* standard containers */
+  --sys-shape-corner-large: 16px 8px 16px 8px;
+  /* variable shape 1 */
+  --sys-shape-corner-extra-large: 28px 12px 28px 12px;
+  /* active states */
+  --sys-shape-corner-full: 9999px;
+  /* traditional pill fallback */
+
+  /* Colored Shadows (Depth) */
+  --sys-elevation-level1: 0 1px 2px rgba(0, 0, 0, 0.3), 0 1px 3px 1px rgba(0, 0, 0, 0.15);
+  --sys-elevation-level2: 0 1px 2px rgba(0, 0, 0, 0.3), 0 2px 6px 2px rgba(0, 0, 0, 0.15);
+  --sys-elevation-level3: 0 4px 8px 3px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.3);
+  --sys-elevation-level4: 0 6px 10px 4px rgba(0, 0, 0, 0.15), 0 2px 3px rgba(0, 0, 0, 0.3);
+  --sys-elevation-level5: 0 8px 12px 6px rgba(0, 0, 0, 0.15), 0 4px 4px rgba(0, 0, 0, 0.3);
+
+  /* Glows */
+  --sys-elevation-glow-primary: 0 0 15px rgba(160, 197, 141, 0.4);
+  --sys-elevation-glow-secondary: 0 0 15px rgba(253, 207, 196, 0.4);
+}
+
+/**
+ * ═══════════════════════════════════════════════════════════════════════════
+ * NORTHCOTE CURIO TYPOGRAPHY - THE FEDERATION STACK
+ * Victorian Naturalist Field Station Design System V2.0
+ * ═══════════════════════════════════════════════════════════════════════════
+ * 
+ * 🏛️ PROCLAMATION (Libre Bodoni)    — Gallery Headers, Hero Moments
+ * 🌸 BLOOM       (Fraunces)         — Sub-headers, Emotional Accents
+ * 📝 FIELD NOTE  (Work Sans)        — Body Text, UI Elements
+ * 🔬 ANNOTATION  (JetBrains Mono)   — Laboratory Data, Technical Precision
+ * 
+ * ANTI-SLOP PROTOCOL: NO Inter, NO Plus Jakarta Sans, NO Roboto, NO Arial
+ * ═══════════════════════════════════════════════════════════════════════════
+ * Auto-generated by scripts/sync-tokens.js
+ * DO NOT EDIT MANUALLY
+ * ═══════════════════════════════════════════════════════════════════════════
+ */
+
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-specimen-night-lightest: #3D3A36;
+  --color-specimen-night-light: #2C2925;
+  --color-specimen-night-base: #1A1714;
+  --color-specimen-night-dark: #0F0C0A;
+  --color-specimen-night-darkest: #050403;
+  --color-specimen-night: #1A1714;
+  --color-wattle-gold-lightest: #E8C77A;
+  --color-wattle-gold-light: #E0BD61;
+  --color-wattle-gold-base: #D4A84B;
+  --color-wattle-gold-dark: #C8983A;
+  --color-wattle-gold-darkest: #B88A2E;
+  --color-wattle-gold: #D4A84B;
+  --color-waratah-crimson-lightest: #E08A7D;
+  --color-waratah-crimson-light: #D27364;
+  --color-waratah-crimson-base: #C45C4B;
+  --color-waratah-crimson-dark: #A64536;
+  --color-waratah-crimson-darkest: #873023;
+  --color-waratah-crimson: #C45C4B;
+  --color-eucalypt-smoke-lightest: #4A433D;
+  --color-eucalypt-smoke-light: #3D3632;
+  --color-eucalypt-smoke-base: #2C2723;
+  --color-eucalypt-smoke-dark: #1F1B18;
+  --color-eucalypt-smoke-darkest: #120F0D;
+  --color-eucalypt-smoke: #2C2723;
+  --color-flannel-flower-lightest: #F5F2EA;
+  --color-flannel-flower-light: #EEEBE3;
+  --color-flannel-flower-base: #E6E1D6;
+  --color-flannel-flower-dark: #D1C9B8;
+  --color-flannel-flower-darkest: #BDB39F;
+  --color-flannel-flower: #E6E1D6;
+  --color-specimen-night: #1A1714;
+  --color-wattle-gold: #D4A84B;
+  --color-waratah-crimson: #C45C4B;
+  --color-eucalypt-smoke: #2C2723;
+  --color-flannel-flower: #E6E1D6;
+  --color-parchment: #F0EAD6;
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 12px;
+  --spacing-lg: 16px;
+  --spacing-xl: 24px;
+  --spacing-xxl: 32px;
+  --spacing-xxxl: 48px;
+  --radius-pebble: 20px 6px 16px 28px;
+  --radius-stone: 16px 4px 12px 24px;
+  --radius-leaf: 24px 8px 20px 4px;
+  --radius-seed: 8px 4px 10px 6px;
+  --radius-sentry: 98%;
+  --shadow-subtle: 0 2px 4px rgba(0, 0, 0, 0.15);
+  --shadow-standard: 0 4px 8px rgba(0, 0, 0, 0.20);
+  --shadow-elevated: 0 8px 16px rgba(0, 0, 0, 0.25);
+  --shadow-maximum: 0 16px 32px rgba(0, 0, 0, 0.30);
+  --duration-fast: 150ms;
+  --duration-standard: 300ms;
+  --duration-slow: 500ms;
+  --ease-viscous-breeze: cubic-bezier(0.34, 1.56, 0.64, 1);
+  /* Spring Physics for Hover (Viscous Breeze) */
+  --spring-stiffness: 500;
+  --spring-damping: 27;
+
+  /* M3 Expressive Typography Variables */
+  --sys-type-axes-authoritative: 'wght' 800, 'wdth' 120, 'XTRA' 468, 'GRAD' 0;
+  --sys-type-axes-wistful: 'wght' 100, 'wdth' 110, 'YTLC' 480, 'GRAD' -50;
+  --sys-type-axes-breathing: 'GRAD' 50;
+  --grad: 0;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-specimen-night);
+    color: var(--color-parchment);
+    font-family: 'Work Sans', sans-serif;
+    overflow-x: hidden;
+    font-variation-settings:
+      'opsz' var(--leaf-opsz),
+      'GRAD' var(--leaf-grad),
+      'XTRA' var(--leaf-xtra);
+  }
+
+
+  /* ═══════════════════════════════════════════════════════════════════════
+     NORTHCOTE CURIO BASE STYLES
+     Enforcing the design system at the root level
+     ═══════════════════════════════════════════════════════════════════════ */
+
+  h1 {
+    font-family: 'Libre Bodoni', serif;
+    font-size: var(--sys-type-display-large-size);
+    line-height: var(--sys-type-display-large-line-height);
+    font-weight: var(--sys-type-weight-bold);
+    letter-spacing: var(--sys-type-display-large-tracking);
+  }
+
+  h2 {
+    font-family: 'Fraunces', serif;
+    font-size: var(--sys-type-headline-large-size);
+    line-height: var(--sys-type-headline-large-line-height);
+    font-weight: var(--sys-type-weight-medium);
+  }
+
+  h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 32px;
+    line-height: 40px;
+    font-weight: var(--sys-type-weight-medium);
+  }
+
+  h4 {
+    font-family: 'Fraunces', serif;
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: var(--sys-type-weight-medium);
+  }
+
+  h5 {
+    font-family: 'Work Sans', sans-serif;
+    font-size: var(--sys-type-title-large-size);
+    line-height: var(--sys-type-title-large-line-height);
+    font-weight: var(--sys-type-weight-medium);
+  }
+
+  h6 {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: var(--sys-type-weight-medium);
+  }
+
+  p {
+    font-family: 'Work Sans', sans-serif;
+    font-size: var(--sys-type-body-large-size);
+    line-height: var(--sys-type-body-large-line-height);
+    color: var(--color-flannel-flower);
+  }
+
+  small,
+  .text-small {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  code,
+  pre {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+  }
+
+  /* BUTTON BASE */
+  button,
+  .btn {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: var(--sys-type-weight-medium);
+    font-size: var(--sys-type-body-medium-size);
+    transition: all var(--duration-standard) var(--ease-viscous-breeze);
+  }
+
+
+  /* Dark Mode Scrollbar (M3 Expressive Aesthetic) */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #121212;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 20px;
+    border: 2px solid #121212;
+    transition: background 0.3s ease;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+}
+
+@layer components {
+  /* ═══════════════════════════════════════════════════════════════════════
+     CONTAINER COMPONENTS
+     ═══════════════════════════════════════════════════════════════════════ */
+
+  .tech-card {
+    background-color: var(--sys-color-surface-container);
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
+    overflow: hidden;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════════
+     THE PROCLAMATION (Libre Bodoni) — Gallery Headers, Hero Moments
+     ═══════════════════════════════════════════════════════════════════════ */
+
+  .text-hero,
+  .text-proclamation {
+    font-family: 'Libre Bodoni', 'Playfair Display', serif;
+    font-weight: var(--sys-type-weight-bold);
+    font-stretch: condensed;
+    letter-spacing: var(--sys-type-display-large-tracking);
+    line-height: var(--sys-type-display-large-line-height);
+    color: var(--color-parchment);
+  }
+
+  .text-proclamation-large {
+    font-family: 'Libre Bodoni', 'Playfair Display', serif;
+    font-weight: var(--sys-type-weight-black);
+    font-stretch: condensed;
+    letter-spacing: var(--sys-type-display-large-tracking);
+    line-height: var(--sys-type-display-large-line-height);
+    text-transform: uppercase;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════════
+     THE BLOOM (Fraunces) — Sub-headers, Emotional Accents
+     ═══════════════════════════════════════════════════════════════════════ */
+
+  .text-title,
+  .text-bloom {
+    font-family: 'Fraunces', serif;
+    font-weight: var(--sys-type-weight-medium);
+    font-variation-settings:
+      'SOFT' 50,
+      'WONK' 1,
+      'wght' 500;
+    line-height: var(--sys-type-headline-large-line-height);
+    color: var(--on-surface-parchment-dim);
+  }
+
+  /* Bloom Soft (maximum native irregularity) */
+  .text-bloom-soft {
+    font-family: 'Fraunces', serif;
+    font-variation-settings:
+      'SOFT' 100,
+      'WONK' 1,
+      'wght' var(--sys-type-weight-regular);
+    font-style: italic;
+  }
+
+  /* Bloom Gallery (Expressive) */
+  .text-bloom-gallery {
+    font-family: 'Fraunces', serif;
+    font-variation-settings:
+      'SOFT' 50,
+      'WONK' 1,
+      'wght' var(--sys-type-weight-bold);
+    color: var(--color-wattle-gold);
+  }
+
+  /* Bloom Laboratory (Restrained) */
+  .text-bloom-laboratory {
+    font-family: 'Fraunces', serif;
+    font-variation-settings:
+      'SOFT' 20,
+      'WONK' 0,
+      'wght' 500;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════════
+     THE FIELD NOTE (Work Sans) — Body Text, UI Elements
+     ═══════════════════════════════════════════════════════════════════════ */
+
+  .text-body,
+  .text-field-note {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: var(--sys-type-weight-regular);
+    line-height: var(--sys-type-body-large-line-height);
+    color: var(--on-surface-parchment-dim);
+  }
+
+  .text-field-note-medium {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: var(--sys-type-weight-medium);
+    line-height: var(--sys-type-body-medium-line-height);
+  }
+
+  .text-field-note-bold {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: var(--sys-type-weight-bold);
+    line-height: var(--sys-type-body-medium-line-height);
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════════
+     THE ANNOTATION (JetBrains Mono) — Laboratory Data, Technical Precision
+     ═══════════════════════════════════════════════════════════════════════ */
+
+  .text-data,
+  .text-mono,
+  .text-annotation {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-weight: var(--sys-type-weight-medium);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    color: var(--on-surface-variant);
+  }
+
+  .text-mono-large {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-weight: var(--sys-type-weight-bold);
+    font-size: 3rem;
+    letter-spacing: -0.02em;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════════
+     BANKSIA COMPOSITION — Hero Moment Typography Duet
+     ═══════════════════════════════════════════════════════════════════════ */
+
+  .banksia-composition {
+    position: relative;
+    display: block;
+  }
+
+  .banksia-proclamation {
+    font-family: 'Libre Bodoni', 'Playfair Display', serif;
+    font-weight: var(--sys-type-weight-black);
+    font-stretch: condensed;
+    letter-spacing: var(--sys-type-display-large-tracking);
+    line-height: var(--sys-type-display-large-line-height);
+    color: var(--color-parchment);
+    text-transform: uppercase;
+  }
+
+  .banksia-bloom {
+    font-family: 'Fraunces', serif;
+    font-variation-settings:
+      'SOFT' 50,
+      'WONK' 1,
+      'wght' var(--sys-type-weight-bold);
+    color: var(--color-wattle-gold);
+    transform: rotate(4deg);
+    position: absolute;
+    /* Positioning is context-dependent — set top/left/right per usage */
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════════
+     BUTTON COMPONENTS
+     ═══════════════════════════════════════════════════════════════════════ */
+
+  .btn-pebble {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: var(--sys-type-weight-bold);
+    border-radius: var(--radius-pebble);
+    transition: all var(--duration-standard) var(--ease-viscous-breeze);
+  }
+
+  .btn-pebble:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: var(--elevation-shadow-glow-gold);
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════════
+     ANTI-SLOP VALIDATION WARNINGS
+     These classes help identify forbidden fonts during development
+     ═══════════════════════════════════════════════════════════════════════ */
+
+  /* DEV ONLY: Highlight forbidden fonts */
+  .debug-typography [style*="Inter"],
+  .debug-typography [style*="Plus Jakarta"],
+  .debug-typography [style*="Recursive"],
+  .debug-typography [style*="Amstelvar"],
+  .debug-typography [style*="Roboto Flex"],
+  .debug-typography [style*="Arial"],
+  .debug-typography [style*="Helvetica"] {
+    outline: 3px dashed red !important;
+  }
+
+  .debug-typography [style*="Inter"]::after,
+  .debug-typography [style*="Plus Jakarta"]::after,
+  .debug-typography [style*="Recursive"]::after,
+  .debug-typography [style*="Amstelvar"]::after,
+  .debug-typography [style*="Roboto Flex"]::after {
+    content: "❌ SLOP FONT";
+    background: red;
+    color: white;
+    padding: 2px 4px;
+    font-size: 10px;
+    position: absolute;
+  }
+}

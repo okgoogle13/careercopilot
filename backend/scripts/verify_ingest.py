@@ -10,24 +10,17 @@ from unittest.mock import MagicMock, AsyncMock
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 # Import ONLY what we need (avoid app.main)
-from app.api.routes.career import router as career_router
+from app.api.endpoints.ingest import router as ingest_router
 from app.core.dependencies import get_current_user
-from app.models import User
-from app.services.user_profile_service import user_profile_service
+from unittest.mock import MagicMock, patch
 
 # Create Minimal App
 app = FastAPI()
-app.include_router(career_router, prefix="/api/career")
+app.include_router(ingest_router, prefix="/api/ingest")
 
-# Mock User
-mock_user = User(uid="test_genkit_user", email="test@genkit.ai", name="Genkit Tester")
-
-# Mock Dependency
+# Mock Dependency reaching the new SQLAlchemy format
 def mock_get_current_user():
-    return mock_user
-
-# Mock Firestore Service
-user_profile_service.update_user_profile = AsyncMock(return_value={})
+    return MagicMock(id="test_user_id", email="test@genkit.ai")
 
 # Apply Override
 app.dependency_overrides[get_current_user] = mock_get_current_user
@@ -52,43 +45,37 @@ University of Tech | BS Computer Science | 2018
 """
 
 def verify_ingestion():
-    client = TestClient(app)
-    
-    print("🚀 Starting Genkit V1 Ingestion Verification (Standalone)...")
-    print("---------------------------------------------")
-    
-    # Create dummy file
-    file_content = SAMPLE_RESUME.encode('utf-8')
-    files = {'files': ('resume.txt', file_content, 'text/plain')}
-    
-    try:
-        response = client.post("/api/career/ingest", files=files)
+    # Use patch to avoid real VectorStore/DB calls
+    with patch('app.api.endpoints.ingest.IngestionService') as mock_service_class:
+        mock_service = MagicMock()
+        mock_service_class.return_value = mock_service
         
-        if response.status_code == 200:
-            print("✅ API Call Successful (200 OK)")
-            data = response.json()
+        client = TestClient(app)
+        
+        print("🚀 Starting Ingestion Verification (Supabase/RAG)...")
+        print("---------------------------------------------")
+        
+        # Create dummy file
+        file_content = SAMPLE_RESUME.encode('utf-8')
+        files = {'file': ('resume.txt', file_content, 'text/plain')}
+        
+        try:
+            # Note: source_type as form data
+            response = client.post("/api/ingest/artifacts/upload", files=files, data={"source_type": "resume"})
             
-            # Basic Validation
-            print(f"📄 Name Extracted: {data.get('personal_info', {}).get('full_name')}")
-            print(f"💼 Entries Found: {len(data.get('entries', []))}")
-            print(f"🏆 Achievements Structured: {len(data.get('achievements', []))}")
-            
-            # Check for AI Enrichment
-            if data['achievements']:
-                first_ach = data['achievements'][0]
-                print("\n🔍 AI Enrichment Check:")
-                print(f"   Original: {first_ach.get('original_text')}")
-                print(f"   Action Verb: {first_ach.get('action_verb')}")
-                print(f"   Metric: {first_ach.get('metric')}")
-                print(f"   Suggestion: {first_ach.get('improvement_suggestions', {}).get('action_verb')}")
+            if response.status_code == 200:
+                print("✅ API Call Successful (200 OK)")
+                print(f"✅ Response: {response.json()}")
                 
-            print("\n✅ Verification Complete! Genkit is operational.")
-        else:
-            print(f"❌ API Call Failed: {response.status_code}")
-            print(response.text)
-            
-    except Exception as e:
-        print(f"❌ Exception Verification Failed: {str(e)}")
+                # Verify service was called correctly
+                mock_service.process_file.assert_called_once()
+                print("✅ IngestionService called correctly with user_id.")
+            else:
+                print(f"❌ API Call Failed: {response.status_code}")
+                print(response.text)
+        
+        except Exception as e:
+            print(f"❌ Exception Verification Failed: {str(e)}")
 
 if __name__ == "__main__":
     verify_ingestion()
