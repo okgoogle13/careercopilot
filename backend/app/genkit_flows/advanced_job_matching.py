@@ -39,7 +39,7 @@ load_dotenv()
 if genkit and getattr(genkit, "get_plugin", None) and not genkit.get_plugin("googleai"):
     genkit.init(plugins=[google_genai.init(api_key=os.getenv("GEMINI_API_KEY"))])
 
-gemini_pro = get_ai_config().get_model_config("gemini-2.0-flash")
+gemini_pro = get_ai_config().get_model_config("gemini-3.0-flash")
 
 
 # Pydantic models for structured outputs

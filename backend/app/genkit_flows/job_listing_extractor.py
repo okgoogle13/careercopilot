@@ -26,16 +26,16 @@ genkit.configure(
         "llm": {
             "service": "googleai",
             "models": [
-                {"name": "gemini-1.5-flash"},
-                {"name": "gemini-1.5-pro-preview"},
+                {"name": "gemini-3.0-flash"},
+                {"name": "gemini-3.0-pro"},
             ],
         },
     }
 )
 
 # Define the models to be used in the flows
-flash_model = llm("gemini-1.5-flash")
-pro_model = llm("gemini-1.5-pro-preview")
+flash_model = llm("gemini-3.0-flash")
+pro_model = llm("gemini-3.0-pro")
 
 # Load prompts from the central template file
 with open("app/prompts/prompt_templates.json", "r") as f:

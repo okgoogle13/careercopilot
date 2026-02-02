@@ -24,7 +24,7 @@ else:
 
 ai = Genkit(
     plugins=plugins,
-    model="googleai/gemini-1.5-flash"  # Defaulting to Flash for speed/quota safety
+    model="googleai/gemini-3.0-flash"  # Defaulting to Flash for speed/quota safety
 )
 
 def get_genkit_instance():

@@ -82,7 +82,7 @@ def init_genkit() -> bool:
                 google_ai_local = cast(Any, GoogleAI)
                 genkit_instance = genkit_local(
                     plugins=[google_ai_local(api_key=api_key)],
-                    model="googleai/gemini-2.0-flash",
+                    model="googleai/gemini-3.0-flash",
                 )
                 logger.info("Genkit initialized successfully with plugin")
                 initialized = True
@@ -108,7 +108,7 @@ def init_genkit() -> bool:
             class GenerativeAIWrapper:
                 def __init__(self, genai_module: Any):
                     self.genai = genai_module
-                    self.model_name = "gemini-2.0-flash"
+                    self.model_name = "gemini-3.0-flash"
 
                 def generate(self, prompt: str, **kwargs) -> Any:
                     """Generate content using Gemini"""

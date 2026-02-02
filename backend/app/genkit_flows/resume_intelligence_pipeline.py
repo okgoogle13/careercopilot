@@ -30,7 +30,7 @@ R = TypeVar('R')
 # Protocol for model configuration
 class ModelConfigProtocol:
     """Protocol for model configuration."""
-    
+
     def generate(self, prompt: str, **kwargs: Any) -> Any:
         ...
 
@@ -80,9 +80,9 @@ def get_gemini_model() -> ModelConfigProtocol:
     global _gemini_model_cache
     if _gemini_model_cache is None:
         try:
-            model_config = get_ai_config().get_model_config("gemini-2.0-flash")
+            model_config = get_ai_config().get_model_config("gemini-3.0-flash")
             if model_config is None:
-                raise RuntimeError("Failed to load model configuration: gemini-2.0-flash not found")
+                raise RuntimeError("Failed to load model configuration: gemini-3.0-flash not found")
             _gemini_model_cache = cast(ModelConfigProtocol, model_config)
         except Exception as e:
             # Re-raise with context - this will only happen when the function is called
@@ -371,7 +371,7 @@ Respond with valid JSON matching the ResumeIntelligenceReport schema.
         # Ensure the response has the expected output method
         if not hasattr(response, 'output') or not callable(response.output):
             raise RuntimeError("Invalid response from model: missing output method")
-            
+
         result = response.output()
         if not isinstance(result, ResumeIntelligenceReport):
             raise RuntimeError("Unexpected response type from model")

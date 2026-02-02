@@ -71,7 +71,7 @@ class AIPromptBuilder:
         prompt_type: PromptType,
         task_prompt: str,
         context: Optional[PromptContext] = None,
-        model: str = "gemini-2.0-flash",
+        model: str = "gemini-3.0-flash",
         use_cache: bool = True,
     ) -> str:
         """
@@ -82,7 +82,7 @@ class AIPromptBuilder:
             context_data = {
                 "career_context": self.career_context
             }
-            
+
             if context:
                 if context.job_context:
                     context_data["job_context"] = context.job_context
@@ -97,7 +97,7 @@ class AIPromptBuilder:
                 user_id="personal_user",
                 context_data=context_data
             )
-            
+
             # Execute Genkit Flow
             response = await careerIntelligenceFlow(request)
             return response.content

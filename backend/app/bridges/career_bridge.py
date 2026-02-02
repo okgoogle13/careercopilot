@@ -22,7 +22,7 @@ class AIPromptBuilderBridge:
     Bridge for legacy AIPromptBuilder calls.
     Maintains compatibility while using Genkit flows internally.
     """
-    
+
     def __init__(self):
         self.config = get_personal_config()
         self.career_context = {
@@ -40,16 +40,16 @@ class AIPromptBuilderBridge:
         prompt_type: PromptType,
         task_prompt: str,
         context: Optional[Any] = None,
-        model: str = "gemini-2.0-flash",
+        model: str = "gemini-3.0-flash",
         use_cache: bool = True
     ) -> str:
         """Bridge method matching AIPromptBuilder.generate_ai_response"""
-        
+
         # Prepare context data for the flow
         context_data = {
             "career_context": self.career_context
         }
-        
+
         if context:
             if hasattr(context, "job_context"):
                 context_data["job_context"] = context.job_context
@@ -64,7 +64,7 @@ class AIPromptBuilderBridge:
             user_id="personal_user",
             context_data=context_data
         )
-        
+
         try:
             response = await careerIntelligenceFlow(request)
             return response.content
