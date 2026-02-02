@@ -105,19 +105,19 @@ export const JobSearch = () => {
           <div className="flex gap-2 w-full md:w-auto overflow-x-auto pb-2 md:pb-0">
             <Pebble
               variant="secondary"
-              icon={MapPin}
+              iconLeft={<MapPin size={16} />}
             >
               Location
             </Pebble>
             <Pebble
               variant="secondary"
-              icon={Briefcase}
+              iconLeft={<Briefcase size={16} />}
             >
               Job Type
             </Pebble>
             <Pebble
               variant="ghost"
-              icon={Filter}
+              iconLeft={<Filter size={16} />}
             >
               More Filters
             </Pebble>
@@ -162,7 +162,7 @@ export const JobSearch = () => {
                 Try adjusting your search terms or filters.
               </p>
               <Pebble
-                variant="text"
+                variant="ghost"
                 className="mt-4 text-[var(--color-leaf-base)]"
                 onClick={() => setSearchQuery('')}
               >

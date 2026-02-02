@@ -7,12 +7,12 @@
 import axios, { AxiosError } from 'axios';
 import { z } from 'zod';
 import {
-  UploadAndTagResponse,
-  uploadAndTagResponseSchema,
   ExtractAndSaveRequest,
   extractAndSaveRequestSchema,
   ExtractAndSaveResponse,
   extractAndSaveResponseSchema,
+  UploadAndTagResponse,
+  uploadAndTagResponseSchema,
 } from '../schemas/api.schema';
 
 /**
@@ -66,7 +66,7 @@ export const uploadAndTagFile = async (
   } catch (error) {
     if (error instanceof z.ZodError) {
       // Handle validation errors
-      throw new ApiServiceError('Invalid response data from server.', 500, error.issues);
+      throw new ApiServiceError('Invalid response data from server.', 500, (error as any).issues);
     } else if (axios.isAxiosError(error)) {
       // Handle network/API errors
       const axiosError = error as AxiosError;
@@ -105,7 +105,7 @@ export const extractAndSaveData = async (
   } catch (error) {
     if (error instanceof z.ZodError) {
       // Can be a request body validation error or a response validation error
-      throw new ApiServiceError('Invalid data.', 400, error.issues);
+      throw new ApiServiceError('Invalid data.', 400, (error as any).issues);
     } else if (axios.isAxiosError(error)) {
       // Handle network/API errors
       const axiosError = error as AxiosError;

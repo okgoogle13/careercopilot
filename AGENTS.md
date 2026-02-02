@@ -193,6 +193,20 @@ design-system/
 
 ## Token Efficiency & MCP Delegation
 
+### MCP Routing Overview (Authoritative)
+
+Use MCP servers to keep context small, reduce latency, and avoid heavy local parsing. When in doubt, **route to the smallest capable MCP tool** rather than doing large reads or complex analysis inline.
+
+**MCP configuration reference:** `/Users/okgoogle13/.gemini/antigravity/mcp_config.json` (current Gemini config). For Claude Desktop setup, see `CLAUDE_DESKTOP_MCP_CONFIG.md`.
+
+**Primary MCP servers used in this repo:**
+- **flash-sidekick**: fast analysis over large code/data, batching, and search grounding.
+- **design-system-sidekick**: Northcote Curio design validation, token extraction, and visual compliance checks.
+- **docker** (when enabled): containerized checks or reproductions that must run in Docker.
+- **playwright** (when enabled): UI verification and browser-based checks.
+
+If a task is both large and visual (e.g., "audit multiple UI screens and check token compliance"), **split**: use flash-sidekick for bulk file/context extraction and design-system-sidekick for visual validation.
+
 ### Flash Sidekick Mandatory Routing
 
 For tasks involving bulk data, ALWAYS delegate to flash-sidekick MCP server:
@@ -216,6 +230,35 @@ elif task == "code_quality":
 elif task == "git_history":
     use flash_sidekick.consult_pro(query)
 ```
+
+### Design System Sidekick Routing
+
+Use **design-system-sidekick** whenever a task requires **visual validation**, **token extraction**, or **Northcote Curio compliance**. This includes:
+- Validating newly generated assets (e.g., wallpaper, motifs, specimens).
+- Checking a UI screenshot for palette, density, or typographic compliance.
+- Extracting or comparing design tokens from visuals.
+- Suggesting prompt refinements for asset regeneration.
+
+If the task involves **code-only styling changes** (e.g., Tailwind classes, token mapping in CSS/TS), use flash-sidekick for bulk reads and analysis, then apply changes locally.
+
+### MCP Task Routing Matrix (Practical)
+
+| Task type | Use MCP server | Notes |
+| --- | --- | --- |
+| Read many files, summarize, find patterns | flash-sidekick | Prefer batch tools; avoid large local reads. |
+| Code quality scan or lint-like review | flash-sidekick | Use analyze_code_quality for findings. |
+| Git history or blame analysis | flash-sidekick | Use consult_pro for compact history summaries. |
+| Visual compliance or asset validation | design-system-sidekick | Use validate_asset_compliance and related tools. |
+| Token extraction from imagery | design-system-sidekick | Use extract_visual_design_tokens. |
+| UI regression screenshots or flows | playwright (if configured) | Use for browser-based checks only. |
+| Container-only reproduction | docker (if configured) | Do not use unless explicitly needed. |
+
+### MCP Failure Handling
+
+If an MCP server is unavailable:
+1. Note it explicitly.
+2. Offer a fallback approach (local read, smaller scope, or partial summary).
+3. Ask whether to proceed with reduced coverage.
 
 ### Session Budget Protocol
 

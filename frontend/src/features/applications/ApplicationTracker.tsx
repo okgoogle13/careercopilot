@@ -1,34 +1,53 @@
-import hangingPlant from '../../assets/images/hanging-plant.jpg';
+import { Pebble, StatusBadge, Stone } from '@/components/ui';
+import { motion } from 'framer-motion';
+import {
+  Calendar,
+  ChevronRight,
+  Flower2,
+  Home,
+  Leaf,
+  MapPin,
+  MoreHorizontal,
+  Plus,
+  Sprout,
+} from 'lucide-react';
+import { useState } from 'react';
 import { PageHeader } from '../../components/shared/PageHeader';
-import { ApplicationCard } from '../../components/shared/ApplicationCard';
 
-// ============================================================================
-// TYPE DEFINITIONS
-// ============================================================================
+// Assets
+import leafFern from '../../assets/specimens/leaf-fern.png';
+import wallpaper from '../../assets/textures/wallpaper.png';
 
-export interface Application {
+interface Application {
   id: number;
   title: string;
   company: string;
   location: string;
   appliedDate: string;
-  currentStep: number;
-  steps: string[];
+  stage: string;
 }
 
-// ============================================================================
-// MOCK DATA - Replace with API calls
-// ============================================================================
+const STAGES = [
+  { id: 'nursery', name: 'The Nursery', description: 'Freshly Applied', icon: Sprout },
+  { id: 'sunlight', name: 'The Sunlight', description: 'Initial Screening', icon: Flower2 },
+  {
+    id: 'transplant',
+    name: 'The Transplant',
+    description: 'Active Interviews',
+    icon: ChevronRight,
+  },
+  { id: 'harvest', name: 'The Harvest', description: 'Offer Received', icon: Leaf },
+  { id: 'archive', name: 'The Archive', description: 'Closed / Finalized', icon: Home },
+];
 
-const APPLICATIONS: Application[] = [
+const MOCK_APPLICATIONS: Application[] = [
   {
     id: 1,
     title: 'Senior Software Engineer',
     company: 'TechCorp',
     location: 'San Francisco, CA',
     appliedDate: '2 days ago',
-    currentStep: 3,
-    steps: ['Applied', 'Screening', 'Interview', 'Offer', 'Accepted'],
+    stage: 'transplant',
   },
   {
     id: 2,
@@ -36,8 +55,7 @@ const APPLICATIONS: Application[] = [
     company: 'DesignHub',
     location: 'Remote',
     appliedDate: '5 days ago',
-    currentStep: 2,
-    steps: ['Applied', 'Screening', 'Interview', 'Offer', 'Accepted'],
+    stage: 'sunlight',
   },
   {
     id: 3,
@@ -45,8 +63,7 @@ const APPLICATIONS: Application[] = [
     company: 'StartupXYZ',
     location: 'New York, NY',
     appliedDate: '1 week ago',
-    currentStep: 1,
-    steps: ['Applied', 'Screening', 'Interview', 'Offer', 'Accepted'],
+    stage: 'nursery',
   },
   {
     id: 4,
@@ -54,68 +71,153 @@ const APPLICATIONS: Application[] = [
     company: 'CodeFactory',
     location: 'Austin, TX',
     appliedDate: '3 days ago',
-    currentStep: 2,
-    steps: ['Applied', 'Screening', 'Interview', 'Offer', 'Accepted'],
+    stage: 'sunlight',
   },
 ];
 
-// ============================================================================
-// COMPONENT
-// ============================================================================
-
+/**
+ * The Greenhouse (Application Tracker / Kanban Board)
+ *
+ * V3.1 Mixed Mode implementation.
+ * A Victorian greenhouse aesthetic where job applications are treated
+ * as specimens in various growth stages.
+ */
 export function ApplicationTracker() {
-  const handleUpdateStatus = (applicationId: number) => {
-    // console.log('Update status for application:', applicationId);
-    // TODO: Replace with actual API call
-    console.log('Update status for application:', applicationId);
-  };
+  const [applications] = useState<Application[]>(MOCK_APPLICATIONS);
 
   return (
-    <div className="p-6 md:p-12 max-w-7xl relative animate-in fade-in zoom-in-95 duration-500 ease-spring">
-      {/* Hanging Plant Decoration - Top Right Corner */}
-      <div className="absolute top-[-20px] right-0 pointer-events-none w-[320px] max-h-[800px] z-[5] opacity-60">
+    <div className="min-h-screen bg-specimen-night relative overflow-hidden pb-12 w-full">
+      {/* Dynamic Stagecraft: Greenhouse Glass & Vines */}
+      <div
+        className="absolute inset-0 opacity-5 pointer-events-none mix-blend-overlay"
+        style={{ backgroundImage: `url(${wallpaper})`, backgroundSize: '400px' }}
+      />
+
+      {/* Decorative Fern Overlay */}
+      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] pointer-events-none z-0 opacity-10 select-none">
         <img
-          src={hangingPlant}
+          src={leafFern}
           alt=""
-          className="w-full h-auto mix-blend-screen"
-          style={{
-            WebkitMaskImage:
-              'linear-gradient(to top, transparent 0%, rgba(0,0,0,0.35) 8%, rgba(0,0,0,0.65) 18%, rgba(0,0,0,0.85) 28%, black 40%)',
-            maskImage:
-              'linear-gradient(to top, transparent 0%, rgba(0,0,0,0.35) 8%, rgba(0,0,0,0.65) 18%, rgba(0,0,0,0.85) 28%, black 40%)',
-          }}
+          className="w-full h-full object-contain object-left-bottom grayscale brightness-200"
         />
       </div>
 
-      <div className="relative z-10">
-        {/* Header */}
+      <div className="relative z-10 p-6 md:p-12 max-w-[1600px] mx-auto">
         <PageHeader
-          title="Application Tracker"
+          title="The Greenhouse"
           highlightedWord="Tracker"
-          description="Track your job applications through every stage"
+          description="Cultivate your career opportunities through every stage of growth."
         />
 
-        {/* Applications List */}
-        <div className="space-y-6">
-          {APPLICATIONS.map((app) => (
-            <ApplicationCard
-              key={app.id}
-              title={app.title}
-              company={app.company}
-              location={app.location}
-              appliedDate={app.appliedDate}
-              currentStep={app.currentStep}
-              steps={app.steps}
-              onUpdateStatus={() => handleUpdateStatus(app.id)}
-            />
+        {/* The Kanban Trellis */}
+        <div className="flex gap-6 overflow-x-auto pb-8 snap-x">
+          {STAGES.map((stage) => (
+            <div
+              key={stage.id}
+              className="flex-shrink-0 w-80 snap-start"
+            >
+              <div className="mb-6 px-2">
+                <div className="flex items-center justify-between mb-1">
+                  <h3 className="font-bloom text-lg font-black text-parchment uppercase tracking-tighter flex items-center gap-2">
+                    <stage.icon className="w-4 h-4 text-wattle-gold" />
+                    {stage.name}
+                  </h3>
+                  <span className="font-annotation text-[9px] text-flannel-flower bg-flannel-flower/5 px-2 py-0.5 border border-flannel-flower/10">
+                    {applications.filter((a) => a.stage === stage.id).length} UNITS
+                  </span>
+                </div>
+                <p className="font-annotation text-[10px] text-flannel-flower uppercase tracking-[0.2em] opacity-60">
+                  {stage.description}
+                </p>
+              </div>
+
+              {/* Glass Column Shell */}
+              <div className="space-y-4 min-h-[500px] rounded-lg border border-dashed border-flannel-flower/5 bg-bark-light/[0.02] p-2">
+                {applications
+                  .filter((app) => app.stage === stage.id)
+                  .map((app) => (
+                    <ApplicationLeaf
+                      key={app.id}
+                      application={app}
+                    />
+                  ))}
+
+                {/* Seedling Dispatch (Add Button) */}
+                <button className="w-full py-4 border border-dashed border-flannel-flower/10 rounded-sm flex items-center justify-center text-flannel-flower/30 hover:border-wattle-gold/40 hover:text-wattle-gold transition-all group">
+                  <Plus className="w-5 h-5 group-hover:rotate-90 transition-transform" />
+                </button>
+              </div>
+            </div>
           ))}
         </div>
-
-        {/* Add New Application Button */}
-        <button className="mt-8 w-full bg-surface-container-low border-2 border-dashed border-outline-variant rounded-pebble py-8 text-on-surface hover:border-primary/50 hover:bg-surface-container transition-all duration-medium-1 ease-spring font-medium text-title-large uppercase tracking-wide">
-          + Add New Application
-        </button>
       </div>
     </div>
+  );
+}
+
+/**
+ * ApplicationLeaf component
+ * A single job application card styled as a specimen leaf.
+ */
+function ApplicationLeaf({ application }: { application: Application }) {
+  return (
+    <motion.div
+      whileHover={{ scale: 1.02, y: -2 }}
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+    >
+      <Stone
+        mode="gallery"
+        elevation="floating"
+        className="p-5 border-flannel-flower/10 bg-specimen-night/40 backdrop-blur-sm group relative overflow-hidden"
+      >
+        {/* Stage Indicator Notch */}
+        <div className="absolute top-0 left-0 w-1 h-full bg-wattle-gold opacity-40 group-hover:opacity-100 transition-opacity" />
+
+        <div className="flex flex-col gap-3">
+          <div className="flex justify-between items-start">
+            <StatusBadge
+              label="ACTIVE"
+              variant="success"
+              showDot
+            />
+            <button className="text-flannel-flower/40 hover:text-wattle-gold">
+              <MoreHorizontal className="w-4 h-4" />
+            </button>
+          </div>
+
+          <div>
+            <h4 className="font-bloom text-base font-bold text-parchment uppercase leading-none mb-1">
+              {application.title}
+            </h4>
+            <p className="font-field-note italic text-xs text-flannel-flower">
+              {application.company}
+            </p>
+          </div>
+
+          <div className="pt-2 space-y-2">
+            <div className="flex items-center gap-2 text-[10px] font-annotation text-flannel-flower/60 uppercase tracking-widest">
+              <MapPin className="w-3 h-3" /> {application.location}
+            </div>
+            <div className="flex items-center gap-2 text-[10px] font-annotation text-flannel-flower/40 uppercase tracking-widest">
+              <Calendar className="w-3 h-3" /> {application.appliedDate}
+            </div>
+          </div>
+
+          <div className="pt-3 flex justify-between items-center border-t border-flannel-flower/5">
+            <span className="font-mono text-[8px] text-flannel-flower/30 uppercase tracking-[0.2em]">
+              SPECIMEN_ID: {application.id.toString().padStart(3, '0')}
+            </span>
+            <Pebble
+              variant="ghost"
+              size="sm"
+              className="h-6 text-[10px] uppercase font-bold tracking-tighter hover:text-wattle-gold"
+            >
+              DETAILS
+            </Pebble>
+          </div>
+        </div>
+      </Stone>
+    </motion.div>
   );
 }

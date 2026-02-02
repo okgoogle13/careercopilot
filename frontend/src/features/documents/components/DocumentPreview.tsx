@@ -1,5 +1,5 @@
 import { Pebble } from '@/components/ui/Pebble';
-import { Seed } from '@/components/ui/Seed';
+import { StatusBadge } from '@/components/ui/StatusBadge/StatusBadge';
 import { Stone } from '@/components/ui/Stone';
 import {
   ArrowLeft,
@@ -51,7 +51,7 @@ export const DocumentPreview: React.FC<DocumentPreviewProps> = ({
             <div>
               <Pebble
                 variant="ghost"
-                icon={ArrowLeft}
+                iconLeft={<ArrowLeft size={16} />}
                 onClick={onBack}
                 className="mb-4"
               >
@@ -71,26 +71,26 @@ export const DocumentPreview: React.FC<DocumentPreviewProps> = ({
             <div className="flex gap-2 flex-wrap">
               <Pebble
                 variant="ghost"
-                icon={Edit3}
+                iconLeft={<Edit3 size={16} />}
                 onClick={onEdit}
               >
                 Edit
               </Pebble>
               <Pebble
                 variant="ghost"
-                icon={Share2}
+                iconLeft={<Share2 size={16} />}
               >
                 Share
               </Pebble>
               <Pebble
                 variant="ghost"
-                icon={Printer}
+                iconLeft={<Printer size={16} />}
               >
                 Print
               </Pebble>
               <Pebble
                 variant="primary"
-                icon={Download}
+                iconLeft={<Download size={16} />}
               >
                 Download PDF
               </Pebble>
@@ -102,7 +102,7 @@ export const DocumentPreview: React.FC<DocumentPreviewProps> = ({
           {/* Sidebar */}
           <div className="lg:col-span-3 flex flex-col gap-6">
             {/* Document Info */}
-            <Stone variant="flat">
+            <Stone elevation="flat">
               <div className="p-4">
                 <h3 className="text-title-small font-bold text-[var(--color-text-primary)] mb-4 border-b border-[var(--color-surface-container)] pb-2">
                   Document Info
@@ -112,7 +112,7 @@ export const DocumentPreview: React.FC<DocumentPreviewProps> = ({
                     <span className="text-body-small text-[var(--color-text-secondary)]">
                       Type:
                     </span>
-                    <Seed
+                    <StatusBadge
                       label={documentType.replace('-', ' ')}
                       variant="neutral"
                       className="capitalize"
@@ -148,7 +148,7 @@ export const DocumentPreview: React.FC<DocumentPreviewProps> = ({
             </Stone>
 
             {/* Zoom Controls */}
-            <Stone variant="flat">
+            <Stone elevation="flat">
               <div className="p-4">
                 <h3 className="text-title-small font-bold text-[var(--color-text-primary)] mb-4 border-b border-[var(--color-surface-container)] pb-2">
                   Zoom Controls
@@ -175,8 +175,8 @@ export const DocumentPreview: React.FC<DocumentPreviewProps> = ({
                   </div>
                   <Pebble
                     variant="ghost"
-                    size="small"
-                    icon={RotateCcw}
+                    size="sm"
+                    iconLeft={<RotateCcw size={14} />}
                     onClick={handleResetZoom}
                   >
                     Reset Zoom
