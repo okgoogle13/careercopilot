@@ -1,10 +1,10 @@
 /**
- * ELECTRIC ALCHEMIST: TABS COMPONENT
+ * NORTHCOTE CURIO: TABS COMPONENT
  * Tabs with sliding pill animation (layoutId="active-pill")
  */
 
-import * as React from 'react';
 import { motion } from 'framer-motion';
+import * as React from 'react';
 import { cn } from '../../../lib/cn';
 
 export interface Tab {
@@ -14,14 +14,14 @@ export interface Tab {
   disabled?: boolean;
 }
 
-export interface ElectricTabsProps {
+export interface NorthcoteTabsProps {
   tabs: Tab[];
   defaultTab?: string;
   onChange?: (tabId: string) => void;
   className?: string;
 }
 
-export const ElectricTabs: React.FC<ElectricTabsProps> = ({
+export const NorthcoteTabs: React.FC<NorthcoteTabsProps> = ({
   tabs,
   defaultTab,
   onChange,
@@ -95,4 +95,4 @@ export const ElectricTabs: React.FC<ElectricTabsProps> = ({
   );
 };
 
-ElectricTabs.displayName = 'ElectricTabs';
+NorthcoteTabs.displayName = 'NorthcoteTabs';

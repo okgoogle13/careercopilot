@@ -2,88 +2,80 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './LandingPage.module.css';
 
-// Plant assets
-import fiddleLeaf from '../../assets/images/fiddle_leaf.jpg';
-import monstera from '../../assets/images/monstera.jpg';
-import pilea from '../../assets/images/pilea.jpg';
-import snakePlant from '../../assets/images/snake_plant.png';
+// Northcote Assets
+import sentryKookaburra from '../../assets/specimens/sentry_kookaburra.png';
+import wallpaper from '../../assets/textures/wallpaper.png';
 
 /**
- * CareerCopilot Landing Page
+ * CareerCopilot Landing Page ("The Resurrection")
  *
- * M3 Anti-Slop Validated:
- * ✓ Plus Jakarta Sans (no forbidden fonts)
- * ✓ Gradient blobs (no solid backgrounds)
- * ✓ Elevation shadows (depth)
- * ✓ Spring-physics hover states
- * ✓ Size contrast 3.18x (3.5rem / 1.1rem)
- * ✓ Weight contrast 2x (800 / 400)
- * ✓ Varied spacing rhythm
+ * V3.1 Gallery Mode Implementation:
+ * ✓ ASSET-01 Wallpaper Integration
+ * ✓ High-Fidelity Hero with Proclamation/Curator mix
+ * ✓ Viscous Breeze motion ready (CSS)
+ * ✓ Federation Font Stack enforced
  */
 export function LandingPage(): React.ReactElement {
   return (
     <div className={styles.container}>
-      {/* LAYER 0: Organic Gradient Blobs */}
+      {/* LAYER 0: The Great Wallpaper (ASSET-01) */}
+      <div
+        className={styles.wallpaperLayer}
+        style={{ backgroundImage: `url(${wallpaper})` }}
+      />
+
+      {/* LAYER 1: Organic Gradient Blobs */}
       <div className={styles.blobCanvas}>
         <div className={`${styles.blob} ${styles.blobA}`} />
         <div className={`${styles.blob} ${styles.blobB}`} />
         <div className={`${styles.blob} ${styles.blobC}`} />
-        <div className={`${styles.blob} ${styles.blobD}`} />
       </div>
 
-      {/* LAYER 1: Plant Illustrations */}
-      <div className={styles.illustrationLayer}>
+      {/* LAYER 2: Specimen Anchors */}
+      <div className={styles.specimenLayer}>
         <img
-          src={monstera}
-          alt=""
-          className={styles.plantTopLeft}
-        />
-        <img
-          src={snakePlant}
-          alt=""
-          className={styles.plantTopRight}
-        />
-        <img
-          src={fiddleLeaf}
-          alt=""
-          className={styles.plantBottomLeft}
-        />
-        <img
-          src={pilea}
-          alt=""
-          className={styles.plantBottomRight}
+          src={sentryKookaburra}
+          alt="The Sentry Kookaburra"
+          className={styles.sentryMascot}
         />
       </div>
 
-      {/* LAYER 2: Hero Card */}
+      {/* LAYER 3: Hero Card (Gallery Glass) */}
       <main className={styles.heroCard}>
         <div className="hero-cursive-mix">
-          <span className="proclamation">Career</span>
+          <span className="proclamation text-bloom-ultra">Career</span>
           <span className="cursive">Copilot</span>
         </div>
 
-        <p className={styles.heroTagline}>Your AI-powered career companion</p>
-        <div className="mt-4">
-          <span className="text-curator-annotation">→ powered by botanical intelligence</span>
+        <p className={styles.heroTagline}>
+          A Victorian Naturalist’s approach to modern career transition.
+        </p>
+
+        <div className="mt-8 flex flex-col items-center gap-2">
+          <span className="text-annotation text-wattle-gold tracking-[0.2em]">
+            RESURRECTION PROTOCOL V3.1
+          </span>
+          <span className="text-curator-annotation text-flannel-flower opacity-60">
+            → specimens awaiting audit
+          </span>
         </div>
 
         <div className={styles.actionContainer}>
           <Link
             to="/login"
-            className={styles.btnFilled}
+            className={styles.btnPebbleFilled}
           >
-            Sign In
+            Enter Station
           </Link>
           <Link
             to="/register"
-            className={styles.btnOutlined}
+            className={styles.btnPebbleOutlined}
           >
-            Register
+            New Specimen
           </Link>
           <Link
             to="/dashboard?demo=true"
-            className={styles.btnOutlined}
-            style={{ opacity: 0.8 }}
+            className={styles.btnLink}
           >
             Explore as Guest
           </Link>

@@ -1,5 +1,10 @@
+import { Pebble, StatusBadge, Stone } from '@/components/ui';
 import { motion } from 'framer-motion';
-import { FileText, Gift, Plus, TrendingUp } from 'lucide-react';
+import { FileText, Layout, Plus, Sparkles, Target, Zap } from 'lucide-react';
+
+// Gallery Assets
+import organicLabyrinth from '../../assets/specimens/organic-labyrinth.jpg';
+import wallpaper from '../../assets/textures/wallpaper.png';
 
 // ============================================================================
 // TYPE DEFINITIONS
@@ -20,210 +25,300 @@ const PROFILES: Profile[] = [
   { name: 'Senior Software Engineer', company: 'TECHCORP', score: 92, status: 'EXCELLENT' },
   { name: 'UX Designer', company: 'DESIGNHUB', score: 85, status: 'GOOD' },
   { name: 'Product Manager', company: 'STARTUPXYZ', score: 78, status: 'FAIR' },
+  { name: 'System Architect', company: 'GLOBALINFRA', score: 88, status: 'GOOD' },
 ];
 
-// ============================================================================
-// COMPONENT
-// ============================================================================
-
+/**
+ * CareerCopilot Dashboard ("The Canopy View")
+ *
+ * V3.1 Gallery Mode Implementation:
+ * ✓ ASSET-09 Organic Labyrinth (Ceiling Motifs)
+ * ✓ High-fidelity Hero Metric Bar
+ * ✓ 2x2 Specimen Grid with Blur Bloom effects
+ */
 export function Dashboard() {
-  // Dotted pattern for cards - Figma spec
-  const dottedPattern = `url("data:image/svg+xml,%3Csvg width='20' height='20' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='2' cy='2' r='1' fill='%23FFFFFF' fill-opacity='0.1'/%3E%3C/svg%3E")`;
-
   const container = {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.1,
+        staggerChildren: 0.15,
+        delayChildren: 0.2,
       },
     },
   };
 
   const item = {
-    hidden: { opacity: 0, y: 20, scale: 0.95 },
+    hidden: { opacity: 0, y: 30 },
     show: {
       opacity: 1,
       y: 0,
-      scale: 1,
       transition: {
-        type: 'spring' as const,
-        stiffness: 400,
+        type: 'spring',
+        stiffness: 300,
         damping: 30,
       },
     },
   };
 
   return (
-    <motion.div
-      variants={container}
-      initial="hidden"
-      animate="show"
-      className="p-6 md:p-12 max-w-7xl"
-    >
-      {/* Hero Banner - Figma Design with Plant Background */}
-      <motion.div
-        variants={item}
-        className="rounded-[24px] p-8 md:p-12 mb-8 relative overflow-hidden min-h-[280px] bg-surface-container-high shadow-lg"
-      >
-        {/* Content Layer */}
-        <div className="relative z-10 flex flex-col items-start">
-          <h1 className="mb-1 text-proclamation-large text-[42px] md:text-[56px] leading-none">
-            GOOD MORNING, <span className="text-wattle-gold">NISHANT</span>!
-          </h1>
-          <div className="mb-4">
-            <span className="text-curator-annotation rotate-quirky-ccw">→ you have 3 upcoming interviews this week</span>
-          </div>
-          <p className="text-on-surface/80 text-lg max-w-lg font-field-note italic">
-            "The field station is alive with data today."
-          </p>
-        </div>
+    <div className="min-h-screen bg-specimen-night relative overflow-hidden p-8 md:p-12 lg:p-16">
+      {/* Background Layer: The Nocturnal Canopy */}
+      <div
+        className="absolute inset-0 opacity-20 pointer-events-none mix-blend-soft-light"
+        style={{
+          backgroundImage: `url(${wallpaper})`,
+          backgroundSize: 'cover',
+          backgroundAttachment: 'fixed',
+        }}
+      />
 
-        {/* Plant Background - Figma Spec */}
-        <div
-          className="absolute bottom-0 right-0 w-full h-[70%] opacity-40 pointer-events-none"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 300'%3E%3Cellipse cx='100' cy='280' rx='60' ry='100' fill='%2385AA73' opacity='0.6'/%3E%3Cellipse cx='250' cy='270' rx='70' ry='110' fill='%236B8F5A' opacity='0.7'/%3E%3Cellipse cx='400' cy='265' rx='65' ry='105' fill='%2385AA73' opacity='0.65'/%3E%3Cellipse cx='550' cy='275' rx='55' ry='95' fill='%236B8F5A' opacity='0.6'/%3E%3Cellipse cx='700' cy='280' rx='60' ry='100' fill='%2385AA73' opacity='0.65'/%3E%3Cpath d='M100,280 Q100,200 120,150' stroke='%23527542' stroke-width='3' fill='none' opacity='0.5'/%3E%3Cpath d='M250,270 Q260,190 280,140' stroke='%233D5C2A' stroke-width='3' fill='none' opacity='0.5'/%3E%3Cpath d='M400,265 Q410,185 430,135' stroke='%23527542' stroke-width='3' fill='none' opacity='0.5'/%3E%3Cellipse cx='130' cy='160' rx='35' ry='50' fill='%2385AA73' opacity='0.4'/%3E%3Cellipse cx='290' cy='150' rx='40' ry='55' fill='%236B8F5A' opacity='0.45'/%3E%3Cellipse cx='440' cy='145' rx='38' ry='52' fill='%2385AA73' opacity='0.42'/%3E%3C/svg%3E")`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center bottom',
-            backgroundRepeat: 'no-repeat',
-          }}
+      {/* ASSET-09: Ceiling Gum Motif (Top Left) */}
+      <motion.div
+        initial={{ y: -50, x: -50, opacity: 0, rotate: -5 }}
+        animate={{ y: 0, x: 0, opacity: 0.4, rotate: 0 }}
+        transition={{ duration: 2, ease: 'easeOut' }}
+        className="absolute -top-32 -left-32 w-[600px] h-[600px] pointer-events-none mix-blend-screen grayscale brightness-125"
+      >
+        <img
+          src={organicLabyrinth}
+          alt=""
+          className="w-full h-full object-cover rounded-full blur-3xl"
         />
       </motion.div>
 
-      {/* Stats Grid - Figma Dotted Pattern */}
-      <motion.div variants={item} className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        {/* Active Applications */}
-        <div
-          className="bg-surface-container rounded-[24px] p-6 relative overflow-hidden shadow-md border border-outline-variant"
-          style={{ backgroundImage: dottedPattern }}
-        >
-          <div className="relative z-10">
-            <FileText className="w-12 h-12 text-wattle-gold mb-4" />
-            <p className="text-[64px] font-annotation font-black text-on-surface leading-none mb-2">8</p>
-            <p className="text-on-surface-variant uppercase text-xs tracking-widest font-annotation">
-              ACTIVE APPLICATIONS
+      <motion.div
+        variants={container as any}
+        initial="hidden"
+        animate="show"
+        className="max-w-[1440px] mx-auto relative z-10 space-y-12"
+      >
+        {/* Header Section */}
+        <header className="flex flex-col md:flex-row md:items-end justify-between gap-8 border-b border-flannel-flower/10 pb-12">
+          <motion.div
+            variants={item as any}
+            className="space-y-2"
+          >
+            <p className="font-annotation text-xs text-wattle-gold tracking-[0.6em] uppercase opacity-60">
+              [ STATION.REPORT_SUMMARY ]
             </p>
-          </div>
-        </div>
-
-        {/* Offers Received */}
-        <div
-          className="bg-surface-container rounded-[24px] p-6 relative overflow-hidden shadow-md border border-outline-variant"
-          style={{ backgroundImage: dottedPattern }}
-        >
-          <div className="relative z-10">
-            <Gift className="w-12 h-12 text-warning mb-4" />
-            <p className="text-[64px] font-black text-on-surface tabular-nums leading-none mb-2">2</p>
-            <p className="text-on-surface-variant uppercase text-xs tracking-widest font-mono">
-              OFFERS RECEIVED
+            <h1 className="font-bloom text-7xl font-black text-parchment tracking-tighter uppercase leading-[0.9]">
+              THE CANOPY <span className="text-wattle-gold">VIEW</span>
+            </h1>
+            <p className="font-field-note text-lg text-flannel-flower opacity-70 italic">
+              "Archival synthesis reveals multiple growing opportunities."
             </p>
-          </div>
-        </div>
+          </motion.div>
 
-        {/* Connections */}
-        <div
-          className="bg-surface-container rounded-[24px] p-6 relative overflow-hidden shadow-md border border-outline-variant"
-          style={{ backgroundImage: dottedPattern }}
-        >
-          <div className="relative z-10">
-            <TrendingUp className="w-12 h-12 text-secondary mb-4" />
-            <p className="text-[64px] font-black text-on-surface tabular-nums leading-none mb-2">45</p>
-            <p className="text-on-surface-variant uppercase text-xs tracking-widest font-mono">
-              CONNECTIONS
-            </p>
-          </div>
-        </div>
-      </motion.div>
+          {/* Quick Stats / Mini Metrics */}
+          <motion.div
+            variants={item as any}
+            className="flex gap-6"
+          >
+            <div className="text-right">
+              <span className="block font-annotation text-[10px] text-flannel-flower-dark uppercase tracking-widest">
+                Growth Rate
+              </span>
+              <span className="text-2xl font-black text-parchment">+14%</span>
+            </div>
+            <div className="w-px bg-flannel-flower/20 h-10" />
+            <div className="text-right">
+              <span className="block font-annotation text-[10px] text-flannel-flower-dark uppercase tracking-widest">
+                Specimens Found
+              </span>
+              <span className="text-2xl font-black text-parchment">42</span>
+            </div>
+          </motion.div>
+        </header>
 
-      {/* Quick Actions - Figma Spec: Coral "Create" + Black "View" + Sage "Connect" */}
-      <motion.div variants={item} className="flex gap-4 mb-12 flex-wrap">
-        {/* Create New Document - Secondary (Coral) */}
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="bg-secondary-container text-on-secondary-container py-4 px-8 rounded-full hover:bg-secondary transition-colors font-bold uppercase tracking-wide flex items-center gap-3 shadow-lg"
-        >
-          <Plus className="w-5 h-5" />
-          <span>Create New Document</span>
-        </motion.button>
+        {/* Hero Metric Bar: High Fidelity Calibration */}
+        <motion.div variants={item as any}>
+          <Stone
+            mode="gallery"
+            elevation="raised"
+            className="p-8 md:p-12 bg-specimen-night/40 border-wattle-gold/20 flex flex-col md:flex-row items-center gap-12 overflow-hidden relative"
+          >
+            {/* Glossy Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-tr from-wattle-gold/5 via-transparent to-transparent pointer-events-none" />
 
-        {/* View Analytics - Neutral */}
-        <button className="bg-surface-container-high text-on-surface border border-outline-variant py-4 px-8 rounded-full hover:bg-surface-bright transition-colors uppercase tracking-wide font-bold shadow-md">
-          View Analytics
-        </button>
-
-        {/* CONNECT - Primary (Sage Green) */}
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="bg-primary-container text-on-primary-container py-4 px-8 rounded-full hover:bg-primary transition-colors font-bold uppercase tracking-wide shadow-lg"
-        >
-          🔌 CONNECT
-        </motion.button>
-      </motion.div>
-
-      {/* Application Profiles - Figma Spec */}
-      <motion.div variants={item} className="mb-8">
-        <div className="flex items-baseline gap-4 mb-6">
-          <h3 className="text-bloom-ultra text-3xl uppercase">
-            YOUR APPLICATION <span className="text-wattle-gold">PROFILES</span>
-          </h3>
-          <span className="text-curator-annotation hidden md:inline-block">→ specimen list</span>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {PROFILES.map((profile, idx) => (
-            <motion.div
-              key={idx}
-              whileHover={{
-                y: -8,
-                scale: 1.02,
-              }}
-              transition={{
-                type: 'spring',
-                stiffness: 250,
-                damping: 20,
-              }}
-              className="bg-surface-container rounded-[24px] p-6 relative overflow-hidden shadow-md border border-outline-variant"
-              style={{ backgroundImage: dottedPattern }}
-            >
-              <div className="relative z-10">
-                <div className="mb-4">
-                  <p className="text-on-surface mb-1 font-bold text-lg">{profile.name}</p>
-                  <p className="text-on-surface-variant uppercase text-xs tracking-wider font-mono">
-                    {profile.company}
-                  </p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-12 w-full relative z-10">
+              {/* Active Inquiries */}
+              <div className="space-y-1">
+                <div className="flex items-center gap-3 text-wattle-gold mb-3">
+                  <FileText className="w-6 h-6" />
+                  <span className="font-annotation text-[10px] uppercase tracking-[0.3em] font-bold">
+                    Active Inquiries
+                  </span>
                 </div>
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-[48px] text-primary font-black tabular-nums leading-none">
-                      {profile.score}
-                    </p>
-                    <p className="text-on-surface-variant uppercase text-xs tracking-wider font-mono">
-                      ATS SCORE
-                    </p>
-                  </div>
-                  <div
-                    className={`
-                      px-4 py-2 rounded-full uppercase text-xs tracking-wider font-mono font-bold
-                      ${profile.status === 'EXCELLENT'
-                        ? 'bg-primary-container text-on-primary-container'
-                        : profile.status === 'GOOD'
-                          ? 'bg-secondary-container text-on-secondary-container'
-                          : 'bg-error-container text-on-error-container'
-                      }
-                    `}
-                  >
-                    {profile.status}
-                  </div>
+                <div className="flex items-baseline gap-2">
+                  <span className="text-7xl font-black text-parchment leading-none tracking-tighter">
+                    08
+                  </span>
+                  <StatusBadge
+                    label="STABLE"
+                    variant="success"
+                  />
                 </div>
               </div>
-            </motion.div>
-          ))}
-        </div>
+
+              {/* Calibrated Matches */}
+              <div className="space-y-1">
+                <div className="flex items-center gap-3 text-flannel-flower mb-3">
+                  <Target className="w-6 h-6" />
+                  <span className="font-annotation text-[10px] uppercase tracking-[0.3em] font-bold">
+                    High Calibration
+                  </span>
+                </div>
+                <div className="flex items-baseline gap-2">
+                  <span className="text-7xl font-black text-parchment leading-none tracking-tighter">
+                    03
+                  </span>
+                  <span className="text-[10px] font-annotation text-wattle-gold uppercase opacity-50 tracking-widest leading-none">
+                    ≥ 90% Match
+                  </span>
+                </div>
+              </div>
+
+              {/* Station Energy / Velocity */}
+              <div className="space-y-1">
+                <div className="flex items-center gap-3 text-tertiary mb-3">
+                  <Zap className="w-6 h-6" />
+                  <span className="font-annotation text-[10px] uppercase tracking-[0.3em] font-bold">
+                    Inquiry Velocity
+                  </span>
+                </div>
+                <div className="relative pt-4">
+                  <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+                    <motion.div
+                      initial={{ width: 0 }}
+                      animate={{ width: '75%' }}
+                      transition={{ duration: 1.5, ease: 'circOut' }}
+                      className="h-full bg-gradient-to-r from-wattle-gold to-flannel-flower shadow-[0_0_10px_rgba(var(--color-wattle-gold),0.5)]"
+                    />
+                  </div>
+                  <p className="text-[9px] font-annotation text-parchment opacity-40 mt-3 uppercase tracking-widest text-right">
+                    Optimal throughput maintained
+                  </p>
+                </div>
+              </div>
+            </div>
+          </Stone>
+        </motion.div>
+
+        {/* Global Action Drawer */}
+        <motion.div
+          variants={item as any}
+          className="flex flex-wrap gap-4"
+        >
+          <Pebble
+            variant="primary"
+            size="lg"
+            className="h-16 px-10 font-bold uppercase tracking-wider shadow-glow-gold"
+          >
+            <Plus className="w-5 h-5 mr-3" /> Deposit Specimen
+          </Pebble>
+          <Pebble
+            variant="secondary"
+            size="lg"
+            className="h-16 px-10 font-bold uppercase tracking-wider backdrop-blur-md"
+          >
+            <Layout className="w-5 h-5 mr-3" /> View Archive
+          </Pebble>
+          <Pebble
+            variant="ghost"
+            size="lg"
+            className="h-16 px-10 font-bold uppercase tracking-wider border-flannel-flower/20 hover:bg-flannel-flower/5"
+          >
+            <Sparkles className="w-5 h-5 mr-3 text-wattle-gold" /> Automated Synthesis
+          </Pebble>
+        </motion.div>
+
+        {/* 2x2 Specimen Grid: Optimized Application Profiles */}
+        <section className="space-y-8">
+          <div className="flex items-baseline gap-4">
+            <h2 className="font-bloom text-3xl font-bold text-parchment uppercase tracking-tight">
+              RECENT <span className="text-wattle-gold">SYNTHESIS</span>
+            </h2>
+            <div className="flex-1 h-px bg-flannel-flower/10" />
+            <span className="font-annotation text-[9px] text-flannel-flower opacity-50 uppercase tracking-[0.4em]">
+              SPECIMEN.LOG
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+            {PROFILES.map((profile, idx) => (
+              <motion.div
+                key={idx}
+                variants={item as any}
+                whileHover={{ y: -5 }}
+                className="group"
+              >
+                <Stone
+                  mode="gallery"
+                  elevation="floating"
+                  className="p-8 border-flannel-flower/10 bg-specimen-night/20 group-hover:bg-specimen-night/40 group-hover:border-wattle-gold/30 transition-all duration-500 overflow-hidden relative"
+                >
+                  {/* Hover Bloom Effect */}
+                  <div className="absolute -inset-20 bg-wattle-gold/5 blur-[100px] opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none" />
+
+                  <div className="relative z-10 flex justify-between items-start">
+                    <div className="space-y-4">
+                      <div>
+                        <p className="font-annotation text-[10px] text-wattle-gold uppercase tracking-[0.2em] opacity-80 mb-1">
+                          {profile.company}
+                        </p>
+                        <h3 className="font-bloom text-2xl font-black text-parchment tracking-tight leading-tight uppercase group-hover:text-wattle-gold transition-colors">
+                          {profile.name}
+                        </h3>
+                      </div>
+
+                      <div className="flex items-center gap-4">
+                        <StatusBadge
+                          label={profile.status}
+                          variant={profile.status === 'EXCELLENT' ? 'success' : 'warning'}
+                          showDot
+                        />
+                        <span className="font-annotation text-[9px] text-flannel-flower opacity-40 uppercase tracking-widest leading-none">
+                          Last Audit: 2m ago
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="text-right">
+                      <div className="text-6xl font-black text-parchment tracking-tighter leading-none mb-1 tabular-nums group-hover:scale-110 transition-transform origin-right">
+                        {profile.score}
+                      </div>
+                      <p className="font-annotation text-[9px] text-wattle-gold uppercase tracking-widest font-bold opacity-60">
+                        Calibration
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="mt-8 pt-6 border-t border-flannel-flower/5 flex justify-between items-center relative z-10">
+                    <button className="text-[10px] font-annotation text-flannel-flower uppercase tracking-widest hover:text-parchment transition-colors">
+                      Generate Artifacts →
+                    </button>
+                  </div>
+                </Stone>
+              </motion.div>
+            ))}
+          </div>
+        </section>
       </motion.div>
-    </motion.div>
+
+      {/* Viscous Breeze Shadowplay (Bottom Right) */}
+      <motion.div
+        animate={{
+          scale: [1, 1.1, 1],
+          opacity: [0.3, 0.4, 0.3],
+          x: [0, 20, 0],
+          y: [0, -20, 0],
+        }}
+        transition={{ duration: 15, repeat: Infinity, ease: 'linear' }}
+        className="absolute -bottom-64 -right-64 w-[800px] h-[800px] rounded-full bg-gradient-to-tl from-flannel-flower/10 via-transparent to-transparent blur-3xl pointer-events-none"
+      />
+    </div>
   );
 }
+
+export default Dashboard;

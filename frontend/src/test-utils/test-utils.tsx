@@ -1,12 +1,12 @@
 /**
- * ELECTRIC ALCHEMIST: TEST UTILITIES
+ * NORTHCOTE CURIO: TEST UTILITIES
  *
- * Testing utilities for React Testing Library with Electric Alchemist design system support.
+ * Testing utilities for React Testing Library with Northcote Curio design system support.
  * Replaces MUI ThemeProvider with design system context.
  */
 
-import React, { ReactElement } from 'react';
 import { render, RenderOptions } from '@testing-library/react';
+import React, { ReactElement } from 'react';
 
 const AllTheProviders = ({ children }: { children: React.ReactNode }) => {
   return <>{children}</>;

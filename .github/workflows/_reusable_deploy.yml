@@ -1,0 +1,149 @@
+# .github/workflows/_reusable_deploy.yml
+
+name: Reusable Deploy
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        required: true
+        type: string
+      commit-sha:
+        required: true
+        type: string
+      ci-run-id:
+        required: true
+        type: string
+
+env:
+  GCP_REGION: us-central1
+  GCP_REGISTRY: us-central1-docker.pkg.dev
+  GCP_IMAGE_NAME: backend
+
+jobs:
+  deploy:
+    name: Deploy to ${{ inputs.environment }}
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
+    timeout-minutes: 20
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4 # v4.1.7
+
+      - name: Set environment variables
+        id: env-vars
+        run: |
+          if [[ "${{ inputs.environment }}" == "staging" ]]; then
+            echo "GCP_PROJECT_ID=careercopilot-staging" >> $GITHUB_ENV
+            echo "GCP_REPOSITORY=careercopilot-repo" >> $GITHUB_ENV
+            echo "FIREBASE_PROJECT=staging" >> $GITHUB_ENV
+            echo "WIF_PROVIDER=${{ secrets.STAGING_GCP_WORKLOAD_IDENTITY_PROVIDER }}" >> $GITHUB_ENV
+            echo "SERVICE_ACCOUNT=${{ secrets.STAGING_GCP_SERVICE_ACCOUNT }}" >> $GITHUB_ENV
+          elif [[ "${{ inputs.environment }}" == "production" ]]; then
+            echo "GCP_PROJECT_ID=careercopilot-468811" >> $GITHUB_ENV
+            echo "GCP_REPOSITORY=careercopilot" >> $GITHUB_ENV
+            echo "FIREBASE_PROJECT=production" >> $GITHUB_ENV
+            echo "WIF_PROVIDER=${{ secrets.PROD_GCP_WORKLOAD_IDENTITY_PROVIDER }}" >> $GITHUB_ENV
+            echo "SERVICE_ACCOUNT=${{ secrets.PROD_GCP_SERVICE_ACCOUNT }}" >> $GITHUB_ENV
+          fi
+
+      - name: Download frontend artifact
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "Downloading frontend artifact from CI run ${{ inputs.ci-run-id }}"
+          gh run download ${{ inputs.ci-run-id }} --name frontend-dist --dir frontend/dist || exit 1
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'yarn'
+          cache-dependency-path: yarn.lock
+
+      - name: Build frontend if artifact unavailable
+        run: |
+          if [ ! -d "frontend/dist" ] || [ -z "$(ls -A frontend/dist)" ]; then
+            echo "Frontend dist is empty, building frontend..."
+            yarn install --immutable
+            yarn workspace careercopilot-frontend build
+          else
+            echo "Frontend artifact found, skipping build"
+          fi
+
+      - name: Authenticate to Google Cloud
+        id: auth
+        uses: google-github-actions/auth@v2 # v2.1.3
+        with:
+          workload_identity_provider: ${{ env.WIF_PROVIDER }}
+          service_account: ${{ env.SERVICE_ACCOUNT }}
+          create_credentials_file: true
+
+      - name: Install Firebase CLI
+        run: npm install -g firebase-tools
+
+      - name: Deploy Frontend to Firebase Hosting
+        run: |
+          echo "Deploying to Firebase Hosting (${{ env.FIREBASE_PROJECT }})"
+          echo "Project ID: ${{ env.GCP_PROJECT_ID }}"
+          echo "Using WIF credentials from: $GOOGLE_APPLICATION_CREDENTIALS"
+
+          # Verify frontend build exists
+          if [ ! -d "frontend/dist" ] || [ -z "$(ls -A frontend/dist)" ]; then
+            echo "::error::Frontend dist directory is empty or doesn't exist"
+            exit 1
+          fi
+
+          # Deploy using Firebase CLI with WIF credentials
+          firebase deploy --only hosting --project ${{ env.FIREBASE_PROJECT }} --non-interactive
+
+      - name: Setup Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2 # v2.1.0
+
+      - name: Verify Backend Image Tag Exists
+        id: verify-image
+        run: |
+          SHORT_SHA="${{ inputs.commit-sha }}"
+          IMAGE_TAG_SHA="${SHORT_SHA:0:7}"
+          IMAGE_PATH="${{ env.GCP_REGISTRY }}/${{ env.GCP_PROJECT_ID }}/${{ env.GCP_REPOSITORY }}/${{ env.GCP_IMAGE_NAME }}"
+          echo "Checking for image tag: $IMAGE_TAG_SHA in $IMAGE_PATH"
+          if gcloud artifacts docker tags list "$IMAGE_PATH" --format="value(tag)" | grep -q "^${IMAGE_TAG_SHA}$"; then
+            echo "Image tag $IMAGE_TAG_SHA verified."
+            echo "image_tag=${IMAGE_TAG_SHA}" >> $GITHUB_OUTPUT
+          else
+            echo "::error::Image tag $IMAGE_TAG_SHA not found."
+            exit 1
+          fi
+
+      - name: Deploy Backend to Cloud Run
+        id: deploy-backend
+        uses: google-github-actions/deploy-cloudrun@v2 # v2.1.0
+        with:
+          service: backend
+          image: ${{ env.GCP_REGISTRY }}/${{ env.GCP_PROJECT_ID }}/${{ env.GCP_REPOSITORY }}/${{ env.GCP_IMAGE_NAME }}:${{ steps.verify-image.outputs.image_tag }}
+          region: ${{ env.GCP_REGION }}
+          project_id: ${{ env.GCP_PROJECT_ID }}
+
+      - name: Health check for backend
+        id: health-check
+        run: |
+          SERVICE_URL="${{ steps.deploy-backend.outputs.url }}"
+          echo "Checking health of backend at $SERVICE_URL/health"
+          MAX_RETRIES=24
+          RETRY_DELAY=5
+          for i in $(seq 1 $MAX_RETRIES); do
+            HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$SERVICE_URL/health" || echo "000")
+            if [ "$HTTP_STATUS" = "200" ]; then
+              echo "Backend is healthy"
+              exit 0
+            fi
+            if [ $i -lt $MAX_RETRIES ]; then
+              echo "Backend not ready yet (attempt $i/$MAX_RETRIES), HTTP status: $HTTP_STATUS. Retrying in $RETRY_DELAY seconds..."
+              sleep $RETRY_DELAY
+            fi
+          done
+          echo "Backend health check failed after $MAX_RETRIES attempts"
+          exit 1

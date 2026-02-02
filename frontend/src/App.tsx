@@ -1,4 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion';
+import { useEffect } from 'react';
 import {
   Navigate,
   Outlet,
@@ -8,10 +9,13 @@ import {
   useLocation,
 } from 'react-router-dom';
 import { Toaster } from 'sonner';
-import texturePattern from './assets/images/texture-pattern.png';
+import texturePattern from './assets/textures/paper-grain.png';
+import { TokenTest } from './components/debug/TokenTest';
+import { getModeForRoute } from './config/routeModeMap';
 import { useAuth } from './context/AuthContext';
 import { AssetLibrary } from './features/analysis/AssetLibrary';
 import { ApplicationTracker } from './features/applications/ApplicationTracker';
+import { CoverLetterGenerator } from './features/applications/CoverLetterGenerator';
 import { Login } from './features/auth/Login';
 import { Register } from './features/auth/Register';
 import { Dashboard } from './features/dashboard/Dashboard';
@@ -19,6 +23,7 @@ import { Documents } from './features/documents/Documents';
 import { KSCGenerator } from './features/ksc-generator/KSCGenerator';
 import { LandingPage } from './features/landing/LandingPage';
 import { NotFound } from './features/not-found/NotFound';
+import { OnboardingPage } from './features/onboarding/OnboardingPage';
 import { Opportunities } from './features/opportunities/Opportunities';
 import { ProfileView } from './features/profile/components/ProfileView';
 import { Settings } from './features/settings/Settings';
@@ -27,6 +32,27 @@ import { Layout } from './layouts/Layout';
 import { AnalysisPage } from './pages/AnalysisPage';
 import { IngestionPage } from './pages/IngestionPage';
 import { JobQueue } from './pages/JobQueue';
+import { useModeStore } from './stores/useModeStore';
+
+/**
+ * ModeSync Component
+ * Automatically switches between Gallery and Laboratory modes based on the current route
+ */
+function ModeSync() {
+  const location = useLocation();
+  const setMode = useModeStore((state) => state.setMode);
+
+  useEffect(() => {
+    const requiredMode = getModeForRoute(location.pathname);
+    setMode(requiredMode);
+
+    if (import.meta.env.DEV) {
+      console.log(`[ModeSync] Route: ${location.pathname} → Mode: ${requiredMode}`);
+    }
+  }, [location.pathname, setMode]);
+
+  return null; // Logic-only component
+}
 
 // Protected Layout with animations
 const ProtectedLayout = () => {
@@ -127,6 +153,7 @@ export default function App() {
         v7_relativeSplatPath: true,
       }}
     >
+      <ModeSync />
       <Toaster
         position="top-right"
         theme="dark"
@@ -159,6 +186,10 @@ export default function App() {
           <Route
             path="/dashboard"
             element={<Dashboard />}
+          />
+          <Route
+            path="/onboarding"
+            element={<OnboardingPage />}
           />
           <Route
             path="/tracker"
@@ -207,6 +238,10 @@ export default function App() {
           <Route
             path="/style-guide"
             element={<StyleGuide />}
+          />
+          <Route
+            path="/test-tokens"
+            element={<TokenTest />}
           />
         </Route>
       </Routes>

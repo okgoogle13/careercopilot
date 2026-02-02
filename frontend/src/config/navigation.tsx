@@ -1,47 +1,47 @@
 /**
- * ELECTRIC ALCHEMIST: NAVIGATION CONFIGURATION
+ * NORTHCOTE CURIO: NAVIGATION CONFIGURATION
  *
  * Navigation structure using lucide-react icons instead of MUI icons.
- * Uses Electric Alchemist design system tokens.
+ * Uses Northcote Curio design system tokens.
  */
 
-import React from 'react';
 import {
-  Home,
-  FolderOpen,
-  UploadCloud,
-  FileText,
-  Mail,
-  History,
-  Wrench,
-  Edit,
-  Search,
-  HelpingHand,
-  Mic,
-  TrendingUp,
-  GraduationCap,
-  Brain,
-  BarChart3,
-  CreditCard,
-  User,
-  Settings,
-  Award,
-  HelpCircle,
-  LogOut,
-  Clock,
   AlertCircle,
-  CheckCircle2,
+  FileText as Article,
+  Award,
+  BarChart3,
   Bookmark,
+  Brain,
   Calendar,
-  Upload,
+  CheckCircle2,
+  Clock,
+  CreditCard,
   Download,
+  Edit,
+  FileText,
+  FolderOpen,
+  Folder as FolderShared,
+  GraduationCap,
+  HelpCircle,
+  HelpingHand,
+  History,
+  Home,
+  LogOut,
+  Mail,
+  Mic,
   Pencil,
-  Trash2,
+  Search,
+  Settings,
   Share2,
   Sliders,
-  FileText as Article,
-  Folder as FolderShared,
+  Trash2,
+  TrendingUp,
+  Upload,
+  UploadCloud,
+  User,
+  Wrench,
 } from 'lucide-react';
+import React from 'react';
 
 export interface NavItem {
   id: string;
