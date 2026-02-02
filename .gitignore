@@ -125,6 +125,12 @@ test-results/
 # Legacy Archive (Pre-Flight Cleanup)
 _archive_legacy/
 credentials.json
+
+# Branch consolidation output files
+branch_analysis.json
+branch_analysis_output.txt
+consolidation_log.txt
+
 # Archived Configs
 *.archived-*
 setup-ci-secrets.sh
