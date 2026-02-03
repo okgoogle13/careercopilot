@@ -32,7 +32,7 @@ print_warning() {
 print_header "M3 Token Consistency Verification"
 
 # Check if design tokens file exists
-TOKENS_FILE="frontend/src/styles/m3-design-tokens.css"
+TOKENS_FILE="frontend/src/styles/design-tokens.css"
 if [ ! -f "$TOKENS_FILE" ]; then
     print_error "Design tokens file not found: $TOKENS_FILE"
     exit 1
@@ -42,7 +42,7 @@ print_success "Design tokens file found"
 
 # Extract all token names from the CSS file
 print_header "Step 1: Extracting Design Tokens"
-TOKEN_COUNT=$(grep -oE '--md-sys-[a-z-]+:[^;]+' "$TOKENS_FILE" | wc -l | tr -d ' ')
+TOKEN_COUNT=$(grep -oE '--[a-z-]+:[^;]+' "$TOKENS_FILE" | wc -l | tr -d ' ')
 print_success "Found $TOKEN_COUNT design tokens"
 
 # Check for common token categories
@@ -51,7 +51,7 @@ print_header "Step 2: Verifying Token Categories"
 CATEGORIES=("color" "spacing" "shape" "typography" "motion" "elevation")
 
 for category in "${CATEGORIES[@]}"; do
-    COUNT=$(grep -cE "--md-sys-$category-" "$TOKENS_FILE" || echo "0")
+    COUNT=$(grep -cE "$category" "$TOKENS_FILE" || echo "0")
     if [ "$COUNT" -gt 0 ]; then
         print_success "$category tokens: $COUNT found"
     else
@@ -62,9 +62,9 @@ done
 # Check component CSS files for token usage
 print_header "Step 3: Verifying Component Token Usage"
 
-COMPONENT_DIR="frontend/src/components/m3-expressive"
+COMPONENT_DIR="frontend/src/components"
 if [ ! -d "$COMPONENT_DIR" ]; then
-    print_error "M3 components directory not found: $COMPONENT_DIR"
+    print_error "Components directory not found: $COMPONENT_DIR"
     exit 1
 fi
 
@@ -88,9 +88,9 @@ while IFS= read -r css_file; do
             print_warning "$(basename "$css_file"): $HARDCODED potential hardcoded values"
             HARDCODED_VALUES=$((HARDCODED_VALUES + HARDCODED))
         fi
-        
+
         # Check for token usage
-        TOKEN_USAGE=$(grep -cE "--md-sys-" "$css_file" || echo "0")
+        TOKEN_USAGE=$(grep -cE "--sys-" "$css_file" || echo "0")
         if [ "$TOKEN_USAGE" -eq 0 ] && [ -s "$css_file" ]; then
             print_warning "$(basename "$css_file"): No design tokens found"
             MISSING_TOKENS=$((MISSING_TOKENS + 1))
@@ -118,4 +118,3 @@ else
     echo "Recommendation: Review components and replace hardcoded values with design tokens"
     exit 1
 fi
-
