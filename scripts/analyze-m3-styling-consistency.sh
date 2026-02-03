@@ -31,11 +31,11 @@ print_error() {
 
 print_header "M3 Styling Consistency Analysis"
 
-COMPONENT_DIR="frontend/src/components/m3-expressive"
-TOKENS_FILE="frontend/src/styles/m3-design-tokens.css"
+COMPONENT_DIR="frontend/src/components"
+TOKENS_FILE="frontend/src/styles/design-tokens.css"
 
 if [ ! -d "$COMPONENT_DIR" ]; then
-    print_error "M3 components directory not found: $COMPONENT_DIR"
+    print_error "Components directory not found: $COMPONENT_DIR"
     exit 1
 fi
 
@@ -62,7 +62,7 @@ print_header "Step 1: Checking for Hardcoded Values"
 while IFS= read -r css_file; do
     if [ -f "$css_file" ]; then
         filename=$(basename "$css_file")
-        
+
         # Check for hardcoded colors (exclude rgba with calc/var which are token-based)
         hardcoded_colors=$(grep -oE "(#[0-9a-fA-F]{3,6}|rgb\([^)]+\)|rgba\([^)]+\))" "$css_file" 2>/dev/null | grep -vE "(var\(|calc\()" | wc -l | tr -d ' ' || echo "0")
         hardcoded_colors=${hardcoded_colors:-0}
@@ -70,7 +70,7 @@ while IFS= read -r css_file; do
             print_warning "$filename: $hardcoded_colors hardcoded color(s) found"
             HARDCODED_COLORS=$((HARDCODED_COLORS + hardcoded_colors))
         fi
-        
+
         # Check for hardcoded spacing (px values that should be tokens, exclude common border widths)
         hardcoded_spacing=$(grep -oE "[0-9]+px" "$css_file" 2>/dev/null | grep -vE "(0px|1px|2px|3px)" | wc -l | tr -d ' ' || echo "0")
         hardcoded_spacing=${hardcoded_spacing:-0}
@@ -78,7 +78,7 @@ while IFS= read -r css_file; do
             print_warning "$filename: $hardcoded_spacing hardcoded spacing value(s) found"
             HARDCODED_SPACING=$((HARDCODED_SPACING + hardcoded_spacing))
         fi
-        
+
         # Check for hardcoded shadows (box-shadow with hardcoded values, exclude elevation tokens)
         hardcoded_shadows=$(grep -E "box-shadow:\s*[0-9]" "$css_file" 2>/dev/null | grep -vE "--md-sys-elevation" | wc -l | tr -d ' ' || echo "0")
         hardcoded_shadows=${hardcoded_shadows:-0}
@@ -86,9 +86,9 @@ while IFS= read -r css_file; do
             print_warning "$filename: $hardcoded_shadows hardcoded shadow(s) found"
             HARDCODED_SHADOWS=$((HARDCODED_SHADOWS + hardcoded_shadows))
         fi
-        
+
         # Check for missing token usage
-        token_usage=$(grep -E "--md-sys-" "$css_file" 2>/dev/null | wc -l | tr -d ' ' || echo "0")
+        token_usage=$(grep -E "--sys-" "$css_file" 2>/dev/null | wc -l | tr -d ' ' || echo "0")
         token_usage=${token_usage:-0}
         if [ "$token_usage" -eq 0 ] && [ -s "$css_file" ]; then
             print_warning "$filename: No design tokens found"
@@ -101,12 +101,12 @@ print_header "Step 2: Token Usage Analysis"
 
 # Count token categories used (portable across grep versions - BSD and GNU)
 # Use find + grep for portability instead of --include flag
-COLOR_TOKENS=$(find "$COMPONENT_DIR" -name "*.css" -type f -exec grep -hE "--md-sys-color-" {} + 2>/dev/null | wc -l | tr -d ' ' || echo "0")
-SPACING_TOKENS=$(find "$COMPONENT_DIR" -name "*.css" -type f -exec grep -hE "--md-sys-spacing-" {} + 2>/dev/null | wc -l | tr -d ' ' || echo "0")
-SHAPE_TOKENS=$(find "$COMPONENT_DIR" -name "*.css" -type f -exec grep -hE "--md-sys-shape-" {} + 2>/dev/null | wc -l | tr -d ' ' || echo "0")
-TYPOGRAPHY_TOKENS=$(find "$COMPONENT_DIR" -name "*.css" -type f -exec grep -hE "--md-sys-typescale-" {} + 2>/dev/null | wc -l | tr -d ' ' || echo "0")
-ELEVATION_TOKENS=$(find "$COMPONENT_DIR" -name "*.css" -type f -exec grep -hE "--md-sys-elevation-" {} + 2>/dev/null | wc -l | tr -d ' ' || echo "0")
-MOTION_TOKENS=$(find "$COMPONENT_DIR" -name "*.css" -type f -exec grep -hE "--md-sys-motion-" {} + 2>/dev/null | wc -l | tr -d ' ' || echo "0")
+COLOR_TOKENS=$(find "$COMPONENT_DIR" -name "*.css" -type f -exec grep -hE "--sys-color-" {} + 2>/dev/null | wc -l | tr -d ' ' || echo "0")
+SPACING_TOKENS=$(find "$COMPONENT_DIR" -name "*.css" -type f -exec grep -hE "--sys-space-" {} + 2>/dev/null | wc -l | tr -d ' ' || echo "0")
+SHAPE_TOKENS=$(find "$COMPONENT_DIR" -name "*.css" -type f -exec grep -hE "--sys-shape-" {} + 2>/dev/null | wc -l | tr -d ' ' || echo "0")
+TYPOGRAPHY_TOKENS=$(find "$COMPONENT_DIR" -name "*.css" -type f -exec grep -hE "--sys-typescale-" {} + 2>/dev/null | wc -l | tr -d ' ' || echo "0")
+ELEVATION_TOKENS=$(find "$COMPONENT_DIR" -name "*.css" -type f -exec grep -hE "--sys-elevation-" {} + 2>/dev/null | wc -l | tr -d ' ' || echo "0")
+MOTION_TOKENS=$(find "$COMPONENT_DIR" -name "*.css" -type f -exec grep -hE "--sys-motion-" {} + 2>/dev/null | wc -l | tr -d ' ' || echo "0")
 
 print_success "Token Usage Statistics:"
 echo "  • Color tokens: $COLOR_TOKENS"
@@ -167,4 +167,3 @@ else
     echo "  4. Review components with missing tokens"
     exit 1
 fi
-
