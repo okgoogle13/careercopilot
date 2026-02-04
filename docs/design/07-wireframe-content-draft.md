@@ -1,0 +1,212 @@
+# Northcote Curio: Content & Asset Integration Draft
+
+**Document ID:** CONTENT-001-DRAFT
+**Status:** Creative Draft
+**Dependencies:** `docs/design/06-wireframes.md`, `ASSET-001-CURIO`
+
+---
+
+## Executive Summary
+
+This document provides the specific "Victorian Naturalist" copy and precise asset placement instructions for the pages identified as having **Critical Asset Gaps**. It orchestrates the "Northcote Typography Strategy" (Expressive/Workhorse/Accent) alongside the missing assets to ensure a cohesive implementation once assets are generated.
+
+---
+
+## Page 1: Landing ("The Resurrection")
+
+**Missing Assets:**
+
+- `ASSET-7` (Firefly Sprite)
+- `ASSET-16` (Wattle Hanging Branch)
+- `ASSET-9` (Waratah Hero Closeup) -> _Proposed as "Future Specimen" container background or Hero accent._
+
+### Copy & Typography Strategy
+
+| Element           | Draft Copy                                                       | Typography Token / Settings                                                                                  |
+| :---------------- | :--------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------- |
+| **Hero Headline** | THE<br>RESURRECTION                                              | **Font:** Libre Bodoni Italic<br>**Size:** 96px (Display Hero)<br>**Color:** `wattleGold`                    |
+| **Subhead**       | _Your professional history, re-catalogued as a living specimen._ | **Font:** Fraunces Variable<br>**Settings:** `opsz`=144, `WONK`=1, `SOFT`=50<br>**Color:** `parchment` (80%) |
+| **CTA Primary**   | COMMENCE EXCAVATION                                              | **Font:** JetBrains Mono<br>**Settings:** Uppercase, tracking 0.2em                                          |
+| **CTA Secondary** | VIEW THE CATALOGUE                                               | **Font:** Work Sans (Body)<br>**Weight:** 400                                                                |
+
+### Asset Integration Guide (Gap Fill)
+
+> **[DEFINED: ASSET-16 Wattle Hanging Branch]**
+>
+> - **Location:** Top-Right Viewport Corner (`position: absolute; top: -15%; right: -5%`).
+> - **Dimensions:** ~600x400px (Natural aspect ratio).
+> - **Z-Index:** 2 (Content Layer).
+> - **Interaction:** Parallax factor 0.15 (slower than scroll). Subtle mouse-reactive sway (max 2deg rotation).
+> - **Context:** Organic Frame - drapes over the "Login" utility, softening the digital edge with "Victorian Greenhouse" aesthetics.
+
+> **[DEFINED: ASSET-7 Firefly Sprite]**
+>
+> - **Count:** 12-16 instances.
+> - **Logic:** `will-change: transform, opacity`.
+> - **Animation:** `float-pulse` (4s ease-in-out infinite alternate).
+> - **Opacity:** Randomize between 0.4 and 0.8.
+> - **Scale:** Randomize between 0.8 and 1.2.
+> - **Context:** Bioluminescent Atmospherics - eliminates "flat black" by adding depth and life to "The Void".
+
+> **[DEFINED: ASSET-9 Waratah Hero Closeup]**
+>
+> - **Location:** Absolute center of `glassmorphism.hero-container`.
+> - **Blend Mode:** `luminosity` at 40% opacity (Ghosted) OR `normal` at 100% if used as main subject.
+> - **Animation:** Fade-in from black on load (1.5s duration).
+> - **Context:** The "Future Specimen" - the vibrant potential of the user's career, captured in macro detail.
+
+---
+
+## Page 2: Authentication ("The Entry Gate")
+
+**Missing Assets:**
+
+- `ASSET-7` (Firefly Sprite)
+- `ASSET-15` (Brass Compass Navigation) -> _Critical Gap_
+
+### Copy & Typography Strategy
+
+| Element         | Draft Copy                           | Typography Token / Settings                                                  |
+| :-------------- | :----------------------------------- | :--------------------------------------------------------------------------- |
+| **Card Header** | IDENTIFY YOURSELF                    | **Font:** Fraunces Variable<br>**Settings:** `WONK`=0, `SOFT`=100 (Inviting) |
+| **Helper Text** | _Access the Northcote Conservatory._ | **Font:** Lora Variable (Italic)                                             |
+
+### Asset Integration Guide (Gap Fill)
+
+> **[DEFINED: ASSET-15 Brass Compass Navigation]**
+>
+> - **Location:** Centered _beneath_ the Auth Card (`bottom: -90px`).
+> - **Dimensions:** 180x180px.
+> - **Opacity:** 60% (Brass texture must remain visible).
+> - **State:** Static (North = 0deg).
+> - **Interaction:**
+>   - **Input Focus:** Rotate +15deg (Spring: stiffness 100, damping 10).
+>   - **Input Blur:** Return to 0deg.
+> - **Metaphor:** "Finding one's bearing" - confirms user intent before entering the collection.
+
+---
+
+## Page 4: Ingestion ("The Mulch & Mineral Setup")
+
+**Missing Assets:**
+
+- `ASSET-14` (Skeleton Anatomical Etching) -> _Critical Gap for background_
+- `ASSET-8` (Fossil Verification Mark) -> _The "Success" State_
+- `ASSET-15` (Compass)
+
+### Copy & Typography Strategy
+
+| Element             | Draft Copy                                        | Typography Token / Settings                                                |
+| :------------------ | :------------------------------------------------ | :------------------------------------------------------------------------- |
+| **Headline**        | DEPOSIT SPECIMEN                                  | **Font:** Fraunces Variable<br>**Settings:** `WONK`=0, `SOFT`=0 (Clinical) |
+| **Drop Zone Label** | DROP PDF HERE<br>FOR DISSECTION                   | **Font:** JetBrains Mono<br>**Style:** Dashed border context               |
+| **Success Message** | _Specimen Verified. Organic integrity confirmed._ | **Font:** Lora Variable<br>**Color:** `wattleGold`                         |
+
+### Asset Integration Guide (Gap Fill)
+
+> **[DEFINED: ASSET-14 Skeleton Anatomical Etching]**
+>
+> - **Location:** Centered strictly behind the Drop Zone.
+> - **Opacity:** 4-6% (Watermark).
+> - **Blend Mode:** `multiply` against Parchment background.
+> - **Subject:** Osteologically accurate ribcage or vertebrae.
+> - **Context:** Analysis Depth - suggests the resume is being X-rayed and analyzed down to its structural bones.
+>
+> **[DEFINED: ASSET-8 Fossil Verification Mark]**
+>
+> - **Location:** Overlapping Bottom-Right corner of Drop Zone.
+> - **Trigger:** `onUploadSuccess`.
+> - **Animation:** Scale (2.0 -> 1.0), Rotate (-30deg -> -5deg).
+> - **Timing:** 0.4s `cubic-bezier(0.34, 1.56, 0.64, 1)` (Viscous Breeze/Bounce).
+> - **Context:** The "Glossopteris" Stamp - definitive, official, archival approval.
+
+---
+
+## Page 5: Analysis Dashboard ("The Audit Microscope")
+
+**Missing Assets:**
+
+- `ASSET-12` (Laboratory Grid Major)
+- `ASSET-15` (Compass - Functioning Gauge)
+
+### Copy & Typography Strategy
+
+| Element         | Draft Copy      | Typography Token / Settings                         |
+| :-------------- | :-------------- | :-------------------------------------------------- |
+| **Gauge Label** | ALIGNMENT SCORE | **Font:** JetBrains Mono (Annotation)               |
+| **Score Value** | 94.2%           | **Font:** Work Sans (Thin/Light)<br>**Size:** 120px |
+
+### Asset Integration Guide (Gap Fill)
+
+> **[DEFINED: ASSET-12 Laboratory Grid Major]**
+>
+> - **Type:** SVG Pattern coverage.
+> - **Style:** 1px stroke, Spacing 100px.
+> - **Color:** `#2C2723` @ 5% opacity.
+> - **Behavior:** Static. Fixed to viewport.
+> - **Context:** "The Lens" - transforms the screen into a measurement surface/graph paper for quantification.
+>
+> **[DEFINED: ASSET-15 Compass (As Gauge)]**
+>
+> - **Location:** Left Column Dashboard Widget.
+> - **Function:** Data Visualization (Gauge).
+> - **Logic:** Needle angle mapped to Analysis Score (0% = -90deg, 100% = +90deg).
+> - **Transition:** 1.2s ease-out settle.
+> - **Context:** Instrument of Measurement - recontextualizing the navigation tool as a precise analytic device.
+
+---
+
+## Page 7: Kanban ("The Command Center Greenhouse")
+
+**Missing Assets:**
+
+- `ASSET-17` (Eucalyptus Hanging Ceiling Gum) -> _Critical for "Greenhouse" feel_
+- `ASSET-19` (Eucalyptus Kanban Column) -> _Structural separator_
+
+### Copy & Typography Strategy
+
+| Element           | Draft Copy               | Typography Token / Settings                                      |
+| :---------------- | :----------------------- | :--------------------------------------------------------------- |
+| **Board Title**   | THE CULTIVATION<br>CYCLE | **Font:** Fraunces Variable<br>**Settings:** `WONK`=1, `SOFT`=25 |
+| **Column Header** | OFFER STAGE              | **Font:** JetBrains Mono<br>**Decoration:** Underline double     |
+
+### Asset Integration Guide (Gap Fill)
+
+> **[DEFINED: ASSET-17 Eucalyptus Hanging Ceiling Gum]**
+>
+> - **Location:** Spanning entire Top Viewport Edge (`width: 100vw`).
+> - **Height:** ~25vh.
+> - **Z-Index:** 10 (Foreground Layer - above content).
+> - **Effect:** Parallax Factor 0.25 (Faster than background). Blur: 2px (Depth of Field).
+> - **Context:** "Canopy Immersion" - places the user physically _under_ the tree, looking up/out at their work.
+>
+> **[DEFINED: ASSET-19 Eucalyptus Kanban Column]**
+>
+> - **Location:** Vertical separator between columns.
+> - **Width:** ~40-60px (Natural stem width).
+> - **Opacity:** 100% (Solid biome element).
+> - **Context:** Structural Vegetation - replaces sterile CSS borders with organic verticality to frame the "Garden" of tasks.
+
+---
+
+## Page 11: Dashboard Overview ("The Canopy View")
+
+**Missing Assets:**
+
+- `ASSET-17` (Eucalyptus Hanging)
+- `ASSET-7` (Firefly Sprite)
+
+### Copy & Typography Strategy
+
+| Element           | Draft Copy                   | Typography Token / Settings                     |
+| :---------------- | :--------------------------- | :---------------------------------------------- |
+| **Hero Greeting** | _The ecosystem is thriving._ | **Font:** Libre Bodoni Italic<br>**Size:** 48px |
+
+### Asset Integration Guide (Gap Fill)
+
+> **[DEFINED: ASSET-17 Eucalyptus Hanging]**
+>
+> - **Location:** Dramatic Top-Left Foreground.
+> - **Z-Index:** 4 (Highest).
+> - **Blur:** 2-4px (Depth of Field).
+> - **Context:** Voyeuristic Framing - peering through the foliage at the "Ecosystem" of career data below.
