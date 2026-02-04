@@ -5,8 +5,8 @@
  * design system physics.
  */
 
+import tokens from '@/design/tokens/tokens.json';
 import type { Transition, Variants } from 'framer-motion';
-import tokens from '../../../design-system/tokens.json';
 
 /**
  * PHYSICS 1: TACTILE PRESS

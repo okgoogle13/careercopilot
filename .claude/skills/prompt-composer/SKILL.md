@@ -33,6 +33,7 @@ Eliminates manual prompt construction. Loads pattern library → applies templat
 Loads validated patterns from `/docs/northcote-asset-generation-patterns.md`:
 
 **Pattern 1: Production Intent**
+
 ```
 MAXIMUM RESOLUTION: Generate at highest quality (no compression)
 EXPORT FORMAT: PNG with zero artifacts
@@ -40,6 +41,7 @@ PRODUCTION ASSET: Not concept exploration—final deliverable
 ```
 
 **Pattern 2: Geographic Authenticity**
+
 ```
 ENDEMIC TEST: Every specimen must answer "Did this organism challenge European taxonomy?"
 AUSTRALIAN ONLY: NO European fauna, generic specimens, northern hemisphere species
@@ -47,6 +49,7 @@ MANDATORY CHECK: [List specimens] → validate against Australian Flora/Fauna Da
 ```
 
 **Pattern 3: Translucency Tiers**
+
 ```
 TIER 1 (60-80% transmission): Spider molt, thin membranes
 TIER 2 (40-60% transmission): Frill-neck tissue, thick leaves
@@ -55,6 +58,7 @@ SYNTAX: "[X-Y% light-transmissive] + [what visible through material]"
 ```
 
 **Pattern 4: Negative Constraints**
+
 ```
 For each specimen: "This is NOT [misinterpretation]"
 Echidna: NOT full animal body, NOT cute portrait
@@ -63,6 +67,7 @@ Frill-neck: NOT standing lizard, NOT profile view
 ```
 
 **Pattern 5: Density Zone Safety Margins**
+
 ```
 Upper-left: 15% coverage maximum (NOT 20%) + 200×200px EMPTY
 Lower-right: 25% coverage maximum (NOT 30%) + 150×150px EMPTY
@@ -70,6 +75,7 @@ Central: 60-80% Wunderkammer density
 ```
 
 **Pattern 6: Typography Constraints**
+
 ```
 FONT: Crimson Text or period-appropriate serif
 COLOR: Cream #F5F0E8 at 85% opacity
@@ -83,20 +89,26 @@ FORMAT: "Fig. X. Scientific name (Common name)"
 # ASSET [N]: [Name] | [Resolution] | Attempt [N]
 
 ## SECTION 1: PRODUCTION INTENT
+
 [Pattern 1 template]
 
 ## SECTION 2: VALIDATED PATTERNS FROM PREVIOUS SUCCESSES
+
 From Asset 1 (91/100): [Applicable patterns]
 From Asset 2 (94/100): [Applicable patterns]
 
 ## SECTION 3: SPECIMEN INVENTORY WITH NEGATIVE CONSTRAINTS
+
 PRIMARY (13-18cm):
+
 - [Specimen name]: [Description] | NOT [misinterpretation]
 
 SECONDARY (8-12cm):
+
 - [Specimen name]: [Description] | NOT [misinterpretation]
 
 TERTIARY (2-8cm):
+
 - [Specimen name]: [Description] | NOT [misinterpretation]
 
 GEOGRAPHIC AUTHENTICITY TEST:
@@ -104,22 +116,27 @@ GEOGRAPHIC AUTHENTICITY TEST:
 ✓ [Specimen]: Australian endemic, [taxonomic significance]
 
 ## SECTION 4: TRANSLUCENCY PHYSICS (if applicable)
+
 [Only if specimens require transmission]
+
 - [Specimen]: [Tier X] [X-Y% light-transmissive]
   What visible through: [botanical elements, background, other specimens]
 
 ## SECTION 5: DENSITY ZONES WITH SAFETY MARGINS
+
 Upper-left: 15% maximum | 200×200px COMPLETELY EMPTY
 Lower-right: 25% maximum | 150×150px COMPLETELY EMPTY
 Central: 60-80% Wunderkammer organic composition
 
 ## SECTION 6: TYPOGRAPHY & DOCUMENTATION
+
 Count: 5-6 labels maximum
 Font: Crimson Text serif
 Color: Cream #F5F0E8 at 85% opacity
 Format: "Fig. 1. Eucalyptus camaldulensis (River Red Gum)"
 
 ## SECTION 7: TECHNICAL OUTPUT
+
 Background: #1A1714 (theatrical void, NO sepia drift)
 Resolution: [WIDTHxHEIGHT]
 Format: PNG maximum quality
@@ -128,6 +145,7 @@ Format: PNG maximum quality
 ---
 
 ## CORRECTIONS FROM ATTEMPT [N-1] (if iteration):
+
 SCORE: [X/100]
 
 WHAT WORKED (preserve):
@@ -154,14 +172,17 @@ CRITICAL FIXES:
 ## Integration Points
 
 **Flash-Sidekick:**
+
 - Call `consult_pro` with specimen list → validate endemic status
 - Call `analyze_code_quality` on draft prompt → identify vague language
 
 **Auto-Validator:**
+
 - Takes previous attempt's `correction_prompt` field
 - Injects into next generation's CORRECTIONS section
 
 **Pattern-Learner:**
+
 - Queries pattern library for latest validated patterns
 - Applies success learnings from recent high-scoring assets
 
@@ -171,6 +192,7 @@ CRITICAL FIXES:
 **Solution:** Template compression
 
 Remove verbose explanations. Use shorthand:
+
 ```
 DENSE (efficient):
 "Eucalyptus: 60% transmission, veins visible through leaf tissue"
@@ -217,4 +239,4 @@ prompt = prompt_composer.generate(
 
 ---
 
-*Transforms pattern library into executable templates. Manual prompt crafting → automated compilation.*
+_Transforms pattern library into executable templates. Manual prompt crafting → automated compilation._

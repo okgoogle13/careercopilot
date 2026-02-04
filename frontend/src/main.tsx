@@ -5,7 +5,7 @@ import { HelmetProvider } from 'react-helmet-async';
 const queryClient = new QueryClient();
 
 // Northcote Curio consolidated theme
-import './theme/northcote.css';
+import './design/styles/northcote.css';
 
 import * as Sentry from '@sentry/react';
 import App from './App';
