@@ -3,42 +3,32 @@ import type { Config } from 'tailwindcss';
 import tokens from './src/design/tokens/tokens.json';
 
 /**
- * Helper function to extract $value from design tokens
- * Handles both direct values and nested $value properties
+ * Safely extract token values from DTCG-formatted tokens.json
+ * Handles both legacy (value) and DTCG ($value) formats
+ * Returns primitive values for Tailwind consumption
  */
-const getValue = (tokenPath: string): any => {
-  const keys = tokenPath.split('.');
-  let value: any = tokens;
+function getValue(path: string): string {
+  const keys = path.split('.');
+  let current: any = tokens;
 
-  // Traverse the token path
   for (const key of keys) {
-    if (value === undefined || value === null) {
-      console.warn(`⚠️  Token path not found: ${tokenPath}`);
-      return tokenPath; // Return path as fallback
+    if (!current || typeof current !== 'object') {
+      return path.includes('color') ? 'transparent' : '0';
     }
-    value = value[key];
+    current = current[key];
   }
 
-  // If we found a $value property, return it
-  if (value && typeof value === 'object' && '$value' in value) {
-    return value.$value;
+  if (!current) return path.includes('color') ? 'transparent' : '0';
+
+  let val: any = current;
+  if (typeof current === 'object') {
+    if ('$value' in current) val = current.$value;
+    else if ('value' in current) val = current.value;
+    else return path.includes('color') ? 'transparent' : '0';
   }
 
-  // If value is a primitive, return it directly
-  if (typeof value !== 'object' || value === null) {
-    return value;
-  }
-
-  // If we got an object without $value, log warning and return the object
-  console.warn(`⚠️  Token at ${tokenPath} has no $value property:`, value);
-  return value;
-};
-
-// 🔍 DEBUG: Verify token structure (remove after build succeeds)
-console.log('🔍 Sample token check:');
-console.log('Primary wattle-gold:', tokens.color?.semantic?.['wattle-gold']);
-console.log('Typography display:', tokens.typography?.fontFamily?.display);
-console.log('Spacing 16:', tokens.spacing?.['16']);
+  return String(val);
+}
 
 const config: Config = {
   darkMode: 'class',
@@ -138,15 +128,29 @@ const config: Config = {
       // TYPOGRAPHY - Federation Stack
       // ============================================
       fontFamily: {
-        display: getValue('typography.fontFamily.bloom').replace(/'/g, '').split(', '),
-        proclamation: getValue('typography.fontFamily.proclamation').replace(/'/g, '').split(', '),
-        body: getValue('typography.fontFamily.field-note').replace(/'/g, '').split(', '),
-        mono: getValue('typography.fontFamily.annotation').replace(/'/g, '').split(', '),
+        // The Bloom - Fraunces variable serif
+        display: (getValue('typography.fontFamily.bloom') || '').replace(/'/g, '').split(', '),
+
+        // The Proclamation - Libre Bodoni
+        proclamation: (getValue('typography.fontFamily.proclamation') || '')
+          .replace(/'/g, '')
+          .split(', '),
+
+        // The Field Note - Work Sans
+        body: (getValue('typography.fontFamily.field-note') || '').replace(/'/g, '').split(', '),
+
+        // The Annotation - JetBrains Mono
+        mono: (getValue('typography.fontFamily.annotation') || '').replace(/'/g, '').split(', '),
+
         // Fallbacks for compatibility
         curator: ['Caveat', 'cursive'],
-        bloom: getValue('typography.fontFamily.bloom').replace(/'/g, '').split(', '),
-        'field-note': getValue('typography.fontFamily.field-note').replace(/'/g, '').split(', '),
-        annotation: getValue('typography.fontFamily.annotation').replace(/'/g, '').split(', '),
+        bloom: (getValue('typography.fontFamily.bloom') || '').replace(/'/g, '').split(', '),
+        'field-note': (getValue('typography.fontFamily.field-note') || '')
+          .replace(/'/g, '')
+          .split(', '),
+        annotation: (getValue('typography.fontFamily.annotation') || '')
+          .replace(/'/g, '')
+          .split(', '),
       },
 
       fontSize: {
@@ -217,16 +221,16 @@ const config: Config = {
       // BOX SHADOW
       // ============================================
       boxShadow: {
-        rest: getValue('shadow.rest') || '0 4px 24px rgba(20, 18, 16, 0.5)',
-        hover: getValue('shadow.hover') || '0 8px 40px rgba(20, 18, 16, 0.6)',
-        'glow-gold': getValue('shadow.glow-gold') || '0 0 40px rgba(212, 168, 75, 0.15)',
+        rest: getValue('shadow.rest'),
+        hover: getValue('shadow.hover'),
+        'glow-gold': getValue('shadow.glow-gold'),
       },
 
       // ============================================
       // TRANSITIONS
       // ============================================
       transitionTimingFunction: {
-        viscous: getValue('motion.easing.viscous-breeze') || 'cubic-bezier(0.34, 1.56, 0.64, 1)',
+        viscous: getValue('motion.easing.viscous-breeze'),
         settle: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
         precise: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
         snap: 'cubic-bezier(0.4, 0, 0.2, 1)',
@@ -234,9 +238,9 @@ const config: Config = {
 
       transitionDuration: {
         micro: '180ms',
-        short: getValue('motion.duration.fast') || '150ms',
-        medium: getValue('motion.duration.standard') || '300ms',
-        long: getValue('motion.duration.slow') || '500ms',
+        short: getValue('motion.duration.fast'),
+        medium: getValue('motion.duration.standard'),
+        long: getValue('motion.duration.slow'),
       },
 
       // ============================================
@@ -278,7 +282,7 @@ const config: Config = {
       },
     },
   },
-  plugins: [require('tailwindcss-animate')],
+  plugins: [],
 };
 
 export default config;

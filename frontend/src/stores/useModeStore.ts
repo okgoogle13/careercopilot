@@ -36,20 +36,16 @@ export const useModeStore = create<ModeState>()(
     (set, get) => ({
       // Initial state
       mode: 'laboratory',
+      isGalleryMode: false,
+      isLaboratoryMode: true,
 
-      // Computed: isGalleryMode
-      get isGalleryMode() {
-        return get().mode === 'gallery';
-      },
-
-      // Computed: isLaboratoryMode
-      get isLaboratoryMode() {
-        return get().mode === 'laboratory';
-      },
-
-      // Action: setMode
+      // Actions
       setMode: (mode: AppMode) => {
-        set({ mode });
+        set({
+          mode,
+          isGalleryMode: mode === 'gallery',
+          isLaboratoryMode: mode === 'laboratory',
+        });
         // Side effect: Update DOM data attributes for CSS token switching
         document.body.dataset.mode = mode;
         document.documentElement.setAttribute('data-mode', mode);
@@ -64,7 +60,7 @@ export const useModeStore = create<ModeState>()(
     }),
     {
       name: 'mode-storage', // localStorage key
-      partialize: (state) => ({ mode: state.mode }), // Only persist mode, not computed values
+      partialize: (state) => ({ mode: state.mode }), // Only persist mode
     }
   )
 );
