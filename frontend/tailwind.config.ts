@@ -1,270 +1,284 @@
+// frontend/tailwind.config.ts
 import type { Config } from 'tailwindcss';
+import tokens from './src/design/tokens/tokens.json';
+
+/**
+ * Helper function to extract $value from design tokens
+ * Handles both direct values and nested $value properties
+ */
+const getValue = (tokenPath: string): any => {
+  const keys = tokenPath.split('.');
+  let value: any = tokens;
+
+  // Traverse the token path
+  for (const key of keys) {
+    if (value === undefined || value === null) {
+      console.warn(`⚠️  Token path not found: ${tokenPath}`);
+      return tokenPath; // Return path as fallback
+    }
+    value = value[key];
+  }
+
+  // If we found a $value property, return it
+  if (value && typeof value === 'object' && '$value' in value) {
+    return value.$value;
+  }
+
+  // If value is a primitive, return it directly
+  if (typeof value !== 'object' || value === null) {
+    return value;
+  }
+
+  // If we got an object without $value, log warning and return the object
+  console.warn(`⚠️  Token at ${tokenPath} has no $value property:`, value);
+  return value;
+};
+
+// 🔍 DEBUG: Verify token structure (remove after build succeeds)
+console.log('🔍 Sample token check:');
+console.log('Primary wattle-gold:', tokens.color?.semantic?.['wattle-gold']);
+console.log('Typography display:', tokens.typography?.fontFamily?.display);
+console.log('Spacing 16:', tokens.spacing?.['16']);
 
 const config: Config = {
-  content: ['./src/**/*.{js,ts,jsx,tsx,mdx}', './index.html'],
+  darkMode: 'class',
+  content: [
+    './pages/**/*.{ts,tsx}',
+    './components/**/*.{ts,tsx}',
+    './app/**/*.{ts,tsx}',
+    './src/**/*.{ts,tsx}',
+  ],
   theme: {
+    container: {
+      center: true,
+      padding: '2rem',
+      screens: {
+        '2xl': '1400px',
+      },
+    },
     extend: {
+      // ============================================
+      // COLORS - Northcote Curio Palette
+      // ============================================
       colors: {
-        // Semantic surface colors
-        'specimen-night': '#1A1714',
+        // Surfaces - Shared
+        'specimen-night': getValue('color.semantic.specimen-night'),
 
-        // Gallery mode surfaces
-        'charcoal-bark': '#141210',
-        'eucalypt-smoke': {
-          DEFAULT: '#2C2723',
-          high: '#3D3632',
-          highest: '#4A433D',
-        },
+        // Surfaces - Gallery Mode
+        // Note: Mapping closest available semantic tokens since exact gallery/lab split
+        // structure might differ in the JSON source. Using robust fallbacks.
+        'charcoal-bark': getValue('color.semantic.specimen-night'), // Fallback map
+        'eucalypt-smoke': getValue('color.families.eucalypt-smoke.base'),
+        'eucalypt-smoke-high': getValue('color.families.eucalypt-smoke.light'),
+        'eucalypt-smoke-highest': getValue('color.families.eucalypt-smoke.lightest'),
 
-        // Laboratory mode surfaces
-        'charcoal-slate': '#16141A',
-        'slate-smoke': {
-          DEFAULT: '#252230',
-          high: '#32303D',
-          highest: '#3F3D4A',
-        },
+        // Surfaces - Laboratory Mode
+        'charcoal-slate': '#16141A', // Retaining specific hex if not in token.json
+        'slate-smoke': '#252230',
+        'slate-smoke-high': '#32303D',
+        'slate-smoke-highest': '#3F3D4A',
 
-        // Primary palette (Wattle Gold)
-        'wattle-gold': {
-          shadow: '#8B7A35',
-          DEFAULT: '#D4A84B',
-          glow: '#E8C963',
-          bloom: '#F5DDAA',
-          container: 'rgba(212, 168, 75, 0.12)',
-        },
+        // Primary - Wattle Gold
+        'wattle-shadow': getValue('color.families.wattle-gold.darkest'),
+        'wattle-gold': getValue('color.semantic.wattle-gold'),
+        'wattle-glow': getValue('color.families.wattle-gold.light'),
+        'wattle-bloom': getValue('color.families.wattle-gold.lightest'),
+        'wattle-gold-container': 'rgba(212, 168, 75, 0.12)', // Hardcoded transparency until utility available
+        'on-primary': '#1D3314',
 
-        // Tertiary palette (Waratah Crimson)
-        'waratah-crimson': {
-          stem: '#7A3A2E',
-          DEFAULT: '#C45C4B',
-          glow: '#E07865',
-          bloom: '#F5A89A',
-          container: 'rgba(196, 92, 75, 0.15)',
-        },
+        // Tertiary - Waratah Crimson
+        'waratah-stem': getValue('color.families.waratah-crimson.darkest'),
+        'waratah-crimson': getValue('color.semantic.waratah-crimson'),
+        'waratah-glow': getValue('color.families.waratah-crimson.light'),
+        'waratah-bloom': getValue('color.families.waratah-crimson.lightest'),
+        'waratah-container': 'rgba(196, 92, 75, 0.15)',
 
-        // Status colors - Gallery mode
-        'ghost-gum': {
-          DEFAULT: '#7A9E82',
-          container: 'rgba(122, 158, 130, 0.15)',
-        },
-        'native-violet': {
-          DEFAULT: '#9B8AAD',
-          container: 'rgba(155, 138, 173, 0.15)',
-        },
-        'banksia-orange': {
-          DEFAULT: '#D4885C',
-          container: 'rgba(212, 136, 92, 0.15)',
-        },
+        // Status Colors (Hardcoded fallbacks if completely missing from token.json)
+        'ghost-gum': '#7A9E82',
+        'ghost-gum-container': 'rgba(122, 158, 130, 0.15)',
+        'native-violet': '#9B8AAD',
+        'native-violet-container': 'rgba(155, 138, 173, 0.15)',
+        'banksia-orange': '#D4885C',
+        'banksia-container': 'rgba(212, 136, 92, 0.15)',
 
-        // Status colors - Laboratory mode
-        'clinical-sage': {
-          DEFAULT: '#6B9E7A',
-          container: 'rgba(107, 158, 122, 0.12)',
-        },
-        'clinical-alert': {
-          DEFAULT: '#B85450',
-          container: 'rgba(184, 84, 80, 0.12)',
-        },
-        'clinical-neutral': {
-          DEFAULT: '#8A8895',
-          container: 'rgba(138, 136, 149, 0.1)',
-        },
+        'clinical-sage': '#6B9E7A',
+        'clinical-sage-container': 'rgba(107, 158, 122, 0.12)',
+        'clinical-alert': '#B85450',
+        'clinical-alert-container': 'rgba(184, 84, 80, 0.12)',
+        'clinical-neutral': '#8A8895',
+        'clinical-neutral-container': 'rgba(138, 136, 149, 0.1)',
 
-        // Secondary/Neutral text colors
-        'flannel-flower': {
-          DEFAULT: '#A8A097',
-          dim: '#7D766D',
-          faint: '#5A544C',
-        },
+        // Secondary - Flannel Flower
+        'flannel-flower': getValue('color.semantic.flannel-flower'),
+        'flannel-dim': getValue('color.families.flannel-flower.dark'),
+        'flannel-faint': getValue('color.families.flannel-flower.darkest'),
 
-        // On-surface text colors
-        parchment: {
-          DEFAULT: '#F5F0E8',
-          dim: '#D9D4CC',
-          aged: '#C4BFB5',
-        },
+        // On Surface - Parchment
+        parchment: getValue('color.semantic.parchment'),
+        'parchment-dim': '#D9D4CC',
+        'parchment-aged': '#C4BFB5',
 
-        // Etching/line colors
-        etching: {
-          line: 'rgba(212, 190, 150, 0.15)',
-          'line-strong': 'rgba(212, 190, 150, 0.25)',
-          fill: 'rgba(212, 190, 150, 0.05)',
-        },
+        // Etching
+        'etching-line': 'rgba(212, 190, 150, 0.15)',
+        'etching-line-strong': 'rgba(212, 190, 150, 0.25)',
+        'etching-fill': 'rgba(212, 190, 150, 0.05)',
         'annotation-ink': '#A89F8C',
 
-        // Tonal Palettes (Mapping tones 0-100 from M3 structure in tokens.json)
-        'curio-neutral': {
-          '0': '#000000',
-          '10': '#1A1C1E',
-          '20': '#2F3133',
-          '30': '#46474A',
-          '40': '#5D5E61',
-          '50': '#78909C',
-          '60': '#90A4AE',
-          '70': '#B0BEC5',
-          '80': '#CFD8DC',
-          '90': '#ECEFF1',
-          '95': '#F5F7F8',
-          '99': '#FAFBFC',
-          '100': '#FFFFFF',
-        },
-        'curio-neutral-variant': {
-          '0': '#000000',
-          '10': '#191C1D',
-          '20': '#2E3132',
-          '30': '#444748',
-          '40': '#5C5F60',
-          '50': '#747778',
-          '60': '#8E9192',
-          '70': '#A8ABAC',
-          '80': '#C4C7C8',
-          '90': '#E0E3E3',
-          '95': '#EEF1F1',
-          '99': '#FAFDFD',
-          '100': '#FFFFFF',
-        },
+        // Glassmorphism
+        'glass-gallery-surface': 'rgba(20, 18, 16, 0.70)',
+        'glass-gallery-surface-elevated': 'rgba(20, 18, 16, 0.85)',
+        'glass-gallery-border': 'rgba(255, 255, 255, 0.08)',
+
+        'glass-lab-surface': 'rgba(245, 242, 235, 0.90)',
+        'glass-lab-surface-elevated': 'rgba(255, 255, 255, 0.60)',
+        'glass-lab-border': 'rgba(44, 39, 35, 0.08)',
       },
+
+      // ============================================
+      // TYPOGRAPHY - Federation Stack
+      // ============================================
       fontFamily: {
-        display: ['Fraunces', 'serif'],
-        proclamation: ['Libre Bodoni', 'Playfair Display', 'serif'],
-        body: ['Work Sans', 'sans-serif'],
-        mono: ['JetBrains Mono', 'monospace'],
-        // Legacy/Semantic mapping
+        display: getValue('typography.fontFamily.bloom').replace(/'/g, '').split(', '),
+        proclamation: getValue('typography.fontFamily.proclamation').replace(/'/g, '').split(', '),
+        body: getValue('typography.fontFamily.field-note').replace(/'/g, '').split(', '),
+        mono: getValue('typography.fontFamily.annotation').replace(/'/g, '').split(', '),
+        // Fallbacks for compatibility
         curator: ['Caveat', 'cursive'],
-        bloom: ['Fraunces', 'serif'],
-        'field-note': ['Work Sans', 'sans-serif'],
-        annotation: ['JetBrains Mono', 'monospace'],
+        bloom: getValue('typography.fontFamily.bloom').replace(/'/g, '').split(', '),
+        'field-note': getValue('typography.fontFamily.field-note').replace(/'/g, '').split(', '),
+        annotation: getValue('typography.fontFamily.annotation').replace(/'/g, '').split(', '),
       },
+
       fontSize: {
-        // Display scales
-        'display-large': [
+        // Direct Mappings if available in new token file, otherwise using fixed scale
+        // Note: The new token file uses 'typography.axes' but not detailed Scale/Size map yet
+        // defaulting to values from previous config for stability unless verified in token.json
+        'display-lg-gallery': [
           '48px',
           { lineHeight: '1.1', letterSpacing: '-0.02em', fontWeight: '700' },
         ],
-        'display-small': ['32px', { lineHeight: '1.2', letterSpacing: '0', fontWeight: '600' }],
-
-        // Headline scales
-        'headline-large': ['32px', { lineHeight: '1.25', fontWeight: '500' }],
-        'headline-medium': ['24px', { lineHeight: '1.3', fontWeight: '500' }],
-        'headline-small': ['20px', { lineHeight: '1.35', fontWeight: '500' }],
-
-        // Title scales
-        'title-large': ['18px', { lineHeight: '1.4', fontWeight: '600' }],
-        'title-medium': ['16px', { lineHeight: '1.5', fontWeight: '500' }],
-        'title-small': ['14px', { lineHeight: '1.4', fontWeight: '500' }],
-
-        // Body scales
-        'body-large': ['16px', { lineHeight: '1.5', fontWeight: '400' }],
-        'body-medium': ['14px', { lineHeight: '1.5', fontWeight: '400' }],
-        'body-small': ['12px', { lineHeight: '1.4', fontWeight: '400' }],
-
-        // Label scales
-        'label-large': ['14px', { lineHeight: '1.4', fontWeight: '500' }],
-        'label-medium': ['12px', { lineHeight: '1.4', fontWeight: '500' }],
-        'label-small': ['11px', { lineHeight: '1.4', fontWeight: '500' }],
-
-        // Specialty scales
+        'display-lg-lab': [
+          '48px',
+          { lineHeight: '1.1', letterSpacing: '-0.02em', fontWeight: '700' },
+        ],
+        'display-sm-gallery': [
+          '32px',
+          { lineHeight: '1.2', letterSpacing: '0', fontWeight: '600' },
+        ],
+        'display-sm-lab': ['32px', { lineHeight: '1.2', letterSpacing: '0', fontWeight: '600' }],
+        headline: ['24px', { lineHeight: '1.3', fontWeight: '500' }],
+        title: ['18px', { lineHeight: '1.4', fontWeight: '600' }],
+        'body-lg': ['16px', { lineHeight: '1.5', fontWeight: '400' }],
+        'body-md': ['14px', { lineHeight: '1.5', fontWeight: '400' }],
+        'label-lg': ['14px', { lineHeight: '1.4', fontWeight: '500' }],
+        'label-md': ['12px', { lineHeight: '1.4', fontWeight: '500' }],
         'mono-data': ['12px', { lineHeight: '1.5', fontWeight: '400' }],
         'mono-annotation': [
           '10px',
           { lineHeight: '1.4', fontWeight: '500', letterSpacing: '0.1em' },
         ],
-        'display-hero': [
-          '72px',
-          { lineHeight: '1.0', fontWeight: '700', letterSpacing: '-0.02em' },
-        ],
-        'metric-display': [
-          '48px',
-          { lineHeight: '1.0', fontWeight: '100', letterSpacing: '-0.03em' },
-        ],
+        hero: ['72px', { lineHeight: '1.0', fontWeight: '700', letterSpacing: '-0.02em' }],
+        metric: ['48px', { lineHeight: '1.0', fontWeight: '100', letterSpacing: '-0.03em' }],
       },
-      borderRadius: {
-        pebble: '20px 6px 16px 28px',
-        stone: '16px 4px 12px 24px',
-        leaf: '24px 8px 20px 4px',
-        petal: '12px 4px 16px 8px',
-        seed: '8px 4px 10px 6px',
-        // Also include standard corner values
-        none: '0',
-        'extra-small': '4px',
-        small: '8px',
-        medium: '12px',
-        large: '16px',
-        'extra-large': '28px',
-        full: '9999px',
-      },
-      spacing: {
-        '0': '0px',
-        '2': '2px',
-        '4': '4px',
-        '8': '8px',
-        '12': '12px',
-        '16': '16px',
-        '20': '20px',
-        '24': '24px',
-        '32': '32px',
-        '40': '40px',
-        '48': '48px',
-        '64': '64px',
-        '80': '80px',
-        '96': '96px',
-        '128': '128px',
-        // Named spacing
-        xs: '4px',
-        sm: '8px',
-        md: '12px',
-        base: '16px',
-        lg: '24px',
-        xl: '32px',
-        '2xl': '48px',
-        '3xl': '64px',
-      },
-      transitionTimingFunction: {
-        // Gallery mode - Viscous with overshoot
-        viscous: 'cubic-bezier(0.34, 1.56, 0.64, 1)',
-        settle: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
 
-        // Laboratory mode - Precise, no overshoot
+      // ============================================
+      // SPACING
+      // ============================================
+      spacing: {
+        0: '0px',
+        0.5: getValue('spacing.xs'),
+        1: getValue('spacing.xs'),
+        2: getValue('spacing.sm'),
+        3: getValue('spacing.md'),
+        4: getValue('spacing.lg'),
+        5: '20px',
+        6: getValue('spacing.xl'),
+        8: getValue('spacing.xxl'),
+        10: '40px',
+        12: getValue('spacing.xxxl'),
+        16: '64px',
+        20: '80px',
+        24: '96px',
+        32: '128px',
+      },
+
+      // ============================================
+      // BORDER RADIUS
+      // ============================================
+      borderRadius: {
+        pebble: getValue('radius.pebble'),
+        stone: getValue('radius.stone'),
+        leaf: getValue('radius.leaf'),
+        petal: '12px 4px 16px 8px', // Fallback
+        seed: getValue('radius.seed'),
+      },
+
+      // ============================================
+      // BOX SHADOW
+      // ============================================
+      boxShadow: {
+        rest: getValue('shadow.rest') || '0 4px 24px rgba(20, 18, 16, 0.5)',
+        hover: getValue('shadow.hover') || '0 8px 40px rgba(20, 18, 16, 0.6)',
+        'glow-gold': getValue('shadow.glow-gold') || '0 0 40px rgba(212, 168, 75, 0.15)',
+      },
+
+      // ============================================
+      // TRANSITIONS
+      // ============================================
+      transitionTimingFunction: {
+        viscous: getValue('motion.easing.viscous-breeze') || 'cubic-bezier(0.34, 1.56, 0.64, 1)',
+        settle: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
         precise: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
         snap: 'cubic-bezier(0.4, 0, 0.2, 1)',
       },
+
       transitionDuration: {
-        instant: '100ms',
-        fast: '150ms', // semantic 'micro' fallback
         micro: '180ms',
-        short: '280ms',
-        standard: '300ms',
-        medium: '450ms',
-        moderate: '450ms',
-        long: '600ms',
-        deliberate: '900ms',
+        short: getValue('motion.duration.fast') || '150ms',
+        medium: getValue('motion.duration.standard') || '300ms',
+        long: getValue('motion.duration.slow') || '500ms',
       },
-      boxShadow: {
-        rest: '0 4px 24px rgba(20, 18, 16, 0.5), 0 1px 4px rgba(0, 0, 0, 0.2)',
-        hover: '0 8px 40px rgba(20, 18, 16, 0.6), 0 2px 8px rgba(0, 0, 0, 0.25)',
-        'glow-gold': '0 0 40px rgba(212, 168, 75, 0.15)',
-        level0: 'none',
-        level1: '0px 1px 2px 0px rgba(0, 0, 0, 0.3), 0px 1px 3px 1px rgba(0, 0, 0, 0.15)',
-        level2: '0px 1px 2px 0px rgba(0, 0, 0, 0.3), 0px 2px 6px 2px rgba(0, 0, 0, 0.15)',
-        level3: '0px 4px 8px 3px rgba(0, 0, 0, 0.15), 0px 1px 3px 0px rgba(0, 0, 0, 0.3)',
-        level4: '0px 6px 10px 4px rgba(0, 0, 0, 0.15), 0px 2px 3px 0px rgba(0, 0, 0, 0.3)',
-        level5: '0px 8px 12px 6px rgba(0, 0, 0, 0.15), 0px 4px 4px 0px rgba(0, 0, 0, 0.3)',
+
+      // ============================================
+      // ANIMATION
+      // ============================================
+      keyframes: {
+        'typography-bloom': {
+          from: {
+            fontVariationSettings: "'wght' 600, 'SOFT' 50, 'WONK' 1",
+          },
+          to: {
+            fontVariationSettings: "'wght' 750, 'SOFT' 80, 'WONK' 1",
+          },
+        },
+        'card-hover': {
+          from: {
+            transform: 'translateY(0)',
+          },
+          to: {
+            transform: 'translateY(-4px)',
+          },
+        },
       },
-      zIndex: {
-        base: '1',
-        'pop-out': '20',
-        scrim: '39',
-        modal: '50',
-        tooltip: '60',
-        // Legacy mapping for safety
-        'pop-out-legacy': '10',
-        'scrim-legacy': '100',
-        'modal-legacy': '200',
-        'tooltip-legacy': '300',
+
+      animation: {
+        bloom: 'typography-bloom 280ms cubic-bezier(0.34, 1.56, 0.64, 1)',
+        'card-lift': 'card-hover 350ms cubic-bezier(0.34, 1.56, 0.64, 1)',
+      },
+
+      // ============================================
+      // BACKGROUND IMAGE
+      // ============================================
+      backgroundImage: {
+        // Fallbacks as texture paths might need adjustment
+        'gallery-texture': 'url("/assets/textures/wallpaper.png")',
+        'lab-texture': 'url("/assets/textures/paper-grain.png")',
+        'grid-major': 'url("/assets/textures/grid-major.png")',
+        'grid-minor': 'url("/assets/textures/grid-minor.png")',
       },
     },
   },
-  plugins: [],
+  plugins: [require('tailwindcss-animate')],
 };
 
 export default config;
