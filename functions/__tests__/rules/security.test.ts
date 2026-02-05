@@ -1,7 +1,7 @@
 // @ts-nocheck
 /* eslint-env jest */
 /* global describe, it, expect, beforeAll, afterEach, beforeEach */
-import { getAuthedFirestore } from "../../test/setup";
+import {getAuthedFirestore} from "../../test/setup";
 // @ts-nocheck
 import {
   collection,
@@ -36,10 +36,10 @@ describe("Firestore Security Rules", () => {
 
   beforeAll(async () => {
     // Initialize Firestore with different user contexts
-    testDb = await getAuthedFirestore({ ...TEST_USER });
-    otherUserDb = await getAuthedFirestore({ ...OTHER_USER });
+    testDb = await getAuthedFirestore({...TEST_USER});
+    otherUserDb = await getAuthedFirestore({...OTHER_USER});
     // Admin has full access for setup/teardown
-    adminDb = await getAuthedFirestore({ uid: "admin", admin: true });
+    adminDb = await getAuthedFirestore({uid: "admin", admin: true});
   });
 
   // Clean up test data
@@ -81,7 +81,7 @@ describe("Firestore Security Rules", () => {
 
     it("should not allow users to update other users profiles", async () => {
       const otherUserDoc = doc(testDb, `users/${OTHER_USER.uid}`);
-      await expect(updateDoc(otherUserDoc, { name: "Hacked" })).rejects.toThrow();
+      await expect(updateDoc(otherUserDoc, {name: "Hacked"})).rejects.toThrow();
     });
 
     it("should not allow users to delete profiles", async () => {
@@ -102,7 +102,7 @@ describe("Firestore Security Rules", () => {
     beforeEach(async () => {
       // Create a test document before each test
       const docRef = doc(collection(testDb, `users/${TEST_USER.uid}/documents`));
-      await setDoc(docRef, { ...testDoc, id: docRef.id });
+      await setDoc(docRef, {...testDoc, id: docRef.id});
       return docRef.id;
     });
 
@@ -152,11 +152,11 @@ describe("Firestore Security Rules", () => {
     it("should not allow users to update documents they do not own", async () => {
       // Create a document as test user
       const docRef = doc(collection(testDb, `users/${TEST_USER.uid}/documents`));
-      await setDoc(docRef, { ...testDoc, id: docRef.id });
+      await setDoc(docRef, {...testDoc, id: docRef.id});
 
       // Try to update as other user
       const otherUserDocRef = doc(otherUserDb, `users/${TEST_USER.uid}/documents/${docRef.id}`);
-      await expect(updateDoc(otherUserDocRef, { title: "Hacked" })).rejects.toThrow();
+      await expect(updateDoc(otherUserDocRef, {title: "Hacked"})).rejects.toThrow();
     });
 
     it("should allow users to delete their own documents", async () => {

@@ -11,24 +11,26 @@ const server = new McpServer({
 
 // Helper to get flow metadata
 const flows = {
-  extractJobListing: extractJobListing,
-  findSimilarListings: findSimilarListings,
+  "extractJobListing": extractJobListing,
+  "findSimilarListings": findSimilarListings
 };
 
 /**
  * Tool: list_genkit_flows
  * Returns a list of available Genkit flows exposed by this server.
  */
-server.tool("list_genkit_flows", {}, async () => {
-  return {
-    content: [
-      {
+server.tool(
+  "list_genkit_flows",
+  {},
+  async () => {
+    return {
+      content: [{
         type: "text",
-        text: JSON.stringify(Object.keys(flows), null, 2),
-      },
-    ],
-  };
-});
+        text: JSON.stringify(Object.keys(flows), null, 2)
+      }]
+    };
+  }
+);
 
 /**
  * Tool: run_genkit_flow
@@ -38,20 +40,18 @@ server.tool(
   "run_genkit_flow",
   {
     flowName: z.string().describe("Name of the flow to run (e.g. 'extractJobListing')"),
-    input: z.string().describe("JSON string representing the input data for the flow"),
+    input: z.string().describe("JSON string representing the input data for the flow")
   },
   async ({ flowName, input }) => {
     const flow = flows[flowName as keyof typeof flows];
-
+    
     if (!flow) {
       return {
-        content: [
-          {
-            type: "text",
-            text: `Error: Flow '${flowName}' not found. Available flows: ${Object.keys(flows).join(", ")}`,
-          },
-        ],
-        isError: true,
+        content: [{
+          type: "text",
+          text: `Error: Flow '${flowName}' not found. Available flows: ${Object.keys(flows).join(", ")}`
+        }],
+        isError: true
       };
     }
 
@@ -61,44 +61,39 @@ server.tool(
         parsedInput = JSON.parse(input);
       } catch (e) {
         return {
-          content: [
-            {
-              type: "text",
-              text: `Error: Input must be valid JSON string. ${e}`,
-            },
-          ],
-          isError: true,
+          content: [{
+            type: "text",
+            text: `Error: Input must be valid JSON string. ${e}`
+          }],
+          isError: true
         };
       }
 
       // Execute the flow
       console.error(`Running flow ${flowName}...`); // Log to stderr (ignored by MCP stdio)
       const result = await flow(parsedInput);
-
+      
       return {
-        content: [
-          {
-            type: "text",
-            text: JSON.stringify(result, null, 2),
-          },
-        ],
+        content: [{
+          type: "text",
+          text: JSON.stringify(result, null, 2)
+        }]
       };
+
     } catch (error: any) {
       return {
-        content: [
-          {
-            type: "text",
-            text: `Error executing flow: ${error.message}`,
-          },
-        ],
-        isError: true,
+        content: [{
+          type: "text",
+          text: `Error executing flow: ${error.message}`
+        }],
+        isError: true
       };
     }
-  },
+  }
 );
 
 async function main() {
-  const transport = new StdioServerTransport();
+  consttransport = new StdioServerTransport();
   await server.connect(transport);
   console.error("Genkit MCP Server running on stdio");
 }
