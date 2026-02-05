@@ -21,7 +21,7 @@
 ### **Issue 2: Wrong Colors**
 - **Cause 1**: Components used hardcoded hex values instead of Tailwind classes
 - **Cause 2**: Missing Tailwind color token mappings in `@theme` section
-- **Cause 3**: Layout used wrong background color (#141218 instead of design tokens)
+- **Cause 3**: Layout used wrong background color (#1A1714 instead of design tokens)
 - **Impact**: Sage green, coral, lavender colors not displaying; generic grays showing instead
 
 ---
@@ -31,7 +31,7 @@
 ### **1. Fixed Layout.tsx** (Navigation Issue)
 **Before**:
 ```tsx
-<div className="min-h-screen bg-[#141218] relative">
+<div className="min-h-screen bg-[#1A1714] relative">
   {/* Texture pattern overlay */}
   ...
 </div>
@@ -50,7 +50,7 @@
 ```
 
 **Changes**:
-- ✅ Removed hardcoded `#141218` color
+- ✅ Removed hardcoded `#1A1714` color
 - ✅ Used `bg-surface` from design tokens
 - ✅ Simplified structure - removed unnecessary texture overlay
 - ✅ Sidebar now always renders (not conditional)

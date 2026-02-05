@@ -2,15 +2,15 @@
 
 ## Core Philosophy: Victorian Anatomical Extremism
 
-Northcote Curio is built on the collision of **Australian Endemic Specimens** and **Geometric Precision**. We reject the generic, the "cute," and the sepia-toned paths of traditional vintage design.
+Northcote is built on the collision of Australian endemic species and geometric precision, framed through a contemporary, anti‑colonial lens. We reject generic, cute, or sepia‑toned vintage design and instead embrace bold, living symbols rooted in present-day Melbourne.
 
 ### 1. The Void (Atmosphere)
 
-- **Primary Background**: `#1A1714` (Specimen Night).
-- **Rule**: Backgrounds must feel like a theatrical void or a deep museum cabinet. Never use pure white, beige, or flat digital black (#000000) except for specific UI technical layers.
+- **Primary Background**: Asphalt Black `#1A1714`.
+- **Rule**: Backgrounds should feel like a street art substrate or nocturnal urban air, not a museum cabinet. Do not use pure black `#000000`, and avoid sepia/vintage treatments.
 - **Translucency**: Assets should leverage alpha transparency to melt into "The Void," preserving detailed edges (watercolor bleeds, hair, spines).
 
-### 2. The Specimen (Subject)
+### 2. The Subject
 
 - **Authenticity**: All fauna and flora must be **geographically authentic to Australia**. (e.g., Banksia, Eucalyptus, Echidna, Kookaburra).
 - **Anatomical Extremism**: Capture the intense, sometimes alien details of nature — skeletal structures, microscopic lattices, and sharp textures.
@@ -29,7 +29,7 @@ Northcote Curio is built on the collision of **Australian Endemic Specimens** an
 
 Assets must implement true light transmission, not just glow effects.
 
-- **Opaque (0% Transmission)**: Core specimen focus, cartilage ribs, midribs.
+- **Opaque (0% Transmission)**: Core subject focus, cartilage ribs, midribs.
 - **Translucent (40-60%)**: Frill-neck membranes, Eucalyptus leaves (reveals internal venation).
 - **Diaphanous (60-80%)**: Huntsman spider molts (amber chitin showing internal shadows).
 
@@ -51,5 +51,5 @@ To prevent visual flatness, maintain clear size ratios:
 
 - **Font**: Crimson Text Regular (Serif).
 - **Size**: 10-12pt (proportional to 1792px width).
-- **Color**: #F5F0E8 (Parchment) @ 85% opacity.
+- **Color**: #F5F0E8 (Paper White) @ 85% opacity.
 - **Format**: "Fig. [X]. [Scientific Name] ([Common Name])"

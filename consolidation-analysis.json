@@ -182,18 +182,18 @@
     "current_canonical_path": "/Users/okgoogle13/Desktop/careercopilot/assets/textures/northcote-night-canopy.png"
   },
   {
-    "filename": "northcote-technical-parchment.jpg",
-    "original_filename": "northcote-technical-parchment.jpg",
+    "filename": "northcote-technical-paper-white.jpg",
+    "original_filename": "northcote-technical-paper-white.jpg",
     "hash": "56012a696c91ae8e46376118e30d4779",
     "action": "KEEP",
-    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/textures/northcote-technical-parchment.jpg",
+    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/textures/northcote-technical-paper-white.jpg",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/assets/textures/northcote-technical-parchment.jpg"
+      "/Users/okgoogle13/Desktop/careercopilot/assets/textures/northcote-technical-paper-white.jpg"
     ],
     "source_labels": [
       "CANONICAL"
     ],
-    "current_canonical_path": "/Users/okgoogle13/Desktop/careercopilot/assets/textures/northcote-technical-parchment.jpg"
+    "current_canonical_path": "/Users/okgoogle13/Desktop/careercopilot/assets/textures/northcote-technical-paper-white.jpg"
   },
   {
     "filename": "northcote-sentry-kookaburra.png",
@@ -996,14 +996,14 @@
     "current_canonical_path": null
   },
   {
-    "filename": "texture-laboratory-parchment-source-1.png",
-    "original_filename": "texture-laboratory-parchment-source-1.png",
+    "filename": "texture-laboratory-paper-white-source-1.png",
+    "original_filename": "texture-laboratory-paper-white-source-1.png",
     "hash": "b6b466bdc1846971666273ee2f04f4eb",
     "action": "MOVE",
-    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/textures/texture-laboratory-parchment-source-1.png",
+    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/textures/texture-laboratory-paper-white-source-1.png",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/public/assets/textures/texture-laboratory-parchment-source-1.png",
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/public/assets/textures/texture-laboratory-parchment-tile.jpg"
+      "/Users/okgoogle13/Desktop/careercopilot/frontend/public/assets/textures/texture-laboratory-paper-white-source-1.png",
+      "/Users/okgoogle13/Desktop/careercopilot/frontend/public/assets/textures/texture-laboratory-paper-white-tile.jpg"
     ],
     "source_labels": [
       "LEGACY_PUBLIC",
@@ -1012,13 +1012,13 @@
     "current_canonical_path": null
   },
   {
-    "filename": "texture-laboratory-parchment-source-2.png",
-    "original_filename": "texture-laboratory-parchment-source-2.png",
+    "filename": "texture-laboratory-paper-white-source-2.png",
+    "original_filename": "texture-laboratory-paper-white-source-2.png",
     "hash": "9af0ae7e08d216682da5987e672ba21c",
     "action": "MOVE",
-    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/textures/texture-laboratory-parchment-source-2.png",
+    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/textures/texture-laboratory-paper-white-source-2.png",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/public/assets/textures/texture-laboratory-parchment-source-2.png"
+      "/Users/okgoogle13/Desktop/careercopilot/frontend/public/assets/textures/texture-laboratory-paper-white-source-2.png"
     ],
     "source_labels": [
       "LEGACY_PUBLIC"
@@ -1040,13 +1040,13 @@
     "current_canonical_path": null
   },
   {
-    "filename": "texture-laboratory-parchment-source-3.png",
-    "original_filename": "texture-laboratory-parchment-source-3.png",
+    "filename": "texture-laboratory-paper-white-source-3.png",
+    "original_filename": "texture-laboratory-paper-white-source-3.png",
     "hash": "7775ac04b974153ad2aa8df0f8558659",
     "action": "MOVE",
-    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/textures/texture-laboratory-parchment-source-3.png",
+    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/textures/texture-laboratory-paper-white-source-3.png",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/public/assets/textures/texture-laboratory-parchment-source-3.png"
+      "/Users/okgoogle13/Desktop/careercopilot/frontend/public/assets/textures/texture-laboratory-paper-white-source-3.png"
     ],
     "source_labels": [
       "LEGACY_PUBLIC"
@@ -1054,13 +1054,13 @@
     "current_canonical_path": null
   },
   {
-    "filename": "texture-laboratory-parchment-source-4.png",
-    "original_filename": "texture-laboratory-parchment-source-4.png",
+    "filename": "texture-laboratory-paper-white-source-4.png",
+    "original_filename": "texture-laboratory-paper-white-source-4.png",
     "hash": "c4549c946e61fb05a148401a78cdba07",
     "action": "MOVE",
-    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/textures/texture-laboratory-parchment-source-4.png",
+    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/textures/texture-laboratory-paper-white-source-4.png",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/public/assets/textures/texture-laboratory-parchment-source-4.png"
+      "/Users/okgoogle13/Desktop/careercopilot/frontend/public/assets/textures/texture-laboratory-paper-white-source-4.png"
     ],
     "source_labels": [
       "LEGACY_PUBLIC"
@@ -1082,13 +1082,13 @@
     "current_canonical_path": null
   },
   {
-    "filename": "texture-gallery-specimen-night-variant.jpg",
-    "original_filename": "texture-gallery-specimen-night-variant.jpg",
+    "filename": "texture-gallery-asphalt-black-variant.jpg",
+    "original_filename": "texture-gallery-asphalt-black-variant.jpg",
     "hash": "81a90db42c3cb957aadba277bc199a98",
     "action": "MOVE",
-    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/textures/texture-gallery-specimen-night-variant.jpg",
+    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/textures/texture-gallery-asphalt-black-variant.jpg",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/public/assets/textures/texture-gallery-specimen-night-variant.jpg"
+      "/Users/okgoogle13/Desktop/careercopilot/frontend/public/assets/textures/texture-gallery-asphalt-black-variant.jpg"
     ],
     "source_labels": [
       "LEGACY_PUBLIC"

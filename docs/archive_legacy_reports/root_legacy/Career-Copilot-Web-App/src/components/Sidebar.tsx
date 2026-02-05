@@ -60,7 +60,7 @@ export function Sidebar() {
                 flex items-center gap-4 px-6 py-4 mb-2 rounded-full transition-all tier-human
                 ${
                   isActive
-                    ? "bg-[#A8C5A3] text-[#141218] font-medium"
+                    ? "bg-[#A8C5A3] text-[#1A1714] font-medium"
                     : "text-[#CAC4D0] hover:bg-[#2B2930] hover:text-[#FFFFFF]"
                 }
               `}

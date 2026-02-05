@@ -30,7 +30,7 @@ Exit code: 0
 ❌ Missing $value property: color.primary.wattleGold
 ❌ Invalid dimension (no units): spacing.16 = 16
 ❌ Circular reference detected: color.alias.primary → color.alias.base → color.alias.primary
-⚠️  Low contrast (3.2:1): parchment on eucalyptSmoke (requires 4.5:1)
+⚠️  Low contrast (3.2:1): paper-white on eucalyptSmoke (requires 4.5:1)
 
 ❌ Structure validation failed
 Exit code: 1
@@ -55,7 +55,7 @@ Exit code: 0
    → Should be: color.semantic.primary.wattleGold
 ❌ getValue() returned undefined: spacing.16.$value
    → Should be: spacing.16
-⚠️  Case mismatch: eucalypt-smoke vs eucalyptSmoke
+⚠️  Case mismatch: concrete-grey vs eucalyptSmoke
 
 ❌ Found 3 getValue() errors
 Exit code: 1

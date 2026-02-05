@@ -1,32 +1,26 @@
 /**
  * Authentication Context
- * Manages global authentication state via Firebase or Offline Mock
+ * Manages global authentication state via Supabase or Offline Mock
  */
 
+import { User as SupabaseUser } from '@supabase/supabase-js';
 import {
-    User as FirebaseUser,
-    createUserWithEmailAndPassword,
-    signOut as firebaseSignOut,
-    updateProfile as firebaseUpdateProfile,
-    onAuthStateChanged,
-    signInWithEmailAndPassword,
-} from 'firebase/auth';
-import {
-    ReactNode,
-    createContext,
-    useCallback,
-    useContext,
-    useEffect,
-    useMemo,
-    useState,
+  ReactNode,
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
 } from 'react';
-import { auth } from '../config/firebase';
+import { supabase } from '../config/supabase';
 
-// Define types locally since we aren't using the external service
-export interface User extends Partial<FirebaseUser> {
-  // Add any custom fields you expect on top of Firebase User if needed
+// Define types locally
+export interface User extends Partial<SupabaseUser> {
+  // Add any custom fields you expect
   role?: string;
-  email: string | null;
+  email?: string; // Changed to optional/undefined to match Partial<SupabaseUser>
+  // Supabase stores display name in user_metadata
   displayName: string | null;
   uid: string;
   access_token?: string | null;
@@ -58,6 +52,21 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
+  // Helper to map Supabase user to our internal User type
+  const mapSupabaseUser = (sbUser: SupabaseUser | null): User | null => {
+    if (!sbUser) return null;
+    return {
+      ...sbUser,
+      uid: sbUser.id,
+      displayName:
+        sbUser.user_metadata?.full_name ||
+        sbUser.user_metadata?.displayName ||
+        sbUser.email?.split('@')[0] ||
+        null,
+      email: sbUser.email || undefined,
+    };
+  };
+
   // Monitor auth state
   useEffect(() => {
     if (isOfflineMode) {
@@ -70,22 +79,34 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       return;
     }
 
-    // CRITICAL FIX: Set a timeout to prevent infinite loading
-    // If Firebase doesn't respond in 2 seconds (likely misconfigured), assume no user
-    const timeoutId = setTimeout(() => {
-      console.warn('Firebase auth initialization timeout - assuming no user');
-      setLoading(false);
-    }, 2000);
+    // Initial session check
+    const checkSession = async () => {
+      try {
+        const {
+          data: { session },
+        } = await supabase.auth.getSession();
+        if (session?.user) {
+          setUser(mapSupabaseUser(session.user));
+        }
+      } catch (error) {
+        console.error('Error checking initial session:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      clearTimeout(timeoutId); // Clear timeout if auth responds
-      setUser(currentUser as User);
+    checkSession();
+
+    // Subscribe to changes
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange(async (_event, session) => {
+      setUser(mapSupabaseUser(session?.user || null));
       setLoading(false);
     });
 
     return () => {
-      clearTimeout(timeoutId);
-      unsubscribe();
+      subscription.unsubscribe();
     };
   }, []);
 
@@ -97,24 +118,6 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
           uid: 'mock-user-123',
           email,
           displayName: 'Dev User',
-          emailVerified: true,
-          isAnonymous: false,
-          metadata: {},
-          providerData: [],
-          refreshToken: 'mock-token',
-          tenantId: null,
-          delete: async () => { },
-          getIdToken: async () => 'mock-jwt',
-          getIdTokenResult: async () => ({
-            token: 'mock-jwt',
-            signInProvider: 'password',
-            claims: {},
-            authTime: Date.now() / 1000,
-            issuedAtTime: Date.now() / 1000,
-            expirationTime: Date.now() / 1000 + 3600,
-          }),
-          reload: async () => { },
-          toJSON: () => ({}),
           role: 'user',
         } as unknown as User;
         setUser(mockUser);
@@ -123,7 +126,13 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       }
       throw new Error('Invalid credentials');
     }
-    await signInWithEmailAndPassword(auth, email, password);
+
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (error) throw error;
   }, []);
 
   const register = useCallback(async (email: string, password: string, displayName: string) => {
@@ -132,24 +141,6 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         uid: 'mock-user-new-' + Date.now(),
         email,
         displayName: displayName || 'New Dev User',
-        emailVerified: true,
-        isAnonymous: false,
-        metadata: {},
-        providerData: [],
-        refreshToken: 'mock-token',
-        tenantId: null,
-        delete: async () => { },
-        getIdToken: async () => 'mock-jwt',
-        getIdTokenResult: async () => ({
-          token: 'mock-jwt',
-          signInProvider: 'password',
-          claims: {},
-          authTime: Date.now() / 1000,
-          issuedAtTime: Date.now() / 1000,
-          expirationTime: Date.now() / 1000 + 3600,
-        }),
-        reload: async () => { },
-        toJSON: () => ({}),
         role: 'user',
       } as unknown as User;
       setUser(mockUser);
@@ -157,11 +148,22 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       return;
     }
 
-    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-    if (displayName) {
-      await firebaseUpdateProfile(userCredential.user, { displayName });
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        data: {
+          full_name: displayName,
+          displayName: displayName, // support for legacy field backup
+        },
+      },
+    });
+
+    if (error) throw error;
+
+    if (data.user) {
       // Force refresh user to get updated display name
-      setUser({ ...userCredential.user, displayName } as User);
+      setUser(mapSupabaseUser(data.user));
     }
   }, []);
 
@@ -171,7 +173,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       localStorage.removeItem('mockUser');
       return;
     }
-    await firebaseSignOut(auth);
+    await supabase.auth.signOut();
   }, []);
 
   const contextValue = useMemo(

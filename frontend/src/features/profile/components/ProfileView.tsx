@@ -26,7 +26,7 @@ export function ProfileView() {
   const [careerData, setCareerData] = useState<any>(null);
 
   return (
-    <div className="min-h-screen bg-specimen-night relative overflow-hidden pb-12 w-full">
+    <div className="min-h-screen bg-asphalt-black relative overflow-hidden pb-12 w-full">
       {/* Background Layer */}
       <div
         className="absolute inset-0 opacity-10 pointer-events-none mix-blend-soft-light"
@@ -44,7 +44,7 @@ export function ProfileView() {
           alt="Specimen Archive"
           className="w-full h-full object-cover brightness-50 contrast-125 saturate-50"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-specimen-night via-specimen-night/40 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-asphalt-black via-asphalt-black/40 to-transparent" />
 
         {/* Subtle Motion Bloom */}
         <motion.div
@@ -60,7 +60,7 @@ export function ProfileView() {
           <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            className="w-40 h-40 md:w-52 md:h-52 rounded-full border-8 border-specimen-night bg-bark-light/10 shadow-glow-gold overflow-hidden relative group cursor-pointer"
+            className="w-40 h-40 md:w-52 md:h-52 rounded-full border-8 border-asphalt-black bg-bark-light/10 shadow-glow-gold overflow-hidden relative group cursor-pointer"
           >
             <div className="absolute inset-0 flex items-center justify-center text-6xl group-hover:scale-110 transition-transform">
               🧑‍💻
@@ -79,11 +79,11 @@ export function ProfileView() {
                 showDot
               />
             </div>
-            <h1 className="font-bloom text-5xl md:text-7xl font-black text-parchment tracking-tighter uppercase leading-none mb-4">
+            <h1 className="font-bloom text-5xl md:text-7xl font-black text-paper-white tracking-tighter uppercase leading-none mb-4">
               Nishant <span className="text-wattle-gold">Dougall</span>
             </h1>
 
-            <div className="flex flex-wrap justify-center md:justify-start gap-6 text-flannel-flower text-xs font-annotation uppercase tracking-widest opacity-80">
+            <div className="flex flex-wrap justify-center md:justify-start gap-6 text-concrete-grey text-xs font-annotation uppercase tracking-widest opacity-80">
               <span className="flex items-center gap-2">
                 <MapPin className="w-3.5 h-3.5 text-wattle-gold" /> San Francisco, CL
               </span>
@@ -113,18 +113,18 @@ export function ProfileView() {
             <Stone
               mode="gallery"
               elevation="raised"
-              className="p-10 border-flannel-flower/10 bg-specimen-night/40 backdrop-blur-md"
+              className="p-10 border-concrete-grey/10 bg-asphalt-black/40 backdrop-blur-md"
             >
               <ResumeUploader onUploadSuccess={setCareerData} />
             </Stone>
 
             <section className="space-y-8">
               <div className="flex items-baseline gap-4">
-                <h2 className="font-bloom text-3xl font-bold text-parchment uppercase tracking-tight flex items-center gap-3">
+                <h2 className="font-bloom text-3xl font-bold text-paper-white uppercase tracking-tight flex items-center gap-3">
                   <Briefcase className="w-6 h-6 text-wattle-gold" />
                   STRATUM <span className="text-wattle-gold">CHRONOLOGY</span>
                 </h2>
-                <div className="flex-1 h-px bg-flannel-flower/10" />
+                <div className="flex-1 h-px bg-concrete-grey/10" />
               </div>
 
               <div className="space-y-4">
@@ -167,11 +167,11 @@ export function ProfileView() {
             <Stone
               mode="gallery"
               elevation="floating"
-              className="p-8 border-flannel-flower/10 bg-specimen-night/20"
+              className="p-8 border-concrete-grey/10 bg-asphalt-black/20"
             >
               <div className="flex items-center gap-3 mb-6">
                 <Fingerprint className="w-5 h-5 text-wattle-gold" />
-                <h3 className="font-annotation text-[10px] font-bold text-parchment uppercase tracking-[0.3em]">
+                <h3 className="font-annotation text-[10px] font-bold text-paper-white uppercase tracking-[0.3em]">
                   Extracted Filaments
                 </h3>
               </div>
@@ -190,7 +190,7 @@ export function ProfileView() {
                 ).map((skill: string) => (
                   <div
                     key={skill}
-                    className="bg-flannel-flower/5 text-flannel-flower border border-flannel-flower/20 font-mono text-[9px] uppercase tracking-widest px-3 py-1 rounded-full"
+                    className="bg-concrete-grey/5 text-concrete-grey border border-concrete-grey/20 font-mono text-[9px] uppercase tracking-widest px-3 py-1 rounded-full"
                   >
                     {skill}
                   </div>
@@ -201,11 +201,11 @@ export function ProfileView() {
             <Stone
               mode="gallery"
               elevation="floating"
-              className="p-8 border-flannel-flower/10 bg-specimen-night/20"
+              className="p-8 border-concrete-grey/10 bg-asphalt-black/20"
             >
               <div className="flex items-center gap-3 mb-6">
                 <Award className="w-5 h-5 text-wattle-gold" />
-                <h3 className="font-annotation text-[10px] font-bold text-parchment uppercase tracking-[0.3em]">
+                <h3 className="font-annotation text-[10px] font-bold text-paper-white uppercase tracking-[0.3em]">
                   Validation Badges
                 </h3>
               </div>
@@ -237,9 +237,9 @@ export function ProfileView() {
               </div>
             </Stone>
 
-            <div className="p-6 border border-flannel-flower/5 rounded-2xl bg-wattle-gold/5 flex flex-col items-center text-center">
+            <div className="p-6 border border-concrete-grey/5 rounded-2xl bg-wattle-gold/5 flex flex-col items-center text-center">
               <Archive className="w-8 h-8 text-wattle-gold mb-4 opacity-40" />
-              <p className="font-field-note text-sm text-parchment opacity-60 italic leading-relaxed">
+              <p className="font-field-note text-sm text-paper-white opacity-60 italic leading-relaxed">
                 "This record is synchronized with the primary Curio node."
               </p>
             </div>
@@ -265,11 +265,11 @@ function TimelineItem({
     <Stone
       mode="gallery"
       elevation="flat"
-      className="p-6 border-flannel-flower/5 bg-white/5 hover:border-wattle-gold/20 transition-all group overflow-hidden relative"
+      className="p-6 border-concrete-grey/5 bg-white/5 hover:border-wattle-gold/20 transition-all group overflow-hidden relative"
     >
       <div className="absolute inset-y-0 left-0 w-1 bg-wattle-gold opacity-20 group-hover:opacity-100 transition-opacity" />
       <div className="flex justify-between items-start mb-2">
-        <h3 className="font-bloom text-xl font-bold text-parchment uppercase tracking-tight">
+        <h3 className="font-bloom text-xl font-bold text-paper-white uppercase tracking-tight">
           {role}
         </h3>
         <span className="font-mono text-[9px] text-wattle-gold opacity-60 tracking-widest uppercase">
@@ -280,7 +280,7 @@ function TimelineItem({
         {company}
       </p>
       {description && (
-        <p className="font-field-note text-sm text-flannel-flower italic opacity-70 leading-relaxed">
+        <p className="font-field-note text-sm text-concrete-grey italic opacity-70 leading-relaxed">
           {description}
         </p>
       )}
@@ -291,7 +291,7 @@ function TimelineItem({
 function Badge({ emoji, title }: { emoji: string; title: string }) {
   return (
     <div
-      className="aspect-square rounded-full bg-bark-light/5 border border-flannel-flower/10 flex items-center justify-center text-2xl hover:bg-wattle-gold/10 hover:border-wattle-gold/30 transition-all cursor-help relative group"
+      className="aspect-square rounded-full bg-bark-light/5 border border-concrete-grey/10 flex items-center justify-center text-2xl hover:bg-wattle-gold/10 hover:border-wattle-gold/30 transition-all cursor-help relative group"
       title={title}
     >
       {emoji}

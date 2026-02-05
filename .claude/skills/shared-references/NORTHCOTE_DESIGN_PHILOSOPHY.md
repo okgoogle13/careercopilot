@@ -20,7 +20,7 @@ Typography is not decoration—it's declaration. Every font choice says:
 Colors derive from **Australian botanical palette**:
 
 - Sage, terracotta, ochre from native plants
-- Wattle Gold, Waratah Crimson from iconic flora
+- Wattle Gold, Waratah Red from iconic flora
 - These aren't just colors—they're connections to place and ecology
 
 ### Layout as Organic Rhythm

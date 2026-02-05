@@ -30,9 +30,9 @@ export interface StatusBadgeProps {
  * **Variants:**
  * - success: Ghost Gum (green)
  * - warning: Banksia (orange)
- * - error: Waratah Crimson (red)
+ * - error: Waratah Red (red)
  * - info: Wattle Gold (yellow)
- * - neutral: Flannel Flower (gray)
+ * - neutral: Concrete Grey (gray)
  */
 export const StatusBadge: React.FC<StatusBadgeProps> = ({
     label,
@@ -65,8 +65,8 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({
         // Adjusting for high contrast on dark backgrounds
         if (base === 'neutral') {
             styles.bg = 'rgba(230, 225, 214, 0.1)';
-            styles.text = 'var(--color-flannel-flower)';
-            styles.dot = 'var(--color-flannel-flower-dark)';
+            styles.text = 'var(--color-concrete-grey)';
+            styles.dot = 'var(--color-concrete-grey-dark)';
             styles.border = 'rgba(230, 225, 214, 0.2)';
         } else if (base === 'warning') {
             styles.text = 'var(--color-wattle-gold)';

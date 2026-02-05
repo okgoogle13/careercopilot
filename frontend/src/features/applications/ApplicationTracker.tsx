@@ -86,7 +86,7 @@ export function ApplicationTracker() {
   const [applications] = useState<Application[]>(MOCK_APPLICATIONS);
 
   return (
-    <div className="min-h-screen bg-specimen-night relative overflow-hidden pb-12 w-full">
+    <div className="min-h-screen bg-asphalt-black relative overflow-hidden pb-12 w-full">
       {/* Dynamic Stagecraft: Greenhouse Glass & Vines */}
       <div
         className="absolute inset-0 opacity-5 pointer-events-none mix-blend-overlay"
@@ -118,21 +118,21 @@ export function ApplicationTracker() {
             >
               <div className="mb-6 px-2">
                 <div className="flex items-center justify-between mb-1">
-                  <h3 className="font-bloom text-lg font-black text-parchment uppercase tracking-tighter flex items-center gap-2">
+                  <h3 className="font-bloom text-lg font-black text-paper-white uppercase tracking-tighter flex items-center gap-2">
                     <stage.icon className="w-4 h-4 text-wattle-gold" />
                     {stage.name}
                   </h3>
-                  <span className="font-annotation text-[9px] text-flannel-flower bg-flannel-flower/5 px-2 py-0.5 border border-flannel-flower/10">
+                  <span className="font-annotation text-[9px] text-concrete-grey bg-concrete-grey/5 px-2 py-0.5 border border-concrete-grey/10">
                     {applications.filter((a) => a.stage === stage.id).length} UNITS
                   </span>
                 </div>
-                <p className="font-annotation text-[10px] text-flannel-flower uppercase tracking-[0.2em] opacity-60">
+                <p className="font-annotation text-[10px] text-concrete-grey uppercase tracking-[0.2em] opacity-60">
                   {stage.description}
                 </p>
               </div>
 
               {/* Glass Column Shell */}
-              <div className="space-y-4 min-h-[500px] rounded-lg border border-dashed border-flannel-flower/5 bg-bark-light/[0.02] p-2">
+              <div className="space-y-4 min-h-[500px] rounded-lg border border-dashed border-concrete-grey/5 bg-bark-light/[0.02] p-2">
                 {applications
                   .filter((app) => app.stage === stage.id)
                   .map((app) => (
@@ -143,7 +143,7 @@ export function ApplicationTracker() {
                   ))}
 
                 {/* Seedling Dispatch (Add Button) */}
-                <button className="w-full py-4 border border-dashed border-flannel-flower/10 rounded-sm flex items-center justify-center text-flannel-flower/30 hover:border-wattle-gold/40 hover:text-wattle-gold transition-all group">
+                <button className="w-full py-4 border border-dashed border-concrete-grey/10 rounded-sm flex items-center justify-center text-concrete-grey/30 hover:border-wattle-gold/40 hover:text-wattle-gold transition-all group">
                   <Plus className="w-5 h-5 group-hover:rotate-90 transition-transform" />
                 </button>
               </div>
@@ -169,7 +169,7 @@ function ApplicationLeaf({ application }: { application: Application }) {
       <Stone
         mode="gallery"
         elevation="floating"
-        className="p-5 border-flannel-flower/10 bg-specimen-night/40 backdrop-blur-sm group relative overflow-hidden"
+        className="p-5 border-concrete-grey/10 bg-asphalt-black/40 backdrop-blur-sm group relative overflow-hidden"
       >
         {/* Stage Indicator Notch */}
         <div className="absolute top-0 left-0 w-1 h-full bg-wattle-gold opacity-40 group-hover:opacity-100 transition-opacity" />
@@ -181,31 +181,31 @@ function ApplicationLeaf({ application }: { application: Application }) {
               variant="success"
               showDot
             />
-            <button className="text-flannel-flower/40 hover:text-wattle-gold">
+            <button className="text-concrete-grey/40 hover:text-wattle-gold">
               <MoreHorizontal className="w-4 h-4" />
             </button>
           </div>
 
           <div>
-            <h4 className="font-bloom text-base font-bold text-parchment uppercase leading-none mb-1">
+            <h4 className="font-bloom text-base font-bold text-paper-white uppercase leading-none mb-1">
               {application.title}
             </h4>
-            <p className="font-field-note italic text-xs text-flannel-flower">
+            <p className="font-field-note italic text-xs text-concrete-grey">
               {application.company}
             </p>
           </div>
 
           <div className="pt-2 space-y-2">
-            <div className="flex items-center gap-2 text-[10px] font-annotation text-flannel-flower/60 uppercase tracking-widest">
+            <div className="flex items-center gap-2 text-[10px] font-annotation text-concrete-grey/60 uppercase tracking-widest">
               <MapPin className="w-3 h-3" /> {application.location}
             </div>
-            <div className="flex items-center gap-2 text-[10px] font-annotation text-flannel-flower/40 uppercase tracking-widest">
+            <div className="flex items-center gap-2 text-[10px] font-annotation text-concrete-grey/40 uppercase tracking-widest">
               <Calendar className="w-3 h-3" /> {application.appliedDate}
             </div>
           </div>
 
-          <div className="pt-3 flex justify-between items-center border-t border-flannel-flower/5">
-            <span className="font-mono text-[8px] text-flannel-flower/30 uppercase tracking-[0.2em]">
+          <div className="pt-3 flex justify-between items-center border-t border-concrete-grey/5">
+            <span className="font-mono text-[8px] text-concrete-grey/30 uppercase tracking-[0.2em]">
               SPECIMEN_ID: {application.id.toString().padStart(3, '0')}
             </span>
             <Pebble

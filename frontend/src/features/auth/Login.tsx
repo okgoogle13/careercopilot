@@ -9,7 +9,7 @@ import { useAuth } from '../../context/AuthContext';
 
 // Northcote Assets
 import specimenGrid from '../../assets/specimens/leaf-fern.png'; // Using available specimen
-import parchmentGrid from '../../assets/textures/paper-grain.png'; // Using available texture
+import paperWhiteGrid from '../../assets/textures/paper-grain.png'; // Using available texture
 
 const loginSchema = z.object({
   email: z.string().email('Please enter a valid email'),
@@ -43,11 +43,11 @@ export function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-specimen-night-darkest flex items-center justify-center p-8 animate-in fade-in duration-500 relative overflow-hidden">
+    <div className="min-h-screen bg-asphalt-black-darkest flex items-center justify-center p-8 animate-in fade-in duration-500 relative overflow-hidden">
       {/* Atmosphere Layer */}
       <div
         className="absolute inset-0 opacity-10 pointer-events-none"
-        style={{ backgroundImage: `url(${parchmentGrid})`, backgroundRepeat: 'repeat' }}
+        style={{ backgroundImage: `url(${paperWhiteGrid})`, backgroundRepeat: 'repeat' }}
       />
 
       <div className="w-full max-w-md relative z-10">
@@ -55,7 +55,7 @@ export function Login() {
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
-          className="bg-eucalypt-smoke/80 backdrop-blur-xl rounded-stone p-10 border border-flannel-flower/10 shadow-maximum overflow-hidden relative"
+          className="bg-concrete-grey/80 backdrop-blur-xl rounded-stone p-10 border border-concrete-grey/10 shadow-maximum overflow-hidden relative"
         >
           {/* Compass Motif Decoration */}
           <div className="absolute top-[-40px] right-[-40px] w-32 h-32 opacity-20 pointer-events-none">
@@ -70,7 +70,7 @@ export function Login() {
           {/* Header */}
           <div className="text-center mb-10">
             <h1 className="text-6xl text-bloom-ultra text-wattle-gold mb-2">Entry Gate</h1>
-            <p className="text-curator-accent text-flannel-flower opacity-70">
+            <p className="text-curator-accent text-concrete-grey opacity-70">
               Begin your botanical assessment
             </p>
           </div>
@@ -80,7 +80,7 @@ export function Login() {
             <motion.div
               initial={{ x: -10, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
-              className="mb-8 p-4 rounded-pebble bg-waratah-crimson/20 text-waratah-crimson border border-waratah-crimson/30 font-annotation text-xs"
+              className="mb-8 p-4 rounded-pebble bg-waratah-red/20 text-waratah-red border border-waratah-red/30 font-annotation text-xs"
             >
               ⚠️ [FAILED_AUTH]: {authError}
             </motion.div>
@@ -103,11 +103,11 @@ export function Login() {
                 id="email"
                 type="email"
                 placeholder="investigator@station.net"
-                className="w-full px-6 bg-specimen-night/50 border border-flannel-flower/20 text-parchment rounded-stone h-14 focus:outline-none focus:border-wattle-gold focus:ring-1 focus:ring-wattle-gold transition-all duration-300 font-field-note"
+                className="w-full px-6 bg-asphalt-black/50 border border-concrete-grey/20 text-paper-white rounded-stone h-14 focus:outline-none focus:border-wattle-gold focus:ring-1 focus:ring-wattle-gold transition-all duration-300 font-field-note"
                 {...register('email')}
               />
               {errors.email && (
-                <p className="text-waratah-crimson text-[10px] mt-2 font-annotation uppercase">
+                <p className="text-waratah-red text-[10px] mt-2 font-annotation uppercase">
                   {errors.email.message}
                 </p>
               )}
@@ -124,11 +124,11 @@ export function Login() {
                 id="password"
                 type="password"
                 placeholder="••••••••"
-                className="w-full px-6 bg-specimen-night/50 border border-flannel-flower/20 text-parchment rounded-stone h-14 focus:outline-none focus:border-wattle-gold focus:ring-1 focus:ring-wattle-gold transition-all duration-300 font-field-note"
+                className="w-full px-6 bg-asphalt-black/50 border border-concrete-grey/20 text-paper-white rounded-stone h-14 focus:outline-none focus:border-wattle-gold focus:ring-1 focus:ring-wattle-gold transition-all duration-300 font-field-note"
                 {...register('password')}
               />
               {errors.password && (
-                <p className="text-waratah-crimson text-[10px] mt-2 font-annotation uppercase">
+                <p className="text-waratah-red text-[10px] mt-2 font-annotation uppercase">
                   {errors.password.message}
                 </p>
               )}
@@ -146,16 +146,16 @@ export function Login() {
           </form>
 
           {/* Helper Links */}
-          <div className="flex justify-between items-center mt-10 pt-6 border-t border-flannel-flower/10">
+          <div className="flex justify-between items-center mt-10 pt-6 border-t border-concrete-grey/10">
             <Link
               to="/register"
-              className="text-curator-accent text-sm text-flannel-flower hover:text-wattle-gold transition-colors"
+              className="text-curator-accent text-sm text-concrete-grey hover:text-wattle-gold transition-colors"
             >
               New Prospect? Register.
             </Link>
             <button
               onClick={() => navigate('/dashboard?demo=true')}
-              className="text-annotation text-[9px] text-flannel-flower/40 hover:text-flannel-flower uppercase tracking-tighter"
+              className="text-annotation text-[9px] text-concrete-grey/40 hover:text-concrete-grey uppercase tracking-tighter"
             >
               Guest Clearance
             </button>

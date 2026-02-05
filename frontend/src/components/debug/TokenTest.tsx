@@ -6,8 +6,8 @@ export const TokenTest = () => {
   return (
     <div
       className="
-      bg-eucalypt-smoke
-      text-parchment
+      bg-concrete-grey
+      text-paper-white
       rounded-pebble
       p-lg
       shadow-rest
@@ -33,7 +33,7 @@ export const TokenTest = () => {
           className="
           bg-wattle-gold
           hover:bg-wattle-gold-glow
-          text-specimen-night
+          text-asphalt-black
           rounded-leaf
           px-5 py-2.5
           font-field-note font-semibold
@@ -46,9 +46,9 @@ export const TokenTest = () => {
 
         <button
           className="
-          bg-waratah-crimson
-          hover:bg-waratah-crimson-glow
-          text-parchment
+          bg-waratah-red
+          hover:bg-waratah-red-glow
+          text-paper-white
           rounded-petal
           px-4 py-2
           font-field-note font-medium

@@ -23,33 +23,33 @@ const cardVariants = cva(
             {
                 mode: 'gallery',
                 variant: 'filled',
-                class: 'bg-surface-gallery-eucalypt-smoke text-on-surface-gallery-parchment',
+                class: 'bg-surface-gallery-concrete-grey text-on-surface-gallery-paper-white',
             },
             {
                 mode: 'gallery',
                 variant: 'outlined',
-                class: 'border-outline-gallery-sandstone text-on-surface-gallery-parchment',
+                class: 'border-outline-gallery-sandstone text-on-surface-gallery-paper-white',
             },
             {
                 mode: 'gallery',
                 variant: 'glass',
-                class: 'bg-surface-gallery-glass-medium border-white/10 text-on-surface-gallery-parchment',
+                class: 'bg-surface-gallery-glass-medium border-white/10 text-on-surface-gallery-paper-white',
             },
             // Laboratory Mode - Precise & Cool
             {
                 mode: 'laboratory',
                 variant: 'filled',
-                class: 'bg-surface-laboratory-deep-ocean text-on-surface-laboratory-parchment',
+                class: 'bg-surface-laboratory-deep-ocean text-on-surface-laboratory-paper-white',
             },
             {
                 mode: 'laboratory',
                 variant: 'outlined',
-                class: 'border-outline-laboratory-steel text-on-surface-laboratory-parchment',
+                class: 'border-outline-laboratory-steel text-on-surface-laboratory-paper-white',
             },
             {
                 mode: 'laboratory',
                 variant: 'glass',
-                class: 'bg-surface-laboratory-glass-medium border-white/5 text-on-surface-laboratory-parchment',
+                class: 'bg-surface-laboratory-glass-medium border-white/5 text-on-surface-laboratory-paper-white',
             },
         ],
         defaultVariants: {

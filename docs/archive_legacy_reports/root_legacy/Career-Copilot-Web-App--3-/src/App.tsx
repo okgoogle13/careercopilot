@@ -53,7 +53,7 @@ const ProtectedLayout = () => {
 // Public Layout (Login/Register)
 const PublicLayout = () => {
   return (
-    <div className="min-h-screen bg-[#141218] relative">
+    <div className="min-h-screen bg-[#1A1714] relative">
       {/* Textured Background */}
       <div
         className="fixed inset-0 pointer-events-none z-0 opacity-30 mix-blend-overlay"

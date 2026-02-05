@@ -77,12 +77,12 @@ Label at bottom in cream serif: "Fig. II. Dacelo novaeguineae".
 (No electric blue, no cyan, no neon colors, no cartoon eyes, no white background).
 ```
 
-### 3. Laboratory Parchment Texture
+### 3. Laboratory Paper White Texture
 
 _The background for the "Technical/Laboratory" mode._
 
 ```
-**Generate a seamless texture of "Scientific Grid Parchment".**
+**Generate a seamless texture of "Scientific Grid Paper White".**
 
 **Visuals:**
 *   **Base:** Very dark charcoal-grey (#2C2C2C). NOT white or beige.
@@ -233,7 +233,7 @@ Background: Deep #1A1714.
 
 Before checking off an asset, ensure it passes the **Northcote Visual Audit**:
 
-- [ ] **Palette Compliance:** Is the red _Waratah Crimson_ (#C45C4B)? Is the gold _Wattle Gold_ (#D4A84B)? **Are there any forbidden blues/purples?**
+- [ ] **Palette Compliance:** Is the red _Waratah Red_ (#C45C4B)? Is the gold _Wattle Gold_ (#D4A84B)? **Are there any forbidden blues/purples?**
 - [ ] **Anatomical Geometry:** Does the Echidna spine cluster look mathematical? Does the Banksia pod show a spiral?
 - [ ] **Lighting:** Is the background pure black (#1A1714)? Is there dramatic contrast?
 - [ ] **Typology:** If text is present, is it a cream serif font (e.g., "Fig. II")?

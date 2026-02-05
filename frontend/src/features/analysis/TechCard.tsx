@@ -29,15 +29,15 @@ const TechCard = React.forwardRef<HTMLDivElement, TechCardProps>(
             beginner: mode === 'gallery' ? 'text-status-gallery-ghost-gum' : 'text-status-laboratory-clinical-sage',
             intermediate: mode === 'gallery' ? 'text-wattle-gold' : 'text-wattle-gold',
             advanced: mode === 'gallery' ? 'text-status-gallery-banksia-orange' : 'text-status-gallery-banksia-orange',
-            expert: mode === 'gallery' ? 'text-tertiary-waratah-crimson' : 'text-status-laboratory-clinical-alert',
+            expert: mode === 'gallery' ? 'text-tertiary-waratah-red' : 'text-status-laboratory-clinical-alert',
         };
 
         // Styles derived from M3Card glass variant logic
         const containerClasses = cn(
             'relative overflow-hidden transition-all duration-300 border backdrop-blur-md',
             mode === 'gallery'
-                ? 'bg-surface-gallery-glass-medium border-white/10 text-on-surface-gallery-parchment'
-                : 'bg-surface-laboratory-glass-medium border-white/5 text-on-surface-laboratory-parchment',
+                ? 'bg-surface-gallery-glass-medium border-white/10 text-on-surface-gallery-paper-white'
+                : 'bg-surface-laboratory-glass-medium border-white/5 text-on-surface-laboratory-paper-white',
             className
         );
 
@@ -103,7 +103,7 @@ const TechCard = React.forwardRef<HTMLDivElement, TechCardProps>(
 
                     {/* Description */}
                     {description && (
-                        <p className="text-sm text-secondary-flannel-flower mb-4 leading-relaxed">
+                        <p className="text-sm text-secondary-concrete-grey mb-4 leading-relaxed">
                             {description}
                         </p>
                     )}
@@ -117,7 +117,7 @@ const TechCard = React.forwardRef<HTMLDivElement, TechCardProps>(
                                     className={cn(
                                         "px-2 py-1 text-xs font-annotation uppercase tracking-wider",
                                         mode === 'gallery'
-                                            ? 'bg-surface-gallery-eucalypt-smoke-high border border-glassmorphism-gallery-border'
+                                            ? 'bg-surface-gallery-concrete-grey-high border border-glassmorphism-gallery-border'
                                             : 'bg-surface-laboratory-slate-smoke-high border border-glassmorphism-laboratory-border'
                                     )}
                                     style={{

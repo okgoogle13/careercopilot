@@ -31,23 +31,23 @@ const buttonVariants = cva(
             {
                 mode: 'gallery',
                 variant: 'primary',
-                class: 'bg-wattle-gold text-surface-specimen-night hover:bg-primary-wattle-glow border border-transparent',
+                class: 'bg-wattle-gold text-surface-asphalt-black hover:bg-primary-wattle-glow border border-transparent',
             },
             {
                 mode: 'gallery',
                 variant: 'secondary',
-                class: 'bg-surface-gallery-glass-medium text-secondary-flannel-flower border-glass-border hover:bg-surface-gallery-elevated',
+                class: 'bg-surface-gallery-glass-medium text-secondary-concrete-grey border-glass-border hover:bg-surface-gallery-elevated',
             },
             // Laboratory Mode
             {
                 mode: 'laboratory',
                 variant: 'primary',
-                class: 'bg-wattle-gold text-surface-specimen-night hover:bg-primary-wattle-glow rounded-sm',
+                class: 'bg-wattle-gold text-surface-asphalt-black hover:bg-primary-wattle-glow rounded-sm',
             },
             {
                 mode: 'laboratory',
                 variant: 'secondary',
-                class: 'bg-surface-laboratory-glass-medium text-secondary-flannel-flower border-glass-border rounded-sm hover:bg-surface-laboratory-elevated',
+                class: 'bg-surface-laboratory-glass-medium text-secondary-concrete-grey border-glass-border rounded-sm hover:bg-surface-laboratory-elevated',
             },
         ],
         defaultVariants: {

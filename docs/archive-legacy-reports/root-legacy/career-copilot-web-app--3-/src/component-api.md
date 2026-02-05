@@ -277,7 +277,7 @@ interface ApplicationCardProps {
 **Stepper Colors:**
 
 - **Current Step:** Purple (`bg-[#D0BCFF]`, `text-[#381E72]`)
-- **Completed:** Green (`bg-[#A8C5A3]`, `text-[#141218]`)
+- **Completed:** Green (`bg-[#A8C5A3]`, `text-[#1A1714]`)
 - **Pending:** Gray (`bg-[#2B2930]`, `text-[#CAC4D0]`)
 
 ---

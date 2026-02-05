@@ -8,7 +8,7 @@
 @layer base {
   :root {
     /* Map tokens to CSS Variables for Tailwind to consume */
-    --color-surface: #141218;
+    --color-surface: #1A1714;
     --color-primary: #D0BCFF;
     --color-outline-variant: #49454F;
   }

@@ -46,7 +46,7 @@ export interface LensProps extends Omit<React.InputHTMLAttributes<HTMLInputEleme
  *
  * **Northcote Design Token Usage:**
  * - Shape: `--radius-leaf` (organic shape) for inputs
- * - Colors: Northcote botanical palette (Wattle Gold, Waratah Crimson, Eucalypt Smoke)
+ * - Colors: Northcote botanical palette (Wattle Gold, Waratah Red, Concrete Grey)
  * - Typography: Northcote field-note font family
  * - Motion: Viscous-breeze easing for organic transitions
  * - Visual: Glassmorphism with subtle backdrop blur
@@ -55,7 +55,7 @@ export interface LensProps extends Omit<React.InputHTMLAttributes<HTMLInputEleme
  * - Default: Outlined with subtle border
  * - Hover: Border color intensifies
  * - Focus: Wattle Gold accent with glow
- * - Error: Waratah Crimson with error message
+ * - Error: Waratah Red with error message
  * - Disabled: Reduced opacity
  *
  * @example
@@ -134,11 +134,11 @@ export const Lens = forwardRef<HTMLInputElement, LensProps>(
       backgroundColor: variant === 'filled' ? 'rgba(44, 39, 35, 0.4)' : 'transparent',
       border: '2px solid',
       borderColor: error
-        ? 'var(--color-waratah-crimson)'
+        ? 'var(--color-waratah-red)'
         : isFocused
           ? 'var(--color-wattle-gold)'
-          : 'var(--color-eucalypt-smoke-base)',
-      color: 'var(--color-parchment)',
+          : 'var(--color-concrete-grey-base)',
+      color: 'var(--color-paper-white)',
       transition: 'all var(--duration-standard) var(--ease-viscous-breeze)',
     };
 
@@ -171,12 +171,12 @@ export const Lens = forwardRef<HTMLInputElement, LensProps>(
           <label
             className={`
           mb-2 text-sm font-medium transition-colors duration-200
-          ${error ? 'text-[var(--color-waratah-crimson)]' : 'text-[var(--color-flannel-flower)]'}
+          ${error ? 'text-[var(--color-waratah-red)]' : 'text-[var(--color-concrete-grey)]'}
           ${isFocused && !error ? 'text-[var(--color-wattle-gold)]' : ''}
         `}
           >
             {label}
-            {required && <span className="text-[var(--color-waratah-crimson)] ml-1">*</span>}
+            {required && <span className="text-[var(--color-waratah-red)] ml-1">*</span>}
           </label>
         )}
 
@@ -191,7 +191,7 @@ export const Lens = forwardRef<HTMLInputElement, LensProps>(
               <div
                 className={`
               flex-shrink-0 ml-3 ${sizeClasses[size].adornment}
-              ${error ? 'text-[var(--color-waratah-crimson)]' : 'text-[var(--color-flannel-flower-dark)]'}
+              ${error ? 'text-[var(--color-waratah-red)]' : 'text-[var(--color-concrete-grey-dark)]'}
             `}
               >
                 {startAdornment}
@@ -218,7 +218,7 @@ export const Lens = forwardRef<HTMLInputElement, LensProps>(
               <div
                 className={`
               flex-shrink-0 mr-3 ${sizeClasses[size].adornment}
-              ${error ? 'text-[var(--color-waratah-crimson)]' : 'text-[var(--color-flannel-flower-dark)]'}
+              ${error ? 'text-[var(--color-waratah-red)]' : 'text-[var(--color-concrete-grey-dark)]'}
             `}
               >
                 {endAdornment}
@@ -235,7 +235,7 @@ export const Lens = forwardRef<HTMLInputElement, LensProps>(
                 id={`${props.id}-helper-text`}
                 className={`
                 text-xs
-                ${error ? 'text-[var(--color-waratah-crimson)]' : 'text-[var(--color-flannel-flower-dark)]'}
+                ${error ? 'text-[var(--color-waratah-red)]' : 'text-[var(--color-concrete-grey-dark)]'}
               `}
               >
                 {displayHelperText}
@@ -246,7 +246,7 @@ export const Lens = forwardRef<HTMLInputElement, LensProps>(
               <p
                 className={`
               text-xs
-              ${charCount > maxLength ? 'text-[var(--color-waratah-crimson)]' : 'text-[var(--color-flannel-flower-dark)]'}
+              ${charCount > maxLength ? 'text-[var(--color-waratah-red)]' : 'text-[var(--color-concrete-grey-dark)]'}
               ml-auto
             `}
               >
@@ -317,11 +317,11 @@ export const LensArea = forwardRef<HTMLTextAreaElement, LensAreaProps>(
       backgroundColor: variant === 'filled' ? 'rgba(44, 39, 35, 0.4)' : 'transparent',
       border: '2px solid',
       borderColor: error
-        ? 'var(--color-waratah-crimson)'
+        ? 'var(--color-waratah-red)'
         : isFocused
           ? 'var(--color-wattle-gold)'
-          : 'var(--color-eucalypt-smoke-base)',
-      color: 'var(--color-parchment)',
+          : 'var(--color-concrete-grey-base)',
+      color: 'var(--color-paper-white)',
       transition: 'all var(--duration-standard) var(--ease-viscous-breeze)',
     };
 
@@ -334,12 +334,12 @@ export const LensArea = forwardRef<HTMLTextAreaElement, LensAreaProps>(
           <label
             className={`
           mb-2 text-sm font-medium transition-colors duration-200
-          ${error ? 'text-[var(--color-waratah-crimson)]' : 'text-[var(--color-flannel-flower)]'}
+          ${error ? 'text-[var(--color-waratah-red)]' : 'text-[var(--color-concrete-grey)]'}
           ${isFocused && !error ? 'text-[var(--color-wattle-gold)]' : ''}
         `}
           >
             {label}
-            {required && <span className="text-[var(--color-waratah-crimson)] ml-1">*</span>}
+            {required && <span className="text-[var(--color-waratah-red)] ml-1">*</span>}
           </label>
         )}
 
@@ -380,7 +380,7 @@ export const LensArea = forwardRef<HTMLTextAreaElement, LensAreaProps>(
                 id={`${props.id}-helper-text`}
                 className={`
                 text-xs
-                ${error ? 'text-[var(--color-waratah-crimson)]' : 'text-[var(--color-flannel-flower-dark)]'}
+                ${error ? 'text-[var(--color-waratah-red)]' : 'text-[var(--color-concrete-grey-dark)]'}
               `}
               >
                 {displayHelperText}
@@ -391,7 +391,7 @@ export const LensArea = forwardRef<HTMLTextAreaElement, LensAreaProps>(
               <p
                 className={`
               text-xs
-              ${charCount > maxLength ? 'text-[var(--color-waratah-crimson)]' : 'text-[var(--color-flannel-flower-dark)]'}
+              ${charCount > maxLength ? 'text-[var(--color-waratah-red)]' : 'text-[var(--color-concrete-grey-dark)]'}
               ml-auto
             `}
               >

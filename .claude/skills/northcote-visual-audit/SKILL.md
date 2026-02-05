@@ -258,7 +258,7 @@ This skill:
 
 Before checking off an asset as audit-complete, ensure it passes the **Northcote Visual Audit**:
 
-- [ ] **Palette Compliance:** Is the red _Waratah Crimson_ (#C45C4B)? Is the gold _Wattle Gold_ (#D4A84B)? **Are there any forbidden blues/purples?**
+- [ ] **Palette Compliance:** Is the red _Waratah Red_ (#C45C4B)? Is the gold _Wattle Gold_ (#D4A84B)? **Are there any forbidden blues/purples?**
 - [ ] **Anatomical Geometry:** Does the Echidna spine cluster look mathematical? Does the Banksia pod show a spiral?
 - [ ] **Lighting:** Is the background pure black (#1A1714)? Is there dramatic contrast?
 - [ ] **Typology:** If text is present, is it a cream serif font (e.g., "Fig. II")?

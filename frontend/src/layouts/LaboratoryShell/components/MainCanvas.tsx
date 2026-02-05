@@ -10,7 +10,7 @@ export const MainCanvas: React.FC = () => {
                 {/* Intro / Breadcrumbs */}
                 <div className="mb-4">
                     <h2 className="font-bloom text-2xl text-wattle-gold">Active Analysis</h2>
-                    <p className="font-field-note text-secondary-flannel-flower opacity-80">
+                    <p className="font-field-note text-secondary-concrete-grey opacity-80">
                         Session ID: #L-ALPHA-01
                     </p>
                 </div>

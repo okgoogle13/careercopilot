@@ -257,7 +257,7 @@ function analyzeComponents(): InventoryReport {
       /\bM3[A-Z]/.test(text);
 
     const curioTokenPattern =
-      /(wattle|waratah|eucalypt|flannel|parchment|specimen|pebble|stone|northcote|curio|banksia|bottlebrush|gum|fern|sentry|gallery|laboratory|slate)/i;
+      /(wattle|waratah|eucalypt|flannel|paper-white|specimen|pebble|stone|northcote|curio|banksia|bottlebrush|gum|fern|sentry|gallery|laboratory|slate)/i;
     const usesDesignTokens =
       curioTokenPattern.test(text) ||
       /--(radius|elevation|duration|motion|surface|color)-/i.test(text);

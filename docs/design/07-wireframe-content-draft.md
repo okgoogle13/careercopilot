@@ -25,7 +25,7 @@ This document provides the specific "Victorian Naturalist" copy and precise asse
 | Element           | Draft Copy                                                       | Typography Token / Settings                                                                                  |
 | :---------------- | :--------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------- |
 | **Hero Headline** | THE<br>RESURRECTION                                              | **Font:** Libre Bodoni Italic<br>**Size:** 96px (Display Hero)<br>**Color:** `wattleGold`                    |
-| **Subhead**       | _Your professional history, re-catalogued as a living specimen._ | **Font:** Fraunces Variable<br>**Settings:** `opsz`=144, `WONK`=1, `SOFT`=50<br>**Color:** `parchment` (80%) |
+| **Subhead**       | _Your professional history, re-catalogued as a living specimen._ | **Font:** Fraunces Variable<br>**Settings:** `opsz`=144, `WONK`=1, `SOFT`=50<br>**Color:** `paper-white` (80%) |
 | **CTA Primary**   | COMMENCE EXCAVATION                                              | **Font:** JetBrains Mono<br>**Settings:** Uppercase, tracking 0.2em                                          |
 | **CTA Secondary** | VIEW THE CATALOGUE                                               | **Font:** Work Sans (Body)<br>**Weight:** 400                                                                |
 
@@ -108,7 +108,7 @@ This document provides the specific "Victorian Naturalist" copy and precise asse
 >
 > - **Location:** Centered strictly behind the Drop Zone.
 > - **Opacity:** 4-6% (Watermark).
-> - **Blend Mode:** `multiply` against Parchment background.
+> - **Blend Mode:** `multiply` against Paper White background.
 > - **Subject:** Osteologically accurate ribcage or vertebrae.
 > - **Context:** Analysis Depth - suggests the resume is being X-rayed and analyzed down to its structural bones.
 >

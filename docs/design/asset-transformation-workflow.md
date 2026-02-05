@@ -24,7 +24,7 @@ Assets rarely come out perfect. Manual or semi-automated transformation steps in
 ### B. Color Grading
 
 - Enforce jewel-tone saturation (crimson, gold, emerald).
-- Desaturate any accidental "naturalistic" blue feathers or green leaves to align with the Northcote palette (Slate-Grey, Eucalypt Smoke).
+- Desaturate any accidental "naturalistic" blue feathers or green leaves to align with the Northcote palette (Slate-Grey, Concrete Grey).
 
 ### C. Transparency Assignment
 

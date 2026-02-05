@@ -16,7 +16,7 @@ All forbidden fonts have been successfully purged from the codebase. The Northco
 ### Core Components
 1. **`frontend/src/components/ui/AuroraHeader.tsx`** ✅
    - Replaced: Plus Jakarta Sans → Fraunces
-   - Updated: Gradient colors to Wattle Gold → Waratah Crimson → Flannel Flower
+   - Updated: Gradient colors to Wattle Gold → Waratah Red → Concrete Grey
    - Added: Fraunces variable axes (SOFT, WONK)
 
 2. **`frontend/src/components/ui/SplitHeader.tsx`** ✅
@@ -37,7 +37,7 @@ All forbidden fonts have been successfully purged from the codebase. The Northco
 ### Theme Configuration
 5. **`frontend/src/theme/mui-theme.ts`** ✅
    - Updated: Header comments to reference Northcote Curio
-   - Updated: Color mappings to Wattle Gold, Waratah Crimson, Flannel Flower
+   - Updated: Color mappings to Wattle Gold, Waratah Red, Concrete Grey
 
 ### Utility Classes
 6. **`frontend/src/index.css`** ✅
@@ -121,8 +121,8 @@ All forbidden fonts have been successfully purged from the codebase. The Northco
 
 ### Color ✅ PASS
 - Wattle Gold (#D4A84B) as primary
-- Waratah Crimson (#C45C4B) as accent
-- Specimen Night (#1A1714) as surface
+- Waratah Red (#C45C4B) as accent
+- Asphalt Black (#1A1714) as surface
 
 ### Morphology ✅ PASS
 - Organic asymmetry implemented

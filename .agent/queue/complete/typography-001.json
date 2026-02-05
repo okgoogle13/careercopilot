@@ -12,7 +12,7 @@
     "h4": "font-family: 'Fraunces', serif; font-size: 24px; line-height: 32px; font-weight: var(--sys-type-weight-medium);",
     "h5": "font-family: 'Work Sans', sans-serif; font-size: var(--sys-type-title-large-size); line-height: var(--sys-type-title-large-line-height); font-weight: var(--sys-type-weight-medium);",
     "h6": "font-family: 'Work Sans', sans-serif; font-size: 16px; line-height: 24px; font-weight: var(--sys-type-weight-medium);",
-    "p": "font-family: 'Work Sans', sans-serif; font-size: var(--sys-type-body-large-size); line-height: var(--sys-type-body-large-line-height); color: var(--color-flannel-flower);",
+    "p": "font-family: 'Work Sans', sans-serif; font-size: var(--sys-type-body-large-size); line-height: var(--sys-type-body-large-line-height); color: var(--color-concrete-grey);",
     "small": "font-family: 'Work Sans', sans-serif; font-size: 14px; line-height: 20px;",
     "code": "font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.1em;",
     "button": "font-family: 'Work Sans', sans-serif; font-weight: var(--sys-type-weight-medium); font-size: var(--sys-type-body-medium-size); transition: all var(--duration-standard) var(--ease-viscous-breeze);",

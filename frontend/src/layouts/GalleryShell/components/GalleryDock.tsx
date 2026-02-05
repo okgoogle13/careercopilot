@@ -39,8 +39,8 @@ export const GalleryDock: React.FC<GalleryDockProps> = ({ currentView, onViewCha
                         className={`
               px-4 py-2 text-sm font-field-note font-medium rounded-[var(--radius-pebble)] transition-all
               ${isActive
-                                ? 'bg-wattle-gold text-surface-specimen-night-base shadow-elevated'
-                                : 'text-parchment hover:bg-surface-gallery-eucalypt-smoke-high/50'}
+                                ? 'bg-wattle-gold text-surface-asphalt-black-base shadow-elevated'
+                                : 'text-paper-white hover:bg-surface-gallery-concrete-grey-high/50'}
             `}
                     >
                         {item.label}

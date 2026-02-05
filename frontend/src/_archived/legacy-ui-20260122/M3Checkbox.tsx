@@ -23,7 +23,7 @@ export interface M3CheckboxProps extends Omit<React.InputHTMLAttributes<HTMLInpu
  *
  * **Northcote Token Usage:**
  * - Typography: `font-field-note` (Label)
- * - Color: `primary-wattle-gold` (Checked), `tertiary-waratah-crimson` (Error)
+ * - Color: `primary-wattle-gold` (Checked), `tertiary-waratah-red` (Error)
  * - Shape: `rounded-[4px]` (Laboratory), `rounded-[6px]` (Gallery)
  * - Motion: `ease-viscous` (Check animation)
  *
@@ -63,7 +63,7 @@ export const M3Checkbox = forwardRef<HTMLInputElement, M3CheckboxProps>(({
             checkbox: `
                 rounded-[6px]
                 ${error
-                    ? 'border-tertiary-waratah-crimson'
+                    ? 'border-tertiary-waratah-red'
                     : isChecked
                         ? 'border-primary-wattle-gold bg-wattle-gold'
                         : 'border-primary-wattle-gold/60'
@@ -71,14 +71,14 @@ export const M3Checkbox = forwardRef<HTMLInputElement, M3CheckboxProps>(({
                 ${!disabled && !isChecked ? 'hover:border-primary-wattle-gold' : ''}
                 ${!disabled && isChecked && !error ? 'hover:bg-wattle-gold/90' : ''}
             `,
-            label: error ? 'text-tertiary-waratah-crimson' : 'text-on-surface-parchment',
-            iconColor: error ? 'text-on-error' : 'text-specimen-night',
+            label: error ? 'text-tertiary-waratah-red' : 'text-on-surface-paper-white',
+            iconColor: error ? 'text-on-error' : 'text-asphalt-black',
         },
         laboratory: {
             checkbox: `
                 rounded-[4px]
                 ${error
-                    ? 'border-tertiary-waratah-crimson'
+                    ? 'border-tertiary-waratah-red'
                     : isChecked
                         ? 'border-primary-wattle-gold bg-wattle-gold'
                         : 'border-outline-variant'
@@ -86,8 +86,8 @@ export const M3Checkbox = forwardRef<HTMLInputElement, M3CheckboxProps>(({
                 ${!disabled && !isChecked ? 'hover:border-outline' : ''}
                 ${!disabled && isChecked && !error ? 'hover:bg-wattle-gold/90' : ''}
             `,
-            label: error ? 'text-tertiary-waratah-crimson' : 'text-on-surface-parchment',
-            iconColor: error ? 'text-on-error' : 'text-specimen-night',
+            label: error ? 'text-tertiary-waratah-red' : 'text-on-surface-paper-white',
+            iconColor: error ? 'text-on-error' : 'text-asphalt-black',
         },
     };
 
@@ -179,28 +179,28 @@ export const M3Radio = forwardRef<HTMLInputElement, M3RadioProps>(({
         gallery: {
             radio: `
                 ${error
-                    ? 'border-tertiary-waratah-crimson'
+                    ? 'border-tertiary-waratah-red'
                     : checked
                         ? 'border-primary-wattle-gold'
                         : 'border-primary-wattle-gold/60'
                 }
                 ${!disabled && !checked ? 'hover:border-primary-wattle-gold' : ''}
             `,
-            dot: error ? 'bg-tertiary-waratah-crimson' : 'bg-wattle-gold',
-            label: error ? 'text-tertiary-waratah-crimson' : 'text-on-surface-parchment',
+            dot: error ? 'bg-tertiary-waratah-red' : 'bg-wattle-gold',
+            label: error ? 'text-tertiary-waratah-red' : 'text-on-surface-paper-white',
         },
         laboratory: {
             radio: `
                 ${error
-                    ? 'border-tertiary-waratah-crimson'
+                    ? 'border-tertiary-waratah-red'
                     : checked
                         ? 'border-primary-wattle-gold'
                         : 'border-outline-variant'
                 }
                 ${!disabled && !checked ? 'hover:border-outline' : ''}
             `,
-            dot: error ? 'bg-tertiary-waratah-crimson' : 'bg-wattle-gold',
-            label: error ? 'text-tertiary-waratah-crimson' : 'text-on-surface-parchment',
+            dot: error ? 'bg-tertiary-waratah-red' : 'bg-wattle-gold',
+            label: error ? 'text-tertiary-waratah-red' : 'text-on-surface-paper-white',
         },
     };
 

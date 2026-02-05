@@ -56,7 +56,7 @@ export const GalleryShell: React.FC<{ children?: React.ReactNode }> = ({ childre
   };
 
   return (
-    <div className="relative min-h-screen w-full overflow-hidden bg-surface-specimen-night-base text-on-surface-parchment font-field-note antialiased selection:bg-wattle-gold selection:text-surface-specimen-night-base">
+    <div className="relative min-h-screen w-full overflow-hidden bg-surface-asphalt-black-base text-on-surface-paper-white font-field-note antialiased selection:bg-wattle-gold selection:text-surface-asphalt-black-base">
       {/* Atmospheric Effects */}
       <Fireflies count={20} />
 

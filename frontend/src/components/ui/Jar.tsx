@@ -55,7 +55,7 @@ export interface JarProps {
  * - Shape: `--radius-stone` for select button, `--radius-pebble` for dropdown
  * - Elevation: `--shadow-maximum` for dropdown menu
  * - Motion: Viscous-breeze easing for smooth open/close
- * - Colors: Northcote botanical palette (Wattle Gold, Waratah Crimson)
+ * - Colors: Northcote botanical palette (Wattle Gold, Waratah Red)
  * - Typography: Field-note font family
  *
  * @example
@@ -138,11 +138,11 @@ export function Jar({
     backgroundColor: 'rgba(44, 39, 35, 0.4)',
     border: '2px solid',
     borderColor: error
-      ? 'var(--color-waratah-crimson)'
+      ? 'var(--color-waratah-red)'
       : isOpen
         ? 'var(--color-wattle-gold)'
-        : 'var(--color-eucalypt-smoke-base)',
-    color: 'var(--color-parchment)',
+        : 'var(--color-concrete-grey-base)',
+    color: 'var(--color-paper-white)',
     transition: 'all var(--duration-standard) var(--ease-viscous-breeze)',
   };
 
@@ -156,12 +156,12 @@ export function Jar({
         <label
           className={`
           mb-2 text-sm font-medium transition-colors duration-200
-          ${error ? 'text-[var(--color-waratah-crimson)]' : 'text-[var(--color-flannel-flower)]'}
+          ${error ? 'text-[var(--color-waratah-red)]' : 'text-[var(--color-concrete-grey)]'}
           ${isOpen && !error ? 'text-[var(--color-wattle-gold)]' : ''}
         `}
         >
           {label}
-          {required && <span className="text-[var(--color-waratah-crimson)] ml-1">*</span>}
+          {required && <span className="text-[var(--color-waratah-red)] ml-1">*</span>}
         </label>
       )}
 
@@ -174,7 +174,7 @@ export function Jar({
           px-4 py-3
           flex items-center justify-between gap-3
           ${isOpen && !error ? 'shadow-[0_0_15px_rgba(212,168,75,0.2)]' : ''}
-          ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:border-[var(--color-flannel-flower-dark)]'}
+          ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:border-[var(--color-concrete-grey-dark)]'}
           ${className}
         `}
         onClick={() => !disabled && setIsOpen(!isOpen)}
@@ -185,15 +185,15 @@ export function Jar({
         <span
           className={
             selectedOption
-              ? 'text-[var(--color-parchment)]'
-              : 'text-[var(--color-flannel-flower-dark)]'
+              ? 'text-[var(--color-paper-white)]'
+              : 'text-[var(--color-concrete-grey-dark)]'
           }
         >
           {selectedOption ? selectedOption.label : placeholder}
         </span>
         <ChevronDown
           className={`
-            w-5 h-5 text-[var(--color-flannel-flower-dark)]
+            w-5 h-5 text-[var(--color-concrete-grey-dark)]
             transition-transform duration-300
             ${isOpen ? 'rotate-180' : 'rotate-0'}
           `}
@@ -207,8 +207,8 @@ export function Jar({
           className="absolute top-full left-0 right-0 mt-3 z-50 overflow-hidden"
           style={{
             borderRadius: 'var(--radius-pebble)',
-            backgroundColor: 'var(--color-specimen-night)',
-            border: '1px solid var(--color-eucalypt-smoke-base)',
+            backgroundColor: 'var(--color-asphalt-black)',
+            border: '1px solid var(--color-concrete-grey-base)',
             boxShadow: 'var(--shadow-maximum)',
             animation: 'fadeIn 0.2s ease-out',
           }}
@@ -229,7 +229,7 @@ export function Jar({
                     px-4 py-3
                     flex items-center justify-between gap-2
                     cursor-pointer
-                    ${isSelected ? 'bg-white/10 text-[var(--color-wattle-gold)]' : 'text-[var(--color-parchment)]'}
+                    ${isSelected ? 'bg-white/10 text-[var(--color-wattle-gold)]' : 'text-[var(--color-paper-white)]'}
                     ${isDisabled ? 'opacity-50 cursor-not-allowed' : 'hover:bg-white/5'}
                     transition-colors duration-150
                   `}
@@ -252,7 +252,7 @@ export function Jar({
         <p
           className={`
           mt-1 px-1 text-xs
-          ${error ? 'text-[var(--color-waratah-crimson)]' : 'text-[var(--color-flannel-flower-dark)]'}
+          ${error ? 'text-[var(--color-waratah-red)]' : 'text-[var(--color-concrete-grey-dark)]'}
         `}
         >
           {displayHelperText}

@@ -24,7 +24,7 @@
 
 - **Context**: Page 4 (Drop Zone) & Page 5 (Cards).
 - **Spec**: Distinct "Laboratory" dark mode background, cooler/bluer than Gallery charcoal.
-- **Current State**: Ambiguous. Code often reuses `eucalypt-smoke` (Gallery).
+- **Current State**: Ambiguous. Code often reuses `concrete-grey` (Gallery).
 - **Action**: Define explicit Lab palette to prevent mode contamination.
 
 ### `color.semantic.border.laboratory.charcoalSlate`

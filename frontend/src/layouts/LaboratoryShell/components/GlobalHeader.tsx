@@ -26,8 +26,8 @@ export const GlobalHeader: React.FC = () => {
             onClick={() => mode !== 'gallery' && toggleMode()}
             className={`px-3 py-1 text-xs font-bold uppercase tracking-wider rounded-md transition-all ${
               mode === 'gallery'
-                ? 'bg-surface-gallery-eucalypt-smoke-high text-wattle-gold shadow-sm'
-                : 'text-secondary-flannel-dim hover:text-on-surface-parchment'
+                ? 'bg-surface-gallery-concrete-grey-high text-wattle-gold shadow-sm'
+                : 'text-secondary-flannel-dim hover:text-on-surface-paper-white'
             }`}
           >
             Gallery
@@ -37,7 +37,7 @@ export const GlobalHeader: React.FC = () => {
             className={`px-3 py-1 text-xs font-bold uppercase tracking-wider rounded-md transition-all ${
               mode === 'laboratory'
                 ? 'bg-surface-laboratory-slate-smoke text-wattle-gold shadow-sm'
-                : 'text-secondary-flannel-dim hover:text-on-surface-parchment'
+                : 'text-secondary-flannel-dim hover:text-on-surface-paper-white'
             }`}
           >
             Laboratory

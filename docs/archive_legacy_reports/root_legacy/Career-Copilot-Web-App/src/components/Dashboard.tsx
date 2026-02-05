@@ -155,7 +155,7 @@ export function Dashboard() {
             damping: 8,
             mass: 1.2,
           }}
-          className="relative overflow-hidden rounded-full px-8 py-4 font-bold text-[#141218] tier-body-strong"
+          className="relative overflow-hidden rounded-full px-8 py-4 font-bold text-[#1A1714] tier-body-strong"
           style={{
             background: "linear-gradient(180deg, #8A9A5B 0%, #6D7E44 100%)", // Sage "Flavor"
             boxShadow: `

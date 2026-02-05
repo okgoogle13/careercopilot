@@ -65,7 +65,7 @@ export const DocumentStack: React.FC = () => {
             {/* Header */}
             <div className="flex items-end justify-between mb-8">
                 <div>
-                    <h1 className="text-display-medium font-display text-on-surface-parchment mb-2">
+                    <h1 className="text-display-medium font-display text-on-surface-paper-white mb-2">
                         Document Stack
                     </h1>
                     <p className="text-body-large text-secondary-flannel-dim font-field-note">
@@ -89,12 +89,12 @@ export const DocumentStack: React.FC = () => {
                         >
                             {/* Icon Container */}
                             <div className="w-12 h-12 rounded-[var(--radius-stone)] bg-surface-laboratory-slate-smoke-highest flex items-center justify-center border border-outline-variant/30">
-                                <Icon className="w-6 h-6 text-on-surface-parchment opacity-70" />
+                                <Icon className="w-6 h-6 text-on-surface-paper-white opacity-70" />
                             </div>
 
                             {/* Main Info */}
                             <div className="flex-1 min-w-0">
-                                <h3 className="text-title-medium font-bold text-on-surface-parchment truncate">
+                                <h3 className="text-title-medium font-bold text-on-surface-paper-white truncate">
                                     {doc.name}
                                 </h3>
                                 <div className="flex items-center gap-4 text-label-small text-secondary-flannel-dim mt-1 font-mono">
@@ -132,7 +132,7 @@ export const DocumentStack: React.FC = () => {
                                 </div>
 
                                 {/* Actions Menu */}
-                                <button className="p-2 text-secondary-flannel-dim hover:text-on-surface-parchment hover:bg-surface-laboratory-slate-smoke-highest rounded-full transition-colors">
+                                <button className="p-2 text-secondary-flannel-dim hover:text-on-surface-paper-white hover:bg-surface-laboratory-slate-smoke-highest rounded-full transition-colors">
                                     <MoreVertical className="w-5 h-5" />
                                 </button>
                             </div>
@@ -144,7 +144,7 @@ export const DocumentStack: React.FC = () => {
             {/* Upload Drop Zone Placeholder */}
             <div className="border-2 border-dashed border-outline-variant/20 rounded-[var(--radius-stone)] p-12 flex flex-col items-center justify-center text-secondary-flannel-dim hover:border-primary-wattle-gold/30 hover:bg-surface-laboratory-slate-smoke-low/20 transition-all cursor-pointer">
                 <Upload className="w-12 h-12 mb-4 opacity-50" />
-                <p className="text-title-medium font-bold text-on-surface-parchment">Drag and drop files here</p>
+                <p className="text-title-medium font-bold text-on-surface-paper-white">Drag and drop files here</p>
                 <p className="text-body-medium mt-2">Supports PDF, DOCX, TXT (Max 10MB)</p>
             </div>
         </div>

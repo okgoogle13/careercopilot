@@ -29,7 +29,7 @@ I have regenerated the core assets using Tier 1 Northcote patterns to ensure 100
 ### Remediated Wallpaper: Nocturnal Gallery (v2)
 ![Nocturnal Gallery v2](/Users/okgoogle13/.gemini/antigravity/brain/211fd345-6ef6-4643-aa0f-deb836212cdb/northcote_wallpaper_nocturnal_v2_1769763735957.png)
 - **Compliance:** **PURGED ELEPHANT**. Australian flora only (Banksia, Waratah, Wattle).
-- **Aesthetic:** Correct #1A1714 Specimen Night background.
+- **Aesthetic:** Correct #1A1714 Asphalt Black background.
 
 ### Remediated Specimen: Waratah (v2)
 ![Waratah v2](/Users/okgoogle13/.gemini/antigravity/brain/211fd345-6ef6-4643-aa0f-deb836212cdb/northcote_waratah_hanging_v2_retry_1769763708806.png)

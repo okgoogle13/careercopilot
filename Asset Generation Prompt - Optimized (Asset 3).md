@@ -8,8 +8,8 @@
 
 - **Resolution:** 1024×1024px (1:1 square, seamless tile)
 - **Format:** PNG (lossless) or High-Quality JPEG
-- **Target Background:** #1A1714 (Specimen Night) or #2C2C2C (Graphite Slate)
-- **File Name:** `northcote-curio_asset-03_scientific-grid_parchment-texture_1024x1024.png`
+- **Target Background:** #1A1714 (Asphalt Black) or #2C2C2C (Graphite Slate)
+- **File Name:** `northcote-curio_asset-03_scientific-grid_paper-white-texture_1024x1024.png`
 
 ---
 
@@ -19,7 +19,7 @@
 ASSET 3: LABORATORY PARCHMENT TEXTURE — THE SCIENTIFIC GRID
 
 SUBJECT OVERVIEW:
-Create a seamless tiling texture of "Scientific Grid Parchment" for a high-end
+Create a seamless tiling texture of "Scientific Grid Paper White" for a high-end
 Victorian laboratory UI. This is a dark-mode vellum surface used by a 19th-century
 naturalist to record microscopic observations. It must feel like an authentic,
 heavyweight material that has been mathematically calibrated.
@@ -29,7 +29,7 @@ heavyweight material that has been mathematically calibrated.
 CRITICAL REQUIREMENTS:
 
 BACKGROUND & COLOR BASE:
-- Base Material: Ancient vellum/parchment, but in deep "Specimen Night" slate.
+- Base Material: Ancient vellum/paper-white, but in deep "Asphalt Black" slate.
 - Primary Color: Charcoal-Graphite (#2C2C2C).
 - Atmosphere: Dark, scholarly, and professional.
 - CRITICAL EXCLUSION: No bright whites, no sepia "tea-stained" paper, no

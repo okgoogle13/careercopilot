@@ -30,7 +30,7 @@ export function MetricCard({
   const cardStyle: React.CSSProperties = {
     borderRadius: 'var(--radius-stone)',
     padding: 'var(--spacing-lg)',
-    backgroundColor: variant === 'filled' ? 'var(--color-specimen-night)' : 'transparent',
+    backgroundColor: variant === 'filled' ? 'var(--color-asphalt-black)' : 'transparent',
     border: '1px solid rgba(240, 234, 214, 0.1)',
     transition: 'all var(--duration-standard) var(--ease-viscous-breeze)',
     boxShadow: isHovered && hoverable ? 'var(--shadow-standard)' : 'var(--shadow-subtle)',
@@ -46,7 +46,7 @@ export function MetricCard({
     >
       <div
         className="absolute inset-0 opacity-[0.02] pointer-events-none"
-        style={{ backgroundImage: 'radial-gradient(var(--color-parchment) 1px, transparent 1px)', backgroundSize: '12px 12px' }}
+        style={{ backgroundImage: 'radial-gradient(var(--color-paper-white) 1px, transparent 1px)', backgroundSize: '12px 12px' }}
       />
 
       <div className="relative z-10">

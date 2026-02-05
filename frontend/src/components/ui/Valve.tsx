@@ -83,7 +83,7 @@ export const Valve = forwardRef<HTMLInputElement, ValveProps>(
                         ${
                           isChecked
                             ? `bg-[var(--ref-palette-${color}-40)]`
-                            : 'bg-[var(--color-eucalypt-smoke-base)]'
+                            : 'bg-[var(--color-concrete-grey-base)]'
                         }
                         peer-focus:ring-2 peer-focus:ring-[var(--color-wattle-gold)]/30
                         border border-white/10
@@ -95,7 +95,7 @@ export const Valve = forwardRef<HTMLInputElement, ValveProps>(
               className={`
                         absolute top-0.5 left-0.5
                         ${currentSize.thumb}
-                        bg-[var(--color-parchment)]
+                        bg-[var(--color-paper-white)]
                         rounded-full
                         shadow-sm
                         transition-all duration-300 var(--ease-viscous-breeze)
@@ -105,7 +105,7 @@ export const Valve = forwardRef<HTMLInputElement, ValveProps>(
           </div>
 
           {label && (
-            <span className="text-sm font-field-note font-medium text-[var(--color-parchment)]">
+            <span className="text-sm font-field-note font-medium text-[var(--color-paper-white)]">
               {label}
             </span>
           )}
@@ -113,7 +113,7 @@ export const Valve = forwardRef<HTMLInputElement, ValveProps>(
 
         {helperText && (
           <p
-            className={`text-xs px-1 ${error ? 'text-[var(--color-waratah-crimson)]' : 'text-[var(--color-flannel-flower-dark)]'}`}
+            className={`text-xs px-1 ${error ? 'text-[var(--color-waratah-red)]' : 'text-[var(--color-concrete-grey-dark)]'}`}
           >
             {helperText}
           </p>

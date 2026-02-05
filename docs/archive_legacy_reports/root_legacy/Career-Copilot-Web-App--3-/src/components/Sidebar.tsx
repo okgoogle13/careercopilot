@@ -97,7 +97,7 @@ export function Sidebar() {
                   md:px-4 lg:px-6
                   ${
                     isActive
-                      ? "bg-[var(--primary-sage)] text-[#141218]"
+                      ? "bg-[var(--primary-sage)] text-[#1A1714]"
                       : "text-[#CAC4D0] hover:bg-[var(--surface-container)] hover:text-[#FFFFFF]"
                   }
                 `}

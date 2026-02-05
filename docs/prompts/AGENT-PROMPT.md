@@ -35,7 +35,7 @@ Prioritize JSON manifests and hard technical tokens over vague prose. Your outpu
 
 ### C. Aesthetic Governance
 
-Enforce the "Specimen Night" (#1A1714) and "Surgical Chiaroscuro" lighting without compromise. If any asset drifts into "AI Slop" (soft edges, generic props, beige palettes), it is your responsibility to trigger a high-precision refinement or regeneration.
+Enforce the "Asphalt Black" (#1A1714) and "Surgical Chiaroscuro" lighting without compromise. If any asset drifts into "AI Slop" (soft edges, generic props, beige palettes), it is your responsibility to trigger a high-precision refinement or regeneration.
 
 ---
 
