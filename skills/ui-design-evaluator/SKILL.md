@@ -52,7 +52,7 @@ INPUT → ANALYZE → EVALUATE → DESIGN → DELIVER
 **A. Northcote Curio V3.1 Compliance (100 pts)**
 - ✅ Uses Federation Typography Stack (Curator, Proclamation, Bloom, Field Note, Annotation)
 - ✅ Asymmetric organic shapes (no uniform border-radius)
-- ✅ Botanical color palette (Wattle Gold, Waratah Crimson, Eucalyptus Smoke)
+- ✅ Botanical color palette (Wattle Gold, Waratah Red, Eucalyptus Smoke)
 - ✅ Mode-appropriate (Gallery vs Laboratory)
 - ✅ V3.1 playful mixing (if Gallery mode)
 - ❌ Anti-Slop violations (Inter/Roboto, purple gradients, uniform corners)
@@ -175,10 +175,10 @@ INPUT → ANALYZE → EVALUATE → DESIGN → DELIVER
 /* Maps to: */ background: var(--nc-wattle-gold-300);
 
 /* Wireframe: "error state - red" */
-/* Maps to: */ color: var(--nc-waratah-crimson-400);
+/* Maps to: */ color: var(--nc-waratah-red-400);
 
 /* Wireframe: "background - dark" */
-/* Maps to: */ background: var(--nc-specimen-night-300);
+/* Maps to: */ background: var(--nc-asphalt-black-300);
 ```
 
 **Typography:**
@@ -271,7 +271,7 @@ Mode: Laboratory (data-focused)
 - ✅ Shadow layering, weight contrast, rotation
 
 **Colors:**
-- Full botanical palette (Wattle Gold, Waratah Crimson)
+- Full botanical palette (Wattle Gold, Waratah Red)
 - High contrast and emotional
 - Glowing accents
 

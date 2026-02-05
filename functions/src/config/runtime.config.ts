@@ -16,7 +16,7 @@
  * ```
  */
 
-import { RuntimeOptions } from "firebase-functions";
+// import { RuntimeOptions } from "firebase-functions"; // Removed invalid import
 
 /**
  * Lightweight API operations (CRUD, simple Firestore queries)
@@ -28,7 +28,7 @@ import { RuntimeOptions } from "firebase-functions";
  * Expected execution time: < 1s
  * Memory usage: 30-80MB
  */
-export const lightweightApi: RuntimeOptions = {
+export const lightweightApi = {
   region: "us-central1",
   memory: "128MB",
   timeoutSeconds: 10,
@@ -45,7 +45,7 @@ export const lightweightApi: RuntimeOptions = {
  * Expected execution time: 1-5s
  * Memory usage: 80-150MB
  */
-export const mediumApi: RuntimeOptions = {
+export const mediumApi = {
   region: "us-central1",
   memory: "256MB",
   timeoutSeconds: 30,
@@ -62,7 +62,7 @@ export const mediumApi: RuntimeOptions = {
  * Expected execution time: 5-30s
  * Memory usage: 150-400MB
  */
-export const heavyApi: RuntimeOptions = {
+export const heavyApi = {
   region: "us-central1",
   memory: "512MB",
   timeoutSeconds: 60,
@@ -81,7 +81,7 @@ export const heavyApi: RuntimeOptions = {
  *
  * Note: Set minInstances: 1 during peak hours to reduce cold starts
  */
-export const aiProcessing: RuntimeOptions = {
+export const aiProcessing = {
   region: "us-central1",
   memory: "1GB",
   timeoutSeconds: 180,
@@ -98,7 +98,7 @@ export const aiProcessing: RuntimeOptions = {
  * Expected execution time: 5-60s
  * Memory usage: 100-200MB
  */
-export const userCleanup: RuntimeOptions = {
+export const userCleanup = {
   region: "us-central1",
   memory: "256MB",
   timeoutSeconds: 60,
@@ -114,7 +114,7 @@ export const userCleanup: RuntimeOptions = {
  * Expected execution time: 30-180s
  * Memory usage: 200-500MB
  */
-export const backgroundTask: RuntimeOptions = {
+export const backgroundTask = {
   region: "us-central1",
   memory: "512MB",
   timeoutSeconds: 120,
@@ -141,10 +141,7 @@ export const RUNTIME_CONFIGS = {
  * @param overrides - Custom overrides
  * @returns Merged runtime configuration
  */
-export function createCustomConfig(
-  baseConfig: RuntimeOptions,
-  overrides: Partial<RuntimeOptions>,
-): RuntimeOptions {
+export function createCustomConfig(baseConfig: any, overrides: Partial<any>): any {
   return {
     ...baseConfig,
     ...overrides,
@@ -155,7 +152,7 @@ export function createCustomConfig(
  * Peak hours configuration (keeps instances warm)
  * Use this for critical functions during business hours
  */
-export function withPeakHoursWarmup(config: RuntimeOptions): RuntimeOptions {
+export function withPeakHoursWarmup(config: any): any {
   return {
     ...config,
     minInstances: 1,
@@ -166,7 +163,7 @@ export function withPeakHoursWarmup(config: RuntimeOptions): RuntimeOptions {
  * Cost-optimized configuration (aggressive scaling down)
  * Use this for low-traffic, non-critical functions
  */
-export function withCostOptimization(config: RuntimeOptions): RuntimeOptions {
+export function withCostOptimization(config: any): any {
   return {
     ...config,
     minInstances: 0,

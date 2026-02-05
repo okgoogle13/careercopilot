@@ -9,13 +9,13 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: 'bg-wattle-gold text-specimen-night hover:bg-wattle-glow shadow-standard hover:shadow-elevated hover:animate-bloom-lift',
+        default: 'bg-wattle-gold text-asphalt-black hover:bg-wattle-glow shadow-standard hover:shadow-elevated hover:animate-bloom-lift',
         destructive:
-          'bg-waratah-crimson text-parchment hover:bg-waratah-glow shadow-standard hover:shadow-elevated focus-visible:ring-waratah-crimson/50',
+          'bg-waratah-red text-paper-white hover:bg-waratah-glow shadow-standard hover:shadow-elevated focus-visible:ring-waratah-red/50',
         outline:
-          'border-2 border-eucalypt-smoke bg-transparent text-eucalypt-mist hover:bg-eucalypt-smoke/10 hover:border-eucalypt-mist',
-        secondary: 'bg-eucalypt-smoke text-parchment hover:bg-eucalypt-dusk shadow-subtle',
-        ghost: 'hover:bg-eucalypt-smoke text-flannel-flower hover:text-parchment',
+          'border-2 border-concrete-grey bg-transparent text-eucalypt-mist hover:bg-concrete-grey/10 hover:border-eucalypt-mist',
+        secondary: 'bg-concrete-grey text-paper-white hover:bg-eucalypt-dusk shadow-subtle',
+        ghost: 'hover:bg-concrete-grey text-concrete-grey hover:text-paper-white',
         link: 'text-wattle-gold underline-offset-4 hover:underline hover:text-wattle-glow',
       },
       size: {

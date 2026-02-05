@@ -9,7 +9,7 @@ export interface PebbleProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
      * - Primary: Wattle Gold (Action)
      * - Secondary: Surface Elevated (Navigation/Option)
      * - Ghost: Transparent (Subtle)
-     * - Destructive: Waratah Crimson (Danger)
+     * - Destructive: Waratah Red (Danger)
      */
     variant?: 'primary' | 'secondary' | 'ghost' | 'destructive';
 

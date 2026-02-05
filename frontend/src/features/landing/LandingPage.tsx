@@ -55,7 +55,7 @@ export function LandingPage(): React.ReactElement {
           <span className="text-annotation text-wattle-gold tracking-[0.2em]">
             RESURRECTION PROTOCOL V3.1
           </span>
-          <span className="text-curator-annotation text-flannel-flower opacity-60">
+          <span className="text-curator-annotation text-concrete-grey opacity-60">
             → specimens awaiting audit
           </span>
         </div>

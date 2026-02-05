@@ -27,7 +27,7 @@ export function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-[#141218] flex items-center justify-center p-8">
+    <div className="min-h-screen bg-[#1A1714] flex items-center justify-center p-8">
       <div className="w-full max-w-md">
         {/* Card */}
         <div

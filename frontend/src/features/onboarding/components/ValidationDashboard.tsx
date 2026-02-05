@@ -164,15 +164,15 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
   };
 
   return (
-    <div className="min-h-screen bg-[var(--color-specimen-night)] p-8 md:p-12 animate-in fade-in duration-700">
+    <div className="min-h-screen bg-[var(--color-asphalt-black)] p-8 md:p-12 animate-in fade-in duration-700">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <header className="flex flex-col md:flex-row justify-between items-start gap-8 mb-12">
           <div>
-            <h1 className="text-5xl font-bold text-[var(--color-parchment)] tracking-tight">
+            <h1 className="text-5xl font-bold text-[var(--color-paper-white)] tracking-tight">
               Professional Vector <span className="text-[var(--color-wattle-gold)]">Audit</span>
             </h1>
-            <p className="text-xl text-[var(--color-flannel-flower-dark)] mt-2">
+            <p className="text-xl text-[var(--color-concrete-grey-dark)] mt-2">
               Refine and validate the tactical components of your professional DNA.
             </p>
           </div>
@@ -222,10 +222,10 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
           >
             <Trophy className="w-10 h-10 text-[var(--color-wattle-gold)]" />
             <div>
-              <span className="text-3xl font-bold text-[var(--color-parchment)] block">
+              <span className="text-3xl font-bold text-[var(--color-paper-white)] block">
                 {localData.Structured_Achievements.length}
               </span>
-              <span className="text-[10px] uppercase tracking-widest text-[var(--color-flannel-flower-dark)]">
+              <span className="text-[10px] uppercase tracking-widest text-[var(--color-concrete-grey-dark)]">
                 Tactical Achievements
               </span>
             </div>
@@ -234,14 +234,14 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
           <Stone
             elevation="raised"
             mode="laboratory"
-            className="flex items-center gap-6 border-l-4 border-l-[var(--color-eucalypt-smoke-base)]"
+            className="flex items-center gap-6 border-l-4 border-l-[var(--color-concrete-grey-base)]"
           >
-            <BrainCircuit className="w-10 h-10 text-[var(--color-eucalypt-smoke-base)]" />
+            <BrainCircuit className="w-10 h-10 text-[var(--color-concrete-grey-base)]" />
             <div>
-              <span className="text-3xl font-bold text-[var(--color-parchment)] block">
+              <span className="text-3xl font-bold text-[var(--color-paper-white)] block">
                 {localData.KSC_Responses.length}
               </span>
-              <span className="text-[10px] uppercase tracking-widest text-[var(--color-flannel-flower-dark)]">
+              <span className="text-[10px] uppercase tracking-widest text-[var(--color-concrete-grey-dark)]">
                 Core Competencies
               </span>
             </div>
@@ -250,16 +250,16 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
           <Stone
             elevation="raised"
             mode="laboratory"
-            className={`flex items-center gap-6 border-l-4 ${flaggedAchievements.length + flaggedKSCs.length > 0 ? 'border-l-orange-500 bg-orange-500/5' : 'border-l-[var(--color-eucalypt-smoke-base)]'}`}
+            className={`flex items-center gap-6 border-l-4 ${flaggedAchievements.length + flaggedKSCs.length > 0 ? 'border-l-orange-500 bg-orange-500/5' : 'border-l-[var(--color-concrete-grey-base)]'}`}
           >
             <AlertTriangle
-              className={`w-10 h-10 ${flaggedAchievements.length + flaggedKSCs.length > 0 ? 'text-orange-500' : 'text-[var(--color-flannel-flower-dark)]/40'}`}
+              className={`w-10 h-10 ${flaggedAchievements.length + flaggedKSCs.length > 0 ? 'text-orange-500' : 'text-[var(--color-concrete-grey-dark)]/40'}`}
             />
             <div>
-              <span className="text-3xl font-bold text-[var(--color-parchment)] block">
+              <span className="text-3xl font-bold text-[var(--color-paper-white)] block">
                 {flaggedAchievements.length + flaggedKSCs.length}
               </span>
-              <span className="text-[10px] uppercase tracking-widest text-[var(--color-flannel-flower-dark)]">
+              <span className="text-[10px] uppercase tracking-widest text-[var(--color-concrete-grey-dark)]">
                 Audit Flags
               </span>
             </div>
@@ -338,7 +338,7 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
                     <div className="absolute left-[-5px] top-0 w-[9px] h-[9px] rounded-full bg-[var(--color-wattle-gold)] shadow-[0_0_8px_var(--color-wattle-gold)]" />
 
                     <div className="flex justify-between items-center mb-6">
-                      <span className="text-[10px] text-[var(--color-flannel-flower-dark)] uppercase tracking-widest">
+                      <span className="text-[10px] text-[var(--color-concrete-grey-dark)] uppercase tracking-widest">
                         Evidence Node {idx + 1}
                       </span>
                       <StatusChip needsReview={achievement.Needs_Review_Flag} />
@@ -406,7 +406,7 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
                         <span className="text-[10px] text-[var(--color-wattle-gold)] uppercase tracking-widest block mb-2">
                           Module {idx + 1} Prompt
                         </span>
-                        <h4 className="text-lg text-[var(--color-parchment)] italic">
+                        <h4 className="text-lg text-[var(--color-paper-white)] italic">
                           "{ksc.KSC_Prompt}"
                         </h4>
                       </div>
@@ -416,7 +416,7 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
                     {ksc.Needs_Review_Flag && ksc.STAR_Feedback && (
                       <div className="bg-orange-500/10 border border-orange-500/20 rounded-stone p-4 mb-8 flex gap-4">
                         <BrainCircuit className="w-5 h-5 text-orange-500 shrink-0" />
-                        <div className="text-xs text-[var(--color-parchment)]/80 leading-relaxed">
+                        <div className="text-xs text-[var(--color-paper-white)]/80 leading-relaxed">
                           <span className="font-bold text-orange-500 uppercase tracking-tighter block mb-1">
                             AI Tactical Feedback
                           </span>
@@ -451,7 +451,7 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
 
         {/* Footer Validation */}
         <footer className="mt-20 pt-10 border-t border-white/5 flex justify-center pb-20">
-          <div className="flex items-center gap-3 px-6 py-3 bg-[var(--color-eucalypt-smoke-base)]/10 text-[var(--color-eucalypt-smoke-base)] rounded-full text-xs uppercase tracking-[0.2em] border border-[var(--color-eucalypt-smoke-base)]/20 shadow-lg">
+          <div className="flex items-center gap-3 px-6 py-3 bg-[var(--color-concrete-grey-base)]/10 text-[var(--color-concrete-grey-base)] rounded-full text-xs uppercase tracking-[0.2em] border border-[var(--color-concrete-grey-base)]/20 shadow-lg">
             <ShieldCheck className="w-4 h-4" />
             Professional Vector Validated and Production Ready
           </div>

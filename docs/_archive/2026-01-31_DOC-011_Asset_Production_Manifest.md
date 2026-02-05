@@ -13,7 +13,7 @@ For efficient execution, process assets in this sequence:
 
 ### Phase 1: Foundation (Day 1)
 1.  **The Sentry (Image 5)** — Hero mascot, emotional anchor
-2.  **Laboratory Parchment Texture (Image 7)** — Mode-critical texture
+2.  **Laboratory Paper White Texture (Image 7)** — Mode-critical texture
 3.  **The Curio Wallpaper (Image 1)** — Primary stage
 
 ### Phase 2: Specimen Series (Day 2)
@@ -43,7 +43,7 @@ Each extraction should produce these deliverables:
 ### File Naming Examples:
 - `motif-gallery-sentry-kookaburra-1024.png`
 - `motif-laboratory-navigator-technical.svg`
-- `texture-laboratory-parchment-tile.jpg`
+- `texture-laboratory-paper-white-tile.jpg`
 - `texture-gallery-curio-wallpaper-2048.jpg`
 
 ---

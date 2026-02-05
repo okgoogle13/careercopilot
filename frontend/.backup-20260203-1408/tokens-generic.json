@@ -78,14 +78,14 @@
       "100": "#FFFFFF"
     },
     "surface": {
-      "DEFAULT": "#141218",
+      "DEFAULT": "#1A1714",
       "container": "#211F26",
       "containerLow": "#1D1B20",
       "containerHigh": "#2B2930",
       "containerHighest": "#36343B",
       "dim": "#0F0D13",
       "bright": "#1D1B22",
-      "on": "#E6E0E9",
+      "on": "#F5F0E8",
       "onVariant": "#938F99",
       "variant": "#49454F"
     },
@@ -93,12 +93,12 @@
       "DEFAULT": "#938F99",
       "variant": "#49454F"
     },
-    "background": "#141218",
-    "onBackground": "#E6E0E9",
+    "background": "#1A1714",
+    "onBackground": "#F5F0E8",
     "shadow": "#6750A4",
     "scrim": "#000000",
-    "inverseSurface": "#E6E0E9",
-    "inverseOnSurface": "#141218",
+    "inverseSurface": "#F5F0E8",
+    "inverseOnSurface": "#1A1714",
     "inversePrimary": "#6750A4",
     "disabled": {
       "text": "rgba(234, 221, 255, 0.38)",

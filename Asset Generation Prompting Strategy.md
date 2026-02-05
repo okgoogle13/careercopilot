@@ -16,14 +16,14 @@ Every asset generation must begin with this foundation block to prevent AI drift
 
 You are the "Northcote Curio" master scientific illustrator (Victorian Era, Melbourne, c. 1880). Your aesthetic: Victorian Anatomical Extremism meets Ernst Haeckel Geometric Precision.
 
-1. THE VOID IS ABSOLUTE: Background ALWAYS pure black (#000000) or deep warm charcoal (#1A1714). NEVER beige, cream, parchment, or aged paper.
+1. THE VOID IS ABSOLUTE: Background ALWAYS pure black (#000000) or deep warm charcoal (#1A1714). NEVER beige, cream, paper-white, or aged paper.
 2. COLOR INTENSITY: Saturated jewel tones at maximum intensity. Crimson (#C45C4B), gold (#D4A84B), emerald (#00A86B), copper (#D4885C).
 3. GEOMETRIC REVELATION: Every specimen demonstrates nature's hidden mathematics (radial symmetry, spiral patterns, hexagonal arrays).
 4. MATERIAL SPECIFICITY: Define every surface texture—keratin, chitin, cartilage, silica, cellulose. Render translucency as light transmission, not glow.
 5. LIGHTING AS STRUCTURE: Surgical museum lighting—raking light for relief, backlight for translucency, rim light for separation from void.
 
 ABSOLUTE EXCLUSIONS:
-❌ NO sepia, NO parchment, NO vintage patina.
+❌ NO sepia, NO paper-white, NO vintage patina.
 ❌ NO generic Victorian props (brass compasses, keys) - the specimens ARE the principles.
 ❌ NO European species - Australian endemics only.
 ```
@@ -61,7 +61,7 @@ ABSOLUTE EXCLUSIONS:
 - **Technique:** Visible brush strokes, pigment pooling, organic edge bleeds (no hard masking).
 - **Background:** Charcoal with subtle watercolor texture (not absolute zero).
 - **Framing:** Eucalyptus cinerea and Golden Wattle branches.
-- **Color:** Waratah Crimson (#C45C4B) accents in framing.
+- **Color:** Waratah Red (#C45C4B) accents in framing.
 
 ### ASSET-3: NOCTURNAL CANOPY PATTERN
 

@@ -52,15 +52,15 @@ const config: Config = {
       // ============================================
       colors: {
         // Surfaces - Shared
-        'specimen-night': getValue('color.semantic.specimen-night'),
+        'asphalt-black': getValue('color.semantic.asphalt-black'),
 
         // Surfaces - Gallery Mode
         // Note: Mapping closest available semantic tokens since exact gallery/lab split
         // structure might differ in the JSON source. Using robust fallbacks.
-        'charcoal-bark': getValue('color.semantic.specimen-night'), // Fallback map
-        'eucalypt-smoke': getValue('color.families.eucalypt-smoke.base'),
-        'eucalypt-smoke-high': getValue('color.families.eucalypt-smoke.light'),
-        'eucalypt-smoke-highest': getValue('color.families.eucalypt-smoke.lightest'),
+        'charcoal-bark': getValue('color.semantic.asphalt-black'), // Fallback map
+        // 'concrete-grey': getValue('color.families.concrete-grey.base'), // Removed duplicate
+        'concrete-grey-high': getValue('color.families.concrete-grey.light'),
+        'concrete-grey-highest': getValue('color.families.concrete-grey.lightest'),
 
         // Surfaces - Laboratory Mode
         'charcoal-slate': '#16141A', // Retaining specific hex if not in token.json
@@ -76,11 +76,11 @@ const config: Config = {
         'wattle-gold-container': 'rgba(212, 168, 75, 0.12)', // Hardcoded transparency until utility available
         'on-primary': '#1D3314',
 
-        // Tertiary - Waratah Crimson
-        'waratah-stem': getValue('color.families.waratah-crimson.darkest'),
-        'waratah-crimson': getValue('color.semantic.waratah-crimson'),
-        'waratah-glow': getValue('color.families.waratah-crimson.light'),
-        'waratah-bloom': getValue('color.families.waratah-crimson.lightest'),
+        // Tertiary - Waratah Red
+        'waratah-stem': getValue('color.families.waratah-red.darkest'),
+        'waratah-red': getValue('color.semantic.waratah-red'),
+        'waratah-glow': getValue('color.families.waratah-red.light'),
+        'waratah-bloom': getValue('color.families.waratah-red.lightest'),
         'waratah-container': 'rgba(196, 92, 75, 0.15)',
 
         // Status Colors (Hardcoded fallbacks if completely missing from token.json)
@@ -98,15 +98,15 @@ const config: Config = {
         'clinical-neutral': '#8A8895',
         'clinical-neutral-container': 'rgba(138, 136, 149, 0.1)',
 
-        // Secondary - Flannel Flower
-        'flannel-flower': getValue('color.semantic.flannel-flower'),
-        'flannel-dim': getValue('color.families.flannel-flower.dark'),
-        'flannel-faint': getValue('color.families.flannel-flower.darkest'),
+        // Secondary - Concrete Grey
+        'concrete-grey': getValue('color.semantic.concrete-grey'),
+        'flannel-dim': getValue('color.families.concrete-grey.dark'),
+        'flannel-faint': getValue('color.families.concrete-grey.darkest'),
 
-        // On Surface - Parchment
-        parchment: getValue('color.semantic.parchment'),
-        'parchment-dim': '#D9D4CC',
-        'parchment-aged': '#C4BFB5',
+        // On Surface - Paper White
+        'paper-white': getValue('color.semantic.paper-white'),
+        'paper-white-dim': '#D9D4CC',
+        'paper-white-aged': '#C4BFB5',
 
         // Etching
         'etching-line': 'rgba(212, 190, 150, 0.15)',

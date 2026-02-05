@@ -12,7 +12,7 @@ import { SidePanel } from './components/SidePanel';
  */
 export const LayoutShell: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
   return (
-    <div className="flex h-screen w-screen overflow-hidden bg-surface-laboratory-slate-smoke-high text-on-surface-parchment font-field-note antialiased">
+    <div className="flex h-screen w-screen overflow-hidden bg-surface-laboratory-slate-smoke-high text-on-surface-paper-white font-field-note antialiased">
       {/* Nav Rail - Fixed Width Left */}
       <div className="flex-none z-30">
         <NavRail />

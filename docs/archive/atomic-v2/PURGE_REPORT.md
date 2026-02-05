@@ -13,7 +13,7 @@
 - **New File:** 13KB of pure Northcote Curio tokens
 - **Changes:**
   - ❌ Removed: Sage Green (`#B4D8AE`), Soft Coral (`#D97C65`)
-  - ✅ Added: Wattle Gold (`#D4A84B`), Specimen Night (`#1A1714`), Waratah Crimson (`#C45C4B`)
+  - ✅ Added: Wattle Gold (`#D4A84B`), Asphalt Black (`#1A1714`), Waratah Red (`#C45C4B`)
   - ✅ Implemented: Mode switching (`[data-mode="gallery"]` / `[data-mode="laboratory"]`)
   - ✅ Implemented: Organic asymmetry shapes (Pebble, Stone, Leaf, Petal, Seed)
   - ✅ Implemented: Viscous Breeze physics (`cubic-bezier(0.34, 1.56, 0.64, 1)`)
@@ -63,7 +63,7 @@
 - `index.css` (CSS classes for `.text-leaf`, `.btn-pebble`)
 
 ### ✅ Color: COMPLIANT
-- All color tokens now use Wattle Gold, Specimen Night, Waratah Crimson
+- All color tokens now use Wattle Gold, Asphalt Black, Waratah Red
 - No Sage Green or Soft Coral in token files
 
 ### ✅ Morphology: COMPLIANT

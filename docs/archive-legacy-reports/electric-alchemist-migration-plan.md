@@ -216,7 +216,7 @@ Task: [BATCH X: Component Name] - Migrate M3Component to ElectricComponent follo
 
 ### Colors:
 
-- Background: `bg-surface` (#141218)
+- Background: `bg-surface` (#1A1714)
 - Cards: `bg-surface-container-low` (#1D1B20)
 - Primary: `bg-primary-container` (#EADDFF)
 - Accent: `bg-tertiary-container` (#FFD8E4)

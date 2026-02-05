@@ -23,7 +23,7 @@ export interface MarkProps extends Omit<React.InputHTMLAttributes<HTMLInputEleme
  *
  * **Northcote Design Token Usage:**
  * - Shape: `--radius-seed` (subtle organic corners)
- * - Colors: Botanical palette (Wattle Gold, Waratah Crimson, Eucalypt Smoke)
+ * - Colors: Botanical palette (Wattle Gold, Waratah Red, Concrete Grey)
  * - Motion: Viscous-breeze easing for smooth check transition
  * - Typography: Field-note font for labels
  *
@@ -31,7 +31,7 @@ export interface MarkProps extends Omit<React.InputHTMLAttributes<HTMLInputEleme
  * - Unchecked: Outlined box
  * - Checked: Filled with checkmark (Wattle Gold)
  * - Indeterminate: Filled with dash (for partial selection)
- * - Error: Waratah Crimson theme
+ * - Error: Waratah Red theme
  * - Disabled: Reduced opacity
  *
  * @example
@@ -104,12 +104,12 @@ export const Mark = forwardRef<HTMLInputElement, MarkProps>(
         border-2
         ${
           error
-            ? 'border-[var(--color-waratah-crimson)]'
+            ? 'border-[var(--color-waratah-red)]'
             : isChecked
               ? 'border-[var(--color-wattle-gold)] bg-[var(--color-wattle-gold)]'
-              : 'border-[var(--color-eucalypt-smoke-base)]'
+              : 'border-[var(--color-concrete-grey-base)]'
         }
-        ${!disabled && !isChecked ? 'hover:border-[var(--color-flannel-flower)]' : ''}
+        ${!disabled && !isChecked ? 'hover:border-[var(--color-concrete-grey)]' : ''}
         transition-all duration-standard var(--ease-viscous-breeze)
         ${className}
       `}
@@ -122,14 +122,14 @@ export const Mark = forwardRef<HTMLInputElement, MarkProps>(
                 <Minus
                   className={`
                 w-3.5 h-3.5
-                ${error ? 'text-on-error' : 'text-[var(--color-specimen-night)]'}
+                ${error ? 'text-on-error' : 'text-[var(--color-asphalt-black)]'}
               `}
                 />
               ) : (
                 <Check
                   className={`
                 w-3.5 h-3.5
-                ${error ? 'text-on-error' : 'text-[var(--color-specimen-night)]'}
+                ${error ? 'text-on-error' : 'text-[var(--color-asphalt-black)]'}
               `}
                 />
               )}
@@ -142,7 +142,7 @@ export const Mark = forwardRef<HTMLInputElement, MarkProps>(
           <span
             className={`
           text-sm font-field-note font-medium
-          ${error ? 'text-[var(--color-waratah-crimson)]' : 'text-[var(--color-parchment)]'}
+          ${error ? 'text-[var(--color-waratah-red)]' : 'text-[var(--color-paper-white)]'}
           select-none
         `}
           >
@@ -207,12 +207,12 @@ export const MarkRadio = forwardRef<HTMLInputElement, MarkRadioProps>(
         border-2
         ${
           error
-            ? 'border-[var(--color-waratah-crimson)]'
+            ? 'border-[var(--color-waratah-red)]'
             : checked
               ? 'border-[var(--color-wattle-gold)]'
-              : 'border-[var(--color-eucalypt-smoke-base)]'
+              : 'border-[var(--color-concrete-grey-base)]'
         }
-        ${!disabled && !checked ? 'hover:border-[var(--color-flannel-flower)]' : ''}
+        ${!disabled && !checked ? 'hover:border-[var(--color-concrete-grey)]' : ''}
         transition-all duration-standard var(--ease-viscous-breeze)
         ${className}
       `}
@@ -228,7 +228,7 @@ export const MarkRadio = forwardRef<HTMLInputElement, MarkRadioProps>(
                 className={`
               w-2.5 h-2.5
              rounded-full
-              ${error ? 'bg-[var(--color-waratah-crimson)]' : 'bg-[var(--color-wattle-gold)]'}
+              ${error ? 'bg-[var(--color-waratah-red)]' : 'bg-[var(--color-wattle-gold)]'}
               scale-100
             `}
               />
@@ -241,7 +241,7 @@ export const MarkRadio = forwardRef<HTMLInputElement, MarkRadioProps>(
           <span
             className={`
           text-sm font-field-note font-medium
-          ${error ? 'text-[var(--color-waratah-crimson)]' : 'text-[var(--color-parchment)]'}
+          ${error ? 'text-[var(--color-waratah-red)]' : 'text-[var(--color-paper-white)]'}
           select-none
         `}
           >

@@ -27,9 +27,9 @@ While the "Gallery" (Mode A) implementation captures the poetic intent of the de
 
 ## Top 5 Critical Issues (Must Fix Before Launch)
 
-1.  **Page 4 (Ingestion) Mode Contamination**: The Drop Zone currently uses `flannel-flower` (Gallery) or generic border tokens. The specification strictly requires `color.semantic.surface.laboratory.slateSmoke` and `charcoalSlate` borders to demarcate the "Laboratory" mode. **This compromises the core Mode A/B separation.**
+1.  **Page 4 (Ingestion) Mode Contamination**: The Drop Zone currently uses `concrete-grey` (Gallery) or generic border tokens. The specification strictly requires `color.semantic.surface.laboratory.slateSmoke` and `charcoalSlate` borders to demarcate the "Laboratory" mode. **This compromises the core Mode A/B separation.**
 2.  **Page 1 (Landing) Hero Typography**: Implementation uses `text-bloom-ultra` (Fraunces). Specification mandates `typography.scale.displayHero` (Libre Bodoni) for the "Resurrection" proclamation. This fundamentally alters the first impression.
-3.  **Page 2 (Auth) Asset Substitution**: The `motif-laboratory-compass` is replaced with a generic `specimenGrid` (fern) or `parchmentGrid`. This removes the "Navigation/Entry" metaphor central to the wireframe.
+3.  **Page 2 (Auth) Asset Substitution**: The `motif-laboratory-compass` is replaced with a generic `specimenGrid` (fern) or `paper-whiteGrid`. This removes the "Navigation/Entry" metaphor central to the wireframe.
 4.  **Page 5 (Analysis) Metric Weight Violation**: The key metrics utilize `text-wattle-gold font-bold` (700 weight). Specification explicitly calls for a `200` (Thin) weight `metricDisplay` token to convey "Scientific Precision" rather than "Marketing Loudness".
 5.  **Page 6 (Opportunity) Sentry Behavior**: The Kookaburra Sentry is implemented as a static image with entrance animation, missing the required "Head Tilt" idle loop (8-12s) that gives the page its "living" quality.
 
@@ -47,7 +47,7 @@ While the "Gallery" (Mode A) implementation captures the poetic intent of the de
 
 - 🔴 **Asset Mismatch**: `motif-laboratory-compass` is missing. Replaced with `specimenGrid` (Fern).
   - _Fix_: Replace image source with correct compass asset.
-- 🟠 **Background**: Uses `parchmentGrid` (Lab texture) in a Gallery Mode page. Spec requires `pattern-nocturnal-canopy`.
+- 🟠 **Background**: Uses `paper-whiteGrid` (Lab texture) in a Gallery Mode page. Spec requires `pattern-nocturnal-canopy`.
   - _Impact_: Confuses the user's sense of "Place" (Gallery vs Lab).
 
 ### PAGE 3: Onboarding - "Choosing the Soil"
@@ -57,7 +57,7 @@ While the "Gallery" (Mode A) implementation captures the poetic intent of the de
 
 ### PAGE 4: Ingestion - "The Mulch & Mineral Setup"
 
-- 🔴 **Token Violation (Breaking)**: Drop Zone uses generic or Gallery-adjacent tokens (`flannel-flower`). MUST use Laboratory semantic tokens (`slateSmoke`, `charcoalSlate`).
+- 🔴 **Token Violation (Breaking)**: Drop Zone uses generic or Gallery-adjacent tokens (`concrete-grey`). MUST use Laboratory semantic tokens (`slateSmoke`, `charcoalSlate`).
 - 🟡 **Behavior**: "Stamp" animation logic exists but asset fidelity needs verification (`naturesClockwork`).
 
 ### PAGE 5: Analysis - "The Audit Microscope"
@@ -90,7 +90,7 @@ The audit revealed gaps in `tokens.json` where the wireframes "hallucinated" or 
 
 ### 2. Mode Contamination
 
-There is a recurring issue of `parchment` (Lab) textures leaking into Gallery pages (Auth) and Gallery colors (`flannel-flower`) leaking into Lab pages (Ingestion).
+There is a recurring issue of `paper-white` (Lab) textures leaking into Gallery pages (Auth) and Gallery colors (`concrete-grey`) leaking into Lab pages (Ingestion).
 
 **Recommendation**: Enforce a strict linting rule or manual check:
 
