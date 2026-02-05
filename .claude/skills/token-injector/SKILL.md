@@ -25,7 +25,7 @@ Output: Updated stylesheets with CSS variables
 {
   "background": "#1A1714",
   "palette": {
-    "waratah_crimson": "#C45C4B",
+    "waratah_red": "#C45C4B",
     "wattle_gold": "#D4A84B",
     "eucalyptus_sage": "#7A9E82"
   }
@@ -35,8 +35,8 @@ Output: Updated stylesheets with CSS variables
 **Generated CSS:**
 ```css
 :root {
-  --color-specimen-night: #1A1714;
-  --color-waratah-crimson: #C45C4B;
+  --color-asphalt-black: #1A1714;
+  --color-waratah-red: #C45C4B;
   --color-wattle-gold: #D4A84B;
   --color-eucalyptus-sage: #7A9E82;
 }
@@ -55,8 +55,8 @@ Output: Updated stylesheets with CSS variables
 **After:**
 ```css
 .card {
-  background: var(--color-specimen-night);
-  border: 1px solid var(--color-waratah-crimson);
+  background: var(--color-asphalt-black);
+  border: 1px solid var(--color-waratah-red);
 }
 ```
 

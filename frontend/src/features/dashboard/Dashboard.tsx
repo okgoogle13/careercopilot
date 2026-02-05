@@ -62,7 +62,7 @@ export function Dashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-specimen-night relative overflow-hidden p-8 md:p-12 lg:p-16">
+    <div className="min-h-screen bg-asphalt-black relative overflow-hidden p-8 md:p-12 lg:p-16">
       {/* Background Layer: The Nocturnal Canopy */}
       <div
         className="absolute inset-0 opacity-20 pointer-events-none mix-blend-soft-light"
@@ -94,7 +94,7 @@ export function Dashboard() {
         className="max-w-[1440px] mx-auto relative z-10 space-y-12"
       >
         {/* Header Section */}
-        <header className="flex flex-col md:flex-row md:items-end justify-between gap-8 border-b border-flannel-flower/10 pb-12">
+        <header className="flex flex-col md:flex-row md:items-end justify-between gap-8 border-b border-concrete-grey/10 pb-12">
           <motion.div
             variants={item as any}
             className="space-y-2"
@@ -102,10 +102,10 @@ export function Dashboard() {
             <p className="font-annotation text-xs text-wattle-gold tracking-[0.6em] uppercase opacity-60">
               [ STATION.REPORT_SUMMARY ]
             </p>
-            <h1 className="font-bloom text-7xl font-black text-parchment tracking-tighter uppercase leading-[0.9]">
+            <h1 className="font-bloom text-7xl font-black text-paper-white tracking-tighter uppercase leading-[0.9]">
               THE CANOPY <span className="text-wattle-gold">VIEW</span>
             </h1>
-            <p className="font-field-note text-lg text-flannel-flower opacity-70 italic">
+            <p className="font-field-note text-lg text-concrete-grey opacity-70 italic">
               "Archival synthesis reveals multiple growing opportunities."
             </p>
           </motion.div>
@@ -116,17 +116,17 @@ export function Dashboard() {
             className="flex gap-6"
           >
             <div className="text-right">
-              <span className="block font-annotation text-[10px] text-flannel-flower-dark uppercase tracking-widest">
+              <span className="block font-annotation text-[10px] text-concrete-grey-dark uppercase tracking-widest">
                 Growth Rate
               </span>
-              <span className="text-2xl font-black text-parchment">+14%</span>
+              <span className="text-2xl font-black text-paper-white">+14%</span>
             </div>
-            <div className="w-px bg-flannel-flower/20 h-10" />
+            <div className="w-px bg-concrete-grey/20 h-10" />
             <div className="text-right">
-              <span className="block font-annotation text-[10px] text-flannel-flower-dark uppercase tracking-widest">
+              <span className="block font-annotation text-[10px] text-concrete-grey-dark uppercase tracking-widest">
                 Specimens Found
               </span>
-              <span className="text-2xl font-black text-parchment">42</span>
+              <span className="text-2xl font-black text-paper-white">42</span>
             </div>
           </motion.div>
         </header>
@@ -136,7 +136,7 @@ export function Dashboard() {
           <Stone
             mode="gallery"
             elevation="raised"
-            className="p-8 md:p-12 bg-specimen-night/40 border-wattle-gold/20 flex flex-col md:flex-row items-center gap-12 overflow-hidden relative"
+            className="p-8 md:p-12 bg-asphalt-black/40 border-wattle-gold/20 flex flex-col md:flex-row items-center gap-12 overflow-hidden relative"
           >
             {/* Glossy Overlay */}
             <div className="absolute inset-0 bg-gradient-to-tr from-wattle-gold/5 via-transparent to-transparent pointer-events-none" />
@@ -151,7 +151,7 @@ export function Dashboard() {
                   </span>
                 </div>
                 <div className="flex items-baseline gap-2">
-                  <span className="text-7xl font-black text-parchment leading-none tracking-tighter">
+                  <span className="text-7xl font-black text-paper-white leading-none tracking-tighter">
                     08
                   </span>
                   <StatusBadge
@@ -163,14 +163,14 @@ export function Dashboard() {
 
               {/* Calibrated Matches */}
               <div className="space-y-1">
-                <div className="flex items-center gap-3 text-flannel-flower mb-3">
+                <div className="flex items-center gap-3 text-concrete-grey mb-3">
                   <Target className="w-6 h-6" />
                   <span className="font-annotation text-[10px] uppercase tracking-[0.3em] font-bold">
                     High Calibration
                   </span>
                 </div>
                 <div className="flex items-baseline gap-2">
-                  <span className="text-7xl font-black text-parchment leading-none tracking-tighter">
+                  <span className="text-7xl font-black text-paper-white leading-none tracking-tighter">
                     03
                   </span>
                   <span className="text-[10px] font-annotation text-wattle-gold uppercase opacity-50 tracking-widest leading-none">
@@ -193,10 +193,10 @@ export function Dashboard() {
                       initial={{ width: 0 }}
                       animate={{ width: '75%' }}
                       transition={{ duration: 1.5, ease: 'circOut' }}
-                      className="h-full bg-gradient-to-r from-wattle-gold to-flannel-flower shadow-[0_0_10px_rgba(var(--color-wattle-gold),0.5)]"
+                      className="h-full bg-gradient-to-r from-wattle-gold to-concrete-grey shadow-[0_0_10px_rgba(var(--color-wattle-gold),0.5)]"
                     />
                   </div>
-                  <p className="text-[9px] font-annotation text-parchment opacity-40 mt-3 uppercase tracking-widest text-right">
+                  <p className="text-[9px] font-annotation text-paper-white opacity-40 mt-3 uppercase tracking-widest text-right">
                     Optimal throughput maintained
                   </p>
                 </div>
@@ -227,7 +227,7 @@ export function Dashboard() {
           <Pebble
             variant="ghost"
             size="lg"
-            className="h-16 px-10 font-bold uppercase tracking-wider border-flannel-flower/20 hover:bg-flannel-flower/5"
+            className="h-16 px-10 font-bold uppercase tracking-wider border-concrete-grey/20 hover:bg-concrete-grey/5"
           >
             <Sparkles className="w-5 h-5 mr-3 text-wattle-gold" /> Automated Synthesis
           </Pebble>
@@ -236,11 +236,11 @@ export function Dashboard() {
         {/* 2x2 Specimen Grid: Optimized Application Profiles */}
         <section className="space-y-8">
           <div className="flex items-baseline gap-4">
-            <h2 className="font-bloom text-3xl font-bold text-parchment uppercase tracking-tight">
+            <h2 className="font-bloom text-3xl font-bold text-paper-white uppercase tracking-tight">
               RECENT <span className="text-wattle-gold">SYNTHESIS</span>
             </h2>
-            <div className="flex-1 h-px bg-flannel-flower/10" />
-            <span className="font-annotation text-[9px] text-flannel-flower opacity-50 uppercase tracking-[0.4em]">
+            <div className="flex-1 h-px bg-concrete-grey/10" />
+            <span className="font-annotation text-[9px] text-concrete-grey opacity-50 uppercase tracking-[0.4em]">
               SPECIMEN.LOG
             </span>
           </div>
@@ -256,7 +256,7 @@ export function Dashboard() {
                 <Stone
                   mode="gallery"
                   elevation="floating"
-                  className="p-8 border-flannel-flower/10 bg-specimen-night/20 group-hover:bg-specimen-night/40 group-hover:border-wattle-gold/30 transition-all duration-500 overflow-hidden relative"
+                  className="p-8 border-concrete-grey/10 bg-asphalt-black/20 group-hover:bg-asphalt-black/40 group-hover:border-wattle-gold/30 transition-all duration-500 overflow-hidden relative"
                 >
                   {/* Hover Bloom Effect */}
                   <div className="absolute -inset-20 bg-wattle-gold/5 blur-[100px] opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none" />
@@ -267,7 +267,7 @@ export function Dashboard() {
                         <p className="font-annotation text-[10px] text-wattle-gold uppercase tracking-[0.2em] opacity-80 mb-1">
                           {profile.company}
                         </p>
-                        <h3 className="font-bloom text-2xl font-black text-parchment tracking-tight leading-tight uppercase group-hover:text-wattle-gold transition-colors">
+                        <h3 className="font-bloom text-2xl font-black text-paper-white tracking-tight leading-tight uppercase group-hover:text-wattle-gold transition-colors">
                           {profile.name}
                         </h3>
                       </div>
@@ -278,14 +278,14 @@ export function Dashboard() {
                           variant={profile.status === 'EXCELLENT' ? 'success' : 'warning'}
                           showDot
                         />
-                        <span className="font-annotation text-[9px] text-flannel-flower opacity-40 uppercase tracking-widest leading-none">
+                        <span className="font-annotation text-[9px] text-concrete-grey opacity-40 uppercase tracking-widest leading-none">
                           Last Audit: 2m ago
                         </span>
                       </div>
                     </div>
 
                     <div className="text-right">
-                      <div className="text-6xl font-black text-parchment tracking-tighter leading-none mb-1 tabular-nums group-hover:scale-110 transition-transform origin-right">
+                      <div className="text-6xl font-black text-paper-white tracking-tighter leading-none mb-1 tabular-nums group-hover:scale-110 transition-transform origin-right">
                         {profile.score}
                       </div>
                       <p className="font-annotation text-[9px] text-wattle-gold uppercase tracking-widest font-bold opacity-60">
@@ -294,8 +294,8 @@ export function Dashboard() {
                     </div>
                   </div>
 
-                  <div className="mt-8 pt-6 border-t border-flannel-flower/5 flex justify-between items-center relative z-10">
-                    <button className="text-[10px] font-annotation text-flannel-flower uppercase tracking-widest hover:text-parchment transition-colors">
+                  <div className="mt-8 pt-6 border-t border-concrete-grey/5 flex justify-between items-center relative z-10">
+                    <button className="text-[10px] font-annotation text-concrete-grey uppercase tracking-widest hover:text-paper-white transition-colors">
                       Generate Artifacts →
                     </button>
                   </div>
@@ -315,7 +315,7 @@ export function Dashboard() {
           y: [0, -20, 0],
         }}
         transition={{ duration: 15, repeat: Infinity, ease: 'linear' }}
-        className="absolute -bottom-64 -right-64 w-[800px] h-[800px] rounded-full bg-gradient-to-tl from-flannel-flower/10 via-transparent to-transparent blur-3xl pointer-events-none"
+        className="absolute -bottom-64 -right-64 w-[800px] h-[800px] rounded-full bg-gradient-to-tl from-concrete-grey/10 via-transparent to-transparent blur-3xl pointer-events-none"
       />
     </div>
   );

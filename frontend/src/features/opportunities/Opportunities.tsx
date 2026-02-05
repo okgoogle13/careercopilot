@@ -60,7 +60,7 @@ export function Opportunities() {
   };
 
   return (
-    <div className="min-h-screen bg-specimen-night relative overflow-hidden pb-12 w-full">
+    <div className="min-h-screen bg-asphalt-black relative overflow-hidden pb-12 w-full">
       {/* Visual Stagecraft: Atmospheric Background */}
       <div
         className="absolute inset-0 opacity-5 pointer-events-none mix-blend-overlay"
@@ -76,7 +76,7 @@ export function Opportunities() {
           alt=""
           className="h-full w-full object-contain object-right-top grayscale brightness-125"
         />
-        <div className="absolute inset-0 bg-gradient-to-l from-transparent to-specimen-night" />
+        <div className="absolute inset-0 bg-gradient-to-l from-transparent to-asphalt-black" />
       </div>
 
       <div className="relative z-10 p-6 md:p-12 max-w-7xl mx-auto">
@@ -90,7 +90,7 @@ export function Opportunities() {
         <Stone
           mode="gallery"
           elevation="raised"
-          className="mb-12 p-8 border-flannel-flower/10 bg-specimen-night/40 backdrop-blur-md"
+          className="mb-12 p-8 border-concrete-grey/10 bg-asphalt-black/40 backdrop-blur-md"
         >
           <div className="flex flex-col lg:flex-row gap-6 items-end">
             <div className="flex-1 space-y-3 w-full">
@@ -102,7 +102,7 @@ export function Opportunities() {
                   type="search"
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
-                  className="w-full bg-bark-light/5 border-b border-flannel-flower/20 font-bloom text-xl text-parchment p-3 focus:border-wattle-gold outline-none transition-all placeholder:text-flannel-flower/30"
+                  className="w-full bg-bark-light/5 border-b border-concrete-grey/20 font-bloom text-xl text-paper-white p-3 focus:border-wattle-gold outline-none transition-all placeholder:text-concrete-grey/30"
                   placeholder="e.g. SOFTWARE ARCHITECT"
                 />
               </div>
@@ -116,7 +116,7 @@ export function Opportunities() {
                 type="text"
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
-                className="w-full bg-bark-light/5 border-b border-flannel-flower/20 font-bloom text-xl text-parchment p-3 focus:border-wattle-gold outline-none transition-all placeholder:text-flannel-flower/30"
+                className="w-full bg-bark-light/5 border-b border-concrete-grey/20 font-bloom text-xl text-paper-white p-3 focus:border-wattle-gold outline-none transition-all placeholder:text-concrete-grey/30"
                 placeholder="e.g. MELBOURNE, VIC"
               />
             </div>
@@ -148,7 +148,7 @@ export function Opportunities() {
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="flex items-center gap-4 text-[10px] font-mono text-flannel-flower border-l-2 border-wattle-gold pl-4 py-2 bg-wattle-gold/5"
+                className="flex items-center gap-4 text-[10px] font-mono text-concrete-grey border-l-2 border-wattle-gold pl-4 py-2 bg-wattle-gold/5"
               >
                 <div className="w-2 h-2 rounded-full bg-wattle-gold animate-pulse" />
                 <span className="uppercase tracking-[0.2em]">
@@ -182,16 +182,16 @@ export function Opportunities() {
                             variant="success"
                             showDot
                           />
-                          <span className="font-annotation text-[9px] text-flannel-flower uppercase tracking-[0.2em]">
+                          <span className="font-annotation text-[9px] text-concrete-grey uppercase tracking-[0.2em]">
                             NODE_0{index + 1}
                           </span>
                         </div>
 
-                        <h3 className="font-bloom text-2xl font-black text-parchment uppercase leading-tight group-hover:text-wattle-gold transition-colors">
+                        <h3 className="font-bloom text-2xl font-black text-paper-white uppercase leading-tight group-hover:text-wattle-gold transition-colors">
                           Opportunity Match Potential
                         </h3>
 
-                        <div className="flex items-center gap-2 text-xs font-mono text-flannel-flower/60 break-all bg-specimen-night/40 p-3 rounded border border-flannel-flower/10">
+                        <div className="flex items-center gap-2 text-xs font-mono text-concrete-grey/60 break-all bg-asphalt-black/40 p-3 rounded border border-concrete-grey/10">
                           <ExternalLink className="w-3 h-3 flex-shrink-0" />
                           <a
                             href={link}
@@ -204,7 +204,7 @@ export function Opportunities() {
                         </div>
 
                         <div className="flex gap-2 pt-2">
-                          <div className="text-[9px] bg-bark-light/10 text-flannel-flower px-2 py-1 border border-flannel-flower/10 uppercase tracking-widest">
+                          <div className="text-[9px] bg-bark-light/10 text-concrete-grey px-2 py-1 border border-concrete-grey/10 uppercase tracking-widest">
                             Found via Search
                           </div>
                           <div className="text-[9px] bg-wattle-gold/10 text-wattle-gold px-2 py-1 border border-wattle-gold/20 uppercase tracking-widest">
@@ -219,11 +219,11 @@ export function Opportunities() {
             ) : (
               !isLoading && (
                 <div className="text-center py-32 opacity-20 flex flex-col items-center">
-                  <Compass className="w-24 h-24 mb-6 text-flannel-flower animate-pulse" />
-                  <p className="font-bloom text-2xl text-parchment uppercase tracking-tighter">
+                  <Compass className="w-24 h-24 mb-6 text-concrete-grey animate-pulse" />
+                  <p className="font-bloom text-2xl text-paper-white uppercase tracking-tighter">
                     Lookout Deck Clear
                   </p>
-                  <p className="font-annotation text-xs text-flannel-flower uppercase tracking-[0.4em] mt-2">
+                  <p className="font-annotation text-xs text-concrete-grey uppercase tracking-[0.4em] mt-2">
                     Awaiting Target Dispatches
                   </p>
                 </div>

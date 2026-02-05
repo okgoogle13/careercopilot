@@ -11,7 +11,7 @@ interface AuroraHeaderProps {
  * AuroraHeader - Northcote Curio Parametric Header
  * 
  * Features:
- * - Tri-color gradient text (Wattle Gold → Waratah Crimson → Flannel Flower)
+ * - Tri-color gradient text (Wattle Gold → Waratah Red → Concrete Grey)
  * - Shimmer animation on hover
  * - Variable font axis animation (Fraunces 'SOFT' and 'WONK')
  * - Optional tag and witty subtitle
@@ -44,7 +44,7 @@ export const AuroraHeader: React.FC<AuroraHeaderProps> = ({
                     className="font-mono text-xs uppercase tracking-widest"
                     style={{
                         fontFamily: "'JetBrains Mono', monospace",
-                        color: '#A8A097', // Flannel Flower
+                        color: '#A8A097', // Concrete Grey
                     }}
                 >
                     {tag}
@@ -67,7 +67,7 @@ export const AuroraHeader: React.FC<AuroraHeaderProps> = ({
                     className="bg-clip-text text-transparent"
                     style={{
                         backgroundImage: 'linear-gradient(135deg, #D4A84B 0%, #C45C4B 50%, #A8A097 100%)',
-                        // Wattle Gold → Waratah Crimson → Flannel Flower
+                        // Wattle Gold → Waratah Red → Concrete Grey
                         backgroundSize: '200% 200%',
                     }}
                     animate={{
@@ -103,7 +103,7 @@ export const AuroraHeader: React.FC<AuroraHeaderProps> = ({
                     style={{
                         fontFamily: "'Fraunces', serif",
                         fontVariationSettings: "'wght' 400, 'SOFT' 100, 'WONK' 1",
-                        color: '#C45C4B', // Waratah Crimson
+                        color: '#C45C4B', // Waratah Red
                     }}
                 >
                     {wittySubtitle}

@@ -232,7 +232,7 @@ import { MetricCard } from "./shared/MetricCard";
           const isCompleted = idx < app.currentStep;
           const isCurrent = idx === app.currentStep;
           return (
-            <div key={idx} className={`flex-1 px-4 py-3 rounded-full text-center transition-all ${isCurrent ? "bg-[#D0BCFF] text-[#381E72]" : isCompleted ? "bg-[#A8C5A3] text-[#141218]" : "bg-[#2B2930] text-[#CAC4D0]"}`}>
+            <div key={idx} className={`flex-1 px-4 py-3 rounded-full text-center transition-all ${isCurrent ? "bg-[#D0BCFF] text-[#381E72]" : isCompleted ? "bg-[#A8C5A3] text-[#1A1714]" : "bg-[#2B2930] text-[#CAC4D0]"}`}>
               <p className="text-sm">{step}</p>
             </div>
           );

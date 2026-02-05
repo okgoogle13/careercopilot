@@ -1,103 +1,176 @@
-# Component Catalog
-
-> Part of [Northcote Curio Design System](00-overview.md)
+Here’s a contemporary, token-aligned rewrite of that components doc.
 
 ---
 
-## Interactive Objects ("The Tools")
+# Component Catalog
+
+> Part of [Northcote Design System – Contemporary Australian](00-overview.md) [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/74141548/2c98fa71-c817-49f8-957d-da13857f9ca1/northcote-design-principles.md)
+
+---
+
+## Interactive Objects (“The Tools”)
 
 ### The Pebble (Button)
 
-| Property | Value                                           |
-| -------- | ----------------------------------------------- |
-| Token    | `radius-pebble` (`20px 6px 16px 28px`)          |
-| Texture  | Matte finish, "Worn River Stone"                |
-| Rest     | Wattle Gold (solid) or Specimen Night (outline) |
-| Hover    | **The Bloom** — inflates, lifts                 |
-| Active   | Pressed into sand (`scale(0.98)`)               |
+| Property | Value                                                               |
+| -------- | ------------------------------------------------------------------- |
+| Token    | `radius-pebble` (`20px 6px 16px 28px`)                              |
+| Surface  | Asphalt Black or Concrete Grey, with strong contrast text           |
+| Rest     | Wattle Gold (solid primary) or Asphalt Black outline on Paper White |
+| Hover    | **Bloom** — lifts slightly, gains emphasis                          |
+| Active   | Pressed into surface (`scale(0.98)`)                                |
 
 ```css
+.btn-pebble {
+  border-radius: var(--radius-button, 24px);
+  background: var(--color-primary); /* Wattle Gold */
+  color: var(--color-surface); /* Asphalt Black */
+  transition:
+    transform var(--duration-medium-2) var(--easing-standard),
+    box-shadow var(--duration-medium-2) var(--easing-standard);
+}
+
 .btn-pebble:hover {
   transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 8px 16px rgba(212, 168, 75, 0.4);
-  transition: all 600ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 8px 16px rgba(212, 168, 75, 0.4); /* Wattle Glow */
 }
 ```
 
 ### The Lens (Input Field)
 
-| Property   | Value                                         |
-| ---------- | --------------------------------------------- |
-| Token      | `radius-stone` (inverted)                     |
-| Texture    | Glass and Brass                               |
-| Background | Eucalypt Smoke with `border-b` Flannel Flower |
-| Focus      | Border lights up Wattle Gold ("The Filament") |
+| Property | Value                                                       |
+| -------- | ----------------------------------------------------------- |
+| Token    | `radius-stone`                                              |
+| Surface  | Concrete Grey container on Asphalt Black background         |
+| Border   | Subtle 1px Concrete Grey by default                         |
+| Focus    | Border and label shift to Wattle Gold (the “filament” glow) |
+
+```css
+.input-lens {
+  border-radius: var(--radius-card, 16px);
+  background: var(--color-container); /* Concrete Grey */
+  border: 1px solid var(--color-muted); /* Muted neutral */
+  color: var(--color-text); /* Paper White */
+}
+
+.input-lens:focus-visible {
+  outline: none;
+  border-color: var(--color-primary); /* Wattle Gold */
+  box-shadow: 0 0 0 1px var(--color-primary);
+}
+```
 
 ---
 
-## Containers ("The Cases")
+## Containers (“The Cases”)
 
 ### The Stone (Card)
 
-| Property   | Value                                 |
-| ---------- | ------------------------------------- |
-| Token      | `radius-stone` (`16px 4px 12px 24px`) |
-| Texture    | Dark Ironbark or Velvet               |
-| Background | Eucalypt Smoke                        |
-| Shadow     | "Ink Pool" — diffuse, bottom-heavy    |
-| Usage      | Job Cards, Skill Groups               |
+| Property | Value                                   |
+| -------- | --------------------------------------- |
+| Token    | `radius-stone` (`16px 4px 12px 24px`)   |
+| Surface  | Concrete Grey on Asphalt Black          |
+| Shadow   | Soft, bottom-biased elevation tokens    |
+| Usage    | Job cards, skill groups, summary blocks |
+
+```css
+.card-stone {
+  border-radius: var(--radius-card, 28px);
+  background: var(--color-container);
+  box-shadow: var(--elevation-2);
+  padding: var(--card-padding, 24px);
+}
+```
 
 ### The Leaf (Hero Wrapper)
 
 | Property | Value                               |
 | -------- | ----------------------------------- |
 | Token    | `radius-leaf` (`24px 8px 20px 4px`) |
-| Vibe     | Organic, sweeping                   |
-| Usage    | Page Headers, Main Dashboards       |
+| Vibe     | Long, sweeping container            |
+| Usage    | Page headers, primary dashboards    |
+
+```css
+.hero-leaf {
+  border-radius: var(--radius-hero, 24px 8px 20px 4px);
+  background: var(--color-surface-container-high);
+  box-shadow: var(--elevation-3);
+}
+```
 
 ---
 
-## Informational ("The Labels")
+## Informational (“The Labels”)
 
-### The Seed (Badge/Tag)
+### The Seed (Badge / Tag)
 
-| Property   | Value                                            |
-| ---------- | ------------------------------------------------ |
-| Token      | `radius-seed` (`8px 4px 10px 6px`)               |
-| Typography | JetBrains Mono                                   |
-| Colors     | Flannel Flower (muted), Waratah Crimson (alerts) |
+| Property   | Value                                             |
+| ---------- | ------------------------------------------------- |
+| Token      | `radius-seed` (`8px 4px 10px 6px`)                |
+| Typography | JetBrains Mono                                    |
+| Colors     | Concrete Grey for neutral, Waratah Red for alerts |
+
+```css
+.badge-seed {
+  border-radius: var(--radius-badge, 8px);
+  padding: 0 0.5rem;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.75rem;
+}
+
+.badge-seed--neutral {
+  background: var(--color-container);
+  color: var(--color-muted);
+}
+
+.badge-seed--alert {
+  background: var(--color-accent); /* Waratah Red */
+  color: var(--color-surface); /* Asphalt Black */
+}
+```
 
 ### The Sentry (Avatar)
 
-| Property | Value                         |
-| -------- | ----------------------------- |
-| Shape    | Imperfect Circle (98% radius) |
-| Border   | Gold leaf (`border-primary`)  |
+| Property | Value                                          |
+| -------- | ---------------------------------------------- |
+| Shape    | Imperfect circle (border-radius ~48–50%)       |
+| Border   | Wattle Gold ring (`border-color: primary`)     |
+| Usage    | Kookaburra or user avatar anchor in navigation |
+
+```css
+.avatar-sentry {
+  border-radius: 48%;
+  border: 2px solid var(--color-primary);
+  background: var(--color-surface-container-high);
+}
+```
 
 ---
 
 ## Motion Patterns
 
-### The Unfolding (Card Hover)
+### Unfold (Card Hover)
 
-Three-phase cascade when hovering:
+Three-phase feel (implemented with simple transitions):
 
-1. **Phase 1** (0-200ms): Card lifts `translateY(-12px)`
-2. **Phase 2** (100-400ms): Background glow expands
-3. **Phase 3** (200-600ms): Typography blooms
+1. Card lifts (`translateY(-4px)` to `-8px`).
+2. Shadow deepens.
+3. Title weight increases slightly. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/74141548/4afd3171-d177-47e4-81e0-4050adcaca29/tokens.json)
 
 ```css
-.card:hover {
-  transform: translateY(-12px);
-  transition: transform 200ms cubic-bezier(0.34, 1.56, 0.64, 1);
+.card-stone {
+  transition:
+    transform var(--duration-medium-2) var(--easing-standard),
+    box-shadow var(--duration-medium-2) var(--easing-standard);
 }
 
-.card:hover .card-title {
+.card-stone:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--elevation-3);
+}
+
+.card-stone:hover .card-title {
   font-weight: 700;
-  font-variation-settings:
-    "SOFT" 0,
-    "WONK" 0.7;
-  transition: all 400ms ease 200ms; /* delayed start */
 }
 ```
 
@@ -119,7 +192,7 @@ Three-phase cascade when hovering:
 }
 
 .hero-leaf {
-  animation: heroReveal 1200ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation: heroReveal var(--duration-long-4) var(--easing-emphasized-decelerate);
 }
 ```
 
@@ -127,9 +200,9 @@ Three-phase cascade when hovering:
 
 ## Motion Principles
 
-1. **Staggered timing** — overlapping start times
-2. **Multiple properties** — transform + shadow + typography together
-3. **Organic easing** — gentle overshoot, not linear
-4. **Meaningful duration** — 600ms+, not instant
+1. **Staggered timing** – overlapping but not chaotic; use delays for child elements. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/74141548/efa04425-d50c-4611-bc01-ab05d271c694/annotated-wireframes.md)
+2. **Multi-property changes** – combine transform + elevation + subtle color shifts. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/74141548/3c4a620b-da4a-462e-bacc-412a0775f24c/01-tokens.md)
+3. **Organic easing** – use the “viscous breeze” curves, avoid linear transitions. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/74141548/4afd3171-d177-47e4-81e0-4050adcaca29/tokens.json)
+4. **Intentional duration** – 250–600ms; fast enough for work, slow enough to feel calm.
 
-This creates **natural unfolding**, not mechanical state changes.
+The goal is **natural unfolding**, like posters and plants responding to the environment, not mechanical state flips.

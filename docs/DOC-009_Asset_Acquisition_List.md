@@ -8,7 +8,7 @@
 | :----------------------------- | :-------------------------------------------- | :--------------------- | :------------- |
 | `motif-laboratory-compass`     | Brass/Gold scientific compass, transparent bg | Page 2, 4, 5, 8, 9, 10 | ❌ SUBSTITUTED |
 | `pattern-nocturnal-canopy`     | Dark, rich leafy texture, 25% opacity base    | Page 1, 2, 3, 6, 7     | ⚠️ UNVERIFIED  |
-| `texture-laboratory-parchment` | Clean, technical paper grain (#F5F2EB)        | Page 4, 5, 8, 9, 10    | ⚠️ UNVERIFIED  |
+| `texture-laboratory-paper-white` | Clean, technical paper grain (#F5F2EB)        | Page 4, 5, 8, 9, 10    | ⚠️ UNVERIFIED  |
 
 ## Priority 2: Botanical Specifics (High)
 

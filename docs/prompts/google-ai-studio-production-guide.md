@@ -48,7 +48,7 @@ northcote-{category}-{subject}-{variant}-{version}.{ext}
 | `botanical` | Flora specimens    | Waratah, Wattle, Banksia, Eucalyptus |
 | `fauna`     | Animal specimens   | Kookaburra, Echidna, Lizard, Spider  |
 | `specimen`  | Combined studies   | Eucalyptus + Echidna spines          |
-| `texture`   | Backgrounds        | Parchment, wallpaper, grids          |
+| `texture`   | Backgrounds        | Paper White, wallpaper, grids          |
 | `ui`        | Interface elements | Spinners, icons, navigation          |
 | `plate`     | Full composition   | Multi-specimen arrangements          |
 
@@ -60,7 +60,7 @@ northcote-{category}-{subject}-{variant}-{version}.{ext}
 
 ```css
 --northcote-black: #1a1714; /* The Void (Background) */
---waratah-crimson: #c45c4b; /* Hero red */
+--waratah-red: #c45c4b; /* Hero red */
 --wattle-gold: #d4a84b; /* Action/Focus gold */
 --sage-green: #7a8b6e; /* Botanical foliage */
 --terracotta: #b8623b; /* Earth tones / lizards */
@@ -139,7 +139,7 @@ ACCENTS:
 - Label at bottom center: "Fig. II. Dacelo novaeguineae".
 ```
 
-### ASSET 3: Laboratory Parchment Texture (Background)
+### ASSET 3: Laboratory Paper White Texture (Background)
 
 _Optimized for subtle, low-contrast tiling._
 
@@ -148,11 +148,11 @@ _Optimized for subtle, low-contrast tiling._
 **Positive Prompt:**
 
 ```text
-A seamless tiling texture map of "Scientific Grid Parchment" for a dark mode UI background.
+A seamless tiling texture map of "Scientific Grid Paper White" for a dark mode UI background.
 
 MATERIAL & COLOR:
 - Base Color: Very dark charcoal-grey (#2C2C2C).
-- Texture: Subtle vellum/parchment grain, not flat digital color.
+- Texture: Subtle vellum/paper-white grain, not flat digital color.
 
 GRAPHIC ELEMENTS (LOW CONTRAST):
 - Grid: A precise 1mm engineering grid in slightly lighter grey lines (only 5% opacity difference from base).

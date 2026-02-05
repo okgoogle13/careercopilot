@@ -4,8 +4,8 @@
   flex-direction: column;
   align-items: center;
   padding: 4rem 2rem;
-  background-color: var(--color-specimen-night);
-  color: var(--color-parchment);
+  background-color: var(--color-asphalt-black);
+  color: var(--color-paper-white);
   overflow-y: auto;
 }
 

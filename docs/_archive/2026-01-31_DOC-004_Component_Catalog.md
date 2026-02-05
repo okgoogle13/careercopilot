@@ -13,7 +13,7 @@
 *   **Token:** `radius-pebble` (`20px 6px 16px 28px`)
 *   **Texture:** Matte finish, "Worn River Stone."
 *   **State:**
-    *   *Rest:* Wattle Gold (Solid) or Specimen Night (Outline).
+    *   *Rest:* Wattle Gold (Solid) or Asphalt Black (Outline).
     *   *Hover:* "The Bloom" (Inflates, Lifts).
     *   *Active:* Pressed into the sand (Scale 0.98).
 *   **Usage:** Primary Actions (Save, Analyze, Apply).
@@ -21,7 +21,7 @@
 ### The Lens (Input Field)
 *   **Token:** `radius-stone` (Inverted)
 *   **Texture:** Glass and Brass.
-*   **Style:** `bg-surface-container` (Eucalypt Smoke) with a `border-b` of Flannel Flower.
+*   **Style:** `bg-surface-container` (Concrete Grey) with a `border-b` of Concrete Grey.
 *   **Focus:** Border lights up with Wattle Gold ("The Filament").
 *   **Usage:** Text inputs, Search bars.
 
@@ -32,7 +32,7 @@
 ### The Stone (Card)
 *   **Token:** `radius-stone` (`16px 4px 12px 24px`)
 *   **Texture:** Dark Ironbark or Velvet.
-*   **Style:** `bg-surface-container` (Eucalypt Smoke).
+*   **Style:** `bg-surface-container` (Concrete Grey).
 *   **Shadow:** "Ink Pool" (Diffuse, bottom-heavy).
 *   **Usage:** Job Cards, Skill Groups.
 
@@ -49,7 +49,7 @@
 ### The Seed (Badge/Tag)
 *   **Token:** `radius-seed` (`8px 4px 10px 6px`)
 *   **Texture:** Small, precise, organic.
-*   **Style:** `bg-muted` (Flannel Flower) or `bg-accent` (Waratah Crimson) for alerts.
+*   **Style:** `bg-muted` (Concrete Grey) or `bg-accent` (Waratah Red) for alerts.
 *   **Typography:** JetBrains Mono (The Annotation).
 *   **Usage:** Skill tags, Status indicators.
 
@@ -134,7 +134,7 @@ When a user hovers over a Job Card in Gallery Mode, trigger a **three-phase casc
     filter: blur(4px);
   }
   100% {
-    background-image: url('aged-parchment.png');
+    background-image: url('aged-paper-white.png');
     filter: hue-rotate(-15deg) saturate(0.8);
   }
 }

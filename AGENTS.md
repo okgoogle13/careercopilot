@@ -66,24 +66,44 @@ cd frontend && npx playwright test
 **Stack**: React 18 + TypeScript · FastAPI · Google Genkit · Firestore · GCP
 **Frontend**: `frontend/` (Vite, Tailwind v4, Zustand, TanStack Query)
 **Backend**: `backend/` (FastAPI, SQLAlchemy, async/await)
-**Design System**: Northcote Curio (M3 variant with Australian botanical palette)
-**Target Users**: Transitioning to social work, community services, government/nonprofit roles
+
+### Design System
+
+- **Name**: Northcote – Contemporary Australian Design System
+- **Foundation**: Material 3 Expressive, dark theme by default
+- **Palette**:
+  - Background/surface: Asphalt Black `#1A1714`
+  - Text: Paper White `#F5F0E8`
+  - Primary actions: Wattle Gold `#D4A84B`
+  - Alerts/urgency: Waratah Red `#C45C4B`
+  - Structural neutrals: Ochre Earth `#B8733D`, Concrete Grey `#A39B8F`
+  - Growth accents: Gum Leaf Green `#6B7F6E`
+- **Tokens**:
+  - Source of truth: `design-system/tokens.json`
+  - CSS variables: `design-system/northcote.css`
+  - All UI must use these tokens; no hardcoded hex values
+- **Aesthetic**:
+  - Contemporary Australian, Peter Drew street art influence
+  - Australian endemic species as living, present-day symbols
+  - Explicitly avoid Victorian specimen plates, museum-cabinet framing, or colonial nostalgia
+- **Target Users**: Transitioning to social work, community services, government/nonprofit roles
 
 ## Key Technologies
 
-| Layer                  | Tech                                             | Rationale                                                |
-| ---------------------- | ------------------------------------------------ | -------------------------------------------------------- |
-| AI Orchestration       | Google Genkit                                    | Native Gemini 1.5 integration, multi-model support       |
-| LLM – High Volume      | Gemini 1.5 Flash                                 | Document generation, ATS optimization, parsing           |
-| LLM – Complex Analysis | Gemini 1.5 Pro                                   | Company research, multi-step workflows, QA               |
-| Document Parsing       | Langextract                                      | Structured resume/document extraction                    |
-| Backend API            | FastAPI                                          | Type safety, async-first, auto OpenAPI docs              |
-| Frontend               | React 18 + TS                                    | Component-driven, strict typing, Northcote design tokens |
-| State Management       | Zustand                                          | Lightweight, no boilerplate                              |
-| Data Fetching          | TanStack Query                                   | Server state, caching, sync                              |
-| Data Persistence       | Firestore                                        | Real-time, Firebase auth integration                     |
-| File Storage           | Cloud Storage                                    | Scalable uploads and generated document storage          |
-| Hosting                | Cloud Run (backend), Firebase Hosting (frontend) | Serverless, auto-scaling                                 |
+| Layer                  | Tech                                             | Rationale                                                  |
+| ---------------------- | ------------------------------------------------ | ---------------------------------------------------------- |
+| AI Orchestration       | Google Genkit                                    | Native Gemini 1.5 integration, multi-model support         |
+| LLM – High Volume      | Gemini 1.5 Flash                                 | Document generation, ATS optimization, parsing             |
+| LLM – Complex Analysis | Gemini 1.5 Pro                                   | Company research, multi-step workflows, QA                 |
+| Document Parsing       | Langextract                                      | Structured resume/document extraction                      |
+| Backend API            | FastAPI                                          | Type safety, async-first, auto OpenAPI docs                |
+| Frontend               | React 18 + TS                                    | Component-driven, strict typing, Northcote design tokens   |
+| Design System          | Northcote Contemporary Australian                | Material 3 Expressive, dark UI, Australian endemic palette |
+| State Management       | Zustand                                          | Lightweight, no boilerplate                                |
+| Data Fetching          | TanStack Query                                   | Server state, caching, sync                                |
+| Data Persistence       | Firestore                                        | Real-time, Firebase auth integration                       |
+| File Storage           | Cloud Storage                                    | Scalable uploads and generated document storage            |
+| Hosting                | Cloud Run (backend), Firebase Hosting (frontend) | Serverless, auto-scaling                                   |
 
 ## Project Structure
 
@@ -200,6 +220,7 @@ Use MCP servers to keep context small, reduce latency, and avoid heavy local par
 **MCP configuration reference:** `/Users/okgoogle13/.gemini/antigravity/mcp_config.json` (current Gemini config). For Claude Desktop setup, see `CLAUDE_DESKTOP_MCP_CONFIG.md`.
 
 **Primary MCP servers used in this repo:**
+
 - **flash-sidekick**: fast analysis over large code/data, batching, and search grounding.
 - **design-system-sidekick**: Northcote Curio design validation, token extraction, and visual compliance checks.
 - **docker** (when enabled): containerized checks or reproductions that must run in Docker.
@@ -234,6 +255,7 @@ elif task == "git_history":
 ### Design System Sidekick Routing
 
 Use **design-system-sidekick** whenever a task requires **visual validation**, **token extraction**, or **Northcote Curio compliance**. This includes:
+
 - Validating newly generated assets (e.g., wallpaper, motifs, specimens).
 - Checking a UI screenshot for palette, density, or typographic compliance.
 - Extracting or comparing design tokens from visuals.
@@ -243,19 +265,20 @@ If the task involves **code-only styling changes** (e.g., Tailwind classes, toke
 
 ### MCP Task Routing Matrix (Practical)
 
-| Task type | Use MCP server | Notes |
-| --- | --- | --- |
-| Read many files, summarize, find patterns | flash-sidekick | Prefer batch tools; avoid large local reads. |
-| Code quality scan or lint-like review | flash-sidekick | Use analyze_code_quality for findings. |
-| Git history or blame analysis | flash-sidekick | Use consult_pro for compact history summaries. |
-| Visual compliance or asset validation | design-system-sidekick | Use validate_asset_compliance and related tools. |
-| Token extraction from imagery | design-system-sidekick | Use extract_visual_design_tokens. |
-| UI regression screenshots or flows | playwright (if configured) | Use for browser-based checks only. |
-| Container-only reproduction | docker (if configured) | Do not use unless explicitly needed. |
+| Task type                                 | Use MCP server             | Notes                                            |
+| ----------------------------------------- | -------------------------- | ------------------------------------------------ |
+| Read many files, summarize, find patterns | flash-sidekick             | Prefer batch tools; avoid large local reads.     |
+| Code quality scan or lint-like review     | flash-sidekick             | Use analyze_code_quality for findings.           |
+| Git history or blame analysis             | flash-sidekick             | Use consult_pro for compact history summaries.   |
+| Visual compliance or asset validation     | design-system-sidekick     | Use validate_asset_compliance and related tools. |
+| Token extraction from imagery             | design-system-sidekick     | Use extract_visual_design_tokens.                |
+| UI regression screenshots or flows        | playwright (if configured) | Use for browser-based checks only.               |
+| Container-only reproduction               | docker (if configured)     | Do not use unless explicitly needed.             |
 
 ### MCP Failure Handling
 
 If an MCP server is unavailable:
+
 1. Note it explicitly.
 2. Offer a fallback approach (local read, smaller scope, or partial summary).
 3. Ask whether to proceed with reduced coverage.

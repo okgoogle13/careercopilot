@@ -49,7 +49,7 @@ export const GalleryFeed: React.FC = () => {
               [1, 2, 3].map((i) => (
                 <div
                   key={i}
-                  className="h-28 bg-surface-specimen-night-light border border-secondary-flannel-dim/20 rounded-[var(--radius-stone)] animate-pulse"
+                  className="h-28 bg-surface-asphalt-black-light border border-secondary-flannel-dim/20 rounded-[var(--radius-stone)] animate-pulse"
                 />
               ))
             : feed.map((item, idx) => (
@@ -78,7 +78,7 @@ export const GalleryFeed: React.FC = () => {
                           <h3 className="text-bloom-gallery text-xl transition-colors">
                             {item.title}
                           </h3>
-                          <p className="text-sm font-annotation text-secondary-flannel-flower mt-1">
+                          <p className="text-sm font-annotation text-secondary-concrete-grey mt-1">
                             {item.timestamp} • {item.meta?.company || 'System Insight'}
                           </p>
                         </div>

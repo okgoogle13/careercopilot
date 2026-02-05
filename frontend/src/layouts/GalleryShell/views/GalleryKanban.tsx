@@ -12,7 +12,7 @@ export const GalleryKanban: React.FC = () => {
 
     return (
         <div className="relative z-20 w-full h-full overflow-x-auto p-8 no-scrollbar">
-            <h2 className="font-bloom text-2xl text-parchment mb-6 sticky left-0">Application Tracker</h2>
+            <h2 className="font-bloom text-2xl text-paper-white mb-6 sticky left-0">Application Tracker</h2>
             <div className="flex gap-6 min-w-max pb-8 h-[calc(100%-4rem)]">
                 {columns.map((col) => {
                     const colApps = getColumnApplications(col);
@@ -20,8 +20,8 @@ export const GalleryKanban: React.FC = () => {
                     return (
                         <div key={col} className="w-80 flex flex-col gap-4">
                             {/* Column Header */}
-                            <div className="flex items-center justify-between pb-2 border-b border-white/10 sticky top-0 bg-surface-specimen-night/50 backdrop-blur-sm z-10 px-2 rounded-t-lg">
-                                <h3 className="font-field-note font-bold text-secondary-flannel-flower uppercase text-xs tracking-widest">{col}</h3>
+                            <div className="flex items-center justify-between pb-2 border-b border-white/10 sticky top-0 bg-surface-asphalt-black/50 backdrop-blur-sm z-10 px-2 rounded-t-lg">
+                                <h3 className="font-field-note font-bold text-secondary-concrete-grey uppercase text-xs tracking-widest">{col}</h3>
                                 <span className="text-[10px] bg-white/5 px-2 py-0.5 rounded-full text-secondary-flannel-dim">{colApps.length}</span>
                             </div>
 
@@ -40,8 +40,8 @@ export const GalleryKanban: React.FC = () => {
                                             className="group cursor-pointer relative"
                                         >
                                             <div className="flex flex-col gap-2">
-                                                <h4 className="font-bloom text-lg text-parchment group-hover:text-wattle-gold transition-colors">{app.role}</h4>
-                                                <div className="text-sm font-body text-secondary-flannel-flower">{app.company}</div>
+                                                <h4 className="font-bloom text-lg text-paper-white group-hover:text-wattle-gold transition-colors">{app.role}</h4>
+                                                <div className="text-sm font-body text-secondary-concrete-grey">{app.company}</div>
 
                                                 <div className="flex items-center gap-3 mt-2 text-xs text-secondary-flannel-dim font-annotation">
                                                     <div className="flex items-center gap-1">
@@ -70,7 +70,7 @@ export const GalleryKanban: React.FC = () => {
                                 {colApps.length === 0 && (
                                     <div className="h-32 border-2 border-dashed border-white/5 rounded-lg flex flex-col items-center justify-center text-center p-4 opacity-50">
                                         <span className="font-handwriting text-2xl text-secondary-flannel-dim rotate-[-5deg] mb-2">Empty...</span>
-                                        <span className="text-xs font-annotation text-secondary-flannel-flower">No specimens here yet</span>
+                                        <span className="text-xs font-annotation text-secondary-concrete-grey">No specimens here yet</span>
                                     </div>
                                 )}
                             </div>

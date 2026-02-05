@@ -4,13 +4,13 @@
   position: relative;
   width: 100vw;
   height: 100vh;
-  background-color: var(--color-specimen-night-darkest, #050403);
+  background-color: var(--color-asphalt-black-darkest, #050403);
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
   font-family: var(--font-field-note, sans-serif);
-  color: var(--color-parchment, #f0ead6);
+  color: var(--color-paper-white, #f0ead6);
 }
 
 /* ==========================================
@@ -59,7 +59,7 @@
 .blobB {
   width: 40vw;
   height: 40vh;
-  background: radial-gradient(circle, var(--color-waratah-crimson, #c45c4b) 0%, transparent 70%);
+  background: radial-gradient(circle, var(--color-waratah-red, #c45c4b) 0%, transparent 70%);
   bottom: -5%;
   right: -5%;
   animation: floating 8s infinite alternate-reverse ease-in-out;
@@ -127,7 +127,7 @@
 .heroCard {
   position: relative;
   z-index: 10;
-  background: rgba(44, 39, 35, 0.7); /* Eucalypt Smoke Base approx */
+  background: rgba(44, 39, 35, 0.7); /* Concrete Grey Base approx */
   backdrop-filter: blur(32px);
   -webkit-backdrop-filter: blur(32px);
   padding: 5rem 4rem;
@@ -135,7 +135,7 @@
   text-align: center;
   max-width: 540px;
   width: 90%;
-  border: 1px solid rgba(230, 225, 214, 0.1); /* Flannel Flower Border */
+  border: 1px solid rgba(230, 225, 214, 0.1); /* Concrete Grey Border */
   box-shadow: var(--shadow-maximum);
   transition: transform var(--duration-standard) var(--ease-viscous-breeze);
 }
@@ -151,7 +151,7 @@
   font-variation-settings:
     'SOFT' 80,
     'WONK' 1;
-  color: var(--color-flannel-flower, #e6e1d6);
+  color: var(--color-concrete-grey, #e6e1d6);
   margin-top: 2rem;
   opacity: 0.9;
 }
@@ -167,7 +167,7 @@
 
 .btnPebbleFilled {
   background-color: var(--color-wattle-gold);
-  color: var(--color-specimen-night-darkest);
+  color: var(--color-asphalt-black-darkest);
   padding: 1.25rem 2.5rem;
   border-radius: var(--radius-pebble);
   font-family: var(--font-field-note);
@@ -205,7 +205,7 @@
 }
 
 .btnLink {
-  color: var(--color-flannel-flower-dark);
+  color: var(--color-concrete-grey-dark);
   font-family: var(--font-annotation);
   text-decoration: underline;
   text-underline-offset: 4px;

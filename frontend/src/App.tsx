@@ -65,7 +65,7 @@ const ProtectedLayout = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#141218] flex items-center justify-center text-[#E6E1E5]">
+      <div className="min-h-screen bg-[#1A1714] flex items-center justify-center text-[#E6E1E5]">
         Loading...
       </div>
     );
@@ -105,7 +105,7 @@ const ProtectedLayout = () => {
 // Public Layout (Login/Register/Landing)
 const PublicLayout = () => {
   return (
-    <div className="min-h-screen bg-[#141218] relative">
+    <div className="min-h-screen bg-[#1A1714] relative">
       {/* Textured Background */}
       <div
         className="fixed inset-0 pointer-events-none z-0 opacity-30 mix-blend-overlay"

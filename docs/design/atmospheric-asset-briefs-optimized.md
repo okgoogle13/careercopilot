@@ -33,7 +33,7 @@
 
 **Concept:** The definitive archival seal of approval. A prehistoric fossil leaf, not a rubber stamp.
 **Materiality:** "Fossilized Gold." Combining the texture of a heavy brass signet ring pressing into gold leaf. Crisp, etched ridges of the Glossopteris venation.
-**Aesthetic:** It shouldn't look "inked"—it should look _embossed_ or _gilded_ onto the parchment.
+**Aesthetic:** It shouldn't look "inked"—it should look _embossed_ or _gilded_ onto the paper-white.
 **Animation:** A heavy, satisfying "Thud." Impact drives a dust cloud (particle effect) and a slight screen shake.
 
 ### 2. Usage Rules
@@ -86,7 +86,7 @@
 ### 1. Visual Definition
 
 **Concept:** The structure beneath the skin. A precise distinctive etching of Australian megafauna skeletal anatomy (e.g., _Diprotodon_ vertebrae or _Thylacine_ jaw).
-**Style:** "Lithographic Plate." Fine, black ink lines on parchment. Cross-hatching for depth. NO gradients.
+**Style:** "Lithographic Plate." Fine, black ink lines on paper-white. Cross-hatching for depth. NO gradients.
 **Integration:** It functions as a watermark. High transparency (4-6% opacity).
 **Blend:** `multiply` against the Field Paper background.
 

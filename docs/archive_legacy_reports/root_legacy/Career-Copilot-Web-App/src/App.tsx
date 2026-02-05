@@ -31,7 +31,7 @@ const ProtectedLayout = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#141218] relative">
+    <div className="min-h-screen bg-[#1A1714] relative">
       {/* Textured Background Layer */}
       <div
         className="fixed inset-0 pointer-events-none"
@@ -73,7 +73,7 @@ const ProtectedLayout = () => {
 // Public Layout
 const PublicLayout = () => {
   return (
-    <div className="min-h-screen bg-[#141218] relative">
+    <div className="min-h-screen bg-[#1A1714] relative">
       {/* Textured Background Layer */}
       <div
         className="fixed inset-0 pointer-events-none"

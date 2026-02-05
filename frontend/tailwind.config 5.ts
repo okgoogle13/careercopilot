@@ -8,10 +8,10 @@ const config: Config = {
     theme: {
         extend: {
             colors: {
-                'specimen-night': 'var(--color-specimen-night)',
-                'parchment': 'var(--color-parchment)',
-                'flannel-flower': 'var(--color-flannel-flower)',
-                'surface-container': 'var(--color-eucalypt-smoke)',
+                'asphalt-black': 'var(--color-asphalt-black)',
+                'paper-white': 'var(--color-paper-white)',
+                'concrete-grey': 'var(--color-concrete-grey)',
+                'surface-container': 'var(--color-concrete-grey)',
             },
             fontFamily: {
                 proclamation: ['"Libre Bodoni"', '"Playfair Display"', 'serif'],

@@ -44,13 +44,13 @@ export default {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
 
-        // Use Specimen Night as the global floor
+        // Use Asphalt Black as the global floor
         black: t.surface.shared.specimenNight.value,
-        white: t.onSurface.parchment.value, // Parchment instead of white
+        white: t.onSurface.paper-white.value, // Paper White instead of white
 
         // Core Botanic Families
-        'specimen-night': t.surface.shared.specimenNight.value,
-        'specimen-night-light': t.surface.shared.specimenNightLight && t.surface.shared.specimenNightLight.value || '#2C2925',
+        'asphalt-black': t.surface.shared.specimenNight.value,
+        'asphalt-black-light': t.surface.shared.specimenNightLight && t.surface.shared.specimenNightLight.value || '#2C2925',
 
         wattle: {
           vault: t.primary.wattleShadow.value, // Fallback
@@ -70,7 +70,7 @@ export default {
           bloom: t.tertiary.waratahBloom.value,
           container: t.tertiary.waratahContainer.value,
         },
-        'waratah-crimson': t.tertiary.waratahCrimson.value,
+        'waratah-red': t.tertiary.waratahCrimson.value,
 
         eucalypt: {
           night: t.surface.shared.specimenNight.value,
@@ -87,9 +87,9 @@ export default {
           light: t.secondary.flannelFaint.value,
           bloom: t.secondary.flannelFaint.value,
         },
-        'flannel-flower': t.secondary.flannelFlower.value,
+        'concrete-grey': t.secondary.flannelFlower.value,
 
-        parchment: t.onSurface.parchment.value,
+        paper-white: t.onSurface.paper-white.value,
 
         // Semantic Semantic (Legacy/Functional) support
         semantic: {
@@ -110,7 +110,7 @@ export default {
         },
         destructive: {
           DEFAULT: t.tertiary.waratahCrimson.value,
-          foreground: t.onSurface.parchment.value,
+          foreground: t.onSurface.paper-white.value,
         },
         muted: {
           DEFAULT: t.surface.gallery.eucalyptSmoke.value,
@@ -118,15 +118,15 @@ export default {
         },
         accent: {
           DEFAULT: t.tertiary.waratahCrimson.value,
-          foreground: t.onSurface.parchment.value,
+          foreground: t.onSurface.paper-white.value,
         },
         popover: {
           DEFAULT: t.surface.gallery.eucalyptSmokeHigh.value,
-          foreground: t.onSurface.parchment.value,
+          foreground: t.onSurface.paper-white.value,
         },
         card: {
           DEFAULT: t.surface.gallery.eucalyptSmoke.value,
-          foreground: t.onSurface.parchment.value,
+          foreground: t.onSurface.paper-white.value,
         },
       },
 

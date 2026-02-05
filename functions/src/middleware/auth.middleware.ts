@@ -1,7 +1,7 @@
-import * as admin from "firebase-admin";
-import type { Request, Response, NextFunction } from "express";
-import { sendResponse } from "../utils/api.utils";
+import type { NextFunction, Request, Response } from "express";
+import admin from "firebase-admin";
 import { AuthResponse } from "../types/api.types";
+import { sendResponse } from "../utils/api.utils";
 
 // Extend Express Request type to include our custom properties
 declare global {

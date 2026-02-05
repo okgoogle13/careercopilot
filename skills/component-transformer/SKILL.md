@@ -28,7 +28,7 @@ Determine if the component belongs in:
 
 Replace generic values with the Northcote Token Set:
 
-- **Colors**: Map to `primary-wattle`, `tertiary-waratah`, `parchment`, etc.
+- **Colors**: Map to `primary-wattle`, `tertiary-waratah`, `paper-white`, etc.
 - **Typography**: Inject the **Federation Stack**.
   - Wrap primary headers in `banksia-composition`.
   - Apply `font-variation-settings` for parametric weight (XTRA: 468).

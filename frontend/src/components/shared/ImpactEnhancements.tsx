@@ -15,13 +15,13 @@ export function ImpactEnhancements({ suggestions }: ImpactEnhancementsProps) {
   }
 
   return (
-    <div className="bg-[var(--color-specimen-night-light)] rounded-stone p-8 border border-white/10 shadow-elevation-1">
+    <div className="bg-[var(--color-asphalt-black-light)] rounded-stone p-8 border border-white/10 shadow-elevation-1">
       <div className="flex items-center gap-3 mb-6">
         <Lightbulb className="w-6 h-6 text-[var(--color-wattle-gold)]" />
-        <h2 className="text-3xl font-bloom text-[var(--color-parchment)]">Impact Enhancements</h2>
+        <h2 className="text-3xl font-bloom text-[var(--color-paper-white)]">Impact Enhancements</h2>
       </div>
 
-      <p className="text-field-note text-[var(--color-flannel-flower-dark)] mb-6">
+      <p className="text-field-note text-[var(--color-concrete-grey-dark)] mb-6">
         Strategic rewrites using the <strong>Google XYZ Formula</strong>: Accomplished [X] as
         measured by [Y], by doing [Z]
       </p>
@@ -30,14 +30,14 @@ export function ImpactEnhancements({ suggestions }: ImpactEnhancementsProps) {
         {suggestions.map((suggestion, index) => (
           <div
             key={index}
-            className="bg-[var(--color-specimen-night-dark)] rounded-pebble p-6 border border-white/5"
+            className="bg-[var(--color-asphalt-black-dark)] rounded-pebble p-6 border border-white/5"
           >
             {/* Original Text */}
             <div className="mb-4">
-              <span className="text-[10px] text-[var(--color-flannel-flower-dark)] uppercase tracking-widest font-annotation">
+              <span className="text-[10px] text-[var(--color-concrete-grey-dark)] uppercase tracking-widest font-annotation">
                 Original
               </span>
-              <p className="text-[15px] text-[var(--color-flannel-flower-dark)] line-through opacity-60 mt-1">
+              <p className="text-[15px] text-[var(--color-concrete-grey-dark)] line-through opacity-60 mt-1">
                 &ldquo;{suggestion.original}&rdquo;
               </p>
             </div>
@@ -52,18 +52,18 @@ export function ImpactEnhancements({ suggestions }: ImpactEnhancementsProps) {
 
             {/* Suggested Rewrite */}
             <div className="mb-4">
-              <p className="text-lg font-bold text-[var(--color-parchment)] leading-relaxed">
+              <p className="text-lg font-bold text-[var(--color-paper-white)] leading-relaxed">
                 {suggestion.suggestion}
               </p>
             </div>
 
             {/* Contextual Why */}
             {suggestion.contextualWhy && (
-              <div className="bg-[var(--color-eucalypt-smoke-base)]/20 rounded-pebble p-4 border-l-4 border-[var(--color-eucalypt-smoke-base)]">
-                <span className="text-[10px] text-[var(--color-flannel-flower)] uppercase tracking-wider font-bold">
+              <div className="bg-[var(--color-concrete-grey-base)]/20 rounded-pebble p-4 border-l-4 border-[var(--color-concrete-grey-base)]">
+                <span className="text-[10px] text-[var(--color-concrete-grey)] uppercase tracking-wider font-bold">
                   💡 Why This Works:
                 </span>
-                <p className="text-sm text-[var(--color-flannel-flower)]/80 mt-2 font-field-note">
+                <p className="text-sm text-[var(--color-concrete-grey)]/80 mt-2 font-field-note">
                   {suggestion.contextualWhy}
                 </p>
               </div>
@@ -79,7 +79,7 @@ export function ImpactEnhancements({ suggestions }: ImpactEnhancementsProps) {
                       ? 'bg-blue-500/10 text-blue-400'
                       : suggestion.type === 'scale'
                         ? 'bg-purple-500/10 text-purple-400'
-                        : 'bg-[var(--color-waratah-crimson)]/10 text-[var(--color-waratah-crimson)]'
+                        : 'bg-[var(--color-waratah-red)]/10 text-[var(--color-waratah-red)]'
                 }`}
               >
                 {suggestion.type.toUpperCase()}

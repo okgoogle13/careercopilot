@@ -21,8 +21,8 @@ const MetricCard = React.forwardRef<HTMLDivElement, MetricCardProps>(
         const trendColor = trend?.direction === 'up'
             ? (mode === 'gallery' ? 'text-status-gallery-ghost-gum' : 'text-status-laboratory-clinical-sage')
             : trend?.direction === 'down'
-                ? (mode === 'gallery' ? 'text-tertiary-waratah-crimson' : 'text-status-laboratory-clinical-alert')
-                : 'text-secondary-flannel-flower';
+                ? (mode === 'gallery' ? 'text-tertiary-waratah-red' : 'text-status-laboratory-clinical-alert')
+                : 'text-secondary-concrete-grey';
 
         return (
             <Stone
@@ -32,7 +32,7 @@ const MetricCard = React.forwardRef<HTMLDivElement, MetricCardProps>(
             >
                 <div className="flex justify-between items-start mb-4">
                     <span className="text-sm font-medium opacity-70 uppercase tracking-wider">{label}</span>
-                    {icon && <div className="text-secondary-flannel-flower opacity-80">{icon}</div>}
+                    {icon && <div className="text-secondary-concrete-grey opacity-80">{icon}</div>}
                 </div>
 
                 <div className="mt-auto">

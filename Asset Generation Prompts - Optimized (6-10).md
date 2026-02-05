@@ -22,8 +22,8 @@ meets Ernst Haeckel Geometric Precision.
 
 CRITICAL REQUIREMENTS (Non-Negotiable):
 
-1. BACKGROUND: Pure Specimen Night (#1A1714) theatrical void
-   EXCLUDE: Cream, beige, tan, parchment, white backgrounds ❌
+1. BACKGROUND: Pure Asphalt Black (#1A1714) theatrical void
+   EXCLUDE: Cream, beige, tan, paper-white, white backgrounds ❌
 
 2. GEOGRAPHIC AUTHENTICITY: Australian endemic specimens ONLY
    VERIFY: Species/artifact native to Australia ✅
@@ -87,7 +87,7 @@ GEOGRAPHIC AUTHENTICITY:
 - VERIFY: Emphasize Australian collection provenance ✅
 
 BACKGROUND:
-- Color: Pure Specimen Night (#1A1714)
+- Color: Pure Asphalt Black (#1A1714)
 - Effect: Theatrical void, absolute darkness
 - CRITICAL EXCLUSION: No cream, beige, tan backgrounds ❌
 
@@ -215,7 +215,7 @@ CONCEPTUAL METAPHOR:
 NEGATIVE CONSTRAINTS (Absolute Exclusions):
 
 BACKGROUND:
-- ❌ Cream, beige, tan, parchment backgrounds
+- ❌ Cream, beige, tan, paper-white backgrounds
 - ❌ White or light neutral backgrounds
 - ❌ Textured paper backgrounds
 
@@ -237,7 +237,7 @@ VERIFICATION CHECKLIST:
 
 Before generation, verify:
 - [ ] Specimen from Australian waters (Great Barrier Reef) ✅
-- [ ] Background is #1A1714 (Specimen Night) ✅
+- [ ] Background is #1A1714 (Asphalt Black) ✅
 - [ ] Typography includes complete provenance ✅
 - [ ] Plate attribution card present (bottom right) ✅
 - [ ] Hexagonal lattice pattern clearly visible ✅
@@ -291,7 +291,7 @@ GEOGRAPHIC AUTHENTICITY:
 - VERIFY: Truly Australian endemic (not introduced) ✅
 
 BACKGROUND:
-- Color: Pure Specimen Night (#1A1714)
+- Color: Pure Asphalt Black (#1A1714)
 - Effect: Theatrical void, absolute darkness
 - CRITICAL EXCLUSION: No cream, beige, tan backgrounds ❌
 
@@ -419,7 +419,7 @@ CONCEPTUAL METAPHOR:
 NEGATIVE CONSTRAINTS (Absolute Exclusions):
 
 BACKGROUND:
-- ❌ Cream, beige, tan, parchment backgrounds
+- ❌ Cream, beige, tan, paper-white backgrounds
 - ❌ White or light neutral backgrounds
 - ❌ Forest floor context (pure void only)
 
@@ -441,7 +441,7 @@ VERIFICATION CHECKLIST:
 
 Before generation, verify:
 - [ ] Specimen is Aseroe rubra (Australian endemic) ✅
-- [ ] Background is #1A1714 (Specimen Night) ✅
+- [ ] Background is #1A1714 (Asphalt Black) ✅
 - [ ] Typography includes complete provenance ✅
 - [ ] Plate attribution card present (bottom right) ✅
 - [ ] Star-shaped radial pattern clearly visible ✅
@@ -488,7 +488,7 @@ GEOGRAPHIC AUTHENTICITY:
 - VERIFY: Australian endemic flying fox ✅
 
 BACKGROUND:
-- Color: Pure Specimen Night (#1A1714)
+- Color: Pure Asphalt Black (#1A1714)
 - Effect: Theatrical void, absolute darkness
 - CRITICAL EXCLUSION: No cream, beige, tan backgrounds ❌
 
@@ -626,7 +626,7 @@ CONCEPTUAL METAPHOR:
 NEGATIVE CONSTRAINTS (Absolute Exclusions):
 
 BACKGROUND:
-- ❌ Cream, beige, tan, parchment backgrounds
+- ❌ Cream, beige, tan, paper-white backgrounds
 - ❌ White or light neutral backgrounds
 - ❌ Anatomical chart paper texture
 
@@ -648,7 +648,7 @@ VERIFICATION CHECKLIST:
 
 Before generation, verify:
 - [ ] Specimen is Pteropus poliocephalus (Australian endemic) ✅
-- [ ] Background is #1A1714 (Specimen Night) ✅
+- [ ] Background is #1A1714 (Asphalt Black) ✅
 - [ ] Typography includes conservation status ✅
 - [ ] Plate attribution card present (bottom right) ✅
 - [ ] Radial fan pattern (180° arc) clearly visible ✅
@@ -695,7 +695,7 @@ GEOGRAPHIC AUTHENTICITY:
 - VERIFY: Great Barrier Reef specimen ✅
 
 BACKGROUND:
-- Color: Pure Specimen Night (#1A1714)
+- Color: Pure Asphalt Black (#1A1714)
 - Effect: Theatrical void, absolute darkness
 - CRITICAL EXCLUSION: No cream, beige, tan backgrounds ❌
 
@@ -825,7 +825,7 @@ CONCEPTUAL METAPHOR:
 NEGATIVE CONSTRAINTS (Absolute Exclusions):
 
 BACKGROUND:
-- ❌ Cream, beige, tan, parchment backgrounds
+- ❌ Cream, beige, tan, paper-white backgrounds
 - ❌ Underwater context (blue water, fish)
 - ❌ Reef environment (pure void only)
 
@@ -847,7 +847,7 @@ VERIFICATION CHECKLIST:
 
 Before generation, verify:
 - [ ] Specimen from Great Barrier Reef (Australian waters) ✅
-- [ ] Background is #1A1714 (Specimen Night) ✅
+- [ ] Background is #1A1714 (Asphalt Black) ✅
 - [ ] Typography includes depth/habitat info ✅
 - [ ] Plate attribution card present (bottom right) ✅
 - [ ] Turing pattern (meandering labyrinth) clearly visible ✅
@@ -893,7 +893,7 @@ GEOGRAPHIC AUTHENTICITY:
 - VERIFY: Australian waters specimen ✅
 
 BACKGROUND:
-- Color: Pure Specimen Night (#1A1714)
+- Color: Pure Asphalt Black (#1A1714)
 - Effect: Theatrical void, absolute darkness
 - CRITICAL EXCLUSION: No cream, beige, tan backgrounds ❌
 
@@ -1027,7 +1027,7 @@ CONCEPTUAL METAPHOR:
 NEGATIVE CONSTRAINTS (Absolute Exclusions):
 
 BACKGROUND:
-- ❌ Cream, beige, tan, parchment backgrounds
+- ❌ Cream, beige, tan, paper-white backgrounds
 - ❌ White or light neutral backgrounds
 - ❌ Underwater context (blue water)
 
@@ -1049,7 +1049,7 @@ VERIFICATION CHECKLIST:
 
 Before generation, verify:
 - [ ] Specimen from Australian waters (Bass Strait) ✅
-- [ ] Background is #1A1714 (Specimen Night) ✅
+- [ ] Background is #1A1714 (Asphalt Black) ✅
 - [ ] Typography includes depth/habitat info ✅
 - [ ] Plate attribution card present (bottom right) ✅
 - [ ] 5-fold radial symmetry clearly visible ✅
