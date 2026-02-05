@@ -6,7 +6,7 @@ import tokens from './src/theme/tokens.json';
 const t = tokens.color.semantic;
 
 export default {
-  darkMode: ["class"],
+  darkMode: ['class'],
   content: [
     './pages/**/*.{ts,tsx}',
     './components/**/*.{ts,tsx}',
@@ -17,9 +17,9 @@ export default {
   theme: {
     container: {
       center: true,
-      padding: "2rem",
+      padding: '2rem',
       screens: {
-        "2xl": "1400px",
+        '2xl': '1400px',
       },
     },
     extend: {
@@ -38,19 +38,21 @@ export default {
       // MOONLIGHT ON VELVET PALETTE
       // ═══════════════════════════════════════════════════════════════════════
       colors: {
-        border: "hsl(var(--border))",
-        input: "hsl(var(--input))",
-        ring: "hsl(var(--ring))",
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
+        border: 'hsl(var(--border))',
+        input: 'hsl(var(--input))',
+        ring: 'hsl(var(--ring))',
+        background: 'hsl(var(--background))',
+        foreground: 'hsl(var(--foreground))',
 
         // Use Asphalt Black as the global floor
         black: t.surface.shared.specimenNight.value,
-        white: t.onSurface.paper-white.value, // Paper White instead of white
+        white: t.onSurface['paper-white'].value, // Paper White instead of white
 
         // Core Botanic Families
         'asphalt-black': t.surface.shared.specimenNight.value,
-        'asphalt-black-light': t.surface.shared.specimenNightLight && t.surface.shared.specimenNightLight.value || '#2C2925',
+        'asphalt-black-light':
+          (t.surface.shared.specimenNightLight && t.surface.shared.specimenNightLight.value) ||
+          '#2C2925',
 
         wattle: {
           vault: t.primary.wattleShadow.value, // Fallback
@@ -89,7 +91,7 @@ export default {
         },
         'concrete-grey': t.secondary.flannelFlower.value,
 
-        paper-white: t.onSurface.paper-white.value,
+        'paper-white': t.onSurface['paper-white'].value,
 
         // Semantic Semantic (Legacy/Functional) support
         semantic: {
@@ -110,7 +112,7 @@ export default {
         },
         destructive: {
           DEFAULT: t.tertiary.waratahCrimson.value,
-          foreground: t.onSurface.paper-white.value,
+          foreground: t.onSurface['paper-white'].value,
         },
         muted: {
           DEFAULT: t.surface.gallery.eucalyptSmoke.value,
@@ -118,20 +120,23 @@ export default {
         },
         accent: {
           DEFAULT: t.tertiary.waratahCrimson.value,
-          foreground: t.onSurface.paper-white.value,
+          foreground: t.onSurface['paper-white'].value,
         },
         popover: {
           DEFAULT: t.surface.gallery.eucalyptSmokeHigh.value,
-          foreground: t.onSurface.paper-white.value,
+          foreground: t.onSurface['paper-white'].value,
         },
         card: {
           DEFAULT: t.surface.gallery.eucalyptSmoke.value,
-          foreground: t.onSurface.paper-white.value,
+          foreground: t.onSurface['paper-white'].value,
         },
       },
 
       fontSize: {
-        'display-hero': ['120px', { lineHeight: '1.0', fontWeight: '100', letterSpacing: '-0.04em' }],
+        'display-hero': [
+          '120px',
+          { lineHeight: '1.0', fontWeight: '100', letterSpacing: '-0.04em' },
+        ],
         'display-lg': ['240px', { lineHeight: '1.1', fontWeight: '700', letterSpacing: '-2px' }],
         'display-md': ['160px', { lineHeight: '1.1', fontWeight: '700', letterSpacing: '-1px' }],
         'display-sm': ['96px', { lineHeight: '1.2', fontWeight: '600' }],
@@ -144,9 +149,33 @@ export default {
         'body-lg': ['16px', { lineHeight: '1.6', fontWeight: '400', letterSpacing: '0.5px' }],
         'body-md': ['14px', { lineHeight: '1.5', fontWeight: '400', letterSpacing: '0.25px' }],
         'body-sm': ['12px', { lineHeight: '1.5', fontWeight: '400', letterSpacing: '0.4px' }],
-        'label-lg': ['13px', { lineHeight: '1.5', fontWeight: '500', letterSpacing: '0.5px', textTransform: 'uppercase' }],
-        'label-md': ['11px', { lineHeight: '1.4', fontWeight: '500', letterSpacing: '0.5px', textTransform: 'uppercase' }],
-        'label-sm': ['10px', { lineHeight: '1.3', fontWeight: '600', letterSpacing: '0.8px', textTransform: 'uppercase' }],
+        'label-lg': [
+          '13px',
+          {
+            lineHeight: '1.5',
+            fontWeight: '500',
+            letterSpacing: '0.5px',
+            textTransform: 'uppercase',
+          },
+        ],
+        'label-md': [
+          '11px',
+          {
+            lineHeight: '1.4',
+            fontWeight: '500',
+            letterSpacing: '0.5px',
+            textTransform: 'uppercase',
+          },
+        ],
+        'label-sm': [
+          '10px',
+          {
+            lineHeight: '1.3',
+            fontWeight: '600',
+            letterSpacing: '0.8px',
+            textTransform: 'uppercase',
+          },
+        ],
       },
 
       // ========================================
@@ -173,9 +202,9 @@ export default {
         sentry: '98%',
 
         // Shadcn fallbacks
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
+        lg: 'var(--radius)',
+        md: 'calc(var(--radius) - 2px)',
+        sm: 'calc(var(--radius) - 4px)',
       },
 
       // ========================================
@@ -215,20 +244,29 @@ export default {
         bloom: 'bloom 600ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards',
         'bloom-lift': 'bloomLift 200ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards',
         'bloom-glow': 'bloomGlow 300ms cubic-bezier(0.25, 0.46, 0.45, 0.94) 100ms forwards',
-        'bloom-typography': 'bloomTypography 400ms cubic-bezier(0.34, 1.56, 0.64, 1) 200ms forwards',
+        'bloom-typography':
+          'bloomTypography 400ms cubic-bezier(0.34, 1.56, 0.64, 1) 200ms forwards',
         unfold: 'unfold 600ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards',
         shimmer: 'shimmer 2000ms linear infinite',
         pulse: 'pulse 2000ms cubic-bezier(0.4, 0, 0.6, 1) infinite',
         press: 'press 150ms cubic-bezier(0.2, 0, 0, 1) forwards',
 
         // Shadcn Accordion
-        "accordion-down": "accordion-down 0.2s ease-out",
-        "accordion-up": "accordion-up 0.2s ease-out",
+        'accordion-down': 'accordion-down 0.2s ease-out',
+        'accordion-up': 'accordion-up 0.2s ease-out',
       },
       keyframes: {
         bloom: {
-          '0%': { transform: 'translateY(0px)', opacity: '1', boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)' },
-          '100%': { transform: 'translateY(-12px)', opacity: '1', boxShadow: '0 0 0 24px rgba(212, 168, 75, 0.2), 0 4px 16px rgba(0, 0, 0, 0.25)' },
+          '0%': {
+            transform: 'translateY(0px)',
+            opacity: '1',
+            boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)',
+          },
+          '100%': {
+            transform: 'translateY(-12px)',
+            opacity: '1',
+            boxShadow: '0 0 0 24px rgba(212, 168, 75, 0.2), 0 4px 16px rgba(0, 0, 0, 0.25)',
+          },
         },
         bloomLift: {
           '0%': { transform: 'translateY(0px)', opacity: '1' },
@@ -259,23 +297,24 @@ export default {
           '50%': { transform: 'scale(0.98)' },
           '100%': { transform: 'scale(0.98)' },
         },
-        "accordion-down": {
+        'accordion-down': {
           from: { height: 0 },
-          to: { height: "var(--radix-accordion-content-height)" },
+          to: { height: 'var(--radix-accordion-content-height)' },
         },
-        "accordion-up": {
-          from: { height: "var(--radix-accordion-content-height)" },
+        'accordion-up': {
+          from: { height: 'var(--radix-accordion-content-height)' },
           to: { height: 0 },
         },
       },
       backgroundImage: {
         'texture-gouache': "url('/textures/gouache-grain-warm.png')",
-        'gallery-gradient': "radial-gradient(ellipse 60% 50% at 85% 15%, rgba(212, 168, 75, 0.08) 0%, transparent 50%), radial-gradient(ellipse 40% 60% at 20% 60%, rgba(196, 92, 75, 0.05) 0%, transparent 40%)",
-      }
+        'gallery-gradient':
+          'radial-gradient(ellipse 60% 50% at 85% 15%, rgba(212, 168, 75, 0.08) 0%, transparent 50%), radial-gradient(ellipse 40% 60% at 20% 60%, rgba(196, 92, 75, 0.05) 0%, transparent 40%)',
+      },
     },
   },
   plugins: [
-    require("tailwindcss-animate"),
+    require('tailwindcss-animate'),
     // Variable Font Axis Support (M3 Expressive)
     function ({ matchUtilities, theme }) {
       matchUtilities(
@@ -305,6 +344,6 @@ export default {
           '@apply': 'outline-none ring-2 ring-offset-0 ring-wattle-gold',
         },
       });
-    }
+    },
   ],
-}
+};

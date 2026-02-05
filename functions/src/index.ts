@@ -1,6 +1,6 @@
 import admin from "firebase-admin";
 import functions from "firebase-functions";
-import { JobListingExtractor } from "./services/job_listing_extractor";
+import {JobListingExtractor} from "./services/job_listing_extractor";
 // // import { onFlow } from "@genkit-ai/firebase"; // Imported implicitly where needed or if we need to configure flow explicitly
 // import { ai } from "./genkit"; // Imported implicitly where needed or if we need to configure flow explicitly
 
@@ -43,7 +43,7 @@ export const enqueueJobProcessing = functions.https.onCall(
         source: data.source,
       });
 
-      return { success: true, jobId: jobRef.id };
+      return {success: true, jobId: jobRef.id};
     } catch (error) {
       console.error("Error enqueuing job processing:", error);
       throw new functions.https.HttpsError("internal", "Failed to enqueue job processing", error);
@@ -65,7 +65,7 @@ export const processJobListing = functions.tasks
   })
   .onDispatch(async (data: { jobId: string; source: string | { url: string } }) => {
     try {
-      const { jobId, source } = data;
+      const {jobId, source} = data;
       const result = await jobListingExtractor.extract({
         source,
         options: {
@@ -82,7 +82,7 @@ export const processJobListing = functions.tasks
         completedAt: admin.firestore.FieldValue.serverTimestamp(),
       });
 
-      return { success: true, jobId };
+      return {success: true, jobId};
     } catch (error) {
       console.error("Error processing job listing:", error);
 
@@ -132,7 +132,7 @@ export const extractJobListing = functions.https.onCall(
           extractLocation: true,
         },
       });
-      return { success: true, data: result };
+      return {success: true, data: result};
     } catch (error) {
       console.error("Error extracting job listing:", error);
       throw new functions.https.HttpsError("internal", "Failed to extract job listing", error);
@@ -163,7 +163,7 @@ export const findSimilarListings = functions.https.onCall(
         minScore: data.minScore || 0.7,
         filters: data.filters || {},
       });
-      return { success: true, data: results };
+      return {success: true, data: results};
     } catch (error) {
       console.error("Error finding similar listings:", error);
       throw new functions.https.HttpsError(

@@ -1,4 +1,4 @@
-import { genkit } from "genkit";
+import {genkit} from "genkit";
 
 // Initialize the Genkit instance
 export const ai = genkit({
