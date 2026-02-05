@@ -14,7 +14,7 @@ The frontend build is now **succeeding** following the execution of the `typogra
 ### ✅ RESOLVED: Tailwind CSS v4 @apply Incompatibility
 **Status**: Resolved via `typography-001` transformation.
 
-**Root Cause**: Tailwind CSS v4 has stricter rules for `@apply` directives. Custom utility classes (like `font-proclamation`, `text-display-lg`, `bg-specimen-night`, etc.) cannot be used in `@apply` without proper configuration.
+**Root Cause**: Tailwind CSS v4 has stricter rules for `@apply` directives. Custom utility classes (like `font-proclamation`, `text-display-lg`, `bg-asphalt-black`, etc.) cannot be used in `@apply` without proper configuration.
 
 **Affected Lines**:
 - Line 412: `@apply font-proclamation text-display-lg font-bold tracking-tighter leading-none;`
@@ -23,7 +23,7 @@ The frontend build is now **succeeding** following the execution of the `typogra
 - Line 424: `@apply font-bloom text-headline-sm font-semibold leading-snug;`
 - Line 428: `@apply font-field-note text-title-lg font-semibold;`
 - Line 432: `@apply font-field-note text-title-md font-semibold;`
-- Line 436: `@apply font-field-note text-body-lg text-flannel-flower;`
+- Line 436: `@apply font-field-note text-body-lg text-concrete-grey;`
 - Line 441: `@apply font-field-note text-body-sm;`
 - Line 446: `@apply font-annotation text-label-md tracking-wider;`
 - Line 452: `@apply font-field-note font-semibold text-body-md transition-all duration-300 ease-viscous-breeze;`

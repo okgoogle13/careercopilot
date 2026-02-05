@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "flash_sidekick_mcp": {
+      "command": "/Users/okgoogle13/.pyenv/versions/3.12.3/bin/python",
+      "args": [
+        "/Users/okgoogle13/Desktop/careercopilot/servers/flash_sidekick.py"
+      ]
+    },
+    "design_system_sidekick_mcp": {
+      "command": "/Users/okgoogle13/.pyenv/versions/3.12.3/bin/python",
+      "args": [
+        "/Users/okgoogle13/Desktop/careercopilot/servers/design_system_sidekick.py"
+      ]
+    }
+  }
+}

@@ -68,15 +68,15 @@ export const NorthcoteButton = React.forwardRef<HTMLButtonElement, NorthcoteButt
       },
       secondary: {
         gallery: {
-          background: 'bg-surface-gallery-eucalypt-smoke-high',
-          text: 'text-secondary-flannel-flower',
-          hover: 'hover:bg-surface-gallery-eucalypt-smoke-highest',
+          background: 'bg-surface-gallery-concrete-grey-high',
+          text: 'text-secondary-concrete-grey',
+          hover: 'hover:bg-surface-gallery-concrete-grey-highest',
           shadow: 'shadow-sm',
-          border: 'border-2 border-secondary-flannel-flower',
+          border: 'border-2 border-secondary-concrete-grey',
         },
         laboratory: {
           background: 'bg-surface-laboratory-slate-smoke-high',
-          text: 'text-secondary-flannel-flower',
+          text: 'text-secondary-concrete-grey',
           hover: 'hover:bg-surface-laboratory-slate-smoke-highest',
           shadow: 'shadow-sm',
           border: 'border border-secondary-flannel-dim',
@@ -85,15 +85,15 @@ export const NorthcoteButton = React.forwardRef<HTMLButtonElement, NorthcoteButt
       tertiary: {
         gallery: {
           background: 'bg-tertiary-waratah-container',
-          text: 'text-tertiary-waratah-crimson',
-          hover: 'hover:bg-tertiary-waratah-crimson hover:text-on-surface-parchment',
+          text: 'text-tertiary-waratah-red',
+          hover: 'hover:bg-tertiary-waratah-red hover:text-on-surface-paper-white',
           shadow: 'shadow-sm',
-          border: 'border border-tertiary-waratah-crimson',
+          border: 'border border-tertiary-waratah-red',
         },
         laboratory: {
           background: 'bg-status-laboratory-clinical-alert-container',
           text: 'text-status-laboratory-clinical-alert',
-          hover: 'hover:bg-status-laboratory-clinical-alert hover:text-on-surface-parchment',
+          hover: 'hover:bg-status-laboratory-clinical-alert hover:text-on-surface-paper-white',
           shadow: 'shadow-sm',
           border: 'border border-status-laboratory-clinical-alert',
         },

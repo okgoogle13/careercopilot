@@ -151,7 +151,7 @@ export function JobQueue() {
     return (
       <div className="flex flex-col justify-center items-center min-h-screen gap-4">
         <div className="w-12 h-12 border-4 border-[var(--color-wattle-gold)]/20 border-t-[var(--color-wattle-gold)] rounded-full animate-spin" />
-        <p className="font-annotation text-xs tracking-widest text-[var(--color-flannel-flower-dark)] uppercase">
+        <p className="font-annotation text-xs tracking-widest text-[var(--color-concrete-grey-dark)] uppercase">
           Synchronizing Queue
         </p>
       </div>
@@ -178,10 +178,10 @@ export function JobQueue() {
       {jobs.length === 0 && !error ? (
         <div className="text-center py-32 opacity-60">
           <div className="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-6 border border-white/10">
-            <Sparkles className="w-10 h-10 text-[var(--color-flannel-flower-dark)]" />
+            <Sparkles className="w-10 h-10 text-[var(--color-concrete-grey-dark)]" />
           </div>
-          <h3 className="font-bloom text-3xl mb-2 text-[var(--color-parchment)]">Empty Pipeline</h3>
-          <p className="font-field-note text-lg text-[var(--color-flannel-flower-dark)]">
+          <h3 className="font-bloom text-3xl mb-2 text-[var(--color-paper-white)]">Empty Pipeline</h3>
+          <p className="font-field-note text-lg text-[var(--color-concrete-grey-dark)]">
             Clip opportunities from Seek or LinkedIn to populate your queue.
           </p>
         </div>
@@ -204,22 +204,22 @@ export function JobQueue() {
                     variant={statusConfig[job.status].variant}
                     showDot
                   />
-                  <span className="text-[10px] font-annotation text-[var(--color-flannel-flower-dark)] uppercase tracking-widest bg-white/5 px-2 py-1 rounded">
+                  <span className="text-[10px] font-annotation text-[var(--color-concrete-grey-dark)] uppercase tracking-widest bg-white/5 px-2 py-1 rounded">
                     {formatDate(job.date_clipped)}
                   </span>
                 </div>
 
                 <div className="px-6 mb-6 flex-1">
-                  <h3 className="font-bloom text-2xl font-bold text-[var(--color-parchment)] mb-2 group-hover:text-[var(--color-wattle-gold)] transition-colors">
+                  <h3 className="font-bloom text-2xl font-bold text-[var(--color-paper-white)] mb-2 group-hover:text-[var(--color-wattle-gold)] transition-colors">
                     {job.title}
                   </h3>
-                  <p className="font-field-note text-lg text-[var(--color-flannel-flower-dark)] italic">
+                  <p className="font-field-note text-lg text-[var(--color-concrete-grey-dark)] italic">
                     {job.company}
                   </p>
 
                   {job.notes && (
                     <div className="mt-4 p-4 bg-white/5 rounded-stone border border-white/5">
-                      <p className="font-field-note text-sm text-[var(--color-parchment)]/70 italic">
+                      <p className="font-field-note text-sm text-[var(--color-paper-white)]/70 italic">
                         "{job.notes}"
                       </p>
                     </div>
@@ -287,7 +287,7 @@ export function JobQueue() {
           )}
 
           <div className="bg-white/5 p-8 rounded-stone border border-white/5 shadow-inner">
-            <pre className="font-field-note text-base text-[var(--color-parchment)]/90 whitespace-pre-wrap leading-relaxed">
+            <pre className="font-field-note text-base text-[var(--color-paper-white)]/90 whitespace-pre-wrap leading-relaxed">
               {coverLetter}
             </pre>
           </div>

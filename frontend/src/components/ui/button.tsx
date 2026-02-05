@@ -9,13 +9,13 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: 'bg-[var(--color-wattle-gold)] text-[var(--color-specimen-night)] hover:shadow-standard',
+        default: 'bg-[var(--color-wattle-gold)] text-[var(--color-asphalt-black)] hover:shadow-standard',
         destructive:
-          'bg-[var(--color-waratah-crimson)] text-white hover:shadow-standard',
+          'bg-[var(--color-waratah-red)] text-white hover:shadow-standard',
         outline:
-          'border-2 border-[var(--color-eucalypt-smoke-base)] bg-transparent text-[var(--color-parchment)] hover:border-[var(--color-flannel-flower)] hover:bg-white/5',
-        secondary: 'bg-[var(--color-eucalypt-smoke-light)] text-[var(--color-flannel-flower)] hover:bg-[var(--color-eucalypt-smoke-lightest)]',
-        ghost: 'text-[var(--color-flannel-flower-dark)] hover:bg-white/5 hover:text-[var(--color-parchment)]',
+          'border-2 border-[var(--color-concrete-grey-base)] bg-transparent text-[var(--color-paper-white)] hover:border-[var(--color-concrete-grey)] hover:bg-white/5',
+        secondary: 'bg-[var(--color-concrete-grey-light)] text-[var(--color-concrete-grey)] hover:bg-[var(--color-concrete-grey-lightest)]',
+        ghost: 'text-[var(--color-concrete-grey-dark)] hover:bg-white/5 hover:text-[var(--color-paper-white)]',
         link: 'text-[var(--color-wattle-gold)] underline-offset-4 hover:underline',
       },
       size: {

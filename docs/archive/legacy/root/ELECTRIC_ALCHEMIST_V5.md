@@ -134,7 +134,7 @@ border-radius: 40px 8px 40px 8px;
 ### **Surface Colors (Dark Theme)**
 ```css
 --surface: #1C1B1F;                    /* surface-container */
---surface-dim: #141218;                /* surface-dim */
+--surface-dim: #1A1714;                /* surface-dim */
 --surface-container-low: #1C1B1F;
 --surface-container: #211F26;
 --surface-container-high: #2B2930;

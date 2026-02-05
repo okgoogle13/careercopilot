@@ -118,7 +118,7 @@
 
 **Mode:** B (Laboratory) - _Refining, Architecture._
 
-- **Background:** Aged Parchment Grain (`img-paper-texture`).
+- **Background:** Aged Paper White Grain (`img-paper-texture`).
 - **Layout:** Preview (Left) / Controls (Right).
 - **Toggle:** "Bot View" switch (Turns preview into Red Anatomical Wireframe).
 

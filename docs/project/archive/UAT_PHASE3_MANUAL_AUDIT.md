@@ -74,7 +74,7 @@ Due to technical limitations with the Antigravity Browser Extension, Phase 3 req
 3. **Responsive Test:** Switch to tablet view (768px) - should show 2-column grid
 
 #### M3 Design Tokens to Verify:
-- Background: `bg-[#141218]` (dark purple-gray)
+- Background: `bg-[#1A1714]` (dark purple-gray)
 - Text: `text-[#E6E1E5]` (off-white)
 - Cards: Organic shapes, not sharp corners
 

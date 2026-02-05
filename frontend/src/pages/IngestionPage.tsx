@@ -18,9 +18,9 @@ type UploadStage = 'idle' | 'uploading' | 'extracting' | 'processing' | 'embeddi
  *
  * V3.1 Laboratory Mode Implementation:
  * ✓ ASSET-08 Verification Stamp Integration
- * ✓ Texture-Laboratory-Parchment overlay
+ * ✓ Texture-Laboratory-Paper White overlay
  * ✓ Skeleton Etch Motif metaphors
- * ✓ Clinical palette restricted to Obsidian/Parchment/Wattle
+ * ✓ Clinical palette restricted to Obsidian/Paper White/Wattle
  */
 export const IngestionPage: React.FC = () => {
   const { submitDocuments, updateCareerDatabase, isLoading, error } = useCareerIngestion();
@@ -104,21 +104,21 @@ export const IngestionPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-specimen-night-darkest flex items-center justify-center p-6 relative overflow-hidden">
-      {/* Texture Layer: Laboratory Parchment */}
+    <div className="min-h-screen bg-asphalt-black-darkest flex items-center justify-center p-6 relative overflow-hidden">
+      {/* Texture Layer: Laboratory Paper White */}
       <div
         className="absolute inset-0 opacity-5 pointer-events-none mix-blend-overlay"
         style={{ backgroundImage: `url(${paperGrain})`, backgroundRepeat: 'repeat' }}
       />
 
       {/* Background Motifs */}
-      <div className="absolute top-10 left-10 w-64 h-64 grayscale opacity-10 pointer-events-none border border-flannel-flower/20 rounded-full" />
-      <div className="absolute bottom-10 right-10 w-96 h-96 grayscale opacity-5 pointer-events-none border-l border-t border-flannel-flower/20 rounded-tl-[120px]" />
+      <div className="absolute top-10 left-10 w-64 h-64 grayscale opacity-10 pointer-events-none border border-concrete-grey/20 rounded-full" />
+      <div className="absolute bottom-10 right-10 w-96 h-96 grayscale opacity-5 pointer-events-none border-l border-t border-concrete-grey/20 rounded-tl-[120px]" />
 
       <Stone
         mode="laboratory"
         elevation="floating"
-        className="max-w-2xl w-full border-2 border-flannel-flower/5 shadow-maximum relative z-10"
+        className="max-w-2xl w-full border-2 border-concrete-grey/5 shadow-maximum relative z-10"
       >
         {/* Verification Stamp Shadowplay (ASSET-08) */}
         <AnimatePresence>
@@ -143,10 +143,10 @@ export const IngestionPage: React.FC = () => {
             <div className="absolute inset-0 animate-pulse border border-wattle-gold/5 rounded-stone scale-110" />
             <Microscope className="w-12 h-12 text-wattle-gold" />
           </div>
-          <h1 className="text-5xl font-bloom font-bold text-parchment tracking-tighter uppercase">
+          <h1 className="text-5xl font-bloom font-bold text-paper-white tracking-tighter uppercase">
             Specimen Ingestion
           </h1>
-          <p className="font-annotation text-xs text-flannel-flower-dark mt-3 tracking-[0.3em] uppercase opacity-60">
+          <p className="font-annotation text-xs text-concrete-grey-dark mt-3 tracking-[0.3em] uppercase opacity-60">
             [ PHASE.01: SEMANTIC_EXTRACTION ]
           </p>
         </header>
@@ -167,7 +167,7 @@ export const IngestionPage: React.FC = () => {
           className={`
             border-2 border-dashed rounded-stone p-12 text-center mb-10
             transition-all duration-500 var(--ease-viscous-breeze)
-            ${isLoading ? 'opacity-30 border-parchment/5 grayscale' : 'border-flannel-flower/20 hover:border-wattle-gold/50 hover:bg-white/[0.02]'}
+            ${isLoading ? 'opacity-30 border-paper-white/5 grayscale' : 'border-concrete-grey/20 hover:border-wattle-gold/50 hover:bg-white/[0.02]'}
           `}
         >
           <input
@@ -186,7 +186,7 @@ export const IngestionPage: React.FC = () => {
           >
             <div className="mb-6 flex justify-center">
               <Fingerprint
-                className={`w-12 h-12 transition-colors duration-500 ${isLoading ? 'text-parchment/10' : 'text-flannel-flower group-hover:text-wattle-gold'}`}
+                className={`w-12 h-12 transition-colors duration-500 ${isLoading ? 'text-paper-white/10' : 'text-concrete-grey group-hover:text-wattle-gold'}`}
               />
             </div>
             <Pebble
@@ -197,7 +197,7 @@ export const IngestionPage: React.FC = () => {
             >
               Deposit Payloads
             </Pebble>
-            <p className="mt-4 font-annotation text-[9px] text-flannel-flower/40 uppercase tracking-tighter">
+            <p className="mt-4 font-annotation text-[9px] text-concrete-grey/40 uppercase tracking-tighter">
               PDF / DOCX / TEXT specimens accepted
             </p>
           </label>
@@ -209,16 +209,16 @@ export const IngestionPage: React.FC = () => {
                   initial={{ x: -10, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
                   key={idx}
-                  className="flex items-center gap-4 p-4 bg-white/[0.02] rounded-stone border border-flannel-flower/10"
+                  className="flex items-center gap-4 p-4 bg-white/[0.02] rounded-stone border border-concrete-grey/10"
                 >
                   <FileText className="w-4 h-4 text-wattle-gold/50" />
                   <div className="text-left flex-grow">
-                    <div className="text-xs font-field-note text-parchment/80">{file.name}</div>
-                    <div className="text-[10px] font-annotation text-flannel-flower-dark uppercase tracking-widest">
+                    <div className="text-xs font-field-note text-paper-white/80">{file.name}</div>
+                    <div className="text-[10px] font-annotation text-concrete-grey-dark uppercase tracking-widest">
                       Payload: {Math.round(file.size / 1024)} KB
                     </div>
                   </div>
-                  <CheckCircle className="w-3 h-3 text-eucalypt-smoke" />
+                  <CheckCircle className="w-3 h-3 text-concrete-grey" />
                 </motion.div>
               ))}
             </div>
@@ -241,14 +241,14 @@ export const IngestionPage: React.FC = () => {
         {isLoading && (
           <div className="mt-10 transition-all animate-in fade-in slide-in-from-top-4">
             <div className="flex justify-between items-center mb-3">
-              <span className="font-annotation text-[10px] text-flannel-flower-dark tracking-[0.2em] uppercase">
+              <span className="font-annotation text-[10px] text-concrete-grey-dark tracking-[0.2em] uppercase">
                 Extraction Protocol In Progress
               </span>
               <span className="font-annotation text-[10px] text-wattle-gold font-bold">
                 {progress}%
               </span>
             </div>
-            <div className="w-full bg-specimen-night-darkest h-1.5 rounded-full overflow-hidden border border-white/5">
+            <div className="w-full bg-asphalt-black-darkest h-1.5 rounded-full overflow-hidden border border-white/5">
               <motion.div
                 className="bg-wattle-gold h-full shadow-[0_0_15px_rgba(212,168,75,0.4)]"
                 initial={{ width: 0 }}
@@ -260,10 +260,10 @@ export const IngestionPage: React.FC = () => {
         )}
 
         {/* Laboratory Technical Audit */}
-        <div className="mt-12 p-6 bg-specimen-night/40 rounded-stone border border-flannel-flower/10 flex gap-5">
+        <div className="mt-12 p-6 bg-asphalt-black/40 rounded-stone border border-concrete-grey/10 flex gap-5">
           <Microscope className="w-8 h-8 text-wattle-gold/40 shrink-0" />
-          <p className="font-field-note text-[11px] text-parchment/50 leading-relaxed italic">
-            <strong className="text-parchment font-annotation uppercase tracking-wider not-italic">
+          <p className="font-field-note text-[11px] text-paper-white/50 leading-relaxed italic">
+            <strong className="text-paper-white font-annotation uppercase tracking-wider not-italic">
               Clinical Audit:
             </strong>{' '}
             Professional vectors are extracted via Gemini 3.0 Pro. This process mandates biological

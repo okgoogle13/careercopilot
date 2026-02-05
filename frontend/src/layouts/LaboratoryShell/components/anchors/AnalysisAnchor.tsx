@@ -43,7 +43,7 @@ export const AnalysisAnchor: React.FC = () => {
                 >
                     <RefreshCw className="w-8 h-8 text-wattle-gold opacity-50" />
                 </motion.div>
-                <p className="font-field-note text-secondary-flannel-flower animate-pulse">
+                <p className="font-field-note text-secondary-concrete-grey animate-pulse">
                     Parsing specimens...
                 </p>
             </div>
@@ -85,7 +85,7 @@ export const AnalysisAnchor: React.FC = () => {
                     <h3 className="font-field-note text-lg text-wattle-gold">
                         Analysis Insights
                     </h3>
-                    <span className="text-xs font-mono text-secondary-flannel-flower opacity-50">
+                    <span className="text-xs font-mono text-secondary-concrete-grey opacity-50">
                         {results.insights.length} Findings
                     </span>
                 </div>
@@ -105,7 +105,7 @@ export const AnalysisAnchor: React.FC = () => {
                                         insight.type === 'warning' ? 'bg-status-laboratory-clinical-alert shadow-[0_0_8px_rgba(248,113,113,0.4)]' :
                                             'bg-wattle-gold'
                                     }`} />
-                                <span className="text-sm font-body text-secondary-flannel-flower group-hover:text-on-surface-laboratory-parchment transition-colors">
+                                <span className="text-sm font-body text-secondary-concrete-grey group-hover:text-on-surface-laboratory-paper-white transition-colors">
                                     {insight.text}
                                 </span>
                             </motion.div>

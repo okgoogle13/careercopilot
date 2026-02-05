@@ -4,7 +4,7 @@ Victorian Naturalist Field Station • Australian Botanical Metaphor
 
 ## Contents
 - [Primary colors](#primary-wattle-gold---acacia-pycnantha)
-- [Tertiary colors](#tertiary-waratah-crimson---telopea-speciosissima)
+- [Tertiary colors](#tertiary-waratah-red---telopea-speciosissima)
 - [Status colors](#status-colors)
 - [Surfaces](#surfaces)
 - [Forbidden colors](#forbidden-colors)
@@ -19,7 +19,7 @@ Victorian Naturalist Field Station • Australian Botanical Metaphor
 - `wattleGlow`: `#E8C963` - Hover states
 - `wattleBloom`: `#F5DDAA` - Subtle accents
 
-## Tertiary (Waratah Crimson - Telopea speciosissima)
+## Tertiary (Waratah Red - Telopea speciosissima)
 - `waratahStem`: `#7A3A2E` - Error states
 - `waratahCrimson`: `#C45C4B` - Alerts, notifications
 - `waratahGlow`: `#E07865` - Urgent hover
@@ -49,7 +49,7 @@ Victorian Naturalist Field Station • Australian Botanical Metaphor
 - `slateSmoke`: `#252230` - Cool card surface
 
 ### Shared
-- `parchment`: `#F5F0E8` - Primary text on dark
+- `paper-white`: `#F5F0E8` - Primary text on dark
 - `flannelFlower`: `#A8A097` - Secondary text (Actinotus helianthi)
 
 ---
@@ -60,7 +60,7 @@ Victorian Naturalist Field Station • Australian Botanical Metaphor
 ❌ **Neon Purple**: `#9D4EDD` and variants  
 ❌ **Cyan**: `#00FFFF` and variants  
 ❌ **Pure Black**: `#000000` (use `specimenNight`)  
-❌ **Pure White**: `#FFFFFF` (use `parchment`)
+❌ **Pure White**: `#FFFFFF` (use `paper-white`)
 
 ---
 

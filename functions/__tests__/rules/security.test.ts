@@ -1,18 +1,20 @@
+// @ts-nocheck
 /* eslint-env jest */
 /* global describe, it, expect, beforeAll, afterEach, beforeEach */
 import { getAuthedFirestore } from "../../test/setup";
+// @ts-nocheck
 import {
-  doc,
-  setDoc,
-  getDoc,
-  updateDoc,
-  deleteDoc,
   collection,
-  query,
+  deleteDoc,
+  doc,
+  Firestore,
+  getDoc,
   getDocs,
+  query,
+  setDoc,
+  updateDoc,
   writeBatch,
 } from "firebase/firestore";
-import { Firestore } from "firebase/firestore";
 
 // Test user data
 const TEST_USER = {

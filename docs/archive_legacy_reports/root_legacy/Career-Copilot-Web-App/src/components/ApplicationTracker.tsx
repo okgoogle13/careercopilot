@@ -146,7 +146,7 @@ export function ApplicationTracker() {
                         isCurrent
                           ? "bg-[#D0BCFF] text-[#381E72]"
                           : isCompleted
-                            ? "bg-[#A8C5A3] text-[#141218]"
+                            ? "bg-[#A8C5A3] text-[#1A1714]"
                             : "bg-[#2B2930] text-[#CAC4D0]"
                       }`}
                     >

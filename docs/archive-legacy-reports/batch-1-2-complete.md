@@ -162,7 +162,7 @@ Successfully implemented **20 Electric Alchemist components** across BATCH 1 (Co
 
 ### Colors (Deep Violet Void)
 
-- **Background:** `bg-surface` (#141218)
+- **Background:** `bg-surface` (#1A1714)
 - **Cards:** `bg-surface-container-low` (#1D1B20)
 - **Containers:** `bg-surface-container` (#211F26)
 - **Elevated:** `bg-surface-container-high` (#2B2930)

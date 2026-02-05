@@ -38,7 +38,7 @@ export interface M3TextFieldProps extends Omit<React.InputHTMLAttributes<HTMLInp
  *
  * **Northcote Token Usage:**
  * - Typography: `font-field-note` (Input), `font-annotation` (Label)
- * - Color: `primary-wattle-gold` (Focus), `tertiary-waratah-crimson` (Error)
+ * - Color: `primary-wattle-gold` (Focus), `tertiary-waratah-red` (Error)
  * - Shape: `radius-stone` (Laboratory), organic asymmetry (Gallery)
  * - Motion: `ease-viscous` (Fluid interactions)
  *
@@ -117,26 +117,26 @@ export const M3TextField = forwardRef<HTMLInputElement, M3TextFieldProps>(({
             container: {
                 outlined: `
                     border-2
-                    ${error ? 'border-tertiary-waratah-crimson' : 'border-primary-wattle-gold/80'}
+                    ${error ? 'border-tertiary-waratah-red' : 'border-primary-wattle-gold/80'}
                     ${isFocused && !error ? 'border-primary-wattle-gold ring-2 ring-primary-wattle-gold/30' : ''}
-                    bg-surface-gallery-eucalypt-smoke
+                    bg-surface-gallery-concrete-grey
                     shadow-sm
                 `,
                 filled: `
                     border-b-2
-                    ${error ? 'border-b-tertiary-waratah-crimson' : 'border-b-primary-wattle-gold/80'}
+                    ${error ? 'border-b-tertiary-waratah-red' : 'border-b-primary-wattle-gold/80'}
                     ${isFocused && !error ? 'border-b-primary-wattle-gold' : ''}
-                    bg-surface-gallery-eucalypt-smoke
+                    bg-surface-gallery-concrete-grey
                 `,
             },
             label: {
-                base: 'text-on-surface-parchment',
-                error: 'text-tertiary-waratah-crimson',
+                base: 'text-on-surface-paper-white',
+                error: 'text-tertiary-waratah-red',
                 floating: 'text-secondary-flannel-dim',
             },
             input: {
-                text: 'text-on-surface-parchment',
-                placeholder: 'placeholder:text-secondary-flannel-flower/60',
+                text: 'text-on-surface-paper-white',
+                placeholder: 'placeholder:text-secondary-concrete-grey/60',
             },
             radius: 'rounded-[8px_12px_6px_10px]', // More organic for Gallery
         },
@@ -144,25 +144,25 @@ export const M3TextField = forwardRef<HTMLInputElement, M3TextFieldProps>(({
             container: {
                 outlined: `
                     border-2
-                    ${error ? 'border-tertiary-waratah-crimson' : 'border-outline-variant'}
+                    ${error ? 'border-tertiary-waratah-red' : 'border-outline-variant'}
                     ${isFocused && !error ? 'border-primary-wattle-gold ring-2 ring-primary-wattle-gold/20' : ''}
                     ${!disabled && !error && !isFocused ? 'hover:border-outline' : ''}
-                    bg-surface-shared-specimen-night/50 backdrop-blur-sm
+                    bg-surface-shared-asphalt-black/50 backdrop-blur-sm
                 `,
                 filled: `
                     border-b-2
-                    ${error ? 'border-b-tertiary-waratah-crimson' : 'border-b-outline-variant'}
+                    ${error ? 'border-b-tertiary-waratah-red' : 'border-b-outline-variant'}
                     ${isFocused && !error ? 'border-b-primary-wattle-gold' : ''}
-                    bg-surface-gallery-eucalypt-smoke shadow-rest
+                    bg-surface-gallery-concrete-grey shadow-rest
                 `,
             },
             label: {
-                base: 'text-on-surface-parchment-dim',
-                error: 'text-tertiary-waratah-crimson',
+                base: 'text-on-surface-paper-white-dim',
+                error: 'text-tertiary-waratah-red',
                 floating: 'text-secondary-flannel-dim',
             },
             input: {
-                text: 'text-on-surface-parchment',
+                text: 'text-on-surface-paper-white',
                 placeholder: 'placeholder:text-secondary-flannel-dim',
             },
             radius: 'radius-stone', // Precise asymmetry for Laboratory
@@ -238,7 +238,7 @@ export const M3TextField = forwardRef<HTMLInputElement, M3TextFieldProps>(({
                             `}
                         >
                             {label}
-                            {required && <span className="text-tertiary-waratah-crimson ml-1">*</span>}
+                            {required && <span className="text-tertiary-waratah-red ml-1">*</span>}
                         </label>
                     )}
 
@@ -274,7 +274,7 @@ export const M3TextField = forwardRef<HTMLInputElement, M3TextFieldProps>(({
                     {displayHelperText && (
                         <p
                             id={`${props.id}-helper-text`}
-                            className={`text-xs font-annotation ${error ? 'text-tertiary-waratah-crimson' : 'text-secondary-flannel-dim'
+                            className={`text-xs font-annotation ${error ? 'text-tertiary-waratah-red' : 'text-secondary-flannel-dim'
                                 }`}
                         >
                             {displayHelperText}
@@ -285,7 +285,7 @@ export const M3TextField = forwardRef<HTMLInputElement, M3TextFieldProps>(({
                         <p
                             className={`
                                 text-xs font-annotation ml-auto
-                                ${isOverLimit ? 'text-tertiary-waratah-crimson' : ''}
+                                ${isOverLimit ? 'text-tertiary-waratah-red' : ''}
                                 ${isNearLimit && !isOverLimit ? 'text-secondary-flannel-dim' : ''}
                             `}
                         >
@@ -369,29 +369,29 @@ export const M3TextArea = forwardRef<HTMLTextAreaElement, M3TextAreaProps>(({
         gallery: {
             container: `
                 border-2
-                ${error ? 'border-tertiary-waratah-crimson' : 'border-primary-wattle-gold/80'}
+                ${error ? 'border-tertiary-waratah-red' : 'border-primary-wattle-gold/80'}
                 ${isFocused && !error ? 'border-primary-wattle-gold ring-2 ring-primary-wattle-gold/30' : ''}
-                bg-surface-gallery-eucalypt-smoke
+                bg-surface-gallery-concrete-grey
                 shadow-sm
                 rounded-[8px_12px_6px_10px]
             `,
             label: {
-                base: 'text-on-surface-parchment',
-                error: 'text-tertiary-waratah-crimson',
+                base: 'text-on-surface-paper-white',
+                error: 'text-tertiary-waratah-red',
                 floating: 'text-secondary-flannel-dim',
             },
         },
         laboratory: {
             container: `
                 border-2
-                ${error ? 'border-tertiary-waratah-crimson' : 'border-outline-variant'}
+                ${error ? 'border-tertiary-waratah-red' : 'border-outline-variant'}
                 ${isFocused && !error ? 'border-primary-wattle-gold ring-2 ring-primary-wattle-gold/20' : ''}
-                bg-surface-shared-specimen-night/50 backdrop-blur-sm
+                bg-surface-shared-asphalt-black/50 backdrop-blur-sm
                 radius-stone
             `,
             label: {
-                base: 'text-on-surface-parchment-dim',
-                error: 'text-tertiary-waratah-crimson',
+                base: 'text-on-surface-paper-white-dim',
+                error: 'text-tertiary-waratah-red',
                 floating: 'text-secondary-flannel-dim',
             },
         },
@@ -422,7 +422,7 @@ export const M3TextArea = forwardRef<HTMLTextAreaElement, M3TextAreaProps>(({
                             `}
                         >
                             {label}
-                            {required && <span className="text-tertiary-waratah-crimson ml-1">*</span>}
+                            {required && <span className="text-tertiary-waratah-red ml-1">*</span>}
                         </label>
                     )}
 
@@ -432,7 +432,7 @@ export const M3TextArea = forwardRef<HTMLTextAreaElement, M3TextAreaProps>(({
                             ${sizeClasses[size]}
                             w-full
                             bg-transparent
-                            text-on-surface-parchment
+                            text-on-surface-paper-white
                             placeholder:text-secondary-flannel-dim
                             focus:outline-2 focus:outline-offset-2 focus:outline-primary-wattle-gold
                             disabled:cursor-not-allowed
@@ -461,7 +461,7 @@ export const M3TextArea = forwardRef<HTMLTextAreaElement, M3TextAreaProps>(({
                     {displayHelperText && (
                         <p
                             id={`${props.id}-helper-text`}
-                            className={`text-xs font-annotation ${error ? 'text-tertiary-waratah-crimson' : 'text-secondary-flannel-dim'}`}
+                            className={`text-xs font-annotation ${error ? 'text-tertiary-waratah-red' : 'text-secondary-flannel-dim'}`}
                         >
                             {displayHelperText}
                         </p>
@@ -471,7 +471,7 @@ export const M3TextArea = forwardRef<HTMLTextAreaElement, M3TextAreaProps>(({
                         <p
                             className={`
                                 text-xs font-annotation ml-auto
-                                ${isOverLimit ? 'text-tertiary-waratah-crimson' : ''}
+                                ${isOverLimit ? 'text-tertiary-waratah-red' : ''}
                                 ${isNearLimit && !isOverLimit ? 'text-secondary-flannel-dim' : ''}
                             `}
                         >

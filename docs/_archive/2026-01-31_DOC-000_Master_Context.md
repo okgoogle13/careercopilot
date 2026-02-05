@@ -32,7 +32,7 @@ Our mission is to give the user the tools of an explorer: the velvet-lined case 
 *This suite constitutes the "Atomic" source of truth. All AI agents must reference these files to maintain system integrity.*
 
 *   **DOC-000:** [Master Context ("The Brain")](./DOC-000_Master_Context.md) - *You are here.*
-*   **DOC-001:** [Design System ("The Skin")](./DOC-001_Design_System.md) - *Tokens for Wattle Gold, Specimen Night, and the Eucalypt Stack.*
+*   **DOC-001:** [Design System ("The Skin")](./DOC-001_Design_System.md) - *Tokens for Wattle Gold, Asphalt Black, and the Eucalypt Stack.*
 *   **DOC-002:** [Architecture Schema](./DOC-002_Architecture_Schema.md) - *Supabase tables and Genkit logic.*
 *   **DOC-003:** [User Flows & Journeys](./DOC-003_User_Flows.md) - *From "The Germination" (Ingest) to "The Pollination" (Apply).*
 *   **DOC-004:** [Component Catalog](./DOC-004_Component_Catalog.md) - *React components: The Pebble, The Stone, The Lens.*
@@ -53,7 +53,7 @@ Our mission is to give the user the tools of an explorer: the velvet-lined case 
 ### A. The "Anti-Slop" Protocol
 
 *   **No Symmetry:** Standard `border-radius: 8px` is banned. We use **"Organic Asymmetry"** (e.g., `24px 8px 20px 4px`) to mimic eroded stones and curled gum leaves.
-*   **No Pure Black/White:** We use **Specimen Night** (`#1A1714`) and **Parchment** (`#F5F0E8`). Pure hex codes create digital harshness that breaks the illusion.
+*   **No Pure Black/White:** We use **Asphalt Black** (`#1A1714`) and **Paper White** (`#F5F0E8`). Pure hex codes create digital harshness that breaks the illusion.
 *   **No Generic Sans-Serifs:** `Inter`, `Roboto`, and `Arial` are strictly forbidden. We use **Work Sans** for human notes and **JetBrains Mono** for machine data.
 *   **No Drop Shadows:** Shadows must behave like **Ink Pools**—diffused, ambient, and grounding. No harsh directional light sources.
 
@@ -113,7 +113,7 @@ We are building a career management platform styled as a **Victorian Naturalist'
 
 **MASTER PALETTE:**
 
-*   **Background:** Specimen Night (`#1A1714`) - Warm charred umber.
+*   **Background:** Asphalt Black (`#1A1714`) - Warm charred umber.
 *   **Primary:** Wattle Gold (`#D4A84B`) - Luminous, like candlelight.
-*   **Accent:** Waratah Crimson (`#C45C4B`) - The heartbeat/alert color.
-*   **Containers:** Eucalypt Smoke (`#2C2723`) - Warm grey woodsmoke.
+*   **Accent:** Waratah Red (`#C45C4B`) - The heartbeat/alert color.
+*   **Containers:** Concrete Grey (`#2C2723`) - Warm grey woodsmoke.

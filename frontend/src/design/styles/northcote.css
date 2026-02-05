@@ -20,42 +20,42 @@
 @config "../../../tailwind.config.ts";
 
 :root {
-  --color-specimen-night-lightest: #3d3a36;
-  --color-specimen-night-light: #2c2925;
-  --color-specimen-night-base: #1a1714;
-  --color-specimen-night-dark: #0f0c0a;
-  --color-specimen-night-darkest: #050403;
-  --color-specimen-night: #1a1714;
+  --color-asphalt-black-lightest: #3d3a36;
+  --color-asphalt-black-light: #2c2925;
+  --color-asphalt-black-base: #1a1714;
+  --color-asphalt-black-dark: #0f0c0a;
+  --color-asphalt-black-darkest: #050403;
+  --color-asphalt-black: #1a1714;
   --color-wattle-gold-lightest: #e8c77a;
   --color-wattle-gold-light: #e0bd61;
   --color-wattle-gold-base: #d4a84b;
   --color-wattle-gold-dark: #c8983a;
   --color-wattle-gold-darkest: #b88a2e;
   --color-wattle-gold: #d4a84b;
-  --color-waratah-crimson-lightest: #e08a7d;
-  --color-waratah-crimson-light: #d27364;
-  --color-waratah-crimson-base: #c45c4b;
-  --color-waratah-crimson-dark: #a64536;
-  --color-waratah-crimson-darkest: #873023;
-  --color-waratah-crimson: #c45c4b;
-  --color-eucalypt-smoke-lightest: #4a433d;
-  --color-eucalypt-smoke-light: #3d3632;
-  --color-eucalypt-smoke-base: #2c2723;
-  --color-eucalypt-smoke-dark: #1f1b18;
-  --color-eucalypt-smoke-darkest: #120f0d;
-  --color-eucalypt-smoke: #2c2723;
-  --color-flannel-flower-lightest: #f5f2ea;
-  --color-flannel-flower-light: #eeebe3;
-  --color-flannel-flower-base: #e6e1d6;
-  --color-flannel-flower-dark: #d1c9b8;
-  --color-flannel-flower-darkest: #bdb39f;
-  --color-flannel-flower: #e6e1d6;
-  --color-specimen-night: #1a1714;
+  --color-waratah-red-lightest: #e08a7d;
+  --color-waratah-red-light: #d27364;
+  --color-waratah-red-base: #c45c4b;
+  --color-waratah-red-dark: #a64536;
+  --color-waratah-red-darkest: #873023;
+  --color-waratah-red: #c45c4b;
+  --color-concrete-grey-lightest: #4a433d;
+  --color-concrete-grey-light: #3d3632;
+  --color-concrete-grey-base: #2c2723;
+  --color-concrete-grey-dark: #1f1b18;
+  --color-concrete-grey-darkest: #120f0d;
+  --color-concrete-grey: #2c2723;
+  --color-concrete-grey-lightest: #f5f2ea;
+  --color-concrete-grey-light: #eeebe3;
+  --color-concrete-grey-base: #e6e1d6;
+  --color-concrete-grey-dark: #d1c9b8;
+  --color-concrete-grey-darkest: #bdb39f;
+  --color-concrete-grey: #e6e1d6;
+  --color-asphalt-black: #1a1714;
   --color-wattle-gold: #d4a84b;
-  --color-waratah-crimson: #c45c4b;
-  --color-eucalypt-smoke: #2c2723;
-  --color-flannel-flower: #e6e1d6;
-  --color-parchment: #f0ead6;
+  --color-waratah-red: #c45c4b;
+  --color-concrete-grey: #2c2723;
+  --color-concrete-grey: #e6e1d6;
+  --color-paper-white: #f0ead6;
   --spacing-xs: 4px;
   --spacing-sm: 8px;
   --spacing-md: 12px;
@@ -96,8 +96,8 @@
 
 @layer base {
   body {
-    background-color: var(--color-specimen-night);
-    color: var(--color-parchment);
+    background-color: var(--color-asphalt-black);
+    color: var(--color-paper-white);
     font-family: var(--font-field-note);
     overflow-x: hidden;
     font-variation-settings:
@@ -158,7 +158,7 @@
     font-family: var(--font-field-note);
     font-size: 16px;
     line-height: 1.6;
-    color: var(--color-flannel-flower);
+    color: var(--color-concrete-grey);
   }
 
   small,
@@ -214,7 +214,7 @@
      ═══════════════════════════════════════════════════════════════════════ */
 
   .tech-card {
-    background-color: var(--color-specimen-night);
+    background-color: var(--color-asphalt-black);
     border: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: 1.5rem;
     position: relative;
@@ -235,7 +235,7 @@
     letter-spacing: -0.03em;
     line-height: 110%;
     color: #f5f0e8;
-    /* Parchment */
+    /* Paper White */
   }
 
   .text-proclamation-large {
@@ -341,7 +341,7 @@
     font-weight: 400;
     transform: rotate(5deg);
     display: inline-block;
-    color: var(--color-flannel-flower-dark);
+    color: var(--color-concrete-grey-dark);
   }
 
   /* ═══════════════════════════════════════════════════════════════════════
@@ -416,7 +416,7 @@
     font-weight: 700;
     transform: rotate(-3deg);
     display: inline-block;
-    color: var(--color-waratah-crimson);
+    color: var(--color-waratah-red);
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   }
 

@@ -45,7 +45,7 @@ export const ProfileEditor: React.FC<ProfileEditorProps> = ({ onNext, onBack }) 
   };
 
   return (
-    <div className="min-h-screen bg-parchment-base relative overflow-hidden py-12 px-6">
+    <div className="min-h-screen bg-paper-white-base relative overflow-hidden py-12 px-6">
       {/* Texture Overlays */}
       <div
         className="absolute inset-0 opacity-40 pointer-events-none mix-blend-multiply"
@@ -285,7 +285,7 @@ export const ProfileEditor: React.FC<ProfileEditorProps> = ({ onNext, onBack }) 
           <Pebble
             variant="primary"
             onClick={onNext}
-            className="h-14 px-12 font-mono text-xs font-bold uppercase tracking-[0.2em] bg-bark-dark text-parchment-base hover:bg-bark-base shadow-lg"
+            className="h-14 px-12 font-mono text-xs font-bold uppercase tracking-[0.2em] bg-bark-dark text-paper-white-base hover:bg-bark-base shadow-lg"
           >
             Finalize Archive & Proceed
           </Pebble>

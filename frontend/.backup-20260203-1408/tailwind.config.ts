@@ -6,11 +6,11 @@ const config: Config = {
     extend: {
       colors: {
         // Semantic surface colors
-        'specimen-night': '#1A1714',
+        'asphalt-black': '#1A1714',
 
         // Gallery mode surfaces
         'charcoal-bark': '#141210',
-        'eucalypt-smoke': {
+        'concrete-grey': {
           DEFAULT: '#2C2723',
           high: '#3D3632',
           highest: '#4A433D',
@@ -33,8 +33,8 @@ const config: Config = {
           container: 'rgba(212, 168, 75, 0.12)',
         },
 
-        // Tertiary palette (Waratah Crimson)
-        'waratah-crimson': {
+        // Tertiary palette (Waratah Red)
+        'waratah-red': {
           stem: '#7A3A2E',
           DEFAULT: '#C45C4B',
           glow: '#E07865',
@@ -71,14 +71,14 @@ const config: Config = {
         },
 
         // Secondary/Neutral text colors
-        'flannel-flower': {
+        'concrete-grey': {
           DEFAULT: '#A8A097',
           dim: '#7D766D',
           faint: '#5A544C',
         },
 
         // On-surface text colors
-        parchment: {
+        paper-white: {
           DEFAULT: '#F5F0E8',
           dim: '#D9D4CC',
           aged: '#C4BFB5',

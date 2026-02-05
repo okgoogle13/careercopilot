@@ -12,7 +12,7 @@ interface AuroraHeaderProps {
  * AuroraHeader - Northcote Curio Parametric Header
  * 
  * Features:
- * - Tri-color gradient text (Wattle Gold → Waratah Crimson → Flannel Flower)
+ * - Tri-color gradient text (Wattle Gold → Waratah Red → Concrete Grey)
  * - Shimmer animation on hover
  * - Variable font axis animation (Fraunces 'SOFT' and 'WONK')
  * - Optional tag and witty subtitle
@@ -44,7 +44,7 @@ export const AuroraHeader: React.FC<AuroraHeaderProps> = ({
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4 }}
-                    className="text-xs uppercase tracking-widest font-annotation text-secondary-flannel-flower"
+                    className="text-xs uppercase tracking-widest font-annotation text-secondary-concrete-grey"
                 >
                     {tag}
                 </motion.div>
@@ -63,7 +63,7 @@ export const AuroraHeader: React.FC<AuroraHeaderProps> = ({
                     className="bg-clip-text text-transparent"
                     style={{
                         backgroundImage: mode === 'gallery'
-                            ? 'linear-gradient(135deg, var(--color-primary-wattle-gold) 0%, var(--color-tertiary-waratah-crimson) 50%, var(--color-secondary-flannel-flower) 100%)'
+                            ? 'linear-gradient(135deg, var(--color-primary-wattle-gold) 0%, var(--color-tertiary-waratah-red) 50%, var(--color-secondary-concrete-grey) 100%)'
                             : 'linear-gradient(135deg, var(--color-primary-wattle-gold) 0%, var(--color-status-alert) 50%, var(--color-status-neutral) 100%)',
                         backgroundSize: '200% 200%',
                     }}
@@ -96,7 +96,7 @@ export const AuroraHeader: React.FC<AuroraHeaderProps> = ({
                     initial={{ opacity: 0, rotate: -2 }}
                     animate={{ opacity: 1, rotate: mode === 'gallery' ? -1 : 0 }}
                     transition={{ duration: 0.5, delay: 0.3 }}
-                    className="text-lg md:text-xl italic font-bloom text-tertiary-waratah-crimson"
+                    className="text-lg md:text-xl italic font-bloom text-tertiary-waratah-red"
                     style={{
                         fontVariationSettings: mode === 'gallery'
                             ? "'wght' 400, 'SOFT' 100, 'WONK' 1"

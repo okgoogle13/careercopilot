@@ -33,7 +33,7 @@ const SplitHeader: React.FC<SplitHeaderProps> = ({
                     className={cn(
                         "font-proclamation font-black uppercase tracking-tighter leading-none",
                         mode === 'gallery' ? 'text-6xl md:text-7xl' : 'text-5xl md:text-6xl',
-                        "text-parchment"
+                        "text-paper-white"
                     )}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -78,7 +78,7 @@ const SplitHeader: React.FC<SplitHeaderProps> = ({
             {subtitle && (
                 <motion.p
                     className={cn(
-                        "font-field-note text-secondary-flannel-flower max-w-2xl",
+                        "font-field-note text-secondary-concrete-grey max-w-2xl",
                         mode === 'gallery' ? 'text-lg' : 'text-base'
                     )}
                     initial={{ opacity: 0 }}

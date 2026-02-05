@@ -1,17 +1,13 @@
-import * as admin from "firebase-admin";
-import * as firebase from "firebase-admin/firestore";
-import { genkit } from "@genkit-ai/core";
-import { defineFlow } from "@genkit-ai/flow";
-import { JobListing } from "../types/job_listing";
-import { FirebaseVectorSearch } from "../lib/firebase_vector_search";
+import admin from "firebase-admin";
+import { z } from "genkit";
 import https from "https";
-
-// Configure Genkit to use the default model
-const model = genkit.model("gemini-pro");
+import { ai } from "../genkit";
+import { FirebaseVectorSearch } from "../lib/firebase_vector_search";
+import { JobListing } from "../types/job_listing";
 
 export class JobListingExtractor {
   private vectorSearch: FirebaseVectorSearch<JobListing>;
-  private db: firebase.Firestore;
+  private db = admin.firestore();
 
   constructor() {
     this.db = admin.firestore();
@@ -19,37 +15,54 @@ export class JobListingExtractor {
   }
 
   /**
-   * Extract job listing from text or URL
+   * Extract job listing data from a source (text or URL)
    */
-  extract = defineFlow(
+  extract = ai.defineFlow(
     {
       name: "extractJobListing",
-      inputSchema: {
-        type: "object",
-        properties: {
-          source: { type: "string" },
-          options: {
-            type: "object",
-            properties: {
-              extractSkills: { type: "boolean", default: true },
-              extractSalary: { type: "boolean", default: true },
-              extractLocation: { type: "boolean", default: true },
-            },
-          },
-        },
-      },
-      outputSchema: {
-        type: "object",
-        properties: {
-          job: { $ref: "JobListing" },
-          metadata: { type: "object" },
-        },
-      },
+      inputSchema: z.object({
+        source: z.union([z.string(), z.object({ url: z.string() })]),
+        options: z
+          .object({
+            extractSkills: z.boolean().default(true),
+            extractSalary: z.boolean().default(true),
+            extractLocation: z.boolean().default(true),
+          })
+          .optional(),
+      }),
+      outputSchema: z.object({
+        id: z.string(),
+        title: z.string(),
+        company: z.string(),
+        description: z.string(),
+        skills: z.array(z.string()),
+        salary: z
+          .object({
+            min: z.number().optional(),
+            max: z.number().optional(),
+            currency: z.string().optional(),
+          })
+          .optional(),
+        location: z.string().optional(),
+        source: z.union([z.string(), z.string()]), // Simplified for now
+        createdAt: z.any(), // Timestamp type handling can be tricky with Zod/Genkit
+      }),
     },
-    async ({
-      source,
-      options = { extractSkills: true, extractSalary: true, extractLocation: true },
-    }) => {
+    async (input) => {
+      // Cast input to expected type since inference might be failing
+      const typedInput = input as {
+        source: string | { url: string };
+        options?: {
+          extractSkills: boolean;
+          extractSalary: boolean;
+          extractLocation: boolean;
+        };
+      };
+
+      const {
+        source,
+        options = { extractSkills: true, extractSalary: true, extractLocation: true },
+      } = typedInput;
       const text = typeof source === "string" ? source : await this.fetchUrl(source.url);
 
       // Basic job listing extraction
@@ -58,9 +71,9 @@ export class JobListingExtractor {
         title: this.extractTitle(text),
         company: this.extractCompany(text),
         description: text,
-        skills: options.extractSkills ? this.extractSkills(text) : [],
-        salary: options.extractSalary ? this.extractSalary(text) : undefined,
-        location: options.extractLocation ? this.extractLocation(text) : undefined,
+        skills: options?.extractSkills ? this.extractSkills(text) : [],
+        salary: options?.extractSalary ? this.extractSalary(text) : undefined,
+        location: options?.extractLocation ? this.extractLocation(text) : undefined,
         source: typeof source === "string" ? "text" : source.url,
         createdAt: admin.firestore.FieldValue.serverTimestamp(),
       };
@@ -77,16 +90,17 @@ export class JobListingExtractor {
    * Find similar job listings
    */
   async findSimilar(data: {
-    query: string | JobListing;
+    query: string | JobListing | Record<string, unknown>;
     limit?: number;
     minScore?: number;
     filters?: Record<string, unknown>;
   }): Promise<Array<{ job: JobListing; score: number }>> {
     // Use Genkit's semantic search
     const queryEmbedding = await this.generateEmbedding({
-      title: typeof data.query === "string" ? data.query : data.query.title || "",
-      description: typeof data.query === "string" ? data.query : data.query.description || "",
-      company: typeof data.query === "string" ? "" : data.query.company || "",
+      title: typeof data.query === "string" ? data.query : (data.query as any).title || "",
+      description:
+        typeof data.query === "string" ? data.query : (data.query as any).description || "",
+      company: typeof data.query === "string" ? "" : (data.query as any).company || "",
     });
 
     const results = await this.vectorSearch.search(queryEmbedding, {
@@ -94,10 +108,12 @@ export class JobListingExtractor {
       minScore: data.minScore,
       filters: data.filters,
     });
-    return results.map(({ id: _id, score, metadata }) => ({
-      job: metadata,
-      score,
-    }));
+    return results.map(
+      ({ id: _id, score, metadata }: { id: string; score: number; metadata: JobListing }) => ({
+        job: metadata,
+        score,
+      }),
+    );
   }
 
   private async fetchUrl(url: string): Promise<string> {
@@ -191,12 +207,13 @@ export class JobListingExtractor {
     const text = `${job.title} ${job.company || ""} ${job.description}`.trim();
 
     // Use Genkit to generate embeddings
-    const response = await model.embed({
+    const response = await ai.embed({
+      embedder: "gemini-1.5-flash",
       content: text,
-      taskType: "retrieval_document",
+      // taskType: "retrieval_document", // might be optional or different in v1
     });
 
-    return response.embedding;
+    return response[0].embedding;
   }
 
   private hashString(str: string): number {

@@ -1,12 +1,12 @@
-import * as functions from "firebase-functions";
-import * as admin from "firebase-admin";
-import type { QueryDocumentSnapshot } from "firebase-admin/firestore";
+import { Buffer } from "buffer";
+import { Document, HeadingLevel, Packer, Paragraph, TextRun } from "docx";
 import type { Request, Response } from "express";
+import admin from "firebase-admin";
+import type { QueryDocumentSnapshot } from "firebase-admin/firestore";
+import functions from "firebase-functions";
 import { validateFirebaseIdToken } from "../middleware/auth.middleware";
 import { handleError, sendResponse } from "../utils/api.utils";
-import * as PDFDocument from "pdfkit";
-import { Document, Packer, Paragraph, TextRun, HeadingLevel } from "docx";
-import { Buffer } from "buffer";
+import PDFDocument = require("pdfkit");
 
 // Initialize Firebase Admin if not already initialized
 if (!admin.apps.length) {
@@ -159,7 +159,9 @@ export const listApplications = functions.https.onRequest(async (req: Request, r
     }
 
     const snapshot = await query.orderBy("updatedAt", "desc").get();
-    const applications = snapshot.docs.map((doc) => applicationFromFirestore(doc));
+    const applications = snapshot.docs.map((doc: QueryDocumentSnapshot) =>
+      applicationFromFirestore(doc),
+    );
 
     return sendResponse(res, 200, applications);
   } catch (error) {
@@ -368,10 +370,12 @@ export const exportApplications = functions.https.onRequest(async (req: Request,
     }
 
     const snapshot = await query.get();
-    const applications = snapshot.docs.map((doc) => applicationFromFirestore(doc));
+    const applications = snapshot.docs.map((doc: QueryDocumentSnapshot) =>
+      applicationFromFirestore(doc),
+    );
     const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
 
-    let exportData: string | Buffer;
+    let exportData: string | Buffer | null = null;
     let contentType: string;
     let filename: string;
 
@@ -399,10 +403,10 @@ export const exportApplications = functions.https.onRequest(async (req: Request,
 
         const csvRows = [
           headers.join(","),
-          ...applications.map((app) =>
+          ...applications.map((app: Application) =>
             headers
-              .map((field) => {
-                const value = (app as Record<string, unknown>)[field] ?? "";
+              .map((field: string, index: number) => {
+                const value = (app as unknown as Record<string, unknown>)[field] ?? "";
                 // CSV escaping: double double-quotes to escape quotes per RFC 4180
                 return `"${value.toString().replace(/"/g, '""')}"`;
               })
@@ -428,7 +432,7 @@ export const exportApplications = functions.https.onRequest(async (req: Request,
         doc.fontSize(20).text("Job Applications", { align: "center" });
         doc.moveDown();
 
-        applications.forEach((app, index) => {
+        applications.forEach((app: Application, index: number) => {
           doc
             .fontSize(14)
             .text(`${index + 1}. ${app.companyName} - ${app.jobTitle} (${app.status})`);
@@ -462,7 +466,7 @@ export const exportApplications = functions.https.onRequest(async (req: Request,
                   heading: HeadingLevel.HEADING_1,
                   spacing: { after: 200 },
                 }),
-                ...applications.flatMap((app, index) => [
+                ...applications.flatMap((app: Application, index: number) => [
                   new Paragraph({
                     text: `${index + 1}. ${app.companyName} - ${app.jobTitle}`,
                     heading: HeadingLevel.HEADING_2,
@@ -505,6 +509,10 @@ export const exportApplications = functions.https.onRequest(async (req: Request,
     // Set headers for file download
     res.setHeader("Content-Type", `${contentType}; charset=utf-8`);
     res.setHeader("Content-Disposition", `attachment; filename="${filename}"`);
+
+    if (!exportData) {
+      return sendResponse(res, 500, { error: "Export data generation failed" });
+    }
 
     // For binary data (PDF, DOCX)
     if (Buffer.isBuffer(exportData)) {

@@ -91,7 +91,7 @@ function FormLabel({ className, ...props }: React.ComponentProps<typeof LabelPri
       data-error={!!error}
       className={cn(
         'text-sm font-field-note font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70',
-        error ? 'text-[var(--color-waratah-crimson)]' : 'text-[var(--color-flannel-flower)]',
+        error ? 'text-[var(--color-waratah-red)]' : 'text-[var(--color-concrete-grey)]',
         className
       )}
       htmlFor={formItemId}
@@ -121,7 +121,7 @@ function FormDescription({ className, ...props }: React.ComponentProps<'p'>) {
     <p
       data-slot="form-description"
       id={formDescriptionId}
-      className={cn('text-[var(--color-flannel-flower-dark)] text-xs font-field-note font-medium opacity-70', className)}
+      className={cn('text-[var(--color-concrete-grey-dark)] text-xs font-field-note font-medium opacity-70', className)}
       {...props}
     />
   );
@@ -139,7 +139,7 @@ function FormMessage({ className, ...props }: React.ComponentProps<'p'>) {
     <p
       data-slot="form-message"
       id={formMessageId}
-      className={cn('text-[var(--color-waratah-crimson)] text-xs font-field-note font-semibold animate-in fade-in slide-in-from-top-1 duration-standard', className)}
+      className={cn('text-[var(--color-waratah-red)] text-xs font-field-note font-semibold animate-in fade-in slide-in-from-top-1 duration-standard', className)}
       {...props}
     >
       {body}

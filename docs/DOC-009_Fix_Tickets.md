@@ -9,7 +9,7 @@
 **Instruction**:
 Refactor the "Drop Zone" container to use strictly Laboratory tokens.
 
-- Change `border-flannel-flower/20` -> `border-eucalypt-smoke-light` (or correct Lab token)
+- Change `border-concrete-grey/20` -> `border-concrete-grey-light` (or correct Lab token)
 - Change background hover states to Lab-appropriate dark modes, avoiding Gallery warmth.
 
 ### [FIX] System: Add Missing Tokens

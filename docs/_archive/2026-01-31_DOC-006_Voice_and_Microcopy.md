@@ -149,8 +149,8 @@ Format skill badges with naturalist notation:
 | :--------- | :------------------ | :-------------- |
 | Applied    | Application Sent    | Wattle Gold     |
 | Interview  | Under Review        | Wattle Glow     |
-| Rejected   | Returned            | Flannel Flower  |
-| Offer      | Offer Received      | Waratah Crimson |
+| Rejected   | Returned            | Concrete Grey  |
+| Offer      | Offer Received      | Waratah Red |
 
 ---
 
