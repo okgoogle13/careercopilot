@@ -1,9 +1,9 @@
-import admin from "firebase-admin";
-import { z } from "genkit";
+aimport admin from "firebase-admin";
+import {z} from "genkit";
 import https from "https";
-import { ai } from "../genkit";
-import { FirebaseVectorSearch } from "../lib/firebase_vector_search";
-import { JobListing } from "../types/job_listing";
+import {ai} from "../genkit";
+import {FirebaseVectorSearch} from "../lib/firebase_vector_search";
+import {JobListing} from "../types/job_listing";
 
 export class JobListingExtractor {
   private vectorSearch: FirebaseVectorSearch<JobListing>;
@@ -21,7 +21,7 @@ export class JobListingExtractor {
     {
       name: "extractJobListing",
       inputSchema: z.object({
-        source: z.union([z.string(), z.object({ url: z.string() })]),
+        source: z.union([z.string(), z.object({url: z.string()})]),
         options: z
           .object({
             extractSkills: z.boolean().default(true),
@@ -61,7 +61,7 @@ export class JobListingExtractor {
 
       const {
         source,
-        options = { extractSkills: true, extractSalary: true, extractLocation: true },
+        options = {extractSkills: true, extractSalary: true, extractLocation: true},
       } = typedInput;
       const text = typeof source === "string" ? source : await this.fetchUrl(source.url);
 
@@ -109,7 +109,7 @@ export class JobListingExtractor {
       filters: data.filters,
     });
     return results.map(
-      ({ id: _id, score, metadata }: { id: string; score: number; metadata: JobListing }) => ({
+      ({id: _id, score, metadata}: { id: string; score: number; metadata: JobListing }) => ({
         job: metadata,
         score,
       }),

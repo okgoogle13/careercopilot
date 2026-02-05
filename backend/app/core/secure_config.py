@@ -1,30 +1,23 @@
 """
-Secure configuration management using Google Cloud Secret Manager.
+Secure configuration management using environment variables.
 
 This module provides a centralized way to access configuration values,
-falling back to environment variables when not in production.
+ensuring consistent settings across the application.
 """
 
 import os
-from typing import Any, Dict, Optional, Tuple, cast
+from typing import Any, Dict, Optional, Tuple
 
-from pydantic import validator
 try:
     from pydantic_settings import BaseSettings
-except ImportError:  # pragma: no cover - optional dependency in test/CI
+except ImportError:  # pragma: no cover
     from pydantic import BaseModel as BaseSettings
 
-# Try to import the secret manager, but don't fail if not available
-try:
-    from .secret_manager import get_database_url, get_secret, get_secret_key
-
-    SECRET_MANAGER_AVAILABLE = True
-except ImportError:
-    SECRET_MANAGER_AVAILABLE = False
+from .secret_manager import get_database_url, get_secret, get_secret_key
 
 
 class SecureSettings(BaseSettings):
-    """Application settings with secure secret management."""
+    """Application settings using environment variables."""
 
     # Environment
     ENV: str = "development"
@@ -33,23 +26,31 @@ class SecureSettings(BaseSettings):
     LOG_LEVEL: str = "INFO"
     PORT: int = 8000
     FRONTEND_URL: str = "http://localhost:3000"
+    APP_URL: str = "http://localhost:8000"
 
-    # Database
+    # Database (Supabase PostgreSQL)
     DATABASE_URL: str = "sqlite:///data/careercopilot-dev.db"
-    DB_PASSWORD: Optional[str] = None
-    DB_HOST: str = "localhost"
-    DB_PORT: int = 5432
-    DB_NAME: str = "careercopilot"
-    DB_USER: str = "careercopilot"
 
-    # Cache configuration (using Firestore instead of Redis)
-    CACHE_COLLECTION: str = "redis_cache"  # Firestore collection for caching
+    # Supabase Configuration
+    SUPABASE_URL: Optional[str] = None
+    SUPABASE_ANON_KEY: Optional[str] = None
+    SUPABASE_SERVICE_ROLE_KEY: Optional[str] = None
+    SUPABASE_STORAGE_BUCKET: str = "user_assets"
 
     # Authentication
-    SECRET_KEY: str = "insecure-default-secret-key"
-    JWT_SECRET_KEY: str = "insecure-default-secret-key"  # Alias for SECRET_KEY
+    JWT_SECRET_KEY: str = "insecure-default-secret-key"
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 1440  # 24 hours
+
+    # AI Services
+    GEMINI_API_KEY: Optional[str] = None
+    ANTHROPIC_API_KEY: Optional[str] = None
+
+    # AWS (for SES/S3 fallback)
+    AWS_ACCESS_KEY_ID: Optional[str] = None
+    AWS_SECRET_ACCESS_KEY: Optional[str] = None
+    AWS_REGION: str = "us-east-1"
+    SES_SENDER_EMAIL: Optional[str] = None
 
     def __init__(self, **kwargs: Any) -> None:
         super().__init__(**kwargs)
@@ -59,160 +60,35 @@ class SecureSettings(BaseSettings):
         elif os.getenv("ENVIRONMENT"):
             self.ENV = os.getenv("ENVIRONMENT", "development")
 
-        # Override with secure values for production or staging
-        if SECRET_MANAGER_AVAILABLE and self.ENV in ["production", "staging"]:
-            try:
-                self.SECRET_KEY = get_secret_key()
-                self.JWT_SECRET_KEY = self.SECRET_KEY
-                self.DATABASE_URL = get_database_url()
+        # Load values
+        try:
+            self.JWT_SECRET_KEY = get_secret_key()
+            self.DATABASE_URL = get_database_url()
 
-                # Load AI API keys from Secret Manager
-                self.GEMINI_API_KEY = get_secret("GEMINI_API_KEY", default=self.GEMINI_API_KEY)
-                self.ANTHROPIC_API_KEY = get_secret(
-                    "ANTHROPIC_API_KEY", default=self.ANTHROPIC_API_KEY
-                )
+            # Load AI API keys
+            self.GEMINI_API_KEY = get_secret("GEMINI_API_KEY", default=self.GEMINI_API_KEY)
+            self.ANTHROPIC_API_KEY = get_secret("ANTHROPIC_API_KEY", default=self.ANTHROPIC_API_KEY)
 
-                # Load Firebase credentials
-                self.FIREBASE_PROJECT_ID = get_secret(
-                    "FIREBASE_PROJECT_ID", default=self.FIREBASE_PROJECT_ID
-                )
-                self.GOOGLE_APPLICATION_CREDENTIALS_JSON = get_secret(
-                    "GOOGLE_APPLICATION_CREDENTIALS_JSON",
-                    default=self.GOOGLE_APPLICATION_CREDENTIALS_JSON,
-                )
-            except Exception as e:
-                raise RuntimeError(f"Failed to load production secrets: {e}")
-        elif self.ENV in ["production", "staging"]:
-            # Fail fast in production if secrets are not properly configured
-            if self.SECRET_KEY == "insecure-default-secret-key":
-                raise RuntimeError("Production environment requires secure secret configuration")
+            # Load Supabase config
+            self.SUPABASE_URL = get_secret("SUPABASE_URL", default=self.SUPABASE_URL)
+            self.SUPABASE_ANON_KEY = get_secret("SUPABASE_ANON_KEY", default=self.SUPABASE_ANON_KEY)
+            self.SUPABASE_SERVICE_ROLE_KEY = get_secret("SUPABASE_SERVICE_ROLE_KEY", default=self.SUPABASE_SERVICE_ROLE_KEY)
 
-    # Firebase Configuration
-    FIREBASE_PROJECT_ID: Optional[str] = None
-    FIREBASE_STORAGE_BUCKET: str = ""
-    FIREBASE_DATABASE_URL: str = ""
-    FIREBASE_AUTH_EMULATOR_HOST: Optional[str] = None
-    FIREBASE_STORAGE_EMULATOR_HOST: Optional[str] = None
-    FIREBASE_DATABASE_EMULATOR_HOST: Optional[str] = None
-    FIREBASE_EMULATOR: bool = False
-
-    # Firebase Admin SDK Credentials (JSON string)
-    FIREBASE_CREDENTIALS_JSON: Optional[str] = None
-
-    @validator("FIREBASE_CREDENTIALS_JSON", pre=True)
-    def validate_firebase_creds(cls, v: Optional[str], values: Dict[str, Any]) -> Optional[str]:
-        if not v and values.get("FIREBASE_PROJECT_ID"):
-            # Try to load from Google Cloud's default credentials
-            try:
-                import google.auth
-
-                credentials, project = google.auth.default()  # type: ignore[no-untyped-call]
-                if project == values.get("FIREBASE_PROJECT_ID"):
-                    return None  # Will use default credentials
-            except Exception:
-                pass
-        return v
-
-    # Google Cloud
-    GOOGLE_CLOUD_PROJECT: Optional[str] = None
-    GCP_PROJECT_ID: Optional[str] = None
-    GOOGLE_APPLICATION_CREDENTIALS: Optional[str] = None
-    GOOGLE_APPLICATION_CREDENTIALS_JSON: Optional[str] = None
-
-    # AI Services
-    GEMINI_API_KEY: Optional[str] = None
-    ANTHROPIC_API_KEY: Optional[str] = None
-
-    # RAG Configuration - REMOVED: Vector search functionality simplified
-    # RAG features have been removed in favor of direct AI integration
-    EMBEDDING_MODEL: str = "text-embedding-004"
-
-    # Email - AWS SES
-    AWS_ACCESS_KEY_ID: Optional[str] = None
-    AWS_SECRET_ACCESS_KEY: Optional[str] = None
-    AWS_REGION: str = "us-east-1"
-    SES_SENDER_EMAIL: Optional[str] = None
-
-    # Performance
-    MAX_WORKERS: int = 2
-    DB_POOL_SIZE: int = 3
-
-    # Feature Flags
-    ENABLE_MULTI_AGENT: bool = False
-    ENABLE_ML_ANALYSIS: bool = False
-    ENABLE_WEB_SEARCH: bool = False
-    ENABLE_EMAIL_NOTIFICATIONS: bool = False
-    ENABLE_AI_FEATURES: bool = True
-
-    # Development Settings
-    ENABLE_HOT_RELOAD: bool = False
-    SHOW_DEBUG_INFO: bool = False
+        except Exception as e:
+            if self.ENV in ["production", "staging"]:
+                raise RuntimeError(f"Failed to load production configuration: {e}")
+            else:
+                print(f"Warning: Failed to load some configuration: {e}")
 
     class Config:
         env_file = ".env"
         env_file_encoding = "utf-8"
         case_sensitive = True
-        extra = "allow"  # Allow extra fields from environment
+        extra = "allow"
 
-        @classmethod
-        def customise_sources(
-            cls,
-            init_settings: Any,
-            env_settings: Any,
-            file_secret_settings: Any,
-        ) -> Tuple[Any, Dict[str, str], Any]:
-            """Customize how settings are loaded."""
-            if not SECRET_MANAGER_AVAILABLE:
-                # If secret manager is not available, just use the default sources
-                return (
-                    init_settings,
-                    env_settings,
-                    file_secret_settings,
-                )
 
-            # Load settings from environment first
-            settings: Dict[str, str] = {
-                **os.environ,
-                **cast(Dict[str, str], env_settings()),
-            }
-
-            # Then try to get values from secret manager
-            try:
-                # Only try to get secrets in production/staging or if explicitly enabled
-                current_env = settings.get("ENV") or settings.get("ENVIRONMENT")
-                if (
-                    current_env in ["production", "staging"]
-                    or settings.get("USE_SECRET_MANAGER", "").lower() == "true"
-                ):
-                    # Get database URL from secret manager
-                    if not settings.get("DATABASE_URL"):
-                        settings["DATABASE_URL"] = get_database_url()
-
-                    # Get secret key from secret manager
-                    if not settings.get("SECRET_KEY"):
-                        settings["SECRET_KEY"] = get_secret_key()
-
-                    # Get other secrets
-                    for secret in [
-                        "GEMINI_API_KEY",
-                        "ANTHROPIC_API_KEY",
-                        "AWS_ACCESS_KEY_ID",
-                        "AWS_SECRET_ACCESS_KEY",
-                        "SES_SENDER_EMAIL",
-                    ]:
-                        if not settings.get(secret):
-                            try:
-                                settings[secret] = get_secret(secret)
-                            except Exception as e:
-                                print(f"Warning: Could not load secret {secret}: {e}")
-            except Exception as e:
-                print(f"Warning: Could not load secrets from Secret Manager: {e}")
-
-            return (
-                init_settings,
-                settings,
-                file_secret_settings,
-            )
+# Create a single instance of the settings
+settings: 'SecureSettings' = SecureSettings()
 
 
 # Create a single instance of the settings
