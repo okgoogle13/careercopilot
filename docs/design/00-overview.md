@@ -14,11 +14,22 @@ Here’s a contemporary, street-art-aligned rewrite that keeps the spirit but dr
 
 CareerCopilot is a curated digital workspace where a user’s professional history is treated not as “data,” but as a living ecosystem of experiences, skills, and stories that keep evolving. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/74141548/71e47c55-6a62-408b-a42b-69ec9db60ba8/README.md)
 
-The visual language sits at the intersection of:
+The visual language is rooted in:
 
-- **Peter Drew street art** — bold silhouettes, poster-like contrast, unapologetic messages. [artmeetsscience](https://www.artmeetsscience.co/art-forms-in-nature-ernst-haeckel/)
-- **Material 3 Expressive** — semantic tokens, springy motion, accessible dark UI. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/74141548/4afd3171-d177-47e4-81e0-4050adcaca29/tokens.json)
-- **Australian endemic species** — Kookaburra, Waratah, Banksia, Eucalyptus, Wattle as living guardians and symbols, not preserved specimens. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/74141548/2c98fa71-c817-49f8-957d-da13857f9ca1/northcote-design-principles.md)
+**1. Peter Drew Street Art (PRIMARY)**
+- Bold silhouettes, poster-like contrast, unapologetic messaging
+- Wheat-paste aesthetic, rough textures, urban grit
+- Political clarity, direct communication, no subtlety
+- Reference: AUSSIE poster campaign (screen-printed, hand-pasted, community-driven)
+
+**2. Material 3 Expressive (FOUNDATION)**
+- Semantic tokens, spring physics, accessible dark UI. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/74141548/4afd3171-d177-47e4-81e0-4050adcaca29/tokens.json)
+- Extreme weight contrasts, variable fonts, organic asymmetry
+
+**3. Australian Context (ACCENT)**
+- Endemic species (Kookaburra, Waratah) as companions, not centerpieces
+- Earthy palette (ochre, wattle gold, gum leaf green)
+- Melbourne urban setting (laneways, trams, street culture)
 
 ---
 
@@ -35,15 +46,16 @@ The visual language sits at the intersection of:
 
 We’ve retired the Gallery vs Laboratory split. There is **one unified contemporary mode**, expressed at different densities:
 
-| Density          | Use                                     | Visual Language                                          |
-| ---------------- | --------------------------------------- | -------------------------------------------------------- |
-| **High Drama**   | Landing, hero moments, key empty states | Large species silhouettes, big type, strong contrast     |
-| **Standard**     | Dashboards, lists, navigation           | Clean surfaces, species accents, clear hierarchy         |
-| **High Clarity** | Data review, parsing, ATS analysis      | Minimal species, high contrast, strong alignment, labels |
+| Density          | Use                                     | Visual Language                                                    |
+| ---------------- | --------------------------------------- | ------------------------------------------------------------------ |
+| **High Drama**   | Landing, hero moments, key empty states | Large poster-style silhouettes, urban textures, bold type contrast |
+| **Standard**     | Dashboards, lists, navigation           | Clean surfaces, subtle urban accents, clear hierarchy              |
+| **High Clarity** | Data review, parsing, ATS analysis      | Minimal decoration, high contrast, strong alignment, data-focused  |
 
-- **High Drama** frames the user as the protagonist in a Melbourne context (laneways, power lines, urban plants). [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/74141548/2c98fa71-c817-49f8-957d-da13857f9ca1/northcote-design-principles.md)
-- **Standard** keeps the species present at the edges as companions rather than decoration. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/74141548/3e96ba46-4b4b-44ae-8fdc-8981f704fb27/05-assets.md)
-- **High Clarity** leans on tokens, grids, and color states for legibility; species drop back to margins or small icons. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/74141548/7cb97ada-65a0-4882-a47d-07e4dff0aef1/annotated-wireframes.md)
+**Species Usage by Density**:
+- **High Drama**: Optional large silhouette as background element (10% of layouts)
+- **Standard**: Small icons at margins (< 5% of surface area)
+- **High Clarity**: No species imagery (tokens and data only)
 
 ---
 
@@ -53,22 +65,36 @@ We’ve retired the Gallery vs Laboratory split. There is **one unified contempo
 
 | Banned                                    | Required                                                                                                                                                                                                                                             |
 | ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Generic `border-radius: 8px`              | **Organic asymmetry** using our radius tokens (pebble/stone/leaf). [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/74141548/3c4a620b-da4a-462e-bacc-412a0775f24c/01-tokens.md)            |
+| Generic `border-radius: 8px`              | **Organic asymmetry** using radius tokens with variation: `radius-pebble` (20px 6px 16px 28px), `radius-stone` (16px 4px 12px 24px), `radius-leaf` (24px 8px 20px 4px) — 4 different corners. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/74141548/3c4a620b-da4a-462e-bacc-412a0775f24c/01-tokens.md) |
 | Pure black / white (`#000000`, `#FFFFFF`) | **Asphalt Black** `#1A1714`, **Paper White** `#F5F0E8`. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/74141548/3c4a620b-da4a-462e-bacc-412a0775f24c/01-tokens.md)                       |
 | Arbitrary hex colors                      | **Semantic tokens** from `tokens.json` and `northcote.css`. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/74141548/4afd3171-d177-47e4-81e0-4050adcaca29/tokens.json)                    |
-| Generic sans (Roboto/Arial)               | **Space Grotesk** (headers), **Inter** (body), **JetBrains Mono** (data). [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/74141548/03227b1a-986b-47ff-8d23-86257e7e16b8/02-typography.md) |
+| Generic sans (Roboto/Arial/Inter alone)   | **Sora Variable** (display), **Plus Jakarta Sans Variable** (headers/body), **JetBrains Mono** (data). [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/74141548/03227b1a-986b-47ff-8d23-86257e7e16b8/02-typography.md) |
 | Heavy hard shadows                        | **Soft, layered elevation** using tokenized shadow levels. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/74141548/4afd3171-d177-47e4-81e0-4050adcaca29/tokens.json)                     |
+
+**Urban Textures**:
+- Concrete grain backgrounds (subtle noise, 5% opacity)
+- Paper texture overlays (recycled poster feel)
+- Asphalt gradients (not flat fills)
 
 ---
 
-### B. Species & Context Rules
+### B. Urban Context & Species as Accents
 
-- **Australian endemic only** — Kookaburra, Waratah, Banksia, Eucalyptus, Wattle, Echidna, etc. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/74141548/2c98fa71-c817-49f8-957d-da13857f9ca1/northcote-design-principles.md)
-- **Living context** — species appear on power lines, street signs, community noticeboards, and urban gardens, not pinned in cabinets. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/74141548/2c98fa71-c817-49f8-957d-da13857f9ca1/northcote-design-principles.md)
-- **Anti‑colonial framing**:
-  - No “specimen”, “cabinet”, “naturalist”, or Federation‑era romance. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/74141548/2c98fa71-c817-49f8-957d-da13857f9ca1/northcote-design-principles.md)
-  - Concentric circles, journey lines, and earth tones can be used as **universal geometric references**, never as imitation of specific First Nations styles. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/74141548/2c98fa71-c817-49f8-957d-da13857f9ca1/northcote-design-principles.md)
-- **Common name first** — “KOOKABURRA” before any Latin names. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/74141548/2c98fa71-c817-49f8-957d-da13857f9ca1/northcote-design-principles.md)
+**Primary Visual Language** — Melbourne street art culture:
+- Laneway murals, wheatpaste posters, stencil graffiti
+- Community noticeboards, street signs, concrete textures
+- Peter Drew AUSSIE poster aesthetic — bold silhouettes, high contrast, unapologetic messages
+
+**Species as Accents** — Australian endemic flora/fauna appear:
+- At margins and edges (not center-stage)
+- Small icons and companion elements (not heroes)
+- Urban context (on power lines, street signs, fences) when used
+- Common names first (KOOKABURRA before Latin)
+- Never as specimens, cabinets, or naturalist collections
+
+**Anti‑colonial framing**:
+- No "specimen", "cabinet", "naturalist", or Federation‑era romance
+- Concentric circles, journey lines, and earth tones as **universal geometric references**, never as imitation of specific First Nations styles
 
 ---
 

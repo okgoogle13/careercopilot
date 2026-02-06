@@ -32,7 +32,7 @@ Here’s a contemporary, token-aligned rewrite of that components doc.
 
 .btn-pebble:hover {
   transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 8px 16px rgba(212, 168, 75, 0.4); /* Wattle Glow */
+  box-shadow: var(--elevation-3); /* Use semantic token instead of hardcoded */
 }
 ```
 
@@ -202,7 +202,61 @@ Three-phase feel (implemented with simple transitions):
 
 1. **Staggered timing** – overlapping but not chaotic; use delays for child elements. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/74141548/efa04425-d50c-4611-bc01-ab05d271c694/annotated-wireframes.md)
 2. **Multi-property changes** – combine transform + elevation + subtle color shifts. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/74141548/3c4a620b-da4a-462e-bacc-412a0775f24c/01-tokens.md)
-3. **Organic easing** – use the “viscous breeze” curves, avoid linear transitions. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/74141548/4afd3171-d177-47e4-81e0-4050adcaca29/tokens.json)
+3. **Organic easing** – use the "viscous breeze" curves, avoid linear transitions. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/74141548/4afd3171-d177-47e4-81e0-4050adcaca29/tokens.json)
 4. **Intentional duration** – 250–600ms; fast enough for work, slow enough to feel calm.
 
 The goal is **natural unfolding**, like posters and plants responding to the environment, not mechanical state flips.
+
+---
+
+## M3 Spring Physics Validation
+
+Our motion curves match M3 Expressive spring physics:
+
+| Token                      | Bezier                                | Overshoot | Use Case                    |
+|----------------------------|---------------------------------------|-----------|-----------------------------|
+| `--easing-standard`        | `cubic-bezier(0.175, 0.885, 0.32, 1.275)` | 12.75%    | Subtle bounce (buttons, cards) |
+| `--easing-emphasized`      | `cubic-bezier(0.68, -0.55, 0.265, 1.55)`  | 55%       | Playful bounce (notifications) |
+| `--easing-decelerate`      | `cubic-bezier(0.05, 0.7, 0.1, 1)`         | 0%        | Smooth page enters          |
+
+**Verify tokens.json contains these exact curves.**
+
+---
+
+## M3 Duration Scale Validation
+
+Material 3 Expressive duration scale:
+
+| Token                | Value  | Use Case                   |
+|----------------------|--------|----------------------------|
+| `--duration-short`   | 50ms   | Micro-interactions         |
+| `--duration-medium-2`| 250ms  | Standard transitions       |
+| `--duration-long-4`  | 500ms  | Page load animations       |
+
+**Maximum duration: 600ms** (per M3 accessibility guidelines)
+
+---
+
+## Accessibility: prefers-reduced-motion
+
+All animations MUST respect user motion preferences:
+
+```css
+.card-stone {
+  transition: transform var(--duration-medium-2) var(--easing-standard);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-stone {
+    transition: transform 200ms ease; /* Simple fade instead of spring */
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skip-animation {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+```
