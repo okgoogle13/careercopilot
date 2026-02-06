@@ -1,4 +1,4 @@
----
+1---
 name: m3-expressive-typography-enhancer
 description: Elevate typography with Material Design 3 Expressive variable fonts, extreme weight contrasts (100 vs 900), optical sizing, and emotional tone guidance. Forbids generic fonts (Inter, Roboto, Arial). Enforces M3 Expressive semantic type scale and high-contrast font pairings.
 ---

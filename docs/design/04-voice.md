@@ -54,6 +54,17 @@ Keep verbs short and consistent across the app. [ppl-ai-file-upload.s3.amazonaws
 
 Personality is welcome here, but never at the cost of understanding what just happened. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/74141548/8ad7dc28-448f-4f80-8d9e-3ee8a27b89f8/04-voice.md)
 
+### Tier 2/3 Boundary Examples
+
+**When to use T2 vs T3:**
+
+| Context                          | Tier | Example                                                  |
+|----------------------------------|------|----------------------------------------------------------|
+| Quick success toast              | T2   | "Saved. One less thing to juggle."                      |
+| Success with next step guidance  | T3   | "Saved. You can reuse this for similar roles next time."|
+| Empty state (first visit)        | T2   | "We don't know your story yet. Let's start."             |
+| Empty state with context         | T3   | "Government forms don't leave room for community work. We do." |
+
 ---
 
 ### Tier 3: Character Depth (Opt‑in / Detail)
@@ -131,8 +142,23 @@ Avoid generic SaaS marketing and AI hype:
 
 Instead, speak like a thoughtful colleague who knows how exhausting applications can be:
 
-- “Make this easier to reuse.”
-- “Keep a copy of this for next time.”
-- “This will save you time on the next application.” [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/74141548/8ad7dc28-448f-4f80-8d9e-3ee8a27b89f8/04-voice.md)
+- "Make this easier to reuse."
+- "Keep a copy of this for next time."
+- "This will save you time on the next application." [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/74141548/8ad7dc28-448f-4f80-8d9e-3ee8a27b89f8/04-voice.md)
 
-Northcote’s voice is **grounded, specific, and on the user’s side**, not selling a fantasy.
+---
+
+## When Humor is Inappropriate
+
+Never use personality or humor in:
+
+1. **System failures** — "Upload failed. Try PDF under 5MB." (not "Oops, that didn't work!")
+2. **Data loss warnings** — "You have unsaved changes. Save before leaving?" (not "Don't lose your work!")
+3. **Security/privacy** — "Your data is encrypted." (not "Your secrets are safe with us!")
+4. **Payment/billing** — "Payment method required." (not "Time to pay up!")
+
+**Rule**: If stakes are high (data loss, money, privacy), use T1 (Functional) voice only.
+
+---
+
+Northcote's voice is **grounded, specific, and on the user's side**, not selling a fantasy.
