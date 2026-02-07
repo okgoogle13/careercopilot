@@ -1,22 +1,24 @@
 ---
 name: figma-to-page
 description: "Generates React code for a full page based on pasted Figma 'Inspect' details. Uses the page scaffolder."
+version: 1.0.0
+tags: []
 ---
 
-# Figma to Page Workflow
+## Purpose
 
-1.  Ask for the page name in `PascalCase` (e.g., `UserProfile`).
-2.  Ask the user to paste all details from the Figma 'Inspect' panel for the _entire page_.
-3.  **Execute scaffolder:**
-    - Run `chmod +x .claude/skills/react-page-scaffolder/scripts/create-page.sh`
-    - Run `.claude/skills/react-page-scaffolder/scripts/create-page.sh {{PAGE_NAME}}`
-    - Report the output (the new file paths). Let `{{PAGE_DIR}}` be the new directory (e.g., `src/pages/userprofile`).
-4.  **Generate Code:**
-    - Read the user-pasted Figma details.
-    - Generate the TSX code for `{{PAGE_DIR}}/{{PAGE_NAME}}.tsx`.
-    - Generate the corresponding CSS for `{{PAGE_DIR}}/{{PAGE_NAME}}.module.css`.
-5.  **Write Files:**
-    - Write the new TSX content, overwriting the template.
-    - Write the new CSS content, overwriting the template.
-6.  **Lint:** Run `yarn lint:fix {{PAGE_DIR}}` to clean up the new files.
-7.  Report that the page has been created and populated from Figma details.
+Generates React code (TSX/CSS) for a full page based on pasted Figma 'Inspect' details, utilizing the standard page scaffolder for structure.
+
+## When to Use
+
+- When migrating high-fidelity designs from Figma to the React codebase.
+- When needing to rapidly prototype pages from existing design specifications.
+- When ensuring structural consistency between design and implementation.
+
+## Process
+
+1. **Page Identification**: Acquire the page name in `PascalCase`.
+2. **Input Ingestion**: Collect Figma 'Inspect' details for the entire page.
+3. **Scaffolding**: Run the `.claude/skills/react-page-scaffolder/scripts/create-page.sh` script.
+4. **Code Generation**: Transform Figma specs into TSX and CSS modules.
+5. **Finalization**: Write files, overwrite templates, and run `yarn lint:fix`.

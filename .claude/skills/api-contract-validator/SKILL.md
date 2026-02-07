@@ -1,13 +1,21 @@
 ---
 name: api-contract-validator
 description: "Validates type contracts between TypeScript interfaces and Pydantic models. Detects field mismatches and type inconsistencies. Related: frontend-backend-mapper for endpoint discovery."
+version: 1.0.0
+tags: []
 ---
 
-# API Contract Validator Workflow
+## Purpose
 
-This skill ensures type safety and consistency between frontend TypeScript interfaces and backend Pydantic models.
+Ensures type safety and consistency between frontend TypeScript interfaces and backend Pydantic models by detecting field name differences, type mismatches, and missing fields.
 
-## Workflow Steps
+## When to Use
+
+- When validating API contracts before a release.
+- When identifying breaking changes in data models between frontend and backend.
+- When standardizing property casing (camelCase vs snake_case) across the stack.
+
+## Process
 
 1. **Scan TypeScript interfaces:**
    - Read frontend API service files (`frontend/src/api/*.ts`)

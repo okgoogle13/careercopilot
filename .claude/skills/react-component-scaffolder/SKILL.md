@@ -5,13 +5,26 @@ version: 1.0.0
 deprecated: true
 deprecated_message: "This skill is deprecated. Use the 'component-builder' skill instead, which generates production-grade, M3-compliant React components with token-aware styling and accessibility features."
 replacement: component-builder
+tags: []
 ---
 
 # React Component Scaffolder (DEPRECATED)
 
 ⚠️ **This skill is deprecated and should no longer be used.**
 
-## Why Deprecated?
+## Purpose
+
+(DEPRECATED) Previously used to create React component directory structures. ⚠️ **Use `component-builder` instead.**
+
+## When to Use
+
+- ❌ NEVER. Use `component-builder` instead.
+
+## Process
+
+1. **Deprecation Check**: Identify that this skill is deprecated.
+2. **Redirection**: Direct the user to use the `component-builder` skill.
+3. **Manual Backup (If absolutely forced)**: Create basic directory structure without intelligent code generation.
 
 The `component-builder` skill is the recommended replacement. It provides:
 

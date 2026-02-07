@@ -1,6 +1,8 @@
 ---
 name: ui-design-evaluator
 description: Evaluate design assets, analyze annotated wireframes, and create high-fidelity interactive mockups with Northcote Curio V3.1 compliance. Use when evaluating designs, analyzing wireframes, creating mockups from annotations, scoring design system compliance, or generating interactive prototypes. Supports Gallery (expressive, warm) and Laboratory (restrained, cool) modes.
+version: 1.0.0
+tags: []
 ---
 
 # UI Design Evaluator & Mockup Creator
@@ -11,7 +13,9 @@ description: Evaluate design assets, analyze annotated wireframes, and create hi
 
 ---
 
-## 🎯 Skill Purpose
+## Purpose
+
+Evaluate design assets, analyze annotated wireframes, and create high-fidelity interactive mockups with Northcote Curio V3.1 compliance.
 
 This skill enables comprehensive UI design workflows:
 
@@ -22,14 +26,23 @@ This skill enables comprehensive UI design workflows:
 
 ---
 
-## 📊 The Complete Workflow
+## When to Use
+
+- When evaluating existing designs against Northcote Curio standards.
+- When creating high-fidelity mockups from annotated wireframes.
+- When scoring design system compliance (400-point system).
+- When generating interactive prototypes or React component specifications.
+
+## Process
 
 ```
 INPUT → ANALYZE → EVALUATE → DESIGN → DELIVER
 ```
 
 ### 1. INPUT Phase
+
 **Accept Multiple Input Types:**
+
 - Screenshots of existing designs
 - Annotated wireframes (image or text description)
 - Figma/Sketch export images
@@ -38,7 +51,9 @@ INPUT → ANALYZE → EVALUATE → DESIGN → DELIVER
 - Component requirement lists
 
 ### 2. ANALYZE Phase
+
 **Extract Design Intent:**
+
 - Parse annotations and notes
 - Identify components needed (buttons, cards, forms, etc.)
 - Map user flows and interactions
@@ -47,9 +62,11 @@ INPUT → ANALYZE → EVALUATE → DESIGN → DELIVER
 - Note accessibility requirements
 
 ### 3. EVALUATE Phase
+
 **Score Against 4 Criteria (400 points total):**
 
 **A. Northcote Curio V3.1 Compliance (100 pts)**
+
 - ✅ Uses Federation Typography Stack (Curator, Proclamation, Bloom, Field Note, Annotation)
 - ✅ Asymmetric organic shapes (no uniform border-radius)
 - ✅ Botanical color palette (Wattle Gold, Waratah Red, Eucalyptus Smoke)
@@ -58,6 +75,7 @@ INPUT → ANALYZE → EVALUATE → DESIGN → DELIVER
 - ❌ Anti-Slop violations (Inter/Roboto, purple gradients, uniform corners)
 
 **B. Accessibility (100 pts)**
+
 - ✅ WCAG AA contrast ratios (4.5:1 minimum)
 - ✅ ARIA labels on interactive elements
 - ✅ Keyboard navigation support
@@ -66,6 +84,7 @@ INPUT → ANALYZE → EVALUATE → DESIGN → DELIVER
 - ✅ Color not sole indicator
 
 **C. User Flow Logic (100 pts)**
+
 - ✅ Clear information hierarchy
 - ✅ Logical interaction patterns
 - ✅ Consistent navigation
@@ -74,6 +93,7 @@ INPUT → ANALYZE → EVALUATE → DESIGN → DELIVER
 - ✅ Empty state design
 
 **D. Visual Hierarchy & Typography (100 pts)**
+
 - ✅ Clear typographic scale (Display → Body)
 - ✅ Proper use of Federation Typography Stack
 - ✅ Visual weight guides attention
@@ -81,6 +101,7 @@ INPUT → ANALYZE → EVALUATE → DESIGN → DELIVER
 - ✅ Alignment and grid consistency
 
 **Scoring:**
+
 - **A (90-100%):** Excellent — Production ready
 - **B (80-89%):** Good — Minor refinements
 - **C (70-79%):** Satisfactory — Needs work
@@ -88,34 +109,41 @@ INPUT → ANALYZE → EVALUATE → DESIGN → DELIVER
 - **F (<60%):** Does not meet standards
 
 ### 4. DESIGN Phase
+
 **Generate High-Fidelity Mockup:**
 
 **Step 1: Mode Selection**
+
 - **Gallery Mode:** Expressive, warm, cursive allowed, extreme Fraunces
 - **Laboratory Mode:** Restrained, cool, no cursive, clean typography
 
 **Step 2: Component Mapping**
+
 - Map wireframe elements to Northcote components
 - Apply design tokens automatically
 - Use Federation Typography Stack
 - Apply asymmetric organic shapes
 
 **Step 3: Layout Construction**
+
 - Build responsive HTML structure
 - Apply CSS with design tokens
 - Add interactive states (hover, focus, active)
 - Implement accessibility attributes
 
 **Step 4: Enhancement**
+
 - Add Framer Motion physics (if Gallery mode)
 - Apply V3.1 playful mixing (if appropriate)
 - Add wallpaper background (if hero section)
 - Implement viscous breeze motion
 
 ### 5. DELIVER Phase
+
 **Output Multiple Formats:**
 
 **A. Interactive HTML Artifact**
+
 ```html
 <!-- Viewable directly in Claude interface -->
 <!-- Full design with interactions -->
@@ -123,6 +151,7 @@ INPUT → ANALYZE → EVALUATE → DESIGN → DELIVER
 ```
 
 **B. React Component Code**
+
 ```tsx
 // Production-ready TypeScript/React
 // 100% design token compliance
@@ -131,8 +160,10 @@ INPUT → ANALYZE → EVALUATE → DESIGN → DELIVER
 ```
 
 **C. Evaluation Report**
+
 ```markdown
 ## Design Evaluation Report
+
 - Northcote Curio V3.1 Compliance: 95/100 (A)
 - Accessibility: 88/100 (B)
 - User Flow Logic: 92/100 (A)
@@ -140,18 +171,22 @@ INPUT → ANALYZE → EVALUATE → DESIGN → DELIVER
 - **Overall:** 365/400 (91% — Excellent)
 
 ### Strengths
+
 - Perfect Federation Typography Stack usage
 - Excellent asymmetric shapes
 - Strong color palette
 
 ### Improvements Needed
+
 - Add focus states to form inputs
 - Increase contrast on secondary text
 ```
 
 **D. Component Specifications**
+
 ```markdown
 ## Components Required
+
 1. HeroSection (Gallery mode)
    - Cursive + Serif mix hero
    - Botanical wallpaper background
@@ -170,40 +205,55 @@ INPUT → ANALYZE → EVALUATE → DESIGN → DELIVER
 ### Automatic Token Mapping
 
 **Colors:**
+
 ```css
 /* Wireframe: "primary button - blue" */
-/* Maps to: */ background: var(--nc-wattle-gold-300);
+/* Maps to: */
+background: var(--nc-wattle-gold-300);
 
 /* Wireframe: "error state - red" */
-/* Maps to: */ color: var(--nc-waratah-red-400);
+/* Maps to: */
+color: var(--nc-waratah-red-400);
 
 /* Wireframe: "background - dark" */
-/* Maps to: */ background: var(--nc-asphalt-black-300);
+/* Maps to: */
+background: var(--nc-asphalt-black-300);
 ```
 
 **Typography:**
+
 ```css
 /* Wireframe: "large heading" */
-/* Gallery: */ font-family: var(--nc-font-bloom);
-              font-variation-settings: 'SOFT' 100, 'WONK' 1, 'wght' 800;
+/* Gallery: */
+font-family: var(--nc-font-bloom);
+font-variation-settings:
+  "SOFT" 100,
+  "WONK" 1,
+  "wght" 800;
 
-/* Laboratory: */ font-family: var(--nc-font-field-note);
-                  font-weight: 700;
+/* Laboratory: */
+font-family: var(--nc-font-field-note);
+font-weight: 700;
 ```
 
 **Shapes:**
+
 ```css
 /* Wireframe: "card" */
-/* Maps to: */ border-radius: 32px 8px 28px 12px; /* specimen shape */
+/* Maps to: */
+border-radius: 32px 8px 28px 12px; /* specimen shape */
 
 /* Wireframe: "button" */
-/* Maps to: */ border-radius: 40px 12px 40px 12px; /* wattle shape */
+/* Maps to: */
+border-radius: 40px 12px 40px 12px; /* wattle shape */
 ```
 
 **Motion:**
+
 ```css
 /* Wireframe: "smooth transition" */
-/* Maps to: */ transition: all 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
+/* Maps to: */
+transition: all 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
 ```
 
 ---
@@ -211,6 +261,7 @@ INPUT → ANALYZE → EVALUATE → DESIGN → DELIVER
 ## 📋 Input Format Examples
 
 ### Example 1: Text Wireframe Description
+
 ```
 Create a landing page hero section with:
 - Large headline: "Career Intelligence"
@@ -225,6 +276,7 @@ Create a landing page hero section with:
 ---
 
 ### Example 2: Annotated Screenshot
+
 ```
 [User uploads screenshot with annotations:]
 - "This should be more expressive" (pointing to header)
@@ -234,6 +286,7 @@ Create a landing page hero section with:
 ```
 
 **Process:**
+
 1. **Analyze:** Header needs Bloom ultra-wonky, cards need asymmetric radii, subtitle needs Caveat cursive
 2. **Evaluate:** Current design scores 60% (generic fonts, uniform corners)
 3. **Design:** Rebuild with V3.1 tokens
@@ -242,6 +295,7 @@ Create a landing page hero section with:
 ---
 
 ### Example 3: Component List
+
 ```
 Dashboard page needs:
 1. PageHeader with title and breadcrumbs
@@ -253,6 +307,7 @@ Mode: Laboratory (data-focused)
 ```
 
 **Output:**
+
 - Interactive dashboard mockup
 - 4 separate React components
 - Laboratory mode styling (restrained, clean)
@@ -265,27 +320,32 @@ Mode: Laboratory (data-focused)
 ### Gallery Mode (Expressive, Warm)
 
 **Typography:**
+
 - ✅ Caveat cursive for hero/annotations
 - ✅ Extreme Fraunces (SOFT=100, WONK=1, wght=900)
 - ✅ Playful mixing utilities
 - ✅ Shadow layering, weight contrast, rotation
 
 **Colors:**
+
 - Full botanical palette (Wattle Gold, Waratah Red)
 - High contrast and emotional
 - Glowing accents
 
 **Shapes:**
+
 - Maximum organic asymmetry
 - Dramatic radius variations
 - Botanical-inspired forms
 
 **Motion:**
+
 - Framer Motion physics
 - Variable font axis animations
 - Viscous breeze easing
 
 **Wallpaper:**
+
 - Full visibility (0.65-0.85 opacity)
 - Parallax effects
 - Hot zones typography positioning
@@ -295,27 +355,32 @@ Mode: Laboratory (data-focused)
 ### Laboratory Mode (Restrained, Cool)
 
 **Typography:**
+
 - ❌ NO cursive (ever)
 - Restrained Fraunces (SOFT=20, WONK=0)
 - Work Sans sans-serif primary
 - JetBrains Mono for data
 
 **Colors:**
+
 - Muted eucalypt smoke palette
 - Low contrast and clinical
 - Minimal gold accents
 
 **Shapes:**
+
 - Subtle asymmetry
 - Functional organic shapes
 - Grid-aligned layouts
 
 **Motion:**
+
 - Minimal animations
 - Fast, efficient transitions
 - No playful physics
 
 **Wallpaper:**
+
 - Barely visible (0.05 opacity)
 - Heavily desaturated
 - Functional background only
@@ -327,6 +392,7 @@ Mode: Laboratory (data-focused)
 Before delivering a mockup, verify:
 
 ### Design System Compliance
+
 - [ ] Uses only Federation Typography Stack (no Inter/Roboto)
 - [ ] All shapes are asymmetric (no uniform border-radius)
 - [ ] Colors from botanical palette
@@ -334,12 +400,14 @@ Before delivering a mockup, verify:
 - [ ] Mode-appropriate styling (Gallery vs Laboratory)
 
 ### V3.1 Typography
+
 - [ ] 5 fonts properly used (Curator, Proclamation, Bloom, Field Note, Annotation)
 - [ ] Cursive ONLY in Gallery mode hero/annotations
 - [ ] Fraunces uses extreme axes in Gallery (SOFT=100, WONK=1)
 - [ ] Work Sans full range utilized (100-900 if weight mixing)
 
 ### Accessibility
+
 - [ ] 4.5:1 contrast ratio minimum (7:1 for AAA)
 - [ ] ARIA labels on all interactive elements
 - [ ] Keyboard navigation support
@@ -347,6 +415,7 @@ Before delivering a mockup, verify:
 - [ ] No color-only indicators
 
 ### Anti-Slop Protocol
+
 - [ ] NO forbidden fonts (Inter, Roboto, Arial, Helvetica)
 - [ ] NO uniform corners (must be asymmetric)
 - [ ] NO purple/blue gradients
@@ -362,9 +431,11 @@ Before delivering a mockup, verify:
 [Uploads screenshot]
 
 **Claude:**
+
 1. Analyzes design visually
 2. Scores against 4 criteria
 3. Generates evaluation report:
+
    ```
    Northcote Curio Compliance: 45/100 (F)
    - Uses Inter font (forbidden)
@@ -389,6 +460,7 @@ Before delivering a mockup, verify:
 [Uploads wireframe sketch with annotations]
 
 **Claude:**
+
 1. **Analyzes:**
    - Hero needs large headline
    - Subtitle with cursive accent
@@ -413,6 +485,7 @@ Before delivering a mockup, verify:
 **User:** "Analyze this 5-page onboarding flow wireframe and create mockups for each page. Laboratory mode."
 
 **Claude:**
+
 1. **Analyzes:**
    - Extracts components from all 5 pages
    - Maps user flow (Step 1 → Step 2 → ... → Complete)
@@ -440,6 +513,7 @@ Before delivering a mockup, verify:
 ## 🎨 Interactive Mockup Features
 
 **HTML Artifacts Include:**
+
 - ✅ Hover states (buttons, cards, links)
 - ✅ Focus states (keyboard navigation)
 - ✅ Active states (button press)
@@ -449,6 +523,7 @@ Before delivering a mockup, verify:
 - ✅ Real design tokens via CSS custom properties
 
 **Interactions Demonstrated:**
+
 - Button hover → Color shift + elevation
 - Card hover → Scale + shadow
 - Input focus → Border glow + label animation
@@ -462,6 +537,7 @@ Before delivering a mockup, verify:
 ### When to Use This Skill
 
 **✅ USE FOR:**
+
 - Evaluating existing designs for Northcote compliance
 - Creating high-fidelity mockups from wireframes
 - Generating interactive prototypes for user testing
@@ -469,6 +545,7 @@ Before delivering a mockup, verify:
 - Validating accessibility before development
 
 **❌ DON'T USE FOR:**
+
 - Production-ready backend integration (use component-builder)
 - Complex state management (use component-builder)
 - Component migration (use component-transformer)
@@ -477,6 +554,7 @@ Before delivering a mockup, verify:
 ### Skill Integration
 
 **Workflow Integration:**
+
 ```
 ui-design-evaluator (mockup)
   → component-builder (production code)
@@ -491,12 +569,14 @@ ui-design-evaluator (mockup)
 ### Evaluation Scoring
 
 **400 Points Total:**
+
 - Northcote Curio V3.1 Compliance: 100 pts
 - Accessibility (WCAG AA): 100 pts
 - User Flow Logic: 100 pts
 - Visual Hierarchy & Typography: 100 pts
 
 **Grades:**
+
 - 360+ (90%) = A (Excellent)
 - 320-359 (80-89%) = B (Good)
 - 280-319 (70-79%) = C (Satisfactory)
@@ -506,6 +586,7 @@ ui-design-evaluator (mockup)
 ### Mode Selection
 
 **Gallery Mode:**
+
 - Landing pages
 - Marketing pages
 - Hero sections
@@ -513,6 +594,7 @@ ui-design-evaluator (mockup)
 - Profile pages
 
 **Laboratory Mode:**
+
 - Dashboards
 - Data tables
 - Forms
@@ -524,6 +606,7 @@ ui-design-evaluator (mockup)
 ## 📚 Related Skills
 
 **Use Together With:**
+
 - `component-builder` — Convert mockups to production code
 - `asset-placement-strategy` — Typography on wallpaper positioning
 - `northcote-curio-audit` — Validate final design token compliance

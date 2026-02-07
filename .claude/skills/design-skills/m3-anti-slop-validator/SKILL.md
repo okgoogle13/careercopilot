@@ -1,6 +1,8 @@
 ---
 name: m3-anti-slop-validator
 description: Detect and prevent generic AI aesthetics in Material Design 3 Expressive components. Forbids purple gradients, flat layouts, generic fonts (Inter, Roboto, Arial). Validates typography, colors, motion, and layout against M3 Expressive standards with 0-100 quality scoring.
+version: 1.0.0
+tags: []
 ---
 
 # M3 Anti-Slop Validator
@@ -37,7 +39,7 @@ Use this skill when you need to:
 - "Why does this feel like AI-generated slop?"
 - "Score this component's aesthetic quality"
 
-## Overview
+## Process
 
 This skill enforces M3 Expressive aesthetic standards by:
 
@@ -300,7 +302,8 @@ if (validation.aestheticQuality.total < 80) {
 - [m3-expressive-typography-enhancer](../m3-expressive-typography-enhancer/SKILL.md) - Enhance typography with variable fonts, extreme weight contrasts
 - [m3-visual-audit](../../../m3-visual-audit/SKILL.md) - Audit components against M3 Expressive visual standards
 - [brand-brief-optimizer](../../../brand-brief-optimizer/SKILL.md) - Stress-test briefs for M3 Expressive clarity
-- [token-orchestrator](../../../token-orchestrator/SKILL.md) - Validate M3 Expressive semantic tokens
+- [design-token-validator](file:///.claude/skills/design-token-validator/SKILL.md)
+- Validate M3 Expressive semantic tokens
 
 ---
 
