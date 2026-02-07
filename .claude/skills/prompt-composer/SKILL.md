@@ -1,6 +1,8 @@
 ---
 name: prompt-composer
 description: Automated prompt generation from pattern library. Input asset specifications → output production-ready Gemini prompt with validated patterns, negative constraints, and previous attempt corrections applied.
+version: 1.0.0
+tags: []
 ---
 
 # Prompt-Composer Skill
@@ -8,6 +10,12 @@ description: Automated prompt generation from pattern library. Input asset speci
 ## Purpose
 
 Eliminates manual prompt construction. Loads pattern library → applies templates → inserts asset specs → outputs Gemini-ready prompt. Prevents copy-paste errors and pattern inconsistency.
+
+## When to Use
+
+- When generating complex AI prompts for image generation (Gemini, DALL-E).
+- When applying design system patterns and negative constraints to prompts.
+- When iterating on prompts based on previous validation scores and violations.
 
 ## Input Format
 
@@ -157,7 +165,7 @@ CRITICAL FIXES:
 ✗ [Violation 2] → FIX: [Specific correction language]
 ```
 
-## Automation Logic
+## Process
 
 1. Load asset specifications JSON
 2. Query pattern library for applicable patterns

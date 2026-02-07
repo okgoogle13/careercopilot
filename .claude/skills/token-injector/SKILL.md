@@ -1,14 +1,22 @@
 ---
 name: token-injector
 description: Automated CSS variable injection from tokens.json. Parses design tokens → generates CSS custom properties → injects into stylesheets → replaces hardcoded values.
+version: 1.0.0
+tags: []
 ---
 
 # Token-Injector Skill
 
-## Function
+## Purpose
 
 Input: `tokens.json` + target CSS files
 Output: Updated stylesheets with CSS variables
+
+## When to Use
+
+- When updating the project's design tokens in `tokens.json`.
+- When automating the conversion of raw tokens into production-ready CSS variables.
+- When replacing hardcoded style values with token-based custom properties.
 
 ## Process
 
@@ -21,6 +29,7 @@ Output: Updated stylesheets with CSS variables
 ## Token Mapping
 
 **tokens.json:**
+
 ```json
 {
   "background": "#1A1714",
@@ -33,26 +42,29 @@ Output: Updated stylesheets with CSS variables
 ```
 
 **Generated CSS:**
+
 ```css
 :root {
-  --color-asphalt-black: #1A1714;
-  --color-waratah-red: #C45C4B;
-  --color-wattle-gold: #D4A84B;
-  --color-eucalyptus-sage: #7A9E82;
+  --color-asphalt-black: #1a1714;
+  --color-waratah-red: #c45c4b;
+  --color-wattle-gold: #d4a84b;
+  --color-eucalyptus-sage: #7a9e82;
 }
 ```
 
 ## Replacement Logic
 
 **Before:**
+
 ```css
 .card {
-  background: #1A1714;
-  border: 1px solid #C45C4B;
+  background: #1a1714;
+  border: 1px solid #c45c4b;
 }
 ```
 
 **After:**
+
 ```css
 .card {
   background: var(--color-asphalt-black);
@@ -63,6 +75,7 @@ Output: Updated stylesheets with CSS variables
 ## Batch Mode
 
 Process all asset `tokens.json` files:
+
 ```bash
 token-injector --input /assets/*/tokens.json --output /frontend/src/styles/northcote-tokens.css
 ```
@@ -81,4 +94,4 @@ token-injector --input /assets/*/tokens.json --output /frontend/src/styles/north
 
 ---
 
-*Tokens → CSS variables → automatic injection. Manual replacement eliminated.*
+_Tokens → CSS variables → automatic injection. Manual replacement eliminated._

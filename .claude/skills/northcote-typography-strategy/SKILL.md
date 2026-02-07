@@ -3,15 +3,29 @@ description: Apply "Maximum Expressive Playful" Northcote Curio typography using
   and Color fonts. Orchestrates 3 interaction tiers (Workhorse, Expressive, Accent)
   with dynamic axes (GRAD, WONK, SOFT) for Victorian-meets-Cyberpunk aesthetic.
 name: northcote-typography-strategy
+version: 1.0.0
+tags: []
 ---
 
-# Northcote Typography Strategy: Maximum Expressive Playful
+## Purpose
 
-## Overview
+Orchestrates the Northcote Curio "Maximum Expressive Playful" typography system using variable and color fonts across three interaction tiers (Workhorse, Expressive, Accent).
 
-Transforms Northcote Curio typography from static "Victorian" constraints into a **dynamic, living system**.
+## When to Use
 
-We achieve "Extreme Variability" not by adding more fonts, but by aggressively manipulating the axes of **three core Variable types**. This aligns with M3 Expressive guidance: **One for Reading, One for Shouting, One for Character.**
+- When designing or implementing UI sections that require the Northcote Victorian-meets-Cyberpunk aesthetic.
+- When applying dynamic font axes (GRAD, WONK, SOFT) for interactive or animated text.
+- When pairing script fonts with functional typography to balance readability and personality.
+
+## Process
+
+1. **Tier Identification**: Assign typography to one of three tiers (Workhorse, Expressive, Accent).
+2. **Axis Manipulation**:
+   - Use `GRAD` for layout-safe hover effects.
+   - Use `SOFT` and `WONK` for "Victorian" personality in headers.
+   - Map `wdth` to interactions for "breathing" text.
+3. **Drafting**: Apply the "Dramatic Juxtaposition" strategy for script flourishes.
+4. **Verification**: Check against the Anti-Patterns list (no system fonts, no weight shifts on hover).
 
 ## The Core Trinity (Magic Number 3)
 

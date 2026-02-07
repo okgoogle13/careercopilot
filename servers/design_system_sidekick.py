@@ -52,9 +52,8 @@ if os.getenv("SENTRY_DSN"):
 GEMINI_VISION_CANDIDATES = [
     # Prioritize 2.5 Pro for complex reasoning on ambiguity (Gallery vs Lab)
     "models/gemini-2.5-pro",
-    os.getenv("GEMINI_VISION_MODEL_PRIMARY", "gemini-2.0-flash"),
-    "models/gemini-2.5-flash",
     "models/gemini-2.0-flash",
+    "models/gemini-1.5-pro",
     "models/gemini-1.5-flash"
 ]
 

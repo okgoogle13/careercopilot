@@ -1,13 +1,23 @@
 ---
 name: jest-test-scaffolder
 description: "Scaffolds Jest unit tests for React components and hooks. Use when creating tests for frontend components."
+version: 1.0.0
+tags: []
 ---
 
 # Jest Test Scaffolder Workflow
 
-This skill creates comprehensive unit tests for React components using Jest, React Testing Library, and user-event.
+## Purpose
 
-## Workflow Steps
+Scaffolds comprehensive Jest unit tests for React components and hooks using React Testing Library and user-event.
+
+## When to Use
+
+- When creating unit tests for new or existing frontend components.
+- When ensuring accessibility and interaction coverage for UI elements.
+- When needing consistent test structures across the project.
+
+## Process
 
 1. **Identify component to test:**
    - Ask for component file path (e.g., `src/components/ui/Button/Button.tsx`)
@@ -192,7 +202,7 @@ This skill uses **Jest** (not Vitest):
 - `jest.spyOn()` instead of `vi.spyOn()`
 - Everything else is the same (React Testing Library patterns)
 
-## When NOT to Use This Skill
+## When NOT to Use
 
 - ❌ E2E tests → Use `webapp-testing` skill (Playwright)
 - ❌ Integration tests → Use `api-integration-test-scaffolder`
