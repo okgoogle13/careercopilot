@@ -1,12 +1,24 @@
 ---
 name: project-health-checker
 description: "Quick diagnostic tool (30s) running validation and health checks. Use for fast status checks. Related: audit-agent for comprehensive security and code quality audits."
+version: 1.0.0
+tags: []
 ---
 
-# Project Health Check Workflow
+## Purpose
 
-1.  Inform the user you are starting the full project health check.
-2.  Run Validator: `python3 scripts/production-secrets-validator.py`
-3.  Run Config Test: `python3 scripts/test-configuration.py`
-4.  Run Genkit Verification: `python3 verify_genkit.py`
-5.  Report a summary of all outputs.
+A quick diagnostic tool (30s) that runs essential validation and health checks to ensure the project is in a consistent state.
+
+## When to Use
+
+- Before starting a new feature or refactor.
+- After making configuration changes.
+- To verify Genkit and production secret status quickly.
+
+## Process
+
+1. **Notification**: Inform the user you are starting the full project health check.
+2. **Validator**: Run `python3 scripts/production-secrets-validator.py`.
+3. **Config Test**: Run `python3 scripts/test-configuration.py`.
+4. **Genkit Verification**: Run `python3 verify_genkit.py`.
+5. **Reporting**: Provide a summary of all outputs.

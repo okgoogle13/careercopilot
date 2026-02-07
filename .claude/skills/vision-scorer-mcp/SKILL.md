@@ -2,19 +2,38 @@
 name: vision-scorer-mcp
 description: MCP server extending Design System Sidekick with programmatic vision-based compliance scoring. Replaces manual Northcote Visual Audit with deterministic measurements.
 type: mcp-server
+version: 1.0.0
+tags: []
 ---
 
 # Vision-Scorer MCP Server
 
 ## Purpose
 
-Add to Design System Sidekick MCP server. Provides programmatic asset validation via Gemini Vision API.
+Programmatic asset validation using Gemini Vision API via the Design System Sidekick MCP server. Provides deterministic, measurement-based compliance scoring for Northcote assets.
+
+## When to Use
+
+- When needing deterministic measurements of color, density, and translucency.
+- When performing automated batch validation of DALL-E or AI-generated assets.
+- When integrating vision-based scoring into CI/CD or dashboarding workflows.
+
+## Process
+
+1. **Load Image**: Programmatically load the asset via the MCP `score_asset_compliance` tool.
+2. **Measurement**:
+   - Extract hex colors and verify against palette.
+   - Detect and identify specimens.
+   - Analyze density zones and translucency physics.
+3. **Scoring**: Calculate scores across 6 dimensions (Geographic, Translucency, Scale, etc.).
+4. **Decision**: Return a structured JSON with an overall score and a REGENERATE/PACKAGE decision.
 
 ## New MCP Tools
 
 ### 1. `score_asset_compliance`
 
 **Input:**
+
 ```json
 {
   "image_path": "/path/to/asset.png",
@@ -24,6 +43,7 @@ Add to Design System Sidekick MCP server. Provides programmatic asset validation
 ```
 
 **Process:**
+
 1. Load image via Vision API
 2. Extract colors (sample 50 points → hex codes)
 3. Identify specimens (Vision recognition + geographic DB lookup)
@@ -33,6 +53,7 @@ Add to Design System Sidekick MCP server. Provides programmatic asset validation
 7. Score 6 dimensions (0-20 each)
 
 **Output:**
+
 ```json
 {
   "overall_score": 87,
@@ -45,10 +66,7 @@ Add to Design System Sidekick MCP server. Provides programmatic asset validation
     "background_color": 9,
     "typography": 8
   },
-  "violations": [
-    "Spider molt appears opaque (no transmission)",
-    "Upper-left density 25% (exceeds 20% threshold)"
-  ],
+  "violations": ["Spider molt appears opaque (no transmission)", "Upper-left density 25% (exceeds 20% threshold)"],
   "correction_prompt": "CRITICAL FIXES:\n- Spider: '60-80% light-transmissive amber chitin'\n- Upper-left: '200×200px COMPLETELY EMPTY'"
 }
 ```
@@ -66,8 +84,8 @@ Add to Design System Sidekick MCP server. Provides programmatic asset validation
     "accents": ["#7A9E82", "#D4885C"]
   },
   "specimens": [
-    {"name": "Waratah", "size_cm": 15, "position": "upper_right"},
-    {"name": "Frill-neck", "size_cm": 18, "position": "center"}
+    { "name": "Waratah", "size_cm": 15, "position": "upper_right" },
+    { "name": "Frill-neck", "size_cm": 18, "position": "center" }
   ],
   "density": {
     "upper_left": 18,
@@ -85,14 +103,11 @@ Add to Design System Sidekick MCP server. Provides programmatic asset validation
 ```json
 {
   "progression": [
-    {"attempt": 1, "score": 68, "key_failure": "Geographic violations"},
-    {"attempt": 2, "score": 87, "key_failure": "Density zones"},
-    {"attempt": 3, "score": 92, "decision": "PACKAGE"}
+    { "attempt": 1, "score": 68, "key_failure": "Geographic violations" },
+    { "attempt": 2, "score": 87, "key_failure": "Density zones" },
+    { "attempt": 3, "score": 92, "decision": "PACKAGE" }
   ],
-  "pattern_learnings": [
-    "Adding negative constraints improved specimen accuracy",
-    "Density zone pixel specs more effective than percentages"
-  ]
+  "pattern_learnings": ["Adding negative constraints improved specimen accuracy", "Density zone pixel specs more effective than percentages"]
 }
 ```
 
@@ -101,6 +116,7 @@ Add to Design System Sidekick MCP server. Provides programmatic asset validation
 **File:** `/servers/design_system_sidekick.py`
 
 **Add Vision API Integration:**
+
 ```python
 import google.generativeai as genai
 
@@ -108,27 +124,27 @@ class VisionScorer:
     def score_asset_compliance(self, image_path, asset_id, target_score):
         # Load image
         image = genai.upload_file(image_path)
-        
+
         # Vision analysis prompt
         prompt = """
         Analyze this Northcote Curio asset:
-        
+
         1. Extract hex colors (background + palette)
         2. Identify specimens (names + sizes)
         3. Measure density zones (upper-left, lower-right, central %)
         4. Detect translucency (which specimens show transmission?)
         5. Count typography labels
-        
+
         Return structured JSON.
         """
-        
+
         model = genai.GenerativeModel('gemini-2.0-flash-exp')
         response = model.generate_content([prompt, image])
-        
+
         # Parse response → score dimensions
         data = parse_vision_response(response.text)
         scores = calculate_dimension_scores(data)
-        
+
         return {
             "overall_score": sum(scores.values()),
             "dimensions": scores,
@@ -139,6 +155,7 @@ class VisionScorer:
 ## Integration
 
 **Claude Desktop Config:**
+
 ```json
 {
   "mcpServers": {
@@ -190,4 +207,4 @@ vs Manual: 10 minutes conversational validation
 
 ---
 
-*Extends Design System Sidekick with vision-based compliance scoring. Manual audit → programmatic measurement.*
+_Extends Design System Sidekick with vision-based compliance scoring. Manual audit → programmatic measurement._

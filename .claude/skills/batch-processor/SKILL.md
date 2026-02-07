@@ -1,6 +1,8 @@
 ---
 name: batch-processor
 description: Parallel processing for validated assets. Input array of 3-5 assets → simultaneous IDF extraction, package generation, file operations. Replaces serial workflow with parallel execution.
+version: 1.0.0
+tags: []
 ---
 
 # Batch-Processor Skill
@@ -8,6 +10,12 @@ description: Parallel processing for validated assets. Input array of 3-5 assets
 ## Purpose
 
 Process multiple validated assets simultaneously. Input: array of 3-5 asset paths. Output: complete packages in parallel. Eliminates sequential bottleneck.
+
+## When to Use
+
+- When processing multiple (3-5) validated assets simultaneously to save time.
+- When performing bulk IDF extractions, package generations, and file operations.
+- When the serial asset processing workflow becomes a bottleneck.
 
 ## Input
 
@@ -40,6 +48,7 @@ Process multiple validated assets simultaneously. Input: array of 3-5 asset path
 ## Parallel Operations
 
 **1. IDF Extraction (Flash-Sidekick)**
+
 ```python
 # Parallel calls
 results = await Promise.all([
@@ -52,17 +61,20 @@ results = await Promise.all([
 
 **2. Package Generation**
 Template-based parallel creation:
+
 - context.md × 3 assets
-- tokens.json × 3 assets  
+- tokens.json × 3 assets
 - usage.md × 3 assets
 
 **3. Directory Creation**
+
 ```bash
 mkdir -p /assets/ASSET-{3,4,6}-*/
 ```
 
 **4. File Copy Operations**
 Parallel cp commands:
+
 ```bash
 cp asset-3.png /frontend/public/assets/patterns/ &
 cp asset-4.png /frontend/public/assets/specimens/ &
@@ -71,12 +83,13 @@ wait
 ```
 
 **5. Single Consolidated Commit**
+
 ```bash
 git add /assets/ASSET-{3,4,6}-* /frontend/public/assets/*
 git commit -m "feat(assets): Add batch theatrical specimens - Assets 3,4,6"
 ```
 
-## Workflow
+## Process
 
 1. Receive array of validated assets
 2. Spawn parallel IDF extraction (Flash-Sidekick)
@@ -88,25 +101,30 @@ git commit -m "feat(assets): Add batch theatrical specimens - Assets 3,4,6"
 ## Integration
 
 **Flash-Sidekick:**
+
 - `batch_file_analysis` for parallel IDF extraction
 - Returns aggregated results JSON
 
 **Asset-Packager:**
+
 - Batch mode trigger
 - Receives array instead of single asset
 
 **Codex CLI:**
+
 - Executes batch file operations
 - Handles git operations
 
 ## Efficiency Gain
 
 **Sequential (3 assets):**
+
 - IDF extraction: 15 min (5 min each)
 - Packaging: 45 min (15 min each)
 - Total: 60 min
 
 **Parallel (3 assets):**
+
 - IDF extraction: 5 min (parallel)
 - Packaging: 10 min (template-based)
 - Total: 15 min
@@ -135,4 +153,4 @@ batch_result = batch_processor.run(
 
 ---
 
-*Parallel processing eliminates sequential bottleneck. 3 assets in 15 min vs 60 min serial.*
+_Parallel processing eliminates sequential bottleneck. 3 assets in 15 min vs 60 min serial._

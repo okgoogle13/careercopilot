@@ -5,15 +5,15 @@ description: Analyze component screenshots and design artifacts against Northcot
   and botanical motif integration. Generate compliance assessments and design evolution
   analysis.
 name: northcote-visual-audit
+version: 1.0.0
+tags: []
 ---
 
 # Northcote Visual Audit Skill
 
-## Overview
+## Purpose
 
-Closes the gap between specification and reality. Uses Claude's vision capabilities to visually analyze component screenshots and validate them against Northcote Curio design standards.
-
-This skill transforms design system management from **specification-heavy and hope-driven** to **visually-grounded and continuously validated**.
+Analyze component screenshots and design artifacts against Northcote Curio visual standards using Claude's vision capabilities. Ensures typography, color, and layout align with the Victorian-Naturalist aesthetic.
 
 ## When to Use This Skill
 
@@ -27,7 +27,7 @@ Use this skill when you need to:
 - **Generate compliance reports** (pass/fail/needs-refinement assessments)
 - **Identify design system drift** (are components becoming more or less Northcote?)
 
-## How It Works
+## Process
 
 The skill uses Claude's vision capabilities to:
 

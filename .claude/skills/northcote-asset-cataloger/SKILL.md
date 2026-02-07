@@ -1,15 +1,24 @@
 ---
 name: northcote-asset-cataloger
 description: Visual triage analyst for Northcote Curio design system. Analyzes uncategorized assets against northcote-curio-manifest.json to generate executable action plans (move/delete/variant). Performs gap analysis, duplicate detection, and mode compliance validation. Outputs structured JSON for automated batch processing.
+version: 1.0.0
+tags: []
 ---
 
 # Northcote Asset Cataloger
 
 **Manifest-driven triage and gap analysis for Northcote Curio assets.**
 
-## Mission Statement
+## Purpose
 
-Perform comprehensive visual analysis of assets in `assets/uncategorized/` against the canonical manifest and existing library. Output an **executable action plan** in strict JSON format that enables automated file operations and manifest updates.
+Perform comprehensive visual analysis of assets in `assets/uncategorized/` against the canonical manifest to generate an executable action plan in JSON format.
+
+## Process
+
+1. **Gap Analysis**: Load the manifest and identify "Missing" IDs (e.g., ASSET-7 to ASSET-19).
+2. **Visual Triage**: Analyze uncategorized assets for manifest matches, duplicates, or variants.
+3. **Action Mapping**: Assign triage categories (MATCH, DUPLICATE, VARIANT, etc.) and generate shell instructions.
+4. **Output Generation**: Produce `assets/asset_triage_plan.json` for automated batch processing.
 
 ## When to Use
 
@@ -22,9 +31,11 @@ Perform comprehensive visual analysis of assets in `assets/uncategorized/` again
 ## Triage Categories
 
 ### 1. MANIFEST_MATCH (Priority: CRITICAL)
+
 Visually fulfills documented "Missing" slot in manifest.
 
 **Output**: Move instruction with correct naming
+
 ```json
 {
   "asset": "assets/uncategorized/phase3-015.png",
@@ -39,9 +50,11 @@ Visually fulfills documented "Missing" slot in manifest.
 ```
 
 ### 2. DUPLICATE (Priority: REMOVE)
+
 Visually identical to existing canonical file.
 
 **Output**: Delete instruction
+
 ```json
 {
   "asset": "assets/uncategorized/phase3-002.png",
@@ -53,9 +66,11 @@ Visually identical to existing canonical file.
 ```
 
 ### 3. VARIANT (Priority: MEDIUM)
+
 Useful alternative with meaningful differences.
 
 **Output**: Move with `-variant-N` suffix
+
 ```json
 {
   "asset": "assets/uncategorized/phase3-003.png",
@@ -69,9 +84,11 @@ Useful alternative with meaningful differences.
 ```
 
 ### 4. NEW_CANDIDATE (Priority: LOW)
+
 Novel asset with value, not matching manifest/existing.
 
 **Output**: Move to category with descriptive name
+
 ```json
 {
   "asset": "assets/uncategorized/phase3-042.png",
@@ -85,9 +102,11 @@ Novel asset with value, not matching manifest/existing.
 ```
 
 ### 5. DISCARD (Priority: REMOVE)
+
 Low quality, noise, test artifacts, no clear use.
 
 **Output**: Delete with reason
+
 ```json
 {
   "asset": "assets/uncategorized/phase3-005.png",
@@ -120,6 +139,7 @@ Low quality, noise, test artifacts, no clear use.
 Save to: `assets/asset_triage_plan.json`
 
 **Schema**:
+
 ```json
 {
   "metadata": {

@@ -92,9 +92,22 @@ system_prompt: |
   ```
 ---
 
-# Skill: PDF Text Extractor
+## Purpose
 
-This skill uses Claude's multimodal (vision) capabilities to read and process PDF documents. It can be used for full text extraction, summarization, Q&A, or structured data extraction.
+Extracts textual content, summaries, or structured data from PDF documents using Claude's multimodal vision capabilities.
+
+## When to Use
+
+- When needing to pull raw text from a PDF for processing or analysis.
+- When summarizing multi-page reports or documents.
+- When extracting specific fields from forms using a JSON schema.
+
+## Process
+
+1. **Ingestion**: Process all provided PDF documents.
+2. **Task Determination**: Analyze the prompt for extraction, summarization, Q&A, or data extraction.
+3. **Execution**: Maintain reading order and extract content according to task requirements.
+4. **Format**: Return a valid JSON object entry for each document.
 
 ## Agent Call
 

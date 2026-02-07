@@ -2,13 +2,28 @@
 name: task-router-mcp
 description: Multi-agent task orchestration MCP server. Queue-based workflow where Claude Desktop assigns tasks → agents claim → execute → report completion → next task auto-assigned.
 type: mcp-server
+version: 1.0.0
+tags: []
 ---
 
 # Task-Router MCP Server
 
-## Function
+## Purpose
 
-Coordinates multi-agent workflows via task queue. Eliminates manual handoffs.
+Coordinates multi-agent workflows via a task queue, eliminating manual handoffs and ensuring autonomous execution.
+
+## When to Use
+
+- When delegating long-running or complex tasks to specialized agents (e.g., Gemini, Codex).
+- When orchestrating multi-step workflows where output from one agent is input for another.
+
+## Process
+
+1. **Task Creation**: Orchestrator (Claude Desktop) creates tasks with specific inputs.
+2. **Polling**: Agents poll the JSON-based queue for pending tasks.
+3. **Claiming**: An agent marks a task as `in_progress`.
+4. **Execution**: The agent performs the task and outputs results.
+5. **Completion**: The agent reports completion, triggering the next task in the chain.
 
 ## Architecture
 
@@ -45,6 +60,7 @@ Next Task Auto-assigned
 ### 2. `claim_task`
 
 Agent marks task as in-progress:
+
 ```json
 {
   "task_id": "asset-3-generation",
@@ -57,6 +73,7 @@ Agent marks task as in-progress:
 ### 3. `complete_task`
 
 Agent reports completion:
+
 ```json
 {
   "task_id": "asset-3-generation",
@@ -72,6 +89,7 @@ Agent reports completion:
 ### 4. `list_tasks`
 
 Query tasks by status/agent:
+
 ```json
 {
   "status": "pending",
@@ -84,6 +102,7 @@ Returns array of matching tasks.
 ### 5. `rollback_task`
 
 If validation fails, rollback to previous state:
+
 ```json
 {
   "task_id": "asset-3-validation",
@@ -97,29 +116,32 @@ If validation fails, rollback to previous state:
 **Phase: Asset 3 Generation**
 
 1. Claude Desktop creates task:
+
 ```json
 {
   "task_id": "asset-3-gen",
   "assigned_to": "gemini",
-  "inputs": {"prompt": "...", "resolution": "512x512"},
+  "inputs": { "prompt": "...", "resolution": "512x512" },
   "next_task": "asset-3-validate"
 }
 ```
 
 2. Gemini polls queue → claims task → generates → completes:
+
 ```json
 {
   "status": "completed",
-  "outputs": {"image_path": "/downloads/asset-3.png"}
+  "outputs": { "image_path": "/downloads/asset-3.png" }
 }
 ```
 
 3. Router auto-creates next task:
+
 ```json
 {
   "task_id": "asset-3-validate",
   "assigned_to": "claude-desktop",
-  "inputs": {"image_path": "/downloads/asset-3.png"}
+  "inputs": { "image_path": "/downloads/asset-3.png" }
 }
 ```
 
@@ -137,7 +159,7 @@ class TaskRouter:
     def __init__(self):
         self.queue_file = "/tmp/northcote-task-queue.json"
         self.tasks = self.load_queue()
-    
+
     def create_task(self, task_data):
         task = {
             "task_id": task_data['task_id'],
@@ -149,20 +171,20 @@ class TaskRouter:
         self.tasks.append(task)
         self.save_queue()
         return task
-    
+
     def claim_task(self, task_id, agent):
         task = self.get_task(task_id)
         task['status'] = 'in_progress'
         task['claimed_by'] = agent
         task['claimed_at'] = datetime.now().isoformat()
         self.save_queue()
-    
+
     def complete_task(self, task_id, outputs):
         task = self.get_task(task_id)
         task['status'] = 'completed'
         task['outputs'] = outputs
         task['completed_at'] = datetime.now().isoformat()
-        
+
         # Auto-create next task if specified
         if task.get('next_task'):
             self.create_task({
@@ -170,13 +192,14 @@ class TaskRouter:
                 'assigned_to': task['next_assigned_to'],
                 'inputs': outputs  # Previous outputs → next inputs
             })
-        
+
         self.save_queue()
 ```
 
 ## Integration
 
 **Claude Desktop Config:**
+
 ```json
 {
   "mcpServers": {
@@ -193,6 +216,7 @@ class TaskRouter:
 Each agent polls queue every 30 seconds:
 
 **Gemini (Antigravity):**
+
 ```python
 while True:
     tasks = mcp.call_tool("task-router", "list_tasks", {
@@ -213,6 +237,7 @@ while True:
 ## Progress Tracking
 
 Dashboard view:
+
 ```json
 {
   "total_tasks": 47,
@@ -220,9 +245,9 @@ Dashboard view:
   "in_progress": 3,
   "pending": 21,
   "by_agent": {
-    "gemini": {"completed": 10, "in_progress": 1},
-    "claude-code": {"completed": 8, "in_progress": 2},
-    "codex": {"completed": 5, "in_progress": 0}
+    "gemini": { "completed": 10, "in_progress": 1 },
+    "claude-code": { "completed": 8, "in_progress": 2 },
+    "codex": { "completed": 5, "in_progress": 0 }
   }
 }
 ```
@@ -237,4 +262,4 @@ Dashboard view:
 
 ---
 
-*Queue-based orchestration. Manual coordination → automatic workflow.*
+_Queue-based orchestration. Manual coordination → automatic workflow._

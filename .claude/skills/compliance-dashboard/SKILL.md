@@ -5,11 +5,13 @@ description: Real-time compliance tracking for Northcote Curio design system. Mo
   system maturity. Feeds data from visual audits and component inventories into health
   metrics.
 name: compliance-dashboard
+version: 1.0.0
+tags: []
 ---
 
 # Compliance Dashboard Skill
 
-## Overview
+## Purpose
 
 Transforms design system validation from **point-in-time audits** into **continuous visibility**. Tracks Northcote Curio adoption across your component library, reveals trends (improving or diverging?), and identifies high-priority refinement targets.
 
@@ -56,30 +58,30 @@ The skill aggregates data from multiple sources:
 
 ### Core Metrics
 
-| Metric | What It Measures | Green | Yellow | Red |
-|---|---|---|---|---|
-| **Overall Compliance** | % of components passing audit | 80%+ | 60-79% | <60% |
-| **Typography Distinctiveness** | % using Northcote fonts, not defaults | 90%+ | 70-89% | <70% |
-| **Color Palette Adherence** | % using Australian botanical colors | 85%+ | 65-84% | <65% |
-| **Layout Intentionality** | % with organic spacing, not mechanical | 80%+ | 60-79% | <60% |
-| **Botanical Integration** | % with meaningful (not decorative) motifs | 70%+ | 50-69% | <50% |
-| **Component Migration** | % using Northcote names (Pebble, Stone, etc.) | 100% | 80-99% | <80% |
+| Metric                         | What It Measures                              | Green | Yellow | Red  |
+| ------------------------------ | --------------------------------------------- | ----- | ------ | ---- |
+| **Overall Compliance**         | % of components passing audit                 | 80%+  | 60-79% | <60% |
+| **Typography Distinctiveness** | % using Northcote fonts, not defaults         | 90%+  | 70-89% | <70% |
+| **Color Palette Adherence**    | % using Australian botanical colors           | 85%+  | 65-84% | <65% |
+| **Layout Intentionality**      | % with organic spacing, not mechanical        | 80%+  | 60-79% | <60% |
+| **Botanical Integration**      | % with meaningful (not decorative) motifs     | 70%+  | 50-69% | <50% |
+| **Component Migration**        | % using Northcote names (Pebble, Stone, etc.) | 100%  | 80-99% | <80% |
 
 ### Trend Metrics
 
-| Metric | Meaning | Good Trend | Bad Trend |
-|---|---|---|---|
-| **Compliance Trajectory** | Is system getting more or less Northcote? | Upward | Downward |
-| **Audit Consistency** | Are results becoming more predictable? | Stabilizing | Diverging |
-| **Refinement Rate** | How many components improve per quarter? | High | Low |
+| Metric                    | Meaning                                   | Good Trend  | Bad Trend |
+| ------------------------- | ----------------------------------------- | ----------- | --------- |
+| **Compliance Trajectory** | Is system getting more or less Northcote? | Upward      | Downward  |
+| **Audit Consistency**     | Are results becoming more predictable?    | Stabilizing | Diverging |
+| **Refinement Rate**       | How many components improve per quarter?  | High        | Low       |
 
 ### Strategic Metrics
 
-| Metric | What It Reveals |
-|---|---|
+| Metric                  | What It Reveals                                                         |
+| ----------------------- | ----------------------------------------------------------------------- |
 | **Brief Effectiveness** | Do audit results match brief guidance? (Consistency = brief is working) |
-| **Component Maturity** | Average number of audit iterations before pass |
-| **Priority Gap** | Which dimensions most commonly fail (where to focus)? |
+| **Component Maturity**  | Average number of audit iterations before pass                          |
+| **Priority Gap**        | Which dimensions most commonly fail (where to focus)?                   |
 
 ## Dashboard Views
 
@@ -166,15 +168,19 @@ Impact on Overall: +3-5% compliance
 ## Integration with Other Skills
 
 ### With Northcote-Visual-Audit
+
 Each visual audit automatically feeds results into the dashboard. Monthly automated audits create historical baseline.
 
 ### With Codebase-Orchestrator
+
 Component inventory data feeds dashboard to track migration completion percentage.
 
 ### With Brand-Brief-Optimizer
+
 If brief clarity score is high but component compliance is low, the brief isn't guiding work effectively (signals need for training/alignment).
 
 ### With Northcote-Typography-Strategy
+
 Typography audit results feed directly into compliance metrics, showing which components have distinctive fonts vs. generic defaults.
 
 ## Handover Integration
@@ -183,18 +189,21 @@ Compliance dashboard automatically integrates with orchestrator handover mode to
 
 **Priority Calculation:**
 Dashboard calculates handover task sequence based on:
+
 1. **Compliance Score**: Components with lowest scores prioritized (highest impact)
 2. **Blocking Dependencies**: Components blocking other migrations moved up
 3. **Usage Frequency**: Most-used components prioritized (highest user impact)
 
 **Handover Contribution:**
 Dashboard feeds orchestrator with:
+
 - Component visual audit status (pass/fail/needs-refinement)
 - Compliance dimensions needing focus (typography, color, layout, botanical)
 - Historical trend data (improving or regressing?)
 - Dimension-specific gaps (where to focus effort)
 
 **Output Example:**
+
 ```json
 {
   "compliance_metrics": {...},
@@ -220,6 +229,7 @@ Dashboard feeds orchestrator with:
 ```
 
 **Workflow:**
+
 1. Orchestrator identifies components needing migration
 2. Dashboard scores compliance and identifies gaps
 3. Dashboard calculates priority (impact + blocking + frequency)
@@ -230,6 +240,7 @@ Dashboard feeds orchestrator with:
 ## Workflow: Continuous Monitoring
 
 ### Monthly (Automated)
+
 1. Screenshot deployed components
 2. Run visual audits
 3. Update compliance metrics
@@ -237,6 +248,7 @@ Dashboard feeds orchestrator with:
 5. Identify new issues
 
 ### Quarterly (Manual Review)
+
 1. Analyze trends
 2. Discuss compliance trajectory with team
 3. Identify strategic focus areas
@@ -244,6 +256,7 @@ Dashboard feeds orchestrator with:
 5. Celebrate milestones
 
 ### Annually (Comprehensive)
+
 1. Review full year of compliance data
 2. Assess design system maturity
 3. Update brief based on learnings
@@ -252,35 +265,43 @@ Dashboard feeds orchestrator with:
 ## Key Insights the Dashboard Reveals
 
 ### Insight 1: Brief Effectiveness
-If visual audits are consistently passing, your brief is clear and guiding work.  
+
+If visual audits are consistently passing, your brief is clear and guiding work.
 If audits are inconsistent, brief language needs clarification.
 
 ### Insight 2: Component Maturity
-If components need many audit iterations to pass, your standards are complex or brief isn't clear.  
+
+If components need many audit iterations to pass, your standards are complex or brief isn't clear.
 If most pass on first audit, team understands brief well.
 
 ### Insight 3: Strategic Gaps
+
 Which dimension fails most often? That's where to invest in brief clarity and training.
 
 ### Insight 4: Timeline to Excellence
+
 Current trajectory projected forward shows when you'll hit 90% compliance (production excellence).
 
 ## Example Scenarios
 
 ### Scenario 1: Strong Compliance, Downward Trend
-**Problem**: Something changed (new team member, brief misunderstanding, pressure to ship fast)  
+
+**Problem**: Something changed (new team member, brief misunderstanding, pressure to ship fast)
 **Response**: Identify what changed, re-align team, potentially update brief if standards evolved
 
 ### Scenario 2: Weak Compliance, Upward Trend
-**Good news**: You're moving in right direction  
+
+**Good news**: You're moving in right direction
 **Response**: Accelerate effort, add resources, celebrate progress
 
 ### Scenario 3: Strong Typography, Weak Botanical
-**Insight**: Typography strategy is clear and guiding decisions  
+
+**Insight**: Typography strategy is clear and guiding decisions
 Botanical guidance needs clarification or examples
 
 ### Scenario 4: Stalled Progress
-**Problem**: Compliance stuck at 70% for two quarters  
+
+**Problem**: Compliance stuck at 70% for two quarters
 **Response**: Analyze why, could be unclear standards, resource constraints, or competing priorities
 
 ## Creating a Culture of Excellence Through Visibility
@@ -299,15 +320,22 @@ That visibility transforms design system work from thankless compliance to **vis
 
 This skill:
 
-✅ Tracks compliance trends over time  
-✅ Aggregates data from multiple audit sources  
-✅ Reveals strategic gaps in brief or execution  
-✅ Provides visible progress indicators  
+✅ Tracks compliance trends over time
+✅ Aggregates data from multiple audit sources
+✅ Reveals strategic gaps in brief or execution
+✅ Provides visible progress indicators
 
-❌ Cannot guarantee consistency across auditors (human judgment involved)  
-❌ Doesn't fix components (only reveals what needs fixing)  
-❌ Requires regular audit data (skipped months create gaps)  
+❌ Cannot guarantee consistency across auditors (human judgment involved)
+❌ Doesn't fix components (only reveals what needs fixing)
+❌ Requires regular audit data (skipped months create gaps)
 ❌ Metrics are relative to your standards, not industry benchmarks
+
+## Process
+
+1. **Data Aggregation**: Collect audit results, inventory counts, and historical trends.
+2. **Metric Calculation**: Calculate compliance percentages across core dimensions.
+3. **Trend Analysis**: Monitor maturity trajectory over time.
+4. **Prioritization**: Identify high-impact components for next refinement cycles.
 
 ## Success Criteria
 
@@ -329,4 +357,4 @@ That shift from binary to directional thinking enables continuous improvement.
 
 ---
 
-*A great design system is measured in its ability to guide consistent, excellent work. The dashboard shows whether you're achieving that.*
+_A great design system is measured in its ability to guide consistent, excellent work. The dashboard shows whether you're achieving that._
