@@ -1,16 +1,65 @@
 {
   "mcpServers": {
-    "flash_sidekick_mcp": {
-      "command": "/Users/okgoogle13/.pyenv/versions/3.12.3/bin/python",
+    "filesystem": {
+      "command": "npx",
       "args": [
-        "/Users/okgoogle13/Desktop/careercopilot/servers/flash_sidekick.py"
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "/Users/okgoogle13/Desktop/careercopilot"
       ]
     },
-    "design_system_sidekick_mcp": {
+    "git": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-git",
+        "--repository",
+        "/Users/okgoogle13/Desktop/careercopilot"
+      ]
+    },
+    "task-router": {
+      "command": "/Users/okgoogle13/.pyenv/versions/3.12.3/bin/python",
+      "args": [
+        "/Users/okgoogle13/Desktop/careercopilot/servers/task_router_mcp.py"
+      ]
+    },
+    "design-system-sidekick": {
       "command": "/Users/okgoogle13/.pyenv/versions/3.12.3/bin/python",
       "args": [
         "/Users/okgoogle13/Desktop/careercopilot/servers/design_system_sidekick.py"
-      ]
+      ],
+      "env": {
+        "GEMINI_API_KEY": "${GEMINI_API_KEY}"
+      }
+    },
+    "vision-scorer-mcp": {
+      "command": "/Users/okgoogle13/.pyenv/versions/3.12.3/bin/python",
+      "args": [
+        "/Users/okgoogle13/Desktop/careercopilot/servers/vision_scorer_mcp.py"
+      ],
+      "env": {
+        "GEMINI_API_KEY": "${GEMINI_API_KEY}"
+      }
+    }
+  },
+  "skills": {
+    "codebase-orchestrator": {
+      "path": "/Users/okgoogle13/Desktop/careercopilot/.claude/skills/codebase-orchestrator/SKILL.md"
+    },
+    "compliance-dashboard": {
+      "path": "/Users/okgoogle13/Desktop/careercopilot/.claude/skills/compliance-dashboard/SKILL.md"
+    },
+    "asset-placement-strategy": {
+      "path": "/Users/okgoogle13/Desktop/careercopilot/.claude/skills/component-extractor/SKILL.md"
+    },
+    "pattern-learner": {
+      "path": "/Users/okgoogle13/Desktop/careercopilot/.claude/skills/pattern-learner/SKILL.md"
+    },
+    "token-injector": {
+      "path": "/Users/okgoogle13/Desktop/careercopilot/.claude/skills/token-injector/SKILL.md"
+    },
+    "batch-processor": {
+      "path": "/Users/okgoogle13/Desktop/careercopilot/.claude/skills/batch-processor/SKILL.md"
     }
   }
 }

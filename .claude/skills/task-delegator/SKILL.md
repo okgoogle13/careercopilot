@@ -1,21 +1,25 @@
 ---
 name: task-delegator
 description: "Delegate tasks to specialized agents and coordinate multi-agent workflows for parallel test generation"
+version: 1.0.0
+tags: []
 ---
 
 # Task Delegator Skill - Jules Coordination
 
 This skill coordinates parallel execution of test generation across 8 Jules instances for accelerated coverage improvement.
 
-## Overview
+## Purpose
 
-**Purpose:** Orchestrate massive-scale test generation by delegating work to multiple Jules instances running in parallel
+Coordinates parallel execution of test generation across multiple Jules instances to accelerate codebase coverage improvement.
 
-**Scope:** Manage 8 parallel batches (66 components) for Week 1 coverage acceleration
+## When to Use
 
-**Success Metric:** Week 1 target = 66 components tested, 53% coverage achieved
+- When managing massive-scale test generation (e.g., 60+ components).
+- When orchestrating parallel batches of work across multiple specialized agents.
+- When tracking coverage progress and consolidating results from multi-agent workflows.
 
-## Workflow Overview
+## Process
 
 ### Phase 1: Preparation (Days 1-2)
 

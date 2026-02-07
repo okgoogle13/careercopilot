@@ -110,7 +110,7 @@ Every page must breathe. No interface should feel entirely constructed—somewhe
 
 | Asset                             | Placement                                               | Z-Index | Behavior                                                                   |
 | --------------------------------- | ------------------------------------------------------- | ------- | -------------------------------------------------------------------------- |
-| `texture-laboratory-paper-white`    | Full viewport background                                | Z-0     | Static, color-matched to #F5F2EB                                           |
+| `texture-laboratory-paper-white`  | Full viewport background                                | Z-0     | Static, color-matched to #F5F2EB                                           |
 | `motif-laboratory-skeleton-etch`  | Centered behind drop zone, 6% opacity                   | Z-1     | Static watermark                                                           |
 | `motif-laboratory-stamp-verified` | Appears on successful upload, bottom-right of drop zone | Z-3     | Stamp animation: scale from 150% with rotation, settles with bounce easing |
 | `motif-laboratory-compass`        | Top-right corner, 30% opacity                           | Z-2     | Static orientation marker                                                  |
@@ -125,7 +125,7 @@ Every page must breathe. No interface should feel entirely constructed—somewhe
 
 | Asset                            | Placement                                           | Z-Index | Behavior                                                     |
 | -------------------------------- | --------------------------------------------------- | ------- | ------------------------------------------------------------ |
-| `texture-laboratory-paper-white`   | Full viewport                                       | Z-0     | Static                                                       |
+| `texture-laboratory-paper-white` | Full viewport                                       | Z-0     | Static                                                       |
 | `texture-laboratory-grid-major`  | Overlay across entire viewport                      | Z-1     | 8% opacity, reinforcing measurement context                  |
 | `motif-laboratory-compass`       | Left column, functioning as the "Match Score Gauge" | Z-2     | Needle rotation animated based on score value (0-100° range) |
 | `motif-laboratory-skeleton-etch` | Fragmentary appearance in empty grid cells          | Z-1     | 4% opacity, decorative continuity                            |
@@ -170,7 +170,7 @@ Every page must breathe. No interface should feel entirely constructed—somewhe
 
 | Asset                            | Placement                             | Z-Index | Behavior                                   |
 | -------------------------------- | ------------------------------------- | ------- | ------------------------------------------ |
-| `texture-laboratory-paper-white`   | Full viewport                         | Z-0     | Static                                     |
+| `texture-laboratory-paper-white` | Full viewport                         | Z-0     | Static                                     |
 | `texture-laboratory-grid-minor`  | Editor panel only, 5% opacity         | Z-1     | Suggests ruled paper                       |
 | `motif-laboratory-compass`       | Bottom-right corner of Evidence panel | Z-2     | 25% opacity, static orientation            |
 | `motif-laboratory-skeleton-etch` | Fragmentary in Evidence panel header  | Z-1     | 8% opacity, connecting to earlier analysis |
@@ -185,7 +185,7 @@ Every page must breathe. No interface should feel entirely constructed—somewhe
 
 | Asset                             | Placement                    | Z-Index | Behavior                                                       |
 | --------------------------------- | ---------------------------- | ------- | -------------------------------------------------------------- |
-| `texture-laboratory-paper-white`    | Full viewport                | Z-0     | Increased grain texture                                        |
+| `texture-laboratory-paper-white`  | Full viewport                | Z-0     | Increased grain texture                                        |
 | `texture-laboratory-grid-major`   | Preview panel, 10% opacity   | Z-1     | When "Bot View" active: shifts to red (#B85450) at 15% opacity |
 | `motif-laboratory-stamp-verified` | Appears on "Finalize" action | Z-3     | Stamp animation as on Ingestion                                |
 | `motif-laboratory-compass`        | Control panel header         | Z-2     | Static, 40% opacity                                            |
@@ -200,7 +200,7 @@ Every page must breathe. No interface should feel entirely constructed—somewhe
 
 | Asset                            | Placement                                         | Z-Index | Behavior                      |
 | -------------------------------- | ------------------------------------------------- | ------- | ----------------------------- |
-| `texture-laboratory-paper-white`   | Full viewport                                     | Z-0     | Static                        |
+| `texture-laboratory-paper-white` | Full viewport                                     | Z-0     | Static                        |
 | `motif-laboratory-skeleton-etch` | Large, centered behind settings cards, 4% opacity | Z-1     | Static architectural presence |
 | `motif-laboratory-compass`       | Header area, integrated with navigation           | Z-2     | Static                        |
 | `texture-laboratory-grid-minor`  | Behind individual settings cards                  | Z-1     | 6% opacity                    |
@@ -361,6 +361,21 @@ Every page must breathe. No interface should feel entirely constructed—somewhe
 | `motif-gallery-banksia-pot`    | `bottom: -60px; left: -40px` | 280px width                 | Z-2     | Static                   |
 | `motif-gallery-firefly-sprite` | Scattered, viewport-relative | 8-16px diameter             | Z-3     | Animated (8s, staggered) |
 | `pattern-nocturnal-canopy`     | Full viewport cover          | 100%                        | Z-0     | Static, 25% opacity      |
+
+#### Machine-Readable Design Intent
+
+<accessibility>
+- **Focus Order**: 1. Nav Dock (Home), 2. Feature Cards (A->B->C), 3. Action Links.
+- **Keyboard Nav**: Left/Right arrows for feature card navigation; Tab for primary actions.
+- **Alt Text**: "Nocturnal canopy wallpaper with wattle accents and glowing fireflies."
+- **Reduced Motion**: Disable parallax on wattle-hanging and disable firefly pulse animations.
+</accessibility>
+
+<constraints>
+- **Density**: High Drama (Poster Style). Maximum 1 primary action above-the-fold.
+- **Color**: NO text below 4.5:1 contrast ratio against the nocturnal canopy.
+- **Visual Priority**: Headline (72pt+) -> Primary Call-to-Action -> Feature Cards.
+</constraints>
 
 ---
 
@@ -539,11 +554,11 @@ Every page must breathe. No interface should feel entirely constructed—somewhe
 
 #### Functional Annotations
 
-| Element             | Specification                  | Token Reference                                |
-| ------------------- | ------------------------------ | ---------------------------------------------- |
+| Element             | Specification                    | Token Reference                                |
+| ------------------- | -------------------------------- | ---------------------------------------------- |
 | **Background**      | `texture-laboratory-paper-white` | `color.semantic.surface.laboratory.fieldPaper` |
-| **Drop Zone Width** | 900px fixed                    | Custom specification                           |
-| **Accepted Files**  | PDF only                       | Validation rule                                |
+| **Drop Zone Width** | 900px fixed                      | Custom specification                           |
+| **Accepted Files**  | PDF only                         | Validation rule                                |
 
 #### Content Annotations
 
@@ -574,7 +589,7 @@ Every page must breathe. No interface should feel entirely constructed—somewhe
 
 | Asset ID                          | Position                  | Size               | Z-Index | Behavior            |
 | --------------------------------- | ------------------------- | ------------------ | ------- | ------------------- |
-| `texture-laboratory-paper-white`    | Full viewport             | 100%               | Z-0     | Static              |
+| `texture-laboratory-paper-white`  | Full viewport             | 100%               | Z-0     | Static              |
 | `motif-laboratory-skeleton-etch`  | Centered behind drop zone | 60% viewport width | Z-1     | Static, 6% opacity  |
 | `motif-laboratory-compass`        | `top: 40px; right: 40px`  | 120px              | Z-2     | Static, 30% opacity |
 | `motif-laboratory-stamp-verified` | Drop zone bottom-right    | 140px              | Z-3     | Animated on success |
@@ -643,7 +658,7 @@ Every page must breathe. No interface should feel entirely constructed—somewhe
 
 | Asset ID                         | Position               | Size           | Z-Index | Behavior           |
 | -------------------------------- | ---------------------- | -------------- | ------- | ------------------ |
-| `texture-laboratory-paper-white`   | Full viewport          | 100%           | Z-0     | Static             |
+| `texture-laboratory-paper-white` | Full viewport          | 100%           | Z-0     | Static             |
 | `texture-laboratory-grid-major`  | Full viewport overlay  | 100%           | Z-1     | Static, 8% opacity |
 | `motif-laboratory-compass`       | Left column, centered  | 280px diameter | Z-2     | Needle animated    |
 | `motif-laboratory-skeleton-etch` | Empty card backgrounds | Fragmentary    | Z-1     | 4% opacity         |
@@ -867,7 +882,7 @@ Every page must breathe. No interface should feel entirely constructed—somewhe
 
 | Asset ID                         | Position                     | Size        | Z-Index | Behavior            |
 | -------------------------------- | ---------------------------- | ----------- | ------- | ------------------- |
-| `texture-laboratory-paper-white`   | Full viewport                | 100%        | Z-0     | Static              |
+| `texture-laboratory-paper-white` | Full viewport                | 100%        | Z-0     | Static              |
 | `texture-laboratory-grid-minor`  | Editor panel only            | 100% panel  | Z-1     | 5% opacity          |
 | `motif-laboratory-compass`       | Evidence panel, bottom-right | 100px       | Z-2     | Static, 25% opacity |
 | `motif-laboratory-skeleton-etch` | Evidence panel header        | Fragmentary | Z-1     | 8% opacity          |
@@ -944,7 +959,7 @@ Every page must breathe. No interface should feel entirely constructed—somewhe
 
 | Asset ID                          | Position                   | Size       | Z-Index | Behavior                            |
 | --------------------------------- | -------------------------- | ---------- | ------- | ----------------------------------- |
-| `texture-laboratory-paper-white`    | Full viewport              | 100%       | Z-0     | Increased grain                     |
+| `texture-laboratory-paper-white`  | Full viewport              | 100%       | Z-0     | Increased grain                     |
 | `texture-laboratory-grid-major`   | Preview panel              | 100% panel | Z-1     | 10% opacity (15% red when Bot View) |
 | `motif-laboratory-compass`        | Control panel header       | 80px       | Z-2     | Static, 40% opacity                 |
 | `motif-laboratory-stamp-verified` | Preview panel, on finalize | 160px      | Z-3     | Animated on action                  |
@@ -1020,7 +1035,7 @@ Every page must breathe. No interface should feel entirely constructed—somewhe
 
 | Asset ID                         | Position                | Size         | Z-Index | Behavior                  |
 | -------------------------------- | ----------------------- | ------------ | ------- | ------------------------- |
-| `texture-laboratory-paper-white`   | Full viewport           | 100%         | Z-0     | Static                    |
+| `texture-laboratory-paper-white` | Full viewport           | 100%         | Z-0     | Static                    |
 | `texture-laboratory-grid-minor`  | Behind each card        | 100% card    | Z-1     | 6% opacity                |
 | `motif-laboratory-skeleton-etch` | Centered, full viewport | 50% viewport | Z-1     | 4% opacity, architectural |
 | `motif-laboratory-compass`       | Header navigation       | 60px         | Z-2     | Static                    |
@@ -1121,7 +1136,7 @@ All assets follow this pattern for traceability:
 | Type      | Mode                    | Examples                                   |
 | --------- | ----------------------- | ------------------------------------------ |
 | `motif`   | `gallery`, `laboratory` | `motif-gallery-sentry-kookaburra-1024.png` |
-| `texture` | `gallery`, `laboratory` | `texture-laboratory-paper-white-tile.jpg`    |
+| `texture` | `gallery`, `laboratory` | `texture-laboratory-paper-white-tile.jpg`  |
 | `pattern` | `gallery`, `laboratory` | `pattern-nocturnal-canopy-2048.jpg`        |
 | `icon`    | `shared`                | `icon-shared-compass-navigation.svg`       |
 
@@ -1132,7 +1147,7 @@ All assets follow this pattern for traceability:
 | —            | Kookaburra Sentry            | `motif-gallery-sentry-kookaburra.png`     | Gallery    | ✅ Available       |
 | —            | Banksia Pot                  | `motif-gallery-botanical-banksia-pot.png` | Gallery    | ✅ Available       |
 | —            | Nocturnal Canopy             | `pattern-nocturnal-canopy-2048.jpg`       | Gallery    | ✅ Available       |
-| —            | Paper White Texture            | `texture-laboratory-paper-white-tile.jpg`   | Laboratory | ✅ Available       |
+| —            | Paper White Texture          | `texture-laboratory-paper-white-tile.jpg` | Laboratory | ✅ Available       |
 | —            | Botanical Banksia            | `motif-gallery-botanical-banksia.png`     | Gallery    | ✅ Available       |
 | **ASSET-7**  | Firefly Sprite (Glow)        | `northcote-firefly-sprite.png`            | Gallery    | 🔴 **Missing/Gap** |
 | **ASSET-8**  | Fossil Verification Mark     | `northcote-verification-stamp.png`        | Laboratory | 🔴 **Missing/Gap** |

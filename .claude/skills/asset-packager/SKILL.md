@@ -1,6 +1,8 @@
 ---
 name: asset-packager
 description: Automated asset packaging—converts validated PNG + IDF JSON into complete production bundle (context.md, tokens.json, usage.md). Eliminates 30 manual file generations across 10 assets.
+version: 1.0.0
+tags: []
 ---
 
 # Asset-Packager Skill
@@ -8,6 +10,12 @@ description: Automated asset packaging—converts validated PNG + IDF JSON into 
 ## Purpose
 
 Automates asset packaging after validation. Input: validated PNG + IDF. Output: complete directory with context/tokens/usage files + production file copy + git commit. Replaces 15 min manual work with 2 min automated execution.
+
+## When to Use
+
+- When a new asset has been validated and scored ≥90.
+- When generating the standard production bundle (context, tokens, usage) for a design asset.
+- When needing to automate git commits and file distribution for newly packaged assets.
 
 ## Input Requirements
 
@@ -18,9 +26,9 @@ Automates asset packaging after validation. Input: validated PNG + IDF. Output: 
   "validated_png": "/downloads/asset-3-validated.png",
   "compliance_score": 92,
   "idf_data": {
-    "colors": {"background": "#1A1714", "wattle_gold": "#D4A84B"},
+    "colors": { "background": "#1A1714", "wattle_gold": "#D4A84B" },
     "specimens": ["Eucalyptus", "Wattle", "Banksia"],
-    "dimensions": {"width": 512, "height": 512},
+    "dimensions": { "width": 512, "height": 512 },
     "mode": "Gallery",
     "purpose": "Seamless background pattern"
   }
@@ -30,9 +38,11 @@ Automates asset packaging after validation. Input: validated PNG + IDF. Output: 
 ## Generated Files
 
 ### 1. context.md
+
 Narrative philosophy explaining specimen choices, geometric principles, mode context.
 
 **Template:**
+
 ```markdown
 # Asset [N]: [Name]
 
@@ -55,9 +65,11 @@ Laboratory: [Clinical/analytical interpretation]
 ```
 
 ### 2. tokens.json
+
 Machine-readable design specifications.
 
 **Structure:**
+
 ```json
 {
   "asset_id": "ASSET-3",
@@ -78,9 +90,11 @@ Machine-readable design specifications.
 ```
 
 ### 3. usage.md
+
 CSS implementation with responsive behavior, opacity ranges, placement guidelines.
 
 **Template:**
+
 ```markdown
 # Usage Guidelines
 
@@ -88,12 +102,12 @@ CSS implementation with responsive behavior, opacity ranges, placement guideline
 
 \`\`\`css
 .asset-[name] {
-  background-image: url('/assets/[path]');
-  background-size: [cover|contain|repeat];
-  background-position: center;
+background-image: url('/assets/[path]');
+background-size: [cover|contain|repeat];
+background-position: center;
 }
 
-/* Opacity by context */
+/_ Opacity by context _/
 .gallery-hero { opacity: 0.85; }
 .gallery-content { opacity: 0.70; }
 .dashboard { opacity: 0.60; }
@@ -111,9 +125,10 @@ Recommended for: [Components list]
 Avoid for: [Contexts where inappropriate]
 ```
 
-## Automation Steps
+## Process
 
 1. **Create Directory**
+
    ```bash
    mkdir -p /assets/ASSET-[N]-[slug]/
    ```
@@ -134,9 +149,11 @@ Avoid for: [Contexts where inappropriate]
    - List component integration targets
 
 5. **Copy Production File**
+
    ```bash
    cp [validated_png] /frontend/public/assets/[category]/[filename]
    ```
+
    Categories: wallpapers, patterns, specimens, icons
 
 6. **Git Commit**
@@ -148,14 +165,17 @@ Avoid for: [Contexts where inappropriate]
 ## Integration Points
 
 **Flash-Sidekick:**
+
 - Call `generate_idf` on validated PNG → extract design tokens
 - Call `quick_summarize` on specimen list → generate narrative
 
 **Auto-Validator:**
+
 - Trigger: score ≥90 → auto-package
 - Input: validation JSON + PNG path
 
 **Claude Code:**
+
 - Delegates file operations and git commits
 - Verifies directory structure creation
 
@@ -185,6 +205,7 @@ packager_result = asset_packager.run(
 
 **Assets Directory:** `ASSET-[N]-[kebab-case-name]/`
 **Production Files:**
+
 - Wallpapers: `texture-[mode]-[name]-[width].png`
 - Patterns: `[name]-tile-[size].png`
 - Specimens: `specimen-[name]-[style]-[size].png`
@@ -192,4 +213,4 @@ packager_result = asset_packager.run(
 
 ---
 
-*Eliminates repetitive packaging work. Validated asset → production bundle in 2 minutes.*
+_Eliminates repetitive packaging work. Validated asset → production bundle in 2 minutes._

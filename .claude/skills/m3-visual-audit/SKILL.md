@@ -1,164 +1,184 @@
 ---
 name: m3-visual-audit
-description: Analyze component screenshots and design artifacts against Material Design 3 visual standards. Validate typography (type scale, semantic fonts), color palette (semantic tokens), layout (Material 3 spacing grid), and component states. Generate compliance assessments and design maturity analysis.
+description: Analyze component screenshots against Material Design 3 Expressive standards. Validate typography (variable fonts, extreme contrasts), color (vibrant tokens), layout (organic asymmetry), motion (spring physics), and expressive distinctiveness. Generate compliance assessments with 0-100 scoring.
+version: 1.0.0
+tags: []
 ---
 
-# Material Design 3 Visual Audit Skill
+# M3 Expressive Visual Audit Skill
 
-## Overview
+## Purpose
 
-Closes the gap between Material Design 3 specification and reality. Uses Claude's vision capabilities to visually analyze component screenshots and validate them against M3 standards.
+Analyze component screenshots against Material Design 3 Expressive standards using Claude's vision capabilities. Validates typography, color, layout, and motion to ensure personality-driven design and prevent "AI slop".
 
-This skill transforms design system management from **specification-heavy and hope-driven** to **visually-grounded and continuously validated**.
+## M3 Expressive Design Principles (Audit Context)
+
+This skill validates components against M3 Expressive standards, which extend Material Design 3 baseline with:
+
+| Principle      | M3 Baseline                   | M3 Expressive                                                       |
+| -------------- | ----------------------------- | ------------------------------------------------------------------- |
+| **Typography** | Clean, professional (Roboto)  | Variable fonts, extreme contrasts (Sora, Plus Jakarta Sans 300-900) |
+| **Color**      | Semantic tokens, neutral      | Vibrant semantic tokens, high saturation (40-80%)                   |
+| **Motion**     | Efficient (250-300ms, linear) | Springy, playful (250-400ms, cubic-bezier overshoot)                |
+| **Layout**     | Grid-aligned, mechanical      | Organic asymmetry, intentional "imperfection"                       |
+| **Components** | Predictable, minimal          | Personality-driven, visually distinctive                            |
+
+This audit validates the **Expressive** layer, not just baseline M3 compliance.
 
 ## When to Use This Skill
 
 Use this skill when you need to:
 
-- **Audit a component screenshot** against Material Design 3 standards
-- **Validate typography choices** (type scale, semantic usage)
-- **Check color palette adherence** (semantic tokens, tonal system)
-- **Assess layout coherence** (Material 3 spacing grid, elevation)
-- **Compare component evolution** (design iteration maturity)
-- **Generate compliance reports** (pass/fail/needs-refinement assessments)
-- **Identify design system drift** (are components drifting from M3?)
-- **Validate component states** (disabled, hover, active, focus, error)
+- **Audit a component screenshot** against M3 Expressive standards
+- **Validate typography choices** (are fonts distinctive and intentional?)
+- **Check color palette adherence** (are colors vibrant and M3 Expressive compliant?)
+- **Assess layout coherence** (is spacing organic or mechanical?)
+- **Evaluate motion quality** (spring physics vs. linear easing?)
+- **Compare component evolution** (Baseline M3 → M3 Expressive transformation)
 
-## How It Works
+## Process
 
-The skill uses Claude's vision capabilities to:
-
-1. **Analyze visual properties** of rendered components
-2. **Extract design data** (typography, colors, spacing, elevation, states)
-3. **Validate against M3 spec** (does it match Material Design 3 standards?)
-4. **Generate audit report** (structured assessment with pass/fail per criterion)
-5. **Suggest refinements** (where and how to improve)
+1. **Input Screenshot**: Accept and process the component screenshot.
+2. **Vision Analysis**: Use Claude Vision to detect fonts, weight contrasts, color tokens, and layout patterns.
+3. **Audit Dimensions**:
+   - Typography (Variable fonts, 3x+ weight ratio)
+   - Color (Vibrant tokens, 40-80% saturation)
+   - Layout (Organic asymmetry, varied spacing)
+   - Motion (Spring physics, bloom effect)
+4. **Generate Report**: Produce a structured JSON assessment with a 0-100 score and specific remediation steps.
 
 ## Audit Criteria
 
 ### 1. Typography Audit
 
-**Pass**: Material 3 type scale applied (Display Large → Label Small), fonts render as intended, hierarchy clear
-**Needs Refinement**: Good fonts but scale inconsistent or hierarchy ambiguous
-**Fail**: Off-scale typography, generic fonts (Inter, Arial), hierarchy unclear
+**Pass**: Distinctive variable fonts (Sora, Poppins, Plus Jakarta Sans) with extreme weight contrasts (3x+ ratio: 300-900). Optical sizing enabled. Clear hierarchy.
+
+**Needs Refinement**: Correct fonts but timid contrasts (1.25x ratio) or hierarchy unclear.
+
+**Fail**: Generic fonts (Inter, Roboto, Arial alone) or undefined hierarchy.
 
 **Specifics to Check:**
-- Type scale applied correctly (Display Large, Display Medium, Display Small, Headline Large/Medium/Small, Title Large/Medium/Small, Body Large/Medium/Small, Label Large/Medium/Small)
-- Font family intentional (primary semantic font, secondary if present)
-- Weight applied correctly (300-400 for body, 500-700 for emphasis)
-- Optical sizing enabled (if variable fonts used)
-- Hierarchy unambiguous (size, weight, color separation)
+
+- Font family: Sora/Poppins/Plus Jakarta Sans Variable (not Inter/Roboto)
+- Weight contrast: 3x+ ratio (100 vs 900, not 400 vs 500)
+- Size contrast: 3x+ ratio (57px vs 12px, not 24px vs 16px)
+- Optical sizing: Enabled (font-optical-sizing: auto)
+- Hierarchy: Display → Headline → Body → Label clear
 
 ### 2. Color Audit
 
-**Pass**: Semantic tokens used (primary, secondary, tertiary, error, neutral), tonal system applied, dark mode coherent
-**Needs Refinement**: Correct tokens but tonal harmony feels off or dark mode incomplete
-**Fail**: Arbitrary hex values, colors disconnected from Material 3 palette, no dark mode support
+**Pass**: M3 Expressive vibrant semantic tokens used (primary, secondary, tertiary, error, neutral at vibrant tones), tonal system applied with 40-80% saturation, dark mode coherent, no baseline M3 colors.
 
-**Specifics to Check:**
-- Semantic tokens applied (primary, secondary, tertiary, error, neutral tones)
-- On-surface variants present (text readability ensured)
-- Contrast ratios meet WCAG AA (4.5:1 body text, 3:1 large text)
-- Dark mode consistent (if applicable)
-- No hardcoded hex values (all from M3 semantic token set)
+**Needs Refinement**: Correct tokens but saturation too muted or dark mode incomplete; mixing baseline + expressive tokens.
+
+**Fail**: Arbitrary hex values, baseline M3 colors (not vibrant), purple gradients, generic blue (#2196F3), no dark mode support.
+
+**M3 Expressive Specific Checks:**
+
+- ✅ Primary token uses vibrant tone (not baseline)
+- ✅ Secondary token uses vibrant tone (not baseline)
+- ✅ Tertiary token uses vibrant tone (not baseline)
+- ✅ Saturation 40-80% (vibrant, not muted)
+- ❌ No purple gradients (#7C4DFF → #9C27B0)
+- ❌ No generic Material Blue (#2196F3)
+- ✅ Tonal variants have purpose (on-surface for text, container for backgrounds)
+- ✅ Dark mode uses vibrant tokens, not desaturated versions
 
 ### 3. Layout Audit
 
-**Pass**: Material 3 spacing grid applied (8dp), elevation tokens used, clear hierarchy, responsive behavior intentional
-**Needs Refinement**: Good spacing but slightly mechanical or grid inconsistent
-**Fail**: Grid-agnostic, mechanical patterns, hierarchy ambiguous
+**Pass**: Organic spacing, intentional asymmetry, clear visual hierarchy, varied spacing rhythm (8px, 16px, 24px, 40px).
+
+**Needs Refinement**: Good spacing but feels slightly mechanical or hierarchy ambiguous.
+
+**Fail**: Grid-rigid, mechanical patterns, uniform spacing, predictable cookie-cutter layouts.
 
 **Specifics to Check:**
-- Spacing follows 8dp grid (or defined spacing scale)
-- Elevation tokens applied (not hardcoded shadows)
-- Component padding/margin consistent with M3 standards
-- State changes visible and distinct (hover, active, disabled, focus)
-- Responsive behavior intentional (breakpoints, reflow)
 
-### 4. Component State Audit
+- Spacing rhythm: Varied (not uniform 16px everywhere)
+- Asymmetry: Intentional (not grid-mechanical)
+- Visual hierarchy: Clear and dramatic (not subtle)
+- Elevation: Layered depth (not flat)
 
-**Pass**: All states present, visually distinct, accessible, and follow M3 state layer system
-**Needs Refinement**: States present but some visually ambiguous
-**Fail**: Missing states, states hard to distinguish, focus state invisible
+### 4. State Visibility Audit
+
+**Pass**: All states present (default, hover, active, disabled, focus, error), clearly distinct, accessible.
+
+**Needs Refinement**: States present but distinctions subtle or focus state unclear.
+
+**Fail**: Missing states, states indistinguishable, no focus indicator.
+
+### 5. Motion Audit
+
+**Pass (M3 Baseline)**: Duration tokens applied (short/medium/long), standard M3 easing curves (emphasized/standard/decelerate), motion supports clarity.
+
+**Pass (M3 Expressive)**: Duration tokens applied, M3 Expressive spring physics easing (cubic-bezier(0.34, 1.56, 0.64, 1)), hover states show "bloom" effect (scale + elevation), motion feels alive and responsive.
+
+**Needs Refinement**: Motion present but easing curves inconsistent or lacks spring physics personality.
+
+**Fail**: No motion, static components, linear easing, motion hinders clarity, seizure-risk patterns.
+
+**M3 Expressive Motion Specifics:**
+
+- ✅ Easing: cubic-bezier(0.34, 1.56, 0.64, 1) (spring physics with overshoot)
+- ✅ Hover state: Scale increase (1.02-1.05) + elevation increase = "bloom" effect
+- ✅ Duration: 250-400ms (M3 Expressive is slower for springiness)
+- ✅ State transitions: smooth, not jarring
+- ✅ Reduced motion: Respects `prefers-reduced-motion` (instant state change, no motion)
+- ✅ Interaction feedback: Clear and immediate
+- ❌ Not: Linear easing (feels stiff)
+- ❌ Not: Instant transitions (feels unresponsive)
+- ❌ Not: Motion that obscures clarity
+
+**M3 Expressive Motion Philosophy**: Motion should make components feel **alive and responsive**, not functional and efficient.
+
+### 6. Expressive Distinctiveness Audit (NEW - M3 Expressive Only)
+
+**Purpose**: Validates that component has intentional personality, not generic/slop aesthetics.
+
+**Pass**: Component shows clear personality, intentional design choices, high-contrast elements, distinctive form.
+
+**Needs Refinement**: Component has some personality but could be bolder or more distinctive.
+
+**Fail**: Generic/cookie-cutter design, looks like "AI slop," no personality.
 
 **Specifics to Check:**
-- Default state clear
-- Hover state visible (opacity layer or elevation change)
-- Active state distinct
-- Disabled state clearly indicated (reduced opacity, no interaction)
-- Focus state visible (outline or fill change, keyboard accessible)
-- Error state uses semantic error token
-- Loading state indicated clearly
 
-### 5. Motion Audit (If Present)
+- Font distinctiveness: Does typography show personality? (not Inter alone)
+- Weight contrast: Are weight differences extreme (3x+)? or timid (1.25x)?
+- Shape distinctiveness: Does component have organic asymmetry? or mechanical uniformity?
+- Visual hierarchy: Is hierarchy dramatic and clear? or subtle and timid?
+- Color personality: Do colors feel intentional and vibrant? or safe and muted?
+- Motion personality: Do interactions feel springy and alive? or stiff and functional?
+- Overall: Does this component feel like "M3 Expressive" (personality-driven)? or "M3 Baseline" (restrained)?
 
-**Pass**: Duration tokens applied, easing curves intentional (emphasized/standard/decelerate), motion supports clarity
-**Needs Refinement**: Motion present but easing curves inconsistent or durations off-spec
-**Fail**: No motion consistency, seizure-risk patterns, motion hinders clarity
+**Validation Checklist:**
 
-**Specifics to Check:**
-- Duration tokens applied (short: 50ms, medium: 250ms, long: 500ms per M3)
-- Easing curves use M3 standard (emphasized: cubic-bezier(0.05, 0.7, 0.1, 1), standard: cubic-bezier(0.4, 0, 0.2, 1), decelerate: cubic-bezier(0, 0, 0.2, 1))
-- Motion purpose clear (emphasize, guide attention, provide feedback)
-- No seizure-risk patterns
-- Respects `prefers-reduced-motion` media query
+- [ ] Typography shows personality (not generic font alone)
+- [ ] Weight/size contrasts are extreme (3x+, not timid)
+- [ ] Shapes show organic asymmetry (not mechanical grid)
+- [ ] Colors feel vibrant and intentional (not safe/muted)
+- [ ] Interactions show spring physics (cubic-bezier overshoot)
+- [ ] Overall personality clear (this is M3 Expressive, not baseline)
+- [ ] No "AI slop" markers (purple gradients, timid contrasts, generic fonts)
 
-### 6. Overall Aesthetic Coherence
+### 7. Overall Aesthetic Coherence
 
-**Pass**: Component clearly embodies Material Design 3 vision; unmistakably intentional and on-spec
-**Needs Refinement**: Good direction but missing some M3 coherence or feels slightly off
-**Fail**: Feels generic, inconsistent, or like it ignores M3 principles
+**Pass (M3 Baseline)**: Component clearly embodies Material Design 3 standards; unmistakably intentional and on-spec.
 
-## Usage Examples
+**Pass (M3 Expressive)**: Component clearly embodies M3 Expressive principles (distinctive personality, extreme contrasts, spring physics, vibrant tokens, organic asymmetry); unmistakably intentional and personality-driven, not generic/slop.
 
-### Example 1: Basic Component Audit
+**Needs Refinement**: Good direction but missing some M3 Expressive coherence (colors too muted, typography too restrained, motion too stiff, shapes too mechanical, personality unclear).
 
-"Audit this Material Design 3 button screenshot against M3 standards"
+**Fail**: Feels generic ("AI slop"), inconsistent, ignores M3 Expressive principles, no personality.
 
-Upload screenshot. Claude will:
+**M3 Expressive Coherence Test:**
+Look at the component and ask:
 
-1. Identify fonts, colors, spacing, elevation
-2. Assess against each criterion
-3. Generate pass/fail for each dimension
-4. Provide specific recommendations
-5. Return structured JSON report
+- ✅ Does this feel like intentional M3 Expressive design? (personality-driven, springy, extreme contrasts)
+- ❌ Or does it feel like baseline M3? (restrained, minimal, efficient)
+- ❌ Or does it feel like generic/slop? (purple gradients, generic fonts, flat layout, cookie-cutter)
 
-### Example 2: Comparative Analysis
-
-"Compare this old Material Design 2 button to the new M3 version and document the evolution"
-
-Upload both screenshots. Claude will:
-
-1. Analyze original (Material Design 2 aesthetics)
-2. Analyze updated (Material Design 3 aesthetic)
-3. Document typography transformation
-4. Assess color palette shift (to M3 semantic system)
-5. Evaluate motion/elevation changes
-6. Tell the story of the design transformation
-
-### Example 3: Batch Component Auditing
-
-"Audit all components in this directory screenshot collection against M3 standards"
-
-Multiple screenshots. Claude will:
-
-1. Audit each component individually
-2. Generate pass/fail for each
-3. Identify patterns (what's working, what's not)
-4. Summarize compliance across portfolio
-5. Highlight priority refinement targets
-
-### Example 4: Design Evolution Tracking
-
-"Show me how this component has evolved through versions toward M3 compliance"
-
-Historical screenshots. Claude will:
-
-1. Analyze progression across versions
-2. Identify where M3 principles solidified
-3. Note when intentionality increased
-4. Document visual maturity trajectory
-5. Assess current alignment with M3
+If you answer baseline or slop, needs refinement or fail.
 
 ## The Audit Report Format
 
@@ -167,161 +187,149 @@ Structured JSON output for integration with compliance dashboards:
 ```json
 {
   "audit": {
-    "component_name": "M3 Button",
-    "design_system": "Material Design 3",
-    "audit_date": "2026-02-05T...",
+    "component_name": "M3 Expressive Button",
+    "design_system": "Material Design 3 Expressive",
+    "audit_date": "2026-02-07T...",
     "overall_status": "pass|needs_refinement|fail",
     "compliance_score": 0-100,
+    "m3_expressive_score": 0-100,
 
     "dimensions": {
       "typography": {
         "status": "pass|needs_refinement|fail",
-        "findings": "Roboto type scale applied, Display Large for emphasis",
+        "findings": "Plus Jakarta Sans Variable, weight 600, distinctive personality",
+        "m3_expressive_assessment": "Excellent - uses vibrant variable font with extreme weight contrast",
         "specifics": {
-          "type_scale": "Label Large",
-          "font_family": "Roboto Flex",
-          "weight_applied": 500,
-          "hierarchy_clarity": "clear"
+          "font_family": "Plus Jakarta Sans Variable",
+          "weight_applied": 600,
+          "hierarchy_clarity": "clear",
+          "distinctiveness": "high",
+          "generic_font_risk": "none"
         }
       },
       "color": {
         "status": "pass|needs_refinement|fail",
-        "findings": "Primary semantic token, on-surface variant for text",
+        "findings": "Primary vibrant semantic token, high saturation",
+        "m3_expressive_assessment": "Excellent - uses M3 Expressive vibrant token, no baseline colors",
         "specifics": {
           "primary_token": "used",
-          "on_surface_variant": "applied",
-          "contrast_ratio": "4.8:1",
-          "dark_mode": "coherent"
-        }
-      },
-      "layout": {
-        "status": "pass|needs_refinement|fail",
-        "findings": "8dp spacing grid applied, elevation token used",
-        "specifics": {
-          "spacing_grid": "8dp",
-          "elevation_token": "level3",
-          "padding": "16dp vertical, 24dp horizontal",
-          "hierarchy_clarity": "strong"
-        }
-      },
-      "component_states": {
-        "status": "pass|needs_refinement|fail",
-        "findings": "All states present and visually distinct",
-        "specifics": {
-          "default": "clear",
-          "hover": "elevation increase + opacity layer",
-          "active": "state layer applied",
-          "disabled": "opacity 38%",
-          "focus": "outline visible",
-          "error": "semantic error token"
+          "token_vibrance": "expressive",
+          "saturation_level": "65%",
+          "no_purple_gradients": true,
+          "no_generic_blue": true
         }
       },
       "motion": {
         "status": "pass|needs_refinement|fail",
-        "findings": "Duration tokens applied, easing curves intentional",
+        "findings": "Spring physics on hover, bloom effect with overshoot easing",
+        "m3_expressive_assessment": "Excellent - uses signature M3 Expressive spring physics",
         "specifics": {
-          "duration": "250ms (medium token)",
-          "easing_curve": "standard",
-          "purpose": "state transition feedback"
+          "duration": "300ms (medium token)",
+          "easing_curve": "cubic-bezier(0.34, 1.56, 0.64, 1)",
+          "easing_type": "spring_physics",
+          "hover_effect": "bloom (scale 1.03 + elevation)",
+          "motion_personality": "alive_and_responsive"
+        }
+      },
+      "expressive_distinctiveness": {
+        "status": "pass|needs_refinement|fail",
+        "findings": "Component shows clear personality and intentional distinctiveness",
+        "specifics": {
+          "personality_level": "high",
+          "generic_risk": "none",
+          "ai_slop_markers": "none",
+          "visual_distinctiveness": "high_contrast_intentional"
         }
       }
     },
 
-    "assessment": "Component strongly embodies Material Design 3 standards",
+    "m3_expressive_validation": {
+      "no_generic_fonts": true,
+      "extreme_contrasts": true,
+      "spring_physics_applied": true,
+      "vibrant_tokens_used": true,
+      "organic_asymmetry": true,
+      "intentional_personality": true,
+      "zero_ai_slop": true
+    },
+
+    "assessment": "Component strongly embodies Material Design 3 Expressive standards with personality-driven design, extreme typography contrasts, and spring physics interactions",
     "recommendations": [
-      "Consider using emphasis easing for focus state entrance",
-      "Error state label could be more prominent"
+      "Consider increasing saturation to 70% for even more vibrancy",
+      "Hover bloom effect could include slight rotation (±2deg) for maximum personality"
     ],
 
-    "design_narrative": "This button demonstrates solid M3 mastery..."
+    "design_narrative": "This button demonstrates strong M3 Expressive mastery: Plus Jakarta Sans 600 weight creates personality without being overly bold, vibrant primary token shows intentional color choice, spring physics easing on hover creates the characteristic 'alive' feel of M3 Expressive. Zero generic markers. Production-ready."
   }
 }
 ```
 
-## Key Capabilities
-
-### Visual Data Extraction
-
-Claude can identify:
-
-- Actual type scale applied (not what you hoped)
-- Semantic tokens used (versus arbitrary hex)
-- Spacing patterns (grid adherence)
-- Elevation/shadow implementation
-- Component state presence and clarity
-- Motion curves and durations (if animated)
-
-### Comparative Analysis
-
-Can compare:
-
-- Before/after (Material Design 2 → M3)
-- Multiple variants (design iterations)
-- Component families (consistency across types)
-- Historical progression (maturity tracking)
-
-### Pattern Recognition
-
-Identifies:
-
-- What's M3-compliant across components
-- Where standards are being violated
-- Edge cases needing attention
-- Trends (improving or diverging from M3?)
-
-## Integration with Other Skills
-
-### With Token-Orchestrator
-
-Validates that semantic token definitions are actually rendering as intended.
-
-### With Frontend-Design
-
-Assesses whether components match Material Design 3 aesthetic direction.
-
-### With Compliance-Dashboard
-
-Audit results feed into dashboard for continuous M3 compliance tracking.
-
-### With Brand-Brief-Optimizer
-
-Reveals where brief language is clear (audits consistent) vs. vague (audits inconsistent).
-
-### With Component-Builder
-
-Verify that built components pass M3 visual audit criteria.
-
-## Important Limitations
-
-This skill:
-
-✅ Analyzes rendered visual output with high accuracy
-✅ Identifies Material Design 3 adherence through visual analysis
-✅ Detects patterns across multiple components
-✅ Provides structured assessment for automation
-
-❌ Cannot measure pixel-perfect specifications
-❌ Cannot validate accessibility beyond visual appearance (ARIA, keyboard navigation)
-❌ Cannot assess performance or rendering speed
-❌ Judgments should be human-verified for high-stakes decisions
-
-## Best Practices
-
-1. **Provide context**: Tell Claude the component name and Material Design 3 purpose
-2. **Screenshot quality**: Use clean, well-lit screenshots for accuracy
-3. **Multiple images**: For complex components, screenshot different states (default, hover, active, disabled, error)
-4. **Human verification**: Audit results should feed into human review loop
-5. **Iteration**: Use feedback to refine both components and design system brief
-
 ## Execution & Validation Checklist
 
-Before checking off a component as audit-complete, ensure it passes the **Material Design 3 Visual Audit**:
+Before checking off a component as audit-complete, ensure it passes the **Material Design 3 Expressive Visual Audit**:
 
-- [ ] **Type Scale Compliance:** Is the label using `Label Large` or `Label Small`? Is Display/Headline hierarchy clear?
-- [ ] **Semantic Token Usage:** Are colors sourced from M3 semantic tokens? Is there on-surface variant for text?
-- [ ] **Spacing Grid:** Does padding follow 8dp grid? Is elevation intentional (not hardcoded shadow)?
-- [ ] **State Visibility:** Are all states present? Is disabled clearly distinct? Is focus visible?
-- [ ] **Motion Consistency:** Are durations and easing curves intentional? Does motion support clarity?
+**M3 Baseline Checks:**
+
+- [ ] **Type Scale Compliance:** Follows M3 type scale (Display Large → Label Small)
+- [ ] **Semantic Token Usage:** Uses M3 semantic tokens (primary, secondary, tertiary, error)
+- [ ] **Spacing Grid:** Follows 8dp grid
+- [ ] **State Visibility:** All states present (default, hover, active, disabled, focus, error)
+- [ ] **Motion Basics:** Duration and easing intentional
+
+**M3 Expressive Checks (Required):**
+
+- [ ] **No Generic Fonts:** Zero use of Inter, Roboto, Arial alone (if present, paired with distinctive display font)
+- [ ] **Extreme Typography Contrasts:** Weight 3x+ or size 3x+ (not timid 1.25x)
+- [ ] **Vibrant Tokens Only:** All colors from M3 Expressive vibrant tokens (saturation 40-80%)
+- [ ] **No Purple Gradients:** Zero purple gradient patterns in any context
+- [ ] **No Generic Blue:** Zero use of #2196F3 or similar generic Material Blue
+- [ ] **Spring Physics Motion:** Easing uses cubic-bezier(0.34, 1.56, 0.64, 1) on interactions
+- [ ] **Hover Bloom Effect:** Hover states show scale increase + elevation increase
+- [ ] **Organic Asymmetry:** Shapes show intentional asymmetry (not uniform border-radius)
+- [ ] **Intentional Personality:** Component feels distinctive, not generic/slop
+- [ ] **Zero AI Slop Markers:** No flat layouts, no timid contrasts, no cookie-cutter design
+
+## M3 Expressive Design Principles (Audit Reference)
+
+This audit validates five core M3 Expressive principles:
+
+### 1. Distinctive Typography (No Generic Fonts)
+
+- ❌ Forbidden: Inter, Roboto, Arial, system fonts (alone)
+- ✅ Required: Variable fonts (Plus Jakarta Sans, Sora, Poppins) with extreme weight contrasts
+- ✅ Required: Optical sizing enabled (font-optical-sizing: auto)
+- ✅ Required: 3x+ weight ratio (100 vs 900, not 400 vs 500)
+
+### 2. Extreme Contrasts (Visual Drama)
+
+- ✅ Typography: 3x+ weight or size difference
+- ✅ Color: Vibrant saturation (40-80%), no muted tones
+- ✅ Layout: Varied spacing (8px, 16px, 24px), not uniform
+- ✅ Components: High-contrast visual hierarchy
+
+### 3. Spring Physics Motion (Alive Interactions)
+
+- ✅ Easing: cubic-bezier(0.34, 1.56, 0.64, 1) (overshoot/spring feel)
+- ✅ Hover: Bloom effect (scale + elevation increase)
+- ✅ Duration: 250-400ms (slow enough to feel springy)
+- ✅ Feedback: Clear state indication on all interactions
+
+### 4. Vibrant Tokens (M3 Expressive Colors)
+
+- ✅ Semantic tokens at expressive saturation (not baseline)
+- ✅ Dominant color in palette (not evenly distributed)
+- ✅ High-saturation colors (vibrant, not timid)
+- ❌ No purple gradients (clichéd)
+- ❌ No generic blue #2196F3 (baseline Material)
+
+### 5. Organic Asymmetry (Intentional Distinctiveness)
+
+- ✅ Layout: Varied spacing and alignment (not grid-mechanical)
+- ✅ Shapes: Asymmetric border-radius (pebble, stone, leaf-inspired)
+- ✅ Hierarchy: Clear visual rhythm, not uniform
+- ✅ Personality: Component feels intentionally designed, not generic
+
+**M3 Expressive Audit Principle**: A component passes when it shows **personality-driven design** that feels intentional, not generic or "AI slop".
 
 ## Validation Questions
 
@@ -337,15 +345,15 @@ If yes to all, the audit is reliable.
 
 ## Related Skills
 
-- **Brand-Brief-Optimizer**: Validates that your M3 brief language is clear and coherent
-- **Token-Orchestrator**: Ensures semantic tokens are properly defined and applied
-- **Component-Builder**: Use audit feedback to build or refine components
-- **Compliance-Dashboard**: Aggregate audit results for system-wide M3 compliance tracking
-
-## Related Documentation
-
-See Material Design 3 official documentation: https://m3.material.io/
+- [m3-anti-slop-validator](../design-skills/m3-anti-slop-validator/SKILL.md) - Validate components against M3 Expressive standards
+- [m3-expressive-typography-enhancer](../design-skills/m3-expressive-typography-enhancer/SKILL.md) - Enhance typography with variable fonts
+- [brand-brief-optimizer](../brand-brief-optimizer/SKILL.md) - Stress-test briefs for M3 Expressive clarity
+- [design-token-validator](file:///.claude/skills/design-token-validator/SKILL.md)
+- Validate M3 Expressive semantic tokens
 
 ---
 
-_Visual audit transforms design system management from specification-only to visually-validated. This closes the loop between M3 intention and implementation._
+**Version:** 3.0.0 (M3 Expressive)
+**Status:** Production Ready
+
+_Vision audit transforms design system management from specification-only to visually-validated. This closes the loop between intention and implementation._

@@ -1,139 +1,72 @@
-# Northcote Curio: Consolidated Design Implementation Guide
+# Northcote Laneway Navigator: Consolidated Design Specs
 
-> **Purpose**: This document acts as the definitive instruction set for generating the CareerCopilot UI. It merges layout architecture, token specifications, content strategy, and asset integration into a single "prompt-ready" format for AI implementation.
-
----
-
-## 🎨 Global Design Tokens (The "Non-Negotiables")
-
-### 1. Atmosphere (The Void)
-
-- **Background**: `color.semantic.surface.shared.specimenNight` (#1A1714) - NEVER pure black.
-- **Lighting**: Ambient "Firefly" glows, not hard spotlights.
-- **Depth**: Glassmorphism (`color.glassmorphism.gallery.surface`) over Paper White (`fieldPaper` #F5F2EB).
-
-### 2. Typography (The Voice)
-
-- **Proclamation (Headlines)**: _Libre Bodoni_ (Italic). For wonder, invitation, and major status updates.
-- **Annotation (Labels)**: `JETBRAINS MONO` (Uppercase, 0.1em tracking). For data, measurement, and scientific classification.
-- **Narrative (Body)**: Work Sans. For sustained reading and interfaces.
-
-### 3. Motion (The Viscous Breeze)
-
-- **Physics**: `cubic-bezier(0.34, 1.56, 0.64, 1)` - Slow overshoot and gentle settle.
-- **Micro-interactions**: Hovering lifts elements (`translateY(-4px)`), buttons "bloom" (scale + glow).
+> **Purpose**: Definitive instruction set for the Contemporary Australian UI. Merges street-art aesthetics, density-aware tokens, and M3 Expressive motion into a prompt-ready manifest.
 
 ---
 
-## 📄 Page Integration Specs
+## 🎨 Global Directives (Non-Negotiables)
+
+### 1. Urban Atmosphere
+
+- **The Void**: `Asphalt Black` (#1A1714) - Use Noise overlays (5% opacity) for concrete texture.
+- **Lighting**: "Firefly" bioluminescent pulses contrast with high-drama poster silhouettes.
+- **Surfacing**: Organic asymmetry (`radius-pebble`, `radius-leaf`) over clean paper-white cards.
+
+### 2. The Laneway Stack
+
+- **The Proclaimer**: **Sora Variable**. Thin for elegance, thick for street-poster impact.
+- **The Navigator**: **Plus Jakarta Sans**. All-rounder for clarity and modern UI.
+- **The Analyst**: **JetBrains Mono**. For anything that requires dissection or measurement.
+
+---
+
+## 📄 Site Integration Specs
 
 ### PAGE 1: Landing ("The Resurrection")
 
-_Mode: Gallery (Wonder/Appeal)_
+_Density: High Drama (Poster Style)_
 
-**Layout & Assets:**
+- **Aesthetic**: Peter Drew "AUSSIE" style silhouettes. Large wheat-paste textures.
+- **Typography**: Sora 300 Italic (Hero Display), 96px.
+- **Assets**: `ASSET-16` (Wattle) as a subtle framing accent (not specimen). `ASSET-7` (Fireflies) for depth.
+- **Interaction**: "The Bloom" - Hero headline gains weight on scroll or hover.
 
-- **Hero**: `glassmorphism.hero-container` (Leaf Shape).
-  - _Anchor_: `ASSET-16` (Wattle Branch) draping from Top-Right (Parallax 0.15).
-  - _Atmosphere_: `ASSET-7` (Fireflies) scattered, breathing opacity (40-80%).
-- **Bottom Anchor**: `ASSET-10` (Banksia Pot) grounding the Bottom-Left.
+### PAGE 4: Ingestion ("The Deposit")
 
-**Copy Strategy:**
+_Density: High Clarity (Precise)_
 
-- **Headline**: "THE RESURRECTION" (_Libre Bodoni Italic_, 96px, Wattle Gold).
-- **Subhead**: "Your professional history, re-catalogued as a living specimen."
-- **CTA**: "COMMENCE EXCAVATION" (_JetBrains Mono_, Uppercase).
+- **Aesthetic**: Recycled paper texture. Minimal decoration.
+- **Typography**: JetBrains Mono for all data tags. Plus Jakarta Sans for instructions.
+- **Assets**: `ASSET-14` (Skeleton) as a whisper-quiet background watermark (4% opacity).
+- **Interaction**: `ASSET-8` (Success Stamp) with viscous overshoot easing.
 
-### PAGE 2: Authentication ("The Entry Gate")
+### PAGE 5: Analysis ("The Audit")
 
-_Mode: Gallery (Trust/Threshold)_
+_Density: High Clarity (Precise)_
 
-**Layout & Assets:**
+- **Aesthetic**: Measurement grids overlaying data surfaces.
+- **Typography**: Sora 700 for key metrics. JetBrains Mono for technical labels.
+- **Assets**: `ASSET-15` (Compass) as a functioning gauge.
+- **Logic**: Use `radius-stone` for metric containers to maintain organic feel in a data view.
 
-- **Card**: Central `stone` container, deep blur (32px).
-- **Navigation**: `ASSET-15` (Brass Compass) centered _below_ the card.
-  - _Interaction_: Rotates +15° on input focus.
-- **Atmosphere**: `pattern-nocturnal-canopy` background (15% opacity).
+### PAGE 7: Kanban ("The Cultivation")
 
-**Copy Strategy:**
+_Density: Standard (Workflow)_
 
-- **Header**: "IDENTIFY YOURSELF" (_Fraunces_, Inviting).
-- **Helper**: "Access the Northcote Conservatory." (_Lora Italic_).
-
-### PAGE 4: Ingestion ("The Mulch & Mineral Setup")
-
-_Mode: Laboratory (Precision/Deposit)_
-
-**Layout & Assets:**
-
-- **Background**: `texture-laboratory-paper-white` (Solid #F5F2EB).
-- **Drop Zone**: `stone` container with dashed etchings.
-  - _Watermark_: `ASSET-14` (Skeleton Etching) centered behind drop zone (4% opacity, Multiply blend).
-- **Success State**: `ASSET-8` (Fossil Stamp) slams onto Bottom-Right corner.
-
-**Copy Strategy:**
-
-- **Status**: "DEPOSIT SPECIMEN" (Strikethrough "HISTORY").
-- **Instruction**: "DROP PDF HERE FOR DISSECTION".
-- **Success**: "Specimen Verified. Organic integrity confirmed."
-
-### PAGE 5: Analysis Dashboard ("The Audit Microscope")
-
-_Mode: Laboratory (Revelation/Metric)_
-
-**Layout & Assets:**
-
-- **Grid**: `ASSET-12` (Major Grid) overlay entire screen (5% opacity).
-- **Widget**: Left Column Gauge using `ASSET-15` (Compass).
-  - _Logic_: Needle rotation maps to Score (0-100 deg).
-- **Cards**: `stone` metric cards ("FIG. A", "FIG. B") with etched dividers.
-
-**Copy Strategy:**
-
-- **Label**: "ALIGNMENT SCORE" (_JetBrains Mono_).
-- **Value**: "94.2%" (_Work Sans Thin_, 120px).
-
-### PAGE 6: Opportunity Feed ("The Sentry Lookout")
-
-_Mode: Gallery (Discovery/Watch)_
-
-**Layout & Assets:**
-
-- **Guide**: `ASSET-6` (Kookaburra Sentry) perched on the Sticky Sidebar header.
-  - _Behavior_: Head tilts randomly every 8-12s.
-- **List**: Glassmorphic job cards (Stone shape) revealing background through blur.
-
-**Copy Strategy:**
-
-- **Title**: "JOB FEED (THE SENTRY LOOKOUT)".
-- **Badge**: "98% MATCH" (_Wattle Gold Seed_).
-
-### PAGE 7: Kanban ("The Cultivation Cycle")
-
-_Mode: Gallery (Growth/Garden)_
-
-**Layout & Assets:**
-
-- **Structure**: `ASSET-19` (Eucalyptus Stems) acting as vertical column separators.
-- **Canopy**: `ASSET-17` (Hanging Gum) spanning top viewport (Foreground, Blur 2px).
-- **Cards**: "Leaf" shaped task cards hanging on the structural stems.
-
-**Copy Strategy:**
-
-- **Title**: "THE CULTIVATION CYCLE".
-- **Columns**: "OFFER STAGE" (Double Underline).
+- **Aesthetic**: A "Greenhouse" layout integrated into a laneway alley.
+- **Typography**: Plus Jakarta Sans 16px (Body Large) on cards.
+- **Assets**: `ASSET-19` (Eucalyptus Stems) as vertical column dividers.
+- **Motion**: Cards "hang" and sway slightly via CSS transforms.
 
 ---
 
-## 🛠 Asset mapping Table
+## 🛠 Asset mapping (Laneway Context)
 
-| Asset ID   | Description         | Context Usage          | Behavior                        |
-| :--------- | :------------------ | :--------------------- | :------------------------------ |
-| `ASSET-6`  | Kookaburra Sentry   | Sidebar / Nav Anchor   | Idle animation (Head tilt)      |
-| `ASSET-7`  | Firefly Sprite      | Gallery Atmosphere     | Float & Pulse (Bioluminescence) |
-| `ASSET-8`  | Fossil Verification | Success State Stamp    | Scale + Slam animation          |
-| `ASSET-12` | Lab Grid Major      | Lab Background Overlay | Static Quantification           |
-| `ASSET-14` | Skeleton Etching    | Lab Watermark          | 4% Opacity, Multiply Blend      |
-| `ASSET-15` | Brass Compass       | Navigation / Gauge     | Rotates on interaction/data     |
-| `ASSET-16` | Wattle Branch       | Top-Right Frame        | Parallax Sway                   |
-| `ASSET-17` | Eucalyptus Ceiling  | Top-Foreground Canopy  | Deep Parallax + Blur            |
+| Asset ID   | Description        | Laneway Role              | Behavior                     |
+| :--------- | :----------------- | :------------------------ | :--------------------------- |
+| `ASSET-6`  | Kookaburra Sentry  | Urban Companion (perched) | Randomized alertness (tilt)  |
+| `ASSET-7`  | Firefly Sprite     | Laneway Bioluminescence   | Breathe & Pulse (Atmosphere) |
+| `ASSET-8`  | Fossil Stamp       | Archival Approval         | Viscous Slam (Feedback)      |
+| `ASSET-15` | Brass Compass      | Navigation Aid            | Rotates on focal/data shifts |
+| `ASSET-17` | Eucalyptus Ceiling | Overhead Canopy           | Foreground Blur (Depth)      |
+| `ASSET-19` | Eucalyptus Column  | Structural Separator      | Organic framing              |

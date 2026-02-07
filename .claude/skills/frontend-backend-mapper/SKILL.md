@@ -1,13 +1,21 @@
 ---
 name: frontend-backend-mapper
 description: "Analyzes and maps frontend API calls to backend endpoints. Detects missing endpoints, unused endpoints, and integration gaps. Optional: trace complete data flows to database and design tokens. Related: api-contract-validator for detailed type analysis."
+version: 1.0.0
+tags: []
 ---
 
-# Frontend-Backend Mapper Workflow
+## Purpose
 
-This skill analyzes the integration between frontend API services and backend endpoints to ensure complete coverage. It can optionally trace complete data flows including database operations and design token usage.
+Analyzes and maps frontend API calls to backend endpoints to detect gaps, unused routes, and type mismatches.
 
-## Workflow Steps
+## When to Use
+
+- When validating API integration coverage.
+- When identifying missing or unused backend endpoints.
+- When tracing complete data flows from frontend to database/Genkit.
+
+## Process
 
 1. **Scan frontend API services:**
    - Read all files in `frontend/src/api/*.ts`
