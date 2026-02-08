@@ -1,0 +1,110 @@
+# Kerala Rage Solidarity: Content & Asset Integration Draft
+
+**Document ID:** CONTENT-001-SOLIDARITY
+**Status:** Unified Design Draft
+**Dependencies:** `docs/design/06-wireframes.md`, `kerala-rage-design-principles.md`
+
+---
+
+## Executive Summary
+
+This document provides the "Solidarity Press" copy and precise asset placement instructions for the pages identified as having **Critical Design Gaps**. It orchestrates the "Solidarity Typography Strategy" (Bebas Neue / Sora / Space Grotesk) alongside the Street Art / Screenprint assets to ensure a cohesive, defiant implementation.
+
+---
+
+## Page 1: Landing ("The Solidarity Manifesto")
+
+**Primary Assets:**
+
+- `{kr-asset-halo-disk}` (The Focal Anchor)
+- `{kr-asset-wheat-paste-tear}` (The Urban Edge)
+- `{kr-asset-screenprint-grit}` (Tactile Atmosphere)
+
+### Copy & Typography Strategy
+
+| Element           | Draft Copy                                                            | Typography Token                                          |
+| :---------------- | :-------------------------------------------------------------------- | :-------------------------------------------------------- |
+| **Hero Headline** | THE SOLIDARITY<br>MANIFESTO                                           | **Font:** Bebas Neue<br>**Color:** `baruGold`             |
+| **Subhead**       | _Your professional history, re-documented for the collective future._ | **Font:** Sora Variable<br>**Color:** `paper-white` (80%) |
+| **CTA Primary**   | BUILD YOUR STORY                                                      | **Font:** Bebas Neue<br>**Style:** Button                 |
+| **CTA Secondary** | VIEW THE COLLECTIVE                                                   | **Font:** Plus Jakarta Sans<br>**Weight:** 400            |
+
+### Asset Integration Guide
+
+- **{kr-asset-halo-disk}**: Positioned behind the "The Solidarity Manifesto" headline as a radiating aura in `baruGold`. Opacity: 40%.
+- **{kr-asset-wheat-paste-tear}**: Applied as a `clip-path` and decorative overlay to the bottom of the hero section, suggesting a posters ripped from a wall.
+- **{kr-asset-screenprint-grit}**: Global overlay at 5% opacity to break the "clean digital" look.
+
+---
+
+## Page 2: Authentication ("The Verification")
+
+**Primary Assets:**
+
+- `{kr-asset-halo-disk}` (The Identity Anchor)
+- `{kr-asset-screenprint-grit}`
+
+### Copy & Typography Strategy
+
+| Element         | Draft Copy                      | Typography Token / Settings                   |
+| :-------------- | :------------------------------ | :-------------------------------------------- |
+| **Card Header** | VERIFY IDENTITY                 | **Font:** Bebas Neue<br>**Color:** `baruGold` |
+| **Helper Text** | _Enter the Solidarity Archive._ | **Font:** Sora Variable (Italic)              |
+
+---
+
+## Page 4: Ingestion ("The Deposition")
+
+**Primary Assets:**
+
+- `{kr-asset-blueprint-layout}` (The Analysis Grid)
+- `{kr-asset-screenprint-stamp}` (The "Verified" Mark)
+
+### Copy & Typography Strategy
+
+| Element             | Draft Copy                               | Typography Token / Settings                                  |
+| :------------------ | :--------------------------------------- | :----------------------------------------------------------- |
+| **Headline**        | DEPOSIT HISTORY                          | **Font:** Bebas Neue<br>**Color:** `baruGold`                |
+| **Drop Zone Label** | DROP PDF HERE<br>FOR ANALYSIS            | **Font:** JetBrains Mono<br>**Style:** Dashed border context |
+| **Success Message** | _History Verified. Integrity confirmed._ | **Font:** Sora Variable<br>**Color:** `baruGold`             |
+
+---
+
+## Page 6: Opportunity Feed ("The Lookout")
+
+**Primary Assets:**
+
+- `{kr-asset-blueprint-grid}` (Tactical Measurement)
+- `{kr-asset-halo-disk}` (Metric Highlight)
+
+---
+
+## Page 7: Kanban ("The Command Center")
+
+**Primary Assets:**
+
+- `{kr-asset-charcoal-paper}` (The Canvas)
+- `{kr-asset-wheat-paste-tear}` (Column Headers)
+
+---
+
+## Page 11: Dashboard Overview ("The Collective")
+
+**Primary Assets:**
+
+- `{kr-asset-wheat-paste-tear}` (Hero Frame)
+- `{kr-asset-screenprint-grit}` (Depth of Field)
+
+### Copy & Typography Strategy
+
+| Element           | Draft Copy                    | Typography Token                                                |
+| :---------------- | :---------------------------- | :-------------------------------------------------------------- |
+| **Hero Greeting** | _The collective is thriving._ | **Font:** Bebas Neue<br>**Size:** 48px<br>**Color:** `baruGold` |
+
+---
+
+## Implementation Directives
+
+1. **Ink Overlap**: When assets like the `{kr-asset-halo-disk}` overlap with text, ensure the text remains legible through high-contrast `baruGold` or `paper-white` color selection.
+2. **Tactile Response**: Every "Verified" action (Page 4, Page 9) should trigger a visceral `{kr-asset-screenprint-stamp}` animation with a physical "slam" motion.
+3. **Substrate Depth**: Backgrounds must never be flat. Use `{kr-asset-charcoal-paper}` or grit patterns to maintain the feeling of a physical Manifesto.
