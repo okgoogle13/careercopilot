@@ -1,6 +1,6 @@
 ---
 name: ui-design-evaluator
-description: Evaluate design assets, analyze annotated wireframes, and create high-fidelity interactive mockups with Northcote Curio V3.1 compliance. Use when evaluating designs, analyzing wireframes, creating mockups from annotations, scoring design system compliance, or generating interactive prototypes. Supports Gallery (expressive, warm) and Laboratory (restrained, cool) modes.
+description: Evaluate design assets, analyze annotated wireframes, and create high-fidelity interactive mockups with Kerala Rage compliance. Use when evaluating designs, analyzing wireframes, creating mockups from annotations, scoring design system compliance, or generating interactive prototypes. Supports only Single Mode: Solidarity.
 version: 1.0.0
 tags: []
 ---
@@ -69,9 +69,9 @@ INPUT → ANALYZE → EVALUATE → DESIGN → DELIVER
 
 - ✅ Uses Federation Typography Stack (Curator, Proclamation, Bloom, Field Note, Annotation)
 - ✅ Asymmetric organic shapes (no uniform border-radius)
-- ✅ Botanical color palette (Wattle Gold, Waratah Red, Eucalyptus Smoke)
-- ✅ Mode-appropriate (Gallery vs Laboratory)
-- ✅ V3.1 playful mixing (if Gallery mode)
+- ✅ Botanical color palette (Wattle Gold,- Determine Single Mode adherence
+- ✅ Mode-appropriate (Solidarity)
+- ✅ V3.1 playful mixing
 - ❌ Anti-Slop violations (Inter/Roboto, purple gradients, uniform corners)
 
 **B. Accessibility (100 pts)**
@@ -114,8 +114,9 @@ INPUT → ANALYZE → EVALUATE → DESIGN → DELIVER
 
 **Step 1: Mode Selection**
 
-- **Gallery Mode:** Expressive, warm, cursive allowed, extreme Fraunces
-- **Laboratory Mode:** Restrained, cool, no cursive, clean typography
+- **Solidarity Mode**: Heavy weights, high contrast, Waratah Red/Baru Gold.
+- **Gallery Mode**: ABOLISHED.
+- **Laboratory Mode**: ABOLISHED.aphy
 
 **Step 2: Component Mapping**
 
@@ -133,7 +134,7 @@ INPUT → ANALYZE → EVALUATE → DESIGN → DELIVER
 
 **Step 4: Enhancement**
 
-- Add Framer Motion physics (if Gallery mode)
+- Add Framer Motion physics
 - Apply V3.1 playful mixing (if appropriate)
 - Add wallpaper background (if hero section)
 - Implement viscous breeze motion
@@ -187,12 +188,12 @@ INPUT → ANALYZE → EVALUATE → DESIGN → DELIVER
 ```markdown
 ## Components Required
 
-1. HeroSection (Gallery mode)
+1. HeroSection
    - Cursive + Serif mix hero
    - Botanical wallpaper background
    - CTA buttons with Wattle Gold
 
-2. MetricCard (Laboratory mode)
+2. MetricCard
    - Clean typography (Work Sans)
    - Asymmetric radius (pebble shape)
    - Restrained color palette
@@ -224,16 +225,11 @@ background: var(--nc-asphalt-black-300);
 
 ```css
 /* Wireframe: "large heading" */
-/* Gallery: */
 font-family: var(--nc-font-bloom);
 font-variation-settings:
   "SOFT" 100,
   "WONK" 1,
   "wght" 800;
-
-/* Laboratory: */
-font-family: var(--nc-font-field-note);
-font-weight: 700;
 ```
 
 **Shapes:**
@@ -268,7 +264,6 @@ Create a landing page hero section with:
 - Subheadline with cursive accent
 - Two CTA buttons (primary + secondary)
 - Background: botanical wallpaper
-- Mode: Gallery (expressive)
 ```
 
 **Output:** Interactive HTML hero with cursive+serif mix, wallpaper background, Wattle Gold CTAs
@@ -282,15 +277,14 @@ Create a landing page hero section with:
 - "This should be more expressive" (pointing to header)
 - "Use organic shapes" (pointing to cards)
 - "Add cursive accent here" (pointing to subtitle)
-- Mode: Gallery
 ```
 
 **Process:**
 
-1. **Analyze:** Header needs Bloom ultra-wonky, cards need asymmetric radii, subtitle needs Caveat cursive
-2. **Evaluate:** Current design scores 60% (generic fonts, uniform corners)
-3. **Design:** Rebuild with V3.1 tokens
-4. **Deliver:** Interactive mockup + evaluation report
+1.  **Analyze:** Header needs Bloom ultra-wonky, cards need asymmetric radii, subtitle needs Caveat cursive
+2.  **Evaluate:** Current design scores 60% (generic fonts, uniform corners)
+3.  **Design:** Rebuild with V3.1 tokens
+4.  **Deliver:** Interactive mockup + evaluation report
 
 ---
 
@@ -302,88 +296,51 @@ Dashboard page needs:
 2. 4x MetricCard showing KPIs
 3. ChartPane with data visualization
 4. ActionButton for primary action
-
-Mode: Laboratory (data-focused)
 ```
 
 **Output:**
 
 - Interactive dashboard mockup
 - 4 separate React components
-- Laboratory mode styling (restrained, clean)
 - Evaluation report with accessibility score
 
 ---
 
-## 🎭 Gallery vs Laboratory Mode
+## 🎭 Solidarity Mode
 
-### Gallery Mode (Expressive, Warm)
+### Solidarity Mode (Heavy, High-Contrast)
 
 **Typography:**
 
-- ✅ Caveat cursive for hero/annotations
-- ✅ Extreme Fraunces (SOFT=100, WONK=1, wght=900)
-- ✅ Playful mixing utilities
-- ✅ Shadow layering, weight contrast, rotation
+- ✅ Inter Display Black (900) for headlines
+- ✅ Inter Regular for body text
+- ✅ Strong typographic hierarchy
+- ✅ Emphasis on readability and impact
 
 **Colors:**
 
-- Full botanical palette (Wattle Gold, Waratah Red)
-- High contrast and emotional
-- Glowing accents
+- Charcoal (#1A1714) for backgrounds and primary text
+- Waratah Red (#F14714) for accents and primary actions
+- Baru Gold (#DAF674) for secondary accents and highlights
+- High contrast ratios for accessibility
 
 **Shapes:**
 
-- Maximum organic asymmetry
-- Dramatic radius variations
-- Botanical-inspired forms
+- Torn edges and organic asymmetry
+- Bold, impactful forms
+- Emphasis on unique, non-uniform shapes
 
 **Motion:**
 
-- Framer Motion physics
-- Variable font axis animations
-- Viscous breeze easing
+- Spring physics with viscous fluidity
+- Deliberate, weighty transitions
+- Subtle, impactful animations
 
 **Wallpaper:**
 
 - Full visibility (0.65-0.85 opacity)
 - Parallax effects
 - Hot zones typography positioning
-
----
-
-### Laboratory Mode (Restrained, Cool)
-
-**Typography:**
-
-- ❌ NO cursive (ever)
-- Restrained Fraunces (SOFT=20, WONK=0)
-- Work Sans sans-serif primary
-- JetBrains Mono for data
-
-**Colors:**
-
-- Muted eucalypt smoke palette
-- Low contrast and clinical
-- Minimal gold accents
-
-**Shapes:**
-
-- Subtle asymmetry
-- Functional organic shapes
-- Grid-aligned layouts
-
-**Motion:**
-
-- Minimal animations
-- Fast, efficient transitions
-- No playful physics
-
-**Wallpaper:**
-
-- Barely visible (0.05 opacity)
-- Heavily desaturated
-- Functional background only
 
 ---
 
@@ -397,13 +354,12 @@ Before delivering a mockup, verify:
 - [ ] All shapes are asymmetric (no uniform border-radius)
 - [ ] Colors from botanical palette
 - [ ] Motion uses viscous breeze easing
-- [ ] Mode-appropriate styling (Gallery vs Laboratory)
 
 ### V3.1 Typography
 
 - [ ] 5 fonts properly used (Curator, Proclamation, Bloom, Field Note, Annotation)
-- [ ] Cursive ONLY in Gallery mode hero/annotations
-- [ ] Fraunces uses extreme axes in Gallery (SOFT=100, WONK=1)
+- [ ] Cursive used appropriately for expressive elements
+- [ ] Fraunces uses extreme axes (SOFT=100, WONK=1)
 - [ ] Work Sans full range utilized (100-900 if weight mixing)
 
 ### Accessibility
@@ -432,81 +388,80 @@ Before delivering a mockup, verify:
 
 **Claude:**
 
-1. Analyzes design visually
-2. Scores against 4 criteria
-3. Generates evaluation report:
+1.  Analyzes design visually
+2.  Scores against 4 criteria
+3.  Generates evaluation report:
 
-   ```
-   Northcote Curio Compliance: 45/100 (F)
-   - Uses Inter font (forbidden)
-   - Uniform 8px border-radius
-   - Generic blue color scheme
+    ```
+    Northcote Curio Compliance: 45/100 (F)
+    - Uses Inter font (forbidden)
+    - Uniform 8px border-radius
+    - Generic blue color scheme
 
-   Accessibility: 75/100 (C)
-   - Contrast ratios adequate
-   - Missing focus states
+    Accessibility: 75/100 (C)
+    - Contrast ratios adequate
+    - Missing focus states
 
-   Recommendations:
-   1. Replace Inter with Federation Typography Stack
-   2. Apply asymmetric organic shapes
-   3. Use botanical color palette
-   ```
+    Recommendations:
+    1. Replace Inter with Federation Typography Stack
+    2. Apply asymmetric organic shapes
+    3. Use botanical color palette
+    ```
 
 ---
 
 ### Example 2: Create Mockup from Wireframe
 
-**User:** "Create a high-fidelity hero section from this wireframe. Gallery mode."
+**User:** "Create a high-fidelity hero section from this wireframe."
 [Uploads wireframe sketch with annotations]
 
 **Claude:**
 
-1. **Analyzes:**
-   - Hero needs large headline
-   - Subtitle with cursive accent
-   - Two CTA buttons
-   - Wallpaper background
+1.  **Analyzes:**
+    - Hero needs large headline
+    - Subtitle with cursive accent
+    - Two CTA buttons
+    - Wallpaper background
 
-2. **Designs:**
-   - Cursive+serif mix hero (Proclamation + Caveat)
-   - Wallpaper at 0.75 opacity with hot zones positioning
-   - Wattle Gold primary button, Waratah secondary
-   - V3.1 playful mixing (shadow layering on hero text)
+2.  **Designs:**
+    - Cursive+serif mix hero (Proclamation + Caveat)
+    - Wallpaper at 0.75 opacity with hot zones positioning
+    - Wattle Gold primary button, Waratah secondary
+    - V3.1 playful mixing (shadow layering on hero text)
 
-3. **Delivers:**
-   - Interactive HTML artifact (viewable immediately)
-   - React component code
-   - Evaluation report (98/100 - Excellent)
+3.  **Delivers:**
+    - Interactive HTML artifact (viewable immediately)
+    - React component code
+    - Evaluation report (98/100 - Excellent)
 
 ---
 
 ### Example 3: Multi-Page Flow
 
-**User:** "Analyze this 5-page onboarding flow wireframe and create mockups for each page. Laboratory mode."
+**User:** "Analyze this 5-page onboarding flow wireframe and create mockups for each page."
 
 **Claude:**
 
-1. **Analyzes:**
-   - Extracts components from all 5 pages
-   - Maps user flow (Step 1 → Step 2 → ... → Complete)
-   - Identifies reusable components
+1.  **Analyzes:**
+    - Extracts components from all 5 pages
+    - Maps user flow (Step 1 → Step 2 → ... → Complete)
+    - Identifies reusable components
 
-2. **Evaluates:**
-   - Flow logic: 90/100
-   - Accessibility: Need focus states
-   - Typography: Will use Work Sans + JetBrains Mono
+2.  **Evaluates:**
+    - Flow logic: 90/100
+    - Accessibility: Need focus states
+    - Typography: Will use Work Sans + JetBrains Mono
 
-3. **Designs:**
-   - Creates 5 interactive HTML pages
-   - Consistent component library
-   - Laboratory mode styling (restrained, clean)
-   - Navigation between pages
+3.  **Designs:**
+    - Creates 5 interactive HTML pages
+    - Consistent component library
+    - Navigation between pages
 
-4. **Delivers:**
-   - 5 interactive HTML artifacts
-   - Shared component code
-   - Flow diagram
-   - Evaluation report
+4.  **Delivers:**
+    - 5 interactive HTML artifacts
+    - Shared component code
+    - Flow diagram
+    - Evaluation report
 
 ---
 
@@ -517,7 +472,7 @@ Before delivering a mockup, verify:
 - ✅ Hover states (buttons, cards, links)
 - ✅ Focus states (keyboard navigation)
 - ✅ Active states (button press)
-- ✅ Animations (Framer Motion physics if Gallery)
+- ✅ Animations (Framer Motion physics)
 - ✅ Responsive breakpoints (mobile, tablet, desktop)
 - ✅ Dark mode support (Northcote is dark-first)
 - ✅ Real design tokens via CSS custom properties
@@ -527,8 +482,8 @@ Before delivering a mockup, verify:
 - Button hover → Color shift + elevation
 - Card hover → Scale + shadow
 - Input focus → Border glow + label animation
-- Typography hover → Variable font axis shift (Gallery mode)
-- Scroll → Parallax wallpaper (Gallery hero sections)
+- Typography hover → Variable font axis shift
+- Scroll → Parallax wallpaper (hero sections)
 
 ---
 
@@ -585,21 +540,15 @@ ui-design-evaluator (mockup)
 
 ### Mode Selection
 
-**Gallery Mode:**
+**Solidarity Mode:**
 
-- Landing pages
-- Marketing pages
-- Hero sections
-- Feature callouts
-- Profile pages
-
-**Laboratory Mode:**
-
-- Dashboards
-- Data tables
-- Forms
-- Settings
-- Technical tools
+- ✅ Typography: Inter Display Black (900)
+- ✅ Colors: Charcoal (#1A1714), Waratah Red (#F14714), Baru Gold (#DAF674)
+- ✅ Shapes: Torn edges, organic asymmetry
+- ✅ Motion: Spring physics (viscous fluidity)ups to production code
+- `asset-placement-strategy` — Typography on wallpaper positioning
+- `northcote-curio-audit` — Validate final design token compliance
+- `design-compliance-dashboard` — Track overall design system adoption
 
 ---
 
