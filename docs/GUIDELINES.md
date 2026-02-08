@@ -51,7 +51,7 @@ Our visual strategy is constructed in three distinct layers (The "Haeckel Sandwi
 ### Development & AI
 
 - **[Agents & AI Architecture](guides/AGENTS.md)**: Rules for Backend/AI logic (Gemini 3.0, Genkit).
-- **[Contribution Guide](guides/contributing.md)**: Folder structure and component rules.
+- **[Contribution Guide](../../CONTRIBUTING.md)**: Folder structure and component rules.
 - **[Project README](../README.md)**: Setup and tech stack overview.
 
 ## 🚀 Quick Summary for Designers
@@ -59,3 +59,20 @@ Our visual strategy is constructed in three distinct layers (The "Haeckel Sandwi
 1.  **Tone**: Serious, Scientific, elegant, yet modern (M3 Expressive).
 2.  **Motion**: "Spring" physics (bouncy yet controlled).
 3.  **Layout**: "Wunderkammer" (Cabinet of kr-solidaritysities) - organized clutter, dense but hierarchical.
+
+## Cultural and Visual Governance
+
+This project operates under strict cultural and symbolic constraints.
+
+All contributors are expected to:
+- Follow the Design System Canon
+- Avoid decorative or aesthetic-only use of cultural symbols
+- Respect First Nations and devotional boundaries
+- Reject “propaganda” tone in favour of declarative, archival expression
+
+When in doubt:
+- Do less
+- Use fewer symbols
+- Remove explanatory text
+- Re-check the canon
+
