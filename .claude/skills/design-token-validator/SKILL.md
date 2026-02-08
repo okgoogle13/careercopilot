@@ -23,7 +23,7 @@ Ensures design token integrity by validating DTCG compliance, Northcote palette 
 1. **DTCG Compliance**: Verify `$value` and `$type` fields via `audit_structure.py`.
 2. **Tailwind Integration**: Resolve `getValue()` paths via `audit_tailwind.py`.
 3. **Palette Compliance**: Audit against the 6-dimension scorecard (Geographic Authenticity, Translucency, etc.) via `validate_palette_mcp.py`.
-4. **Mode Parity**: Confirm Gallery/Laboratory consistency via `check_mode_parity.py`.
+4. **Mode Parity**: SKIPPED (Single Mode Enforced).
 5. **Accessibility**: Verify WCAG AA contrast ratios (4.5:1 minimum).
 6. **Full Audit**: Run `run_full_audit.sh` for pre-commit verification.
 
@@ -39,7 +39,7 @@ Ensures design token integrity by validating DTCG compliance, Northcote palette 
 1. ✅ **DTCG Schema**: Validates `$value`, `$type`, and unit compliance.
 2. ✅ **Circular Refs**: Ensures no infinite alias loops.
 3. ✅ **WCAG 2.2 AA**: Contrast checks for all token pairs.
-4. ✅ **Mode Parity**: 100% mapping between Gallery and Laboratory.
+4. ✅ **Mode Parity**: SKIPPED.
 5. ✅ **6-Dimension Scorecard**:
    - Geographic Authenticity (Australian botanical references)
    - Translucency Physics (glassmorphism/ink pools)
