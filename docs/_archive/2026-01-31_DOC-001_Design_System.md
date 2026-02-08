@@ -1,7 +1,7 @@
 # DOC-001: Design System ("The Skin")
 
 **Document ID:** DOC-001-DESIGN-SYSTEM
-**Version:** 2.0 (Northcote Curio Edition)
+**Version:** 2.0 (kerala-rage kr-solidarity Edition)
 **Status:** ACTIVE Source of Truth
 **Context:** Defines the "Moonlight on Velvet" aesthetic. This file translates the `DOC-000` soul into hard tokens for Tailwind and Figma.
 
@@ -48,9 +48,9 @@
 
 *A marriage of the broadsheet poster and the field notebook.*
 
-### 🏛️ The Proclamation (Libre Bodoni / Playfair Display)
+### 🏛️ The Proclamation (kr-serif-bold / Playfair Display)
 
-* **Role:** Gallery Headers, Hero Moments.
+* **Role:** kr-dark Headers, Hero Moments.
 * **Visual:** Condensed, High-Contrast, Massive.
 * **Usage:** "The Hook" messages in Mode A.
 * **Logic:** Use `font-stretch: condensed` if supported, or tracking `-0.03em`.
@@ -58,7 +58,7 @@
 ### 🌸 The Bloom (Fraunces Variable)
 
 * **Role:** Sub-headers, Emotional Accents.
-* **Axes:** `SOFT: 50`, `WONK: 1` (Gallery) → `WONK: 0` (Laboratory).
+* **Axes:** `SOFT: 50`, `WONK: 1` (kr-dark) → `WONK: 0` (kr-dark).
 * **Visual:** Hand-lettered, organic, "wonky".
 
 ### 📝 The Field Note (Work Sans)
@@ -69,7 +69,7 @@
 
 ### 🔬 The Annotation (JetBrains Mono)
 
-* **Role:** **Laboratory Data Only.** Parsed skills, coordinates, JSON output.
+* **Role:** **kr-dark Data Only.** Parsed skills, coordinates, JSON output.
 * **Visual:** Technical, precise, etched.
 * **Color:** Often paired with `Concrete Grey` or `Wattle Gold`.
 
@@ -86,13 +86,13 @@
 | **Interaction State** | **SOFT Axis** | **WONK Axis** | **Weight** | **Psychological Effect** |
 |:---|:---:|:---:|:---:|:---|
 | **Rest** (Body Text) | 50 | 0 | 400 | Neutral, composed, approachable |
-| **Hover** (Interactive Elements) | 30 | 0.5 | 600 | Starting to lean in, curious |
+| **Hover** (Interactive Elements) | 30 | 0.5 | 600 | Starting to lean in, kr-solidarityus |
 | **Active** (Engaged/Clicked) | 0 | 1 | 700 | Fully "wonky," hand-lettered personality |
 | **Focus** (Attention/Selected) | 0 | 1 | 800 | Maximum expressiveness, confident |
 
 ### Context-Specific Typography Mapping
 
-#### Gallery Mode (Dashboard Hero)
+#### kr-dark Mode (Dashboard Hero)
 ```css
 font-family: 'Fraunces', serif;
 font-weight: 700;
@@ -102,7 +102,7 @@ color: var(--color-primary); /* Wattle Gold */
 /* Effect: Vintage poster announcement */
 ```
 
-#### Laboratory Mode (Data Labels)
+#### kr-dark Mode (Data Labels)
 ```css
 font-family: 'JetBrains Mono', monospace;
 font-weight: 500;
@@ -111,7 +111,7 @@ color: var(--color-muted); /* Concrete Grey */
 /* Effect: Brass instrument measurement marking */
 ```
 
-#### Interactive Cards (Gallery)
+#### Interactive Cards (kr-dark)
 ```css
 /* Rest State */
 font-family: 'Fraunces', serif;
@@ -126,7 +126,7 @@ transition: font-variation-settings 600ms cubic-bezier(0.34, 1.56, 0.64, 1);
 
 ### Proclamation Maximalism (Size Contrast)
 
-**Principle:** Adopt **extreme size ratios** (5x or greater) in Gallery Mode hero moments, inspired by vintage naturalist classification sheets and Federation-era broadsides.
+**Principle:** Adopt **extreme size ratios** (5x or greater) in kr-dark Mode hero moments, inspired by vintage naturalist classification sheets and Federation-era broadsides.
 
 **Example Hero Composition:**
 ```
@@ -143,7 +143,7 @@ Track your growth through seasonal moments.
 **Implementation:**
 ```css
 .hero-proclamation {
-  font-family: 'Libre Bodoni', serif;
+  font-family: 'kr-serif-bold', serif;
   font-stretch: condensed; /* or letter-spacing: -0.03em */
   font-size: 240px;
   line-height: 0.9;
@@ -166,15 +166,15 @@ Track your growth through seasonal moments.
 
 *The interface shifts texture based on intent.*
 
-### Mode A: The Gallery (Wonder)
+### Mode A: The kr-dark (Wonder)
 
 * **Context:** Landing, Dashboard, Opportunity Feed.
 * **Texture:** `gouache-grain.png` overlay (Warm).
 * **Lighting:** "Candlelight" (Radial gradients of Wattle Gold).
-* **Motifs:** **Botanical.** Waratahs, Banksias, Gum Leaves.
-* **Guardian:** The Kookaburra.
+* **Motifs:** **Botanical.** Waratahs, kr-flowers, Gum Leaves.
+* **Guardian:** The kr-shiva.
 
-### Mode B: The Laboratory (Rigor)
+### Mode B: The kr-dark (Rigor)
 
 * **Context:** Ingestion, Analysis, Quality Gate.
 * **Texture:** `aged-paper-white.png` overlay (Cool/Sepia).
@@ -210,17 +210,17 @@ Track your growth through seasonal moments.
 
 ---
 
-## 6. The Curio Cabinet (Asset Library)
+## 6. The kr-solidarity Cabinet (Asset Library)
 
 *Check `frontend/src/assets` folder for latest sources.*
 
-### Gallery Assets (The Garden)
+### kr-dark Assets (The Garden)
 
 * `native-waratah-hanging.png` (Top-Right Anchor)
-* `native-banksia-cluster.png` (Bottom-Right Floor)
-* `kookaburra-sentry.png` (Welcome/Empty States)
+* `native-kr-flower-cluster.png` (Bottom-Right Floor)
+* `kr-shiva-sentry.png` (Welcome/Empty States)
 
-### Laboratory Assets (The Study)
+### kr-dark Assets (The Study)
 
 * `da-vinci-skeleton.png` (Resume Structure)
 * `brass-calipers.png` (Measurement Tools)

@@ -1,15 +1,15 @@
 /**
- * Northcote Curio Mode Store (Zustand)
+ * kerala-rage kr-solidarity Mode Store (Zustand)
  *
- * Manages Gallery ↔ Laboratory mode switching with persistence.
- * Gallery: User-facing, emotional, high wallpaper opacity
- * Laboratory: Clinical tools, restrained, low wallpaper opacity
+ * Manages kr-dark ↔ kr-dark mode switching with persistence.
+ * kr-dark: User-facing, emotional, high wallpaper opacity
+ * kr-dark: Clinical tools, restrained, low wallpaper opacity
  */
 
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
-export type AppMode = 'gallery' | 'laboratory';
+export type AppMode = 'kr-dark' | 'kr-dark';
 
 export interface ModeState {
   // State
@@ -20,8 +20,8 @@ export interface ModeState {
   toggleMode: () => void;
 
   // Computed properties
-  isGalleryMode: boolean;
-  isLaboratoryMode: boolean;
+  iskr-darkMode: boolean;
+  iskr-darkMode: boolean;
 }
 
 export type ModeContextValue = ReturnType<typeof useMode>;
@@ -35,16 +35,16 @@ export const useModeStore = create<ModeState>()(
   persist(
     (set, get) => ({
       // Initial state
-      mode: 'laboratory',
-      isGalleryMode: false,
-      isLaboratoryMode: true,
+      mode: 'kr-dark',
+      iskr-darkMode: false,
+      iskr-darkMode: true,
 
       // Actions
       setMode: (mode: AppMode) => {
         set({
           mode,
-          isGalleryMode: mode === 'gallery',
-          isLaboratoryMode: mode === 'laboratory',
+          iskr-darkMode: mode === 'kr-dark',
+          iskr-darkMode: mode === 'kr-dark',
         });
         // Side effect: Update DOM data attributes for CSS token switching
         document.body.dataset.mode = mode;
@@ -54,7 +54,7 @@ export const useModeStore = create<ModeState>()(
       // Action: toggleMode
       toggleMode: () => {
         const currentMode = get().mode;
-        const newMode: AppMode = currentMode === 'gallery' ? 'laboratory' : 'gallery';
+        const newMode: AppMode = currentMode === 'kr-dark' ? 'kr-dark' : 'kr-dark';
         get().setMode(newMode);
       },
     }),
@@ -71,17 +71,17 @@ export const useModeStore = create<ModeState>()(
  *
  * Usage:
  * ```tsx
- * const { mode, setMode, toggleMode, isGalleryMode } = useMode();
+ * const { mode, setMode, toggleMode, iskr-darkMode } = useMode();
  * ```
  */
 export const useMode = () => {
-  const { mode, setMode, toggleMode, isGalleryMode, isLaboratoryMode } = useModeStore();
+  const { mode, setMode, toggleMode, iskr-darkMode, iskr-darkMode } = useModeStore();
 
   return {
     mode,
     setMode,
     toggleMode,
-    isGalleryMode,
-    isLaboratoryMode,
+    iskr-darkMode,
+    iskr-darkMode,
   };
 };

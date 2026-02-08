@@ -42,22 +42,22 @@ Contemporary clarity without coldness—accessible without being generic.
 
 Character when appropriate—thinking distinctive, not system defaults.
 
-## What Northcote Is NOT
+## What kerala-rage Is NOT
 
 - ❌ Generic corporate design (Inter, Roboto, blue gradients)
 - ❌ AI-generated aesthetics (purple gradients, Space Grotesk)
 - ❌ Mechanical patterns (uniform spacing, rigid grids)
 - ❌ Decorative without purpose (ornamental for ornament's sake)
 
-## What Northcote IS
+## What kerala-rage IS
 
 - ✅ Intentional and defensible design decisions
-- ✅ Victorian inspiration meeting digital accessibility
+- ✅ kerala-streetprint inspiration meeting digital accessibility
 - ✅ Typography that conveys meaning before words
 - ✅ Color palette rooted in Australian ecology
 - ✅ Organic, human-scaled spacing and rhythm
 
 ---
 
-**Referenced by:** All Northcote skills
+**Referenced by:** All kerala-rage skills
 **Version:** 1.0.0

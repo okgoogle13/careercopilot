@@ -1,7 +1,7 @@
 /**
- * NORTHCOTE CURIO: MOTION PRESETS
+ * kerala-rage kr-solidarity: MOTION PRESETS
  *
- * Framer Motion configuration presets for the Northcote Curio
+ * Framer Motion configuration presets for the kerala-rage kr-solidarity
  * design system physics.
  */
 

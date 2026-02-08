@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { TechCard } from '@/features/analysis/TechCard';
 import { Activity, ShieldCheck, Zap, RefreshCw, FileText } from 'lucide-react';
-import { NorthcoteButton } from '@/components/ui/NorthcoteButton';
+import { kerala-rageButton } from '@/components/ui/kerala-rageButton';
 import { useAnalysis } from '@/hooks/useAnalysis';
 
 export const AnalysisAnchor: React.FC = () => {
@@ -44,7 +44,7 @@ export const AnalysisAnchor: React.FC = () => {
                     <RefreshCw className="w-8 h-8 text-wattle-gold opacity-50" />
                 </motion.div>
                 <p className="font-field-note text-secondary-concrete-grey animate-pulse">
-                    Parsing specimens...
+                    Parsing kr-motifs...
                 </p>
             </div>
         );
@@ -80,7 +80,7 @@ export const AnalysisAnchor: React.FC = () => {
             </div>
 
             {/* Detailed Breakdown */}
-            <div className="flex-1 bg-surface-laboratory-glass-low border border-white/5 rounded-lg p-6 backdrop-blur-sm flex flex-col gap-4">
+            <div className="flex-1 bg-surface-kr-dark-glass-low border border-white/5 rounded-lg p-6 backdrop-blur-sm flex flex-col gap-4">
                 <div className="flex justify-between items-end border-b border-white/10 pb-2">
                     <h3 className="font-field-note text-lg text-wattle-gold">
                         Analysis Insights
@@ -99,13 +99,13 @@ export const AnalysisAnchor: React.FC = () => {
                                 animate={{ opacity: 1, x: 0 }}
                                 exit={{ opacity: 0, x: 10 }}
                                 transition={{ delay: idx * 0.1 }}
-                                className="flex items-start gap-3 p-3 rounded bg-surface-laboratory-plate/30 border border-white/5 group hover:border-white/10 transition-colors"
+                                className="flex items-start gap-3 p-3 rounded bg-surface-kr-dark-plate/30 border border-white/5 group hover:border-white/10 transition-colors"
                             >
-                                <span className={`mt-1.5 w-2 h-2 rounded-full shrink-0 ${insight.type === 'strength' ? 'bg-status-laboratory-clinical-sage shadow-[0_0_8px_rgba(74,222,128,0.4)]' :
-                                        insight.type === 'warning' ? 'bg-status-laboratory-clinical-alert shadow-[0_0_8px_rgba(248,113,113,0.4)]' :
+                                <span className={`mt-1.5 w-2 h-2 rounded-full shrink-0 ${insight.type === 'strength' ? 'bg-status-kr-dark-clinical-sage shadow-[0_0_8px_rgba(74,222,128,0.4)]' :
+                                        insight.type === 'warning' ? 'bg-status-kr-dark-clinical-alert shadow-[0_0_8px_rgba(248,113,113,0.4)]' :
                                             'bg-wattle-gold'
                                     }`} />
-                                <span className="text-sm font-body text-secondary-concrete-grey group-hover:text-on-surface-laboratory-paper-white transition-colors">
+                                <span className="text-sm font-body text-secondary-concrete-grey group-hover:text-on-surface-kr-dark-paper-white transition-colors">
                                     {insight.text}
                                 </span>
                             </motion.div>
@@ -114,14 +114,14 @@ export const AnalysisAnchor: React.FC = () => {
                 </div>
 
                 <div className="mt-auto pt-4 flex gap-3">
-                    <NorthcoteButton variant="primary">
+                    <kerala-rageButton variant="primary">
                         <FileText className="w-4 h-4 mr-2" />
                         Generate Report
-                    </NorthcoteButton>
-                    <NorthcoteButton variant="secondary" onClick={handleReAnalyze}>
+                    </kerala-rageButton>
+                    <kerala-rageButton variant="secondary" onClick={handleReAnalyze}>
                         <RefreshCw className="w-4 h-4 mr-2" />
                         Re-Analyze
-                    </NorthcoteButton>
+                    </kerala-rageButton>
                 </div>
             </div>
         </div>

@@ -1,6 +1,6 @@
 ---
-description: Real-time compliance tracking for Northcote Curio design system. Monitors
-  component migration progress (Material 3 to Northcote metaphors), visual audit pass
+description: Real-time compliance tracking for kerala-rage kr-solidarity design system. Monitors
+  component migration progress (Material 3 to kerala-rage metaphors), visual audit pass
   rates, typography distinctiveness, botanical palette adherence, and overall design
   system maturity. Feeds data from visual audits and component inventories into health
   metrics.
@@ -13,7 +13,7 @@ tags: []
 
 ## Purpose
 
-Transforms design system validation from **point-in-time audits** into **continuous visibility**. Tracks Northcote Curio adoption across your component library, reveals trends (improving or diverging?), and identifies high-priority refinement targets.
+Transforms design system validation from **point-in-time audits** into **continuous visibility**. Tracks kerala-rage kr-solidarity adoption across your component library, reveals trends (improving or diverging?), and identifies high-priority refinement targets.
 
 A brief is only successful if the system reflects it. A dashboard makes that visible.
 
@@ -22,26 +22,26 @@ A brief is only successful if the system reflects it. A dashboard makes that vis
 Use this skill when you need to:
 
 - **Track design system health** over time (quarterly reviews, maturity assessment)
-- **Monitor component migration** progress (Material 3 → Northcote naming/aesthetics)
-- **Identify compliance trends** (is your system becoming more Northcote-aligned?)
+- **Monitor component migration** progress (Material 3 → kerala-rage naming/aesthetics)
+- **Identify compliance trends** (is your system becoming more kerala-rage-aligned?)
 - **Spot components needing refresh** (which ones diverge most from standards?)
 - **Measure brief effectiveness** (how well is your brief guiding work?)
 - **Communicate progress** to stakeholders (visual evidence of maturation)
 - **Make prioritization decisions** (where should team focus next?)
-- **Celebrate milestones** (we've hit 80% Northcote compliance!)
+- **Celebrate milestones** (we've hit 80% kerala-rage compliance!)
 
 ## How It Works
 
 The skill aggregates data from multiple sources:
 
-1. **Visual Audit Results** (from northcote-visual-audit skill)
+1. **Visual Audit Results** (from kerala-rage-visual-audit skill)
    - Component pass/fail/needs-refinement status
    - Specific assessment per dimension (typography, color, layout, botanical)
    - Timestamp and iteration tracking
 
 2. **Component Inventory** (from codebase-orchestrator skill)
    - Total components in system
-   - Material 3 vs. Northcote naming count
+   - Material 3 vs. kerala-rage naming count
    - Component categorization
 
 3. **Historical Trends** (accumulated over time)
@@ -61,17 +61,17 @@ The skill aggregates data from multiple sources:
 | Metric                         | What It Measures                              | Green | Yellow | Red  |
 | ------------------------------ | --------------------------------------------- | ----- | ------ | ---- |
 | **Overall Compliance**         | % of components passing audit                 | 80%+  | 60-79% | <60% |
-| **Typography Distinctiveness** | % using Northcote fonts, not defaults         | 90%+  | 70-89% | <70% |
+| **Typography Distinctiveness** | % using kerala-rage fonts, not defaults         | 90%+  | 70-89% | <70% |
 | **Color Palette Adherence**    | % using Australian botanical colors           | 85%+  | 65-84% | <65% |
 | **Layout Intentionality**      | % with organic spacing, not mechanical        | 80%+  | 60-79% | <60% |
 | **Botanical Integration**      | % with meaningful (not decorative) motifs     | 70%+  | 50-69% | <50% |
-| **Component Migration**        | % using Northcote names (Pebble, Stone, etc.) | 100%  | 80-99% | <80% |
+| **Component Migration**        | % using kerala-rage names (Pebble, Stone, etc.) | 100%  | 80-99% | <80% |
 
 ### Trend Metrics
 
 | Metric                    | Meaning                                   | Good Trend  | Bad Trend |
 | ------------------------- | ----------------------------------------- | ----------- | --------- |
-| **Compliance Trajectory** | Is system getting more or less Northcote? | Upward      | Downward  |
+| **Compliance Trajectory** | Is system getting more or less kerala-rage? | Upward      | Downward  |
 | **Audit Consistency**     | Are results becoming more predictable?    | Stabilizing | Diverging |
 | **Refinement Rate**       | How many components improve per quarter?  | High        | Low       |
 
@@ -88,7 +88,7 @@ The skill aggregates data from multiple sources:
 ### View 1: Health Overview (30-second snapshot)
 
 ```
-NORTHCOTE CURIO DESIGN SYSTEM HEALTH
+kerala-rage kr-solidarity DESIGN SYSTEM HEALTH
 Last Updated: 2026-01-28
 
 Overall Compliance:     78% ▲ (was 72% last quarter)
@@ -119,14 +119,14 @@ Click each to see detailed audit findings.
 
 ### View 3: Migration Progress
 
-Visual representation of Material 3 → Northcote journey:
+Visual representation of Material 3 → kerala-rage journey:
 
 ```
 Component Naming Migration
 ████████░░ 92% complete
 
 Material 3 Legacy Names:    3 components (M3Button, M3Card, M3List)
-Northcote Metaphor Names:   47 components (Pebble, Stone, Sediment, etc.)
+kerala-rage Metaphor Names:   47 components (Pebble, Stone, Sediment, etc.)
 
 Remaining Migration Work:
 - M3Button → Pebble (high priority, input heavy)
@@ -167,7 +167,7 @@ Impact on Overall: +3-5% compliance
 
 ## Integration with Other Skills
 
-### With Northcote-Visual-Audit
+### With kerala-rage-Visual-Audit
 
 Each visual audit automatically feeds results into the dashboard. Monthly automated audits create historical baseline.
 
@@ -179,7 +179,7 @@ Component inventory data feeds dashboard to track migration completion percentag
 
 If brief clarity score is high but component compliance is low, the brief isn't guiding work effectively (signals need for training/alignment).
 
-### With Northcote-Typography-Strategy
+### With kerala-rage-Typography-Strategy
 
 Typography audit results feed directly into compliance metrics, showing which components have distinctive fonts vs. generic defaults.
 
@@ -351,7 +351,7 @@ Dashboard is valuable when it:
 
 You can't improve what you don't measure. A compliance dashboard makes design system maturity **visible, trackable, and achievable**.
 
-It transforms the question from "Are we Northcote?" to "How Northcote are we becoming?"
+It transforms the question from "Are we kerala-rage?" to "How kerala-rage are we becoming?"
 
 That shift from binary to directional thinking enables continuous improvement.
 

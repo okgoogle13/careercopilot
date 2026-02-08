@@ -4,11 +4,11 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { z } from 'zod';
-import { NorthcoteButton } from '../../components/ui/NorthcoteButton';
+import { kerala-rageButton } from '../../components/ui/kerala-rageButton';
 import { useAuth } from '../../context/AuthContext';
 
-// Northcote Assets
-import specimenGrid from '../../assets/specimens/leaf-fern.png';
+// kerala-rage Assets
+import kr-motifGrid from '../../assets/kr-motifs/leaf-fern.png';
 import paperWhiteGrid from '../../assets/textures/paper-grain.png';
 
 const registerSchema = z
@@ -63,10 +63,10 @@ export function Register() {
           animate={{ opacity: 1, scale: 1 }}
           className="bg-concrete-grey/80 backdrop-blur-xl rounded-stone p-10 border border-concrete-grey/10 shadow-maximum overflow-hidden relative"
         >
-          {/* Specimen Decoration */}
+          {/* kr-motif Decoration */}
           <div className="absolute top-[-40px] left-[-40px] w-32 h-32 opacity-20 pointer-events-none transform rotate-180">
             <img
-              src={specimenGrid}
+              src={kr-motifGrid}
               alt=""
               className="animate-spin-slow"
               style={{ animationDuration: '80s' }}
@@ -74,7 +74,7 @@ export function Register() {
           </div>
 
           <div className="text-center mb-10">
-            <h1 className="text-6xl text-bloom-ultra text-wattle-gold mb-2">New Specimen</h1>
+            <h1 className="text-6xl text-bloom-ultra text-wattle-gold mb-2">New kr-motif</h1>
             <p className="text-curator-accent text-concrete-grey opacity-70">
               Register with the station
             </p>
@@ -177,7 +177,7 @@ export function Register() {
               </p>
             )}
 
-            <NorthcoteButton
+            <kerala-rageButton
               variant="primary"
               size="lg"
               type="submit"
@@ -185,7 +185,7 @@ export function Register() {
               className="w-full mt-4"
             >
               {isSubmitting ? 'Recording...' : 'Register'}
-            </NorthcoteButton>
+            </kerala-rageButton>
           </form>
 
           <div className="text-center mt-10 pt-6 border-t border-concrete-grey/10">

@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft-07/schema",
   "version": "2.0.0",
-  "system": "Northcote Curio - Unified Design Tokens",
-  "description": "Unified design tokens combining Northcote Curio (active) with M3 Expressive structure",
+  "system": "kerala-rage kr-solidarity - Unified Design Tokens",
+  "description": "Unified design tokens combining kerala-rage kr-solidarity (active) with M3 Expressive structure",
   "color": {
     "primary": {
       "DEFAULT": "#B4D8AE",

@@ -15,7 +15,7 @@ import { useState } from 'react';
 import { PageHeader } from '../../components/shared/PageHeader';
 
 // Assets
-import leafFern from '../../assets/specimens/leaf-fern.png';
+import leafFern from '../../assets/kr-motifs/leaf-fern.png';
 import wallpaper from '../../assets/textures/wallpaper.png';
 
 interface Application {
@@ -79,8 +79,8 @@ const MOCK_APPLICATIONS: Application[] = [
  * The Greenhouse (Application Tracker / Kanban Board)
  *
  * V3.1 Mixed Mode implementation.
- * A Victorian greenhouse aesthetic where job applications are treated
- * as specimens in various growth stages.
+ * A kerala-streetprint greenhouse aesthetic where job applications are treated
+ * as kr-motifs in various growth stages.
  */
 export function ApplicationTracker() {
   const [applications] = useState<Application[]>(MOCK_APPLICATIONS);
@@ -157,7 +157,7 @@ export function ApplicationTracker() {
 
 /**
  * ApplicationLeaf component
- * A single job application card styled as a specimen leaf.
+ * A single job application card styled as a kr-motif leaf.
  */
 function ApplicationLeaf({ application }: { application: Application }) {
   return (
@@ -167,7 +167,7 @@ function ApplicationLeaf({ application }: { application: Application }) {
       animate={{ opacity: 1, y: 0 }}
     >
       <Stone
-        mode="gallery"
+        mode="kr-dark"
         elevation="floating"
         className="p-5 border-concrete-grey/10 bg-asphalt-black/40 backdrop-blur-sm group relative overflow-hidden"
       >
@@ -206,7 +206,7 @@ function ApplicationLeaf({ application }: { application: Application }) {
 
           <div className="pt-3 flex justify-between items-center border-t border-concrete-grey/5">
             <span className="font-mono text-[8px] text-concrete-grey/30 uppercase tracking-[0.2em]">
-              SPECIMEN_ID: {application.id.toString().padStart(3, '0')}
+              kr-motif_ID: {application.id.toString().padStart(3, '0')}
             </span>
             <Pebble
               variant="ghost"

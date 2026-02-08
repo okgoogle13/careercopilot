@@ -14,7 +14,7 @@ const config: Config = {
                 'surface-container': 'var(--color-concrete-grey)',
             },
             fontFamily: {
-                proclamation: ['"Libre Bodoni"', '"Playfair Display"', 'serif'],
+                proclamation: ['"kr-serif-bold"', '"Playfair Display"', 'serif'],
                 bloom: ['"Fraunces"', 'serif'],
                 'field-note': ['"Work Sans"', 'sans-serif'],
                 annotation: ['"JetBrains Mono"', 'monospace'],

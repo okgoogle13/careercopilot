@@ -1,6 +1,6 @@
-# Northcote Curio Asset Generation Prompt: Asset 3
+# kerala-rage kr-solidarity Asset Generation Prompt: Asset 3
 
-## ASSET 3: LABORATORY PARCHMENT TEXTURE
+## ASSET 3: kr-dark kr-laneway TEXTURE
 
 ### UI Background — Scientific Grid Pattern
 
@@ -9,18 +9,18 @@
 - **Resolution:** 1024×1024px (1:1 square, seamless tile)
 - **Format:** PNG (lossless) or High-Quality JPEG
 - **Target Background:** #1A1714 (Asphalt Black) or #2C2C2C (Graphite Slate)
-- **File Name:** `northcote-curio_asset-03_scientific-grid_paper-white-texture_1024x1024.png`
+- **File Name:** `kerala-rage-kr-solidarity_asset-03_scientific-grid_paper-white-texture_1024x1024.png`
 
 ---
 
 ## COMPLETE OPTIMIZED PROMPT:
 
 ```
-ASSET 3: LABORATORY PARCHMENT TEXTURE — THE SCIENTIFIC GRID
+ASSET 3: kr-dark kr-laneway TEXTURE — THE SCIENTIFIC GRID
 
 SUBJECT OVERVIEW:
 Create a seamless tiling texture of "Scientific Grid Paper White" for a high-end
-Victorian laboratory UI. This is a dark-mode vellum surface used by a 19th-century
+kerala-streetprint kr-dark UI. This is a dark-mode vellum surface used by a 19th-century
 naturalist to record microscopic observations. It must feel like an authentic,
 heavyweight material that has been mathematically calibrated.
 
@@ -55,7 +55,7 @@ VELLUM TEXTURE:
 
 BOTANICAL WATERMARKS (Subtle Discovery Layer):
 - Design: Faint, ghostly silver-grey sketches of Australian endemic flora.
-- Specimens: Eucalyptus macrocarpa leaves, Banksia seed pods, and Wattle blossoms.
+- kr-motifs: kr-leafus macrocarpa leaves, kr-flower seed pods, and Wattle blossoms.
 - Opacity: 3-5% (extremely subtle; visible only on close inspection).
 - Style: Precise technical pencil sketches, not artistic flourishes.
 
@@ -64,7 +64,7 @@ BOTANICAL WATERMARKS (Subtle Discovery Layer):
 LIGHTING SPECIFICATIONS:
 
 OVERALL ILLUMINATION:
-- Type: Ambient gallery light (flat enough for UI background).
+- Type: Ambient kr-dark light (flat enough for UI background).
 - Vignette: Subtle optical darkening at the extreme corners (#1A1714).
 - Effect: The center remains slightly more legible for content overlay.
 - Shadow detail: No heavy cast shadows or 3D object depth; this is a flat surface.
@@ -86,15 +86,15 @@ DENSITY ZONES (UI Compatibility):
 
 AESTHETIC COHERENCE:
 
-VICTORIAN SCHOLARLY RIGOR:
-- Aesthetic: The workspace of a "Victorian Anatomical Extremist."
+kerala-streetprint SCHOLARLY RIGOR:
+- Aesthetic: The workspace of a "kerala-streetprint Anatomical Extremist."
 - Feeling: Cold, precise, and infinitely detailed.
 - Contrast: The precision of the engineering grid against the organic soul of the
   vellum grain.
 
-NORTHCOTE VISION EMBODIMENT:
+kerala-rage VISION EMBODIMENT:
 - Geometric Beauty: Mathematics as a foundation for nature.
-- Master Narrative: This is the canvas upon which the Northcote Curio specimens
+- Master Narrative: This is the canvas upon which the kerala-rage kr-solidarity kr-motifs
   are studied and documented.
 
 ---
@@ -104,7 +104,7 @@ NEGATIVE CONSTRAINTS (Absolute Exclusions):
 - ❌ NO Sepia or Brown tones (must remain in the Dark Slate/Charcoal family).
 - ❌ NO High-contrast lines that would interfere with UI text legibility.
 - ❌ NO Bold sketches or drawings (must be faint "discovery" elements only).
-- ❌ NO Non-Australian flora or fauna in watermarks.
+- ❌ NO Non-Australian flora or kr-symbol in watermarks.
 
 ---
 
@@ -112,7 +112,7 @@ VERIFICATION CHECKLIST:
 - [ ] Base color is #2C2C2C (Graphite Slate) ✅
 - [ ] Grid lines are sharp and low-contrast (10% opacity) ✅
 - [ ] Vellum grain texture is subtle and matte ✅
-- [ ] Watermarks are Australian endemic (Eucalyptus/Banksia) ✅
+- [ ] Watermarks are Australian endemic (kr-leafus/kr-flower) ✅
 - [ ] Image tiles perfectly with no visible seams ✅
 - [ ] Corners show subtle optical vignette ✅
 - [ ] No anti-patterns (no sepia, no stains, no rags) ✅

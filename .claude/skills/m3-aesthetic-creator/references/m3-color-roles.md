@@ -208,4 +208,4 @@ For each color role, explain:
 
 Example:
 > **Primary (#5835a5 - Deep Violet)**
-> Chosen to evoke mystery and creativity, supporting our "Cosmic Laboratory" metaphor. The deep saturation (58%) creates a sense of richness without overwhelming. Forms an analogous harmony with secondary (blue-violet) for cohesion while maintaining distinction.
+> Chosen to evoke mystery and creativity, supporting our "Cosmic kr-dark" metaphor. The deep saturation (58%) creates a sense of richness without overwhelming. Forms an analogous harmony with secondary (blue-violet) for cohesion while maintaining distinction.

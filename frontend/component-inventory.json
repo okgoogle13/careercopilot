@@ -1822,7 +1822,7 @@
       "usageCount": 2,
       "importedBy": [
         "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/core/Pebble.figma.tsx",
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/GalleryShell/views/GalleryFeed.tsx"
+        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/views/kr-darkFeed.tsx"
       ],
       "exports": [
         "PebbleProps",
@@ -2817,9 +2817,9 @@
       "usesModeSystem": false
     },
     {
-      "name": "NorthcoteButton",
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/NorthcoteButton.tsx",
-      "relativePath": "src/components/ui/NorthcoteButton.tsx",
+      "name": "kerala-rageButton",
+      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/kerala-rageButton.tsx",
+      "relativePath": "src/components/ui/kerala-rageButton.tsx",
       "category": "ui",
       "usageCount": 11,
       "importedBy": [
@@ -2829,15 +2829,15 @@
         "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/auth/Register.tsx",
         "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/documents/DocumentStack.tsx",
         "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/sandbox/components/SplitEditor.tsx",
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/GalleryShell/views/GalleryLanding.tsx",
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/LaboratoryShell/components/GlobalHeader.tsx",
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/LaboratoryShell/components/NavRail.tsx",
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/LaboratoryShell/components/anchors/AnalysisAnchor.tsx",
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/LaboratoryShell/components/anchors/DocumentStackAnchor.tsx"
+        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/views/kr-darkLanding.tsx",
+        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/components/GlobalHeader.tsx",
+        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/components/NavRail.tsx",
+        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/components/anchors/AnalysisAnchor.tsx",
+        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/components/anchors/DocumentStackAnchor.tsx"
       ],
       "exports": [
-        "NorthcoteButtonProps",
-        "NorthcoteButton"
+        "kerala-rageButtonProps",
+        "kerala-rageButton"
       ],
       "hasTests": false,
       "hasStories": false,
@@ -3184,7 +3184,7 @@
       "linesOfCode": 66,
       "complexity": "medium",
       "dependencies": [
-        "../../components/ui/NorthcoteButton"
+        "../../components/ui/kerala-rageButton"
       ],
       "isReusable": false,
       "usesMUI": false,
@@ -3280,7 +3280,7 @@
       "category": "features",
       "usageCount": 1,
       "importedBy": [
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/LaboratoryShell/components/anchors/AnalysisAnchor.tsx"
+        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/components/anchors/AnalysisAnchor.tsx"
       ],
       "exports": [
         "TechCard"
@@ -3320,7 +3320,7 @@
       "complexity": "medium",
       "dependencies": [
         "@/components/ui/StatusBadge/StatusBadge",
-        "@/components/ui/NorthcoteButton"
+        "@/components/ui/kerala-rageButton"
       ],
       "isReusable": false,
       "usesMUI": false,
@@ -3382,7 +3382,7 @@
       "complexity": "medium",
       "dependencies": [
         "../../context/AuthContext",
-        "../../components/ui/NorthcoteButton"
+        "../../components/ui/kerala-rageButton"
       ],
       "isReusable": false,
       "usesMUI": false,
@@ -3412,7 +3412,7 @@
       "complexity": "medium",
       "dependencies": [
         "../../context/AuthContext",
-        "../../components/ui/NorthcoteButton"
+        "../../components/ui/kerala-rageButton"
       ],
       "isReusable": false,
       "usesMUI": false,
@@ -3553,7 +3553,7 @@
       "complexity": "medium",
       "dependencies": [
         "@/lib/utils",
-        "@/components/ui/NorthcoteButton"
+        "@/components/ui/kerala-rageButton"
       ],
       "isReusable": false,
       "usesMUI": false,
@@ -3592,13 +3592,13 @@
     },
     {
       "name": "GlassLeafCard",
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/gallery/GlassLeafCard.tsx",
-      "relativePath": "src/features/gallery/GlassLeafCard.tsx",
+      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/kr-dark/GlassLeafCard.tsx",
+      "relativePath": "src/features/kr-dark/GlassLeafCard.tsx",
       "category": "features",
       "usageCount": 2,
       "importedBy": [
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/GalleryShell/views/GalleryFeed.tsx",
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/GalleryShell/views/GalleryKanban.tsx"
+        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/views/kr-darkFeed.tsx",
+        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/views/kr-darkKanban.tsx"
       ],
       "exports": [
         "GlassLeafCard"
@@ -3623,8 +3623,8 @@
     },
     {
       "name": "IconBadge",
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/gallery/IconBadge.tsx",
-      "relativePath": "src/features/gallery/IconBadge.tsx",
+      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/kr-dark/IconBadge.tsx",
+      "relativePath": "src/features/kr-dark/IconBadge.tsx",
       "category": "features",
       "usageCount": 0,
       "importedBy": [],
@@ -4017,7 +4017,7 @@
       "linesOfCode": 134,
       "complexity": "medium",
       "dependencies": [
-        "@/components/ui/NorthcoteButton",
+        "@/components/ui/kerala-rageButton",
         "../logic",
         "@/hooks/useAnalysis",
         "../EcosystemSandbox"
@@ -4153,12 +4153,12 @@
     },
     {
       "name": "Fireflies",
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/GalleryShell/components/Fireflies.tsx",
-      "relativePath": "src/layouts/GalleryShell/components/Fireflies.tsx",
+      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/components/Fireflies.tsx",
+      "relativePath": "src/layouts/kr-darkShell/components/Fireflies.tsx",
       "category": "layout",
       "usageCount": 1,
       "importedBy": [
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/GalleryShell/GalleryShell.tsx"
+        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/kr-darkShell.tsx"
       ],
       "exports": [
         "Fireflies"
@@ -4179,16 +4179,16 @@
       "usesModeSystem": false
     },
     {
-      "name": "GalleryDock",
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/GalleryShell/components/GalleryDock.tsx",
-      "relativePath": "src/layouts/GalleryShell/components/GalleryDock.tsx",
+      "name": "kr-darkDock",
+      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/components/kr-darkDock.tsx",
+      "relativePath": "src/layouts/kr-darkShell/components/kr-darkDock.tsx",
       "category": "layout",
       "usageCount": 1,
       "importedBy": [
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/GalleryShell/GalleryShell.tsx"
+        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/kr-darkShell.tsx"
       ],
       "exports": [
-        "GalleryDock"
+        "kr-darkDock"
       ],
       "hasTests": false,
       "hasStories": false,
@@ -4208,14 +4208,14 @@
       "usesModeSystem": false
     },
     {
-      "name": "GalleryShell",
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/GalleryShell/GalleryShell.tsx",
-      "relativePath": "src/layouts/GalleryShell/GalleryShell.tsx",
+      "name": "kr-darkShell",
+      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/kr-darkShell.tsx",
+      "relativePath": "src/layouts/kr-darkShell/kr-darkShell.tsx",
       "category": "layout",
       "usageCount": 0,
       "importedBy": [],
       "exports": [
-        "GalleryShell"
+        "kr-darkShell"
       ],
       "hasTests": false,
       "hasStories": false,
@@ -4225,13 +4225,13 @@
       "dependencies": [
         "../../context/ModeContext",
         "./components/Fireflies",
-        "./components/GalleryDock",
-        "./views/GalleryLanding",
-        "./views/GalleryAuth",
-        "./views/GalleryOnboarding",
-        "./views/GalleryFeed",
-        "./views/GalleryDashboard",
-        "./views/GalleryKanban"
+        "./components/kr-darkDock",
+        "./views/kr-darkLanding",
+        "./views/kr-darkAuth",
+        "./views/kr-darkOnboarding",
+        "./views/kr-darkFeed",
+        "./views/kr-darkDashboard",
+        "./views/kr-darkKanban"
       ],
       "isReusable": false,
       "usesMUI": false,
@@ -4243,16 +4243,16 @@
       "usesModeSystem": true
     },
     {
-      "name": "GalleryAuth",
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/GalleryShell/views/GalleryAuth.tsx",
-      "relativePath": "src/layouts/GalleryShell/views/GalleryAuth.tsx",
+      "name": "kr-darkAuth",
+      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/views/kr-darkAuth.tsx",
+      "relativePath": "src/layouts/kr-darkShell/views/kr-darkAuth.tsx",
       "category": "layout",
       "usageCount": 1,
       "importedBy": [
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/GalleryShell/GalleryShell.tsx"
+        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/kr-darkShell.tsx"
       ],
       "exports": [
-        "GalleryAuth"
+        "kr-darkAuth"
       ],
       "hasTests": false,
       "hasStories": false,
@@ -4270,16 +4270,16 @@
       "usesModeSystem": false
     },
     {
-      "name": "GalleryDashboard",
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/GalleryShell/views/GalleryDashboard.tsx",
-      "relativePath": "src/layouts/GalleryShell/views/GalleryDashboard.tsx",
+      "name": "kr-darkDashboard",
+      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/views/kr-darkDashboard.tsx",
+      "relativePath": "src/layouts/kr-darkShell/views/kr-darkDashboard.tsx",
       "category": "layout",
       "usageCount": 1,
       "importedBy": [
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/GalleryShell/GalleryShell.tsx"
+        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/kr-darkShell.tsx"
       ],
       "exports": [
-        "GalleryDashboard"
+        "kr-darkDashboard"
       ],
       "hasTests": false,
       "hasStories": false,
@@ -4297,16 +4297,16 @@
       "usesModeSystem": false
     },
     {
-      "name": "GalleryFeed",
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/GalleryShell/views/GalleryFeed.tsx",
-      "relativePath": "src/layouts/GalleryShell/views/GalleryFeed.tsx",
+      "name": "kr-darkFeed",
+      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/views/kr-darkFeed.tsx",
+      "relativePath": "src/layouts/kr-darkShell/views/kr-darkFeed.tsx",
       "category": "layout",
       "usageCount": 1,
       "importedBy": [
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/GalleryShell/GalleryShell.tsx"
+        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/kr-darkShell.tsx"
       ],
       "exports": [
-        "GalleryFeed"
+        "kr-darkFeed"
       ],
       "hasTests": false,
       "hasStories": false,
@@ -4315,8 +4315,8 @@
       "complexity": "medium",
       "dependencies": [
         "@/components/core/Pebble",
-        "@/features/gallery/GlassLeafCard",
-        "@/hooks/useGalleryData"
+        "@/features/kr-dark/GlassLeafCard",
+        "@/hooks/usekr-darkData"
       ],
       "isReusable": false,
       "usesMUI": false,
@@ -4328,16 +4328,16 @@
       "usesModeSystem": false
     },
     {
-      "name": "GalleryKanban",
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/GalleryShell/views/GalleryKanban.tsx",
-      "relativePath": "src/layouts/GalleryShell/views/GalleryKanban.tsx",
+      "name": "kr-darkKanban",
+      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/views/kr-darkKanban.tsx",
+      "relativePath": "src/layouts/kr-darkShell/views/kr-darkKanban.tsx",
       "category": "layout",
       "usageCount": 1,
       "importedBy": [
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/GalleryShell/GalleryShell.tsx"
+        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/kr-darkShell.tsx"
       ],
       "exports": [
-        "GalleryKanban"
+        "kr-darkKanban"
       ],
       "hasTests": false,
       "hasStories": false,
@@ -4346,7 +4346,7 @@
       "complexity": "medium",
       "dependencies": [
         "@/hooks/useKanban",
-        "@/features/gallery/GlassLeafCard"
+        "@/features/kr-dark/GlassLeafCard"
       ],
       "isReusable": false,
       "usesMUI": false,
@@ -4358,16 +4358,16 @@
       "usesModeSystem": false
     },
     {
-      "name": "GalleryLanding",
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/GalleryShell/views/GalleryLanding.tsx",
-      "relativePath": "src/layouts/GalleryShell/views/GalleryLanding.tsx",
+      "name": "kr-darkLanding",
+      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/views/kr-darkLanding.tsx",
+      "relativePath": "src/layouts/kr-darkShell/views/kr-darkLanding.tsx",
       "category": "layout",
       "usageCount": 1,
       "importedBy": [
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/GalleryShell/GalleryShell.tsx"
+        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/kr-darkShell.tsx"
       ],
       "exports": [
-        "GalleryLanding"
+        "kr-darkLanding"
       ],
       "hasTests": false,
       "hasStories": false,
@@ -4375,7 +4375,7 @@
       "linesOfCode": 43,
       "complexity": "simple",
       "dependencies": [
-        "../../../components/ui/NorthcoteButton"
+        "../../../components/ui/kerala-rageButton"
       ],
       "isReusable": false,
       "usesMUI": false,
@@ -4387,16 +4387,16 @@
       "usesModeSystem": false
     },
     {
-      "name": "GalleryOnboarding",
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/GalleryShell/views/GalleryOnboarding.tsx",
-      "relativePath": "src/layouts/GalleryShell/views/GalleryOnboarding.tsx",
+      "name": "kr-darkOnboarding",
+      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/views/kr-darkOnboarding.tsx",
+      "relativePath": "src/layouts/kr-darkShell/views/kr-darkOnboarding.tsx",
       "category": "layout",
       "usageCount": 1,
       "importedBy": [
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/GalleryShell/GalleryShell.tsx"
+        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/kr-darkShell.tsx"
       ],
       "exports": [
-        "GalleryOnboarding"
+        "kr-darkOnboarding"
       ],
       "hasTests": false,
       "hasStories": false,
@@ -4414,18 +4414,18 @@
       "usesModeSystem": false
     },
     {
-      "name": "GalleryPlaceholders",
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/GalleryShell/views/GalleryPlaceholders.tsx",
-      "relativePath": "src/layouts/GalleryShell/views/GalleryPlaceholders.tsx",
+      "name": "kr-darkPlaceholders",
+      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/views/kr-darkPlaceholders.tsx",
+      "relativePath": "src/layouts/kr-darkShell/views/kr-darkPlaceholders.tsx",
       "category": "layout",
       "usageCount": 0,
       "importedBy": [],
       "exports": [
-        "GalleryAuth",
-        "GalleryOnboarding",
-        "GalleryDashboard",
-        "GalleryKanban",
-        "GalleryPlaceholders",
+        "kr-darkAuth",
+        "kr-darkOnboarding",
+        "kr-darkDashboard",
+        "kr-darkKanban",
+        "kr-darkPlaceholders",
         "default"
       ],
       "hasTests": false,
@@ -4445,12 +4445,12 @@
     },
     {
       "name": "AnalysisAnchor",
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/LaboratoryShell/components/anchors/AnalysisAnchor.tsx",
-      "relativePath": "src/layouts/LaboratoryShell/components/anchors/AnalysisAnchor.tsx",
+      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/components/anchors/AnalysisAnchor.tsx",
+      "relativePath": "src/layouts/kr-darkShell/components/anchors/AnalysisAnchor.tsx",
       "category": "layout",
       "usageCount": 1,
       "importedBy": [
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/LaboratoryShell/components/MainCanvas.tsx"
+        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/components/MainCanvas.tsx"
       ],
       "exports": [
         "AnalysisAnchor"
@@ -4462,7 +4462,7 @@
       "complexity": "medium",
       "dependencies": [
         "@/features/analysis/TechCard",
-        "@/components/ui/NorthcoteButton",
+        "@/components/ui/kerala-rageButton",
         "@/hooks/useAnalysis"
       ],
       "isReusable": false,
@@ -4476,12 +4476,12 @@
     },
     {
       "name": "DocumentStackAnchor",
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/LaboratoryShell/components/anchors/DocumentStackAnchor.tsx",
-      "relativePath": "src/layouts/LaboratoryShell/components/anchors/DocumentStackAnchor.tsx",
+      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/components/anchors/DocumentStackAnchor.tsx",
+      "relativePath": "src/layouts/kr-darkShell/components/anchors/DocumentStackAnchor.tsx",
       "category": "layout",
       "usageCount": 1,
       "importedBy": [
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/LaboratoryShell/components/MainCanvas.tsx"
+        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/components/MainCanvas.tsx"
       ],
       "exports": [
         "DocumentStackAnchor"
@@ -4492,7 +4492,7 @@
       "linesOfCode": 44,
       "complexity": "simple",
       "dependencies": [
-        "@/components/ui/NorthcoteButton"
+        "@/components/ui/kerala-rageButton"
       ],
       "isReusable": false,
       "usesMUI": false,
@@ -4505,12 +4505,12 @@
     },
     {
       "name": "GlobalHeader",
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/LaboratoryShell/components/GlobalHeader.tsx",
-      "relativePath": "src/layouts/LaboratoryShell/components/GlobalHeader.tsx",
+      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/components/GlobalHeader.tsx",
+      "relativePath": "src/layouts/kr-darkShell/components/GlobalHeader.tsx",
       "category": "layout",
       "usageCount": 1,
       "importedBy": [
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/LaboratoryShell/LayoutShell.tsx"
+        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/LayoutShell.tsx"
       ],
       "exports": [
         "GlobalHeader"
@@ -4522,7 +4522,7 @@
       "complexity": "simple",
       "dependencies": [
         "../../../context/ModeContext",
-        "../../../components/ui/NorthcoteButton"
+        "../../../components/ui/kerala-rageButton"
       ],
       "isReusable": false,
       "usesMUI": false,
@@ -4535,12 +4535,12 @@
     },
     {
       "name": "MainCanvas",
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/LaboratoryShell/components/MainCanvas.tsx",
-      "relativePath": "src/layouts/LaboratoryShell/components/MainCanvas.tsx",
+      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/components/MainCanvas.tsx",
+      "relativePath": "src/layouts/kr-darkShell/components/MainCanvas.tsx",
       "category": "layout",
       "usageCount": 1,
       "importedBy": [
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/LaboratoryShell/LayoutShell.tsx"
+        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/LayoutShell.tsx"
       ],
       "exports": [
         "MainCanvas"
@@ -4565,12 +4565,12 @@
     },
     {
       "name": "NavRail",
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/LaboratoryShell/components/NavRail.tsx",
-      "relativePath": "src/layouts/LaboratoryShell/components/NavRail.tsx",
+      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/components/NavRail.tsx",
+      "relativePath": "src/layouts/kr-darkShell/components/NavRail.tsx",
       "category": "layout",
       "usageCount": 1,
       "importedBy": [
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/LaboratoryShell/LayoutShell.tsx"
+        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/LayoutShell.tsx"
       ],
       "exports": [
         "NavRail"
@@ -4581,7 +4581,7 @@
       "linesOfCode": 31,
       "complexity": "simple",
       "dependencies": [
-        "../../../components/ui/NorthcoteButton",
+        "../../../components/ui/kerala-rageButton",
         "../../../config/navigation.schema"
       ],
       "isReusable": false,
@@ -4595,12 +4595,12 @@
     },
     {
       "name": "SidePanel",
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/LaboratoryShell/components/SidePanel.tsx",
-      "relativePath": "src/layouts/LaboratoryShell/components/SidePanel.tsx",
+      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/components/SidePanel.tsx",
+      "relativePath": "src/layouts/kr-darkShell/components/SidePanel.tsx",
       "category": "layout",
       "usageCount": 1,
       "importedBy": [
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/LaboratoryShell/LayoutShell.tsx"
+        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/LayoutShell.tsx"
       ],
       "exports": [
         "SidePanel"
@@ -4622,8 +4622,8 @@
     },
     {
       "name": "LayoutShell",
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/LaboratoryShell/LayoutShell.tsx",
-      "relativePath": "src/layouts/LaboratoryShell/LayoutShell.tsx",
+      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/LayoutShell.tsx",
+      "relativePath": "src/layouts/kr-darkShell/LayoutShell.tsx",
       "category": "layout",
       "usageCount": 0,
       "importedBy": [],
@@ -5166,10 +5166,10 @@
     "src/features/applications/ApplicationCard.tsx",
     "src/features/context/ModeContext.tsx",
     "src/features/documents/DocumentStack.tsx",
-    "src/features/gallery/IconBadge.tsx",
+    "src/features/kr-dark/IconBadge.tsx",
     "src/features/style-guide/M3ExpressiveComponents.tsx",
-    "src/layouts/GalleryShell/GalleryShell.tsx",
-    "src/layouts/LaboratoryShell/LayoutShell.tsx",
+    "src/layouts/kr-darkShell/kr-darkShell.tsx",
+    "src/layouts/kr-darkShell/LayoutShell.tsx",
     "src/legacy/ui/AuroraHeader.tsx",
     "src/legacy/ui/chart.tsx",
     "src/legacy/ui/collapsible.tsx",
@@ -5186,7 +5186,7 @@
     "src/features/ingestion/components/DropZone.tsx",
     "src/features/profile/components/ProfileCardMUI.tsx",
     "src/features/profile/components/ProfileComparison.tsx",
-    "src/layouts/GalleryShell/views/GalleryPlaceholders.tsx",
+    "src/layouts/kr-darkShell/views/kr-darkPlaceholders.tsx",
     "packages/ui/src/components/alert-dialog/alert-dialog.tsx",
     "packages/ui/src/components/aspect-ratio/aspect-ratio.tsx",
     "packages/ui/src/components/calendar/calendar.tsx",
@@ -5219,7 +5219,7 @@
   ],
   "mostUsedComponents": [
     {
-      "name": "NorthcoteButton",
+      "name": "kerala-rageButton",
       "count": 11
     },
     {
@@ -5260,13 +5260,13 @@
     }
   ],
   "recommendations": [
-    "169 components lack test coverage. Consider adding tests for: NorthcoteButton, button, PageHeader, Pebble, KeywordTag...",
-    "71 reusable components lack Storybook stories. Consider documenting: NorthcoteButton, button, PageHeader, Pebble, KeywordTag...",
+    "169 components lack test coverage. Consider adding tests for: kerala-rageButton, button, PageHeader, Pebble, KeywordTag...",
+    "71 reusable components lack Storybook stories. Consider documenting: kerala-rageButton, button, PageHeader, Pebble, KeywordTag...",
     "85 components appear unused. Consider archiving or removing them.",
     "23 components are marked as complex (>200 LOC or >10 dependencies). Consider refactoring: Pebble, AnalysisPage, JobQueue, Documents, KSCGenerator...",
-    "24 components mix Northcote Curio tokens with legacy MUI/M3 usage. Consolidate to Curio-only: NorthcoteButton, Pebble, AnalysisPage, JobQueue, EditableField...",
-    "4 components still rely on legacy MUI/M3 without Curio tokens. Migrate to Northcote Curio: Button, chart, collapsible, metric-card",
-    "Northcote Curio Adoption: 48.5% (83/171) fully adopted. Target: 80%+ for complete Curio migration."
+    "24 components mix kerala-rage kr-solidarity tokens with legacy MUI/M3 usage. Consolidate to kr-solidarity-only: kerala-rageButton, Pebble, AnalysisPage, JobQueue, EditableField...",
+    "4 components still rely on legacy MUI/M3 without kr-solidarity tokens. Migrate to kerala-rage kr-solidarity: Button, chart, collapsible, metric-card",
+    "kerala-rage kr-solidarity Adoption: 48.5% (83/171) fully adopted. Target: 80%+ for complete kr-solidarity migration."
   ],
   "migrationSummary": {
     "migrated": 83,
@@ -5274,11 +5274,11 @@
     "not_migrated": 4,
     "unknown": 60
   },
-  "curioAdoption": {
-    "withCurioTokens": 107,
+  "kr-solidarityAdoption": {
+    "withkr-solidarityTokens": 107,
     "withModeSystem": 12,
     "legacyMUI": 1,
     "legacyM3": 27,
-    "fullyCurio": 83
+    "fullykr-solidarity": 83
   }
 }

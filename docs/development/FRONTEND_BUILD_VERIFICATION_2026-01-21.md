@@ -3,7 +3,7 @@
 **Status**: ✅ PASS
 
 ## Executive Summary
-The frontend build is now **succeeding** following the execution of the `typography-001` task. All `@apply` directives in `northcote.css` that were incompatible with Tailwind CSS v4 have been converted to standard CSS custom properties.
+The frontend build is now **succeeding** following the execution of the `typography-001` task. All `@apply` directives in `kerala-rage.css` that were incompatible with Tailwind CSS v4 have been converted to standard CSS custom properties.
 
 ## Metrics
 - **TypeScript Compilation**: ✅ PASS (0 errors)
@@ -43,7 +43,7 @@ h1 {
 
 /* After */
 h1 {
-  font-family: 'Libre Bodoni', 'Playfair Display', serif;
+  font-family: 'kr-serif-bold', 'Playfair Display', serif;
   font-size: var(--sys-type-display-large-size);
   line-height: var(--sys-type-display-large-line-height);
   font-weight: var(--sys-type-weight-bold);
@@ -77,13 +77,13 @@ If v4 compatibility is blocking progress, consider temporarily downgrading to v3
 ## Next Steps
 
 1. **Immediate**: Monitor build stability through subsequent feature additions.
-2. **Short-term**: Audit other CSS files for potential `@apply` issues (though `northcote.css` was the primary blocker).
+2. **Short-term**: Audit other CSS files for potential `@apply` issues (though `kerala-rage.css` was the primary blocker).
 3. **Medium-term**: Review and optimize bundle size.
 4. **Long-term**: Establish automated build verification in CI/CD.
 
 ## Files Modified
 - ✅ `.agent/workflows/` (Added root cleanup and build verification protocols)
-- ✅ `frontend/src/theme/northcote.css` (Converted `@apply` to standard CSS properties)
+- ✅ `frontend/src/theme/kerala-rage.css` (Converted `@apply` to standard CSS properties)
 - ✅ Repository Root (Consolidated 43 files down to 18 organized files)
 
 ## Conclusion

@@ -14,47 +14,47 @@ const cardVariants = cva(
                 glass: 'backdrop-blur-md border',
             },
             mode: {
-                gallery: '',
-                laboratory: '',
+                kr-dark: '',
+                kr-dark: '',
             },
         },
         compoundVariants: [
-            // Gallery Mode - Organic & Warm
+            // kr-dark Mode - Organic & Warm
             {
-                mode: 'gallery',
+                mode: 'kr-dark',
                 variant: 'filled',
-                class: 'bg-surface-gallery-concrete-grey text-on-surface-gallery-paper-white',
+                class: 'bg-surface-kr-dark-concrete-grey text-on-surface-kr-dark-paper-white',
             },
             {
-                mode: 'gallery',
+                mode: 'kr-dark',
                 variant: 'outlined',
-                class: 'border-outline-gallery-sandstone text-on-surface-gallery-paper-white',
+                class: 'border-outline-kr-dark-sandstone text-on-surface-kr-dark-paper-white',
             },
             {
-                mode: 'gallery',
+                mode: 'kr-dark',
                 variant: 'glass',
-                class: 'bg-surface-gallery-glass-medium border-white/10 text-on-surface-gallery-paper-white',
+                class: 'bg-surface-kr-dark-glass-medium border-white/10 text-on-surface-kr-dark-paper-white',
             },
-            // Laboratory Mode - Precise & Cool
+            // kr-dark Mode - Precise & Cool
             {
-                mode: 'laboratory',
+                mode: 'kr-dark',
                 variant: 'filled',
-                class: 'bg-surface-laboratory-deep-ocean text-on-surface-laboratory-paper-white',
+                class: 'bg-surface-kr-dark-deep-ocean text-on-surface-kr-dark-paper-white',
             },
             {
-                mode: 'laboratory',
+                mode: 'kr-dark',
                 variant: 'outlined',
-                class: 'border-outline-laboratory-steel text-on-surface-laboratory-paper-white',
+                class: 'border-outline-kr-dark-steel text-on-surface-kr-dark-paper-white',
             },
             {
-                mode: 'laboratory',
+                mode: 'kr-dark',
                 variant: 'glass',
-                class: 'bg-surface-laboratory-glass-medium border-white/5 text-on-surface-laboratory-paper-white',
+                class: 'bg-surface-kr-dark-glass-medium border-white/5 text-on-surface-kr-dark-paper-white',
             },
         ],
         defaultVariants: {
             variant: 'filled',
-            mode: 'gallery',
+            mode: 'kr-dark',
         },
     }
 );
@@ -78,7 +78,7 @@ const M3Card = React.forwardRef<HTMLDivElement, M3CardProps>(
                 ref={ref}
                 className={cn(cardVariants({ variant, mode }), className)}
                 style={{
-                    borderRadius: mode === 'gallery' ? 'var(--radius-stone)' : '8px' // var(--radius-seed) check needed
+                    borderRadius: mode === 'kr-dark' ? 'var(--radius-stone)' : '8px' // var(--radius-seed) check needed
                 }}
                 whileHover={hoverEffect ? {
                     y: -4,

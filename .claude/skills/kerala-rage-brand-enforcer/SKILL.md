@@ -1,38 +1,38 @@
 ---
 name: kerala-rage-brand-enforcer
-description: Auto-applies Kerala Rage brand guidelines (Agit-Prop aesthetic, Worker Solidarity motifs) to ensure design consistency.
+description: Auto-applies kerala-rage brand guidelines (Melbourne laneway aesthetic, endemic flora) to ensure design consistency.
 tags: [brand, compliance, kerala-rage, design]
-version: 2.0.0
+version: 1.0.0
 ---
 
-# Kerala Rage Brand Enforcer skill
+# kerala-rage Brand Enforcer skill
 
 ## Purpose
 
-Guardrails to ensure all AI-generated content matches the Kerala Migrant Rage (Agit-Prop / Viscous Fluidity) aesthetic.
+Guardrails to ensure all AI-generated content matches the kerala-rage Contemporary Australian aesthetic.
 
 ## Process
 
 1. **Review Output**: Analyze generated content (wireframes, specs, documentation)
-2. **Validate Colors**: Ensure Charcoal (#1A1714) bg, Waratah Red (#F14714) primary, Baru Gold (#DAF674) accent.
-3. **Check Typography**: Verify Inter Variable (display/body) with extreme weights (900 vs 200), Recursive (expressive). NO Roboto/Arial.
-4. **Validate Layout**: Confirm organic asymmetry, torn edges, "Viscous" motion physics.
-5. **Verify Visual**: Ensure Agit-Prop aesthetic, worker solidarity motifs, Malayalam typography integration.
-6. **Report Violations**: Flag non-compliant elements (e.g., "Victorian", "Botanical") with specific corrections
+2. **Validate Colors**: Ensure dark ironbark bg, kr-leafus accent, soft white text
+3. **Check Typography**: Verify Bebas Neue (display), Space Grotesk (headers), NO Roboto/Arial
+4. **Validate Layout**: Confirm 8px grid, appropriate corner radius, M3 shadows
+5. **Verify Visual**: Ensure Melbourne laneway aesthetic and Australian endemic flora motifs
+6. **Report Violations**: Flag non-compliant elements with specific corrections
 
 ## When to Use
 
 - After wireframe annotation to validate brand compliance
 - Before component spec generation to ensure design consistency
 - When reviewing design system documentation
-- When auditing visual outputs for Kerala Rage adherence
+- When auditing visual outputs for kerala-rage adherence
 
 ## Enforcement Rules
 
-- **Colors**: Charcoal (#1A1714) bg, Waratah Red (#F14714), Baru Gold (#DAF674).
-- **Typography**: Inter Variable (Display 900 / Body 200), Recursive (Expressive). NO Bebas/Space Grotesk.
-- **Layout**: Asymmetric grids, torn edges (clip-path), Viscous motion (spring physics).
-- **Visual**: Agit-Prop, Solidarity Icons (Fist, Star), Malayalam script, Glitch effects.
+- **Colors**: Dark ironbark bg, kr-leafus accent, soft white text
+- **Typography**: Bebas Neue (display), Space Grotesk (headers), NO Roboto/Arial
+- **Layout**: 8px grid, sharp corners (0px) or subtle (4-8px), M3 shadows
+- **Visual**: Melbourne laneway aesthetic, Australian endemic flora motifs
 
 ## Validates Outputs From
 

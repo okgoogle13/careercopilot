@@ -2,7 +2,7 @@ import React, { forwardRef, useEffect } from 'react';
 
 export type M3TextFieldVariant = 'filled' | 'outlined';
 export type M3TextFieldSize = 'small' | 'medium' | 'large';
-export type M3TextFieldMode = 'gallery' | 'laboratory';
+export type M3TextFieldMode = 'kr-dark' | 'kr-dark';
 
 export interface M3TextFieldProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'> {
     /** Input label */
@@ -17,7 +17,7 @@ export interface M3TextFieldProps extends Omit<React.InputHTMLAttributes<HTMLInp
     variant?: M3TextFieldVariant;
     /** Input size */
     size?: M3TextFieldSize;
-    /** Theme mode: Gallery (warm, botanical) or Laboratory (clinical, precise) */
+    /** Theme mode: kr-dark (warm, botanical) or kr-dark (clinical, precise) */
     mode?: M3TextFieldMode;
     /** Start adornment (icon or text) */
     startAdornment?: React.ReactNode;
@@ -32,14 +32,14 @@ export interface M3TextFieldProps extends Omit<React.InputHTMLAttributes<HTMLInp
 }
 
 /**
- * M3TextField - Northcote Curio Text Input
+ * M3TextField - kerala-rage kr-solidarity Text Input
  *
- * Supports both Gallery (warm, botanical) and Laboratory (clinical, precise) modes.
+ * Supports both kr-dark (warm, botanical) and kr-dark (clinical, precise) modes.
  *
- * **Northcote Token Usage:**
+ * **kerala-rage Token Usage:**
  * - Typography: `font-field-note` (Input), `font-annotation` (Label)
  * - Color: `primary-wattle-gold` (Focus), `tertiary-waratah-red` (Error)
- * - Shape: `radius-stone` (Laboratory), organic asymmetry (Gallery)
+ * - Shape: `radius-stone` (kr-dark), organic asymmetry (kr-dark)
  * - Motion: `ease-viscous` (Fluid interactions)
  *
  * **Accessibility:**
@@ -55,7 +55,7 @@ export const M3TextField = forwardRef<HTMLInputElement, M3TextFieldProps>(({
     errorMessage,
     variant = 'outlined',
     size = 'medium',
-    mode = 'laboratory',
+    mode = 'kr-dark',
     startAdornment,
     endAdornment,
     fullWidth = false,
@@ -111,22 +111,22 @@ export const M3TextField = forwardRef<HTMLInputElement, M3TextFieldProps>(({
         },
     };
 
-    // Theme variants (Gallery vs. Laboratory)
+    // Theme variants (kr-dark vs. kr-dark)
     const themeVariants = {
-        gallery: {
+        kr-dark: {
             container: {
                 outlined: `
                     border-2
                     ${error ? 'border-tertiary-waratah-red' : 'border-primary-wattle-gold/80'}
                     ${isFocused && !error ? 'border-primary-wattle-gold ring-2 ring-primary-wattle-gold/30' : ''}
-                    bg-surface-gallery-concrete-grey
+                    bg-surface-kr-dark-concrete-grey
                     shadow-sm
                 `,
                 filled: `
                     border-b-2
                     ${error ? 'border-b-tertiary-waratah-red' : 'border-b-primary-wattle-gold/80'}
                     ${isFocused && !error ? 'border-b-primary-wattle-gold' : ''}
-                    bg-surface-gallery-concrete-grey
+                    bg-surface-kr-dark-concrete-grey
                 `,
             },
             label: {
@@ -138,9 +138,9 @@ export const M3TextField = forwardRef<HTMLInputElement, M3TextFieldProps>(({
                 text: 'text-on-surface-paper-white',
                 placeholder: 'placeholder:text-secondary-concrete-grey/60',
             },
-            radius: 'rounded-[8px_12px_6px_10px]', // More organic for Gallery
+            radius: 'rounded-[8px_12px_6px_10px]', // More organic for kr-dark
         },
-        laboratory: {
+        kr-dark: {
             container: {
                 outlined: `
                     border-2
@@ -153,7 +153,7 @@ export const M3TextField = forwardRef<HTMLInputElement, M3TextFieldProps>(({
                     border-b-2
                     ${error ? 'border-b-tertiary-waratah-red' : 'border-b-outline-variant'}
                     ${isFocused && !error ? 'border-b-primary-wattle-gold' : ''}
-                    bg-surface-gallery-concrete-grey shadow-rest
+                    bg-surface-kr-dark-concrete-grey shadow-rest
                 `,
             },
             label: {
@@ -165,7 +165,7 @@ export const M3TextField = forwardRef<HTMLInputElement, M3TextFieldProps>(({
                 text: 'text-on-surface-paper-white',
                 placeholder: 'placeholder:text-secondary-flannel-dim',
             },
-            radius: 'radius-stone', // Precise asymmetry for Laboratory
+            radius: 'radius-stone', // Precise asymmetry for kr-dark
         },
     };
 
@@ -321,7 +321,7 @@ export const M3TextArea = forwardRef<HTMLTextAreaElement, M3TextAreaProps>(({
     error = false,
     errorMessage,
     size = 'medium',
-    mode = 'laboratory',
+    mode = 'kr-dark',
     fullWidth = false,
     showCounter = false,
     maxLength,
@@ -366,12 +366,12 @@ export const M3TextArea = forwardRef<HTMLTextAreaElement, M3TextAreaProps>(({
     };
 
     const themeVariants = {
-        gallery: {
+        kr-dark: {
             container: `
                 border-2
                 ${error ? 'border-tertiary-waratah-red' : 'border-primary-wattle-gold/80'}
                 ${isFocused && !error ? 'border-primary-wattle-gold ring-2 ring-primary-wattle-gold/30' : ''}
-                bg-surface-gallery-concrete-grey
+                bg-surface-kr-dark-concrete-grey
                 shadow-sm
                 rounded-[8px_12px_6px_10px]
             `,
@@ -381,7 +381,7 @@ export const M3TextArea = forwardRef<HTMLTextAreaElement, M3TextAreaProps>(({
                 floating: 'text-secondary-flannel-dim',
             },
         },
-        laboratory: {
+        kr-dark: {
             container: `
                 border-2
                 ${error ? 'border-tertiary-waratah-red' : 'border-outline-variant'}

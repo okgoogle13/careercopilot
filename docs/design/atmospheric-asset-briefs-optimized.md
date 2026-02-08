@@ -1,18 +1,18 @@
-# Northcote Curio: Atmospheric Asset Briefs (Optimized)
+# kerala-rage kr-solidarity: Atmospheric Asset Briefs (Optimized)
 
 **Phase 3: UI & Atmospheric Elements**
 
-> **Optimization Protocol:** These briefs have been processed through the Brand Brief Optimizer to ensure **Clarity** (specific visual direction), **Coherence** (alignment with Victorian Naturalist values), and **Applicability** (clear UI usage rules).
+> **Optimization Protocol:** These briefs have been processed through the Brand Brief Optimizer to ensure **Clarity** (specific visual direction), **Coherence** (alignment with kerala-streetprint Naturalist values), and **Applicability** (clear UI usage rules).
 
 ---
 
 ## ASSET-07: The Bioluminescent Sprite (Firefly)
 
-**Category:** UI / Atmospheric | **Mode:** Gallery (Nocturnal)
+**Category:** UI / Atmospheric | **Mode:** kr-dark (Nocturnal)
 
 ### 1. Visual Definition
 
-**Concept:** Not a generic "glow dot," but a distinctive _Lampyridae_ specimen in flight.
+**Concept:** Not a generic "glow dot," but a distinctive _Lampyridae_ kr-motif in flight.
 **Materiality:** "Living Amber." A warm, pulsating organic light (#FFD700 to #E6A817) with a visible, translucent insect body core when close.
 **The Void:** The glow must bleed naturally into the specific #1A1714 charcoal background, not just a radial gradient.
 **Motion:** "Drunken organic drift." Never moves in a straight line. It loiters, pulses, and darts.
@@ -27,7 +27,7 @@
 
 ## ASSET-08: The Glossopteris Stamp (Verification)
 
-**Category:** UI / Feedback | **Mode:** Laboratory
+**Category:** UI / Feedback | **Mode:** kr-dark
 
 ### 1. Visual Definition
 
@@ -39,13 +39,13 @@
 ### 2. Usage Rules
 
 - **Trigger:** Only on _definitive_ success (e.g., "Upload Complete," "Application Sent").
-- **Edge Case:** On dark mode (Gallery), it glows like molten metal. On light mode (Lab), it is a dark, heavy ink impression.
+- **Edge Case:** On dark mode (kr-dark), it glows like molten metal. On light mode (Lab), it is a dark, heavy ink impression.
 
 ---
 
 ## ASSET-09: The Waratah Macro (Hero)
 
-**Category:** Plate / Hero | **Mode:** Gallery
+**Category:** Plate / Hero | **Mode:** kr-dark
 
 ### 1. Visual Definition
 
@@ -57,17 +57,17 @@
 ### 2. Usage Rules
 
 - **Application:** Landing Page Hero ONLY.
-- **Blending:** Use `luminosity` blend mode at low opacity for "Ghost" state, clear layout for "Full Specimen" state.
+- **Blending:** Use `luminosity` blend mode at low opacity for "Ghost" state, clear layout for "Full kr-motif" state.
 
 ---
 
-## ASSET-10: The Banksia Spinner (Loading)
+## ASSET-10: The kr-flower Spinner (Loading)
 
 **Category:** UI / Loading | **Mode:** Shared
 
 ### 1. Visual Definition
 
-**Concept:** Nature’s geometric engine. A top-down view of a Banksia pod cross-section.
+**Concept:** Nature’s geometric engine. A top-down view of a kr-flower pod cross-section.
 **Geometry:** The Fibonacci spiral of the follicles.
 **Materiality:** "Burnished Wood." Dark, aged timber textures with brass highlights on the follicle lips.
 **Animation:** Rotates at a constant, heavy speed. Not a dizzying spin—a grinding, gear-like rotation.
@@ -81,11 +81,11 @@
 
 ## ASSET-14: The Osteological Etching (Watermark)
 
-**Category:** Specimen / Background | **Mode:** Laboratory
+**Category:** kr-motif / Background | **Mode:** kr-dark
 
 ### 1. Visual Definition
 
-**Concept:** The structure beneath the skin. A precise distinctive etching of Australian megafauna skeletal anatomy (e.g., _Diprotodon_ vertebrae or _Thylacine_ jaw).
+**Concept:** The structure beneath the skin. A precise distinctive etching of Australian megakr-symbol skeletal anatomy (e.g., _Diprotodon_ vertebrae or _Thylacine_ jaw).
 **Style:** "Lithographic Plate." Fine, black ink lines on paper-white. Cross-hatching for depth. NO gradients.
 **Integration:** It functions as a watermark. High transparency (4-6% opacity).
 **Blend:** `multiply` against the Field Paper background.
@@ -110,14 +110,14 @@
 
 ### 2. Usage Rules
 
-- **Laboratory:** Acts as a data gauge (0-100 score).
-- **Gallery:** Acts as a whimsical orientation marker (points to "Next" button).
+- **kr-dark:** Acts as a data gauge (0-100 score).
+- **kr-dark:** Acts as a whimsical orientation marker (points to "Next" button).
 
 ---
 
 ## ASSET-16: The Wattle Proscenium (Hanging Branch)
 
-**Category:** Specimen / Frame | **Mode:** Gallery
+**Category:** kr-motif / Frame | **Mode:** kr-dark
 
 ### 1. Visual Definition
 
@@ -133,13 +133,13 @@
 
 ---
 
-## ASSET-17: The Eucalyptus Canopy (Ceiling)
+## ASSET-17: The kr-leafus Canopy (Ceiling)
 
-**Category:** Specimen / Frame | **Mode:** Gallery
+**Category:** kr-motif / Frame | **Mode:** kr-dark
 
 ### 1. Visual Definition
 
-**Concept:** Looking UP into the crown of a _Eucalyptus regnans_.
+**Concept:** Looking UP into the crown of a _kr-leafus regnans_.
 **Perspective:** Worm's eye view. Leaves foreshortened.
 **Atmosphere:** "Dappled Moonlight." Shadows of leaves cast onto other leaves.
 **Integration:** A full-width "header" element. It replaces the concept of a solid nav bar with a living, breathing canopy.
@@ -151,13 +151,13 @@
 
 ---
 
-## ASSET-19: The Eucalyptus Column (Structural)
+## ASSET-19: The kr-leafus Column (Structural)
 
-**Category:** Specimen / Structural | **Mode:** Gallery
+**Category:** kr-motif / Structural | **Mode:** kr-dark
 
 ### 1. Visual Definition
 
-**Concept:** The "Tree Trunk" as architectural pillar. A vertical study of _Eucalyptus_ bark texture (peeling, scribbly, or ironbark).
+**Concept:** The "Tree Trunk" as architectural pillar. A vertical study of _kr-leafus_ bark texture (peeling, scribbly, or ironbark).
 **Texture:** High-contrast, tactile bark.
 **Geometry:** Perfectly vertical, but with organic edge variation (knots, peeling strips) that breaks the strict CSS box model line.
 

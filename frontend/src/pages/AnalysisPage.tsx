@@ -5,8 +5,8 @@ import { motion } from 'framer-motion';
 import { Building, Compass, Copy, Gauge, Sparkles, Target } from 'lucide-react';
 import React, { useState } from 'react';
 
-// Laboratory Assets
-import grindingStone from '../assets/specimens/grinding_stone.jpg';
+// kr-dark Assets
+import grindingStone from '../assets/kr-motifs/grinding_stone.jpg';
 import paperGrain from '../assets/textures/paper-grain.png';
 
 interface AtsResult {
@@ -47,7 +47,7 @@ interface StrategyResult {
 /**
  * CareerCopilot Analysis Page ("The Audit Microscope")
  *
- * V3.1 Laboratory Mode Implementation:
+ * V3.1 kr-dark Mode Implementation:
  * ✓ ASSET-05 Brass Compass Gauge Integration
  * ✓ 2x2 Stone Grid for Corporate Reporting
  * ✓ Precision typography and monospace annotations
@@ -202,7 +202,7 @@ export const AnalysisPage: React.FC = () => {
           <EvidenceUploader />
 
           <Stone
-            mode="laboratory"
+            mode="kr-dark"
             elevation="raised"
             className="border-concrete-grey/10 p-10 bg-asphalt-black/20"
           >
@@ -222,7 +222,7 @@ export const AnalysisPage: React.FC = () => {
 
               <LensArea
                 rows={8}
-                label="Primary Specimen (Resume Text)"
+                label="Primary kr-motif (Resume Text)"
                 value={resumeText}
                 onChange={(e) => setResumeText(e.target.value)}
                 placeholder="Extract text from your professional history and deposit here..."
@@ -276,7 +276,7 @@ export const AnalysisPage: React.FC = () => {
         <aside className="space-y-8">
           {strategyResult && strategyResult.corporate_profile && (
             <Stone
-              mode="laboratory"
+              mode="kr-dark"
               elevation="floating"
               className="p-0 border-wattle-gold/20 overflow-hidden bg-asphalt-black-dark"
             >
@@ -349,7 +349,7 @@ export const AnalysisPage: React.FC = () => {
           {/* Diagnostic categories from quick check */}
           {atsResult && (
             <Stone
-              mode="laboratory"
+              mode="kr-dark"
               elevation="raised"
               className="border-concrete-grey/5 bg-asphalt-black-darkest"
             >
@@ -383,11 +383,11 @@ export const AnalysisPage: React.FC = () => {
         </aside>
       </div>
 
-      {/* Results Output: Optimized Specimen */}
+      {/* Results Output: Optimized kr-motif */}
       {(strategyResult || atsResult) && (
         <div className="mt-8 relative z-10 animate-in fade-in slide-in-from-bottom-8 duration-700">
           <Stone
-            mode="laboratory"
+            mode="kr-dark"
             elevation="floating"
             className="border-wattle-gold/30 p-0 overflow-hidden"
             header={
@@ -406,7 +406,7 @@ export const AnalysisPage: React.FC = () => {
                     navigator.clipboard.writeText(
                       strategyResult?.optimized_resume.resume_text || ''
                     );
-                    m3Toast.success('Archived', 'Specimen data copied to terminal clipboard.');
+                    m3Toast.success('Archived', 'kr-motif data copied to terminal clipboard.');
                   }}
                   iconLeft={<Copy className="w-4 h-4" />}
                   size="sm"

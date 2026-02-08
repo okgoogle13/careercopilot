@@ -13,7 +13,7 @@ interface MetricCardProps {
 }
 
 /**
- * MetricCard - Northcote Curio V3.1 Metric Display Component
+ * MetricCard - kerala-rage kr-solidarity V3.1 Metric Display Component
  */
 export function MetricCard({
   icon: Icon,

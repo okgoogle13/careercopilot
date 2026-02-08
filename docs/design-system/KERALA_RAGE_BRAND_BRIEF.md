@@ -5,8 +5,10 @@
 **Dominant Visual Language (80% weight):**
 
 - Kerala cultural imagery: elephants, kettuvalam houseboats, coconut palms, rubber plantations
-- Australian activism: union posters, refugee rights campaigns, anti-racist street signage, Melbourne laneways
-- Indian-Australian diaspora: migration journeys, visa/passport subversion, dual-city life, service labor dignity
+- Australian activism: **Australian context appears through land-based demands and street truth, not institutional imagery.** Examples: Anti-colonial graffiti ("NO PRIDE IN GENOCIDE"), Land justice demands ("TREATY NOW"). The system avoids state symbols, civic branding, or bureaucratic aesthetics entirely.
+
+- Indian-Australian diaspora: migration journeys, dual-city life, service labor dignity
+
 - Socialist organizing: red hammer-sickle flags, workers' solidarity, protest banners
 
 **Receding/Fractured (20% maximum):**
@@ -17,6 +19,14 @@
   - Desaturated, washed-out colors
   - Visually overpowered by Kerala/activist imagery
   - Conceptually "losing" to migrant/socialist elements
+
+**Core Narrative: Street kr-dark, Not Campaign Flyer**
+
+> **This system operates as a street kr-dark, not a campaign flyer.**
+> Visuals borrow from wheat-paste portrait posters, protest murals, devotional statuary, and anti-colonial graffiti. The tone is declarative, symbolic, and interrogative — not instructional, not recruitment-oriented, and never neutral.
+>
+> **Primary visual energy is mythic and archival, not logistical.**
+> Portraits, statues, and symbols function as cultural memory and refusal, not as calls to action. The system privileges _who we are_ and _what history refuses to disappear_ over explicit instruction or mobilisation graphics.
 
 ## 2. Language Protocol: English is ONLY LANGUAGE
 
@@ -40,7 +50,10 @@
 - Visible Aboriginal-led campaign posters/placards in protest scenes
 - Aboriginal flags in organizing contexts
 
-**NEVER:**
+**First Nations solidarity is expressed through language and placement, not style.**
+
+- Aboriginal flag colours may be used **only** on protest placards, banners, or contextual posters within a scene.
+- No Aboriginal visual styles, mark-making systems, or symbolic abstractions are ever reinterpreted, echoed, or remixed into the design system itself.
 
 - Imitate or generate Aboriginal dot painting patterns
 - Appropriate sacred motifs or iconography
@@ -69,7 +82,7 @@
 
 - **One Truth**: There is only one mode. It is Solidarity. It is Dark.
 - **Default Canvas**: Very dark charcoal (#1a1a1a), matte finish.
-- **Abolished Modes**: Light Mode, Gallery Mode, Laboratory Mode, Theory Mode.
+- **Abolished Modes**: Light Mode, kr-dark Mode, kr-dark Mode, Theory Mode.
 - **Reasoning**: We do not "switch code" for the user. We present one unified front.
 
 ---
@@ -91,16 +104,16 @@
 **Usage:** Red hammer-sickle flags, urgent emphasis text, elephant temple decorations, protest banners, primary CTAs
 **Emotion:** Deep rage → active resistance → hopeful fire
 
-#### Specimen Night Red (#F14844)
+#### kr-motif Night Red (#F14844)
 
-**Source:** Specimen jar label, institutional critique
+**Source:** kr-motif jar label, institutional critique
 **Tonal Family:** #C1132F → #D72F41 → #F14844 → #FF6B66 → #FF9490
-**Usage:** Urgent text ("Revolution"), urgent headlines, worker solidarity declarations, visa stamp subversions
+**Usage:** Malayalam urgent text ("വിപ്ലവം" revolution), urgent headlines, worker solidarity declarations
 **Emotion:** Institutional warning → urgent action
 
-#### Eucalyptus Smoke Green (#48DA8B)
+#### kr-leafus Smoke Green (#48DA8B)
 
-**Source:** Kerala backwaters, Australian eucalyptus, calm-meets-activism
+**Source:** Kerala backwaters, Australian kr-leafus, calm-meets-activism
 **Tonal Family:** #3AAF6E → #42C47D → #48DA8B → #6BE5A8 → #8EEFC0
 **Usage:** Coconut palms, Kerala landscape, backwater water ripples, bridge text ("BETWEEN WORLDS"), migration route maps, melancholic sections
 **Emotion:** Calm melancholy → living persistence
@@ -109,7 +122,8 @@
 
 **Source:** Tropical parrot, Melbourne integration, hybrid identity
 **Tonal Family:** #36BDD1 → #3FD9DC → #48F0E5 → #6FF5EC → #97F9F3
-**Usage:** Melbourne context text/signage, visa stamps, crossed-out bureaucracy, Australian activist posters, diaspora integration elements
+**Usage:** Melbourne context text/signage, Australian activist posters, diaspora integration elements
+
 **Emotion:** Bureaucratic cold → vibrant hybrid identity
 
 #### Baru Gold (#DAF674)
@@ -126,7 +140,7 @@
 **Usage:** Solidarity text ("WORKERS UNITE"), economic critique ("$27/HR COLONIAL GUILT"), union signage, Australian landscape elements, warning/attention accents
 **Emotion:** Economic exploitation → collective power
 
-#### Eucalyptus Ash (#DAF6B3)
+#### kr-leafus Ash (#DAF6B3)
 
 **Source:** Pale ash, worker hands, formal acknowledgments
 **Tonal Family:** #B8D89A → #C8E8A7 → #DAF6B3 → #E8FBCC → #F4FFDD
@@ -157,6 +171,10 @@
 
 ## Typography System
 
+### Typography as Pressure System
+
+> Typography in the Kerala Rage system behaves as a physical force, not a neutral carrier of text.
+
 ### Variable Font Requirements
 
 **Mandatory Axes:**
@@ -178,33 +196,38 @@
 
 ### M3 Expressive Type Scale
 
-1. **Micro (8px):** Bureaucratic detail, visa fine print, metadata
-2. **Small (12px):** Wurundjeri acknowledgment, secondary labels
-3. **Body (16px):** Default readable paragraph text
-4. **Subhead (24px):** Form labels, card titles, subsection headers
-5. **Headline (48px):** Page titles, panel headers, major sections
-6. **Display (72px):** Hero statements, solidarity banners, cultural pride declarations
-7. **Hero (144px):** Manifestos ("NO NEUTRAL CANVAS", "KERALA TO NAARM")
+1.  **Micro (8px):** Technical detail, metadata
+
+2.  **Small (12px):** Wurundjeri acknowledgment, secondary labels
+3.  **Body (16px):** Default readable paragraph text
+4.  **Subhead (24px):** Form labels, card titles, subsection headers
+5.  **Headline (48px):** Page titles, panel headers, major sections
+6.  **Display (72px):** Hero statements, solidarity banners, cultural pride declarations
+7.  **Hero (144px):** Manifestos ("NO NEUTRAL CANVAS", "KERALA TO NAARM")
 
 ### M3 Expressive Contrast Ratios
 
-**Extreme Weight Contrast (9x Ratio):**
+**Extreme Variable Contrast:**
+A minimum **9× weight ratio** (100 ↔ 900) and **6× size ratio** (12px ↔ 72px+) is required to create expressive tension.
 
-- **Hero Banner**: wght 100, size 144px (Hairline Thin)
-- **Supporting Subtext**: wght 900, size 16px (Ultra Black)
-- **Ratio**: 9x weight difference = Visual Drama
+**Emotional Axis Mapping:**
+Variable font axes are mapped to emotional states:
+– _Pressure_: compressed, heavy
+– _Solidarity_: expanded, bold
+– _Melancholy_: oscillating, light
 
-**Size + Weight Compound Contrast:**
+**Global Optical Sizing:**
+`font-optical-sizing: auto` is mandatory to ensure dignity at small sizes and fragility at large scales.
 
-- **Display Large**: wght 100, size 72px, letter-spacing -0.02em
-- **Body Small**: wght 900, size 12px, letter-spacing 0em
-- **Combined Effect**: 9x weight × 6x size = Maximum Hierarchy
+**English-Only, Visually Loud:**
+Cultural identity is asserted through scale, weight, and layout — never through non-English UI text.
 
 ### Emotional Typography Patterns
 
-| Pattern | Weight | Width | Slant | Optical Size | Letter Spacing | Duration | Easing | Usage |
-|---------|--------|-------|-------|--------------|----------------|----------|--------|-------|
-| **Pressure/Occupation** | 900 | 75 | 0 | auto | 0em | - | - | "MIGRANT" visa stamp, labor exploitation |
+| Pattern                                       | Weight | Width | Slant | Optical Size | Letter Spacing | Duration | Easing | Usage                   |
+| --------------------------------------------- | ------ | ----- | ----- | ------------ | -------------- | -------- | ------ | ----------------------- |
+| **Pressure/Occupation (Labor Exploitation):** | 900    | 75    | 0     | auto         | 0em            | -        | -      | Labor exploitation text |
+
 | **Solidarity/Protest** | 800 | 120 | 0 | auto | 0.02em | - | - | "WORKERS UNITE", collective action (SIGNATURE) |
 | **Melancholy/Longing** | 450-500 | 95-100 | 0 | auto | 0em | 4s | ease-in-out | "BETWEEN WORLDS", diaspora tension |
 | **Ghostly Colonial** | 100 | 75 | 0 | auto | 0em | - | - | Crown fragments, British symbols |
@@ -248,7 +271,7 @@
 **Coconut Palms**
 
 - **Symbol:** Kerala landscape refusing to disappear, diaspora rootedness
-- **Visual:** Tall organic curves, asymmetric fronds, eucalyptus smoke green
+- **Visual:** Tall organic curves, asymmetric fronds, kr-leafus smoke green
 - **Usage:** Landscape frames, homesickness melancholy, persistent identity
 - **Motion:** Gentle sway, wind responsiveness
 
@@ -258,13 +281,6 @@
 - **Visual:** Hands with tools (rubber cup, coffee, mop, delivery bag)
 - **Usage:** Labor exploitation sections, economic critique, worker heroism
 - **Motion:** Upward solidarity thrust, tool grip with tension
-
-**Visa/Passport Subversion**
-
-- **Symbol:** Bureaucratic rebellion, documentation overpowered by identity
-- **Visual:** Official documents with Kerala imagery bleeding through
-- **Usage:** Migration stress, border violence, rage against bureaucracy
-- **Motion:** Stamp slam impact, rotation momentum
 
 **Melbourne Laneways + Kerala Streets**
 
@@ -276,18 +292,17 @@
 **Australian Union/Refugee Rights Posters**
 
 - **Symbol:** Local activism, Melbourne-specific organizing
-- **Visual:** Wheat-paste aesthetic, torn edges, tape marks, English text
+- Visual: Worker portraits, compressed heavy typography
 - **Usage:** Community organizing, Australian context integration
 - **Motion:** Poster slam, drag settle into place
 
 ### Secondary Motifs (Receding, Fractured, Losing)
 
-**Cracked Crown Fragments**
+**Shiva (Statue Reference, Icon-Scale)**
 
-- **Symbol:** Colonial power defeated, monarchy irrelevance
-- **Visual:** Small broken pieces, 10-30% opacity, desaturated gold
-- **Usage:** Background archaeology only, never central
-- **Motion:** Static decay, no animation (dead weight)
+- **Symbol:** Cultural anchor, emotional stabilizer
+- **Visual:** Simplified statue-inspired form, screened in limited inks, stone-like weight. Revered, not ironic.
+- **Constraint:** Never merged with protest text or First Nations content. Not a political logo.
 
 **Torn Union Jack**
 
@@ -295,6 +310,85 @@
 - **Visual:** Torn fabric, faded colors, crossed-out sections
 - **Usage:** Background fragments being painted over
 - **Motion:** Static or fading out
+
+---
+
+## South Asian Resistance Lineage
+
+> The system explicitly situates Kerala diaspora identity within a longer South Asian anti-colonial lineage.
+>
+> Revolutionary figures such as **Tipu Sultan** and **Bhagat Singh** appear as **portrait-poster icons**, rendered in screenprint style with halo or sun-disk treatments.
+>
+> These figures are not decorative; they establish continuity between historical resistance and contemporary migrant rage on stolen land.
+
+**Bhagat Singh Text Protocol:**
+Text associated with Bhagat Singh uses **Latin-script English transliteration** (e.g., _INQUILAB ZINDABAD_) to maintain the English-only protocol while preserving revolutionary meaning.
+
+---
+
+## Motif and Visual Safety Preferences
+
+### 1. Simple, Bold, Icon-Scale Motifs
+
+- **Enforce:** All motifs must be simple, bold, and clearly recognizable even at small icon scales (24px).
+- **Ban:** Over-complex, ambiguous, or abstract shapes that lose meaning when resized.
+- **Goal:** Immediate visual cognition without requiring "artistic interpretation."
+
+### 2. Balanced Representation
+
+- **Requirement:** Every visual composition must maintain a balance between:
+  - **Indian/Kerala:** (Elephants, Palms, Houseboats)
+  - **Australian:** (Waratah, Gum Leaves, Melbourne Laneways)
+  - **Solidarity:** (Hands, Flags, Placards)
+- **Avoid:** Over-indexing on one culture to the exclusion of the others. The strength is in the _hybrid_.
+
+### 3. Australian Context Motifs
+
+- **Include:**
+  - Union posters (wheat-paste aesthetic)
+  - Refugee rights campaign imagery
+  - Anti-racist street signage
+  - Iconic Melbourne motifs (trams, laneway bricks, coffee cups as labor tools)
+- **Explicitly Reject:** Generic corporate "diversity" stock-photo aesthetics. Real grit, not polished inclusion.
+
+### 4. UI-Usable Activism
+
+- **Constraint:** Protest elements must be drawn as **flat, legible icons** suitable for UI components.
+- **Usage:**
+  - **Buttons:** Small raised fist or flag icon.
+  - **Nav:** Simple placard icon.
+  - **Empty States:** Single clear banner or crowd silhouette.
+- **Ban:** Full complex poster scenes used as tiny UI elements. Keep them distinct.
+
+### 5. Bureaucracy Ban (Explicit)
+
+- **Constraint:** Passports, ID cards, border gates, visas, and immigration counters are **EXPLICITLY BANNED**.
+- **Reasoning:** We reject the "migrant as documented subject" narrative entirely. The focus is on the human, the labor, and the culture, not the permission to exist.
+- **Action:** If a concept requires "documentation," use a union card or a protest flyer instead.
+
+### 6. Colonial Defeat
+
+- **Restatement:** Crowns, Union Jacks, and monarchic symbols must **ONLY** appear as:
+  - Cracked, broken, or fading background archaeology.
+  - Low opacity (<20%).
+  - Desaturated.
+- **Never:** Hero imagery, positive symbols, or decorative flourishes. They represent a fading, defeated past.
+
+### 7. First Nations Solidarity (In Situ)
+
+- **Constraint:** Use Aboriginal flags and slogans ("Always Was, Always Will Be") only **in situ** (on protest placards, posters within a scene).
+- **Ban:**
+  - Imitating Aboriginal dot painting styles.
+  - Using sacred motifs as decoration.
+  - Inventing "Aboriginal-style" patterns.
+- **Goal:** Respectful solidarity, not appropriation.
+
+### 8. Mood Board Layout Rules
+
+- **Format:** Single-page, tile-based grid.
+- **Content:** Each tile shows **ONE** motif, color family, or UI fragment.
+- **Spacing:** Consistent size tiles separated by ample **dark-UI whitespace**.
+- **Reasoning:** Prevents visual clutter ("slop") and ensures each element is readable and intentional.
 
 ---
 
@@ -389,11 +483,8 @@
 
 **Avoid:**
 
-- Corporate diversity speak
-- "Inclusive" without specificity
-- Neutral/diplomatic language about oppression
-- Saviorism toward any group
-- Romanticizing poverty or struggle without rage
+**The interface asserts, it does not persuade.**
+Text is declarative, confrontational, or reflective — never instructional or motivational in tone.
 
 ---
 
@@ -441,6 +532,11 @@
 ❌ Union Jack or colonial symbols as hero imagery
 ❌ Aboriginal art imitation or appropriation
 ❌ Generic diverse stock photos
+❌ Passports, Visas, ID Cards (even subverted)
+❌ Bureaucratic forms or government aesthetics
+❌ Overuse of slogans across multiple tiles or screens
+❌ Treating revolutionary figures as decorative wallpaper
+❌ Mixing devotional, First Nations, and protest symbolism into a single composite motif
 
 ### Language Bans
 
@@ -547,11 +643,11 @@ export const SolidarityBanner: React.FC<{ children: string }> = ({ children }) =
     <motion.h1
       initial={{
         fontVariationSettings: `'wght' 600, 'wdth' 100`,
-        opacity: 0.6
+        opacity: 0.6,
       }}
       animate={{
         fontVariationSettings: `'wght' 800, 'wdth' 120`,
-        opacity: 1
+        opacity: 1,
       }}
       transition={{
         duration: 0.8,
@@ -784,7 +880,7 @@ Data is political. We do not use neutral blues. We use the colors of the land (K
 ### 2. Comparison Data (The Context)
 
 - **Token:** `color-data-comparison`
-- **Ref:** `var(--color-eucalyptus-smoke-primary)`
+- **Ref:** `var(--color-kr-leafus-smoke-primary)`
 - **Usage:** Averages, benchmarks, "others".
 
 ### 3. Alert Data (The Warning)
@@ -803,7 +899,7 @@ Data is political. We do not use neutral blues. We use the colors of the land (K
 
 - **Axis Labels:** `JetBrains Mono` (The Annotation), 10px, Uppercase.
 - **Tooltips:** `Work Sans` (The Field Note), 12px, Dark Background with Wattle Border.
-- **Big Numbers:** `Libre Bodoni` (The Proclamation), Condensed.
+- **Big Numbers:** `kr-serif-bold` (The Proclamation), Condensed.
 
 ## Chart Styles
 

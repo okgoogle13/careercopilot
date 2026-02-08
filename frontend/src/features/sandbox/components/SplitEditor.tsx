@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { SplitSquareHorizontal, Save, Sparkles, Wand2, ShieldCheck } from 'lucide-react';
-import { NorthcoteButton } from '@/components/ui/NorthcoteButton';
+import { kerala-rageButton } from '@/components/ui/kerala-rageButton';
 import { scaffoldKSCResponse, STARInput } from '../logic';
 import { toast } from 'sonner';
 import { useAnalysis, type AnalysisResult } from '@/hooks/useAnalysis';
@@ -89,21 +89,21 @@ export function SplitEditor({ activeTab, onTabChange, archetype }: SplitEditorPr
                 </div>
 
                 <div className="flex items-center gap-2">
-                    <NorthcoteButton variant="secondary" className="h-8 w-8 p-0 rounded-full" title="Split View (Coming Soon)">
+                    <kerala-rageButton variant="secondary" className="h-8 w-8 p-0 rounded-full" title="Split View (Coming Soon)">
                         <SplitSquareHorizontal className="w-4 h-4 text-on-surface-variant" />
-                    </NorthcoteButton>
-                    <NorthcoteButton
+                    </kerala-rageButton>
+                    <kerala-rageButton
                         onClick={handleAnalyze}
                         disabled={analyzing}
                         className="h-8 px-4 text-label-small bg-tertiary-container text-on-tertiary-container hover:bg-tertiary hover:text-on-tertiary transition-colors"
                     >
                         <ShieldCheck className="w-3 h-3 mr-2" />
                         {analyzing ? 'Auditing...' : 'Analyze'}
-                    </NorthcoteButton>
-                    <NorthcoteButton className="h-8 px-4 text-label-small bg-primary text-on-primary">
+                    </kerala-rageButton>
+                    <kerala-rageButton className="h-8 px-4 text-label-small bg-primary text-on-primary">
                         <Save className="w-3 h-3 mr-2" />
                         Save Draft
-                    </NorthcoteButton>
+                    </kerala-rageButton>
                 </div>
             </div>
 

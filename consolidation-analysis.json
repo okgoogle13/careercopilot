@@ -1,241 +1,241 @@
 [
   {
-    "filename": "northcote-curio-manifest.json",
-    "original_filename": "northcote-curio-manifest.json",
+    "filename": "kerala-rage-kr-solidarity-manifest.json",
+    "original_filename": "kerala-rage-kr-solidarity-manifest.json",
     "hash": "879edce75203b489cbfa76fe1998feaa",
     "action": "KEEP",
-    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/northcote-curio-manifest.json",
+    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/kerala-rage-kr-solidarity-manifest.json",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/assets/northcote-curio-manifest.json"
+      "/Users/okgoogle13/Desktop/careercopilot/assets/kerala-rage-kr-solidarity-manifest.json"
     ],
     "source_labels": [
       "CANONICAL"
     ],
-    "current_canonical_path": "/Users/okgoogle13/Desktop/careercopilot/assets/northcote-curio-manifest.json"
+    "current_canonical_path": "/Users/okgoogle13/Desktop/careercopilot/assets/kerala-rage-kr-solidarity-manifest.json"
   },
   {
-    "filename": "northcote-eucalyptus-echidna.png",
-    "original_filename": "northcote-eucalyptus-echidna.png",
+    "filename": "kerala-rage-kr-leafus-echidna.png",
+    "original_filename": "kerala-rage-kr-leafus-echidna.png",
     "hash": "8c5cff89a0602ce2b641475543d5ec31",
     "action": "KEEP",
-    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/specimens/northcote-eucalyptus-echidna.png",
+    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/kr-motifs/kerala-rage-kr-leafus-echidna.png",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/assets/specimens/northcote-eucalyptus-echidna.png"
+      "/Users/okgoogle13/Desktop/careercopilot/assets/kr-motifs/kerala-rage-kr-leafus-echidna.png"
     ],
     "source_labels": [
       "CANONICAL"
     ],
-    "current_canonical_path": "/Users/okgoogle13/Desktop/careercopilot/assets/specimens/northcote-eucalyptus-echidna.png"
+    "current_canonical_path": "/Users/okgoogle13/Desktop/careercopilot/assets/kr-motifs/kerala-rage-kr-leafus-echidna.png"
   },
   {
-    "filename": "northcote-sea-urchin-crown.jpg",
-    "original_filename": "northcote-sea-urchin-crown.jpg",
+    "filename": "kerala-rage-sea-urchin-crown.jpg",
+    "original_filename": "kerala-rage-sea-urchin-crown.jpg",
     "hash": "ecbb36afd5d6925d2ab0b8d9a24a1d7f",
     "action": "KEEP",
-    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/specimens/northcote-sea-urchin-crown.jpg",
+    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/kr-motifs/kerala-rage-sea-urchin-crown.jpg",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/assets/specimens/northcote-sea-urchin-crown.jpg"
+      "/Users/okgoogle13/Desktop/careercopilot/assets/kr-motifs/kerala-rage-sea-urchin-crown.jpg"
     ],
     "source_labels": [
       "CANONICAL"
     ],
-    "current_canonical_path": "/Users/okgoogle13/Desktop/careercopilot/assets/specimens/northcote-sea-urchin-crown.jpg"
+    "current_canonical_path": "/Users/okgoogle13/Desktop/careercopilot/assets/kr-motifs/kerala-rage-sea-urchin-crown.jpg"
   },
   {
-    "filename": "northcote-flying-fox-wing.jpg",
-    "original_filename": "northcote-flying-fox-wing.jpg",
+    "filename": "kerala-rage-flying-fox-wing.jpg",
+    "original_filename": "kerala-rage-flying-fox-wing.jpg",
     "hash": "6e40d79bce8457e8be25d3961326a3f2",
     "action": "KEEP",
-    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/specimens/northcote-flying-fox-wing.jpg",
+    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/kr-motifs/kerala-rage-flying-fox-wing.jpg",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/assets/specimens/northcote-flying-fox-wing.jpg"
+      "/Users/okgoogle13/Desktop/careercopilot/assets/kr-motifs/kerala-rage-flying-fox-wing.jpg"
     ],
     "source_labels": [
       "CANONICAL"
     ],
-    "current_canonical_path": "/Users/okgoogle13/Desktop/careercopilot/assets/specimens/northcote-flying-fox-wing.jpg"
+    "current_canonical_path": "/Users/okgoogle13/Desktop/careercopilot/assets/kr-motifs/kerala-rage-flying-fox-wing.jpg"
   },
   {
-    "filename": "northcote-grinding-stone.jpg",
-    "original_filename": "northcote-grinding-stone.jpg",
+    "filename": "kerala-rage-grinding-stone.jpg",
+    "original_filename": "kerala-rage-grinding-stone.jpg",
     "hash": "3fdf47bb545ea1fa5fc235bb5dff8508",
     "action": "KEEP",
-    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/specimens/northcote-grinding-stone.jpg",
+    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/kr-motifs/kerala-rage-grinding-stone.jpg",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/assets/specimens/northcote-grinding-stone.jpg"
+      "/Users/okgoogle13/Desktop/careercopilot/assets/kr-motifs/kerala-rage-grinding-stone.jpg"
     ],
     "source_labels": [
       "CANONICAL"
     ],
-    "current_canonical_path": "/Users/okgoogle13/Desktop/careercopilot/assets/specimens/northcote-grinding-stone.jpg"
+    "current_canonical_path": "/Users/okgoogle13/Desktop/careercopilot/assets/kr-motifs/kerala-rage-grinding-stone.jpg"
   },
   {
-    "filename": "northcote-starfish-fungus.jpg",
-    "original_filename": "northcote-starfish-fungus.jpg",
+    "filename": "kerala-rage-starfish-fungus.jpg",
+    "original_filename": "kerala-rage-starfish-fungus.jpg",
     "hash": "d1fdfd952d52d9c23e67359c9fd1c987",
     "action": "KEEP",
-    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/specimens/northcote-starfish-fungus.jpg",
+    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/kr-motifs/kerala-rage-starfish-fungus.jpg",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/assets/specimens/northcote-starfish-fungus.jpg"
+      "/Users/okgoogle13/Desktop/careercopilot/assets/kr-motifs/kerala-rage-starfish-fungus.jpg"
     ],
     "source_labels": [
       "CANONICAL"
     ],
-    "current_canonical_path": "/Users/okgoogle13/Desktop/careercopilot/assets/specimens/northcote-starfish-fungus.jpg"
+    "current_canonical_path": "/Users/okgoogle13/Desktop/careercopilot/assets/kr-motifs/kerala-rage-starfish-fungus.jpg"
   },
   {
-    "filename": "northcote-brain-coral.jpg",
-    "original_filename": "northcote-brain-coral.jpg",
+    "filename": "kerala-rage-brain-coral.jpg",
+    "original_filename": "kerala-rage-brain-coral.jpg",
     "hash": "eb6ce096ece6390f06616566cd662311",
     "action": "KEEP",
-    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/specimens/northcote-brain-coral.jpg",
+    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/kr-motifs/kerala-rage-brain-coral.jpg",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/assets/specimens/northcote-brain-coral.jpg"
+      "/Users/okgoogle13/Desktop/careercopilot/assets/kr-motifs/kerala-rage-brain-coral.jpg"
     ],
     "source_labels": [
       "CANONICAL"
     ],
-    "current_canonical_path": "/Users/okgoogle13/Desktop/careercopilot/assets/specimens/northcote-brain-coral.jpg"
+    "current_canonical_path": "/Users/okgoogle13/Desktop/careercopilot/assets/kr-motifs/kerala-rage-brain-coral.jpg"
   },
   {
-    "filename": "northcote-banksia-pod.jpg",
-    "original_filename": "northcote-banksia-pod.jpg",
+    "filename": "kerala-rage-kr-flower-pod.jpg",
+    "original_filename": "kerala-rage-kr-flower-pod.jpg",
     "hash": "96dd922d8360073a6f1534dc76c1bfe5",
     "action": "KEEP",
-    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/specimens/northcote-banksia-pod.jpg",
+    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/kr-motifs/kerala-rage-kr-flower-pod.jpg",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/assets/specimens/northcote-banksia-pod.jpg"
+      "/Users/okgoogle13/Desktop/careercopilot/assets/kr-motifs/kerala-rage-kr-flower-pod.jpg"
     ],
     "source_labels": [
       "CANONICAL"
     ],
-    "current_canonical_path": "/Users/okgoogle13/Desktop/careercopilot/assets/specimens/northcote-banksia-pod.jpg"
+    "current_canonical_path": "/Users/okgoogle13/Desktop/careercopilot/assets/kr-motifs/kerala-rage-kr-flower-pod.jpg"
   },
   {
-    "filename": "northcote-wattle-beetle.png",
-    "original_filename": "northcote-wattle-beetle.png",
+    "filename": "kerala-rage-wattle-beetle.png",
+    "original_filename": "kerala-rage-wattle-beetle.png",
     "hash": "eea115fc0d2a13f378c7881310af4911",
     "action": "KEEP",
-    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/specimens/northcote-wattle-beetle.png",
+    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/kr-motifs/kerala-rage-wattle-beetle.png",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/assets/specimens/northcote-wattle-beetle.png"
+      "/Users/okgoogle13/Desktop/careercopilot/assets/kr-motifs/kerala-rage-wattle-beetle.png"
     ],
     "source_labels": [
       "CANONICAL"
     ],
-    "current_canonical_path": "/Users/okgoogle13/Desktop/careercopilot/assets/specimens/northcote-wattle-beetle.png"
+    "current_canonical_path": "/Users/okgoogle13/Desktop/careercopilot/assets/kr-motifs/kerala-rage-wattle-beetle.png"
   },
   {
-    "filename": "northcote-radiolaria-bone-cage.jpg",
-    "original_filename": "northcote-radiolaria-bone-cage.jpg",
+    "filename": "kerala-rage-radiolaria-bone-cage.jpg",
+    "original_filename": "kerala-rage-radiolaria-bone-cage.jpg",
     "hash": "46edf9aa8120531bf5b814e81deb4982",
     "action": "KEEP",
-    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/specimens/northcote-radiolaria-bone-cage.jpg",
+    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/kr-motifs/kerala-rage-radiolaria-bone-cage.jpg",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/assets/specimens/northcote-radiolaria-bone-cage.jpg"
+      "/Users/okgoogle13/Desktop/careercopilot/assets/kr-motifs/kerala-rage-radiolaria-bone-cage.jpg"
     ],
     "source_labels": [
       "CANONICAL"
     ],
-    "current_canonical_path": "/Users/okgoogle13/Desktop/careercopilot/assets/specimens/northcote-radiolaria-bone-cage.jpg"
+    "current_canonical_path": "/Users/okgoogle13/Desktop/careercopilot/assets/kr-motifs/kerala-rage-radiolaria-bone-cage.jpg"
   },
   {
-    "filename": "northcote-nav-icons.png",
-    "original_filename": "northcote-nav-icons.png",
+    "filename": "kerala-rage-nav-icons.png",
+    "original_filename": "kerala-rage-nav-icons.png",
     "hash": "589b1cb961d16469d6ed723315eef5ba",
     "action": "KEEP",
-    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/ui/northcote-nav-icons.png",
+    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/ui/kerala-rage-nav-icons.png",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/assets/ui/northcote-nav-icons.png"
+      "/Users/okgoogle13/Desktop/careercopilot/assets/ui/kerala-rage-nav-icons.png"
     ],
     "source_labels": [
       "CANONICAL"
     ],
-    "current_canonical_path": "/Users/okgoogle13/Desktop/careercopilot/assets/ui/northcote-nav-icons.png"
+    "current_canonical_path": "/Users/okgoogle13/Desktop/careercopilot/assets/ui/kerala-rage-nav-icons.png"
   },
   {
-    "filename": "northcote-banksia-spinner.png",
-    "original_filename": "northcote-banksia-spinner.png",
+    "filename": "kerala-rage-kr-flower-spinner.png",
+    "original_filename": "kerala-rage-kr-flower-spinner.png",
     "hash": "d7f2fde077bf100bd4b22a8b7fdb9495",
     "action": "KEEP",
-    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/ui/northcote-banksia-spinner.png",
+    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/ui/kerala-rage-kr-flower-spinner.png",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/assets/ui/northcote-banksia-spinner.png"
+      "/Users/okgoogle13/Desktop/careercopilot/assets/ui/kerala-rage-kr-flower-spinner.png"
     ],
     "source_labels": [
       "CANONICAL"
     ],
-    "current_canonical_path": "/Users/okgoogle13/Desktop/careercopilot/assets/ui/northcote-banksia-spinner.png"
+    "current_canonical_path": "/Users/okgoogle13/Desktop/careercopilot/assets/ui/kerala-rage-kr-flower-spinner.png"
   },
   {
-    "filename": "northcote-night-canopy.png",
-    "original_filename": "northcote-night-canopy.png",
+    "filename": "kerala-rage-night-canopy.png",
+    "original_filename": "kerala-rage-night-canopy.png",
     "hash": "c7df8e27f7542ba04a5f40e663e61fb0",
     "action": "KEEP",
-    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/textures/northcote-night-canopy.png",
+    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/textures/kerala-rage-night-canopy.png",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/assets/textures/northcote-night-canopy.png"
+      "/Users/okgoogle13/Desktop/careercopilot/assets/textures/kerala-rage-night-canopy.png"
     ],
     "source_labels": [
       "CANONICAL"
     ],
-    "current_canonical_path": "/Users/okgoogle13/Desktop/careercopilot/assets/textures/northcote-night-canopy.png"
+    "current_canonical_path": "/Users/okgoogle13/Desktop/careercopilot/assets/textures/kerala-rage-night-canopy.png"
   },
   {
-    "filename": "northcote-technical-paper-white.jpg",
-    "original_filename": "northcote-technical-paper-white.jpg",
+    "filename": "kerala-rage-technical-paper-white.jpg",
+    "original_filename": "kerala-rage-technical-paper-white.jpg",
     "hash": "56012a696c91ae8e46376118e30d4779",
     "action": "KEEP",
-    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/textures/northcote-technical-paper-white.jpg",
+    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/textures/kerala-rage-technical-paper-white.jpg",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/assets/textures/northcote-technical-paper-white.jpg"
+      "/Users/okgoogle13/Desktop/careercopilot/assets/textures/kerala-rage-technical-paper-white.jpg"
     ],
     "source_labels": [
       "CANONICAL"
     ],
-    "current_canonical_path": "/Users/okgoogle13/Desktop/careercopilot/assets/textures/northcote-technical-paper-white.jpg"
+    "current_canonical_path": "/Users/okgoogle13/Desktop/careercopilot/assets/textures/kerala-rage-technical-paper-white.jpg"
   },
   {
-    "filename": "northcote-sentry-kookaburra.png",
-    "original_filename": "northcote-sentry-kookaburra.png",
+    "filename": "kerala-rage-sentry-kr-shiva.png",
+    "original_filename": "kerala-rage-sentry-kr-shiva.png",
     "hash": "d77b49f53c63553202641b59f58890cc",
     "action": "KEEP",
-    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/fauna/northcote-sentry-kookaburra.png",
+    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/kr-symbol/kerala-rage-sentry-kr-shiva.png",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/assets/fauna/northcote-sentry-kookaburra.png"
+      "/Users/okgoogle13/Desktop/careercopilot/assets/kr-symbol/kerala-rage-sentry-kr-shiva.png"
     ],
     "source_labels": [
       "CANONICAL"
     ],
-    "current_canonical_path": "/Users/okgoogle13/Desktop/careercopilot/assets/fauna/northcote-sentry-kookaburra.png"
+    "current_canonical_path": "/Users/okgoogle13/Desktop/careercopilot/assets/kr-symbol/kerala-rage-sentry-kr-shiva.png"
   },
   {
-    "filename": "northcote-curio-wallpaper.png",
-    "original_filename": "northcote-curio-wallpaper.png",
+    "filename": "kerala-rage-kr-solidarity-wallpaper.png",
+    "original_filename": "kerala-rage-kr-solidarity-wallpaper.png",
     "hash": "faf340b81ae651d4e39258caec12e1c4",
     "action": "KEEP",
-    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/plates/northcote-curio-wallpaper.png",
+    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/plates/kerala-rage-kr-solidarity-wallpaper.png",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/assets/plates/northcote-curio-wallpaper.png"
+      "/Users/okgoogle13/Desktop/careercopilot/assets/plates/kerala-rage-kr-solidarity-wallpaper.png"
     ],
     "source_labels": [
       "CANONICAL"
     ],
-    "current_canonical_path": "/Users/okgoogle13/Desktop/careercopilot/assets/plates/northcote-curio-wallpaper.png"
+    "current_canonical_path": "/Users/okgoogle13/Desktop/careercopilot/assets/plates/kerala-rage-kr-solidarity-wallpaper.png"
   },
   {
-    "filename": "northcote-temporal-still-life.png",
-    "original_filename": "northcote-temporal-still-life.png",
+    "filename": "kerala-rage-temporal-still-life.png",
+    "original_filename": "kerala-rage-temporal-still-life.png",
     "hash": "f592712483b7a64949ffbf3881afd7fb",
     "action": "KEEP",
-    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/plates/northcote-temporal-still-life.png",
+    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/plates/kerala-rage-temporal-still-life.png",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/assets/plates/northcote-temporal-still-life.png"
+      "/Users/okgoogle13/Desktop/careercopilot/assets/plates/kerala-rage-temporal-still-life.png"
     ],
     "source_labels": [
       "CANONICAL"
     ],
-    "current_canonical_path": "/Users/okgoogle13/Desktop/careercopilot/assets/plates/northcote-temporal-still-life.png"
+    "current_canonical_path": "/Users/okgoogle13/Desktop/careercopilot/assets/plates/kerala-rage-temporal-still-life.png"
   },
   {
     "filename": "file-SdhoQzyxwnFQf85ada3bZS.webp",
@@ -244,8 +244,8 @@
     "action": "MOVE",
     "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/uncategorized/file-SdhoQzyxwnFQf85ada3bZS.webp",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/Curio images phase 3/file-SdhoQzyxwnFQf85ada3bZS.webp",
-      "/Users/okgoogle13/Desktop/careercopilot/Curio images phase 3/file-SdhoQzyxwnFQf85ada3bZS copy.webp"
+      "/Users/okgoogle13/Desktop/careercopilot/kr-solidarity images phase 3/file-SdhoQzyxwnFQf85ada3bZS.webp",
+      "/Users/okgoogle13/Desktop/careercopilot/kr-solidarity images phase 3/file-SdhoQzyxwnFQf85ada3bZS copy.webp"
     ],
     "source_labels": [
       "NEW_SOURCE",
@@ -260,8 +260,8 @@
     "action": "MOVE",
     "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/uncategorized/file-PS48DhLhcp37vpnhyDdsMT.webp",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/Curio images phase 3/file-PS48DhLhcp37vpnhyDdsMT.webp",
-      "/Users/okgoogle13/Desktop/careercopilot/Curio images phase 3/file-PS48DhLhcp37vpnhyDdsMT copy.webp"
+      "/Users/okgoogle13/Desktop/careercopilot/kr-solidarity images phase 3/file-PS48DhLhcp37vpnhyDdsMT.webp",
+      "/Users/okgoogle13/Desktop/careercopilot/kr-solidarity images phase 3/file-PS48DhLhcp37vpnhyDdsMT copy.webp"
     ],
     "source_labels": [
       "NEW_SOURCE",
@@ -276,8 +276,8 @@
     "action": "MOVE",
     "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/ui/file-MGJYRLfbzTv3Mi3SkA1ui4 copy.webp",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/Curio images phase 3/file-MGJYRLfbzTv3Mi3SkA1ui4 copy.webp",
-      "/Users/okgoogle13/Desktop/careercopilot/Curio images phase 3/file-MGJYRLfbzTv3Mi3SkA1ui4.webp"
+      "/Users/okgoogle13/Desktop/careercopilot/kr-solidarity images phase 3/file-MGJYRLfbzTv3Mi3SkA1ui4 copy.webp",
+      "/Users/okgoogle13/Desktop/careercopilot/kr-solidarity images phase 3/file-MGJYRLfbzTv3Mi3SkA1ui4.webp"
     ],
     "source_labels": [
       "NEW_SOURCE",
@@ -292,9 +292,9 @@
     "action": "MOVE",
     "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/uncategorized/file-LZzmgnJu5jYqZj1ASj3D9Z.webp",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/Curio images phase 3/file-LZzmgnJu5jYqZj1ASj3D9Z.webp",
-      "/Users/okgoogle13/Desktop/careercopilot/Curio images phase 3/DALL\u00b7E 2026-01-24 22.27.00 - Victorian-era hand-tinted lithographic curiosity specimen viewed under a magnifying glass. Subject_ an eccentric antique brass key whose ward and bow .webp",
-      "/Users/okgoogle13/Desktop/careercopilot/Curio images phase 3/file-LZzmgnJu5jYqZj1ASj3D9Z copy.webp"
+      "/Users/okgoogle13/Desktop/careercopilot/kr-solidarity images phase 3/file-LZzmgnJu5jYqZj1ASj3D9Z.webp",
+      "/Users/okgoogle13/Desktop/careercopilot/kr-solidarity images phase 3/DALL\u00b7E 2026-01-24 22.27.00 - kerala-streetprint-era hand-tinted lithographic kr-solidaritysity kr-motif viewed under a magnifying glass. Subject_ an eccentric antique brass key whose ward and bow .webp",
+      "/Users/okgoogle13/Desktop/careercopilot/kr-solidarity images phase 3/file-LZzmgnJu5jYqZj1ASj3D9Z copy.webp"
     ],
     "source_labels": [
       "NEW_SOURCE",
@@ -310,8 +310,8 @@
     "action": "MOVE",
     "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/uncategorized/file-HJdvkwhL6rav4cFJrr29Wf.webp",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/Curio images phase 3/file-HJdvkwhL6rav4cFJrr29Wf.webp",
-      "/Users/okgoogle13/Desktop/careercopilot/Curio images phase 3/file-HJdvkwhL6rav4cFJrr29Wf copy.webp"
+      "/Users/okgoogle13/Desktop/careercopilot/kr-solidarity images phase 3/file-HJdvkwhL6rav4cFJrr29Wf.webp",
+      "/Users/okgoogle13/Desktop/careercopilot/kr-solidarity images phase 3/file-HJdvkwhL6rav4cFJrr29Wf copy.webp"
     ],
     "source_labels": [
       "NEW_SOURCE",
@@ -326,7 +326,7 @@
     "action": "MOVE",
     "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/uncategorized/Generated Image January 19, 2026 - 2_11PM.jpeg",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/Curio images phase 3/Generated Image January 19, 2026 - 2_11PM.jpeg"
+      "/Users/okgoogle13/Desktop/careercopilot/kr-solidarity images phase 3/Generated Image January 19, 2026 - 2_11PM.jpeg"
     ],
     "source_labels": [
       "NEW_SOURCE"
@@ -340,8 +340,8 @@
     "action": "MOVE",
     "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/uncategorized/file-X3AfJnTjFMfEeDFLAVQzNi.webp",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/Curio images phase 3/file-X3AfJnTjFMfEeDFLAVQzNi.webp",
-      "/Users/okgoogle13/Desktop/careercopilot/Curio images phase 3/file-X3AfJnTjFMfEeDFLAVQzNi copy.webp"
+      "/Users/okgoogle13/Desktop/careercopilot/kr-solidarity images phase 3/file-X3AfJnTjFMfEeDFLAVQzNi.webp",
+      "/Users/okgoogle13/Desktop/careercopilot/kr-solidarity images phase 3/file-X3AfJnTjFMfEeDFLAVQzNi copy.webp"
     ],
     "source_labels": [
       "NEW_SOURCE",
@@ -356,7 +356,7 @@
     "action": "MOVE",
     "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/uncategorized/Generated Image January 30, 2026 - 7_51AM.jpeg",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/Curio images phase 3/Generated Image January 30, 2026 - 7_51AM.jpeg"
+      "/Users/okgoogle13/Desktop/careercopilot/kr-solidarity images phase 3/Generated Image January 30, 2026 - 7_51AM.jpeg"
     ],
     "source_labels": [
       "NEW_SOURCE"
@@ -370,7 +370,7 @@
     "action": "MOVE",
     "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/uncategorized/Screenshot 2026-01-18 at 05.45.43.png",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/Curio images phase 3/Screenshot 2026-01-18 at 05.45.43.png"
+      "/Users/okgoogle13/Desktop/careercopilot/kr-solidarity images phase 3/Screenshot 2026-01-18 at 05.45.43.png"
     ],
     "source_labels": [
       "NEW_SOURCE"
@@ -384,7 +384,7 @@
     "action": "MOVE",
     "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/uncategorized/Generated Image January 30, 2026 - 9_38PM.jpeg",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/Curio images phase 3/Generated Image January 30, 2026 - 9_38PM.jpeg"
+      "/Users/okgoogle13/Desktop/careercopilot/kr-solidarity images phase 3/Generated Image January 30, 2026 - 9_38PM.jpeg"
     ],
     "source_labels": [
       "NEW_SOURCE"
@@ -398,7 +398,7 @@
     "action": "MOVE",
     "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/uncategorized/Generated Image January 30, 2026 - 7_57AM.jpeg",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/Curio images phase 3/Generated Image January 30, 2026 - 7_57AM.jpeg"
+      "/Users/okgoogle13/Desktop/careercopilot/kr-solidarity images phase 3/Generated Image January 30, 2026 - 7_57AM.jpeg"
     ],
     "source_labels": [
       "NEW_SOURCE"
@@ -412,7 +412,7 @@
     "action": "MOVE",
     "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/uncategorized/Screenshot 2026-01-18 at 05.38.51.png",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/Curio images phase 3/Screenshot 2026-01-18 at 05.38.51.png"
+      "/Users/okgoogle13/Desktop/careercopilot/kr-solidarity images phase 3/Screenshot 2026-01-18 at 05.38.51.png"
     ],
     "source_labels": [
       "NEW_SOURCE"
@@ -426,7 +426,7 @@
     "action": "MOVE",
     "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/uncategorized/Generated Image January 19, 2026 - 2_05PM-2.jpeg",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/Curio images phase 3/Generated Image January 19, 2026 - 2_05PM-2.jpeg"
+      "/Users/okgoogle13/Desktop/careercopilot/kr-solidarity images phase 3/Generated Image January 19, 2026 - 2_05PM-2.jpeg"
     ],
     "source_labels": [
       "NEW_SOURCE"
@@ -440,7 +440,7 @@
     "action": "MOVE",
     "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/uncategorized/Generated Image January 19, 2026 - 2_05PM.jpeg",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/Curio images phase 3/Generated Image January 19, 2026 - 2_05PM.jpeg"
+      "/Users/okgoogle13/Desktop/careercopilot/kr-solidarity images phase 3/Generated Image January 19, 2026 - 2_05PM.jpeg"
     ],
     "source_labels": [
       "NEW_SOURCE"
@@ -454,7 +454,7 @@
     "action": "MOVE",
     "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/uncategorized/Generated Image January 19, 2026 - 2_09PM.jpeg",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/Curio images phase 3/Generated Image January 19, 2026 - 2_09PM.jpeg"
+      "/Users/okgoogle13/Desktop/careercopilot/kr-solidarity images phase 3/Generated Image January 19, 2026 - 2_09PM.jpeg"
     ],
     "source_labels": [
       "NEW_SOURCE"
@@ -468,7 +468,7 @@
     "action": "MOVE",
     "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/uncategorized/Generated Image January 30, 2026 - 10_11PM.jpeg",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/Curio images phase 3/Generated Image January 30, 2026 - 10_11PM.jpeg"
+      "/Users/okgoogle13/Desktop/careercopilot/kr-solidarity images phase 3/Generated Image January 30, 2026 - 10_11PM.jpeg"
     ],
     "source_labels": [
       "NEW_SOURCE"
@@ -482,7 +482,7 @@
     "action": "MOVE",
     "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/uncategorized/Generated Image January 19, 2026 - 7_28PM.jpeg",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/Curio images phase 3/Generated Image January 19, 2026 - 7_28PM.jpeg"
+      "/Users/okgoogle13/Desktop/careercopilot/kr-solidarity images phase 3/Generated Image January 19, 2026 - 7_28PM.jpeg"
     ],
     "source_labels": [
       "NEW_SOURCE"
@@ -496,9 +496,9 @@
     "action": "MOVE",
     "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/uncategorized/Generated Image January 30, 2026 - 12_42AM.jpeg",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/Curio images phase 3/Generated Image January 30, 2026 - 12_42AM.jpeg",
-      "/Users/okgoogle13/Desktop/careercopilot/Curio images phase 3/Generated Image January 30, 2026 - 7_54AM (3).jpeg",
-      "/Users/okgoogle13/Desktop/careercopilot/Curio images phase 3/Generated Image January 30, 2026 - 7_54AM (4).jpeg"
+      "/Users/okgoogle13/Desktop/careercopilot/kr-solidarity images phase 3/Generated Image January 30, 2026 - 12_42AM.jpeg",
+      "/Users/okgoogle13/Desktop/careercopilot/kr-solidarity images phase 3/Generated Image January 30, 2026 - 7_54AM (3).jpeg",
+      "/Users/okgoogle13/Desktop/careercopilot/kr-solidarity images phase 3/Generated Image January 30, 2026 - 7_54AM (4).jpeg"
     ],
     "source_labels": [
       "NEW_SOURCE",
@@ -514,8 +514,8 @@
     "action": "MOVE",
     "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/uncategorized/file-UvyNA3R153vA95oow4Tcx2.webp",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/Curio images phase 3/file-UvyNA3R153vA95oow4Tcx2.webp",
-      "/Users/okgoogle13/Desktop/careercopilot/Curio images phase 3/file-UvyNA3R153vA95oow4Tcx2 copy.webp"
+      "/Users/okgoogle13/Desktop/careercopilot/kr-solidarity images phase 3/file-UvyNA3R153vA95oow4Tcx2.webp",
+      "/Users/okgoogle13/Desktop/careercopilot/kr-solidarity images phase 3/file-UvyNA3R153vA95oow4Tcx2 copy.webp"
     ],
     "source_labels": [
       "NEW_SOURCE",
@@ -530,7 +530,7 @@
     "action": "MOVE",
     "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/uncategorized/Generated Image January 30, 2026 - 7_54AM (5).jpeg",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/Curio images phase 3/Generated Image January 30, 2026 - 7_54AM (5).jpeg"
+      "/Users/okgoogle13/Desktop/careercopilot/kr-solidarity images phase 3/Generated Image January 30, 2026 - 7_54AM (5).jpeg"
     ],
     "source_labels": [
       "NEW_SOURCE"
@@ -544,7 +544,7 @@
     "action": "MOVE",
     "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/uncategorized/Gemini_Generated_Image_usd1rtusd1rtusd1 (1).png",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/Curio images phase 3/Gemini_Generated_Image_usd1rtusd1rtusd1 (1).png"
+      "/Users/okgoogle13/Desktop/careercopilot/kr-solidarity images phase 3/Gemini_Generated_Image_usd1rtusd1rtusd1 (1).png"
     ],
     "source_labels": [
       "NEW_SOURCE"
@@ -558,7 +558,7 @@
     "action": "MOVE",
     "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/uncategorized/Generated Image January 30, 2026 - 7_52AM.jpeg",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/Curio images phase 3/Generated Image January 30, 2026 - 7_52AM.jpeg"
+      "/Users/okgoogle13/Desktop/careercopilot/kr-solidarity images phase 3/Generated Image January 30, 2026 - 7_52AM.jpeg"
     ],
     "source_labels": [
       "NEW_SOURCE"
@@ -572,7 +572,7 @@
     "action": "MOVE",
     "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/uncategorized/Generated Image January 30, 2026 - 7_54AM (7).jpeg",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/Curio images phase 3/Generated Image January 30, 2026 - 7_54AM (7).jpeg"
+      "/Users/okgoogle13/Desktop/careercopilot/kr-solidarity images phase 3/Generated Image January 30, 2026 - 7_54AM (7).jpeg"
     ],
     "source_labels": [
       "NEW_SOURCE"
@@ -586,7 +586,7 @@
     "action": "MOVE",
     "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/uncategorized/Generated Image January 19, 2026 - 2_00PM.jpeg",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/Curio images phase 3/Generated Image January 19, 2026 - 2_00PM.jpeg"
+      "/Users/okgoogle13/Desktop/careercopilot/kr-solidarity images phase 3/Generated Image January 19, 2026 - 2_00PM.jpeg"
     ],
     "source_labels": [
       "NEW_SOURCE"
@@ -600,8 +600,8 @@
     "action": "MOVE",
     "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/uncategorized/file-HmdMnQ2xsahy4XdQskqk2y.webp",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/Curio images phase 3/file-HmdMnQ2xsahy4XdQskqk2y.webp",
-      "/Users/okgoogle13/Desktop/careercopilot/Curio images phase 3/file-HmdMnQ2xsahy4XdQskqk2y copy.webp"
+      "/Users/okgoogle13/Desktop/careercopilot/kr-solidarity images phase 3/file-HmdMnQ2xsahy4XdQskqk2y.webp",
+      "/Users/okgoogle13/Desktop/careercopilot/kr-solidarity images phase 3/file-HmdMnQ2xsahy4XdQskqk2y copy.webp"
     ],
     "source_labels": [
       "NEW_SOURCE",
@@ -616,8 +616,8 @@
     "action": "MOVE",
     "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/uncategorized/file-EeA2MMcW6g4fiJaAdR1KoE.webp",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/Curio images phase 3/file-EeA2MMcW6g4fiJaAdR1KoE.webp",
-      "/Users/okgoogle13/Desktop/careercopilot/Curio images phase 3/file-EeA2MMcW6g4fiJaAdR1KoE copy.webp"
+      "/Users/okgoogle13/Desktop/careercopilot/kr-solidarity images phase 3/file-EeA2MMcW6g4fiJaAdR1KoE.webp",
+      "/Users/okgoogle13/Desktop/careercopilot/kr-solidarity images phase 3/file-EeA2MMcW6g4fiJaAdR1KoE copy.webp"
     ],
     "source_labels": [
       "NEW_SOURCE",
@@ -632,8 +632,8 @@
     "action": "MOVE",
     "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/uncategorized/Generated Image January 30, 2026 - 7_54AM (1).jpeg",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/Curio images phase 3/Generated Image January 30, 2026 - 7_54AM (1).jpeg",
-      "/Users/okgoogle13/Desktop/careercopilot/Curio images phase 3/Generated Image January 30, 2026 - 7_54AM (2).jpeg"
+      "/Users/okgoogle13/Desktop/careercopilot/kr-solidarity images phase 3/Generated Image January 30, 2026 - 7_54AM (1).jpeg",
+      "/Users/okgoogle13/Desktop/careercopilot/kr-solidarity images phase 3/Generated Image January 30, 2026 - 7_54AM (2).jpeg"
     ],
     "source_labels": [
       "NEW_SOURCE",
@@ -648,7 +648,7 @@
     "action": "MOVE",
     "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/uncategorized/Generated Image January 30, 2026 - 7_56AM (2).jpeg",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/Curio images phase 3/Generated Image January 30, 2026 - 7_56AM (2).jpeg"
+      "/Users/okgoogle13/Desktop/careercopilot/kr-solidarity images phase 3/Generated Image January 30, 2026 - 7_56AM (2).jpeg"
     ],
     "source_labels": [
       "NEW_SOURCE"
@@ -662,8 +662,8 @@
     "action": "MOVE",
     "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/uncategorized/file-GvB3iC5GJHzdjkySrKE7qA copy.webp",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/Curio images phase 3/file-GvB3iC5GJHzdjkySrKE7qA copy.webp",
-      "/Users/okgoogle13/Desktop/careercopilot/Curio images phase 3/file-GvB3iC5GJHzdjkySrKE7qA.webp"
+      "/Users/okgoogle13/Desktop/careercopilot/kr-solidarity images phase 3/file-GvB3iC5GJHzdjkySrKE7qA copy.webp",
+      "/Users/okgoogle13/Desktop/careercopilot/kr-solidarity images phase 3/file-GvB3iC5GJHzdjkySrKE7qA.webp"
     ],
     "source_labels": [
       "NEW_SOURCE",
@@ -678,8 +678,8 @@
     "action": "MOVE",
     "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/uncategorized/file-51CtCwsNynzbsxgg2KdhPx.webp",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/Curio images phase 3/file-51CtCwsNynzbsxgg2KdhPx.webp",
-      "/Users/okgoogle13/Desktop/careercopilot/Curio images phase 3/file-51CtCwsNynzbsxgg2KdhPx copy.webp"
+      "/Users/okgoogle13/Desktop/careercopilot/kr-solidarity images phase 3/file-51CtCwsNynzbsxgg2KdhPx.webp",
+      "/Users/okgoogle13/Desktop/careercopilot/kr-solidarity images phase 3/file-51CtCwsNynzbsxgg2KdhPx copy.webp"
     ],
     "source_labels": [
       "NEW_SOURCE",
@@ -688,13 +688,13 @@
     "current_canonical_path": null
   },
   {
-    "filename": "DALL\u00b7E 2026-01-24 22.36.45 - Victorian-era scientific illustration plate of bats (Chiroptera), hand-tinted lithography with extreme austerity. Subject_ comparative anatomical stud.webp",
-    "original_filename": "DALL\u00b7E 2026-01-24 22.36.45 - Victorian-era scientific illustration plate of bats (Chiroptera), hand-tinted lithography with extreme austerity. Subject_ comparative anatomical stud.webp",
+    "filename": "DALL\u00b7E 2026-01-24 22.36.45 - kerala-streetprint-era scientific illustration plate of bats (Chiroptera), hand-tinted lithography with extreme austerity. Subject_ comparative anatomical stud.webp",
+    "original_filename": "DALL\u00b7E 2026-01-24 22.36.45 - kerala-streetprint-era scientific illustration plate of bats (Chiroptera), hand-tinted lithography with extreme austerity. Subject_ comparative anatomical stud.webp",
     "hash": "3ec3c80d7a9a57fb37ac921e01a198ac",
     "action": "MOVE",
-    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/plates/DALL\u00b7E 2026-01-24 22.36.45 - Victorian-era scientific illustration plate of bats (Chiroptera), hand-tinted lithography with extreme austerity. Subject_ comparative anatomical stud.webp",
+    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/plates/DALL\u00b7E 2026-01-24 22.36.45 - kerala-streetprint-era scientific illustration plate of bats (Chiroptera), hand-tinted lithography with extreme austerity. Subject_ comparative anatomical stud.webp",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/Curio images phase 3/DALL\u00b7E 2026-01-24 22.36.45 - Victorian-era scientific illustration plate of bats (Chiroptera), hand-tinted lithography with extreme austerity. Subject_ comparative anatomical stud.webp"
+      "/Users/okgoogle13/Desktop/careercopilot/kr-solidarity images phase 3/DALL\u00b7E 2026-01-24 22.36.45 - kerala-streetprint-era scientific illustration plate of bats (Chiroptera), hand-tinted lithography with extreme austerity. Subject_ comparative anatomical stud.webp"
     ],
     "source_labels": [
       "NEW_SOURCE"
@@ -708,7 +708,7 @@
     "action": "MOVE",
     "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/uncategorized/Generated Image January 30, 2026 - 7_54AM (6).jpeg",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/Curio images phase 3/Generated Image January 30, 2026 - 7_54AM (6).jpeg"
+      "/Users/okgoogle13/Desktop/careercopilot/kr-solidarity images phase 3/Generated Image January 30, 2026 - 7_54AM (6).jpeg"
     ],
     "source_labels": [
       "NEW_SOURCE"
@@ -722,7 +722,7 @@
     "action": "MOVE",
     "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/uncategorized/Generated Image January 19, 2026 - 1_58PM.jpeg",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/Curio images phase 3/Generated Image January 19, 2026 - 1_58PM.jpeg"
+      "/Users/okgoogle13/Desktop/careercopilot/kr-solidarity images phase 3/Generated Image January 19, 2026 - 1_58PM.jpeg"
     ],
     "source_labels": [
       "NEW_SOURCE"
@@ -736,7 +736,7 @@
     "action": "MOVE",
     "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/uncategorized/Generated Image January 30, 2026 - 2_48PM.jpeg",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/Curio images phase 3/Generated Image January 30, 2026 - 2_48PM.jpeg"
+      "/Users/okgoogle13/Desktop/careercopilot/kr-solidarity images phase 3/Generated Image January 30, 2026 - 2_48PM.jpeg"
     ],
     "source_labels": [
       "NEW_SOURCE"
@@ -750,7 +750,7 @@
     "action": "MOVE",
     "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/uncategorized/Generated Image January 30, 2026 - 7_54AM.jpeg",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/Curio images phase 3/Generated Image January 30, 2026 - 7_54AM.jpeg"
+      "/Users/okgoogle13/Desktop/careercopilot/kr-solidarity images phase 3/Generated Image January 30, 2026 - 7_54AM.jpeg"
     ],
     "source_labels": [
       "NEW_SOURCE"
@@ -764,7 +764,7 @@
     "action": "MOVE",
     "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/uncategorized/Generated Image January 19, 2026 - 2_30PM.jpeg",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/Curio images phase 3/Generated Image January 19, 2026 - 2_30PM.jpeg"
+      "/Users/okgoogle13/Desktop/careercopilot/kr-solidarity images phase 3/Generated Image January 19, 2026 - 2_30PM.jpeg"
     ],
     "source_labels": [
       "NEW_SOURCE"
@@ -772,13 +772,13 @@
     "current_canonical_path": null
   },
   {
-    "filename": "DALL\u00b7E 2026-01-24 22.27.46 - Victorian-era scientific illustration of nocturnal bats, hand-tinted lithograph aesthetic, observed by lamplight in a colonial Australian field statio.webp",
-    "original_filename": "DALL\u00b7E 2026-01-24 22.27.46 - Victorian-era scientific illustration of nocturnal bats, hand-tinted lithograph aesthetic, observed by lamplight in a colonial Australian field statio.webp",
+    "filename": "DALL\u00b7E 2026-01-24 22.27.46 - kerala-streetprint-era scientific illustration of nocturnal bats, hand-tinted lithograph aesthetic, observed by lamplight in a colonial Australian field statio.webp",
+    "original_filename": "DALL\u00b7E 2026-01-24 22.27.46 - kerala-streetprint-era scientific illustration of nocturnal bats, hand-tinted lithograph aesthetic, observed by lamplight in a colonial Australian field statio.webp",
     "hash": "bbb276c863358199d92e34b29b4c0cc8",
     "action": "MOVE",
-    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/fauna/DALL\u00b7E 2026-01-24 22.27.46 - Victorian-era scientific illustration of nocturnal bats, hand-tinted lithograph aesthetic, observed by lamplight in a colonial Australian field statio.webp",
+    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/kr-symbol/DALL\u00b7E 2026-01-24 22.27.46 - kerala-streetprint-era scientific illustration of nocturnal bats, hand-tinted lithograph aesthetic, observed by lamplight in a colonial Australian field statio.webp",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/Curio images phase 3/DALL\u00b7E 2026-01-24 22.27.46 - Victorian-era scientific illustration of nocturnal bats, hand-tinted lithograph aesthetic, observed by lamplight in a colonial Australian field statio.webp"
+      "/Users/okgoogle13/Desktop/careercopilot/kr-solidarity images phase 3/DALL\u00b7E 2026-01-24 22.27.46 - kerala-streetprint-era scientific illustration of nocturnal bats, hand-tinted lithograph aesthetic, observed by lamplight in a colonial Australian field statio.webp"
     ],
     "source_labels": [
       "NEW_SOURCE"
@@ -792,7 +792,7 @@
     "action": "MOVE",
     "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/uncategorized/Generated Image January 30, 2026 - 7_56AM (1).jpeg",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/Curio images phase 3/Generated Image January 30, 2026 - 7_56AM (1).jpeg"
+      "/Users/okgoogle13/Desktop/careercopilot/kr-solidarity images phase 3/Generated Image January 30, 2026 - 7_56AM (1).jpeg"
     ],
     "source_labels": [
       "NEW_SOURCE"
@@ -806,7 +806,7 @@
     "action": "MOVE",
     "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/uncategorized/Screenshot 2026-01-18 at 05.47.29.png",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/Curio images phase 3/Screenshot 2026-01-18 at 05.47.29.png"
+      "/Users/okgoogle13/Desktop/careercopilot/kr-solidarity images phase 3/Screenshot 2026-01-18 at 05.47.29.png"
     ],
     "source_labels": [
       "NEW_SOURCE"
@@ -820,7 +820,7 @@
     "action": "MOVE",
     "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/uncategorized/Screenshot 2026-01-18 at 05.47.15.png",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/Curio images phase 3/Screenshot 2026-01-18 at 05.47.15.png"
+      "/Users/okgoogle13/Desktop/careercopilot/kr-solidarity images phase 3/Screenshot 2026-01-18 at 05.47.15.png"
     ],
     "source_labels": [
       "NEW_SOURCE"
@@ -834,7 +834,7 @@
     "action": "MOVE",
     "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/uncategorized/Generated Image January 30, 2026 - 7_56AM.jpeg",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/Curio images phase 3/Generated Image January 30, 2026 - 7_56AM.jpeg"
+      "/Users/okgoogle13/Desktop/careercopilot/kr-solidarity images phase 3/Generated Image January 30, 2026 - 7_56AM.jpeg"
     ],
     "source_labels": [
       "NEW_SOURCE"
@@ -848,7 +848,7 @@
     "action": "MOVE",
     "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/uncategorized/native-waratah-hanging.png",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/public/assets/specimens/native-waratah-hanging.png"
+      "/Users/okgoogle13/Desktop/careercopilot/frontend/public/assets/kr-motifs/native-waratah-hanging.png"
     ],
     "source_labels": [
       "LEGACY_PUBLIC"
@@ -856,13 +856,13 @@
     "current_canonical_path": null
   },
   {
-    "filename": "motif-laboratory-arborist-notes.png",
-    "original_filename": "motif-laboratory-arborist-notes.png",
+    "filename": "motif-kr-dark-arborist-notes.png",
+    "original_filename": "motif-kr-dark-arborist-notes.png",
     "hash": "e12ca64495c070733ba51520c05bfb10",
     "action": "MOVE",
-    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/uncategorized/motif-laboratory-arborist-notes.png",
+    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/uncategorized/motif-kr-dark-arborist-notes.png",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/public/assets/specimens/motif-laboratory-arborist-notes.png"
+      "/Users/okgoogle13/Desktop/careercopilot/frontend/public/assets/kr-motifs/motif-kr-dark-arborist-notes.png"
     ],
     "source_labels": [
       "LEGACY_PUBLIC"
@@ -876,7 +876,7 @@
     "action": "MOVE",
     "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/plates/motif-reference-archival-plate.png",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/public/assets/specimens/motif-reference-archival-plate.png"
+      "/Users/okgoogle13/Desktop/careercopilot/frontend/public/assets/kr-motifs/motif-reference-archival-plate.png"
     ],
     "source_labels": [
       "LEGACY_PUBLIC"
@@ -884,13 +884,13 @@
     "current_canonical_path": null
   },
   {
-    "filename": "motif-gallery-core-specimen-series.png",
-    "original_filename": "motif-gallery-core-specimen-series.png",
+    "filename": "motif-kr-dark-core-kr-motif-series.png",
+    "original_filename": "motif-kr-dark-core-kr-motif-series.png",
     "hash": "233be3958a27fadaf1ee27eb3d9674d8",
     "action": "MOVE",
-    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/specimens/motif-gallery-core-specimen-series.png",
+    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/kr-motifs/motif-kr-dark-core-kr-motif-series.png",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/public/assets/specimens/motif-gallery-core-specimen-series.png"
+      "/Users/okgoogle13/Desktop/careercopilot/frontend/public/assets/kr-motifs/motif-kr-dark-core-kr-motif-series.png"
     ],
     "source_labels": [
       "LEGACY_PUBLIC"
@@ -898,13 +898,13 @@
     "current_canonical_path": null
   },
   {
-    "filename": "northcote-sentry-kookaburra.png",
-    "original_filename": "motif-gallery-sentry-kookaburra-1024.png",
+    "filename": "kerala-rage-sentry-kr-shiva.png",
+    "original_filename": "motif-kr-dark-sentry-kr-shiva-1024.png",
     "hash": "8f26aa3a5ae25d69d72624e167306266",
     "action": "MOVE",
-    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/fauna/northcote-sentry-kookaburra.png",
+    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/kr-symbol/kerala-rage-sentry-kr-shiva.png",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/public/assets/specimens/motif-gallery-sentry-kookaburra-1024.png"
+      "/Users/okgoogle13/Desktop/careercopilot/frontend/public/assets/kr-motifs/motif-kr-dark-sentry-kr-shiva-1024.png"
     ],
     "source_labels": [
       "LEGACY_PUBLIC"
@@ -918,7 +918,7 @@
     "action": "MOVE",
     "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/uncategorized/leaf-fern.png",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/public/assets/specimens/leaf-fern.png"
+      "/Users/okgoogle13/Desktop/careercopilot/frontend/public/assets/kr-motifs/leaf-fern.png"
     ],
     "source_labels": [
       "LEGACY_PUBLIC"
@@ -932,7 +932,7 @@
     "action": "MOVE",
     "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/ui/motif-reference-field-guide.png",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/public/assets/specimens/motif-reference-field-guide.png"
+      "/Users/okgoogle13/Desktop/careercopilot/frontend/public/assets/kr-motifs/motif-reference-field-guide.png"
     ],
     "source_labels": [
       "LEGACY_PUBLIC"
@@ -940,13 +940,13 @@
     "current_canonical_path": null
   },
   {
-    "filename": "northcote-eucalyptus-echidna.png",
-    "original_filename": "motif-gallery-eucalyptus-specimen.png",
+    "filename": "kerala-rage-kr-leafus-echidna.png",
+    "original_filename": "motif-kr-dark-kr-leafus-kr-motif.png",
     "hash": "ad4f4099d920d8c6ff286828e1e4bcc6",
     "action": "MOVE",
-    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/specimens/northcote-eucalyptus-echidna.png",
+    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/kr-motifs/kerala-rage-kr-leafus-echidna.png",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/public/assets/specimens/motif-gallery-eucalyptus-specimen.png"
+      "/Users/okgoogle13/Desktop/careercopilot/frontend/public/assets/kr-motifs/motif-kr-dark-kr-leafus-kr-motif.png"
     ],
     "source_labels": [
       "LEGACY_PUBLIC"
@@ -954,13 +954,13 @@
     "current_canonical_path": null
   },
   {
-    "filename": "motif-laboratory-anatomical-grid.png",
-    "original_filename": "motif-laboratory-anatomical-grid.png",
+    "filename": "motif-kr-dark-anatomical-grid.png",
+    "original_filename": "motif-kr-dark-anatomical-grid.png",
     "hash": "c756144532c57f13b4e5d8df22c7ad68",
     "action": "MOVE",
-    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/uncategorized/motif-laboratory-anatomical-grid.png",
+    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/uncategorized/motif-kr-dark-anatomical-grid.png",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/public/assets/specimens/motif-laboratory-anatomical-grid.png"
+      "/Users/okgoogle13/Desktop/careercopilot/frontend/public/assets/kr-motifs/motif-kr-dark-anatomical-grid.png"
     ],
     "source_labels": [
       "LEGACY_PUBLIC"
@@ -968,13 +968,13 @@
     "current_canonical_path": null
   },
   {
-    "filename": "motif-gallery-dryandra-hero.png",
-    "original_filename": "motif-gallery-dryandra-hero.png",
+    "filename": "motif-kr-dark-dryandra-hero.png",
+    "original_filename": "motif-kr-dark-dryandra-hero.png",
     "hash": "4cc33f00d02ec35eb023bb759564ac2f",
     "action": "MOVE",
-    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/uncategorized/motif-gallery-dryandra-hero.png",
+    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/uncategorized/motif-kr-dark-dryandra-hero.png",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/public/assets/specimens/motif-gallery-dryandra-hero.png"
+      "/Users/okgoogle13/Desktop/careercopilot/frontend/public/assets/kr-motifs/motif-kr-dark-dryandra-hero.png"
     ],
     "source_labels": [
       "LEGACY_PUBLIC"
@@ -982,13 +982,13 @@
     "current_canonical_path": null
   },
   {
-    "filename": "northcote-canopy-pattern.png",
-    "original_filename": "texture-gallery-nocturnal-tile.png",
+    "filename": "kerala-rage-canopy-pattern.png",
+    "original_filename": "texture-kr-dark-nocturnal-tile.png",
     "hash": "92581a6db2b7934228fe07d60cf5dfc1",
     "action": "MOVE",
-    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/textures/northcote-canopy-pattern.png",
+    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/textures/kerala-rage-canopy-pattern.png",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/public/assets/textures/texture-gallery-nocturnal-tile.png"
+      "/Users/okgoogle13/Desktop/careercopilot/frontend/public/assets/textures/texture-kr-dark-nocturnal-tile.png"
     ],
     "source_labels": [
       "LEGACY_PUBLIC"
@@ -996,14 +996,14 @@
     "current_canonical_path": null
   },
   {
-    "filename": "texture-laboratory-paper-white-source-1.png",
-    "original_filename": "texture-laboratory-paper-white-source-1.png",
+    "filename": "texture-kr-dark-paper-white-source-1.png",
+    "original_filename": "texture-kr-dark-paper-white-source-1.png",
     "hash": "b6b466bdc1846971666273ee2f04f4eb",
     "action": "MOVE",
-    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/textures/texture-laboratory-paper-white-source-1.png",
+    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/textures/texture-kr-dark-paper-white-source-1.png",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/public/assets/textures/texture-laboratory-paper-white-source-1.png",
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/public/assets/textures/texture-laboratory-paper-white-tile.jpg"
+      "/Users/okgoogle13/Desktop/careercopilot/frontend/public/assets/textures/texture-kr-dark-paper-white-source-1.png",
+      "/Users/okgoogle13/Desktop/careercopilot/frontend/public/assets/textures/texture-kr-dark-paper-white-tile.jpg"
     ],
     "source_labels": [
       "LEGACY_PUBLIC",
@@ -1012,13 +1012,13 @@
     "current_canonical_path": null
   },
   {
-    "filename": "texture-laboratory-paper-white-source-2.png",
-    "original_filename": "texture-laboratory-paper-white-source-2.png",
+    "filename": "texture-kr-dark-paper-white-source-2.png",
+    "original_filename": "texture-kr-dark-paper-white-source-2.png",
     "hash": "9af0ae7e08d216682da5987e672ba21c",
     "action": "MOVE",
-    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/textures/texture-laboratory-paper-white-source-2.png",
+    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/textures/texture-kr-dark-paper-white-source-2.png",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/public/assets/textures/texture-laboratory-paper-white-source-2.png"
+      "/Users/okgoogle13/Desktop/careercopilot/frontend/public/assets/textures/texture-kr-dark-paper-white-source-2.png"
     ],
     "source_labels": [
       "LEGACY_PUBLIC"
@@ -1026,13 +1026,13 @@
     "current_canonical_path": null
   },
   {
-    "filename": "texture-gallery-midnight-garden.jpg",
-    "original_filename": "texture-gallery-midnight-garden.jpg",
+    "filename": "texture-kr-dark-midnight-garden.jpg",
+    "original_filename": "texture-kr-dark-midnight-garden.jpg",
     "hash": "dc5f795d9ce1973fb19fda55e20d8842",
     "action": "MOVE",
-    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/textures/texture-gallery-midnight-garden.jpg",
+    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/textures/texture-kr-dark-midnight-garden.jpg",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/public/assets/textures/texture-gallery-midnight-garden.jpg"
+      "/Users/okgoogle13/Desktop/careercopilot/frontend/public/assets/textures/texture-kr-dark-midnight-garden.jpg"
     ],
     "source_labels": [
       "LEGACY_PUBLIC"
@@ -1040,13 +1040,13 @@
     "current_canonical_path": null
   },
   {
-    "filename": "texture-laboratory-paper-white-source-3.png",
-    "original_filename": "texture-laboratory-paper-white-source-3.png",
+    "filename": "texture-kr-dark-paper-white-source-3.png",
+    "original_filename": "texture-kr-dark-paper-white-source-3.png",
     "hash": "7775ac04b974153ad2aa8df0f8558659",
     "action": "MOVE",
-    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/textures/texture-laboratory-paper-white-source-3.png",
+    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/textures/texture-kr-dark-paper-white-source-3.png",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/public/assets/textures/texture-laboratory-paper-white-source-3.png"
+      "/Users/okgoogle13/Desktop/careercopilot/frontend/public/assets/textures/texture-kr-dark-paper-white-source-3.png"
     ],
     "source_labels": [
       "LEGACY_PUBLIC"
@@ -1054,13 +1054,13 @@
     "current_canonical_path": null
   },
   {
-    "filename": "texture-laboratory-paper-white-source-4.png",
-    "original_filename": "texture-laboratory-paper-white-source-4.png",
+    "filename": "texture-kr-dark-paper-white-source-4.png",
+    "original_filename": "texture-kr-dark-paper-white-source-4.png",
     "hash": "c4549c946e61fb05a148401a78cdba07",
     "action": "MOVE",
-    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/textures/texture-laboratory-paper-white-source-4.png",
+    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/textures/texture-kr-dark-paper-white-source-4.png",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/public/assets/textures/texture-laboratory-paper-white-source-4.png"
+      "/Users/okgoogle13/Desktop/careercopilot/frontend/public/assets/textures/texture-kr-dark-paper-white-source-4.png"
     ],
     "source_labels": [
       "LEGACY_PUBLIC"
@@ -1082,13 +1082,13 @@
     "current_canonical_path": null
   },
   {
-    "filename": "texture-gallery-asphalt-black-variant.jpg",
-    "original_filename": "texture-gallery-asphalt-black-variant.jpg",
+    "filename": "texture-kr-dark-asphalt-black-variant.jpg",
+    "original_filename": "texture-kr-dark-asphalt-black-variant.jpg",
     "hash": "81a90db42c3cb957aadba277bc199a98",
     "action": "MOVE",
-    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/textures/texture-gallery-asphalt-black-variant.jpg",
+    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/textures/texture-kr-dark-asphalt-black-variant.jpg",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/public/assets/textures/texture-gallery-asphalt-black-variant.jpg"
+      "/Users/okgoogle13/Desktop/careercopilot/frontend/public/assets/textures/texture-kr-dark-asphalt-black-variant.jpg"
     ],
     "source_labels": [
       "LEGACY_PUBLIC"
@@ -1096,13 +1096,13 @@
     "current_canonical_path": null
   },
   {
-    "filename": "gallery-nocturnal.webp",
-    "original_filename": "gallery-nocturnal.webp",
+    "filename": "kr-dark-nocturnal.webp",
+    "original_filename": "kr-dark-nocturnal.webp",
     "hash": "d0d6da39c23033d84463ee6d40b99ccc",
     "action": "MOVE",
-    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/uncategorized/gallery-nocturnal.webp",
+    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/uncategorized/kr-dark-nocturnal.webp",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/public/assets/wallpapers/gallery-nocturnal.webp"
+      "/Users/okgoogle13/Desktop/careercopilot/frontend/public/assets/wallpapers/kr-dark-nocturnal.webp"
     ],
     "source_labels": [
       "LEGACY_PUBLIC"
@@ -1124,13 +1124,13 @@
     "current_canonical_path": null
   },
   {
-    "filename": "northcote-curio-wallpaper-v2.png",
-    "original_filename": "gallery-nocturnal.png",
+    "filename": "kerala-rage-kr-solidarity-wallpaper-v2.png",
+    "original_filename": "kr-dark-nocturnal.png",
     "hash": "f08b6af0927a6b11ebb469a84726cc2f",
     "action": "MOVE",
-    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/uncategorized/northcote-curio-wallpaper-v2.png",
+    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/uncategorized/kerala-rage-kr-solidarity-wallpaper-v2.png",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/public/assets/wallpapers/gallery-nocturnal.png"
+      "/Users/okgoogle13/Desktop/careercopilot/frontend/public/assets/wallpapers/kr-dark-nocturnal.png"
     ],
     "source_labels": [
       "LEGACY_PUBLIC"
@@ -1138,13 +1138,13 @@
     "current_canonical_path": null
   },
   {
-    "filename": "northcote-curio-wallpaper-v2.jpg",
-    "original_filename": "texture-gallery-curio-wallpaper-2048.jpg",
+    "filename": "kerala-rage-kr-solidarity-wallpaper-v2.jpg",
+    "original_filename": "texture-kr-dark-kr-solidarity-wallpaper-2048.jpg",
     "hash": "7431f5e2562cee1b13c34dbb73fab7be",
     "action": "MOVE",
-    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/plates/northcote-curio-wallpaper-v2.jpg",
+    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/plates/kerala-rage-kr-solidarity-wallpaper-v2.jpg",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/public/assets/wallpapers/texture-gallery-curio-wallpaper-2048.jpg"
+      "/Users/okgoogle13/Desktop/careercopilot/frontend/public/assets/wallpapers/texture-kr-dark-kr-solidarity-wallpaper-2048.jpg"
     ],
     "source_labels": [
       "LEGACY_PUBLIC"

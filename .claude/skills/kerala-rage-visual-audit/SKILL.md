@@ -1,30 +1,31 @@
 ---
-description: Analyze component screenshots and design artifacts against Kerala Rage
-  visual standards. Validate typography (Agit-Prop, Solidarity), color palette (Charcoal, Waratah, Gold),
-  layout (asymmetry, torn edges), and motion (viscous fluidity). Generate compliance assessments
-  and design evolution analysis.
+description: Analyze component screenshots and design artifacts against kerala-rage
+  kr-solidarity visual standards. Validate typography (distinctiveness, kerala-streetprint craftsmanship),
+  color palette (Australian botanical colors), layout (organic spacing, asymmetry),
+  and botanical motif integration. Generate compliance assessments and design evolution
+  analysis.
 name: kerala-rage-visual-audit
-version: 2.0.0
-tags: [validation, vision, kerala-rage]
+version: 1.0.0
+tags: []
 ---
 
-# Kerala Rage Visual Audit Skill
+# kerala-rage Visual Audit Skill
 
 ## Purpose
 
-Analyze component screenshots and design artifacts against Kerala Migrant Rage visual standards using Claude's vision capabilities. Ensures typography, color, and layout align with the Agit-Prop / Viscous Fluidity aesthetic.
+Analyze component screenshots and design artifacts against kerala-rage kr-solidarity visual standards using Claude's vision capabilities. Ensures typography, color, and layout align with the kerala-streetprint-Naturalist aesthetic.
 
 ## When to Use This Skill
 
 Use this skill when you need to:
 
-- **Audit a component screenshot** against Kerala Rage design standards
-- **Validate typography choices** (are fonts Brutalist and Urgent?)
-- **Check color palette adherence** (Charcoal background, Waratah Red urgency?)
-- **Assess layout coherence** (is spacing asymmetric and tense?)
-- **Compare component evolution** (Northcote → Kerala Rage transformation)
+- **Audit a component screenshot** against kerala-rage design standards
+- **Validate typography choices** (are fonts distinctive and intentional?)
+- **Check color palette adherence** (are colors true to Australian botanical palette?)
+- **Assess layout coherence** (is spacing organic or mechanical?)
+- **Compare component evolution** (Material Design → kerala-rage transformation)
 - **Generate compliance reports** (pass/fail/needs-refinement assessments)
-- **Identify design system drift** (are components becoming more or less Radical?)
+- **Identify design system drift** (are components becoming more or less kerala-rage?)
 
 ## Process
 
@@ -32,7 +33,7 @@ The skill uses Claude's vision capabilities to:
 
 1. **Analyze visual properties** of rendered components
 2. **Extract design data** (typography, colors, spacing, motifs)
-3. **Validate against spec** (does it match Northcote standards?)
+3. **Validate against spec** (does it match kerala-rage standards?)
 4. **Generate audit report** (structured assessment with pass/fail per criterion)
 5. **Suggest refinements** (where and how to improve)
 
@@ -40,33 +41,33 @@ The skill uses Claude's vision capabilities to:
 
 ### 1. Typography Audit
 
-**Pass**: Brutalist fonts (Inter Display Black, Recursive Mono) with extreme weight contrast (900 vs 400).
-**Needs Refinement**: Good fonts but lack "Urgency" or "Rage".
-**Fail**: Generic fonts (Roboto, Open Sans) or polite/neutral hierarchy.
+**Pass**: Distinctive fonts (Lora, Crimson Text, Fraunces) with clear display+body pairing
+**Needs Refinement**: Good fonts but pairing unclear or emotion undefined
+**Fail**: Generic fonts (Inter, Arial, Roboto, Space Grotesk) or undefined hierarchy
 
 ### 2. Color Audit
 
-**Pass**: Kerala Rage palette (#1A1714 Charcoal, #F14714 Waratah, #DAF674 Gold). High contrast.
-**Needs Refinement**: Correct colors but insufficient contrast or "muddy" tones.
-**Fail**: White backgrounds, blue primary buttons, or pastel/soft palettes.
+**Pass**: Australian botanical palette (sage, terracotta, ochre, gold) with cohesive harmony
+**Needs Refinement**: Correct colors but harmony feels off or theme inconsistent
+**Fail**: Colors disconnected from botanical inspiration or purple gradients (generic default)
 
 ### 3. Layout Audit
 
-**Pass**: Asymmetric spacing, torn edges, clear "Worker Power" hierarchy.
-**Needs Refinement**: Good spacing but feels too balanced or safe.
-**Fail**: Grid-rigid, symmetrical, or "corporate" layouts.
+**Pass**: Organic spacing, intentional asymmetry, clear visual hierarchy
+**Needs Refinement**: Good spacing but feels slightly mechanical or hierarchy ambiguous
+**Fail**: Grid-rigid, mechanical patterns or predictable cookie-cutter layouts
 
-### 4. Agit-Prop Elements Audit
+### 4. Botanical Elements Audit
 
-**Pass**: Solidarity motifs (fist, star, megaphone) or Malayalam script integrated meaningfully.
-**Needs Refinement**: Motifs present but feel decorative rather than ideological.
-**Fail**: No motifs (when expected) or use of "Victorian" or "Botanical" elements.
+**Pass**: Naturalist motifs integrated meaningfully, supporting hierarchy or clarity
+**Needs Refinement**: Motifs present but feel slightly ornamental or purpose unclear
+**Fail**: No motifs (when expected) or motifs feel decorative/bolted-on
 
 ### 5. Overall Aesthetic Coherence
 
-**Pass**: Component clearly embodies "Migrant Rage"; unmistakably intentional.
-**Needs Refinement**: Good direction but missing raw energy or viscous feel.
-**Fail**: Feels generic, corporate, or colonial (Northcote).
+**Pass**: Component clearly embodies kerala-rage vision; unmistakably intentional
+**Needs Refinement**: Good direction but missing some coherence or personalization
+**Fail**: Feels generic or like multiple conflicting aesthetic directions
 
 ### 6. Microcopy Audit
 
@@ -82,7 +83,7 @@ _See [DOC-006 Voice Tier System](file:///Users/okgoogle13/Desktop/careercopilot/
 
 ### Example 1: Basic Component Audit
 
-"Audit this Pebble button screenshot against Northcote standards"
+"Audit this Pebble button screenshot against kerala-rage standards"
 
 Upload screenshot. Claude will:
 
@@ -94,12 +95,12 @@ Upload screenshot. Claude will:
 
 ### Example 2: Comparative Analysis
 
-"Compare this Material Design button to the Northcote version and document the evolution"
+"Compare this Material Design button to the kerala-rage version and document the evolution"
 
 Upload both screenshots. Claude will:
 
 1. Analyze original (Material Design aesthetics)
-2. Analyze updated (Northcote aesthetic)
+2. Analyze updated (kerala-rage aesthetic)
 3. Document typography transformation
 4. Assess color palette shift
 5. Evaluate overall aesthetic evolution
@@ -107,7 +108,7 @@ Upload both screenshots. Claude will:
 
 ### Example 3: Batch Component Auditing
 
-"Audit all components in this directory screenshot collection against Northcote standards"
+"Audit all components in this directory screenshot collection against kerala-rage standards"
 
 Multiple screenshots. Claude will:
 
@@ -119,7 +120,7 @@ Multiple screenshots. Claude will:
 
 ### Example 4: Design Evolution Tracking
 
-"Show me how this component has evolved through versions toward Northcote coherence"
+"Show me how this component has evolved through versions toward kerala-rage coherence"
 
 Historical screenshots. Claude will:
 
@@ -127,7 +128,7 @@ Historical screenshots. Claude will:
 2. Identify where aesthetic solidified
 3. Note when intentionality increased
 4. Document visual maturity trajectory
-5. Assess current alignment with Northcote
+5. Assess current alignment with kerala-rage
 
 ## The Audit Report Format
 
@@ -136,8 +137,8 @@ Structured JSON output for integration with compliance dashboards:
 ```json
 {
   "audit": {
-    "component_name": "Action Button",
-    "audit_date": "2026-02-08T...",
+    "component_name": "Pebble Button",
+    "audit_date": "2026-01-28T...",
     "overall_status": "pass|needs_refinement|fail",
     "compliance_score": 0-100,
 
@@ -154,9 +155,9 @@ Structured JSON output for integration with compliance dashboards:
       },
       "color": {
         "status": "pass|needs_refinement|fail",
-        "findings": "Charcoal background, Waratah Red primary, within palette",
+        "findings": "Sage primary, terracotta accent, within botanical palette",
         "palette_adherence": "100%",
-        "theme_consistency": "dark_ui_mandatory"
+        "theme_consistency": "light_mode_cohesive"
       },
       "layout": {
         "status": "pass|needs_refinement|fail",
@@ -172,7 +173,7 @@ Structured JSON output for integration with compliance dashboards:
       }
     },
 
-    "assessment": "Component strongly embodies Northcote vision",
+    "assessment": "Component strongly embodies kerala-rage vision",
     "recommendations": [
       "Consider slightly warmer undertone in accent color",
       "Botanical motif could be slightly more prominent without becoming decorative"
@@ -199,10 +200,10 @@ Claude can identify:
 
 Can compare:
 
-- Before/after (Northcote → Kerala Rage)
+- Before/after (Material Design → kerala-rage)
 - Multiple variants (design iterations)
 - Component families (consistency across types)
-- Historical progression (radicalization tracking)
+- Historical progression (maturity tracking)
 
 ### Pattern Recognition
 
@@ -215,7 +216,7 @@ Identifies:
 
 ## Integration with Other Skills
 
-### With Kerala-Rage-Typography-Strategy
+### With kerala-rage-Typography-Strategy
 
 Validates that typography choices made are actually rendering as intended.
 
@@ -255,12 +256,12 @@ This skill:
 
 ## Execution & Validation Checklist
 
-Before checking off an asset as audit-complete, ensure it passes the **Northcote Visual Audit**:
+Before checking off an asset as audit-complete, ensure it passes the **kerala-rage Visual Audit**:
 
-- [ ] **Palette Compliance:** Is the red _Waratah Red_ (#F14714)? Is the gold _Baru Gold_ (#DAF674)? **Are there any forbidden blues/purples?**
-- [ ] **Background:** Is the background pure Charcoal (#1A1714)? **No White Backgrounds.**
-- [ ] **Typography:** Is it Inter Display Black (900)? Is Recursive used for code/theory?
-- [ ] **Motifs:** Are there Solidarity motifs (Stars, Fists)? **No Flowers/Birds.**
+- [ ] **Palette Compliance:** Is the red _Waratah Red_ (#C45C4B)? Is the gold _Wattle Gold_ (#D4A84B)? **Are there any forbidden blues/purples?**
+- [ ] **Anatomical Geometry:** Does the Echidna spine cluster look mathematical? Does the kr-flower pod show a spiral?
+- [ ] **Lighting:** Is the background pure black (#1A1714)? Is there dramatic contrast?
+- [ ] **Typology:** If text is present, is it a cream serif font (e.g., "Fig. II")?
 
 ## Validation Questions
 
@@ -278,7 +279,7 @@ If yes to all, the audit is reliable.
 
 See `references/kerala-rage-visual-spec.md` for complete audit criteria.
 See `references/component-examples.md` for exemplary passing/failing components.
-See `references/radicalization-tracking.md` for how to document visual transformation over time.
+See `references/design-evolution-tracking.md` for how to document visual transformation over time.
 
 ---
 

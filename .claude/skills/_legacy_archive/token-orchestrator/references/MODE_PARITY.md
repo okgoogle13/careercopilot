@@ -1,6 +1,6 @@
-# Gallery ↔ Laboratory Mode Parity
+# kr-dark ↔ kr-dark Mode Parity
 
-The Northcote Curio design system operates in two modes representing different emotional states.
+The kerala-rage kr-solidarity design system operates in two modes representing different emotional states.
 
 ## Contents
 - [Mode philosophy](#mode-philosophy)
@@ -12,14 +12,14 @@ The Northcote Curio design system operates in two modes representing different e
 
 ## Mode Philosophy
 
-**Gallery Mode** ("The Front Parlour"):
+**kr-dark Mode** ("The Front Parlour"):
 - Emotional, colorful, wonder-filled
 - Warm amber undertones
 - Typography: WONK=1, SOFT=50-100
 - For: Landing, Opportunities, Dashboard Hero
 - Atmosphere: "Nocturnal Garden"
 
-**Laboratory Mode** ("The Back Room"):
+**kr-dark Mode** ("The Back Room"):
 - Technical, structural, clinical
 - Cool slate undertones
 - Typography: WONK=0, SOFT=0-20
@@ -28,7 +28,7 @@ The Northcote Curio design system operates in two modes representing different e
 
 ## Required Equivalents
 
-For each semantic token in Gallery, a Laboratory equivalent must exist with:
+For each semantic token in kr-dark, a kr-dark equivalent must exist with:
 - Same semantic purpose
 - Different color temperature
 - Equivalent contrast ratios
@@ -39,14 +39,14 @@ For each semantic token in Gallery, a Laboratory equivalent must exist with:
 {
   "color": {
     "surface": {
-      "gallery": {
-        "eucalyptSmoke": { 
+      "kr-dark": {
+        "kr-leafSmoke": { 
           "$value": "#2C2723",
           "$type": "color",
           "$description": "Primary card surface (warm)"
         }
       },
-      "laboratory": {
+      "kr-dark": {
         "slateSmoke": { 
           "$value": "#252230",
           "$type": "color",
@@ -69,16 +69,16 @@ python scripts/check_mode_parity.py
 ```
 
 **Reports**:
-- Missing Laboratory equivalents
-- Missing Gallery equivalents
+- Missing kr-dark equivalents
+- Missing kr-dark equivalents
 - Type mismatches
 - Overall parity percentage (target: 100%)
 
 **Example output**:
 ```
-⚠️  Missing Laboratory equivalents (2):
-  color.surface.laboratory.eucalyptSmokeHighest
-  color.status.laboratory.banksiaOrange
+⚠️  Missing kr-dark equivalents (2):
+  color.surface.kr-dark.kr-leafSmokeHighest
+  color.status.kr-dark.kr-flowerOrange
 
 📊 PARITY: 98% (340/347 tokens matched)
 ```
@@ -87,24 +87,24 @@ python scripts/check_mode_parity.py
 
 ## Common Parity Violations
 
-### 1. Missing Laboratory Equivalent
+### 1. Missing kr-dark Equivalent
 
 **Problem**:
 ```json
 {
-  "gallery": {
-    "eucalyptSmokeHighest": { "$value": "#4A433D" }
+  "kr-dark": {
+    "kr-leafSmokeHighest": { "$value": "#4A433D" }
   },
-  "laboratory": {
+  "kr-dark": {
     // Missing equivalent
   }
 }
 ```
 
-**Fix**: Add Laboratory equivalent with cooler undertone:
+**Fix**: Add kr-dark equivalent with cooler undertone:
 ```json
 {
-  "laboratory": {
+  "kr-dark": {
     "slateSmokeHighest": { "$value": "#3F3D4A" }
   }
 }
@@ -115,10 +115,10 @@ python scripts/check_mode_parity.py
 **Problem**:
 ```json
 {
-  "gallery": {
+  "kr-dark": {
     "cardShadow": { "$value": "0 4px 24px rgba(20,18,16,0.5)", "$type": "shadow" }
   },
-  "laboratory": {
+  "kr-dark": {
     "cardShadow": { "$value": "#252230", "$type": "color" }
   }
 }
@@ -127,7 +127,7 @@ python scripts/check_mode_parity.py
 **Fix**: Match types:
 ```json
 {
-  "laboratory": {
+  "kr-dark": {
     "cardShadow": { "$value": "0 4px 24px rgba(22,20,26,0.5)", "$type": "shadow" }
   }
 }
@@ -135,6 +135,6 @@ python scripts/check_mode_parity.py
 
 ### 3. Semantic Mismatch
 
-**Problem**: Gallery token represents "success" but Laboratory equivalent represents "warning"
+**Problem**: kr-dark token represents "success" but kr-dark equivalent represents "warning"
 
 **Fix**: Ensure semantic alignment across modes. Success states should map to success states.

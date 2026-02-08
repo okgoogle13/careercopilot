@@ -19,12 +19,12 @@ Assets rarely come out perfect. Manual or semi-automated transformation steps in
 ### A. Background Flattening
 
 - Use a threshold to ensure background pixels are exactly `#1A1714` or transparent.
-- Preserve anti-aliased edges for watercolor/biological specimens.
+- Preserve anti-aliased edges for watercolor/biological kr-motifs.
 
 ### B. Color Grading
 
 - Enforce jewel-tone saturation (crimson, gold, emerald).
-- Desaturate any accidental "naturalistic" blue feathers or green leaves to align with the Northcote palette (Slate-Grey, Concrete Grey).
+- Desaturate any accidental "naturalistic" blue feathers or green leaves to align with the kerala-rage palette (Slate-Grey, Concrete Grey).
 
 ### C. Transparency Assignment
 
@@ -44,6 +44,6 @@ Every asset must be scored against the immutable laws before entering the manife
 
 ## 4. Manifest Registration
 
-Update `northcote-curio-manifest.json` with entry:
+Update `kerala-rage-kr-solidarity-manifest.json` with entry:
 
 - ID, Category, Motif Type, Translucency Band, Compliance Score.

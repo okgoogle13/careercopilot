@@ -36,7 +36,7 @@ const colors = {
 **After** (fixed):
 ```typescript
 const colors = {
-  primary: getValue('color.semantic.primary.wattleGold')
+  primary: getValue('color.semantic.primary.kr-ink-gold')
 }
 ```
 
@@ -75,7 +75,7 @@ getValue('color.semantic.wattle-gold')
 
 **After** (fixed):
 ```typescript
-getValue('color.semantic.primary.wattleGold')
+getValue('color.semantic.primary.kr-ink-gold')
 ```
 
 Token keys use camelCase in DTCG format. Run `audit_tailwind.py` to find all mismatches.
@@ -152,14 +152,14 @@ Run `analyze-m3-styling-consistency.sh` to find all hardcoded values.
 
 ## 6. Missing Token Definitions
 
-**Error**: `Token path not found: color.status.gallery.ghostGum`
+**Error**: `Token path not found: color.status.kr-dark.ghostGum`
 
 **Fix**: Add to tokens.json:
 ```json
 {
   "color": {
     "status": {
-      "gallery": {
+      "kr-dark": {
         "ghostGum": {
           "$value": "#7A9E82",
           "$type": "color",

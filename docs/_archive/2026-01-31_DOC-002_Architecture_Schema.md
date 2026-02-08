@@ -1,9 +1,9 @@
 # DOC-002: Architecture Schema ("The Machinery")
 
 **Document ID:** DOC-002-ARCH
-**Version:** 2.0 (Northcote Curio Edition)
+**Version:** 2.0 (kerala-rage kr-solidarity Edition)
 **Status:** DEFINITIVE
-**Context:** The mechanical underpinnings of the Field Station. How the "Gallery" (Frontend) talks to the "Archive" (Backend) and the "Naturalist" (AI).
+**Context:** The mechanical underpinnings of the Field Station. How the "kr-dark" (Frontend) talks to the "Archive" (Backend) and the "Naturalist" (AI).
 
 ---
 
@@ -11,8 +11,8 @@
 
 We employ a **Hybrid Intelligence Architecture**:
 
-*   **The Gallery (Frontend):** *React 19, Vite, Tailwind.*
-    The user-facing conservatory. Renders the "Northcote Curio" aesthetic.
+*   **The kr-dark (Frontend):** *React 19, Vite, Tailwind.*
+    The user-facing conservatory. Renders the "kerala-rage kr-solidarity" aesthetic.
     *   *Role:* Presentation, Animation, User Interaction.
     *   *Hosting:* Firebase Hosting.
 
@@ -22,7 +22,7 @@ We employ a **Hybrid Intelligence Architecture**:
     *   *Schema:* Relational (Users, Resumes, Analyses).
 
 *   **The Naturalist (AI Engine):** *Google Genkit + Gemini 1.5 Pro.*
-    The intelligence that dissects the specimens.
+    The intelligence that dissects the kr-motifs.
     *   *Role:* Resume Parsing, Gap Analysis, Career Strategy.
     *   *Deployment:* Cloud Run (Serverless).
 
@@ -38,9 +38,9 @@ We employ a **Hybrid Intelligence Architecture**:
 Identity and preference settings.
 *   `id`: UUID (Primary Key)
 *   `email`: String
-*   `mode_preference`: "Gallery" | "Laboratory" (Default: "Gallery")
+*   `mode_preference`: "kr-dark" | "kr-dark" (Default: "kr-dark")
 
-#### `resumes` (The Specimen)
+#### `resumes` (The kr-motif)
 The raw biological material provided by the user.
 *   `id`: UUID
 *   `user_id`: UUID (FK)
@@ -49,7 +49,7 @@ The raw biological material provided by the user.
 *   `created_at`: Timestamp
 
 #### `analyses` (The Dissection)
-The AI's breakdown of the specimen.
+The AI's breakdown of the kr-motif.
 *   `id`: UUID
 *   `resume_id`: UUID (FK)
 *   `status`: "processing" | "complete" | "failed"
@@ -77,6 +77,6 @@ The AI's breakdown of the specimen.
 
 ## 4. Security & Permissions
 
-*   **Row Level Security (RLS):** Enabled on ALL tables. Users can only see their own biological specimens.
+*   **Row Level Security (RLS):** Enabled on ALL tables. Users can only see their own biological kr-motifs.
 *   **Auth:** Supabase Auth (Email/Password + OAuth).
 *   **API Security:** All Genkit endpoints require Bearer Token validation.

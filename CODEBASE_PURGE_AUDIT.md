@@ -2,7 +2,7 @@
 
 ## Scope & Constraints
 - Audit focus: redundant code, orphaned files, migration remnants, dead dependencies, and unreachable logic after Firebase/GCP -> Supabase migration.
-- Exclusions honored: `frontend/src/assets/specimens` not scanned; `backend/app/models/**` excluded to protect BaseMixin and Supabase-aligned SQLAlchemy models.
+- Exclusions honored: `frontend/src/assets/kr-motifs` not scanned; `backend/app/models/**` excluded to protect BaseMixin and Supabase-aligned SQLAlchemy models.
 - Note: flash-sidekick MCP was unavailable in this session; analysis used local ripgrep + heuristic import graphing.
 
 ## Orphaned Components (frontend/src/components)
@@ -15,7 +15,7 @@ Potentially unused in main application flow (no import references outside tests/
 | `frontend/src/components/core/Leaf.figma.tsx` | Orphaned Component | Low | No import references detected in non-test application code; candidate for removal or consolidation. |
 | `frontend/src/components/figma/ImageWithFallback.tsx` | Orphaned Component | Low | No import references detected in non-test application code; candidate for removal or consolidation. |
 | `frontend/src/components/index.ts` | Orphaned Component | Low | No import references detected in non-test application code; candidate for removal or consolidation. |
-| `frontend/src/components/northcote/tabs/NorthcoteTabs.tsx` | Orphaned Component | Low | No import references detected in non-test application code; candidate for removal or consolidation. |
+| `frontend/src/components/kerala-rage/tabs/kerala-rageTabs.tsx` | Orphaned Component | Low | No import references detected in non-test application code; candidate for removal or consolidation. |
 | `frontend/src/components/shared/CodePreview.tsx` | Orphaned Component | Low | No import references detected in non-test application code; candidate for removal or consolidation. |
 | `frontend/src/components/shared/JobCard 2.tsx` | Orphaned Component | Low | No import references detected in non-test application code; candidate for removal or consolidation. |
 | `frontend/src/components/shared/PlasmaBackground.tsx` | Orphaned Component | Low | No import references detected in non-test application code; candidate for removal or consolidation. |

@@ -21,7 +21,7 @@ Process multiple validated assets simultaneously. Input: array of 3-5 asset path
 
 ```json
 {
-  "batch_id": "batch-theatrical-specimens",
+  "batch_id": "batch-theatrical-kr-motifs",
   "assets": [
     {
       "asset_id": "ASSET-3",
@@ -77,8 +77,8 @@ Parallel cp commands:
 
 ```bash
 cp asset-3.png /frontend/public/assets/patterns/ &
-cp asset-4.png /frontend/public/assets/specimens/ &
-cp asset-6.png /frontend/public/assets/specimens/ &
+cp asset-4.png /frontend/public/assets/kr-motifs/ &
+cp asset-6.png /frontend/public/assets/kr-motifs/ &
 wait
 ```
 
@@ -86,7 +86,7 @@ wait
 
 ```bash
 git add /assets/ASSET-{3,4,6}-* /frontend/public/assets/*
-git commit -m "feat(assets): Add batch theatrical specimens - Assets 3,4,6"
+git commit -m "feat(assets): Add batch theatrical kr-motifs - Assets 3,4,6"
 ```
 
 ## Process
@@ -141,7 +141,7 @@ git commit -m "feat(assets): Add batch theatrical specimens - Assets 3,4,6"
 
 ```python
 batch_result = batch_processor.run(
-    batch_id="theatrical-specimens",
+    batch_id="theatrical-kr-motifs",
     assets=[asset_3, asset_4, asset_6]
 )
 

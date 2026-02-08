@@ -7,7 +7,7 @@ This directory contains skills that have been consolidated or replaced.
 - **Status**: DEPRECATED
 - **Replaced By**: [design-token-validator](file:///.claude/skills/design-token-validator/SKILL.md)
 - **Consolidation Date**: 2026-02-07
-- **Reason**: Redundant functionality. `design-token-validator` now covers DTCG compliance, Northcote palette rules, circular references, and mode parity.
+- **Reason**: Redundant functionality. `design-token-validator` now covers DTCG compliance, kerala-rage palette rules, circular references, and mode parity.
 
 ## theme-factory
 

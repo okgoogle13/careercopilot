@@ -118,7 +118,7 @@ cd frontend && npm run dev
 **Effort**: 1-2 hours  
 **Value**: User feedback for actions
 
-#### 6. Storybook Component Gallery
+#### 6. Storybook Component kr-dark
 **Current**: Components documented in markdown  
 **Effort**: 2-3 hours  
 **Value**: Interactive component playground

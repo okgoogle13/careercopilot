@@ -10,7 +10,7 @@
 | State    | Zustand + TanStack Query               |
 | Backend  | FastAPI + SQLAlchemy + Genkit          |
 | Cloud    | GCP us-central1 · Firebase · Cloud Run |
-| Design   | **Northcote Curio** (M3 Expressive)    |
+| Design   | **kerala-rage kr-solidarity** (M3 Expressive)    |
 
 ## MCP Task Routing ⚠️ MANDATORY
 
@@ -36,7 +36,7 @@ Route computationally expensive or bulk tasks to **flash-sidekick** to preserve 
 - UI/UX design decisions
 - Code architecture
 - Design system compliance audits
-- Component implementation with Northcote Curio tokens
+- Component implementation with kerala-rage kr-solidarity tokens
 
 ### Session Budget
 
@@ -44,21 +44,21 @@ Route computationally expensive or bulk tasks to **flash-sidekick** to preserve 
 - **Action at 75%**: Stop, summarize, propose new session
 - **Forbidden**: Sequential reads of 5+ files, unbatched greps
 
-## Design System: Northcote Curio
+## Design System: kerala-rage kr-solidarity
 
-Victorian naturalist field station aesthetic. Dual modes:
+kerala-streetprint naturalist field station aesthetic. Dual modes:
 
 | Mode           | Context                | Typography                          | Wallpaper Opacity |
 | -------------- | ---------------------- | ----------------------------------- | ----------------- |
-| **Gallery**    | User-facing, emotional | Fraunces SOFT=100 WONK=1, Caveat OK | 0.65+             |
-| **Laboratory** | Tools, clinical        | Fraunces SOFT=20 WONK=0, NO cursive | 0.05              |
+| **kr-dark**    | User-facing, emotional | Fraunces SOFT=100 WONK=1, Caveat OK | 0.65+             |
+| **kr-dark** | Tools, clinical        | Fraunces SOFT=20 WONK=0, NO cursive | 0.05              |
 
 **Anti-Slop Protocol** (strictly enforced):
 
 - ❌ Inter, Roboto, Arial
 - ❌ Uniform border-radius
 - ❌ Purple gradients
-- ✅ Federation Typography Stack (Fraunces, Libre Bodoni, Work Sans, JetBrains Mono)
+- ✅ Federation Typography Stack (Fraunces, kr-serif-bold, Work Sans, JetBrains Mono)
 - ✅ Asymmetric organic shapes
 - ✅ Australian botanical palette
 
@@ -107,7 +107,7 @@ export const Component: React.FC<Props> = ({ ...props }) => {
 ## Response Guidelines
 
 1. **Code requests** → Output code immediately, no setup narrative
-2. **Design questions** → Reference Northcote Curio tokens, cite mode (Gallery/Laboratory)
+2. **Design questions** → Reference kerala-rage kr-solidarity tokens, cite mode (kr-dark/kr-dark)
 3. **Bulk analysis** → Route to flash-sidekick, return synthesized result
 4. **Debugging** → Identify issue first, then minimal fix
 5. **Architecture** → Diagrams via Mermaid when useful
