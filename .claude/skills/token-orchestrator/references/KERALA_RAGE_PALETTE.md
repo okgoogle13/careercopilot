@@ -35,5 +35,5 @@
 ## Forbidden Colors
 
 - **Blue**: No "Tech Blue" or "Corporate Blue".
-- **Green**: No "Nature Green" (unless strictly eucalyptus-smoke `#4A5D55` for distinct secondary).
+- **Green**: No "Nature Green" (unless strictly kr-leafus-smoke `#4A5D55` for distinct secondary).
 - **Purple**: No "SaaS Purple".

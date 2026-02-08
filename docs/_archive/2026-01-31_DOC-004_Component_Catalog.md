@@ -1,9 +1,9 @@
 -# DOC-004: Component Catalog ("The Cabinet")
 
 **Document ID:** DOC-004-CATALOG
-**Version:** 2.0 (Northcote Curio Edition)
+**Version:** 2.0 (kerala-rage kr-solidarity Edition)
 **Status:** DEFINITIVE
-**Context:** The physical artifacts of the interface. Each component is a handcrafted object in the Curio Cabinet.
+**Context:** The physical artifacts of the interface. Each component is a handcrafted object in the kr-solidarity Cabinet.
 
 ---
 
@@ -39,7 +39,7 @@
 ### The Leaf (Hero Wrapper)
 *   **Token:** `radius-leaf` (`24px 8px 20px 4px`)
 *   **Vibe:** Organic, sweeping.
-*   **Style:** Often holds the "Banksia Composition" pattern.
+*   **Style:** Often holds the "kr-flower Composition" pattern.
 *   **Usage:** Page Headers, Main Dashboards.
 
 ---
@@ -68,7 +68,7 @@
 
 ### The Unfolding Pattern (Card Hover)
 
-When a user hovers over a Job Card in Gallery Mode, trigger a **three-phase cascade**:
+When a user hovers over a Job Card in kr-dark Mode, trigger a **three-phase cascade**:
 
 ```css
 /* Phase 1: Card Lifts (0-200ms) */
@@ -120,10 +120,10 @@ When a user hovers over a Job Card in Gallery Mode, trigger a **three-phase casc
 }
 ```
 
-### Mode Switch Animation (Gallery ↔ Laboratory)
+### Mode Switch Animation (kr-dark ↔ kr-dark)
 
 ```css
-/* Gallery to Laboratory Transition */
+/* kr-dark to kr-dark Transition */
 @keyframes modeSwitch {
   0% {
     background-image: url('gouache-grain.png');

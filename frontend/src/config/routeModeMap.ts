@@ -1,11 +1,11 @@
 /**
  * Route-to-Mode Mapping Configuration
  *
- * Defines which pages use Gallery mode (emotional, user-facing)
- * versus Laboratory mode (clinical tools, configuration)
+ * Defines which pages use kr-dark mode (emotional, user-facing)
+ * versus kr-dark mode (clinical tools, configuration)
  *
- * Gallery Mode: Landing, Auth, Onboarding, Opportunities, Dashboard, Kanban
- * Laboratory Mode: Analysis, Ingestion, Documents, Settings, Generation tools
+ * kr-dark Mode: Landing, Auth, Onboarding, Opportunities, Dashboard, Kanban
+ * kr-dark Mode: Analysis, Ingestion, Documents, Settings, Generation tools
  */
 
 import type { AppMode } from '../stores/useModeStore';
@@ -21,59 +21,59 @@ export interface RouteModeConfig {
  * Sorted by specificity (longest paths first) for matching algorithm
  */
 export const ROUTE_MODE_MAP: RouteModeConfig[] = [
-  // ============== GALLERY MODE ROUTES ==============
+  // ============== kr-dark MODE ROUTES ==============
   // Emotional, user-facing experiences
 
   // Public landing pages
-  { path: '/', mode: 'gallery' },
+  { path: '/', mode: 'kr-dark' },
 
   // Authentication flows
-  { path: '/login', mode: 'gallery' },
-  { path: '/register', mode: 'gallery' },
+  { path: '/login', mode: 'kr-dark' },
+  { path: '/register', mode: 'kr-dark' },
 
   // Onboarding experience
-  { path: '/onboarding', mode: 'gallery' },
+  { path: '/onboarding', mode: 'kr-dark' },
 
   // Discovery & opportunity viewing
-  { path: '/opportunities', mode: 'gallery' },
+  { path: '/opportunities', mode: 'kr-dark' },
 
   // Dashboard overview
-  { path: '/dashboard', mode: 'gallery' },
+  { path: '/dashboard', mode: 'kr-dark' },
 
   // Application tracking (Kanban view)
-  { path: '/tracker', mode: 'gallery' },
+  { path: '/tracker', mode: 'kr-dark' },
 
   // Profile viewing (not editing)
-  { path: '/profile', mode: 'gallery', exact: true },
+  { path: '/profile', mode: 'kr-dark', exact: true },
 
-  // ============== LABORATORY MODE ROUTES ==============
+  // ============== kr-dark MODE ROUTES ==============
   // Clinical tools, analysis, configuration
 
   // Analysis & insights dashboard
-  { path: '/analysis', mode: 'laboratory' },
+  { path: '/analysis', mode: 'kr-dark' },
 
   // Data ingestion/import
-  { path: '/career/ingest', mode: 'laboratory' },
-  { path: '/ingestion', mode: 'laboratory' },
+  { path: '/career/ingest', mode: 'kr-dark' },
+  { path: '/ingestion', mode: 'kr-dark' },
 
   // Document management & editing
-  { path: '/documents', mode: 'laboratory' },
+  { path: '/documents', mode: 'kr-dark' },
 
   // Generation tools
-  { path: '/ksc-generator', mode: 'laboratory' },
-  { path: '/cover-letter-generator', mode: 'laboratory' },
+  { path: '/ksc-generator', mode: 'kr-dark' },
+  { path: '/cover-letter-generator', mode: 'kr-dark' },
 
   // Asset library (archive vault)
-  { path: '/asset-library', mode: 'laboratory' },
+  { path: '/asset-library', mode: 'kr-dark' },
 
   // Settings & configuration
-  { path: '/settings', mode: 'laboratory' },
+  { path: '/settings', mode: 'kr-dark' },
 
   // Job queue & background processing
-  { path: '/job-queue', mode: 'laboratory' },
+  { path: '/job-queue', mode: 'kr-dark' },
 
   // Development & style guide
-  { path: '/style-guide', mode: 'laboratory' },
+  { path: '/style-guide', mode: 'kr-dark' },
 ];
 
 /**
@@ -81,11 +81,11 @@ export const ROUTE_MODE_MAP: RouteModeConfig[] = [
  * Uses longest-match-first algorithm to handle nested routes correctly
  *
  * Example:
- * getModeForRoute('/documents/upload') → 'laboratory' (matches /documents)
- * getModeForRoute('/unknown') → 'laboratory' (default fallback)
+ * getModeForRoute('/documents/upload') → 'kr-dark' (matches /documents)
+ * getModeForRoute('/unknown') → 'kr-dark' (default fallback)
  *
  * @param pathname - Current route pathname
- * @returns AppMode ('gallery' | 'laboratory')
+ * @returns AppMode ('kr-dark' | 'kr-dark')
  */
 export function getModeForRoute(pathname: string): AppMode {
   // Sort routes by path length descending (longest/most specific first)
@@ -103,8 +103,8 @@ export function getModeForRoute(pathname: string): AppMode {
     return pathname.startsWith(route.path);
   });
 
-  // Return matched mode or default to laboratory for unknown routes
-  return matchedRoute?.mode ?? 'laboratory';
+  // Return matched mode or default to kr-dark for unknown routes
+  return matchedRoute?.mode ?? 'kr-dark';
 }
 
 /**

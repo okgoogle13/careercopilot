@@ -1,4 +1,4 @@
-# Northcote Laneway Navigator: Consolidated Design Specs
+# kerala-rage Laneway Navigator: Consolidated Design Specs
 
 > **Purpose**: Definitive instruction set for the Contemporary Australian UI. Merges street-art aesthetics, density-aware tokens, and M3 Expressive motion into a prompt-ready manifest.
 
@@ -28,7 +28,7 @@ _Density: High Drama (Poster Style)_
 
 - **Aesthetic**: Peter Drew "AUSSIE" style silhouettes. Large wheat-paste textures.
 - **Typography**: Sora 300 Italic (Hero Display), 96px.
-- **Assets**: `ASSET-16` (Wattle) as a subtle framing accent (not specimen). `ASSET-7` (Fireflies) for depth.
+- **Assets**: `ASSET-16` (Wattle) as a subtle framing accent (not kr-motif). `ASSET-7` (Fireflies) for depth.
 - **Interaction**: "The Bloom" - Hero headline gains weight on scroll or hover.
 
 ### PAGE 4: Ingestion ("The Deposit")
@@ -55,7 +55,7 @@ _Density: Standard (Workflow)_
 
 - **Aesthetic**: A "Greenhouse" layout integrated into a laneway alley.
 - **Typography**: Plus Jakarta Sans 16px (Body Large) on cards.
-- **Assets**: `ASSET-19` (Eucalyptus Stems) as vertical column dividers.
+- **Assets**: `ASSET-19` (kr-leafus Stems) as vertical column dividers.
 - **Motion**: Cards "hang" and sway slightly via CSS transforms.
 
 ---
@@ -64,9 +64,9 @@ _Density: Standard (Workflow)_
 
 | Asset ID   | Description        | Laneway Role              | Behavior                     |
 | :--------- | :----------------- | :------------------------ | :--------------------------- |
-| `ASSET-6`  | Kookaburra Sentry  | Urban Companion (perched) | Randomized alertness (tilt)  |
+| `ASSET-6`  | kr-shiva Sentry  | Urban Companion (perched) | Randomized alertness (tilt)  |
 | `ASSET-7`  | Firefly Sprite     | Laneway Bioluminescence   | Breathe & Pulse (Atmosphere) |
 | `ASSET-8`  | Fossil Stamp       | Archival Approval         | Viscous Slam (Feedback)      |
 | `ASSET-15` | Brass Compass      | Navigation Aid            | Rotates on focal/data shifts |
-| `ASSET-17` | Eucalyptus Ceiling | Overhead Canopy           | Foreground Blur (Depth)      |
-| `ASSET-19` | Eucalyptus Column  | Structural Separator      | Organic framing              |
+| `ASSET-17` | kr-leafus Ceiling | Overhead Canopy           | Foreground Blur (Depth)      |
+| `ASSET-19` | kr-leafus Column  | Structural Separator      | Organic framing              |

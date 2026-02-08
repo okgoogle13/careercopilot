@@ -14,13 +14,13 @@ import { useState } from 'react';
 import ResumeUploader from './ResumeUploader';
 
 // Assets
-import starfishCage from '../../../assets/specimens/starfish-cage.jpg';
+import starfishCage from '../../../assets/kr-motifs/starfish-cage.jpg';
 import wallpaper from '../../../assets/textures/wallpaper.png';
 
 /**
- * CareerCopilot Profile View ("The Specimen Archive")
+ * CareerCopilot Profile View ("The kr-motif Archive")
  *
- * V3.1 Gallery Mode View implementation.
+ * V3.1 kr-dark Mode View implementation.
  */
 export function ProfileView() {
   const [careerData, setCareerData] = useState<any>(null);
@@ -41,7 +41,7 @@ export function ProfileView() {
       <div className="h-64 md:h-80 relative overflow-hidden">
         <img
           src={starfishCage}
-          alt="Specimen Archive"
+          alt="kr-motif Archive"
           className="w-full h-full object-cover brightness-50 contrast-125 saturate-50"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-asphalt-black via-asphalt-black/40 to-transparent" />
@@ -111,7 +111,7 @@ export function ProfileView() {
           {/* Main Column - Career Strata */}
           <div className="lg:col-span-8 space-y-12">
             <Stone
-              mode="gallery"
+              mode="kr-dark"
               elevation="raised"
               className="p-10 border-concrete-grey/10 bg-asphalt-black/40 backdrop-blur-md"
             >
@@ -154,7 +154,7 @@ export function ProfileView() {
                       role="Metadata Architect"
                       company="StartUp Studio"
                       date="2020 - 2022"
-                      description="Designed core taxonomies for career data ingestion. Managed a team of 4 specimen auditors."
+                      description="Designed core taxonomies for career data ingestion. Managed a team of 4 kr-motif auditors."
                     />
                   </>
                 )}
@@ -165,7 +165,7 @@ export function ProfileView() {
           {/* Sidebar Column - Traits & Filaments */}
           <div className="lg:col-span-4 space-y-8">
             <Stone
-              mode="gallery"
+              mode="kr-dark"
               elevation="floating"
               className="p-8 border-concrete-grey/10 bg-asphalt-black/20"
             >
@@ -183,7 +183,7 @@ export function ProfileView() {
                     'Neural.sys',
                     'Tailwind',
                     'GraphQL',
-                    'Specimen.Audit',
+                    'kr-motif.Audit',
                     'Python',
                     'Archival.Design',
                   ]
@@ -199,7 +199,7 @@ export function ProfileView() {
             </Stone>
 
             <Stone
-              mode="gallery"
+              mode="kr-dark"
               elevation="floating"
               className="p-8 border-concrete-grey/10 bg-asphalt-black/20"
             >
@@ -240,7 +240,7 @@ export function ProfileView() {
             <div className="p-6 border border-concrete-grey/5 rounded-2xl bg-wattle-gold/5 flex flex-col items-center text-center">
               <Archive className="w-8 h-8 text-wattle-gold mb-4 opacity-40" />
               <p className="font-field-note text-sm text-paper-white opacity-60 italic leading-relaxed">
-                "This record is synchronized with the primary Curio node."
+                "This record is synchronized with the primary kr-solidarity node."
               </p>
             </div>
           </div>
@@ -263,7 +263,7 @@ function TimelineItem({
 }) {
   return (
     <Stone
-      mode="gallery"
+      mode="kr-dark"
       elevation="flat"
       className="p-6 border-concrete-grey/5 bg-white/5 hover:border-wattle-gold/20 transition-all group overflow-hidden relative"
     >

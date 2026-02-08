@@ -104,7 +104,7 @@ Create a single consolidated task file instead of verbose documentation:
     }
   ],
   "token_system_reference": {
-    "location": "frontend/src/design-tokens/northcote-tokens.ts",
+    "location": "frontend/src/design-tokens/kerala-rage-tokens.ts",
     "required_imports": [
       "ncFontDisplay",
       "ncFontBody",
@@ -113,9 +113,9 @@ Create a single consolidated task file instead of verbose documentation:
     ],
     "migration_checklist": [
       "Replace M3 semantic colors with botanical palette",
-      "Replace Inter/Roboto with Northcote typography stack",
+      "Replace Inter/Roboto with kerala-rage typography stack",
       "Apply organic border-radius (asymmetric)",
-      "Remove Material 3 elevation system, use Northcote shadow tokens"
+      "Remove Material 3 elevation system, use kerala-rage shadow tokens"
     ]
   },
   "handover_receiver": {
@@ -202,12 +202,12 @@ Migrate in order: Lens → Mark → Jar → Valve → Signal → Cabinet
    - M3 color tokens (e.g., `colors.blue.500`)
    - M3 typography (e.g., `fontFamily: 'Roboto'`)
    - M3 elevation (e.g., `boxShadow: elevation[4]`)
-3. Replace with Northcote:
+3. Replace with kerala-rage:
    - Botanical colors (from `ncColorBotanical`)
    - Typography stack (Lora, Crimson Text, Fraunces)
    - Organic shapes (asymmetric border-radius)
 4. Run component tests (Testing MCP)
-5. Commit with message: `refactor(components): migrate <Name> to Northcote`
+5. Commit with message: `refactor(components): migrate <Name> to kerala-rage`
 
 **Success Criteria:** Each component passes tests, git history shows clean commits
 
@@ -268,7 +268,7 @@ GET /files?paths=["Lens.tsx", "Mark.tsx", "Jar.tsx"]
 ### Strategy B: Incremental Commits (Reduce Context Bloat)
 After each component migration:
 ```bash
-git commit -m "refactor(components): migrate <Name> to Northcote"
+git commit -m "refactor(components): migrate <Name> to kerala-rage"
 ```
 
 This allows Gemini 3 Pro to:
@@ -387,7 +387,7 @@ Then:
 2. Run full test suite locally
 3. Run linting
 4. Create PR with Gemini's commits
-5. Deploy to staging for visual audit (via `northcote-visual-audit`)
+5. Deploy to staging for visual audit (via `kerala-rage-visual-audit`)
 
 ---
 
@@ -398,7 +398,7 @@ After Gemini 3 Pro completes phases 1-3:
 **Phase 4 (Visual Validation via Claude Code):**
 ```bash
 # Take screenshots of migrated components
-# Run northcote-visual-audit on each
+# Run kerala-rage-visual-audit on each
 # Check typography, colors, spacing against standards
 ```
 

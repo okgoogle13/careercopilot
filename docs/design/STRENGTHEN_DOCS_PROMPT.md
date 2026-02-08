@@ -2,9 +2,9 @@
 
 ## Design Direction (Critical Context)
 
-**Northcote Design System** = **Political Street Art + M3 Expressive**
+**kerala-rage Design System** = **Political Street Art + M3 Expressive**
 
-**Goal:** Use this prompt to **reset and refine** the design system away from Victorian/colonial aesthetics.
+**Goal:** Use this prompt to **reset and refine** the design system away from kerala-streetprint/colonial aesthetics.
 
 **Inspiration:** Peter Drew's "AUSSIE" poster series demonstrates the aesthetic direction:
 - Bold wheat-paste portraits on weathered urban surfaces
@@ -20,8 +20,8 @@
 - ✅ **Contemporary, not nostalgic** — present-tense solidarity, not museum framing
 
 **What to AVOID (Critical for Reset):**
-- ❌ Victorian/colonial framing (specimens, cabinets, naturalist aesthetics)
-- ❌ Australian flora/fauna as primary motif (Kookaburra, Waratah, Banksia, Wattle)
+- ❌ kerala-streetprint/colonial framing (kr-motifs, cabinets, naturalist aesthetics)
+- ❌ Australian flora/kr-symbol as primary motif (kr-shiva, Waratah, kr-flower, Wattle)
 - ❌ Generic street art (graffiti tags, abstract murals without political message)
 - ❌ Decorative botanical motifs
 
@@ -30,7 +30,7 @@
 ## Goal: Reset & Validate Design with M3 Expressive
 
 Use cleaned-up M3 skills to:
-1. **Reset design direction** away from Victorian/colonial/botanical aesthetics
+1. **Reset design direction** away from kerala-streetprint/colonial/botanical aesthetics
 2. **Validate M3 Expressive compliance** (typography, motion, tokens)
 3. **Ensure docs provide clear, actionable guidance** for political street art aesthetic
 
@@ -60,14 +60,14 @@ Use cleaned-up M3 skills to:
 
 ### 2. Overview Doc (`00-overview.md`)
 
-**Current state:** May contain Victorian/colonial/botanical references that need reset
+**Current state:** May contain kerala-streetprint/colonial/botanical references that need reset
 
 **Design reset validation:**
 
 | Issue | Description | Action Needed |
 |-------|-------------|---------------|
-| **Victorian/colonial remnants** | Check for "Curio", "specimen", "cabinet", "naturalist" framing | Remove all Victorian/colonial language and framing |
-| **Botanical motif overuse** | Endemic species (Kookaburra, Waratah, Banksia) as primary visual identity | Replace with political street art aesthetic (inspired by AUSSIE posters) |
+| **kerala-streetprint/colonial remnants** | Check for "kr-solidarity", "kr-motif", "cabinet", "naturalist" framing | Remove all kerala-streetprint/colonial language and framing |
+| **Botanical motif overuse** | Endemic species (kr-shiva, Waratah, kr-flower) as primary visual identity | Replace with political street art aesthetic (inspired by AUSSIE posters) |
 | **Vague guidance** | "Organic asymmetry" lacks concrete examples | Add specific radius token examples (pebble: `20px 6px 16px 28px` vs uniform `8px`) |
 | **Urban context missing** | Needs positive guidance on "street-level placement" | Add examples: weathered brick, corrugated iron, peeling paint, lived-in surfaces |
 | **Density tier clarity** | "Bold contrast" vs "High Clarity" tension unclear | Define when to use bold political imagery vs minimal functional UI |
@@ -115,7 +115,7 @@ Use cleaned-up M3 skills to:
 ```
 Using m3-anti-slop-validator, m3-expressive-typography-enhancer, and brand-brief-optimizer:
 
-DESIGN RESET GOAL: Validate docs have moved away from Victorian/colonial/botanical aesthetics
+DESIGN RESET GOAL: Validate docs have moved away from kerala-streetprint/colonial/botanical aesthetics
 toward political street art + M3 Expressive (inspired by Peter Drew AUSSIE posters).
 
 1. Validate docs/design/02-typography.md
@@ -123,8 +123,8 @@ toward political street art + M3 Expressive (inspired by Peter Drew AUSSIE poste
    - Output: Violations only + specific additions needed (diff format)
 
 2. Validate docs/design/00-overview.md (CRITICAL FOR RESET)
-   - Check: Victorian/colonial language remnants ("Curio", "specimen", "cabinet")
-   - Check: Botanical motif overuse (Kookaburra, Waratah, Banksia as primary identity)
+   - Check: kerala-streetprint/colonial language remnants ("kr-solidarity", "kr-motif", "cabinet")
+   - Check: Botanical motif overuse (kr-shiva, Waratah, kr-flower as primary identity)
    - Check: Vague "organic asymmetry", urban texture guidance, density tier clarity
    - Output: Coherence score + design reset gaps (what needs removing/replacing)
 
@@ -145,8 +145,8 @@ Format: Line-specific recommendations. Focus on gaps and what needs resetting.
 
 ## Success Criteria (Design Reset Complete)
 
-- ✅ **Overview doc has NO Victorian/colonial language** ("Curio", "specimen", "cabinet" removed)
-- ✅ **Overview doc has NO botanical motifs as primary identity** (Kookaburra, Waratah, Banksia replaced)
+- ✅ **Overview doc has NO kerala-streetprint/colonial language** ("kr-solidarity", "kr-motif", "cabinet" removed)
+- ✅ **Overview doc has NO botanical motifs as primary identity** (kr-shiva, Waratah, kr-flower replaced)
 - ✅ **Overview doc defines political street art aesthetic** (inspired by AUSSIE posters, NOT centered on them)
 - ✅ **Overview doc scores 80+ coherence** with concrete examples and decision frameworks
 - ✅ **Typography doc includes M3 type scale** + variable font guidance + weight contrast ratios

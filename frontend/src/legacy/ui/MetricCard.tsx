@@ -19,9 +19,9 @@ const MetricCard = React.forwardRef<HTMLDivElement, MetricCardProps>(
         const { mode } = useMode();
 
         const trendColor = trend?.direction === 'up'
-            ? (mode === 'gallery' ? 'text-status-gallery-ghost-gum' : 'text-status-laboratory-clinical-sage')
+            ? (mode === 'kr-dark' ? 'text-status-kr-dark-ghost-gum' : 'text-status-kr-dark-clinical-sage')
             : trend?.direction === 'down'
-                ? (mode === 'gallery' ? 'text-tertiary-waratah-red' : 'text-status-laboratory-clinical-alert')
+                ? (mode === 'kr-dark' ? 'text-tertiary-waratah-red' : 'text-status-kr-dark-clinical-alert')
                 : 'text-secondary-concrete-grey';
 
         return (
@@ -38,7 +38,7 @@ const MetricCard = React.forwardRef<HTMLDivElement, MetricCardProps>(
                 <div className="mt-auto">
                     <div className={cn(
                         "font-display leading-none mb-2",
-                        mode === 'gallery' ? 'text-5xl font-bold tracking-tight' : 'text-4xl font-mono tracking-normal'
+                        mode === 'kr-dark' ? 'text-5xl font-bold tracking-tight' : 'text-4xl font-mono tracking-normal'
                     )}>
                         {value}
                     </div>

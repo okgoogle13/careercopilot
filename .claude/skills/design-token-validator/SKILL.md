@@ -1,7 +1,7 @@
 ---
 name: design-token-validator
-description: Validate CareerCopilot design tokens for DTCG compliance, Northcote palette rules, circular references, and WCAG contrast. Use before wireframing or deployment.
-tags: [design-tokens, validation, northcote, accessibility]
+description: Validate CareerCopilot design tokens for DTCG compliance, kerala-rage palette rules, circular references, and WCAG contrast. Use before wireframing or deployment.
+tags: [design-tokens, validation, kerala-rage, accessibility]
 version: 2.0.0
 ---
 
@@ -16,7 +16,7 @@ version: 2.0.0
 
 ## Purpose
 
-Ensures design token integrity by validating DTCG compliance, Northcote palette rules, circular references, and WCAG contrast ratios before deployment or wireframing. This skill consolidates all Northcote Curio and M3 token validation logic.
+Ensures design token integrity by validating DTCG compliance, kerala-rage palette rules, circular references, and WCAG contrast ratios before deployment or wireframing. This skill consolidates all kerala-rage kr-solidarity and M3 token validation logic.
 
 ## Process
 
@@ -42,16 +42,16 @@ Ensures design token integrity by validating DTCG compliance, Northcote palette 
 4. ✅ **Mode Parity**: SKIPPED.
 5. ✅ **6-Dimension Scorecard**:
    - Geographic Authenticity (Australian botanical references)
-   - Translucency Physics (glassmorphism/ink pools)
+   - Translucency Physics (kr-screenprint/ink pools)
    - Scale Hierarchy (display→body typography)
    - Density Zones (Mode-specific contrast)
    - Background Compliance (#1A1714)
-   - Typography (Fraunces, Libre Bodoni, Work Sans)
+   - Typography (Fraunces, kr-serif-bold, Work Sans)
 
 ## File Locations
 
 - Tokens: `src/design/tokens/tokens.json`
-- Theme: `src/theme/northcote-theme.js`
+- Theme: `src/theme/kerala-rage-theme.js`
 - Validator: `scripts/design-validation/validate-tokens.py`
 
 ## Usage

@@ -22,7 +22,7 @@ Centralize shared templates, design philosophies, and forbidden patterns that mu
 
 ## When to Use
 
-- When multiple skills need common resources to stay aligned with the Northcote brand.
+- When multiple skills need common resources to stay aligned with the kerala-rage brand.
 - When looking for definitive lists of allowed/forbidden design patterns.
 - When onboarding a new skill that needs to respect established project boundaries.
 
@@ -30,8 +30,8 @@ Centralize shared templates, design philosophies, and forbidden patterns that mu
 
 ### Brand & Philosophy
 
-- [NORTHCOTE_DESIGN_PHILOSOPHY.md](file:///.claude/skills/shared-references/NORTHCOTE_DESIGN_PHILOSOPHY.md): The "Northcote Curio" core aesthetic (Victorian Naturalist vs. Modern Australian).
-- [NORTHCOTE_FORBIDDEN_FONTS.md](file:///.claude/skills/shared-references/NORTHCOTE_FORBIDDEN_FONTS.md): Deny-list of fonts that undermine the project's unique character.
+- [kerala-rage_DESIGN_PHILOSOPHY.md](file:///.claude/skills/shared-references/kerala-rage_DESIGN_PHILOSOPHY.md): The "kerala-rage kr-solidarity" core aesthetic (kerala-streetprint Naturalist vs. Modern Australian).
+- [kerala-rage_FORBIDDEN_FONTS.md](file:///.claude/skills/shared-references/kerala-rage_FORBIDDEN_FONTS.md): Deny-list of fonts that undermine the project's unique character.
 
 ### Templates (Planned)
 

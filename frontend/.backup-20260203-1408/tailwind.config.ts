@@ -8,7 +8,7 @@ const config: Config = {
         // Semantic surface colors
         'asphalt-black': '#1A1714',
 
-        // Gallery mode surfaces
+        // kr-dark mode surfaces
         'charcoal-bark': '#141210',
         'concrete-grey': {
           DEFAULT: '#2C2723',
@@ -16,7 +16,7 @@ const config: Config = {
           highest: '#4A433D',
         },
 
-        // Laboratory mode surfaces
+        // kr-dark mode surfaces
         'charcoal-slate': '#16141A',
         'slate-smoke': {
           DEFAULT: '#252230',
@@ -42,7 +42,7 @@ const config: Config = {
           container: 'rgba(196, 92, 75, 0.15)',
         },
 
-        // Status colors - Gallery mode
+        // Status colors - kr-dark mode
         'ghost-gum': {
           DEFAULT: '#7A9E82',
           container: 'rgba(122, 158, 130, 0.15)',
@@ -51,12 +51,12 @@ const config: Config = {
           DEFAULT: '#9B8AAD',
           container: 'rgba(155, 138, 173, 0.15)',
         },
-        'banksia-orange': {
+        'kr-flower-orange': {
           DEFAULT: '#D4885C',
           container: 'rgba(212, 136, 92, 0.15)',
         },
 
-        // Status colors - Laboratory mode
+        // Status colors - kr-dark mode
         'clinical-sage': {
           DEFAULT: '#6B9E7A',
           container: 'rgba(107, 158, 122, 0.12)',
@@ -93,7 +93,7 @@ const config: Config = {
         'annotation-ink': '#A89F8C',
 
         // Tonal Palettes (Mapping tones 0-100 from M3 structure in tokens.json)
-        'curio-neutral': {
+        'kr-solidarity-neutral': {
           '0': '#000000',
           '10': '#1A1C1E',
           '20': '#2F3133',
@@ -108,7 +108,7 @@ const config: Config = {
           '99': '#FAFBFC',
           '100': '#FFFFFF',
         },
-        'curio-neutral-variant': {
+        'kr-solidarity-neutral-variant': {
           '0': '#000000',
           '10': '#191C1D',
           '20': '#2E3132',
@@ -126,7 +126,7 @@ const config: Config = {
       },
       fontFamily: {
         display: ['Fraunces', 'serif'],
-        proclamation: ['Libre Bodoni', 'Playfair Display', 'serif'],
+        proclamation: ['kr-serif-bold', 'Playfair Display', 'serif'],
         body: ['Work Sans', 'sans-serif'],
         mono: ['JetBrains Mono', 'monospace'],
         // Legacy/Semantic mapping
@@ -220,11 +220,11 @@ const config: Config = {
         '3xl': '64px',
       },
       transitionTimingFunction: {
-        // Gallery mode - Viscous with overshoot
+        // kr-dark mode - Viscous with overshoot
         viscous: 'cubic-bezier(0.34, 1.56, 0.64, 1)',
         settle: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
 
-        // Laboratory mode - Precise, no overshoot
+        // kr-dark mode - Precise, no overshoot
         precise: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
         snap: 'cubic-bezier(0.4, 0, 0.2, 1)',
       },

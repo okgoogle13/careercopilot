@@ -15,7 +15,7 @@ Data is political. We do not use neutral blues. We use the colors of the land (K
 ### 2. Comparison Data (The Context)
 
 - **Token:** `color-data-comparison`
-- **Ref:** `var(--color-eucalyptus-smoke-primary)`
+- **Ref:** `var(--color-kr-leafus-smoke-primary)`
 - **Usage:** Averages, benchmarks, "others".
 
 ### 3. Alert Data (The Warning)
@@ -34,7 +34,7 @@ Data is political. We do not use neutral blues. We use the colors of the land (K
 
 - **Axis Labels:** `JetBrains Mono` (The Annotation), 10px, Uppercase.
 - **Tooltips:** `Work Sans` (The Field Note), 12px, Dark Background with Wattle Border.
-- **Big Numbers:** `Libre Bodoni` (The Proclamation), Condensed.
+- **Big Numbers:** `kr-serif-bold` (The Proclamation), Condensed.
 
 ## Chart Styles
 

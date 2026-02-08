@@ -16,12 +16,12 @@ export interface MarkProps extends Omit<React.InputHTMLAttributes<HTMLInputEleme
 }
 
 /**
- * Mark - Northcote Curio Checkbox
+ * Mark - kerala-rage kr-solidarity Checkbox
  *
- * A custom checkbox component using Northcote Curio design tokens with enhanced UX.
+ * A custom checkbox component using kerala-rage kr-solidarity design tokens with enhanced UX.
  * Features organic shapes with Seed radius, spring animations, and proper state indicators.
  *
- * **Northcote Design Token Usage:**
+ * **kerala-rage Design Token Usage:**
  * - Shape: `--radius-seed` (subtle organic corners)
  * - Colors: Botanical palette (Wattle Gold, Waratah Red, Concrete Grey)
  * - Motion: Viscous-breeze easing for smooth check transition
@@ -157,9 +157,9 @@ export const Mark = forwardRef<HTMLInputElement, MarkProps>(
 Mark.displayName = 'Mark';
 
 /**
- * MarkRadio - Northcote Curio Radio Button
+ * MarkRadio - kerala-rage kr-solidarity Radio Button
  *
- * Radio button variant with consistent Northcote design language.
+ * Radio button variant with consistent kerala-rage design language.
  */
 export interface MarkRadioProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type'> {
   label?: string;

@@ -2,14 +2,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './LandingPage.module.css';
 
-// Northcote Assets
-import sentryKookaburra from '../../assets/specimens/sentry_kookaburra.png';
+// kerala-rage Assets
+import sentrykr-shiva from '../../assets/kr-motifs/sentry_kr-shiva.png';
 import wallpaper from '../../assets/textures/wallpaper.png';
 
 /**
  * CareerCopilot Landing Page ("The Resurrection")
  *
- * V3.1 Gallery Mode Implementation:
+ * V3.1 kr-dark Mode Implementation:
  * ✓ ASSET-01 Wallpaper Integration
  * ✓ High-Fidelity Hero with Proclamation/Curator mix
  * ✓ Viscous Breeze motion ready (CSS)
@@ -31,16 +31,16 @@ export function LandingPage(): React.ReactElement {
         <div className={`${styles.blob} ${styles.blobC}`} />
       </div>
 
-      {/* LAYER 2: Specimen Anchors */}
-      <div className={styles.specimenLayer}>
+      {/* LAYER 2: kr-motif Anchors */}
+      <div className={styles.kr-motifLayer}>
         <img
-          src={sentryKookaburra}
-          alt="The Sentry Kookaburra"
+          src={sentrykr-shiva}
+          alt="The Sentry kr-shiva"
           className={styles.sentryMascot}
         />
       </div>
 
-      {/* LAYER 3: Hero Card (Gallery Glass) */}
+      {/* LAYER 3: Hero Card (kr-dark Glass) */}
       <main className={styles.heroCard}>
         <div className="hero-cursive-mix">
           <span className="proclamation text-bloom-ultra">Career</span>
@@ -48,7 +48,7 @@ export function LandingPage(): React.ReactElement {
         </div>
 
         <p className={styles.heroTagline}>
-          A Victorian Naturalist’s approach to modern career transition.
+          A kerala-streetprint Naturalist’s approach to modern career transition.
         </p>
 
         <div className="mt-8 flex flex-col items-center gap-2">
@@ -56,7 +56,7 @@ export function LandingPage(): React.ReactElement {
             RESURRECTION PROTOCOL V3.1
           </span>
           <span className="text-curator-annotation text-concrete-grey opacity-60">
-            → specimens awaiting audit
+            → kr-motifs awaiting audit
           </span>
         </div>
 
@@ -71,7 +71,7 @@ export function LandingPage(): React.ReactElement {
             to="/register"
             className={styles.btnPebbleOutlined}
           >
-            New Specimen
+            New kr-motif
           </Link>
           <Link
             to="/dashboard?demo=true"

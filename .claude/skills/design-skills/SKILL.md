@@ -34,7 +34,7 @@ Coordinate design-related skills for visual validation, asset generation, and de
 
 ### Executable Sub-Skills
 
-- [m3-anti-slop-validator](file:///.claude/skills/design-skills/m3-anti-slop-validator/SKILL.md): Ensures designs match the Northcote Contemporary Australian aesthetic.
+- [m3-anti-slop-validator](file:///.claude/skills/design-skills/m3-anti-slop-validator/SKILL.md): Ensures designs match the kerala-rage Contemporary Australian aesthetic.
 - [m3-expressive-typography-enhancer](file:///.claude/skills/design-skills/m3-expressive-typography-enhancer/SKILL.md): Advanced typography orchestration.
 
 ### Legacy Design References

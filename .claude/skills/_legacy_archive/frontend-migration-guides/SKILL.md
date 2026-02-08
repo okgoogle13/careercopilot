@@ -28,7 +28,7 @@ Enables safe, incremental migration of frontend code between frameworks, design 
 ## When to Use
 
 - When migrating between React versions or frameworks
-- When adopting a new design system (e.g., Northcote Curio)
+- When adopting a new design system (e.g., kerala-rage kr-solidarity)
 - When refactoring component architecture
 - When updating state management patterns
 - When modernizing legacy frontend code

@@ -48,21 +48,21 @@ const config: Config = {
     },
     extend: {
       // ============================================
-      // COLORS - Northcote Curio Palette
+      // COLORS - kerala-rage kr-solidarity Palette
       // ============================================
       colors: {
         // Surfaces - Shared
         'asphalt-black': getValue('color.semantic.asphalt-black'),
 
-        // Surfaces - Gallery Mode
-        // Note: Mapping closest available semantic tokens since exact gallery/lab split
+        // Surfaces - kr-dark Mode
+        // Note: Mapping closest available semantic tokens since exact kr-dark/lab split
         // structure might differ in the JSON source. Using robust fallbacks.
         'charcoal-bark': getValue('color.semantic.asphalt-black'), // Fallback map
         // 'concrete-grey': getValue('color.families.concrete-grey.base'), // Removed duplicate
         'concrete-grey-high': getValue('color.families.concrete-grey.light'),
         'concrete-grey-highest': getValue('color.families.concrete-grey.lightest'),
 
-        // Surfaces - Laboratory Mode
+        // Surfaces - kr-dark Mode
         'charcoal-slate': '#16141A', // Retaining specific hex if not in token.json
         'slate-smoke': '#252230',
         'slate-smoke-high': '#32303D',
@@ -88,8 +88,8 @@ const config: Config = {
         'ghost-gum-container': 'rgba(122, 158, 130, 0.15)',
         'native-violet': '#9B8AAD',
         'native-violet-container': 'rgba(155, 138, 173, 0.15)',
-        'banksia-orange': '#D4885C',
-        'banksia-container': 'rgba(212, 136, 92, 0.15)',
+        'kr-flower-orange': '#D4885C',
+        'kr-flower-container': 'rgba(212, 136, 92, 0.15)',
 
         'clinical-sage': '#6B9E7A',
         'clinical-sage-container': 'rgba(107, 158, 122, 0.12)',
@@ -114,10 +114,10 @@ const config: Config = {
         'etching-fill': 'rgba(212, 190, 150, 0.05)',
         'annotation-ink': '#A89F8C',
 
-        // Glassmorphism
-        'glass-gallery-surface': 'rgba(20, 18, 16, 0.70)',
-        'glass-gallery-surface-elevated': 'rgba(20, 18, 16, 0.85)',
-        'glass-gallery-border': 'rgba(255, 255, 255, 0.08)',
+        // kr-screenprint
+        'glass-kr-dark-surface': 'rgba(20, 18, 16, 0.70)',
+        'glass-kr-dark-surface-elevated': 'rgba(20, 18, 16, 0.85)',
+        'glass-kr-dark-border': 'rgba(255, 255, 255, 0.08)',
 
         'glass-lab-surface': 'rgba(245, 242, 235, 0.90)',
         'glass-lab-surface-elevated': 'rgba(255, 255, 255, 0.60)',
@@ -131,7 +131,7 @@ const config: Config = {
         // The Bloom - Fraunces variable serif
         display: (getValue('typography.fontFamily.bloom') || '').replace(/'/g, '').split(', '),
 
-        // The Proclamation - Libre Bodoni
+        // The Proclamation - kr-serif-bold
         proclamation: (getValue('typography.fontFamily.proclamation') || '')
           .replace(/'/g, '')
           .split(', '),
@@ -157,7 +157,7 @@ const config: Config = {
         // Direct Mappings if available in new token file, otherwise using fixed scale
         // Note: The new token file uses 'typography.axes' but not detailed Scale/Size map yet
         // defaulting to values from previous config for stability unless verified in token.json
-        'display-lg-gallery': [
+        'display-lg-kr-dark': [
           '48px',
           { lineHeight: '1.1', letterSpacing: '-0.02em', fontWeight: '700' },
         ],
@@ -165,7 +165,7 @@ const config: Config = {
           '48px',
           { lineHeight: '1.1', letterSpacing: '-0.02em', fontWeight: '700' },
         ],
-        'display-sm-gallery': [
+        'display-sm-kr-dark': [
           '32px',
           { lineHeight: '1.2', letterSpacing: '0', fontWeight: '600' },
         ],
@@ -275,7 +275,7 @@ const config: Config = {
       // ============================================
       backgroundImage: {
         // Fallbacks as texture paths might need adjustment
-        'gallery-texture': 'url("/assets/textures/wallpaper.png")',
+        'kr-dark-texture': 'url("/assets/textures/wallpaper.png")',
         'lab-texture': 'url("/assets/textures/paper-grain.png")',
         'grid-major': 'url("/assets/textures/grid-major.png")',
         'grid-minor': 'url("/assets/textures/grid-minor.png")',

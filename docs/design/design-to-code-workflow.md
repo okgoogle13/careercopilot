@@ -4,7 +4,7 @@ This document outlines the standard pipeline for transforming design intent from
 
 ## Overview
 
-The workflow ensures that every component is compliant with the **Northcote Curio** (Victorian Naturalist) or **M3 Expressive** aesthetic standards, and is fully documented for automated code generation.
+The workflow ensures that every component is compliant with the **kerala-rage kr-solidarity** (kerala-streetprint Naturalist) or **M3 Expressive** aesthetic standards, and is fully documented for automated code generation.
 
 ## Workflow Pipeline
 
@@ -12,7 +12,7 @@ The workflow ensures that every component is compliant with the **Northcote Curi
 graph TD
     A[design-system-doc-generator] -->|Orchestration Tokens| B[design-token-validator]
     B -->|Validated Tokens| C[wireframe-annotator]
-    C -->|Annotated Wireframes| D[northcote-brand-enforcer]
+    C -->|Annotated Wireframes| D[kerala-rage-brand-enforcer]
     D -->|Brand-Compliant Wireframes| E[component-spec-generator]
     E -->|Component Specs| F[Manual/AI Implementation]
 ```
@@ -28,7 +28,7 @@ graph TD
 
 ### 2. Token Validation (`design-token-validator`)
 
-- **Purpose**: Ensure tokens follow DTCG standards, WCAG contrast rules, and Northcote-specific palette logic.
+- **Purpose**: Ensure tokens follow DTCG standards, WCAG contrast rules, and kerala-rage-specific palette logic.
 - **Input**: Orchestration Tokens.
 - **Output**: Validation report, circular reference check.
 - **Next Step**: Wireframe Annotation.
@@ -40,9 +40,9 @@ graph TD
 - **Output**: Annotated Wireframes with `<layout>`, `<tokens>`, and `<accessibility>` blocks.
 - **Next Step**: Brand Enforcement.
 
-### 4. Brand Enforcement (`northcote-brand-enforcer`)
+### 4. Brand Enforcement (`kerala-rage-brand-enforcer`)
 
-- **Purpose**: Audit wireframes against the "Northcote Curio" Five Immutable Laws.
+- **Purpose**: Audit wireframes against the "kerala-rage kr-solidarity" Five Immutable Laws.
 - **Input**: Annotated Wireframes.
 - **Output**: Brand compliance score and remediation suggestions.
 - **Next Step**: Component Specification.
@@ -61,20 +61,20 @@ graph TD
 | `design-system-doc-generator` | Design Intent Artifacts | Orchestration Tokens              | DTCG Schema               |
 | `design-token-validator`      | Raw JSON Tokens         | Validated Token Set               | WCAG 2.2 AA / Mode Parity |
 | `wireframe-annotator`         | Orchestration Tokens    | XML-Structured Wireframes         | Layout Logic              |
-| `northcote-brand-enforcer`    | Annotated Wireframes    | Compliance Audit                  | 5 Immutable Laws          |
+| `kerala-rage-brand-enforcer`    | Annotated Wireframes    | Compliance Audit                  | 5 Immutable Laws          |
 | `component-spec-generator`    | Validated Wireframes    | `src/components/[name]/README.md` | Token Resolution          |
 
 ## Usage Example
 
 To execute the full chain for a new "Job Card" component:
 
-1. **Tokens**: `Generate orchestration tokens for the Job Card based on the Northcote aesthetic.`
+1. **Tokens**: `Generate orchestration tokens for the Job Card based on the kerala-rage aesthetic.`
 2. **Validate**: `Validate the new tokens in tokens.json.`
 3. **Annotate**: `Annotate the Job Card wireframe using the new tokens.`
-4. **Enforce**: `Audit the Job Card wireframe for Northcote brand compliance.`
+4. **Enforce**: `Audit the Job Card wireframe for kerala-rage brand compliance.`
 5. **Spec**: `Generate specs for JobCard based on the annotated wireframe.`
 
 ## Integration Points
 
-- **Shared References**: Most skills use `shared-references/SKILL.md` to access the `NORTHCOTE_DESIGN_PHILOSOPHY.md` and `NORTHCOTE_FORBIDDEN_FONTS.md`.
+- **Shared References**: Most skills use `shared-references/SKILL.md` to access the `kerala-rage_DESIGN_PHILOSOPHY.md` and `kerala-rage_FORBIDDEN_FONTS.md`.
 - **Validation Gates**: Skills like `component-spec-generator` call `design-token-validator` internally to ensure no broken tokens reach production.

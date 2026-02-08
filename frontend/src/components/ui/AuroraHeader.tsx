@@ -8,7 +8,7 @@ interface AuroraHeaderProps {
 }
 
 /**
- * AuroraHeader - Northcote Curio Parametric Header
+ * AuroraHeader - kerala-rage kr-solidarity Parametric Header
  * 
  * Features:
  * - Tri-color gradient text (Wattle Gold → Waratah Red → Concrete Grey)

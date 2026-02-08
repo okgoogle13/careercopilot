@@ -49,7 +49,7 @@ export const EvidenceUploader: React.FC = () => {
 
   return (
     <Stone
-      mode="laboratory"
+      mode="kr-dark"
       className="p-0 border-2 border-dashed border-[var(--color-concrete-grey-base)]/30 bg-transparent overflow-hidden"
     >
       <div className="p-6 flex items-center gap-4">

@@ -4,13 +4,13 @@ Here’s a contemporary, single‑mode rewrite that stays true to your new palet
 
 # Design Tokens
 
-> Part of [Northcote Design System – Contemporary Australian](00-overview.md) [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/74141548/2c98fa71-c817-49f8-957d-da13857f9ca1/northcote-design-principles.md)
+> Part of [kerala-rage Design System – Contemporary Australian](00-overview.md) [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/74141548/2c98fa71-c817-49f8-957d-da13857f9ca1/kerala-rage-design-principles.md)
 
 ---
 
 ## Color Palette
 
-_Contemporary Australian street art on a dark Melbourne laneway, not a Victorian cabinet._ [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/74141548/3c4a620b-da4a-462e-bacc-412a0775f24c/01-tokens.md)
+_Contemporary Australian street art on a dark Melbourne laneway, not a kerala-streetprint cabinet._ [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/74141548/3c4a620b-da4a-462e-bacc-412a0775f24c/01-tokens.md)
 
 ### Core Tokens
 
@@ -99,7 +99,7 @@ Size and line‑height follow the Material 3 type scale defined in `tokens.json`
 
 ## Atmosphere (Replaces Dual Mode)
 
-We now use **one unified contemporary mode**, tuned by density instead of a Gallery vs Laboratory split: [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/74141548/2c98fa71-c817-49f8-957d-da13857f9ca1/northcote-design-principles.md)
+We now use **one unified contemporary mode**, tuned by density instead of a kr-dark vs kr-dark split: [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/74141548/2c98fa71-c817-49f8-957d-da13857f9ca1/kerala-rage-design-principles.md)
 
 - **High Drama**: hero sections, first‑time landing, big empty states
   - Large species silhouettes, strong contrast, bold type.
@@ -122,7 +122,7 @@ _Used when tagging/generated assets or configuring asset pipelines._ [ppl-ai-fil
 | **Translucency Bands** | `opaque`, `translucent` (40–60%), `diaphanous` (60–80%)          |
 | **Scale Hierarchy**    | `primary` (hero), `secondary` (supporting), `tertiary` (texture) |
 
-Values mirror your earlier scheme but shift the language away from “specimen” toward **living subjects**.
+Values mirror your earlier scheme but shift the language away from “kr-motif” toward **living subjects**.
 
 ---
 

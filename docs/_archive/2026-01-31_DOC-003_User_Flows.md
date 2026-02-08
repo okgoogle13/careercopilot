@@ -1,7 +1,7 @@
 # DOC-003: User Flows ("The Expedition")
 
 **Document ID:** DOC-003-FLOWS
-**Version:** 2.0 (Northcote Curio Edition)
+**Version:** 2.0 (kerala-rage kr-solidarity Edition)
 **Status:** DEFINITIVE
 **Context:** The maps for the explorer's journey through the Field Station.
 
@@ -12,12 +12,12 @@
 *From darkness into the Conservatory.*
 
 ### Step 1: The Arrival
-*   **Scene:** Landing Page (Mode A: Gallery).
-*   **Action:** User is greeted by the "Kookaburra Sentry" and the "Wattle Gold" primary CTA.
+*   **Scene:** Landing Page (Mode A: kr-dark).
+*   **Action:** User is greeted by the "kr-shiva Sentry" and the "Wattle Gold" primary CTA.
 *   **Vibe:** Awe, Invitation. "Unlock your career's natural history."
 
-### Step 2: The Specimen Collection
-*   **Scene:** Ingestion Viewer (Mode B: Laboratory).
+### Step 2: The kr-motif Collection
+*   **Scene:** Ingestion Viewer (Mode B: kr-dark).
 *   **Action:** User drops their resume onto the "Glass Slide" (Upload Zone).
 *   **Feedback:** The file resonates (gentle pulse). A "Brass Caliper" loading animation measures the file size.
 *   **Outcome:** Resume is stored, and the raw extraction begins.
@@ -29,7 +29,7 @@
 *Detailed study under the inspection lamp.*
 
 ### Step 1: The Workbench
-*   **Scene:** Analysis Dashboard (Mode B: Laboratory).
+*   **Scene:** Analysis Dashboard (Mode B: kr-dark).
 *   **Action:** User activates "The Inspection" (Button: `radius-pebble`, Wattle Gold).
 *   **Vibe:** Clinical, Precise. The "No Flowers" rule is in effect. Monoline icons only.
 
@@ -47,11 +47,11 @@
 *Taking the seed out into the world.*
 
 ### Step 1: The Opportunity Field
-*   **Scene:** Opportunity Feed (Mode A: Gallery).
+*   **Scene:** Opportunity Feed (Mode A: kr-dark).
 *   **Vibe:** Lush, "Wild Growth." Job cards look like "Botanical Plates" (Tech Cards).
 *   **Action:** User filters by "Sunlight" (Salary) or "Soil Type" (Technology).
 
 ### Step 2: The Tailoring
 *   **Scene:** Application Editor (Hybrid Mode).
-*   **Action:** User modifies their bio-specimen to fit a specific niche.
-*   **Goal:** Create a "Perfect Specimen" for export.
+*   **Action:** User modifies their bio-kr-motif to fit a specific niche.
+*   **Goal:** Create a "Perfect kr-motif" for export.

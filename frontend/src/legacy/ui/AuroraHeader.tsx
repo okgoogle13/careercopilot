@@ -9,14 +9,14 @@ interface AuroraHeaderProps {
 }
 
 /**
- * AuroraHeader - Northcote Curio Parametric Header
+ * AuroraHeader - kerala-rage kr-solidarity Parametric Header
  * 
  * Features:
  * - Tri-color gradient text (Wattle Gold → Waratah Red → Concrete Grey)
  * - Shimmer animation on hover
  * - Variable font axis animation (Fraunces 'SOFT' and 'WONK')
  * - Optional tag and witty subtitle
- * - Dual-mode support (Gallery/Laboratory)
+ * - Dual-mode support (kr-dark/kr-dark)
  * 
  * Typography: Fraunces (The Bloom) with parametric axes
  * 
@@ -62,7 +62,7 @@ export const AuroraHeader: React.FC<AuroraHeaderProps> = ({
                 <motion.span
                     className="bg-clip-text text-transparent"
                     style={{
-                        backgroundImage: mode === 'gallery'
+                        backgroundImage: mode === 'kr-dark'
                             ? 'linear-gradient(135deg, var(--color-primary-wattle-gold) 0%, var(--color-tertiary-waratah-red) 50%, var(--color-secondary-concrete-grey) 100%)'
                             : 'linear-gradient(135deg, var(--color-primary-wattle-gold) 0%, var(--color-status-alert) 50%, var(--color-status-neutral) 100%)',
                         backgroundSize: '200% 200%',
@@ -70,8 +70,8 @@ export const AuroraHeader: React.FC<AuroraHeaderProps> = ({
                     animate={{
                         backgroundPosition: isHovered ? ['0% 50%', '100% 50%'] : '0% 50%',
                         fontVariationSettings: isHovered
-                            ? (mode === 'gallery' ? "'wght' 750, 'SOFT' 80, 'WONK' 1" : "'wght' 600, 'SOFT' 30, 'WONK' 0")
-                            : (mode === 'gallery' ? "'wght' 700, 'SOFT' 50, 'WONK' 1" : "'wght' 500, 'SOFT' 20, 'WONK' 0"),
+                            ? (mode === 'kr-dark' ? "'wght' 750, 'SOFT' 80, 'WONK' 1" : "'wght' 600, 'SOFT' 30, 'WONK' 0")
+                            : (mode === 'kr-dark' ? "'wght' 700, 'SOFT' 50, 'WONK' 1" : "'wght' 500, 'SOFT' 20, 'WONK' 0"),
                     }}
                     transition={{
                         backgroundPosition: {
@@ -94,11 +94,11 @@ export const AuroraHeader: React.FC<AuroraHeaderProps> = ({
             {wittySubtitle && (
                 <motion.p
                     initial={{ opacity: 0, rotate: -2 }}
-                    animate={{ opacity: 1, rotate: mode === 'gallery' ? -1 : 0 }}
+                    animate={{ opacity: 1, rotate: mode === 'kr-dark' ? -1 : 0 }}
                     transition={{ duration: 0.5, delay: 0.3 }}
                     className="text-lg md:text-xl italic font-bloom text-tertiary-waratah-red"
                     style={{
-                        fontVariationSettings: mode === 'gallery'
+                        fontVariationSettings: mode === 'kr-dark'
                             ? "'wght' 400, 'SOFT' 100, 'WONK' 1"
                             : "'wght' 400, 'SOFT' 30, 'WONK' 0",
                     }}

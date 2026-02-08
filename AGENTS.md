@@ -69,7 +69,7 @@ cd frontend && npx playwright test
 
 ### Design System
 
-- **Name**: Northcote – Contemporary Australian Design System
+- **Name**: kerala-rage – Contemporary Australian Design System
 - **Foundation**: Material 3 Expressive, dark theme by default
 - **Palette**:
   - Background/surface: Asphalt Black `#1A1714`
@@ -80,12 +80,12 @@ cd frontend && npx playwright test
   - Growth accents: Gum Leaf Green `#6B7F6E`
 - **Tokens**:
   - Source of truth: `design-system/tokens.json`
-  - CSS variables: `design-system/northcote.css`
+  - CSS variables: `design-system/kerala-rage.css`
   - All UI must use these tokens; no hardcoded hex values
 - **Aesthetic**:
   - Contemporary Australian, Peter Drew street art influence
   - Australian endemic species as living, present-day symbols
-  - Explicitly avoid Victorian specimen plates, museum-cabinet framing, or colonial nostalgia
+  - Explicitly avoid kerala-streetprint kr-motif plates, museum-cabinet framing, or colonial nostalgia
 - **Target Users**: Transitioning to social work, community services, government/nonprofit roles
 
 ## Key Technologies
@@ -97,8 +97,8 @@ cd frontend && npx playwright test
 | LLM – Complex Analysis | Gemini 1.5 Pro                                   | Company research, multi-step workflows, QA                 |
 | Document Parsing       | Langextract                                      | Structured resume/document extraction                      |
 | Backend API            | FastAPI                                          | Type safety, async-first, auto OpenAPI docs                |
-| Frontend               | React 18 + TS                                    | Component-driven, strict typing, Northcote design tokens   |
-| Design System          | Northcote Contemporary Australian                | Material 3 Expressive, dark UI, Australian endemic palette |
+| Frontend               | React 18 + TS                                    | Component-driven, strict typing, kerala-rage design tokens   |
+| Design System          | kerala-rage Contemporary Australian                | Material 3 Expressive, dark UI, Australian endemic palette |
 | State Management       | Zustand                                          | Lightweight, no boilerplate                                |
 | Data Fetching          | TanStack Query                                   | Server state, caching, sync                                |
 | Data Persistence       | Firestore                                        | Real-time, Firebase auth integration                       |
@@ -123,7 +123,7 @@ backend/
 
 frontend/
 ├── src/
-│   ├── components/                # React components (Northcote Curio compliant)
+│   ├── components/                # React components (kerala-rage kr-solidarity compliant)
 │   │   ├── DocumentGeneration/    # Resume/cover letter generation UI
 │   │   ├── AtsAnalyzer/           # ATS scoring interface
 │   │   ├── ProfileForm/           # User profile input
@@ -135,7 +135,7 @@ frontend/
 │   └── tests/                     # Jest, Playwright e2e tests
 
 design-system/
-└── tokens.json                    # Northcote Curio design tokens (colors, typography, spacing)
+└── tokens.json                    # kerala-rage kr-solidarity design tokens (colors, typography, spacing)
 ```
 
 ## Standards & Patterns
@@ -151,7 +151,7 @@ design-system/
 - ✅ Include confidence scores (0-1) and error details in all AI responses
 - ✅ Use async/await in FastAPI endpoints and Genkit flows
 - ✅ Use TypeScript strict mode (`tsconfig.json: "strict": true`)
-- ✅ Apply Northcote Curio design tokens for all UI (no hardcoded colors)
+- ✅ Apply kerala-rage kr-solidarity design tokens for all UI (no hardcoded colors)
 - ✅ Validate all AI agent inputs before processing
 - ✅ Test AI agents with sample user data before deployment
 - ✅ Use environment variables for API keys, model configs, and secrets
@@ -167,7 +167,7 @@ design-system/
 - ❌ Do NOT store sensitive user data in client-side Zustand state
 - ❌ Do NOT query Firestore directly from React components (use API layer only)
 - ❌ Do NOT commit sensitive files (`.env.local`, API credentials)
-- ❌ Do NOT use Inter, Roboto, or Arial fonts (use Fraunces, Caveat, Work Sans from Northcote)
+- ❌ Do NOT use Inter, Roboto, or Arial fonts (use Fraunces, Caveat, Work Sans from kerala-rage)
 
 ## Git Workflow & Safety Boundaries
 
@@ -222,7 +222,7 @@ Use MCP servers to keep context small, reduce latency, and avoid heavy local par
 **Primary MCP servers used in this repo:**
 
 - **flash-sidekick**: fast analysis over large code/data, batching, and search grounding.
-- **design-system-sidekick**: Northcote Curio design validation, token extraction, and visual compliance checks.
+- **design-system-sidekick**: kerala-rage kr-solidarity design validation, token extraction, and visual compliance checks.
 - **docker** (when enabled): containerized checks or reproductions that must run in Docker.
 - **playwright** (when enabled): UI verification and browser-based checks.
 
@@ -254,9 +254,9 @@ elif task == "git_history":
 
 ### Design System Sidekick Routing
 
-Use **design-system-sidekick** whenever a task requires **visual validation**, **token extraction**, or **Northcote Curio compliance**. This includes:
+Use **design-system-sidekick** whenever a task requires **visual validation**, **token extraction**, or **kerala-rage kr-solidarity compliance**. This includes:
 
-- Validating newly generated assets (e.g., wallpaper, motifs, specimens).
+- Validating newly generated assets (e.g., wallpaper, motifs, kr-motifs).
 - Checking a UI screenshot for palette, density, or typographic compliance.
 - Extracting or comparing design tokens from visuals.
 - Suggesting prompt refinements for asset regeneration.
@@ -414,7 +414,7 @@ See [backend/app/agents/document_generator.py](backend/app/agents/document_gener
 
 See [backend/app/api/endpoints/resumes.py](backend/app/api/endpoints/resumes.py). Async FastAPI endpoint calling Genkit flow, input validation, response serialization.
 
-### Good: React Component with Northcote Tokens
+### Good: React Component with kerala-rage Tokens
 
 See [frontend/src/components/DocumentGeneration/DocumentGeneration.tsx](frontend/src/components/DocumentGeneration/DocumentGeneration.tsx). Uses design tokens, no hardcoded colors, TypeScript strict mode, integrates TanStack Query.
 
@@ -483,7 +483,7 @@ Include timing in agent metadata for monitoring.
 - [ ] Tests pass: `cd frontend && yarn test` and `cd backend && pytest`
 - [ ] Type check passes: `yarn type-check` and `mypy backend/`
 - [ ] Linting passes: `yarn lint` and `ruff check backend/`
-- [ ] Code follows Northcote design system (if UI changes)
+- [ ] Code follows kerala-rage design system (if UI changes)
 - [ ] AI agent I/O matches documented contracts
 - [ ] No secrets committed (check `.gitignore`)
 - [ ] Commit message format: `feat(scope): description` or `fix(scope): description`
@@ -542,7 +542,7 @@ Key document requirements:
 - **Formatter**: Prettier (configured in `.prettierrc`)
 - **Linter**: ESLint with TypeScript parser
 - **Component style**: Functional components with hooks
-- **Styling**: Tailwind CSS with Northcote Curio design tokens only (no hardcoded colors)
+- **Styling**: Tailwind CSS with kerala-rage kr-solidarity design tokens only (no hardcoded colors)
 - **State management**: Zustand for global state, TanStack Query for server state
 - **File naming**: PascalCase for components, camelCase for utilities
 

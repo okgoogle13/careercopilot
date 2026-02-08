@@ -1,4 +1,4 @@
-# Weekly Status Tracker (Northcote Curio Migration)
+# Weekly Status Tracker (kerala-rage kr-solidarity Migration)
 
 ## Gate 1 Components
 
@@ -22,7 +22,7 @@
 
 ## Phase 3: Page Consolidation
 
-| Page | Status | MUI Dependency | Curio Adoption |
+| Page | Status | MUI Dependency | kr-solidarity Adoption |
 |------|--------|----------------|----------------|
 | **AnalysisPage** | 🟡 Mixed | High | Moderate |
 | **JobQueue** | 🟡 Mixed | Moderate | Low |

@@ -26,8 +26,8 @@ Eliminates manual prompt construction. Loads pattern library → applies templat
   "asset_type": "pattern_tile",
   "resolution": "512x512",
   "mode": "Solidarity",
-  "specimens": ["Eucalyptus", "Wattle", "Banksia", "Gum nuts"],
-  "primary_focus": "Botanical only (no fauna)",
+  "kr-motifs": ["kr-leafus", "Wattle", "kr-flower", "Gum nuts"],
+  "primary_focus": "Botanical only (no kr-symbol)",
   "special_requirements": ["Seamless tiling", "Edge-matching critical"],
   "previous_attempt": {
     "score": 85,
@@ -38,7 +38,7 @@ Eliminates manual prompt construction. Loads pattern library → applies templat
 
 ## Pattern Library Integration
 
-Loads validated patterns from `/docs/northcote-asset-generation-patterns.md`:
+Loads validated patterns from `/docs/kerala-rage-asset-generation-patterns.md`:
 
 **Pattern 1: Production Intent**
 
@@ -51,9 +51,9 @@ PRODUCTION ASSET: Not concept exploration—final deliverable
 **Pattern 2: Geographic Authenticity**
 
 ```
-ENDEMIC TEST: Every specimen must answer "Did this organism challenge European taxonomy?"
-AUSTRALIAN ONLY: NO European fauna, generic specimens, northern hemisphere species
-MANDATORY CHECK: [List specimens] → validate against Australian Flora/Fauna Database
+ENDEMIC TEST: Every kr-motif must answer "Did this organism challenge European taxonomy?"
+AUSTRALIAN ONLY: NO European kr-symbol, generic kr-motifs, northern hemisphere species
+MANDATORY CHECK: [List kr-motifs] → validate against Australian Flora/kr-symbol Database
 ```
 
 **Pattern 3: Translucency Tiers**
@@ -68,7 +68,7 @@ SYNTAX: "[X-Y% light-transmissive] + [what visible through material]"
 **Pattern 4: Negative Constraints**
 
 ```
-For each specimen: "This is NOT [misinterpretation]"
+For each kr-motif: "This is NOT [misinterpretation]"
 Echidna: NOT full animal body, NOT cute portrait
 Spider: NOT live crawling, NOT opaque solid
 Frill-neck: NOT standing lizard, NOT profile view
@@ -105,30 +105,30 @@ FORMAT: "Fig. X. Scientific name (Common name)"
 From Asset 1 (91/100): [Applicable patterns]
 From Asset 2 (94/100): [Applicable patterns]
 
-## SECTION 3: SPECIMEN INVENTORY WITH NEGATIVE CONSTRAINTS
+## SECTION 3: kr-motif INVENTORY WITH NEGATIVE CONSTRAINTS
 
 PRIMARY (13-18cm):
 
-- [Specimen name]: [Description] | NOT [misinterpretation]
+- [kr-motif name]: [Description] | NOT [misinterpretation]
 
 SECONDARY (8-12cm):
 
-- [Specimen name]: [Description] | NOT [misinterpretation]
+- [kr-motif name]: [Description] | NOT [misinterpretation]
 
 TERTIARY (2-8cm):
 
-- [Specimen name]: [Description] | NOT [misinterpretation]
+- [kr-motif name]: [Description] | NOT [misinterpretation]
 
 GEOGRAPHIC AUTHENTICITY TEST:
-✓ [Specimen]: Challenged European taxonomy via [reason]
-✓ [Specimen]: Australian endemic, [taxonomic significance]
+✓ [kr-motif]: Challenged European taxonomy via [reason]
+✓ [kr-motif]: Australian endemic, [taxonomic significance]
 
 ## SECTION 4: TRANSLUCENCY PHYSICS (if applicable)
 
-[Only if specimens require transmission]
+[Only if kr-motifs require transmission]
 
-- [Specimen]: [Tier X] [X-Y% light-transmissive]
-  What visible through: [botanical elements, background, other specimens]
+- [kr-motif]: [Tier X] [X-Y% light-transmissive]
+  What visible through: [botanical elements, background, other kr-motifs]
 
 ## SECTION 5: DENSITY ZONES WITH SAFETY MARGINS
 
@@ -141,7 +141,7 @@ Central: 60-80% Wunderkammer organic composition
 Count: 5-6 labels maximum
 Font: Crimson Text serif
 Color: Cream #F5F0E8 at 85% opacity
-Format: "Fig. 1. Eucalyptus camaldulensis (River Red Gum)"
+Format: "Fig. 1. kr-leafus camaldulensis (River Red Gum)"
 
 ## SECTION 7: TECHNICAL OUTPUT
 
@@ -171,7 +171,7 @@ CRITICAL FIXES:
 2. Query pattern library for applicable patterns
 3. If `asset_type == "pattern_tile"` → add seamless tiling spec
 4. **Single Mode**: Always apply "Solidarity" aesthetic overrides.
-5. Map specimens → taxonomic significance database
+5. Map kr-motifs → taxonomic significance database
 6. Generate negative constraints from common failures
 7. If `previous_attempt` exists → prepend corrections section
 8. Format as structured prompt
@@ -181,7 +181,7 @@ CRITICAL FIXES:
 
 **Flash-Sidekick:**
 
-- Call `consult_pro` with specimen list → validate endemic status
+- Call `consult_pro` with kr-motif list → validate endemic status
 - Call `analyze_code_quality` on draft prompt → identify vague language
 
 **Auto-Validator:**
@@ -203,10 +203,10 @@ Remove verbose explanations. Use shorthand:
 
 ```
 DENSE (efficient):
-"Eucalyptus: 60% transmission, veins visible through leaf tissue"
+"kr-leafus: 60% transmission, veins visible through leaf tissue"
 
 VERBOSE (wasteful):
-"The eucalyptus leaves should demonstrate approximately 60% light transmission, wherein the vein architecture becomes visible when light passes through the leaf tissue, creating an effect of botanical translucency"
+"The kr-leafus leaves should demonstrate approximately 60% light transmission, wherein the vein architecture becomes visible when light passes through the leaf tissue, creating an effect of botanical translucency"
 ```
 
 Target: 1200-1500 tokens per prompt (25-40% reduction)
@@ -219,7 +219,7 @@ prompt = prompt_composer.generate(
     asset_name="Nocturnal Canopy Pattern",
     specs={
         "resolution": "512x512",
-        "specimens": ["Eucalyptus", "Wattle", "Banksia"],
+        "kr-motifs": ["kr-leafus", "Wattle", "kr-flower"],
         "special": ["seamless_tile"]
     },
     previous_attempt={

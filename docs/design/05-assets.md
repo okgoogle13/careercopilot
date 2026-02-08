@@ -1,6 +1,6 @@
-# Northcote Assets – Simple Registry
+# kerala-rage Assets – Simple Registry
 
-> Part of [Northcote Design System – Contemporary Australian](00-overview.md)
+> Part of [kerala-rage Design System – Contemporary Australian](00-overview.md)
 
 ---
 
@@ -23,7 +23,7 @@ All assets must:
   - Concrete Grey `#A39B8F`
   - Gum Leaf Green `#6B7F6E`
 - Follow the species prompt system in `image-generator-prompt.md`.
-- Feel contemporary and living (no museum/specimen/cabinet framing).
+- Feel contemporary and living (no museum/kr-motif/cabinet framing).
 
 ---
 

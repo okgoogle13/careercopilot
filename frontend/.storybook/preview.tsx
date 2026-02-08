@@ -3,7 +3,7 @@ import type { Preview } from '@storybook/react';
 import { BrowserRouter } from 'react-router-dom';
 import { AuthProvider } from '../src/context/AuthContext';
 import '../src/index.css';
-import '../src/theme/northcote.css';
+import '../src/theme/kerala-rage.css';
 
 const preview: Preview = {
   parameters: {

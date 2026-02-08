@@ -4,7 +4,7 @@ Here’s a contemporary, single‑mode rewrite for your typography doc that matc
 
 # Typography
 
-> Part of [Northcote Design System – Contemporary Australian](00-overview.md) [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/74141548/2c98fa71-c817-49f8-957d-da13857f9ca1/northcote-design-principles.md)
+> Part of [kerala-rage Design System – Contemporary Australian](00-overview.md) [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/74141548/2c98fa71-c817-49f8-957d-da13857f9ca1/kerala-rage-design-principles.md)
 
 ---
 
@@ -19,7 +19,7 @@ _A marriage of street poster impact and clear, modern UI._ [ppl-ai-file-upload.s
 | **Body**    | Plus Jakarta Sans Variable     | Body text, forms, UI elements  |
 | **Data**    | JetBrains Mono                 | Scores, code, technical labels |
 
-- **Sora Variable** carries the Peter Drew poster energy with extreme weight range (100-800) for dramatic contrast. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/74141548/2c98fa71-c817-49f8-957d-da13857f9ca1/northcote-design-principles.md)
+- **Sora Variable** carries the Peter Drew poster energy with extreme weight range (100-800) for dramatic contrast. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/74141548/2c98fa71-c817-49f8-957d-da13857f9ca1/kerala-rage-design-principles.md)
 - **Plus Jakarta Sans Variable** is the M3 Expressive workhorse (200-800) for modern, professional typography with extreme weight versatility.
 - **JetBrains Mono** anchors anything numeric, structured, or "machine‑like." [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/74141548/03227b1a-986b-47ff-8d23-86257e7e16b8/02-typography.md)
 
@@ -229,7 +229,7 @@ Aim for at least a **3–4× size ratio** between hero title and supporting line
   line-height: 1.5;
 }
 
-/* Size ratio: 57/16 = 3.5x — Bold without going full Victorian broadsheet */
+/* Size ratio: 57/16 = 3.5x — Bold without going full kerala-streetprint broadsheet */
 ```
 
 ---

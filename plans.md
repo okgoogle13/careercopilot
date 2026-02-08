@@ -12,7 +12,7 @@ Career Copilot architectural planning guide for AI agents and developers. This d
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│ Frontend Layer (React 18 + TypeScript + Northcote Curio)        │
+│ Frontend Layer (React 18 + TypeScript + kerala-rage kr-solidarity)        │
 │ ├─ Components: DocumentGeneration, AtsAnalyzer, ProfileForm    │
 │ ├─ State: Zustand (global) + TanStack Query (server)           │
 │ └─ Styling: Tailwind v4 + design tokens                        │
@@ -58,7 +58,7 @@ Career Copilot architectural planning guide for AI agents and developers. This d
 | **Data Persistence**   | Firestore            | Real-time updates, Firebase auth integration, scalability  | PostgreSQL, MongoDB      |
 | **File Storage**       | Cloud Storage        | Native Firebase integration, resume versioning             | S3, local filesystem     |
 | **Hosting**            | Cloud Run + Firebase | Managed, serverless, automatic scaling, cost-effective     | EC2, Heroku, Railway     |
-| **Design System**      | Northcote Curio      | Distinctive, botanical aesthetic, M3 compliant             | Material Design, Shadcn  |
+| **Design System**      | kerala-rage kr-solidarity      | Distinctive, botanical aesthetic, M3 compliant             | Material Design, Shadcn  |
 
 ---
 
@@ -462,7 +462,7 @@ service cloud.firestore {
 1. **Ship incrementally** – Small PRs, frequent deploys, early user feedback
 2. **Bias toward Flash** – Default to cheaper, faster model; escalate only when needed
 3. **User data first** – Privacy by design, minimal collection, explicit consent
-4. **Northcote identity** – Distinctive design, not generic Bootstrap/Material
+4. **kerala-rage identity** – Distinctive design, not generic Bootstrap/Material
 5. **Test everything** – Unit tests, integration tests, e2e tests before merge
 6. **Document decisions** – Why, not just what; update this file as you learn
 7. **Token-efficient AI** – Default to Flash Sidekick for bulk operations. Never read 500+ line files directly. Batch multi-file analysis. Session budget: 150K tokens.
@@ -571,15 +571,15 @@ if not profile:
 
 ## Decision Log
 
-### Why Northcote Curio over Material Design 3?
+### Why kerala-rage kr-solidarity over Material Design 3?
 
 **Date**: 2025-10-15
-**Decision**: Use Northcote Curio (botanical aesthetic) over Material Design 3
+**Decision**: Use kerala-rage kr-solidarity (botanical aesthetic) over Material Design 3
 **Rationale**:
 
 - Distinctive brand identity (not generic Material)
 - Australian botanical palette aligns with community services ethos
-- Supports dual modes (Gallery for users, Laboratory for tools)
+- Supports dual modes (kr-dark for users, kr-dark for tools)
 - Justifiable to users: "Designed with care, not automation"
 
 **Alternative Rejected**: Material Design 3 (too common, no memorable brand)

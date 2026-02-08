@@ -20,7 +20,7 @@ export interface SeedProps {
 }
 
 /**
- * M3Badge - Northcote Curio Notification Badge
+ * M3Badge - kerala-rage kr-solidarity Notification Badge
  *
  * An organic badge overlay for icons and components.
  */

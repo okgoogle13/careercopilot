@@ -110,7 +110,7 @@ Quick reference for which doc to read based on your task.
 | Why did we choose X over Y? | `PLANS.md` Decision Log |
 | What are common gotchas? | `PLANS.md` Known Constraints & Gotchas |
 | How do I debug Firestore issues? | `PLANS.md` Debugging & Troubleshooting Guide |
-| What's the design system? | `agents.md` Standards & Patterns (Northcote) |
+| What's the design system? | `agents.md` Standards & Patterns (kerala-rage) |
 | How do I structure components? | `agents.md` Code Examples + `PLANS.md` Data Models |
 
 ---
@@ -171,8 +171,8 @@ See `agents.md` Quick Commands for full reference.
 ### Q: How do I access the Firebase emulator?
 **A**: Run `firebase emulators:start`. Then set `FIREBASE_EMULATOR_HOST=localhost:8080` in `.env.local`.
 
-### Q: What's the Northcote Curio design system?
-**A**: Custom design system with botanical aesthetic (Australian palette, Victorian craftsmanship). See `agents.md` Standards & Patterns and `design-system/tokens.json`.
+### Q: What's the kerala-rage kr-solidarity design system?
+**A**: Custom design system with botanical aesthetic (Australian palette, kerala-streetprint craftsmanship). See `agents.md` Standards & Patterns and `design-system/tokens.json`.
 
 ### Q: Can I use Redux instead of Zustand?
 **A**: No. Zustand is the standard. It's simpler and sufficient for our needs. See `PLANS.md` Decision Log for rationale.

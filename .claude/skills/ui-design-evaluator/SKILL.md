@@ -1,25 +1,25 @@
 ---
 name: ui-design-evaluator
-description: Evaluate design assets, analyze annotated wireframes, and create high-fidelity interactive mockups with Kerala Rage compliance. Use when evaluating designs, analyzing wireframes, creating mockups from annotations, scoring design system compliance, or generating interactive prototypes. Supports only Single Mode: Solidarity.
+description: Evaluate design assets, analyze annotated wireframes, and create high-fidelity interactive mockups with kerala-rage kr-solidarity V3.1 compliance. Use when evaluating designs, analyzing wireframes, creating mockups from annotations, scoring design system compliance, or generating interactive prototypes. Supports kr-dark (expressive, warm) and kr-dark (restrained, cool) modes.
 version: 1.0.0
-tags: []
+tags: [design, research, ui, ux, kerala-rage-kr-solidarity]
 ---
 
 # UI Design Evaluator & Mockup Creator
 
 **Version:** 1.0
 **Purpose:** Design evaluation, wireframe analysis, and high-fidelity mockup generation
-**Design System:** Northcote Curio V3.1 (Victorian Naturalist Field Station)
+**Design System:** kerala-rage kr-solidarity V3.1 (kerala-streetprint Naturalist Field Station)
 
 ---
 
 ## Purpose
 
-Evaluate design assets, analyze annotated wireframes, and create high-fidelity interactive mockups with Northcote Curio V3.1 compliance.
+Evaluate design assets, analyze annotated wireframes, and create high-fidelity interactive mockups with kerala-rage kr-solidarity V3.1 compliance.
 
 This skill enables comprehensive UI design workflows:
 
-1. **Evaluate** existing designs against Northcote Curio V3.1 standards
+1. **Evaluate** existing designs against kerala-rage kr-solidarity V3.1 standards
 2. **Analyze** annotated wireframes to extract components and flows
 3. **Design** high-fidelity mockups with design token compliance
 4. **Deliver** interactive prototypes, React components, and evaluation reports
@@ -28,7 +28,7 @@ This skill enables comprehensive UI design workflows:
 
 ## When to Use
 
-- When evaluating existing designs against Northcote Curio standards.
+- When evaluating existing designs against kerala-rage kr-solidarity standards.
 - When creating high-fidelity mockups from annotated wireframes.
 - When scoring design system compliance (400-point system).
 - When generating interactive prototypes or React component specifications.
@@ -57,7 +57,7 @@ INPUT → ANALYZE → EVALUATE → DESIGN → DELIVER
 - Parse annotations and notes
 - Identify components needed (buttons, cards, forms, etc.)
 - Map user flows and interactions
-- Determine Gallery vs Laboratory mode
+- Determine kr-dark vs kr-dark mode
 - Extract content hierarchy
 - Note accessibility requirements
 
@@ -65,12 +65,12 @@ INPUT → ANALYZE → EVALUATE → DESIGN → DELIVER
 
 **Score Against 4 Criteria (400 points total):**
 
-**A. Northcote Curio V3.1 Compliance (100 pts)**
+**A. kerala-rage kr-solidarity V3.1 Compliance (100 pts)**
 
 - ✅ Uses Federation Typography Stack (Curator, Proclamation, Bloom, Field Note, Annotation)
 - ✅ Asymmetric organic shapes (no uniform border-radius)
-- ✅ Botanical color palette (Wattle Gold,- Determine Single Mode adherence
-- ✅ Mode-appropriate (Solidarity)
+- ✅ Botanical color palette (Wattle Gold, Waratah Red, kr-leafus Smoke)
+- ✅ Mode-appropriate (kr-dark vs kr-dark)
 - ✅ V3.1 playful mixing
 - ❌ Anti-Slop violations (Inter/Roboto, purple gradients, uniform corners)
 
@@ -114,13 +114,12 @@ INPUT → ANALYZE → EVALUATE → DESIGN → DELIVER
 
 **Step 1: Mode Selection**
 
-- **Solidarity Mode**: Heavy weights, high contrast, Waratah Red/Baru Gold.
-- **Gallery Mode**: ABOLISHED.
-- **Laboratory Mode**: ABOLISHED.aphy
+- **kr-dark Mode:** Expressive, warm, cursive allowed, extreme Fraunces.
+- **kr-dark Mode:** Restrained, cool, no cursive, clean typography.
 
 **Step 2: Component Mapping**
 
-- Map wireframe elements to Northcote components
+- Map wireframe elements to kerala-rage components
 - Apply design tokens automatically
 - Use Federation Typography Stack
 - Apply asymmetric organic shapes
@@ -165,7 +164,7 @@ INPUT → ANALYZE → EVALUATE → DESIGN → DELIVER
 ```markdown
 ## Design Evaluation Report
 
-- Northcote Curio V3.1 Compliance: 95/100 (A)
+- kerala-rage kr-solidarity V3.1 Compliance: 95/100 (A)
 - Accessibility: 88/100 (B)
 - User Flow Logic: 92/100 (A)
 - Visual Hierarchy: 90/100 (A)
@@ -188,12 +187,12 @@ INPUT → ANALYZE → EVALUATE → DESIGN → DELIVER
 ```markdown
 ## Components Required
 
-1. HeroSection
+1. HeroSection (kr-dark mode)
    - Cursive + Serif mix hero
    - Botanical wallpaper background
    - CTA buttons with Wattle Gold
 
-2. MetricCard
+2. MetricCard (kr-dark mode)
    - Clean typography (Work Sans)
    - Asymmetric radius (pebble shape)
    - Restrained color palette
@@ -225,11 +224,16 @@ background: var(--nc-asphalt-black-300);
 
 ```css
 /* Wireframe: "large heading" */
+/* kr-dark: */
 font-family: var(--nc-font-bloom);
 font-variation-settings:
   "SOFT" 100,
   "WONK" 1,
   "wght" 800;
+
+/* kr-dark: */
+font-family: var(--nc-font-field-note);
+font-weight: 700;
 ```
 
 **Shapes:**
@@ -237,7 +241,7 @@ font-variation-settings:
 ```css
 /* Wireframe: "card" */
 /* Maps to: */
-border-radius: 32px 8px 28px 12px; /* specimen shape */
+border-radius: 32px 8px 28px 12px; /* kr-motif shape */
 
 /* Wireframe: "button" */
 /* Maps to: */
@@ -264,6 +268,7 @@ Create a landing page hero section with:
 - Subheadline with cursive accent
 - Two CTA buttons (primary + secondary)
 - Background: botanical wallpaper
+- Mode: kr-dark (expressive)
 ```
 
 **Output:** Interactive HTML hero with cursive+serif mix, wallpaper background, Wattle Gold CTAs
@@ -277,6 +282,7 @@ Create a landing page hero section with:
 - "This should be more expressive" (pointing to header)
 - "Use organic shapes" (pointing to cards)
 - "Add cursive accent here" (pointing to subtitle)
+- Mode: kr-dark
 ```
 
 **Process:**
@@ -296,51 +302,88 @@ Dashboard page needs:
 2. 4x MetricCard showing KPIs
 3. ChartPane with data visualization
 4. ActionButton for primary action
+
+Mode: kr-dark (data-focused)
 ```
 
 **Output:**
 
 - Interactive dashboard mockup
 - 4 separate React components
+- kr-dark mode styling (restrained, clean)
 - Evaluation report with accessibility score
 
 ---
 
-## 🎭 Solidarity Mode
+## 🎭 kr-dark vs kr-dark Mode
 
-### Solidarity Mode (Heavy, High-Contrast)
+### kr-dark Mode (Expressive, Warm)
 
 **Typography:**
 
-- ✅ Inter Display Black (900) for headlines
-- ✅ Inter Regular for body text
-- ✅ Strong typographic hierarchy
-- ✅ Emphasis on readability and impact
+- ✅ Caveat cursive for hero/annotations
+- ✅ Extreme Fraunces (SOFT=100, WONK=1, wght=900)
+- ✅ Playful mixing utilities
+- ✅ Shadow layering, weight contrast, rotation
 
 **Colors:**
 
-- Charcoal (#1A1714) for backgrounds and primary text
-- Waratah Red (#F14714) for accents and primary actions
-- Baru Gold (#DAF674) for secondary accents and highlights
-- High contrast ratios for accessibility
+- Full botanical palette (Wattle Gold, Waratah Red)
+- High contrast and emotional
+- Glowing accents
 
 **Shapes:**
 
-- Torn edges and organic asymmetry
-- Bold, impactful forms
-- Emphasis on unique, non-uniform shapes
+- Maximum organic asymmetry
+- Dramatic radius variations
+- Botanical-inspired forms
 
 **Motion:**
 
-- Spring physics with viscous fluidity
-- Deliberate, weighty transitions
-- Subtle, impactful animations
+- Framer Motion physics
+- Variable font axis animations
+- Viscous breeze easing
 
 **Wallpaper:**
 
 - Full visibility (0.65-0.85 opacity)
 - Parallax effects
 - Hot zones typography positioning
+
+---
+
+### kr-dark Mode (Restrained, Cool)
+
+**Typography:**
+
+- ❌ NO cursive (ever)
+- Restrained Fraunces (SOFT=20, WONK=0)
+- Work Sans sans-serif primary
+- JetBrains Mono for data
+
+**Colors:**
+
+- Muted kr-leaf smoke palette
+- Low contrast and clinical
+- Minimal gold accents
+
+**Shapes:**
+
+- Subtle asymmetry
+- Functional organic shapes
+- Grid-aligned layouts
+
+**Motion:**
+
+- Minimal animations
+- Fast, efficient transitions
+- No playful physics
+
+**Wallpaper:**
+
+- Barely visible (0.05 opacity)
+- Heavily desaturated
+- Functional background only
 
 ---
 
@@ -354,12 +397,13 @@ Before delivering a mockup, verify:
 - [ ] All shapes are asymmetric (no uniform border-radius)
 - [ ] Colors from botanical palette
 - [ ] Motion uses viscous breeze easing
+- [ ] Mode-appropriate styling (kr-dark vs kr-dark)
 
 ### V3.1 Typography
 
 - [ ] 5 fonts properly used (Curator, Proclamation, Bloom, Field Note, Annotation)
-- [ ] Cursive used appropriately for expressive elements
-- [ ] Fraunces uses extreme axes (SOFT=100, WONK=1)
+- [ ] Cursive ONLY in kr-dark mode hero/annotations
+- [ ] Fraunces uses extreme axes in kr-dark (SOFT=100, WONK=1)
 - [ ] Work Sans full range utilized (100-900 if weight mixing)
 
 ### Accessibility
@@ -393,7 +437,7 @@ Before delivering a mockup, verify:
 3.  Generates evaluation report:
 
     ```
-    Northcote Curio Compliance: 45/100 (F)
+    kerala-rage kr-solidarity Compliance: 45/100 (F)
     - Uses Inter font (forbidden)
     - Uniform 8px border-radius
     - Generic blue color scheme
@@ -412,7 +456,7 @@ Before delivering a mockup, verify:
 
 ### Example 2: Create Mockup from Wireframe
 
-**User:** "Create a high-fidelity hero section from this wireframe."
+**User:** "Create a high-fidelity hero section from this wireframe. kr-dark mode."
 [Uploads wireframe sketch with annotations]
 
 **Claude:**
@@ -438,7 +482,7 @@ Before delivering a mockup, verify:
 
 ### Example 3: Multi-Page Flow
 
-**User:** "Analyze this 5-page onboarding flow wireframe and create mockups for each page."
+**User:** "Analyze this 5-page onboarding flow wireframe and create mockups for each page. kr-dark mode."
 
 **Claude:**
 
@@ -455,6 +499,7 @@ Before delivering a mockup, verify:
 3.  **Designs:**
     - Creates 5 interactive HTML pages
     - Consistent component library
+    - kr-dark mode styling (restrained, clean)
     - Navigation between pages
 
 4.  **Delivers:**
@@ -472,9 +517,9 @@ Before delivering a mockup, verify:
 - ✅ Hover states (buttons, cards, links)
 - ✅ Focus states (keyboard navigation)
 - ✅ Active states (button press)
-- ✅ Animations (Framer Motion physics)
+- ✅ Animations (Framer Motion physics if kr-dark)
 - ✅ Responsive breakpoints (mobile, tablet, desktop)
-- ✅ Dark mode support (Northcote is dark-first)
+- ✅ Dark mode support (kerala-rage is dark-first)
 - ✅ Real design tokens via CSS custom properties
 
 **Interactions Demonstrated:**
@@ -482,8 +527,8 @@ Before delivering a mockup, verify:
 - Button hover → Color shift + elevation
 - Card hover → Scale + shadow
 - Input focus → Border glow + label animation
-- Typography hover → Variable font axis shift
-- Scroll → Parallax wallpaper (hero sections)
+- Typography hover → Variable font axis shift (kr-dark mode)
+- Scroll → Parallax wallpaper (kr-dark hero sections)
 
 ---
 
@@ -493,7 +538,7 @@ Before delivering a mockup, verify:
 
 **✅ USE FOR:**
 
-- Evaluating existing designs for Northcote compliance
+- Evaluating existing designs for kerala-rage compliance
 - Creating high-fidelity mockups from wireframes
 - Generating interactive prototypes for user testing
 - Converting design specifications to code
@@ -504,7 +549,7 @@ Before delivering a mockup, verify:
 - Production-ready backend integration (use component-builder)
 - Complex state management (use component-builder)
 - Component migration (use component-transformer)
-- Design token auditing (use northcote-curio-audit)
+- Design token auditing (use kerala-rage-kr-solidarity-audit)
 
 ### Skill Integration
 
@@ -525,7 +570,7 @@ ui-design-evaluator (mockup)
 
 **400 Points Total:**
 
-- Northcote Curio V3.1 Compliance: 100 pts
+- kerala-rage kr-solidarity V3.1 Compliance: 100 pts
 - Accessibility (WCAG AA): 100 pts
 - User Flow Logic: 100 pts
 - Visual Hierarchy & Typography: 100 pts
@@ -540,15 +585,21 @@ ui-design-evaluator (mockup)
 
 ### Mode Selection
 
-**Solidarity Mode:**
+**kr-dark Mode:**
 
-- ✅ Typography: Inter Display Black (900)
-- ✅ Colors: Charcoal (#1A1714), Waratah Red (#F14714), Baru Gold (#DAF674)
-- ✅ Shapes: Torn edges, organic asymmetry
-- ✅ Motion: Spring physics (viscous fluidity)ups to production code
-- `asset-placement-strategy` — Typography on wallpaper positioning
-- `northcote-curio-audit` — Validate final design token compliance
-- `design-compliance-dashboard` — Track overall design system adoption
+- Landing pages
+- Marketing pages
+- Hero sections
+- Feature callouts
+- Profile pages
+
+**kr-dark Mode:**
+
+- Dashboards
+- Data tables
+- Forms
+- Settings
+- Technical tools
 
 ---
 
@@ -558,12 +609,12 @@ ui-design-evaluator (mockup)
 
 - `component-builder` — Convert mockups to production code
 - `asset-placement-strategy` — Typography on wallpaper positioning
-- `northcote-curio-audit` — Validate final design token compliance
-- `design-compliance-dashboard` — Track overall design system adoption
+- `kerala-rage-visual-audit` — Validate final design token compliance
+- `compliance-dashboard` — Track overall design system adoption
 
 ---
 
 **Status:** ✅ Production Ready
-**Version:** 1.0
+**Version:** 1.0.0
 **V3.1 Compatible:** Yes
-**Last Updated:** 2026-01-28
+**Last Updated:** 2026-02-08
