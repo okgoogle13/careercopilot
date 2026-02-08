@@ -36,7 +36,7 @@ afterEach(() => {
 // Mock window.matchMedia for Material-UI components
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
-  value: jest.fn().mockImplementation((query) => ({
+  value: jest.fn().mockImplementation((query: any) => ({
     matches: false,
     media: query,
     onchange: null,

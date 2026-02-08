@@ -6,7 +6,7 @@ import { PageHeader } from '../../components/shared/PageHeader';
 import { API_ENDPOINTS } from '../../config/api';
 
 // Assets
-import sentrykr-shiva from '../../assets/kr-motifs/sentry_kr-shiva.png';
+import sentryKrShiva from '../../assets/KrMotifs/sentry_kr-shiva.png';
 import wallpaper from '../../assets/textures/wallpaper.png';
 
 interface ScoutResponse {
@@ -17,8 +17,8 @@ interface ScoutResponse {
 /**
  * The Sentry Lookout (Opportunity Feed)
  *
- * V3.1 kr-dark Mode implementation.
- * An atmospheric lookout point where the "kr-shiva" (autonomous agent)
+ * V3.1 KrDark Mode implementation.
+ * An atmospheric lookout point where the "KrShiva" (autonomous agent)
  * reports back with found opportunities.
  */
 export function Opportunities() {
@@ -52,7 +52,7 @@ export function Opportunities() {
     } catch (error) {
       console.error(error);
       setScoutMessage(
-        'The Sentry reports an error in the transmission. Ensure the kr-dark backend is active.'
+        'The Sentry reports an error in the transmission. Ensure the KrDark backend is active.'
       );
     } finally {
       setIsLoading(false);
@@ -67,12 +67,12 @@ export function Opportunities() {
         style={{ backgroundImage: `url(${wallpaper})`, backgroundSize: '400px' }}
       />
 
-      {/* Sentry Mascot: The kr-shiva Lookout */}
+      {/* Sentry Mascot: The KrShiva Lookout */}
       <div className="absolute top-0 right-0 w-1/2 h-full pointer-events-none z-0 overflow-hidden opacity-30 select-none font-bloom">
         <motion.img
           initial={{ x: 200, opacity: 0 }}
           animate={{ x: 0, opacity: 0.3 }}
-          src={sentrykr-shiva}
+          src={sentryKrShiva}
           alt=""
           className="h-full w-full object-contain object-right-top grayscale brightness-125"
         />
@@ -88,7 +88,7 @@ export function Opportunities() {
 
         {/* Lookout Controls: The Search Deck */}
         <Stone
-          mode="kr-dark"
+          mode="KrDark"
           elevation="raised"
           className="mb-12 p-8 border-concrete-grey/10 bg-asphalt-black/40 backdrop-blur-md"
         >
@@ -167,7 +167,7 @@ export function Opportunities() {
                     transition={{ delay: index * 0.05 }}
                   >
                     <Stone
-                      mode="kr-dark"
+                      mode="KrDark"
                       elevation="floating"
                       className="p-8 group hover:border-wattle-gold/40 transition-all cursor-pointer relative overflow-hidden"
                     >

@@ -1,24 +1,24 @@
 #!/usr/bin/env ts-node
 /**
- * Component Inventory Generator - kerala-rage kr-solidarity Edition
+ * Component Inventory Generator - KeralaRage KrSolidarity Edition
  *
  * This script analyzes the frontend codebase to generate an accurate inventory
- * of all components, their usage patterns, and kerala-rage kr-solidarity migration status.
+ * of all components, their usage patterns, and KeralaRage KrSolidarity migration status.
  *
  * Features:
  * - Uses TypeScript AST analysis via ts-morph for accuracy
  * - Detects all import patterns (default, named, dynamic)
- * - Tracks component dependencies and kerala-rage kr-solidarity migration status
+ * - Tracks component dependencies and KeralaRage KrSolidarity migration status
  * - Identifies test/story file coverage
  * - Categorizes components by type
- * - Analyzes kerala-rage kr-solidarity adoption (token usage, mode system, legacy usage)
+ * - Analyzes KeralaRage KrSolidarity adoption (token usage, mode system, legacy usage)
  * - Generates detailed JSON report with migration recommendations
  *
- * Migration Status Detection (kerala-rage kr-solidarity):
- * - 'migrated': Uses kr-solidarity tokens/mode system, no legacy MUI/M3 dependencies
- * - 'mixed': Uses kr-solidarity tokens/mode system alongside legacy MUI/M3
- * - 'not_migrated': Uses legacy MUI/M3 without kr-solidarity tokens
- * - 'unknown': No clear kr-solidarity or legacy signals detected
+ * Migration Status Detection (KeralaRage KrSolidarity):
+ * - 'migrated': Uses KrSolidarity tokens/mode system, no legacy MUI/M3 dependencies
+ * - 'mixed': Uses KrSolidarity tokens/mode system alongside legacy MUI/M3
+ * - 'not_migrated': Uses legacy MUI/M3 without KrSolidarity tokens
+ * - 'unknown': No clear KrSolidarity or legacy signals detected
  *
  * Usage:
  *   npx ts-node scripts/component-inventory.ts
@@ -64,7 +64,7 @@ interface ComponentInfo {
   usesLegacyM3: boolean;
   isDemo: boolean;
   migrationStatus: 'migrated' | 'mixed' | 'not_migrated' | 'unknown';
-  // kerala-rage kr-solidarity specific fields
+  // KeralaRage KrSolidarity specific fields
   usesDesignTokens: boolean;
   usesModeSystem: boolean;
 }
@@ -81,12 +81,12 @@ interface InventoryReport {
     'migrated' | 'mixed' | 'not_migrated' | 'unknown',
     number
   >;
-  kr-solidarityAdoption: {
-    withkr-solidarityTokens: number;
+  KrSolidarityAdoption: {
+    withKrSolidarityTokens: number;
     withModeSystem: number;
     legacyMUI: number;
     legacyM3: number;
-    fullykr-solidarity: number;
+    fullyKrSolidarity: number;
   };
 }
 
@@ -226,7 +226,7 @@ function analyzeComponents(): InventoryReport {
       }
     });
 
-    // Determine migration flags and kerala-rage kr-solidarity adoption
+    // Determine migration flags and KeralaRage KrSolidarity adoption
     const importDecls = sourceFile.getImportDeclarations();
     const usesMUI = importDecls.some((imp) => {
       const mod = imp.getModuleSpecifierValue();
@@ -256,32 +256,32 @@ function analyzeComponents(): InventoryReport {
       }) ||
       /\bM3[A-Z]/.test(text);
 
-    const kr-solidarityTokenPattern =
-      /(wattle|waratah|kr-leaf|flannel|paper-white|kr-motif|pebble|stone|kerala-rage|kr-solidarity|kr-flower|bottlebrush|gum|fern|sentry|kr-dark|kr-dark|slate)/i;
+    const KrSolidarityTokenPattern =
+      /(wattle|waratah|kr-leaf|flannel|paper-white|kr-motif|pebble|stone|KeralaRage|KrSolidarity|kr-flower|bottlebrush|gum|fern|sentry|KrDark|KrDark|slate)/i;
     const usesDesignTokens =
-      kr-solidarityTokenPattern.test(text) ||
+      KrSolidarityTokenPattern.test(text) ||
       /--(radius|elevation|duration|motion|surface|color)-/i.test(text);
 
     const usesModeSystem =
       text.includes('useMode') ||
       text.includes('ModeContext') ||
-      text.includes("mode === 'kr-dark'") ||
-      text.includes('mode === "kr-dark"') ||
-      text.includes("mode === 'kr-dark'") ||
-      text.includes('mode === "kr-dark"');
+      text.includes("mode === 'KrDark'") ||
+      text.includes('mode === "KrDark"') ||
+      text.includes("mode === 'KrDark'") ||
+      text.includes('mode === "KrDark"');
 
     const isDemo = filePath.includes('Figma UI Files');
     let migrationStatus: ComponentInfo['migrationStatus'] = 'unknown';
 
-    // Determine migration status with kerala-rage kr-solidarity detection
-    const useskr-solidaritySignals = usesDesignTokens || usesModeSystem;
+    // Determine migration status with KeralaRage KrSolidarity detection
+    const usesKrSolidaritySignals = usesDesignTokens || usesModeSystem;
     const usesLegacy = usesMUI || usesLegacyM3;
 
-    if (useskr-solidaritySignals && !usesLegacy) {
+    if (usesKrSolidaritySignals && !usesLegacy) {
       migrationStatus = 'migrated';
-    } else if (useskr-solidaritySignals && usesLegacy) {
+    } else if (usesKrSolidaritySignals && usesLegacy) {
       migrationStatus = 'mixed';
-    } else if (!useskr-solidaritySignals && usesLegacy) {
+    } else if (!usesKrSolidaritySignals && usesLegacy) {
       migrationStatus = 'not_migrated';
     }
 
@@ -428,11 +428,11 @@ function analyzeComponents(): InventoryReport {
     );
   }
 
-  // kerala-rage kr-solidarity specific recommendations
+  // KeralaRage KrSolidarity specific recommendations
   const mixedComponents = components.filter((c) => c.migrationStatus === 'mixed');
   if (mixedComponents.length > 0) {
     recommendations.push(
-      `${mixedComponents.length} components mix kerala-rage kr-solidarity tokens with legacy MUI/M3 usage. Consolidate to kr-solidarity-only: ` +
+      `${mixedComponents.length} components mix KeralaRage KrSolidarity tokens with legacy MUI/M3 usage. Consolidate to KrSolidarity-only: ` +
         mixedComponents
           .slice(0, 5)
           .map((c) => c.name)
@@ -444,7 +444,7 @@ function analyzeComponents(): InventoryReport {
   const notMigratedComponents = components.filter((c) => c.migrationStatus === 'not_migrated');
   if (notMigratedComponents.length > 0) {
     recommendations.push(
-      `${notMigratedComponents.length} components still rely on legacy MUI/M3 without kr-solidarity tokens. Migrate to kerala-rage kr-solidarity: ` +
+      `${notMigratedComponents.length} components still rely on legacy MUI/M3 without KrSolidarity tokens. Migrate to KeralaRage KrSolidarity: ` +
         notMigratedComponents
           .slice(0, 5)
           .map((c) => c.name)
@@ -467,13 +467,13 @@ function analyzeComponents(): InventoryReport {
     } as Record<'migrated' | 'mixed' | 'not_migrated' | 'unknown', number>
   );
 
-  // kerala-rage kr-solidarity adoption metrics
-  const kr-solidarityAdoption = {
-    withkr-solidarityTokens: components.filter((c) => c.usesDesignTokens).length,
+  // KeralaRage KrSolidarity adoption metrics
+  const KrSolidarityAdoption = {
+    withKrSolidarityTokens: components.filter((c) => c.usesDesignTokens).length,
     withModeSystem: components.filter((c) => c.usesModeSystem).length,
     legacyMUI: components.filter((c) => c.usesMUI).length,
     legacyM3: components.filter((c) => c.usesLegacyM3).length,
-    fullykr-solidarity: components.filter((c) => c.migrationStatus === 'migrated').length,
+    fullyKrSolidarity: components.filter((c) => c.migrationStatus === 'migrated').length,
   };
 
   const migratedWithoutTokens = components.filter(
@@ -481,7 +481,7 @@ function analyzeComponents(): InventoryReport {
   );
   if (migratedWithoutTokens.length > 0) {
     recommendations.push(
-      `${migratedWithoutTokens.length} migrated components lack kr-solidarity tokens. Add kerala-rage token classes/vars: ` +
+      `${migratedWithoutTokens.length} migrated components lack KrSolidarity tokens. Add KeralaRage token classes/vars: ` +
         migratedWithoutTokens
           .slice(0, 5)
           .map((c) => c.name)
@@ -490,13 +490,13 @@ function analyzeComponents(): InventoryReport {
     );
   }
 
-  const fullykr-solidarityPercent = (
-    (kr-solidarityAdoption.fullykr-solidarity / components.length) *
+  const fullyKrSolidarityPercent = (
+    (KrSolidarityAdoption.fullyKrSolidarity / components.length) *
     100
   ).toFixed(1);
   recommendations.push(
-    `kerala-rage kr-solidarity Adoption: ${fullykr-solidarityPercent}% (${kr-solidarityAdoption.fullykr-solidarity}/${components.length}) fully adopted. ` +
-      `Target: 80%+ for complete kr-solidarity migration.`
+    `KeralaRage KrSolidarity Adoption: ${fullyKrSolidarityPercent}% (${KrSolidarityAdoption.fullyKrSolidarity}/${components.length}) fully adopted. ` +
+      `Target: 80%+ for complete KrSolidarity migration.`
   );
 
   const report: InventoryReport = {
@@ -508,7 +508,7 @@ function analyzeComponents(): InventoryReport {
     mostUsedComponents,
     recommendations,
     migrationSummary,
-    kr-solidarityAdoption,
+    KrSolidarityAdoption,
   };
 
   return report;
@@ -533,18 +533,18 @@ function main() {
       console.log(`  ${category}: ${count}`);
     });
 
-    console.log(`\n=== kerala-rage kr-solidarity Migration Status ===`);
-    console.log(`Migrated (kr-solidarity Only): ${report.migrationSummary.migrated}`);
-    console.log(`Mixed (kr-solidarity + Legacy): ${report.migrationSummary.mixed}`);
+    console.log(`\n=== KeralaRage KrSolidarity Migration Status ===`);
+    console.log(`Migrated (KrSolidarity Only): ${report.migrationSummary.migrated}`);
+    console.log(`Mixed (KrSolidarity + Legacy): ${report.migrationSummary.mixed}`);
     console.log(`Not Migrated (Legacy Only): ${report.migrationSummary.not_migrated}`);
     console.log(`Unknown: ${report.migrationSummary.unknown}`);
 
-    console.log(`\n=== kr-solidarity Adoption ===`);
-    console.log(`Components with kr-solidarity Tokens: ${report.kr-solidarityAdoption.withkr-solidarityTokens}`);
-    console.log(`Components with Mode System: ${report.kr-solidarityAdoption.withModeSystem}`);
-    console.log(`Legacy MUI Usage: ${report.kr-solidarityAdoption.legacyMUI}`);
-    console.log(`Legacy M3 Usage: ${report.kr-solidarityAdoption.legacyM3}`);
-    console.log(`Fully kr-solidarity: ${report.kr-solidarityAdoption.fullykr-solidarity}`);
+    console.log(`\n=== KrSolidarity Adoption ===`);
+    console.log(`Components with KrSolidarity Tokens: ${report.KrSolidarityAdoption.withKrSolidarityTokens}`);
+    console.log(`Components with Mode System: ${report.KrSolidarityAdoption.withModeSystem}`);
+    console.log(`Legacy MUI Usage: ${report.KrSolidarityAdoption.legacyMUI}`);
+    console.log(`Legacy M3 Usage: ${report.KrSolidarityAdoption.legacyM3}`);
+    console.log(`Fully KrSolidarity: ${report.KrSolidarityAdoption.fullyKrSolidarity}`);
 
     console.log(`\nUnused Components: ${report.unusedComponents.length}`);
     console.log(`\nTop 5 Most Used:`);

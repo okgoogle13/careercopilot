@@ -20,7 +20,7 @@ export interface SeedProps {
 }
 
 /**
- * M3Badge - kerala-rage kr-solidarity Notification Badge
+ * M3Badge - KeralaRage KrSolidarity Notification Badge
  *
  * An organic badge overlay for icons and components.
  */

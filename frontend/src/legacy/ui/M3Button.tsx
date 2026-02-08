@@ -22,38 +22,38 @@ const buttonVariants = cva(
                 icon: 'size-10',
             },
             mode: {
-                kr-dark: '',
-                kr-dark: '',
+                'KrDark': '',
+                'KrLight' : '',
             },
         },
         compoundVariants: [
-            // kr-dark Mode
+            // KrDark Mode
             {
-                mode: 'kr-dark',
+                mode: 'KrDark',
                 variant: 'primary',
                 class: 'bg-wattle-gold text-surface-asphalt-black hover:bg-primary-wattle-glow border border-transparent',
             },
             {
-                mode: 'kr-dark',
+                mode: 'KrDark',
                 variant: 'secondary',
-                class: 'bg-surface-kr-dark-glass-medium text-secondary-concrete-grey border-glass-border hover:bg-surface-kr-dark-elevated',
+                class: 'bg-surface-KrDark-glass-medium text-secondary-concrete-grey border-glass-border hover:bg-surface-KrDark-elevated',
             },
-            // kr-dark Mode
+            // KrDark Mode
             {
-                mode: 'kr-dark',
+                mode: 'KrDark',
                 variant: 'primary',
                 class: 'bg-wattle-gold text-surface-asphalt-black hover:bg-primary-wattle-glow rounded-sm',
             },
             {
-                mode: 'kr-dark',
+                mode: 'KrDark',
                 variant: 'secondary',
-                class: 'bg-surface-kr-dark-glass-medium text-secondary-concrete-grey border-glass-border rounded-sm hover:bg-surface-kr-dark-elevated',
+                class: 'bg-surface-KrDark-glass-medium text-secondary-concrete-grey border-glass-border rounded-sm hover:bg-surface-KrDark-elevated',
             },
         ],
         defaultVariants: {
             variant: 'primary',
             size: 'default',
-            mode: 'kr-dark',
+            mode: 'KrDark',
         },
     }
 );
@@ -68,9 +68,9 @@ const M3Button = React.forwardRef<HTMLButtonElement, M3ButtonProps>(
     ({ className, variant, size, asChild: _asChild = false, ...props }, ref) => {
         const { mode } = useMode();
 
-        // Shape logic: kr-dark = Organic, Lab = Precise
+        // Shape logic: KrDark = Organic, Lab = Precise
         // We use inline styles for shape to avoid generic tailwind classes
-        const shapeStyle = mode === 'kr-dark'
+        const shapeStyle = mode === 'KrDark' || mode === 'KrLight'
             ? { borderRadius: 'var(--radius-leaf)' }
             : { borderRadius: '4px' }; // Precise
 
@@ -90,7 +90,7 @@ const M3Button = React.forwardRef<HTMLButtonElement, M3ButtonProps>(
             >
                 <span className={cn(
                     "relative",
-                    mode === 'kr-dark' ? 'font-field-note font-semibold tracking-wide' : 'font-annotation uppercase tracking-widest text-[11px]'
+                    mode === 'KrDark' || mode === 'KrLight' ? 'font-field-note font-semibold tracking-wide' : 'font-annotation uppercase tracking-widest text-[11px]'
                 )}>
                     {props.children}
                 </span>
@@ -119,7 +119,7 @@ export const M3IconButton = React.forwardRef<HTMLButtonElement, M3IconButtonProp
                     : color === 'error'
                         ? 'bg-error text-on-error'
                         : 'bg-primary text-on-primary';
-        const shapeClass = mode === 'kr-dark' ? 'rounded-[var(--radius-seed)]' : 'rounded-md';
+        const shapeClass = mode === 'KrDark' || mode === 'KrLight' ? 'rounded-[var(--radius-seed)]' : 'rounded-md';
 
         return (
             <button

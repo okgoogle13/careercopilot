@@ -1,15 +1,15 @@
 /**
- * kerala-rage kr-solidarity Motion Presets
- * Framer Motion configurations for kr-dark and kr-dark modes
+ * KeralaRage KrSolidarity Motion Presets
+ * Framer Motion configurations for KrDark and KrDark modes
  * 
  * Usage:
- * import { kr-darkSpring, kr-darkSpring, motionVariants } from '@/theme/motion-presets';
+ * import { KrDarkSpring, KrLightSpring, motionVariants } from '@/theme/motion-presets';
  * 
  * <motion.div
  *   initial="hidden"
  *   animate="visible"
  *   variants={motionVariants.card}
- *   transition={kr-darkSpring}
+ *   transition={KrLightSpring}
  * />
  */
 
@@ -20,10 +20,10 @@ import { Transition, Variants } from 'framer-motion';
 // ═══════════════════════════════════════════════════════════════════════════
 
 /**
- * kr-dark Mode Spring — Viscous Breeze
+ * KrDark Mode Spring — Viscous Breeze
  * Expressive, gentle overshoot, air resistance
  */
-export const kr-darkSpring: Transition = {
+export const KrDarkSpring: Transition = {
     type: 'spring',
     stiffness: 500,
     damping: 27,
@@ -31,10 +31,10 @@ export const kr-darkSpring: Transition = {
 };
 
 /**
- * kr-dark Mode Spring — Precise Control
+ * KrDark Mode Spring — Precise Control
  * Clinical, minimal overshoot, controlled
  */
-export const kr-darkSpring: Transition = {
+export const KrLightSpring: Transition = {
     type: 'spring',
     stiffness: 800,
     damping: 40,
@@ -43,7 +43,7 @@ export const kr-darkSpring: Transition = {
 
 /**
  * Elastic Spring — Pronounced Bounce
- * kr-dark mode accents only
+ * KrDark mode accents only
  */
 export const elasticSpring: Transition = {
     type: 'spring',
@@ -217,8 +217,8 @@ export const dragConstraints = {
 };
 
 export const dragElastic = {
-    kr-dark: 0.2, // More elastic in kr-dark mode
-    kr-dark: 0.1, // Less elastic in kr-dark mode
+    KrDark: 0.2, // More elastic in KrDark mode
+    KrLight: 0.1, // Less elastic in KrDark mode
 };
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -237,7 +237,7 @@ export const prefersReducedMotion = (): boolean => {
  * Get transition based on reduced motion preference
  */
 export const getTransition = (
-    mode: 'kr-dark' | 'kr-dark' = 'kr-dark'
+    mode: 'KrDark' | 'KrLight' = 'KrDark'
 ): Transition => {
     if (prefersReducedMotion()) {
         return {
@@ -245,7 +245,7 @@ export const getTransition = (
             ease: 'linear',
         };
     }
-    return mode === 'kr-dark' ? kr-darkSpring : kr-darkSpring;
+    return mode === 'KrDark' ? KrLightSpring : KrLightSpring;
 };
 
 /**
@@ -296,8 +296,8 @@ export const staggerContainer: Variants = {
 
 export default {
     spring: {
-        kr-dark: kr-darkSpring,
-        kr-dark: kr-darkSpring,
+        KrDark: KrDarkSpring,
+        KrLight: KrLightSpring,
         elastic: elasticSpring,
     },
     easing,

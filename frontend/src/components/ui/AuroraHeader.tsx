@@ -8,7 +8,7 @@ interface AuroraHeaderProps {
 }
 
 /**
- * AuroraHeader - kerala-rage kr-solidarity Parametric Header
+ * AuroraHeader - KeralaRage KrSolidarity Parametric Header
  * 
  * Features:
  * - Tri-color gradient text (Wattle Gold → Waratah Red → Concrete Grey)

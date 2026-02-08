@@ -16,12 +16,12 @@ export interface MarkProps extends Omit<React.InputHTMLAttributes<HTMLInputEleme
 }
 
 /**
- * Mark - kerala-rage kr-solidarity Checkbox
+ * Mark - KeralaRage KrSolidarity Checkbox
  *
- * A custom checkbox component using kerala-rage kr-solidarity design tokens with enhanced UX.
+ * A custom checkbox component using KeralaRage KrSolidarity design tokens with enhanced UX.
  * Features organic shapes with Seed radius, spring animations, and proper state indicators.
  *
- * **kerala-rage Design Token Usage:**
+ * **KeralaRage Design Token Usage:**
  * - Shape: `--radius-seed` (subtle organic corners)
  * - Colors: Botanical palette (Wattle Gold, Waratah Red, Concrete Grey)
  * - Motion: Viscous-breeze easing for smooth check transition
@@ -157,9 +157,9 @@ export const Mark = forwardRef<HTMLInputElement, MarkProps>(
 Mark.displayName = 'Mark';
 
 /**
- * MarkRadio - kerala-rage kr-solidarity Radio Button
+ * MarkRadio - KeralaRage KrSolidarity Radio Button
  *
- * Radio button variant with consistent kerala-rage design language.
+ * Radio button variant with consistent KeralaRage design language.
  */
 export interface MarkRadioProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type'> {
   label?: string;
