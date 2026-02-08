@@ -124,7 +124,32 @@ def process(data): return data['score'] * 2 # Implicit types, loose dict
 **Good:**
 
 ```python
-class ScoreInput(BaseModel): score: float
 @flow
 def process(data: ScoreInput) -> float: return data.score * 2
 ```
+
+---
+
+## 🎨 Design System Authority
+
+All automated agents operating in this repository must treat the
+**Kerala Rage Design System Canon** as immutable unless explicitly instructed otherwise.
+
+📄 Canon location:
+`/docs/design/DESIGN_SYSTEM_CANON.md`
+
+### Agent Constraints
+
+Agents MUST NOT:
+- Invent new visual motifs
+- Introduce prohibited symbols (e.g. crowns, bureaucracy, decorative flags)
+- Reinterpret cultural or devotional rules
+- Merge symbolic elements across categories
+
+Agents MAY:
+- Reference canonical visuals for style alignment only
+- Reject outputs that violate canon constraints
+- Flag ambiguity rather than guessing
+
+If a conflict exists between an instruction and the canon,
+the canon takes precedence.

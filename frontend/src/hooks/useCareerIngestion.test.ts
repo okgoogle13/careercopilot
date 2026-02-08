@@ -1,13 +1,20 @@
+import { jest } from '@jest/globals';
+
+// Mock AuthContext
+const mockUseAuth = jest.fn();
+(jest as any).unstable_mockModule('@/context/AuthContext', () => ({
+    useAuth: mockUseAuth,
+}));
+
+const mockSession = { access_token: 'test-token', user: { email: 'test@example.com' } };
+
 import React from 'react';
 import { renderHook, act } from '@testing-library/react';
-import { useCareerIngestion } from './useCareerIngestion';
-import { CareerDatabase } from '../types/api';
-import { AuthContext } from '../context/AuthContext';
 
 // Mock global fetch
 global.fetch = jest.fn();
 
-const mockCareerData: CareerDatabase = {
+const mockCareerData = {
     Personal_Information: {
         FullName: 'John Doe',
         Phone: '123-456-7890',
@@ -36,23 +43,32 @@ const mockContextValue = {
     logout: jest.fn(),
 } as any;
 
-// Use React.createElement to avoid potential JSX parsing issues if configuration is strict
-const wrapper = ({ children }: { children: React.ReactNode }) =>
-    React.createElement(AuthContext.Provider, { value: mockContextValue }, children);
-
 describe('useCareerIngestion', () => {
-    beforeEach(() => {
+    let useCareerIngestion: any;
+
+    beforeEach(async () => {
         jest.clearAllMocks();
+        mockUseAuth.mockReturnValue({
+            session: mockSession,
+            user: mockSession.user,
+            loading: false,
+            login: jest.fn(),
+            register: jest.fn(),
+            logout: jest.fn(),
+        });
+
+        // Dynamic import to ensure mock is applied
+        const module = await import('./useCareerIngestion');
+        useCareerIngestion = module.useCareerIngestion;
     });
 
     it('updateCareerDatabase calls correct endpoint with PATCH and data', async () => {
-        mockGetIdToken.mockResolvedValue('test-token');
         (global.fetch as jest.Mock).mockResolvedValue({
             ok: true,
             json: async () => mockCareerData,
         });
 
-        const { result } = renderHook(() => useCareerIngestion(), { wrapper });
+        const { result } = renderHook(() => useCareerIngestion());
 
         await act(async () => {
             await result.current.updateCareerDatabase(mockCareerData);
@@ -72,13 +88,13 @@ describe('useCareerIngestion', () => {
     });
 
     it('submitDocuments calls correct endpoint with POST and files', async () => {
-        mockGetIdToken.mockResolvedValue('test-token');
+        // mockSession already has token
         (global.fetch as jest.Mock).mockResolvedValue({
             ok: true,
             json: async () => mockCareerData,
         });
 
-        const { result } = renderHook(() => useCareerIngestion(), { wrapper });
+        const { result } = renderHook(() => useCareerIngestion());
         const files = [new File([''], 'test.pdf', { type: 'application/pdf' })];
 
         await act(async () => {
@@ -92,20 +108,26 @@ describe('useCareerIngestion', () => {
             },
         }));
 
+        expect(global.fetch).toHaveBeenCalledWith('/api/v1/ingest', expect.objectContaining({
+            method: 'POST',
+            headers: {
+                'Authorization': 'Bearer test-token',
+            },
+        }));
+
         const callArgs = (global.fetch as jest.Mock).mock.calls[0];
-        expect(callArgs[0]).toBe('/api/v1/ingest');
         expect(callArgs[1].body).toBeInstanceOf(FormData);
     });
 
     it('handles errors correctly', async () => {
-        mockGetIdToken.mockResolvedValue('test-token');
+        // mockSession already has token
         (global.fetch as jest.Mock).mockResolvedValue({
             ok: false,
             text: async () => 'Internal Server Error',
             statusText: 'Internal Server Error'
         });
 
-        const { result } = renderHook(() => useCareerIngestion(), { wrapper });
+        const { result } = renderHook(() => useCareerIngestion());
 
         await act(async () => {
             try {

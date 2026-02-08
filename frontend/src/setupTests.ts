@@ -11,6 +11,8 @@ import { cleanup } from '@testing-library/react';
   meta: {
     env: {
       VITE_API_URL: 'http://localhost:8000',
+      VITE_SUPABASE_URL: 'https://test.supabase.co',
+      VITE_SUPABASE_ANON_KEY: 'test-anon-key',
       VITE_FIREBASE_API_KEY: 'test-api-key',
       VITE_FIREBASE_AUTH_DOMAIN: 'test.firebaseapp.com',
       VITE_FIREBASE_PROJECT_ID: 'test-project',
