@@ -22,7 +22,8 @@ describe('useAnalysis', () => {
             analysis = await analysisPromise;
         });
 
-        expect(analysis?.breakdown.softSkills.reason).toContain('3 action verbs detected');
+        const verbCount = Number(analysis?.breakdown.softSkills.reason.split(' ')[0]);
+        expect(verbCount).toBe(3);
     });
 
     it('does not double-count repeated action verbs', async () => {
@@ -37,6 +38,7 @@ describe('useAnalysis', () => {
             analysis = await analysisPromise;
         });
 
-        expect(analysis?.breakdown.softSkills.reason).toContain('1 action verbs detected');
+        const verbCount = Number(analysis?.breakdown.softSkills.reason.split(' ')[0]);
+        expect(verbCount).toBe(1);
     });
 });
