@@ -22,8 +22,7 @@ describe('useAnalysis', () => {
             analysis = await analysisPromise;
         });
 
-        const verbCount = Number(analysis?.breakdown.softSkills.reason.split(' ')[0]);
-        expect(verbCount).toBe(3);
+        expect(analysis?.score.softSkills).toBe(30);
     });
 
     it('does not double-count repeated action verbs', async () => {
@@ -38,7 +37,6 @@ describe('useAnalysis', () => {
             analysis = await analysisPromise;
         });
 
-        const verbCount = Number(analysis?.breakdown.softSkills.reason.split(' ')[0]);
-        expect(verbCount).toBe(1);
+        expect(analysis?.score.softSkills).toBe(10);
     });
 });
