@@ -335,8 +335,60 @@ FIREBASE_CREDENTIALS=path_to_credentials
 - **GCP Region:** us-central1
 - **GCP Project:** careercopilot-468811
 
+## Skills Registry & Tagging System
+
+**Central Hub:** `.claude/skills/SKILL_REGISTRY.md` (52+ active Claude Code skills)
+
+The project has a comprehensive skills ecosystem for specialized tasks. Use the registry to find the right skill for your work.
+
+### Navigation by Need
+
+**I need to design/validate:**
+- Visual: `ui-design-evaluator`, `kerala-rage-visual-audit`, `m3-visual-audit`
+- Tokens: `design-token-validator`, `token-orchestrator`
+- Typography: `kerala-rage-typography-strategy`, `expressive-typography-manipulation`
+- Brand: `brand-brief-optimizer`, `kerala-rage-brand-enforcer`
+
+**I need to scaffold code:**
+- React: `component-builder`, `react-page-scaffolder`, `storybook-scaffolder`
+- Backend: `pydantic-model-scaffolder`, `pytest-test-scaffolder`
+- Tests: `jest-test-scaffolder`, `webapp-testing`
+- Agents: `careercopilot-agent-scaffolder`, `careercopilot-tool-creator`
+
+**I need to validate/audit:**
+- Code: `audit-agent`, `project-health-checker`
+- Design: `compliance-dashboard`, `kerala-rage-asset-cataloger`
+- Assets: `auto-validator`, `vision-scorer-mcp`
+
+**I need to generate/orchestrate:**
+- Assets: `asset-packager`, `batch-processor`
+- Docs: `design-system-doc-generator`
+- Tasks: `task-router-mcp`, `task-delegator`
+
+### Tags Index
+
+**By Capability:**
+- `#validation` – m3-visual-audit, kerala-rage-visual-audit, design-token-validator, auto-validator
+- `#scaffolding` – storybook-scaffolder, jest-test-scaffolder, pytest-test-scaffolder
+- `#generation` – ui-design-evaluator, m3-expressive-ui-evaluator, asset-packager
+- `#analysis` – audit-agent, project-health-checker, compliance-dashboard
+- `#optimization` – brand-brief-optimizer, pattern-learner, prompt-composer
+
+**By Design System:**
+- `#kerala-rage` – kerala-rage-typography-strategy, kerala-rage-visual-audit, compliance-dashboard
+- `#m3-expressive` – m3-visual-audit, m3-expressive-ui-evaluator, m3-expressive-token-orchestrator
+
+**By Technology:**
+- `#react` – component-builder, storybook-scaffolder, react-page-scaffolder
+- `#python` – pytest-test-scaffolder, pydantic-model-scaffolder, careercopilot-agent-scaffolder
+- `#variable-fonts` – kerala-rage-typography-strategy, expressive-typography-manipulation
+
+**By Project:**
+- `#careercopilot` – careercopilot-agent-scaffolder, careercopilot-tool-creator, webapp-testing
+
 ## References to Keep Nearby
 
+- `.claude/skills/SKILL_REGISTRY.md` – Master skills discovery hub (52+ skills with tags, decision trees)
 - `.github/workflows/ci.yml` – CI/CD pipeline (parallel jobs: Jest, pytest, E2E, security scans)
 - `.pre-commit-config.yaml` – Git hooks (linting, formatting, type checking)
 - `README.md` – Quick start & feature overview
