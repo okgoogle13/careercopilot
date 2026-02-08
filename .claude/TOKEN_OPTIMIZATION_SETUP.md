@@ -9,7 +9,7 @@
 ### 1. Claude Desktop Config (`~/.claude/claude_desktop_config.json`)
 Added:
 - **flash-sidekick** MCP server (already configured)
-- **design-system-sidekick** MCP server (NEW—for Northcote validation)
+- **design-system-sidekick** MCP server (NEW—for kerala-rage validation)
 - `customInstructions` field with routing policy for both
 
 **Key points:**
@@ -24,7 +24,7 @@ Added detailed `customInstructions` for Claude Code with:
 - Flash-sidekick decision matrix and examples
 - Design-system-sidekick usage patterns
 - Token savings percentages and ratios
-- Gallery vs. Laboratory mode guidance
+- kr-dark vs. kr-dark mode guidance
 
 **Key points:**
 - Provides specific Task syntax examples
@@ -35,7 +35,7 @@ Added detailed `customInstructions` for Claude Code with:
 
 ### 3. MCP Servers Registered
 - ✅ **flash-sidekick** — General analysis, code quality, documentation
-- ✅ **design-system-sidekick** — Northcote Curio validation & asset orchestration
+- ✅ **design-system-sidekick** — kerala-rage kr-solidarity validation & asset orchestration
 - ✅ Existing policies:
   - `.claude/mcp-usage-policy.md` — Comprehensive decision matrix
   - `CLAUDE.md` — MCP task routing table
@@ -55,7 +55,7 @@ When you ask me to:
 **Design-System-Sidekick (Design Tasks)**
 When you ask me to:
 1. **Validate design assets** → `validate_asset_compliance` tool
-2. **Check Northcote compliance** → Design-system-sidekick MCP
+2. **Check kerala-rage compliance** → Design-system-sidekick MCP
 3. **Generate component scaffolding** → `generate_implementation_package` tool
 4. **Create design implementation packages** → Design-system-sidekick
 

@@ -4,7 +4,7 @@ Here’s a contemporary, migrant‑centred rewrite for your voice doc.
 
 # Voice & Microcopy
 
-> Part of [Northcote Design System – Contemporary Australian](00-overview.md) [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/74141548/2c98fa71-c817-49f8-957d-da13857f9ca1/northcote-design-principles.md)
+> Part of [kerala-rage Design System – Contemporary Australian](00-overview.md) [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/74141548/2c98fa71-c817-49f8-957d-da13857f9ca1/kerala-rage-design-principles.md)
 
 ---
 
@@ -14,7 +14,7 @@ Here’s a contemporary, migrant‑centred rewrite for your voice doc.
 
 | Characteristic           | Example                                                                        |
 | ------------------------ | ------------------------------------------------------------------------------ |
-| Curious, not corporate   | “Let’s inspect this role” vs “View Details”                                    |
+| kr-solidarityus, not corporate   | “Let’s inspect this role” vs “View Details”                                    |
 | Honest, not hypey        | “This might be a stretch—but here’s why it’s worth a look” vs “Perfect match!” |
 | Plain, not jargon‑heavy  | “No roles match yet” vs “No results returned”                                  |
 | Inviting, not commanding | “Ready to try this next?” vs “Click here to start”                             |
@@ -30,7 +30,7 @@ Here’s a contemporary, migrant‑centred rewrite for your voice doc.
 **Where**: Navigation, buttons, form labels, core error messages
 **Voice**: Clear, simple, unambiguous. No metaphors.
 
-| Generic       | Northcote           |
+| Generic       | kerala-rage           |
 | ------------- | ------------------- |
 | Upload resume | Upload resume       |
 | Save changes  | Save                |
@@ -45,7 +45,7 @@ Keep verbs short and consistent across the app. [ppl-ai-file-upload.s3.amazonaws
 **Where**: Success messages, empty states, onboarding, non‑critical hints
 **Voice**: Warm, wry, and aware of how annoying job search can be.
 
-| Context          | Northcote example                                       |
+| Context          | kerala-rage example                                       |
 | ---------------- | ------------------------------------------------------- |
 | Success          | “Saved. One less thing to juggle.”                      |
 | Loading          | “Reading your history, not rewriting it…”               |
@@ -82,7 +82,7 @@ Examples:
 
 ## Contextual Voice Shifts
 
-We don’t use Gallery/Lab modes anymore, but we still shift tone with context:
+We don’t use kr-dark/Lab modes anymore, but we still shift tone with context:
 
 | Context               | Tone & Verbs                                                            |
 | --------------------- | ----------------------------------------------------------------------- |
@@ -101,7 +101,7 @@ If in doubt: **short, clear, then kind.** [ppl-ai-file-upload.s3.amazonaws](http
 
 ```text
 ❌ Too themed: “The system couldn’t digest this artifact.”
-✅ Northcote: “Upload failed. Use PDF or DOCX format, under 5MB.”
+✅ kerala-rage: “Upload failed. Use PDF or DOCX format, under 5MB.”
 ```
 
 Patterns:
@@ -161,4 +161,4 @@ Never use personality or humor in:
 
 ---
 
-Northcote's voice is **grounded, specific, and on the user's side**, not selling a fantasy.
+kerala-rage's voice is **grounded, specific, and on the user's side**, not selling a fantasy.

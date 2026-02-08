@@ -4,11 +4,11 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { z } from 'zod';
-import { NorthcoteButton } from '../../components/ui/NorthcoteButton';
+import { kerala-rageButton } from '../../components/ui/kerala-rageButton';
 import { useAuth } from '../../context/AuthContext';
 
-// Northcote Assets
-import specimenGrid from '../../assets/specimens/leaf-fern.png'; // Using available specimen
+// kerala-rage Assets
+import kr-motifGrid from '../../assets/kr-motifs/leaf-fern.png'; // Using available kr-motif
 import paperWhiteGrid from '../../assets/textures/paper-grain.png'; // Using available texture
 
 const loginSchema = z.object({
@@ -51,7 +51,7 @@ export function Login() {
       />
 
       <div className="w-full max-w-md relative z-10">
-        {/* The Entry Gate (Gallery Glass) */}
+        {/* The Entry Gate (kr-dark Glass) */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -60,7 +60,7 @@ export function Login() {
           {/* Compass Motif Decoration */}
           <div className="absolute top-[-40px] right-[-40px] w-32 h-32 opacity-20 pointer-events-none">
             <img
-              src={specimenGrid}
+              src={kr-motifGrid}
               alt=""
               className="animate-spin-slow"
               style={{ animationDuration: '60s' }}
@@ -134,7 +134,7 @@ export function Login() {
               )}
             </div>
 
-            <NorthcoteButton
+            <kerala-rageButton
               variant="primary"
               size="lg"
               type="submit"
@@ -142,7 +142,7 @@ export function Login() {
               className="w-full mt-4"
             >
               {isSubmitting ? 'Validating...' : 'Authenticate'}
-            </NorthcoteButton>
+            </kerala-rageButton>
           </form>
 
           {/* Helper Links */}

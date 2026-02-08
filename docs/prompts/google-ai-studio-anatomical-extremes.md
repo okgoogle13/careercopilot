@@ -1,4 +1,4 @@
-# Google AI Studio Generation Suite: Northcote Curio "Anatomical Extremes"
+# Google AI Studio Generation Suite: kerala-rage kr-solidarity "Anatomical Extremes"
 
 **Document ID:** GOOGLE-AI-NANOBANANA-SUITE-001
 **Target Model:** Gemini 3.0 Pro / Imagen 3 (Nano Banana Pro)
@@ -13,12 +13,12 @@
 _Copy and paste this into the "System Instructions" or "Context" field to prime the model._
 
 ```
-You are the "Northcote Curio" master illustrator (Victorian Era, Melbourne, c. 1880).
+You are the "kerala-rage kr-solidarity" master illustrator (kerala-streetprint Era, Melbourne, c. 1880).
 Your work is defined by **"Haeckelian Geometry in the Dark Pattern."**
 
 **Five Immutable Laws:**
 1.  **The Void:** Background is ALWAYS pure matte charcoal-black (#1A1714) unless specified as a texture.
-2.  **The Subject:** Exclusively Australian Native Fauna/Flora. No European species.
+2.  **The Subject:** Exclusively Australian Native kr-symbol/Flora. No European species.
 3.  **The Lens:** Geometric Naturalism. You exaggerate radial symmetry, spirals, and structural order (Ernst Haeckel style).
 4.  **The Light:** Surgical Chiaroscuro. Single distinct light source, sharp shadows, high contrast.
 5.  **The Palette:** Restriction: Ochre, Crimson, Sage, Gold, Rust, Cream. (ABSOLUTELY NO Blues, Purples, or Neons).
@@ -28,12 +28,12 @@ Your work is defined by **"Haeckelian Geometry in the Dark Pattern."**
 
 ## 🏛️ PHASE 1: FOUNDATION ASSETS
 
-### 1. The Curio Wallpaper (Gallery Master Background)
+### 1. The kr-solidarity Wallpaper (kr-dark Master Background)
 
 _The atmospheric stage for the application._
 
 ```
-**Generate an intricate Victorian naturalist specimen plate titled "Anomalies of the Antipodes".**
+**Generate an intricate kerala-streetprint naturalist kr-motif plate titled "Anomalies of the Antipodes".**
 
 **Composition:**
 A dense, asymmetrical "working table" arrangement floating in a black void (#1A1714). NOT a grid. Objects should overlap slightly to create depth (shadows falling on objects behind).
@@ -41,10 +41,10 @@ A dense, asymmetrical "working table" arrangement floating in a black void (#1A1
 **Subject Inventory (Must Include All):**
 1.  **Waratah Bloom (Hero):** Deep coral-red, top-down view to emphasize mandala-like petal symmetry.
 2.  **Frill-necked Lizard Head:** Throat frill fully extended. Translucent terracotta membrane with cream ribs.
-3.  **Huntsman Spider Molt:** A "ghost" specimen. Translucent amber-gold exoskeleton, hollow and delicate.
+3.  **Huntsman Spider Molt:** A "ghost" kr-motif. Translucent amber-gold exoskeleton, hollow and delicate.
 4.  **Echidna Spine Cluster:** A radial burst of sharp spines. Banded: Cream -> Gold -> Dark Tip.
-5.  **Banksia Cones:** Woody, textured, deep brown cylinders with spiral "eyes".
-6.  **Eucalyptus Foliage:** Sprigs of lance-shaped sage green leaves weaving through the gaps.
+5.  **kr-flower Cones:** Woody, textured, deep brown cylinders with spiral "eyes".
+6.  **kr-leafus Foliage:** Sprigs of lance-shaped sage green leaves weaving through the gaps.
 
 **Style Directive:**
 Render with the precision of a scientific diagram but the dramatic lighting of a Baroque still life. Sharp focus everywhere.
@@ -53,18 +53,18 @@ Render with the precision of a scientific diagram but the dramatic lighting of a
 (No blue feathers, no purple, white background, blurry edges, text overlay, 3d render look, symmetrical grid).
 ```
 
-### 2. The Sentry Kookaburra (Mascot)
+### 2. The Sentry kr-shiva (Mascot)
 
 _The emotional anchor. Note the color override._
 
 ```
-**Generate a hyper-realistic Victorian lithograph of a Laughing Kookaburra (Dacelo novaeguineae).**
+**Generate a hyper-realistic kerala-streetprint lithograph of a Laughing kr-shiva (Dacelo novaeguineae).**
 
 **Pose:**
 Profile view, facing left. Perched on a rough Ironbark branch. Regal and alert.
 
 **Color Override Instructions:**
-The Kookaburra typically has blue wing feathers. **You must OVERRIDE this.** Render the wing feathers in **Steely-Grey and Slate-Blue** (desaturated) to harmonize with the warm Victorian palette.
+The kr-shiva typically has blue wing feathers. **You must OVERRIDE this.** Render the wing feathers in **Steely-Grey and Slate-Blue** (desaturated) to harmonize with the warm kerala-streetprint palette.
 *   Breast: Cream/Off-white.
 *   Back/Wings: Dark Brown and Slate Grey.
 *   Beak: Massive, bone-colored.
@@ -77,9 +77,9 @@ Label at bottom in cream serif: "Fig. II. Dacelo novaeguineae".
 (No electric blue, no cyan, no neon colors, no cartoon eyes, no white background).
 ```
 
-### 3. Laboratory Paper White Texture
+### 3. kr-dark Paper White Texture
 
-_The background for the "Technical/Laboratory" mode._
+_The background for the "Technical/kr-dark" mode._
 
 ```
 **Generate a seamless texture of "Scientific Grid Paper White".**
@@ -87,7 +87,7 @@ _The background for the "Technical/Laboratory" mode._
 **Visuals:**
 *   **Base:** Very dark charcoal-grey (#2C2C2C). NOT white or beige.
 *   **Grid:** A faint, precise 1mm engineering grid in diverse lighter grey lines.
-*   **Watermarks:** Subtle, faded sketches of botanical diagrams (Banksia seeds, Eucalyptus leaves) overlaid at 5% opacity.
+*   **Watermarks:** Subtle, faded sketches of botanical diagrams (kr-flower seeds, kr-leafus leaves) overlaid at 5% opacity.
 *   **Vignette:** Slight darkening at the edges.
 
 **Feel:**
@@ -99,17 +99,17 @@ A clean, dark slate used by a botanist for field notes.
 
 ---
 
-## 🌿 PHASE 2: SPECIMEN SERIES (Verticals)
+## 🌿 PHASE 2: kr-motif SERIES (Verticals)
 
-### 4. Eucalyptus Branch with Echidna Spines
+### 4. kr-leafus Branch with Echidna Spines
 
 _The contrast of soft leaves and sharp spines._
 
 ```
-**Generate a vertical botanical study: "Eucalyptus globulus host to Tachyglossus defense".**
+**Generate a vertical botanical study: "kr-leafus globulus host to Tachyglossus defense".**
 
 **Visuals:**
-A single Eucalyptus branch hangs vertically from the top right.
+A single kr-leafus branch hangs vertically from the top right.
 *   **Leaves:** Matte, dusty sage-green. Backlit to show translucent veins.
 *   **The Anomaly:** At the branch junction, a preserved cluster of **Echidna Spines** is mounted.
     *   *Texture:* Keratinous, hard, sharp.
@@ -133,7 +133,7 @@ _The contrast of fuzzy flowers and metallic insect._
 
 **Subjects:**
 1.  **The Flora:** Soft, fuzzy yellow wattle spheres (pompoms). Texture is matte and pollen-heavy.
-2.  **The Fauna:** A single Buprestid Beetle. Texture is **Metallic Iridescence**.
+2.  **The kr-symbol:** A single Buprestid Beetle. Texture is **Metallic Iridescence**.
     *   Color: Deep Emerald Green shifting to Copper.
     *   Surface: Pitted, glossy, hard.
 
@@ -149,12 +149,12 @@ Background: Deep #1A1714.
 
 ## ⚙️ PHASE 3: UI & ENRICHMENT ELEMENTS
 
-### 6. Banksia Geometric Cross-Section (Spinner)
+### 6. kr-flower Geometric Cross-Section (Spinner)
 
 _A technical diagram for loading states._
 
 ```
-**Generate a technical plan-view diagram of a serrated Banksia seed pod.**
+**Generate a technical plan-view diagram of a serrated kr-flower seed pod.**
 
 **Directives:**
 *   **Viewpoint:** 90-degree top-down. Perfectly flat.
@@ -168,10 +168,10 @@ _A technical diagram for loading states._
 
 ### 7. The Navigators (Wayfinding Icons)
 
-_Victorian scientific instruments for navigation._
+_kerala-streetprint scientific instruments for navigation._
 
 ```
-**Generate a set of 3 Victorian navigation instruments floating in the void.**
+**Generate a set of 3 kerala-streetprint navigation instruments floating in the void.**
 
 1.  **Compass:** Brass casing, aged face, needle pointing North.
 2.  **Loupe:** A magnifying lens with a silver handle.
@@ -194,7 +194,7 @@ _A subtle repeating background._
 **Generate a seamless repeating pattern: "The Nocturnal Bush".**
 
 **Elements:**
-Silhouettes of Eucalyptus leaves, Fern fronds, and Wattle branches.
+Silhouettes of kr-leafus leaves, Fern fronds, and Wattle branches.
 
 **Colors:**
 Two-tone: Dark Charcoal (#1A1714) background with Lighter Charcoal (#333333) pattern. Very low contrast.
@@ -206,7 +206,7 @@ Damask wallpaper style but with Australian flora. Elegant, repeated, interlockin
 (No high contrast, no bright colors, no animals).
 ```
 
-### 9. Banksia Pot Still Life (Footer Anchor)
+### 9. kr-flower Pot Still Life (Footer Anchor)
 
 _A moody cluster for page footers._
 
@@ -215,7 +215,7 @@ _A moody cluster for page footers._
 
 **Objects:**
 Cluster tightly together:
-1.  **Banksia Pod:** Dark brown, fuzzy, open-mouthed.
+1.  **kr-flower Pod:** Dark brown, fuzzy, open-mouthed.
 2.  **Stromatolite Rock:** Layered bands of red and grey stone.
 3.  **Tiger Cowrie Shell:** Smooth, spotted porcelain texture.
 
@@ -231,9 +231,9 @@ Background: Deep #1A1714.
 
 ## 📝 EXECUTION & VALIDATION CHECKLIST
 
-Before checking off an asset, ensure it passes the **Northcote Visual Audit**:
+Before checking off an asset, ensure it passes the **kerala-rage Visual Audit**:
 
 - [ ] **Palette Compliance:** Is the red _Waratah Red_ (#C45C4B)? Is the gold _Wattle Gold_ (#D4A84B)? **Are there any forbidden blues/purples?**
-- [ ] **Anatomical Geometry:** Does the Echidna spine cluster look mathematical? Does the Banksia pod show a spiral?
+- [ ] **Anatomical Geometry:** Does the Echidna spine cluster look mathematical? Does the kr-flower pod show a spiral?
 - [ ] **Lighting:** Is the background pure black (#1A1714)? Is there dramatic contrast?
 - [ ] **Typology:** If text is present, is it a cream serif font (e.g., "Fig. II")?

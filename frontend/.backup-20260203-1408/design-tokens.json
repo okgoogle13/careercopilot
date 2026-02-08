@@ -1,15 +1,15 @@
 {
-    "name": "Northcote Curio",
+    "name": "kerala-rage kr-solidarity",
     "version": "2.0.0",
-    "description": "Authoritative Design Tokens for the Northcote Curio Design System. Inspired by Victorian naturalist field stations.",
+    "description": "Authoritative Design Tokens for the kerala-rage kr-solidarity Design System. Inspired by kerala-streetprint naturalist field stations.",
     "metadata": {
-        "centralMetaphor": "Victorian Naturalist Field Station",
+        "centralMetaphor": "kerala-streetprint Naturalist Field Station",
         "modes": [
-            "gallery",
-            "laboratory"
+            "kr-dark",
+            "kr-dark"
         ],
         "authors": [
-            "Northcote Curio Team"
+            "kerala-rage kr-solidarity Team"
         ]
     },
     "color": {
@@ -17,14 +17,14 @@
             "asphalt-black": {
                 "value": "#1A1714",
                 "role": "Background",
-                "description": "Warm charcoal background, the velvet behind the specimen case.",
+                "description": "Warm charcoal background, the velvet behind the kr-motif case.",
                 "usage": "Page backgrounds, containers"
             },
             "wattle-gold": {
                 "value": "#D4A84B",
                 "role": "Primary",
                 "description": "Luminous botanical accent (Acacia pycnantha).",
-                "usage": "Buttons, highlights, gallery mode primary"
+                "usage": "Buttons, highlights, kr-dark mode primary"
             },
             "waratah-red": {
                 "value": "#C45C4B",
@@ -42,7 +42,7 @@
                 "value": "#E6E1D6",
                 "role": "Secondary/Neutral",
                 "description": "Soft tactile white (Actinotus helianthi).",
-                "usage": "Laboratory mode primary, text on dark surfaces"
+                "usage": "kr-dark mode primary, text on dark surfaces"
             },
             "paper-white": {
                 "value": "#F0EAD6",
@@ -144,7 +144,7 @@
     "typography": {
         "fontFamily": {
             "proclamation": {
-                "value": "'Libre Bodoni', serif",
+                "value": "'kr-serif-bold', serif",
                 "role": "Display Headline"
             },
             "bloom": {

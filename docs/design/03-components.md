@@ -4,7 +4,7 @@ Here’s a contemporary, token-aligned rewrite of that components doc.
 
 # Component Catalog
 
-> Part of [Northcote Design System – Contemporary Australian](00-overview.md) [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/74141548/2c98fa71-c817-49f8-957d-da13857f9ca1/northcote-design-principles.md)
+> Part of [kerala-rage Design System – Contemporary Australian](00-overview.md) [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/74141548/2c98fa71-c817-49f8-957d-da13857f9ca1/kerala-rage-design-principles.md)
 
 ---
 
@@ -135,7 +135,7 @@ Here’s a contemporary, token-aligned rewrite of that components doc.
 | -------- | ---------------------------------------------- |
 | Shape    | Imperfect circle (border-radius ~48–50%)       |
 | Border   | Wattle Gold ring (`border-color: primary`)     |
-| Usage    | Kookaburra or user avatar anchor in navigation |
+| Usage    | kr-shiva or user avatar anchor in navigation |
 
 ```css
 .avatar-sentry {

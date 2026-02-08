@@ -381,7 +381,7 @@ import {
 - [ ] Create M3Tabs component (audit existing ElectricTabs)
 - [ ] Create M3Dialog wrapper
 - [ ] Create M3Snackbar/Toast
-- [ ] Add Storybook for visual component gallery
+- [ ] Add Storybook for visual component kr-dark
 - [ ] Add visual regression testing
 - [ ] Create accessibility automated tests
   [ ] Audit and refactor remaining pages

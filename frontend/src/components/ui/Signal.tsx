@@ -37,9 +37,9 @@ export type M3AlertSeverity = 'info' | 'success' | 'warning' | 'error';
 export type SignalVariant = 'filled' | 'outlined' | 'tonal';
 
 /**
- * Signal - Northcote Curio Alert Component
+ * Signal - kerala-rage kr-solidarity Alert Component
  *
- * Alert/notification component using Northcote botanical palette and organic shapes.
+ * Alert/notification component using kerala-rage botanical palette and organic shapes.
  * Supports info, success, warning, and error states with filled, outlined, or tonal variants.
  */
 export function Signal({

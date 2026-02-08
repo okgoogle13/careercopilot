@@ -7,7 +7,7 @@
 
 ## Summary
 
-All forbidden fonts have been successfully purged from the codebase. The Northcote Curio design system is now fully implemented across all layers.
+All forbidden fonts have been successfully purged from the codebase. The kerala-rage kr-solidarity design system is now fully implemented across all layers.
 
 ---
 
@@ -20,32 +20,32 @@ All forbidden fonts have been successfully purged from the codebase. The Northco
    - Added: Fraunces variable axes (SOFT, WONK)
 
 2. **`frontend/src/components/ui/SplitHeader.tsx`** ✅
-   - Replaced: Amstelvar (Trunk) → Libre Bodoni (Proclamation)
+   - Replaced: Amstelvar (Trunk) → kr-serif-bold (Proclamation)
    - Replaced: Recursive (Vine) → Fraunces (Bloom)
    - Updated: Color to Wattle Gold
 
 3. **`frontend/src/components/shared/SplitHeader.tsx`** ✅
-   - Replaced: Amstelvar → Libre Bodoni
+   - Replaced: Amstelvar → kr-serif-bold
    - Replaced: Recursive → Fraunces
    - Updated: Typography comments to Federation Stack
 
 ### Demo/Style Guide Files
 4. **`frontend/src/features/style-guide/M3ExpressiveComponents.tsx`** ✅
    - Replaced: Plus Jakarta Sans → Work Sans (3 occurrences)
-   - Updated: All interactive demos now use Northcote Curio fonts
+   - Updated: All interactive demos now use kerala-rage kr-solidarity fonts
 
 ### Theme Configuration
 5. **`frontend/src/theme/mui-theme.ts`** ✅
-   - Updated: Header comments to reference Northcote Curio
+   - Updated: Header comments to reference kerala-rage kr-solidarity
    - Updated: Color mappings to Wattle Gold, Waratah Red, Concrete Grey
 
 ### Utility Classes
 6. **`frontend/src/index.css`** ✅
    - **COMPLETE REWRITE** of typography utility classes
-   - Removed: `.text-vine`, `.text-trunk`, `.text-leaf` (Eucalypt Stack)
+   - Removed: `.text-vine`, `.text-trunk`, `.text-leaf` (kr-leaf Stack)
    - Added: `.text-proclamation`, `.text-bloom`, `.text-field-note`, `.text-annotation` (Federation Stack)
    - Removed: All Recursive, Amstelvar, Roboto Flex references
-   - Updated: `.banksia-composition` to use Proclamation + Bloom
+   - Updated: `.kr-flower-composition` to use Proclamation + Bloom
    - Updated: `.btn-pebble` to use Work Sans
    - Added: Debug validators for Recursive, Amstelvar, Roboto Flex
 
@@ -59,8 +59,8 @@ All forbidden fonts have been successfully purged from the codebase. The Northco
 - **Amstelvar:** 5 remaining (2 in comments, 3 in debug validators)
 - **Roboto Flex:** 3 remaining (all in debug validators)
 
-### ✅ Northcote Curio Fonts: **ACTIVE**
-- **Libre Bodoni:** 13 references
+### ✅ kerala-rage kr-solidarity Fonts: **ACTIVE**
+- **kr-serif-bold:** 13 references
 - **Fraunces:** 21 references
 - **Work Sans:** 11 references
 - **JetBrains Mono:** 7 references
@@ -97,7 +97,7 @@ All forbidden fonts have been successfully purged from the codebase. The Northco
 ## Design System Status
 
 ### Core Layer ✅ 100% Complete
-- `frontend/src/theme/tokens.json` - Northcote Curio spec
+- `frontend/src/theme/tokens.json` - kerala-rage kr-solidarity spec
 - `frontend/src/theme/design-tokens.css` - Regenerated from tokens.json
 - `frontend/src/index.css` - Font imports updated
 
@@ -138,8 +138,8 @@ All forbidden fonts have been successfully purged from the codebase. The Northco
 
 ## Conclusion
 
-**The Northcote Curio design system is now fully operational.**
+**The kerala-rage kr-solidarity design system is now fully operational.**
 
-All critical code paths use the correct fonts. The remaining 4 references are in comments/documentation and do not affect runtime behavior. The old Flora & Fauna design has been successfully purged and backed up.
+All critical code paths use the correct fonts. The remaining 4 references are in comments/documentation and do not affect runtime behavior. The old Flora & kr-symbol design has been successfully purged and backed up.
 
 **Next recommended action:** Visual QA to verify rendering across all pages.

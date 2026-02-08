@@ -152,12 +152,12 @@ If validation fails, rollback to previous state:
 
 **File:** `/servers/task_router_mcp.py`
 
-**Queue Storage:** `/tmp/northcote-task-queue.json`
+**Queue Storage:** `/tmp/kerala-rage-task-queue.json`
 
 ```python
 class TaskRouter:
     def __init__(self):
-        self.queue_file = "/tmp/northcote-task-queue.json"
+        self.queue_file = "/tmp/kerala-rage-task-queue.json"
         self.tasks = self.load_queue()
 
     def create_task(self, task_data):

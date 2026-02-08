@@ -12,14 +12,14 @@ interface ApplicationCardProps {
 import { StatusBadge, type StatusBadgeVariant } from '../ui/StatusBadge';
 
 /**
- * ApplicationCard - Northcote Curio V3.1 Job Application Tracker Card
+ * ApplicationCard - kerala-rage kr-solidarity V3.1 Job Application Tracker Card
  *
  * Displays job application information with a multi-step progress indicator.
  *
- * **Northcote Curio V3.1 Usage:**
+ * **kerala-rage kr-solidarity V3.1 Usage:**
  * - Shape: `rounded-pebble` → Organic asymmetric corners ✅
  * - Elevation: `shadow-standard` → `shadow-maximum` on hover
- * - Typography: `text-bloom-gallery` (SOFT=100) for titles
+ * - Typography: `text-bloom-kr-dark` (SOFT=100) for titles
  * - Annotations: `text-curator-annotation` for curator notes
  */
 export function ApplicationCard({
@@ -37,7 +37,7 @@ export function ApplicationCard({
       {/* Header Section */}
       <div className="flex items-start justify-between mb-8">
         <div className="flex-1">
-          <h3 className="text-bloom-gallery text-xl mb-1">{title}</h3>
+          <h3 className="text-bloom-kr-dark text-xl mb-1">{title}</h3>
           <p className="text-on-surface-variant font-field-note italic text-lg">{company}</p>
           <div className="flex items-center gap-2 mt-2">
             <span className="text-curator-annotation text-sm">→ {location}</span>

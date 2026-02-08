@@ -14,8 +14,8 @@ figma.connect(
     {
         props: {
             mode: figma.enum("Mode", {
-                Gallery: "gallery",
-                Laboratory: "laboratory",
+                kr-dark: "kr-dark",
+                kr-dark: "kr-dark",
             }),
             elevation: figma.enum("Elevation", {
                 Flat: "flat",

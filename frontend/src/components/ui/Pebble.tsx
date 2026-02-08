@@ -38,7 +38,7 @@ export interface PebbleProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
  * **THE PEBBLE**
  * 
  * A smooth, organically shaped action element.
- * Corresponds to the 'Leaf' (Primary) and 'Pebble' (Container) shapes in Northcote Curio.
+ * Corresponds to the 'Leaf' (Primary) and 'Pebble' (Container) shapes in kerala-rage kr-solidarity.
  * 
  * @example
  * <Pebble variant="primary" onClick={doSomething}>Click Me</Pebble>

@@ -9,12 +9,12 @@
 | :--------------------------------------- | :--------- | :------------------ |
 | `/assets`                                | 21         | ✅ Canonical Active |
 | `/AIStudioAssets`                        | 0          | ❌ Not Found        |
-| `/AIStudioAssets/northcote-curio-assets` | 0          | ❌ Not Found        |
+| `/AIStudioAssets/kerala-rage-kr-solidarity-assets` | 0          | ❌ Not Found        |
 | `/frontend/public/assets`                | 24         | ⚠️ Legacy Public    |
-| `/Curio images phase 3`                  | 56         | ⚠️ Raw Source       |
+| `/kr-solidarity images phase 3`                  | 56         | ⚠️ Raw Source       |
 
 ## Next Steps
 
 - Begin Phase 2: deduplication and consolidation.
 - Analyze `frontend/public/assets` for unique files not present in `/assets`.
-- Process `Curio images phase 3` for relevant Asset 6-10 candidates if duplicates exist.
+- Process `kr-solidarity images phase 3` for relevant Asset 6-10 candidates if duplicates exist.

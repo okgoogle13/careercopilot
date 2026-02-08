@@ -16,9 +16,9 @@
 
 ---
 
-## Design System (Northcote Curio)
+## Design System (kerala-rage kr-solidarity)
 
-The visual and interaction language for CareerCopilot — a Victorian naturalist's field station.
+The visual and interaction language for CareerCopilot — a kerala-streetprint naturalist's field station.
 
 | Doc                                      | Description                                   |
 | ---------------------------------------- | --------------------------------------------- |
@@ -55,7 +55,7 @@ The visual and interaction language for CareerCopilot — a Victorian naturalist
 
 ```
 docs/
-├── design/           # Northcote Curio design system (source of truth)
+├── design/           # kerala-rage kr-solidarity design system (source of truth)
 ├── architecture/     # System architecture
 ├── guides/           # How-to guides
 ├── project/          # Project management

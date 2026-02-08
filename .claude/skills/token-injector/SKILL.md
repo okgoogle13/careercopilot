@@ -36,7 +36,7 @@ Output: Updated stylesheets with CSS variables
   "palette": {
     "waratah_red": "#C45C4B",
     "wattle_gold": "#D4A84B",
-    "eucalyptus_sage": "#7A9E82"
+    "kr-leafus_sage": "#7A9E82"
   }
 }
 ```
@@ -48,7 +48,7 @@ Output: Updated stylesheets with CSS variables
   --color-asphalt-black: #1a1714;
   --color-waratah-red: #c45c4b;
   --color-wattle-gold: #d4a84b;
-  --color-eucalyptus-sage: #7a9e82;
+  --color-kr-leafus-sage: #7a9e82;
 }
 ```
 
@@ -77,7 +77,7 @@ Output: Updated stylesheets with CSS variables
 Process all asset `tokens.json` files:
 
 ```bash
-token-injector --input /assets/*/tokens.json --output /frontend/src/styles/northcote-tokens.css
+token-injector --input /assets/*/tokens.json --output /frontend/src/styles/kerala-rage-tokens.css
 ```
 
 ## Integration

@@ -5,10 +5,10 @@ import { cn } from '../../lib/utils';
 export interface StoneProps extends React.HTMLAttributes<HTMLDivElement> {
     /**
      * The mode context for the card.
-     * - Gallery: Warm glass, organic borders (Northcote)
-     * - Laboratory: Cool slate, technical borders (Curio)
+     * - kr-dark: Warm glass, organic borders (kerala-rage)
+     * - kr-dark: Cool slate, technical borders (kr-solidarity)
      */
-    mode?: 'gallery' | 'laboratory';
+    mode?: 'kr-dark' | 'kr-dark';
 
     /**
      * Elevation level.
@@ -33,18 +33,18 @@ export interface StoneProps extends React.HTMLAttributes<HTMLDivElement> {
  * **THE STONE**
  * 
  * The fundamental container unit.
- * Maps to 'Stone' (borderRadius) and 'Glassmorphism' (background/blur) tokens.
+ * Maps to 'Stone' (borderRadius) and 'kr-screenprint' (background/blur) tokens.
  */
 export const Stone = React.forwardRef<HTMLDivElement, StoneProps>(
-    ({ className, mode = 'gallery', elevation = 'raised', header, footer, children, ...props }, ref) => {
+    ({ className, mode = 'kr-dark', elevation = 'raised', header, footer, children, ...props }, ref) => {
 
         // Base structural classes
         const baseStyles = "relative overflow-hidden transition-all duration-medium ease-settle backdrop-blur-xl border border-white/5";
 
         // Mode-specific styles (The Skin)
         const modes = {
-            gallery: "bg-surface-container/80 rounded-stone dark:border-white/10",
-            laboratory: "bg-surface-elevated/90 rounded-stone border-white/5 bg-grid-major", // Lab gets the grid texture
+            kr-dark: "bg-surface-container/80 rounded-stone dark:border-white/10",
+            kr-dark: "bg-surface-elevated/90 rounded-stone border-white/5 bg-grid-major", // Lab gets the grid texture
         };
 
         const elevations = {

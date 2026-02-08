@@ -10,9 +10,9 @@
 | Subdirectory | File Count | Notes |
 | :--- | :--- | :--- |
 | `/assets` | 1 | ✅ Validated |
-| `/fauna` | 3 | ✅ Validated |
+| `/kr-symbol` | 3 | ✅ Validated |
 | `/plates` | 5 | ✅ Validated |
-| `/specimens` | 11 | ✅ Validated |
+| `/kr-motifs` | 11 | ✅ Validated |
 | `/textures` | 10 | ✅ Validated |
 | `/ui` | 4 | ✅ Validated |
 | `/uncategorized` | 46 | ⚠️ Requires manual review |

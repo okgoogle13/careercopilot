@@ -6,8 +6,8 @@ Date: 2026-02-08 00:13:31
 - **Migration Strategy:** Regex substitution of legacy tokens to new semantic tokens + tokens.json generation.
 
 ## Files Modified
-- `frontend/src/design/styles/northcote.css`
-- `frontend/src/design/styles/northcote.css`
+- `frontend/src/design/styles/kerala-rage.css`
+- `frontend/src/design/styles/kerala-rage.css`
 
 ## Manual Cleanup Required
 
@@ -19,6 +19,6 @@ Date: 2026-02-08 00:13:31
    - Global search for `font-family` and ensure `Inter Variable` or `Recursive` is used.
    - Update `tailwind.config.ts` if needed.
 3. **Motion:** Check animations. Legacy linear easings may still exist.
-4. **CSS Variables:** Verify `northcote.css` contains the new root variables.
+4. **CSS Variables:** Verify `kerala-rage.css` contains the new root variables.
 5. **Shadows:** Check `tokens.json` for new shadow definitions.
 

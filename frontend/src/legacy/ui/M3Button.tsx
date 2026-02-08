@@ -22,38 +22,38 @@ const buttonVariants = cva(
                 icon: 'size-10',
             },
             mode: {
-                gallery: '',
-                laboratory: '',
+                kr-dark: '',
+                kr-dark: '',
             },
         },
         compoundVariants: [
-            // Gallery Mode
+            // kr-dark Mode
             {
-                mode: 'gallery',
+                mode: 'kr-dark',
                 variant: 'primary',
                 class: 'bg-wattle-gold text-surface-asphalt-black hover:bg-primary-wattle-glow border border-transparent',
             },
             {
-                mode: 'gallery',
+                mode: 'kr-dark',
                 variant: 'secondary',
-                class: 'bg-surface-gallery-glass-medium text-secondary-concrete-grey border-glass-border hover:bg-surface-gallery-elevated',
+                class: 'bg-surface-kr-dark-glass-medium text-secondary-concrete-grey border-glass-border hover:bg-surface-kr-dark-elevated',
             },
-            // Laboratory Mode
+            // kr-dark Mode
             {
-                mode: 'laboratory',
+                mode: 'kr-dark',
                 variant: 'primary',
                 class: 'bg-wattle-gold text-surface-asphalt-black hover:bg-primary-wattle-glow rounded-sm',
             },
             {
-                mode: 'laboratory',
+                mode: 'kr-dark',
                 variant: 'secondary',
-                class: 'bg-surface-laboratory-glass-medium text-secondary-concrete-grey border-glass-border rounded-sm hover:bg-surface-laboratory-elevated',
+                class: 'bg-surface-kr-dark-glass-medium text-secondary-concrete-grey border-glass-border rounded-sm hover:bg-surface-kr-dark-elevated',
             },
         ],
         defaultVariants: {
             variant: 'primary',
             size: 'default',
-            mode: 'gallery',
+            mode: 'kr-dark',
         },
     }
 );
@@ -68,9 +68,9 @@ const M3Button = React.forwardRef<HTMLButtonElement, M3ButtonProps>(
     ({ className, variant, size, asChild: _asChild = false, ...props }, ref) => {
         const { mode } = useMode();
 
-        // Shape logic: Gallery = Organic, Lab = Precise
+        // Shape logic: kr-dark = Organic, Lab = Precise
         // We use inline styles for shape to avoid generic tailwind classes
-        const shapeStyle = mode === 'gallery'
+        const shapeStyle = mode === 'kr-dark'
             ? { borderRadius: 'var(--radius-leaf)' }
             : { borderRadius: '4px' }; // Precise
 
@@ -90,7 +90,7 @@ const M3Button = React.forwardRef<HTMLButtonElement, M3ButtonProps>(
             >
                 <span className={cn(
                     "relative",
-                    mode === 'gallery' ? 'font-field-note font-semibold tracking-wide' : 'font-annotation uppercase tracking-widest text-[11px]'
+                    mode === 'kr-dark' ? 'font-field-note font-semibold tracking-wide' : 'font-annotation uppercase tracking-widest text-[11px]'
                 )}>
                     {props.children}
                 </span>
@@ -119,7 +119,7 @@ export const M3IconButton = React.forwardRef<HTMLButtonElement, M3IconButtonProp
                     : color === 'error'
                         ? 'bg-error text-on-error'
                         : 'bg-primary text-on-primary';
-        const shapeClass = mode === 'gallery' ? 'rounded-[var(--radius-seed)]' : 'rounded-md';
+        const shapeClass = mode === 'kr-dark' ? 'rounded-[var(--radius-seed)]' : 'rounded-md';
 
         return (
             <button

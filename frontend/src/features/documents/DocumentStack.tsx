@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FileText, Upload, MoreVertical, FileCode, FileType, CheckCircle, Clock } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { NorthcoteButton } from '@/components/ui/NorthcoteButton';
+import { kerala-rageButton } from '@/components/ui/kerala-rageButton';
 
 interface Document {
     id: string;
@@ -72,10 +72,10 @@ export const DocumentStack: React.FC = () => {
                         Manage your source materials. Upload resumes, cover letters, and raw career data.
                     </p>
                 </div>
-                <NorthcoteButton variant="primary" size="md" className="gap-2">
+                <kerala-rageButton variant="primary" size="md" className="gap-2">
                     <Upload className="w-4 h-4" />
                     Upload Document
-                </NorthcoteButton>
+                </kerala-rageButton>
             </div>
 
             {/* Document Grid */}
@@ -85,10 +85,10 @@ export const DocumentStack: React.FC = () => {
                     return (
                         <div
                             key={doc.id}
-                            className="p-4 flex items-center gap-6 rounded-[var(--radius-stone)] border border-outline-variant/30 bg-surface-laboratory-slate-smoke-low/20 group hover:bg-surface-laboratory-slate-smoke-low/50 transition-colors"
+                            className="p-4 flex items-center gap-6 rounded-[var(--radius-stone)] border border-outline-variant/30 bg-surface-kr-dark-slate-smoke-low/20 group hover:bg-surface-kr-dark-slate-smoke-low/50 transition-colors"
                         >
                             {/* Icon Container */}
-                            <div className="w-12 h-12 rounded-[var(--radius-stone)] bg-surface-laboratory-slate-smoke-highest flex items-center justify-center border border-outline-variant/30">
+                            <div className="w-12 h-12 rounded-[var(--radius-stone)] bg-surface-kr-dark-slate-smoke-highest flex items-center justify-center border border-outline-variant/30">
                                 <Icon className="w-6 h-6 text-on-surface-paper-white opacity-70" />
                             </div>
 
@@ -120,7 +120,7 @@ export const DocumentStack: React.FC = () => {
 
                                 {/* Status Pill */}
                                 <div className={cn(
-                                    "px-3 py-1 rounded-full border bg-surface-laboratory-slate-smoke-highest/30 text-xs font-bold uppercase tracking-wider flex items-center gap-2",
+                                    "px-3 py-1 rounded-full border bg-surface-kr-dark-slate-smoke-highest/30 text-xs font-bold uppercase tracking-wider flex items-center gap-2",
                                     getStatusColor(doc.status),
                                     doc.status === 'analyzed' && "border-primary-wattle-gold/20",
                                     doc.status === 'pending' && "border-secondary-flannel/20",
@@ -132,7 +132,7 @@ export const DocumentStack: React.FC = () => {
                                 </div>
 
                                 {/* Actions Menu */}
-                                <button className="p-2 text-secondary-flannel-dim hover:text-on-surface-paper-white hover:bg-surface-laboratory-slate-smoke-highest rounded-full transition-colors">
+                                <button className="p-2 text-secondary-flannel-dim hover:text-on-surface-paper-white hover:bg-surface-kr-dark-slate-smoke-highest rounded-full transition-colors">
                                     <MoreVertical className="w-5 h-5" />
                                 </button>
                             </div>
@@ -142,7 +142,7 @@ export const DocumentStack: React.FC = () => {
             </div>
 
             {/* Upload Drop Zone Placeholder */}
-            <div className="border-2 border-dashed border-outline-variant/20 rounded-[var(--radius-stone)] p-12 flex flex-col items-center justify-center text-secondary-flannel-dim hover:border-primary-wattle-gold/30 hover:bg-surface-laboratory-slate-smoke-low/20 transition-all cursor-pointer">
+            <div className="border-2 border-dashed border-outline-variant/20 rounded-[var(--radius-stone)] p-12 flex flex-col items-center justify-center text-secondary-flannel-dim hover:border-primary-wattle-gold/30 hover:bg-surface-kr-dark-slate-smoke-low/20 transition-all cursor-pointer">
                 <Upload className="w-12 h-12 mb-4 opacity-50" />
                 <p className="text-title-medium font-bold text-on-surface-paper-white">Drag and drop files here</p>
                 <p className="text-body-medium mt-2">Supports PDF, DOCX, TXT (Max 10MB)</p>

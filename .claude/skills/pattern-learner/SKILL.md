@@ -9,7 +9,7 @@ tags: []
 
 ## Purpose
 
-Self-improving pattern database that analyzes successful assets (score ≥95) to extract effective prompt language and abstract reusable patterns for the Northcote library.
+Self-improving pattern database that analyzes successful assets (score ≥95) to extract effective prompt language and abstract reusable patterns for the kerala-rage library.
 
 ## When to Use
 
@@ -23,7 +23,7 @@ Self-improving pattern database that analyzes successful assets (score ≥95) to
 2. Extract language that drove compliance improvement
 3. Abstract reusable pattern from specific instance
 4. Tag effectiveness (high/medium/low based on first-attempt success)
-5. Update `/docs/northcote-asset-generation-patterns.md`
+5. Update `/docs/kerala-rage-asset-generation-patterns.md`
 
 ## Example Learning
 

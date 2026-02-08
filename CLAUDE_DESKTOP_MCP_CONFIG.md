@@ -1,7 +1,7 @@
 # Claude Desktop MCP Configuration - Design System Integration
 
 **Last Updated:** 2026-01-29  
-**Purpose:** Register Design System Sidekick server for Northcote Curio asset workflows
+**Purpose:** Register Design System Sidekick server for kerala-rage kr-solidarity asset workflows
 
 ---
 
@@ -168,7 +168,7 @@ python3 -m pip install --upgrade google-generativeai
 ### Validate DALL-E Output
 
 ```
-I've generated Asset 1 (Curio Wallpaper). Can you validate it against Northcote compliance criteria?
+I've generated Asset 1 (kr-solidarity Wallpaper). Can you validate it against kerala-rage compliance criteria?
 
 [Upload image or provide path]
 ```
@@ -200,7 +200,7 @@ Extract color palette and scale hierarchy from this validated asset.
 
 Claude will call `extract_visual_design_tokens` with vision analysis to identify:
 - Hex codes with token matches
-- Specimen size relationships
+- kr-motif size relationships
 - Density zone coverage
 
 ---
@@ -316,4 +316,4 @@ https://spec.modelcontextprotocol.io/
 ---
 
 **Configuration Complete**  
-**Design System Sidekick Ready for Northcote Curio Asset Workflows**
+**Design System Sidekick Ready for kerala-rage kr-solidarity Asset Workflows**

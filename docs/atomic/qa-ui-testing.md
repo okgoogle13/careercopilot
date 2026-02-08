@@ -10,14 +10,14 @@
 ## Navigation Regression
 
 - Verify `?tool=` routing and back/forward navigation.
-- Check Gallery + Laboratory key flows.
+- Check kr-dark + kr-dark key flows.
 
-## Northcote Curio Visual Verification
+## kerala-rage kr-solidarity Visual Verification
 
-- Confirm `frontend/src/globals.css` loads Northcote Curio tokens.
-- Verify `NorthcoteButton` hover uses GRAD physics (no layout shift).
+- Confirm `frontend/src/globals.css` loads kerala-rage kr-solidarity tokens.
+- Verify `kerala-rageButton` hover uses GRAD physics (no layout shift).
 - Verify `StatusBadge` breathing animation present.
-- Spot-check Gallery + Laboratory pages for tokenized colors and shapes.
+- Spot-check kr-dark + kr-dark pages for tokenized colors and shapes.
 
 ## Lighthouse
 

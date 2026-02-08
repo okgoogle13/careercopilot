@@ -1,7 +1,7 @@
 import { useMode } from '@/hooks/use-mode';
 
 export const TokenTest = () => {
-  const { mode, isGalleryMode, isLaboratoryMode } = useMode();
+  const { mode, iskr-darkMode, iskr-darkMode } = useMode();
 
   return (
     <div
@@ -24,8 +24,8 @@ export const TokenTest = () => {
         <p>
           Current Mode: <span className="font-annotation text-clinical-sage">{mode}</span>
         </p>
-        <p>Gallery Mode: {isGalleryMode ? '✅' : '❌'}</p>
-        <p>Laboratory Mode: {isLaboratoryMode ? '✅' : '❌'}</p>
+        <p>kr-dark Mode: {iskr-darkMode ? '✅' : '❌'}</p>
+        <p>kr-dark Mode: {iskr-darkMode ? '✅' : '❌'}</p>
       </div>
 
       <div className="mt-6 flex gap-3">

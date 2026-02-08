@@ -7,7 +7,7 @@
 - **Profile Ingestion Engine**: Upload PDFs/IDFs, extract data via Google Genkit, and structure career history.
 - **Resume Optimizer** ✨ NEW: AI-powered keyword integration for ATS optimization with company-specific tailoring.
 - **Company Analyzer** ✨ NEW: Analyze company websites to extract keywords and communication tone for targeted resumes.
-- **Validation Dashboard**: Review and edit AI-extracted career data with Northcote Curio M3 Expressive UI.
+- **Validation Dashboard**: Review and edit AI-extracted career data with kerala-rage kr-solidarity M3 Expressive UI.
 - **Dual-Engine AI**: Leveraging Gemini 3.0 Flash (Speed) and Gemini 3.0 Pro (Reasoning).
 - **Automated UAT**: Full end-to-end testing suite with Playwright.
 - **Chrome Extension**: Intelligent job capture with auto-deadline extraction and calendar reminders.
@@ -22,11 +22,11 @@
 
 ### Design System
 
-- **UI System**: Northcote Contemporary Australian Design System on top of MUI v5 and Material 3 Expressive
+- **UI System**: kerala-rage Contemporary Australian Design System on top of MUI v5 and Material 3 Expressive
 - **Visual Identity**: Dark UI anchored in Asphalt Black (`#1A1714`) with Paper White (`#F5F0E8`) for high-contrast text
 - **Core Palette**: Wattle Gold (`#D4A84B`) for primary actions, Waratah Red (`#C45C4B`) for urgency, Ochre Earth (`#B8733D`) and Concrete Grey (`#A39B8F`) as structural neutrals, Gum Leaf Green (`#6B7F6E`) as a growth accent
-- **Tokens**: Centralised in `design-system/tokens.json` and exposed via CSS variables in `design-system/northcote.css` (color, shape, elevation, motion)
-- **Aesthetic**: Peter Drew–influenced street art energy, Material 3 Expressive motion, Australian endemic species as living symbols (Kookaburra, Waratah, Banksia, Eucalyptus), anti‑colonial and contemporary (no Victorian cabinet / specimen framing)
+- **Tokens**: Centralised in `design-system/tokens.json` and exposed via CSS variables in `design-system/kerala-rage.css` (color, shape, elevation, motion)
+- **Aesthetic**: Peter Drew–influenced street art energy, Material 3 Expressive motion, Australian endemic species as living symbols (kr-shiva, Waratah, kr-flower, kr-leafus), anti‑colonial and contemporary (no kerala-streetprint cabinet / kr-motif framing)
 
 ### Backend (`/backend`)
 
@@ -131,7 +131,7 @@ Create `.env` files in `backend/` and `frontend/` (see `.env.example`).
 
 **Design:**
 
-- Northcote Curio M3 Expressive design system
+- kerala-rage kr-solidarity M3 Expressive design system
 - Organic shapes (Pebble, Tech archetypes)
 - Spring motion effects
 - Sage Green + Soft Coral palette

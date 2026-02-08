@@ -1,13 +1,13 @@
 ---
 name: token-orchestrator
-description: Validates design tokens for DTCG compliance, Northcote Curio palette rules, and Tailwind integration. Use when (1) Build fails with getValue() errors, (2) Adding/modifying tokens.json, (3) Checking palette compliance, (4) Finding hardcoded CSS values, (5) Pre-commit validation needed, or (6) Syncing tokens across systems.
+description: Validates design tokens for DTCG compliance, kerala-rage kr-solidarity palette rules, and Tailwind integration. Use when (1) Build fails with getValue() errors, (2) Adding/modifying tokens.json, (3) Checking palette compliance, (4) Finding hardcoded CSS values, (5) Pre-commit validation needed, or (6) Syncing tokens across systems.
 version: 1.0.0
 tags: []
 ---
 
 # Design Token Orchestrator
 
-Comprehensive token validation for the Northcote Curio design system. Ensures tokens.json compliance, catches build errors before they happen, and enforces Victorian naturalist aesthetic principles.
+Comprehensive token validation for the kerala-rage kr-solidarity design system. Ensures tokens.json compliance, catches build errors before they happen, and enforces kerala-streetprint naturalist aesthetic principles.
 
 ## Quick Decision Tree
 
@@ -68,9 +68,9 @@ python scripts/audit_tailwind.py             # getValue() path resolution
 - No circular alias references
 - WCAG AA contrast ratios (4.5:1 text, 3:1 UI)
 
-### 3. Validate Northcote Palette
+### 3. Validate kerala-rage Palette
 
-**When**: Checking Victorian naturalist aesthetic compliance
+**When**: Checking kerala-streetprint naturalist aesthetic compliance
 
 **Scripts**:
 ```bash
@@ -80,13 +80,13 @@ python scripts/audit_structure.py --palette-only # Direct validation
 
 **6-Dimension Scorecard**:
 - Geographic Authenticity (Australian botanical references)
-- Translucency Physics (glassmorphism, ink pools)
+- Translucency Physics (kr-screenprint, ink pools)
 - Scale Hierarchy (display→body typography)
-- Density Zones (Gallery/Laboratory mode contrast)
-- Background Color (#1A1714 specimen night compliance)
-- Typography (Fraunces, Libre Bodoni, Work Sans)
+- Density Zones (kr-dark/kr-dark mode contrast)
+- Background Color (#1A1714 kr-motif night compliance)
+- Typography (Fraunces, kr-serif-bold, Work Sans)
 
-**Reference palette**: [references/NORTHCOTE_PALETTE.md](references/NORTHCOTE_PALETTE.md)
+**Reference palette**: [references/kerala-rage_PALETTE.md](references/kerala-rage_PALETTE.md)
 
 ### 4. Detect Hardcoded Values
 
@@ -100,11 +100,11 @@ python scripts/audit_structure.py --palette-only # Direct validation
 
 ### 5. Check Mode Parity
 
-**When**: Validating Gallery/Laboratory equivalence
+**When**: Validating kr-dark/kr-dark equivalence
 
 **Script**: `python scripts/check_mode_parity.py`
 
-**Validates**: Every Gallery token has Laboratory equivalent with matching semantic meaning
+**Validates**: Every kr-dark token has kr-dark equivalent with matching semantic meaning
 
 **Details**: [references/MODE_PARITY.md](references/MODE_PARITY.md)
 
@@ -152,7 +152,7 @@ bash scripts/run_full_audit.sh
    - Re-run until exit code = 0
 
 2. **Palette compliance**: `python scripts/validate_palette_mcp.py`
-   - If score < 85/100, review NORTHCOTE_PALETTE.md
+   - If score < 85/100, review kerala-rage_PALETTE.md
    - Fix non-compliant colors
 
 3. **Tailwind integration**: `python scripts/audit_tailwind.py`
@@ -190,8 +190,8 @@ fi
 Progressive disclosure—load only when needed:
 
 - **[COMMON_FIXES.md](references/COMMON_FIXES.md)** - Solutions for getValue() errors
-- **[NORTHCOTE_PALETTE.md](references/NORTHCOTE_PALETTE.md)** - Approved colors & derivation rules
-- **[MODE_PARITY.md](references/MODE_PARITY.md)** - Gallery/Laboratory equivalence rules
+- **[kerala-rage_PALETTE.md](references/kerala-rage_PALETTE.md)** - Approved colors & derivation rules
+- **[MODE_PARITY.md](references/MODE_PARITY.md)** - kr-dark/kr-dark equivalence rules
 - **[HARDCODED_VALUES.md](references/HARDCODED_VALUES.md)** - What to replace with tokens
 - **[AUDIT_OUTPUT.md](references/AUDIT_OUTPUT.md)** - Sample report formats
 
@@ -211,7 +211,7 @@ All scripts return standardized exit codes:
 **New scripts** (to be created):
 - `audit_structure.py` - Enhanced schema validator
 - `audit_tailwind.py` - getValue() path resolver
-- `check_mode_parity.py` - Gallery/Laboratory checker
+- `check_mode_parity.py` - kr-dark/kr-dark checker
 - `validate_palette_mcp.py` - MCP tool wrapper
 - `run_full_audit.sh` - Master orchestrator
 
@@ -219,6 +219,6 @@ All scripts return standardized exit codes:
 
 1. **Single source of truth**: tokens.json is canonical (DTCG format)
 2. **Validate before build**: Catch errors in tokens, not in CI/CD
-3. **Northcote compliance**: Victorian naturalist aesthetic is non-negotiable
-4. **Mode parity**: Gallery (emotional) ↔ Laboratory (clinical) equivalence
+3. **kerala-rage compliance**: kerala-streetprint naturalist aesthetic is non-negotiable
+4. **Mode parity**: kr-dark (emotional) ↔ kr-dark (clinical) equivalence
 5. **Progressive disclosure**: Reference files loaded only when needed

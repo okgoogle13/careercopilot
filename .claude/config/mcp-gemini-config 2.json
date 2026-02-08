@@ -25,7 +25,7 @@
         "AUTO_COMMIT": "true",
         "FILTER": "components-only",
         "DIFF_FORMAT": "compact",
-        "COMMIT_TEMPLATE": "refactor(components): migrate {component_name} to Northcote"
+        "COMMIT_TEMPLATE": "refactor(components): migrate {component_name} to kerala-rage"
       },
       "description": "Git operations for version control and commits",
       "optimization": "Incremental commits prevent context bloat"
@@ -204,7 +204,7 @@
     "when_complete": "Gemini reports final metrics with completion percentage",
     "handback_to": "Claude Code",
     "next_phases": [
-      "Phase 4: northcote-visual-audit on 6 migrated components",
+      "Phase 4: kerala-rage-visual-audit on 6 migrated components",
       "Phase 5: Migrate secondary components (Seed, Vessel, etc.)",
       "Phase 6: Audit remaining 11 shared components"
     ],

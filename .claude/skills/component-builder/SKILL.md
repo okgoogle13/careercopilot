@@ -20,7 +20,7 @@ NEVER use Roboto (static), or System fonts. Use only:
 - **Agit-Prop** (`Inter Display Black 900`): Hero moments.
 - **Solidarity** (Heavy/Bold): The ONLY mode. High-contrast, localized beauty, visceral interaction.
 - **Theory**: ABOLISHED.
-- **Laboratory**: ABOLISHED.
+- **kr-dark**: ABOLISHED.
 - **Direct Action** (`Inter Variable`): Functional body/UI.
 
 ### 2. Kerala Rage Morphology
@@ -38,7 +38,7 @@ NEVER use Roboto (static), or System fonts. Use only:
 ## Workflow
 
 3.  **Receive Spec**: Get component name and props.
-4.  **Mode Enforcement**: REJECT any request for "Theory", "Lab", or "Gallery" mode. FORCE "Solidarity".
+4.  **Mode Enforcement**: REJECT any request for "Theory", "Lab", or "kr-dark" mode. FORCE "Solidarity".
 5.  **Generate Code**:
     - Use `lucide-react` for icons.
     - Use `framer-motion` for complex physics.

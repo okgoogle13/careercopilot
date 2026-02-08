@@ -1,24 +1,24 @@
 #!/usr/bin/env ts-node
 /**
- * Component Inventory Generator - Northcote Curio Edition
+ * Component Inventory Generator - kerala-rage kr-solidarity Edition
  *
  * This script analyzes the frontend codebase to generate an accurate inventory
- * of all components, their usage patterns, and Northcote Curio migration status.
+ * of all components, their usage patterns, and kerala-rage kr-solidarity migration status.
  *
  * Features:
  * - Uses TypeScript AST analysis via ts-morph for accuracy
  * - Detects all import patterns (default, named, dynamic)
- * - Tracks component dependencies and Northcote Curio migration status
+ * - Tracks component dependencies and kerala-rage kr-solidarity migration status
  * - Identifies test/story file coverage
  * - Categorizes components by type
- * - Analyzes Northcote Curio adoption (token usage, mode system, legacy usage)
+ * - Analyzes kerala-rage kr-solidarity adoption (token usage, mode system, legacy usage)
  * - Generates detailed JSON report with migration recommendations
  *
- * Migration Status Detection (Northcote Curio):
- * - 'migrated': Uses Curio tokens/mode system, no legacy MUI/M3 dependencies
- * - 'mixed': Uses Curio tokens/mode system alongside legacy MUI/M3
- * - 'not_migrated': Uses legacy MUI/M3 without Curio tokens
- * - 'unknown': No clear Curio or legacy signals detected
+ * Migration Status Detection (kerala-rage kr-solidarity):
+ * - 'migrated': Uses kr-solidarity tokens/mode system, no legacy MUI/M3 dependencies
+ * - 'mixed': Uses kr-solidarity tokens/mode system alongside legacy MUI/M3
+ * - 'not_migrated': Uses legacy MUI/M3 without kr-solidarity tokens
+ * - 'unknown': No clear kr-solidarity or legacy signals detected
  *
  * Usage:
  *   npx ts-node scripts/component-inventory.ts
@@ -64,7 +64,7 @@ interface ComponentInfo {
   usesLegacyM3: boolean;
   isDemo: boolean;
   migrationStatus: 'migrated' | 'mixed' | 'not_migrated' | 'unknown';
-  // Northcote Curio specific fields
+  // kerala-rage kr-solidarity specific fields
   usesDesignTokens: boolean;
   usesModeSystem: boolean;
 }
@@ -81,12 +81,12 @@ interface InventoryReport {
     'migrated' | 'mixed' | 'not_migrated' | 'unknown',
     number
   >;
-  curioAdoption: {
-    withCurioTokens: number;
+  kr-solidarityAdoption: {
+    withkr-solidarityTokens: number;
     withModeSystem: number;
     legacyMUI: number;
     legacyM3: number;
-    fullyCurio: number;
+    fullykr-solidarity: number;
   };
 }
 
@@ -226,7 +226,7 @@ function analyzeComponents(): InventoryReport {
       }
     });
 
-    // Determine migration flags and Northcote Curio adoption
+    // Determine migration flags and kerala-rage kr-solidarity adoption
     const importDecls = sourceFile.getImportDeclarations();
     const usesMUI = importDecls.some((imp) => {
       const mod = imp.getModuleSpecifierValue();
@@ -256,32 +256,32 @@ function analyzeComponents(): InventoryReport {
       }) ||
       /\bM3[A-Z]/.test(text);
 
-    const curioTokenPattern =
-      /(wattle|waratah|eucalypt|flannel|paper-white|specimen|pebble|stone|northcote|curio|banksia|bottlebrush|gum|fern|sentry|gallery|laboratory|slate)/i;
+    const kr-solidarityTokenPattern =
+      /(wattle|waratah|kr-leaf|flannel|paper-white|kr-motif|pebble|stone|kerala-rage|kr-solidarity|kr-flower|bottlebrush|gum|fern|sentry|kr-dark|kr-dark|slate)/i;
     const usesDesignTokens =
-      curioTokenPattern.test(text) ||
+      kr-solidarityTokenPattern.test(text) ||
       /--(radius|elevation|duration|motion|surface|color)-/i.test(text);
 
     const usesModeSystem =
       text.includes('useMode') ||
       text.includes('ModeContext') ||
-      text.includes("mode === 'gallery'") ||
-      text.includes('mode === "gallery"') ||
-      text.includes("mode === 'laboratory'") ||
-      text.includes('mode === "laboratory"');
+      text.includes("mode === 'kr-dark'") ||
+      text.includes('mode === "kr-dark"') ||
+      text.includes("mode === 'kr-dark'") ||
+      text.includes('mode === "kr-dark"');
 
     const isDemo = filePath.includes('Figma UI Files');
     let migrationStatus: ComponentInfo['migrationStatus'] = 'unknown';
 
-    // Determine migration status with Northcote Curio detection
-    const usesCurioSignals = usesDesignTokens || usesModeSystem;
+    // Determine migration status with kerala-rage kr-solidarity detection
+    const useskr-solidaritySignals = usesDesignTokens || usesModeSystem;
     const usesLegacy = usesMUI || usesLegacyM3;
 
-    if (usesCurioSignals && !usesLegacy) {
+    if (useskr-solidaritySignals && !usesLegacy) {
       migrationStatus = 'migrated';
-    } else if (usesCurioSignals && usesLegacy) {
+    } else if (useskr-solidaritySignals && usesLegacy) {
       migrationStatus = 'mixed';
-    } else if (!usesCurioSignals && usesLegacy) {
+    } else if (!useskr-solidaritySignals && usesLegacy) {
       migrationStatus = 'not_migrated';
     }
 
@@ -428,11 +428,11 @@ function analyzeComponents(): InventoryReport {
     );
   }
 
-  // Northcote Curio specific recommendations
+  // kerala-rage kr-solidarity specific recommendations
   const mixedComponents = components.filter((c) => c.migrationStatus === 'mixed');
   if (mixedComponents.length > 0) {
     recommendations.push(
-      `${mixedComponents.length} components mix Northcote Curio tokens with legacy MUI/M3 usage. Consolidate to Curio-only: ` +
+      `${mixedComponents.length} components mix kerala-rage kr-solidarity tokens with legacy MUI/M3 usage. Consolidate to kr-solidarity-only: ` +
         mixedComponents
           .slice(0, 5)
           .map((c) => c.name)
@@ -444,7 +444,7 @@ function analyzeComponents(): InventoryReport {
   const notMigratedComponents = components.filter((c) => c.migrationStatus === 'not_migrated');
   if (notMigratedComponents.length > 0) {
     recommendations.push(
-      `${notMigratedComponents.length} components still rely on legacy MUI/M3 without Curio tokens. Migrate to Northcote Curio: ` +
+      `${notMigratedComponents.length} components still rely on legacy MUI/M3 without kr-solidarity tokens. Migrate to kerala-rage kr-solidarity: ` +
         notMigratedComponents
           .slice(0, 5)
           .map((c) => c.name)
@@ -467,13 +467,13 @@ function analyzeComponents(): InventoryReport {
     } as Record<'migrated' | 'mixed' | 'not_migrated' | 'unknown', number>
   );
 
-  // Northcote Curio adoption metrics
-  const curioAdoption = {
-    withCurioTokens: components.filter((c) => c.usesDesignTokens).length,
+  // kerala-rage kr-solidarity adoption metrics
+  const kr-solidarityAdoption = {
+    withkr-solidarityTokens: components.filter((c) => c.usesDesignTokens).length,
     withModeSystem: components.filter((c) => c.usesModeSystem).length,
     legacyMUI: components.filter((c) => c.usesMUI).length,
     legacyM3: components.filter((c) => c.usesLegacyM3).length,
-    fullyCurio: components.filter((c) => c.migrationStatus === 'migrated').length,
+    fullykr-solidarity: components.filter((c) => c.migrationStatus === 'migrated').length,
   };
 
   const migratedWithoutTokens = components.filter(
@@ -481,7 +481,7 @@ function analyzeComponents(): InventoryReport {
   );
   if (migratedWithoutTokens.length > 0) {
     recommendations.push(
-      `${migratedWithoutTokens.length} migrated components lack Curio tokens. Add Northcote token classes/vars: ` +
+      `${migratedWithoutTokens.length} migrated components lack kr-solidarity tokens. Add kerala-rage token classes/vars: ` +
         migratedWithoutTokens
           .slice(0, 5)
           .map((c) => c.name)
@@ -490,13 +490,13 @@ function analyzeComponents(): InventoryReport {
     );
   }
 
-  const fullyCurioPercent = (
-    (curioAdoption.fullyCurio / components.length) *
+  const fullykr-solidarityPercent = (
+    (kr-solidarityAdoption.fullykr-solidarity / components.length) *
     100
   ).toFixed(1);
   recommendations.push(
-    `Northcote Curio Adoption: ${fullyCurioPercent}% (${curioAdoption.fullyCurio}/${components.length}) fully adopted. ` +
-      `Target: 80%+ for complete Curio migration.`
+    `kerala-rage kr-solidarity Adoption: ${fullykr-solidarityPercent}% (${kr-solidarityAdoption.fullykr-solidarity}/${components.length}) fully adopted. ` +
+      `Target: 80%+ for complete kr-solidarity migration.`
   );
 
   const report: InventoryReport = {
@@ -508,7 +508,7 @@ function analyzeComponents(): InventoryReport {
     mostUsedComponents,
     recommendations,
     migrationSummary,
-    curioAdoption,
+    kr-solidarityAdoption,
   };
 
   return report;
@@ -533,18 +533,18 @@ function main() {
       console.log(`  ${category}: ${count}`);
     });
 
-    console.log(`\n=== Northcote Curio Migration Status ===`);
-    console.log(`Migrated (Curio Only): ${report.migrationSummary.migrated}`);
-    console.log(`Mixed (Curio + Legacy): ${report.migrationSummary.mixed}`);
+    console.log(`\n=== kerala-rage kr-solidarity Migration Status ===`);
+    console.log(`Migrated (kr-solidarity Only): ${report.migrationSummary.migrated}`);
+    console.log(`Mixed (kr-solidarity + Legacy): ${report.migrationSummary.mixed}`);
     console.log(`Not Migrated (Legacy Only): ${report.migrationSummary.not_migrated}`);
     console.log(`Unknown: ${report.migrationSummary.unknown}`);
 
-    console.log(`\n=== Curio Adoption ===`);
-    console.log(`Components with Curio Tokens: ${report.curioAdoption.withCurioTokens}`);
-    console.log(`Components with Mode System: ${report.curioAdoption.withModeSystem}`);
-    console.log(`Legacy MUI Usage: ${report.curioAdoption.legacyMUI}`);
-    console.log(`Legacy M3 Usage: ${report.curioAdoption.legacyM3}`);
-    console.log(`Fully Curio: ${report.curioAdoption.fullyCurio}`);
+    console.log(`\n=== kr-solidarity Adoption ===`);
+    console.log(`Components with kr-solidarity Tokens: ${report.kr-solidarityAdoption.withkr-solidarityTokens}`);
+    console.log(`Components with Mode System: ${report.kr-solidarityAdoption.withModeSystem}`);
+    console.log(`Legacy MUI Usage: ${report.kr-solidarityAdoption.legacyMUI}`);
+    console.log(`Legacy M3 Usage: ${report.kr-solidarityAdoption.legacyM3}`);
+    console.log(`Fully kr-solidarity: ${report.kr-solidarityAdoption.fullykr-solidarity}`);
 
     console.log(`\nUnused Components: ${report.unusedComponents.length}`);
     console.log(`\nTop 5 Most Used:`);

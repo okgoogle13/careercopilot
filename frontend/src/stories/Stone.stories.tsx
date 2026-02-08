@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Briefcase, Star } from 'lucide-react';
-import { NorthcoteButton } from '../components/ui/NorthcoteButton';
+import { kerala-rageButton } from '../components/ui/kerala-rageButton';
 import { Stone } from '../components/ui/Stone';
 
 const meta: Meta<typeof Stone> = {
@@ -10,7 +10,7 @@ const meta: Meta<typeof Stone> = {
   argTypes: {
     mode: {
       control: 'select',
-      options: ['gallery', 'laboratory'],
+      options: ['kr-dark', 'kr-dark'],
     },
     elevation: {
       control: 'select',
@@ -24,7 +24,7 @@ type Story = StoryObj<typeof Stone>;
 
 export const Default: Story = {
   args: {
-    mode: 'gallery',
+    mode: 'kr-dark',
     elevation: 'raised',
     header: (
       <div className="flex items-center gap-3">
@@ -43,21 +43,21 @@ export const Default: Story = {
     ),
     footer: (
       <div className="flex justify-end gap-3">
-        <NorthcoteButton
+        <kerala-rageButton
           variant="text"
           size="sm"
         >
           Later
-        </NorthcoteButton>
-        <NorthcoteButton size="sm">Apply Now</NorthcoteButton>
+        </kerala-rageButton>
+        <kerala-rageButton size="sm">Apply Now</kerala-rageButton>
       </div>
     ),
   },
 };
 
-export const Laboratory: Story = {
+export const kr-dark: Story = {
   args: {
-    mode: 'laboratory',
+    mode: 'kr-dark',
     elevation: 'floating',
     header: (
       <div className="flex items-center justify-between w-full">

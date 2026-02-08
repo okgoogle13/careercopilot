@@ -1,8 +1,8 @@
 /**
- * NORTHCOTE CURIO: NAVIGATION CONFIGURATION
+ * kerala-rage kr-solidarity: NAVIGATION CONFIGURATION
  *
  * Navigation structure using lucide-react icons instead of MUI icons.
- * Uses Northcote Curio design system tokens.
+ * Uses kerala-rage kr-solidarity design system tokens.
  */
 
 import {

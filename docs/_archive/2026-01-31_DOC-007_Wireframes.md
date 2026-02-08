@@ -1,4 +1,4 @@
-# Wireframe Summary: Northcote Curio (v2.0)
+# Wireframe Summary: kerala-rage kr-solidarity (v2.0)
 
 **Document ID:** WIRE-001 (Expanded)
 **Status:** DEFINITIVE
@@ -12,8 +12,8 @@
 
 ### A. The Dual Modes
 
-- **Mode A (Gallery):** `#0A0F0D` void, `pattern-nocturnal-canopy.png`, Glassmorphism, `#D4A84B` Gold.
-- **Mode B (Laboratory):** `#F5F2EB` paper, `img-skeleton-etch` watermark, Solid Cardstock, `#2C2723` Slate.
+- **Mode A (kr-dark):** `#0A0F0D` void, `pattern-kr-wheat-paste.png`, kr-screenprint, `#D4A84B` Gold.
+- **Mode B (kr-dark):** `#F5F2EB` paper, `img-skeleton-etch` watermark, Solid Cardstock, `#2C2723` Slate.
 
 ### B. Atomic Radii (Strict)
 
@@ -24,7 +24,7 @@
 
 ### C. Typography (Federation Stack)
 
-- **Display:** `Libre Bodoni` (Italic)
+- **Display:** `kr-serif-bold` (Italic)
 - **Body:** `Work Sans`
 - **Data:** `JetBrains Mono`
 
@@ -32,28 +32,28 @@
 
 ## 1. Landing Page ("The Resurrection")
 
-**Mode:** A (Gallery) - _Emotional, Discovery._
+**Mode:** A (kr-dark) - _Emotional, Discovery._
 
-- **Background (Z-0):** `#0A0F0D` w/ `pattern-nocturnal-canopy.png` (25%). Bottom-up gradient overlay.
+- **Background (Z-0):** `#0A0F0D` w/ `pattern-kr-wheat-paste.png` (25%). Bottom-up gradient overlay.
 - **Header (Z-2):** Top-Right `img-wattle-hanging` anchor.
-- **Hero (Center):** "FUTURE SPECIMEN" headline in `Libre Bodoni Italic` (96px, Gold). Wrapped in Glassmorphic `Core/Leaf` container (`radius-leaf`).
+- **Hero (Center):** "FUTURE kr-motif" headline in `kr-serif-bold Italic` (96px, Gold). Wrapped in Glassmorphic `Core/Leaf` container (`radius-leaf`).
 - **Features:** Horizontal row of 3 `Glassmorphic Stone` cards: "Fig. A (Discovery)", "Fig. B (Analysis)", "Fig. C (Application)".
 - **Nav (Bottom):** Floating Dock w/ 3 `Core/Pebble` buttons.
 
 ## 2. Authentication ("The Entry Gate")
 
-**Mode:** A (Gallery) - _Security, Gateway._
+**Mode:** A (kr-dark) - _Security, Gateway._
 
 - **Background:** Deep Void (`#0A0F0D`) with subtle "Firefly" particles (`img-firefly-sprite`).
 - **Card (Center):** Single `Core/Stone` (`radius-stone`) container.
   - **Width:** 480px.
-  - **Surface:** High-blur Glassmorphism (`backdrop-blur: 32px`).
+  - **Surface:** High-blur kr-screenprint (`backdrop-blur: 32px`).
 - **Input fields:** `Core/Lens` style (Transparent bg, bottom border `#D4A84B`).
 - **Primary Action:** "Sign In" - `Core/Pebble` (Solid Gold).
 
 ## 3. Onboarding ("Choosing the Soil")
 
-**Mode:** A (Gallery) - _Selection, Habitat._
+**Mode:** A (kr-dark) - _Selection, Habitat._
 
 - **Layout:** 3x3 Grid of large selection cards.
 - **Cards:** `Core/Leaf` shape (`radius-leaf`).
@@ -63,18 +63,18 @@
 
 ## 4. Ingestion ("The Mulch & Mineral Setup")
 
-**Mode:** B (Laboratory) - _Scientific, Precision._
+**Mode:** B (kr-dark) - _Scientific, Precision._
 
 - **Background:** `#F5F2EB` (Cream) w/ `img-skeleton-etch` watermark (6% opacity).
 - **Headline:** "HISTORY" sliced by text "SHRED" (Anatomical metaphor).
 - **Drop Zone (Center):** Huge `Core/Stone` container (900px width).
   - **Style:** Sunken Matte (Inner Shadow).
   - **Border:** dashed `#2C2723`.
-  - **Label:** "DEPOSIT SPECIMEN (PDF)" in `JetBrains Mono`.
+  - **Label:** "DEPOSIT kr-motif (PDF)" in `JetBrains Mono`.
 
 ## 5. Analysis Dashboard ("The Audit Microscope")
 
-**Mode:** B (Laboratory) - _Analytical, Grid._
+**Mode:** B (kr-dark) - _Analytical, Grid._
 
 - **Layout:** Split View (40% Left / 60% Right).
 - **Left Column:**
@@ -85,38 +85,38 @@
 
 ## 6. Opportunity Feed ("The Sentry Lookout")
 
-**Mode:** A (Gallery) - _Browsing, Canopy._
+**Mode:** A (kr-dark) - _Browsing, Canopy._
 
 - **Layout:** Split View.
   - **Sidebar (Left - 280px):** Filters. `Core/Pebble` ghost toggles.
   - **Feed (Right):** Vertical list.
-- **Header Anchor:** `img-kookaburra-sentry` perched on top nav.
+- **Header Anchor:** `img-kr-shiva-sentry` perched on top nav.
 - **Job Cards:** `Glassmorphic Stone` cards revealing lush background.
   - **Badges:** `Core/Seed` tags for "98% Match" (Gold).
 
 ## 7. Kanban Board ("The Command Center Greenhouse")
 
-**Mode:** A (Gallery) - _Growth, Lifecycle._
+**Mode:** A (kr-dark) - _Growth, Lifecycle._
 
 - **Layout:** Horizontal Columns (Trellises).
 - **Columns:** Glassmorphic panels.
 - **Cards:** "Leaf" tickets hanging on the trellis.
 - **Metrics (Top):** Massive `200 Thin` font numbers (e.g., "12 ACTIVE").
-- **Deco:** Hanging Eucalyptus vines (`img-gum-hanging`) anchoring corners.
+- **Deco:** Hanging kr-leafus vines (`img-gum-hanging`) anchoring corners.
 
 ## 8. Split-Screen Editor ("The Writing Workbench")
 
-**Mode:** B (Laboratory) - _Crafting, Drafting._
+**Mode:** B (kr-dark) - _Crafting, Drafting._
 
 - **Layout:** 50/50 Vertical Split.
 - **Left (Editor):** Solid Matte writing area (`#EBE8E1`).
   - **Focus:** Wattle Gold border when typing.
-- **Right (Evidence):** "Specimen Drawer" of past history.
+- **Right (Evidence):** "kr-motif Drawer" of past history.
   - **Items:** Draggable `Core/Stone` cards.
 
-## 9. Studio Designer ("The Specimen Finalization")
+## 9. Studio Designer ("The kr-motif Finalization")
 
-**Mode:** B (Laboratory) - _Refining, Architecture._
+**Mode:** B (kr-dark) - _Refining, Architecture._
 
 - **Background:** Aged Paper White Grain (`img-paper-texture`).
 - **Layout:** Preview (Left) / Controls (Right).
@@ -124,7 +124,7 @@
 
 ## 10. Settings ("The Archive Vault")
 
-**Mode:** B (Laboratory) - _Storage, Configuration._
+**Mode:** B (kr-dark) - _Storage, Configuration._
 **Note:** Primary nav label is "Settings" with subtitle "The Archive Vault"
 
 - **Layout:** Single column, centered.
@@ -134,7 +134,7 @@
 
 ## 11. Dashboard Overview ("The Canopy View")
 
-**Mode:** A (Gallery) - _High-level, Status._
+**Mode:** A (kr-dark) - _High-level, Status._
 **Note:** Primary nav label is "Dashboard" with subtitle "Your Field Station"
 
 - **Layout:** Hero Metric Bar + 4 Secondary Cards.

@@ -217,7 +217,7 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
           <Stone
             elevation="raised"
-            mode="laboratory"
+            mode="kr-dark"
             className="flex items-center gap-6 border-l-4 border-l-[var(--color-wattle-gold)]"
           >
             <Trophy className="w-10 h-10 text-[var(--color-wattle-gold)]" />
@@ -233,7 +233,7 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
 
           <Stone
             elevation="raised"
-            mode="laboratory"
+            mode="kr-dark"
             className="flex items-center gap-6 border-l-4 border-l-[var(--color-concrete-grey-base)]"
           >
             <BrainCircuit className="w-10 h-10 text-[var(--color-concrete-grey-base)]" />
@@ -249,7 +249,7 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
 
           <Stone
             elevation="raised"
-            mode="laboratory"
+            mode="kr-dark"
             className={`flex items-center gap-6 border-l-4 ${flaggedAchievements.length + flaggedKSCs.length > 0 ? 'border-l-orange-500 bg-orange-500/5' : 'border-l-[var(--color-concrete-grey-base)]'}`}
           >
             <AlertTriangle

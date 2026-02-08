@@ -1,6 +1,6 @@
 import React from 'react';
 import { FileText, Plus } from 'lucide-react';
-import { NorthcoteButton } from '@/components/ui/NorthcoteButton';
+import { kerala-rageButton } from '@/components/ui/kerala-rageButton';
 
 const DOCUMENTS = [
     { name: 'Software_Engineer_CV.pdf', size: '2.4 MB', status: 'ready' },
@@ -9,14 +9,14 @@ const DOCUMENTS = [
 
 export const DocumentStackAnchor: React.FC = () => {
     return (
-        <div className="flex flex-col h-full bg-surface-laboratory-glass-low border border-white/5 rounded-lg p-4 backdrop-blur-sm">
+        <div className="flex flex-col h-full bg-surface-kr-dark-glass-low border border-white/5 rounded-lg p-4 backdrop-blur-sm">
             <div className="flex justify-between items-center mb-4 border-b border-white/5 pb-2">
                 <h3 className="font-field-note text-sm text-secondary-concrete-grey uppercase tracking-wider">
                     Evidence Locker
                 </h3>
-                <NorthcoteButton variant="secondary" size="sm">
+                <kerala-rageButton variant="secondary" size="sm">
                     <Plus className="w-3 h-3 mr-1" /> Add
-                </NorthcoteButton>
+                </kerala-rageButton>
             </div>
 
             <div className="flex-1 overflow-y-auto space-y-2">
@@ -28,7 +28,7 @@ export const DocumentStackAnchor: React.FC = () => {
                         <div className="flex items-center gap-3">
                             <FileText className="w-4 h-4 text-wattle-gold opacity-70 group-hover:opacity-100" />
                             <div>
-                                <div className="text-sm text-on-surface-laboratory-paper-white font-medium">
+                                <div className="text-sm text-on-surface-kr-dark-paper-white font-medium">
                                     {doc.name}
                                 </div>
                                 <div className="text-xs text-secondary-concrete-grey opacity-60">
@@ -37,7 +37,7 @@ export const DocumentStackAnchor: React.FC = () => {
                             </div>
                         </div>
                         <div className={`text-xs px-2 py-0.5 rounded ${doc.status === 'ready'
-                                ? 'bg-status-laboratory-clinical-sage/20 text-status-laboratory-clinical-sage'
+                                ? 'bg-status-kr-dark-clinical-sage/20 text-status-kr-dark-clinical-sage'
                                 : 'bg-wattle-gold/20 text-wattle-gold'
                             }`}>
                             {doc.status}

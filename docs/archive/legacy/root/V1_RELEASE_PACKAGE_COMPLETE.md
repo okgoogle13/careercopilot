@@ -161,7 +161,7 @@ STATUS: READY TO LAUNCH ✨
 - Electric Alchemist aesthetic applied
 - M3 design system active
 - Organic shapes and gradients rendering
-- Glassmorphism effects present
+- kr-screenprint effects present
 
 ### Backend Verification
 ```bash

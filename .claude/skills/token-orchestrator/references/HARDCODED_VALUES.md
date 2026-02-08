@@ -26,7 +26,7 @@ border: 1px solid rgba(212, 168, 75, 0.12);
 **After** (using tokens):
 ```css
 background: var(--sys-color-wattle-gold);
-color: var(--sys-color-specimen-night);
+color: var(--sys-color-kr-motif-night);
 border: 1px solid var(--sys-color-wattle-gold-container);
 ```
 

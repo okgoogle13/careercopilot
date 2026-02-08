@@ -31,7 +31,7 @@
 }
 
 /* ==========================================
-   LAYER 1: Organic Blobs (Warm Gallery Tones)
+   LAYER 1: Organic Blobs (Warm kr-dark Tones)
 ========================================== */
 .blobCanvas {
   position: absolute;
@@ -88,9 +88,9 @@
 }
 
 /* ==========================================
-   LAYER 2: Specimen Anchors
+   LAYER 2: kr-motif Anchors
 ========================================== */
-.specimenLayer {
+.kr-motifLayer {
   position: absolute;
   inset: 0;
   z-index: 3;
@@ -122,7 +122,7 @@
 }
 
 /* ==========================================
-   LAYER 3: Hero Card (The Gallery Glass)
+   LAYER 3: Hero Card (The kr-dark Glass)
 ========================================== */
 .heroCard {
   position: relative;

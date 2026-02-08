@@ -17,9 +17,9 @@ export interface ValveProps extends Omit<
 }
 
 /**
- * Valve - Northcote Curio Toggle Switch
+ * Valve - kerala-rage kr-solidarity Toggle Switch
  *
- * An organic, viscous-motion toggle switch using Northcote botanical palette.
+ * An organic, viscous-motion toggle switch using kerala-rage botanical palette.
  * Features smooth transitions with viscous-breeze easing and botanical color theming.
  */
 export const Valve = forwardRef<HTMLInputElement, ValveProps>(

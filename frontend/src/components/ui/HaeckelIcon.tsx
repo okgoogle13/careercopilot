@@ -3,7 +3,7 @@ import React from 'react';
 /**
  * HaeckelIcon component
  * 
- * Provides a central way to render the 25 isolated Haeckel specimens
+ * Provides a central way to render the 25 isolated Haeckel kr-motifs
  * sliced from the Composite Grid.
  * 
  * Grid lookup: icon-haeckel-[row]-[col].png
@@ -32,7 +32,7 @@ export const HaeckelIcon: React.FC<HaeckelIconProps> = ({
   return (
     <img
       src={assetPath}
-      alt={`Haeckel Specimen ${row}-${col}`}
+      alt={`Haeckel kr-motif ${row}-${col}`}
       width={size}
       height={size}
       className={className}

@@ -1,14 +1,14 @@
 import React from 'react';
 
 export type StatusBadgeVariant = 'success' | 'warning' | 'error' | 'info' | 'neutral';
-export type StatusBadgeMode = 'gallery' | 'laboratory';
+export type StatusBadgeMode = 'kr-dark' | 'kr-dark';
 
 export interface StatusBadgeProps {
     /** The text label to display */
     label: string;
     /** Semantic status variant */
     variant?: StatusBadgeVariant;
-    /** Theme mode: Gallery (warm, botanical) or Laboratory (clinical, precise) */
+    /** Theme mode: kr-dark (warm, botanical) or kr-dark (clinical, precise) */
     mode?: StatusBadgeMode;
     /** Optional dot indicator */
     showDot?: boolean;
@@ -17,11 +17,11 @@ export interface StatusBadgeProps {
 }
 
 /**
- * StatusBadge - Northcote Curio Status Indicator
+ * StatusBadge - kerala-rage kr-solidarity Status Indicator
  *
- * Supports both Gallery (warm, botanical) and Laboratory (clinical, precise) modes.
+ * Supports both kr-dark (warm, botanical) and kr-dark (clinical, precise) modes.
  *
- * **Northcote Token Usage:**
+ * **kerala-rage Token Usage:**
  * - Typography: `font-annotation` (Uppercase, tracked)
  * - Color: Semantic status colors (success, warning, error, info)
  * - Shape: `radius-seed` (Organic asymmetry for badges)
@@ -29,7 +29,7 @@ export interface StatusBadgeProps {
  *
  * **Variants:**
  * - success: Ghost Gum (green)
- * - warning: Banksia (orange)
+ * - warning: kr-flower (orange)
  * - error: Waratah Red (red)
  * - info: Wattle Gold (yellow)
  * - neutral: Concrete Grey (gray)
@@ -37,11 +37,11 @@ export interface StatusBadgeProps {
 export const StatusBadge: React.FC<StatusBadgeProps> = ({
     label,
     variant = 'neutral',
-    mode = 'gallery',
+    mode = 'kr-dark',
     showDot = false,
     className = '',
 }) => {
-    // Northcote Curio Palette Mappings
+    // kerala-rage kr-solidarity Palette Mappings
     const getVariantStyles = () => {
         const colorMap: Record<StatusBadgeVariant, string> = {
             success: 'primary',    // Sage (Botanical)
@@ -61,7 +61,7 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({
             border: `var(--ref-palette-${base}-80)`,
         };
 
-        // Dark mode overrides (Laboratory/Gallery root is deep charcoal)
+        // Dark mode overrides (kr-dark/kr-dark root is deep charcoal)
         // Adjusting for high contrast on dark backgrounds
         if (base === 'neutral') {
             styles.bg = 'rgba(230, 225, 214, 0.1)';

@@ -1,6 +1,6 @@
 # Skill Registry
 
-> **Purpose**: Central discovery hub for all 46 active Claude Code skills. Use this to find the right skill for your task, understand relationships between skills, and navigate by domain or capability.
+> **Purpose**: Central discovery hub for all 52+ active Claude Code skills. Use this to find the right skill for your task, understand relationships between skills, and navigate by domain or capability.
 
 ---
 
@@ -10,8 +10,8 @@
 
 - **Visual Design**: [ui-design-evaluator](#ui-design-evaluator), [m3-visual-audit](#m3-visual-audit), [kerala-rage-visual-audit](#kerala-rage-visual-audit)
 - **Design Tokens**: [design-token-validator](#design-token-validator), [token-orchestrator](#token-orchestrator)
-- **Typography**: [m3-expressive-typography-enhancer](#m3-expressive-typography-enhancer), [kerala-rage-typography-strategy](#kerala-rage-typography-strategy), [expressive-typography-manipulation](#expressive-typography-manipulation)
-- **Anti-Slop (Quality)**: [m3-anti-slop-validator](#m3-anti-slop-validator)
+- **Typography**: [expressive-typography-manipulation](#expressive-typography-manipulation), [kerala-rage-typography-strategy](#kerala-rage-typography-strategy)
+- **Anti-Slop (Quality)**: [auto-validator](#auto-validator)
 - **Brand Alignment**: [brand-brief-optimizer](#brand-brief-optimizer), [kerala-rage-brand-enforcer](#kerala-rage-brand-enforcer)
 
 ### "I need to build or scaffold code"
@@ -19,7 +19,7 @@
 - **React Components**: [react-component-scaffolder](#react-component-scaffolder-deprecated), [storybook-scaffolder](#storybook-scaffolder), [component-spec-generator](#component-spec-generator), [m3-expressive-ui-evaluator](#m3-expressive-ui-evaluator), [figma-to-page](#figma-to-page)
 - **React Pages**: [react-page-scaffolder](#react-page-scaffolder)
 - **Backend**: [pydantic-model-scaffolder](#pydantic-model-scaffolder), [pytest-test-scaffolder](#pytest-test-scaffolder)
-- **Tests**: [jest-test-scaffolder](#jest-test-scaffaller), [pytest-test-scaffolder](#pytest-test-scaffolder), [webapp-testing](#webapp-testing)
+- **Tests**: [jest-test-scaffolder](#jest-test-scaffolder), [pytest-test-scaffolder](#pytest-test-scaffolder), [webapp-testing](#webapp-testing)
 - **Agents** (CareerCopilot): [careercopilot-agent-scaffolder](#careercopilot-agent-scaffolder), [careercopilot-tool-creator](#careercopilot-tool-creator)
 
 ### "I need to validate or audit something"
@@ -40,68 +40,65 @@
 
 ## Skills by Domain
 
-### Design System (17 skills)
+### Design System (19 skills)
 
-#### Typography (3)
+#### Typography (2)
 
-- [m3-expressive-typography-enhancer](#m3-expressive-typography-enhancer) - Variable fonts, extreme contrasts, emotional tone mapping
-- [kerala-rage-typography-strategy](#kerala-rage-typography-strategy) - Kerala Rage Agit-Prop typography (Solidarity, Direct Action)
+- [kerala-rage-typography-strategy](#kerala-rage-typography-strategy) - kerala-rage kr-solidarity "Maximum Expressive Playful" with variable fonts (Workhorse, Expressive, Accent tiers)
 - [expressive-typography-manipulation](#expressive-typography-manipulation) - Technical implementation patterns with Framer Motion
 
 #### Validation (7)
 
-- [token-orchestrator](#token-orchestrator) - Comprehensive token validation & orchestration (Kerala Rage)
-- [m3-anti-slop-validator](#m3-anti-slop-validator) - Detect generic AI patterns, score aesthetic quality
-- [m3-visual-audit](#m3-visual-audit) - Component screenshot validation against M3 Expressive
-- [kerala-rage-visual-audit](#kerala-rage-visual-audit) - Component validation against Kerala Rage Agit-Prop
+- [token-orchestrator](#token-orchestrator) - Comprehensive token validation & orchestration (kerala-rage kr-solidarity)
+- [kerala-rage-visual-audit](#kerala-rage-visual-audit) - Component validation against kerala-rage kr-solidarity standards
 - [design-token-validator](#design-token-validator) - DTCG compliance, contrast, circular refs
 - [auto-validator](#auto-validator) - Vision-based asset compliance scoring
 - [vision-scorer-mcp](#vision-scorer-mcp) - MCP server for programmatic compliance scoring
+- [m3-visual-audit](#m3-visual-audit) - Component screenshot validation against M3 Expressive
+- [m3-expressive-token-orchestrator](#m3-expressive-token-orchestrator) - M3 Expressive token validation
 
-#### Generation (4)
+#### Generation (3)
 
-- [m3-aesthetic-creator](#m3-aesthetic-creator) - Comprehensive M3 Expressive layout & aesthetic generator
-- [ui-design-evaluator](#ui-design-evaluator) - Evaluate designs, create mockups, score compliance
+- [ui-design-evaluator](#ui-design-evaluator) - Evaluate designs, create mockups, score kerala-rage kr-solidarity compliance (kr-dark/kr-dark modes)
 - [m3-expressive-ui-evaluator](#m3-expressive-ui-evaluator) - Generate M3 Expressive mockups from wireframes
-- [m3-expressive-token-orchestrator](#m3-expressive-token-orchestrator) - Validate and orchestrate M3 Expressive tokens
+- [m3-aesthetic-creator](#m3-aesthetic-creator) - Comprehensive M3 Expressive layout & aesthetic generator
 
-#### Brand (2)
+#### Brand & Asset Management (3)
 
-- [kerala-rage-brand-enforcer](#kerala-rage-brand-enforcer) - Auto-apply Kerala Rage brand guidelines (Agit-Prop)
-- [kerala-rage-asset-cataloger](#kerala-rage-asset-cataloger) - Visual triage and gap analysis for Agit-Prop assets
+- [kerala-rage-brand-enforcer](#kerala-rage-brand-enforcer) - Auto-apply kerala-rage kr-solidarity brand guidelines (Melbourne laneway aesthetic, endemic flora)
+- [kerala-rage-asset-cataloger](#kerala-rage-asset-cataloger) - Visual triage and gap analysis for design assets
+- [asset-placement-strategy](#asset-placement-strategy) - Strategic placement of kerala-rage kr-solidarity artifacts (Seeds, Pebbles, Lenses, Stones) with biological asymmetry
 
 #### Tracking (2)
 
-- [compliance-dashboard](#compliance-dashboard) - Real-time Northcote Curio compliance metrics
+- [compliance-dashboard](#compliance-dashboard) - Real-time kerala-rage kr-solidarity compliance metrics
 - [m3-expressive-compliance-dashboard](#m3-expressive-compliance-dashboard) - M3 Expressive adoption tracking
 
-#### Planning (1)
+#### Planning & Documentation (2)
 
 - [brand-brief-optimizer](#brand-brief-optimizer) - Strengthen design briefs, identify gaps
+- [design-system-doc-generator](#design-system-doc-generator) - Generate machine-readable design documentation
 
-#### Documentation (1)
-
-- [design-system-doc-generator](#design-system-doc-generator) - Generate machine-readable design docs
 
 ---
 
-### Development (15 skills)
+### Development (16 skills)
 
-#### Component Scaffolding (4)
+#### Component Scaffolding (5)
 
-- [component-builder](#component-builder) - **Kerala Rage Standard** component generator (Solidarity Mode Only)
+- [component-builder](#component-builder) - **kerala-rage kr-solidarity Standard** component generator (Production-ready React/TypeScript)
+- [component-transformer](#component-transformer) - Migrate legacy MUI/generic components to kerala-rage kr-solidarity design system
 - [storybook-scaffolder](#storybook-scaffolder) - Generate Storybook story files (.stories.tsx)
 - [component-spec-generator](#component-spec-generator) - Generate component specs from wireframes
 - [figma-to-page](#figma-to-page) - Generate React code from Figma
 
-#### Page/Routing (2)
+#### Page/Routing (1)
 
 - [react-page-scaffolder](#react-page-scaffolder) - Create React page directories with routing
 
-#### Backend (2)
+#### Backend (1)
 
 - [pydantic-model-scaffolder](#pydantic-model-scaffolder) - Scaffold Pydantic request/response models
-- [fastapi-endpoint-scaffolder](#fastapi-endpoint-scaffolder) - Scaffold FastAPI endpoints (⚠️ Legacy)
 
 #### Testing (3)
 
@@ -118,9 +115,8 @@
 
 - [audit-agent](#audit-agent) - Security and code quality audits
 
-#### Utilities (2)
+#### Utilities (1)
 
-- [react-component-scaffolder](#react-component-scaffolder-deprecated) - ❌ DEPRECATED (use component-spec-generator)
 - [wireframe-annotator](#wireframe-annotator) - ASCII wireframes with annotations
 
 ---
@@ -160,14 +156,14 @@
 ```
 ├─ Are you starting from scratch?
 │  └─ YES → Use brand-brief-optimizer first (clarify brief)
-│             Then choose base: M3 Expressive or Northcote Curio
+│             Then choose base: M3 Expressive or kerala-rage kr-solidarity
 │
 ├─ Do you need M3 Expressive?
 │  ├─ YES → Start: m3-expressive-typography-enhancer (strategy)
 │  │         Then: expressive-typography-manipulation (implement)
 │  │         Then: m3-anti-slop-validator (validate)
 │  │
-│  └─ NO → Goto Northcote...
+│  └─ NO → Goto kerala-rage...
 │
    │
 172: └─ Do you need Kerala Rage?
@@ -184,7 +180,7 @@
 ├─ Do you have a screenshot?
 │  ├─ YES → Which standard?
 │  │         ├─ M3 Expressive → m3-visual-audit
-│  │         ├─ Northcote Curio → northcote-visual-audit
+│  │         ├─ kerala-rage kr-solidarity → kerala-rage-visual-audit
 │  │         └─ Generic quality → m3-anti-slop-validator
 │  │
 │  └─ NO → Is it a design mockup?
@@ -192,7 +188,7 @@
 │           └─ NO → Create mockup first with figma-to-page or m3-expressive-ui-evaluator
 │
 └─ Need compliance tracking?
-   └─ YES → compliance-dashboard (Northcote) or m3-expressive-compliance-dashboard (M3)
+   └─ YES → compliance-dashboard (kerala-rage) or m3-expressive-compliance-dashboard (M3)
 ```
 
 ### "I need to scaffold a React component"
@@ -213,7 +209,7 @@
 
 ### By Capability
 
-- **#validation**: m3-anti-slop-validator, m3-visual-audit, northcote-visual-audit, design-token-validator, auto-validator, vision-scorer-mcp
+- **#validation**: m3-anti-slop-validator, m3-visual-audit, kerala-rage-visual-audit, design-token-validator, auto-validator, vision-scorer-mcp
 - **#scaffolding**: storybook-scaffolder, component-spec-generator, jest-test-scaffolder, pytest-test-scaffolder, pydantic-model-scaffolder
 - **#generation**: ui-design-evaluator, m3-expressive-ui-evaluator, m3-expressive-token-orchestrator, asset-packager, batch-processor
 - **#analysis**: audit-agent, project-health-checker, compliance-dashboard, m3-expressive-compliance-dashboard
