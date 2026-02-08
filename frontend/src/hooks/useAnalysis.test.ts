@@ -24,4 +24,19 @@ describe('useAnalysis', () => {
 
         expect(analysis?.breakdown.softSkills.reason).toContain('3 action verbs detected');
     });
+
+    it('does not double-count repeated action verbs', async () => {
+        const { result } = renderHook(() => useAnalysis());
+        const documentText = 'Led the team. Led delivery.';
+        const jobCriteria = 'leadership management budgeting';
+        let analysis: AnalysisResult | undefined;
+
+        await act(async () => {
+            const analysisPromise = result.current.analyzeDocument(documentText, jobCriteria, false);
+            jest.advanceTimersByTime(1500);
+            analysis = await analysisPromise;
+        });
+
+        expect(analysis?.breakdown.softSkills.reason).toContain('1 action verbs detected');
+    });
 });
