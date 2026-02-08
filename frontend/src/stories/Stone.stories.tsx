@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Briefcase, Star } from 'lucide-react';
-import { kerala-rageButton } from '../components/ui/kerala-rageButton';
+import { KeralaRageButton } from '../components/ui/KeralaRageButton';
 import { Stone } from '../components/ui/Stone';
 
 const meta: Meta<typeof Stone> = {
@@ -10,7 +10,7 @@ const meta: Meta<typeof Stone> = {
   argTypes: {
     mode: {
       control: 'select',
-      options: ['kr-dark', 'kr-dark'],
+      options: ['KrDark', 'KrDark'],
     },
     elevation: {
       control: 'select',
@@ -24,7 +24,7 @@ type Story = StoryObj<typeof Stone>;
 
 export const Default: Story = {
   args: {
-    mode: 'kr-dark',
+    mode: 'KrDark',
     elevation: 'raised',
     header: (
       <div className="flex items-center gap-3">
@@ -43,21 +43,21 @@ export const Default: Story = {
     ),
     footer: (
       <div className="flex justify-end gap-3">
-        <kerala-rageButton
-          variant="text"
+        <KeralaRageButton
+          variant="tertiary"
           size="sm"
         >
           Later
-        </kerala-rageButton>
-        <kerala-rageButton size="sm">Apply Now</kerala-rageButton>
+        </KeralaRageButton>
+        <KeralaRageButton size="sm">Apply Now</KeralaRageButton>
       </div>
     ),
   },
 };
 
-export const kr-dark: Story = {
+export const KrDark: Story = {
   args: {
-    mode: 'kr-dark',
+    mode: 'KrDark',
     elevation: 'floating',
     header: (
       <div className="flex items-center justify-between w-full">

@@ -10,14 +10,14 @@ interface ApplicationCardProps {
 }
 
 import { StatusBadge, type StatusBadgeVariant } from '@/components/ui/StatusBadge/StatusBadge';
-import { kerala-rageButton } from '@/components/ui/kerala-rageButton';
+import { KeralaRageButton } from '@/components/ui/KeralaRageButton';
 import { motion } from 'framer-motion';
 
 /**
  * ApplicationCard - M3 Compliant Job Application Tracker Card
  * 
  * Displays job application information with a multi-step progress indicator.
- * Built using Material Design 3 kerala-rage kr-solidarity design tokens.
+ * Built using Material Design 3 KeralaRage KrSolidarity design tokens.
  * 
  * **M3 Design Token Usage:**
  * - Shape: `rounded-pebble` → `--sys-shape-pebble` (20px 20px 32px 32px) - Organic asymmetric corners ✅
@@ -65,13 +65,13 @@ export function ApplicationCard({
             showDot
           />
           {onUpdateStatus && (
-            <kerala-rageButton
+            <KeralaRageButton
               onClick={onUpdateStatus}
               variant="secondary"
               size="md"
             >
               Update Status
-            </kerala-rageButton>
+            </KeralaRageButton>
           )}
         </div>
       </div>

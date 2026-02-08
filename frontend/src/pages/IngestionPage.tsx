@@ -7,18 +7,18 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { CheckCircle, FileText, Fingerprint, Microscope } from 'lucide-react';
 import React, { useState } from 'react';
 
-// kr-dark Assets
-import naturesClockwork from '../assets/kr-motifs/natures_clockwork.jpg';
+// KrDark Assets
+import naturesClockwork from '../assets/KrMotifs/natures_clockwork.jpg';
 import paperGrain from '../assets/textures/paper-grain.png';
 
 type UploadStage = 'idle' | 'uploading' | 'extracting' | 'processing' | 'embedding' | 'complete';
 
 /**
- * CareerCopilot Ingestion Page ("The Mulch / kr-motif Tray")
+ * CareerCopilot Ingestion Page ("The Mulch / KrMotif Tray")
  *
- * V3.1 kr-dark Mode Implementation:
+ * V3.1 KrDark Mode Implementation:
  * ✓ ASSET-08 Verification Stamp Integration
- * ✓ Texture-kr-dark-Paper White overlay
+ * ✓ Texture-KrDark-Paper White overlay
  * ✓ Skeleton Etch Motif metaphors
  * ✓ Clinical palette restricted to Obsidian/Paper White/Wattle
  */
@@ -59,7 +59,7 @@ export const IngestionPage: React.FC = () => {
       setUploadStage('complete');
       setProgress(100);
       setCareerData(result);
-      m3Toast.success('Ingestion Complete', 'kr-motif data archived successfully.');
+      m3Toast.success('Ingestion Complete', 'KrMotif data archived successfully.');
     } catch (err) {
       console.error('Upload failed:', err);
       setUploadStage('idle');
@@ -93,7 +93,7 @@ export const IngestionPage: React.FC = () => {
       case 'extracting':
         return 'Harvesting Semantic DNA...';
       case 'processing':
-        return 'Analyzing Career kr-motif...';
+        return 'Analyzing Career KrMotif...';
       case 'embedding':
         return 'Mapping Professional Vector...';
       case 'complete':
@@ -105,7 +105,7 @@ export const IngestionPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-asphalt-black-darkest flex items-center justify-center p-6 relative overflow-hidden">
-      {/* Texture Layer: kr-dark Paper White */}
+      {/* Texture Layer: KrDark Paper White */}
       <div
         className="absolute inset-0 opacity-5 pointer-events-none mix-blend-overlay"
         style={{ backgroundImage: `url(${paperGrain})`, backgroundRepeat: 'repeat' }}
@@ -116,7 +116,7 @@ export const IngestionPage: React.FC = () => {
       <div className="absolute bottom-10 right-10 w-96 h-96 grayscale opacity-5 pointer-events-none border-l border-t border-concrete-grey/20 rounded-tl-[120px]" />
 
       <Stone
-        mode="kr-dark"
+        mode="KrDark"
         elevation="floating"
         className="max-w-2xl w-full border-2 border-concrete-grey/5 shadow-maximum relative z-10"
       >
@@ -144,7 +144,7 @@ export const IngestionPage: React.FC = () => {
             <Microscope className="w-12 h-12 text-wattle-gold" />
           </div>
           <h1 className="text-5xl font-bloom font-bold text-paper-white tracking-tighter uppercase">
-            kr-motif Ingestion
+            KrMotif Ingestion
           </h1>
           <p className="font-annotation text-xs text-concrete-grey-dark mt-3 tracking-[0.3em] uppercase opacity-60">
             [ PHASE.01: SEMANTIC_EXTRACTION ]
@@ -198,7 +198,7 @@ export const IngestionPage: React.FC = () => {
               Deposit Payloads
             </Pebble>
             <p className="mt-4 font-annotation text-[9px] text-concrete-grey/40 uppercase tracking-tighter">
-              PDF / DOCX / TEXT kr-motifs accepted
+              PDF / DOCX / TEXT KrMotifs accepted
             </p>
           </label>
 
@@ -259,7 +259,7 @@ export const IngestionPage: React.FC = () => {
           </div>
         )}
 
-        {/* kr-dark Technical Audit */}
+        {/* KrDark Technical Audit */}
         <div className="mt-12 p-6 bg-asphalt-black/40 rounded-stone border border-concrete-grey/10 flex gap-5">
           <Microscope className="w-8 h-8 text-wattle-gold/40 shrink-0" />
           <p className="font-field-note text-[11px] text-paper-white/50 leading-relaxed italic">

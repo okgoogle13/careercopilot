@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 import defaultTheme from 'tailwindcss/defaultTheme';
-import tokens from './src/theme/tokens.json';
+import tokens from './src/design/tokens/tokens.json';
 
 // Helper to safely access tokens
 const t = tokens.color.semantic;
@@ -45,24 +45,24 @@ export default {
         foreground: 'hsl(var(--foreground))',
 
         // Use Asphalt Black as the global floor
-        black: t.surface.shared.kr-charcoal.value,
+        black: t.surface.shared['kr-charcoal'].value,
         white: t.onSurface['paper-white'].value, // Paper White instead of white
 
         // Core Botanic Families
-        'asphalt-black': t.surface.shared.kr-charcoal.value,
+        'asphalt-black': t.surface.shared['kr-charcoal'].value,
         'asphalt-black-light':
-          (t.surface.shared.kr-charcoalLight && t.surface.shared.kr-charcoalLight.value) ||
+          (t.surface.shared['kr-charcoalLight'] && t.surface.shared['kr-charcoalLight'].value) ||
           '#2C2925',
 
         wattle: {
           vault: t.primary.wattleShadow.value, // Fallback
           shadow: t.primary.wattleShadow.value,
-          gold: t.primary.kr-ink-gold.value,
+          gold: t.primary['kr-ink-gold'].value,
           glow: t.primary.wattleGlow.value,
           bloom: t.primary.wattleBloom.value,
-          container: t.primary.kr-ink-goldContainer.value,
+          container: t.primary['kr-ink-goldContainer'].value,
         },
-        'wattle-gold': t.primary.kr-ink-gold.value,
+        'wattle-gold': t.primary['kr-ink-gold'].value,
 
         waratah: {
           stem: t.tertiary.waratahStem.value,
@@ -74,12 +74,12 @@ export default {
         },
         'waratah-red': t.tertiary.waratahCrimson.value,
 
-        kr-leaf: {
-          night: t.surface.shared.kr-charcoal.value,
-          ash: t.surface.kr-dark.charcoalBark.value,
-          smoke: t.surface.kr-dark.kr-leafSmoke.value,
-          dusk: t.surface.kr-dark.kr-leafSmokeHigh.value,
-          mist: t.surface.kr-dark.kr-leafSmokeHighest.value,
+        'kr-leaf': {
+          night: t.surface.shared['kr-charcoal'].value,
+          ash: t.surface['kr-dark'].charcoalBark.value,
+          smoke: t.surface['kr-dark']['kr-leafSmoke'].value,
+          dusk: t.surface['kr-dark']['kr-leafSmokeHigh'].value,
+          mist: t.surface['kr-dark']['kr-leafSmokeHighest'].value,
         },
 
         flannel: {
@@ -95,27 +95,27 @@ export default {
 
         // Semantic Semantic (Legacy/Functional) support
         semantic: {
-          success: t.status.kr-dark.ghostGum.value,
-          warning: t.status.kr-dark.kr-flowerOrange.value,
-          info: t.status.kr-dark.nativeViolet.value,
+          success: t.status['kr-dark'].ghostGum.value,
+          warning: t.status['kr-dark']['kr-flowerOrange'].value,
+          info: t.status['kr-dark'].nativeViolet.value,
         },
 
         // Shadcn UI Mapping (Retaining for component compatibility)
         primary: {
-          DEFAULT: t.primary.kr-ink-gold.value,
-          foreground: t.surface.shared.kr-charcoal.value,
-          container: t.primary.kr-ink-goldContainer.value,
+          DEFAULT: t.primary['kr-ink-gold'].value,
+          foreground: t.surface.shared['kr-charcoal'].value,
+          container: t.primary['kr-ink-goldContainer'].value,
         },
         secondary: {
           DEFAULT: t.secondary.flannelFlower.value,
-          foreground: t.surface.shared.kr-charcoal.value,
+          foreground: t.surface.shared['kr-charcoal'].value,
         },
         destructive: {
           DEFAULT: t.tertiary.waratahCrimson.value,
           foreground: t.onSurface['paper-white'].value,
         },
         muted: {
-          DEFAULT: t.surface.kr-dark.kr-leafSmoke.value,
+          DEFAULT: t.surface['kr-dark']['kr-leafSmoke'].value,
           foreground: t.secondary.flannelFlower.value,
         },
         accent: {
@@ -123,11 +123,11 @@ export default {
           foreground: t.onSurface['paper-white'].value,
         },
         popover: {
-          DEFAULT: t.surface.kr-dark.kr-leafSmokeHigh.value,
+          DEFAULT: t.surface['kr-dark']['kr-leafSmokeHigh'].value,
           foreground: t.onSurface['paper-white'].value,
         },
         card: {
-          DEFAULT: t.surface.kr-dark.kr-leafSmoke.value,
+          DEFAULT: t.surface['kr-dark']['kr-leafSmoke'].value,
           foreground: t.onSurface['paper-white'].value,
         },
       },

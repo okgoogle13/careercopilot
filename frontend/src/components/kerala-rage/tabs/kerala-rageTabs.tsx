@@ -1,5 +1,5 @@
 /**
- * kerala-rage kr-solidarity: TABS COMPONENT
+ * KeralaRage KrSolidarity: TABS COMPONENT
  * Tabs with sliding pill animation (layoutId="active-pill")
  */
 
@@ -14,14 +14,14 @@ export interface Tab {
   disabled?: boolean;
 }
 
-export interface kerala-rageTabsProps {
+export interface KeralaRageTabsProps {
   tabs: Tab[];
   defaultTab?: string;
   onChange?: (tabId: string) => void;
   className?: string;
 }
 
-export const kerala-rageTabs: React.FC<kerala-rageTabsProps> = ({
+export const KeralaRageTabs: React.FC<KeralaRageTabsProps> = ({
   tabs,
   defaultTab,
   onChange,
@@ -95,4 +95,4 @@ export const kerala-rageTabs: React.FC<kerala-rageTabsProps> = ({
   );
 };
 
-kerala-rageTabs.displayName = 'kerala-rageTabs';
+KeralaRageTabs.displayName = 'KeralaRageTabs';

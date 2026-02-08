@@ -1,7 +1,7 @@
 import React, { forwardRef, useEffect, useRef, useImperativeHandle } from 'react';
 import { Check, Minus } from 'lucide-react';
 
-export type M3CheckboxMode = 'kr-dark' | 'kr-dark';
+export type M3CheckboxMode = 'KrDark' | 'KrLight';
 
 export interface M3CheckboxProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type'> {
     /** Checkbox label */
@@ -10,21 +10,21 @@ export interface M3CheckboxProps extends Omit<React.InputHTMLAttributes<HTMLInpu
     error?: boolean;
     /** Indeterminate state (for "select all" scenarios) */
     indeterminate?: boolean;
-    /** Theme mode: kr-dark (warm, botanical) or kr-dark (clinical, precise) */
+    /** Theme mode: KrDark (warm, botanical) or KrDark (clinical, precise) */
     mode?: M3CheckboxMode;
     /** Additional CSS classes for container */
     containerClassName?: string;
 }
 
 /**
- * M3Checkbox - kerala-rage kr-solidarity Checkbox
+ * M3Checkbox - KeralaRage KrSolidarity Checkbox
  *
- * Supports both kr-dark (warm, botanical) and kr-dark (clinical, precise) modes.
+ * Supports both KrDark (warm, botanical) and KrDark (clinical, precise) modes.
  *
- * **kerala-rage Token Usage:**
+ * **KeralaRage Token Usage:**
  * - Typography: `font-field-note` (Label)
  * - Color: `primary-wattle-gold` (Checked), `tertiary-waratah-red` (Error)
- * - Shape: `rounded-[4px]` (kr-dark), `rounded-[6px]` (kr-dark)
+ * - Shape: `rounded-[4px]` (KrDark), `rounded-[6px]` (KrDark)
  * - Motion: `ease-viscous` (Check animation)
  *
  * **Accessibility:**
@@ -37,7 +37,7 @@ export const M3Checkbox = forwardRef<HTMLInputElement, M3CheckboxProps>(({
     label,
     error = false,
     indeterminate = false,
-    mode = 'kr-dark',
+    mode = 'KrDark',
     containerClassName = '',
     className = '',
     disabled = false,
@@ -57,9 +57,9 @@ export const M3Checkbox = forwardRef<HTMLInputElement, M3CheckboxProps>(({
 
     const isChecked = checked || indeterminate;
 
-    // Theme variants (kr-dark vs. kr-dark)
+    // Theme variants (KrDark vs. KrDark)
     const themeVariants = {
-        kr-dark: {
+        'KrDark': {
             checkbox: `
                 rounded-[6px]
                 ${error
@@ -74,7 +74,7 @@ export const M3Checkbox = forwardRef<HTMLInputElement, M3CheckboxProps>(({
             label: error ? 'text-tertiary-waratah-red' : 'text-on-surface-paper-white',
             iconColor: error ? 'text-on-error' : 'text-asphalt-black',
         },
-        kr-dark: {
+        'KrLight': {
             checkbox: `
                 rounded-[4px]
                 ${error
@@ -152,7 +152,7 @@ export const M3Checkbox = forwardRef<HTMLInputElement, M3CheckboxProps>(({
 M3Checkbox.displayName = 'M3Checkbox';
 
 /**
- * M3Radio - kerala-rage kr-solidarity Radio Button
+ * M3Radio - KeralaRage KrSolidarity Radio Button
  *
  * **M3 Expressive Exception:**
  * Uses `rounded-full` for functional reasons. Perfect circles provide better
@@ -168,7 +168,7 @@ export interface M3RadioProps extends Omit<React.InputHTMLAttributes<HTMLInputEl
 export const M3Radio = forwardRef<HTMLInputElement, M3RadioProps>(({
     label,
     error = false,
-    mode = 'kr-dark',
+    mode = 'KrDark',
     containerClassName = '',
     className = '',
     disabled = false,
@@ -176,7 +176,7 @@ export const M3Radio = forwardRef<HTMLInputElement, M3RadioProps>(({
     ...props
 }, ref) => {
     const themeVariants = {
-        kr-dark: {
+        'KrDark': {
             radio: `
                 ${error
                     ? 'border-tertiary-waratah-red'
@@ -189,7 +189,7 @@ export const M3Radio = forwardRef<HTMLInputElement, M3RadioProps>(({
             dot: error ? 'bg-tertiary-waratah-red' : 'bg-wattle-gold',
             label: error ? 'text-tertiary-waratah-red' : 'text-on-surface-paper-white',
         },
-        kr-dark: {
+        'KrLight': {
             radio: `
                 ${error
                     ? 'border-tertiary-waratah-red'

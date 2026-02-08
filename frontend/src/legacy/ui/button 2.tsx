@@ -13,8 +13,8 @@ const buttonVariants = cva(
         destructive:
           'bg-waratah-red text-paper-white hover:bg-waratah-glow shadow-standard hover:shadow-elevated focus-visible:ring-waratah-red/50',
         outline:
-          'border-2 border-concrete-grey bg-transparent text-kr-leaf-mist hover:bg-concrete-grey/10 hover:border-kr-leaf-mist',
-        secondary: 'bg-concrete-grey text-paper-white hover:bg-kr-leaf-dusk shadow-subtle',
+          'border-2 border-concrete-grey bg-transparent text-KrLeaf-mist hover:bg-concrete-grey/10 hover:border-KrLeaf-mist',
+        secondary: 'bg-concrete-grey text-paper-white hover:bg-KrLeaf-dusk shadow-subtle',
         ghost: 'hover:bg-concrete-grey text-concrete-grey hover:text-paper-white',
         link: 'text-wattle-gold underline-offset-4 hover:underline hover:text-wattle-glow',
       },

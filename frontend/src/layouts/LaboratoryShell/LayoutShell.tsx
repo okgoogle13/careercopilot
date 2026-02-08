@@ -7,12 +7,12 @@ import { SidePanel } from './components/SidePanel';
 /**
  * LayoutShell
  *
- * The primary container for the kr-dark Workspace.
+ * The primary container for the KrDark Workspace.
  * Orchestrates the grid layout and provides the ModeContext.
  */
 export const LayoutShell: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
   return (
-    <div className="flex h-screen w-screen overflow-hidden bg-surface-kr-dark-slate-smoke-high text-on-surface-paper-white font-field-note antialiased">
+    <div className="flex h-screen w-screen overflow-hidden bg-surface-KrDark-slate-smoke-high text-on-surface-paper-white font-field-note antialiased">
       {/* Nav Rail - Fixed Width Left */}
       <div className="flex-none z-30">
         <NavRail />
@@ -31,7 +31,7 @@ export const LayoutShell: React.FC<{ children?: React.ReactNode }> = ({ children
           <main className="flex-1 overflow-auto relative z-0">{children || <MainCanvas />}</main>
 
           {/* Side Panel - Fixed Width Right (Collapsible logic to be added later) */}
-          <aside className="flex-none w-80 border-l border-surface-kr-dark-slate-smoke-highest bg-surface-kr-dark-slate-smoke-high z-10 hidden lg:block">
+          <aside className="flex-none w-80 border-l border-surface-KrDark-slate-smoke-highest bg-surface-KrDark-slate-smoke-high z-10 hidden lg:block">
             <SidePanel />
           </aside>
         </div>

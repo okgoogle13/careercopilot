@@ -26,18 +26,18 @@ const TechCard = React.forwardRef<HTMLDivElement, TechCardProps>(
         };
 
         const levelColors = {
-            beginner: mode === 'kr-dark' ? 'text-status-kr-dark-ghost-gum' : 'text-status-kr-dark-clinical-sage',
-            intermediate: mode === 'kr-dark' ? 'text-wattle-gold' : 'text-wattle-gold',
-            advanced: mode === 'kr-dark' ? 'text-status-kr-dark-kr-flower-orange' : 'text-status-kr-dark-kr-flower-orange',
-            expert: mode === 'kr-dark' ? 'text-tertiary-waratah-red' : 'text-status-kr-dark-clinical-alert',
+            beginner: mode === 'KrDark' ? 'text-status-KrDark-ghost-gum' : 'text-status-KrDark-clinical-sage',
+            intermediate: mode === 'KrDark' ? 'text-wattle-gold' : 'text-wattle-gold',
+            advanced: mode === 'KrDark' ? 'text-status-KrDark-KrFlower-orange' : 'text-status-KrDark-KrFlower-orange',
+            expert: mode === 'KrDark' ? 'text-tertiary-waratah-red' : 'text-status-KrDark-clinical-alert',
         };
 
         // Styles derived from M3Card glass variant logic
         const containerClasses = cn(
             'relative overflow-hidden transition-all duration-300 border backdrop-blur-md',
-            mode === 'kr-dark'
-                ? 'bg-surface-kr-dark-glass-medium border-white/10 text-on-surface-kr-dark-paper-white'
-                : 'bg-surface-kr-dark-glass-medium border-white/5 text-on-surface-kr-dark-paper-white',
+            mode === 'KrDark'
+                ? 'bg-surface-KrDark-glass-medium border-white/10 text-on-surface-KrDark-paper-white'
+                : 'bg-surface-KrDark-glass-medium border-white/5 text-on-surface-KrDark-paper-white',
             className
         );
 
@@ -46,7 +46,7 @@ const TechCard = React.forwardRef<HTMLDivElement, TechCardProps>(
                 ref={ref}
                 className={containerClasses}
                 style={{
-                    borderRadius: mode === 'kr-dark' ? 'var(--radius-stone)' : '8px'
+                    borderRadius: mode === 'KrDark' ? 'var(--radius-stone)' : '8px'
                 }}
                 whileHover={{
                     y: -4,
@@ -58,7 +58,7 @@ const TechCard = React.forwardRef<HTMLDivElement, TechCardProps>(
                 {...props}
             >
                 {/* Glare effect on hover */}
-                {isHovered && mode === 'kr-dark' && (
+                {isHovered && mode === 'KrDark' && (
                     <motion.div
                         className="absolute inset-0 pointer-events-none"
                         style={{
@@ -86,7 +86,7 @@ const TechCard = React.forwardRef<HTMLDivElement, TechCardProps>(
                             )}
                             <h3 className={cn(
                                 "font-semibold",
-                                mode === 'kr-dark' ? 'font-bloom text-xl' : 'font-field-note text-lg'
+                                mode === 'KrDark' ? 'font-bloom text-xl' : 'font-field-note text-lg'
                             )}>
                                 {title}
                             </h3>
@@ -116,12 +116,12 @@ const TechCard = React.forwardRef<HTMLDivElement, TechCardProps>(
                                     key={index}
                                     className={cn(
                                         "px-2 py-1 text-xs font-annotation uppercase tracking-wider",
-                                        mode === 'kr-dark'
-                                            ? 'bg-surface-kr-dark-concrete-grey-high border border-kr-screenprint-kr-dark-border'
-                                            : 'bg-surface-kr-dark-slate-smoke-high border border-kr-screenprint-kr-dark-border'
+                                        mode === 'KrDark'
+                                            ? 'bg-surface-KrDark-concrete-grey-high border border-KrScreenprint-KrDark-border'
+                                            : 'bg-surface-KrDark-slate-smoke-high border border-KrScreenprint-KrDark-border'
                                     )}
                                     style={{
-                                        borderRadius: mode === 'kr-dark' ? 'var(--radius-seed)' : '2px'
+                                        borderRadius: mode === 'KrDark' ? 'var(--radius-seed)' : '2px'
                                     }}
                                     whileHover={{ scale: 1.05 }}
                                     transition={{ type: "spring", stiffness: 400, damping: 25 }}

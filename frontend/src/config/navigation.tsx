@@ -1,8 +1,8 @@
 /**
- * kerala-rage kr-solidarity: NAVIGATION CONFIGURATION
+ * KeralaRage KrSolidarity: NAVIGATION CONFIGURATION
  *
  * Navigation structure using lucide-react icons instead of MUI icons.
- * Uses kerala-rage kr-solidarity design system tokens.
+ * Uses KeralaRage KrSolidarity design system tokens.
  */
 
 import {

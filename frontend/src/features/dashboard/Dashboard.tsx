@@ -2,8 +2,8 @@ import { Pebble, StatusBadge, Stone } from '@/components/ui';
 import { motion } from 'framer-motion';
 import { FileText, Layout, Plus, Sparkles, Target, Zap } from 'lucide-react';
 
-// kr-dark Assets
-import organicLabyrinth from '../../assets/kr-motifs/organic-labyrinth.jpg';
+// KrDark Assets
+import organicLabyrinth from '../../assets/KrMotifs/organic-labyrinth.jpg';
 import wallpaper from '../../assets/textures/wallpaper.png';
 
 // ============================================================================
@@ -31,10 +31,10 @@ const PROFILES: Profile[] = [
 /**
  * CareerCopilot Dashboard ("The Canopy View")
  *
- * V3.1 kr-dark Mode Implementation:
+ * V3.1 KrDark Mode Implementation:
  * ✓ ASSET-09 Organic Labyrinth (Ceiling Motifs)
  * ✓ High-fidelity Hero Metric Bar
- * ✓ 2x2 kr-motif Grid with Blur Bloom effects
+ * ✓ 2x2 KrMotif Grid with Blur Bloom effects
  */
 export function Dashboard() {
   const container = {
@@ -124,7 +124,7 @@ export function Dashboard() {
             <div className="w-px bg-concrete-grey/20 h-10" />
             <div className="text-right">
               <span className="block font-annotation text-[10px] text-concrete-grey-dark uppercase tracking-widest">
-                kr-motifs Found
+                KrMotifs Found
               </span>
               <span className="text-2xl font-black text-paper-white">42</span>
             </div>
@@ -134,7 +134,7 @@ export function Dashboard() {
         {/* Hero Metric Bar: High Fidelity Calibration */}
         <motion.div variants={item as any}>
           <Stone
-            mode="kr-dark"
+            mode="KrDark"
             elevation="raised"
             className="p-8 md:p-12 bg-asphalt-black/40 border-wattle-gold/20 flex flex-col md:flex-row items-center gap-12 overflow-hidden relative"
           >
@@ -215,7 +215,7 @@ export function Dashboard() {
             size="lg"
             className="h-16 px-10 font-bold uppercase tracking-wider shadow-glow-gold"
           >
-            <Plus className="w-5 h-5 mr-3" /> Deposit kr-motif
+            <Plus className="w-5 h-5 mr-3" /> Deposit KrMotif
           </Pebble>
           <Pebble
             variant="secondary"
@@ -233,7 +233,7 @@ export function Dashboard() {
           </Pebble>
         </motion.div>
 
-        {/* 2x2 kr-motif Grid: Optimized Application Profiles */}
+        {/* 2x2 KrMotif Grid: Optimized Application Profiles */}
         <section className="space-y-8">
           <div className="flex items-baseline gap-4">
             <h2 className="font-bloom text-3xl font-bold text-paper-white uppercase tracking-tight">
@@ -241,7 +241,7 @@ export function Dashboard() {
             </h2>
             <div className="flex-1 h-px bg-concrete-grey/10" />
             <span className="font-annotation text-[9px] text-concrete-grey opacity-50 uppercase tracking-[0.4em]">
-              kr-motif.LOG
+              KrMotif.LOG
             </span>
           </div>
 
@@ -254,7 +254,7 @@ export function Dashboard() {
                 className="group"
               >
                 <Stone
-                  mode="kr-dark"
+                  mode="KrDark"
                   elevation="floating"
                   className="p-8 border-concrete-grey/10 bg-asphalt-black/20 group-hover:bg-asphalt-black/40 group-hover:border-wattle-gold/30 transition-all duration-500 overflow-hidden relative"
                 >

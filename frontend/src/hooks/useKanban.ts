@@ -23,7 +23,7 @@ export function useKanban() {
             {
                 id: 'app-1',
                 role: 'Product Designer',
-                company: 'kerala-rage kr-solidarity',
+                company: 'KeralaRage KrSolidarity',
                 location: 'Remote',
                 updatedAt: '2d ago',
                 status: 'Applied',

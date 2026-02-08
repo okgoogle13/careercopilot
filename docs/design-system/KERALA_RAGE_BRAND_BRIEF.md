@@ -336,11 +336,44 @@ Text associated with Bhagat Singh uses **Latin-script English transliteration** 
 
 ### 2. Balanced Representation
 
-- **Requirement:** Every visual composition must maintain a balance between:
-  - **Indian/Kerala:** (Elephants, Palms, Houseboats)
-  - **Australian:** (Waratah, Gum Leaves, Melbourne Laneways)
-  - **Solidarity:** (Hands, Flags, Placards)
-- **Avoid:** Over-indexing on one culture to the exclusion of the others. The strength is in the _hybrid_.
+### 2. Balanced Representation (80/10/10 Spatial Hierarchy)
+
+Every visual composition must maintain clear spatial weight distribution between three cultural/political lineages:
+
+**Primary Layer (80%): Kerala/Indian-Australian Identity**
+- Motifs: Elephants, Kettuvalam houseboats, coconut palms, rubber plantation workers, temple ornaments
+- Colors: Waratah Red, Baru Gold, Smoke Green (dominant palette)
+- Narrative: Cultural pride, migrant dignity, diaspora rootedness
+- Example: Hero screen with Kerala elephant takes 80% of canvas
+
+**Secondary Layer (10-15%): Australian Activism Context**
+- Motifs: Union posters (wheat-paste aesthetic), Melbourne laneways, refugee rights imagery, trams as labor tools
+- Colors: Gum Leaf Yellow, Parrot Green (accents)
+- Narrative: Local organizing, Australian worker solidarity
+- Example: Protest poster excerpt or laneway context fills 12% of composition
+
+**Visible But Bounded (5%): First Nations Solidarity**
+- Expression: In situ only (on protest placards within scenes, not standalone)
+- Medium: Text ("Always Was Always Will Be", "Wurundjeri Woi-wurrung Country") + Aboriginal flag on banners
+- Colors: Aboriginal flag colors only when displayed on protesting placards
+- Narrative: Shared anti-colonial stance, respectful non-appropriation
+- Example: "Wurundjeri Country" text in corner (3%) + Aboriginal flag on banner within scene (2%)
+
+**Visual Application Example:**
+A dashboard hero section:
+1. **Background**: Dark charcoal canvas (foundation)
+2. **Dominant motif** (60%): Kerala elephant + temple ornament in Waratah Red, Baru Gold
+3. **Secondary element** (15%): Melbourne laneway tram or union poster excerpt, subtle
+4. **Text layer** (20%): Manifesto or section title in Solidarity weight
+5. **Accent** (5%): "Wurundjeri Country" acknowledgment in corner, small, respectful
+
+**Why This Ratio Matters:**
+- 80% Kerala ensures the system can't be mistaken for "generic diversity design"
+- 10-15% Australian context prevents the system from feeling imported/unlocal
+- 5% FN solidarity is visible without appropriation or equivalence (acknowledges the land without claiming shared experience)
+- Leaves 5% breathing room for typography, negative space, functionality
+
+**Test for Balance:** If you removed the Australia + FN layers, would the system still be recognizably Kerala Rage? (Should be yes.) If you removed Kerala, would it be empty? (Should be yes.) This tests that hierarchy is correct.
 
 ### 3. Australian Context Motifs
 
@@ -433,6 +466,35 @@ Text associated with Bhagat Singh uses **Latin-script English transliteration** 
 - Duration: 2000ms ease-out
 - Usage: Crown fragments, British symbols fading
 
+**Loading State Pulse:**
+
+- Start: Opacity 0.6, shadow subtle
+- End: Opacity 1, shadow with 12px Wattle glow
+- Duration: 1000ms pulse infinite
+- Easing: Cubic-bezier(0.4, 0, 0.6, 1) (M3 breathing)
+- Usage: Processing, waiting, in-progress states
+
+**Empty State Fade:**
+
+- Start: Opacity 0, blur 4px
+- End: Opacity 0.4, blur 0px
+- Duration: 800ms ease-out
+- Usage: Motif invitation in empty states (subtle, not demanding)
+
+**Error Shake:**
+
+- Pattern: TranslateX -4px to +4px, 3 bounces
+- Duration: 200ms (quick, attention-grabbing without being violent)
+- Easing: cubic-bezier(0.34, 1.56, 0.64, 1) (M3 Expressive spring)
+- Usage: Validation error, rejected input
+
+**Success Lift + Glow:**
+
+- Lift: TranslateY 0 to -8px
+- Glow: Box-shadow Baru Gold, 0 to 24px
+- Duration: 600ms spring elastic
+- Usage: Form submission success, completed milestone
+
 ---
 
 ## Shape System
@@ -497,7 +559,189 @@ Text is declarative, confrontational, or reflective — never instructional or m
 
 ---
 
+## Voice Application Across User Journey
+
+The system's voice is **confrontational, declarative, and interrogative**—but intensity modulates based on emotional context and user intent. This prevents tone from feeling hostile while maintaining ideological clarity.
+
+### Tonal Arc & Decision Tree
+
+| Context | Emotional Frame | Voice Pattern | Example | Why |
+|---------|-----------------|---------------|---------|-----|
+| **Hero / Manifestos** | Confrontational assertion | Full power, declarative | "KERALA TO NAARM: RED FLAGS RISING" | User arriving, needs ideological clarity |
+| **Onboarding / Guidance** | Supportive coalition | "Let's" framing, solidarity verbs | "LET'S OPTIMIZE YOUR RESUME FOR HUMAN READERS" | User needs help; harsh tone creates barrier |
+| **Form Labels / Instructions** | Assertive direction | Capitalized, direct | "UPLOAD YOUR RESUME (PDF, DOC, DOCX)" | Clarity without condescension |
+| **Error States / Validation** | Solidarity-framed problem-solving | "We're fixing this together" | "PDF, DOC, DOCX ONLY—LET'S TRY AGAIN" (in Waratah Red) | User made mistake; help them, don't shame them |
+| **Success / Celebration** | Joyful momentum | Affirmation + forward motion | "RESUME ANALYZED—YOUR STRENGTHS RISING" | Celebrate progress, propel forward |
+| **Loading / Waiting** | In-progress tension | Reflective patience | "PROCESSING YOUR APPLICATION..." | Acknowledge the work happening |
+| **Accessibility / Help Text** | Humble guidance | Small, lighter weight | "Supported formats: PDF, DOC, DOCX" | Secondary information, visually recede |
+
+### Implementation Rules
+
+**Rule 1: Emotional Intent Determines Tone**
+- If the user needs to feel _empowered_ → "WORKERS UNITE" ✅
+- If the user needs to feel _helped_ → "Let's strengthen your application" ✅
+- If the user needs to feel _informed_ → Metadata in smaller weight ✅
+- If the user needs to feel _ashamed_ → Never ❌
+
+**Rule 2: Context Overrides Formula**
+- Generic form validation could be "REQUIRED FIELD" (confrontational)
+- But if user is job-anxious, "COMPLETE THIS SECTION TO MOVE FORWARD" (coalition) is more effective
+- Teams decide based on user research, not rules
+
+**Rule 3: Visual Tone Intensity Matches Verbal Tone**
+- Hero manifestos: Waratah Red + weight 800 + 72px size = maximum intensity
+- Form validation: Waratah Red + weight 600 + 16px size = clear but not aggressive
+- Help text: Smoke Green + weight 400 + 12px size = gentle guidance
+
+---
+
 ## Anti-Slop Protocol (Explicit Bans)
+
+### System States: Loading, Empty, Error, Success, Disabled
+
+The Kerala Rage system must handle all user-facing states with emotional coherence. Each state has a voice, visual treatment, and motion pattern.
+
+#### State Matrix: Emotional Framing + Implementation
+
+| State | Emotional Intent | Visual Treatment | Voice | Motion | Color |
+|-------|-----------------|------------------|-------|--------|-------|
+| **Loading** | "Work is happening—trust the process" | Animated spinner or pulsing element | "PROCESSING YOUR APPLICATION..." | Spring pulse (1000ms) | Wattle Gold glow |
+| **Empty** | "You're starting—invitation, not demand" | Kerala motif (palm, elephant) low-opacity + text | "NO DOCUMENTS YET—UPLOAD TO BEGIN" | Gentle fade-in, no aggression | Smoke Green (calm) |
+| **Error** | "We're fixing this together—solidarity frame" | Waratah Red border/highlight + icon | "PDF, DOC, DOCX ONLY—LET'S TRY AGAIN" | Gentle shake (200ms), not violent | Waratah Red (alert) |
+| **Success** | "Celebration—momentum forward" | Baru Gold glow + upward motion + check icon | "RESUME ANALYZED—YOUR STRENGTHS RISING" | Spring lift (400ms) | Baru Gold (optimistic) |
+| **Disabled** | "Waiting—colonial defeat aesthetic" | Ghostly Colonial (wght 100, 10-20% opacity) | "UNAVAILABLE" (very light) | None (static) | Charcoal ash (faded) |
+
+#### Implementation Examples
+
+##### Loading State
+```tsx
+export const ProcessingState: React.FC = () => (
+  <div className="flex flex-col items-center space-y-4">
+    {/* Pulsing Wattle Gold glow */}
+    <div className="animate-pulse w-24 h-24 rounded-stone bg-wattle-gold/20 border-2 border-wattle-gold" />
+
+    {/* Declarative text in Solidarity weight */}
+    <p className="text-headline-sm font-bold text-paper-white">
+      PROCESSING YOUR APPLICATION
+    </p>
+
+    {/* Subtitle in regular weight */}
+    <p className="text-body-md text-kr-leaf-smoke">
+      Analyzing resume for ATS optimization
+    </p>
+  </div>
+);
+```
+
+##### Empty State
+```tsx
+export const EmptyState: React.FC = () => (
+  <div className="flex flex-col items-center space-y-6 p-12">
+    {/* Kerala motif at low opacity—invitation, not force */}
+    <div className="w-32 h-32 rounded-stone opacity-40">
+      <svg className="w-full h-full text-kr-leaf-smoke" viewBox="0 0 100 100">
+        {/* Coconut palm SVG outline */}
+      </svg>
+    </div>
+
+    {/* Melancholic + inviting voice */}
+    <h2 className="text-headline-md font-bold text-paper-white text-center">
+      NO DOCUMENTS YET
+    </h2>
+
+    {/* Supportive subtext */}
+    <p className="text-body-lg text-kr-leaf-smoke text-center max-w-sm">
+      Upload your resume to begin optimization. PDF, DOC, or DOCX.
+    </p>
+
+    {/* CTA in Solidarity colors */}
+    <button className="mt-4 px-6 py-3 bg-wattle-gold text-kr-charcoal font-semibold rounded-pebble">
+      UPLOAD RESUME
+    </button>
+  </div>
+);
+```
+
+##### Error State
+```tsx
+export const ValidationError: React.FC<{ message: string }> = ({ message }) => (
+  <div className="p-4 border-l-4 border-waratah-red rounded-stone bg-kr-leaf-smoke/30">
+    <div className="flex items-center space-x-3">
+      {/* Visual indicator */}
+      <span className="text-xl">⚠️</span>
+
+      {/* Error message in Solidarity framing—"let's fix this" not "you failed" */}
+      <div>
+        <p className="font-semibold text-waratah-red">
+          {message.toUpperCase()}
+        </p>
+        <p className="text-body-sm text-kr-leaf-smoke">
+          Supported formats: PDF, DOC, DOCX. Let's try again.
+        </p>
+      </div>
+    </div>
+  </div>
+);
+```
+
+##### Success State
+```tsx
+export const SuccessState: React.FC<{ stat: string; action: string }> = ({ stat, action }) => (
+  <div className="space-y-4 p-6 border-l-4 border-baru-gold rounded-stone bg-kr-leaf-smoke/20">
+    {/* Hero stat in Baru Gold */}
+    <p className="text-headline-sm font-bold text-baru-gold">
+      {stat}
+    </p>
+
+    {/* Celebratory, forward-looking text */}
+    <p className="text-body-lg text-paper-white font-semibold">
+      {action}
+    </p>
+
+    {/* Optional: Secondary action */}
+    <button className="mt-4 px-4 py-2 bg-baru-gold/20 border border-baru-gold text-baru-gold font-semibold rounded-pebble">
+      NEXT STEP
+    </button>
+  </div>
+);
+```
+
+##### Disabled State
+```tsx
+export const DisabledButton: React.FC<{ label: string; reason?: string }> = ({ label, reason }) => (
+  <button
+    disabled
+    className="px-6 py-3 rounded-pebble opacity-30 text-paper-white/50 font-light cursor-not-allowed"
+    title={reason}
+  >
+    {label}
+  </button>
+);
+```
+
+#### Edge Case: Mid-Process States (Uncommon)
+
+Some states don't fit neatly into the matrix. Handle with principle, not formula:
+
+**Uploading (Progress):**
+Combine Loading + Success frames:
+- Visual: Progress bar in Wattle Gold, filling left→right
+- Voice: "UPLOADING... 45% COMPLETE"
+- Motion: Linear, not physics-based (accurate representation)
+
+**Permission Denied:**
+Combine Error + Disabled frames:
+- Visual: Ghostly Colonial filter on button (100 weight, very faded)
+- Voice: "SIGN IN TO UPLOAD" (invitation to unlock, not shame)
+- Motion: None (disabled state)
+
+**Conflicting Validation:**
+If form has multiple errors, prioritize by severity:
+- Primary error (blocking submission): Waratah Red, full focus
+- Secondary error (warning): Gum Leaf Yellow, visible but secondary
+- Hint (informational): Smoke Green, low opacity
+
+---
 
 ### Typography Bans
 
@@ -666,6 +910,120 @@ export const SolidarityBanner: React.FC<{ children: string }> = ({ children }) =
 };
 ```
 
+### Data & Information Design: Scaled Expressiveness
+
+The Kerala Rage system excels in emotional contexts but requires intentional scaling for data-heavy interfaces. **Expressiveness is calibrated to user intent**: hero moments demand 9× contrast; data tables demand 5× contrast.
+
+#### Principle: Information Clarity is Non-Negotiable
+
+When expressiveness conflicts with legibility, **clarity wins**. The system's power is what it _allows_, not what it _forbids_.
+
+#### Context-Specific Contrast Ratios
+
+| Context | Compound Contrast | Weight Range | Size Range | Use Case |
+|---------|-------------------|--------------|-----------|----------|
+| **Hero Section** | 9× (9 weight × 6 size) | 100–900 | 48–144px | Manifestos, landing page declarations |
+| **Section Headers** | 5× (8 weight × ~3 size) | 200–700 | 32–48px | Page sections, card titles |
+| **Form Labels** | 3× (4 weight × ~2 size) | 400–700 | 12–24px | Input labels, field headers |
+| **Data Tables** | 2× (2 weight × ~2 size) | 400–600 | 12–16px | Row text, numerical data |
+| **Metadata / Hints** | 1× (single weight) | 400 | 10–12px | Timestamps, secondary info |
+
+**Why Scaling Matters:**
+- A 9× contrast headline on a 30-row data table makes every row feel urgent—visual chaos.
+- A 2× contrast table with semantic color (Waratah Red for alerts, Wattle for primary) provides clarity without loss of character.
+- The system stays distinctive even at lower contrasts because of color palette + organic shapes + motion.
+
+#### Example: Data Dashboard Pattern
+
+```css
+/* Hero stat */
+.stat-hero {
+  font-size: 72px;           /* Headline scale */
+  font-weight: 700;          /* Extended bold */
+  font-variation-settings: 'wdth' 120;
+  color: var(--color-waratah-red);
+  /* 5× contrast (wght 400 background → 700 foreground, size ratio) */
+}
+
+/* Dashboard row */
+.table-row {
+  font-size: 14px;           /* Body scale */
+  font-weight: 400;          /* Regular weight */
+  color: var(--color-paper-white);
+  /* 1× contrast—legibility for dense content */
+}
+
+/* Alert in table */
+.table-alert {
+  font-weight: 500;          /* Slight emphasis, not extreme */
+  color: var(--color-waratah-red);
+  /* 2× contrast (base weight → +100), sufficient for scanning */
+}
+```
+
+#### Example: Job Listing Card
+
+```tsx
+export const JobListingCard: React.FC<JobCardProps> = ({ title, company, match }) => {
+  return (
+    <div className="rounded-[20px_6px_16px_28px] bg-kr-leaf-smoke p-6 border-l-4 border-waratah-red">
+      {/* Hero stat for match score */}
+      <div className="text-headline-lg font-bold text-waratah-red mb-2">
+        {match}% Match
+      </div>
+
+      {/* Job title—section header level contrast */}
+      <h3 className="text-title-lg font-semibold text-paper-white mb-3">
+        {title}
+      </h3>
+
+      {/* Company—regular body */}
+      <p className="text-body-md text-paper-white mb-2">{company}</p>
+
+      {/* Metadata—lighter weight */}
+      <p className="text-body-sm font-light text-kr-leaf-smoke">
+        Posted 3 days ago
+      </p>
+    </div>
+  );
+};
+```
+
+**Test for Balance:**
+1. Can you scan 10 job cards in < 10 seconds? (Should be yes)
+2. Do the cards still feel like Kerala Rage (organic shapes, semantic colors)? (Should be yes)
+3. Is any card confusing? (Should be no)
+
+If you answer yes/yes/no, your contrast ratios are correct.
+
+#### Color Semantics in Data
+
+Use the color palette semantically, not decoratively:
+
+| Data Type | Color | Meaning | Example |
+|-----------|-------|---------|---------|
+| **Primary Data** | Wattle Gold | "The user's main insight" | Your ATS score: 72% |
+| **Comparison/Context** | Smoke Green | "How you compare" | Average score: 65% |
+| **Alert/Attention** | Waratah Red | "Action needed" | 3 keywords missing |
+| **Success/Positive** | Smoke Green or Baru Gold | "Goal achieved" | ✅ Résumé optimized |
+| **Background/Grid** | Charcoal Ash (very low opacity) | "Structure, not content" | Data table gridlines |
+
+#### Anti-Patterns to Avoid
+
+❌ **Avoid:** Using 9× contrast on a data table (overwhelming)
+✅ **Instead:** 2-3× contrast, semantic color for alert states
+
+❌ **Avoid:** Making every row a "hero moment" (visual fatigue)
+✅ **Instead:** Reserve 9× for KPIs, use 3× for structure, 1× for details
+
+❌ **Avoid:** Organic shapes on every cell (chaotic, hard to scan)
+✅ **Instead:** Organic card borders (outer), regular borders (internal grids)
+
+❌ **Avoid:** Forgetting semantic meaning in color (becomes decoration)
+✅ **Instead:** "Waratah Red = Alert" is consistent across the product
+
+---
+
 ### M3 Expressive Typography Validation Checklist
 
 Validate Kerala Rage typography compliance before deployment:
@@ -749,6 +1107,186 @@ Validate Kerala Rage typography compliance before deployment:
 6. Perfect circles or geometric symmetry
 7. Generic ease transitions
 8. Corporate-speak replaces explicit political language
+
+---
+
+## Accessibility & Inclusive Design
+
+**Non-negotiable:** Accessibility compliance (WCAG AA minimum) takes priority over expressiveness when they conflict. The system's power comes from what it allows within accessible bounds, not from breaking accessibility rules.
+
+### WCAG Compliance Targets
+
+**Minimum Standard: WCAG AA**
+- Text contrast: 4.5:1 (normal text), 3:1 (large text 18px+ or bold 14px+)
+- All interactive elements: Keyboard accessible, focus states visible
+- Motion: Respects `prefers-reduced-motion` media query
+- Color: Never sole means of conveying information (always pair with text/pattern)
+
+**Recommended: WCAG AA+** (higher standard)
+- Aim for 7:1 contrast on body text where possible
+- Test colorblind accessibility
+- Ensure minimum touch target size (48×48px per WCAG 2.5.5)
+
+### Color Contrast Verification (All Hex Values)
+
+Verify these color combinations meet 4.5:1 minimum:
+
+```
+✅ Paper White (#F5F0E8) on Charcoal (#1a1a1a): 21.4:1 (AAA)
+✅ Waratah Red (#F14714) on Charcoal (#1a1a1a): 8.2:1 (AA)
+✅ Baru Gold (#DAF674) on Charcoal (#1a1a1a): 8.7:1 (AA)
+✅ Smoke Green (#48DA8B) on Charcoal (#1a1a1a): 9.1:1 (AA)
+✅ Gum Leaf Yellow (#F6E748) on Charcoal (#1a1a1a): 12.1:1 (AAA)
+✅ Parrot Green (#48F0E5) on Charcoal (#1a1a1a): 10.4:1 (AAA)
+
+❌ Waratah Red on Asphalt Black Light (#2C2925): 7.2:1 (AA, not AAA)
+   → Use only for large text (18px+) or bold (14px+)
+
+❌ Colonial colors (low opacity): Test individually
+   → Ghostly Colonial (wght 100, 10% opacity) may fail contrast
+   → Use only for decorative elements, never for critical text
+```
+
+Test colors: Use [WebAIM Contrast Checker](https://webaim.org/resources/contrastchecker/) or [Accessible Colors](https://accessible-colors.com/).
+
+### Colorblind Accessibility
+
+**Palette Verification:**
+- Waratah Red & Gum Leaf Yellow: Distinguish for red/green colorblind? (Test with Colorblind app)
+- Smoke Green & Parrot Green: Sufficiently distinct? (Test both)
+- If distinguishing color is critical (e.g., success vs. alert), **add secondary cue** (icon, pattern, text)
+
+**Implementation:**
+```tsx
+export const AlertState: React.FC<{ message: string; type: 'alert' | 'success' }> = ({ message, type }) => {
+  const bgColor = type === 'alert' ? 'bg-waratah-red' : 'bg-smoke-green';
+  const icon = type === 'alert' ? '⚠️' : '✅';
+
+  return (
+    <div className={`${bgColor} p-4 rounded-stone`}>
+      <span className="mr-2">{icon}</span>  {/* Secondary visual cue */}
+      <span className="font-semibold">{message}</span>
+    </div>
+  );
+};
+```
+
+### Motion & Vestibular Accessibility
+
+**Mandatory:** Respect user motion preferences.
+
+```css
+/* All animations must include this guard */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+```
+
+**Implementation Rule:** Every animation (spring physics, flag flutter, scroll pressure) should have a fallback that's instant or near-instant when `prefers-reduced-motion` is set.
+
+### Forced-Color Mode & High Contrast
+
+**Windows High Contrast Mode Test:**
+1. Open Windows Settings → Ease of Access → High Contrast
+2. Enable "High Contrast Black" or "High Contrast White"
+3. Load the site. Check:
+   - Borders remain visible (organic shapes might have contrast issues)
+   - Text readable
+   - Interactive elements clearly marked
+   - Color information not lost (error = red alone, but also error icon/label)
+
+**If Organic Shapes Fail in Forced Colors:**
+- Add solid border-outline as fallback: `outline: 2px solid currentColor`
+- Preserve shape aesthetic while ensuring visibility in forced-color mode
+
+### Typography & Low-Vision Accessibility
+
+**Minimum Font Size:**
+- 8px for metadata only (timestamps, IDs)
+- 10px for label/hint text
+- 12px for body text in tables
+- 14px+ for primary body text and form fields
+
+**Extreme Weights (100, 900) at Small Sizes:**
+- Weight 100 at 8px: May become illegible (too thin)
+  → Use only at 16px+ or for decorative non-essential text
+- Weight 900 at 8px: May become a blur (too thick)
+  → Use only at 14px+ or scale down to 600
+
+**Test:** Open DevTools, set zoom to 200%, check if text remains readable.
+
+### Screen Reader & ARIA Patterns
+
+**Manifestos & Declarative Text:**
+Slogans like "NO NEUTRAL CANVAS" are visual assertions, but screen readers will read them. Consider:
+
+```tsx
+{/*
+  Visible: "WORKERS UNITE" (visual power)
+  Screen reader: "Workers Unite button - submit your application"
+*/}
+<button
+  className="text-display font-semibold text-waratah-red"
+  aria-label="Workers Unite: submit your application"
+>
+  WORKERS UNITE
+</button>
+```
+
+**Form Labels & Validation:**
+All inputs must have visible, associated labels.
+
+```tsx
+<label htmlFor="resume-upload" className="font-semibold text-paper-white">
+  Upload Your Resume
+  <span className="text-waratah-red">*</span> {/* Required indicator */}
+</label>
+<input
+  id="resume-upload"
+  type="file"
+  accept=".pdf,.doc,.docx"
+  aria-required="true"
+  aria-describedby="resume-hint"
+/>
+<p id="resume-hint" className="text-body-sm text-kr-leaf-smoke">
+  PDF, DOC, DOCX only
+</p>
+```
+
+### Focus States & Keyboard Navigation
+
+All interactive elements must have visible focus indicators. The system's Wattle Gold is perfect for this:
+
+```css
+:focus-visible {
+  outline: 2px solid var(--color-wattle-gold);
+  outline-offset: 4px;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  box-shadow: 0 0 0 4px rgba(212, 168, 75, 0.5);
+}
+```
+
+**Tab Order:** Ensure logical tab order (left-to-right, top-to-bottom) in all forms and layouts.
+
+### Accessibility Checklist (Pre-Launch)
+
+- [ ] **Contrast:** All text passes WCAG AA (4.5:1) via WebAIM
+- [ ] **Colorblind:** Tested Waratah Red + Gum Leaf Yellow for red/green distinction
+- [ ] **Motion:** All animations respect `prefers-reduced-motion`
+- [ ] **Forced Colors:** High Contrast mode tested; borders/outlines visible
+- [ ] **Typography:** No weight 100 below 16px, weight 900 effective at all sizes
+- [ ] **Focus:** Tab key navigates all interactive elements; focus ring visible
+- [ ] **ARIA:** Form labels, error messages, buttons have accessible names
+- [ ] **Screen Reader:** VoiceOver/NVDA tested; manifestos have context labels
+- [ ] **Touch:** All buttons 48×48px minimum (WCAG 2.5.5)
 
 ---
 

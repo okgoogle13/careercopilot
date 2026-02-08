@@ -101,10 +101,10 @@ export function ApplicationTracker() {
                     'text-[var(--color-text-tertiary)] bg-[var(--color-surface-container)] opacity-60';
 
                   if (isCurrent) {
-                    variant = 'primary'; // kerala-rage primary (Leaf)
+                    variant = 'primary'; // KeralaRage primary (Leaf)
                     className = 'font-bold shadow-sm scale-105 border-[var(--color-leaf-base)]';
                   } else if (isCompleted) {
-                    variant = 'secondary'; // kerala-rage secondary (Wattle) for completed
+                    variant = 'secondary'; // KeralaRage secondary (Wattle) for completed
                     className = 'opacity-100';
                   }
 

@@ -1,7 +1,7 @@
 /**
- * kerala-rage kr-solidarity: TEST UTILITIES
+ * KeralaRage KrSolidarity: TEST UTILITIES
  *
- * Testing utilities for React Testing Library with kerala-rage kr-solidarity design system support.
+ * Testing utilities for React Testing Library with KeralaRage KrSolidarity design system support.
  * Replaces MUI ThemeProvider with design system context.
  */
 
