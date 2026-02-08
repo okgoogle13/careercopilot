@@ -1,11 +1,11 @@
 /**
  * Route-to-Mode Mapping Configuration
  *
- * Defines which pages use kr-dark mode (emotional, user-facing)
- * versus kr-dark mode (clinical tools, configuration)
+ * Defines which pages use KrDark mode (emotional, user-facing)
+ * versus KrDark mode (clinical tools, configuration)
  *
- * kr-dark Mode: Landing, Auth, Onboarding, Opportunities, Dashboard, Kanban
- * kr-dark Mode: Analysis, Ingestion, Documents, Settings, Generation tools
+ * KrDark Mode: Landing, Auth, Onboarding, Opportunities, Dashboard, Kanban
+ * KrDark Mode: Analysis, Ingestion, Documents, Settings, Generation tools
  */
 
 import type { AppMode } from '../stores/useModeStore';
@@ -21,59 +21,59 @@ export interface RouteModeConfig {
  * Sorted by specificity (longest paths first) for matching algorithm
  */
 export const ROUTE_MODE_MAP: RouteModeConfig[] = [
-  // ============== kr-dark MODE ROUTES ==============
+  // ============== KrDark MODE ROUTES ==============
   // Emotional, user-facing experiences
 
   // Public landing pages
-  { path: '/', mode: 'kr-dark' },
+  { path: '/', mode: 'KrDark' },
 
   // Authentication flows
-  { path: '/login', mode: 'kr-dark' },
-  { path: '/register', mode: 'kr-dark' },
+  { path: '/login', mode: 'KrDark' },
+  { path: '/register', mode: 'KrDark' },
 
   // Onboarding experience
-  { path: '/onboarding', mode: 'kr-dark' },
+  { path: '/onboarding', mode: 'KrDark' },
 
   // Discovery & opportunity viewing
-  { path: '/opportunities', mode: 'kr-dark' },
+  { path: '/opportunities', mode: 'KrDark' },
 
   // Dashboard overview
-  { path: '/dashboard', mode: 'kr-dark' },
+  { path: '/dashboard', mode: 'KrDark' },
 
   // Application tracking (Kanban view)
-  { path: '/tracker', mode: 'kr-dark' },
+  { path: '/tracker', mode: 'KrDark' },
 
   // Profile viewing (not editing)
-  { path: '/profile', mode: 'kr-dark', exact: true },
+  { path: '/profile', mode: 'KrDark', exact: true },
 
-  // ============== kr-dark MODE ROUTES ==============
+  // ============== KrDark MODE ROUTES ==============
   // Clinical tools, analysis, configuration
 
   // Analysis & insights dashboard
-  { path: '/analysis', mode: 'kr-dark' },
+  { path: '/analysis', mode: 'KrDark' },
 
   // Data ingestion/import
-  { path: '/career/ingest', mode: 'kr-dark' },
-  { path: '/ingestion', mode: 'kr-dark' },
+  { path: '/career/ingest', mode: 'KrDark' },
+  { path: '/ingestion', mode: 'KrDark' },
 
   // Document management & editing
-  { path: '/documents', mode: 'kr-dark' },
+  { path: '/documents', mode: 'KrDark' },
 
   // Generation tools
-  { path: '/ksc-generator', mode: 'kr-dark' },
-  { path: '/cover-letter-generator', mode: 'kr-dark' },
+  { path: '/ksc-generator', mode: 'KrDark' },
+  { path: '/cover-letter-generator', mode: 'KrDark' },
 
   // Asset library (archive vault)
-  { path: '/asset-library', mode: 'kr-dark' },
+  { path: '/asset-library', mode: 'KrDark' },
 
   // Settings & configuration
-  { path: '/settings', mode: 'kr-dark' },
+  { path: '/settings', mode: 'KrDark' },
 
   // Job queue & background processing
-  { path: '/job-queue', mode: 'kr-dark' },
+  { path: '/job-queue', mode: 'KrDark' },
 
   // Development & style guide
-  { path: '/style-guide', mode: 'kr-dark' },
+  { path: '/style-guide', mode: 'KrDark' },
 ];
 
 /**
@@ -81,11 +81,11 @@ export const ROUTE_MODE_MAP: RouteModeConfig[] = [
  * Uses longest-match-first algorithm to handle nested routes correctly
  *
  * Example:
- * getModeForRoute('/documents/upload') → 'kr-dark' (matches /documents)
- * getModeForRoute('/unknown') → 'kr-dark' (default fallback)
+ * getModeForRoute('/documents/upload') → 'KrDark' (matches /documents)
+ * getModeForRoute('/unknown') → 'KrDark' (default fallback)
  *
  * @param pathname - Current route pathname
- * @returns AppMode ('kr-dark' | 'kr-dark')
+ * @returns AppMode ('KrDark' | 'KrDark')
  */
 export function getModeForRoute(pathname: string): AppMode {
   // Sort routes by path length descending (longest/most specific first)
@@ -103,8 +103,8 @@ export function getModeForRoute(pathname: string): AppMode {
     return pathname.startsWith(route.path);
   });
 
-  // Return matched mode or default to kr-dark for unknown routes
-  return matchedRoute?.mode ?? 'kr-dark';
+  // Return matched mode or default to KrDark for unknown routes
+  return matchedRoute?.mode ?? 'KrDark';
 }
 
 /**

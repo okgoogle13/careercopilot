@@ -13,7 +13,7 @@ interface MetricCardProps {
 }
 
 /**
- * MetricCard - kerala-rage kr-solidarity V3.1 Metric Display Component
+ * MetricCard - KeralaRage KrSolidarity V3.1 Metric Display Component
  */
 export function MetricCard({
   icon: Icon,

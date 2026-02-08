@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Jar } from '../components/ui/M3Select';
+import { M3Select } from '../legacy/ui/M3Select';
 
 const meta: Meta<typeof M3Select> = {
     title: 'M3 Components/Select',

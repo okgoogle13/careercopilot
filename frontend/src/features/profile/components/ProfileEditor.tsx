@@ -5,7 +5,7 @@ import { Archive, Award, Box, Briefcase, Loader2, Plus, Sparkles, User } from 'l
 import React, { useState } from 'react';
 
 // Lab Assets
-import starfishCage from '../../assets/kr-motifs/starfish-cage.jpg';
+import starfishCage from '../../assets/KrMotifs/starfish-cage.jpg';
 import paperGrain from '../../assets/textures/paper-grain.png';
 
 export interface ProfileEditorProps {
@@ -23,10 +23,10 @@ const skillsList = [
 ];
 
 /**
- * CareerCopilot Profile Editor ("The kr-motif Archive")
+ * CareerCopilot Profile Editor ("The KrMotif Archive")
  *
- * V3.1 kr-dark Mode Implementation:
- * ✓ ASSET-07 Starfish Cage (Glass kr-motif Case backdrop)
+ * V3.1 KrDark Mode Implementation:
+ * ✓ ASSET-07 Starfish Cage (Glass KrMotif Case backdrop)
  * ✓ Clinical Typography (Monospace metadata, Serif descriptors)
  * ✓ Paper Texture & Grid Overlays
  */
@@ -67,10 +67,10 @@ export const ProfileEditor: React.FC<ProfileEditorProps> = ({ onNext, onBack }) 
               [ BIOMETRIC_ARCHIVE.v3 ]
             </p>
             <h1 className="font-serif text-5xl text-bark-base tracking-tight italic">
-              The kr-motif <span className="text-leaf-dark">Archive</span>
+              The KrMotif <span className="text-leaf-dark">Archive</span>
             </h1>
             <p className="font-field-note text-lg text-bark-base/60 mt-2 max-w-2xl">
-              Review and recalibrate the extracted metadata from your career kr-motifs. Precision is
+              Review and recalibrate the extracted metadata from your career KrMotifs. Precision is
               mandatory for successful synthesis.
             </p>
           </div>
@@ -84,14 +84,14 @@ export const ProfileEditor: React.FC<ProfileEditorProps> = ({ onNext, onBack }) 
           {/* Left Column - The "Glass Case" Visual (ASSET-07) */}
           <div className="lg:col-span-4 space-y-8">
             <Stone
-              mode="kr-dark"
+              mode="KrDark"
               elevation="floating"
               className="aspect-[4/5] overflow-hidden relative border-bark-base/20 group"
             >
               <div className="absolute inset-0 bg-bark-dark/10 mix-blend-multiply opacity-40 z-10 pointer-events-none" />
               <img
                 src={starfishCage}
-                alt="kr-motif Container"
+                alt="KrMotif Container"
                 className="w-full h-full object-cover scale-110 group-hover:scale-100 transition-transform duration-[5s] ease-out brightness-90 saturate-[0.8]"
               />
               <div className="absolute bottom-0 inset-x-0 p-6 bg-gradient-to-t from-bark-dark/80 to-transparent z-20">
@@ -201,7 +201,7 @@ export const ProfileEditor: React.FC<ProfileEditorProps> = ({ onNext, onBack }) 
               />
             </section>
 
-            {/* Experience & Skills - kr-motif List */}
+            {/* Experience & Skills - KrMotif List */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
               <section className="space-y-6">
                 <div className="flex items-center gap-3 border-b border-bark-base/5 pb-2">

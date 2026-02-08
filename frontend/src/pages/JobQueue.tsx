@@ -194,7 +194,7 @@ export function JobQueue() {
             return (
               <Stone
                 key={job.id}
-                mode="kr-dark"
+                mode="KrDark"
                 elevation="raised"
                 className="flex flex-col h-full group p-0 overflow-hidden"
               >

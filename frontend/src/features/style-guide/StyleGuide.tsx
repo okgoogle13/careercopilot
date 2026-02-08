@@ -19,7 +19,7 @@ export function StyleGuide() {
       <div className="animate-in slide-in-from-top-4 fade-in duration-700 ease-spring-decelerate">
         <PageHeader
           title="Living Style Guide"
-          description="The source of truth for the kerala-rage kr-solidarity aesthetic"
+          description="The source of truth for the KeralaRage KrSolidarity aesthetic"
           highlightedWord="Style Guide"
         />
       </div>
@@ -169,7 +169,7 @@ export function StyleGuide() {
               Display Large (Weight 900)
             </p>
             <h1 className="text-display-large font-black transition-all duration-300 group-hover:tracking-wider cursor-default">
-              kerala-rage kr-solidarity
+              KeralaRage KrSolidarity
             </h1>
           </div>
           <div className="group">

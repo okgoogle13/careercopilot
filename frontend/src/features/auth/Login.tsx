@@ -4,11 +4,11 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { z } from 'zod';
-import { kerala-rageButton } from '../../components/ui/kerala-rageButton';
+import { KeralaRageButton } from '../../components/ui/KeralaRageButton';
 import { useAuth } from '../../context/AuthContext';
 
-// kerala-rage Assets
-import kr-motifGrid from '../../assets/kr-motifs/leaf-fern.png'; // Using available kr-motif
+// KeralaRage Assets
+import KrMotifGrid from '../../assets/KrMotifs/leaf-fern.png'; // Using available KrMotif
 import paperWhiteGrid from '../../assets/textures/paper-grain.png'; // Using available texture
 
 const loginSchema = z.object({
@@ -51,7 +51,7 @@ export function Login() {
       />
 
       <div className="w-full max-w-md relative z-10">
-        {/* The Entry Gate (kr-dark Glass) */}
+        {/* The Entry Gate (KrDark Glass) */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -60,7 +60,7 @@ export function Login() {
           {/* Compass Motif Decoration */}
           <div className="absolute top-[-40px] right-[-40px] w-32 h-32 opacity-20 pointer-events-none">
             <img
-              src={kr-motifGrid}
+              src={KrMotifGrid}
               alt=""
               className="animate-spin-slow"
               style={{ animationDuration: '60s' }}
@@ -134,7 +134,7 @@ export function Login() {
               )}
             </div>
 
-            <kerala-rageButton
+            <KeralaRageButton
               variant="primary"
               size="lg"
               type="submit"
@@ -142,7 +142,7 @@ export function Login() {
               className="w-full mt-4"
             >
               {isSubmitting ? 'Validating...' : 'Authenticate'}
-            </kerala-rageButton>
+            </KeralaRageButton>
           </form>
 
           {/* Helper Links */}

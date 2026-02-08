@@ -1,4 +1,4 @@
-export type NavigationModeAvailability = 'kr-dark' | 'kr-dark' | 'both';
+export type NavigationModeAvailability = 'KrDark' | 'KrDark' | 'both';
 
 export interface NavigationItem {
     id: string;
@@ -9,34 +9,34 @@ export interface NavigationItem {
 
 export const NAVIGATION_SCHEMA: NavigationItem[] = [
     {
-        id: 'kr-dark-feed',
+        id: 'KrDark-feed',
         label: 'Feed',
-        route: '/kr-dark/feed',
-        modeAvailability: 'kr-dark',
+        route: '/KrDark/feed',
+        modeAvailability: 'KrDark',
     },
     {
-        id: 'kr-dark-kanban',
+        id: 'KrDark-kanban',
         label: 'Kanban',
-        route: '/kr-dark/kanban',
-        modeAvailability: 'kr-dark',
+        route: '/KrDark/kanban',
+        modeAvailability: 'KrDark',
     },
     {
-        id: 'kr-dark-landing',
+        id: 'KrDark-landing',
         label: 'Landing',
-        route: '/kr-dark',
-        modeAvailability: 'kr-dark',
+        route: '/KrDark',
+        modeAvailability: 'KrDark',
     },
     {
         id: 'lab-dashboard',
         label: 'Lab',
         route: '/lab',
-        modeAvailability: 'kr-dark',
+        modeAvailability: 'KrDark',
     },
     {
         id: 'lab-analysis',
         label: 'Analysis',
         route: '/lab/analysis',
-        modeAvailability: 'kr-dark',
+        modeAvailability: 'KrDark',
     },
     {
         id: 'overview',

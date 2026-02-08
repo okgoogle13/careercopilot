@@ -5,7 +5,7 @@ import { cn } from '../../lib/utils';
 export interface LeafProps extends React.HTMLAttributes<HTMLDivElement> {
     /**
      * The structural role of this text block.
-     * - Hero: The kr-flower Composition (Vine + Trunk)
+     * - Hero: The KrFlower Composition (Vine + Trunk)
      * - Title: Section headers (Bloom)
      * - Body: Standard content (Leaf)
      * - Data: Monospace metrics (JetBrains)
@@ -18,7 +18,7 @@ export interface LeafProps extends React.HTMLAttributes<HTMLDivElement> {
     children: React.ReactNode;
 
     /**
-     * Optional decorative label overlay (for kr-flower).
+     * Optional decorative label overlay (for KrFlower).
      */
     label?: string;
 
@@ -38,18 +38,18 @@ export interface LeafProps extends React.HTMLAttributes<HTMLDivElement> {
 export const Leaf = React.forwardRef<HTMLDivElement, LeafProps>(
     ({ className, role = 'body', label, children, as, ...props }, ref) => {
 
-        // kr-flower Composition Logic (Hero)
+        // KrFlower Composition Logic (Hero)
         if (role === 'hero') {
             return (
-                <div ref={ref} className={cn("kr-flower-composition relative py-4", className)} {...props}>
+                <div ref={ref} className={cn("KrFlower-composition relative py-4", className)} {...props}>
                     {/* The Trunk (Base) */}
-                    <h1 className="kr-flower-trunk text-7xl md:text-9xl tracking-tight text-white mb-2 z-10 relative">
+                    <h1 className="KrFlower-trunk text-7xl md:text-9xl tracking-tight text-white mb-2 z-10 relative">
                         {children}
                     </h1>
 
                     {/* The Vine (Overlay) */}
                     {label && (
-                        <span className="kr-flower-vine absolute -top-2 -left-4 text-4xl md:text-6xl text-primary mix-blend-exclusion z-20">
+                        <span className="KrFlower-vine absolute -top-2 -left-4 text-4xl md:text-6xl text-primary mix-blend-exclusion z-20">
                             {label}
                         </span>
                     )}

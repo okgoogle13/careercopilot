@@ -3,14 +3,14 @@ import React from 'react';
 export const SidePanel: React.FC = () => {
   return (
     <div className="h-full flex flex-col">
-      <div className="p-4 border-b border-surface-kr-dark-slate-smoke-highest">
+      <div className="p-4 border-b border-surface-KrDark-slate-smoke-highest">
         <h3 className="font-bloom text-lg text-wattle-gold">Context</h3>
       </div>
       <div className="p-4 flex-1 overflow-y-auto">
         <div className="mb-6 relative">
-          <div className="relative rounded-xl overflow-hidden shadow-lg border-2 border-surface-kr-dark-slate-smoke-highest bg-surface-kr-dark-charcoal-slate max-w-[120px] mx-auto">
+          <div className="relative rounded-xl overflow-hidden shadow-lg border-2 border-surface-KrDark-slate-smoke-highest bg-surface-KrDark-charcoal-slate max-w-[120px] mx-auto">
             <img
-              src="/src/assets/kr-motifs/lab-sentry.png"
+              src="/src/assets/KrMotifs/lab-sentry.png"
               alt="The Auditor - Echidna Mascot"
               className="w-full h-auto object-cover opacity-80"
             />

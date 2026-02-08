@@ -39,17 +39,17 @@ export interface LensProps extends Omit<React.InputHTMLAttributes<HTMLInputEleme
 }
 
 /**
- * Lens - kerala-rage kr-solidarity Text Input
+ * Lens - KeralaRage KrSolidarity Text Input
  *
- * A comprehensive text input component using the kerala-rage kr-solidarity design system.
- * Supports filled and outlined variants with proper kerala-rage states and validation.
+ * A comprehensive text input component using the KeralaRage KrSolidarity design system.
+ * Supports filled and outlined variants with proper KeralaRage states and validation.
  *
- * **kerala-rage Design Token Usage:**
+ * **KeralaRage Design Token Usage:**
  * - Shape: `--radius-leaf` (organic shape) for inputs
- * - Colors: kerala-rage botanical palette (Wattle Gold, Waratah Red, Concrete Grey)
- * - Typography: kerala-rage field-note font family
+ * - Colors: KeralaRage botanical palette (Wattle Gold, Waratah Red, Concrete Grey)
+ * - Typography: KeralaRage field-note font family
  * - Motion: Viscous-breeze easing for organic transitions
- * - Visual: kr-screenprint with subtle backdrop blur
+ * - Visual: KrScreenprint with subtle backdrop blur
  *
  * **States:**
  * - Default: Outlined with subtle border
@@ -128,7 +128,7 @@ export const Lens = forwardRef<HTMLInputElement, LensProps>(
       },
     };
 
-    // Variant-specific styles (kerala-rage kr-solidarity)
+    // Variant-specific styles (KeralaRage KrSolidarity)
     const containerStyle = {
       borderRadius: 'var(--radius-leaf)',
       backgroundColor: variant === 'filled' ? 'rgba(44, 39, 35, 0.4)' : 'transparent',
@@ -266,7 +266,7 @@ Lens.displayName = 'Lens';
  * LensArea - Multi-line text input variant
  *
  * Same API as Lens but renders a textarea for multi-line input.
- * Uses kerala-rage kr-solidarity design tokens for consistent organic styling.
+ * Uses KeralaRage KrSolidarity design tokens for consistent organic styling.
  */
 export interface LensAreaProps extends Omit<
   React.TextareaHTMLAttributes<HTMLTextAreaElement>,
