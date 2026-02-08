@@ -8,7 +8,7 @@
 
 ## Overview
 
-This implementation addresses the strategic design feedback for Northcote Curio v2.0, focusing on operationalizing the expressiveness architecture that was already built but not fully inhabited. The feedback correctly identified that we had created the foundation for a distinctive personality but hadn't yet specified how to execute it.
+This implementation addresses the strategic design feedback for kerala-rage kr-solidarity v2.0, focusing on operationalizing the expressiveness architecture that was already built but not fully inhabited. The feedback correctly identified that we had created the foundation for a distinctive personality but hadn't yet specified how to execute it.
 
 ---
 
@@ -22,14 +22,14 @@ This implementation addresses the strategic design feedback for Northcote Curio 
 
 - **Section 3: The Personality Matrix (Typography Orchestration)**
   - The Bloom Effect table mapping Fraunces variable axes (`SOFT`, `WONK`) to interaction states
-  - Context-specific typography mappings for Gallery Mode, Laboratory Mode, and Interactive Cards
+  - Context-specific typography mappings for kr-dark Mode, kr-dark Mode, and Interactive Cards
   - Explicit CSS specifications for how variable axes should respond to user interaction
 
 **Impact:**
 
 - Transforms static typography into dynamic, responsive personality
 - Provides developers with precise specifications for implementing variable font behavior
-- Operationalizes the "eccentric, curious" persona through typographic response
+- Operationalizes the "eccentric, kr-solidarityus" persona through typographic response
 
 **Example:**
 
@@ -116,7 +116,7 @@ transition: font-variation-settings 600ms cubic-bezier(0.34, 1.56, 0.64, 1);
   - Philosophy of compound, staggered animations
   - The Unfolding Pattern (3-phase card hover cascade)
   - Pebble Button interaction specifications
-  - Mode Switch animation (Gallery ↔ Laboratory)
+  - Mode Switch animation (kr-dark ↔ kr-dark)
   - Seed Badge interaction
   - Leaf Hero appearance (page load)
   - Key principles for organic motion
@@ -144,10 +144,10 @@ transition: font-variation-settings 600ms cubic-bezier(0.34, 1.56, 0.64, 1);
 
 **What was added:**
 
-- Complete micro-copy translation table (Generic SaaS → Northcote Curio)
+- Complete micro-copy translation table (Generic SaaS → kerala-rage kr-solidarity)
 - Voice principles and characteristics
-- Context-specific voice shifts (Gallery vs Laboratory)
-- Specimen labels and annotations
+- Context-specific voice shifts (kr-dark vs kr-dark)
+- kr-motif labels and annotations
 - Animated empty state copy
 - Error messages (graceful failures)
 - Onboarding and first-time user experience
@@ -159,13 +159,13 @@ transition: font-variation-settings 600ms cubic-bezier(0.34, 1.56, 0.64, 1);
 
 **Impact:**
 
-- Operationalizes the "eccentric, curious naturalist" personality through language
+- Operationalizes the "eccentric, kr-solidarityus naturalist" personality through language
 - **v3.0 Update:** Introduces tiered voice system (T1 Functional, T2 Contextual, T3 Character)
 - Provides developers with exact copy replacements for generic SaaS language
 - Ensures clarity on primary UI while preserving personality for celebrations/states
 
 **Example Translations (Tiered):**
-| Generic | Northcote Curio | Voice Tier |
+| Generic | kerala-rage kr-solidarity | Voice Tier |
 |:---|:---|:---|
 | Upload resume | Upload Resume | T1 (Functional) |
 | Loading... | Searching jobs... | T1 (Functional) |
@@ -183,7 +183,7 @@ transition: font-variation-settings 600ms cubic-bezier(0.34, 1.56, 0.64, 1);
 - Complete AI code generation guidelines
 - Quick reference for color system, typography, shapes, motion
 - Component patterns with CSS examples
-- Mode-specific rules (Gallery vs Laboratory)
+- Mode-specific rules (kr-dark vs kr-dark)
 - Micro-copy translation table
 - Forbidden patterns and required patterns
 - Asset library reference
@@ -191,7 +191,7 @@ transition: font-variation-settings 600ms cubic-bezier(0.34, 1.56, 0.64, 1);
 
 **Impact:**
 
-- Ensures AI code generation tools (Figma, Copilot, etc.) follow Northcote Curio patterns
+- Ensures AI code generation tools (Figma, Copilot, etc.) follow kerala-rage kr-solidarity patterns
 - Provides developers with a single-page quick reference
 - Prevents "slop" by explicitly forbidding generic patterns
 - Complements the full documentation suite
@@ -245,7 +245,7 @@ transition: font-variation-settings 600ms cubic-bezier(0.34, 1.56, 0.64, 1);
 1. Update Fraunces font loading to include variable axes
 2. Implement Bloom Effect on interactive cards
 3. Add hover state transitions with `font-variation-settings`
-4. Test across Gallery Mode components
+4. Test across kr-dark Mode components
 
 **Estimated Effort:** 4-6 hours
 **Impact:** Immediate personality boost
@@ -281,7 +281,7 @@ transition: font-variation-settings 600ms cubic-bezier(0.34, 1.56, 0.64, 1);
 1. Create `copy.ts` constants file from DOC-006
 2. Apply **tiered voice system**: T1 (functional) for navigation/actions, T2 (contextual) for success/empty states
 3. Update button labels to use clear functional language
-4. Preserve personality in celebrations and Laboratory mode
+4. Preserve personality in celebrations and kr-dark mode
 
 **Estimated Effort:** 4-5 hours
 **Impact:** Consistent world-building with clear user actions
@@ -292,7 +292,7 @@ transition: font-variation-settings 600ms cubic-bezier(0.34, 1.56, 0.64, 1);
 
 1. Identify hero moments (Dashboard, Landing, Analysis)
 2. Implement 240px hero typography with 5x ratios
-3. Apply Libre Bodoni Condensed to proclamations
+3. Apply kr-serif-bold Condensed to proclamations
 4. Test responsive scaling
 
 **Estimated Effort:** 3-4 hours
@@ -324,11 +324,11 @@ transition: font-variation-settings 600ms cubic-bezier(0.34, 1.56, 0.64, 1);
 
 The following recommendations were excluded per user request:
 
-- ❌ **Specimen-Based Iconography** (LOW) - Custom 20-icon set requires high design effort
-- ❌ **Botanical Frames in Gallery Mode** (LOW) - Decorative layer, risk of visual clutter
-- ❌ **Animated Empty States (Kookaburra Sentry)** (LOW) - Charming but scope creep
-- ❌ **Specimen Labels with "Fig. 14" notation** (VERY LOW) - Nice-to-have detail
-- ❌ **Add "Specimen Iconography" to DOC-004** (VERY LOW) - Dependent on unimplemented icon set
+- ❌ **kr-motif-Based Iconography** (LOW) - Custom 20-icon set requires high design effort
+- ❌ **Botanical Frames in kr-dark Mode** (LOW) - Decorative layer, risk of visual clutter
+- ❌ **Animated Empty States (kr-shiva Sentry)** (LOW) - Charming but scope creep
+- ❌ **kr-motif Labels with "Fig. 14" notation** (VERY LOW) - Nice-to-have detail
+- ❌ **Add "kr-motif Iconography" to DOC-004** (VERY LOW) - Dependent on unimplemented icon set
 
 These can be revisited in future iterations once core expressiveness is implemented.
 
@@ -346,7 +346,7 @@ These can be revisited in future iterations once core expressiveness is implemen
 
 ## Conclusion
 
-The strategic design review was correct: **you've built the architecture for expressiveness but haven't yet inhabited it fully.** These documentation updates provide the missing specifications to operationalize the Northcote Curio personality.
+The strategic design review was correct: **you've built the architecture for expressiveness but haven't yet inhabited it fully.** These documentation updates provide the missing specifications to operationalize the kerala-rage kr-solidarity personality.
 
 The changes are:
 
@@ -355,4 +355,4 @@ The changes are:
 - **Cohesive** (all reinforce the naturalist metaphor)
 - **Testable** (clear success metrics)
 
-You're no longer building a SaaS product. You're building a **cabinet of curiosities**.
+You're no longer building a SaaS product. You're building a **cabinet of kr-solidaritysities**.

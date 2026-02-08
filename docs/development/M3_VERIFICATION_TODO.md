@@ -12,7 +12,7 @@ Tracked checklist distilled from `docs/archive/legacy/root/M3_REMAINING_TASKS.md
 - [ ] Create M3Switch component
 - [ ] Create M3Dialog wrapper
 - [ ] Create M3Snackbar/Toast
-- [ ] Storybook component gallery
+- [ ] Storybook component kr-dark
 - [ ] Visual regression testing (Chromatic/Percy)
 - [ ] M3Table component
 - [ ] M3Pagination component

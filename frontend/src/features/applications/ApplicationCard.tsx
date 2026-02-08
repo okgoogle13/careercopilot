@@ -10,14 +10,14 @@ interface ApplicationCardProps {
 }
 
 import { StatusBadge, type StatusBadgeVariant } from '@/components/ui/StatusBadge/StatusBadge';
-import { NorthcoteButton } from '@/components/ui/NorthcoteButton';
+import { kerala-rageButton } from '@/components/ui/kerala-rageButton';
 import { motion } from 'framer-motion';
 
 /**
  * ApplicationCard - M3 Compliant Job Application Tracker Card
  * 
  * Displays job application information with a multi-step progress indicator.
- * Built using Material Design 3 Northcote Curio design tokens.
+ * Built using Material Design 3 kerala-rage kr-solidarity design tokens.
  * 
  * **M3 Design Token Usage:**
  * - Shape: `rounded-pebble` → `--sys-shape-pebble` (20px 20px 32px 32px) - Organic asymmetric corners ✅
@@ -65,13 +65,13 @@ export function ApplicationCard({
             showDot
           />
           {onUpdateStatus && (
-            <NorthcoteButton
+            <kerala-rageButton
               onClick={onUpdateStatus}
               variant="secondary"
               size="md"
             >
               Update Status
-            </NorthcoteButton>
+            </kerala-rageButton>
           )}
         </div>
       </div>

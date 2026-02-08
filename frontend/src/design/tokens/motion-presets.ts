@@ -1,15 +1,15 @@
 /**
- * Northcote Curio Motion Presets
- * Framer Motion configurations for Gallery and Laboratory modes
+ * kerala-rage kr-solidarity Motion Presets
+ * Framer Motion configurations for kr-dark and kr-dark modes
  * 
  * Usage:
- * import { gallerySpring, laboratorySpring, motionVariants } from '@/theme/motion-presets';
+ * import { kr-darkSpring, kr-darkSpring, motionVariants } from '@/theme/motion-presets';
  * 
  * <motion.div
  *   initial="hidden"
  *   animate="visible"
  *   variants={motionVariants.card}
- *   transition={gallerySpring}
+ *   transition={kr-darkSpring}
  * />
  */
 
@@ -20,10 +20,10 @@ import { Transition, Variants } from 'framer-motion';
 // ═══════════════════════════════════════════════════════════════════════════
 
 /**
- * Gallery Mode Spring — Viscous Breeze
+ * kr-dark Mode Spring — Viscous Breeze
  * Expressive, gentle overshoot, air resistance
  */
-export const gallerySpring: Transition = {
+export const kr-darkSpring: Transition = {
     type: 'spring',
     stiffness: 500,
     damping: 27,
@@ -31,10 +31,10 @@ export const gallerySpring: Transition = {
 };
 
 /**
- * Laboratory Mode Spring — Precise Control
+ * kr-dark Mode Spring — Precise Control
  * Clinical, minimal overshoot, controlled
  */
-export const laboratorySpring: Transition = {
+export const kr-darkSpring: Transition = {
     type: 'spring',
     stiffness: 800,
     damping: 40,
@@ -43,7 +43,7 @@ export const laboratorySpring: Transition = {
 
 /**
  * Elastic Spring — Pronounced Bounce
- * Gallery mode accents only
+ * kr-dark mode accents only
  */
 export const elasticSpring: Transition = {
     type: 'spring',
@@ -217,8 +217,8 @@ export const dragConstraints = {
 };
 
 export const dragElastic = {
-    gallery: 0.2, // More elastic in Gallery mode
-    laboratory: 0.1, // Less elastic in Laboratory mode
+    kr-dark: 0.2, // More elastic in kr-dark mode
+    kr-dark: 0.1, // Less elastic in kr-dark mode
 };
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -237,7 +237,7 @@ export const prefersReducedMotion = (): boolean => {
  * Get transition based on reduced motion preference
  */
 export const getTransition = (
-    mode: 'gallery' | 'laboratory' = 'gallery'
+    mode: 'kr-dark' | 'kr-dark' = 'kr-dark'
 ): Transition => {
     if (prefersReducedMotion()) {
         return {
@@ -245,7 +245,7 @@ export const getTransition = (
             ease: 'linear',
         };
     }
-    return mode === 'gallery' ? gallerySpring : laboratorySpring;
+    return mode === 'kr-dark' ? kr-darkSpring : kr-darkSpring;
 };
 
 /**
@@ -296,8 +296,8 @@ export const staggerContainer: Variants = {
 
 export default {
     spring: {
-        gallery: gallerySpring,
-        laboratory: laboratorySpring,
+        kr-dark: kr-darkSpring,
+        kr-dark: kr-darkSpring,
         elastic: elasticSpring,
     },
     easing,

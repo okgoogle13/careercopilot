@@ -27,7 +27,7 @@ export default {
       // THE FEDERATION TYPOGRAPHY STACK
       // ═══════════════════════════════════════════════════════════════════════
       fontFamily: {
-        proclamation: ['"Libre Bodoni"', '"Playfair Display"', ...defaultTheme.fontFamily.serif],
+        proclamation: ['"kr-serif-bold"', '"Playfair Display"', ...defaultTheme.fontFamily.serif],
         bloom: ['"Fraunces"', ...defaultTheme.fontFamily.serif],
         'field-note': ['"Work Sans"', ...defaultTheme.fontFamily.sans],
         annotation: ['"JetBrains Mono"', ...defaultTheme.fontFamily.mono],
@@ -45,24 +45,24 @@ export default {
         foreground: 'hsl(var(--foreground))',
 
         // Use Asphalt Black as the global floor
-        black: t.surface.shared.specimenNight.value,
+        black: t.surface.shared.kr-charcoal.value,
         white: t.onSurface['paper-white'].value, // Paper White instead of white
 
         // Core Botanic Families
-        'asphalt-black': t.surface.shared.specimenNight.value,
+        'asphalt-black': t.surface.shared.kr-charcoal.value,
         'asphalt-black-light':
-          (t.surface.shared.specimenNightLight && t.surface.shared.specimenNightLight.value) ||
+          (t.surface.shared.kr-charcoalLight && t.surface.shared.kr-charcoalLight.value) ||
           '#2C2925',
 
         wattle: {
           vault: t.primary.wattleShadow.value, // Fallback
           shadow: t.primary.wattleShadow.value,
-          gold: t.primary.wattleGold.value,
+          gold: t.primary.kr-ink-gold.value,
           glow: t.primary.wattleGlow.value,
           bloom: t.primary.wattleBloom.value,
-          container: t.primary.wattleGoldContainer.value,
+          container: t.primary.kr-ink-goldContainer.value,
         },
-        'wattle-gold': t.primary.wattleGold.value,
+        'wattle-gold': t.primary.kr-ink-gold.value,
 
         waratah: {
           stem: t.tertiary.waratahStem.value,
@@ -74,12 +74,12 @@ export default {
         },
         'waratah-red': t.tertiary.waratahCrimson.value,
 
-        eucalypt: {
-          night: t.surface.shared.specimenNight.value,
-          ash: t.surface.gallery.charcoalBark.value,
-          smoke: t.surface.gallery.eucalyptSmoke.value,
-          dusk: t.surface.gallery.eucalyptSmokeHigh.value,
-          mist: t.surface.gallery.eucalyptSmokeHighest.value,
+        kr-leaf: {
+          night: t.surface.shared.kr-charcoal.value,
+          ash: t.surface.kr-dark.charcoalBark.value,
+          smoke: t.surface.kr-dark.kr-leafSmoke.value,
+          dusk: t.surface.kr-dark.kr-leafSmokeHigh.value,
+          mist: t.surface.kr-dark.kr-leafSmokeHighest.value,
         },
 
         flannel: {
@@ -95,27 +95,27 @@ export default {
 
         // Semantic Semantic (Legacy/Functional) support
         semantic: {
-          success: t.status.gallery.ghostGum.value,
-          warning: t.status.gallery.banksiaOrange.value,
-          info: t.status.gallery.nativeViolet.value,
+          success: t.status.kr-dark.ghostGum.value,
+          warning: t.status.kr-dark.kr-flowerOrange.value,
+          info: t.status.kr-dark.nativeViolet.value,
         },
 
         // Shadcn UI Mapping (Retaining for component compatibility)
         primary: {
-          DEFAULT: t.primary.wattleGold.value,
-          foreground: t.surface.shared.specimenNight.value,
-          container: t.primary.wattleGoldContainer.value,
+          DEFAULT: t.primary.kr-ink-gold.value,
+          foreground: t.surface.shared.kr-charcoal.value,
+          container: t.primary.kr-ink-goldContainer.value,
         },
         secondary: {
           DEFAULT: t.secondary.flannelFlower.value,
-          foreground: t.surface.shared.specimenNight.value,
+          foreground: t.surface.shared.kr-charcoal.value,
         },
         destructive: {
           DEFAULT: t.tertiary.waratahCrimson.value,
           foreground: t.onSurface['paper-white'].value,
         },
         muted: {
-          DEFAULT: t.surface.gallery.eucalyptSmoke.value,
+          DEFAULT: t.surface.kr-dark.kr-leafSmoke.value,
           foreground: t.secondary.flannelFlower.value,
         },
         accent: {
@@ -123,11 +123,11 @@ export default {
           foreground: t.onSurface['paper-white'].value,
         },
         popover: {
-          DEFAULT: t.surface.gallery.eucalyptSmokeHigh.value,
+          DEFAULT: t.surface.kr-dark.kr-leafSmokeHigh.value,
           foreground: t.onSurface['paper-white'].value,
         },
         card: {
-          DEFAULT: t.surface.gallery.eucalyptSmoke.value,
+          DEFAULT: t.surface.kr-dark.kr-leafSmoke.value,
           foreground: t.onSurface['paper-white'].value,
         },
       },
@@ -308,7 +308,7 @@ export default {
       },
       backgroundImage: {
         'texture-gouache': "url('/textures/gouache-grain-warm.png')",
-        'gallery-gradient':
+        'kr-dark-gradient':
           'radial-gradient(ellipse 60% 50% at 85% 15%, rgba(212, 168, 75, 0.08) 0%, transparent 50%), radial-gradient(ellipse 40% 60% at 20% 60%, rgba(196, 92, 75, 0.05) 0%, transparent 40%)',
       },
     },

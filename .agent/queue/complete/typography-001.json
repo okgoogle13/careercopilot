@@ -2,11 +2,11 @@
   "task_id": "typography-001",
   "priority": "critical",
   "objective": "Convert @apply directives to CSS custom properties",
-  "file": "frontend/src/theme/northcote.css",
+  "file": "frontend/src/theme/kerala-rage.css",
   "lines": [412, 416, 420, 424, 428, 432, 436, 441, 446, 452, 483],
   "action": "Replace @apply with direct CSS using var(--sys-type-*) tokens",
   "mappings": {
-    "h1": "font-family: 'Libre Bodoni', serif; font-size: var(--sys-type-display-large-size); line-height: var(--sys-type-display-large-line-height); font-weight: var(--sys-type-weight-bold); letter-spacing: var(--sys-type-display-large-tracking);",
+    "h1": "font-family: 'kr-serif-bold', serif; font-size: var(--sys-type-display-large-size); line-height: var(--sys-type-display-large-line-height); font-weight: var(--sys-type-weight-bold); letter-spacing: var(--sys-type-display-large-tracking);",
     "h2": "font-family: 'Fraunces', serif; font-size: var(--sys-type-headline-large-size); line-height: var(--sys-type-headline-large-line-height); font-weight: var(--sys-type-weight-medium);",
     "h3": "font-family: 'Fraunces', serif; font-size: 32px; line-height: 40px; font-weight: var(--sys-type-weight-medium);",
     "h4": "font-family: 'Fraunces', serif; font-size: 24px; line-height: 32px; font-weight: var(--sys-type-weight-medium);",

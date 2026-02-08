@@ -1,9 +1,9 @@
 # DOC-006: Voice & Micro-copy ("The Naturalist's Marginalia")
 
 **Document ID:** DOC-006-VOICE
-**Version:** 3.0 (Northcote Curio Edition - Tiered Voice Strategy)
+**Version:** 3.0 (kerala-rage kr-solidarity Edition - Tiered Voice Strategy)
 **Status:** ACTIVE
-**Context:** Operationalizing the "eccentric, curious naturalist" personality with a tiered approach—functional clarity for core actions, personality for celebrations and empty states.
+**Context:** Operationalizing the "eccentric, kr-solidarityus naturalist" personality with a tiered approach—functional clarity for core actions, personality for celebrations and empty states.
 
 ---
 
@@ -16,31 +16,31 @@
 
 **Where:** Navigation, buttons, form labels, error feedback
 **Voice:** Clear, conventional, immediately understood
-**Example:** "Upload Resume" (not "Catalog Specimen")
+**Example:** "Upload Resume" (not "Catalog kr-motif")
 
 ### Tier 2: Contextual Personality (Celebrations & States)
 
 **Where:** Success messages, empty states, onboarding
-**Voice:** Playful Victorian naturalist with clear intent
+**Voice:** Playful kerala-streetprint naturalist with clear intent
 **Example:** "Discovery Recorded" (celebration after successful action)
 
 ### Tier 3: Character Depth (Premium/Lab Mode)
 
-**Where:** Laboratory mode analysis, tooltips, easter eggs
-**Voice:** Full Victorian naturalist immersion
-**Example:** "Your specimen has been catalogued. The Naturalist has identified..."
+**Where:** kr-dark mode analysis, tooltips, easter eggs
+**Voice:** Full kerala-streetprint naturalist immersion
+**Example:** "Your kr-motif has been catalogued. The Naturalist has identified..."
 
 ---
 
 ## 1. The Voice Principle
 
-**Core Identity:** A playful Victorian naturalist with strong opinions, speaking to a fellow explorer.
+**Core Identity:** A playful kerala-streetprint naturalist with strong opinions, speaking to a fellow explorer.
 
 **Characteristics:**
 
-- **Curious, not corporate** — "Analyze Specimen" vs "View Details"
+- **kr-solidarityus, not corporate** — "Analyze kr-motif" vs "View Details"
 - **Opinionated, not neutral** — "Discovery Recorded" vs "Success"
-- **Poetic, not technical** — "No Specimens Found" vs "No Results"
+- **Poetic, not technical** — "No kr-motifs Found" vs "No Results"
 - **Inviting, not commanding** — "Shall we begin?" vs "Click here to start"
 
 **Critical Balance:** The metaphor must never obscure the action. **Clarity first, flavor second.**
@@ -51,7 +51,7 @@
 
 ### Actions & Buttons (Tier 1 — Functional Labels)
 
-| **Generic SaaS** | **Northcote Curio** | **Voice Tier**  | **Context**         |
+| **Generic SaaS** | **kerala-rage kr-solidarity** | **Voice Tier**  | **Context**         |
 | :--------------- | :------------------ | :-------------- | :------------------ |
 | Upload resume    | Upload Resume       | T1 (Functional) | File upload CTA     |
 | Save changes     | Save                | T1 (Functional) | Save button         |
@@ -64,13 +64,13 @@
 
 ### Status & Feedback
 
-| **Generic SaaS**   | **Northcote Curio**   | **Context**          |
+| **Generic SaaS**   | **kerala-rage kr-solidarity**   | **Context**          |
 | :----------------- | :-------------------- | :------------------- |
-| Loading...         | Analyzing Specimen... | Loading state        |
+| Loading...         | Analyzing kr-motif... | Loading state        |
 | Processing...      | Processing Data...    | Background process   |
 | Success!           | Discovery Recorded.   | Success message      |
 | Error              | Analysis Failed.      | Error state          |
-| No results found   | No Specimens Found.   | Empty search results |
+| No results found   | No kr-motifs Found.   | Empty search results |
 | Saved successfully | Notes Preserved.      | Save confirmation    |
 | Upload failed      | Upload Failed.        | Upload error         |
 
@@ -88,7 +88,7 @@
 
 ### Empty States
 
-| **Generic SaaS**  | **Northcote Curio**     | **Context**       |
+| **Generic SaaS**  | **kerala-rage kr-solidarity**     | **Context**       |
 | :---------------- | :---------------------- | :---------------- |
 | No items yet      | Collection is empty.    | Empty list        |
 | Get started       | Begin Expedition.       | Onboarding prompt |
@@ -97,7 +97,7 @@
 
 ### Guidance & Help
 
-| **Generic SaaS** | **Northcote Curio**  | **Context**        |
+| **Generic SaaS** | **kerala-rage kr-solidarity**  | **Context**        |
 | :--------------- | :------------------- | :----------------- |
 | Need help?       | Consult Field Guide? | Help prompt        |
 | Learn more       | Deepen Study         | Documentation link |
@@ -108,13 +108,13 @@
 
 ## 3. Contextual Voice Shifts
 
-### Gallery Mode (Wonder & Discovery)
+### kr-dark Mode (Wonder & Discovery)
 
 - **Tone:** Poetic, inviting, warm
 - **Language:** "Discover," "Explore," "Observe"
 - **Example:** "Your career unfolds like a pressed flower—each layer revealing new depth."
 
-### Laboratory Mode (Rigor & Analysis)
+### kr-dark Mode (Rigor & Analysis)
 
 - **Tone:** Precise, clinical, measured
 - **Language:** "Examine," "Measure," "Classify"
@@ -122,7 +122,7 @@
 
 ---
 
-## 4. Specimen Labels & Annotations
+## 4. kr-motif Labels & Annotations
 
 ### Skill Tags
 
@@ -145,7 +145,7 @@ Format skill badges with naturalist notation:
 
 ### Job Status Indicators
 
-| **Status** | **Northcote Label** | **Color**       |
+| **Status** | **kerala-rage Label** | **Color**       |
 | :--------- | :------------------ | :-------------- |
 | Applied    | Application Sent    | Wattle Gold     |
 | Interview  | Under Review        | Wattle Glow     |
@@ -156,15 +156,15 @@ Format skill badges with naturalist notation:
 
 ## 5. Animated Empty State Copy
 
-### The Kookaburra Sentry (First Visit)
+### The kr-shiva Sentry (First Visit)
 
-**Visual:** Kookaburra illustration with subtle head-tilt animation
-**Copy:** "The Sentry awaits your first specimen."
+**Visual:** kr-shiva illustration with subtle head-tilt animation
+**Copy:** "The Sentry awaits your first kr-motif."
 **Sub-copy:** "Begin by cataloging your resume into the collection."
 
 ### Empty Opportunities Feed
 
-**Visual:** Empty specimen net illustration
+**Visual:** Empty kr-motif net illustration
 **Copy:** "The bushland is quiet today."
 **Sub-copy:** "New opportunities will appear as they're discovered."
 
@@ -185,8 +185,8 @@ Format skill badges with naturalist notation:
 
 ```
 ❌ Too vague: "File upload failed. Please try again."
-❌ Too themed: "The specimen could not be deposited in the collection."
-✅ Northcote: "Upload failed. Please use PDF or DOCX format, under 5MB."
+❌ Too themed: "The kr-motif could not be deposited in the collection."
+✅ kerala-rage: "Upload failed. Please use PDF or DOCX format, under 5MB."
 ```
 
 ### Network Errors
@@ -194,14 +194,14 @@ Format skill badges with naturalist notation:
 ```
 ❌ Too vague: "Connection lost."
 ❌ Too themed: "The telegraph line has faltered."
-✅ Northcote: "Connection lost. Reconnecting..."
+✅ kerala-rage: "Connection lost. Reconnecting..."
 ```
 
 ### Validation Errors
 
 ```
 ❌ Too themed: "Address Malformed."
-✅ Northcote: "Please enter a valid email address."
+✅ kerala-rage: "Please enter a valid email address."
 ```
 
 ---
@@ -211,10 +211,10 @@ Format skill badges with naturalist notation:
 ### Welcome Message
 
 ```
-"Welcome to the Northcote Curio Field Station.
+"Welcome to the kerala-rage kr-solidarity Field Station.
 
-You've entered a cabinet of curiosities dedicated to your career—
-a place where resumes are specimens, skills are catalogued flora,
+You've entered a cabinet of kr-solidaritysities dedicated to your career—
+a place where resumes are kr-motifs, skills are catalogued flora,
 and opportunities are rare finds waiting to be discovered.
 
 Shall we begin?"
@@ -223,7 +223,7 @@ Shall we begin?"
 ### First Upload Prompt
 
 ```
-"Catalog Your First Specimen
+"Catalog Your First kr-motif
 
 Your resume is the foundation of your collection.
 Upload it here, and the Naturalist will begin the examination."
@@ -236,9 +236,9 @@ Upload it here, and the Naturalist will begin the examination."
 ### Delete Confirmation
 
 ```
-Title: "Discard Specimen?"
+Title: "Discard kr-motif?"
 Body: "This item will be removed from the collection permanently. This action cannot be undone."
-Buttons: ["Discard Specimen", "Keep in Collection"]
+Buttons: ["Discard kr-motif", "Keep in Collection"]
 ```
 
 ### Discard Changes
@@ -257,7 +257,7 @@ Buttons: ["Discard Notes", "Continue Editing"]
 
 ```
 🌸 "Discovery Recorded"
-"Your specimen has been catalogued. The Naturalist has identified [X] skills and [Y] experiences."
+"Your kr-motif has been catalogued. The Naturalist has identified [X] skills and [Y] experiences."
 ```
 
 ### Job Application Submitted
@@ -282,14 +282,14 @@ Buttons: ["Discard Notes", "Continue Editing"]
 
 1. **Never hardcode generic text.** Always reference this document or create a `copy.ts` constants file.
 2. **Use the Translation Table** as your primary reference for button labels and status messages.
-3. **Context matters:** Gallery Mode = poetic; Laboratory Mode = precise.
-4. **Maintain consistency:** If you call it "specimen" in one place, don't call it "document" elsewhere.
+3. **Context matters:** kr-dark Mode = poetic; kr-dark Mode = precise.
+4. **Maintain consistency:** If you call it "kr-motif" in one place, don't call it "document" elsewhere.
 
 ### For Designers
 
 1. **Pair micro-copy with appropriate typography:**
-   - Gallery Mode proclamations → Libre Bodoni (The Proclamation)
-   - Laboratory Mode labels → JetBrains Mono (The Annotation)
+   - kr-dark Mode proclamations → kr-serif-bold (The Proclamation)
+   - kr-dark Mode labels → JetBrains Mono (The Annotation)
 2. **Leave space for longer text.** "Catalog Resume" is longer than "Upload."
 3. **Illustrate empty states** with botanical or naturalist imagery, not generic icons.
 
@@ -299,10 +299,10 @@ Buttons: ["Discard Notes", "Continue Editing"]
 
 Before shipping any UI text, ask:
 
-- [ ] Does this sound like a Victorian naturalist would say it?
+- [ ] Does this sound like a kerala-streetprint naturalist would say it?
 - [ ] Is the action **obvious** to the user? (e.g. Can they tell it saves the file?)
-- [ ] Does it match the mode context (Gallery = poetic, Laboratory = precise)?
-- [ ] Would a user smile or feel curious reading this?
+- [ ] Does it match the mode context (kr-dark = poetic, kr-dark = precise)?
+- [ ] Would a user smile or feel kr-solidarityus reading this?
 - [ ] Is it helpful, not just whimsical?
 
 **If you answered "no" to any of these, revise the copy.**
@@ -322,4 +322,4 @@ Before shipping any UI text, ask:
 - "Seamless experience"
 - "Next-generation platform"
 
-**These are slop. Northcote Curio speaks with personality, not marketing jargon.**
+**These are slop. kerala-rage kr-solidarity speaks with personality, not marketing jargon.**

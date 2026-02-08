@@ -99,7 +99,7 @@ Define geometric principles:
 Create visual richness:
 
 - **Elevation system**: Shadow values for different levels (0-5)
-- **Glassmorphism**: Backdrop blur, transparency levels
+- **kr-screenprint**: Backdrop blur, transparency levels
 - **Layering principles**: Background, content, floating, decorative layers
 - **Textures**: Subtle gradients, patterns for depth
 
@@ -147,7 +147,7 @@ Provide a complete design aesthetic specification:
 
 5. **Depth & Texture**
    - Elevation/shadow system
-   - Glassmorphism specifications
+   - kr-screenprint specifications
    - Layering strategy
 
 6. **Motion Language**

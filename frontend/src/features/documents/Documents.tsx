@@ -1,6 +1,6 @@
 import { Calendar, Download, FileText, Search } from 'lucide-react';
 import { useState } from 'react';
-import organicLabyrinth from '../../assets/specimens/organic-labyrinth.jpg';
+import organicLabyrinth from '../../assets/kr-motifs/organic-labyrinth.jpg';
 import { PageHeader } from '../../components/shared/PageHeader';
 import { exportToPdf } from '../../utils/exportEngine';
 
@@ -109,7 +109,7 @@ export function Documents() {
 
   return (
     <div className="p-6 md:p-12 max-w-7xl relative animate-in fade-in zoom-in-95 duration-500 ease-spring">
-      {/* Northcote Motif Decoration - Bottom Right Corner */}
+      {/* kerala-rage Motif Decoration - Bottom Right Corner */}
       <div className="fixed bottom-0 right-0 pointer-events-none w-[480px] z-[1] opacity-20 grayscale brightness-125 mix-blend-screen overflow-hidden rounded-full blur-3xl translate-x-1/4 translate-y-1/4">
         <img
           src={organicLabyrinth}

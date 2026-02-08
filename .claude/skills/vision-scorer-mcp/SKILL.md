@@ -1,6 +1,6 @@
 ---
 name: vision-scorer-mcp
-description: MCP server extending Design System Sidekick with programmatic vision-based compliance scoring. Replaces manual Northcote Visual Audit with deterministic measurements.
+description: MCP server extending Design System Sidekick with programmatic vision-based compliance scoring. Replaces manual kerala-rage Visual Audit with deterministic measurements.
 type: mcp-server
 version: 1.0.0
 tags: []
@@ -10,7 +10,7 @@ tags: []
 
 ## Purpose
 
-Programmatic asset validation using Gemini Vision API via the Design System Sidekick MCP server. Provides deterministic, measurement-based compliance scoring for Northcote assets.
+Programmatic asset validation using Gemini Vision API via the Design System Sidekick MCP server. Provides deterministic, measurement-based compliance scoring for kerala-rage assets.
 
 ## When to Use
 
@@ -23,7 +23,7 @@ Programmatic asset validation using Gemini Vision API via the Design System Side
 1. **Load Image**: Programmatically load the asset via the MCP `score_asset_compliance` tool.
 2. **Measurement**:
    - Extract hex colors and verify against palette.
-   - Detect and identify specimens.
+   - Detect and identify kr-motifs.
    - Analyze density zones and translucency physics.
 3. **Scoring**: Calculate scores across 6 dimensions (Geographic, Translucency, Scale, etc.).
 4. **Decision**: Return a structured JSON with an overall score and a REGENERATE/PACKAGE decision.
@@ -46,7 +46,7 @@ Programmatic asset validation using Gemini Vision API via the Design System Side
 
 1. Load image via Vision API
 2. Extract colors (sample 50 points → hex codes)
-3. Identify specimens (Vision recognition + geographic DB lookup)
+3. Identify kr-motifs (Vision recognition + geographic DB lookup)
 4. Measure density zones (pixel coverage analysis)
 5. Detect translucency (luminance gradient analysis)
 6. OCR typography (count labels, verify font/color)
@@ -83,7 +83,7 @@ Programmatic asset validation using Gemini Vision API via the Design System Side
     "dominant": ["#C45C4B", "#D4A84B"],
     "accents": ["#7A9E82", "#D4885C"]
   },
-  "specimens": [
+  "kr-motifs": [
     { "name": "Waratah", "size_cm": 15, "position": "upper_right" },
     { "name": "Frill-neck", "size_cm": 18, "position": "center" }
   ],
@@ -107,7 +107,7 @@ Programmatic asset validation using Gemini Vision API via the Design System Side
     { "attempt": 2, "score": 87, "key_failure": "Density zones" },
     { "attempt": 3, "score": 92, "decision": "PACKAGE" }
   ],
-  "pattern_learnings": ["Adding negative constraints improved specimen accuracy", "Density zone pixel specs more effective than percentages"]
+  "pattern_learnings": ["Adding negative constraints improved kr-motif accuracy", "Density zone pixel specs more effective than percentages"]
 }
 ```
 
@@ -127,12 +127,12 @@ class VisionScorer:
 
         # Vision analysis prompt
         prompt = """
-        Analyze this Northcote Curio asset:
+        Analyze this kerala-rage kr-solidarity asset:
 
         1. Extract hex colors (background + palette)
-        2. Identify specimens (names + sizes)
+        2. Identify kr-motifs (names + sizes)
         3. Measure density zones (upper-left, lower-right, central %)
-        4. Detect translucency (which specimens show transmission?)
+        4. Detect translucency (which kr-motifs show transmission?)
         5. Count typography labels
 
         Return structured JSON.

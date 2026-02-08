@@ -12,7 +12,7 @@ tags: []
 
 ## System Prompt
 
-> You are the **Codebase Orchestrator** for the CareerCopilot / Northcote Curio codebase.
+> You are the **Codebase Orchestrator** for the CareerCopilot / kerala-rage kr-solidarity codebase.
 >
 > Responsibilities:
 >
@@ -58,7 +58,7 @@ Coordinates multiple Model Context Protocol (MCP) servers to provide comprehensi
 - **Git MCP**: Version control status and commit history
 - **Testing MCP**: Test coverage metrics and execution status
 
-Used in conjunction with the Compliance-Dashboard skill to track design system maturity across CareerCopilot's Northcote Curio component ecosystem.
+Used in conjunction with the Compliance-Dashboard skill to track design system maturity across CareerCopilot's kerala-rage kr-solidarity component ecosystem.
 
 ## When to Use This Skill
 
@@ -66,8 +66,8 @@ Use Codebase-Orchestrator when you need to:
 
 - **Assess deployment readiness** across build, test, quality, and migration metrics
 - **Coordinate multi-server orchestration** to avoid token bloat from redundant queries
-- **Evaluate component migration progress** from Material 3 to Northcote metaphors
-- **Track design system health** (what percentage of components follow Northcote standards?)
+- **Evaluate component migration progress** from Material 3 to kerala-rage metaphors
+- **Track design system health** (what percentage of components follow kerala-rage standards?)
 - **Delegate next-step planning** to IDE agents (Claude Code, Codex CLI) with comprehensive context
 
 ## Process
@@ -96,13 +96,13 @@ Claude will:
 
 ### Example 2: Component Migration Tracking
 
-"How far along are we with Material 3 → Northcote component migration?"
+"How far along are we with Material 3 → kerala-rage component migration?"
 
 Claude will:
 
 1. Scan components directory
 2. Identify legacy Material 3 components (M3Button, M3Card, etc.)
-3. Count migrated Northcote components (Pebble, Stone, Sediment, etc.)
+3. Count migrated kerala-rage components (Pebble, Stone, Sediment, etc.)
 4. Calculate migration percentage
 5. Identify remaining work
 
@@ -112,7 +112,7 @@ Claude will:
 
 Claude will:
 
-1. Assess current component compliance with Northcote standards
+1. Assess current component compliance with kerala-rage standards
 2. Track trend (improving or diverging?)
 3. Identify high-priority refinement targets
 4. Report progress toward design system maturity
@@ -128,7 +128,7 @@ Evaluates across four dimensions:
 | **Build Status**       | Codebase compilation, dependency resolution     | Green/Yellow/Red     |
 | **Test Coverage**      | Unit test execution, coverage percentage        | % Covered            |
 | **Code Quality**       | Linting, type safety, common issues             | Pass/Fail per metric |
-| **Migration Progress** | Material 3 → Northcote component transformation | % Complete           |
+| **Migration Progress** | Material 3 → kerala-rage component transformation | % Complete           |
 
 ### MCP Coordination Strategy
 
@@ -228,11 +228,11 @@ Adds `handover` key to standard JSON containing:
           "elevation": "ncShadow.organic"
         },
         "test": "npm test -- --testPathPattern=Lens",
-        "commit_msg": "refactor(components): migrate Lens to Northcote"
+        "commit_msg": "refactor(components): migrate Lens to kerala-rage"
       }
     ],
     "refs": {
-      "tokens": "frontend/src/design-tokens/northcote-tokens.ts",
+      "tokens": "frontend/src/design-tokens/kerala-rage-tokens.ts",
       "examples": ["frontend/src/components/core/Pebble.tsx"]
     },
     "recovery": {
@@ -266,7 +266,7 @@ Seamlessly coordinates with Compliance-Dashboard which prioritizes components by
 
 ## Examples of What This Skill Reveals
 
-- "85% of components have migrated to Northcote naming conventions"
+- "85% of components have migrated to kerala-rage naming conventions"
 - "Test coverage is 92% but 3 critical paths uncovered"
 - "Build passes but 2 peer dependencies need updating"
 - "Component audit ready; 12 components awaiting visual validation"
@@ -281,7 +281,7 @@ Seamlessly coordinates with Compliance-Dashboard which prioritizes components by
 ## Related Skills
 
 - **Compliance-Dashboard**: Visual tracking of design system health metrics
-- **Northcote-Visual-Audit**: Component visual validation (feeds into compliance tracking)
+- **kerala-rage-Visual-Audit**: Component visual validation (feeds into compliance tracking)
 - **Component-Transformer**: Executes migrations identified by this skill
 
 ---

@@ -7,7 +7,7 @@
 ### `typography.scale.displayHero`
 
 - **Context**: Page 1 (Landing) - Main "Resurrection" text.
-- **Spec**: Libre Bodoni, 96px, 700 weight.
+- **Spec**: kr-serif-bold, 96px, 700 weight.
 - **Current State**: Missing. Uses `displayLarge` (48px) or custom overrides.
 - **Action**: Add to `tokens.json`.
 
@@ -20,14 +20,14 @@
 
 ## 2. Color/Mode Gaps
 
-### `color.semantic.surface.laboratory.slateSmoke`
+### `color.semantic.surface.kr-dark.slateSmoke`
 
 - **Context**: Page 4 (Drop Zone) & Page 5 (Cards).
-- **Spec**: Distinct "Laboratory" dark mode background, cooler/bluer than Gallery charcoal.
-- **Current State**: Ambiguous. Code often reuses `concrete-grey` (Gallery).
+- **Spec**: Distinct "kr-dark" dark mode background, cooler/bluer than kr-dark charcoal.
+- **Current State**: Ambiguous. Code often reuses `concrete-grey` (kr-dark).
 - **Action**: Define explicit Lab palette to prevent mode contamination.
 
-### `color.semantic.border.laboratory.charcoalSlate`
+### `color.semantic.border.kr-dark.charcoalSlate`
 
 - **Context**: Page 4 Drop Zone Border.
 - **Spec**: Technical border color.

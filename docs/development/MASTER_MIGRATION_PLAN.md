@@ -12,26 +12,26 @@
 - [x] 1.3 Import Quarantine
     - [x] Create `src/legacy/ui/`
     - [x] Move generic/shadcn components to `legacy/ui`
-    - [x] Retain `NorthcoteButton`, `StatusBadge`, `NativeAnchor` in `components/ui`
+    - [x] Retain `kerala-rageButton`, `StatusBadge`, `NativeAnchor` in `components/ui`
     - [x] Update imports for moved components
 
 ## Phase 2: Design System Facade
 - [ ] 2.1 Create Facade Structure
     - [x] Create `src/design-system/` with `tokens`, `primitives`, `components`
     - [x] Create re-exports for `Leaf`, `Pebble`, `Stone`
-    - [x] Create re-exports for `NorthcoteButton`
+    - [x] Create re-exports for `kerala-rageButton`
     - [x] Create re-exports for tokens
 
 ## Phase 3: Shell Stability
 - [x] 3.1 Verify Shell Slots
-    - [x] Check `LaboratoryShell` slots
-    - [x] Check `GalleryShell` slots
+    - [x] Check `kr-darkShell` slots
+    - [x] Check `kr-darkShell` slots
 
 ## Phase 4: Feature-Sliced Migration
 - [x] 4.1 Migrate Shared UI
     - [x] Move `ApplicationCard` to `features/applications`
     - [x] Move `MetricCard`, `TechCard` to `features/analysis`
-    - [x] Move `GlassLeafCard`, `IconBadge` to `features/gallery` (+ check compliance)
+    - [x] Move `GlassLeafCard`, `IconBadge` to `features/kr-dark` (+ check compliance)
 - [x] 4.2 Migrate Auth
     - [x] Refactor `Login.tsx`
     - [x] Refactor `Register.tsx` (Completed)
@@ -39,7 +39,7 @@
 ## Phase 5: Navigation Contract
 - [x] 5.1 Unified Nav Schema
     - [x] Create `src/config/navigation.schema.ts`
-    - [x] Update `GalleryDock` to consume schema
+    - [x] Update `kr-darkDock` to consume schema
     - [x] Update `NavRail` to consume schema
 
 ## Phase 6: Cleanup
@@ -54,7 +54,7 @@
 ## Phase 6: System Restoration (Current)
 - [x] 6.0 Foundation Restoration
     - [x] Restore `package.json` & scripts
-    - [x] Restore `tailwind.config.js` with Northcote tokens
+    - [x] Restore `tailwind.config.js` with kerala-rage tokens
     - [x] Restore `index.css` & Global Styles
     - [x] Restore Entry Points (`index.html`, `main.tsx`, `App.tsx`)
 - [x] 6.1 Asset Injection
@@ -62,9 +62,9 @@
     - [x] Create missing textures (paper-grain, scanlines, dusty-overlay, grid-mesh)
     - [x] Restore missing images (fern, beetle)
     - [x] **Haeckel Foundation**: Sliced 25 icons from Composite Grid (B2-03)
-    - [x] **Specimen Collection**: Extracted 13 jars from Victorian plate
+    - [x] **kr-motif Collection**: Extracted 13 jars from kerala-streetprint plate
     - [x] **Lab Instruments**: Extracted 12 gold tools from Anatomical plate
-    - [x] **Hero Specimens**: Generated Waratah, Wattle, Banksia, Eucalyptus, Brass Key
+    - [x] **Hero kr-motifs**: Generated Waratah, Wattle, kr-flower, kr-leafus, Brass Key
     - [x] **Catalog**: Created Storybook stories for all assets
     - [x] **Batch 2 Integration**:
         - [x] Sliced 25 Haeckel Icons from Composite Grid
@@ -78,16 +78,16 @@
     - [x] Define Expressive Tokens (`authoritative`, `wistful`, `breathing`)
     - [x] Add CSS Variables for physics axes
 - [x] 6.2.2 Component Updates
-    - [x] `NorthcoteButton`: Implement layout-safe `GRAD` physics
+    - [x] `kerala-rageButton`: Implement layout-safe `GRAD` physics
     - [x] `StatusBadge`: Add "Breathing" animation support
     - [x] `JobQueue`: Apply Tabular Figures & Slashed Zeros
 
 ## Phase 7: Data Integration
-- [x] 7.1 Laboratory Wiring
+- [x] 7.1 kr-dark Wiring
     - [x] Implement Analysis Dashboard (Mock Data Wiring)
     - [x] Implement Evidence Locker (Document Stack)
     - [x] Connect to real backend scoring API (Simulated Service)
-- [x] 7.2 Gallery Wiring
+- [x] 7.2 kr-dark Wiring
     - [x] Connect Feed to meaningful activity data (Mocked + Decor)
     - [x] Connect Kanban to application state (Mocked)
 - [ ] 7.3 Genkit Embedding Integration (Functions)
@@ -102,7 +102,7 @@
     - [ ] Navigation Regression Sweep (Transitions, `?tool=` routing, history)
     - [ ] Component Coverage Audit (Check `MetricCard`, `ImpactEnhancements`, etc.)
     - [ ] Design Token Health Check (Verify Tailwind tokens, global styles)
-    - [ ] Smoke Tests (Expand UI suite to Gallery/Laboratory views)
+    - [ ] Smoke Tests (Expand UI suite to kr-dark/kr-dark views)
     - [x] Asset Path Stabilization (Resolved `/texture-pattern.png` runtime warning in Profile view)
 - [ ] 5.5.2 Quality Gates
     - [ ] Performance Baseline (Capture Lighthouse metrics)

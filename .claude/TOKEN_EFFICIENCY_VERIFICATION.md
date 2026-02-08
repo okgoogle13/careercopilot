@@ -125,7 +125,7 @@ Result: 100K tokens → 2K tokens (98% saved)
 ### When Design Validation is Requested
 
 ```
-User: "Validate this Figma export against Northcote"
+User: "Validate this Figma export against kerala-rage"
      ↓
 Claude: Detects design asset validation
      ↓

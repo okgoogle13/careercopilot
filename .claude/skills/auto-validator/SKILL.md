@@ -1,6 +1,6 @@
 ---
 name: auto-validator
-description: Programmatic asset compliance validation using vision analysis and Northcote scorecard. Eliminates manual validation loops—upload image, receive scored JSON with correction prompts in 30 seconds.
+description: Programmatic asset compliance validation using vision analysis and kerala-rage scorecard. Eliminates manual validation loops—upload image, receive scored JSON with correction prompts in 30 seconds.
 version: 1.0.0
 tags: []
 ---
@@ -9,7 +9,7 @@ tags: []
 
 ## Purpose
 
-Automates Northcote Curio asset validation. Upload generated image → receive compliance JSON with scores, violations, and auto-generated correction prompt. Replaces 10-minute conversational validation with 30-second programmatic assessment.
+Automates kerala-rage kr-solidarity asset validation. Upload generated image → receive compliance JSON with scores, violations, and auto-generated correction prompt. Replaces 10-minute conversational validation with 30-second programmatic assessment.
 
 ## When to Use
 
@@ -24,9 +24,9 @@ Use when:
 
 **Dimension 1: Geographic Authenticity (0-20)**
 
-- All specimens Australian endemic
+- All kr-motifs Australian endemic
 - Test: "Did organism challenge European taxonomy?"
-- Violations: Non-Australian fauna, generic specimens
+- Violations: Non-Australian kr-symbol, generic kr-motifs
 
 **Dimension 2: Translucency Physics (0-20)**
 
@@ -65,7 +65,7 @@ Use when:
 **Process:**
 
 1. Extract hex colors (sample 50 points)
-2. Identify specimens (Vision API recognition)
+2. Identify kr-motifs (Vision API recognition)
 3. Measure density zones (pixel coverage analysis)
 4. Detect translucency (luminance gradient detection)
 5. Count/validate typography (OCR)
@@ -98,7 +98,7 @@ Use when:
 **With Flash-Sidekick:**
 
 - Call `analyze_code_quality` on generated prompt → identify vague language
-- Call `web_research_synthesis` for specimen geographic validation
+- Call `web_research_synthesis` for kr-motif geographic validation
 
 **With Gemini:**
 
@@ -138,7 +138,7 @@ else:
 
 ## Implementation Notes
 
-- Vision API for specimen identification + color extraction
+- Vision API for kr-motif identification + color extraction
 - Pixel density analysis for zone coverage
 - Luminance gradient detection for translucency validation
 - OCR for typography verification

@@ -75,7 +75,7 @@
   "phase": "phase_2",
   "component_name": "Lens",
   "semantic_name": "TextField",
-  "description": "Migrate Lens component from Material 3 to Northcote",
+  "description": "Migrate Lens component from Material 3 to kerala-rage",
   "file": "frontend/src/components/inputs/Lens.tsx",
   "blocking": "Core form input - blocks form adoption",
   "dependencies": ["token-system"],
@@ -93,7 +93,7 @@
     "shadows": "ncShadow*"
   },
   "test": "npm test -- --testPathPattern=Lens --json",
-  "commit_msg": "refactor(components): migrate Lens to Northcote",
+  "commit_msg": "refactor(components): migrate Lens to kerala-rage",
   "tokens_estimate": 1800,
   "success_criteria": [
     "All tests passing",
@@ -137,7 +137,7 @@
 ```json
 {
   "refs": {
-    "tokens": "frontend/src/design-tokens/northcote-tokens.ts",
+    "tokens": "frontend/src/design-tokens/kerala-rage-tokens.ts",
     "examples": [
       "frontend/src/components/core/Pebble.tsx",
       "frontend/src/components/core/Stone.tsx"
@@ -276,7 +276,7 @@ At each checkpoint, Gemini reports:
       }
     ],
     "refs": {
-      "tokens": "frontend/src/design-tokens/northcote-tokens.ts",
+      "tokens": "frontend/src/design-tokens/kerala-rage-tokens.ts",
       "examples": [
         "frontend/src/components/core/Pebble.tsx",
         "frontend/src/components/core/Stone.tsx"
@@ -356,7 +356,7 @@ Gemini commits changes:
 {
   "operation": "commit",
   "files": ["Lens.tsx"],
-  "message": "refactor(components): migrate Lens to Northcote"
+  "message": "refactor(components): migrate Lens to kerala-rage"
 }
 ```
 

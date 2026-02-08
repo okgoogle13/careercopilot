@@ -1,21 +1,21 @@
 {
     "$schema": "https://design-tokens.org/schema.json",
-    "name": "Northcote Curio Motion Library",
+    "name": "kerala-rage kr-solidarity Motion Library",
     "version": "1.0.0",
-    "description": "Comprehensive motion token library quantifying 'Viscous Breeze' physics for Gallery and Laboratory modes",
+    "description": "Comprehensive motion token library quantifying 'Viscous Breeze' physics for kr-dark and kr-dark modes",
     "motion": {
         "physics": {
             "$description": "Spring physics parameters for natural, physics-based animations",
-            "gallery": {
+            "kr-dark": {
                 "stiffness": {
                     "$value": 500,
                     "$type": "number",
-                    "$description": "Gallery mode spring stiffness — gentle, expressive"
+                    "$description": "kr-dark mode spring stiffness — gentle, expressive"
                 },
                 "damping": {
                     "$value": 27,
                     "$type": "number",
-                    "$description": "Gallery mode damping — allows overshoot, air resistance"
+                    "$description": "kr-dark mode damping — allows overshoot, air resistance"
                 },
                 "mass": {
                     "$value": 1,
@@ -28,16 +28,16 @@
                     "$description": "Initial velocity"
                 }
             },
-            "laboratory": {
+            "kr-dark": {
                 "stiffness": {
                     "$value": 800,
                     "$type": "number",
-                    "$description": "Laboratory mode spring stiffness — precise, controlled"
+                    "$description": "kr-dark mode spring stiffness — precise, controlled"
                 },
                 "damping": {
                     "$value": 40,
                     "$type": "number",
-                    "$description": "Laboratory mode damping — minimal overshoot, clinical precision"
+                    "$description": "kr-dark mode damping — minimal overshoot, clinical precision"
                 },
                 "mass": {
                     "$value": 1,
@@ -56,12 +56,12 @@
             "viscous": {
                 "$value": "cubic-bezier(0.34, 1.56, 0.64, 1)",
                 "$type": "cubicBezier",
-                "$description": "Viscous Breeze — Gallery mode primary, gentle overshoot"
+                "$description": "Viscous Breeze — kr-dark mode primary, gentle overshoot"
             },
             "precise": {
                 "$value": "cubic-bezier(0.25, 0.46, 0.45, 0.94)",
                 "$type": "cubicBezier",
-                "$description": "Laboratory mode — no overshoot, controlled"
+                "$description": "kr-dark mode — no overshoot, controlled"
             },
             "settle": {
                 "$value": "cubic-bezier(0.25, 0.46, 0.45, 0.94)",
@@ -76,7 +76,7 @@
             "elastic": {
                 "$value": "cubic-bezier(0.68, -0.55, 0.265, 1.55)",
                 "$type": "cubicBezier",
-                "$description": "Pronounced bounce — Gallery mode accents only"
+                "$description": "Pronounced bounce — kr-dark mode accents only"
             },
             "linear": {
                 "$value": "linear",
@@ -220,7 +220,7 @@
                         "$type": "shadow"
                     },
                     "borderColor": {
-                        "$value": "{color.primary.wattleGold}",
+                        "$value": "{color.primary.kr-ink-gold}",
                         "$type": "color"
                     },
                     "duration": {
@@ -327,7 +327,7 @@
         },
         "modeSpecific": {
             "$description": "Mode-specific motion overrides",
-            "gallery": {
+            "kr-dark": {
                 "defaultEasing": {
                     "$value": "{motion.easing.viscous}",
                     "$type": "cubicBezier"
@@ -341,7 +341,7 @@
                     "$type": "boolean"
                 }
             },
-            "laboratory": {
+            "kr-dark": {
                 "defaultEasing": {
                     "$value": "{motion.easing.precise}",
                     "$type": "cubicBezier"

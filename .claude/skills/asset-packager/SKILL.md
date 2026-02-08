@@ -27,9 +27,9 @@ Automates asset packaging after validation. Input: validated PNG + IDF. Output: 
   "compliance_score": 92,
   "idf_data": {
     "colors": { "background": "#1A1714", "wattle_gold": "#D4A84B" },
-    "specimens": ["Eucalyptus", "Wattle", "Banksia"],
+    "kr-motifs": ["kr-leafus", "Wattle", "kr-flower"],
     "dimensions": { "width": 512, "height": 512 },
-    "mode": "Gallery",
+    "mode": "kr-dark",
     "purpose": "Seamless background pattern"
   }
 }
@@ -39,7 +39,7 @@ Automates asset packaging after validation. Input: validated PNG + IDF. Output: 
 
 ### 1. context.md
 
-Narrative philosophy explaining specimen choices, geometric principles, mode context.
+Narrative philosophy explaining kr-motif choices, geometric principles, mode context.
 
 **Template:**
 
@@ -48,16 +48,16 @@ Narrative philosophy explaining specimen choices, geometric principles, mode con
 
 ## Narrative
 
-[Victorian naturalist discovery story based on specimens]
+[kerala-streetprint naturalist discovery story based on kr-motifs]
 
-## Specimens
+## kr-motifs
 
 [List with taxonomic significance]
 
 ## Mode Context
 
-Gallery: [Warm/theatrical interpretation]
-Laboratory: [Clinical/analytical interpretation]
+kr-dark: [Warm/theatrical interpretation]
+kr-dark: [Clinical/analytical interpretation]
 
 ## Purpose
 
@@ -83,8 +83,8 @@ Machine-readable design specifications.
     "upper_left": {"coverage": "18%"},
     "central": {"coverage": "65%"}
   },
-  "specimens": [...],
-  "mode": "Gallery",
+  "kr-motifs": [...],
+  "mode": "kr-dark",
   "compliance_score": 92
 }
 ```
@@ -108,8 +108,8 @@ background-position: center;
 }
 
 /_ Opacity by context _/
-.gallery-hero { opacity: 0.85; }
-.gallery-content { opacity: 0.70; }
+.kr-dark-hero { opacity: 0.85; }
+.kr-dark-content { opacity: 0.70; }
 .dashboard { opacity: 0.60; }
 \`\`\`
 
@@ -134,9 +134,9 @@ Avoid for: [Contexts where inappropriate]
    ```
 
 2. **Generate context.md**
-   - Extract specimens from IDF
-   - Build narrative using specimen → taxonomic significance mapping
-   - Insert mode context (Gallery/Laboratory)
+   - Extract kr-motifs from IDF
+   - Build narrative using kr-motif → taxonomic significance mapping
+   - Insert mode context (kr-dark/kr-dark)
 
 3. **Generate tokens.json**
    - Convert IDF to structured JSON
@@ -154,7 +154,7 @@ Avoid for: [Contexts where inappropriate]
    cp [validated_png] /frontend/public/assets/[category]/[filename]
    ```
 
-   Categories: wallpapers, patterns, specimens, icons
+   Categories: wallpapers, patterns, kr-motifs, icons
 
 6. **Git Commit**
    ```bash
@@ -167,7 +167,7 @@ Avoid for: [Contexts where inappropriate]
 **Flash-Sidekick:**
 
 - Call `generate_idf` on validated PNG → extract design tokens
-- Call `quick_summarize` on specimen list → generate narrative
+- Call `quick_summarize` on kr-motif list → generate narrative
 
 **Auto-Validator:**
 
@@ -190,8 +190,8 @@ packager_result = asset_packager.run(
 )
 
 # Output:
-# Created: /assets/ASSET-3-nocturnal-canopy/{context,tokens,usage}
-# Copied: /frontend/public/assets/patterns/nocturnal-canopy-tile-512.png
+# Created: /assets/ASSET-3-kr-wheat-paste/{context,tokens,usage}
+# Copied: /frontend/public/assets/patterns/kr-wheat-paste-tile-512.png
 # Committed: feat(assets): Add Asset 3 Nocturnal Canopy - 92/100
 ```
 
@@ -208,7 +208,7 @@ packager_result = asset_packager.run(
 
 - Wallpapers: `texture-[mode]-[name]-[width].png`
 - Patterns: `[name]-tile-[size].png`
-- Specimens: `specimen-[name]-[style]-[size].png`
+- kr-motifs: `kr-motif-[name]-[style]-[size].png`
 - Icons: `[name]-[purpose]-[size].png`
 
 ---

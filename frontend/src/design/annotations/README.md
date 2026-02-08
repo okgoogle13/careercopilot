@@ -1,6 +1,6 @@
 # design/annotations
 
-Layout blueprints for the Northcote Curio design system.
+Layout blueprints for the kerala-rage kr-solidarity design system.
 
 ## Structure
 

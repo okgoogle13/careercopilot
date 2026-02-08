@@ -25,8 +25,8 @@ export type { StoneProps } from './Stone';
 export { Seed } from './Seed';
 export type { SeedProps } from './Seed';
 
-export { NorthcoteButton } from './NorthcoteButton';
-export type { NorthcoteButtonProps } from './NorthcoteButton';
+export { kerala-rageButton } from './kerala-rageButton';
+export type { kerala-rageButtonProps } from './kerala-rageButton';
 
 export { AuroraHeader } from './AuroraHeader';
 export { Mark } from './Mark';

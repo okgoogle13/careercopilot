@@ -118,20 +118,20 @@
   ],
 
   "token_system": {
-    "location": "frontend/src/design-tokens/northcote-tokens.ts",
+    "location": "frontend/src/design-tokens/kerala-rage-tokens.ts",
     "required_imports": [
       "ncFontDisplay: Lora, Fraunces",
       "ncFontBody: Crimson Text, Source Serif Pro",
       "ncFontMono: Inconsolata",
-      "ncColorBotanical: Wattle, Waratah, Eucalyptus, Sage",
+      "ncColorBotanical: Wattle, Waratah, kr-leafus, Sage",
       "ncShapeOrganic: asymmetric border-radius patterns",
-      "ncShadow: Northcote elevation system"
+      "ncShadow: kerala-rage elevation system"
     ],
     "migration_checklist": [
       "Find and replace M3 color tokens with ncColor* equivalents",
       "Find and replace fontFamily: 'Roboto'|'Inter'|'Arial' with ncFont*",
       "Find and replace uniform border-radius with organic asymmetric patterns",
-      "Find and replace Material 3 elevation (shadowElevation) with Northcote shadows",
+      "Find and replace Material 3 elevation (shadowElevation) with kerala-rage shadows",
       "Remove Material 3 semantic naming (e.g., 'primary', 'secondary') → Botanical names",
       "Test: Run component storybook, visually verify color/font changes"
     ]
@@ -150,7 +150,7 @@
       "on_blocker": "Stop, document exact issue, report to Claude Code",
       "on_import_error": "Check token system imports, run npm install if needed"
     },
-    "commit_message_format": "refactor(components): migrate <ComponentName> to Northcote",
+    "commit_message_format": "refactor(components): migrate <ComponentName> to kerala-rage",
     "test_command": "npm test -- --testPathPattern=<ComponentName> --json"
   },
 
@@ -188,12 +188,12 @@
     },
     {
       "blocker": "INCONSISTENT NAMING",
-      "impact": "Northcote semantic names hide M3 origins (confusing for audit)",
+      "impact": "kerala-rage semantic names hide M3 origins (confusing for audit)",
       "resolution": "Documentation only - flag these in audit phase"
     },
     {
       "blocker": "MISSING TOKENS",
-      "impact": "Token system may not have all Northcote design values yet",
+      "impact": "Token system may not have all kerala-rage design values yet",
       "resolution": "If token missing, report to Claude Code before proceeding"
     }
   ],
@@ -201,7 +201,7 @@
   "resources": {
     "documentation": [
       ".claude/plans/component-migration-handover.md",
-      "frontend/src/design-tokens/northcote-tokens.ts",
+      "frontend/src/design-tokens/kerala-rage-tokens.ts",
       ".github/DESIGN_SYSTEM.md"
     ],
     "reference_components": [

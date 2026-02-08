@@ -39,17 +39,17 @@ export interface LensProps extends Omit<React.InputHTMLAttributes<HTMLInputEleme
 }
 
 /**
- * Lens - Northcote Curio Text Input
+ * Lens - kerala-rage kr-solidarity Text Input
  *
- * A comprehensive text input component using the Northcote Curio design system.
- * Supports filled and outlined variants with proper Northcote states and validation.
+ * A comprehensive text input component using the kerala-rage kr-solidarity design system.
+ * Supports filled and outlined variants with proper kerala-rage states and validation.
  *
- * **Northcote Design Token Usage:**
+ * **kerala-rage Design Token Usage:**
  * - Shape: `--radius-leaf` (organic shape) for inputs
- * - Colors: Northcote botanical palette (Wattle Gold, Waratah Red, Concrete Grey)
- * - Typography: Northcote field-note font family
+ * - Colors: kerala-rage botanical palette (Wattle Gold, Waratah Red, Concrete Grey)
+ * - Typography: kerala-rage field-note font family
  * - Motion: Viscous-breeze easing for organic transitions
- * - Visual: Glassmorphism with subtle backdrop blur
+ * - Visual: kr-screenprint with subtle backdrop blur
  *
  * **States:**
  * - Default: Outlined with subtle border
@@ -128,7 +128,7 @@ export const Lens = forwardRef<HTMLInputElement, LensProps>(
       },
     };
 
-    // Variant-specific styles (Northcote Curio)
+    // Variant-specific styles (kerala-rage kr-solidarity)
     const containerStyle = {
       borderRadius: 'var(--radius-leaf)',
       backgroundColor: variant === 'filled' ? 'rgba(44, 39, 35, 0.4)' : 'transparent',
@@ -266,7 +266,7 @@ Lens.displayName = 'Lens';
  * LensArea - Multi-line text input variant
  *
  * Same API as Lens but renders a textarea for multi-line input.
- * Uses Northcote Curio design tokens for consistent organic styling.
+ * Uses kerala-rage kr-solidarity design tokens for consistent organic styling.
  */
 export interface LensAreaProps extends Omit<
   React.TextareaHTMLAttributes<HTMLTextAreaElement>,

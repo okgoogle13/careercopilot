@@ -36,7 +36,7 @@ import { useModeStore } from './stores/useModeStore';
 
 /**
  * ModeSync Component
- * Automatically switches between Gallery and Laboratory modes based on the current route
+ * Automatically switches between kr-dark and kr-dark modes based on the current route
  */
 function ModeSync() {
   const location = useLocation();

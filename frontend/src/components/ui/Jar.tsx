@@ -46,16 +46,16 @@ export interface JarProps {
 }
 
 /**
- * Jar - Northcote Curio Select Dropdown
+ * Jar - kerala-rage kr-solidarity Select Dropdown
  *
- * A custom select component using Northcote Curio design tokens with enhanced UX.
+ * A custom select component using kerala-rage kr-solidarity design tokens with enhanced UX.
  * Features organic shapes, proper elevation, and smooth animations.
  *
- * **Northcote Design Token Usage:**
+ * **kerala-rage Design Token Usage:**
  * - Shape: `--radius-stone` for select button, `--radius-pebble` for dropdown
  * - Elevation: `--shadow-maximum` for dropdown menu
  * - Motion: Viscous-breeze easing for smooth open/close
- * - Colors: Northcote botanical palette (Wattle Gold, Waratah Red)
+ * - Colors: kerala-rage botanical palette (Wattle Gold, Waratah Red)
  * - Typography: Field-note font family
  *
  * @example

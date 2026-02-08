@@ -20,18 +20,18 @@ export interface CabinetProps {
   /** Max width of the modal */
   maxWidth?: 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 
-  /** Visual variant - Northcote Curio compatible */
+  /** Visual variant - kerala-rage kr-solidarity compatible */
   variant?: 'tech' | 'organic' | 'standard';
 }
 
 /**
- * Cabinet - Northcote Curio Modal Component
+ * Cabinet - kerala-rage kr-solidarity Modal Component
  *
- * Modal dialog component with Northcote design system styling.
+ * Modal dialog component with kerala-rage design system styling.
  * Features:
  * - Managed focus and ESC key support
- * - Northcote botanical palette and organic shapes
- * - Stone card wrapper with glassmorphism
+ * - kerala-rage botanical palette and organic shapes
+ * - Stone card wrapper with kr-screenprint
  * - Portal rendering for proper z-index layering
  */
 export const Cabinet: React.FC<CabinetProps> = ({
@@ -77,7 +77,7 @@ export const Cabinet: React.FC<CabinetProps> = ({
         onClick={onClose}
       />
       <Stone
-        mode={variant === 'tech' ? 'laboratory' : 'gallery'}
+        mode={variant === 'tech' ? 'kr-dark' : 'kr-dark'}
         elevation="floating"
         className={`relative w-full ${maxWidthClasses[maxWidth]} shadow-2xl animate-in zoom-in-95 duration-300`}
       >

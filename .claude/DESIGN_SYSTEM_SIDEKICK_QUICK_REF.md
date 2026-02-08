@@ -4,7 +4,7 @@ Use this server to **bridge creative direction with programmatic validation**.
 
 ## 🛑 WHEN TO USE
 
-- 🎨 **Asset Auditing**: Checking if a generated image matches Northcote standards.
+- 🎨 **Asset Auditing**: Checking if a generated image matches kerala-rage standards.
 - 📦 **Implementation**: Generating CSS/React code for a validated asset.
 - ✅ **Compliance**: Ensuring typography, color, and layout rules are met.
 
@@ -17,7 +17,7 @@ Use this server to **bridge creative direction with programmatic validation**.
 
 **Example Prompt:**
 
-> "Audit this generated Kookaburra image for Northcote compliance."
+> "Audit this generated kr-shiva image for kerala-rage compliance."
 
 **What it does:**
 
@@ -75,4 +75,4 @@ Use this server to **bridge creative direction with programmatic validation**.
 
 ---
 
-_Reference: `.claude/skills/northcote-visual-audit/SKILL.md`_
+_Reference: `.claude/skills/kerala-rage-visual-audit/SKILL.md`_

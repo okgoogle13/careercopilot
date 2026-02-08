@@ -1,10 +1,10 @@
-# Northcote Image Generator Prompt Template
+# kerala-rage Image Generator Prompt Template
 
 Use this template to generate high-fidelity, contemporary Australian assets for CareerCopilot.
 
 ## The Strategy: The Haeckel Sandwich
 
-Every prompt must be constructed using these five layers to ensure compliance with the Northcote Curio aesthetic.
+Every prompt must be constructed using these five layers to ensure compliance with the kerala-rage kr-solidarity aesthetic.
 
 ### 1. The Base: Absolute Void
 
@@ -17,7 +17,7 @@ Every prompt must be constructed using these five layers to ensure compliance wi
 - **Requirement**: **Australian Endemic Species** only.
 - **Living Context**: The species must be in an active, living scene (e.g., on power lines, street signs, urban gardens).
 - **Species**: [SPECIES OR SUBJECT]
-- **Prohibited**: No "specimens", no "museum cabinets", no "pinning", no "preservation".
+- **Prohibited**: No "kr-motifs", no "museum cabinets", no "pinning", no "preservation".
 
 ### 3. The Topping: Geometric Lens & Surgical Light
 
@@ -34,7 +34,7 @@ Every prompt must be constructed using these five layers to ensure compliance wi
 
 ### 5. The Five Immutable Laws
 
-1.  **Contemporary, Not Nostalgic**: No sepia, no vintage filters, no Victorian fonts.
+1.  **Contemporary, Not Nostalgic**: No sepia, no vintage filters, no kerala-streetprint fonts.
 2.  **Graphic Contrast**: Bold silhouettes and high-contrast edges.
 3.  **Anatomical Extremism**: Capture intense biological detail (skeletal structures, microscopic lattices).
 4.  **Peter Drew Aesthetic**: Poster-like boldness, unapologetic silhouettes.
@@ -55,9 +55,9 @@ Every prompt must be constructed using these five layers to ensure compliance wi
 > **Lighting**: Surgical top-down rim lighting in Wattle Gold (#D4A84B) and Waratah Red (#C45C4B) highlights.
 > **Palette**: Strictly restricted to Asphalt Black (#1A1714), Paper White (#F5F0E8), Wattle Gold (#D4A84B), and [ACCENT COLOR].
 >
-> **Forbidden**: vintage, sepia, specimen, museum, cabinet, naturalist, federaton, colonial, cute, soft.
+> **Forbidden**: vintage, sepia, kr-motif, museum, cabinet, naturalist, federaton, colonial, cute, soft.
 >
-> **Negative Prompt**: sepia, vintage, low-res, blurry, cute, cartoon, 3d render, museum cabinet, specimen plate.
+> **Negative Prompt**: sepia, vintage, low-res, blurry, cute, cartoon, 3d render, museum cabinet, kr-motif plate.
 
 ---
 

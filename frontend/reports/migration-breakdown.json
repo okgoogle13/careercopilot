@@ -186,9 +186,9 @@
   ],
   "topMixed": [
     {
-      "name": "NorthcoteButton",
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/NorthcoteButton.tsx",
-      "relativePath": "src/components/ui/NorthcoteButton.tsx",
+      "name": "kerala-rageButton",
+      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/kerala-rageButton.tsx",
+      "relativePath": "src/components/ui/kerala-rageButton.tsx",
       "category": "ui",
       "usageCount": 11,
       "importedBy": [
@@ -198,15 +198,15 @@
         "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/auth/Register.tsx",
         "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/documents/DocumentStack.tsx",
         "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/sandbox/components/SplitEditor.tsx",
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/GalleryShell/views/GalleryLanding.tsx",
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/LaboratoryShell/components/GlobalHeader.tsx",
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/LaboratoryShell/components/NavRail.tsx",
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/LaboratoryShell/components/anchors/AnalysisAnchor.tsx",
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/LaboratoryShell/components/anchors/DocumentStackAnchor.tsx"
+        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/views/kr-darkLanding.tsx",
+        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/components/GlobalHeader.tsx",
+        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/components/NavRail.tsx",
+        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/components/anchors/AnalysisAnchor.tsx",
+        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/components/anchors/DocumentStackAnchor.tsx"
       ],
       "exports": [
-        "NorthcoteButtonProps",
-        "NorthcoteButton"
+        "kerala-rageButtonProps",
+        "kerala-rageButton"
       ],
       "hasTests": false,
       "hasStories": false,
@@ -364,7 +364,7 @@
       "category": "features",
       "usageCount": 1,
       "importedBy": [
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/LaboratoryShell/components/anchors/AnalysisAnchor.tsx"
+        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/components/anchors/AnalysisAnchor.tsx"
       ],
       "exports": [
         "TechCard"

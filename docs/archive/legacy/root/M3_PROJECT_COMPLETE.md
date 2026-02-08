@@ -324,7 +324,7 @@ If you want to push to 100% compliance:
 ### Medium Value:
 - [ ] Create M3Dialog wrapper
 - [ ] Create M3Snackbar/Toast
-- [ ] Add Storybook component gallery
+- [ ] Add Storybook component kr-dark
 - [ ] Visual regression testing setup
 
 ### Low Priority:

@@ -1,17 +1,17 @@
 ---
 name: kerala-rage-asset-cataloger
-description: Visual triage analyst for Kerala Rage design system. Analyzes uncategorized assets against kerala-rage-manifest.json to generate executable action plans. Performs gap analysis and Agit-Prop compliance validation.
-version: 2.0.0
-tags: [assets, cataloging, kerala-rage]
+description: Visual triage analyst for kerala-rage kr-solidarity design system. Analyzes uncategorized assets against kerala-rage-kr-solidarity-manifest.json to generate executable action plans (move/delete/variant). Performs gap analysis, duplicate detection, and mode compliance validation. Outputs structured JSON for automated batch processing.
+version: 1.0.0
+tags: []
 ---
 
-# Kerala Rage Asset Cataloger
+# kerala-rage Asset Cataloger
 
-**Manifest-driven triage and gap analysis for Kerala Migrant Rage assets.**
+**Manifest-driven triage and gap analysis for kerala-rage kr-solidarity assets.**
 
 ## Purpose
 
-Perform comprehensive visual analysis of assets in `assets/uncategorized/` against the canonical manifest to generate an executable action plan (Move/Delete/Radicalize).
+Perform comprehensive visual analysis of assets in `assets/uncategorized/` against the canonical manifest to generate an executable action plan in JSON format.
 
 ## Process
 
@@ -41,11 +41,11 @@ Visually fulfills documented "Missing" slot in manifest.
   "asset": "assets/uncategorized/phase3-015.png",
   "status": "MANIFEST_MATCH",
   "target_id": "ASSET-15",
-  "target_category": "propaganda",
-  "proposed_name": "kerala-rage-propaganda-fist-rise.png",
-  "visual_description": "Red fist rising from charcoal background",
+  "target_category": "ui",
+  "proposed_name": "kerala-rage-ui-compass-rose.png",
+  "visual_description": "Brass compass with kerala-streetprint engravings",
   "confidence": "HIGH",
-  "instruction": "mv assets/uncategorized/phase3-015.png assets/propaganda/kerala-rage-propaganda-fist-rise.png"
+  "instruction": "mv assets/uncategorized/phase3-015.png assets/ui/kerala-rage-ui-compass-rose.png"
 }
 ```
 
@@ -59,7 +59,7 @@ Visually identical to existing canonical file.
 {
   "asset": "assets/uncategorized/phase3-002.png",
   "status": "DUPLICATE",
-  "visual_description": "Identical to assets/solidarity/kerala-rage-star-pattern.png",
+  "visual_description": "Identical to assets/kr-symbol/kerala-rage-sentry-kr-shiva.png",
   "confidence": "HIGH",
   "instruction": "rm assets/uncategorized/phase3-002.png"
 }
@@ -75,11 +75,11 @@ Useful alternative with meaningful differences.
 {
   "asset": "assets/uncategorized/phase3-003.png",
   "status": "VARIANT",
-  "target_category": "solidarity",
-  "proposed_name": "kerala-rage-solidarity-diagram-variant-2.png",
-  "visual_description": "Different angle of Marxist theory diagram",
+  "target_category": "kr-motifs",
+  "proposed_name": "kerala-rage-kr-motif-kr-flower-pod-variant-2.png",
+  "visual_description": "Different angle, 2048px vs 1024px existing",
   "confidence": "HIGH",
-  "instruction": "mv assets/uncategorized/phase3-003.png assets/solidarity/kerala-rage-solidarity-diagram-variant-2.png"
+  "instruction": "mv assets/uncategorized/phase3-003.png assets/kr-motifs/kerala-rage-kr-motif-kr-flower-pod-variant-2.png"
 }
 ```
 
@@ -93,11 +93,11 @@ Novel asset with value, not matching manifest/existing.
 {
   "asset": "assets/uncategorized/phase3-042.png",
   "status": "NEW_CANDIDATE",
-  "target_category": "solidarity",
-  "proposed_name": "kerala-rage-solidarity-union-banner.png",
-  "visual_description": "Union banner with Malayalam text, no existing banner",
+  "target_category": "kr-symbol",
+  "proposed_name": "kerala-rage-kr-symbol-lyrebird-display.png",
+  "visual_description": "kerala-streetprint lyrebird illustration, warm sepia, no existing lyrebird",
   "confidence": "MEDIUM",
-  "instruction": "mv assets/uncategorized/phase3-042.png assets/solidarity/kerala-rage-solidarity-union-banner.png"
+  "instruction": "mv assets/uncategorized/phase3-042.png assets/kr-symbol/kerala-rage-kr-symbol-lyrebird-display.png"
 }
 ```
 
@@ -119,7 +119,7 @@ Low quality, noise, test artifacts, no clear use.
 
 ## Manifest Integration
 
-**Source**: `/Users/okgoogle13/Desktop/careercopilot/assets/kerala-rage-manifest.json`
+**Source**: `/Users/okgoogle13/Desktop/careercopilot/assets/kerala-rage-kr-solidarity-manifest.json`
 
 **Gap Analysis**: Load manifest, filter `status: "Missing"`, match ASSET-7 through ASSET-19 against uncategorized assets.
 
@@ -127,13 +127,12 @@ Low quality, noise, test artifacts, no clear use.
 
 **Pattern**: `kerala-rage-{category}-{descriptive-name}[-variant-N].png`
 
-**Categories**: propaganda, solidarity, theory, textures, ui, mockups
+**Categories**: kr-symbol, plates, kr-motifs, textures, ui, mockups
 
 ## Mode Compliance
 
-**Solidarity**: ✅ Fists, Stars, Red/Gold/Charcoal | ❌ Flowers, Birds
-**Theory**: ABOLISHED.
-**Laboratory**: ABOLISHED.
+**kr-dark**: ✅ Botanicals, kr-symbol, warm tones | ❌ Technical diagrams
+**kr-dark**: ✅ Diagrams, instruments, cool tones | ❌ Flowers, kr-symbol
 
 ## Required Output
 
@@ -174,4 +173,4 @@ Save to: `assets/asset_triage_plan.json`
 
 ---
 
-_Curatorial precision for Agit-Prop design assets_
+_Curatorial precision for kerala-streetprint naturalist design assets_
