@@ -7,7 +7,7 @@ export interface M3SelectOption {
     disabled?: boolean;
 }
 
-export type M3SelectMode = 'kr-dark' | 'kr-dark';
+export type M3SelectMode = 'KrDark' | 'KrLight';
 
 export interface M3SelectProps {
     /** Select label */
@@ -32,7 +32,7 @@ export interface M3SelectProps {
     required?: boolean;
     /** Full width select */
     fullWidth?: boolean;
-    /** Theme mode: kr-dark (warm, botanical) or kr-dark (clinical, precise) */
+    /** Theme mode: KrDark (warm, botanical) or KrDark (clinical, precise) */
     mode?: M3SelectMode;
     /** Additional CSS classes */
     className?: string;
@@ -41,15 +41,15 @@ export interface M3SelectProps {
 }
 
 /**
- * M3Select - kerala-rage kr-solidarity Select Dropdown
+ * M3Select - KeralaRage KrSolidarity Select Dropdown
  *
- * Supports both kr-dark (warm, botanical) and kr-dark (clinical, precise) modes.
+ * Supports both KrDark (warm, botanical) and KrDark (clinical, precise) modes.
  *
- * **kerala-rage Token Usage:**
+ * **KeralaRage Token Usage:**
  * - Typography: `font-field-note` (Options), `font-annotation` (Label)
  * - Color: `primary-wattle-gold` (Focus), `tertiary-waratah-red` (Error)
- * - Shape: `radius-stone` (kr-dark), organic asymmetry (kr-dark)
- * - Motion: `ease-viscous` (kr-dark), `ease-precise` (kr-dark)
+ * - Shape: `radius-stone` (KrDark), organic asymmetry (KrDark)
+ * - Motion: `ease-viscous` (KrDark), `ease-precise` (KrDark)
  *
  * **Accessibility:**
  * - WCAG 2.1 Level AA compliant
@@ -69,7 +69,7 @@ export const M3Select = forwardRef<HTMLButtonElement, M3SelectProps>(({
     disabled = false,
     required = false,
     fullWidth = false,
-    mode = 'kr-dark',
+    mode = 'KrDark',
     className = '',
     id,
 }, ref) => {
@@ -147,19 +147,19 @@ export const M3Select = forwardRef<HTMLButtonElement, M3SelectProps>(({
         }
     };
 
-    // Theme variants (kr-dark vs. kr-dark)
+    // Theme variants (KrDark vs. KrDark)
     const themeVariants = {
-        kr-dark: {
+        'KrDark': {
             button: `
                 border-2 
                 ${error ? 'border-tertiary-waratah-red' : 'border-primary-wattle-gold/80'}
                 ${isOpen && !error ? 'border-primary-wattle-gold ring-2 ring-primary-wattle-gold/30' : ''}
-                bg-surface-kr-dark-concrete-grey
+                bg-surface-KrDark-concrete-grey
                 shadow-sm
                 rounded-[8px_12px_6px_10px]
             `,
             dropdown: `
-                bg-surface-kr-dark-concrete-grey
+                bg-surface-KrDark-concrete-grey
                 border border-primary-wattle-gold/40
                 shadow-elevated
                 rounded-[8px_12px_6px_10px]
@@ -174,7 +174,7 @@ export const M3Select = forwardRef<HTMLButtonElement, M3SelectProps>(({
                 floating: 'text-secondary-flannel-dim',
             },
         },
-        kr-dark: {
+        'KrLight': {
             button: `
                 border-2 
                 ${error ? 'border-tertiary-waratah-red' : 'border-outline-variant'}

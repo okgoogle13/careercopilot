@@ -1,5 +1,5 @@
 import { X } from 'lucide-react';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { Pebble } from './Pebble';
 import { Stone } from './Stone';
@@ -20,18 +20,18 @@ export interface CabinetProps {
   /** Max width of the modal */
   maxWidth?: 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 
-  /** Visual variant - kerala-rage kr-solidarity compatible */
+  /** Visual variant - KeralaRage KrSolidarity compatible */
   variant?: 'tech' | 'organic' | 'standard';
 }
 
 /**
- * Cabinet - kerala-rage kr-solidarity Modal Component
+ * Cabinet - KeralaRage KrSolidarity Modal Component
  *
- * Modal dialog component with kerala-rage design system styling.
+ * Modal dialog component with KeralaRage design system styling.
  * Features:
  * - Managed focus and ESC key support
- * - kerala-rage botanical palette and organic shapes
- * - Stone card wrapper with kr-screenprint
+ * - KeralaRage botanical palette and organic shapes
+ * - Stone card wrapper with KrScreenprint
  * - Portal rendering for proper z-index layering
  */
 export const Cabinet: React.FC<CabinetProps> = ({
@@ -42,8 +42,6 @@ export const Cabinet: React.FC<CabinetProps> = ({
   maxWidth = 'md',
   variant = 'standard',
 }) => {
-  const modalRef = useRef<HTMLDivElement>(null);
-
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
@@ -77,7 +75,7 @@ export const Cabinet: React.FC<CabinetProps> = ({
         onClick={onClose}
       />
       <Stone
-        mode={variant === 'tech' ? 'kr-dark' : 'kr-dark'}
+        mode={variant === 'tech' ? 'KrDark' : 'KrDark'}
         elevation="floating"
         className={`relative w-full ${maxWidthClasses[maxWidth]} shadow-2xl animate-in zoom-in-95 duration-300`}
       >

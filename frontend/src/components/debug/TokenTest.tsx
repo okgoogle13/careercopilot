@@ -1,7 +1,7 @@
 import { useMode } from '@/hooks/use-mode';
 
 export const TokenTest = () => {
-  const { mode, iskr-darkMode, iskr-darkMode } = useMode();
+  const { mode, isKrDarkMode } = useMode();
 
   return (
     <div
@@ -24,8 +24,7 @@ export const TokenTest = () => {
         <p>
           Current Mode: <span className="font-annotation text-clinical-sage">{mode}</span>
         </p>
-        <p>kr-dark Mode: {iskr-darkMode ? '✅' : '❌'}</p>
-        <p>kr-dark Mode: {iskr-darkMode ? '✅' : '❌'}</p>
+        <p>KrDark Mode: {isKrDarkMode ? '✅' : '❌'}</p>
       </div>
 
       <div className="mt-6 flex gap-3">

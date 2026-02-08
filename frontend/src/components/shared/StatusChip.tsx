@@ -10,7 +10,7 @@ interface StatusChipProps {
 /**
  * StatusChip - Unified Status Indicator
  * 
- * Re-routes to StatusBadge for centralized kr-solidarity design system management.
+ * Re-routes to StatusBadge for centralized KrSolidarity design system management.
  */
 export const StatusChip: React.FC<StatusChipProps> = ({
     needsReview,
@@ -26,4 +26,3 @@ export const StatusChip: React.FC<StatusChipProps> = ({
         />
     );
 };
-

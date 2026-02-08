@@ -2,7 +2,7 @@ import React, { forwardRef, useEffect } from 'react';
 
 export type M3TextFieldVariant = 'filled' | 'outlined';
 export type M3TextFieldSize = 'small' | 'medium' | 'large';
-export type M3TextFieldMode = 'kr-dark' | 'kr-dark';
+export type M3TextFieldMode = 'KrDark' | 'KrLight';
 
 export interface M3TextFieldProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'> {
     /** Input label */
@@ -17,7 +17,7 @@ export interface M3TextFieldProps extends Omit<React.InputHTMLAttributes<HTMLInp
     variant?: M3TextFieldVariant;
     /** Input size */
     size?: M3TextFieldSize;
-    /** Theme mode: kr-dark (warm, botanical) or kr-dark (clinical, precise) */
+    /** Theme mode: KrDark (warm, botanical) or KrLight (clinical, precise) */
     mode?: M3TextFieldMode;
     /** Start adornment (icon or text) */
     startAdornment?: React.ReactNode;
@@ -32,21 +32,9 @@ export interface M3TextFieldProps extends Omit<React.InputHTMLAttributes<HTMLInp
 }
 
 /**
- * M3TextField - kerala-rage kr-solidarity Text Input
+ * M3TextField - KeralaRage KrSolidarity Text Input
  *
- * Supports both kr-dark (warm, botanical) and kr-dark (clinical, precise) modes.
- *
- * **kerala-rage Token Usage:**
- * - Typography: `font-field-note` (Input), `font-annotation` (Label)
- * - Color: `primary-wattle-gold` (Focus), `tertiary-waratah-red` (Error)
- * - Shape: `radius-stone` (kr-dark), organic asymmetry (kr-dark)
- * - Motion: `ease-viscous` (Fluid interactions)
- *
- * **Accessibility:**
- * - WCAG 2.1 Level AA compliant
- * - Visible focus indicators
- * - ARIA attributes for screen readers
- * - Floating label animation
+ * Supports both KrDark (warm, botanical) and KrLight (clinical, precise) modes.
  */
 export const M3TextField = forwardRef<HTMLInputElement, M3TextFieldProps>(({
     label,
@@ -55,7 +43,7 @@ export const M3TextField = forwardRef<HTMLInputElement, M3TextFieldProps>(({
     errorMessage,
     variant = 'outlined',
     size = 'medium',
-    mode = 'kr-dark',
+    mode = 'KrDark',
     startAdornment,
     endAdornment,
     fullWidth = false,
@@ -74,19 +62,18 @@ export const M3TextField = forwardRef<HTMLInputElement, M3TextFieldProps>(({
         value ? String(value).length : 0
     );
 
-    // Update floating state when value changes
     useEffect(() => {
         setIsFloating(!!value);
     }, [value]);
 
     const handleFocus = () => {
         setIsFocused(true);
-        setIsFloating(true); // Float on focus regardless of value
+        setIsFloating(true);
     };
 
     const handleBlur = () => {
         setIsFocused(false);
-        setIsFloating(!!value); // Only float if has value
+        setIsFloating(!!value);
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -95,7 +82,6 @@ export const M3TextField = forwardRef<HTMLInputElement, M3TextFieldProps>(({
         props.onChange?.(e);
     };
 
-    // Size-specific classes
     const sizeClasses: Record<M3TextFieldSize, { input: string; adornment: string }> = {
         small: {
             input: 'px-3 py-2 text-sm',
@@ -111,22 +97,21 @@ export const M3TextField = forwardRef<HTMLInputElement, M3TextFieldProps>(({
         },
     };
 
-    // Theme variants (kr-dark vs. kr-dark)
     const themeVariants = {
-        kr-dark: {
+        'KrDark': {
             container: {
                 outlined: `
                     border-2
                     ${error ? 'border-tertiary-waratah-red' : 'border-primary-wattle-gold/80'}
                     ${isFocused && !error ? 'border-primary-wattle-gold ring-2 ring-primary-wattle-gold/30' : ''}
-                    bg-surface-kr-dark-concrete-grey
+                    bg-surface-KrDark-concrete-grey
                     shadow-sm
                 `,
                 filled: `
                     border-b-2
                     ${error ? 'border-b-tertiary-waratah-red' : 'border-b-primary-wattle-gold/80'}
                     ${isFocused && !error ? 'border-b-primary-wattle-gold' : ''}
-                    bg-surface-kr-dark-concrete-grey
+                    bg-surface-KrDark-concrete-grey
                 `,
             },
             label: {
@@ -138,9 +123,9 @@ export const M3TextField = forwardRef<HTMLInputElement, M3TextFieldProps>(({
                 text: 'text-on-surface-paper-white',
                 placeholder: 'placeholder:text-secondary-concrete-grey/60',
             },
-            radius: 'rounded-[8px_12px_6px_10px]', // More organic for kr-dark
+            radius: 'rounded-[8px_12px_6px_10px]',
         },
-        kr-dark: {
+        'KrLight': {
             container: {
                 outlined: `
                     border-2
@@ -153,7 +138,7 @@ export const M3TextField = forwardRef<HTMLInputElement, M3TextFieldProps>(({
                     border-b-2
                     ${error ? 'border-b-tertiary-waratah-red' : 'border-b-outline-variant'}
                     ${isFocused && !error ? 'border-b-primary-wattle-gold' : ''}
-                    bg-surface-kr-dark-concrete-grey shadow-rest
+                    bg-surface-KrDark-concrete-grey shadow-rest
                 `,
             },
             label: {
@@ -165,13 +150,12 @@ export const M3TextField = forwardRef<HTMLInputElement, M3TextFieldProps>(({
                 text: 'text-on-surface-paper-white',
                 placeholder: 'placeholder:text-secondary-flannel-dim',
             },
-            radius: 'radius-stone', // Precise asymmetry for kr-dark
+            radius: 'radius-stone',
         },
     };
 
     const currentTheme = themeVariants[mode];
 
-    // Variant classes using current theme
     const variantClasses = {
         outlined: {
             container: currentTheme.container.outlined,
@@ -181,7 +165,6 @@ export const M3TextField = forwardRef<HTMLInputElement, M3TextFieldProps>(({
         },
     };
 
-    // Input classes with focus outline (WCAG 2.4.7)
     const inputClasses = `
         ${sizeClasses[size].input}
         w-full
@@ -203,26 +186,19 @@ export const M3TextField = forwardRef<HTMLInputElement, M3TextFieldProps>(({
         ${containerClassName}
     `;
 
-    // Character counter warning states
     const isOverLimit = maxLength && charCount > maxLength;
     const isNearLimit = maxLength && charCount > maxLength * 0.8;
-
     const displayHelperText = errorMessage || helperText;
 
     return (
         <div className={`flex flex-col ${fullWidth ? 'w-full' : 'w-auto'} relative`}>
-            {/* Input Container */}
             <div className={containerClasses}>
-                {/* Start Adornment */}
                 {startAdornment && (
                     <div className={`flex items-center ${sizeClasses[size].adornment} text-secondary-flannel-dim mr-2`}>
                         {startAdornment}
                     </div>
                 )}
-
-                {/* Input Field */}
                 <div className="flex-1 relative">
-                    {/* Floating Label */}
                     {label && (
                         <label
                             htmlFor={props.id}
@@ -241,8 +217,6 @@ export const M3TextField = forwardRef<HTMLInputElement, M3TextFieldProps>(({
                             {required && <span className="text-tertiary-waratah-red ml-1">*</span>}
                         </label>
                     )}
-
-                    {/* Input Element */}
                     <input
                         ref={ref}
                         className={inputClasses}
@@ -259,28 +233,22 @@ export const M3TextField = forwardRef<HTMLInputElement, M3TextFieldProps>(({
                         {...props}
                     />
                 </div>
-
-                {/* End Adornment */}
                 {endAdornment && (
                     <div className={`flex items-center ${sizeClasses[size].adornment} text-secondary-flannel-dim ml-2`}>
                         {endAdornment}
                     </div>
                 )}
             </div>
-
-            {/* Helper Text / Error Message / Character Counter */}
             {(displayHelperText || showCounter) && (
                 <div className="flex items-center justify-between mt-2 px-1">
                     {displayHelperText && (
                         <p
                             id={`${props.id}-helper-text`}
-                            className={`text-xs font-annotation ${error ? 'text-tertiary-waratah-red' : 'text-secondary-flannel-dim'
-                                }`}
+                            className={`text-xs font-annotation ${error ? 'text-tertiary-waratah-red' : 'text-secondary-flannel-dim'}`}
                         >
                             {displayHelperText}
                         </p>
                     )}
-
                     {showCounter && maxLength && (
                         <p
                             className={`
@@ -300,9 +268,6 @@ export const M3TextField = forwardRef<HTMLInputElement, M3TextFieldProps>(({
 
 M3TextField.displayName = 'M3TextField';
 
-/**
- * M3TextArea - Multi-line text input variant
- */
 export interface M3TextAreaProps extends Omit<React.TextareaHTMLAttributes<HTMLTextAreaElement>, 'size'> {
     label?: string;
     helperText?: string;
@@ -321,7 +286,7 @@ export const M3TextArea = forwardRef<HTMLTextAreaElement, M3TextAreaProps>(({
     error = false,
     errorMessage,
     size = 'medium',
-    mode = 'kr-dark',
+    mode = 'KrDark',
     fullWidth = false,
     showCounter = false,
     maxLength,
@@ -366,12 +331,12 @@ export const M3TextArea = forwardRef<HTMLTextAreaElement, M3TextAreaProps>(({
     };
 
     const themeVariants = {
-        kr-dark: {
+        'KrDark': {
             container: `
                 border-2
                 ${error ? 'border-tertiary-waratah-red' : 'border-primary-wattle-gold/80'}
                 ${isFocused && !error ? 'border-primary-wattle-gold ring-2 ring-primary-wattle-gold/30' : ''}
-                bg-surface-kr-dark-concrete-grey
+                bg-surface-KrDark-concrete-grey
                 shadow-sm
                 rounded-[8px_12px_6px_10px]
             `,
@@ -381,7 +346,7 @@ export const M3TextArea = forwardRef<HTMLTextAreaElement, M3TextAreaProps>(({
                 floating: 'text-secondary-flannel-dim',
             },
         },
-        kr-dark: {
+        'KrLight': {
             container: `
                 border-2
                 ${error ? 'border-tertiary-waratah-red' : 'border-outline-variant'}
@@ -425,7 +390,6 @@ export const M3TextArea = forwardRef<HTMLTextAreaElement, M3TextAreaProps>(({
                             {required && <span className="text-tertiary-waratah-red ml-1">*</span>}
                         </label>
                     )}
-
                     <textarea
                         ref={ref}
                         className={`
@@ -455,7 +419,6 @@ export const M3TextArea = forwardRef<HTMLTextAreaElement, M3TextAreaProps>(({
                     />
                 </div>
             </div>
-
             {(displayHelperText || showCounter) && (
                 <div className="flex items-center justify-between mt-2 px-1">
                     {displayHelperText && (
@@ -466,7 +429,6 @@ export const M3TextArea = forwardRef<HTMLTextAreaElement, M3TextAreaProps>(({
                             {displayHelperText}
                         </p>
                     )}
-
                     {showCounter && maxLength && (
                         <p
                             className={`

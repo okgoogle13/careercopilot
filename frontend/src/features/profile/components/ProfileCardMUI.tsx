@@ -1,7 +1,7 @@
 /**
- * kerala-rage kr-solidarity: PROFILE CARD (MUI Replacement)
+ * KeralaRage KrSolidarity: PROFILE CARD (MUI Replacement)
  *
- * Profile card component using kerala-rage kr-solidarity Design System v4.4.
+ * Profile card component using KeralaRage KrSolidarity Design System v4.4.
  * Refactored to use CSS variables from unified design tokens.
  */
 

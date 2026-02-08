@@ -17,9 +17,9 @@ export interface ValveProps extends Omit<
 }
 
 /**
- * Valve - kerala-rage kr-solidarity Toggle Switch
+ * Valve - KeralaRage KrSolidarity Toggle Switch
  *
- * An organic, viscous-motion toggle switch using kerala-rage botanical palette.
+ * An organic, viscous-motion toggle switch using KeralaRage botanical palette.
  * Features smooth transitions with viscous-breeze easing and botanical color theming.
  */
 export const Valve = forwardRef<HTMLInputElement, ValveProps>(

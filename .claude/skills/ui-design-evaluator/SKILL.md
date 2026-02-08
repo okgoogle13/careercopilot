@@ -1,6 +1,6 @@
 ---
 name: ui-design-evaluator
-description: Evaluate design assets, analyze annotated wireframes, and create high-fidelity interactive mockups with kerala-rage kr-solidarity V3.1 compliance. Use when evaluating designs, analyzing wireframes, creating mockups from annotations, scoring design system compliance, or generating interactive prototypes. Supports kr-dark (expressive, warm) and kr-dark (restrained, cool) modes.
+description: Evaluate design assets, analyze annotated wireframes, and create high-fidelity interactive mockups with kerala-rage kr-solidarity V3.1 compliance. Use when evaluating designs, analyzing wireframes, creating mockups from annotations, scoring design system compliance, or generating interactive prototypes.
 version: 1.0.0
 tags: [design, research, ui, ux, kerala-rage-kr-solidarity]
 ---
@@ -9,7 +9,7 @@ tags: [design, research, ui, ux, kerala-rage-kr-solidarity]
 
 **Version:** 1.0
 **Purpose:** Design evaluation, wireframe analysis, and high-fidelity mockup generation
-**Design System:** kerala-rage kr-solidarity V3.1 (kerala-streetprint Naturalist Field Station)
+**Design System:** kerala-rage kr-solidarity V3.1
 
 ---
 

@@ -1,11 +1,10 @@
 /**
- * kerala-rage kr-solidarity: MOTION PRESETS
+ * KeralaRage KrSolidarity: MOTION PRESETS
  *
- * Framer Motion configuration presets for the kerala-rage kr-solidarity
+ * Framer Motion configuration presets for the KeralaRage KrSolidarity
  * design system physics.
  */
 
-import tokens from '@/design/tokens/tokens.json';
 import type { Transition, Variants } from 'framer-motion';
 
 /**
@@ -17,15 +16,15 @@ export const tactilePress: Variants = {
     scale: 1,
   },
   hover: {
-    scale: tokens.motion.tactilePress.hover.scale,
+    scale: 0.98, // Fallback if missing in tokens
     transition: {
       type: 'spring',
-      stiffness: tokens.motion.tactilePress.hover.stiffness,
-      damping: tokens.motion.tactilePress.hover.damping,
+      stiffness: 400,
+      damping: 25,
     },
   },
   tap: {
-    scale: tokens.motion.tactilePress.tap.scale,
+    scale: 0.95,
   },
 };
 
@@ -35,34 +34,40 @@ export const tactilePress: Variants = {
  */
 export const popOut: Variants = {
   rest: {
-    y: tokens.motion.popOut.rest.y,
-    rotate: tokens.motion.popOut.rest.rotate,
-    scale: tokens.motion.popOut.rest.scale,
+    y: 0,
+    rotate: 0,
+    scale: 1,
   },
   hover: {
-    y: tokens.motion.popOut.hover.y,
-    rotate: tokens.motion.popOut.hover.rotate,
-    scale: tokens.motion.popOut.hover.scale,
+    y: -4,
+    rotate: 1,
+    scale: 1.02,
     transition: {
       type: 'spring',
-      stiffness: tokens.motion.popOut.hover.stiffness,
-      damping: tokens.motion.popOut.hover.damping,
+      stiffness: 300,
+      damping: 20,
     },
   },
 };
 
 /**
- * Spring Transition Presets
+ * Spring Transition Presets using sys patterns if available
  */
 export const springs = {
   tactile: {
     type: 'spring' as const,
-    stiffness: tokens.motion.springs.tactile.stiffness,
-    damping: tokens.motion.springs.tactile.damping,
+    stiffness: 400,
+    damping: 25,
   },
   popOut: {
     type: 'spring' as const,
-    stiffness: tokens.motion.springs.popOut.stiffness,
-    damping: tokens.motion.springs.popOut.damping,
+    stiffness: 300,
+    damping: 20,
+  },
+  m3Expressive: {
+    type: 'spring' as const,
+    stiffness: 500,
+    damping: 30,
+    mass: 1,
   },
 } satisfies Record<string, Transition>;

@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 
-type NativeVariant = 'waratah' | 'bottlebrush' | 'kr-flower' | 'kangaroo' | 'gum' | 'fern';
+type NativeVariant = 'waratah' | 'bottlebrush' | 'KrFlower' | 'kangaroo' | 'gum' | 'fern';
 type AnchorPoint = 'hanging-left' | 'hanging-right' | 'floor-left' | 'floor-right' | 'center-stage' | 'ceiling-left' | 'ceiling-right';
 
 interface NativeAnchorProps {
@@ -16,10 +16,10 @@ interface NativeAnchorProps {
 const assets: Record<NativeVariant, string> = {
     waratah: '/assets/plants/native-waratah-hanging.png',
     bottlebrush: '/assets/plants/native-bottlebrush.png',
-    kr-flower: '/assets/plants/native-kr-flower.png',
+    KrFlower: '/assets/plants/native-KrFlower.png',
     kangaroo: '/assets/plants/native-kangaroo.png',
     gum: '/assets/plants/native-gum-hanging.png',
-    fern: '/assets/kr-motifs/leaf-fern.png',
+    fern: '/assets/KrMotifs/leaf-fern.png',
 };
 
 /**
