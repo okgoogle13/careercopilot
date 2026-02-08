@@ -288,11 +288,10 @@ const ACTION_VERBS = [
     'achieved', 'improved', 'increased', 'reduced', 'optimized', 'coordinated',
     'facilitated', 'mentored', 'trained', 'delivered', 'executed', 'launched',
 ];
-const ACTION_VERB_PATTERN = new RegExp(ACTION_VERBS.join('|'), 'g');
+const ACTION_VERB_PATTERN = new RegExp(`\\b(?:${ACTION_VERBS.join('|')})\\b`, 'g');
 
 function countActionVerbs(text: string): number {
     const lowerText = text.toLowerCase();
-    ACTION_VERB_PATTERN.lastIndex = 0;
     const matches = lowerText.match(ACTION_VERB_PATTERN);
     return matches ? new Set(matches).size : 0;
 }
