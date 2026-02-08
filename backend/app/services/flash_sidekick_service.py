@@ -1,8 +1,6 @@
-
 import asyncio
 import json
 import os
-
 from app.services.mcp_utils import require_mcp_client
 
 class FlashSidekickService:
