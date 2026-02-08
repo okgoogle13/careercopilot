@@ -25,7 +25,7 @@ Eliminates manual prompt construction. Loads pattern library → applies templat
   "asset_name": "Nocturnal Canopy Pattern",
   "asset_type": "pattern_tile",
   "resolution": "512x512",
-  "mode": "Gallery",
+  "mode": "Solidarity",
   "specimens": ["Eucalyptus", "Wattle", "Banksia", "Gum nuts"],
   "primary_focus": "Botanical only (no fauna)",
   "special_requirements": ["Seamless tiling", "Edge-matching critical"],
@@ -170,7 +170,7 @@ CRITICAL FIXES:
 1. Load asset specifications JSON
 2. Query pattern library for applicable patterns
 3. If `asset_type == "pattern_tile"` → add seamless tiling spec
-4. If `mode == "Laboratory"` → apply clinical aesthetic overrides
+4. **Single Mode**: Always apply "Solidarity" aesthetic overrides.
 5. Map specimens → taxonomic significance database
 6. Generate negative constraints from common failures
 7. If `previous_attempt` exists → prepend corrections section
