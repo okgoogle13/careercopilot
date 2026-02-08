@@ -1,138 +1,74 @@
-Here’s a contemporary, street-art-aligned rewrite that keeps the spirit but drops the kerala-streetprint cabinet vibe.
+# Kerala Rage Design System – The Solidarity System
+
+> **Navigation**: [Overview](00-overview.md) · [Brand Brief](KERALA_RAGE_BRAND_BRIEF.md) · [Tokens](01-tokens.md) · [Typography](02-typography.md) · [Components](03-components.md) · [Voice](04-voice.md) · [Assets](05-assets.md) · [Wireframes](06-wireframes.md)
 
 ---
 
-# kerala-rage Design System – Contemporary Australian
+## System Identity: The Solidarity Press
 
-> **Navigation**: [Tokens](01-tokens.md) · [Typography](02-typography.md) · [Components](03-components.md) · [Voice](04-voice.md) · [Assets](05-assets.md) · [Wireframes](06-wireframes.md) [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/74141548/2c98fa71-c817-49f8-957d-da13857f9ca1/kerala-rage-design-principles.md)
+**We are not building a dashboard. We are building a living manifesto for migrants, POC, and career-changers moving through systems not built for them.**
 
----
+CareerCopilot is a tactical digital workspace where a user’s professional journey is treated as a collective history of resilience. The visual language is rooted in:
 
-## System Identity: The Laneway Navigator
+**1. Street Art & Resistance (PRIMARY)**
 
-**We are not building a dashboard. We are building a living navigation surface for migrants, POC, and career‑changers moving through systems not built for them.** [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/74141548/2c98fa71-c817-49f8-957d-da13857f9ca1/kerala-rage-design-principles.md)
+- **Peter Drew Influence**: Bold silhouettes, high-contrast stencils, and wheat-paste textures.
+- **Gritty Substrate**: Surfaces that feel like charcoal paper or weathered laneway walls.
+- **Solidarity Messaging**: Unapologetic, human-centric, and peers-to-peer.
 
-CareerCopilot is a curated digital workspace where a user’s professional history is treated not as “data,” but as a living ecosystem of experiences, skills, and stories that keep evolving. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/74141548/71e47c55-6a62-408b-a42b-69ec9db60ba8/README.md)
+**2. Screenprint Aesthetics (FOUNDATION)**
 
-The visual language is rooted in:
+- Visible registration marks, halftone patterns, and ink displacement.
+- High weight contrasts and visceral colors (Baru Gold, Waratah Red).
 
-**1. Peter Drew Street Art (PRIMARY)**
-- Bold silhouettes, poster-like contrast, unapologetic messaging
-- Wheat-paste aesthetic, rough textures, urban grit
-- Political clarity, direct communication, no subtlety
-- Reference: AUSSIE poster campaign (screen-printed, hand-pasted, community-driven)
+**3. Australian Contemporary Context (COLLECTIVE)**
 
-**2. Material 3 Expressive (FOUNDATION)**
-- Semantic tokens, spring physics, accessible dark UI. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/74141548/4afd3171-d177-47e4-81e0-4050adcaca29/tokens.json)
-- Extreme weight contrasts, variable fonts, organic asymmetry
-
-**3. Australian Context (ACCENT)**
-- Endemic species (kr-shiva, Waratah) as companions, not centerpieces
-- Earthy palette (ochre, wattle gold, gum leaf green)
-- Melbourne urban setting (laneways, trams, street culture)
+- Endemic species as solidarity mascots (Parrot, Waratah) rendered in high-contrast stencils.
+- Palette inspired by the collision of Kerala’s vibrant light and Melbourne’s urban grit.
 
 ---
 
-## Core Identity
+## Core Directives (Non-Negotiables)
 
-- **Contemporary, not nostalgic** — no sepia, no faux‑kerala-streetprint museum cabinets. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/74141548/2c98fa71-c817-49f8-957d-da13857f9ca1/kerala-rage-design-principles.md)
-- **Living, not preserved** — present‑tense, active scenes rather than “kr-motifs on display.” [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/74141548/2c98fa71-c817-49f8-957d-da13857f9ca1/kerala-rage-design-principles.md)
-- **Bold, not subtle** — high contrast, strong shapes, legible hierarchy. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/74141548/4afd3171-d177-47e4-81e0-4050adcaca29/tokens.json)
-- **Migrant‑centred, not system‑centred** — interfaces are built around the person navigating Centrelink, selection criteria, and hiring barriers, not around HR workflows. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/74141548/47446d17-47bd-4d14-ba14-c7869503af06/AGENTS.md)
+### A. Anti-Slop Protocol
 
----
+- **Banned**: Generic `border-radius: 8px`, pure white surfaces, corporate blue, and bureaucratic "passport" imagery.
+- **Required**: Organic asymmetry (Slab, Stone, Pebble), `charcoalBackground` (#1A1A1A), and semantic token usage.
 
-## Single Mode, Three Densities
+### B. Urban Context & Species as Mascot
 
-We’ve retired the kr-dark vs kr-dark split. There is **one unified contemporary mode**, expressed at different densities:
+- Species appear as stencils or screenprinted motifs, never as naturalistic "museum" specimens.
+- High contrast, bold silhouettes, and placement in "the urban void."
 
-| Density          | Use                                     | Visual Language                                                    |
-| ---------------- | --------------------------------------- | ------------------------------------------------------------------ |
-| **High Drama**   | Landing, hero moments, key empty states | Large poster-style silhouettes, urban textures, bold type contrast |
-| **Standard**     | Dashboards, lists, navigation           | Clean surfaces, subtle urban accents, clear hierarchy              |
-| **High Clarity** | Data review, parsing, ATS analysis      | Minimal decoration, high contrast, strong alignment, data-focused  |
+### C. Motion: The Stencil Slam
 
-**Species Usage by Density**:
-- **High Drama**: Optional large silhouette as background element (10% of layouts)
-- **Standard**: Small icons at margins (< 5% of surface area)
-- **High Clarity**: No species imagery (tokens and data only)
-
----
-
-## Core Directives (Non‑Negotiables)
-
-### A. Anti‑Slop Protocol
-
-| Banned                                    | Required                                                                                                                                                                                                                                             |
-| ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Generic `border-radius: 8px`              | **Organic asymmetry** using radius tokens with variation: `radius-pebble` (20px 6px 16px 28px), `radius-stone` (16px 4px 12px 24px), `radius-leaf` (24px 8px 20px 4px) — 4 different corners. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/74141548/3c4a620b-da4a-462e-bacc-412a0775f24c/01-tokens.md) |
-| Pure black / white (`#000000`, `#FFFFFF`) | **Asphalt Black** `#1A1714`, **Paper White** `#F5F0E8`. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/74141548/3c4a620b-da4a-462e-bacc-412a0775f24c/01-tokens.md)                       |
-| Arbitrary hex colors                      | **Semantic tokens** from `tokens.json` and `kerala-rage.css`. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/74141548/4afd3171-d177-47e4-81e0-4050adcaca29/tokens.json)                    |
-| Generic sans (Roboto/Arial/Inter alone)   | **Sora Variable** (display), **Plus Jakarta Sans Variable** (headers/body), **JetBrains Mono** (data). [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/74141548/03227b1a-986b-47ff-8d23-86257e7e16b8/02-typography.md) |
-| Heavy hard shadows                        | **Soft, layered elevation** using tokenized shadow levels. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/74141548/4afd3171-d177-47e4-81e0-4050adcaca29/tokens.json)                     |
-
-**Urban Textures**:
-- Concrete grain backgrounds (subtle noise, 5% opacity)
-- Paper texture overlays (recycled poster feel)
-- Asphalt gradients (not flat fills)
-
----
-
-### B. Urban Context & Species as Accents
-
-**Primary Visual Language** — Melbourne street art culture:
-- Laneway murals, wheatpaste posters, stencil graffiti
-- Community noticeboards, street signs, concrete textures
-- Peter Drew AUSSIE poster aesthetic — bold silhouettes, high contrast, unapologetic messages
-
-**Species as Accents** — Australian endemic flora/kr-symbol appear:
-- At margins and edges (not center-stage)
-- Small icons and companion elements (not heroes)
-- Urban context (on power lines, street signs, fences) when used
-- Common names first (kr-shiva before Latin)
-- Never as kr-motifs, cabinets, or naturalist collections
-
-**Anti‑colonial framing**:
-- No "kr-motif", "cabinet", "naturalist", or Federation‑era romance
-- Concentric circles, journey lines, and earth tones as **universal geometric references**, never as imitation of specific First Nations styles
-
----
-
-### C. Motion: The Viscous Breeze
-
-- **Primary curve**: `cubic-bezier(0.34, 1.56, 0.64, 1)` — gentle overshoot then settle. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/74141548/3c4a620b-da4a-462e-bacc-412a0775f24c/01-tokens.md)
-- **Durations**: 250–400ms as per Material 3 Expressive duration tokens. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/74141548/4afd3171-d177-47e4-81e0-4050adcaca29/tokens.json)
-- **Hover = Bloom**:
-  - Slight lift `translateY(-2px)`.
-  - Weight or emphasis increases (stronger contrast, subtle scale). [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/74141548/3c4a620b-da4a-462e-bacc-412a0775f24c/01-tokens.md)
-- Motion should feel like **breathing street posters**, not bouncy toys.
+- Motion should feel like heavy paper responding to a printing press.
+- **The Slam**: Headers and posters hit the surface with a dramatic overshoot.
+- **Hover = Bloom**: Elements lift and gain typographic weight, suggesting a "wet ink" expansion.
 
 ---
 
 ## Architecture Summary
 
-| Layer         | Technology                                                                                                                                                                                                                                                           |
-| ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Frontend      | React + Tailwind (or CSS Modules) with kerala-rage tokens applied. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/74141548/47446d17-47bd-4d14-ba14-c7869503af06/AGENTS.md)                                 |
-| Design Engine | `design-system/tokens.json` + `design-system/kerala-rage.css` (Material 3 Expressive structure). [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/74141548/4afd3171-d177-47e4-81e0-4050adcaca29/tokens.json) |
-| Backend       | FastAPI / Genkit / Firestore stack as per project README. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/74141548/47446d17-47bd-4d14-ba14-c7869503af06/AGENTS.md)                                        |
-| Primary Intel | Gemini 3.x (Flash + Pro) orchestrated via Genkit flows. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/74141548/47446d17-47bd-4d14-ba14-c7869503af06/AGENTS.md)                                          |
-| Sidekicks     | Design system sidekick for visual/token compliance where available. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/74141548/47446d17-47bd-4d14-ba14-c7869503af06/AGENTS.md)                              |
-| Testing       | Playwright visual checks + Jest/pytest for behavior. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/74141548/47446d17-47bd-4d14-ba14-c7869503af06/AGENTS.md)                                             |
+| Layer         | Technology                                              |
+| ------------- | ------------------------------------------------------- |
+| Frontend      | React + Tailwind/CSS Modules with Kerala Rage tokens.   |
+| Design Engine | `tokens.json` + `kerala-rage.css` (M3 Expressive base). |
+| Intel         | Gemini 3.x (Flash + Pro) orchestrated via Genkit flows. |
 
 ---
 
-## Master Palette (Contemporary)
+## Master Palette (Solidarity Mode)
 
-```txt
-MASTER PALETTE (DARK THEME)
-├── Background    Asphalt Black   #1A1714
-├── Text          Paper White     #F5F0E8
-├── Primary       Wattle Gold     #D4A84B
-├── Secondary     Waratah Red     #C45C4B
-├── Tertiary      Ochre Earth     #B8733D
-├── Neutral       Concrete Grey   #A39B8F
-└── Accent        Gum Leaf Green  #6B7F6E
-```
+| Token                   | Hex       | Vibe                  |
+| ----------------------- | --------- | --------------------- |
+| **Charcoal Background** | `#1A1A1A` | The raw substrate.    |
+| **Baru Gold**           | `#E6B34D` | Internal radiance.    |
+| **Waratah Red**         | `#D94A4A` | Tactical heat.        |
+| **Parrot Green**        | `#50C878` | Hybrid identity life. |
+| **Paper White**         | `#F5F0E8` | High-contrast ink.    |
 
-Use the **semantic tokens** for implementation; the hex values exist for reference and asset generation prompts, not for hard‑coding into components.
+---
+
+**Last Updated**: 2026-02-08
+**Target Architecture**: Gemini 3.x / Antigravity / Contemporary Australian Design System
