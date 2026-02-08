@@ -1,14 +1,9 @@
 
 import asyncio
-import os
 import json
-try:
-    from mcp import ClientSession, StdioServerParameters
-    from mcp.client.stdio import stdio_client
-except ImportError:  # pragma: no cover - optional dependency in test/CI
-    ClientSession = None
-    StdioServerParameters = None
-    stdio_client = None
+import os
+
+from app.services.mcp_utils import require_mcp_client
 
 class FlashSidekickService:
     """
@@ -29,8 +24,7 @@ class FlashSidekickService:
         """
         Extracts valid job listing URLs from a raw HTML search result page.
         """
-        if not ClientSession or not StdioServerParameters or not stdio_client:
-            raise RuntimeError("MCP client not installed")
+        ClientSession, StdioServerParameters, stdio_client = require_mcp_client()
         prompt = """
         You are an HTML parser. 
         Input: Raw HTML from a Google Search result page.
