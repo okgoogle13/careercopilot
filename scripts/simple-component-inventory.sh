@@ -5,7 +5,7 @@ echo "📊 Component Inventory Analysis"
 echo "================================"
 echo ""
 
-FRONTEND_DIR="/home/user/careercopilot/frontend/src/components"
+FRONTEND_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)/src/components"
 
 # Count all .tsx files
 TOTAL_TSX=$(find "$FRONTEND_DIR" -name "*.tsx" -not -path "*/_deprecated/*" -not -name "*.test.tsx" -not -name "*.stories.tsx" | wc -l)
@@ -45,14 +45,21 @@ echo "    ... (showing first 10)"
 echo ""
 
 echo "  Complex (>300 lines):"
-find "$FRONTEND_DIR" -name "*.tsx" -not -name "*.test.tsx" -not -name "*.stories.tsx" -not -path "*/_deprecated/*" -exec wc -l {} + | awk '$1 >= 300 {print "    " $2 " (" $1 " lines)")}'
+find "$FRONTEND_DIR" -name "*.tsx" -not -name "*.test.tsx" -not -name "*.stories.tsx" -not -path "*/_deprecated/*" -exec wc -l {} + | awk '$1 >= 300 {print "    " $2 " (" $1 " lines)"}'
 echo ""
 
 # Component duplicates check
 echo "🔍 Potential Duplicate Components:"
-find "$FRONTEND_DIR" -name "*.tsx" -not -name "*.test.tsx" -not -name "*.stories.tsx" -not -path "*/_deprecated/*" -exec basename {} \; | sort | uniq -d | while read -r basename; do
-  echo "  $basename found in:"
-  find "$FRONTEND_DIR" -name "$basename" -not -path "*/_deprecated/*" | sed 's/^/    /'
+find "$FRONTEND_DIR" -name "*.tsx" -not -name "*.test.tsx" -not -name "*.stories.tsx" -not -path "*/_deprecated/*" | while read -r file; do
+  basename=$(basename "$file")
+  if [ "$basename" == "index.tsx" ]; then
+    dirname=$(basename "$(dirname "$file")")
+    echo "$dirname"
+  else
+    echo "${basename%.*}"
+  fi
+done | sort | uniq -d | while read -r name; do
+  echo "  $name found in multiple locations."
 done
 echo ""
 
