@@ -1,4 +1,5 @@
 import { Pebble, StatusBadge, Stone } from '@/components/ui';
+import { ProfileHeader } from '@/components/ProfileHeader';
 import { motion } from 'framer-motion';
 import {
   Archive,
@@ -55,57 +56,12 @@ export function ProfileView() {
       </div>
 
       <div className="max-w-6xl mx-auto px-6 relative -mt-32 z-10">
-        {/* Header Section */}
-        <div className="flex flex-col md:flex-row items-end gap-8 mb-12">
-          <motion.div
-            initial={{ scale: 0.9, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            className="w-40 h-40 md:w-52 md:h-52 rounded-full border-8 border-asphalt-black bg-bark-light/10 shadow-glow-gold overflow-hidden relative group cursor-pointer"
-          >
-            <div className="absolute inset-0 flex items-center justify-center text-6xl group-hover:scale-110 transition-transform">
-              🧑‍💻
-            </div>
-            <div className="absolute inset-0 bg-wattle-gold/5 blur-[40px] opacity-0 group-hover:opacity-100 transition-opacity" />
-          </motion.div>
-
-          <div className="flex-1 pb-4 text-center md:text-left">
-            <div className="flex items-center justify-center md:justify-start gap-3 mb-2">
-              <span className="font-annotation text-[10px] text-wattle-gold uppercase tracking-[0.4em] opacity-60">
-                IDENTIFIER: NJD_08
-              </span>
-              <StatusBadge
-                label="ACTIVE"
-                variant="success"
-                showDot
-              />
-            </div>
-            <h1 className="font-bloom text-5xl md:text-7xl font-black text-paper-white tracking-tighter uppercase leading-none mb-4">
-              Nishant <span className="text-wattle-gold">Dougall</span>
-            </h1>
-
-            <div className="flex flex-wrap justify-center md:justify-start gap-6 text-concrete-grey text-xs font-annotation uppercase tracking-widest opacity-80">
-              <span className="flex items-center gap-2">
-                <MapPin className="w-3.5 h-3.5 text-wattle-gold" /> San Francisco, CL
-              </span>
-              <span className="flex items-center gap-2">
-                <Mail className="w-3.5 h-3.5 text-wattle-gold" /> nishant@arch.ive
-              </span>
-              <span className="flex items-center gap-2">
-                <LinkIcon className="w-3.5 h-3.5 text-wattle-gold" /> CC_NODE_691
-              </span>
-            </div>
-          </div>
-
-          <div className="pb-4">
-            <Pebble
-              variant="primary"
-              size="lg"
-              className="px-10 font-bold uppercase tracking-widest shadow-lg"
-            >
-              <Edit3 className="w-4 h-4 mr-2" /> RECALIBRATE
-            </Pebble>
-          </div>
-        </div>
+        <ProfileHeader
+          name="Nishant Dougall"
+          bio="Senior Full Stack Engineer / Metadata Architect"
+          identityTags={careerData?.skills?.slice(0, 3) || ['React.tsx', 'Neural.sys', 'Archival.Design']}
+          landAcknowledgment="Wurundjeri Woi-wurrung Country"
+        />
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
           {/* Main Column - Career Strata */}
