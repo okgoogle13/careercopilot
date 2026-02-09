@@ -1,5 +1,5 @@
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { PathSelectionCard } from '@/components/PathSelectionCard';
 import styles from './OnboardingPage.module.css';
 
 // Haeckel Icons for domains
@@ -45,21 +45,15 @@ export function OnboardingPage() {
         </p>
       </header>
 
-      <div className={styles.grid}>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-12 max-w-7xl mx-auto">
         {DOMAINS.map((domain) => (
-          <button
+          <PathSelectionCard
             key={domain.id}
-            className={`${styles.leafCard} ${selected === domain.id ? styles.selected : ''}`}
-            onClick={() => setSelected(domain.id)}
-          >
-            <div className={styles.iconWrapper}>
-              <img
-                src={domain.icon}
-                alt=""
-              />
-            </div>
-            <span className="text-annotation">{domain.name}</span>
-          </button>
+            title={domain.name}
+            description={`Specialize in ${domain.name} through the lens of Kerala Rage autonomy.`}
+            isSelected={selected === domain.id}
+            onSelect={() => setSelected(domain.id)}
+          />
         ))}
       </div>
 
