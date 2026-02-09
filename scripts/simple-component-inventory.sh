@@ -5,7 +5,7 @@ echo "📊 Component Inventory Analysis"
 echo "================================"
 echo ""
 
-FRONTEND_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)/src/components"
+FRONTEND_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)/frontend/src/components"
 
 # Count all .tsx files
 TOTAL_TSX=$(find "$FRONTEND_DIR" -name "*.tsx" -not -path "*/_deprecated/*" -not -name "*.test.tsx" -not -name "*.stories.tsx" | wc -l)
