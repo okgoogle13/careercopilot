@@ -1,3 +1,15 @@
+"""
+⚠️  IMPORTANT: THIS SCRIPT IS A WORKFLOW COORDINATOR
+
+This script scaffolds the design-to-code workflow but DOES NOT directly execute 
+the LLM-based logic (skills). It coordinates the artifacts and sequence.
+
+HOW TO USE WITH CLAUDE CODE:
+1. Run this script to generate initial scaffolds and paths.
+2. When the script prints 'Invoking skill...', copy that command.
+3. Run the command in your Claude Code terminal.
+4. After the skill completes, return to this script and approve/proceed.
+"""
 
 import argparse
 import os
@@ -69,9 +81,10 @@ def get_file_paths(component_name: str):
     """Returns standardized file paths for a component."""
     lower_name = component_name.lower()
     return {
-        "protocol": PROTOCOLS_DIR / "kerala-rage-protocol.md",
+        "protocol": PROTOCOLS_DIR / f"{lower_name}-protocol.md",
         "wireframe": WIREFRAMES_DIR / f"{lower_name}.md",
         "mockup": MOCKUPS_DIR / f"{lower_name}.html",
+        "validation_report": MOCKUPS_DIR / f"{lower_name}-validation.json",
         "spec": SPECS_DIR / f"{component_name}.md",
         "component_dir": COMPONENTS_DIR / component_name
     }
@@ -88,7 +101,7 @@ def mock_generate_file(path: Path, content: str, description: str):
 
 # --- Stages ---
 
-def run_structure_stage(component_name: str, brief_path: Path):
+def run_structure_stage(component_name: str, brief_path: Path, auto_approve: bool = False):
     """
     Stage 1: Structure (Lo-Fi)
     Goal: Validate layout, hierarchy, and API before any visual polish.
@@ -112,6 +125,19 @@ def run_structure_stage(component_name: str, brief_path: Path):
     print(f"3️⃣  Generating Component Specification...")
     run_skill("component_spec_generator", "--wireframe", str(paths["wireframe"]), "--component", component_name, "--out", str(paths["spec"]))
     mock_generate_file(paths["spec"], f"# Spec: {component_name}\n\n## Props\n- title: string\n...", "Spec")
+
+    # 4. Validation Gate
+    print(f"\n4️⃣  [QUALITY GATE] Running M3 Expressive validation on wireframe...")
+    print(f"   📊 Score target: ≥ 240/400 (Check {paths['wireframe']})")
+    run_skill("m3_expressive_ui_evaluator", "--wireframe", str(paths["wireframe"]), "--mode", "validate")
+    
+    if auto_approve:
+        print(f"   ⏩ Auto-approving gate for batch mode.")
+    else:
+        proceed = input("\n✅ Wireframe and validation approved? (y/n): ").lower() == 'y'
+        if not proceed:
+            print("   ❌ Workflow paused. Please refine wireframe/spec and re-run.")
+            sys.exit(0)
 
     print(f"\n🎉 Stage 1 Complete! Review the generated files:\n- {paths['wireframe']}\n- {paths['spec']}")
 
@@ -145,9 +171,18 @@ def run_visuals_stage(component_name: str, mode: str):
             print(f"   ✅ Created component directory: {paths['component_dir']}")
 
     elif mode == "migrate":
+        if not paths["component_dir"].exists():
+            print(f"❌ Error: Component directory not found at {paths['component_dir']}")
+            return
+
         print(f"2️⃣  Refactoring EXISTING Component '{component_name}' via Transformer...")
         run_skill("component_transformer", "--component-dir", str(paths["component_dir"]), "--spec", str(paths["spec"]), "--protocol", str(paths["protocol"]))
         print(f"   ℹ️  Transformer logic would apply here to {paths['component_dir']}")
+        
+        # 3. Post-Migration Validation
+        print(f"3️⃣  Validating migrated component against M3 Expressive standards...")
+        run_skill("m3_expressive_ui_evaluator", "--component", str(paths["component_dir"]), "--out-report", str(paths["validation_report"]))
+        print(f"   ✅ Validation complete. Check report at {paths['validation_report']}")
 
     print(f"\n🎉 Stage 2 Complete! Component is ready in {paths['component_dir']}")
 
@@ -160,6 +195,7 @@ def main():
     parser.add_argument("--brief", default=str(DEFAULT_BRIEF_PATH), help="Path to design brief")
     parser.add_argument("--stage", choices=["structure", "visuals", "full"], default="full", help="Workflow stage")
     parser.add_argument("--mode", choices=["new", "migrate", "auto"], default="auto", help="Implementation mode")
+    parser.add_argument("--auto-approve", action="store_true", help="Skip interactive approval gates (for batch mode)")
 
     args = parser.parse_args()
     
@@ -182,7 +218,7 @@ def main():
     
     # Execute Stages
     if args.stage in ["structure", "full"]:
-        run_structure_stage(args.component, brief_path)
+        run_structure_stage(args.component, brief_path, auto_approve=args.auto_approve)
     
     if args.stage in ["visuals", "full"]:
         run_visuals_stage(args.component, mode)

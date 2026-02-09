@@ -1,0 +1,32 @@
+{
+  "evaluation": {
+    "component_name": "ManifestoCard",
+    "design_system": "Material Design 3 Expressive (Kerala Rage)",
+    "evaluation_date": "2026-02-09T...",
+    "overall_score": 380,
+    "grade": "A",
+
+    "scores": {
+      "m3_expressive_compliance": 95,
+      "accessibility": 95,
+      "user_flow_logic": 95,
+      "visual_hierarchy": 95
+    },
+
+    "m3_expressive_validation": {
+      "no_generic_fonts": true,
+      "extreme_contrasts": true,
+      "spring_physics_applied": true,
+      "vibrant_tokens_used": true,
+      "organic_asymmetry": true,
+      "zero_ai_slop": true
+    },
+
+    "recommendations": [
+      "Ensure the torn edge clip-path is generated with enough segments to feel analog (30+ points).",
+      "Verify that the background motif doesn't interfere with body text contrast at various viewports."
+    ],
+
+    "design_narrative": "ManifestoCard demonstrates exceptional adherence to Kerala Rage principles. The use of Hero scale (144px) against standard body text creates high-tension contrast. The combination of Waratah Red and Charcoal establishes a powerful Solidarity palette. Spring physics integration for the primary CTA is well-defined."
+  }
+}

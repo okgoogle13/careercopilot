@@ -23,6 +23,14 @@ Use when porting legacy components (MUI, etc.) to the kerala-rage kr-solidarity 
 4. **Behavioral Preservation**: Ensure no business logic or event handlers are lost.
 5. **Verification**: Generate unit tests and Storybook stories.
 
+## Post-Migration Validation
+
+After transformation completes, run `m3-expressive-ui-evaluator`:
+- **Input**: Migrated component directory.
+- **Validate**: Meets Kerala Rage kr-solidarity / M3 Expressive standards.
+- **Score Target**: ≥ 240/400 to proceed to production.
+- **If issues found**: Iteratively re-transform or manually polish based on scoring feedback.
+
 ## Implementation Principles
 
 - **Anti-Slop**: Reject any transformation that results in a "generic SaaS" look.
