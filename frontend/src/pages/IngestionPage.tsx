@@ -1,4 +1,5 @@
 import { Pebble, Signal, Stone } from '@/components/ui';
+import { ApplicationForm } from '@/components/ApplicationForm';
 import { ValidationDashboard } from '@/features/onboarding/components/ValidationDashboard';
 import { useCareerIngestion } from '@/hooks/useCareerIngestion';
 import { CareerDatabase } from '@/types/api';
@@ -162,67 +163,14 @@ export const IngestionPage: React.FC = () => {
           </Signal>
         )}
 
-        {/* File Ingestion Zone (The Mulch) */}
-        <div
-          className={`
-            border-2 border-dashed rounded-stone p-12 text-center mb-10
-            transition-all duration-500 var(--ease-viscous-breeze)
-            ${isLoading ? 'opacity-30 border-paper-white/5 grayscale' : 'border-concrete-grey/20 hover:border-wattle-gold/50 hover:bg-white/[0.02]'}
-          `}
-        >
-          <input
-            accept=".pdf,.docx,.txt"
-            className="hidden"
-            id="file-upload"
-            multiple
-            type="file"
-            onChange={handleFileSelect}
-            disabled={isLoading}
+        {/* File Ingestion Zone (ApplicationForm) */}
+        <div className="mb-10">
+          <ApplicationForm
+            onUpload={(file) => {
+              setSelectedFiles([file]);
+            }}
+            isVerifying={isLoading}
           />
-
-          <label
-            htmlFor="file-upload"
-            className="cursor-pointer group"
-          >
-            <div className="mb-6 flex justify-center">
-              <Fingerprint
-                className={`w-12 h-12 transition-colors duration-500 ${isLoading ? 'text-paper-white/10' : 'text-concrete-grey group-hover:text-wattle-gold'}`}
-              />
-            </div>
-            <Pebble
-              variant="secondary"
-              disabled={isLoading}
-              className="pointer-events-none font-bold tracking-widest uppercase text-xs"
-              size="sm"
-            >
-              Deposit Payloads
-            </Pebble>
-            <p className="mt-4 font-annotation text-[9px] text-concrete-grey/40 uppercase tracking-tighter">
-              PDF / DOCX / TEXT KrMotifs accepted
-            </p>
-          </label>
-
-          {selectedFiles.length > 0 && (
-            <div className="mt-10 space-y-3">
-              {selectedFiles.map((file, idx) => (
-                <motion.div
-                  initial={{ x: -10, opacity: 0 }}
-                  animate={{ x: 0, opacity: 1 }}
-                  key={idx}
-                  className="flex items-center gap-4 p-4 bg-white/[0.02] rounded-stone border border-concrete-grey/10"
-                >
-                  <FileText className="w-4 h-4 text-wattle-gold/50" />
-                  <div className="text-left flex-grow">
-                    <div className="text-xs font-field-note text-paper-white/80">{file.name}</div>
-                    <div className="text-[10px] font-annotation text-concrete-grey-dark uppercase tracking-widest">
-                      Payload: {Math.round(file.size / 1024)} KB
-                    </div>
-                  </div>
-                  <CheckCircle className="w-3 h-3 text-concrete-grey" />
-                </motion.div>
-              ))}
-            </div>
-          )}
         </div>
 
         {/* Synthesis Trigger */}
@@ -236,28 +184,6 @@ export const IngestionPage: React.FC = () => {
         >
           {isLoading ? getStageMessage() : 'Initialize Harvesting'}
         </Pebble>
-
-        {/* Clinical Progress Visualization */}
-        {isLoading && (
-          <div className="mt-10 transition-all animate-in fade-in slide-in-from-top-4">
-            <div className="flex justify-between items-center mb-3">
-              <span className="font-annotation text-[10px] text-concrete-grey-dark tracking-[0.2em] uppercase">
-                Extraction Protocol In Progress
-              </span>
-              <span className="font-annotation text-[10px] text-wattle-gold font-bold">
-                {progress}%
-              </span>
-            </div>
-            <div className="w-full bg-asphalt-black-darkest h-1.5 rounded-full overflow-hidden border border-white/5">
-              <motion.div
-                className="bg-wattle-gold h-full shadow-[0_0_15px_rgba(212,168,75,0.4)]"
-                initial={{ width: 0 }}
-                animate={{ width: `${progress}%` }}
-                transition={{ duration: 0.5, ease: 'linear' }}
-              />
-            </div>
-          </div>
-        )}
 
         {/* KrDark Technical Audit */}
         <div className="mt-12 p-6 bg-asphalt-black/40 rounded-stone border border-concrete-grey/10 flex gap-5">

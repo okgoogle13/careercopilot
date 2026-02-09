@@ -1,4 +1,5 @@
 import { Pebble, StatusBadge, Stone } from '@/components/ui';
+import { JobList } from '@/components/JobList';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Briefcase, Compass, ExternalLink, MapPin, Search, Sparkles } from 'lucide-react';
 import { useState } from 'react';
@@ -158,64 +159,20 @@ export function Opportunities() {
             )}
 
             {results.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {results.map((link, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: index * 0.05 }}
-                  >
-                    <Stone
-                      mode="KrDark"
-                      elevation="floating"
-                      className="p-8 group hover:border-wattle-gold/40 transition-all cursor-pointer relative overflow-hidden"
-                    >
-                      <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-100 transition-opacity">
-                        <Briefcase className="w-8 h-8 text-wattle-gold" />
-                      </div>
-
-                      <div className="flex flex-col gap-4">
-                        <div className="flex items-center gap-3">
-                          <StatusBadge
-                            label="HIGH MATCH"
-                            variant="success"
-                            showDot
-                          />
-                          <span className="font-annotation text-[9px] text-concrete-grey uppercase tracking-[0.2em]">
-                            NODE_0{index + 1}
-                          </span>
-                        </div>
-
-                        <h3 className="font-bloom text-2xl font-black text-paper-white uppercase leading-tight group-hover:text-wattle-gold transition-colors">
-                          Opportunity Match Potential
-                        </h3>
-
-                        <div className="flex items-center gap-2 text-xs font-mono text-concrete-grey/60 break-all bg-asphalt-black/40 p-3 rounded border border-concrete-grey/10">
-                          <ExternalLink className="w-3 h-3 flex-shrink-0" />
-                          <a
-                            href={link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="hover:text-wattle-gold truncate"
-                          >
-                            {link}
-                          </a>
-                        </div>
-
-                        <div className="flex gap-2 pt-2">
-                          <div className="text-[9px] bg-bark-light/10 text-concrete-grey px-2 py-1 border border-concrete-grey/10 uppercase tracking-widest">
-                            Found via Search
-                          </div>
-                          <div className="text-[9px] bg-wattle-gold/10 text-wattle-gold px-2 py-1 border border-wattle-gold/20 uppercase tracking-widest">
-                            Analysis Recommended
-                          </div>
-                        </div>
-                      </div>
-                    </Stone>
-                  </motion.div>
-                ))}
-              </div>
+              <JobList
+                jobs={results.map((link, index) => ({
+                  id: `node-0${index + 1}`,
+                  title: "Opportunity Match Potential",
+                  location: "Found via Search",
+                  salary: "Analysis Recommended",
+                  tags: ["High Match", "Scout Dispatch"]
+                }))}
+                onJobSelect={(id) => {
+                  const index = parseInt(id.replace('node-0', '')) - 1;
+                  window.open(results[index], '_blank');
+                }}
+                isLoading={isLoading}
+              />
             ) : (
               !isLoading && (
                 <div className="text-center py-32 opacity-20 flex flex-col items-center">

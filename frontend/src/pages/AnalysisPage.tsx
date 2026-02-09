@@ -1,4 +1,5 @@
 import { Lens, LensArea, Pebble, StatusBadge, Stone } from '@/components/ui';
+import { SkillBreakdownCard } from '@/components/SkillBreakdownCard';
 import { EvidenceUploader } from '@/features/ingestion/components/EvidenceUploader';
 import { m3Toast } from '@/utils/toast';
 import { motion } from 'framer-motion';
@@ -143,56 +144,7 @@ export const AnalysisPage: React.FC = () => {
           </div>
         </div>
 
-        {/* Score/Gauge Summary (ASSET-05 Metaphor) */}
-        {atsResult && (
-          <div className="flex items-center gap-8 bg-asphalt-black/30 p-4 rounded-stone border border-concrete-grey/10">
-            <div className="relative w-24 h-24">
-              <img
-                src={grindingStone}
-                alt=""
-                className="absolute inset-0 w-full h-full object-cover rounded-full opacity-20 grayscale brightness-150"
-              />
-              <svg className="w-full h-full transform -rotate-90">
-                <circle
-                  cx="48"
-                  cy="48"
-                  r="40"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  fill="transparent"
-                  className="text-concrete-grey/10"
-                />
-                <motion.circle
-                  cx="48"
-                  cy="48"
-                  r="40"
-                  stroke="currentColor"
-                  strokeWidth="4"
-                  fill="transparent"
-                  strokeDasharray="251.2"
-                  initial={{ strokeDashoffset: 251.2 }}
-                  animate={{ strokeDashoffset: 251.2 - (251.2 * atsResult.overallScore) / 100 }}
-                  transition={{ duration: 1.5, ease: 'easeOut' }}
-                  className="text-wattle-gold"
-                />
-              </svg>
-              <div className="absolute inset-0 flex flex-col items-center justify-center">
-                <span className="text-2xl font-black text-paper-white">{atsResult.overallScore}</span>
-                <span className="text-[8px] font-annotation text-wattle-gold uppercase">Match</span>
-              </div>
-            </div>
-            <div className="space-y-1">
-              <span className="block font-annotation text-[10px] text-concrete-grey-dark uppercase tracking-widest">
-                Global Calibration
-              </span>
-              <StatusBadge
-                label={atsResult.overallScore > 70 ? 'HIGH_COMPATIBILITY' : 'REFINEMENT_REQUIRED'}
-                variant={atsResult.overallScore > 70 ? 'success' : 'warning'}
-                showDot
-              />
-            </div>
-          </div>
-        )}
+        {/* Score/Gauge Summary (Replaced by SkillBreakdownCard in sidebar) */}
       </header>
 
       {/* Main Grid: Lab Inputs and Evidence */}
@@ -346,39 +298,21 @@ export const AnalysisPage: React.FC = () => {
             </Stone>
           )}
 
-          {/* Diagnostic categories from quick check */}
+          {/* Skill Breakdown (Audit Microscope) */}
           {atsResult && (
-            <Stone
-              mode="KrDark"
-              elevation="raised"
-              className="border-concrete-grey/5 bg-asphalt-black-darkest"
-            >
-              <h3 className="font-annotation text-[10px] text-concrete-grey uppercase mb-6 flex items-center gap-2">
-                <Gauge className="w-3 h-3" /> Diagnostic Categories
-              </h3>
-              <div className="space-y-6">
-                {atsResult.categories.map((cat, idx) => (
-                  <div
-                    key={idx}
-                    className="space-y-2"
-                  >
-                    <div className="flex justify-between items-end">
-                      <span className="font-field-note text-xs text-paper-white/80">{cat.name}</span>
-                      <span className="font-annotation text-[10px] text-wattle-gold">
-                        {cat.score}%
-                      </span>
-                    </div>
-                    <div className="h-1 bg-white/5 rounded-full overflow-hidden">
-                      <motion.div
-                        initial={{ width: 0 }}
-                        animate={{ width: `${cat.score}%` }}
-                        className="h-full bg-concrete-grey/30"
-                      />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </Stone>
+            <SkillBreakdownCard
+              overallScore={atsResult.overallScore}
+              categories={atsResult.categories.map(cat => ({
+                label: cat.name,
+                value: cat.score,
+                details: cat.suggestions
+              }))}
+              onAction={(type) => {
+                if (type === 'strengthen') {
+                  m3Toast.success('Refining Tray', 'Identifying weak KrMotif filaments...');
+                }
+              }}
+            />
           )}
         </aside>
       </div>

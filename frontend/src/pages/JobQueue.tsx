@@ -1,4 +1,5 @@
 import { Cabinet, Pebble, StatusBadge, Stone, type StatusBadgeVariant } from '@/components/ui';
+import { KanbanCard } from '@/components/KanbanCard';
 import { m3Toast } from '@/utils/toast';
 import { CheckCircle, Clock, Copy, ExternalLink, FileText, Play, Sparkles } from 'lucide-react';
 import { useEffect, useState } from 'react';
@@ -192,78 +193,19 @@ export function JobQueue() {
             const isDrafting = draftingJobId === job.id;
 
             return (
-              <Stone
+              <KanbanCard
                 key={job.id}
-                mode="KrDark"
-                elevation="raised"
-                className="flex flex-col h-full group p-0 overflow-hidden"
-              >
-                <div className="px-6 pt-6 flex justify-between items-start mb-6">
-                  <StatusBadge
-                    label={statusConfig[job.status].label}
-                    variant={statusConfig[job.status].variant}
-                    showDot
-                  />
-                  <span className="text-[10px] font-annotation text-[var(--color-concrete-grey-dark)] uppercase tracking-widest bg-white/5 px-2 py-1 rounded">
-                    {formatDate(job.date_clipped)}
-                  </span>
-                </div>
-
-                <div className="px-6 mb-6 flex-1">
-                  <h3 className="font-bloom text-2xl font-bold text-[var(--color-paper-white)] mb-2 group-hover:text-[var(--color-wattle-gold)] transition-colors">
-                    {job.title}
-                  </h3>
-                  <p className="font-field-note text-lg text-[var(--color-concrete-grey-dark)] italic">
-                    {job.company}
-                  </p>
-
-                  {job.notes && (
-                    <div className="mt-4 p-4 bg-white/5 rounded-stone border border-white/5">
-                      <p className="font-field-note text-sm text-[var(--color-paper-white)]/70 italic">
-                        "{job.notes}"
-                      </p>
-                    </div>
-                  )}
-                </div>
-
-                <div className="px-6 pb-6 flex flex-col gap-3 mt-auto">
-                  <Pebble
-                    variant="primary"
-                    size="md"
-                    iconLeft={!isAnalyzing && <Play className="w-4 h-4" />}
-                    onClick={() => handleAnalyze(job.id)}
-                    disabled={job.status !== 'pending_analysis' || isAnalyzing}
-                    isLoading={isAnalyzing}
-                    className="w-full"
-                  >
-                    {isAnalyzing ? 'Analyzing' : 'Analyze Intelligence'}
-                  </Pebble>
-
-                  {job.status === 'ready_to_apply' && (
-                    <Pebble
-                      variant="secondary"
-                      size="md"
-                      iconLeft={!isDrafting && <FileText className="w-4 h-4" />}
-                      onClick={() => handleDraft(job.id, job.title, job.company)}
-                      disabled={isDrafting}
-                      isLoading={isDrafting}
-                      className="w-full"
-                    >
-                      {isDrafting ? 'Drafting' : 'Synthesize Letter'}
-                    </Pebble>
-                  )}
-
-                  <Pebble
-                    variant="ghost"
-                    size="md"
-                    iconLeft={<ExternalLink className="w-4 h-4" />}
-                    onClick={() => window.open(job.url, '_blank')}
-                    className="w-full opacity-70 hover:opacity-100"
-                  >
-                    Inspect Source
-                  </Pebble>
-                </div>
-              </Stone>
+                id={job.id}
+                title={job.title}
+                description={job.notes || job.company}
+                status={statusConfig[job.status].label}
+                priority="medium"
+                dueDate={formatDate(job.date_clipped)}
+                onSelect={() => {
+                   if (job.status === 'pending_analysis') handleAnalyze(job.id);
+                   else if (job.status === 'ready_to_apply') handleDraft(job.id, job.title, job.company);
+                }}
+              />
             );
           })}
         </div>
