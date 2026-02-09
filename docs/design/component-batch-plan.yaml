@@ -2,21 +2,25 @@ components:
   - name: ManifestoCard
     mode: migrate
     priority: high
+    reference: true
   - name: LoginCard
     mode: new
     priority: high
   - name: JobList
     mode: new
     priority: high
+    reference: true
   - name: ApplicationForm
     mode: new
     priority: high
   - name: ProfileHeader
     mode: migrate
     priority: high
+    reference: true
   - name: SkillBreakdownCard
     mode: new
     priority: medium
+    reference: true
   - name: KanbanCard
     mode: new
     priority: medium
