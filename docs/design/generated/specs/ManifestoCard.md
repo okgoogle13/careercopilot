@@ -1,52 +1,42 @@
-# Component Spec: ManifestoCard
+# Spec: ManifestoCard
 
-## 1. Component Description
-A high-impact card for displaying revolutionary manifestos and collective declarations. Enforces "Solidarity Mode" aesthetics with M3 Expressive principles.
-
-## 2. TypeScript Interface
+## TypeScript Interface
 ```typescript
 interface ManifestoCardProps {
-  /** The bold declaration title */
   title: string;
-  /** The manifesto content text */
   content: string;
-  /** Label for the primary action button */
   actionLabel?: string;
-  /** Callback triggered on action click */
   onAction?: () => void;
-  /** Optional background motif visibility */
-  showMotif?: boolean;
+  showMotif?: boolean; // Default: true
+  className?: string;
 }
 ```
 
-## 3. State Management
-- **Local State**:
-    - `interactionState`: 'idle' | 'hover' | 'active'
-    - `submissionStatus`: 'idle' | 'loading' | 'success' | 'error'
+## State Management
+- **Hover State**: Local boolean for bloom effect (weight/shadow).
+- **Press State**: Local boolean for active scaling.
 
-## 4. Design Token Mapping
-| Element | Category | CSS/Tailwind Class |
-|---------|----------|-------------------|
-| Container | Layout/Surface | `bg-charcoal-100 shadow-viscous clip-path-tear` |
-| Title | Typography | `text-display-lg font-solidarity-800 text-waratah-red` |
-| Body | Typography | `text-body-lg font-direct-action-450 text-paper-white/80` |
-| Action Button | Component | `bg-baru-gold text-charcoal shadow-hover-rise rounded-pebble` |
-| Background Motif | Asset | `opacity-10 pointer-events-none z-0` |
+## Accessibility Spec
+- **ARIA Roles**: `role="article"`
+- **Keyboard**: Button must be reachable via `Tab`, triggered via `Enter/Space`.
 
-## 5. Accessibility (ARIA)
-- **Role**: `article`
-- **Landmarks**: `h2` for title, `button` for action.
-- **Labels**: 
-    - Card: `aria-label="Manifesto: {title}"`
-    - Action: `aria-label="Commit to {actionLabel}"`
+## Design Token Mapping
+- **Container**: `bg-[#1a1a1a]`, `rounded-[16px_4px_12px_24px]`, `shadow-[4px_4px_0px_#2a2a2a]`
+- **Title**: `text-[48px]`, `font-weight-800`, `text-[#F14714]`
+- **Content**: `text-[18px]`, `font-weight-450`, `text-[#F5F0E8]/80`
+- **Button**: `bg-[#DAF674]`, `text-[#1a1a1a]`, `rounded-[20px_6px_16px_28px]`
 
-## 6. Micro-interactions
-- **Entrance**: Framer Motion `initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ type: "spring", stiffness: 100, damping: 12 }}`.
-- **Hover**: Scale `1.03`, shadow intensification.
-- **Action Click**: `scale: 0.95`, haptic pulse simulation.
+## Test Stubs
+```javascript
+test('renders manifesto title and content', () => {
+  render(<ManifestoCard title="REVOLT" content="Backwaters to Brunswick" />);
+  expect(screen.getByText('REVOLT')).toBeInTheDocument();
+});
 
-## 7. Test Stubs
-- [ ] Renders title and content correctly.
-- [ ] Triggers `onAction` when clicked.
-- [ ] Displays loading pulse when `submissionStatus` is 'loading'.
-- [ ] Accessibility: Passes `axe` audit for contrast and roles.
+test('calls onAction when button clicked', () => {
+  const handler = jest.fn();
+  render(<ManifestoCard title="T" content="C" onAction={handler} />);
+  fireEvent.click(screen.getByRole('button'));
+  expect(handler).toHaveBeenCalled();
+});
+```
