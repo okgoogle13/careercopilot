@@ -25,7 +25,7 @@
 ### "I need to validate or audit something"
 
 - **Code Quality**: [audit-agent](#audit-agent)
-- **Design System**: [compliance-dashboard](#compliance-dashboard), [kerala-rage-asset-cataloger](#kerala-rage-asset-cataloger), [m3-expressive-compliance-dashboard](#m3-expressive-compliance-dashboard)
+- **Design System**: [compliance-dashboard](#compliance-dashboard), [kerala-rage-asset-cataloger](#kerala-rage-asset-cataloger), [m3-expressive-compliance-dashboard](#m3-expressive-compliance-dashboard), [kerala-automation-auditor](#kerala-automation-auditor)
 - **Brand Briefs**: [brand-brief-optimizer](#brand-brief-optimizer)
 - **Design Assets**: [auto-validator](#auto-validator)
 
@@ -69,10 +69,11 @@
 - [kerala-rage-asset-cataloger](#kerala-rage-asset-cataloger) - Visual triage and gap analysis for design assets
 - [asset-placement-strategy](#asset-placement-strategy) - Strategic placement of kerala-rage kr-solidarity artifacts (Seeds, Pebbles, Lenses, Stones) with biological asymmetry
 
-#### Tracking (2)
+#### Tracking & Auditing (3)
 
 - [compliance-dashboard](#compliance-dashboard) - Real-time kerala-rage kr-solidarity compliance metrics
 - [m3-expressive-compliance-dashboard](#m3-expressive-compliance-dashboard) - M3 Expressive adoption tracking
+- [kerala-automation-auditor](#kerala-automation-auditor) - Audit component automation progress (Stage 1 & 2)
 
 #### Planning & Documentation (2)
 
@@ -212,13 +213,13 @@
 - **#validation**: m3-anti-slop-validator, m3-visual-audit, kerala-rage-visual-audit, design-token-validator, auto-validator, vision-scorer-mcp
 - **#scaffolding**: storybook-scaffolder, component-spec-generator, jest-test-scaffolder, pytest-test-scaffolder, pydantic-model-scaffolder
 - **#generation**: ui-design-evaluator, m3-expressive-ui-evaluator, m3-expressive-token-orchestrator, asset-packager, batch-processor
-- **#analysis**: audit-agent, project-health-checker, compliance-dashboard, m3-expressive-compliance-dashboard
+- **#analysis**: audit-agent, project-health-checker, compliance-dashboard, m3-expressive-compliance-dashboard, kerala-automation-auditor
 - **#optimization**: brand-brief-optimizer, pattern-learner, prompt-composer
 
 ### By Design System
 
 - **#m3-expressive**: m3-expressive-typography-enhancer, m3-anti-slop-validator, m3-visual-audit, m3-expressive-ui-evaluator, m3-expressive-token-orchestrator, m3-expressive-compliance-dashboard
-- **#kerala-rage**: kerala-rage-typography-strategy, kerala-rage-visual-audit, kerala-rage-brand-enforcer, kerala-rage-asset-cataloger, compliance-dashboard
+- **#kerala-rage**: kerala-rage-typography-strategy, kerala-rage-visual-audit, kerala-rage-brand-enforcer, kerala-rage-asset-cataloger, compliance-dashboard, kerala-automation-auditor
 
 ### By Technology
 
@@ -230,7 +231,7 @@
 
 ### By Project
 
-- **#careercopilot**: careercopilot-agent-scaffolder, careercopilot-tool-creator, webapp-testing
+- **#careercopilot**: careercopilot-agent-scaffolder, careercopilot-tool-creator, webapp-testing, kerala-automation-auditor
 - **#generic**: (All others - applicable to any project)
 
 ---
