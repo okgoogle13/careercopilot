@@ -283,14 +283,20 @@ function extractKeywords(text: string): string[] {
     return [...new Set(words.filter((w) => !stopWords.has(w)))];
 }
 
+const ACTION_VERBS = [
+    'led', 'managed', 'created', 'developed', 'implemented', 'designed',
+    'achieved', 'improved', 'increased', 'reduced', 'optimized', 'coordinated',
+    'facilitated', 'mentored', 'trained', 'delivered', 'executed', 'launched',
+];
+const ACTION_VERB_PATTERN = new RegExp(`\\b(?:${ACTION_VERBS.join('|')})\\b`, 'gi');
+
 function countActionVerbs(text: string): number {
-    const actionVerbs = [
-        'led', 'managed', 'created', 'developed', 'implemented', 'designed',
-        'achieved', 'improved', 'increased', 'reduced', 'optimized', 'coordinated',
-        'facilitated', 'mentored', 'trained', 'delivered', 'executed', 'launched',
-    ];
-    const lowerText = text.toLowerCase();
-    return actionVerbs.filter((verb) => lowerText.includes(verb)).length;
+    const matches = text.match(ACTION_VERB_PATTERN);
+    if (!matches) {
+        return 0;
+    }
+    const normalizedMatches = matches.map((match) => match.toLowerCase());
+    return new Set(normalizedMatches).size;
 }
 
 function detectQuantifiers(text: string): string[] {
