@@ -5,11 +5,11 @@
 This guide explains how to use the automated design workflow to transform high-level design briefs into production-ready assets and code.
 
 The workflow leverages a 5-step process:
-1.  **Formalization**: Convert Design Brief -> Protocol
-2.  **Wireframing (Lo-Fi)**: Protocol -> ASCII Wireframes
-3.  **Visual Design (Hi-Fi)**: Wireframes -> HTML Mockups
-4.  **Specification**: Mockups -> Component Specs
-5.  **Implementation**: Specs -> React Code
+This guide explains how to use the **Two-Stage Design Workflow** to transform high-level design briefs into production-ready assets and code. The workflow separates structural definition from visual implementation, allowing for review and refinement.
+
+### Stages
+1.  **Structure (Lo-Fi)**: Validates layout, hierarchy, and API contract. Generates Protocols, Wireframes, and Specs.
+2.  **Visuals (Hi-Fi)**: Applies visual design and implements code. Generates HTML Mockups and React Components.
 
 ## Usage
 
@@ -19,42 +19,6 @@ The workflow leverages a 5-step process:
 
 ### Running the Automation Script
 
-The `automate_design_workflow.py` script orchestrates the first 3 steps (Formalization -> Mockup).
-
-```bash
-# Basic usage
-python3 scripts/automate_design_workflow.py --component LoginCard
-
-# Specify fidelity (lo-fi only)
-python3 scripts/automate_design_workflow.py --component LoginCard --fidelity lo-fi
-
-# Specify custom brief
-python3 scripts/automate_design_workflow.py --component LoginCard --brief docs/design/CUSTOM_BRIEF.md
-```
-
-### Outputs
-
-The script generates artifacts in `docs/design/generated/`:
-
--   `protocols/`: System protocols defining the rules.
--   `wireframes/`: ASCII wireframes for layout validation.
--   `mockups/`: High-fidelity HTML mockups for visual validation.
-
-### Next Steps (Manual Handoff)
-
-Once the artifacts are generated, proceed with the agent-assisted implementation:
-
-1.  **Generate Specs**:
-    ```bash
-    # Feed the generated wireframe to the Component Spec Generator skill
-    # (Agent Prompt Example)
-    "Use component-spec-generator to create specs for LoginCard using docs/design/generated/wireframes/logincard.md"
-    ```
-
-2.  **Build Component**:
-    ```bash
-    # Feed the specs to the Component Builder skill
-    # (Agent Prompt Example)
     "Build the LoginCard component based on the specs in src/components/LoginCard/README.md"
     ```
 
