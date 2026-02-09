@@ -128,7 +128,7 @@ def run_structure_stage(component_name: str, brief_path: Path, auto_approve: boo
 
     # 4. Validation Gate
     print(f"\n4️⃣  [QUALITY GATE] Running M3 Expressive validation on wireframe...")
-    print(f"   📊 Score target: ≥ 240/400 (Check {paths['wireframe']})")
+    print(f"   📊 Score target: ≥ 320/400 (Check {paths['wireframe']})")
     run_skill("m3_expressive_ui_evaluator", "--wireframe", str(paths["wireframe"]), "--mode", "validate")
     
     if auto_approve:

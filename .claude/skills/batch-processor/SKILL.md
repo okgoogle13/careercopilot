@@ -112,7 +112,7 @@ If 1 out of 5 components fails validation or build:
 ## Troubleshooting
 
 ### "Validation Gate 1 Failed for Component X"
-*   **Cause**: The wireframe score is below threshold (e.g., < 240/400).
+*   **Cause**: The wireframe score is below threshold (e.g., < 320/400).
 *   **Fix**: Review `wires/component-x.md`. Manually specific constraints in the prompt to improve M3 alignment. Re-run `wireframe-annotator` for that specific component.
 
 ### "Merge Conflict in Consolidated Commit"
