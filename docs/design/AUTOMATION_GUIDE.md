@@ -22,6 +22,16 @@ This guide explains how to use the **Two-Stage Design Workflow** to transform hi
     "Build the LoginCard component based on the specs in src/components/LoginCard/README.md"
     ```
 
+## Reference Patterns
+
+When generating new components or refactoring existing ones, use these "Strong" (Score > 360/400) components as canonical examples of Kerala Rage / Solidarity Mode morphology, motion, and accessibility:
+
+1.  **[ManifestoCard](file:///Users/okgoogle13/Desktop/careercopilot/src/components/ManifestoCard/index.tsx)** (380/400): Exemplar for torn edges (`clip-path-tear`), viscous shadows, and Waratah Red accents.
+2.  **[ProfileHeader](file:///Users/okgoogle13/Desktop/careercopilot/src/components/ProfileHeader/index.tsx)** (374/400): Exemplar for high-contrast typography scaling and identity-first land acknowledgments.
+3.  **[SkillBreakdownCard](file:///Users/okgoogle13/Desktop/careercopilot/src/components/SkillBreakdownCard/index.tsx)** (368/400): Exemplar for blueprint watermarks, radial score gauges, and Baru Gold radiance.
+
+*Future components should match the patterns, token usage, and motion physics established in these files.*
+
 ## Fidelity Levels
 
 -   **Lo-Fi (ASCII)**: Best for validating layout, hierarchy, and content structure without visual distraction.
