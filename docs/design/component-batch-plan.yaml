@@ -27,3 +27,19 @@ components:
   - name: PathSelectionCard
     mode: new
     priority: medium
+  - name: TestComponentB
+    mode: migrate
+    priority: medium
+  - name: Lens
+    mode: migrate
+    priority: high
+    target:
+      tests: basic
+  - name: Jar
+    mode: migrate
+    priority: high
+    target:
+      tests: basic
+  - name: NewModule
+    mode: new
+    priority: high
