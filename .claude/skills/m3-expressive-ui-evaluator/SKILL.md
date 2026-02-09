@@ -22,6 +22,20 @@ Use this skill when you need to:
 - **Transform baseline M3** designs into M3 Expressive
 - **Validate design decisions** against M3 Expressive principles
 
+## When to Invoke
+
+### Option 1: Early Validation (Post-Wireframing)
+- **After**: `wireframe-annotator` produces wireframes.
+- **Purpose**: Validate M3 Expressive compliance before spec generation.
+- **Output**: Score + feedback for refinement.
+- **Gate**: Aim for score ≥ 240/400 to proceed to specs.
+
+### Option 2: Mockup Generation (Pre-Implementation)
+- **After**: `component-spec-generator` produces implementation specs.
+- **Purpose**: Generate high-fidelity interactive mockups for stakeholder review.
+- **Output**: Interactive HTML prototype + React component scaffolding.
+- **Gate**: Use mockup to verify visual intent matches technical specs.
+
 ## Process
 
 ```
