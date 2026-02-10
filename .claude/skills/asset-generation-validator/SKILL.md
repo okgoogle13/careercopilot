@@ -1,15 +1,15 @@
 ---
-name: auto-validator
-description: Programmatic asset compliance validation using vision analysis and kerala-rage scorecard. Eliminates manual validation loops—upload image, receive scored JSON with correction prompts in 30 seconds.
+name: asset-generation-validator
+description: Programmatic validation for Gemini/DALL-E-generated botanical assets. Automated compliance scoring across 6 dimensions with correction prompts. Replaces manual validation loops—30-second assessment with binary decision (PACKAGE vs. REGENERATE).
 version: 1.0.0
-tags: []
+tags: [validation, asset-generation, vision-analysis, kerala-rage, automation]
 ---
 
-# Auto-Validator Skill
+# Asset Generation Validator Skill
 
 ## Purpose
 
-Automates kerala-rage kr-solidarity asset validation. Upload generated image → receive compliance JSON with scores, violations, and auto-generated correction prompt. Replaces 10-minute conversational validation with 30-second programmatic assessment.
+Automates compliance validation for **generated assets** (Gemini/DALL-E output). Upload generated image → receive compliance JSON with scores, violations, and auto-generated correction prompt. Designed specifically for iterating on decorative botanical assets, not UI components. Replaces 10-minute conversational validation with 30-second programmatic assessment.
 
 ## When to Use
 
