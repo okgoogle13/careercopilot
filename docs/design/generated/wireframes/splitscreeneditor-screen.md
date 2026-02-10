@@ -2,55 +2,46 @@
 
 <layout>
 ```text
-+------------------------------------------+
-| [ Header / Nav ]                         |
-+------------------------------------------+
-|                                          |
-|  [ Hero / Manifesto ]                    |
-|                                          |
-+------------------------------------------+
-|                                          |
-|  [ Content / Cards ]                     |
-|                                          |
-+------------------------------------------+
-| [ Footer ]                               |
-+------------------------------------------+
+┌────────┬──────────────────┬──────────────────┐
+│        │                  │                  │
+│ TOOLS  │    LEFT PANEL    │   RIGHT PANEL    │
+│ STONE  │    (Z-1 Stone)   │   (Z-1 Stone)    │
+│ (Z-2)  │    CODE / DATA   │   VIEW / RESULT  │
+│        │                  │                  │
+├────────┴──────────────────┴──────────────────┤
+│ Z-0: {kr-asset-blueprint-grid} (12% opacity) │
+└──────────────────────────────────────────────┘
 ```
 </layout>
 
 <tokens>
-- **Container**: `surface-charcoal`, `shadow-viscous`
-- **HeroTitle**: `Hero-144px`, `Solidarity-800`, `Waratah-Red`
-- **Body**: `Body-16px`, `Direct-Action-450`, `On-Surface-Ash`
-- **PrimaryAction**: `Baru-Gold-Surface`, `shadow-hover-rise`
+- **Ink**: `baruGold` (Line/Border), `kr-leafusAsh` (Text)
+- **Shapes**: `radius-stone` (Panels), `radius-pebble` (Tool Icons)
+- **Typography**: `Metadata` (12px, JetBrains Mono)
 </tokens>
 
 <assets>
-- Hero motif: `Elephant-Motif`, 1x, top-right, 20% opacity.
-- Background texture: `Torn-Edge-Texture`, full-width, bottom.
-- Icon set: `Solidarity-Icon-Pack` (filter, sort, bookmark).
+- **Textures**: `blueprint-grid` (Z-0)
+- **Motifs**: none (purely functional)
+- **Register**: Possibility
 </assets>
 
 <components>
-- ManifestoCard (card)
-  - Used: hero manifesto section.
-  - Assets: background motif (elephant), torn edge.
-- SkillBreakdownCard (card)
-  - Used: data visualization section.
-  - Assets: botanical-motif.
+- **EditorPanel** (stone)
+  - Role: Code/Data editing area.
+- **PreviewPanel** (stone)
+  - Role: Visual result display.
+- **ToolPebble** (pebble)
+  - Role: Action icons (Save, Run, Debug).
 </components>
 
 <annotations>
-1 | hero_title        | Content: max-chars: 80; Style: display-heading; State: default.
-2 | btn_primary_cta   | Action: onClick → POST /api/apply, then nav → /application/success; State: default, loading, error.
-3 | job_search_input  | Input: type=text; max-chars: 60; Validation: non-empty; State: default, focused, error.
-4 | job_list_item     | Data: bound to jobs[]; Layout: 1-line title, 1-line org/location; Truncate: ellipsis on overflow.
-5 | toast_error       | State: visible when form submit fails; Content: "Something went wrong"; Auto-hide: 6s; Role: status.
-6 | layout_grid       | Breakpoints: mobile=1col, tablet=2col, desktop=3col; Gutter: 16px.
-7 | form_apply        | System: onSubmit → POST /api/applications; Retry: 3x on 5xx.
+1 | split_pane        | Behavior: resizable horizontal; divider=baruGold (2px).
+2 | left_panel        | Content: monospaced code; Syntax: YAML/JSON; State: editing, readonly.
+3 | right_panel       | Content: visual preview (Component/Canvas); State: default, loading, error.
+4 | save_btn          | Action: onClick → POST /api/save; Style: radius-pebble; Location: top toolbar.
 </annotations>
 
 <notes>
-- Flow: primary path is “Read manifesto → Search jobs → Apply”.
-- Edge cases: empty job list state, offline banner.
+- Goal: Detailed technical editing of solidarity blueprints.
 </notes>

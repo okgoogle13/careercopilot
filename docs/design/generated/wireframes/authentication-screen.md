@@ -2,55 +2,63 @@
 
 <layout>
 ```text
-+------------------------------------------+
-| [ Header / Nav ]                         |
-+------------------------------------------+
-|                                          |
-|  [ Hero / Manifesto ]                    |
-|                                          |
-+------------------------------------------+
-|                                          |
-|  [ Content / Cards ]                     |
-|                                          |
-+------------------------------------------+
-| [ Footer ]                               |
-+------------------------------------------+
+┌─────────────────────────────────────────────────────────────┐
+│                                                             │
+│  Z-3: {kr-asset-screenprint-grit} (card-adjacent)           │
+│                                                             │
+│              ┌─────────────────────────┐                   │
+│              │                         │                   │
+│              │    "VERIFY IDENTITY"    │  Z-2              │
+│              │    Stone Container      │                   │
+│              │    480px width          │                   │
+│              │                         │                   │
+│              └─────────────────────────┘                   │
+│                                                             │
+│              ┌─────────────────────────┐                   │
+│              │  {kr-asset-halo-disk}   │  Z-1              │
+│              │  (60% opacity)          │                   │
+│              └─────────────────────────┘                   │
+│                                                             │
+│ Z-0: {kr-asset-screenprint-substrate} (15% opacity)         │
+└─────────────────────────────────────────────────────────────┘
 ```
 </layout>
 
 <tokens>
-- **Container**: `surface-charcoal`, `shadow-viscous`
-- **HeroTitle**: `Hero-144px`, `Solidarity-800`, `Waratah-Red`
-- **Body**: `Body-16px`, `Direct-Action-450`, `On-Surface-Ash`
-- **PrimaryAction**: `Baru-Gold-Surface`, `shadow-hover-rise`
+- **Substrate**: `charcoalBackground` (#1A1A1A)
+- **Primary Ink**: `baruGold` (#DAF674)
+- **Shapes**: `radius-stone` (Container), `radius-pebble` (Input/Button)
+- **Typography**: `Display Large` (72px, Recursive) for Title, `Metadata` (12px, JetBrains Mono) for labels.
 </tokens>
 
 <assets>
-- Hero motif: `Elephant-Motif`, 1x, top-right, 20% opacity.
-- Background texture: `Torn-Edge-Texture`, full-width, bottom.
-- Icon set: `Solidarity-Icon-Pack` (filter, sort, bookmark).
+- **Textures**: `screenprint-substrate` (15% opacity), `screenprint-grit` (ambient)
+- **Motifs**: `halo-disk` (Z-1, 60% opacity)
+- **Symbolic Anchor**: Forbidden on Auth pages.
 </assets>
 
 <components>
-- ManifestoCard (card)
-  - Used: hero manifesto section.
-  - Assets: background motif (elephant), torn edge.
-- SkillBreakdownCard (card)
-  - Used: data visualization section.
-  - Assets: botanical-motif.
+- **AuthContainer** (stone)
+  - Role: Central login/verification card.
+  - Assets: Secondary halo backdrop.
+- **TextInput** (pebble)
+  - Role: Email/Password fields.
+  - Assets: none.
+- **SignButton** (pebble)
+  - Role: Primary action ("Enter Archive").
+  - Assets: none.
 </components>
 
 <annotations>
-1 | hero_title        | Content: max-chars: 80; Style: display-heading; State: default.
-2 | btn_primary_cta   | Action: onClick → POST /api/apply, then nav → /application/success; State: default, loading, error.
-3 | job_search_input  | Input: type=text; max-chars: 60; Validation: non-empty; State: default, focused, error.
-4 | job_list_item     | Data: bound to jobs[]; Layout: 1-line title, 1-line org/location; Truncate: ellipsis on overflow.
-5 | toast_error       | State: visible when form submit fails; Content: "Something went wrong"; Auto-hide: 6s; Role: status.
-6 | layout_grid       | Breakpoints: mobile=1col, tablet=2col, desktop=3col; Gutter: 16px.
-7 | form_apply        | System: onSubmit → POST /api/applications; Retry: 3x on 5xx.
+1 | auth_title        | Content: "VERIFY IDENTITY"; Style: Display Large; Weight: 800 Solidarity.
+2 | inp_email         | Label: "Email" (Metadata); Placeholder: "collective@id.kr"; State: default, focus, error.
+3 | inp_password      | Label: "Password"; Masked: true; State: default, focus, error.
+4 | btn_login         | Content: "Enter Archive"; Action: onClick → validate + login; Style: radius-pebble.
+5 | btn_create_id     | Content: "Create Collective ID"; Style: Inter Body (16px); Action: onClick → nav /onboarding.
+6 | grid_overlay      | Style: screenprint-substrate (15% opacity); Z-Index: Z-0.
 </annotations>
 
 <notes>
-- Flow: primary path is “Read manifesto → Search jobs → Apply”.
-- Edge cases: empty job list state, offline banner.
+- Emotional Register: Trust.
+- No Symbolic Anchors allowed.
 </notes>

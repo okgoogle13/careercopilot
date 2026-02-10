@@ -2,55 +2,51 @@
 
 <layout>
 ```text
-+------------------------------------------+
-| [ Header / Nav ]                         |
-+------------------------------------------+
-|                                          |
-|  [ Hero / Manifesto ]                    |
-|                                          |
-+------------------------------------------+
-|                                          |
-|  [ Content / Cards ]                     |
-|                                          |
-+------------------------------------------+
-| [ Footer ]                               |
-+------------------------------------------+
+┌─────────────────────────────────────────────────────────────┐
+│                                                             │
+│  "SYSTEM PARAMETERS" (Headline)                             │
+│                                                             │
+│  ┌───────────────────────────────────────────────────────┐  │
+│  │ CATEGORY: IDENTITY                                    │  │
+│  │ Stone Container                                         │  │
+│  │                                                       │  │
+│  │ - [ Setting 1 ] Pebble Toggle                         │  │
+│  │ - [ Setting 2 ] Pebble Input                          │  │
+│  └───────────────────────────────────────────────────────┘  │
+│                                                             │
+│ Z-0: {kr-asset-screenprint-substrate} (5% opacity)          │
+└─────────────────────────────────────────────────────────────┘
 ```
 </layout>
 
 <tokens>
-- **Container**: `surface-charcoal`, `shadow-viscous`
-- **HeroTitle**: `Hero-144px`, `Solidarity-800`, `Waratah-Red`
-- **Body**: `Body-16px`, `Direct-Action-450`, `On-Surface-Ash`
-- **PrimaryAction**: `Baru-Gold-Surface`, `shadow-hover-rise`
+- **Ink**: `baruGold` (Category Labels), `kr-leafusAsh` (Substance)
+- **Shapes**: `radius-stone` (Group Wrapper), `radius-pebble` (Toggles)
+- **Typography**: `Headline` (48px, Sora)
 </tokens>
 
 <assets>
-- Hero motif: `Elephant-Motif`, 1x, top-right, 20% opacity.
-- Background texture: `Torn-Edge-Texture`, full-width, bottom.
-- Icon set: `Solidarity-Icon-Pack` (filter, sort, bookmark).
+- **Textures**: `screenprint-substrate` (Z-0)
+- **Motifs**: none.
+- **Register**: Trust
 </assets>
 
 <components>
-- ManifestoCard (card)
-  - Used: hero manifesto section.
-  - Assets: background motif (elephant), torn edge.
-- SkillBreakdownCard (card)
-  - Used: data visualization section.
-  - Assets: botanical-motif.
+- **SettingsGroup** (stone)
+  - Role: Logically related setting items.
+- **PebbleToggle** (pebble)
+  - Role: Boolean switch.
+- **PebbleSelect** (pebble)
+  - Role: Dropdown/Selection.
 </components>
 
 <annotations>
-1 | hero_title        | Content: max-chars: 80; Style: display-heading; State: default.
-2 | btn_primary_cta   | Action: onClick → POST /api/apply, then nav → /application/success; State: default, loading, error.
-3 | job_search_input  | Input: type=text; max-chars: 60; Validation: non-empty; State: default, focused, error.
-4 | job_list_item     | Data: bound to jobs[]; Layout: 1-line title, 1-line org/location; Truncate: ellipsis on overflow.
-5 | toast_error       | State: visible when form submit fails; Content: "Something went wrong"; Auto-hide: 6s; Role: status.
-6 | layout_grid       | Breakpoints: mobile=1col, tablet=2col, desktop=3col; Gutter: 16px.
-7 | form_apply        | System: onSubmit → POST /api/applications; Retry: 3x on 5xx.
+1 | toggle_logic       | Action: onClick → PATCH /api/settings; State: on (baruGold), off (ash).
+2 | input_validation   | Action: onBlur → validate; State: default, focus, error.
+3 | section_header     | Style: uppercase Sora; Color: baruGold; Border-Bottom: 1px leafusAsh.
+4 | reset_btn          | Action: onClick → confirm → revert all; Style: radius-pebble; Border: 1px waratahRed.
 </annotations>
 
 <notes>
-- Flow: primary path is “Read manifesto → Search jobs → Apply”.
-- Edge cases: empty job list state, offline banner.
+- Goal: Configure privacy, notification, and system preferences.
 </notes>
