@@ -8,10 +8,18 @@ import { KrDarkAuth } from './views/KrDarkAuth';
 import { KrDarkDashboard } from './views/KrDarkDashboard';
 import { KrDarkFeed } from './views/KrDarkFeed';
 import { KrDarkKanban } from './views/KrDarkKanban';
-import { KrDarkLanding } from './views/KrDarkLanding'; // Renamed from KrDarkCanvas
+import { KrDarkLanding } from './views/KrDarkLanding'; 
 import { KrDarkOnboarding } from './views/KrDarkOnboarding';
+import { KrDarkIngestion } from './views/KrDarkIngestion';
+import { KrDarkAnalysis } from './views/KrDarkAnalysis';
+import { KrDarkSearch } from './views/KrDarkSearch';
+import { KrDarkApplication } from './views/KrDarkApplication';
+import { KrDarkEditor } from './views/KrDarkEditor';
+import { KrDarkSettings } from './views/KrDarkSettings';
+import { KrDarkProfile } from './views/KrDarkProfile';
+import { KrDarkDesigner } from './views/KrDarkDesigner';
 
-type KrDarkView = 'landing' | 'auth' | 'onboarding' | 'feed' | 'dashboard' | 'kanban';
+type KrDarkView = 'landing' | 'auth' | 'onboarding' | 'feed' | 'dashboard' | 'kanban' | 'ingestion' | 'analysis' | 'search' | 'application' | 'editor' | 'settings' | 'profile' | 'designer';
 
 /**
  * KrDarkShell
@@ -49,6 +57,22 @@ export const KrDarkShell: React.FC<{ children?: React.ReactNode }> = ({ children
         return <KrDarkDashboard />;
       case 'kanban':
         return <KrDarkKanban />;
+      case 'ingestion':
+        return <KrDarkIngestion />;
+      case 'analysis':
+        return <KrDarkAnalysis />;
+      case 'search':
+        return <KrDarkSearch />;
+      case 'application':
+        return <KrDarkApplication />;
+      case 'editor':
+        return <KrDarkEditor />;
+      case 'settings':
+        return <KrDarkSettings />;
+      case 'profile':
+        return <KrDarkProfile />;
+      case 'designer':
+        return <KrDarkDesigner />;
       case 'landing':
       default:
         return <KrDarkLanding />;

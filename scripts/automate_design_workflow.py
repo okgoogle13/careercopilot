@@ -183,6 +183,30 @@ def run_visuals_stage(component_name: str, mode: str):
 
     print(f"\n🎉 Stage 2 Complete! Component is ready in {paths['component_dir']}")
 
+def run_screen_visuals_stage(screen_name: str):
+    """
+    Stage 2: Screen Visuals (Hi-Fi)
+    Goal: Transform structural React files into Hi-Fi implementations using hifi-notes.
+    """
+    print(f"\n🎨 Running STAGE 2: VISUALS for Screen '{screen_name}'\n")
+    
+    view_path = REPO_ROOT / "frontend" / "src" / "layouts" / "KrDarkShell" / "views" / f"KrDark{screen_name}.tsx"
+    hifi_notes = DOCS_DESIGN_DIR / "hifi" / f"{screen_name}-hifi.md"
+    
+    if not view_path.exists():
+        print(f"❌ Error: Missing structural view at {view_path}. Run Stage 1/Scaffolding first.")
+        return
+        
+    if not hifi_notes.exists():
+        print(f"❌ Error: Missing Hi-Fi notes at {hifi_notes}. Generate them first.")
+        return
+
+    print(f"1️⃣  Transforming {view_path.name} using Hi-Fi notes from {hifi_notes.name}...")
+    # This invokes the transformer logic on the screen file
+    run_skill("component_transformer", "--file", str(view_path), "--hifi-notes", str(hifi_notes))
+    
+    print(f"✅ Screen transformation initiated for {screen_name}.")
+
 def run_screens_stage(screen_name: str, brief_path: Path):
     """
     Stage: Screens (Lo-Fi)
@@ -436,6 +460,11 @@ def main():
         # Always regenerate summary if plan is provided, or specifically if steps were taken
         regenerate_discovery_summary()
         sys.exit(0)
+
+    if args.screen and args.stage == "visuals":
+        run_screen_visuals_stage(args.screen)
+        sys.exit(0)
+
     if args.stage in ["structure", "full"]:
         run_structure_stage(args.component, brief_path, auto_approve=args.auto_approve)
     
