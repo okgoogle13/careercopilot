@@ -40,6 +40,16 @@
   - Assets: botanical-motif.
 </components>
 
+<annotations>
+1 | hero_title        | Content: max-chars: 80; Style: display-heading; State: default.
+2 | btn_primary_cta   | Action: onClick → POST /api/apply, then nav → /application/success; State: default, loading, error.
+3 | job_search_input  | Input: type=text; max-chars: 60; Validation: non-empty; State: default, focused, error.
+4 | job_list_item     | Data: bound to jobs[]; Layout: 1-line title, 1-line org/location; Truncate: ellipsis on overflow.
+5 | toast_error       | State: visible when form submit fails; Content: "Something went wrong"; Auto-hide: 6s; Role: status.
+6 | layout_grid       | Breakpoints: mobile=1col, tablet=2col, desktop=3col; Gutter: 16px.
+7 | form_apply        | System: onSubmit → POST /api/applications; Retry: 3x on 5xx.
+</annotations>
+
 <notes>
 - Flow: primary path is “Read manifesto → Search jobs → Apply”.
 - Edge cases: empty job list state, offline banner.
