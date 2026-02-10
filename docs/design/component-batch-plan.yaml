@@ -3,43 +3,111 @@ components:
     mode: migrate
     priority: high
     reference: true
+    target:
+      stage1: complete
+      stage2: complete
+      tests: basic
+      tokens: strict
+      status: active
   - name: LoginCard
     mode: new
     priority: high
+    target:
+      stage1: complete
+      stage2: complete
+      tests: full
+      tokens: strict
+      status: active
   - name: JobList
     mode: new
     priority: high
     reference: true
+    target:
+      stage1: complete
+      stage2: complete
+      tests: basic
+      tokens: strict
+      status: active
   - name: ApplicationForm
     mode: new
     priority: high
+    target:
+      stage1: complete
+      stage2: complete
+      tests: basic
+      tokens: strict
+      status: active
   - name: ProfileHeader
     mode: migrate
     priority: high
     reference: true
+    target:
+      stage1: complete
+      stage2: complete
+      tests: none
+      tokens: relaxed
+      status: active
   - name: SkillBreakdownCard
     mode: new
     priority: medium
     reference: true
+    target:
+      stage1: complete
+      stage2: complete
+      tests: none
+      tokens: strict
+      status: active
   - name: KanbanCard
     mode: new
     priority: medium
+    target:
+      stage1: complete
+      stage2: complete
+      tests: none
+      tokens: strict
+      status: active
   - name: PathSelectionCard
     mode: new
     priority: medium
+    target:
+      stage1: complete
+      stage2: complete
+      tests: none
+      tokens: strict
+      status: active
   - name: TestComponentB
     mode: migrate
     priority: medium
+    target:
+      stage1: complete
+      stage2: complete
+      tests: none
+      tokens: relaxed
+      status: active
   - name: Lens
     mode: migrate
     priority: high
     target:
+      stage1: complete
+      stage2: complete
       tests: basic
+      tokens: strict
+      status: active
   - name: Jar
     mode: migrate
     priority: high
     target:
+      stage1: complete
+      stage2: complete
       tests: basic
+      tokens: strict
+      status: active
   - name: NewModule
     mode: new
     priority: high
+    target:
+      stage1: complete
+      stage2: complete
+      tests: none
+      tokens: strict
+      status: active

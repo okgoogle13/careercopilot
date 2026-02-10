@@ -13,22 +13,21 @@ tags: []
 
 ## Purpose
 
-Transforms design system validation from **point-in-time audits** into **continuous visibility**. Tracks kerala-rage kr-solidarity adoption across your component library, reveals trends (improving or diverging?), and identifies high-priority refinement targets.
+Real-time compliance tracking CLI for kerala-rage kr-solidarity design system. Monitors component migration progress, visual audit pass rates, typography distinctiveness, botanical palette adherence, and overall design system maturity.
 
-A brief is only successful if the system reflects it. A dashboard makes that visible.
+Transforms design system validation from **point-in-time audits** into **continuous visibility**. Run the tool to get instant health metrics across all components.
 
 ## When to Use This Skill
 
 Use this skill when you need to:
 
-- **Track design system health** over time (quarterly reviews, maturity assessment)
-- **Monitor component migration** progress (Material 3 → kerala-rage naming/aesthetics)
-- **Identify compliance trends** (is your system becoming more kerala-rage-aligned?)
-- **Spot components needing refresh** (which ones diverge most from standards?)
-- **Measure brief effectiveness** (how well is your brief guiding work?)
-- **Communicate progress** to stakeholders (visual evidence of maturation)
-- **Make prioritization decisions** (where should team focus next?)
-- **Celebrate milestones** (we've hit 80% kerala-rage compliance!)
+- **Check design system health** (quick compliance snapshot)
+- **Track component status** (which components are aligned vs need refinement)
+- **Identify next priorities** (which components to focus on next)
+- **Export JSON data** (integrate with CI/CD or dashboards)
+- **Monitor migration progress** (Material 3 → kerala-rage naming)
+- **Validate against specs** (component code, tests, mockups existence)
+- **Detect hardcoded values** (identify token migration cleanup work)
 
 ## How It Works
 

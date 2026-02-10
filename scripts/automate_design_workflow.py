@@ -186,24 +186,100 @@ def run_visuals_stage(component_name: str, mode: str):
 
     print(f"\n🎉 Stage 2 Complete! Component is ready in {paths['component_dir']}")
 
+def run_screens_stage(screen_name: str, brief_path: Path):
+    """
+    Stage: Screens (Lo-Fi)
+    Goal: Define full-page layout and discover component/asset needs.
+    """
+    print(f"\n📱 Running STAGE: SCREENS for '{screen_name}'\n")
+    
+    # 1. Screen Protocol (Ensures we have a shared protocol for the screen)
+    protocol_path = PROTOCOLS_DIR / "kerala-rage-protocol.md"
+    print(f"1️⃣  Ensuring Kerala Rage Protocol exists...")
+    run_skill("design_system_doc_generator", "--brief", str(brief_path), "--out", str(protocol_path))
+    # Note: In mock mode, we just ensure it exists.
+    if not protocol_path.exists():
+        mock_generate_file(protocol_path, "# Kerala Rage Protocol\n\nDerived from design briefs.", "Global Protocol")
+
+    # 2. Lo-Fi Screen Wireframe
+    out_path = WIREFRAMES_DIR / f"{screen_name.lower()}-screen.md"
+    print(f"2️⃣  Generating Lo-Fi Screen Wireframe...")
+    run_skill("wireframe_annotator", "--protocol", str(protocol_path), "--screen", screen_name, "--out", str(out_path))
+    
+    mock_content = f"""# Screen: {screen_name}
+
+<layout>
++------------------------------------------+
+| [ Header / Nav ]                         |
++------------------------------------------+
+|                                          |
+|  [ Hero / Manifesto ]                    |
+|                                          |
++------------------------------------------+
+|                                          |
+|  [ Content / Cards ]                     |
+|                                          |
++------------------------------------------+
+| [ Footer ]                               |
++------------------------------------------+
+</layout>
+
+<tokens>
+- header: surface-container-low
+- hero: tertiary-fixed-dim
+- cards: surface-container
+</tokens>
+
+<assets>
+- hero-motif: elephant-dots-kookaburra
+- background: rough-concrete-texture
+</assets>
+
+<components>
+- ManifestoCard (Role: Hero Content, needs: icon-dots)
+- SkillBreakdownCard (Role: Data Viz, needs: botanical-motif)
+</components>
+"""
+    mock_generate_file(out_path, mock_content, "Screen Wireframe")
+
+    print(f"\n🎉 Screen Stage Complete! Review: {out_path}")
+
 # --- Main CLI ---
 
 def main():
-    parser = argparse.ArgumentParser(description="Automate Design Workflow (Two-Stage)")
+    parser = argparse.ArgumentParser(description="Automate Design Workflow (Two-Stage + Screens)")
     
-    parser.add_argument("--component", required=True, help="PascalCase name of the component (e.g. LoginCard)")
-    parser.add_argument("--brief", default=str(DEFAULT_BRIEF_PATH), help="Path to design brief")
-    parser.add_argument("--stage", choices=["structure", "visuals", "full"], default="full", help="Workflow stage")
+    group = parser.add_mutually_exclusive_group(required=True)
+    group.add_argument("--component", help="PascalCase name of the component")
+    group.add_argument("--screen", help="PascalCase name of the screen")
+    
+    parser.add_argument("--brief", help="Path to design brief")
+    parser.add_argument("--stage", choices=["structure", "visuals", "full", "screens"], default="full", help="Workflow stage")
     parser.add_argument("--mode", choices=["new", "migrate", "auto"], default="auto", help="Implementation mode")
-    parser.add_argument("--auto-approve", action="store_true", help="Skip interactive approval gates (for batch mode)")
+    parser.add_argument("--auto-approve", action="store_true", help="Skip interactive approval gates")
 
     args = parser.parse_args()
     
     ensure_dirs()
     
-    brief_path = Path(args.brief)
+    # Handle Screens
+    if args.screen:
+        if args.stage != "screens":
+             print(f"⚠️  For screens, stage is forced to 'screens'.")
+        
+        # Determine brief path for screen
+        brief_path = Path(args.brief) if args.brief else DOCS_DESIGN_DIR / "briefs" / f"{args.screen.lower()}.md"
+        if not brief_path.exists():
+            # Fallback to default if specific brief missing
+            print(f"⚠️  Specific brief not found at {brief_path}. Using default.")
+            brief_path = DEFAULT_BRIEF_PATH
+            
+        run_screens_stage(args.screen, brief_path)
+        sys.exit(0)
+
+    # Handle Components
+    brief_path = Path(args.brief) if args.brief else DEFAULT_BRIEF_PATH
     if not brief_path.exists():
-        # Fallback or warning if default brief is missing
         print(f"⚠️  Warning: Brief not found at {brief_path}. Proceeding with defaults.")
 
     # Determine Mode
