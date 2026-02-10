@@ -1,19 +1,15 @@
 ---
-description: Analyze component screenshots and design artifacts against kerala-rage
-  kr-solidarity visual standards. Validate typography (distinctiveness, kerala-streetprint craftsmanship),
-  color palette (Australian botanical colors), layout (organic spacing, asymmetry),
-  and botanical motif integration. Generate compliance assessments and design evolution
-  analysis.
-name: kerala-rage-visual-audit
+name: component-visual-audit
+description: Analyze UI component screenshots against kerala-rage kr-solidarity standards. Validate typography (distinctiveness, hierarchy), color palette (Australian botanical), layout (organic spacing, asymmetry), botanical motif integration. Generate compliance assessments with narrative feedback and design evolution tracking.
 version: 1.0.0
-tags: []
+tags: [validation, components, vision-analysis, kerala-rage, design-system, ui-audit]
 ---
 
-# kerala-rage Visual Audit Skill
+# Component Visual Audit Skill
 
 ## Purpose
 
-Analyze component screenshots and design artifacts against kerala-rage kr-solidarity visual standards using Claude's vision capabilities. Ensures typography, color, and layout align with the kerala-streetprint-Naturalist aesthetic.
+Validate **UI component screenshots** against kerala-rage kr-solidarity visual standards using Claude's vision capabilities. Designed specifically for component coherence auditing, not asset generation. Ensures typography, color, and layout align with the kerala-streetprint-Naturalist aesthetic.
 
 ## When to Use This Skill
 
@@ -76,8 +72,6 @@ The skill uses Claude's vision capabilities to:
 **Fail**: Copy is so themed that users cannot determine what the element does.
 
 **Key Test**: Can a first-time user understand the action within 2 seconds?
-
-_See [DOC-006 Voice Tier System](file:///Users/okgoogle13/Desktop/careercopilot/docs/archive/atomic-v2/DOC-006_Voice_and_Microcopy.md) for voice guidelines._
 
 ## Usage Examples
 
@@ -277,9 +271,9 @@ If yes to all, the audit is reliable.
 
 ## Related Documentation
 
-See `references/kerala-rage-visual-spec.md` for complete audit criteria.
-See `references/component-examples.md` for exemplary passing/failing components.
-See `references/design-evolution-tracking.md` for how to document visual transformation over time.
+- **`references/component-visual-spec.md`** – Detailed audit criteria for each dimension (typography, color, layout, botanical elements, coherence, microcopy)
+- **`references/passing-components.md`** – Real examples of pass/fail/needs-refinement components across Pebble, Lens, Stone archetypes
+- **`references/design-evolution-tracking.md`** – Methodology for documenting component maturity progression (v1 → v5), portfolio-level tracking, and design narrative
 
 ---
 
