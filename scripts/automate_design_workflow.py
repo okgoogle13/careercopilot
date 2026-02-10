@@ -92,12 +92,9 @@ def get_file_paths(component_name: str):
 # --- Mock Implementation Functions (Simulating Skill Outputs) ---
 
 def mock_generate_file(path: Path, content: str, description: str):
-    if not path.exists():
-        print(f"📄 Generating {description}: {path}")
-        with open(path, "w") as f:
-            f.write(content)
-    else:
-        print(f"✅ {description} already exists at {path}")
+    print(f"📄 Generating {description}: {path}")
+    with open(path, "w") as f:
+        f.write(content)
 
 # --- Stages ---
 
@@ -206,9 +203,10 @@ def run_screens_stage(screen_name: str, brief_path: Path):
     print(f"2️⃣  Generating Lo-Fi Screen Wireframe...")
     run_skill("wireframe_annotator", "--protocol", str(protocol_path), "--screen", screen_name, "--out", str(out_path))
     
-    mock_content = f"""# Screen: {screen_name}
+    mock_content = f"""# Wireframe: {screen_name} (Screen)
 
 <layout>
+```text
 +------------------------------------------+
 | [ Header / Nav ]                         |
 +------------------------------------------+
@@ -222,23 +220,35 @@ def run_screens_stage(screen_name: str, brief_path: Path):
 +------------------------------------------+
 | [ Footer ]                               |
 +------------------------------------------+
+```
 </layout>
 
 <tokens>
-- header: surface-container-low
-- hero: tertiary-fixed-dim
-- cards: surface-container
+- **Container**: `surface-charcoal`, `shadow-viscous`
+- **HeroTitle**: `Hero-144px`, `Solidarity-800`, `Waratah-Red`
+- **Body**: `Body-16px`, `Direct-Action-450`, `On-Surface-Ash`
+- **PrimaryAction**: `Baru-Gold-Surface`, `shadow-hover-rise`
 </tokens>
 
 <assets>
-- hero-motif: elephant-dots-kookaburra
-- background: rough-concrete-texture
+- Hero motif: `Elephant-Motif`, 1x, top-right, 20% opacity.
+- Background texture: `Torn-Edge-Texture`, full-width, bottom.
+- Icon set: `Solidarity-Icon-Pack` (filter, sort, bookmark).
 </assets>
 
 <components>
-- ManifestoCard (Role: Hero Content, needs: icon-dots)
-- SkillBreakdownCard (Role: Data Viz, needs: botanical-motif)
+- ManifestoCard (card)
+  - Used: hero manifesto section.
+  - Assets: background motif (elephant), torn edge.
+- SkillBreakdownCard (card)
+  - Used: data visualization section.
+  - Assets: botanical-motif.
 </components>
+
+<notes>
+- Flow: primary path is “Read manifesto → Search jobs → Apply”.
+- Edge cases: empty job list state, offline banner.
+</notes>
 """
     mock_generate_file(out_path, mock_content, "Screen Wireframe")
 
