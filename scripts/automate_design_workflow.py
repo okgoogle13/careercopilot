@@ -272,6 +272,7 @@ def main():
     group = parser.add_mutually_exclusive_group(required=True)
     group.add_argument("--component", help="PascalCase name of the component")
     group.add_argument("--screen", help="PascalCase name of the screen")
+    group.add_argument("--plan", help="Path to screen-plan.yaml for batch processing")
     
     parser.add_argument("--brief", help="Path to design brief")
     parser.add_argument("--stage", choices=["structure", "visuals", "full", "screens"], default="full", help="Workflow stage")
@@ -304,7 +305,7 @@ def main():
 
     # Determine Mode
     mode = args.mode
-    if mode == "auto":
+    if args.component and mode == "auto":
         if component_exists(args.component):
             mode = "migrate"
             print(f"🔍 Auto-detected existing component: Switching to 'migrate' mode.")
@@ -313,6 +314,35 @@ def main():
             print(f"🔍 No existing component found: Switching to 'new' mode.")
     
     # Execute Stages
+    if args.screen:
+        # Determine brief path for screen
+        brief_path = Path(args.brief) if args.brief else DOCS_DESIGN_DIR / "briefs" / f"{args.screen.lower()}.md"
+        if not brief_path.exists():
+            # Fallback to default if specific brief missing
+            print(f"⚠️  Specific brief not found at {brief_path}. Using default.")
+            brief_path = DEFAULT_BRIEF_PATH
+            
+        run_screens_stage(args.screen, brief_path)
+        sys.exit(0)
+
+    # New plan-based execution
+    if hasattr(args, 'plan') and args.plan:
+        import yaml
+        with open(args.plan, 'r') as f:
+            plan = yaml.safe_load(f)
+            for screen in plan.get('screens', []):
+                name = screen['name']
+                target = screen.get('target', {}).get('wireframes')
+                if target == 'lo-fi-only':
+                    out_path = WIREFRAMES_DIR / f"{name.lower()}-screen.md"
+                    if not out_path.exists():
+                        brief_path = Path(screen['brief'])
+                        if not brief_path.exists():
+                            brief_path = DEFAULT_BRIEF_PATH
+                        run_screens_stage(name, brief_path)
+                    else:
+                        print(f"✅ Screen '{name}' already exists. Skipping.")
+        sys.exit(0)
     if args.stage in ["structure", "full"]:
         run_structure_stage(args.component, brief_path, auto_approve=args.auto_approve)
     
