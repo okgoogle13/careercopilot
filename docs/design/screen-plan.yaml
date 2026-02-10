@@ -4,13 +4,68 @@ screens:
     priority: high
     target:
       wireframes: lo-fi-only
+  - name: Authentication
+    brief: docs/design/briefs/authentication.md
+    priority: high
+    target:
+      wireframes: lo-fi-only
+  - name: Onboarding
+    brief: docs/design/briefs/onboarding.md
+    priority: high
+    target:
+      wireframes: lo-fi-only
+  - name: Ingestion
+    brief: docs/design/briefs/ingestion.md
+    priority: high
+    target:
+      wireframes: lo-fi-only
+  - name: AnalysisDashboard
+    brief: docs/design/briefs/analysis-dashboard.md
+    priority: high
+    target:
+      wireframes: lo-fi-only
+  - name: OpportunityFeed
+    brief: docs/design/briefs/opportunity-feed.md
+    priority: high
+    target:
+      wireframes: lo-fi-only
   - name: JobSearchFlow
     brief: docs/design/briefs/job-search-flow.md
     priority: high
     target:
       wireframes: lo-fi-only
+  - name: KanbanBoard
+    brief: docs/design/briefs/kanban-board.md
+    priority: medium
+    target:
+      wireframes: lo-fi-only
   - name: ApplicationFormFlow
     brief: docs/design/briefs/application-form-flow.md
+    priority: medium
+    target:
+      wireframes: lo-fi-only
+  - name: SplitScreenEditor
+    brief: docs/design/briefs/split-screen-editor.md
+    priority: low
+    target:
+      wireframes: lo-fi-only
+  - name: StudioDesigner
+    brief: docs/design/briefs/studio-designer.md
+    priority: low
+    target:
+      wireframes: lo-fi-only
+  - name: Settings
+    brief: docs/design/briefs/settings.md
+    priority: low
+    target:
+      wireframes: lo-fi-only
+  - name: ProfileSettings
+    brief: docs/design/briefs/profile-settings.md
+    priority: medium
+    target:
+      wireframes: lo-fi-only
+  - name: DashboardOverview
+    brief: docs/design/briefs/dashboard-overview.md
     priority: medium
     target:
       wireframes: lo-fi-only
