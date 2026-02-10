@@ -2,70 +2,55 @@
 
 <layout>
 ```text
-┌─────────────────────────────────────────────────────────────┐
-│ Z-2: {kr-asset-wheat-paste-tear} (top-right)                │
-│                                                             │
-│  Z-3: {kr-asset-screenprint-grit} (scattered particles)     │
-│                                                             │
-│         ┌─────────────────────────────────┐                │
-│         │    "THE SOLIDARITY"             │  Z-1           │
-│         │    "MANIFESTO"                  │                │
-│         │    Slab Container               │                │
-│         └─────────────────────────────────┘                │
-│                                                             │
-│    ┌──────────┐  ┌──────────┐  ┌──────────┐               │
-│    │ Build    │  │ Archive  │  │ Resist   │  Z-1          │
-│    │ Stone    │  │ Stone    │  │ Stone    │               │
-│    └──────────┘  └──────────┘  └──────────┘               │
-│                                                             │
-│                  ┌─────────────────┐                       │
-│                  │ Enter / Pebble  │  Z-2                  │
-│                  └─────────────────┘                       │
-│                                                             │
-│ Z-2: {kr-asset-halo-disk} (bottom-left, baruGold)          │
-│                                                             │
-│ Z-0: {kr-asset-screenprint-substrate} (25% opacity)         │
-└─────────────────────────────────────────────────────────────┘
++------------------------------------------+
+| [ Header / Nav ]                         |
++------------------------------------------+
+|                                          |
+|  [ Hero / Manifesto ]                    |
+|                                          |
++------------------------------------------+
+|                                          |
+|  [ Content / Cards ]                     |
+|                                          |
++------------------------------------------+
+| [ Footer ]                               |
++------------------------------------------+
 ```
 </layout>
 
 <tokens>
-- **Background**: `charcoalBackground` (#1A1A1A) + `screenprint-substrate` (25% opacity)
-- **Primary Ink**: `baruGold` (#DAF674)
-- **Typography Ink**: `kr-leafusAsh` (#DAF6B3)
-- **Shapes**: `radius-slab` (Hero), `radius-stone` (Cards), `radius-pebble` (Button)
-- **Typography**: `Display Hero` (144px, Recursive), `Headline` (48px, Sora), `Subhead` (24px, Inter)
+- **Container**: `surface-charcoal`, `shadow-viscous`
+- **HeroTitle**: `Hero-144px`, `Solidarity-800`, `Waratah-Red`
+- **Body**: `Body-16px`, `Direct-Action-450`, `On-Surface-Ash`
+- **PrimaryAction**: `Baru-Gold-Surface`, `shadow-hover-rise`
 </tokens>
 
 <assets>
-- **Motifs**: `wheat-paste-tear` (Z-2), `halo-disk` (Z-2, bottom-left)
-- **Textures**: `screenprint-substrate` (Z-0), `screenprint-grit` (Z-3)
-- **Emotional Register**: Defiance
+- Hero motif: `Elephant-Motif`, 1x, top-right, 20% opacity.
+- Background texture: `Torn-Edge-Texture`, full-width, bottom.
+- Icon set: `Solidarity-Icon-Pack` (filter, sort, bookmark).
 </assets>
 
 <components>
-- **ManifestoHero** (slab)
-  - Role: Primary manifesto statement container.
-  - Assets: None (contained text only).
-- **SolidarityCard** (stone)
-  - Role: Feature highlights (Build, Archive, Resist).
-  - Assets: Subtle background grit.
-- **ActionButton** (pebble)
-  - Role: Main entry point ("Enter").
-  - Assets: Motion glow on hover.
+- ManifestoCard (card)
+  - Used: hero manifesto section.
+  - Assets: background motif (elephant), torn edge.
+- SkillBreakdownCard (card)
+  - Used: data visualization section.
+  - Assets: botanical-motif.
 </components>
 
 <annotations>
-1 | hero_title        | Content: "THE SOLIDARITY MANIFESTO"; Style: Display Hero (900 Slam); Alignment: centered.
-2 | card_group        | Layout: mobile=1col, desktop=3col; Gutter: 24px.
-3 | btn_enter         | Action: onClick → nav /auth; Style: radius-pebble; Color: baruGold.
-4 | grit_ambient      | Style: opacity pulse (8s loop); Z-Index: Z-3 (highest).
-5 | substrate_texture | Style: matte charcoal; Opacity: 25%; Z-Index: Z-0 (lowest).
-6 | halo_disk         | Color: baruGold; Opacity: 60%; Position: bottom-left.
+1 | hero_title        | Content: max-chars: 80; Style: display-heading; State: default.
+2 | btn_primary_cta   | Action: onClick → POST /api/apply, then nav → /application/success; State: default, loading, error.
+3 | job_search_input  | Input: type=text; max-chars: 60; Validation: non-empty; State: default, focused, error.
+4 | job_list_item     | Data: bound to jobs[]; Layout: 1-line title, 1-line org/location; Truncate: ellipsis on overflow.
+5 | toast_error       | State: visible when form submit fails; Content: "Something went wrong"; Auto-hide: 6s; Role: status.
+6 | layout_grid       | Breakpoints: mobile=1col, tablet=2col, desktop=3col; Gutter: 16px.
+7 | form_apply        | System: onSubmit → POST /api/applications; Retry: 3x on 5xx.
 </annotations>
 
 <notes>
-- Emotional Register: Defiance.
-- Flow: Read Manifesto → Enter Collective.
-- Symbolic Anchor: Optional bhagat-singh-reference.png in corner.
+- Flow: primary path is “Read manifesto → Search jobs → Apply”.
+- Edge cases: empty job list state, offline banner.
 </notes>
