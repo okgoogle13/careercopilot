@@ -1,34 +1,37 @@
 # Kerala Rage Lo-Fi Discovery Summary
 
-This document summarizes the component and asset needs discovered during the Lo-Fi screen orchestration phase.
+This document consolidates the component and asset discovery from across all screens in the screen plan.
 
-## 📱 Screens Processed
-- [SolidarityLanding](file:///Users/okgoogle13/Desktop/careercopilot/docs/design/generated/wireframes/solidaritylanding-screen.md)
-- [JobSearchFlow](file:///Users/okgoogle13/Desktop/careercopilot/docs/design/generated/wireframes/jobsearchflow-screen.md)
-- [ApplicationFormFlow](file:///Users/okgoogle13/Desktop/careercopilot/docs/design/generated/wireframes/applicationformflow-screen.md)
+## 📱 Screens & Artifacts
+| Screen | Wireframe | Status |
+| :--- | :--- | :--- |
+| **SolidarityLanding** | [solidaritylanding-screen.md](file:///Users/okgoogle13/Desktop/careercopilot/docs/design/generated/wireframes/solidaritylanding-screen.md) | ✅ Lo-Fi Only |
+| **JobSearchFlow** | [jobsearchflow-screen.md](file:///Users/okgoogle13/Desktop/careercopilot/docs/design/generated/wireframes/jobsearchflow-screen.md) | ✅ Lo-Fi Only |
+| **ApplicationFormFlow** | [applicationformflow-screen.md](file:///Users/okgoogle13/Desktop/careercopilot/docs/design/generated/wireframes/applicationformflow-screen.md) | ✅ Lo-Fi Only |
 
-## 🏗️ Candidate Components
-The following patterns were identified as reusable components across screens:
+## 🏗️ Candidate Component Backlog
+Identified patterns for promotion to implementation phase:
 
-| Component | Count | Role | Asset Needs |
+| Component | Count | Type | Asset Needs |
 | :--- | :--- | :--- | :--- |
-| **ManifestoCard** | 3 | card | hero manifesto, elephant motif, torn edge |
-| **SkillBreakdownCard** | 3 | card | data visualization, botanical-motif |
+| **ManifestoCard** | 3 | card | elephant motif, torn edge |
+| **SkillBreakdownCard** | 3 | card | botanical-motif |
+| **LoginBlock** | 1 | form | none |
+| **JobListItem** | 1 | list item | status icon |
 
-## 🎨 Image & Motif Asset Needs
-Consolidated list of visual assets required for high-fidelity implementation:
+## 🎨 Image & Motif backlogs
+Consolidated requirements for high-fidelity assets:
 
-- **Hero motif**: `Elephant-Motif`, 1x, top-right, 20% opacity.
-- **Background texture**: `Torn-Edge-Texture`, full-width, bottom.
-- **Icon set**: `Solidarity-Icon-Pack` (filter, sort, bookmark).
-- **Icons**: `dots`, `botanical-motif`.
+### Motifs & Illustrations
+- **Elephant-Motif**: High Priority (Used by 3 screens). Notes: 20% opacity, top-right placement.
+- **Botanical-Motif**: Medium Priority (Used by 3 screens).
+- **Torn-Edge-Texture**: High Priority (Used by 3 screens). Notes: full-width, bottom placement.
 
-## 🏛️ Refined Tokens (Discovered)
-- **Colors**: `surface-charcoal`, `Waratah-Red`, `On-Surface-Ash`, `Baru-Gold-Surface`.
-- **Typography**: `Hero-144px` (Solidarity-800), `Body-16px` (Direct-Action-450).
-- **Effects**: `shadow-viscous`, `shadow-hover-rise`.
+### Icons
+- **Solidarity-Icon-Pack**: (filter, sort, bookmark).
+- **Status-Icon**: for job items.
+- **Dots**: for ManifestoCard icons.
 
-## 📋 Next Steps
-1. Add newly discovered candidate components to `docs/design/component-batch-plan.yaml`.
-2. Initiate asset generation for the identified motifs.
-3. Proceed with Stage 1 (Specs) for high-priority components.
+## 📋 Next Mission: High-Fidelity promotion
+1. Select components from the backlog above for Spec/Mockup generation.
+2. Commission image assets for the Motifs and Textures identified.
