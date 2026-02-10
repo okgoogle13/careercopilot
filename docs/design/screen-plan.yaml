@@ -1,0 +1,16 @@
+screens:
+  - name: SolidarityLanding
+    brief: docs/design/briefs/solidarity-landing.md
+    priority: high
+    target:
+      wireframes: lo-fi-only
+  - name: JobSearchFlow
+    brief: docs/design/briefs/job-search-flow.md
+    priority: high
+    target:
+      wireframes: lo-fi-only
+  - name: ApplicationFormFlow
+    brief: docs/design/briefs/application-form-flow.md
+    priority: medium
+    target:
+      wireframes: lo-fi-only
