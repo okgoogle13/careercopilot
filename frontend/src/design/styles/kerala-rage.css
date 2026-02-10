@@ -92,6 +92,32 @@
   --sys-type-axes-wistful: 'wght' 100, 'wdth' 110, 'YTLC' 480, 'GRAD' -50;
   --sys-type-axes-breathing: 'GRAD' 50;
   --grad: 0;
+
+  /* Fraunces Variable Font Axis Presets for Enhanced Expressiveness */
+  --type-energetic: 'wght' 700, 'SOFT' 100, 'WONK' 1, 'opsz' 144;
+  --type-restrained: 'wght' 400, 'SOFT' 20, 'WONK' 0, 'opsz' 12;
+  --type-breathing: 'wght' 450, 'SOFT' 60, 'WONK' 0.5, 'opsz' 48;
+
+  /* Spring physics easing (M3 Expressive) */
+  --ease-spring-energetic: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --duration-quick: 200ms;
+  --duration-standard: 300ms;
+}
+
+/* Mode-specific Fraunces axis configurations */
+[data-mode="KrDark"] {
+  --type-default: var(--type-energetic);
+  --wallpaper-opacity: 0.65;
+}
+
+[data-mode="KrLight"] {
+  --type-default: var(--type-restrained);
+  --wallpaper-opacity: 0.05;
+}
+
+/* Enable optical sizing for all fonts */
+* {
+  font-optical-sizing: auto;
 }
 
 @layer base {
