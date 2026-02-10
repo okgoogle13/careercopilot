@@ -12,15 +12,21 @@ The following patterns were identified as reusable components across screens:
 
 | Component | Count | Role | Asset Needs |
 | :--- | :--- | :--- | :--- |
-| **ManifestoCard** | 3 | Hero Content | icon-dots |
-| **SkillBreakdownCard** | 3 | Data Viz | botanical-motif |
+| **ManifestoCard** | 3 | card | hero manifesto, elephant motif, torn edge |
+| **SkillBreakdownCard** | 3 | card | data visualization, botanical-motif |
 
 ## 🎨 Image & Motif Asset Needs
 Consolidated list of visual assets required for high-fidelity implementation:
 
-- **hero-motif**: `elephant-dots-kookaburra`
-- **background**: `rough-concrete-texture`
-- **icons**: `dots`, `botanical-motif`
+- **Hero motif**: `Elephant-Motif`, 1x, top-right, 20% opacity.
+- **Background texture**: `Torn-Edge-Texture`, full-width, bottom.
+- **Icon set**: `Solidarity-Icon-Pack` (filter, sort, bookmark).
+- **Icons**: `dots`, `botanical-motif`.
+
+## 🏛️ Refined Tokens (Discovered)
+- **Colors**: `surface-charcoal`, `Waratah-Red`, `On-Surface-Ash`, `Baru-Gold-Surface`.
+- **Typography**: `Hero-144px` (Solidarity-800), `Body-16px` (Direct-Action-450).
+- **Effects**: `shadow-viscous`, `shadow-hover-rise`.
 
 ## 📋 Next Steps
 1. Add newly discovered candidate components to `docs/design/component-batch-plan.yaml`.
