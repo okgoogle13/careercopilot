@@ -2,55 +2,61 @@
 
 <layout>
 ```text
-+------------------------------------------+
-| [ Header / Nav ]                         |
-+------------------------------------------+
-|                                          |
-|  [ Hero / Manifesto ]                    |
-|                                          |
-+------------------------------------------+
-|                                          |
-|  [ Content / Cards ]                     |
-|                                          |
-+------------------------------------------+
-| [ Footer ]                               |
-+------------------------------------------+
+┌─────────────────────────────────────────────────────────────┐
+│                                                             │
+│  "FEED THE ARCHIVE"                                         │
+│  Slab Container (Z-1)                                        │
+│                                                             │
+│  Z-2: {kr-asset-screenprint-grit}                           │
+│                                                             │
+│         ┌───────────────────────────────┐                  │
+│         │                               │                  │
+│         │    [ DROP RESUME / DATA ]     │  Z-2             │
+│         │    Pebble Dropzone            │                  │
+│         │                               │                  │
+│         └───────────────────────────────┘                  │
+│                                                             │
+│              ┌─────────────────┐                           │
+│              │   Scan Archive  │  Z-2                      │
+│              │   Pebble Button │                           │
+│              └─────────────────┘                           │
+│                                                             │
+│  Z-1: {kr-asset-halo-disk} (behind dropzone)                │
+│                                                             │
+│ Z-0: {kr-asset-screenprint-substrate}                       │
+└─────────────────────────────────────────────────────────────┘
 ```
 </layout>
 
 <tokens>
-- **Container**: `surface-charcoal`, `shadow-viscous`
-- **HeroTitle**: `Hero-144px`, `Solidarity-800`, `Waratah-Red`
-- **Body**: `Body-16px`, `Direct-Action-450`, `On-Surface-Ash`
-- **PrimaryAction**: `Baru-Gold-Surface`, `shadow-hover-rise`
+- **Ink**: `baruGold` (Accent), `kr-leafusAsh` (Body)
+- **Shapes**: `radius-slab` (Headline), `radius-pebble` (Interactive)
+- **Typography**: `Display Large` (72px, Recursive)
 </tokens>
 
 <assets>
-- Hero motif: `Elephant-Motif`, 1x, top-right, 20% opacity.
-- Background texture: `Torn-Edge-Texture`, full-width, bottom.
-- Icon set: `Solidarity-Icon-Pack` (filter, sort, bookmark).
+- **Textures**: `screenprint-substrate` (Z-0), `screenprint-grit` (Z-2)
+- **Motifs**: `halo-disk` (Z-1)
+- **Register**: Defiance
 </assets>
 
 <components>
-- ManifestoCard (card)
-  - Used: hero manifesto section.
-  - Assets: background motif (elephant), torn edge.
-- SkillBreakdownCard (card)
-  - Used: data visualization section.
-  - Assets: botanical-motif.
+- **IngestionSlab** (slab)
+  - Role: Page title container.
+- **DropZone** (pebble)
+  - Role: File upload / drag-and-drop area.
+  - Assets: Glow on dragOver.
+- **PrimaryAction** (pebble)
+  - Role: Process button.
 </components>
 
 <annotations>
-1 | hero_title        | Content: max-chars: 80; Style: display-heading; State: default.
-2 | btn_primary_cta   | Action: onClick → POST /api/apply, then nav → /application/success; State: default, loading, error.
-3 | job_search_input  | Input: type=text; max-chars: 60; Validation: non-empty; State: default, focused, error.
-4 | job_list_item     | Data: bound to jobs[]; Layout: 1-line title, 1-line org/location; Truncate: ellipsis on overflow.
-5 | toast_error       | State: visible when form submit fails; Content: "Something went wrong"; Auto-hide: 6s; Role: status.
-6 | layout_grid       | Breakpoints: mobile=1col, tablet=2col, desktop=3col; Gutter: 16px.
-7 | form_apply        | System: onSubmit → POST /api/applications; Retry: 3x on 5xx.
+1 | drop_zone         | Action: onDrop → upload file, show preview; State: default, dragOver, uploading.
+2 | btn_scan          | Action: onClick → POST /api/ingest; State: default, loading (spinner), success.
+3 | progress_bar      | State: visible during upload; Style: baruGold stroke; Type: Linear.
+4 | error_msg         | State: visible on invalid format; Content: "Invalid Substrate"; Style: text-red.
 </annotations>
 
 <notes>
-- Flow: primary path is “Read manifesto → Search jobs → Apply”.
-- Edge cases: empty job list state, offline banner.
+- Goal: Securely upload resume/data for analysis.
 </notes>
