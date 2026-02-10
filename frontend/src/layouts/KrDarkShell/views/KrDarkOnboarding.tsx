@@ -1,25 +1,80 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
+import { ManifestoSlab, SolidarityCard, ActionButton } from '../../../components/kerala-rage';
 
+/**
+ * KrDarkOnboarding (Hi-Fi)
+ * 
+ * Guided sequence to initialize the Naturalist's profile.
+ * High-stasis transitions with bold proclamation typography.
+ */
 export const KrDarkOnboarding: React.FC = () => {
-    return (
-        <div className="relative z-20 w-full h-full flex flex-col items-center justify-center p-12 text-center">
-            <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5 }}
-                className="max-w-2xl bg-surface-asphalt-black-light p-8 rounded-[var(--radius-leaf)] border border-primary-wattle-gold/10"
-            >
-                <h2 className="font-proclamation text-4xl text-paper-white mb-4">Welcome, Naturalist.</h2>
-                <p className="font-field-note text-secondary-concrete-grey text-lg mb-8 leading-relaxed">
-                    [Placeholder] Guided onboarding flow to initialize your collection parameters.
+  const shouldReduceMotion = useReducedMotion() ?? false;
+
+  const steps = [
+    { title: "Define Identity", desc: "Establish your unique designation within the collective archive." },
+    { title: "Audit History", desc: "Extract and verify tactical experience from legacy sources." },
+    { title: "Secure Reach", desc: "Configure broadcast parameters for mission discovery." }
+  ];
+
+  return (
+    <div className="relative z-20 w-full min-h-[80vh] flex flex-col items-center justify-center p-8 md:p-16">
+      {/* SECTION 1: The Induction Header */}
+      <motion.div
+        initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+        className="text-center mb-16 space-y-4"
+      >
+        <h1 className="font-proclamation text-5xl md:text-7xl uppercase text-paper-white tracking-widest">
+          Welcome, Naturalist.
+        </h1>
+        <p className="font-annotation text-[10px] uppercase tracking-[0.4em] text-waratah-red/80">
+          Initializing Induction Protocol
+        </p>
+      </motion.div>
+
+      {/* SECTION 2: The Step Matrix */}
+      <div className="grid md:grid-cols-3 gap-8 w-full max-w-6xl">
+        {steps.map((step, idx) => (
+          <motion.div
+            key={step.title}
+            initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.5 + (idx * 0.2), duration: 0.8 }}
+          >
+            <SolidarityCard className="p-8 h-full flex flex-col gap-6 relative group border-white/5 hover:border-wattle-gold/20 transition-colors">
+              <div className="flex justify-between items-baseline">
+                <span className="font-mono text-[10px] text-paper-white/20">STEP_0{idx + 1}</span>
+                <div className="h-px flex-1 bg-white/5 mx-4" />
+                <div className={`w-2 h-2 rounded-full ${idx === 0 ? 'bg-wattle-gold shadow-wattle-glow' : 'bg-white/10'}`} />
+              </div>
+              
+              <div className="space-y-3">
+                <h3 className="font-proclamation text-2xl uppercase text-paper-white/90 group-hover:text-wattle-gold transition-colors">
+                  {step.title}
+                </h3>
+                <p className="font-body text-sm text-paper-white/40 leading-relaxed">
+                  {step.desc}
                 </p>
-                <div className="grid grid-cols-3 gap-4">
-                    <div className="h-32 bg-surface-asphalt-black-dark rounded-lg flex items-center justify-center text-sm border border-dashed border-secondary-flannel-dim opacity-50">Step 1</div>
-                    <div className="h-32 bg-surface-asphalt-black-dark rounded-lg flex items-center justify-center text-sm border border-dashed border-secondary-flannel-dim opacity-50">Step 2</div>
-                    <div className="h-32 bg-surface-asphalt-black-dark rounded-lg flex items-center justify-center text-sm border border-dashed border-secondary-flannel-dim opacity-50">Step 3</div>
-                </div>
-            </motion.div>
-        </div>
-    );
+              </div>
+            </SolidarityCard>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* SECTION 3: Action Primary */}
+      <motion.div
+        initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1.5 }}
+        className="mt-20 flex flex-col items-center gap-6"
+      >
+        <ActionButton variant="primary" label="BEGIN AUDIT" className="px-16 py-4 text-xs tracking-widest" />
+        <p className="font-mono text-[9px] uppercase tracking-tighter text-paper-white/20">
+          Estimated completion: 240 seconds
+        </p>
+      </motion.div>
+    </div>
+  );
 };

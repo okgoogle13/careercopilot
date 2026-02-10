@@ -1,109 +1,243 @@
-# Kerala Rage Create: The Asset Generation Manifest
+# ASSET NAMING & EXPORT CONVENTION (GLOBAL)
 
-> Part of [Kerala Rage Design System – Contemporary Australian](00-overview.md)
+**System slug:** `kr-solidarity`
+**Naming format:**
 
----
+```
+kr-solidarity__[category]__[asset-name]__[variant].png
+```
 
-## 1. Asset Strategy: Screenprint & Solidarity
+**Rules**
 
-Our asset system reflects a collision of high-fidelity screenprinting aesthetics with raw street art urgency. We move away from botanical catalogs into a living expression of diaspora identity and Australian endemic geometry.
+* kebab-case only
+* no spaces
+* variant always `v1` (since you removed variants)
+* **Proportions:** Diversified (1:1, 3:4, 16:9, 2:1) based on motif
+* minimum **2048px** on shortest edge
 
-### Core Visual Constraints:
+**Categories**
 
-- **Style**: Screenprint, Wheat-paste, Stencil, Halftone, Grit.
-- **Colors**:
-  - `charcoalBackground` (#1A1A1A) - The substrate.
-  - `baruGold` (#DAF674) - The light of discovery.
-  - `waratahRed` (#F14714) - The heat of action.
-  - `parrotGreen` (#48F0E5) - The vibration of life.
-- **Banned Elements**: No perfect circles, no bureaucratic forms (passports, stamps), no light mode, no generic blue.
+* `portrait`
+* `devotional`
+* `symbol`
+* `street`
+* `texture`
+* `abstract`
 
----
-
-## 2. The Generation Manifest (To-Do List)
-
-These are the **8 core assets** required to build the Solidarity Mode interface. All assets must be generated as PNGs and converted to WebP.
-
-| Asset ID | Filename                              | Description                | Prompt Keywords                                                                       |
-| :------- | :------------------------------------ | :------------------------- | :------------------------------------------------------------------------------------ |
-| **01**   | `kr-asset-charcoal-paper.webp`        | Base substrate texture     | Matte charcoal paper texture, heavy grain, seamless, dark grey #1A1A1A                |
-| **02**   | `kr-asset-screenprint-substrate.webp` | Overlay texture with noise | Screenprint ink texture, noise, dust, subtle scratches, 20% opacity look              |
-| **03**   | `kr-asset-wheat-paste-tear.webp`      | Torn paper edge            | Torn poster edge, wheat-paste texture, ragged paper, white/grey fibers                |
-| **04**   | `kr-asset-halo-disk.webp`             | Gold radiance circle       | Circular gold halo, screenprint texture, imperfect edge, varying opacity, #DAF674     |
-| **05**   | `kr-asset-screenprint-grit.webp`      | Particle noise             | Speckled grit, ink splatter, dust particles, floating debris, white/grey              |
-| **06**   | `kr-asset-blueprint-grid.webp`        | Technical grid overlay     | Technical drawing grid, dashed lines, white on transparent, blueprint aesthetic       |
-| **07**   | `kr-asset-blueprint-layout.webp`      | Complex layout watermark   | Abstract architectural layout, dashed lines, geometric shapes, watermark style        |
-| **08**   | `kr-asset-screenprint-stamp.webp`     | "Verified" ink stamp       | Circular ink stamp, "VERIFIED" text, grunge texture, uneven ink distribution, #DAF674 |
+We’ll now **bake this into the prompts**.
 
 ---
 
-## 3. Asset Categories
+# 🔒 LOCKED CONTEXT BLOCK (UNCHANGED)
 
-### Solidarity Mascots & Motifs
+> ⚠️ Use verbatim in every batch prompt.
 
-Dynamic, high-contrast stencils of Australian endemic species and cultural symbols. These carry the "Solidarity" message.
+```
+STYLE & CONSTRAINTS (LOCKED):
 
-- _Examples_: `{kr-asset-halo-disk}`, `{kr-asset-screenprint-stamp}`
+Primary style: screenprint illustration.
+Secondary texture: wheat-paste / street poster.
+Dark-only UI aesthetic.
+Matte charcoal background.
+Limited ink palette (3–5 colours max).
+Bold flat shapes.
+High contrast.
+Visible ink grain and paper texture.
+Slight misregistration allowed.
 
-### Atmospheric Substrates
+NO photorealism.
+NO gradients.
 
-Textural backgrounds that provide depth and a tactile feel.
+LANGUAGE:
+English-only text.
 
-- _Examples_: `{kr-asset-charcoal-paper}`, `{kr-asset-screenprint-substrate}`, `{kr-asset-wheat-paste-tear}`
+HARD EXCLUSIONS:
+No crowns or monarchy symbols.
+No bureaucracy (no passports, visas, IDs, forms, border gates).
+No national flags as decoration.
+No corporate or stock-photo aesthetics.
+No police or state authority imagery.
+No Aboriginal art styles or dot painting.
 
-### Interaction Overlays
+FIRST NATIONS RULE:
+Aboriginal flag colours (red, yellow, black) allowed ONLY on placards or posters shown in situ.
+Text allowed only on placards:
+“ALWAYS WAS ALWAYS WILL BE”
+Never decorative. Never abstracted.
 
-Grit, noise, and blueprint lines that appear during state changes or as subtle framing.
+DEVOTIONAL RULE:
+Shiva imagery must be reverent, statue-inspired, grounded.
+No irony. No fantasy glow. No slogans attached.
 
-- _Examples_: `{kr-asset-screenprint-grit}`, `{kr-asset-blueprint-grid}`, `{kr-asset-blueprint-layout}`
-
-### Symbolic Anchors (Cultural Motifs)
-
-**Definition**: Low-frequency, high-meaning visual elements that carry cultural, devotional, or resistance narratives. These are NOT decorative assets—they are narrative anchors that ground the interface in its Kerala diaspora and Australian solidarity context.
-
-#### Canonical Visual References
-
-| Asset Filename                  | Description                                       | Cultural Context                             | Usage Constraint                |
-| :------------------------------ | :------------------------------------------------ | :------------------------------------------- | :------------------------------ |
-| `shiva-statue-reference.png`    | Shiva Nataraja statue (cosmic dance)              | Devotional anchor, Kerala Hindu identity     | Max 1 per screen, never as icon |
-| `kerala-elephant-reference.png` | Decorated temple elephant                         | Kerala cultural symbol, festival context     | Background element only         |
-| `tipu-sultan-reference.png`     | Tipu Sultan portrait (green turban, tiger motifs) | Anti-colonial resistance lineage             | Hero sections only, min 96px    |
-| `bhagat-singh-reference.png`    | Bhagat Singh portrait with martyr halo            | Anti-colonial resistance lineage             | Hero sections only, min 96px    |
-| `treaty-now-laneway.png`        | "TREATY NOW" street art / laneway poster          | First Nations solidarity, Australian context | In-situ placard use only        |
-| `first-nations-placard.png`     | First Nations solidarity placard imagery          | First Nations solidarity, Australian context | In-situ placard use only        |
-
-#### Symbolic Anchor Usage Rules
-
-1. **Frequency**: Maximum ONE Symbolic Anchor per screen.
-2. **Placement**: Never overlap with form fields, primary reading zones, or interactive elements.
-3. **Size**: Minimum 96px in smallest dimension. These are not icons.
-4. **Context**: Must align with page emotional register (e.g., devotional anchors on reflective pages, resistance figures on defiant pages).
-5. **Cultural Safety**:
-   - **Devotional (Shiva)**: Never mix with protest language in the same visual frame.
-   - **Resistance Figures (Tipu, Bhagat Singh)**: Use with "INQUILAB ZINDABAD" or similar anti-colonial text only.
-   - **First Nations**: Only appear in-situ on placards/posters. Never as general UI decoration.
-6. **Responsive Behavior**:
-   - **Desktop**: Full presence at specified opacity.
-   - **Tablet**: Reduce opacity by 50%.
-   - **Mobile**: Remove entirely.
-
-#### Forbidden Uses
-
-- ❌ Using Shiva imagery as a logo or icon
-- ❌ Using First Nations imagery outside of placard/poster context
-- ❌ Mixing devotional and protest symbols in the same composition
-- ❌ Using resistance figures at small sizes (<96px)
-- ❌ Multiple Symbolic Anchors on the same screen
+DESIGNED FOR:
+Website UI assets and editorial panels.
+```
 
 ---
 
-## 4. Usage Rules
+# BATCH 1 — DEVOTIONAL + RESISTANCE PORTRAITS
 
-- **Contrast**: High contrast between foreground motifs and background substrates.
-- **Density**: Controlled through the "Atmosphere" system (Pages use specific density levels).
-- **Format**: SVG for vector stencils; WebP with grain preservation for textures.
+```
+[PASTE LOCKED CONTEXT BLOCK]
+
+TASK:
+Generate THREE SEPARATE IMAGES.
+Each image is a standalone exportable asset.
+
+IMAGE 1:
+Asset name: kr-solidarity__devotional__shiva-statue__v1.png
+**Aspect ratio: 1:1 (square)**
+Statue-inspired Shiva.
+Stone-like weight.
+Muted gold halo disk.
+No text.
+
+IMAGE 2:
+Asset name: kr-solidarity__portrait__tipu-sultan__v1.png
+**Aspect ratio: 3:4 (portrait)**
+Screenprint portrait of Tipu Sultan.
+Green turban.
+Subtle tiger motif shapes in background.
+No text.
+
+IMAGE 3:
+Asset name: kr-solidarity__portrait__bhagat-singh__v1.png
+**Aspect ratio: 3:4 (portrait)**
+Screenprint portrait of Bhagat Singh in iconic profile with hat.
+Martyr-style halo disk.
+Text included: “INQUILAB ZINDABAD” (Latin script only).
+
+IMPORTANT:
+Each image is independent.
+Do not merge subjects.
+Do not repeat subjects.
+```
 
 ---
 
-**Last Updated**: February 9, 2026
-**Next Review**: Post-generation quality check
+# BATCH 2 — KERALA SYMBOLS & EMOTION
+
+```
+[PASTE LOCKED CONTEXT BLOCK]
+
+TASK:
+Generate THREE SEPARATE IMAGES.
+
+IMAGE 1:
+Asset name: kr-solidarity__symbol__kerala-elephant__v1.png
+**Aspect ratio: 1:1 (square)**
+Kerala elephant.
+Simplified temple ornaments.
+Palm frond framing.
+Halo disk.
+No text.
+
+IMAGE 2:
+Asset name: kr-solidarity__symbol__kerala-landscape__v1.png
+**Aspect ratio: 16:9 (landscape)**
+Kerala backwater or coconut palm landscape.
+No people.
+No text.
+
+IMAGE 3:
+Asset name: kr-solidarity__abstract__paint-splash__v1.png
+**Aspect ratio: 2:1 (banner)**
+Abstract paint splashes and ink drips.
+Organic shapes.
+No text.
+```
+
+---
+
+# BATCH 3 — AUSTRALIAN STREET & SOLIDARITY
+
+```
+[PASTE LOCKED CONTEXT BLOCK]
+
+TASK:
+Generate THREE SEPARATE IMAGES.
+
+IMAGE 1:
+Asset name: kr-solidarity__street__anti-colonial-graffiti__v1.png
+**Aspect ratio: 1:1 (square)**
+Anti-colonial graffiti on brick or urban wall.
+Text: “NO PRIDE IN GENOCIDE”.
+
+IMAGE 2:
+Asset name: kr-solidarity__texture__melbourne-laneway__v1.png
+**Aspect ratio: 16:9 (landscape)**
+Melbourne laneway wall.
+Torn wheat-paste posters.
+Paste residue.
+No readable text.
+
+IMAGE 3:
+Asset name: kr-solidarity__street__first-nations-placard__v1.png
+**Aspect ratio: 1:1 (square)**
+Street placard shown in situ.
+Text: “ALWAYS WAS ALWAYS WILL BE”.
+Aboriginal flag colours ONLY on placard.
+```
+
+---
+
+# BATCH 4 — SYSTEM & ABSTRACTION
+
+```
+[PASTE LOCKED CONTEXT BLOCK]
+
+TASK:
+Generate THREE SEPARATE IMAGES.
+
+IMAGE 1:
+Asset name: kr-solidarity__abstract__mythic-mural__v1.png
+**Aspect ratio: 16:9 (landscape)**
+Mythic mural-style illustration.
+Layered silhouettes.
+Symbolic composition.
+No text.
+
+IMAGE 2:
+Asset name: kr-solidarity__abstract__typography-pressure__v1.png
+**Aspect ratio: 2:1 (banner)**
+Abstract letterform fragments only.
+Extreme contrast between ultra-thin and ultra-bold strokes.
+No readable words.
+
+IMAGE 3:
+Asset name: kr-solidarity__portrait__street-poster__v1.png
+**Aspect ratio: 3:4 (portrait)**
+Street portrait poster.
+Screenprint portrait style.
+Wheat-paste paper texture.
+No slogans.
+```
+
+---
+
+# DEV HANDOFF NOTES (YOU CAN PASTE INTO README)
+
+**Folder structure**
+
+```
+/assets/kr-solidarity/
+  /abstract
+  /devotional
+  /portrait
+  /street
+  /symbol
+  /texture
+```
+
+**Do not**
+
+* recolour assets outside defined palette
+* mirror or rotate portraits
+* add new text layers on top of portrait assets
+
+**Allowed**
+
+* crop
+* mask
+* scale
+* overlay UI typography

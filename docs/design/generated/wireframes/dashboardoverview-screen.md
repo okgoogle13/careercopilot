@@ -2,54 +2,55 @@
 
 <layout>
 ```text
-┌─────────────────────────────────────────────────────────────┐
-│                                                             │
-│  "COMMAND CENTRE" (Headline)                                │
-│                                                             │
-│    ┌──────────┐  ┌──────────┐  ┌──────────┐               │
-│    │ Active   │  │ Success  │  │ Impact   │               │
-│    │ Slab     │  │ Slab     │  │ Slab     │               │
-│    └──────────┘  └──────────┘  └──────────┘               │
-│                                                             │
-│  ┌───────────────────────────────────────────────────────┐  │
-│  │ RECENT DEVELOPMENTS                                   │  │
-│  │ Stone Container (Z-1)                                 │  │
-│  │                                                       │  │
-│  │ - [Event 1]                                           │  │
-│  │ - [Event 2]                                           │  │
-│  └───────────────────────────────────────────────────────┘  │
-│                                                             │
-│ Z-0: {kr-asset-blueprint-grid} (8% opacity)                 │
-└─────────────────────────────────────────────────────────────┘
++------------------------------------------+
+| [ Header / Nav ]                         |
++------------------------------------------+
+|                                          |
+|  [ Hero / Manifesto ]                    |
+|                                          |
++------------------------------------------+
+|                                          |
+|  [ Content / Cards ]                     |
+|                                          |
++------------------------------------------+
+| [ Footer ]                               |
++------------------------------------------+
 ```
 </layout>
 
 <tokens>
-- **Ink**: `baruGold` (Headline), `white` (Substance)
-- **Shapes**: `radius-slab` (Stat Summary), `radius-stone` (Event Feed)
-- **Typography**: `Headline` (48px, Sora)
+- **Container**: `surface-charcoal`, `shadow-viscous`
+- **HeroTitle**: `Hero-144px`, `Solidarity-800`, `Waratah-Red`
+- **Body**: `Body-16px`, `Direct-Action-450`, `On-Surface-Ash`
+- **PrimaryAction**: `Baru-Gold-Surface`, `shadow-hover-rise`
 </tokens>
 
 <assets>
-- **Textures**: `blueprint-grid` (Z-0)
-- **Motifs**: `screenprint-grit` (ambient overlay)
-- **Register**: Direct Action
+- Hero motif: `Elephant-Motif`, 1x, top-right, 20% opacity.
+- Background texture: `Torn-Edge-Texture`, full-width, bottom.
+- Icon set: `Solidarity-Icon-Pack` (filter, sort, bookmark).
 </assets>
 
 <components>
-- **StatSlab** (slab)
-  - Role: High-level metric display.
-- **ActivityFeed** (stone)
-  - Role: List of recent record changes.
+- ManifestoCard (card)
+  - Used: hero manifesto section.
+  - Assets: background motif (elephant), torn edge.
+- SkillBreakdownCard (card)
+  - Used: data visualization section.
+  - Assets: botanical-motif.
 </components>
 
 <annotations>
-1 | metric_value      | Style: Recursive 900 Slam; Color: baruGold; Size: 72px.
-2 | event_item        | Behavior: onHover → underline; onClick → nav to event source.
-3 | layout_grid       | Breakpoints: mobile=1col, desktop=2col (stats top, feed bottom).
-4 | grit_ambient      | Style: static noise overlay (5% opacity); Z-Index: Z-3.
+1 | hero_title        | Content: max-chars: 80; Style: display-heading; State: default.
+2 | btn_primary_cta   | Action: onClick → POST /api/apply, then nav → /application/success; State: default, loading, error.
+3 | job_search_input  | Input: type=text; max-chars: 60; Validation: non-empty; State: default, focused, error.
+4 | job_list_item     | Data: bound to jobs[]; Layout: 1-line title, 1-line org/location; Truncate: ellipsis on overflow.
+5 | toast_error       | State: visible when form submit fails; Content: "Something went wrong"; Auto-hide: 6s; Role: status.
+6 | layout_grid       | Breakpoints: mobile=1col, tablet=2col, desktop=3col; Gutter: 16px.
+7 | form_apply        | System: onSubmit → POST /api/applications; Retry: 3x on 5xx.
 </annotations>
 
 <notes>
-- Goal: High-level situational awareness for the user.
+- Flow: primary path is “Read manifesto → Search jobs → Apply”.
+- Edge cases: empty job list state, offline banner.
 </notes>
