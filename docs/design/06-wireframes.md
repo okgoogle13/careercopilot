@@ -38,10 +38,10 @@ These wireframes embody the **Solidarity Mode** design system—a high-contrast,
 Based on **Kerala Rage — Solidarity Mode** (`tokens.json` V3.2).
 
 - **Substrate:** `charcoalBackground` (#1A1A1A). Matte charcoal, weathered brick texture.
-- **Primary Ink:** `baruGold` (#DAF674). Temple radiance, optimistic defiance.
-- **Secondary Ink:** `parrotGreen` (#48F0E5). Hybrid identity pop.
-- **Accent Ink:** `waratahRed` (#F14714). Resistance heat, urgency.
-- **Typography Ink:** `kr-leafusAsh` (#DAF6B3). High-contrast readable text.
+- **Primary Ink:** `inkGold` (#DAF674). Temple radiance, optimistic defiance.
+- **Secondary Ink:** `signalGreen` (#48F0E5). Hybrid identity pop.
+- **Accent Ink:** `solidarityRed` (#F14714). Resistance heat, urgency.
+- **Typography Ink:** `worker-ash` (#DAF6B3). High-contrast readable text.
 - **Background Texture:** `{kr-asset-screenprint-substrate}` at 15-25% opacity.
 
 ### Shape Tokens (Border Radius)
@@ -95,7 +95,7 @@ Based on **Kerala Rage — Solidarity Mode** (`tokens.json` V3.2).
 │                  │ Enter / Pebble  │  Z-2                  │
 │                  └─────────────────┘                       │
 │                                                             │
-│ Z-2: {kr-asset-halo-disk} (bottom-left, baruGold)          │
+│ Z-2: {kr-asset-halo-disk} (bottom-left, inkGold)          │
 │                                                             │
 │ Z-0: {kr-asset-screenprint-substrate} (25% opacity)         │
 └─────────────────────────────────────────────────────────────┘
@@ -123,7 +123,7 @@ Based on **Kerala Rage — Solidarity Mode** (`tokens.json` V3.2).
 | ------------------ | --------------- | -------------------- | ------------------------- |
 | **Hero Container** | `radius-slab`   | `charcoalBackground` | 2px solid `blueprintGrey` |
 | **Feature Cards**  | `radius-stone`  | `charcoalBackground` | 1px solid `blueprintGrey` |
-| **Nav Buttons**    | `radius-pebble` | `baruGold`           | None                      |
+| **Nav Buttons**    | `radius-pebble` | `inkGold`           | None                      |
 
 #### Interaction Annotations
 
@@ -216,7 +216,7 @@ See `06b-asset-placement.md` for detailed asset integration specifications.
 ┌─────────────────────────────────────────────────────────────┐
 │                                                             │
 │         "DEPOSIT HISTORY"                                   │
-│         Display Large (Recursive, 72px, baruGold)           │
+│         Display Large (Recursive, 72px, inkGold)           │
 │                                                             │
 │              ┌─────────────────────────┐                   │
 │              │                         │                   │
@@ -239,13 +239,13 @@ See `06b-asset-placement.md` for detailed asset integration specifications.
 | ------------------- | ---------------------------------------- | ------------------------- |
 | **Headline**        | "DEPOSIT HISTORY"                        | Display Large (Recursive) |
 | **Drop Zone Label** | "DROP PDF HERE<br>FOR ANALYSIS"          | Metadata (JetBrains Mono) |
-| **Success Message** | "History Verified. Integrity confirmed." | Subhead (Inter, baruGold) |
+| **Success Message** | "History Verified. Integrity confirmed." | Subhead (Inter, inkGold) |
 
 #### Interaction Annotations
 
 | Element                 | Trigger          | Animation                                  |
 | ----------------------- | ---------------- | ------------------------------------------ |
-| **Drop Zone**           | File drag-over   | Border shifts to `waratahRed`, glow effect |
+| **Drop Zone**           | File drag-over   | Border shifts to `solidarityRed`, glow effect |
 | **Verification Stamp**  | Upload success   | Scale from 2.0→1.0, rotate -30deg→-5deg    |
 | **Blueprint Watermark** | Upload in-flight | Opacity fade 6%→12%                        |
 
@@ -423,7 +423,7 @@ See `06b-asset-placement.md` for detailed asset integration specifications.
 │  Z-2: {kr-asset-wheat-paste-tear} (top-left, dramatic)      │
 │                                                             │
 │         "THE COLLECTIVE IS THRIVING"                        │
-│         Display Large (Recursive, 72px, baruGold)           │
+│         Display Large (Recursive, 72px, inkGold)           │
 │                                                             │
 │    ┌──────────┐  ┌──────────┐  ┌──────────┐               │
 │    │ Active   │  │ Skills   │  │ Progress │               │
@@ -431,7 +431,7 @@ See `06b-asset-placement.md` for detailed asset integration specifications.
 │    │ Stone    │  │ Stone    │  │ Stone    │               │
 │    └──────────┘  └──────────┘  └──────────┘               │
 │                                                             │
-│ Z-2: {kr-asset-halo-disk} (bottom-right, baruGold)          │
+│ Z-2: {kr-asset-halo-disk} (bottom-right, inkGold)          │
 │                                                             │
 │ Z-0: {kr-asset-screenprint-substrate} (25% opacity)         │
 └─────────────────────────────────────────────────────────────┘

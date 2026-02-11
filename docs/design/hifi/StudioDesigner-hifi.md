@@ -8,13 +8,13 @@
 ## Typography
 - **Tool Labels**: `JetBrains Mono`, 11px, `uppercase`, `text-paper-white/50`.
 - **Asset Titles**: `Work Sans`, 14px, `font-weight: 500`.
-- **Canvas Metadata**: `JetBrains Mono`, 12px, `text-wattle-gold/60`.
+- **Canvas Metadata**: `JetBrains Mono`, 12px, `text-ink-gold/60`.
 
 ## Color
 - **Substrate**: `bg-asphalt-black`.
 - **Canvas**: `bg-asphalt-black`, `border-white/5`, `shadow-viscous`.
-- **Grid Lines**: `border-wattle-gold/10` (Dynamic based on zoom).
-- **Selection Box**: `border-wattle-gold` (1px solid), `bg-wattle-gold/5`.
+- **Grid Lines**: `border-ink-gold/10` (Dynamic based on zoom).
+- **Selection Box**: `border-ink-gold` (1px solid), `bg-ink-gold/5`.
 
 ## Spacing
 - **Toolbar Height**: `h-14`.

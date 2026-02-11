@@ -40,15 +40,15 @@ export const SolidarityCard: React.FC<SolidarityCardProps> = ({
 
   const variantStyles = {
     standard: 'bg-asphalt-black border-white/5 shadow-viscous',
-    ghost: 'bg-transparent border-wattle-gold shadow-none',
-    active: 'bg-asphalt-black border-wattle-gold shadow-wattle-glow scale-[1.02]',
+    ghost: 'bg-transparent border-ink-gold shadow-none',
+    active: 'bg-asphalt-black border-ink-gold shadow-ink-glow scale-[1.02]',
   };
 
   // Tone & Density Hooks (Ready for Hi-Fi mapping in Stage 2)
   const toneStyles = {
     neutral: '',
     success: '', // TODO[hifi]: Map to gumLeafGreen variants
-    danger: '',  // TODO[hifi]: Map to waratahRed variants
+    danger: '',  // TODO[hifi]: Map to solidarityRed variants
   };
 
   const densityStyles = {
@@ -79,7 +79,7 @@ export const SolidarityCard: React.FC<SolidarityCardProps> = ({
       layout
       className={cn(
         'rounded-stone border relative overflow-hidden',
-        'focus-within:ring-2 focus-within:ring-wattle-gold focus-within:ring-offset-2 focus-within:ring-offset-asphalt-black',
+        'focus-within:ring-2 focus-within:ring-ink-gold focus-within:ring-offset-2 focus-within:ring-offset-asphalt-black',
         variantStyles[variant],
         toneStyles[tone],
         densityStyles[density],

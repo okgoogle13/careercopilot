@@ -7,15 +7,15 @@
 
 ## Typography
 - **Identity Headline**: `Fraunces Energetic`, 48px, `font-weight: 800`, `text-paper-white`.
-- **Stat Value**: `JetBrains Mono`, 32px, `font-weight: 800`, `text-wattle-gold`.
+- **Stat Value**: `JetBrains Mono`, 32px, `font-weight: 800`, `text-ink-gold`.
 - **Stat Label**: `Work Sans`, 14px, `font-weight: 500`, `text-paper-white/50`, `uppercase`.
 - **Bio Text**: `Work Sans`, 16px, `italic`, `text-paper-white/70`.
 
 ## Color
 - **Substrate**: `bg-asphalt-black`.
 - **Info Blocks**: `bg-asphalt-black/50`, `border-white/5`, `shadow-viscous`.
-- **Active Badge**: `shadow-wattle-glow`, `border-wattle-gold/40`.
-- **Halo Glow**: Radial gradient `from-wattle-gold/20 to-transparent`.
+- **Active Badge**: `shadow-ink-glow`, `border-ink-gold/40`.
+- **Halo Glow**: Radial gradient `from-ink-gold/20 to-transparent`.
 
 ## Spacing
 - **Avatar Size**: `w-32 h-32` (Desktop), `w-24 h-24` (Mobile).

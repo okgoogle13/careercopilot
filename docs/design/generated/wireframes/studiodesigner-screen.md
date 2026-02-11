@@ -16,7 +16,7 @@
 </layout>
 
 <tokens>
-- **Ink**: `baruGold` (Grid/Border), `white` (Substance)
+- **Ink**: `inkGold` (Grid/Border), `white` (Substance)
 - **Shapes**: `radius-stone` (Canvas/Library), `radius-pebble` (Tools)
 - **Typography**: `Subhead` (24px, Inter)
 </tokens>
@@ -40,7 +40,7 @@
 1 | canvas_drag        | Behavior: drag-and-drop from library; snap-to-grid=blueprint-grid.
 2 | asset_preview      | Style: radius-stone thumbnails; onHover → show metadata.
 3 | zoom_control       | Style: radius-pebble; Action: onScale → update canvas-transform.
-4 | export_btn        | Action: onClick → generate manifest; Style: radius-pebble; Color: baruGold.
+4 | export_btn        | Action: onClick → generate manifest; Style: radius-pebble; Color: inkGold.
 </annotations>
 
 <notes>

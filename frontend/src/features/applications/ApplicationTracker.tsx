@@ -119,7 +119,7 @@ export function ApplicationTracker() {
               <div className="mb-6 px-2">
                 <div className="flex items-center justify-between mb-1">
                   <h3 className="font-bloom text-lg font-black text-paper-white uppercase tracking-tighter flex items-center gap-2">
-                    <stage.icon className="w-4 h-4 text-wattle-gold" />
+                    <stage.icon className="w-4 h-4 text-ink-gold" />
                     {stage.name}
                   </h3>
                   <span className="font-annotation text-[9px] text-concrete-grey bg-concrete-grey/5 px-2 py-0.5 border border-concrete-grey/10">
@@ -143,7 +143,7 @@ export function ApplicationTracker() {
                   ))}
 
                 {/* Seedling Dispatch (Add Button) */}
-                <button className="w-full py-4 border border-dashed border-concrete-grey/10 rounded-sm flex items-center justify-center text-concrete-grey/30 hover:border-wattle-gold/40 hover:text-wattle-gold transition-all group">
+                <button className="w-full py-4 border border-dashed border-concrete-grey/10 rounded-sm flex items-center justify-center text-concrete-grey/30 hover:border-ink-gold/40 hover:text-ink-gold transition-all group">
                   <Plus className="w-5 h-5 group-hover:rotate-90 transition-transform" />
                 </button>
               </div>
@@ -172,7 +172,7 @@ function ApplicationLeaf({ application }: { application: Application }) {
         className="p-5 border-concrete-grey/10 bg-asphalt-black/40 backdrop-blur-sm group relative overflow-hidden"
       >
         {/* Stage Indicator Notch */}
-        <div className="absolute top-0 left-0 w-1 h-full bg-wattle-gold opacity-40 group-hover:opacity-100 transition-opacity" />
+        <div className="absolute top-0 left-0 w-1 h-full bg-ink-gold opacity-40 group-hover:opacity-100 transition-opacity" />
 
         <div className="flex flex-col gap-3">
           <div className="flex justify-between items-start">
@@ -181,7 +181,7 @@ function ApplicationLeaf({ application }: { application: Application }) {
               variant="success"
               showDot
             />
-            <button className="text-concrete-grey/40 hover:text-wattle-gold">
+            <button className="text-concrete-grey/40 hover:text-ink-gold">
               <MoreHorizontal className="w-4 h-4" />
             </button>
           </div>
@@ -211,7 +211,7 @@ function ApplicationLeaf({ application }: { application: Application }) {
             <Pebble
               variant="ghost"
               size="sm"
-              className="h-6 text-[10px] uppercase font-bold tracking-tighter hover:text-wattle-gold"
+              className="h-6 text-[10px] uppercase font-bold tracking-tighter hover:text-ink-gold"
             >
               DETAILS
             </Pebble>

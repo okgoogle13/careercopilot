@@ -32,7 +32,7 @@ export const KrDarkApplication: React.FC = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3, duration: 1 }}
       >
-        <SolidarityCard className="p-12 flex flex-col gap-10 relative overflow-hidden group hover:border-wattle-gold/20 transition-colors">
+        <SolidarityCard className="p-12 flex flex-col gap-10 relative overflow-hidden group hover:border-ink-gold/20 transition-colors">
           {/* TODO[asset]: Application Seal motif overlay (Z-1, 3% opacity) */}
           
           <div className="space-y-4">
@@ -43,7 +43,7 @@ export const KrDarkApplication: React.FC = () => {
             
             <div className="relative">
               <textarea 
-                className="w-full h-64 bg-asphalt-black/50 border border-white/5 rounded-stone p-8 font-body text-lg leading-relaxed text-paper-white placeholder:text-paper-white/10 focus:outline-none focus:border-wattle-gold/40 focus:ring-1 focus:ring-wattle-gold/10 transition-all duration-500 resize-none shadow-viscous"
+                className="w-full h-64 bg-asphalt-black/50 border border-white/5 rounded-stone p-8 font-body text-lg leading-relaxed text-paper-white placeholder:text-paper-white/10 focus:outline-none focus:border-ink-gold/40 focus:ring-1 focus:ring-ink-gold/10 transition-all duration-500 resize-none shadow-viscous"
                 placeholder="Declare why your extracted mastery aligns with this specific tactical front line..."
               />
               <div className="absolute bottom-4 right-6 pointer-events-none opacity-20">
@@ -56,11 +56,11 @@ export const KrDarkApplication: React.FC = () => {
             <div className="flex items-center gap-4">
               <span className="font-mono text-[9px] text-paper-white/30 uppercase tracking-widest mr-4">SEQUENCE:</span>
               <div className="flex gap-3">
-                <div className="w-5 h-1 bg-wattle-gold rounded-full shadow-wattle-glow" />
+                <div className="w-5 h-1 bg-ink-gold rounded-full shadow-ink-glow" />
                 <div className="w-5 h-1 bg-white/10 rounded-full" />
                 <div className="w-5 h-1 bg-white/10 rounded-full" />
               </div>
-              <span className="font-mono text-[10px] text-paper-white/40 ml-4 group-hover:text-wattle-gold transition-colors">01 / 03</span>
+              <span className="font-mono text-[10px] text-paper-white/40 ml-4 group-hover:text-ink-gold transition-colors">01 / 03</span>
             </div>
 
             <div className="flex gap-4">

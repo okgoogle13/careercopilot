@@ -16,7 +16,7 @@ export const TokenTest = () => {
       font-field-note text-body-large
     "
     >
-      <h2 className="font-proclamation text-display-small text-wattle-gold mb-4">
+      <h2 className="font-proclamation text-display-small text-ink-gold mb-4">
         Token System Test
       </h2>
 
@@ -30,8 +30,8 @@ export const TokenTest = () => {
       <div className="mt-6 flex gap-3">
         <button
           className="
-          bg-wattle-gold
-          hover:bg-wattle-gold-glow
+          bg-ink-gold
+          hover:bg-ink-gold-glow
           text-asphalt-black
           rounded-leaf
           px-5 py-2.5
@@ -45,8 +45,8 @@ export const TokenTest = () => {
 
         <button
           className="
-          bg-waratah-red
-          hover:bg-waratah-red-glow
+          bg-solidarity-red
+          hover:bg-solidarity-red-glow
           text-paper-white
           rounded-petal
           px-4 py-2

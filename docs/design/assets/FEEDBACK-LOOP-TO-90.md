@@ -74,10 +74,10 @@ Developer **copies correction prompt directly into Gemini prompt** for next atte
 
 ```
 Original Prompt:
-  "Generate a botanical kr-motif asset with wattle and leaf elements..."
+  "Generate a botanical kr-motif asset with ink and leaf elements..."
 
 New Prompt (with corrections):
-  "Generate a botanical kr-motif asset with wattle and leaf elements.
+  "Generate a botanical kr-motif asset with ink and leaf elements.
 
   CORRECTIONS FROM LAST ATTEMPT:
   - Reduce to max 6 labels (currently 7)
@@ -124,9 +124,9 @@ Why it matters:
 - Kerala-rage aesthetic requires Australian endemic species
 - Test: "Did organism challenge European taxonomy?"
 - Examples of valid flora:
-  - Wattle (acacia)
+  - Ink (acacia)
   - Gum leaves (eucalyptus)
-  - Waratah
+  - Solidarity
   - Banksia
   - Native ferns
 
@@ -335,7 +335,7 @@ Your selected HiFi spec (DashboardOverview-hifi.md) shows design constraints:
 
 ## Color
 - Substrate: bg-asphalt-black
-- Metrics: paper-white, wattle-gold, waratah-red, ghost-gum
+- Metrics: paper-white, ink-gold, solidarity-red, solidarity-green
 - Cards: border-white/5, shadow-viscous
 
 ## Accessibility
@@ -475,7 +475,7 @@ Workflow captures feedback for every iteration:
 **Deploy with confidence**: The feedback loop is complete, actionable, and proven.
 
 For your DashboardOverview hifi design, the asset validator will ensure any background/motif assets match:
-- ✅ Color constraints (asphalt-black, wattle-gold, waratah-red, ghost-gum)
+- ✅ Color constraints (asphalt-black, ink-gold, solidarity-red, solidarity-green)
 - ✅ Typography rules (label count, font families, contrast)
 - ✅ Spacing/density (Wunderkammer central, empty upper-left)
 - ✅ Aesthetic alignment (Australian kr-solidarity)

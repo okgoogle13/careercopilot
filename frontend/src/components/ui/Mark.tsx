@@ -23,15 +23,15 @@ export interface MarkProps extends Omit<React.InputHTMLAttributes<HTMLInputEleme
  *
  * **KeralaRage Design Token Usage:**
  * - Shape: `--radius-seed` (subtle organic corners)
- * - Colors: Botanical palette (Wattle Gold, Waratah Red, Concrete Grey)
+ * - Colors: Botanical palette (Ink Gold, Solidarity Red, Concrete Grey)
  * - Motion: Viscous-breeze easing for smooth check transition
  * - Typography: Field-note font for labels
  *
  * **States:**
  * - Unchecked: Outlined box
- * - Checked: Filled with checkmark (Wattle Gold)
+ * - Checked: Filled with checkmark (Ink Gold)
  * - Indeterminate: Filled with dash (for partial selection)
- * - Error: Waratah Red theme
+ * - Error: Solidarity Red theme
  * - Disabled: Reduced opacity
  *
  * @example
@@ -104,9 +104,9 @@ export const Mark = forwardRef<HTMLInputElement, MarkProps>(
         border-2
         ${
           error
-            ? 'border-[var(--color-waratah-red)]'
+            ? 'border-[var(--color-solidarity-red)]'
             : isChecked
-              ? 'border-[var(--color-wattle-gold)] bg-[var(--color-wattle-gold)]'
+              ? 'border-[var(--color-ink-gold)] bg-[var(--color-ink-gold)]'
               : 'border-[var(--color-concrete-grey-base)]'
         }
         ${!disabled && !isChecked ? 'hover:border-[var(--color-concrete-grey)]' : ''}
@@ -142,7 +142,7 @@ export const Mark = forwardRef<HTMLInputElement, MarkProps>(
           <span
             className={`
           text-sm font-field-note font-medium
-          ${error ? 'text-[var(--color-waratah-red)]' : 'text-[var(--color-paper-white)]'}
+          ${error ? 'text-[var(--color-solidarity-red)]' : 'text-[var(--color-paper-white)]'}
           select-none
         `}
           >
@@ -207,9 +207,9 @@ export const MarkRadio = forwardRef<HTMLInputElement, MarkRadioProps>(
         border-2
         ${
           error
-            ? 'border-[var(--color-waratah-red)]'
+            ? 'border-[var(--color-solidarity-red)]'
             : checked
-              ? 'border-[var(--color-wattle-gold)]'
+              ? 'border-[var(--color-ink-gold)]'
               : 'border-[var(--color-concrete-grey-base)]'
         }
         ${!disabled && !checked ? 'hover:border-[var(--color-concrete-grey)]' : ''}
@@ -228,7 +228,7 @@ export const MarkRadio = forwardRef<HTMLInputElement, MarkRadioProps>(
                 className={`
               w-2.5 h-2.5
              rounded-full
-              ${error ? 'bg-[var(--color-waratah-red)]' : 'bg-[var(--color-wattle-gold)]'}
+              ${error ? 'bg-[var(--color-solidarity-red)]' : 'bg-[var(--color-ink-gold)]'}
               scale-100
             `}
               />
@@ -241,7 +241,7 @@ export const MarkRadio = forwardRef<HTMLInputElement, MarkRadioProps>(
           <span
             className={`
           text-sm font-field-note font-medium
-          ${error ? 'text-[var(--color-waratah-red)]' : 'text-[var(--color-paper-white)]'}
+          ${error ? 'text-[var(--color-solidarity-red)]' : 'text-[var(--color-paper-white)]'}
           select-none
         `}
           >

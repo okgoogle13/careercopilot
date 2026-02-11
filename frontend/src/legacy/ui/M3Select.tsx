@@ -47,7 +47,7 @@ export interface M3SelectProps {
  *
  * **KeralaRage Token Usage:**
  * - Typography: `font-field-note` (Options), `font-annotation` (Label)
- * - Color: `primary-wattle-gold` (Focus), `tertiary-waratah-red` (Error)
+ * - Color: `primary-ink-gold` (Focus), `tertiary-solidarity-red` (Error)
  * - Shape: `radius-stone` (KrDark), organic asymmetry (KrDark)
  * - Motion: `ease-viscous` (KrDark), `ease-precise` (KrDark)
  *
@@ -152,33 +152,33 @@ export const M3Select = forwardRef<HTMLButtonElement, M3SelectProps>(({
         'KrDark': {
             button: `
                 border-2 
-                ${error ? 'border-tertiary-waratah-red' : 'border-primary-wattle-gold/80'}
-                ${isOpen && !error ? 'border-primary-wattle-gold ring-2 ring-primary-wattle-gold/30' : ''}
+                ${error ? 'border-tertiary-solidarity-red' : 'border-primary-ink-gold/80'}
+                ${isOpen && !error ? 'border-primary-ink-gold ring-2 ring-primary-ink-gold/30' : ''}
                 bg-surface-KrDark-concrete-grey
                 shadow-sm
                 rounded-[8px_12px_6px_10px]
             `,
             dropdown: `
                 bg-surface-KrDark-concrete-grey
-                border border-primary-wattle-gold/40
+                border border-primary-ink-gold/40
                 shadow-elevated
                 rounded-[8px_12px_6px_10px]
             `,
             option: {
-                selected: 'bg-wattle-gold/20 text-on-surface-paper-white',
-                hover: 'hover:bg-wattle-gold/10',
+                selected: 'bg-ink-gold/20 text-on-surface-paper-white',
+                hover: 'hover:bg-ink-gold/10',
             },
             label: {
                 base: 'text-on-surface-paper-white',
-                error: 'text-tertiary-waratah-red',
+                error: 'text-tertiary-solidarity-red',
                 floating: 'text-secondary-flannel-dim',
             },
         },
         'KrLight': {
             button: `
                 border-2 
-                ${error ? 'border-tertiary-waratah-red' : 'border-outline-variant'}
-                ${isOpen && !error ? 'border-primary-wattle-gold ring-2 ring-primary-wattle-gold/20' : ''}
+                ${error ? 'border-tertiary-solidarity-red' : 'border-outline-variant'}
+                ${isOpen && !error ? 'border-primary-ink-gold ring-2 ring-primary-ink-gold/20' : ''}
                 ${!disabled && !error && !isOpen ? 'hover:border-outline' : ''}
                 bg-surface-shared-asphalt-black/50 backdrop-blur-sm
                 radius-stone
@@ -190,12 +190,12 @@ export const M3Select = forwardRef<HTMLButtonElement, M3SelectProps>(({
                 radius-stone
             `,
             option: {
-                selected: 'bg-wattle-gold/15 text-on-surface-paper-white',
+                selected: 'bg-ink-gold/15 text-on-surface-paper-white',
                 hover: 'hover:bg-surface-shared-asphalt-black',
             },
             label: {
                 base: 'text-on-surface-paper-white-dim',
-                error: 'text-tertiary-waratah-red',
+                error: 'text-tertiary-solidarity-red',
                 floating: 'text-secondary-flannel-dim',
             },
         },
@@ -226,7 +226,7 @@ export const M3Select = forwardRef<HTMLButtonElement, M3SelectProps>(({
                         `}
                     >
                         {label}
-                        {required && <span className="text-tertiary-waratah-red ml-1">*</span>}
+                        {required && <span className="text-tertiary-solidarity-red ml-1">*</span>}
                     </label>
                 )}
 
@@ -242,7 +242,7 @@ export const M3Select = forwardRef<HTMLButtonElement, M3SelectProps>(({
                         ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}
                         text-on-surface-paper-white font-field-note
                         transition-all duration-standard ease-viscous
-                        focus:outline-2 focus:outline-offset-2 focus:outline-primary-wattle-gold
+                        focus:outline-2 focus:outline-offset-2 focus:outline-primary-ink-gold
                         ${className}
                     `}
                     onClick={handleToggle}
@@ -298,7 +298,7 @@ export const M3Select = forwardRef<HTMLButtonElement, M3SelectProps>(({
                                         flex items-center justify-between gap-2
                                         font-field-note
                                         ${isSelected ? currentTheme.option.selected : 'text-on-surface-paper-white'}
-                                        ${isFocused && !isDisabled ? 'bg-wattle-gold/10' : ''}
+                                        ${isFocused && !isDisabled ? 'bg-ink-gold/10' : ''}
                                         ${isDisabled ? 'opacity-50 cursor-not-allowed' : `cursor-pointer ${currentTheme.option.hover}`}
                                         transition-colors duration-fast ease-viscous
                                     `}
@@ -307,7 +307,7 @@ export const M3Select = forwardRef<HTMLButtonElement, M3SelectProps>(({
                                 >
                                     <span>{option.label}</span>
                                     {isSelected && (
-                                        <Check className="w-5 h-5 flex-shrink-0 text-wattle-gold" />
+                                        <Check className="w-5 h-5 flex-shrink-0 text-ink-gold" />
                                     )}
                                 </div>
                             );
@@ -321,7 +321,7 @@ export const M3Select = forwardRef<HTMLButtonElement, M3SelectProps>(({
                 <p
                     className={`
                         mt-2 px-1 text-xs font-annotation
-                        ${error ? 'text-tertiary-waratah-red' : 'text-secondary-flannel-dim'}
+                        ${error ? 'text-tertiary-solidarity-red' : 'text-secondary-flannel-dim'}
                     `}
                 >
                     {displayHelperText}

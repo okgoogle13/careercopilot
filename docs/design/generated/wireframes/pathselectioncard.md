@@ -4,21 +4,21 @@
 +-----------------------------------------------------------+
 |                                                           |
 |             "TECH WORKER"                                 |
-|             (Display Large, 72px, parrotGreen)            |
+|             (Display Large, 72px, signalGreen)            |
 |                                                           |
 |    "Build the digital infrastructure of                   |
 |     the collective." (Body, 16px)                         |
 |                                                           |
 |             [ CHOOSE THIS PATH ]                          |
-|             (Pebble, Baru Gold)                           |
+|             (Pebble, Ink Gold)                           |
 |                                                           |
 +-----------------------------------------------------------+
 </layout>
 
 <tokens>
 - **Container**: `bg-charcoal`, `radius-stone`, `w-[320px]`, `p-8`
-- **PathTitle**: `text-display-lg`, `font-solidarity-800`, `text-parrot-green`
-- **Button**: `bg-baru-gold`, `text-charcoal`, `radius-pebble`
+- **PathTitle**: `text-display-lg`, `font-solidarity-800`, `text-signal-green`
+- **Button**: `bg-ink-gold`, `text-charcoal`, `radius-pebble`
 </tokens>
 
 <accessibility>
@@ -28,9 +28,9 @@
 </accessibility>
 
 <states>
-- **Selected**: Card gains 4px Baru Gold border; scale 1.05.
+- **Selected**: Card gains 4px Ink Gold border; scale 1.05.
 - **Loading**: Skeleton palm tree motif pulsing behind the card.
-- **Error**: "Path Alignment Error" in Waratah Red.
+- **Error**: "Path Alignment Error" in Solidarity Red.
 </states>
 
 <assets>

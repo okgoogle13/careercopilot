@@ -26,7 +26,7 @@
 
 <tokens>
 - **Substrate**: `charcoalBackground` (#1A1A1A)
-- **Primary Ink**: `baruGold` (#DAF674)
+- **Primary Ink**: `inkGold` (#DAF674)
 - **Shapes**: `radius-stone` (Container), `radius-pebble` (Input/Button)
 - **Typography**: `Display Large` (72px, Recursive) for Title, `Metadata` (12px, JetBrains Mono) for labels.
 </tokens>

@@ -44,10 +44,10 @@ export const KrDarkAnalysis: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 + (i * 0.1), duration: 0.6 }}
           >
-            <SolidarityCard className="p-8 flex flex-col gap-8 relative group hover:border-wattle-gold/30 transition-colors">
+            <SolidarityCard className="p-8 flex flex-col gap-8 relative group hover:border-ink-gold/30 transition-colors">
               <div className="flex justify-between items-start">
                 <div className="space-y-1">
-                  <h3 className="font-proclamation text-2xl uppercase text-paper-white group-hover:text-wattle-gold transition-colors">
+                  <h3 className="font-proclamation text-2xl uppercase text-paper-white group-hover:text-ink-gold transition-colors">
                     {skill.title}
                   </h3>
                   <p className="font-mono text-[9px] uppercase tracking-tighter text-paper-white/20">
@@ -55,7 +55,7 @@ export const KrDarkAnalysis: React.FC = () => {
                   </p>
                 </div>
                 <div className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center">
-                  <span className="font-mono text-[10px] text-wattle-gold">{skill.mastery}</span>
+                  <span className="font-mono text-[10px] text-ink-gold">{skill.mastery}</span>
                 </div>
               </div>
 
@@ -69,7 +69,7 @@ export const KrDarkAnalysis: React.FC = () => {
                     initial={{ width: 0 }}
                     animate={{ width: `${skill.mastery}%` }}
                     transition={shouldReduceMotion ? { duration: 0 } : { delay: 1 + (i * 0.1), duration: 1.5, ease: "circOut" }}
-                    className="bg-wattle-gold h-full shadow-wattle-glow"
+                    className="bg-ink-gold h-full shadow-ink-glow"
                   />
                 </div>
               </div>

@@ -99,11 +99,11 @@ export function Dashboard() {
             variants={item as any}
             className="space-y-2"
           >
-            <p className="font-annotation text-xs text-wattle-gold tracking-[0.6em] uppercase opacity-60">
+            <p className="font-annotation text-xs text-ink-gold tracking-[0.6em] uppercase opacity-60">
               [ STATION.REPORT_SUMMARY ]
             </p>
             <h1 className="font-bloom text-7xl font-black text-paper-white tracking-tighter uppercase leading-[0.9]">
-              THE CANOPY <span className="text-wattle-gold">VIEW</span>
+              THE CANOPY <span className="text-ink-gold">VIEW</span>
             </h1>
             <p className="font-field-note text-lg text-concrete-grey opacity-70 italic">
               "Archival synthesis reveals multiple growing opportunities."
@@ -136,15 +136,15 @@ export function Dashboard() {
           <Stone
             mode="KrDark"
             elevation="raised"
-            className="p-8 md:p-12 bg-asphalt-black/40 border-wattle-gold/20 flex flex-col md:flex-row items-center gap-12 overflow-hidden relative"
+            className="p-8 md:p-12 bg-asphalt-black/40 border-ink-gold/20 flex flex-col md:flex-row items-center gap-12 overflow-hidden relative"
           >
             {/* Glossy Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-tr from-wattle-gold/5 via-transparent to-transparent pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-tr from-ink-gold/5 via-transparent to-transparent pointer-events-none" />
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-12 w-full relative z-10">
               {/* Active Inquiries */}
               <div className="space-y-1">
-                <div className="flex items-center gap-3 text-wattle-gold mb-3">
+                <div className="flex items-center gap-3 text-ink-gold mb-3">
                   <FileText className="w-6 h-6" />
                   <span className="font-annotation text-[10px] uppercase tracking-[0.3em] font-bold">
                     Active Inquiries
@@ -173,7 +173,7 @@ export function Dashboard() {
                   <span className="text-7xl font-black text-paper-white leading-none tracking-tighter">
                     03
                   </span>
-                  <span className="text-[10px] font-annotation text-wattle-gold uppercase opacity-50 tracking-widest leading-none">
+                  <span className="text-[10px] font-annotation text-ink-gold uppercase opacity-50 tracking-widest leading-none">
                     ≥ 90% Match
                   </span>
                 </div>
@@ -193,7 +193,7 @@ export function Dashboard() {
                       initial={{ width: 0 }}
                       animate={{ width: '75%' }}
                       transition={{ duration: 1.5, ease: 'circOut' }}
-                      className="h-full bg-gradient-to-r from-wattle-gold to-concrete-grey shadow-[0_0_10px_rgba(var(--color-wattle-gold),0.5)]"
+                      className="h-full bg-gradient-to-r from-ink-gold to-concrete-grey shadow-[0_0_10px_rgba(var(--color-ink-gold),0.5)]"
                     />
                   </div>
                   <p className="text-[9px] font-annotation text-paper-white opacity-40 mt-3 uppercase tracking-widest text-right">
@@ -229,7 +229,7 @@ export function Dashboard() {
             size="lg"
             className="h-16 px-10 font-bold uppercase tracking-wider border-concrete-grey/20 hover:bg-concrete-grey/5"
           >
-            <Sparkles className="w-5 h-5 mr-3 text-wattle-gold" /> Automated Synthesis
+            <Sparkles className="w-5 h-5 mr-3 text-ink-gold" /> Automated Synthesis
           </Pebble>
         </motion.div>
 
@@ -237,7 +237,7 @@ export function Dashboard() {
         <section className="space-y-8">
           <div className="flex items-baseline gap-4">
             <h2 className="font-bloom text-3xl font-bold text-paper-white uppercase tracking-tight">
-              RECENT <span className="text-wattle-gold">SYNTHESIS</span>
+              RECENT <span className="text-ink-gold">SYNTHESIS</span>
             </h2>
             <div className="flex-1 h-px bg-concrete-grey/10" />
             <span className="font-annotation text-[9px] text-concrete-grey opacity-50 uppercase tracking-[0.4em]">
@@ -256,18 +256,18 @@ export function Dashboard() {
                 <Stone
                   mode="KrDark"
                   elevation="floating"
-                  className="p-8 border-concrete-grey/10 bg-asphalt-black/20 group-hover:bg-asphalt-black/40 group-hover:border-wattle-gold/30 transition-all duration-500 overflow-hidden relative"
+                  className="p-8 border-concrete-grey/10 bg-asphalt-black/20 group-hover:bg-asphalt-black/40 group-hover:border-ink-gold/30 transition-all duration-500 overflow-hidden relative"
                 >
                   {/* Hover Bloom Effect */}
-                  <div className="absolute -inset-20 bg-wattle-gold/5 blur-[100px] opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none" />
+                  <div className="absolute -inset-20 bg-ink-gold/5 blur-[100px] opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none" />
 
                   <div className="relative z-10 flex justify-between items-start">
                     <div className="space-y-4">
                       <div>
-                        <p className="font-annotation text-[10px] text-wattle-gold uppercase tracking-[0.2em] opacity-80 mb-1">
+                        <p className="font-annotation text-[10px] text-ink-gold uppercase tracking-[0.2em] opacity-80 mb-1">
                           {profile.company}
                         </p>
-                        <h3 className="font-bloom text-2xl font-black text-paper-white tracking-tight leading-tight uppercase group-hover:text-wattle-gold transition-colors">
+                        <h3 className="font-bloom text-2xl font-black text-paper-white tracking-tight leading-tight uppercase group-hover:text-ink-gold transition-colors">
                           {profile.name}
                         </h3>
                       </div>
@@ -288,7 +288,7 @@ export function Dashboard() {
                       <div className="text-6xl font-black text-paper-white tracking-tighter leading-none mb-1 tabular-nums group-hover:scale-110 transition-transform origin-right">
                         {profile.score}
                       </div>
-                      <p className="font-annotation text-[9px] text-wattle-gold uppercase tracking-widest font-bold opacity-60">
+                      <p className="font-annotation text-[9px] text-ink-gold uppercase tracking-widest font-bold opacity-60">
                         Calibration
                       </p>
                     </div>

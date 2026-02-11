@@ -30,9 +30,9 @@ export const ActionButton = React.forwardRef<HTMLButtonElement, ActionButtonProp
     const shouldReduceMotion = useReducedMotion();
 
     const variantStyles = {
-      primary: 'bg-wattle-gold text-asphalt-black shadow-wattle-glow-sm',
-      secondary: 'bg-transparent border-wattle-gold text-wattle-gold border',
-      accent: 'bg-waratah-red text-paper-white shadow-waratah-glow',
+      primary: 'bg-ink-gold text-asphalt-black shadow-ink-glow-sm',
+      secondary: 'bg-transparent border-ink-gold text-ink-gold border',
+      accent: 'bg-solidarity-red text-paper-white shadow-solidarity-glow',
     };
 
     const sizeStyles = {
@@ -52,7 +52,7 @@ export const ActionButton = React.forwardRef<HTMLButtonElement, ActionButtonProp
         type="button"
         className={cn(
           'rounded-pebble font-field-note font-bold uppercase tracking-wider',
-          'transition-colors duration-quick focus-visible:ring-2 focus-visible:ring-wattle-gold focus-visible:ring-offset-2 focus-visible:ring-offset-asphalt-black outline-none',
+          'transition-colors duration-quick focus-visible:ring-2 focus-visible:ring-ink-gold focus-visible:ring-offset-2 focus-visible:ring-offset-asphalt-black outline-none',
           'disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none',
           variantStyles[variant],
           sizeStyles[size],

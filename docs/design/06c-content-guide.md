@@ -56,13 +56,13 @@ This document provides the **actual copy, microcopy, and content specifications*
 
 | Element            | Content                                                                                                                                 | Typography Token                                                 | Color Token                                 |
 | ------------------ | --------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- | ------------------------------------------- |
-| **Hero Headline**  | "THE SOLIDARITY<br>MANIFESTO"                                                                                                           | Display Hero (Recursive Variable, 144px, 900 wght)               | `baruGold`                                  |
-| **Subhead**        | "Your professional history, re-documented for the collective future."                                                                   | Headline (Sora Variable, 48px, 700 wght)                         | `kr-leafusAsh` (80% opacity)                |
-| **Feature Card 1** | **Title:** "Build Your Story"<br>**Body:** "Deposit your work history. We'll analyze it for evidence of skill, not corporate keywords." | **Title:** Subhead (Inter, 24px)<br>**Body:** Body (Inter, 16px) | Title: `baruGold`<br>Body: `kr-leafusAsh`   |
+| **Hero Headline**  | "THE SOLIDARITY<br>MANIFESTO"                                                                                                           | Display Hero (Recursive Variable, 144px, 900 wght)               | `inkGold`                                  |
+| **Subhead**        | "Your professional history, re-documented for the collective future."                                                                   | Headline (Sora Variable, 48px, 700 wght)                         | `worker-ash` (80% opacity)                |
+| **Feature Card 1** | **Title:** "Build Your Story"<br>**Body:** "Deposit your work history. We'll analyze it for evidence of skill, not corporate keywords." | **Title:** Subhead (Inter, 24px)<br>**Body:** Body (Inter, 16px) | Title: `inkGold`<br>Body: `worker-ash`   |
 | **Feature Card 2** | **Title:** "Archive Evidence"<br>**Body:** "Every project, every skill, every proof point—catalogued with precision, not AI slop."      | Same as Card 1                                                   | Same as Card 1                              |
 | **Feature Card 3** | **Title:** "Resist Slop"<br>**Body:** "Generate applications that pass ATS filters without sounding like a bot wrote them."             | Same as Card 1                                                   | Same as Card 1                              |
-| **Primary CTA**    | "BUILD YOUR STORY"                                                                                                                      | Subhead (Inter, 24px, 700 wght)                                  | `charcoalBackground` (on `baruGold` button) |
-| **Secondary CTA**  | "View the Collective"                                                                                                                   | Body (Inter, 16px, 400 wght)                                     | `kr-leafusAsh`                              |
+| **Primary CTA**    | "BUILD YOUR STORY"                                                                                                                      | Subhead (Inter, 24px, 700 wght)                                  | `charcoalBackground` (on `inkGold` button) |
+| **Secondary CTA**  | "View the Collective"                                                                                                                   | Body (Inter, 16px, 400 wght)                                     | `worker-ash`                              |
 
 #### Microcopy
 
@@ -78,20 +78,20 @@ This document provides the **actual copy, microcopy, and content specifications*
 
 | Element             | Content                         | Typography Token                          | Color Token                                 |
 | ------------------- | ------------------------------- | ----------------------------------------- | ------------------------------------------- |
-| **Card Header**     | "VERIFY IDENTITY"               | Display Large (Recursive, 72px, 800 wght) | `baruGold`                                  |
-| **Helper Text**     | "Enter the Solidarity Archive." | Subhead (Inter, 24px, 500 wght, italic)   | `kr-leafusAsh` (70% opacity)                |
-| **Email Label**     | "Email"                         | Metadata (JetBrains Mono, 12px)           | `kr-leafusAsh`                              |
-| **Password Label**  | "Password"                      | Metadata (JetBrains Mono, 12px)           | `kr-leafusAsh`                              |
-| **Primary CTA**     | "Enter Archive"                 | Subhead (Inter, 24px, 700 wght)           | `charcoalBackground` (on `baruGold` button) |
-| **Secondary CTA**   | "Create Collective ID"          | Body (Inter, 16px, 400 wght)              | `kr-leafusAsh`                              |
-| **Forgot Password** | "Reset access"                  | Body (Inter, 16px, 400 wght)              | `parrotGreen`                               |
+| **Card Header**     | "VERIFY IDENTITY"               | Display Large (Recursive, 72px, 800 wght) | `inkGold`                                  |
+| **Helper Text**     | "Enter the Solidarity Archive." | Subhead (Inter, 24px, 500 wght, italic)   | `worker-ash` (70% opacity)                |
+| **Email Label**     | "Email"                         | Metadata (JetBrains Mono, 12px)           | `worker-ash`                              |
+| **Password Label**  | "Password"                      | Metadata (JetBrains Mono, 12px)           | `worker-ash`                              |
+| **Primary CTA**     | "Enter Archive"                 | Subhead (Inter, 24px, 700 wght)           | `charcoalBackground` (on `inkGold` button) |
+| **Secondary CTA**   | "Create Collective ID"          | Body (Inter, 16px, 400 wght)              | `worker-ash`                              |
+| **Forgot Password** | "Reset access"                  | Body (Inter, 16px, 400 wght)              | `signalGreen`                               |
 
 #### Error States
 
 | Scenario                | Message                                                                                          | Color Token      |
 | ----------------------- | ------------------------------------------------------------------------------------------------ | ---------------- |
-| **Invalid Credentials** | "Credentials not recognized. Double-check your email and password."                              | `waratahRed`     |
-| **Network Error**       | "Connection failed. Check your network and try again."                                           | `waratahRed`     |
+| **Invalid Credentials** | "Credentials not recognized. Double-check your email and password."                              | `solidarityRed`     |
+| **Network Error**       | "Connection failed. Check your network and try again."                                           | `solidarityRed`     |
 | **Account Locked**      | "Too many attempts. Your account is temporarily locked. Reset your password or wait 15 minutes." | `kr-charcoalRed` |
 
 ---
@@ -104,12 +104,12 @@ This document provides the **actual copy, microcopy, and content specifications*
 
 | Element             | Content                                                                                | Typography Token                                                 | Color Token                                 |
 | ------------------- | -------------------------------------------------------------------------------------- | ---------------------------------------------------------------- | ------------------------------------------- |
-| **Headline**        | "CHOOSE YOUR SOLIDARITY PATH"                                                          | Display Large (Recursive, 72px, 800 wght)                        | `baruGold`                                  |
-| **Subhead**         | "Select your primary work context. You can refine this later."                         | Headline (Sora, 48px, 700 wght)                                  | `kr-leafusAsh` (80% opacity)                |
-| **Industry Card 1** | **Title:** "Tech Worker"<br>**Body:** "Software, data, infrastructure, product."       | **Title:** Subhead (Inter, 24px)<br>**Body:** Body (Inter, 16px) | Title: `baruGold`<br>Body: `kr-leafusAsh`   |
+| **Headline**        | "CHOOSE YOUR SOLIDARITY PATH"                                                          | Display Large (Recursive, 72px, 800 wght)                        | `inkGold`                                  |
+| **Subhead**         | "Select your primary work context. You can refine this later."                         | Headline (Sora, 48px, 700 wght)                                  | `worker-ash` (80% opacity)                |
+| **Industry Card 1** | **Title:** "Tech Worker"<br>**Body:** "Software, data, infrastructure, product."       | **Title:** Subhead (Inter, 24px)<br>**Body:** Body (Inter, 16px) | Title: `inkGold`<br>Body: `worker-ash`   |
 | **Industry Card 2** | **Title:** "Care Worker"<br>**Body:** "Health, education, social services, community." | Same as Card 1                                                   | Same as Card 1                              |
 | **Industry Card 3** | **Title:** "Creative Worker"<br>**Body:** "Design, media, arts, communications."       | Same as Card 1                                                   | Same as Card 1                              |
-| **Primary CTA**     | "Continue to Deposit"                                                                  | Subhead (Inter, 24px, 700 wght)                                  | `charcoalBackground` (on `baruGold` button) |
+| **Primary CTA**     | "Continue to Deposit"                                                                  | Subhead (Inter, 24px, 700 wght)                                  | `charcoalBackground` (on `inkGold` button) |
 
 ---
 
@@ -121,20 +121,20 @@ This document provides the **actual copy, microcopy, and content specifications*
 
 | Element               | Content                                                 | Typography Token                           | Color Token                                 |
 | --------------------- | ------------------------------------------------------- | ------------------------------------------ | ------------------------------------------- |
-| **Headline**          | "DEPOSIT HISTORY"                                       | Display Large (Recursive, 72px, 800 wght)  | `baruGold`                                  |
-| **Subhead**           | "Upload your resume or CV. We'll extract the evidence." | Headline (Sora, 48px, 700 wght)            | `kr-leafusAsh` (80% opacity)                |
-| **Drop Zone Label**   | "DROP PDF HERE<br>FOR ANALYSIS"                         | Metadata (JetBrains Mono, 12px, uppercase) | `kr-leafusAsh` (60% opacity)                |
-| **File Requirements** | "PDF only. Max 5MB."                                    | Metadata (JetBrains Mono, 10px)            | `kr-leafusAsh` (50% opacity)                |
-| **Upload Progress**   | "Analyzing... {percentage}%"                            | Metadata (JetBrains Mono, 12px)            | `baruGold`                                  |
-| **Success Message**   | "History Verified. Integrity confirmed."                | Subhead (Inter, 24px, 500 wght)            | `baruGold`                                  |
-| **Primary CTA**       | "View Analysis"                                         | Subhead (Inter, 24px, 700 wght)            | `charcoalBackground` (on `baruGold` button) |
+| **Headline**          | "DEPOSIT HISTORY"                                       | Display Large (Recursive, 72px, 800 wght)  | `inkGold`                                  |
+| **Subhead**           | "Upload your resume or CV. We'll extract the evidence." | Headline (Sora, 48px, 700 wght)            | `worker-ash` (80% opacity)                |
+| **Drop Zone Label**   | "DROP PDF HERE<br>FOR ANALYSIS"                         | Metadata (JetBrains Mono, 12px, uppercase) | `worker-ash` (60% opacity)                |
+| **File Requirements** | "PDF only. Max 5MB."                                    | Metadata (JetBrains Mono, 10px)            | `worker-ash` (50% opacity)                |
+| **Upload Progress**   | "Analyzing... {percentage}%"                            | Metadata (JetBrains Mono, 12px)            | `inkGold`                                  |
+| **Success Message**   | "History Verified. Integrity confirmed."                | Subhead (Inter, 24px, 500 wght)            | `inkGold`                                  |
+| **Primary CTA**       | "View Analysis"                                         | Subhead (Inter, 24px, 700 wght)            | `charcoalBackground` (on `inkGold` button) |
 
 #### Error States
 
 | Scenario            | Message                                                | Color Token      |
 | ------------------- | ------------------------------------------------------ | ---------------- |
-| **Wrong File Type** | "PDF files only. Convert your document and try again." | `waratahRed`     |
-| **File Too Large**  | "File exceeds 5MB. Compress or split your document."   | `waratahRed`     |
+| **Wrong File Type** | "PDF files only. Convert your document and try again." | `solidarityRed`     |
+| **File Too Large**  | "File exceeds 5MB. Compress or split your document."   | `solidarityRed`     |
 | **Corrupted File**  | "File appears corrupted. Re-export and try again."     | `kr-charcoalRed` |
 | **Analysis Failed** | "Analysis failed. Contact support if this persists."   | `kr-charcoalRed` |
 
@@ -148,20 +148,20 @@ This document provides the **actual copy, microcopy, and content specifications*
 
 | Element               | Content                                 | Typography Token                          | Color Token                                 |
 | --------------------- | --------------------------------------- | ----------------------------------------- | ------------------------------------------- |
-| **Headline**          | "THE AUDIT"                             | Display Large (Recursive, 72px, 800 wght) | `baruGold`                                  |
-| **Subhead**           | "Your professional evidence, analyzed." | Headline (Sora, 48px, 700 wght)           | `kr-leafusAsh` (80% opacity)                |
-| **Match Score Label** | "Match Score"                           | Metadata (JetBrains Mono, 12px)           | `kr-leafusAsh`                              |
-| **Score Value**       | "{score}/100"                           | Display Large (Recursive, 72px, 900 wght) | `baruGold`                                  |
-| **Skill Card Header** | "Verified Skills"                       | Subhead (Inter, 24px, 700 wght)           | `baruGold`                                  |
-| **Skill Item**        | "{Skill Name}: {count} instances"       | Body (Inter, 16px, 400 wght)              | `kr-leafusAsh`                              |
-| **Primary CTA**       | "Browse Opportunities"                  | Subhead (Inter, 24px, 700 wght)           | `charcoalBackground` (on `baruGold` button) |
+| **Headline**          | "THE AUDIT"                             | Display Large (Recursive, 72px, 800 wght) | `inkGold`                                  |
+| **Subhead**           | "Your professional evidence, analyzed." | Headline (Sora, 48px, 700 wght)           | `worker-ash` (80% opacity)                |
+| **Match Score Label** | "Match Score"                           | Metadata (JetBrains Mono, 12px)           | `worker-ash`                              |
+| **Score Value**       | "{score}/100"                           | Display Large (Recursive, 72px, 900 wght) | `inkGold`                                  |
+| **Skill Card Header** | "Verified Skills"                       | Subhead (Inter, 24px, 700 wght)           | `inkGold`                                  |
+| **Skill Item**        | "{Skill Name}: {count} instances"       | Body (Inter, 16px, 400 wght)              | `worker-ash`                              |
+| **Primary CTA**       | "Browse Opportunities"                  | Subhead (Inter, 24px, 700 wght)           | `charcoalBackground` (on `inkGold` button) |
 
 #### Empty States
 
 | Scenario            | Message                                                                       | Color Token                  |
 | ------------------- | ----------------------------------------------------------------------------- | ---------------------------- |
-| **No Skills Found** | "No skills detected. Upload a more detailed resume or add skills manually."   | `kr-leafusAsh` (60% opacity) |
-| **Low Match Score** | "Match score is low. Refine your profile or explore different opportunities." | `kr-leafusAsh` (60% opacity) |
+| **No Skills Found** | "No skills detected. Upload a more detailed resume or add skills manually."   | `worker-ash` (60% opacity) |
+| **Low Match Score** | "Match score is low. Refine your profile or explore different opportunities." | `worker-ash` (60% opacity) |
 
 ---
 
@@ -173,20 +173,20 @@ This document provides the **actual copy, microcopy, and content specifications*
 
 | Element             | Content                                   | Typography Token                          | Color Token                  |
 | ------------------- | ----------------------------------------- | ----------------------------------------- | ---------------------------- |
-| **Headline**        | "THE LOOKOUT"                             | Display Large (Recursive, 72px, 800 wght) | `baruGold`                   |
-| **Subhead**         | "Opportunities matched to your evidence." | Headline (Sora, 48px, 700 wght)           | `kr-leafusAsh` (80% opacity) |
-| **Filter Label**    | "Filters"                                 | Subhead (Inter, 24px, 700 wght)           | `baruGold`                   |
-| **Sort Label**      | "Sort by"                                 | Metadata (JetBrains Mono, 12px)           | `kr-leafusAsh`               |
-| **Card: Job Title** | "{Job Title}"                             | Subhead (Inter, 24px, 700 wght)           | `baruGold`                   |
-| **Card: Company**   | "{Company Name}"                          | Body (Inter, 16px, 400 wght)              | `kr-leafusAsh`               |
-| **Card: Match**     | "Match: {score}%"                         | Metadata (JetBrains Mono, 12px)           | `parrotGreen`                |
-| **Card CTA**        | "View Details"                            | Body (Inter, 16px, 500 wght)              | `baruGold`                   |
+| **Headline**        | "THE LOOKOUT"                             | Display Large (Recursive, 72px, 800 wght) | `inkGold`                   |
+| **Subhead**         | "Opportunities matched to your evidence." | Headline (Sora, 48px, 700 wght)           | `worker-ash` (80% opacity) |
+| **Filter Label**    | "Filters"                                 | Subhead (Inter, 24px, 700 wght)           | `inkGold`                   |
+| **Sort Label**      | "Sort by"                                 | Metadata (JetBrains Mono, 12px)           | `worker-ash`               |
+| **Card: Job Title** | "{Job Title}"                             | Subhead (Inter, 24px, 700 wght)           | `inkGold`                   |
+| **Card: Company**   | "{Company Name}"                          | Body (Inter, 16px, 400 wght)              | `worker-ash`               |
+| **Card: Match**     | "Match: {score}%"                         | Metadata (JetBrains Mono, 12px)           | `signalGreen`                |
+| **Card CTA**        | "View Details"                            | Body (Inter, 16px, 500 wght)              | `inkGold`                   |
 
 #### Empty States
 
 | Scenario             | Message                                                                                  | Color Token                  |
 | -------------------- | ---------------------------------------------------------------------------------------- | ---------------------------- |
-| **No Opportunities** | "No opportunities match your current filters. Adjust your criteria or check back later." | `kr-leafusAsh` (60% opacity) |
+| **No Opportunities** | "No opportunities match your current filters. Adjust your criteria or check back later." | `worker-ash` (60% opacity) |
 
 ---
 
@@ -198,21 +198,21 @@ This document provides the **actual copy, microcopy, and content specifications*
 
 | Element             | Content                                         | Typography Token                          | Color Token                  |
 | ------------------- | ----------------------------------------------- | ----------------------------------------- | ---------------------------- |
-| **Headline**        | "THE COMMAND CENTER"                            | Display Large (Recursive, 72px, 800 wght) | `baruGold`                   |
-| **Subhead**         | "Track your applications through the pipeline." | Headline (Sora, 48px, 700 wght)           | `kr-leafusAsh` (80% opacity) |
-| **Column 1 Header** | "Applied"                                       | Subhead (Inter, 24px, 700 wght)           | `baruGold`                   |
-| **Column 2 Header** | "Screening"                                     | Subhead (Inter, 24px, 700 wght)           | `baruGold`                   |
-| **Column 3 Header** | "Interview"                                     | Subhead (Inter, 24px, 700 wght)           | `baruGold`                   |
-| **Column 4 Header** | "Offer"                                         | Subhead (Inter, 24px, 700 wght)           | `baruGold`                   |
-| **Card: Job Title** | "{Job Title}"                                   | Subhead (Inter, 20px, 700 wght)           | `kr-leafusAsh`               |
-| **Card: Company**   | "{Company Name}"                                | Body (Inter, 14px, 400 wght)              | `kr-leafusAsh` (70% opacity) |
-| **Card: Date**      | "Applied {date}"                                | Metadata (JetBrains Mono, 10px)           | `kr-leafusAsh` (50% opacity) |
+| **Headline**        | "THE COMMAND CENTER"                            | Display Large (Recursive, 72px, 800 wght) | `inkGold`                   |
+| **Subhead**         | "Track your applications through the pipeline." | Headline (Sora, 48px, 700 wght)           | `worker-ash` (80% opacity) |
+| **Column 1 Header** | "Applied"                                       | Subhead (Inter, 24px, 700 wght)           | `inkGold`                   |
+| **Column 2 Header** | "Screening"                                     | Subhead (Inter, 24px, 700 wght)           | `inkGold`                   |
+| **Column 3 Header** | "Interview"                                     | Subhead (Inter, 24px, 700 wght)           | `inkGold`                   |
+| **Column 4 Header** | "Offer"                                         | Subhead (Inter, 24px, 700 wght)           | `inkGold`                   |
+| **Card: Job Title** | "{Job Title}"                                   | Subhead (Inter, 20px, 700 wght)           | `worker-ash`               |
+| **Card: Company**   | "{Company Name}"                                | Body (Inter, 14px, 400 wght)              | `worker-ash` (70% opacity) |
+| **Card: Date**      | "Applied {date}"                                | Metadata (JetBrains Mono, 10px)           | `worker-ash` (50% opacity) |
 
 #### Empty States
 
 | Scenario            | Message                                                                       | Color Token                  |
 | ------------------- | ----------------------------------------------------------------------------- | ---------------------------- |
-| **No Applications** | "No applications yet. Browse opportunities and start building your pipeline." | `kr-leafusAsh` (60% opacity) |
+| **No Applications** | "No applications yet. Browse opportunities and start building your pipeline." | `worker-ash` (60% opacity) |
 
 ---
 
@@ -224,13 +224,13 @@ This document provides the **actual copy, microcopy, and content specifications*
 
 | Element            | Content                                 | Typography Token                          | Color Token                                 |
 | ------------------ | --------------------------------------- | ----------------------------------------- | ------------------------------------------- |
-| **Headline**       | "THE WORKBENCH"                         | Display Large (Recursive, 72px, 800 wght) | `baruGold`                                  |
-| **Subhead**        | "Craft your application with evidence." | Headline (Sora, 48px, 700 wght)           | `kr-leafusAsh` (80% opacity)                |
-| **Evidence Panel** | "Evidence"                              | Subhead (Inter, 24px, 700 wght)           | `baruGold`                                  |
-| **Editor Panel**   | "Cover Letter"                          | Subhead (Inter, 24px, 700 wght)           | `baruGold`                                  |
-| **Evidence Card**  | "{Skill/Project Name}"                  | Body (Inter, 16px, 500 wght)              | `kr-leafusAsh`                              |
-| **Insert Button**  | "Insert"                                | Metadata (JetBrains Mono, 12px)           | `parrotGreen`                               |
-| **Primary CTA**    | "Finalize Application"                  | Subhead (Inter, 24px, 700 wght)           | `charcoalBackground` (on `baruGold` button) |
+| **Headline**       | "THE WORKBENCH"                         | Display Large (Recursive, 72px, 800 wght) | `inkGold`                                  |
+| **Subhead**        | "Craft your application with evidence." | Headline (Sora, 48px, 700 wght)           | `worker-ash` (80% opacity)                |
+| **Evidence Panel** | "Evidence"                              | Subhead (Inter, 24px, 700 wght)           | `inkGold`                                  |
+| **Editor Panel**   | "Cover Letter"                          | Subhead (Inter, 24px, 700 wght)           | `inkGold`                                  |
+| **Evidence Card**  | "{Skill/Project Name}"                  | Body (Inter, 16px, 500 wght)              | `worker-ash`                              |
+| **Insert Button**  | "Insert"                                | Metadata (JetBrains Mono, 12px)           | `signalGreen`                               |
+| **Primary CTA**    | "Finalize Application"                  | Subhead (Inter, 24px, 700 wght)           | `charcoalBackground` (on `inkGold` button) |
 
 ---
 
@@ -242,19 +242,19 @@ This document provides the **actual copy, microcopy, and content specifications*
 
 | Element                | Content                               | Typography Token                          | Color Token                                 |
 | ---------------------- | ------------------------------------- | ----------------------------------------- | ------------------------------------------- |
-| **Headline**           | "THE FINALIZATION"                    | Display Large (Recursive, 72px, 800 wght) | `baruGold`                                  |
-| **Subhead**            | "Review and export your application." | Headline (Sora, 48px, 700 wght)           | `kr-leafusAsh` (80% opacity)                |
-| **Control Panel**      | "Format Controls"                     | Subhead (Inter, 24px, 700 wght)           | `baruGold`                                  |
-| **Toggle: Bot View**   | "Bot View"                            | Body (Inter, 16px, 400 wght)              | `kr-leafusAsh`                              |
-| **Toggle: Human View** | "Human View"                          | Body (Inter, 16px, 400 wght)              | `kr-leafusAsh`                              |
-| **Primary CTA**        | "Export PDF"                          | Subhead (Inter, 24px, 700 wght)           | `charcoalBackground` (on `baruGold` button) |
-| **Secondary CTA**      | "Save Draft"                          | Body (Inter, 16px, 500 wght)              | `parrotGreen`                               |
+| **Headline**           | "THE FINALIZATION"                    | Display Large (Recursive, 72px, 800 wght) | `inkGold`                                  |
+| **Subhead**            | "Review and export your application." | Headline (Sora, 48px, 700 wght)           | `worker-ash` (80% opacity)                |
+| **Control Panel**      | "Format Controls"                     | Subhead (Inter, 24px, 700 wght)           | `inkGold`                                  |
+| **Toggle: Bot View**   | "Bot View"                            | Body (Inter, 16px, 400 wght)              | `worker-ash`                              |
+| **Toggle: Human View** | "Human View"                          | Body (Inter, 16px, 400 wght)              | `worker-ash`                              |
+| **Primary CTA**        | "Export PDF"                          | Subhead (Inter, 24px, 700 wght)           | `charcoalBackground` (on `inkGold` button) |
+| **Secondary CTA**      | "Save Draft"                          | Body (Inter, 16px, 500 wght)              | `signalGreen`                               |
 
 #### Success States
 
 | Scenario           | Message                                     | Color Token |
 | ------------------ | ------------------------------------------- | ----------- |
-| **Export Success** | "Application exported. Integrity verified." | `baruGold`  |
+| **Export Success** | "Application exported. Integrity verified." | `inkGold`  |
 
 ---
 
@@ -266,12 +266,12 @@ This document provides the **actual copy, microcopy, and content specifications*
 
 | Element       | Content                            | Typography Token                          | Color Token                  |
 | ------------- | ---------------------------------- | ----------------------------------------- | ---------------------------- |
-| **Headline**  | "ARCHIVE CONFIGURATION"            | Display Large (Recursive, 72px, 800 wght) | `baruGold`                   |
-| **Subhead**   | "Manage your collective identity." | Headline (Sora, 48px, 700 wght)           | `kr-leafusAsh` (80% opacity) |
-| **Section 1** | "Profile Settings"                 | Subhead (Inter, 24px, 700 wght)           | `baruGold`                   |
-| **Section 2** | "Privacy Controls"                 | Subhead (Inter, 24px, 700 wght)           | `baruGold`                   |
-| **Section 3** | "Data Management"                  | Subhead (Inter, 24px, 700 wght)           | `baruGold`                   |
-| **Section 4** | "Export Options"                   | Subhead (Inter, 24px, 700 wght)           | `baruGold`                   |
+| **Headline**  | "ARCHIVE CONFIGURATION"            | Display Large (Recursive, 72px, 800 wght) | `inkGold`                   |
+| **Subhead**   | "Manage your collective identity." | Headline (Sora, 48px, 700 wght)           | `worker-ash` (80% opacity) |
+| **Section 1** | "Profile Settings"                 | Subhead (Inter, 24px, 700 wght)           | `inkGold`                   |
+| **Section 2** | "Privacy Controls"                 | Subhead (Inter, 24px, 700 wght)           | `inkGold`                   |
+| **Section 3** | "Data Management"                  | Subhead (Inter, 24px, 700 wght)           | `inkGold`                   |
+| **Section 4** | "Export Options"                   | Subhead (Inter, 24px, 700 wght)           | `inkGold`                   |
 
 ---
 
@@ -283,9 +283,9 @@ This document provides the **actual copy, microcopy, and content specifications*
 
 | Element           | Content                                                         | Typography Token                                                                         | Color Token                                |
 | ----------------- | --------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ------------------------------------------ |
-| **Hero Greeting** | "THE COLLECTIVE IS THRIVING"                                    | Display Large (Recursive, 72px, 800 wght)                                                | `baruGold`                                 |
-| **Subhead**       | "Your solidarity ecosystem at a glance."                        | Headline (Sora, 48px, 700 wght)                                                          | `kr-leafusAsh` (80% opacity)               |
-| **Metric Card 1** | **Label:** "Active Applications"<br>**Value:** "{count}"        | **Label:** Metadata (JetBrains Mono, 12px)<br>**Value:** Display Large (Recursive, 48px) | Label: `kr-leafusAsh`<br>Value: `baruGold` |
+| **Hero Greeting** | "THE COLLECTIVE IS THRIVING"                                    | Display Large (Recursive, 72px, 800 wght)                                                | `inkGold`                                 |
+| **Subhead**       | "Your solidarity ecosystem at a glance."                        | Headline (Sora, 48px, 700 wght)                                                          | `worker-ash` (80% opacity)               |
+| **Metric Card 1** | **Label:** "Active Applications"<br>**Value:** "{count}"        | **Label:** Metadata (JetBrains Mono, 12px)<br>**Value:** Display Large (Recursive, 48px) | Label: `worker-ash`<br>Value: `inkGold` |
 | **Metric Card 2** | **Label:** "Skills Tracked"<br>**Value:** "{count}"             | Same as Card 1                                                                           | Same as Card 1                             |
 | **Metric Card 3** | **Label:** "Progress This Week"<br>**Value:** "{count} actions" | Same as Card 1                                                                           | Same as Card 1                             |
 
@@ -378,7 +378,7 @@ When Symbolic Anchors (devotional, resistance, or First Nations imagery) are pre
 
 ### 1. Ink Overlap
 
-When assets like `{kr-asset-halo-disk}` overlap with text, ensure text remains legible through high-contrast `baruGold` or `kr-leafusAsh` color selection. Minimum contrast ratio: 4.5:1.
+When assets like `{kr-asset-halo-disk}` overlap with text, ensure text remains legible through high-contrast `inkGold` or `worker-ash` color selection. Minimum contrast ratio: 4.5:1.
 
 ### 2. Tactile Response
 

@@ -9,19 +9,19 @@ Data is political. We do not use neutral blues. We use the colors of the land (K
 ### 1. Primary Data (The Truth)
 
 - **Token:** `color-data-primary`
-- **Ref:** `var(--color-wattle-gold)`
+- **Ref:** `var(--color-ink-gold)`
 - **Usage:** The main dataset, the "User's" performance.
 
 ### 2. Comparison Data (The Context)
 
 - **Token:** `color-data-comparison`
-- **Ref:** `var(--color-kr-leafus-smoke-primary)`
+- **Ref:** `var(--color-backwater-green-primary)`
 - **Usage:** Averages, benchmarks, "others".
 
 ### 3. Alert Data (The Warning)
 
 - **Token:** `color-data-alert`
-- **Ref:** `var(--color-waratah-red)`
+- **Ref:** `var(--color-solidarity-red)`
 - **Usage:** Drops in performance, critical thresholds.
 
 ### 4. Background Data (The Noise)
@@ -33,7 +33,7 @@ Data is political. We do not use neutral blues. We use the colors of the land (K
 ## Typography in Charts
 
 - **Axis Labels:** `JetBrains Mono` (The Annotation), 10px, Uppercase.
-- **Tooltips:** `Work Sans` (The Field Note), 12px, Dark Background with Wattle Border.
+- **Tooltips:** `Work Sans` (The Field Note), 12px, Dark Background with Ink Border.
 - **Big Numbers:** `kr-serif-bold` (The Proclamation), Condensed.
 
 ## Chart Styles

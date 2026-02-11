@@ -131,8 +131,8 @@ export const AnalysisPage: React.FC = () => {
       {/* Header: Analytical Focus */}
       <header className="mb-12 flex items-center justify-between border-b border-concrete-grey/10 pb-8 relative z-10">
         <div className="flex items-center gap-6">
-          <div className="w-20 h-20 rounded-stone bg-wattle-gold/5 flex items-center justify-center border border-wattle-gold/20 shadow-inner">
-            <Compass className="w-10 h-10 text-wattle-gold animate-in spin-in-12 duration-1000" />
+          <div className="w-20 h-20 rounded-stone bg-ink-gold/5 flex items-center justify-center border border-ink-gold/20 shadow-inner">
+            <Compass className="w-10 h-10 text-ink-gold animate-in spin-in-12 duration-1000" />
           </div>
           <div>
             <h1 className="font-bloom text-6xl font-black text-paper-white tracking-tighter uppercase">
@@ -158,7 +158,7 @@ export const AnalysisPage: React.FC = () => {
             elevation="raised"
             className="border-concrete-grey/10 p-10 bg-asphalt-black/20"
           >
-            <h2 className="font-bloom text-2xl font-bold text-wattle-gold mb-8 flex items-center gap-3 uppercase tracking-tight">
+            <h2 className="font-bloom text-2xl font-bold text-ink-gold mb-8 flex items-center gap-3 uppercase tracking-tight">
               <Target className="w-6 h-6" /> Tactical Inputs
             </h2>
 
@@ -230,10 +230,10 @@ export const AnalysisPage: React.FC = () => {
             <Stone
               mode="KrDark"
               elevation="floating"
-              className="p-0 border-wattle-gold/20 overflow-hidden bg-asphalt-black-dark"
+              className="p-0 border-ink-gold/20 overflow-hidden bg-asphalt-black-dark"
             >
-              <div className="p-6 bg-wattle-gold/[0.03] border-b border-concrete-grey/10 flex items-center gap-4">
-                <Building className="w-6 h-6 text-wattle-gold" />
+              <div className="p-6 bg-ink-gold/[0.03] border-b border-concrete-grey/10 flex items-center gap-4">
+                <Building className="w-6 h-6 text-ink-gold" />
                 <div>
                   <h3 className="font-bloom text-xl text-paper-white leading-none">
                     {strategyResult.corporate_profile.name}
@@ -247,7 +247,7 @@ export const AnalysisPage: React.FC = () => {
               {/* 2x2 Forensic Grid */}
               <div className="grid grid-cols-2">
                 <div className="p-6 border-r border-b border-concrete-grey/5">
-                  <h4 className="font-annotation text-[10px] text-wattle-gold/60 uppercase mb-2">
+                  <h4 className="font-annotation text-[10px] text-ink-gold/60 uppercase mb-2">
                     Voice
                   </h4>
                   <span className="text-xs font-field-note text-paper-white">
@@ -255,7 +255,7 @@ export const AnalysisPage: React.FC = () => {
                   </span>
                 </div>
                 <div className="p-6 border-b border-concrete-grey/5">
-                  <h4 className="font-annotation text-[10px] text-wattle-gold/60 uppercase mb-2">
+                  <h4 className="font-annotation text-[10px] text-ink-gold/60 uppercase mb-2">
                     Known For
                   </h4>
                   <span className="text-xs font-field-note text-paper-white truncate block">
@@ -263,7 +263,7 @@ export const AnalysisPage: React.FC = () => {
                   </span>
                 </div>
                 <div className="p-6 border-r border-concrete-grey/5">
-                  <h4 className="font-annotation text-[10px] text-wattle-gold/60 uppercase mb-2">
+                  <h4 className="font-annotation text-[10px] text-ink-gold/60 uppercase mb-2">
                     Strategic Focus
                   </h4>
                   <span className="text-xs font-field-note text-paper-white line-clamp-2">
@@ -271,7 +271,7 @@ export const AnalysisPage: React.FC = () => {
                   </span>
                 </div>
                 <div className="p-6">
-                  <h4 className="font-annotation text-[10px] text-wattle-gold/60 uppercase mb-2">
+                  <h4 className="font-annotation text-[10px] text-ink-gold/60 uppercase mb-2">
                     Core Ethos
                   </h4>
                   <div className="flex flex-wrap gap-1">
@@ -323,12 +323,12 @@ export const AnalysisPage: React.FC = () => {
           <Stone
             mode="KrDark"
             elevation="floating"
-            className="border-wattle-gold/30 p-0 overflow-hidden"
+            className="border-ink-gold/30 p-0 overflow-hidden"
             header={
-              <div className="flex justify-between items-center w-full bg-wattle-gold/[0.02] p-6 border-b border-concrete-grey/10">
+              <div className="flex justify-between items-center w-full bg-ink-gold/[0.02] p-6 border-b border-concrete-grey/10">
                 <div>
                   <h3 className="text-2xl font-black text-paper-white flex items-center gap-3 uppercase tracking-tighter">
-                    <Sparkles className="w-6 h-6 text-wattle-gold" /> Optimized Output
+                    <Sparkles className="w-6 h-6 text-ink-gold" /> Optimized Output
                   </h3>
                   <p className="text-[10px] font-annotation text-concrete-grey-dark mt-1 uppercase tracking-widest">
                     Ready for archival submission

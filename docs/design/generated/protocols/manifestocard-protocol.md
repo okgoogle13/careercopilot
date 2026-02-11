@@ -7,8 +7,8 @@
 
 ## Visual Hierarchy
 - **Dominant**: Kerala Elephant (80% weight, abstract/stencil)
-- **Primary Ink**: Waratah Red (#F14714) for titles and accents.
-- **Secondary Ink**: Baru Gold (#DAF674) for primary actions.
+- **Primary Ink**: Solidarity Red (#F14714) for titles and accents.
+- **Secondary Ink**: Ink Gold (#DAF674) for primary actions.
 - **Substrate**: Charcoal Background (#1A1A1A).
 
 ## Motion Physics

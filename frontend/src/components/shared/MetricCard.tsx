@@ -20,7 +20,7 @@ export function MetricCard({
   label,
   value,
   annotation,
-  iconColor = 'text-[var(--color-wattle-gold)]',
+  iconColor = 'text-[var(--color-ink-gold)]',
   variant = 'outlined',
   hoverable = true,
   className = '',
@@ -60,7 +60,7 @@ export function MetricCard({
         </div>
 
         <div className="flex items-baseline gap-2">
-          <p className="text-3xl font-annotation font-black text-on-surface shadow-layered-wattle">
+          <p className="text-3xl font-annotation font-black text-on-surface shadow-layered-ink">
             {value}
           </p>
           {annotation && (

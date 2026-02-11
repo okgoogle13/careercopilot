@@ -10,7 +10,7 @@ export const GlobalHeader: React.FC = () => {
       <div className="flex items-center gap-4">
         {/* Branding */}
         <div className="flex flex-col">
-          <h1 className="font-proclamation text-xl text-wattle-gold tracking-tight">
+          <h1 className="font-proclamation text-xl text-ink-gold tracking-tight">
             KeralaRage KrSolidarity
           </h1>
           <span className="text-[10px] font-annotation uppercase tracking-widest text-secondary-flannel-dim opacity-70">
@@ -26,7 +26,7 @@ export const GlobalHeader: React.FC = () => {
             onClick={() => mode !== 'KrDark' && toggleMode()}
             className={`px-3 py-1 text-xs font-bold uppercase tracking-wider rounded-md transition-all ${
               mode === 'KrDark'
-                ? 'bg-surface-KrDark-concrete-grey-high text-wattle-gold shadow-sm'
+                ? 'bg-surface-KrDark-concrete-grey-high text-ink-gold shadow-sm'
                 : 'text-secondary-flannel-dim hover:text-on-surface-paper-white'
             }`}
           >
@@ -36,7 +36,7 @@ export const GlobalHeader: React.FC = () => {
             onClick={() => mode !== 'KrDark' && toggleMode()}
             className={`px-3 py-1 text-xs font-bold uppercase tracking-wider rounded-md transition-all ${
               mode === 'KrDark'
-                ? 'bg-surface-KrDark-slate-smoke text-wattle-gold shadow-sm'
+                ? 'bg-surface-KrDark-slate-smoke text-ink-gold shadow-sm'
                 : 'text-secondary-flannel-dim hover:text-on-surface-paper-white'
             }`}
           >

@@ -55,13 +55,13 @@ export const KrDarkKanban: React.FC = () => {
                                     transition={{ delay: (idx * 0.1) + (appIdx * 0.05) }}
                                   >
                                     <SolidarityCard
-                                        className="p-8 group/card cursor-pointer border-white/5 hover:border-wattle-gold/20 transition-all duration-500 relative overflow-hidden"
+                                        className="p-8 group/card cursor-pointer border-white/5 hover:border-ink-gold/20 transition-all duration-500 relative overflow-hidden"
                                         onClick={() => console.log('Opening mission:', app.id)}
                                     >
                                         <div className="flex flex-col gap-5 relative z-10">
                                             <div className="space-y-1">
                                               <span className="font-mono text-[8px] text-paper-white/20 uppercase tracking-widest">ID: {app.id.slice(0, 8)}</span>
-                                              <h4 className="font-proclamation text-2xl uppercase text-paper-white group-hover/card:text-wattle-gold transition-colors duration-500 leading-tight">
+                                              <h4 className="font-proclamation text-2xl uppercase text-paper-white group-hover/card:text-ink-gold transition-colors duration-500 leading-tight">
                                                 {app.role}
                                               </h4>
                                             </div>
@@ -72,18 +72,18 @@ export const KrDarkKanban: React.FC = () => {
 
                                             <div className="flex items-center gap-6 pt-4 border-t border-white/5 text-[10px] text-paper-white/30 font-mono tracking-tighter">
                                                 <div className="flex items-center gap-2">
-                                                    <MapPin className="w-3 h-3 text-waratah-red/40" />
+                                                    <MapPin className="w-3 h-3 text-solidarity-red/40" />
                                                     {app.location}
                                                 </div>
                                                 <div className="flex items-center gap-2">
-                                                    <Clock className="w-3 h-3 text-wattle-gold/40" />
+                                                    <Clock className="w-3 h-3 text-ink-gold/40" />
                                                     {app.updatedAt}
                                                 </div>
                                             </div>
 
                                             {app.status === 'Offer' && (
                                                 <div className="absolute top-0 right-0">
-                                                   <div className="w-2 h-2 rounded-full bg-wattle-gold animate-pulse shadow-wattle-glow" />
+                                                   <div className="w-2 h-2 rounded-full bg-ink-gold animate-pulse shadow-ink-glow" />
                                                 </div>
                                             )}
                                         </div>

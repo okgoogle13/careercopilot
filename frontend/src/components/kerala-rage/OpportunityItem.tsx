@@ -38,21 +38,21 @@ export const OpportunityItem = React.forwardRef<HTMLDivElement, OpportunityItemP
         {/* Priority Halo - TODO[asset]: Human replacement with halo disk PNG. */}
         {priority && (
           <div className="absolute top-0 right-0 w-16 h-16 pointer-events-none overflow-hidden">
-            <div className="absolute top-[-20%] right-[-20%] w-24 h-24 bg-wattle-gold/20 blur-xl rounded-full animate-pulse" />
+            <div className="absolute top-[-20%] right-[-20%] w-24 h-24 bg-ink-gold/20 blur-xl rounded-full animate-pulse" />
           </div>
         )}
 
         <div className="flex-1 space-y-2 relative z-10">
           <div className="flex items-center gap-3">
              {priority && (
-               <span className="flex h-2 w-2 rounded-full bg-waratah-red shadow-[0_0_8px_rgba(241,71,20,0.8)]" aria-label="Priority Item" />
+               <span className="flex h-2 w-2 rounded-full bg-solidarity-red shadow-[0_0_8px_rgba(241,71,20,0.8)]" aria-label="Priority Item" />
              )}
-             <span className="font-annotation text-xs text-wattle-gold tracking-widest uppercase">
+             <span className="font-annotation text-xs text-ink-gold tracking-widest uppercase">
                {meta}
              </span>
           </div>
 
-          <h3 className="font-bloom text-xl text-paper-white group-hover:text-wattle-gold transition-colors">
+          <h3 className="font-bloom text-xl text-paper-white group-hover:text-ink-gold transition-colors">
             {title}
           </h3>
           

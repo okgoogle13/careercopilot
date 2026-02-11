@@ -26,10 +26,10 @@ const TechCard = React.forwardRef<HTMLDivElement, TechCardProps>(
         };
 
         const levelColors = {
-            beginner: mode === 'KrDark' ? 'text-status-KrDark-ghost-gum' : 'text-status-KrDark-clinical-sage',
-            intermediate: mode === 'KrDark' ? 'text-wattle-gold' : 'text-wattle-gold',
+            beginner: mode === 'KrDark' ? 'text-status-KrDark-solidarity-green' : 'text-status-KrDark-clinical-sage',
+            intermediate: mode === 'KrDark' ? 'text-ink-gold' : 'text-ink-gold',
             advanced: mode === 'KrDark' ? 'text-status-KrDark-KrFlower-orange' : 'text-status-KrDark-KrFlower-orange',
-            expert: mode === 'KrDark' ? 'text-tertiary-waratah-red' : 'text-status-KrDark-clinical-alert',
+            expert: mode === 'KrDark' ? 'text-tertiary-solidarity-red' : 'text-status-KrDark-clinical-alert',
         };
 
         // Styles derived from M3Card glass variant logic
@@ -77,7 +77,7 @@ const TechCard = React.forwardRef<HTMLDivElement, TechCardProps>(
                         <div className="flex items-center gap-3">
                             {icon && (
                                 <motion.div
-                                    className="text-wattle-gold"
+                                    className="text-ink-gold"
                                     whileHover={{ scale: 1.1, rotate: 5 }}
                                     transition={{ type: "spring", stiffness: 400, damping: 20 }}
                                 >

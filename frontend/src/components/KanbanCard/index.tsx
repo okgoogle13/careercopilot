@@ -43,7 +43,7 @@ export const KanbanCard: React.FC<KanbanCardProps> = ({
   onDragStart,
   onSelect
 }) => {
-  const priorityColor = priority === 'high' ? 'text-waratah-red' : priority === 'medium' ? 'text-baru-gold' : 'text-smoke-green';
+  const priorityColor = priority === 'high' ? 'text-solidarity-red' : priority === 'medium' ? 'text-ink-gold' : 'text-smoke-green';
   
   return (
     <motion.div

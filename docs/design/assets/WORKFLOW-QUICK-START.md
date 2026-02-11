@@ -138,7 +138,7 @@ Recommendations:
 /assets/ASSET-20260211-023251-botanical-canopy-{id}/
 ├── context.md (92 lines)
 │   └── Narrative: Kerala-streetprint naturalist discovery
-│   └── kr-motifs: Wattle, leaves, endemic flora
+│   └── kr-motifs: Ink, leaves, endemic flora
 │   └── Mode context: Gallery (warm), Lab (clinical)
 │
 ├── tokens.json (43 lines, DTCG-compliant)
@@ -235,7 +235,7 @@ All generated assets use this palette:
 ```json
 {
   "background": "#1A1714",        // Asphalt black
-  "primary": ["#D4A84B", "#C45C4B"],    // Wattle gold, Waratah red
+  "primary": ["#D4A84B", "#C45C4B"],    // Ink gold, Solidarity red
   "secondary": ["#B8733D", "#7A9E82"]   // Ochre earth, Gum leaf green
 }
 ```

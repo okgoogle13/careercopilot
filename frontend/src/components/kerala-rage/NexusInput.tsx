@@ -41,7 +41,7 @@ export const NexusInput = React.forwardRef<HTMLInputElement, NexusInputProps>(
           {...motionProps}
         >
           {icon === 'search' && (
-            <div className="absolute left-4 text-wattle-gold/70 pointer-events-none">
+            <div className="absolute left-4 text-ink-gold/70 pointer-events-none">
               {loading ? (
                 <Loader2 className="w-5 h-5 animate-spin" />
               ) : (
@@ -64,10 +64,10 @@ export const NexusInput = React.forwardRef<HTMLInputElement, NexusInputProps>(
               icon === 'search' ? "pl-12 pr-4" : "px-6",
               
               // Focus State (Gold Glow)
-              "focus:outline-none focus:border-wattle-gold focus:shadow-[0_0_15px_rgba(218,246,116,0.15)]",
+              "focus:outline-none focus:border-ink-gold focus:shadow-[0_0_15px_rgba(218,246,116,0.15)]",
               
               // Error State
-              error && "border-waratah-red focus:border-waratah-red focus:shadow-[0_0_15px_rgba(241,71,20,0.15)]",
+              error && "border-solidarity-red focus:border-solidarity-red focus:shadow-[0_0_15px_rgba(241,71,20,0.15)]",
               
               className
             )}

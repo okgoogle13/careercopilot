@@ -12,7 +12,7 @@
 
 ## Color
 - **Substrate**: `bg-asphalt-black`. 
-- **Hero Text**: `text-waratah-red` (Title) and `text-paper-white/80` (Body).
+- **Hero Text**: `text-solidarity-red` (Title) and `text-paper-white/80` (Body).
 - **Cards**: `bg-asphalt-black` with `border-white/10` and `shadow-viscous`.
 
 ## Spacing

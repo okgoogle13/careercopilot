@@ -34,11 +34,11 @@ export const KrDarkIngestion: React.FC = () => {
       >
         <div className="relative group cursor-pointer">
           {/* Z-0: TODO[asset]: Blueprint Grid Substrate overlay (12% opacity) */}
-          <div className="absolute inset-0 bg-waratah-red/5 blur-[80px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
+          <div className="absolute inset-0 bg-solidarity-red/5 blur-[80px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
           
-          <div className="flex flex-col items-center justify-center p-24 border-2 border-dashed border-white/10 rounded-stone bg-asphalt-black/40 backdrop-blur-sm group-hover:border-waratah-red/40 transition-all duration-700 shadow-viscous group-hover:shadow-wattle-glow">
+          <div className="flex flex-col items-center justify-center p-24 border-2 border-dashed border-white/10 rounded-stone bg-asphalt-black/40 backdrop-blur-sm group-hover:border-solidarity-red/40 transition-all duration-700 shadow-viscous group-hover:shadow-ink-glow">
             <div className="mb-8 relative">
-              <div className="w-20 h-20 rounded-full border border-white/20 flex items-center justify-center text-paper-white/20 group-hover:text-waratah-red group-hover:border-waratah-red/40 transition-colors duration-500">
+              <div className="w-20 h-20 rounded-full border border-white/20 flex items-center justify-center text-paper-white/20 group-hover:text-solidarity-red group-hover:border-solidarity-red/40 transition-colors duration-500">
                 <svg className="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
                 </svg>
@@ -52,7 +52,7 @@ export const KrDarkIngestion: React.FC = () => {
             <ActionButton variant="secondary" label="BROWSE ARCHIVE_01" className="px-10 py-3 text-[10px] tracking-[0.3em]" />
 
             <div className="absolute bottom-6 right-8">
-              <span className="font-mono text-[8px] uppercase tracking-widest text-paper-white/20 group-hover:text-waratah-red/40 transition-colors">
+              <span className="font-mono text-[8px] uppercase tracking-widest text-paper-white/20 group-hover:text-solidarity-red/40 transition-colors">
                 STATUS: READY_FOR_FEED
               </span>
             </div>

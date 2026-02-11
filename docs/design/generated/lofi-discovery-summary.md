@@ -35,7 +35,7 @@ This document consolidates discovery data from all 14 screens in the screen plan
 | Asset Name | Priority | Usage Notes |
 | :--- | :--- | :--- |
 | **screenprint-substrate** | **Critical** | Global background texture (Z-0). |
-| **halo-disk** | **Critical** | Primary emphasis motif (Z-1/Z-2); Baru Gold. |
+| **halo-disk** | **Critical** | Primary emphasis motif (Z-1/Z-2); Ink Gold. |
 | **blueprint-grid** | **High** | Foundation for Creator/Analytical screens (8-12% opacity). |
 | **screenprint-grit** | **High** | Ambient particle overlay (Z-3). |
 | **Solidarity-Icon-Pack** | **High** | Action icons (filter, search, sort, bookmark). |
@@ -52,6 +52,6 @@ This document consolidates discovery data from all 14 screens in the screen plan
 
 ### Assets (Commission/Generate)
 1. **screenprint-substrate**: High-res matte charcoal texture with subtle organic variation.
-2. **halo-disk**: Soft but vibrant radial glow motif in Baru Gold.
+2. **halo-disk**: Soft but vibrant radial glow motif in Ink Gold.
 3. **blueprint-grid**: Geometric tactical grid for high-precision layouts.
 4. **Solidarity-Icon-Pack**: Minimalist, high-contrast SVG set for tactical actions.

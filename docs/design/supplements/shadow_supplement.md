@@ -38,17 +38,17 @@ Shadows are not just depth; they are atmosphere. In the Kerala Rage system, shad
 
 ## Colored Shadow Signatures
 
-### Wattle Offset (Optimism)
+### Ink Offset (Optimism)
 
-- **Token:** `shadow-wattle-offset`
-- **Value:** `2px 2px 0px var(--color-baru-gold-primary)`
+- **Token:** `shadow-ink-offset`
+- **Value:** `2px 2px 0px var(--color-ink-gold-primary)`
 - **Usage:** Primary buttons, "Call to Action" cards.
 - **Effect:** Hard edge, retro-optimistic.
 
-### Waratah Bleed (Rage/Danger)
+### Solidarity Bleed (Rage/Danger)
 
-- **Token:** `shadow-waratah-bleed`
-- **Value:** `0 0 12px var(--color-waratah-primary)`
+- **Token:** `shadow-solidarity-bleed`
+- **Value:** `0 0 12px var(--color-solidarity-primary)`
 - **Usage:** Error inputs, destructive buttons, "Revolution" text.
 - **Effect:** Glowing, radioactive intensity.
 

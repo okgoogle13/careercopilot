@@ -46,7 +46,7 @@ export const ApplicationForm: React.FC<ApplicationFormProps> = ({
       {/* Blueprint Watermark */}
       <div className="absolute inset-0 opacity-[0.06] pointer-events-none bg-[url('/assets/blueprint-grid.svg')] z-0" />
 
-      <h1 className="text-display-lg font-solidarity-900 text-baru-gold uppercase mb-12 relative z-10">
+      <h1 className="text-display-lg font-solidarity-900 text-ink-gold uppercase mb-12 relative z-10">
         DEPOSIT HISTORY
       </h1>
 
@@ -74,8 +74,8 @@ export const ApplicationForm: React.FC<ApplicationFormProps> = ({
                exit={{ opacity: 0 }}
                className="flex flex-col items-center gap-4"
              >
-               <div className="w-12 h-12 border-4 border-baru-gold border-t-transparent rounded-full animate-spin" />
-               <span className="font-jetbrains-mono text-xs uppercase text-baru-gold">Verifying Integrity...</span>
+               <div className="w-12 h-12 border-4 border-ink-gold border-t-transparent rounded-full animate-spin" />
+               <span className="font-jetbrains-mono text-xs uppercase text-ink-gold">Verifying Integrity...</span>
              </motion.div>
           ) : isSuccess ? (
              <motion.div
@@ -90,7 +90,7 @@ export const ApplicationForm: React.FC<ApplicationFormProps> = ({
              </motion.div>
           ) : (
              <div className="flex flex-col items-center gap-4 text-center">
-               <svg className="w-16 h-16 text-blueprint-grey group-hover:text-waratah-red transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+               <svg className="w-16 h-16 text-blueprint-grey group-hover:text-solidarity-red transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
                </svg>
                <div className="space-y-2">
@@ -122,12 +122,12 @@ export const ApplicationForm: React.FC<ApplicationFormProps> = ({
         <div className="text-[10px] font-jetbrains-mono text-blueprint-grey/40 uppercase tracking-[0.3em]">
           Station: Collective_V01
         </div>
-        <div className="w-32 h-1 bg-waratah-red/20 overflow-hidden">
+        <div className="w-32 h-1 bg-solidarity-red/20 overflow-hidden">
           <motion.div
             initial={{ x: '-100%' }}
             animate={isVerifying ? { x: '100%' } : { x: '-100%' }}
             transition={{ repeat: Infinity, duration: 1.5, ease: "linear" }}
-            className="w-full h-full bg-waratah-red"
+            className="w-full h-full bg-solidarity-red"
           />
         </div>
       </div>

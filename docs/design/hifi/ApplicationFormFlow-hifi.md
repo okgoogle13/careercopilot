@@ -7,15 +7,15 @@
 
 ## Typography
 - **Form Headline**: `Fraunces Energetic`, 48px (mobile: 32px), `font-weight: 800`.
-- **Step Label**: `JetBrains Mono`, 14px, `uppercase`, `text-wattle-gold`.
+- **Step Label**: `JetBrains Mono`, 14px, `uppercase`, `text-ink-gold`.
 - **Input Labels**: `Work Sans`, 14px, `font-weight: 500`, `text-paper-white/60`.
-- **Success Title**: `Fraunces Energetic`, 64px, `font-weight: 800`, `text-waratah-red`.
+- **Success Title**: `Fraunces Energetic`, 64px, `font-weight: 800`, `text-solidarity-red`.
 
 ## Color
 - **Substrate**: `bg-asphalt-black`.
 - **Form Card**: `bg-asphalt-black`, `border-white/5`, `shadow-viscous`.
-- **Active Indicator**: `bg-wattle-gold`.
-- **Error State**: `text-waratah-red`, `border-waratah-red/50`.
+- **Active Indicator**: `bg-ink-gold`.
+- **Error State**: `text-solidarity-red`, `border-solidarity-red/50`.
 
 ## Spacing
 - **Form Padding**: `p-12` (Desktop), `p-6` (Mobile).
@@ -24,7 +24,7 @@
 
 ## Motion
 - **Step Transition**: Current step slides out (`x: -20`, `opacity: 0`) and next step slides in (`x: 20`, `opacity: 1`) using a synchronized spring.
-- **Success Reveal**: Successful submission triggers a full-screen `blur-md` overlay with a high-impact `waratah-red` energetic headline.
+- **Success Reveal**: Successful submission triggers a full-screen `blur-md` overlay with a high-impact `solidarity-red` energetic headline.
 - **Micro-interaction**: Inputs lift and glow on focus.
 
 ## Motif Slots

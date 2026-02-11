@@ -102,21 +102,21 @@ export const M3TextField = forwardRef<HTMLInputElement, M3TextFieldProps>(({
             container: {
                 outlined: `
                     border-2
-                    ${error ? 'border-tertiary-waratah-red' : 'border-primary-wattle-gold/80'}
-                    ${isFocused && !error ? 'border-primary-wattle-gold ring-2 ring-primary-wattle-gold/30' : ''}
+                    ${error ? 'border-tertiary-solidarity-red' : 'border-primary-ink-gold/80'}
+                    ${isFocused && !error ? 'border-primary-ink-gold ring-2 ring-primary-ink-gold/30' : ''}
                     bg-surface-KrDark-concrete-grey
                     shadow-sm
                 `,
                 filled: `
                     border-b-2
-                    ${error ? 'border-b-tertiary-waratah-red' : 'border-b-primary-wattle-gold/80'}
-                    ${isFocused && !error ? 'border-b-primary-wattle-gold' : ''}
+                    ${error ? 'border-b-tertiary-solidarity-red' : 'border-b-primary-ink-gold/80'}
+                    ${isFocused && !error ? 'border-b-primary-ink-gold' : ''}
                     bg-surface-KrDark-concrete-grey
                 `,
             },
             label: {
                 base: 'text-on-surface-paper-white',
-                error: 'text-tertiary-waratah-red',
+                error: 'text-tertiary-solidarity-red',
                 floating: 'text-secondary-flannel-dim',
             },
             input: {
@@ -129,21 +129,21 @@ export const M3TextField = forwardRef<HTMLInputElement, M3TextFieldProps>(({
             container: {
                 outlined: `
                     border-2
-                    ${error ? 'border-tertiary-waratah-red' : 'border-outline-variant'}
-                    ${isFocused && !error ? 'border-primary-wattle-gold ring-2 ring-primary-wattle-gold/20' : ''}
+                    ${error ? 'border-tertiary-solidarity-red' : 'border-outline-variant'}
+                    ${isFocused && !error ? 'border-primary-ink-gold ring-2 ring-primary-ink-gold/20' : ''}
                     ${!disabled && !error && !isFocused ? 'hover:border-outline' : ''}
                     bg-surface-shared-asphalt-black/50 backdrop-blur-sm
                 `,
                 filled: `
                     border-b-2
-                    ${error ? 'border-b-tertiary-waratah-red' : 'border-b-outline-variant'}
-                    ${isFocused && !error ? 'border-b-primary-wattle-gold' : ''}
+                    ${error ? 'border-b-tertiary-solidarity-red' : 'border-b-outline-variant'}
+                    ${isFocused && !error ? 'border-b-primary-ink-gold' : ''}
                     bg-surface-KrDark-concrete-grey shadow-rest
                 `,
             },
             label: {
                 base: 'text-on-surface-paper-white-dim',
-                error: 'text-tertiary-waratah-red',
+                error: 'text-tertiary-solidarity-red',
                 floating: 'text-secondary-flannel-dim',
             },
             input: {
@@ -171,7 +171,7 @@ export const M3TextField = forwardRef<HTMLInputElement, M3TextFieldProps>(({
         bg-transparent
         ${currentTheme.input.text}
         ${currentTheme.input.placeholder}
-        focus:outline-2 focus:outline-offset-2 focus:outline-primary-wattle-gold
+        focus:outline-2 focus:outline-offset-2 focus:outline-primary-ink-gold
         disabled:cursor-not-allowed
         font-field-note
         ${className}
@@ -214,7 +214,7 @@ export const M3TextField = forwardRef<HTMLInputElement, M3TextFieldProps>(({
                             `}
                         >
                             {label}
-                            {required && <span className="text-tertiary-waratah-red ml-1">*</span>}
+                            {required && <span className="text-tertiary-solidarity-red ml-1">*</span>}
                         </label>
                     )}
                     <input
@@ -244,7 +244,7 @@ export const M3TextField = forwardRef<HTMLInputElement, M3TextFieldProps>(({
                     {displayHelperText && (
                         <p
                             id={`${props.id}-helper-text`}
-                            className={`text-xs font-annotation ${error ? 'text-tertiary-waratah-red' : 'text-secondary-flannel-dim'}`}
+                            className={`text-xs font-annotation ${error ? 'text-tertiary-solidarity-red' : 'text-secondary-flannel-dim'}`}
                         >
                             {displayHelperText}
                         </p>
@@ -253,7 +253,7 @@ export const M3TextField = forwardRef<HTMLInputElement, M3TextFieldProps>(({
                         <p
                             className={`
                                 text-xs font-annotation ml-auto
-                                ${isOverLimit ? 'text-tertiary-waratah-red' : ''}
+                                ${isOverLimit ? 'text-tertiary-solidarity-red' : ''}
                                 ${isNearLimit && !isOverLimit ? 'text-secondary-flannel-dim' : ''}
                             `}
                         >
@@ -334,29 +334,29 @@ export const M3TextArea = forwardRef<HTMLTextAreaElement, M3TextAreaProps>(({
         'KrDark': {
             container: `
                 border-2
-                ${error ? 'border-tertiary-waratah-red' : 'border-primary-wattle-gold/80'}
-                ${isFocused && !error ? 'border-primary-wattle-gold ring-2 ring-primary-wattle-gold/30' : ''}
+                ${error ? 'border-tertiary-solidarity-red' : 'border-primary-ink-gold/80'}
+                ${isFocused && !error ? 'border-primary-ink-gold ring-2 ring-primary-ink-gold/30' : ''}
                 bg-surface-KrDark-concrete-grey
                 shadow-sm
                 rounded-[8px_12px_6px_10px]
             `,
             label: {
                 base: 'text-on-surface-paper-white',
-                error: 'text-tertiary-waratah-red',
+                error: 'text-tertiary-solidarity-red',
                 floating: 'text-secondary-flannel-dim',
             },
         },
         'KrLight': {
             container: `
                 border-2
-                ${error ? 'border-tertiary-waratah-red' : 'border-outline-variant'}
-                ${isFocused && !error ? 'border-primary-wattle-gold ring-2 ring-primary-wattle-gold/20' : ''}
+                ${error ? 'border-tertiary-solidarity-red' : 'border-outline-variant'}
+                ${isFocused && !error ? 'border-primary-ink-gold ring-2 ring-primary-ink-gold/20' : ''}
                 bg-surface-shared-asphalt-black/50 backdrop-blur-sm
                 radius-stone
             `,
             label: {
                 base: 'text-on-surface-paper-white-dim',
-                error: 'text-tertiary-waratah-red',
+                error: 'text-tertiary-solidarity-red',
                 floating: 'text-secondary-flannel-dim',
             },
         },
@@ -387,7 +387,7 @@ export const M3TextArea = forwardRef<HTMLTextAreaElement, M3TextAreaProps>(({
                             `}
                         >
                             {label}
-                            {required && <span className="text-tertiary-waratah-red ml-1">*</span>}
+                            {required && <span className="text-tertiary-solidarity-red ml-1">*</span>}
                         </label>
                     )}
                     <textarea
@@ -398,7 +398,7 @@ export const M3TextArea = forwardRef<HTMLTextAreaElement, M3TextAreaProps>(({
                             bg-transparent
                             text-on-surface-paper-white
                             placeholder:text-secondary-flannel-dim
-                            focus:outline-2 focus:outline-offset-2 focus:outline-primary-wattle-gold
+                            focus:outline-2 focus:outline-offset-2 focus:outline-primary-ink-gold
                             disabled:cursor-not-allowed
                             font-field-note
                             resize-vertical
@@ -424,7 +424,7 @@ export const M3TextArea = forwardRef<HTMLTextAreaElement, M3TextAreaProps>(({
                     {displayHelperText && (
                         <p
                             id={`${props.id}-helper-text`}
-                            className={`text-xs font-annotation ${error ? 'text-tertiary-waratah-red' : 'text-secondary-flannel-dim'}`}
+                            className={`text-xs font-annotation ${error ? 'text-tertiary-solidarity-red' : 'text-secondary-flannel-dim'}`}
                         >
                             {displayHelperText}
                         </p>
@@ -433,7 +433,7 @@ export const M3TextArea = forwardRef<HTMLTextAreaElement, M3TextAreaProps>(({
                         <p
                             className={`
                                 text-xs font-annotation ml-auto
-                                ${isOverLimit ? 'text-tertiary-waratah-red' : ''}
+                                ${isOverLimit ? 'text-tertiary-solidarity-red' : ''}
                                 ${isNearLimit && !isOverLimit ? 'text-secondary-flannel-dim' : ''}
                             `}
                         >

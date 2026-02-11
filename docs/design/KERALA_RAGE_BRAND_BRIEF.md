@@ -97,9 +97,9 @@
 
 ### Color Families
 
-#### Waratah Red (#F14714)
+#### Solidarity Red (#F14714)
 
-**Source:** Australian waratah flower, blood, resistance
+**Source:** Australian solidarity flower, blood, resistance
 **Tonal Family:** #A02F0F → #C03811 → #F14714 → #FF6B3D → #FF9470 → #FFB999
 **Usage:** Red hammer-sickle flags, urgent emphasis text, elephant temple decorations, protest banners, primary CTAs
 **Emotion:** Deep rage → active resistance → hopeful fire
@@ -111,49 +111,49 @@
 **Usage:** Malayalam urgent text ("വിപ്ലവം" revolution), urgent headlines, worker solidarity declarations
 **Emotion:** Institutional warning → urgent action
 
-#### kr-leafus Smoke Green (#48DA8B)
+#### kr-activist Smoke Green (#48DA8B)
 
-**Source:** Kerala backwaters, Australian kr-leafus, calm-meets-activism
+**Source:** Kerala backwaters, Australian kr-activist, calm-meets-activism
 **Tonal Family:** #3AAF6E → #42C47D → #48DA8B → #6BE5A8 → #8EEFC0
 **Usage:** Coconut palms, Kerala landscape, backwater water ripples, bridge text ("BETWEEN WORLDS"), migration route maps, melancholic sections
 **Emotion:** Calm melancholy → living persistence
 
-#### Parrot Green (#48F0E5)
+#### Signal Green (#48F0E5)
 
-**Source:** Tropical parrot, Melbourne integration, hybrid identity
+**Source:** Tropical signal, Melbourne integration, hybrid identity
 **Tonal Family:** #36BDD1 → #3FD9DC → #48F0E5 → #6FF5EC → #97F9F3
 **Usage:** Melbourne context text/signage, Australian activist posters, diaspora integration elements
 
 **Emotion:** Bureaucratic cold → vibrant hybrid identity
 
-#### Baru Gold (#DAF674)
+#### Ink Gold (#DAF674)
 
-**Source:** Baru nut, temple gold, optimistic resistance
+**Source:** Primary nut, temple gold, optimistic resistance
 **Tonal Family:** #C8E260 → #D1EC68 → #DAF674 → #E6FF90 → #F0FFB3
 **Usage:** Kerala elephant ornaments, temple decorations, evening light, optimistic moments, small crown tags (when Kerala winning), radiating energy, hope accents
 **Emotion:** Temple reverence → optimistic defiance
 
-#### Gum Leaf Yellow (#F6E748)
+#### Stencil Yellow (#F6E748)
 
 **Source:** Australian gum tree, economic critique, solidarity text
 **Tonal Family:** #E4DA39 → #EDE241 → #F6E748 → #F9ED6F → #FFF876
 **Usage:** Solidarity text ("WORKERS UNITE"), economic critique ("$27/HR COLONIAL GUILT"), union signage, Australian landscape elements, warning/attention accents
 **Emotion:** Economic exploitation → collective power
 
-#### kr-leafus Ash (#DAF6B3)
+#### worker-ash (#DAF6B3)
 
 **Source:** Pale ash, worker hands, formal acknowledgments
 **Tonal Family:** #B8D89A → #C8E8A7 → #DAF6B3 → #E8FBCC → #F4FFDD
 **Usage:** Worker hands/skin tones, kettuvalam houseboat structures, coconut palm frames, Wurundjeri Country acknowledgments, calm melancholic backgrounds
 **Emotion:** Exhausted dignity → quiet reverence
 
-#### Waratah Smoke Orange (#DA8B48)
+#### Solidarity Smoke Orange (#DA8B48)
 
 **Source:** Rubber plantation earth, labor warmth
 **Usage:** Rubber plantation scenes, labor continuity elements, warm Kerala landscape tones, worker solidarity warmth
 **Emotion:** Plantation labor → warm solidarity
 
-#### Lab Wren Metal Blue (#48B3DA)
+#### Ripple Metal Blue (#48B3DA)
 
 **Source:** Lab wren bird, cool technical, water depth
 **Tonal Family:** #36A8C6 → #3FAFD0 → #48B3DA → #6BCCE8 → #8FDCF0
@@ -250,7 +250,7 @@ Cultural identity is asserted through scale, weight, and layout — never throug
 **Kerala Elephant**
 
 - **Symbol:** Cultural power, defiance, Kerala identity assertion
-- **Visual:** Asymmetric organic shape, temple ornaments in waratah red/baru gold
+- **Visual:** Asymmetric organic shape, temple ornaments in solidarity-red/ink-gold
 - **Usage:** Hero sections, identity declarations, "no apology" moments
 - **Motion:** Stride forward with momentum, elastic bounce on interaction
 
@@ -264,14 +264,14 @@ Cultural identity is asserted through scale, weight, and layout — never throug
 **Red Hammer-Sickle Flags**
 
 - **Symbol:** Workers' solidarity, plantation-to-café labor continuity, protest
-- **Visual:** Fabric physics with flutter, waratah red dominant
+- **Visual:** Fabric physics with flutter, solidarity-red dominant
 - **Usage:** Protest banners, union organizing, solidarity declarations
 - **Motion:** Wind drag, flag flutter animation, impact slam
 
 **Coconut Palms**
 
 - **Symbol:** Kerala landscape refusing to disappear, diaspora rootedness
-- **Visual:** Tall organic curves, asymmetric fronds, kr-leafus smoke green
+- **Visual:** Tall organic curves, asymmetric fronds, backwater-green green
 - **Usage:** Landscape frames, homesickness melancholy, persistent identity
 - **Motion:** Gentle sway, wind responsiveness
 
@@ -342,13 +342,13 @@ Every visual composition must maintain clear spatial weight distribution between
 
 **Primary Layer (80%): Kerala/Indian-Australian Identity**
 - Motifs: Elephants, Kettuvalam houseboats, coconut palms, rubber plantation workers, temple ornaments
-- Colors: Waratah Red, Baru Gold, Smoke Green (dominant palette)
+- Colors: Solidarity Red, Ink Gold, Smoke Green (dominant palette)
 - Narrative: Cultural pride, migrant dignity, diaspora rootedness
 - Example: Hero screen with Kerala elephant takes 80% of canvas
 
 **Secondary Layer (10-15%): Australian Activism Context**
 - Motifs: Union posters (wheat-paste aesthetic), Melbourne laneways, refugee rights imagery, trams as labor tools
-- Colors: Gum Leaf Yellow, Parrot Green (accents)
+- Colors: Stencil Yellow, Signal Green (accents)
 - Narrative: Local organizing, Australian worker solidarity
 - Example: Protest poster excerpt or laneway context fills 12% of composition
 
@@ -362,7 +362,7 @@ Every visual composition must maintain clear spatial weight distribution between
 **Visual Application Example:**
 A dashboard hero section:
 1. **Background**: Dark charcoal canvas (foundation)
-2. **Dominant motif** (60%): Kerala elephant + temple ornament in Waratah Red, Baru Gold
+2. **Dominant motif** (60%): Kerala elephant + temple ornament in Solidarity Red, Ink Gold
 3. **Secondary element** (15%): Melbourne laneway tram or union poster excerpt, subtle
 4. **Text layer** (20%): Manifesto or section title in Solidarity weight
 5. **Accent** (5%): "Wurundjeri Country" acknowledgment in corner, small, respectful
@@ -469,7 +469,7 @@ A dashboard hero section:
 **Loading State Pulse:**
 
 - Start: Opacity 0.6, shadow subtle
-- End: Opacity 1, shadow with 12px Wattle glow
+- End: Opacity 1, shadow with 12px Ink glow
 - Duration: 1000ms pulse infinite
 - Easing: Cubic-bezier(0.4, 0, 0.6, 1) (M3 breathing)
 - Usage: Processing, waiting, in-progress states
@@ -491,7 +491,7 @@ A dashboard hero section:
 **Success Lift + Glow:**
 
 - Lift: TranslateY 0 to -8px
-- Glow: Box-shadow Baru Gold, 0 to 24px
+- Glow: Box-shadow Ink Gold, 0 to 24px
 - Duration: 600ms spring elastic
 - Usage: Form submission success, completed milestone
 
@@ -570,7 +570,7 @@ The system's voice is **confrontational, declarative, and interrogative**—but 
 | **Hero / Manifestos** | Confrontational assertion | Full power, declarative | "KERALA TO NAARM: RED FLAGS RISING" | User arriving, needs ideological clarity |
 | **Onboarding / Guidance** | Supportive coalition | "Let's" framing, solidarity verbs | "LET'S OPTIMIZE YOUR RESUME FOR HUMAN READERS" | User needs help; harsh tone creates barrier |
 | **Form Labels / Instructions** | Assertive direction | Capitalized, direct | "UPLOAD YOUR RESUME (PDF, DOC, DOCX)" | Clarity without condescension |
-| **Error States / Validation** | Solidarity-framed problem-solving | "We're fixing this together" | "PDF, DOC, DOCX ONLY—LET'S TRY AGAIN" (in Waratah Red) | User made mistake; help them, don't shame them |
+| **Error States / Validation** | Solidarity-framed problem-solving | "We're fixing this together" | "PDF, DOC, DOCX ONLY—LET'S TRY AGAIN" (in Solidarity Red) | User made mistake; help them, don't shame them |
 | **Success / Celebration** | Joyful momentum | Affirmation + forward motion | "RESUME ANALYZED—YOUR STRENGTHS RISING" | Celebrate progress, propel forward |
 | **Loading / Waiting** | In-progress tension | Reflective patience | "PROCESSING YOUR APPLICATION..." | Acknowledge the work happening |
 | **Accessibility / Help Text** | Humble guidance | Small, lighter weight | "Supported formats: PDF, DOC, DOCX" | Secondary information, visually recede |
@@ -589,8 +589,8 @@ The system's voice is **confrontational, declarative, and interrogative**—but 
 - Teams decide based on user research, not rules
 
 **Rule 3: Visual Tone Intensity Matches Verbal Tone**
-- Hero manifestos: Waratah Red + weight 800 + 72px size = maximum intensity
-- Form validation: Waratah Red + weight 600 + 16px size = clear but not aggressive
+- Hero manifestos: Solidarity Red + weight 800 + 72px size = maximum intensity
+- Form validation: Solidarity Red + weight 600 + 16px size = clear but not aggressive
 - Help text: Smoke Green + weight 400 + 12px size = gentle guidance
 
 ---
@@ -605,10 +605,10 @@ The Kerala Rage system must handle all user-facing states with emotional coheren
 
 | State | Emotional Intent | Visual Treatment | Voice | Motion | Color |
 |-------|-----------------|------------------|-------|--------|-------|
-| **Loading** | "Work is happening—trust the process" | Animated spinner or pulsing element | "PROCESSING YOUR APPLICATION..." | Spring pulse (1000ms) | Wattle Gold glow |
+| **Loading** | "Work is happening—trust the process" | Animated spinner or pulsing element | "PROCESSING YOUR APPLICATION..." | Spring pulse (1000ms) | Ink Gold glow |
 | **Empty** | "You're starting—invitation, not demand" | Kerala motif (palm, elephant) low-opacity + text | "NO DOCUMENTS YET—UPLOAD TO BEGIN" | Gentle fade-in, no aggression | Smoke Green (calm) |
-| **Error** | "We're fixing this together—solidarity frame" | Waratah Red border/highlight + icon | "PDF, DOC, DOCX ONLY—LET'S TRY AGAIN" | Gentle shake (200ms), not violent | Waratah Red (alert) |
-| **Success** | "Celebration—momentum forward" | Baru Gold glow + upward motion + check icon | "RESUME ANALYZED—YOUR STRENGTHS RISING" | Spring lift (400ms) | Baru Gold (optimistic) |
+| **Error** | "We're fixing this together—solidarity frame" | Solidarity Red border/highlight + icon | "PDF, DOC, DOCX ONLY—LET'S TRY AGAIN" | Gentle shake (200ms), not violent | Solidarity Red (alert) |
+| **Success** | "Celebration—momentum forward" | Ink Gold glow + upward motion + check icon | "RESUME ANALYZED—YOUR STRENGTHS RISING" | Spring lift (400ms) | Ink Gold (optimistic) |
 | **Disabled** | "Waiting—colonial defeat aesthetic" | Ghostly Colonial (wght 100, 10-20% opacity) | "UNAVAILABLE" (very light) | None (static) | Charcoal ash (faded) |
 
 #### Implementation Examples
@@ -617,8 +617,8 @@ The Kerala Rage system must handle all user-facing states with emotional coheren
 ```tsx
 export const ProcessingState: React.FC = () => (
   <div className="flex flex-col items-center space-y-4">
-    {/* Pulsing Wattle Gold glow */}
-    <div className="animate-pulse w-24 h-24 rounded-stone bg-wattle-gold/20 border-2 border-wattle-gold" />
+    {/* Pulsing Ink Gold glow */}
+    <div className="animate-pulse w-24 h-24 rounded-stone bg-ink-gold/20 border-2 border-ink-gold" />
 
     {/* Declarative text in Solidarity weight */}
     <p className="text-headline-sm font-bold text-paper-white">
@@ -655,7 +655,7 @@ export const EmptyState: React.FC = () => (
     </p>
 
     {/* CTA in Solidarity colors */}
-    <button className="mt-4 px-6 py-3 bg-wattle-gold text-kr-charcoal font-semibold rounded-pebble">
+    <button className="mt-4 px-6 py-3 bg-ink-gold text-kr-charcoal font-semibold rounded-pebble">
       UPLOAD RESUME
     </button>
   </div>
@@ -665,14 +665,14 @@ export const EmptyState: React.FC = () => (
 ##### Error State
 ```tsx
 export const ValidationError: React.FC<{ message: string }> = ({ message }) => (
-  <div className="p-4 border-l-4 border-waratah-red rounded-stone bg-kr-leaf-smoke/30">
+  <div className="p-4 border-l-4 border-solidarity-red rounded-stone bg-kr-leaf-smoke/30">
     <div className="flex items-center space-x-3">
       {/* Visual indicator */}
       <span className="text-xl">⚠️</span>
 
       {/* Error message in Solidarity framing—"let's fix this" not "you failed" */}
       <div>
-        <p className="font-semibold text-waratah-red">
+        <p className="font-semibold text-solidarity-red">
           {message.toUpperCase()}
         </p>
         <p className="text-body-sm text-kr-leaf-smoke">
@@ -687,9 +687,9 @@ export const ValidationError: React.FC<{ message: string }> = ({ message }) => (
 ##### Success State
 ```tsx
 export const SuccessState: React.FC<{ stat: string; action: string }> = ({ stat, action }) => (
-  <div className="space-y-4 p-6 border-l-4 border-baru-gold rounded-stone bg-kr-leaf-smoke/20">
-    {/* Hero stat in Baru Gold */}
-    <p className="text-headline-sm font-bold text-baru-gold">
+  <div className="space-y-4 p-6 border-l-4 border-ink-gold rounded-stone bg-kr-leaf-smoke/20">
+    {/* Hero stat in Ink Gold */}
+    <p className="text-headline-sm font-bold text-ink-gold">
       {stat}
     </p>
 
@@ -699,7 +699,7 @@ export const SuccessState: React.FC<{ stat: string; action: string }> = ({ stat,
     </p>
 
     {/* Optional: Secondary action */}
-    <button className="mt-4 px-4 py-2 bg-baru-gold/20 border border-baru-gold text-baru-gold font-semibold rounded-pebble">
+    <button className="mt-4 px-4 py-2 bg-ink-gold/20 border border-ink-gold text-ink-gold font-semibold rounded-pebble">
       NEXT STEP
     </button>
   </div>
@@ -725,7 +725,7 @@ Some states don't fit neatly into the matrix. Handle with principle, not formula
 
 **Uploading (Progress):**
 Combine Loading + Success frames:
-- Visual: Progress bar in Wattle Gold, filling left→right
+- Visual: Progress bar in Ink Gold, filling left→right
 - Voice: "UPLOADING... 45% COMPLETE"
 - Motion: Linear, not physics-based (accurate representation)
 
@@ -737,8 +737,8 @@ Combine Error + Disabled frames:
 
 **Conflicting Validation:**
 If form has multiple errors, prioritize by severity:
-- Primary error (blocking submission): Waratah Red, full focus
-- Secondary error (warning): Gum Leaf Yellow, visible but secondary
+- Primary error (blocking submission): Solidarity Red, full focus
+- Secondary error (warning): Stencil Yellow, visible but secondary
 - Hint (informational): Smoke Green, low opacity
 
 ---
@@ -901,7 +901,7 @@ export const SolidarityBanner: React.FC<{ children: string }> = ({ children }) =
         fontFamily: "var(--font-display)",
         fontSize: "var(--type-display-size)",
         letterSpacing: "0.02em",
-        color: "var(--color-waratah-primary)",
+        color: "var(--color-solidarity-primary)",
       }}
     >
       {children}
@@ -930,7 +930,7 @@ When expressiveness conflicts with legibility, **clarity wins**. The system's po
 
 **Why Scaling Matters:**
 - A 9× contrast headline on a 30-row data table makes every row feel urgent—visual chaos.
-- A 2× contrast table with semantic color (Waratah Red for alerts, Wattle for primary) provides clarity without loss of character.
+- A 2× contrast table with semantic color (Solidarity Red for alerts, Ink for primary) provides clarity without loss of character.
 - The system stays distinctive even at lower contrasts because of color palette + organic shapes + motion.
 
 #### Example: Data Dashboard Pattern
@@ -941,7 +941,7 @@ When expressiveness conflicts with legibility, **clarity wins**. The system's po
   font-size: 72px;           /* Headline scale */
   font-weight: 700;          /* Extended bold */
   font-variation-settings: 'wdth' 120;
-  color: var(--color-waratah-red);
+  color: var(--color-solidarity-red);
   /* 5× contrast (wght 400 background → 700 foreground, size ratio) */
 }
 
@@ -956,7 +956,7 @@ When expressiveness conflicts with legibility, **clarity wins**. The system's po
 /* Alert in table */
 .table-alert {
   font-weight: 500;          /* Slight emphasis, not extreme */
-  color: var(--color-waratah-red);
+  color: var(--color-solidarity-red);
   /* 2× contrast (base weight → +100), sufficient for scanning */
 }
 ```
@@ -966,9 +966,9 @@ When expressiveness conflicts with legibility, **clarity wins**. The system's po
 ```tsx
 export const JobListingCard: React.FC<JobCardProps> = ({ title, company, match }) => {
   return (
-    <div className="rounded-[20px_6px_16px_28px] bg-kr-leaf-smoke p-6 border-l-4 border-waratah-red">
+    <div className="rounded-[20px_6px_16px_28px] bg-kr-leaf-smoke p-6 border-l-4 border-solidarity-red">
       {/* Hero stat for match score */}
-      <div className="text-headline-lg font-bold text-waratah-red mb-2">
+      <div className="text-headline-lg font-bold text-solidarity-red mb-2">
         {match}% Match
       </div>
 
@@ -1002,10 +1002,10 @@ Use the color palette semantically, not decoratively:
 
 | Data Type | Color | Meaning | Example |
 |-----------|-------|---------|---------|
-| **Primary Data** | Wattle Gold | "The user's main insight" | Your ATS score: 72% |
+| **Primary Data** | Ink Gold | "The user's main insight" | Your ATS score: 72% |
 | **Comparison/Context** | Smoke Green | "How you compare" | Average score: 65% |
-| **Alert/Attention** | Waratah Red | "Action needed" | 3 keywords missing |
-| **Success/Positive** | Smoke Green or Baru Gold | "Goal achieved" | ✅ Résumé optimized |
+| **Alert/Attention** | Solidarity Red | "Action needed" | 3 keywords missing |
+| **Success/Positive** | Smoke Green or Ink Gold | "Goal achieved" | ✅ Résumé optimized |
 | **Background/Grid** | Charcoal Ash (very low opacity) | "Structure, not content" | Data table gridlines |
 
 #### Anti-Patterns to Avoid
@@ -1020,7 +1020,7 @@ Use the color palette semantically, not decoratively:
 ✅ **Instead:** Organic card borders (outer), regular borders (internal grids)
 
 ❌ **Avoid:** Forgetting semantic meaning in color (becomes decoration)
-✅ **Instead:** "Waratah Red = Alert" is consistent across the product
+✅ **Instead:** "Solidarity Red = Alert" is consistent across the product
 
 ---
 
@@ -1133,13 +1133,13 @@ Verify these color combinations meet 4.5:1 minimum:
 
 ```
 ✅ Paper White (#F5F0E8) on Charcoal (#1a1a1a): 21.4:1 (AAA)
-✅ Waratah Red (#F14714) on Charcoal (#1a1a1a): 8.2:1 (AA)
-✅ Baru Gold (#DAF674) on Charcoal (#1a1a1a): 8.7:1 (AA)
+✅ Solidarity Red (#F14714) on Charcoal (#1a1a1a): 8.2:1 (AA)
+✅ Ink Gold (#DAF674) on Charcoal (#1a1a1a): 8.7:1 (AA)
 ✅ Smoke Green (#48DA8B) on Charcoal (#1a1a1a): 9.1:1 (AA)
-✅ Gum Leaf Yellow (#F6E748) on Charcoal (#1a1a1a): 12.1:1 (AAA)
-✅ Parrot Green (#48F0E5) on Charcoal (#1a1a1a): 10.4:1 (AAA)
+✅ Stencil Yellow (#F6E748) on Charcoal (#1a1a1a): 12.1:1 (AAA)
+✅ Signal Green (#48F0E5) on Charcoal (#1a1a1a): 10.4:1 (AAA)
 
-❌ Waratah Red on Asphalt Black Light (#2C2925): 7.2:1 (AA, not AAA)
+❌ Solidarity Red on Asphalt Black Light (#2C2925): 7.2:1 (AA, not AAA)
    → Use only for large text (18px+) or bold (14px+)
 
 ❌ Colonial colors (low opacity): Test individually
@@ -1152,14 +1152,14 @@ Test colors: Use [WebAIM Contrast Checker](https://webaim.org/resources/contrast
 ### Colorblind Accessibility
 
 **Palette Verification:**
-- Waratah Red & Gum Leaf Yellow: Distinguish for red/green colorblind? (Test with Colorblind app)
-- Smoke Green & Parrot Green: Sufficiently distinct? (Test both)
+- Solidarity Red & Stencil Yellow: Distinguish for red/green colorblind? (Test with Colorblind app)
+- Smoke Green & Signal Green: Sufficiently distinct? (Test both)
 - If distinguishing color is critical (e.g., success vs. alert), **add secondary cue** (icon, pattern, text)
 
 **Implementation:**
 ```tsx
 export const AlertState: React.FC<{ message: string; type: 'alert' | 'success' }> = ({ message, type }) => {
-  const bgColor = type === 'alert' ? 'bg-waratah-red' : 'bg-smoke-green';
+  const bgColor = type === 'alert' ? 'bg-solidarity-red' : 'bg-smoke-green';
   const icon = type === 'alert' ? '⚠️' : '✅';
 
   return (
@@ -1230,7 +1230,7 @@ Slogans like "NO NEUTRAL CANVAS" are visual assertions, but screen readers will 
   Screen reader: "Workers Unite button - submit your application"
 */}
 <button
-  className="text-display font-semibold text-waratah-red"
+  className="text-display font-semibold text-solidarity-red"
   aria-label="Workers Unite: submit your application"
 >
   WORKERS UNITE
@@ -1243,7 +1243,7 @@ All inputs must have visible, associated labels.
 ```tsx
 <label htmlFor="resume-upload" className="font-semibold text-paper-white">
   Upload Your Resume
-  <span className="text-waratah-red">*</span> {/* Required indicator */}
+  <span className="text-solidarity-red">*</span> {/* Required indicator */}
 </label>
 <input
   id="resume-upload"
@@ -1259,11 +1259,11 @@ All inputs must have visible, associated labels.
 
 ### Focus States & Keyboard Navigation
 
-All interactive elements must have visible focus indicators. The system's Wattle Gold is perfect for this:
+All interactive elements must have visible focus indicators. The system's Ink Gold is perfect for this:
 
 ```css
 :focus-visible {
-  outline: 2px solid var(--color-wattle-gold);
+  outline: 2px solid var(--color-ink-gold);
   outline-offset: 4px;
 }
 
@@ -1279,7 +1279,7 @@ input:focus-visible {
 ### Accessibility Checklist (Pre-Launch)
 
 - [ ] **Contrast:** All text passes WCAG AA (4.5:1) via WebAIM
-- [ ] **Colorblind:** Tested Waratah Red + Gum Leaf Yellow for red/green distinction
+- [ ] **Colorblind:** Tested Solidarity Red + Stencil Yellow for red/green distinction
 - [ ] **Motion:** All animations respect `prefers-reduced-motion`
 - [ ] **Forced Colors:** High Contrast mode tested; borders/outlines visible
 - [ ] **Typography:** No weight 100 below 16px, weight 900 effective at all sizes
@@ -1292,7 +1292,7 @@ input:focus-visible {
 
 ## Appendix: Token Naming Conventions
 
-**Colors:** `--color-[source]-[tone]` (e.g., `--color-waratah-dark`)
+**Colors:** `--color-[source]-[tone]` (e.g., `--color-solidarity-dark`)
 **Typography:** `--type-[scale]-[property]` (e.g., `--type-hero-size`)
 **Motion:** `--motion-[physics]-[easing/duration]` (e.g., `--motion-spring-elastic`)
 **Shape:** `--shape-[type]-[variant]` (e.g., `--shape-organic-card-1`)
@@ -1344,17 +1344,17 @@ Shadows are not just depth; they are atmosphere. In the Kerala Rage system, shad
 
 ## Colored Shadow Signatures
 
-### Wattle Offset (Optimism)
+### Ink Offset (Optimism)
 
-- **Token:** `shadow-wattle-offset`
-- **Value:** `2px 2px 0px var(--color-baru-gold-primary)`
+- **Token:** `shadow-ink-offset`
+- **Value:** `2px 2px 0px var(--color-ink-gold-primary)`
 - **Usage:** Primary buttons, "Call to Action" cards.
 - **Effect:** Hard edge, retro-optimistic.
 
-### Waratah Bleed (Rage/Danger)
+### Solidarity Bleed (Rage/Danger)
 
-- **Token:** `shadow-waratah-bleed`
-- **Value:** `0 0 12px var(--color-waratah-primary)`
+- **Token:** `shadow-solidarity-bleed`
+- **Value:** `0 0 12px var(--color-solidarity-primary)`
 - **Usage:** Error inputs, destructive buttons, "Revolution" text.
 - **Effect:** Glowing, radioactive intensity.
 
@@ -1412,19 +1412,19 @@ Data is political. We do not use neutral blues. We use the colors of the land (K
 ### 1. Primary Data (The Truth)
 
 - **Token:** `color-data-primary`
-- **Ref:** `var(--color-wattle-gold)`
+- **Ref:** `var(--color-ink-gold)`
 - **Usage:** The main dataset, the "User's" performance.
 
 ### 2. Comparison Data (The Context)
 
 - **Token:** `color-data-comparison`
-- **Ref:** `var(--color-kr-leafus-smoke-primary)`
+- **Ref:** `var(--color-backwater-green-primary)`
 - **Usage:** Averages, benchmarks, "others".
 
 ### 3. Alert Data (The Warning)
 
 - **Token:** `color-data-alert`
-- **Ref:** `var(--color-waratah-red)`
+- **Ref:** `var(--color-solidarity-red)`
 - **Usage:** Drops in performance, critical thresholds.
 
 ### 4. Background Data (The Noise)
@@ -1436,7 +1436,7 @@ Data is political. We do not use neutral blues. We use the colors of the land (K
 ## Typography in Charts
 
 - **Axis Labels:** `JetBrains Mono` (The Annotation), 10px, Uppercase.
-- **Tooltips:** `Work Sans` (The Field Note), 12px, Dark Background with Wattle Border.
+- **Tooltips:** `Work Sans` (The Field Note), 12px, Dark Background with Ink Border.
 - **Big Numbers:** `kr-serif-bold` (The Proclamation), Condensed.
 
 ## Chart Styles

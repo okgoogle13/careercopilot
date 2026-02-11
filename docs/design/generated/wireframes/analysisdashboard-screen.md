@@ -22,7 +22,7 @@
 </layout>
 
 <tokens>
-- **Ink**: `baruGold` (Data Viz), `charcoalBackground` (Base)
+- **Ink**: `inkGold` (Data Viz), `charcoalBackground` (Base)
 - **Shapes**: `radius-stone` (Skill Tiles)
 - **Typography**: `Headline` (48px, Sora)
 </tokens>

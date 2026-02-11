@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 
-type NativeVariant = 'waratah' | 'bottlebrush' | 'KrFlower' | 'kangaroo' | 'gum' | 'fern';
+type NativeVariant = 'solidarity' | 'bottlebrush' | 'KrFlower' | 'kangaroo' | 'gum' | 'fern';
 type AnchorPoint = 'hanging-left' | 'hanging-right' | 'floor-left' | 'floor-right' | 'center-stage' | 'ceiling-left' | 'ceiling-right';
 
 interface NativeAnchorProps {
@@ -14,7 +14,7 @@ interface NativeAnchorProps {
  * Asset paths for Australian Native Plants
  */
 const assets: Record<NativeVariant, string> = {
-    waratah: '/assets/plants/native-waratah-hanging.png',
+    solidarity: '/assets/plants/native-solidarity-hanging.png',
     bottlebrush: '/assets/plants/native-bottlebrush.png',
     KrFlower: '/assets/plants/native-KrFlower.png',
     kangaroo: '/assets/plants/native-kangaroo.png',
@@ -26,7 +26,7 @@ const assets: Record<NativeVariant, string> = {
  * NativeAnchor - Australian Native Plant Decorative Component
  * 
  * Renders plant illustrations with physics-based animations:
- * - Hanging plants (waratah, gum): Gentle sway + bob
+ * - Hanging plants (solidarity, gum): Gentle sway + bob
  * - Standing plants (others): Breathing animation
  * 
  * Features:
@@ -50,7 +50,7 @@ export const NativeAnchor = ({
     className = ''
 }: NativeAnchorProps) => {
     // 1. Determine if plant is hanging or standing
-    const isHanging = variant === 'waratah' || variant === 'gum';
+    const isHanging = variant === 'solidarity' || variant === 'gum';
 
     // 2. Define physics-based animations
     const animations = {

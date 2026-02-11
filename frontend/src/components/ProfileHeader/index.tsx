@@ -55,7 +55,7 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({
               className="w-full h-full object-cover grayscale opacity-90 mix-blend-luminosity"
             />
           ) : (
-             <div className="w-full h-full flex items-center justify-center bg-charcoal font-solidarity text-baru-gold text-4xl">
+             <div className="w-full h-full flex items-center justify-center bg-charcoal font-solidarity text-ink-gold text-4xl">
                {name.charAt(0)}
              </div>
           )}
@@ -67,12 +67,12 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({
           <motion.h1
              initial={{ x: -20, opacity: 0 }}
              animate={{ x: 0, opacity: 1 }}
-             className="text-[84px] leading-none font-solidarity-900 text-baru-gold tracking-tighter uppercase"
+             className="text-[84px] leading-none font-solidarity-900 text-ink-gold tracking-tighter uppercase"
           >
             {name}
           </motion.h1>
           
-          <p className="text-2xl font-medium text-parrot-green italic tracking-tight">
+          <p className="text-2xl font-medium text-signal-green italic tracking-tight">
             {bio}
           </p>
 
@@ -81,7 +81,7 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({
               <motion.span
                 key={tag}
                 whileHover={{ scale: 1.1, skewX: -12 }}
-                className="px-6 py-2 bg-parrot-green/10 text-parrot-green border border-parrot-green/30 text-xs font-bold uppercase tracking-widest rounded-seed cursor-default"
+                className="px-6 py-2 bg-signal-green/10 text-signal-green border border-signal-green/30 text-xs font-bold uppercase tracking-widest rounded-seed cursor-default"
               >
                 {tag}
               </motion.span>

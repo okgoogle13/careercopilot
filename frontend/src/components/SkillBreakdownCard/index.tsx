@@ -67,10 +67,10 @@ export const SkillBreakdownCard: React.FC<SkillBreakdownCardProps> = ({
                 initial={{ strokeDashoffset: 351.85 }}
                 animate={{ strokeDashoffset: 351.85 - (351.85 * overallScore) / 100 }}
                 transition={{ duration: 1.5, ease: "easeOut" }}
-                className="text-baru-gold shadow-glow-wattle"
+                className="text-ink-gold shadow-glow-ink"
               />
             </svg>
-            <div className="absolute inset-0 flex items-center justify-center font-jetbrains-mono font-bold text-2xl text-baru-gold">
+            <div className="absolute inset-0 flex items-center justify-center font-jetbrains-mono font-bold text-2xl text-ink-gold">
               {overallScore}%
             </div>
           </div>
@@ -110,7 +110,7 @@ export const SkillBreakdownCard: React.FC<SkillBreakdownCardProps> = ({
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => onAction?.('strengthen')}
-            className="flex-1 py-3 bg-baru-gold text-charcoal font-bold uppercase text-xs tracking-widest rounded-pebble"
+            className="flex-1 py-3 bg-ink-gold text-charcoal font-bold uppercase text-xs tracking-widest rounded-pebble"
           >
             STRENGTHEN
           </motion.button>
