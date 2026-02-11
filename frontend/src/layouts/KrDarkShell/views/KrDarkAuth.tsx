@@ -28,7 +28,7 @@ export const KrDarkAuth: React.FC = () => {
             <motion.div 
               animate={{ y: [0, 400, 0] }}
               transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-              className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-wattle-gold/20 to-transparent z-10 pointer-events-none"
+              className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-ink-gold/20 to-transparent z-10 pointer-events-none"
             />
           )}
 
@@ -47,7 +47,7 @@ export const KrDarkAuth: React.FC = () => {
               <input 
                 type="text" 
                 placeholder="PROX_IDENTIFIER" 
-                className="w-full bg-asphalt-black/50 border border-white/5 rounded-stone px-6 py-4 font-mono text-sm text-paper-white focus:outline-none focus:border-wattle-gold/40 transition-colors"
+                className="w-full bg-asphalt-black/50 border border-white/5 rounded-stone px-6 py-4 font-mono text-sm text-paper-white focus:outline-none focus:border-ink-gold/40 transition-colors"
               />
             </div>
 
@@ -56,7 +56,7 @@ export const KrDarkAuth: React.FC = () => {
               <input 
                 type="password" 
                 placeholder="••••••••" 
-                className="w-full bg-asphalt-black/50 border border-white/5 rounded-stone px-6 py-4 font-mono text-sm text-paper-white focus:outline-none focus:border-wattle-gold/40 transition-colors"
+                className="w-full bg-asphalt-black/50 border border-white/5 rounded-stone px-6 py-4 font-mono text-sm text-paper-white focus:outline-none focus:border-ink-gold/40 transition-colors"
               />
             </div>
 

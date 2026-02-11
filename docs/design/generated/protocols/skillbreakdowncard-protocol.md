@@ -7,8 +7,8 @@
 
 ## Visual Hierarchy
 - **Dominant**: Radial Score Gauge or Halo Disk (Z-2) highlighting the primary metric.
-- **Primary Ink**: Baru Gold (#DAF674) for scores and optimism.
-- **Secondary Ink**: Lab Wren Metal Blue (#48B3DA) for technical/metadata accents.
+- **Primary Ink**: Ink Gold (#DAF674) for scores and optimism.
+- **Secondary Ink**: Ripple Metal Blue (#48B3DA) for technical/metadata accents.
 - **Substrate**: Charcoal Background with Blueprint Grid (8% opacity).
 
 ## Motion Physics

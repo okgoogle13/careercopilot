@@ -39,7 +39,7 @@ export const KrDarkDock: React.FC<KrDarkDockProps> = ({ currentView, onViewChang
                         className={`
               px-4 py-2 text-sm font-field-note font-medium rounded-[var(--radius-pebble)] transition-all
               ${isActive
-                                ? 'bg-wattle-gold text-surface-asphalt-black-base shadow-elevated'
+                                ? 'bg-ink-gold text-surface-asphalt-black-base shadow-elevated'
                                 : 'text-paper-white hover:bg-surface-KrDark-concrete-grey-high/50'}
             `}
                     >

@@ -39,7 +39,7 @@ export const PathSelectionCard: React.FC<PathSelectionCardProps> = ({
       className={cn(
         "relative w-[320px] p-8 bg-charcoal-100 border-2 transition-all",
         "rounded-stone shadow-viscous cursor-pointer overflow-hidden",
-        isSelected ? "border-baru-gold ring-4 ring-baru-gold/20" : "border-blueprint-grey/20"
+        isSelected ? "border-ink-gold ring-4 ring-ink-gold/20" : "border-blueprint-grey/20"
       )}
       role="button"
       aria-pressed={isSelected}
@@ -50,7 +50,7 @@ export const PathSelectionCard: React.FC<PathSelectionCardProps> = ({
       <div className="relative z-10 flex flex-col gap-12 h-full">
         <h2 className={cn(
           "text-[72px] leading-[0.85] font-solidarity-900 uppercase tracking-tighter",
-          isSelected ? "text-baru-gold" : "text-parrot-green transition-colors"
+          isSelected ? "text-ink-gold" : "text-signal-green transition-colors"
         )}>
           {title}
         </h2>
@@ -62,7 +62,7 @@ export const PathSelectionCard: React.FC<PathSelectionCardProps> = ({
         <div className="mt-auto">
           <div className={cn(
             "w-full py-4 text-center font-bold uppercase tracking-widest text-xs rounded-pebble transition-all",
-            isSelected ? "bg-baru-gold text-charcoal shadow-glow-wattle" : "bg-charcoal-200 text-paper-white/40 hover:bg-charcoal-300"
+            isSelected ? "bg-ink-gold text-charcoal shadow-glow-ink" : "bg-charcoal-200 text-paper-white/40 hover:bg-charcoal-300"
           )}>
             {isSelected ? "SELECTED" : "CHOOSE THIS PATH"}
           </div>

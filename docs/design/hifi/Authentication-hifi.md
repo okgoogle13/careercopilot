@@ -8,12 +8,12 @@
 - **Verification Title**: `Fraunces Energetic`, 72px (mobile: 48px), `font-weight: 800`.
 - **Form Labels**: `JetBrains Mono`, 12px, `uppercase`, `text-paper-white/50`.
 - **Input Text**: `Work Sans`, 16px, `text-paper-white`.
-- **Link Buttons**: `Work Sans`, 14px, `underline`, `text-wattle-gold`.
+- **Link Buttons**: `Work Sans`, 14px, `underline`, `text-ink-gold`.
 
 ## Color
 - **Substrate**: `bg-asphalt-black`.
-- **Portal Card**: `bg-asphalt-black` (solid) with `border-wattle-gold/20` and `shadow-viscous`.
-- **Primary CTA**: `bg-wattle-gold` with `text-asphalt-black`.
+- **Portal Card**: `bg-asphalt-black` (solid) with `border-ink-gold/20` and `shadow-viscous`.
+- **Primary CTA**: `bg-ink-gold` with `text-asphalt-black`.
 
 ## Spacing
 - **Container Gap**: `gap-8` between title and form.
@@ -22,7 +22,7 @@
 
 ## Motion
 - **Entry**: The `AuthContainer` settles from `y: 40` -> `y: 0` with a heavy spring.
-- **Micro-interactions**: Subtle `wattle-gold` border glow on input focus.
+- **Micro-interactions**: Subtle `ink-gold` border glow on input focus.
 - **Halo Pulse**: The `halo-disk` motif behind the card has a long-period (8s) subtle opacity pulse (40-60%).
 
 ## Motif Slots

@@ -31,9 +31,9 @@ export const EditorSplitPane: React.FC<EditorSplitPaneProps> = ({
         {leftContent}
       </div>
 
-      <div className="w-1 bg-wattle-gold/20 hover:bg-wattle-gold/50 cursor-col-resize transition-colors relative z-20">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-8 bg-asphalt-black border border-wattle-gold/30 rounded-full flex items-center justify-center pointer-events-none">
-          <div className="w-0.5 h-4 bg-wattle-gold/50 rounded-full" />
+      <div className="w-1 bg-ink-gold/20 hover:bg-ink-gold/50 cursor-col-resize transition-colors relative z-20">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-8 bg-asphalt-black border border-ink-gold/30 rounded-full flex items-center justify-center pointer-events-none">
+          <div className="w-0.5 h-4 bg-ink-gold/50 rounded-full" />
         </div>
       </div>
 

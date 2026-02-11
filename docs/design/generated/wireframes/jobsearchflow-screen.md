@@ -17,7 +17,7 @@
 </layout>
 
 <tokens>
-- **Ink**: `baruGold` (Interaction), `kr-leafusAsh` (Subhead)
+- **Ink**: `inkGold` (Interaction), `worker-ash` (Subhead)
 - **Shapes**: `radius-stone` (Sidebar/Items), `radius-pebble` (Inputs)
 - **Typography**: `Subhead` (24px, Inter)
 </tokens>
@@ -40,7 +40,7 @@
 1 | search_input      | Action: onKeyUp (debounce 300ms) → filter results; Style: radius-pebble.
 2 | filter_toggle     | Behavior: multi-select; onToggle → refresh feed.
 3 | result_click      | Action: onClick → nav /opportunity/:id.
-4 | empty_state       | Content: "No Front Lines Found"; Style: italic leafusAsh.
+4 | empty_state       | Content: "No Front Lines Found"; Style: italic activistAsh.
 </annotations>
 
 <notes>

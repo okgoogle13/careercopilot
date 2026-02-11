@@ -16,9 +16,9 @@ Kerala Rage is a design system of collective resistance, blending the vibrant en
 ### 2. The Ink (Screenprint Logic)
 
 - **Limited Palette**: Stick to the core Solidarity ramp:
-  - **baruGold**: Temple radiance and optimistic defiance.
-  - **waratahRed**: Resistance heat and primary energy.
-  - **parrotGreen**: Hybrid identity pop (Kerala backwaters meeting Melbourne tracks).
+  - **inkGold**: Temple radiance and optimistic defiance.
+  - **solidarityRed**: Resistance heat and primary energy.
+  - **signalGreen**: Hybrid identity pop (Kerala backwaters meeting Melbourne tracks).
 - **Ink Bleed**: Focus on the behavior of ink on paper. Subtle displacement, textured edges, and high-salience overlaps.
 - **The Halo**: Use circular "halo disks" (inspired by saint motifs and temple halos) as focal anchors for key metrics or images.
 

@@ -8,7 +8,7 @@
 ## Visual Hierarchy
 - **Dominant**: List of asymmetric `radius-stone` cards.
 - **Primary Ink**: Smoke Green (#48DA8B) for calming yet active navigation.
-- **Secondary Ink**: Parrot Green (#48F0E5) for hybrid identity life in job tags.
+- **Secondary Ink**: Signal Green (#48F0E5) for hybrid identity life in job tags.
 - **Substrate**: Charcoal Background (#1A1A1A) with 22% grit opacity.
 
 ## Motion Physics

@@ -15,7 +15,7 @@
 </layout>
 
 <tokens>
-- **Ink**: `baruGold` (Line/Border), `kr-leafusAsh` (Text)
+- **Ink**: `inkGold` (Line/Border), `worker-ash` (Text)
 - **Shapes**: `radius-stone` (Panels), `radius-pebble` (Tool Icons)
 - **Typography**: `Metadata` (12px, JetBrains Mono)
 </tokens>
@@ -36,7 +36,7 @@
 </components>
 
 <annotations>
-1 | split_pane        | Behavior: resizable horizontal; divider=baruGold (2px).
+1 | split_pane        | Behavior: resizable horizontal; divider=inkGold (2px).
 2 | left_panel        | Content: monospaced code; Syntax: YAML/JSON; State: editing, readonly.
 3 | right_panel       | Content: visual preview (Component/Canvas); State: default, loading, error.
 4 | save_btn          | Action: onClick → POST /api/save; Style: radius-pebble; Location: top toolbar.

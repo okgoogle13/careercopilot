@@ -40,10 +40,10 @@ Every asset in the Solidarity system serves a tactical purpose—breaking the me
 | ---------------------------------- | ---------------------------- | --------------------------- | ------- | ------- | --------------------------------------------------------- |
 | `{kr-asset-screenprint-substrate}` | Full viewport background     | 100% cover                  | Z-0     | 25%     | Static                                                    |
 | `{kr-asset-wheat-paste-tear}`      | `top: -20px; right: 0`       | 320px width, natural height | Z-2     | 100%    | Parallax (translateY at 0.1x scroll speed)                |
-| `{kr-asset-halo-disk}`             | `bottom: -60px; left: -40px` | 280px diameter              | Z-2     | 100%    | Static anchor, `baruGold` tint                            |
+| `{kr-asset-halo-disk}`             | `bottom: -60px; left: -40px` | 280px diameter              | Z-2     | 100%    | Static anchor, `inkGold` tint                            |
 | `{kr-asset-screenprint-grit}`      | Scattered, viewport-relative | 8-16px particles            | Z-3     | 40-80%  | CSS animation: float + opacity pulse (8s loop, staggered) |
 
-**Spatial Logic:** The wheat-paste tear suggests a poster ripped from a wall, framing the hero content. The halo disk anchors the bottom-left, radiating `baruGold` optimism. Grit particles provide tactile atmosphere without competing with typography.
+**Spatial Logic:** The wheat-paste tear suggests a poster ripped from a wall, framing the hero content. The halo disk anchors the bottom-left, radiating `inkGold` optimism. Grit particles provide tactile atmosphere without competing with typography.
 
 **Responsive Behavior:**
 
@@ -97,13 +97,13 @@ Every asset in the Solidarity system serves a tactical purpose—breaking the me
 | `{kr-asset-charcoal-paper}`    | Full viewport background               | 100% cover     | Z-0     | 100%    | Base substrate                                                            |
 | `{kr-asset-blueprint-layout}`  | Centered behind drop zone              | 600px width    | Z-1     | 6%      | Static watermark                                                          |
 | `{kr-asset-screenprint-stamp}` | Bottom-right of drop zone (on success) | 120px diameter | Z-3     | 100%    | Stamp animation: scale from 2.0→1.0, rotate -30deg→-5deg (0.4s overshoot) |
-| `{kr-asset-halo-disk}`         | Top-right corner                       | 160px diameter | Z-2     | 30%     | Static orientation marker, `baruGold` tint                                |
+| `{kr-asset-halo-disk}`         | Top-right corner                       | 160px diameter | Z-2     | 30%     | Static orientation marker, `inkGold` tint                                |
 
 **Spatial Logic:** The blueprint watermark transforms document upload into tactical analysis—the user isn't just uploading a file, they're depositing evidence for examination. The stamp provides satisfying feedback that echoes archival verification processes.
 
 **Interaction Triggers:**
 
-- **File drag-over**: Drop zone border shifts to `waratahRed`, blueprint opacity increases to 12%.
+- **File drag-over**: Drop zone border shifts to `solidarityRed`, blueprint opacity increases to 12%.
 - **Upload success**: Stamp animates in with overshoot easing, blueprint fades back to 6%.
 
 **Responsive Behavior:**
@@ -191,9 +191,9 @@ Every asset in the Solidarity system serves a tactical purpose—breaking the me
 | Asset ID                       | Position              | Size           | Z-Index | Opacity | Behavior                                                      |
 | ------------------------------ | --------------------- | -------------- | ------- | ------- | ------------------------------------------------------------- |
 | `{kr-asset-charcoal-paper}`    | Full viewport         | 100% cover     | Z-0     | 100%    | Increased grain texture                                       |
-| `{kr-asset-blueprint-grid}`    | Preview panel         | Panel size     | Z-1     | 10%     | When "Bot View" active: shifts to `waratahRed` at 15% opacity |
+| `{kr-asset-blueprint-grid}`    | Preview panel         | Panel size     | Z-1     | 10%     | When "Bot View" active: shifts to `solidarityRed` at 15% opacity |
 | `{kr-asset-screenprint-stamp}` | Appears on "Finalize" | 140px diameter | Z-3     | 100%    | Stamp animation as on Ingestion                               |
-| `{kr-asset-halo-disk}`         | Control panel header  | 120px diameter | Z-2     | 40%     | Static, `baruGold` tint                                       |
+| `{kr-asset-halo-disk}`         | Control panel header  | 120px diameter | Z-2     | 40%     | Static, `inkGold` tint                                       |
 
 **Spatial Logic:** The aged charcoal grain intensifies here—the document is being prepared for permanent archival. The "Bot View" toggle transforms the preview into a tactical diagram, revealing the document's structural skeleton. The verification stamp provides ceremonial closure.
 
@@ -229,7 +229,7 @@ Every asset in the Solidarity system serves a tactical purpose—breaking the me
 | ---------------------------------- | ------------------- | --------------------------- | ------- | ------- | --------------------------------- |
 | `{kr-asset-screenprint-substrate}` | Full viewport       | 100% cover                  | Z-0     | 25%     | Static                            |
 | `{kr-asset-wheat-paste-tear}`      | Top-left, dramatic  | 400px width, natural height | Z-2     | 100%    | Parallax on scroll (0.15x speed)  |
-| `{kr-asset-halo-disk}`             | Bottom-right corner | 300px diameter              | Z-2     | 100%    | Static grounding, `baruGold` tint |
+| `{kr-asset-halo-disk}`             | Bottom-right corner | 300px diameter              | Z-2     | 100%    | Static grounding, `inkGold` tint |
 | `{kr-asset-screenprint-grit}`      | Ambient throughout  | 8-16px particles            | Z-3     | 40-80%  | Standard animation (8s loop)      |
 
 **Spatial Logic:** The overview is the collective itself—the user looks at their career ecosystem from above. The wheat-paste tear returns dramatically, suggesting that the journey has brought user and system to the same vantage point. Maximum asset presence reinforces that this is a living system, not a static report.

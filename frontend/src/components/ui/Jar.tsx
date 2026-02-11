@@ -55,7 +55,7 @@ export interface JarProps {
  * - Shape: `--radius-stone` for select button, `--radius-pebble` for dropdown
  * - Elevation: `--shadow-maximum` for dropdown menu
  * - Motion: Viscous-breeze easing for smooth open/close
- * - Colors: KeralaRage botanical palette (Wattle Gold, Waratah Red)
+ * - Colors: KeralaRage botanical palette (Ink Gold, Solidarity Red)
  * - Typography: Field-note font family
  *
  * @example
@@ -138,9 +138,9 @@ export function Jar({
     backgroundColor: 'rgba(44, 39, 35, 0.4)',
     border: '2px solid',
     borderColor: error
-      ? 'var(--color-waratah-red)'
+      ? 'var(--color-solidarity-red)'
       : isOpen
-        ? 'var(--color-wattle-gold)'
+        ? 'var(--color-ink-gold)'
         : 'var(--color-concrete-grey-base)',
     color: 'var(--color-paper-white)',
     transition: 'all var(--duration-standard) var(--ease-viscous-breeze)',
@@ -156,12 +156,12 @@ export function Jar({
         <label
           className={`
           mb-2 text-sm font-medium transition-colors duration-200
-          ${error ? 'text-[var(--color-waratah-red)]' : 'text-[var(--color-concrete-grey)]'}
-          ${isOpen && !error ? 'text-[var(--color-wattle-gold)]' : ''}
+          ${error ? 'text-[var(--color-solidarity-red)]' : 'text-[var(--color-concrete-grey)]'}
+          ${isOpen && !error ? 'text-[var(--color-ink-gold)]' : ''}
         `}
         >
           {label}
-          {required && <span className="text-[var(--color-waratah-red)] ml-1">*</span>}
+          {required && <span className="text-[var(--color-solidarity-red)] ml-1">*</span>}
         </label>
       )}
 
@@ -229,7 +229,7 @@ export function Jar({
                     px-4 py-3
                     flex items-center justify-between gap-2
                     cursor-pointer
-                    ${isSelected ? 'bg-white/10 text-[var(--color-wattle-gold)]' : 'text-[var(--color-paper-white)]'}
+                    ${isSelected ? 'bg-white/10 text-[var(--color-ink-gold)]' : 'text-[var(--color-paper-white)]'}
                     ${isDisabled ? 'opacity-50 cursor-not-allowed' : 'hover:bg-white/5'}
                     transition-colors duration-150
                   `}
@@ -238,7 +238,7 @@ export function Jar({
                 >
                   <span className="font-field-note">{option.label}</span>
                   {isSelected && (
-                    <Check className="w-5 h-5 flex-shrink-0 text-[var(--color-wattle-gold)]" />
+                    <Check className="w-5 h-5 flex-shrink-0 text-[var(--color-ink-gold)]" />
                   )}
                 </div>
               );
@@ -252,7 +252,7 @@ export function Jar({
         <p
           className={`
           mt-1 px-1 text-xs
-          ${error ? 'text-[var(--color-waratah-red)]' : 'text-[var(--color-concrete-grey-dark)]'}
+          ${error ? 'text-[var(--color-solidarity-red)]' : 'text-[var(--color-concrete-grey-dark)]'}
         `}
         >
           {displayHelperText}

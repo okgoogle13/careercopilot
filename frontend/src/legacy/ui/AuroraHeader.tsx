@@ -12,7 +12,7 @@ interface AuroraHeaderProps {
  * AuroraHeader - KeralaRage KrSolidarity Parametric Header
  * 
  * Features:
- * - Tri-color gradient text (Wattle Gold → Waratah Red → Concrete Grey)
+ * - Tri-color gradient text (Ink Gold → Solidarity Red → Concrete Grey)
  * - Shimmer animation on hover
  * - Variable font axis animation (Fraunces 'SOFT' and 'WONK')
  * - Optional tag and witty subtitle
@@ -63,8 +63,8 @@ export const AuroraHeader: React.FC<AuroraHeaderProps> = ({
                     className="bg-clip-text text-transparent"
                     style={{
                         backgroundImage: mode === 'KrDark' || mode === 'KrLight'
-                            ? 'linear-gradient(135deg, var(--color-primary-wattle-gold) 0%, var(--color-tertiary-waratah-red) 50%, var(--color-secondary-concrete-grey) 100%)'
-                            : 'linear-gradient(135deg, var(--color-primary-wattle-gold) 0%, var(--color-status-alert) 50%, var(--color-status-neutral) 100%)',
+                            ? 'linear-gradient(135deg, var(--color-primary-ink-gold) 0%, var(--color-tertiary-solidarity-red) 50%, var(--color-secondary-concrete-grey) 100%)'
+                            : 'linear-gradient(135deg, var(--color-primary-ink-gold) 0%, var(--color-status-alert) 50%, var(--color-status-neutral) 100%)',
                         backgroundSize: '200% 200%',
                     }}
                     animate={{
@@ -96,7 +96,7 @@ export const AuroraHeader: React.FC<AuroraHeaderProps> = ({
                     initial={{ opacity: 0, rotate: -2 }}
                     animate={{ opacity: 1, rotate: mode === 'KrDark' || mode === 'KrLight' ? -1 : 0 }}
                     transition={{ duration: 0.5, delay: 0.3 }}
-                    className="text-lg md:text-xl italic font-bloom text-tertiary-waratah-red"
+                    className="text-lg md:text-xl italic font-bloom text-tertiary-solidarity-red"
                     style={{
                         fontVariationSettings: mode === 'KrDark' || mode === 'KrLight'
                             ? "'wght' 400, 'SOFT' 100, 'WONK' 1"

@@ -51,7 +51,7 @@ export function ProfileView() {
         <motion.div
           animate={{ opacity: [0.1, 0.2, 0.1] }}
           transition={{ duration: 5, repeat: Infinity }}
-          className="absolute top-0 right-0 w-[500px] h-[500px] bg-wattle-gold/10 blur-3xl pointer-events-none"
+          className="absolute top-0 right-0 w-[500px] h-[500px] bg-ink-gold/10 blur-3xl pointer-events-none"
         />
       </div>
 
@@ -77,8 +77,8 @@ export function ProfileView() {
             <section className="space-y-8">
               <div className="flex items-baseline gap-4">
                 <h2 className="font-bloom text-3xl font-bold text-paper-white uppercase tracking-tight flex items-center gap-3">
-                  <Briefcase className="w-6 h-6 text-wattle-gold" />
-                  STRATUM <span className="text-wattle-gold">CHRONOLOGY</span>
+                  <Briefcase className="w-6 h-6 text-ink-gold" />
+                  STRATUM <span className="text-ink-gold">CHRONOLOGY</span>
                 </h2>
                 <div className="flex-1 h-px bg-concrete-grey/10" />
               </div>
@@ -126,7 +126,7 @@ export function ProfileView() {
               className="p-8 border-concrete-grey/10 bg-asphalt-black/20"
             >
               <div className="flex items-center gap-3 mb-6">
-                <Fingerprint className="w-5 h-5 text-wattle-gold" />
+                <Fingerprint className="w-5 h-5 text-ink-gold" />
                 <h3 className="font-annotation text-[10px] font-bold text-paper-white uppercase tracking-[0.3em]">
                   Extracted Filaments
                 </h3>
@@ -160,7 +160,7 @@ export function ProfileView() {
               className="p-8 border-concrete-grey/10 bg-asphalt-black/20"
             >
               <div className="flex items-center gap-3 mb-6">
-                <Award className="w-5 h-5 text-wattle-gold" />
+                <Award className="w-5 h-5 text-ink-gold" />
                 <h3 className="font-annotation text-[10px] font-bold text-paper-white uppercase tracking-[0.3em]">
                   Validation Badges
                 </h3>
@@ -193,8 +193,8 @@ export function ProfileView() {
               </div>
             </Stone>
 
-            <div className="p-6 border border-concrete-grey/5 rounded-2xl bg-wattle-gold/5 flex flex-col items-center text-center">
-              <Archive className="w-8 h-8 text-wattle-gold mb-4 opacity-40" />
+            <div className="p-6 border border-concrete-grey/5 rounded-2xl bg-ink-gold/5 flex flex-col items-center text-center">
+              <Archive className="w-8 h-8 text-ink-gold mb-4 opacity-40" />
               <p className="font-field-note text-sm text-paper-white opacity-60 italic leading-relaxed">
                 "This record is synchronized with the primary KrSolidarity node."
               </p>
@@ -221,18 +221,18 @@ function TimelineItem({
     <Stone
       mode="KrDark"
       elevation="flat"
-      className="p-6 border-concrete-grey/5 bg-white/5 hover:border-wattle-gold/20 transition-all group overflow-hidden relative"
+      className="p-6 border-concrete-grey/5 bg-white/5 hover:border-ink-gold/20 transition-all group overflow-hidden relative"
     >
-      <div className="absolute inset-y-0 left-0 w-1 bg-wattle-gold opacity-20 group-hover:opacity-100 transition-opacity" />
+      <div className="absolute inset-y-0 left-0 w-1 bg-ink-gold opacity-20 group-hover:opacity-100 transition-opacity" />
       <div className="flex justify-between items-start mb-2">
         <h3 className="font-bloom text-xl font-bold text-paper-white uppercase tracking-tight">
           {role}
         </h3>
-        <span className="font-mono text-[9px] text-wattle-gold opacity-60 tracking-widest uppercase">
+        <span className="font-mono text-[9px] text-ink-gold opacity-60 tracking-widest uppercase">
           {date}
         </span>
       </div>
-      <p className="font-annotation text-[10px] text-wattle-gold uppercase tracking-[0.2em] mb-4 opacity-80">
+      <p className="font-annotation text-[10px] text-ink-gold uppercase tracking-[0.2em] mb-4 opacity-80">
         {company}
       </p>
       {description && (
@@ -247,11 +247,11 @@ function TimelineItem({
 function Badge({ emoji, title }: { emoji: string; title: string }) {
   return (
     <div
-      className="aspect-square rounded-full bg-bark-light/5 border border-concrete-grey/10 flex items-center justify-center text-2xl hover:bg-wattle-gold/10 hover:border-wattle-gold/30 transition-all cursor-help relative group"
+      className="aspect-square rounded-full bg-bark-light/5 border border-concrete-grey/10 flex items-center justify-center text-2xl hover:bg-ink-gold/10 hover:border-ink-gold/30 transition-all cursor-help relative group"
       title={title}
     >
       {emoji}
-      <div className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-wattle-gold opacity-0 group-hover:opacity-100 transition-opacity" />
+      <div className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-ink-gold opacity-0 group-hover:opacity-100 transition-opacity" />
     </div>
   );
 }

@@ -281,7 +281,7 @@ descriptor = "botanical-canopy"  # User-provided or inferred from asset type
 This kr-motifs asset exemplifies kerala-rage kr-solidarity aesthetics...
 
 ## kr-motifs
-- Wattle (iconic Australian acacia)
+- Ink (iconic Australian acacia)
 - Leaf structures (native botanical form)
 - Organic density zones (theatrical void + Wunderkammer central)
 
@@ -311,7 +311,7 @@ Suitable for backgrounds, hero sections, or decorative elements...
     "central": {"coverage": "65%", "density": "wunderkammer"},
     "lower_right": {"coverage": "20%", "empty_space": "150x150px"}
   },
-  "kr_motifs": ["wattle", "leaf", "endemic_flora"],
+  "kr_motifs": ["ink", "leaf", "endemic_flora"],
   "mode": "kr-dark",
   "compliance_score": 78
 }

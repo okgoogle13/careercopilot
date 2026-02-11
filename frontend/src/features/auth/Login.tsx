@@ -61,7 +61,7 @@ export function Login() {
           <motion.div
             initial={{ y: 10, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            className="mt-8 p-4 rounded-pebble bg-waratah-red/10 text-waratah-red border border-waratah-red/20 text-center font-jetbrains-mono text-xs uppercase"
+            className="mt-8 p-4 rounded-pebble bg-solidarity-red/10 text-solidarity-red border border-solidarity-red/20 text-center font-jetbrains-mono text-xs uppercase"
           >
             Verification Fault: {authError}
           </motion.div>

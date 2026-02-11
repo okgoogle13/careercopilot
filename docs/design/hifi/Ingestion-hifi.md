@@ -12,9 +12,9 @@
 
 ## Color
 - **Substrate**: `bg-asphalt-black`.
-- **Dropzone**: `bg-asphalt-black/40`, `border-dashed`, `border-wattle-gold/30`.
-- **Dropzone Active**: `bg-wattle-gold/5`, `border-wattle-gold`, `shadow-wattle-glow`.
-- **Primary CTA**: `bg-wattle-gold` with `text-asphalt-black`.
+- **Dropzone**: `bg-asphalt-black/40`, `border-dashed`, `border-ink-gold/30`.
+- **Dropzone Active**: `bg-ink-gold/5`, `border-ink-gold`, `shadow-ink-glow`.
+- **Primary CTA**: `bg-ink-gold` with `text-asphalt-black`.
 
 ## Spacing
 - **Vertical Stack**: `gap-10`.
@@ -23,7 +23,7 @@
 
 ## Motion
 - **Entry Pulse**: The Dropzone has a very subtle, slow "breathing" border-opacity pulse (20% -> 40%).
-- **Drag Interaction**: Dragging a file over the zone triggers a `scale: 1.02` lift and an immediate `shadow-wattle-glow` reveal.
+- **Drag Interaction**: Dragging a file over the zone triggers a `scale: 1.02` lift and an immediate `shadow-ink-glow` reveal.
 - **Upload Progress**: The progress bar uses a viscous spring for "lurching" forward as data chunks are processed.
 
 ## Motif Slots

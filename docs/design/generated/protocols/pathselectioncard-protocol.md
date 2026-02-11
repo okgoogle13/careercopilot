@@ -7,8 +7,8 @@
 
 ## Visual Hierarchy
 - **Dominant**: `radius-stone` card with a `radius-pebble` action button.
-- **Primary Ink**: Parrot Green (#48F0E5) for hybrid identity and discovery.
-- **Secondary Ink**: Baru Gold (#DAF674) for optimistic path selection.
+- **Primary Ink**: Signal Green (#48F0E5) for hybrid identity and discovery.
+- **Secondary Ink**: Ink Gold (#DAF674) for optimistic path selection.
 - **Substrate**: Charcoal Background with Blueprint Grid (8% opacity).
 
 ## Motion Physics

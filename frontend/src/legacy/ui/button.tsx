@@ -5,18 +5,18 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from './utils';
 
 const buttonVariants = cva(
-  "btn-pebble inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-field-note font-semibold transition-all duration-standard ease-viscous-breeze disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:ring-2 focus-visible:ring-wattle-gold/50",
+  "btn-pebble inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-field-note font-semibold transition-all duration-standard ease-viscous-breeze disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:ring-2 focus-visible:ring-ink-gold/50",
   {
     variants: {
       variant: {
-        default: 'bg-wattle-gold text-asphalt-black hover:bg-wattle-glow shadow-standard hover:shadow-elevated hover:animate-bloom-lift',
+        default: 'bg-ink-gold text-asphalt-black hover:bg-ink-glow shadow-standard hover:shadow-elevated hover:animate-bloom-lift',
         destructive:
-          'bg-waratah-red text-paper-white hover:bg-waratah-glow shadow-standard hover:shadow-elevated focus-visible:ring-waratah-red/50',
+          'bg-solidarity-red text-paper-white hover:bg-solidarity-glow shadow-standard hover:shadow-elevated focus-visible:ring-solidarity-red/50',
         outline:
           'border-2 border-concrete-grey bg-transparent text-KrLeaf-mist hover:bg-concrete-grey/10 hover:border-KrLeaf-mist',
         secondary: 'bg-concrete-grey text-paper-white hover:bg-KrLeaf-dusk shadow-subtle',
         ghost: 'hover:bg-concrete-grey text-concrete-grey hover:text-paper-white',
-        link: 'text-wattle-gold underline-offset-4 hover:underline hover:text-wattle-glow',
+        link: 'text-ink-gold underline-offset-4 hover:underline hover:text-ink-glow',
       },
       size: {
         default: 'h-10 px-5 py-2 has-[>svg]:px-4',

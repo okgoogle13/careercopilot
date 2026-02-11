@@ -80,7 +80,7 @@ export const KrDarkShell: React.FC<{ children?: React.ReactNode }> = ({ children
   };
 
   return (
-    <div className="relative min-h-screen w-full overflow-hidden bg-surface-asphalt-black-base text-on-surface-paper-white font-field-note antialiased selection:bg-wattle-gold selection:text-surface-asphalt-black-base">
+    <div className="relative min-h-screen w-full overflow-hidden bg-surface-asphalt-black-base text-on-surface-paper-white font-field-note antialiased selection:bg-ink-gold selection:text-surface-asphalt-black-base">
       {/* Atmospheric Effects */}
       <Fireflies count={20} />
 
@@ -99,7 +99,7 @@ export const KrDarkShell: React.FC<{ children?: React.ReactNode }> = ({ children
         <div className="fixed top-4 right-4 z-50 opacity-50 hover:opacity-100 transition-opacity">
           <Link
             to="/lab"
-            className="text-xs font-annotation text-secondary-flannel-dim hover:text-wattle-gold"
+            className="text-xs font-annotation text-secondary-flannel-dim hover:text-ink-gold"
           >
             Switch to KrDark →
           </Link>

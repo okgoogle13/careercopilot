@@ -58,7 +58,7 @@ export const UnifiedPane = React.forwardRef<HTMLElement, UnifiedPaneProps>(
           {/* Header */}
           {title && (
             <div className="p-6 border-b border-white/5 flex items-center justify-between bg-white/[0.02]">
-              <h2 className="font-bloom text-2xl text-wattle-gold tracking-wide">
+              <h2 className="font-bloom text-2xl text-ink-gold tracking-wide">
                 {title}
               </h2>
               {/* TODO[asset]: Human to add optional texture embellishment here. */}

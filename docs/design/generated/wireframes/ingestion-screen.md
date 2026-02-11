@@ -29,7 +29,7 @@
 </layout>
 
 <tokens>
-- **Ink**: `baruGold` (Accent), `kr-leafusAsh` (Body)
+- **Ink**: `inkGold` (Accent), `worker-ash` (Body)
 - **Shapes**: `radius-slab` (Headline), `radius-pebble` (Interactive)
 - **Typography**: `Display Large` (72px, Recursive)
 </tokens>
@@ -53,7 +53,7 @@
 <annotations>
 1 | drop_zone         | Action: onDrop → upload file, show preview; State: default, dragOver, uploading.
 2 | btn_scan          | Action: onClick → POST /api/ingest; State: default, loading (spinner), success.
-3 | progress_bar      | State: visible during upload; Style: baruGold stroke; Type: Linear.
+3 | progress_bar      | State: visible during upload; Style: inkGold stroke; Type: Linear.
 4 | error_msg         | State: visible on invalid format; Content: "Invalid Substrate"; Style: text-red.
 </annotations>
 

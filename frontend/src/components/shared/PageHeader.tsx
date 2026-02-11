@@ -24,7 +24,7 @@ export function PageHeader({
     return (
       <>
         {parts[0]}
-        <span className="text-secondary-waratah-red cursive text-curator-large px-1">{highlightedWord}</span>
+        <span className="text-secondary-solidarity-red cursive text-curator-large px-1">{highlightedWord}</span>
         {parts[1]}
       </>
     );

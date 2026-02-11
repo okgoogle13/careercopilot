@@ -41,7 +41,7 @@ export const AnalysisAnchor: React.FC = () => {
                     animate={{ rotate: 360 }}
                     transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
                 >
-                    <RefreshCw className="w-8 h-8 text-wattle-gold opacity-50" />
+                    <RefreshCw className="w-8 h-8 text-ink-gold opacity-50" />
                 </motion.div>
                 <p className="font-field-note text-secondary-concrete-grey animate-pulse">
                     Parsing KrMotifs...
@@ -82,7 +82,7 @@ export const AnalysisAnchor: React.FC = () => {
             {/* Detailed Breakdown */}
             <div className="flex-1 bg-surface-KrDark-glass-low border border-white/5 rounded-lg p-6 backdrop-blur-sm flex flex-col gap-4">
                 <div className="flex justify-between items-end border-b border-white/10 pb-2">
-                    <h3 className="font-field-note text-lg text-wattle-gold">
+                    <h3 className="font-field-note text-lg text-ink-gold">
                         Analysis Insights
                     </h3>
                     <span className="text-xs font-mono text-secondary-concrete-grey opacity-50">
@@ -103,7 +103,7 @@ export const AnalysisAnchor: React.FC = () => {
                             >
                                 <span className={`mt-1.5 w-2 h-2 rounded-full shrink-0 ${insight.type === 'strength' ? 'bg-status-KrDark-clinical-sage shadow-[0_0_8px_rgba(74,222,128,0.4)]' :
                                         insight.type === 'warning' ? 'bg-status-KrDark-clinical-alert shadow-[0_0_8px_rgba(248,113,113,0.4)]' :
-                                            'bg-wattle-gold'
+                                            'bg-ink-gold'
                                     }`} />
                                 <span className="text-sm font-body text-secondary-concrete-grey group-hover:text-on-surface-KrDark-paper-white transition-colors">
                                     {insight.text}

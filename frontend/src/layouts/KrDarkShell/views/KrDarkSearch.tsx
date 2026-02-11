@@ -28,7 +28,7 @@ export const KrDarkSearch: React.FC = () => {
           <input 
             type="text" 
             placeholder="PROBE THE COLLECTIVE ARCHIVE..."
-            className="w-full bg-asphalt-black/40 border border-white/5 rounded-pebble px-8 py-5 font-mono text-sm text-paper-white focus:outline-none focus:border-wattle-gold/40 focus:ring-1 focus:ring-wattle-gold/20 transition-all duration-500 shadow-viscous"
+            className="w-full bg-asphalt-black/40 border border-white/5 rounded-pebble px-8 py-5 font-mono text-sm text-paper-white focus:outline-none focus:border-ink-gold/40 focus:ring-1 focus:ring-ink-gold/20 transition-all duration-500 shadow-viscous"
           />
           <div className="absolute right-6 top-1/2 -translate-y-1/2 opacity-20 pointer-events-none">
             <span className="font-mono text-[10px] tracking-widest uppercase">CTRL_S</span>
@@ -48,7 +48,7 @@ export const KrDarkSearch: React.FC = () => {
               <label className="font-annotation text-[9px] uppercase tracking-[0.4em] text-paper-white/30">Sector Density</label>
               <div className="flex flex-wrap gap-2">
                 {['Logistics', 'Defense', 'Extraction', 'Community'].map(tag => (
-                  <span key={tag} className="px-3 py-1 bg-white/5 border border-white/5 rounded-pebble text-[10px] font-mono font-bold uppercase text-paper-white/40 hover:text-wattle-gold hover:border-wattle-gold/20 cursor-pointer transition-colors">
+                  <span key={tag} className="px-3 py-1 bg-white/5 border border-white/5 rounded-pebble text-[10px] font-mono font-bold uppercase text-paper-white/40 hover:text-ink-gold hover:border-ink-gold/20 cursor-pointer transition-colors">
                     {tag}
                   </span>
                 ))}
@@ -58,7 +58,7 @@ export const KrDarkSearch: React.FC = () => {
             <div className="space-y-4">
               <label className="font-annotation text-[9px] uppercase tracking-[0.4em] text-paper-white/30">Match Minimum</label>
               <div className="relative h-1 bg-white/5 rounded-full overflow-hidden">
-                <div className="absolute left-0 top-0 h-full w-3/4 bg-wattle-gold/40" />
+                <div className="absolute left-0 top-0 h-full w-3/4 bg-ink-gold/40" />
               </div>
               <div className="flex justify-between font-mono text-[10px] text-paper-white/20">
                 <span>50%</span>
@@ -77,13 +77,13 @@ export const KrDarkSearch: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 * idx, duration: 0.5 }}
             >
-              <SolidarityCard className="p-8 group hover:border-wattle-gold/30 transition-all duration-500 cursor-pointer relative overflow-hidden">
+              <SolidarityCard className="p-8 group hover:border-ink-gold/30 transition-all duration-500 cursor-pointer relative overflow-hidden">
                 <div className="flex justify-between items-start relative z-10">
                   <div className="space-y-3">
-                    <span className="font-mono text-[9px] text-wattle-gold uppercase tracking-[0.2em] opacity-60">
+                    <span className="font-mono text-[9px] text-ink-gold uppercase tracking-[0.2em] opacity-60">
                       ID: {job.id} // MATCH: {job.match}
                     </span>
-                    <h3 className="font-proclamation text-3xl uppercase text-paper-white group-hover:text-wattle-gold transition-colors duration-500">
+                    <h3 className="font-proclamation text-3xl uppercase text-paper-white group-hover:text-ink-gold transition-colors duration-500">
                       {job.title}
                     </h3>
                     <p className="font-body text-base text-paper-white/40 italic">
@@ -94,14 +94,14 @@ export const KrDarkSearch: React.FC = () => {
                   <div className="flex flex-col items-end gap-6">
                     <ActionButton variant="secondary" label="AUDIT POSITION" size="sm" className="px-6 py-2 text-[10px] tracking-widest" />
                     <div className="flex gap-2">
-                       <div className="w-1.5 h-1.5 rounded-full bg-wattle-gold animate-pulse" />
+                       <div className="w-1.5 h-1.5 rounded-full bg-ink-gold animate-pulse" />
                        <span className="font-mono text-[9px] text-paper-white/20 uppercase">Active Broadcast</span>
                     </div>
                   </div>
                 </div>
 
                 {/* Internal Decorative element */}
-                <div className="absolute top-0 right-0 w-32 h-32 bg-wattle-gold/5 blur-[60px] rounded-full -mr-16 -mt-16 opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
+                <div className="absolute top-0 right-0 w-32 h-32 bg-ink-gold/5 blur-[60px] rounded-full -mr-16 -mt-16 opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
               </SolidarityCard>
             </motion.div>
           ))}

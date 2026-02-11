@@ -150,7 +150,7 @@ const TimelineEventComponent: React.FC<TimelineEventComponentProps> = ({
       case 'in-progress':
         return 'text-[var(--color-flower-base)]';
       case 'upcoming':
-        return 'text-[var(--color-wattle-base)]';
+        return 'text-[var(--color-ink-base)]';
       case 'cancelled':
         return 'text-[var(--color-bark-base)]';
       default:
@@ -213,7 +213,7 @@ const TimelineEventComponent: React.FC<TimelineEventComponentProps> = ({
             event.color === 'primary'
               ? 'bg-[var(--color-leaf-base)]'
               : event.color === 'secondary'
-                ? 'bg-[var(--color-wattle-base)]'
+                ? 'bg-[var(--color-ink-base)]'
                 : event.color === 'tertiary'
                   ? 'bg-[var(--color-flower-base)]'
                   : event.color === 'error'

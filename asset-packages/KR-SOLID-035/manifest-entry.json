@@ -1,0 +1,23 @@
+{
+  "id": "KR-SOLID-035",
+  "name": "kr-solidarity__texture__melbourne-laneway__v1",
+  "category": "texture",
+  "file_path": "/assets/kr-solidarity/texture/kr-solidarity__texture__kr-solidarity--texture--melbourne-laneway--v1__v1.png",
+  "priority": "HIGH",
+  "status": "ready",
+  "intended_context": "Catalog imported",
+  "specs": {
+    "aspect_ratio": "2048:2048",
+    "style": "mixed",
+    "text_content": null,
+    "visual_anchors": {
+      "halo": null,
+      "framing": null,
+      "subject": "catalog-imported"
+    },
+    "color_palette": {
+      "primary": "#1A1714",
+      "secondary": "#D4A84B"
+    }
+  }
+}

@@ -1,0 +1,355 @@
+{
+  "assets": [
+    {
+      "original_path": "frontend/TBC/Gemini_Generated_Image_12eg8912eg8912eg.png",
+      "suggested_name": "kr-solidarity__devotional__shiva-urban-protest__v1.png",
+      "mode": "solidarity",
+      "category": "devotional",
+      "dimensions": "1920x1080",
+      "dominant_colors": [
+        "#1A1714",
+        "#4F6D63",
+        "#D7A54F",
+        "#8D3C34",
+        "#EBEBEB"
+      ],
+      "compliance": {
+        "northcote_philosophy": true,
+        "issues": [
+          "DEVOTIONAL RULE: The Shiva imagery has slogans attached to the surrounding scene (protest posters on the wall), violating the 'No slogans attached' constraint.",
+          "FIRST NATIONS RULE: An Aboriginal flag is present on a poster, but the text on that placard ('MELBOURNE') does not adhere to the 'Text allowed only on placards: \u201cALWAYS WAS ALWAYS WILL BE\u201d' constraint.",
+          "GLOBAL ASSET RULE: The shortest edge of the asset is 1080px, which is below the minimum required 2048px."
+        ]
+      },
+      "duplicate_of": null
+    },
+    {
+      "original_path": "frontend/TBC/ChatGPT Image Feb 11, 2026, 12_48_30 AM.png",
+      "suggested_name": "kr-solidarity__devotional__shiva-statue__v1.png",
+      "mode": "solidarity",
+      "category": "devotional",
+      "dimensions": "2048x2048",
+      "dominant_colors": [
+        "#41341F",
+        "#C89C4C",
+        "#765A2C",
+        "#AF601D",
+        "#8B4E1B"
+      ],
+      "compliance": {
+        "northcote_philosophy": false,
+        "issues": [
+          "Image is highly photorealistic, violating 'NO photorealism' constraint.",
+          "Image contains gradients in both the background and object shading, violating 'NO gradients' constraint.",
+          "Primary style is not 'screenprint illustration'; it is a realistic 3D render/sculpture.",
+          "Shapes are highly detailed and sculptural, not 'bold flat shapes'.",
+          "Colour palette exceeds '3\u20135 colours max' with many shades and realistic tones.",
+          "Lacks 'visible ink grain and paper texture'.",
+          "Background is a dark brown/gold gradient, not 'matte charcoal background'."
+        ]
+      },
+      "duplicate_of": null
+    },
+    {
+      "original_path": "frontend/TBC/ChatGPT Image Feb 11, 2026, 12_47_46 AM.png",
+      "suggested_name": "kr-solidarity__devotional__shiva-statue__v1.png",
+      "mode": "solidarity",
+      "category": "devotional",
+      "dimensions": "2048x2048",
+      "dominant_colors": [
+        "#1A1714",
+        "#DDD8CB",
+        "#D2A73B",
+        "#6A6A6A"
+      ],
+      "compliance": {
+        "northcote_philosophy": true,
+        "issues": []
+      },
+      "duplicate_of": null
+    },
+    {
+      "original_path": "frontend/TBC/ChatGPT Image Feb 11, 2026, 12_48_24 AM.png",
+      "suggested_name": "kr-solidarity__portrait__turbaned-man__v1.png",
+      "mode": "solidarity",
+      "category": "portrait",
+      "dimensions": "2048x2048",
+      "dominant_colors": [
+        "#1A1714",
+        "#DF6E1A",
+        "#F0EAE1",
+        "#4A4644",
+        "#596C72"
+      ],
+      "compliance": {
+        "northcote_philosophy": true,
+        "issues": [
+          "The asset contains three highly similar portrait variations (A, B, C) within a single image. Per system rules for asset generation, each unique asset should be standalone and exportable.",
+          "If treated as individual assets, each portrait (approx. 600x900px) falls significantly below the minimum resolution requirement of 2048px on the shortest edge.",
+          "The asset includes textual labels (A, B, C) which are not part of the core visual motif and would need removal if individual portraits are exported."
+        ]
+      },
+      "duplicate_of": null
+    },
+    {
+      "original_path": "frontend/TBC/Gemini_Generated_Image_sej6vsej6vsej6vs (1).png",
+      "suggested_name": "kr-solidarity__abstract__paint-splash__v1.png",
+      "mode": "solidarity",
+      "category": "abstract",
+      "dimensions": "1000x1000px",
+      "dominant_colors": [
+        "#1A1714",
+        "#D4A346",
+        "#9B3D3B",
+        "#5A8C77",
+        "#E6E0D0"
+      ],
+      "compliance": {
+        "northcote_philosophy": true,
+        "issues": [
+          "Shortest edge (1000px) is below the minimum required 2048px.",
+          "Aspect ratio (1:1) does not match the specified 2:1 (banner) for 'kr-solidarity__abstract__paint-splash__v1.png' in BATCH 2."
+        ]
+      },
+      "duplicate_of": null
+    },
+    {
+      "original_path": "frontend/TBC/Gemini_Generated_Image_o3mtmto3mtmto3mt.png",
+      "suggested_name": "kr-solidarity__portrait__bhagat-singh__v1.png",
+      "mode": "solidarity",
+      "category": "portrait",
+      "dimensions": "1200x1600",
+      "dominant_colors": [
+        "#1A1714",
+        "#D4AE42",
+        "#6E9987",
+        "#7C2B2A"
+      ],
+      "compliance": {
+        "northcote_philosophy": true,
+        "issues": [
+          "Minimum shortest edge requirement: The image's shortest edge (1200px) is below the minimum required 2048px.",
+          "Text content: The prompt for this asset (Bhagat Singh portrait) explicitly specified only 'INQUILAB ZINDABAD'. The image contains additional readable text ('AUSTRALIAN PROTEST') which was not requested for this specific asset."
+        ]
+      },
+      "duplicate_of": null
+    },
+    {
+      "original_path": "frontend/TBC/Gemini_Generated_Image_ts3wyjts3wyjts3w.png",
+      "suggested_name": "kr-solidarity__devotional__shiva-statue__v1.png",
+      "mode": "solidarity",
+      "category": "devotional",
+      "dimensions": "1024x1024",
+      "dominant_colors": [
+        "#1A1714",
+        "#5E7C77",
+        "#9B443B",
+        "#D7C6A0"
+      ],
+      "compliance": {
+        "northcote_philosophy": true,
+        "issues": [
+          "Background contains graffiti elements which may border on 'slogans' depending on interpretation of Devotional Rule; however, imagery remains grounded and statue-inspired."
+        ]
+      },
+      "duplicate_of": null
+    },
+    {
+      "original_path": "frontend/TBC/Gemini_Generated_Image_r8axlar8axlar8ax.png",
+      "suggested_name": "kr-solidarity__devotional__shiva-statue-street__v1.png",
+      "mode": "solidarity",
+      "category": "devotional",
+      "dimensions": "1792x1024",
+      "dominant_colors": [
+        "#1A1714",
+        "#5C1B1B",
+        "#A67C00",
+        "#4A4A4A"
+      ],
+      "compliance": {
+        "northcote_philosophy": true,
+        "issues": [
+          "Incidental background text on posters should be monitored for slogan-to-subject proximity, though currently compliant under street-aesthetic rules."
+        ]
+      },
+      "duplicate_of": null
+    },
+    {
+      "original_path": "frontend/TBC/Gemini_Generated_Image_fugl0wfugl0wfugl.png",
+      "suggested_name": "kr-solidarity__abstract__paint-splash__v1.png",
+      "mode": "solidarity",
+      "category": "abstract",
+      "dimensions": "1024x1024",
+      "dominant_colors": [
+        "#8B1A1A",
+        "#BA9B45",
+        "#5E6332",
+        "#1A1714"
+      ],
+      "compliance": {
+        "northcote_philosophy": true,
+        "issues": []
+      },
+      "duplicate_of": null
+    },
+    {
+      "original_path": "frontend/TBC/ChatGPT Image Feb 11, 2026, 12_48_15 AM.png",
+      "suggested_name": "kr-solidarity__street__treaty-now-poster__v1.png",
+      "mode": "solidarity",
+      "category": "street",
+      "dimensions": "2048x2048",
+      "dominant_colors": [
+        "#1a1714",
+        "#e77141",
+        "#f0c340",
+        "#e0e0e0"
+      ],
+      "compliance": {
+        "northcote_philosophy": true,
+        "issues": [
+          "The 'FIRST NATIONS RULE' specifies 'Text allowed only on placards: \u201cALWAYS WAS ALWAYS WILL BE\u201d'. This asset features 'TREATY NOW' on a wheat-paste poster/graffiti which, while strongly aligned with solidarity and anti-colonial messaging, is not the exact text specified for *placards*. However, the 'BATCH 3' instructions for the 'street' category explicitly allow other anti-colonial text like 'NO PRIDE IN GENOCIDE' for graffiti, suggesting flexibility for this category beyond handheld placards."
+        ]
+      },
+      "duplicate_of": null
+    },
+    {
+      "original_path": "frontend/TBC/Gemini_Generated_Image_sej6vsej6vsej6vs.png",
+      "suggested_name": "kr-solidarity__abstract__paint-splash__v1.png",
+      "mode": "solidarity",
+      "category": "abstract",
+      "dimensions": "2048x2048",
+      "dominant_colors": [
+        "#1A1714",
+        "#D69B3E",
+        "#608170",
+        "#8C362B",
+        "#E2D6BF"
+      ],
+      "compliance": {
+        "northcote_philosophy": true,
+        "issues": []
+      },
+      "duplicate_of": null
+    },
+    {
+      "original_path": "frontend/TBC/Gemini_Generated_Image_vnppasvnppasvnpp.png",
+      "suggested_name": "kr-solidarity__texture__melbourne-laneway__v1.png",
+      "mode": "solidarity",
+      "category": "texture",
+      "dimensions": "1024x1024",
+      "dominant_colors": [
+        "#1A1714",
+        "#D2B48C",
+        "#6B8E8E",
+        "#8B4545"
+      ],
+      "compliance": {
+        "northcote_philosophy": true,
+        "issues": []
+      },
+      "duplicate_of": null
+    },
+    {
+      "original_path": "frontend/TBC/Gemini_Generated_Image_esxbtoesxbtoesxb.png",
+      "suggested_name": "kr-solidarity__symbol__kerala-landscape__v1.png",
+      "mode": "solidarity",
+      "category": "symbol",
+      "dimensions": {
+        "width": 1920,
+        "height": 1080,
+        "aspect_ratio": "16:9"
+      },
+      "dominant_colors": [
+        "#1A1714",
+        "#8B4538",
+        "#4E6352",
+        "#C8A24D"
+      ],
+      "compliance": {
+        "northcote_philosophy": true,
+        "issues": []
+      },
+      "duplicate_of": null
+    },
+    {
+      "original_path": "frontend/TBC/ChatGPT Image Feb 11, 2026, 12_48_17 AM.png",
+      "suggested_name": "kr-solidarity__street__first-nations-placard__v1.png",
+      "mode": "solidarity",
+      "category": "street",
+      "dimensions": "1000x1000",
+      "dominant_colors": [
+        "#1E1E1E",
+        "#C83E38",
+        "#F0CD72",
+        "#FFFFFF"
+      ],
+      "compliance": {
+        "northcote_philosophy": true,
+        "issues": []
+      },
+      "duplicate_of": null
+    },
+    {
+      "original_path": "frontend/TBC/ChatGPT Image Feb 11, 2026, 12_47_51 AM.png",
+      "suggested_name": "kr-solidarity__portrait__tipu-sultan__v1.png",
+      "mode": "solidarity",
+      "category": "portrait",
+      "dimensions": "1024x1024",
+      "dominant_colors": [
+        "#1A1714",
+        "#34685E",
+        "#9F844F",
+        "#D9D2BF"
+      ],
+      "compliance": {
+        "northcote_philosophy": false,
+        "issues": [
+          "Aspect ratio does not match the requested '3:4 (portrait)' for Tipu Sultan; current is '1:1 (square)'.",
+          "Shortest edge (1024px) does not meet the minimum requirement of 2048px."
+        ]
+      },
+      "duplicate_of": null
+    },
+    {
+      "original_path": "frontend/TBC/Gemini_Generated_Image_bubag0bubag0buba.png",
+      "suggested_name": "kr-solidarity__street__first-nations-placard__v1.png",
+      "mode": "solidarity",
+      "category": "street",
+      "dimensions": "1000x1000",
+      "dominant_colors": [
+        "#333333",
+        "#D9BA77",
+        "#E66B4E",
+        "#8C4A3A",
+        "#608E8E"
+      ],
+      "compliance": {
+        "northcote_philosophy": true,
+        "issues": []
+      },
+      "duplicate_of": "kr-solidarity__street__first-nations-placard__v1.png"
+    },
+    {
+      "original_path": "frontend/TBC/ChatGPT Image Feb 11, 2026, 12_48_01 AM.png",
+      "suggested_name": "kr-solidarity__symbol__kerala-elephant__v1.png",
+      "mode": "solidarity",
+      "category": "symbol",
+      "dimensions": "2048x2048",
+      "dominant_colors": [
+        "#1A1714",
+        "#4C7D73",
+        "#CCAA4F",
+        "#E0E0CE"
+      ],
+      "compliance": {
+        "northcote_philosophy": true,
+        "issues": []
+      },
+      "duplicate_of": null
+    }
+  ],
+  "summary": {
+    "total_assets": 25,
+    "solidarity_mode": 17
+  }
+}

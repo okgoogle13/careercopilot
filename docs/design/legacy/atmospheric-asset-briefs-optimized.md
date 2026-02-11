@@ -43,7 +43,7 @@
 
 ---
 
-## ASSET-09: The Waratah Macro (Hero)
+## ASSET-09: The Solidarity Macro (Hero)
 
 **Category:** Plate / Hero | **Mode:** kr-dark
 
@@ -115,7 +115,7 @@
 
 ---
 
-## ASSET-16: The Wattle Proscenium (Hanging Branch)
+## ASSET-16: The Ink Proscenium (Hanging Branch)
 
 **Category:** kr-motif / Frame | **Mode:** kr-dark
 
@@ -133,13 +133,13 @@
 
 ---
 
-## ASSET-17: The kr-leafus Canopy (Ceiling)
+## ASSET-17: The kr-activist Canopy (Ceiling)
 
 **Category:** kr-motif / Frame | **Mode:** kr-dark
 
 ### 1. Visual Definition
 
-**Concept:** Looking UP into the crown of a _kr-leafus regnans_.
+**Concept:** Looking UP into the crown of a _kr-activist regnans_.
 **Perspective:** Worm's eye view. Leaves foreshortened.
 **Atmosphere:** "Dappled Moonlight." Shadows of leaves cast onto other leaves.
 **Integration:** A full-width "header" element. It replaces the concept of a solid nav bar with a living, breathing canopy.
@@ -151,13 +151,13 @@
 
 ---
 
-## ASSET-19: The kr-leafus Column (Structural)
+## ASSET-19: The kr-activist Column (Structural)
 
 **Category:** kr-motif / Structural | **Mode:** kr-dark
 
 ### 1. Visual Definition
 
-**Concept:** The "Tree Trunk" as architectural pillar. A vertical study of _kr-leafus_ bark texture (peeling, scribbly, or ironbark).
+**Concept:** The "Tree Trunk" as architectural pillar. A vertical study of _kr-activist_ bark texture (peeling, scribbly, or ironbark).
 **Texture:** High-contrast, tactile bark.
 **Geometry:** Perfectly vertical, but with organic edge variation (knots, peeling strips) that breaks the strict CSS box model line.
 

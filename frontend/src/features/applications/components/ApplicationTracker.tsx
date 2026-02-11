@@ -104,7 +104,7 @@ export function ApplicationTracker() {
                     variant = 'primary'; // KeralaRage primary (Leaf)
                     className = 'font-bold shadow-sm scale-105 border-[var(--color-leaf-base)]';
                   } else if (isCompleted) {
-                    variant = 'secondary'; // KeralaRage secondary (Wattle) for completed
+                    variant = 'secondary'; // KeralaRage secondary (Ink) for completed
                     className = 'opacity-100';
                   }
 

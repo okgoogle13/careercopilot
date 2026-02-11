@@ -70,7 +70,7 @@ _Use Case_: All standard text, descriptions, and user input.
   font-weight: 400;
   font-size: 0.8rem;
   letter-spacing: 0.05em;
-  color: var(--kr-baru-gold); /* Often used for emphasis in data */
+  color: var(--kr-ink-gold); /* Often used for emphasis in data */
 }
 ```
 
