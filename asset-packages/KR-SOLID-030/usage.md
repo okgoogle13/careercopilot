@@ -1,17 +1,17 @@
-# Deployment Guide: kr-solidarity__symbol__kerala-landscape__v1
+# Deployment Guide: Abstract - Solidarity (gemini_generate)
 
 ## Quick Facts
 - **Asset ID:** KR-SOLID-030
-- **Canonical Path:** `/assets/kr-solidarity/symbol/kr-solidarity__symbol__kr-solidarity--symbol--kerala-landscape--v1__v1.png`
+- **Canonical Path:** `/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-gemini-generate__v1.png`
 - **Approval Status:** conditional-approval
-- **Overall Score:** 88.8/100
+- **Overall Score:** 85.6/100
 
 ## Integration Steps
 
 ### 1. File Placement
 Place the asset at the canonical path:
 ```
-kr-solidarity/symbol/kr-solidarity__symbol__kr-solidarity--symbol--kerala-landscape--v1__v1.png
+kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-gemini-generate__v1.png
 ```
 
 ### 2. Manifest Entry
@@ -20,20 +20,21 @@ Add this entry to `frontend/public/assets/kerala-rage-kr-solidarity-manifest.jso
 ```json
 {
   "id": "KR-SOLID-030",
-  "name": "kr-solidarity__symbol__kerala-landscape__v1",
-  "category": "symbol",
-  "file_path": "/assets/kr-solidarity/symbol/kr-solidarity__symbol__kr-solidarity--symbol--kerala-landscape--v1__v1.png",
+  "name": "Abstract - Solidarity (gemini_generate)",
+  "category": "abstract",
+  "file_path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-gemini-generate__v1.png",
   "priority": "HIGH",
   "status": "ready",
-  "intended_context": "Catalog imported",
+  "intended_context": "Analysis failed",
+  "components_allowed": [],
   "specs": {
-    "aspect_ratio": "2752:1536",
+    "aspect_ratio": "1856:2304",
     "style": "mixed",
     "text_content": null,
     "visual_anchors": {
       "halo": null,
       "framing": null,
-      "subject": "catalog-imported"
+      "subject": "error fallback"
     },
     "color_palette": {
       "primary": "#1A1714",
@@ -51,8 +52,8 @@ export const MyComponent = () => {
   return (
     <div className="kr-solidarity-asset">
       <img
-        src="/assets/kr-solidarity/symbol/kr-solidarity__symbol__kr-solidarity--symbol--kerala-landscape--v1__v1.png"
-        alt="kr-solidarity__symbol__kerala-landscape__v1"
+        src="/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-gemini-generate__v1.png"
+        alt="Abstract - Solidarity (gemini_generate)"
         className="w-full h-auto"
       />
     </div>
@@ -86,11 +87,19 @@ If using color palette, add to design tokens:
 ## Support
 
 For questions about this asset's cultural significance or governance status, refer to:
-- Analysis Notes: Imported from Sidekick Catalog
+- Analysis Notes: Analysis failed: 400 API key not valid. Please pass a valid API key. [reason: "API_KEY_INVALID"
+domain: "googleapis.com"
+metadata {
+  key: "service"
+  value: "generativelanguage.googleapis.com"
+}
+, locale: "en-US"
+message: "API key not valid. Please pass a valid API key."
+]
 - Placement Fit: Landing, Dashboard Overview
 - Governance Notes: 0 violations, 0 warnings
 - Scoring Details: See `metadata.json`
 
 ---
 
-Generated: 2026-02-11T12:24:13.561114
+Generated: 2026-02-11T22:04:27.614108

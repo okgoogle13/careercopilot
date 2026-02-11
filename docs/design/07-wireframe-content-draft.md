@@ -16,9 +16,9 @@ This document provides the specific "kerala-streetprint Naturalist" copy and pre
 
 **Missing Assets:**
 
-- `ASSET-7` (Firefly Sprite)
-- `ASSET-16` (Ink Hanging Branch)
-- `ASSET-9` (Solidarity Hero Closeup) -> _Proposed as "Future kr-motif" container background or Hero accent._
+- `{KR-UI-003}` **UI-KIT REQUIRED** (Screenprint Grit Particles)
+- `{KR-SOLID-011}` or `{KR-SOLID-029}` (Atmospheric/Paint Splash overlay) → _Available as atmospheric accent or expressive overlay_
+- `{KR-SOLID-002}` (Shiva) or `{KR-SOLID-005}`/`{KR-SOLID-006}` (Resistance portraits) → _Proposed as symbolic anchor (Z-1/Z-2 only, optional)_
 
 ### Copy & Typography Strategy
 
@@ -61,8 +61,8 @@ This document provides the specific "kerala-streetprint Naturalist" copy and pre
 
 **Missing Assets:**
 
-- `ASSET-7` (Firefly Sprite)
-- `ASSET-15` (Brass Compass Navigation) -> _Critical Gap_
+- `{KR-UI-003}` **UI-KIT REQUIRED** (Screenprint Grit Particles)
+- `{KR-UI-002}` **UI-KIT REQUIRED** (Halo Disk / Compass Navigation) -> _Critical Gap_
 
 ### Copy & Typography Strategy
 
@@ -90,9 +90,9 @@ This document provides the specific "kerala-streetprint Naturalist" copy and pre
 
 **Missing Assets:**
 
-- `ASSET-14` (Skeleton Anatomical Etching) -> _Critical Gap for background_
-- `ASSET-8` (Fossil Verification Mark) -> _The "Success" State_
-- `ASSET-15` (Compass)
+- `{KR-UI-005}` **UI-KIT REQUIRED** (Charcoal Paper Base)
+- `{KR-UI-007}` **UI-KIT REQUIRED** (Verification Stamp) -> _The "Success" State_
+- `{KR-UI-002}` **UI-KIT REQUIRED** (Halo Disk / Compass)
 
 ### Copy & Typography Strategy
 
@@ -126,8 +126,8 @@ This document provides the specific "kerala-streetprint Naturalist" copy and pre
 
 **Missing Assets:**
 
-- `ASSET-12` (kr-dark Grid Major)
-- `ASSET-15` (Compass - Functioning Gauge)
+- `{KR-UI-004}` **UI-KIT REQUIRED** (Blueprint Grid Major)
+- `{KR-UI-002}` **UI-KIT REQUIRED** (Halo Disk - Functioning Gauge)
 
 ### Copy & Typography Strategy
 
@@ -160,8 +160,8 @@ This document provides the specific "kerala-streetprint Naturalist" copy and pre
 
 **Missing Assets:**
 
-- `ASSET-17` (kr-activist Hanging Ceiling Gum) -> _Critical for "Greenhouse" feel_
-- `ASSET-19` (kr-activist Kanban Column) -> _Structural separator_
+- `{KR-UI-001}` **UI-KIT REQUIRED** (Wheat Paste Tear - Column Headers) -> _Critical for visual aesthetic_
+- `{KR-UI-003}` **UI-KIT REQUIRED** (Screenprint Grit Particles)
 
 ### Copy & Typography Strategy
 
@@ -193,8 +193,8 @@ This document provides the specific "kerala-streetprint Naturalist" copy and pre
 
 **Missing Assets:**
 
-- `ASSET-17` (kr-activist Hanging)
-- `ASSET-7` (Firefly Sprite)
+- `{KR-SOLID-011}` or `{KR-SOLID-029}` (Atmospheric/Paint Splash overlay) → _Available for expressive overlay_
+- `{KR-UI-003}` **UI-KIT REQUIRED** (Screenprint Grit Particles)
 
 ### Copy & Typography Strategy
 

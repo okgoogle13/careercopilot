@@ -1,9 +1,9 @@
-# kr-solidarity__symbol__kerala-landscape__v1
+# Abstract - Solidarity (gemini_generate)
 
 **Asset ID:** KR-SOLID-030
-**Category:** symbol
+**Category:** abstract
 **Political Significance:** solidarity
-**Created:** 2026-02-11 12:24:13
+**Created:** 2026-02-11 22:04:27
 
 ## Governance Status
 - **Approval Level:** AUTO-APPROVED
@@ -22,9 +22,9 @@
 |-----------|-------|--------|
 | Political Representation | 75/100 | 25% |
 | Governance Compliance | 100/100 | 30% |
-| Cultural Appropriateness | 90/100 | 25% |
-| Aesthetic Quality | 88/100 | 20% |
-| **OVERALL** | **88.8/100** | **100%** |
+| Cultural Appropriateness | 85/100 | 25% |
+| Aesthetic Quality | 78/100 | 20% |
+| **OVERALL** | **85.6/100** | **100%** |
 
 **Approval Status:** CONDITIONAL-APPROVAL
 
@@ -44,7 +44,7 @@
 - secondary: #D4A84B
 
 **Intended Context:**
-Catalog imported
+Analysis failed
 
 ## Implementation Notes
 
@@ -55,5 +55,13 @@ Catalog imported
 
 ---
 
-**Confidence Score:** 0.97/1.0
-**Analysis Notes:** Imported from Sidekick Catalog
+**Confidence Score:** 0.50/1.0
+**Analysis Notes:** Analysis failed: 400 API key not valid. Please pass a valid API key. [reason: "API_KEY_INVALID"
+domain: "googleapis.com"
+metadata {
+  key: "service"
+  value: "generativelanguage.googleapis.com"
+}
+, locale: "en-US"
+message: "API key not valid. Please pass a valid API key."
+]

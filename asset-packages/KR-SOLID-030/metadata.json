@@ -1,11 +1,11 @@
 {
   "asset_id": "KR-SOLID-030",
-  "name": "kr-solidarity__symbol__kerala-landscape__v1",
-  "created_at": "2026-02-11T12:24:13.558459",
-  "asset_path": "/assets/kr-solidarity/symbol/kr-solidarity__symbol__kr-solidarity--symbol--kerala-landscape--v1__v1.png",
-  "source_image": "frontend/TBC/Gemini_Generated_Image_esxbtoesxbtoesxb.png",
+  "name": "Abstract - Solidarity (gemini_generate)",
+  "created_at": "2026-02-11T22:04:27.614003",
+  "asset_path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-gemini-generate__v1.png",
+  "source_image": "frontend/TBC/Gemini_Generated_Image_bubag0bubag0buba.png",
   "analysis": {
-    "category": "symbol",
+    "category": "abstract",
     "political_significance": "solidarity",
     "text_content": null,
     "detected_symbols": [],
@@ -14,10 +14,10 @@
       "primary": "#1A1714",
       "secondary": "#D4A84B"
     },
-    "intended_context": "Catalog imported",
+    "intended_context": "Analysis failed",
     "historical_reference": null,
-    "analysis_confidence": 0.95,
-    "analysis_notes": "Imported from Sidekick Catalog"
+    "analysis_confidence": 0.0,
+    "analysis_notes": "Analysis failed: 400 API key not valid. Please pass a valid API key. [reason: \"API_KEY_INVALID\"\ndomain: \"googleapis.com\"\nmetadata {\n  key: \"service\"\n  value: \"generativelanguage.googleapis.com\"\n}\n, locale: \"en-US\"\nmessage: \"API key not valid. Please pass a valid API key.\"\n]"
   },
   "governance": {
     "passed": true,
@@ -28,18 +28,18 @@
     "governance_notes": "0 violations, 0 warnings"
   },
   "scoring": {
-    "overall_score": 88.85,
+    "overall_score": 85.6,
     "political_representation": 75,
     "governance_compliance": 100,
-    "cultural_appropriateness": 90,
-    "aesthetic_quality": 88,
+    "cultural_appropriateness": 85,
+    "aesthetic_quality": 78,
     "approval_status": "conditional-approval",
-    "confidence": 0.975
+    "confidence": 0.5
   },
   "specifications": {
     "dimensions": {
-      "width": 2752,
-      "height": 1536,
+      "width": 1856,
+      "height": 2304,
       "meets_minimum": false
     },
     "priority": "HIGH",
