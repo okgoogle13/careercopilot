@@ -1,11 +1,11 @@
 {
   "asset_id": "KR-SOLID-034",
-  "name": "kr-solidarity__street__treaty-now-poster__v1",
-  "created_at": "2026-02-11T12:24:13.737837",
-  "asset_path": "/assets/kr-solidarity/street/kr-solidarity__street__kr-solidarity--street--treaty-now-poster--v1__v1.png",
-  "source_image": "frontend/TBC/ChatGPT Image Feb 11, 2026, 12_48_15 AM.png",
+  "name": "Abstract - Solidarity (gemini_generate)",
+  "created_at": "2026-02-11T22:04:32.083155",
+  "asset_path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-gemini-generate__v1.png",
+  "source_image": "frontend/TBC/Gemini_Generated_Image_12eg8912eg8912eg.png",
   "analysis": {
-    "category": "street",
+    "category": "abstract",
     "political_significance": "solidarity",
     "text_content": null,
     "detected_symbols": [],
@@ -14,35 +14,32 @@
       "primary": "#1A1714",
       "secondary": "#D4A84B"
     },
-    "intended_context": "Catalog imported",
+    "intended_context": "Analysis failed",
     "historical_reference": null,
-    "analysis_confidence": 0.95,
-    "analysis_notes": "Imported from Sidekick Catalog"
+    "analysis_confidence": 0.0,
+    "analysis_notes": "Analysis failed: 400 API key not valid. Please pass a valid API key. [reason: \"API_KEY_INVALID\"\ndomain: \"googleapis.com\"\nmetadata {\n  key: \"service\"\n  value: \"generativelanguage.googleapis.com\"\n}\n, locale: \"en-US\"\nmessage: \"API key not valid. Please pass a valid API key.\"\n]"
   },
   "governance": {
     "passed": true,
-    "approval_level": "human-review",
+    "approval_level": "auto-approved",
     "violations": [],
-    "warnings": [
-      "Street art: generally includes text/slogan (check composition)",
-      "Street art: should specify in-situ context"
-    ],
-    "governance_score": 95.0,
-    "governance_notes": "0 violations, 2 warnings"
+    "warnings": [],
+    "governance_score": 100,
+    "governance_notes": "0 violations, 0 warnings"
   },
   "scoring": {
-    "overall_score": 83.1,
+    "overall_score": 85.6,
     "political_representation": 75,
-    "governance_compliance": 85.0,
+    "governance_compliance": 100,
     "cultural_appropriateness": 85,
-    "aesthetic_quality": 88,
+    "aesthetic_quality": 78,
     "approval_status": "conditional-approval",
-    "confidence": 0.975
+    "confidence": 0.5
   },
   "specifications": {
     "dimensions": {
-      "width": 1024,
-      "height": 1024,
+      "width": 2752,
+      "height": 1536,
       "meets_minimum": false
     },
     "priority": "HIGH",

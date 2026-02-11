@@ -1,19 +1,20 @@
 {
   "id": "KR-SOLID-033",
-  "name": "kr-solidarity__devotional__shiva-urban-protest__v1",
-  "category": "devotional",
-  "file_path": "/assets/kr-solidarity/devotional/kr-solidarity__devotional__kr-solidarity--devotional--shiva-urban-protest--v1__v1.png",
+  "name": "Abstract - Solidarity (gemini_generate)",
+  "category": "abstract",
+  "file_path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-gemini-generate__v1.png",
   "priority": "HIGH",
   "status": "ready",
-  "intended_context": "Catalog imported",
+  "intended_context": "Analysis failed",
+  "components_allowed": [],
   "specs": {
-    "aspect_ratio": "2752:1536",
+    "aspect_ratio": "2048:2048",
     "style": "mixed",
     "text_content": null,
     "visual_anchors": {
       "halo": null,
       "framing": null,
-      "subject": "catalog-imported"
+      "subject": "error fallback"
     },
     "color_palette": {
       "primary": "#1A1714",

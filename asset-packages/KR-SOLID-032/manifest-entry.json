@@ -1,19 +1,20 @@
 {
   "id": "KR-SOLID-032",
-  "name": "kr-solidarity__abstract__paint-splash__v1",
+  "name": "Abstract - Solidarity (gemini_generate)",
   "category": "abstract",
-  "file_path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__kr-solidarity--abstract--paint-splash--v1__v1.png",
+  "file_path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-gemini-generate__v1.png",
   "priority": "HIGH",
   "status": "ready",
-  "intended_context": "Catalog imported",
+  "intended_context": "Analysis failed",
+  "components_allowed": [],
   "specs": {
-    "aspect_ratio": "2048:2048",
+    "aspect_ratio": "1536:2752",
     "style": "mixed",
     "text_content": null,
     "visual_anchors": {
       "halo": null,
       "framing": null,
-      "subject": "catalog-imported"
+      "subject": "error fallback"
     },
     "color_palette": {
       "primary": "#1A1714",

@@ -26,7 +26,8 @@ echo "Excluding .git, node_modules, and .venv..."
 
 # Find duplicate files
 # Note: Using -print0 and read -d '' to safely handle filenames with spaces
-find "$TARGET_DIR" -type f -name "* 2.*" \
+# Pattern handles both "file 2.ext" and "file 2"
+find "$TARGET_DIR" -type f \( -name "* 2.*" -o -name "* 2" \) \
     -not -path "*/.git/*" \
     -not -path "*/node_modules/*" \
     -not -path "*/.venv/*" \
