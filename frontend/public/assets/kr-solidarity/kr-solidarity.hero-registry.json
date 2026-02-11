@@ -1,0 +1,168 @@
+{
+  "version": "1.0.0",
+  "registry_name": "kerala-rage-hero-compositions",
+  "last_updated": "2026-02-12",
+  "compositions": [
+    {
+      "id": "devotional-anchor-hero",
+      "name": "Devotional Anchor Hero",
+      "layers": [
+        {
+          "type": "substrate",
+          "asset_id": "KR-SOLID-033",
+          "z_index": 1,
+          "opacity": 0.4,
+          "blend_mode": "normal",
+          "position": "cover"
+        },
+        {
+          "type": "atmospheric",
+          "asset_id": "auto",
+          "z_index": 2,
+          "opacity": 0.3,
+          "blend_mode": "overlay",
+          "position": "center"
+        },
+        {
+          "type": "spiritual",
+          "asset_id": "KR-SOLID-001",
+          "z_index": 3,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "position": "center"
+        }
+      ],
+      "typography": {
+        "headline": "Solidarity Across Borders",
+        "supporting": "First Nations, Kerala, Global Resistance",
+        "pressure_state": {
+          "wght": 900,
+          "wdth": 75
+        },
+        "solidarity_state": {
+          "wght": 800,
+          "wdth": 120
+        },
+        "melancholy_state": {
+          "wght": 475,
+          "wdth": 97.5
+        }
+      },
+      "motion": {
+        "bezier": [0.34, 1.56, 0.64, 1],
+        "scroll_wght_range": [300, 800],
+        "transition_duration": 400
+      }
+    },
+    {
+      "id": "resistance-portrait-hero",
+      "name": "Resistance Portrait Hero",
+      "layers": [
+        {
+          "type": "substrate",
+          "asset_id": "KR-SOLID-033",
+          "z_index": 1,
+          "opacity": 0.5,
+          "blend_mode": "normal",
+          "position": "cover"
+        },
+        {
+          "type": "atmospheric",
+          "asset_id": "auto",
+          "z_index": 2,
+          "opacity": 0.2,
+          "blend_mode": "multiply",
+          "position": "center"
+        },
+        {
+          "type": "resistance",
+          "asset_id": "auto",
+          "z_index": 3,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "position": "center"
+        }
+      ],
+      "typography": {
+        "headline": "The Rage Never Dies",
+        "supporting": "Legacy of Resistance",
+        "pressure_state": {
+          "wght": 900,
+          "wdth": 75
+        },
+        "solidarity_state": {
+          "wght": 800,
+          "wdth": 120
+        },
+        "melancholy_state": {
+          "wght": 475,
+          "wdth": 97.5
+        }
+      },
+      "motion": {
+        "bezier": [0.34, 1.56, 0.64, 1],
+        "scroll_wght_range": [300, 800],
+        "transition_duration": 400
+      }
+    },
+    {
+      "id": "layered-solidarity-hero",
+      "name": "Layered Solidarity Hero",
+      "layers": [
+        {
+          "type": "substrate",
+          "asset_id": "KR-SOLID-033",
+          "z_index": 1,
+          "opacity": 0.6,
+          "blend_mode": "normal",
+          "position": "cover"
+        },
+        {
+          "type": "atmospheric",
+          "asset_id": "auto",
+          "z_index": 2,
+          "opacity": 0.25,
+          "blend_mode": "screen",
+          "position": "center"
+        },
+        {
+          "type": "resistance",
+          "asset_id": "auto",
+          "z_index": 3,
+          "opacity": 0.7,
+          "blend_mode": "normal",
+          "position": "left"
+        },
+        {
+          "type": "atmospheric",
+          "asset_id": "KR-SOLID-029",
+          "z_index": 4,
+          "opacity": 0.3,
+          "blend_mode": "color-dodge",
+          "position": "right"
+        }
+      ],
+      "typography": {
+        "headline": "Intersectional Resistance",
+        "supporting": "Solidarity is Our Weapon",
+        "pressure_state": {
+          "wght": 900,
+          "wdth": 75
+        },
+        "solidarity_state": {
+          "wght": 800,
+          "wdth": 120
+        },
+        "melancholy_state": {
+          "wght": 475,
+          "wdth": 97.5
+        }
+      },
+      "motion": {
+        "bezier": [0.34, 1.56, 0.64, 1],
+        "scroll_wght_range": [300, 800],
+        "transition_duration": 400
+      }
+    }
+  ]
+}

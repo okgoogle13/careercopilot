@@ -26,6 +26,7 @@ Add this entry to `frontend/public/assets/kerala-rage-kr-solidarity-manifest.jso
   "priority": "HIGH",
   "status": "ready",
   "intended_context": "Analysis failed",
+  "components_allowed": [],
   "specs": {
     "aspect_ratio": "2048:2048",
     "style": "mixed",
@@ -86,28 +87,14 @@ If using color palette, add to design tokens:
 ## Support
 
 For questions about this asset's cultural significance or governance status, refer to:
-- Analysis Notes: Analysis failed: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
-* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3-flash
-Please retry in 46.091154883s. [links {
-  description: "Learn more about Gemini API quotas"
-  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+- Analysis Notes: Analysis failed: 400 API key not valid. Please pass a valid API key. [reason: "API_KEY_INVALID"
+domain: "googleapis.com"
+metadata {
+  key: "service"
+  value: "generativelanguage.googleapis.com"
 }
-, violations {
-  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
-  quota_id: "GenerateRequestsPerDayPerProjectPerModel-FreeTier"
-  quota_dimensions {
-    key: "model"
-    value: "gemini-3-flash"
-  }
-  quota_dimensions {
-    key: "location"
-    value: "global"
-  }
-  quota_value: 20
-}
-, retry_delay {
-  seconds: 46
-}
+, locale: "en-US"
+message: "API key not valid. Please pass a valid API key."
 ]
 - Placement Fit: Landing, Dashboard Overview
 - Governance Notes: 0 violations, 0 warnings
@@ -115,4 +102,4 @@ Please retry in 46.091154883s. [links {
 
 ---
 
-Generated: 2026-02-11T12:24:13.926804
+Generated: 2026-02-11T22:04:30.779608

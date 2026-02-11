@@ -1,0 +1,24 @@
+{
+  "id": "KR-SOLID-219",
+  "name": "Abstract - Solidarity (logo)",
+  "category": "abstract",
+  "file_path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-logo__v1.png",
+  "priority": "HIGH",
+  "status": "ready",
+  "intended_context": "Analysis failed",
+  "components_allowed": [],
+  "specs": {
+    "aspect_ratio": "397:116",
+    "style": "mixed",
+    "text_content": null,
+    "visual_anchors": {
+      "halo": null,
+      "framing": null,
+      "subject": "error fallback"
+    },
+    "color_palette": {
+      "primary": "#1A1714",
+      "secondary": "#D4A84B"
+    }
+  }
+}

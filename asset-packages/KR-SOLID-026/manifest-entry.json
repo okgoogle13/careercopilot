@@ -6,6 +6,7 @@
   "priority": "HIGH",
   "status": "ready",
   "intended_context": "Analysis failed",
+  "components_allowed": [],
   "specs": {
     "aspect_ratio": "2048:2048",
     "style": "mixed",

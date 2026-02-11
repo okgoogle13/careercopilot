@@ -1,17 +1,17 @@
-# Deployment Guide: kr-solidarity__devotional__shiva-urban-protest__v1
+# Deployment Guide: Abstract - Solidarity (gemini_generate)
 
 ## Quick Facts
 - **Asset ID:** KR-SOLID-033
-- **Canonical Path:** `/assets/kr-solidarity/devotional/kr-solidarity__devotional__kr-solidarity--devotional--shiva-urban-protest--v1__v1.png`
+- **Canonical Path:** `/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-gemini-generate__v1.png`
 - **Approval Status:** conditional-approval
-- **Overall Score:** 80.6/100
+- **Overall Score:** 85.6/100
 
 ## Integration Steps
 
 ### 1. File Placement
 Place the asset at the canonical path:
 ```
-kr-solidarity/devotional/kr-solidarity__devotional__kr-solidarity--devotional--shiva-urban-protest--v1__v1.png
+kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-gemini-generate__v1.png
 ```
 
 ### 2. Manifest Entry
@@ -20,20 +20,21 @@ Add this entry to `frontend/public/assets/kerala-rage-kr-solidarity-manifest.jso
 ```json
 {
   "id": "KR-SOLID-033",
-  "name": "kr-solidarity__devotional__shiva-urban-protest__v1",
-  "category": "devotional",
-  "file_path": "/assets/kr-solidarity/devotional/kr-solidarity__devotional__kr-solidarity--devotional--shiva-urban-protest--v1__v1.png",
+  "name": "Abstract - Solidarity (gemini_generate)",
+  "category": "abstract",
+  "file_path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-gemini-generate__v1.png",
   "priority": "HIGH",
   "status": "ready",
-  "intended_context": "Catalog imported",
+  "intended_context": "Analysis failed",
+  "components_allowed": [],
   "specs": {
-    "aspect_ratio": "2752:1536",
+    "aspect_ratio": "2048:2048",
     "style": "mixed",
     "text_content": null,
     "visual_anchors": {
       "halo": null,
       "framing": null,
-      "subject": "catalog-imported"
+      "subject": "error fallback"
     },
     "color_palette": {
       "primary": "#1A1714",
@@ -51,8 +52,8 @@ export const MyComponent = () => {
   return (
     <div className="kr-solidarity-asset">
       <img
-        src="/assets/kr-solidarity/devotional/kr-solidarity__devotional__kr-solidarity--devotional--shiva-urban-protest--v1__v1.png"
-        alt="kr-solidarity__devotional__shiva-urban-protest__v1"
+        src="/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-gemini-generate__v1.png"
+        alt="Abstract - Solidarity (gemini_generate)"
         className="w-full h-auto"
       />
     </div>
@@ -73,8 +74,8 @@ If using color palette, add to design tokens:
 - [x] Passes governance validation
 - [ ] Overall score ≥ 90
 - [x] No governance violations
-- [ ] No governance warnings
-- [ ] Image meets minimum resolution (2048px)
+- [x] No governance warnings
+- [x] Image meets minimum resolution (2048px)
 
 ## Recommendations
 
@@ -82,17 +83,23 @@ If using color palette, add to design tokens:
 - 📍 Strengthen political significance framing (current: 75)
 -    → Add historical reference or movement context
 -    → Enhance visual symbolism or cultural markers
-- 🎭 Enhance cultural appropriateness (current: 75)
--    → Use more reverent artistic style
 
 ## Support
 
 For questions about this asset's cultural significance or governance status, refer to:
-- Analysis Notes: Imported from Sidekick Catalog
-- Placement Fit: Landing, Dashboard Overview, Analysis Dashboard
-- Governance Notes: 0 violations, 1 warnings
+- Analysis Notes: Analysis failed: 400 API key not valid. Please pass a valid API key. [reason: "API_KEY_INVALID"
+domain: "googleapis.com"
+metadata {
+  key: "service"
+  value: "generativelanguage.googleapis.com"
+}
+, locale: "en-US"
+message: "API key not valid. Please pass a valid API key."
+]
+- Placement Fit: Landing, Dashboard Overview
+- Governance Notes: 0 violations, 0 warnings
 - Scoring Details: See `metadata.json`
 
 ---
 
-Generated: 2026-02-11T12:24:13.671218
+Generated: 2026-02-11T22:04:29.871376

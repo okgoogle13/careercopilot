@@ -1,0 +1,152 @@
+{
+  "version": "1.0.0",
+  "updated": "2026-02-12T02:59:37+11:00",
+  "description": "Central mapping file resolving both KR-SOLID assets and future KR-UI assets",
+  "tokens": {
+    "kr-asset-screenprint-substrate": {
+      "ref": "KR-SOLID-033",
+      "path": "/assets/kr-solidarity/texture/kr-solidarity__texture__kr-solidarity--texture--melbourne-laneway--v1__v1.png",
+      "type": "kr-solidarity",
+      "status": "ready",
+      "layer": "substrate",
+      "description": "Melbourne Laneway texture - real-world substrate base"
+    },
+    "kr-asset-atmospheric-overlay": {
+      "ref": "KR-SOLID-011",
+      "path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-chatgpt-image-f__v1.png",
+      "type": "kr-solidarity",
+      "status": "ready",
+      "layer": "atmospheric",
+      "description": "Abstract solidarity - ink atmosphere overlay"
+    },
+    "kr-asset-paint-splash": {
+      "ref": "KR-SOLID-029",
+      "path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__kr-solidarity--abstract--paint-splash--v1__v1.png",
+      "type": "kr-solidarity",
+      "status": "ready",
+      "layer": "atmospheric",
+      "description": "Paint splash - dynamic expressive overlay"
+    },
+    "kr-asset-screenprint-grit": {
+      "ref": "KR-UI-003",
+      "path": null,
+      "type": "ui-kit",
+      "status": "planned",
+      "description": "Screenprint grit particles (tile + sprite set) for floating texture"
+    },
+    "kr-asset-charcoal-paper": {
+      "ref": "KR-UI-005",
+      "path": null,
+      "type": "ui-kit",
+      "status": "planned",
+      "description": "Neutral charcoal paper substrate distinct from laneway texture"
+    },
+    "kr-asset-wheat-paste-tear": {
+      "ref": "KR-UI-001",
+      "path": null,
+      "type": "ui-kit",
+      "status": "planned",
+      "description": "Wheat paste tear (large + small variants) for torn poster edges"
+    },
+    "kr-asset-halo-disk": {
+      "ref": "KR-UI-002",
+      "path": null,
+      "type": "ui-kit",
+      "status": "planned",
+      "description": "Halo disk (plain + gauge version) for radiant circle elements"
+    },
+    "kr-asset-blueprint-grid": {
+      "ref": "KR-UI-004",
+      "path": null,
+      "type": "ui-kit",
+      "status": "planned",
+      "description": "Blueprint grid overlay (transparent) for technical grid patterns"
+    },
+    "kr-asset-blueprint-layout": {
+      "ref": "KR-UI-006",
+      "path": null,
+      "type": "ui-kit",
+      "status": "planned",
+      "description": "Blueprint layout watermark (transparent) for structural documentation"
+    },
+    "kr-asset-screenprint-stamp": {
+      "ref": "KR-UI-007",
+      "path": null,
+      "type": "ui-kit",
+      "status": "planned",
+      "description": "Screenprint stamp 'VERIFIED' (transparent) for approval indicators"
+    },
+    "kr-asset-field-grid": {
+      "ref": "KR-UI-004",
+      "path": null,
+      "type": "ui-kit",
+      "status": "planned",
+      "description": "Alias for blueprint-grid - technical grid overlay"
+    },
+    "kr-asset-field-layout": {
+      "ref": "KR-UI-006",
+      "path": null,
+      "type": "ui-kit",
+      "status": "planned",
+      "description": "Alias for blueprint-layout - technical layout watermark"
+    },
+    "kr-asset-ink-slam-mark": {
+      "ref": "KR-UI-007",
+      "path": null,
+      "type": "ui-kit",
+      "status": "planned",
+      "description": "Alias for screenprint-stamp - verification stamp"
+    }
+  },
+  "ui_kit_gaps": [
+    {
+      "id": "KR-UI-001",
+      "name": "Wheat Paste Tear",
+      "description": "Torn poster edge decoration (large + small variants)",
+      "usage": "Street poster framing effect",
+      "status": "planned"
+    },
+    {
+      "id": "KR-UI-002",
+      "name": "Halo Disk",
+      "description": "Radiant circle element (plain + gauge version)",
+      "usage": "Navigation marker and data visualization",
+      "status": "planned"
+    },
+    {
+      "id": "KR-UI-003",
+      "name": "Screenprint Grit Particles",
+      "description": "Floating texture particles (tile + sprite set)",
+      "usage": "Atmospheric depth and tactile presence",
+      "status": "planned"
+    },
+    {
+      "id": "KR-UI-004",
+      "name": "Blueprint Grid Overlay",
+      "description": "Technical grid overlay (transparent)",
+      "usage": "Measurement and structural context",
+      "status": "planned"
+    },
+    {
+      "id": "KR-UI-005",
+      "name": "Charcoal Paper Substrate",
+      "description": "Neutral charcoal paper base texture",
+      "usage": "Stable background for structural pages",
+      "status": "planned"
+    },
+    {
+      "id": "KR-UI-006",
+      "name": "Blueprint Layout Watermark",
+      "description": "Technical layout overlay (transparent)",
+      "usage": "Architectural presence and documentation context",
+      "status": "planned"
+    },
+    {
+      "id": "KR-UI-007",
+      "name": "Screenprint Stamp",
+      "description": "Verification stamp (VERIFIED)",
+      "usage": "Official approval indicator",
+      "status": "planned"
+    }
+  ]
+}

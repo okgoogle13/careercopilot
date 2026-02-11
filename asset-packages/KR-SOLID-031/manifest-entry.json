@@ -1,19 +1,20 @@
 {
   "id": "KR-SOLID-031",
-  "name": "kr-solidarity__street__first-nations-placard__v1",
-  "category": "street",
-  "file_path": "/assets/kr-solidarity/street/kr-solidarity__street__kr-solidarity--street--first-nations-placard--v1__v1.png",
+  "name": "Abstract - Solidarity (gemini_generate)",
+  "category": "abstract",
+  "file_path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-gemini-generate__v1.png",
   "priority": "HIGH",
   "status": "ready",
-  "intended_context": "Catalog imported",
+  "intended_context": "Analysis failed",
+  "components_allowed": [],
   "specs": {
-    "aspect_ratio": "1856:2304",
+    "aspect_ratio": "2752:1536",
     "style": "mixed",
     "text_content": null,
     "visual_anchors": {
       "halo": null,
       "framing": null,
-      "subject": "catalog-imported"
+      "subject": "error fallback"
     },
     "color_palette": {
       "primary": "#1A1714",

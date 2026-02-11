@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { 
   ManifestoSlab, 
   ManifestoCard, 
   ActionButton 
 } from '../../../components/kerala-rage';
+import { LayeredHero } from '../../../components/kerala-rage/LayeredHero';
+import type { SolidarityManifest } from '../../../design/hero/heroTypes';
+import { loadHeroRegistry } from '../../../design/hero/heroRegistry';
+import { composeHero } from '../../../utils/heroComposer';
 
 /**
  * KrDarkLanding (Hi-Fi)
@@ -14,30 +18,47 @@ import {
  */
 export const KrDarkLanding: React.FC = () => {
   const shouldReduceMotion = useReducedMotion() ?? false;
+  const [heroData, setHeroData] = useState<{
+    layers: any[];
+    typography: any;
+    motion: any;
+  } | null>(null);
+
+  useEffect(() => {
+    async function loadHero() {
+      try {
+        const [manifest, registry] = await Promise.all([
+          fetch('/assets/kerala-rage-kr-solidarity-manifest.json').then((r) => r.json()),
+          loadHeroRegistry(),
+        ]);
+
+        const result = composeHero(manifest as SolidarityManifest, registry, 'layered-solidarity-hero');
+
+        if (result.valid) {
+          setHeroData({
+            layers: result.resolvedLayers,
+            typography: result.typography,
+            motion: result.motion,
+          });
+        }
+      } catch (error) {
+        console.error('Failed to load hero:', error);
+      }
+    }
+    loadHero();
+  }, []);
 
   return (
     <div className="relative z-20 w-full max-w-7xl mx-auto flex flex-col items-center gap-24 p-8 md:p-24 overflow-hidden">
-      {/* Z-0: TODO[asset]: Screenprint Substrate overlay (10% opacity) */}
-      
-      {/* SECTION 1: The Proclamation */}
-      <motion.div 
-        initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.9, y: 20 }}
-        animate={{ opacity: 1, scale: 1, y: 0 }}
-        transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-        className="w-full flex justify-center text-center"
-      >
-        <div className="space-y-4">
-          <h2 className="font-annotation text-sm uppercase tracking-[0.4em] text-solidarity-red/80 mb-6">
-            Proclamation of Solidarity
-          </h2>
-          <h1 className="font-proclamation text-6xl md:text-8xl lg:text-9xl uppercase leading-[0.85] text-paper-white tracking-tighter">
-            Kerala<br/>Streetprint<br/>Naturalist
-          </h1>
-          <p className="font-body text-xl text-paper-white/40 mt-8 max-w-2xl mx-auto italic">
-            "Defiance is botanical. Precision is tactical."
-          </p>
-        </div>
-      </motion.div>
+      {/* SECTION 1: The Layered Hero */}
+      {heroData && (
+        <LayeredHero
+          layers={heroData.layers}
+          typography={heroData.typography}
+          motion={heroData.motion}
+          className="mb-12"
+        />
+      )}
 
       {/* SECTION 2: The Manifesto Core */}
       <div className="grid lg:grid-cols-5 gap-16 items-center w-full">

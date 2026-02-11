@@ -1,19 +1,20 @@
 {
   "id": "KR-SOLID-028",
-  "name": "kr-solidarity__portrait__bhagat-singh__v1",
-  "category": "portrait",
-  "file_path": "/assets/kr-solidarity/portrait/kr-solidarity__portrait__kr-solidarity--portrait--bhagat-singh--v1__v1.png",
+  "name": "Abstract - Solidarity (gemini_generate)",
+  "category": "abstract",
+  "file_path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-gemini-generate__v1.png",
   "priority": "HIGH",
   "status": "ready",
-  "intended_context": "Catalog imported",
+  "intended_context": "Analysis failed",
+  "components_allowed": [],
   "specs": {
-    "aspect_ratio": "1792:2400",
+    "aspect_ratio": "2048:2048",
     "style": "mixed",
     "text_content": null,
     "visual_anchors": {
       "halo": null,
       "framing": null,
-      "subject": "catalog-imported"
+      "subject": "error fallback"
     },
     "color_palette": {
       "primary": "#1A1714",
