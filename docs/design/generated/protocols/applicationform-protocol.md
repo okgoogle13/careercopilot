@@ -7,8 +7,8 @@
 
 ## Visual Hierarchy
 - **Dominant**: Large "Deposit" drop-zone with dashed blueprint borders.
-- **Primary Ink**: Baru Gold (#DAF674) for success confirmations and primary labels.
-- **Secondary Ink**: Waratah Red (#F14714) for drag-over highlights and errors.
+- **Primary Ink**: Ink Gold (#DAF674) for success confirmations and primary labels.
+- **Secondary Ink**: Solidarity Red (#F14714) for drag-over highlights and errors.
 - **Substrate**: Charcoal Paper (Z-0) with Blueprint Watermark (Z-1).
 
 ## Motion Physics

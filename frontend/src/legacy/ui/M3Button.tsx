@@ -31,7 +31,7 @@ const buttonVariants = cva(
             {
                 mode: 'KrDark',
                 variant: 'primary',
-                class: 'bg-wattle-gold text-surface-asphalt-black hover:bg-primary-wattle-glow border border-transparent',
+                class: 'bg-ink-gold text-surface-asphalt-black hover:bg-primary-ink-glow border border-transparent',
             },
             {
                 mode: 'KrDark',
@@ -42,7 +42,7 @@ const buttonVariants = cva(
             {
                 mode: 'KrDark',
                 variant: 'primary',
-                class: 'bg-wattle-gold text-surface-asphalt-black hover:bg-primary-wattle-glow rounded-sm',
+                class: 'bg-ink-gold text-surface-asphalt-black hover:bg-primary-ink-glow rounded-sm',
             },
             {
                 mode: 'KrDark',

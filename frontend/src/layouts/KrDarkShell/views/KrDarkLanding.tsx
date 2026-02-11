@@ -27,7 +27,7 @@ export const KrDarkLanding: React.FC = () => {
         className="w-full flex justify-center text-center"
       >
         <div className="space-y-4">
-          <h2 className="font-annotation text-sm uppercase tracking-[0.4em] text-waratah-red/80 mb-6">
+          <h2 className="font-annotation text-sm uppercase tracking-[0.4em] text-solidarity-red/80 mb-6">
             Proclamation of Solidarity
           </h2>
           <h1 className="font-proclamation text-6xl md:text-8xl lg:text-9xl uppercase leading-[0.85] text-paper-white tracking-tighter">
@@ -49,8 +49,8 @@ export const KrDarkLanding: React.FC = () => {
           className="lg:col-span-2 relative group"
         >
           {/* TODO[asset]: Elephant Motif overlay (Z-1) */}
-          <div className="absolute inset-0 bg-wattle-gold/5 blur-[120px] rounded-full scale-150" />
-          <div className="relative aspect-[3/4] bg-asphalt-black rounded-stone border border-white/5 overflow-hidden shadow-viscous group-hover:border-wattle-gold/20 transition-colors duration-700">
+          <div className="absolute inset-0 bg-ink-gold/5 blur-[120px] rounded-full scale-150" />
+          <div className="relative aspect-[3/4] bg-asphalt-black rounded-stone border border-white/5 overflow-hidden shadow-viscous group-hover:border-ink-gold/20 transition-colors duration-700">
              <img 
                src="/src/assets/KrMotifs/the-sentry.png" 
                alt="The Sentry" 

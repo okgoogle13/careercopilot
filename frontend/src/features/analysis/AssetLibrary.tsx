@@ -20,7 +20,7 @@ export function AssetLibrary() {
         <div>
           <h1 className="text-display-large-KrDark font-bloom font-black tracking-tight text-on-surface-paper-white leading-tight">
             Asset{' '}
-            <span className="font-proclamation italic font-light text-wattle-gold">
+            <span className="font-proclamation italic font-light text-ink-gold">
               Library
             </span>
           </h1>
@@ -44,8 +44,8 @@ export function AssetLibrary() {
           >
             {/* Icon */}
             <div className="flex items-center justify-center mb-6">
-              <div className="w-16 h-16 rounded-[var(--radius-pebble)] bg-wattle-gold/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
-                <FileText className="w-8 h-8 text-wattle-gold" />
+              <div className="w-16 h-16 rounded-[var(--radius-pebble)] bg-ink-gold/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
+                <FileText className="w-8 h-8 text-ink-gold" />
               </div>
             </div>
 
@@ -59,7 +59,7 @@ export function AssetLibrary() {
 
             {/* Actions */}
             <div className="flex gap-3 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
-              <button className="flex-1 bg-surface-KrDark-concrete-grey-highest hover:bg-wattle-gold hover:text-primary-on-primary text-wattle-gold rounded-[var(--radius-seed)] py-2.5 flex items-center justify-center transition-all duration-300 border border-primary-wattle-gold/20">
+              <button className="flex-1 bg-surface-KrDark-concrete-grey-highest hover:bg-ink-gold hover:text-primary-on-primary text-ink-gold rounded-[var(--radius-seed)] py-2.5 flex items-center justify-center transition-all duration-300 border border-primary-ink-gold/20">
                 <Download className="w-4 h-4" />
               </button>
               <button className="flex-1 bg-surface-KrDark-concrete-grey-highest hover:bg-error hover:text-on-error text-error rounded-[var(--radius-seed)] py-2.5 flex items-center justify-center transition-all duration-300 border border-error/20">

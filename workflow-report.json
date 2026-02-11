@@ -1,0 +1,320 @@
+{
+  "workflow_id": "workflow-20260211-141110",
+  "started_at": "2026-02-11T14:11:10.252450",
+  "completed_at": "2026-02-11T14:11:27.925467",
+  "total_assets": 27,
+  "successful": 27,
+  "failed": 0,
+  "results": [
+    {
+      "success": true,
+      "image_path": "frontend/TBC/ChatGPT Image Feb 11, 2026, 12_48_17 AM.png",
+      "asset_id": "KR-SOLID-069",
+      "stage_completed": "export",
+      "overall_score": 85.6,
+      "approval_status": "conditional-approval",
+      "error": null,
+      "warnings": [],
+      "processing_time": 1.872654
+    },
+    {
+      "success": true,
+      "image_path": "frontend/TBC/ChatGPT Image Feb 11, 2026, 12_47_46 AM.png",
+      "asset_id": "KR-SOLID-068",
+      "stage_completed": "export",
+      "overall_score": 85.6,
+      "approval_status": "conditional-approval",
+      "error": null,
+      "warnings": [],
+      "processing_time": 1.872801
+    },
+    {
+      "success": true,
+      "image_path": "frontend/TBC/Gemini_Generated_Image_p70pkgp70pkgp70p.png",
+      "asset_id": "KR-SOLID-066",
+      "stage_completed": "export",
+      "overall_score": 85.6,
+      "approval_status": "conditional-approval",
+      "error": null,
+      "warnings": [],
+      "processing_time": 3.024734
+    },
+    {
+      "success": true,
+      "image_path": "frontend/TBC/ChatGPT Image Feb 11, 2026, 12_48_01 AM.png",
+      "asset_id": "KR-SOLID-071",
+      "stage_completed": "export",
+      "overall_score": 85.6,
+      "approval_status": "conditional-approval",
+      "error": null,
+      "warnings": [],
+      "processing_time": 1.555958
+    },
+    {
+      "success": true,
+      "image_path": "frontend/TBC/Gemini_Generated_Image_he6vddhe6vddhe6v.png",
+      "asset_id": "KR-SOLID-067",
+      "stage_completed": "export",
+      "overall_score": 85.6,
+      "approval_status": "conditional-approval",
+      "error": null,
+      "warnings": [],
+      "processing_time": 3.496162
+    },
+    {
+      "success": true,
+      "image_path": "frontend/TBC/ChatGPT Image Feb 11, 2026, 12_48_15 AM.png",
+      "asset_id": "KR-SOLID-074",
+      "stage_completed": "export",
+      "overall_score": 85.6,
+      "approval_status": "conditional-approval",
+      "error": null,
+      "warnings": [],
+      "processing_time": 1.180299
+    },
+    {
+      "success": true,
+      "image_path": "frontend/TBC/Gemini_Generated_Image_12eg8912eg8912eg.png",
+      "asset_id": "KR-SOLID-072",
+      "stage_completed": "export",
+      "overall_score": 85.6,
+      "approval_status": "conditional-approval",
+      "error": null,
+      "warnings": [],
+      "processing_time": 2.065999
+    },
+    {
+      "success": true,
+      "image_path": "frontend/TBC/Gemini_Generated_Image_r8axlar8axlar8ax.png",
+      "asset_id": "KR-SOLID-070",
+      "stage_completed": "export",
+      "overall_score": 85.6,
+      "approval_status": "conditional-approval",
+      "error": null,
+      "warnings": [],
+      "processing_time": 3.52891
+    },
+    {
+      "success": true,
+      "image_path": "frontend/TBC/ChatGPT Image Feb 11, 2026, 12_48_24 AM.png",
+      "asset_id": "KR-SOLID-076",
+      "stage_completed": "export",
+      "overall_score": 85.6,
+      "approval_status": "conditional-approval",
+      "error": null,
+      "warnings": [],
+      "processing_time": 1.093745
+    },
+    {
+      "success": true,
+      "image_path": "frontend/TBC/Gemini_Generated_Image_bubag0bubag0buba.png",
+      "asset_id": "KR-SOLID-075",
+      "stage_completed": "export",
+      "overall_score": 85.6,
+      "approval_status": "conditional-approval",
+      "error": null,
+      "warnings": [],
+      "processing_time": 2.67241
+    },
+    {
+      "success": true,
+      "image_path": "frontend/TBC/ChatGPT Image Feb 11, 2026, 06_09_08 AM.png",
+      "asset_id": "KR-SOLID-078",
+      "stage_completed": "export",
+      "overall_score": 85.6,
+      "approval_status": "conditional-approval",
+      "error": null,
+      "warnings": [],
+      "processing_time": 1.440794
+    },
+    {
+      "success": true,
+      "image_path": "frontend/TBC/KR-SOLID-013.png",
+      "asset_id": "KR-SOLID-079",
+      "stage_completed": "export",
+      "overall_score": 85.6,
+      "approval_status": "conditional-approval",
+      "error": null,
+      "warnings": [],
+      "processing_time": 0.560426
+    },
+    {
+      "success": true,
+      "image_path": "frontend/TBC/Gemini_Generated_Image_esxbtoesxbtoesxb.png",
+      "asset_id": "KR-SOLID-073",
+      "stage_completed": "export",
+      "overall_score": 85.6,
+      "approval_status": "conditional-approval",
+      "error": null,
+      "warnings": [],
+      "processing_time": 4.758232
+    },
+    {
+      "success": true,
+      "image_path": "frontend/TBC/Gemini_Generated_Image_ts3wyjts3wyjts3w.png",
+      "asset_id": "KR-SOLID-080",
+      "stage_completed": "export",
+      "overall_score": 85.6,
+      "approval_status": "conditional-approval",
+      "error": null,
+      "warnings": [],
+      "processing_time": 1.570959
+    },
+    {
+      "success": true,
+      "image_path": "frontend/TBC/Gemini_Generated_Image_sej6vsej6vsej6vs.png",
+      "asset_id": "KR-SOLID-077",
+      "stage_completed": "export",
+      "overall_score": 85.6,
+      "approval_status": "conditional-approval",
+      "error": null,
+      "warnings": [],
+      "processing_time": 4.605405
+    },
+    {
+      "success": true,
+      "image_path": "frontend/TBC/ChatGPT Image Feb 11, 2026, 12_47_57 AM.png",
+      "asset_id": "KR-SOLID-083",
+      "stage_completed": "export",
+      "overall_score": 85.6,
+      "approval_status": "conditional-approval",
+      "error": null,
+      "warnings": [],
+      "processing_time": 1.036048
+    },
+    {
+      "success": true,
+      "image_path": "frontend/TBC/Gemini_Generated_Image_sej6vsej6vsej6vs (1).png",
+      "asset_id": "KR-SOLID-081",
+      "stage_completed": "export",
+      "overall_score": 85.6,
+      "approval_status": "conditional-approval",
+      "error": null,
+      "warnings": [],
+      "processing_time": 2.767043
+    },
+    {
+      "success": true,
+      "image_path": "frontend/TBC/KR-SOLID-014.png",
+      "asset_id": "KR-SOLID-085",
+      "stage_completed": "export",
+      "overall_score": 85.6,
+      "approval_status": "conditional-approval",
+      "error": null,
+      "warnings": [],
+      "processing_time": 0.536622
+    },
+    {
+      "success": true,
+      "image_path": "frontend/TBC/ChatGPT Image Feb 11, 2026, 12_47_51 AM.png",
+      "asset_id": "KR-SOLID-084",
+      "stage_completed": "export",
+      "overall_score": 85.6,
+      "approval_status": "conditional-approval",
+      "error": null,
+      "warnings": [],
+      "processing_time": 1.373813
+    },
+    {
+      "success": true,
+      "image_path": "frontend/TBC/Gemini_Generated_Image_o3mtmto3mtmto3mt.png",
+      "asset_id": "KR-SOLID-082",
+      "stage_completed": "export",
+      "overall_score": 85.6,
+      "approval_status": "conditional-approval",
+      "error": null,
+      "warnings": [],
+      "processing_time": 5.399074
+    },
+    {
+      "success": true,
+      "image_path": "frontend/TBC/Gemini_Generated_Image_fugl0wfugl0wfugl.png",
+      "asset_id": "KR-SOLID-086",
+      "stage_completed": "export",
+      "overall_score": 85.6,
+      "approval_status": "conditional-approval",
+      "error": null,
+      "warnings": [],
+      "processing_time": 4.291982
+    },
+    {
+      "success": true,
+      "image_path": "frontend/TBC/Gemini_Generated_Image_8psbz28psbz28psb.png",
+      "asset_id": "KR-SOLID-087",
+      "stage_completed": "export",
+      "overall_score": 85.6,
+      "approval_status": "conditional-approval",
+      "error": null,
+      "warnings": [],
+      "processing_time": 4.23902
+    },
+    {
+      "success": true,
+      "image_path": "frontend/TBC/Gemini_Generated_Image_vnppasvnppasvnpp.png",
+      "asset_id": "KR-SOLID-088",
+      "stage_completed": "export",
+      "overall_score": 85.6,
+      "approval_status": "conditional-approval",
+      "error": null,
+      "warnings": [],
+      "processing_time": 4.490165
+    },
+    {
+      "success": true,
+      "image_path": "frontend/TBC/ChatGPT Image Feb 11, 2026, 12_48_30 AM.png",
+      "asset_id": "KR-SOLID-091",
+      "stage_completed": "export",
+      "overall_score": 85.6,
+      "approval_status": "conditional-approval",
+      "error": null,
+      "warnings": [],
+      "processing_time": 1.017762
+    },
+    {
+      "success": true,
+      "image_path": "frontend/TBC/ChatGPT Image Feb 11, 2026, 12_48_03 AM.png",
+      "asset_id": "KR-SOLID-090",
+      "stage_completed": "export",
+      "overall_score": 85.6,
+      "approval_status": "conditional-approval",
+      "error": null,
+      "warnings": [],
+      "processing_time": 1.057789
+    },
+    {
+      "success": true,
+      "image_path": "frontend/TBC/ChatGPT Image Feb 11, 2026, 12_48_11 AM.png",
+      "asset_id": "KR-SOLID-089",
+      "stage_completed": "export",
+      "overall_score": 85.6,
+      "approval_status": "conditional-approval",
+      "error": null,
+      "warnings": [],
+      "processing_time": 2.634982
+    },
+    {
+      "success": true,
+      "image_path": "frontend/TBC/Gemini_Generated_Image_dh3syldh3syldh3s.png",
+      "asset_id": "KR-SOLID-092",
+      "stage_completed": "export",
+      "overall_score": 85.6,
+      "approval_status": "conditional-approval",
+      "error": null,
+      "warnings": [],
+      "processing_time": 1.799391
+    }
+  ],
+  "summary_stats": {
+    "total_assets": 27,
+    "successful": 27,
+    "failed": 0,
+    "success_rate": "100.0%",
+    "total_time_seconds": 17.673017,
+    "average_time_per_asset": 0.6545561851851852,
+    "average_score": "85.6",
+    "approval_distribution": {
+      "conditional-approval": 27
+    }
+  },
+  "errors": []
+}

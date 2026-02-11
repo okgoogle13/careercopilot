@@ -50,7 +50,7 @@
 .blobA {
   width: 50vw;
   height: 50vh;
-  background: radial-gradient(circle, var(--color-wattle-gold, #d4a84b) 0%, transparent 70%);
+  background: radial-gradient(circle, var(--color-ink-gold, #d4a84b) 0%, transparent 70%);
   top: -10%;
   left: -10%;
   animation: floating var(--duration-slow) infinite alternate ease-in-out;
@@ -59,7 +59,7 @@
 .blobB {
   width: 40vw;
   height: 40vh;
-  background: radial-gradient(circle, var(--color-waratah-red, #c45c4b) 0%, transparent 70%);
+  background: radial-gradient(circle, var(--color-solidarity-red, #c45c4b) 0%, transparent 70%);
   bottom: -5%;
   right: -5%;
   animation: floating 8s infinite alternate-reverse ease-in-out;
@@ -70,7 +70,7 @@
   height: 30vh;
   background: radial-gradient(
     circle,
-    var(--color-wattle-gold-lightest, #e8c77a) 0%,
+    var(--color-ink-gold-lightest, #e8c77a) 0%,
     transparent 70%
   );
   top: 40%;
@@ -166,7 +166,7 @@
 }
 
 .btnPebbleFilled {
-  background-color: var(--color-wattle-gold);
+  background-color: var(--color-ink-gold);
   color: var(--color-asphalt-black-darkest);
   padding: 1.25rem 2.5rem;
   border-radius: var(--radius-pebble);
@@ -181,16 +181,16 @@
 
 .btnPebbleFilled:hover {
   transform: translateY(-4px) scale(1.05);
-  background-color: var(--color-wattle-gold-light);
+  background-color: var(--color-ink-gold-light);
   box-shadow: var(--shadow-elevated);
 }
 
 .btnPebbleOutlined {
   background-color: transparent;
-  color: var(--color-wattle-gold);
+  color: var(--color-ink-gold);
   padding: 1.25rem 2.5rem;
   border-radius: var(--radius-pebble);
-  border: 2px solid var(--color-wattle-gold);
+  border: 2px solid var(--color-ink-gold);
   font-family: var(--font-field-note);
   font-weight: 700;
   text-transform: uppercase;
@@ -224,7 +224,7 @@
   bottom: 3rem;
   left: 3rem;
   font-size: 3rem;
-  color: var(--color-wattle-gold);
+  color: var(--color-ink-gold);
   opacity: 0.2;
   pointer-events: none;
 }

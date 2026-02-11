@@ -95,7 +95,7 @@ export function Opportunities() {
         >
           <div className="flex flex-col lg:flex-row gap-6 items-end">
             <div className="flex-1 space-y-3 w-full">
-              <label className="text-xs font-annotation text-wattle-gold uppercase tracking-[0.3em] flex items-center gap-2">
+              <label className="text-xs font-annotation text-ink-gold uppercase tracking-[0.3em] flex items-center gap-2">
                 <Compass className="w-3 h-3" /> Target Trajectory
               </label>
               <div className="relative">
@@ -103,21 +103,21 @@ export function Opportunities() {
                   type="search"
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
-                  className="w-full bg-bark-light/5 border-b border-concrete-grey/20 font-bloom text-xl text-paper-white p-3 focus:border-wattle-gold outline-none transition-all placeholder:text-concrete-grey/30"
+                  className="w-full bg-bark-light/5 border-b border-concrete-grey/20 font-bloom text-xl text-paper-white p-3 focus:border-ink-gold outline-none transition-all placeholder:text-concrete-grey/30"
                   placeholder="e.g. SOFTWARE ARCHITECT"
                 />
               </div>
             </div>
 
             <div className="flex-1 space-y-3 w-full">
-              <label className="text-xs font-annotation text-wattle-gold uppercase tracking-[0.3em] flex items-center gap-2">
+              <label className="text-xs font-annotation text-ink-gold uppercase tracking-[0.3em] flex items-center gap-2">
                 <MapPin className="w-3 h-3" /> Geographical Node
               </label>
               <input
                 type="text"
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
-                className="w-full bg-bark-light/5 border-b border-concrete-grey/20 font-bloom text-xl text-paper-white p-3 focus:border-wattle-gold outline-none transition-all placeholder:text-concrete-grey/30"
+                className="w-full bg-bark-light/5 border-b border-concrete-grey/20 font-bloom text-xl text-paper-white p-3 focus:border-ink-gold outline-none transition-all placeholder:text-concrete-grey/30"
                 placeholder="e.g. MELBOURNE, VIC"
               />
             </div>
@@ -149,9 +149,9 @@ export function Opportunities() {
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="flex items-center gap-4 text-[10px] font-mono text-concrete-grey border-l-2 border-wattle-gold pl-4 py-2 bg-wattle-gold/5"
+                className="flex items-center gap-4 text-[10px] font-mono text-concrete-grey border-l-2 border-ink-gold pl-4 py-2 bg-ink-gold/5"
               >
-                <div className="w-2 h-2 rounded-full bg-wattle-gold animate-pulse" />
+                <div className="w-2 h-2 rounded-full bg-ink-gold animate-pulse" />
                 <span className="uppercase tracking-[0.2em]">
                   {'>'} SCOUT DISPATCH: {scoutMessage}
                 </span>

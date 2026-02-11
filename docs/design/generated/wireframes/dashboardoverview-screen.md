@@ -20,9 +20,9 @@
 
 <tokens>
 - **Container**: `surface-charcoal`, `shadow-viscous`
-- **HeroTitle**: `Hero-144px`, `Solidarity-800`, `Waratah-Red`
+- **HeroTitle**: `Hero-144px`, `Solidarity-800`, `Solidarity Red`
 - **Body**: `Body-16px`, `Direct-Action-450`, `On-Surface-Ash`
-- **PrimaryAction**: `Baru-Gold-Surface`, `shadow-hover-rise`
+- **PrimaryAction**: `Ink Gold-Surface`, `shadow-hover-rise`
 </tokens>
 
 <assets>

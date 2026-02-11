@@ -19,9 +19,9 @@ const MetricCard = React.forwardRef<HTMLDivElement, MetricCardProps>(
         const { mode } = useMode();
 
         const trendColor = trend?.direction === 'up'
-            ? (mode === 'KrDark' || mode === 'KrLight' ? 'text-status-KrDark-ghost-gum' : 'text-status-KrDark-clinical-sage')
+            ? (mode === 'KrDark' || mode === 'KrLight' ? 'text-status-KrDark-solidarity-green' : 'text-status-KrDark-clinical-sage')
             : trend?.direction === 'down'
-                ? (mode === 'KrDark' || mode === 'KrLight' ? 'text-tertiary-waratah-red' : 'text-status-KrDark-clinical-alert')
+                ? (mode === 'KrDark' || mode === 'KrLight' ? 'text-tertiary-solidarity-red' : 'text-status-KrDark-clinical-alert')
                 : 'text-secondary-concrete-grey';
 
         return (

@@ -17,7 +17,7 @@ export function ImpactEnhancements({ suggestions }: ImpactEnhancementsProps) {
   return (
     <div className="bg-[var(--color-asphalt-black-light)] rounded-stone p-8 border border-white/10 shadow-elevation-1">
       <div className="flex items-center gap-3 mb-6">
-        <Lightbulb className="w-6 h-6 text-[var(--color-wattle-gold)]" />
+        <Lightbulb className="w-6 h-6 text-[var(--color-ink-gold)]" />
         <h2 className="text-3xl font-bloom text-[var(--color-paper-white)]">Impact Enhancements</h2>
       </div>
 
@@ -44,8 +44,8 @@ export function ImpactEnhancements({ suggestions }: ImpactEnhancementsProps) {
 
             {/* Arrow Indicator */}
             <div className="flex items-center gap-2 mb-4">
-              <ArrowRight className="w-5 h-5 text-[var(--color-wattle-gold)]" />
-              <span className="text-[11px] text-[var(--color-wattle-gold)] font-bold tracking-tighter">
+              <ArrowRight className="w-5 h-5 text-[var(--color-ink-gold)]" />
+              <span className="text-[11px] text-[var(--color-ink-gold)] font-bold tracking-tighter">
                 ENHANCED
               </span>
             </div>
@@ -74,12 +74,12 @@ export function ImpactEnhancements({ suggestions }: ImpactEnhancementsProps) {
               <span
                 className={`inline-flex px-3 py-1 rounded-full text-[10px] font-bold tracking-wider ${
                   suggestion.type === 'number'
-                    ? 'bg-[var(--color-wattle-gold)]/10 text-[var(--color-wattle-gold)]'
+                    ? 'bg-[var(--color-ink-gold)]/10 text-[var(--color-ink-gold)]'
                     : suggestion.type === 'percentage'
                       ? 'bg-blue-500/10 text-blue-400'
                       : suggestion.type === 'scale'
                         ? 'bg-purple-500/10 text-purple-400'
-                        : 'bg-[var(--color-waratah-red)]/10 text-[var(--color-waratah-red)]'
+                        : 'bg-[var(--color-solidarity-red)]/10 text-[var(--color-solidarity-red)]'
                 }`}
               >
                 {suggestion.type.toUpperCase()}

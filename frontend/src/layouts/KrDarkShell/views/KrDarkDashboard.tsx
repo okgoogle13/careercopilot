@@ -41,9 +41,9 @@ export const KrDarkDashboard: React.FC = () => {
   const shouldReduceMotion = useReducedMotion() ?? false ?? false;
 
   const metrics = [
-    { label: 'RESUME_ALIGNMENT', value: '85%', color: 'text-wattle-gold', ref: 'ALGN_01' },
-    { label: 'MISSION_READY', value: '12', color: 'text-waratah-red', ref: 'RDY_02' },
-    { label: 'OPPORTUNITY_SCORE', value: '74', color: 'text-ghost-gum', ref: 'SCR_03' },
+    { label: 'RESUME_ALIGNMENT', value: '85%', color: 'text-ink-gold', ref: 'ALGN_01' },
+    { label: 'MISSION_READY', value: '12', color: 'text-solidarity-red', ref: 'RDY_02' },
+    { label: 'OPPORTUNITY_SCORE', value: '74', color: 'text-solidarity-green', ref: 'SCR_03' },
     { label: 'NETWORK_STRENGTH', value: 'LOW', color: 'text-clinical-alert', ref: 'NET_04' },
   ];
 
@@ -72,7 +72,7 @@ export const KrDarkDashboard: React.FC = () => {
              transition={{ delay: 0.2 + (i * 0.1), duration: 0.6 }}
           >
             <SolidarityCard 
-              className="flex flex-col justify-between aspect-square p-10 group hover:border-wattle-gold/20 transition-all duration-500 relative overflow-hidden shadow-viscous"
+              className="flex flex-col justify-between aspect-square p-10 group hover:border-ink-gold/20 transition-all duration-500 relative overflow-hidden shadow-viscous"
             >
               <div className="space-y-1">
                 <span className="font-annotation text-xs uppercase tracking-[0.4em] text-paper-white/30 group-hover:text-paper-white/50 transition-colors">
@@ -86,7 +86,7 @@ export const KrDarkDashboard: React.FC = () => {
               </div>
 
               {/* Substrate Pulse: Subtle radial glow */}
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-wattle-gold/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none" />
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-ink-gold/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none" />
 
               <div className="absolute bottom-4 right-6 opacity-0 group-hover:opacity-10 transition-opacity">
                  <div className="w-12 h-12 rounded-full border border-current" />
@@ -106,7 +106,7 @@ export const KrDarkDashboard: React.FC = () => {
         <SolidarityCard className="w-full p-12 relative overflow-hidden bg-asphalt-black group">
           <div className="flex justify-between items-center mb-8 border-b border-white/5 pb-6">
              <div className="flex items-center gap-4">
-                <div className="w-2 h-2 rounded-full bg-wattle-gold animate-pulse" />
+                <div className="w-2 h-2 rounded-full bg-ink-gold animate-pulse" />
                 <h3 className="font-proclamation text-2xl uppercase text-paper-white/80">Live Archive Stream</h3>
              </div>
              <span className="font-mono text-[10px] text-paper-white/20 uppercase tracking-widest">SUBSTRATE_FEED_ACTV</span>
@@ -117,7 +117,7 @@ export const KrDarkDashboard: React.FC = () => {
           <div className="space-y-6">
              {[1, 2, 3].map(i => (
                <div key={i} className="flex gap-8 items-center border-b border-white/5 pb-4 last:border-0 opacity-40 hover:opacity-100 transition-opacity">
-                  <span className="font-mono text-[10px] text-wattle-gold">0{i}_REG</span>
+                  <span className="font-mono text-[10px] text-ink-gold">0{i}_REG</span>
                   <p className="font-body text-base text-paper-white/60 italic">"Historical resistance record {i} successfully extracted and aligned with current mission parameters."</p>
                   <span className="ml-auto font-mono text-[9px] text-paper-white/20">2m ago</span>
                </div>

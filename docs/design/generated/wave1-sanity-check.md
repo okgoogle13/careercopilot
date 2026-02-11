@@ -22,8 +22,8 @@ This report summarizes the sanity check for the foundational Kerala Rage compone
 - **Accessibility**: Defaults to `type="button"`. Explicit `focus-visible` ring. Correctly handles `disabled` attribute and styling.
 - **Motion**: Integrated `useReducedMotion()`. Disables scaling and Y-translation on hover/tap for reduced-motion users.
 - **Color Tokens**:
-  - Primary: `wattle-gold` on `asphalt-black`.
-  - Accent: `waratah-red` on `paper-white`.
+  - Primary: `ink-gold` on `asphalt-black`.
+  - Accent: `solidarity-red` on `paper-white`.
 - **WCAG Result**: ✅ PASS (8.08:1 for Gold, 4.23:1 for Red).
 - **Fraunces Usage**: Uses `font-field-note` (Work Sans) per spec. TODO added for potential Fraunces label experiments.
 
@@ -33,7 +33,7 @@ This report summarizes the sanity check for the foundational Kerala Rage compone
 - **Motion**: Integrated `useReducedMotion()`. Disables scaling transition on entrance.
 - **Color Tokens**:
   - Background: `asphalt-black`.
-  - Accent Border: `waratah-red/20`.
+  - Accent Border: `solidarity-red/20`.
 - **WCAG Result**: ✅ PASS.
 - **Fraunces Usage**: **Correctly wired** to `useMode()`.
   - `KrDark` -> `energetic` preset.

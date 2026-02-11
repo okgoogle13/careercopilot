@@ -19,11 +19,11 @@ CareerCopilot is a tactical digital workspace where a user’s professional jour
 **2. Screenprint Aesthetics (FOUNDATION)**
 
 - Visible registration marks, halftone patterns, and ink displacement.
-- High weight contrasts and visceral colors (Baru Gold, Waratah Red).
+- High weight contrasts and visceral colors (Ink Gold, Solidarity Red).
 
 **3. Australian Contemporary Context (COLLECTIVE)**
 
-- Endemic species as solidarity mascots (Parrot, Waratah) rendered in high-contrast stencils.
+- Endemic species as solidarity mascots (Signal, Solidarity) rendered in high-contrast stencils.
 - Palette inspired by the collision of Kerala’s vibrant light and Melbourne’s urban grit.
 
 ---
@@ -63,9 +63,9 @@ CareerCopilot is a tactical digital workspace where a user’s professional jour
 | Token                   | Hex       | Vibe                  |
 | ----------------------- | --------- | --------------------- |
 | **Charcoal Background** | `#1A1A1A` | The raw substrate.    |
-| **Baru Gold**           | `#E6B34D` | Internal radiance.    |
-| **Waratah Red**         | `#D94A4A` | Tactical heat.        |
-| **Parrot Green**        | `#50C878` | Hybrid identity life. |
+| **Ink Gold**           | `#E6B34D` | Internal radiance.    |
+| **Solidarity Red**         | `#D94A4A` | Tactical heat.        |
+| **Signal Green**        | `#50C878` | Hybrid identity life. |
 | **Paper White**         | `#F5F0E8` | High-contrast ink.    |
 
 ---

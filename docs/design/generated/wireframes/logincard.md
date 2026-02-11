@@ -25,7 +25,7 @@
 - **Container**: `bg-charcoal`, `radius-stone`, `w-[480px]`
 - **Title**: `text-display-lg`, `font-recursive-800`
 - **Inputs**: `bg-charcoal`, `border-blueprint-grey`, `radius-slab`
-- **Button**: `bg-baru-gold`, `text-charcoal`, `radius-pebble`
+- **Button**: `bg-ink-gold`, `text-charcoal`, `radius-pebble`
 </tokens>
 
 <accessibility>
@@ -35,9 +35,9 @@
 </accessibility>
 
 <states>
-- **Loading**: Wattle Gold glow pulse behind the card.
+- **Loading**: Ink Gold glow pulse behind the card.
 - **Empty**: Fields highlighted with Smoke Green hint.
-- **Error**: Waratah Red border shake; voice: "LET'S TRY AGAIN".
+- **Error**: Solidarity Red border shake; voice: "LET'S TRY AGAIN".
 </states>
 
 <assets>

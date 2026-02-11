@@ -54,9 +54,9 @@ export const DocumentStack: React.FC = () => {
 
     const getStatusColor = (status: Document['status']) => {
         switch (status) {
-            case 'analyzed': return 'text-wattle-gold';
+            case 'analyzed': return 'text-ink-gold';
             case 'pending': return 'text-secondary-flannel';
-            case 'draft': return 'text-tertiary-waratah';
+            case 'draft': return 'text-tertiary-solidarity';
         }
     };
 
@@ -112,7 +112,7 @@ export const DocumentStack: React.FC = () => {
                                 {doc.score && (
                                     <div className="flex flex-col items-end">
                                         <div className="text-label-small uppercase text-secondary-flannel-dim font-bold">ATS Score</div>
-                                        <div className={cn("text-title-large font-bold", doc.score > 70 ? "text-wattle-gold" : "text-tertiary-waratah")}>
+                                        <div className={cn("text-title-large font-bold", doc.score > 70 ? "text-ink-gold" : "text-tertiary-solidarity")}>
                                             {doc.score}
                                         </div>
                                     </div>
@@ -122,9 +122,9 @@ export const DocumentStack: React.FC = () => {
                                 <div className={cn(
                                     "px-3 py-1 rounded-full border bg-surface-KrDark-slate-smoke-highest/30 text-xs font-bold uppercase tracking-wider flex items-center gap-2",
                                     getStatusColor(doc.status),
-                                    doc.status === 'analyzed' && "border-primary-wattle-gold/20",
+                                    doc.status === 'analyzed' && "border-primary-ink-gold/20",
                                     doc.status === 'pending' && "border-secondary-flannel/20",
-                                    doc.status === 'draft' && "border-tertiary-waratah/20"
+                                    doc.status === 'draft' && "border-tertiary-solidarity/20"
                                 )}>
                                     {doc.status === 'analyzed' && <CheckCircle className="w-3 h-3" />}
                                     {doc.status === 'pending' && <Clock className="w-3 h-3" />}
@@ -142,7 +142,7 @@ export const DocumentStack: React.FC = () => {
             </div>
 
             {/* Upload Drop Zone Placeholder */}
-            <div className="border-2 border-dashed border-outline-variant/20 rounded-[var(--radius-stone)] p-12 flex flex-col items-center justify-center text-secondary-flannel-dim hover:border-primary-wattle-gold/30 hover:bg-surface-KrDark-slate-smoke-low/20 transition-all cursor-pointer">
+            <div className="border-2 border-dashed border-outline-variant/20 rounded-[var(--radius-stone)] p-12 flex flex-col items-center justify-center text-secondary-flannel-dim hover:border-primary-ink-gold/30 hover:bg-surface-KrDark-slate-smoke-low/20 transition-all cursor-pointer">
                 <Upload className="w-12 h-12 mb-4 opacity-50" />
                 <p className="text-title-medium font-bold text-on-surface-paper-white">Drag and drop files here</p>
                 <p className="text-body-medium mt-2">Supports PDF, DOCX, TXT (Max 10MB)</p>

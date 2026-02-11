@@ -19,7 +19,7 @@
 </layout>
 
 <tokens>
-- **Ink**: `baruGold` (Accent), `kr-leafusAsh` (Body)
+- **Ink**: `inkGold` (Accent), `worker-ash` (Body)
 - **Shapes**: `radius-stone` (Selection Cards)
 - **Typography**: `Display Large` (72px, Recursive) for Headline
 </tokens>
@@ -38,7 +38,7 @@
 </components>
 
 <annotations>
-1 | page_headline     | Content: "CHOOSE YOUR SOLIDARITY PATH"; Style: Recursive 800; Color: kr-leafusAsh.
+1 | page_headline     | Content: "CHOOSE YOUR SOLIDARITY PATH"; Style: Recursive 800; Color: worker-ash.
 2 | card_selection    | Behavior: single select; onHover → border glow; onClick → next step.
 3 | layout_grid       | Screen Area: centered horizontal 3-column.
 4 | grid_bg           | Style: blueprint-grid; Opacity: 8%; Z-Index: Z-0.

@@ -68,7 +68,7 @@ export const KrDarkSettings: React.FC = () => {
                 <SolidarityCard key={setting.label} className="p-10 group hover:border-white/10 transition-colors">
                   <div className="flex items-center justify-between gap-12">
                     <div className="space-y-2">
-                       <h4 className="font-proclamation text-xl uppercase text-paper-white/90 group-hover:text-wattle-gold transition-colors">
+                       <h4 className="font-proclamation text-xl uppercase text-paper-white/90 group-hover:text-ink-gold transition-colors">
                          {setting.label}
                        </h4>
                        <p className="font-body text-sm text-paper-white/40 leading-relaxed italic max-w-lg">
@@ -77,7 +77,7 @@ export const KrDarkSettings: React.FC = () => {
                     </div>
 
                     {/* Toggle Interaction */}
-                    <div className={`w-14 h-7 rounded-full relative cursor-pointer transition-colors duration-500 pb-px ${setting.active ? 'bg-wattle-gold' : 'bg-white/5 border border-white/5 shadow-inner'}`}>
+                    <div className={`w-14 h-7 rounded-full relative cursor-pointer transition-colors duration-500 pb-px ${setting.active ? 'bg-ink-gold' : 'bg-white/5 border border-white/5 shadow-inner'}`}>
                       <motion.div 
                         animate={setting.active ? { x: 28 } : { x: 4 }}
                         className={`absolute top-1 w-5 h-5 rounded-full shadow-viscous ${setting.active ? 'bg-asphalt-black' : 'bg-paper-white/20'}`}
@@ -97,13 +97,13 @@ export const KrDarkSettings: React.FC = () => {
            animate={{ opacity: 1, y: 0 }}
            transition={{ delay: 0.5 }}
         >
-          <SolidarityCard className="p-10 border-waratah-red/10 bg-waratah-red/[0.02]">
+          <SolidarityCard className="p-10 border-solidarity-red/10 bg-solidarity-red/[0.02]">
             <div className="flex flex-col md:flex-row items-center justify-between gap-8">
               <div className="space-y-2 text-center md:text-left">
-                <h4 className="font-proclamation text-xl uppercase text-waratah-red">Crucial Security Rotation</h4>
+                <h4 className="font-proclamation text-xl uppercase text-solidarity-red">Crucial Security Rotation</h4>
                 <p className="font-body text-sm text-paper-white/40 italic">Invalidate current session tokens and rotate encryption seeds.</p>
               </div>
-              <ActionButton variant="secondary" label="ROTATE ENCRYPTION KEYS" className="border-waratah-red text-waratah-red hover:bg-waratah-red hover:text-paper-white transition-all px-10 py-3 text-[10px]" />
+              <ActionButton variant="secondary" label="ROTATE ENCRYPTION KEYS" className="border-solidarity-red text-solidarity-red hover:bg-solidarity-red hover:text-paper-white transition-all px-10 py-3 text-[10px]" />
             </div>
           </SolidarityCard>
         </motion.div>

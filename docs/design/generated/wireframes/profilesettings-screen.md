@@ -22,7 +22,7 @@
 </layout>
 
 <tokens>
-- **Ink**: `baruGold` (Stats), `kr-leafusAsh` (Labels)
+- **Ink**: `inkGold` (Stats), `worker-ash` (Labels)
 - **Shapes**: `radius-stone` (Info blocks), `radius-pebble` (Edit button)
 - **Typography**: `Subhead` (24px, Inter)
 </tokens>
@@ -44,7 +44,7 @@
 
 <annotations>
 1 | avatar_mask       | Style: border-radius=50%; Clip: {kr-asset-halo-disk}.
-2 | stat_value        | Style: JetBrains Mono; Color: baruGold; Weight: 800.
+2 | stat_value        | Style: JetBrains Mono; Color: inkGold; Weight: 800.
 3 | btn_edit          | Action: onClick → toggle edit mode; Style: radius-pebble.
 4 | badge_hover       | Action: onHover → show badge title/date tooltip.
 </annotations>

@@ -157,7 +157,7 @@ Input PNG
 ├── WORKFLOW-TEST-RESULTS.md
 ├── WORKFLOW-QUICK-START.md
 ├── ORCHESTRATION-SUMMARY.md (this)
-└── ASSET-1-wattle.md (future: individual asset specs)
+└── ASSET-1-ink.md (future: individual asset specs)
 ```
 
 ✅ **Aligns with CLAUDE.md file patterns**
@@ -171,7 +171,7 @@ Input PNG
 **Current Convention**: `kerala-rage-[descriptor]-[variant]-[size].png`
 
 **Examples Generated**:
-- ✅ `kerala-rage-wattle-burst-1024.png`
+- ✅ `kerala-rage-ink-burst-1024.png`
 - ✅ `texture-kr-dark-lab-grid-512.png`
 - ✅ `pattern-botanical-tile-256.png`
 
@@ -222,7 +222,7 @@ Input PNG
     "central": {"coverage": "65%", "density": "wunderkammer"},
     "lower_right": {"coverage": "20%", "empty_space": "150x150px"}
   },
-  "kr_motifs": ["wattle", "leaf", "endemic_flora"],
+  "kr_motifs": ["ink", "leaf", "endemic_flora"],
   "mode": "kr-dark",
   "compliance_score": 78
 }

@@ -22,7 +22,7 @@
 - **Container**: `bg-charcoal`, `p-8`, `max-w-4xl`
 - **Card**: `radius-stone`, `border-blueprint-grey`, `shadow-viscous`
 - **Meta**: `text-metadata`, `font-jetbrains-mono`
-- **Tags**: `radius-seed`, `bg-parrot-green/20`, `text-parrot-green`
+- **Tags**: `radius-seed`, `bg-signal-green/20`, `text-signal-green`
 </tokens>
 
 <accessibility>
@@ -32,9 +32,9 @@
 </accessibility>
 
 <states>
-- **Loading**: Empty cards with skeleton Wattle Gold pulse.
+- **Loading**: Empty cards with skeleton Ink Gold pulse.
 - **Empty**: Kerala motif (palm tree) at 40% opacity with "NO OPPORTUNITIES FOUND".
-- **Error**: "FEED RECOVERY IN PROGRESS" in Waratah Red.
+- **Error**: "FEED RECOVERY IN PROGRESS" in Solidarity Red.
 </states>
 
 <assets>

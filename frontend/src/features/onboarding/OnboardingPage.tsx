@@ -59,7 +59,7 @@ export function OnboardingPage() {
 
       <footer className={styles.footer}>
         <button
-          className="btn-pebble bg-wattle-gold text-asphalt-black px-12 py-4 disabled:opacity-30 disabled:cursor-not-allowed"
+          className="btn-pebble bg-ink-gold text-asphalt-black px-12 py-4 disabled:opacity-30 disabled:cursor-not-allowed"
           disabled={!selected}
           onClick={handleProceed}
         >

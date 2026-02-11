@@ -28,10 +28,10 @@ export interface StatusBadgeProps {
  * - Motion: `ease-viscous` (Hover animation)
  *
  * **Variants:**
- * - success: Ghost Gum (green)
+ * - success: Solidarity Green (green)
  * - warning: KrFlower (orange)
- * - error: Waratah Red (red)
- * - info: Wattle Gold (yellow)
+ * - error: Solidarity Red (red)
+ * - info: Ink Gold (yellow)
  * - neutral: Concrete Grey (gray)
  */
 export const StatusBadge: React.FC<StatusBadgeProps> = ({
@@ -69,10 +69,10 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({
             styles.dot = 'var(--color-concrete-grey-dark)';
             styles.border = 'rgba(230, 225, 214, 0.2)';
         } else if (base === 'warning') {
-            styles.text = 'var(--color-wattle-gold)';
+            styles.text = 'var(--color-ink-gold)';
             styles.bg = 'rgba(212, 168, 75, 0.15)';
             styles.border = 'rgba(212, 168, 75, 0.3)';
-            styles.dot = 'var(--color-wattle-gold)';
+            styles.dot = 'var(--color-ink-gold)';
         }
 
         return styles;

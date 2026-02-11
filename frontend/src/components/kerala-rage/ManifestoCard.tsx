@@ -50,8 +50,8 @@ export const ManifestoCard: React.FC<ManifestoCardProps> = ({
 
   const toneStyles = {
     neutral: 'border-white/10',
-    success: 'border-ghost-gum/20',
-    danger: 'border-waratah-red/20',
+    success: 'border-solidarity-green/20',
+    danger: 'border-solidarity-red/20',
   };
 
   return (
@@ -66,10 +66,10 @@ export const ManifestoCard: React.FC<ManifestoCardProps> = ({
       )}
     >
       {/* Red Flag Accent */}
-      <div className="absolute top-8 right-8 w-1 h-12 bg-waratah-red" />
+      <div className="absolute top-8 right-8 w-1 h-12 bg-solidarity-red" />
 
       {/* Hero Title */}
-      <h2 className="mb-8 text-display-hero font-solidarity text-waratah-red leading-tight uppercase tracking-tighter">
+      <h2 className="mb-8 text-display-hero font-solidarity text-solidarity-red leading-tight uppercase tracking-tighter">
         {title}
       </h2>
 
@@ -91,7 +91,7 @@ export const ManifestoCard: React.FC<ManifestoCardProps> = ({
       {/* Background Motif: Placeholder SVG for Elephant */}
       {showMotif && (
         <div className="absolute bottom-[-10%] right-[-5%] w-64 h-64 opacity-5 pointer-events-none z-0">
-          <svg viewBox="0 0 100 100" className="w-full h-full fill-wattle-gold">
+          <svg viewBox="0 0 100 100" className="w-full h-full fill-ink-gold">
             <path d="M70,30 C70,15 55,10 45,10 C30,10 20,25 20,40 C20,55 30,60 30,80 L40,85 C40,65 35,60 35,40 C35,30 40,25 50,25 C60,25 60,35 60,40 L60,80 L70,80 L70,30 Z" />
           </svg>
         </div>

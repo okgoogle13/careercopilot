@@ -12,9 +12,9 @@ This document tracks the transition of `SolidarityCard` from a functional Lo-Fi 
 ### Color Mapping (Tones)
 | Tone | Background | Border | Accent |
 | :--- | :--- | :--- | :--- |
-| `neutral` | `asphalt-black` | `white/5` | `wattle-gold` (focus) |
-| `success` | `asphalt-black` | `ghost-gum/20` | `ghost-gum` |
-| `danger` | `asphalt-black` | `waratah-red/20` | `waratah-red` |
+| `neutral` | `asphalt-black` | `white/5` | `ink-gold` (focus) |
+| `success` | `asphalt-black` | `solidarity-green/20` | `solidarity-green` |
+| `danger` | `asphalt-black` | `solidarity-red/20` | `solidarity-red` |
 
 ### Motion
 - Ensure hover Lift does not conflict with surrounding elements in high-density grids.

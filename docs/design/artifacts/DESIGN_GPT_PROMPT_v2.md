@@ -35,11 +35,11 @@ This JSON must precisely reflect the "Kerala Migrant Rage" (V3.1) design system 
       "timestamp": "ISO-8601"
     },
     "color": {
-      "waratah-red": {
+      "solidarity-red": {
         "base": {
           "$value": "#F14714",
           "$type": "color",
-          "$description": "Primary resistance color. Source: Australian waratah/blood."
+          "$description": "Primary resistance color. Source: Australian solidarity/blood."
         },
         "steps": {
           "$value": ["#A02F0F", "#C03811", "#F14714", "#FF6B3D", "#FF9470", "#FFB999"],

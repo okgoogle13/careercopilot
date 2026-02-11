@@ -14,8 +14,8 @@
 ## Color
 - **Substrate**: `bg-asphalt-black`.
 - **Tiles**: `bg-asphalt-black/50` with `border-white/10` and `shadow-viscous`.
-- **Mastery Accent**: `text-wattle-gold` (Status) or `text-ghost-gum` (Mastery).
-- **Elite Indicator**: `text-waratah-red`.
+- **Mastery Accent**: `text-ink-gold` (Status) or `text-solidarity-green` (Mastery).
+- **Elite Indicator**: `text-solidarity-red`.
 
 ## Spacing
 - **Grid Gutter**: `gap-4`.
@@ -24,7 +24,7 @@
 
 ## Motion
 - **Matrix Reveal**: Skill tiles stagger in with a `scale: 0.95` -> `1.0` + `opacity` transition.
-- **Hover Elevation**: Tiles elevate on hover (`y: -6`) and show a `wattle-gold` border glow.
+- **Hover Elevation**: Tiles elevate on hover (`y: -6`) and show a `ink-gold` border glow.
 - **Mastery Animate**: Radial/Hex mastery graphs animate their fill state over 1.5s (Viscous ease).
 
 ## Motif Slots

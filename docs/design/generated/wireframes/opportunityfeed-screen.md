@@ -22,7 +22,7 @@
 </layout>
 
 <tokens>
-- **Ink**: `baruGold` (Accent), `waratahRed` (Priority)
+- **Ink**: `inkGold` (Accent), `solidarityRed` (Priority)
 - **Shapes**: `radius-stone` (Feed Items)
 - **Typography**: `Headline` (48px, Sora)
 </tokens>
@@ -43,9 +43,9 @@
 
 <annotations>
 1 | feed_list         | Layout: vertical stack; Spacing: 12px; Scroll: infinite.
-2 | item_priority     | Style: border-color=waratahRed; backdrop=halo-disk (60% opacity).
+2 | item_priority     | Style: border-color=solidarityRed; backdrop=halo-disk (60% opacity).
 3 | item_click        | Action: onClick → nav to Detail screen.
-4 | filter_chip       | Style: radius-pebble; State: selected (baruGold), default (ash).
+4 | filter_chip       | Style: radius-pebble; State: selected (inkGold), default (ash).
 </annotations>
 
 <notes>

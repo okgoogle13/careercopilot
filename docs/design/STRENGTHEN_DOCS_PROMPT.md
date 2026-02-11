@@ -21,7 +21,7 @@
 
 **What to AVOID (Critical for Reset):**
 - ❌ kerala-streetprint/colonial framing (kr-motifs, cabinets, naturalist aesthetics)
-- ❌ Australian flora/kr-symbol as primary motif (kr-shiva, Waratah, kr-flower, Wattle)
+- ❌ Australian flora/kr-symbol as primary motif (kr-shiva, Solidarity, kr-flower, Ink)
 - ❌ Generic street art (graffiti tags, abstract murals without political message)
 - ❌ Decorative botanical motifs
 
@@ -67,7 +67,7 @@ Use cleaned-up M3 skills to:
 | Issue | Description | Action Needed |
 |-------|-------------|---------------|
 | **kerala-streetprint/colonial remnants** | Check for "kr-solidarity", "kr-motif", "cabinet", "naturalist" framing | Remove all kerala-streetprint/colonial language and framing |
-| **Botanical motif overuse** | Endemic species (kr-shiva, Waratah, kr-flower) as primary visual identity | Replace with political street art aesthetic (inspired by AUSSIE posters) |
+| **Botanical motif overuse** | Endemic species (kr-shiva, Solidarity, kr-flower) as primary visual identity | Replace with political street art aesthetic (inspired by AUSSIE posters) |
 | **Vague guidance** | "Organic asymmetry" lacks concrete examples | Add specific radius token examples (pebble: `20px 6px 16px 28px` vs uniform `8px`) |
 | **Urban context missing** | Needs positive guidance on "street-level placement" | Add examples: weathered brick, corrugated iron, peeling paint, lived-in surfaces |
 | **Density tier clarity** | "Bold contrast" vs "High Clarity" tension unclear | Define when to use bold political imagery vs minimal functional UI |
@@ -124,7 +124,7 @@ toward political street art + M3 Expressive (inspired by Peter Drew AUSSIE poste
 
 2. Validate docs/design/00-overview.md (CRITICAL FOR RESET)
    - Check: kerala-streetprint/colonial language remnants ("kr-solidarity", "kr-motif", "cabinet")
-   - Check: Botanical motif overuse (kr-shiva, Waratah, kr-flower as primary identity)
+   - Check: Botanical motif overuse (kr-shiva, Solidarity, kr-flower as primary identity)
    - Check: Vague "organic asymmetry", urban texture guidance, density tier clarity
    - Output: Coherence score + design reset gaps (what needs removing/replacing)
 
@@ -146,7 +146,7 @@ Format: Line-specific recommendations. Focus on gaps and what needs resetting.
 ## Success Criteria (Design Reset Complete)
 
 - ✅ **Overview doc has NO kerala-streetprint/colonial language** ("kr-solidarity", "kr-motif", "cabinet" removed)
-- ✅ **Overview doc has NO botanical motifs as primary identity** (kr-shiva, Waratah, kr-flower replaced)
+- ✅ **Overview doc has NO botanical motifs as primary identity** (kr-shiva, Solidarity, kr-flower replaced)
 - ✅ **Overview doc defines political street art aesthetic** (inspired by AUSSIE posters, NOT centered on them)
 - ✅ **Overview doc scores 80+ coherence** with concrete examples and decision frameworks
 - ✅ **Typography doc includes M3 type scale** + variable font guidance + weight contrast ratios

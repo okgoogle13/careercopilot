@@ -7,8 +7,8 @@
 
 ## Visual Hierarchy
 - **Dominant**: User Portrait or Avatar with screenprint texture overlay.
-- **Primary Ink**: Baru Gold (#DAF674) for the name and high-impact identity markers.
-- **Secondary Ink**: Parrot Green (#48F0E5) for hybrid identity bio/tags.
+- **Primary Ink**: Ink Gold (#DAF674) for the name and high-impact identity markers.
+- **Secondary Ink**: Signal Green (#48F0E5) for hybrid identity bio/tags.
 - **Substrate**: Charcoal Background (#1A1A1A).
 
 ## Motion Physics

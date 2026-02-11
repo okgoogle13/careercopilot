@@ -13,7 +13,7 @@ The **Stone** is the heavy, foundational container of the Kerala Rage design sys
 ### 1. Morphology
 - **Radii:** `rounded-stone` (Organic, asymmetric softness).
 - **Shadows:** `shadow-viscous` (Deep, physical presence).
-- **Border:** Subtle `border-white/5` (Internal) or `wattle-gold` (External/Active).
+- **Border:** Subtle `border-white/5` (Internal) or `ink-gold` (External/Active).
 
 ### 2. Motion (The Settle)
 Stones do not "bounce"; they **settle**.
@@ -23,7 +23,7 @@ Stones do not "bounce"; they **settle**.
 - **Accessibility:** Always wrap animations in `useReducedMotion()` checks.
 
 ### 3. Accessibility
-- **Focus:** Must use `focus-within:ring-2` with `ring-wattle-gold` and a dark offset.
+- **Focus:** Must use `focus-within:ring-2` with `ring-ink-gold` and a dark offset.
 - **Semantics:** Use `<article>`, `<section>`, or `<div>` with appropriate ARIA roles.
 
 ## Variants
@@ -31,8 +31,8 @@ Stones do not "bounce"; they **settle**.
 | Variant | Context | Styling |
 | :--- | :--- | :--- |
 | `standard` | Default background for content blocks. | `bg-asphalt-black`, `shadow-viscous` |
-| `ghost` | Secondary content with high definition but low "weight". | `bg-transparent`, `border-wattle-gold` |
-| `active` | Highlighted state or high-priority items. | `shadow-wattle-glow`, `scale-[1.02]` |
+| `ghost` | Secondary content with high definition but low "weight". | `bg-transparent`, `border-ink-gold` |
+| `active` | Highlighted state or high-priority items. | `shadow-ink-glow`, `scale-[1.02]` |
 
 ## Hi-Fi Lifecycle
 1. **Lo-Fi:** Functional container with standard padding and color.

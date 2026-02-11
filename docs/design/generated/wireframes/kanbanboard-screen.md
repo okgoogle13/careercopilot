@@ -20,7 +20,7 @@
 </layout>
 
 <tokens>
-- **Ink**: `baruGold` (Headers), `kr-leafusAsh` (Cards)
+- **Ink**: `inkGold` (Headers), `worker-ash` (Cards)
 - **Shapes**: `radius-stone` (Columns/Cards), `radius-pebble` (Action Buttons)
 - **Typography**: `Headline` (48px, Sora)
 </tokens>
@@ -40,7 +40,7 @@
 </components>
 
 <annotations>
-1 | column_header     | Style: uppercase; Weight: 800; Color: baruGold.
+1 | column_header     | Style: uppercase; Weight: 800; Color: inkGold.
 2 | card_drag         | Action: onDragStart → set active; onDrop → update status; State: dragging, idle.
 3 | add_btn           | Action: onClick → open New Task modal; Style: radius-pebble.
 4 | column_scroll     | Behavior: independent vertical overflow; Scrollbar: hidden/minimal.

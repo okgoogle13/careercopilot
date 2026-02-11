@@ -17,7 +17,7 @@
 - **Substrate**: `bg-asphalt-black`.
 - **Sidebar**: `bg-asphalt-black/50`, `border-r`, `border-white/5`.
 - **Results**: `bg-asphalt-black`.
-- **Highlight**: `text-wattle-gold`.
+- **Highlight**: `text-ink-gold`.
 
 ## Spacing
 - **Sidebar Width**: `w-80` (Desktop), `hidden` (Mobile - replaced by Drawer).
@@ -27,7 +27,7 @@
 ## Motion
 - **Sidebar Slide**: Sidebar slides in from `x: -100%` on mobile drawer open.
 - **Result Stagger**: New results cascade in with a `0.05s` stagger delay.
-- **Micro-interaction**: Search bar focus triggers a subtle `wattle-gold` outer glow.
+- **Micro-interaction**: Search bar focus triggers a subtle `ink-gold` outer glow.
 
 ## Motif Slots
 - `// TODO[asset]: Blueprint Grid Substrate overlay (Z-0, 8% opacity)`.

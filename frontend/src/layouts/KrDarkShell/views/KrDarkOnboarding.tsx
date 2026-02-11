@@ -29,7 +29,7 @@ export const KrDarkOnboarding: React.FC = () => {
         <h1 className="font-proclamation text-5xl md:text-7xl uppercase text-paper-white tracking-widest">
           Welcome, Naturalist.
         </h1>
-        <p className="font-annotation text-[10px] uppercase tracking-[0.4em] text-waratah-red/80">
+        <p className="font-annotation text-[10px] uppercase tracking-[0.4em] text-solidarity-red/80">
           Initializing Induction Protocol
         </p>
       </motion.div>
@@ -43,15 +43,15 @@ export const KrDarkOnboarding: React.FC = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.5 + (idx * 0.2), duration: 0.8 }}
           >
-            <SolidarityCard className="p-8 h-full flex flex-col gap-6 relative group border-white/5 hover:border-wattle-gold/20 transition-colors">
+            <SolidarityCard className="p-8 h-full flex flex-col gap-6 relative group border-white/5 hover:border-ink-gold/20 transition-colors">
               <div className="flex justify-between items-baseline">
                 <span className="font-mono text-[10px] text-paper-white/20">STEP_0{idx + 1}</span>
                 <div className="h-px flex-1 bg-white/5 mx-4" />
-                <div className={`w-2 h-2 rounded-full ${idx === 0 ? 'bg-wattle-gold shadow-wattle-glow' : 'bg-white/10'}`} />
+                <div className={`w-2 h-2 rounded-full ${idx === 0 ? 'bg-ink-gold shadow-ink-glow' : 'bg-white/10'}`} />
               </div>
               
               <div className="space-y-3">
-                <h3 className="font-proclamation text-2xl uppercase text-paper-white/90 group-hover:text-wattle-gold transition-colors">
+                <h3 className="font-proclamation text-2xl uppercase text-paper-white/90 group-hover:text-ink-gold transition-colors">
                   {step.title}
                 </h3>
                 <p className="font-body text-sm text-paper-white/40 leading-relaxed">

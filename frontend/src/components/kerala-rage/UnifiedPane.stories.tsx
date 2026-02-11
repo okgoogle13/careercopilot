@@ -32,7 +32,7 @@ const DemoContent = () => (
     </p>
     {[1, 2, 3, 4, 5].map((i) => (
       <div key={i} className="p-4 rounded-pebble bg-white/5 border border-white/5">
-        <h3 className="font-bloom text-lg text-wattle-gold mb-1">Item {i}</h3>
+        <h3 className="font-bloom text-lg text-ink-gold mb-1">Item {i}</h3>
         <p className="text-sm text-white/60">Description text for item {i} goes here.</p>
       </div>
     ))}

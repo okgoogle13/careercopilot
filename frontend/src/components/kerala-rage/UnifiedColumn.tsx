@@ -58,7 +58,7 @@ export const UnifiedColumn: React.FC<UnifiedColumnProps> = ({
     <div
       className={cn(
         "flex flex-col h-full min-w-[320px] max-w-[400px] bg-asphalt-black/50 rounded-stone border border-white/5 shadow-viscous",
-        tone === 'success' && "border-ghost-gum/20",
+        tone === 'success' && "border-solidarity-green/20",
         className
       )}
     >

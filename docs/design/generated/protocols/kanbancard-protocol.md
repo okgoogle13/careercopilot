@@ -7,7 +7,7 @@
 
 ## Visual Hierarchy
 - **Dominant**: `radius-stone` card with high-contrast sharp elevation shadow.
-- **Primary Ink**: Waratah Red (#F14714) for urgent tasks/deadlines.
+- **Primary Ink**: Solidarity Red (#F14714) for urgent tasks/deadlines.
 - **Secondary Ink**: Smoke Green (#48DA8B) for stable/completed items.
 - **Substrate**: Charcoal Background (#1A1A1A).
 

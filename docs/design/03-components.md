@@ -13,7 +13,7 @@ High-contrast pill buttons that anchor the user's primary journey.
 | Property | Value                                                     |
 | -------- | --------------------------------------------------------- |
 | Token    | `radius-pebble` (`100px`)                                 |
-| Surface  | `baruGold` or `waratahRed` with `charcoalBackground` text |
+| Surface  | `inkGold` or `solidarityRed` with `charcoalBackground` text |
 | Rest     | Solid color block.                                        |
 | Hover    | **Bloom** — lifts slightly, gains emphasis weight (+100). |
 | Active   | Pressed into surface (`scale(0.98)`).                     |
@@ -21,7 +21,7 @@ High-contrast pill buttons that anchor the user's primary journey.
 ```css
 .btn-pebble {
   border-radius: var(--kr-radius-pebble);
-  background: var(--kr-baru-gold);
+  background: var(--kr-ink-gold);
   color: var(--kr-charcoal-bg);
   transition: transform 0.2s cubic-bezier(0.3, 0, 0.2, 1);
 }
@@ -35,7 +35,7 @@ Tactical input surfaces that feel like drawing through a stencil.
 | -------- | --------------------------------------------------------- |
 | Token    | `radius-slab`                                             |
 | Surface  | `charcoalBackground` with `blueprintGrey` borders.        |
-| Focus    | Border and label shift to `baruGold` (the "reveal" glow). |
+| Focus    | Border and label shift to `inkGold` (the "reveal" glow). |
 
 ```css
 .input-lens {
@@ -90,7 +90,7 @@ Monospaced indicators of state or category.
 | ---------- | ---------------------------------------------------- |
 | Token      | `radius-slab`                                        |
 | Typography | JetBrains Mono                                       |
-| Colors     | `blueprintGrey` for neutral, `waratahRed` for alerts |
+| Colors     | `blueprintGrey` for neutral, `solidarityRed` for alerts |
 
 ---
 

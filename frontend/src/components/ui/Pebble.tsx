@@ -6,10 +6,10 @@ import { Loader2 } from 'lucide-react';
 export interface PebbleProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     /**
      * The visual style variant.
-     * - Primary: Wattle Gold (Action)
+     * - Primary: Ink Gold (Action)
      * - Secondary: Surface Elevated (Navigation/Option)
      * - Ghost: Transparent (Subtle)
-     * - Destructive: Waratah Red (Danger)
+     * - Destructive: Solidarity Red (Danger)
      */
     variant?: 'primary' | 'secondary' | 'ghost' | 'destructive';
 

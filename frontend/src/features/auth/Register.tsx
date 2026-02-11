@@ -74,7 +74,7 @@ export function Register() {
           </div>
 
           <div className="text-center mb-10">
-            <h1 className="text-6xl text-bloom-ultra text-wattle-gold mb-2">New KrMotif</h1>
+            <h1 className="text-6xl text-bloom-ultra text-ink-gold mb-2">New KrMotif</h1>
             <p className="text-curator-accent text-concrete-grey opacity-70">
               Register with the station
             </p>
@@ -84,7 +84,7 @@ export function Register() {
             <motion.div
               initial={{ x: -10, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
-              className="mb-8 p-4 rounded-pebble bg-waratah-red/20 text-waratah-red border border-waratah-red/30 font-annotation text-xs"
+              className="mb-8 p-4 rounded-pebble bg-solidarity-red/20 text-solidarity-red border border-solidarity-red/30 font-annotation text-xs"
             >
               ⚠️ [FAILED_REG]: {authError}
             </motion.div>
@@ -98,7 +98,7 @@ export function Register() {
             <div className="group">
               <label
                 htmlFor="displayName"
-                className="block text-xs text-wattle-gold mb-2 font-annotation tracking-widest uppercase"
+                className="block text-xs text-ink-gold mb-2 font-annotation tracking-widest uppercase"
               >
                 Common Name (Display Name)
               </label>
@@ -106,11 +106,11 @@ export function Register() {
                 id="displayName"
                 type="text"
                 placeholder="Field Investigator Jones"
-                className="w-full px-6 bg-asphalt-black/50 border border-concrete-grey/20 text-paper-white rounded-stone h-12 focus:outline-none focus:border-wattle-gold transition-all font-field-note"
+                className="w-full px-6 bg-asphalt-black/50 border border-concrete-grey/20 text-paper-white rounded-stone h-12 focus:outline-none focus:border-ink-gold transition-all font-field-note"
                 {...register('displayName')}
               />
               {errors.displayName && (
-                <p className="text-waratah-red text-[10px] mt-1 font-annotation uppercase">
+                <p className="text-solidarity-red text-[10px] mt-1 font-annotation uppercase">
                   {errors.displayName.message}
                 </p>
               )}
@@ -119,7 +119,7 @@ export function Register() {
             <div className="group">
               <label
                 htmlFor="email"
-                className="block text-xs text-wattle-gold mb-2 font-annotation tracking-widest uppercase"
+                className="block text-xs text-ink-gold mb-2 font-annotation tracking-widest uppercase"
               >
                 Station ID (Email)
               </label>
@@ -127,11 +127,11 @@ export function Register() {
                 id="email"
                 type="email"
                 placeholder="investigator@station.net"
-                className="w-full px-6 bg-asphalt-black/50 border border-concrete-grey/20 text-paper-white rounded-stone h-12 focus:outline-none focus:border-wattle-gold transition-all font-field-note"
+                className="w-full px-6 bg-asphalt-black/50 border border-concrete-grey/20 text-paper-white rounded-stone h-12 focus:outline-none focus:border-ink-gold transition-all font-field-note"
                 {...register('email')}
               />
               {errors.email && (
-                <p className="text-waratah-red text-[10px] mt-1 font-annotation uppercase">
+                <p className="text-solidarity-red text-[10px] mt-1 font-annotation uppercase">
                   {errors.email.message}
                 </p>
               )}
@@ -142,7 +142,7 @@ export function Register() {
                 <label
                   htmlFor="password"
                   title="Keychain"
-                  className="block text-xs text-wattle-gold mb-2 font-annotation tracking-widest uppercase overflow-hidden text-ellipsis whitespace-nowrap"
+                  className="block text-xs text-ink-gold mb-2 font-annotation tracking-widest uppercase overflow-hidden text-ellipsis whitespace-nowrap"
                 >
                   Keychain
                 </label>
@@ -150,7 +150,7 @@ export function Register() {
                   id="password"
                   type="password"
                   placeholder="••••••••"
-                  className="w-full px-4 bg-asphalt-black/50 border border-concrete-grey/20 text-paper-white rounded-stone h-12 focus:outline-none focus:border-wattle-gold transition-all font-field-note"
+                  className="w-full px-4 bg-asphalt-black/50 border border-concrete-grey/20 text-paper-white rounded-stone h-12 focus:outline-none focus:border-ink-gold transition-all font-field-note"
                   {...register('password')}
                 />
               </div>
@@ -158,7 +158,7 @@ export function Register() {
                 <label
                   htmlFor="confirmPassword"
                   title="Verify"
-                  className="block text-xs text-wattle-gold mb-2 font-annotation tracking-widest uppercase overflow-hidden text-ellipsis whitespace-nowrap"
+                  className="block text-xs text-ink-gold mb-2 font-annotation tracking-widest uppercase overflow-hidden text-ellipsis whitespace-nowrap"
                 >
                   Verify
                 </label>
@@ -166,13 +166,13 @@ export function Register() {
                   id="confirmPassword"
                   type="password"
                   placeholder="••••••••"
-                  className="w-full px-4 bg-asphalt-black/50 border border-concrete-grey/20 text-paper-white rounded-stone h-12 focus:outline-none focus:border-wattle-gold transition-all font-field-note"
+                  className="w-full px-4 bg-asphalt-black/50 border border-concrete-grey/20 text-paper-white rounded-stone h-12 focus:outline-none focus:border-ink-gold transition-all font-field-note"
                   {...register('confirmPassword')}
                 />
               </div>
             </div>
             {(errors.password || errors.confirmPassword) && (
-              <p className="text-waratah-red text-[10px] font-annotation uppercase">
+              <p className="text-solidarity-red text-[10px] font-annotation uppercase">
                 {errors.password?.message || errors.confirmPassword?.message}
               </p>
             )}
@@ -191,7 +191,7 @@ export function Register() {
           <div className="text-center mt-10 pt-6 border-t border-concrete-grey/10">
             <Link
               to="/login"
-              className="text-curator-accent text-sm text-concrete-grey hover:text-wattle-gold transition-colors"
+              className="text-curator-accent text-sm text-concrete-grey hover:text-ink-gold transition-colors"
             >
               Already registered? Sign in.
             </Link>

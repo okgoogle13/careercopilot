@@ -85,7 +85,7 @@ export const Valve = forwardRef<HTMLInputElement, ValveProps>(
                             ? `bg-[var(--ref-palette-${color}-40)]`
                             : 'bg-[var(--color-concrete-grey-base)]'
                         }
-                        peer-focus:ring-2 peer-focus:ring-[var(--color-wattle-gold)]/30
+                        peer-focus:ring-2 peer-focus:ring-[var(--color-ink-gold)]/30
                         border border-white/10
                     `}
             />
@@ -113,7 +113,7 @@ export const Valve = forwardRef<HTMLInputElement, ValveProps>(
 
         {helperText && (
           <p
-            className={`text-xs px-1 ${error ? 'text-[var(--color-waratah-red)]' : 'text-[var(--color-concrete-grey-dark)]'}`}
+            className={`text-xs px-1 ${error ? 'text-[var(--color-solidarity-red)]' : 'text-[var(--color-concrete-grey-dark)]'}`}
           >
             {helperText}
           </p>

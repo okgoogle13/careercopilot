@@ -151,7 +151,7 @@ export function JobQueue() {
   if (loading) {
     return (
       <div className="flex flex-col justify-center items-center min-h-screen gap-4">
-        <div role="status" data-testid="job-queue-loader" className="w-12 h-12 border-4 border-[var(--color-wattle-gold)]/20 border-t-[var(--color-wattle-gold)] rounded-full animate-spin" />
+        <div role="status" data-testid="job-queue-loader" className="w-12 h-12 border-4 border-[var(--color-ink-gold)]/20 border-t-[var(--color-ink-gold)] rounded-full animate-spin" />
         <p className="font-annotation text-xs tracking-widest text-[var(--color-concrete-grey-dark)] uppercase">
           Synchronizing Queue
         </p>
@@ -220,8 +220,8 @@ export function JobQueue() {
       >
         <div className="space-y-6">
           {coverLetterJob && (
-            <div className="p-4 bg-[var(--color-wattle-gold)]/10 rounded-stone border border-[var(--color-wattle-gold)]/20">
-              <p className="font-field-note text-sm text-[var(--color-wattle-gold)]">
+            <div className="p-4 bg-[var(--color-ink-gold)]/10 rounded-stone border border-[var(--color-ink-gold)]/20">
+              <p className="font-field-note text-sm text-[var(--color-ink-gold)]">
                 Optimized for <span className="font-bold">{coverLetterJob.title}</span> at{' '}
                 <span className="font-bold">{coverLetterJob.company}</span>
               </p>

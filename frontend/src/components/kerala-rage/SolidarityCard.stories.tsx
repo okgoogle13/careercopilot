@@ -36,7 +36,7 @@ export const Ghost: Story = {
     variant: 'ghost',
     children: (
       <div className="flex flex-col gap-2">
-        <h3 className="font-proclamation text-wattle-gold">Ghost Card</h3>
+        <h3 className="font-proclamation text-ink-gold">Ghost Card</h3>
         <p className="font-field-note text-paper-white/80">
           This is a ghost card variant.
         </p>

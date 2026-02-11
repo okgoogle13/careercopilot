@@ -18,7 +18,7 @@ This report summarizes the sanity check for the "Tactical Interface" component s
   - Respects `useReducedMotion()` to disable scale effects.
 - **Styling**: 
   - `rounded-pebble` border radius.
-  - `wattle-gold` glow on focus/active states.
+  - `ink-gold` glow on focus/active states.
 - **WCAG**: Passes standard text contrast.
 
 ### 2. UnifiedPane (Stone)
@@ -44,11 +44,11 @@ This report summarizes the sanity check for the "Tactical Interface" component s
   - Priority pulse animation is decorative and respects reduced motion (system-level).
 - **Styling**: 
   - Uses `active` variant of `SolidarityCard` for high-priority items.
-  - `waratah-red` status indicator.
+  - `solidarity-red` status indicator.
 
 ## Design System Alignment
 - **Primitives**: Strictly adhered to Stone (containers) and Pebble (inputs/buttons).
-- **Tokens**: All colors referenced from `tokens.json` (e.g., `wattle-gold`, `waratah-red`).
+- **Tokens**: All colors referenced from `tokens.json` (e.g., `ink-gold`, `solidarity-red`).
 - **Typography**: Uses `field-note` (Work Sans) for UI text, `bloom` (Fraunces) for headers.
 
 ## "Good Enough for Reuse" Checklist
