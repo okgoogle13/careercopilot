@@ -1,7 +1,7 @@
 {
   "project": "kerala-rage kr-solidarity",
-  "version": "5.0.0",
-  "last_updated": "2026-02-12",
+  "version": "6.0.0",
+  "last_updated": "2026-02-11",
   "strategy": "Layered Identity System",
   "total_assets": 33,
   "layers": [
@@ -14,601 +14,7 @@
   "assets": [
     {
       "id": "KR-SOLID-001",
-      "name": "Devotional Cultural Anchor",
-      "category": "devotional",
-      "layer": "spiritual",
-      "aspect_ratio": "1:1",
-      "file_path": "/assets/kr-solidarity/devotional/kr-solidarity__devotional__devotional---cultural-anchor__v1.png",
-      "priority": "CRITICAL",
-      "semantics": {
-        "functional_role": "symbolic-anchor",
-        "semantic_weight": "mythic",
-        "layering_role": "foreground-dominant"
-      },
-      "usage_rules": {
-        "scale_suitability": ["hero-only", "large-section"],
-        "small_ui_safe": false
-      },
-      "layering_compatibility": {
-        "can_overlay_with": ["substrate", "atmospheric"],
-        "cannot_overlay_with": ["spiritual", "resistance"]
-      }
-    },
-    {
-      "id": "KR-SOLID-002",
-      "name": "Shiva Statue",
-      "category": "devotional",
-      "layer": "spiritual",e
-      "aspect_ratio": "1:1",
-      "file_path": "/assets/kr-solidarity/devotional/kr-solidarity__devotional__kr-solidarity--devotional--shiva-statue--v1__v1.png",
-      "priority": "CRITICAL",
-      "semantics": {
-        "functional_role": "symbolic-anchor",
-        "semantic_weight": "mythic",
-        "layering_role": "foreground-dominant"
-      },
-      "usage_rules": {
-        "scale_suitability": ["hero-only", "large-section"],
-        "small_ui_safe": false
-      },
-      "layering_compatibility": {
-        "can_overlay_with": ["substrate", "atmospheric"],
-        "cannot_overlay_with": ["spiritual", "resistance"]
-      }
-    },
-    {
-      "id": "KR-SOLID-003",
-      "name": "Shiva Statue Street",
-      "category": "devotional",
-      "layer": "spiritual",
-      "aspect_ratio": "1:1",
-      "file_path": "/assets/kr-solidarity/devotional/kr-solidarity__devotional__kr-solidarity--devotional--shiva-statue-street--v1__v1.png",
-      "priority": "CRITICAL",
-      "semantics": {
-        "functional_role": "symbolic-anchor",
-        "semantic_weight": "mythic",
-        "layering_role": "foreground-dominant"
-      },
-      "usage_rules": {
-        "scale_suitability": ["hero-only", "large-section"],
-        "small_ui_safe": false
-      },
-      "layering_compatibility": {
-        "can_overlay_with": ["substrate", "atmospheric"],
-        "cannot_overlay_with": ["spiritual", "resistance"]
-      }
-    },
-    {
-      "id": "KR-SOLID-004",
-      "name": "Shiva Urban Protest",
-      "category": "devotional",
-      "layer": "spiritual",
-      "aspect_ratio": "1:1",
-      "file_path": "/assets/kr-solidarity/devotional/kr-solidarity__devotional__kr-solidarity--devotional--shiva-urban-protest--v1__v1.png",
-      "priority": "CRITICAL",
-      "semantics": {
-        "functional_role": "symbolic-anchor",
-        "semantic_weight": "mythic",
-        "layering_role": "foreground-dominant"
-      },
-      "usage_rules": {
-        "scale_suitability": ["hero-only", "large-section"],
-        "small_ui_safe": false
-      },
-      "layering_compatibility": {
-        "can_overlay_with": ["substrate", "atmospheric"],
-        "cannot_overlay_with": ["spiritual", "resistance"]
-      }
-    },
-    {
-      "id": "KR-SOLID-005",
-      "name": "Bhagat Singh",
-      "category": "portrait",
-      "layer": "resistance",
-      "aspect_ratio": "3:4",
-      "file_path": "/assets/kr-solidarity/portrait/kr-solidarity__portrait__kr-solidarity--portrait--bhagat-singh--v1__v1.png",
-      "priority": "CRITICAL",
-      "semantics": {
-        "functional_role": "editorial-hero",
-        "semantic_weight": "heroic",
-        "layering_role": "foreground"
-      },
-      "usage_rules": {
-        "scale_suitability": ["hero-only", "feature"],
-        "small_ui_safe": false
-      },
-      "layering_compatibility": {
-        "can_overlay_with": ["substrate", "atmospheric"],
-        "cannot_overlay_with": ["resistance", "spiritual"]
-      }
-    },
-    {
-      "id": "KR-SOLID-006",
-      "name": "Tipu Sultan",
-      "category": "portrait",
-      "layer": "resistance",
-      "aspect_ratio": "3:4",
-      "file_path": "/assets/kr-solidarity/portrait/kr-solidarity__portrait__kr-solidarity--portrait--tipu-sultan--v1__v1.png",
-      "priority": "CRITICAL",
-      "semantics": {
-        "functional_role": "editorial-hero",
-        "semantic_weight": "heroic",
-        "layering_role": "foreground"
-      },
-      "usage_rules": {
-        "scale_suitability": ["hero-only", "feature"],
-        "small_ui_safe": false
-      },
-      "layering_compatibility": {
-        "can_overlay_with": ["substrate", "atmospheric"],
-        "cannot_overlay_with": ["resistance", "spiritual"]
-      }
-    },
-    {
-      "id": "KR-SOLID-007",
-      "name": "Turbaned Man",
-      "category": "portrait",
-      "layer": "resistance",
-      "aspect_ratio": "3:4",
-      "file_path": "/assets/kr-solidarity/portrait/kr-solidarity__portrait__kr-solidarity--portrait--turbaned-man--v1__v1.png",
-      "priority": "CRITICAL",
-      "semantics": {
-        "functional_role": "editorial-hero",
-        "semantic_weight": "heroic",
-        "layering_role": "foreground"
-      },
-      "usage_rules": {
-        "scale_suitability": ["hero-only", "feature"],
-        "small_ui_safe": false
-      },
-      "layering_compatibility": {
-        "can_overlay_with": ["substrate", "atmospheric"],
-        "cannot_overlay_with": ["resistance", "spiritual"]
-      }
-    },
-    {
-      "id": "KR-SOLID-008",
-      "name": "Resistance History",
-      "category": "portrait",
-      "layer": "resistance",
-      "aspect_ratio": "3:4",
-      "file_path": "/assets/kr-solidarity/portrait/kr-solidarity__portrait__portrait---resistance-history__v1.png",
-      "priority": "CRITICAL",
-      "semantics": {
-        "functional_role": "editorial-hero",
-        "semantic_weight": "heroic",
-        "layering_role": "foreground"
-      },
-      "usage_rules": {
-        "scale_suitability": ["hero-only", "feature"],
-        "small_ui_safe": false
-      },
-      "layering_compatibility": {
-        "can_overlay_with": ["substrate", "atmospheric"],
-        "cannot_overlay_with": ["resistance", "spiritual"]
-      }
-    },
-    {
-      "id": "KR-SOLID-009",
-      "name": "Kerala Elephant",
-      "category": "symbol",
-      "layer": "cultural",
-      "aspect_ratio": "1:1",
-      "file_path": "/assets/kr-solidarity/symbol/kr-solidarity__symbol__kr-solidarity--symbol--kerala-elephant--v1__v1.png",
-      "priority": "HIGH",
-      "semantics": {
-        "functional_role": "icon-anchor",
-        "semantic_weight": "iconic",
-        "layering_role": "mid-layer"
-      },
-      "usage_rules": {
-        "scale_suitability": ["hero", "section", "card"],
-        "small_ui_safe": true
-      },
-      "layering_compatibility": {
-        "can_overlay_with": ["substrate", "atmospheric"],
-        "cannot_overlay_with": ["cultural"]
-      }
-    },
-    {
-      "id": "KR-SOLID-010",
-      "name": "Kerala Landscape",
-      "category": "symbol",
-      "layer": "cultural",
-      "aspect_ratio": "16:9",
-      "file_path": "/assets/kr-solidarity/symbol/kr-solidarity__symbol__kr-solidarity--symbol--kerala-landscape--v1__v1.png",
-      "priority": "HIGH",
-      "semantics": {
-        "functional_role": "environment-anchor",
-        "semantic_weight": "grounded",
-        "layering_role": "mid-layer"
-      },
-      "usage_rules": {
-        "scale_suitability": ["hero", "section", "card"],
-        "small_ui_safe": true
-      },
-      "layering_compatibility": {
-        "can_overlay_with": ["substrate", "atmospheric"],
-        "cannot_overlay_with": ["cultural"]
-      }
-    },
-    {
-      "id": "KR-SOLID-011",
-      "name": "Abstract Solidarity",
-      "category": "abstract",
-      "layer": "atmospheric",
-      "aspect_ratio": "1:1",
-      "file_path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-chatgpt-image-f__v1.png",
-      "priority": "HIGH",
-      "semantics": {
-        "functional_role": "background-texture",
-        "semantic_weight": "atmospheric",
-        "layering_role": "overlay"
-      },
-      "usage_rules": {
-        "scale_suitability": ["hero", "section"],
-        "small_ui_safe": true
-      },
-      "layering_compatibility": {
-        "can_overlay_with": ["substrate"],
-        "cannot_overlay_with": ["atmospheric"]
-      }
-    },
-    {
-      "id": "KR-SOLID-012",
-      "name": "Abstract Solidarity Dalle",
-      "category": "abstract",
-      "layer": "atmospheric",
-      "aspect_ratio": "1:1",
-      "file_path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-dalle-2026-01-__v1.png",
-      "priority": "HIGH",
-      "semantics": {
-        "functional_role": "background-texture",
-        "semantic_weight": "atmospheric",
-        "layering_role": "overlay"
-      },
-      "usage_rules": {
-        "scale_suitability": ["hero", "section"],
-        "small_ui_safe": true
-      },
-      "layering_compatibility": {
-        "can_overlay_with": ["substrate"],
-        "cannot_overlay_with": ["atmospheric"]
-      }
-    },
-    {
-      "id": "KR-SOLID-013",
-      "name": "Abstract Solidarity Gemini",
-      "category": "abstract",
-      "layer": "atmospheric",
-      "aspect_ratio": "1:1",
-      "file_path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-gemini-generate__v1.png",
-      "priority": "HIGH",
-      "semantics": {
-        "functional_role": "background-texture",
-        "semantic_weight": "atmospheric",
-        "layering_role": "overlay"
-      },
-      "usage_rules": {
-        "scale_suitability": ["hero", "section"],
-        "small_ui_safe": true
-      },
-      "layering_compatibility": {
-        "can_overlay_with": ["substrate"],
-        "cannot_overlay_with": ["atmospheric"]
-      }
-    },
-    {
-      "id": "KR-SOLID-014",
-      "name": "Abstract Solidarity Kerala Rage Bee",
-      "category": "abstract",
-      "layer": "atmospheric",
-      "aspect_ratio": "1:1",
-      "file_path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-kerala-rage-bee__v1.png",
-      "priority": "HIGH",
-      "semantics": {
-        "functional_role": "background-texture",
-        "semantic_weight": "atmospheric",
-        "layering_role": "overlay"
-      },
-      "usage_rules": {
-        "scale_suitability": ["hero", "section"],
-        "small_ui_safe": true
-      },
-      "layering_compatibility": {
-        "can_overlay_with": ["substrate"],
-        "cannot_overlay_with": ["atmospheric"]
-      }
-    },
-    {
-      "id": "KR-SOLID-015",
-      "name": "Abstract Solidarity Kerala Rage Bra",
-      "category": "abstract",
-      "layer": "atmospheric",
-      "aspect_ratio": "1:1",
-      "file_path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-kerala-rage-bra__v1.png",
-      "priority": "HIGH",
-      "semantics": {
-        "functional_role": "background-texture",
-        "semantic_weight": "atmospheric",
-        "layering_role": "overlay"
-      },
-      "usage_rules": {
-        "scale_suitability": ["hero", "section"],
-        "small_ui_safe": true
-      },
-      "layering_compatibility": {
-        "can_overlay_with": ["substrate"],
-        "cannot_overlay_with": ["atmospheric"]
-      }
-    },
-    {
-      "id": "KR-SOLID-016",
-      "name": "Abstract Solidarity Kerala Rage Fly",
-      "category": "abstract",
-      "layer": "atmospheric",
-      "aspect_ratio": "1:1",
-      "file_path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-kerala-rage-fly__v1.png",
-      "priority": "HIGH",
-      "semantics": {
-        "functional_role": "background-texture",
-        "semantic_weight": "atmospheric",
-        "layering_role": "overlay"
-      },
-      "usage_rules": {
-        "scale_suitability": ["hero", "section"],
-        "small_ui_safe": true
-      },
-      "layering_compatibility": {
-        "can_overlay_with": ["substrate"],
-        "cannot_overlay_with": ["atmospheric"]
-      }
-    },
-    {
-      "id": "KR-SOLID-017",
-      "name": "Abstract Solidarity Kerala Rage Fri",
-      "category": "abstract",
-      "layer": "atmospheric",
-      "aspect_ratio": "1:1",
-      "file_path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-kerala-rage-fri__v1.png",
-      "priority": "HIGH",
-      "semantics": {
-        "functional_role": "background-texture",
-        "semantic_weight": "atmospheric",
-        "layering_role": "overlay"
-      },
-      "usage_rules": {
-        "scale_suitability": ["hero", "section"],
-        "small_ui_safe": true
-      },
-      "layering_compatibility": {
-        "can_overlay_with": ["substrate"],
-        "cannot_overlay_with": ["atmospheric"]
-      }
-    },
-    {
-      "id": "KR-SOLID-018",
-      "name": "Abstract Solidarity Kerala Rage Gri",
-      "category": "abstract",
-      "layer": "atmospheric",
-      "aspect_ratio": "1:1",
-      "file_path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-kerala-rage-gri__v1.png",
-      "priority": "HIGH",
-      "semantics": {
-        "functional_role": "background-texture",
-        "semantic_weight": "atmospheric",
-        "layering_role": "overlay"
-      },
-      "usage_rules": {
-        "scale_suitability": ["hero", "section"],
-        "small_ui_safe": true
-      },
-      "layering_compatibility": {
-        "can_overlay_with": ["substrate"],
-        "cannot_overlay_with": ["atmospheric"]
-      }
-    },
-    {
-      "id": "KR-SOLID-019",
-      "name": "Abstract Solidarity Kerala Rage Kr",
-      "category": "abstract",
-      "layer": "atmospheric",
-      "aspect_ratio": "1:1",
-      "file_path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-kerala-rage-kr-__v1.png",
-      "priority": "HIGH",
-      "semantics": {
-        "functional_role": "background-texture",
-        "semantic_weight": "atmospheric",
-        "layering_role": "overlay"
-      },
-      "usage_rules": {
-        "scale_suitability": ["hero", "section"],
-        "small_ui_safe": true
-      },
-      "layering_compatibility": {
-        "can_overlay_with": ["substrate"],
-        "cannot_overlay_with": ["atmospheric"]
-      }
-    },
-    {
-      "id": "KR-SOLID-020",
-      "name": "Abstract Solidarity Kerala Rage Nav",
-      "category": "abstract",
-      "layer": "atmospheric",
-      "aspect_ratio": "1:1",
-      "file_path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-kerala-rage-nav__v1.png",
-      "priority": "HIGH",
-      "semantics": {
-        "functional_role": "background-texture",
-        "semantic_weight": "atmospheric",
-        "layering_role": "overlay"
-      },
-      "usage_rules": {
-        "scale_suitability": ["hero", "section"],
-        "small_ui_safe": true
-      },
-      "layering_compatibility": {
-        "can_overlay_with": ["substrate"],
-        "cannot_overlay_with": ["atmospheric"]
-      }
-    },
-    {
-      "id": "KR-SOLID-021",
-      "name": "Abstract Solidarity Kerala Rage Rad",
-      "category": "abstract",
-      "layer": "atmospheric",
-      "aspect_ratio": "1:1",
-      "file_path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-kerala-rage-rad__v1.png",
-      "priority": "HIGH",
-      "semantics": {
-        "functional_role": "background-texture",
-        "semantic_weight": "atmospheric",
-        "layering_role": "overlay"
-      },
-      "usage_rules": {
-        "scale_suitability": ["hero", "section"],
-        "small_ui_safe": true
-      },
-      "layering_compatibility": {
-        "can_overlay_with": ["substrate"],
-        "cannot_overlay_with": ["atmospheric"]
-      }
-    },
-    {
-      "id": "KR-SOLID-022",
-      "name": "Abstract Solidarity Kerala Rage Sea",
-      "category": "abstract",
-      "layer": "atmospheric",
-      "aspect_ratio": "1:1",
-      "file_path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-kerala-rage-sea__v1.png",
-      "priority": "HIGH",
-      "semantics": {
-        "functional_role": "background-texture",
-        "semantic_weight": "atmospheric",
-        "layering_role": "overlay"
-      },
-      "usage_rules": {
-        "scale_suitability": ["hero", "section"],
-        "small_ui_safe": true
-      },
-      "layering_compatibility": {
-        "can_overlay_with": ["substrate"],
-        "cannot_overlay_with": ["atmospheric"]
-      }
-    },
-    {
-      "id": "KR-SOLID-023",
-      "name": "Abstract Solidarity Kerala Rage Sen",
-      "category": "abstract",
-      "layer": "atmospheric",
-      "aspect_ratio": "1:1",
-      "file_path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-kerala-rage-sen__v1.png",
-      "priority": "HIGH",
-      "semantics": {
-        "functional_role": "background-texture",
-        "semantic_weight": "atmospheric",
-        "layering_role": "overlay"
-      },
-      "usage_rules": {
-        "scale_suitability": ["hero", "section"],
-        "small_ui_safe": true
-      },
-      "layering_compatibility": {
-        "can_overlay_with": ["substrate"],
-        "cannot_overlay_with": ["atmospheric"]
-      }
-    },
-    {
-      "id": "KR-SOLID-024",
-      "name": "Abstract Solidarity Kerala Rage Wat",
-      "category": "abstract",
-      "layer": "atmospheric",
-      "aspect_ratio": "1:1",
-      "file_path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-kerala-rage-wat__v1.png",
-      "priority": "HIGH",
-      "semantics": {
-        "functional_role": "background-texture",
-        "semantic_weight": "atmospheric",
-        "layering_role": "overlay"
-      },
-      "usage_rules": {
-        "scale_suitability": ["hero", "section"],
-        "small_ui_safe": true
-      },
-      "layering_compatibility": {
-        "can_overlay_with": ["substrate"],
-        "cannot_overlay_with": ["atmospheric"]
-      }
-    },
-    {
-      "id": "KR-SOLID-025",
-      "name": "Abstract Solidarity Kr Solid 013",
-      "category": "abstract",
-      "layer": "atmospheric",
-      "aspect_ratio": "1:1",
-      "file_path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-kr-solid-013__v1.png",
-      "priority": "HIGH",
-      "semantics": {
-        "functional_role": "background-texture",
-        "semantic_weight": "atmospheric",
-        "layering_role": "overlay"
-      },
-      "usage_rules": {
-        "scale_suitability": ["hero", "section"],
-        "small_ui_safe": true
-      },
-      "layering_compatibility": {
-        "can_overlay_with": ["substrate"],
-        "cannot_overlay_with": ["atmospheric"]
-      }
-    },
-    {
-      "id": "KR-SOLID-026",
-      "name": "Abstract Solidarity Kr Solid 014",
-      "category": "abstract",
-      "layer": "atmospheric",
-      "aspect_ratio": "1:1",
-      "file_path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-kr-solid-014__v1.png",
-      "priority": "HIGH",
-      "semantics": {
-        "functional_role": "background-texture",
-        "semantic_weight": "atmospheric",
-        "layering_role": "overlay"
-      },
-      "usage_rules": {
-        "scale_suitability": ["hero", "section"],
-        "small_ui_safe": true
-      },
-      "layering_compatibility": {
-        "can_overlay_with": ["substrate"],
-        "cannot_overlay_with": ["atmospheric"]
-      }
-    },
-    {
-      "id": "KR-SOLID-027",
-      "name": "Abstract Solidarity Moodboard",
-      "category": "abstract",
-      "layer": "atmospheric",
-      "aspect_ratio": "1:1",
-      "file_path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-moodboard-12-ti__v1.png",
-      "priority": "HIGH",
-      "semantics": {
-        "functional_role": "background-texture",
-        "semantic_weight": "atmospheric",
-        "layering_role": "overlay"
-      },
-      "usage_rules": {
-        "scale_suitability": ["hero", "section"],
-        "small_ui_safe": true
-      },
-      "layering_compatibility": {
-        "can_overlay_with": ["substrate"],
-        "cannot_overlay_with": ["atmospheric"]
-      }
-    },
-    {
-      "id": "KR-SOLID-028",
-      "name": "Abstract Solidarity",
+      "name": "Abstract -solidarity",
       "category": "abstract",
       "layer": "atmospheric",
       "aspect_ratio": "1:1",
@@ -620,108 +26,952 @@
         "layering_role": "overlay"
       },
       "usage_rules": {
-        "scale_suitability": ["hero", "section"],
+        "scale_suitability": [
+          "hero",
+          "section"
+        ],
         "small_ui_safe": true
       },
       "layering_compatibility": {
-        "can_overlay_with": ["substrate"],
-        "cannot_overlay_with": ["atmospheric"]
+        "can_overlay_with": [
+          "substrate"
+        ],
+        "cannot_overlay_with": [
+          "atmospheric"
+        ]
+      }
+    },
+    {
+      "id": "KR-SOLID-002",
+      "name": "Abstract -solidarity-chatgpt-image-f",
+      "category": "abstract",
+      "layer": "atmospheric",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-chatgpt-image-f__v1.png",
+      "priority": "HIGH",
+      "semantics": {
+        "functional_role": "background-texture",
+        "semantic_weight": "atmospheric",
+        "layering_role": "overlay"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "hero",
+          "section"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate"
+        ],
+        "cannot_overlay_with": [
+          "atmospheric"
+        ]
+      }
+    },
+    {
+      "id": "KR-SOLID-003",
+      "name": "Abstract -solidarity-dalle-2026-01-",
+      "category": "abstract",
+      "layer": "atmospheric",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-dalle-2026-01-__v1.png",
+      "priority": "HIGH",
+      "semantics": {
+        "functional_role": "background-texture",
+        "semantic_weight": "atmospheric",
+        "layering_role": "overlay"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "hero",
+          "section"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate"
+        ],
+        "cannot_overlay_with": [
+          "atmospheric"
+        ]
+      }
+    },
+    {
+      "id": "KR-SOLID-004",
+      "name": "Abstract -solidarity-gemini-generate",
+      "category": "abstract",
+      "layer": "atmospheric",
+      "aspect_ratio": "3:4",
+      "file_path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-gemini-generate__v1.png",
+      "priority": "HIGH",
+      "semantics": {
+        "functional_role": "background-texture",
+        "semantic_weight": "atmospheric",
+        "layering_role": "overlay"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "hero",
+          "section"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate"
+        ],
+        "cannot_overlay_with": [
+          "atmospheric"
+        ]
+      }
+    },
+    {
+      "id": "KR-SOLID-005",
+      "name": "Abstract -solidarity-kerala-rage-bee",
+      "category": "abstract",
+      "layer": "atmospheric",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-kerala-rage-bee__v1.png",
+      "priority": "HIGH",
+      "semantics": {
+        "functional_role": "background-texture",
+        "semantic_weight": "atmospheric",
+        "layering_role": "overlay"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "hero",
+          "section"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate"
+        ],
+        "cannot_overlay_with": [
+          "atmospheric"
+        ]
+      }
+    },
+    {
+      "id": "KR-SOLID-006",
+      "name": "Abstract -solidarity-kerala-rage-bra",
+      "category": "abstract",
+      "layer": "atmospheric",
+      "aspect_ratio": "11:6",
+      "file_path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-kerala-rage-bra__v1.png",
+      "priority": "HIGH",
+      "semantics": {
+        "functional_role": "background-texture",
+        "semantic_weight": "atmospheric",
+        "layering_role": "overlay"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "hero",
+          "section"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate"
+        ],
+        "cannot_overlay_with": [
+          "atmospheric"
+        ]
+      }
+    },
+    {
+      "id": "KR-SOLID-007",
+      "name": "Abstract -solidarity-kerala-rage-fly",
+      "category": "abstract",
+      "layer": "atmospheric",
+      "aspect_ratio": "11:6",
+      "file_path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-kerala-rage-fly__v1.png",
+      "priority": "HIGH",
+      "semantics": {
+        "functional_role": "background-texture",
+        "semantic_weight": "atmospheric",
+        "layering_role": "overlay"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "hero",
+          "section"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate"
+        ],
+        "cannot_overlay_with": [
+          "atmospheric"
+        ]
+      }
+    },
+    {
+      "id": "KR-SOLID-008",
+      "name": "Abstract -solidarity-kerala-rage-fri",
+      "category": "abstract",
+      "layer": "atmospheric",
+      "aspect_ratio": "16:9",
+      "file_path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-kerala-rage-fri__v1.png",
+      "priority": "HIGH",
+      "semantics": {
+        "functional_role": "background-texture",
+        "semantic_weight": "atmospheric",
+        "layering_role": "overlay"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "hero",
+          "section"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate"
+        ],
+        "cannot_overlay_with": [
+          "atmospheric"
+        ]
+      }
+    },
+    {
+      "id": "KR-SOLID-009",
+      "name": "Abstract -solidarity-kerala-rage-gri",
+      "category": "abstract",
+      "layer": "atmospheric",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-kerala-rage-gri__v1.png",
+      "priority": "HIGH",
+      "semantics": {
+        "functional_role": "background-texture",
+        "semantic_weight": "atmospheric",
+        "layering_role": "overlay"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "hero",
+          "section"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate"
+        ],
+        "cannot_overlay_with": [
+          "atmospheric"
+        ]
+      }
+    },
+    {
+      "id": "KR-SOLID-010",
+      "name": "Abstract -solidarity-kerala-rage-kr-",
+      "category": "abstract",
+      "layer": "atmospheric",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-kerala-rage-kr-__v1.png",
+      "priority": "HIGH",
+      "semantics": {
+        "functional_role": "background-texture",
+        "semantic_weight": "atmospheric",
+        "layering_role": "overlay"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "hero",
+          "section"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate"
+        ],
+        "cannot_overlay_with": [
+          "atmospheric"
+        ]
+      }
+    },
+    {
+      "id": "KR-SOLID-011",
+      "name": "Abstract -solidarity-kerala-rage-nav",
+      "category": "abstract",
+      "layer": "atmospheric",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-kerala-rage-nav__v1.png",
+      "priority": "HIGH",
+      "semantics": {
+        "functional_role": "background-texture",
+        "semantic_weight": "atmospheric",
+        "layering_role": "overlay"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "hero",
+          "section"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate"
+        ],
+        "cannot_overlay_with": [
+          "atmospheric"
+        ]
+      }
+    },
+    {
+      "id": "KR-SOLID-012",
+      "name": "Abstract -solidarity-kerala-rage-rad",
+      "category": "abstract",
+      "layer": "atmospheric",
+      "aspect_ratio": "11:6",
+      "file_path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-kerala-rage-rad__v1.png",
+      "priority": "HIGH",
+      "semantics": {
+        "functional_role": "background-texture",
+        "semantic_weight": "atmospheric",
+        "layering_role": "overlay"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "hero",
+          "section"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate"
+        ],
+        "cannot_overlay_with": [
+          "atmospheric"
+        ]
+      }
+    },
+    {
+      "id": "KR-SOLID-013",
+      "name": "Abstract -solidarity-kerala-rage-sea",
+      "category": "abstract",
+      "layer": "atmospheric",
+      "aspect_ratio": "11:6",
+      "file_path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-kerala-rage-sea__v1.png",
+      "priority": "HIGH",
+      "semantics": {
+        "functional_role": "background-texture",
+        "semantic_weight": "atmospheric",
+        "layering_role": "overlay"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "hero",
+          "section"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate"
+        ],
+        "cannot_overlay_with": [
+          "atmospheric"
+        ]
+      }
+    },
+    {
+      "id": "KR-SOLID-014",
+      "name": "Abstract -solidarity-kerala-rage-sen",
+      "category": "abstract",
+      "layer": "atmospheric",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-kerala-rage-sen__v1.png",
+      "priority": "HIGH",
+      "semantics": {
+        "functional_role": "background-texture",
+        "semantic_weight": "atmospheric",
+        "layering_role": "overlay"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "hero",
+          "section"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate"
+        ],
+        "cannot_overlay_with": [
+          "atmospheric"
+        ]
+      }
+    },
+    {
+      "id": "KR-SOLID-015",
+      "name": "Abstract -solidarity-kerala-rage-wat",
+      "category": "abstract",
+      "layer": "atmospheric",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-kerala-rage-wat__v1.png",
+      "priority": "HIGH",
+      "semantics": {
+        "functional_role": "background-texture",
+        "semantic_weight": "atmospheric",
+        "layering_role": "overlay"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "hero",
+          "section"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate"
+        ],
+        "cannot_overlay_with": [
+          "atmospheric"
+        ]
+      }
+    },
+    {
+      "id": "KR-SOLID-016",
+      "name": "Abstract -solidarity-kr-solid-013",
+      "category": "abstract",
+      "layer": "atmospheric",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-kr-solid-013__v1.png",
+      "priority": "HIGH",
+      "semantics": {
+        "functional_role": "background-texture",
+        "semantic_weight": "atmospheric",
+        "layering_role": "overlay"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "hero",
+          "section"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate"
+        ],
+        "cannot_overlay_with": [
+          "atmospheric"
+        ]
+      }
+    },
+    {
+      "id": "KR-SOLID-017",
+      "name": "Abstract -solidarity-kr-solid-014",
+      "category": "abstract",
+      "layer": "atmospheric",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-kr-solid-014__v1.png",
+      "priority": "HIGH",
+      "semantics": {
+        "functional_role": "background-texture",
+        "semantic_weight": "atmospheric",
+        "layering_role": "overlay"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "hero",
+          "section"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate"
+        ],
+        "cannot_overlay_with": [
+          "atmospheric"
+        ]
+      }
+    },
+    {
+      "id": "KR-SOLID-018",
+      "name": "Abstract -solidarity-moodboard-12-ti",
+      "category": "abstract",
+      "layer": "atmospheric",
+      "aspect_ratio": "2:3",
+      "file_path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-moodboard-12-ti__v1.png",
+      "priority": "HIGH",
+      "semantics": {
+        "functional_role": "background-texture",
+        "semantic_weight": "atmospheric",
+        "layering_role": "overlay"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "hero",
+          "section"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate"
+        ],
+        "cannot_overlay_with": [
+          "atmospheric"
+        ]
+      }
+    },
+    {
+      "id": "KR-SOLID-019",
+      "name": "Paint-splash V1",
+      "category": "abstract",
+      "layer": "atmospheric",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__kr-solidarity--abstract--paint-splash--v1__v1.png",
+      "priority": "HIGH",
+      "semantics": {
+        "functional_role": "background-texture",
+        "semantic_weight": "atmospheric",
+        "layering_role": "overlay"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "hero",
+          "section"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate"
+        ],
+        "cannot_overlay_with": [
+          "atmospheric"
+        ]
+      }
+    },
+    {
+      "id": "KR-SOLID-020",
+      "name": "Devotional -cultural-anchor",
+      "category": "devotional",
+      "layer": "spiritual",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/devotional/kr-solidarity__devotional__devotional---cultural-anchor__v1.png",
+      "priority": "CRITICAL",
+      "semantics": {
+        "functional_role": "symbolic-anchor",
+        "semantic_weight": "mythic",
+        "layering_role": "foreground-dominant"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "hero-only",
+          "large-section"
+        ],
+        "small_ui_safe": false
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric"
+        ],
+        "cannot_overlay_with": [
+          "spiritual",
+          "resistance"
+        ]
+      }
+    },
+    {
+      "id": "KR-SOLID-021",
+      "name": "Shiva-statue V1",
+      "category": "devotional",
+      "layer": "spiritual",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/devotional/kr-solidarity__devotional__kr-solidarity--devotional--shiva-statue--v1__v1.png",
+      "priority": "CRITICAL",
+      "semantics": {
+        "functional_role": "symbolic-anchor",
+        "semantic_weight": "mythic",
+        "layering_role": "foreground-dominant"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "hero-only",
+          "large-section"
+        ],
+        "small_ui_safe": false
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric"
+        ],
+        "cannot_overlay_with": [
+          "spiritual",
+          "resistance"
+        ]
+      }
+    },
+    {
+      "id": "KR-SOLID-022",
+      "name": "Shiva-statue-street V1",
+      "category": "devotional",
+      "layer": "spiritual",
+      "aspect_ratio": "16:9",
+      "file_path": "/assets/kr-solidarity/devotional/kr-solidarity__devotional__kr-solidarity--devotional--shiva-statue-street--v1__v1.png",
+      "priority": "CRITICAL",
+      "semantics": {
+        "functional_role": "symbolic-anchor",
+        "semantic_weight": "mythic",
+        "layering_role": "foreground-dominant"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "hero-only",
+          "large-section"
+        ],
+        "small_ui_safe": false
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric"
+        ],
+        "cannot_overlay_with": [
+          "spiritual",
+          "resistance"
+        ]
+      }
+    },
+    {
+      "id": "KR-SOLID-023",
+      "name": "Shiva-urban-protest V1",
+      "category": "devotional",
+      "layer": "spiritual",
+      "aspect_ratio": "16:9",
+      "file_path": "/assets/kr-solidarity/devotional/kr-solidarity__devotional__kr-solidarity--devotional--shiva-urban-protest--v1__v1.png",
+      "priority": "CRITICAL",
+      "semantics": {
+        "functional_role": "symbolic-anchor",
+        "semantic_weight": "mythic",
+        "layering_role": "foreground-dominant"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "hero-only",
+          "large-section"
+        ],
+        "small_ui_safe": false
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric"
+        ],
+        "cannot_overlay_with": [
+          "spiritual",
+          "resistance"
+        ]
+      }
+    },
+    {
+      "id": "KR-SOLID-024",
+      "name": "Bhagat-singh V1",
+      "category": "portrait",
+      "layer": "resistance",
+      "aspect_ratio": "3:4",
+      "file_path": "/assets/kr-solidarity/portrait/kr-solidarity__portrait__kr-solidarity--portrait--bhagat-singh--v1__v1.png",
+      "priority": "CRITICAL",
+      "semantics": {
+        "functional_role": "editorial-hero",
+        "semantic_weight": "heroic",
+        "layering_role": "foreground"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "hero-only",
+          "feature"
+        ],
+        "small_ui_safe": false
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric"
+        ],
+        "cannot_overlay_with": [
+          "resistance",
+          "spiritual"
+        ]
+      }
+    },
+    {
+      "id": "KR-SOLID-025",
+      "name": "Portrait -resistance-history",
+      "category": "portrait",
+      "layer": "resistance",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/portrait/kr-solidarity__portrait__portrait---resistance-history__v1.png",
+      "priority": "CRITICAL",
+      "semantics": {
+        "functional_role": "editorial-hero",
+        "semantic_weight": "heroic",
+        "layering_role": "foreground"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "hero-only",
+          "feature"
+        ],
+        "small_ui_safe": false
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric"
+        ],
+        "cannot_overlay_with": [
+          "resistance",
+          "spiritual"
+        ]
+      }
+    },
+    {
+      "id": "KR-SOLID-026",
+      "name": "Tipu-sultan V1",
+      "category": "portrait",
+      "layer": "resistance",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/portrait/kr-solidarity__portrait__kr-solidarity--portrait--tipu-sultan--v1__v1.png",
+      "priority": "CRITICAL",
+      "semantics": {
+        "functional_role": "editorial-hero",
+        "semantic_weight": "heroic",
+        "layering_role": "foreground"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "hero-only",
+          "feature"
+        ],
+        "small_ui_safe": false
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric"
+        ],
+        "cannot_overlay_with": [
+          "resistance",
+          "spiritual"
+        ]
+      }
+    },
+    {
+      "id": "KR-SOLID-027",
+      "name": "Turbaned-man V1",
+      "category": "portrait",
+      "layer": "resistance",
+      "aspect_ratio": "3:2",
+      "file_path": "/assets/kr-solidarity/portrait/kr-solidarity__portrait__kr-solidarity--portrait--turbaned-man--v1__v1.png",
+      "priority": "CRITICAL",
+      "semantics": {
+        "functional_role": "editorial-hero",
+        "semantic_weight": "heroic",
+        "layering_role": "foreground"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "hero-only",
+          "feature"
+        ],
+        "small_ui_safe": false
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric"
+        ],
+        "cannot_overlay_with": [
+          "resistance",
+          "spiritual"
+        ]
+      }
+    },
+    {
+      "id": "KR-SOLID-028",
+      "name": "First-nations-placard V1",
+      "category": "street",
+      "layer": "resistance",
+      "aspect_ratio": "29:36",
+      "file_path": "/assets/kr-solidarity/street/kr-solidarity__street__kr-solidarity--street--first-nations-placard--v1__v1.png",
+      "priority": "HIGH",
+      "semantics": {
+        "functional_role": "editorial-hero",
+        "semantic_weight": "heroic",
+        "layering_role": "foreground"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "hero-only",
+          "feature"
+        ],
+        "small_ui_safe": false
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric"
+        ],
+        "cannot_overlay_with": [
+          "resistance",
+          "spiritual"
+        ]
       }
     },
     {
       "id": "KR-SOLID-029",
-      "name": "Paint Splash",
-      "category": "abstract",
-      "layer": "atmospheric",
-      "aspect_ratio": "2:1",
-      "file_path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__kr-solidarity--abstract--paint-splash--v1__v1.png",
+      "name": "Street -resistance-historyactivist",
+      "category": "street",
+      "layer": "resistance",
+      "aspect_ratio": "24:43",
+      "file_path": "/assets/kr-solidarity/street/kr-solidarity__street__street---resistance-historyactivist__v1.png",
       "priority": "HIGH",
       "semantics": {
-        "functional_role": "dynamic-overlay",
-        "semantic_weight": "expressive",
-        "layering_role": "overlay"
+        "functional_role": "editorial-hero",
+        "semantic_weight": "heroic",
+        "layering_role": "foreground"
       },
       "usage_rules": {
-        "scale_suitability": ["hero", "section"],
-        "small_ui_safe": true
+        "scale_suitability": [
+          "hero-only",
+          "feature"
+        ],
+        "small_ui_safe": false
       },
       "layering_compatibility": {
-        "can_overlay_with": ["substrate", "atmospheric"],
-        "cannot_overlay_with": []
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric"
+        ],
+        "cannot_overlay_with": [
+          "resistance",
+          "spiritual"
+        ]
       }
     },
     {
       "id": "KR-SOLID-030",
-      "name": "First Nations Placard",
-      "category": "street",
-      "layer": "resistance",
-      "aspect_ratio": "1:1",
-      "file_path": "/assets/kr-solidarity/street/kr-solidarity__street__kr-solidarity--street--first-nations-placard--v1__v1.png",
-      "priority": "HIGH",
-      "semantics": {
-        "functional_role": "contextual-motif",
-        "semantic_weight": "activist",
-        "layering_role": "mid-layer"
-      },
-      "usage_rules": {
-        "scale_suitability": ["hero", "section", "card"],
-        "small_ui_safe": true
-      },
-      "layering_compatibility": {
-        "can_overlay_with": ["substrate", "atmospheric"],
-        "cannot_overlay_with": ["resistance"]
-      }
-    },
-    {
-      "id": "KR-SOLID-031",
-      "name": "Treaty Now Poster",
+      "name": "Treaty-now-poster V1",
       "category": "street",
       "layer": "resistance",
       "aspect_ratio": "1:1",
       "file_path": "/assets/kr-solidarity/street/kr-solidarity__street__kr-solidarity--street--treaty-now-poster--v1__v1.png",
       "priority": "HIGH",
       "semantics": {
-        "functional_role": "contextual-motif",
-        "semantic_weight": "activist",
+        "functional_role": "editorial-hero",
+        "semantic_weight": "heroic",
+        "layering_role": "foreground"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "hero-only",
+          "feature"
+        ],
+        "small_ui_safe": false
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric"
+        ],
+        "cannot_overlay_with": [
+          "resistance",
+          "spiritual"
+        ]
+      }
+    },
+    {
+      "id": "KR-SOLID-031",
+      "name": "Kerala-elephant V1",
+      "category": "symbol",
+      "layer": "cultural",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/symbol/kr-solidarity__symbol__kr-solidarity--symbol--kerala-elephant--v1__v1.png",
+      "priority": "HIGH",
+      "semantics": {
+        "functional_role": "icon-anchor",
+        "semantic_weight": "iconic",
         "layering_role": "mid-layer"
       },
       "usage_rules": {
-        "scale_suitability": ["hero", "section", "card"],
+        "scale_suitability": [
+          "hero",
+          "section",
+          "card"
+        ],
         "small_ui_safe": true
       },
       "layering_compatibility": {
-        "can_overlay_with": ["substrate", "atmospheric"],
-        "cannot_overlay_with": ["resistance"]
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric"
+        ],
+        "cannot_overlay_with": [
+          "cultural"
+        ]
       }
     },
     {
       "id": "KR-SOLID-032",
-      "name": "Resistance History Activist",
-      "category": "street",
-      "layer": "resistance",
-      "aspect_ratio": "1:1",
-      "file_path": "/assets/kr-solidarity/street/kr-solidarity__street__street---resistance-historyactivist__v1.png",
+      "name": "Kerala-landscape V1",
+      "category": "symbol",
+      "layer": "cultural",
+      "aspect_ratio": "16:9",
+      "file_path": "/assets/kr-solidarity/symbol/kr-solidarity__symbol__kr-solidarity--symbol--kerala-landscape--v1__v1.png",
       "priority": "HIGH",
       "semantics": {
-        "functional_role": "contextual-motif",
-        "semantic_weight": "activist",
+        "functional_role": "icon-anchor",
+        "semantic_weight": "iconic",
         "layering_role": "mid-layer"
       },
       "usage_rules": {
-        "scale_suitability": ["hero", "section", "card"],
+        "scale_suitability": [
+          "hero",
+          "section",
+          "card"
+        ],
         "small_ui_safe": true
       },
       "layering_compatibility": {
-        "can_overlay_with": ["substrate", "atmospheric"],
-        "cannot_overlay_with": ["resistance"]
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric"
+        ],
+        "cannot_overlay_with": [
+          "cultural"
+        ]
       }
     },
     {
       "id": "KR-SOLID-033",
-      "name": "Melbourne Laneway",
+      "name": "Melbourne-laneway V1",
       "category": "texture",
       "layer": "substrate",
-      "aspect_ratio": "16:9",
+      "aspect_ratio": "1:1",
       "file_path": "/assets/kr-solidarity/texture/kr-solidarity__texture__kr-solidarity--texture--melbourne-laneway--v1__v1.png",
       "priority": "HIGH",
       "semantics": {
@@ -730,12 +980,17 @@
         "layering_role": "background-base"
       },
       "usage_rules": {
-        "scale_suitability": ["hero-background", "global-overlay"],
+        "scale_suitability": [
+          "hero-background",
+          "global-overlay"
+        ],
         "small_ui_safe": false
       },
       "layering_compatibility": {
         "can_overlay_with": [],
-        "cannot_overlay_with": ["substrate"]
+        "cannot_overlay_with": [
+          "substrate"
+        ]
       }
     }
   ]
