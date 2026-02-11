@@ -12,9 +12,9 @@ export const KrDarkProfile: React.FC = () => {
   const shouldReduceMotion = useReducedMotion() ?? false;
 
   const stats = [
-    { label: 'Tactical Missions', value: '24', color: 'text-wattle-gold' },
-    { label: 'Defiance Tier', value: 'Level 08', color: 'text-waratah-red' },
-    { label: 'Collective Ties', value: '342', color: 'text-ghost-gum' },
+    { label: 'Tactical Missions', value: '24', color: 'text-ink-gold' },
+    { label: 'Defiance Tier', value: 'Level 08', color: 'text-solidarity-red' },
+    { label: 'Collective Ties', value: '342', color: 'text-solidarity-green' },
   ];
 
   return (
@@ -28,11 +28,11 @@ export const KrDarkProfile: React.FC = () => {
       >
         <div className="relative group">
           {/* TODO[asset]: Profile Bio-Data Motif overlay (Z-1, 10% opacity) */}
-          <div className="w-56 h-56 rounded-full bg-asphalt-black border-4 border-white/5 flex items-center justify-center overflow-hidden shadow-viscous group-hover:border-wattle-gold/20 transition-all duration-700">
-             <div className="absolute inset-0 bg-gradient-to-tr from-wattle-gold/5 via-transparent to-waratah-red/5 opacity-40 group-hover:opacity-100 transition-opacity" />
-             <span className="font-proclamation text-7xl text-paper-white/10 group-hover:text-wattle-gold/20 transition-colors">NAT</span>
+          <div className="w-56 h-56 rounded-full bg-asphalt-black border-4 border-white/5 flex items-center justify-center overflow-hidden shadow-viscous group-hover:border-ink-gold/20 transition-all duration-700">
+             <div className="absolute inset-0 bg-gradient-to-tr from-ink-gold/5 via-transparent to-solidarity-red/5 opacity-40 group-hover:opacity-100 transition-opacity" />
+             <span className="font-proclamation text-7xl text-paper-white/10 group-hover:text-ink-gold/20 transition-colors">NAT</span>
           </div>
-          <div className="absolute -bottom-2 -right-2 w-12 h-12 rounded-stone bg-wattle-gold flex items-center justify-center shadow-wattle-glow">
+          <div className="absolute -bottom-2 -right-2 w-12 h-12 rounded-stone bg-ink-gold flex items-center justify-center shadow-ink-glow">
              <span className="font-mono text-xs font-bold text-asphalt-black">08</span>
           </div>
         </div>
@@ -87,10 +87,10 @@ export const KrDarkProfile: React.FC = () => {
               <motion.div 
                 key={i} 
                 whileHover={shouldReduceMotion ? {} : { y: -4, scale: 1.05 }}
-                className="aspect-square rounded-stone bg-white/5 border border-white/5 flex items-center justify-center hover:border-wattle-gold/30 hover:shadow-wattle-glow transition-all duration-500 cursor-pointer group"
+                className="aspect-square rounded-stone bg-white/5 border border-white/5 flex items-center justify-center hover:border-ink-gold/30 hover:shadow-ink-glow transition-all duration-500 cursor-pointer group"
               >
-                 <div className="w-10 h-10 bg-paper-white/5 rounded-pebble group-hover:bg-wattle-gold/20 transition-colors flex items-center justify-center">
-                    <div className={`w-4 h-4 rounded-full ${i % 2 === 0 ? 'bg-wattle-gold/40' : 'bg-waratah-red/40'} border border-white/10`} />
+                 <div className="w-10 h-10 bg-paper-white/5 rounded-pebble group-hover:bg-ink-gold/20 transition-colors flex items-center justify-center">
+                    <div className={`w-4 h-4 rounded-full ${i % 2 === 0 ? 'bg-ink-gold/40' : 'bg-solidarity-red/40'} border border-white/10`} />
                  </div>
               </motion.div>
             ))}

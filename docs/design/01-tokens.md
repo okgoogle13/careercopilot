@@ -13,9 +13,9 @@ Visual language inspired by urban resistance, high-contrast stencils, and gritty
 | Token                   | Hex       | CSS Variable          | Usage                                                      |
 | ----------------------- | --------- | --------------------- | ---------------------------------------------------------- |
 | **Charcoal Background** | `#1A1A1A` | `--kr-charcoal-bg`    | **The Substrate** — Raw paper texture background.          |
-| **Baru Gold**           | `#E6B34D` | `--kr-baru-gold`      | **The Reveal** — Primary actions, focus, and illumination. |
-| **Waratah Red**         | `#D94A4A` | `--kr-waratah-red`    | **The Urgency** — Alerts, navigation high-points, energy.  |
-| **Parrot Green**        | `#50C878` | `--kr-parrot-green`   | **The Life** — Growth metrics, success states, vitality.   |
+| **Ink Gold**           | `#E6B34D` | `--kr-ink-gold`      | **The Reveal** — Primary actions, focus, and illumination. |
+| **Solidarity Red**         | `#D94A4A` | `--kr-solidarity-red`    | **The Urgency** — Alerts, navigation high-points, energy.  |
+| **Signal Green**        | `#50C878` | `--kr-signal-green`   | **The Life** — Growth metrics, success states, vitality.   |
 | **Paper White**         | `#F5F0E8` | `--kr-paper-white`    | **The Ink** — Primary high-contrast typography.            |
 | **Blueprint Grey**      | `#333333` | `--kr-blueprint-grey` | **The Structure** — Grids, lines, and borders.             |
 
@@ -64,7 +64,7 @@ On interaction, background surfaces may intensify their texture or color density
 
 Density levels replace "Modes". Every page uses the **Charcoal Background**.
 
-- **Solidarity High** (Hero): Large stencils, high Baru Gold usage, wheat-paste ripples.
+- **Solidarity High** (Hero): Large stencils, high Ink Gold usage, wheat-paste ripples.
 - **Solidarity Standard** (UI): Clean grids, blueprint overlays, focused accent colors.
 - **Solidarity Minimal** (Data): Maximum legibility, 1px blueprint lines, mono-spaced data priority.
 

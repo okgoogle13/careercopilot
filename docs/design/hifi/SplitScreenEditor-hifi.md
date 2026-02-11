@@ -13,8 +13,8 @@
 ## Color
 - **Substrate**: `bg-asphalt-black`.
 - **Panels**: `bg-asphalt-black/80`, `border-white/5`.
-- **Divider**: `bg-wattle-gold` (2px tactile line).
-- **Active Tab**: `text-wattle-gold`.
+- **Divider**: `bg-ink-gold` (2px tactile line).
+- **Active Tab**: `text-ink-gold`.
 
 ## Spacing
 - **Panel Gutter**: `0px` (Shared divider), `gap-4` for external padding.
@@ -22,7 +22,7 @@
 - **Console Height**: `h-32` (Bottom reveal).
 
 ## Motion
-- **Divider Hover**: The `wattle-gold` divider glows and thickens slightly when interactive.
+- **Divider Hover**: The `ink-gold` divider glows and thickens slightly when interactive.
 - **Preview Refresh**: Right panel has a subtle `blur-sm` -> `opacity` fade on data re-render.
 - **Tool Hover**: `ToolPebble` icons lift on hover (`y: -2`) and show a tool-tip.
 

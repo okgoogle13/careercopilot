@@ -17,7 +17,7 @@
 .header h1 {
   font-size: 4rem;
   margin-bottom: 1rem;
-  color: var(--color-wattle-gold);
+  color: var(--color-ink-gold);
 }
 
 .grid {
@@ -44,13 +44,13 @@
 .leafCard:hover {
   transform: translateY(-8px) scale(1.02);
   background: rgba(44, 39, 35, 0.6);
-  border-color: var(--color-wattle-gold);
+  border-color: var(--color-ink-gold);
   box-shadow: var(--shadow-elevated);
 }
 
 .leafCard.selected {
   background: rgba(212, 168, 75, 0.1);
-  border-color: var(--color-wattle-gold);
+  border-color: var(--color-ink-gold);
   box-shadow: 0 0 40px rgba(212, 168, 75, 0.2);
   transform: scale(1.05);
 }
@@ -73,7 +73,7 @@
 .iconWrapper img {
   max-width: 100%;
   max-height: 100%;
-  filter: sepia(1) saturate(2) hue-rotate(-10deg); /* Wattle-gold-ish filter */
+  filter: sepia(1) saturate(2) hue-rotate(-10deg); /* Ink-gold-ish filter */
 }
 
 .footer {

@@ -170,7 +170,7 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
         <header className="flex flex-col md:flex-row justify-between items-start gap-8 mb-12">
           <div>
             <h1 className="text-5xl font-bold text-[var(--color-paper-white)] tracking-tight">
-              Professional Vector <span className="text-[var(--color-wattle-gold)]">Audit</span>
+              Professional Vector <span className="text-[var(--color-ink-gold)]">Audit</span>
             </h1>
             <p className="text-xl text-[var(--color-concrete-grey-dark)] mt-2">
               Refine and validate the tactical components of your professional DNA.
@@ -218,9 +218,9 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
           <Stone
             elevation="raised"
             mode="KrDark"
-            className="flex items-center gap-6 border-l-4 border-l-[var(--color-wattle-gold)]"
+            className="flex items-center gap-6 border-l-4 border-l-[var(--color-ink-gold)]"
           >
-            <Trophy className="w-10 h-10 text-[var(--color-wattle-gold)]" />
+            <Trophy className="w-10 h-10 text-[var(--color-ink-gold)]" />
             <div>
               <span className="text-3xl font-bold text-[var(--color-paper-white)] block">
                 {localData.Structured_Achievements.length}
@@ -335,7 +335,7 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
                     key={achievement.Achievement_ID}
                     className="relative pl-6 border-l border-white/10 pb-8 last:pb-0"
                   >
-                    <div className="absolute left-[-5px] top-0 w-[9px] h-[9px] rounded-full bg-[var(--color-wattle-gold)] shadow-[0_0_8px_var(--color-wattle-gold)]" />
+                    <div className="absolute left-[-5px] top-0 w-[9px] h-[9px] rounded-full bg-[var(--color-ink-gold)] shadow-[0_0_8px_var(--color-ink-gold)]" />
 
                     <div className="flex justify-between items-center mb-6">
                       <span className="text-[10px] text-[var(--color-concrete-grey-dark)] uppercase tracking-widest">
@@ -403,7 +403,7 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
                   >
                     <div className="flex justify-between items-start mb-8">
                       <div className="flex-1 mr-4">
-                        <span className="text-[10px] text-[var(--color-wattle-gold)] uppercase tracking-widest block mb-2">
+                        <span className="text-[10px] text-[var(--color-ink-gold)] uppercase tracking-widest block mb-2">
                           Module {idx + 1} Prompt
                         </span>
                         <h4 className="text-lg text-[var(--color-paper-white)] italic">

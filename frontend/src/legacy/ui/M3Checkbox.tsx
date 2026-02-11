@@ -23,7 +23,7 @@ export interface M3CheckboxProps extends Omit<React.InputHTMLAttributes<HTMLInpu
  *
  * **KeralaRage Token Usage:**
  * - Typography: `font-field-note` (Label)
- * - Color: `primary-wattle-gold` (Checked), `tertiary-waratah-red` (Error)
+ * - Color: `primary-ink-gold` (Checked), `tertiary-solidarity-red` (Error)
  * - Shape: `rounded-[4px]` (KrDark), `rounded-[6px]` (KrDark)
  * - Motion: `ease-viscous` (Check animation)
  *
@@ -63,30 +63,30 @@ export const M3Checkbox = forwardRef<HTMLInputElement, M3CheckboxProps>(({
             checkbox: `
                 rounded-[6px]
                 ${error
-                    ? 'border-tertiary-waratah-red'
+                    ? 'border-tertiary-solidarity-red'
                     : isChecked
-                        ? 'border-primary-wattle-gold bg-wattle-gold'
-                        : 'border-primary-wattle-gold/60'
+                        ? 'border-primary-ink-gold bg-ink-gold'
+                        : 'border-primary-ink-gold/60'
                 }
-                ${!disabled && !isChecked ? 'hover:border-primary-wattle-gold' : ''}
-                ${!disabled && isChecked && !error ? 'hover:bg-wattle-gold/90' : ''}
+                ${!disabled && !isChecked ? 'hover:border-primary-ink-gold' : ''}
+                ${!disabled && isChecked && !error ? 'hover:bg-ink-gold/90' : ''}
             `,
-            label: error ? 'text-tertiary-waratah-red' : 'text-on-surface-paper-white',
+            label: error ? 'text-tertiary-solidarity-red' : 'text-on-surface-paper-white',
             iconColor: error ? 'text-on-error' : 'text-asphalt-black',
         },
         'KrLight': {
             checkbox: `
                 rounded-[4px]
                 ${error
-                    ? 'border-tertiary-waratah-red'
+                    ? 'border-tertiary-solidarity-red'
                     : isChecked
-                        ? 'border-primary-wattle-gold bg-wattle-gold'
+                        ? 'border-primary-ink-gold bg-ink-gold'
                         : 'border-outline-variant'
                 }
                 ${!disabled && !isChecked ? 'hover:border-outline' : ''}
-                ${!disabled && isChecked && !error ? 'hover:bg-wattle-gold/90' : ''}
+                ${!disabled && isChecked && !error ? 'hover:bg-ink-gold/90' : ''}
             `,
-            label: error ? 'text-tertiary-waratah-red' : 'text-on-surface-paper-white',
+            label: error ? 'text-tertiary-solidarity-red' : 'text-on-surface-paper-white',
             iconColor: error ? 'text-on-error' : 'text-asphalt-black',
         },
     };
@@ -120,7 +120,7 @@ export const M3Checkbox = forwardRef<HTMLInputElement, M3CheckboxProps>(({
                 border-2
                 ${currentTheme.checkbox}
                 transition-all duration-standard ease-viscous
-                peer-focus:outline-2 peer-focus:outline-offset-2 peer-focus:outline-primary-wattle-gold
+                peer-focus:outline-2 peer-focus:outline-offset-2 peer-focus:outline-primary-ink-gold
                 ${className}
             `}>
                 {/* Checkmark or Dash Icon */}
@@ -179,28 +179,28 @@ export const M3Radio = forwardRef<HTMLInputElement, M3RadioProps>(({
         'KrDark': {
             radio: `
                 ${error
-                    ? 'border-tertiary-waratah-red'
+                    ? 'border-tertiary-solidarity-red'
                     : checked
-                        ? 'border-primary-wattle-gold'
-                        : 'border-primary-wattle-gold/60'
+                        ? 'border-primary-ink-gold'
+                        : 'border-primary-ink-gold/60'
                 }
-                ${!disabled && !checked ? 'hover:border-primary-wattle-gold' : ''}
+                ${!disabled && !checked ? 'hover:border-primary-ink-gold' : ''}
             `,
-            dot: error ? 'bg-tertiary-waratah-red' : 'bg-wattle-gold',
-            label: error ? 'text-tertiary-waratah-red' : 'text-on-surface-paper-white',
+            dot: error ? 'bg-tertiary-solidarity-red' : 'bg-ink-gold',
+            label: error ? 'text-tertiary-solidarity-red' : 'text-on-surface-paper-white',
         },
         'KrLight': {
             radio: `
                 ${error
-                    ? 'border-tertiary-waratah-red'
+                    ? 'border-tertiary-solidarity-red'
                     : checked
-                        ? 'border-primary-wattle-gold'
+                        ? 'border-primary-ink-gold'
                         : 'border-outline-variant'
                 }
                 ${!disabled && !checked ? 'hover:border-outline' : ''}
             `,
-            dot: error ? 'bg-tertiary-waratah-red' : 'bg-wattle-gold',
-            label: error ? 'text-tertiary-waratah-red' : 'text-on-surface-paper-white',
+            dot: error ? 'bg-tertiary-solidarity-red' : 'bg-ink-gold',
+            label: error ? 'text-tertiary-solidarity-red' : 'text-on-surface-paper-white',
         },
     };
 
@@ -233,7 +233,7 @@ export const M3Radio = forwardRef<HTMLInputElement, M3RadioProps>(({
                 border-2
                 ${currentTheme.radio}
                 transition-all duration-standard ease-viscous
-                peer-focus:outline-2 peer-focus:outline-offset-2 peer-focus:outline-primary-wattle-gold
+                peer-focus:outline-2 peer-focus:outline-offset-2 peer-focus:outline-primary-ink-gold
                 ${className}
             `}>
                 {/* Inner Dot */}

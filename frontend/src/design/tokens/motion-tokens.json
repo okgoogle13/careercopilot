@@ -158,7 +158,7 @@
                 },
                 "link": {
                     "color": {
-                        "$value": "{color.primary.wattleGlow}",
+                        "$value": "{color.primary.inkGlow}",
                         "$type": "color"
                     },
                     "underlineOffset": {

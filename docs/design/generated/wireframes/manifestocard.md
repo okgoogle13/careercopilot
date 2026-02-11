@@ -5,7 +5,7 @@
 |                                  [ Red Flag Accent ]      |
 |                                                           |
 |             "MANIFESTO TITLE"                             |
-|             (Display Large, Waratah Red)                  |
+|             (Display Large, Solidarity Red)                  |
 |                                                           |
 |    "Body content text goes here. It should feel           |
 |     like a declaration, not instructions."                |
@@ -21,9 +21,9 @@
 
 <tokens>
 - **Container**: `bg-charcoal`, `radius-stone`, `shadow-viscous`
-- **Title**: `text-display-lg`, `font-solidarity-800`, `text-waratah-red`
+- **Title**: `text-display-lg`, `font-solidarity-800`, `text-solidarity-red`
 - **Content**: `text-body-lg`, `font-direct-action-450`, `text-paper-white/80`
-- **Button**: `bg-baru-gold`, `text-charcoal`, `radius-pebble`, `shadow-hover-rise`
+- **Button**: `bg-ink-gold`, `text-charcoal`, `radius-pebble`, `shadow-hover-rise`
 </tokens>
 
 <accessibility>
@@ -33,9 +33,9 @@
 </accessibility>
 
 <states>
-- **Loading**: Pulse throb on the Baru Gold glow.
+- **Loading**: Pulse throb on the Ink Gold glow.
 - **Empty**: Not applicable (manifesto must have content).
-- **Error**: Waratah Red border shake on invalid configuration.
+- **Error**: Solidarity Red border shake on invalid configuration.
 </states>
 
 <assets>

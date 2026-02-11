@@ -6,9 +6,9 @@
 - **Core Narrative**: Verification, entry into the collective archive, security.
 
 ## Visual Hierarchy
-- **Dominant**: Halo Disk (60% opacity, Baru Gold radiance behind the card)
+- **Dominant**: Halo Disk (60% opacity, Ink Gold radiance behind the card)
 - **Primary Ink**: Paper White (#F5F0E8) for labels and primary text.
-- **Secondary Ink**: Baru Gold (#DAF674) for the "Enter Archive" action.
+- **Secondary Ink**: Ink Gold (#DAF674) for the "Enter Archive" action.
 - **Substrate**: Charcoal Background (#1A1A1A).
 
 ## Motion Physics

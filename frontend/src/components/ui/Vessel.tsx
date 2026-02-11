@@ -25,7 +25,7 @@ export const M3Accordion: React.FC<VesselProps> = ({
                 className="w-full flex items-center justify-between p-5 text-left hover:bg-white/5 transition-colors focus:outline-none"
             >
                 <div className="flex items-center gap-4">
-                    {icon && <div className="text-[var(--color-wattle-gold)]">{icon}</div>}
+                    {icon && <div className="text-[var(--color-ink-gold)]">{icon}</div>}
                     <h3 className="font-bloom text-lg font-bold text-[var(--color-paper-white)]">{title}</h3>
                 </div>
                 <ChevronDown

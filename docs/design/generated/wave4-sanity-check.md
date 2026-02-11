@@ -14,7 +14,7 @@ This report summarizes the sanity check for the "The Pages" assembly phase (`KrD
   - `ManifestoCard` provides the "Tactical Core" with "ENTER STATION" CTA.
 - **Visuals**: 
   - Successfully integrates `The Sentry` mascot placeholder with `shadow-viscous`.
-  - Background radial glow (`wattle-gold/10`) creates atmospheric focus.
+  - Background radial glow (`ink-gold/10`) creates atmospheric focus.
 - **Accessibility**: 
   - Semantic `<main>` and `<article>` tags preserved.
   - Button actions correctly wired to routing/logic.
@@ -25,7 +25,7 @@ This report summarizes the sanity check for the "The Pages" assembly phase (`KrD
   - Primary headline via `ManifestoSlab`.
   - Secondary metrics using standard `Stone` primitives.
 - **Visuals**: 
-  - Color-coded metrics (`wattle-gold`, `waratah-red`, `ghost-gum`) provide immediate status read.
+  - Color-coded metrics (`ink-gold`, `solidarity-red`, `solidarity-green`) provide immediate status read.
   - `shadow-viscous` on cards ensures layering clarity.
 - **Accessibility**: 
   - `aria-hidden` spanning for decorative placeholders.

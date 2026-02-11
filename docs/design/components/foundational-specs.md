@@ -12,17 +12,17 @@ The workhorse container for data, content cards, and navigation items.
 - **Variants**:
   - **Standard**: Opaque background.
   - **Ghost**: Transparent background, 1px gold border.
-  - **Active**: Scale 105%, baruGold border-glow.
+  - **Active**: Scale 105%, inkGold border-glow.
 
 ## 2. The Pebble (radius-pebble)
 Small, interactive elements like buttons, chips, and inputs.
 
 - **Geometry**: `border-radius: 24px` (radius-pebble / Capsule)
-- **Background**: `primary.DEFAULT` (#D4A84B / Baru Gold) for primary actions.
+- **Background**: `primary.DEFAULT` (#D4A84B / Ink Gold) for primary actions.
 - **Typography**: `Recursive 800 Solidarity` (14px-16px).
 - **Interactions**:
-  - **Hover**: 2px waratahRed underline or glow disk expansion.
-  - **Active**: 4px baruGold halo shadow.
+  - **Hover**: 2px solidarityRed underline or glow disk expansion.
+  - **Active**: 4px inkGold halo shadow.
 
 ## 3. The Slab (radius-slab)
 Large structural blocks for headlines, hero sections, and category headers.
@@ -33,7 +33,7 @@ Large structural blocks for headlines, hero sections, and category headers.
 - **Z-Layering**: Always Z-1.
 
 ## Global Tokens Mapping
-- **Ink (Baru Gold)**: `#D4A84B`
-- **Ink (Waratah Red)**: `#C45C4B`
-- **Ink (Leafus Ash)**: `#F5DDAA`
+- **Ink (Ink Gold)**: `#D4A84B`
+- **Ink (Solidarity Red)**: `#C45C4B`
+- **Ink (Activist Ash)**: `#F5DDAA`
 - **Substrate (Asphalt)**: `#1A1714`

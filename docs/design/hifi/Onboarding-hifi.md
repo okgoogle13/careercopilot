@@ -12,7 +12,7 @@
 ## Color
 - **Substrate**: `bg-asphalt-black`.
 - **Cards**: `bg-asphalt-black` (solid) with a subtle `border-white/5` and `shadow-viscous`.
-- **Active Selection**: `border-wattle-gold` with a `shadow-wattle-glow`.
+- **Active Selection**: `border-ink-gold` with a `shadow-ink-glow`.
 
 ## Spacing
 - **Card Grid Gap**: `gap-12` (Desktop), `gap-6` (Mobile).

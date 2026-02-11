@@ -15,8 +15,8 @@
 ## Color
 - **Substrate**: `bg-asphalt-black`.
 - **Groups**: `bg-asphalt-black/50` with `border-white/5`.
-- **Interactive Accent**: `text-wattle-gold` (Selection) or `text-waratah-red` (Destructive).
-- **Toggle State**: `bg-wattle-gold` (On), `bg-white/10` (Off).
+- **Interactive Accent**: `text-ink-gold` (Selection) or `text-solidarity-red` (Destructive).
+- **Toggle State**: `bg-ink-gold` (On), `bg-white/10` (Off).
 
 ## Spacing
 - **Group Margin**: `mb-8`.

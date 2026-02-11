@@ -27,7 +27,7 @@ export const KrDarkDesigner: React.FC = () => {
         
         <div className="flex items-center gap-4">
           <span className="font-mono text-[10px] uppercase tracking-widest text-paper-white/30">PROJECT_ID: KR_SOLIDARITY_01</span>
-          <div className="w-1.5 h-1.5 rounded-full bg-wattle-gold animate-pulse" />
+          <div className="w-1.5 h-1.5 rounded-full bg-ink-gold animate-pulse" />
         </div>
 
         <div className="ml-auto flex gap-4">
@@ -55,7 +55,7 @@ export const KrDarkDesigner: React.FC = () => {
                  whileHover={shouldReduceMotion ? {} : { scale: 1.05, borderColor: 'rgba(212, 175, 55, 0.4)' }}
                  className="aspect-square bg-white/5 rounded-stone border border-white/5 flex items-center justify-center cursor-move transition-all duration-300 group shadow-viscous"
                >
-                 <div className="w-10 h-10 bg-paper-white/5 rounded-pebble group-hover:bg-wattle-gold/10 transition-colors flex items-center justify-center">
+                 <div className="w-10 h-10 bg-paper-white/5 rounded-pebble group-hover:bg-ink-gold/10 transition-colors flex items-center justify-center">
                     <span className="font-mono text-[8px] text-paper-white/20 select-none">M_0{i}</span>
                  </div>
                </motion.div>

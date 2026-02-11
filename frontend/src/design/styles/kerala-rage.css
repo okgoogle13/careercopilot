@@ -26,18 +26,18 @@
   --color-asphalt-black-dark: #0f0c0a;
   --color-asphalt-black-darkest: #050403;
   --color-asphalt-black: #1a1714;
-  --color-wattle-gold-lightest: #e8c77a;
-  --color-wattle-gold-light: #e0bd61;
-  --color-wattle-gold-base: #d4a84b;
-  --color-wattle-gold-dark: #c8983a;
-  --color-wattle-gold-darkest: #b88a2e;
-  --color-wattle-gold: #d4a84b;
-  --color-waratah-red-lightest: #e08a7d;
-  --color-waratah-red-light: #d27364;
-  --color-waratah-red-base: #c45c4b;
-  --color-waratah-red-dark: #a64536;
-  --color-waratah-red-darkest: #873023;
-  --color-waratah-red: #c45c4b;
+  --color-ink-gold-lightest: #e8c77a;
+  --color-ink-gold-light: #e0bd61;
+  --color-ink-gold-base: #d4a84b;
+  --color-ink-gold-dark: #c8983a;
+  --color-ink-gold-darkest: #b88a2e;
+  --color-ink-gold: #d4a84b;
+  --color-solidarity-red-lightest: #e08a7d;
+  --color-solidarity-red-light: #d27364;
+  --color-solidarity-red-base: #c45c4b;
+  --color-solidarity-red-dark: #a64536;
+  --color-solidarity-red-darkest: #873023;
+  --color-solidarity-red: #c45c4b;
   --color-concrete-grey-lightest: #4a433d;
   --color-concrete-grey-light: #3d3632;
   --color-concrete-grey-base: #2c2723;
@@ -51,8 +51,8 @@
   --color-concrete-grey-darkest: #bdb39f;
   --color-concrete-grey: #e6e1d6;
   --color-asphalt-black: #1a1714;
-  --color-wattle-gold: #d4a84b;
-  --color-waratah-red: #c45c4b;
+  --color-ink-gold: #d4a84b;
+  --color-solidarity-red: #c45c4b;
   --color-concrete-grey: #2c2723;
   --color-concrete-grey: #e6e1d6;
   --color-paper-white: #f0ead6;
@@ -306,7 +306,7 @@
       'SOFT' 100,
       'WONK' 1,
       'wght' 700;
-    color: var(--color-wattle-gold);
+    color: var(--color-ink-gold);
   }
 
   /* Bloom Ultra (Hero Moments) - NEW V3.1 */
@@ -316,7 +316,7 @@
       'SOFT' 100,
       'WONK' 1,
       'wght' 800;
-    color: var(--color-wattle-gold);
+    color: var(--color-ink-gold);
   }
 
   /* Bloom Editorial (Light) - NEW V3.1 */
@@ -442,7 +442,7 @@
     font-weight: 700;
     transform: rotate(-3deg);
     display: inline-block;
-    color: var(--color-waratah-red);
+    color: var(--color-solidarity-red);
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   }
 
@@ -455,7 +455,7 @@
 
   .hero-layered-shadow {
     text-shadow:
-      2px 2px 0px var(--color-wattle-gold-dark),
+      2px 2px 0px var(--color-ink-gold-dark),
       4px 4px 0px rgba(0, 0, 0, 0.3);
   }
 
@@ -470,13 +470,13 @@
     font-weight: 900;
   }
 
-  .shadow-wattle-offset {
-    text-shadow: 2px 2px 0px var(--color-wattle-gold);
+  .shadow-ink-offset {
+    text-shadow: 2px 2px 0px var(--color-ink-gold);
   }
 
-  .shadow-layered-wattle {
+  .shadow-layered-ink {
     text-shadow:
-      2px 2px 0px var(--color-wattle-gold),
+      2px 2px 0px var(--color-ink-gold),
       4px 4px 0px rgba(0, 0, 0, 0.5);
   }
 
@@ -490,7 +490,7 @@
   }
 
   .text-outline-medium {
-    -webkit-text-stroke: 2px var(--color-wattle-gold);
+    -webkit-text-stroke: 2px var(--color-ink-gold);
     color: transparent;
   }
 
@@ -520,7 +520,7 @@
       'WONK' 1,
       'wght' 600;
     color: #d4a84b;
-    /* Wattle Gold */
+    /* Ink Gold */
     transform: rotate(4deg);
     position: absolute;
     /* Positioning is context-dependent — set top/left/right per usage */

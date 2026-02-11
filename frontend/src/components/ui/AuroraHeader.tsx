@@ -11,7 +11,7 @@ interface AuroraHeaderProps {
  * AuroraHeader - KeralaRage KrSolidarity Parametric Header
  * 
  * Features:
- * - Tri-color gradient text (Wattle Gold → Waratah Red → Concrete Grey)
+ * - Tri-color gradient text (Ink Gold → Solidarity Red → Concrete Grey)
  * - Shimmer animation on hover
  * - Variable font axis animation (Fraunces 'SOFT' and 'WONK')
  * - Optional tag and witty subtitle
@@ -67,7 +67,7 @@ export const AuroraHeader: React.FC<AuroraHeaderProps> = ({
                     className="bg-clip-text text-transparent"
                     style={{
                         backgroundImage: 'linear-gradient(135deg, #D4A84B 0%, #C45C4B 50%, #A8A097 100%)',
-                        // Wattle Gold → Waratah Red → Concrete Grey
+                        // Ink Gold → Solidarity Red → Concrete Grey
                         backgroundSize: '200% 200%',
                     }}
                     animate={{
@@ -103,7 +103,7 @@ export const AuroraHeader: React.FC<AuroraHeaderProps> = ({
                     style={{
                         fontFamily: "'Fraunces', serif",
                         fontVariationSettings: "'wght' 400, 'SOFT' 100, 'WONK' 1",
-                        color: '#C45C4B', // Waratah Red
+                        color: '#C45C4B', // Solidarity Red
                     }}
                 >
                     {wittySubtitle}

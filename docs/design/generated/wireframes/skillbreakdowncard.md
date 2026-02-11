@@ -5,7 +5,7 @@
 +-----------------------------------------------------------+
 |                                                           |
 |     (HALO DISK)           "88% SOLIDARITY SCORE"          |
-|     [Score Gauge]         (Display Large, Baru Gold)      |
+|     [Score Gauge]         (Display Large, Ink Gold)      |
 |                                                           |
 |     +-----------------------------------------------+     |
 |     |  TECH PROFICIENCY: 92% (Mono, 12px)           |     |
@@ -22,7 +22,7 @@
 
 <tokens>
 - **Container**: `bg-charcoal`, `radius-stone`, `p-8`
-- **Gauge**: `accent-baru-gold`, `shadow-glow-wattle`
+- **Gauge**: `accent-ink-gold`, `shadow-glow-ink`
 - **Text**: `text-paper-white`, `font-jetbrains-mono` for data.
 - **Grid**: `{kr-asset-blueprint-grid}` at 8% opacity.
 </tokens>
@@ -34,9 +34,9 @@
 </accessibility>
 
 <states>
-- **Loading**: Gauge spinning/looping with Baru Gold trail.
+- **Loading**: Gauge spinning/looping with Ink Gold trail.
 - **Empty**: Skeleton grid with "AWAITING INGESTION" label.
-- **Error**: "Audit Integrity Failure" in Waratah Red with shake.
+- **Error**: "Audit Integrity Failure" in Solidarity Red with shake.
 </states>
 
 <assets>

@@ -14,8 +14,8 @@
 ## Color
 - **Substrate**: `bg-asphalt-black`.
 - **Columns**: `bg-asphalt-black/40`, `border-white/5`.
-- **Active Card**: `border-wattle-gold`, `shadow-wattle-glow`.
-- **Column Accents**: Status-specific colored labels (`ghost-gum` for resolved, `waratah-red` for blocked).
+- **Active Card**: `border-ink-gold`, `shadow-ink-glow`.
+- **Column Accents**: Status-specific colored labels (`solidarity-green` for resolved, `solidarity-red` for blocked).
 
 ## Spacing
 - **Column Gap**: `gap-6`.

@@ -43,16 +43,16 @@ export const KeralaRageButton = React.forwardRef<HTMLButtonElement, KeralaRageBu
     const variantStyles: any = {
       primary: {
         'KrDark': {
-          background: 'bg-wattle-gold',
+          background: 'bg-ink-gold',
           text: 'text-primary-on-primary',
-          hover: 'hover:bg-primary-wattle-glow',
+          hover: 'hover:bg-primary-ink-glow',
           shadow: 'shadow-sm hover:shadow-[var(--elevation-shadow-glow-gold)]',
           border: '',
         },
         'KrLight': { // Assuming kr-light exists or use KrDark as fallback
-          background: 'bg-wattle-gold',
+          background: 'bg-ink-gold',
           text: 'text-primary-on-primary',
-          hover: 'hover:bg-primary-wattle-glow',
+          hover: 'hover:bg-primary-ink-glow',
           shadow: 'shadow-sm hover:shadow-[var(--elevation-shadow-hover)]',
           border: '',
         },
@@ -75,11 +75,11 @@ export const KeralaRageButton = React.forwardRef<HTMLButtonElement, KeralaRageBu
       },
       tertiary: {
         'KrDark': {
-          background: 'bg-tertiary-waratah-container',
-          text: 'text-tertiary-waratah-red',
-          hover: 'hover:bg-tertiary-waratah-red hover:text-on-surface-paper-white',
+          background: 'bg-tertiary-solidarity-container',
+          text: 'text-tertiary-solidarity-red',
+          hover: 'hover:bg-tertiary-solidarity-red hover:text-on-surface-paper-white',
           shadow: 'shadow-sm',
-          border: 'border border-tertiary-waratah-red',
+          border: 'border border-tertiary-solidarity-red',
         },
         'KrLight': {
           background: 'bg-status-KrDark-clinical-alert-container',

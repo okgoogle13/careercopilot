@@ -20,7 +20,7 @@
 </layout>
 
 <tokens>
-- **Ink**: `baruGold` (Category Labels), `kr-leafusAsh` (Substance)
+- **Ink**: `inkGold` (Category Labels), `worker-ash` (Substance)
 - **Shapes**: `radius-stone` (Group Wrapper), `radius-pebble` (Toggles)
 - **Typography**: `Headline` (48px, Sora)
 </tokens>
@@ -41,10 +41,10 @@
 </components>
 
 <annotations>
-1 | toggle_logic       | Action: onClick → PATCH /api/settings; State: on (baruGold), off (ash).
+1 | toggle_logic       | Action: onClick → PATCH /api/settings; State: on (inkGold), off (ash).
 2 | input_validation   | Action: onBlur → validate; State: default, focus, error.
-3 | section_header     | Style: uppercase Sora; Color: baruGold; Border-Bottom: 1px leafusAsh.
-4 | reset_btn          | Action: onClick → confirm → revert all; Style: radius-pebble; Border: 1px waratahRed.
+3 | section_header     | Style: uppercase Sora; Color: inkGold; Border-Bottom: 1px activistAsh.
+4 | reset_btn          | Action: onClick → confirm → revert all; Style: radius-pebble; Border: 1px solidarityRed.
 </annotations>
 
 <notes>

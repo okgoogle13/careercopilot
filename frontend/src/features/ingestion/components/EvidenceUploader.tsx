@@ -53,8 +53,8 @@ export const EvidenceUploader: React.FC = () => {
       className="p-0 border-2 border-dashed border-[var(--color-concrete-grey-base)]/30 bg-transparent overflow-hidden"
     >
       <div className="p-6 flex items-center gap-4">
-        <div className="w-12 h-12 rounded-full bg-[var(--color-wattle-gold)]/10 flex items-center justify-center">
-          <UploadCloud className="w-6 h-6 text-[var(--color-wattle-gold)]" />
+        <div className="w-12 h-12 rounded-full bg-[var(--color-ink-gold)]/10 flex items-center justify-center">
+          <UploadCloud className="w-6 h-6 text-[var(--color-ink-gold)]" />
         </div>
         <div className="flex-grow">
           <h3 className="font-bloom text-lg font-bold text-[var(--color-paper-white)]">

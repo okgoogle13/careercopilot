@@ -18,9 +18,9 @@
 - **Substrate**: `bg-asphalt-black`.
 - **Metrics**: 
   - Neutral: `paper-white`
-  - Warning/Alignment: `wattle-gold`
-  - Ready/Mission: `waratah-red`
-  - Success/Score: `ghost-gum`
+  - Warning/Alignment: `ink-gold`
+  - Ready/Mission: `solidarity-red`
+  - Success/Score: `solidarity-green`
 - **Cards**: `bg-asphalt-black`, `border-white/5`, `shadow-viscous`.
 
 ## Spacing

@@ -45,7 +45,7 @@ export const LoginCard: React.FC<LoginCardProps> = ({
     <div className="relative group">
       {/* Halo Disk Radiance */}
       <div className={cn(
-        "absolute inset-0 -z-10 bg-baru-gold/20 blur-3xl rounded-full scale-150 transition-opacity",
+        "absolute inset-0 -z-10 bg-ink-gold/20 blur-3xl rounded-full scale-150 transition-opacity",
         isLoading ? "animate-pulse opacity-60" : "opacity-0 group-hover:opacity-40"
       )} />
 
@@ -79,7 +79,7 @@ export const LoginCard: React.FC<LoginCardProps> = ({
               onChange={(e) => setEmail(e.target.value)}
               className={cn(
                 "w-full bg-black/40 border border-blueprint-grey/20 p-4 rounded-slab",
-                "text-paper-white font-jetbrains-mono focus:border-baru-gold focus:outline-none transition-colors"
+                "text-paper-white font-jetbrains-mono focus:border-ink-gold focus:outline-none transition-colors"
               )}
               required
             />
@@ -95,7 +95,7 @@ export const LoginCard: React.FC<LoginCardProps> = ({
               onChange={(e) => setPassword(e.target.value)}
               className={cn(
                 "w-full bg-black/40 border border-blueprint-grey/20 p-4 rounded-slab",
-                "text-paper-white font-jetbrains-mono focus:border-baru-gold focus:outline-none transition-colors"
+                "text-paper-white font-jetbrains-mono focus:border-ink-gold focus:outline-none transition-colors"
               )}
               required
             />
@@ -107,7 +107,7 @@ export const LoginCard: React.FC<LoginCardProps> = ({
           whileTap={{ scale: 0.98 }}
           type="submit"
           className={cn(
-            "mt-4 py-5 bg-baru-gold text-charcoal font-bold uppercase tracking-[0.2em]",
+            "mt-4 py-5 bg-ink-gold text-charcoal font-bold uppercase tracking-[0.2em]",
             "rounded-pebble shadow-hover-rise text-lg"
           )}
           disabled={isLoading}
@@ -118,7 +118,7 @@ export const LoginCard: React.FC<LoginCardProps> = ({
         <button
           type="button"
           onClick={onRegisterClick}
-          className="text-center text-paper-white/60 font-inter text-sm hover:text-baru-gold transition-colors"
+          className="text-center text-paper-white/60 font-inter text-sm hover:text-ink-gold transition-colors"
         >
           Create Collective ID
         </button>

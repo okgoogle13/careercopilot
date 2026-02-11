@@ -10,7 +10,7 @@
 |  "Update evidence from the workshop"                      |
 |  (Body, 16px, Smoke Green)                                |
 |                                                           |
-|  [ PRIORITY: HIGH ] (Waratah Red)   [ DUE: 4h ]           |
+|  [ PRIORITY: HIGH ] (Solidarity Red)   [ DUE: 4h ]           |
 +-----------------------------------------------------------+
 </layout>
 
@@ -18,7 +18,7 @@
 - **Container**: `bg-charcoal`, `radius-stone`, `shadow-viscous`
 - **Title**: `text-subhead`, `font-solidarity-600`
 - **StatusTag**: `radius-seed`, `bg-blueprint-grey/20`
-- **Priority**: `text-waratah-red`, `font-bold`
+- **Priority**: `text-solidarity-red`, `font-bold`
 </tokens>
 
 <accessibility>
@@ -30,7 +30,7 @@
 <states>
 - **Dragging**: Opacity shifts to 60%; scale increases slightly (1.02); drop preview shows blueprint grid.
 - **Loading**: Pulse throb on the card border.
-- **Error**: "Task Integrity Compromised" in Waratah Red.
+- **Error**: "Task Integrity Compromised" in Solidarity Red.
 </states>
 
 <assets>

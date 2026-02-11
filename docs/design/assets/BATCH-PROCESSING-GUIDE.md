@@ -90,7 +90,7 @@ For complex workflows with per-asset configuration:
     {
       "path": "/downloads/asset-1.png",
       "category": "kr-motifs",
-      "descriptor": "wattle-burst"
+      "descriptor": "ink-burst"
     },
     {
       "path": "s3://bucket/asset-2.png",
@@ -125,7 +125,7 @@ ls /assets/ASSET-*/
 cat /assets/batch-results-*.json | jq .
 
 # 4. Check specific assets
-cat /assets/ASSET-20260211-001-wattle-burst/context.md
+cat /assets/ASSET-20260211-001-ink-burst/context.md
 ```
 
 **Output**:
@@ -189,7 +189,7 @@ ls /assets/batch-results-*.json
 
 | Category | Type | Description |
 |----------|------|-------------|
-| `kr-motifs` | Botanical | Australian endemic flora (wattle, leaves, etc.) |
+| `kr-motifs` | Botanical | Australian endemic flora (ink, leaves, etc.) |
 | `textures` | Background | Lab aesthetic, meshes, overlays |
 | `patterns` | Seamless | Tile-able patterns for backgrounds |
 | `backgrounds` | Hero | Full-screen atmospheric backgrounds |
@@ -220,7 +220,7 @@ After batch processing, files are organized as:
 
 ```
 /assets/
-├── ASSET-20260211-001-wattle-burst/
+├── ASSET-20260211-001-ink-burst/
 │   ├── context.md (narrative + kr-motifs)
 │   ├── tokens.json (design tokens)
 │   ├── usage.md (CSS + responsive)
@@ -242,7 +242,7 @@ After batch processing, files are organized as:
 
 /frontend/public/assets/
 ├── kr-motifs/
-│   ├── kerala-rage-wattle-burst-kr-dark-1024.png
+│   ├── kerala-rage-ink-burst-kr-dark-1024.png
 │   ├── kerala-rage-leaf-canopy-kr-dark-1024.png
 │   └── ... (one per successful asset)
 └── textures/
@@ -410,7 +410,7 @@ SCRIPT
 
 ### ✅ Do
 
-- ✅ Name PNGs descriptively: `wattle-burst.png`, `leaf-canopy.png`
+- ✅ Name PNGs descriptively: `ink-burst.png`, `leaf-canopy.png`
 - ✅ Batch by category: Keep kr-motifs separate from textures
 - ✅ Include README: Document asset sources/notes in ZIP
 - ✅ Review scores: Check compliance before deployment
@@ -434,7 +434,7 @@ SCRIPT
 
 ```
 Dashboard Assets.zip
-├── wattle-burst.png (1024×1024, kr-motif)
+├── ink-burst.png (1024×1024, kr-motif)
 ├── leaf-canopy.png (1024×1024, kr-motif)
 ├── lab-grid.png (512×512, texture overlay)
 ├── night-garden.png (2048×2048, hero background)
@@ -460,7 +460,7 @@ Dashboard Assets.zip
   Failed: 1
 
 batch-results-20260211-043000.json shows:
-  - wattle-burst: 91/100 ✅ PACKAGE
+  - ink-burst: 91/100 ✅ PACKAGE
   - leaf-canopy: 88/100 ⚠️ REGENERATE
   - lab-grid: 94/100 ✅ PACKAGE
   - night-garden: 92/100 ✅ PACKAGE
@@ -489,7 +489,7 @@ cat /assets/ASSET-20260211-002-leaf-canopy/README.md
 ```bash
 # Production files ready:
 ls /frontend/public/assets/kr-motifs/
-# kerala-rage-wattle-burst-kr-dark-1024.png
+# kerala-rage-ink-burst-kr-dark-1024.png
 # kerala-rage-leaf-canopy-kr-dark-1024.png (if regenerated)
 # kerala-rage-lab-grid-kr-dark-512.png
 # kerala-rage-night-garden-kr-dark-2048.png
@@ -508,7 +508,7 @@ export const DashboardHero = () => {
   return (
     <div
       style={{
-        backgroundImage: 'url(/assets/kr-motifs/kerala-rage-wattle-burst-kr-dark-1024.png)',
+        backgroundImage: 'url(/assets/kr-motifs/kerala-rage-ink-burst-kr-dark-1024.png)',
         backgroundSize: 'cover',
         opacity: 0.65  // Gallery mode
       }}

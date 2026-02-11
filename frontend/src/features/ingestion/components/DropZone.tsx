@@ -111,7 +111,7 @@ export const DropZone: React.FC<DropZoneProps> = ({
                 <>
                     {/* Chaos Script Text */}
                     <motion.p
-                        className="font-vine mb-4 text-4xl text-wattle"
+                        className="font-vine mb-4 text-4xl text-ink"
                         style={{ transform: 'rotate(-3.5deg)' }}
                         animate={{ rotate: [-3.5, -2.5, -3.5] }}
                         transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}

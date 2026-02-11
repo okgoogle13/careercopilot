@@ -14,8 +14,8 @@
 ## Color
 - **Substrate**: `bg-asphalt-black`.
 - **Standard Item**: `bg-asphalt-black/50`, `border-white/5`.
-- **High Priority Item**: `border-waratah-red/40`, `bg-waratah-red/5`.
-- **Selection Accent**: `text-wattle-gold`.
+- **High Priority Item**: `border-solidarity-red/40`, `bg-solidarity-red/5`.
+- **Selection Accent**: `text-ink-gold`.
 
 ## Spacing
 - **Vertical Stack Gap**: `space-y-4`.

@@ -59,7 +59,7 @@ export const EditableField: React.FC<EditableFieldProps> = ({
             iconLeft={<Check className="w-4 h-4" />}
             onClick={handleSave}
             size="md"
-            className="bg-[var(--color-wattle-gold)]/20 text-[var(--color-wattle-gold)] hover:bg-[var(--color-wattle-gold)] hover:text-white"
+            className="bg-[var(--color-ink-gold)]/20 text-[var(--color-ink-gold)] hover:bg-[var(--color-ink-gold)] hover:text-white"
             aria-label="save"
           />
           <Pebble
@@ -82,8 +82,8 @@ export const EditableField: React.FC<EditableFieldProps> = ({
         </div>
 
         {suggestion && (
-          <div className="mt-4 p-3 bg-[var(--color-wattle-gold)]/5 border border-[var(--color-wattle-gold)]/10 rounded-stone">
-            <p className="text-xs text-[var(--color-wattle-gold)]/70 italic leading-relaxed">
+          <div className="mt-4 p-3 bg-[var(--color-ink-gold)]/5 border border-[var(--color-ink-gold)]/10 rounded-stone">
+            <p className="text-xs text-[var(--color-ink-gold)]/70 italic leading-relaxed">
               💡 Concept: {suggestion}
             </p>
           </div>
@@ -94,12 +94,12 @@ export const EditableField: React.FC<EditableFieldProps> = ({
 
   return (
     <div
-      className="group mb-4 p-4 rounded-pebble bg-white/5 border border-white/5 hover:border-[var(--color-wattle-gold)]/30 hover:bg-white/10 transition-all duration-300 cursor-pointer"
+      className="group mb-4 p-4 rounded-pebble bg-white/5 border border-white/5 hover:border-[var(--color-ink-gold)]/30 hover:bg-white/10 transition-all duration-300 cursor-pointer"
       onClick={() => setIsEditing(true)}
     >
       <div className="flex justify-between items-start gap-4">
         <div className="flex-1">
-          <span className="text-[9px] uppercase tracking-widest text-[var(--color-concrete-grey-dark)] mb-1 block group-hover:text-[var(--color-wattle-gold)] transition-colors">
+          <span className="text-[9px] uppercase tracking-widest text-[var(--color-concrete-grey-dark)] mb-1 block group-hover:text-[var(--color-ink-gold)] transition-colors">
             {label}
           </span>
           <p
@@ -112,7 +112,7 @@ export const EditableField: React.FC<EditableFieldProps> = ({
             )}
           </p>
         </div>
-        <Edit className="w-4 h-4 text-[var(--color-concrete-grey-dark)] opacity-30 group-hover:opacity-100 group-hover:text-[var(--color-wattle-gold)] transition-all" />
+        <Edit className="w-4 h-4 text-[var(--color-concrete-grey-dark)] opacity-30 group-hover:opacity-100 group-hover:text-[var(--color-ink-gold)] transition-all" />
       </div>
     </div>
   );

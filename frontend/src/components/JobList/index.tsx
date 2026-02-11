@@ -77,7 +77,7 @@ export const JobList: React.FC<JobListProps> = ({
                 {job.tags.map(tag => (
                   <span
                     key={tag}
-                    className="px-3 py-1 bg-parrot-green/10 text-parrot-green text-xs font-bold uppercase rounded-seed border border-parrot-green/20"
+                    className="px-3 py-1 bg-signal-green/10 text-signal-green text-xs font-bold uppercase rounded-seed border border-signal-green/20"
                   >
                     {tag}
                   </span>

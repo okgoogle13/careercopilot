@@ -50,7 +50,7 @@ export const ManifestoSlab: React.FC<ManifestoSlabProps> = ({
         ease: [0.34, 1.56, 0.64, 1]
       }}
       className={cn(
-        'bg-asphalt-black border-waratah-red/20 border-l-[6px] p-10 md:p-16',
+        'bg-asphalt-black border-solidarity-red/20 border-l-[6px] p-10 md:p-16',
         'rounded-sm relative overflow-hidden z-20',
         'shadow-elevated',
         className
@@ -64,7 +64,7 @@ export const ManifestoSlab: React.FC<ManifestoSlabProps> = ({
       <div className="relative z-10 flex flex-col gap-4">
         {subtitle && (
           <span 
-            className="font-curator text-waratah-red text-2xl rotate-quirky-ccw"
+            className="font-curator text-solidarity-red text-2xl rotate-quirky-ccw"
             aria-hidden="true"
           >
             {subtitle}

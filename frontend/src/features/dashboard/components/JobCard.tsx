@@ -25,7 +25,7 @@ export const JobCard: React.FC<JobCardProps> = ({
             case 'offer':
                 return 'bg-sage text-surface';
             case 'interview':
-                return 'bg-wattle text-surface';
+                return 'bg-ink text-surface';
             case 'rejected':
                 return 'bg-terracotta text-white';
             default:
@@ -35,7 +35,7 @@ export const JobCard: React.FC<JobCardProps> = ({
 
     const getMatchBadgeColor = () => {
         if (matchScore >= 80) return 'bg-sage text-surface';
-        if (matchScore >= 60) return 'bg-wattle text-surface';
+        if (matchScore >= 60) return 'bg-ink text-surface';
         return 'bg-terracotta text-white';
     };
 

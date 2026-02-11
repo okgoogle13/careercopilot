@@ -41,12 +41,12 @@ This report summarizes the sanity check for the "The Workshop" component set (`U
   - Viscous transition on divider hover.
 - **Styling**: 
   - `bg-asphalt-black` base.
-  - `wattle-gold` accent on the divider handle.
+  - `ink-gold` accent on the divider handle.
   - blueprint-grid background (Z-0) ready for creator/analytical context.
 
 ## Design System Alignment
 - **Primitives**: Adhered to Stone (containers) and specialized Slab layouts.
-- **Tokens**: Colors synchronized with `tokens.json` via Tailwind mappings (`asphalt-black`, `wattle-gold`, `waratah-red`).
+- **Tokens**: Colors synchronized with `tokens.json` via Tailwind mappings (`asphalt-black`, `ink-gold`, `solidarity-red`).
 - **Typography**: `solidarity` (Fraunces Restrained) for column headers, `direct-action` for badges.
 
 ## "Good Enough for Reuse" Checklist

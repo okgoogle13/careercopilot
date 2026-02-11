@@ -21,7 +21,7 @@ type UploadStage = 'idle' | 'uploading' | 'extracting' | 'processing' | 'embeddi
  * ✓ ASSET-08 Verification Stamp Integration
  * ✓ Texture-KrDark-Paper White overlay
  * ✓ Skeleton Etch Motif metaphors
- * ✓ Clinical palette restricted to Obsidian/Paper White/Wattle
+ * ✓ Clinical palette restricted to Obsidian/Paper White/Ink
  */
 export const IngestionPage: React.FC = () => {
   const { submitDocuments, updateCareerDatabase, isLoading, error } = useCareerIngestion();
@@ -132,7 +132,7 @@ export const IngestionPage: React.FC = () => {
               <img
                 src={naturesClockwork}
                 alt="Verified"
-                className="w-full h-full object-contain rounded-full border-4 border-wattle-gold"
+                className="w-full h-full object-contain rounded-full border-4 border-ink-gold"
               />
             </motion.div>
           )}
@@ -140,9 +140,9 @@ export const IngestionPage: React.FC = () => {
 
         {/* Header: Clinical Focus */}
         <header className="text-center mb-12">
-          <div className="w-24 h-24 bg-wattle-gold/5 rounded-stone flex items-center justify-center mx-auto mb-6 border border-wattle-gold/10 relative">
-            <div className="absolute inset-0 animate-pulse border border-wattle-gold/5 rounded-stone scale-110" />
-            <Microscope className="w-12 h-12 text-wattle-gold" />
+          <div className="w-24 h-24 bg-ink-gold/5 rounded-stone flex items-center justify-center mx-auto mb-6 border border-ink-gold/10 relative">
+            <div className="absolute inset-0 animate-pulse border border-ink-gold/5 rounded-stone scale-110" />
+            <Microscope className="w-12 h-12 text-ink-gold" />
           </div>
           <h1 className="text-5xl font-bloom font-bold text-paper-white tracking-tighter uppercase">
             KrMotif Ingestion
@@ -187,7 +187,7 @@ export const IngestionPage: React.FC = () => {
 
         {/* KrDark Technical Audit */}
         <div className="mt-12 p-6 bg-asphalt-black/40 rounded-stone border border-concrete-grey/10 flex gap-5">
-          <Microscope className="w-8 h-8 text-wattle-gold/40 shrink-0" />
+          <Microscope className="w-8 h-8 text-ink-gold/40 shrink-0" />
           <p className="font-field-note text-[11px] text-paper-white/50 leading-relaxed italic">
             <strong className="text-paper-white font-annotation uppercase tracking-wider not-italic">
               Clinical Audit:
