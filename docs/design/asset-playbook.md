@@ -77,22 +77,50 @@ The Kerala Rage system draws from **screenprint poster culture**, **wheat‑past
 
 ---
 
-## 4. AI Generation Playbook
+## 4. AI Generation Playbook (Gemini Nano)
 
-### Tooling
-- **Primary:** Gemini Nano / Banana Pro
-- **Optional:** DALL·E (1–2 hero composite portraits only, heavy curation)
+### Tooling & Optimization
+- **Primary:** Gemini 2.0 Flash / Pro (The "Hero Engine").
+- **Strategy:** Modular, structured prompts. Avoid narrative; use technical layer declarations.
+- **Rules:** 
+  1. Repeat constraints explicitly in every batch.
+  2. Reserve **35–45% negative space** (upper-left) for UI typography.
+  3. Embed export metadata directly in the prompt.
 
-### Generation Order
-1. Shiva (Anchors)
-2. Kerala Symbols
-3. System Abstracts & Textures
-4. Australian Context & Solidarity
-5. Resistance Portraits
+### Layer Generation Order
+1. **Substrate** (Base) -> 2. **Atmospheric** (Overlay) -> 3. **Cultural** (Mid) -> 4. **Anchor** (Foreground).
 
 ---
 
-## 5. Master Prompt Library (DHS Enabled)
+## 5. The Hero Engine (Layered Composition)
+
+To generate high-fidelity hero compositions, follow this structured template.
+
+### Production Template
+```text
+PROJECT: Kerala Rage – kr-solidarity (v6.0)
+STYLE: Screenprint illustration, Melbourne street texture.
+EXECUTION: Dark-only, English-only. NO gradients. NO bureaucracy.
+
+LAYER ORDER (bottom to top):
+1. Substrate: [Select from Manifest: Charcoal Paper / Laneway]
+2. Atmospheric: [Select from Manifest: Abstract Solidarity / Paint Splash]
+3. Cultural (Optional): [Select: Kerala Landscape / Elephant]
+4. Foreground Anchor: [Select: Shiva / Bhagat Singh / Tipu Sultan]
+
+COMPOSITION RULES:
+- Max 1 spiritual anchor OR 1 resistance portrait per image.
+- Preserve 40% negative space in upper-left quadrant.
+- Base Color: #1A1714 | Accent: #C84032 (Red), #D4A84B (Gold).
+```
+
+### Variant Strategies
+- **Devotional Hero:** foreground: Shiva Statue. Atmospheric opacity: 20%.
+- **Resistance Hero:** foreground: Bhagat Singh/Tipu Sultan. Street assets (placards) allowed in mid-layer.
+
+---
+
+## 6. Master Prompt Library (DHS Enabled)
 
 ### GLOBAL PREFIX (Prepend to EVERY prompt)
 ```
@@ -193,10 +221,11 @@ Protest placard reading "ALWAYS WAS ALWAYS WILL BE". Raw paint strokes, urgent l
 
 ---
 
-## 6. Final Acceptance Test
-1. Does this feel **found**, not designed?
-2. Would it belong on a wall at night?
-3. Is it **dark-only** and **English-only**?
-4. Does it match its **Filename and Export Path** exactly?
+## 7. Final Acceptance Test
+1. Does this feel **found** (street-paste), not designed?
+2. Is the **negative space** preserved for typography?
+3. Does it follow the **Substrate > Mid > Foreground** layer logic?
+4. Is it **dark-only** and **English-only**?
+5. Does it match its **Filename and Export Path** exactly?
 
 If yes → **Accept**. If no → **Regenerate**.

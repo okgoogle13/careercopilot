@@ -3,7 +3,7 @@
 **Document ID:** DOC-002-ARCH
 **Version:** 2.0 (kerala-rage kr-solidarity Edition)
 **Status:** DEFINITIVE
-**Context:** The mechanical underpinnings of the Field Station. How the "kr-dark" (Frontend) talks to the "Archive" (Backend) and the "Naturalist" (AI).
+**Context:** The mechanical underpinnings of the Field Station. How the "kr-dark" (Frontend) talks to the "Archive" (Backend) and the "[DEPRECATED_STYLE]" (AI).
 
 ---
 
@@ -21,7 +21,7 @@ We employ a **Hybrid Intelligence Architecture**:
     *   *Role:* Persistence, Auth, Real-time subscriptions.
     *   *Schema:* Relational (Users, Resumes, Analyses).
 
-*   **The Naturalist (AI Engine):** *Google Genkit + Gemini 1.5 Pro.*
+*   **The [DEPRECATED_STYLE] (AI Engine):** *Google Genkit + Gemini 1.5 Pro.*
     The intelligence that dissects the kr-motifs.
     *   *Role:* Resume Parsing, Gap Analysis, Career Strategy.
     *   *Deployment:* Cloud Run (Serverless).

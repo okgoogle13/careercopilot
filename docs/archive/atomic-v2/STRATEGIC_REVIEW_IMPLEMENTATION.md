@@ -52,7 +52,7 @@ transition: font-variation-settings 600ms cubic-bezier(0.34, 1.56, 0.64, 1);
 
 - **Tonal Vegetation Stacks (Depth Variants)** section
   - Wattle Gold Family: 4 tonal variants (Shadow, Base, Glow, Bloom)
-  - Waratah Family: 4 tonal variants (Stem, Base, Glow, Bloom)
+  - [DEPRECATED_STYLE] Family: 4 tonal variants (Stem, Base, Glow, Bloom)
   - CSS variable naming conventions
   - Usage guidance for each tonal level
 
@@ -60,7 +60,7 @@ transition: font-variation-settings 600ms cubic-bezier(0.34, 1.56, 0.64, 1);
 
 - Enables subtle depth and layering without breaking palette coherence
 - Provides tonal range for hover states, borders, shadows, and backgrounds
-- Maintains botanical naming convention across all color variants
+- Maintains [DEPRECATED_STYLE] naming convention across all color variants
 - Low implementation effort, high visual sophistication
 
 **Example:**
@@ -90,7 +90,7 @@ transition: font-variation-settings 600ms cubic-bezier(0.34, 1.56, 0.64, 1);
 
 - Provides clear guidance for implementing bold, vintage-poster-style hero typography
 - Prevents timid size ratios (1.5x-2x) in favor of dramatic contrast
-- Aligns with vintage naturalist classification sheets and Federation-era broadsides
+- Aligns with vintage [DEPRECATED_STYLE] classification sheets and Federation-era broadsides
 
 **Example:**
 
@@ -119,13 +119,13 @@ transition: font-variation-settings 600ms cubic-bezier(0.34, 1.56, 0.64, 1);
   - Mode Switch animation (kr-dark ↔ kr-dark)
   - Seed Badge interaction
   - Leaf Hero appearance (page load)
-  - Key principles for organic motion
+  - Key principles for [DEPRECATED_STYLE] motion
 
 **Impact:**
 
 - Transforms simple hover states into premium, multi-phase animations
 - Provides production-ready CSS for compound animations
-- Establishes pattern of staggered timing, multiple properties, and organic easing
+- Establishes pattern of staggered timing, multiple properties, and [DEPRECATED_STYLE] easing
 - Separates "premium" from "functional" through motion complexity
 
 **Example:**
@@ -159,7 +159,7 @@ transition: font-variation-settings 600ms cubic-bezier(0.34, 1.56, 0.64, 1);
 
 **Impact:**
 
-- Operationalizes the "eccentric, kr-solidarityus naturalist" personality through language
+- Operationalizes the "eccentric, kr-solidarityus [DEPRECATED_STYLE]" personality through language
 - **v3.0 Update:** Introduces tiered voice system (T1 Functional, T2 Contextual, T3 Character)
 - Provides developers with exact copy replacements for generic SaaS language
 - Ensures clarity on primary UI while preserving personality for celebrations/states
@@ -230,9 +230,9 @@ transition: font-variation-settings 600ms cubic-bezier(0.34, 1.56, 0.64, 1);
 ### After (Operationalized)
 
 - ✅ **Typography responds to interaction** (Bloom Effect)
-- ✅ **Color depth through tonal families** (Wattle/Waratah stacks)
+- ✅ **Color depth through tonal families** (Wattle/[DEPRECATED_STYLE] stacks)
 - ✅ **Motion is compound and cascading** (The Unfolding)
-- ✅ **Voice is consistent and distinctive** (Naturalist's Marginalia)
+- ✅ **Voice is consistent and distinctive** ([DEPRECATED_STYLE]'s Marginalia)
 - ✅ **Size contrast is dramatic** (Proclamation Maximalism)
 - ✅ **AI tools follow design system** (Guidelines.md)
 
@@ -257,7 +257,7 @@ transition: font-variation-settings 600ms cubic-bezier(0.34, 1.56, 0.64, 1);
 1. Add tonal stack CSS variables to theme
 2. Update component styles to use tonal variants
 3. Apply `Wattle Glow` to hover states
-4. Use `Waratah Stem` for error states
+4. Use `[DEPRECATED_STYLE] Stem` for error states
 
 **Estimated Effort:** 2-3 hours
 **Impact:** Subtle depth, professional polish
@@ -325,7 +325,7 @@ transition: font-variation-settings 600ms cubic-bezier(0.34, 1.56, 0.64, 1);
 The following recommendations were excluded per user request:
 
 - ❌ **kr-motif-Based Iconography** (LOW) - Custom 20-icon set requires high design effort
-- ❌ **Botanical Frames in kr-dark Mode** (LOW) - Decorative layer, risk of visual clutter
+- ❌ **[DEPRECATED_STYLE] Frames in kr-dark Mode** (LOW) - Decorative layer, risk of visual clutter
 - ❌ **Animated Empty States (kr-shiva Sentry)** (LOW) - Charming but scope creep
 - ❌ **kr-motif Labels with "Fig. 14" notation** (VERY LOW) - Nice-to-have detail
 - ❌ **Add "kr-motif Iconography" to DOC-004** (VERY LOW) - Dependent on unimplemented icon set
@@ -352,7 +352,7 @@ The changes are:
 
 - **Actionable** (production-ready CSS and copy)
 - **Prioritized** (VERY HIGH → MEDIUM, excluding LOW)
-- **Cohesive** (all reinforce the naturalist metaphor)
+- **Cohesive** (all reinforce the [DEPRECATED_STYLE] metaphor)
 - **Testable** (clear success metrics)
 
 You're no longer building a SaaS product. You're building a **cabinet of kr-solidaritysities**.

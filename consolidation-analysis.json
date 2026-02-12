@@ -842,13 +842,13 @@
     "current_canonical_path": null
   },
   {
-    "filename": "native-waratah-hanging.png",
-    "original_filename": "native-waratah-hanging.png",
+    "filename": "native-[DEPRECATED_STYLE]-hanging.png",
+    "original_filename": "native-[DEPRECATED_STYLE]-hanging.png",
     "hash": "0f914bcbe37a7230832d2bbc3d8c3d62",
     "action": "MOVE",
-    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/uncategorized/native-waratah-hanging.png",
+    "destination": "/Users/okgoogle13/Desktop/careercopilot/assets/uncategorized/native-[DEPRECATED_STYLE]-hanging.png",
     "sources": [
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/public/assets/kr-motifs/native-waratah-hanging.png"
+      "/Users/okgoogle13/Desktop/careercopilot/frontend/public/assets/kr-motifs/native-[DEPRECATED_STYLE]-hanging.png"
     ],
     "source_labels": [
       "LEGACY_PUBLIC"

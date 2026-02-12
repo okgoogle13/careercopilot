@@ -126,7 +126,7 @@ def parse_audit_scores(audit_data: Dict[str, Any]) -> Dict[str, float]:
             "typography": None,
             "color": None,
             "layout": None,
-            "botanical": None,
+            "[DEPRECATED_STYLE]": None,
         }
 
     def status_to_score(status: str) -> float:
@@ -152,7 +152,7 @@ def parse_audit_scores(audit_data: Dict[str, Any]) -> Dict[str, float]:
         "typography": status_to_score(dimensions.get("typography", {}).get("status")),
         "color": status_to_score(dimensions.get("color", {}).get("status")),
         "layout": status_to_score(dimensions.get("layout", {}).get("status")),
-        "botanical": status_to_score(dimensions.get("botanical_elements", {}).get("status")),
+        "[DEPRECATED_STYLE]": status_to_score(dimensions.get("botanical_elements", {}).get("status")),
     }
 
 
@@ -241,7 +241,7 @@ def generate_needs(
         needs.append("needs_color_fix")
     if scores["layout"] is not None and scores["layout"] < 0.8:
         needs.append("needs_layout_refine")
-    if scores["botanical"] is not None and scores["botanical"] < 0.7:
+    if scores["[DEPRECATED_STYLE]"] is not None and scores["[DEPRECATED_STYLE]"] < 0.7:
         needs.append("needs_botanical_integration")
 
     # Migration needs
@@ -311,7 +311,7 @@ def compute_summary(components: List[Dict[str, Any]]) -> Dict[str, Any]:
             "typography": 0.0,
             "color": 0.0,
             "layout": 0.0,
-            "botanical": 0.0,
+            "[DEPRECATED_STYLE]": 0.0,
             "migration": 0.0,
             "generated_at": datetime.now(timezone.utc).isoformat(),
         }
@@ -328,7 +328,7 @@ def compute_summary(components: List[Dict[str, Any]]) -> Dict[str, Any]:
     typography = avg_score("typography")
     color = avg_score("color")
     layout = avg_score("layout")
-    botanical = avg_score("botanical")
+    [DEPRECATED_STYLE] = avg_score("[DEPRECATED_STYLE]")
 
     # Migration: % of non-M3* named components
     m3_count = sum(1 for c in components if c["name"].startswith("M3"))
@@ -339,7 +339,7 @@ def compute_summary(components: List[Dict[str, Any]]) -> Dict[str, Any]:
         "typography": round(typography, 2),
         "color": round(color, 2),
         "layout": round(layout, 2),
-        "botanical": round(botanical, 2),
+        "[DEPRECATED_STYLE]": round([DEPRECATED_STYLE], 2),
         "migration": round(migration, 2),
         "generated_at": datetime.now(timezone.utc).isoformat(),
     }
@@ -373,7 +373,7 @@ def format_human(summary: Dict[str, Any], components: List[Dict[str, Any]]) -> s
         "Typography": summary["typography"],
         "Color": summary["color"],
         "Layout": summary["layout"],
-        "Botanical": summary["botanical"],
+        "[DEPRECATED_STYLE]": summary["[DEPRECATED_STYLE]"],
         "Migration": summary["migration"],
     }
     for dim_name, score in dims.items():

@@ -26,7 +26,7 @@ def prepare_batch_payload(image_paths, manifest_path):
         "analysis_requirements": [
             "subject_identification",
             "mode_classification (gallery/laboratory/both)",
-            "category_assignment (plate/fauna/texture/specimen/ui)",
+            "category_assignment (plate/fauna/texture/[DEPRECATED_STYLE]/ui)",
             "doc008_gap_matching",
             "size_estimation",
             "color_palette_extraction"

@@ -71,7 +71,7 @@ C. Magic: Syne (The Expressive Moment)
     •	color: var(--tertiary); /* Pink */
     •
 
-2. Shape System (Organic & Asymmetric)
+2. Shape System ([DEPRECATED_STYLE] & Asymmetric)
 
 We move away from standard rectangles to distinct shapes that tell the user what is "System" and what is "AI."
 Token

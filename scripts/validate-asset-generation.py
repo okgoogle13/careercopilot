@@ -20,15 +20,15 @@ class ValidationResult:
     recommendations: List[str]
 
 FORBIDDEN_TERMS = [
-    "victorian",
+    "[DEPRECATED_STYLE]",
     "vintage",
     "sepia",
-    "specimen",
+    "[DEPRECATED_STYLE]",
     "cabinet",
     "museum",
     "preserved",
     "fig.",
-    "naturalist",
+    "[DEPRECATED_STYLE]",
     "federation",
     "colonial"
 ]

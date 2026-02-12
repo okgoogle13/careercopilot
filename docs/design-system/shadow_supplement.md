@@ -45,10 +45,10 @@ Shadows are not just depth; they are atmosphere. In the Kerala Rage system, shad
 - **Usage:** Primary buttons, "Call to Action" cards.
 - **Effect:** Hard edge, retro-optimistic.
 
-### Waratah Bleed (Rage/Danger)
+### [DEPRECATED_STYLE] Bleed (Rage/Danger)
 
-- **Token:** `shadow-waratah-bleed`
-- **Value:** `0 0 12px var(--color-waratah-primary)`
+- **Token:** `shadow-[DEPRECATED_STYLE]-bleed`
+- **Value:** `0 0 12px var(--color-[DEPRECATED_STYLE]-primary)`
 - **Usage:** Error inputs, destructive buttons, "Revolution" text.
 - **Effect:** Glowing, radioactive intensity.
 

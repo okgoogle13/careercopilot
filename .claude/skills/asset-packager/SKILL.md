@@ -48,7 +48,7 @@ Narrative philosophy explaining kr-motif choices, geometric principles, mode con
 
 ## Narrative
 
-[kerala-streetprint naturalist discovery story based on kr-motifs]
+[kerala-streetprint [DEPRECATED_STYLE] discovery story based on kr-motifs]
 
 ## kr-motifs
 

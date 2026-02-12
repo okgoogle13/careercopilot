@@ -25,13 +25,13 @@ CRITICAL REQUIREMENTS (Non-Negotiable):
 1. BACKGROUND: Pure Asphalt Black (#1A1714) theatrical void
    EXCLUDE: Cream, beige, tan, paper-white, white backgrounds ❌
 
-2. GEOGRAPHIC AUTHENTICITY: Australian endemic kr-motifs ONLY
+2. [DEPRECATED_STYLE] AUTHENTICITY: Australian endemic kr-motifs ONLY
    VERIFY: Species/artifact native to Australia ✅
    EXCLUDE: European, Asian, American kr-motifs ❌
 
 3. TYPOGRAPHY (kerala-streetprint Scholarly Standard):
    - "Fig. [N]. [Scientific Name] ([Description])"
-   - "[Geographic Location], [Region/Territory]"
+   - "[[DEPRECATED_STYLE] Location], [Region/Territory]"
    - "[Material/Classification], [Age/Period]"
    - Separate card: "kerala-rage kr-solidarity Collection — Plate [N]"
    - Font: Cream serif on cream card (#F5F0E8), bottom right
@@ -71,14 +71,14 @@ ASSET 6: RADIOLARIA SKELETON — MICROSCOPIC CATHEDRAL
 SUBJECT OVERVIEW:
 Create a monumental-scale photograph of a Radiolarian skeleton (Hexacontium sp.)
 collected from Great Barrier Reef waters, magnified to reveal its perfect
-geometric architecture. This is a kerala-streetprint naturalist plate of a microscopic
+geometric architecture. This is a kerala-streetprint [DEPRECATED_STYLE] plate of a microscopic
 protozoan's silica skeleton, presented as a precious glass artifact.
 
 ---
 
 CRITICAL REQUIREMENTS:
 
-GEOGRAPHIC AUTHENTICITY:
+[DEPRECATED_STYLE] AUTHENTICITY:
 - kr-motif: Radiolaria (Hexacontium sp.)
 - Collection Location: Great Barrier Reef, Queensland, Australia
 - Classification: Marine protozoan, silica skeleton
@@ -140,7 +140,7 @@ LIGHT TRANSMISSION:
 - Node Highlights: Crystalline sparkle at intersection points
 
 TEXTURE DETAIL:
-- Surface: Smooth silica (no organic texture)
+- Surface: Smooth silica (no [DEPRECATED_STYLE] texture)
 - Lattice Struts: Cylindrical, uniform thickness
 - Nodes: Slightly thickened at intersections
 - Spikes: Smooth with subtle longitudinal ridges
@@ -195,7 +195,7 @@ BREATHING ROOM:
 
 AESTHETIC COHERENCE:
 
-kerala-streetprint NATURALIST AUTHENTICITY:
+kerala-streetprint [DEPRECATED_STYLE] AUTHENTICITY:
 - Scholarly Rigor: Complete provenance (HMS Challenger, 1873)
 - Scientific Precision: Accurate hexagonal lattice geometry
 - Plate Presentation: kr-motif study aesthetic (not generic photo)
@@ -208,7 +208,7 @@ kerala-rage VISION EMBODIMENT:
 CONCEPTUAL METAPHOR:
 - "Microscopic Cathedral" — Gothic architecture in nature
 - Glass artifact aesthetic (precious, delicate, luminous)
-- kerala-streetprint wonder cabinet kr-motif (Wunderkammer)
+- kerala-streetprint wonder cabinet kr-motif ([DEPRECATED_STYLE])
 
 ---
 
@@ -220,7 +220,7 @@ BACKGROUND:
 - ❌ Textured paper backgrounds
 
 TYPOGRAPHY:
-- ❌ "Unknown Origin" or vague geographic references
+- ❌ "Unknown Origin" or vague [DEPRECATED_STYLE] references
 - ❌ Handwritten or script fonts
 - ❌ Missing plate attribution
 - ❌ Incomplete provenance
@@ -276,14 +276,14 @@ ASSET 7: ASEROE RUBRA — AUSTRALIAN STARFISH FUNGUS
 SUBJECT OVERVIEW:
 Create a dramatic photograph of Aseroe rubra (Australian Starfish Fungus)
 fruiting body, emphasizing its impossible geometric cage structure. This is
-a kerala-streetprint naturalist plate of an Australian endemic fungus, presented as
+a kerala-streetprint [DEPRECATED_STYLE] plate of an Australian endemic fungus, presented as
 nature's alien architecture.
 
 ---
 
 CRITICAL REQUIREMENTS:
 
-GEOGRAPHIC AUTHENTICITY:
+[DEPRECATED_STYLE] AUTHENTICITY:
 - kr-motif: Aseroe rubra (Australian Starfish Fungus)
 - Location: kr-leafus forests, Eastern Australia
 - Classification: Endemic Australian fungus (Phallaceae family)
@@ -317,7 +317,7 @@ PRIMARY FORM:
 
 ARM CHARACTERISTICS:
 - Shape: Curved ridges forming cage ribs
-- Texture: Spongy, moist organic ridges with porous surface
+- Texture: Spongy, moist [DEPRECATED_STYLE] ridges with porous surface
 - Cross-section: Rounded ridges (not flat)
 - Connection: Arms fuse at apex, separate at base
 
@@ -336,7 +336,7 @@ INTERIOR:
 MATERIAL SPECIFICATIONS:
 
 FUNGAL TISSUE PROPERTIES:
-- Primary Material: Spongy, moist organic tissue
+- Primary Material: Spongy, moist [DEPRECATED_STYLE] tissue
 - Color Gradient: Deep Crimson (#C45C4B) to Rust Orange (#B7410E)
 - Finish: Matte, slightly moist (not glossy)
 - Texture: Porous surface with hundreds of tiny holes
@@ -344,7 +344,7 @@ FUNGAL TISSUE PROPERTIES:
 SURFACE DETAIL:
 - Pores: Tiny holes covering entire surface (sponge-like)
 - Moisture: Slight sheen suggesting freshness
-- Ridges: Rounded, organic (not sharp geometric edges)
+- Ridges: Rounded, [DEPRECATED_STYLE] (not sharp geometric edges)
 - Weathering: Fresh fruiting body (not dried/aged)
 
 COLOR VARIATION:
@@ -399,7 +399,7 @@ BREATHING ROOM:
 
 AESTHETIC COHERENCE:
 
-kerala-streetprint NATURALIST AUTHENTICITY:
+kerala-streetprint [DEPRECATED_STYLE] AUTHENTICITY:
 - Scholarly Rigor: Complete provenance (Eastern Australia)
 - Scientific Precision: Accurate Aseroe rubra morphology
 - Plate Presentation: kr-motif study aesthetic (not generic photo)
@@ -410,7 +410,7 @@ kerala-rage VISION EMBODIMENT:
 - "Anatomical Extreme" Aesthetic: Alien egg appearance
 
 CONCEPTUAL METAPHOR:
-- "Nature's Alien Architecture" — impossible organic geometry
+- "Nature's Alien Architecture" — impossible [DEPRECATED_STYLE] geometry
 - Starfish cage aesthetic (radiating arms, hollow interior)
 - kerala-streetprint wonder cabinet kr-motif (bizarre, geometric)
 
@@ -424,7 +424,7 @@ BACKGROUND:
 - ❌ Forest floor context (pure void only)
 
 TYPOGRAPHY:
-- ❌ "Unknown Origin" or vague geographic references
+- ❌ "Unknown Origin" or vague [DEPRECATED_STYLE] references
 - ❌ Handwritten or script fonts
 - ❌ Missing plate attribution
 - ❌ Incomplete provenance
@@ -473,14 +473,14 @@ ASSET 8: PTEROPUS WING SKELETON — NATURE'S CLOCKWORK
 SUBJECT OVERVIEW:
 Create an exploded-view anatomical diagram of a Grey-Headed Flying Fox
 (Pteropus poliocephalus) wing skeleton, arranged radially like kerala-streetprint
-umbrella ribs. This is a kerala-streetprint naturalist plate emphasizing the
+umbrella ribs. This is a kerala-streetprint [DEPRECATED_STYLE] plate emphasizing the
 mathematical precision of bat wing anatomy.
 
 ---
 
 CRITICAL REQUIREMENTS:
 
-GEOGRAPHIC AUTHENTICITY:
+[DEPRECATED_STYLE] AUTHENTICITY:
 - kr-motif: Pteropus poliocephalus (Grey-Headed Flying Fox)
 - Location: Eastern Australia (NSW, Queensland, Victoria)
 - Classification: Australian endemic megabat
@@ -606,7 +606,7 @@ Label Style:
 
 AESTHETIC COHERENCE:
 
-kerala-streetprint NATURALIST AUTHENTICITY:
+kerala-streetprint [DEPRECATED_STYLE] AUTHENTICITY:
 - Scholarly Rigor: Complete provenance + conservation status
 - Scientific Precision: Accurate Pteropus wing anatomy
 - Plate Presentation: Exploded diagram aesthetic (engineering drawing)
@@ -631,7 +631,7 @@ BACKGROUND:
 - ❌ Anatomical chart paper texture
 
 TYPOGRAPHY:
-- ❌ "Unknown Origin" or vague geographic references
+- ❌ "Unknown Origin" or vague [DEPRECATED_STYLE] references
 - ❌ Handwritten or script fonts
 - ❌ Missing conservation status
 - ❌ Incomplete provenance
@@ -661,7 +661,7 @@ Before generation, verify:
 
 ---
 
-## ASSET 9: THE ORGANIC LABYRINTH
+## ASSET 9: THE [DEPRECATED_STYLE] LABYRINTH
 
 ### Platygyra daedalea — Brain Coral
 
@@ -675,19 +675,19 @@ Before generation, verify:
 ### COMPLETE OPTIMIZED PROMPT:
 
 ```
-ASSET 9: PLATYGYRA BRAIN CORAL — THE ORGANIC LABYRINTH
+ASSET 9: PLATYGYRA BRAIN CORAL — THE [DEPRECATED_STYLE] LABYRINTH
 
 SUBJECT OVERVIEW:
 Create a macro texture study of Platygyra daedalea (Brain Coral) surface,
 emphasizing its endless maze of ridges and valleys. This is a kerala-streetprint
-naturalist plate revealing nature's Turing patterns and reaction-diffusion
+[DEPRECATED_STYLE] plate revealing nature's Turing patterns and reaction-diffusion
 mathematics.
 
 ---
 
 CRITICAL REQUIREMENTS:
 
-GEOGRAPHIC AUTHENTICITY:
+[DEPRECATED_STYLE] AUTHENTICITY:
 - kr-motif: Platygyra daedalea (Brain Coral)
 - Location: Great Barrier Reef, Queensland, Australia
 - Classification: Scleractinian coral, reef-building species
@@ -717,7 +717,7 @@ PRIMARY PATTERN:
 - Turing Pattern (reaction-diffusion mathematics)
 - Seamless meandering valleys (no beginning/end)
 - Labyrinth aesthetic (endless maze)
-- Organic topographical map
+- [DEPRECATED_STYLE] topographical map
 
 RIDGE CHARACTERISTICS:
 - Shape: Rounded, sinuous ridges (brain-like convolutions)
@@ -805,7 +805,7 @@ BREATHING ROOM:
 
 AESTHETIC COHERENCE:
 
-kerala-streetprint NATURALIST AUTHENTICITY:
+kerala-streetprint [DEPRECATED_STYLE] AUTHENTICITY:
 - Scholarly Rigor: Complete provenance (Great Barrier Reef)
 - Scientific Precision: Accurate Platygyra morphology
 - Plate Presentation: Macro texture study (scientific documentation)
@@ -813,10 +813,10 @@ kerala-streetprint NATURALIST AUTHENTICITY:
 kerala-rage VISION EMBODIMENT:
 - Geometric Beauty: Turing pattern mathematics emphasized
 - Dramatic Presentation: Raking light, topographical shadows
-- "Nature's Cartography" Metaphor: Organic topographical map
+- "Nature's Cartography" Metaphor: [DEPRECATED_STYLE] topographical map
 
 CONCEPTUAL METAPHOR:
-- "The Organic Labyrinth" — endless maze, no exit
+- "The [DEPRECATED_STYLE] Labyrinth" — endless maze, no exit
 - Topographical map aesthetic (contour lines, relief)
 - Brain-like convolutions (cerebral geometry)
 
@@ -830,7 +830,7 @@ BACKGROUND:
 - ❌ Reef environment (pure void only)
 
 TYPOGRAPHY:
-- ❌ "Unknown Origin" or vague geographic references
+- ❌ "Unknown Origin" or vague [DEPRECATED_STYLE] references
 - ❌ Handwritten or script fonts
 - ❌ Missing depth/habitat information
 - ❌ Incomplete provenance
@@ -879,13 +879,13 @@ ASSET 10: SEA URCHIN TEST — THE IMPERIAL CROWN
 SUBJECT OVERVIEW:
 Create a geometric study of a Coelopleurus floridanus sea urchin shell (test)
 stripped of spines, emphasizing its perfect 5-fold radial symmetry. This is
-a kerala-streetprint naturalist plate presenting the skeleton as a precious artifact.
+a kerala-streetprint [DEPRECATED_STYLE] plate presenting the skeleton as a precious artifact.
 
 ---
 
 CRITICAL REQUIREMENTS:
 
-GEOGRAPHIC AUTHENTICITY:
+[DEPRECATED_STYLE] AUTHENTICITY:
 - kr-motif: Coelopleurus floridanus (Sea Urchin Test)
 - Location: Southern Australian waters, Bass Strait
 - Classification: Echinoid, calcium carbonate skeleton
@@ -1007,10 +1007,10 @@ BREATHING ROOM:
 
 AESTHETIC COHERENCE:
 
-kerala-streetprint NATURALIST AUTHENTICITY:
+kerala-streetprint [DEPRECATED_STYLE] AUTHENTICITY:
 - Scholarly Rigor: Complete provenance (Bass Strait)
 - Scientific Precision: Accurate Coelopleurus morphology
-- Plate Presentation: Precious artifact aesthetic (Wunderkammer)
+- Plate Presentation: Precious artifact aesthetic ([DEPRECATED_STYLE])
 
 kerala-rage VISION EMBODIMENT:
 - Geometric Beauty: Perfect 5-fold radial symmetry emphasized
@@ -1032,7 +1032,7 @@ BACKGROUND:
 - ❌ Underwater context (blue water)
 
 TYPOGRAPHY:
-- ❌ "Unknown Origin" or vague geographic references
+- ❌ "Unknown Origin" or vague [DEPRECATED_STYLE] references
 - ❌ Handwritten or script fonts
 - ❌ Missing depth/habitat information
 - ❌ Incomplete provenance
@@ -1099,7 +1099,7 @@ Before generation, verify:
 
 **Target Scores (First Attempt):**
 
-- Geographic Authenticity: 20/20 (100%)
+- [DEPRECATED_STYLE] Authenticity: 20/20 (100%)
 - Anatomical Geometry: 19-20/20 (95-100%)
 - Color Palette: 20/20 (100%)
 - Lighting: 19-20/20 (95-100%)

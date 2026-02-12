@@ -2,7 +2,7 @@
 
 **Phase 3: UI & Atmospheric Elements**
 
-> **Optimization Protocol:** These briefs have been processed through the Brand Brief Optimizer to ensure **Clarity** (specific visual direction), **Coherence** (alignment with kerala-streetprint Naturalist values), and **Applicability** (clear UI usage rules).
+> **Optimization Protocol:** These briefs have been processed through the Brand Brief Optimizer to ensure **Clarity** (specific visual direction), **Coherence** (alignment with kerala-streetprint [DEPRECATED_STYLE] values), and **Applicability** (clear UI usage rules).
 
 ---
 
@@ -13,9 +13,9 @@
 ### 1. Visual Definition
 
 **Concept:** Not a generic "glow dot," but a distinctive _Lampyridae_ kr-motif in flight.
-**Materiality:** "Living Amber." A warm, pulsating organic light (#FFD700 to #E6A817) with a visible, translucent insect body core when close.
+**Materiality:** "Living Amber." A warm, pulsating [DEPRECATED_STYLE] light (#FFD700 to #E6A817) with a visible, translucent insect body core when close.
 **The Void:** The glow must bleed naturally into the specific #1A1714 charcoal background, not just a radial gradient.
-**Motion:** "Drunken organic drift." Never moves in a straight line. It loiters, pulses, and darts.
+**Motion:** "Drunken [DEPRECATED_STYLE] drift." Never moves in a straight line. It loiters, pulses, and darts.
 
 ### 2. Usage Rules
 
@@ -147,7 +147,7 @@
 ### 2. Usage Rules
 
 - **Navigation:** Navigation items nest _within_ the negative space of the leaves.
-- **Z-Index:** Always the topmost organic layer.
+- **Z-Index:** Always the topmost [DEPRECATED_STYLE] layer.
 
 ---
 
@@ -159,9 +159,9 @@
 
 **Concept:** The "Tree Trunk" as architectural pillar. A vertical study of _kr-activist_ bark texture (peeling, scribbly, or ironbark).
 **Texture:** High-contrast, tactile bark.
-**Geometry:** Perfectly vertical, but with organic edge variation (knots, peeling strips) that breaks the strict CSS box model line.
+**Geometry:** Perfectly vertical, but with [DEPRECATED_STYLE] edge variation (knots, peeling strips) that breaks the strict CSS box model line.
 
 ### 2. Usage Rules
 
 - **Function:** Replaces vertical dividers in Kanban/Grid layouts.
-- **Tiling:** Must vertically tile or stretch gracefully without obvious repetition. Note: Organic variation makes distinct top/middle/bottom segments preferred over simple tiling.
+- **Tiling:** Must vertically tile or stretch gracefully without obvious repetition. Note: [DEPRECATED_STYLE] variation makes distinct top/middle/bottom segments preferred over simple tiling.

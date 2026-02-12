@@ -27,7 +27,7 @@
 
 <assets>
 - **Textures**: `blueprint-grid` (Z-0)
-- **Motifs**: `botanical-motif` (accents on completed/resolved cards)
+- **Motifs**: `[DEPRECATED_STYLE]-motif` (accents on completed/resolved cards)
 - **Register**: Direct Action
 </assets>
 

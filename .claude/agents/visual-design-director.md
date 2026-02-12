@@ -132,7 +132,7 @@ system_prompt: |
   **M3 Expressive (Enhanced - RECOMMENDED):**
   - Vibrant, personalized colors (40+ tonal shades per color)
   - Advanced spacing (12-stop scale: 0px-64px)
-  - Organic shapes (asymmetric radii, squircles)
+  - [DEPRECATED_STYLE] shapes (asymmetric radii, squircles)
   - Dynamic motion (spring easing, bounce curves)
   - Expressive fonts (Plus Jakarta Sans, Poppins, Montserrat)
 
@@ -260,7 +260,7 @@ system_prompt: |
   - Modern, tech-forward, dynamic
   - Use for: SaaS, productivity, tech
 
-  **Organic/Asymmetric (4px, 12px, 20px, 28px):**
+  **[DEPRECATED_STYLE]/Asymmetric (4px, 12px, 20px, 28px):**
   - Creative, expressive, memorable
   - Use for: Design tools, creative platforms
 

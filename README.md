@@ -24,9 +24,9 @@
 
 - **UI System**: kerala-rage Contemporary Australian Design System on top of MUI v5 and Material 3 Expressive
 - **Visual Identity**: Dark UI anchored in Asphalt Black (`#1A1714`) with Paper White (`#F5F0E8`) for high-contrast text
-- **Core Palette**: Wattle Gold (`#D4A84B`) for primary actions, Waratah Red (`#C45C4B`) for urgency, Ochre Earth (`#B8733D`) and Concrete Grey (`#A39B8F`) as structural neutrals, Gum Leaf Green (`#6B7F6E`) as a growth accent
+- **Core Palette**: Wattle Gold (`#D4A84B`) for primary actions, [DEPRECATED_STYLE] Red (`#C45C4B`) for urgency, Ochre Earth (`#B8733D`) and Concrete Grey (`#A39B8F`) as structural neutrals, Gum Leaf Green (`#6B7F6E`) as a growth accent
 - **Tokens**: Centralised in `design-system/tokens.json` and exposed via CSS variables in `design-system/kerala-rage.css` (color, shape, elevation, motion)
-- **Aesthetic**: Peter Drew–influenced street art energy, Material 3 Expressive motion, Australian endemic species as living symbols (kr-shiva, Waratah, kr-flower, kr-leafus), anti‑colonial and contemporary (no kerala-streetprint cabinet / kr-motif framing)
+- **Aesthetic**: Peter Drew–influenced street art energy, Material 3 Expressive motion, Australian endemic species as living symbols (kr-shiva, [DEPRECATED_STYLE], kr-flower, kr-leafus), anti‑colonial and contemporary (no kerala-streetprint cabinet / kr-motif framing)
 
 ### Backend (`/backend`)
 
@@ -132,7 +132,7 @@ Create `.env` files in `backend/` and `frontend/` (see `.env.example`).
 **Design:**
 
 - kerala-rage kr-solidarity M3 Expressive design system
-- Organic shapes (Pebble, Tech archetypes)
+- [DEPRECATED_STYLE] shapes (Pebble, Tech archetypes)
 - Spring motion effects
 - Sage Green + Soft Coral palette
 

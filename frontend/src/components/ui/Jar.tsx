@@ -49,13 +49,13 @@ export interface JarProps {
  * Jar - KeralaRage KrSolidarity Select Dropdown
  *
  * A custom select component using KeralaRage KrSolidarity design tokens with enhanced UX.
- * Features organic shapes, proper elevation, and smooth animations.
+ * Features [DEPRECATED_STYLE] shapes, proper elevation, and smooth animations.
  *
  * **KeralaRage Design Token Usage:**
  * - Shape: `--radius-stone` for select button, `--radius-pebble` for dropdown
  * - Elevation: `--shadow-maximum` for dropdown menu
  * - Motion: Viscous-breeze easing for smooth open/close
- * - Colors: KeralaRage botanical palette (Ink Gold, Solidarity Red)
+ * - Colors: KeralaRage [DEPRECATED_STYLE] palette (Ink Gold, Solidarity Red)
  * - Typography: Field-note font family
  *
  * @example

@@ -4,7 +4,7 @@ This document outlines the standard pipeline for transforming design intent from
 
 ## Overview
 
-The workflow ensures that every component is compliant with the **kerala-rage kr-solidarity** (kerala-streetprint Naturalist) or **M3 Expressive** aesthetic standards, and is fully documented for automated code generation.
+The workflow ensures that every component is compliant with the **kerala-rage kr-solidarity** (kerala-streetprint [DEPRECATED_STYLE]) or **M3 Expressive** aesthetic standards, and is fully documented for automated code generation.
 
 ## Workflow Pipeline
 

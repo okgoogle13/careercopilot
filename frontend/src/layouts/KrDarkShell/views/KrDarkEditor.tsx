@@ -64,7 +64,7 @@ tactics:
     path: "/src/core"
     payload: "optimized-mesh-routing"
     stamina: 0.85
-  - type: "botanical-shift"
+  - type: "[DEPRECATED_STYLE]-shift"
     alignment: "SOLIDARITY_RED"
     
 governance:

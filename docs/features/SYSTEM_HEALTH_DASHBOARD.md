@@ -73,7 +73,7 @@ Build a Quick Win System Health Dashboard to provide centralized visibility into
 - **Performance:** Dashboard loads in < 2s
 - **Reliability:** 30s polling doesn't impact app performance
 - **Accessibility:** WCAG AA compliant
-- **M3 Compliance:** Uses organic shapes and elevation
+- **M3 Compliance:** Uses [DEPRECATED_STYLE] shapes and elevation
 
 ## Acceptance Criteria
 

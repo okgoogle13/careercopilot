@@ -17,7 +17,7 @@ Enforce Material Design 3 Expressive aesthetic standards by detecting and preven
 - ✅ Extreme weight contrasts (100 vs 900, not 400 vs 600) → 3x+ ratio enforced
 - ✅ Spring physics interactions (hover bloom/lift with overshoot easing)
 - ✅ Vibrant semantic tokens (M3 Expressive tones, not baseline)
-- ✅ Organic asymmetry (no mechanical grid, no uniform border-radius)
+- ✅ [DEPRECATED_STYLE] asymmetry (no mechanical grid, no uniform border-radius)
 - ✅ No purple gradients, no generic blue (#2196F3)
 
 ## When to Use
@@ -125,7 +125,7 @@ Scans code for forbidden font families. If found alone (without distinctive disp
 
 - **Typography (25 points)**: Font distinctiveness (no Inter/Roboto alone), weight contrast (3x+ ratio), size contrast (3x+), variable fonts used
 - **Color (25 points)**: Palette vibrancy (M3 Expressive vibrant, not baseline), saturation (40-80%), dominance (not evenly distributed), no purple gradients
-- **Layout (25 points)**: Organic asymmetry (not grid-mechanical), elevation tokens used (dramatic depth), spacing rhythm intentional (varied, not uniform)
+- **Layout (25 points)**: [DEPRECATED_STYLE] asymmetry (not grid-mechanical), elevation tokens used (dramatic depth), spacing rhythm intentional (varied, not uniform)
 - **Motion (25 points)**: Spring physics easing on interactions (cubic-bezier overshoot), hover states with bloom/lift effect, duration tokens applied (50/250/500ms), motion supports clarity
 
 **Grade Scale:**
@@ -156,11 +156,11 @@ M3 Expressive uses semantic tokens at higher saturation than baseline:
 - Dominant color in palette (not evenly distributed)
 - Forbidden: Purple gradients, generic blue (#2196F3)
 
-### 3. Organic Layout
+### 3. [DEPRECATED_STYLE] Layout
 
 No mechanical, grid-aligned layouts:
 
-- Asymmetric shapes (varied border-radius, organic curves)
+- Asymmetric shapes (varied border-radius, [DEPRECATED_STYLE] curves)
 - Intentional spacing rhythm (8px, 16px, 24px, 40px)
 - Dramatic elevation (layered depth, not subtle shadows)
 
@@ -267,7 +267,7 @@ if (validation.aestheticQuality.total < 80) {
 - [ ] Vibrant semantic tokens used (M3 Expressive, not baseline)
 - [ ] Spring physics on hover (cubic-bezier overshoot, not linear)
 - [ ] Bloom/lift effect on interactions (scale + elevation)
-- [ ] Organic asymmetry in shapes (no uniform border-radius)
+- [ ] [DEPRECATED_STYLE] asymmetry in shapes (no uniform border-radius)
 - [ ] Elevation tokens used for dramatic depth (not subtle shadows)
 - [ ] Motion duration tokens applied (50ms, 250ms, 500ms)
 - [ ] Aesthetic quality score ≥ 80 (Grade B minimum)

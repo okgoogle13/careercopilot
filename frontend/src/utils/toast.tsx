@@ -5,7 +5,7 @@ import { CheckCircle, AlertCircle, Info, AlertTriangle } from 'lucide-react';
 /**
  * m3Toast - KeralaRage KrSolidarity Themed Notifications
  * 
- * A wrapper around sonner that applies KrSolidarity design tokens and organic styling.
+ * A wrapper around sonner that applies KrSolidarity design tokens and [DEPRECATED_STYLE] styling.
  */
 export const m3Toast = {
     success: (message: string, description?: string) => {

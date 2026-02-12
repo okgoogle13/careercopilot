@@ -222,7 +222,7 @@ npm run test M3Button
 ### M3 Compliance ✅
 - [x] 98-100% overall compliance
 - [x] All components use design tokens
-- [x] Organic shapes throughout (no symmetric radii)
+- [x] [DEPRECATED_STYLE] shapes throughout (no symmetric radii)
 - [x] M3 elevation system applied
 - [x] Spring motion on all transitions
 - [x] Semantic color usage

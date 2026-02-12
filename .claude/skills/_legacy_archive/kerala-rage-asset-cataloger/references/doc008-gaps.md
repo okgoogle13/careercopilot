@@ -5,7 +5,7 @@ High-priority gaps from wireframe requirements.
 ## Background Textures
 
 ### pattern-kr-wheat-paste
-- **Description**: Full viewport background, botanical silhouettes on dark
+- **Description**: Full viewport background, [DEPRECATED_STYLE] silhouettes on dark
 - **Use**: Background pattern at 18-25% opacity across multiple pages
 - **Mode**: kr-dark
 
@@ -48,17 +48,17 @@ High-priority gaps from wireframe requirements.
 - **Use**: Animated floating elements, 6-16 instances/page
 - **Mode**: kr-dark
 
-### motif-kr-dark-botanical-waratah
-- **Description**: Telopea waratah bloom, red/crimson
+### motif-kr-dark-[DEPRECATED_STYLE]-[DEPRECATED_STYLE]
+- **Description**: Telopea [DEPRECATED_STYLE] bloom, red/crimson
 - **Use**: Page 3 onboarding, top-left corner anchor
 - **Mode**: kr-dark
 
-### motif-kr-dark-botanical-wattle
+### motif-kr-dark-[DEPRECATED_STYLE]-wattle
 - **Description**: Acacia pycnantha spray/branch
 - **Use**: Page 3 bottom-right, extends beyond viewport
 - **Mode**: kr-dark
 
-### motif-kr-dark-botanical-kr-flower
+### motif-kr-dark-[DEPRECATED_STYLE]-kr-flower
 - **Description**: kr-flower cone or flower
 - **Use**: Page 3 mid-edge, 40% opacity
 - **Mode**: kr-dark

@@ -241,6 +241,6 @@ Works with:
 ✅ Expressive fonts: Plus Jakarta Sans, Poppins, Montserrat, Sora
 ✅ Extreme contrasts: 3x+ font weight (100 vs 900), 3x+ size (57px vs 12px)
 ✅ Layered gradients: Multi-stop, radial + linear combinations
-✅ Geometric patterns: Grid, dots, organic blobs, aurora effects
+✅ Geometric patterns: Grid, dots, [DEPRECATED_STYLE] blobs, aurora effects
 ✅ Spring motion: Choreographed page loads, bounce on interaction
 ✅ Emotional tone: Playful, confident, elegant, tech-forward options

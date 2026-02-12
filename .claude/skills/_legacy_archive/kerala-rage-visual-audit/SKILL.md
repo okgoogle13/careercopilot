@@ -1,6 +1,6 @@
 ---
 description: Analyze component screenshots and design artifacts against Kerala Rage
-  visual standards. Validate typography (Agit-Prop, Solidarity), color palette (Charcoal, Waratah, Gold),
+  visual standards. Validate typography (Agit-Prop, Solidarity), color palette (Charcoal, [DEPRECATED_STYLE], Gold),
   layout (asymmetry, torn edges), and motion (viscous fluidity). Generate compliance assessments
   and design evolution analysis.
 name: kerala-rage-visual-audit
@@ -20,7 +20,7 @@ Use this skill when you need to:
 
 - **Audit a component screenshot** against Kerala Rage design standards
 - **Validate typography choices** (are fonts Brutalist and Urgent?)
-- **Check color palette adherence** (Charcoal background, Waratah Red urgency?)
+- **Check color palette adherence** (Charcoal background, [DEPRECATED_STYLE] Red urgency?)
 - **Assess layout coherence** (is spacing asymmetric and tense?)
 - **Compare component evolution** (kerala-rage → Kerala Rage transformation)
 - **Generate compliance reports** (pass/fail/needs-refinement assessments)
@@ -46,7 +46,7 @@ The skill uses Claude's vision capabilities to:
 
 ### 2. Color Audit
 
-**Pass**: Kerala Rage palette (#1A1714 Charcoal, #F14714 Waratah, #DAF674 Gold). High contrast.
+**Pass**: Kerala Rage palette (#1A1714 Charcoal, #F14714 [DEPRECATED_STYLE], #DAF674 Gold). High contrast.
 **Needs Refinement**: Correct colors but insufficient contrast or "muddy" tones.
 **Fail**: White backgrounds, blue primary buttons, or pastel/soft palettes.
 
@@ -60,7 +60,7 @@ The skill uses Claude's vision capabilities to:
 
 **Pass**: Solidarity motifs (fist, star, megaphone) or Malayalam script integrated meaningfully.
 **Needs Refinement**: Motifs present but feel decorative rather than ideological.
-**Fail**: No motifs (when expected) or use of "kerala-streetprint" or "Botanical" elements.
+**Fail**: No motifs (when expected) or use of "kerala-streetprint" or "[DEPRECATED_STYLE]" elements.
 
 ### 5. Overall Aesthetic Coherence
 
@@ -154,14 +154,14 @@ Structured JSON output for integration with compliance dashboards:
       },
       "color": {
         "status": "pass|needs_refinement|fail",
-        "findings": "Charcoal background, Waratah Red primary, within palette",
+        "findings": "Charcoal background, [DEPRECATED_STYLE] Red primary, within palette",
         "palette_adherence": "100%",
         "theme_consistency": "dark_ui_mandatory"
       },
       "layout": {
         "status": "pass|needs_refinement|fail",
-        "findings": "Organic spacing with intentional asymmetry",
-        "spacing_quality": "organic",
+        "findings": "[DEPRECATED_STYLE] spacing with intentional asymmetry",
+        "spacing_quality": "[DEPRECATED_STYLE]",
         "hierarchy_clarity": "strong"
       },
       "botanical_elements": {
@@ -175,7 +175,7 @@ Structured JSON output for integration with compliance dashboards:
     "assessment": "Component strongly embodies kerala-rage vision",
     "recommendations": [
       "Consider slightly warmer undertone in accent color",
-      "Botanical motif could be slightly more prominent without becoming decorative"
+      "[DEPRECATED_STYLE] motif could be slightly more prominent without becoming decorative"
     ],
 
     "design_narrative": "This button demonstrates intentional design mastery..."
@@ -191,9 +191,9 @@ Claude can identify:
 
 - Actual fonts rendered (not what you hoped)
 - Exact color usage (hex values or descriptions)
-- Spacing patterns (organic vs. mechanical)
+- Spacing patterns ([DEPRECATED_STYLE] vs. mechanical)
 - Visual hierarchy establishment
-- Botanical motif presence and integration
+- [DEPRECATED_STYLE] motif presence and integration
 
 ### Comparative Analysis
 

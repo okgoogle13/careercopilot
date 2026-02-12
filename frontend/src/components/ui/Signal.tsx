@@ -39,7 +39,7 @@ export type SignalVariant = 'filled' | 'outlined' | 'tonal';
 /**
  * Signal - KeralaRage KrSolidarity Alert Component
  *
- * Alert/notification component using KeralaRage botanical palette and organic shapes.
+ * Alert/notification component using KeralaRage [DEPRECATED_STYLE] palette and [DEPRECATED_STYLE] shapes.
  * Supports info, success, warning, and error states with filled, outlined, or tonal variants.
  */
 export function Signal({

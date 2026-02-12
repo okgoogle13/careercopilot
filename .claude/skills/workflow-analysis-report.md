@@ -409,9 +409,9 @@ Create a **Shared Terminology Guide** (reference file):
 | **Design Identity Brief** | The "soul" of the project - core directives and anti-patterns | design-system-doc-generator |
 | **Anti-Slop Protocol** | Explicit bans on generic patterns (no Inter, no 8px radius, etc.) | design-system-doc-generator |
 | **Annotated Wireframe Protocol** | Structured specification for screens (layout, tokens, a11y, states, assets) | design-system-doc-generator → wireframe-annotator |
-| **Kerala Rage kr-solidarity** | Project-specific design system based on M3 Expressive + Australian botanical aesthetic | CLAUDE.md |
+| **Kerala Rage kr-solidarity** | Project-specific design system based on M3 Expressive + Australian [DEPRECATED_STYLE] aesthetic | CLAUDE.md |
 | **M3 Expressive** | Material Design 3 Expressive (foundation for Kerala Rage) | m3-expressive-ui-evaluator |
-| **Solidarity Mode** | Warm, emotional, high-contrast aesthetic (vs clinical Laboratory mode) | component-builder |
+| **Solidarity Mode** | Warm, emotional, high-contrast aesthetic (vs clinical [DEPRECATED_MODE]) | component-builder |
 
 ## Alignment
 

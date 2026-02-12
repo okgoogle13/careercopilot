@@ -53,8 +53,8 @@ def convert_to_design_asset(source_dir, output_dir, target_format='PNG', quality
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Convert web images to design assets.")
-    parser.add_argument("--source", default="/Users/okgoogle13/Desktop/Curio images phase 2", help="Source directory")
-    parser.add_argument("--output", default="/Users/okgoogle13/Desktop/Curio design assets", help="Output directory")
+    parser.add_argument("--source", default="/Users/okgoogle13/Desktop/[DEPRECATED_STYLE] images phase 2", help="Source directory")
+    parser.add_argument("--output", default="/Users/okgoogle13/Desktop/[DEPRECATED_STYLE] design assets", help="Output directory")
     parser.add_argument("--format", default="PNG", choices=["PNG", "JPEG"], help="Target format")
 
     args = parser.parse_args()

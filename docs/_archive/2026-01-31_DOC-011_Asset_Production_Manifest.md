@@ -17,12 +17,12 @@ For efficient execution, process assets in this sequence:
 3.  **The kr-solidarity Wallpaper (Image 1)** — Primary stage
 
 ### Phase 2: kr-motif Series (Day 2)
-4.  **Core Botanicals from Image 10** — Waratah, Wattle priority
+4.  **Core Botanicals from Image 10** — [DEPRECATED_STYLE], Wattle priority
 5.  **The Anatomical Grid (Image 11)** — kr-dark motif + texture
 6.  **The Navigators (Images 18, 19)** — Wayfinding icons
 
 ### Phase 3: Enrichment (Day 3+)
-7.  **kr-leafus kr-motif (Image 6)** — Accent botanical
+7.  **kr-leafus kr-motif (Image 6)** — Accent [DEPRECATED_STYLE]
 8.  **Nocturnal Garden Tile (Image 3)** — Secondary background
 9.  **The Dryandra (Image 8)** — Hero decorative
 10. **Remaining extractions as needed**

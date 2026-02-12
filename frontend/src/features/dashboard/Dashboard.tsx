@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { FileText, Layout, Plus, Sparkles, Target, Zap } from 'lucide-react';
 
 // KrDark Assets
-import organicLabyrinth from '../../assets/KrMotifs/organic-labyrinth.jpg';
+import organicLabyrinth from '../../assets/KrMotifs/[DEPRECATED_STYLE]-labyrinth.jpg';
 import wallpaper from '../../assets/textures/wallpaper.png';
 
 // ============================================================================
@@ -32,7 +32,7 @@ const PROFILES: Profile[] = [
  * CareerCopilot Dashboard ("The Canopy View")
  *
  * V3.1 KrDark Mode Implementation:
- * ✓ ASSET-09 Organic Labyrinth (Ceiling Motifs)
+ * ✓ ASSET-09 [DEPRECATED_STYLE] Labyrinth (Ceiling Motifs)
  * ✓ High-fidelity Hero Metric Bar
  * ✓ 2x2 KrMotif Grid with Blur Bloom effects
  */

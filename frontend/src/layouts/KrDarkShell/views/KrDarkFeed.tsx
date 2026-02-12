@@ -6,7 +6,7 @@ import { SolidarityCard, ActionButton, ManifestoSlab } from '../../../components
  * KrDarkFeed (Hi-Fi)
  * 
  * Strategic opportunity broadcast stream.
- * Features botanical growth motifs, tactical result cards, and match-score pulse logic.
+ * Features [DEPRECATED_STYLE] growth motifs, tactical result cards, and match-score pulse logic.
  * Standardized on SolidarityCard and ActionButton for ecosystem cohesion.
  */
 export const KrDarkFeed: React.FC = () => {
@@ -27,7 +27,7 @@ export const KrDarkFeed: React.FC = () => {
       company: 'Archive Prime', 
       timestamp: '15m ago',
       match: 94,
-      desc: 'Audit and consolidate legacy records into the botanical substrate. Requires mastery in extraction tactics.'
+      desc: 'Audit and consolidate legacy records into the [DEPRECATED_STYLE] substrate. Requires mastery in extraction tactics.'
     },
     { 
       id: 'OPP_03', 
@@ -69,7 +69,7 @@ export const KrDarkFeed: React.FC = () => {
             transition={{ delay: 0.2 + (idx * 0.1), duration: 0.6 }}
           >
             <SolidarityCard className="p-10 group relative border-white/5 hover:border-ink-gold/20 transition-all duration-500 overflow-hidden">
-              {/* TODO[asset]: Botanical Growth Motif overlay (Z-1, 5% opacity) */}
+              {/* TODO[asset]: [DEPRECATED_STYLE] Growth Motif overlay (Z-1, 5% opacity) */}
               
               <div className="flex flex-col md:flex-row gap-10 relative z-10">
                 {/* Visual Anchor */}

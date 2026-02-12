@@ -1,6 +1,6 @@
 ---
 name: m3-expressive-compliance-dashboard
-description: Track Material Design 3 Expressive adoption metrics across components. Monitor no-generic-fonts percentage, extreme-contrasts percentage, spring-physics percentage, vibrant-tokens percentage, and organic-asymmetry percentage. Generate compliance reports and identify components needing expressiveness enhancement.
+description: Track Material Design 3 Expressive adoption metrics across components. Monitor no-generic-fonts percentage, extreme-contrasts percentage, spring-physics percentage, vibrant-tokens percentage, and [DEPRECATED_STYLE]-asymmetry percentage. Generate compliance reports and identify components needing expressiveness enhancement.
 version: 1.0.0
 tags: []
 ---
@@ -97,9 +97,9 @@ Use this skill when you need to:
 - Generic blue (#2196F3)
 - Hardcoded hex values (not tokens)
 
-### 5. Organic Asymmetry (%)
+### 5. [DEPRECATED_STYLE] Asymmetry (%)
 
-**Definition**: Percentage of components using organic asymmetric shapes instead of mechanical uniform shapes.
+**Definition**: Percentage of components using [DEPRECATED_STYLE] asymmetric shapes instead of mechanical uniform shapes.
 
 **Calculation**:
 
@@ -122,7 +122,7 @@ Use this skill when you need to:
 **Calculation**:
 
 ```
-Average of 5 core metrics (No Generic Fonts + Extreme Contrasts + Spring Physics + Vibrant Tokens + Organic Asymmetry) / 5
+Average of 5 core metrics (No Generic Fonts + Extreme Contrasts + Spring Physics + Vibrant Tokens + [DEPRECATED_STYLE] Asymmetry) / 5
 ```
 
 **Grade Scale**:
@@ -324,7 +324,7 @@ For each component, validate:
 
 ### Layout
 
-- [ ] Organic asymmetry (not grid-mechanical)
+- [ ] [DEPRECATED_STYLE] asymmetry (not grid-mechanical)
 - [ ] Varied spacing rhythm (8px, 16px, 24px, 40px)
 - [ ] Dramatic elevation (layered depth)
 

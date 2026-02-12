@@ -42,7 +42,7 @@ def main():
             "dimensions": {
                 "geographic_authenticity": {"score": 95, "violations": []},
                 "translucency_physics": {"score": 88, "violations": []},
-                "scale_hierarchy": {"score": 75, "violations": ["Primary specimen too small relative to field note"]},
+                "scale_hierarchy": {"score": 75, "violations": ["Primary [DEPRECATED_STYLE] too small relative to field note"]},
                 "density_zones": {"score": 92, "violations": []},
                 "background_color": {"score": 100, "violations": []},
                 "typography": {"score": 90, "violations": []}
@@ -56,7 +56,7 @@ def main():
             if score >= 85: return "✅"
             return "⚠️"
 
-        print(f"{get_status_icon(dims['geographic_authenticity']['score'])} Geographic Authenticity: {dims['geographic_authenticity']['score']}/100")
+        print(f"{get_status_icon(dims['geographic_authenticity']['score'])} [DEPRECATED_STYLE] Authenticity: {dims['geographic_authenticity']['score']}/100")
         print(f"{get_status_icon(dims['translucency_physics']['score'])} Translucency Physics: {dims['translucency_physics']['score']}/100")
         print(f"{get_status_icon(dims['scale_hierarchy']['score'])} Scale Hierarchy: {dims['scale_hierarchy']['score']}/100")
         print(f"{get_status_icon(dims['density_zones']['score'])} Density Zones: {dims['density_zones']['score']}/100")

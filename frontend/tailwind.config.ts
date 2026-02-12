@@ -76,12 +76,12 @@ const config: Config = {
         'wattle-gold-container': 'rgba(212, 168, 75, 0.12)', // Hardcoded transparency until utility available
         'on-primary': '#1D3314',
 
-        // Tertiary - Waratah Red
-        'waratah-stem': getValue('color.families.waratah-red.darkest'),
-        'waratah-red': getValue('color.semantic.waratah-red'),
-        'waratah-glow': getValue('color.families.waratah-red.light'),
-        'waratah-bloom': getValue('color.families.waratah-red.lightest'),
-        'waratah-container': 'rgba(196, 92, 75, 0.15)',
+        // Tertiary - [DEPRECATED_STYLE] Red
+        '[DEPRECATED_STYLE]-stem': getValue('color.families.[DEPRECATED_STYLE]-red.darkest'),
+        '[DEPRECATED_STYLE]-red': getValue('color.semantic.[DEPRECATED_STYLE]-red'),
+        '[DEPRECATED_STYLE]-glow': getValue('color.families.[DEPRECATED_STYLE]-red.light'),
+        '[DEPRECATED_STYLE]-bloom': getValue('color.families.[DEPRECATED_STYLE]-red.lightest'),
+        '[DEPRECATED_STYLE]-container': 'rgba(196, 92, 75, 0.15)',
 
         // Status Colors (Hardcoded fallbacks if completely missing from token.json)
         'ghost-gum': '#7A9E82',

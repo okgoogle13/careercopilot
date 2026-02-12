@@ -83,7 +83,7 @@
 
 **Features**:
 - ✅ Custom dropdown (not native select)
-- ✅ Organic shapes: `rounded-tech` button, `rounded-pebble` dropdown
+- ✅ [DEPRECATED_STYLE] shapes: `rounded-tech` button, `rounded-pebble` dropdown
 - ✅ M3 elevation (`shadow-elevation-3`) for dropdown
 - ✅ Smooth animations (spring easing, fade-in)
 - ✅ Keyboard navigation (Arrow keys, Enter, Escape)
@@ -117,7 +117,7 @@
 
 **M3Checkbox Features**:
 - ✅ Custom checkbox (replaces native)
-- ✅ Organic shape (`rounded-tech`)
+- ✅ [DEPRECATED_STYLE] shape (`rounded-tech`)
 - ✅ Checked, unchecked, indeterminate states
 - ✅ Error state styling
 - ✅ Spring animations
@@ -166,7 +166,7 @@
 - ✅ Automatic icon selection (CheckCircle, Info, AlertTriangle, AlertCircle)
 - ✅ Optional title
 - ✅ Optional close button with M3IconButton
-- ✅ Organic `rounded-pebble` shape
+- ✅ [DEPRECATED_STYLE] `rounded-pebble` shape
 - ✅ M3 elevation for prominence
 - ✅ Semantic color roles
 - ✅ Accessibility (role="alert")
@@ -471,7 +471,7 @@ function ContactForm() {
 
 3. **Enhanced UX**
    - Spring animations throughout
-   - Organic shapes everywhere
+   - [DEPRECATED_STYLE] shapes everywhere
    - Proper focus management
    - Keyboard navigation
 

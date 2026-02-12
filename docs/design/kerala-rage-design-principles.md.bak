@@ -1,55 +1,51 @@
-# kerala-rage kr-solidarity Design Principles
+# Kerala Rage — Solidarity Mode: Design Principles
 
-## Core Philosophy: kerala-streetprint Anatomical Extremism
+## Core Philosophy: Street-Truth & Solidarity
 
-kerala-rage is built on the collision of Australian endemic species and geometric precision, framed through a contemporary, anti‑colonial lens. We reject generic, cute, or sepia‑toned vintage design and instead embrace bold, living symbols rooted in present-day Melbourne.
+Kerala Rage is a design system of collective resistance, blending the vibrant energy of the Kerala diaspora with the gritty, expressive language of Naarm (Melbourne) street art. We reject bureaucratic "slop," colonial aesthetics, and corporate neutrality. Our interface is a **Screenprint Manifesto**—layered, high-contrast, and deeply human.
 
-### 1. The Void (Atmosphere)
+---
 
-- **Primary Background**: Asphalt Black `#1A1714`.
-- **Rule**: Backgrounds should feel like a street art substrate or nocturnal urban air, not a museum cabinet. Do not use pure black `#000000`, and avoid sepia/vintage treatments.
-- **Translucency**: Assets should leverage alpha transparency to melt into "The Void," preserving detailed edges (watercolor bleeds, hair, spines).
+### 1. The Substrate (Solidarity Charcoal)
 
-### 2. The Subject
+- **Primary Background**: `charcoalBackground` (#1A1A1A).
+- **Rule**: Backgrounds are never a "void"; they are the urban substrate. Think matte charcoal, weathered brick, or asphalt.
+- **No White**: Pure white (#FFFFFF) is banned. Light exists only as ink or bioluminescence.
+- **Wheat-Paste Layers**: Use textures that suggest layering—torn edges, paper grain, and screenprint displacement.
 
-- **Authenticity**: All kr-symbol and flora must be **geographically authentic to Australia**. (e.g., kr-flower, kr-leafus, Echidna, kr-shiva).
-- **Anatomical Extremism**: Capture the intense, sometimes alien details of nature — skeletal structures, microscopic lattices, and sharp textures.
-- **Motif Split**:
-  - **Anatomical**: Skeletal, structural, biological (e.g., bone cages, wing articulations).
-  - **Geometric**: Nature's mathematics (e.g., Fibonacci spirals in ferns/kr-flower, hexagonal lattices in radiolaria).
+### 2. The Ink (Screenprint Logic)
 
-### 3. The Lens (Haeckelian Geometry)
+- **Limited Palette**: Stick to the core Solidarity ramp:
+  - **inkGold**: Temple radiance and optimistic defiance.
+  - **solidarityRed**: Resistance heat and primary energy.
+  - **signalGreen**: Hybrid identity pop (Kerala backwaters meeting Melbourne tracks).
+- **Ink Bleed**: Focus on the behavior of ink on paper. Subtle displacement, textured edges, and high-salience overlaps.
+- **The Halo**: Use circular "halo disks" (inspired by saint motifs and temple halos) as focal anchors for key metrics or images.
 
-- **Natural Math**: Every asset must demonstrate underlying order (radial symmetry, spiral growth patterns, hexagonal arrays).
-- **Projection**: Prefer orthographic or precise isometric views over casual perspective.
+### 3. The Voice (Anti-Colonial Expression)
 
-### 4. Technical Specifications (Path B Standards)
+- **Typographic Tension**: Use extreme weight contrast. Massive display stencils (Bebas Neue) against expressive headers (Sora) and hairline metadata (JetBrains Mono).
+- **Pressure & Relief**: Typography should behave as if responding to environmental pressure—compressing for weight, expanding for solidarity.
+- **No Bureaucracy**: Explicitly ban all motifs of borders, passports, government forms, or official documentation. We speak peer-to-peer.
 
-#### Translucency Bands (Light Transmission)
+### 4. The Geometry (Organic Defiance)
 
-Assets must implement true light transmission, not just glow effects.
+- **Rejection of Perfect Grids**: While the system is precise, the edges are "eroded." Use organic asymmetrical radii (Pebble, Stone, Slab) instead of machine-perfect corners.
+- **Torn Edges**: Use the `tornEdgeClipPath` for section breaks, suggesting posters ripped from a wall.
+- **Imperfect Rounds**: Avoid perfect 50% circles for avatars; use "imperfect rounds" (~48%) to maintain a hand-cut feel.
 
-- **Opaque (0% Transmission)**: Core subject focus, cartilage ribs, midribs.
-- **Translucent (40-60%)**: Frill-neck membranes, kr-leafus leaves (reveals internal venation).
-- **Diaphanous (60-80%)**: Huntsman spider molts (amber chitin showing internal shadows).
+### 5. The Movement (Viscous Breeze & Slam)
 
-#### Scale Hierarchy (Focal Tiers)
+- **Expressive Motion**: All transitions use the M3 Expressive curve (overshoot).
+- **The Slam**: Primary headers and posters "slam" into place (600ms).
+- **The Breath**: Secondary content "breathes" or "drifts" with organic instability.
+- **Reduced Motion**: Always provide an accessible, low-motion path for high-clarity needs.
 
-To prevent visual flatness, maintain clear size ratios:
+---
 
-- **Primary (12-20cm)**: Hero elements (e.g., Waratah, Frill-neck display).
-- **Secondary (8-12cm)**: Supporting geometry (e.g., kr-flower cones, Echidna spine clusters).
-- **Tertiary (2-8cm)**: Textural detail (e.g., Wattle spheres, Gum nuts, Fossils).
+**Success Criteria**:
 
-#### Density Zones (UI Safe Areas)
-
-- **Zone 1 Central**: 60-80% density (The Wunderkammer core).
-- **Zone 2 Upper-Left**: <20% density (UI Profile/Nav safe area).
-- **Zone 3 Lower-Right**: <30% density (Widget/Action safe area).
-
-#### Annotation Typography
-
-- **Font**: Crimson Text Regular (Serif).
-- **Size**: 10-12pt (proportional to 1792px width).
-- **Color**: #F5F0E8 (Paper White) @ 85% opacity.
-- **Format**: "Fig. [X]. [Scientific Name] ([Common Name])"
+- Does it look like a street poster?
+- Does it feel like a living manifesto?
+- Is there zero "corporate slop" or bureaucratic coldness?
+- Is the cultural solidarity (Kerala + Naarm) visible in the ink and motifs?

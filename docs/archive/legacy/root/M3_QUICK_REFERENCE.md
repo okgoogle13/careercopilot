@@ -58,9 +58,9 @@ Warning (Amber):     #F59E0B → #FEF3C7   [NEW] Caution states
 Surface (Void):      #121212 → #E6E1E5   Atmospheric base
 ```
 
-### Shape Tokens (Organic Contradiction)
+### Shape Tokens ([DEPRECATED_STYLE] Contradiction)
 ```css
-.rounded-pebble   →  20px 20px 32px 32px   (Friendly organic)
+.rounded-pebble   →  20px 20px 32px 32px   (Friendly [DEPRECATED_STYLE])
 .rounded-tech     →  24px  4px 24px 20px   (Precision)
 .rounded-leaf     →  32px 12px 32px 12px   (Growth motif)
 .rounded-gem      →  40px  8px 40px  8px   (Highlight)
@@ -124,7 +124,7 @@ Surface (Void):      #121212 → #E6E1E5   Atmospheric base
 // Semantic color tokens
 <div className="bg-primary-container text-on-primary-container">
 
-// M3 organic shapes
+// M3 [DEPRECATED_STYLE] shapes
 <div className="rounded-pebble">
 
 // Custom M3 components

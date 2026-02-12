@@ -180,13 +180,13 @@ from pathlib import Path
 from typing import List, Tuple, Dict
 
 TOKEN_MAPPINGS = {
-    "Specimen Night": "Asphalt Black",
-    "specimen-night": "asphalt-black",
+    "[DEPRECATED_STYLE] Night": "Asphalt Black",
+    "[DEPRECATED_STYLE]-night": "asphalt-black",
     "specimen_night": "asphalt_black",
     "Parchment": "Paper White",
     "parchment": "paper-white",
-    "Waratah Crimson": "Waratah Red",
-    "waratah-crimson": "waratah-red",
+    "[DEPRECATED_STYLE] Crimson": "[DEPRECATED_STYLE] Red",
+    "[DEPRECATED_STYLE]-crimson": "[DEPRECATED_STYLE]-red",
     "waratah_crimson": "waratah_red",
     "Eucalypt Smoke": "Concrete Grey",
     "eucalypt-smoke": "concrete-grey",
@@ -262,7 +262,7 @@ def main():
     import argparse
 
     parser = argparse.ArgumentParser(
-        description="Migrate Northcote design tokens from Victorian Curio to Contemporary Australian naming"
+        description="Migrate Northcote design tokens from [DEPRECATED_STYLE] [DEPRECATED_STYLE] to Contemporary Australian naming"
     )
     parser.add_argument("--dry-run", action="store_true", help="Preview changes without applying them")
     parser.add_argument("--apply", action="store_true", help="Apply all changes")
@@ -341,15 +341,15 @@ class ValidationResult:
     recommendations: List[str]
 
 FORBIDDEN_TERMS = [
-    "victorian",
+    "[DEPRECATED_STYLE]",
     "vintage",
     "sepia",
-    "specimen",
+    "[DEPRECATED_STYLE]",
     "cabinet",
     "museum",
     "preserved",
     "fig.",
-    "naturalist",
+    "[DEPRECATED_STYLE]",
     "federation",
     "colonial"
 ]
@@ -525,15 +525,15 @@ Use these as authoritative design files:
 
 Core rules:
 - Dark UI base: Asphalt Black #1A1714, text Paper White #F5F0E8.
-- Primary: Wattle Gold #D4A84B; Secondary: Waratah Red #C45C4B; Tertiary: Ochre Earth #B8733D; neutrals Concrete Grey #A39B8F and Gum Leaf Green #6B7F6E.
+- Primary: Wattle Gold #D4A84B; Secondary: [DEPRECATED_STYLE] Red #C45C4B; Tertiary: Ochre Earth #B8733D; neutrals Concrete Grey #A39B8F and Gum Leaf Green #6B7F6E.
 - Use tokens, not raw hex, in UI code.
-- No Victorian museum/specimen/sepia/colonial nostalgia.
+- No [DEPRECATED_STYLE] museum/[DEPRECATED_STYLE]/sepia/colonial nostalgia.
 - Species graphics: Peter Drew street art, contemporary Melbourne, living not preserved.
 
 Migration rules:
-- Specimen Night → Asphalt Black
+- [DEPRECATED_STYLE] Night → Asphalt Black
 - Parchment → Paper White
-- Waratah Crimson → Waratah Red
+- [DEPRECATED_STYLE] Crimson → [DEPRECATED_STYLE] Red
 - Eucalypt Smoke → Concrete Grey
 - Flannel Flower → Concrete Grey
 - #141218 → #1A1714

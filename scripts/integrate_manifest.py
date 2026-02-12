@@ -42,7 +42,7 @@ EXISTING_ASSETS = [
     {"id": "KR-SOLID-003", "name": "Bhagat Singh Portrait", "category": "portrait", "priority": "HIGH"},
     {"id": "KR-SOLID-004", "name": "Kerala Elephant Symbol", "category": "symbol", "priority": "CRITICAL"},
     {"id": "KR-SOLID-005", "name": "Kerala Landscape", "category": "symbol", "priority": "HIGH"},
-    {"id": "KR-SOLID-006", "name": "Organic Paint Splash", "category": "abstract", "priority": "MEDIUM"},
+    {"id": "KR-SOLID-006", "name": "[DEPRECATED_STYLE] Paint Splash", "category": "abstract", "priority": "MEDIUM"},
     {"id": "KR-SOLID-007", "name": "Anti-Colonial Graffiti", "category": "street", "priority": "CRITICAL"},
     {"id": "KR-SOLID-008", "name": "Melbourne Laneway Texture", "category": "texture", "priority": "CRITICAL"},
     {"id": "KR-SOLID-009", "name": "First Nations Placard", "category": "street", "priority": "CRITICAL"},

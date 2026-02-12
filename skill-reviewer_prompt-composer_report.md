@@ -51,7 +51,7 @@ The `prompt-composer` skill demonstrates **strong technical clarity** and **exce
 - ❌ **Missing Edge Case Documentation**:
   - What happens with incomplete asset specifications?
   - How does it handle new kr-motifs not in the pattern library?
-  - What's the behavior for non-botanical assets?
+  - What's the behavior for non-[DEPRECATED_STYLE] assets?
 - ❌ **Vague Process Steps**: The "Process" section (lines 168-178) is sequential but lacks error handling
   - Step 2 "Query pattern library" — what if query returns empty?
   - Step 5 "Map kr-motifs → taxonomic database" — what's the fallback?
@@ -66,7 +66,7 @@ The `prompt-composer` skill demonstrates **strong technical clarity** and **exce
 
 **Clarity Issues:**
 - ⚠️ "Attempt [N]" language is unclear—does this mean "iteration attempt" or "generation attempt"?
-- ⚠️ "Wunderkammer density" is jargon not explained for new users
+- ⚠️ "[DEPRECATED_STYLE] density" is jargon not explained for new users
 - ⚠️ "kr-" prefix convention not explained (should note this is Kerala Rage motif abbreviation)
 
 ---
@@ -162,7 +162,7 @@ The `prompt-composer` skill demonstrates **strong technical clarity** and **exce
 **Issues:**
 - ⚠️ "When to Use" section (lines 14-18) is brief—could include:
   - Who are primary users? (Asset designers, Design system maintainers)
-  - What's required knowledge? (Kerala Rage patterns, botanical taxonomy)
+  - What's required knowledge? (Kerala Rage patterns, [DEPRECATED_STYLE] taxonomy)
   - What are prerequisites? (Pattern library file, pattern-learner skill)
 - ⚠️ Missing "Prerequisites" section
 - ⚠️ Missing "Related Skills" section in footer—should link to:
@@ -189,7 +189,7 @@ The `prompt-composer` skill demonstrates **strong technical clarity** and **exce
    - Add "Limitations" section explicitly stating:
      - Only works with Kerala Rage kr-motifs
      - Requires valid pattern library file
-     - Single mode (Solidarity) — no Gallery mode support
+     - Single mode (Solidarity) — no [DEPRECATED_MODE] support
      - Density zone values are fixed (not customizable)
    - Add error scenarios for each process step
 
@@ -250,7 +250,7 @@ The `prompt-composer` skill demonstrates **strong technical clarity** and **exce
    - Show data flow: prompt-composer → asset-generation-validator → asset-packager
 
 4. **Improve Jargon Accessibility**
-   - Define "Wunderkammer" (Cabinet of Curiosities metaphor for density)
+   - Define "[DEPRECATED_STYLE]" (Cabinet of Curiosities metaphor for density)
    - Explain "kr-" prefix convention
    - Clarify "attempt" vs. "iteration"
 

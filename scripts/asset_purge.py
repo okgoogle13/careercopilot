@@ -4,7 +4,7 @@ Asset Purge & Triage Script
 Sorts assets in frontend/public/assets/ into categorized buckets:
   - keep/       → Genuine Kerala Rage solidarity assets
   - quarantine/ → Ambiguous, needs manual review
-  - legacy/     → Northcote Curio / botanical / Victorian science
+  - legacy/     → Northcote [DEPRECATED_STYLE] / [DEPRECATED_STYLE] / [DEPRECATED_STYLE] science
   - discard/    → Storybook screenshots, test images, tool artifacts
 
 Inspired by legacy kerala-rage-asset-cataloger triage patterns.
@@ -22,15 +22,15 @@ from collections import defaultdict
 # CLASSIFICATION PATTERNS
 # ============================================================================
 
-# Northcote Curio / botanical / Victorian science theme
+# Northcote [DEPRECATED_STYLE] / [DEPRECATED_STYLE] / [DEPRECATED_STYLE] science theme
 LEGACY_PATTERNS = [
     'haeckel', 'fossil', 'starfish', 'fern', 'leaf-fern', 'coral',
     'beetle', 'wattle', 'echidna', 'flying-fox', 'sea-urchin',
-    'radiolaria', 'stromatolite', 'waratah', 'canopy', 'grinding-stone',
+    'radiolaria', 'stromatolite', '[DEPRECATED_STYLE]', 'canopy', 'grinding-stone',
     'skeleton', 'compass', 'kr-leafus', 'kr-flower', 'kr-dark',
     'firefly', 'nocturnal', 'temporal-still', 'bone-cage',
-    'anatomical', 'victorian', 'botanical', 'curio', 'northcote',
-    'labyrinth', 'organic-labyr', 'brain-coral', 'pod.jpg',
+    'anatomical', '[DEPRECATED_STYLE]', '[DEPRECATED_STYLE]', '[DEPRECATED_STYLE]', 'northcote',
+    'labyrinth', '[DEPRECATED_STYLE]-labyr', 'brain-coral', 'pod.jpg',
     'spine.png', 'icon-fossil', 'icon-haeckel',
 ]
 
@@ -90,13 +90,13 @@ def classify_asset(filepath: Path) -> dict:
                 'reason': f'In excluded directory: {skip}',
             }
 
-    # Check legacy patterns (Northcote Curio)
+    # Check legacy patterns (Northcote [DEPRECATED_STYLE])
     for pattern in LEGACY_PATTERNS:
         if pattern in name or pattern in rel:
             return {
                 'category': 'legacy',
                 'confidence': 'HIGH',
-                'reason': f'Northcote Curio pattern match: {pattern}',
+                'reason': f'Northcote [DEPRECATED_STYLE] pattern match: {pattern}',
             }
 
     # Check discard patterns (storybook/dev)

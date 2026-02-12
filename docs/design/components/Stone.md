@@ -11,7 +11,7 @@ The **Stone** is the heavy, foundational container of the Kerala Rage design sys
 ## Pattern Constants
 
 ### 1. Morphology
-- **Radii:** `rounded-stone` (Organic, asymmetric softness).
+- **Radii:** `rounded-stone` ([DEPRECATED_STYLE], asymmetric softness).
 - **Shadows:** `shadow-viscous` (Deep, physical presence).
 - **Border:** Subtle `border-white/5` (Internal) or `ink-gold` (External/Active).
 
@@ -37,5 +37,5 @@ Stones do not "bounce"; they **settle**.
 ## Hi-Fi Lifecycle
 1. **Lo-Fi:** Functional container with standard padding and color.
 2. **Hi-Fi Stage 1:** Addition of `tone` and `density` hooks in the API.
-3. **Hi-Fi Stage 2:** Mapping tones to botanical color tokens and densities to expressive spacing.
+3. **Hi-Fi Stage 2:** Mapping tones to [DEPRECATED_STYLE] color tokens and densities to expressive spacing.
 4. **Final Polish:** Addition of the `screenprint-grit` textural overlay (Z-0).

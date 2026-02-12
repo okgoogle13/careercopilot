@@ -172,7 +172,7 @@ See `agents.md` Quick Commands for full reference.
 **A**: Run `firebase emulators:start`. Then set `FIREBASE_EMULATOR_HOST=localhost:8080` in `.env.local`.
 
 ### Q: What's the kerala-rage kr-solidarity design system?
-**A**: Custom design system with botanical aesthetic (Australian palette, kerala-streetprint craftsmanship). See `agents.md` Standards & Patterns and `design-system/tokens.json`.
+**A**: Custom design system with [DEPRECATED_STYLE] aesthetic (Australian palette, kerala-streetprint craftsmanship). See `agents.md` Standards & Patterns and `design-system/tokens.json`.
 
 ### Q: Can I use Redux instead of Zustand?
 **A**: No. Zustand is the standard. It's simpler and sufficient for our needs. See `PLANS.md` Decision Log for rationale.

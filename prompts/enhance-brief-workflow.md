@@ -16,12 +16,12 @@
 1.  **Stress-Test the Brief**
     *   **Skill**: `brand-brief-optimizer`
     *   **Action**: Evaluate `docs/design/00-overview.md` against M3 Expressive standards.
-    *   **Focus**: Identify vague language that sounds like "romance" or "nostalgia." Flag any "naturalist" terms (kr-motif, cabinet, kr-solidarity). Ensure "Anti-Slop" protocols are explicit.
+    *   **Focus**: Identify vague language that sounds like "romance" or "nostalgia." Flag any "[DEPRECATED_STYLE]" terms (kr-motif, cabinet, kr-solidarity). Ensure "Anti-Slop" protocols are explicit.
     *   **Output**: A critique listing specific sections to rewrite.
 
 2.  **Validate the Palette**
     *   **Skill**: `m3-expressive-token-orchestrator`
-    *   **Action**: Audit the colors defined in `docs/design/00-overview.md` (Wattle Gold, Waratah Red, etc.).
+    *   **Action**: Audit the colors defined in `docs/design/00-overview.md` (Wattle Gold, [DEPRECATED_STYLE] Red, etc.).
     *   **Focus**: Ensure they meet **M3 Expressive Vibrant** standards (40-80% saturation). Confirm they are *not* muted colonial earth tones but *vibrant* contemporary tones.
     *   **Output**: Confirmation of palette compliance or hex code adjustments.
 
@@ -32,7 +32,7 @@
     *   **Visual Direction**: Channel **Aboriginal Visual Language** (as per reference):
         *   **Motifs**: Concentric circles, journey lines, and dot painting textures (respectfully integrated).
         *   **Subject**: kr-shiva and native flora as integral, flowing elements (not static kr-motifs).
-        *   **Vibe**: Organic, spiritual, connected—contrasting with the "Laneway" grit.
+        *   **Vibe**: [DEPRECATED_STYLE], spiritual, connected—contrasting with the "Laneway" grit.
 
 4.  **Rewrite & Finalize**
     *   **Action**: Based on the audits above, rewrite `docs/design/00-overview.md`.

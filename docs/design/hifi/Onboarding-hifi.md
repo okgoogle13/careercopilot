@@ -25,5 +25,5 @@
 - **Blueprint Fade**: The `blueprint-grid` substrate enters at `opacity: 0` and fades to `opacity: 8%` over 2s.
 
 ## Motif Slots
-- `// TODO[asset]: Blueprint Grid Substrate overlay (Z-0, 8% opacity)`
-- `// TODO[asset]: Botanical/Technical Icons for each path card.`
+- `- {KR-UI-004} Blueprint grid overlay (transparent) for technical grid patterns) **[REQUIRES GENERATION]**
+- `// TODO[asset]: [DEPRECATED_STYLE]/Technical Icons for each path card.`

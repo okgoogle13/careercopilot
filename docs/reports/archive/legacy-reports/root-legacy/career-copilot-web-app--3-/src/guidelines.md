@@ -94,7 +94,7 @@ _Usage: Do not use drop shadows for depth. Use Surface Tones._
 ## 3. LAYOUT & PHYSICS (Container Transform)
 
 - **Shape Scale:**
-  - **28px (`rounded-3xl`):** All Level 2 Panes (Soft/Organic).
+  - **28px (`rounded-3xl`):** All Level 2 Panes (Soft/[DEPRECATED_STYLE]).
   - **12px (`rounded-xl`):** Inner data cards (Functional).
   - **999px (Pill):** All Buttons and Tier 3 Tags (M3 Standard).
 - **Motion Choreography:**

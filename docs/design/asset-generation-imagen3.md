@@ -11,7 +11,7 @@
 
 Imagen 3 excels at:
 - ✅ Authentic material textures (paper grain, charcoal, ink)
-- ✅ Organic, non-digital aesthetics
+- ✅ [DEPRECATED_STYLE], non-digital aesthetics
 - ✅ Seamless tileable patterns
 - ✅ Photorealistic material photography
 - ✅ Expressive screenprint effects
@@ -145,7 +145,7 @@ Bold screenprint ink slam mark, abstract circular impact shape with
 paint spread and misregistration, solidarity red ink #F14714 with 
 gold edge bleed #DAF674, no official stamp design, no text, no insignia, 
 no bureaucratic elements, transparent background, 1:1 square, 
-expressive hand-pressed screenprint aesthetic, organic ink spread, 
+expressive hand-pressed screenprint aesthetic, [DEPRECATED_STYLE] ink spread, 
 contemporary activist graphic design, Melbourne street art style
 ```
 
@@ -171,7 +171,7 @@ From Asset Placement Guide (renamed):
 - ❌ Bureaucratic/institutional aesthetics
 
 **MUST INCLUDE**:
-- ✅ Organic ink spread (hand-pressed feel)
+- ✅ [DEPRECATED_STYLE] ink spread (hand-pressed feel)
 - ✅ Misregistration (screenprint authenticity)
 - ✅ Red + gold color bleed
 - ✅ Abstract circular impact shape
@@ -181,7 +181,7 @@ From Asset Placement Guide (renamed):
 - [ ] Transparent background (no white halo)
 - [ ] No text or official insignia visible
 - [ ] Red (#F14714) and gold (#DAF674) colors present
-- [ ] Organic, hand-pressed feel (not digital/perfect)
+- [ ] [DEPRECATED_STYLE], hand-pressed feel (not digital/perfect)
 - [ ] Works at 120-160px diameter
 - [ ] Reads as "solidarity mark" not "government stamp"
 - [ ] Passes narrative QA (anti-bureaucratic)
@@ -216,7 +216,7 @@ From Asset Placement Guide (renamed):
 
 ### Iteration Strategy
 If first generation looks too "official":
-1. Regenerate with emphasis on "organic ink spread, no official design"
+1. Regenerate with emphasis on "[DEPRECATED_STYLE] ink spread, no official design"
 2. Try adding "Melbourne street art protest poster aesthetic"
 3. Reference existing manifest asset **KR-SOLID-029** (Paint Splash) for expressive style
 

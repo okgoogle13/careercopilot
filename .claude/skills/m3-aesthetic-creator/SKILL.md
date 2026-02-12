@@ -86,7 +86,7 @@ Define geometric principles:
 
 - Corner radius strategy (subtle vs. friendly vs. playful)
 - Aspect ratios for cards/containers
-- Organic vs. structural balance
+- [DEPRECATED_STYLE] vs. structural balance
 - Component-specific shapes (buttons, cards, inputs, modals)
 
 **Requirements:**

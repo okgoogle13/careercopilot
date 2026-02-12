@@ -1,8 +1,8 @@
-# Deployment Guide: Abstract - Solidarity (organic-labyrin)
+# Deployment Guide: Abstract - Solidarity ([DEPRECATED_STYLE]-labyrin)
 
 ## Quick Facts
 - **Asset ID:** KR-SOLID-168
-- **Canonical Path:** `/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-organic-labyrin__v1.png`
+- **Canonical Path:** `/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-[DEPRECATED_STYLE]-labyrin__v1.png`
 - **Approval Status:** conditional-approval
 - **Overall Score:** 85.6/100
 
@@ -11,7 +11,7 @@
 ### 1. File Placement
 Place the asset at the canonical path:
 ```
-kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-organic-labyrin__v1.png
+kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-[DEPRECATED_STYLE]-labyrin__v1.png
 ```
 
 ### 2. Manifest Entry
@@ -20,9 +20,9 @@ Add this entry to `frontend/public/assets/kerala-rage-kr-solidarity-manifest.jso
 ```json
 {
   "id": "KR-SOLID-168",
-  "name": "Abstract - Solidarity (organic-labyrin)",
+  "name": "Abstract - Solidarity ([DEPRECATED_STYLE]-labyrin)",
   "category": "abstract",
-  "file_path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-organic-labyrin__v1.png",
+  "file_path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-[DEPRECATED_STYLE]-labyrin__v1.png",
   "priority": "HIGH",
   "status": "ready",
   "intended_context": "Analysis failed",
@@ -52,8 +52,8 @@ export const MyComponent = () => {
   return (
     <div className="kr-solidarity-asset">
       <img
-        src="/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-organic-labyrin__v1.png"
-        alt="Abstract - Solidarity (organic-labyrin)"
+        src="/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-[DEPRECATED_STYLE]-labyrin__v1.png"
+        alt="Abstract - Solidarity ([DEPRECATED_STYLE]-labyrin)"
         className="w-full h-auto"
       />
     </div>

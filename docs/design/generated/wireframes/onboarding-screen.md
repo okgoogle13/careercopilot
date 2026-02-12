@@ -34,7 +34,7 @@
   - Role: Page title.
 - **PathCard** (stone)
   - Role: Role selection (Tech, Care, Creative).
-  - Assets: subtle Role-specific icons (botanical/blueprint).
+  - Assets: subtle Role-specific icons ([DEPRECATED_STYLE]/blueprint).
 </components>
 
 <annotations>

@@ -64,7 +64,7 @@ export default {
         },
         'wattle-gold': t.primary['kr-ink-gold'].value,
 
-        waratah: {
+        [DEPRECATED_STYLE]: {
           stem: t.tertiary.waratahStem.value,
           root: t.tertiary.waratahStem.value, // Fallback
           crimson: t.tertiary.waratahCrimson.value,
@@ -72,7 +72,7 @@ export default {
           bloom: t.tertiary.waratahBloom.value,
           container: t.tertiary.waratahContainer.value,
         },
-        'waratah-red': t.tertiary.waratahCrimson.value,
+        '[DEPRECATED_STYLE]-red': t.tertiary.waratahCrimson.value,
 
         'kr-leaf': {
           night: t.surface.shared['kr-charcoal'].value,
@@ -192,7 +192,7 @@ export default {
       },
 
       // ========================================
-      // BORDER RADIUS: Organic Asymmetry
+      // BORDER RADIUS: [DEPRECATED_STYLE] Asymmetry
       // ========================================
       borderRadius: {
         pebble: '20px 6px 16px 28px',
@@ -219,7 +219,7 @@ export default {
 
         'wattle-glow': '0 0 0 24px rgba(212, 168, 75, 0.2)',
         'wattle-glow-sm': '0 0 0 12px rgba(212, 168, 75, 0.15)',
-        'waratah-glow': '0 0 0 24px rgba(196, 92, 75, 0.2)',
+        '[DEPRECATED_STYLE]-glow': '0 0 0 24px rgba(196, 92, 75, 0.2)',
 
         'focus-ring': '0 0 0 4px rgba(212, 168, 75, 0.5)',
       },

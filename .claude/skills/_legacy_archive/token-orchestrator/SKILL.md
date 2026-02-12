@@ -7,7 +7,7 @@ tags: []
 
 # Design Token Orchestrator
 
-Comprehensive token validation for the kerala-rage kr-solidarity design system. Ensures tokens.json compliance, catches build errors before they happen, and enforces kerala-streetprint naturalist aesthetic principles.
+Comprehensive token validation for the kerala-rage kr-solidarity design system. Ensures tokens.json compliance, catches build errors before they happen, and enforces kerala-streetprint [DEPRECATED_STYLE] aesthetic principles.
 
 ## Quick Decision Tree
 
@@ -70,7 +70,7 @@ python scripts/audit_tailwind.py             # getValue() path resolution
 
 ### 3. Validate kerala-rage Palette
 
-**When**: Checking kerala-streetprint naturalist aesthetic compliance
+**When**: Checking kerala-streetprint [DEPRECATED_STYLE] aesthetic compliance
 
 **Scripts**:
 ```bash
@@ -79,7 +79,7 @@ python scripts/audit_structure.py --palette-only # Direct validation
 ```
 
 **6-Dimension Scorecard**:
-- Geographic Authenticity (Australian botanical references)
+- [DEPRECATED_STYLE] Authenticity (Australian [DEPRECATED_STYLE] references)
 - Translucency Physics (kr-screenprint, ink pools)
 - Scale Hierarchy (display→body typography)
 - Density Zones (kr-dark/kr-dark mode contrast)
@@ -219,6 +219,6 @@ All scripts return standardized exit codes:
 
 1. **Single source of truth**: tokens.json is canonical (DTCG format)
 2. **Validate before build**: Catch errors in tokens, not in CI/CD
-3. **kerala-rage compliance**: kerala-streetprint naturalist aesthetic is non-negotiable
+3. **kerala-rage compliance**: kerala-streetprint [DEPRECATED_STYLE] aesthetic is non-negotiable
 4. **Mode parity**: kr-dark (emotional) ↔ kr-dark (clinical) equivalence
 5. **Progressive disclosure**: Reference files loaded only when needed
