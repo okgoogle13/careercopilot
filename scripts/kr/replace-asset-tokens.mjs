@@ -24,6 +24,11 @@ const SEMANTIC_MATCHERS = [
   { pattern: /substrate|laneway|melbourne/i, token: 'KR-SOLID-033' },
   { pattern: /atmospheric|abstract.?solidarity|ink.?atmosphere/i, token: 'KR-SOLID-011' },
   { pattern: /paint.?splash|dynamic.?overlay/i, token: 'KR-SOLID-029' },
+  { pattern: /shiva|devotional.?anchor/i, token: 'KR-SOLID-021' },
+  { pattern: /elephant|kerala.?elephant/i, token: 'KR-SOLID-031' },
+  { pattern: /bhagat.?singh/i, token: 'KR-SOLID-024' },
+  { pattern: /trishula/i, token: 'KR-SOLID-031' }, // Fallback to elephant if specific icon not in series yet
+  { pattern: /icon.?pack|technical.?icons/i, token: 'KR-UI-004' }, // Fallback to grid/technical series
 ];
 
 function loadTokenMap() {
@@ -55,7 +60,7 @@ function extractContext(todoLine) {
 }
 
 function replaceMarker(content, tokenMap) {
-  const todoRegex = /\/\/\s*TODO\[asset\]:\s*(.+?)(?=\n|$)/g;
+  const todoRegex = /(?:\/\/|-)\s*TODO\[asset\]:\s*(.+?)(?=\n|$)/g;
   let replacements = 0;
   let unmatchedMarkers = [];
 

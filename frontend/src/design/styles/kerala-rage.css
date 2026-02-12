@@ -21,31 +21,31 @@
 @config "../../../tailwind.config.ts";
 
 :root {
-  --color-asphalt-black-lightest: #3d3a36;
-  --color-asphalt-black-light: #2c2925;
-  --color-asphalt-black-base: #1a1714;
-  --color-asphalt-black-dark: #0f0c0a;
-  --color-asphalt-black-darkest: #050403;
-  --color-asphalt-black: #1a1714;
-  --color-ink-gold-lightest: #e8c77a;
-  --color-ink-gold-light: #e0bd61;
-  --color-ink-gold-base: #d4a84b;
-  --color-ink-gold-dark: #c8983a;
-  --color-ink-gold-darkest: #b88a2e;
-  --color-ink-gold: #d4a84b;
-  --color-solidarity-red-lightest: #e08a7d;
-  --color-solidarity-red-light: #d27364;
-  --color-solidarity-red-base: #c45c4b;
-  --color-solidarity-red-dark: #a64536;
-  --color-solidarity-red-darkest: #873023;
-  --color-solidarity-red: #c45c4b;
-  --color-concrete-grey-lightest: #f5f2ea;
-  --color-concrete-grey-light: #eeebe3;
-  --color-concrete-grey-base: #e6e1d6;
-  --color-concrete-grey-dark: #d1c9b8;
-  --color-concrete-grey-darkest: #bdb39f;
-  --color-concrete-grey: #e6e1d6;
-  --color-paper-white: #f0ead6;
+  --color-asphalt-black-lightest: var(--sys-color-charcoalBackground-steps-4);
+  --color-asphalt-black-light: var(--sys-color-charcoalBackground-steps-2);
+  --color-asphalt-black-base: var(--sys-color-charcoalBackground-base);
+  --color-asphalt-black-dark: var(--sys-color-charcoalBackground-steps-0);
+  --color-asphalt-black-darkest: #050403; /* Deepest black fallback */
+  --color-asphalt-black: var(--sys-color-charcoalBackground-base);
+  --color-ink-gold-lightest: var(--sys-color-inkGold-steps-5);
+  --color-ink-gold-light: var(--sys-color-inkGold-steps-4);
+  --color-ink-gold-base: var(--sys-color-inkGold-base);
+  --color-ink-gold-dark: var(--sys-color-inkGold-steps-1);
+  --color-ink-gold-darkest: var(--sys-color-inkGold-steps-0);
+  --color-ink-gold: var(--sys-color-inkGold-base);
+  --color-solidarity-red-lightest: var(--sys-color-solidarityRed-steps-5);
+  --color-solidarity-red-light: var(--sys-color-solidarityRed-steps-4);
+  --color-solidarity-red-base: var(--sys-color-solidarityRed-base);
+  --color-solidarity-red-dark: var(--sys-color-solidarityRed-steps-1);
+  --color-solidarity-red-darkest: var(--sys-color-solidarityRed-steps-0);
+  --color-solidarity-red: var(--sys-color-solidarityRed-base);
+  --color-concrete-grey-lightest: var(--sys-color-worker-ash-steps-6);
+  --color-concrete-grey-light: var(--sys-color-worker-ash-steps-5);
+  --color-concrete-grey-base: var(--sys-color-worker-ash-base);
+  --color-concrete-grey-dark: var(--sys-color-worker-ash-steps-2);
+  --color-concrete-grey-darkest: var(--sys-color-worker-ash-steps-1);
+  --color-concrete-grey: var(--sys-color-worker-ash-base);
+  --color-paper-white: var(--sys-color-worker-ash-steps-6);
   --spacing-xs: 4px;
   --spacing-sm: 8px;
   --spacing-md: 12px;
@@ -62,37 +62,16 @@
   --shadow-standard: 0 4px 8px rgba(0, 0, 0, 0.2);
   --shadow-elevated: 0 8px 16px rgba(0, 0, 0, 0.25);
   --shadow-maximum: 0 16px 32px rgba(0, 0, 0, 0.3);
+  /* Transition Variables - Unifying on generated tokens if possible, or keeping specific ones */
   --duration-fast: 150ms;
   --duration-standard: 300ms;
   --duration-slow: 500ms;
-  --ease-viscous-breeze: cubic-bezier(0.34, 1.56, 0.64, 1);
-  /* Spring Physics for Hover (Viscous Breeze) */
-  --spring-stiffness: 500;
-  --spring-damping: 27;
-
-  /* V3.1 Typography Variables */
-  --font-curator: 'Caveat', cursive;
-  --font-proclamation: 'Libre Bodoni', serif;
-  --font-bloom: 'Fraunces', serif;
-  --font-field-note: 'Work Sans', sans-serif;
-  --font-annotation: 'JetBrains Mono', monospace;
-  --font-hero: 'Nabla', system-ui;
-
-  /* M3 Expressive Typography Variables */
-  --sys-type-axes-authoritative: 'wght' 800, 'wdth' 120, 'XTRA' 468, 'GRAD' 0;
-  --sys-type-axes-wistful: 'wght' 100, 'wdth' 110, 'YTLC' 480, 'GRAD' -50;
-  --sys-type-axes-breathing: 'GRAD' 50;
-  --grad: 0;
-
-  /* Fraunces Variable Font Axis Presets for Enhanced Expressiveness */
-  --type-energetic: 'wght' 700, 'SOFT' 100, 'WONK' 1, 'opsz' 144;
-  --type-restrained: 'wght' 400, 'SOFT' 20, 'WONK' 0, 'opsz' 12;
-  --type-breathing: 'wght' 450, 'SOFT' 60, 'WONK' 0.5, 'opsz' 48;
-
-  /* Spring physics easing (M3 Expressive) */
-  --ease-spring-energetic: cubic-bezier(0.34, 1.56, 0.64, 1);
   --duration-quick: 200ms;
-  --duration-standard: 300ms;
+
+  /* Leaf Axis Defaults (MANDATORY for body rendering) */
+  --leaf-opsz: 12;
+  --leaf-grad: 0;
+  --leaf-xtra: 400;
 }
 
 /* Standard Solidarity Mode axis configurations */
@@ -196,7 +175,7 @@
     font-weight: 600;
     font-size: 14px;
     line-height: 1.5;
-    transition: all 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition: all var(--duration-standard) var(--ease-viscous-breeze);
   }
 
   /* Dark Mode Scrollbar (M3 Expressive Aesthetic) */
@@ -205,18 +184,18 @@
   }
 
   ::-webkit-scrollbar-track {
-    background: #121212;
+    background: var(--color-asphalt-black-darkest);
   }
 
   ::-webkit-scrollbar-thumb {
-    background: #333;
+    background: var(--color-asphalt-black-lightest);
     border-radius: 20px;
-    border: 2px solid #121212;
-    transition: background 0.3s ease;
+    border: 2px solid var(--color-asphalt-black-darkest);
+    transition: background var(--duration-standard) ease;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: #555;
+    background: var(--color-concrete-grey-darkest);
   }
 }
 
@@ -246,8 +225,8 @@
     font-stretch: condensed;
     letter-spacing: -0.03em;
     line-height: 110%;
-    color: #f5f0e8;
-    /* Paper White */
+    color: var(--color-concrete-grey-lightest);
+    /* Paper White / Concrete Grey Lightest */
   }
 
   .text-proclamation-large {
@@ -286,7 +265,7 @@
   }
 
   /* Bloom kr-dark (Expressive) - V3.1 ENHANCED */
-  .text-bloom-kr-dark {
+  .text-bloom-kr-expressive {
     font-family: 'Fraunces', serif;
     font-variation-settings:
       'SOFT' 100,
@@ -315,7 +294,7 @@
   }
 
   /* Bloom kr-dark (Restrained) */
-  .text-bloom-kr-dark {
+  .text-bloom-kr-restrained {
     font-family: 'Fraunces', serif;
     font-variation-settings:
       'SOFT' 20,
@@ -508,7 +487,7 @@
     font-stretch: condensed;
     letter-spacing: -0.03em;
     line-height: 100%;
-    color: #ffffff;
+    color: var(--color-paper-white);
     text-transform: uppercase;
   }
 
@@ -518,7 +497,7 @@
       'SOFT' 50,
       'WONK' 1,
       'wght' 600;
-    color: #d4a84b;
+    color: var(--color-ink-gold);
     /* Ink Gold */
     transform: rotate(4deg);
     position: absolute;

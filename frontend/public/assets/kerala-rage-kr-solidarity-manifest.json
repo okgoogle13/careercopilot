@@ -16,7 +16,7 @@
       "id": "KR-SOLID-001",
       "name": "Abstract -solidarity",
       "category": "abstract",
-      "layer": "atmospheric",
+      "layer": "spiritual",
       "aspect_ratio": "1:1",
       "file_path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity__v1.png",
       "priority": "HIGH",
@@ -248,7 +248,7 @@
       "id": "KR-SOLID-009",
       "name": "Abstract -solidarity-kerala-rage-gri",
       "category": "abstract",
-      "layer": "atmospheric",
+      "layer": "spiritual",
       "aspect_ratio": "1:1",
       "file_path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-kerala-rage-gri__v1.png",
       "priority": "HIGH",
@@ -364,7 +364,7 @@
       "id": "KR-SOLID-013",
       "name": "Abstract -solidarity-kerala-rage-sea",
       "category": "abstract",
-      "layer": "atmospheric",
+      "layer": "resistance",
       "aspect_ratio": "11:6",
       "file_path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-kerala-rage-sea__v1.png",
       "priority": "HIGH",
@@ -992,6 +992,80 @@
           "substrate"
         ]
       }
+    },
+    {
+      "id": "KR-SOLID-034",
+      "name": "Resistance Hero Portrait",
+      "category": "heroes",
+      "layer": "resistance",
+      "aspect_ratio": "3:4",
+      "file_path": "/assets/kr-solidarity/heroes/kr-solidarity__hero__resistance-portrait__v1.png",
+      "priority": "CRITICAL",
+      "semantics": {
+        "functional_role": "editorial-hero",
+        "semantic_weight": "heroic",
+        "layering_role": "foreground"
+      },
+      "usage_rules": {
+        "scale_suitability": ["hero-only", "feature"],
+        "small_ui_safe": false
+      }
+    },
+    {
+      "id": "KR-UI-001",
+      "name": "Wheat Paste Tear",
+      "category": "ui-kit",
+      "layer": "ui-kit",
+      "file_path": "/assets/kr-solidarity/ui-kit/svg/KR-UI-001.svg",
+      "status": "ready"
+    },
+    {
+      "id": "KR-UI-002",
+      "name": "Halo Disk",
+      "category": "ui-kit",
+      "layer": "ui-kit",
+      "file_path": "/assets/kr-solidarity/ui-kit/svg/KR-UI-002.svg",
+      "status": "ready"
+    },
+    {
+      "id": "KR-UI-003",
+      "name": "Screenprint Grit Particles",
+      "category": "ui-kit",
+      "layer": "ui-kit",
+      "file_path": "/assets/kr-solidarity/ui-kit/svg/KR-UI-003.svg",
+      "status": "ready"
+    },
+    {
+      "id": "KR-UI-004",
+      "name": "Blueprint Grid Overlay",
+      "category": "ui-kit",
+      "layer": "ui-kit",
+      "file_path": "/assets/kr-solidarity/ui-kit/svg/KR-UI-004.svg",
+      "status": "ready"
+    },
+    {
+      "id": "KR-UI-005",
+      "name": "Charcoal Paper Substrate",
+      "category": "ui-kit",
+      "layer": "ui-kit",
+      "file_path": "/assets/kr-solidarity/ui-kit/svg/KR-UI-005.svg",
+      "status": "ready"
+    },
+    {
+      "id": "KR-UI-006",
+      "name": "Blueprint Layout Watermark",
+      "category": "ui-kit",
+      "layer": "ui-kit",
+      "file_path": "/assets/kr-solidarity/ui-kit/svg/KR-UI-006.svg",
+      "status": "ready"
+    },
+    {
+      "id": "KR-UI-007",
+      "name": "Screenprint Stamp",
+      "category": "ui-kit",
+      "layer": "ui-kit",
+      "file_path": "/assets/kr-solidarity/ui-kit/svg/KR-UI-007.svg",
+      "status": "ready"
     }
   ]
 }

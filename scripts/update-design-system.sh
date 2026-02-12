@@ -28,7 +28,7 @@ fi
 # Step 1: Validate the new tokens
 echo ""
 echo "[Step 1/2] Validating design tokens..."
-python3 scripts/validate-design-tokens.py
+python3 scripts/design-validation/validate-tokens.py
 
 # Check if validation passed
 if [ $? -ne 0 ]; then
@@ -41,12 +41,12 @@ echo "✅ Token validation successful."
 # Step 2: Build the frontend assets
 echo ""
 echo "[Step 2/2] Building frontend token assets..."
-python3 scripts/build-design-tokens.py
+python3 scripts/build-m3-tokens.py
 
 echo ""
 echo "✨ Design System update complete."
 echo "New assets created:"
-echo "  - frontend/src/styles/design-tokens.css"
-echo "  - design-system/tailwind-token-patch.js"
+echo "  - frontend/src/design/styles/design-tokens.css"
+echo "  - frontend/tailwind-m3-patch.js"
 echo ""
 echo "Remember to import 'design-tokens.css' in your app and merge the patch into 'tailwind.config.js'."
