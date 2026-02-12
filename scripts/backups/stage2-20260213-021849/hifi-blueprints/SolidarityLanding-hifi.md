@@ -26,6 +26,6 @@
 - **Stagger**: All high-level cards use a `0.1s` stagger delay.
 
 ## Motif Slots
-- {KR-SOLID-031} Kerala-elephant V1 (top-right, opacity-20)
-- {KR-UI-001} Wheat paste tear (large + small variants) for torn poster edges
-- {KR-UI-003} Screenprint grit particles (tile + sprite set) for floating texture
+- `// TODO[asset]: Hero Elephant Motif (top-right, opacity-20)`
+- `- {KR-UI-001} Wheat paste tear (large + small variants) for torn poster edges) **[REQUIRES GENERATION]**
+- `- {KR-UI-003} Screenprint grit particles (tile + sprite set) for floating texture) **[REQUIRES GENERATION]**

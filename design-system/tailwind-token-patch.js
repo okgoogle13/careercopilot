@@ -8,6 +8,13 @@ module.exports = {
     extend: {
       colors: {
         ...{
+          "asphaltBlack": "var(--sys-color-asphaltBlack)",
+          "paperWhite": "var(--sys-color-paperWhite)",
+          "kr-ink-gold": "var(--sys-color-kr-ink-gold)",
+          "waratahRed": "var(--sys-color-waratahRed)",
+          "ochreEarth": "var(--sys-color-ochreEarth)",
+          "concreteGrey": "var(--sys-color-concreteGrey)",
+          "gumLeafGreen": "var(--sys-color-gumLeafGreen)",
           "primary": "var(--sys-color-primary)",
           "secondary": "var(--sys-color-secondary)",
           "tertiary": "var(--sys-color-tertiary)",
@@ -22,75 +29,18 @@ module.exports = {
           "inverseOnSurface": "var(--sys-color-inverseOnSurface)",
           "inversePrimary": "var(--sys-color-inversePrimary)",
           "disabled": "var(--sys-color-disabled)",
-          "seed": "var(--sys-color-seed)",
           "neutral": "var(--sys-color-neutral)",
           "neutralVariant": "var(--sys-color-neutralVariant)"
 }
       },
       spacing: {
-        ...{
-          "0": "0px",
-          "1": "4px",
-          "2": "8px",
-          "3": "12px",
-          "4": "16px",
-          "5": "20px",
-          "6": "24px",
-          "7": "28px",
-          "8": "32px",
-          "10": "40px",
-          "12": "48px",
-          "16": "64px",
-          "20": "80px",
-          "24": "96px",
-          "32": "128px"
-}
+        ...{}
       },
       boxShadow: {
-        ...{
-          "popOutOffset": "-40px",
-          "zIndex": {
-                    "base": 1,
-                    "popOut": 20,
-                    "scrim": 39,
-                    "modal": 50,
-                    "tooltip": 60
-          },
-          "borderWidth": {
-                    "card": "1px",
-                    "cardHover": "2px",
-                    "modal": "3px"
-          },
-          "level0": "none",
-          "level1": "0px 1px 2px 0px rgba(0, 0, 0, 0.3), 0px 1px 3px 1px rgba(0, 0, 0, 0.15)",
-          "level2": "0px 1px 2px 0px rgba(0, 0, 0, 0.3), 0px 2px 6px 2px rgba(0, 0, 0, 0.15)",
-          "level3": "0px 4px 8px 3px rgba(0, 0, 0, 0.15), 0px 1px 3px 0px rgba(0, 0, 0, 0.3)",
-          "level4": "0px 6px 10px 4px rgba(0, 0, 0, 0.15), 0px 2px 3px 0px rgba(0, 0, 0, 0.3)",
-          "level5": "0px 8px 12px 6px rgba(0, 0, 0, 0.15), 0px 4px 4px 0px rgba(0, 0, 0, 0.3)"
-}
+        ...{}
       },
       borderRadius: {
-        ...{
-          "radius": {
-                    "card": "28px",
-                    "button": "24px",
-                    "badge": "8px",
-                    "asymmetric": "0 28px 28px 0"
-          },
-          "corner": {
-                    "none": "0px",
-                    "extraSmall": "4px",
-                    "small": "8px",
-                    "medium": "12px",
-                    "large": "16px",
-                    "extraLarge": "28px",
-                    "full": "9999px"
-          },
-          "family": {
-                    "rounded": "rounded",
-                    "cut": "cut"
-          }
-}
+        ...{}
       },
       fontFamily: {
         ...{
