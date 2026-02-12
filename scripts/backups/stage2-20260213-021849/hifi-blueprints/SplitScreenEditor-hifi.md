@@ -28,5 +28,5 @@
 
 ## Motif Slots
 - `- {KR-UI-004} Blueprint grid overlay (transparent) for technical grid patterns) **[REQUIRES GENERATION]**
-- `- {KR-UI-004} Blueprint grid overlay (transparent) for technical grid patterns)
+- `// TODO[asset]: Solidarity-Icon-Pack (Save, Run, Debug, Branch)`.
 - `// TODO[asset]: Grid Line decorative motifs for panel corners.`

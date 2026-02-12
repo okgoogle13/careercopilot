@@ -1,6 +1,6 @@
 {
-  "version": "1.0.1",
-  "updated": "2026-02-12T02:23:12.494Z",
+  "version": "1.0.2",
+  "updated": "2026-02-12T15:18:50.160Z",
   "description": "Central mapping file resolving both KR-SOLID assets and future KR-UI assets",
   "tokens": {
     "kr-asset-screenprint-substrate": {
@@ -29,51 +29,51 @@
     },
     "kr-asset-screenprint-grit": {
       "ref": "KR-UI-003",
-      "path": "/frontend/public/assets/ui-kit/screenprint-grit.png",
+      "path": "/assets/kr-solidarity/ui-kit/svg/KR-UI-003.svg",
       "type": "ui-kit",
       "status": "ready",
       "description": "Screenprint grit particles (tile + sprite set) for floating texture"
     },
     "kr-asset-charcoal-paper": {
       "ref": "KR-UI-005",
-      "path": null,
+      "path": "/assets/kr-solidarity/ui-kit/svg/KR-UI-005.svg",
       "type": "ui-kit",
-      "status": "planned",
+      "status": "ready",
       "description": "Neutral charcoal paper substrate distinct from laneway texture"
     },
     "kr-asset-wheat-paste-tear": {
       "ref": "KR-UI-001",
-      "path": null,
+      "path": "/assets/kr-solidarity/ui-kit/svg/KR-UI-001.svg",
       "type": "ui-kit",
-      "status": "planned",
+      "status": "ready",
       "description": "Wheat paste tear (large + small variants) for torn poster edges"
     },
     "kr-asset-halo-disk": {
       "ref": "KR-UI-002",
-      "path": "/frontend/public/assets/ui-kit/halo-disk.png",
+      "path": "/assets/kr-solidarity/ui-kit/svg/KR-UI-002.svg",
       "type": "ui-kit",
       "status": "ready",
       "description": "Halo disk (plain + gauge version) for radiant circle elements"
     },
     "kr-asset-blueprint-grid": {
       "ref": "KR-UI-004",
-      "path": null,
+      "path": "/assets/kr-solidarity/ui-kit/svg/KR-UI-004.svg",
       "type": "ui-kit",
-      "status": "planned",
+      "status": "ready",
       "description": "Blueprint grid overlay (transparent) for technical grid patterns"
     },
     "kr-asset-blueprint-layout": {
       "ref": "KR-UI-006",
-      "path": null,
+      "path": "/assets/kr-solidarity/ui-kit/svg/KR-UI-006.svg",
       "type": "ui-kit",
-      "status": "planned",
+      "status": "ready",
       "description": "Blueprint layout watermark (transparent) for structural documentation"
     },
     "kr-asset-screenprint-stamp": {
       "ref": "KR-UI-007",
-      "path": null,
+      "path": "/assets/kr-solidarity/ui-kit/svg/KR-UI-007.svg",
       "type": "ui-kit",
-      "status": "planned",
+      "status": "ready",
       "description": "Screenprint stamp 'VERIFIED' (transparent) for approval indicators"
     },
     "kr-asset-field-grid": {
@@ -336,6 +336,14 @@
       "status": "ready",
       "layer": "cultural",
       "description": "Kerala-landscape V1"
+    },
+    "kr-asset-portrait-resistance-hero": {
+      "ref": "KR-SOLID-034",
+      "path": "/assets/kr-solidarity/heroes/kr-solidarity__hero__resistance-portrait__v1.png",
+      "type": "kr-solidarity",
+      "status": "ready",
+      "layer": "resistance",
+      "description": "Resistance Hero Portrait - Identified as Orphan"
     }
   },
   "ui_kit_gaps": [
