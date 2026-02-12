@@ -31,5 +31,5 @@
 
 ## Motif Slots
 - `- {KR-UI-004} Blueprint grid overlay (transparent) for technical grid patterns) **[REQUIRES GENERATION]**
-- `- {KR-UI-004} Blueprint grid overlay (transparent) for technical grid patterns)
+- `// TODO[asset]: Solidarity-Icon-Pack (Filter, Sort, Search)`.
 - `- {KR-SOLID-033} Melbourne Laneway texture - real-world substrate base)

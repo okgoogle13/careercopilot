@@ -67,10 +67,10 @@ def generate_css_variables(tokens):
         if isinstance(value, list):
             # Optionally expand arrays: color-red-0, color-red-1...
             for i, item in enumerate(value):
-                var_name = f"--md-sys-{key}-{i}"
+                var_name = f"--sys-{key}-{i}"
                 content.append(f"  {var_name}: {item};\n")
         else:
-            var_name = f"--md-sys-{key}"
+            var_name = f"--sys-{key}"
             content.append(f"  {var_name}: {value};\n")
 
     content.append("}\n")
@@ -113,32 +113,32 @@ def generate_tailwind_patch(tokens):
                      color_def['DEFAULT'] = value['base'] # var(--md-sys-color-name-base)
                      # Instead of hardcoding value, use CSS var reference? 
                      # For seamless handover, let's use the CSS var for live updates.
-                     color_def['DEFAULT'] = f"var(--md-sys-color-{name}-base)"
+                     color_def['DEFAULT'] = f"var(--sys-color-{name}-base)"
                 
                 if 'steps' in value and isinstance(value['steps'], list):
                     for i, step in enumerate(value['steps']):
-                        color_def[str(i)] = f"var(--md-sys-color-{name}-steps-{i})"
+                        color_def[str(i)] = f"var(--sys-color-{name}-steps-{i})"
 
                 tw_theme['colors'][name] = color_def
             else:
-                tw_theme['colors'][name] = f"var(--md-sys-color-{name})"
+                tw_theme['colors'][name] = f"var(--sys-color-{name})"
 
     # Map Typography
     if 'type' in tokens:
         # Font Families
         if 'fontFamilies' in tokens['type']:
             for name, val in tokens['type']['fontFamilies'].items():
-                tw_theme['fontFamily'][name] = [f"var(--md-sys-type-fontFamilies-{name})"]
+                tw_theme['fontFamily'][name] = [f"var(--sys-type-fontFamilies-{name})"]
         
         # Scale (Font Sizes)
         if 'scale' in tokens['type']:
              for name, val in tokens['type']['scale'].items():
-                  tw_theme['fontSize'][name] = f"var(--md-sys-type-scale-{name})"
+                  tw_theme['fontSize'][name] = f"var(--sys-type-scale-{name})"
 
     # Map Shapes
     if 'shape' in tokens:
         for name, val in tokens['shape'].items():
-            tw_theme['borderRadius'][name] = f"var(--md-sys-shape-{name})"
+            tw_theme['borderRadius'][name] = f"var(--sys-shape-{name})"
 
     # Map Shadows
     if 'shadow' in tokens:
@@ -155,13 +155,13 @@ def generate_tailwind_patch(tokens):
                  val_str = f"cubic-bezier({', '.join(map(str, val))})"
                  tw_theme['transitionTimingFunction']['expressive'] = val_str # Hard to use var for bezier in TW sometimes
              else:
-                  tw_theme['transitionTimingFunction']['expressive'] = f"var(--md-sys-motion-m3Expressive)"
+                  tw_theme['transitionTimingFunction']['expressive'] = f"var(--sys-motion-m3Expressive)"
 
         # Patterns (Duration?)
         if 'patterns' in tokens['motion']:
              for name, pattern in tokens['motion']['patterns'].items():
                   if isinstance(pattern, dict) and 'duration' in pattern:
-                       tw_theme['transitionDuration'][name] = f"var(--md-sys-motion-patterns-{name}-duration)"
+                       tw_theme['transitionDuration'][name] = f"var(--sys-motion-patterns-{name}-duration)"
 
 
     patch_content = f"""// Kerala Rage Tailwind Patch
