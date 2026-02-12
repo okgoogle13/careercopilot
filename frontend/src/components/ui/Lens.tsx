@@ -45,10 +45,10 @@ export interface LensProps extends Omit<React.InputHTMLAttributes<HTMLInputEleme
  * Supports filled and outlined variants with proper KeralaRage states and validation.
  *
  * **KeralaRage Design Token Usage:**
- * - Shape: `--radius-leaf` (organic shape) for inputs
- * - Colors: KeralaRage botanical palette (Ink Gold, Solidarity Red, Concrete Grey)
+ * - Shape: `--radius-leaf` ([DEPRECATED_STYLE] shape) for inputs
+ * - Colors: KeralaRage [DEPRECATED_STYLE] palette (Ink Gold, Solidarity Red, Concrete Grey)
  * - Typography: KeralaRage field-note font family
- * - Motion: Viscous-breeze easing for organic transitions
+ * - Motion: Viscous-breeze easing for [DEPRECATED_STYLE] transitions
  * - Visual: KrScreenprint with subtle backdrop blur
  *
  * **States:**
@@ -266,7 +266,7 @@ Lens.displayName = 'Lens';
  * LensArea - Multi-line text input variant
  *
  * Same API as Lens but renders a textarea for multi-line input.
- * Uses KeralaRage KrSolidarity design tokens for consistent organic styling.
+ * Uses KeralaRage KrSolidarity design tokens for consistent [DEPRECATED_STYLE] styling.
  */
 export interface LensAreaProps extends Omit<
   React.TextareaHTMLAttributes<HTMLTextAreaElement>,

@@ -1,21 +1,24 @@
 import React, { useEffect, useState, useRef } from 'react';
 import type { ResolvedLayer } from '../../utils/heroComposer';
-import type { Typography, Motion } from '../../design/hero/heroTypes';
+import type { Typography, AnimationProfile, LayerType } from '../../design/hero/heroTypes';
+import { calculatePressure } from '../../utils/typographyPressure';
 
 interface LayeredHeroProps {
   layers: ResolvedLayer[];
   typography: Typography;
-  motion: Motion;
+  animation?: AnimationProfile;
+  zIndexMap?: Record<LayerType, number>;
   className?: string;
 }
 
-const M3_BEZIER = 'cubic-bezier(0.34, 1.56, 0.64, 1)';
+const DEFAULT_M3_BEZIER = 'cubic-bezier(0.34, 1.56, 0.64, 1)';
 const BASE_MATTE = '#1A1714';
 
 export const LayeredHero: React.FC<LayeredHeroProps> = ({
   layers,
   typography,
-  motion,
+  animation,
+  zIndexMap,
   className = '',
 }) => {
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -39,21 +42,30 @@ export const LayeredHero: React.FC<LayeredHeroProps> = ({
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll(); // Initial calculation
+    handleScroll();
     
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Interpolate font weight based on scroll
-  const interpolatedWght = Math.round(
-    motion.scroll_wght_range[0] +
-      (motion.scroll_wght_range[1] - motion.scroll_wght_range[0]) * scrollProgress
-  );
+  // Use dynamic pressure calculation if profile exists, else fallback to legacy
+  const pressure = calculatePressure(scrollProgress, typography.pressure_profile);
+  
+  const interpolatedWght = typography.pressure_profile 
+    ? pressure.weight 
+    : Math.round(300 + (500 * scrollProgress)); // Legacy fallback
+
+  const interpolatedWdth = typography.pressure_profile
+    ? pressure.tracking
+    : 75; // Legacy fallback
+
+  const bezier = animation?.bezier 
+    ? `cubic-bezier(${animation.bezier.join(',')})` 
+    : DEFAULT_M3_BEZIER;
 
   const typographyStyle: React.CSSProperties = {
-    fontVariationSettings: `'wght' ${interpolatedWght}, 'wdth' ${typography.pressure_state.wdth}`,
+    fontVariationSettings: `'wght' ${interpolatedWght}, 'wdth' ${interpolatedWdth}`,
     fontOpticalSizing: 'auto',
-    transition: `font-variation-settings ${motion.transition_duration}ms ${M3_BEZIER}`,
+    transition: `font-variation-settings ${animation?.transition_duration || 400}ms ${bezier}`,
   };
 
   return (
@@ -63,31 +75,42 @@ export const LayeredHero: React.FC<LayeredHeroProps> = ({
       style={{ backgroundColor: BASE_MATTE }}
     >
       {/* Render layers */}
-      {layers.map((layer, index) => (
-        <div
-          key={`layer-${index}`}
-          className="absolute inset-0"
-          style={{
-            zIndex: layer.zIndex,
-            opacity: layer.opacity,
-            mixBlendMode: layer.blendMode as any,
-          }}
-        >
-          <img
-            src={layer.assetUrl}
-            alt=""
-            className={`w-full h-full object-${
-              layer.position === 'cover' ? 'cover' : 'contain'
-            }`}
+      {layers.map((layer, index) => {
+        const zIndex = zIndexMap ? (zIndexMap[layer.type] || layer.zIndex) : layer.zIndex;
+        
+        // Calculate parallax if enabled
+        const parallaxOffset = (animation?.parallax && layer.type !== 'substrate')
+          ? (index * 50 * scrollProgress)
+          : 0;
+
+        return (
+          <div
+            key={`layer-${index}`}
+            className="absolute inset-0"
             style={{
-              objectPosition:
-                layer.position === 'cover'
-                  ? 'center'
-                  : layer.position,
+              zIndex,
+              opacity: layer.opacity,
+              mixBlendMode: layer.blendMode as any,
+              transform: `translateY(${parallaxOffset}px)`,
+              transition: `transform 100ms linear`,
             }}
-          />
-        </div>
-      ))}
+          >
+            <img
+              src={layer.assetUrl}
+              alt=""
+              className={`w-full h-full object-${
+                layer.position === 'cover' ? 'cover' : 'contain'
+              }`}
+              style={{
+                objectPosition:
+                  layer.position === 'cover'
+                    ? 'center'
+                    : layer.position,
+              }}
+            />
+          </div>
+        );
+      })}
 
       {/* Typography overlay */}
       <div
@@ -98,6 +121,9 @@ export const LayeredHero: React.FC<LayeredHeroProps> = ({
           className="text-6xl md:text-8xl font-bold text-white mb-4"
           style={{
             textShadow: '0 4px 16px rgba(0, 0, 0, 0.8)',
+            transform: animation?.scroll_behavior === 'scale_expansion' 
+              ? `scale(${1 + scrollProgress * 0.2})` 
+              : 'none',
           }}
         >
           {typography.headline}

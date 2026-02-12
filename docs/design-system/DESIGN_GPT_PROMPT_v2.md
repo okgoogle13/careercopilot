@@ -19,7 +19,7 @@ This JSON must precisely reflect the "Kerala Migrant Rage" (V3.1) design system 
    - `color`: 5-7 step tonal families (shadow → highlight).
    - `type`: Variable font axes (`wght`, `wdth`, `opsz`) and M3 Expressive scale.
    - `motion`: Physics tokens (`spring`, `drag`, `gravity`) with `cubic-bezier(0.34, 1.56, 0.64, 1)`.
-   - `shape`: Organic asymmetry (`pebble`, `stone`, `leaf`) border-radius values.
+   - `shape`: [DEPRECATED_STYLE] asymmetry (`pebble`, `stone`, `leaf`) border-radius values.
    - `motifs`: Metadata for Kerala/Australian/Socialist iconography.
    - `compliance`: The "Anti-Slop Protocol" (Explicit Bans).
 
@@ -35,11 +35,11 @@ This JSON must precisely reflect the "Kerala Migrant Rage" (V3.1) design system 
       "timestamp": "ISO-8601"
     },
     "color": {
-      "waratah-red": {
+      "[DEPRECATED_STYLE]-red": {
         "base": {
           "$value": "#F14714",
           "$type": "color",
-          "$description": "Primary resistance color. Source: Australian waratah/blood."
+          "$description": "Primary resistance color. Source: Australian [DEPRECATED_STYLE]/blood."
         },
         "steps": {
           "$value": ["#A02F0F", "#C03811", "#F14714", "#FF6B3D", "#FF9470", "#FFB999"],
@@ -76,10 +76,10 @@ This JSON must precisely reflect the "Kerala Migrant Rage" (V3.1) design system 
       }
     },
     "shape": {
-      "organic-card": {
+      "[DEPRECATED_STYLE]-card": {
         "$value": "28px 24px 32px 20px",
         "$type": "dimension",
-        "$description": "Asymmetric organic asymmetry (NO perfect circles)."
+        "$description": "Asymmetric [DEPRECATED_STYLE] asymmetry (NO perfect circles)."
       }
     },
     "anti-slop": {
@@ -93,7 +93,7 @@ This JSON must precisely reflect the "Kerala Migrant Rage" (V3.1) design system 
 
 1. **Never Default**: Do not use generic M3 defaults (like deep purple). Always stick to the Kerala/Australian activist palette.
 2. **Always Variable**: Ensure typography tokens always include variable axes, not static weights.
-3. **Always Asymmetric**: Every shape token must provide 4 distinct corner values for organic feel.
+3. **Always Asymmetric**: Every shape token must provide 4 distinct corner values for [DEPRECATED_STYLE] feel.
 4. **Tone Check**: Ensure the metadata and descriptions carry the "unapologetic, confrontational, anti-corporate" voice defined in the brand brief.
 5. **Machine-Ready**: The output must be valid JSON to be parsed by the `m3-expressive-token-orchestrator`.
 

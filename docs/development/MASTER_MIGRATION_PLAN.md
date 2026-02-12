@@ -64,7 +64,7 @@
     - [x] **Haeckel Foundation**: Sliced 25 icons from Composite Grid (B2-03)
     - [x] **kr-motif Collection**: Extracted 13 jars from kerala-streetprint plate
     - [x] **Lab Instruments**: Extracted 12 gold tools from Anatomical plate
-    - [x] **Hero kr-motifs**: Generated Waratah, Wattle, kr-flower, kr-leafus, Brass Key
+    - [x] **Hero kr-motifs**: Generated [DEPRECATED_STYLE], Wattle, kr-flower, kr-leafus, Brass Key
     - [x] **Catalog**: Created Storybook stories for all assets
     - [x] **Batch 2 Integration**:
         - [x] Sliced 25 Haeckel Icons from Composite Grid

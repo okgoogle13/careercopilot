@@ -29,7 +29,7 @@
 
 <assets>
 - **Textures**: `screenprint-substrate` (15% opacity)
-- **Motifs**: `halo-disk` (behind avatar), `botanical-motif` (badge icons)
+- **Motifs**: `halo-disk` (behind avatar), `[DEPRECATED_STYLE]-motif` (badge icons)
 - **Register**: Possibility
 </assets>
 

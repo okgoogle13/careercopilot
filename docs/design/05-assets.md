@@ -143,7 +143,7 @@ IMAGE 3:
 Asset name: kr-solidarity__abstract__paint-splash__v1.png
 **Aspect ratio: 2:1 (banner)**
 Abstract paint splashes and ink drips.
-Organic shapes.
+[DEPRECATED_STYLE] shapes.
 No text.
 ```
 

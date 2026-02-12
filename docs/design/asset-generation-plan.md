@@ -21,11 +21,11 @@
 
 | Asset Type | Tool | Rationale |
 |------------|------|-----------|
-| **Substrate textures** | Imagen 3 | Organic grain, material authenticity, seamless tiling |
+| **Substrate textures** | Imagen 3 | [DEPRECATED_STYLE] grain, material authenticity, seamless tiling |
 | **Wheat-paste tears** | DALL-E | Controlled edge shapes, transparent backgrounds, consistent style |
 | **Halo disks** | DALL-E | Geometric precision, gauge tick marks, repeatable |
 | **Grit particles** | DALL-E | Small sprites, transparent backgrounds, batch consistency |
-| **Solidarity seal** | Imagen 3 | Expressive ink spread, screenprint authenticity, organic impact |
+| **Solidarity seal** | Imagen 3 | Expressive ink spread, screenprint authenticity, [DEPRECATED_STYLE] impact |
 
 ---
 
@@ -183,7 +183,7 @@ street art poster texture, Melbourne laneway aesthetic
 
 **Validation criteria**:
 - ✅ Transparent background
-- ✅ Torn edge looks organic (not cut)
+- ✅ Torn edge looks [DEPRECATED_STYLE] (not cut)
 - ✅ Paper layers visible
 - ✅ No readable text or symbols
 - ✅ Scales well at 320-400px width
@@ -272,7 +272,7 @@ Bold screenprint ink slam mark, abstract circular impact shape with
 paint spread and misregistration, solidarity red ink #F14714 with 
 gold edge bleed #DAF674, no official stamp design, no text, no insignia, 
 no bureaucratic elements, transparent background, 1:1 square, 
-expressive hand-pressed screenprint aesthetic, organic ink spread, 
+expressive hand-pressed screenprint aesthetic, [DEPRECATED_STYLE] ink spread, 
 contemporary activist graphic design
 ```
 
@@ -286,7 +286,7 @@ contemporary activist graphic design
 - ✅ Transparent background
 - ✅ No text or official insignia
 - ✅ Red and gold colors match tokens
-- ✅ Organic, hand-pressed feel (not digital/perfect)
+- ✅ [DEPRECATED_STYLE], hand-pressed feel (not digital/perfect)
 - ✅ Works at 120-160px diameter
 - ✅ Reads as "solidarity mark" not "government stamp"
 

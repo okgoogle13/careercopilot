@@ -125,7 +125,7 @@ street art poster texture, Melbourne laneway aesthetic
 
 ### Post-Generation Checklist
 - [ ] Transparent background
-- [ ] Torn edge looks organic (not cut with scissors)
+- [ ] Torn edge looks [DEPRECATED_STYLE] (not cut with scissors)
 - [ ] Paper layers visible at edges
 - [ ] No readable text or recognizable symbols
 - [ ] Scales well at 320-400px width

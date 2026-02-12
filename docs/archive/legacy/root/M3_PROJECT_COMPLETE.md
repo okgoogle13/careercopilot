@@ -27,7 +27,7 @@
 ### **15 Production-Ready Components**
 
 #### M3 UI Components (8) - 100% Compliant ⭐
-1. **M3Card** - Container with 4 organic shapes (pebble, tech, leaf, gem)
+1. **M3Card** - Container with 4 [DEPRECATED_STYLE] shapes (pebble, tech, leaf, gem)
 2. **M3Button** - 5 variants, 5 colors, loading states
 3. **M3TextField** - Text input with validation, adornments
 4. **M3TextArea** - Multi-line text input
@@ -141,7 +141,7 @@ See `M3_COMPONENT_GUIDE.md` for complete examples!
 ✅ 14 components at 100% M3 compliance
 ✅ 1 component at 95% (StatusChip - MUI themed)
 ✅ All components use M3 design tokens
-✅ All components have organic shapes
+✅ All components have [DEPRECATED_STYLE] shapes
 ✅ All components use spring motion
 ```
 
@@ -158,7 +158,7 @@ See `M3_COMPONENT_GUIDE.md` for complete examples!
 ### M3 Compliance ✅
 - [x] 98-100% overall compliance
 - [x] Design tokens throughout
-- [x] Organic shapes (no symmetric)
+- [x] [DEPRECATED_STYLE] shapes (no symmetric)
 - [x] M3 elevation system
 - [x] Spring motion everywhere
 
@@ -275,7 +275,7 @@ frontend/tests/components/
 
 ### Design System Principles
 - ✅ Material Design 3 implementation
-- ✅ Organic shape system design
+- ✅ [DEPRECATED_STYLE] shape system design
 - ✅ Semantic color application
 - ✅ Elevation hierarchy
 - ✅ Spring motion physics
@@ -346,7 +346,7 @@ If you want to push to 100% compliance:
 - [ ] Run `npm run build` - should complete without errors
 - [ ] Run `npm run test` - tests should pass
 - [ ] Visual check JobQueue page at `/job-queue`
-- [ ] Verify organic shapes visible (asymmetric corners)
+- [ ] Verify [DEPRECATED_STYLE] shapes visible (asymmetric corners)
 - [ ] Verify colors match Electric Alchemist palette
 
 #### Integration

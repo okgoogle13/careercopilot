@@ -1,4 +1,4 @@
-# Abstract - Solidarity (organic-labyrin)
+# Abstract - Solidarity ([DEPRECATED_STYLE]-labyrin)
 
 **Asset ID:** KR-SOLID-168
 **Category:** abstract

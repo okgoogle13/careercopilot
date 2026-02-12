@@ -63,7 +63,7 @@ components/
   └── shared/               # Shared utilities
 features/                   # Feature modules (auth, dashboard, analysis, etc.)
 layouts/                    # LaboratoryShell + GalleryShell
-stores/                     # Zustand state (useModeStore for Gallery/Laboratory mode)
+stores/                     # Zustand state (useModeStore for Gallery/[DEPRECATED_MODE])
 hooks/                      # useApi, useAnalysis, etc.
 design/
   ├── tokens/               # Token definitions
@@ -103,12 +103,12 @@ Contemporary Australian dark aesthetic. Dual modes:
 - ❌ Uniform border-radius
 - ❌ Purple gradients
 - ✅ Federation Typography Stack (Fraunces, Libre Bodoni, Work Sans, JetBrains Mono)
-- ✅ Asymmetric organic shapes
-- ✅ Australian botanical palette (Wattle Gold, Waratah Red, Ochre Earth, Gum Leaf Green)
+- ✅ Asymmetric [DEPRECATED_STYLE] shapes
+- ✅ Australian [DEPRECATED_STYLE] palette (Wattle Gold, [DEPRECATED_STYLE] Red, Ochre Earth, Gum Leaf Green)
 
 **Palette Reference:**
 - Primary: Wattle Gold (`#D4A84B`)
-- Secondary: Waratah Red (`#C45C4B`)
+- Secondary: [DEPRECATED_STYLE] Red (`#C45C4B`)
 - Tertiary: Ochre Earth (`#B8733D`)
 - Surface: Asphalt Black (`#1A1714`)
 - Text: Paper White (`#F5F0E8`)

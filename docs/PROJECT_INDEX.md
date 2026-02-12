@@ -4457,7 +4457,7 @@
           - [WEEKLY_TRACKER_2026-W03.md](./docs/project/archive/weekly-logs/WEEKLY_TRACKER_2026-W03.md)
     - `prompts/`
       - [google-ai-studio-anatomical-extremes.md](./docs/prompts/google-ai-studio-anatomical-extremes.md)
-      - [kerala-rage-kr-solidarity-botanical-plate.md](./docs/prompts/kerala-rage-kr-solidarity-botanical-plate.md)
+      - [kerala-rage-kr-solidarity-[DEPRECATED_STYLE]-plate.md](./docs/prompts/kerala-rage-kr-solidarity-[DEPRECATED_STYLE]-plate.md)
     - `setup/`
       - [AI_AGENTS_UPDATE_GUIDE.md](./docs/setup/AI_AGENTS_UPDATE_GUIDE.md)
       - [CLAUDE_CODE_AGENT_CONFIGURATION.md](./docs/setup/CLAUDE_CODE_AGENT_CONFIGURATION.md)
@@ -4730,7 +4730,7 @@
           - [native-bottlebrush.png](./frontend/public/assets/plants/native-bottlebrush.png)
           - [native-gum-hanging.png](./frontend/public/assets/plants/native-gum-hanging.png)
           - [native-kangaroo.png](./frontend/public/assets/plants/native-kangaroo.png)
-          - [native-waratah-hanging.png](./frontend/public/assets/plants/native-waratah-hanging.png)
+          - [native-[DEPRECATED_STYLE]-hanging.png](./frontend/public/assets/plants/native-[DEPRECATED_STYLE]-hanging.png)
         - `kr-motifs/`
           - [leaf-fern.png](./frontend/public/assets/kr-motifs/leaf-fern.png)
           - [motif-kr-dark-core-kr-motif-series.png](./frontend/public/assets/kr-motifs/motif-kr-dark-core-kr-motif-series.png)

@@ -32,7 +32,7 @@ export interface M3SelectProps {
     required?: boolean;
     /** Full width select */
     fullWidth?: boolean;
-    /** Theme mode: KrDark (warm, botanical) or KrDark (clinical, precise) */
+    /** Theme mode: KrDark (warm, [DEPRECATED_STYLE]) or KrDark (clinical, precise) */
     mode?: M3SelectMode;
     /** Additional CSS classes */
     className?: string;
@@ -43,12 +43,12 @@ export interface M3SelectProps {
 /**
  * M3Select - KeralaRage KrSolidarity Select Dropdown
  *
- * Supports both KrDark (warm, botanical) and KrDark (clinical, precise) modes.
+ * Supports both KrDark (warm, [DEPRECATED_STYLE]) and KrDark (clinical, precise) modes.
  *
  * **KeralaRage Token Usage:**
  * - Typography: `font-field-note` (Options), `font-annotation` (Label)
  * - Color: `primary-ink-gold` (Focus), `tertiary-solidarity-red` (Error)
- * - Shape: `radius-stone` (KrDark), organic asymmetry (KrDark)
+ * - Shape: `radius-stone` (KrDark), [DEPRECATED_STYLE] asymmetry (KrDark)
  * - Motion: `ease-viscous` (KrDark), `ease-precise` (KrDark)
  *
  * **Accessibility:**

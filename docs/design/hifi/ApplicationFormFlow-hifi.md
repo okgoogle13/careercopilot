@@ -28,6 +28,6 @@
 - **Micro-interaction**: Inputs lift and glow on focus.
 
 ## Motif Slots
-- `// TODO[asset]: Halo Disk Motif pulsing behind Submit button (Z-1)`.
-- `// TODO[asset]: Botanical Motif overlay for Success Screen (Z-0)`.
-- `// TODO[asset]: Screenprint Substrate overlay (global)`.
+- `- {KR-UI-002} Halo disk (plain + gauge version) for radiant circle elements) **[REQUIRES GENERATION]**
+- `// TODO[asset]: [DEPRECATED_STYLE] Motif overlay for Success Screen (Z-0)`.
+- `- {KR-SOLID-033} Melbourne Laneway texture - real-world substrate base)

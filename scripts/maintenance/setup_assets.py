@@ -68,7 +68,7 @@ def git_stage_file(filepath):
          print("⚠️  Warning: Git command not found. Skipping staging.")
 
 def main():
-    print("--- Starting Northcote Curio Asset Setup ---")
+    print("--- Starting Northcote [DEPRECATED_STYLE] Asset Setup ---")
 
     # 1. Create target directory
     ensure_directory(TARGET_DIR)

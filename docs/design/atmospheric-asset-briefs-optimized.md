@@ -102,7 +102,7 @@
 
 #### 1. Visual Definition
 - **Concept:** Kinetic energy captured in ink.
-- **Form:** Organic splatters, directed drips.
+- **Form:** [DEPRECATED_STYLE] splatters, directed drips.
 - **Color:** Often monochrome or dual-tone (Charcoal + Accent).
 
 #### 2. Usage Rules
@@ -111,7 +111,7 @@
 
 #### 3. Optimized Prompt (Nano Banana Pro)
 **Generation Prompt:**
-> Wide horizontal screenprint banner of kinetic paint splashes and ink drips. Energy streaking across a wide 2:1 canvas. Organic splatters, directed drips. Monochrome or dual-tone (Charcoal + Accent). 3-5 ink colors, matte charcoal background. **No text.**
+> Wide horizontal screenprint banner of kinetic paint splashes and ink drips. Energy streaking across a wide 2:1 canvas. [DEPRECATED_STYLE] splatters, directed drips. Monochrome or dual-tone (Charcoal + Accent). 3-5 ink colors, matte charcoal background. **No text.**
 
 ---
 

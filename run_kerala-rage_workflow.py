@@ -31,18 +31,18 @@ DOCS_FILE = "/Users/okgoogle13/Desktop/careercopilot/docs/northcote-asset-genera
 ASSETS = [
     {
         "id": "ASSET-1",
-        "filename": "DALL·E 2026-01-24 22.27.00 - Victorian-era hand-tinted lithographic curiosity specimen viewed under a magnifying glass. Subject_ an eccentric antique brass key whose ward and bow .webp",
-        "description": "Victorian-era hand-tinted lithographic curiosity specimen viewed under a magnifying glass. Subject: an eccentric antique brass key."
+        "filename": "DALL·E 2026-01-24 22.27.00 - [DEPRECATED_STYLE]-era hand-tinted lithographic curiosity [DEPRECATED_STYLE] viewed under a magnifying glass. Subject_ an eccentric antique brass key whose ward and bow .webp",
+        "description": "[DEPRECATED_STYLE]-era hand-tinted lithographic curiosity [DEPRECATED_STYLE] viewed under a magnifying glass. Subject: an eccentric antique brass key."
     },
     {
         "id": "ASSET-2",
-        "filename": "DALL·E 2026-01-24 22.27.46 - Victorian-era scientific illustration of nocturnal bats, hand-tinted lithograph aesthetic, observed by lamplight in a colonial Australian field statio.webp",
-        "description": "Victorian-era scientific illustration of nocturnal bats, hand-tinted lithograph aesthetic, observed by lamplight in a colonial Australian field."
+        "filename": "DALL·E 2026-01-24 22.27.46 - [DEPRECATED_STYLE]-era scientific illustration of nocturnal bats, hand-tinted lithograph aesthetic, observed by lamplight in a colonial Australian field statio.webp",
+        "description": "[DEPRECATED_STYLE]-era scientific illustration of nocturnal bats, hand-tinted lithograph aesthetic, observed by lamplight in a colonial Australian field."
     },
     {
         "id": "ASSET-3",
-        "filename": "DALL·E 2026-01-24 22.36.45 - Victorian-era scientific illustration plate of bats (Chiroptera), hand-tinted lithography with extreme austerity. Subject_ comparative anatomical stud.webp",
-        "description": "Victorian-era scientific illustration plate of bats (Chiroptera), hand-tinted lithography with extreme austerity. Subject: comparative anatomical stud."
+        "filename": "DALL·E 2026-01-24 22.36.45 - [DEPRECATED_STYLE]-era scientific illustration plate of bats (Chiroptera), hand-tinted lithography with extreme austerity. Subject_ comparative anatomical stud.webp",
+        "description": "[DEPRECATED_STYLE]-era scientific illustration plate of bats (Chiroptera), hand-tinted lithography with extreme austerity. Subject: comparative anatomical stud."
     }
 ]
 
@@ -95,7 +95,7 @@ async def run_workflow():
                 "compliance": True,
                 "score": 96,
                 "issues": [],
-                "summary": "Excellent adherence to Victorian lithograph style.",
+                "summary": "Excellent adherence to [DEPRECATED_STYLE] lithograph style.",
                 "recommendations": ["None"]
             })
 
@@ -126,7 +126,7 @@ async def run_workflow():
 "{effective_language}"
 
 **Why It Works:**
-Successfully evokes the target aesthetic through specific keyword density ("Victorian-era", "hand-tinted", "lithograph").
+Successfully evokes the target aesthetic through specific keyword density ("[DEPRECATED_STYLE]-era", "hand-tinted", "lithograph").
 
 **Effectiveness:** HIGH
 
@@ -158,8 +158,8 @@ Successfully evokes the target aesthetic through specific keyword density ("Vict
 
     generated_assets = []
     task_descriptions = [
-        "A detailed beetle specimen with iridescent shell",
-        "A botanical fern study with root systems",
+        "A detailed beetle [DEPRECATED_STYLE] with iridescent shell",
+        "A [DEPRECATED_STYLE] fern study with root systems",
         "A cross-section of a nautilus shell",
         "A microscopic view of a butterfly wing scale",
         "A study of indigenous fungi on bark",
@@ -169,13 +169,13 @@ Successfully evokes the target aesthetic through specific keyword density ("Vict
 
     for i, desc in enumerate(task_descriptions):
         asset_id = f"ASSET-{i+4}"
-        # Reuse patterns: inject "Victorian-era hand-tinted lithograph"
-        prompt = f"Victorian-era hand-tinted lithograph of {desc}. Scientific illustration style, extreme detail, on parchment background. Aspect Ratio 4:5."
+        # Reuse patterns: inject "[DEPRECATED_STYLE]-era hand-tinted lithograph"
+        prompt = f"[DEPRECATED_STYLE]-era hand-tinted lithograph of {desc}. Scientific illustration style, extreme detail, on parchment background. Aspect Ratio 4:5."
 
         generated_assets.append({
             "asset_id": asset_id,
             "prompt": prompt,
-            "expected_patterns": ["Victorian Lithograph", "Scientific Illustration"],
+            "expected_patterns": ["[DEPRECATED_STYLE] Lithograph", "Scientific Illustration"],
             "target_score": 90,
             "resolution": "1024x1280"
         })

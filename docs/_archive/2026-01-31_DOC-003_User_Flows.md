@@ -48,7 +48,7 @@
 
 ### Step 1: The Opportunity Field
 *   **Scene:** Opportunity Feed (Mode A: kr-dark).
-*   **Vibe:** Lush, "Wild Growth." Job cards look like "Botanical Plates" (Tech Cards).
+*   **Vibe:** Lush, "Wild Growth." Job cards look like "[DEPRECATED_STYLE] Plates" (Tech Cards).
 *   **Action:** User filters by "Sunlight" (Salary) or "Soil Type" (Technology).
 
 ### Step 2: The Tailoring

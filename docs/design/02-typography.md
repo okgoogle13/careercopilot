@@ -4,82 +4,81 @@
 
 ---
 
-## 1. The Solidarity Stack
+## 1. The ExpressiveStack
 
-A marriage of street poster impact and high-legibility UI, built for the "Contemporary Australian" context.
+A high-performance typography system blending street-poster impact with Material 3 Expressive motion.
 
-| Role         | Font Family       | Usage                           |
-| ------------ | ----------------- | ------------------------------- |
-| **Display**  | Bebas Neue        | Hero headlines, big metrics.    |
-| **Header**   | Sora Variable     | Page titles, expressive nav.    |
-| **Body**     | Plus Jakarta Sans | Primary copy, forms, UI labels. |
-| **Metadata** | JetBrains Mono    | Technical data, annotations.    |
+| Role | Font Family | Usage |
+|------|-------------|-------|
+| **Primary** | Work Sans | Main UI, body text, labels. |
+| **Display** | Fraunces | Emotional headers, subheads. |
+| **Proclamation** | Libre Bodoni | Authoritative hero statements. |
+| **Mono** | JetBrains Mono | Technical data, annotations. |
+| **Curator** | Caveat | Handwritten accents, notes. |
+| **Accent** | Nabla | Restricted hero moments only. |
 
 ---
 
-## 2. Usage Specifications
+## 2. Strict Nabla Usage Policy
 
-### Display (The Stencil)
+To maintain brand integrity and trust, the **Nabla** font is restricted to specific editorial moments.
+
+### ✅ ALLOWED:
+- **Dashboard Overview ("The Collective"):** 1–2 words only in hero title (e.g., "Collective", "Rage").
+- **Ingestion ("The Deposition"):** Success stamp word only (e.g., "DEPOSITED").
+- **Manifesto Heroes:** Single accent word.
+
+### ❌ FORBIDDEN:
+- **Authentication ("The Verification"):** Undermines trust/security.
+- **Analysis Dashboard:** Too "structural"; use Proclamation/Bloom/Mono only.
+- **Settings ("The Archive Vault"):** Creates UI noise.
+
+---
+
+## 3. Usage Specifications
+
+### Proclamation (The Manifesto)
 
 ```css
-.display-large {
-  font-family: "Bebas Neue", sans-serif;
-  font-size: 4rem;
-  line-height: 0.9;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-  color: var(--kr-paper-white);
-}
-```
-
-_Use Case_: Landing page headings, major section transitions.
-
-### Headline (The Call to Action)
-
-```css
-.headline-large {
-  font-family: "Sora", sans-serif;
+.text-proclamation {
+  font-family: "Libre Bodoni", serif;
   font-weight: 700;
-  font-size: 2rem;
-  line-height: 1.2;
-  color: var(--kr-paper-white);
+  font-stretch: condensed;
+  letter-spacing: -0.03em;
 }
 ```
 
-_Use Case_: Page titles, card headers.
-
-### Body (The Narrative)
+### Display (The Emotional Bloom)
 
 ```css
-.body-medium {
-  font-family: "Plus Jakarta Sans", sans-serif;
-  font-weight: 400;
-  font-size: 1rem;
-  line-height: 1.6;
-  color: var(--kr-paper-white);
+.text-bloom {
+  font-family: "Fraunces", serif;
+  font-variation-settings: "SOFT" 50, "WONK" 1, "wght" 500;
 }
 ```
 
-_Use Case_: All standard text, descriptions, and user input.
-
-### Metadata (The Blueprint)
+### Primary (The Field Note)
 
 ```css
-.metadata {
-  font-family: "JetBrains Mono", monospace;
+.text-body {
+  font-family: "Work Sans", sans-serif;
   font-weight: 400;
-  font-size: 0.8rem;
-  letter-spacing: 0.05em;
-  color: var(--kr-ink-gold); /* Often used for emphasis in data */
 }
 ```
 
-_Use Case_: Timestamps, IDs, structural annotations.
+### Nabla Hero (The Hit)
+
+```css
+.text-nabla-hero {
+  font-family: "Nabla", system-ui;
+  font-palette: --nabla-solidarity;
+}
+```
 
 ---
 
-## 3. Typographic Principles
+## 4. Typographic Principles
 
-1. **Extreme Contrast**: Pair Bebas Neue (Display) with Plus Jakarta Sans (Body) for maximum focal impact.
-2. **Ink Awareness**: Use high weight (700+) for headlines to simulate "thick ink" on the charcoal substrate.
-3. **No Slop**: Avoid generic serif or sans-serif defaults. Every font choice must feel intentional and aligned with the "Street Art" philosophy.
+1. **Extreme Variable Contrast**: Enforce 9× weight ratio (100 vs 900) and 6× size ratio (12px vs 72px+).
+2. **Optical Sizing**: `font-optical-sizing: auto` is mandatory for all roles.
+3. **No Slop**: Absolutely NO Inter (standard), NO Recursive (deprecated), NO Sora, NO Plus Jakarta Sans.

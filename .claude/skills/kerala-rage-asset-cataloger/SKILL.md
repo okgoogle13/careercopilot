@@ -173,4 +173,4 @@ Save to: `assets/asset_triage_plan.json`
 
 ---
 
-_Curatorial precision for kerala-streetprint naturalist design assets_
+_Curatorial precision for kerala-streetprint [DEPRECATED_STYLE] design assets_

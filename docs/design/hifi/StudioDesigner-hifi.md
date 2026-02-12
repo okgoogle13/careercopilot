@@ -2,7 +2,7 @@
 
 ## Layout Regions
 - **Design Bar**: A horizontal toolbar for layout and manipulation tools.
-- **Asset Reservoir (Left)**: A vertical stone list of draggable botanical and technical motifs.
+- **Asset Reservoir (Left)**: A vertical stone list of draggable [DEPRECATED_STYLE] and technical motifs.
 - **Assembly Canvas**: A multi-layered high-fidelity stone area with a dynamic blueprint grid.
 
 ## Typography
@@ -27,6 +27,6 @@
 - **Grit Ambient**: Background `screenprint-grit` has a low-frequency fractal animation for "living texture".
 
 ## Motif Slots
-- `// TODO[asset]: Blueprint Grid Dynamic overlay (Z-0)`.
-- `// TODO[asset]: Screenprint Grit Ambient Texture (global)`.
-- `// TODO[asset]: Botanical Motif reservoir items.`.
+- `- {KR-UI-004} Blueprint grid overlay (transparent) for technical grid patterns) **[REQUIRES GENERATION]**
+- `- {KR-UI-003} Screenprint grit particles (tile + sprite set) for floating texture) **[REQUIRES GENERATION]**
+- `// TODO[asset]: [DEPRECATED_STYLE] Motif reservoir items.`.

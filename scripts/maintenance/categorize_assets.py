@@ -9,18 +9,18 @@ import shlex
 ROOT_DIR = '/Users/okgoogle13/Desktop/careercopilot'
 DIRECTORIES = {
     'CANONICAL': os.path.join(ROOT_DIR, 'assets'),
-    'NEW_SOURCE': os.path.join(ROOT_DIR, 'Curio images phase 3'),
+    'NEW_SOURCE': os.path.join(ROOT_DIR, '[DEPRECATED_STYLE] images phase 3'),
     'LEGACY_PUBLIC': os.path.join(ROOT_DIR, 'frontend/public/assets'),
 }
 
-MANIFEST_PATH = os.path.join(ROOT_DIR, 'assets/northcote-curio-manifest.json')
+MANIFEST_PATH = os.path.join(ROOT_DIR, 'assets/northcote-[DEPRECATED_STYLE]-manifest.json')
 
 # Known mappings from Legacy filenames to Manifest target filenames
 # This enforces the "Naming Convention" requested by the user.
 LEGACY_TO_MANIFEST_MAP = {
     # Asset 1: Wallpaper
-    'texture-gallery-curio-wallpaper-2048.jpg': 'northcote-curio-wallpaper-v2.jpg',
-    'gallery-nocturnal.png': 'northcote-curio-wallpaper-v2.png',
+    'texture-gallery-[DEPRECATED_STYLE]-wallpaper-2048.jpg': 'northcote-[DEPRECATED_STYLE]-wallpaper-v2.jpg',
+    'gallery-nocturnal.png': 'northcote-[DEPRECATED_STYLE]-wallpaper-v2.png',
 
     # Asset 2: Kookaburra
     'motif-gallery-sentry-kookaburra-1024.png': 'northcote-sentry-kookaburra.png',
@@ -36,7 +36,7 @@ LEGACY_TO_MANIFEST_MAP = {
 
     # Asset 5: Eucalyptus Echidna
     'northcote-vertical-echidna.png': 'northcote-eucalyptus-echidna.png',
-    'motif-gallery-eucalyptus-specimen.png': 'northcote-eucalyptus-echidna.png',
+    'motif-gallery-eucalyptus-[DEPRECATED_STYLE].png': 'northcote-eucalyptus-echidna.png',
 
     # Asset 6: Still Life
     'northcote-footer-still-life.png': 'northcote-temporal-still-life.png',
@@ -50,7 +50,7 @@ CATEGORY_RULES = [
     (r'wallpaper|plate|background', 'plates'),
     (r'kookaburra|sentry|fauna|bat|beetle|echidna', 'fauna'),
     (r'texture|pattern|canopy|grain|noise', 'textures'),
-    (r'specimen|fossil|bone|coral|fungus|spine', 'specimens'),
+    (r'[DEPRECATED_STYLE]|fossil|bone|coral|fungus|spine', 'specimens'),
     (r'icon|spinner|ui|logo|badge', 'ui'),
 ]
 

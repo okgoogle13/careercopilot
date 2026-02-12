@@ -2,7 +2,7 @@
 
 ## ASSET-1: The kr-solidarity Wallpaper
 - **Category**: plate
-- **Subject**: Wunderkammer Composition
+- **Subject**: [DEPRECATED_STYLE] Composition
 - **Mode**: kr-dark
 
 ## ASSET-2: The Sentry kr-shiva
@@ -12,7 +12,7 @@
 
 ## ASSET-3: Nocturnal Canopy Pattern
 - **Category**: texture
-- **Subject**: Botanical Silhouettes
+- **Subject**: [DEPRECATED_STYLE] Silhouettes
 - **Mode**: kr-dark
 
 ## ASSET-4: Wattle Branch with Jewel Beetle
@@ -40,7 +40,7 @@
 - **Subject**: Glossopteris Fossil
 - **Mode**: kr-dark
 
-## ASSET-9: Waratah Hero Closeup
+## ASSET-9: [DEPRECATED_STYLE] Hero Closeup
 - **Category**: plate
 - **Subject**: Telopea speciosissima
 - **Mode**: kr-dark

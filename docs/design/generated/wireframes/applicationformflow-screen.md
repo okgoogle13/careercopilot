@@ -51,7 +51,7 @@
 1 | text_area         | Action: onChange → validate length; State: default, focus, error; Max-Chars: 1000.
 2 | btn_next          | Action: onClick → validate + next step; Style: radius-pebble; Animation: Slide.
 3 | btn_submit        | Action: onClick → POST /api/applications; Style: radius-pebble; Color: inkGold.
-4 | success_overlay    | State: visible on code 201; content: "Engagement Recorded"; Style: full-screen blur with botanical motif.
+4 | success_overlay    | State: visible on code 201; content: "Engagement Recorded"; Style: full-screen blur with [DEPRECATED_STYLE] motif.
 </annotations>
 
 <notes>

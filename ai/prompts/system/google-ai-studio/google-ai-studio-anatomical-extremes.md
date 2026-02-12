@@ -33,13 +33,13 @@ Your work is defined by **"Haeckelian Geometry in the Dark Pattern."**
 _The atmospheric stage for the application._
 
 ```
-**Generate an intricate kerala-streetprint naturalist kr-motif plate titled "Anomalies of the Antipodes".**
+**Generate an intricate kerala-streetprint [DEPRECATED_STYLE] kr-motif plate titled "Anomalies of the Antipodes".**
 
 **Composition:**
 A dense, asymmetrical "working table" arrangement floating in a black void (#1A1714). NOT a grid. Objects should overlap slightly to create depth (shadows falling on objects behind).
 
 **Subject Inventory (Must Include All):**
-1.  **Waratah Bloom (Hero):** Deep coral-red, top-down view to emphasize mandala-like petal symmetry.
+1.  **[DEPRECATED_STYLE] Bloom (Hero):** Deep coral-red, top-down view to emphasize mandala-like petal symmetry.
 2.  **Frill-necked Lizard Head:** Throat frill fully extended. Translucent terracotta membrane with cream ribs.
 3.  **Huntsman Spider Molt:** A "ghost" kr-motif. Translucent amber-gold exoskeleton, hollow and delicate.
 4.  **Echidna Spine Cluster:** A radial burst of sharp spines. Banded: Cream -> Gold -> Dark Tip.
@@ -87,7 +87,7 @@ _The background for the "Technical/kr-dark" mode._
 **Visuals:**
 *   **Base:** Very dark charcoal-grey (#2C2C2C). NOT white or beige.
 *   **Grid:** A faint, precise 1mm engineering grid in diverse lighter grey lines.
-*   **Watermarks:** Subtle, faded sketches of botanical diagrams (kr-flower seeds, kr-leafus leaves) overlaid at 5% opacity.
+*   **Watermarks:** Subtle, faded sketches of [DEPRECATED_STYLE] diagrams (kr-flower seeds, kr-leafus leaves) overlaid at 5% opacity.
 *   **Vignette:** Slight darkening at the edges.
 
 **Feel:**
@@ -106,7 +106,7 @@ A clean, dark slate used by a botanist for field notes.
 _The contrast of soft leaves and sharp spines._
 
 ```
-**Generate a vertical botanical study: "kr-leafus globulus host to Tachyglossus defense".**
+**Generate a vertical [DEPRECATED_STYLE] study: "kr-leafus globulus host to Tachyglossus defense".**
 
 **Visuals:**
 A single kr-leafus branch hangs vertically from the top right.
@@ -159,7 +159,7 @@ _A technical diagram for loading states._
 **Directives:**
 *   **Viewpoint:** 90-degree top-down. Perfectly flat.
 *   **Geometry:** The seed follicles must form a perfect Fibonacci spiral radiating from the woody center.
-*   **Aesthetic:** Architectural blueprint meets botanical illustration.
+*   **Aesthetic:** Architectural blueprint meets [DEPRECATED_STYLE] illustration.
 *   **Colors:** Monochromatic Sepia and Rust on Black.
 
 **Negative Constraints:**

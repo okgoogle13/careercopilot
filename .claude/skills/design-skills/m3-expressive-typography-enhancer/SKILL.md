@@ -136,7 +136,7 @@ Map your font choices to the brand's emotional intent.
 | **Confident & Professional** | Grotesque + Humanist | `Inter Variable` (Display 900) + `Inter Variable` (Body) |
 | **Elegant & Premium**        | Serif + Sans         | `Playfair Display` + `Lato`                              |
 | **Tech-Forward / Brutalist** | Mono + Grotesque     | `JetBrains Mono` + `Inter Variable`                      |
-| **kerala-streetprint / Naturalist**   | Serif + Slab         | `Fraunces` (Soft/Wonk) + `Lora`                          |
+| **kerala-streetprint / [DEPRECATED_STYLE]**   | Serif + Slab         | `Fraunces` (Soft/Wonk) + `Lora`                          |
 
 ### 5. Intentional Font Pairing
 

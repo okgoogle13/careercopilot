@@ -1,9 +1,9 @@
-# DOC-006: Voice & Micro-copy ("The Naturalist's Marginalia")
+# DOC-006: Voice & Micro-copy ("The [DEPRECATED_STYLE]'s Marginalia")
 
 **Document ID:** DOC-006-VOICE
 **Version:** 3.0 (kerala-rage kr-solidarity Edition - Tiered Voice Strategy)
 **Status:** ACTIVE
-**Context:** Operationalizing the "eccentric, kr-solidarityus naturalist" personality with a tiered approach—functional clarity for core actions, personality for celebrations and empty states.
+**Context:** Operationalizing the "eccentric, kr-solidarityus [DEPRECATED_STYLE]" personality with a tiered approach—functional clarity for core actions, personality for celebrations and empty states.
 
 ---
 
@@ -21,20 +21,20 @@
 ### Tier 2: Contextual Personality (Celebrations & States)
 
 **Where:** Success messages, empty states, onboarding
-**Voice:** Playful kerala-streetprint naturalist with clear intent
+**Voice:** Playful kerala-streetprint [DEPRECATED_STYLE] with clear intent
 **Example:** "Discovery Recorded" (celebration after successful action)
 
 ### Tier 3: Character Depth (Premium/Lab Mode)
 
 **Where:** kr-dark mode analysis, tooltips, easter eggs
-**Voice:** Full kerala-streetprint naturalist immersion
-**Example:** "Your kr-motif has been catalogued. The Naturalist has identified..."
+**Voice:** Full kerala-streetprint [DEPRECATED_STYLE] immersion
+**Example:** "Your kr-motif has been catalogued. The [DEPRECATED_STYLE] has identified..."
 
 ---
 
 ## 1. The Voice Principle
 
-**Core Identity:** A playful kerala-streetprint naturalist with strong opinions, speaking to a fellow explorer.
+**Core Identity:** A playful kerala-streetprint [DEPRECATED_STYLE] with strong opinions, speaking to a fellow explorer.
 
 **Characteristics:**
 
@@ -101,7 +101,7 @@
 | :--------------- | :------------------- | :----------------- |
 | Need help?       | Consult Field Guide? | Help prompt        |
 | Learn more       | Deepen Study         | Documentation link |
-| Tips & tricks    | Naturalist's Notes   | Tips section       |
+| Tips & tricks    | [DEPRECATED_STYLE]'s Notes   | Tips section       |
 | FAQ              | Common Inquiries     | FAQ section        |
 
 ---
@@ -126,7 +126,7 @@
 
 ### Skill Tags
 
-Format skill badges with naturalist notation:
+Format skill badges with [DEPRECATED_STYLE] notation:
 
 ```
 ┌─ Fig. 14 ─┐
@@ -150,7 +150,7 @@ Format skill badges with naturalist notation:
 | Applied    | Application Sent    | Wattle Gold     |
 | Interview  | Under Review        | Wattle Glow     |
 | Rejected   | Returned            | Concrete Grey  |
-| Offer      | Offer Received      | Waratah Red |
+| Offer      | Offer Received      | [DEPRECATED_STYLE] Red |
 
 ---
 
@@ -226,7 +226,7 @@ Shall we begin?"
 "Catalog Your First kr-motif
 
 Your resume is the foundation of your collection.
-Upload it here, and the Naturalist will begin the examination."
+Upload it here, and the [DEPRECATED_STYLE] will begin the examination."
 ```
 
 ---
@@ -257,7 +257,7 @@ Buttons: ["Discard Notes", "Continue Editing"]
 
 ```
 🌸 "Discovery Recorded"
-"Your kr-motif has been catalogued. The Naturalist has identified [X] skills and [Y] experiences."
+"Your kr-motif has been catalogued. The [DEPRECATED_STYLE] has identified [X] skills and [Y] experiences."
 ```
 
 ### Job Application Submitted
@@ -291,7 +291,7 @@ Buttons: ["Discard Notes", "Continue Editing"]
    - kr-dark Mode proclamations → kr-serif-bold (The Proclamation)
    - kr-dark Mode labels → JetBrains Mono (The Annotation)
 2. **Leave space for longer text.** "Catalog Resume" is longer than "Upload."
-3. **Illustrate empty states** with botanical or naturalist imagery, not generic icons.
+3. **Illustrate empty states** with [DEPRECATED_STYLE] or [DEPRECATED_STYLE] imagery, not generic icons.
 
 ---
 
@@ -299,7 +299,7 @@ Buttons: ["Discard Notes", "Continue Editing"]
 
 Before shipping any UI text, ask:
 
-- [ ] Does this sound like a kerala-streetprint naturalist would say it?
+- [ ] Does this sound like a kerala-streetprint [DEPRECATED_STYLE] would say it?
 - [ ] Is the action **obvious** to the user? (e.g. Can they tell it saves the file?)
 - [ ] Does it match the mode context (kr-dark = poetic, kr-dark = precise)?
 - [ ] Would a user smile or feel kr-solidarityus reading this?

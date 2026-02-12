@@ -13,9 +13,9 @@
 - **New File:** 13KB of pure kerala-rage kr-solidarity tokens
 - **Changes:**
   - ❌ Removed: Sage Green (`#B4D8AE`), Soft Coral (`#D97C65`)
-  - ✅ Added: Wattle Gold (`#D4A84B`), Asphalt Black (`#1A1714`), Waratah Red (`#C45C4B`)
+  - ✅ Added: Wattle Gold (`#D4A84B`), Asphalt Black (`#1A1714`), [DEPRECATED_STYLE] Red (`#C45C4B`)
   - ✅ Implemented: Mode switching (`[data-mode="kr-dark"]` / `[data-mode="kr-dark"]`)
-  - ✅ Implemented: Organic asymmetry shapes (Pebble, Stone, Leaf, Petal, Seed)
+  - ✅ Implemented: [DEPRECATED_STYLE] asymmetry shapes (Pebble, Stone, Leaf, Petal, Seed)
   - ✅ Implemented: Viscous Breeze physics (`cubic-bezier(0.34, 1.56, 0.64, 1)`)
 
 ### ✅ 2. GENERATED CSS FROM `tokens.json`
@@ -29,7 +29,7 @@
   - Component tokens (Cards, Buttons, Status chips)
 
 ### ✅ 3. IMPLEMENTED MODE SWITCHING
-- **kr-dark Mode:** Warm botanical glows, gouache texture, emotional typography
+- **kr-dark Mode:** Warm [DEPRECATED_STYLE] glows, gouache texture, emotional typography
 - **kr-dark Mode:** Cool clinical tones, grid overlays, precise typography
 - **Transition:** 600ms settle easing between modes
 
@@ -63,11 +63,11 @@
 - `index.css` (CSS classes for `.text-leaf`, `.btn-pebble`)
 
 ### ✅ Color: COMPLIANT
-- All color tokens now use Wattle Gold, Asphalt Black, Waratah Red
+- All color tokens now use Wattle Gold, Asphalt Black, [DEPRECATED_STYLE] Red
 - No Sage Green or Soft Coral in token files
 
 ### ✅ Morphology: COMPLIANT
-- Organic asymmetry implemented (e.g., `20px 6px 16px 28px`)
+- [DEPRECATED_STYLE] asymmetry implemented (e.g., `20px 6px 16px 28px`)
 - No generic `border-radius: 8px` in token files
 
 ---

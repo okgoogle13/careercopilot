@@ -130,14 +130,14 @@ def main():
     # I'll keep the logic from the original script but adapt paths
     semantic_colors = tokens.get('color', {}).get('semantic', {})
     if semantic_colors:
-        # Example: wattle-gold on specimen-night
+        # Example: wattle-gold on [DEPRECATED_STYLE]-night
         wattle = semantic_colors.get('wattle-gold', {}).get('value') or semantic_colors.get('wattle-gold', {}).get('$value')
-        night = semantic_colors.get('specimen-night', {}).get('value') or semantic_colors.get('specimen-night', {}).get('$value')
+        night = semantic_colors.get('[DEPRECATED_STYLE]-night', {}).get('value') or semantic_colors.get('[DEPRECATED_STYLE]-night', {}).get('$value')
         if wattle and night:
-            result = check_contrast('Wattle Gold', wattle, 'Specimen Night', night)
+            result = check_contrast('Wattle Gold', wattle, '[DEPRECATED_STYLE] Night', night)
             print(result)
             if "[FAIL]" in result:
-                warnings.append(f"Contrast FAIL: Wattle Gold on Specimen Night ({result})")
+                warnings.append(f"Contrast FAIL: Wattle Gold on [DEPRECATED_STYLE] Night ({result})")
 
     # Output Report
     if not critical_issues and not warnings:

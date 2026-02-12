@@ -7,7 +7,7 @@ This folder contains deprecated design documentation that has been consolidated 
 ### `annotated-wireframes.md.deprecated`
 
 - **Deprecated:** February 9, 2026
-- **Reason:** Contained outdated botanical/naturalist language ("kr-activist", "Greenhouse", "Cultivation") from the pre-Solidarity Mode design system.
+- **Reason:** Contained outdated [DEPRECATED_STYLE]/[DEPRECATED_STYLE] language ("kr-activist", "Greenhouse", "Cultivation") from the pre-Solidarity Mode design system.
 - **Consolidated Into:**
   - `06-wireframes.md` (layout and interaction specifications)
   - `06b-asset-placement.md` (asset integration details)

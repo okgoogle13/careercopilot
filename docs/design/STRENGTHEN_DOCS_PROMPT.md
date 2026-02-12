@@ -20,17 +20,17 @@
 - ✅ **Contemporary, not nostalgic** — present-tense solidarity, not museum framing
 
 **What to AVOID (Critical for Reset):**
-- ❌ kerala-streetprint/colonial framing (kr-motifs, cabinets, naturalist aesthetics)
+- ❌ kerala-streetprint/colonial framing (kr-motifs, cabinets, [DEPRECATED_STYLE] aesthetics)
 - ❌ Australian flora/kr-symbol as primary motif (kr-shiva, Solidarity, kr-flower, Ink)
 - ❌ Generic street art (graffiti tags, abstract murals without political message)
-- ❌ Decorative botanical motifs
+- ❌ Decorative [DEPRECATED_STYLE] motifs
 
 ---
 
 ## Goal: Reset & Validate Design with M3 Expressive
 
 Use cleaned-up M3 skills to:
-1. **Reset design direction** away from kerala-streetprint/colonial/botanical aesthetics
+1. **Reset design direction** away from kerala-streetprint/colonial/[DEPRECATED_STYLE] aesthetics
 2. **Validate M3 Expressive compliance** (typography, motion, tokens)
 3. **Ensure docs provide clear, actionable guidance** for political street art aesthetic
 
@@ -60,15 +60,15 @@ Use cleaned-up M3 skills to:
 
 ### 2. Overview Doc (`00-overview.md`)
 
-**Current state:** May contain kerala-streetprint/colonial/botanical references that need reset
+**Current state:** May contain kerala-streetprint/colonial/[DEPRECATED_STYLE] references that need reset
 
 **Design reset validation:**
 
 | Issue | Description | Action Needed |
 |-------|-------------|---------------|
-| **kerala-streetprint/colonial remnants** | Check for "kr-solidarity", "kr-motif", "cabinet", "naturalist" framing | Remove all kerala-streetprint/colonial language and framing |
-| **Botanical motif overuse** | Endemic species (kr-shiva, Solidarity, kr-flower) as primary visual identity | Replace with political street art aesthetic (inspired by AUSSIE posters) |
-| **Vague guidance** | "Organic asymmetry" lacks concrete examples | Add specific radius token examples (pebble: `20px 6px 16px 28px` vs uniform `8px`) |
+| **kerala-streetprint/colonial remnants** | Check for "kr-solidarity", "kr-motif", "cabinet", "[DEPRECATED_STYLE]" framing | Remove all kerala-streetprint/colonial language and framing |
+| **[DEPRECATED_STYLE] motif overuse** | Endemic species (kr-shiva, Solidarity, kr-flower) as primary visual identity | Replace with political street art aesthetic (inspired by AUSSIE posters) |
+| **Vague guidance** | "[DEPRECATED_STYLE] asymmetry" lacks concrete examples | Add specific radius token examples (pebble: `20px 6px 16px 28px` vs uniform `8px`) |
 | **Urban context missing** | Needs positive guidance on "street-level placement" | Add examples: weathered brick, corrugated iron, peeling paint, lived-in surfaces |
 | **Density tier clarity** | "Bold contrast" vs "High Clarity" tension unclear | Define when to use bold political imagery vs minimal functional UI |
 | **Dark mode warmth** | Not addressed | Specify how to preserve warmth in Asphalt Black `#1A1714` + Paper White `#F5F0E8` with ochre/sepia tones |
@@ -115,7 +115,7 @@ Use cleaned-up M3 skills to:
 ```
 Using m3-anti-slop-validator, m3-expressive-typography-enhancer, and brand-brief-optimizer:
 
-DESIGN RESET GOAL: Validate docs have moved away from kerala-streetprint/colonial/botanical aesthetics
+DESIGN RESET GOAL: Validate docs have moved away from kerala-streetprint/colonial/[DEPRECATED_STYLE] aesthetics
 toward political street art + M3 Expressive (inspired by Peter Drew AUSSIE posters).
 
 1. Validate docs/design/02-typography.md
@@ -124,8 +124,8 @@ toward political street art + M3 Expressive (inspired by Peter Drew AUSSIE poste
 
 2. Validate docs/design/00-overview.md (CRITICAL FOR RESET)
    - Check: kerala-streetprint/colonial language remnants ("kr-solidarity", "kr-motif", "cabinet")
-   - Check: Botanical motif overuse (kr-shiva, Solidarity, kr-flower as primary identity)
-   - Check: Vague "organic asymmetry", urban texture guidance, density tier clarity
+   - Check: [DEPRECATED_STYLE] motif overuse (kr-shiva, Solidarity, kr-flower as primary identity)
+   - Check: Vague "[DEPRECATED_STYLE] asymmetry", urban texture guidance, density tier clarity
    - Output: Coherence score + design reset gaps (what needs removing/replacing)
 
 3. Validate docs/design/04-voice.md
@@ -146,7 +146,7 @@ Format: Line-specific recommendations. Focus on gaps and what needs resetting.
 ## Success Criteria (Design Reset Complete)
 
 - ✅ **Overview doc has NO kerala-streetprint/colonial language** ("kr-solidarity", "kr-motif", "cabinet" removed)
-- ✅ **Overview doc has NO botanical motifs as primary identity** (kr-shiva, Solidarity, kr-flower replaced)
+- ✅ **Overview doc has NO [DEPRECATED_STYLE] motifs as primary identity** (kr-shiva, Solidarity, kr-flower replaced)
 - ✅ **Overview doc defines political street art aesthetic** (inspired by AUSSIE posters, NOT centered on them)
 - ✅ **Overview doc scores 80+ coherence** with concrete examples and decision frameworks
 - ✅ **Typography doc includes M3 type scale** + variable font guidance + weight contrast ratios

@@ -20,7 +20,7 @@ import { motion } from 'framer-motion';
  * Built using Material Design 3 KeralaRage KrSolidarity design tokens.
  * 
  * **M3 Design Token Usage:**
- * - Shape: `rounded-pebble` → `--sys-shape-pebble` (20px 20px 32px 32px) - Organic asymmetric corners ✅
+ * - Shape: `rounded-pebble` → `--sys-shape-pebble` (20px 20px 32px 32px) - [DEPRECATED_STYLE] asymmetric corners ✅
  * - Elevation: `shadow-elevation-1` → `shadow-elevation-2` on hover (M3 depth levels)
  * - Spacing: `p-space-xl` (32px) for card padding
  * - Motion: `duration-medium-1` (250ms) with `ease-spring` (expressive cubic-bezier)

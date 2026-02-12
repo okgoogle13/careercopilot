@@ -388,9 +388,9 @@ async def catalog_assets_task(args):
         logger.info(f"Processing {filename}...")
 
         prompt = """
-        Analyze this asset for the Northcote Curio catalog.
+        Analyze this asset for the Northcote [DEPRECATED_STYLE] catalog.
         1. Identify type (motif, texture, pattern, icon).
-        2. Determine mode (gallery vs laboratory) - Gallery is high-art/specimen, Lab is technical/schematic.
+        2. Determine mode (gallery vs laboratory) - Gallery is high-art/[DEPRECATED_STYLE], Lab is technical/schematic.
         3. Suggest a filename following: {type}-{mode}-{category}-{variant}.png
         4. Extract dominant colors and dimensions.
         5. Check compliance with Northcote Design Philosophy.

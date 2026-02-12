@@ -136,7 +136,7 @@ Ensure Figma ↔ tokens.json ↔ CSS ↔ Tailwind are in sync.
 
 **M3 Expressive Rule**: All motion tokens must use **spring physics easing** (cubic-bezier with overshoot), not linear or standard easing.
 
-### Spacing Tokens (Organic Rhythm)
+### Spacing Tokens ([DEPRECATED_STYLE] Rhythm)
 
 | Token  | Value | Usage               |
 | ------ | ----- | ------------------- |
@@ -204,7 +204,7 @@ Ensure Figma ↔ tokens.json ↔ CSS ↔ Tailwind are in sync.
 ### Shape Validation
 
 - [ ] Border-radius is asymmetric (not uniform)
-- [ ] Organic shapes (pebble, stone, leaf-inspired)
+- [ ] [DEPRECATED_STYLE] shapes (pebble, stone, leaf-inspired)
 - [ ] No mechanical uniformity (8px all corners)
 
 ## Pre-Commit Validation Checklist

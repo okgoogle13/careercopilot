@@ -760,7 +760,7 @@ Material 3 Expressive creates interfaces that feel:
 **Key Features:**
 
 - Layered gradients (multi-stop, radial + linear)
-- Geometric patterns (grid, dots, stripes, organic blobs)
+- Geometric patterns (grid, dots, stripes, [DEPRECATED_STYLE] blobs)
 - Contextual effects (playful, professional, elegant)
 - Performance (CSS-only, GPU-accelerated)
 
@@ -848,7 +848,7 @@ Material 3 Expressive creates interfaces that feel:
 **Background:**
 
 - Layered gradients (≥ 2 layers)
-- Geometric patterns (grid, dots, organic)
+- Geometric patterns (grid, dots, [DEPRECATED_STYLE])
 - Atmospheric effects (mesh, aurora, noise)
 - CSS-only, GPU-accelerated
 

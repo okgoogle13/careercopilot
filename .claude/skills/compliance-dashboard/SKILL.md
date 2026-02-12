@@ -1,7 +1,7 @@
 ---
 description: Real-time compliance tracking for kerala-rage kr-solidarity design system. Monitors
   component migration progress (Material 3 to kerala-rage metaphors), visual audit pass
-  rates, typography distinctiveness, botanical palette adherence, and overall design
+  rates, typography distinctiveness, [DEPRECATED_STYLE] palette adherence, and overall design
   system maturity. Feeds data from visual audits and component inventories into health
   metrics.
 name: compliance-dashboard
@@ -17,7 +17,7 @@ Real-time compliance tracking CLI for kerala-rage kr-solidarity design system. A
 
 Run the tool to get:
 - **Overall compliance %** (target: 80%)
-- **Per-dimension metrics** (typography, color, layout, botanical)
+- **Per-dimension metrics** (typography, color, layout, [DEPRECATED_STYLE])
 - **Component-level status** (aligned vs needs refinement)
 - **Prioritized work queues** (which components to focus on next)
 
@@ -47,7 +47,7 @@ The tool aggregates from multiple sources to compute component health:
 
 2. **docs/design/audits/<ComponentName>.json**
    - Visual audit results (if exist)
-   - Dimension scores (typography, color, layout, botanical)
+   - Dimension scores (typography, color, layout, [DEPRECATED_STYLE])
    - Overall compliance score
 
 3. **docs/design/generated/specs/**
@@ -77,7 +77,7 @@ Complete structured output:
     "typography": 0.85,
     "color": 0.82,
     "layout": 0.74,
-    "botanical": 0.68,
+    "[DEPRECATED_STYLE]": 0.68,
     "migration": 0.92,
     "generated_at": "2026-02-10T02:07:37.749610+00:00"
   },
@@ -91,7 +91,7 @@ Complete structured output:
         "typography": null,
         "color": null,
         "layout": null,
-        "botanical": null
+        "[DEPRECATED_STYLE]": null
       },
       "status": "aligned|needs_refinement",
       "needs": [
@@ -128,7 +128,7 @@ Overall Compliance: 78% ▲ (Target: 80%)
   Typography        85% ✓
   Color             82% ✓
   Layout            74% ▼
-  Botanical         68% ▲
+  [DEPRECATED_STYLE]         68% ▲
   Migration        100% ✓
 
 Status: Approaching production-ready threshold
@@ -170,7 +170,7 @@ Computed from gaps:
 | `needs_typography_fix` | typography score < 0.8 |
 | `needs_color_fix` | color score < 0.8 |
 | `needs_layout_refine` | layout score < 0.8 |
-| `needs_botanical_integration` | botanical score < 0.7 |
+| `needs_botanical_integration` | [DEPRECATED_STYLE] score < 0.7 |
 | `needs_migration_cleanup` | mode = "migrate" AND hardcoded_values = true |
 | `needs_tests` | target.tests ≠ "none" AND no test file |
 | `needs_stage2` | target.stage2 = "complete" AND (no mockup OR no code) |
@@ -204,7 +204,7 @@ Average score across components with audit data:
 typography_avg = mean(comp.scores.typography for comp in components if score exists)
 color_avg = mean(comp.scores.color for comp in components if score exists)
 layout_avg = mean(comp.scores.layout for comp in components if score exists)
-botanical_avg = mean(comp.scores.botanical for comp in components if score exists)
+botanical_avg = mean(comp.scores.[DEPRECATED_STYLE] for comp in components if score exists)
 ```
 
 ### Migration Compliance

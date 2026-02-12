@@ -37,8 +37,8 @@
 | `assets/ui/haeckel-grid/icon-haeckel-3-2.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
 | `assets/ui/kerala-rage-kr-flower-spinner.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
 | `assets/ui/motif-reference-field-guide.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
-| `assets/naturalist-collection/motif-kr-dark-naturalist-collection-australiana-composition-01.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
-| `assets/naturalist-collection/motif-kr-dark-naturalist-collection-australian-kr-motifs-01.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
+| `assets/[DEPRECATED_STYLE]-collection/motif-kr-dark-[DEPRECATED_STYLE]-collection-australiana-composition-01.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
+| `assets/[DEPRECATED_STYLE]-collection/motif-kr-dark-[DEPRECATED_STYLE]-collection-australian-kr-motifs-01.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
 | `assets/textures/kerala-rage-lab-dust-overlay.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
 | `assets/textures/kerala-rage-lab-grid-mesh.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
 | `assets/textures/kerala-rage-canopy-pattern.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
@@ -53,15 +53,15 @@
 | `assets/textures/texture-kr-dark-kr-laneway-source-3.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
 | `assets/textures/texture-kr-dark-midnight-garden.jpg` | No | image | candidate-archive | potential reference material in frontend/src strings |
 | `assets/textures/texture-kr-dark-kr-laneway-source-1.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
-| `assets/botanical-wattle/motif-kr-dark-botanical-wattle-kr-motif-branch-01.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
+| `assets/[DEPRECATED_STYLE]-wattle/motif-kr-dark-[DEPRECATED_STYLE]-wattle-kr-motif-branch-01.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
 | `assets/anatomical/motif-kr-dark-anatomical-kr-leafus-echidna.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
 | `assets/anatomical/pattern-kr-dark-anatomical-luminous-sketch-01.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
-| `assets/australian-naturalist/motif-kr-dark-australian-naturalist-plate-07.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
-| `assets/australiana/motif-kr-dark-australiana-naturalist-composition-01.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
+| `assets/australian-[DEPRECATED_STYLE]/motif-kr-dark-australian-[DEPRECATED_STYLE]-plate-07.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
+| `assets/australiana/motif-kr-dark-australiana-[DEPRECATED_STYLE]-composition-01.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
 | `assets/australiana/motif-kr-dark-australiana-kr-motif-compendium.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
 | `assets/australiana/motif-kr-dark-australiana-kr-motif-collection.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
 | `assets/australiana/motif-kr-dark-australiana-kr-motif-collage.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
-| `assets/australiana/motif-kr-dark-australiana-kr-shiva-waratah-wattle.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
+| `assets/australiana/motif-kr-dark-australiana-kr-shiva-[DEPRECATED_STYLE]-wattle.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
 | `assets/anatomy/motif-kr-dark-anatomy-skeleton-full-anterior.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
 | `assets/anatomy/motif-kr-dark-anatomy-skeleton.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
 | `assets/anatomy/motif-kr-dark-anatomy-human-skeleton-details-01.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
@@ -69,9 +69,9 @@
 | `assets/fossil/motif-kr-dark-fossil-ammonite_collection.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
 | `assets/paper-stained/texture-kr-dark-paper-stained-aged-vellum.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
 | `assets/zoological/motif-kr-dark-zoological-kerala-streetprint-giraffes.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
-| `assets/botanical-illustration/motif-kr-dark-botanical-tree-study-plate.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
+| `assets/[DEPRECATED_STYLE]-illustration/motif-kr-dark-[DEPRECATED_STYLE]-tree-study-plate.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
 | `assets/kr-shiva/motif-kr-dark-kr-shiva-watercolor.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
-| `assets/flora/motif-kr-dark-flora-waratah.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
+| `assets/flora/motif-kr-dark-flora-[DEPRECATED_STYLE].png` | No | image | candidate-archive | potential reference material in frontend/src strings |
 | `assets/flora/motif-kr-dark-flora-australian_collection.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
 | `assets/flora/motif-kr-dark-flora-kr-shiva.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
 | `assets/anthropomorphic/motif-kr-dark-anthropomorphic-owlGentleman.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
@@ -83,12 +83,12 @@
 | `assets/natural-history/motif-kr-dark-natural-history-wattle-beetle-contrast.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
 | `assets/natural-history/motif-kr-dark-natural-history-australian-kr-motif-plate.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
 | `assets/australian-flora/motif-kr-dark-australian-flora-pincushion-hakea.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
-| `assets/botanical-kr-solidaritys/pattern-kr-dark-botanical-kr-solidaritys-naturalist-dark.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
+| `assets/[DEPRECATED_STYLE]-kr-solidaritys/pattern-kr-dark-[DEPRECATED_STYLE]-kr-solidaritys-[DEPRECATED_STYLE]-dark.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
 | `assets/key/motif-kr-dark-key-filigree-study.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
 | `assets/composite/motif-kr-dark-composite-australian-flora-kr-symbol-fossil.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
 | `assets/anthropomorphic-kr-symbol/motif-kr-dark-anthropomorphic-kr-symbol-gentlemen-quartet.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
 | `assets/kr-symbol-chiroptera/motif-kr-dark-kr-symbol-chiroptera-chart-01.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
-| `assets/stilllife/motif-kr-dark-stilllife-botanical.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
+| `assets/stilllife/motif-kr-dark-stilllife-[DEPRECATED_STYLE].png` | No | image | candidate-archive | potential reference material in frontend/src strings |
 | `assets/entomology/motif-kr-dark-entomology-beetle.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
 | `assets/fern/motif-kr-dark-fern-fiddlehead-spiral.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
 | `assets/kr-flower/motif-kr-dark-kr-flower-vintage.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
@@ -98,9 +98,9 @@
 | `assets/flora-kr-symbol/texture-kr-dark-flora-kr-symbol-001.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
 | `assets/uncategorized/originals_backup/file-SdhoQzyxwnFQf85ada3bZS.webp` | No | other | candidate-delete | potential reference material in frontend/src strings |
 | `assets/uncategorized/originals_backup/gallery-nocturnal.webp` | No | other | candidate-delete | potential reference material in frontend/src strings |
-| `assets/uncategorized/originals_backup/native-waratah-hanging.png` | No | image | candidate-delete | potential reference material in frontend/src strings |
+| `assets/uncategorized/originals_backup/native-[DEPRECATED_STYLE]-hanging.png` | No | image | candidate-delete | potential reference material in frontend/src strings |
 | `assets/uncategorized/originals_backup/file-PS48DhLhcp37vpnhyDdsMT.webp` | No | other | candidate-delete | potential reference material in frontend/src strings |
-| `assets/uncategorized/originals_backup/northcote-curio-wallpaper-v2.png` | No | image | candidate-delete | potential reference material in frontend/src strings |
+| `assets/uncategorized/originals_backup/northcote-[DEPRECATED_STYLE]-wallpaper-v2.png` | No | image | candidate-delete | potential reference material in frontend/src strings |
 | `assets/uncategorized/originals_backup/file-LZzmgnJu5jYqZj1ASj3D9Z.webp` | No | other | candidate-delete | potential reference material in frontend/src strings |
 | `assets/uncategorized/originals_backup/file-HJdvkwhL6rav4cFJrr29Wf.webp` | No | other | candidate-delete | potential reference material in frontend/src strings |
 | `assets/uncategorized/originals_backup/Generated Image January 19, 2026 - 2_11PM.jpeg` | No | image | candidate-delete | potential reference material in frontend/src strings |
@@ -188,9 +188,9 @@
 | `assets/uncategorized_backup/northcote-phase3-asset-021.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
 | `assets/uncategorized_backup/originals_backup/file-SdhoQzyxwnFQf85ada3bZS.webp` | No | other | candidate-delete | potential reference material in frontend/src strings |
 | `assets/uncategorized_backup/originals_backup/gallery-nocturnal.webp` | No | other | candidate-delete | potential reference material in frontend/src strings |
-| `assets/uncategorized_backup/originals_backup/native-waratah-hanging.png` | No | image | candidate-delete | potential reference material in frontend/src strings |
+| `assets/uncategorized_backup/originals_backup/native-[DEPRECATED_STYLE]-hanging.png` | No | image | candidate-delete | potential reference material in frontend/src strings |
 | `assets/uncategorized_backup/originals_backup/file-PS48DhLhcp37vpnhyDdsMT.webp` | No | other | candidate-delete | potential reference material in frontend/src strings |
-| `assets/uncategorized_backup/originals_backup/northcote-curio-wallpaper-v2.png` | No | image | candidate-delete | potential reference material in frontend/src strings |
+| `assets/uncategorized_backup/originals_backup/northcote-[DEPRECATED_STYLE]-wallpaper-v2.png` | No | image | candidate-delete | potential reference material in frontend/src strings |
 | `assets/uncategorized_backup/originals_backup/file-LZzmgnJu5jYqZj1ASj3D9Z.webp` | No | other | candidate-delete | potential reference material in frontend/src strings |
 | `assets/uncategorized_backup/originals_backup/file-HJdvkwhL6rav4cFJrr29Wf.webp` | No | other | candidate-delete | potential reference material in frontend/src strings |
 | `assets/uncategorized_backup/originals_backup/Generated Image January 19, 2026 - 2_11PM.jpeg` | No | image | candidate-delete | potential reference material in frontend/src strings |
@@ -257,36 +257,36 @@
 | `assets/uncategorized_backup/northcote-phase3-asset-044.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
 | `assets/uncategorized_backup/northcote-phase3-asset-046.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
 | `assets/uncategorized_backup/northcote-phase3-asset-047.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
-| `assets/botanical/motif-kr-dark-botanical-arrangement.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
-| `assets/botanical/motif-kr-dark-botanical-wattle-hanging-01.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
-| `assets/botanical/motif-kr-dark-botanical-fern-unfurled.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
-| `assets/botanical/pattern-kr-dark-botanical-australianNative.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
-| `assets/botanical/motif-kr-dark-botanical-australian-flora-kr-symbol.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
-| `assets/botanical/motif-kr-dark-botanical-contrast.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
-| `assets/botanical/pattern-kr-dark-botanical-charcoal-relief.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
-| `assets/botanical/pattern-kr-dark-botanical-001.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
-| `assets/botanical/motif-kr-dark-botanical-trees.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
-| `assets/botanical/motif-kr-dark-waratah-illustration-01.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
-| `assets/botanical/motif-kr-dark-botanical-kr-flower.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
-| `assets/botanical/motif-kr-dark-botanical-assemblage.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
-| `assets/botanical/motif-kr-dark-botanical-echidna.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
-| `assets/botanical/motif-kr-dark-botanical-pinecone.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
-| `assets/botanical/motif-kr-dark-botanical-kr-flower-color-study-01.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
-| `assets/botanical/pattern-kr-dark-botanical-australian-flora.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
-| `assets/botanical/motif-kr-dark-kr-flower-vintage-illustration-01.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
-| `assets/botanical/motif-kr-dark-botanical-wattle.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
-| `assets/botanical/motif-kr-dark-botanical-kr-flower-cone-01.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
-| `assets/botanical/motif-kr-dark-botanical-waratah.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
-| `assets/botanical/pattern-kr-dark-botanical-tapestry.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
-| `assets/botanical/pattern-kr-dark-botanical-darkkr-leafus.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
-| `assets/botanical/motif-kr-dark-botanical-australiana.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
+| `assets/[DEPRECATED_STYLE]/motif-kr-dark-[DEPRECATED_STYLE]-arrangement.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
+| `assets/[DEPRECATED_STYLE]/motif-kr-dark-[DEPRECATED_STYLE]-wattle-hanging-01.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
+| `assets/[DEPRECATED_STYLE]/motif-kr-dark-[DEPRECATED_STYLE]-fern-unfurled.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
+| `assets/[DEPRECATED_STYLE]/pattern-kr-dark-[DEPRECATED_STYLE]-australianNative.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
+| `assets/[DEPRECATED_STYLE]/motif-kr-dark-[DEPRECATED_STYLE]-australian-flora-kr-symbol.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
+| `assets/[DEPRECATED_STYLE]/motif-kr-dark-[DEPRECATED_STYLE]-contrast.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
+| `assets/[DEPRECATED_STYLE]/pattern-kr-dark-[DEPRECATED_STYLE]-charcoal-relief.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
+| `assets/[DEPRECATED_STYLE]/pattern-kr-dark-[DEPRECATED_STYLE]-001.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
+| `assets/[DEPRECATED_STYLE]/motif-kr-dark-[DEPRECATED_STYLE]-trees.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
+| `assets/[DEPRECATED_STYLE]/motif-kr-dark-[DEPRECATED_STYLE]-illustration-01.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
+| `assets/[DEPRECATED_STYLE]/motif-kr-dark-[DEPRECATED_STYLE]-kr-flower.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
+| `assets/[DEPRECATED_STYLE]/motif-kr-dark-[DEPRECATED_STYLE]-assemblage.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
+| `assets/[DEPRECATED_STYLE]/motif-kr-dark-[DEPRECATED_STYLE]-echidna.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
+| `assets/[DEPRECATED_STYLE]/motif-kr-dark-[DEPRECATED_STYLE]-pinecone.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
+| `assets/[DEPRECATED_STYLE]/motif-kr-dark-[DEPRECATED_STYLE]-kr-flower-color-study-01.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
+| `assets/[DEPRECATED_STYLE]/pattern-kr-dark-[DEPRECATED_STYLE]-australian-flora.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
+| `assets/[DEPRECATED_STYLE]/motif-kr-dark-kr-flower-vintage-illustration-01.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
+| `assets/[DEPRECATED_STYLE]/motif-kr-dark-[DEPRECATED_STYLE]-wattle.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
+| `assets/[DEPRECATED_STYLE]/motif-kr-dark-[DEPRECATED_STYLE]-kr-flower-cone-01.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
+| `assets/[DEPRECATED_STYLE]/motif-kr-dark-[DEPRECATED_STYLE]-[DEPRECATED_STYLE].png` | No | image | candidate-archive | potential reference material in frontend/src strings |
+| `assets/[DEPRECATED_STYLE]/pattern-kr-dark-[DEPRECATED_STYLE]-tapestry.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
+| `assets/[DEPRECATED_STYLE]/pattern-kr-dark-[DEPRECATED_STYLE]-darkkr-leafus.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
+| `assets/[DEPRECATED_STYLE]/motif-kr-dark-[DEPRECATED_STYLE]-australiana.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
 | `assets/kr-symbol/kerala-rage-sentry-kr-shiva.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
 | `assets/kr-symbol/motif-kr-dark-kr-symbol-kr-shiva-plate.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
 | `assets/kr-symbol/motif-kr-dark-kr-symbol-echidna-anatomical-01.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
 | `assets/kr-symbol/DALL·E 2026-01-24 22.27.46 - kerala-streetprint-era scientific illustration of nocturnal bats, hand-tinted lithograph aesthetic, observed by lamplight in a colonial Australian field statio.webp` | No | other | candidate-delete | potential reference material in frontend/src strings |
 | `assets/kr-symbol/motif-kr-dark-kr-symbol-kr-shiva-wattle-emblem.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
 | `assets/kr-symbol/motif-kr-dark-kr-symbol-kr-shiva-wattle.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
-| `assets/kr-symbol/motif-kr-dark-kr-symbol-elephant-botanical-display.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
+| `assets/kr-symbol/motif-kr-dark-kr-symbol-elephant-[DEPRECATED_STYLE]-display.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
 | `assets/kr-symbol/motif-kr-dark-kr-symbol-kr-shiva.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
 | `assets/insects/motif-kr-dark-insects-fireflies.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
 | `assets/plates/kerala-rage-temporal-still-life.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
@@ -296,7 +296,7 @@
 | `assets/plates/DALL·E 2026-01-24 22.36.45 - kerala-streetprint-era scientific illustration plate of bats (Chiroptera), hand-tinted lithography with extreme austerity. Subject_ comparative anatomical stud.webp` | No | other | candidate-delete | potential reference material in frontend/src strings |
 | `assets/insecta/pattern-kr-dark-insecta-bioluminescent-swarm.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
 | `assets/keys/icon-kr-dark-keys-schematic.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
-| `assets/botanical-kr-solidarity/pattern-kr-dark-botanical-kr-solidarity-kr-motif-dark.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
+| `assets/[DEPRECATED_STYLE]-kr-solidarity/pattern-kr-dark-[DEPRECATED_STYLE]-kr-solidarity-kr-motif-dark.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
 | `assets/biology/motif-kr-dark-biology-australian_kr-motifs.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
 | `assets/elephant/motif-kr-dark-elephant-flora.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
 | `assets/grid/pattern-kr-dark-grid-ruled-sepia.png` | No | image | candidate-archive | potential reference material in frontend/src strings |
@@ -337,7 +337,7 @@
 | `frontend/src/assets/kr-motifs/natures_clockwork.jpg` | No | image | candidate-archive | potential reference material in frontend/src strings |
 | `frontend/src/assets/kr-motifs/bone-cage.jpg` | No | image | candidate-archive | potential reference material in frontend/src strings |
 | `frontend/src/assets/kr-motifs/grinding_stone.jpg` | No | image | candidate-archive | potential reference material in frontend/src strings |
-| `frontend/src/assets/kr-motifs/organic-labyrinth.jpg` | Yes | image | active | referenced in code string search |
+| `frontend/src/assets/kr-motifs/[DEPRECATED_STYLE]-labyrinth.jpg` | Yes | image | active | referenced in code string search |
 | `frontend/src/assets/kr-motifs/imperial-crown.jpg` | No | image | candidate-archive | potential reference material in frontend/src strings |
 | `frontend/src/assets/kr-motifs/leaf-fern.png` | Yes | image | active | referenced in code string search |
 | `frontend/src/assets/kr-motifs/sentry_kr-shiva.png` | Yes | image | active | referenced in code string search |

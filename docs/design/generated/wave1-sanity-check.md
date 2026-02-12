@@ -55,7 +55,7 @@ This report summarizes the sanity check for the foundational Kerala Rage compone
 
 ## TODOs for Human Design decisions
 - `// TODO[asset]:` Placeholder in `SolidarityCard.tsx` for `screenprint-grit` texture.
-- `// TODO[asset]:` Placeholder in `ManifestoSlab.tsx` for `botanical-motif` overlay.
+- `// TODO[asset]:` Placeholder in `ManifestoSlab.tsx` for `[DEPRECATED_STYLE]-motif` overlay.
 - `// TODO[asset]:` Decision on whether `ActionButton` labels should adopt Fraunces presets.
 - **Tone Tuning**: Verify if the `energetic` vs `restrained` transition in `ManifestoSlab` matches the desired emotional weight during actual mode switching.
 

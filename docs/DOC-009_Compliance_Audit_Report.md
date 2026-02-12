@@ -52,7 +52,7 @@ While the "kr-dark" (Mode A) implementation captures the poetic intent of the de
 
 ### PAGE 3: Onboarding - "Choosing the Soil"
 
-- 🔴 **Assets**: Missing botanical anchors (`waratah`, `wattle`, `kr-flower`) in CSS.
+- 🔴 **Assets**: Missing [DEPRECATED_STYLE] anchors (`[DEPRECATED_STYLE]`, `wattle`, `kr-flower`) in CSS.
 - 🟡 **Content**: Title "Choosing the Soil" differs slightly from spec "Choose Your Habitat".
 
 ### PAGE 4: Ingestion - "The Mulch & Mineral Setup"
@@ -107,4 +107,4 @@ Many unique assets (Compass, Specific Botanicals) are currently represented by t
 
 ## Conclusion
 
-The application is functionally robust but **aesthetically misaligned** with the specific "Naturalist/Scientific" duality designated in DOC-008. Bringing the tokens and assets into compliance is critical to achieving the intended "kerala-rage kr-solidarity" atmosphere.
+The application is functionally robust but **aesthetically misaligned** with the specific "[DEPRECATED_STYLE]/Scientific" duality designated in DOC-008. Bringing the tokens and assets into compliance is critical to achieving the intended "kerala-rage kr-solidarity" atmosphere.

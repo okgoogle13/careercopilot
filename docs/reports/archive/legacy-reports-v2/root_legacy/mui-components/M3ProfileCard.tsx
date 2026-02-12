@@ -33,7 +33,7 @@ const getScoreColor = (score: number) => {
  *
  * Anatomy:
  * 1. Base Container (z-index: 0) - M3 Filled Card variant
- * 2. Media Layer (z-index: 1) - Botanical leaf illustration
+ * 2. Media Layer (z-index: 1) - [DEPRECATED_STYLE] leaf illustration
  * 3. Content Layer (z-index: 2) - Profile information
  */
 export const M3ProfileCard: React.FC<M3ProfileCardProps> = ({
@@ -64,7 +64,7 @@ export const M3ProfileCard: React.FC<M3ProfileCardProps> = ({
         boxShadow: "none",
       }}
     >
-      {/* Media Layer (z-index: 1) - Botanical Leaf Illustration */}
+      {/* Media Layer (z-index: 1) - [DEPRECATED_STYLE] Leaf Illustration */}
       <Box
         sx={{
           position: "absolute",

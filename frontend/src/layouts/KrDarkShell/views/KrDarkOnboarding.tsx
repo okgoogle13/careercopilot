@@ -5,7 +5,7 @@ import { ManifestoSlab, SolidarityCard, ActionButton } from '../../../components
 /**
  * KrDarkOnboarding (Hi-Fi)
  * 
- * Guided sequence to initialize the Naturalist's profile.
+ * Guided sequence to initialize the [DEPRECATED_STYLE]'s profile.
  * High-stasis transitions with bold proclamation typography.
  */
 export const KrDarkOnboarding: React.FC = () => {
@@ -27,7 +27,7 @@ export const KrDarkOnboarding: React.FC = () => {
         className="text-center mb-16 space-y-4"
       >
         <h1 className="font-proclamation text-5xl md:text-7xl uppercase text-paper-white tracking-widest">
-          Welcome, Naturalist.
+          Welcome, [DEPRECATED_STYLE].
         </h1>
         <p className="font-annotation text-[10px] uppercase tracking-[0.4em] text-solidarity-red/80">
           Initializing Induction Protocol

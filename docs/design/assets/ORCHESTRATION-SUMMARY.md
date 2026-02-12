@@ -41,7 +41,7 @@
 - ✅ Validation: Scored 78/100 (correctly identified as REGENERATE)
 - ✅ Packaging: Created 5-file bundle in `/assets/ASSET-20260211-023251-*/`
 - ✅ Categorization: Tagged as `kr-motif-variant` (dark-mode)
-- ✅ Placement: Generated Stone archetype, 1-5 z-index, 0.65/0.15 opacity guidelines
+- ✅ Placement: Generated Stone archetype, 1-5 z-index, 0.65 opacity guidelines
 - ✅ Directory structure verified (matches CLAUDE.md)
 - ✅ File naming conventions validated
 
@@ -51,11 +51,11 @@
 ├── context.md (92 lines, Kerala-rage narrative)
 ├── tokens.json (43 lines, DTCG-compliant design tokens)
 ├── usage.md (74 lines, CSS + responsive guidelines)
-├── placement-guide.md (46 lines, organic layout strategy)
+├── placement-guide.md (46 lines, [DEPRECATED_STYLE] layout strategy)
 └── README.md (19 lines, iteration tracking)
 
 /frontend/public/assets/kr-motifs/
-└── kr-moti-kr-dark-botanical-canopy-*-1024.png (production asset)
+└── kr-moti-kr-dark-[DEPRECATED_STYLE]-canopy-*-1024.png (production asset)
 ```
 
 ---
@@ -139,7 +139,7 @@ Input PNG
 ├── placeholders/
 ├── templates/
 ├── uncategorized_backup/
-├── ASSET-20260211-023251-botanical-canopy-{id}/ ← NEW
+├── ASSET-20260211-023251-[DEPRECATED_STYLE]-canopy-{id}/ ← NEW
 │   ├── context.md
 │   ├── tokens.json
 │   ├── usage.md
@@ -150,7 +150,7 @@ Input PNG
 /frontend/public/assets/kr-motifs/
 ├── keras-rage-beetle-scarab-variant.png
 ├── ... (10 existing)
-└── kr-moti-kr-dark-botanical-canopy-{id}-1024.png ← NEW
+└── kr-moti-kr-dark-[DEPRECATED_STYLE]-canopy-{id}-1024.png ← NEW
 
 /docs/design/assets/
 ├── asset-workflow.md (integration review)
@@ -173,18 +173,18 @@ Input PNG
 **Examples Generated**:
 - ✅ `kerala-rage-ink-burst-1024.png`
 - ✅ `texture-kr-dark-lab-grid-512.png`
-- ✅ `pattern-botanical-tile-256.png`
+- ✅ `pattern-[DEPRECATED_STYLE]-tile-256.png`
 
 **Current Test Output** (needs fixing):
-- ⚠️ `kr-moti-kr-dark-botanical-canopy-{id}-1024.png`
-  - Fix: Should be `kerala-rage-botanical-canopy-kr-dark-1024.png`
+- ⚠️ `kr-moti-kr-dark-[DEPRECATED_STYLE]-canopy-{id}-1024.png`
+  - Fix: Should be `kerala-rage-[DEPRECATED_STYLE]-canopy-kr-dark-1024.png`
 
 ### Metadata Directories (`/assets/`)
 
 **Convention**: `ASSET-[ID]-[slug]/`
 
 **Examples**:
-- ✅ `ASSET-20260211-023251-botanical-canopy-{id}/`
+- ✅ `ASSET-20260211-023251-[DEPRECATED_STYLE]-canopy-{id}/`
 - ✅ `ASSET-20260211-HHMMSS-kr-motif-name/`
 
 ---
@@ -198,8 +198,7 @@ Input PNG
 | Categorization | Category = kr-motifs | Variant = kr-motif-variant |
 | Categorization | Compliance ≥85 | Ready for Placement = true |
 | Placement | Category = kr-motif-variant | Archetype = Stone, Z-index = 1-5 |
-| Placement | Gallery Mode | Opacity = 0.65 |
-| Placement | Laboratory Mode | Opacity = 0.15 |
+| Placement | Solidarity Mode | Opacity = 0.65 |
 
 ---
 
@@ -209,7 +208,7 @@ Input PNG
 ```json
 {
   "asset_id": "ASSET-20260211-023251",
-  "asset_name": "Botanical Canopy...",
+  "asset_name": "[DEPRECATED_STYLE] Canopy...",
   "category": "kr-motifs",
   "background": "#1A1714",
   "palette": {
@@ -219,7 +218,7 @@ Input PNG
   "dimensions": {"width": 1024, "height": 1024, "format": "PNG"},
   "density_zones": {
     "upper_left": {"coverage": "18%", "empty_space": "200x200px"},
-    "central": {"coverage": "65%", "density": "wunderkammer"},
+    "central": {"coverage": "65%", "density": "[DEPRECATED_STYLE]"},
     "lower_right": {"coverage": "20%", "empty_space": "150x150px"}
   },
   "kr_motifs": ["ink", "leaf", "endemic_flora"],
@@ -230,8 +229,8 @@ Input PNG
 
 ### usage.md (CSS Implementation)
 ```css
-.asset-botanical-canopy {
-  background-image: url('/assets/kr-motifs/kerala-rage-botanical-canopy-kr-dark-1024.png');
+.asset-[DEPRECATED_STYLE]-canopy {
+  background-image: url('/assets/kr-motifs/kerala-rage-[DEPRECATED_STYLE]-canopy-kr-dark-1024.png');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -239,8 +238,7 @@ Input PNG
 
 .kr-dark-hero { opacity: 0.85; }
 .kr-dark-content { opacity: 0.70; }
-.gallery-mode { opacity: 0.65; }
-.laboratory-mode { opacity: 0.15; }
+.solidarity-mode { opacity: 0.65; }
 ```
 
 ### placement-guide.md (Layout Strategy)
@@ -248,16 +246,16 @@ Input PNG
 ## Archetype Mapping
 - **Archetype**: Stone (layered, heavy, foundational)
 - **Z-index**: 1-5 (behind content, above base)
-- **Opacity**: Gallery 0.65, Laboratory 0.15
+- **Opacity**: 0.65
 
-## Organic Drift
+## [DEPRECATED_STYLE] Drift
 - Horizontal offset: 7.5% (not 8%)
 - Vertical offset: 4.2% (not 5%)
 - Border radius: 23px (not 20px/24px)
 
 ## Density Zones
 - Upper-left: 18% coverage, 200×200px empty
-- Central: 65% (Wunderkammer density)
+- Central: 65% ([DEPRECATED_STYLE] density)
 - Lower-right: 20% coverage, 150×150px empty
 ```
 
@@ -389,7 +387,7 @@ The orchestrated 4-skill asset workflow successfully demonstrates:
 1. **Validation**: Automated compliance scoring (6 dimensions)
 2. **Packaging**: Standardized bundle generation (metadata + production)
 3. **Categorization**: Intelligent asset tagging (category + variance)
-4. **Placement**: Organic layout suggestions (archetype + positioning)
+4. **Placement**: [DEPRECATED_STYLE] layout suggestions (archetype + positioning)
 
 **Key Achievements**:
 - ✅ Skill chain architecture proven and tested

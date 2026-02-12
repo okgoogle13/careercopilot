@@ -29,10 +29,10 @@ export interface M3AlertProps {
  * M3Alert - Material Design 3 Compliant Alert Component
  *
  * Displays important messages with semantic color coding and icons.
- * Features organic M3 shapes and proper accessibility.
+ * Features [DEPRECATED_STYLE] M3 shapes and proper accessibility.
  *
  * **M3 Design Token Usage:**
- * - Shape: `rounded-pebble` (friendly organic)
+ * - Shape: `rounded-pebble` (friendly [DEPRECATED_STYLE])
  * - Colors: M3 semantic color roles (error, warning, info, success→secondary)
  * - Typography: M3 title + body scales
  * - Elevation: Subtle shadow for prominence

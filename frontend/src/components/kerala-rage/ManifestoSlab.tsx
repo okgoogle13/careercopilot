@@ -18,7 +18,7 @@ export interface ManifestoSlabProps extends HTMLMotionProps<'div'> {
  * ManifestoSlab (Slab)
  * 
  * Structural primitive for high-impact headlines and hero sections.
- * Implements the "Slab" primitive with sharp but softened organic radii.
+ * Implements the "Slab" primitive with sharp but softened [DEPRECATED_STYLE] radii.
  * 
  * @mission Technically solid, accessible, and correctly wired to the Fraunces presets.
  */
@@ -58,8 +58,8 @@ export const ManifestoSlab: React.FC<ManifestoSlabProps> = ({
       {...motionProps}
       {...props}
     >
-      {/* TODO[asset]: Human will replace with botanical motif background overlay. */}
-      {/* <div className="absolute top-0 right-0 w-64 h-64 opacity-5 pointer-events-none z-0 bg-motif-botanical" /> */}
+      {/* TODO[asset]: Human will replace with [DEPRECATED_STYLE] motif background overlay. */}
+      {/* <div className="absolute top-0 right-0 w-64 h-64 opacity-5 pointer-events-none z-0 bg-motif-[DEPRECATED_STYLE]" /> */}
 
       <div className="relative z-10 flex flex-col gap-4">
         {subtitle && (

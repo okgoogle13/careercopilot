@@ -22,7 +22,7 @@ export interface SeedProps {
 /**
  * M3Badge - KeralaRage KrSolidarity Notification Badge
  *
- * An organic badge overlay for icons and components.
+ * An [DEPRECATED_STYLE] badge overlay for icons and components.
  */
 export const Seed: React.FC<SeedProps> = ({
   content,

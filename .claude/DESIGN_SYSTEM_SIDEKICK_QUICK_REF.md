@@ -37,7 +37,7 @@ Use this server to **bridge creative direction with programmatic validation**.
 
 **Example Prompt:**
 
-> "Create the React component and CSS for this validated Waratah background."
+> "Create the React component and CSS for this validated [DEPRECATED_STYLE] background."
 
 **What it does:**
 

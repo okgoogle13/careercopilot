@@ -123,16 +123,16 @@
       "ncFontDisplay: Lora, Fraunces",
       "ncFontBody: Crimson Text, Source Serif Pro",
       "ncFontMono: Inconsolata",
-      "ncColorBotanical: Wattle, Waratah, kr-leafus, Sage",
+      "ncColorBotanical: Wattle, [DEPRECATED_STYLE], kr-leafus, Sage",
       "ncShapeOrganic: asymmetric border-radius patterns",
       "ncShadow: kerala-rage elevation system"
     ],
     "migration_checklist": [
       "Find and replace M3 color tokens with ncColor* equivalents",
       "Find and replace fontFamily: 'Roboto'|'Inter'|'Arial' with ncFont*",
-      "Find and replace uniform border-radius with organic asymmetric patterns",
+      "Find and replace uniform border-radius with [DEPRECATED_STYLE] asymmetric patterns",
       "Find and replace Material 3 elevation (shadowElevation) with kerala-rage shadows",
-      "Remove Material 3 semantic naming (e.g., 'primary', 'secondary') → Botanical names",
+      "Remove Material 3 semantic naming (e.g., 'primary', 'secondary') → [DEPRECATED_STYLE] names",
       "Test: Run component storybook, visually verify color/font changes"
     ]
   },

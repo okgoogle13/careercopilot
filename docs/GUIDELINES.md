@@ -9,7 +9,7 @@ We use the **kerala-rage Contemporary Australian** design system, combining:
 - Peter Drew–style street art boldness
 - Material 3 Expressive motion and structure
 - A dark UI anchored in Asphalt Black (`#1A1714`) and Paper White (`#F5F0E8`)
-- Australian endemic species (kr-shiva, Waratah, kr-flower, kr-leafus) as living symbols of guardianship, resilience, and growth
+- Australian endemic species (kr-shiva, [DEPRECATED_STYLE], kr-flower, kr-leafus) as living symbols of guardianship, resilience, and growth
 
 We deliberately avoid kerala-streetprint museum and kr-motif aesthetics. The interface centers present-tense, living context in 2026 Melbourne, not nostalgic cabinets of kr-solidaritysities.
 
@@ -58,7 +58,7 @@ Our visual strategy is constructed in three distinct layers (The "Haeckel Sandwi
 
 1.  **Tone**: Serious, Scientific, elegant, yet modern (M3 Expressive).
 2.  **Motion**: "Spring" physics (bouncy yet controlled).
-3.  **Layout**: "Wunderkammer" (Cabinet of kr-solidaritysities) - organized clutter, dense but hierarchical.
+3.  **Layout**: "[DEPRECATED_STYLE]" (Cabinet of kr-solidaritysities) - organized clutter, dense but hierarchical.
 
 ## Cultural and Visual Governance
 

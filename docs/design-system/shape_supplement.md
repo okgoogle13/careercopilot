@@ -1,20 +1,20 @@
-# Supplement: Organic Shape System
+# Supplement: [DEPRECATED_STYLE] Shape System
 
 ## Philosophy
 
-Nature hates straight lines. The Kerala Rage system rejects the colonial "perfect grid" in favor of organic, asymmetric, and "torn" shapes that imply history, wear, and resistance.
+Nature hates straight lines. The Kerala Rage system rejects the colonial "perfect grid" in favor of [DEPRECATED_STYLE], asymmetric, and "torn" shapes that imply history, wear, and resistance.
 
 ## Core Shapes
 
-### 1. Organic Card (The Stone)
+### 1. [DEPRECATED_STYLE] Card (The Stone)
 
-- **Token:** `shape-organic-card`
+- **Token:** `shape-[DEPRECATED_STYLE]-card`
 - **Border-Radius:** `28px 24px 32px 20px` (Base), `32px 20px 24px 28px` (Variant)
 - **Usage:** All main content containers. NEVER a perfect rectangle.
 
-### 2. Organic Button (The Pebble)
+### 2. [DEPRECATED_STYLE] Button (The Pebble)
 
-- **Token:** `shape-organic-button`
+- **Token:** `shape-[DEPRECATED_STYLE]-button`
 - **Border-Radius:** `16px 8px 12px 20px`
 - **Usage:** Primary interactions.
 
@@ -33,4 +33,4 @@ Nature hates straight lines. The Kerala Rage system rejects the colonial "perfec
 ## Implementation Notes
 
 - Use `CSS Masking` or `clip-path` for Torn Edges.
-- Avoid repeating the exact same organic shape adjacent to each other; use `nth-child` to alternate radius values.
+- Avoid repeating the exact same [DEPRECATED_STYLE] shape adjacent to each other; use `nth-child` to alternate radius values.

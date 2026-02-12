@@ -68,7 +68,7 @@ const M3Button = React.forwardRef<HTMLButtonElement, M3ButtonProps>(
     ({ className, variant, size, asChild: _asChild = false, ...props }, ref) => {
         const { mode } = useMode();
 
-        // Shape logic: KrDark = Organic, Lab = Precise
+        // Shape logic: KrDark = [DEPRECATED_STYLE], Lab = Precise
         // We use inline styles for shape to avoid generic tailwind classes
         const shapeStyle = mode === 'KrDark' || mode === 'KrLight'
             ? { borderRadius: 'var(--radius-leaf)' }

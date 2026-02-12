@@ -19,11 +19,11 @@ export interface MarkProps extends Omit<React.InputHTMLAttributes<HTMLInputEleme
  * Mark - KeralaRage KrSolidarity Checkbox
  *
  * A custom checkbox component using KeralaRage KrSolidarity design tokens with enhanced UX.
- * Features organic shapes with Seed radius, spring animations, and proper state indicators.
+ * Features [DEPRECATED_STYLE] shapes with Seed radius, spring animations, and proper state indicators.
  *
  * **KeralaRage Design Token Usage:**
- * - Shape: `--radius-seed` (subtle organic corners)
- * - Colors: Botanical palette (Ink Gold, Solidarity Red, Concrete Grey)
+ * - Shape: `--radius-seed` (subtle [DEPRECATED_STYLE] corners)
+ * - Colors: [DEPRECATED_STYLE] palette (Ink Gold, Solidarity Red, Concrete Grey)
  * - Motion: Viscous-breeze easing for smooth check transition
  * - Typography: Field-note font for labels
  *

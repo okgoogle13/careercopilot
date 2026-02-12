@@ -701,7 +701,7 @@
     },
     {
       "success": true,
-      "image_path": "frontend/src/assets/kr-motifs/organic-labyrinth.jpg",
+      "image_path": "frontend/src/assets/kr-motifs/[DEPRECATED_STYLE]-labyrinth.jpg",
       "asset_id": "KR-SOLID-168",
       "stage_completed": "export",
       "overall_score": 85.6,
@@ -943,7 +943,7 @@
     },
     {
       "success": true,
-      "image_path": "frontend/public/assets/kr-motifs/kr-moti-kr-dark-botanical-canopy-feb-11,-2026,-12_47_46-am-1024.png",
+      "image_path": "frontend/public/assets/kr-motifs/kr-moti-kr-dark-[DEPRECATED_STYLE]-canopy-feb-11,-2026,-12_47_46-am-1024.png",
       "asset_id": "KR-SOLID-194",
       "stage_completed": "export",
       "overall_score": 85.6,

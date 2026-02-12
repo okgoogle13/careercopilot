@@ -21,7 +21,7 @@ export interface SolidarityCardProps extends HTMLMotionProps<'div'> {
  * SolidarityCard (Stone)
  * 
  * Foundational container for the Kerala Rage design system. 
- * Implements the "Stone" primitive with organic radii and viscous shadows.
+ * Implements the "Stone" primitive with [DEPRECATED_STYLE] radii and viscous shadows.
  * 
  * Pattern Principles:
  * 1. Reduced-motion compliance (opacity-only fallback).

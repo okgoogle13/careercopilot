@@ -21,7 +21,7 @@ Data is political. We do not use neutral blues. We use the colors of the land (K
 ### 3. Alert Data (The Warning)
 
 - **Token:** `color-data-alert`
-- **Ref:** `var(--color-waratah-red)`
+- **Ref:** `var(--color-[DEPRECATED_STYLE]-red)`
 - **Usage:** Drops in performance, critical thresholds.
 
 ### 4. Background Data (The Noise)

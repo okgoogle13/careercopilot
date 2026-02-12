@@ -27,5 +27,5 @@
 
 ## Motif Slots
 - `// TODO[asset]: Hero Elephant Motif (top-right, opacity-20)`
-- `// TODO[asset]: Torn Edge Substrate (full-width bottom edge)`
-- `// TODO[asset]: Screenprint Grit Overlay (global)`
+- `- {KR-UI-001} Wheat paste tear (large + small variants) for torn poster edges) **[REQUIRES GENERATION]**
+- `- {KR-UI-003} Screenprint grit particles (tile + sprite set) for floating texture) **[REQUIRES GENERATION]**

@@ -9,9 +9,9 @@
 
 ## 1. System Identity: The Field Station
 
-**We are not building a dashboard. We are building a kerala-streetprint naturalist's field station, discovered in the Australian bush at twilight.**
+**We are not building a dashboard. We are building a kerala-streetprint [DEPRECATED_STYLE]'s field station, discovered in the Australian bush at twilight.**
 
-CareerCopilot is a curated digital workspace where a user's professional history is treated not as "data," but as a precious biological kr-motif. The interface creates a deliberate tension between two worlds, directly inspired by Federation-era botanical plates and Da Vinci's anatomical notebooks:
+CareerCopilot is a curated digital workspace where a user's professional history is treated not as "data," but as a precious biological kr-motif. The interface creates a deliberate tension between two worlds, directly inspired by Federation-era [DEPRECATED_STYLE] plates and Da Vinci's anatomical notebooks:
 
 ### The Central Duality
 
@@ -37,7 +37,7 @@ Our mission is to give the user the tools of an explorer: the velvet-lined case 
 *   **DOC-003:** [User Flows & Journeys](./DOC-003_User_Flows.md) - *From "The Germination" (Ingest) to "The Pollination" (Apply).*
 *   **DOC-004:** [Component Catalog](./DOC-004_Component_Catalog.md) - *React components: The Pebble, The Stone, The Lens.*
 *   **DOC-005:** [Migration Reports](./DOC-005_Migration_Report.md) - *Audit logs of the shift from v1.*
-*   **DOC-006:** [Voice and Microcopy](./DOC-006_Voice_and_Microcopy.md) - *The tone and language of the naturalist.*
+*   **DOC-006:** [Voice and Microcopy](./DOC-006_Voice_and_Microcopy.md) - *The tone and language of the [DEPRECATED_STYLE].*
 *   **DOC-007:** [Wireframes](./DOC-007_Wireframes.md) - *The structural blueprints.*
 *   **DOC-008:** [Detailed Wireframe Asset Summary](./DOC-008_Detailed_wireframe_asset_summary.md) - *High-density mapping of assets to pages.*
 *   **DOC-009:** [Asset Transformation Principles](./DOC-009_Asset_Transformation_Principles.md) - *Philosophy and narratives for kr-motif prep.*
@@ -52,14 +52,14 @@ Our mission is to give the user the tools of an explorer: the velvet-lined case 
 
 ### A. The "Anti-Slop" Protocol
 
-*   **No Symmetry:** Standard `border-radius: 8px` is banned. We use **"Organic Asymmetry"** (e.g., `24px 8px 20px 4px`) to mimic eroded stones and curled gum leaves.
+*   **No Symmetry:** Standard `border-radius: 8px` is banned. We use **"[DEPRECATED_STYLE] Asymmetry"** (e.g., `24px 8px 20px 4px`) to mimic eroded stones and curled gum leaves.
 *   **No Pure Black/White:** We use **Asphalt Black** (`#1A1714`) and **Paper White** (`#F5F0E8`). Pure hex codes create digital harshness that breaks the illusion.
 *   **No Generic Sans-Serifs:** `Inter`, `Roboto`, and `Arial` are strictly forbidden. We use **Work Sans** for human notes and **JetBrains Mono** for machine data.
 *   **No Drop Shadows:** Shadows must behave like **Ink Pools**—diffused, ambient, and grounding. No harsh directional light sources.
 
 ### B. The Mode Separation Law (Crucial)
 
-*   **The kr-dark Rule:** Lush botanical motifs (Waratahs, kr-flowers) belong *only* in emotional spaces. Use the "Poster Typography" style here (Condensed Serif Proclamations).
+*   **The kr-dark Rule:** Lush [DEPRECATED_STYLE] motifs (Waratahs, kr-flowers) belong *only* in emotional spaces. Use the "Poster Typography" style here (Condensed Serif Proclamations).
 *   **The kr-dark Rule:** **NO FLOWERS** in the Audit Chamber. When analyzing data, we switch to **Skeletal Etchings**. The visual language is grid lines, measurement markings, and monoline vectors.
 
 ### C. The "Viscous Breeze" Physics
@@ -94,7 +94,7 @@ Our mission is to give the user the tools of an explorer: the velvet-lined case 
 *(Copy this section into your Cursor/Lovable/Figma system prompt)*
 
 **PROJECT IDENTITY: kerala-rage kr-solidarity**
-We are building a career management platform styled as a **kerala-streetprint Naturalist's Field Station**. The design system has two distinct emotional modes:
+We are building a career management platform styled as a **kerala-streetprint [DEPRECATED_STYLE]'s Field Station**. The design system has two distinct emotional modes:
 
 **MODE A: THE kr-dark (Wonder)**
 
@@ -115,5 +115,5 @@ We are building a career management platform styled as a **kerala-streetprint Na
 
 *   **Background:** Asphalt Black (`#1A1714`) - Warm charred umber.
 *   **Primary:** Wattle Gold (`#D4A84B`) - Luminous, like candlelight.
-*   **Accent:** Waratah Red (`#C45C4B`) - The heartbeat/alert color.
+*   **Accent:** [DEPRECATED_STYLE] Red (`#C45C4B`) - The heartbeat/alert color.
 *   **Containers:** Concrete Grey (`#2C2723`) - Warm grey woodsmoke.

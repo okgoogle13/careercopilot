@@ -15,14 +15,14 @@
 | --- | --- | --- | --- |
 | **Asphalt Black** | `#1A1714` | `--color-surface` | **The Floor.** A warm, charred umber (not black). |
 | **Wattle Gold** | `#D4A84B` | `--color-primary` | **The Protagonist.** Actions, Focus, "Candlelight". |
-| **Waratah Red** | `#C45C4B` | `--color-accent` | **The Spark.** Alerts, Urgency, "Heartbeat". |
+| **[DEPRECATED_STYLE] Red** | `#C45C4B` | `--color-accent` | **The Spark.** Alerts, Urgency, "Heartbeat". |
 | **Concrete Grey** | `#2C2723` | `--color-container` | **The Container.** Cards, Panels (Woodsmoke at dusk). |
 | **Concrete Grey** | `#A8A097` | `--color-muted` | **The Detail.** Metadata, Secondary Text (Dusty Mauve). |
 | **Paper White** | `#F5F0E8` | `--color-text` | **The Ink.** Primary text contrast. |
 
 ### Tonal Vegetation Stacks (Depth Variants)
 
-*Expanding tonal range within each botanical family for layered depth.*
+*Expanding tonal range within each [DEPRECATED_STYLE] family for layered depth.*
 
 #### 🌼 Wattle Gold Family (Primary Tones)
 | Token Name | Hex | CSS Variable | Usage |
@@ -32,13 +32,13 @@
 | **Wattle Glow** | `#E8C963` | `--color-primary-light` | Lighter, almost fluorescent. Hover states, highlights. |
 | **Wattle Bloom** | `#F5DDAA` | `--color-primary-pale` | Nearly paper-white, barely visible. Subtle accents, backgrounds. |
 
-#### 🌺 Waratah Family (Accent Tones)
+#### 🌺 [DEPRECATED_STYLE] Family (Accent Tones)
 | Token Name | Hex | CSS Variable | Usage |
 | --- | --- | --- | --- |
-| **Waratah Stem** | `#7A3A2E` | `--color-accent-dark` | Deep wine, grounded. Error states, critical alerts. |
-| **Waratah Base** | `#C45C4B` | `--color-accent` | Heartbeat, alert. Standard accent. |
-| **Waratah Glow** | `#E07865` | `--color-accent-light` | Neon-ish, urgent. Hover on accent elements. |
-| **Waratah Bloom** | `#F5A89A` | `--color-accent-pale` | Pale, softened. Subtle warnings, info states. |
+| **[DEPRECATED_STYLE] Stem** | `#7A3A2E` | `--color-accent-dark` | Deep wine, grounded. Error states, critical alerts. |
+| **[DEPRECATED_STYLE] Base** | `#C45C4B` | `--color-accent` | Heartbeat, alert. Standard accent. |
+| **[DEPRECATED_STYLE] Glow** | `#E07865` | `--color-accent-light` | Neon-ish, urgent. Hover on accent elements. |
+| **[DEPRECATED_STYLE] Bloom** | `#F5A89A` | `--color-accent-pale` | Pale, softened. Subtle warnings, info states. |
 
 **Design Principle:** Use tonal stacks to create **subtle depth** without breaking palette coherence. Example: A card might use `Concrete Grey` (container) with a `Wattle Glow` accent line—instantly familiar, instantly deeper.
 
@@ -59,7 +59,7 @@
 
 * **Role:** Sub-headers, Emotional Accents.
 * **Axes:** `SOFT: 50`, `WONK: 1` (kr-dark) → `WONK: 0` (kr-dark).
-* **Visual:** Hand-lettered, organic, "wonky".
+* **Visual:** Hand-lettered, [DEPRECATED_STYLE], "wonky".
 
 ### 📝 The Field Note (Work Sans)
 
@@ -126,7 +126,7 @@ transition: font-variation-settings 600ms cubic-bezier(0.34, 1.56, 0.64, 1);
 
 ### Proclamation Maximalism (Size Contrast)
 
-**Principle:** Adopt **extreme size ratios** (5x or greater) in kr-dark Mode hero moments, inspired by vintage naturalist classification sheets and Federation-era broadsides.
+**Principle:** Adopt **extreme size ratios** (5x or greater) in kr-dark Mode hero moments, inspired by vintage [DEPRECATED_STYLE] classification sheets and Federation-era broadsides.
 
 **Example Hero Composition:**
 ```
@@ -171,7 +171,7 @@ Track your growth through seasonal moments.
 * **Context:** Landing, Dashboard, Opportunity Feed.
 * **Texture:** `gouache-grain.png` overlay (Warm).
 * **Lighting:** "Candlelight" (Radial gradients of Wattle Gold).
-* **Motifs:** **Botanical.** Waratahs, kr-flowers, Gum Leaves.
+* **Motifs:** **[DEPRECATED_STYLE].** Waratahs, kr-flowers, Gum Leaves.
 * **Guardian:** The kr-shiva.
 
 ### Mode B: The kr-dark (Rigor)
@@ -184,7 +184,7 @@ Track your growth through seasonal moments.
 
 ---
 
-## 4. Morphology (Organic Asymmetry)
+## 4. Morphology ([DEPRECATED_STYLE] Asymmetry)
 
 *Eroded stones, not CAD-generated rectangles.*
 
@@ -216,7 +216,7 @@ Track your growth through seasonal moments.
 
 ### kr-dark Assets (The Garden)
 
-* `native-waratah-hanging.png` (Top-Right Anchor)
+* `native-[DEPRECATED_STYLE]-hanging.png` (Top-Right Anchor)
 * `native-kr-flower-cluster.png` (Bottom-Right Floor)
 * `kr-shiva-sentry.png` (Welcome/Empty States)
 

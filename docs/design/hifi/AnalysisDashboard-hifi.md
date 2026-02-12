@@ -3,7 +3,7 @@
 ## Layout Regions
 - **Discovery Header**: High-authority headline regarding identified skill sets.
 - **Skill Matrix**: A CSS grid (mobile: 2-col, desktop: 3/4-col) of `SkillTile` (Stone) components.
-- **Blueprint Foundation**: Full-screen substrate with a technical grid and occasional botanical accents.
+- **Blueprint Foundation**: Full-screen substrate with a technical grid and occasional [DEPRECATED_STYLE] accents.
 
 ## Typography
 - **Page Headline**: `Fraunces Energetic`, 48px, `font-weight: 800`.
@@ -28,6 +28,6 @@
 - **Mastery Animate**: Radial/Hex mastery graphs animate their fill state over 1.5s (Viscous ease).
 
 ## Motif Slots
-- `// TODO[asset]: Blueprint Grid Substrate overlay (Z-0, 12% opacity)`.
-- `// TODO[asset]: Botanical Motif accents for Elite/High-Mastery skills.`.
+- `- {KR-UI-004} Blueprint grid overlay (transparent) for technical grid patterns) **[REQUIRES GENERATION]**
+- `// TODO[asset]: [DEPRECATED_STYLE] Motif accents for Elite/High-Mastery skills.`.
 - `// TODO[asset]: Mastery Chart SVG/Canvas patterns`.
