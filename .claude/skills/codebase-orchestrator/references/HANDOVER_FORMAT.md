@@ -80,11 +80,11 @@
   "blocking": "Core form input - blocks form adoption",
   "dependencies": ["token-system"],
   "transforms": {
-    "M3Color": "ncColor.botanical",
+    "M3Color": "ncColor.[DEPRECATED_STYLE]",
     "fontFamily:Roboto": "ncFont.body",
     "fontFamily:Inter": "ncFont.body",
-    "elevation": "ncShadow.organic",
-    "borderRadius:8px": "borderRadius:organic"
+    "elevation": "ncShadow.[DEPRECATED_STYLE]",
+    "borderRadius:8px": "borderRadius:[DEPRECATED_STYLE]"
   },
   "token_refs": {
     "colors": "ncColorBotanical",

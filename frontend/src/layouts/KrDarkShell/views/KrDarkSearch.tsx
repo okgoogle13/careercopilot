@@ -15,7 +15,7 @@ export const KrDarkSearch: React.FC = () => {
     { title: 'Logistics Coordinator', company: 'Global Front', match: '98%', id: 'JOB_A' },
     { title: 'Security Architect', company: 'Sentry Core', match: '94%', id: 'JOB_B' },
     { title: 'Community Liaison', company: 'Collective Hub', match: '89%', id: 'JOB_C' },
-    { title: 'Data Naturalist', company: 'Archive Prime', match: '85%', id: 'JOB_D' },
+    { title: 'Data [DEPRECATED_STYLE]', company: 'Archive Prime', match: '85%', id: 'JOB_D' },
     { title: 'Tactical Analyst', company: 'Mission Control', match: '82%', id: 'JOB_E' },
   ];
 

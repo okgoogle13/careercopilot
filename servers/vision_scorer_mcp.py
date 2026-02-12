@@ -43,19 +43,19 @@ def score_asset_compliance(image_path: str, asset_id: str, target_score: int = 9
         model = genai.GenerativeModel('gemini-2.0-flash')
 
         prompt = f"""
-        Analyze this Northcote Curio asset (ID: {asset_id}).
+        Analyze this Northcote [DEPRECATED_STYLE] asset (ID: {asset_id}).
 
         Task: Perform a strict visual compliance audit against the Northcote Design System.
 
         1. Extract visual data:
            - Hex colors (dominant + accents)
-           - Specimen identification (if organic)
+           - [DEPRECATED_STYLE] identification (if [DEPRECATED_STYLE])
            - Density analysis (upper-left, center, lower-right)
            - Translucency check
            - Typography validation (if present)
 
         2. Score against these dimensions (0-20 each):
-           - Geographic Authenticity (Australian flora/fauna correctness)
+           - [DEPRECATED_STYLE] Authenticity (Australian flora/fauna correctness)
            - Translucency Physics (Light interaction, x-ray effects)
            - Scale Hierarchy (Clear focal point, correct proportions)
            - Density Zones (Proper negative space vs detail)

@@ -14,7 +14,7 @@ import {
  * KrDarkKanban (Hi-Fi)
  * 
  * High-fidelity mission tracking.
- * Features tactical assembly grids, dense mission cards with monospaced metadata, and botanical status pulses.
+ * Features tactical assembly grids, dense mission cards with monospaced metadata, and [DEPRECATED_STYLE] status pulses.
  */
 export const KrDarkKanban: React.FC = () => {
     const shouldReduceMotion = useReducedMotion() ?? false;

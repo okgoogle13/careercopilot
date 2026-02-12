@@ -20,7 +20,7 @@ export interface ActionButtonProps extends HTMLMotionProps<'button'> {
  * ActionButton (Pebble)
  * 
  * Foundational interaction primitive for the Kerala Rage design system.
- * Implements the "Pebble" primitive with hand-cut organic radii.
+ * Implements the "Pebble" primitive with hand-cut [DEPRECATED_STYLE] radii.
  * 
  * @mission Technically solid, accessible, and correctly wired to the Fraunces presets.
  */

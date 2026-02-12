@@ -48,7 +48,7 @@ You are the "kerala-rage kr-solidarity" master scientific illustrator (kerala-st
 | ASSET-6  | kr-flower Pot + Stromatolite | Temporal Narrative   | None (Geological)    |
 | ASSET-7  | Firefly Sprite             | Atmospheric Detail   | High (Glow)          |
 | ASSET-8  | Fossil Verification Mark   | Lab Mode Stamp       | None (Paleo)         |
-| ASSET-9  | Waratah Hero Closeup       | Marketing Hero       | Low (Petals)         |
+| ASSET-9  | [DEPRECATED_STYLE] Hero Closeup       | Marketing Hero       | Low (Petals)         |
 | ASSET-10 | kr-flower Spinner            | Loading State        | None (Abstract)      |
 
 ---
@@ -61,17 +61,17 @@ You are the "kerala-rage kr-solidarity" master scientific illustrator (kerala-st
 
 ### ASSET-2: THE SENTRY kr-shiva
 
-**Core Concept:** Watercolor naturalist illustration in the Gould tradition. Direct gaze, welcoming posture.
+**Core Concept:** Watercolor [DEPRECATED_STYLE] illustration in the Gould tradition. Direct gaze, welcoming posture.
 **Prompt Additions:**
 
-- **Technique:** Visible brush strokes, pigment pooling, organic edge bleeds (no hard masking).
+- **Technique:** Visible brush strokes, pigment pooling, [DEPRECATED_STYLE] edge bleeds (no hard masking).
 - **Background:** Charcoal with subtle watercolor texture (not absolute zero).
 - **Framing:** kr-leafus cinerea and Golden Wattle branches.
-- **Color:** Waratah Red (#C45C4B) accents in framing.
+- **Color:** [DEPRECATED_STYLE] Red (#C45C4B) accents in framing.
 
 ### ASSET-3: NOCTURNAL CANOPY PATTERN
 
-**Core Concept:** Seamless botanical silhouette pattern.
+**Core Concept:** Seamless [DEPRECATED_STYLE] silhouette pattern.
 **Prompt Additions:**
 
 - **Geometry:** Repeating tile of kr-flower cones, kr-leafus lanceolate leaves, and Wattle spheres.
@@ -81,7 +81,7 @@ You are the "kerala-rage kr-solidarity" master scientific illustrator (kerala-st
 
 ### ASSET-4: WATTLE BRANCH WITH JEWEL BEETLE
 
-**Core Concept:** Metallic carapace geometry meets botanical soft spheres.
+**Core Concept:** Metallic carapace geometry meets [DEPRECATED_STYLE] soft spheres.
 **Prompt Additions:**
 
 - **kr-motif:** Acacia pycnantha spray with a Jewel Beetle (Sternocera sp.).
@@ -120,9 +120,9 @@ You are the "kerala-rage kr-solidarity" master scientific illustrator (kerala-st
 - **Geometry:** Precise reticulate (net-like) venation.
 - **Style:** High-contrast lithic study. Deep brown veins (#6A4E42) on stony grey (#A89F8C).
 
-### ASSET-9: WARATAH HERO CLOSEUP
+### ASSET-9: [DEPRECATED_STYLE] HERO CLOSEUP
 
-**Core Concept:** The Botanical Rose Window.
+**Core Concept:** The [DEPRECATED_STYLE] Rose Window.
 **Prompt Additions:**
 
 - **Geometry:** Pure frontal view of Telopea speciosissima head. Radial mandala of 250+ individual florets.

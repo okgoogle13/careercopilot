@@ -25,7 +25,7 @@ Programmatic asset validation using Gemini Vision API via the Design System Side
    - Extract hex colors and verify against palette.
    - Detect and identify kr-motifs.
    - Analyze density zones and translucency physics.
-3. **Scoring**: Calculate scores across 6 dimensions (Geographic, Translucency, Scale, etc.).
+3. **Scoring**: Calculate scores across 6 dimensions ([DEPRECATED_STYLE], Translucency, Scale, etc.).
 4. **Decision**: Return a structured JSON with an overall score and a REGENERATE/PACKAGE decision.
 
 ## New MCP Tools
@@ -46,7 +46,7 @@ Programmatic asset validation using Gemini Vision API via the Design System Side
 
 1. Load image via Vision API
 2. Extract colors (sample 50 points → hex codes)
-3. Identify kr-motifs (Vision recognition + geographic DB lookup)
+3. Identify kr-motifs (Vision recognition + [DEPRECATED_STYLE] DB lookup)
 4. Measure density zones (pixel coverage analysis)
 5. Detect translucency (luminance gradient analysis)
 6. OCR typography (count labels, verify font/color)
@@ -84,8 +84,8 @@ Programmatic asset validation using Gemini Vision API via the Design System Side
     "accents": ["#7A9E82", "#D4885C"]
   },
   "kr-motifs": [
-    { "name": "Waratah", "size_cm": 15, "position": "upper_right" },
-    { "name": "Frill-neck", "size_cm": 18, "position": "center" }
+    { "name": "[DEPRECATED_STYLE]", "size_cm": 15, "position": "upper_right" },
+    { "name": "[DEPRECATED_STYLE]", "size_cm": 18, "position": "center" }
   ],
   "density": {
     "upper_left": 18,
@@ -103,7 +103,7 @@ Programmatic asset validation using Gemini Vision API via the Design System Side
 ```json
 {
   "progression": [
-    { "attempt": 1, "score": 68, "key_failure": "Geographic violations" },
+    { "attempt": 1, "score": 68, "key_failure": "[DEPRECATED_STYLE] violations" },
     { "attempt": 2, "score": 87, "key_failure": "Density zones" },
     { "attempt": 3, "score": 92, "decision": "PACKAGE" }
   ],

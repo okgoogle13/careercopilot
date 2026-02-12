@@ -56,7 +56,7 @@ From pattern analysis (12/38 ready assets):
 Create an abstract solidarity texture using pure screenprint aesthetics:
 
 **Primary Elements**:
-- Organic paint drips and splashes
+- [DEPRECATED_STYLE] paint drips and splashes
 - Wheat-paste residue textures
 - Weathered poster fragments
 - Hand-printed imperfections
@@ -85,7 +85,7 @@ This is a background texture representing:
 
 - **Central Zone (60-70% coverage)**: Primary paint drips and texture
 - **Edge Zones (20-30% coverage)**: Lighter, faded areas for UI layering
-- **Corners**: Organic fadeout, NOT hard edges
+- **Corners**: [DEPRECATED_STYLE] fadeout, NOT hard edges
 
 ## TECHNICAL OUTPUT
 
@@ -111,7 +111,7 @@ This is a background texture representing:
 
 ---
 
-Generate with emphasis on hand-printed texture, organic imperfection, and wheat-paste poster aesthetics.
+Generate with emphasis on hand-printed texture, [DEPRECATED_STYLE] imperfection, and wheat-paste poster aesthetics.
 ```
 
 ---
@@ -145,7 +145,7 @@ From pattern analysis (12/38 ready assets):
 Create an abstract solidarity texture using pure screenprint aesthetics:
 
 **Primary Elements**:
-- Organic paint drips and splashes
+- [DEPRECATED_STYLE] paint drips and splashes
 - Wheat-paste residue textures
 - Weathered poster fragments
 - Hand-printed imperfections
@@ -174,7 +174,7 @@ This is a background texture representing:
 
 - **Central Zone (60-70% coverage)**: Primary paint drips and texture
 - **Edge Zones (20-30% coverage)**: Lighter, faded areas for UI layering
-- **Corners**: Organic fadeout, NOT hard edges
+- **Corners**: [DEPRECATED_STYLE] fadeout, NOT hard edges
 
 ## TECHNICAL OUTPUT
 
@@ -199,7 +199,7 @@ This is a background texture representing:
 
 ---
 
-Generate with emphasis on organic gravity-driven ink flow, hand-printed imperfection, and protest banner aesthetics.
+Generate with emphasis on [DEPRECATED_STYLE] gravity-driven ink flow, hand-printed imperfection, and protest banner aesthetics.
 ```
 
 ---

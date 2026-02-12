@@ -33,7 +33,7 @@ export interface M3PlantCareCardProps {
  * M3PlantCareCard - Material 3 Expressive Plant Care Card
  *
  * Features:
- * - Custom card component with botanical theme
+ * - Custom card component with [DEPRECATED_STYLE] theme
  * - Base: surfaceContainer fill with outlineVariant stroke
  * - Corner radius: 16px
  * - Title uses primary color and h5 typography
@@ -123,7 +123,7 @@ const PlantNameText = styled(Typography)(({ theme }) => ({
   fontStyle: "italic",
 }));
 
-// Botanical illustrations from Figma - actual plant images
+// [DEPRECATED_STYLE] illustrations from Figma - actual plant images
 const PlantIllustrations = {
   plant1: plant1Image, // Wavy curved leaves
   plant2: plant2Image, // Potted plant with broad leaves
@@ -138,7 +138,7 @@ export const M3PlantCareCard: React.FC<M3PlantCareCardProps> = ({
 }) => {
   return (
     <StyledCard>
-      {/* Media Layer (z-index: 1) - Botanical Illustration */}
+      {/* Media Layer (z-index: 1) - [DEPRECATED_STYLE] Illustration */}
       <IllustrationContainer>
         <img
           src={PlantIllustrations[illustration]}

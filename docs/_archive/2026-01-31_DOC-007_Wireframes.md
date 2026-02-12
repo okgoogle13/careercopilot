@@ -59,7 +59,7 @@
 - **Cards:** `Core/Leaf` shape (`radius-leaf`).
   - **Default:** Glassmorphic.
   - **Selected:** Wattle Gold "Filament" border (`3px solid #D4A84B`) + Glow.
-- **Content:** Industry sectors (e.g., "Tech", "Health") represented by vintage botanical icons.
+- **Content:** Industry sectors (e.g., "Tech", "Health") represented by vintage [DEPRECATED_STYLE] icons.
 
 ## 4. Ingestion ("The Mulch & Mineral Setup")
 

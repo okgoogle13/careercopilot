@@ -159,7 +159,7 @@ Complete M3 token definitions:
 
 - [ ] **Test JobQueue Page**
   - Navigate to `/job-queue`
-  - Verify cards use organic shapes (asymmetric corners)
+  - Verify cards use [DEPRECATED_STYLE] shapes (asymmetric corners)
   - Check button hover effects
   - Test analyze and draft functionality
 
@@ -322,7 +322,7 @@ A: Yes! They work together seamlessly thanks to the shared theme.
 A: Use the themed MUI component temporarily, or create a new M3 component following the patterns in M3Card/M3Button.
 
 **Q: How do I test the changes?**  
-A: Run `npm run dev`, navigate to `/job-queue`, and visually inspect the organic shapes, colors, and animations.
+A: Run `npm run dev`, navigate to `/job-queue`, and visually inspect the [DEPRECATED_STYLE] shapes, colors, and animations.
 
 ---
 

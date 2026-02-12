@@ -37,7 +37,7 @@ if [ -f "src/index.css" ]; then
     fi
     
     if grep -q "rounded-pebble" src/index.css; then
-        echo -e "${GREEN}✓${NC} Organic shape utilities found"
+        echo -e "${GREEN}✓${NC} [DEPRECATED_STYLE] shape utilities found"
         ((utilities_count++))
     fi
     
@@ -66,7 +66,7 @@ echo ""
 echo "📋 Step 3: Checking ApplicationCard component..."
 if [ -f "src/components/shared/ApplicationCard.tsx" ]; then
     if grep -q "rounded-pebble" src/components/shared/ApplicationCard.tsx; then
-        echo -e "${GREEN}✓${NC} ApplicationCard uses organic shape (pebble)"
+        echo -e "${GREEN}✓${NC} ApplicationCard uses [DEPRECATED_STYLE] shape (pebble)"
     else
         echo -e "${YELLOW}⚠${NC} ApplicationCard still using generic rounded corners"
     fi
@@ -123,7 +123,7 @@ echo ""
 echo "Next Steps:"
 echo "  1. Start Storybook: ${YELLOW}yarn storybook${NC}"
 echo "  2. Navigate to: Shared → ApplicationCard"
-echo "  3. Verify organic pebble shape on card corners"
+echo "  3. Verify [DEPRECATED_STYLE] pebble shape on card corners"
 echo "  4. Test hover state for elevation change"
 echo "  5. Check all story variants render correctly"
 echo ""

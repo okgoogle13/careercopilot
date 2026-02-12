@@ -4,14 +4,14 @@
 
 ✅ **Allowed:**
 - Warm amber/gold/brown tones
-- Botanical subjects (flowers, leaves, branches)
+- [DEPRECATED_STYLE] subjects (flowers, leaves, branches)
 - kr-symbol (birds, insects in natural context)
-- Decorative, organic, flowing compositions
+- Decorative, [DEPRECATED_STYLE], flowing compositions
 - Emotional/aspirational aesthetic
 
 ✅ **Color Palette:**
 - Wattle Gold (#D4A84B)
-- Waratah Red (#C45C4B)
+- [DEPRECATED_STYLE] Red (#C45C4B)
 - Dark Ironbark backgrounds
 - Warm earth tones
 
@@ -31,8 +31,8 @@
 ❌ **Prohibited:**
 - Flowers
 - Decorative kr-symbol
-- Organic flourishes
-- Warm botanical tones
+- [DEPRECATED_STYLE] flourishes
+- Warm [DEPRECATED_STYLE] tones
 
 ✅ **Color Palette:**
 - Charcoal Slate (#16141A)
@@ -47,7 +47,7 @@
 
 Assets that work in either context:
 - Neutral geometric patterns
-- Hybrid scientific-botanical subjects (anatomical + natural)
+- Hybrid scientific-[DEPRECATED_STYLE] subjects (anatomical + natural)
 - kr-motifs without strong temperature bias
 - Structural elements (grids, frames) without decorative elements
 

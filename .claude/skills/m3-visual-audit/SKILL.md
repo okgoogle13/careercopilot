@@ -1,6 +1,6 @@
 ---
 name: m3-visual-audit
-description: Analyze component screenshots against Material Design 3 Expressive standards. Validate typography (variable fonts, extreme contrasts), color (vibrant tokens), layout (organic asymmetry), motion (spring physics), and expressive distinctiveness. Generate compliance assessments with 0-100 scoring.
+description: Analyze component screenshots against Material Design 3 Expressive standards. Validate typography (variable fonts, extreme contrasts), color (vibrant tokens), layout ([DEPRECATED_STYLE] asymmetry), motion (spring physics), and expressive distinctiveness. Generate compliance assessments with 0-100 scoring.
 version: 1.0.0
 tags: []
 ---
@@ -20,7 +20,7 @@ This skill validates components against M3 Expressive standards, which extend Ma
 | **Typography** | Clean, professional (Roboto)  | Variable fonts, extreme contrasts (Sora, Plus Jakarta Sans 300-900) |
 | **Color**      | Semantic tokens, neutral      | Vibrant semantic tokens, high saturation (40-80%)                   |
 | **Motion**     | Efficient (250-300ms, linear) | Springy, playful (250-400ms, cubic-bezier overshoot)                |
-| **Layout**     | Grid-aligned, mechanical      | Organic asymmetry, intentional "imperfection"                       |
+| **Layout**     | Grid-aligned, mechanical      | [DEPRECATED_STYLE] asymmetry, intentional "imperfection"                       |
 | **Components** | Predictable, minimal          | Personality-driven, visually distinctive                            |
 
 This audit validates the **Expressive** layer, not just baseline M3 compliance.
@@ -32,7 +32,7 @@ Use this skill when you need to:
 - **Audit a component screenshot** against M3 Expressive standards
 - **Validate typography choices** (are fonts distinctive and intentional?)
 - **Check color palette adherence** (are colors vibrant and M3 Expressive compliant?)
-- **Assess layout coherence** (is spacing organic or mechanical?)
+- **Assess layout coherence** (is spacing [DEPRECATED_STYLE] or mechanical?)
 - **Evaluate motion quality** (spring physics vs. linear easing?)
 - **Compare component evolution** (Baseline M3 → M3 Expressive transformation)
 
@@ -43,7 +43,7 @@ Use this skill when you need to:
 3. **Audit Dimensions**:
    - Typography (Variable fonts, 3x+ weight ratio)
    - Color (Vibrant tokens, 40-80% saturation)
-   - Layout (Organic asymmetry, varied spacing)
+   - Layout ([DEPRECATED_STYLE] asymmetry, varied spacing)
    - Motion (Spring physics, bloom effect)
 4. **Generate Report**: Produce a structured JSON assessment with a 0-100 score and specific remediation steps.
 
@@ -86,7 +86,7 @@ Use this skill when you need to:
 
 ### 3. Layout Audit
 
-**Pass**: Organic spacing, intentional asymmetry, clear visual hierarchy, varied spacing rhythm (8px, 16px, 24px, 40px).
+**Pass**: [DEPRECATED_STYLE] spacing, intentional asymmetry, clear visual hierarchy, varied spacing rhythm (8px, 16px, 24px, 40px).
 
 **Needs Refinement**: Good spacing but feels slightly mechanical or hierarchy ambiguous.
 
@@ -145,7 +145,7 @@ Use this skill when you need to:
 
 - Font distinctiveness: Does typography show personality? (not Inter alone)
 - Weight contrast: Are weight differences extreme (3x+)? or timid (1.25x)?
-- Shape distinctiveness: Does component have organic asymmetry? or mechanical uniformity?
+- Shape distinctiveness: Does component have [DEPRECATED_STYLE] asymmetry? or mechanical uniformity?
 - Visual hierarchy: Is hierarchy dramatic and clear? or subtle and timid?
 - Color personality: Do colors feel intentional and vibrant? or safe and muted?
 - Motion personality: Do interactions feel springy and alive? or stiff and functional?
@@ -155,7 +155,7 @@ Use this skill when you need to:
 
 - [ ] Typography shows personality (not generic font alone)
 - [ ] Weight/size contrasts are extreme (3x+, not timid)
-- [ ] Shapes show organic asymmetry (not mechanical grid)
+- [ ] Shapes show [DEPRECATED_STYLE] asymmetry (not mechanical grid)
 - [ ] Colors feel vibrant and intentional (not safe/muted)
 - [ ] Interactions show spring physics (cubic-bezier overshoot)
 - [ ] Overall personality clear (this is M3 Expressive, not baseline)
@@ -165,7 +165,7 @@ Use this skill when you need to:
 
 **Pass (M3 Baseline)**: Component clearly embodies Material Design 3 standards; unmistakably intentional and on-spec.
 
-**Pass (M3 Expressive)**: Component clearly embodies M3 Expressive principles (distinctive personality, extreme contrasts, spring physics, vibrant tokens, organic asymmetry); unmistakably intentional and personality-driven, not generic/slop.
+**Pass (M3 Expressive)**: Component clearly embodies M3 Expressive principles (distinctive personality, extreme contrasts, spring physics, vibrant tokens, [DEPRECATED_STYLE] asymmetry); unmistakably intentional and personality-driven, not generic/slop.
 
 **Needs Refinement**: Good direction but missing some M3 Expressive coherence (colors too muted, typography too restrained, motion too stiff, shapes too mechanical, personality unclear).
 
@@ -285,7 +285,7 @@ Before checking off a component as audit-complete, ensure it passes the **Materi
 - [ ] **No Generic Blue:** Zero use of #2196F3 or similar generic Material Blue
 - [ ] **Spring Physics Motion:** Easing uses cubic-bezier(0.34, 1.56, 0.64, 1) on interactions
 - [ ] **Hover Bloom Effect:** Hover states show scale increase + elevation increase
-- [ ] **Organic Asymmetry:** Shapes show intentional asymmetry (not uniform border-radius)
+- [ ] **[DEPRECATED_STYLE] Asymmetry:** Shapes show intentional asymmetry (not uniform border-radius)
 - [ ] **Intentional Personality:** Component feels distinctive, not generic/slop
 - [ ] **Zero AI Slop Markers:** No flat layouts, no timid contrasts, no cookie-cutter design
 
@@ -322,7 +322,7 @@ This audit validates five core M3 Expressive principles:
 - ❌ No purple gradients (clichéd)
 - ❌ No generic blue #2196F3 (baseline Material)
 
-### 5. Organic Asymmetry (Intentional Distinctiveness)
+### 5. [DEPRECATED_STYLE] Asymmetry (Intentional Distinctiveness)
 
 - ✅ Layout: Varied spacing and alignment (not grid-mechanical)
 - ✅ Shapes: Asymmetric border-radius (pebble, stone, leaf-inspired)

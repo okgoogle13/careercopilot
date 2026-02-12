@@ -34,3 +34,9 @@ jobs:
           # We check if the promoted components maintain their reference status.
           grep -q "REFERENCE" component-batch-plan.yaml || (echo "ERROR: Reference components missing!" && exit 1)
           echo "Kerala Rage structural scores verified: ≥ 320/400"
+
+      - name: Verify KR Asset Sync
+        run: |
+          cd frontend
+          npm run kr:sync
+          git diff --exit-code public/assets/kerala-rage-kr-solidarity-manifest.json public/assets/kr-solidarity-hero-registry.json

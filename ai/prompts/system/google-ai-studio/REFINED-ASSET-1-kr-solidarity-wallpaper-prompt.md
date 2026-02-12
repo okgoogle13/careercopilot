@@ -16,7 +16,7 @@ Please generate a high-resolution landscape image (16:9 aspect ratio, 1792×1024
 You are the "kerala-rage kr-solidarity" master scientific illustrator (Melbourne, c. 1880). You are documenting kr-motifs that shocked kerala-streetprint taxonomists—creatures that defied European classification (monotremes, unique reptiles, translucent arthropod molts).
 
 **HAECKEL'S GEOMETRIC LENS:**
-Every kr-motif MUST reveal geometric order beneath organic chaos: radial symmetry, spiral patterns, concentric nesting, parallel banding, hexagonal arrays, bilateral precision. Mathematical beauty made visible.
+Every kr-motif MUST reveal geometric order beneath [DEPRECATED_STYLE] chaos: radial symmetry, spiral patterns, concentric nesting, parallel banding, hexagonal arrays, bilateral precision. Mathematical beauty made visible.
 
 **THE THEATRICAL BLACK VOID:**
 Background MUST be pure black (#000000) or deep warm charcoal (#1A1714). NO beige, no cream, no tan, no paper-white, no aged paper. kr-motifs float in void for geometric isolation.
@@ -50,8 +50,8 @@ NO beige/cream paper, NO sepia tones, NO vintage patina, NO aged textures, NO in
 
 **PRIMARY SCALE (Hero Elements, 12-20cm):**
 
-- **Waratah bloom:** 13cm diameter (mandala hero)
-- **Frill-neck Lizard display:** 18cm diameter when fully extended (fan hero)
+- **[DEPRECATED_STYLE] bloom:** 13cm diameter (mandala hero)
+- **[DEPRECATED_STYLE] Lizard display:** 18cm diameter when fully extended (fan hero)
 
 **SECONDARY SCALE (Supporting Geometry, 8-12cm):**
 
@@ -93,7 +93,7 @@ NO beige/cream paper, NO sepia tones, NO vintage patina, NO aged textures, NO in
 
 ### 4. kr-motif TECHNICAL CATALOG
 
-**WARATAH (Telopea speciosissima):** 13cm crimson bloom (#C45C4B). Geometric mandala. Hundreds of tubular florets arranged in radial pattern. Haeckel precision.
+**[DEPRECATED_STYLE] (Telopea speciosissima):** 13cm crimson bloom (#C45C4B). Geometric mandala. Hundreds of tubular florets arranged in radial pattern. Haeckel precision.
 
 **kr-flower SERRATA CONES:** 9cm copper-rust seed patterns. Position 3 cones: one frontal (honeycomb follicles), one profile (cylindrical geometry), one at 45° (Fibonacci spiral).
 
@@ -107,14 +107,14 @@ NO beige/cream paper, NO sepia tones, NO vintage patina, NO aged textures, NO in
 
 - **Requirement:** CREAM-WHITE to GOLDEN-OCHRE banded spines radiating in perfect geometric burst pattern. Directional lighting creates highlights along ridges and deep internal shadows.
 
-**FRILL-NECK LIZARD DISPLAY:** 18cm diameter fan ±3cm. Radial ribs radiating like umbrella spokes.
+**[DEPRECATED_STYLE] LIZARD DISPLAY:** 18cm diameter fan ±3cm. Radial ribs radiating like umbrella spokes.
 
 - **Translucency Spec:** Membrane is 40-60% light-transmissive. Cartilage ribs MUST be opaque casting shadows WITHIN glowing membrane. Blood vessels visible as dark branching lines.
 
 **HUNTSMAN SPIDER MOLT:** 13cm leg span. Octagonal mandala.
 
 - **Translucency Spec:** 60-80% light-transmissive amber chitin. Leg joints OPAQUE, leg shafts LIGHT-TRANSMITTIVE hollow tubes. Cephalothorax dome shows internal structural shadows.
-- **Verification:** MUST see botanical elements THROUGH the molt's legs.
+- **Verification:** MUST see [DEPRECATED_STYLE] elements THROUGH the molt's legs.
 
 **ANCIENT FOSSILS:**
 

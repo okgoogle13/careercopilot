@@ -20,11 +20,11 @@ border-radius: 0.75rem; /* 12px on all corners */
 └─────────────────────────┘
 ```
 
-#### After: Organic Asymmetric "Pebble" Shape
+#### After: [DEPRECATED_STYLE] Asymmetric "Pebble" Shape
 ```css
 border-radius: var(--sys-shape-pebble); /* 20px 20px 32px 32px */
 ```
-**Visual:** Unique organic shape - Electric Alchemist aesthetic
+**Visual:** Unique [DEPRECATED_STYLE] shape - Electric Alchemist aesthetic
 
 ```
 ┌──────────────────────────┐
@@ -141,7 +141,7 @@ export function ApplicationCard({ ... }: ApplicationCardProps) {
 ```
 
 **Improvements:**
-- ✅ `rounded-pebble` - Organic M3 shape
+- ✅ `rounded-pebble` - [DEPRECATED_STYLE] M3 shape
 - ✅ `p-space-xl` - M3 spacing token
 - ✅ All utilities now properly defined
 - ✅ JSDoc documentation
@@ -153,7 +153,7 @@ export function ApplicationCard({ ... }: ApplicationCardProps) {
 
 ### 1. **Corner Shape** 🔍
 - **Check:** Bottom-right and bottom-left corners are noticeably larger than top corners
-- **Expected:** Friendly, organic feel (not generic/corporate)
+- **Expected:** Friendly, [DEPRECATED_STYLE] feel (not generic/corporate)
 
 ### 2. **Elevation on Hover** 🔍
 - **Action:** Hover over any ApplicationCard
@@ -212,7 +212,7 @@ To see the M3 tokens in action:
 ## Production Impact
 
 ### Visual Consistency
-- ✅ All ApplicationCard instances now use same organic shape
+- ✅ All ApplicationCard instances now use same [DEPRECATED_STYLE] shape
 - ✅ Elevation consistently applied across hover states
 - ✅ Typography scales properly on all devices
 
@@ -230,7 +230,7 @@ To see the M3 tokens in action:
 
 ## Next Components to Migrate
 
-These components should also adopt M3 organic shapes:
+These components should also adopt M3 [DEPRECATED_STYLE] shapes:
 
 1. **MetricCard** - Currently uses `rounded-lg`, should use `rounded-leaf`
 2. **ChartPane** - Currently symmetric, should use `rounded-tech` for precision feel

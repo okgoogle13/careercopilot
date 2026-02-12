@@ -31,7 +31,7 @@
 
 ### "I need to generate or orchestrate something"
 
-- **Assets**: [asset-packager](#asset-packager), [batch-processor](#batch-processor)
+- **Assets**: [asset-packager](#asset-packager), [batch-processor](#batch-processor), [kr-svg](#kr-svg)
 - **Documentation**: [design-system-doc-generator](#design-system-doc-generator)
 - **Tasks**: [task-router-mcp](#task-router-mcp), [task-delegator](#task-delegator)
 - **Tokens**: [token-injector](#token-injector)
@@ -63,10 +63,11 @@
 - [m3-expressive-ui-evaluator](#m3-expressive-ui-evaluator) - Generate M3 Expressive mockups from wireframes
 - [m3-aesthetic-creator](#m3-aesthetic-creator) - Comprehensive M3 Expressive layout & aesthetic generator
 
-#### Brand & Asset Management (3)
+#### Brand & Asset Management (4)
 
 - [kerala-rage-brand-enforcer](#kerala-rage-brand-enforcer) - Auto-apply kerala-rage kr-solidarity brand guidelines (Melbourne laneway aesthetic, endemic flora)
 - [kerala-rage-asset-cataloger](#kerala-rage-asset-cataloger) - Visual triage and gap analysis for design assets
+- [kr-svg](#kr-svg) - Generate Kerala Rage UI primitive SVGs with strict token compliance and organic asymmetry
 - [asset-placement-strategy](#asset-placement-strategy) - Strategic placement of kerala-rage kr-solidarity artifacts (Seeds, Pebbles, Lenses, Stones) with biological asymmetry
 
 #### Tracking & Auditing (3)
@@ -212,18 +213,18 @@
 
 - **#validation**: m3-anti-slop-validator, m3-visual-audit, kerala-rage-visual-audit, design-token-validator, auto-validator, vision-scorer-mcp
 - **#scaffolding**: storybook-scaffolder, component-spec-generator, jest-test-scaffolder, pytest-test-scaffolder, pydantic-model-scaffolder
-- **#generation**: ui-design-evaluator, m3-expressive-ui-evaluator, m3-expressive-token-orchestrator, asset-packager, batch-processor
+- **#generation**: ui-design-evaluator, m3-expressive-ui-evaluator, m3-expressive-token-orchestrator, asset-packager, batch-processor, kr-svg
 - **#analysis**: audit-agent, project-health-checker, compliance-dashboard, m3-expressive-compliance-dashboard, kerala-automation-auditor
 - **#optimization**: brand-brief-optimizer, pattern-learner, prompt-composer
 
 ### By Design System
 
 - **#m3-expressive**: m3-expressive-typography-enhancer, m3-anti-slop-validator, m3-visual-audit, m3-expressive-ui-evaluator, m3-expressive-token-orchestrator, m3-expressive-compliance-dashboard
-- **#kerala-rage**: kerala-rage-typography-strategy, kerala-rage-visual-audit, kerala-rage-brand-enforcer, kerala-rage-asset-cataloger, compliance-dashboard, kerala-automation-auditor
+- **#kerala-rage**: kerala-rage-typography-strategy, kerala-rage-visual-audit, kerala-rage-brand-enforcer, kerala-rage-asset-cataloger, compliance-dashboard, kerala-automation-auditor, kr-svg
 
 ### By Technology
 
-- **#react**: storybook-scaffolder, component-spec-generator, react-page-scaffolder, jest-test-scaffolder, figma-to-page
+- **#react**: storybook-scaffolder, component-spec-generator, react-page-scaffolder, jest-test-scaffolder, figma-to-page, kr-svg
 - **#python**: pytest-test-scaffolder, pydantic-model-scaffolder, careercopilot-agent-scaffolder, careercopilot-tool-creator
 - **#typescript**: component-spec-generator, jest-test-scaffolder
 - **#variable-fonts**: m3-expressive-typography-enhancer, kerala-rage-typography-strategy, expressive-typography-manipulation
@@ -424,6 +425,13 @@
 **Purpose**: Visual triage and gap analysis for Agit-Prop assets
 **When to use**: Organizing uncategorized assets
 **Related**: [auto-validator](#auto-validator)
+
+### kr-svg
+
+**Purpose**: Generate Kerala Rage kr-solidarity UI primitive SVGs (512×512) with strict design token compliance and organic asymmetry
+**When to use**: Creating new UI primitive icons for Kerala Rage design system, building SVG assets for React components (Lens, Seed, Pebble, Stone), generating card tiles, buttons, badges, or document previews, ensuring design token compliance in vector graphics
+**Key concepts**: Three-layer structure (base, content, accent), strict color tokens (only `var(--kr-*)`), organic asymmetry (offset coords, uneven radii), forbidden elements (no text, filters, masks), built-in self-check validation
+**Related**: [design-token-validator](#design-token-validator), [component-builder](#component-builder), [kerala-rage-asset-cataloger](#kerala-rage-asset-cataloger)
 
 ### auto-validator
 

@@ -4,7 +4,7 @@
 BASE_DIR="frontend/public/assets/northcote_v1"
 
 # 1. Create the Directory Structure
-echo "🏛️  Creating Northcote Curio Asset Structure..."
+echo "🏛️  Creating Northcote [DEPRECATED_STYLE] Asset Structure..."
 mkdir -p "$BASE_DIR/backgrounds"
 mkdir -p "$BASE_DIR/botanicals"
 mkdir -p "$BASE_DIR/icons"
@@ -16,14 +16,14 @@ echo "📝 Generating _manifest.json..."
 
 cat > "$BASE_DIR/_manifest.json" <<EOF
 {
-  "project": "Northcote Curio Design System",
+  "project": "Northcote [DEPRECATED_STYLE] Design System",
   "version": "1.0",
   "last_audit": "$(date +%Y-%m-%d)",
   "assets": {
     "backgrounds": {
       "asset_01_wallpaper": {
         "status": "MISSING",
-        "desc": "The Curio Wallpaper (Gallery Master)",
+        "desc": "The [DEPRECATED_STYLE] Wallpaper (Gallery Master)",
         "source": "Gemini Asset 1"
       },
       "asset_03_parchment": {
@@ -48,7 +48,7 @@ cat > "$BASE_DIR/_manifest.json" <<EOF
       "asset_09_waratah": {
         "status": "READY",
         "file": "waratah_hero_master.png",
-        "desc": "Waratah Hero Closeup",
+        "desc": "[DEPRECATED_STYLE] Hero Closeup",
         "source": "Claude Archive (92/100)"
       }
     },

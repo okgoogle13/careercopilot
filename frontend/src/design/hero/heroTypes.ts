@@ -34,18 +34,31 @@ export interface TypographyState {
   wdth: number;
 }
 
+export type EmotionalRegister = 'defiance' | 'reflection' | 'discovery' | 'control' | 'craft';
+
+export interface TypographyPressureProfile {
+  register: EmotionalRegister;
+  weight_range: [number, number]; // [start, end]
+  tracking_range: [number, number]; // [start, end]
+  contrast_ratio: number;
+}
+
+export interface AnimationProfile {
+  bezier: [number, number, number, number];
+  parallax: boolean;
+  scroll_behavior: 'weight_shift' | 'scale_expansion' | 'blur_reveal';
+  transition_duration: number;
+}
+
 export interface Typography {
   headline: string;
   supporting: string;
-  pressure_state: TypographyState;
-  solidarity_state: TypographyState;
-  melancholy_state: TypographyState;
-}
-
-export interface Motion {
-  bezier: [number, number, number, number];
-  scroll_wght_range: [number, number];
-  transition_duration: number;
+  pressure_state?: TypographyState; // Legacy support
+  solidarity_state?: TypographyState; // Legacy support
+  melancholy_state?: TypographyState; // Legacy support
+  pressure_profile?: TypographyPressureProfile;
+  scale_ratio?: number;
+  contrast_mode?: 'extreme' | 'standard' | 'muted';
 }
 
 export interface HeroComposition {
@@ -53,7 +66,9 @@ export interface HeroComposition {
   name: string;
   layers: HeroLayer[];
   typography: Typography;
-  motion: Motion;
+  motion?: Motion; // Legacy support
+  animation?: AnimationProfile;
+  z_index_map?: Record<LayerType, number>;
 }
 
 export interface HeroRegistry {

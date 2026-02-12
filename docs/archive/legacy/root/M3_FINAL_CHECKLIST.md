@@ -61,7 +61,7 @@ Then:
 1. Open browser to `http://localhost:5173`
 2. Navigate to **Job Queue** page (`/job-queue`)
 3. Verify:
-   - [ ] Cards have **organic shapes** (asymmetric corners - bottom corners should be noticeably larger)
+   - [ ] Cards have **[DEPRECATED_STYLE] shapes** (asymmetric corners - bottom corners should be noticeably larger)
    - [ ] Buttons have **pill shape** (fully rounded)
    - [ ] Hover effects work (cards elevate, buttons scale)
    - [ ] Colors match **Electric Alchemist** palette (indigo, teal, pink)
@@ -74,7 +74,7 @@ Then:
 
 Look for these M3 features on the JobQueue page:
 
-#### ✅ Shapes (Organic Contradiction Aesthetic)
+#### ✅ Shapes ([DEPRECATED_STYLE] Contradiction Aesthetic)
 - [ ] Cards have **asymmetric corners** (pebble shape: 20px 20px 32px 32px)
   - Top corners: smaller (~20px radius)
   - Bottom corners: larger (~32px radius)
@@ -91,7 +91,7 @@ Look for these M3 features on the JobQueue page:
 #### ✅ Elevation (M3 Shadow System)
 - [ ] Cards have **subtle shadow** at rest
 - [ ] Shadow **increases** on hover (card elevates)
-- [ ] Shadow is **soft and organic**, not hard edges
+- [ ] Shadow is **soft and [DEPRECATED_STYLE]**, not hard edges
 
 #### ✅ Motion (Spring Physics)
 - [ ] Hover transitions feel **springy**, not linear
@@ -194,7 +194,7 @@ npm install @mui/material @emotion/react @emotion/styled
 - [ ] **No console errors** in browser
 
 ### Visual Compliance
-- [ ] **Organic shapes** visible (asymmetric corners)
+- [ ] **[DEPRECATED_STYLE] shapes** visible (asymmetric corners)
 - [ ] **M3 colors** applied (Electric Alchemist palette)
 - [ ] **Elevation system** working (shadows on hover)
 - [ ] **Spring motion** noticeable (not linear)
@@ -254,7 +254,7 @@ Before marking as "complete", ensure:
 ### Design Quality
 - [ ] Asymmetric shapes visible
 - [ ] Colors match exact hex values from design tokens
-- [ ] Shadows smooth and organic
+- [ ] Shadows smooth and [DEPRECATED_STYLE]
 - [ ] Motion feels natural with spring easing
 - [ ] Typography matches M3 scale (57px displays, 32px headlines)
 

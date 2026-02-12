@@ -10,7 +10,7 @@
 
 - **The Void**: `Asphalt Black` (#1A1714) - Use Noise overlays (5% opacity) for concrete texture.
 - **Lighting**: "Firefly" bioluminescent pulses contrast with high-drama poster silhouettes.
-- **Surfacing**: Organic asymmetry (`radius-pebble`, `radius-leaf`) over clean paper-white cards.
+- **Surfacing**: [DEPRECATED_STYLE] asymmetry (`radius-pebble`, `radius-leaf`) over clean paper-white cards.
 
 ### 2. The Laneway Stack
 
@@ -47,7 +47,7 @@ _Density: High Clarity (Precise)_
 - **Aesthetic**: Measurement grids overlaying data surfaces.
 - **Typography**: Sora 700 for key metrics. JetBrains Mono for technical labels.
 - **Assets**: `ASSET-15` (Compass) as a functioning gauge.
-- **Logic**: Use `radius-stone` for metric containers to maintain organic feel in a data view.
+- **Logic**: Use `radius-stone` for metric containers to maintain [DEPRECATED_STYLE] feel in a data view.
 
 ### PAGE 7: Kanban ("The Cultivation")
 
@@ -69,4 +69,4 @@ _Density: Standard (Workflow)_
 | `ASSET-8`  | Fossil Stamp       | Archival Approval         | Viscous Slam (Feedback)      |
 | `ASSET-15` | Brass Compass      | Navigation Aid            | Rotates on focal/data shifts |
 | `ASSET-17` | kr-leafus Ceiling | Overhead Canopy           | Foreground Blur (Depth)      |
-| `ASSET-19` | kr-leafus Column  | Structural Separator      | Organic framing              |
+| `ASSET-19` | kr-leafus Column  | Structural Separator      | [DEPRECATED_STYLE] framing              |

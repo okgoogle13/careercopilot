@@ -40,5 +40,5 @@
 
 ## Motif Slots
 - `// TODO[asset]: Historical Record Background Texture (Z-0, 5% opacity)`
-- `// TODO[asset]: Screenprint Substrate overlay (global)`
-- `// TODO[asset]: Metric-specific graphical motifs (mini-charts or botanical symbols).`
+- `- {KR-SOLID-033} Melbourne Laneway texture - real-world substrate base)
+- `// TODO[asset]: Metric-specific graphical motifs (mini-charts or [DEPRECATED_STYLE] symbols).`

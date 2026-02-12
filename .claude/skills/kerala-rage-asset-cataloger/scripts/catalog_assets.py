@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Northcote Asset Cataloger - Manifest Integration
-Analyzes images and validates against northcote-curio-manifest.json schema.
+Analyzes images and validates against northcote-[DEPRECATED_STYLE]-manifest.json schema.
 """
 
 import json
@@ -28,17 +28,6 @@ def get_next_asset_id(manifest):
                 pass
     return f"ASSET-{max_id + 1}"
 
-def validate_mode_compliance(subject, mode):
-    """Check Gallery/Laboratory compliance rules."""
-    violations = []
-    
-    if mode == 'laboratory':
-        forbidden = ['flower', 'bloom', 'petal', 'decorative fauna']
-        for term in forbidden:
-            if term in subject.lower():
-                violations.append(f"Laboratory mode prohibits: {term}")
-    
-    return violations
 
 def analyze_image(image_path, manifest, doc008_gaps):
     """

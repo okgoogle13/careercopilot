@@ -28,9 +28,9 @@ Kerala Rage is a design system of collective resistance, blending the vibrant en
 - **Pressure & Relief**: Typography should behave as if responding to environmental pressure—compressing for weight, expanding for solidarity.
 - **No Bureaucracy**: Explicitly ban all motifs of borders, passports, government forms, or official documentation. We speak peer-to-peer.
 
-### 4. The Geometry (Organic Defiance)
+### 4. The Geometry ([DEPRECATED_STYLE] Defiance)
 
-- **Rejection of Perfect Grids**: While the system is precise, the edges are "eroded." Use organic asymmetrical radii (Pebble, Stone, Slab) instead of machine-perfect corners.
+- **Rejection of Perfect Grids**: While the system is precise, the edges are "eroded." Use [DEPRECATED_STYLE] asymmetrical radii (Pebble, Stone, Slab) instead of machine-perfect corners.
 - **Torn Edges**: Use the `tornEdgeClipPath` for section breaks, suggesting posters ripped from a wall.
 - **Imperfect Rounds**: Avoid perfect 50% circles for avatars; use "imperfect rounds" (~48%) to maintain a hand-cut feel.
 
@@ -38,7 +38,7 @@ Kerala Rage is a design system of collective resistance, blending the vibrant en
 
 - **Expressive Motion**: All transitions use the M3 Expressive curve (overshoot).
 - **The Slam**: Primary headers and posters "slam" into place (600ms).
-- **The Breath**: Secondary content "breathes" or "drifts" with organic instability.
+- **The Breath**: Secondary content "breathes" or "drifts" with [DEPRECATED_STYLE] instability.
 - **Reduced Motion**: Always provide an accessible, low-motion path for high-clarity needs.
 
 ---

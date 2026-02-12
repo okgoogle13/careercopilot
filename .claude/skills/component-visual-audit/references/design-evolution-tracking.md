@@ -62,15 +62,15 @@ Tracking this progression reveals:
   "changes": ["Color palette updated to Wattle Gold", "Minor spacing adjustments"],
   "audit": {
     "typography": 8,
-    "color": 16,      // ← Major improvement: now botanical palette
-    "layout": 11,     // ← Minor improvement: organic padding added
+    "color": 16,      // ← Major improvement: now [DEPRECATED_STYLE] palette
+    "layout": 11,     // ← Minor improvement: [DEPRECATED_STYLE] padding added
     "botanical_elements": 6,   // ← First motif experiment
     "coherence": 12,  // ← Personality emerging
     "microcopy": 14
   },
   "overall": 67,
   "status": "NEEDS_REFINEMENT",
-  "narrative": "Palette shift successful. Color now aligns with botanical inspiration. Typography still generic (Inter). Layout slightly more organic. Coherence improving but design intent still unclear.",
+  "narrative": "Palette shift successful. Color now aligns with [DEPRECATED_STYLE] inspiration. Typography still generic (Inter). Layout slightly more [DEPRECATED_STYLE]. Coherence improving but design intent still unclear.",
   "stage": "Palette Shift"
 }
 ```
@@ -92,7 +92,7 @@ Tracking this progression reveals:
   },
   "overall": 75,
   "status": "NEEDS_REFINEMENT",
-  "narrative": "Typography transformation. Crimson + Work Sans creates strong display/body hierarchy. Layout becoming more organic. Botanical elements still experimental. Component starting to feel intentional.",
+  "narrative": "Typography transformation. Crimson + Work Sans creates strong display/body hierarchy. Layout becoming more [DEPRECATED_STYLE]. [DEPRECATED_STYLE] elements still experimental. Component starting to feel intentional.",
   "stage": "Typography Awakening"
 }
 ```
@@ -103,10 +103,10 @@ Tracking this progression reveals:
 {
   "iteration": "v4",
   "date": "2026-01-30",
-  "changes": ["Botanical motif: sage leaf now integrated purposefully", "Layout: refined asymmetry", "Microcopy: 'Let's Build Your Story' replaces generic 'Save'"],
+  "changes": ["[DEPRECATED_STYLE] motif: sage leaf now integrated purposefully", "Layout: refined asymmetry", "Microcopy: 'Let's Build Your Story' replaces generic 'Save'"],
   "audit": {
     "typography": 18,
-    "color": 19,       // ← Full botanical harmony
+    "color": 19,       // ← Full [DEPRECATED_STYLE] harmony
     "layout": 17,      // ← Clear asymmetric hierarchy
     "botanical_elements": 17, // ← Motif now meaningful, not decorative
     "coherence": 17,   // ← Design story emerging
@@ -114,7 +114,7 @@ Tracking this progression reveals:
   },
   "overall": 81,
   "status": "PASS",
-  "narrative": "Component reaches PASS threshold. Every design choice feels motivated. Botanical motif supports visual hierarchy. Personality shines through without obscuring clarity. Component embodies kerala-rage vision.",
+  "narrative": "Component reaches PASS threshold. Every design choice feels motivated. [DEPRECATED_STYLE] motif supports visual hierarchy. Personality shines through without obscuring clarity. Component embodies kerala-rage vision.",
   "stage": "Intentionality Emerges",
   "design_story": "The button journey: from generic Material default to distinctive Kerala-rage artifact. Sage leaf guides user focus. Cremson/Work Sans pairing creates warmth and clarity."
 }
@@ -126,18 +126,18 @@ Tracking this progression reveals:
 {
   "iteration": "v5",
   "date": "2026-02-05",
-  "changes": ["Hover state: botanical motif animates (spring physics)", "Focus state: warm secondary color", "Component now supports Gallery/Laboratory mode switching"],
+  "changes": ["Hover state: [DEPRECATED_STYLE] motif animates (spring physics)", "Focus state: warm secondary color", "Component now supports Gallery/[DEPRECATED_MODE] switching"],
   "audit": {
     "typography": 19,  // ← Subtle variable font axis tweaks
-    "color": 20,       // ← Perfect botanical harmony
+    "color": 20,       // ← Perfect [DEPRECATED_STYLE] harmony
     "layout": 19,      // ← Mastery of asymmetric spacing
     "botanical_elements": 19, // ← Motif integrated across all states
     "coherence": 19,   // ← Design tells complete story
-    "microcopy": 18    // ← Gallery mode: personality. Lab mode: clarity.
+    "microcopy": 18    // ← [DEPRECATED_MODE]: personality. Lab mode: clarity.
   },
   "overall": 88,
   "status": "PASS",
-  "narrative": "Component reaches excellence. Multi-state design consistency. Botanical motif tells story across interactions. Gallery/Lab mode switching shows design maturity. Ready for portfolio showcase.",
+  "narrative": "Component reaches excellence. Multi-state design consistency. [DEPRECATED_STYLE] motif tells story across interactions. Gallery/Lab mode switching shows design maturity. Ready for portfolio showcase.",
   "stage": "Cohesive Personality",
   "design_story": "Mastery phase. Button responds to context (Gallery warmth vs. Lab clarity). Sage motif becomes signature, not decoration. Users feel the design intent."
 }
@@ -168,8 +168,8 @@ Create a summary spreadsheet:
 
 **What Needs Attention (Slow Progression):**
 - Seed: Only 40-point gain after 4 iterations (below median)
-- Issue: Botanical element integration unclear
-- Action: Revisit design brief, refine botanical metaphor
+- Issue: [DEPRECATED_STYLE] element integration unclear
+- Action: Revisit design brief, refine [DEPRECATED_STYLE] metaphor
 
 **Portfolio Maturity:**
 - Current average: 76/100 (NEEDS_REFINEMENT threshold)
@@ -200,7 +200,7 @@ Create a summary spreadsheet:
 ✅ Overall score ≥80
 ✅ No dimension below 15/20
 ✅ Design narrative is clear and coherent
-✅ Botanical elements meaningfully integrated
+✅ [DEPRECATED_STYLE] elements meaningfully integrated
 ✅ Component would be recognizable in portfolio
 
 ---
@@ -218,15 +218,15 @@ Create a summary spreadsheet:
 **Problem:** Only 34-point progression in 4 iterations. Lagging behind peer components.
 
 **Root Cause Analysis:**
-- Botanical elements score stuck at 8-10 (design direction unclear)
+- [DEPRECATED_STYLE] elements score stuck at 8-10 (design direction unclear)
 - Coherence stuck at 14-16 (component purpose ambiguous in design system)
 - Microcopy score lowest dimension (generic labels like "New", "Alert")
 
 **Recommendation:**
 1. **Clarify design brief for Seed**: What role does it play in kr-solidarity system?
-2. **Botanical metaphor**: Find specific seed archetype (wattle seed? native wildflower?)
+2. **[DEPRECATED_STYLE] metaphor**: Find specific seed archetype (wattle seed? native wildflower?)
 3. **Microcopy personality**: Replace "New" with kr-solidarity-specific copy ("Newly Posted", "Opportunity Unlocked")
-4. **Next iteration focus**: Botanical integration + coherence narrative
+4. **Next iteration focus**: [DEPRECATED_STYLE] integration + coherence narrative
 
 **Expected outcome:** v5 should jump to 78-82 (unified design direction)
 
@@ -258,19 +258,19 @@ Create a summary spreadsheet:
 ## Standout Components (Ready for Showcase)
 
 ✅ **Pebble (88/100)** – Button mastery, multi-state consistency
-✅ **Jar (83/100)** – Modal coherence, botanical sophistication
+✅ **Jar (83/100)** – Modal coherence, [DEPRECATED_STYLE] sophistication
 ✅ **Cabinet (82/100)** – Drawer refinement, intentional typography
 
 ## Components Needing Attention
 
-⚠️ **Seed (72/100)** – Botanical direction unclear, needs brief clarity
+⚠️ **Seed (72/100)** – [DEPRECATED_STYLE] direction unclear, needs brief clarity
 ⚠️ **Lens (79/100)** – Close to PASS, one iteration away
 
 ## Next Iterations
 
-- Seed: Focus on botanical archetype + microcopy personality
+- Seed: Focus on [DEPRECATED_STYLE] archetype + microcopy personality
 - Lens: Refine coherence narrative, strengthen hierarchy
-- Stone: Evaluate multi-state complexity, botanical integration
+- Stone: Evaluate multi-state complexity, [DEPRECATED_STYLE] integration
 
 ## Recommendation
 
@@ -290,7 +290,7 @@ Evolution audit results feed into compliance dashboard:
 
 ### With Design Team Workflows
 
-1. **Sprint Planning:** "Seed needs botanical direction – assign design brief refinement"
+1. **Sprint Planning:** "Seed needs [DEPRECATED_STYLE] direction – assign design brief refinement"
 2. **Design Review:** Compare v_n → v_n+1 scores, discuss improvements
 3. **Handoff to Dev:** Only PASS (80+) components ready for implementation
 

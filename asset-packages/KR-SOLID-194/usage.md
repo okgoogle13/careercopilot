@@ -87,7 +87,7 @@ If using color palette, add to design tokens:
 ## Support
 
 For questions about this asset's cultural significance or governance status, refer to:
-- Analysis Notes: Analysis failed: cannot identify image file 'frontend/public/assets/kr-motifs/kr-moti-kr-dark-botanical-canopy-feb-11,-2026,-12_47_46-am-1024.png'
+- Analysis Notes: Analysis failed: cannot identify image file 'frontend/public/assets/kr-motifs/kr-moti-kr-dark-[DEPRECATED_STYLE]-canopy-feb-11,-2026,-12_47_46-am-1024.png'
 - Placement Fit: Landing, Dashboard Overview
 - Governance Notes: 0 violations, 0 warnings
 - Scoring Details: See `metadata.json`

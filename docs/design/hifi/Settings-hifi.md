@@ -29,5 +29,5 @@
 - **Section Expand**: Accordion-style sections use a `height` + `opacity` transition (Viscous).
 
 ## Motif Slots
-- `// TODO[asset]: Screenprint Substrate overlay (Z-0, 5% opacity)`.
+- `- {KR-SOLID-033} Melbourne Laneway texture - real-world substrate base)
 - `// TODO[asset]: Context-specific technical icons for setting categories.`.

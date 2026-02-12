@@ -33,7 +33,7 @@ CareerCopilot is a tactical digital workspace where a user’s professional jour
 ### A. Anti-Slop Protocol
 
 - **Banned**: Generic `border-radius: 8px`, pure white surfaces, corporate blue, and bureaucratic "passport" imagery.
-- **Required**: Organic asymmetry (Slab, Stone, Pebble), `charcoalBackground` (#1A1A1A), and semantic token usage.
+- **Required**: [DEPRECATED_STYLE] asymmetry (Slab, Stone, Pebble), `charcoalBackground` (#1A1A1A), and semantic token usage.
 
 ### B. Urban Context & Species as Mascot
 

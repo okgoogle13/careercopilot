@@ -9,6 +9,7 @@ import { LayeredHero } from '../../../components/kerala-rage/LayeredHero';
 import type { SolidarityManifest } from '../../../design/hero/heroTypes';
 import { loadHeroRegistry } from '../../../design/hero/heroRegistry';
 import { composeHero } from '../../../utils/heroComposer';
+import { getHeroForVariant, LANDING_HERO_AB_CONFIG, AbVariant } from '../../../utils/heroAbTesting';
 
 /**
  * KrDarkLanding (Hi-Fi)
@@ -21,8 +22,10 @@ export const KrDarkLanding: React.FC = () => {
   const [heroData, setHeroData] = useState<{
     layers: any[];
     typography: any;
-    motion: any;
+    animation: any;
+    zIndexMap: any;
   } | null>(null);
+  const [variant, setVariant] = useState<AbVariant>('A');
 
   useEffect(() => {
     async function loadHero() {
@@ -32,14 +35,21 @@ export const KrDarkLanding: React.FC = () => {
           loadHeroRegistry(),
         ]);
 
-        const result = composeHero(manifest as SolidarityManifest, registry, 'layered-solidarity-hero');
+        const assignedHero = getHeroForVariant(registry, LANDING_HERO_AB_CONFIG);
+        const result = composeHero(
+          manifest as SolidarityManifest, 
+          registry, 
+          assignedHero?.id || 'layered-solidarity-hero'
+        );
 
         if (result.valid) {
           setHeroData({
             layers: result.resolvedLayers,
             typography: result.typography,
-            motion: result.motion,
+            animation: result.animation,
+            zIndexMap: result.zIndexMap,
           });
+          setVariant(localStorage.getItem(`kr_hero_ab_${LANDING_HERO_AB_CONFIG.testId}`) as AbVariant || 'A');
         }
       } catch (error) {
         console.error('Failed to load hero:', error);
@@ -48,16 +58,32 @@ export const KrDarkLanding: React.FC = () => {
     loadHero();
   }, []);
 
+  const toggleVariant = () => {
+    const nextVariant = variant === 'A' ? 'B' : 'A';
+    localStorage.setItem(`kr_hero_ab_${LANDING_HERO_AB_CONFIG.testId}`, nextVariant);
+    window.location.reload(); // Reload to apply new variant
+  };
+
   return (
     <div className="relative z-20 w-full max-w-7xl mx-auto flex flex-col items-center gap-24 p-8 md:p-24 overflow-hidden">
       {/* SECTION 1: The Layered Hero */}
       {heroData && (
-        <LayeredHero
-          layers={heroData.layers}
-          typography={heroData.typography}
-          motion={heroData.motion}
-          className="mb-12"
-        />
+        <div className="relative w-full">
+          <LayeredHero
+            layers={heroData.layers}
+            typography={heroData.typography}
+            animation={heroData.animation}
+            zIndexMap={heroData.zIndexMap}
+            className="mb-12"
+          />
+          {/* Debug Variant Toggle */}
+          <button 
+            onClick={toggleVariant}
+            className="absolute bottom-4 right-4 z-[100] px-3 py-1 bg-black/50 border border-white/10 rounded font-mono text-[10px] text-white/50 hover:text-white hover:bg-black/80 transition-all uppercase tracking-widest"
+          >
+            Switch Register (Current: {variant})
+          </button>
+        </div>
       )}
 
       {/* SECTION 2: The Manifesto Core */}
@@ -95,7 +121,7 @@ export const KrDarkLanding: React.FC = () => {
         >
           <ManifestoCard 
             title="Career Resurrection"
-            content="Your professional history is a KrMotif awaiting audit. Secure the past to claim the future through botanical precision and street-print defiance. Join the collective front line today."
+            content="Your professional history is a KrMotif awaiting audit. Secure the past to claim the future through [DEPRECATED_STYLE] precision and street-print defiance. Join the collective front line today."
             actionLabel="SECURE ACCESS"
             onAction={() => window.location.href = '/login'}
             className="w-full"

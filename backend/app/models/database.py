@@ -691,7 +691,7 @@ class MarketAnalysis(Base):
         String(100), nullable=False, comment="Industry field (e.g., social_work, finance, etc.)"
     )
     location: Mapped[str] = mapped_column(
-        String(100), nullable=False, comment="Geographic location for this analysis"
+        String(100), nullable=False, comment="[DEPRECATED_STYLE] location for this analysis"
     )
     analysis_date: Mapped[datetime] = mapped_column(
         DateTime, default=datetime.utcnow, nullable=False

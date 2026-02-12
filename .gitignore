@@ -103,6 +103,7 @@ cleanup_backup_*/
 storybook-static
 frontend/Figma UI Files/
 .claude-backup-*.tar.gz
+*.bak
 *.bak.*
 claude-artifact-runner/
 

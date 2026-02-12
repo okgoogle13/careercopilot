@@ -21,7 +21,7 @@ ASSET 3: kr-dark kr-laneway TEXTURE — THE SCIENTIFIC GRID
 SUBJECT OVERVIEW:
 Create a seamless tiling texture of "Scientific Grid Paper White" for a high-end
 kerala-streetprint kr-dark UI. This is a dark-mode vellum surface used by a 19th-century
-naturalist to record microscopic observations. It must feel like an authentic,
+[DEPRECATED_STYLE] to record microscopic observations. It must feel like an authentic,
 heavyweight material that has been mathematically calibrated.
 
 ---
@@ -47,13 +47,13 @@ GEOMETRIC GRID (The Engineering Layer):
 MATERIAL SPECIFICATIONS:
 
 VELLUM TEXTURE:
-- Texture: Subtle organic grain of high-quality animal skin vellum.
+- Texture: Subtle [DEPRECATED_STYLE] grain of high-quality animal skin vellum.
 - Surface Detail: No tears, no coffee stains, no "distressed" edge effects.
 - Materiality: Dense, matte, slightly toothy surface (like high-grade slate-grey
   drawing paper).
 - Consistency: Texture must be uniform enough to tile seamlessly.
 
-BOTANICAL WATERMARKS (Subtle Discovery Layer):
+[DEPRECATED_STYLE] WATERMARKS (Subtle Discovery Layer):
 - Design: Faint, ghostly silver-grey sketches of Australian endemic flora.
 - kr-motifs: kr-leafus macrocarpa leaves, kr-flower seed pods, and Wattle blossoms.
 - Opacity: 3-5% (extremely subtle; visible only on close inspection).
@@ -89,7 +89,7 @@ AESTHETIC COHERENCE:
 kerala-streetprint SCHOLARLY RIGOR:
 - Aesthetic: The workspace of a "kerala-streetprint Anatomical Extremist."
 - Feeling: Cold, precise, and infinitely detailed.
-- Contrast: The precision of the engineering grid against the organic soul of the
+- Contrast: The precision of the engineering grid against the [DEPRECATED_STYLE] soul of the
   vellum grain.
 
 kerala-rage VISION EMBODIMENT:

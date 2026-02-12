@@ -45,7 +45,16 @@
     "docs": "jsdoc -c jsdoc.config.json",
     "docs:serve": "serve docs/api",
     "docs:clean": "rimraf docs/api",
-    "docs:build": "yarn docs:clean && yarn docs"
+    "docs:build": "yarn docs:clean && yarn docs",
+    "kr:manifest": "node scripts/kr/generate-manifest.mjs",
+    "kr:heroes": "node scripts/kr/generate-hero-registry.mjs",
+    "kr:sync": "npm run kr:manifest && npm run kr:heroes",
+    "kr:watch": "node scripts/kr/watch-assets.mjs",
+    "kr:validate": "node scripts/kr/validate-manifest.mjs",
+    "kr:replace-markers": "node ../scripts/kr/replace-asset-tokens.mjs",
+    "kr:update-tokens": "node ../scripts/kr/update-token-map.mjs",
+    "kr:inject-layers": "node scripts/kr/inject-ui-kit-layers.mjs",
+    "kr:stage2": "bash ../scripts/orchestrate-stage2.sh"
   },
   "engines": {
     "node": ">=16.0.0"
@@ -158,6 +167,7 @@
     "autoprefixer": "^10.4.23",
     "babel-jest": "^29.7.0",
     "baseline-browser-mapping": "^2.8.32",
+    "chokidar": "^3.6.0",
     "clean-jsdoc-theme": "^4.3.0",
     "esbuild": "^0.21.5",
     "eslint": "^9.38.0",
@@ -189,6 +199,7 @@
     "rollup": "^4.56.0",
     "rollup-plugin-visualizer": "^6.0.5",
     "serve": "^14.2.1",
+    "sharp": "^0.33.0",
     "storybook": "^8.1.11",
     "tailwindcss": "^4.1.18",
     "terser": "^5.44.0",

@@ -16,7 +16,9 @@ export interface CompositionValidationSuccess {
   valid: true;
   resolvedLayers: ResolvedLayer[];
   typography: HeroComposition['typography'];
-  motion: HeroComposition['motion'];
+  motion?: HeroComposition['motion'];
+  animation?: HeroComposition['animation'];
+  zIndexMap?: HeroComposition['z_index_map'];
 }
 
 export type CompositionResult = CompositionValidationError | CompositionValidationSuccess;
@@ -178,5 +180,7 @@ export function composeHero(
     resolvedLayers,
     typography: composition.typography,
     motion: composition.motion,
+    animation: composition.animation,
+    zIndexMap: composition.z_index_map,
   };
 }

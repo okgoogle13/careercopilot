@@ -3,7 +3,7 @@
 ## Layout Regions
 - **Identity Header**: Centralized avatar and display name area with atmospheric backing.
 - **Engagement Stats**: A horizontal row of high-density `InfoStone` components.
-- **Badge Archive**: A grid of `BadgePebble` items representing earned botanical/technical marks.
+- **Badge Archive**: A grid of `BadgePebble` items representing earned [DEPRECATED_STYLE]/technical marks.
 
 ## Typography
 - **Identity Headline**: `Fraunces Energetic`, 48px, `font-weight: 800`, `text-paper-white`.
@@ -29,6 +29,6 @@
 - **Badge Tilt**: Badges have a subtle 3D tilt effect on hover using `framer-motion`.
 
 ## Motif Slots
-- `// TODO[asset]: Halo Disk Motif (Z-1, behind avatar, 40% opacity)`.
-- `// TODO[asset]: Screenprint Substrate overlay (Z-0, 15% opacity)`.
-- `// TODO[asset]: Botanical Badge icons for specific skill achievements.`.
+- `- {KR-UI-002} Halo disk (plain + gauge version) for radiant circle elements) **[REQUIRES GENERATION]**
+- `- {KR-SOLID-033} Melbourne Laneway texture - real-world substrate base)
+- `// TODO[asset]: [DEPRECATED_STYLE] Badge icons for specific skill achievements.`.

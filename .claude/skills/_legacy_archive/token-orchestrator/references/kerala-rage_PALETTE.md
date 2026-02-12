@@ -1,10 +1,10 @@
 # kerala-rage kr-solidarity Reference Palette
 
-kerala-streetprint Naturalist Field Station • Australian Botanical Metaphor
+kerala-streetprint [DEPRECATED_STYLE] Field Station • Australian [DEPRECATED_STYLE] Metaphor
 
 ## Contents
 - [Primary colors](#primary-wattle-gold---acacia-pycnantha)
-- [Tertiary colors](#tertiary-waratah-red---telopea-speciosissima)
+- [Tertiary colors](#tertiary-[DEPRECATED_STYLE]-red---telopea-speciosissima)
 - [Status colors](#status-colors)
 - [Surfaces](#surfaces)
 - [Forbidden colors](#forbidden-colors)
@@ -19,7 +19,7 @@ kerala-streetprint Naturalist Field Station • Australian Botanical Metaphor
 - `wattleGlow`: `#E8C963` - Hover states
 - `wattleBloom`: `#F5DDAA` - Subtle accents
 
-## Tertiary (Waratah Red - Telopea speciosissima)
+## Tertiary ([DEPRECATED_STYLE] Red - Telopea speciosissima)
 - `waratahStem`: `#7A3A2E` - Error states
 - `waratahCrimson`: `#C45C4B` - Alerts, notifications
 - `waratahGlow`: `#E07865` - Urgent hover
@@ -27,7 +27,7 @@ kerala-streetprint Naturalist Field Station • Australian Botanical Metaphor
 
 ## Status Colors
 
-### kr-dark Mode (Botanical)
+### kr-dark Mode ([DEPRECATED_STYLE])
 - `ghostGum`: `#7A9E82` - Success (Corymbia aparrerinja)
 - `nativeViolet`: `#9B8AAD` - Progress (Viola hederacea)
 - `kr-flowerOrange`: `#D4885C` - Warning (kr-flower serrata)

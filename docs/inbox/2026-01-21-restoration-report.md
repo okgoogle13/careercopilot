@@ -4,7 +4,7 @@
 **Branch:** `kerala-rage-restoration`
 
 ## Executive Summary
-Successful restoration and integration of the kerala-rage kr-solidarity dual-mode architecture. The system now supports dynamic switching between the **kr-dark (kerala-streetprint Naturalist)** and **kr-dark (Workspace)** shells, leveraging the restored design tokens and typography.
+Successful restoration and integration of the kerala-rage kr-solidarity dual-mode architecture. The system now supports dynamic switching between the **kr-dark (kerala-streetprint [DEPRECATED_STYLE])** and **kr-dark (Workspace)** shells, leveraging the restored design tokens and typography.
 
 ## Changes Implemented
 

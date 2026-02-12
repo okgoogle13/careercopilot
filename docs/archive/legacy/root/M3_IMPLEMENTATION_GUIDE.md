@@ -55,7 +55,7 @@ import { m3Theme } from './theme/mui-theme';
 ---
 
 ### 2. M3Card Component ✅
-**Impact**: Replace all MUI Cards with M3-compliant organic shapes
+**Impact**: Replace all MUI Cards with M3-compliant [DEPRECATED_STYLE] shapes
 
 **File**: `/frontend/src/components/ui/M3Card.tsx` (NEW - 200+ lines)
 
@@ -304,7 +304,7 @@ Before deploying, verify:
 - [ ] All buttons are clickable
 - [ ] Card hover effects work (elevation increases)
 - [ ] Loading states show spinner
-- [ ] Shapes are organic (asymmetric corners visible)
+- [ ] Shapes are [DEPRECATED_STYLE] (asymmetric corners visible)
 - [ ] Colors match Electric Alchemist palette
 - [ ] Frontend builds without errors: `npm run build`
 

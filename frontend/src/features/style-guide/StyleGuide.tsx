@@ -45,7 +45,7 @@ export function StyleGuide() {
               .rounded-leaf
             </code>
             <p className="mt-4 text-on-surface-variant">
-              Organic, growing asymmetry. Used for content containers, cards, and sections that feel
+              [DEPRECATED_STYLE], growing asymmetry. Used for content containers, cards, and sections that feel
               "alive."
               <br />
               <span className="text-xs opacity-70 font-mono">Radius: 32px 12px 32px 12px</span>
@@ -65,7 +65,7 @@ export function StyleGuide() {
               .rounded-tech
             </code>
             <p className="mt-4 text-on-surface-variant">
-              Digital precision with a slight organic touch. Used for data-heavy panes, settings,
+              Digital precision with a slight [DEPRECATED_STYLE] touch. Used for data-heavy panes, settings,
               and tools.
               <br />
               <span className="text-xs opacity-70 font-mono">Radius: 24px 4px 24px 20px</span>

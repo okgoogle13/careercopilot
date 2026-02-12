@@ -58,7 +58,7 @@ Career Copilot architectural planning guide for AI agents and developers. This d
 | **Data Persistence**   | Firestore            | Real-time updates, Firebase auth integration, scalability  | PostgreSQL, MongoDB      |
 | **File Storage**       | Cloud Storage        | Native Firebase integration, resume versioning             | S3, local filesystem     |
 | **Hosting**            | Cloud Run + Firebase | Managed, serverless, automatic scaling, cost-effective     | EC2, Heroku, Railway     |
-| **Design System**      | kerala-rage kr-solidarity      | Distinctive, botanical aesthetic, M3 compliant             | Material Design, Shadcn  |
+| **Design System**      | kerala-rage kr-solidarity      | Distinctive, [DEPRECATED_STYLE] aesthetic, M3 compliant             | Material Design, Shadcn  |
 
 ---
 
@@ -574,11 +574,11 @@ if not profile:
 ### Why kerala-rage kr-solidarity over Material Design 3?
 
 **Date**: 2025-10-15
-**Decision**: Use kerala-rage kr-solidarity (botanical aesthetic) over Material Design 3
+**Decision**: Use kerala-rage kr-solidarity ([DEPRECATED_STYLE] aesthetic) over Material Design 3
 **Rationale**:
 
 - Distinctive brand identity (not generic Material)
-- Australian botanical palette aligns with community services ethos
+- Australian [DEPRECATED_STYLE] palette aligns with community services ethos
 - Supports dual modes (kr-dark for users, kr-dark for tools)
 - Justifiable to users: "Designed with care, not automation"
 

@@ -84,16 +84,16 @@ For **EACH** component:
 
    REPLACE WITH (from frontend/src/design-tokens/kerala-rage-tokens.ts):
    - fontFamily: 'Crimson Text' or 'Lora'
-   - ncColor.botanical.wattle or ncColor.botanical.waratah
-   - ncShadow.organic.elevated
-   - border-radius: '40px 12px 40px 12px' (asymmetric/organic)
+   - ncColor.[DEPRECATED_STYLE].wattle or ncColor.[DEPRECATED_STYLE].[DEPRECATED_STYLE]
+   - ncShadow.[DEPRECATED_STYLE].elevated
+   - border-radius: '40px 12px 40px 12px' (asymmetric/[DEPRECATED_STYLE])
    ```
 
 3. **Make edits:**
-   - Search & replace M3 colors → kerala-rage botanical colors
+   - Search & replace M3 colors → kerala-rage [DEPRECATED_STYLE] colors
    - Search & replace fonts → ncFont* imports
    - Search & replace elevation → ncShadow*
-   - Search & replace uniform corners → organic asymmetric patterns
+   - Search & replace uniform corners → [DEPRECATED_STYLE] asymmetric patterns
 
 4. **Run component tests** (Testing MCP)
    ```bash

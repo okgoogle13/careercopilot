@@ -13,11 +13,11 @@ MIGRATION_REPORT_PATH = os.path.join(DOCS_DIR, 'MIGRATION.md')
 # Order matters: more specific matches should come first.
 
 COLOR_MIGRATIONS = {
-    # Red / Rational -> Waratah (Primary Rage)
-    r'--color-waratah-red-base': '--color-waratah-primary',
-    r'--color-waratah-red': '--color-waratah-primary',
-    r'--sys-color-primary': '--color-waratah-primary',
-    r'--sys-color-error': '--color-specimen-red-primary', # Urgent/Error -> Specimen Red
+    # Red / Rational -> [DEPRECATED_STYLE] (Primary Rage)
+    r'--color-[DEPRECATED_STYLE]-red-base': '--color-[DEPRECATED_STYLE]-primary',
+    r'--color-[DEPRECATED_STYLE]-red': '--color-[DEPRECATED_STYLE]-primary',
+    r'--sys-color-primary': '--color-[DEPRECATED_STYLE]-primary',
+    r'--sys-color-error': '--color-[DEPRECATED_STYLE]-red-primary', # Urgent/Error -> [DEPRECATED_STYLE] Red
 
     # Gold / Optimism -> Baru Gold (Optimistic Resistance)
     r'--color-wattle-gold-base': '--color-baru-gold-primary',
@@ -46,17 +46,17 @@ COLOR_MIGRATIONS = {
 NEW_CSS_VARIABLES = """
   /* KERALA RAGE COLOR SYSTEM */
 
-  /* Waratah Red (Resistance/Rage) */
-  --color-waratah-shadow: #A02F0F;
-  --color-waratah-dark: #C03811;
-  --color-waratah-primary: #F14714;
-  --color-waratah-light: #FF6B3D;
-  --color-waratah-highlight: #FF9470;
+  /* [DEPRECATED_STYLE] Red (Resistance/Rage) */
+  --color-[DEPRECATED_STYLE]-shadow: #A02F0F;
+  --color-[DEPRECATED_STYLE]-dark: #C03811;
+  --color-[DEPRECATED_STYLE]-primary: #F14714;
+  --color-[DEPRECATED_STYLE]-light: #FF6B3D;
+  --color-[DEPRECATED_STYLE]-highlight: #FF9470;
 
-  /* Specimen Night Red (Urgency/Warning) */
-  --color-specimen-red-dark: #D72F41;
-  --color-specimen-red-primary: #F14844;
-  --color-specimen-red-light: #FF6B66;
+  /* [DEPRECATED_STYLE] Night Red (Urgency/Warning) */
+  --color-[DEPRECATED_STYLE]-red-dark: #D72F41;
+  --color-[DEPRECATED_STYLE]-red-primary: #F14844;
+  --color-[DEPRECATED_STYLE]-red-light: #FF6B66;
 
   /* Eucalyptus Smoke Green (Melancholy/Landscape) */
   --color-eucalyptus-smoke-dark: #42C47D;
@@ -88,10 +88,10 @@ NEW_CSS_VARIABLES = """
   /* MAPPING TO SYSTEM UTILITIES */
   --sys-color-background: var(--color-charcoal-primary);
   --sys-color-surface: var(--color-charcoal-surface);
-  --sys-color-primary: var(--color-waratah-primary);
+  --sys-color-primary: var(--color-[DEPRECATED_STYLE]-primary);
   --sys-color-secondary: var(--color-baru-gold-primary);
   --sys-color-tertiary: var(--color-eucalyptus-smoke-primary);
-  --sys-color-error: var(--color-specimen-red-primary);
+  --sys-color-error: var(--color-[DEPRECATED_STYLE]-red-primary);
   --sys-color-onBackground: var(--color-eucalyptus-ash-primary);
   --sys-color-onSurface: var(--color-eucalyptus-ash-primary);
   --sys-color-onPrimary: var(--color-charcoal-primary);
@@ -172,7 +172,7 @@ class MigrationAutomator:
         print(f"Generating {tokens_path}...")
 
         # We can either parse the existing one and update it, or write a new structure.
-        # Given the "Northcote Curio" existing structure is complex, let's try to update key fields
+        # Given the "Northcote [DEPRECATED_STYLE]" existing structure is complex, let's try to update key fields
         # if the file exists, otherwise write a fresh one.
 
         import json
@@ -187,7 +187,7 @@ class MigrationAutomator:
                 "hover": { "$value": "0 8px 16px rgba(0, 0, 0, 0.45)", "$type": "shadow" },
                 "maximum": { "$value": "0 16px 32px rgba(0, 0, 0, 0.55)", "$type": "shadow" },
                 "wattle-offset": { "$value": "2px 2px 0px #DAF674", "$type": "shadow" },
-                "waratah-bleed": { "$value": "0 0 12px #F14714", "$type": "shadow" }
+                "[DEPRECATED_STYLE]-bleed": { "$value": "0 0 12px #F14714", "$type": "shadow" }
             }
         }
 
@@ -205,7 +205,7 @@ class MigrationAutomator:
                 # Update semantic colors if possible (naive update)
                 if 'color' in existing and 'semantic' in existing['color']:
                      existing['color']['semantic']['wattle-gold']['$value'] = "#DAF674" # Baru Gold
-                     existing['color']['semantic']['waratah-red']['$value'] = "#F14714" # Waratah
+                     existing['color']['semantic']['[DEPRECATED_STYLE]-red']['$value'] = "#F14714" # [DEPRECATED_STYLE]
                      existing['color']['semantic']['asphalt-black']['$value'] = "#1a1a1a" # Charcoal
 
                 final_content = existing

@@ -122,7 +122,7 @@ The **Solidarity Mode** design system embodies:
 **Key Differences Lo-Fi → Hi-Fi**:
 - Lo-fi has 2x3 skill grid; hi-fi shows sidebar + grid layout
 - Lo-fi uses 12% opacity for blueprint; hi-fi uses 8%
-- Both reference botanical motif for elite skills (>90% mastery)
+- Both reference [DEPRECATED_STYLE] motif for elite skills (>90% mastery)
 
 ---
 

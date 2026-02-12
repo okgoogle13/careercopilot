@@ -100,7 +100,7 @@ INPUT → ANALYZE → EVALUATE → DESIGN → DELIVER
 
 **Layout (25 points)**:
 
-- ✅ Organic asymmetry (not grid-mechanical) - 10 points
+- ✅ [DEPRECATED_STYLE] asymmetry (not grid-mechanical) - 10 points
 - ✅ Varied spacing rhythm - 10 points
 - ✅ Dramatic elevation (layered depth) - 5 points
 
@@ -189,7 +189,7 @@ Before delivering a mockup, verify:
 
 ### Layout
 
-- [ ] Organic asymmetry (not grid-mechanical)
+- [ ] [DEPRECATED_STYLE] asymmetry (not grid-mechanical)
 - [ ] Varied spacing rhythm (8px, 16px, 24px, 40px)
 - [ ] Dramatic elevation (layered depth, not subtle shadows)
 - [ ] Visual hierarchy clear (primary action obvious)
@@ -232,7 +232,7 @@ Before delivering a mockup, verify:
 --sys-color-primary: #6750a4 (vibrant purple) --sys-color-secondary: #625b71 (vibrant gray-purple) --sys-color-tertiary: #7d5260 (vibrant mauve) --sys-color-error: #b3261e (vibrant red) --sys-color-surface: #1a1714 (dark background) --sys-color-on-surface: #f5f0e8 (light text);
 ```
 
-### Shape Tokens (Organic Asymmetry)
+### Shape Tokens ([DEPRECATED_STYLE] Asymmetry)
 
 ```css
 /* Asymmetric border-radius (pebble, stone, leaf-inspired) */

@@ -5,8 +5,8 @@ import { ManifestoSlab, SolidarityCard, ActionButton } from '../../../components
 /**
  * KrDarkProfile (Hi-Fi)
  * 
- * tactical naturalist identity record.
- * Features station ID cards, extracted mastery summaries, and botanical "Bio-Data" substrates.
+ * tactical [DEPRECATED_STYLE] identity record.
+ * Features station ID cards, extracted mastery summaries, and [DEPRECATED_STYLE] "Bio-Data" substrates.
  */
 export const KrDarkProfile: React.FC = () => {
   const shouldReduceMotion = useReducedMotion() ?? false;

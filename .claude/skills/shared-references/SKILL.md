@@ -30,7 +30,7 @@ Centralize shared templates, design philosophies, and forbidden patterns that mu
 
 ### Brand & Philosophy
 
-- [kerala-rage_DESIGN_PHILOSOPHY.md](file:///.claude/skills/shared-references/kerala-rage_DESIGN_PHILOSOPHY.md): The "kerala-rage kr-solidarity" core aesthetic (kerala-streetprint Naturalist vs. Modern Australian).
+- [kerala-rage_DESIGN_PHILOSOPHY.md](file:///.claude/skills/shared-references/kerala-rage_DESIGN_PHILOSOPHY.md): The "kerala-rage kr-solidarity" core aesthetic (kerala-streetprint [DEPRECATED_STYLE] vs. Modern Australian).
 - [kerala-rage_FORBIDDEN_FONTS.md](file:///.claude/skills/shared-references/kerala-rage_FORBIDDEN_FONTS.md): Deny-list of fonts that undermine the project's unique character.
 
 ### Templates (Planned)

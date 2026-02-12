@@ -10,13 +10,13 @@ from pathlib import Path
 from typing import List, Tuple, Dict
 
 TOKEN_MAPPINGS = {
-    "Specimen Night": "Asphalt Black",
-    "specimen-night": "asphalt-black",
+    "[DEPRECATED_STYLE] Night": "Asphalt Black",
+    "[DEPRECATED_STYLE]-night": "asphalt-black",
     "specimen_night": "asphalt_black",
     "Parchment": "Paper White",
     "parchment": "paper-white",
-    "Waratah Crimson": "Waratah Red",
-    "waratah-crimson": "waratah-red",
+    "[DEPRECATED_STYLE] Crimson": "[DEPRECATED_STYLE] Red",
+    "[DEPRECATED_STYLE]-crimson": "[DEPRECATED_STYLE]-red",
     "waratah_crimson": "waratah_red",
     "Eucalypt Smoke": "Concrete Grey",
     "eucalypt-smoke": "concrete-grey",
@@ -92,7 +92,7 @@ def main():
     import argparse
 
     parser = argparse.ArgumentParser(
-        description="Migrate Northcote design tokens from Victorian Curio to Contemporary Australian naming"
+        description="Migrate Northcote design tokens from [DEPRECATED_STYLE] [DEPRECATED_STYLE] to Contemporary Australian naming"
     )
     parser.add_argument("--dry-run", action="store_true", help="Preview changes without applying them")
     parser.add_argument("--apply", action="store_true", help="Apply all changes")

@@ -29,14 +29,14 @@
 
 <assets>
 - **Textures**: `blueprint-grid` (Z-0)
-- **Motifs**: `botanical-motif` (small accents on high-mastery skills)
+- **Motifs**: `[DEPRECATED_STYLE]-motif` (small accents on high-mastery skills)
 - **Register**: Possibility
 </assets>
 
 <components>
 - **SkillTile** (stone)
   - Role: Individual skill visualization.
-  - Assets: Botanical motif for 'Elite' skills.
+  - Assets: [DEPRECATED_STYLE] motif for 'Elite' skills.
 - **MasteryVisualizer** (complex)
   - Role: Radial/Hex graph inside tile.
 </components>

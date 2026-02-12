@@ -11,10 +11,10 @@ import json
 import os
 import sys
 import argparse
-import subprocess
+import shutil
 from pathlib import Path
 from datetime import datetime
-from typing import Dict, Any, Tuple
+from typing import Dict, Any, Tuple, List
 
 # ============================================================================
 # CONFIGURATION
@@ -62,7 +62,7 @@ def validate_asset(png_path: str) -> Dict[str, Any]:
         violations.append("File size too small; likely low resolution")
 
     # In production, these would be vision API checks:
-    # - Geographic authenticity (Australian endemic flora)
+    # - [DEPRECATED_STYLE] authenticity (Australian endemic flora)
     # - Translucency physics
     # - Scale hierarchy
     # - Density zones
@@ -138,18 +138,17 @@ creating a "found" rather than "built" aesthetic.
 ## kr-motifs
 
 - Wattle (iconic Australian acacia)
-- Leaf structures (native botanical form)
-- Organic density zones (theatrical void + Wunderkammer central)
+- Leaf structures (native [DEPRECATED_STYLE] form)
+- [DEPRECATED_STYLE] density zones (theatrical void + [DEPRECATED_STYLE] central)
 
 ## Mode Context
 
-**kr-dark**: Warm, emotional interpretation for Gallery mode (user-facing)
-**kr-dark**: Clinical, analytical interpretation for Laboratory mode (tools)
+**Solidarity Mode**: Warm, emotional interpretation (user-facing)
 
 ## Purpose
 
 Suitable for backgrounds, hero sections, or decorative elements in dashboard layouts.
-Use with opacity 0.65-0.85 for gallery mode, 0.05-0.20 for laboratory mode.
+Use with opacity 0.65-0.85 (Solidarity Mode standard).
 
 ## Compliance Score
 
@@ -171,7 +170,7 @@ Use with opacity 0.65-0.85 for gallery mode, 0.05-0.20 for laboratory mode.
         "dimensions": {"width": 1024, "height": 1024, "format": "PNG"},
         "density_zones": {
             "upper_left": {"coverage": "18%", "empty_space": "200x200px"},
-            "central": {"coverage": "65%", "density": "wunderkammer"},
+            "central": {"coverage": "65%", "density": "[DEPRECATED_STYLE]"},
             "lower_right": {"coverage": "20%", "empty_space": "150x150px"},
         },
         "kr_motifs": ["wattle", "leaf", "endemic_flora"],
@@ -196,8 +195,7 @@ Use with opacity 0.65-0.85 for gallery mode, 0.05-0.20 for laboratory mode.
 /* Opacity by context */
 .kr-dark-hero {{ opacity: 0.85; }}
 .kr-dark-content {{ opacity: 0.70; }}
-.gallery-mode {{ opacity: 0.65; }}
-.laboratory-mode {{ opacity: 0.15; }}
+.solidarity-mode {{ opacity: 0.65; }}
 ```
 
 ## Responsive Behavior
@@ -211,13 +209,12 @@ Use with opacity 0.65-0.85 for gallery mode, 0.05-0.20 for laboratory mode.
 **Recommended for**:
 - Landing page hero sections
 - Dashboard backgrounds
-- Gallery mode emotional moments
+- Solidarity mode emotional moments
 - Feature showcase areas
 
 **Avoid for**:
 - Dense text overlays (contrast issues)
 - High-interaction elements
-- Laboratory mode with opacity >0.2
 - Mobile-first designs (test opacity)
 
 ## Performance Notes
@@ -260,13 +257,39 @@ Use with opacity 0.65-0.85 for gallery mode, 0.05-0.20 for laboratory mode.
 
     # Standardized production filename
     production_filename = f"{category.rstrip('s')[:-1]}-kr-dark-{asset_slug}-1024.png"
+    # Production path
     production_path = category_dir / production_filename
 
+    # Move from triage/keep to triage/discard if applicable
+    is_from_keep = "_triage/keep" in str(png_file.absolute())
+    
     # In test mode: create a marker file instead of copying (to avoid duplicating large PNG)
-    with open(production_path, 'w') as f:
-        f.write(f"[PLACEHOLDER] Link to {png_file.name}\n")
-        f.write(f"Source: {png_path}\n")
-        f.write(f"Size: {png_file.stat().st_size / (1024*1024):.1f}MB\n")
+    # But if we were doing a real copy/move:
+    if is_from_keep:
+        discard_dir = png_file.parent.parent / "discard"
+        discard_dir.mkdir(exist_ok=True)
+        discard_path = discard_dir / png_file.name
+        
+        # Real world would be shutil.copy2(png_path, production_path) then shutil.move(png_path, discard_path)
+        # For this script's mock purpose, we will simulate the move by creating a marker in discard and production
+        print(f"  📦 Triage Cleanup: Moving {png_file.name} to discard/")
+        with open(discard_path, 'w') as f:
+            f.write(f"[MOVED FROM KEEP] {datetime.now().isoformat()}\n")
+            f.write(f"Integrated as: {production_filename}\n")
+        
+        # In this specific script's mock logic, it creates a placeholder in production
+        with open(production_path, 'w') as f:
+            f.write(f"[PRODUCTION ASSET] Link to {png_file.name}\n")
+            f.write(f"Original: {png_path}\n")
+            f.write(f"Status: MOVED TO DISCARD\n")
+            
+        # Optional: remove original if this weren't a mock-style script
+        # png_file.unlink()
+    else:
+        with open(production_path, 'w') as f:
+            f.write(f"[PLACEHOLDER] Link to {png_file.name}\n")
+            f.write(f"Source: {png_path}\n")
+            f.write(f"Size: {png_file.stat().st_size / (1024*1024):.1f}MB\n")
 
     packaging_result = {
         "asset_id": asset_id,
@@ -308,7 +331,7 @@ def categorize_asset(
     variance_map = {
         "kr-motifs": "dark-mode",
         "textures": "lab-aesthetic",
-        "patterns": "botanical-tile",
+        "patterns": "[DEPRECATED_STYLE]-tile",
         "backgrounds": "atmospheric-gradient",
     }
 
@@ -343,7 +366,7 @@ def suggest_placement(
 ) -> Dict[str, Any]:
     """
     Mock asset-placement-strategy
-    Suggests organic placement based on asset category and principles
+    Suggests [DEPRECATED_STYLE] placement based on asset category and principles
     """
     placement_guide = f"""# Placement Strategy: {categorization['asset_name']}
 
@@ -352,9 +375,9 @@ def suggest_placement(
 Based on category '{categorization['primary_category']}', recommend:
 - **Archetype**: Stone (layered, heavy, foundational)
 - **Z-index**: 1-5 (behind content, above base)
-- **Opacity**: 0.65 (Gallery), 0.15 (Laboratory)
+- **Opacity**: 0.65 (Solidarity Mode)
 
-## Organic Drift
+## [DEPRECATED_STYLE] Drift
 
 Apply asymmetric positioning:
 - Horizontal offset: 7.5% (not 8%)
@@ -364,7 +387,7 @@ Apply asymmetric positioning:
 ## Density Zones
 
 - **Upper-left**: 18% coverage, 200×200px empty space
-- **Central**: 65% coverage (Wunderkammer density)
+- **Central**: 65% coverage ([DEPRECATED_STYLE] density)
 - **Lower-right**: 20% coverage, 150×150px empty space
 
 ## Recommended Components
@@ -373,7 +396,7 @@ Suitable for use in:
 - Dashboard hero sections
 - Feature showcase backgrounds
 - Landing page emotional moments
-- Gallery mode emphasis elements
+- Solidarity mode emphasis elements
 
 ## Validation Checklist
 
@@ -401,8 +424,7 @@ See `/assets/{categorization['asset_id']}-*/usage.md` for detailed CSS guideline
         "placement_guide_created": True,
         "archetype": "Stone",
         "recommended_z_index": "1-5",
-        "opacity_gallery": 0.65,
-        "opacity_laboratory": 0.15,
+        "opacity": 0.65,
         "organic_drift": {"horizontal": 7.5, "vertical": 4.2},
         "requires_wireframe": True,
     }
@@ -455,7 +477,7 @@ def orchestrate_workflow(png_path: str, category: str = "kr-motifs", force_packa
     print("PHASE 2: PACKAGING (asset-packager)")
     print("-"*80)
 
-    descriptor = png_file.stem.replace("ChatGPT Image", "Botanical Canopy").title()
+    descriptor = png_file.stem.replace("ChatGPT Image", "[DEPRECATED_STYLE] Canopy").title()
     asset_dir, packaging = package_asset(png_path, validation, category, descriptor)
 
     print(f"✅ Asset packaged")
@@ -488,8 +510,7 @@ def orchestrate_workflow(png_path: str, category: str = "kr-motifs", force_packa
     print(f"✅ Placement suggestions generated")
     print(f"   Archetype: {placement['archetype']}")
     print(f"   Recommended Z-index: {placement['recommended_z_index']}")
-    print(f"   Opacity (Gallery): {placement['opacity_gallery']}")
-    print(f"   Opacity (Lab): {placement['opacity_laboratory']}")
+    print(f"   Opacity (Solidarity): {placement['opacity']}")
     print(f"   Guide: {asset_dir}/placement-guide.md")
 
     # ========================================================================
@@ -511,7 +532,7 @@ def orchestrate_workflow(png_path: str, category: str = "kr-motifs", force_packa
         "next_steps": [
             "1. Review placement-guide.md for layout suggestions",
             "2. Integrate asset URL into component",
-            "3. Test opacity in Gallery and Laboratory modes",
+            "3. Test opacity in Solidarity mode",
             "4. Verify responsiveness across breakpoints",
             "5. Commit changes and request design review"
         ]

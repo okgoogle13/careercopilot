@@ -1,6 +1,6 @@
 # Non-Negotiable Core Design Directives
 
-## 1. Visual Hierarchy: Kerala/Indian-Australian PRIMARY, Colonial SECONDARY
+## 1. Visual Hierarchy: Kerala/Indian-Australian PRIMARY
 
 **Dominant Visual Language (80% weight):**
 
@@ -65,7 +65,7 @@
 **Required:**
 
 - Variable fonts with wght (100-900), wdth (75-125), opsz (8-144) axes
-- Organic asymmetric shapes (no perfect circles or geometric symmetry)
+- [DEPRECATED_STYLE] asymmetric shapes (no perfect circles or geometric symmetry)
 - Physics-based motion (spring, drag, gravity, pulse)
 - 5-7 step tonal families for every color (never flat single-tone)
 - Extreme type scale contrast (8px micro to 144px hero)
@@ -97,9 +97,9 @@
 
 ### Color Families
 
-#### Waratah Red (#F14714)
+#### [DEPRECATED_STYLE] Red (#F14714)
 
-**Source:** Australian waratah flower, blood, resistance
+**Source:** Australian [DEPRECATED_STYLE] flower, blood, resistance
 **Tonal Family:** #A02F0F → #C03811 → #F14714 → #FF6B3D → #FF9470 → #FFB999
 **Usage:** Red hammer-sickle flags, urgent emphasis text, elephant temple decorations, protest banners, primary CTAs
 **Emotion:** Deep rage → active resistance → hopeful fire
@@ -147,7 +147,7 @@
 **Usage:** Worker hands/skin tones, kettuvalam houseboat structures, coconut palm frames, Wurundjeri Country acknowledgments, calm melancholic backgrounds
 **Emotion:** Exhausted dignity → quiet reverence
 
-#### Waratah Smoke Orange (#DA8B48)
+#### [DEPRECATED_STYLE] Smoke Orange (#DA8B48)
 
 **Source:** Rubber plantation earth, labor warmth
 **Usage:** Rubber plantation scenes, labor continuity elements, warm Kerala landscape tones, worker solidarity warmth
@@ -250,7 +250,7 @@ Cultural identity is asserted through scale, weight, and layout — never throug
 **Kerala Elephant**
 
 - **Symbol:** Cultural power, defiance, Kerala identity assertion
-- **Visual:** Asymmetric organic shape, temple ornaments in waratah red/baru gold
+- **Visual:** Asymmetric [DEPRECATED_STYLE] shape, temple ornaments in [DEPRECATED_STYLE] red/baru gold
 - **Usage:** Hero sections, identity declarations, "no apology" moments
 - **Motion:** Stride forward with momentum, elastic bounce on interaction
 
@@ -264,14 +264,14 @@ Cultural identity is asserted through scale, weight, and layout — never throug
 **Red Hammer-Sickle Flags**
 
 - **Symbol:** Workers' solidarity, plantation-to-café labor continuity, protest
-- **Visual:** Fabric physics with flutter, waratah red dominant
+- **Visual:** Fabric physics with flutter, [DEPRECATED_STYLE] red dominant
 - **Usage:** Protest banners, union organizing, solidarity declarations
 - **Motion:** Wind drag, flag flutter animation, impact slam
 
 **Coconut Palms**
 
 - **Symbol:** Kerala landscape refusing to disappear, diaspora rootedness
-- **Visual:** Tall organic curves, asymmetric fronds, kr-leafus smoke green
+- **Visual:** Tall [DEPRECATED_STYLE] curves, asymmetric fronds, kr-leafus smoke green
 - **Usage:** Landscape frames, homesickness melancholy, persistent identity
 - **Motion:** Gentle sway, wind responsiveness
 
@@ -342,7 +342,7 @@ Every visual composition must maintain clear spatial weight distribution between
 
 **Primary Layer (80%): Kerala/Indian-Australian Identity**
 - Motifs: Elephants, Kettuvalam houseboats, coconut palms, rubber plantation workers, temple ornaments
-- Colors: Waratah Red, Baru Gold, Smoke Green (dominant palette)
+- Colors: [DEPRECATED_STYLE] Red, Baru Gold, Smoke Green (dominant palette)
 - Narrative: Cultural pride, migrant dignity, diaspora rootedness
 - Example: Hero screen with Kerala elephant takes 80% of canvas
 
@@ -362,7 +362,7 @@ Every visual composition must maintain clear spatial weight distribution between
 **Visual Application Example:**
 A dashboard hero section:
 1. **Background**: Dark charcoal canvas (foundation)
-2. **Dominant motif** (60%): Kerala elephant + temple ornament in Waratah Red, Baru Gold
+2. **Dominant motif** (60%): Kerala elephant + temple ornament in [DEPRECATED_STYLE] Red, Baru Gold
 3. **Secondary element** (15%): Melbourne laneway tram or union poster excerpt, subtle
 4. **Text layer** (20%): Manifesto or section title in Solidarity weight
 5. **Accent** (5%): "Wurundjeri Country" acknowledgment in corner, small, respectful
@@ -499,9 +499,9 @@ A dashboard hero section:
 
 ## Shape System
 
-### Organic Asymmetry (NO Perfect Circles)
+### [DEPRECATED_STYLE] Asymmetry (NO Perfect Circles)
 
-**Organic Cards:** `border-radius: 42% 58% 45% 55% / 48% 62% 38% 52%` (and variations)
+**[DEPRECATED_STYLE] Cards:** `border-radius: 42% 58% 45% 55% / 48% 62% 38% 52%` (and variations)
 **Sharp Protest Angles:** `clip-path: polygon(0% 15% 85% 0%)`
 **Torn Edge:** Polygon with irregular 30+ points creating wheat-paste poster aesthetic
 **Elephant Body:** `border-radius: 35% 65% 60% 40% / 45% 55% 50% 50%`
@@ -570,7 +570,7 @@ The system's voice is **confrontational, declarative, and interrogative**—but 
 | **Hero / Manifestos** | Confrontational assertion | Full power, declarative | "KERALA TO NAARM: RED FLAGS RISING" | User arriving, needs ideological clarity |
 | **Onboarding / Guidance** | Supportive coalition | "Let's" framing, solidarity verbs | "LET'S OPTIMIZE YOUR RESUME FOR HUMAN READERS" | User needs help; harsh tone creates barrier |
 | **Form Labels / Instructions** | Assertive direction | Capitalized, direct | "UPLOAD YOUR RESUME (PDF, DOC, DOCX)" | Clarity without condescension |
-| **Error States / Validation** | Solidarity-framed problem-solving | "We're fixing this together" | "PDF, DOC, DOCX ONLY—LET'S TRY AGAIN" (in Waratah Red) | User made mistake; help them, don't shame them |
+| **Error States / Validation** | Solidarity-framed problem-solving | "We're fixing this together" | "PDF, DOC, DOCX ONLY—LET'S TRY AGAIN" (in [DEPRECATED_STYLE] Red) | User made mistake; help them, don't shame them |
 | **Success / Celebration** | Joyful momentum | Affirmation + forward motion | "RESUME ANALYZED—YOUR STRENGTHS RISING" | Celebrate progress, propel forward |
 | **Loading / Waiting** | In-progress tension | Reflective patience | "PROCESSING YOUR APPLICATION..." | Acknowledge the work happening |
 | **Accessibility / Help Text** | Humble guidance | Small, lighter weight | "Supported formats: PDF, DOC, DOCX" | Secondary information, visually recede |
@@ -589,8 +589,8 @@ The system's voice is **confrontational, declarative, and interrogative**—but 
 - Teams decide based on user research, not rules
 
 **Rule 3: Visual Tone Intensity Matches Verbal Tone**
-- Hero manifestos: Waratah Red + weight 800 + 72px size = maximum intensity
-- Form validation: Waratah Red + weight 600 + 16px size = clear but not aggressive
+- Hero manifestos: [DEPRECATED_STYLE] Red + weight 800 + 72px size = maximum intensity
+- Form validation: [DEPRECATED_STYLE] Red + weight 600 + 16px size = clear but not aggressive
 - Help text: Smoke Green + weight 400 + 12px size = gentle guidance
 
 ---
@@ -607,7 +607,7 @@ The Kerala Rage system must handle all user-facing states with emotional coheren
 |-------|-----------------|------------------|-------|--------|-------|
 | **Loading** | "Work is happening—trust the process" | Animated spinner or pulsing element | "PROCESSING YOUR APPLICATION..." | Spring pulse (1000ms) | Wattle Gold glow |
 | **Empty** | "You're starting—invitation, not demand" | Kerala motif (palm, elephant) low-opacity + text | "NO DOCUMENTS YET—UPLOAD TO BEGIN" | Gentle fade-in, no aggression | Smoke Green (calm) |
-| **Error** | "We're fixing this together—solidarity frame" | Waratah Red border/highlight + icon | "PDF, DOC, DOCX ONLY—LET'S TRY AGAIN" | Gentle shake (200ms), not violent | Waratah Red (alert) |
+| **Error** | "We're fixing this together—solidarity frame" | [DEPRECATED_STYLE] Red border/highlight + icon | "PDF, DOC, DOCX ONLY—LET'S TRY AGAIN" | Gentle shake (200ms), not violent | [DEPRECATED_STYLE] Red (alert) |
 | **Success** | "Celebration—momentum forward" | Baru Gold glow + upward motion + check icon | "RESUME ANALYZED—YOUR STRENGTHS RISING" | Spring lift (400ms) | Baru Gold (optimistic) |
 | **Disabled** | "Waiting—colonial defeat aesthetic" | Ghostly Colonial (wght 100, 10-20% opacity) | "UNAVAILABLE" (very light) | None (static) | Charcoal ash (faded) |
 
@@ -665,14 +665,14 @@ export const EmptyState: React.FC = () => (
 ##### Error State
 ```tsx
 export const ValidationError: React.FC<{ message: string }> = ({ message }) => (
-  <div className="p-4 border-l-4 border-waratah-red rounded-stone bg-kr-leaf-smoke/30">
+  <div className="p-4 border-l-4 border-[DEPRECATED_STYLE]-red rounded-stone bg-kr-leaf-smoke/30">
     <div className="flex items-center space-x-3">
       {/* Visual indicator */}
       <span className="text-xl">⚠️</span>
 
       {/* Error message in Solidarity framing—"let's fix this" not "you failed" */}
       <div>
-        <p className="font-semibold text-waratah-red">
+        <p className="font-semibold text-[DEPRECATED_STYLE]-red">
           {message.toUpperCase()}
         </p>
         <p className="text-body-sm text-kr-leaf-smoke">
@@ -737,7 +737,7 @@ Combine Error + Disabled frames:
 
 **Conflicting Validation:**
 If form has multiple errors, prioritize by severity:
-- Primary error (blocking submission): Waratah Red, full focus
+- Primary error (blocking submission): [DEPRECATED_STYLE] Red, full focus
 - Secondary error (warning): Gum Leaf Yellow, visible but secondary
 - Hint (informational): Smoke Green, low opacity
 
@@ -811,7 +811,7 @@ If form has multiple errors, prioritize by severity:
 **Layout Must:**
 
 - Embrace asymmetry (no perfect centering)
-- Use organic irregular spacing
+- Use [DEPRECATED_STYLE] irregular spacing
 - Layer elements (street wall logic: base → Kerala → flags → typography)
 - Show material texture (paint drips, torn edges, tape marks)
 
@@ -901,7 +901,7 @@ export const SolidarityBanner: React.FC<{ children: string }> = ({ children }) =
         fontFamily: "var(--font-display)",
         fontSize: "var(--type-display-size)",
         letterSpacing: "0.02em",
-        color: "var(--color-waratah-primary)",
+        color: "var(--color-[DEPRECATED_STYLE]-primary)",
       }}
     >
       {children}
@@ -930,8 +930,8 @@ When expressiveness conflicts with legibility, **clarity wins**. The system's po
 
 **Why Scaling Matters:**
 - A 9× contrast headline on a 30-row data table makes every row feel urgent—visual chaos.
-- A 2× contrast table with semantic color (Waratah Red for alerts, Wattle for primary) provides clarity without loss of character.
-- The system stays distinctive even at lower contrasts because of color palette + organic shapes + motion.
+- A 2× contrast table with semantic color ([DEPRECATED_STYLE] Red for alerts, Wattle for primary) provides clarity without loss of character.
+- The system stays distinctive even at lower contrasts because of color palette + [DEPRECATED_STYLE] shapes + motion.
 
 #### Example: Data Dashboard Pattern
 
@@ -941,7 +941,7 @@ When expressiveness conflicts with legibility, **clarity wins**. The system's po
   font-size: 72px;           /* Headline scale */
   font-weight: 700;          /* Extended bold */
   font-variation-settings: 'wdth' 120;
-  color: var(--color-waratah-red);
+  color: var(--color-[DEPRECATED_STYLE]-red);
   /* 5× contrast (wght 400 background → 700 foreground, size ratio) */
 }
 
@@ -956,7 +956,7 @@ When expressiveness conflicts with legibility, **clarity wins**. The system's po
 /* Alert in table */
 .table-alert {
   font-weight: 500;          /* Slight emphasis, not extreme */
-  color: var(--color-waratah-red);
+  color: var(--color-[DEPRECATED_STYLE]-red);
   /* 2× contrast (base weight → +100), sufficient for scanning */
 }
 ```
@@ -966,9 +966,9 @@ When expressiveness conflicts with legibility, **clarity wins**. The system's po
 ```tsx
 export const JobListingCard: React.FC<JobCardProps> = ({ title, company, match }) => {
   return (
-    <div className="rounded-[20px_6px_16px_28px] bg-kr-leaf-smoke p-6 border-l-4 border-waratah-red">
+    <div className="rounded-[20px_6px_16px_28px] bg-kr-leaf-smoke p-6 border-l-4 border-[DEPRECATED_STYLE]-red">
       {/* Hero stat for match score */}
-      <div className="text-headline-lg font-bold text-waratah-red mb-2">
+      <div className="text-headline-lg font-bold text-[DEPRECATED_STYLE]-red mb-2">
         {match}% Match
       </div>
 
@@ -991,7 +991,7 @@ export const JobListingCard: React.FC<JobCardProps> = ({ title, company, match }
 
 **Test for Balance:**
 1. Can you scan 10 job cards in < 10 seconds? (Should be yes)
-2. Do the cards still feel like Kerala Rage (organic shapes, semantic colors)? (Should be yes)
+2. Do the cards still feel like Kerala Rage ([DEPRECATED_STYLE] shapes, semantic colors)? (Should be yes)
 3. Is any card confusing? (Should be no)
 
 If you answer yes/yes/no, your contrast ratios are correct.
@@ -1004,7 +1004,7 @@ Use the color palette semantically, not decoratively:
 |-----------|-------|---------|---------|
 | **Primary Data** | Wattle Gold | "The user's main insight" | Your ATS score: 72% |
 | **Comparison/Context** | Smoke Green | "How you compare" | Average score: 65% |
-| **Alert/Attention** | Waratah Red | "Action needed" | 3 keywords missing |
+| **Alert/Attention** | [DEPRECATED_STYLE] Red | "Action needed" | 3 keywords missing |
 | **Success/Positive** | Smoke Green or Baru Gold | "Goal achieved" | ✅ Résumé optimized |
 | **Background/Grid** | Charcoal Ash (very low opacity) | "Structure, not content" | Data table gridlines |
 
@@ -1016,11 +1016,11 @@ Use the color palette semantically, not decoratively:
 ❌ **Avoid:** Making every row a "hero moment" (visual fatigue)
 ✅ **Instead:** Reserve 9× for KPIs, use 3× for structure, 1× for details
 
-❌ **Avoid:** Organic shapes on every cell (chaotic, hard to scan)
-✅ **Instead:** Organic card borders (outer), regular borders (internal grids)
+❌ **Avoid:** [DEPRECATED_STYLE] shapes on every cell (chaotic, hard to scan)
+✅ **Instead:** [DEPRECATED_STYLE] card borders (outer), regular borders (internal grids)
 
 ❌ **Avoid:** Forgetting semantic meaning in color (becomes decoration)
-✅ **Instead:** "Waratah Red = Alert" is consistent across the product
+✅ **Instead:** "[DEPRECATED_STYLE] Red = Alert" is consistent across the product
 
 ---
 
@@ -1133,13 +1133,13 @@ Verify these color combinations meet 4.5:1 minimum:
 
 ```
 ✅ Paper White (#F5F0E8) on Charcoal (#1a1a1a): 21.4:1 (AAA)
-✅ Waratah Red (#F14714) on Charcoal (#1a1a1a): 8.2:1 (AA)
+✅ [DEPRECATED_STYLE] Red (#F14714) on Charcoal (#1a1a1a): 8.2:1 (AA)
 ✅ Baru Gold (#DAF674) on Charcoal (#1a1a1a): 8.7:1 (AA)
 ✅ Smoke Green (#48DA8B) on Charcoal (#1a1a1a): 9.1:1 (AA)
 ✅ Gum Leaf Yellow (#F6E748) on Charcoal (#1a1a1a): 12.1:1 (AAA)
 ✅ Parrot Green (#48F0E5) on Charcoal (#1a1a1a): 10.4:1 (AAA)
 
-❌ Waratah Red on Asphalt Black Light (#2C2925): 7.2:1 (AA, not AAA)
+❌ [DEPRECATED_STYLE] Red on Asphalt Black Light (#2C2925): 7.2:1 (AA, not AAA)
    → Use only for large text (18px+) or bold (14px+)
 
 ❌ Colonial colors (low opacity): Test individually
@@ -1152,14 +1152,14 @@ Test colors: Use [WebAIM Contrast Checker](https://webaim.org/resources/contrast
 ### Colorblind Accessibility
 
 **Palette Verification:**
-- Waratah Red & Gum Leaf Yellow: Distinguish for red/green colorblind? (Test with Colorblind app)
+- [DEPRECATED_STYLE] Red & Gum Leaf Yellow: Distinguish for red/green colorblind? (Test with Colorblind app)
 - Smoke Green & Parrot Green: Sufficiently distinct? (Test both)
 - If distinguishing color is critical (e.g., success vs. alert), **add secondary cue** (icon, pattern, text)
 
 **Implementation:**
 ```tsx
 export const AlertState: React.FC<{ message: string; type: 'alert' | 'success' }> = ({ message, type }) => {
-  const bgColor = type === 'alert' ? 'bg-waratah-red' : 'bg-smoke-green';
+  const bgColor = type === 'alert' ? 'bg-[DEPRECATED_STYLE]-red' : 'bg-smoke-green';
   const icon = type === 'alert' ? '⚠️' : '✅';
 
   return (
@@ -1194,12 +1194,12 @@ export const AlertState: React.FC<{ message: string; type: 'alert' | 'success' }
 1. Open Windows Settings → Ease of Access → High Contrast
 2. Enable "High Contrast Black" or "High Contrast White"
 3. Load the site. Check:
-   - Borders remain visible (organic shapes might have contrast issues)
+   - Borders remain visible ([DEPRECATED_STYLE] shapes might have contrast issues)
    - Text readable
    - Interactive elements clearly marked
    - Color information not lost (error = red alone, but also error icon/label)
 
-**If Organic Shapes Fail in Forced Colors:**
+**If [DEPRECATED_STYLE] Shapes Fail in Forced Colors:**
 - Add solid border-outline as fallback: `outline: 2px solid currentColor`
 - Preserve shape aesthetic while ensuring visibility in forced-color mode
 
@@ -1230,7 +1230,7 @@ Slogans like "NO NEUTRAL CANVAS" are visual assertions, but screen readers will 
   Screen reader: "Workers Unite button - submit your application"
 */}
 <button
-  className="text-display font-semibold text-waratah-red"
+  className="text-display font-semibold text-[DEPRECATED_STYLE]-red"
   aria-label="Workers Unite: submit your application"
 >
   WORKERS UNITE
@@ -1243,7 +1243,7 @@ All inputs must have visible, associated labels.
 ```tsx
 <label htmlFor="resume-upload" className="font-semibold text-paper-white">
   Upload Your Resume
-  <span className="text-waratah-red">*</span> {/* Required indicator */}
+  <span className="text-[DEPRECATED_STYLE]-red">*</span> {/* Required indicator */}
 </label>
 <input
   id="resume-upload"
@@ -1279,7 +1279,7 @@ input:focus-visible {
 ### Accessibility Checklist (Pre-Launch)
 
 - [ ] **Contrast:** All text passes WCAG AA (4.5:1) via WebAIM
-- [ ] **Colorblind:** Tested Waratah Red + Gum Leaf Yellow for red/green distinction
+- [ ] **Colorblind:** Tested [DEPRECATED_STYLE] Red + Gum Leaf Yellow for red/green distinction
 - [ ] **Motion:** All animations respect `prefers-reduced-motion`
 - [ ] **Forced Colors:** High Contrast mode tested; borders/outlines visible
 - [ ] **Typography:** No weight 100 below 16px, weight 900 effective at all sizes
@@ -1292,10 +1292,10 @@ input:focus-visible {
 
 ## Appendix: Token Naming Conventions
 
-**Colors:** `--color-[source]-[tone]` (e.g., `--color-waratah-dark`)
+**Colors:** `--color-[source]-[tone]` (e.g., `--color-[DEPRECATED_STYLE]-dark`)
 **Typography:** `--type-[scale]-[property]` (e.g., `--type-hero-size`)
 **Motion:** `--motion-[physics]-[easing/duration]` (e.g., `--motion-spring-elastic`)
-**Shape:** `--shape-[type]-[variant]` (e.g., `--shape-organic-card-1`)
+**Shape:** `--shape-[type]-[variant]` (e.g., `--shape-[DEPRECATED_STYLE]-card-1`)
 **Emotional Patterns:** `--type-[emotion]-[property]` (e.g., `--type-solidarity-wght`)
 
 ---
@@ -1351,10 +1351,10 @@ Shadows are not just depth; they are atmosphere. In the Kerala Rage system, shad
 - **Usage:** Primary buttons, "Call to Action" cards.
 - **Effect:** Hard edge, retro-optimistic.
 
-### Waratah Bleed (Rage/Danger)
+### [DEPRECATED_STYLE] Bleed (Rage/Danger)
 
-- **Token:** `shadow-waratah-bleed`
-- **Value:** `0 0 12px var(--color-waratah-primary)`
+- **Token:** `shadow-[DEPRECATED_STYLE]-bleed`
+- **Value:** `0 0 12px var(--color-[DEPRECATED_STYLE]-primary)`
 - **Usage:** Error inputs, destructive buttons, "Revolution" text.
 - **Effect:** Glowing, radioactive intensity.
 
@@ -1364,23 +1364,23 @@ Shadows are not just depth; they are atmosphere. In the Kerala Rage system, shad
 - **Value:** `box-shadow 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)`
 - **Usage:** All elevation changes. Shadows don't just fade; they _ooze_ into place.
 
-# Supplement: Organic Shape System
+# Supplement: [DEPRECATED_STYLE] Shape System
 
 ## Philosophy
 
-Nature hates straight lines. The Kerala Rage system rejects the colonial "perfect grid" in favor of organic, asymmetric, and "torn" shapes that imply history, wear, and resistance.
+Nature hates straight lines. The Kerala Rage system rejects the colonial "perfect grid" in favor of [DEPRECATED_STYLE], asymmetric, and "torn" shapes that imply history, wear, and resistance.
 
 ## Core Shapes
 
-### 1. Organic Card (The Stone)
+### 1. [DEPRECATED_STYLE] Card (The Stone)
 
-- **Token:** `shape-organic-card`
+- **Token:** `shape-[DEPRECATED_STYLE]-card`
 - **Border-Radius:** `28px 24px 32px 20px` (Base), `32px 20px 24px 28px` (Variant)
 - **Usage:** All main content containers. NEVER a perfect rectangle.
 
-### 2. Organic Button (The Pebble)
+### 2. [DEPRECATED_STYLE] Button (The Pebble)
 
-- **Token:** `shape-organic-button`
+- **Token:** `shape-[DEPRECATED_STYLE]-button`
 - **Border-Radius:** `16px 8px 12px 20px`
 - **Usage:** Primary interactions.
 
@@ -1399,7 +1399,7 @@ Nature hates straight lines. The Kerala Rage system rejects the colonial "perfec
 ## Implementation Notes
 
 - Use `CSS Masking` or `clip-path` for Torn Edges.
-- Avoid repeating the exact same organic shape adjacent to each other; use `nth-child` to alternate radius values.
+- Avoid repeating the exact same [DEPRECATED_STYLE] shape adjacent to each other; use `nth-child` to alternate radius values.
 
 # Supplement: Data Visualization System
 
@@ -1424,7 +1424,7 @@ Data is political. We do not use neutral blues. We use the colors of the land (K
 ### 3. Alert Data (The Warning)
 
 - **Token:** `color-data-alert`
-- **Ref:** `var(--color-waratah-red)`
+- **Ref:** `var(--color-[DEPRECATED_STYLE]-red)`
 - **Usage:** Drops in performance, critical thresholds.
 
 ### 4. Background Data (The Noise)

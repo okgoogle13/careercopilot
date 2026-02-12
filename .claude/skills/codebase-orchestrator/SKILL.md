@@ -223,9 +223,9 @@ Adds `handover` key to standard JSON containing:
         "blocking": "Core form input",
         "deps": ["token-system"],
         "transforms": {
-          "M3Color": "ncColor.botanical",
+          "M3Color": "ncColor.[DEPRECATED_STYLE]",
           "fontFamily:Roboto": "ncFont.body",
-          "elevation": "ncShadow.organic"
+          "elevation": "ncShadow.[DEPRECATED_STYLE]"
         },
         "test": "npm test -- --testPathPattern=Lens",
         "commit_msg": "refactor(components): migrate Lens to kerala-rage"

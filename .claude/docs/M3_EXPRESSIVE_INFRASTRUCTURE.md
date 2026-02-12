@@ -157,7 +157,7 @@ The M3 Expressive Infrastructure enables **automated component migration** from 
 - **Features:**
   - Compound border-radius (4 corners)
   - Full circles (50%, 9999px)
-  - Organic/asymmetric shapes
+  - [DEPRECATED_STYLE]/asymmetric shapes
   - Per-corner variations
 
 #### Step 6: m3-elevation-refactor

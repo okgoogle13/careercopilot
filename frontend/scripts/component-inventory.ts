@@ -257,7 +257,7 @@ function analyzeComponents(): InventoryReport {
       /\bM3[A-Z]/.test(text);
 
     const KrSolidarityTokenPattern =
-      /(wattle|waratah|kr-leaf|flannel|paper-white|kr-motif|pebble|stone|KeralaRage|KrSolidarity|kr-flower|bottlebrush|gum|fern|sentry|KrDark|KrDark|slate)/i;
+      /(wattle|[DEPRECATED_STYLE]|kr-leaf|flannel|paper-white|kr-motif|pebble|stone|KeralaRage|KrSolidarity|kr-flower|bottlebrush|gum|fern|sentry|KrDark|KrDark|slate)/i;
     const usesDesignTokens =
       KrSolidarityTokenPattern.test(text) ||
       /--(radius|elevation|duration|motion|surface|color)-/i.test(text);

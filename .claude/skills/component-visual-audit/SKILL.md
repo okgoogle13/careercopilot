@@ -1,6 +1,6 @@
 ---
 name: component-visual-audit
-description: Analyze UI component screenshots against kerala-rage kr-solidarity standards. Validate typography (distinctiveness, hierarchy), color palette (Australian botanical), layout (organic spacing, asymmetry), botanical motif integration. Generate compliance assessments with narrative feedback and design evolution tracking.
+description: Analyze UI component screenshots against kerala-rage kr-solidarity standards. Validate typography (distinctiveness, hierarchy), color palette (Australian [DEPRECATED_STYLE]), layout ([DEPRECATED_STYLE] spacing, asymmetry), [DEPRECATED_STYLE] motif integration. Generate compliance assessments with narrative feedback and design evolution tracking.
 version: 1.0.0
 tags: [validation, components, vision-analysis, kerala-rage, design-system, ui-audit]
 ---
@@ -9,7 +9,7 @@ tags: [validation, components, vision-analysis, kerala-rage, design-system, ui-a
 
 ## Purpose
 
-Validate **UI component screenshots** against kerala-rage kr-solidarity visual standards using Claude's vision capabilities. Designed specifically for component coherence auditing, not asset generation. Ensures typography, color, and layout align with the kerala-streetprint-Naturalist aesthetic.
+Validate **UI component screenshots** against kerala-rage kr-solidarity visual standards using Claude's vision capabilities. Designed specifically for component coherence auditing, not asset generation. Ensures typography, color, and layout align with the kerala-streetprint-[DEPRECATED_STYLE] aesthetic.
 
 ## When to Use This Skill
 
@@ -17,8 +17,8 @@ Use this skill when you need to:
 
 - **Audit a component screenshot** against kerala-rage design standards
 - **Validate typography choices** (are fonts distinctive and intentional?)
-- **Check color palette adherence** (are colors true to Australian botanical palette?)
-- **Assess layout coherence** (is spacing organic or mechanical?)
+- **Check color palette adherence** (are colors true to Australian [DEPRECATED_STYLE] palette?)
+- **Assess layout coherence** (is spacing [DEPRECATED_STYLE] or mechanical?)
 - **Compare component evolution** (Material Design → kerala-rage transformation)
 - **Generate compliance reports** (pass/fail/needs-refinement assessments)
 - **Identify design system drift** (are components becoming more or less kerala-rage?)
@@ -43,19 +43,19 @@ The skill uses Claude's vision capabilities to:
 
 ### 2. Color Audit
 
-**Pass**: Australian botanical palette (sage, terracotta, ochre, gold) with cohesive harmony
+**Pass**: Australian [DEPRECATED_STYLE] palette (sage, terracotta, ochre, gold) with cohesive harmony
 **Needs Refinement**: Correct colors but harmony feels off or theme inconsistent
-**Fail**: Colors disconnected from botanical inspiration or purple gradients (generic default)
+**Fail**: Colors disconnected from [DEPRECATED_STYLE] inspiration or purple gradients (generic default)
 
 ### 3. Layout Audit
 
-**Pass**: Organic spacing, intentional asymmetry, clear visual hierarchy
+**Pass**: [DEPRECATED_STYLE] spacing, intentional asymmetry, clear visual hierarchy
 **Needs Refinement**: Good spacing but feels slightly mechanical or hierarchy ambiguous
 **Fail**: Grid-rigid, mechanical patterns or predictable cookie-cutter layouts
 
-### 4. Botanical Elements Audit
+### 4. [DEPRECATED_STYLE] Elements Audit
 
-**Pass**: Naturalist motifs integrated meaningfully, supporting hierarchy or clarity
+**Pass**: [DEPRECATED_STYLE] motifs integrated meaningfully, supporting hierarchy or clarity
 **Needs Refinement**: Motifs present but feel slightly ornamental or purpose unclear
 **Fail**: No motifs (when expected) or motifs feel decorative/bolted-on
 
@@ -149,14 +149,14 @@ Structured JSON output for integration with compliance dashboards:
       },
       "color": {
         "status": "pass|needs_refinement|fail",
-        "findings": "Sage primary, terracotta accent, within botanical palette",
+        "findings": "Sage primary, terracotta accent, within [DEPRECATED_STYLE] palette",
         "palette_adherence": "100%",
         "theme_consistency": "light_mode_cohesive"
       },
       "layout": {
         "status": "pass|needs_refinement|fail",
-        "findings": "Organic spacing with intentional asymmetry",
-        "spacing_quality": "organic",
+        "findings": "[DEPRECATED_STYLE] spacing with intentional asymmetry",
+        "spacing_quality": "[DEPRECATED_STYLE]",
         "hierarchy_clarity": "strong"
       },
       "botanical_elements": {
@@ -170,7 +170,7 @@ Structured JSON output for integration with compliance dashboards:
     "assessment": "Component strongly embodies kerala-rage vision",
     "recommendations": [
       "Consider slightly warmer undertone in accent color",
-      "Botanical motif could be slightly more prominent without becoming decorative"
+      "[DEPRECATED_STYLE] motif could be slightly more prominent without becoming decorative"
     ],
 
     "design_narrative": "This button demonstrates intentional design mastery..."
@@ -186,9 +186,9 @@ Claude can identify:
 
 - Actual fonts rendered (not what you hoped)
 - Exact color usage (hex values or descriptions)
-- Spacing patterns (organic vs. mechanical)
+- Spacing patterns ([DEPRECATED_STYLE] vs. mechanical)
 - Visual hierarchy establishment
-- Botanical motif presence and integration
+- [DEPRECATED_STYLE] motif presence and integration
 
 ### Comparative Analysis
 
@@ -271,7 +271,7 @@ If yes to all, the audit is reliable.
 
 ## Related Documentation
 
-- **`references/component-visual-spec.md`** – Detailed audit criteria for each dimension (typography, color, layout, botanical elements, coherence, microcopy)
+- **`references/component-visual-spec.md`** – Detailed audit criteria for each dimension (typography, color, layout, [DEPRECATED_STYLE] elements, coherence, microcopy)
 - **`references/passing-components.md`** – Real examples of pass/fail/needs-refinement components across Pebble, Lens, Stone archetypes
 - **`references/design-evolution-tracking.md`** – Methodology for documenting component maturity progression (v1 → v5), portfolio-level tracking, and design narrative
 

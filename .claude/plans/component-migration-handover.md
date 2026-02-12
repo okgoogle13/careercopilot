@@ -112,9 +112,9 @@ Create a single consolidated task file instead of verbose documentation:
       "ncShapeOrganic"
     ],
     "migration_checklist": [
-      "Replace M3 semantic colors with botanical palette",
+      "Replace M3 semantic colors with [DEPRECATED_STYLE] palette",
       "Replace Inter/Roboto with kerala-rage typography stack",
-      "Apply organic border-radius (asymmetric)",
+      "Apply [DEPRECATED_STYLE] border-radius (asymmetric)",
       "Remove Material 3 elevation system, use kerala-rage shadow tokens"
     ]
   },
@@ -203,9 +203,9 @@ Migrate in order: Lens → Mark → Jar → Valve → Signal → Cabinet
    - M3 typography (e.g., `fontFamily: 'Roboto'`)
    - M3 elevation (e.g., `boxShadow: elevation[4]`)
 3. Replace with kerala-rage:
-   - Botanical colors (from `ncColorBotanical`)
+   - [DEPRECATED_STYLE] colors (from `ncColorBotanical`)
    - Typography stack (Lora, Crimson Text, Fraunces)
-   - Organic shapes (asymmetric border-radius)
+   - [DEPRECATED_STYLE] shapes (asymmetric border-radius)
 4. Run component tests (Testing MCP)
 5. Commit with message: `refactor(components): migrate <Name> to kerala-rage`
 

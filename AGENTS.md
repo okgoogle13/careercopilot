@@ -1,6 +1,6 @@
 # AGENTS.md
 
-Career Copilot is an AI-powered job application assistant built with React, FastAPI, Google Genkit, and Firestore. This document guides AI models and coding agents on project conventions, workflows, dependencies, code style, testing, security, and boundaries.
+Career Copilot is an AI-powered job application assistant built with React, FastAPI, Google Genkit, and Supabase/Postgres (with legacy Firestore artifacts still present). This document guides AI models and coding agents on project conventions, workflows, dependencies, code style, testing, security, and boundaries.
 
 **Note**: This file complements README.md by providing detailed context for AI agents and coding assistants across multiple platforms (GitHub Copilot, OpenAI Codex, Claude, etc.).
 
@@ -11,41 +11,41 @@ Career Copilot is an AI-powered job application assistant built with React, Fast
 ```bash
 # Run all tests
 cd frontend && yarn test
-cd backend && pytest backend/app/tests/
+cd backend && pytest
 
 # Type check
 cd frontend && yarn type-check
-cd backend && mypy backend/
+cd backend && mypy .
 
 # Format & lint
 cd frontend && yarn lint:fix
-cd backend && ruff check --fix backend/
+cd backend && ruff check --fix .
 ```
 
 ### Backend AI Agents
 
 ```bash
-# Run specific agent tests
-pytest backend/app/tests/agents/test_document_generator.py -v
+# Run specific Genkit flow tests
+pytest backend/app/tests/genkit_flows/test_ats_scoring.py -v
 
 # Test Genkit flows locally
-ENABLE_GENKIT_FLOWS=true pytest backend/app/tests/agents/ -v
+ENABLE_GENKIT_FLOWS=true pytest backend/app/tests/genkit_flows -v
 
 # Run backend dev server
-uvicorn backend.app.main:app --reload
+cd backend && uvicorn app.main:app --reload
 ```
 
 ### Frontend Components
 
 ```bash
 # Test specific component
-cd frontend && yarn test DocumentGeneration.test.tsx
+cd frontend && yarn test JobQueue.test.tsx
 
 # Build & preview
 cd frontend && yarn build && yarn preview
 
 # Run end-to-end tests
-cd frontend && npx playwright test
+cd frontend && yarn test:e2e
 ```
 
 ### Deployment
@@ -63,9 +63,9 @@ cd frontend && npx playwright test
 
 ## Project Overview
 
-**Stack**: React 18 + TypeScript · FastAPI · Google Genkit · Firestore · GCP
-**Frontend**: `frontend/` (Vite, Tailwind v4, Zustand, TanStack Query)
-**Backend**: `backend/` (FastAPI, SQLAlchemy, async/await)
+**Stack**: React 18 + TypeScript · FastAPI · Google Genkit · Supabase (Postgres/Auth/Storage) · GCP
+**Frontend**: `frontend/` (Vite, Tailwind v4, Zustand, TanStack Query, MUI)
+**Backend**: `backend/` (FastAPI, SQLAlchemy, Supabase/Postgres, async/await)
 
 ### Design System
 
@@ -75,12 +75,13 @@ cd frontend && npx playwright test
   - Background/surface: Asphalt Black `#1A1714`
   - Text: Paper White `#F5F0E8`
   - Primary actions: Wattle Gold `#D4A84B`
-  - Alerts/urgency: Waratah Red `#C45C4B`
+  - Alerts/urgency: [DEPRECATED_STYLE] Red `#C45C4B`
   - Structural neutrals: Ochre Earth `#B8733D`, Concrete Grey `#A39B8F`
   - Growth accents: Gum Leaf Green `#6B7F6E`
 - **Tokens**:
   - Source of truth: `design-system/tokens.json`
-  - CSS variables: `design-system/kerala-rage.css`
+  - CSS variables: `frontend/src/design/styles/kerala-rage.css`
+  - Frontend token mirror: `frontend/src/design/tokens/tokens.json`
   - All UI must use these tokens; no hardcoded hex values
 - **Aesthetic**:
   - Contemporary Australian, Peter Drew street art influence
@@ -90,20 +91,21 @@ cd frontend && npx playwright test
 
 ## Key Technologies
 
-| Layer                  | Tech                                             | Rationale                                                  |
-| ---------------------- | ------------------------------------------------ | ---------------------------------------------------------- |
-| AI Orchestration       | Google Genkit                                    | Native Gemini 1.5 integration, multi-model support         |
-| LLM – High Volume      | Gemini 1.5 Flash                                 | Document generation, ATS optimization, parsing             |
-| LLM – Complex Analysis | Gemini 1.5 Pro                                   | Company research, multi-step workflows, QA                 |
-| Document Parsing       | Langextract                                      | Structured resume/document extraction                      |
-| Backend API            | FastAPI                                          | Type safety, async-first, auto OpenAPI docs                |
-| Frontend               | React 18 + TS                                    | Component-driven, strict typing, kerala-rage design tokens   |
-| Design System          | kerala-rage Contemporary Australian                | Material 3 Expressive, dark UI, Australian endemic palette |
-| State Management       | Zustand                                          | Lightweight, no boilerplate                                |
-| Data Fetching          | TanStack Query                                   | Server state, caching, sync                                |
-| Data Persistence       | Firestore                                        | Real-time, Firebase auth integration                       |
-| File Storage           | Cloud Storage                                    | Scalable uploads and generated document storage            |
-| Hosting                | Cloud Run (backend), Firebase Hosting (frontend) | Serverless, auto-scaling                                   |
+| Layer                  | Tech                                                          | Rationale                                                  |
+| ---------------------- | ------------------------------------------------------------- | ---------------------------------------------------------- |
+| AI Orchestration       | Google Genkit + `app.core.genkit_init`                         | Standardized flow wiring with fallback to google-generativeai |
+| LLM – High Volume      | Gemini 3.0 Flash (runtime) / Gemini 2.5 Flash (service config) | Fast generation and ATS tasks                              |
+| LLM – Complex Analysis | Gemini 3.0 Pro / Gemini 2.5 Pro                                | Deep reasoning and analysis                                |
+| Document Parsing       | pdfminer.six + python-docx (`IngestionService`)                | PDF/DOCX ingestion and chunking                            |
+| Backend API            | FastAPI                                                       | Type safety, async-first, auto OpenAPI docs                |
+| Frontend               | React 18 + TS                                                  | Component-driven, strict typing, kerala-rage design tokens  |
+| Design System          | kerala-rage Contemporary Australian                            | Material 3 Expressive, dark UI, Australian endemic palette |
+| State Management       | React Context + Zustand                                        | Auth context + lightweight global state                    |
+| Data Fetching          | TanStack Query + axios                                         | Server state, caching, async requests                      |
+| Data Persistence       | Postgres via SQLAlchemy (Supabase) + SQLite dev                | Primary DB with local dev fallback                         |
+| Vector Store           | pgvector + Gemini embeddings                                   | Semantic search over career artifacts                      |
+| File Storage           | Supabase Storage                                               | Scalable uploads and generated document storage            |
+| Hosting                | Cloud Run (backend), Firebase Hosting (frontend)               | Serverless, auto-scaling                                   |
 
 ## Project Structure
 
@@ -111,28 +113,29 @@ cd frontend && npx playwright test
 backend/
 ├── app/
 │   ├── main.py                    # FastAPI setup, middleware, routes
-│   ├── api/endpoints/             # API route handlers (resumes, cover-letters, analysis, profiles)
-│   ├── services/                  # Firebase SDK, authentication, document operations
-│   ├── agents/                    # AI agents using Genkit flows
-│   │   ├── document_generator.py  # Resume/cover letter generation
-│   │   ├── ats_optimizer.py       # ATS scoring, keyword matching
-│   │   ├── resume_parser.py       # Document parsing with Langextract
-│   │   └── ksc_generator.py       # Key Selection Criteria for government roles
-│   ├── genkit_flows/              # Genkit @define_flow definitions
+│   ├── api/endpoints/             # API route handlers (analysis, documents, workflows, genkit, job_scout, ingest)
+│   ├── core/                      # Auth (Supabase JWT), database, Genkit init, config
+│   ├── services/                  # Ingestion, vector_store, supabase client
+│   ├── agents/                    # Job scout agent
+│   ├── genkit_flows/              # Symlink -> ai/flows/backend (Genkit flow definitions)
 │   └── tests/                     # Unit & integration tests
+
+ai/
+└── flows/backend/                 # Genkit flows (ATS, cover letters, resume optimizer, job analyzer, etc.)
 
 frontend/
 ├── src/
 │   ├── components/                # React components (kerala-rage kr-solidarity compliant)
-│   │   ├── DocumentGeneration/    # Resume/cover letter generation UI
-│   │   ├── AtsAnalyzer/           # ATS scoring interface
-│   │   ├── ProfileForm/           # User profile input
-│   │   └── ui/                    # Design system components
-│   ├── pages/                     # Route pages
-│   ├── services/                  # API client (apiClient.ts), Firebase SDK usage
-│   ├── hooks/                     # useAuth, useProfile, custom hooks
-│   ├── types/                     # TypeScript interfaces & contracts
-│   └── tests/                     # Jest, Playwright e2e tests
+│   │   ├── kerala-rage/            # Design system components
+│   │   └── ui/                    # Shared UI primitives
+│   ├── pages/                     # AnalysisPage, IngestionPage, JobQueue
+│   ├── api/                       # API services + axios client
+│   ├── services/                  # Genkit/AI helpers, mock data
+│   ├── context/                   # AuthContext (Supabase)
+│   ├── hooks/                     # Custom hooks
+│   └── design/                    # Token styles + presets
+
+chrome-extension/
 
 design-system/
 └── tokens.json                    # kerala-rage kr-solidarity design tokens (colors, typography, spacing)
@@ -142,13 +145,14 @@ design-system/
 
 ### Do
 
-- ✅ Use Firebase v9 modular SDK (`import { doc } from 'firebase/firestore'`)
-- ✅ Use Google Genkit for all AI workflows via `@define_flow` decorators
-- ✅ Route high-volume tasks to Gemini 1.5 Flash (document generation, ATS scoring, parsing)
-- ✅ Route complex reasoning to Gemini 1.5 Pro (company research, career strategy)
-- ✅ Use Langextract exclusively for resume/document parsing
-- ✅ Implement standardized I/O for all AI agents (see API Contracts section)
-- ✅ Include confidence scores (0-1) and error details in all AI responses
+- ✅ Use Supabase client config from `frontend/src/config/supabase.ts` for auth/storage
+- ✅ Use Supabase auth helpers in `backend/app/core/auth.py` and `backend/app/core/dependencies.py`
+- ✅ Use Genkit flow decorators from `app.genkit_flows.flow_decorator` (`@genkit_flow`, `@async_genkit_flow`)
+- ✅ Route high-volume tasks to Gemini Flash (runtime default: 3.0; service config in `ai/config/ai_config.json`)
+- ✅ Route complex reasoning to Gemini Pro (3.0/2.5 per service config)
+- ✅ Use `IngestionService` for document parsing (pdfminer.six/python-docx) and `VectorStore` for embeddings
+- ✅ Implement standardized I/O for all AI flows (Pydantic output schemas)
+- ✅ Include confidence scores where the response schema supports it
 - ✅ Use async/await in FastAPI endpoints and Genkit flows
 - ✅ Use TypeScript strict mode (`tsconfig.json: "strict": true`)
 - ✅ Apply kerala-rage kr-solidarity design tokens for all UI (no hardcoded colors)
@@ -158,14 +162,14 @@ design-system/
 
 ### Don't
 
-- ❌ Do NOT use Firebase v8 legacy SDK
 - ❌ Do NOT hard-code API keys or secrets in code
 - ❌ Do NOT create monolithic agents—keep to single responsibility
 - ❌ Do NOT skip error handling in AI operations
 - ❌ Do NOT use localStorage/sessionStorage in generated artifacts
 - ❌ Do NOT bypass authentication on protected routes
 - ❌ Do NOT store sensitive user data in client-side Zustand state
-- ❌ Do NOT query Firestore directly from React components (use API layer only)
+- ❌ Do NOT query Supabase/Postgres/Firestore directly from React components (use API layer only)
+- ❌ Do NOT introduce new Firebase client usage (legacy server-side only)
 - ❌ Do NOT commit sensitive files (`.env.local`, API credentials)
 - ❌ Do NOT use Inter, Roboto, or Arial fonts (use Fraunces, Caveat, Work Sans from kerala-rage)
 
@@ -184,7 +188,7 @@ design-system/
 ### 🤔 Ask First
 
 - Install new npm/pip dependencies
-- Modify Firebase security rules or Firestore indexes
+- Modify Supabase RLS/policies, database migrations, or Firestore rules/indexes (legacy)
 - Change Genkit flow structure or AI model selection
 - Update environment variable requirements
 - Delete user data, documents, or collections
@@ -201,15 +205,15 @@ design-system/
 - Hard-code secrets in environment setup or configuration files
 - Bypass authentication checks or security rules
 - Access user data outside authorized endpoints (violates privacy)
-- Query Firestore directly from frontend code (centralize in API layer)
-- Store user passwords in plain text (always hash with bcrypt, use Firebase Auth)
+- Query Supabase/Postgres/Firestore directly from frontend code (centralize in API layer)
+- Store user passwords in plain text (always hash with bcrypt, use Supabase Auth)
 - Log sensitive data (PII, API keys, auth tokens) to console or files
 
 **Security Gotchas**:
 
 - Pre-commit hooks verify no secrets leak; if hook fails, fix issues and recommit (never skip with `--no-verify`)
-- Genkit flows inherit Firebase context; always validate user ownership of data before returning results
-- Firestore security rules are the primary defense; misconfigured rules expose user data to public read
+- Genkit flows inherit request auth context; always validate user ownership via Supabase JWT claims and DB records
+- Supabase RLS/DB policies + API auth are primary defenses; Firestore rules apply only to legacy tests
 
 ## Token Efficiency & MCP Delegation
 
@@ -291,72 +295,31 @@ If an MCP server is unavailable:
 
 ## API Contracts
 
-### Document Generation
+Canonical schemas live in:
+- `backend/app/api/endpoints/genkit.py`
+- `backend/app/api/endpoints/analysis.py`
+- `backend/app/api/endpoints/documents.py`
+- `backend/app/api/endpoints/ingest.py`
+
+Key endpoints (current):
+- `POST /api/genkit/cover-letter/generate`
+- `POST /api/genkit/ksc/generate`
+- `POST /api/genkit/resume/optimize`
+- `POST /api/genkit/company/context`
+- `POST /api/genkit/job/analyze-url`
+- `POST /api/analysis/optimize-resume`
+- `POST /api/ingest/artifacts/upload` (FormData: `file` + `source_type`)
+
+Example: cover letter request (`CoverLetterRequest` in `backend/app/api/endpoints/genkit.py`)
 
 ```python
-# POST /api/resumes/tailored
-Request:
 {
-    "user_profile": {
-        "name": str,
-        "email": str,
-        "experience": list[dict],
-        "skills": list[str]
-    },
-    "job_description": str,
-    "optimization_level": "balanced" | "aggressive"  # ATS optimization intensity
-}
-
-Response:
-{
-    "success": bool,
-    "content": str,  # Generated resume markdown
-    "confidence_score": float,  # 0-1
-    "metadata": {
-        "processing_time_ms": int,
-        "tokens_used": int,
-        "model": "gemini-1.5-flash"
-    },
-    "suggestions": [str]  # Actionable improvements
-}
-```
-
-### AI Analysis
-
-```python
-# POST /api/analysis/ats-score
-Request: { "resume": str, "job_description": str }
-
-Response:
-{
-    "success": bool,
-    "score": float,  # 0-100 ATS match percentage
-    "confidence_score": float,  # 0-1 confidence in score
-    "missing_keywords": [str],
-    "suggestions": [str],
-    "metadata": { "model": "gemini-1.5-flash" }
-}
-```
-
-### Resume Parsing
-
-```python
-# POST /api/documents/parse
-Request: FormData with file upload
-
-Response:
-{
-    "success": bool,
-    "profile": {
-        "name": str,
-        "email": str,
-        "phone": str,
-        "experience": [dict],
-        "skills": [str],
-        "education": [dict]
-    },
-    "confidence_score": float,
-    "metadata": { "file_name": str, "pages": int }
+    "candidate_profile": {"name": "Jane Doe", "experience": [], "skills": []},
+    "job_description": "Senior Case Manager",
+    "company_info": {"name": "Community First"},
+    "style": "professional",
+    "format_type": "full_letter",
+    "special_instructions": "Keep it concise"
 }
 ```
 
@@ -365,66 +328,48 @@ Response:
 All AI agents must follow this structure:
 
 ```python
-from genkit import define_flow
+from pydantic import BaseModel
+from app.genkit_flows.flow_decorator import async_genkit_flow
+from app.core.genkit_init import get_model
 
-@define_flow(name="resume_generator")
-async def generate_resume(input_data: dict) -> dict:
-    # 1. Validate input schema
-    if not input_data.get("user_profile"):
-        return {"success": False, "error": "Missing user_profile"}
+class ExampleResponse(BaseModel):
+    content: str
 
-    # 2. Build prompt with context
-    prompt = f"""Generate a tailored resume...
-    Profile: {input_data['user_profile']}
-    Job: {input_data['job_description']}
-    """
+@async_genkit_flow(name="example_flow", output_schema=ExampleResponse)
+async def example_flow(prompt: str) -> ExampleResponse:
+    if not prompt:
+        return ExampleResponse(content="")
 
-    # 3. Call LLM (Flash for generation, Pro for analysis)
-    try:
-        result = await generate(
-            model="gemini-1.5-flash",
-            prompt=prompt,
-            config={"temperature": 0.7}
-        )
+    model = get_model()
+    if not model:
+        raise RuntimeError("Genkit model not available")
 
-        # 4. Return standardized response
-        return {
-            "success": True,
-            "content": result.text,
-            "confidence_score": 0.92,
-            "suggestions": [],
-            "metadata": {"model": "gemini-1.5-flash"}
-        }
-    except Exception as e:
-        return {
-            "success": False,
-            "error": str(e),
-            "content": None,
-            "confidence_score": 0.0
-        }
+    response = model.generate(prompt=prompt)
+    text = response.text if hasattr(response, "text") else str(response)
+    return ExampleResponse(content=text)
 ```
 
 ## Code Examples
 
 ### Good: Focused Agent with Error Handling
 
-See [backend/app/agents/document_generator.py](backend/app/agents/document_generator.py) for the reference pattern. One clear responsibility, standardized I/O, proper error handling.
+See [ai/flows/backend/resume_optimizer.py](ai/flows/backend/resume_optimizer.py) for the reference pattern. One clear responsibility, standardized I/O, proper error handling.
 
 ### Good: API Route
 
-See [backend/app/api/endpoints/resumes.py](backend/app/api/endpoints/resumes.py). Async FastAPI endpoint calling Genkit flow, input validation, response serialization.
+See [backend/app/api/endpoints/genkit.py](backend/app/api/endpoints/genkit.py). Async FastAPI endpoints calling Genkit flows with input validation and response models.
 
 ### Good: React Component with kerala-rage Tokens
 
-See [frontend/src/components/DocumentGeneration/DocumentGeneration.tsx](frontend/src/components/DocumentGeneration/DocumentGeneration.tsx). Uses design tokens, no hardcoded colors, TypeScript strict mode, integrates TanStack Query.
+See [frontend/src/components/kerala-rage/ActionButton.tsx](frontend/src/components/kerala-rage/ActionButton.tsx). Uses design tokens, no hardcoded colors, TypeScript strict mode.
 
-### Good: useAuth Hook
+### Good: Auth Context
 
-See [frontend/src/hooks/useAuth.ts](frontend/src/hooks/useAuth.ts). Wraps Firebase auth, updates Zustand state, handles token refresh.
+See [frontend/src/context/AuthContext.tsx](frontend/src/context/AuthContext.tsx). Wraps Supabase auth, manages auth state, handles token refresh.
 
-### Bad: Direct Firestore in Component
+### Bad: Direct DB in Component
 
-❌ Avoid fetching Firestore directly in React components. Routes allow centralized auth, error handling, logging.
+❌ Avoid calling Supabase/Postgres directly in React components. Use the API layer for centralized auth, error handling, and logging.
 
 ### Bad: Monolithic Agent
 
@@ -432,41 +377,29 @@ See [frontend/src/hooks/useAuth.ts](frontend/src/hooks/useAuth.ts). Wraps Fireba
 
 ## Testing
 
-### Unit Tests - Backend Agents
+### Unit Tests - Backend Genkit Flows
 
-```python
-# backend/app/tests/agents/test_document_generator.py
-import pytest
-from backend.app.agents.document_generator import generate_resume
-
-@pytest.mark.asyncio
-async def test_generate_resume_success():
-    result = await generate_resume({
-        "user_profile": {"name": "Alice", "experience": []},
-        "job_description": "Software Engineer"
-    })
-    assert result["success"] == True
-    assert len(result["content"]) > 0
-    assert 0 <= result["confidence_score"] <= 1
+```bash
+pytest backend/app/tests/genkit_flows/test_ats_scoring.py -v
 ```
 
 ### Unit Tests - React Components
 
 ```bash
-cd frontend && yarn test DocumentGeneration.test.tsx --coverage
+cd frontend && yarn test JobQueue.test.tsx --coverage
 ```
 
 ### E2E Tests
 
 ```bash
-cd frontend && npx playwright test tests/e2e/document-workflow.spec.ts
+cd frontend && npx playwright test tests/e2e/ingestion-flow.spec.ts
 ```
 
-### Firebase Emulator for Security Rules
+### Firestore Emulator (Legacy Tests Only)
 
 ```bash
 firebase emulators:start
-# Tests run against local emulator, no live data affected
+# Only needed for legacy Firestore integration tests.
 ```
 
 ## Performance Targets
@@ -481,13 +414,13 @@ Include timing in agent metadata for monitoring.
 ## PR Checklist
 
 - [ ] Tests pass: `cd frontend && yarn test` and `cd backend && pytest`
-- [ ] Type check passes: `yarn type-check` and `mypy backend/`
-- [ ] Linting passes: `yarn lint` and `ruff check backend/`
+- [ ] Type check passes: `yarn type-check` and `cd backend && mypy .`
+- [ ] Linting passes: `yarn lint` and `cd backend && ruff check .`
 - [ ] Code follows kerala-rage design system (if UI changes)
 - [ ] AI agent I/O matches documented contracts
 - [ ] No secrets committed (check `.gitignore`)
 - [ ] Commit message format: `feat(scope): description` or `fix(scope): description`
-- [ ] If Firebase changes: tested with emulator
+- [ ] If Firestore legacy tests change: run emulator; if Supabase policies change: verify locally
 
 ## When Stuck
 
@@ -495,7 +428,7 @@ Include timing in agent metadata for monitoring.
 - **Complex workflows**: Propose a plan before implementation; create draft PR for early feedback
 - **AI quality issues**: Add failing test reproducing the issue, then modify prompt/model to fix
 - **Performance problems**: Profile with monitoring; avoid speculative optimizations
-- **Firestore/auth issues**: Use emulator locally; check security rules
+- **Supabase/auth issues**: Validate JWT flow and API dependencies; Firestore emulator only for legacy tests
 
 ## Agent & Codex Compatibility
 
@@ -529,9 +462,9 @@ Key document requirements:
 
 ### Python Backend
 
-- **Formatter**: Ruff format (configured in `pyproject.toml`)
-- **Linter**: Ruff check (replace legacy Black/Flake8)
-- **Type checking**: mypy strict mode
+- **Formatter**: Black (configured in `backend/pyproject.toml`)
+- **Linter**: Ruff (configured in `backend/pyproject.toml`); legacy `flake8` config remains in `backend/setup.cfg`
+- **Type checking**: mypy (configured in `backend/mypy.ini`, non-strict with overrides)
 - **Docstring style**: Google-style docstrings with parameter types
 - **Async/await**: Required for all I/O operations (FastAPI routes, Genkit flows)
 - **Error handling**: Always return standardized `{"success": bool, "error": str}` responses
@@ -548,17 +481,17 @@ Key document requirements:
 
 ### Genkit Flows
 
-- **Naming convention**: `@define_flow(name="snake_case_flow_name")`
+- **Naming convention**: `@genkit_flow` / `@async_genkit_flow` from `app.genkit_flows.flow_decorator`
 - **Input validation**: Always validate input_data schema first
-- **Model selection**: Default to Gemini 1.5 Flash; escalate to Pro for complex reasoning
-- **Temperature config**: `{"temperature": 0.7}` for generation, `0.3` for analysis
-- **Response format**: Always return standardized response with `success`, `content`, `confidence_score`, `metadata`
+- **Model selection**: Default to Gemini Flash; escalate to Pro for complex reasoning (see `ai/config/ai_config.json`)
+- **Temperature config**: Use service defaults from `ai/config/ai_config.json` unless a flow requires overrides
+- **Response format**: Prefer Pydantic output schemas for structured responses
 
-### Firebase & Security
+### Supabase & Security
 
-- **SDK version**: Firebase v9 modular SDK only (no legacy SDK)
-- **Auth**: Always check `request.auth != null` before user operations
-- **Firestore queries**: Never expose raw queries from frontend (use API layer)
+- **Auth**: Validate Supabase JWTs in `backend/app/core/auth.py` and guard routes via dependencies
+- **Database**: Enforce least-privilege access; avoid direct client DB access outside the API layer
+- **Legacy Firestore**: Keep confined to legacy tests; do not introduce new client usage
 - **Secrets**: Store in Google Cloud Secret Manager or `.env.local` (never commit)
 
 ### Commit Messages
@@ -569,7 +502,7 @@ Examples:
 
 - `feat(agents): Add KSC generator flow for government applications`
 - `fix(frontend): Correct ATS score calculation in analysis component`
-- `refactor(backend): Simplify resume parsing with Langextract`
+- `refactor(backend): Simplify ingestion parsing with pdfminer`
 - `test(agents): Add integration tests for cover letter generation`
 - `docs(agents): Update API contract for document parsing endpoint`
 
@@ -593,14 +526,14 @@ source venv/bin/activate
 cd frontend && yarn dev
 
 # Start backend dev server (port 8000)
-uvicorn backend.app.main:app --reload
+cd backend && uvicorn app.main:app --reload
 ```
 
 ### Incremental Development
 
 ```bash
 # Run specific agent tests while developing
-pytest backend/app/tests/agents/test_document_generator.py -v --tb=short
+pytest backend/app/tests/genkit_flows/test_ats_scoring.py -v --tb=short
 
 # Type check just your changes
 yarn type-check
@@ -622,49 +555,58 @@ cd frontend && yarn test && cd ../backend && pytest
 git diff HEAD --name-only | xargs git check-attr filter
 ```
 
-## Firestore & Cloud Storage
+## Supabase & Storage
 
-### Collection Structure
+### Database
 
-- `/users/{uid}/profiles/{profileId}` — User profiles (skills, experience)
-- `/users/{uid}/documents/{docId}` — Generated resumes, cover letters
-- `/users/{uid}/jobs/{jobId}` — Saved job opportunities
-- `/templates/` — Document templates (global, admin-writable)
+- Primary DB: Postgres via SQLAlchemy (Supabase). See `backend/app/core/database.py` and `backend/app/models/database.py`.
+- Vector store: pgvector embeddings in `backend/app/models/document_embedding.py` and `backend/app/services/vector_store.py`.
 
-### Cloud Storage Paths
+### Storage
 
-- `/users/{uid}/uploads/` — User-uploaded documents
-- `/users/{uid}/generated/` — AI-generated documents
-- `/templates/` — Template assets and previews
+- Supabase Storage bucket configured by `SUPABASE_STORAGE_BUCKET` (default: `user_assets`).
+- Client helpers live in `frontend/src/api/storageService.ts`.
 
-### Security Rules
+### Legacy Firestore
 
-- All user data requires authentication (`request.auth != null`)
-- Users can only access their own data (`request.auth.uid == resource.data.userId`)
-- Templates are publicly readable, admin-writable only
+- Firestore schemas remain in `backend/app/models/*_schema.py` and legacy integration tests.
+- Use Firestore emulator only if touching those paths.
 
 ## Genkit Model Selection
 
-| Model            | Use Case                                     | Speed  | Cost | Quality   |
-| ---------------- | -------------------------------------------- | ------ | ---- | --------- |
-| Gemini 1.5 Flash | Document generation, ATS, keyword extraction | < 5s   | Low  | Good      |
-| Gemini 1.5 Pro   | Company research, strategy, QA               | 10-20s | High | Excellent |
+| Model            | Use Case                                           | Notes                                      |
+| ---------------- | -------------------------------------------------- | ------------------------------------------ |
+| Gemini 3.0 Flash | Default runtime model in Genkit init               | Fast, general-purpose generation           |
+| Gemini 3.0 Pro   | Complex reasoning (company research, gap analysis) | Slower, highest reasoning quality          |
+| Gemini 2.5 Flash | Service defaults in `ai/config/ai_config.json`     | High-volume tasks and ATS scoring          |
+| Gemini 2.5 Pro   | High-quality services (ATS, cover letters)         | Higher quality with higher cost            |
+| Gemini 1.5 *     | Fallbacks in `ai/config/ai_config.json`            | Legacy compatibility fallback              |
 
 **Rule of thumb**: Default to Flash. Escalate to Pro only for complex reasoning or multi-step workflows.
 
 ## Environment Variables (Development)
 
 ```bash
-# .env.local (never committed)
-VITE_API_URL=http://localhost:8000
-VITE_FIREBASE_PROJECT_ID=careercopilot-468811
-FIREBASE_EMULATOR_HOST=localhost:8080
+# backend/.env.local (never committed)
+DATABASE_URL=sqlite:///data/careercopilot-dev.db
+SUPABASE_URL=<your-supabase-url>
+SUPABASE_ANON_KEY=<your-supabase-anon-key>
+SUPABASE_SERVICE_ROLE_KEY=<your-supabase-service-role-key>
+SUPABASE_STORAGE_BUCKET=user_assets
 
 ENABLE_GENKIT_FLOWS=true
 ENABLE_NLP_PRELOAD=true
-
 GEMINI_API_KEY=<your-key>
-LANGEXTRACT_API_KEY=<your-key>
+
+# frontend/.env.local (never committed)
+VITE_API_URL=http://localhost:8000
+VITE_SUPABASE_URL=<your-supabase-url>
+VITE_SUPABASE_ANON_KEY=<your-supabase-anon-key>
+VITE_SENTRY_DSN=<your-sentry-dsn>
+VITE_GEMINI_API_KEY=<your-key>
+VITE_USE_MOCK_API=true
+VITE_USE_MOCK_AUTH=true
+VITE_OFFLINE_MODE=false
 ```
 
 ## Deployment

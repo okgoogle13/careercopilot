@@ -3,3 +3,10 @@
 
 # Run lint-staged
 npx lint-staged --no-stash
+
+# Sync KR assets before commit
+cd frontend && npm run kr:sync && cd ..
+
+# Stage generated files
+git add frontend/public/assets/kerala-rage-kr-solidarity-manifest.json
+git add frontend/public/assets/kr-solidarity-hero-registry.json

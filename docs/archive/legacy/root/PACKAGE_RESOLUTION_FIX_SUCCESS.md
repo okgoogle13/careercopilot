@@ -106,7 +106,7 @@ npm run dev
 **Visual Elements Present:**
 - ✅ Plus Jakarta Sans typography (verified in browser)
 - ✅ M3 color tokens (`bg-surface`, `text-primary`, etc.) applied
-- ✅ Organic shapes and gradients in landing page
+- ✅ [DEPRECATED_STYLE] shapes and gradients in landing page
 - ✅ kr-screenprint effects in components
 - ✅ Plant illustrations loading (monstera, fiddle leaf, pilea, snake plant)
 

@@ -27,6 +27,6 @@
 - **Upload Progress**: The progress bar uses a viscous spring for "lurching" forward as data chunks are processed.
 
 ## Motif Slots
-- `// TODO[asset]: Blueprint Grid overlay constrained to Dropzone (Z-0)`.
-- `// TODO[asset]: Halo Disk Motif pulsing behind Dropzone (Z-1)`.
+- `- {KR-UI-004} Blueprint grid overlay (transparent) for technical grid patterns) **[REQUIRES GENERATION]**
+- `- {KR-UI-002} Halo disk (plain + gauge version) for radiant circle elements) **[REQUIRES GENERATION]**
 - `// TODO[asset]: Scanning holographic motif for primary CTA button.`
