@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img">
+  <title>Lens Primary — Card Container</title>
+  <desc>Asymmetric card frame with header band for kr-solidarity UI kit. Primary content container primitive.</desc>
+  <g id="base">
+    <rect x="48" y="56" width="420" height="400" rx="16" ry="4" fill="var(--kr-surface)" stroke="var(--kr-tertiary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <g id="content">
+    <rect x="48" y="56" width="420" height="72" rx="16" ry="4" fill="var(--kr-primary)" opacity="0.15"/>
+    <line x1="80" y1="92" x2="260" y2="92" stroke="var(--kr-text)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="0.8"/>
+    <rect x="80" y="160" width="340" height="10" rx="5" ry="3" fill="var(--kr-text)" opacity="0.25"/>
+    <rect x="80" y="188" width="280" height="10" rx="5" ry="2" fill="var(--kr-text)" opacity="0.18"/>
+    <rect x="80" y="216" width="310" height="10" rx="4" ry="3" fill="var(--kr-text)" opacity="0.18"/>
+    <rect x="80" y="268" width="160" height="80" rx="12" ry="6" fill="var(--kr-tertiary)" opacity="0.12"/>
+    <rect x="268" y="268" width="160" height="80" rx="8" ry="14" fill="var(--kr-tertiary)" opacity="0.12"/>
+  </g>
+  <g id="accent">
+    <path d="M456 56 L468 56 L468 80 Q462 88 456 80 Z" fill="var(--kr-secondary)" opacity="0.7"/>
+    <ellipse cx="86" cy="408" rx="22" ry="16" fill="var(--kr-primary)" opacity="0.2" transform="rotate(8 86 408)"/>
+  </g>
+</svg>

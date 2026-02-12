@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img">
+  <title>Pebble — Button Primitive</title>
+  <desc>Asymmetric pill button with inner inset detail for kr-solidarity UI kit.</desc>
+  <g id="base">
+    <rect x="76" y="188" width="366" height="136" rx="42" ry="18" fill="var(--kr-primary)" stroke="var(--kr-primary)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <g id="content">
+    <rect x="108" y="210" width="302" height="92" rx="34" ry="14" fill="var(--kr-surface)" opacity="0.15"/>
+    <rect x="160" y="246" width="148" height="14" rx="7" ry="4" fill="var(--kr-surface)" opacity="0.9"/>
+    <rect x="164" y="270" width="80" height="8" rx="4" ry="2" fill="var(--kr-surface)" opacity="0.45"/>
+  </g>
+  <g id="accent">
+    <ellipse cx="394" cy="218" rx="20" ry="14" fill="var(--kr-secondary)" opacity="0.6" transform="rotate(-10 394 218)"/>
+    <path d="M92 296 Q110 318 132 302" fill="none" stroke="var(--kr-tertiary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+  </g>
+</svg>
