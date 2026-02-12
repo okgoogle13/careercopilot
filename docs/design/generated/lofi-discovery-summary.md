@@ -39,7 +39,7 @@ This document consolidates discovery data from all 14 screens in the screen plan
 | **blueprint-grid** | **High** | Foundation for Creator/Analytical screens (8-12% opacity). |
 | **screenprint-grit** | **High** | Ambient particle overlay (Z-3). |
 | **Solidarity-Icon-Pack** | **High** | Action icons (filter, search, sort, bookmark). |
-| **botanical-motif** | **Medium** | Accents for high-mastery skills and success states. |
+| **[DEPRECATED_STYLE]-motif** | **Medium** | Accents for high-mastery skills and success states. |
 | **wheat-paste-tear** | **Medium** | Iconic landing page accent (top-right). |
 
 ## 🚀 Wave 1 Recommendation
@@ -51,7 +51,7 @@ This document consolidates discovery data from all 14 screens in the screen plan
 4. **NexusInput**: Critical input pattern for Auth, Search, and Ingestion.
 
 ### Assets (Commission/Generate)
-1. **screenprint-substrate**: High-res matte charcoal texture with subtle organic variation.
+1. **screenprint-substrate**: High-res matte charcoal texture with subtle [DEPRECATED_STYLE] variation.
 2. **halo-disk**: Soft but vibrant radial glow motif in Ink Gold.
 3. **blueprint-grid**: Geometric tactical grid for high-precision layouts.
 4. **Solidarity-Icon-Pack**: Minimalist, high-contrast SVG set for tactical actions.

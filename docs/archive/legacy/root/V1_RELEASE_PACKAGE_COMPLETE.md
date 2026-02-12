@@ -160,7 +160,7 @@ STATUS: READY TO LAUNCH ✨
 **Theme Confirmed:**
 - Electric Alchemist aesthetic applied
 - M3 design system active
-- Organic shapes and gradients rendering
+- [DEPRECATED_STYLE] shapes and gradients rendering
 - kr-screenprint effects present
 
 ### Backend Verification

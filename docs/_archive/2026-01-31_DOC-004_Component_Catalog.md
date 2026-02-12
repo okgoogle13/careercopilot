@@ -38,7 +38,7 @@
 
 ### The Leaf (Hero Wrapper)
 *   **Token:** `radius-leaf` (`24px 8px 20px 4px`)
-*   **Vibe:** Organic, sweeping.
+*   **Vibe:** [DEPRECATED_STYLE], sweeping.
 *   **Style:** Often holds the "kr-flower Composition" pattern.
 *   **Usage:** Page Headers, Main Dashboards.
 
@@ -48,8 +48,8 @@
 
 ### The Seed (Badge/Tag)
 *   **Token:** `radius-seed` (`8px 4px 10px 6px`)
-*   **Texture:** Small, precise, organic.
-*   **Style:** `bg-muted` (Concrete Grey) or `bg-accent` (Waratah Red) for alerts.
+*   **Texture:** Small, precise, [DEPRECATED_STYLE].
+*   **Style:** `bg-muted` (Concrete Grey) or `bg-accent` ([DEPRECATED_STYLE] Red) for alerts.
 *   **Typography:** JetBrains Mono (The Annotation).
 *   **Usage:** Skill tags, Status indicators.
 
@@ -187,7 +187,7 @@ When a user hovers over a Job Card in kr-dark Mode, trigger a **three-phase casc
 **Key Principle:** Each animation phase should have:
 1. **Staggered timing** (overlapping start times)
 2. **Multiple properties animating** (transform + shadow + typography)
-3. **Organic easing** (gentle overshoot, not linear)
+3. **[DEPRECATED_STYLE] easing** (gentle overshoot, not linear)
 4. **Meaningful duration** (600ms+, not instant)
 
 This creates the sensation of **natural unfolding**, not mechanical state changes.

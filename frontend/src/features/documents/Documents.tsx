@@ -1,6 +1,6 @@
 import { Calendar, Download, FileText, Search } from 'lucide-react';
 import { useState } from 'react';
-import organicLabyrinth from '../../assets/KrMotifs/organic-labyrinth.jpg';
+import organicLabyrinth from '../../assets/KrMotifs/[DEPRECATED_STYLE]-labyrinth.jpg';
 import { PageHeader } from '../../components/shared/PageHeader';
 import { exportToPdf } from '../../utils/exportEngine';
 

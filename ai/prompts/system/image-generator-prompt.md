@@ -28,7 +28,7 @@ Every prompt must be constructed using these five layers to ensure compliance wi
 ### 4. The Ink: Solidarity Palette
 
 - **Primary**: Baru Gold `#E6B34D` (The reveal)
-- **Secondary**: Waratah Red `#D94A4A` (The urgency)
+- **Secondary**: [DEPRECATED_STYLE] Red `#D94A4A` (The urgency)
 - **Neutral**: Paper White `#F5F0E8` (The highlights)
 - **Accent**: Parrot Green `#50C878` (The life)
 
@@ -52,12 +52,12 @@ Every prompt must be constructed using these five layers to ensure compliance wi
 >
 > **Aesthetic**: Gritty screenprint style, Peter Drew street art influence, rough stencil edges. Halftone dot patterns in shadows. Visible ink texture.
 > **Atmosphere**: Positioned on a raw charcoal paper substrate of Charcoal Black (#1A1A1A).
-> **Ink Layers**: Heavy Baru Gold (#E6B34D) solids, Waratah Red (#D94A4A) accents, and Paper White (#F5F0E8) registration marks.
-> **Palette**: Strictly restricted to Charcoal #1A1A1A, Baru Gold #E6B34D, Waratah Red #D94A4A, and [ACCENT COLOR].
+> **Ink Layers**: Heavy Baru Gold (#E6B34D) solids, [DEPRECATED_STYLE] Red (#D94A4A) accents, and Paper White (#F5F0E8) registration marks.
+> **Palette**: Strictly restricted to Charcoal #1A1A1A, Baru Gold #E6B34D, [DEPRECATED_STYLE] Red #D94A4A, and [ACCENT COLOR].
 >
-> **Forbidden**: gradients, soft shadows, 3D rendering, botanical, museum, naturalist, colonial, cute, safe.
+> **Forbidden**: gradients, soft shadows, 3D rendering, [DEPRECATED_STYLE], museum, [DEPRECATED_STYLE], colonial, cute, safe.
 >
-> **Negative Prompt**: gradient, soft, 3D, blurry, low-res, museum cabinet, botanical illustration, cute, cartoon.
+> **Negative Prompt**: gradient, soft, 3D, blurry, low-res, museum cabinet, [DEPRECATED_STYLE] illustration, cute, cartoon.
 
 ---
 

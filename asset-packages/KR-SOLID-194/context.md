@@ -56,4 +56,4 @@ Analysis failed
 ---
 
 **Confidence Score:** 0.50/1.0
-**Analysis Notes:** Analysis failed: cannot identify image file 'frontend/public/assets/kr-motifs/kr-moti-kr-dark-botanical-canopy-feb-11,-2026,-12_47_46-am-1024.png'
+**Analysis Notes:** Analysis failed: cannot identify image file 'frontend/public/assets/kr-motifs/kr-moti-kr-dark-[DEPRECATED_STYLE]-canopy-feb-11,-2026,-12_47_46-am-1024.png'

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-MCP Design System Sidekick - Northcote Curio Validation & Asset Orchestration (FastMCP Version)
+MCP Design System Sidekick - Northcote [DEPRECATED_STYLE] Validation & Asset Orchestration (FastMCP Version)
 """
 import warnings
 warnings.filterwarnings("ignore")
@@ -252,15 +252,15 @@ async def catalog_assets_task(args):
         logger.info(f"Processing {filename}...")
 
         prompt = f"""
-        Analyze this asset for the Northcote Curio catalog.
+        Analyze this asset for the Northcote [DEPRECATED_STYLE] catalog.
 
         System Context:
         {design_philosophy}
 
         Task:
         1. Identify type (motif, texture, pattern, icon).
-        2. Determine mode (gallery vs laboratory) - Gallery is high-art/specimen, Lab is technical/schematic. This is critical.
-           - Gallery: detailed, organic, hand-drawn look, specimen style.
+        2. Determine mode (gallery vs laboratory) - Gallery is high-art/[DEPRECATED_STYLE], Lab is technical/schematic. This is critical.
+           - Gallery: detailed, [DEPRECATED_STYLE], hand-drawn look, [DEPRECATED_STYLE] style.
            - Laboratory: technical, schematic, grid, blueprint style.
         3. Suggest a filename following: {{type}}-{{mode}}-{{category}}-{{variant}}.png
         4. Extract dominant colors and dimensions.

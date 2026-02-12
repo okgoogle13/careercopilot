@@ -21,7 +21,7 @@ export interface CabinetProps {
   maxWidth?: 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 
   /** Visual variant - KeralaRage KrSolidarity compatible */
-  variant?: 'tech' | 'organic' | 'standard';
+  variant?: 'tech' | '[DEPRECATED_STYLE]' | 'standard';
 }
 
 /**
@@ -30,7 +30,7 @@ export interface CabinetProps {
  * Modal dialog component with KeralaRage design system styling.
  * Features:
  * - Managed focus and ESC key support
- * - KeralaRage botanical palette and organic shapes
+ * - KeralaRage [DEPRECATED_STYLE] palette and [DEPRECATED_STYLE] shapes
  * - Stone card wrapper with KrScreenprint
  * - Portal rendering for proper z-index layering
  */

@@ -249,7 +249,7 @@ def run_screens_stage(screen_name: str, brief_path: Path):
 
 <tokens>
 - **Container**: `surface-charcoal`, `shadow-viscous`
-- **HeroTitle**: `Hero-144px`, `Solidarity-800`, `Waratah-Red`
+- **HeroTitle**: `Hero-144px`, `Solidarity-800`, `[DEPRECATED_STYLE]-Red`
 - **Body**: `Body-16px`, `Direct-Action-450`, `On-Surface-Ash`
 - **PrimaryAction**: `Baru-Gold-Surface`, `shadow-hover-rise`
 </tokens>
@@ -266,7 +266,7 @@ def run_screens_stage(screen_name: str, brief_path: Path):
   - Assets: background motif (elephant), torn edge.
 - SkillBreakdownCard (card)
   - Used: data visualization section.
-  - Assets: botanical-motif.
+  - Assets: [DEPRECATED_STYLE]-motif.
 </components>
 
 <annotations>

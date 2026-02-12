@@ -1,9 +1,9 @@
 import { test, expect } from '@playwright/test';
 
 /**
- * Responsive Design Audit: M3 Organic Shapes
+ * Responsive Design Audit: M3 [DEPRECATED_STYLE] Shapes
  * 
- * Tests the responsive behavior of M3 organic border-radius shapes
+ * Tests the responsive behavior of M3 [DEPRECATED_STYLE] border-radius shapes
  * across mobile (iPhone 14) and tablet (iPad Pro) viewports.
  * 
  * Checks for:
@@ -108,7 +108,7 @@ test.describe('Responsive M3 Design Audit', () => {
             const jobCards = page.locator('div.rounded-pebble, div.rounded-leaf');
             const cardCount = await jobCards.count();
 
-            console.log(`📱 ${viewport.name} - Found ${cardCount} cards with organic shapes`);
+            console.log(`📱 ${viewport.name} - Found ${cardCount} cards with [DEPRECATED_STYLE] shapes`);
 
             if (cardCount > 0) {
                 // Check first card
@@ -127,7 +127,7 @@ test.describe('Responsive M3 Design Audit', () => {
                     };
                 });
 
-                console.log(`📱 ${viewport.name} - Card Organic Shape:`, cardStyles);
+                console.log(`📱 ${viewport.name} - Card [DEPRECATED_STYLE] Shape:`, cardStyles);
 
                 // Check if border radius values are too large for small screens
                 const radii = [

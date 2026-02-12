@@ -9,7 +9,7 @@ import { M3ProfileCard } from "./M3ProfileCard";
  * Demonstrates:
  * 1. M3 Outlined Cards - for content, activity, actions
  * 2. M3 Filled Cards - for profiles, featured content
- * 3. Profile Card with botanical illustration
+ * 3. Profile Card with [DEPRECATED_STYLE] illustration
  */
 export const M3CardExamples: React.FC = () => {
   return (
@@ -270,7 +270,7 @@ export const M3CardExamples: React.FC = () => {
           </Grid>
         </Box>
 
-        {/* Profile Cards with Botanical Illustrations */}
+        {/* Profile Cards with [DEPRECATED_STYLE] Illustrations */}
         <Box>
           <Typography
             variant="h5"
@@ -283,7 +283,7 @@ export const M3CardExamples: React.FC = () => {
             Profile Cards (M3 Filled with Media Layer)
           </Typography>
           <Typography variant="body2" color="text.secondary" sx={{ mb: 4 }}>
-            Three-layer design: Base (Filled Card) + Media (Botanical Illustration) + Content
+            Three-layer design: Base (Filled Card) + Media ([DEPRECATED_STYLE] Illustration) + Content
           </Typography>
 
           <Grid container spacing={3}>

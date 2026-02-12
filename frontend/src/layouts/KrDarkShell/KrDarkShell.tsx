@@ -24,7 +24,7 @@ type KrDarkView = 'landing' | 'auth' | 'onboarding' | 'feed' | 'dashboard' | 'ka
 /**
  * KrDarkShell
  *
- * The atmospheric container for the KeralaStreetprint Naturalist experience.
+ * The atmospheric container for the KeralaStreetprint [DEPRECATED_STYLE] experience.
  * Orchestrates global KrDark state and visual effects.
  */
 export const KrDarkShell: React.FC<{ children?: React.ReactNode }> = ({ children }) => {

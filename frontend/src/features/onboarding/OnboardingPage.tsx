@@ -41,7 +41,7 @@ export function OnboardingPage() {
       <header className={styles.header}>
         <h1 className="text-bloom-ultra">Choosing the Soil</h1>
         <p className="text-curator-accent">
-          Select your botanical domain to begin the resurrection.
+          Select your [DEPRECATED_STYLE] domain to begin the resurrection.
         </p>
       </header>
 

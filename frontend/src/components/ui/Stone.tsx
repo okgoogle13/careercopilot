@@ -5,7 +5,7 @@ import { cn } from '../../lib/utils';
 export interface StoneProps extends React.HTMLAttributes<HTMLDivElement> {
     /**
      * The mode context for the card.
-     * - KrDark: Warm glass, organic borders (KeralaRage)
+     * - KrDark: Warm glass, [DEPRECATED_STYLE] borders (KeralaRage)
      * - KrLight: Cool slate, technical borders (KrSolidarity)
      */
     mode?: 'KrDark' | 'KrLight';

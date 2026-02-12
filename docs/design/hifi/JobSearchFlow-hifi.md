@@ -30,6 +30,6 @@
 - **Micro-interaction**: Search bar focus triggers a subtle `ink-gold` outer glow.
 
 ## Motif Slots
-- `// TODO[asset]: Blueprint Grid Substrate overlay (Z-0, 8% opacity)`.
+- `- {KR-UI-004} Blueprint grid overlay (transparent) for technical grid patterns) **[REQUIRES GENERATION]**
 - `// TODO[asset]: Solidarity-Icon-Pack (Filter, Sort, Search)`.
-- `// TODO[asset]: Screenprint Substrate overlay (global)`.
+- `- {KR-SOLID-033} Melbourne Laneway texture - real-world substrate base)

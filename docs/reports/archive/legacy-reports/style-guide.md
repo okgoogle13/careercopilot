@@ -97,7 +97,7 @@ The button mimics a hot coal or bioluminescent pebble. High contrast is non-nego
 ```tsx
 // Component: <MagmaButton />
 // Text must be BEDROCK (#121110) to contrast against the orange.
-// No border radius corners; use 'rounded-full' for organic pebble shape.
+// No border radius corners; use 'rounded-full' for [DEPRECATED_STYLE] pebble shape.
 
 export const MagmaButton = ({ label, onClick }) => (
   <button

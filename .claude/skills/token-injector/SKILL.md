@@ -34,9 +34,9 @@ Output: Updated stylesheets with CSS variables
 {
   "background": "#1A1714",
   "palette": {
-    "waratah_red": "#C45C4B",
-    "wattle_gold": "#D4A84B",
-    "kr-leafus_sage": "#7A9E82"
+    "solidarity_red": "#F14714",
+    "ink_gold": "#DAF674",
+    "activist_green": "#48DA8B"
   }
 }
 ```
@@ -46,9 +46,9 @@ Output: Updated stylesheets with CSS variables
 ```css
 :root {
   --color-asphalt-black: #1a1714;
-  --color-waratah-red: #c45c4b;
-  --color-wattle-gold: #d4a84b;
-  --color-kr-leafus-sage: #7a9e82;
+  --color-solidarity-red: #f14714;
+  --color-ink-gold: #daf674;
+  --color-activist-green: #48da8b;
 }
 ```
 
@@ -68,7 +68,7 @@ Output: Updated stylesheets with CSS variables
 ```css
 .card {
   background: var(--color-asphalt-black);
-  border: 1px solid var(--color-waratah-red);
+  border: 1px solid var(--color-solidarity-red);
 }
 ```
 

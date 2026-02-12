@@ -10,7 +10,7 @@ import {
  * KrDarkDashboard (Hi-Fi)
  * 
  * tactical central command.
- * Features high-stasis metric cards, a simulated "Live Archive" feed, and botanical heartbeat motifs.
+ * Features high-stasis metric cards, a simulated "Live Archive" feed, and [DEPRECATED_STYLE] heartbeat motifs.
  */
 
 const ValueReveal = ({ value, shouldReduceMotion }: { value: string, shouldReduceMotion: boolean }) => {

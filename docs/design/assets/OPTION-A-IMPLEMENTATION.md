@@ -106,7 +106,7 @@ Expected output:
   },
   "kr_motifs": ["ink", "leaf"],
   "dimensions": {"width": 1024, "height": 1024, "format": "PNG"},
-  "purpose": "botanical-accent",
+  "purpose": "[DEPRECATED_STYLE]-accent",
   "confidence": 0.85
 }
 ```
@@ -146,7 +146,7 @@ KR_MOTIFS_WHITELIST = {
 1. Detect all labels in image
 2. Keep only Australian endemic flora
 3. Limit to 5 maximum motifs
-4. Fallback: ["botanical"]
+4. Fallback: ["[DEPRECATED_STYLE]"]
 
 ### Confidence Scoring
 
@@ -234,7 +234,7 @@ export GOOGLE_APPLICATION_CREDENTIALS="~/gcp-key.json"
 ### Test 1: Single Image Extraction
 
 ```bash
-python scripts/vision_idf_extractor.py /path/to/botanical-asset.png
+python scripts/vision_idf_extractor.py /path/to/[DEPRECATED_STYLE]-asset.png
 ```
 
 Verify output includes:
@@ -340,7 +340,7 @@ Try Vision API Extraction
 ### What Vision API Handles Well
 
 ✅ **Works Great For**:
-- Botanical images (ink, fern, etc.)
+- [DEPRECATED_STYLE] images (ink, fern, etc.)
 - Color-rich assets
 - Well-lit, clear images
 - Multiple colors/motifs
@@ -350,7 +350,7 @@ Try Vision API Extraction
 ⚠️ **Known Limitations**:
 - Very abstract/geometric images (may not detect kr-motifs)
 - Low-contrast or dark images (color detection unreliable)
-- Non-botanical images (label detection unhelpful)
+- Non-[DEPRECATED_STYLE] images (label detection unhelpful)
 - Artistic/stylized images (colors may not map to design tokens)
 
 **Mitigation**:
@@ -364,7 +364,7 @@ Try Vision API Extraction
 
 ### Short-term (Week 2-3)
 
-- [ ] Test with 10 real botanical assets
+- [ ] Test with 10 real [DEPRECATED_STYLE] assets
 - [ ] Monitor Vision API accuracy (kr-motif detection)
 - [ ] Collect metrics (confidence distribution)
 - [ ] Document common misdetections
@@ -448,7 +448,7 @@ from vision_idf_extractor import extract_idf_from_image
 
 idf = extract_idf_from_image("/path/to/image.png")
 print(idf["palette"])      # Design tokens
-print(idf["kr_motifs"])    # Botanical elements
+print(idf["kr_motifs"])    # [DEPRECATED_STYLE] elements
 print(idf["confidence"])   # Quality metric
 ```
 

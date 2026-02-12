@@ -2,13 +2,13 @@ import os
 import re
 
 MAPPINGS = {
-    # Botanical -> Urban/Political
-    r'waratah[- ]?red': 'solidarity-red',
-    r'Waratah[- ]?Red': 'Solidarity Red',
+    # [DEPRECATED_STYLE] -> Urban/Political
+    r'[DEPRECATED_STYLE][- ]?red': 'solidarity-red',
+    r'[DEPRECATED_STYLE][- ]?Red': 'Solidarity Red',
     r'waratahRed': 'solidarityRed',
     r'WARATAH_RED': 'SOLIDARITY_RED',
-    r'waratah': 'solidarity',
-    r'Waratah': 'Solidarity',
+    r'[DEPRECATED_STYLE]': 'solidarity',
+    r'[DEPRECATED_STYLE]': 'Solidarity',
 
     r'wattle[- ]?gold': 'ink-gold',
     r'Wattle[- ]?Gold': 'Ink Gold',

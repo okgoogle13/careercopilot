@@ -51,7 +51,7 @@ Add to Design System Sidekick MCP server. Provides programmatic asset validation
 
 1. Load image via Vision API
 2. Extract colors (sample 50 points → hex codes)
-3. Identify kr-motifs (Vision recognition + geographic DB lookup)
+3. Identify kr-motifs (Vision recognition + [DEPRECATED_STYLE] DB lookup)
 4. Measure density zones (pixel coverage analysis)
 5. Detect translucency (luminance gradient analysis)
 6. OCR typography (count labels, verify font/color)
@@ -92,8 +92,8 @@ Add to Design System Sidekick MCP server. Provides programmatic asset validation
     "accents": ["#7A9E82", "#D4885C"]
   },
   "kr-motifs": [
-    { "name": "Waratah", "size_cm": 15, "position": "upper_right" },
-    { "name": "Frill-neck", "size_cm": 18, "position": "center" }
+    { "name": "[DEPRECATED_STYLE]", "size_cm": 15, "position": "upper_right" },
+    { "name": "[DEPRECATED_STYLE]", "size_cm": 18, "position": "center" }
   ],
   "density": {
     "upper_left": 18,
@@ -111,7 +111,7 @@ Add to Design System Sidekick MCP server. Provides programmatic asset validation
 ```json
 {
   "progression": [
-    { "attempt": 1, "score": 68, "key_failure": "Geographic violations" },
+    { "attempt": 1, "score": 68, "key_failure": "[DEPRECATED_STYLE] violations" },
     { "attempt": 2, "score": 87, "key_failure": "Density zones" },
     { "attempt": 3, "score": 92, "decision": "PACKAGE" }
   ],
@@ -233,7 +233,7 @@ Output: Updated stylesheets with CSS variables
 ```css
 :root {
   --color-kr-motif-night: #1a1714;
-  --color-waratah-crimson: #c45c4b;
+  --color-[DEPRECATED_STYLE]-crimson: #c45c4b;
   --color-wattle-gold: #d4a84b;
   --color-kr-leafus-sage: #7a9e82;
 }
@@ -255,7 +255,7 @@ Output: Updated stylesheets with CSS variables
 ```css
 .card {
   background: var(--color-kr-motif-night);
-  border: 1px solid var(--color-waratah-crimson);
+  border: 1px solid var(--color-[DEPRECATED_STYLE]-crimson);
 }
 ```
 

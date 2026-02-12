@@ -14,6 +14,14 @@ import os
 import sys
 from pathlib import Path
 
+# [DEPRECATED] This script is disabled to prevent regression during ExpressiveStack migration.
+# The source of truth for tokens is now frontend/src/design/tokens/tokens.json
+print("⚠️  WARNING: sync-theme-to-tokens.py is DEPRECATED.")
+print("The ExpressiveStack migration is in progress. This script would overwrite new tokens with old values.")
+print("Abort.")
+sys.exit(0)
+
+
 # Color mapping from theme.ts (Dark Mode)
 THEME_COLORS = {
     # Primary palette (Purple)

@@ -35,7 +35,7 @@
 
 **ZIP structure**:
 ```
-my-botanical-assets.zip
+my-[DEPRECATED_STYLE]-assets.zip
 ├── asset-1.png
 ├── asset-2.png
 ├── asset-3.png
@@ -45,7 +45,7 @@ my-botanical-assets.zip
 
 **Create ZIP from PNGs**:
 ```bash
-zip my-botanical-assets.zip *.png
+zip my-[DEPRECATED_STYLE]-assets.zip *.png
 ```
 
 ---
@@ -189,7 +189,7 @@ ls /assets/batch-results-*.json
 
 | Category | Type | Description |
 |----------|------|-------------|
-| `kr-motifs` | Botanical | Australian endemic flora (ink, leaves, etc.) |
+| `kr-motifs` | [DEPRECATED_STYLE] | Australian endemic flora (ink, leaves, etc.) |
 | `textures` | Background | Lab aesthetic, meshes, overlays |
 | `patterns` | Seamless | Tile-able patterns for backgrounds |
 | `backgrounds` | Hero | Full-screen atmospheric backgrounds |
@@ -438,12 +438,12 @@ Dashboard Assets.zip
 ├── leaf-canopy.png (1024×1024, kr-motif)
 ├── lab-grid.png (512×512, texture overlay)
 ├── night-garden.png (2048×2048, hero background)
-├── botanical-frame.png (1024×1024, accent motif)
+├── [DEPRECATED_STYLE]-frame.png (1024×1024, accent motif)
 └── README.txt
     Assets for DashboardOverview HiFi spec
     - All use asphalt-black background
     - Max 6 labels per asset
-    - Organized by Wunderkammer principle
+    - Organized by [DEPRECATED_STYLE] principle
 ```
 
 ### Step 2: Developer Processes Batch
@@ -464,7 +464,7 @@ batch-results-20260211-043000.json shows:
   - leaf-canopy: 88/100 ⚠️ REGENERATE
   - lab-grid: 94/100 ✅ PACKAGE
   - night-garden: 92/100 ✅ PACKAGE
-  - botanical-frame: 90/100 ✅ PACKAGE
+  - [DEPRECATED_STYLE]-frame: 90/100 ✅ PACKAGE
 ```
 
 ### Step 3: Address Failures
@@ -493,7 +493,7 @@ ls /frontend/public/assets/kr-motifs/
 # kerala-rage-leaf-canopy-kr-dark-1024.png (if regenerated)
 # kerala-rage-lab-grid-kr-dark-512.png
 # kerala-rage-night-garden-kr-dark-2048.png
-# kerala-rage-botanical-frame-kr-dark-1024.png
+# kerala-rage-[DEPRECATED_STYLE]-frame-kr-dark-1024.png
 
 # Metadata ready:
 ls /assets/ASSET-*/context.md
@@ -510,7 +510,7 @@ export const DashboardHero = () => {
       style={{
         backgroundImage: 'url(/assets/kr-motifs/kerala-rage-ink-burst-kr-dark-1024.png)',
         backgroundSize: 'cover',
-        opacity: 0.65  // Gallery mode
+        opacity: 0.65  // Solidarity mode
       }}
     >
       {/* Content */}

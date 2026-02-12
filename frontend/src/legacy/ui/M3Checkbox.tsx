@@ -10,7 +10,7 @@ export interface M3CheckboxProps extends Omit<React.InputHTMLAttributes<HTMLInpu
     error?: boolean;
     /** Indeterminate state (for "select all" scenarios) */
     indeterminate?: boolean;
-    /** Theme mode: KrDark (warm, botanical) or KrDark (clinical, precise) */
+    /** Theme mode: KrDark (warm, [DEPRECATED_STYLE]) or KrDark (clinical, precise) */
     mode?: M3CheckboxMode;
     /** Additional CSS classes for container */
     containerClassName?: string;
@@ -19,7 +19,7 @@ export interface M3CheckboxProps extends Omit<React.InputHTMLAttributes<HTMLInpu
 /**
  * M3Checkbox - KeralaRage KrSolidarity Checkbox
  *
- * Supports both KrDark (warm, botanical) and KrDark (clinical, precise) modes.
+ * Supports both KrDark (warm, [DEPRECATED_STYLE]) and KrDark (clinical, precise) modes.
  *
  * **KeralaRage Token Usage:**
  * - Typography: `font-field-note` (Label)

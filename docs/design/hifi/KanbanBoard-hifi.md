@@ -28,6 +28,6 @@
 - **Blueprint Fade**: The `blueprint-grid` background enters at `opacity-6`.
 
 ## Motif Slots
-- `// TODO[asset]: Blueprint Grid Substrate overlay (Z-0, 6% opacity)`
-- `// TODO[asset]: Botanical Motif accents on "Resolved" cards.`
+- `- {KR-UI-004} Blueprint grid overlay (transparent) for technical grid patterns) **[REQUIRES GENERATION]**
+- `// TODO[asset]: [DEPRECATED_STYLE] Motif accents on "Resolved" cards.`
 - `// TODO[asset]: Priority Indicator motifs (Halo variant).`

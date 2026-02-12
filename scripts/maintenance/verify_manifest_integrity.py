@@ -5,7 +5,7 @@ import sys
 
 # Configuration
 ROOT_DIR = '/Users/okgoogle13/Desktop/careercopilot'
-MANIFEST_PATH = os.path.join(ROOT_DIR, 'assets/northcote-curio-manifest.json')
+MANIFEST_PATH = os.path.join(ROOT_DIR, 'assets/northcote-[DEPRECATED_STYLE]-manifest.json')
 
 def verify_manifest():
     print(f"Verifying Manifest Integrity: {MANIFEST_PATH}")

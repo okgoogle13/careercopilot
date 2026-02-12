@@ -1,6 +1,6 @@
 # REFINED ASSET 5: kr-leafus + Echidna (Path B Anatomical Study)
 
-**Purpose:** Dashboard organic anchor, Path B anatomical demonstration
+**Purpose:** Dashboard [DEPRECATED_STYLE] anchor, Path B anatomical demonstration
 **Specs:** Vertical 3:4 portrait (1024×1365px)
 **Background:** Pure black (#000000) for extraction to transparent
 **Success Criteria:** Monotreme defensive geometry, leaf translucency, surgical lighting
@@ -13,7 +13,7 @@ Please generate a high-resolution vertical portrait (3:4 aspect ratio, 1024×136
 
 ### 1. AESTHETIC FOUNDATION: Anatomical Extremism meets Haeckel Geometric Precision
 
-You are documenting a breakthrough anatomical study of the Echidna (monotreme) defensive structure integrated with kr-leafus botanical context.
+You are documenting a breakthrough anatomical study of the Echidna (monotreme) defensive structure integrated with kr-leafus [DEPRECATED_STYLE] context.
 
 **IMMUTABLE LAWS:**
 
@@ -33,7 +33,7 @@ A 10cm diameter (±2cm) cluster of dorsal spines from an adult Echidna, arranged
 - **Attachment:** Base shows preserved skin papillae and coarse fur texture between spine roots.
 - **Lighting:** Raking light from the side creates intense highlights along spine ridges and deep, geometric shadows into the cluster's core.
 
-### 3. BOTANICAL CONTEXT: kr-leafus Branch
+### 3. [DEPRECATED_STYLE] CONTEXT: kr-leafus Branch
 
 The spine cluster is integrated with/attached to a thick kr-leafus branch featuring lance-shaped silvery-sage leaves (#7A9E82).
 

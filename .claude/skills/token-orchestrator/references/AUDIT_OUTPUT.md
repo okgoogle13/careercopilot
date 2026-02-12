@@ -70,7 +70,7 @@ Exit code: 1
 📊 kerala-rage Palette Compliance Score: 87/100
 
 Dimension Scores:
-✓ Geographic Authenticity: 95/100 (Australian botanical names)
+✓ [DEPRECATED_STYLE] Authenticity: 95/100 (Australian [DEPRECATED_STYLE] names)
 ✓ Translucency Physics: 90/100 (kr-screenprint present)
 ✓ Scale Hierarchy: 85/100 (Display→body typography)
 ⚠️ Density Zones: 72/100 (kr-dark/Lab contrast needs work)

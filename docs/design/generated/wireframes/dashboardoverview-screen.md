@@ -37,7 +37,7 @@
   - Assets: background motif (elephant), torn edge.
 - SkillBreakdownCard (card)
   - Used: data visualization section.
-  - Assets: botanical-motif.
+  - Assets: [DEPRECATED_STYLE]-motif.
 </components>
 
 <annotations>

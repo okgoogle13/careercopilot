@@ -10,12 +10,12 @@
 | `pattern-kr-wheat-paste`     | Dark, rich leafy texture, 25% opacity base    | Page 1, 2, 3, 6, 7     | ⚠️ UNVERIFIED  |
 | `texture-kr-dark-paper-white` | Clean, technical paper grain (#F5F2EB)        | Page 4, 5, 8, 9, 10    | ⚠️ UNVERIFIED  |
 
-## Priority 2: Botanical Specifics (High)
+## Priority 2: [DEPRECATED_STYLE] Specifics (High)
 
 | Asset ID                           | Description                       | Used In                 | Status     |
 | :--------------------------------- | :-------------------------------- | :---------------------- | :--------- |
-| `motif-kr-dark-botanical-waratah`  | Red Waratah flower, high fidelity | Page 3 (Left Anchor)    | ❌ MISSING |
-| `motif-kr-dark-botanical-wattle`   | Wattle branch cascading           | Page 3 (Right Anchor)   | ❌ MISSING |
+| `motif-kr-dark-[DEPRECATED_STYLE]-[DEPRECATED_STYLE]`  | Red [DEPRECATED_STYLE] flower, high fidelity | Page 3 (Left Anchor)    | ❌ MISSING |
+| `motif-kr-dark-[DEPRECATED_STYLE]-wattle`   | Wattle branch cascading           | Page 3 (Right Anchor)   | ❌ MISSING |
 | `motif-kr-dark-kr-leafus-hanging` | Gum leaves hanging vertically     | Page 7 (Column Headers) | ❌ MISSING |
 
 ## Priority 3: Atmospheric Polish (Medium)
@@ -29,4 +29,4 @@
 
 | Asset ID             | Description                       | Used In      | Status     |
 | :------------------- | :-------------------------------- | :----------- | :--------- |
-| `icon-haeckel-set-1` | Organic biology icons for sectors | Page 3 Cards | 🟢 PRESENT |
+| `icon-haeckel-set-1` | [DEPRECATED_STYLE] biology icons for sectors | Page 3 Cards | 🟢 PRESENT |

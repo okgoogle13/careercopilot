@@ -21,7 +21,7 @@ This document tracks the transition of `SolidarityCard` from a functional Lo-Fi 
 - If used in a `KanbanBoard`, set `layout` prop to `true` to ensure smooth reordering transitions.
 
 ### 🎨 Motif & Texture
-- **Texture:** The `screenprint-grit` asset should be applied as an absolute overlay at `opacity-5` (Laboratory) or `opacity-15` (Gallery).
+- **Texture:** The `screenprint-grit` asset should be applied as an absolute overlay at `opacity-15` (Solidarity Mode).
 - **Interaction:** On hover, the grit texture opacity can subtly increase (`+5%`) to mimic physical interaction with the page.
 
 ## 🚀 Assembly Checklist

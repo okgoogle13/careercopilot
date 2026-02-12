@@ -68,8 +68,8 @@ INPUT → ANALYZE → EVALUATE → DESIGN → DELIVER
 **A. kerala-rage kr-solidarity V3.1 Compliance (100 pts)**
 
 - ✅ Uses Federation Typography Stack (Curator, Proclamation, Bloom, Field Note, Annotation)
-- ✅ Asymmetric organic shapes (no uniform border-radius)
-- ✅ Botanical color palette (Wattle Gold, Waratah Red, kr-leafus Smoke)
+- ✅ Asymmetric [DEPRECATED_STYLE] shapes (no uniform border-radius)
+- ✅ [DEPRECATED_STYLE] color palette (Wattle Gold, [DEPRECATED_STYLE] Red, kr-leafus Smoke)
 - ✅ Mode-appropriate (kr-dark vs kr-dark)
 - ✅ V3.1 playful mixing
 - ❌ Anti-Slop violations (Inter/Roboto, purple gradients, uniform corners)
@@ -122,7 +122,7 @@ INPUT → ANALYZE → EVALUATE → DESIGN → DELIVER
 - Map wireframe elements to kerala-rage components
 - Apply design tokens automatically
 - Use Federation Typography Stack
-- Apply asymmetric organic shapes
+- Apply asymmetric [DEPRECATED_STYLE] shapes
 
 **Step 3: Layout Construction**
 
@@ -189,7 +189,7 @@ INPUT → ANALYZE → EVALUATE → DESIGN → DELIVER
 
 1. HeroSection (kr-dark mode)
    - Cursive + Serif mix hero
-   - Botanical wallpaper background
+   - [DEPRECATED_STYLE] wallpaper background
    - CTA buttons with Wattle Gold
 
 2. MetricCard (kr-dark mode)
@@ -213,7 +213,7 @@ background: var(--nc-wattle-gold-300);
 
 /* Wireframe: "error state - red" */
 /* Maps to: */
-color: var(--nc-waratah-red-400);
+color: var(--nc-[DEPRECATED_STYLE]-red-400);
 
 /* Wireframe: "background - dark" */
 /* Maps to: */
@@ -267,7 +267,7 @@ Create a landing page hero section with:
 - Large headline: "Career Intelligence"
 - Subheadline with cursive accent
 - Two CTA buttons (primary + secondary)
-- Background: botanical wallpaper
+- Background: [DEPRECATED_STYLE] wallpaper
 - Mode: kr-dark (expressive)
 ```
 
@@ -280,7 +280,7 @@ Create a landing page hero section with:
 ```
 [User uploads screenshot with annotations:]
 - "This should be more expressive" (pointing to header)
-- "Use organic shapes" (pointing to cards)
+- "Use [DEPRECATED_STYLE] shapes" (pointing to cards)
 - "Add cursive accent here" (pointing to subtitle)
 - Mode: kr-dark
 ```
@@ -328,15 +328,15 @@ Mode: kr-dark (data-focused)
 
 **Colors:**
 
-- Full botanical palette (Wattle Gold, Waratah Red)
+- Full [DEPRECATED_STYLE] palette (Wattle Gold, [DEPRECATED_STYLE] Red)
 - High contrast and emotional
 - Glowing accents
 
 **Shapes:**
 
-- Maximum organic asymmetry
+- Maximum [DEPRECATED_STYLE] asymmetry
 - Dramatic radius variations
-- Botanical-inspired forms
+- [DEPRECATED_STYLE]-inspired forms
 
 **Motion:**
 
@@ -370,7 +370,7 @@ Mode: kr-dark (data-focused)
 **Shapes:**
 
 - Subtle asymmetry
-- Functional organic shapes
+- Functional [DEPRECATED_STYLE] shapes
 - Grid-aligned layouts
 
 **Motion:**
@@ -395,7 +395,7 @@ Before delivering a mockup, verify:
 
 - [ ] Uses only Federation Typography Stack (no Inter/Roboto)
 - [ ] All shapes are asymmetric (no uniform border-radius)
-- [ ] Colors from botanical palette
+- [ ] Colors from [DEPRECATED_STYLE] palette
 - [ ] Motion uses viscous breeze easing
 - [ ] Mode-appropriate styling (kr-dark vs kr-dark)
 
@@ -448,8 +448,8 @@ Before delivering a mockup, verify:
 
     Recommendations:
     1. Replace Inter with Federation Typography Stack
-    2. Apply asymmetric organic shapes
-    3. Use botanical color palette
+    2. Apply asymmetric [DEPRECATED_STYLE] shapes
+    3. Use [DEPRECATED_STYLE] color palette
     ```
 
 ---
@@ -470,7 +470,7 @@ Before delivering a mockup, verify:
 2.  **Designs:**
     - Cursive+serif mix hero (Proclamation + Caveat)
     - Wallpaper at 0.75 opacity with hot zones positioning
-    - Wattle Gold primary button, Waratah secondary
+    - Wattle Gold primary button, [DEPRECATED_STYLE] secondary
     - V3.1 playful mixing (shadow layering on hero text)
 
 3.  **Delivers:**

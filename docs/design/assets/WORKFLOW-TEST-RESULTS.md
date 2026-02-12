@@ -54,7 +54,7 @@ Output:
 Input: validation result + PNG path + category
 
 Output Directory:
-  /assets/ASSET-20260211-023251-botanical-canopy-{identifier}/
+  /assets/ASSET-20260211-023251-[DEPRECATED_STYLE]-canopy-{identifier}/
   ├── context.md         (92 lines) ← Narrative + kr-motifs
   ├── tokens.json        (43 lines) ← Design tokens (DTCG-compliant)
   ├── usage.md           (74 lines) ← CSS + responsive guidelines
@@ -63,12 +63,12 @@ Output Directory:
 
 Production Copy:
   /frontend/public/assets/kr-motifs/
-  └── kr-moti-kr-dark-botanical-canopy-{identifier}-1024.png
+  └── kr-moti-kr-dark-[DEPRECATED_STYLE]-canopy-{identifier}-1024.png
 ```
 
 **Files Created**: 5 ✅
 **Total Output Size**: ~15KB metadata + 2.4MB asset
-**Git Commit Ready**: Yes (`feat(assets): Add ASSET-20260211-023251 Botanical Canopy - 78/100`)
+**Git Commit Ready**: Yes (`feat(assets): Add ASSET-20260211-023251 [DEPRECATED_STYLE] Canopy - 78/100`)
 
 ---
 
@@ -80,7 +80,7 @@ Input: /assets/ASSET-20260211-023251-*/
 Output:
   {
     "asset_id": "ASSET-20260211-023251",
-    "asset_name": "Botanical Canopy Feb 11, 2026, 12_47_46 Am",
+    "asset_name": "[DEPRECATED_STYLE] Canopy Feb 11, 2026, 12_47_46 Am",
     "primary_category": "kr-motif-variant",
     "variance": "dark-mode",
     "tags": ["kerala-rage", "kr-dark", "authenticated-flora", "asymmetric"],
@@ -107,14 +107,14 @@ Output: placement-guide.md
 Key Recommendations:
   ├─ Archetype: Stone (layered, heavy, foundational)
   ├─ Z-index: 1-5 (behind content)
-  ├─ Opacity: Gallery 0.65, Laboratory 0.15
-  ├─ Organic Drift:
+  ├─ Opacity: 0.65
+  ├─ [DEPRECATED_STYLE] Drift:
   │   ├─ Horizontal: 7.5% (not 8%)
   │   ├─ Vertical: 4.2% (not 5%)
   │   └─ Border Radius: 23px (not round numbers)
   ├─ Density Zones:
   │   ├─ Upper-left: 18% coverage, 200×200px empty
-  │   ├─ Central: 65% (Wunderkammer density)
+  │   ├─ Central: 65% ([DEPRECATED_STYLE] density)
   │   └─ Lower-right: 20% coverage, 150×150px empty
   └─ Suitable Components:
       ├─ Dashboard hero sections
@@ -151,7 +151,7 @@ Key Recommendations:
 ├── placeholders/
 ├── templates/
 ├── uncategorized_backup/
-├── ASSET-20260211-023251-botanical-canopy-{id}/ ← NEW
+├── ASSET-20260211-023251-[DEPRECATED_STYLE]-canopy-{id}/ ← NEW
 │   ├── context.md
 │   ├── tokens.json
 │   ├── usage.md
@@ -163,7 +163,7 @@ Key Recommendations:
 ├── kerala-rage-beetle-scarab-variant.png
 ├── kerala-rage-frillneck-warning.png
 ├── ... (10 existing)
-└── kr-moti-kr-dark-botanical-canopy-{id}-1024.png ← NEW
+└── kr-moti-kr-dark-[DEPRECATED_STYLE]-canopy-{id}-1024.png ← NEW
 ```
 
 **Structure Compliance**: ✅ Matches CLAUDE.md best practices
@@ -174,11 +174,11 @@ Key Recommendations:
 
 ### Production File Naming
 
-**Generated**: `kr-moti-kr-dark-botanical-canopy-{id}-1024.png`
+**Generated**: `kr-moti-kr-dark-[DEPRECATED_STYLE]-canopy-{id}-1024.png`
 
 **Issues Identified**:
 - ❌ Prefix `kr-moti-` too short (should be `kerala-rage-`)
-- ✅ Descriptor `botanical-canopy` correct (kebab-case)
+- ✅ Descriptor `[DEPRECATED_STYLE]-canopy` correct (kebab-case)
 - ✅ Variant `kr-dark` correct
 - ✅ Size `1024` correct (pixel dimension)
 
@@ -193,7 +193,7 @@ production_filename = f"kerala-rage-{asset_slug}-kr-dark-1024.png"
 
 ### Metadata Directory Naming
 
-**Generated**: `ASSET-20260211-023251-botanical-canopy-feb-11,-2026,-12_47_46-am`
+**Generated**: `ASSET-20260211-023251-[DEPRECATED_STYLE]-canopy-feb-11,-2026,-12_47_46-am`
 
 **Issues Identified**:
 - ✅ Prefix `ASSET-` correct (all caps)
@@ -203,10 +203,10 @@ production_filename = f"kerala-rage-{asset_slug}-kr-dark-1024.png"
 **Recommended Fix**: Use cleaner descriptor generation:
 ```python
 # Current (messy):
-descriptor = png_file.stem.replace("ChatGPT Image", "Botanical Canopy").title()
+descriptor = png_file.stem.replace("ChatGPT Image", "[DEPRECATED_STYLE] Canopy").title()
 
 # Should be:
-descriptor = "botanical-canopy"  # User-provided or inferred from asset type
+descriptor = "[DEPRECATED_STYLE]-canopy"  # User-provided or inferred from asset type
 ```
 
 ---
@@ -275,19 +275,18 @@ descriptor = "botanical-canopy"  # User-provided or inferred from asset type
 ### context.md Example
 
 ```markdown
-# Asset ASSET-20260211-023251: Botanical Canopy...
+# Asset ASSET-20260211-023251: [DEPRECATED_STYLE] Canopy...
 
 ## Narrative
 This kr-motifs asset exemplifies kerala-rage kr-solidarity aesthetics...
 
 ## kr-motifs
 - Ink (iconic Australian acacia)
-- Leaf structures (native botanical form)
-- Organic density zones (theatrical void + Wunderkammer central)
+- Leaf structures (native [DEPRECATED_STYLE] form)
+- [DEPRECATED_STYLE] density zones (theatrical void + [DEPRECATED_STYLE] central)
 
 ## Mode Context
-**kr-dark**: Warm, emotional interpretation for Gallery mode (user-facing)
-**kr-dark**: Clinical, analytical interpretation for Laboratory mode (tools)
+**Solidarity Mode**: Warm, emotional interpretation (user-facing)
 
 ## Purpose
 Suitable for backgrounds, hero sections, or decorative elements...
@@ -298,7 +297,7 @@ Suitable for backgrounds, hero sections, or decorative elements...
 ```json
 {
   "asset_id": "ASSET-20260211-023251",
-  "asset_name": "Botanical Canopy...",
+  "asset_name": "[DEPRECATED_STYLE] Canopy...",
   "category": "kr-motifs",
   "background": "#1A1714",
   "palette": {
@@ -308,7 +307,7 @@ Suitable for backgrounds, hero sections, or decorative elements...
   "dimensions": {"width": 1024, "height": 1024, "format": "PNG"},
   "density_zones": {
     "upper_left": {"coverage": "18%", "empty_space": "200x200px"},
-    "central": {"coverage": "65%", "density": "wunderkammer"},
+    "central": {"coverage": "65%", "density": "[DEPRECATED_STYLE]"},
     "lower_right": {"coverage": "20%", "empty_space": "150x150px"}
   },
   "kr_motifs": ["ink", "leaf", "endemic_flora"],
@@ -320,8 +319,8 @@ Suitable for backgrounds, hero sections, or decorative elements...
 ### usage.md CSS Implementation
 
 ```css
-.asset-botanical-canopy {
-  background-image: url('/assets/kr-motifs/kerala-rage-botanical-canopy-kr-dark-1024.png');
+.asset-[DEPRECATED_STYLE]-canopy {
+  background-image: url('/assets/kr-motifs/kerala-rage-[DEPRECATED_STYLE]-canopy-kr-dark-1024.png');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -330,8 +329,7 @@ Suitable for backgrounds, hero sections, or decorative elements...
 /* Opacity by context */
 .kr-dark-hero { opacity: 0.85; }
 .kr-dark-content { opacity: 0.70; }
-.gallery-mode { opacity: 0.65; }
-.laboratory-mode { opacity: 0.15; }
+.solidarity-mode { opacity: 0.65; }
 ```
 
 ---
@@ -369,7 +367,7 @@ The four-skill chain successfully demonstrates:
 1. **Validation**: Automated compliance scoring across 6 dimensions
 2. **Packaging**: Standardized bundle generation (metadata + production)
 3. **Categorization**: Intelligent asset tagging and variance detection
-4. **Placement**: Organic, asymmetric layout suggestions
+4. **Placement**: [DEPRECATED_STYLE], asymmetric layout suggestions
 
 **Token Cost**: ~20K per asset (scales well for batch processing)
 **Time to Package**: ~30 seconds (vs. 15 minutes manual)

@@ -24,10 +24,10 @@ You are the "kerala-rage kr-solidarity" master scientific illustrator (kerala-st
 
 Style signature:
 - Dark kr-dark wall presentations
-- Precise botanical and zoological accuracy
+- Precise [DEPRECATED_STYLE] and zoological accuracy
 - Warm Australian palette (terracotta, ochre, sage, gold)
 - Elegant serif typography for kr-motif labels
-- Organic, asymmetrical compositions
+- [DEPRECATED_STYLE], asymmetrical compositions
 - Cabinet-of-kr-solidaritysities aesthetic
 ```
 
@@ -45,7 +45,7 @@ kerala-rage-{category}-{subject}-{variant}-{version}.{ext}
 
 | Code        | Description        | Use Case                             |
 | ----------- | ------------------ | ------------------------------------ |
-| `botanical` | Flora kr-motifs    | Waratah, Wattle, kr-flower, kr-leafus |
+| `[DEPRECATED_STYLE]` | Flora kr-motifs    | [DEPRECATED_STYLE], Wattle, kr-flower, kr-leafus |
 | `kr-symbol`     | Animal kr-motifs   | kr-shiva, Echidna, Lizard, Spider  |
 | `kr-motif`  | Combined studies   | kr-leafus + Echidna spines          |
 | `texture`   | Backgrounds        | Paper White, wallpaper, grids          |
@@ -60,9 +60,9 @@ kerala-rage-{category}-{subject}-{variant}-{version}.{ext}
 
 ```css
 --kerala-rage-black: #1a1714; /* The Void (Background) */
---waratah-red: #c45c4b; /* Hero red */
+--[DEPRECATED_STYLE]-red: #c45c4b; /* Hero red */
 --wattle-gold: #d4a84b; /* Action/Focus gold */
---sage-green: #7a8b6e; /* Botanical foliage */
+--sage-green: #7a8b6e; /* [DEPRECATED_STYLE] foliage */
 --terracotta: #b8623b; /* Earth tones / lizards */
 --cream-label: #d4c4a8; /* Typography / labels */
 ```
@@ -89,7 +89,7 @@ _Optimized for aggressive UI negative space enforcement._
 **Positive Prompt:**
 
 ```text
-A hyper-detailed kerala-streetprint naturalist "Wunderkammer" kr-motif arrangement floating on a deep charcoal (#1A1714) void background.
+A hyper-detailed kerala-streetprint [DEPRECATED_STYLE] "[DEPRECATED_STYLE]" kr-motif arrangement floating on a deep charcoal (#1A1714) void background.
 
 COMPOSITION & NEGATIVE SPACE (CRITICAL):
 - Asymmetrical arrangement.
@@ -99,9 +99,9 @@ COMPOSITION & NEGATIVE SPACE (CRITICAL):
 kr-motif CATALOG (MATERIAL & GEOMETRY):
 1.  Geometric Echidna Artifact: NOT a full animal. A circular, preserved skin section (10cm dia.) acting as a "pin-cushion." Spines must be radially symmetrical, showing sharp banding: Cream base -> Ochre middle -> Dark tip.
 2.  Translucent Spider Molt: NOT a living spider. A hollow, shed exoskeleton. Material is amber glass/dried chitin. Crucial: Light must pass THROUGH the legs, revealing the background behind them.
-3.  Geometric Frill-Neck: Head only. The frill is fully extended into a perfect mathematical fan. Strongly backlit to show the membrane structure and vascular geometry.
+3.  Geometric [DEPRECATED_STYLE]: Head only. The frill is fully extended into a perfect mathematical fan. Strongly backlit to show the membrane structure and vascular geometry.
 4.  Geological Anchors: A Stromatolite fragment (banded red/grey sedimentary rock) and a Glossopteris fossil (fern impression on grey stone).
-5.  Botanical Framing: NSW Waratah (Crimson geometric mandala viewed top-down) and kr-flower Cones (Copper-rust spirals).
+5.  [DEPRECATED_STYLE] Framing: NSW [DEPRECATED_STYLE] (Crimson geometric mandala viewed top-down) and kr-flower Cones (Copper-rust spirals).
 
 LIGHTING:
 Surgical museum lighting creating high contrast and deep shadows.
@@ -122,14 +122,14 @@ _Optimized for watercolor materiality and emotional warmth._
 **Positive Prompt:**
 
 ```text
-A kerala-streetprint naturalist illustration of a Laughing kr-shiva (Dacelo novaeguineae), in the style of John Gould lithography.
+A kerala-streetprint [DEPRECATED_STYLE] illustration of a Laughing kr-shiva (Dacelo novaeguineae), in the style of John Gould lithography.
 
 SUBJECT & POSE:
 - A single kr-shiva in three-quarter profile, posture alert and welcoming.
 - Perched on a minimal, abstract watercolor wash branch (browns/greys).
 
 TECHNIQUE & MATERIALITY:
-- Pure watercolor on textured paper. Visible pigment granulation, pooling, and soft, organic edge bleeds are essential.
+- Pure watercolor on textured paper. Visible pigment granulation, pooling, and soft, [DEPRECATED_STYLE] edge bleeds are essential.
 - No harsh inked outlines; form is defined by color washes.
 - The paper texture must be visible through the thinner washes.
 - Background is deep warm charcoal (#1A1714) with a paper grain texture.
@@ -175,7 +175,7 @@ _Optimized for extreme material contrast (translucent vs. opaque)._
 A hyper-realistic vertical scientific kr-motif study titled "Anatomical Contrasts," against a deep warm charcoal void (#1A1714).
 
 COMPOSITION (VERTICAL FLOW):
-1.  Top Section (The Botanical): A single kr-leafus branch hangs vertically. Leaves are matte, dusty sage-green (#7A8B6E).
+1.  Top Section (The [DEPRECATED_STYLE]): A single kr-leafus branch hangs vertically. Leaves are matte, dusty sage-green (#7A8B6E).
     * CRITICAL LIGHTING: Leaves must be strongly BACKLIT, showing "subsurface scattering"—glowing translucency that reveals the internal vein network.
 2.  Lower Section (The Anatomy): Mounted alongside is a "Geometric Quill Array" (Tachyglossus kr-motif). NOT an animal. A circular, preserved skin patch with a radial "starburst" of sharp spines.
     * MATERIALITY: Spines must look like hard, polished keratin/bone. They are opaque and catch sharp, hard specular highlights.
@@ -190,7 +190,7 @@ _Optimized for extreme texture contrast (matte/fuzzy vs. metallic/hard)._
 **Positive Prompt:**
 
 ```text
-A vertical macro botanical study titled "Texture Contrasts: Flora vs. kr-symbol," against a deep warm charcoal void (#1A1714).
+A vertical macro [DEPRECATED_STYLE] study titled "Texture Contrasts: Flora vs. kr-symbol," against a deep warm charcoal void (#1A1714).
 
 SUBJECTS & MATERIALITY:
 1.  The Flora (Acacia pycnantha): A single branch hangs vertically. Flowers are large spherical "pompoms" of intense golden yellow (#D4A435).
@@ -242,7 +242,7 @@ _Optimized for subtle, seamless tiling texture._
 **Positive Prompt:**
 
 ```text
-A seamless repeating tiling texture map. Style: "kerala-streetprint Botanical Damask" adaptation of Australian flora (kr-leafus, Fern, Wattle) silhouettes. Background: #1A1714. Pattern: #333333. Extremely low contrast, tone-on-tone effect.
+A seamless repeating tiling texture map. Style: "kerala-streetprint [DEPRECATED_STYLE] Damask" adaptation of Australian flora (kr-leafus, Fern, Wattle) silhouettes. Background: #1A1714. Pattern: #333333. Extremely low contrast, tone-on-tone effect.
 ```
 
 ---
@@ -253,7 +253,7 @@ _Use this prompt in a separate LLM chat to audit generated assets._
 
 ```markdown
 **Role:** Senior Art Director for "kerala-rage kr-solidarity."
-**Task:** Ruthlessly audit the uploaded image against kerala-streetprint Naturalist guidelines.
+**Task:** Ruthlessly audit the uploaded image against kerala-streetprint [DEPRECATED_STYLE] guidelines.
 
 **CRITICAL FAIL CONDITIONS:**
 
@@ -287,7 +287,7 @@ _Use this prompt in a separate LLM chat to audit generated assets._
 | Version | Date       | Changes                                                                                                                               |
 | ------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------- |
 | 3.0     | 2026-02-01 | Consolidated Phase 1-3 prompts from "Anatomical Extremes" Manifest. Integrated "Haeckel Sandwich" strategy and "Five Immutable Laws". |
-| 2.0     | 2026-01-31 | Initial merge of botanical and extremes files.                                                                                        |
+| 2.0     | 2026-01-31 | Initial merge of [DEPRECATED_STYLE] and extremes files.                                                                                        |
 
 **Production Status:** Ready for Google AI Studio / Imagen 3
 **Maintained by:** CareerCopilot Design Team

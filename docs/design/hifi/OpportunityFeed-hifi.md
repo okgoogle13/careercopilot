@@ -28,6 +28,6 @@
 - **List Interaction**: Items lift slightly (`y: -4`) on hover.
 
 ## Motif Slots
-- `// TODO[asset]: Halo Disk Motif behind High Priority items (Z-1, 60% opacity)`
-- `// TODO[asset]: Screenprint Substrate Texture backdrop (10% opacity)`
-- `// TODO[asset]: Status-specific botanical icons for list items.`
+- `- {KR-UI-002} Halo disk (plain + gauge version) for radiant circle elements) **[REQUIRES GENERATION]**
+- `- {KR-SOLID-033} Melbourne Laneway texture - real-world substrate base)
+- `// TODO[asset]: Status-specific [DEPRECATED_STYLE] icons for list items.`

@@ -62,7 +62,7 @@ CRITICAL FIXES:
 5. Scale Hierarchy: Ensure primary 1.5-2× secondary
    └─ Medium fix, ~5 min, gains +2 points
 
-6. Geographic Authenticity: Verify all flora are Australian endemic
+6. [DEPRECATED_STYLE] Authenticity: Verify all flora are Australian endemic
    └─ Hard fix, ~20 min, gains +5 points
 ```
 
@@ -74,10 +74,10 @@ Developer **copies correction prompt directly into Gemini prompt** for next atte
 
 ```
 Original Prompt:
-  "Generate a botanical kr-motif asset with ink and leaf elements..."
+  "Generate a [DEPRECATED_STYLE] kr-motif asset with ink and leaf elements..."
 
 New Prompt (with corrections):
-  "Generate a botanical kr-motif asset with ink and leaf elements.
+  "Generate a [DEPRECATED_STYLE] kr-motif asset with ink and leaf elements.
 
   CORRECTIONS FROM LAST ATTEMPT:
   - Reduce to max 6 labels (currently 7)
@@ -112,11 +112,11 @@ NEW SCORE: 93/100 ✅ DECISION: PACKAGE
 
 ## Dimension-Specific Feedback Examples
 
-### Example 1: Geographic Authenticity (–5 points)
+### Example 1: [DEPRECATED_STYLE] Authenticity (–5 points)
 
 **Feedback from Validator**:
 ```
-Dimension: Geographic Authenticity (0-20)
+Dimension: [DEPRECATED_STYLE] Authenticity (0-20)
 Score: 15/20
 Violation: "Non-Australian endemic flora detected"
 
@@ -182,7 +182,7 @@ Violations:
 
 Why it matters:
 - Theatrical void (empty space) creates visual breathing room
-- Wunderkammer central density creates mystery
+- [DEPRECATED_STYLE] central density creates mystery
 - Asymmetric balance avoids "grid" feeling
 
 Current state:
@@ -191,7 +191,7 @@ Current state:
 │ [25% DENSE] [SHOULD BE EMPTY]   │  Upper-left: 25% (too dense)
 │             [CONTENT AREA]      │  Central: 65% (perfect)
 │                                 │  Lower-right: 22% (acceptable)
-│        [65% WUNDERKAMMER]       │
+│        [65% [DEPRECATED_STYLE]]       │
 │             [STORYTELLING]      │
 │                                 │
 │        [HISTORICAL ECHOES]      │
@@ -202,7 +202,7 @@ Current state:
 How to fix:
 1. Reduce upper-left content to ≤20% (remove 2-3 elements)
 2. Maintain lower-right at ≤30% (within tolerance)
-3. Expand central Wunderkammer to 65-70%
+3. Expand central [DEPRECATED_STYLE] to 65-70%
 4. Request Gemini: "Upper-left quadrant must be 200×200px completely empty with minimal elements"
 ```
 
@@ -260,7 +260,7 @@ RESULT
   "asset_id": "ASSET-20260211-023251",
   "overall_score": 78,
   "decision": "REGENERATE",
-  "correction_prompt": "CRITICAL FIXES:\n- Typography: Reduce to max 6 labels (currently 7)\n- Background Color: Ensure #1A1714 asphalt black (±5% tolerance)\n- Translucency: Add 60-80% light-transmissive overlay for depth\n- Density Zones: Upper-left must be ≤20% (current: ~25%)\n- Scale Hierarchy: Ensure primary 1.5-2× secondary\n- Geographic Auth: Verify all flora are Australian endemic",
+  "correction_prompt": "CRITICAL FIXES:\n- Typography: Reduce to max 6 labels (currently 7)\n- Background Color: Ensure #1A1714 asphalt black (±5% tolerance)\n- Translucency: Add 60-80% light-transmissive overlay for depth\n- Density Zones: Upper-left must be ≤20% (current: ~25%)\n- Scale Hierarchy: Ensure primary 1.5-2× secondary\n- [DEPRECATED_STYLE] Auth: Verify all flora are Australian endemic",
   "dimensions": {
     "geographic_authenticity": { "score": 15, "violations": [] },
     "translucency_physics": { "score": 14, "violations": [] },
@@ -296,7 +296,7 @@ Each fix tied to measurable point gain:
 - Density zones: +2-4 points
 - Translucency: +3-6 points
 - Scale hierarchy: +2 points
-- Geographic auth: +5 points
+- [DEPRECATED_STYLE] auth: +5 points
 
 **Total potential**: 78 → 93 (+15 points)
 
@@ -314,7 +314,7 @@ Priority 2 (Medium, 15 min total):
   Result: 83 → 89
 
 Priority 3 (Hard, 20 min):
-  └─ Fix geographic auth + translucency → +6 points
+  └─ Fix [DEPRECATED_STYLE] auth + translucency → +6 points
   Result: 89 → 95
 
 Total effort: ~42 minutes for 95/100 → 100% automation after
@@ -440,7 +440,7 @@ Developer knows exactly what to prioritize.
 Workflow captures feedback for every iteration:
 
 ```
-/assets/ASSET-20260211-023251-botanical-canopy-{id}/
+/assets/ASSET-20260211-023251-[DEPRECATED_STYLE]-canopy-{id}/
 ├── README.md (iteration history)
 │   └─ Attempt 1: 78/100 → REGENERATE
 │   └─ Attempt 2: [score TBD] → [decision TBD]
@@ -477,7 +477,7 @@ Workflow captures feedback for every iteration:
 For your DashboardOverview hifi design, the asset validator will ensure any background/motif assets match:
 - ✅ Color constraints (asphalt-black, ink-gold, solidarity-red, solidarity-green)
 - ✅ Typography rules (label count, font families, contrast)
-- ✅ Spacing/density (Wunderkammer central, empty upper-left)
+- ✅ Spacing/density ([DEPRECATED_STYLE] central, empty upper-left)
 - ✅ Aesthetic alignment (Australian kr-solidarity)
 
 **Next step**: Integrate validator feedback loop into your asset generation pipeline.

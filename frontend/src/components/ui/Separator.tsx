@@ -27,7 +27,7 @@ export interface SeparatorProps extends React.HTMLAttributes<HTMLDivElement> {
  * **THE SEPARATOR** (Stone Gap)
  * 
  * A high-stasis structural division element.
- * Maps to the 'Stone' aesthetic with subtle transparency and organic ease.
+ * Maps to the 'Stone' aesthetic with subtle transparency and [DEPRECATED_STYLE] ease.
  */
 export const Separator = React.forwardRef<HTMLDivElement, SeparatorProps>(
   (

@@ -78,9 +78,9 @@
 
 ### 1.4 asset-placement-strategy
 
-**Purpose**: Suggest organic placement based on asset category + wireframe
+**Purpose**: Suggest [DEPRECATED_STYLE] placement based on asset category + wireframe
 **Input**: Categorized assets + wireframe specs
-**Output**: Placement suggestions (anchor points, organic drift, z-index)
+**Output**: Placement suggestions (anchor points, [DEPRECATED_STYLE] drift, z-index)
 
 | Aspect | Status | Notes |
 |--------|--------|-------|
@@ -120,7 +120,7 @@
 │           │   ├── texture-kr-dark-lab-grid-512.png
 │           │   └── texture-kr-dark-night-garden-2048.jpg
 │           └── patterns/
-│               └── pattern-botanical-tile-256.png
+│               └── pattern-[DEPRECATED_STYLE]-tile-256.png
 │
 ├── docs/
 │   └── design/
@@ -134,7 +134,7 @@
 └── design-system/
     └── assets/
         ├── kr-atmospheric/        # Design system-specific
-        └── kr-botanical/
+        └── kr-[DEPRECATED_STYLE]/
 ```
 
 ---
@@ -148,7 +148,7 @@
 **Examples**:
 - `kerala-rage-wattle-burst-1024.png` (kr-motif)
 - `texture-kr-dark-lab-grid-512.png` (texture)
-- `pattern-botanical-tile-256.png` (pattern)
+- `pattern-[DEPRECATED_STYLE]-tile-256.png` (pattern)
 - `background-hero-kr-dark-night-2048.jpg` (hero banner)
 
 **Rules**:

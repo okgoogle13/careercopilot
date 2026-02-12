@@ -37,7 +37,7 @@ The `asset-packager` skill requires IDF (Image Description Format) metadata:
 **Implementation**:
 1. Pass PNG to Vision API
 2. Detect dominant colors → map to design tokens
-3. Identify kr-motifs (botanical entities) via label detection
+3. Identify kr-motifs ([DEPRECATED_STYLE] entities) via label detection
 4. Extract dimensions from PNG metadata
 5. Auto-generate IDF JSON
 
@@ -49,7 +49,7 @@ The `asset-packager` skill requires IDF (Image Description Format) metadata:
 
 **Cons**:
 - ❌ Requires Vision API quota + cost
-- ❌ Vision API may misidentify botanical elements
+- ❌ Vision API may misidentify [DEPRECATED_STYLE] elements
 - ❌ Needs fallback for extraction failures
 - ❌ Additional 10-20 seconds per asset
 

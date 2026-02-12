@@ -29,7 +29,7 @@
 - ✅ M3 design tokens (colors, shapes, typography, motion)
 - ✅ MUI theme integration (`mui-theme.ts`)
 - ✅ Error/Warning color palettes
-- ✅ Organic shape system (pebble, tech, leaf, gem)
+- ✅ [DEPRECATED_STYLE] shape system (pebble, tech, leaf, gem)
 - ✅ Spring motion choreography
 
 ### Documentation ✅
@@ -67,7 +67,7 @@ cd frontend && npm run test
 #### 3. Visual Verification 🔍
 **Task**: Open app in browser and verify:
 - [ ] Navigate to `/job-queue` page
-- [ ] Verify organic shapes visible (asymmetric corners on cards)
+- [ ] Verify [DEPRECATED_STYLE] shapes visible (asymmetric corners on cards)
 - [ ] Verify colors match Electric Alchemist palette
 - [ ] Check dark mode toggle works
 - [ ] Verify M3 components render correctly

@@ -16,7 +16,7 @@ All forbidden fonts have been successfully purged from the codebase. The kerala-
 ### Core Components
 1. **`frontend/src/components/ui/AuroraHeader.tsx`** ✅
    - Replaced: Plus Jakarta Sans → Fraunces
-   - Updated: Gradient colors to Wattle Gold → Waratah Red → Concrete Grey
+   - Updated: Gradient colors to Wattle Gold → [DEPRECATED_STYLE] Red → Concrete Grey
    - Added: Fraunces variable axes (SOFT, WONK)
 
 2. **`frontend/src/components/ui/SplitHeader.tsx`** ✅
@@ -37,7 +37,7 @@ All forbidden fonts have been successfully purged from the codebase. The kerala-
 ### Theme Configuration
 5. **`frontend/src/theme/mui-theme.ts`** ✅
    - Updated: Header comments to reference kerala-rage kr-solidarity
-   - Updated: Color mappings to Wattle Gold, Waratah Red, Concrete Grey
+   - Updated: Color mappings to Wattle Gold, [DEPRECATED_STYLE] Red, Concrete Grey
 
 ### Utility Classes
 6. **`frontend/src/index.css`** ✅
@@ -121,11 +121,11 @@ All forbidden fonts have been successfully purged from the codebase. The kerala-
 
 ### Color ✅ PASS
 - Wattle Gold (#D4A84B) as primary
-- Waratah Red (#C45C4B) as accent
+- [DEPRECATED_STYLE] Red (#C45C4B) as accent
 - Asphalt Black (#1A1714) as surface
 
 ### Morphology ✅ PASS
-- Organic asymmetry implemented
+- [DEPRECATED_STYLE] asymmetry implemented
 - Pebble, Stone, Leaf shapes active
 - No generic border-radius values
 

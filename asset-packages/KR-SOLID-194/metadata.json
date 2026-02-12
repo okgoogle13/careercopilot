@@ -3,7 +3,7 @@
   "name": "Abstract - Solidarity (kr-moti-kr-dark)",
   "created_at": "2026-02-11T22:09:24.023290",
   "asset_path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-kr-moti-kr-dark__v1.png",
-  "source_image": "frontend/public/assets/kr-motifs/kr-moti-kr-dark-botanical-canopy-feb-11,-2026,-12_47_46-am-1024.png",
+  "source_image": "frontend/public/assets/kr-motifs/kr-moti-kr-dark-[DEPRECATED_STYLE]-canopy-feb-11,-2026,-12_47_46-am-1024.png",
   "analysis": {
     "category": "abstract",
     "political_significance": "solidarity",
@@ -17,7 +17,7 @@
     "intended_context": "Analysis failed",
     "historical_reference": null,
     "analysis_confidence": 0.0,
-    "analysis_notes": "Analysis failed: cannot identify image file 'frontend/public/assets/kr-motifs/kr-moti-kr-dark-botanical-canopy-feb-11,-2026,-12_47_46-am-1024.png'"
+    "analysis_notes": "Analysis failed: cannot identify image file 'frontend/public/assets/kr-motifs/kr-moti-kr-dark-[DEPRECATED_STYLE]-canopy-feb-11,-2026,-12_47_46-am-1024.png'"
   },
   "governance": {
     "passed": true,

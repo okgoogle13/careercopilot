@@ -91,7 +91,7 @@
 | Asset | Type | Used In Screens | Status | Notes |
 |-------|------|-----------------|--------|-------|
 | `kr-asset-blueprint-layout` | Texture | Ingestion | ✅ | Watermark 6% opacity |
-| `kr-asset-botanical-motif` | Inline | Analysis, Kanban | ✅ | Elite skill indicator (>90%) |
+| `kr-asset-[DEPRECATED_STYLE]-motif` | Inline | Analysis, Kanban | ✅ | Elite skill indicator (>90%) |
 
 ### Symbolic Anchors (Optional)
 | Asset | Screens Eligible | Min Size | Emotional Register | Status |
@@ -196,7 +196,7 @@ Integration:  ░░░░░░░░░░░░░░░░░░░░   0% 
    - Analysis: Kerala elephant or Shiva?
    - Dashboard: Bhagat Singh or Treaty Now?
 
-2. **Botanical Motif**: Still used despite "botanical purge"?
+2. **[DEPRECATED_STYLE] Motif**: Still used despite "[DEPRECATED_STYLE] purge"?
    - Currently referenced in Analysis and Kanban specs
    - Needs alignment with v5.0.0 layered identity system
 

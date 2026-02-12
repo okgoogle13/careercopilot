@@ -10,7 +10,7 @@ This workflow defines the process of moving an image from generation (AI Studio)
 - **Rules**:
   - Apply Universal System Instructions (Immutable Laws).
   - Ensure background is `#1A1714` (The Void).
-  - Maximize geographic authenticity (Australian endemic).
+  - Maximize [DEPRECATED_STYLE] authenticity (Australian endemic).
 
 ## 2. Transformation Process
 

@@ -59,9 +59,9 @@ This document provides detailed specifications for validating UI components agai
 
 ### Palette Adherence
 
-**Australian Botanical Palette (Required):**
+**Australian [DEPRECATED_STYLE] Palette (Required):**
 - Primary: Wattle Gold (`#D4A84B`)
-- Secondary: Waratah Red (`#C45C4B`)
+- Secondary: [DEPRECATED_STYLE] Red (`#C45C4B`)
 - Tertiary: Ochre Earth (`#B8733D`)
 - Surface: Asphalt Black (`#1A1714`)
 - Text: Paper White (`#F5F0E8`)
@@ -82,9 +82,9 @@ This document provides detailed specifications for validating UI components agai
 - Color choices correct but feeling muted (saturation <40%)
 
 **Fail (0 points):**
-- Colors disconnected from botanical inspiration
+- Colors disconnected from [DEPRECATED_STYLE] inspiration
 - Purple gradients present (generic Material Design default)
-- Generic Material Design blue (not waratah-inspired)
+- Generic Material Design blue (not [DEPRECATED_STYLE]-inspired)
 - Desaturated or washed-out (saturation <30%)
 - More than 2 colors outside palette
 
@@ -92,7 +92,7 @@ This document provides detailed specifications for validating UI components agai
 
 **Unity Check:**
 - Do the colors feel cohesive when viewed together?
-- Is the color story clear (e.g., "waratah + sage" vs. "random colors")?
+- Is the color story clear (e.g., "[DEPRECATED_STYLE] + sage" vs. "random colors")?
 
 **Contrast Check:**
 - Text readability: WCAG AA minimum (4.5:1)
@@ -106,7 +106,7 @@ This document provides detailed specifications for validating UI components agai
 ### Spacing Quality
 
 **Pass (20 points):**
-- Spacing appears organic, not grid-rigid
+- Spacing appears [DEPRECATED_STYLE], not grid-rigid
 - Intentional asymmetry present (not uniform padding)
 - Visual weight distribution is balanced
 - Breathing room around interactive elements
@@ -115,7 +115,7 @@ This document provides detailed specifications for validating UI components agai
 **Needs Refinement (10 points):**
 - Good spacing but feels slightly mechanical
 - Hierarchy present but ambiguous
-- Mostly organic but some predictable patterns
+- Mostly [DEPRECATED_STYLE] but some predictable patterns
 - Adequate breathing room but not intentional
 
 **Fail (0 points):**
@@ -141,16 +141,16 @@ This document provides detailed specifications for validating UI components agai
 
 ---
 
-## 4. Botanical Elements Audit Specification
+## 4. [DEPRECATED_STYLE] Elements Audit Specification
 
 ### Motif Integration
 
 **Pass (20 points):**
-- Naturalist motifs present and meaningful
+- [DEPRECATED_STYLE] motifs present and meaningful
 - Motifs support visual hierarchy or information clarity
 - Integration feels intentional, not decorative
 - Motifs don't compete with primary content
-- Botanical inspiration is recognizable
+- [DEPRECATED_STYLE] inspiration is recognizable
 
 **Needs Refinement (10 points):**
 - Motifs present but purpose unclear
@@ -165,7 +165,7 @@ This document provides detailed specifications for validating UI components agai
 - Generic florals (not Australian endemic)
 - Motifs feel bolted-on or cosmetic
 
-### Botanical Authenticity
+### [DEPRECATED_STYLE] Authenticity
 
 - Are motifs Australian endemic (not European florals)?
 - Do they align with kr-solidarity manifesto?
@@ -260,7 +260,7 @@ This document provides detailed specifications for validating UI components agai
 Typography:          (score/20) × 16 = ___ / 16
 Color:               (score/20) × 16 = ___ / 16
 Layout:              (score/20) × 16 = ___ / 16
-Botanical Elements:  (score/20) × 16 = ___ / 16
+[DEPRECATED_STYLE] Elements:  (score/20) × 16 = ___ / 16
 Coherence:           (score/20) × 16 = ___ / 16
 Microcopy:           (score/20) × 18 = ___ / 18
 ────────────────────────────────

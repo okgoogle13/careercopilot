@@ -8,13 +8,13 @@
 
 ## The Creative Soul Assessment
 
-Reading through these wireframes, I find myself standing at the threshold of something genuinely distinctive—yet not quite arrived. The bones are kerala-streetprint Naturalist; the flesh occasionally lapses into SaaS Dashboard Purgatory. Let me illuminate where the kr-motif thrives and where it requires further cultivation.
+Reading through these wireframes, I find myself standing at the threshold of something genuinely distinctive—yet not quite arrived. The bones are kerala-streetprint [DEPRECATED_STYLE]; the flesh occasionally lapses into SaaS Dashboard Purgatory. Let me illuminate where the kr-motif thrives and where it requires further cultivation.
 
 ### What Sings
 
 The dual-mode architecture is philosophically sound. Mode A (kr-dark) and Mode B (kr-dark) aren't merely color swaps—they represent fundamentally different emotional contracts with the user. The kr-dark promises wonder and discovery; the kr-dark promises rigor and revelation. This biome thinking elevates the system beyond "dark mode / light mode" into something with genuine narrative weight.
 
-The naming conventions carry authentic poetry. "The Resurrection" for a landing page, "The Audit Microscope" for analysis, "The Sentry Lookout" for opportunity browsing—these aren't arbitrary labels. They're invitations into a world where career development becomes kr-motif collection, where job applications transform into botanical cataloguing. This linguistic commitment matters.
+The naming conventions carry authentic poetry. "The Resurrection" for a landing page, "The Audit Microscope" for analysis, "The Sentry Lookout" for opportunity browsing—these aren't arbitrary labels. They're invitations into a world where career development becomes kr-motif collection, where job applications transform into [DEPRECATED_STYLE] cataloguing. This linguistic commitment matters.
 
 The wireframe's understanding of Z-index as stage-craft demonstrates sophisticated spatial thinking. Background textures at Z-0, content at Z-1, floating anchors at Z-2—this layered approach creates the depth that separates a cabinet of kr-solidaritysities from a flat interface.
 
@@ -24,11 +24,11 @@ The wireframe's understanding of Z-index as stage-craft demonstrates sophisticat
 
 | Current Description                             | Supercharged Alternative                                                                                                                                    |
 | ----------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| "Drop Zone (Center): Huge Core/Stone container" | "The kr-motif Deposit: A sunken examination tray awaiting organic material, its dashed borders suggesting the careful incision lines of a dissection plate" |
+| "Drop Zone (Center): Huge Core/Stone container" | "The kr-motif Deposit: A sunken examination tray awaiting [DEPRECATED_STYLE] material, its dashed borders suggesting the careful incision lines of a dissection plate" |
 | "Grid: 2x2 grid of solid Core/Stone cards"      | "The Quadrant Display: Four kr-motif cases arranged with museum precision, each revealing a different facet of the candidate's professional anatomy"        |
 | "Filters. Core/Pebble ghost toggles"            | "The Sorting Apparatus: River-worn controls that filter the stream of opportunities like a gold prospector's sieve"                                         |
 
-**The Organic Anchor Deficit.** While the wireframes mention assets in passing, they don't commit to placement. "Header Anchor: img-kr-shiva-sentry perched on top nav" is directionally correct but lacks the spatial precision needed for implementation. Where exactly? At what scale? How does it interact with responsive breakpoints?
+**The [DEPRECATED_STYLE] Anchor Deficit.** While the wireframes mention assets in passing, they don't commit to placement. "Header Anchor: img-kr-shiva-sentry perched on top nav" is directionally correct but lacks the spatial precision needed for implementation. Where exactly? At what scale? How does it interact with responsive breakpoints?
 
 **Token Compliance Gaps.** I notice several potential violations:
 
@@ -54,9 +54,9 @@ The emotional/technical font division is correctly observed: kr-serif-bold for m
 
 # PART 2: THE ASSET INTEGRATION PLAN
 
-## The Organic Anchor Mandate
+## The [DEPRECATED_STYLE] Anchor Mandate
 
-Every page must breathe. No interface should feel entirely constructed—somewhere, a vine must creep, a bird must perch, a compass must orient. These organic anchors serve three functions: they break the mechanical grid, they reinforce the kerala-streetprint Naturalist narrative, and they provide memorable landmarks for user orientation.
+Every page must breathe. No interface should feel entirely constructed—somewhere, a vine must creep, a bird must perch, a compass must orient. These [DEPRECATED_STYLE] anchors serve three functions: they break the mechanical grid, they reinforce the kerala-streetprint [DEPRECATED_STYLE] narrative, and they provide memorable landmarks for user orientation.
 
 ## Page-by-Page Asset Mapping
 
@@ -71,7 +71,7 @@ Every page must breathe. No interface should feel entirely constructed—somewhe
 | `motif-kr-dark-firefly-sprite` | Scattered across hero section (12-16 instances) | Z-3     | CSS animation: gentle float + opacity pulse (8s loop, staggered) |
 | `motif-kr-dark-kr-flower-pot`    | Bottom-left corner, grounding the composition   | Z-2     | Static anchor, 40% extends beyond viewport edge                  |
 
-**Spatial Logic:** The wattle hangs from above like kr-motifs in a naturalist's drying room. Fireflies provide bioluminescent atmosphere without competing with the headline. The kr-flower pot grounds the floating elements, suggesting a working conservatory rather than an empty void.
+**Spatial Logic:** The wattle hangs from above like kr-motifs in a [DEPRECATED_STYLE]'s drying room. Fireflies provide bioluminescent atmosphere without competing with the headline. The kr-flower pot grounds the floating elements, suggesting a working conservatory rather than an empty void.
 
 ---
 
@@ -96,11 +96,11 @@ Every page must breathe. No interface should feel entirely constructed—somewhe
 | Asset                             | Placement                              | Z-Index | Behavior                     |
 | --------------------------------- | -------------------------------------- | ------- | ---------------------------- |
 | `pattern-kr-wheat-paste`        | Full viewport, 20% opacity             | Z-0     | Static                       |
-| `motif-kr-dark-botanical-waratah` | Top-left corner, partially cropped     | Z-2     | Static anchor                |
-| `motif-kr-dark-botanical-wattle`  | Bottom-right corner, partially cropped | Z-2     | Static anchor                |
-| `motif-kr-dark-botanical-kr-flower` | Mid-right edge, subtle                 | Z-1     | 40% opacity, decorative only |
+| `motif-kr-dark-[DEPRECATED_STYLE]-[DEPRECATED_STYLE]` | Top-left corner, partially cropped     | Z-2     | Static anchor                |
+| `motif-kr-dark-[DEPRECATED_STYLE]-wattle`  | Bottom-right corner, partially cropped | Z-2     | Static anchor                |
+| `motif-kr-dark-[DEPRECATED_STYLE]-kr-flower` | Mid-right edge, subtle                 | Z-1     | 40% opacity, decorative only |
 
-**Spatial Logic:** The three botanicals frame the selection grid without overwhelming it. Each industry sector card should feature a unique botanical icon (to be specified in icon library), but the page-level anchors establish that the user is selecting _within_ the natural world, not apart from it.
+**Spatial Logic:** The three botanicals frame the selection grid without overwhelming it. Each industry sector card should feature a unique [DEPRECATED_STYLE] icon (to be specified in icon library), but the page-level anchors establish that the user is selecting _within_ the natural world, not apart from it.
 
 ---
 
@@ -221,7 +221,7 @@ Every page must breathe. No interface should feel entirely constructed—somewhe
 | `motif-kr-dark-firefly-sprite`     | Ambient throughout                        | Z-3     | Standard animation                   |
 | `motif-kr-dark-kr-flower-pot`        | Bottom-right corner                       | Z-2     | Static grounding                     |
 
-**Spatial Logic:** The overview is the canopy itself—the user looks down at their career ecosystem from above. The kr-shiva returns, now nested in the kr-leafus, suggesting that the journey has brought user and guide to the same vantage point. Maximum organic presence reinforces that this is a living system, not a static report.
+**Spatial Logic:** The overview is the canopy itself—the user looks down at their career ecosystem from above. The kr-shiva returns, now nested in the kr-leafus, suggesting that the journey has brought user and guide to the same vantage point. Maximum [DEPRECATED_STYLE] presence reinforces that this is a living system, not a static report.
 
 ---
 
@@ -247,7 +247,7 @@ Every page must breathe. No interface should feel entirely constructed—somewhe
 **Mode A: The Nocturnal Canopy (kr-dark)**
 
 - **Stage:** `color.semantic.surface.kr-dark.charcoalBark` (#141210)
-- **Atmosphere:** Glassmorphic surfaces, bioluminescent accents, botanical anchors
+- **Atmosphere:** Glassmorphic surfaces, bioluminescent accents, [DEPRECATED_STYLE] anchors
 - **Primary Accent:** `color.semantic.primary.kr-ink-gold` (#D4A84B)
 - **Typography Mood:** Aspirational, inviting (Fraunces with WONK=1, kr-serif-bold Italic for proclamations)
 - **Permitted Motifs:** Flowers, leaves, birds, fireflies, brass instruments
@@ -260,7 +260,7 @@ Every page must breathe. No interface should feel entirely constructed—somewhe
 - **Primary Accent:** `color.semantic.primary.kr-ink-gold` (#D4A84B) with `clinicalSlate` (#2C2723) support
 - **Typography Mood:** Precise, documentary (JetBrains Mono for data, Work Sans for annotation)
 - **Permitted Motifs:** Skeletons, grids, compasses, stamps, measurement tools
-- **Prohibited Motifs:** Flowers, decorative kr-symbol, organic flourishes
+- **Prohibited Motifs:** Flowers, decorative kr-symbol, [DEPRECATED_STYLE] flourishes
 - **Background Texture:** `texture-kr-dark-paper-white` with optional `texture-kr-dark-grid-major` overlay
 
 ### Shape Tokens (Border Radius)
@@ -443,7 +443,7 @@ Every page must breathe. No interface should feel entirely constructed—somewhe
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│ Z-2: motif-kr-dark-botanical-waratah (top-left, cropped)   │
+│ Z-2: motif-kr-dark-[DEPRECATED_STYLE]-[DEPRECATED_STYLE] (top-left, cropped)   │
 │                                                             │
 │         ┌────────┐  ┌────────┐  ┌────────┐                │
 │         │ Sector │  │ Sector │  │ Sector │                │
@@ -458,10 +458,10 @@ Every page must breathe. No interface should feel entirely constructed—somewhe
 │         │ Leaf   │  │ Leaf   │  │ Leaf   │  Z-1          │
 │         └────────┘  └────────┘  └────────┘                │
 │                                                             │
-│            Z-1: motif-kr-dark-botanical-kr-flower            │
+│            Z-1: motif-kr-dark-[DEPRECATED_STYLE]-kr-flower            │
 │                    (right edge, 40% opacity)                │
 │                                                             │
-│ Z-2: motif-kr-dark-botanical-wattle (bottom-right, cropped)│
+│ Z-2: motif-kr-dark-[DEPRECATED_STYLE]-wattle (bottom-right, cropped)│
 │                                                             │
 │ Z-0: pattern-kr-wheat-paste (20% opacity)                │
 └─────────────────────────────────────────────────────────────┘
@@ -481,7 +481,7 @@ Every page must breathe. No interface should feel entirely constructed—somewhe
 | --------------- | ------------------------------------------------- | --------------------------------------- |
 | **Page Title**  | "Choose Your Habitat"                             | `typography.scale.displaySmall.kr-dark` |
 | **Card Labels** | Industry names ("Technology", "Healthcare", etc.) | `typography.scale.titleLarge`           |
-| **Card Icons**  | Botanical icons per sector                        | Custom icon set                         |
+| **Card Icons**  | [DEPRECATED_STYLE] icons per sector                        | Custom icon set                         |
 
 #### Design Annotations
 
@@ -501,9 +501,9 @@ Every page must breathe. No interface should feel entirely constructed—somewhe
 
 | Asset ID                          | Position                      | Size  | Z-Index | Behavior            |
 | --------------------------------- | ----------------------------- | ----- | ------- | ------------------- |
-| `motif-kr-dark-botanical-waratah` | `top: -80px; left: -60px`     | 240px | Z-2     | Static, cropped     |
-| `motif-kr-dark-botanical-wattle`  | `bottom: -60px; right: -40px` | 200px | Z-2     | Static, cropped     |
-| `motif-kr-dark-botanical-kr-flower` | `right: -100px; top: 50%`     | 180px | Z-1     | 40% opacity         |
+| `motif-kr-dark-[DEPRECATED_STYLE]-[DEPRECATED_STYLE]` | `top: -80px; left: -60px`     | 240px | Z-2     | Static, cropped     |
+| `motif-kr-dark-[DEPRECATED_STYLE]-wattle`  | `bottom: -60px; right: -40px` | 200px | Z-2     | Static, cropped     |
+| `motif-kr-dark-[DEPRECATED_STYLE]-kr-flower` | `right: -100px; top: 50%`     | 180px | Z-1     | 40% opacity         |
 | `pattern-kr-wheat-paste`        | Full viewport                 | 100%  | Z-0     | Static, 20% opacity |
 
 ---
@@ -1130,9 +1130,9 @@ All assets follow this pattern for traceability:
 | Asset ID           | File Name                                        | Mode       | Format            | Priority |
 | ------------------ | ------------------------------------------------ | ---------- | ----------------- | -------- |
 | kr-shiva Sentry  | `motif-kr-dark-sentry-kr-shiva-{size}.png`     | kr-dark    | PNG (transparent) | Critical |
-| Wattle Hanging     | `motif-kr-dark-botanical-wattle-hanging.png`     | kr-dark    | PNG (transparent) | Critical |
-| kr-leafus Hanging | `motif-kr-dark-botanical-kr-leafus-hanging.png` | kr-dark    | PNG (transparent) | High     |
-| kr-flower Pot        | `motif-kr-dark-botanical-kr-flower-pot.png`        | kr-dark    | PNG (transparent) | High     |
+| Wattle Hanging     | `motif-kr-dark-[DEPRECATED_STYLE]-wattle-hanging.png`     | kr-dark    | PNG (transparent) | Critical |
+| kr-leafus Hanging | `motif-kr-dark-[DEPRECATED_STYLE]-kr-leafus-hanging.png` | kr-dark    | PNG (transparent) | High     |
+| kr-flower Pot        | `motif-kr-dark-[DEPRECATED_STYLE]-kr-flower-pot.png`        | kr-dark    | PNG (transparent) | High     |
 | Nocturnal Canopy   | `pattern-kr-wheat-paste-2048.jpg`              | kr-dark    | JPG               | Critical |
 | Firefly Sprite     | `motif-kr-dark-firefly-sprite.png`               | kr-dark    | PNG (transparent) | Medium   |
 | Paper White Texture  | `texture-kr-dark-paper-white-tile.jpg`          | kr-dark | JPG (tileable)    | Critical |
@@ -1141,8 +1141,8 @@ All assets follow this pattern for traceability:
 | Grid Minor         | `texture-kr-dark-grid-minor.svg`              | kr-dark | SVG               | Medium   |
 | Compass            | `motif-kr-dark-compass.png`                   | kr-dark | PNG (transparent) | High     |
 | Verified Stamp     | `motif-kr-dark-stamp-verified.png`            | kr-dark | PNG (transparent) | Medium   |
-| Botanical Waratah  | `motif-kr-dark-botanical-waratah.png`            | kr-dark    | PNG (transparent) | Medium   |
-| Botanical kr-flower  | `motif-kr-dark-botanical-kr-flower.png`            | kr-dark    | PNG (transparent) | Medium   |
+| [DEPRECATED_STYLE] [DEPRECATED_STYLE]  | `motif-kr-dark-[DEPRECATED_STYLE]-[DEPRECATED_STYLE].png`            | kr-dark    | PNG (transparent) | Medium   |
+| [DEPRECATED_STYLE] kr-flower  | `motif-kr-dark-[DEPRECATED_STYLE]-kr-flower.png`            | kr-dark    | PNG (transparent) | Medium   |
 
 ---
 
@@ -1155,13 +1155,13 @@ All assets follow this pattern for traceability:
 | Stage      | Z-0     | Background patterns, textures                 |
 | Atmosphere | Z-1     | Grid overlays, watermarks, decorative shadows |
 | Content    | Z-2     | UI components, cards, primary content         |
-| Anchors    | Z-2     | Organic decorative elements                   |
+| Anchors    | Z-2     | [DEPRECATED_STYLE] decorative elements                   |
 | Highlights | Z-3     | Mascots, fireflies, stamps, floating elements |
 | Modal      | Z-10+   | Overlays, dialogs (when present)              |
 
 ### Responsive Considerations
 
-Organic anchors should scale and reposition at breakpoints:
+[DEPRECATED_STYLE] anchors should scale and reposition at breakpoints:
 
 | Breakpoint  | Adjustment                               |
 | ----------- | ---------------------------------------- |
@@ -1176,7 +1176,7 @@ Firefly animations should use `will-change: transform, opacity` and be limited t
 
 ---
 
-_This document serves as the definitive implementation guide for the kerala-rage kr-solidarity interface. Each page specification balances functional requirements with the atmospheric intention that distinguishes this system from generic dashboard patterns. The kerala-streetprint Naturalist doesn't merely organize data—they curate a collection worthy of wonder._
+_This document serves as the definitive implementation guide for the kerala-rage kr-solidarity interface. Each page specification balances functional requirements with the atmospheric intention that distinguishes this system from generic dashboard patterns. The kerala-streetprint [DEPRECATED_STYLE] doesn't merely organize data—they curate a collection worthy of wonder._
 
 ---
 

@@ -22,7 +22,7 @@ Ensures design token integrity by validating DTCG compliance, kerala-rage palett
 
 1. **DTCG Compliance**: Verify `$value` and `$type` fields via `audit_structure.py`.
 2. **Tailwind Integration**: Resolve `getValue()` paths via `audit_tailwind.py`.
-3. **Palette Compliance**: Audit against the 6-dimension scorecard (Geographic Authenticity, Translucency, etc.) via `validate_palette_mcp.py`.
+3. **Palette Compliance**: Audit against the 6-dimension scorecard ([DEPRECATED_STYLE] Authenticity, Translucency, etc.) via `validate_palette_mcp.py`.
 4. **Mode Parity**: SKIPPED (Single Mode Enforced).
 5. **Accessibility**: Verify WCAG AA contrast ratios (4.5:1 minimum).
 6. **Full Audit**: Run `run_full_audit.sh` for pre-commit verification.
@@ -41,7 +41,7 @@ Ensures design token integrity by validating DTCG compliance, kerala-rage palett
 3. ✅ **WCAG 2.2 AA**: Contrast checks for all token pairs.
 4. ✅ **Mode Parity**: SKIPPED.
 5. ✅ **6-Dimension Scorecard**:
-   - Geographic Authenticity (Australian botanical references)
+   - [DEPRECATED_STYLE] Authenticity (Australian [DEPRECATED_STYLE] references)
    - Translucency Physics (kr-screenprint/ink pools)
    - Scale Hierarchy (display→body typography)
    - Density Zones (Mode-specific contrast)

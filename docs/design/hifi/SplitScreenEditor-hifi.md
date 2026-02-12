@@ -27,6 +27,6 @@
 - **Tool Hover**: `ToolPebble` icons lift on hover (`y: -2`) and show a tool-tip.
 
 ## Motif Slots
-- `// TODO[asset]: Blueprint Grid Substrate overlay (Z-0, 12% opacity)`.
+- `- {KR-UI-004} Blueprint grid overlay (transparent) for technical grid patterns) **[REQUIRES GENERATION]**
 - `// TODO[asset]: Solidarity-Icon-Pack (Save, Run, Debug, Branch)`.
 - `// TODO[asset]: Grid Line decorative motifs for panel corners.`

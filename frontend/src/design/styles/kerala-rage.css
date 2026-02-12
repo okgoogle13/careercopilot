@@ -4,17 +4,18 @@
  * kerala-streetprint Naturalist Field Station Design System V3.1 (EXPRESSIVE MAXIMALISM)
  * ═══════════════════════════════════════════════════════════════════════════
  *
- * 🎭 CURATOR'S HAND (Caveat)        — Hero Accents, Annotations (NEW V3.1)
- * 🏛️ PROCLAMATION   (kr-serif-bold)  — kr-dark Headers, Hero Moments
+ * 🎭 CURATOR'S HAND (Caveat)        — Hero Accents, Annotations
+ * 🏛️ PROCLAMATION   (Libre Bodoni) — kr-dark Headers, Hero Moments
  * 🌸 BLOOM         (Fraunces)       — Sub-headers, Emotional Accents
  * 📝 FIELD NOTE    (Work Sans)      — Body Text, UI Elements
  * 🔬 ANNOTATION    (JetBrains Mono) — kr-dark Data, Technical Precision
+ * 🌈 HERO ACCENT   (Nabla)          — DASHBOARD HERO ONLY
  *
- * ANTI-SLOP PROTOCOL: NO Inter, NO Plus Jakarta Sans, NO Roboto, NO Arial
+ * ANTI-SLOP PROTOCOL: NO Inter, NO Recursive, NO Sora, NO Plus Jakarta Sans
  * ═══════════════════════════════════════════════════════════════════════════
  */
 
-@import url('https://fonts.googleapis.com/css2?family=Libre+Bodoni:ital,wght@0,400;0,700;1,400;1,700&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1;1,9..144,100..900,0..100,0..1&family=Work+Sans:ital,wght@0,100..900;1,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Caveat:wght@400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Libre+Bodoni:ital,wght@0,400;0,700;1,400;1,700&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1;1,9..144,100..900,0..100,0..1&family=Work+Sans:ital,wght@0,100..900;1,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Caveat:wght@400..700&family=Nabla&display=swap');
 
 @import 'tailwindcss';
 @config "../../../tailwind.config.ts";
@@ -38,22 +39,11 @@
   --color-solidarity-red-dark: #a64536;
   --color-solidarity-red-darkest: #873023;
   --color-solidarity-red: #c45c4b;
-  --color-concrete-grey-lightest: #4a433d;
-  --color-concrete-grey-light: #3d3632;
-  --color-concrete-grey-base: #2c2723;
-  --color-concrete-grey-dark: #1f1b18;
-  --color-concrete-grey-darkest: #120f0d;
-  --color-concrete-grey: #2c2723;
   --color-concrete-grey-lightest: #f5f2ea;
   --color-concrete-grey-light: #eeebe3;
   --color-concrete-grey-base: #e6e1d6;
   --color-concrete-grey-dark: #d1c9b8;
   --color-concrete-grey-darkest: #bdb39f;
-  --color-concrete-grey: #e6e1d6;
-  --color-asphalt-black: #1a1714;
-  --color-ink-gold: #d4a84b;
-  --color-solidarity-red: #c45c4b;
-  --color-concrete-grey: #2c2723;
   --color-concrete-grey: #e6e1d6;
   --color-paper-white: #f0ead6;
   --spacing-xs: 4px;
@@ -82,10 +72,11 @@
 
   /* V3.1 Typography Variables */
   --font-curator: 'Caveat', cursive;
-  --font-proclamation: 'kr-serif-bold', serif;
+  --font-proclamation: 'Libre Bodoni', serif;
   --font-bloom: 'Fraunces', serif;
   --font-field-note: 'Work Sans', sans-serif;
   --font-annotation: 'JetBrains Mono', monospace;
+  --font-hero: 'Nabla', system-ui;
 
   /* M3 Expressive Typography Variables */
   --sys-type-axes-authoritative: 'wght' 800, 'wdth' 120, 'XTRA' 468, 'GRAD' 0;
@@ -104,15 +95,10 @@
   --duration-standard: 300ms;
 }
 
-/* Mode-specific Fraunces axis configurations */
-[data-mode="KrDark"] {
+/* Standard Solidarity Mode axis configurations */
+:root {
   --type-default: var(--type-energetic);
   --wallpaper-opacity: 0.65;
-}
-
-[data-mode="KrLight"] {
-  --type-default: var(--type-restrained);
-  --wallpaper-opacity: 0.05;
 }
 
 /* Enable optical sizing for all fonts */
@@ -255,7 +241,7 @@
 
   .text-hero,
   .text-proclamation {
-    font-family: 'kr-serif-bold', 'Playfair Display', serif;
+    font-family: 'Libre Bodoni', serif;
     font-weight: 700;
     font-stretch: condensed;
     letter-spacing: -0.03em;
@@ -265,7 +251,7 @@
   }
 
   .text-proclamation-large {
-    font-family: 'kr-serif-bold', 'Playfair Display', serif;
+    font-family: 'Libre Bodoni', serif;
     font-weight: 900;
     font-stretch: condensed;
     letter-spacing: -0.03em;
@@ -368,6 +354,19 @@
     transform: rotate(5deg);
     display: inline-block;
     color: var(--color-concrete-grey-dark);
+  }
+
+  @font-palette-values --nabla-solidarity {
+    font-family: Nabla;
+    base-palette: 0;
+  }
+
+  .text-nabla-hero {
+    font-family: var(--font-hero);
+    font-palette: --nabla-solidarity;
+    font-size: clamp(3rem, 10vw, 8rem);
+    text-align: center;
+    line-height: 1;
   }
 
   /* ═══════════════════════════════════════════════════════════════════════

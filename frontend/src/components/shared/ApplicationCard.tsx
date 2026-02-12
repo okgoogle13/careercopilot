@@ -17,7 +17,7 @@ import { StatusBadge, type StatusBadgeVariant } from '../ui/StatusBadge';
  * Displays job application information with a multi-step progress indicator.
  *
  * **KeralaRage KrSolidarity V3.1 Usage:**
- * - Shape: `rounded-pebble` → Organic asymmetric corners ✅
+ * - Shape: `rounded-pebble` → [DEPRECATED_STYLE] asymmetric corners ✅
  * - Elevation: `shadow-standard` → `shadow-maximum` on hover
  * - Typography: `text-bloom-KrDark` (SOFT=100) for titles
  * - Annotations: `text-curator-annotation` for curator notes

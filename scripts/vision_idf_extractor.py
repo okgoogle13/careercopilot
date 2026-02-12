@@ -35,8 +35,8 @@ except ImportError:
 COLOR_TOKEN_MAP = {
     "#D4A84B": "wattle-gold",
     "#d4a84b": "wattle-gold",
-    "#C45C4B": "waratah-red",
-    "#c45c4b": "waratah-red",
+    "#C45C4B": "[DEPRECATED_STYLE]-red",
+    "#c45c4b": "[DEPRECATED_STYLE]-red",
     "#B8733D": "ochre-earth",
     "#b8733d": "ochre-earth",
     "#7A9E82": "gum-leaf-green",
@@ -57,7 +57,7 @@ KR_MOTIFS_WHITELIST = {
     "eucalyptus leaf",
     "leaf",
     "leaves",
-    "waratah",
+    "[DEPRECATED_STYLE]",
     "banksia",
     "fern",
     "native fern",
@@ -66,7 +66,7 @@ KR_MOTIFS_WHITELIST = {
     "flying fox",
     "lichen",
     "moss",
-    "botanical",
+    "[DEPRECATED_STYLE]",
     "flora",
     "plant",
     "flower",
@@ -168,7 +168,7 @@ def filter_kr_motifs(labels: List[str]) -> List[str]:
     # Deduplicate and limit
     kr_motifs = list(dict.fromkeys(kr_motifs))[:5]  # Max 5 motifs
 
-    return kr_motifs or ["botanical"]  # Fallback
+    return kr_motifs or ["[DEPRECATED_STYLE]"]  # Fallback
 
 
 def map_colors_to_tokens(colors_dict: Dict[str, str]) -> Dict[str, List[str]]:
@@ -193,8 +193,8 @@ def infer_purpose(labels: List[str]) -> str:
 
     if any(word in text for word in ["background", "texture", "pattern", "tile"]):
         return "background-texture"
-    elif any(word in text for word in ["landscape", "scenery", "nature", "botanical"]):
-        return "botanical-accent"
+    elif any(word in text for word in ["landscape", "scenery", "nature", "[DEPRECATED_STYLE]"]):
+        return "[DEPRECATED_STYLE]-accent"
     elif any(word in text for word in ["abstract", "geometric", "shape"]):
         return "decorative-motif"
     else:
@@ -220,7 +220,7 @@ def extract_idf_from_image(image_path: str, client: Optional[vision.ImageAnnotat
             "kr_motifs": ["wattle", "leaf"],
             "dimensions": {"width": 1024, "height": 1024, "format": "PNG"},
             "mode": "kr-dark",
-            "purpose": "botanical-accent",
+            "purpose": "[DEPRECATED_STYLE]-accent",
             "confidence": 0.85
         }
     """
@@ -271,7 +271,7 @@ def extract_idf_from_image(image_path: str, client: Optional[vision.ImageAnnotat
         # Return safe fallback
         return {
             "colors": {"primary": ["wattle-gold"], "secondary": ["asphalt-black"]},
-            "kr_motifs": ["botanical"],
+            "kr_motifs": ["[DEPRECATED_STYLE]"],
             "dimensions": get_image_dimensions(image_path),
             "mode": "kr-dark",
             "purpose": "general-background",

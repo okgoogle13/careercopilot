@@ -151,8 +151,12 @@
   --md-sys-color-aboriginalFlagBlack-steps-4: #2A2A2A;
   --md-sys-color-aboriginalFlagBlack-usage-0: inSituPlacardsOnly;
   --md-sys-color-aboriginalFlagBlack-usage-1: solidarityPostersOnly;
-  --md-sys-type-fontFamilies-primary: Inter Variable;
-  --md-sys-type-fontFamilies-display: Recursive Variable;
+  --md-sys-type-fontFamilies-primary: Work Sans;
+  --md-sys-type-fontFamilies-display: Fraunces;
+  --md-sys-type-fontFamilies-proclamation: Libre Bodoni;
+  --md-sys-type-fontFamilies-mono: JetBrains Mono;
+  --md-sys-type-fontFamilies-curator: Caveat;
+  --md-sys-type-fontFamilies-colorAccent: Nabla;
   --md-sys-type-globalSettings-fontOpticalSizing: auto;
   --md-sys-type-scale-micro: 8px;
   --md-sys-type-scale-small: 12px;
@@ -201,9 +205,9 @@
   --md-sys-motion-patterns-waterRipple-usage: Houseboat sections, ripple highlights, calm transitions.;
   --md-sys-motion-patterns-melancholyBreath-duration: 4000ms;
   --md-sys-motion-patterns-melancholyBreath-usage: Oscillate wght slightly (450–500) and opacity subtly for reflective text.;
-  --md-sys-shape-organicCardA: 42% 58% 45% 55% / 48% 62% 38% 52%;
-  --md-sys-shape-organicCardB: 48% 52% 58% 42% / 55% 45% 60% 40%;
-  --md-sys-shape-organicButton: 16px 8px 12px 20px;
+  --md-sys-shape-radius-stone: 42% 58% 45% 55% / 48% 62% 38% 52%;
+  --md-sys-shape-radius-slab: 48% 52% 58% 42% / 55% 45% 60% 40%;
+  --md-sys-shape-radius-pebble: 16px 8px 12px 20px;
   --md-sys-shape-sentryAvatar: 98%;
   --md-sys-shape-tornEdgeClipPath: polygon(0% 10px, 5% 0px, 10% 8px, 15% 2px, 20% 6px, 25% 0px, 30% 8px, 35% 2px, 40% 6px, 45% 0px, 50% 8px, 55% 2px, 60% 6px, 65% 0px, 70% 8px, 75% 2px, 80% 6px, 85% 0px, 90% 8px, 95% 2px, 100% 6px, 100% 100%, 0% 100%);
   --md-sys-shadow-elevation1Pebble: 0 2px 4px rgba(0, 0, 0, 0.25);

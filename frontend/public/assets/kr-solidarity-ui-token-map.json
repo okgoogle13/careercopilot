@@ -1,6 +1,6 @@
 {
-  "version": "1.0.0",
-  "updated": "2026-02-12T02:59:37+11:00",
+  "version": "1.0.1",
+  "updated": "2026-02-12T02:23:12.494Z",
   "description": "Central mapping file resolving both KR-SOLID assets and future KR-UI assets",
   "tokens": {
     "kr-asset-screenprint-substrate": {
@@ -29,9 +29,9 @@
     },
     "kr-asset-screenprint-grit": {
       "ref": "KR-UI-003",
-      "path": null,
+      "path": "/frontend/public/assets/ui-kit/screenprint-grit.png",
       "type": "ui-kit",
-      "status": "planned",
+      "status": "ready",
       "description": "Screenprint grit particles (tile + sprite set) for floating texture"
     },
     "kr-asset-charcoal-paper": {
@@ -50,9 +50,9 @@
     },
     "kr-asset-halo-disk": {
       "ref": "KR-UI-002",
-      "path": null,
+      "path": "/frontend/public/assets/ui-kit/halo-disk.png",
       "type": "ui-kit",
-      "status": "planned",
+      "status": "ready",
       "description": "Halo disk (plain + gauge version) for radiant circle elements"
     },
     "kr-asset-blueprint-grid": {
@@ -96,6 +96,246 @@
       "type": "ui-kit",
       "status": "planned",
       "description": "Alias for screenprint-stamp - verification stamp"
+    },
+    "kr-asset-abstract-abstract-solidarity": {
+      "ref": "KR-SOLID-001",
+      "path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity__v1.png",
+      "type": "kr-solidarity",
+      "status": "ready",
+      "layer": "atmospheric",
+      "description": "Abstract -solidarity"
+    },
+    "kr-asset-abstract-abstract-solidarity-chatgpt-image-f": {
+      "ref": "KR-SOLID-002",
+      "path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-chatgpt-image-f__v1.png",
+      "type": "kr-solidarity",
+      "status": "ready",
+      "layer": "atmospheric",
+      "description": "Abstract -solidarity-chatgpt-image-f"
+    },
+    "kr-asset-abstract-abstract-solidarity-dalle-2026-01-": {
+      "ref": "KR-SOLID-003",
+      "path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-dalle-2026-01-__v1.png",
+      "type": "kr-solidarity",
+      "status": "ready",
+      "layer": "atmospheric",
+      "description": "Abstract -solidarity-dalle-2026-01-"
+    },
+    "kr-asset-abstract-abstract-solidarity-gemini-generate": {
+      "ref": "KR-SOLID-004",
+      "path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-gemini-generate__v1.png",
+      "type": "kr-solidarity",
+      "status": "ready",
+      "layer": "atmospheric",
+      "description": "Abstract -solidarity-gemini-generate"
+    },
+    "kr-asset-abstract-abstract-solidarity-kerala-rage-bee": {
+      "ref": "KR-SOLID-005",
+      "path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-kerala-rage-bee__v1.png",
+      "type": "kr-solidarity",
+      "status": "ready",
+      "layer": "atmospheric",
+      "description": "Abstract -solidarity-kerala-rage-bee"
+    },
+    "kr-asset-abstract-abstract-solidarity-kerala-rage-bra": {
+      "ref": "KR-SOLID-006",
+      "path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-kerala-rage-bra__v1.png",
+      "type": "kr-solidarity",
+      "status": "ready",
+      "layer": "atmospheric",
+      "description": "Abstract -solidarity-kerala-rage-bra"
+    },
+    "kr-asset-abstract-abstract-solidarity-kerala-rage-fly": {
+      "ref": "KR-SOLID-007",
+      "path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-kerala-rage-fly__v1.png",
+      "type": "kr-solidarity",
+      "status": "ready",
+      "layer": "atmospheric",
+      "description": "Abstract -solidarity-kerala-rage-fly"
+    },
+    "kr-asset-abstract-abstract-solidarity-kerala-rage-fri": {
+      "ref": "KR-SOLID-008",
+      "path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-kerala-rage-fri__v1.png",
+      "type": "kr-solidarity",
+      "status": "ready",
+      "layer": "atmospheric",
+      "description": "Abstract -solidarity-kerala-rage-fri"
+    },
+    "kr-asset-abstract-abstract-solidarity-kerala-rage-gri": {
+      "ref": "KR-SOLID-009",
+      "path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-kerala-rage-gri__v1.png",
+      "type": "kr-solidarity",
+      "status": "ready",
+      "layer": "atmospheric",
+      "description": "Abstract -solidarity-kerala-rage-gri"
+    },
+    "kr-asset-abstract-abstract-solidarity-kerala-rage-kr-": {
+      "ref": "KR-SOLID-010",
+      "path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-kerala-rage-kr-__v1.png",
+      "type": "kr-solidarity",
+      "status": "ready",
+      "layer": "atmospheric",
+      "description": "Abstract -solidarity-kerala-rage-kr-"
+    },
+    "kr-asset-abstract-abstract-solidarity-kerala-rage-rad": {
+      "ref": "KR-SOLID-012",
+      "path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-kerala-rage-rad__v1.png",
+      "type": "kr-solidarity",
+      "status": "ready",
+      "layer": "atmospheric",
+      "description": "Abstract -solidarity-kerala-rage-rad"
+    },
+    "kr-asset-abstract-abstract-solidarity-kerala-rage-sea": {
+      "ref": "KR-SOLID-013",
+      "path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-kerala-rage-sea__v1.png",
+      "type": "kr-solidarity",
+      "status": "ready",
+      "layer": "atmospheric",
+      "description": "Abstract -solidarity-kerala-rage-sea"
+    },
+    "kr-asset-abstract-abstract-solidarity-kerala-rage-sen": {
+      "ref": "KR-SOLID-014",
+      "path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-kerala-rage-sen__v1.png",
+      "type": "kr-solidarity",
+      "status": "ready",
+      "layer": "atmospheric",
+      "description": "Abstract -solidarity-kerala-rage-sen"
+    },
+    "kr-asset-abstract-abstract-solidarity-kerala-rage-wat": {
+      "ref": "KR-SOLID-015",
+      "path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-kerala-rage-wat__v1.png",
+      "type": "kr-solidarity",
+      "status": "ready",
+      "layer": "atmospheric",
+      "description": "Abstract -solidarity-kerala-rage-wat"
+    },
+    "kr-asset-abstract-abstract-solidarity-kr-solid-013": {
+      "ref": "KR-SOLID-016",
+      "path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-kr-solid-013__v1.png",
+      "type": "kr-solidarity",
+      "status": "ready",
+      "layer": "atmospheric",
+      "description": "Abstract -solidarity-kr-solid-013"
+    },
+    "kr-asset-abstract-abstract-solidarity-kr-solid-014": {
+      "ref": "KR-SOLID-017",
+      "path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-kr-solid-014__v1.png",
+      "type": "kr-solidarity",
+      "status": "ready",
+      "layer": "atmospheric",
+      "description": "Abstract -solidarity-kr-solid-014"
+    },
+    "kr-asset-abstract-abstract-solidarity-moodboard-12-ti": {
+      "ref": "KR-SOLID-018",
+      "path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-moodboard-12-ti__v1.png",
+      "type": "kr-solidarity",
+      "status": "ready",
+      "layer": "atmospheric",
+      "description": "Abstract -solidarity-moodboard-12-ti"
+    },
+    "kr-asset-abstract-paint-splash-v1": {
+      "ref": "KR-SOLID-019",
+      "path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__kr-solidarity--abstract--paint-splash--v1__v1.png",
+      "type": "kr-solidarity",
+      "status": "ready",
+      "layer": "atmospheric",
+      "description": "Paint-splash V1"
+    },
+    "kr-asset-devotional-devotional-cultural-anchor": {
+      "ref": "KR-SOLID-020",
+      "path": "/assets/kr-solidarity/devotional/kr-solidarity__devotional__devotional---cultural-anchor__v1.png",
+      "type": "kr-solidarity",
+      "status": "ready",
+      "layer": "spiritual",
+      "description": "Devotional -cultural-anchor"
+    },
+    "kr-asset-devotional-shiva-statue-v1": {
+      "ref": "KR-SOLID-021",
+      "path": "/assets/kr-solidarity/devotional/kr-solidarity__devotional__kr-solidarity--devotional--shiva-statue--v1__v1.png",
+      "type": "kr-solidarity",
+      "status": "ready",
+      "layer": "spiritual",
+      "description": "Shiva-statue V1"
+    },
+    "kr-asset-devotional-shiva-statue-street-v1": {
+      "ref": "KR-SOLID-022",
+      "path": "/assets/kr-solidarity/devotional/kr-solidarity__devotional__kr-solidarity--devotional--shiva-statue-street--v1__v1.png",
+      "type": "kr-solidarity",
+      "status": "ready",
+      "layer": "spiritual",
+      "description": "Shiva-statue-street V1"
+    },
+    "kr-asset-devotional-shiva-urban-protest-v1": {
+      "ref": "KR-SOLID-023",
+      "path": "/assets/kr-solidarity/devotional/kr-solidarity__devotional__kr-solidarity--devotional--shiva-urban-protest--v1__v1.png",
+      "type": "kr-solidarity",
+      "status": "ready",
+      "layer": "spiritual",
+      "description": "Shiva-urban-protest V1"
+    },
+    "kr-asset-portrait-bhagat-singh-v1": {
+      "ref": "KR-SOLID-024",
+      "path": "/assets/kr-solidarity/portrait/kr-solidarity__portrait__kr-solidarity--portrait--bhagat-singh--v1__v1.png",
+      "type": "kr-solidarity",
+      "status": "ready",
+      "layer": "resistance",
+      "description": "Bhagat-singh V1"
+    },
+    "kr-asset-portrait-portrait-resistance-history": {
+      "ref": "KR-SOLID-025",
+      "path": "/assets/kr-solidarity/portrait/kr-solidarity__portrait__portrait---resistance-history__v1.png",
+      "type": "kr-solidarity",
+      "status": "ready",
+      "layer": "resistance",
+      "description": "Portrait -resistance-history"
+    },
+    "kr-asset-portrait-tipu-sultan-v1": {
+      "ref": "KR-SOLID-026",
+      "path": "/assets/kr-solidarity/portrait/kr-solidarity__portrait__kr-solidarity--portrait--tipu-sultan--v1__v1.png",
+      "type": "kr-solidarity",
+      "status": "ready",
+      "layer": "resistance",
+      "description": "Tipu-sultan V1"
+    },
+    "kr-asset-portrait-turbaned-man-v1": {
+      "ref": "KR-SOLID-027",
+      "path": "/assets/kr-solidarity/portrait/kr-solidarity__portrait__kr-solidarity--portrait--turbaned-man--v1__v1.png",
+      "type": "kr-solidarity",
+      "status": "ready",
+      "layer": "resistance",
+      "description": "Turbaned-man V1"
+    },
+    "kr-asset-street-first-nations-placard-v1": {
+      "ref": "KR-SOLID-028",
+      "path": "/assets/kr-solidarity/street/kr-solidarity__street__kr-solidarity--street--first-nations-placard--v1__v1.png",
+      "type": "kr-solidarity",
+      "status": "ready",
+      "layer": "resistance",
+      "description": "First-nations-placard V1"
+    },
+    "kr-asset-street-treaty-now-poster-v1": {
+      "ref": "KR-SOLID-030",
+      "path": "/assets/kr-solidarity/street/kr-solidarity__street__kr-solidarity--street--treaty-now-poster--v1__v1.png",
+      "type": "kr-solidarity",
+      "status": "ready",
+      "layer": "resistance",
+      "description": "Treaty-now-poster V1"
+    },
+    "kr-asset-symbol-kerala-elephant-v1": {
+      "ref": "KR-SOLID-031",
+      "path": "/assets/kr-solidarity/symbol/kr-solidarity__symbol__kr-solidarity--symbol--kerala-elephant--v1__v1.png",
+      "type": "kr-solidarity",
+      "status": "ready",
+      "layer": "cultural",
+      "description": "Kerala-elephant V1"
+    },
+    "kr-asset-symbol-kerala-landscape-v1": {
+      "ref": "KR-SOLID-032",
+      "path": "/assets/kr-solidarity/symbol/kr-solidarity__symbol__kr-solidarity--symbol--kerala-landscape--v1__v1.png",
+      "type": "kr-solidarity",
+      "status": "ready",
+      "layer": "cultural",
+      "description": "Kerala-landscape V1"
     }
   },
   "ui_kit_gaps": [

@@ -6,7 +6,7 @@ import { ManifestoSlab, SolidarityCard, ActionButton } from '../../../components
  * KrDarkApplication (Hi-Fi)
  * 
  * Formal engagement submission flow.
- * Features multi-step induction logic, drafting aesthetics, and botanical motivation prompts.
+ * Features multi-step induction logic, drafting aesthetics, and [DEPRECATED_STYLE] motivation prompts.
  */
 export const KrDarkApplication: React.FC = () => {
   const shouldReduceMotion = useReducedMotion() ?? false;

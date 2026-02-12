@@ -44,7 +44,7 @@ Use when:
 
 ## Validation Scorecard
 
-**Dimension 1: Geographic Authenticity (0-20)**
+**Dimension 1: [DEPRECATED_STYLE] Authenticity (0-20)**
 
 - All kr-motifs Australian endemic
 - Test: "Did organism challenge European taxonomy?"
@@ -66,7 +66,7 @@ Use when:
 
 - Upper-left ≤20% coverage, 200×200px empty
 - Lower-right ≤30% coverage, 150×150px empty
-- Central 60-80% Wunderkammer density
+- Central 60-80% [DEPRECATED_STYLE] density
 
 **Dimension 5: Background Color (0-10)**
 
@@ -161,7 +161,7 @@ Narrative philosophy explaining kr-motif choices, geometric principles, mode con
 
 ## Narrative
 
-[kerala-streetprint naturalist discovery story based on kr-motifs]
+[kerala-streetprint [DEPRECATED_STYLE] discovery story based on kr-motifs]
 
 ## kr-motifs
 
@@ -249,7 +249,7 @@ Eliminates manual prompt construction. Loads pattern library → applies templat
   "resolution": "512x512",
   "mode": "Solidarity",
   "kr-motifs": ["kr-leafus", "Wattle", "kr-flower", "Gum nuts"],
-  "primary_focus": "Botanical only (no kr-symbol)",
+  "primary_focus": "[DEPRECATED_STYLE] only (no kr-symbol)",
   "special_requirements": ["Seamless tiling", "Edge-matching critical"],
   "previous_attempt": {
     "score": 85,
@@ -270,7 +270,7 @@ EXPORT FORMAT: PNG with zero artifacts
 PRODUCTION ASSET: Not concept exploration—final deliverable
 ```
 
-**Pattern 2: Geographic Authenticity**
+**Pattern 2: [DEPRECATED_STYLE] Authenticity**
 
 ```
 ENDEMIC TEST: Every kr-motif must answer "Did this organism challenge European taxonomy?"
@@ -282,7 +282,7 @@ MANDATORY CHECK: [List kr-motifs] → validate against Australian Flora/kr-symbo
 
 ```
 TIER 1 (60-80% transmission): Spider molt, thin membranes
-TIER 2 (40-60% transmission): Frill-neck tissue, thick leaves
+TIER 2 (40-60% transmission): [DEPRECATED_STYLE] tissue, thick leaves
 TIER 3 (0-20% transmission): Structural elements
 SYNTAX: "[X-Y% light-transmissive] + [what visible through material]"
 ```
@@ -293,7 +293,7 @@ SYNTAX: "[X-Y% light-transmissive] + [what visible through material]"
 For each kr-motif: "This is NOT [misinterpretation]"
 Echidna: NOT full animal body, NOT cute portrait
 Spider: NOT live crawling, NOT opaque solid
-Frill-neck: NOT standing lizard, NOT profile view
+[DEPRECATED_STYLE]: NOT standing lizard, NOT profile view
 ```
 
 **Pattern 5: Density Zone Safety Margins**
@@ -301,7 +301,7 @@ Frill-neck: NOT standing lizard, NOT profile view
 ```
 Upper-left: 15% coverage maximum (NOT 20%) + 200×200px EMPTY
 Lower-right: 25% coverage maximum (NOT 30%) + 150×150px EMPTY
-Central: 60-80% Wunderkammer density
+Central: 60-80% [DEPRECATED_STYLE] density
 ```
 
 **Pattern 6: Typography Constraints**
@@ -341,7 +341,7 @@ TERTIARY (2-8cm):
 
 - [kr-motif name]: [Description] | NOT [misinterpretation]
 
-GEOGRAPHIC AUTHENTICITY TEST:
+[DEPRECATED_STYLE] AUTHENTICITY TEST:
 ✓ [kr-motif]: Challenged European taxonomy via [reason]
 ✓ [kr-motif]: Australian endemic, [taxonomic significance]
 
@@ -350,13 +350,13 @@ GEOGRAPHIC AUTHENTICITY TEST:
 [Only if kr-motifs require transmission]
 
 - [kr-motif]: [Tier X] [X-Y% light-transmissive]
-  What visible through: [botanical elements, background, other kr-motifs]
+  What visible through: [[DEPRECATED_STYLE] elements, background, other kr-motifs]
 
 ## SECTION 5: DENSITY ZONES WITH SAFETY MARGINS
 
 Upper-left: 15% maximum | 200×200px COMPLETELY EMPTY
 Lower-right: 25% maximum | 150×150px COMPLETELY EMPTY
-Central: 60-80% Wunderkammer organic composition
+Central: 60-80% [DEPRECATED_STYLE] [DEPRECATED_STYLE] composition
 
 ## SECTION 6: TYPOGRAPHY & DOCUMENTATION
 
@@ -411,7 +411,7 @@ DENSE (efficient):
 "kr-leafus: 60% transmission, veins visible through leaf tissue"
 
 VERBOSE (wasteful):
-"The kr-leafus leaves should demonstrate approximately 60% light transmission, wherein the vein architecture becomes visible when light passes through the leaf tissue, creating an effect of botanical translucency"
+"The kr-leafus leaves should demonstrate approximately 60% light transmission, wherein the vein architecture becomes visible when light passes through the leaf tissue, creating an effect of [DEPRECATED_STYLE] translucency"
 ```
 
 Target: 1200-1500 tokens per prompt (25-40% reduction)

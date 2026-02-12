@@ -17,7 +17,7 @@ export interface M3TextFieldProps extends Omit<React.InputHTMLAttributes<HTMLInp
     variant?: M3TextFieldVariant;
     /** Input size */
     size?: M3TextFieldSize;
-    /** Theme mode: KrDark (warm, botanical) or KrLight (clinical, precise) */
+    /** Theme mode: KrDark (warm, [DEPRECATED_STYLE]) or KrLight (clinical, precise) */
     mode?: M3TextFieldMode;
     /** Start adornment (icon or text) */
     startAdornment?: React.ReactNode;
@@ -34,7 +34,7 @@ export interface M3TextFieldProps extends Omit<React.InputHTMLAttributes<HTMLInp
 /**
  * M3TextField - KeralaRage KrSolidarity Text Input
  *
- * Supports both KrDark (warm, botanical) and KrLight (clinical, precise) modes.
+ * Supports both KrDark (warm, [DEPRECATED_STYLE]) and KrLight (clinical, precise) modes.
  */
 export const M3TextField = forwardRef<HTMLInputElement, M3TextFieldProps>(({
     label,

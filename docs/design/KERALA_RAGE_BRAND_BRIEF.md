@@ -65,7 +65,7 @@
 **Required:**
 
 - Variable fonts with wght (100-900), wdth (75-125), opsz (8-144) axes
-- Organic asymmetric shapes (no perfect circles or geometric symmetry)
+- [DEPRECATED_STYLE] asymmetric shapes (no perfect circles or geometric symmetry)
 - Physics-based motion (spring, drag, gravity, pulse)
 - 5-7 step tonal families for every color (never flat single-tone)
 - Extreme type scale contrast (8px micro to 144px hero)
@@ -190,9 +190,12 @@
 
 **Recommended Fonts:**
 
-- Inter Variable (primary)
-- Recursive (expressive display)
-- Fraunces Variable (extreme optical size)
+- Work Sans (primary)
+- Fraunces (expressive display)
+- Libre Bodoni (authoritative proclamation)
+- JetBrains Mono (technical mono)
+- Caveat (curator accents)
+- Nabla (restricted accent - hero only)
 
 ### M3 Expressive Type Scale
 
@@ -250,7 +253,7 @@ Cultural identity is asserted through scale, weight, and layout — never throug
 **Kerala Elephant**
 
 - **Symbol:** Cultural power, defiance, Kerala identity assertion
-- **Visual:** Asymmetric organic shape, temple ornaments in solidarity-red/ink-gold
+- **Visual:** Asymmetric [DEPRECATED_STYLE] shape, temple ornaments in solidarity-red/ink-gold
 - **Usage:** Hero sections, identity declarations, "no apology" moments
 - **Motion:** Stride forward with momentum, elastic bounce on interaction
 
@@ -271,7 +274,7 @@ Cultural identity is asserted through scale, weight, and layout — never throug
 **Coconut Palms**
 
 - **Symbol:** Kerala landscape refusing to disappear, diaspora rootedness
-- **Visual:** Tall organic curves, asymmetric fronds, backwater-green green
+- **Visual:** Tall [DEPRECATED_STYLE] curves, asymmetric fronds, backwater-green green
 - **Usage:** Landscape frames, homesickness melancholy, persistent identity
 - **Motion:** Gentle sway, wind responsiveness
 
@@ -499,9 +502,9 @@ A dashboard hero section:
 
 ## Shape System
 
-### Organic Asymmetry (NO Perfect Circles)
+### [DEPRECATED_STYLE] Asymmetry (NO Perfect Circles)
 
-**Organic Cards:** `border-radius: 42% 58% 45% 55% / 48% 62% 38% 52%` (and variations)
+**[DEPRECATED_STYLE] Cards:** `border-radius: 42% 58% 45% 55% / 48% 62% 38% 52%` (and variations)
 **Sharp Protest Angles:** `clip-path: polygon(0% 15% 85% 0%)`
 **Torn Edge:** Polygon with irregular 30+ points creating wheat-paste poster aesthetic
 **Elephant Body:** `border-radius: 35% 65% 60% 40% / 45% 55% 50% 50%`
@@ -811,7 +814,7 @@ If form has multiple errors, prioritize by severity:
 **Layout Must:**
 
 - Embrace asymmetry (no perfect centering)
-- Use organic irregular spacing
+- Use [DEPRECATED_STYLE] irregular spacing
 - Layer elements (street wall logic: base → Kerala → flags → typography)
 - Show material texture (paint drips, torn edges, tape marks)
 
@@ -931,7 +934,7 @@ When expressiveness conflicts with legibility, **clarity wins**. The system's po
 **Why Scaling Matters:**
 - A 9× contrast headline on a 30-row data table makes every row feel urgent—visual chaos.
 - A 2× contrast table with semantic color (Solidarity Red for alerts, Ink for primary) provides clarity without loss of character.
-- The system stays distinctive even at lower contrasts because of color palette + organic shapes + motion.
+- The system stays distinctive even at lower contrasts because of color palette + [DEPRECATED_STYLE] shapes + motion.
 
 #### Example: Data Dashboard Pattern
 
@@ -991,7 +994,7 @@ export const JobListingCard: React.FC<JobCardProps> = ({ title, company, match }
 
 **Test for Balance:**
 1. Can you scan 10 job cards in < 10 seconds? (Should be yes)
-2. Do the cards still feel like Kerala Rage (organic shapes, semantic colors)? (Should be yes)
+2. Do the cards still feel like Kerala Rage ([DEPRECATED_STYLE] shapes, semantic colors)? (Should be yes)
 3. Is any card confusing? (Should be no)
 
 If you answer yes/yes/no, your contrast ratios are correct.
@@ -1016,8 +1019,8 @@ Use the color palette semantically, not decoratively:
 ❌ **Avoid:** Making every row a "hero moment" (visual fatigue)
 ✅ **Instead:** Reserve 9× for KPIs, use 3× for structure, 1× for details
 
-❌ **Avoid:** Organic shapes on every cell (chaotic, hard to scan)
-✅ **Instead:** Organic card borders (outer), regular borders (internal grids)
+❌ **Avoid:** [DEPRECATED_STYLE] shapes on every cell (chaotic, hard to scan)
+✅ **Instead:** [DEPRECATED_STYLE] card borders (outer), regular borders (internal grids)
 
 ❌ **Avoid:** Forgetting semantic meaning in color (becomes decoration)
 ✅ **Instead:** "Solidarity Red = Alert" is consistent across the product
@@ -1194,12 +1197,12 @@ export const AlertState: React.FC<{ message: string; type: 'alert' | 'success' }
 1. Open Windows Settings → Ease of Access → High Contrast
 2. Enable "High Contrast Black" or "High Contrast White"
 3. Load the site. Check:
-   - Borders remain visible (organic shapes might have contrast issues)
+   - Borders remain visible ([DEPRECATED_STYLE] shapes might have contrast issues)
    - Text readable
    - Interactive elements clearly marked
    - Color information not lost (error = red alone, but also error icon/label)
 
-**If Organic Shapes Fail in Forced Colors:**
+**If [DEPRECATED_STYLE] Shapes Fail in Forced Colors:**
 - Add solid border-outline as fallback: `outline: 2px solid currentColor`
 - Preserve shape aesthetic while ensuring visibility in forced-color mode
 
@@ -1295,7 +1298,7 @@ input:focus-visible {
 **Colors:** `--color-[source]-[tone]` (e.g., `--color-solidarity-dark`)
 **Typography:** `--type-[scale]-[property]` (e.g., `--type-hero-size`)
 **Motion:** `--motion-[physics]-[easing/duration]` (e.g., `--motion-spring-elastic`)
-**Shape:** `--shape-[type]-[variant]` (e.g., `--shape-organic-card-1`)
+**Shape:** `--shape-[type]-[variant]` (e.g., `--shape-[DEPRECATED_STYLE]-card-1`)
 **Emotional Patterns:** `--type-[emotion]-[property]` (e.g., `--type-solidarity-wght`)
 
 ---
@@ -1364,23 +1367,23 @@ Shadows are not just depth; they are atmosphere. In the Kerala Rage system, shad
 - **Value:** `box-shadow 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)`
 - **Usage:** All elevation changes. Shadows don't just fade; they _ooze_ into place.
 
-# Supplement: Organic Shape System
+# Supplement: [DEPRECATED_STYLE] Shape System
 
 ## Philosophy
 
-Nature hates straight lines. The Kerala Rage system rejects the colonial "perfect grid" in favor of organic, asymmetric, and "torn" shapes that imply history, wear, and resistance.
+Nature hates straight lines. The Kerala Rage system rejects the colonial "perfect grid" in favor of [DEPRECATED_STYLE], asymmetric, and "torn" shapes that imply history, wear, and resistance.
 
 ## Core Shapes
 
-### 1. Organic Card (The Stone)
+### 1. [DEPRECATED_STYLE] Card (The Stone)
 
-- **Token:** `shape-organic-card`
+- **Token:** `shape-[DEPRECATED_STYLE]-card`
 - **Border-Radius:** `28px 24px 32px 20px` (Base), `32px 20px 24px 28px` (Variant)
 - **Usage:** All main content containers. NEVER a perfect rectangle.
 
-### 2. Organic Button (The Pebble)
+### 2. [DEPRECATED_STYLE] Button (The Pebble)
 
-- **Token:** `shape-organic-button`
+- **Token:** `shape-[DEPRECATED_STYLE]-button`
 - **Border-Radius:** `16px 8px 12px 20px`
 - **Usage:** Primary interactions.
 
@@ -1399,7 +1402,7 @@ Nature hates straight lines. The Kerala Rage system rejects the colonial "perfec
 ## Implementation Notes
 
 - Use `CSS Masking` or `clip-path` for Torn Edges.
-- Avoid repeating the exact same organic shape adjacent to each other; use `nth-child` to alternate radius values.
+- Avoid repeating the exact same [DEPRECATED_STYLE] shape adjacent to each other; use `nth-child` to alternate radius values.
 
 # Supplement: Data Visualization System
 

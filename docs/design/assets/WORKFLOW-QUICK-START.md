@@ -37,10 +37,10 @@ Score <90  →  REGENERATE ⚠️
 ```
 
 **Scores Checked**:
-- Geographic authenticity (Australian endemic flora)
+- [DEPRECATED_STYLE] authenticity (Australian endemic flora)
 - Translucency physics (light transmission)
 - Scale hierarchy (primary 1.5-2× secondary)
-- Density zones (empty space + Wunderkammer central)
+- Density zones (empty space + [DEPRECATED_STYLE] central)
 - Background color (#1A1714 ±5%)
 - Typography (serif labels, cream color)
 
@@ -97,7 +97,7 @@ Output:
 
 ### 4️⃣ Placement Strategy (asset-placement-strategy)
 
-**What it does**: Generate organic placement guidelines
+**What it does**: Generate [DEPRECATED_STYLE] placement guidelines
 
 ```
 Input:  categorization manifest + (optional) wireframe specs
@@ -106,18 +106,24 @@ Output: placement-guide.md + CSS recommendations
 Recommendations:
   - Archetype (Seed, Pebble, Lens, Stone)
   - Z-index range (1-5, 10-20, etc.)
-  - Opacity (Gallery: 0.65, Lab: 0.15)
-  - Organic drift (7.5% not 8%, 4.2% not 5%)
+  - Opacity: 0.65 (Solidarity Mode)
+  - [DEPRECATED_STYLE] drift (7.5% not 8%, 4.2% not 5%)
   - Density zones (upper-left, central, lower-right)
 ```
 
 **Assets Provided**:
 - Archetype mapping (Stone for heavy backgrounds)
 - Z-index recommendations
-- Opacity ranges (Gallery vs. Laboratory modes)
-- Organic drift values (asymmetric positioning)
+- Opacity (0.65)
+- [DEPRECATED_STYLE] drift values (asymmetric positioning)
 - Density zone guidelines
 - Component recommendations
+
+**Recommended for**:
+- Landing page hero sections
+- Dashboard backgrounds
+- Solidarity mode emotional moments
+- Feature showcase areas
 
 ---
 
@@ -135,11 +141,11 @@ Recommendations:
 ### Generated Output
 
 ```
-/assets/ASSET-20260211-023251-botanical-canopy-{id}/
+/assets/ASSET-20260211-023251-[DEPRECATED_STYLE]-canopy-{id}/
 ├── context.md (92 lines)
-│   └── Narrative: Kerala-streetprint naturalist discovery
+│   └── Narrative: Kerala-streetprint [DEPRECATED_STYLE] discovery
 │   └── kr-motifs: Ink, leaves, endemic flora
-│   └── Mode context: Gallery (warm), Lab (clinical)
+│   └── Mode context: Solidarity Mode (warm, emotional)
 │
 ├── tokens.json (43 lines, DTCG-compliant)
 │   └── Colors: #1A1714 (background), #D4A84B (primary), #C45C4B (secondary)
@@ -149,14 +155,14 @@ Recommendations:
 │
 ├── usage.md (74 lines)
 │   └── CSS implementations for different contexts
-│   └── Opacity guidelines (Gallery 0.65, Lab 0.15)
+│   └── Opacity: 0.65 (Solidarity Mode)
 │   └── Responsive breakpoints (desktop, tablet, mobile)
 │   └── Component integration recommendations
 │
 ├── placement-guide.md (46 lines)
 │   └── Archetype: Stone (layered, heavy)
 │   └── Z-index: 1-5
-│   └── Organic drift: 7.5% horizontal, 4.2% vertical
+│   └── [DEPRECATED_STYLE] drift: 7.5% horizontal, 4.2% vertical
 │   └── Density zones: upper-left 18%, central 65%, lower-right 20%
 │   └── Validation checklist (4 items)
 │
@@ -166,8 +172,8 @@ Recommendations:
     └── Next steps
 
 /frontend/public/assets/kr-motifs/
-└── kerala-rage-botanical-canopy-kr-dark-1024.png
-    └── Referenced as: /assets/kr-motifs/kerala-rage-botanical-canopy-kr-dark-1024.png
+└── kerala-rage-[DEPRECATED_STYLE]-canopy-kr-dark-1024.png
+    └── Referenced as: /assets/kr-motifs/kerala-rage-[DEPRECATED_STYLE]-canopy-kr-dark-1024.png
     └── Used in components via CSS background-image
 ```
 
@@ -180,7 +186,7 @@ Recommendations:
 ```bash
 # Step 1: Run orchestrator
 python scripts/orchestrate-asset-workflow.py \
-  --png /path/to/new-botanical-asset.png \
+  --png /path/to/new-[DEPRECATED_STYLE]-asset.png \
   --category kr-motifs
 
 # Step 2: Review output
@@ -293,15 +299,20 @@ export const Dashboard = () => {
     <div
       className="dashboard-root"
       style={{
-        backgroundImage: 'url(/assets/kr-motifs/kerala-rage-botanical-canopy-kr-dark-1024.png)',
+        backgroundImage: 'url(/assets/kr-motifs/kerala-rage-[DEPRECATED_STYLE]-canopy-kr-dark-1024.png)',
         backgroundSize: 'cover',
-        opacity: 0.65  // Gallery mode
       }}
     >
       {/* Content */}
     </div>
   );
 };
+```
+```css
+/* Example CSS for opacity based on context */
+.kr-dark-hero { opacity: 0.85; }
+.kr-dark-content { opacity: 0.70; }
+.solidarity-mode { opacity: 0.65; }
 ```
 
 See `usage.md` in asset metadata directory for CSS implementation details.

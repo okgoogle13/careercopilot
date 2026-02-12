@@ -18,7 +18,7 @@
 
 ## Design System (kerala-rage kr-solidarity)
 
-The visual and interaction language for CareerCopilot — a kerala-streetprint naturalist's field station.
+The visual and interaction language for CareerCopilot — a kerala-streetprint [DEPRECATED_STYLE]'s field station.
 
 | Doc                                      | Description                                   |
 | ---------------------------------------- | --------------------------------------------- |

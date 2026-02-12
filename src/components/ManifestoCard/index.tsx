@@ -51,12 +51,12 @@ export const ManifestoCard: React.FC<ManifestoCardProps> = ({
       role="article"
     >
       {/* Red Flag Accent */}
-      <div className="absolute top-8 right-8 w-1 h-12 bg-waratah-red" />
+      <div className="absolute top-8 right-8 w-1 h-12 bg-[DEPRECATED_STYLE]-red" />
 
       {/* Hero Title */}
       <h2 className={cn(
         "mb-8",
-        "text-display-lg font-solidarity-800 text-waratah-red"
+        "text-display-lg font-solidarity-800 text-[DEPRECATED_STYLE]-red"
       )}>
         {title}
       </h2>

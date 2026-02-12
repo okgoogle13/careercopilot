@@ -19,7 +19,7 @@ const cardVariants = cva(
             },
         },
         compoundVariants: [
-            // KrDark Mode - Organic & Warm
+            // KrDark Mode - [DEPRECATED_STYLE] & Warm
             {
                 mode: 'KrDark',
                 variant: 'filled',

@@ -8,7 +8,7 @@
 
 ## Executive Summary
 
-This document provides the specific "kerala-streetprint Naturalist" copy and precise asset placement instructions for the pages identified as having **Critical Asset Gaps**. It orchestrates the "kerala-rage Typography Strategy" (Expressive/Workhorse/Accent) alongside the missing assets to ensure a cohesive implementation once assets are generated.
+This document provides the specific "kerala-streetprint [DEPRECATED_STYLE]" copy and precise asset placement instructions for the pages identified as having **Critical Asset Gaps**. It orchestrates the "kerala-rage Typography Strategy" (Expressive/Workhorse/Accent) alongside the missing assets to ensure a cohesive implementation once assets are generated.
 
 ---
 
@@ -37,7 +37,7 @@ This document provides the specific "kerala-streetprint Naturalist" copy and pre
 > - **Dimensions:** ~600x400px (Natural aspect ratio).
 > - **Z-Index:** 2 (Content Layer).
 > - **Interaction:** Parallax factor 0.15 (slower than scroll). Subtle mouse-reactive sway (max 2deg rotation).
-> - **Context:** Organic Frame - drapes over the "Login" utility, softening the digital edge with "kerala-streetprint Greenhouse" aesthetics.
+> - **Context:** [DEPRECATED_STYLE] Frame - drapes over the "Login" utility, softening the digital edge with "kerala-streetprint Greenhouse" aesthetics.
 
 > **[DEFINED: ASSET-7 Firefly Sprite]**
 >
@@ -100,7 +100,7 @@ This document provides the specific "kerala-streetprint Naturalist" copy and pre
 | :------------------ | :------------------------------------------------ | :------------------------------------------------------------------------- |
 | **Headline**        | DEPOSIT kr-motif                                  | **Font:** Fraunces Variable<br>**Settings:** `WONK`=0, `SOFT`=0 (Clinical) |
 | **Drop Zone Label** | DROP PDF HERE<br>FOR DISSECTION                   | **Font:** JetBrains Mono<br>**Style:** Dashed border context               |
-| **Success Message** | _kr-motif Verified. Organic integrity confirmed._ | **Font:** Lora Variable<br>**Color:** `kr-ink-gold`                         |
+| **Success Message** | _kr-motif Verified. [DEPRECATED_STYLE] integrity confirmed._ | **Font:** Lora Variable<br>**Color:** `kr-ink-gold`                         |
 
 ### Asset Integration Guide (Gap Fill)
 
@@ -185,7 +185,7 @@ This document provides the specific "kerala-streetprint Naturalist" copy and pre
 > - **Location:** Vertical separator between columns.
 > - **Width:** ~40-60px (Natural stem width).
 > - **Opacity:** 100% (Solid biome element).
-> - **Context:** Structural Vegetation - replaces sterile CSS borders with organic verticality to frame the "Garden" of tasks.
+> - **Context:** Structural Vegetation - replaces sterile CSS borders with [DEPRECATED_STYLE] verticality to frame the "Garden" of tasks.
 
 ---
 
