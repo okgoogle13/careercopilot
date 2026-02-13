@@ -27,6 +27,6 @@
 - **Tool Hover**: `ToolPebble` icons lift on hover (`y: -2`) and show a tool-tip.
 
 ## Motif Slots
-- `- {KR-UI-004} Blueprint grid overlay (transparent) for technical grid patterns) **[REQUIRES GENERATION]**
-- `- {KR-UI-004} Blueprint grid overlay (transparent) for technical grid patterns)
-- `// TODO[asset]: Grid Line decorative motifs for panel corners.`
+- `{KR-UI-004}` Blueprint grid overlay (transparent) for technical grid patterns **[REQUIRES GENERATION]**
+- `{KR-UI-004}` Blueprint grid overlay (transparent) for technical grid patterns
+- `{KR-UI-004}` Blueprint grid overlay (transparent) for technical grid patterns

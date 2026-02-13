@@ -26,6 +26,6 @@
 - **Halo Pulse**: The `halo-disk` motif behind the card has a long-period (8s) subtle opacity pulse (40-60%).
 
 ## Motif Slots
-- `- {KR-UI-002} Halo disk (plain + gauge version) for radiant circle elements) **[REQUIRES GENERATION]**
-- `- {KR-SOLID-033} Melbourne Laneway texture - real-world substrate base)
-- `- {KR-UI-003} Screenprint grit particles (tile + sprite set) for floating texture) **[REQUIRES GENERATION]**
+- `{KR-UI-002}` Halo disk (plain + gauge version) for radiant circle elements **[REQUIRES GENERATION]**
+- `{KR-SOLID-033}` Melbourne Laneway texture - real-world substrate base
+- `{KR-UI-003}` Screenprint grit particles (tile + sprite set) for floating texture **[REQUIRES GENERATION]**

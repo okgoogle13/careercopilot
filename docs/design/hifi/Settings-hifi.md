@@ -29,5 +29,5 @@
 - **Section Expand**: Accordion-style sections use a `height` + `opacity` transition (Viscous).
 
 ## Motif Slots
-- `- {KR-SOLID-033} Melbourne Laneway texture - real-world substrate base)
-- `- {KR-UI-004} Blueprint grid overlay (transparent) for technical grid patterns)
+- `{KR-SOLID-033}` Melbourne Laneway texture - real-world substrate base
+- `{KR-UI-004}` Blueprint grid overlay (transparent) for technical grid patterns

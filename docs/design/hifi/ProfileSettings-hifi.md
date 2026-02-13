@@ -29,6 +29,6 @@
 - **Badge Tilt**: Badges have a subtle 3D tilt effect on hover using `framer-motion`.
 
 ## Motif Slots
-- `- {KR-UI-002} Halo disk (plain + gauge version) for radiant circle elements) **[REQUIRES GENERATION]**
-- `- {KR-SOLID-033} Melbourne Laneway texture - real-world substrate base)
-- `// TODO[asset]: [DEPRECATED_STYLE] Badge icons for specific skill achievements.`.
+- `{KR-UI-002}` Halo disk (plain + gauge version) for radiant circle elements **[REQUIRES GENERATION]**
+- `{KR-SOLID-033}` Melbourne Laneway texture - real-world substrate base
+- `{KR-UI-007}` Screenprint stamp 'VERIFIED' (transparent) for approval indicators
