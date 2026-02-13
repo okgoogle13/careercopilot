@@ -2,7 +2,7 @@
   <title>Document Tile — Doc Preview with Corner Fold</title>
   <desc>Document preview tile with obvious top-right corner fold for kr-solidarity UI kit.</desc>
   <g id="base">
-    <path d="M64 60 L384 60 L384 60 L448 124 L448 452 Q448 460 440 460 L72 460 Q64 460 64 452 Z" fill="var(--kr-surface)" stroke="var(--kr-tertiary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M64 60 L384 60 L448 124 L448 452 Q448 460 440 460 L72 460 Q64 460 64 452 Z" fill="none" stroke="var(--kr-tertiary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
   </g>
   <g id="content">
     <rect x="96" y="108" width="220" height="14" rx="7" ry="3" fill="var(--kr-text)" opacity="0.65"/>
@@ -11,7 +11,6 @@
     <rect x="96" y="200" width="310" height="8" rx="4" ry="2" fill="var(--kr-text)" opacity="0.18"/>
     <rect x="96" y="220" width="280" height="8" rx="3" ry="2" fill="var(--kr-text)" opacity="0.18"/>
     <rect x="96" y="240" width="296" height="8" rx="4" ry="3" fill="var(--kr-text)" opacity="0.18"/>
-    <rect x="96" y="260" width="240" height="8" rx="3" ry="2" fill="var(--kr-text)" opacity="0.18"/>
     <rect x="96" y="320" width="120" height="60" rx="10" ry="6" fill="var(--kr-tertiary)" opacity="0.1"/>
   </g>
   <g id="accent">

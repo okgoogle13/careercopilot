@@ -395,6 +395,130 @@
       "description": "Verification stamp (VERIFIED)",
       "usage": "Official approval indicator",
       "status": "planned"
+    },
+    {
+      "id": "KR-UI-008",
+      "name": "Elite Mastery Motif Accents",
+      "description": "Motif overlay accents for Elite/High-Mastery skill indicators",
+      "kind": "motif_overlay",
+      "render_mode": "overlay",
+      "canonical_svg_path": "/assets/kr-solidarity/ui-kit/svg/motifs/KR-UI-008.svg",
+      "opacity_default": 0.65,
+      "scale_safe": true,
+      "status": "planned"
+    },
+    {
+      "id": "KR-UI-009",
+      "name": "Mastery Chart Patterns",
+      "description": "SVG/Canvas patterns for mastery chart fills",
+      "kind": "pattern",
+      "render_mode": "chartFill",
+      "canonical_svg_path": "/assets/kr-solidarity/ui-kit/svg/patterns/KR-UI-009.svg",
+      "scale_safe": true,
+      "status": "planned"
+    },
+    {
+      "id": "KR-UI-010",
+      "name": "Success Screen Motif Overlay",
+      "description": "Background motif overlay for success screen (Z-0)",
+      "kind": "motif_overlay",
+      "render_mode": "backgroundZ0",
+      "canonical_svg_path": "/assets/kr-solidarity/ui-kit/svg/motifs/KR-UI-010.svg",
+      "opacity_default": 0.15,
+      "scale_safe": true,
+      "status": "planned"
+    },
+    {
+      "id": "KR-UI-011",
+      "name": "Historical Record Background Texture",
+      "description": "Background texture pattern for historical records (Z-0, 5% opacity)",
+      "kind": "pattern",
+      "render_mode": "backgroundZ0",
+      "canonical_svg_path": "/assets/kr-solidarity/ui-kit/svg/patterns/KR-UI-011.svg",
+      "opacity_default": 0.05,
+      "scale_safe": true,
+      "status": "planned"
+    },
+    {
+      "id": "KR-UI-012",
+      "name": "Metric Graphical Motifs",
+      "description": "Metric-specific mini-chart glyphs and symbols",
+      "kind": "motif_glyph",
+      "render_mode": "inline24",
+      "canonical_svg_path": "/assets/kr-solidarity/ui-kit/svg/motifs/KR-UI-012.svg",
+      "scale_safe": true,
+      "status": "planned"
+    },
+    {
+      "id": "KR-UI-013",
+      "name": "Scanning Holographic Motif",
+      "description": "Scanning holographic overlay for primary CTA buttons",
+      "kind": "motif_overlay",
+      "render_mode": "overlay",
+      "canonical_svg_path": "/assets/kr-solidarity/ui-kit/svg/motifs/KR-UI-013.svg",
+      "opacity_default": 0.7,
+      "scale_safe": true,
+      "status": "planned"
+    },
+    {
+      "id": "KR-UI-014",
+      "name": "Resolved Card Motif Accents",
+      "description": "Corner motif accents for Resolved cards",
+      "kind": "motif_corner",
+      "render_mode": "frame",
+      "canonical_svg_path": "/assets/kr-solidarity/ui-kit/svg/motifs/KR-UI-014.svg",
+      "scale_safe": true,
+      "status": "planned"
+    },
+    {
+      "id": "KR-UI-015",
+      "name": "Priority Indicator Halo Variant",
+      "description": "Halo-variant priority indicator motif glyphs",
+      "kind": "motif_glyph",
+      "render_mode": "inline24",
+      "canonical_svg_path": "/assets/kr-solidarity/ui-kit/svg/motifs/KR-UI-015.svg",
+      "scale_safe": true,
+      "status": "planned"
+    },
+    {
+      "id": "KR-UI-016",
+      "name": "Status Icons Set",
+      "description": "Status-specific icon set for list items",
+      "kind": "icon_set",
+      "render_mode": "inline24",
+      "canonical_svg_path": "/assets/kr-solidarity/ui-kit/svg/icons/KR-UI-016.svg",
+      "scale_safe": true,
+      "status": "planned"
+    },
+    {
+      "id": "KR-UI-017",
+      "name": "Skill Achievement Badge Set",
+      "description": "Badge icons for specific skill achievements",
+      "kind": "badge_set",
+      "render_mode": "inline24",
+      "canonical_svg_path": "/assets/kr-solidarity/ui-kit/svg/icons/KR-UI-017.svg",
+      "scale_safe": true,
+      "status": "planned"
+    },
+    {
+      "id": "KR-UI-018",
+      "name": "Grid Line Corner Motifs",
+      "description": "Decorative grid line motifs for panel corners",
+      "kind": "motif_corner",
+      "render_mode": "frame",
+      "canonical_svg_path": "/assets/kr-solidarity/ui-kit/svg/motifs/KR-UI-018.svg",
+      "scale_safe": true,
+      "status": "planned"
+    },
+    {
+      "id": "KR-UI-019",
+      "name": "Motif Reservoir Items",
+      "description": "Reservoir of reusable tiling motif elements",
+      "kind": "reservoir",
+      "render_mode": "tile",
+      "canonical_svg_path": "/assets/kr-solidarity/ui-kit/svg/motifs/KR-UI-019.svg",
+      "scale_safe": true,
+      "status": "planned"
     }
   ]
 }
