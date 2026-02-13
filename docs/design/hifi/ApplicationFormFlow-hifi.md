@@ -28,6 +28,6 @@
 - **Micro-interaction**: Inputs lift and glow on focus.
 
 ## Motif Slots
-- `- {KR-UI-002} Halo disk (plain + gauge version) for radiant circle elements) **[REQUIRES GENERATION]**
-- `// TODO[asset]: [DEPRECATED_STYLE] Motif overlay for Success Screen (Z-0)`.
-- `- {KR-SOLID-033} Melbourne Laneway texture - real-world substrate base)
+- `{KR-UI-002}` Halo disk (plain + gauge version) for radiant circle elements **[REQUIRES GENERATION]**
+- `{KR-SOLID-011}` Abstract solidarity - ink atmosphere overlay (Z-0)
+- `{KR-SOLID-033}` Melbourne Laneway texture - real-world substrate base

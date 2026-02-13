@@ -27,6 +27,6 @@
 - **Grit Ambient**: Background `screenprint-grit` has a low-frequency fractal animation for "living texture".
 
 ## Motif Slots
-- `- {KR-UI-004} Blueprint grid overlay (transparent) for technical grid patterns) **[REQUIRES GENERATION]**
-- `- {KR-UI-003} Screenprint grit particles (tile + sprite set) for floating texture) **[REQUIRES GENERATION]**
-- `// TODO[asset]: [DEPRECATED_STYLE] Motif reservoir items.`.
+- `{KR-UI-004}` Blueprint grid overlay (transparent) for technical grid patterns **[REQUIRES GENERATION]**
+- `{KR-UI-003}` Screenprint grit particles (tile + sprite set) for floating texture **[REQUIRES GENERATION]**
+- `{KR-SOLID-011}` Abstract solidarity - ink atmosphere overlay

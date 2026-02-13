@@ -28,6 +28,6 @@
 - **Mastery Animate**: Radial/Hex mastery graphs animate their fill state over 1.5s (Viscous ease).
 
 ## Motif Slots
-- `- {KR-UI-004} Blueprint grid overlay (transparent) for technical grid patterns) **[REQUIRES GENERATION]**
-- `// TODO[asset]: [DEPRECATED_STYLE] Motif accents for Elite/High-Mastery skills.`.
-- `// TODO[asset]: Mastery Chart SVG/Canvas patterns`.
+- `{KR-UI-004}` Blueprint grid overlay (transparent) for technical grid patterns **[REQUIRES GENERATION]**
+- `{KR-SOLID-029}` Paint splash - dynamic expressive overlay
+- `{KR-UI-002}` Halo disk (plain + gauge version) for radiant circle elements

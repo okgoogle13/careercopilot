@@ -28,6 +28,6 @@
 - **List Interaction**: Items lift slightly (`y: -4`) on hover.
 
 ## Motif Slots
-- `- {KR-UI-002} Halo disk (plain + gauge version) for radiant circle elements) **[REQUIRES GENERATION]**
-- `- {KR-SOLID-033} Melbourne Laneway texture - real-world substrate base)
-- `// TODO[asset]: Status-specific [DEPRECATED_STYLE] icons for list items.`
+- `{KR-UI-002}` Halo disk (plain + gauge version) for radiant circle elements **[REQUIRES GENERATION]**
+- `{KR-SOLID-033}` Melbourne Laneway texture - real-world substrate base
+- `{KR-UI-007}` Screenprint stamp 'VERIFIED' (transparent) for approval indicators
