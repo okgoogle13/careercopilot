@@ -2,7 +2,7 @@
   <title>Seed — Badge / Overlay Token</title>
   <desc>Small asymmetrical capsule badge primitive for kr-solidarity UI kit. Stamp-like overlay token with organic asymmetry.</desc>
   <g id="base">
-    <rect x="126" y="186" width="268" height="148" rx="42" ry="18" fill="var(--kr-surface)" stroke="var(--kr-text)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="126" y="186" width="268" height="148" rx="42" ry="18" fill="none" stroke="var(--kr-surface)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
   </g>
   <g id="content">
     <rect x="158" y="224" width="140" height="10" rx="5" ry="3" fill="var(--kr-text)" opacity="0.7"/>
@@ -10,7 +10,7 @@
     <rect x="310" y="218" width="52" height="52" rx="14" ry="8" fill="var(--kr-tertiary)" opacity="0.3"/>
   </g>
   <g id="accent">
-    <ellipse cx="372" cy="198" rx="18" ry="14" fill="var(--kr-primary)" opacity="0.85" transform="rotate(-6 372 198)"/>
-    <path d="M134 310 Q156 326 180 312" fill="none" stroke="var(--kr-secondary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <ellipse cx="372" cy="198" rx="18" ry="14" fill="var(--kr-secondary)" opacity="0.85" transform="rotate(-6 372 198)"/>
+    <path d="M134 310 Q156 326 180 312" fill="none" stroke="var(--kr-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
   </g>
 </svg>

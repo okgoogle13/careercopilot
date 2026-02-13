@@ -2,7 +2,7 @@
   <title>Cabinet — Drawer / Sheet Primitive</title>
   <desc>Base panel with offset handle notch for drawer or bottom-sheet UI primitive in kr-solidarity UI kit.</desc>
   <g id="base">
-    <rect x="32" y="128" width="448" height="352" rx="22" ry="8" fill="var(--kr-surface)" stroke="var(--kr-tertiary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="32" y="128" width="448" height="352" rx="22" ry="8" fill="none" stroke="var(--kr-tertiary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
   </g>
   <g id="content">
     <rect x="196" y="142" width="120" height="8" rx="4" ry="3" fill="var(--kr-tertiary)" opacity="0.6"/>
