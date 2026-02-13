@@ -30,6 +30,6 @@
 - **Micro-interaction**: Search bar focus triggers a subtle `ink-gold` outer glow.
 
 ## Motif Slots
-- `- {KR-UI-004} Blueprint grid overlay (transparent) for technical grid patterns) **[REQUIRES GENERATION]**
-- `- {KR-UI-004} Blueprint grid overlay (transparent) for technical grid patterns)
-- `- {KR-SOLID-033} Melbourne Laneway texture - real-world substrate base)
+- `{KR-UI-004}` Blueprint grid overlay (transparent) for technical grid patterns **[REQUIRES GENERATION]**
+- `{KR-UI-004}` Blueprint grid overlay (transparent) for technical grid patterns
+- `{KR-SOLID-033}` Melbourne Laneway texture - real-world substrate base

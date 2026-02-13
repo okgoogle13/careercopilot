@@ -39,6 +39,6 @@
 - **Value Animation Fallback**: When reduced motion is on, skip number tweening and use a simple fade-in.
 
 ## Motif Slots
-- `// TODO[asset]: Historical Record Background Texture (Z-0, 5% opacity)`
-- `- {KR-SOLID-033} Melbourne Laneway texture - real-world substrate base)
-- `// TODO[asset]: Metric-specific graphical motifs (mini-charts or [DEPRECATED_STYLE] symbols).`
+- `{KR-SOLID-033}` Melbourne Laneway texture - real-world substrate base (Z-0, 5% opacity)
+- `{KR-SOLID-033}` Melbourne Laneway texture - real-world substrate base
+- `{KR-UI-002}` Halo disk (plain + gauge version) for radiant circle elements

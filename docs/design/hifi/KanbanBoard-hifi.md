@@ -28,6 +28,6 @@
 - **Blueprint Fade**: The `blueprint-grid` background enters at `opacity-6`.
 
 ## Motif Slots
-- `- {KR-UI-004} Blueprint grid overlay (transparent) for technical grid patterns) **[REQUIRES GENERATION]**
-- `// TODO[asset]: [DEPRECATED_STYLE] Motif accents on "Resolved" cards.`
-- `// TODO[asset]: Priority Indicator motifs (Halo variant).`
+- `{KR-UI-004}` Blueprint grid overlay (transparent) for technical grid patterns **[REQUIRES GENERATION]**
+- `{KR-SOLID-029}` Paint splash - dynamic expressive overlay
+- `{KR-UI-002}` Halo disk (plain + gauge version) for radiant circle elements
