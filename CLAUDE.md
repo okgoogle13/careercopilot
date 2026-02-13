@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-Guidance for Claude Code working in this repository.
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 > **Output**: Code first. No preamble.
 
@@ -12,108 +12,305 @@ Guidance for Claude Code working in this repository.
 | -------- | -------------------------------------- |
 | Frontend | React 18 + TS + Vite + Tailwind v4     |
 | State    | Zustand + TanStack Query               |
-| Backend  | FastAPI + SQLAlchemy + Genkit          |
+| Backend  | FastAPI + SQLAlchemy + Genkit + Python 3.10+ |
 | Cloud    | GCP us-central1 · Firebase · Cloud Run |
 | Design   | **kerala-rage kr-solidarity** (M3 Expressive) |
+| Tests    | Jest (frontend), Playwright (e2e), pytest (backend) |
+| DB       | PostgreSQL via SQLAlchemy + Alembic migrations |
 
 ---
 
-## MCP Task Routing ⚠️ MANDATORY
+## Workspace Structure
 
-Route to **flash-sidekick** to preserve context:
-- Summarize large files/text → `quick_summarize`
-- Code quality analysis → `analyze_code_quality`
-- Generate unit tests → `generate_unit_tests`
-- Batch file analysis → `batch_file_analysis`
-- Complex research → `consult_pro`
+```
+frontend/               # React 18 app (Vite)
+  src/
+    components/ui/     # UI primitives & archetypes
+    features/          # Feature modules (Auth, Dashboard, Applications, etc.)
+    layouts/           # Page layouts (legacy shell names: LaboratoryShell, GalleryShell)
+    stores/            # Zustand state (useModeStore, auth stores)
+    hooks/             # Custom React hooks
+    api/               # Frontend API clients
+    lib/               # Utilities & helpers
+    design/            # Design tokens & CSS variables
+    pages/             # Route pages
+  tests/               # E2E tests (Playwright)
+  scripts/             # Build & asset generation scripts (kr-solidarity)
 
-**Keep in Claude**: UI/UX decisions, code architecture, design compliance audits
+backend/               # FastAPI application
+  app/
+    api/
+      router.py        # Main API router (aggregates all endpoints)
+      endpoints/       # Resource-specific routers (ingest, job_scout, etc.)
+    services/          # Business logic (ATS scoring, job matching, etc.)
+    schemas/           # Pydantic models (request/response validation)
+    models/            # SQLAlchemy ORM models
+    core/              # Database, config, monitoring, logging
+    genkit_flows/      # AI orchestration (symlink: ../../../ai/flows/backend)
+    agents/            # Autonomous AI agents
+    tests/             # Unit & integration tests
+  pyproject.toml       # Python 3.10+, dependencies, tool config
 
-**Budget**:
-- Target: < 150K tokens per task
-- Action at 75%: stop, summarize, propose new session
-- Forbidden: sequential reads of 5+ files, unbatched greps
+design-system/         # DTCG token definitions
+  tokens.json          # Master token file (semantic colors, typography, spacing)
+
+scripts/               # Root-level deployment & utility scripts
+  deploy.sh
+  lint-autofix.sh
+  test-deployment.sh
+  kr/                  # Kerala Rage asset orchestration scripts
+```
 
 ---
 
-## Design System: kerala-rage kr-solidarity
+## Design System: kerala-rage kr-solidarity (M3 Expressive)
 
-**Single mode: Solidarity** (unified product experience)
+**Single mode: Solidarity** (unified product experience). Identity: Kerala diaspora + Naarm/Melbourne aesthetics. No bureaucratic motifs.
 
-**Truth lives in**:
-- Tokens: `design-system/tokens.json` (DTCG)
-- CSS Vars: `frontend/src/design/styles/design-tokens.css`
-- Archetypes: `frontend/src/components/ui/*` (Seed, Pebble, Lens, Jar, Cabinet, Stone)
+### Semantic Color Variables (The Truth)
 
-**Anti-Slop**:
-- ❌ Inter/Roboto/Arial as primary font
-- ❌ Uniform border-radius
-- ❌ Purple gradients
-- ✅ Token-based typography (Fraunces, Work Sans, JetBrains Mono)
-- ✅ Asymmetric shapes
-- ✅ Palette from tokens (Solidarity Red #C45C4B, Ink Gold #D4A84B, Asphalt Black #1A1714)
+All colors are **semantic** (usage-driven), not generic. **Truth lives in `design-system/tokens.json`** (DTCG format).
 
-**Legacy identifiers** (LaboratoryShell, GalleryShell, useModeStore, routeModeMap.ts) exist but do NOT add new mode-dependent logic.
+**CSS Variable Convention**: `--sys-{category}-{semantic-name}-{variant}`
+
+| Semantic Name | CSS Variable Base | Usage Intent | Base Hex |
+|---|---|---|---|
+| **solidarityRed** | `--sys-color-solidarityRed-*` | Primary CTA, urgent emphasis, activism | `#F14714` |
+| **kr-charcoalRed** | `--sys-color-kr-charcoalRed-*` | Destructive, error states, critical | `#F14844` |
+| **inkGold** | `--sys-color-inkGold-*` | Ornaments, highlights, focus rings | `#DAF674` |
+| **kr-activistSmokeGreen** | `--sys-color-kr-activistSmokeGreen-*` | Landscape, nature, secondary | `#42C47D` |
+| **signalGreen** | `--sys-color-signalGreen-*` | Links, accents, illustrations | `#3FD9DC` |
+| **stencilYellow** | `--sys-color-stencilYellow-*` | Headlines, attention, stencil type | `#E4DA39` |
+| **charcoalBackground** | `--sys-color-charcoalBackground-*` | App background, surfaces, layers | `#242424` |
+| **worker-ash** | `--sys-color-worker-ash-*` | Body text, neutral content | `#B8D89A` |
+
+**Tonal Steps** (each semantic color has `steps-0` through `steps-6`):
+```css
+/* Example: solidarityRed */
+--sys-color-solidarityRed-steps-0: #A02F0F;  /* darkest, containers */
+--sys-color-solidarityRed-steps-1: #C03811;
+--sys-color-solidarityRed-steps-2: #F14714;  /* base */
+--sys-color-solidarityRed-steps-3: #FF6B3D;
+--sys-color-solidarityRed-steps-4: #FF9470;
+--sys-color-solidarityRed-steps-5: #FFB999;  /* lightest, highlights */
+```
+
+**Usage Metadata** (documents semantic purpose):
+```css
+--sys-color-solidarityRed-usage-0: primaryCTA;
+--sys-color-solidarityRed-usage-1: urgentEmphasis;
+--sys-color-solidarityRed-usage-2: screenprintInk;
+--sys-color-solidarityRed-usage-3: haloAccents;
+```
+
+**When Building UIs**: Use the `-usage-N` variant names as guides; pick the tonal step that provides proper contrast (steps-0/1 for backgrounds, steps-3/4 for mid-tones, steps-5/6 for highlights).
+
+### Typography (Variable Fonts Only)
+
+- **Headlines**: Fraunces (wght 700, wdth 100) — expressive, warm, identity
+- **Body/UI**: Work Sans (wght 400–600) — modern, legible, hierarchy
+- **Code/Data**: JetBrains Mono (wght 400–600) — monospace, technical clarity
+
+No Inter, Roboto, or Arial as primary. Extreme contrast typography is the M3 Expressive standard.
+
+### UI Archetypes (Components)
+
+Located in `frontend/src/components/ui/`:
+- **Seed**: Atomic button, chip, badge (single element)
+- **Pebble**: Stacked chips, progress indicator (linear composition)
+- **Lens**: Modal, popover, inspection overlay (focal container)
+- **Jar**: Card, list item, container (simple frame)
+- **Cabinet**: Grid layout, multi-column structure (complex layout)
+- **Stone**: Divider, spacer, border primitive (structural element)
+
+**All archetypes MUST use `--sys-color-*` CSS variables, never hardcoded hex.**
+
+### Design System Sources of Truth (Hierarchy)
+
+1. **Tokens**: `design-system/tokens.json` (DTCG, hand-authored, canonical)
+2. **CSS Variables**: `frontend/src/design/styles/design-tokens.css` (auto-generated, `--sys-*` prefix, rebuilt via `node scripts/build-m3-tokens.py`)
+3. **Components**: `frontend/src/components/ui/*` (consume CSS variables via `className="..."` or `getTokenValue()`)
+4. **Figma**: Figma variables synced via `node scripts/sync-tokens-to-figma-vars.mjs` (bi-directional)
+
+### Legacy Constraints (Do NOT Expand)
+
+- `useModeStore`, `routeModeMap.ts` exist for backward compatibility but are **frozen**
+- `LaboratoryShell`, `GalleryShell` layout containers: use but don't modify
+- No new mode-dependent logic; **Solidarity is the only mode**
+
+### Anti-Patterns
+
+- ❌ Hardcoded colors like `#1A1714` (use `--sys-color-charcoalBackground-base` instead)
+- ❌ Generic shape radius (use asymmetric shapes per archetype design)
+- ❌ Purple gradients (Solidarity uses red, gold, green only)
+- ❌ Uniform font weights (use variable fonts with semantic weights)
+- ❌ Button states without token variables
+- ✅ All colors from semantic tokens (`--sys-color-*`)
+- ✅ All fonts from {Fraunces, Work Sans, JetBrains Mono}
+- ✅ Asymmetric spacing and border radius per design spec
+- ✅ Extreme contrast typography (M3 Expressive standard)
 
 ---
 
-## Architecture
+## Design-to-Code Workflow (Design Workflow 2026)
 
-### Frontend (`/frontend/src`)
-```
-components/ui/          # kerala-rage archetypes (40+)
-features/               # Feature modules
-layouts/                # Legacy shell names remain
-stores/                 # Zustand state
-design/tokens/          # Token definitions
-config/navigation.tsx   # Routes
-```
+**Execution Standard**: Follow `/.agent/workflows/design-workflow-2026.md` for all design tasks.
 
-### Backend (`/backend/app`)
-```
-api/endpoints/          # Resource routers
-genkit_flows/           # AI orchestration (40+ flows)
-services/               # Business logic
-core/                   # DB, Genkit init, config
-schemas/                # Pydantic models
-```
+### Phase 1: Research & Briefing
+1. Use `prompts/library/design-brief.md` template
+2. **Human review**: Equity, inclusion, alignment
 
-**Key Genkit Flows**: `career_application_workflow.py`, `ats_scoring.py`, `advanced_job_matching.py`
+### Phase 2: Ideation & Flows
+1. Use `prompts/library/user-flows.md` template
+2. **Human review**: Select ethical, feasible flow
 
-**Enable**: `ENABLE_GENKIT_FLOWS=true`
-**Models**: Gemini 3.0 Flash (speed), Gemini 3.0 Pro (reasoning)
+### Phase 3: Wireframing
+1. Use **wireframe-annotator** skill or `prompts/library/wireframes-lowfi.md`
+2. Include: `<layout>`, `<tokens>`, `<accessibility>` blocks
+
+### Phase 4: UI Specification (HiFi)
+1. Use `prompts/library/ui-spec-hifi.md` template
+2. Apply **Asset Generation Prompting Strategy**
+3. **Output**: Developer-ready specs with token references
+
+### Phase 5: Accessibility Audit
+1. Check layout against WCAG 2.2 AA
+2. Document fixes in `<accessibility>` block
+
+### Phase 6: Handoff
+1. Export design tokens to Figma (via `sync-tokens-to-figma-vars.mjs`)
+2. Convert design to React via **figma-to-page** skill
+3. Generate SVG primitives via **kr-svg** skill
+4. Validate component compliance via **ui-design-evaluator** + **m3-expressive-ui-evaluator**
+
+---
+
+## Skills for Design Tasks (Next Phase)
+
+These skills are optimized for the upcoming workflow:
+
+| Skill | Purpose | Input | Output |
+|---|---|---|---|
+| **figma-to-page** | Convert Figma inspect to React code | Figma design + inspect details | React `.tsx` file + hooks |
+| **kr-svg** | Generate Kerala Rage SVG primitives | Usage intent (e.g., "icon button") | SVG with semantic colors (`--sys-color-*` CSS vars) |
+| **ui-design-evaluator** | Audit UI against kr-solidarity standards | Component screenshot or code | Visual score + semantic color compliance |
+| **m3-expressive-ui-evaluator** | Check M3 Expressive compliance | Design mockup | Typography score, contrast score, spring physics usage |
+| **codebase-orchestrator** | Track design system health & deployment readiness | (queries MCP servers) | Status report: component migration %, token sync health, build readiness |
+| **wireframe-annotator** | Generate annotated ASCII wireframes | Feature brief + user flow | Wireframe with `<layout>`, `<tokens>`, `<accessibility>` blocks |
+
+**Usage**: Invoke skills via `/skill-name` (e.g., `/figma-to-page`) in Claude Code prompts.
 
 ---
 
 ## Quick Commands
 
-**Dev**:
+### Setup (First Time)
 ```bash
-# Backend
-cd backend && source .venv/bin/activate && uvicorn app.main:app --reload
+# Backend: Python 3.10+ required
+cd backend
+python3.10 -m venv venv
+source venv/bin/activate
+pip install -e ".[dev]"
 
 # Frontend
-cd frontend && yarn dev
+cd frontend
+yarn install
+
+# Verify setup
+cd frontend && yarn build
+cd ../backend && pytest --co -q
 ```
 
-**Test**:
+### Development
+
+**Backend** (FastAPI with reload):
 ```bash
-cd frontend && yarn test              # Jest
-cd frontend && yarn test:e2e          # Playwright
-cd backend && pytest                  # Pytest
+cd backend && source venv/bin/activate
+uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 ```
 
-**Lint**:
+**Frontend** (Vite dev server):
 ```bash
-cd frontend && yarn lint:fix && yarn format:fix
-cd backend && black app && isort app && mypy app
+cd frontend
+yarn dev  # http://localhost:5173
 ```
 
-**Deploy**:
+### Design Token Sync
+
+**Rebuild CSS variables from tokens.json**:
 ```bash
-./scripts/deploy.sh staging       # careercopilot-staging.web.app
-./scripts/deploy.sh production    # careercopilot-468811.web.app
+cd frontend
+node scripts/build-m3-tokens.py  # Generates design-tokens.css
+npm run kr:validate              # Verify DTCG compliance
 ```
+
+**Sync tokens to Figma** (after token updates):
+```bash
+node scripts/sync-tokens-to-figma-vars.mjs
+```
+
+### Testing
+
+**Frontend**:
+```bash
+cd frontend
+yarn test                    # Jest (watch mode)
+yarn test:coverage          # With coverage report
+yarn test:e2e               # Playwright tests
+yarn test:e2e:headed        # Headed mode (visual)
+```
+
+**Backend**:
+```bash
+cd backend && source venv/bin/activate
+pytest                       # Run all tests
+pytest -v --cov=app         # With coverage
+```
+
+### Linting & Formatting
+
+**Frontend**:
+```bash
+cd frontend
+yarn lint:fix               # Auto-fix ESLint
+yarn format                 # Auto-format Prettier
+```
+
+**Backend**:
+```bash
+cd backend && source venv/bin/activate
+black app && isort app && mypy app
+```
+
+---
+
+## Architecture Notes
+
+### Frontend Data Flow
+- **Components** read from **Zustand stores** (useModeStore, auth store)
+- **Services** (`frontend/src/services/`) make API calls via Axios
+- **TanStack Query** handles server state caching
+- **Routes** are centralized in `config/navigation.tsx`
+- **Layouts** apply LaboratoryShell (grid) or GalleryShell (custom) containers
+- **ModeSync** in App.tsx auto-switches design mode based on route
+- **Design tokens** are consumed via CSS variables (`--sys-color-*`)
+
+### Backend Structure
+- **`api/router.py`** aggregates all endpoint routers
+- **`api/endpoints/*.py`** = individual resource routers (follow FastAPI convention)
+- **`services/*.py`** = business logic (no direct HTTP concerns)
+- **`core/database.py`** = SQLAlchemy session management
+- **`core/genkit_init.py`** = Genkit model initialization (respects `ENABLE_GENKIT_FLOWS`)
+- **`models/database.py`** = SQLAlchemy ORM schemas
+- **`schemas/*.py`** = Pydantic validation models
+- **Migrations**: `backend/alembic/` (auto-generated via SQLAlchemy 2.0 style)
+
+### AI/Genkit Integration
+- **Location**: `ai/flows/backend/` (symlinked as `app/genkit_flows/`)
+- **Models**: Gemini 3.0 Flash (speed), Gemini 3.0 Pro (reasoning)
+- **Key flows**: `career_application_workflow.py`, `ats_scoring.py`, `advanced_job_matching.py`
+- **Enable locally**: Set `ENABLE_GENKIT_FLOWS=true` in `.env.local`
+- **Testing**: Use `pytest-mock` to mock Genkit responses; avoid real API calls in unit tests
 
 ---
 
@@ -127,58 +324,49 @@ cd backend && black app && isort app && mypy app
 | Service Logic     | `backend/app/services/{name}_service.py`      |
 | Genkit Flow       | `backend/app/genkit_flows/{flow_name}.py`     |
 | Design Tokens     | `design-system/tokens.json`                   |
+| CSS Variables     | `frontend/src/design/styles/design-tokens.css` |
 | Test (Frontend)   | `frontend/src/{feature}/__tests__/{test}.test.tsx` |
 | Test (Backend)    | `backend/app/tests/{domain}/{test}.py`        |
 
 ---
 
-## Response Guidelines
+## Environment Configuration
 
-1. **Code requests** → output code immediately
-2. **Design questions** → cite tokens/components as source of truth
-3. **Bulk analysis** → route to flash-sidekick (MCP routing)
-4. **Debugging** → root cause first, minimal fix
-5. **Genkit flows** → use decorators, mock in tests, respect `ENABLE_GENKIT_FLOWS`
+### Local (`backend/.env.local`, `frontend/.env.local`)
+- **Created by**: `./setup-api-keys.sh` (interactive setup)
+- **Gitignored**: Never commit secrets
+- **Required keys**:
+  - Backend: `GENKIT_GOOGLE_API_KEY`, `DATABASE_URL`, `SENTRY_DSN`, etc.
+  - Frontend: `VITE_API_BASE_URL`, `VITE_GOOGLE_CLIENT_ID`, etc.
 
----
-
-## Component Template
-
-```tsx
-interface Props {
-  // Props with clear types
-}
-
-export const Component: React.FC<Props> = (props) => {
-  return (
-    <div className="/* Tailwind utilities mapped to tokens */">
-      {/* Use archetypes: Seed, Pebble, Lens, Jar, Cabinet, Stone */}
-    </div>
-  );
-};
-```
+### Production
+- **Secrets**: Google Cloud Secret Manager
+- **Deployment**: `./scripts/deploy.sh production` (requires confirmation + GCP auth)
 
 ---
 
-## Skills
+## URLs & Services
 
-**Central Hub**: `.claude/skills/SKILL_REGISTRY.md` (52+ skills)
-
-**Key skills**:
-- Design: `ui-design-evaluator`, `kerala-rage-visual-audit`, `token-orchestrator`
-- Scaffold: `component-builder`, `react-page-scaffolder`, `pytest-test-scaffolder`
-- Validate: `audit-agent`, `compliance-dashboard`, `auto-validator`
-- Generate: `asset-packager`, `batch-processor`
-
----
-
-## URLs
-
-- Staging: https://careercopilot-staging.web.app
-- Production: https://careercopilot-468811.web.app
-- Backend (local): http://localhost:8000
-- GCP: us-central1, careercopilot-468811
+- **Staging**: https://careercopilot-staging.web.app
+- **Production**: https://careercopilot-468811.web.app
+- **Backend local**: http://localhost:8000
+- **Frontend local**: http://localhost:5173
+- **Storybook**: http://localhost:6006 (`yarn storybook`)
+- **GCP Project**: us-central1, careercopilot-468811
 
 ---
 
-_Tokens and archetypes are law. Solidarity mode is the only mode._
+## Helpful References
+
+- **Python version**: 3.10 minimum (pyproject.toml)
+- **Node version**: 18+ (package.json)
+- **Design tokens DTCG**: `design-system/tokens.json` is the source of truth
+- **CSS variables**: `frontend/src/design/styles/design-tokens.css` (auto-generated, `--sys-*` prefix)
+- **Token sync to Figma**: `node scripts/sync-tokens-to-figma-vars.mjs`
+- **M3 Expressive**: Variable fonts + extreme contrast typography
+- **Type safety**: Frontend uses strict TS; backend uses mypy (strict)
+- **Pre-commit hooks**: Configured in `.husky/` (linting before commit)
+
+---
+
+_Tokens are law. Semantic color variables (`--sys-color-*`) are the source of truth. All components consume design tokens, never hardcoded colors. Solidarity mode only._

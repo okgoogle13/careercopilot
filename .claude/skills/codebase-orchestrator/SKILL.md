@@ -49,6 +49,8 @@ tags: []
 > - Do not implement code changes directly; instead, define tasks for IDE/agent execution.
 > - Keep outputs concise and token-efficient, following the size and elimination rules in `HANDOVER_FORMAT.md`.
 > - When blocked or uncertain, escalate clearly and propose remediation tasks instead of guessing.
+> - **Design Workflow 2026 Integration**: Always refer to the [Design Workflow 2026](file:///Users/okgoogle13/Desktop/careercopilot/.agent/workflows/design-workflow-2026.md) as the execution standard.
+> - **Variable/Token Sync**: Use `node scripts/sync-tokens-to-figma-vars.mjs` to synchronize verified token changes back to Figma.
 
 ## Purpose
 
@@ -74,11 +76,12 @@ Use Codebase-Orchestrator when you need to:
 
 The skill operates as an orchestrator that:
 
-1. **Scans codebase** using filesystem MCP to understand structure
-2. **Evaluates git status** using git MCP to track changes and history
-3. **Runs test suite** using testing MCP to assess code quality
-4. **Synthesizes results** into deployment readiness assessment
-5. **Identifies gaps** and recommends next steps for improvement
+1. **SCANS codebase** using filesystem MCP to understand structure.
+2. **EVALUATES git status** using git MCP.
+3. **AUDITS Design Tokens** using `design-system-sidekick`.
+4. **DELEGATES tasks** via `task-router` if gaps are found (e.g., to `codex-cli` for script fixes).
+5. **VERIFIES results** and triggers `scripts/sync-tokens-to-figma-vars.mjs` for high-fidelity handoff.
+6. **SYNTHESIZES results** into deployment readiness assessment.
 
 ## Usage Examples
 
