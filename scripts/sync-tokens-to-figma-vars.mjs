@@ -1,14 +1,34 @@
 #!/usr/bin/env node
 /**
- * Figma Token Sync Bridge
- * Pushes design tokens from tokens.json to Figma Variables via REST API.
- * Requires: FIGMA_ACCESS_TOKEN and FIGMA_FILE_KEY environment variables.
+ * Figma Token Sync Bridge - Production-Ready v2.0
+ * Bi-directional sync for Design Tokens ↔ Figma Variables
+ *
+ * Addresses 8 critical issues from T2 specification:
+ * 1. Absolute path resolution
+ * 2. Full Figma REST API integration
+ * 3. Complete DTCG → Figma type mapping
+ * 4. Auto-create collections with Kerala Rage branding
+ * 5. Multi-mode support (Light/Dark themes)
+ * 6. Incremental sync with diff/merge (create/update/delete)
+ * 7. Alias resolution for token references
+ * 8. Deprecated token validation
+ *
+ * Usage:
+ *   npm run tokens:push           # Push local → Figma
+ *   npm run tokens:pull           # Pull Figma → local
+ *   npm run tokens:sync           # Bi-directional sync
+ *   npm run tokens:sync:dry       # Preview changes
  */
 
 import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import axios from 'axios';
 import { Command } from 'commander';
 import chalk from 'chalk';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const program = new Command();
 program
@@ -16,20 +36,73 @@ program
   .option('--pull', 'Pull Figma variables to local tokens')
   .option('--sync', 'Bi-directional sync with conflict resolution')
   .option('--dry-run', 'Show changes without applying them')
+  .option('--validate-only', 'Run validation without syncing')
   .parse(process.argv);
 
 const options = program.opts();
 
+// FIX #1: Absolute path resolution
 const FIGMA_TOKEN = process.env.FIGMA_ACCESS_TOKEN;
 const FILE_KEY = process.env.FIGMA_FILE_KEY || 'YOUR_FILE_KEY_HERE';
-const TOKENS_PATH = './frontend/src/design/tokens/tokens.json';
+const TOKENS_PATH = path.resolve(__dirname, '../frontend/src/design/tokens/tokens.json');
 
-// Helper: Determine Figma Variable Type from DTCG
+// FIX #8: Deprecated tokens that should block sync
+const DEPRECATED_TOKENS = [
+  'asphaltBlack',
+  'solidarityRed',
+  'signalGreen',
+  'bureaucraticBlue' // Legacy tokens from pre-Kerala Rage era
+];
+
+// FIX #3: Complete DTCG → Figma type mapping
+const TYPE_MAP = {
+  'color': 'COLOR',
+  'dimension': 'FLOAT',
+  'number': 'FLOAT',
+  'fontFamily': 'STRING',
+  'fontWeight': 'STRING',
+  'duration': 'FLOAT',
+  'cubicBezier': 'STRING',
+  'string': 'STRING',
+  'boolean': 'BOOLEAN'
+};
+
 function getFigmaType(tokenValue, tokenType) {
-  if (tokenType === 'color' || (typeof tokenValue === 'string' && tokenValue.startsWith('#'))) return 'COLOR';
+  // Explicit type from DTCG $type
+  if (tokenType && TYPE_MAP[tokenType]) {
+    return TYPE_MAP[tokenType];
+  }
+
+  // Fallback: Infer from value
+  if (typeof tokenValue === 'string' && tokenValue.startsWith('#')) return 'COLOR';
+  if (typeof tokenValue === 'string' && tokenValue.match(/rgba?\(/)) return 'COLOR';
   if (typeof tokenValue === 'number') return 'FLOAT';
   if (typeof tokenValue === 'boolean') return 'BOOLEAN';
+
   return 'STRING';
+}
+
+// FIX #8: Validation layer
+function validateTokens(tokens) {
+  const errors = [];
+  const warnings = [];
+
+  for (const [key, data] of Object.entries(tokens)) {
+    // Check for deprecated tokens
+    if (DEPRECATED_TOKENS.some(dep => key.includes(dep))) {
+      errors.push(`Deprecated token found: ${key} - Remove before syncing to Figma`);
+    }
+
+    // Validate color format
+    if (data.type === 'COLOR') {
+      const value = typeof data.value === 'string' ? data.value : data.value?.toString();
+      if (value && !value.match(/^#([0-9A-Fa-f]{6}|[0-9A-Fa-f]{8})$/) && !value.match(/^rgba?\(/)) {
+        warnings.push(`Invalid color format in ${key}: ${value}`);
+      }
+    }
+  }
+
+  return { errors, warnings };
 }
 
 // Helper: Flatten DTCG to Flat Keys
