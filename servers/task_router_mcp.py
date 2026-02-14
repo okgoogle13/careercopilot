@@ -13,8 +13,8 @@ from typing import Dict, Any, List, Optional
 import shutil
 
 # Configuration
-QUEUE_FILE = "/tmp/northcote-task-queue.json"
-BACKUP_FILE = "/tmp/northcote-task-queue.bak.json"
+QUEUE_FILE = "/tmp/kerala-rage-task-queue.json"
+BACKUP_FILE = "/tmp/kerala-rage-task-queue.bak.json"
 
 mcp = FastMCP("task-router")
 
