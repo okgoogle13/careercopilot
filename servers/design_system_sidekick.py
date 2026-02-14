@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """
-MCP Design System Sidekick - Northcote [DEPRECATED_STYLE] Validation & Asset Orchestration (FastMCP Version)
+MCP Design System Sidekick - Kerala Rage Solidarity Mode Validation & Asset Orchestration (FastMCP Version)
+Validates AI-generated assets against the Kerala Rage design system compliance scorecard.
 """
 import warnings
 warnings.filterwarnings("ignore")
@@ -57,10 +58,25 @@ GEMINI_VISION_CANDIDATES = [
     "models/gemini-1.5-flash"
 ]
 
+
+def _get_github_token() -> str:
+    for key in (
+        "GITHUB_TOKEN",
+        "GH_TOKEN",
+        "GITHUB_PAT",
+        "GITHUB_PERSONAL_ACCESS_TOKEN",
+        "CODEX_GITHUB_PERSONAL_ACCESS_TOKEN",
+    ):
+        value = os.getenv(key, "")
+        if value:
+            return value
+    return ""
+
+
 # --- Global State ---
 executor = ThreadPoolExecutor(max_workers=5)
 gemini_key = os.getenv("GEMINI_API_KEY", "")
-github_token = os.getenv("GITHUB_TOKEN", os.getenv("GH_TOKEN", ""))
+github_token = _get_github_token()
 
 if gemini_key:
     genai.configure(api_key=gemini_key)
@@ -165,10 +181,58 @@ async def validate_asset_compliance(asset_id: str, image_path: Optional[str] = N
         return json.dumps({"error": f"Image path not found: {image_path}"})
 
     prompt = f"""
-    Validate the following asset for Northcote compliance:
+    Validate the following asset for Kerala Rage — Solidarity Mode compliance:
     Asset ID: {asset_id}
-    Focus on: Palette consistency, geometric precision, lighting balance, and typography.
-    Return ONLY a JSON object with: compliance (bool), score (0-100), issues (list), summary (string).
+    
+    CRITICAL COMPLIANCE CHECKS (antiSlopProtocol):
+    
+    BANNED (Any violation = FAIL):
+    - Light mode or white backgrounds (#FFFFFF)
+    - Crown/monarchy symbols (any form, any opacity)
+    - Passports, visas, ID cards, border gates, government forms, bureaucratic aesthetics
+    - Aboriginal art imitation (dot painting, invented patterns, sacred motif appropriation)
+    - Using Aboriginal flag colors as general decoration (allowed only in situ on placards/posters)
+    - Perfect circles (border-radius: 50%)
+    - Symmetrical geometric layouts as dominant structure
+    - Static single-weight fonts; non-variable font usage
+    - Mixing devotional (Shiva) and First Nations solidarity into single composite motif
+    - Generic corporate diversity stock-photo aesthetics
+    
+    REQUIRED (Must be present):
+    - Dark-only Solidarity mode on charcoal base (#1A1A1A or charcoal steps)
+    - Variable typography with extreme contrast (9× weight ratio, 6× size ratio)
+    - Organic stone shapes (NOT perfect geometry)
+    - Screenprint/wheat-paste aesthetic
+    - Icon-scale motifs recognizable at 24px
+    - First Nations solidarity appears only in situ via placards/posters
+    
+    COLOR PALETTE VALIDATION:
+    - Primary: Solidarity Red (#F14714), Charcoal Background (#1A1A1A)
+    - Accents: Activist Smoke Green (#48DA8B), Signal Green (#48F0E5), Ink Gold (#DAF674)
+    - Text: Worker Ash (#DAF6B3) for body text on dark
+    - Check: Are colors from the Kerala Rage palette?
+    
+    TYPOGRAPHY VALIDATION:
+    - Variable fonts with wght 100-900, wdth 75-125
+    - Extreme variable contrast enforced (9× weight ratio, 6× size ratio)
+    - Emotional patterns: Solidarity Protest (wght 800, wdth 120), Labor Pressure (wght 900, wdth 75)
+    
+    MOTION & SHAPE:
+    - M3 Expressive curve: cubic-bezier(0.34, 1.56, 0.64, 1)
+    - Organic stone shapes, torn edges, imperfect circles (98%)
+    
+    Return ONLY valid JSON:
+    {{
+      "compliance": boolean,
+      "score": 0-100,
+      "issues": ["list of violations"],
+      "summary": "Brief compliance summary",
+      "banned_violations": ["specific banned items found"],
+      "missing_requirements": ["required items not found"],
+      "color_palette_match": boolean,
+      "typography_compliance": boolean,
+      "cultural_safety": boolean
+    }}
     """
 
     backend = "gemini"
@@ -204,7 +268,12 @@ async def validate_asset_compliance(asset_id: str, image_path: Optional[str] = N
             "compliance": data.get("compliance", data.get("compliant", False)),
             "score": data.get("score", 0),
             "issues": data.get("issues", []),
-            "summary": data.get("summary", "Validated")
+            "summary": data.get("summary", "Validated"),
+            "banned_violations": data.get("banned_violations", []),
+            "missing_requirements": data.get("missing_requirements", []),
+            "color_palette_match": data.get("color_palette_match", True),
+            "typography_compliance": data.get("typography_compliance", True),
+            "cultural_safety": data.get("cultural_safety", True)
         }
         return json.dumps(final_output)
     except Exception as e:
@@ -214,9 +283,34 @@ async def validate_asset_compliance(asset_id: str, image_path: Optional[str] = N
 async def generate_implementation_package(asset_id: str, asset_metadata: Optional[Dict[str, Any]] = None) -> str:
     """Generate Implementation Package for validated asset"""
     prompt = f"""
-    Generate an implementation package for Asset {asset_id}.
+    Generate a Kerala Rage — Solidarity Mode implementation package for Asset {asset_id}.
     Metadata: {json.dumps(asset_metadata or {})}
-    Provide a detailed plan covering: CSS Tokens, React Component structure, Animation specs.
+    
+    Provide a detailed implementation plan covering:
+    
+    1. CSS Design Tokens:
+       - Map colors to Kerala Rage palette (Solidarity Red #F14714, Charcoal #1A1A1A, etc.)
+       - Define variable font settings (wght 100-900, wdth 75-125)
+       - Include M3 Expressive motion curve: cubic-bezier(0.34, 1.56, 0.64, 1)
+       - Specify organic stone shapes and border-radius values
+    
+    2. React Component Structure:
+       - Component architecture following Kerala Rage patterns
+       - Props interface with TypeScript
+       - Accessibility considerations (ARIA labels, keyboard navigation)
+       - Responsive behavior on charcoal backgrounds
+    
+    3. Animation Specifications:
+       - M3 Expressive transitions (typeSpringSlam 600ms, dragSettle 800ms)
+       - Variable font animations (wght/wdth interpolation)
+       - Reduced motion fallbacks
+    
+    4. Cultural Safety Checklist:
+       - Verify no banned elements (crowns, perfect circles, bureaucratic aesthetics)
+       - Confirm dark-only mode compliance
+       - Validate First Nations solidarity is in-situ only
+    
+    Return implementation guide in markdown format.
     """
     return await _call_llm_async(prompt)
 
@@ -252,21 +346,31 @@ async def catalog_assets_task(args):
         logger.info(f"Processing {filename}...")
 
         prompt = f"""
-        Analyze this asset for the Northcote [DEPRECATED_STYLE] catalog.
+        Analyze this asset for the Kerala Rage — Solidarity Mode catalog.
 
         System Context:
         {design_philosophy}
 
         Task:
-        1. Identify type (motif, texture, pattern, icon).
-        2. Determine mode (gallery vs laboratory) - Gallery is high-art/[DEPRECATED_STYLE], Lab is technical/schematic. This is critical.
-           - Gallery: detailed, [DEPRECATED_STYLE], hand-drawn look, [DEPRECATED_STYLE] style.
-           - Laboratory: technical, schematic, grid, blueprint style.
+        1. Identify type (motif, icon, texture, pattern, illustration).
+        2. Determine aesthetic mode:
+           - Screenprint: Bold, high-contrast, street-poster aesthetic with organic shapes
+           - Wheat-paste: Layered, torn-edge, activist poster aesthetic
+           - Technical: Schematic, blueprint, data visualization style
         3. Suggest a filename following: {{type}}-{{mode}}-{{category}}-{{variant}}.png
-        4. Extract dominant colors and dimensions.
-        5. Check compliance with Northcote Design Philosophy.
+        4. Extract dominant colors and check against Kerala Rage palette:
+           - Solidarity Red (#F14714), Charcoal (#1A1A1A), Activist Smoke Green (#48DA8B)
+           - Signal Green (#48F0E5), Ink Gold (#DAF674), Worker Ash (#DAF6B3)
+        5. Check Kerala Rage compliance:
+           - Dark backgrounds only (no white/light backgrounds)
+           - No crowns, bureaucratic aesthetics, perfect circles
+           - No Aboriginal art imitation
+           - Cultural safety (First Nations solidarity in-situ only)
 
-        Return ONLY valid JSON (no markdown) with keys: original_path, suggested_name, mode, category, dimensions, dominant_colors, compliance (object with northcote_philosophy boolean), duplicate_of (null if new).
+        Return ONLY valid JSON (no markdown) with keys: 
+        original_path, suggested_name, mode, category, dimensions, dominant_colors, 
+        kerala_rage_compliance (object with cultural_safety boolean, dark_mode boolean, banned_elements array), 
+        duplicate_of (null if new).
         """
 
         # Use existing validate_asset_compliance internal logic or similar
@@ -322,8 +426,9 @@ async def catalog_assets_task(args):
     catalog["assets"] = valid_results
 
     # Calculate summary
-    catalog["summary"]["gallery_mode"] = sum(1 for a in valid_results if a.get('mode') == 'gallery')
-    catalog["summary"]["laboratory_mode"] = sum(1 for a in valid_results if a.get('mode') == 'laboratory')
+    catalog["summary"]["screenprint_mode"] = sum(1 for a in valid_results if a.get('mode') == 'screenprint')
+    catalog["summary"]["wheat_paste_mode"] = sum(1 for a in valid_results if a.get('mode') == 'wheat-paste')
+    catalog["summary"]["technical_mode"] = sum(1 for a in valid_results if a.get('mode') == 'technical')
 
     with open(output_file, 'w') as f:
         json.dump(catalog, f, indent=2)
