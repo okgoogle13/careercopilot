@@ -12,10 +12,10 @@ Supports:
 
 import logging
 import re
-from typing import Optional, List, Tuple
-from urllib.parse import urljoin, urlparse
-import requests
 from io import BytesIO
+from urllib.parse import urljoin
+
+import requests
 
 logger = logging.getLogger(__name__)
 
@@ -112,10 +112,10 @@ def extract_text_from_docx(file_content: bytes) -> str:
         return text
     except Exception as e:
         logger.error(f"Word document extraction failed: {e}")
-        raise RuntimeError(f"Failed to extract Word document: {str(e)}")
+        raise RuntimeError(f"Failed to extract Word document: {e!s}")
 
 
-def detect_document_links(html_content: str, base_url: str) -> List[Tuple[str, str]]:
+def detect_document_links(html_content: str, base_url: str) -> list[tuple[str, str]]:
     """
     Detect PDF and Word document links in HTML content.
 
@@ -136,13 +136,13 @@ def detect_document_links(html_content: str, base_url: str) -> List[Tuple[str, s
     for match in re.finditer(pdf_pattern, html_content, re.IGNORECASE):
         url = match.group(1)
         absolute_url = urljoin(base_url, url)
-        documents.append((absolute_url, 'pdf'))
+        documents.append((absolute_url, "pdf"))
 
     # Find Word document links
     for match in re.finditer(docx_pattern, html_content, re.IGNORECASE):
         url = match.group(1)
         absolute_url = urljoin(base_url, url)
-        documents.append((absolute_url, 'docx'))
+        documents.append((absolute_url, "docx"))
 
     logger.info(f"Detected {len(documents)} document links: {documents}")
     return documents
@@ -161,13 +161,13 @@ def download_document(url: str, timeout: int = 30) -> bytes:
     """
     try:
         response = requests.get(url, timeout=timeout, headers={
-            'User-Agent': 'Mozilla/5.0 (compatible; JobAnalyzer/1.0)'
+            "User-Agent": "Mozilla/5.0 (compatible; JobAnalyzer/1.0)"
         })
         response.raise_for_status()
         return response.content
     except Exception as e:
         logger.error(f"Failed to download document from {url}: {e}")
-        raise RuntimeError(f"Document download failed: {str(e)}")
+        raise RuntimeError(f"Document download failed: {e!s}")
 
 
 def extract_documents_from_page(html_content: str, base_url: str) -> str:
@@ -194,9 +194,9 @@ def extract_documents_from_page(html_content: str, base_url: str) -> str:
             logger.info(f"Downloading {doc_type} from {doc_url}")
             content = download_document(doc_url)
 
-            if doc_type == 'pdf':
+            if doc_type == "pdf":
                 text = extract_text_from_pdf(content)
-            elif doc_type == 'docx':
+            elif doc_type == "docx":
                 text = extract_text_from_docx(content)
             else:
                 logger.warning(f"Unknown document type: {doc_type}")

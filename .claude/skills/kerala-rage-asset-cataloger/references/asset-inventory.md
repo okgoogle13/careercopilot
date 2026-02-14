@@ -1,4 +1,3 @@
-# Existing Asset Inventory (ASSET-1 to ASSET-10)
 
 ## ASSET-1: The kr-solidarity Wallpaper
 - **Category**: plate

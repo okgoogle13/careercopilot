@@ -1,8 +1,13 @@
 ---
 name: m3-expressive-token-orchestrator
-description: Validate Material Design 3 Expressive design tokens for DTCG compliance, vibrant palette rules, and M3 Expressive principles. Enforces no purple gradients, no generic blue, vibrant saturation (40-80%), spring physics motion curves, and M3 type scale with variable fonts.
-version: 1.0.0
-tags: []
+description: Validate Material Design 3 Expressive design tokens for DTCG compliance,
+  vibrant palette rules, and M3 Expressive principles. Enforces no purple gradients,
+  no generic blue, vibrant saturation (40-80%), spring physics motion curves, and
+  M3 type scale with variable fonts.
+metadata:
+  legacy_frontmatter:
+    version: 1.0.0
+    tags: []
 ---
 
 # M3 Expressive Token Orchestrator

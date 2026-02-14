@@ -1,8 +1,15 @@
 ---
 name: mcp-configuration-skill
-description: "DEPRECATED - This skill references MCP servers that no longer exist in the codebase. The ConfigurationRegistry server was archived during MCP cleanup. Use native file system tools and flash-sidekick for configuration tasks."
-tags: [deprecated, mcp, legacy]
-status: archived
+description: DEPRECATED - This skill references MCP servers that no longer exist in
+  the codebase. The ConfigurationRegistry server was archived during MCP cleanup.
+  Use native file system tools and flash-sidekick for configuration tasks.
+metadata:
+  legacy_frontmatter:
+    tags:
+    - deprecated
+    - mcp
+    - legacy
+    status: archived
 ---
 
 # ⚠️ DEPRECATED: MCP Configuration Skill

@@ -9,17 +9,17 @@ Career Copilot is an AI-powered job application assistant built with React, Fast
 ### Testing & Validation
 
 ```bash
-# Run all tests
-cd frontend && yarn test
-cd backend && pytest
+# Run all tests (from repo root)
+(cd frontend && yarn test)
+(cd backend && pytest)
 
-# Type check
-cd frontend && yarn type-check
-cd backend && mypy .
+# Type check (from repo root)
+(cd frontend && yarn type-check)
+(cd backend && mypy .)
 
-# Format & lint
-cd frontend && yarn lint:fix
-cd backend && ruff check --fix .
+# Format & lint (from repo root)
+(cd frontend && yarn lint:fix)
+(cd backend && ruff check --fix .)
 ```
 
 ### Backend AI Agents
@@ -79,10 +79,10 @@ cd frontend && yarn test:e2e
   - Structural neutrals: Ochre Earth `#B8733D`, Concrete Grey `#A39B8F`
   - Growth accents: Gum Leaf Green `#6B7F6E`
 - **Tokens**:
-  - Source of truth: `design-system/tokens.json`
-  - CSS variables: `frontend/src/design/styles/kerala-rage.css`
-  - Frontend token mirror: `frontend/src/design/tokens/tokens.json`
-  - All UI must use these tokens; no hardcoded hex values
+  - Source of truth: `frontend/src/design/tokens/tokens.json` (complete Kerala Rage M3 Expressive system)
+  - CSS variables: `frontend/src/design/styles/design-tokens.css` (auto-generated)
+  - Deprecated legacy file: `design-system/tokens.json` (Material Design 3 only, incomplete — do not use)
+  - All UI must use semantic tokens (--sys-color-*); no hardcoded hex values
 - **Aesthetic**:
   - Contemporary Australian, Peter Drew street art influence
   - Australian endemic species as living, present-day symbols
@@ -117,7 +117,7 @@ backend/
 │   ├── core/                      # Auth (Supabase JWT), database, Genkit init, config
 │   ├── services/                  # Ingestion, vector_store, supabase client
 │   ├── agents/                    # Job scout agent
-│   ├── genkit_flows/              # Symlink -> ai/flows/backend (Genkit flow definitions)
+│   ├── genkit_flows/              # Import namespace for Genkit flows (must resolve for `app.genkit_flows.*` imports)
 │   └── tests/                     # Unit & integration tests
 
 ai/
@@ -147,7 +147,7 @@ design-system/
 
 - ✅ Use Supabase client config from `frontend/src/config/supabase.ts` for auth/storage
 - ✅ Use Supabase auth helpers in `backend/app/core/auth.py` and `backend/app/core/dependencies.py`
-- ✅ Use Genkit flow decorators from `app.genkit_flows.flow_decorator` (`@genkit_flow`, `@async_genkit_flow`)
+- ✅ Use Genkit flow decorators from `app.genkit_flows.flow_decorator` (`@genkit_flow`, `@async_genkit_flow`) and verify the `app.genkit_flows` import path resolves in your environment
 - ✅ Route high-volume tasks to Gemini Flash (runtime default: 3.0; service config in `ai/config/ai_config.json`)
 - ✅ Route complex reasoning to Gemini Pro (3.0/2.5 per service config)
 - ✅ Use `IngestionService` for document parsing (pdfminer.six/python-docx) and `VectorStore` for embeddings
@@ -163,6 +163,7 @@ design-system/
 ### Don't
 
 - ❌ Do NOT hard-code API keys or secrets in code
+- ❌ Do NOT expose provider secrets in frontend `VITE_*` variables for production builds
 - ❌ Do NOT create monolithic agents—keep to single responsibility
 - ❌ Do NOT skip error handling in AI operations
 - ❌ Do NOT use localStorage/sessionStorage in generated artifacts
@@ -219,9 +220,9 @@ design-system/
 
 ### MCP Routing Overview (Authoritative)
 
-Use MCP servers to keep context small, reduce latency, and avoid heavy local parsing. When in doubt, **route to the smallest capable MCP tool** rather than doing large reads or complex analysis inline.
+Use MCP servers to keep context small, reduce latency, and avoid heavy local parsing. Prefer the smallest capable MCP tool first, then fall back to local commands if MCP is unavailable.
 
-**MCP configuration reference:** `/Users/okgoogle13/.gemini/antigravity/mcp_config.json` (current Gemini config). For Claude Desktop setup, see `CLAUDE_DESKTOP_MCP_CONFIG.md`.
+Start each session by checking server availability (`list_mcp_resources` / `list_mcp_resource_templates`) rather than assuming specific local config paths.
 
 **Primary MCP servers used in this repo:**
 
@@ -232,17 +233,17 @@ Use MCP servers to keep context small, reduce latency, and avoid heavy local par
 
 If a task is both large and visual (e.g., "audit multiple UI screens and check token compliance"), **split**: use flash-sidekick for bulk file/context extraction and design-system-sidekick for visual validation.
 
-### Flash Sidekick Mandatory Routing
+### Flash Sidekick Routing
 
-For tasks involving bulk data, ALWAYS delegate to flash-sidekick MCP server:
+For tasks involving bulk data, prefer `flash-sidekick` when available:
 
-| Operation           | Direct (Claude) Cost | Delegated (Flash) Cost | Savings |
-| ------------------- | -------------------- | ---------------------- | ------- |
+| Operation           | Direct Agent Cost | Delegated (Flash) Cost | Savings |
+| ------------------- | ----------------- | ---------------------- | ------- |
 | Read 10 files       | ~50K tokens          | ~2K tokens             | 96%     |
 | Grep + read matches | ~30K tokens          | ~1K tokens             | 97%     |
 | Generate tests      | ~20K tokens          | ~1K tokens             | 95%     |
 
-### Delegation Rules (Enforced)
+### Delegation Rules
 
 ```python
 # Pseudo-code for agent behavior
@@ -269,15 +270,15 @@ If the task involves **code-only styling changes** (e.g., Tailwind classes, toke
 
 ### MCP Task Routing Matrix (Practical)
 
-| Task type                                 | Use MCP server             | Notes                                            |
-| ----------------------------------------- | -------------------------- | ------------------------------------------------ |
-| Read many files, summarize, find patterns | flash-sidekick             | Prefer batch tools; avoid large local reads.     |
-| Code quality scan or lint-like review     | flash-sidekick             | Use analyze_code_quality for findings.           |
-| Git history or blame analysis             | flash-sidekick             | Use consult_pro for compact history summaries.   |
-| Visual compliance or asset validation     | design-system-sidekick     | Use validate_asset_compliance and related tools. |
-| Token extraction from imagery             | design-system-sidekick     | Use extract_visual_design_tokens.                |
-| UI regression screenshots or flows        | playwright (if configured) | Use for browser-based checks only.               |
-| Container-only reproduction               | docker (if configured)     | Do not use unless explicitly needed.             |
+| Task type                                 | Preferred MCP (if available) | Fallback if unavailable                          |
+| ----------------------------------------- | ---------------------------- | ------------------------------------------------ |
+| Read many files, summarize, find patterns | flash-sidekick               | `rg` + targeted local file reads                 |
+| Code quality scan or lint-like review     | flash-sidekick               | local linters/tests with narrowed scope          |
+| Git history or blame analysis             | flash-sidekick               | `git log`, `git show`, `git blame`               |
+| Visual compliance or asset validation     | design-system-sidekick       | local token/style inspection                     |
+| Token extraction from imagery             | design-system-sidekick       | manual token mapping from design artifacts       |
+| UI regression screenshots or flows        | playwright (if configured)   | local Playwright runs                            |
+| Container-only reproduction               | docker (if configured)       | local runtime reproduction without Docker        |
 
 ### MCP Failure Handling
 
@@ -290,8 +291,8 @@ If an MCP server is unavailable:
 ### Session Budget Protocol
 
 1. **Start of session**: Estimate task complexity
-2. **At 75% budget**: Stop, summarize progress, propose continuation
-3. **Never**: Push through expensive operations to "finish"
+2. **When context/runtime gets expensive**: checkpoint progress and continue in smaller batches
+3. **Only pause for user confirmation** when a task requires reduced coverage or risk acceptance
 
 ## API Contracts
 
@@ -402,6 +403,11 @@ firebase emulators:start
 # Only needed for legacy Firestore integration tests.
 ```
 
+### Mocking & Offline Testing
+
+- Many Python tests mock Genkit or `gemini_pro`. When adding tests, mock external Genkit calls (see tests under `backend/app/tests/genkit_flows/`).
+- Use `cached_ai_operations.py` helpers in tests where Genkit is unavailable to avoid hitting live APIs.
+
 ## Performance Targets
 
 - Document generation: < 30 seconds
@@ -414,8 +420,8 @@ Include timing in agent metadata for monitoring.
 ## PR Checklist
 
 - [ ] Tests pass: `cd frontend && yarn test` and `cd backend && pytest`
-- [ ] Type check passes: `yarn type-check` and `cd backend && mypy .`
-- [ ] Linting passes: `yarn lint` and `cd backend && ruff check .`
+- [ ] Type check passes: `cd frontend && yarn type-check` and `cd backend && mypy .`
+- [ ] Linting passes: `cd frontend && yarn lint` and `cd backend && ruff check .`
 - [ ] Code follows kerala-rage design system (if UI changes)
 - [ ] AI agent I/O matches documented contracts
 - [ ] No secrets committed (check `.gitignore`)
@@ -437,9 +443,16 @@ This AGENTS.md file is compatible with:
 - **GitHub Copilot** – Provides context for Copilot chat and inline suggestions
 - **OpenAI Codex** – Structured per Codex AGENTS.md conventions with environment setup, testing, and style guidance
 - **Claude Code** – Full AI agent support with boundary specifications and workflow documentation
-- **agents.md standard** – Follows the open agents.md specification for cross-platform compatibility
+- **agents.md-style conventions** – Structured for cross-platform parsing and low-ambiguity execution
 
 **For Codex users**: The document is organized for optimal parsing. Run tests with commands listed in "Quick Commands" section. Update this file if project structure or conventions change.
+
+### Codex-High Optimization Notes
+
+- Use copy/paste-safe commands that do not depend on previous `cd` state.
+- Prefer repo-relative paths over machine-specific absolute paths.
+- Keep routing rules explicit with MCP fallback behavior when servers are unavailable.
+- Favor deterministic checks (tests, type checks, lint) before subjective review.
 
 ## Domain Knowledge: Community Services
 
@@ -467,7 +480,7 @@ Key document requirements:
 - **Type checking**: mypy (configured in `backend/mypy.ini`, non-strict with overrides)
 - **Docstring style**: Google-style docstrings with parameter types
 - **Async/await**: Required for all I/O operations (FastAPI routes, Genkit flows)
-- **Error handling**: Always return standardized `{"success": bool, "error": str}` responses
+- **Error handling**: Use typed success response models and raise `HTTPException` for API errors; use standardized result objects in service/worker layers where applicable
 
 ### TypeScript Frontend
 
@@ -536,10 +549,10 @@ cd backend && uvicorn app.main:app --reload
 pytest backend/app/tests/genkit_flows/test_ats_scoring.py -v --tb=short
 
 # Type check just your changes
-yarn type-check
+(cd frontend && yarn type-check)
 
 # Lint and fix only modified files
-yarn lint:fix
+(cd frontend && yarn lint:fix)
 ```
 
 ### Before Submitting PR
@@ -549,11 +562,27 @@ yarn lint:fix
 ./scripts/test-deployment.sh
 
 # Ensure all tests pass
-cd frontend && yarn test && cd ../backend && pytest
+(cd frontend && yarn test)
+(cd backend && pytest)
 
 # Check no secrets are committed
 git diff HEAD --name-only | xargs git check-attr filter
 ```
+
+## Frontend Readiness & Build Diagnostics
+
+Use these before deploy or when debugging build issues:
+
+1. **Validate build locally**:
+   - `yarn install` then `yarn build:frontend`
+   - Verify `frontend/dist` contains `index.html` and assets.
+2. **Helper scripts**:
+   - `./scripts/frontend-readiness.sh`: Installs deps, builds, and verifies artifacts.
+   - `./scripts/prep-production-env.sh`: Creates `frontend/.env.production.local` using `scripts/fetch-firebase-config.py`.
+3. **Preview production build**:
+   - `cd frontend && yarn preview`
+4. **Hosting Emulator**:
+   - `firebase emulators:start --only hosting` to replicate hosting behavior.
 
 ## Supabase & Storage
 
@@ -603,7 +632,9 @@ VITE_API_URL=http://localhost:8000
 VITE_SUPABASE_URL=<your-supabase-url>
 VITE_SUPABASE_ANON_KEY=<your-supabase-anon-key>
 VITE_SENTRY_DSN=<your-sentry-dsn>
-VITE_GEMINI_API_KEY=<your-key>
+# Provider API keys should stay backend-only in production.
+# Legacy/local-only fallback (avoid in production):
+# VITE_GEMINI_API_KEY=<your-key>
 VITE_USE_MOCK_API=true
 VITE_USE_MOCK_AUTH=true
 VITE_OFFLINE_MODE=false
@@ -627,3 +658,27 @@ VITE_OFFLINE_MODE=false
 ```
 
 Pre-flight checks ensure no secrets leak, tests pass, and builds succeed.
+
+## Production Troubleshooting (https://careercopilot-468811.web.app)
+
+### Quick Triage Checklist
+1. **Firebase Console**: Check Hosting status & deploy history (look for recent errors).
+2. **Build Artifacts**: Confirm `frontend/dist` was uploaded and `firebase.json` points to it.
+3. **Rewrites**: Verify single-page app rewrite (`source: "**"`, `destination: "/index.html"`) in `firebase.json`.
+4. **Env Vars**: Confirm `frontend/.env.production` keys were present at build time.
+5. **Backend Logs**: Inspect Cloud Functions / Cloud Run logs for 5xx errors.
+
+### Common Issues
+- **Stale CDN**: Hosting caches `/static/**`. If users see old assets, try `firebase hosting:channel:deploy` or redeploy.
+- **Missing Config**: If API calls fail, ensure `scripts/fetch-firebase-config.py` ran before build.
+- **404s**: Check `index.html` references correct hashed filenames.
+- **Auth Failures**: Verify Firebase project ID matches the hosted site.
+
+### Diagnostics
+- **Cloud Functions Logs**: Filter `severity=ERROR` in GCP Console.
+- **Cloud Run Logs**: Query `resource.type="cloud_run_revision" AND severity>=ERROR`.
+- **Sentry**: Check DSN in `backend/app/core/secure_config.py`.
+
+### Quick Rollback
+- **Clone Channel**: `firebase hosting:clone <source> <target>`
+- **Redeploy Function**: `firebase deploy --only functions:functionName` found in `functions/` workspace.

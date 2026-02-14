@@ -2,9 +2,9 @@ import json
 from unittest.mock import Mock, patch
 
 import pytest
+from app.genkit_flows.resume_analyzer import compare_resume_to_job
 
 from app.core.ai_error_handling import AIError
-from app.genkit_flows.resume_analyzer import compare_resume_to_job
 
 
 @pytest.mark.skip(reason="gemini_pro model removed - test needs refactoring for new model setup")

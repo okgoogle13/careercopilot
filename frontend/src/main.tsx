@@ -5,7 +5,7 @@ import { HelmetProvider } from 'react-helmet-async';
 const queryClient = new QueryClient();
 
 // KeralaRage KrSolidarity consolidated theme
-import './design/styles/KeralaRage.css';
+import './design/styles/kerala-rage.css';
 
 import * as Sentry from '@sentry/react';
 import App from './App';

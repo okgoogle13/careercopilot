@@ -55,7 +55,7 @@ export const JobList: React.FC<JobListProps> = ({
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ delay: index * 0.05, type: "spring" }}
-              whileHover={{ y: -4, shadow: "0 20px 40px rgba(0,0,0,0.6)" }}
+              whileHover={{ y: -4, boxShadow: '0 20px 40px rgba(0,0,0,0.6)' }}
               className={cn(
                 "p-8 bg-charcoal-100 border border-blueprint-grey/20",
                 "rounded-stone shadow-viscous cursor-pointer group transition-all"

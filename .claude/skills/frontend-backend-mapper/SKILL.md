@@ -1,8 +1,13 @@
 ---
 name: frontend-backend-mapper
-description: "Analyzes and maps frontend API calls to backend endpoints. Detects missing endpoints, unused endpoints, and integration gaps. Optional: trace complete data flows to database and design tokens. Related: api-contract-validator for detailed type analysis."
-version: 1.0.0
-tags: []
+description: 'Analyzes and maps frontend API calls to backend endpoints. Detects missing
+  endpoints, unused endpoints, and integration gaps. Optional: trace complete data
+  flows to database and design tokens. Related: api-contract-validator for detailed
+  type analysis.'
+metadata:
+  legacy_frontmatter:
+    version: 1.0.0
+    tags: []
 ---
 
 ## Purpose

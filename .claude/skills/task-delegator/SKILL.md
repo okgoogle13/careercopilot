@@ -1,8 +1,11 @@
 ---
 name: task-delegator
-description: "Delegate tasks to specialized agents and coordinate multi-agent workflows for parallel test generation"
-version: 1.0.0
-tags: []
+description: Delegate tasks to specialized agents and coordinate multi-agent workflows
+  for parallel test generation
+metadata:
+  legacy_frontmatter:
+    version: 1.0.0
+    tags: []
 ---
 
 # Task Delegator Skill - Jules Coordination

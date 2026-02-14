@@ -1,12 +1,14 @@
 ---
+name: hero-composition-injector
 description: Automates the insertion of new Gemini-generated hero compositions into
   the hero-registry.json. Maintains schema integrity and prevents merge conflicts.
-name: hero-composition-injector
-version: 1.0.0
-tags:
-- automation
-- registry
-- gemini
+metadata:
+  legacy_frontmatter:
+    version: 1.0.0
+    tags:
+    - automation
+    - registry
+    - gemini
 ---
 
 # Hero Composition Injector Skill

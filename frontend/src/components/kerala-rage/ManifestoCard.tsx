@@ -42,7 +42,7 @@ export const ManifestoCard: React.FC<ManifestoCardProps> = ({
         initial: { opacity: 0, y: 10 },
         animate: { opacity: 1, y: 0 },
         transition: {
-          type: 'spring',
+          type: 'spring' as const,
           stiffness: 320,
           damping: 26,
         },

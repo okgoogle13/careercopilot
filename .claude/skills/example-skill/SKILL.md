@@ -1,11 +1,14 @@
 ---
 name: example-skill
-description: "Example skill demonstrating YAML best practices. Use when learning skill structure, reviewing formatting standards, or creating new skills as a reference."
-version: 1.0.0
-tags:
-  - example
-  - reference
-  - yaml
+description: Example skill demonstrating YAML best practices. Use when learning skill
+  structure, reviewing formatting standards, or creating new skills as a reference.
+metadata:
+  legacy_frontmatter:
+    version: 1.0.0
+    tags:
+    - example
+    - reference
+    - yaml
 ---
 
 # Example Skill

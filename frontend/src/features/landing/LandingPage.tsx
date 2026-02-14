@@ -9,7 +9,7 @@ export const LandingPage: React.FC = () => {
   const [heroData, setHeroData] = useState<{
     layers: any[];
     typography: any;
-    motion: any;
+    animation: any;
   } | null>(null);
 
   useEffect(() => {
@@ -26,7 +26,7 @@ export const LandingPage: React.FC = () => {
           setHeroData({
             layers: result.resolvedLayers,
             typography: result.typography,
-            motion: result.motion,
+            animation: result.animation ?? result.motion,
           });
         }
       } catch (error) {
@@ -45,7 +45,7 @@ export const LandingPage: React.FC = () => {
       <LayeredHero
         layers={heroData.layers}
         typography={heroData.typography}
-        motion={heroData.motion}
+        animation={heroData.animation}
       />
       <KrDarkShell />
     </>

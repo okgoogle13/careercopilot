@@ -2,9 +2,9 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { z } from 'zod';
-import { LoginCard } from '../../components/LoginCard';
+import { LoginCard, type LoginCredentials } from '../../components/LoginCard';
 import { useAuth } from '../../context/AuthContext';
 
 // KeralaRage Assets
@@ -52,7 +52,13 @@ export function Login() {
 
       <div className="relative z-10">
         <LoginCard
-          onLogin={onSubmit}
+          onLogin={(credentials: LoginCredentials) => {
+            const values: LoginValues = {
+              email: credentials.email,
+              password: credentials.password ?? '',
+            };
+            void onSubmit(values);
+          }}
           onRegisterClick={() => navigate('/register')}
           isLoading={isSubmitting}
         />

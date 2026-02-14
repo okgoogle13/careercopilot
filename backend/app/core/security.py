@@ -1,14 +1,12 @@
+import logging
 import os
 from datetime import datetime, timedelta, timezone
-from typing import Any, Dict, Optional
-import logging
 
 import jwt
-from fastapi import HTTPException, Request, status, Depends, Header
+from fastapi import Header, HTTPException, Request, status
+from firebase_admin import auth
 from google.auth.transport import requests
 from google.oauth2 import id_token
-from firebase_admin import auth
-import firebase_admin
 
 logger = logging.getLogger(__name__)
 
@@ -75,7 +73,7 @@ async def verify_google_oidc_token(request: Request):
         )
 
 
-def create_access_token(data: dict, expires_delta: Optional[timedelta] = None) -> str:
+def create_access_token(data: dict, expires_delta: timedelta | None = None) -> str:
     """
     Create a JWT access token with the provided data.
 
@@ -103,7 +101,7 @@ def create_access_token(data: dict, expires_delta: Optional[timedelta] = None) -
 
 class AuthenticationError(HTTPException):
     """Custom exception for authentication failures."""
-    
+
     def __init__(self, detail: str):
         super().__init__(
             status_code=status.HTTP_401_UNAUTHORIZED,
@@ -130,25 +128,25 @@ async def verify_firebase_token(token: str) -> dict:
         decoded_token = auth.verify_id_token(token)
         logger.debug(f"Token verified for user: {decoded_token.get('uid')}")
         return decoded_token
-        
+
     except auth.InvalidIdTokenError as e:
         logger.warning(f"Invalid Firebase token: {e}")
         raise AuthenticationError("Invalid authentication token")
-    
+
     except auth.ExpiredIdTokenError as e:
         logger.warning(f"Expired Firebase token: {e}")
         raise AuthenticationError("Authentication token has expired")
-    
+
     except auth.RevokedIdTokenError as e:
         logger.warning(f"Revoked Firebase token: {e}")
         raise AuthenticationError("Authentication token has been revoked")
-    
+
     except Exception as e:
         logger.error(f"Token verification failed: {e}")
         raise AuthenticationError("Authentication failed")
 
 
-async def get_current_user_id(authorization: Optional[str] = Header(None)) -> str:
+async def get_current_user_id(authorization: str | None = Header(None)) -> str:
     """
     Extract and verify the current user's ID from the Authorization header.
     
@@ -171,36 +169,36 @@ async def get_current_user_id(authorization: Optional[str] = Header(None)) -> st
     if not authorization:
         logger.warning("Missing Authorization header")
         raise AuthenticationError("Missing authentication token")
-    
+
     # Extract token from "Bearer <token>" format
     parts = authorization.split()
-    
+
     if len(parts) != 2 or parts[0].lower() != "bearer":
         logger.warning(f"Invalid Authorization header format: {authorization[:20]}...")
         raise AuthenticationError("Invalid authorization header format")
-    
+
     token = parts[1]
-    
+
     # Verify token and extract user ID
     try:
         decoded_token = await verify_firebase_token(token)
         user_id = decoded_token.get("uid")
-        
+
         if not user_id:
             logger.error("Token missing 'uid' claim")
             raise AuthenticationError("Invalid token claims")
-        
+
         return user_id
-        
+
     except AuthenticationError:
         raise  # Re-raise our custom exceptions
-    
+
     except Exception as e:
         logger.error(f"Unexpected error during authentication: {e}")
         raise AuthenticationError("Authentication failed")
 
 
-async def get_current_user_optional(authorization: Optional[str] = Header(None)) -> Optional[str]:
+async def get_current_user_optional(authorization: str | None = Header(None)) -> str | None:
     """
     Extract user ID from Authorization header if present, otherwise return None.
     
@@ -221,7 +219,7 @@ async def get_current_user_optional(authorization: Optional[str] = Header(None))
     """
     if not authorization:
         return None
-    
+
     try:
         return await get_current_user_id(authorization)
     except AuthenticationError:

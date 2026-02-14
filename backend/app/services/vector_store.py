@@ -1,12 +1,15 @@
 import os
-from typing import List, Dict, Optional, Literal
-from pydantic import BaseModel
+from typing import Literal
+
 from dotenv import load_dotenv
+from pydantic import BaseModel
+
 try:
     import google.generativeai as genai
 except ImportError:  # pragma: no cover - optional dependency in test/CI
     genai = None
 from sqlalchemy import select
+
 from app.core.database import get_db_session
 from app.models.document_embedding import DocumentEmbedding
 
@@ -20,7 +23,7 @@ class CareerArtifact(BaseModel):
     content: str
     source_type: Literal["resume", "cover_letter", "ksc_response"]
     source_filename: str
-    derived_skills: List[str] = []
+    derived_skills: list[str] = []
     date: str = ""
 
 class VectorStore:
@@ -33,21 +36,21 @@ class VectorStore:
         # Connection managed via app.core.database
         self.embedding_model = "models/text-embedding-004"
 
-    def _generate_embeddings(self, texts: List[str]) -> List[List[float]]:
+    def _generate_embeddings(self, texts: list[str]) -> list[list[float]]:
         """Generates embeddings using Gemini API."""
         if not texts:
             return []
         if not genai:
             raise RuntimeError("Google Generative AI library not installed")
-        
+
         results = genai.embed_content(
             model=self.embedding_model,
             content=texts,
             task_type="retrieval_document"
         )
-        return results['embedding']
+        return results["embedding"]
 
-    def _generate_query_embedding(self, text: str) -> List[float]:
+    def _generate_query_embedding(self, text: str) -> list[float]:
         """Generates embedding for a single query."""
         if not genai:
             raise RuntimeError("Google Generative AI library not installed")
@@ -56,12 +59,12 @@ class VectorStore:
             content=text,
             task_type="retrieval_query"
         )
-        return result['embedding']
+        return result["embedding"]
 
     def add_artifact(self, artifact: CareerArtifact, user_id: str = "legacy_user"):
         """Adds a single artifact to the vector store."""
         embedding_vector = self._generate_embeddings([artifact.content])[0]
-        
+
         # Metadata for filtering
         metadata = {
             "source_type": artifact.source_type,
@@ -69,7 +72,7 @@ class VectorStore:
             "date": artifact.date,
             "skills": artifact.derived_skills
         }
-        
+
         with get_db_session() as db:
             doc = DocumentEmbedding(
                 user_id=user_id,
@@ -79,28 +82,28 @@ class VectorStore:
             )
             db.add(doc)
             # Commit handled by context manager
-            
+
         print(f"DEBUG: Added artifact {artifact.source_filename} to Supabase VectorStore.")
 
-    def query_similar(self, query: str, n_results: int = 3, filter_source: Optional[str] = None, user_id: str = "legacy_user") -> List[Dict]:
+    def query_similar(self, query: str, n_results: int = 3, filter_source: str | None = None, user_id: str = "legacy_user") -> list[dict]:
         """Queries the vector store for similar artifacts."""
         query_embedding = self._generate_query_embedding(query)
-        
+
         with get_db_session() as db:
             # Cosine distance operator is <=>
             stmt = select(DocumentEmbedding).order_by(
                 DocumentEmbedding.embedding.cosine_distance(query_embedding)
             ).limit(n_results)
-            
+
             if filter_source:
                 # Generic JSON filtering
-                stmt = stmt.filter(DocumentEmbedding.metadata_json['source_type'].as_string() == filter_source)
-            
+                stmt = stmt.filter(DocumentEmbedding.metadata_json["source_type"].as_string() == filter_source)
+
             if user_id:
                 stmt = stmt.filter(DocumentEmbedding.user_id == user_id)
 
             results = db.execute(stmt).scalars().all()
-            
+
             output = []
             for doc in results:
                 output.append({
@@ -109,7 +112,7 @@ class VectorStore:
                     "metadata": doc.metadata_json,
                     "distance": 0.0 # Distance calculation requires modification to select clause to return it
                 })
-            
+
             return output
 
     def clear_database(self, user_id: str = "legacy_user"):

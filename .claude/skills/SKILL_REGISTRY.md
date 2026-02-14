@@ -1,6 +1,19 @@
-# Skill Registry
+---
 
-> **Purpose**: Central discovery hub for all 52+ active Claude Code skills. Use this to find the right skill for your task, understand relationships between skills, and navigate by domain or capability.
+## Single Source of Truth Standardization
+
+As of 2026-02-14, all skills are standardized for interoperability across **Claude Code, Codex CLI, and Antigravity IDE**.
+
+### Skill Standard
+- **File**: Each skill directory must contain a `SKILL.md`.
+- **Frontmatter**: `SKILL.md` must begin with YAML frontmatter containing `name` and `description`.
+- **Structure**:
+    - `scripts/`: Executable scripts and tools.
+    - `references/`: Supporting documentation and templates.
+    - `assets/`: Static assets or mockups.
+
+### Automation
+- [standardize-skills.py](file:///Users/okgoogle13/Desktop/careercopilot/scripts/standardize-skills.py) can be used to re-sync or clean up skill directories.
 
 ---
 
@@ -9,7 +22,7 @@
 ### "I need to design or validate something"
 
 - **Visual Design**: [ui-design-evaluator](#ui-design-evaluator), [m3-visual-audit](#m3-visual-audit), [kerala-rage-visual-audit](#kerala-rage-visual-audit)
-- **Design Tokens**: [design-token-validator](#design-token-validator), [token-orchestrator](#token-orchestrator)
+- **Design Tokens**: [design-token-validator](#design-token-validator), [token-orchestrator](#token-orchestrator), [figma-token-sync](#figma-token-sync)
 - **Typography**: [expressive-typography-manipulation](#expressive-typography-manipulation), [kerala-rage-typography-strategy](#kerala-rage-typography-strategy)
 - **Anti-Slop (Quality)**: [auto-validator](#auto-validator)
 - **Brand Alignment**: [brand-brief-optimizer](#brand-brief-optimizer), [kerala-rage-brand-enforcer](#kerala-rage-brand-enforcer)
@@ -60,6 +73,7 @@
 #### Generation (3)
 
 - [ui-design-evaluator](#ui-design-evaluator) - Evaluate designs, create mockups, score kerala-rage kr-solidarity compliance (kr-dark/kr-dark modes)
+- [figma-token-sync](#figma-token-sync) - Bi-directional token synchronization between DTCG tokens.json and Figma Variables
 - [m3-expressive-ui-evaluator](#m3-expressive-ui-evaluator) - Generate M3 Expressive mockups from wireframes
 - [m3-aesthetic-creator](#m3-aesthetic-creator) - Comprehensive M3 Expressive layout & aesthetic generator
 
@@ -438,6 +452,13 @@
 **Purpose**: Vision-based asset compliance scoring
 **When to use**: Quick asset validation (30 seconds)
 **Related**: [kerala-rage-asset-cataloger](#kerala-rage-asset-cataloger)
+
+### figma-token-sync
+
+**Purpose**: Bi-directional token synchronization between DTCG tokens.json and Figma Variables
+**When to use**: After editing design tokens, before design handoff, during mockup generation
+**Key concepts**: Bi-directional sync, DTCG type mapping, alias resolution, incremential updates
+**Related**: [design-token-validator](#design-token-validator), [ui-design-evaluator](#ui-design-evaluator)
 
 ### vision-scorer-mcp
 

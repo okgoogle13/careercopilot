@@ -1,13 +1,15 @@
 # backend/app/api/v1/analysis.py (Revised for Supabase Alignment & Genkit 0.4.0 fix)
 
-from fastapi import APIRouter, Body, Depends, HTTPException
-from pydantic import BaseModel, Field
-from typing import Any, Dict, List, Optional, cast
 import asyncio
 from concurrent.futures import ThreadPoolExecutor
+from typing import Any
+
+from app.genkit_flows.resume_optimizer import optimizeResume
+from fastapi import APIRouter, Body, Depends, HTTPException
+from pydantic import BaseModel, Field
 
 from app.core.dependencies import get_current_user
-from app.genkit_flows.resume_optimizer import optimizeResume, OptimizedResume
+
 # from app.genkit_flows.corporate_intelligence import research_company, CorporateProfile # Optional: Import if needed
 
 router = APIRouter()
@@ -17,7 +19,7 @@ executor = ThreadPoolExecutor(max_workers=3)
 
 class OptimizeResumeRequest(BaseModel):
     job_description: str
-    company_url: Optional[str] = None
+    company_url: str | None = None
     resume_text: str = Field(default="") # Added for direct testing
 
 class OptimizeResumeResponse(BaseModel):
@@ -48,7 +50,7 @@ async def optimize_resume(
 
         # Missing keywords would come from ATS score usually.
         # For this simplified version, we'll ask the model to infer them or pass empty.
-        missing_keywords = [] 
+        missing_keywords = []
 
         # Call optimizer synchronously in threadpool
         loop = asyncio.get_event_loop()
@@ -69,7 +71,7 @@ async def optimize_resume(
         print(f"Resume optimization error: {e}")
         raise HTTPException(
             status_code=500,
-            detail=f"An unexpected error occurred during resume optimization: {str(e)}",
+            detail=f"An unexpected error occurred during resume optimization: {e!s}",
         )
 
 
@@ -81,8 +83,8 @@ async def get_analysis_data(current_user: Any = Depends(get_current_user)):
     # ... Original logic ...
     # Simplified for verify
     return {
-        "atsScoreHistory": [{"month": 'Jan', "score": 82}],
-        "applicationStatus": [{"name": 'Applied', "value": 1, "color": '#D0BCFF'}],
+        "atsScoreHistory": [{"month": "Jan", "score": 82}],
+        "applicationStatus": [{"name": "Applied", "value": 1, "color": "#D0BCFF"}],
         "keywordMatch": [],
         "matchedKeywords": ["Python", "FastAPI"],
         "missingKeywords": ["Genkit 0.4.0"]

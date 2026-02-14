@@ -1,11 +1,14 @@
 ---
 name: design-skills
-description: "Collection of design-focused skills for visual validation, asset generation, and design system compliance"
-version: 1.0.0
-tags:
-  - design
-  - design-system
-  - visual-validation
+description: Collection of design-focused skills for visual validation, asset generation,
+  and design system compliance
+metadata:
+  legacy_frontmatter:
+    version: 1.0.0
+    tags:
+    - design
+    - design-system
+    - visual-validation
 ---
 
 # Design Skills Collection

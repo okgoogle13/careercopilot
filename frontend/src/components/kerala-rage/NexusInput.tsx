@@ -1,10 +1,9 @@
 import React from 'react';
-import { motion, HTMLMotionProps, useReducedMotion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { cn } from '@/lib/utils';
-import { useMode } from '@/hooks/use-mode';
 import { Search, Loader2 } from 'lucide-react';
 
-export interface NexusInputProps extends Omit<HTMLMotionProps<'input'>, 'ref'> {
+export interface NexusInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   icon?: 'search' | 'none';
   loading?: boolean;
   label?: string; // Accessible label
@@ -21,7 +20,6 @@ export interface NexusInputProps extends Omit<HTMLMotionProps<'input'>, 'ref'> {
  */
 export const NexusInput = React.forwardRef<HTMLInputElement, NexusInputProps>(
   ({ className, icon = 'none', loading = false, label, error, ...props }, ref) => {
-    const { mode } = useMode();
     const shouldReduceMotion = useReducedMotion();
 
     const motionProps = shouldReduceMotion

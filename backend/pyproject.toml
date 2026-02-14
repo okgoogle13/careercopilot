@@ -217,29 +217,3 @@ dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
     "S101",  # Use of assert detected
     "ARG001", # Unused method argument
 ]
-
-# Jupyter Notebook support
-[tool.ruff.jupyter]
-enabled = true
-
-# Type checking rules
-[tool.ruff.type-checking]
-strict = true
-
-# Flake8-quotes configuration
-[tool.ruff.flake8-quotes]
-docstring-quotes = "double"
-inline-quotes = "double"
-multiline-quotes = "double"
-
-# Flake8-bugbear configuration
-[tool.ruff.flake8-bugbear]
-extend-immutable-calls = ["fastapi.Depends"]
-
-# Pyupgrade configuration
-[tool.ruff.pyupgrade]
-keep-runtime-typing = true
-
-# isort configuration
-[tool.ruff.isort]
-known-first-party = ["app"]

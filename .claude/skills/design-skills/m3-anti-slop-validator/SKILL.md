@@ -1,8 +1,13 @@
 ---
 name: m3-anti-slop-validator
-description: Detect and prevent generic AI aesthetics in Material Design 3 Expressive components. Forbids purple gradients, flat layouts, generic fonts (Inter, Roboto, Arial). Validates typography, colors, motion, and layout against M3 Expressive standards with 0-100 quality scoring.
-version: 1.0.0
-tags: []
+description: Detect and prevent generic AI aesthetics in Material Design 3 Expressive
+  components. Forbids purple gradients, flat layouts, generic fonts (Inter, Roboto,
+  Arial). Validates typography, colors, motion, and layout against M3 Expressive standards
+  with 0-100 quality scoring.
+metadata:
+  legacy_frontmatter:
+    version: 1.0.0
+    tags: []
 ---
 
 # M3 Anti-Slop Validator

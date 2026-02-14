@@ -2,13 +2,13 @@
 Integration tests for user profile creation using SQLAlchemy and PostgreSQL.
 """
 
-import pytest
-from sqlalchemy.orm import Session
-from datetime import datetime, timezone
 
-from app.services.user_profile_service import UserProfileService
-from app.models.database import User
+import pytest
+
 from app.core.database import SessionLocal, db_config
+from app.models.database import User
+from app.services.user_profile_service import UserProfileService
+
 
 @pytest.mark.asyncio
 class TestProfileCreation:
@@ -62,7 +62,7 @@ class TestProfileCreation:
         assert result["name"] == name
         assert result["location"] == location
         assert "created_at" in result
-        
+
         # Verify in DB
         db_user = db_session.query(User).filter(User.id == user_id).first()
         assert db_user is not None

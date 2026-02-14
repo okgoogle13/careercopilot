@@ -1,8 +1,11 @@
 ---
 name: pytest-test-scaffolder
-description: Scaffolds pytest unit tests for Python backend functions and classes. Use when creating tests for FastAPI endpoints, services, and utilities.
-version: 1.0.0
-tags: []
+description: Scaffolds pytest unit tests for Python backend functions and classes.
+  Use when creating tests for FastAPI endpoints, services, and utilities.
+metadata:
+  legacy_frontmatter:
+    version: 1.0.0
+    tags: []
 ---
 
 # Pytest Test Scaffolder

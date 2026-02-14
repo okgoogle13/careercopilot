@@ -1,7 +1,17 @@
 ---
 name: mcp-genkit-flows-skill
-description: "Execute and manage 26 Genkit AI flows via MCP with 90% caching. Use when generating KSC responses, creating cover letters, analyzing resumes, or orchestrating multi-step AI workflows. Provides 70-90% token savings and memoization for repeated requests."
-tags: [mcp, genkit, ai-flows, orchestration, caching]
+description: Execute and manage 26 Genkit AI flows via MCP with 90% caching. Use when
+  generating KSC responses, creating cover letters, analyzing resumes, or orchestrating
+  multi-step AI workflows. Provides 70-90% token savings and memoization for repeated
+  requests.
+metadata:
+  legacy_frontmatter:
+    tags:
+    - mcp
+    - genkit
+    - ai-flows
+    - orchestration
+    - caching
 ---
 
 # MCP Genkit Flows Skill

@@ -1,12 +1,14 @@
 ---
+name: manifest-reconciler
 description: Reconciles filesystem assets with the hero registry and manifest files.
   catches missing, abandoned, or mismatched assets to maintain system integrity.
-name: manifest-reconciler
-version: 1.0.0
-tags:
-- manifest
-- filesystem
-- integrity
+metadata:
+  legacy_frontmatter:
+    version: 1.0.0
+    tags:
+    - manifest
+    - filesystem
+    - integrity
 ---
 
 # Manifest Reconciler Skill

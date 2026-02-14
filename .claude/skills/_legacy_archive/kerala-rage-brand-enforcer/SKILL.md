@@ -1,8 +1,15 @@
 ---
 name: kerala-rage-brand-enforcer
-description: Auto-applies Kerala Rage brand guidelines (Agit-Prop aesthetic, Worker Solidarity motifs) to ensure design consistency.
-tags: [brand, compliance, kerala-rage, design]
-version: 2.0.0
+description: Auto-applies Kerala Rage brand guidelines (Agit-Prop aesthetic, Worker
+  Solidarity motifs) to ensure design consistency.
+metadata:
+  legacy_frontmatter:
+    tags:
+    - brand
+    - compliance
+    - kerala-rage
+    - design
+    version: 2.0.0
 ---
 
 # Kerala Rage Brand Enforcer skill

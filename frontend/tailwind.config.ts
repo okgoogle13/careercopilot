@@ -1,6 +1,9 @@
 // frontend/tailwind.config.ts
 import type { Config } from 'tailwindcss';
 import tokens from './src/design/tokens/tokens.json';
+// @ts-ignore
+import m3Patch from './tailwind-m3-patch.js';
+
 
 /**
  * Safely extract token values from DTCG-formatted tokens.json
@@ -47,8 +50,10 @@ const config: Config = {
       },
     },
     extend: {
+      ...(m3Patch?.theme?.extend || {}),
       // ============================================
       // COLORS - kerala-rage kr-solidarity Palette
+
       // ============================================
       colors: {
         // Surfaces - Shared

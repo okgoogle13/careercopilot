@@ -1,8 +1,12 @@
 ---
 name: token-injector
-description: Automated CSS variable injection from tokens.json. Parses design tokens → generates CSS custom properties → injects into stylesheets → replaces hardcoded values.
-version: 1.0.0
-tags: []
+description: "Automated CSS variable injection from tokens.json. Parses design tokens\
+  \ \u2192 generates CSS custom properties \u2192 injects into stylesheets \u2192\
+  \ replaces hardcoded values."
+metadata:
+  legacy_frontmatter:
+    version: 1.0.0
+    tags: []
 ---
 
 # Token-Injector Skill

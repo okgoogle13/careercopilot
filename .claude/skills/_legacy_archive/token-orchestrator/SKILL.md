@@ -1,8 +1,14 @@
 ---
 name: token-orchestrator
-description: Validates design tokens for DTCG compliance, kerala-rage kr-solidarity palette rules, and Tailwind integration. Use when (1) Build fails with getValue() errors, (2) Adding/modifying tokens.json, (3) Checking palette compliance, (4) Finding hardcoded CSS values, (5) Pre-commit validation needed, or (6) Syncing tokens across systems.
-version: 1.0.0
-tags: []
+description: Validates design tokens for DTCG compliance, kerala-rage kr-solidarity
+  palette rules, and Tailwind integration. Use when (1) Build fails with getValue()
+  errors, (2) Adding/modifying tokens.json, (3) Checking palette compliance, (4) Finding
+  hardcoded CSS values, (5) Pre-commit validation needed, or (6) Syncing tokens across
+  systems.
+metadata:
+  legacy_frontmatter:
+    version: 1.0.0
+    tags: []
 ---
 
 # Design Token Orchestrator

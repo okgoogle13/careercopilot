@@ -1,8 +1,14 @@
 ---
 name: kerala-rage-asset-cataloger
-description: Visual triage analyst for kerala-rage kr-solidarity design system. Analyzes uncategorized assets against kerala-rage-kr-solidarity-manifest.json to generate executable action plans (move/delete/variant). Performs gap analysis, duplicate detection, and mode compliance validation. Outputs structured JSON for automated batch processing.
-version: 1.0.0
-tags: []
+description: Visual triage analyst for kerala-rage kr-solidarity design system. Analyzes
+  uncategorized assets against kerala-rage-kr-solidarity-manifest.json to generate
+  executable action plans (move/delete/variant). Performs gap analysis, duplicate
+  detection, and mode compliance validation. Outputs structured JSON for automated
+  batch processing.
+metadata:
+  legacy_frontmatter:
+    version: 1.0.0
+    tags: []
 ---
 
 # kerala-rage Asset Cataloger

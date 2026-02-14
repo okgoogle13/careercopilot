@@ -1,8 +1,11 @@
 ---
 name: skill-reviewer
-description: Evaluates skill effectiveness, suggests improvements to instructions, identifies missing edge cases, and recommends structure changes.
-version: 1.0.0
-tags: []
+description: Evaluates skill effectiveness, suggests improvements to instructions,
+  identifies missing edge cases, and recommends structure changes.
+metadata:
+  legacy_frontmatter:
+    version: 1.0.0
+    tags: []
 ---
 
 # Skill Reviewer

@@ -1,6 +1,7 @@
 ---
 name: api-integration-test-scaffolder
-description: "Generates integration tests for frontend → backend → Genkit flow connections. Use when creating E2E API tests."
+description: "Generates integration tests for frontend \u2192 backend \u2192 Genkit\
+  \ flow connections. Use when creating E2E API tests."
 ---
 
 # API Integration Test Scaffolder Workflow
