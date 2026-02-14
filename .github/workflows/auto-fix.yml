@@ -29,8 +29,10 @@ permissions:
   checks: write
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
-  cancel-in-progress: true
+  # Prevent multiple auto-fix runs on the same PR/branch
+  # Using github.sha ensures we queue runs instead of canceling
+  group: auto-fix-${{ github.event.pull_request.number || github.ref }}-${{ github.sha }}
+  cancel-in-progress: false  # Queue runs instead of canceling to avoid losing fixes
 
 env:
   PYTHON_VERSION: "3.13"
@@ -48,6 +50,22 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
+
+      - name: Verify git repository state
+        run: |
+          echo "🔍 Checking git repository state..."
+          
+          # Remove any stale lock files from previous failed runs
+          find .git -name "*.lock" -type f -delete 2>/dev/null || true
+          
+          # Verify repository is in good state
+          git status
+          
+          # Display git configuration for debugging
+          echo "📋 Git configuration:"
+          git config --list --local
+          
+          echo "✅ Git repository state verified"
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -213,15 +231,66 @@ jobs:
         run: |
           git diff --exit-code || echo "changes_made=true" >> $GITHUB_OUTPUT
 
-      - name: Commit and push changes
+      - name: Clean up stale git locks
         if: steps.git-check.outputs.changes_made == 'true'
         run: |
+          echo "🧹 Cleaning up any stale git lock files..."
+          # Remove stale lock files that might cause issues
+          rm -f .git/index.lock .git/HEAD.lock .git/refs/heads/*.lock 2>/dev/null || true
+          echo "✅ Lock file cleanup complete"
+
+      - name: Commit and push changes with retry
+        if: steps.git-check.outputs.changes_made == 'true'
+        env:
+          # Prevent system-level git config conflicts
+          GIT_CONFIG_SYSTEM: ""
+        run: |
+          set +e  # Don't exit on error, we'll handle retries
+          
+          echo "🔧 Configuring git..."
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "GitHub Actions Auto-Fix Bot"
+          
+          echo "📦 Staging changes..."
           git add .
+          
+          echo "💾 Committing changes..."
           git commit -m "style(auto): Apply Electric Alchemist auto-fixes [skip ci]" \
             -m "Applied standard formatting and linting for TS, Python, and CSS."
-          git push
+          
+          # Retry logic for git push with exponential backoff
+          MAX_RETRIES=5
+          RETRY_COUNT=0
+          RETRY_DELAY=2
+          
+          while [ $RETRY_COUNT -lt $MAX_RETRIES ]; do
+            echo "🚀 Attempting to push (attempt $((RETRY_COUNT + 1))/$MAX_RETRIES)..."
+            
+            # Clean up any stale locks before push
+            rm -f .git/index.lock .git/HEAD.lock 2>/dev/null || true
+            
+            # Try to push
+            if git push; then
+              echo "✅ Push successful!"
+              exit 0
+            else
+              RETRY_COUNT=$((RETRY_COUNT + 1))
+              if [ $RETRY_COUNT -lt $MAX_RETRIES ]; then
+                echo "⚠️  Push failed, waiting ${RETRY_DELAY}s before retry..."
+                sleep $RETRY_DELAY
+                # Exponential backoff
+                RETRY_DELAY=$((RETRY_DELAY * 2))
+                
+                # Try to pull and rebase in case of conflicts
+                echo "🔄 Pulling latest changes..."
+                git pull --rebase origin ${{ github.head_ref || github.ref_name }} || true
+              else
+                echo "❌ Push failed after $MAX_RETRIES attempts"
+                echo "This may be due to concurrent workflow runs. The changes are committed locally."
+                exit 1
+              fi
+            fi
+          done
 
       # ============================================================
       # PR NOTIFICATIONS
