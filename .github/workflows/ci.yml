@@ -24,7 +24,8 @@ permissions:
   contents: read
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  # Prevent concurrent CI runs on the same branch to avoid git lock conflicts
+  group: ci-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
 env:
@@ -232,20 +233,19 @@ jobs:
           install-mode: "full"
           cache-prefix: ${{ matrix.test-group }}
       - name: Run checks
-        working-directory: backend
         run: |
           case ${{ matrix.test-group }} in
             lint)
-              ruff check app/
+              flake8 backend/app/ --show-source --statistics --format=github
               ;;
             format)
-              ruff format --check .
+              black --check backend/ --line-length=100 --diff
               ;;
             security)
-              bandit -r app/ -f json -o bandit-report.json
+              bandit -r backend/ -f json -o bandit-report.json
               ;;
             mypy)
-              mypy app/ --ignore-missing-imports --show-error-codes
+              mypy backend/ --ignore-missing-imports --show-error-codes
               ;;
           esac
       - name: Upload bandit report
