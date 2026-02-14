@@ -1,11 +1,16 @@
 ---
-description: Analyze component screenshots and design artifacts against Kerala Rage
-  visual standards. Validate typography (Agit-Prop, Solidarity), color palette (Charcoal, [DEPRECATED_STYLE], Gold),
-  layout (asymmetry, torn edges), and motion (viscous fluidity). Generate compliance assessments
-  and design evolution analysis.
 name: kerala-rage-visual-audit
-version: 2.0.0
-tags: [validation, vision, kerala-rage]
+description: Analyze component screenshots and design artifacts against Kerala Rage
+  visual standards. Validate typography (Agit-Prop, Solidarity), color palette (Charcoal,
+  [DEPRECATED_STYLE], Gold), layout (asymmetry, torn edges), and motion (viscous fluidity).
+  Generate compliance assessments and design evolution analysis.
+metadata:
+  legacy_frontmatter:
+    version: 2.0.0
+    tags:
+    - validation
+    - vision
+    - kerala-rage
 ---
 
 # Kerala Rage Visual Audit Skill

@@ -1,12 +1,14 @@
 ---
+name: hifi-blueprint-linter
 description: Validates high-fidelity wireframe content against the Kerala Rage design
   specs. catches aesthetic and technical drifts in markdown documentation and drafts.
-name: hifi-blueprint-linter
-version: 1.0.0
-tags:
-- design-system
-- linting
-- documentation
+metadata:
+  legacy_frontmatter:
+    version: 1.0.0
+    tags:
+    - design-system
+    - linting
+    - documentation
 ---
 
 # Hi-Fi Blueprint Linter Skill

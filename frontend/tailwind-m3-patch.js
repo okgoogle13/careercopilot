@@ -166,13 +166,13 @@ module.exports = {
             "tornEdgeClipPath": "var(--sys-shape-tornEdgeClipPath)"
       },
       "boxShadow": {
-            "elevation1Pebble": "var(--md-sys-shadow-elevation1Pebble)",
-            "elevation2Stone": "var(--md-sys-shadow-elevation2Stone)",
-            "elevation3HoverLift": "var(--md-sys-shadow-elevation3HoverLift)",
-            "elevation4Float": "var(--md-sys-shadow-elevation4Float)",
-            "inkOffset": "var(--md-sys-shadow-inkOffset)",
-            "solidarityBleed": "var(--md-sys-shadow-solidarityBleed)",
-            "viscousBreezeTransition": "var(--md-sys-shadow-viscousBreezeTransition)"
+            "elevation1Pebble": "var(--sys-shadow-elevation1Pebble)",
+            "elevation2Stone": "var(--sys-shadow-elevation2Stone)",
+            "elevation3HoverLift": "var(--sys-shadow-elevation3HoverLift)",
+            "elevation4Float": "var(--sys-shadow-elevation4Float)",
+            "inkOffset": "var(--sys-shadow-inkOffset)",
+            "solidarityBleed": "var(--sys-shadow-solidarityBleed)",
+            "viscousBreezeTransition": "var(--sys-shadow-viscousBreezeTransition)"
       },
       "transitionTimingFunction": {
             "expressive": "cubic-bezier(0.34, 1.56, 0.64, 1)"

@@ -1,10 +1,13 @@
 ---
-description: Apply "Maximum Expressive Playful" kerala-rage kr-solidarity typography using Variable
-  and Color fonts. Orchestrates 3 interaction tiers (Workhorse, Expressive, Accent)
-  with dynamic axes (GRAD, WONK, SOFT) for kerala-streetprint-meets-Cyberpunk aesthetic.
 name: kerala-rage-typography-strategy
-version: 1.0.0
-tags: []
+description: Apply "Maximum Expressive Playful" kerala-rage kr-solidarity typography
+  using Variable and Color fonts. Orchestrates 3 interaction tiers (Workhorse, Expressive,
+  Accent) with dynamic axes (GRAD, WONK, SOFT) for kerala-streetprint-meets-Cyberpunk
+  aesthetic.
+metadata:
+  legacy_frontmatter:
+    version: 1.0.0
+    tags: []
 ---
 
 ## Purpose

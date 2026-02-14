@@ -6,7 +6,7 @@ ensuring consistent settings across the application.
 """
 
 import os
-from typing import Any, Dict, Optional, Tuple
+from typing import Any
 
 try:
     from pydantic_settings import BaseSettings
@@ -32,9 +32,9 @@ class SecureSettings(BaseSettings):
     DATABASE_URL: str = "sqlite:///data/careercopilot-dev.db"
 
     # Supabase Configuration
-    SUPABASE_URL: Optional[str] = None
-    SUPABASE_ANON_KEY: Optional[str] = None
-    SUPABASE_SERVICE_ROLE_KEY: Optional[str] = None
+    SUPABASE_URL: str | None = None
+    SUPABASE_ANON_KEY: str | None = None
+    SUPABASE_SERVICE_ROLE_KEY: str | None = None
     SUPABASE_STORAGE_BUCKET: str = "user_assets"
 
     # Authentication
@@ -43,14 +43,14 @@ class SecureSettings(BaseSettings):
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 1440  # 24 hours
 
     # AI Services
-    GEMINI_API_KEY: Optional[str] = None
-    ANTHROPIC_API_KEY: Optional[str] = None
+    GEMINI_API_KEY: str | None = None
+    ANTHROPIC_API_KEY: str | None = None
 
     # AWS (for SES/S3 fallback)
-    AWS_ACCESS_KEY_ID: Optional[str] = None
-    AWS_SECRET_ACCESS_KEY: Optional[str] = None
+    AWS_ACCESS_KEY_ID: str | None = None
+    AWS_SECRET_ACCESS_KEY: str | None = None
     AWS_REGION: str = "us-east-1"
-    SES_SENDER_EMAIL: Optional[str] = None
+    SES_SENDER_EMAIL: str | None = None
 
     def __init__(self, **kwargs: Any) -> None:
         super().__init__(**kwargs)
@@ -88,11 +88,11 @@ class SecureSettings(BaseSettings):
 
 
 # Create a single instance of the settings
-settings: 'SecureSettings' = SecureSettings()
+settings: "SecureSettings" = SecureSettings()
 
 
 # Create a single instance of the settings
-settings: 'SecureSettings' = SecureSettings()
+settings: "SecureSettings" = SecureSettings()
 
 # For backward compatibility
 if __name__ == "__main__":

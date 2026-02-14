@@ -1,8 +1,19 @@
 ---
 name: component-visual-audit
-description: Analyze UI component screenshots against kerala-rage kr-solidarity standards. Validate typography (distinctiveness, hierarchy), color palette (Australian [DEPRECATED_STYLE]), layout ([DEPRECATED_STYLE] spacing, asymmetry), [DEPRECATED_STYLE] motif integration. Generate compliance assessments with narrative feedback and design evolution tracking.
-version: 1.0.0
-tags: [validation, components, vision-analysis, kerala-rage, design-system, ui-audit]
+description: Analyze UI component screenshots against kerala-rage kr-solidarity standards.
+  Validate typography (distinctiveness, hierarchy), color palette (Australian [DEPRECATED_STYLE]),
+  layout ([DEPRECATED_STYLE] spacing, asymmetry), [DEPRECATED_STYLE] motif integration.
+  Generate compliance assessments with narrative feedback and design evolution tracking.
+metadata:
+  legacy_frontmatter:
+    version: 1.0.0
+    tags:
+    - validation
+    - components
+    - vision-analysis
+    - kerala-rage
+    - design-system
+    - ui-audit
 ---
 
 # Component Visual Audit Skill

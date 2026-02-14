@@ -66,7 +66,7 @@ export interface HeroComposition {
   name: string;
   layers: HeroLayer[];
   typography: Typography;
-  motion?: Motion; // Legacy support
+  motion?: AnimationProfile; // Legacy support
   animation?: AnimationProfile;
   z_index_map?: Record<LayerType, number>;
 }

@@ -71,6 +71,14 @@ repos:
         exclude: ^frontend/(node_modules|dist|build)/
         pass_filenames: false
 
+      - id: token-builder-validator
+        name: Rebuild & Validate Design Tokens
+        entry: bash -c 'echo "🔨 Rebuilding design tokens..." && python3 scripts/build-m3-tokens.py && echo "✅ Validating tokens..." && python3 scripts/design-validation/validate-tokens.py'
+        language: system
+        files: ^frontend/src/design/tokens/tokens\.json$
+        pass_filenames: false
+        stages: [pre-commit]
+
   # General: Remove trailing whitespace and basic checks
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v6.0.0

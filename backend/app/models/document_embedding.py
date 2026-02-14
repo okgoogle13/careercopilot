@@ -1,10 +1,12 @@
 
-from sqlalchemy import Column, String, Integer, ForeignKey, JSON
+from sqlalchemy import JSON, Column, ForeignKey, String
+
 try:
     from pgvector.sqlalchemy import Vector
 except ImportError:  # pragma: no cover - optional dependency in test/CI
     Vector = None
 from app.models.database import Base, BaseMixin
+
 
 class DocumentEmbedding(Base, BaseMixin):
     """
@@ -12,7 +14,7 @@ class DocumentEmbedding(Base, BaseMixin):
     Replaces local ChromaDB.
     """
     __tablename__ = "document_embeddings"
-    __table_args__ = {'extend_existing': True}
+    __table_args__ = {"extend_existing": True}
 
 
     user_id = Column(String, ForeignKey("users.id"), nullable=False, index=True)

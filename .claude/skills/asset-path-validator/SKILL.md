@@ -1,12 +1,14 @@
 ---
-description: Deep-scan validator for all asset paths in the codebase. Ensures all src/url
-  attributes in components and markdown point to valid public assets.
 name: asset-path-validator
-version: 1.0.0
-tags:
-- assets
-- validation
-- quality
+description: Deep-scan validator for all asset paths in the codebase. Ensures all
+  src/url attributes in components and markdown point to valid public assets.
+metadata:
+  legacy_frontmatter:
+    version: 1.0.0
+    tags:
+    - assets
+    - validation
+    - quality
 ---
 
 # Asset Path Validator Skill

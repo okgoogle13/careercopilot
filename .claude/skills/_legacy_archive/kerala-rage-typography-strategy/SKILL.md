@@ -1,10 +1,15 @@
 ---
-description: Apply "Agit-Prop / Viscous Fluidity" Kerala Rage typography using Variable
-  and Recursive fonts. Orchestrates the Interaction Trinity within the single "Solidarity" mode,
-  with dynamic axes (wght, slnt, CASL) for Agit-Prop aesthetic.
 name: kerala-rage-typography-strategy
-version: 2.0.0
-tags: [typography, kerala-rage, variable-fonts]
+description: Apply "Agit-Prop / Viscous Fluidity" Kerala Rage typography using Variable
+  and Recursive fonts. Orchestrates the Interaction Trinity within the single "Solidarity"
+  mode, with dynamic axes (wght, slnt, CASL) for Agit-Prop aesthetic.
+metadata:
+  legacy_frontmatter:
+    version: 2.0.0
+    tags:
+    - typography
+    - kerala-rage
+    - variable-fonts
 ---
 
 ## Purpose

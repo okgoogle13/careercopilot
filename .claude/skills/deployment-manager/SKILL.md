@@ -1,8 +1,11 @@
 ---
 name: deployment-manager
-description: "Deploys the project to staging or production using this project's scripts. Use when asked to 'deploy' or 'push to staging'."
-version: 1.0.0
-tags: []
+description: Deploys the project to staging or production using this project's scripts.
+  Use when asked to 'deploy' or 'push to staging'.
+metadata:
+  legacy_frontmatter:
+    version: 1.0.0
+    tags: []
 ---
 
 ## Purpose

@@ -1,8 +1,18 @@
 ---
 name: kerala-rage-tier1-automation
-version: 1.0.0
-description: Tier 1 Kerala Rage automation skills for immediate 5× ROI. Includes auto-validator (30-sec compliance scoring), asset-packager (2-min automated bundling), and prompt-composer (1-min prompt generation). Deploy first for 90% time reduction on asset validation and packaging.
-tags: [automation, kerala-rage, validation, asset-packaging, tier1]
+description: "Tier 1 Kerala Rage automation skills for immediate 5\xD7 ROI. Includes\
+  \ auto-validator (30-sec compliance scoring), asset-packager (2-min automated bundling),\
+  \ and prompt-composer (1-min prompt generation). Deploy first for 90% time reduction\
+  \ on asset validation and packaging."
+metadata:
+  legacy_frontmatter:
+    version: 1.0.0
+    tags:
+    - automation
+    - kerala-rage
+    - validation
+    - asset-packaging
+    - tier1
 ---
 
 # Tier 1 Automation Skills

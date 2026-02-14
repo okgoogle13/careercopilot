@@ -1,8 +1,15 @@
 ---
 name: batch-processor
-description: Orchestrates parallel design-to-code workflows for multiple components (3-5). Manages the pipeline from Protocol → Wireframe → Spec → Build with aggregated validation gates.
-version: 2.0.0
-tags: [design-automation, component-batching, orchestration]
+description: "Orchestrates parallel design-to-code workflows for multiple components\
+  \ (3-5). Manages the pipeline from Protocol \u2192 Wireframe \u2192 Spec \u2192\
+  \ Build with aggregated validation gates."
+metadata:
+  legacy_frontmatter:
+    version: 2.0.0
+    tags:
+    - design-automation
+    - component-batching
+    - orchestration
 ---
 
 # Batch-Processor Skill

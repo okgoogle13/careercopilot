@@ -3,21 +3,18 @@ kr-solidarity v3.0.0 Asset Review Endpoints
 Human review workflow for governance overrides and bulk decisions.
 """
 
-from fastapi import APIRouter, HTTPException, Depends
-from typing import List, Optional
-from datetime import datetime, timedelta
-import json
-from pathlib import Path
+from datetime import datetime
+
+from fastapi import APIRouter, HTTPException
 
 from app.schemas.asset_review import (
+    AssetReviewResponse,
     AssetReviewSubmission,
     BulkAssetReviewSubmission,
-    AssetReviewResponse,
+    GovernanceOverride,
     ReviewDashboardAsset,
     ReviewDashboardStats,
-    GovernanceOverride
 )
-
 
 router = APIRouter(prefix="/api/asset-review", tags=["asset-review"])
 
@@ -42,7 +39,7 @@ async def submit_asset_review(review: AssetReviewSubmission):
     - **reviewed_by**: Reviewer identity
     - **confidence**: Reviewer confidence score (0.0-1.0)
     """
-    print(f"\n📝 Asset Review Submission")
+    print("\n📝 Asset Review Submission")
     print(f"  Asset: {review.asset_id}")
     print(f"  Decision: {review.overall_decision}")
     print(f"  Reviewer: {review.reviewed_by}")
@@ -70,7 +67,7 @@ async def submit_asset_review(review: AssetReviewSubmission):
         override_id = f"{review.asset_id}_{override.violation_id}"
         OVERRIDES_STORAGE[override_id] = override.dict()
 
-    print(f"  ✅ Review saved")
+    print("  ✅ Review saved")
 
     return AssetReviewResponse(
         success=True,
@@ -93,7 +90,7 @@ async def submit_bulk_review(bulk_review: BulkAssetReviewSubmission):
     - **reason**: Justification for bulk decision
     - **reviewed_by**: Reviewer identity
     """
-    print(f"\n📝 Bulk Asset Review")
+    print("\n📝 Bulk Asset Review")
     print(f"  Assets: {len(bulk_review.asset_ids)}")
     print(f"  Decision: {bulk_review.bulk_decision}")
     print(f"  Reviewer: {bulk_review.reviewed_by}")
@@ -125,10 +122,10 @@ async def submit_bulk_review(bulk_review: BulkAssetReviewSubmission):
 
 @router.get("/pending")
 async def get_pending_reviews(
-    status: Optional[str] = None,
-    category: Optional[str] = None,
+    status: str | None = None,
+    category: str | None = None,
     limit: int = 50
-) -> List[ReviewDashboardAsset]:
+) -> list[ReviewDashboardAsset]:
     """
     Get list of assets pending review.
 
@@ -137,7 +134,7 @@ async def get_pending_reviews(
     - **category**: Filter by asset category (devotional, portrait, symbol, street, abstract, texture)
     - **limit**: Maximum number of results (default 50)
     """
-    print(f"\n📋 Fetching pending reviews")
+    print("\n📋 Fetching pending reviews")
     print(f"  Status filter: {status}")
     print(f"  Category filter: {category}")
     print(f"  Limit: {limit}")
@@ -212,7 +209,7 @@ async def get_dashboard_stats() -> ReviewDashboardStats:
 
     Returns counts of pending, approved, rejected, and conditional assets.
     """
-    print(f"\n📊 Fetching dashboard statistics")
+    print("\n📊 Fetching dashboard statistics")
 
     # Mock data - in production, query from database
     stats = ReviewDashboardStats(
@@ -246,7 +243,7 @@ async def submit_governance_override(
     - **violation_id**: The specific violation/warning to override
     - **override**: GovernanceOverride with justification
     """
-    print(f"\n⚖️  Governance Override")
+    print("\n⚖️  Governance Override")
     print(f"  Asset: {asset_id}")
     print(f"  Violation: {violation_id}")
     print(f"  Decision: {override.decision}")
@@ -259,7 +256,7 @@ async def submit_governance_override(
         **override.dict()
     }
 
-    print(f"  ✅ Override stored")
+    print("  ✅ Override stored")
 
     return {
         "success": True,
@@ -277,7 +274,7 @@ async def get_asset_review_history(asset_id: str):
 
     Returns all reviews and overrides submitted for this asset.
     """
-    print(f"\n📜 Asset Review History")
+    print("\n📜 Asset Review History")
     print(f"  Asset: {asset_id}")
 
     review = REVIEWS_STORAGE.get(asset_id)
@@ -289,7 +286,7 @@ async def get_asset_review_history(asset_id: str):
     if not review:
         raise HTTPException(status_code=404, detail=f"No reviews found for {asset_id}")
 
-    print(f"  Review found")
+    print("  Review found")
     print(f"  Overrides: {len(overrides)}")
 
     return {
@@ -310,7 +307,7 @@ async def export_reviews(
     - **format**: json, csv
     - **include_rejected**: Include rejected assets in export
     """
-    print(f"\n📤 Exporting Reviews")
+    print("\n📤 Exporting Reviews")
     print(f"  Format: {format}")
     print(f"  Include rejected: {include_rejected}")
 
@@ -376,7 +373,7 @@ async def clear_all_reviews(confirm: bool = False):
     REVIEWS_STORAGE.clear()
     OVERRIDES_STORAGE.clear()
 
-    print(f"\n🗑️  Cleared all reviews")
+    print("\n🗑️  Cleared all reviews")
     print(f"  Reviews deleted: {count_reviews}")
     print(f"  Overrides deleted: {count_overrides}")
 

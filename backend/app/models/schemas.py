@@ -9,7 +9,7 @@ AI-powered features in the Careercopilot application.
 """
 
 from datetime import datetime  # Make sure datetime is imported
-from typing import List, Literal, Optional
+from typing import Literal
 
 from pydantic import BaseModel, Field
 
@@ -25,8 +25,8 @@ class ProfileVariation(BaseModel):
     id: str
     name: str
     description: str
-    target_roles: List[str]
-    skills_emphasis: List[str]
+    target_roles: list[str]
+    skills_emphasis: list[str]
     experience_focus: str
     created_at: datetime  # Use datetime for better type handling
     is_default: bool = False
@@ -37,8 +37,8 @@ class CreateProfileVariationRequest(BaseModel):
 
     name: str
     description: str
-    target_roles: List[str]
-    skills_emphasis: List[str]
+    target_roles: list[str]
+    skills_emphasis: list[str]
     experience_focus: str
 
 
@@ -72,9 +72,9 @@ class GenerateKscRequest(BaseModel):
 
 
 class GenerateKscResponse(BaseModel):
-    criteria: List[KscCriterion]
-    responses: List[KscResponse]
-    processing_time: Optional[float] = None
+    criteria: list[KscCriterion]
+    responses: list[KscResponse]
+    processing_time: float | None = None
 
 
 # =============================================================================
@@ -89,7 +89,7 @@ class CoverLetterRequest(BaseModel):
 
 class CoverLetterResponse(BaseModel):
     cover_letter: str
-    subject_line: Optional[str] = None
+    subject_line: str | None = None
 
 
 # =============================================================================
@@ -105,7 +105,7 @@ class CategoryScore(BaseModel):
     status: Literal["good", "warning", "poor"] = Field(
         ..., description="The qualitative status of the score."
     )
-    suggestions: List[str] = Field(
+    suggestions: list[str] = Field(
         ..., description="A list of AI-generated suggestions for this category."
     )
 
@@ -117,8 +117,8 @@ class User(BaseModel):
     """Pydantic model representing an authenticated user."""
 
     uid: str
-    email: Optional[str] = None
-    name: Optional[str] = None
+    email: str | None = None
+    name: str | None = None
 
 
 class Recommendation(BaseModel):
@@ -158,7 +158,7 @@ class UserPreferences(BaseModel):
     """Stores user-specific preferences."""
 
     themeId: str
-    targetRoles: List[str]
+    targetRoles: list[str]
     voiceProfile: VoiceProfile
 
 
@@ -168,17 +168,17 @@ class PersonalInfo(BaseModel):
     name: str
     phone: str
     location: str
-    linkedIn: Optional[str] = None
+    linkedIn: str | None = None
 
 
 class MasterProfile(BaseModel):
     """The core master profile containing all professional information."""
 
     summary: str
-    skills: List[str]
-    experience: List[ExperienceItem]
-    education: List[EducationItem]
-    certifications: List[str]
+    skills: list[str]
+    experience: list[ExperienceItem]
+    education: list[EducationItem]
+    certifications: list[str]
 
 
 # =============================================================================
@@ -193,11 +193,11 @@ class ATSScoreResponse(BaseModel):
     """
 
     overall_score: int = Field(..., alias="score", description="The composite ATS score (0-100).")
-    categories: List[CategoryScore] = Field(..., alias="breakdown", description="A breakdown of scores by category.")
-    matched_keywords: List[str] = Field(
+    categories: list[CategoryScore] = Field(..., alias="breakdown", description="A breakdown of scores by category.")
+    matched_keywords: list[str] = Field(
         ..., alias="matchedKeywords", description="Keywords found in both the resume and job description."
     )
-    missing_keywords: List[str] = Field(
+    missing_keywords: list[str] = Field(
         ..., alias="missingKeywords", description="Keywords found in the job description but not the resume."
     )
 
@@ -211,10 +211,10 @@ class KeywordAnalysisResponse(BaseModel):
     Corresponds to Ref #25 in the UI Mapping.
     """
 
-    matched: List[str] = Field(
+    matched: list[str] = Field(
         ..., description="Keywords found in both the resume and job description."
     )
-    missing: List[str] = Field(
+    missing: list[str] = Field(
         ..., description="Keywords found in the job description but not the resume."
     )
 
@@ -225,7 +225,7 @@ class AIRecommendationsResponse(BaseModel):
     Corresponds to Ref #27 in the UI Mapping.
     """
 
-    recommendations: List[Recommendation] = Field(
+    recommendations: list[Recommendation] = Field(
         ..., description="A list of actionable recommendations."
     )
 
@@ -242,12 +242,12 @@ class JobOpportunity(BaseModel):
     title: str
     company: str
     description: str
-    deadline: Optional[datetime] = None
+    deadline: datetime | None = None
     applicationStatus: Literal["detected", "in_progress", "applied"]
-    documents: List[str] = Field(
+    documents: list[str] = Field(
         ..., description="A list of generated document IDs related to this opportunity."
     )
-    calendarEventId: Optional[str] = None
+    calendarEventId: str | None = None
     created: datetime
 
 
@@ -277,37 +277,37 @@ class JobListingDetails(BaseModel):
     Ported from the TypeScript JobDetails interface.
     """
 
-    due_date: Optional[str] = Field(None, description="The application due date.")
-    company_name: Optional[str] = Field(
+    due_date: str | None = Field(None, description="The application due date.")
+    company_name: str | None = Field(
         None, description="The name of the hiring organization or company."
     )
-    role_title: Optional[str] = Field(None, description="The title of the role.")
-    hiring_manager: Optional[str] = Field(None, description="The name of the hiring manager.")
-    manager_contact: Optional[str] = Field(
+    role_title: str | None = Field(None, description="The title of the role.")
+    hiring_manager: str | None = Field(None, description="The name of the hiring manager.")
+    manager_contact: str | None = Field(
         None, description="Contact details (email or phone) for the hiring manager."
     )
-    essential_criteria: List[str] = Field(
+    essential_criteria: list[str] = Field(
         default_factory=list,
         description="A list of key selection criteria that are explicitly mentioned as essential, mandatory, or required.",
     )
-    desirable_criteria: List[str] = Field(
+    desirable_criteria: list[str] = Field(
         default_factory=list,
         description="A list of key selection criteria that are explicitly mentioned as desirable, preferred, or 'nice to have'.",
     )
-    role_type: Optional[str] = Field(
+    role_type: str | None = Field(
         None,
         description="The classified role type: 'Frontline/Support', 'PM/Delivery', or 'Other'.",
     )
-    subsectors: List[str] = Field(
+    subsectors: list[str] = Field(
         default_factory=list,
         description="A list of relevant community service subsectors this role operates in.",
     )
-    location: Optional[str] = Field(None, description="The location, suburb, or region of the role.")
-    key_responsibilities: List[str] = Field(
+    location: str | None = Field(None, description="The location, suburb, or region of the role.")
+    key_responsibilities: list[str] = Field(
         default_factory=list,
         description="A list of key duties, tasks, or responsibilities associated with the role.",
     )
-    full_description: Optional[str] = Field(
+    full_description: str | None = Field(
         None,
         description="The complete, unprocessed job description text for use with AI features.",
     )

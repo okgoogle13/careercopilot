@@ -1,8 +1,15 @@
 ---
 name: kerala-rage-asset-cataloger
-description: Visual triage analyst for Kerala Rage design system. Analyzes uncategorized assets against kerala-rage-manifest.json to generate executable action plans. Performs gap analysis and Agit-Prop compliance validation.
-version: 2.0.0
-tags: [assets, cataloging, kerala-rage]
+description: Visual triage analyst for Kerala Rage design system. Analyzes uncategorized
+  assets against kerala-rage-manifest.json to generate executable action plans. Performs
+  gap analysis and Agit-Prop compliance validation.
+metadata:
+  legacy_frontmatter:
+    version: 2.0.0
+    tags:
+    - assets
+    - cataloging
+    - kerala-rage
 ---
 
 # Kerala Rage Asset Cataloger

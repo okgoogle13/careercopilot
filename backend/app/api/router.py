@@ -8,7 +8,17 @@ from fastapi import APIRouter
 
 # Import endpoint modules
 # Import endpoint modules
-from .endpoints import analysis, config, documents, workflows, opportunities, applications, chrome_extension, genkit
+from .endpoints import (
+    analysis,
+    applications,
+    chrome_extension,
+    config,
+    documents,
+    genkit,
+    opportunities,
+    workflows,
+)
+
 # from .routers import ingestion
 
 api_router = APIRouter()

@@ -47,7 +47,7 @@ FORBIDDEN_COLORS_OLD = [
     "#E6E0E9"
 ]
 
-def load_tokens(tokens_path: str = "design-system/tokens.json") -> Dict:
+def load_tokens(tokens_path: str = "frontend/src/design/tokens/tokens.json") -> Dict:
     try:
         return json.loads(Path(tokens_path).read_text())
     except FileNotFoundError:

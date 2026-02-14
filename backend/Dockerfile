@@ -13,7 +13,7 @@ ENV PIP_DISABLE_PIP_VERSION_CHECK on
 WORKDIR /app
 
 # Install curl for healthchecks and system dependencies if any (e.g., for psycopg2)
-RUN apt-get update && apt-get install -y --no-install-recommends curl && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y --no-install-recommends curl build-essential g++ && rm -rf /var/lib/apt/lists/*
 
 # Copy only the requirements file first to leverage Docker cache
 COPY requirements.txt .

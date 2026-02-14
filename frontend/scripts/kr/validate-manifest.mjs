@@ -11,7 +11,7 @@ const MANIFEST_PATH = join(__dirname, '../../public/assets/kerala-rage-kr-solida
 const ASSET_BASE = join(__dirname, '../../public/assets/kr-solidarity');
 
 // Valid layers
-const VALID_LAYERS = ['substrate', 'atmospheric', 'cultural', 'resistance', 'spiritual'];
+const VALID_LAYERS = ['substrate', 'atmospheric', 'cultural', 'resistance', 'spiritual', 'ui-kit'];
 
 // Validation state
 let errorCount = 0;

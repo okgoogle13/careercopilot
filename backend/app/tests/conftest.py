@@ -1,5 +1,4 @@
 import os
-import sys
 from unittest.mock import MagicMock
 
 import pytest
@@ -65,13 +64,13 @@ def mock_get_current_user():
 def client(monkeypatch, mock_db, mock_get_current_user):
     """Sync test client for the app with mocked dependencies."""
     # Import here to ensure environment is set up first
+    from app.core import db as db_module
     from app.core.dependencies import get_current_user
     from app.main import app
-    from app.core import db as db_module
 
     # Monkeypatch the db variable in the db module
     monkeypatch.setattr(db_module, "db", mock_db)
-    
+
     # Also patch the user_profile_service db instance
     from app.services.user_profile_service import user_profile_service
     user_profile_service.db = mock_db

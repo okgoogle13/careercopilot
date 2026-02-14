@@ -1,8 +1,18 @@
 ---
 name: ui-design-evaluator
-description: Evaluate design assets, analyze annotated wireframes, and create high-fidelity interactive mockups with kerala-rage kr-solidarity V3.1 compliance. Use when evaluating designs, analyzing wireframes, creating mockups from annotations, scoring design system compliance, or generating interactive prototypes.
-version: 1.0.0
-tags: [design, research, ui, ux, kerala-rage-kr-solidarity]
+description: Evaluate design assets, analyze annotated wireframes, and create high-fidelity
+  interactive mockups with kerala-rage kr-solidarity V3.1 compliance. Use when evaluating
+  designs, analyzing wireframes, creating mockups from annotations, scoring design
+  system compliance, or generating interactive prototypes.
+metadata:
+  legacy_frontmatter:
+    version: 1.0.0
+    tags:
+    - design
+    - research
+    - ui
+    - ux
+    - kerala-rage-kr-solidarity
 ---
 
 # UI Design Evaluator & Mockup Creator

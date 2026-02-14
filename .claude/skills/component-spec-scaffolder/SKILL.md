@@ -1,12 +1,14 @@
 ---
+name: component-spec-scaffolder
 description: Generates boilerplate markdown specs for new Kerala Rage components based
   on wireframe prompts.
-name: component-spec-scaffolder
-version: 1.0.0
-tags:
-- documentation
-- workflow
-- scaffolding
+metadata:
+  legacy_frontmatter:
+    version: 1.0.0
+    tags:
+    - documentation
+    - workflow
+    - scaffolding
 ---
 
 # Component Spec Scaffolder Skill

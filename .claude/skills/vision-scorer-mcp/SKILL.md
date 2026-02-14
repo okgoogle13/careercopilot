@@ -1,9 +1,13 @@
 ---
 name: vision-scorer-mcp
-description: MCP server extending Design System Sidekick with programmatic vision-based compliance scoring. Replaces manual kerala-rage Visual Audit with deterministic measurements.
-type: mcp-server
-version: 1.0.0
-tags: []
+description: MCP server extending Design System Sidekick with programmatic vision-based
+  compliance scoring. Replaces manual kerala-rage Visual Audit with deterministic
+  measurements.
+metadata:
+  legacy_frontmatter:
+    type: mcp-server
+    version: 1.0.0
+    tags: []
 ---
 
 # Vision-Scorer MCP Server

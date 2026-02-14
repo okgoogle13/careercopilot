@@ -1,8 +1,11 @@
 ---
 name: webapp-testing
-description: "Runs or writes Playwright tests for the 'careercopilot' webapp. Use when asked to 'run playwright' or 'write a new e2e test'."
-version: 1.0.0
-tags: []
+description: Runs or writes Playwright tests for the 'careercopilot' webapp. Use when
+  asked to 'run playwright' or 'write a new e2e test'.
+metadata:
+  legacy_frontmatter:
+    version: 1.0.0
+    tags: []
 ---
 
 ## Purpose

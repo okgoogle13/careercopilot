@@ -27,7 +27,8 @@ const FALLBACK_REGISTRY: HeroRegistry = {
       },
       motion: {
         bezier: [0.34, 1.56, 0.64, 1],
-        scroll_wght_range: [300, 800],
+        parallax: false,
+        scroll_behavior: 'weight_shift',
         transition_duration: 400,
       },
     },

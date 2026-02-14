@@ -18,7 +18,7 @@ This workflow implements the "Iterative Chains" approach for AI-assisted UI/UX d
 
 ## Step 3: Wireframing
 
-1. Use the [wireframes-lowfi.md](file:///Users/okgoogle13/Desktop/careercopilot/prompts/library/wireframes-lowfi.md) template or the `wireframe-annotator` skill.
+1. Use the [wirefra222mes-lowfi.md](file:///Users/okgoogle13/Desktop/careercopilot/prompts/library/wireframes-lowfi.md) template or the `wireframe-annotator` skill.
 2. Ensure the output includes `<layout>`, `<tokens>`, and `<accessibility>` blocks.
 
 ## Step 4: UI Specification

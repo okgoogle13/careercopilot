@@ -3,21 +3,21 @@ kr-solidarity v3.0.0 Manifest Integration Schemas
 Pydantic models for manifest update and asset integration.
 """
 
-from pydantic import BaseModel, Field
-from typing import List, Optional, Dict, Any
 from datetime import datetime
+
+from pydantic import BaseModel, Field
 
 
 class AssetSpecification(BaseModel):
     """Asset specification details."""
     aspect_ratio: str = Field(..., description="e.g., 1:1, 3:4, 16:9")
     style: str = Field(..., description="screenprint, wheat-paste, etching, etc.")
-    halo: Optional[str] = Field(None, description="Optional halo/frame color")
-    framing: Optional[str] = Field(None, description="Optional framing details")
-    text_content: Optional[str] = Field(None, description="Text visible in asset")
-    subject: Optional[str] = Field(None, description="Subject matter")
-    color_palette: Optional[Dict[str, str]] = Field(None, description="Hex color codes")
-    symbols: Optional[List[str]] = Field(None, description="Cultural/political symbols")
+    halo: str | None = Field(None, description="Optional halo/frame color")
+    framing: str | None = Field(None, description="Optional framing details")
+    text_content: str | None = Field(None, description="Text visible in asset")
+    subject: str | None = Field(None, description="Subject matter")
+    color_palette: dict[str, str] | None = Field(None, description="Hex color codes")
+    symbols: list[str] | None = Field(None, description="Cultural/political symbols")
 
 
 class ManifestAssetEntry(BaseModel):
@@ -30,31 +30,31 @@ class ManifestAssetEntry(BaseModel):
     status: str = Field(..., description="ready, needs-review, approved, conditional")
     intended_context: str = Field(..., description="How asset will be used")
     specs: AssetSpecification = Field(..., description="Asset specifications")
-    reviewed_by: Optional[str] = Field(None, description="Reviewer email")
-    review_decision: Optional[str] = Field(None, description="approved, conditional-approval, needs-revision, rejected")
-    review_feedback: Optional[str] = Field(None, description="Reviewer feedback")
+    reviewed_by: str | None = Field(None, description="Reviewer email")
+    review_decision: str | None = Field(None, description="approved, conditional-approval, needs-revision, rejected")
+    review_feedback: str | None = Field(None, description="Reviewer feedback")
     created_at: datetime = Field(default_factory=datetime.utcnow)
 
 
 class ManifestUpdateRequest(BaseModel):
     """Request to update manifest with new assets."""
-    assets_to_add: List[ManifestAssetEntry] = Field(..., description="New assets")
-    assets_to_update: Optional[List[ManifestAssetEntry]] = Field(None, description="Assets to refresh")
+    assets_to_add: list[ManifestAssetEntry] = Field(..., description="New assets")
+    assets_to_update: list[ManifestAssetEntry] | None = Field(None, description="Assets to refresh")
     updated_by: str = Field(..., description="Update initiator")
     version_bump: str = Field("minor", description="major, minor, patch")
-    notes: Optional[str] = Field(None, description="Release notes")
+    notes: str | None = Field(None, description="Release notes")
 
 
 class ManifestValidationResult(BaseModel):
     """Validation result for manifest integrity."""
     valid: bool
     total_assets: int
-    by_category: Dict[str, int]
-    by_priority: Dict[str, int]
-    by_status: Dict[str, int]
-    errors: List[str] = Field(default_factory=list)
-    warnings: List[str] = Field(default_factory=list)
-    checks_passed: Dict[str, bool] = Field(default_factory=dict)
+    by_category: dict[str, int]
+    by_priority: dict[str, int]
+    by_status: dict[str, int]
+    errors: list[str] = Field(default_factory=list)
+    warnings: list[str] = Field(default_factory=list)
+    checks_passed: dict[str, bool] = Field(default_factory=dict)
 
 
 class AssetIntegrationTestResult(BaseModel):
@@ -62,7 +62,7 @@ class AssetIntegrationTestResult(BaseModel):
     asset_id: str
     test_name: str
     passed: bool
-    error_message: Optional[str] = None
+    error_message: str | None = None
     execution_time_ms: float
 
 
@@ -72,9 +72,9 @@ class ManifestDeploymentPlan(BaseModel):
     total_new_assets: int
     total_updated_assets: int
     deployment_timestamp: datetime
-    tests_required: List[str]
+    tests_required: list[str]
     rollback_plan: str
-    go_live_checklist: List[str]
+    go_live_checklist: list[str]
     estimated_deployment_time_minutes: float
 
 

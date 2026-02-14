@@ -8,7 +8,7 @@ better performance, and simplified configuration compared to the standard loggin
 import os
 import sys
 from pathlib import Path
-from typing import Any, Optional
+from typing import Any
 
 try:
     from loguru import logger
@@ -47,7 +47,7 @@ except ImportError:  # pragma: no cover - optional dependency in test/CI
 
 
 def configure_loguru(
-    environment: Optional[str] = None,
+    environment: str | None = None,
     log_dir: str = "logs",
     service_name: str = "careercopilot",
 ) -> None:
@@ -197,7 +197,7 @@ def get_logger(name: str) -> Any:
     return logger.bind(context=name)
 
 
-def add_request_context(request_id: str, user_id: Optional[str] = None, **extra: Any) -> Any:
+def add_request_context(request_id: str, user_id: str | None = None, **extra: Any) -> Any:
     """
     Add request context to Loguru logger.
 
@@ -268,7 +268,7 @@ def log_function_call(level: str = "DEBUG", exclude_args: bool = True):
                 return result
             except Exception as e:
                 func_logger.error(
-                    f"Function {func.__name__} failed: {str(e)}",
+                    f"Function {func.__name__} failed: {e!s}",
                     function=func.__name__,
                     error_type=type(e).__name__,
                     exc_info=True,
@@ -301,7 +301,7 @@ def log_function_call(level: str = "DEBUG", exclude_args: bool = True):
                 return result
             except Exception as e:
                 func_logger.error(
-                    f"Async function {func.__name__} failed: {str(e)}",
+                    f"Async function {func.__name__} failed: {e!s}",
                     function=func.__name__,
                     error_type=type(e).__name__,
                     exc_info=True,

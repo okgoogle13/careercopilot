@@ -1,8 +1,12 @@
 ---
 name: careercopilot-tool-creator
-description: "Scaffolds a new Python tool utility in 'src/tools/' for agents to call. Tools are utility functions (web scraping, PDF parsing, database queries) that agents use. Use when creating utilities that agents depend on."
-version: 1.0.0
-tags: []
+description: Scaffolds a new Python tool utility in 'src/tools/' for agents to call.
+  Tools are utility functions (web scraping, PDF parsing, database queries) that agents
+  use. Use when creating utilities that agents depend on.
+metadata:
+  legacy_frontmatter:
+    version: 1.0.0
+    tags: []
 ---
 
 ## Purpose

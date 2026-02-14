@@ -1,4 +1,3 @@
-from typing import List, Optional
 
 from pydantic import BaseModel
 
@@ -10,5 +9,5 @@ class ProfileUpdate(BaseModel):
 
 class ProfileVariationCreate(BaseModel):
     name: str
-    keywords: Optional[List[str]] = None
-    skills: Optional[List[str]] = None
+    keywords: list[str] | None = None
+    skills: list[str] | None = None

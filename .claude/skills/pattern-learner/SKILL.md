@@ -1,8 +1,12 @@
 ---
 name: pattern-learner
-description: Self-improving pattern database. Analyzes successful assets (≥95/100) → extracts effective prompt language → abstracts reusable patterns → updates library automatically.
-version: 1.0.0
-tags: []
+description: "Self-improving pattern database. Analyzes successful assets (\u2265\
+  95/100) \u2192 extracts effective prompt language \u2192 abstracts reusable patterns\
+  \ \u2192 updates library automatically."
+metadata:
+  legacy_frontmatter:
+    version: 1.0.0
+    tags: []
 ---
 
 # Pattern-Learner Skill
