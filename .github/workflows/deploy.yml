@@ -22,8 +22,9 @@ permissions:
   id-token: write
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  # Prevent concurrent deployments to avoid conflicts
+  group: deploy-${{ github.ref }}-${{ inputs.environment || 'auto' }}
+  cancel-in-progress: false  # Queue deployments instead of canceling
 
 env:
   GCP_REGION: us-central1
