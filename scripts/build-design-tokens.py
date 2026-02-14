@@ -39,8 +39,16 @@ def generate_css_variables(tokens):
     ]
 
     # Add Colors
+    def append_color_vars(prefix, value):
+        if isinstance(value, dict):
+            for sub_key, sub_value in value.items():
+                sub_prefix = f"{prefix}-{str(sub_key).replace('_', '-').lower()}"
+                append_color_vars(sub_prefix, sub_value)
+        else:
+            content.append(f"  --sys-color-{prefix}: {value};\n")
+
     for key, value in tokens.get('color', {}).items():
-        content.append(f"  --sys-color-{key.replace('_', '-')}: {value};\n")
+        append_color_vars(key.replace('_', '-').lower(), value)
 
     # Add Shapes (Border Radius)
     for key, value in tokens.get('shape', {}).items():
