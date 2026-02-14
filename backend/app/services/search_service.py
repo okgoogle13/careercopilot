@@ -1,7 +1,7 @@
 import logging
 import os
 
-import requests
+import httpx
 from dotenv import load_dotenv
 from pydantic import BaseModel
 
@@ -15,6 +15,7 @@ class SearchService:
     """
     Service for performing deep web research using Perplexity API.
     Uses 'sonar-pro' (formerly sonar-reasoning-pro) for high-quality, reasoned synthesis.
+    Now uses async httpx client for better performance in async contexts.
     """
 
     def __init__(self):
@@ -25,7 +26,7 @@ class SearchService:
         if not self.api_key:
             self.logger.warning("PERPLEXITY_API_KEY is not set. Search capabilities will be disabled.")
 
-    def research_company(self, company_name: str) -> str | None:
+    async def research_company(self, company_name: str) -> str | None:
         """
         Conduct deep research on a company to extract intelligence for job applications.
         returns a synthesized text summary of the company's mission, values, and culture.
@@ -69,15 +70,22 @@ class SearchService:
 
         try:
             self.logger.info(f"Sending Perplexity request for: {company_name}")
-            response = requests.post(self.base_url, json=payload, headers=headers, timeout=60)
-            response.raise_for_status()
+            # Use async httpx client instead of synchronous requests for better performance
+            async with httpx.AsyncClient() as client:
+                response = await client.post(
+                    self.base_url, 
+                    json=payload, 
+                    headers=headers, 
+                    timeout=60.0
+                )
+                response.raise_for_status()
 
-            data = response.json()
-            # Extract the content from the first choice
-            content = data["choices"][0]["message"]["content"]
-            return content
+                data = response.json()
+                # Extract the content from the first choice
+                content = data["choices"][0]["message"]["content"]
+                return content
 
-        except requests.exceptions.RequestException as e:
+        except httpx.HTTPError as e:
             self.logger.error(f"Perplexity API request failed for {company_name}: {e!s}")
             return None
         except (KeyError, IndexError) as e:

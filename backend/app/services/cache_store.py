@@ -122,14 +122,14 @@ class SQLAlchemyCacheStore:
 
     def clear_pattern(self, pattern: str) -> int:
         """
-        Clear all keys matching a pattern (prefix).
+        Clear all keys matching a pattern (prefix) using bulk delete for performance.
         """
         try:
-            entries = self.db.query(Cache).filter(Cache.key.like(f"{pattern}%")).all()
-            count = len(entries)
-            for entry in entries:
-                self.db.delete(entry)
+            # Use bulk delete instead of iterating - fixes N+1 query problem
+            count = self.db.query(Cache).filter(Cache.key.like(f"{pattern}%")).delete(synchronize_session=False)
             self.db.commit()
+            if count > 0:
+                logger.info(f"[Cache] Cleared {count} entries matching pattern '{pattern}'")
             return count
         except Exception as e:
             logger.error(f"[Cache] Error clearing pattern {pattern}: {e}")
@@ -138,16 +138,14 @@ class SQLAlchemyCacheStore:
 
     def cleanup_expired(self) -> int:
         """
-        Remove all expired cache entries.
+        Remove all expired cache entries using bulk delete for performance.
         """
         try:
             now = datetime.now(timezone.utc)
-            expired_entries = self.db.query(Cache).filter(Cache.expires_at < now).all()
-            count = len(expired_entries)
+            # Use bulk delete instead of iterating - fixes N+1 query problem
+            count = self.db.query(Cache).filter(Cache.expires_at < now).delete()
+            self.db.commit()
             if count > 0:
-                for entry in expired_entries:
-                    self.db.delete(entry)
-                self.db.commit()
                 logger.info(f"[Cache] Cleaned up {count} expired SQL entries")
             return count
         except Exception as e:
