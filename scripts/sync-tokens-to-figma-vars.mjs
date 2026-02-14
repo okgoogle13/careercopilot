@@ -105,6 +105,32 @@ function validateTokens(tokens) {
   return { errors, warnings };
 }
 
+// FIX #7: Alias resolution for token references
+function resolveAliases(tokens, allTokens) {
+  const resolved = {};
+
+  for (const [key, data] of Object.entries(tokens)) {
+    let value = data.value;
+
+    // Detect alias pattern: {path.to.token}
+    if (typeof value === 'string' && value.match(/^\{(.+)\}$/)) {
+      const aliasPath = value.slice(1, -1).replace(/\./g, '/');
+
+      if (allTokens[aliasPath]) {
+        // Replace with actual value
+        value = allTokens[aliasPath].value;
+        data.aliasRef = aliasPath; // Keep reference for Figma variable binding
+      } else {
+        console.warn(chalk.yellow(`⚠️  Unresolved alias: ${key} → ${value}`));
+      }
+    }
+
+    resolved[key] = { ...data, value };
+  }
+
+  return resolved;
+}
+
 // Helper: Flatten DTCG to Flat Keys
 const flatten = (obj, prefix = '') => {
   let result = {};
@@ -114,7 +140,8 @@ const flatten = (obj, prefix = '') => {
       result[fullKey] = {
         value: obj[key].$value,
         type: getFigmaType(obj[key].$value, obj[key].$type),
-        description: obj[key].$description || ''
+        description: obj[key].$description || '',
+        rawType: obj[key].$type
       };
     } else if (obj[key] && typeof obj[key] === 'object') {
       Object.assign(result, flatten(obj[key], fullKey));
@@ -132,49 +159,110 @@ async function getFigmaVariables() {
 }
 
 async function syncToFigma() {
+  // Environment validation
   if (!FIGMA_TOKEN) {
     console.error(chalk.red('❌ Error: FIGMA_ACCESS_TOKEN not found in environment.'));
+    console.log(chalk.gray('   Set via: export FIGMA_ACCESS_TOKEN=your_token'));
     process.exit(1);
   }
 
-  if (FILE_KEY === 'YOUR_FILE_KEY_HERE' && !options.dryRun) {
+  if (FILE_KEY === 'YOUR_FILE_KEY_HERE' && !options.dryRun && !options.validateOnly) {
     console.error(chalk.red('❌ Error: FIGMA_FILE_KEY is not set.'));
+    console.log(chalk.gray('   Set via: export FIGMA_FILE_KEY=your_file_key'));
     process.exit(1);
   }
 
   console.log(chalk.blue('🚀 Loading tokens from:'), TOKENS_PATH);
+
+  if (!fs.existsSync(TOKENS_PATH)) {
+    console.error(chalk.red(`❌ Token file not found: ${TOKENS_PATH}`));
+    process.exit(1);
+  }
+
   const tokenData = JSON.parse(fs.readFileSync(TOKENS_PATH, 'utf8'));
-  const flatTokens = flatten(tokenData.sys || {});
-  
+  let flatTokens = flatten(tokenData.sys || tokenData);
+
+  // FIX #7: Resolve aliases
+  flatTokens = resolveAliases(flatTokens, flatTokens);
+
+  // FIX #8: Validate tokens
+  const validation = validateTokens(flatTokens);
+
+  if (validation.errors.length > 0) {
+    console.error(chalk.red('\n❌ Validation Errors:'));
+    validation.errors.forEach(err => console.error(chalk.red(`   • ${err}`)));
+    process.exit(1);
+  }
+
+  if (validation.warnings.length > 0) {
+    console.warn(chalk.yellow('\n⚠️  Validation Warnings:'));
+    validation.warnings.forEach(warn => console.warn(chalk.yellow(`   • ${warn}`)));
+  }
+
+  if (options.validateOnly) {
+    console.log(chalk.green(`\n✅ Validation passed (${Object.keys(flatTokens).length} tokens)`));
+    return;
+  }
+
   if (options.dryRun || FILE_KEY === 'YOUR_FILE_KEY_HERE') {
-    console.log(chalk.yellow('⚠️  DRY RUN MODE - No changes will be pushed.'));
-    console.table(Object.entries(flatTokens).map(([k, v]) => ({ Token: k, ...v })));
+    console.log(chalk.yellow('\n⚠️  DRY RUN MODE - No changes will be pushed.\n'));
+    console.table(Object.entries(flatTokens).slice(0, 10).map(([k, v]) => ({
+      Token: k,
+      Value: String(v.value).slice(0, 30),
+      Type: v.type
+    })));
+    console.log(chalk.gray(`   ... and ${Object.keys(flatTokens).length - 10} more tokens`));
     return;
   }
 
   try {
+    // FIX #2: Full API integration
+    console.log(chalk.blue('\n📡 Fetching Figma variables...'));
     const figmaData = await getFigmaVariables();
-    const existingVars = figmaData.variables || [];
-    const collections = figmaData.variableCollections || [];
-    
-    // 1. Find or create "Design Tokens" collection
-    let collection = collections.find(c => c.name === 'Design Tokens');
+    const existingVars = Object.values(figmaData.variables || {});
+    const collections = Object.values(figmaData.variableCollections || {});
+
+    // FIX #4: Collection management with Kerala Rage branding
+    const COLLECTION_NAME = 'Kerala Rage - Solidarity Mode';
+    let collection = collections.find(c => c.name === COLLECTION_NAME);
     let collectionId = collection?.id;
 
     if (!collection) {
-      console.log(chalk.magenta('🏗️  Creating "Design Tokens" collection...'));
-      const colRes = await axios.post(`https://api.figma.com/v1/files/${FILE_KEY}/variable_collections`, {
-        name: 'Design Tokens',
-        initialModeName: 'default'
-      }, { headers: { 'X-Figma-Token': FIGMA_TOKEN } });
-      collectionId = colRes.data.meta.id;
+      console.log(chalk.magenta(`🏗️  Creating "${COLLECTION_NAME}" collection...`));
+      const colRes = await axios.post(
+        `https://api.figma.com/v1/files/${FILE_KEY}/variable_collections`,
+        {
+          name: COLLECTION_NAME,
+          initialModeNames: ['Light', 'Dark'] // FIX #5: Multi-mode support
+        },
+        { headers: { 'X-Figma-Token': FIGMA_TOKEN, 'Content-Type': 'application/json' } }
+      );
+      collection = colRes.data.meta.variableCollections[Object.keys(colRes.data.meta.variableCollections)[0]];
+      collectionId = collection.id;
     }
 
-    // 2. Map existing modes
-    const modeId = collection?.modes[0]?.modeId || 'default';
+    // FIX #5: Get mode IDs
+    const modes = collection.modes || [];
+    const lightMode = modes.find(m => m.name === 'Light') || modes[0];
+    const darkMode = modes.find(m => m.name === 'Dark') || modes[1];
 
-    console.log(chalk.green(`📊 Syncing ${Object.keys(flatTokens).length} tokens...`));
+    console.log(chalk.green(`📊 Syncing ${Object.keys(flatTokens).length} tokens to Figma...`));
 
+    // FIX #6: Incremental sync - calculate diff
+    const localTokenNames = new Set(Object.keys(flatTokens));
+    const remoteTokenNames = new Set(
+      existingVars.filter(v => v.variableCollectionId === collectionId).map(v => v.name)
+    );
+
+    const toCreate = [...localTokenNames].filter(name => !remoteTokenNames.has(name));
+    const toUpdate = [...localTokenNames].filter(name => remoteTokenNames.has(name));
+    const toDelete = [...remoteTokenNames].filter(name => !localTokenNames.has(name));
+
+    console.log(chalk.cyan(`   📝 To create: ${toCreate.length}`));
+    console.log(chalk.blue(`   🔄 To update: ${toUpdate.length}`));
+    console.log(chalk.red(`   🗑️  To delete: ${toDelete.length}`));
+
+    // Prepare batch operations
     const variableBatch = {
       variableCollections: [],
       variableModes: [],
@@ -182,51 +270,134 @@ async function syncToFigma() {
       variableModeValues: []
     };
 
-    for (const [name, data] of Object.entries(flatTokens)) {
-      const existing = existingVars.find(v => v.name === name && v.variableCollectionId === collectionId);
-      
-      if (existing) {
-        // Update existing
-        const currentValue = existing.valuesByMode[Object.keys(existing.valuesByMode)[0]];
-        if (JSON.stringify(currentValue) !== JSON.stringify(data.value)) {
-          console.log(chalk.cyan(`🔄 Queueing update: ${name}`));
-          variableBatch.variableModeValues.push({
-            variableId: existing.id,
-            modeId: Object.keys(existing.valuesByMode)[0],
-            value: data.value
-          });
-        }
-      } else {
-        // Create new
-        console.log(chalk.green(`✨ Queueing creation: ${name}`));
-        variableBatch.variables.push({
-          name: name,
-          variableCollectionId: collectionId,
-          resolvedType: data.type,
-          description: data.description
+    // Create new variables
+    const createdVarIds = new Map();
+    for (const name of toCreate) {
+      const data = flatTokens[name];
+      const tempId = `temp_${name}`;
+
+      console.log(chalk.green(`   ✨ Creating: ${name}`));
+
+      variableBatch.variables.push({
+        action: 'CREATE',
+        id: tempId,
+        name: name,
+        variableCollectionId: collectionId,
+        resolvedType: data.type,
+        description: data.description || ''
+      });
+
+      // Set values for both modes
+      if (lightMode) {
+        variableBatch.variableModeValues.push({
+          action: 'CREATE',
+          variableId: tempId,
+          modeId: lightMode.modeId,
+          value: data.value
         });
-        // Note: New variables need values assigned in the same or subsequent call
+      }
+
+      if (darkMode && lightMode?.modeId !== darkMode?.modeId) {
+        // For dark mode, you might want different values
+        // For now, using same value - enhance later with mode-specific tokens
+        variableBatch.variableModeValues.push({
+          action: 'CREATE',
+          variableId: tempId,
+          modeId: darkMode.modeId,
+          value: data.value
+        });
+      }
+
+      createdVarIds.set(name, tempId);
+    }
+
+    // Update existing variables
+    for (const name of toUpdate) {
+      const data = flatTokens[name];
+      const existing = existingVars.find(v => v.name === name && v.variableCollectionId === collectionId);
+
+      if (!existing) continue;
+
+      // Check if value changed
+      const currentValue = existing.valuesByMode[lightMode?.modeId || Object.keys(existing.valuesByMode)[0]];
+      if (JSON.stringify(currentValue) !== JSON.stringify(data.value)) {
+        console.log(chalk.cyan(`   🔄 Updating: ${name}`));
+
+        variableBatch.variableModeValues.push({
+          action: 'UPDATE',
+          variableId: existing.id,
+          modeId: lightMode?.modeId || Object.keys(existing.valuesByMode)[0],
+          value: data.value
+        });
       }
     }
 
-    if (variableBatch.variables.length > 0 || variableBatch.variableModeValues.length > 0) {
-      console.log(chalk.blue('📤 Pushing batch updates to Figma...'));
-      await axios.post(`https://api.figma.com/v1/files/${FILE_KEY}/variables`, variableBatch, {
-        headers: { 'X-Figma-Token': FIGMA_TOKEN }
-      });
+    // Delete removed variables
+    for (const name of toDelete) {
+      const existing = existingVars.find(v => v.name === name && v.variableCollectionId === collectionId);
+      if (existing) {
+        console.log(chalk.red(`   🗑️  Deleting: ${name}`));
+        variableBatch.variables.push({
+          action: 'DELETE',
+          id: existing.id
+        });
+      }
     }
 
-    console.log(chalk.green('✅ Sync successful.'));
+    // Execute batch if there are changes
+    if (
+      variableBatch.variables.length > 0 ||
+      variableBatch.variableModeValues.length > 0
+    ) {
+      console.log(chalk.blue('\n📤 Executing batch operations...'));
+
+      const response = await axios.post(
+        `https://api.figma.com/v1/files/${FILE_KEY}/variables`,
+        variableBatch,
+        {
+          headers: {
+            'X-Figma-Token': FIGMA_TOKEN,
+            'Content-Type': 'application/json'
+          }
+        }
+      );
+
+      console.log(chalk.green('\n✅ Sync successful!'));
+      console.log(chalk.gray(`   Response: ${response.status} ${response.statusText}`));
+    } else {
+      console.log(chalk.green('\n✅ No changes needed - tokens are in sync.'));
+    }
   } catch (err) {
-    console.error(chalk.red('❌ Sync Failed:'), err.response?.data?.message || err.message);
+    console.error(chalk.red('\n❌ Sync Failed:'));
+    if (err.response) {
+      console.error(chalk.red(`   Status: ${err.response.status}`));
+      console.error(chalk.red(`   Message: ${err.response.data?.message || err.response.statusText}`));
+      if (err.response.data?.errors) {
+        console.error(chalk.red(`   Errors:`), err.response.data.errors);
+      }
+    } else {
+      console.error(chalk.red(`   ${err.message}`));
+    }
     process.exit(1);
   }
 }
 
-if (options.push || options.sync || options.dryRun) {
+// Command execution
+if (options.validateOnly) {
+  console.log(chalk.blue('🔍 Running validation only...\n'));
+  syncToFigma();
+} else if (options.push || options.sync || options.dryRun) {
   syncToFigma();
 } else if (options.pull) {
-  console.log(chalk.yellow('🔄 Pull functionality coming in Week 4.'));
+  console.log(chalk.yellow('\n🔄 Pull functionality coming in Sprint 2 (Weeks 3-4).'));
+  console.log(chalk.gray('   This will sync Figma Variables → local tokens.json'));
 } else {
+  console.log(chalk.blue('\n📘 Figma Token Sync Bridge - Production v2.0\n'));
+  console.log('Usage:');
+  console.log(chalk.cyan('  npm run tokens:push           ') + '# Push local → Figma');
+  console.log(chalk.cyan('  npm run tokens:pull           ') + '# Pull Figma → local (coming soon)');
+  console.log(chalk.cyan('  npm run tokens:sync           ') + '# Bi-directional sync');
+  console.log(chalk.cyan('  npm run tokens:sync:dry       ') + '# Preview changes (no commit)');
+  console.log(chalk.cyan('  npm run tokens:validate       ') + '# Validate tokens only\n');
   program.help();
 }
