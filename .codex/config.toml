@@ -1,0 +1,32 @@
+# Codex CLI MCP Server Configuration
+# This file configures MCP servers for use with Codex CLI
+# Documentation: https://github.com/okgoogle13/careercopilot/docs/guides/CODEX_CLI_SETUP.md
+
+# GitHub MCP Server Configuration
+# The GitHub MCP server provides access to GitHub repositories, issues, PRs, and more
+[mcp_servers.github]
+# Environment variable containing your GitHub Personal Access Token
+# Create a PAT at: https://github.com/settings/personal-access-tokens
+# Required scopes: repo, workflow, read:org
+bearer_token_env_var = "CODEX_GITHUB_PERSONAL_ACCESS_TOKEN"
+
+# Flash Sidekick MCP Server (Optional)
+# Provides token-efficient code analysis using Gemini 2.5 Pro/Flash
+# [mcp_servers.flash-sidekick]
+# command = "python3"
+# args = ["servers/flash_sidekick.py"]
+# env = { GEMINI_API_KEY = "GEMINI_API_KEY" }
+
+# Design System Sidekick MCP Server (Optional)
+# Provides Kerala Rage design system validation and asset workflows
+# [mcp_servers.design-system-sidekick]
+# command = "python3"
+# args = ["servers/design_system_sidekick.py"]
+# env = { GEMINI_API_KEY = "GEMINI_API_KEY" }
+
+# Playwright MCP Server (Optional)
+# Provides browser automation and E2E testing capabilities
+# [mcp_servers.playwright]
+# command = "npx"
+# args = ["-y", "@modelcontextprotocol/server-playwright"]
+# env = { PLAYWRIGHT_BROWSERS_PATH = "0" }
