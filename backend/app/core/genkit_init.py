@@ -5,10 +5,11 @@ Initializes and configures the Genkit framework for the CareerCopilot applicatio
 Handles AI model initialization, flow registration, and provides health monitoring.
 """
 
+import importlib
 import logging
 import os
-import importlib
-from typing import Any, Callable, Dict, Optional, List, cast
+from collections.abc import Callable
+from typing import Any, cast
 
 # Best-effort dynamic imports for Genkit
 GENKIT_AVAILABLE = False
@@ -36,7 +37,7 @@ logger = logging.getLogger(__name__)
 # --- Global State ---
 initialized: bool = False
 genkit_instance: Any | None = None
-registered_flows: Dict[str, Any] = {}
+registered_flows: dict[str, Any] = {}
 
 # --- Core Initialization ---
 
@@ -65,7 +66,7 @@ def init_genkit() -> bool:
         # Fallback to direct env check if secret manager fails or is not available
         api_key = os.getenv("GEMINI_API_KEY")
         if not api_key:
-            logger.warning(f"Could not fetch API key: {str(e)}")
+            logger.warning(f"Could not fetch API key: {e!s}")
             logger.warning("GEMINI_API_KEY not set. Some AI features will be disabled.")
             return False
 
@@ -89,7 +90,7 @@ def init_genkit() -> bool:
                 return True
 
         except Exception as e:
-            logger.warning(f"Genkit plugin initialization failed: {str(e)}")
+            logger.warning(f"Genkit plugin initialization failed: {e!s}")
             logger.info("Falling back to google-generativeai library")
 
     # Fallback to google-generativeai (more reliable)
@@ -121,7 +122,7 @@ def init_genkit() -> bool:
             return True
 
         except Exception as e:
-            logger.error(f"Failed to initialize with google-generativeai: {str(e)}", exc_info=True)
+            logger.error(f"Failed to initialize with google-generativeai: {e!s}", exc_info=True)
             return False
 
     logger.error("Neither Genkit nor google-generativeai available")
@@ -150,7 +151,7 @@ def is_genkit_enabled() -> bool:
     return os.getenv("ENABLE_GENKIT_FLOWS", "true").lower() == "true"
 
 
-def check_genkit_health() -> Dict[str, Any]:
+def check_genkit_health() -> dict[str, Any]:
     """
     Check the health of the Genkit framework and registered flows.
 
@@ -159,8 +160,8 @@ def check_genkit_health() -> Dict[str, Any]:
     """
     # API key is present if either the env var is set OR the model is successfully initialized
     api_key_present = bool(os.getenv("GEMINI_API_KEY")) or initialized
-    errors: List[str] = []
-    health_status: Dict[str, Any] = {
+    errors: list[str] = []
+    health_status: dict[str, Any] = {
         "available": GENKIT_AVAILABLE or GOOGLE_GENERATIVEAI_AVAILABLE,
         "initialized": initialized,
         "gemini_api_key_present": api_key_present,
@@ -198,7 +199,7 @@ def startup_genkit() -> None:
         logger.info("Genkit initialization skipped (ENABLE_GENKIT_FLOWS is not 'true')")
 
 
-def register_flow_function(func: Callable[..., Any], name: Optional[str] = None) -> Callable[..., Any]:
+def register_flow_function(func: Callable[..., Any], name: str | None = None) -> Callable[..., Any]:
     """
     Register a flow function for tracking purposes.
 
@@ -215,7 +216,7 @@ def register_flow_function(func: Callable[..., Any], name: Optional[str] = None)
     return func
 
 
-def get_registered_flows() -> Dict[str, Any]:
+def get_registered_flows() -> dict[str, Any]:
     """
     Get all registered flow functions.
 

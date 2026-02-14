@@ -232,19 +232,20 @@ jobs:
           install-mode: "full"
           cache-prefix: ${{ matrix.test-group }}
       - name: Run checks
+        working-directory: backend
         run: |
           case ${{ matrix.test-group }} in
             lint)
-              flake8 backend/app/ --show-source --statistics --format=github
+              ruff check app/
               ;;
             format)
-              black --check backend/ --line-length=100 --diff
+              ruff format --check .
               ;;
             security)
-              bandit -r backend/ -f json -o bandit-report.json
+              bandit -r app/ -f json -o bandit-report.json
               ;;
             mypy)
-              mypy backend/ --ignore-missing-imports --show-error-codes
+              mypy app/ --ignore-missing-imports --show-error-codes
               ;;
           esac
       - name: Upload bandit report

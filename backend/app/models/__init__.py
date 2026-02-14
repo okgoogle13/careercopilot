@@ -8,6 +8,7 @@ Example:
 from app.models import UserProfile
 """
 
+from .document_embedding import DocumentEmbedding
 from .schemas import (
     AIRecommendationsResponse,
     ATSScoreResponse,
@@ -29,24 +30,23 @@ from .schemas import (
 )
 from .user import User as DBUser
 from .user_asset import UserAsset
-from .document_embedding import DocumentEmbedding
 
 __all__ = [
     "AIRecommendationsResponse",
     "ATSScoreResponse",
     "CategoryScore",
+    "CreateProfileVariationRequest",
     "EducationItem",
     "ExperienceItem",
     "JobOpportunity",
     "KeywordAnalysisResponse",
     "MasterProfile",
     "PersonalInfo",
+    "ProfileVariation",
     "Recommendation",
     "User",
     "UserPreferences",
     "UserProfile",
     "VoiceProfile",
-    "ProfileVariation",
-    "CreateProfileVariationRequest",
     "VoiceProfileResponse",
 ]

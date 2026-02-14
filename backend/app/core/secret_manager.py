@@ -5,15 +5,14 @@ This module provides functions to access configuration values from environment v
 ensuring a consistent interface for the application.
 """
 
-import os
 import logging
-from typing import Optional, Any
+import os
 
 logger = logging.getLogger(__name__)
 
 def get_secret(
     secret_id: str,
-    default: Optional[str] = None,
+    default: str | None = None,
 ) -> str:
     """
     Retrieve a configuration value from environment variables.
@@ -50,7 +49,7 @@ def get_secret_key() -> str:
     return get_secret("JWT_SECRET_KEY", default="insecure-default-secret-key")
 
 
-def get_app_secret(secret_name: str, default: Optional[str] = None) -> str:
+def get_app_secret(secret_name: str, default: str | None = None) -> str:
     """
     Get an application configuration value.
 

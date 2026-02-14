@@ -1,8 +1,12 @@
 ---
 name: api-contract-validator
-description: "Validates type contracts between TypeScript interfaces and Pydantic models. Detects field mismatches and type inconsistencies. Related: frontend-backend-mapper for endpoint discovery."
-version: 1.0.0
-tags: []
+description: 'Validates type contracts between TypeScript interfaces and Pydantic
+  models. Detects field mismatches and type inconsistencies. Related: frontend-backend-mapper
+  for endpoint discovery.'
+metadata:
+  legacy_frontmatter:
+    version: 1.0.0
+    tags: []
 ---
 
 ## Purpose

@@ -1,10 +1,10 @@
 """Market analysis models for job market trends."""
 
 from datetime import datetime
-from typing import Any, Dict, List, Optional
+from typing import Any
 
-from sqlalchemy import JSON, Column, DateTime, ForeignKey, Integer, String
-from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy import JSON, DateTime, Integer, String
+from sqlalchemy.orm import Mapped, mapped_column
 
 from .base import Base, BaseMixin
 
@@ -21,21 +21,21 @@ class MarketAnalysis(Base, BaseMixin):
 
     # Market data
     total_jobs_found: Mapped[int] = mapped_column(Integer, nullable=False)
-    average_salary: Mapped[Optional[int]] = mapped_column(Integer, nullable=True)
-    salary_range: Mapped[Dict[str, Any]] = mapped_column(JSON, default=dict)
+    average_salary: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    salary_range: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
 
     # Skill trends
-    top_skills: Mapped[List[str]] = mapped_column(JSON, default=list)
-    emerging_skills: Mapped[List[str]] = mapped_column(JSON, default=list)
-    skill_frequency: Mapped[Dict[str, int]] = mapped_column(JSON, default=dict)
+    top_skills: Mapped[list[str]] = mapped_column(JSON, default=list)
+    emerging_skills: Mapped[list[str]] = mapped_column(JSON, default=list)
+    skill_frequency: Mapped[dict[str, int]] = mapped_column(JSON, default=dict)
 
     # Company insights
-    top_employers: Mapped[List[Dict[str, Any]]] = mapped_column(JSON, default=list)
-    company_hiring_trends: Mapped[Dict[str, Any]] = mapped_column(JSON, default=dict)
+    top_employers: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    company_hiring_trends: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
 
     # Predictions
-    demand_forecast: Mapped[Dict[str, Any]] = mapped_column(JSON, default=dict)
-    competition_level: Mapped[Optional[str]] = mapped_column(String(50), nullable=True)
+    demand_forecast: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    competition_level: Mapped[str | None] = mapped_column(String(50), nullable=True)
 
     # Data freshness
     expires_at: Mapped[datetime] = mapped_column(DateTime, nullable=False)

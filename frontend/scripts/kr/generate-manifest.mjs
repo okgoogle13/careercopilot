@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { writeFileSync, readdirSync, statSync } from 'fs';
+import { writeFileSync, readdirSync, statSync, readFileSync } from 'fs';
 import { join, basename, dirname, extname } from 'path';
 import { fileURLToPath } from 'url';
 
@@ -24,10 +24,12 @@ const OUTPUT_PATH = join(__dirname, '../../public/assets/kerala-rage-kr-solidari
 const CATEGORY_TO_LAYER = {
   devotional: 'spiritual',
   portrait: 'resistance',
+  hero: 'resistance',
   symbol: 'cultural',
   abstract: 'atmospheric',
   street: 'resistance',
-  texture: 'substrate'
+  texture: 'substrate',
+  'ui-kit': 'ui-kit'
 };
 
 // Priority mapping
@@ -37,7 +39,8 @@ const CATEGORY_TO_PRIORITY = {
   symbol: 'HIGH',
   abstract: 'HIGH',
   street: 'HIGH',
-  texture: 'HIGH'
+  texture: 'HIGH',
+  'ui-kit': 'MEDIUM'
 };
 
 // Semantic mapping
@@ -66,6 +69,11 @@ const LAYER_TO_SEMANTICS = {
     functional_role: 'material-base',
     semantic_weight: 'material',
     layering_role: 'background-base'
+  },
+  'ui-kit': {
+    functional_role: 'ui-element',
+    semantic_weight: 'utility',
+    layering_role: 'interface'
   }
 };
 
@@ -90,6 +98,10 @@ const LAYERING_COMPATIBILITY = {
   substrate: {
     can_overlay_with: [],
     cannot_overlay_with: ['substrate']
+  },
+  'ui-kit': {
+    can_overlay_with: ['substrate', 'atmospheric', 'cultural', 'resistance', 'spiritual'],
+    cannot_overlay_with: []
   }
 };
 
@@ -114,6 +126,10 @@ const LAYER_TO_USAGE_RULES = {
   substrate: {
     scale_suitability: ['hero-background', 'global-overlay'],
     small_ui_safe: false
+  },
+  'ui-kit': {
+    scale_suitability: ['ui-component', 'icon'],
+    small_ui_safe: true
   }
 };
 
@@ -128,9 +144,9 @@ const SPECIAL_CASES = {
 };
 
 /**
- * Recursively find all PNG files
+ * Recursively find files by extension
  */
-function findPngFiles(dir) {
+function findFiles(dir, ext) {
   let results = [];
   const list = readdirSync(dir);
   
@@ -139,9 +155,9 @@ function findPngFiles(dir) {
     const stat = statSync(filePath);
     
     if (stat && stat.isDirectory()) {
-      results = results.concat(findPngFiles(filePath));
+      results = results.concat(findFiles(filePath, ext));
     } else {
-      if (extname(file).toLowerCase() === '.png') {
+      if (extname(file).toLowerCase() === ext) {
         results.push(filePath);
       }
     }
@@ -151,15 +167,15 @@ function findPngFiles(dir) {
 }
 
 /**
- * Extract metadata from filename
+ * Extract metadata from KR Solidarity filename (PNG)
  * Format: kr-solidarity__<category>__<name>__v<version>.png
  */
-function parseFilename(filepath) {
+function parseSolidarityFilename(filepath) {
   const filename = basename(filepath, '.png');
   const parts = filename.split('__');
   
   if (parts.length < 3) {
-    console.warn(`Warning: Unexpected filename format: ${filename}`);
+    // console.warn(`Warning: Unexpected filename format: ${filename}`);
     return null;
   }
   
@@ -176,7 +192,28 @@ function parseFilename(filepath) {
   return {
     category,
     name,
-    filename
+    filename,
+    type: 'solidarity'
+  };
+}
+
+/**
+ * Extract metadata from UI Kit filename (SVG)
+ * Format: KR-UI-XXX.svg
+ */
+function parseUiKitFilename(filepath) {
+  const filename = basename(filepath, '.svg');
+  if (!filename.startsWith('KR-UI-')) {
+      return null;
+  }
+  
+  // For UI Kit, name and category are inferred or hardcoded if not in filename
+  return {
+    category: 'ui-kit',
+    name: `UI Asset ${filename}`, // Default name, ideally populated from a map or metadata file
+    filename,
+    type: 'ui-kit',
+    id: filename // Reuse filename ID for UI kit
   };
 }
 
@@ -202,11 +239,19 @@ function calculateAspectRatio(width, height) {
 /**
  * Generate manifest entry for an asset
  */
-async function generateManifestEntry(filepath, index) {
-  const metadata = parseFilename(filepath);
+async function generateManifestEntry(filepath, index, type = 'solidarity') {
+    let metadata;
+    let extension = extname(filepath).toLowerCase();
+    
+    if (type === 'ui-kit') {
+        metadata = parseUiKitFilename(filepath);
+    } else {
+        metadata = parseSolidarityFilename(filepath);
+    }
+
   if (!metadata) return null;
   
-  const { category, name, filename } = metadata;
+  const { category, name, filename, id: explicitId } = metadata;
   const layer = CATEGORY_TO_LAYER[category];
   
   if (!layer) {
@@ -214,15 +259,29 @@ async function generateManifestEntry(filepath, index) {
     return null;
   }
   
-  // Get image dimensions
+  // Get image dimensions/aspect ratio
   let aspectRatio = '1:1';
   if (sharp) {
     try {
+      // Svg metadata usually works with sharp too
       const imageMetadata = await sharp(filepath).metadata();
-      aspectRatio = calculateAspectRatio(imageMetadata.width, imageMetadata.height);
+      if (imageMetadata.width && imageMetadata.height) {
+          aspectRatio = calculateAspectRatio(imageMetadata.width, imageMetadata.height);
+      }
     } catch (err) {
-      console.warn(`Warning: Could not read image metadata for ${filename}: ${err.message}`);
+      // console.warn(`Warning: Could not read image metadata for ${filename}: ${err.message}`);
     }
+  } else if (extension === '.svg') {
+      // Fallback for SVG if sharp missing: read viewBox
+      try {
+          const content = readFileSync(filepath, 'utf8');
+          const viewBox = content.match(/viewBox="([^"]+)"/);
+          if (viewBox) {
+              const [_, BoxStr] = viewBox;
+              const [x, y, w, h] = BoxStr.split(' ').map(Number);
+              aspectRatio = calculateAspectRatio(w, h);
+          }
+      } catch (e) {}
   }
   
   // Build relative path
@@ -231,8 +290,16 @@ async function generateManifestEntry(filepath, index) {
   // Check for special cases
   const specialCase = SPECIAL_CASES[name.toLowerCase().replace(/\s+/g, '-')];
   
+  // ID Generation
+  let assetId;
+  if (explicitId) {
+      assetId = explicitId;
+  } else {
+      assetId = `KR-SOLID-${String(index + 1).padStart(3, '0')}`;
+  }
+
   return {
-    id: `KR-SOLID-${String(index + 1).padStart(3, '0')}`,
+    id: assetId,
     name,
     category,
     layer,
@@ -249,44 +316,41 @@ async function generateManifestEntry(filepath, index) {
  * Main generator function
  */
 async function generateManifest() {
-  console.log('🔍 Scanning for KR Solidarity assets...');
+  console.log('🔍 Scanning for KR assets...');
   
-  // Find all PNG files
-  console.log(`🔍 Searching in: ${BASE_DIR}`);
-  console.log('⏳ Starting recursive scan...');
+  // 1. Find Solidarity PNGs
+  const pngFiles = findFiles(BASE_DIR, '.png');
+  console.log(`📦 Found ${pngFiles.length} Solidarity (PNG) assets`);
   
-  let files = [];
+  // 2. Find UI Kit SVGs
+  const uiKitDir = join(BASE_DIR, 'ui-kit/svg');
+  let svgFiles = [];
   try {
-    files = findPngFiles(BASE_DIR);
-    console.log('✅ Recursive scan complete');
-  } catch (err) {
-    console.error(`❌ Error scanning directory: ${err.message}`);
-    process.exit(1);
+      svgFiles = findFiles(uiKitDir, '.svg');
+      console.log(`📦 Found ${svgFiles.length} UI Kit (SVG) assets`);
+  } catch (e) {
+      console.warn('⚠️  UI Kit directory not found or empty');
   }
-  
-  console.log(`📦 Found ${files.length} assets`);
-  
+
   // Generate entries
   const entries = [];
-  for (let i = 0; i < files.length; i++) {
-    const entry = await generateManifestEntry(files[i], i);
+  
+  // Solidarity Assets (Auto-increment IDs)
+  // Sort first for determinism
+  pngFiles.sort();
+  for (let i = 0; i < pngFiles.length; i++) {
+    const entry = await generateManifestEntry(pngFiles[i], i, 'solidarity');
     if (entry) {
       entries.push(entry);
     }
   }
-  
-  // Sort for determinism: first by category, then by name
-  entries.sort((a, b) => {
-    if (a.category !== b.category) {
-      return a.category.localeCompare(b.category);
-    }
-    return a.name.localeCompare(b.name);
-  });
-  
-  // Reassign sequential IDs after sorting
-  entries.forEach((entry, idx) => {
-    entry.id = `KR-SOLID-${String(idx + 1).padStart(3, '0')}`;
-  });
+
+  // UI Kit Assets (Use filename IDs)
+  svgFiles.sort();
+  for (let i = 0; i < svgFiles.length; i++) {
+      const entry = await generateManifestEntry(svgFiles[i], 0, 'ui-kit');
+      if (entry) entries.push(entry);
+  }
   
   // Build manifest
   const manifest = {
@@ -295,7 +359,7 @@ async function generateManifest() {
     last_updated: new Date().toISOString().split('T')[0],
     strategy: 'Layered Identity System',
     total_assets: entries.length,
-    layers: ['substrate', 'atmospheric', 'cultural', 'resistance', 'spiritual'],
+    layers: ['substrate', 'atmospheric', 'cultural', 'resistance', 'spiritual', 'ui-kit'],
     assets: entries
   };
   
@@ -304,16 +368,6 @@ async function generateManifest() {
   
   console.log(`✅ Manifest generated: ${OUTPUT_PATH}`);
   console.log(`📊 Total assets: ${entries.length}`);
-  console.log('📋 Assets by layer:');
-  
-  const layerCounts = entries.reduce((acc, entry) => {
-    acc[entry.layer] = (acc[entry.layer] || 0) + 1;
-    return acc;
-  }, {});
-  
-  Object.entries(layerCounts).forEach(([layer, count]) => {
-    console.log(`   ${layer}: ${count}`);
-  });
 }
 
 // Run generator

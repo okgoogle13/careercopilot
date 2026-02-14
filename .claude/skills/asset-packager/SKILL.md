@@ -1,8 +1,12 @@
 ---
 name: asset-packager
-description: Automated asset packaging—converts validated PNG + IDF JSON into complete production bundle (context.md, tokens.json, usage.md). Eliminates 30 manual file generations across 10 assets.
-version: 1.0.0
-tags: []
+description: "Automated asset packaging\u2014converts validated PNG + IDF JSON into\
+  \ complete production bundle (context.md, tokens.json, usage.md). Eliminates 30\
+  \ manual file generations across 10 assets."
+metadata:
+  legacy_frontmatter:
+    version: 1.0.0
+    tags: []
 ---
 
 # Asset-Packager Skill

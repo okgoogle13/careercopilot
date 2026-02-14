@@ -143,7 +143,7 @@ def generate_tailwind_patch(tokens):
     # Map Shadows
     if 'shadow' in tokens:
          for name, val in tokens['shadow'].items():
-              tw_theme['boxShadow'][name] = f"var(--md-sys-shadow-{name})"
+              tw_theme['boxShadow'][name] = f"var(--sys-shadow-{name})"
 
     # Map Motion
     if 'motion' in tokens:

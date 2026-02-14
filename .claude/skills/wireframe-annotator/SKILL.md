@@ -1,8 +1,16 @@
 ---
 name: wireframe-annotator
-description: Generate annotated ASCII wireframes based on the "Annotated Wireframe Protocol". Bridges the gap between high-level specs and developer-ready implementation guidance.
-tags: [wireframing, design, spec-generation, design-to-code]
-version: 2.0.0
+description: Generate annotated ASCII wireframes based on the "Annotated Wireframe
+  Protocol". Bridges the gap between high-level specs and developer-ready implementation
+  guidance.
+metadata:
+  legacy_frontmatter:
+    tags:
+    - wireframing
+    - design
+    - spec-generation
+    - design-to-code
+    version: 2.0.0
 ---
 
 # Wireframe Annotator Skill

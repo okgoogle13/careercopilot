@@ -1,8 +1,12 @@
 ---
 name: project-health-checker
-description: "Quick diagnostic tool (30s) running validation and health checks. Use for fast status checks. Related: audit-agent for comprehensive security and code quality audits."
-version: 1.0.0
-tags: []
+description: 'Quick diagnostic tool (30s) running validation and health checks. Use
+  for fast status checks. Related: audit-agent for comprehensive security and code
+  quality audits.'
+metadata:
+  legacy_frontmatter:
+    version: 1.0.0
+    tags: []
 ---
 
 ## Purpose

@@ -1,8 +1,12 @@
 ---
 name: expressive-typography-manipulation
-description: Technical implementation guide for Material Design 3 Expressive Typography. Contains code patterns for variable font axis manipulation (wght, wdth, opsz), semantic token theming, and Framer Motion typographic animations with spring physics.
-version: 1.0.0
-tags: []
+description: Technical implementation guide for Material Design 3 Expressive Typography.
+  Contains code patterns for variable font axis manipulation (wght, wdth, opsz), semantic
+  token theming, and Framer Motion typographic animations with spring physics.
+metadata:
+  legacy_frontmatter:
+    version: 1.0.0
+    tags: []
 ---
 
 # Expressive Typography Manipulation (Material Design 3 Expressive)

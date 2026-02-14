@@ -1,8 +1,16 @@
 ---
 name: artifact-bundler
-description: Bundles a React component or mini-app into a single, self-contained HTML file. Use this to create shareable prototypes of Kerala Rage components that can be run independently in a browser.
-version: 1.0.0
-tags: [bundling, prototype, html, parcel]
+description: Bundles a React component or mini-app into a single, self-contained HTML
+  file. Use this to create shareable prototypes of Kerala Rage components that can
+  be run independently in a browser.
+metadata:
+  legacy_frontmatter:
+    version: 1.0.0
+    tags:
+    - bundling
+    - prototype
+    - html
+    - parcel
 ---
 
 # Artifact Bundler

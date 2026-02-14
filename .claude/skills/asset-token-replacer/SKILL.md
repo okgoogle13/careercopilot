@@ -1,13 +1,15 @@
 ---
+name: asset-token-replacer
 description: Automated replacement of generic asset placeholders with canonical KR-SOLID
   tokens across React components and markdown blueprints. Ensures visual compliance
   with the Kerala Rage asset registry.
-name: asset-token-replacer
-version: 1.0.0
-tags:
-- design-system
-- automation
-- assets
+metadata:
+  legacy_frontmatter:
+    version: 1.0.0
+    tags:
+    - design-system
+    - automation
+    - assets
 ---
 
 # Asset Token Replacer Skill

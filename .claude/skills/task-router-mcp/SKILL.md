@@ -1,9 +1,13 @@
 ---
 name: task-router-mcp
-description: Multi-agent task orchestration MCP server. Queue-based workflow where Claude Desktop assigns tasks → agents claim → execute → report completion → next task auto-assigned.
-type: mcp-server
-version: 1.0.0
-tags: []
+description: "Multi-agent task orchestration MCP server. Queue-based workflow where\
+  \ Claude Desktop assigns tasks \u2192 agents claim \u2192 execute \u2192 report\
+  \ completion \u2192 next task auto-assigned."
+metadata:
+  legacy_frontmatter:
+    type: mcp-server
+    version: 1.0.0
+    tags: []
 ---
 
 # Task-Router MCP Server

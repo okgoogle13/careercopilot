@@ -1,11 +1,13 @@
 ---
+name: brand-brief-optimizer
 description: Evaluate and strengthen design system briefs by identifying vague language,
   testing applicability across component types, and suggesting specific examples that
   clarify edge cases and decision frameworks. Works with Material Design 3, custom
   systems, or any design philosophy.
-name: brand-brief-optimizer
-version: 1.0.0
-tags: []
+metadata:
+  legacy_frontmatter:
+    version: 1.0.0
+    tags: []
 ---
 
 # Brand Brief Optimizer Skill

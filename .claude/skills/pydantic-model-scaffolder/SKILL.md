@@ -1,8 +1,12 @@
 ---
 name: pydantic-model-scaffolder
-description: "Scaffolds Pydantic models for request/response validation with advanced validation rules. Use for complex data models. Related: fastapi-endpoint-scaffolder for quick endpoint creation."
-version: 1.0.0
-tags: []
+description: 'Scaffolds Pydantic models for request/response validation with advanced
+  validation rules. Use for complex data models. Related: fastapi-endpoint-scaffolder
+  for quick endpoint creation.'
+metadata:
+  legacy_frontmatter:
+    version: 1.0.0
+    tags: []
 ---
 
 # Pydantic Model Scaffolder Workflow

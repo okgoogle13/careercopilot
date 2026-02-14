@@ -1,6 +1,7 @@
 ---
 name: kr-svg
-description: Generate Kerala Rage kr-solidarity UI primitive SVGs (strict tokens, organic asymmetry, 3-layer grouping). Output SVG only.
+description: Generate Kerala Rage kr-solidarity UI primitive SVGs (strict tokens,
+  organic asymmetry, 3-layer grouping). Output SVG only.
 ---
 
 # KR SVG Generator (kr-solidarity)

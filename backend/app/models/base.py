@@ -4,38 +4,34 @@ from __future__ import annotations
 
 import json
 import uuid
-from datetime import datetime, timezone
-from typing import Any, Dict, Generic, List, Optional, Type, TypeVar, cast, overload
+from datetime import datetime
+from typing import Any, TypeVar
 
-from sqlalchemy import DateTime, String, func, inspect
+from sqlalchemy import DateTime, String, func
 from sqlalchemy.orm import (
     DeclarativeBase,
     Mapped,
-    MappedAsDataclass,
-    Session,
     declared_attr,
     mapped_column,
-    relationship,
-    sessionmaker,
 )
-from sqlalchemy.types import TypeDecorator, TypeEngine
+from sqlalchemy.types import TypeDecorator
 
 # Type variable for generic types
 T = TypeVar("T", bound="Base")
 
 
-class JSONEncodedDict(TypeDecorator[Dict[str, Any]]):
+class JSONEncodedDict(TypeDecorator[dict[str, Any]]):
     """Represents an immutable structure as a json-encoded string."""
 
     impl = String
     cache_ok = True
 
-    def process_bind_param(self, value: Optional[Dict[str, Any]], dialect: Any) -> Optional[str]:
+    def process_bind_param(self, value: dict[str, Any] | None, dialect: Any) -> str | None:
         if value is not None:
             return json.dumps(value)
         return None
 
-    def process_result_value(self, value: Optional[str], dialect: Any) -> Optional[Dict[str, Any]]:
+    def process_result_value(self, value: str | None, dialect: Any) -> dict[str, Any] | None:
         if value is not None:
             return json.loads(value)
         return None
@@ -65,9 +61,9 @@ class BaseMixin:
         nullable=False,
     )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Convert model instance to dictionary."""
-        result: Dict[str, Any] = {}
+        result: dict[str, Any] = {}
         for column in self.__table__.columns:  # type: ignore[attr-defined]
             value = getattr(self, column.name)
             if isinstance(value, datetime):
@@ -76,11 +72,11 @@ class BaseMixin:
         return result
 
     @classmethod
-    def from_dict(cls: Type[T], data: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], data: dict[str, Any]) -> T:
         """Create model instance from dictionary."""
         return cls(**data)
 
-    def update_from_dict(self, data: Dict[str, Any]) -> None:
+    def update_from_dict(self, data: dict[str, Any]) -> None:
         """Update model instance from dictionary."""
         protected_fields = {"id", "created_at", "updated_at"}
         for key, value in data.items():

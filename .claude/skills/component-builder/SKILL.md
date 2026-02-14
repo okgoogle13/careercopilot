@@ -1,8 +1,20 @@
 ---
 name: component-builder
-version: 2.0.0
-description: "Production-grade UI component creator for Kerala Rage design system with M3 Expressive principles. Creates production-ready React/TypeScript components with 100% design token compliance, ARIA accessibility, and Agit-Prop aesthetics. Solidarity Mode Only (Expressive, Warm). Use when creating new components, building UI elements from scratch, or generating production-ready React components with the Solidarity Typography Stack and Kerala Rage Morphology."
-tags: [react, typescript, component-building, kerala-rage, m3-expressive]
+description: Production-grade UI component creator for Kerala Rage design system with
+  M3 Expressive principles. Creates production-ready React/TypeScript components with
+  100% design token compliance, ARIA accessibility, and Agit-Prop aesthetics. Solidarity
+  Mode Only (Expressive, Warm). Use when creating new components, building UI elements
+  from scratch, or generating production-ready React components with the Solidarity
+  Typography Stack and Kerala Rage Morphology.
+metadata:
+  legacy_frontmatter:
+    version: 2.0.0
+    tags:
+    - react
+    - typescript
+    - component-building
+    - kerala-rage
+    - m3-expressive
 ---
 
 # Component Builder Skill (v2.0)

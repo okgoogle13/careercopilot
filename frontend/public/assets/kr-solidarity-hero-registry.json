@@ -1,7 +1,7 @@
 {
   "version": "2.0.0",
   "registry_name": "kerala-rage-hero-compositions",
-  "last_updated": "2026-02-11",
+  "last_updated": "2026-02-14",
   "manifest_version": "6.0.0",
   "m3_expressive_bezier": [
     0.34,
@@ -17,7 +17,7 @@
       "layers": [
         {
           "type": "substrate",
-          "asset_id": "KR-SOLID-033",
+          "asset_id": "KR-SOLID-034",
           "z_index": 1,
           "opacity": 0.4,
           "blend_mode": "normal",
@@ -77,7 +77,7 @@
       "layers": [
         {
           "type": "substrate",
-          "asset_id": "KR-SOLID-033",
+          "asset_id": "KR-SOLID-034",
           "z_index": 1,
           "opacity": 0.4,
           "blend_mode": "normal",
@@ -137,67 +137,7 @@
       "layers": [
         {
           "type": "substrate",
-          "asset_id": "KR-SOLID-033",
-          "z_index": 1,
-          "opacity": 0.5,
-          "blend_mode": "normal",
-          "position": "cover"
-        },
-        {
-          "type": "atmospheric",
-          "asset_id": "auto",
-          "z_index": 2,
-          "opacity": 0.2,
-          "blend_mode": "multiply",
-          "position": "center"
-        },
-        {
-          "type": "resistance",
-          "asset_id": "KR-SOLID-024",
-          "z_index": 3,
-          "opacity": 1,
-          "blend_mode": "normal",
-          "position": "center"
-        }
-      ],
-      "typography": {
-        "headline": "The Rage Never Dies",
-        "supporting": "Legacy of Resistance",
-        "pressure_state": {
-          "wght": 900,
-          "wdth": 75
-        },
-        "solidarity_state": {
-          "wght": 800,
-          "wdth": 120
-        },
-        "melancholy_state": {
-          "wght": 475,
-          "wdth": 97.5
-        }
-      },
-      "motion": {
-        "bezier": [
-          0.34,
-          1.56,
-          0.64,
-          1
-        ],
-        "scroll_wght_range": [
-          300,
-          800
-        ],
-        "transition_duration": 400
-      }
-    },
-    {
-      "id": "resistance-portrait-hero-2",
-      "name": "Resistance Portrait Hero 2",
-      "description": "Hero composition featuring Portrait -resistance-history",
-      "layers": [
-        {
-          "type": "substrate",
-          "asset_id": "KR-SOLID-033",
+          "asset_id": "KR-SOLID-034",
           "z_index": 1,
           "opacity": 0.5,
           "blend_mode": "normal",
@@ -251,13 +191,13 @@
       }
     },
     {
-      "id": "resistance-portrait-hero-3",
-      "name": "Resistance Portrait Hero 3",
+      "id": "resistance-portrait-hero-2",
+      "name": "Resistance Portrait Hero 2",
       "description": "Hero composition featuring Tipu-sultan V1",
       "layers": [
         {
           "type": "substrate",
-          "asset_id": "KR-SOLID-033",
+          "asset_id": "KR-SOLID-034",
           "z_index": 1,
           "opacity": 0.5,
           "blend_mode": "normal",
@@ -311,13 +251,73 @@
       }
     },
     {
+      "id": "resistance-portrait-hero-3",
+      "name": "Resistance Portrait Hero 3",
+      "description": "Hero composition featuring Turbaned-man V1",
+      "layers": [
+        {
+          "type": "substrate",
+          "asset_id": "KR-SOLID-034",
+          "z_index": 1,
+          "opacity": 0.5,
+          "blend_mode": "normal",
+          "position": "cover"
+        },
+        {
+          "type": "atmospheric",
+          "asset_id": "auto",
+          "z_index": 2,
+          "opacity": 0.2,
+          "blend_mode": "multiply",
+          "position": "center"
+        },
+        {
+          "type": "resistance",
+          "asset_id": "KR-SOLID-027",
+          "z_index": 3,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "position": "center"
+        }
+      ],
+      "typography": {
+        "headline": "The Rage Never Dies",
+        "supporting": "Legacy of Resistance",
+        "pressure_state": {
+          "wght": 900,
+          "wdth": 75
+        },
+        "solidarity_state": {
+          "wght": 800,
+          "wdth": 120
+        },
+        "melancholy_state": {
+          "wght": 475,
+          "wdth": 97.5
+        }
+      },
+      "motion": {
+        "bezier": [
+          0.34,
+          1.56,
+          0.64,
+          1
+        ],
+        "scroll_wght_range": [
+          300,
+          800
+        ],
+        "transition_duration": 400
+      }
+    },
+    {
       "id": "layered-solidarity-hero",
       "name": "Layered Solidarity Hero",
       "description": "Multi-layer composite with resistance and atmospheric layers",
       "layers": [
         {
           "type": "substrate",
-          "asset_id": "KR-SOLID-033",
+          "asset_id": "KR-SOLID-034",
           "z_index": 1,
           "opacity": 0.6,
           "blend_mode": "normal",
@@ -385,7 +385,7 @@
       "layers": [
         {
           "type": "substrate",
-          "asset_id": "KR-SOLID-033",
+          "asset_id": "KR-SOLID-034",
           "z_index": 1,
           "opacity": 0.45,
           "blend_mode": "normal",
@@ -401,7 +401,7 @@
         },
         {
           "type": "cultural",
-          "asset_id": "KR-SOLID-031",
+          "asset_id": "KR-SOLID-032",
           "z_index": 3,
           "opacity": 1,
           "blend_mode": "normal",
@@ -445,7 +445,7 @@
       "layers": [
         {
           "type": "substrate",
-          "asset_id": "KR-SOLID-033",
+          "asset_id": "KR-SOLID-034",
           "z_index": 1,
           "opacity": 0.45,
           "blend_mode": "normal",
@@ -461,7 +461,7 @@
         },
         {
           "type": "cultural",
-          "asset_id": "KR-SOLID-032",
+          "asset_id": "KR-SOLID-033",
           "z_index": 3,
           "opacity": 1,
           "blend_mode": "normal",

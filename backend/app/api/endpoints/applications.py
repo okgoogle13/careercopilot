@@ -1,4 +1,3 @@
-from typing import List, Optional
 from datetime import datetime, timezone
 
 from fastapi import APIRouter, Depends, HTTPException, status
@@ -7,7 +6,7 @@ from sqlalchemy.orm import Session
 from app.core.database import get_db
 from app.core.dependencies import get_current_user
 from app.models.application_schemas import ApplicationCreate, ApplicationResponse
-from app.models.database import User, Application
+from app.models.database import Application, User
 
 router = APIRouter()
 
@@ -16,14 +15,14 @@ router = APIRouter()
     "/", response_model=ApplicationResponse, status_code=status.HTTP_201_CREATED
 )
 async def create_application(
-    application: ApplicationCreate, 
+    application: ApplicationCreate,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
 ):
     """Create a new job application for the current user."""
-    
+
     application_data = application.model_dump(by_alias=True, exclude_unset=True)
-    
+
     new_application = Application(
         user_id=current_user.id,
         job_title=application.job_title,
@@ -33,11 +32,11 @@ async def create_application(
         source="manual",
         applied_date=datetime.now(timezone.utc)
     )
-    
+
     db.add(new_application)
     db.commit()
     db.refresh(new_application)
-    
+
     return new_application.to_dict()
 
 
@@ -47,7 +46,7 @@ async def create_application(
     status_code=status.HTTP_200_OK,
 )
 async def get_application(
-    application_id: str, 
+    application_id: str,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
 ):
@@ -65,7 +64,7 @@ async def get_application(
 
 @router.get(
     "/",
-    response_model=List[ApplicationResponse],
+    response_model=list[ApplicationResponse],
     status_code=status.HTTP_200_OK,
 )
 async def get_all_applications(
@@ -116,7 +115,7 @@ async def update_application(
     "/{application_id}", status_code=status.HTTP_204_NO_CONTENT
 )
 async def delete_application(
-    application_id: str, 
+    application_id: str,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
 ):

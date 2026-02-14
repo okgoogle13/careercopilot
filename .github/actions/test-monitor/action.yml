@@ -1,0 +1,253 @@
+name: 'Test Monitoring & Flakiness Detection'
+description: 'Monitors test execution patterns and detects flaky tests'
+inputs:
+  test-results-path:
+    description: 'Path to test results directory'
+    required: false
+    default: '.'
+  flakiness-threshold:
+    description: 'Number of retries before marking as flaky'
+    required: false
+    default: '2'
+  performance-baseline:
+    description: 'Performance baseline file path'
+    required: false
+    default: '.github/baselines/performance.json'
+outputs:
+  flaky-tests-detected:
+    description: 'Number of flaky tests detected'
+    value: ${{ steps.analyze.outputs.flaky-count }}
+  performance-regression:
+    description: 'Whether performance regression was detected'
+    value: ${{ steps.analyze.outputs.performance-regression }}
+  test-summary:
+    description: 'JSON summary of test results'
+    value: ${{ steps.analyze.outputs.test-summary }}
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Install dependencies
+      shell: bash
+      run: |
+        pip install --quiet junitparser pytest-json-report
+
+    - name: Analyze test results
+      id: analyze
+      shell: bash
+      run: |
+        #!/bin/bash
+        set -e
+
+        echo "🔍 Analyzing test results for flakiness and performance"
+
+        # Initialize counters
+        flaky_count=0
+        total_tests=0
+        failed_tests=0
+        performance_regression=false
+
+        # Find all test result files
+        junit_files=$(find ${{ inputs.test-results-path }} -name "*.xml" -type f 2>/dev/null || echo "")
+        json_files=$(find ${{ inputs.test-results-path }} -name "*results*.json" -type f 2>/dev/null || echo "")
+
+        # Analyze JUnit XML files
+        if [[ -n "$junit_files" ]]; then
+          echo "📊 Analyzing JUnit XML files"
+
+          python3 -c "
+        import xml.etree.ElementTree as ET
+        import sys
+        import json
+        from collections import defaultdict
+
+        test_results = defaultdict(list)
+        flaky_tests = []
+
+        # Parse all XML files
+        for junit_file in '''$junit_files'''.split():
+            if not junit_file.strip():
+                continue
+            try:
+                tree = ET.parse(junit_file.strip())
+                root = tree.getroot()
+
+                # Handle different JUnit formats
+                testcases = root.findall('.//testcase')
+
+                for testcase in testcases:
+                    test_name = testcase.get('name', 'unknown')
+                    classname = testcase.get('classname', 'unknown')
+                    full_name = f'{classname}::{test_name}'
+                    time = float(testcase.get('time', 0))
+
+                    # Check if test failed
+                    failure = testcase.find('failure')
+                    error = testcase.find('error')
+                    skipped = testcase.find('skipped')
+
+                    status = 'passed'
+                    if failure is not None or error is not None:
+                        status = 'failed'
+                    elif skipped is not None:
+                        status = 'skipped'
+
+                    test_results[full_name].append({
+                        'status': status,
+                        'time': time,
+                        'file': junit_file
+                    })
+            except Exception as e:
+                print(f'Error parsing {junit_file}: {e}', file=sys.stderr)
+
+        # Detect flaky tests (tests that have both passed and failed runs)
+        for test_name, runs in test_results.items():
+            if len(runs) > 1:  # Multiple runs detected
+                statuses = [run['status'] for run in runs]
+                if 'passed' in statuses and 'failed' in statuses:
+                    flaky_tests.append({
+                        'name': test_name,
+                        'runs': len(runs),
+                        'failures': statuses.count('failed'),
+                        'avg_time': sum(run['time'] for run in runs) / len(runs)
+                    })
+
+        # Output results
+        print(f'flaky_count={len(flaky_tests)}')
+        print(f'total_tests={len(test_results)}')
+
+        # Create detailed report
+        summary = {
+            'total_tests': len(test_results),
+            'flaky_tests': len(flaky_tests),
+            'flaky_details': flaky_tests
+        }
+
+        with open('test-analysis.json', 'w') as f:
+            json.dump(summary, f, indent=2)
+
+        if flaky_tests:
+            print('🔥 Flaky tests detected:')
+            for test in flaky_tests:
+                print(f\"  - {test['name']}: {test['failures']}/{test['runs']} failed\")
+        "
+        fi
+
+        # Analyze performance results
+        if [[ -n "$json_files" ]]; then
+          echo "⚡ Analyzing performance results"
+
+          for json_file in $json_files; do
+            if [[ "$json_file" == *"performance"* ]]; then
+              echo "📈 Found performance results: $json_file"
+
+              # Compare with baseline if available
+              if [[ -f "${{ inputs.performance-baseline }}" ]]; then
+                python3 -c "
+        import json
+        import sys
+
+        try:
+            with open('$json_file') as f:
+                current = json.load(f)
+            with open('${{ inputs.performance-baseline }}') as f:
+                baseline = json.load(f)
+
+            # Compare benchmarks (simplified)
+            regression_detected = False
+            if 'benchmarks' in current and 'benchmarks' in baseline:
+                for bench in current['benchmarks']:
+                    name = bench.get('name', '')
+                    current_time = bench.get('stats', {}).get('mean', 0)
+
+                    # Find baseline
+                    baseline_bench = next((b for b in baseline['benchmarks'] if b.get('name') == name), None)
+                    if baseline_bench:
+                        baseline_time = baseline_bench.get('stats', {}).get('mean', 0)
+                        if baseline_time > 0 and current_time > baseline_time * 1.2:  # 20% regression threshold
+                            print(f'⚠️  Performance regression in {name}: {current_time:.4f}s vs {baseline_time:.4f}s')
+                            regression_detected = True
+
+            print(f'performance_regression={regression_detected}')
+        except Exception as e:
+            print(f'Error analyzing performance: {e}', file=sys.stderr)
+            print('performance_regression=false')
+        "
+              fi
+            fi
+          done
+        fi
+
+        # Read analysis results
+        if [[ -f "test-analysis.json" ]]; then
+          flaky_count=$(jq -r '.flaky_tests' test-analysis.json)
+          echo "flaky-count=$flaky_count" >> $GITHUB_OUTPUT
+          echo "test-summary=$(cat test-analysis.json | jq -c .)" >> $GITHUB_OUTPUT
+        else
+          echo "flaky-count=0" >> $GITHUB_OUTPUT
+          echo "test-summary={}" >> $GITHUB_OUTPUT
+        fi
+
+        # Set performance regression output
+        echo "performance-regression=${performance_regression:-false}" >> $GITHUB_OUTPUT
+
+    - name: Create flakiness report
+      if: steps.analyze.outputs.flaky-count > 0
+      shell: bash
+      run: |
+        echo "📝 Creating flakiness report"
+
+        cat > flakiness-report.md << 'EOF'
+        # 🔥 Flaky Test Detection Report
+
+        **Detection Date**: $(date -u +"%Y-%m-%d %H:%M:%S UTC")
+        **Commit**: ${{ github.sha }}
+        **Branch**: ${{ github.ref_name }}
+        **Workflow**: ${{ github.workflow }}
+
+        ## Summary
+        - **Flaky Tests Detected**: ${{ steps.analyze.outputs.flaky-count }}
+        - **Total Tests Analyzed**: $(jq -r '.total_tests' test-analysis.json 2>/dev/null || echo "Unknown")
+
+        ## Flaky Test Details
+
+        EOF
+
+        if [[ -f "test-analysis.json" ]]; then
+          jq -r '.flaky_details[]? | "- **\(.name)**: \(.failures)/\(.runs) runs failed (avg: \(.avg_time | tostring)s)"' test-analysis.json >> flakiness-report.md
+        fi
+
+        cat >> flakiness-report.md << 'EOF'
+
+        ## Recommended Actions
+
+        1. **Investigate Root Causes**:
+           - Check for timing-sensitive operations
+           - Review external dependencies
+           - Analyze test environment conditions
+
+        2. **Immediate Fixes**:
+           - Add proper wait conditions
+           - Increase timeouts where appropriate
+           - Mock unreliable external services
+
+        3. **Long-term Solutions**:
+           - Implement retry logic in application code
+           - Improve test isolation
+           - Add performance monitoring
+
+        ## Links
+        - [Workflow Run](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
+        - [Test Artifacts](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}#artifacts)
+        EOF
+
+        echo "📄 Flakiness report created"
+
+    - name: Upload analysis results
+      uses: actions/upload-artifact@v4
+      with:
+        name: test-analysis-${{ github.run_number }}
+        path: |
+          test-analysis.json
+          flakiness-report.md
+        retention-days: 90

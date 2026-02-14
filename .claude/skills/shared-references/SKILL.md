@@ -1,11 +1,14 @@
 ---
 name: shared-references
-description: "Common reference materials, templates, and utilities shared across multiple skills"
-version: 1.0.0
-tags:
-  - reference
-  - templates
-  - utilities
+description: Common reference materials, templates, and utilities shared across multiple
+  skills
+metadata:
+  legacy_frontmatter:
+    version: 1.0.0
+    tags:
+    - reference
+    - templates
+    - utilities
 ---
 
 # Shared References

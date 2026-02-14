@@ -1,8 +1,8 @@
 
-from typing import List, Optional
-from fastapi import APIRouter, HTTPException, Depends
-from pydantic import BaseModel
 import logging
+
+from fastapi import APIRouter, HTTPException
+from pydantic import BaseModel
 
 from app.agents.job_scout import JobScoutAgent
 
@@ -12,10 +12,10 @@ router = APIRouter()
 
 class JobSearchRequest(BaseModel):
     query: str
-    location: Optional[str] = "Australia"
+    location: str | None = "Australia"
 
 class JobScoutResponse(BaseModel):
-    found_links: List[str]
+    found_links: list[str]
     message: str
 
 # Instantiate the agent globally or per request
@@ -29,11 +29,11 @@ async def search_jobs(request: JobSearchRequest):
     Triggers the JobScout Agent to search for jobs based on the query.
     """
     logger.info(f"Received job search request: {request.query} in {request.location}")
-    
+
     try:
         agent = JobScoutAgent()
         links = await agent.search_jobs(request.query, request.location)
-        
+
         return JobScoutResponse(
             found_links=links,
             message=f"Successfully found {len(links)} potential job links."

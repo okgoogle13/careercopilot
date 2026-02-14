@@ -1,12 +1,14 @@
 ---
+name: registry-version-bumper
 description: Automates semantic versioning and timestamp updates for JSON registries.
   Maintains record of change history for automated manifests.
-name: registry-version-bumper
-version: 1.0.0
-tags:
-- manifest
-- dev-ops
-- versioning
+metadata:
+  legacy_frontmatter:
+    version: 1.0.0
+    tags:
+    - manifest
+    - dev-ops
+    - versioning
 ---
 
 # Registry Version Bumper Skill

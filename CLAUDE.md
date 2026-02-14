@@ -32,7 +32,7 @@ frontend/               # React 18 app (Vite)
     hooks/             # Custom React hooks
     api/               # Frontend API clients
     lib/               # Utilities & helpers
-    design/            # Design tokens & CSS variables
+    styles/            # Design tokens & CSS variables
     pages/             # Route pages
   tests/               # E2E tests (Playwright)
   scripts/             # Build & asset generation scripts (kr-solidarity)
@@ -51,8 +51,9 @@ backend/               # FastAPI application
     tests/             # Unit & integration tests
   pyproject.toml       # Python 3.10+, dependencies, tool config
 
-design-system/         # DTCG token definitions
-  tokens.json          # Master token file (semantic colors, typography, spacing)
+frontend/src/design/   # M3 Expressive design tokens
+  tokens/
+    tokens.json        # Master token file (Kerala Rage: semantic colors, typography, motion, shapes, shadows)
 
 scripts/               # Root-level deployment & utility scripts
   deploy.sh
@@ -69,41 +70,33 @@ scripts/               # Root-level deployment & utility scripts
 
 ### Semantic Color Variables (The Truth)
 
-All colors are **semantic** (usage-driven), not generic. **Truth lives in `design-system/tokens.json`** (DTCG format).
+All colors are **semantic** (usage-driven), not generic. **Truth lives in `frontend/src/design/tokens/tokens.json`** (DTCG format).
 
-**CSS Variable Convention**: `--sys-{category}-{semantic-name}-{variant}`
+**CSS Variable Convention**: `--sys-color-{name}` or `--sys-color-{role}-{step}`
 
 | Semantic Name | CSS Variable Base | Usage Intent | Base Hex |
 |---|---|---|---|
-| **solidarityRed** | `--sys-color-solidarityRed-*` | Primary CTA, urgent emphasis, activism | `#F14714` |
-| **kr-charcoalRed** | `--sys-color-kr-charcoalRed-*` | Destructive, error states, critical | `#F14844` |
-| **inkGold** | `--sys-color-inkGold-*` | Ornaments, highlights, focus rings | `#DAF674` |
-| **kr-activistSmokeGreen** | `--sys-color-kr-activistSmokeGreen-*` | Landscape, nature, secondary | `#42C47D` |
-| **signalGreen** | `--sys-color-signalGreen-*` | Links, accents, illustrations | `#3FD9DC` |
-| **stencilYellow** | `--sys-color-stencilYellow-*` | Headlines, attention, stencil type | `#E4DA39` |
-| **charcoalBackground** | `--sys-color-charcoalBackground-*` | App background, surfaces, layers | `#242424` |
-| **worker-ash** | `--sys-color-worker-ash-*` | Body text, neutral content | `#B8D89A` |
+| **asphaltBlack** | `--sys-color-asphaltBlack` | Global floor, backgrounds, dark text | `#1A1714` |
+| **paperWhite** | `--sys-color-paperWhite` | Text on dark, high contrast surfaces | `#F5F0E8` |
+| **kr-ink-gold** | `--sys-color-kr-ink-gold` | Primary brand, varying opacity overlays | `#D4A84B` |
+| **waratahRed** | `--sys-color-waratahRed` | Secondary brand, urgent actions | `#C45C4B` |
+| **ochreEarth** | `--sys-color-ochreEarth` | Tertiary brand, grounded elements | `#B8733D` |
+| **gumLeafGreen** | `--sys-color-gumLeafGreen` | Shadows, natural accents | `#6B7F6E` |
+| **concreteGrey** | `--sys-color-concreteGrey` | Neutral UI, borders, disabled states | `#A39B8F` |
 
-**Tonal Steps** (each semantic color has `steps-0` through `steps-6`):
+**Tonal Steps** (M3 Standard 0-100):
+Roles like `primary`, `secondary`, `tertiary`, `error`, `neutral` have full tonal palettes:
 ```css
-/* Example: solidarityRed */
---sys-color-solidarityRed-steps-0: #A02F0F;  /* darkest, containers */
---sys-color-solidarityRed-steps-1: #C03811;
---sys-color-solidarityRed-steps-2: #F14714;  /* base */
---sys-color-solidarityRed-steps-3: #FF6B3D;
---sys-color-solidarityRed-steps-4: #FF9470;
---sys-color-solidarityRed-steps-5: #FFB999;  /* lightest, highlights */
+/* Example: primary (based on kr-ink-gold) */
+--sys-color-primary-0: #000000;
+--sys-color-primary-10: #2A1F0B; /* Darkest container */
+--sys-color-primary-40: #8B7A35; /* Standard container */
+--sys-color-primary-50: #D4A84B; /* Base */
+--sys-color-primary-90: #FFF8EB; /* Lightest surface */
+--sys-color-primary-100: #FFFFFF;
 ```
 
-**Usage Metadata** (documents semantic purpose):
-```css
---sys-color-solidarityRed-usage-0: primaryCTA;
---sys-color-solidarityRed-usage-1: urgentEmphasis;
---sys-color-solidarityRed-usage-2: screenprintInk;
---sys-color-solidarityRed-usage-3: haloAccents;
-```
-
-**When Building UIs**: Use the `-usage-N` variant names as guides; pick the tonal step that provides proper contrast (steps-0/1 for backgrounds, steps-3/4 for mid-tones, steps-5/6 for highlights).
+**When Building UIs**: Use the semantic roles (`--sys-color-primary-*`) when possible, or the named primitives (`--sys-color-kr-ink-gold`) for specific brand moments.
 
 ### Typography (Variable Fonts Only)
 
@@ -127,10 +120,11 @@ Located in `frontend/src/components/ui/`:
 
 ### Design System Sources of Truth (Hierarchy)
 
-1. **Tokens**: `design-system/tokens.json` (DTCG, hand-authored, canonical)
-2. **CSS Variables**: `frontend/src/design/styles/design-tokens.css` (auto-generated, `--sys-*` prefix, rebuilt via `node scripts/build-m3-tokens.py`)
+1. **Tokens**: `frontend/src/design/tokens/tokens.json` (DTCG, hand-authored, canonical)
+2. **CSS Variables**: `frontend/src/styles/design-tokens.css` (auto-generated, `--sys-*` prefix, rebuilt via `python3 scripts/build-m3-tokens.py`)
 3. **Components**: `frontend/src/components/ui/*` (consume CSS variables via `className="..."` or `getTokenValue()`)
 4. **Figma**: Figma variables synced via `node scripts/sync-tokens-to-figma-vars.mjs` (bi-directional)
+5. **Deprecated**: `design-system/tokens.json` (Material Design 3 only, incomplete — do not use)
 
 ### Legacy Constraints (Do NOT Expand)
 
@@ -140,9 +134,10 @@ Located in `frontend/src/components/ui/`:
 
 ### Anti-Patterns
 
-- ❌ Hardcoded colors like `#1A1714` (use `--sys-color-charcoalBackground-base` instead)
+- ❌ Hardcoded colors like `#1A1714` (use `--sys-color-asphaltBlack` or `--sys-color-surface-dim` instead)
 - ❌ Generic shape radius (use asymmetric shapes per archetype design)
 - ❌ Purple gradients (Solidarity uses red, gold, green only)
+- ❌ Using legacy colors like `solidarityRed` or `signalGreen` (deprecated)
 - ❌ Uniform font weights (use variable fonts with semantic weights)
 - ❌ Button states without token variables
 - ✅ All colors from semantic tokens (`--sys-color-*`)
@@ -323,8 +318,8 @@ black app && isort app && mypy app
 | API Route         | `backend/app/api/endpoints/{resource}.py`     |
 | Service Logic     | `backend/app/services/{name}_service.py`      |
 | Genkit Flow       | `backend/app/genkit_flows/{flow_name}.py`     |
-| Design Tokens     | `design-system/tokens.json`                   |
-| CSS Variables     | `frontend/src/design/styles/design-tokens.css` |
+| Design Tokens     | `frontend/src/design/tokens/tokens.json`      |
+| CSS Variables     | `frontend/src/styles/design-tokens.css`       |
 | Test (Frontend)   | `frontend/src/{feature}/__tests__/{test}.test.tsx` |
 | Test (Backend)    | `backend/app/tests/{domain}/{test}.py`        |
 
@@ -360,12 +355,12 @@ black app && isort app && mypy app
 
 - **Python version**: 3.10 minimum (pyproject.toml)
 - **Node version**: 18+ (package.json)
-- **Design tokens DTCG**: `design-system/tokens.json` is the source of truth
-- **CSS variables**: `frontend/src/design/styles/design-tokens.css` (auto-generated, `--sys-*` prefix)
+- **Design tokens DTCG**: `frontend/src/design/tokens/tokens.json` is the source of truth (complete Kerala Rage system)
+- **CSS variables**: `frontend/src/styles/design-tokens.css` (auto-generated, `--sys-*` prefix, rebuilt via `npm run tokens:build`)
 - **Token sync to Figma**: `node scripts/sync-tokens-to-figma-vars.mjs`
 - **M3 Expressive**: Variable fonts + extreme contrast typography
 - **Type safety**: Frontend uses strict TS; backend uses mypy (strict)
-- **Pre-commit hooks**: Configured in `.husky/` (linting before commit)
+- **Pre-commit hooks**: Configured in `.husky/` (auto-rebuilds design tokens on commit)
 
 ---
 

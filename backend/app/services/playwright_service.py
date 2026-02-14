@@ -1,11 +1,9 @@
 
 import asyncio
 import os
-import shutil
-import sys
-from typing import Optional
 
 from app.services.mcp_utils import require_mcp_client
+
 
 class PlaywrightService:
     """
@@ -46,13 +44,13 @@ class PlaywrightService:
                         "playwright_navigate",
                         arguments={
                             "url": url,
-                            "waitUntil": "domcontentloaded" 
+                            "waitUntil": "domcontentloaded"
                         }
                     )
 
                     # 2. Extract Visible Text (or HTML if preferred for parsing)
-                    # Getting pure text is often safer for LLMs to process than raw HTML 
-                    # unless structure is strictly needed. 
+                    # Getting pure text is often safer for LLMs to process than raw HTML
+                    # unless structure is strictly needed.
                     # For extraction tasks, HTML might be better. Let's get HTML for maximum context.
                     result = await session.call_tool(
                         "playwright_get_visible_html", # Assuming this tool exists or similar
@@ -61,7 +59,7 @@ class PlaywrightService:
                              "removeScripts": True
                         }
                     )
-                    
+
                     # Fallback if specific tool fails or name differs - check available tools
                     # tools = await session.list_tools()
                     # print(tools)
@@ -69,12 +67,12 @@ class PlaywrightService:
                     # The result structure from call_tool usually has a 'content' list
                     if result.content and len(result.content) > 0:
                         return result.content[0].text
-                    
+
                     return ""
 
         except Exception as e:
             # Propagate error with context
-            raise RuntimeError(f"Playwright MCP Service Failed for {url}: {str(e)}") from e
+            raise RuntimeError(f"Playwright MCP Service Failed for {url}: {e!s}") from e
 
 # Simple synchronous wrapper for non-async calling contexts if needed
 def scrape_url_sync(url: str) -> str:

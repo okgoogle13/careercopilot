@@ -1,8 +1,15 @@
 ---
 name: component-transformer
-description: Orchestrates the migration of legacy MUI or generic components to the kerala-rage kr-solidarity design system. Specializes in "Refactor-on-Port" logic, ensuring visual transformation while preserving business state and behavioral integrity.
-version: 1.0.0
-tags: [migration, refactor, kerala-rage-kr-solidarity]
+description: Orchestrates the migration of legacy MUI or generic components to the
+  kerala-rage kr-solidarity design system. Specializes in "Refactor-on-Port" logic,
+  ensuring visual transformation while preserving business state and behavioral integrity.
+metadata:
+  legacy_frontmatter:
+    version: 1.0.0
+    tags:
+    - migration
+    - refactor
+    - kerala-rage-kr-solidarity
 ---
 
 # Component Transformer Skill

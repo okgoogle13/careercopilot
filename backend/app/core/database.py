@@ -5,8 +5,8 @@ Supports PostgreSQL (production) and SQLite (development/testing).
 
 import logging
 import os
+from collections.abc import Generator
 from contextlib import contextmanager
-from typing import Generator
 
 from sqlalchemy import create_engine, event, text
 from sqlalchemy.orm import Session, sessionmaker

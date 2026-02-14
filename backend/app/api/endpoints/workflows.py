@@ -5,13 +5,12 @@ FastAPI endpoints for orchestrated workflow operations.
 Legcay Genkit workflows are currently disabled due to 0.4.0 migration.
 """
 
-import traceback
-from typing import Any, Dict, Optional, Union
-from typing_extensions import TypedDict
+from typing import Any
 
 from fastapi import APIRouter, HTTPException, status
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field
+from typing_extensions import TypedDict
 
 # Legacy Genkit flows disabled
 # from app.genkit_flows.career_application_workflow import (
@@ -34,10 +33,10 @@ class EmailWorkflowResult(TypedDict, total=False):
     total_opportunities_found: int
     tasks_created: int
     error_message: str
-    details: Dict[str, Any]
+    details: dict[str, Any]
 
 
-scan_inbox_for_opportunities: Optional[Any] = None  # Placeholder for async function
+scan_inbox_for_opportunities: Any | None = None  # Placeholder for async function
 
 
 # Authentication handled by get_current_user dependency in main router
@@ -50,7 +49,7 @@ class GenerateApplicationRequest(BaseModel):
     """Request model for application package generation"""
 
     job_description: str = Field(description="Complete job description/posting text", min_length=50)
-    user_profile: Dict[str, Any] = Field(
+    user_profile: dict[str, Any] = Field(
         default=...,
         description="Comprehensive user profile data including resume content",
         min_length=1,
@@ -61,7 +60,7 @@ class GenerateApplicationResponse(BaseModel):
     """Response model for application package generation"""
 
     success: bool = Field(description="Whether the generation was successful")
-    data: Optional[ApplicationPackageResult] = Field(description="Generated application package")
+    data: ApplicationPackageResult | None = Field(description="Generated application package")
     message: str = Field(description="Success or error message")
     processing_time_seconds: float = Field(description="Total processing time")
 
@@ -76,7 +75,7 @@ class ScanEmailResponse(BaseModel):
     """Response model for email scanning workflow"""
 
     success: bool = Field(description="Whether the scanning was successful")
-    data: Optional[EmailWorkflowResult] = Field(description="Email scanning results")
+    data: EmailWorkflowResult | None = Field(description="Email scanning results")
     message: str = Field(description="Success or error message")
 
 
@@ -117,7 +116,7 @@ async def scan_email_for_opportunities(request: ScanEmailRequest) -> ScanEmailRe
     summary="Workflow Service Health Check",
     description="Check the health and availability of workflow services",
 )
-async def workflow_health_check() -> Dict[str, Any]:
+async def workflow_health_check() -> dict[str, Any]:
     """
     Check the health of workflow services and dependencies.
     """

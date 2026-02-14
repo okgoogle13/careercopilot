@@ -1,12 +1,14 @@
 ---
+name: git-commit-batcher
 description: Groups design system changes into logical, conventional commit batches.
   Ensures a clean, readable history for the asset pipeline and design canon.
-name: git-commit-batcher
-version: 1.0.0
-tags:
-- git
-- workflow
-- dev-ops
+metadata:
+  legacy_frontmatter:
+    version: 1.0.0
+    tags:
+    - git
+    - workflow
+    - dev-ops
 ---
 
 # Git Commit Batcher Skill

@@ -1,8 +1,15 @@
 ---
 name: component-spec-generator
-description: Transform wireframe markdown into detailed React component implementation specifications with TypeScript interfaces and test stubs.
-tags: [react, typescript, testing, spec]
-version: 1.0.0
+description: Transform wireframe markdown into detailed React component implementation
+  specifications with TypeScript interfaces and test stubs.
+metadata:
+  legacy_frontmatter:
+    tags:
+    - react
+    - typescript
+    - testing
+    - spec
+    version: 1.0.0
 ---
 
 # Component Spec Generator

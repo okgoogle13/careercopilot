@@ -3,9 +3,9 @@ kr-solidarity v3.0.0 Asset Review Schemas
 Pydantic models for human review workflow.
 """
 
-from pydantic import BaseModel, Field
-from typing import List, Optional
 from datetime import datetime
+
+from pydantic import BaseModel, Field
 
 
 class GovernanceOverride(BaseModel):
@@ -22,8 +22,8 @@ class AssetReviewSubmission(BaseModel):
     asset_id: str = Field(..., description="KR-SOLID-XXX")
     overall_decision: str = Field(..., description="approved, conditional-approval, needs-revision, rejected")
     cultural_feedback: str = Field(..., description="Feedback on cultural appropriateness")
-    aesthetic_notes: Optional[str] = Field(None, description="Notes on visual quality")
-    overrides: List[GovernanceOverride] = Field(default_factory=list, description="Governance flag overrides")
+    aesthetic_notes: str | None = Field(None, description="Notes on visual quality")
+    overrides: list[GovernanceOverride] = Field(default_factory=list, description="Governance flag overrides")
     reviewed_by: str = Field(..., description="Reviewer identity")
     review_timestamp: datetime = Field(default_factory=datetime.utcnow)
     confidence: float = Field(..., ge=0.0, le=1.0, description="Reviewer confidence in decision")
@@ -31,7 +31,7 @@ class AssetReviewSubmission(BaseModel):
 
 class BulkAssetReviewSubmission(BaseModel):
     """Bulk submit reviews for multiple assets."""
-    asset_ids: List[str] = Field(..., description="List of KR-SOLID-XXX IDs")
+    asset_ids: list[str] = Field(..., description="List of KR-SOLID-XXX IDs")
     bulk_decision: str = Field(..., description="approved, conditional-approval, rejected")
     reason: str = Field(..., description="Bulk decision justification")
     reviewed_by: str = Field(..., description="Reviewer identity")
@@ -54,14 +54,14 @@ class ReviewDashboardAsset(BaseModel):
     category: str
     score: float
     approval_status: str
-    violations: List[str]
-    warnings: List[str]
+    violations: list[str]
+    warnings: list[str]
     governance_passed: bool
     requires_review: bool
     political_significance: str
-    text_content: Optional[str]
-    color_palette: Optional[dict]
-    sample_image_url: Optional[str]
+    text_content: str | None
+    color_palette: dict | None
+    sample_image_url: str | None
 
 
 class ReviewDashboardStats(BaseModel):
@@ -71,5 +71,5 @@ class ReviewDashboardStats(BaseModel):
     assets_rejected: int
     assets_conditional: int
     average_review_time: float
-    reviewers_active: List[str]
+    reviewers_active: list[str]
     pending_overrides: int
