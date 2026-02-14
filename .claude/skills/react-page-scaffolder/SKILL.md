@@ -1,8 +1,12 @@
 ---
 name: react-page-scaffolder
-description: "Creates a complete React page directory (page.tsx, index.ts, styles.css) with routing integration. Use when asked to create a new page, view, or route handler that combines components and layouts."
-version: 1.0.0
-tags: []
+description: Creates a complete React page directory (page.tsx, index.ts, styles.css)
+  with routing integration. Use when asked to create a new page, view, or route handler
+  that combines components and layouts.
+metadata:
+  legacy_frontmatter:
+    version: 1.0.0
+    tags: []
 ---
 
 ## Purpose

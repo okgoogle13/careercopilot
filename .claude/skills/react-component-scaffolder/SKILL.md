@@ -1,11 +1,16 @@
 ---
 name: react-component-scaffolder
-description: "DEPRECATED: Use component-builder instead for M3-compliant, production-grade components."
-version: 1.0.0
-deprecated: true
-deprecated_message: "This skill is deprecated. Use the 'component-builder' skill instead, which generates production-grade, M3-compliant React components with token-aware styling and accessibility features."
-replacement: component-builder
-tags: []
+description: 'DEPRECATED: Use component-builder instead for M3-compliant, production-grade
+  components.'
+metadata:
+  legacy_frontmatter:
+    version: 1.0.0
+    deprecated: true
+    deprecated_message: This skill is deprecated. Use the 'component-builder' skill
+      instead, which generates production-grade, M3-compliant React components with
+      token-aware styling and accessibility features.
+    replacement: component-builder
+    tags: []
 ---
 
 # React Component Scaffolder (DEPRECATED)

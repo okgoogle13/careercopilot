@@ -1,8 +1,13 @@
 ---
 name: careercopilot-agent-scaffolder
-description: "Scaffolds a new Python agent for autonomous AI tasks in 'src/agents/'. Agents are autonomous components that handle complex operations (resume analysis, job matching, KSC generation). Use when asked to create a new AI agent or automation component."
-version: 1.0.0
-tags: []
+description: Scaffolds a new Python agent for autonomous AI tasks in 'src/agents/'.
+  Agents are autonomous components that handle complex operations (resume analysis,
+  job matching, KSC generation). Use when asked to create a new AI agent or automation
+  component.
+metadata:
+  legacy_frontmatter:
+    version: 1.0.0
+    tags: []
 ---
 
 ## Purpose

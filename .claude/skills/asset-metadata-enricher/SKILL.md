@@ -1,12 +1,14 @@
 ---
+name: asset-metadata-enricher
 description: Attempts to extract and append semantic metadata (alt-text, political
   significance) to asset manifests using Gemini or provided context.
-name: asset-metadata-enricher
-version: 1.0.0
-tags:
-- assets
-- ai
-- accessibility
+metadata:
+  legacy_frontmatter:
+    version: 1.0.0
+    tags:
+    - assets
+    - ai
+    - accessibility
 ---
 
 # Asset Metadata Enricher Skill

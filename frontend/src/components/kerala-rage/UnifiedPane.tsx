@@ -1,7 +1,6 @@
 import React from 'react';
 import { motion, HTMLMotionProps, useReducedMotion } from 'framer-motion';
 import { cn } from '@/lib/utils';
-import { useMode } from '@/hooks/use-mode';
 
 export interface UnifiedPaneProps extends HTMLMotionProps<'section'> {
   title?: string;
@@ -20,14 +19,13 @@ export interface UnifiedPaneProps extends HTMLMotionProps<'section'> {
 export const UnifiedPane = React.forwardRef<HTMLElement, UnifiedPaneProps>(
   ({ className, title, sidebar, children, ...props }, ref) => {
     const shouldReduceMotion = useReducedMotion();
-    const { mode } = useMode();
 
     const motionProps = shouldReduceMotion
       ? { initial: { opacity: 0 }, animate: { opacity: 1 } }
       : { 
           initial: { opacity: 0, y: 20 }, 
           animate: { opacity: 1, y: 0 },
-          transition: { type: 'spring', stiffness: 300, damping: 30 }
+          transition: { type: 'spring' as const, stiffness: 300, damping: 30 }
         };
 
     return (

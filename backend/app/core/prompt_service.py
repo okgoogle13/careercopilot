@@ -10,7 +10,7 @@ import logging
 from dataclasses import dataclass, field
 from datetime import datetime
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any
 
 logger = logging.getLogger(__name__)
 
@@ -24,11 +24,11 @@ class PromptTemplate:
     category: str
     version: str
     template: str
-    parameters: List[str]
+    parameters: list[str]
     output_format: str
-    system_prompt: Optional[str] = None
+    system_prompt: str | None = None
     has_system_prompt: bool = False
-    metadata: Dict[str, Any] = field(default_factory=dict)
+    metadata: dict[str, Any] = field(default_factory=dict)
 
     def format(self, **kwargs: Any) -> str:
         """Format the template with provided parameters"""
@@ -50,16 +50,16 @@ class PromptTemplate:
         except KeyError as e:
             raise ValueError(f"Template formatting failed: missing parameter {e}")
         except Exception as e:
-            raise ValueError(f"Template formatting failed: {str(e)}")
+            raise ValueError(f"Template formatting failed: {e!s}")
 
 
 class PromptService:
     """Service for managing AI prompts from JSON templates"""
 
-    def __init__(self, prompts_dir: Optional[str] = None):
+    def __init__(self, prompts_dir: str | None = None):
         self.prompts_dir = Path(prompts_dir or self._get_default_prompts_dir())
-        self._templates: Dict[str, PromptTemplate] = {}
-        self._config: Dict[str, Any] = {}
+        self._templates: dict[str, PromptTemplate] = {}
+        self._config: dict[str, Any] = {}
         self._cached = False
 
         # Load configuration and templates on initialization
@@ -76,7 +76,7 @@ class PromptService:
         """Load prompt configuration from JSON"""
         config_path = self.prompts_dir / "prompt_config.json"
         try:
-            with open(config_path, "r", encoding="utf-8") as f:
+            with open(config_path, encoding="utf-8") as f:
                 self._config = json.load(f)
             logger.info(f"Loaded prompt configuration from {config_path}")
         except FileNotFoundError:
@@ -86,7 +86,7 @@ class PromptService:
             logger.error(f"Invalid JSON in prompt config: {e}")
             self._config = self._get_default_config()
 
-    def _get_default_config(self) -> Dict[str, Any]:
+    def _get_default_config(self) -> dict[str, Any]:
         """Get default configuration when config file is missing"""
         return {
             "prompt_management": {
@@ -110,7 +110,7 @@ class PromptService:
 
         for template_file in template_files:
             try:
-                with open(template_file, "r", encoding="utf-8") as f:
+                with open(template_file, encoding="utf-8") as f:
                     templates_data = json.load(f)
 
                 for template_id, template_data in templates_data.items():
@@ -127,7 +127,7 @@ class PromptService:
         self._cached = True
         logger.info(f"Total templates loaded: {len(self._templates)}")
 
-    def _create_template(self, template_id: str, template_data: Dict[str, Any]) -> PromptTemplate:
+    def _create_template(self, template_id: str, template_data: dict[str, Any]) -> PromptTemplate:
         """Create a PromptTemplate object from JSON data"""
         return PromptTemplate(
             name=template_data.get("name", template_id),
@@ -142,19 +142,19 @@ class PromptService:
             metadata=template_data.get("metadata", {}),
         )
 
-    def get_template(self, template_id: str) -> Optional[PromptTemplate]:
+    def get_template(self, template_id: str) -> PromptTemplate | None:
         """Get a specific prompt template by ID"""
         return self._templates.get(template_id)
 
-    def get_templates_by_category(self, category: str) -> List[PromptTemplate]:
+    def get_templates_by_category(self, category: str) -> list[PromptTemplate]:
         """Get all templates in a specific category"""
         return [template for template in self._templates.values() if template.category == category]
 
-    def list_templates(self) -> List[str]:
+    def list_templates(self) -> list[str]:
         """List all available template IDs"""
         return list(self._templates.keys())
 
-    def list_categories(self) -> List[str]:
+    def list_categories(self) -> list[str]:
         """List all available categories"""
         return list({template.category for template in self._templates.values()})
 
@@ -171,28 +171,28 @@ class PromptService:
 
         return template.format(**kwargs)
 
-    def get_system_prompt(self, template_id: str) -> Optional[str]:
+    def get_system_prompt(self, template_id: str) -> str | None:
         """Get the system prompt for a template if it exists"""
         template = self.get_template(template_id)
         if template and template.has_system_prompt:
             return template.system_prompt
         return None
 
-    def get_category_config(self, category: str) -> Dict[str, Any]:
+    def get_category_config(self, category: str) -> dict[str, Any]:
         """Get configuration for a specific category"""
         categories = self._config.get("categories", {})
         from typing import cast as _cast
-        return _cast(Dict[str, Any], categories.get(category, {}))
+        return _cast(dict[str, Any], categories.get(category, {}))
 
     def get_length_instruction(self, length_type: str) -> str:
         """Get length instruction text for a specific type"""
-        from typing import Dict as _Dict, cast as _cast
-        length_instructions = _cast(_Dict[str, str], self._config.get("length_instructions", {}))
+        from typing import cast as _cast
+        length_instructions = _cast(dict[str, str], self._config.get("length_instructions", {}))
         return length_instructions.get(length_type, length_instructions.get("standard", ""))
 
     def validate_template_parameters(
-        self, template_id: str, parameters: Dict[str, Any]
-    ) -> List[str]:
+        self, template_id: str, parameters: dict[str, Any]
+    ) -> list[str]:
         """Validate parameters for a template and return any validation errors"""
         template = self.get_template(template_id)
         if not template:
@@ -216,7 +216,7 @@ class PromptService:
         self._load_templates()
         logger.info("Templates reloaded from disk")
 
-    def get_template_metadata(self, template_id: str) -> Dict[str, Any]:
+    def get_template_metadata(self, template_id: str) -> dict[str, Any]:
         """Get metadata for a specific template"""
         template = self.get_template(template_id)
         if not template:
@@ -232,7 +232,7 @@ class PromptService:
 
 
 # Global instance
-_prompt_service: Optional[PromptService] = None
+_prompt_service: PromptService | None = None
 
 
 def get_prompt_service() -> PromptService:
@@ -250,6 +250,6 @@ def format_prompt(template_id: str, **kwargs: Any) -> str:
     return service.format_prompt(template_id, **kwargs)
 
 
-def get_system_prompt(template_id: str) -> Optional[str]:
+def get_system_prompt(template_id: str) -> str | None:
     """Convenience function to get a system prompt"""
     return get_prompt_service().get_system_prompt(template_id)

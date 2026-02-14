@@ -1,8 +1,16 @@
 ---
 name: asset-placement-strategy
-description: Specialized logic for strategic placement of kerala-rage kr-solidarity design artifacts (Seeds, Pebbles, Lenses, Stones) based on biological asymmetry and kr-solidaritysity kr-motif aesthetics. Ensures [DEPRECATED_STYLE] balance and avoids "slop" by enforcing strict archetype constraints and structural integrity.
-version: 1.0.0
-tags: [design, layout, kerala-rage-kr-solidarity]
+description: Specialized logic for strategic placement of kerala-rage kr-solidarity
+  design artifacts (Seeds, Pebbles, Lenses, Stones) based on biological asymmetry
+  and kr-solidaritysity kr-motif aesthetics. Ensures [DEPRECATED_STYLE] balance and
+  avoids "slop" by enforcing strict archetype constraints and structural integrity.
+metadata:
+  legacy_frontmatter:
+    version: 1.0.0
+    tags:
+    - design
+    - layout
+    - kerala-rage-kr-solidarity
 ---
 
 # Asset Placement Strategy Skill

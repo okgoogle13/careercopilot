@@ -35,9 +35,9 @@
     ]
   },
   "include": [
-    "src",
-    "**/*.ts",
-    "**/*.tsx"
+    "src/main.tsx",
+    "src/images.d.ts",
+    "src/vite-env.d.ts"
   ],
   "exclude": [
     "node_modules",

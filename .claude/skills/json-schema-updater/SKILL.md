@@ -1,13 +1,15 @@
 ---
+name: json-schema-updater
 description: Synchronizes design token maps and asset manifests with the latest design
   canon. ensures that schema changes in the root design system are propagated to the
   frontend implementation.
-name: json-schema-updater
-version: 1.0.0
-tags:
-- design-system
-- schema
-- maintenance
+metadata:
+  legacy_frontmatter:
+    version: 1.0.0
+    tags:
+    - design-system
+    - schema
+    - maintenance
 ---
 
 # JSON Schema Updater Skill

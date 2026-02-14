@@ -9,11 +9,9 @@ including extracted data, contextual tags, and metadata.
 """
 
 from datetime import datetime
-from typing import Any, Dict, List, Literal, Optional
+from typing import Any, Literal
 
 from pydantic import BaseModel, Field
-
-from .master_profile_schema import MasterCareerProfile
 
 
 class ContextTags(BaseModel):
@@ -23,7 +21,7 @@ class ContextTags(BaseModel):
         ...,
         description="The primary role type this asset is relevant for (e.g., 'Social Worker', 'Software Engineer', 'Project Manager')",
     )
-    subsectors: List[str] = Field(
+    subsectors: list[str] = Field(
         default_factory=list,
         description="Industry subsectors or specializations (e.g., 'Healthcare', 'Community Services', 'Mental Health')",
     )
@@ -45,7 +43,7 @@ class AssetMetadata(BaseModel):
         ...,
         description="Google Cloud Storage URI where the document is stored (e.g., 'gs://bucket-name/user_assets/user_id/filename.pdf')",
     )
-    fileSizeBytes: Optional[int] = Field(None, description="Size of the uploaded file in bytes")
+    fileSizeBytes: int | None = Field(None, description="Size of the uploaded file in bytes")
 
 
 class VoiceProfile(BaseModel):
@@ -68,11 +66,11 @@ class VoiceProfile(BaseModel):
         ...,
         description="Vocabulary sophistication level (e.g., 'Simple', 'Moderate', 'Advanced', 'Technical')",
     )
-    sentenceComplexity: Optional[str] = Field(
+    sentenceComplexity: str | None = Field(
         None,
         description="Average sentence complexity (e.g., 'Simple sentences', 'Compound sentences', 'Complex structures')",
     )
-    preferredPhrasing: List[str] = Field(
+    preferredPhrasing: list[str] = Field(
         default_factory=list,
         description="Common phrases or expressions the user frequently uses",
     )
@@ -92,7 +90,7 @@ class AssetDocument(BaseModel):
         ...,
         description="Type of document: 'resume' for full resumes, 'ksc' for Key Selection Criteria responses, 'voice' for writing samples",
     )
-    extractedData: Dict[str, Any] = Field(
+    extractedData: dict[str, Any] = Field(
         ...,
         description="The main extracted data object. For 'resume' and 'ksc' types, this is a MasterCareerProfile. For 'voice' type, this is a VoiceProfile",
     )

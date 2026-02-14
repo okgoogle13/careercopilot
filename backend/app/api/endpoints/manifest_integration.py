@@ -3,23 +3,21 @@ kr-solidarity v3.0.0 Manifest Integration Endpoints
 Asset integration, manifest updates, and production deployment.
 """
 
-from fastapi import APIRouter, HTTPException, UploadFile, File
-from typing import List, Dict, Optional
-from datetime import datetime
 import json
-from pathlib import Path
 import shutil
+from datetime import datetime
+from pathlib import Path
+
+from fastapi import APIRouter, File, HTTPException, UploadFile
 
 from app.schemas.manifest_integration import (
-    ManifestAssetEntry,
+    AssetIntegrationTestResult,
+    BackfillAssetRequest,
+    BackfillResult,
+    ManifestDeploymentPlan,
     ManifestUpdateRequest,
     ManifestValidationResult,
-    AssetIntegrationTestResult,
-    ManifestDeploymentPlan,
-    BackfillAssetRequest,
-    BackfillResult
 )
-
 
 router = APIRouter(prefix="/api/manifest-integration", tags=["manifest-integration"])
 
@@ -35,7 +33,7 @@ ASSET_PACKAGES_DIR = Path("./asset-packages")
 def load_manifest() -> dict:
     """Load current manifest."""
     if MANIFEST_PATH.exists():
-        with open(MANIFEST_PATH, 'r') as f:
+        with open(MANIFEST_PATH) as f:
             return json.load(f)
     return {
         "project": "kerala-rage kr-solidarity",
@@ -51,7 +49,7 @@ def save_manifest(manifest: dict) -> bool:
     """Save manifest to file."""
     try:
         MANIFEST_PATH.parent.mkdir(parents=True, exist_ok=True)
-        with open(MANIFEST_PATH, 'w') as f:
+        with open(MANIFEST_PATH, "w") as f:
             json.dump(manifest, f, indent=2)
         print(f"✅ Manifest saved: {MANIFEST_PATH}")
         return True
@@ -73,7 +71,7 @@ async def add_assets_to_manifest(request: ManifestUpdateRequest):
     - **updated_by**: Who is making this update
     - **version_bump**: major, minor, patch
     """
-    print(f"\n📝 Adding assets to manifest")
+    print("\n📝 Adding assets to manifest")
     print(f"  Assets: {len(request.assets_to_add)}")
     print(f"  Updated by: {request.updated_by}")
     print(f"  Version bump: {request.version_bump}")
@@ -158,7 +156,7 @@ async def validate_manifest() -> ManifestValidationResult:
     - File paths exist
     - No broken references
     """
-    print(f"\n✅ Validating manifest...")
+    print("\n✅ Validating manifest...")
 
     manifest = load_manifest()
     errors = []
@@ -250,7 +248,7 @@ async def validate_manifest() -> ManifestValidationResult:
 @router.post("/recalculate-summary")
 async def recalculate_manifest_summary():
     """Recalculate manifest summary statistics."""
-    print(f"\n🔄 Recalculating manifest summary...")
+    print("\n🔄 Recalculating manifest summary...")
 
     manifest = load_manifest()
 
@@ -277,7 +275,7 @@ async def recalculate_manifest_summary():
     manifest["last_updated"] = datetime.utcnow().isoformat()
 
     if save_manifest(manifest):
-        print(f"  ✅ Summary recalculated")
+        print("  ✅ Summary recalculated")
         return {"success": True, "summary": manifest["asset_summary"]}
     else:
         raise HTTPException(status_code=500, detail="Failed to save manifest")
@@ -324,7 +322,7 @@ async def backfill_asset_metadata(request: BackfillAssetRequest) -> BackfillResu
     manifest["last_updated"] = datetime.utcnow().isoformat()
 
     if save_manifest(manifest):
-        print(f"  ✅ Asset metadata updated")
+        print("  ✅ Asset metadata updated")
         return BackfillResult(
             success=True,
             asset_id=request.asset_id,
@@ -421,7 +419,7 @@ async def generate_deployment_plan(request: ManifestUpdateRequest) -> ManifestDe
     - Rollback procedures
     - Go-live checklist
     """
-    print(f"\n📋 Generating deployment plan")
+    print("\n📋 Generating deployment plan")
 
     manifest = load_manifest()
 
@@ -460,7 +458,7 @@ async def generate_deployment_plan(request: ManifestUpdateRequest) -> ManifestDe
         estimated_deployment_time_minutes=5.0
     )
 
-    print(f"  ✅ Deployment plan generated")
+    print("  ✅ Deployment plan generated")
     print(f"     New assets: {plan.total_new_assets}")
     print(f"     Updated assets: {plan.total_updated_assets}")
     print(f"     Tests required: {len(plan.tests_required)}")
@@ -471,7 +469,7 @@ async def generate_deployment_plan(request: ManifestUpdateRequest) -> ManifestDe
 @router.get("/export")
 async def export_manifest():
     """Export current manifest as JSON."""
-    print(f"\n📤 Exporting manifest...")
+    print("\n📤 Exporting manifest...")
 
     manifest = load_manifest()
 
@@ -505,7 +503,7 @@ async def import_manifest(file: UploadFile = File(...)):
 
         # Save new
         if save_manifest(imported_manifest):
-            print(f"  ✅ Manifest imported successfully")
+            print("  ✅ Manifest imported successfully")
             return {
                 "success": True,
                 "message": "Manifest imported",
@@ -515,4 +513,4 @@ async def import_manifest(file: UploadFile = File(...)):
             raise Exception("Failed to save imported manifest")
 
     except Exception as e:
-        raise HTTPException(status_code=400, detail=f"Import failed: {str(e)}")
+        raise HTTPException(status_code=400, detail=f"Import failed: {e!s}")

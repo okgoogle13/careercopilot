@@ -1,8 +1,11 @@
 ---
 name: figma-to-page
-description: "Generates React code for a full page based on pasted Figma 'Inspect' details. Uses the page scaffolder."
-version: 1.0.0
-tags: []
+description: Generates React code for a full page based on pasted Figma 'Inspect'
+  details. Uses the page scaffolder.
+metadata:
+  legacy_frontmatter:
+    version: 1.0.0
+    tags: []
 ---
 
 ## Purpose

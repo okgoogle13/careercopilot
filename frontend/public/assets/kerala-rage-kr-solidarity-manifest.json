@@ -1,48 +1,20 @@
 {
   "project": "kerala-rage kr-solidarity",
   "version": "6.0.0",
-  "last_updated": "2026-02-11",
+  "last_updated": "2026-02-14",
   "strategy": "Layered Identity System",
-  "total_assets": 33,
+  "total_assets": 41,
   "layers": [
     "substrate",
     "atmospheric",
     "cultural",
     "resistance",
-    "spiritual"
+    "spiritual",
+    "ui-kit"
   ],
   "assets": [
     {
       "id": "KR-SOLID-001",
-      "name": "Abstract -solidarity",
-      "category": "abstract",
-      "layer": "spiritual",
-      "aspect_ratio": "1:1",
-      "file_path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity__v1.png",
-      "priority": "HIGH",
-      "semantics": {
-        "functional_role": "background-texture",
-        "semantic_weight": "atmospheric",
-        "layering_role": "overlay"
-      },
-      "usage_rules": {
-        "scale_suitability": [
-          "hero",
-          "section"
-        ],
-        "small_ui_safe": true
-      },
-      "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate"
-        ],
-        "cannot_overlay_with": [
-          "atmospheric"
-        ]
-      }
-    },
-    {
-      "id": "KR-SOLID-002",
       "name": "Abstract -solidarity-chatgpt-image-f",
       "category": "abstract",
       "layer": "atmospheric",
@@ -71,7 +43,7 @@
       }
     },
     {
-      "id": "KR-SOLID-003",
+      "id": "KR-SOLID-002",
       "name": "Abstract -solidarity-dalle-2026-01-",
       "category": "abstract",
       "layer": "atmospheric",
@@ -100,7 +72,7 @@
       }
     },
     {
-      "id": "KR-SOLID-004",
+      "id": "KR-SOLID-003",
       "name": "Abstract -solidarity-gemini-generate",
       "category": "abstract",
       "layer": "atmospheric",
@@ -129,7 +101,7 @@
       }
     },
     {
-      "id": "KR-SOLID-005",
+      "id": "KR-SOLID-004",
       "name": "Abstract -solidarity-kerala-rage-bee",
       "category": "abstract",
       "layer": "atmospheric",
@@ -158,7 +130,7 @@
       }
     },
     {
-      "id": "KR-SOLID-006",
+      "id": "KR-SOLID-005",
       "name": "Abstract -solidarity-kerala-rage-bra",
       "category": "abstract",
       "layer": "atmospheric",
@@ -187,7 +159,7 @@
       }
     },
     {
-      "id": "KR-SOLID-007",
+      "id": "KR-SOLID-006",
       "name": "Abstract -solidarity-kerala-rage-fly",
       "category": "abstract",
       "layer": "atmospheric",
@@ -216,7 +188,7 @@
       }
     },
     {
-      "id": "KR-SOLID-008",
+      "id": "KR-SOLID-007",
       "name": "Abstract -solidarity-kerala-rage-fri",
       "category": "abstract",
       "layer": "atmospheric",
@@ -245,10 +217,10 @@
       }
     },
     {
-      "id": "KR-SOLID-009",
+      "id": "KR-SOLID-008",
       "name": "Abstract -solidarity-kerala-rage-gri",
       "category": "abstract",
-      "layer": "spiritual",
+      "layer": "atmospheric",
       "aspect_ratio": "1:1",
       "file_path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-kerala-rage-gri__v1.png",
       "priority": "HIGH",
@@ -274,7 +246,7 @@
       }
     },
     {
-      "id": "KR-SOLID-010",
+      "id": "KR-SOLID-009",
       "name": "Abstract -solidarity-kerala-rage-kr-",
       "category": "abstract",
       "layer": "atmospheric",
@@ -303,7 +275,7 @@
       }
     },
     {
-      "id": "KR-SOLID-011",
+      "id": "KR-SOLID-010",
       "name": "Abstract -solidarity-kerala-rage-nav",
       "category": "abstract",
       "layer": "atmospheric",
@@ -332,7 +304,7 @@
       }
     },
     {
-      "id": "KR-SOLID-012",
+      "id": "KR-SOLID-011",
       "name": "Abstract -solidarity-kerala-rage-rad",
       "category": "abstract",
       "layer": "atmospheric",
@@ -361,10 +333,10 @@
       }
     },
     {
-      "id": "KR-SOLID-013",
+      "id": "KR-SOLID-012",
       "name": "Abstract -solidarity-kerala-rage-sea",
       "category": "abstract",
-      "layer": "resistance",
+      "layer": "atmospheric",
       "aspect_ratio": "11:6",
       "file_path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-kerala-rage-sea__v1.png",
       "priority": "HIGH",
@@ -390,7 +362,7 @@
       }
     },
     {
-      "id": "KR-SOLID-014",
+      "id": "KR-SOLID-013",
       "name": "Abstract -solidarity-kerala-rage-sen",
       "category": "abstract",
       "layer": "atmospheric",
@@ -419,7 +391,7 @@
       }
     },
     {
-      "id": "KR-SOLID-015",
+      "id": "KR-SOLID-014",
       "name": "Abstract -solidarity-kerala-rage-wat",
       "category": "abstract",
       "layer": "atmospheric",
@@ -448,7 +420,7 @@
       }
     },
     {
-      "id": "KR-SOLID-016",
+      "id": "KR-SOLID-015",
       "name": "Abstract -solidarity-kr-solid-013",
       "category": "abstract",
       "layer": "atmospheric",
@@ -477,7 +449,7 @@
       }
     },
     {
-      "id": "KR-SOLID-017",
+      "id": "KR-SOLID-016",
       "name": "Abstract -solidarity-kr-solid-014",
       "category": "abstract",
       "layer": "atmospheric",
@@ -506,12 +478,41 @@
       }
     },
     {
-      "id": "KR-SOLID-018",
+      "id": "KR-SOLID-017",
       "name": "Abstract -solidarity-moodboard-12-ti",
       "category": "abstract",
       "layer": "atmospheric",
       "aspect_ratio": "2:3",
       "file_path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-moodboard-12-ti__v1.png",
+      "priority": "HIGH",
+      "semantics": {
+        "functional_role": "background-texture",
+        "semantic_weight": "atmospheric",
+        "layering_role": "overlay"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "hero",
+          "section"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate"
+        ],
+        "cannot_overlay_with": [
+          "atmospheric"
+        ]
+      }
+    },
+    {
+      "id": "KR-SOLID-018",
+      "name": "Abstract -solidarity",
+      "category": "abstract",
+      "layer": "atmospheric",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity__v1.png",
       "priority": "HIGH",
       "semantics": {
         "functional_role": "background-texture",
@@ -689,12 +690,12 @@
     },
     {
       "id": "KR-SOLID-024",
-      "name": "Bhagat-singh V1",
-      "category": "portrait",
+      "name": "Resistance-portrait",
+      "category": "hero",
       "layer": "resistance",
-      "aspect_ratio": "3:4",
-      "file_path": "/assets/kr-solidarity/portrait/kr-solidarity__portrait__kr-solidarity--portrait--bhagat-singh--v1__v1.png",
-      "priority": "CRITICAL",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/heroes/kr-solidarity__hero__resistance-portrait__v1.png",
+      "priority": "MEDIUM",
       "semantics": {
         "functional_role": "editorial-hero",
         "semantic_weight": "heroic",
@@ -720,11 +721,11 @@
     },
     {
       "id": "KR-SOLID-025",
-      "name": "Portrait -resistance-history",
+      "name": "Bhagat-singh V1",
       "category": "portrait",
       "layer": "resistance",
-      "aspect_ratio": "1:1",
-      "file_path": "/assets/kr-solidarity/portrait/kr-solidarity__portrait__portrait---resistance-history__v1.png",
+      "aspect_ratio": "3:4",
+      "file_path": "/assets/kr-solidarity/portrait/kr-solidarity__portrait__kr-solidarity--portrait--bhagat-singh--v1__v1.png",
       "priority": "CRITICAL",
       "semantics": {
         "functional_role": "editorial-hero",
@@ -813,12 +814,12 @@
     },
     {
       "id": "KR-SOLID-028",
-      "name": "First-nations-placard V1",
-      "category": "street",
+      "name": "Portrait -resistance-history",
+      "category": "portrait",
       "layer": "resistance",
-      "aspect_ratio": "29:36",
-      "file_path": "/assets/kr-solidarity/street/kr-solidarity__street__kr-solidarity--street--first-nations-placard--v1__v1.png",
-      "priority": "HIGH",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/portrait/kr-solidarity__portrait__portrait---resistance-history__v1.png",
+      "priority": "CRITICAL",
       "semantics": {
         "functional_role": "editorial-hero",
         "semantic_weight": "heroic",
@@ -844,11 +845,11 @@
     },
     {
       "id": "KR-SOLID-029",
-      "name": "Street -resistance-historyactivist",
+      "name": "First-nations-placard V1",
       "category": "street",
       "layer": "resistance",
-      "aspect_ratio": "24:43",
-      "file_path": "/assets/kr-solidarity/street/kr-solidarity__street__street---resistance-historyactivist__v1.png",
+      "aspect_ratio": "29:36",
+      "file_path": "/assets/kr-solidarity/street/kr-solidarity__street__kr-solidarity--street--first-nations-placard--v1__v1.png",
       "priority": "HIGH",
       "semantics": {
         "functional_role": "editorial-hero",
@@ -906,6 +907,37 @@
     },
     {
       "id": "KR-SOLID-031",
+      "name": "Street -resistance-historyactivist",
+      "category": "street",
+      "layer": "resistance",
+      "aspect_ratio": "24:43",
+      "file_path": "/assets/kr-solidarity/street/kr-solidarity__street__street---resistance-historyactivist__v1.png",
+      "priority": "HIGH",
+      "semantics": {
+        "functional_role": "editorial-hero",
+        "semantic_weight": "heroic",
+        "layering_role": "foreground"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "hero-only",
+          "feature"
+        ],
+        "small_ui_safe": false
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric"
+        ],
+        "cannot_overlay_with": [
+          "resistance",
+          "spiritual"
+        ]
+      }
+    },
+    {
+      "id": "KR-SOLID-032",
       "name": "Kerala-elephant V1",
       "category": "symbol",
       "layer": "cultural",
@@ -936,7 +968,7 @@
       }
     },
     {
-      "id": "KR-SOLID-032",
+      "id": "KR-SOLID-033",
       "name": "Kerala-landscape V1",
       "category": "symbol",
       "layer": "cultural",
@@ -967,7 +999,7 @@
       }
     },
     {
-      "id": "KR-SOLID-033",
+      "id": "KR-SOLID-034",
       "name": "Melbourne-laneway V1",
       "category": "texture",
       "layer": "substrate",
@@ -994,78 +1026,221 @@
       }
     },
     {
-      "id": "KR-SOLID-034",
-      "name": "Resistance Hero Portrait",
-      "category": "heroes",
-      "layer": "resistance",
-      "aspect_ratio": "3:4",
-      "file_path": "/assets/kr-solidarity/heroes/kr-solidarity__hero__resistance-portrait__v1.png",
-      "priority": "CRITICAL",
+      "id": "KR-UI-001",
+      "name": "UI Asset KR-UI-001",
+      "category": "ui-kit",
+      "layer": "ui-kit",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/ui-kit/svg/KR-UI-001.svg",
+      "priority": "MEDIUM",
       "semantics": {
-        "functional_role": "editorial-hero",
-        "semantic_weight": "heroic",
-        "layering_role": "foreground"
+        "functional_role": "ui-element",
+        "semantic_weight": "utility",
+        "layering_role": "interface"
       },
       "usage_rules": {
-        "scale_suitability": ["hero-only", "feature"],
-        "small_ui_safe": false
+        "scale_suitability": [
+          "ui-component",
+          "icon"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric",
+          "cultural",
+          "resistance",
+          "spiritual"
+        ],
+        "cannot_overlay_with": []
       }
     },
     {
-      "id": "KR-UI-001",
-      "name": "Wheat Paste Tear",
-      "category": "ui-kit",
-      "layer": "ui-kit",
-      "file_path": "/assets/kr-solidarity/ui-kit/svg/KR-UI-001.svg",
-      "status": "ready"
-    },
-    {
       "id": "KR-UI-002",
-      "name": "Halo Disk",
+      "name": "UI Asset KR-UI-002",
       "category": "ui-kit",
       "layer": "ui-kit",
+      "aspect_ratio": "1:1",
       "file_path": "/assets/kr-solidarity/ui-kit/svg/KR-UI-002.svg",
-      "status": "ready"
+      "priority": "MEDIUM",
+      "semantics": {
+        "functional_role": "ui-element",
+        "semantic_weight": "utility",
+        "layering_role": "interface"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "ui-component",
+          "icon"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric",
+          "cultural",
+          "resistance",
+          "spiritual"
+        ],
+        "cannot_overlay_with": []
+      }
     },
     {
       "id": "KR-UI-003",
-      "name": "Screenprint Grit Particles",
+      "name": "UI Asset KR-UI-003",
       "category": "ui-kit",
       "layer": "ui-kit",
+      "aspect_ratio": "1:1",
       "file_path": "/assets/kr-solidarity/ui-kit/svg/KR-UI-003.svg",
-      "status": "ready"
+      "priority": "MEDIUM",
+      "semantics": {
+        "functional_role": "ui-element",
+        "semantic_weight": "utility",
+        "layering_role": "interface"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "ui-component",
+          "icon"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric",
+          "cultural",
+          "resistance",
+          "spiritual"
+        ],
+        "cannot_overlay_with": []
+      }
     },
     {
       "id": "KR-UI-004",
-      "name": "Blueprint Grid Overlay",
+      "name": "UI Asset KR-UI-004",
       "category": "ui-kit",
       "layer": "ui-kit",
+      "aspect_ratio": "1:1",
       "file_path": "/assets/kr-solidarity/ui-kit/svg/KR-UI-004.svg",
-      "status": "ready"
+      "priority": "MEDIUM",
+      "semantics": {
+        "functional_role": "ui-element",
+        "semantic_weight": "utility",
+        "layering_role": "interface"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "ui-component",
+          "icon"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric",
+          "cultural",
+          "resistance",
+          "spiritual"
+        ],
+        "cannot_overlay_with": []
+      }
     },
     {
       "id": "KR-UI-005",
-      "name": "Charcoal Paper Substrate",
+      "name": "UI Asset KR-UI-005",
       "category": "ui-kit",
       "layer": "ui-kit",
+      "aspect_ratio": "1:1",
       "file_path": "/assets/kr-solidarity/ui-kit/svg/KR-UI-005.svg",
-      "status": "ready"
+      "priority": "MEDIUM",
+      "semantics": {
+        "functional_role": "ui-element",
+        "semantic_weight": "utility",
+        "layering_role": "interface"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "ui-component",
+          "icon"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric",
+          "cultural",
+          "resistance",
+          "spiritual"
+        ],
+        "cannot_overlay_with": []
+      }
     },
     {
       "id": "KR-UI-006",
-      "name": "Blueprint Layout Watermark",
+      "name": "UI Asset KR-UI-006",
       "category": "ui-kit",
       "layer": "ui-kit",
+      "aspect_ratio": "1:1",
       "file_path": "/assets/kr-solidarity/ui-kit/svg/KR-UI-006.svg",
-      "status": "ready"
+      "priority": "MEDIUM",
+      "semantics": {
+        "functional_role": "ui-element",
+        "semantic_weight": "utility",
+        "layering_role": "interface"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "ui-component",
+          "icon"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric",
+          "cultural",
+          "resistance",
+          "spiritual"
+        ],
+        "cannot_overlay_with": []
+      }
     },
     {
       "id": "KR-UI-007",
-      "name": "Screenprint Stamp",
+      "name": "UI Asset KR-UI-007",
       "category": "ui-kit",
       "layer": "ui-kit",
+      "aspect_ratio": "1:1",
       "file_path": "/assets/kr-solidarity/ui-kit/svg/KR-UI-007.svg",
-      "status": "ready"
+      "priority": "MEDIUM",
+      "semantics": {
+        "functional_role": "ui-element",
+        "semantic_weight": "utility",
+        "layering_role": "interface"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "ui-component",
+          "icon"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric",
+          "cultural",
+          "resistance",
+          "spiritual"
+        ],
+        "cannot_overlay_with": []
+      }
     }
   ]
 }

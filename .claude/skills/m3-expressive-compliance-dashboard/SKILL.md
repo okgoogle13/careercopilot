@@ -1,8 +1,13 @@
 ---
 name: m3-expressive-compliance-dashboard
-description: Track Material Design 3 Expressive adoption metrics across components. Monitor no-generic-fonts percentage, extreme-contrasts percentage, spring-physics percentage, vibrant-tokens percentage, and [DEPRECATED_STYLE]-asymmetry percentage. Generate compliance reports and identify components needing expressiveness enhancement.
-version: 1.0.0
-tags: []
+description: Track Material Design 3 Expressive adoption metrics across components.
+  Monitor no-generic-fonts percentage, extreme-contrasts percentage, spring-physics
+  percentage, vibrant-tokens percentage, and [DEPRECATED_STYLE]-asymmetry percentage.
+  Generate compliance reports and identify components needing expressiveness enhancement.
+metadata:
+  legacy_frontmatter:
+    version: 1.0.0
+    tags: []
 ---
 
 # M3 Expressive Compliance Dashboard

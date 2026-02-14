@@ -1,11 +1,13 @@
 ---
+name: codebase-orchestrator
 description: Multi-MCP deployment tool for Claude Desktop that coordinates filesystem,
   git, and testing servers to assess deployment readiness across build status, test
   coverage, code quality, and component migration progress. Integrates with Compliance-Dashboard
   skill for design system validation.
-name: codebase-orchestrator
-version: 1.0.0
-tags: []
+metadata:
+  legacy_frontmatter:
+    version: 1.0.0
+    tags: []
 ---
 
 # Codebase Orchestrator Skill

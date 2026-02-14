@@ -1,12 +1,14 @@
 ---
-description: Real-time compliance tracking for kerala-rage kr-solidarity design system. Monitors
-  component migration progress (Material 3 to kerala-rage metaphors), visual audit pass
-  rates, typography distinctiveness, [DEPRECATED_STYLE] palette adherence, and overall design
-  system maturity. Feeds data from visual audits and component inventories into health
-  metrics.
 name: compliance-dashboard
-version: 1.0.0
-tags: []
+description: Real-time compliance tracking for kerala-rage kr-solidarity design system.
+  Monitors component migration progress (Material 3 to kerala-rage metaphors), visual
+  audit pass rates, typography distinctiveness, [DEPRECATED_STYLE] palette adherence,
+  and overall design system maturity. Feeds data from visual audits and component
+  inventories into health metrics.
+metadata:
+  legacy_frontmatter:
+    version: 1.0.0
+    tags: []
 ---
 
 # Compliance Dashboard Skill

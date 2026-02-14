@@ -10,7 +10,6 @@ This schema is designed for:
 - Comprehensive career data representation
 """
 
-from typing import List, Optional
 
 from pydantic import BaseModel, EmailStr, Field, HttpUrl
 
@@ -20,8 +19,8 @@ class PersonalInfo(BaseModel):
 
     name: str = Field(..., description="Full name of the individual")
     email: EmailStr = Field(..., description="Primary contact email address")
-    phone: Optional[str] = Field(None, description="Primary contact phone number")
-    location: Optional[str] = Field(
+    phone: str | None = Field(None, description="Primary contact phone number")
+    location: str | None = Field(
         None,
         description="Current city and state/country (e.g., 'Naarm, VIC', 'London, UK')",
     )
@@ -29,10 +28,10 @@ class PersonalInfo(BaseModel):
         ...,
         description="A 2-4 sentence professional summary or objective highlighting key experience and goals",
     )
-    linkedin: Optional[HttpUrl] = Field(
+    linkedin: HttpUrl | None = Field(
         None, description="URL of the LinkedIn profile, if available"
     )
-    portfolio: Optional[HttpUrl] = Field(
+    portfolio: HttpUrl | None = Field(
         None, description="URL of a personal portfolio or website, if available"
     )
 
@@ -50,20 +49,20 @@ class WorkExperience(BaseModel):
         description="Job title held. Combine multiple titles with ' / ' if roles were consolidated",
     )
     company: str = Field(..., description="Name of the company or organization")
-    location: Optional[str] = Field(
+    location: str | None = Field(
         None, description="City and state/country where the job was located"
     )
     startDate: str = Field(..., description="Start date in YYYY-MM format (e.g., '2022-03')")
     endDate: str = Field(..., description="End date in YYYY-MM format or 'Present'")
-    responsibilities: List[str] = Field(
+    responsibilities: list[str] = Field(
         default_factory=list,
         description="List of general duties and responsibilities for the role. DO NOT include quantifiable achievements here",
     )
-    achievements: List[str] = Field(
+    achievements: list[str] = Field(
         default_factory=list,
         description="List of specific, quantifiable accomplishments or results achieved in the role (STAR format preferred). DO NOT list general duties here",
     )
-    skillsUsed: List[str] = Field(
+    skillsUsed: list[str] = Field(
         default_factory=list,
         description="Specific skills (technical, tools, methodologies) utilized in THIS role. MUST be populated if skills are mentioned for the role",
     )
@@ -74,10 +73,10 @@ class Project(BaseModel):
 
     projectName: str = Field(..., description="Name of the project")
     description: str = Field(..., description="Brief description of the project and your role")
-    startDate: Optional[str] = Field(None, description="Start date in YYYY-MM format")
-    endDate: Optional[str] = Field(None, description="End date in YYYY-MM format or 'Ongoing'")
-    link: Optional[HttpUrl] = Field(None, description="URL to the project, if available")
-    technologiesUsed: List[str] = Field(
+    startDate: str | None = Field(None, description="Start date in YYYY-MM format")
+    endDate: str | None = Field(None, description="End date in YYYY-MM format or 'Ongoing'")
+    link: HttpUrl | None = Field(None, description="URL to the project, if available")
+    technologiesUsed: list[str] = Field(
         default_factory=list, description="Key technologies or skills used"
     )
 
@@ -90,13 +89,13 @@ class Education(BaseModel):
         ...,
         description="Degree or qualification obtained (e.g., 'Master of Finance', 'Diploma of Community Services')",
     )
-    fieldOfStudy: Optional[str] = Field(
+    fieldOfStudy: str | None = Field(
         None,
         description="Major or field of study (e.g., 'Finance', 'Community Services', 'Marketing'). Extract ONLY the core field (e.g., 'Marketing' not 'Business in Marketing')",
     )
-    startDate: Optional[str] = Field(None, description="Start date in YYYY-MM or YYYY format")
+    startDate: str | None = Field(None, description="Start date in YYYY-MM or YYYY format")
     endDate: str = Field(..., description="End date or graduation date in YYYY-MM or YYYY format")
-    notes: Optional[str] = Field(None, description="Optional: GPA, honors, relevant coursework")
+    notes: str | None = Field(None, description="Optional: GPA, honors, relevant coursework")
 
 
 class Skills(BaseModel):
@@ -107,19 +106,19 @@ class Skills(BaseModel):
     soft skills, and methodologies for maximum utility in job applications.
     """
 
-    technical: List[str] = Field(
+    technical: list[str] = Field(
         default_factory=list,
         description="Specific technical expertise relevant to the field (e.g., 'AOD services', 'Pharmacokinetics', 'Case Management', 'Data Entry')",
     )
-    tools: List[str] = Field(
+    tools: list[str] = Field(
         default_factory=list,
         description="Software, hardware, or specific tools proficiency (e.g., 'Microsoft Office Suite', 'Excel', 'Salesforce', 'Jira', 'Asana', 'Oracle BPM'). MUST NOT be empty if tools are mentioned anywhere in the document",
     )
-    soft: List[str] = Field(
+    soft: list[str] = Field(
         default_factory=list,
         description="Interpersonal and professional skills (e.g., 'Stakeholder Management', 'Communication', 'Empathy', 'Adaptability')",
     )
-    methodologies: List[str] = Field(
+    methodologies: list[str] = Field(
         default_factory=list,
         description="Frameworks, processes, or ways of working (e.g., 'Project Management', 'Agile', 'Scrum', 'Co-design Facilitation', 'SMART Recovery Facilitation')",
     )
@@ -135,7 +134,7 @@ class KeySelectionCriteriaExample(BaseModel):
 
     criteria: str = Field(..., description="The KSC question or statement")
     example: str = Field(..., description="The full example response")
-    relatedSkills: List[str] = Field(
+    relatedSkills: list[str] = Field(
         ...,
         description="Skills demonstrated in this example. MUST be populated by analyzing the 'example' text",
     )
@@ -152,15 +151,15 @@ class MasterCareerProfile(BaseModel):
     """
 
     personalInfo: PersonalInfo = Field(..., description="Basic contact and summary information")
-    workExperience: List[WorkExperience] = Field(
+    workExperience: list[WorkExperience] = Field(
         default_factory=list,
         description="Chronological list of professional work experiences. Consolidate multiple roles at the same company with overlapping dates into ONE entry",
     )
-    projects: List[Project] = Field(
+    projects: list[Project] = Field(
         default_factory=list,
         description="Significant personal or professional projects",
     )
-    education: List[Education] = Field(
+    education: list[Education] = Field(
         default_factory=list,
         description="List of educational qualifications",
     )
@@ -168,11 +167,11 @@ class MasterCareerProfile(BaseModel):
         ...,
         description="Categorized list of ALL skills mentioned in the document",
     )
-    certifications: List[str] = Field(
+    certifications: list[str] = Field(
         default_factory=list,
         description="List of professional certifications or licenses",
     )
-    keySelectionCriteriaExamples: List[KeySelectionCriteriaExample] = Field(
+    keySelectionCriteriaExamples: list[KeySelectionCriteriaExample] = Field(
         default_factory=list,
         description="Specific examples written in response to Key Selection Criteria (KSC) or using STAR format. Only extract if explicitly present",
     )

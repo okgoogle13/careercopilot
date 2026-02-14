@@ -1,8 +1,18 @@
 ---
 name: kerala-rage-tier3-automation
-version: 1.0.0
-description: Tier 3 Kerala Rage quality and learning skills. Includes vision-scorer-mcp (deterministic compliance scoring), token-injector (automated CSS variable injection), and pattern-learner (self-improving pattern database). Deploy after Tier 2 for continuous quality improvement and pattern learning.
-tags: [automation, kerala-rage, quality-assurance, learning, tier3]
+description: Tier 3 Kerala Rage quality and learning skills. Includes vision-scorer-mcp
+  (deterministic compliance scoring), token-injector (automated CSS variable injection),
+  and pattern-learner (self-improving pattern database). Deploy after Tier 2 for continuous
+  quality improvement and pattern learning.
+metadata:
+  legacy_frontmatter:
+    version: 1.0.0
+    tags:
+    - automation
+    - kerala-rage
+    - quality-assurance
+    - learning
+    - tier3
 ---
 
 # Tier 3 Automation Skills

@@ -1,8 +1,17 @@
 ---
 name: kerala-rage-tier2-automation
-version: 1.0.0
-description: Tier 2 Kerala Rage workflow acceleration skills. Includes batch-processor (parallel asset packaging) and task-router-mcp (multi-agent coordination). Deploy after Tier 1 for 73% time reduction on batch operations and automated workflow handoffs.
-tags: [automation, kerala-rage, batch-processing, workflow, tier2]
+description: Tier 2 Kerala Rage workflow acceleration skills. Includes batch-processor
+  (parallel asset packaging) and task-router-mcp (multi-agent coordination). Deploy
+  after Tier 1 for 73% time reduction on batch operations and automated workflow handoffs.
+metadata:
+  legacy_frontmatter:
+    version: 1.0.0
+    tags:
+    - automation
+    - kerala-rage
+    - batch-processing
+    - workflow
+    - tier2
 ---
 
 # Tier 2 Automation Skills

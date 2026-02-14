@@ -1,64 +1,48 @@
-# Mode Compliance Rules
+# Mode Compliance Rules: Solidarity Mode Only
 
-## kr-dark Mode Indicators
+## Core Aesthetic: Kerala Rage Solidarity
+**Status**: The ONLY valid design mode. "Laboratory Mode" and "Curio Mode" are DEPRECATED.
 
-✅ **Allowed:**
-- Warm amber/gold/brown tones
-- [DEPRECATED_STYLE] subjects (flowers, leaves, branches)
-- kr-symbol (birds, insects in natural context)
-- Decorative, [DEPRECATED_STYLE], flowing compositions
-- Emotional/aspirational aesthetic
+### ✅ Compliant Indicators
 
-✅ **Color Palette:**
-- Wattle Gold (#D4A84B)
-- [DEPRECATED_STYLE] Red (#C45C4B)
-- Dark Ironbark backgrounds
-- Warm earth tones
+**Visual Themes:**
+- **Peter Drew Street Art Influence**: Bold, poster-like, high contrast.
+- **Australian Endemic**: Living symbols (Wattle, Gum Leaves, Magpies) in present-day context.
+- **Material 3 Expressive**: Large type, distinct containers, "Asphalt" dark theme.
+- **Emotional Tone**: Solidarity, urgency, community strength.
 
-✅ **Typography:**
-- Fraunces (WONK:1, SOFT:50+)
-- kr-serif-bold
+**Color Palette (Strict):**
+- **Background**: Asphalt Black (`#1A1714`)
+- **Action**: Wattle Gold (`#D4A84B`)
+- **Structure**: Ochre Earth (`#B8733D`), Concrete Grey (`#A39B8F`)
+- **Text**: Paper White (`#F5F0E8`)
+- **Accent**: Gum Leaf Green (`#6B7F6E`)
 
-## kr-dark Mode Indicators
+**Typography:**
+- **Headings**: `Fraunces` (Soft: 50+, Wonk: 1)
+- **Body**: `Work Sans`
+- **Accents**: `Caveat` (Handwritten notes)
 
-✅ **Allowed:**
-- Cool slate/gray/blue tones
-- Technical diagrams, grids, measurements
-- Anatomical/skeletal structures
-- Scientific instruments (compass, calipers, rulers)
-- Clinical/documentary aesthetic
+### ❌ Prohibited (Legacy/Laboratory)
 
-❌ **Prohibited:**
-- Flowers
-- Decorative kr-symbol
-- [DEPRECATED_STYLE] flourishes
-- Warm [DEPRECATED_STYLE] tones
+**Do NOT use:**
+- ❌ **Clinical/Laboratory Aesthetic**: Blue/Slate technical diagrams, grids, calipers.
+- ❌ **Colonial Nostalgia**: "Museum cabinet" framing, sepia-toned "Curio" styles.
+- ❌ **Generic Tech**: "Matrix" digital rain, circuit boards, neon cyber-punk.
+- ❌ **Colors**: `#16141A` (Charcoal Slate), Clinical Blues.
 
-✅ **Color Palette:**
-- Charcoal Slate (#16141A)
-- Clinical grays/blues
-- Aged paper-white cream (#D4BE96 at low opacity)
+## Triage Guide
 
-✅ **Typography:**
-- JetBrains Mono
-- Work Sans
+| Feature | Status | Action |
+| :--- | :--- | :--- |
+| **Warm Earth Tones** | ✅ Match | Keep / Catalog |
+| **Wattle/Flora Subjects** | ✅ Match | Keep / Catalog |
+| **Cool Blue/Grey Tones** | ❌ Violation | **Discard / Remix** |
+| **Technical Grids** | ❌ Violation | **Discard** |
+| **Victorian Etchings** | ⚠️ Caution | Update to "Street Art" style |
 
-## Both Modes
+## Common Violations to Flag
 
-Assets that work in either context:
-- Neutral geometric patterns
-- Hybrid scientific-[DEPRECATED_STYLE] subjects (anatomical + natural)
-- kr-motifs without strong temperature bias
-- Structural elements (grids, frames) without decorative elements
-
-## Common Violations
-
-❌ **kr-dark mode with lab subjects**: Technical diagrams with warm tones
-❌ **kr-dark mode with flora**: Flowers/decorative botanicals in lab aesthetic
-❌ **Temperature mismatch**: Cool blues in kr-dark, warm golds in kr-dark
-
-## Edge Cases
-
-- **Echidna spines** (ASSET-5): Scientific structure + natural subject = both
-- **Fossil stamps** (ASSET-8): Clinical verification mark = kr-dark only
-- **kr-flower cross-section** (ASSET-10): Geometric pattern = both modes
+1.  **"The Laboratory"**: Any asset looking like a medical or physics diagram.
+2.  **"The Museum"**: Any asset looking like a dusty hidden object game (Curio).
+3.  **"The Template"**: Any asset using default Tailwind colors (Blue-500, etc).

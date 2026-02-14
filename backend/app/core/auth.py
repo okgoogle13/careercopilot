@@ -5,10 +5,11 @@ Authentication system using Supabase JWTs.
 import logging
 import os
 from datetime import datetime, timedelta
-from typing import Any, Dict, Optional
+from typing import Any
 
 from fastapi import Depends, HTTPException, status
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
+
 try:
     from jose import JWTError, jwt
 except ImportError:  # pragma: no cover - optional dependency in test/CI
@@ -29,7 +30,7 @@ logger = logging.getLogger(__name__)
 
 # Security configuration
 # In Supabase, this is the "JWT Secret" found in Project Settings -> API
-SECRET_KEY = os.getenv("JWT_SECRET_KEY") 
+SECRET_KEY = os.getenv("JWT_SECRET_KEY")
 ALGORITHM = "HS256"
 
 # JWT Bearer token scheme
@@ -38,17 +39,17 @@ security = HTTPBearer()
 class AuthManager:
     """Handles authentication operations via Supabase JWTs"""
 
-    def verify_token(self, token: str) -> Optional[Dict[str, Any]]:
+    def verify_token(self, token: str) -> dict[str, Any] | None:
         """Verify JWT token and return payload"""
         try:
             # Supabase tokens are signed with the project secret
             if not SECRET_KEY:
                 logger.error("JWT_SECRET_KEY is not set!")
                 return None
-                
+
             payload = jwt.decode(
-                token, 
-                SECRET_KEY, 
+                token,
+                SECRET_KEY,
                 algorithms=[ALGORITHM],
                 options={"verify_aud": False} # Supabase 'aud' can vary (authenticated, etc)
             )
@@ -105,8 +106,8 @@ async def get_current_user(
 
 async def get_current_user_optional(
     db: Session = Depends(get_db),
-    credentials: Optional[HTTPAuthorizationCredentials] = Depends(security),
-) -> Optional[User]:
+    credentials: HTTPAuthorizationCredentials | None = Depends(security),
+) -> User | None:
     """Optional authentication"""
     if not credentials:
         return None
@@ -126,7 +127,7 @@ def create_user_token(user: User) -> str:
 # Simple rate limiter (unchanged)
 class RateLimiter:
     def __init__(self):
-        self.requests = {} 
+        self.requests = {}
 
     def check_rate_limit(self, user_id: str, limit: int = 100, window: int = 3600) -> bool:
         now = datetime.utcnow()

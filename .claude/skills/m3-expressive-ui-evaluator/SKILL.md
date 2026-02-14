@@ -1,8 +1,13 @@
 ---
 name: m3-expressive-ui-evaluator
-description: Evaluate UI designs and mockups against Material Design 3 Expressive standards. Generate high-fidelity M3 Expressive mockups from wireframes with 400-point scoring system (M3 Compliance, Accessibility, User Flow, Visual Hierarchy). Creates interactive HTML artifacts and React component code.
-version: 1.0.0
-tags: []
+description: Evaluate UI designs and mockups against Material Design 3 Expressive
+  standards. Generate high-fidelity M3 Expressive mockups from wireframes with 400-point
+  scoring system (M3 Compliance, Accessibility, User Flow, Visual Hierarchy). Creates
+  interactive HTML artifacts and React component code.
+metadata:
+  legacy_frontmatter:
+    version: 1.0.0
+    tags: []
 ---
 
 # M3 Expressive UI Evaluator & Mockup Creator

@@ -1,8 +1,15 @@
 ---
 name: kerala-rage-brand-enforcer
-description: Auto-applies kerala-rage brand guidelines (Melbourne laneway aesthetic, endemic flora) to ensure design consistency.
-tags: [brand, compliance, kerala-rage, design]
-version: 1.0.0
+description: Auto-applies kerala-rage brand guidelines (Melbourne laneway aesthetic,
+  endemic flora) to ensure design consistency.
+metadata:
+  legacy_frontmatter:
+    tags:
+    - brand
+    - compliance
+    - kerala-rage
+    - design
+    version: 1.0.0
 ---
 
 # kerala-rage Brand Enforcer skill

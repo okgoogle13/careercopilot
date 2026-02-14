@@ -1,9 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 import defaultTheme from 'tailwindcss/defaultTheme';
-import tokens from './src/design/tokens/tokens.json';
-
+import m3Patch from './tailwind-m3-patch.js';
 // Helper to safely access tokens
-const t = tokens.color.semantic;
+// const t = tokens.color.semantic;
 
 export default {
   darkMode: ['class'],
@@ -23,8 +22,10 @@ export default {
       },
     },
     extend: {
+      ...(m3Patch?.theme?.extend || {}),
       // ═══════════════════════════════════════════════════════════════════════
       // THE FEDERATION TYPOGRAPHY STACK
+
       // ═══════════════════════════════════════════════════════════════════════
       fontFamily: {
         proclamation: ['"kr-serif-bold"', '"Playfair Display"', ...defaultTheme.fontFamily.serif],
@@ -32,6 +33,7 @@ export default {
         'field-note': ['"Work Sans"', ...defaultTheme.fontFamily.sans],
         annotation: ['"JetBrains Mono"', ...defaultTheme.fontFamily.mono],
         curator: ['"Caveat"', 'cursive'],
+        'color-accent': ['"Nabla"', 'display'],
       },
 
       // ═══════════════════════════════════════════════════════════════════════
@@ -45,90 +47,88 @@ export default {
         foreground: 'hsl(var(--foreground))',
 
         // Use Asphalt Black as the global floor
-        black: t.surface.shared['kr-charcoal'].value,
-        white: t.onSurface['paper-white'].value, // Paper White instead of white
+        black: 'var(--color-asphalt-black)',
+        white: 'var(--color-paper-white)', // Paper White instead of white
 
         // Core Botanic Families
-        'asphalt-black': t.surface.shared['kr-charcoal'].value,
-        'asphalt-black-light':
-          (t.surface.shared['kr-charcoalLight'] && t.surface.shared['kr-charcoalLight'].value) ||
-          '#2C2925',
+        'asphalt-black': 'var(--color-asphalt-black)',
+        'asphalt-black-light': 'var(--color-asphalt-black-light)',
 
         wattle: {
-          vault: t.primary.wattleShadow.value, // Fallback
-          shadow: t.primary.wattleShadow.value,
-          gold: t.primary['kr-ink-gold'].value,
-          glow: t.primary.wattleGlow.value,
-          bloom: t.primary.wattleBloom.value,
-          container: t.primary['kr-ink-goldContainer'].value,
+          vault: 'var(--color-ink-gold-darkest)', // Mapped to closest step
+          shadow: 'var(--color-ink-gold-dark)',
+          gold: 'var(--color-ink-gold)',
+          glow: 'var(--color-ink-gold-light)',
+          bloom: 'var(--color-ink-gold-lightest)',
+          container: 'var(--sys-color-inkGold-container)', // Fallback to sys var if semantic missing
         },
-        'wattle-gold': t.primary['kr-ink-gold'].value,
+        'wattle-gold': 'var(--color-ink-gold)',
 
         [DEPRECATED_STYLE]: {
-          stem: t.tertiary.waratahStem.value,
-          root: t.tertiary.waratahStem.value, // Fallback
-          crimson: t.tertiary.waratahCrimson.value,
-          glow: t.tertiary.waratahGlow.value,
-          bloom: t.tertiary.waratahBloom.value,
-          container: t.tertiary.waratahContainer.value,
+          stem: 'var(--color-solidarity-red-darkest)',
+          root: 'var(--color-solidarity-red-darkest)',
+          crimson: 'var(--color-solidarity-red)',
+          glow: 'var(--color-solidarity-red-light)',
+          bloom: 'var(--color-solidarity-red-lightest)',
+          container: 'var(--sys-color-solidarityRed-container)',
         },
-        '[DEPRECATED_STYLE]-red': t.tertiary.waratahCrimson.value,
+        '[DEPRECATED_STYLE]-red': 'var(--color-solidarity-red)',
 
         'kr-leaf': {
-          night: t.surface.shared['kr-charcoal'].value,
-          ash: t.surface['kr-dark'].charcoalBark.value,
-          smoke: t.surface['kr-dark']['kr-leafSmoke'].value,
-          dusk: t.surface['kr-dark']['kr-leafSmokeHigh'].value,
-          mist: t.surface['kr-dark']['kr-leafSmokeHighest'].value,
+          night: 'var(--color-asphalt-black)',
+          ash: 'var(--color-concrete-grey-darkest)',
+          smoke: 'var(--color-concrete-grey-dark)',
+          dusk: 'var(--color-concrete-grey)',
+          mist: 'var(--color-concrete-grey-light)',
         },
 
         flannel: {
-          deep: t.secondary.flannelDim.value,
-          medium: t.secondary.flannelDim.value,
-          flower: t.secondary.flannelFlower.value,
-          light: t.secondary.flannelFaint.value,
-          bloom: t.secondary.flannelFaint.value,
+          deep: 'var(--color-concrete-grey-dark)',
+          medium: 'var(--color-concrete-grey)',
+          flower: 'var(--color-concrete-grey-light)',
+          light: 'var(--color-concrete-grey-lightest)',
+          bloom: 'var(--color-paper-white)',
         },
-        'concrete-grey': t.secondary.flannelFlower.value,
+        'concrete-grey': 'var(--color-concrete-grey)',
 
-        'paper-white': t.onSurface['paper-white'].value,
+        'paper-white': 'var(--color-paper-white)',
 
         // Semantic Semantic (Legacy/Functional) support
         semantic: {
-          success: t.status['kr-dark'].ghostGum.value,
-          warning: t.status['kr-dark']['kr-flowerOrange'].value,
-          info: t.status['kr-dark'].nativeViolet.value,
+          success: 'var(--sys-color-kr-activistSmokeGreen-base)',
+          warning: 'var(--sys-color-stencilYellow-base)',
+          info: 'var(--sys-color-labWrenMetalBlue-base)',
         },
 
         // Shadcn UI Mapping (Retaining for component compatibility)
         primary: {
-          DEFAULT: t.primary['kr-ink-gold'].value,
-          foreground: t.surface.shared['kr-charcoal'].value,
-          container: t.primary['kr-ink-goldContainer'].value,
+          DEFAULT: 'var(--color-ink-gold)',
+          foreground: 'var(--color-asphalt-black)',
+          container: 'var(--sys-color-inkGold-container)',
         },
         secondary: {
-          DEFAULT: t.secondary.flannelFlower.value,
-          foreground: t.surface.shared['kr-charcoal'].value,
+          DEFAULT: 'var(--color-concrete-grey)',
+          foreground: 'var(--color-asphalt-black)',
         },
         destructive: {
-          DEFAULT: t.tertiary.waratahCrimson.value,
-          foreground: t.onSurface['paper-white'].value,
+          DEFAULT: 'var(--color-solidarity-red)',
+          foreground: 'var(--color-paper-white)',
         },
         muted: {
-          DEFAULT: t.surface['kr-dark']['kr-leafSmoke'].value,
-          foreground: t.secondary.flannelFlower.value,
+          DEFAULT: 'var(--color-concrete-grey-dark)',
+          foreground: 'var(--color-concrete-grey-lightest)',
         },
         accent: {
-          DEFAULT: t.tertiary.waratahCrimson.value,
-          foreground: t.onSurface['paper-white'].value,
+          DEFAULT: 'var(--color-solidarity-red)',
+          foreground: 'var(--color-paper-white)',
         },
         popover: {
-          DEFAULT: t.surface['kr-dark']['kr-leafSmokeHigh'].value,
-          foreground: t.onSurface['paper-white'].value,
+          DEFAULT: 'var(--color-asphalt-black-light)',
+          foreground: 'var(--color-paper-white)',
         },
         card: {
-          DEFAULT: t.surface['kr-dark']['kr-leafSmoke'].value,
-          foreground: t.onSurface['paper-white'].value,
+          DEFAULT: 'var(--color-asphalt-black)',
+          foreground: 'var(--color-paper-white)',
         },
       },
 

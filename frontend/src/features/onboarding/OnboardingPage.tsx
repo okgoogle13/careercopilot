@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { PathSelectionCard } from '@/components/PathSelectionCard';
 import styles from './OnboardingPage.module.css';

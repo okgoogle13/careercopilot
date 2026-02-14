@@ -1,8 +1,16 @@
 ---
 name: design-token-validator
-description: Validate CareerCopilot design tokens for DTCG compliance, kerala-rage palette rules, circular references, and WCAG contrast. Use before wireframing or deployment.
-tags: [design-tokens, validation, kerala-rage, accessibility]
-version: 2.0.0
+description: Validate CareerCopilot design tokens for DTCG compliance, kerala-rage
+  palette rules, circular references, and WCAG contrast. Use before wireframing or
+  deployment.
+metadata:
+  legacy_frontmatter:
+    tags:
+    - design-tokens
+    - validation
+    - kerala-rage
+    - accessibility
+    version: 2.0.0
 ---
 
 # Design Token Validator

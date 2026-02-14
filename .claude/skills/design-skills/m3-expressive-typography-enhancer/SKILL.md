@@ -1,8 +1,13 @@
 ---
 name: m3-expressive-typography-enhancer
-description: Elevate typography with Material Design 3 Expressive variable fonts, extreme weight contrasts (100 vs 900), optical sizing, and emotional tone mapping. Transforms generic defaults into intentional, memorable typography by enforcing M3 Expressive principles rather than specific font families.
-version: 3.1.0
-tags: []
+description: Elevate typography with Material Design 3 Expressive variable fonts,
+  extreme weight contrasts (100 vs 900), optical sizing, and emotional tone mapping.
+  Transforms generic defaults into intentional, memorable typography by enforcing
+  M3 Expressive principles rather than specific font families.
+metadata:
+  legacy_frontmatter:
+    version: 3.1.0
+    tags: []
 ---
 
 # M3 Expressive Typography Enhancer

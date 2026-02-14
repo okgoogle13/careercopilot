@@ -1,11 +1,14 @@
 ---
 name: frontend-migration
-description: "Guides migration of frontend code between frameworks, design systems, or architectural patterns"
-version: 1.0.0
-tags:
-  - frontend
-  - migration
-  - refactoring
+description: Guides migration of frontend code between frameworks, design systems,
+  or architectural patterns
+metadata:
+  legacy_frontmatter:
+    version: 1.0.0
+    tags:
+    - frontend
+    - migration
+    - refactoring
 ---
 
 # Frontend Migration Skill

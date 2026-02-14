@@ -39,6 +39,7 @@ build/
 # IDE files
 .vscode/
 .idea/
+.antigravity/mcp.json
 *.swp
 *.swo
 

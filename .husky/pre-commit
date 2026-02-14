@@ -1,3 +1,28 @@
-# Temporarily skipping tests to allow commit
-# Tests will be fixed in a separate PR
-echo "Skipping tests for now. Will be fixed in a separate PR."
+#!/bin/sh
+# Pre-commit hook: Design token validation and rebuild
+# Ensures design tokens remain complete and consistent
+
+set -e  # Exit on first error
+
+# Check if tokens have changed
+if git diff --cached --name-only | grep -q "frontend/src/design/tokens/tokens\.json"; then
+  echo "📋 Design tokens changed. Running validation and rebuild..."
+  python3 scripts/build-m3-tokens.py
+  if [ $? -ne 0 ]; then
+    echo "❌ Token rebuild failed. Aborting commit."
+    exit 1
+  fi
+
+  python3 scripts/design-validation/validate-tokens.py
+  if [ $? -ne 0 ]; then
+    echo "❌ Token validation failed. Aborting commit."
+    exit 1
+  fi
+
+  # Re-stage the rebuilt CSS file
+  git add frontend/src/design/styles/design-tokens.css
+  echo "✅ CSS variables rebuilt and validated. Added to staging."
+fi
+
+# Run pre-commit hooks via the framework
+exec npx pre-commit run --hook-stage commit-msg --hook-stage pre-commit

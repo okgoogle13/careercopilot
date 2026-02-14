@@ -1,8 +1,21 @@
 ---
 name: m3-aesthetic-creator
-version: 2.0.0
-description: Create comprehensive design aesthetic systems using Material 3 Expressive Design principles, including color palettes, typography hierarchies, shape language, depth strategies, and motion principles. Use this skill when users request design systems, visual aesthetics, brand design directions, M3-based design specifications, or need to establish a cohesive visual language for a product. Trigger phrases include "create a design aesthetic", "build a design system", "develop visual language", "design direction using M3", or "expressive design aesthetic".
-tags: [design-system, m3-expressive, aesthetic, generation, visual-design]
+description: Create comprehensive design aesthetic systems using Material 3 Expressive
+  Design principles, including color palettes, typography hierarchies, shape language,
+  depth strategies, and motion principles. Use this skill when users request design
+  systems, visual aesthetics, brand design directions, M3-based design specifications,
+  or need to establish a cohesive visual language for a product. Trigger phrases include
+  "create a design aesthetic", "build a design system", "develop visual language",
+  "design direction using M3", or "expressive design aesthetic".
+metadata:
+  legacy_frontmatter:
+    version: 2.0.0
+    tags:
+    - design-system
+    - m3-expressive
+    - aesthetic
+    - generation
+    - visual-design
 ---
 
 # M3 Aesthetic Creator

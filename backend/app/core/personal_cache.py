@@ -9,7 +9,7 @@ import logging
 import os
 from datetime import datetime, timedelta
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any
 
 logger = logging.getLogger(__name__)
 
@@ -21,7 +21,7 @@ class PersonalCache:
         self.cache_dir = Path(cache_dir)
         self.default_ttl = timedelta(hours=24)
         self.backend = self  # For compatibility with cache middleware
-        self.CACHE_CONFIGS: Dict[str, Dict[str, Any]] = {
+        self.CACHE_CONFIGS: dict[str, dict[str, Any]] = {
             "default": {
                 "ttl": int(self.default_ttl.total_seconds()),
                 "max_size": 1000,
@@ -53,7 +53,7 @@ class PersonalCache:
         filename = self._generate_cache_key(key)
         return self.cache_dir / category / filename
 
-    async def get(self, key: str, category: str = "general") -> Optional[Dict[str, Any]]:
+    async def get(self, key: str, category: str = "general") -> dict[str, Any] | None:
         """Retrieve cached value with TTL check"""
         try:
             cache_file = self._get_cache_file_path(key, category)
@@ -63,7 +63,7 @@ class PersonalCache:
                 return None
 
             # Read cache file
-            with open(cache_file, "r") as f:
+            with open(cache_file) as f:
                 cache_data = json.load(f)
 
             # Check TTL
@@ -85,8 +85,8 @@ class PersonalCache:
     async def set(
         self,
         key: str,
-        value: Dict[str, Any],
-        ttl: Optional[timedelta] = None,
+        value: dict[str, Any],
+        ttl: timedelta | None = None,
         category: str = "general",
     ) -> bool:
         """Store value in cache with TTL"""
@@ -142,7 +142,7 @@ class PersonalCache:
             logger.error(f"Error deleting cache file {cache_file}: {e}")
             return False
 
-    async def clear_expired(self, category: Optional[str] = None) -> int:
+    async def clear_expired(self, category: str | None = None) -> int:
         """Remove all expired cache entries"""
         try:
             cleared_count = 0
@@ -176,7 +176,7 @@ class PersonalCache:
 
         for cache_file in directory.glob("*.json"):
             try:
-                with open(cache_file, "r") as f:
+                with open(cache_file) as f:
                     cache_data = json.load(f)
 
                 expires_at = datetime.fromisoformat(cache_data.get("expires_at", ""))
@@ -190,10 +190,10 @@ class PersonalCache:
 
         return cleared_count
 
-    async def get_cache_stats(self) -> Dict[str, Any]:
+    async def get_cache_stats(self) -> dict[str, Any]:
         """Get cache statistics"""
         try:
-            stats: Dict[str, Any] = {"total_files": 0, "categories": {}, "total_size_mb": 0.0}
+            stats: dict[str, Any] = {"total_files": 0, "categories": {}, "total_size_mb": 0.0}
 
             for category_dir in self.cache_dir.iterdir():
                 if category_dir.is_dir():
@@ -225,13 +225,13 @@ class PersonalCache:
     async def cache_user_profile(
         self,
         user_id: str,
-        profile_data: Dict[str, Any],
+        profile_data: dict[str, Any],
         ttl: timedelta = timedelta(days=7),
     ) -> bool:
         """Cache user profile with 7-day TTL"""
         return await self.set(f"profile_{user_id}", profile_data, ttl, "profiles")
 
-    async def get_user_profile(self, user_id: str) -> Optional[Dict[str, Any]]:
+    async def get_user_profile(self, user_id: str) -> dict[str, Any] | None:
         """Get cached user profile"""
         return await self.get(f"profile_{user_id}", "profiles")
 
@@ -239,7 +239,7 @@ class PersonalCache:
         self,
         company_name: str,
         job_url: str,
-        research_data: Dict[str, Any],
+        research_data: dict[str, Any],
         ttl: timedelta = timedelta(days=7),
     ) -> bool:
         """Cache company research with 7-day TTL"""
@@ -250,7 +250,7 @@ class PersonalCache:
 
     async def get_company_research(
         self, company_name: str, job_url: str
-    ) -> Optional[Dict[str, Any]]:
+    ) -> dict[str, Any] | None:
         """Get cached company research"""
         url_hash = hashlib.md5(job_url.encode()).hexdigest()[:8]
         cache_key = f"company_{company_name}_{url_hash}"
@@ -259,23 +259,23 @@ class PersonalCache:
     async def cache_ai_response(
         self,
         prompt_hash: str,
-        response_data: Dict[str, Any],
+        response_data: dict[str, Any],
         ttl: timedelta = timedelta(hours=72),
     ) -> bool:
         """Cache AI response with 72-hour TTL"""
         return await self.set(f"ai_{prompt_hash}", response_data, ttl, "ai_responses")
 
-    async def get_ai_response(self, prompt_hash: str) -> Optional[Dict[str, Any]]:
+    async def get_ai_response(self, prompt_hash: str) -> dict[str, Any] | None:
         """Get cached AI response"""
         return await self.get(f"ai_{prompt_hash}", "ai_responses")
 
     async def cache_job_opportunity(
-        self, job_id: str, job_data: Dict[str, Any], ttl: timedelta = timedelta(days=3)
+        self, job_id: str, job_data: dict[str, Any], ttl: timedelta = timedelta(days=3)
     ) -> bool:
         """Cache job opportunity with 3-day TTL"""
         return await self.set(f"job_{job_id}", job_data, ttl, "jobs")
 
-    async def get_job_opportunity(self, job_id: str) -> Optional[Dict[str, Any]]:
+    async def get_job_opportunity(self, job_id: str) -> dict[str, Any] | None:
         """Get cached job opportunity"""
         return await self.get(f"job_{job_id}", "jobs")
 
@@ -284,8 +284,8 @@ class PersonalCache:
     async def cache_ai_operation(
         self,
         operation_type: str,
-        input_data: Dict[str, Any],
-        result: Dict[str, Any],
+        input_data: dict[str, Any],
+        result: dict[str, Any],
         user_id: str = "default",
         ttl: timedelta = timedelta(hours=72),
     ) -> bool:
@@ -310,8 +310,8 @@ class PersonalCache:
         return await self.set(cache_key, cache_data, ttl, "ai_operations")
 
     async def get_ai_operation(
-        self, operation_type: str, input_data: Dict[str, Any], user_id: str = "default"
-    ) -> Optional[Dict[str, Any]]:
+        self, operation_type: str, input_data: dict[str, Any], user_id: str = "default"
+    ) -> dict[str, Any] | None:
         """
         Get cached AI operation result
         Absorbs AICache functionality for AI operation retrieval
@@ -328,7 +328,7 @@ class PersonalCache:
             return cached_data["result"]
         return cached_data
 
-    async def clear_ai_operations(self, operation_type: Optional[str] = None) -> int:
+    async def clear_ai_operations(self, operation_type: str | None = None) -> int:
         """
         Clear AI operations cache, optionally filtered by operation type
         Enhanced cleanup functionality absorbing AICache patterns
@@ -359,7 +359,7 @@ class PersonalCache:
 
     async def get_ai_compatible(
         self, operation_type: str, user_id: str, input_data: Any, **kwargs
-    ) -> Optional[Any]:
+    ) -> Any | None:
         """
         AICache-compatible get method for cache decorators
         Maps to enhanced AI operation caching
@@ -376,7 +376,7 @@ class PersonalCache:
         return await self.cache_ai_operation(operation_type, input_data, result, user_id)
 
     async def invalidate_user_cache(
-        self, user_id: str, operation_types: Optional[List[str]] = None
+        self, user_id: str, operation_types: list[str] | None = None
     ) -> int:
         """
         AICache-compatible invalidation method
@@ -433,7 +433,7 @@ class PersonalCache:
 
 
 # Global instance
-_personal_cache: Optional[PersonalCache] = None
+_personal_cache: PersonalCache | None = None
 
 
 def get_personal_cache(cache_dir: str = "data/cache") -> PersonalCache:
@@ -459,7 +459,7 @@ class PersonalCacheExtensions:
 
     @staticmethod
     def generate_operation_key(
-        operation_type: str, input_data: Dict[str, Any], user_id: str = "default"
+        operation_type: str, input_data: dict[str, Any], user_id: str = "default"
     ) -> str:
         """
         Generate cache key for AI operations (absorbs AICache key generation)

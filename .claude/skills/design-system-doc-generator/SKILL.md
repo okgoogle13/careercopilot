@@ -1,8 +1,17 @@
 ---
 name: design-system-doc-generator
-description: Framework for generating machine-readable design documentation that enables seamless AI-orchestrated frontend development. Standardizes the bridge between design intent and automated code generation.
-tags: [design-system, documentation, ai-orchestration, low-code, design-to-code]
-version: 2.0.0
+description: Framework for generating machine-readable design documentation that enables
+  seamless AI-orchestrated frontend development. Standardizes the bridge between design
+  intent and automated code generation.
+metadata:
+  legacy_frontmatter:
+    tags:
+    - design-system
+    - documentation
+    - ai-orchestration
+    - low-code
+    - design-to-code
+    version: 2.0.0
 ---
 
 # AI Design-to-Code Orchestrator

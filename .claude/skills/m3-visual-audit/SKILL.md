@@ -1,8 +1,13 @@
 ---
 name: m3-visual-audit
-description: Analyze component screenshots against Material Design 3 Expressive standards. Validate typography (variable fonts, extreme contrasts), color (vibrant tokens), layout ([DEPRECATED_STYLE] asymmetry), motion (spring physics), and expressive distinctiveness. Generate compliance assessments with 0-100 scoring.
-version: 1.0.0
-tags: []
+description: Analyze component screenshots against Material Design 3 Expressive standards.
+  Validate typography (variable fonts, extreme contrasts), color (vibrant tokens),
+  layout ([DEPRECATED_STYLE] asymmetry), motion (spring physics), and expressive distinctiveness.
+  Generate compliance assessments with 0-100 scoring.
+metadata:
+  legacy_frontmatter:
+    version: 1.0.0
+    tags: []
 ---
 
 # M3 Expressive Visual Audit Skill

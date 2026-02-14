@@ -38,7 +38,7 @@ const ValueReveal = ({ value, shouldReduceMotion }: { value: string, shouldReduc
 };
 
 export const KrDarkDashboard: React.FC = () => {
-  const shouldReduceMotion = useReducedMotion() ?? false ?? false;
+  const shouldReduceMotion = useReducedMotion() ?? false;
 
   const metrics = [
     { label: 'RESUME_ALIGNMENT', value: '85%', color: 'text-ink-gold', ref: 'ALGN_01' },
