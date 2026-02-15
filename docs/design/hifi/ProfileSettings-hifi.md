@@ -3,7 +3,7 @@
 ## Layout Regions
 - **Identity Header**: Centralized avatar and display name area with atmospheric backing.
 - **Engagement Stats**: A horizontal row of high-density `InfoStone` components.
-- **Badge Archive**: A grid of `BadgePebble` items representing earned [DEPRECATED_STYLE]/technical marks.
+- **Badge Archive**: A grid of `BadgePebble` items representing earned kr-solidarity achievement marks.
 
 ## Typography
 - **Identity Headline**: `Fraunces Energetic`, 48px, `font-weight: 800`, `text-paper-white`.

@@ -1241,6 +1241,378 @@
         ],
         "cannot_overlay_with": []
       }
+    },
+    {
+      "id": "KR-UI-008",
+      "name": "Elite Mastery Motif Accents",
+      "category": "ui-kit",
+      "layer": "ui-kit",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/ui-kit/svg/motifs/KR-UI-008.svg",
+      "priority": "MEDIUM",
+      "semantics": {
+        "functional_role": "motif-overlay",
+        "semantic_weight": "utility",
+        "layering_role": "interface"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "ui-component",
+          "overlay"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric",
+          "cultural",
+          "resistance",
+          "spiritual"
+        ],
+        "cannot_overlay_with": []
+      }
+    },
+    {
+      "id": "KR-UI-009",
+      "name": "Mastery Chart Patterns",
+      "category": "ui-kit",
+      "layer": "ui-kit",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/ui-kit/svg/patterns/KR-UI-009.svg",
+      "priority": "MEDIUM",
+      "semantics": {
+        "functional_role": "pattern-fill",
+        "semantic_weight": "utility",
+        "layering_role": "interface"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "ui-component",
+          "chart"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric",
+          "cultural",
+          "resistance",
+          "spiritual"
+        ],
+        "cannot_overlay_with": []
+      }
+    },
+    {
+      "id": "KR-UI-010",
+      "name": "Success Screen Motif Overlay",
+      "category": "ui-kit",
+      "layer": "ui-kit",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/ui-kit/svg/motifs/KR-UI-010.svg",
+      "priority": "MEDIUM",
+      "semantics": {
+        "functional_role": "motif-overlay",
+        "semantic_weight": "utility",
+        "layering_role": "interface"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "ui-component",
+          "background"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric",
+          "cultural",
+          "resistance",
+          "spiritual"
+        ],
+        "cannot_overlay_with": []
+      }
+    },
+    {
+      "id": "KR-UI-011",
+      "name": "Historical Record Background Texture",
+      "category": "ui-kit",
+      "layer": "ui-kit",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/ui-kit/svg/patterns/KR-UI-011.svg",
+      "priority": "MEDIUM",
+      "semantics": {
+        "functional_role": "pattern-fill",
+        "semantic_weight": "utility",
+        "layering_role": "interface"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "ui-component",
+          "background"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric",
+          "cultural",
+          "resistance",
+          "spiritual"
+        ],
+        "cannot_overlay_with": []
+      }
+    },
+    {
+      "id": "KR-UI-012",
+      "name": "Metric Graphical Motifs",
+      "category": "ui-kit",
+      "layer": "ui-kit",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/ui-kit/svg/motifs/KR-UI-012.svg",
+      "priority": "MEDIUM",
+      "semantics": {
+        "functional_role": "motif-glyph",
+        "semantic_weight": "utility",
+        "layering_role": "interface"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "ui-component",
+          "icon"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric",
+          "cultural",
+          "resistance",
+          "spiritual"
+        ],
+        "cannot_overlay_with": []
+      }
+    },
+    {
+      "id": "KR-UI-013",
+      "name": "Scanning Holographic Motif",
+      "category": "ui-kit",
+      "layer": "ui-kit",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/ui-kit/svg/motifs/KR-UI-013.svg",
+      "priority": "MEDIUM",
+      "semantics": {
+        "functional_role": "motif-overlay",
+        "semantic_weight": "utility",
+        "layering_role": "interface"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "ui-component",
+          "overlay"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric",
+          "cultural",
+          "resistance",
+          "spiritual"
+        ],
+        "cannot_overlay_with": []
+      }
+    },
+    {
+      "id": "KR-UI-014",
+      "name": "Resolved Card Motif Accents",
+      "category": "ui-kit",
+      "layer": "ui-kit",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/ui-kit/svg/motifs/KR-UI-014.svg",
+      "priority": "MEDIUM",
+      "semantics": {
+        "functional_role": "motif-corner",
+        "semantic_weight": "utility",
+        "layering_role": "interface"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "ui-component",
+          "frame"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric",
+          "cultural",
+          "resistance",
+          "spiritual"
+        ],
+        "cannot_overlay_with": []
+      }
+    },
+    {
+      "id": "KR-UI-015",
+      "name": "Priority Indicator Halo Variant",
+      "category": "ui-kit",
+      "layer": "ui-kit",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/ui-kit/svg/motifs/KR-UI-015.svg",
+      "priority": "MEDIUM",
+      "semantics": {
+        "functional_role": "motif-glyph",
+        "semantic_weight": "utility",
+        "layering_role": "interface"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "ui-component",
+          "icon"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric",
+          "cultural",
+          "resistance",
+          "spiritual"
+        ],
+        "cannot_overlay_with": []
+      }
+    },
+    {
+      "id": "KR-UI-016",
+      "name": "Status Icons Set",
+      "category": "ui-kit",
+      "layer": "ui-kit",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/ui-kit/svg/icons/KR-UI-016.svg",
+      "priority": "MEDIUM",
+      "semantics": {
+        "functional_role": "icon-set",
+        "semantic_weight": "utility",
+        "layering_role": "interface"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "ui-component",
+          "icon"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric",
+          "cultural",
+          "resistance",
+          "spiritual"
+        ],
+        "cannot_overlay_with": []
+      }
+    },
+    {
+      "id": "KR-UI-017",
+      "name": "Skill Achievement Badge Set",
+      "category": "ui-kit",
+      "layer": "ui-kit",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/ui-kit/svg/icons/KR-UI-017.svg",
+      "priority": "MEDIUM",
+      "semantics": {
+        "functional_role": "badge-set",
+        "semantic_weight": "utility",
+        "layering_role": "interface"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "ui-component",
+          "icon"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric",
+          "cultural",
+          "resistance",
+          "spiritual"
+        ],
+        "cannot_overlay_with": []
+      }
+    },
+    {
+      "id": "KR-UI-018",
+      "name": "Grid Line Corner Motifs",
+      "category": "ui-kit",
+      "layer": "ui-kit",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/ui-kit/svg/motifs/KR-UI-018.svg",
+      "priority": "MEDIUM",
+      "semantics": {
+        "functional_role": "motif-corner",
+        "semantic_weight": "utility",
+        "layering_role": "interface"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "ui-component",
+          "frame"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric",
+          "cultural",
+          "resistance",
+          "spiritual"
+        ],
+        "cannot_overlay_with": []
+      }
+    },
+    {
+      "id": "KR-UI-019",
+      "name": "Motif Reservoir Items",
+      "category": "ui-kit",
+      "layer": "ui-kit",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/ui-kit/svg/motifs/KR-UI-019.svg",
+      "priority": "MEDIUM",
+      "semantics": {
+        "functional_role": "reservoir",
+        "semantic_weight": "utility",
+        "layering_role": "interface"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "ui-component",
+          "tile"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric",
+          "cultural",
+          "resistance",
+          "spiritual"
+        ],
+        "cannot_overlay_with": []
+      }
     }
   ]
 }
