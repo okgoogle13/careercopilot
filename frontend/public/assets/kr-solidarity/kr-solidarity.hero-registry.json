@@ -670,6 +670,65 @@
           "contrast_ratio": 3
         }
       }
+    },
+    {
+      "composition_id": "anti-colonial-hero-001",
+      "layers": [
+        {
+          "id": "KR-SOLID-034",
+          "name": "Melbourne-laneway V1",
+          "type": "substrate",
+          "settings": {
+            "opacity": 1,
+            "blend_mode": "normal",
+            "texture_intensity": "high",
+            "grit_factor": "maximum"
+          }
+        },
+        {
+          "id": "KR-SOLID-011",
+          "name": "Abstract -solidarity-kerala-rage-rad",
+          "type": "atmospheric",
+          "settings": {
+            "opacity": 0.65,
+            "blend_mode": "multiply",
+            "effect": "distressed-grain"
+          }
+        },
+        {
+          "id": "KR-SOLID-025",
+          "name": "Bhagat-singh V1",
+          "type": "resistance",
+          "settings": {
+            "opacity": 0.9,
+            "blend_mode": "hard-light",
+            "edge_treatment": "torn-wheat-paste",
+            "positioning": "center-focus"
+          }
+        }
+      ],
+      "typography": {
+        "content": "RECLAIM THE STREETS",
+        "color": "#C84032",
+        "style": {
+          "profile": "aggressive",
+          "weight": "ultra-bold",
+          "font_family": "High-Contrast-Grotesque",
+          "letter_spacing": "-0.05em"
+        },
+        "animation": {
+          "on_scroll": "dynamic-scale-expansion",
+          "intensity": "high",
+          "trigger_point": "0.2"
+        }
+      },
+      "visual_meta": {
+        "tone": "Urban, Wheat-paste, Melbourne laneway grit",
+        "context": "Urban decay",
+        "excluded_layers": [
+          "spiritual"
+        ]
+      }
     }
   ]
 }

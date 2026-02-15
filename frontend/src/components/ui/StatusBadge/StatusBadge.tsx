@@ -65,14 +65,14 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({
         // Adjusting for high contrast on dark backgrounds
         if (base === 'neutral') {
             styles.bg = 'rgba(230, 225, 214, 0.1)';
-            styles.text = 'var(--color-concrete-grey)';
-            styles.dot = 'var(--color-concrete-grey-dark)';
+            styles.text = 'var(--sys-color-worker-ash-base)';
+            styles.dot = 'var(--sys-color-worker-ash-steps-2)';
             styles.border = 'rgba(230, 225, 214, 0.2)';
         } else if (base === 'warning') {
-            styles.text = 'var(--color-ink-gold)';
+            styles.text = 'var(--sys-color-inkGold-base)';
             styles.bg = 'rgba(212, 168, 75, 0.15)';
             styles.border = 'rgba(212, 168, 75, 0.3)';
-            styles.dot = 'var(--color-ink-gold)';
+            styles.dot = 'var(--sys-color-inkGold-base)';
         }
 
         return styles;

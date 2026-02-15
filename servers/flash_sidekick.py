@@ -125,11 +125,11 @@ def _get_github_token() -> str:
 # Candidates
 # Candidates
 # Verified available models from list_models()
-FAST_CANDIDATES = ["models/gemini-2.0-flash", "models/gemini-2.5-flash"]
+FAST_CANDIDATES = ["models/gemini-3-flash-preview", "models/gemini-2.5-flash", "models/gemini-2.0-flash"]
 env_fast = os.getenv("GEMINI_MODEL")
 if env_fast and env_fast not in FAST_CANDIDATES: FAST_CANDIDATES.insert(0, env_fast)
 
-PRO_CANDIDATES = ["models/gemini-2.5-pro", "models/gemini-exp-1206", "models/gemini-1.5-pro"]
+PRO_CANDIDATES = ["models/gemini-3-pro-preview", "models/gemini-2.5-pro", "models/gemini-exp-1206"]
 env_pro = os.getenv("GEMINI_PRO_MODEL")
 if env_pro and env_pro not in PRO_CANDIDATES: PRO_CANDIDATES.insert(0, env_pro)
 
@@ -281,7 +281,7 @@ async def _analyze_single_file(path: str, analysis_type: str, rules: str) -> Dic
 
     if len(code) > 50000: code = code[:50000] + "\n...[Truncated]"
     prompt = f"Analyze this file for {analysis_type}.\n\nCode:\n{code}"
-    response = await _call_gemini_async("pro", prompt, f"Analyze code strictly. {rules}")
+    response = await _call_gemini_async("fast", prompt, f"Analyze code strictly. {rules}")  # Changed to fast
     return {"file": path, "analysis": response}
 
 # --- FastMCP Server ---
@@ -308,7 +308,7 @@ async def consult_pro(query: str, context: Optional[str] = None) -> str:
 
 @mcp.tool()
 async def batch_file_analysis(file_paths: List[str], analysis_type: Literal["quality", "dependencies", "complexity", "security"]) -> str:
-    """Analyze multiple files concurrently to save tokens."""
+    """Analyze multiple files concurrently to save tokens. [OPTIMIZED: Flash]"""
     rules = _load_project_rules()
     tasks = [_analyze_single_file(p, analysis_type, rules) for p in file_paths]
     results = await asyncio.gather(*tasks)
@@ -344,9 +344,9 @@ async def suggest_refactoring(code: str) -> str:
 
 @mcp.tool()
 async def create_readme(code: str) -> str:
-    """Generate a comprehensive README for the provided code."""
+    """Generate a comprehensive README for the provided code. [OPTIMIZED: Flash]"""
     rules = _load_project_rules()
-    return await _call_gemini_async("pro", code, f"Generate a professional README.md.{rules}")
+    return await _call_gemini_async("fast", code, f"Generate a professional README.md.{rules}")
 
 @mcp.tool()
 async def extract_dependencies(code: str) -> str:
@@ -360,9 +360,9 @@ async def generate_api_docs(code: str) -> str:
 
 @mcp.tool()
 async def generate_integration_tests(code: str) -> str:
-    """Generate E2E/Integration test scaffolding."""
+    """Generate E2E/Integration test scaffolding. [OPTIMIZED: Flash]"""
     rules = _load_project_rules()
-    return await _call_gemini_async("pro", code, f"Generate E2E integration test scenarios.{rules}")
+    return await _call_gemini_async("fast", code, f"Generate E2E integration test scenarios.{rules}")
 
 @mcp.tool()
 async def trigger_error() -> str:

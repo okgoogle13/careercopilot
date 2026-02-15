@@ -134,11 +134,11 @@ export const Lens = forwardRef<HTMLInputElement, LensProps>(
       backgroundColor: variant === 'filled' ? 'rgba(44, 39, 35, 0.4)' : 'transparent',
       border: '2px solid',
       borderColor: error
-        ? 'var(--color-solidarity-red)'
+        ? 'var(--sys-color-solidarityRed-base)'
         : isFocused
-          ? 'var(--color-ink-gold)'
-          : 'var(--color-concrete-grey-base)',
-      color: 'var(--color-paper-white)',
+          ? 'var(--sys-color-inkGold-base)'
+          : 'var(--sys-color-worker-ash-base)',
+      color: 'var(--sys-color-worker-ash-steps-6)',
       transition: 'all var(--duration-standard) var(--ease-viscous-breeze)',
     };
 
@@ -171,12 +171,12 @@ export const Lens = forwardRef<HTMLInputElement, LensProps>(
           <label
             className={`
           mb-2 text-sm font-medium transition-colors duration-200
-          ${error ? 'text-[var(--color-solidarity-red)]' : 'text-[var(--color-concrete-grey)]'}
-          ${isFocused && !error ? 'text-[var(--color-ink-gold)]' : ''}
+          ${error ? 'text-[var(--sys-color-solidarityRed-base)]' : 'text-[var(--sys-color-worker-ash-base)]'}
+          ${isFocused && !error ? 'text-[var(--sys-color-inkGold-base)]' : ''}
         `}
           >
             {label}
-            {required && <span className="text-[var(--color-solidarity-red)] ml-1">*</span>}
+            {required && <span className="text-[var(--sys-color-solidarityRed-base)] ml-1">*</span>}
           </label>
         )}
 
@@ -191,7 +191,7 @@ export const Lens = forwardRef<HTMLInputElement, LensProps>(
               <div
                 className={`
               flex-shrink-0 ml-3 ${sizeClasses[size].adornment}
-              ${error ? 'text-[var(--color-solidarity-red)]' : 'text-[var(--color-concrete-grey-dark)]'}
+              ${error ? 'text-[var(--sys-color-solidarityRed-base)]' : 'text-[var(--sys-color-worker-ash-steps-2)]'}
             `}
               >
                 {startAdornment}
@@ -218,7 +218,7 @@ export const Lens = forwardRef<HTMLInputElement, LensProps>(
               <div
                 className={`
               flex-shrink-0 mr-3 ${sizeClasses[size].adornment}
-              ${error ? 'text-[var(--color-solidarity-red)]' : 'text-[var(--color-concrete-grey-dark)]'}
+              ${error ? 'text-[var(--sys-color-solidarityRed-base)]' : 'text-[var(--sys-color-worker-ash-steps-2)]'}
             `}
               >
                 {endAdornment}
@@ -235,7 +235,7 @@ export const Lens = forwardRef<HTMLInputElement, LensProps>(
                 id={`${props.id}-helper-text`}
                 className={`
                 text-xs
-                ${error ? 'text-[var(--color-solidarity-red)]' : 'text-[var(--color-concrete-grey-dark)]'}
+                ${error ? 'text-[var(--sys-color-solidarityRed-base)]' : 'text-[var(--sys-color-worker-ash-steps-2)]'}
               `}
               >
                 {displayHelperText}
@@ -246,7 +246,7 @@ export const Lens = forwardRef<HTMLInputElement, LensProps>(
               <p
                 className={`
               text-xs
-              ${charCount > maxLength ? 'text-[var(--color-solidarity-red)]' : 'text-[var(--color-concrete-grey-dark)]'}
+              ${charCount > maxLength ? 'text-[var(--sys-color-solidarityRed-base)]' : 'text-[var(--sys-color-worker-ash-steps-2)]'}
               ml-auto
             `}
               >
@@ -317,11 +317,11 @@ export const LensArea = forwardRef<HTMLTextAreaElement, LensAreaProps>(
       backgroundColor: variant === 'filled' ? 'rgba(44, 39, 35, 0.4)' : 'transparent',
       border: '2px solid',
       borderColor: error
-        ? 'var(--color-solidarity-red)'
+        ? 'var(--sys-color-solidarityRed-base)'
         : isFocused
-          ? 'var(--color-ink-gold)'
-          : 'var(--color-concrete-grey-base)',
-      color: 'var(--color-paper-white)',
+          ? 'var(--sys-color-inkGold-base)'
+          : 'var(--sys-color-worker-ash-base)',
+      color: 'var(--sys-color-worker-ash-steps-6)',
       transition: 'all var(--duration-standard) var(--ease-viscous-breeze)',
     };
 
@@ -334,12 +334,12 @@ export const LensArea = forwardRef<HTMLTextAreaElement, LensAreaProps>(
           <label
             className={`
           mb-2 text-sm font-medium transition-colors duration-200
-          ${error ? 'text-[var(--color-solidarity-red)]' : 'text-[var(--color-concrete-grey)]'}
-          ${isFocused && !error ? 'text-[var(--color-ink-gold)]' : ''}
+          ${error ? 'text-[var(--sys-color-solidarityRed-base)]' : 'text-[var(--sys-color-worker-ash-base)]'}
+          ${isFocused && !error ? 'text-[var(--sys-color-inkGold-base)]' : ''}
         `}
           >
             {label}
-            {required && <span className="text-[var(--color-solidarity-red)] ml-1">*</span>}
+            {required && <span className="text-[var(--sys-color-solidarityRed-base)] ml-1">*</span>}
           </label>
         )}
 
@@ -380,7 +380,7 @@ export const LensArea = forwardRef<HTMLTextAreaElement, LensAreaProps>(
                 id={`${props.id}-helper-text`}
                 className={`
                 text-xs
-                ${error ? 'text-[var(--color-solidarity-red)]' : 'text-[var(--color-concrete-grey-dark)]'}
+                ${error ? 'text-[var(--sys-color-solidarityRed-base)]' : 'text-[var(--sys-color-worker-ash-steps-2)]'}
               `}
               >
                 {displayHelperText}
@@ -391,7 +391,7 @@ export const LensArea = forwardRef<HTMLTextAreaElement, LensAreaProps>(
               <p
                 className={`
               text-xs
-              ${charCount > maxLength ? 'text-[var(--color-solidarity-red)]' : 'text-[var(--color-concrete-grey-dark)]'}
+              ${charCount > maxLength ? 'text-[var(--sys-color-solidarityRed-base)]' : 'text-[var(--sys-color-worker-ash-steps-2)]'}
               ml-auto
             `}
               >

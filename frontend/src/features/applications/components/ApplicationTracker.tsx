@@ -43,16 +43,16 @@ export function ApplicationTracker() {
   ];
 
   return (
-    <div className="p-8 max-w-6xl mx-auto bg-[var(--color-background-base)] min-h-screen">
+    <div className="p-8 max-w-6xl mx-auto bg-[var(--sys-color-charcoalBackground-base)] min-h-screen">
       {/* Header */}
       <div className="mb-10 text-center md:text-left">
-        <h1 className="text-display-large font-bold text-[var(--color-text-primary)] mb-2">
+        <h1 className="text-display-large font-bold text-[var(--sys-color-worker-ash-steps-6)] mb-2">
           Application{' '}
-          <span className="font-serif italic font-light text-[var(--color-leaf-base)]">
+          <span className="font-serif italic font-light text-[var(--sys-color-kr-activistSmokeGreen-base)]">
             Tracker
           </span>
         </h1>
-        <p className="text-body-large text-[var(--color-text-secondary)]">
+        <p className="text-body-large text-[var(--sys-color-worker-ash-steps-4)]">
           Track your job applications through every stage
         </p>
       </div>
@@ -63,18 +63,18 @@ export function ApplicationTracker() {
           <Stone
             key={app.id}
             elevation="flat"
-            className="group transition-all duration-300 hover:border-[var(--color-leaf-base)] hover:shadow-md"
+            className="group transition-all duration-300 hover:border-[var(--sys-color-kr-activistSmokeGreen-base)] hover:shadow-md"
           >
             <div className="p-6">
               <div className="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-8">
                 <div className="flex-1">
-                  <h3 className="text-display-small font-bold text-[var(--color-text-primary)] mb-1">
+                  <h3 className="text-display-small font-bold text-[var(--sys-color-worker-ash-steps-6)] mb-1">
                     {app.title}
                   </h3>
-                  <p className="text-title-medium font-serif italic text-[var(--color-text-secondary)] mb-2">
+                  <p className="text-title-medium font-serif italic text-[var(--sys-color-worker-ash-steps-4)] mb-2">
                     {app.company}
                   </p>
-                  <div className="flex items-center gap-2 text-label-small uppercase tracking-wider text-[var(--color-text-tertiary)]">
+                  <div className="flex items-center gap-2 text-label-small uppercase tracking-wider text-[var(--sys-color-worker-ash-steps-2)]">
                     <span>{app.location}</span>
                     <span>•</span>
                     <span>Applied {app.appliedDate}</span>
@@ -98,11 +98,11 @@ export function ApplicationTracker() {
                   // Determine variants and styling based on state
                   let variant: 'neutral' | 'primary' | 'secondary' = 'neutral';
                   let className =
-                    'text-[var(--color-text-tertiary)] bg-[var(--color-surface-container)] opacity-60';
+                    'text-[var(--sys-color-worker-ash-steps-2)] bg-[var(--sys-color-charcoalBackground-steps-3)] opacity-60';
 
                   if (isCurrent) {
                     variant = 'primary'; // KeralaRage primary (Leaf)
-                    className = 'font-bold shadow-sm scale-105 border-[var(--color-leaf-base)]';
+                    className = 'font-bold shadow-sm scale-105 border-[var(--sys-color-kr-activistSmokeGreen-base)]';
                   } else if (isCompleted) {
                     variant = 'secondary'; // KeralaRage secondary (Ink) for completed
                     className = 'opacity-100';
@@ -123,8 +123,8 @@ export function ApplicationTracker() {
                         <div
                           className={`hidden md:block h-1 w-full rounded-full mt-1 ${
                             idx < app.currentStep
-                              ? 'bg-[var(--color-leaf-light)]'
-                              : 'bg-[var(--color-surface-container-high)]'
+                              ? 'bg-[var(--sys-color-kr-activistSmokeGreen-steps-4)]'
+                              : 'bg-[var(--sys-color-charcoalBackground-steps-4)]'
                           }`}
                         />
                       )}
@@ -138,8 +138,8 @@ export function ApplicationTracker() {
       </div>
 
       {/* Add New Application */}
-      <button className="mt-8 w-full py-8 border-2 border-dashed border-[var(--color-surface-container-high)] rounded-2xl text-[var(--color-text-secondary)] hover:border-[var(--color-leaf-base)] hover:text-[var(--color-leaf-base)] hover:bg-[var(--color-leaf-light)]/5 transition-all flex flex-col items-center justify-center gap-2 group">
-        <div className="p-3 bg-[var(--color-surface-container)] rounded-full group-hover:bg-[var(--color-leaf-base)] group-hover:text-white transition-colors">
+      <button className="mt-8 w-full py-8 border-2 border-dashed border-[var(--sys-color-charcoalBackground-steps-4)] rounded-2xl text-[var(--sys-color-worker-ash-steps-4)] hover:border-[var(--sys-color-kr-activistSmokeGreen-base)] hover:text-[var(--sys-color-kr-activistSmokeGreen-base)] hover:bg-[var(--sys-color-kr-activistSmokeGreen-steps-4)]/5 transition-all flex flex-col items-center justify-center gap-2 group">
+        <div className="p-3 bg-[var(--sys-color-charcoalBackground-steps-3)] rounded-full group-hover:bg-[var(--sys-color-kr-activistSmokeGreen-base)] group-hover:text-white transition-colors">
           <Plus size={24} />
         </div>
         <span className="text-title-medium font-medium">Add New Application</span>

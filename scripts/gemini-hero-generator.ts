@@ -1,19 +1,41 @@
+import dotenv from 'dotenv';
+dotenv.config({ path: '.env.local' });
+dotenv.config();
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
-// Polyfill for __dirname in ESM
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+// Initialize Gemini API
+console.log('CWD:', process.cwd());
+console.log('API Key present:', !!process.env.GEMINI_API_KEY);
+console.log('API Key length:', process.env.GEMINI_API_KEY ? process.env.GEMINI_API_KEY.length : 0);
 
 // Initialize Gemini API
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '');
-const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
+const apiKey = (process.env.GEMINI_API_KEY || '').trim();
+const genAI = new GoogleGenerativeAI(apiKey);
 
-const PROMPTS_PATH = path.resolve(__dirname, 'gemini-prompts/hero-composer.json');
-const REGISTRY_PATH = path.resolve(__dirname, '../frontend/public/assets/kr-solidarity/kr-solidarity.hero-registry.json');
-const MANIFEST_PATH = path.resolve(__dirname, '../frontend/public/assets/kerala-rage-kr-solidarity-manifest.json');
+// GitHub Models Configuration
+const githubToken = process.env.GITHUB_TOKEN || process.env.GH_PAT;
+const GITHUB_MODELS_ENDPOINT = "https://models.inference.ai.azure.com/chat/completions";
+
+const MODEL_CANDIDATES = [
+  { provider: 'google', model: 'gemini-3-flash-preview' }, // Newest/Fastest
+  { provider: 'google', model: 'gemini-3-pro-preview' },   // Newest/Smartest
+  { provider: 'google', model: 'gemini-2.5-flash' },       // Production Stable
+  { provider: 'google', model: 'gemini-2.5-pro' },         // Production Smart
+  { provider: 'google', model: 'gemini-2.0-flash' },       // Previous Flash
+  { provider: 'google', model: 'gemini-2.0-flash-lite' },  // Ultra-lite fallback
+  { provider: 'github', model: 'gpt-4o' },                 // GitHub Fallback 1
+  { provider: 'github', model: 'Meta-Llama-3-70B-Instruct' } // GitHub Fallback 2
+];
+
+// Path resolution based on process.cwd() (Project Root)
+const PROJECT_ROOT = process.cwd();
+
+const PROMPTS_PATH = path.resolve(PROJECT_ROOT, 'scripts/gemini-prompts/hero-composer.json');
+const REGISTRY_PATH = path.resolve(PROJECT_ROOT, 'frontend/public/assets/kr-solidarity/kr-solidarity.hero-registry.json');
+const MANIFEST_PATH = path.resolve(PROJECT_ROOT, 'frontend/public/assets/kerala-rage-kr-solidarity-manifest.json');
 
 async function generateHero(promptId: string, context = '') {
   const promptsData = JSON.parse(fs.readFileSync(PROMPTS_PATH, 'utf-8'));
@@ -34,23 +56,93 @@ async function generateHero(promptId: string, context = '') {
     ${JSON.stringify(manifest.assets.map((a: any) => ({ id: a.id, name: a.name, layer: a.layer })), null, 2)}
   `;
 
-  try {
-    const result = await model.generateContent(fullPrompt);
-    const response = await result.response;
-    const text = response.text();
+  let lastError;
+
+  for (const candidate of MODEL_CANDIDATES) {
+    console.log(`🤖 Attempting generation with ${candidate.provider}:${candidate.model}...`);
     
-    // Extract JSON from markdown code blocks if necessary
-    const jsonMatch = text.match(/\{[\s\S]*\}/);
-    if (!jsonMatch) {
-      throw new Error('No JSON found in Gemini response');
+    try {
+      let text = '';
+      
+      if (candidate.provider === 'google') {
+        const MAX_RETRIES = 5;
+        let retries = 0;
+        
+        while (retries < MAX_RETRIES) {
+            try {
+                const model = genAI.getGenerativeModel({ 
+                    model: candidate.model,
+                    generationConfig: { responseMimeType: 'application/json' }
+                });
+                const result = await model.generateContent(fullPrompt);
+                const response = await result.response;
+                text = response.text();
+                break; // Success
+            } catch (err: any) {
+                if (err.status === 429) {
+                    let delay = 30000;
+                    const message = err.message || '';
+                    const match = message.match(/retry in ([0-9.]+)s/);
+                    if (match && match[1]) delay = Math.ceil(parseFloat(match[1]) * 1000) + 1000;
+                    
+                    console.log(`⏳ ${candidate.model} rate limited. Waiting ${delay/1000}s (Retry ${retries + 1}/${MAX_RETRIES})...`);
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                    retries++;
+                } else {
+                    throw err; // Non-retriable, throw to outer catch
+                }
+            }
+        }
+        if (!text) throw new Error(`Failed to generate with ${candidate.model} after ${MAX_RETRIES} retries.`);
+        
+      } else if (candidate.provider === 'github') {
+        if (!githubToken) {
+            console.log('⚠️ Skipping GitHub Model (no token)');
+            continue;
+        }
+        
+        const response = await fetch(GITHUB_MODELS_ENDPOINT, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${githubToken}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                messages: [
+                    { role: "system", content: "You are a JSON-only generator. Output raw JSON without markdown." },
+                    { role: "user", content: fullPrompt }
+                ],
+                model: candidate.model,
+                temperature: 0.7,
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error(`GitHub Models API Error: ${response.status} ${response.statusText}`);
+        }
+
+        const data: any = await response.json(); // Type as any to avoid TS strictness without types
+        text = data.choices[0]?.message?.content || '';
+      }
+
+      // Validate JSON
+      const jsonMatch = text.match(/\{[\s\S]*\}/);
+      if (!jsonMatch) {
+         throw new Error('No JSON found in response');
+      }
+      
+      const heroData = JSON.parse(jsonMatch[0]);
+      console.log(`✅ Success with ${candidate.model}`);
+      return heroData;
+
+    } catch (error: any) {
+      console.warn(`❌ Failed with ${candidate.model}: ${error.message}`);
+      lastError = error;
+      // Continue to next candidate
     }
-    
-    const heroData = JSON.parse(jsonMatch[0]);
-    return heroData;
-  } catch (error) {
-    console.error('Gemini generation failed:', error);
-    throw error;
   }
+
+  throw new Error(`All model candidates failed. Last error: ${lastError?.message}`);
 }
 
 async function updateRegistry(newHero: any) {

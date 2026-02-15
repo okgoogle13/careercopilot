@@ -164,15 +164,15 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
   };
 
   return (
-    <div className="min-h-screen bg-[var(--color-asphalt-black)] p-8 md:p-12 animate-in fade-in duration-700">
+    <div className="min-h-screen bg-[var(--sys-color-charcoalBackground-base)] p-8 md:p-12 animate-in fade-in duration-700">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <header className="flex flex-col md:flex-row justify-between items-start gap-8 mb-12">
           <div>
-            <h1 className="text-5xl font-bold text-[var(--color-paper-white)] tracking-tight">
-              Professional Vector <span className="text-[var(--color-ink-gold)]">Audit</span>
+            <h1 className="text-5xl font-bold text-[var(--sys-color-worker-ash-steps-6)] tracking-tight">
+              Professional Vector <span className="text-[var(--sys-color-inkGold-base)]">Audit</span>
             </h1>
-            <p className="text-xl text-[var(--color-concrete-grey-dark)] mt-2">
+            <p className="text-xl text-[var(--sys-color-worker-ash-steps-2)] mt-2">
               Refine and validate the tactical components of your professional DNA.
             </p>
           </div>
@@ -218,14 +218,14 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
           <Stone
             elevation="raised"
             mode="KrDark"
-            className="flex items-center gap-6 border-l-4 border-l-[var(--color-ink-gold)]"
+            className="flex items-center gap-6 border-l-4 border-l-[var(--sys-color-inkGold-base)]"
           >
-            <Trophy className="w-10 h-10 text-[var(--color-ink-gold)]" />
+            <Trophy className="w-10 h-10 text-[var(--sys-color-inkGold-base)]" />
             <div>
-              <span className="text-3xl font-bold text-[var(--color-paper-white)] block">
+              <span className="text-3xl font-bold text-[var(--sys-color-worker-ash-steps-6)] block">
                 {localData.Structured_Achievements.length}
               </span>
-              <span className="text-[10px] uppercase tracking-widest text-[var(--color-concrete-grey-dark)]">
+              <span className="text-[10px] uppercase tracking-widest text-[var(--sys-color-worker-ash-steps-2)]">
                 Tactical Achievements
               </span>
             </div>
@@ -234,14 +234,14 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
           <Stone
             elevation="raised"
             mode="KrDark"
-            className="flex items-center gap-6 border-l-4 border-l-[var(--color-concrete-grey-base)]"
+            className="flex items-center gap-6 border-l-4 border-l-[var(--sys-color-worker-ash-base)]"
           >
-            <BrainCircuit className="w-10 h-10 text-[var(--color-concrete-grey-base)]" />
+            <BrainCircuit className="w-10 h-10 text-[var(--sys-color-worker-ash-base)]" />
             <div>
-              <span className="text-3xl font-bold text-[var(--color-paper-white)] block">
+              <span className="text-3xl font-bold text-[var(--sys-color-worker-ash-steps-6)] block">
                 {localData.KSC_Responses.length}
               </span>
-              <span className="text-[10px] uppercase tracking-widest text-[var(--color-concrete-grey-dark)]">
+              <span className="text-[10px] uppercase tracking-widest text-[var(--sys-color-worker-ash-steps-2)]">
                 Core Competencies
               </span>
             </div>
@@ -250,16 +250,16 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
           <Stone
             elevation="raised"
             mode="KrDark"
-            className={`flex items-center gap-6 border-l-4 ${flaggedAchievements.length + flaggedKSCs.length > 0 ? 'border-l-orange-500 bg-orange-500/5' : 'border-l-[var(--color-concrete-grey-base)]'}`}
+            className={`flex items-center gap-6 border-l-4 ${flaggedAchievements.length + flaggedKSCs.length > 0 ? 'border-l-orange-500 bg-orange-500/5' : 'border-l-[var(--sys-color-worker-ash-base)]'}`}
           >
             <AlertTriangle
-              className={`w-10 h-10 ${flaggedAchievements.length + flaggedKSCs.length > 0 ? 'text-orange-500' : 'text-[var(--color-concrete-grey-dark)]/40'}`}
+              className={`w-10 h-10 ${flaggedAchievements.length + flaggedKSCs.length > 0 ? 'text-orange-500' : 'text-[var(--sys-color-worker-ash-steps-2)]/40'}`}
             />
             <div>
-              <span className="text-3xl font-bold text-[var(--color-paper-white)] block">
+              <span className="text-3xl font-bold text-[var(--sys-color-worker-ash-steps-6)] block">
                 {flaggedAchievements.length + flaggedKSCs.length}
               </span>
-              <span className="text-[10px] uppercase tracking-widest text-[var(--color-concrete-grey-dark)]">
+              <span className="text-[10px] uppercase tracking-widest text-[var(--sys-color-worker-ash-steps-2)]">
                 Audit Flags
               </span>
             </div>
@@ -335,10 +335,10 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
                     key={achievement.Achievement_ID}
                     className="relative pl-6 border-l border-white/10 pb-8 last:pb-0"
                   >
-                    <div className="absolute left-[-5px] top-0 w-[9px] h-[9px] rounded-full bg-[var(--color-ink-gold)] shadow-[0_0_8px_var(--color-ink-gold)]" />
+                    <div className="absolute left-[-5px] top-0 w-[9px] h-[9px] rounded-full bg-[var(--sys-color-inkGold-base)] shadow-[0_0_8px_var(--sys-color-inkGold-base)]" />
 
                     <div className="flex justify-between items-center mb-6">
-                      <span className="text-[10px] text-[var(--color-concrete-grey-dark)] uppercase tracking-widest">
+                      <span className="text-[10px] text-[var(--sys-color-worker-ash-steps-2)] uppercase tracking-widest">
                         Evidence Node {idx + 1}
                       </span>
                       <StatusChip needsReview={achievement.Needs_Review_Flag} />
@@ -403,10 +403,10 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
                   >
                     <div className="flex justify-between items-start mb-8">
                       <div className="flex-1 mr-4">
-                        <span className="text-[10px] text-[var(--color-ink-gold)] uppercase tracking-widest block mb-2">
+                        <span className="text-[10px] text-[var(--sys-color-inkGold-base)] uppercase tracking-widest block mb-2">
                           Module {idx + 1} Prompt
                         </span>
-                        <h4 className="text-lg text-[var(--color-paper-white)] italic">
+                        <h4 className="text-lg text-[var(--sys-color-worker-ash-steps-6)] italic">
                           "{ksc.KSC_Prompt}"
                         </h4>
                       </div>
@@ -416,7 +416,7 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
                     {ksc.Needs_Review_Flag && ksc.STAR_Feedback && (
                       <div className="bg-orange-500/10 border border-orange-500/20 rounded-stone p-4 mb-8 flex gap-4">
                         <BrainCircuit className="w-5 h-5 text-orange-500 shrink-0" />
-                        <div className="text-xs text-[var(--color-paper-white)]/80 leading-relaxed">
+                        <div className="text-xs text-[var(--sys-color-worker-ash-steps-6)]/80 leading-relaxed">
                           <span className="font-bold text-orange-500 uppercase tracking-tighter block mb-1">
                             AI Tactical Feedback
                           </span>
@@ -451,7 +451,7 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
 
         {/* Footer Validation */}
         <footer className="mt-20 pt-10 border-t border-white/5 flex justify-center pb-20">
-          <div className="flex items-center gap-3 px-6 py-3 bg-[var(--color-concrete-grey-base)]/10 text-[var(--color-concrete-grey-base)] rounded-full text-xs uppercase tracking-[0.2em] border border-[var(--color-concrete-grey-base)]/20 shadow-lg">
+          <div className="flex items-center gap-3 px-6 py-3 bg-[var(--sys-color-worker-ash-base)]/10 text-[var(--sys-color-worker-ash-base)] rounded-full text-xs uppercase tracking-[0.2em] border border-[var(--sys-color-worker-ash-base)]/20 shadow-lg">
             <ShieldCheck className="w-4 h-4" />
             Professional Vector Validated and Production Ready
           </div>

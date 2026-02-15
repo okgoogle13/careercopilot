@@ -10,7 +10,7 @@ import figma from "@figma/code-connect";
  */
 figma.connect(
     Stone,
-    "https://www.figma.com/design/YOUR_FILE_ID?node-id=YOUR_NODE_ID",
+    "https://www.figma.com/design/OQizDLqM9Y3qitGXiabkAv?node-id=TODO_STONE_NODE_ID",
     {
         props: {
             mode: figma.enum("Mode", {

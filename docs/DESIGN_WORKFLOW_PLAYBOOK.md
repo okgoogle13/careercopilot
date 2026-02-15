@@ -19,10 +19,12 @@
 
 **I need to...**
 - **Create a new page from Figma** → Use `/figma-to-page` skill (2-5 min, 6× faster)
+- **Convert wireframe to mockup** → Use `/ui-design-evaluator` skill + Figma MCP push
 - **Generate wireframes** → Use `/wireframe-annotator` skill or prompt template
 - **Validate design compliance** → Use `/kerala-rage-visual-audit` or `/m3-visual-audit`
 - **Build a production component** → Use `/component-builder` skill
 - **Define brand aesthetics** → Invoke `visual-design-director` agent
+- **Sync tokens with Figma** → `npm run tokens:push` (local → Figma) or `npm run tokens:pull` (Figma → local)
 - **Run parallel design tasks** → Delegate via `/task-router-mcp`
 - **Plan final deployment sprint** → Use `/sprint-coordinator` for sprint planning, daily standups, go/no-go decisions
 
@@ -489,6 +491,129 @@ What are you trying to do?
 
 ## 4. Common Design Tasks
 
+### Task: Convert wireframe to mockup via Figma Dev Mode
+
+**Time: 3-5 minutes per screen**
+
+**Prerequisites:**
+- Wireframe markdown in `docs/design/generated/wireframes/` with `<layout>`, `<tokens>`, `<accessibility>` blocks
+- Figma MCP server configured (`claude_desktop_config.json` → `figma` entry)
+- Environment: `FIGMA_ACCESS_TOKEN` and `FIGMA_FILE_KEY` set
+
+**Steps:**
+
+1. **Invoke ui-design-evaluator skill:**
+```bash
+/ui-design-evaluator
+
+Arguments:
+{
+  "wireframe_path": "docs/design/generated/wireframes/dashboardoverview-screen.md",
+  "validation_mode": "kerala-rage-kr-solidarity",
+  "output_format": "html_mockup"
+}
+
+Output:
+- Interactive HTML mockup artifact
+- Compliance score (target: ≥ 320/400)
+- Token mapping report
+```
+
+2. **Push to Figma via MCP:**
+```bash
+# Token sync ensures Figma has latest Kerala Rage variables
+npm run tokens:push
+
+# Use Figma MCP to create frame from mockup
+# (via Claude Desktop with figma MCP server)
+```
+
+3. **Generate HiFi blueprint:**
+```bash
+# Output structured markdown to docs/design/hifi/
+# Include: layout regions, typography, color, spacing, motion, motif slots
+```
+
+4. **Validate against existing HiFi (if one exists):**
+```bash
+# Compare generated mockup with existing hifi blueprint
+diff docs/design/hifi/DashboardOverview-hifi.md /path/to/new-hifi.md
+```
+
+**Batch conversion via MCP:**
+```json
+{
+  "task_id": "mockup-batch-tier1",
+  "assigned_to": "ui-design-evaluator",
+  "priority": "high",
+  "inputs": {
+    "wireframes": [
+      "solidaritylanding-screen.md",
+      "dashboardoverview-screen.md",
+      "kanbanboard-screen.md",
+      "analysisdashboard-screen.md",
+      "splitscreeneditor-screen.md"
+    ],
+    "validation_threshold": 320,
+    "output_figma": true
+  }
+}
+```
+
+**Acceptance criteria:**
+- Mockup score ≥ 320/400 (80% compliance)
+- Zero hardcoded colors (all `--sys-color-*` tokens)
+- Typography uses variable fonts (Fraunces, Work Sans, JetBrains Mono)
+- WCAG 2.2 AA contrast (4.5:1 text, 3:1 UI)
+- HiFi blueprint generated in `docs/design/hifi/`
+
+---
+
+### Figma MCP Setup Guide
+
+**1. Install Figma Code Connect:**
+```bash
+cd frontend && yarn add -D @figma/code-connect
+```
+
+**2. Set environment variables** (in `frontend/.env.local`):
+```bash
+FIGMA_ACCESS_TOKEN=figd_your_token_here  # Settings → Tokens → Create new
+FIGMA_FILE_KEY=OQizDLqM9Y3qitGXiabkAv   # From Figma file URL
+```
+
+**3. MCP server** (already configured in `claude_desktop_config.json`):
+```json
+{
+  "figma": {
+    "command": "npx",
+    "args": ["-y", "@anthropic-ai/mcp-server-figma", "--figma-access-token=${FIGMA_ACCESS_TOKEN}"]
+  }
+}
+```
+
+**4. Token sync commands:**
+```bash
+npm run tokens:push       # Push local tokens → Figma variables
+npm run tokens:pull       # Pull Figma variables → local tokens
+npm run tokens:sync       # Bi-directional sync
+npm run tokens:sync:dry   # Preview changes without applying
+npm run tokens:validate   # Validate token integrity
+```
+
+**5. Code Connect verification:**
+```bash
+npx figma connect verify  # Validates all .figma.tsx declarations
+```
+
+**Code Connect files** (link components to Figma nodes):
+- `frontend/src/components/core/Leaf.figma.tsx` — Typography component
+- `frontend/src/components/shared/TechCard.figma.tsx` — Card component
+- `frontend/src/components/ui/Pebble.figma.tsx` — Action/button component
+- `frontend/src/components/ui/Stone.figma.tsx` — Container component
+
+---
+
 ### Task: Create a new page from Figma design
 
 **Time: 2-5 minutes**
@@ -625,6 +750,78 @@ Output:
 - Zero hardcoded colors (all `--sys-color-*`)
 - Typography uses variable fonts (Fraunces, Work Sans, JetBrains Mono)
 - WCAG 2.2 AA contrast (4.5:1 text, 3:1 UI)
+
+---
+
+### Task: Generate hero composition via Gemini (Automated)
+
+**Time: 1-3 minutes**
+
+**Prerequisites:**
+- Gemini API key configured (`GEMINI_API_KEY` in `.env.local`)
+- Asset manifest exists (`frontend/public/assets/kerala-rage-kr-solidarity-manifest.json`)
+- Hero registry exists (`frontend/public/assets/kr-solidarity/kr-solidarity.hero-registry.json`)
+
+**Step 1: Choose a prompt template**
+
+Available templates in `scripts/gemini-prompts/hero-composer.json`:
+
+| Template ID | Use Case | Mood |
+|---|---|---|
+| `deterministic-layered-hero` | Standard layered composition | Configurable (defiance, reflection, etc.) |
+| `cinematic-spiritual-hero` | Devotional/Shiva focal point | Mythic, solemn |
+| `resistance-hero-street` | Anti-colonial urban aesthetic | Aggressive, wheat-paste energy |
+
+**Step 2: Run the generator**
+
+```bash
+npm run hero:generate -- deterministic-layered-hero "Emotional register: Defiance. Cinematic asymmetry."
+```
+
+The generator:
+- Reads the asset manifest (41 assets across 6 layers)
+- Enforces layering rules (substrate → atmospheric → cultural/resistance/spiritual → typography → UI)
+- Calls Gemini 2.0 Flash with structured JSON output
+- Auto-retries on 429 rate limits (up to 5 retries with exponential backoff)
+- Updates the hero registry automatically
+
+**Step 3: Validate the output**
+
+Use the `hero-composition-injector` skill to verify:
+- ID uniqueness (no collisions in registry)
+- Asset references exist in manifest
+- Layer constraints respected (no spiritual + resistance coexistence)
+- Typography pressure profile valid (register, weight_range, tracking_range)
+
+**Step 4: Batch generation via MCP** (for multiple compositions)
+
+```json
+{
+  "task_id": "hero-batch-generation",
+  "assigned_to": "gemini-hero-generator",
+  "priority": "medium",
+  "inputs": {
+    "templates": [
+      {"id": "deterministic-layered-hero", "context": "Register: Defiance"},
+      {"id": "cinematic-spiritual-hero", "context": "Shiva anchor, warm halo"},
+      {"id": "resistance-hero-street", "context": "Bhagat Singh, Melbourne laneway"}
+    ],
+    "validate_after": true,
+    "update_registry": true
+  }
+}
+```
+
+**Output schema** (per composition):
+```json
+{
+  "hero_id": "string",
+  "name": "string",
+  "layers": [{"type": "substrate|atmospheric|cultural|resistance|spiritual", "asset_id": "string", "z_index": 1, "opacity": 1.0, "blend_mode": "normal", "position": "center"}],
+  "typography": {"headline": "string", "supporting": "string", "pressure_profile": {"register": "defiance|reflection|discovery|control|craft", "weight_range": [400, 700], "tracking_range": [-0.02, 0.04]}},
+  "animation": {"bezier": [0.34, 1.56, 0.64, 1], "parallax": true, "scroll_behavior": "weight_shift"}
+}
+```
 
 ---
 

@@ -104,12 +104,12 @@ export const Mark = forwardRef<HTMLInputElement, MarkProps>(
         border-2
         ${
           error
-            ? 'border-[var(--color-solidarity-red)]'
+            ? 'border-[var(--sys-color-solidarityRed-base)]'
             : isChecked
-              ? 'border-[var(--color-ink-gold)] bg-[var(--color-ink-gold)]'
-              : 'border-[var(--color-concrete-grey-base)]'
+              ? 'border-[var(--sys-color-inkGold-base)] bg-[var(--sys-color-inkGold-base)]'
+              : 'border-[var(--sys-color-worker-ash-base)]'
         }
-        ${!disabled && !isChecked ? 'hover:border-[var(--color-concrete-grey)]' : ''}
+        ${!disabled && !isChecked ? 'hover:border-[var(--sys-color-worker-ash-base)]' : ''}
         transition-all duration-standard var(--ease-viscous-breeze)
         ${className}
       `}
@@ -122,14 +122,14 @@ export const Mark = forwardRef<HTMLInputElement, MarkProps>(
                 <Minus
                   className={`
                 w-3.5 h-3.5
-                ${error ? 'text-on-error' : 'text-[var(--color-asphalt-black)]'}
+                ${error ? 'text-on-error' : 'text-[var(--sys-color-charcoalBackground-base)]'}
               `}
                 />
               ) : (
                 <Check
                   className={`
                 w-3.5 h-3.5
-                ${error ? 'text-on-error' : 'text-[var(--color-asphalt-black)]'}
+                ${error ? 'text-on-error' : 'text-[var(--sys-color-charcoalBackground-base)]'}
               `}
                 />
               )}
@@ -142,7 +142,7 @@ export const Mark = forwardRef<HTMLInputElement, MarkProps>(
           <span
             className={`
           text-sm font-field-note font-medium
-          ${error ? 'text-[var(--color-solidarity-red)]' : 'text-[var(--color-paper-white)]'}
+          ${error ? 'text-[var(--sys-color-solidarityRed-base)]' : 'text-[var(--sys-color-worker-ash-steps-6)]'}
           select-none
         `}
           >
@@ -207,12 +207,12 @@ export const MarkRadio = forwardRef<HTMLInputElement, MarkRadioProps>(
         border-2
         ${
           error
-            ? 'border-[var(--color-solidarity-red)]'
+            ? 'border-[var(--sys-color-solidarityRed-base)]'
             : checked
-              ? 'border-[var(--color-ink-gold)]'
-              : 'border-[var(--color-concrete-grey-base)]'
+              ? 'border-[var(--sys-color-inkGold-base)]'
+              : 'border-[var(--sys-color-worker-ash-base)]'
         }
-        ${!disabled && !checked ? 'hover:border-[var(--color-concrete-grey)]' : ''}
+        ${!disabled && !checked ? 'hover:border-[var(--sys-color-worker-ash-base)]' : ''}
         transition-all duration-standard var(--ease-viscous-breeze)
         ${className}
       `}
@@ -228,7 +228,7 @@ export const MarkRadio = forwardRef<HTMLInputElement, MarkRadioProps>(
                 className={`
               w-2.5 h-2.5
              rounded-full
-              ${error ? 'bg-[var(--color-solidarity-red)]' : 'bg-[var(--color-ink-gold)]'}
+              ${error ? 'bg-[var(--sys-color-solidarityRed-base)]' : 'bg-[var(--sys-color-inkGold-base)]'}
               scale-100
             `}
               />
@@ -241,7 +241,7 @@ export const MarkRadio = forwardRef<HTMLInputElement, MarkRadioProps>(
           <span
             className={`
           text-sm font-field-note font-medium
-          ${error ? 'text-[var(--color-solidarity-red)]' : 'text-[var(--color-paper-white)]'}
+          ${error ? 'text-[var(--sys-color-solidarityRed-base)]' : 'text-[var(--sys-color-worker-ash-steps-6)]'}
           select-none
         `}
           >

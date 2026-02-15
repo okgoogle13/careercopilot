@@ -32,11 +32,11 @@ export const JobCard: React.FC<JobCardProps> = ({
   return (
     <Stone
       elevation="raised"
-      className="h-full flex flex-col p-6 transition-all hover:border-[var(--color-leaf-base)]/30"
+      className="h-full flex flex-col p-6 transition-all hover:border-[var(--sys-color-kr-activistSmokeGreen-base)]/30"
     >
       <div className="flex justify-between items-start mb-4">
         <div className="flex gap-4">
-          <div className="w-12 h-12 rounded-stone bg-[var(--color-surface-container-high)] flex items-center justify-center overflow-hidden border border-white/5">
+          <div className="w-12 h-12 rounded-stone bg-[var(--sys-color-charcoalBackground-steps-4)] flex items-center justify-center overflow-hidden border border-white/5">
             {logo ? (
               <img
                 src={logo}
@@ -46,15 +46,15 @@ export const JobCard: React.FC<JobCardProps> = ({
             ) : (
               <Building
                 size={24}
-                className="text-[var(--color-text-tertiary)]"
+                className="text-[var(--sys-color-worker-ash-steps-2)]"
               />
             )}
           </div>
           <div>
-            <h3 className="text-xl font-bold text-[var(--color-text-primary)] leading-tight mb-1">
+            <h3 className="text-xl font-bold text-[var(--sys-color-worker-ash-steps-6)] leading-tight mb-1">
               {title}
             </h3>
-            <p className="text-sm font-medium text-[var(--color-leaf-base)]">{company}</p>
+            <p className="text-sm font-medium text-[var(--sys-color-kr-activistSmokeGreen-base)]">{company}</p>
           </div>
         </div>
         <div className="flex gap-1">
@@ -76,7 +76,7 @@ export const JobCard: React.FC<JobCardProps> = ({
         </div>
       </div>
 
-      <div className="flex flex-wrap gap-4 mb-4 text-sm text-[var(--color-text-secondary)]">
+      <div className="flex flex-wrap gap-4 mb-4 text-sm text-[var(--sys-color-worker-ash-steps-4)]">
         <div className="flex items-center gap-1.5">
           <MapPin size={16} />
           <span>{location}</span>
@@ -85,12 +85,12 @@ export const JobCard: React.FC<JobCardProps> = ({
           <Globe size={16} />
           <span>{type}</span>
         </div>
-        <div className="flex items-center gap-1.5 font-medium text-[var(--color-bark-base)]">
+        <div className="flex items-center gap-1.5 font-medium text-[var(--sys-color-solidaritySmokeOrange-base)]">
           <span>{salary}</span>
         </div>
       </div>
 
-      <p className="text-sm text-[var(--color-text-secondary)] line-clamp-3 mb-6 flex-grow leading-relaxed">
+      <p className="text-sm text-[var(--sys-color-worker-ash-steps-4)] line-clamp-3 mb-6 flex-grow leading-relaxed">
         {description}
       </p>
 
@@ -99,7 +99,7 @@ export const JobCard: React.FC<JobCardProps> = ({
           {tags.map((tag) => (
             <span
               key={tag}
-              className="px-2.5 py-1 rounded-full bg-[var(--color-surface-container-high)] text-[var(--color-text-tertiary)] text-xs font-medium"
+              className="px-2.5 py-1 rounded-full bg-[var(--sys-color-charcoalBackground-steps-4)] text-[var(--sys-color-worker-ash-steps-2)] text-xs font-medium"
             >
               {tag}
             </span>
@@ -123,7 +123,7 @@ export const JobCard: React.FC<JobCardProps> = ({
         </div>
       </div>
 
-      <div className="mt-4 pt-4 border-t border-white/5 text-[10px] text-[var(--color-text-tertiary)] uppercase tracking-widest font-medium">
+      <div className="mt-4 pt-4 border-t border-white/5 text-[10px] text-[var(--sys-color-worker-ash-steps-2)] uppercase tracking-widest font-medium">
         Posted {postedAt}
       </div>
     </Stone>

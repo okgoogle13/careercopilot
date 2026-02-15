@@ -43,10 +43,10 @@ export const DocumentPreview: React.FC<DocumentPreviewProps> = ({
   const handleResetZoom = () => setZoomLevel(100);
 
   return (
-    <div className="min-h-screen bg-[var(--color-background-base)] py-8 px-4">
+    <div className="min-h-screen bg-[var(--sys-color-charcoalBackground-base)] py-8 px-4">
       <div className="max-w-[1600px] mx-auto">
         {/* Header */}
-        <div className="mb-8 border-b border-[var(--color-surface-container-high)] pb-6">
+        <div className="mb-8 border-b border-[var(--sys-color-charcoalBackground-steps-4)] pb-6">
           <div className="flex flex-col xl:flex-row justify-between items-start gap-4">
             <div>
               <Pebble
@@ -57,10 +57,10 @@ export const DocumentPreview: React.FC<DocumentPreviewProps> = ({
               >
                 Back to Templates
               </Pebble>
-              <h1 className="text-display-medium font-bold text-[var(--color-text-primary)] mb-1">
+              <h1 className="text-display-medium font-bold text-[var(--sys-color-worker-ash-steps-6)] mb-1">
                 Document Preview
               </h1>
-              <div className="flex items-center gap-2 text-body-medium text-[var(--color-text-secondary)]">
+              <div className="flex items-center gap-2 text-body-medium text-[var(--sys-color-worker-ash-steps-4)]">
                 <FileText size={16} />
                 <span>{mockDocument.title}</span>
                 <span>•</span>
@@ -104,12 +104,12 @@ export const DocumentPreview: React.FC<DocumentPreviewProps> = ({
             {/* Document Info */}
             <Stone elevation="flat">
               <div className="p-4">
-                <h3 className="text-title-small font-bold text-[var(--color-text-primary)] mb-4 border-b border-[var(--color-surface-container)] pb-2">
+                <h3 className="text-title-small font-bold text-[var(--sys-color-worker-ash-steps-6)] mb-4 border-b border-[var(--sys-color-charcoalBackground-steps-3)] pb-2">
                   Document Info
                 </h3>
                 <div className="flex flex-col gap-3">
                   <div className="flex justify-between items-center">
-                    <span className="text-body-small text-[var(--color-text-secondary)]">
+                    <span className="text-body-small text-[var(--sys-color-worker-ash-steps-4)]">
                       Type:
                     </span>
                     <StatusBadge
@@ -119,26 +119,26 @@ export const DocumentPreview: React.FC<DocumentPreviewProps> = ({
                     />
                   </div>
                   <div className="flex justify-between items-center">
-                    <span className="text-body-small text-[var(--color-text-secondary)]">
+                    <span className="text-body-small text-[var(--sys-color-worker-ash-steps-4)]">
                       Template:
                     </span>
-                    <span className="text-body-small font-semibold text-[var(--color-text-primary)]">
+                    <span className="text-body-small font-semibold text-[var(--sys-color-worker-ash-steps-6)]">
                       {templateName}
                     </span>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span className="text-body-small text-[var(--color-text-secondary)]">
+                    <span className="text-body-small text-[var(--sys-color-worker-ash-steps-4)]">
                       Pages:
                     </span>
-                    <span className="text-body-small font-semibold text-[var(--color-text-primary)]">
+                    <span className="text-body-small font-semibold text-[var(--sys-color-worker-ash-steps-6)]">
                       {mockDocument.pages}
                     </span>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span className="text-body-small text-[var(--color-text-secondary)]">
+                    <span className="text-body-small text-[var(--sys-color-worker-ash-steps-4)]">
                       Modified:
                     </span>
-                    <div className="flex items-center gap-1 text-body-small font-semibold text-[var(--color-text-primary)]">
+                    <div className="flex items-center gap-1 text-body-small font-semibold text-[var(--sys-color-worker-ash-steps-6)]">
                       <Clock size={12} />
                       <span>{mockDocument.lastModified}</span>
                     </div>
@@ -150,15 +150,15 @@ export const DocumentPreview: React.FC<DocumentPreviewProps> = ({
             {/* Zoom Controls */}
             <Stone elevation="flat">
               <div className="p-4">
-                <h3 className="text-title-small font-bold text-[var(--color-text-primary)] mb-4 border-b border-[var(--color-surface-container)] pb-2">
+                <h3 className="text-title-small font-bold text-[var(--sys-color-worker-ash-steps-6)] mb-4 border-b border-[var(--sys-color-charcoalBackground-steps-3)] pb-2">
                   Zoom Controls
                 </h3>
                 <div className="flex flex-col gap-3 items-center">
-                  <div className="flex items-center gap-2 bg-[var(--color-surface-container)] rounded-lg p-1">
+                  <div className="flex items-center gap-2 bg-[var(--sys-color-charcoalBackground-steps-3)] rounded-lg p-1">
                     <button
                       onClick={handleZoomOut}
                       disabled={zoomLevel <= 50}
-                      className="p-2 rounded-md hover:bg-[var(--color-surface-base)] disabled:opacity-50 transition-colors"
+                      className="p-2 rounded-md hover:bg-[var(--sys-color-charcoalBackground-steps-2)] disabled:opacity-50 transition-colors"
                     >
                       <ZoomOut size={16} />
                     </button>
@@ -168,7 +168,7 @@ export const DocumentPreview: React.FC<DocumentPreviewProps> = ({
                     <button
                       onClick={handleZoomIn}
                       disabled={zoomLevel >= 200}
-                      className="p-2 rounded-md hover:bg-[var(--color-surface-base)] disabled:opacity-50 transition-colors"
+                      className="p-2 rounded-md hover:bg-[var(--sys-color-charcoalBackground-steps-2)] disabled:opacity-50 transition-colors"
                     >
                       <ZoomIn size={16} />
                     </button>

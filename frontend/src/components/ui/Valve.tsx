@@ -83,9 +83,9 @@ export const Valve = forwardRef<HTMLInputElement, ValveProps>(
                         ${
                           isChecked
                             ? `bg-[var(--ref-palette-${color}-40)]`
-                            : 'bg-[var(--color-concrete-grey-base)]'
+                            : 'bg-[var(--sys-color-worker-ash-base)]'
                         }
-                        peer-focus:ring-2 peer-focus:ring-[var(--color-ink-gold)]/30
+                        peer-focus:ring-2 peer-focus:ring-[var(--sys-color-inkGold-base)]/30
                         border border-white/10
                     `}
             />
@@ -95,7 +95,7 @@ export const Valve = forwardRef<HTMLInputElement, ValveProps>(
               className={`
                         absolute top-0.5 left-0.5
                         ${currentSize.thumb}
-                        bg-[var(--color-paper-white)]
+                        bg-[var(--sys-color-worker-ash-steps-6)]
                         rounded-full
                         shadow-sm
                         transition-all duration-300 var(--ease-viscous-breeze)
@@ -105,7 +105,7 @@ export const Valve = forwardRef<HTMLInputElement, ValveProps>(
           </div>
 
           {label && (
-            <span className="text-sm font-field-note font-medium text-[var(--color-paper-white)]">
+            <span className="text-sm font-field-note font-medium text-[var(--sys-color-worker-ash-steps-6)]">
               {label}
             </span>
           )}
@@ -113,7 +113,7 @@ export const Valve = forwardRef<HTMLInputElement, ValveProps>(
 
         {helperText && (
           <p
-            className={`text-xs px-1 ${error ? 'text-[var(--color-solidarity-red)]' : 'text-[var(--color-concrete-grey-dark)]'}`}
+            className={`text-xs px-1 ${error ? 'text-[var(--sys-color-solidarityRed-base)]' : 'text-[var(--sys-color-worker-ash-steps-2)]'}`}
           >
             {helperText}
           </p>

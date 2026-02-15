@@ -57,7 +57,7 @@ def _load_genai():
 class FlashSidekickServer:
     def __init__(self):
         self.api_key = os.getenv("GEMINI_API_KEY", "")
-        self.model_name = os.getenv("GEMINI_MODEL", "gemini-1.5-flash")
+        self.model_name = os.getenv("GEMINI_MODEL", "gemini-3-flash-preview")
         self._model = None
         self._initialized = False
 
