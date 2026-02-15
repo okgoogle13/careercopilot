@@ -1,10 +1,14 @@
+import React, { useState, useEffect } from 'react';
 import { Lens, LensArea, Pebble, StatusBadge, Stone } from '@/components/ui';
 import { SkillBreakdownCard } from '@/components/SkillBreakdownCard';
 import { EvidenceUploader } from '@/features/ingestion/components/EvidenceUploader';
 import { m3Toast } from '@/utils/toast';
 import { motion } from 'framer-motion';
 import { Building, Compass, Copy, Gauge, Sparkles, Target } from 'lucide-react';
-import React, { useState } from 'react';
+import { LayeredHero } from '@/components/kerala-rage/LayeredHero';
+import { loadHeroRegistry } from '@/design/hero/heroRegistry';
+import { composeHero } from '@/utils/heroComposer';
+import type { SolidarityManifest } from '@/design/hero/heroTypes';
 
 // KrDark Assets
 import grindingStone from '../assets/KrMotifs/grinding_stone.jpg';
@@ -61,6 +65,35 @@ export const AnalysisPage: React.FC = () => {
   const [strategyResult, setStrategyResult] = useState<StrategyResult | null>(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [isGeneratingStrategy, setIsGeneratingStrategy] = useState(false);
+  const [heroData, setHeroData] = useState<{
+    layers: any[];
+    typography: any;
+    animation: any;
+  } | null>(null);
+
+  useEffect(() => {
+    async function initHero() {
+      try {
+        const [manifest, registry] = await Promise.all([
+          fetch('/assets/kerala-rage-kr-solidarity-manifest.json').then((r) => r.json()),
+          loadHeroRegistry(),
+        ]);
+
+        const result = composeHero(manifest as SolidarityManifest, registry, 'shiva-monolith-spiritual');
+
+        if (result.valid) {
+          setHeroData({
+            layers: result.resolvedLayers,
+            typography: result.typography,
+            animation: result.animation ?? result.motion,
+          });
+        }
+      } catch (error) {
+        console.error('Failed to load hero for AnalysisPage:', error);
+      }
+    }
+    initHero();
+  }, []);
 
   const handleAnalysis = async () => {
     if (!resumeText || !jobDescription) {
@@ -121,12 +154,18 @@ export const AnalysisPage: React.FC = () => {
   };
 
   return (
-    <div className="p-8 max-w-[1440px] mx-auto min-h-screen bg-asphalt-black-darkest relative overflow-hidden">
-      {/* Texture Layer: Lab Overlay */}
-      <div
-        className="absolute inset-0 opacity-5 pointer-events-none mix-blend-screen"
-        style={{ backgroundImage: `url(${paperGrain})`, backgroundRepeat: 'repeat' }}
-      />
+    <div className="p-8 max-w-[1440px] mx-auto min-h-screen bg-transparent relative overflow-hidden">
+      {/* Background Hero Layer */}
+      {heroData && (
+        <div className="fixed inset-0 z-0">
+          <LayeredHero
+            layers={heroData.layers}
+            typography={{ ...heroData.typography, headline: '', supporting: '' }} // Hide text in dashboard background
+            animation={heroData.animation}
+            className="!h-full !w-full"
+          />
+        </div>
+      )}
 
       {/* Header: Analytical Focus */}
       <header className="mb-12 flex items-center justify-between border-b border-concrete-grey/10 pb-8 relative z-10">

@@ -1,20 +1,20 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img">
-  <title>Stone — Heavy Container</title>
-  <desc>Chunky slab container with subtle crack accent wedge for kr-solidarity UI kit. Heavy visual weight primitive.</desc>
+  <title>Screenprint Stamp</title>
+  <desc>Rough screenprint verification stamp mark with checkmark and abstract bars. No literal text. Kerala Rage kr-solidarity UI primitive.</desc>
   <g id="base">
-    <rect x="36" y="72" width="440" height="368" rx="16" ry="4" fill="none" stroke="var(--kr-text)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-    <rect x="36" y="72" width="440" height="368" rx="16" ry="4" fill="var(--kr-tertiary)" opacity="0.06"/>
+    <path d="M96 112 Q102 98 148 96 L212 94 Q258 92 312 96 L368 98 Q412 102 418 112 L422 156 Q424 198 420 248 L418 296 Q416 342 420 388 L418 402 Q412 414 368 416 L312 418 Q258 420 212 418 L148 416 Q102 414 96 402 L92 356 Q90 312 94 258 L92 204 Q90 156 96 112 Z" fill="none" stroke="var(--kr-primary)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity="0.8"/>
+    <path d="M108 124 Q114 112 156 110 L216 108 Q256 106 304 110 L356 112 Q398 116 404 124 L408 164 Q410 204 406 252 L404 296 Q402 336 406 376 L404 388 Q398 398 356 400 L304 402 Q256 404 216 402 L156 400 Q114 398 108 388 L104 348 Q102 308 106 258 L104 208 Q102 168 108 124 Z" fill="none" stroke="var(--kr-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.35"/>
   </g>
   <g id="content">
-    <rect x="68" y="108" width="240" height="16" rx="8" ry="4" fill="var(--kr-text)" opacity="0.6"/>
-    <rect x="68" y="140" width="160" height="10" rx="5" ry="3" fill="var(--kr-tertiary)" opacity="0.35"/>
-    <line x1="68" y1="176" x2="444" y2="176" stroke="var(--kr-tertiary)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="0.2"/>
-    <rect x="68" y="204" width="376" height="180" rx="12" ry="6" fill="var(--kr-tertiary)" opacity="0.07"/>
-    <rect x="88" y="224" width="336" height="8" rx="4" ry="2" fill="var(--kr-text)" opacity="0.15"/>
-    <rect x="88" y="248" width="300" height="8" rx="3" ry="2" fill="var(--kr-text)" opacity="0.12"/>
+    <path d="M172 268 L216 328 L348 188" fill="none" stroke="var(--kr-text)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" opacity="0.75"/>
+    <line x1="148" y1="156" x2="368" y2="156" stroke="var(--kr-text)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="0.3"/>
+    <line x1="156" y1="172" x2="312" y2="172" stroke="var(--kr-text)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.2"/>
+    <line x1="148" y1="366" x2="368" y2="366" stroke="var(--kr-text)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="0.3"/>
+    <line x1="172" y1="382" x2="338" y2="382" stroke="var(--kr-text)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.2"/>
   </g>
   <g id="accent">
-    <path d="M420 72 L476 132 L476 108 Q476 80 456 72 Z" fill="var(--kr-primary)" opacity="0.35"/>
-    <path d="M36 340 Q42 360 56 350 Q68 342 74 356" fill="none" stroke="var(--kr-secondary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.4"/>
+    <ellipse cx="378" cy="128" rx="24" ry="18" fill="var(--kr-secondary)" opacity="0.4" transform="rotate(-8 378 128)"/>
+    <path d="M108 384 Q118 396 134 388" fill="none" stroke="var(--kr-tertiary)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="0.45"/>
+    <circle cx="256" cy="256" r="68" fill="none" stroke="var(--kr-secondary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.12"/>
   </g>
 </svg>

@@ -58,17 +58,18 @@ Orchestrates the kerala-rage kr-solidarity "Maximum Expressive Playful" typograp
 ### 3. Tertiary "Accent" (Flourish & Special)
 
 **Role**: High-impact, "alive" brand moments.
-**Options**:
+**Font**: **Nabla** (COLRv1 Color Font).
+**M3 Category**: Accent/Decor.
+**Playfulness Strategy**:
 
-- **Option A (kerala-streetprint Hand)**: **Variable Script** (e.g., _Birthstone Bounce_ or _Petit Formal_).
-  - _Effect_: Authentic 19th-century penmanship.
-- **Option B (Cyberpunk)**: **COLRv1 Color Fonts** (e.g., _Nabla_). \* _Effect_: Modern, digital-native flourish.
-  **M3 Category**: Accent/Decor.
-  **Playfulness Strategy**:
+- **The "Dramatic Juxtaposition"**: Pair ultra-clean Sans/Serif with unexpected "Wild Cursive" or colorful Nabla accents.
+- **Palette Switching**: Use CSS `@font-palette-values` to instantly re-theme Nabla from "Sepia/Ink" (Day) to "Kerala Rage Neon" (Night).
+  - **Kerala Rage Sepia**: Brown/Cream (#4a3b32, #d4c5b0) — streetprint aesthetic
+  - **Kerala Rage Neon**: kr-ink-gold/waratahRed (#D4A84B, #C45C4B) — cyberpunk aesthetic
+- **Depth Animation**: Animate internal COLRv1 axes (like shadow depth or highlight position) on user interaction.
+- **Brand Moments**: Use Nabla for success badges, celebration states, feature highlights, and accent annotations.
 
-* **The "Dramatic Juxtaposition"**: Pair ultra-clean Sans/Serif with unexpected "Wild Cursive" headers.
-* **Palette Switching**: Use CSS `@font-palette-values` to instantly re-theme flourishes from "Sepia/Ink" (Day) to "Neon/Gaslight" (Night).
-* **Depth Animation**: Animate internal COLRv1 axes (like shadow depth or highlight position) on user interaction.
+**Alternative (kerala-streetprint Hand)**: **Variable Script** (e.g., _Birthstone Bounce_ or _Petit Formal_) for authentic 19th-century penmanship when color fonts are not supported.
 
 ---
 
