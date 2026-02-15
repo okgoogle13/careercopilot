@@ -1,19 +1,27 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img">
-  <title>Cabinet — Drawer / Sheet Primitive</title>
-  <desc>Base panel with offset handle notch for drawer or bottom-sheet UI primitive in kr-solidarity UI kit.</desc>
+  <title>Blueprint Layout Watermark</title>
+  <desc>Faint layout rectangles, columns, and measurement marks as architectural watermark overlay. Kerala Rage kr-solidarity UI primitive.</desc>
   <g id="base">
-    <rect x="32" y="128" width="448" height="352" rx="22" ry="8" fill="none" stroke="var(--kr-tertiary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="42" y="38" width="188" height="278" rx="2" ry="2" fill="none" stroke="var(--kr-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.06"/>
+    <rect x="248" y="38" width="222" height="132" rx="2" ry="2" fill="none" stroke="var(--kr-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.04"/>
+    <rect x="248" y="188" width="222" height="128" rx="2" ry="2" fill="none" stroke="var(--kr-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.06"/>
+    <rect x="42" y="334" width="428" height="142" rx="2" ry="2" fill="none" stroke="var(--kr-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.04"/>
   </g>
   <g id="content">
-    <rect x="196" y="142" width="120" height="8" rx="4" ry="3" fill="var(--kr-tertiary)" opacity="0.6"/>
-    <line x1="64" y1="180" x2="448" y2="180" stroke="var(--kr-tertiary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.25"/>
-    <rect x="64" y="208" width="380" height="10" rx="5" ry="3" fill="var(--kr-text)" opacity="0.2"/>
-    <rect x="64" y="232" width="320" height="10" rx="4" ry="2" fill="var(--kr-text)" opacity="0.15"/>
-    <rect x="64" y="280" width="180" height="120" rx="14" ry="6" fill="var(--kr-tertiary)" opacity="0.08"/>
-    <rect x="268" y="280" width="180" height="120" rx="8" ry="12" fill="var(--kr-tertiary)" opacity="0.08"/>
+    <line x1="42" y1="24" x2="42" y2="32" stroke="var(--kr-text)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.06"/>
+    <line x1="230" y1="24" x2="230" y2="32" stroke="var(--kr-text)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.06"/>
+    <line x1="42" y1="28" x2="230" y2="28" stroke="var(--kr-text)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.05"/>
+    <line x1="26" y1="38" x2="34" y2="38" stroke="var(--kr-text)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.06"/>
+    <line x1="26" y1="316" x2="34" y2="316" stroke="var(--kr-text)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.06"/>
+    <line x1="30" y1="38" x2="30" y2="316" stroke="var(--kr-text)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.05"/>
+    <line x1="136" y1="38" x2="136" y2="316" stroke="var(--kr-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.03" stroke-dasharray="8 12"/>
+    <line x1="360" y1="38" x2="360" y2="170" stroke="var(--kr-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.03" stroke-dasharray="8 12"/>
+    <line x1="248" y1="104" x2="470" y2="104" stroke="var(--kr-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.03" stroke-dasharray="8 12"/>
   </g>
   <g id="accent">
-    <rect x="218" y="120" width="84" height="22" rx="10" ry="6" fill="var(--kr-secondary)" opacity="0.5" transform="rotate(-1 260 131)"/>
-    <path d="M440 440 Q460 460 472 440" fill="none" stroke="var(--kr-primary)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="0.35"/>
+    <circle cx="42" cy="38" r="3" fill="var(--kr-secondary)" opacity="0.07"/>
+    <circle cx="470" cy="316" r="3" fill="var(--kr-secondary)" opacity="0.06"/>
+    <path d="M476 484 L484 476" stroke="var(--kr-tertiary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.08"/>
+    <path d="M476 476 L484 484" stroke="var(--kr-tertiary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.08"/>
   </g>
 </svg>

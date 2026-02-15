@@ -141,7 +141,7 @@ Located in `frontend/src/components/ui/`:
 - ❌ Uniform font weights (use variable fonts with semantic weights)
 - ❌ Button states without token variables
 - ✅ All colors from semantic tokens (`--sys-color-*`)
-- ✅ All fonts from {Fraunces, Work Sans, JetBrains Mono}
+- ✅ All fonts from {Fraunces, Work Sans, JetBrains Mono, Nabla (COLRv1 accent)}
 - ✅ Asymmetric spacing and border radius per design spec
 - ✅ Extreme contrast typography (M3 Expressive standard)
 

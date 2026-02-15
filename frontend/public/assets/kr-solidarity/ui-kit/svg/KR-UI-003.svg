@@ -1,21 +1,37 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img">
-  <title>Job Tile — Listing Card with Seed Slot</title>
-  <desc>Job listing card primitive with obvious seed badge slot at top-right for kr-solidarity UI kit.</desc>
+  <title>Screenprint Grit Particles</title>
+  <desc>Sparse screenprint grit dots and specks for atmospheric texture overlay. Repeat-safe with matching edge particles. Kerala Rage kr-solidarity UI primitive.</desc>
   <g id="base">
-    <rect x="40" y="44" width="432" height="424" rx="20" ry="6" fill="none" stroke="var(--kr-tertiary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="78" cy="42" r="2.5" fill="var(--kr-text)" opacity="0.08"/>
+    <circle cx="234" cy="28" r="1.8" fill="var(--kr-text)" opacity="0.06"/>
+    <circle cx="412" cy="56" r="2.2" fill="var(--kr-text)" opacity="0.07"/>
+    <circle cx="488" cy="134" r="2" fill="var(--kr-text)" opacity="0.09"/>
+    <circle cx="156" cy="98" r="1.5" fill="var(--kr-text)" opacity="0.05"/>
+    <circle cx="342" cy="112" r="2.2" fill="var(--kr-text)" opacity="0.06"/>
+    <circle cx="52" cy="186" r="2.8" fill="var(--kr-text)" opacity="0.08"/>
+    <circle cx="298" cy="172" r="1.6" fill="var(--kr-text)" opacity="0.05"/>
+    <circle cx="462" cy="224" r="2.4" fill="var(--kr-text)" opacity="0.1"/>
+    <circle cx="128" cy="268" r="2" fill="var(--kr-text)" opacity="0.07"/>
+    <circle cx="368" cy="286" r="1.8" fill="var(--kr-text)" opacity="0.04"/>
+    <circle cx="42" cy="348" r="2.6" fill="var(--kr-text)" opacity="0.06"/>
+    <circle cx="216" cy="332" r="1.4" fill="var(--kr-text)" opacity="0.05"/>
+    <circle cx="478" cy="372" r="2.2" fill="var(--kr-text)" opacity="0.09"/>
+    <circle cx="98" cy="428" r="1.8" fill="var(--kr-text)" opacity="0.06"/>
+    <circle cx="322" cy="418" r="2.8" fill="var(--kr-text)" opacity="0.04"/>
+    <circle cx="186" cy="478" r="2" fill="var(--kr-text)" opacity="0.07"/>
+    <circle cx="438" cy="468" r="1.6" fill="var(--kr-text)" opacity="0.06"/>
   </g>
   <g id="content">
-    <rect x="72" y="88" width="200" height="14" rx="7" ry="4" fill="var(--kr-text)" opacity="0.7"/>
-    <rect x="72" y="118" width="140" height="10" rx="5" ry="3" fill="var(--kr-tertiary)" opacity="0.5"/>
-    <line x1="72" y1="156" x2="400" y2="156" stroke="var(--kr-tertiary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.3"/>
-    <rect x="72" y="180" width="340" height="8" rx="4" ry="2" fill="var(--kr-text)" opacity="0.2"/>
-    <rect x="72" y="200" width="290" height="8" rx="4" ry="3" fill="var(--kr-text)" opacity="0.2"/>
-    <rect x="72" y="280" width="100" height="36" rx="14" ry="6" fill="var(--kr-primary)" opacity="0.15"/>
-    <rect x="190" y="280" width="80" height="36" rx="10" ry="8" fill="var(--kr-tertiary)" opacity="0.12"/>
-    <rect x="72" y="370" width="180" height="42" rx="18" ry="6" fill="var(--kr-primary)" opacity="0.2"/>
+    <ellipse cx="168" cy="156" rx="3.5" ry="2.5" fill="var(--kr-text)" opacity="0.04" transform="rotate(22 168 156)"/>
+    <ellipse cx="386" cy="198" rx="2.5" ry="4" fill="var(--kr-text)" opacity="0.03" transform="rotate(-15 386 198)"/>
+    <ellipse cx="72" cy="312" rx="4" ry="2" fill="var(--kr-text)" opacity="0.05" transform="rotate(38 72 312)"/>
+    <ellipse cx="446" cy="308" rx="3" ry="2.5" fill="var(--kr-text)" opacity="0.03" transform="rotate(-28 446 308)"/>
+    <ellipse cx="258" cy="242" rx="2.5" ry="3.5" fill="var(--kr-text)" opacity="0.04" transform="rotate(45 258 242)"/>
+    <ellipse cx="352" cy="448" rx="3.5" ry="2" fill="var(--kr-text)" opacity="0.04" transform="rotate(18 352 448)"/>
   </g>
   <g id="accent">
-    <rect x="378" y="52" width="82" height="54" rx="8" ry="4" fill="var(--kr-secondary)" opacity="0.8" transform="rotate(2 419 79)"/>
-    <rect x="390" y="64" width="50" height="6" rx="3" ry="2" fill="var(--kr-surface)" opacity="0.9"/>
+    <circle cx="196" cy="388" r="3" fill="var(--kr-secondary)" opacity="0.06"/>
+    <circle cx="418" cy="142" r="2.8" fill="var(--kr-primary)" opacity="0.05"/>
+    <circle cx="76" cy="482" r="2" fill="var(--kr-tertiary)" opacity="0.07"/>
   </g>
 </svg>

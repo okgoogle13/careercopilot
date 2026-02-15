@@ -1,16 +1,18 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img">
-  <title>Seed — Badge / Overlay Token</title>
-  <desc>Small asymmetrical capsule badge primitive for kr-solidarity UI kit. Stamp-like overlay token with organic asymmetry.</desc>
+  <title>Wheat Paste Tear</title>
+  <desc>Irregular torn poster edge running full width as a horizontal section divider. Clip-friendly single edge fragment. Kerala Rage kr-solidarity UI primitive.</desc>
   <g id="base">
-    <rect x="126" y="186" width="268" height="148" rx="42" ry="18" fill="none" stroke="var(--kr-surface)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M0 312 Q18 296 36 308 L58 294 Q82 310 106 292 L132 304 Q156 288 182 300 L208 286 Q234 302 260 290 L288 298 Q312 282 340 296 L366 284 Q392 300 418 288 L444 296 Q468 280 494 294 L512 286 L512 512 L0 512 Z" fill="var(--kr-primary)" opacity="0.85"/>
+    <path d="M0 328 Q22 316 44 326 L68 312 Q94 328 118 310 L146 322 Q170 306 198 318 L224 304 Q250 320 278 308 L304 316 Q330 300 358 314 L384 302 Q410 318 438 306 L464 314 Q488 298 512 310 L512 512 L0 512 Z" fill="var(--kr-surface)" opacity="0.6"/>
   </g>
   <g id="content">
-    <rect x="158" y="224" width="140" height="10" rx="5" ry="3" fill="var(--kr-text)" opacity="0.7"/>
-    <rect x="162" y="248" width="96" height="8" rx="4" ry="2" fill="var(--kr-text)" opacity="0.4"/>
-    <rect x="310" y="218" width="52" height="52" rx="14" ry="8" fill="var(--kr-tertiary)" opacity="0.3"/>
+    <path d="M0 356 Q28 342 56 354 L84 340 Q114 356 142 338 L174 348 Q204 332 236 346 L268 334 Q298 350 330 336 L362 344 Q392 328 424 342 L456 332 Q484 346 512 338" fill="none" stroke="var(--kr-text)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.3"/>
+    <path d="M0 392 Q32 380 64 390 L96 376 Q130 392 162 378 L196 386 Q228 370 264 384 L298 372 Q332 388 366 374 L400 382 Q434 366 470 380 L512 372" fill="none" stroke="var(--kr-text)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.18"/>
+    <path d="M24 436 Q58 424 92 434 L128 420 Q164 436 198 422 L236 432 Q272 416 310 428 L348 418 Q386 434 422 420 L460 430 Q490 418 512 426" fill="none" stroke="var(--kr-text)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.1"/>
   </g>
   <g id="accent">
-    <ellipse cx="372" cy="198" rx="18" ry="14" fill="var(--kr-secondary)" opacity="0.85" transform="rotate(-6 372 198)"/>
-    <path d="M134 310 Q156 326 180 312" fill="none" stroke="var(--kr-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M86 296 Q94 282 104 298" fill="none" stroke="var(--kr-secondary)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+    <ellipse cx="378" cy="308" rx="10" ry="6" fill="var(--kr-secondary)" opacity="0.4" transform="rotate(-12 378 308)"/>
+    <path d="M232 290 Q240 278 248 292" fill="none" stroke="var(--kr-tertiary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
   </g>
 </svg>

@@ -72,7 +72,8 @@
     "docs": "jsdoc -c jsdoc.config.json",
     "docs:serve": "serve docs/api",
     "docs:clean": "rimraf docs/api",
-    "docs:build": "yarn docs:clean && yarn docs"
+    "docs:build": "yarn docs:clean && yarn docs",
+    "hero:generate": "npx ts-node scripts/gemini-hero-generator.ts"
   },
   "config": {
     "commitizen": {

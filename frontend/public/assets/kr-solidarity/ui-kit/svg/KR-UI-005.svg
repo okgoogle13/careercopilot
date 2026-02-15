@@ -1,16 +1,34 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img">
-  <title>Pebble — Button Primitive</title>
-  <desc>Asymmetric pill button with inner inset detail for kr-solidarity UI kit.</desc>
+  <title>Charcoal Paper Substrate</title>
+  <desc>Subtle charcoal paper grain texture using simple shapes for stable background substrate. Low-contrast speckle. Kerala Rage kr-solidarity UI primitive.</desc>
   <g id="base">
-    <rect x="76" y="188" width="366" height="136" rx="42" ry="18" fill="var(--kr-primary)" stroke="var(--kr-primary)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="0" y="0" width="512" height="512" fill="var(--kr-surface)" opacity="0.03"/>
+    <path d="M0 32 Q128 28 256 34 Q384 30 512 32" fill="none" stroke="var(--kr-text)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.04"/>
+    <path d="M0 96 Q140 92 280 98 Q420 94 512 96" fill="none" stroke="var(--kr-text)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.03"/>
+    <path d="M0 164 Q120 160 248 166 Q376 162 512 164" fill="none" stroke="var(--kr-text)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.04"/>
+    <path d="M0 232 Q144 228 288 234 Q432 230 512 232" fill="none" stroke="var(--kr-text)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.03"/>
+    <path d="M0 298 Q136 294 272 300 Q408 296 512 298" fill="none" stroke="var(--kr-text)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.04"/>
+    <path d="M0 366 Q148 362 296 368 Q444 364 512 366" fill="none" stroke="var(--kr-text)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.03"/>
+    <path d="M0 432 Q132 428 264 434 Q396 430 512 432" fill="none" stroke="var(--kr-text)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.04"/>
+    <path d="M0 496 Q124 492 248 498 Q372 494 512 496" fill="none" stroke="var(--kr-text)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.03"/>
   </g>
   <g id="content">
-    <rect x="108" y="210" width="302" height="92" rx="34" ry="14" fill="var(--kr-surface)" opacity="0.15"/>
-    <rect x="160" y="246" width="148" height="14" rx="7" ry="4" fill="var(--kr-surface)" opacity="0.9"/>
-    <rect x="164" y="270" width="80" height="8" rx="4" ry="2" fill="var(--kr-surface)" opacity="0.45"/>
+    <circle cx="86" cy="54" r="1.5" fill="var(--kr-text)" opacity="0.06"/>
+    <circle cx="234" cy="118" r="2" fill="var(--kr-text)" opacity="0.05"/>
+    <circle cx="412" cy="78" r="1.8" fill="var(--kr-text)" opacity="0.07"/>
+    <circle cx="156" cy="212" r="1.2" fill="var(--kr-text)" opacity="0.05"/>
+    <circle cx="348" cy="186" r="2.2" fill="var(--kr-text)" opacity="0.06"/>
+    <circle cx="68" cy="324" r="1.6" fill="var(--kr-text)" opacity="0.07"/>
+    <circle cx="288" cy="358" r="1.4" fill="var(--kr-text)" opacity="0.05"/>
+    <circle cx="456" cy="296" r="1.8" fill="var(--kr-text)" opacity="0.06"/>
+    <circle cx="192" cy="442" r="2" fill="var(--kr-text)" opacity="0.05"/>
+    <circle cx="378" cy="468" r="1.5" fill="var(--kr-text)" opacity="0.07"/>
+    <ellipse cx="122" cy="148" rx="3" ry="1.5" fill="var(--kr-text)" opacity="0.04" transform="rotate(14 122 148)"/>
+    <ellipse cx="396" cy="408" rx="2.5" ry="1.8" fill="var(--kr-text)" opacity="0.04" transform="rotate(-22 396 408)"/>
   </g>
   <g id="accent">
-    <ellipse cx="394" cy="218" rx="20" ry="14" fill="var(--kr-secondary)" opacity="0.6" transform="rotate(-10 394 218)"/>
-    <path d="M92 296 Q110 318 132 302" fill="none" stroke="var(--kr-tertiary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+    <path d="M0 8 Q4 12 8 8" fill="none" stroke="var(--kr-tertiary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.06"/>
+    <path d="M504 502 Q508 498 512 504" fill="none" stroke="var(--kr-tertiary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.06"/>
+    <circle cx="256" cy="256" r="1" fill="var(--kr-primary)" opacity="0.04"/>
   </g>
 </svg>

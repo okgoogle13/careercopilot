@@ -94,9 +94,16 @@ Unless intent demands otherwise:
 - accent: one small “seed/marker/fold” feature per accent_usage
 
 ## Examples (reference only; do not copy verbatim)
-- Lens Primary: asymmetric container + top band + corner accent
-- Job Tile: asymmetric layout blocks + seed slot accent
-- Document Tile: irregular fold corner + lines
+- Wheat Paste Tear: irregular torn edge contour, ripped poster feel — NOT a card/container
+- Halo Disk: imperfect circle halo with inner arc ticks — NOT a button
+- Screenprint Grit: sparse dots/specks for texture overlay — NOT a listing tile
+- Blueprint Grid: thin technical grid lines with uneven offsets — NOT a document preview
+- Charcoal Paper Substrate: subtle paper grain speckle — NOT a button primitive
+- Blueprint Layout Watermark: faint layout rectangles/columns — NOT a drawer/sheet
+- Screenprint Stamp: rough border + checkmark + abstract bars (no text) — NOT a slab container
+
+CRITICAL: KR-UI primitives are texture/overlay/decoration elements, NOT UI card/tile layouts.
+Do NOT generate card containers, button shapes, or listing tiles for these asset IDs.
 
 ## File Save
 Write output to:
