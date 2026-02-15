@@ -14,13 +14,30 @@ const HIFI_DIR = path.join(__dirname, '../../docs/design/hifi');
 
 // Semantic matchers for TODO descriptions → token IDs
 const SEMANTIC_MATCHERS = [
+  // Primary UI-KIT assets (001-007)
+  { pattern: /wheat.?paste|torn.?edge|tear/i, token: 'KR-UI-001' },
   { pattern: /halo.?disk|radiant.?circle/i, token: 'KR-UI-002' },
   { pattern: /screenprint.?grit|particles|dust/i, token: 'KR-UI-003' },
-  { pattern: /blueprint.?grid|technical.?grid/i, token: 'KR-UI-004' },
+  { pattern: /blueprint.?grid|technical.?grid|field.?grid/i, token: 'KR-UI-004' },
   { pattern: /charcoal.?paper|neutral.?base/i, token: 'KR-UI-005' },
-  { pattern: /blueprint.?layout|watermark|layout|field.?layout/i, token: 'KR-UI-006' },
-  { pattern: /wheat.?paste|torn.?edge|tear/i, token: 'KR-UI-001' },
-  { pattern: /screenprint.?stamp|verified|stamp/i, token: 'KR-UI-007' },
+  { pattern: /blueprint.?layout|watermark|field.?layout/i, token: 'KR-UI-006' },
+  { pattern: /screenprint.?stamp|verified|stamp|ink.?slam/i, token: 'KR-UI-007' },
+
+  // Motifs & Icons (008-019)
+  { pattern: /elite.?mastery|mastery.?motif/i, token: 'KR-UI-008' },
+  { pattern: /mastery.?chart|chart.?pattern/i, token: 'KR-UI-009' },
+  { pattern: /success.?screen|success.?motif/i, token: 'KR-UI-010' },
+  { pattern: /historical.?record|history.?texture/i, token: 'KR-UI-011' },
+  { pattern: /metric.?motif|metric.?graph/i, token: 'KR-UI-012' },
+  { pattern: /scanning|holographic/i, token: 'KR-UI-013' },
+  { pattern: /resolved.?card|card.?motif/i, token: 'KR-UI-014' },
+  { pattern: /priority.?indicator|priority.?halo/i, token: 'KR-UI-015' },
+  { pattern: /status.?icon/i, token: 'KR-UI-016' },
+  { pattern: /skill.?badge|achievement.?badge/i, token: 'KR-UI-017' },
+  { pattern: /grid.?corner|corner.?motif/i, token: 'KR-UI-018' },
+  { pattern: /reservoir|motif.?reservoir/i, token: 'KR-UI-019' },
+
+  // KR-SOLID assets
   { pattern: /substrate|laneway|melbourne/i, token: 'KR-SOLID-033' },
   { pattern: /atmospheric|abstract.?solidarity|ink.?atmosphere/i, token: 'KR-SOLID-011' },
   { pattern: /paint.?splash|dynamic.?overlay/i, token: 'KR-SOLID-029' },
@@ -28,7 +45,6 @@ const SEMANTIC_MATCHERS = [
   { pattern: /elephant|kerala.?elephant/i, token: 'KR-SOLID-031' },
   { pattern: /bhagat.?singh/i, token: 'KR-SOLID-024' },
   { pattern: /trishula/i, token: 'KR-SOLID-031' }, // Fallback to elephant if specific icon not in series yet
-  { pattern: /icon.?pack|technical.?icons/i, token: 'KR-UI-004' }, // Fallback to grid/technical series
 ];
 
 function loadTokenMap() {

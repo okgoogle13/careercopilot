@@ -555,6 +555,90 @@
       "description": "Verification stamp (VERIFIED)",
       "usage": "Official approval indicator",
       "status": "ready"
+    },
+    {
+      "id": "KR-UI-008",
+      "name": "Elite Mastery Motif Accents",
+      "description": "Motif overlay accents for Elite/High-Mastery skill indicators",
+      "usage": "Elite skill level visual enhancement",
+      "status": "ready"
+    },
+    {
+      "id": "KR-UI-009",
+      "name": "Mastery Chart Patterns",
+      "description": "SVG/Canvas patterns for mastery chart fills",
+      "usage": "Skill visualization chart patterns",
+      "status": "ready"
+    },
+    {
+      "id": "KR-UI-010",
+      "name": "Success Screen Motif Overlay",
+      "description": "Background motif overlay for success screen (Z-0)",
+      "usage": "Success state visual feedback",
+      "status": "ready"
+    },
+    {
+      "id": "KR-UI-011",
+      "name": "Historical Record Background Texture",
+      "description": "Background texture pattern for historical records (Z-0, 5% opacity)",
+      "usage": "Archival content background",
+      "status": "ready"
+    },
+    {
+      "id": "KR-UI-012",
+      "name": "Metric Graphical Motifs",
+      "description": "Metric-specific mini-chart glyphs and symbols",
+      "usage": "Inline metric visualization",
+      "status": "ready"
+    },
+    {
+      "id": "KR-UI-013",
+      "name": "Scanning Holographic Motif",
+      "description": "Scanning holographic overlay for primary CTA buttons",
+      "usage": "Interactive button state overlay",
+      "status": "ready"
+    },
+    {
+      "id": "KR-UI-014",
+      "name": "Resolved Card Motif Accents",
+      "description": "Corner motif accents for Resolved cards",
+      "usage": "Card completion visual indicator",
+      "status": "ready"
+    },
+    {
+      "id": "KR-UI-015",
+      "name": "Priority Indicator Halo Variant",
+      "description": "Halo-variant priority indicator motif glyphs",
+      "usage": "Priority level visual marker",
+      "status": "ready"
+    },
+    {
+      "id": "KR-UI-016",
+      "name": "Status Icons Set",
+      "description": "Status-specific icon set for list items",
+      "usage": "List item status indicators",
+      "status": "ready"
+    },
+    {
+      "id": "KR-UI-017",
+      "name": "Skill Achievement Badge Set",
+      "description": "Badge icons for specific skill achievements",
+      "usage": "Achievement unlocked indicators",
+      "status": "ready"
+    },
+    {
+      "id": "KR-UI-018",
+      "name": "Grid Line Corner Motifs",
+      "description": "Decorative grid line motifs for panel corners",
+      "usage": "Panel frame decoration",
+      "status": "ready"
+    },
+    {
+      "id": "KR-UI-019",
+      "name": "Motif Reservoir Items",
+      "description": "Reservoir of reusable tiling motif elements",
+      "usage": "Flexible decorative motifs",
+      "status": "ready"
     }
   ]
 }

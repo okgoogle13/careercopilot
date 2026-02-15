@@ -3,7 +3,7 @@
 ## Layout Regions
 - **Discovery Header**: High-authority headline regarding identified skill sets.
 - **Skill Matrix**: A CSS grid (mobile: 2-col, desktop: 3/4-col) of `SkillTile` (Stone) components.
-- **Blueprint Foundation**: Full-screen substrate with a technical grid and occasional [DEPRECATED_STYLE] accents.
+- **Blueprint Foundation**: Full-screen substrate with technical grid overlay and kr-solidarity visual accents.
 
 ## Typography
 - **Page Headline**: `Fraunces Energetic`, 48px, `font-weight: 800`.

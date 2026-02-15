@@ -2,7 +2,7 @@
 
 ## Layout Regions
 - **Design Bar**: A horizontal toolbar for layout and manipulation tools.
-- **Asset Reservoir (Left)**: A vertical stone list of draggable [DEPRECATED_STYLE] and technical motifs.
+- **Asset Reservoir (Left)**: A vertical stone list of draggable kr-solidarity motifs and technical patterns.
 - **Assembly Canvas**: A multi-layered high-fidelity stone area with a dynamic blueprint grid.
 
 ## Typography
