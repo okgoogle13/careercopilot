@@ -12,7 +12,7 @@ type TechCardExampleProps = {
  * Figma Code Connect - TechCard Component
  * Strict mapping following DS/TechCard specification
  */
-figma.connect(TechCard, 'https://www.figma.com/file/IryuGDWixbuDc3RVhC6llE?node-id=NODE_ID', {
+figma.connect(TechCard, 'https://www.figma.com/design/OQizDLqM9Y3qitGXiabkAv?node-id=TODO_TECHCARD_NODE_ID', {
     props: {
         title: figma.string('title'),
         content: figma.children('content'),

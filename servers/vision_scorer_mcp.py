@@ -40,7 +40,7 @@ def score_asset_compliance(image_path: str, asset_id: str, target_score: int = 9
 
     try:
         _ensure_genai()
-        model = genai.GenerativeModel('gemini-2.0-flash')
+        model = genai.GenerativeModel('gemini-3-flash-preview')
 
         prompt = f"""
         Analyze this Northcote [DEPRECATED_STYLE] asset (ID: {asset_id}).
@@ -110,7 +110,7 @@ def extract_visual_tokens(image_path: str) -> Dict[str, Any]:
 
     try:
         _ensure_genai()
-        model = genai.GenerativeModel('gemini-2.0-flash')
+        model = genai.GenerativeModel('gemini-3-flash-preview')
 
         prompt = """
         Extract visual design tokens from this image.
@@ -143,7 +143,7 @@ def compare_attempts(attempt_paths: List[str]) -> Dict[str, Any]:
 
     try:
         _ensure_genai()
-        model = genai.GenerativeModel('gemini-2.0-flash')
+        model = genai.GenerativeModel('gemini-3-flash-preview')
 
         prompt = """
         Compare these image attempts in order.

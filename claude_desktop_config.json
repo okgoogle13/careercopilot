@@ -50,6 +50,14 @@
         "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_PERSONAL_ACCESS_TOKEN}",
         "CODEX_GITHUB_PERSONAL_ACCESS_TOKEN": "${CODEX_GITHUB_PERSONAL_ACCESS_TOKEN}"
       }
+    },
+    "figma": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@anthropic-ai/mcp-server-figma",
+        "--figma-access-token=${FIGMA_ACCESS_TOKEN}"
+      ]
     }
   },
   "skills": {

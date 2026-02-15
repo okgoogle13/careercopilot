@@ -70,22 +70,22 @@ export const JobSearch = () => {
   });
 
   return (
-    <div className="min-h-screen bg-[var(--color-background-base)] py-8 px-4">
+    <div className="min-h-screen bg-[var(--sys-color-charcoalBackground-base)] py-8 px-4">
       <div className="max-w-6xl mx-auto">
         {/* Header Section */}
         <div className="text-center mb-12">
-          <h1 className="text-display-large font-bold text-[var(--color-text-primary)] mb-4">
+          <h1 className="text-display-large font-bold text-[var(--sys-color-worker-ash-steps-6)] mb-4">
             Find Your Next{' '}
-            <span className="font-serif italic text-[var(--color-leaf-base)]">Opportunity</span>
+            <span className="font-serif italic text-[var(--sys-color-kr-activistSmokeGreen-base)]">Opportunity</span>
           </h1>
-          <p className="text-body-large text-[var(--color-text-secondary)] max-w-2xl mx-auto">
+          <p className="text-body-large text-[var(--sys-color-worker-ash-steps-4)] max-w-2xl mx-auto">
             Discover roles that match your skills and career aspirations from thousands of top
             companies.
           </p>
         </div>
 
         {/* Search & Filter Bar */}
-        <div className="bg-[var(--color-surface-container)] p-4 rounded-2xl shadow-sm mb-10 flex flex-col md:flex-row gap-4 items-center border border-[var(--color-surface-container-high)]">
+        <div className="bg-[var(--sys-color-charcoalBackground-steps-3)] p-4 rounded-2xl shadow-sm mb-10 flex flex-col md:flex-row gap-4 items-center border border-[var(--sys-color-charcoalBackground-steps-4)]">
           <div className="flex-1 w-full relative">
             <Lens
               placeholder="Search by job title, company, or keywords..."
@@ -97,7 +97,7 @@ export const JobSearch = () => {
               // Assuming standard input behavior here.
             />
             <Search
-              className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--color-text-tertiary)] pointer-events-none"
+              className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--sys-color-worker-ash-steps-2)] pointer-events-none"
               size={20}
             />
           </div>
@@ -126,7 +126,7 @@ export const JobSearch = () => {
 
         {/* Job Listings Grid */}
         <div>
-          <h2 className="text-title-medium font-bold text-[var(--color-text-secondary)] mb-6 uppercase tracking-wider">
+          <h2 className="text-title-medium font-bold text-[var(--sys-color-worker-ash-steps-4)] mb-6 uppercase tracking-wider">
             {filteredJobs.length} {filteredJobs.length === 1 ? 'Job' : 'Jobs'} Found
           </h2>
 
@@ -150,20 +150,20 @@ export const JobSearch = () => {
           </div>
 
           {filteredJobs.length === 0 && (
-            <div className="text-center py-20 border-2 border-dashed border-[var(--color-surface-container-high)] rounded-2xl">
+            <div className="text-center py-20 border-2 border-dashed border-[var(--sys-color-charcoalBackground-steps-4)] rounded-2xl">
               <Search
                 size={48}
-                className="mx-auto text-[var(--color-text-tertiary)] mb-4 opacity-50"
+                className="mx-auto text-[var(--sys-color-worker-ash-steps-2)] mb-4 opacity-50"
               />
-              <h3 className="text-title-large font-bold text-[var(--color-text-primary)]">
+              <h3 className="text-title-large font-bold text-[var(--sys-color-worker-ash-steps-6)]">
                 No jobs found
               </h3>
-              <p className="text-body-medium text-[var(--color-text-secondary)] mt-2">
+              <p className="text-body-medium text-[var(--sys-color-worker-ash-steps-4)] mt-2">
                 Try adjusting your search terms or filters.
               </p>
               <Pebble
                 variant="ghost"
-                className="mt-4 text-[var(--color-leaf-base)]"
+                className="mt-4 text-[var(--sys-color-kr-activistSmokeGreen-base)]"
                 onClick={() => setSearchQuery('')}
               >
                 Clear Search

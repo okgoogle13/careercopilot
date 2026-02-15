@@ -41,7 +41,7 @@ export const Seed: React.FC<SeedProps> = ({
     secondary: 'bg-[var(--ref-palette-secondary-40)] text-[var(--ref-palette-secondary-100)]',
     error: 'bg-[var(--ref-palette-error-40)] text-[var(--ref-palette-error-100)]',
     warning: 'bg-[var(--ref-palette-warning-40)] text-[var(--ref-palette-warning-10)]',
-    neutral: 'bg-[var(--color-concrete-grey-dark)] text-[var(--color-paper-white)]',
+    neutral: 'bg-[var(--sys-color-worker-ash-steps-2)] text-[var(--sys-color-worker-ash-steps-6)]',
   };
 
   const sizeClasses = {
@@ -63,7 +63,7 @@ export const Seed: React.FC<SeedProps> = ({
                     ${colorClasses[color]}
                     ${sizeClasses[size]}
                     ${overlapClasses}
-                    border border-[var(--color-asphalt-black)]
+                    border border-[var(--sys-color-charcoalBackground-base)]
                     transition-all duration-300 var(--ease-viscous-breeze)
                     animate-in zoom-in duration-200
                 `}

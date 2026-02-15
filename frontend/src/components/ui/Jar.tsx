@@ -138,11 +138,11 @@ export function Jar({
     backgroundColor: 'rgba(44, 39, 35, 0.4)',
     border: '2px solid',
     borderColor: error
-      ? 'var(--color-solidarity-red)'
+      ? 'var(--sys-color-solidarityRed-base)'
       : isOpen
-        ? 'var(--color-ink-gold)'
-        : 'var(--color-concrete-grey-base)',
-    color: 'var(--color-paper-white)',
+        ? 'var(--sys-color-inkGold-base)'
+        : 'var(--sys-color-worker-ash-base)',
+    color: 'var(--sys-color-worker-ash-steps-6)',
     transition: 'all var(--duration-standard) var(--ease-viscous-breeze)',
   };
 
@@ -156,12 +156,12 @@ export function Jar({
         <label
           className={`
           mb-2 text-sm font-medium transition-colors duration-200
-          ${error ? 'text-[var(--color-solidarity-red)]' : 'text-[var(--color-concrete-grey)]'}
-          ${isOpen && !error ? 'text-[var(--color-ink-gold)]' : ''}
+          ${error ? 'text-[var(--sys-color-solidarityRed-base)]' : 'text-[var(--sys-color-worker-ash-base)]'}
+          ${isOpen && !error ? 'text-[var(--sys-color-inkGold-base)]' : ''}
         `}
         >
           {label}
-          {required && <span className="text-[var(--color-solidarity-red)] ml-1">*</span>}
+          {required && <span className="text-[var(--sys-color-solidarityRed-base)] ml-1">*</span>}
         </label>
       )}
 
@@ -174,7 +174,7 @@ export function Jar({
           px-4 py-3
           flex items-center justify-between gap-3
           ${isOpen && !error ? 'shadow-[0_0_15px_rgba(212,168,75,0.2)]' : ''}
-          ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:border-[var(--color-concrete-grey-dark)]'}
+          ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:border-[var(--sys-color-worker-ash-steps-2)]'}
           ${className}
         `}
         onClick={() => !disabled && setIsOpen(!isOpen)}
@@ -185,15 +185,15 @@ export function Jar({
         <span
           className={
             selectedOption
-              ? 'text-[var(--color-paper-white)]'
-              : 'text-[var(--color-concrete-grey-dark)]'
+              ? 'text-[var(--sys-color-worker-ash-steps-6)]'
+              : 'text-[var(--sys-color-worker-ash-steps-2)]'
           }
         >
           {selectedOption ? selectedOption.label : placeholder}
         </span>
         <ChevronDown
           className={`
-            w-5 h-5 text-[var(--color-concrete-grey-dark)]
+            w-5 h-5 text-[var(--sys-color-worker-ash-steps-2)]
             transition-transform duration-300
             ${isOpen ? 'rotate-180' : 'rotate-0'}
           `}
@@ -207,8 +207,8 @@ export function Jar({
           className="absolute top-full left-0 right-0 mt-3 z-50 overflow-hidden"
           style={{
             borderRadius: 'var(--radius-pebble)',
-            backgroundColor: 'var(--color-asphalt-black)',
-            border: '1px solid var(--color-concrete-grey-base)',
+            backgroundColor: 'var(--sys-color-charcoalBackground-base)',
+            border: '1px solid var(--sys-color-worker-ash-base)',
             boxShadow: 'var(--shadow-maximum)',
             animation: 'fadeIn 0.2s ease-out',
           }}
@@ -229,7 +229,7 @@ export function Jar({
                     px-4 py-3
                     flex items-center justify-between gap-2
                     cursor-pointer
-                    ${isSelected ? 'bg-white/10 text-[var(--color-ink-gold)]' : 'text-[var(--color-paper-white)]'}
+                    ${isSelected ? 'bg-white/10 text-[var(--sys-color-inkGold-base)]' : 'text-[var(--sys-color-worker-ash-steps-6)]'}
                     ${isDisabled ? 'opacity-50 cursor-not-allowed' : 'hover:bg-white/5'}
                     transition-colors duration-150
                   `}
@@ -238,7 +238,7 @@ export function Jar({
                 >
                   <span className="font-field-note">{option.label}</span>
                   {isSelected && (
-                    <Check className="w-5 h-5 flex-shrink-0 text-[var(--color-ink-gold)]" />
+                    <Check className="w-5 h-5 flex-shrink-0 text-[var(--sys-color-inkGold-base)]" />
                   )}
                 </div>
               );
@@ -252,7 +252,7 @@ export function Jar({
         <p
           className={`
           mt-1 px-1 text-xs
-          ${error ? 'text-[var(--color-solidarity-red)]' : 'text-[var(--color-concrete-grey-dark)]'}
+          ${error ? 'text-[var(--sys-color-solidarityRed-base)]' : 'text-[var(--sys-color-worker-ash-steps-2)]'}
         `}
         >
           {displayHelperText}

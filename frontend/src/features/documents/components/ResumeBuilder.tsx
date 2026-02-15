@@ -119,7 +119,7 @@ export const ResumeBuilder: React.FC<ResumeBuilderProps> = ({ onBack, onNext, pr
   };
 
   return (
-    <div className="min-h-screen bg-[var(--color-surface-base)] py-8 font-sans">
+    <div className="min-h-screen bg-[var(--sys-color-charcoalBackground-steps-2)] py-8 font-sans">
       <div className="container mx-auto px-4 max-w-7xl">
         {/* Header */}
         <div className="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
@@ -131,7 +131,7 @@ export const ResumeBuilder: React.FC<ResumeBuilderProps> = ({ onBack, onNext, pr
             >
               Back to Dashboard
             </Pebble>
-            <h1 className="text-3xl font-bold text-[var(--color-leaf-base)]">Resume Builder</h1>
+            <h1 className="text-3xl font-bold text-[var(--sys-color-kr-activistSmokeGreen-base)]">Resume Builder</h1>
           </div>
           <div className="flex gap-2">
             <Pebble
@@ -165,7 +165,7 @@ export const ResumeBuilder: React.FC<ResumeBuilderProps> = ({ onBack, onNext, pr
               elevation="raised"
               className="p-6"
             >
-              <h2 className="text-xl font-bold mb-6 text-[var(--color-leaf-base)]">
+              <h2 className="text-xl font-bold mb-6 text-[var(--sys-color-kr-activistSmokeGreen-base)]">
                 Personal Information
               </h2>
               <div className="flex flex-col gap-4">
@@ -209,7 +209,7 @@ export const ResumeBuilder: React.FC<ResumeBuilderProps> = ({ onBack, onNext, pr
               elevation="raised"
               className="p-6"
             >
-              <h2 className="text-xl font-bold mb-6 text-[var(--color-leaf-base)]">Skills</h2>
+              <h2 className="text-xl font-bold mb-6 text-[var(--sys-color-kr-activistSmokeGreen-base)]">Skills</h2>
               <div className="flex gap-2 mb-4">
                 <Lens
                   className="w-full"
@@ -230,12 +230,12 @@ export const ResumeBuilder: React.FC<ResumeBuilderProps> = ({ onBack, onNext, pr
                 {resumeData.skills.map((skill, index) => (
                   <div
                     key={index}
-                    className="flex items-center gap-1 px-3 py-1 rounded-full bg-[var(--color-surface-container)] text-[var(--color-text-primary)] text-sm"
+                    className="flex items-center gap-1 px-3 py-1 rounded-full bg-[var(--sys-color-charcoalBackground-steps-3)] text-[var(--sys-color-worker-ash-steps-6)] text-sm"
                   >
                     <span>{skill}</span>
                     <button
                       onClick={() => removeSkill(index)}
-                      className="hover:text-[var(--color-bark-base)] transition-colors"
+                      className="hover:text-[var(--sys-color-solidaritySmokeOrange-base)] transition-colors"
                     >
                       <X size={14} />
                     </button>
@@ -253,7 +253,7 @@ export const ResumeBuilder: React.FC<ResumeBuilderProps> = ({ onBack, onNext, pr
               className="p-6"
             >
               <div className="flex justify-between items-center mb-6">
-                <h2 className="text-xl font-bold text-[var(--color-leaf-base)]">Work Experience</h2>
+                <h2 className="text-xl font-bold text-[var(--sys-color-kr-activistSmokeGreen-base)]">Work Experience</h2>
                 <Pebble
                   variant="secondary"
                   size="sm"
@@ -269,7 +269,7 @@ export const ResumeBuilder: React.FC<ResumeBuilderProps> = ({ onBack, onNext, pr
                     key={exp.id}
                     className="flex flex-col gap-4"
                   >
-                    {index > 0 && <hr className="border-[var(--color-leaf-base)]/20" />}
+                    {index > 0 && <hr className="border-[var(--sys-color-kr-activistSmokeGreen-base)]/20" />}
                     <Lens
                       className="w-full"
                       label="Job Title"
@@ -307,7 +307,7 @@ export const ResumeBuilder: React.FC<ResumeBuilderProps> = ({ onBack, onNext, pr
               className="p-6"
             >
               <div className="flex justify-between items-center mb-6">
-                <h2 className="text-xl font-bold text-[var(--color-leaf-base)]">Education</h2>
+                <h2 className="text-xl font-bold text-[var(--sys-color-kr-activistSmokeGreen-base)]">Education</h2>
                 <Pebble
                   variant="secondary"
                   size="sm"
@@ -323,7 +323,7 @@ export const ResumeBuilder: React.FC<ResumeBuilderProps> = ({ onBack, onNext, pr
                     key={edu.id}
                     className="flex flex-col gap-4"
                   >
-                    {index > 0 && <hr className="border-[var(--color-leaf-base)]/20" />}
+                    {index > 0 && <hr className="border-[var(--sys-color-kr-activistSmokeGreen-base)]/20" />}
                     <Lens
                       className="w-full"
                       label="Degree"

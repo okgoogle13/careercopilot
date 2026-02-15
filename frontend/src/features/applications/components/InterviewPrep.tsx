@@ -24,19 +24,19 @@ const questionCategories = [
     id: 'behavioral',
     title: 'Behavioral Questions',
     description: 'Questions about past experiences and how you handled situations',
-    color: 'var(--color-leaf-base)', // #60A5FA
+    color: 'var(--sys-color-kr-activistSmokeGreen-base)', // #60A5FA
   },
   {
     id: 'situational',
     title: 'Situational Questions',
     description: 'Hypothetical scenarios to assess problem-solving skills',
-    color: 'var(--color-ink-base)', // #86EFAC
+    color: 'var(--sys-color-inkGold-base)', // #86EFAC
   },
   {
     id: 'technical',
     title: 'Technical Questions',
     description: 'Role-specific questions about skills and knowledge',
-    color: 'var(--color-flower-base)', // #F472B6
+    color: 'var(--sys-color-solidarityRed-base)', // #F472B6
   },
 ];
 
@@ -137,7 +137,7 @@ export const InterviewPrep: React.FC<InterviewPrepProps> = ({ onBack }) => {
   };
 
   return (
-    <div className="min-h-screen bg-[var(--color-background-base)] py-8 px-4">
+    <div className="min-h-screen bg-[var(--sys-color-charcoalBackground-base)] py-8 px-4">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="mb-8">
@@ -154,13 +154,13 @@ export const InterviewPrep: React.FC<InterviewPrepProps> = ({ onBack }) => {
             <div className="flex items-center justify-center gap-3 mb-3">
               <Sparkles
                 size={32}
-                className="text-[var(--color-flower-base)]"
+                className="text-[var(--sys-color-solidarityRed-base)]"
               />
-              <h1 className="text-display-medium font-bold text-[var(--color-text-primary)]">
+              <h1 className="text-display-medium font-bold text-[var(--sys-color-worker-ash-steps-6)]">
                 Interview Preparation
               </h1>
             </div>
-            <p className="text-body-large text-[var(--color-text-secondary)]">
+            <p className="text-body-large text-[var(--sys-color-worker-ash-steps-4)]">
               Practice with AI-powered mock interviews tailored to your target roles.
             </p>
           </div>
@@ -174,7 +174,7 @@ export const InterviewPrep: React.FC<InterviewPrepProps> = ({ onBack }) => {
                 <Stone
                   key={category.id}
                   elevation="flat"
-                  className="cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:border-[var(--color-leaf-base)] group"
+                  className="cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:border-[var(--sys-color-kr-activistSmokeGreen-base)] group"
                   onClick={() => handleSelectCategory(category.id)}
                 >
                   <div className="p-6 flex flex-col items-center text-center h-full">
@@ -187,10 +187,10 @@ export const InterviewPrep: React.FC<InterviewPrepProps> = ({ onBack }) => {
                         style={{ color: category.color }}
                       />
                     </div>
-                    <h3 className="text-display-small font-bold text-[var(--color-text-primary)] mb-2">
+                    <h3 className="text-display-small font-bold text-[var(--sys-color-worker-ash-steps-6)] mb-2">
                       {category.title}
                     </h3>
-                    <p className="text-body-medium text-[var(--color-text-secondary)]">
+                    <p className="text-body-medium text-[var(--sys-color-worker-ash-steps-4)]">
                       {category.description}
                     </p>
                   </div>
@@ -232,14 +232,14 @@ export const InterviewPrep: React.FC<InterviewPrepProps> = ({ onBack }) => {
                     </Pebble>
                   </div>
 
-                  <h2 className="text-display-small font-semibold text-[var(--color-text-primary)] mb-8 leading-tight">
+                  <h2 className="text-display-small font-semibold text-[var(--sys-color-worker-ash-steps-6)] mb-8 leading-tight">
                     {currentQuestion.question}
                   </h2>
 
                   {/* Answer Input */}
                   <div className="mb-6">
                     <div className="flex justify-between items-center mb-3">
-                      <span className="text-label-large font-bold text-[var(--color-text-primary)]">
+                      <span className="text-label-large font-bold text-[var(--sys-color-worker-ash-steps-6)]">
                         Your Answer
                       </span>
                       <Pebble
@@ -277,11 +277,11 @@ export const InterviewPrep: React.FC<InterviewPrepProps> = ({ onBack }) => {
                       </Pebble>
 
                       {showSampleAnswer && (
-                        <div className="bg-[var(--color-surface-container-low)] border border-[var(--color-leaf-base)] rounded-lg p-4 animate-in fade-in slide-in-from-top-2">
-                          <span className="text-label-small font-bold text-[var(--color-leaf-base)] block mb-1">
+                        <div className="bg-[var(--sys-color-charcoalBackground-steps-1)] border border-[var(--sys-color-kr-activistSmokeGreen-base)] rounded-lg p-4 animate-in fade-in slide-in-from-top-2">
+                          <span className="text-label-small font-bold text-[var(--sys-color-kr-activistSmokeGreen-base)] block mb-1">
                             SAMPLE ANSWER
                           </span>
-                          <p className="text-body-medium text-[var(--color-text-secondary)] leading-relaxed">
+                          <p className="text-body-medium text-[var(--sys-color-worker-ash-steps-4)] leading-relaxed">
                             {currentQuestion.sampleAnswer}
                           </p>
                         </div>
@@ -313,11 +313,11 @@ export const InterviewPrep: React.FC<InterviewPrepProps> = ({ onBack }) => {
 
             {/* Tips Panel */}
             <div className="lg:col-span-1">
-              <Stone className="lg:sticky lg:top-6 bg-[var(--color-surface-container)]">
+              <Stone className="lg:sticky lg:top-6 bg-[var(--sys-color-charcoalBackground-steps-3)]">
                 <div className="p-6">
-                  <div className="flex items-center gap-2 mb-4 text-[var(--color-flower-base)]">
+                  <div className="flex items-center gap-2 mb-4 text-[var(--sys-color-solidarityRed-base)]">
                     <Sparkles size={20} />
-                    <h3 className="text-body-large font-bold text-[var(--color-text-primary)]">
+                    <h3 className="text-body-large font-bold text-[var(--sys-color-worker-ash-steps-6)]">
                       Answer Tips
                     </h3>
                   </div>
@@ -326,10 +326,10 @@ export const InterviewPrep: React.FC<InterviewPrepProps> = ({ onBack }) => {
                     {currentQuestion.tips.map((tip, index) => (
                       <div
                         key={index}
-                        className="flex gap-3 items-start p-2 rounded-md hover:bg-[var(--color-surface-base)] transition-colors"
+                        className="flex gap-3 items-start p-2 rounded-md hover:bg-[var(--sys-color-charcoalBackground-steps-2)] transition-colors"
                       >
-                        <div className="w-2 h-2 rounded-full bg-[var(--color-leaf-base)] mt-2 flex-shrink-0" />
-                        <p className="text-body-medium text-[var(--color-text-secondary)] leading-relaxed">
+                        <div className="w-2 h-2 rounded-full bg-[var(--sys-color-kr-activistSmokeGreen-base)] mt-2 flex-shrink-0" />
+                        <p className="text-body-medium text-[var(--sys-color-worker-ash-steps-4)] leading-relaxed">
                           {tip}
                         </p>
                       </div>

@@ -2,13 +2,13 @@
   position: relative;
   width: 100vw;
   height: 100vh;
-  background-color: var(--color-asphalt-black-darkest, #050403);
+  background-color: var(--sys-color-charcoalBackground-steps-0, #050403);
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
   font-family: var(--font-field-note, sans-serif);
-  color: var(--color-paper-white, #f0ead6);
+  color: var(--sys-color-worker-ash-steps-6, #f0ead6);
 }
 
 /* ==========================================
@@ -48,7 +48,7 @@
 .blobA {
   width: 50vw;
   height: 50vh;
-  background: radial-gradient(circle, var(--color-ink-gold, #d4a84b) 0%, transparent 70%);
+  background: radial-gradient(circle, var(--sys-color-inkGold-base, #d4a84b) 0%, transparent 70%);
   top: -10%;
   left: -10%;
   animation: floating var(--duration-slow) infinite alternate ease-in-out;
@@ -57,7 +57,7 @@
 .blobB {
   width: 40vw;
   height: 40vh;
-  background: radial-gradient(circle, var(--color-solidarity-red, #c45c4b) 0%, transparent 70%);
+  background: radial-gradient(circle, var(--sys-color-solidarityRed-base, #c45c4b) 0%, transparent 70%);
   bottom: -5%;
   right: -5%;
   animation: floating 8s infinite alternate-reverse ease-in-out;
@@ -68,7 +68,7 @@
   height: 30vh;
   background: radial-gradient(
     circle,
-    var(--color-ink-gold-lightest, #e8c77a) 0%,
+    var(--sys-color-inkGold-steps-5, #e8c77a) 0%,
     transparent 70%
   );
   top: 40%;
@@ -149,7 +149,7 @@
   font-variation-settings:
     'SOFT' 80,
     'WONK' 1;
-  color: var(--color-concrete-grey, #e6e1d6);
+  color: var(--sys-color-worker-ash-base, #e6e1d6);
   margin-top: 2rem;
   opacity: 0.9;
 }
@@ -164,8 +164,8 @@
 }
 
 .btnPebbleFilled {
-  background-color: var(--color-ink-gold);
-  color: var(--color-asphalt-black-darkest);
+  background-color: var(--sys-color-inkGold-base);
+  color: var(--sys-color-charcoalBackground-steps-0);
   padding: 1.25rem 2.5rem;
   border-radius: var(--radius-pebble);
   font-family: var(--font-field-note);
@@ -179,16 +179,16 @@
 
 .btnPebbleFilled:hover {
   transform: translateY(-4px) scale(1.05);
-  background-color: var(--color-ink-gold-light);
+  background-color: var(--sys-color-inkGold-steps-4);
   box-shadow: var(--shadow-elevated);
 }
 
 .btnPebbleOutlined {
   background-color: transparent;
-  color: var(--color-ink-gold);
+  color: var(--sys-color-inkGold-base);
   padding: 1.25rem 2.5rem;
   border-radius: var(--radius-pebble);
-  border: 2px solid var(--color-ink-gold);
+  border: 2px solid var(--sys-color-inkGold-base);
   font-family: var(--font-field-note);
   font-weight: 700;
   text-transform: uppercase;
@@ -203,7 +203,7 @@
 }
 
 .btnLink {
-  color: var(--color-concrete-grey-dark);
+  color: var(--sys-color-worker-ash-steps-2);
   font-family: var(--font-annotation);
   text-decoration: underline;
   text-underline-offset: 4px;
@@ -222,7 +222,7 @@
   bottom: 3rem;
   left: 3rem;
   font-size: 3rem;
-  color: var(--color-ink-gold);
+  color: var(--sys-color-inkGold-base);
   opacity: 0.2;
   pointer-events: none;
 }

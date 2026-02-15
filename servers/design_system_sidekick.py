@@ -52,10 +52,10 @@ if os.getenv("SENTRY_DSN"):
 # --- Config ---
 GEMINI_VISION_CANDIDATES = [
     # Prioritize 2.5 Pro for complex reasoning on ambiguity (Gallery vs Lab)
+    "models/gemini-3-pro-preview",
+    "models/gemini-3-flash-preview",
     "models/gemini-2.5-pro",
-    "models/gemini-2.0-flash",
-    "models/gemini-1.5-pro",
-    "models/gemini-1.5-flash"
+    "models/gemini-2.5-flash"
 ]
 
 
@@ -127,7 +127,7 @@ async def _call_llm_async(prompt, json_mode=False):
             # Use same vision candidates or specific pro model for text?
             # User request: "update design sidekick to use 2.5 pro" - implies generally.
             # But let's check availability.
-            model = genai.GenerativeModel('gemini-2.5-pro')
+            model = genai.GenerativeModel('gemini-3-pro-preview')
             loop = asyncio.get_event_loop()
             def sync_call():
                 config = {"response_mime_type": "application/json"} if json_mode else None
@@ -139,7 +139,7 @@ async def _call_llm_async(prompt, json_mode=False):
             logger.warning(f"Gemini 2.5 Pro failed: {e}. Trying fallbacks.")
             # Fallback to flash if Pro fails
             try:
-                model = genai.GenerativeModel('gemini-2.0-flash')
+                model = genai.GenerativeModel('gemini-3-flash-preview')
                 loop = asyncio.get_event_loop()
                 def sync_call_fallback():
                     config = {"response_mime_type": "application/json"} if json_mode else None
@@ -174,66 +174,31 @@ async def _call_llm_async(prompt, json_mode=False):
 
 mcp = FastMCP("design_system_sidekick")
 
+
 @mcp.tool()
 async def validate_asset_compliance(asset_id: str, image_path: Optional[str] = None) -> str:
     """Validate DALL-E output against Northcote compliance scorecard"""
     if not image_path or not os.path.exists(image_path):
         return json.dumps({"error": f"Image path not found: {image_path}"})
 
-    prompt = f"""
-    Validate the following asset for Kerala Rage — Solidarity Mode compliance:
-    Asset ID: {asset_id}
+    # Compressed compliance schema (~350 tokens vs ~1,200)
+    COMPLIANCE_SCHEMA = {
+        "banned": ["light_bg", "crowns", "passports", "aboriginal_art_imitation", 
+                   "perfect_circles", "symmetric_geo", "static_fonts",
+                   "mixed_devotional_solidarity", "corporate_stock"],
+        "required": ["dark_charcoal_base", "variable_type_9x_contrast",
+                     "organic_stone_shapes", "screenprint_aesthetic",
+                     "24px_icon_motifs", "solidarity_in_situ_only"],
+        "palette": {"primary": "#F14714", "bg": "#1A1A1A", 
+                    "accents": ["#48DA8B", "#48F0E5", "#DAF674"], "text": "#DAF6B3"},
+        "typography": {"variable": True, "wght_range": [100, 900], "contrast_ratio": 9},
+        "motion": {"bezier": [0.34, 1.56, 0.64, 1], "organic_shapes": True}
+    }
     
-    CRITICAL COMPLIANCE CHECKS (antiSlopProtocol):
-    
-    BANNED (Any violation = FAIL):
-    - Light mode or white backgrounds (#FFFFFF)
-    - Crown/monarchy symbols (any form, any opacity)
-    - Passports, visas, ID cards, border gates, government forms, bureaucratic aesthetics
-    - Aboriginal art imitation (dot painting, invented patterns, sacred motif appropriation)
-    - Using Aboriginal flag colors as general decoration (allowed only in situ on placards/posters)
-    - Perfect circles (border-radius: 50%)
-    - Symmetrical geometric layouts as dominant structure
-    - Static single-weight fonts; non-variable font usage
-    - Mixing devotional (Shiva) and First Nations solidarity into single composite motif
-    - Generic corporate diversity stock-photo aesthetics
-    
-    REQUIRED (Must be present):
-    - Dark-only Solidarity mode on charcoal base (#1A1A1A or charcoal steps)
-    - Variable typography with extreme contrast (9× weight ratio, 6× size ratio)
-    - Organic stone shapes (NOT perfect geometry)
-    - Screenprint/wheat-paste aesthetic
-    - Icon-scale motifs recognizable at 24px
-    - First Nations solidarity appears only in situ via placards/posters
-    
-    COLOR PALETTE VALIDATION:
-    - Primary: Solidarity Red (#F14714), Charcoal Background (#1A1A1A)
-    - Accents: Activist Smoke Green (#48DA8B), Signal Green (#48F0E5), Ink Gold (#DAF674)
-    - Text: Worker Ash (#DAF6B3) for body text on dark
-    - Check: Are colors from the Kerala Rage palette?
-    
-    TYPOGRAPHY VALIDATION:
-    - Variable fonts with wght 100-900, wdth 75-125
-    - Extreme variable contrast enforced (9× weight ratio, 6× size ratio)
-    - Emotional patterns: Solidarity Protest (wght 800, wdth 120), Labor Pressure (wght 900, wdth 75)
-    
-    MOTION & SHAPE:
-    - M3 Expressive curve: cubic-bezier(0.34, 1.56, 0.64, 1)
-    - Organic stone shapes, torn edges, imperfect circles (98%)
-    
-    Return ONLY valid JSON:
-    {{
-      "compliance": boolean,
-      "score": 0-100,
-      "issues": ["list of violations"],
-      "summary": "Brief compliance summary",
-      "banned_violations": ["specific banned items found"],
-      "missing_requirements": ["required items not found"],
-      "color_palette_match": boolean,
-      "typography_compliance": boolean,
-      "cultural_safety": boolean
-    }}
-    """
+    prompt = f"Validate asset {asset_id} against Kerala Rage — Solidarity Mode compliance. " \
+             f"Schema: {json.dumps(COMPLIANCE_SCHEMA)}. " \
+             f"Return JSON with: compliance (bool), score (0-100), issues (list), banned_violations (list)."
+
 
     backend = "gemini"
     result_text = None

@@ -146,15 +146,15 @@ const TimelineEventComponent: React.FC<TimelineEventComponentProps> = ({
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'completed':
-        return 'text-[var(--color-leaf-base)]';
+        return 'text-[var(--sys-color-kr-activistSmokeGreen-base)]';
       case 'in-progress':
-        return 'text-[var(--color-flower-base)]';
+        return 'text-[var(--sys-color-solidarityRed-base)]';
       case 'upcoming':
-        return 'text-[var(--color-ink-base)]';
+        return 'text-[var(--sys-color-inkGold-base)]';
       case 'cancelled':
-        return 'text-[var(--color-bark-base)]';
+        return 'text-[var(--sys-color-solidaritySmokeOrange-base)]';
       default:
-        return 'text-[var(--color-text-secondary)]';
+        return 'text-[var(--sys-color-worker-ash-steps-4)]';
     }
   };
 
@@ -198,12 +198,12 @@ const TimelineEventComponent: React.FC<TimelineEventComponentProps> = ({
     <div className="relative flex gap-4 mb-6">
       {/* Timeline Line */}
       {!isLast && (
-        <div className="absolute left-6 top-12 w-0.5 h-[calc(100%+24px)] bg-[var(--color-surface-container-high)] opacity-50" />
+        <div className="absolute left-6 top-12 w-0.5 h-[calc(100%+24px)] bg-[var(--sys-color-charcoalBackground-steps-4)] opacity-50" />
       )}
 
       {/* Timeline Icon */}
       <div
-        className={`relative z-10 flex items-center justify-center w-12 h-12 rounded-full border-2 border-[var(--color-surface-container-high)] bg-[var(--color-surface-base)] flex-shrink-0 ${
+        className={`relative z-10 flex items-center justify-center w-12 h-12 rounded-full border-2 border-[var(--sys-color-charcoalBackground-steps-4)] bg-[var(--sys-color-charcoalBackground-steps-2)] flex-shrink-0 ${
           isLatest ? 'shadow-[0_0_0_4px_rgba(var(--bg-leaf-base)_/_0.2)]' : ''
         }`}
       >
@@ -211,14 +211,14 @@ const TimelineEventComponent: React.FC<TimelineEventComponentProps> = ({
           className={`flex items-center justify-center w-8 h-8 rounded-full ${
             // Map colors to our design tokens simply
             event.color === 'primary'
-              ? 'bg-[var(--color-leaf-base)]'
+              ? 'bg-[var(--sys-color-kr-activistSmokeGreen-base)]'
               : event.color === 'secondary'
-                ? 'bg-[var(--color-ink-base)]'
+                ? 'bg-[var(--sys-color-inkGold-base)]'
                 : event.color === 'tertiary'
-                  ? 'bg-[var(--color-flower-base)]'
+                  ? 'bg-[var(--sys-color-solidarityRed-base)]'
                   : event.color === 'error'
-                    ? 'bg-[var(--color-bark-base)]'
-                    : 'bg-[var(--color-leaf-base)]'
+                    ? 'bg-[var(--sys-color-solidaritySmokeOrange-base)]'
+                    : 'bg-[var(--sys-color-kr-activistSmokeGreen-base)]'
           } ${isLatest ? 'animate-pulse' : ''}`}
         >
           <IconComponent
@@ -232,14 +232,14 @@ const TimelineEventComponent: React.FC<TimelineEventComponentProps> = ({
       <div className="flex-1">
         <Stone
           elevation={isLatest ? 'raised' : 'flat'}
-          className={`${isLatest ? 'border-[var(--color-leaf-base)]' : ''}`}
+          className={`${isLatest ? 'border-[var(--sys-color-kr-activistSmokeGreen-base)]' : ''}`}
         >
           <div className="p-4">
             {/* Header */}
             <div className="flex items-start justify-between mb-4">
               <div className="flex-1">
                 <div className="flex items-center gap-2 mb-1">
-                  <span className="font-semibold text-body-large text-[var(--color-text-primary)]">
+                  <span className="font-semibold text-body-large text-[var(--sys-color-worker-ash-steps-6)]">
                     {event.title}
                   </span>
                   <StatusIcon
@@ -247,10 +247,10 @@ const TimelineEventComponent: React.FC<TimelineEventComponentProps> = ({
                     className={statusClass}
                   />
                 </div>
-                <p className="text-body-medium text-[var(--color-text-secondary)] mb-2">
+                <p className="text-body-medium text-[var(--sys-color-worker-ash-steps-4)] mb-2">
                   {event.description}
                 </p>
-                <div className="flex items-center gap-2 text-body-small text-[var(--color-text-tertiary)]">
+                <div className="flex items-center gap-2 text-body-small text-[var(--sys-color-worker-ash-steps-2)]">
                   <Calendar size={12} />
                   <span>{formatTimestamp(event.timestamp)}</span>
                 </div>
@@ -266,19 +266,19 @@ const TimelineEventComponent: React.FC<TimelineEventComponentProps> = ({
             {event.details && (
               <div className="flex flex-col gap-2 mb-4 pl-1">
                 {event.details.interviewer && (
-                  <div className="flex items-center gap-2 text-body-small text-[var(--color-text-secondary)]">
+                  <div className="flex items-center gap-2 text-body-small text-[var(--sys-color-worker-ash-steps-4)]">
                     <User size={14} />
                     <span>{event.details.interviewer}</span>
                   </div>
                 )}
                 {event.details.platform && (
-                  <div className="flex items-center gap-2 text-body-small text-[var(--color-text-secondary)]">
+                  <div className="flex items-center gap-2 text-body-small text-[var(--sys-color-worker-ash-steps-4)]">
                     <Video size={14} />
                     <span>{event.details.platform}</span>
                   </div>
                 )}
                 {event.details.documents && event.details.documents.length > 0 && (
-                  <div className="flex items-center gap-2 text-body-small text-[var(--color-text-secondary)]">
+                  <div className="flex items-center gap-2 text-body-small text-[var(--sys-color-worker-ash-steps-4)]">
                     <FileText size={14} />
                     <span>
                       {event.details.documents.length} document
@@ -294,7 +294,7 @@ const TimelineEventComponent: React.FC<TimelineEventComponentProps> = ({
               <div className="mt-2">
                 <button
                   onClick={() => setIsExpanded(!isExpanded)}
-                  className="flex items-center gap-1 text-label-medium text-[var(--color-leaf-base)] hover:underline focus:outline-none mb-2"
+                  className="flex items-center gap-1 text-label-medium text-[var(--sys-color-kr-activistSmokeGreen-base)] hover:underline focus:outline-none mb-2"
                 >
                   {isExpanded ? (
                     <>
@@ -308,31 +308,31 @@ const TimelineEventComponent: React.FC<TimelineEventComponentProps> = ({
                 </button>
 
                 {isExpanded && (
-                  <div className="p-3 bg-[var(--color-surface-container-low)] rounded-md animate-in fade-in zoom-in-95 duration-200">
+                  <div className="p-3 bg-[var(--sys-color-charcoalBackground-steps-1)] rounded-md animate-in fade-in zoom-in-95 duration-200">
                     <div className="flex flex-col gap-3">
                       {event.details?.notes && (
                         <div>
-                          <h4 className="text-label-small font-bold text-[var(--color-text-primary)] mb-1">
+                          <h4 className="text-label-small font-bold text-[var(--sys-color-worker-ash-steps-6)] mb-1">
                             Notes:
                           </h4>
-                          <p className="text-body-small text-[var(--color-text-secondary)]">
+                          <p className="text-body-small text-[var(--sys-color-worker-ash-steps-4)]">
                             {event.details.notes}
                           </p>
                         </div>
                       )}
                       {event.details?.nextSteps && (
                         <div>
-                          <h4 className="text-label-small font-bold text-[var(--color-text-primary)] mb-1">
+                          <h4 className="text-label-small font-bold text-[var(--sys-color-worker-ash-steps-6)] mb-1">
                             Next Steps:
                           </h4>
-                          <p className="text-body-small text-[var(--color-text-secondary)]">
+                          <p className="text-body-small text-[var(--sys-color-worker-ash-steps-4)]">
                             {event.details.nextSteps}
                           </p>
                         </div>
                       )}
                       {event.details?.documents && (
                         <div>
-                          <h4 className="text-label-small font-bold text-[var(--color-text-primary)] mb-1">
+                          <h4 className="text-label-small font-bold text-[var(--sys-color-worker-ash-steps-6)] mb-1">
                             Documents:
                           </h4>
                           <div className="flex flex-wrap gap-2">
@@ -341,7 +341,7 @@ const TimelineEventComponent: React.FC<TimelineEventComponentProps> = ({
                                 key={i}
                                 label={doc}
                                 variant="neutral"
-                                className="bg-[var(--color-surface-container)]"
+                                className="bg-[var(--sys-color-charcoalBackground-steps-3)]"
                               />
                             ))}
                           </div>
@@ -397,9 +397,9 @@ export const TimelineView: React.FC<TimelineViewProps> = ({
   };
 
   return (
-    <div className="min-h-screen bg-[var(--color-background-base)]">
+    <div className="min-h-screen bg-[var(--sys-color-charcoalBackground-base)]">
       {/* Header */}
-      <div className="sticky top-0 z-20 bg-[var(--color-background-base)]/80 backdrop-blur-md border-b border-[var(--color-surface-container-high)] p-6">
+      <div className="sticky top-0 z-20 bg-[var(--sys-color-charcoalBackground-base)]/80 backdrop-blur-md border-b border-[var(--sys-color-charcoalBackground-steps-4)] p-6">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-4">
             {onBack && (
@@ -412,10 +412,10 @@ export const TimelineView: React.FC<TimelineViewProps> = ({
               </Pebble>
             )}
             <div>
-              <h1 className="text-display-small font-bold text-[var(--color-text-primary)]">
+              <h1 className="text-display-small font-bold text-[var(--sys-color-worker-ash-steps-6)]">
                 Application Timeline
               </h1>
-              <div className="flex items-center gap-2 text-body-medium text-[var(--color-text-secondary)] mt-1">
+              <div className="flex items-center gap-2 text-body-medium text-[var(--sys-color-worker-ash-steps-4)] mt-1">
                 <Building2 size={16} />
                 <span>
                   {jobTitle} at {companyName}
@@ -435,18 +435,18 @@ export const TimelineView: React.FC<TimelineViewProps> = ({
         {/* Progress and Filters */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="flex items-center gap-4 flex-1">
-            <div className="w-full max-w-xs h-2 bg-[var(--color-surface-container-high)] rounded-full overflow-hidden">
+            <div className="w-full max-w-xs h-2 bg-[var(--sys-color-charcoalBackground-steps-4)] rounded-full overflow-hidden">
               <div
-                className="h-full bg-[var(--color-leaf-base)] transition-all duration-500 rounded-full"
+                className="h-full bg-[var(--sys-color-kr-activistSmokeGreen-base)] transition-all duration-500 rounded-full"
                 style={{ width: `${getProgressPercentage()}%` }}
               />
             </div>
-            <span className="text-body-small text-[var(--color-text-secondary)] whitespace-nowrap">
+            <span className="text-body-small text-[var(--sys-color-worker-ash-steps-4)] whitespace-nowrap">
               {getProgressPercentage()}% Complete
             </span>
           </div>
 
-          <div className="flex gap-2 bg-[var(--color-surface-container-low)] p-1 rounded-full">
+          <div className="flex gap-2 bg-[var(--sys-color-charcoalBackground-steps-1)] p-1 rounded-full">
             {[
               { key: 'all', label: 'All' },
               { key: 'interviews', label: 'Interviews' },
@@ -457,8 +457,8 @@ export const TimelineView: React.FC<TimelineViewProps> = ({
                 onClick={() => setFilter(key as any)}
                 className={`px-4 py-1.5 rounded-full text-label-small transition-colors ${
                   filter === key
-                    ? 'bg-[var(--color-surface-base)] shadow-sm text-[var(--color-text-primary)] font-medium'
-                    : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]'
+                    ? 'bg-[var(--sys-color-charcoalBackground-steps-2)] shadow-sm text-[var(--sys-color-worker-ash-steps-6)] font-medium'
+                    : 'text-[var(--sys-color-worker-ash-steps-4)] hover:text-[var(--sys-color-worker-ash-steps-6)]'
                 }`}
               >
                 {label}
@@ -472,15 +472,15 @@ export const TimelineView: React.FC<TimelineViewProps> = ({
       <div className="p-6">
         <div className="max-w-3xl mx-auto">
           {filteredEvents.length === 0 ? (
-            <Stone className="p-12 text-center bg-[var(--color-surface-container-low)] border-dashed border-2 border-[var(--color-surface-container-high)]">
+            <Stone className="p-12 text-center bg-[var(--sys-color-charcoalBackground-steps-1)] border-dashed border-2 border-[var(--sys-color-charcoalBackground-steps-4)]">
               <MessageSquare
                 size={48}
-                className="mx-auto mb-4 text-[var(--color-text-tertiary)]"
+                className="mx-auto mb-4 text-[var(--sys-color-worker-ash-steps-2)]"
               />
-              <h3 className="text-display-small font-medium text-[var(--color-text-primary)] mb-2">
+              <h3 className="text-display-small font-medium text-[var(--sys-color-worker-ash-steps-6)] mb-2">
                 No Events Found
               </h3>
-              <p className="text-body-medium text-[var(--color-text-secondary)] mb-6">
+              <p className="text-body-medium text-[var(--sys-color-worker-ash-steps-4)] mb-6">
                 {filter === 'all'
                   ? 'No timeline events have been recorded yet.'
                   : `No ${filter} events found.`}

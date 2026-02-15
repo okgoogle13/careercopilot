@@ -216,7 +216,7 @@ export function Dashboard() {
                       initial={{ width: 0 }}
                       animate={{ width: '75%' }}
                       transition={{ duration: 1.5, ease: 'circOut' }}
-                      className="h-full bg-gradient-to-r from-ink-gold to-concrete-grey shadow-[0_0_10px_rgba(var(--color-ink-gold),0.5)]"
+                      className="h-full bg-gradient-to-r from-ink-gold to-concrete-grey shadow-[0_0_10px_rgba(var(--sys-color-inkGold-base),0.5)]"
                     />
                   </div>
                   <p className="text-[9px] font-annotation text-paper-white opacity-40 mt-3 uppercase tracking-widest text-right">
