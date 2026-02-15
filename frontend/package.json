@@ -54,7 +54,14 @@
     "kr:replace-markers": "node ../scripts/kr/replace-asset-tokens.mjs",
     "kr:update-tokens": "node ../scripts/kr/update-token-map.mjs",
     "kr:inject-layers": "node scripts/kr/inject-ui-kit-layers.mjs",
-    "kr:stage2": "bash ../scripts/orchestrate-stage2.sh"
+    "kr:stage2": "bash ../scripts/orchestrate-stage2.sh",
+    "tokens:push": "node ../scripts/sync-tokens-to-figma-vars.mjs --push",
+    "tokens:pull": "node ../scripts/sync-tokens-to-figma-vars.mjs --pull",
+    "tokens:sync": "node ../scripts/sync-tokens-to-figma-vars.mjs --sync",
+    "tokens:sync:dry": "node ../scripts/sync-tokens-to-figma-vars.mjs --dry-run",
+    "tokens:validate": "node ../scripts/sync-tokens-to-figma-vars.mjs --validate-only",
+    "tokens:watch": "chokidar 'src/design/tokens/tokens.json' -c 'npm run tokens:sync:dry'",
+    "tokens:build": "python3 ../scripts/build-m3-tokens.py"
   },
   "engines": {
     "node": ">=16.0.0"

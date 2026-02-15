@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { FileText, Layout, Plus, Sparkles, Target, Zap } from 'lucide-react';
 
 // KrDark Assets
-import organicLabyrinth from '../../assets/KrMotifs/[DEPRECATED_STYLE]-labyrinth.jpg';
+import organicLabyrinth from '../../assets/specimens/organic-labyrinth.jpg';
 import wallpaper from '../../assets/textures/wallpaper.png';
 
 // ============================================================================

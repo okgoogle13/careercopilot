@@ -2,7 +2,7 @@
 
 ## 🚀 When to Use Flash-Sidekick
 
-**Current Status:** ⚠️ Filesystem:Flash-Sidekick ratio is **38:1** (should be <0.5)
+**Purpose:** Token-efficient analysis, summarization, and code generation using Gemini Flash (with GitHub Models fallback).
 
 ### Common Scenarios
 
@@ -94,44 +94,55 @@
 | Read agent_handoff.py  | ~1,200      | ~150                | 87%     |
 | **Total**              | **~10,200** | **~650**            | **94%** |
 
-## 📊 Current Usage Stats
+## 🔧 Backend Configuration
 
-```
-Filesystem calls:     76
-Flash-Sidekick calls: 2
-Ratio:                38:1 ⚠️
+### Primary: Gemini Flash
+- **Models**: `gemini-2.0-flash-exp` → `gemini-1.5-flash` → `gemini-pro`
+- **API Key**: Retrieved from macOS Keychain (`gemini-key`)
+- **Current Status**: ⚠️ API key invalid (400 error)
 
-Target ratio:         <0.5:1 ✅
-```
-
-## ✅ Action Items
-
-1. **Restart Claude Desktop** - Apply flash-sidekick env fix
-2. **Use the monitoring script** - Run `./scripts/monitor-mcp-usage.sh` weekly
-3. **Follow the policy** - Review `.claude/mcp-usage-policy.md`
-4. **Start conversations with** - "@flash-sidekick mode enabled"
+### Fallback: GitHub Models
+- **Model**: `gpt-4o-mini`
+- **Token**: Retrieved from `GITHUB_TOKEN` or `GH_TOKEN` env var
+- **Status**: ⚠️ Configured but missing `azure-ai-inference` dependency
 
 ## 🔧 Quick Commands
 
 ```bash
-# Monitor usage
-./scripts/monitor-mcp-usage.sh
+# Check Gemini API key status
+python3 -c "
+import os, google.generativeai as genai
+key = os.getenv('GEMINI_API_KEY')
+print(f'Key: {key[:10]}...{key[-4:]}' if key else 'NOT SET')
+genai.configure(api_key=key)
+try:
+    model = genai.GenerativeModel('gemini-2.0-flash-exp')
+    print('✅ API Key Valid')
+except Exception as e:
+    print(f'❌ {str(e)[:100]}')
+"
 
-# Check flash-sidekick health
-tail -f /tmp/mcp-flash-sidekick.log
+# Update Gemini API key in keychain
+security delete-generic-password -a "gemini-key" -s "careercopilot"
+/Users/okgoogle13/scripts/setup-keychain-secrets.sh
 
-# Clear MCP logs (reset counters)
-rm ~/Library/Logs/Claude/mcp.log
+# Install GitHub Models fallback dependencies
+cd /Users/okgoogle13/Desktop/careercopilot
+source .venv/bin/activate
+pip install --no-cache-dir azure-ai-inference openai
 
 # Test flash-sidekick
 echo '{"jsonrpc":"2.0","method":"tools/list","id":1}' | \
   /Users/okgoogle13/Desktop/careercopilot/.venv/bin/python3 \
   /Users/okgoogle13/Desktop/careercopilot/servers/flash_sidekick.py
+
+# Monitor flash-sidekick logs
+tail -f /tmp/mcp-flash-sidekick.log
 ```
 
 ---
 
 **Remember:** Flash-sidekick uses Gemini (free/cheap), Filesystem uses Claude tokens (expensive/limited)
 
-**Last Updated:** 2026-01-29
-**Status:** Flash-sidekick fixed, ready to use after restart
+**Last Updated:** 2026-02-15
+**Status:** ⚠️ Blocked on invalid Gemini API key - see diagnosis report
