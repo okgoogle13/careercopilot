@@ -138,3 +138,13 @@ consolidation_log.txt
 setup-ci-secrets.sh
 .asset_backup_*
 .asset_backup_*
+* 2.*
+* copy.*
+* old.*
+# General Clean-up
+venv/
+.git_corrupted_backup_*/
+purge/
+claude_desktop_config.json.backup
+archive/
+

@@ -108,6 +108,20 @@ response_cache = {}
 cache_ttl = int(os.getenv("CACHE_TTL_SECONDS", "3600"))
 _models_cache = {}
 
+
+def _get_github_token() -> str:
+    for key in (
+        "GITHUB_TOKEN",
+        "GH_TOKEN",
+        "GITHUB_PAT",
+        "GITHUB_PERSONAL_ACCESS_TOKEN",
+        "CODEX_GITHUB_PERSONAL_ACCESS_TOKEN",
+    ):
+        value = os.getenv(key, "")
+        if value:
+            return value
+    return ""
+
 # Candidates
 # Candidates
 # Verified available models from list_models()
@@ -132,7 +146,7 @@ def _get_model(candidates):
     return None
 
 async def _call_gh_models_async(prompt, sys_instruct="", json_mode=False):
-    github_token = os.getenv("GITHUB_TOKEN", os.getenv("GH_TOKEN", ""))
+    github_token = _get_github_token()
     if not ChatCompletionsClient or not github_token:
         return "Error: GitHub Models fallback not configured."
     try:

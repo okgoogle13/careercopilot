@@ -29,7 +29,12 @@
         "/Users/okgoogle13/Desktop/careercopilot/servers/design_system_sidekick.py"
       ],
       "env": {
-        "GEMINI_API_KEY": "${GEMINI_API_KEY}"
+        "GEMINI_API_KEY": "${GEMINI_API_KEY}",
+        "GITHUB_TOKEN": "${GITHUB_TOKEN}",
+        "GH_TOKEN": "${GH_TOKEN}",
+        "GITHUB_PAT": "${GITHUB_PAT}",
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_PERSONAL_ACCESS_TOKEN}",
+        "CODEX_GITHUB_PERSONAL_ACCESS_TOKEN": "${CODEX_GITHUB_PERSONAL_ACCESS_TOKEN}"
       }
     },
     "vision-scorer-mcp": {
@@ -38,7 +43,12 @@
         "/Users/okgoogle13/Desktop/careercopilot/servers/vision_scorer_mcp.py"
       ],
       "env": {
-        "GEMINI_API_KEY": "${GEMINI_API_KEY}"
+        "GEMINI_API_KEY": "${GEMINI_API_KEY}",
+        "GITHUB_TOKEN": "${GITHUB_TOKEN}",
+        "GH_TOKEN": "${GH_TOKEN}",
+        "GITHUB_PAT": "${GITHUB_PAT}",
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_PERSONAL_ACCESS_TOKEN}",
+        "CODEX_GITHUB_PERSONAL_ACCESS_TOKEN": "${CODEX_GITHUB_PERSONAL_ACCESS_TOKEN}"
       }
     }
   },

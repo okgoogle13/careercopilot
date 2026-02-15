@@ -46,6 +46,13 @@ function validate() {
         echo "✅ GEMINI_API_KEY detected."
     fi
 
+    local github_pat="${GITHUB_TOKEN:-${GH_TOKEN:-${GITHUB_PAT:-${GITHUB_PERSONAL_ACCESS_TOKEN:-${CODEX_GITHUB_PERSONAL_ACCESS_TOKEN:-}}}}}"
+    if [ -z "$github_pat" ]; then
+        echo "⚠️  Warning: No GitHub PAT detected (fallback for Gemini MCP servers will be unavailable)."
+    else
+        echo "✅ GitHub PAT fallback token detected."
+    fi
+
     echo "✅ Validation complete."
 }
 

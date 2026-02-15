@@ -42,7 +42,7 @@ registered_flows: dict[str, Any] = {}
 # --- Core Initialization ---
 
 
-def init_genkit() -> bool:
+async def init_genkit() -> bool:
     """
     Initialize the Genkit framework with required plugins and models.
     Falls back to google-generativeai if Genkit plugin initialization fails.
@@ -83,7 +83,7 @@ def init_genkit() -> bool:
                 google_ai_local = cast(Any, GoogleAI)
                 genkit_instance = genkit_local(
                     plugins=[google_ai_local(api_key=api_key)],
-                    model="googleai/gemini-3.0-flash",
+                    model="googleai/gemini-2.5-flash",  # Updated to available model
                 )
                 logger.info("Genkit initialized successfully with plugin")
                 initialized = True
@@ -109,9 +109,9 @@ def init_genkit() -> bool:
             class GenerativeAIWrapper:
                 def __init__(self, genai_module: Any):
                     self.genai = genai_module
-                    self.model_name = "gemini-3.0-flash"
+                    self.model_name = "gemini-2.5-flash"  # Updated to available model
 
-                def generate(self, prompt: str, **kwargs) -> Any:
+                async def generate(self, prompt: str, **kwargs) -> Any:
                     """Generate content using Gemini"""
                     model = self.genai.GenerativeModel(self.model_name)
                     return model.generate_content(prompt, **kwargs)
@@ -184,14 +184,14 @@ def check_genkit_health() -> dict[str, Any]:
     return health_status
 
 
-def startup_genkit() -> None:
+async def startup_genkit() -> None:
     """
     Initialize Genkit during application startup.
     Honors the ENABLE_GENKIT_FLOWS environment variable.
     """
     if is_genkit_enabled():
         logger.info("Genkit flows are enabled, initializing...")
-        if init_genkit():
+        if await init_genkit():
             logger.info("Genkit startup completed successfully")
         else:
             logger.warning("Genkit startup completed with warnings")

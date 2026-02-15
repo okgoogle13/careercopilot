@@ -23,8 +23,8 @@ supabase
 anthropic
 
 # Genkit AI framework
-genkit
-genkit-plugin-google-genai
+genkit==0.5.0
+genkit-plugin-google-genai==0.5.0
 
 # Authentication
 python-jose[cryptography]
