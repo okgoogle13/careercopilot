@@ -65,6 +65,23 @@ This repository uses a unified MCP configuration for AI-assisted coding.
 | `npm run build` | Build both frontend and functions |
 | `npm run test` | Run frontend test suite |
 | `python3 tools/doctor.py` | Run system health check |
+| `bash scripts/git-health-check.sh` | Check git repository health |
+
+## 🔍 Troubleshooting
+
+### Git Repository Issues
+
+If you encounter "short read" errors or git corruption:
+
+```bash
+# Run comprehensive git health check
+bash scripts/git-health-check.sh --verbose
+
+# Attempt automatic repairs
+bash scripts/git-health-check.sh --repair
+```
+
+See [docs/GIT_HEALTH_CHECK.md](docs/GIT_HEALTH_CHECK.md) for detailed diagnostics and resolution steps.
 
 ---
 **Status**: ✅ PRODUCTION READY - v1.0.0

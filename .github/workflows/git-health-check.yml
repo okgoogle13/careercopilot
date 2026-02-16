@@ -1,0 +1,123 @@
+name: Git Health Check
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+  schedule:
+    # Run daily at 2 AM UTC
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+
+jobs:
+  git-health:
+    name: Repository Health Check
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          # Use full clone for comprehensive checks
+          fetch-depth: 0
+      
+      - name: Run Git Health Check
+        id: health-check
+        run: |
+          chmod +x scripts/git-health-check.sh
+          bash scripts/git-health-check.sh --verbose
+        continue-on-error: true
+      
+      - name: Check for corruption
+        run: |
+          # Run git fsck and capture output
+          if ! git fsck --full 2>&1 | tee fsck-output.txt; then
+            echo "::error::Git fsck detected issues"
+            cat fsck-output.txt
+            exit 1
+          fi
+          
+          # Check for specific error patterns
+          if grep -iE "error|corrupt|missing|broken|short read" fsck-output.txt; then
+            echo "::error::Corruption detected in repository"
+            cat fsck-output.txt
+            exit 1
+          fi
+          
+          echo "✓ No corruption detected"
+      
+      - name: Verify pack files
+        run: |
+          echo "Verifying pack files..."
+          for idx in .git/objects/pack/*.idx; do
+            if [ -f "$idx" ]; then
+              echo "Verifying $idx..."
+              if ! git verify-pack -v "$idx" > /dev/null 2>&1; then
+                echo "::error::Pack file verification failed: $idx"
+                exit 1
+              fi
+            fi
+          done
+          echo "✓ All pack files verified"
+      
+      - name: Check repository size
+        run: |
+          GIT_SIZE_BYTES=$(du -sb .git | cut -f1)
+          GIT_SIZE_MB=$((GIT_SIZE_BYTES / 1024 / 1024))
+          
+          echo "Repository size: ${GIT_SIZE_MB}MB"
+          
+          if [ $GIT_SIZE_BYTES -gt 1073741824 ]; then  # 1GB
+            echo "::warning::Large repository detected (${GIT_SIZE_MB}MB)"
+            echo "Consider using Git LFS for large files"
+          fi
+      
+      - name: Check for large files
+        run: |
+          echo "Checking for large files in repository..."
+          # Find files larger than 50MB
+          find . -type f -size +50M -not -path "./.git/*" | while read file; do
+            size=$(du -h "$file" | cut -f1)
+            echo "::warning::Large file detected: $file ($size)"
+          done || true
+      
+      - name: Optimize repository (if needed)
+        if: success()
+        run: |
+          # Only run gc if there are loose objects
+          LOOSE_OBJECTS=$(git count-objects | cut -d' ' -f1)
+          if [ "$LOOSE_OBJECTS" -gt 100 ]; then
+            echo "Optimizing repository (${LOOSE_OBJECTS} loose objects)..."
+            git gc --auto
+          else
+            echo "Repository doesn't need optimization"
+          fi
+      
+      - name: Report results
+        if: always()
+        run: |
+          echo "## Git Health Check Results" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          if [ "${{ steps.health-check.outcome }}" == "success" ]; then
+            echo "✅ **Repository is healthy**" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "⚠️ **Health check detected issues**" >> $GITHUB_STEP_SUMMARY
+          fi
+          
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Statistics" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          git count-objects -vH >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+      
+      - name: Upload fsck results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: git-health-check-results
+          path: |
+            fsck-output.txt
+          retention-days: 30

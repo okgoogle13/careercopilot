@@ -45,6 +45,7 @@ This master setup script handles:
 - **`production-secrets-validator.py`** - Production secrets validation
 - **`run-tests.sh`** - Test suite runner
 - **`typescript-check.sh`** - TypeScript validation
+- **`git-health-check.sh`** - Git repository health diagnostics
 
 ### 🎨 Design System Scripts
 
@@ -288,6 +289,34 @@ Run validation test suite.
 ```bash
 ./scripts/run-validation-tests.sh
 ```
+
+#### `git-health-check.sh`
+
+Comprehensive git repository health diagnostics to detect corruption, "short read" errors, and repository issues.
+
+```bash
+# Basic health check
+bash scripts/git-health-check.sh
+
+# Verbose output
+bash scripts/git-health-check.sh --verbose
+
+# Attempt automatic repairs
+bash scripts/git-health-check.sh --repair
+
+# Help
+bash scripts/git-health-check.sh --help
+```
+
+**Features:**
+- Validates git repository integrity with `git fsck`
+- Verifies pack file health
+- Detects shallow clones
+- Checks repository size and suggests optimizations
+- Identifies large files that should use Git LFS
+- Provides actionable recommendations
+
+See [docs/GIT_HEALTH_CHECK.md](../docs/GIT_HEALTH_CHECK.md) for detailed documentation.
 
 ### Utilities & Maintenance Scripts
 
