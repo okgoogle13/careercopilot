@@ -46,6 +46,7 @@ This master setup script handles:
 - **`run-tests.sh`** - Test suite runner
 - **`typescript-check.sh`** - TypeScript validation
 - **`git-health-check.sh`** - Git repository health diagnostics
+- **`cleanup-repository-size.sh`** - Repository size optimization and cleanup
 
 ### 🎨 Design System Scripts
 
@@ -317,6 +318,36 @@ bash scripts/git-health-check.sh --help
 - Provides actionable recommendations
 
 See [docs/GIT_HEALTH_CHECK.md](../docs/GIT_HEALTH_CHECK.md) for detailed documentation.
+
+#### `cleanup-repository-size.sh`
+
+Optimize repository size by removing duplicates, cleanup artifacts, and uncategorized assets.
+
+```bash
+# Dry-run (preview what would be deleted)
+bash scripts/cleanup-repository-size.sh
+
+# Execute cleanup with backup
+bash scripts/cleanup-repository-size.sh --execute
+
+# Execute without backup (not recommended)
+bash scripts/cleanup-repository-size.sh --execute --no-backup
+
+# Help
+bash scripts/cleanup-repository-size.sh --help
+```
+
+**Features:**
+- Removes cleanup artifacts (purge/ directory)
+- Cleans uncategorized assets (700MB+)
+- Removes triage/staging directories
+- Reports duplicate files
+- Creates automatic backups before deletion
+- Shows large file report (>10MB)
+
+**Potential Space Savings:** ~900MB (reduces working tree from 1.4GB to ~500MB)
+
+See [docs/REPOSITORY_SIZE_ANALYSIS.md](../docs/REPOSITORY_SIZE_ANALYSIS.md) for full analysis and recommendations.
 
 ### Utilities & Maintenance Scripts
 
