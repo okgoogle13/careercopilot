@@ -73,6 +73,14 @@
   --leaf-opsz: 12;
   --leaf-grad: 0;
   --leaf-xtra: 400;
+
+  /* Font Family Aliases (The Federation Stack) */
+  --font-field-note: var(--sys-type-fontFamilies-primary), sans-serif;
+  --font-bloom: var(--sys-type-fontFamilies-display), serif;
+  --font-proclamation: var(--sys-type-fontFamilies-proclamation), serif;
+  --font-annotation: var(--sys-type-fontFamilies-mono), monospace;
+  --font-curator: var(--sys-type-fontFamilies-curator), cursive;
+  --font-hero: var(--sys-type-fontFamilies-colorAccent), sans-serif;
 }
 
 /* Standard Solidarity Mode axis configurations */

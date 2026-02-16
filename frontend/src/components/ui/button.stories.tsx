@@ -1,3 +1,4 @@
+import 'src/design/styles/design-tokens.css';
 import type { Meta, StoryObj } from '@storybook/react';
 import { Mail, Trash } from 'lucide-react';
 import { Button } from './button';
@@ -26,6 +27,36 @@ export const Default: Story = {
     children: 'Button',
     variant: 'default',
     size: 'default',
+  },
+};
+
+export const Hover: Story = {
+  args: {
+    children: 'Hover Preview',
+    variant: 'default',
+    className: 'hover:scale-105',
+  },
+};
+
+export const Focus: Story = {
+  args: {
+    children: 'Focus Preview',
+    variant: 'default',
+    className: 'ring-2 ring-[var(--sys-color-inkGold-base)]',
+  },
+};
+
+export const Disabled: Story = {
+  args: {
+    children: 'Disabled',
+    disabled: true,
+  },
+};
+
+export const Error: Story = {
+  args: {
+    children: 'Error',
+    variant: 'destructive',
   },
 };
 

@@ -202,6 +202,29 @@ export function StyleGuide() {
           </div>
         </div>
       </section>
+
+      {/* Act 5: Signature Accents (Nabla / Caveat) */}
+      <section className="mb-16 animate-in slide-in-from-bottom-8 fade-in duration-700 delay-400 ease-spring-decelerate fill-mode-both">
+        <h2 className="text-display-small font-black uppercase mb-8">Signature Accents</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="p-8 bg-surface-container rounded-leaf border border-outline-variant flex flex-col items-center justify-center min-h-[240px]">
+            <p className="text-label-small uppercase tracking-widest text-on-surface-variant mb-6 text-center">
+              Nabla (Hero Color Accent)
+            </p>
+            <h1 className="font-color-accent text-6xl md:text-8xl select-none">
+              NABLA
+            </h1>
+          </div>
+          <div className="p-8 bg-surface-container rounded-leaf border border-outline-variant flex flex-col items-center justify-center min-h-[240px]">
+            <p className="text-label-small uppercase tracking-widest text-on-surface-variant mb-6 text-center">
+              Caveat (Curator Annotation)
+            </p>
+            <p className="font-curator text-4xl md:text-5xl text-primary transform -rotate-2">
+              Human-first annotations
+            </p>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

@@ -13,6 +13,12 @@ CareerCopilot is an AI-powered career management platform designed to automate j
 - **AI Engine**: Powered by Gemini Pro 2.0 (and Flash) for high-performance job analysis.
 - **Infrastructure**: Fully containerized with Docker and modular architecture.
 
+## 📚 Documentation
+
+- **[Full Documentation →](docs/)** — Complete guides and references
+- **[Setup Guide](docs/setup/)** — Get started in 5 minutes
+- **[Architecture](docs/architecture/)** — Understand the system
+
 ## 🚀 Quickstart
 
 Start the entire application with a single command:

@@ -1,0 +1,65 @@
+{
+  "version": "1.0.0",
+  "generator": "codex-cli deterministic fallback",
+  "description": "Sprint3 hero pipeline batch outputs",
+  "templates": [
+    "deterministic-layered-hero",
+    "resistance-hero-street"
+  ],
+  "registers": [
+    "defiance",
+    "discovery",
+    "reflection"
+  ],
+  "asset_count": 6,
+  "assets": [
+    {
+      "template": "deterministic-layered-hero",
+      "register": "defiance",
+      "file": "heroes/deterministic-layered-hero-defiance-1920x1080.svg",
+      "resolution": "1920x1080",
+      "format": "svg",
+      "generated_at": "2026-02-16T00:07:04.672885"
+    },
+    {
+      "template": "deterministic-layered-hero",
+      "register": "discovery",
+      "file": "heroes/deterministic-layered-hero-discovery-1920x1080.svg",
+      "resolution": "1920x1080",
+      "format": "svg",
+      "generated_at": "2026-02-16T00:07:04.673493"
+    },
+    {
+      "template": "deterministic-layered-hero",
+      "register": "reflection",
+      "file": "heroes/deterministic-layered-hero-reflection-1920x1080.svg",
+      "resolution": "1920x1080",
+      "format": "svg",
+      "generated_at": "2026-02-16T00:07:04.674031"
+    },
+    {
+      "template": "resistance-hero-street",
+      "register": "defiance",
+      "file": "heroes/resistance-hero-street-defiance-1920x1080.svg",
+      "resolution": "1920x1080",
+      "format": "svg",
+      "generated_at": "2026-02-16T00:07:04.674600"
+    },
+    {
+      "template": "resistance-hero-street",
+      "register": "discovery",
+      "file": "heroes/resistance-hero-street-discovery-1920x1080.svg",
+      "resolution": "1920x1080",
+      "format": "svg",
+      "generated_at": "2026-02-16T00:07:04.675256"
+    },
+    {
+      "template": "resistance-hero-street",
+      "register": "reflection",
+      "file": "heroes/resistance-hero-street-reflection-1920x1080.svg",
+      "resolution": "1920x1080",
+      "format": "svg",
+      "generated_at": "2026-02-16T00:07:04.675896"
+    }
+  ]
+}
