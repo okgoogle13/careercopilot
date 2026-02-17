@@ -45,6 +45,8 @@ This master setup script handles:
 - **`production-secrets-validator.py`** - Production secrets validation
 - **`run-tests.sh`** - Test suite runner
 - **`typescript-check.sh`** - TypeScript validation
+- **`git-health-check.sh`** - Git repository health diagnostics
+- **`cleanup-repository-size.sh`** - Repository size optimization and cleanup
 
 ### 🎨 Design System Scripts
 
@@ -288,6 +290,64 @@ Run validation test suite.
 ```bash
 ./scripts/run-validation-tests.sh
 ```
+
+#### `git-health-check.sh`
+
+Comprehensive git repository health diagnostics to detect corruption, "short read" errors, and repository issues.
+
+```bash
+# Basic health check
+bash scripts/git-health-check.sh
+
+# Verbose output
+bash scripts/git-health-check.sh --verbose
+
+# Attempt automatic repairs
+bash scripts/git-health-check.sh --repair
+
+# Help
+bash scripts/git-health-check.sh --help
+```
+
+**Features:**
+- Validates git repository integrity with `git fsck`
+- Verifies pack file health
+- Detects shallow clones
+- Checks repository size and suggests optimizations
+- Identifies large files that should use Git LFS
+- Provides actionable recommendations
+
+See [docs/GIT_HEALTH_CHECK.md](../docs/GIT_HEALTH_CHECK.md) for detailed documentation.
+
+#### `cleanup-repository-size.sh`
+
+Optimize repository size by removing duplicates, cleanup artifacts, and uncategorized assets.
+
+```bash
+# Dry-run (preview what would be deleted)
+bash scripts/cleanup-repository-size.sh
+
+# Execute cleanup with backup
+bash scripts/cleanup-repository-size.sh --execute
+
+# Execute without backup (not recommended)
+bash scripts/cleanup-repository-size.sh --execute --no-backup
+
+# Help
+bash scripts/cleanup-repository-size.sh --help
+```
+
+**Features:**
+- Removes cleanup artifacts (purge/ directory)
+- Cleans uncategorized assets (700MB+)
+- Removes triage/staging directories
+- Reports duplicate files
+- Creates automatic backups before deletion
+- Shows large file report (>10MB)
+
+**Potential Space Savings:** ~900MB (reduces working tree from 1.4GB to ~500MB)
+
+See [docs/REPOSITORY_SIZE_ANALYSIS.md](../docs/REPOSITORY_SIZE_ANALYSIS.md) for full analysis and recommendations.
 
 ### Utilities & Maintenance Scripts
 
