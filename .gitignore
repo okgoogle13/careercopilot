@@ -138,3 +138,4 @@ consolidation_log.txt
 setup-ci-secrets.sh
 .asset_backup_*
 .asset_backup_*
+_archive/
