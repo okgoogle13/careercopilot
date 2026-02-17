@@ -59,13 +59,4 @@ export async function loadHeroRegistry(): Promise<HeroRegistry> {
   }
 }
 
-export function getCompositionById(
-  registry: HeroRegistry,
-  compositionId: string
-): HeroComposition | undefined {
-  return registry.compositions.find((comp) => comp.id === compositionId);
-}
 
-export function getAllCompositions(registry: HeroRegistry): HeroComposition[] {
-  return registry.compositions;
-}

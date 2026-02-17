@@ -1,0 +1,37 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended"],
+  "dependencyDashboard": true,
+  "dependencyDashboardTitle": "📊 Dependency Dashboard",
+  "enabledManagers": ["npm", "pip_requirements"],
+  "labels": ["dependencies"],
+  "assignAutomerge": true,
+  "automergeType": "branch",
+  "automergeStrategy": "squash",
+  "schedule": ["before 5am on monday"],
+  "timezone": "Australia/Sydney",
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "automerge": true,
+      "automergeType": "branch"
+    },
+    {
+      "matchUpdateTypes": ["major"],
+      "dependencyDashboardApproval": true
+    },
+    {
+      "matchPackagePatterns": ["^@types/"],
+      "automerge": true
+    },
+    {
+      "matchPackagePatterns": ["eslint", "prettier", "typescript"],
+      "groupName": "development dependencies",
+      "schedule": ["before 5am on the first day of the month"]
+    },
+    {
+      "matchManagers": ["pip_requirements"],
+      "versioning": "pep440"
+    }
+  ]
+}

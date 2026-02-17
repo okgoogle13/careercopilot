@@ -1,0 +1,23 @@
+{
+  "id": "KR-SOLID-024",
+  "name": "kr-solidarity__devotional__shiva-statue__v1",
+  "category": "devotional",
+  "file_path": "/assets/kr-solidarity/devotional/kr-solidarity__devotional__kr-solidarity--devotional--shiva-statue--v1__v1.png",
+  "priority": "HIGH",
+  "status": "ready",
+  "intended_context": "Catalog imported",
+  "specs": {
+    "aspect_ratio": "1024:1024",
+    "style": "mixed",
+    "text_content": null,
+    "visual_anchors": {
+      "halo": null,
+      "framing": null,
+      "subject": "catalog-imported"
+    },
+    "color_palette": {
+      "primary": "#1A1714",
+      "secondary": "#D4A84B"
+    }
+  }
+}

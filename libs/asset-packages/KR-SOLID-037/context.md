@@ -1,0 +1,61 @@
+# kr-solidarity__devotional__shiva-statue-street__v1
+
+**Asset ID:** KR-SOLID-037
+**Category:** devotional
+**Political Significance:** solidarity
+**Created:** 2026-02-11 12:24:13
+
+## Governance Status
+- **Approval Level:** HUMAN-REVIEW
+- **Passed Validation:** ✅ Yes
+- **Governance Score:** 90/100
+
+
+
+
+**Warnings:**
+- Devotional imagery: style should be reverent (screenprint/painting/etching)
+
+## Scoring Summary
+
+| Dimension | Score | Weight |
+|-----------|-------|--------|
+| Political Representation | 75/100 | 25% |
+| Governance Compliance | 85/100 | 30% |
+| Cultural Appropriateness | 75/100 | 25% |
+| Aesthetic Quality | 88/100 | 20% |
+| **OVERALL** | **80.6/100** | **100%** |
+
+**Approval Status:** CONDITIONAL-APPROVAL
+
+## Asset Details
+
+**Text Content:** (none)
+
+**Historical Reference:** (none)
+
+**Detected Symbols:**
+(none)
+
+**Artistic Style:** mixed
+
+**Color Palette:**
+- primary: #1A1714
+- secondary: #D4A84B
+
+**Intended Context:**
+Catalog imported
+
+## Implementation Notes
+
+- ⚠️  Good asset - monitor for cultural sensitivity feedback
+- 📍 Strengthen political significance framing (current: 75)
+-    → Add historical reference or movement context
+-    → Enhance visual symbolism or cultural markers
+- 🎭 Enhance cultural appropriateness (current: 75)
+-    → Use more reverent artistic style
+
+---
+
+**Confidence Score:** 0.97/1.0
+**Analysis Notes:** Imported from Sidekick Catalog

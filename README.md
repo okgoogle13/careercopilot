@@ -60,5 +60,23 @@ This repository uses a unified MCP configuration for AI-assisted coding.
 | `npm run test` | Run frontend test suite |
 | `python3 tools/doctor.py` | Run system health check |
 
+## Git Lock Recovery
+
+Use repo-local git wrappers to avoid stale lock and LFS filter failures:
+
+```bash
+./scripts/git-safe.sh preflight
+./scripts/git-safe.sh add
+./scripts/git-safe.sh commit -m "your message"
+./scripts/git-safe.sh push origin <branch>
+```
+
+If git operations still fail, run:
+
+```bash
+./scripts/git-lock-diagnose.sh
+./scripts/git-safe.sh repair
+```
+
 ---
 **Status**: ✅ PRODUCTION READY - v1.0.0
