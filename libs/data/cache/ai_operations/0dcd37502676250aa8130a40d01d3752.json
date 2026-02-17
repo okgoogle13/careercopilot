@@ -1,0 +1,16 @@
+{
+  "key": "resume_analysis_user_789_6bd7661dd3170b8f",
+  "value": {
+    "result": {
+      "result": "resume_analysis_result"
+    },
+    "operation_type": "resume_analysis",
+    "input_hash": "6bd7661dd3170b8f",
+    "user_id": "user_789",
+    "cached_at": "2025-11-22T20:57:26.421967"
+  },
+  "timestamp": "2025-11-22T20:57:26.421997",
+  "expires_at": "2025-11-25T20:57:26.421997",
+  "ttl_hours": 72.0,
+  "category": "ai_operations"
+}

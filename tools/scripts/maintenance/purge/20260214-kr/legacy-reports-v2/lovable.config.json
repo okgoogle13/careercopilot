@@ -1,0 +1,30 @@
+{
+  "$schema": "https://www.lovable.dev/schema.json",
+  "parsers": [
+    {
+      "path": "frontend/src/theme/theme.ts",
+      "type": "mui-theme"
+    }
+  ],
+  "output": {
+    "path": "frontend/dist/tokens/design-tokens.json",
+    "format": "json-design-tokens"
+  },
+  "tokens": {
+    "colors": {
+      "source": "palette"
+    },
+    "typography": {
+      "source": "typography"
+    },
+    "spacing": {
+      "source": "spacing"
+    },
+    "shadows": {
+      "source": "shadows"
+    },
+    "shape": {
+      "source": "shape"
+    }
+  }
+}
