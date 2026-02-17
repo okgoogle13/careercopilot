@@ -1,0 +1,423 @@
+/* ============================================
+   KERALA RAGE — SOLIDARITY MODE
+   globals.css v1.0.0
+   
+   This file imports design-tokens.css (the single
+   source of truth) and layers base styles, component
+   classes, and utilities on top.
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Libre+Bodoni:ital,wght@0,400..700;1,400..700&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Caveat:wght@400..700&family=Nabla&display=swap');
+
+/* Design tokens — inlined (no external file dependency) */
+:root {
+  /* ---- CHARCOAL SURFACE SYSTEM ---- */
+  --sys-color-charcoalBackground-steps-0: #0F0F0F;
+  --sys-color-charcoalBackground-steps-1: #1A1A1A;
+  --sys-color-charcoalBackground-steps-2: #242424;
+  --sys-color-charcoalBackground-steps-3: #2A2A2A;
+  --sys-color-charcoalBackground-steps-4: #323232;
+  --sys-color-charcoalBackground-steps-5: #3A3A3A;
+  --sys-color-charcoalBackground-steps-6: #444444;
+
+  /* ---- PRIMARY ACCENTS ---- */
+  --sys-color-solidarityRed-base: #F14714;
+  --sys-color-inkGold-base: #DAF674;
+  --sys-color-stencilYellow-base: #F6E748;
+  --sys-color-signalGreen-base: #48F0E5;
+  --sys-color-signalGreen-steps-4: #7AF5ED;
+  --sys-color-kr-activistSmokeGreen-base: #48DA8B;
+  --sys-color-worker-ash-base: #DAF6B3;
+  --sys-color-worker-ash-steps-3: #9AAF7D;
+  --sys-color-solidaritySmokeOrange-base: #DA8B48;
+  --sys-color-labWrenMetalBlue-base: #48B3DA;
+  --sys-color-kr-charcoalRed-base: #F14844;
+
+  /* ---- FONT FAMILIES ---- */
+  --sys-type-fontFamilies-primary: 'Work Sans';
+  --sys-type-fontFamilies-display: 'Fraunces';
+  --sys-type-fontFamilies-proclamation: 'Libre Bodoni';
+  --sys-type-fontFamilies-mono: 'JetBrains Mono';
+  --sys-type-fontFamilies-curator: 'Caveat';
+  --sys-type-fontFamilies-colorAccent: 'Nabla';
+
+  /* ---- TYPE SCALE ---- */
+  --sys-type-scale-micro: 8px;
+  --sys-type-scale-small: 12px;
+  --sys-type-scale-body: 16px;
+  --sys-type-scale-subhead: 24px;
+  --sys-type-scale-headline: 48px;
+  --sys-type-scale-display: 72px;
+  --sys-type-scale-hero: 144px;
+
+  /* ---- EMOTIONAL PATTERNS ---- */
+  --sys-type-emotionalPatterns-solidarityProtest-wght: 800;
+  --sys-type-emotionalPatterns-solidarityProtest-wdth: 120;
+  --sys-type-emotionalPatterns-solidarityProtest-letterSpacing: 0.02em;
+  --sys-type-emotionalPatterns-laborExploitationPressure-wght: 900;
+  --sys-type-emotionalPatterns-laborExploitationPressure-wdth: 75;
+  --sys-type-emotionalPatterns-laborExploitationPressure-letterSpacing: 0em;
+  --sys-type-emotionalPatterns-melancholyLonging-wght: 475;
+  --sys-type-emotionalPatterns-melancholyLonging-wdth: 98;
+  --sys-type-emotionalPatterns-melancholyLonging-letterSpacing: 0em;
+  --sys-type-emotionalPatterns-identityAssertion-wght: 700;
+  --sys-type-emotionalPatterns-identityAssertion-wdth: 110;
+  --sys-type-emotionalPatterns-identityAssertion-letterSpacing: 0em;
+  --sys-type-emotionalPatterns-extremeVariableContrast-wght: 100;
+  --sys-type-emotionalPatterns-extremeVariableContrast-wdth: 100;
+  --sys-type-emotionalPatterns-extremeVariableContrast-letterSpacing: -0.02em;
+
+  /* ---- SHAPE DNA ---- */
+  --sys-shape-radius-stone: 42% 58% 45% 55% / 48% 62% 38% 52%;
+  --sys-shape-radius-slab: 48% 52% 58% 42% / 55% 45% 60% 40%;
+  --sys-shape-radius-pebble: 16px 8px 12px 20px;
+  --sys-shape-sentryAvatar: 98%;
+  --sys-shape-tornEdgeClipPath: polygon(0% 2%, 5% 0%, 15% 3%, 25% 0%, 35% 2%, 45% 0%, 55% 3%, 65% 0%, 75% 2%, 85% 0%, 95% 3%, 100% 0%, 100% 98%, 95% 100%, 85% 97%, 75% 100%, 65% 98%, 55% 100%, 45% 97%, 35% 100%, 25% 98%, 15% 100%, 5% 97%, 0% 100%);
+
+  /* ---- ELEVATION / SHADOWS ---- */
+  --sys-shadow-elevation1Pebble: 0 2px 4px rgba(0,0,0,0.25);
+  --sys-shadow-elevation2Stone: 0 4px 8px rgba(0,0,0,0.35);
+  --sys-shadow-elevation3HoverLift: 0 8px 16px rgba(0,0,0,0.45);
+  --sys-shadow-elevation4Float: 0 16px 32px rgba(0,0,0,0.55);
+  --sys-shadow-inkOffset: 2px 2px 0px #DAF674;
+  --sys-shadow-solidarityBleed: 0 0 12px #F14714;
+
+  /* ---- MOTION ---- */
+  --sys-motion-m3Expressive-0: 0.34;
+  --sys-motion-m3Expressive-1: 1.56;
+  --sys-motion-m3Expressive-2: 0.64;
+  --sys-motion-m3Expressive-3: 1;
+  --sys-motion-patterns-typeSpringSlam-duration: 600ms;
+  --sys-motion-patterns-dragSettle-duration: 800ms;
+  --sys-motion-patterns-pulseThrob-duration: 1000ms;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================
+   BASE LAYER
+   ============================================ */
+@layer base {
+  :root {
+    font-optical-sizing: auto;
+  }
+
+  body {
+    background-color: var(--sys-color-charcoalBackground-steps-0);
+    color: var(--sys-color-worker-ash-base);
+    font-family: var(--sys-type-fontFamilies-primary), system-ui, sans-serif;
+    font-weight: 400;
+    font-optical-sizing: auto;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* ---- TYPOGRAPHY SYSTEM ---- */
+
+  h1, h2, h3 {
+    font-family: var(--sys-type-fontFamilies-display), serif;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    line-height: 1.05;
+  }
+
+  h4, h5, h6 {
+    font-family: var(--sys-type-fontFamilies-primary), system-ui, sans-serif;
+    font-weight: 700;
+    letter-spacing: 0em;
+    line-height: 1.15;
+  }
+
+  p, li {
+    font-family: var(--sys-type-fontFamilies-primary), system-ui, sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+  }
+
+  code, pre, kbd, samp {
+    font-family: var(--sys-type-fontFamilies-mono), monospace;
+    font-size: 0.875em;
+  }
+
+  a {
+    color: var(--sys-color-signalGreen-base);
+    text-decoration: none;
+    transition: color 200ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  a:hover {
+    color: var(--sys-color-signalGreen-steps-4);
+  }
+
+  ::selection {
+    background-color: var(--sys-color-solidarityRed-base);
+    color: var(--sys-color-charcoalBackground-steps-0);
+  }
+}
+
+/* ============================================
+   COMPONENT CLASSES
+   ============================================ */
+@layer components {
+
+  /* ---- SHAPES ---- */
+
+  .shape-stone {
+    border-radius: var(--sys-shape-radius-stone);
+  }
+
+  .shape-slab {
+    border-radius: var(--sys-shape-radius-slab);
+  }
+
+  .shape-pebble {
+    border-radius: var(--sys-shape-radius-pebble);
+  }
+
+  .shape-sentry {
+    border-radius: var(--sys-shape-sentryAvatar);
+  }
+
+  .shape-torn {
+    clip-path: var(--sys-shape-tornEdgeClipPath);
+  }
+
+  /* ---- ELEVATION ---- */
+
+  .elevation-1 {
+    box-shadow: var(--sys-shadow-elevation1Pebble);
+  }
+
+  .elevation-2 {
+    box-shadow: var(--sys-shadow-elevation2Stone);
+  }
+
+  .elevation-3 {
+    box-shadow: var(--sys-shadow-elevation3HoverLift);
+  }
+
+  .elevation-4 {
+    box-shadow: var(--sys-shadow-elevation4Float);
+  }
+
+  .shadow-ink {
+    text-shadow: var(--sys-shadow-inkOffset);
+  }
+
+  .shadow-bleed {
+    box-shadow: var(--sys-shadow-solidarityBleed);
+  }
+
+  /* ---- EMOTIONAL TYPOGRAPHY ---- */
+
+  .type-solidarity-protest {
+    font-family: var(--sys-type-fontFamilies-primary), system-ui, sans-serif;
+    font-variation-settings:
+      'wght' var(--sys-type-emotionalPatterns-solidarityProtest-wght),
+      'wdth' var(--sys-type-emotionalPatterns-solidarityProtest-wdth);
+    letter-spacing: var(--sys-type-emotionalPatterns-solidarityProtest-letterSpacing);
+    text-transform: uppercase;
+  }
+
+  .type-labor-pressure {
+    font-family: var(--sys-type-fontFamilies-primary), system-ui, sans-serif;
+    font-variation-settings:
+      'wght' var(--sys-type-emotionalPatterns-laborExploitationPressure-wght),
+      'wdth' var(--sys-type-emotionalPatterns-laborExploitationPressure-wdth);
+    letter-spacing: var(--sys-type-emotionalPatterns-laborExploitationPressure-letterSpacing);
+  }
+
+  .type-melancholy {
+    font-family: var(--sys-type-fontFamilies-primary), system-ui, sans-serif;
+    font-variation-settings:
+      'wght' var(--sys-type-emotionalPatterns-melancholyLonging-wght),
+      'wdth' var(--sys-type-emotionalPatterns-melancholyLonging-wdth);
+    letter-spacing: var(--sys-type-emotionalPatterns-melancholyLonging-letterSpacing);
+  }
+
+  .type-identity-assertion {
+    font-family: var(--sys-type-fontFamilies-primary), system-ui, sans-serif;
+    font-variation-settings:
+      'wght' var(--sys-type-emotionalPatterns-identityAssertion-wght),
+      'wdth' var(--sys-type-emotionalPatterns-identityAssertion-wdth);
+    letter-spacing: var(--sys-type-emotionalPatterns-identityAssertion-letterSpacing);
+    text-transform: uppercase;
+  }
+
+  .type-extreme-contrast {
+    font-family: var(--sys-type-fontFamilies-primary), system-ui, sans-serif;
+    font-variation-settings:
+      'wght' var(--sys-type-emotionalPatterns-extremeVariableContrast-wght),
+      'wdth' var(--sys-type-emotionalPatterns-extremeVariableContrast-wdth);
+    letter-spacing: var(--sys-type-emotionalPatterns-extremeVariableContrast-letterSpacing);
+  }
+
+  /* ---- FONT ROLE CLASSES ---- */
+
+  .font-display {
+    font-family: var(--sys-type-fontFamilies-display), serif;
+  }
+
+  .font-proclamation {
+    font-family: var(--sys-type-fontFamilies-proclamation), serif;
+  }
+
+  .font-mono {
+    font-family: var(--sys-type-fontFamilies-mono), monospace;
+  }
+
+  .font-curator {
+    font-family: var(--sys-type-fontFamilies-curator), cursive;
+  }
+
+  .font-color-accent {
+    font-family: var(--sys-type-fontFamilies-colorAccent), sans-serif;
+  }
+
+  /* ---- DATA LABEL ---- */
+
+  .data-label {
+    font-family: var(--sys-type-fontFamilies-mono), monospace;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: var(--sys-type-scale-small);
+    color: var(--sys-color-worker-ash-steps-3);
+  }
+
+  /* ---- NOISE TEXTURE OVERLAY ---- */
+
+  .noise-texture {
+    position: relative;
+  }
+
+  .noise-texture::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
+    background-size: 200px 200px;
+    pointer-events: none;
+    mix-blend-mode: overlay;
+  }
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+@layer utilities {
+
+  /* ---- COLOR UTILITIES ---- */
+
+  .text-solidarity     { color: var(--sys-color-solidarityRed-base); }
+  .bg-solidarity       { background-color: var(--sys-color-solidarityRed-base); }
+  .text-ink-gold       { color: var(--sys-color-inkGold-base); }
+  .bg-ink-gold         { background-color: var(--sys-color-inkGold-base); }
+  .text-stencil        { color: var(--sys-color-stencilYellow-base); }
+  .bg-stencil          { background-color: var(--sys-color-stencilYellow-base); }
+  .text-signal         { color: var(--sys-color-signalGreen-base); }
+  .bg-signal           { background-color: var(--sys-color-signalGreen-base); }
+  .text-activist       { color: var(--sys-color-kr-activistSmokeGreen-base); }
+  .bg-activist         { background-color: var(--sys-color-kr-activistSmokeGreen-base); }
+  .text-worker-ash     { color: var(--sys-color-worker-ash-base); }
+  .text-worker-ash-muted { color: var(--sys-color-worker-ash-steps-3); }
+  .bg-worker-ash       { background-color: var(--sys-color-worker-ash-base); }
+  .text-smoke-orange   { color: var(--sys-color-solidaritySmokeOrange-base); }
+  .bg-smoke-orange     { background-color: var(--sys-color-solidaritySmokeOrange-base); }
+  .text-metal-blue     { color: var(--sys-color-labWrenMetalBlue-base); }
+  .bg-metal-blue       { background-color: var(--sys-color-labWrenMetalBlue-base); }
+  .text-charcoal-red   { color: var(--sys-color-kr-charcoalRed-base); }
+  .bg-charcoal-red     { background-color: var(--sys-color-kr-charcoalRed-base); }
+
+  /* ---- SURFACE UTILITIES ---- */
+
+  .bg-canvas           { background-color: var(--sys-color-charcoalBackground-steps-0); }
+  .bg-surface          { background-color: var(--sys-color-charcoalBackground-steps-1); }
+  .bg-surface-raised   { background-color: var(--sys-color-charcoalBackground-steps-2); }
+  .bg-surface-gutter   { background-color: var(--sys-color-charcoalBackground-steps-3); }
+  .bg-surface-card     { background-color: var(--sys-color-charcoalBackground-steps-4); }
+  .bg-surface-hover    { background-color: var(--sys-color-charcoalBackground-steps-5); }
+  .bg-surface-active   { background-color: var(--sys-color-charcoalBackground-steps-6); }
+
+  /* ---- GLOW UTILITIES ---- */
+
+  .glow-solidarity {
+    box-shadow: 0 0 24px -4px var(--sys-color-solidarityRed-base);
+  }
+  .glow-ink-gold {
+    box-shadow: 0 0 24px -4px var(--sys-color-inkGold-base);
+  }
+  .glow-signal {
+    box-shadow: 0 0 24px -4px var(--sys-color-signalGreen-base);
+  }
+
+  /* ---- MOTION UTILITIES ---- */
+
+  .motion-spring-slam {
+    transition: all var(--sys-motion-patterns-typeSpringSlam-duration) cubic-bezier(
+      var(--sys-motion-m3Expressive-0),
+      var(--sys-motion-m3Expressive-1),
+      var(--sys-motion-m3Expressive-2),
+      var(--sys-motion-m3Expressive-3)
+    );
+  }
+
+  .motion-drag-settle {
+    transition: all var(--sys-motion-patterns-dragSettle-duration) cubic-bezier(
+      var(--sys-motion-m3Expressive-0),
+      var(--sys-motion-m3Expressive-1),
+      var(--sys-motion-m3Expressive-2),
+      var(--sys-motion-m3Expressive-3)
+    );
+  }
+
+  .motion-pulse-throb {
+    transition: all var(--sys-motion-patterns-pulseThrob-duration) cubic-bezier(
+      var(--sys-motion-m3Expressive-0),
+      var(--sys-motion-m3Expressive-1),
+      var(--sys-motion-m3Expressive-2),
+      var(--sys-motion-m3Expressive-3)
+    );
+  }
+
+  /* ---- TYPE SCALE UTILITIES ---- */
+
+  .text-micro    { font-size: var(--sys-type-scale-micro); }
+  .text-small    { font-size: var(--sys-type-scale-small); }
+  .text-body     { font-size: var(--sys-type-scale-body); }
+  .text-subhead  { font-size: var(--sys-type-scale-subhead); }
+  .text-headline { font-size: var(--sys-type-scale-headline); }
+  .text-display  { font-size: var(--sys-type-scale-display); }
+  .text-hero     { font-size: var(--sys-type-scale-hero); }
+
+  /* ---- ANTI-SLOP ENFORCEMENT ---- */
+
+  .weight-100 { font-weight: 100 !important; }
+  .weight-400 { font-weight: 400 !important; }
+  .weight-700 { font-weight: 700 !important; }
+  .weight-900 { font-weight: 900 !important; }
+
+  /* ---- MESH GRADIENT ---- */
+
+  .mesh-gradient {
+    background:
+      radial-gradient(circle at 15% 25%, rgba(241, 71, 20, 0.12) 0%, transparent 50%),
+      radial-gradient(circle at 75% 75%, rgba(218, 246, 116, 0.10) 0%, transparent 50%),
+      radial-gradient(circle at 50% 50%, rgba(72, 240, 229, 0.08) 0%, transparent 50%),
+      radial-gradient(circle at 85% 15%, rgba(246, 231, 72, 0.06) 0%, transparent 50%);
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    .motion-spring-slam,
+    .motion-drag-settle,
+    .motion-pulse-throb {
+      transition: none;
+    }
+  }
+}
