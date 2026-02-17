@@ -65,6 +65,45 @@ This repository uses a unified MCP configuration for AI-assisted coding.
 | `npm run build` | Build both frontend and functions |
 | `npm run test` | Run frontend test suite |
 | `python3 tools/doctor.py` | Run system health check |
+| `bash scripts/git-health-check.sh` | Check git repository health |
+
+## 🔍 Troubleshooting
+
+### Git Repository Issues
+
+If you encounter "short read" errors or git corruption:
+
+```bash
+# Run comprehensive git health check
+bash scripts/git-health-check.sh --verbose
+
+# Attempt automatic repairs
+bash scripts/git-health-check.sh --repair
+```
+
+See [docs/GIT_HEALTH_CHECK.md](docs/GIT_HEALTH_CHECK.md) for detailed diagnostics and resolution steps.
+
+### Repository Size Issues
+
+If the repository is slow to clone or taking up too much disk space:
+
+```bash
+# Analyze repository size
+# See docs/REPOSITORY_SIZE_ANALYSIS.md for full report
+
+# Preview cleanup (dry-run)
+bash scripts/cleanup-repository-size.sh
+
+# Execute cleanup with backup
+bash scripts/cleanup-repository-size.sh --execute
+```
+
+**Current working tree size: 1.4GB**
+- `frontend/` - 744MB (mostly public/assets/)
+- `assets/` - 546MB (uncategorized images)
+- Potential savings: ~900MB with cleanup
+
+See [docs/REPOSITORY_SIZE_ANALYSIS.md](docs/REPOSITORY_SIZE_ANALYSIS.md) for detailed analysis and Git LFS migration guide.
 
 ---
 **Status**: ✅ PRODUCTION READY - v1.0.0
