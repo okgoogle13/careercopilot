@@ -4,7 +4,11 @@ import { EvidenceUploader } from '@/features/ingestion/components/EvidenceUpload
 import { m3Toast } from '@/utils/toast';
 import { motion } from 'framer-motion';
 import { Building, Compass, Copy, Gauge, Sparkles, Target } from 'lucide-react';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { LayeredHero } from '../components/kerala-rage/LayeredHero';
+import { loadHeroRegistry } from '../design/hero/heroRegistry';
+import { composeHero } from '../utils/heroComposer';
+import type { SolidarityManifest } from '../design/hero/heroTypes';
 
 // KrDark Assets
 import grindingStone from '../assets/KrMotifs/grinding_stone.jpg';
@@ -54,6 +58,42 @@ interface StrategyResult {
  * ✓ Precision typography and monospace annotations
  */
 export const AnalysisPage: React.FC = () => {
+  const [heroData, setHeroData] = useState<{
+    layers: any[];
+    typography: any;
+    animation: any;
+    zIndexMap: any;
+  } | null>(null);
+
+  useEffect(() => {
+    async function loadHero() {
+      try {
+        const [manifest, registry] = await Promise.all([
+          fetch('/assets/kerala-rage-kr-solidarity-manifest.json').then((r) => r.json()),
+          loadHeroRegistry(),
+        ]);
+
+        const result = composeHero(
+          manifest as SolidarityManifest,
+          registry,
+          'resistance-portrait-hero-1' // Bhagat Singh
+        );
+
+        if (result.valid) {
+          setHeroData({
+            layers: result.resolvedLayers,
+            typography: result.typography,
+            animation: result.animation,
+            zIndexMap: result.zIndexMap,
+          });
+        }
+      } catch (error) {
+        console.error('Failed to load analysis hero:', error);
+      }
+    }
+    loadHero();
+  }, []);
+
   const [jobUrl, setJobUrl] = useState('');
   const [jobDescription, setJobDescription] = useState('');
   const [resumeText, setResumeText] = useState('');
@@ -127,6 +167,20 @@ export const AnalysisPage: React.FC = () => {
         className="absolute inset-0 opacity-5 pointer-events-none mix-blend-screen"
         style={{ backgroundImage: `url(${paperGrain})`, backgroundRepeat: 'repeat' }}
       />
+
+      {/* Hero Engine Integration: Static Hero Header */}
+      {heroData && (
+        <div className="absolute top-0 left-0 w-full h-[300px] pointer-events-none opacity-20 mask-gradient-to-bottom">
+          <LayeredHero
+            layers={heroData.layers}
+            typography={{ ...heroData.typography, headline: '', supporting: '' }}
+            animation={{ ...heroData.animation, scroll_behavior: 'none' }}
+            zIndexMap={heroData.zIndexMap}
+            className="h-full"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent to-asphalt-black-darkest" />
+        </div>
+      )}
 
       {/* Header: Analytical Focus */}
       <header className="mb-12 flex items-center justify-between border-b border-concrete-grey/10 pb-8 relative z-10">

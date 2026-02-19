@@ -43,7 +43,7 @@ export async function loadHeroRegistry(): Promise<HeroRegistry> {
   }
 
   try {
-    const response = await fetch('/assets/kr-solidarity/kr-solidarity.hero-registry.json');
+    const response = await fetch('/assets/kr-solidarity-hero-registry.json');
     if (!response.ok) {
       console.warn('Hero registry fetch failed, using fallback');
       cachedRegistry = FALLBACK_REGISTRY;

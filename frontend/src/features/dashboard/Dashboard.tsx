@@ -1,10 +1,11 @@
 import { Pebble, StatusBadge, Stone } from '@/components/ui';
 import { motion } from 'framer-motion';
 import { FileText, Layout, Plus, Sparkles, Target, Zap } from 'lucide-react';
-
-// KrDark Assets
-import organicLabyrinth from '../../assets/KrMotifs/[DEPRECATED_STYLE]-labyrinth.jpg';
-import wallpaper from '../../assets/textures/wallpaper.png';
+import { useEffect, useState } from 'react';
+import { LayeredHero } from '../../components/kerala-rage/LayeredHero';
+import { loadHeroRegistry } from '../../design/hero/heroRegistry';
+import { composeHero } from '../../utils/heroComposer';
+import type { SolidarityManifest } from '../../design/hero/heroTypes';
 
 // ============================================================================
 // TYPE DEFINITIONS
@@ -37,6 +38,42 @@ const PROFILES: Profile[] = [
  * ✓ 2x2 KrMotif Grid with Blur Bloom effects
  */
 export function Dashboard() {
+  const [heroData, setHeroData] = useState<{
+    layers: any[];
+    typography: any;
+    animation: any;
+    zIndexMap: any;
+  } | null>(null);
+
+  useEffect(() => {
+    async function loadHero() {
+      try {
+        const [manifest, registry] = await Promise.all([
+          fetch('/assets/kerala-rage-kr-solidarity-manifest.json').then((r) => r.json()),
+          loadHeroRegistry(),
+        ]);
+
+        const result = composeHero(
+          manifest as SolidarityManifest,
+          registry,
+          'layered-solidarity-hero'
+        );
+
+        if (result.valid) {
+          setHeroData({
+            layers: result.resolvedLayers,
+            typography: result.typography,
+            animation: result.animation,
+            zIndexMap: result.zIndexMap,
+          });
+        }
+      } catch (error) {
+        console.error('Failed to load dashboard hero:', error);
+      }
+    }
+    loadHero();
+  }, []);
+
   const container = {
     hidden: { opacity: 0 },
     show: {
@@ -63,29 +100,18 @@ export function Dashboard() {
 
   return (
     <div className="min-h-screen bg-asphalt-black relative overflow-hidden p-8 md:p-12 lg:p-16">
-      {/* Background Layer: The Nocturnal Canopy */}
-      <div
-        className="absolute inset-0 opacity-20 pointer-events-none mix-blend-soft-light"
-        style={{
-          backgroundImage: `url(${wallpaper})`,
-          backgroundSize: 'cover',
-          backgroundAttachment: 'fixed',
-        }}
-      />
-
-      {/* ASSET-09: Ceiling Gum Motif (Top Left) */}
-      <motion.div
-        initial={{ y: -50, x: -50, opacity: 0, rotate: -5 }}
-        animate={{ y: 0, x: 0, opacity: 0.4, rotate: 0 }}
-        transition={{ duration: 2, ease: 'easeOut' }}
-        className="absolute -top-32 -left-32 w-[600px] h-[600px] pointer-events-none mix-blend-screen grayscale brightness-125"
-      >
-        <img
-          src={organicLabyrinth}
-          alt=""
-          className="w-full h-full object-cover rounded-full blur-3xl"
-        />
-      </motion.div>
+      {/* Background Layer: Hero Engine Integration */}
+      {heroData && (
+        <div className="absolute inset-0 pointer-events-none opacity-30">
+          <LayeredHero
+            layers={heroData.layers}
+            typography={{ ...heroData.typography, headline: '', supporting: '' }} // Hide text for background use
+            animation={heroData.animation}
+            zIndexMap={heroData.zIndexMap}
+            className="h-full"
+          />
+        </div>
+      )}
 
       <motion.div
         variants={container as any}
