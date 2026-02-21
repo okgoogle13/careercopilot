@@ -75,7 +75,7 @@ export const KanbanCard: React.FC<KanbanCardProps> = ({
         <h3 className="text-xl font-bold text-paper-white uppercase tracking-tight mb-2">
           {title}
         </h3>
-        <p className="text-sm text-paper-white/60 font-inter line-clamp-2">
+        <p className="text-[10px] text-paper-white/60 font-mono uppercase tracking-widest line-clamp-2">
           {description}
         </p>
       </div>

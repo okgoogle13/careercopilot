@@ -109,13 +109,12 @@ cache_ttl = int(os.getenv("CACHE_TTL_SECONDS", "3600"))
 _models_cache = {}
 
 # Candidates
-# Candidates
 # Verified available models from list_models()
-FAST_CANDIDATES = ["models/gemini-2.0-flash", "models/gemini-2.5-flash"]
+FAST_CANDIDATES = ["models/gemini-3-flash-preview", "models/gemini-2.5-flash", "models/gemini-2.0-flash"]
 env_fast = os.getenv("GEMINI_MODEL")
 if env_fast and env_fast not in FAST_CANDIDATES: FAST_CANDIDATES.insert(0, env_fast)
 
-PRO_CANDIDATES = ["models/gemini-2.5-pro", "models/gemini-exp-1206", "models/gemini-1.5-pro"]
+PRO_CANDIDATES = ["models/gemini-3-pro-preview", "models/gemini-2.5-pro", "models/gemini-exp-1206"]
 env_pro = os.getenv("GEMINI_PRO_MODEL")
 if env_pro and env_pro not in PRO_CANDIDATES: PRO_CANDIDATES.insert(0, env_pro)
 
@@ -132,9 +131,10 @@ def _get_model(candidates):
     return None
 
 async def _call_gh_models_async(prompt, sys_instruct="", json_mode=False):
-    github_token = os.getenv("GITHUB_TOKEN", os.getenv("GH_TOKEN", ""))
+    github_token = os.getenv("GITHUB_TOKEN", os.getenv("GH_TOKEN", os.getenv("GITHUB_PAT", "")))
     if not ChatCompletionsClient or not github_token:
-        return "Error: GitHub Models fallback not configured."
+        logger.warning("GitHub Models fallback attempted but GITHUB_TOKEN is not configured.")
+        return "Error: Both Gemini and GitHub Models fallback failed (GITHUB_TOKEN missing)."
     try:
         async with ChatCompletionsClient(
             endpoint="https://models.github.ai/inference",
@@ -187,8 +187,22 @@ async def _call_gemini_async(engine_type, prompt, sys_instruct="", use_search=Fa
             logger.error(f"Gemini call failed: {e}")
             return None
 
-    result = await loop.run_in_executor(executor, blocking_call)
+    retry_count = 0
+    max_retries = 2
+    result = None
+
+    while retry_count <= max_retries:
+        result = await loop.run_in_executor(executor, blocking_call)
+        if result is not None:
+            break
+        retry_count += 1
+        if retry_count <= max_retries:
+            wait = retry_count * 2
+            logger.warning(f"Gemini call failed, retrying in {wait}s ({retry_count}/{max_retries})")
+            await asyncio.sleep(wait)
+
     if result is None:
+        logger.error(f"Gemini failed after {max_retries} retries. Falling back to GitHub Models.")
         return await _call_gh_models_async(prompt, sys_instruct, json_mode)
     return result
 
@@ -206,6 +220,8 @@ async def _analyze_image_async(image_path: str, prompt: str, sys_instruct: str =
 
             with open(image_path, "rb") as f:
                 image_data = f.read()
+                if image_data.startswith(b"version https://git-lfs.github.com/spec/v1"):
+                    return json.dumps({"error": f"File at {image_path} is a Git LFS pointer. Run 'git lfs pull'."})
 
             contents = []
             if sys_instruct:
