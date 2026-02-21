@@ -107,7 +107,7 @@ export const NorthcoteButton = React.forwardRef<HTMLButtonElement, NorthcoteButt
         ref={ref}
         className={cn(
           // Base styles
-          'font-bold uppercase tracking-wide', // Removed font-field-note to use Roboto Flex override
+          'font-bold uppercase tracking-wide', // slop-ignore: using system font for Northcote override
           'transition-colors duration-[var(--duration-fast)]', // Removed generic transition-all to let motion handle physics
           'disabled:opacity-50 disabled:cursor-not-allowed',
 

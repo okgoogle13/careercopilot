@@ -40,3 +40,12 @@ jobs:
           cd frontend
           npm run kr:sync
           git diff --exit-code public/assets/kerala-rage-kr-solidarity-manifest.json public/assets/kr-solidarity-hero-registry.json
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Run Design System Guardrails
+        run: |
+          npm run tokens:guardrail

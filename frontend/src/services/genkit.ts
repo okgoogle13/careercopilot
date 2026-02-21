@@ -26,6 +26,14 @@ export interface KSCRequest {
   ksc_statement: string;
 }
 
+export interface ProfileSummaryRequest {
+  user_profile_data: any;
+}
+
+export interface ProfileSummaryResponse {
+  summary: string;
+}
+
 export interface SmartCoverLetter {
   letter_content: string;
   subject_line?: string;
@@ -136,6 +144,13 @@ const mockGenkitApi = {
     return {
       resume_text: `${data.resume_text}\n\n[Mock: Integrated keywords: ${data.missing_keywords.join(', ')}]`,
       keywords_integrated: data.missing_keywords,
+    };
+  },
+
+  async generateProfileSummary(data: ProfileSummaryRequest): Promise<ProfileSummaryResponse> {
+    await new Promise((resolve) => setTimeout(resolve, 2500));
+    return {
+      summary: `[Mock AI Summary] Innovative and mission-driven professional with expertise in community care and crisis intervention. Proven track record of delivering high-impact solutions in complex environments.`,
     };
   },
 
@@ -305,6 +320,25 @@ const realGenkitApi = {
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({}));
       throw new Error(errorData.detail || 'Failed to analyze job from URL');
+    }
+
+    return await response.json();
+  },
+
+  async generateProfileSummary(data: ProfileSummaryRequest): Promise<ProfileSummaryResponse> {
+    const token = await getAuthToken();
+    const response = await fetch(`${API_URL}/genkit/profile/summary`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(errorData.detail || 'Failed to generate profile summary');
     }
 
     return await response.json();

@@ -86,7 +86,7 @@ export const ApplicationForm: React.FC<ApplicationFormProps> = ({
                <div className="px-6 py-2 border-4 border-smoke-green text-smoke-green font-bold text-2xl uppercase tracking-tighter">
                  VERIFIED
                </div>
-               <span className="font-inter text-sm text-paper-white/60">History confirmed.</span>
+               <span className="font-mono text-[10px] uppercase tracking-widest text-paper-white/60">History confirmed.</span>
              </motion.div>
           ) : (
              <div className="flex flex-col items-center gap-4 text-center">

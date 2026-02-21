@@ -64,7 +64,7 @@ export const LoginCard: React.FC<LoginCardProps> = ({
         {/* Screenprint Substrate Overlay */}
         <div className="absolute inset-0 opacity-[0.08] pointer-events-none bg-[url('/assets/noise-texture.png')] mix-blend-overlay" />
 
-        <h2 className="text-display-lg font-recursive-800 text-paper-white tracking-tighter">
+        <h2 className="text-display-lg font-serif italic text-paper-white tracking-tighter">
           VERIFY IDENTITY
         </h2>
 
@@ -118,7 +118,7 @@ export const LoginCard: React.FC<LoginCardProps> = ({
         <button
           type="button"
           onClick={onRegisterClick}
-          className="text-center text-paper-white/60 font-inter text-sm hover:text-ink-gold transition-colors"
+          className="text-center text-paper-white/60 font-mono text-[10px] uppercase tracking-widest hover:text-ink-gold transition-colors"
         >
           Create Collective ID
         </button>

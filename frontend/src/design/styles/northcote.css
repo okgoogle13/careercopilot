@@ -532,11 +532,11 @@
     outline: 3px dashed red !important;
   }
 
-  .debug-typography [style*='Inter']::after,
-  .debug-typography [style*='Plus Jakarta']::after,
-  .debug-typography [style*='Recursive']::after,
-  .debug-typography [style*='Amstelvar']::after,
-  .debug-typography [style*='Roboto Flex']::after {
+  .debug-typography [style*='Inter']::after, // slop-ignore
+  .debug-typography [style*='Plus Jakarta']::after, // slop-ignore
+  .debug-typography [style*='Recursive']::after, // slop-ignore
+  .debug-typography [style*='Amstelvar']::after, // slop-ignore
+  .debug-typography [style*='Roboto Flex']::after { // slop-ignore
     content: '❌ SLOP FONT';
     background: red;
     color: white;
