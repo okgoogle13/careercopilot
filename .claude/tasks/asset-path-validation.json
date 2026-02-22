@@ -1,0 +1,195 @@
+{
+  "metadata": {
+    "title": "Asset Path Validation (Recurring)",
+    "description": "Ongoing validation of all asset references across codebase to prevent broken paths",
+    "total_tasks": 5,
+    "frequency": "weekly",
+    "priority": "normal",
+    "created_at": "2026-02-22T00:00:00Z",
+    "recurring": true
+  },
+  "tasks": [
+    {
+      "task_id": "scan-component-refs",
+      "assigned_to": "claude-code",
+      "status": "pending",
+      "priority": "normal",
+      "inputs": {
+        "action": "scan_asset_references",
+        "source_type": "react_components",
+        "directories": [
+          "frontend/src/components/",
+          "frontend/src/features/",
+          "frontend/src/layouts/"
+        ],
+        "file_extensions": [".tsx", ".ts", ".jsx", ".js"],
+        "search_patterns": [
+          "import.*from.*assets",
+          "src=.*assets",
+          "backgroundImage.*assets",
+          "require.*assets"
+        ],
+        "asset_base_dirs": [
+          "frontend/src/assets/",
+          "frontend/public/assets/"
+        ],
+        "output_file": "component-refs-scan.json",
+        "report_format": {
+          "file_path": "relative path",
+          "reference_type": "import|src|url|require",
+          "asset_path": "referenced path",
+          "exists": "boolean",
+          "asset_type": "image|svg|font|other",
+          "line_number": "if applicable"
+        }
+      },
+      "next_task": "scan-markdown-refs",
+      "next_assigned_to": "claude-code"
+    },
+    {
+      "task_id": "scan-markdown-refs",
+      "assigned_to": "claude-code",
+      "status": "pending",
+      "priority": "normal",
+      "inputs": {
+        "action": "scan_asset_references",
+        "source_type": "markdown_documents",
+        "directories": [
+          "docs/",
+          "frontend/src/design/",
+          "./"
+        ],
+        "file_extensions": [".md"],
+        "search_patterns": [
+          "!\\[.*\\]\\(.*assets",
+          "\\[.*\\]\\(.*assets",
+          "src=.*assets"
+        ],
+        "asset_base_dirs": [
+          "frontend/src/assets/",
+          "frontend/public/assets/"
+        ],
+        "output_file": "markdown-refs-scan.json",
+        "report_format": {
+          "file_path": "relative path",
+          "reference_type": "image|link",
+          "asset_path": "referenced path",
+          "exists": "boolean",
+          "context": "markdown snippet around reference"
+        }
+      },
+      "next_task": "scan-css-refs",
+      "next_assigned_to": "claude-code"
+    },
+    {
+      "task_id": "scan-css-refs",
+      "assigned_to": "claude-code",
+      "status": "pending",
+      "priority": "normal",
+      "inputs": {
+        "action": "scan_asset_references",
+        "source_type": "css_stylesheets",
+        "directories": [
+          "frontend/src/styles/",
+          "frontend/src/components/",
+          "frontend/src/features/"
+        ],
+        "file_extensions": [".css", ".scss", ".tsx"],
+        "search_patterns": [
+          "url\\(.*assets",
+          "background-image.*assets",
+          "backgroundImage.*assets"
+        ],
+        "asset_base_dirs": [
+          "frontend/src/assets/",
+          "frontend/public/assets/"
+        ],
+        "output_file": "css-refs-scan.json",
+        "report_format": {
+          "file_path": "relative path",
+          "reference_type": "url|background|backgroundImage",
+          "asset_path": "referenced path",
+          "exists": "boolean",
+          "is_public_path": "if /assets/ prefix"
+        }
+      },
+      "next_task": "consolidate-report",
+      "next_assigned_to": "claude-code"
+    },
+    {
+      "task_id": "consolidate-report",
+      "assigned_to": "claude-code",
+      "status": "pending",
+      "priority": "normal",
+      "inputs": {
+        "action": "consolidate_scans",
+        "scan_files": [
+          "component-refs-scan.json",
+          "markdown-refs-scan.json",
+          "css-refs-scan.json"
+        ],
+        "analysis": {
+          "total_references": "count",
+          "broken_references": "filter exists=false",
+          "by_file": "group by source file",
+          "by_asset": "group by asset path",
+          "by_type": "group by reference type"
+        },
+        "output_file": "asset-path-validation-report.json",
+        "report_sections": [
+          "summary",
+          "broken_references_list",
+          "orphaned_assets_not_referenced",
+          "warnings",
+          "recommendations"
+        ]
+      },
+      "next_task": "fix-broken-refs-if-found",
+      "next_assigned_to": "gemini",
+      "conditional": "only_if_broken_references_found"
+    },
+    {
+      "task_id": "fix-broken-refs-if-found",
+      "assigned_to": "gemini",
+      "status": "pending",
+      "priority": "high",
+      "inputs": {
+        "action": "fix_broken_references",
+        "report_file": "asset-path-validation-report.json",
+        "broken_refs_only": true,
+        "fix_strategy": "find_closest_matching_asset_or_report_for_manual_review",
+        "operations": [
+          "identify_correct_file",
+          "suggest_replacement_path",
+          "generate_fix_commands",
+          "create_pr_ready_summary"
+        ],
+        "output_file": "broken-refs-fixes.json"
+      },
+      "success_criteria": {
+        "all_broken_references_addressed": true,
+        "fix_suggestions_valid": true,
+        "zero_broken_remaining": true
+      }
+    }
+  ],
+  "execution_schedule": {
+    "frequency": "weekly",
+    "day_of_week": "monday",
+    "time_utc": "09:00",
+    "automated_trigger": "on_git_push_to_main"
+  },
+  "notifications": {
+    "on_broken_found": "Alert development team",
+    "on_completion": "Post summary to #design-system slack channel"
+  },
+  "metrics": {
+    "track": [
+      "total_asset_references",
+      "broken_reference_count",
+      "broken_reference_trend",
+      "time_to_fix_average"
+    ],
+    "dashboard_update_frequency": "weekly"
+  }
+}

@@ -10,6 +10,7 @@ import type { SolidarityManifest } from '../../../design/hero/heroTypes';
 import { loadHeroRegistry } from '../../../design/hero/heroRegistry';
 import { composeHero } from '../../../utils/heroComposer';
 import { getHeroForVariant, LANDING_HERO_AB_CONFIG, AbVariant } from '../../../utils/heroAbTesting';
+import sentryKrShivaSrc from '../../../assets/KrMotifs/sentry_kr-shiva.png';
 
 /**
  * KrDarkLanding (Hi-Fi)
@@ -99,7 +100,7 @@ export const KrDarkLanding: React.FC = () => {
           <div className="absolute inset-0 bg-ink-gold/5 blur-[120px] rounded-full scale-150" />
           <div className="relative aspect-[3/4] bg-asphalt-black rounded-stone border border-white/5 overflow-hidden shadow-viscous group-hover:border-ink-gold/20 transition-colors duration-700">
              <img 
-               src="/src/assets/KrMotifs/the-sentry.png" 
+               src={sentryKrShivaSrc} 
                alt="The Sentry" 
                className="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-1000"
              />
