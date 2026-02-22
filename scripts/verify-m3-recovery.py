@@ -28,7 +28,7 @@ EXPECTED_FILES = {
     "design_token_system": {
         "files": [
             {
-                "path": "design-system/tokens.json",
+                "path": "frontend/src/design/tokens/tokens.json",
                 "min_size": 500,
                 "type": "json",
                 "required_keys": ["color", "spacing", "shape", "elevation", "typography"],

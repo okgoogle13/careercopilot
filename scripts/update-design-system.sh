@@ -2,7 +2,7 @@
 
 # This script validates and builds the design token system.
 # It should be run after the 'design-token-generator' skill
-# has updated 'design-system/tokens.json'.
+# has updated 'frontend/src/design/tokens/tokens.json'.
 #
 # Usage: ./scripts/update-design-system.sh
 

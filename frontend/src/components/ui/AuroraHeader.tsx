@@ -44,7 +44,7 @@ export const AuroraHeader: React.FC<AuroraHeaderProps> = ({
                     className="font-mono text-xs uppercase tracking-widest"
                     style={{
                         fontFamily: "'JetBrains Mono', monospace",
-                        color: 'var(--sys-color-concreteGrey)', // Concrete Grey
+                        color: 'var(--sys-color-worker-ash-base)', // Worker Ash (replaces Concrete Grey)
                     }}
                 >
                     {tag}
@@ -66,8 +66,8 @@ export const AuroraHeader: React.FC<AuroraHeaderProps> = ({
                 <motion.span
                     className="bg-clip-text text-transparent"
                     style={{
-                        backgroundImage: 'linear-gradient(135deg, var(--sys-color-kr-ink-gold) 0%, var(--sys-color-waratahRed) 50%, var(--sys-color-concreteGrey) 100%)',
-                        // Ink Gold → Solidarity Red → Concrete Grey
+                        backgroundImage: 'linear-gradient(135deg, var(--sys-color-inkGold-base) 0%, var(--sys-color-solidarityRed-base) 50%, var(--sys-color-worker-ash-base) 100%)',
+                        // Ink Gold → Solidarity Red → Worker Ash
                         backgroundSize: '200% 200%',
                     }}
                     animate={{
@@ -103,7 +103,7 @@ export const AuroraHeader: React.FC<AuroraHeaderProps> = ({
                     style={{
                         fontFamily: "'Fraunces', serif",
                         fontVariationSettings: "'wght' 400, 'SOFT' 100, 'WONK' 1",
-                        color: 'var(--sys-color-waratahRed)', // Solidarity Red
+                        color: 'var(--sys-color-solidarityRed-base)', // Solidarity Red
                     }}
                 >
                     {wittySubtitle}

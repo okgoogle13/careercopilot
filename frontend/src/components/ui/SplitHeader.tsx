@@ -32,7 +32,7 @@ export const SplitHeader: React.FC<SplitHeaderProps> = ({
         <div className={`relative ${className}`}>
             {/* The Proclamation (KrSerifBold) - Structural Anchor */}
             <motion.h1
-                className="relative z-0 text-6xl font-black uppercase tracking-tight text-white md:text-7xl lg:text-8xl"
+                className="relative z-0 text-6xl font-black uppercase tracking-tight text-[var(--sys-color-worker-ash-base)] md:text-7xl lg:text-8xl"
                 style={{
                     fontFamily: "'KrSerifBold', 'Playfair Display', serif",
                     fontStretch: 'condensed',
