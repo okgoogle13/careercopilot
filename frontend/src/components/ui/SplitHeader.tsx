@@ -51,7 +51,7 @@ export const SplitHeader: React.FC<SplitHeaderProps> = ({
                 style={{
                     fontFamily: "'Fraunces', serif",
                     fontVariationSettings: "'wght' 600, 'SOFT' 50, 'WONK' 1",
-                    color: '#D4A84B', // Ink Gold
+                    color: 'var(--sys-color-kr-ink-gold)', // Ink Gold
                     transform: `rotate(${vineRotation}deg)`,
                 }}
                 initial={{ opacity: 0, scale: 0.8, rotate: 0 }}

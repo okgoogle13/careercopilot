@@ -210,7 +210,7 @@ export function Jar({
             backgroundColor: 'var(--color-asphalt-black)',
             border: '1px solid var(--color-concrete-grey-base)',
             boxShadow: 'var(--shadow-maximum)',
-            animation: 'fadeIn 0.2s ease-out',
+            animation: 'fadeIn 0.2s cubic-bezier(0.34, 1.56, 0.64, 1)',
           }}
           role="listbox"
         >
