@@ -1,0 +1,235 @@
+{
+  "metadata": {
+    "title": "Uncategorized Asset Classification & Migration",
+    "description": "Classify 73 uncategorized/raw-generated assets into semantic categories and migrate to permanent kr-solidarity structure",
+    "total_tasks": 9,
+    "total_assets": 73,
+    "priority": "high",
+    "created_at": "2026-02-22T00:00:00Z"
+  },
+  "tasks": [
+    {
+      "task_id": "classify-batch-1",
+      "assigned_to": "gemini",
+      "status": "pending",
+      "priority": "high",
+      "inputs": {
+        "action": "visual_classification",
+        "batch_number": 1,
+        "asset_count": 10,
+        "assets": [
+          "kerala-rage-gen-raw-20260214-002.jpeg",
+          "kerala-rage-gen-raw-20260214-003.jpeg",
+          "kerala-rage-gen-raw-20260214-004.jpeg",
+          "kerala-rage-gen-raw-20260214-005.jpeg",
+          "kerala-rage-gen-raw-20260214-006.jpeg",
+          "kerala-rage-gen-raw-20260214-007.jpeg",
+          "kerala-rage-gen-raw-20260214-008.jpeg",
+          "kerala-rage-gen-raw-20260214-009.jpeg",
+          "kerala-rage-gen-raw-20260214-010.jpeg",
+          "kerala-rage-gen-raw-20260214-011.jpeg"
+        ],
+        "asset_directory": "frontend/public/assets/uncategorized/",
+        "categories": [
+          "abstract",
+          "motif",
+          "texture",
+          "portrait",
+          "devotional",
+          "landscape",
+          "specimen",
+          "discard"
+        ],
+        "category_guidelines": {
+          "abstract": "Atmospheric, generative art, gradients, backgrounds",
+          "motif": "Botanical patterns, symbolic elements, repeating designs",
+          "texture": "Substrates, materials, tactile patterns",
+          "portrait": "Faces, people, cultural figures, resistance icons",
+          "devotional": "Spiritual, sacred, ancestral imagery",
+          "landscape": "Geographic scenes, Melbourne urban, Kerala terrain",
+          "specimen": "Natural history, taxidermy, Northcote archive style",
+          "discard": "Low quality, duplicates, test assets, insufficient resolution"
+        },
+        "output_format": "json",
+        "output_file": "batch-1-classification.json",
+        "success_criteria": {
+          "all_assets_classified": true,
+          "confidence_score_minimum": 0.7,
+          "justifications_provided": true
+        }
+      },
+      "next_task": "validate-batch-1",
+      "next_assigned_to": "claude-code",
+      "created_at": "2026-02-22T00:00:00Z"
+    },
+    {
+      "task_id": "validate-batch-1",
+      "assigned_to": "claude-code",
+      "status": "pending",
+      "priority": "high",
+      "inputs": {
+        "action": "validate_classification",
+        "batch_number": 1,
+        "classification_file": "batch-1-classification.json",
+        "manifest_path": "frontend/src/design/tokens/kerala-rage-kr-solidarity-manifest.json",
+        "asset_directory": "frontend/public/assets/uncategorized/",
+        "validation_rules": {
+          "filename_format": "kr-solidarity__{category}__{descriptor}__v1.{ext}",
+          "check_duplicates": true,
+          "verify_resolution": true,
+          "minimum_resolution": "512x512"
+        },
+        "output_file": "batch-1-validated.json"
+      },
+      "next_task": "classify-batch-2",
+      "next_assigned_to": "gemini",
+      "created_at": "2026-02-22T00:00:00Z"
+    },
+    {
+      "task_id": "classify-batch-2",
+      "assigned_to": "gemini",
+      "status": "pending",
+      "priority": "high",
+      "inputs": {
+        "action": "visual_classification",
+        "batch_number": 2,
+        "asset_count": 10,
+        "assets": [
+          "kerala-rage-gen-raw-20260214-012.jpeg",
+          "kerala-rage-gen-raw-20260214-013.jpeg",
+          "kerala-rage-gen-raw-20260214-014.jpeg",
+          "kerala-rage-gen-raw-20260214-015.jpeg",
+          "kerala-rage-gen-raw-20260214-016.jpeg",
+          "kerala-rage-gen-raw-20260214-017.jpeg",
+          "kerala-rage-gen-raw-20260214-018.jpeg",
+          "kerala-rage-gen-raw-20260214-019.jpeg",
+          "kerala-rage-gen-raw-20260214-020.jpeg",
+          "kerala-rage-gen-raw-20260214-021.jpeg"
+        ],
+        "asset_directory": "frontend/public/assets/uncategorized/",
+        "categories": ["abstract", "motif", "texture", "portrait", "devotional", "landscape", "specimen", "discard"],
+        "output_format": "json",
+        "output_file": "batch-2-classification.json"
+      },
+      "next_task": "validate-batch-2",
+      "next_assigned_to": "claude-code"
+    },
+    {
+      "task_id": "validate-batch-2",
+      "assigned_to": "claude-code",
+      "status": "pending",
+      "priority": "high",
+      "inputs": {
+        "action": "validate_classification",
+        "batch_number": 2,
+        "classification_file": "batch-2-classification.json",
+        "manifest_path": "frontend/src/design/tokens/kerala-rage-kr-solidarity-manifest.json",
+        "asset_directory": "frontend/public/assets/uncategorized/",
+        "output_file": "batch-2-validated.json"
+      },
+      "next_task": "classify-batch-3",
+      "next_assigned_to": "gemini"
+    },
+    {
+      "task_id": "classify-batch-3",
+      "assigned_to": "gemini",
+      "status": "pending",
+      "priority": "high",
+      "inputs": {
+        "action": "visual_classification",
+        "batch_number": 3,
+        "asset_count": 10,
+        "assets": [
+          "kerala-rage-triage-20260214-001.png",
+          "kerala-rage-triage-20260214-002.png",
+          "kerala-rage-triage-20260214-003.png",
+          "kerala-rage-triage-20260214-004.png",
+          "kerala-rage-triage-20260214-005.png",
+          "kerala-rage-triage-20260214-006.png",
+          "kerala-rage-triage-20260214-007.png",
+          "kerala-rage-triage-20260214-008.png",
+          "kerala-rage-triage-20260214-009.png",
+          "kerala-rage-triage-20260214-010.png"
+        ],
+        "asset_directory": "frontend/public/assets/uncategorized/",
+        "categories": ["abstract", "motif", "texture", "portrait", "devotional", "landscape", "specimen", "discard"],
+        "output_format": "json",
+        "output_file": "batch-3-classification.json"
+      },
+      "next_task": "validate-batch-3",
+      "next_assigned_to": "claude-code"
+    },
+    {
+      "task_id": "validate-batch-3",
+      "assigned_to": "claude-code",
+      "status": "pending",
+      "priority": "high",
+      "inputs": {
+        "action": "validate_classification",
+        "batch_number": 3,
+        "classification_file": "batch-3-classification.json",
+        "manifest_path": "frontend/src/design/tokens/kerala-rage-kr-solidarity-manifest.json",
+        "asset_directory": "frontend/public/assets/uncategorized/",
+        "output_file": "batch-3-validated.json"
+      },
+      "next_task": "consolidate-and-migrate",
+      "next_assigned_to": "claude-code"
+    },
+    {
+      "task_id": "consolidate-and-migrate",
+      "assigned_to": "claude-code",
+      "status": "pending",
+      "priority": "high",
+      "inputs": {
+        "action": "migrate_assets",
+        "source_directory": "frontend/public/assets/uncategorized/",
+        "target_directory": "frontend/public/assets/kr-solidarity/",
+        "classification_files": [
+          "batch-1-validated.json",
+          "batch-2-validated.json",
+          "batch-3-validated.json"
+        ],
+        "asset_count": 73,
+        "naming_pattern": "kr-solidarity__{category}__{descriptor}__v1.{ext}",
+        "operations": [
+          "rename_assets",
+          "move_to_category_folders",
+          "update_manifest",
+          "verify_completeness"
+        ]
+      },
+      "next_task": "final-audit-uncategorized",
+      "next_assigned_to": "claude-code"
+    },
+    {
+      "task_id": "final-audit-uncategorized",
+      "assigned_to": "claude-code",
+      "status": "pending",
+      "priority": "normal",
+      "inputs": {
+        "action": "audit",
+        "checks": [
+          "verify_all_73_assets_migrated",
+          "verify_naming_compliance",
+          "verify_manifest_integrity",
+          "verify_no_orphaned_files",
+          "generate_compliance_report"
+        ],
+        "manifest_path": "frontend/src/design/tokens/kerala-rage-kr-solidarity-manifest.json",
+        "expected_asset_increase": 73,
+        "output_file": "uncategorized-migration-audit-report.json"
+      },
+      "success_criteria": {
+        "all_assets_migrated": true,
+        "naming_compliance": 1.0,
+        "manifest_sync": 1.0,
+        "zero_orphaned": true
+      }
+    }
+  ],
+  "rollback_procedures": {
+    "on_failure": "Restore from git backup; review error logs in batch reports",
+    "git_branch_safe": true,
+    "estimated_recovery_time_minutes": 10
+  }
+}
