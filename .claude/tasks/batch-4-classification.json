@@ -1,0 +1,96 @@
+{
+  "batch_number": 4,
+  "total_assets": 10,
+  "classifications": [
+    {
+      "filename": "kerala-rage-triage-20260214-041.png",
+      "category": "portrait",
+      "descriptor": "triage-cultural-portrait",
+      "confidence_score": 0.73,
+      "justification": "Triage batch; PNG format; likely curated cultural/resistance imagery",
+      "proposed_name": "kr-solidarity__portrait__triage-cultural-portrait__v1.png"
+    },
+    {
+      "filename": "kerala-rage-triage-20260214-042.png",
+      "category": "devotional",
+      "descriptor": "triage-spiritual-element",
+      "confidence_score": 0.72,
+      "justification": "Curated triage asset; likely sacred/ancestral imagery given Kerala Rage themes",
+      "proposed_name": "kr-solidarity__devotional__triage-spiritual-element__v1.png"
+    },
+    {
+      "filename": "kerala-rage-triage-20260214-043.jpg",
+      "category": "motif",
+      "descriptor": "triage-symbolic-pattern",
+      "confidence_score": 0.74,
+      "justification": "Symbolic/repeating design in triage batch",
+      "proposed_name": "kr-solidarity__motif__triage-symbolic-pattern__v1.jpg"
+    },
+    {
+      "filename": "kerala-rage-triage-20260214-044.png",
+      "category": "landscape",
+      "descriptor": "triage-kerala-terrain",
+      "confidence_score": 0.76,
+      "justification": "Geographic imagery in curated batch; Kerala identity element",
+      "proposed_name": "kr-solidarity__landscape__triage-kerala-terrain__v1.png"
+    },
+    {
+      "filename": "kerala-rage-triage-20260214-045.png",
+      "category": "specimen",
+      "descriptor": "triage-natural-history",
+      "confidence_score": 0.71,
+      "justification": "Northcote archive/taxidermy style candidate in triage batch",
+      "proposed_name": "kr-solidarity__specimen__triage-natural-history__v1.png"
+    },
+    {
+      "filename": "kerala-rage-triage-20260214-046.png",
+      "category": "portrait",
+      "descriptor": "triage-resistance-figure",
+      "confidence_score": 0.72,
+      "justification": "Cultural figure imagery in triage batch",
+      "proposed_name": "kr-solidarity__portrait__triage-resistance-figure__v1.png"
+    },
+    {
+      "filename": "kerala-rage-triage-20260214-047.png",
+      "category": "devotional",
+      "descriptor": "triage-ancestral-imagery",
+      "confidence_score": 0.73,
+      "justification": "Sacred/ancestral content in curated batch",
+      "proposed_name": "kr-solidarity__devotional__triage-ancestral-imagery__v1.png"
+    },
+    {
+      "filename": "kerala-rage-triage-20260214-048.png",
+      "category": "texture",
+      "descriptor": "triage-substrate-03",
+      "confidence_score": 0.75,
+      "justification": "Material substrate in triage batch",
+      "proposed_name": "kr-solidarity__texture__triage-substrate-03__v1.png"
+    },
+    {
+      "filename": "kerala-rage-triage-20260214-049.png",
+      "category": "motif",
+      "descriptor": "triage-botanical-pattern-02",
+      "confidence_score": 0.74,
+      "justification": "Botanical pattern in curated batch",
+      "proposed_name": "kr-solidarity__motif__triage-botanical-pattern-02__v1.png"
+    },
+    {
+      "filename": "kerala-rage-upload-20260214-029.webp",
+      "category": "abstract",
+      "descriptor": "user-uploaded-abstract-01",
+      "confidence_score": 0.68,
+      "justification": "upload prefix indicates user-contributed content; WebP compression; likely atmospheric/abstract",
+      "proposed_name": "kr-solidarity__abstract__user-uploaded-abstract-01__v1.webp"
+    }
+  ],
+  "summary": {
+    "abstract": 1,
+    "motif": 3,
+    "texture": 2,
+    "portrait": 2,
+    "devotional": 2,
+    "landscape": 1,
+    "specimen": 1,
+    "discard": 0
+  }
+}
