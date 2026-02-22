@@ -71,7 +71,11 @@ def update_imports_for_rename(old_name: str, new_name: str) -> int:
         if old_name in content:
             new_content = content.replace(old_name, new_name)
             ts_file.write_text(new_content)
-            print(f"  Updated imports in: {ts_file.relative_to(Path.cwd())}")
+            try:
+                print(f"  Updated imports in: {ts_file.relative_to(Path.cwd())}")
+            except ValueError:
+                # Fallback to absolute path if relative_to fails
+                print(f"  Updated imports in: {ts_file}")
             count += 1
 
     return count
