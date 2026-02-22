@@ -368,7 +368,7 @@ scripts/
 **Action:** Add each `manifest-entry.json` to assets array
 
 ### Design Tokens
-**File:** `design-system/tokens.json`
+**File:** `frontend/src/design/tokens/tokens.json`
 
 **Action:** Update with asset color palettes (if applicable)
 
