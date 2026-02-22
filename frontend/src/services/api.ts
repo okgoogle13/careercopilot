@@ -26,8 +26,10 @@ const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const getAuthToken = async () => {
   if (import.meta.env.DEV) return 'dev-token';
-  const { data } = await supabase.auth.getSession();
-  return data.session?.access_token || '';
+  // TODO: Add Supabase client when auth is fully integrated
+  // const { data } = await supabase.auth.getSession();
+  // return data.session?.access_token || '';
+  return '';
 };
 
 // Keys for syncEngine
@@ -233,6 +235,22 @@ export const realApi = {
     });
     if (!response.ok) throw new Error('Failed to fetch opportunities');
     return await response.json();
+  },
+
+  async saveKSCDraft(draft: KSCDraft): Promise<void> {
+    return mockApi.saveKSCDraft(draft);
+  },
+
+  async getKSCDraft(): Promise<KSCDraft | null> {
+    return mockApi.getKSCDraft();
+  },
+
+  async clearKSCDraft(): Promise<void> {
+    return mockApi.clearKSCDraft();
+  },
+
+  async saveUserProfile(profile: UserProfile): Promise<void> {
+    return mockApi.saveUserProfile(profile);
   },
 };
 
