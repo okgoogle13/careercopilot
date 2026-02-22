@@ -164,7 +164,7 @@ export const NorthcoteButton = React.forwardRef<HTMLButtonElement, NorthcoteButt
         {loading ? (
           <motion.div
             animate={{ rotate: 360 }}
-            transition={{ repeat: Infinity, duration: 1, ease: 'linear' }}
+            transition={{ repeat: Infinity, duration: 1, ease: [0.34, 1.56, 0.64, 1] }}
             className="mr-2"
           >
             <span className="block w-4 h-4 border-2 border-current border-t-transparent rounded-full" />

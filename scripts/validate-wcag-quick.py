@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Quick WCAG AA contrast check for key token combinations.
 
-Target existing colors from /design-system/tokens.json to ensure accessibility
+Target existing colors from frontend/src/design/tokens/tokens.json to ensure accessibility
 before building real screens with Fraunces expressive axes.
 
 Usage:
