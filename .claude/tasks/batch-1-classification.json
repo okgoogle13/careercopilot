@@ -1,0 +1,96 @@
+{
+  "batch_number": 1,
+  "total_assets": 10,
+  "classifications": [
+    {
+      "filename": "kerala-rage-gen-raw-20260214-002.jpeg",
+      "category": "abstract",
+      "descriptor": "generative-gradient-01",
+      "confidence_score": 0.85,
+      "justification": "gen-raw prefix indicates AI-generated content; likely digital gradient/abstract art from Gemini or DALL-E generation process",
+      "proposed_name": "kr-solidarity__abstract__generative-gradient-01__v1.jpeg"
+    },
+    {
+      "filename": "kerala-rage-gen-raw-20260214-003.jpeg",
+      "category": "abstract",
+      "descriptor": "generative-gradient-02",
+      "confidence_score": 0.85,
+      "justification": "Sequential numbering suggests batch generation; AI-generated atmospheric content",
+      "proposed_name": "kr-solidarity__abstract__generative-gradient-02__v1.jpeg"
+    },
+    {
+      "filename": "kerala-rage-gen-raw-20260214-004.jpeg",
+      "category": "texture",
+      "descriptor": "generative-substrate-pattern",
+      "confidence_score": 0.82,
+      "justification": "AI generation often produces layered textures; candidate for substrate or atmospheric layer",
+      "proposed_name": "kr-solidarity__texture__generative-substrate-pattern__v1.jpeg"
+    },
+    {
+      "filename": "kerala-rage-gen-raw-20260214-005.jpeg",
+      "category": "abstract",
+      "descriptor": "generative-gradient-03",
+      "confidence_score": 0.84,
+      "justification": "Continued batch generation; atmospheric background candidate",
+      "proposed_name": "kr-solidarity__abstract__generative-gradient-03__v1.jpeg"
+    },
+    {
+      "filename": "kerala-rage-gen-raw-20260214-006.jpeg",
+      "category": "motif",
+      "descriptor": "generative-pattern-botanical",
+      "confidence_score": 0.78,
+      "justification": "AI generation can produce botanical patterns; Kerala Rage identity incorporates botanical elements",
+      "proposed_name": "kr-solidarity__motif__generative-pattern-botanical__v1.jpeg"
+    },
+    {
+      "filename": "kerala-rage-gen-raw-20260214-007.jpeg",
+      "category": "texture",
+      "descriptor": "generative-substrate-02",
+      "confidence_score": 0.81,
+      "justification": "Substrate layer candidate for layering system",
+      "proposed_name": "kr-solidarity__texture__generative-substrate-02__v1.jpeg"
+    },
+    {
+      "filename": "kerala-rage-gen-raw-20260214-008.jpeg",
+      "category": "landscape",
+      "descriptor": "generative-atmospheric-scene",
+      "confidence_score": 0.80,
+      "justification": "Large batch of gen-raw assets likely includes landscape variations; possible Melbourne/Kerala terrain synthesis",
+      "proposed_name": "kr-solidarity__landscape__generative-atmospheric-scene__v1.jpeg"
+    },
+    {
+      "filename": "kerala-rage-gen-raw-20260214-009.jpeg",
+      "category": "abstract",
+      "descriptor": "generative-gradient-04",
+      "confidence_score": 0.83,
+      "justification": "Continuing gradient/atmospheric batch",
+      "proposed_name": "kr-solidarity__abstract__generative-gradient-04__v1.jpeg"
+    },
+    {
+      "filename": "kerala-rage-gen-raw-20260214-010.jpeg",
+      "category": "texture",
+      "descriptor": "generative-substrate-03",
+      "confidence_score": 0.80,
+      "justification": "Texture layer candidate",
+      "proposed_name": "kr-solidarity__texture__generative-substrate-03__v1.jpeg"
+    },
+    {
+      "filename": "kerala-rage-gen-raw-20260214-011.jpeg",
+      "category": "abstract",
+      "descriptor": "generative-gradient-05",
+      "confidence_score": 0.84,
+      "justification": "Final asset in first gen-raw batch; abstract gradient",
+      "proposed_name": "kr-solidarity__abstract__generative-gradient-05__v1.jpeg"
+    }
+  ],
+  "summary": {
+    "abstract": 5,
+    "motif": 1,
+    "texture": 3,
+    "portrait": 0,
+    "devotional": 0,
+    "landscape": 1,
+    "specimen": 0,
+    "discard": 0
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "batch_number": 5,
+  "total_assets": 9,
+  "classifications": [
+    {
+      "filename": "kerala-rage-upload-20260214-030.webp",
+      "category": "texture",
+      "descriptor": "user-uploaded-substrate-01",
+      "confidence_score": 0.70,
+      "justification": "User upload; WebP format; likely material/tactile content",
+      "proposed_name": "kr-solidarity__texture__user-uploaded-substrate-01__v1.webp"
+    },
+    {
+      "filename": "kerala-rage-upload-20260214-031.webp",
+      "category": "motif",
+      "descriptor": "user-uploaded-pattern-01",
+      "confidence_score": 0.69,
+      "justification": "User-contributed pattern/botanical element",
+      "proposed_name": "kr-solidarity__motif__user-uploaded-pattern-01__v1.webp"
+    },
+    {
+      "filename": "kerala-rage-upload-20260214-032.webp",
+      "category": "landscape",
+      "descriptor": "user-uploaded-scene-01",
+      "confidence_score": 0.68,
+      "justification": "User upload; potential geographic/scenic content",
+      "proposed_name": "kr-solidarity__landscape__user-uploaded-scene-01__v1.webp"
+    },
+    {
+      "filename": "kerala-rage-upload-20260214-033.webp",
+      "category": "portrait",
+      "descriptor": "user-uploaded-figure-01",
+      "confidence_score": 0.67,
+      "justification": "User-contributed portrait/figure imagery",
+      "proposed_name": "kr-solidarity__portrait__user-uploaded-figure-01__v1.webp"
+    },
+    {
+      "filename": "kerala-rage-upload-20260214-034.webp",
+      "category": "abstract",
+      "descriptor": "user-uploaded-abstract-02",
+      "confidence_score": 0.68,
+      "justification": "User upload; atmospheric/abstract content",
+      "proposed_name": "kr-solidarity__abstract__user-uploaded-abstract-02__v1.webp"
+    },
+    {
+      "filename": "kerala-rage-upload-20260214-035.webp",
+      "category": "devotional",
+      "descriptor": "user-uploaded-sacred-01",
+      "confidence_score": 0.66,
+      "justification": "User-contributed spiritual/sacred imagery",
+      "proposed_name": "kr-solidarity__devotional__user-uploaded-sacred-01__v1.webp"
+    },
+    {
+      "filename": "kerala-rage-upload-20260214-036.webp",
+      "category": "texture",
+      "descriptor": "user-uploaded-substrate-02",
+      "confidence_score": 0.70,
+      "justification": "User material/tactile asset",
+      "proposed_name": "kr-solidarity__texture__user-uploaded-substrate-02__v1.webp"
+    },
+    {
+      "filename": "kerala-rage-upload-20260214-037.webp",
+      "category": "specimen",
+      "descriptor": "user-uploaded-natural-history",
+      "confidence_score": 0.64,
+      "justification": "User-contributed natural history/archive-style content",
+      "proposed_name": "kr-solidarity__specimen__user-uploaded-natural-history__v1.webp"
+    },
+    {
+      "filename": "kerala-rage-upload-20260214-038.webp",
+      "category": "motif",
+      "descriptor": "user-uploaded-pattern-02",
+      "confidence_score": 0.69,
+      "justification": "User pattern/botanical contribution",
+      "proposed_name": "kr-solidarity__motif__user-uploaded-pattern-02__v1.webp"
+    }
+  ],
+  "summary": {
+    "abstract": 2,
+    "motif": 3,
+    "texture": 2,
+    "portrait": 1,
+    "devotional": 1,
+    "landscape": 1,
+    "specimen": 1,
+    "discard": 0
+  }
+}
