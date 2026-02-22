@@ -168,8 +168,8 @@ export function KSCGenerator() {
       />
 
       {/* Progress Stepper */}
-      <motion.div 
-        variants={KrDarkSpring}
+      <motion.div
+        transition={KrDarkSpring}
         className="flex items-center justify-center mb-8 gap-4"
       >
         {[1, 2, 3].map((s) => (
@@ -195,8 +195,8 @@ export function KSCGenerator() {
       </motion.div>
 
       {/* Main Card */}
-      <motion.div 
-        variants={KrDarkSpring}
+      <motion.div
+        transition={KrDarkSpring}
         className="bg-surface-container rounded-leaf p-8 border border-outline-variant shadow-elevation-1 relative overflow-hidden"
       >
         <AnimatePresence mode="wait">
@@ -407,9 +407,6 @@ export function KSCGenerator() {
         </AnimatePresence>
       </motion.div>
     </motion.div>
-  );
-}
-    </div>
   );
 }
 
