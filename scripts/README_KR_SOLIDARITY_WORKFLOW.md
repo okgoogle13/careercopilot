@@ -492,7 +492,7 @@ pip install google-generativeai Pillow
 
 ## References
 
-- **Design System:** `design-system/tokens.json`
+- **Design System:** `frontend/src/design/tokens/tokens.json`
 - **Current Manifest:** `frontend/public/assets/kerala-rage-kr-solidarity-manifest.json`
 - **Governance Rules:** See `FORBIDDEN_KEYWORDS` in `validate_kr_solidarity_governance.py`
 - **Component Usage:** See `usage.md` in generated asset packages

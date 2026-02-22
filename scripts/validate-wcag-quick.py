@@ -34,7 +34,7 @@ def contrast_ratio(fg, bg):
     return (lighter + 0.05) / (darker + 0.05)
 
 
-# Key combinations from /design-system/tokens.json (lines 6-14)
+# Key combinations from frontend/src/design/tokens/tokens.json (lines 6-14)
 # Format: (foreground_name, background_name, min_ratio_for_wcag)
 TESTS = [
     ("paperWhite", "asphaltBlack", "4.5"),    # Text on background
@@ -43,7 +43,7 @@ TESTS = [
     ("gumLeafGreen", "asphaltBlack", "3.0"),  # Success/accent on background
 ]
 
-# Token values from /design-system/tokens.json (top-level colors)
+# Token values from frontend/src/design/tokens/tokens.json (top-level colors)
 TOKENS = {
     "asphaltBlack": "#1A1714",
     "paperWhite": "#F5F0E8",
