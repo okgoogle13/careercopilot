@@ -25,7 +25,7 @@ _Last updated: 2026-02-23_
 | asset-placement-strategy | .claude/skills/asset-placement-strategy | Wireframe-driven placement strategy for Kerala Rage assets with strict semantic token usage and deterministic placement scoring. |
 | asset-token-replacer | .claude/skills/asset-token-replacer | Automated replacement of generic asset placeholders with canonical KR-SOLID |
 | audit-agent | .claude/skills/audit-agent | Comprehensive security and code quality audit. Use for thorough security, |
-| auto-validator | .claude/skills/auto-validator | Programmatic asset compliance validation using vision analysis and Northcote\ |
+| auto-validator | .claude/skills/auto-validator | Programmatic asset compliance validation using vision analysis and Kerala Rage\ |
 | batch-processor | .claude/skills/batch-processor | Parallel batch orchestration for component workflows and asset-audit workflows with aggregated validation gates. |
 | brand-brief-optimizer | .claude/skills/brand-brief-optimizer | Evaluate and strengthen design system briefs by identifying vague language, |
 | careercopilot-agent-scaffolder | .claude/skills/careercopilot-agent-scaffolder | Scaffolds a new Python agent for autonomous AI tasks in 'src/agents/'. |
@@ -61,8 +61,6 @@ _Last updated: 2026-02-23_
 | m3-expressive-ui-evaluator | .claude/skills/m3-expressive-ui-evaluator | Evaluate UI designs and mockups against Material Design 3 Expressive |
 | m3-visual-audit | .claude/skills/m3-visual-audit | Analyze component screenshots against Material Design 3 Expressive standards. |
 | manifest-reconciler | .claude/skills/manifest-reconciler | Reconcile KR asset files against manifest and hero registries; report gaps, orphans, and hero coverage metrics. |
-| northcote-typography-strategy | .claude/skills/northcote-typography-strategy | Apply "Maximum Expressive Playful" Northcote Curio typography using Variable |
-| northcote-visual-audit | .claude/skills/northcote-visual-audit | Analyze component screenshots and design artifacts against Northcote |
 | pattern-learner | .claude/skills/pattern-learner | Self-improving pattern database. Analyzes successful assets (\u2265\ |
 | pdf-text-extractor | .claude/skills/pdf-text-extractor | Extracts text content from one or more PDF documents. |
 | project-health-checker | .claude/skills/project-health-checker | Quick diagnostic tool (30s) running validation and health checks. Use |

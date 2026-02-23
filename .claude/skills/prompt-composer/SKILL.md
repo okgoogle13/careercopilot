@@ -32,7 +32,7 @@ Eliminates manual prompt construction. Loads pattern library → applies templat
 
 ## Pattern Library Integration
 
-Loads validated patterns from `/docs/northcote-asset-generation-patterns.md`:
+Loads validated patterns from `/docs/kerala-rage-asset-generation-patterns.md`:
 
 **Pattern 1: Production Intent**
 
