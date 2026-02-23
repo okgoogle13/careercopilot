@@ -1,9 +1,9 @@
 {
   "mcpServers": {
     "flash-sidekick": {
-      "command": "/Users/okgoogle13/Desktop/careercopilot/venv/bin/python",
+      "command": "/Users/okgoogle13/Projects/careercopilot/venv/bin/python",
       "args": [
-        "/Users/okgoogle13/Desktop/careercopilot/servers/flash_sidekick.py"
+        "/Users/okgoogle13/Projects/careercopilot/servers/flash_sidekick.py"
       ]
     },
     "github": {
@@ -51,9 +51,9 @@
       }
     },
     "cloud-ops": {
-      "command": "/Users/okgoogle13/Desktop/careercopilot/venv/bin/python",
+      "command": "/Users/okgoogle13/Projects/careercopilot/venv/bin/python",
       "args": [
-        "/Users/okgoogle13/Desktop/careercopilot/servers/cloud_ops.py"
+        "/Users/okgoogle13/Projects/careercopilot/servers/cloud_ops.py"
       ]
     },
     "genkit": {
@@ -62,8 +62,8 @@
         "-u",
         "NODE_OPTIONS",
         "/Users/okgoogle13/.nvm/versions/node/v20.19.5/bin/node",
-        "/Users/okgoogle13/Desktop/careercopilot/functions/node_modules/.bin/tsx",
-        "/Users/okgoogle13/Desktop/careercopilot/functions/src/mcp_server.ts"
+        "/Users/okgoogle13/Projects/careercopilot/functions/node_modules/.bin/tsx",
+        "/Users/okgoogle13/Projects/careercopilot/functions/src/mcp_server.ts"
       ],
       "env": {
         "NODE_ENV": "development"
