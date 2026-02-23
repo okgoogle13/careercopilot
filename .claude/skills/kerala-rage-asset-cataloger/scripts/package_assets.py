@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Northcote Asset Packager - Manifest Integration v2.0
+Kerala Rage Asset Packager - Manifest Integration v2.0
 Standardizes naming, PNG format, validates sizes, organizes by category.
 """
 
@@ -88,10 +88,10 @@ def generate_standard_name(asset):
 def main():
     # Paths
     PROJECT_ROOT = Path("/Users/okgoogle13/Desktop/careercopilot")
-    MANIFEST_PATH = PROJECT_ROOT / "assets" / "northcote-[DEPRECATED_STYLE]-manifest.json"
+    MANIFEST_PATH = PROJECT_ROOT / "assets" / "kerala-rage-kr-solidarity-manifest.json"
     OUTPUT_DIR = Path("packaged_assets")
     
-    print("🎨 Northcote Asset Packager v2.0")
+    print("🎨 Kerala Rage Asset Packager v2.0")
     print(f"   Manifest: {MANIFEST_PATH}\n")
     
     if not MANIFEST_PATH.exists():
@@ -102,7 +102,7 @@ def main():
     
     # Create timestamped package
     timestamp = datetime.now().strftime("%Y%m%d-%H%M")
-    pkg_dir = OUTPUT_DIR / f"northcote-assets_{timestamp}"
+    pkg_dir = OUTPUT_DIR / f"kerala-rage-assets_{timestamp}"
     pkg_dir.mkdir(parents=True, exist_ok=True)
     
     processed = 0
@@ -148,10 +148,10 @@ def main():
         json.dump(audit, f, indent=2)
     
     # Create ZIP
-    shutil.make_archive(OUTPUT_DIR / f"northcote-assets_{timestamp}", 'zip', pkg_dir)
+    shutil.make_archive(OUTPUT_DIR / f"kerala-rage-assets_{timestamp}", 'zip', pkg_dir)
     
     print(f"\n✅ Complete: {processed} assets")
-    print(f"   Package: {OUTPUT_DIR / f'northcote-assets_{timestamp}.zip'}")
+    print(f"   Package: {OUTPUT_DIR / f'kerala-rage-assets_{timestamp}.zip'}")
 
 if __name__ == "__main__":
     main()
