@@ -1,8 +1,8 @@
 {
-  "asset_id": "KR-SOLID-013",
-  "asset_name": "Abstract - Solidarity",
+  "asset_id": "KR-SOLID-168",
+  "asset_name": "Abstract - Solidarity ([DEPRECATED_STYLE]-labyrin)",
   "packaging_version": "1.0",
-  "packaged_at": "2026-02-23T18:51:36.930Z",
+  "packaged_at": "2026-02-23T18:51:37.143Z",
   "source": {
     "original_path": "unknown",
     "file_size_bytes": 0,
@@ -12,8 +12,8 @@
   "packaging_strategy": "production-deploy",
   "files_deployed": {
     "primary": {
-      "name": "kr-solidarity__abstract__abstract---solidarity__v1.png",
-      "path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity__v1.png",
+      "name": "kr-solidarity__abstract__abstract---solidarity-[DEPRECATED_STYLE]-labyrin__v1.png",
+      "path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-[DEPRECATED_STYLE]-labyrin__v1.png",
       "size_bytes": 0,
       "format": "PNG",
       "purpose": "Original high-quality asset"
@@ -35,27 +35,27 @@
     "variants_generated": [],
     "variants_available": {
       "retina_2x": {
-        "name": "kr-solidarity__abstract__abstract---solidarity__v1@2x.png",
+        "name": "kr-solidarity__abstract__abstract---solidarity-[DEPRECATED_STYLE]-labyrin__v1@2x.png",
         "status": "not_generated",
         "reason": "imagemagick_not_available"
       },
       "webp": {
-        "name": "kr-solidarity__abstract__abstract---solidarity__v1.webp",
+        "name": "kr-solidarity__abstract__abstract---solidarity-[DEPRECATED_STYLE]-labyrin__v1.webp",
         "status": "not_generated",
         "reason": "cwebp_not_available"
       },
       "thumbnail": {
-        "name": "kr-solidarity__abstract__abstract---solidarity__v1_thumb.png",
+        "name": "kr-solidarity__abstract__abstract---solidarity-[DEPRECATED_STYLE]-labyrin__v1_thumb.png",
         "status": "not_generated",
         "reason": "imagemagick_not_available"
       }
     }
   },
   "deployment_info": {
-    "asset_id": "KR-SOLID-013",
-    "canonical_path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity__v1.png",
+    "asset_id": "KR-SOLID-168",
+    "canonical_path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-[DEPRECATED_STYLE]-labyrin__v1.png",
     "category": "abstract",
-    "priority": "HIGH",
+    "priority": "MEDIUM",
     "status": "ready",
     "production_ready": true,
     "cdn_ready": false,
@@ -67,10 +67,10 @@
   },
   "manifest_integration": {
     "manifest_file": "frontend/public/assets/kerala-rage-kr-solidarity-manifest.json",
-    "entry_ready": true,
+    "entry_ready": false,
     "entry_path_verified": true,
     "files_at_path": true,
-    "next_step": "Verified"
+    "next_step": "Add manifest entry to manifest.json"
   },
   "quality_checks": {
     "file_exists": true,
@@ -100,7 +100,7 @@
     "5. [RECOMMENDED] Test component integration"
   ],
   "deployment_commands": {
-    "add_to_manifest": "python scripts/integrate_manifest.py ./asset-packages/KR-SOLID-013/",
+    "add_to_manifest": "python scripts/integrate_manifest.py ./asset-packages/KR-SOLID-168/",
     "validate_manifest": "python scripts/integrate_manifest.py --validate",
     "generate_variants": "convert src.png -resize 200% dest@2x.png && cwebp src.png -o dest.webp"
   },
