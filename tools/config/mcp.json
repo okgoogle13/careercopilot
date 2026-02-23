@@ -12,7 +12,7 @@
       "args": [
         "-y",
         "@modelcontextprotocol/server-filesystem",
-        "/Users/okgoogle13/Desktop/careercopilot"
+        "/Users/okgoogle13/Projects/careercopilot"
       ]
     },
     "git": {
@@ -21,19 +21,19 @@
         "-y",
         "@modelcontextprotocol/server-git",
         "--repository",
-        "/Users/okgoogle13/Desktop/careercopilot"
+        "/Users/okgoogle13/Projects/careercopilot"
       ]
     },
     "task-router": {
       "command": "/Users/okgoogle13/.pyenv/versions/3.12.3/bin/python",
       "args": [
-        "/Users/okgoogle13/Desktop/careercopilot/servers/task_router_mcp.py"
+        "/Users/okgoogle13/Projects/careercopilot/servers/task_router_mcp.py"
       ]
     },
     "design-system-sidekick": {
       "command": "/Users/okgoogle13/.pyenv/versions/3.12.3/bin/python",
       "args": [
-        "/Users/okgoogle13/Desktop/careercopilot/servers/design_system_sidekick.py"
+        "/Users/okgoogle13/Projects/careercopilot/servers/design_system_sidekick.py"
       ],
       "env": {
         "GEMINI_API_KEY": "${GEMINI_API_KEY}",
@@ -47,7 +47,7 @@
     "vision-scorer-mcp": {
       "command": "/Users/okgoogle13/.pyenv/versions/3.12.3/bin/python",
       "args": [
-        "/Users/okgoogle13/Desktop/careercopilot/servers/vision_scorer_mcp.py"
+        "/Users/okgoogle13/Projects/careercopilot/servers/vision_scorer_mcp.py"
       ],
       "env": {
         "GEMINI_API_KEY": "${GEMINI_API_KEY}",
@@ -61,7 +61,7 @@
     "flash-sidekick": {
       "command": "python3",
       "args": [
-        "/Users/okgoogle13/Desktop/careercopilot/servers/flash_sidekick.py"
+        "/Users/okgoogle13/Projects/careercopilot/servers/flash_sidekick.py"
       ],
       "env": {
         "GEMINI_API_KEY": "${GEMINI_API_KEY}",

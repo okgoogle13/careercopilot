@@ -6,7 +6,7 @@
       "command": "node",
       "args": ["./mcp-servers/filesystem.js"],
       "env": {
-        "ROOT_PATH": "/Users/okgoogle13/Desktop/careercopilot",
+        "ROOT_PATH": "/Users/okgoogle13/Projects/careercopilot",
         "BATCH_READS": "true",
         "RESPONSE_FORMAT": "compact",
         "AUTO_MKDIR": "false"
@@ -21,7 +21,7 @@
       "command": "node",
       "args": ["./mcp-servers/git.js"],
       "env": {
-        "REPO_PATH": "/Users/okgoogle13/Desktop/careercopilot",
+        "REPO_PATH": "/Users/okgoogle13/Projects/careercopilot",
         "AUTO_COMMIT": "true",
         "FILTER": "components-only",
         "DIFF_FORMAT": "compact",
@@ -37,7 +37,7 @@
       "command": "node",
       "args": ["./mcp-servers/testing.js"],
       "env": {
-        "REPO_PATH": "/Users/okgoogle13/Desktop/careercopilot",
+        "REPO_PATH": "/Users/okgoogle13/Projects/careercopilot",
         "TEST_FRAMEWORK": "jest",
         "OUTPUT_FORMAT": "json",
         "VERBOSE": "false",
