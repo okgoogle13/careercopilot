@@ -367,12 +367,10 @@ interface ManifestoCardProps {
 
 ### SkillBreakdownCard (Data Visualization)
 
-**Note:** Wireframe referenced this component with `[DEPRECATED_STYLE]-motif` asset. **DEPRECATED** tag indicates this is likely leftover from Material 3 migration. Recommend using **ManifestoCard** instead with updated Kerala Rage motifs.
-
-**If still needed:**
-- Replace deprecated motif with Kerala Rage asset (Elephant, Torn Edge, or Solidarity Icon)
-- Ensure all colors use `--sys-color-*` tokens
-- Apply asymmetric kr-motif shape (`32px 8px 28px 12px`)
+**Implementation Detail:**
+- Use **ManifestoCard** with updated Kerala Rage motifs (Elephant, Torn Edge, or Solidarity Icon).
+- Ensure all colors use `--sys-color-*` tokens.
+- Apply asymmetric kr-motif shape (`32px 8px 28px 12px`).
 
 ---
 

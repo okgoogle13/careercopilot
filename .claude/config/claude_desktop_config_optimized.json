@@ -1,7 +1,7 @@
 {
   "mcpServers": {
     "flash-sidekick": {
-      "command": "/Users/okgoogle13/Desktop/careercopilot/.venv/bin/python3",
+      "command": "/Users/okgoogle13/Desktop/careercopilot/venv/bin/python",
       "args": [
         "/Users/okgoogle13/Desktop/careercopilot/servers/flash_sidekick.py"
       ]
@@ -51,7 +51,7 @@
       }
     },
     "cloud-ops": {
-      "command": "/Users/okgoogle13/Desktop/careercopilot/.venv/bin/python3",
+      "command": "/Users/okgoogle13/Desktop/careercopilot/venv/bin/python",
       "args": [
         "/Users/okgoogle13/Desktop/careercopilot/servers/cloud_ops.py"
       ]

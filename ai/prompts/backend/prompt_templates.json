@@ -1,5 +1,58 @@
 {
-  "semantic_analysis": {
+  "cover_letter_smart_generate": {
+    "name": "Smart Cover Letter Generation",
+    "description": "Generates a highly personalised, multi-section cover letter with company research integration and quality analysis.",
+    "category": "cover_letter",
+    "version": "2.0",
+    "system_prompt": "You are an expert cover letter strategist and career coach with 15+ years of experience crafting compelling, highly personalised cover letters that secure interviews.",
+    "has_system_prompt": true,
+    "template": "Create a highly personalised, compelling cover letter that demonstrates deep understanding of the role and company.\n\nCANDIDATE PROFILE:\n{candidate_profile}\n\nJOB DESCRIPTION:\n{job_description}\n\nCOMPANY INFORMATION:\n{company_information}\n\nSTYLE: {style}\nFORMAT: {format_type}\nSPECIAL INSTRUCTIONS: {special_instructions}\n\nREQUIREMENTS:\n1. STRATEGIC POSITIONING: Lead with strongest qualifications, connect experience to job requirements, highlight value proposition.\n2. PERSONALISATION: Reference specific job requirements, company values, recent developments. Include quantifiable achievements.\n3. COMPELLING NARRATIVE: Logical flow from opening to closing, balance confidence with genuine interest, strong call to action.\n4. STYLE ADAPTATION: {style} tone throughout, length appropriate for {format_type}.\n5. MULTI-VERSION OUTPUT: Primary version in requested style, alternative versions, section-by-section breakdown.\n\nRespond with valid JSON matching the SmartCoverLetter schema.",
+    "parameters": ["candidate_profile", "job_description", "company_information", "style", "format_type", "special_instructions"],
+    "output_format": "structured_json",
+    "output_schema": "SmartCoverLetter",
+    "metadata": { "created_at": "2026-02-23", "usage_count": 0 }
+  },
+  "cover_letter_company_research": {
+    "name": "Company Research for Cover Letter",
+    "description": "Generates company research insights to inform personalised cover letter strategy.",
+    "category": "cover_letter",
+    "version": "2.0",
+    "system_prompt": "You are a company research specialist with deep expertise in analysing organisations for job application strategy.",
+    "has_system_prompt": true,
+    "template": "Provide comprehensive insights about this company to inform a personalised job application strategy.\n\nCOMPANY: {company_name}\nINDUSTRY: {industry}\nTARGET ROLE: {job_role}\nADDITIONAL CONTEXT: {additional_context}\n\nRESEARCH ANALYSIS REQUIRED:\n1. Company overview (history, model, size, culture)\n2. Recent developments (news, launches, leadership changes, awards)\n3. Culture & values (mission, DEI commitments, work environment)\n4. Business initiatives (key projects, digital transformation, R&D)\n5. Market position (industry standing, competitors, growth trajectory)\n6. Application strategy (value propositions that resonate, cultural fit elements, ways to demonstrate interest)\n\nRespond with valid JSON matching the CompanyResearchInsights schema.",
+    "parameters": ["company_name", "industry", "job_role", "additional_context"],
+    "output_format": "structured_json",
+    "output_schema": "CompanyResearchInsights",
+    "metadata": { "created_at": "2026-02-23", "usage_count": 0 }
+  },
+  "cover_letter_optimize": {
+    "name": "Cover Letter Optimisation",
+    "description": "Optimises an existing cover letter for better impact and job alignment with scored before/after comparison.",
+    "category": "cover_letter",
+    "version": "2.0",
+    "system_prompt": "You are a cover letter optimisation expert with extensive experience improving job applications for maximum impact and interview conversion.",
+    "has_system_prompt": true,
+    "template": "Analyse this existing cover letter and create an improved version with enhanced impact and job alignment.\n\nEXISTING COVER LETTER:\n{existing_cover_letter}\n\nJOB DESCRIPTION:\n{job_description}\n\nCANDIDATE PROFILE:\n{candidate_profile}\n\nCOMPANY INSIGHTS:\n{company_insights}\n\nOPTIMISATION REQUIREMENTS:\n1. Score current quality (0-100), identify strengths and gaps, assess job alignment.\n2. Strengthen opening, improve job requirement alignment, enhance personalisation.\n3. Add missing qualifications, stronger action verbs, quantifiable achievements.\n4. Eliminate weak/generic language, optimise length and structure.\n5. Provide specific before/after comparisons with clear rationale for each change.\n\nRespond with valid JSON matching the CoverLetterOptimizationResult schema.",
+    "parameters": ["existing_cover_letter", "job_description", "candidate_profile", "company_insights"],
+    "output_format": "structured_json",
+    "output_schema": "CoverLetterOptimizationResult",
+    "metadata": { "created_at": "2026-02-23", "usage_count": 0 }
+  },
+  "cover_letter_multi_format": {
+    "name": "Multi-Format Cover Letter Suite",
+    "description": "Creates a complete suite: full letter, email, LinkedIn message, networking email, and follow-up templates.",
+    "category": "cover_letter",
+    "version": "2.0",
+    "system_prompt": "You are a comprehensive application strategy specialist with expertise in crafting consistent, compelling messaging across multiple communication channels.",
+    "has_system_prompt": true,
+    "template": "Create a complete suite of personalised application materials in multiple formats.\n\nCANDIDATE PROFILE:\n{candidate_profile}\n\nJOB DESCRIPTION:\n{job_description}\n\nCOMPANY INSIGHTS:\n{company_insights}\n\nSUITE REQUIREMENTS:\n1. FULL COVER LETTER: 3-4 paragraphs, 300-500 words, professional format with strong opening and closing.\n2. EMAIL VERSION: 2-3 paragraphs, 150-250 words, with clear subject line.\n3. LINKEDIN MESSAGE: under 300 characters, value proposition + call to action.\n4. NETWORKING EMAIL: 100-200 words, informational interview request, relationship-building focus.\n5. FOLLOW-UP TEMPLATES: after application, after no response (2 weeks), interview thank you, post-interview.\n6. USAGE GUIDELINES: timing recommendations, customisation tips, personalisation strategies.\n\nMaintain consistent messaging across all formats. Optimise each for its specific channel.\n\nRespond with valid JSON matching the MultiFormatCoverLetterSuite schema.",
+    "parameters": ["candidate_profile", "job_description", "company_insights"],
+    "output_format": "structured_json",
+    "output_schema": "MultiFormatCoverLetterSuite",
+    "metadata": { "created_at": "2026-02-23", "usage_count": 0 }
+  },
+  "semantic_analysis":
+ {
     "name": "Semantic Analysis",
     "description": "Compares resume against job description for semantic similarity",
     "category": "ats_scoring",
@@ -50,25 +103,38 @@
       "usage_count": 0
     }
   },
-  "ksc_star_response": {
+  "resume_optimize": {
+    "name": "Resume Keyword Optimization",
+    "description": "Seamlessly integrates missing keywords into a resume without fabricating experience.",
+    "category": "resume_intelligence",
+    "version": "2.0",
+    "system_prompt": "You are an expert resume editor and career coach specializing in ATS optimization. Your goal is to revise resumes to naturally integrate missing keywords while maintaining authenticity and professional tone.",
+    "has_system_prompt": true,
+    "template": "Revise the provided resume to seamlessly integrate a list of missing keywords. The goal is to make the resume a stronger match for the target job description without inventing new experiences or skills.\n\n**Target Job Description:**\n---\n{job_description}\n---\n\n**Original Resume / Profile:**\n---\n{career_profile}\n---\n\n**Keywords to Integrate:**\n- {missing_keywords}\n\n**Instructions:**\n1. **Analyze Context:** Read the job description and the profile to understand the candidate's experience and the employer's needs.\n2. **Integrate Naturally:** Weave the keywords into the existing text. Rephrase bullet points or summaries where appropriate.\n3. **Score Impact:** Assess the resume's match for the job before and after your changes (0-100).\n4. **Competitive Advantages:** Identify 2-3 key strengths this candidate has for this specific role.\n5. **Do Not Fabricate:** You must not add new job roles, invent new skills, or create experiences the candidate does not have.\n\n**Output Format:**\nReturn a JSON object matching the TailoredResumeResult schema with: tailored_text, original_score, tailored_score, improvements_made, keywords_integrated, competitive_advantages.",
+    "parameters": ["job_description", "career_profile", "missing_keywords"],
+    "output_format": "structured_json",
+    "output_schema": "TailoredResumeResult",
+    "metadata": { "created_at": "2026-02-23", "usage_count": 0 }
+  },
+  "ksc_response": {
     "name": "KSC STAR Response Generation",
-    "description": "Generates STAR methodology responses for Key Selection Criteria",
+    "description": "Generates STAR methodology responses for Key Selection Criteria. detail_instruction controls output depth: 'simple' returns 4 fields; 'full' returns extended analysis with ksc_analysis, experience_selection, star_response, and optimization_suggestions.",
     "category": "ksc_generation",
-    "version": "1.0",
-    "system_prompt": "You are an expert career coach specializing in the STAR (Situation, Task, Action, Result) methodology for interview responses and Key Selection Criteria. You excel at identifying the most relevant experiences and crafting compelling, evidence-based responses.",
-    "template": "Generate a compelling STAR methodology response for the Key Selection Criterion using the most relevant experience from the user's profile.\n\nSTAR METHODOLOGY REQUIREMENTS:\n- Situation: Set the context with specific details about the scenario\n- Task: Clearly define what needed to be accomplished or the challenge faced\n- Action: Detail specific actions taken, focusing on individual contributions\n- Result: Quantify outcomes and impact, including lessons learned\n\nRESPONSE QUALITY STANDARDS:\n- Use specific, quantifiable examples wherever possible\n- Focus on individual contributions rather than team achievements\n- Include measurable outcomes and impact\n- Demonstrate growth and learning\n- {length_instruction}\n\nRequired JSON structure:\n{{\n  \"ksc_analysis\": {{\n    \"ksc_interpretation\": \"<analysis of what the KSC is really asking for>\",\n    \"key_competencies\": [<key skills/competencies this KSC tests>],\n    \"success_factors\": [<what makes a strong response to this KSC>],\n    \"common_pitfalls\": [<common mistakes to avoid>]\n  }},\n  \"experience_selection\": {{\n    \"chosen_experience\": \"<brief description of selected experience>\",\n    \"relevance_score\": <0-100 score for how well this experience matches>,\n    \"selection_rationale\": \"<why this experience was chosen over others>\",\n    \"alternative_experiences\": [<other potential experiences that could work>]\n  }},\n  \"star_response\": {{\n    \"situation\": \"<detailed situation context>\",\n    \"task\": \"<specific task or challenge>\",\n    \"action\": \"<detailed actions taken>\",\n    \"result\": \"<quantified results and outcomes>\",\n    \"full_response\": \"<complete STAR response as a cohesive narrative>\"\n  }},\n  \"optimization_suggestions\": {{\n    \"strength_areas\": [<what makes this response strong>],\n    \"improvement_areas\": [<specific areas that could be enhanced>],\n    \"alternative_approaches\": [<different ways to structure or present this response>]\n  }}\n}}\n\nKSC STATEMENT: {ksc_statement}\nUSER PROFILE: {user_profile}\nPRIORITIZE ACHIEVEMENTS: {focus_achievements}",
+    "version": "2.0",
+    "system_prompt": "You are an expert career coach specialising in the STAR (Situation, Task, Action, Result) methodology for Key Selection Criteria responses in Australian public sector and community sector job applications. You identify the most relevant real-world experience and craft compelling, evidence-based responses. You never fabricate experience.",
+    "has_system_prompt": true,
+    "template": "As an expert career coach, generate a STAR response for the following Key Selection Criterion.\n\n**KSC Statement:** \"{ksc_statement}\"\n\n**User Profile:**\n```json\n{user_profile_data}\n```\n\n**Instructions:**\n1. Identify the single most relevant real-world example from the profile.\n2. Write a complete STAR response using that example only. Do not fabricate experience or skills.\n3. {detail_instruction}\n\n**Output:** Return valid JSON only. No markdown fences, no explanatory text.",
     "parameters": [
       "ksc_statement",
-      "user_profile",
-      "focus_achievements",
-      "length_instruction"
+      "user_profile_data",
+      "detail_instruction"
     ],
     "output_format": "structured_json",
-    "has_system_prompt": true,
     "metadata": {
       "created_at": "2024-09-11",
-      "last_updated": "2024-09-11",
-      "usage_count": 0
+      "last_updated": "2026-02-23",
+      "usage_count": 0,
+      "replaces": ["ksc_simple_response", "ksc_star_response"]
     }
   },
   "tailored_cover_letter_simple": {
@@ -104,23 +170,6 @@
     ],
     "output_format": "structured_json",
     "has_system_prompt": true,
-    "metadata": {
-      "created_at": "2024-09-11",
-      "last_updated": "2024-09-11",
-      "usage_count": 0
-    }
-  },
-  "ksc_simple_response": {
-    "name": "KSC Simple Response Generation",
-    "description": "Generates simple STAR methodology responses for Key Selection Criteria",
-    "category": "ksc_generation",
-    "version": "1.0",
-    "template": "As an expert career coach and a master of the STAR interview technique, your task is to generate a response for a Key Selection Criterion (KSC).\n\n**Objective:**\n1. Analyze the following Key Selection Criterion: \"{ksc_statement}\".\n2. Search through the provided user profile data to find the most relevant real-world example of this skill or experience.\n3. Using that single, most relevant example, write a comprehensive response that is strictly formatted using the STAR methodology (Situation, Task, Action, Result).\n4. The final output must be a JSON object with four keys: \"situation\", \"task\", \"action\", and \"result\".\n\n**User Profile Data:**\n```json\n{user_profile_data}\n```\n\nNow, generate the STAR response based on the user's experience.",
-    "parameters": [
-      "ksc_statement",
-      "user_profile_data"
-    ],
-    "output_format": "structured_json",
     "metadata": {
       "created_at": "2024-09-11",
       "last_updated": "2024-09-11",

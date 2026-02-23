@@ -10,9 +10,9 @@
 | Field               | Value                |
 | ------------------- | -------------------- |
 | **Document ID**     | ASSET-PLACE-001      |
-| **Version**         | 1.0                  |
-| **Status**          | Implementation Ready |
-| **Last Updated**    | February 9, 2026     |
+| **Version**         | 1.1                  |
+| **Status**          | Production Ready    |
+| **Last Updated**    | February 23, 2026    |
 | **Parent Document** | 06-wireframes.md     |
 
 ---
@@ -425,24 +425,24 @@ This section maps asset tokens to their resolved paths in the kr-solidarity syst
 - **KR-SOLID-011** provides atmospheric overlay — Use at 6-18% opacity for ink atmosphere effects
 - **KR-SOLID-029** provides dynamic overlay — Use at 35-60% opacity for expressive pages (Landing, Dashboard Overview)
 
-### Planned Assets (KR-UI Kit Gaps)
+### System Assets (Production Ready)
 
-The following UI-kit primitives are marked as **planned** and require generation:
+The following UI-kit primitives are fully implemented as SVGs and resolved via the token map:
 
-| KR-UI ID | Name | Description | Status |
-|----------|------|-------------|--------|
-| **KR-UI-001** | Wheat Paste Tear | Torn poster edge decoration (large + small variants) | Planned |
-| **KR-UI-002** | Halo Disk | Radiant circle element (plain + gauge version) | Planned |
-| **KR-UI-003** | Screenprint Grit Particles | Floating texture particles (tile + sprite set) | Planned |
-| **KR-UI-004** | Blueprint Grid Overlay | Technical grid overlay (transparent) | Planned |
-| **KR-UI-005** | Charcoal Paper Substrate | Neutral charcoal paper base texture | Planned |
-| **KR-UI-006** | Blueprint Layout Watermark | Technical layout overlay (transparent) | Planned |
-| **KR-UI-007** | Screenprint Stamp | Verification stamp (VERIFIED) | Planned |
+| KR-UI ID | Name | Description | Status | Path (Resolved) |
+|----------|------|-------------|--------|-----------------|
+| **KR-UI-001** | Wheat Paste Tear | Torn poster edge decoration | Ready | `/assets/kr-solidarity/ui-kit/svg/...` |
+| **KR-UI-002** | Halo Disk | Radiant circle element | Ready | `/assets/kr-solidarity/ui-kit/svg/...` |
+| **KR-UI-003** | Screenprint Grit | Floating texture particles | Ready | `/assets/kr-solidarity/ui-kit/svg/...` |
+| **KR-UI-004** | Blueprint Grid | Technical grid overlay | Ready | `/assets/kr-solidarity/ui-kit/svg/...` |
+| **KR-UI-005** | Charcoal Paper | Neutral charcoal base texture | Ready | `/assets/kr-solidarity/ui-kit/svg/...` |
+| **KR-UI-006** | Blueprint Layout | Technical layout watermark | Ready | `/assets/kr-solidarity/ui-kit/svg/...` |
+| **KR-UI-007** | Screenprint Stamp | Verification stamp (VERIFIED) | Ready | `/assets/kr-solidarity/ui-kit/svg/...` |
 
-**Implementation Note:** These UI-kit assets are system primitives (not cultural/identity motifs) and won't violate the layered identity rules. A central token mapping file is available at `frontend/public/assets/kr-solidarity-ui-token-map.json`.
+**Implementation Note:** All system primitives are now high-performance SVGs, allowing for crisp scaling and CSS-based tinting (e.g., using `mask-image` or `currentColor` where applicable). A central token mapping file (v1.1.0) is available at `frontend/public/assets/kr-solidarity-ui-token-map.json`.
 
 ---
 
-**Last Updated**: February 12, 2026  
-**Next Review**: Asset generation phase completion
+**Last Updated**: February 23, 2026  
+**Next Review**: Production UI Audit 
 

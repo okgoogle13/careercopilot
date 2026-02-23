@@ -184,8 +184,7 @@ module.exports = {
             "windFlutter": "var(--sys-motion-patterns-windFlutter-duration)",
             "waterRipple": "var(--sys-motion-patterns-waterRipple-duration)",
             "melancholyBreath": "var(--sys-motion-patterns-melancholyBreath-duration)"
-      },
-      "extend": {}
+      }
 }
   }
 };
