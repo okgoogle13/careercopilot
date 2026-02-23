@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Northcote Asset Cataloger - Manifest Integration
-Analyzes images and validates against northcote-[DEPRECATED_STYLE]-manifest.json schema.
+Kerala Rage Asset Cataloger - Manifest Integration
+Analyzes images and validates against kerala-rage-kr-solidarity-manifest.json schema.
 """
 
 import json

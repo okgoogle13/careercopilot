@@ -1,6 +1,6 @@
 ---
 name: auto-validator
-description: "Programmatic asset compliance validation using vision analysis and Northcote\
+description: "Programmatic asset compliance validation using vision analysis and Kerala Rage\
   \ scorecard. Eliminates manual validation loops\u2014upload image, receive scored\
   \ JSON with correction prompts in 30 seconds."
 ---
@@ -9,7 +9,7 @@ description: "Programmatic asset compliance validation using vision analysis and
 
 ## Purpose
 
-Automates Northcote Curio asset validation. Upload generated image → receive compliance JSON with scores, violations, and auto-generated correction prompt. Replaces 10-minute conversational validation with 30-second programmatic assessment.
+Automates Kerala Rage asset validation. Upload generated image → receive compliance JSON with scores, violations, and auto-generated correction prompt. Replaces 10-minute conversational validation with 30-second programmatic assessment.
 
 ## Trigger Conditions
 
