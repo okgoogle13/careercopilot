@@ -279,11 +279,11 @@ const config: Config = {
       // BACKGROUND IMAGE
       // ============================================
       backgroundImage: {
-        // Fallbacks as texture paths might need adjustment
-        'kr-dark-texture': 'url("/assets/textures/wallpaper.png")',
-        'lab-texture': 'url("/assets/textures/paper-grain.png")',
-        'grid-major': 'url("/assets/textures/grid-major.png")',
-        'grid-minor': 'url("/assets/textures/grid-minor.png")',
+        // Updated to Kr-Solidarity standardized assets
+        'kr-dark-texture': 'url("/assets/kr-solidarity/texture/kr-solidarity__substrate__kr-solidarity--texture--melbourne-laneway--v1__v1.png")',
+        'lab-texture': 'url("/assets/kr-solidarity/texture/kr-solidarity__substrate__kr-solidarity--texture--melbourne-laneway--v1__v1.png")',
+        'grid-major': 'url("/assets/kr-solidarity/ui-kit/svg/motifs/kr-solidarity__ui-kit__KR-UI-010__v1.svg")',
+        'grid-minor': 'url("/assets/kr-solidarity/ui-kit/svg/motifs/kr-solidarity__ui-kit__KR-UI-008__v1.svg")',
       },
     },
   },

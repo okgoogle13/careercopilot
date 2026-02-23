@@ -15,8 +15,8 @@ import { useState } from 'react';
 import { PageHeader } from '../../components/shared/PageHeader';
 
 // Assets
-import leafFern from '../../assets/KrMotifs/leaf-fern.png';
-import wallpaper from '../../assets/textures/wallpaper.png';
+const leafFern = '/assets/kr-solidarity/specimen/kr-solidarity__specimen__triage-natural-history__v1.png';
+const wallpaper = '/assets/kr-solidarity/texture/kr-solidarity__substrate__kr-solidarity--texture--melbourne-laneway--v1__v1.png';
 
 interface Application {
   id: number;

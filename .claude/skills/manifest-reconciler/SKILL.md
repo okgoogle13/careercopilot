@@ -1,53 +1,60 @@
 ---
 name: manifest-reconciler
-description: Reconciles filesystem assets with the hero registry and manifest files.
-  catches missing, abandoned, or mismatched assets to maintain system integrity.
+description: Reconcile KR asset files against manifest and hero registries; report gaps, orphans, and hero coverage metrics.
 metadata:
   legacy_frontmatter:
-    version: 1.0.0
+    version: 2.0.0
     tags:
     - manifest
-    - filesystem
     - integrity
+    - hero
 ---
 
-# Manifest Reconciler Skill
-
-## System Prompt
-
-> You are the **Manifest Reconciler** for the CareerCopilot asset pipeline.
->
-> Responsibilities:
->
-> 1.  **Filesystem Scan**: List all files in `/public/assets/kr-solidarity/` and sub-directories.
-> 2.  **Cross-Reference**: Compare the set of actual files against entries in `manifest.json` and `kr-solidarity.hero-registry.json`.
-> 3.  **Conflict Identification**:
->     - **Orphaned Assets**: Files that exist on disk but are not in any registry.
->     - **Broken References**: Manifest entries pointing to non-existent files.
->     - **Type Mismatches**: Assets categorized as `spiritual` but located in the `resistance` folder (or vice versa).
-> 4.  **Auto-Correction**: Propose fixes (moving files, updating registry IDs) to restore perfect sync.
->
-> Rules:
->
-> - **Safety First**: NEVER delete files automatically. Only report and propose `git rm` commands.
-> - **Hashing (Optional)**: If duplicates are suspected, compare file sizes or basic hashes.
->
-> Output:
->
-> - A report containing table of "Asset Integrity Status".
+# Manifest Reconciler
 
 ## Purpose
+Guarantee that assets on disk, manifest entries, and hero registry references are synchronized before packaging or deployment.
 
-Ensures the data layer (JSON) and the binary layer (PNGs) are in sync. Critical for preventing 404s in the UI and ensuring the "Composition Engine" has valid ingredients.
+## Inputs
+```json
+{
+  "asset_root": "frontend/public/assets/kr-solidarity",
+  "manifest": "frontend/public/assets/kerala-rage-kr-solidarity-manifest.json",
+  "hero_registry": "frontend/public/assets/kr-solidarity-hero-registry.json"
+}
+```
 
-## When to Use This Skill
+## Checks
+1. Filesystem -> manifest reconciliation
+- Orphans: file exists, not in manifest
+- Broken refs: manifest path missing on disk
+- Duplicates: duplicate ids or file paths
 
-- After manual asset uploads or bulk deletions.
-- As part of a pre-commit or CI check.
+2. Hero reconciliation
+- Hero layer asset IDs resolve to manifest IDs
+- No missing IDs in hero compositions
+- Hero depth metrics are reported (`layers >= 4` coverage)
 
-## Process
+3. Coverage summary
+- Total assets
+- Per-layer counts
+- Hero composition count
+- Unique hero assets used
 
-1.  **Index**: Crawl the asset directory.
-2.  **Query**: Search manifest files for all file path strings.
-3.  **Reconcile**: Perform set difference operations to find anomalies.
-4.  **Propose**: Output a list of reconciliation actions.
+## Output Contract
+```json
+{
+  "status": "PASS",
+  "manifest_total": 56,
+  "orphans": [],
+  "broken_references": [],
+  "hero_missing_assets": [],
+  "hero_depth_ratio": 0.50,
+  "notes": []
+}
+```
+
+## Safety Rules
+- Never delete automatically.
+- Emit proposed `git rm` commands only for reviewed orphan candidates.
+- Fail if manifest or hero registry cannot be parsed.

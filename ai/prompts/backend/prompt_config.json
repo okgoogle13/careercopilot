@@ -46,6 +46,11 @@
     "comprehensive": "Provide comprehensive, detailed responses (4-6 sentences each). Total response should be 450-600 words."
   },
 
+  "ksc_detail_levels": {
+    "simple": "Return a JSON object with exactly four string keys: \"situation\", \"task\", \"action\", \"result\". Each value should be a clear, specific paragraph of 2-4 sentences.",
+    "full": "Return a JSON object with keys: \"ksc_analysis\" (object with: ksc_interpretation string, key_competencies array, success_factors array, common_pitfalls array), \"experience_selection\" (object with: chosen_experience string, relevance_score integer 0-100, selection_rationale string, alternative_experiences array), \"star_response\" (object with: situation string, task string, action string, result string, full_response string), \"optimization_suggestions\" (object with: strength_areas array, improvement_areas array, alternative_approaches array)."
+  },
+
   "validation_rules": {
     "required_parameters": true,
     "parameter_type_checking": true,

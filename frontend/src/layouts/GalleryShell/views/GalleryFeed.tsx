@@ -4,7 +4,7 @@ import { useGalleryData } from '@/hooks/useGalleryData';
 import { motion } from 'framer-motion';
 import { Briefcase, Sparkles, TrendingUp } from 'lucide-react';
 import React from 'react';
-import leafFernSrc from '../../../assets/specimens/leaf-fern.png';
+
 
 export const GalleryFeed: React.FC = () => {
   const { feed, isLoading } = useGalleryData();
@@ -119,7 +119,7 @@ export const GalleryFeed: React.FC = () => {
                     {idx % 2 === 0 && (
                       <div className="absolute -right-8 -top-8 w-32 h-32 opacity-10 pointer-events-none group-hover:opacity-20 transition-opacity duration-700 mix-blend-overlay">
                         <img
-                          src={leafFernSrc}
+                          src="/assets/kr-solidarity/specimen/kr-solidarity__specimen__triage-natural-history__v1.png"
                           alt=""
                           className="w-full h-full object-contain transform rotate-12"
                         />
@@ -128,12 +128,13 @@ export const GalleryFeed: React.FC = () => {
                     {idx % 2 !== 0 && (
                       <div className="absolute -right-4 bottom-4 w-24 h-24 opacity-5 pointer-events-none group-hover:opacity-15 transition-opacity duration-700 mix-blend-overlay">
                         <img
-                          src="/assets/specimens/northcote-beetle-scarab-variant.png"
+                          src="/assets/kr-solidarity/specimen/kr-solidarity__specimen__user-uploaded-natural-history__v1.webp"
                           alt=""
                           className="w-full h-full object-contain transform -rotate-12"
                         />
                       </div>
                     )}
+
                   </GlassLeafCard>
                 </motion.div>
               ))}

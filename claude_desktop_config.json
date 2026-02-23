@@ -18,13 +18,13 @@
       ]
     },
     "task-router": {
-      "command": "/Users/okgoogle13/.pyenv/versions/3.12.3/bin/python",
+      "command": "/Users/okgoogle13/Desktop/careercopilot/venv/bin/python",
       "args": [
         "/Users/okgoogle13/Desktop/careercopilot/servers/task_router_mcp.py"
       ]
     },
     "design-system-sidekick": {
-      "command": "/Users/okgoogle13/.pyenv/versions/3.12.3/bin/python",
+      "command": "/Users/okgoogle13/Desktop/careercopilot/venv/bin/python",
       "args": [
         "/Users/okgoogle13/Desktop/careercopilot/servers/design_system_sidekick.py"
       ],
@@ -33,7 +33,7 @@
       }
     },
     "vision-scorer-mcp": {
-      "command": "/Users/okgoogle13/.pyenv/versions/3.12.3/bin/python",
+      "command": "/Users/okgoogle13/Desktop/careercopilot/venv/bin/python",
       "args": [
         "/Users/okgoogle13/Desktop/careercopilot/servers/vision_scorer_mcp.py"
       ],

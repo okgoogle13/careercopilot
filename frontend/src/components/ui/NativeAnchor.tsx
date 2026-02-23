@@ -19,7 +19,7 @@ const assets: Record<NativeVariant, string> = {
     KrFlower: '/assets/plants/native-KrFlower.png',
     kangaroo: '/assets/plants/native-kangaroo.png',
     gum: '/assets/plants/native-gum-hanging.png',
-    fern: '/assets/KrMotifs/leaf-fern.png',
+    fern: '/assets/kr-solidarity/specimen/kr-solidarity__specimen__triage-natural-history__v1.png',
 };
 
 /**

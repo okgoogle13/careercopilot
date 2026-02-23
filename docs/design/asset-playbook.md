@@ -1,6 +1,6 @@
 # Kerala Rage — Asset Playbook
 
-> **Status:** Canonical, merged source of truth ✅
+> **Status:** Canonical, merged source of truth (Kr-Solidarity V3.1) ✅
 > **Scope:** Visual identity, symbolic system, AI generation playbook, asset usage, and product integration.
 > **Audience:** Designers, developers, collaborators, AI operators.
 
@@ -80,7 +80,7 @@ The Kerala Rage system draws from **screenprint poster culture**, **wheat‑past
 ## 4. AI Generation Playbook (Gemini Nano)
 
 ### Tooling & Optimization
-- **Primary:** Gemini 2.0 Flash / Pro (The "Hero Engine").
+- **Primary:** Gemini 3 Flash / Pro (The "Hero Engine").
 - **Strategy:** Modular, structured prompts. Avoid narrative; use technical layer declarations.
 - **Rules:** 
   1. Repeat constraints explicitly in every batch.
@@ -111,7 +111,7 @@ LAYER ORDER (bottom to top):
 COMPOSITION RULES:
 - Max 1 spiritual anchor OR 1 resistance portrait per image.
 - Preserve 40% negative space in upper-left quadrant.
-- Base Color: #1A1714 | Accent: #C84032 (Red), #D4A84B (Gold).
+- Base Color: #1A1A1A | Accent: #F14714 (Red), #DAF674 (Gold).
 ```
 
 ### Variant Strategies
@@ -139,7 +139,7 @@ Heavy screenprint grain and wheat-paste texture.
 ```
 Generate a cinematic landing hero illustration. A central Shiva statue–inspired figure rendered as a solid, sculptural silhouette, integrated into contemporary Australian urban textures (brick laneways, protest residue), with Aboriginal flag colours subtly embedded in the ground, roots, or horizon glow. All identities must coexist in one image.
 ```
-- **Filename:** `hero_layered_shiva_landing_16x9_v1.png`
+- **Filename:** `hero_layered_shiva_landing_16x9_v1.webp`
 - **Output Path:** `/public/assets/hero/`
 - **Specs:** 16:9 | 3840 × 2160 px | 72 DPI
 
@@ -147,7 +147,7 @@ Generate a cinematic landing hero illustration. A central Shiva statue–inspire
 ```
 Generate an abstract editorial background for long-scroll content. Kerala greens and reds bleeding into Australian urban textures, paint splashes, torn poster edges, screenprint grain, Aboriginal flag colours faintly layered beneath the surface like soil strata. No figures. No text.
 ```
-- **Filename:** `bg_editorial_layeredfield_9x16_v1.png`
+- **Filename:** `bg_editorial_layeredfield_9x16_v1.webp`
 - **Output Path:** `/public/assets/backgrounds/`
 - **Specs:** 9:16 | 2160 × 3840 px | 72 DPI
 
@@ -159,7 +159,7 @@ Generate an abstract editorial background for long-scroll content. Kerala greens
 ```
 Screenprint image of a Shiva statue, stone-like and monumental. Calm, reverent, statue-inspired, grounded. The figure should feel embedded in lived space, not fantasy imagery. Centered composition. Muted gold halo disk. No text.
 ```
-- **Filename:** `motif_shiva_sculptural_anchor_1x1_v1.png`
+- **Filename:** `motif_shiva_sculptural_anchor_1x1_v1.webp`
 - **Output Path:** `/public/assets/motifs/`
 - **Specs:** 1:1 | 2048 × 2048 px
 
@@ -167,7 +167,7 @@ Screenprint image of a Shiva statue, stone-like and monumental. Calm, reverent, 
 ```
 Bold screenprint icon of a trishula with damru. Thick line weight, simplified silhouette, high stasis. Recognizable at small scales. 3-5 ink colors. No text.
 ```
-- **Filename:** `symbol_trishula_damru_1x1_v1.png`
+- **Filename:** `symbol_trishula_damru_1x1_v1.svg`
 - **Output Path:** `/public/assets/symbols/`
 - **Specs:** 1:1 | 1024 × 1024 px
 
@@ -175,7 +175,7 @@ Bold screenprint icon of a trishula with damru. Thick line weight, simplified si
 ```
 Screenprint illustration of a Kerala elephant with simplified temple ornaments (Nettipattam), palm framing, and a subtle halo disk. Celebration and cultural richness. No text.
 ```
-- **Filename:** `symbol_kerala_elephant_1x1_v1.png`
+- **Filename:** `symbol_kerala_elephant_1x1_v1.webp`
 - **Output Path:** `/public/assets/symbols/`
 - **Specs:** 1:1 | 2048 × 2048 px
 
@@ -187,7 +187,7 @@ Screenprint illustration of a Kerala elephant with simplified temple ornaments (
 ```
 Agitprop stencil screenprint portrait of Bhagat Singh. Profile with hat. Distinct thin gold "Martyr's Halo" ring behind head. Text included: "INQUILAB ZINDABAD". Heavy grain, limited palette.
 ```
-- **Filename:** `portrait_bhagatsingh_editorial_3x4_v1.png`
+- **Filename:** `portrait_bhagatsingh_editorial_3x4_v1.webp`
 - **Output Path:** `/public/assets/portraits/`
 - **Specs:** 3:4 | 2400 × 3200 px
 
@@ -195,7 +195,7 @@ Agitprop stencil screenprint portrait of Bhagat Singh. Profile with hat. Distinc
 ```
 Screenprint portrait of Tipu Sultan. Green turban. Subtle tiger motifs integrated into shading. Defiant, intellectual expression. No historical realism. No text.
 ```
-- **Filename:** `portrait_tipu_sultan_editorial_3x4_v1.png`
+- **Filename:** `portrait_tipu_sultan_editorial_3x4_v1.webp`
 - **Output Path:** `/public/assets/portraits/`
 - **Specs:** 3:4 | 2400 × 3200 px
 
@@ -207,7 +207,7 @@ Screenprint portrait of Tipu Sultan. Green turban. Subtle tiger motifs integrate
 ```
 Melbourne street texture asset. Brick walls, wheat-paste residue, graffiti remains. Screenprint texture, material-first. No readable text.
 ```
-- **Filename:** `texture_melbourne_street_1x1_v1.png`
+- **Filename:** `texture_melbourne_street_1x1_v1.webp`
 - **Output Path:** `/public/assets/textures/`
 - **Specs:** 1:1 | 2048 × 2048 px
 
@@ -215,7 +215,7 @@ Melbourne street texture asset. Brick walls, wheat-paste residue, graffiti remai
 ```
 Protest placard reading "ALWAYS WAS ALWAYS WILL BE". Raw paint strokes, urgent lettering, embedded in an atmospheric street context.
 ```
-- **Filename:** `solidarity_firstnations_placard_4x5_v1.png`
+- **Filename:** `solidarity_firstnations_placard_4x5_v1.webp`
 - **Output Path:** `/public/assets/solidarity/`
 - **Specs:** 4:5 | 2160 × 2700 px
 
