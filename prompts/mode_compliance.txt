@@ -1,0 +1,22 @@
+You are validating a Kerala Rage asset for mode compliance.
+
+Asset: {{asset_name}}
+Category: {{category}}
+Current ID: {{asset_id}}
+Manifest Path: frontend/public/assets/kerala-rage-kr-solidarity-manifest.json
+
+Evaluate strictly against these rules:
+1) Palette must remain within solidarity tokens:
+   #1A1714, #F5F0E8, #D4A84B, #B8733D, #A39B8F, #6B7F6E.
+2) Visual direction must be contemporary Australian, solidarity-forward, and non-clinical.
+3) Typography and composition must be expressive and readable (no generic defaults).
+4) Reject colonial nostalgia, museum framing, and technical-lab motif language.
+
+Return JSON:
+{
+  "asset_id": "...",
+  "compliance": "PASS|CONDITIONAL|FAIL",
+  "score": 0-100,
+  "issues": ["..."],
+  "recommended_action": "catalog|remix|regenerate|discard"
+}

@@ -1,48 +1,95 @@
-# Mode Compliance Rules: Solidarity Mode Only
+# Mode Compliance: Kerala Rage Solidarity
 
-## Core Aesthetic: Kerala Rage Solidarity
-**Status**: The ONLY valid design mode. "Laboratory Mode" and "Curio Mode" are DEPRECATED.
+**Status**: Active and required. This is the only supported mode for this skill.
+**Last Updated**: 2026-02-23
 
-### ✅ Compliant Indicators
+## Linked Artifacts
 
-**Visual Themes:**
-- **Peter Drew Street Art Influence**: Bold, poster-like, high contrast.
-- **Australian Endemic**: Living symbols (Wattle, Gum Leaves, Magpies) in present-day context.
-- **Material 3 Expressive**: Large type, distinct containers, "Asphalt" dark theme.
-- **Emotional Tone**: Solidarity, urgency, community strength.
+- Inventory: [asset-inventory.md](./asset-inventory.md)
+- Gap reference: [doc008-gaps.md](./doc008-gaps.md)
+- Canonical manifest: [`frontend/public/assets/kerala-rage-kr-solidarity-manifest.json`](../../../../frontend/public/assets/kerala-rage-kr-solidarity-manifest.json)
 
-**Color Palette (Strict):**
-- **Background**: Asphalt Black (`#1A1714`)
-- **Action**: Wattle Gold (`#D4A84B`)
-- **Structure**: Ochre Earth (`#B8733D`), Concrete Grey (`#A39B8F`)
-- **Text**: Paper White (`#F5F0E8`)
-- **Accent**: Gum Leaf Green (`#6B7F6E`)
+## Compliance Matrix
 
-**Typography:**
-- **Headings**: `Fraunces` (Soft: 50+, Wonk: 1)
-- **Body**: `Work Sans`
-- **Accents**: `Caveat` (Handwritten notes)
+| Dimension | Required | Reject |
+|---|---|---|
+| Theme | Contemporary Australian, solidarity-forward | Clinical/lab, colonial nostalgia, generic cyberpunk |
+| Palette | Asphalt `#1A1714`, Paper `#F5F0E8`, Wattle `#D4A84B`, Ochre `#B8733D`, Concrete `#A39B8F`, Gum `#6B7F6E` | Clinical blue/steel palettes, off-system hex values |
+| Typography | Fraunces (heading), Work Sans (body), Caveat (accent) | Inter, Roboto, Arial |
+| Composition | Bold contrast, expressive asymmetry, readable focal hierarchy | Flat template layouts, decorative clutter, unclear hierarchy |
+| Subject Framing | Living endemic species and social context | Museum-cabinet framing, archival nostalgia |
 
-### ❌ Prohibited (Legacy/Laboratory)
+## Triage Decision Table
 
-**Do NOT use:**
-- ❌ **Clinical/Laboratory Aesthetic**: Blue/Slate technical diagrams, grids, calipers.
-- ❌ **Colonial Nostalgia**: "Museum cabinet" framing, sepia-toned "Curio" styles.
-- ❌ **Generic Tech**: "Matrix" digital rain, circuit boards, neon cyber-punk.
-- ❌ **Colors**: `#16141A` (Charcoal Slate), Clinical Blues.
+| Signal | Decision | Action |
+|---|---|---|
+| Warm earthy palette + endemic motif + clear hierarchy | Compliant | Keep and catalog |
+| Mixed signals (good subject, weak palette or hierarchy) | Conditional | Remix and re-score |
+| Clinical/technical visual language or off-mode styling | Non-compliant | Discard or regenerate |
 
-## Triage Guide
+## Example Triage JSON
 
-| Feature | Status | Action |
-| :--- | :--- | :--- |
-| **Warm Earth Tones** | ✅ Match | Keep / Catalog |
-| **Wattle/Flora Subjects** | ✅ Match | Keep / Catalog |
-| **Cool Blue/Grey Tones** | ❌ Violation | **Discard / Remix** |
-| **Technical Grids** | ❌ Violation | **Discard** |
-| **Victorian Etchings** | ⚠️ Caution | Update to "Street Art" style |
+```json
+{
+  "asset_id": "KR-SOLID-011",
+  "legacy_alias": "ASSET-11",
+  "mode": "kerala-rage-solidarity",
+  "compliance": "PASS",
+  "score": 94,
+  "reasons": [
+    "Uses in-palette warm neutrals",
+    "Maintains expressive focal hierarchy",
+    "Avoids prohibited legacy aesthetics"
+  ],
+  "next_action": "catalog"
+}
+```
 
-## Common Violations to Flag
+## Mode-Compliance Flowchart
 
-1.  **"The Laboratory"**: Any asset looking like a medical or physics diagram.
-2.  **"The Museum"**: Any asset looking like a dusty hidden object game (Curio).
-3.  **"The Template"**: Any asset using default Tailwind colors (Blue-500, etc).
+```mermaid
+flowchart TD
+  A[Start asset review] --> B{Palette in allowed token set?}
+  B -- No --> X[Fail: regenerate or discard]
+  B -- Yes --> C{Subject and framing match solidarity mode?}
+  C -- No --> X
+  C -- Yes --> D{Typography/layout expressive and readable?}
+  D -- No --> E[Conditional: remix + re-score]
+  D -- Yes --> F[Pass: catalog + manifest link]
+```
+
+## Prompt Template
+
+```text
+You are validating a Kerala Rage asset for mode compliance.
+
+Asset: {{asset_name}}
+Category: {{category}}
+Current ID: {{asset_id}}
+Manifest Path: frontend/public/assets/kerala-rage-kr-solidarity-manifest.json
+
+Evaluate strictly against these rules:
+1) Palette must remain within solidarity tokens:
+   #1A1714, #F5F0E8, #D4A84B, #B8733D, #A39B8F, #6B7F6E.
+2) Visual direction must be contemporary Australian, solidarity-forward, and non-clinical.
+3) Typography and composition must be expressive and readable (no generic defaults).
+4) Reject colonial nostalgia, museum framing, and technical-lab motif language.
+
+Return JSON:
+{
+  "asset_id": "...",
+  "compliance": "PASS|CONDITIONAL|FAIL",
+  "score": 0-100,
+  "issues": ["..."],
+  "recommended_action": "catalog|remix|regenerate|discard"
+}
+```
+
+## Validation Checklist
+
+- [ ] Linked manifest path resolves and asset ID exists.
+- [ ] Palette is within approved solidarity tokens.
+- [ ] No prohibited visual language (clinical, nostalgic museum framing, generic tech).
+- [ ] Composition preserves clear focal hierarchy and readability.
+- [ ] Typography follows the approved stack (Fraunces, Work Sans, Caveat).
+- [ ] Final decision recorded as `PASS`, `CONDITIONAL`, or `FAIL` with reasons.
