@@ -140,3 +140,30 @@ setup-ci-secrets.sh
 .asset_backup_*
 _archive/
 venv/
+
+# ============================================================
+# DEPRECATED LEGACY ASSETS — Northcote/Curio is DEAD
+# These paths must NEVER be re-tracked
+# ============================================================
+assets/specimens/
+assets/ui/
+assets/textures/
+assets/fauna/
+assets/KrMotifs/
+assets/kr-motifs/
+assets/_triage/
+assets/mockups/
+assets/placeholders/
+assets/plates/
+assets/templates/
+frontend/public/assets/specimens/
+frontend/public/assets/ui/
+frontend/public/assets/textures/
+frontend/public/assets/fauna/
+frontend/public/assets/KrMotifs/
+frontend/public/assets/kr-motifs/
+frontend/public/assets/_triage/
+libs/assets/uncategorized/northcote-*
+run_northcote_workflow.py
+tools/scripts/maintenance/run_northcote_workflow.py
+tools/scripts/workflow/run_northcote_workflow.py
