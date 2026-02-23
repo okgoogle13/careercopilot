@@ -1,44 +1,74 @@
 ---
 name: asset-placement-strategy
-description: Specialized logic for strategic placement of kerala-rage kr-solidarity
-  design artifacts (Seeds, Pebbles, Lenses, Stones) based on biological asymmetry
-  and kr-solidaritysity kr-motif aesthetics. Ensures [DEPRECATED_STYLE] balance and
-  avoids "slop" by enforcing strict archetype constraints and structural integrity.
+description: Wireframe-driven placement strategy for Kerala Rage assets with strict semantic token usage and deterministic placement scoring.
 metadata:
   legacy_frontmatter:
-    version: 1.0.0
+    version: 2.0.0
     tags:
     - design
     - layout
-    - kerala-rage-kr-solidarity
+    - wireframe
 ---
 
-# Asset Placement Strategy Skill
+# Asset Placement Strategy
 
 ## Purpose
+Place KR assets (Seeds, Pebbles, Lenses, Stones, motifs, hero overlays) against annotated wireframes with explicit, testable constraints.
 
-This skill provides a framework for placing design "artifacts" within the kerala-rage kr-solidarity design system. It moves beyond standard layouts to prioritize biological asymmetry, tactility, and kr-solidaritysity-kr-motif aesthetics.
+## Inputs
+```json
+{
+  "wireframe_doc": "docs/design/annotated-wireframes.md",
+  "status_doc": "docs/design/wireframe-status.md",
+  "manifest": "frontend/public/assets/kerala-rage-kr-solidarity-manifest.json",
+  "hero_registry": "frontend/public/assets/kr-solidarity-hero-registry.json",
+  "target_screens": ["Landing", "Analysis", "Dashboard"]
+}
+```
 
-## When to Use
+## Hard Placement Rules
+1. Use semantic tokens only:
+- Color: `--sys-color-*`
+- Typography: `--sys-type-*`
+- Do not introduce hardcoded hex in implementation scope.
+2. Respect wireframe layer intent:
+- `Z-0`: substrate/base texture
+- `Z-1..Z-2`: atmospheric/motif overlays
+- `Z-3+`: foreground highlights and hero focal cues
+3. Every placed asset must map to a valid manifest entry.
+4. If wireframes include `TODO[asset]`, produce explicit tokenized replacements.
+5. Hero surfaces must include intentional depth and lighting/halo logic where specified.
 
-Use this skill when placing design elements (Seeds, Pebbles, Lenses, Stones) to ensure [DEPRECATED_STYLE] balance and adherence to kerala-rage kr-solidarity design principles.
+## Placement Scoring (100)
+- Wireframe alignment and z-order correctness: 35
+- Token compliance (`--sys-*` only): 25
+- Manifest-valid asset mapping: 20
+- Hero depth and halo/lighting intent: 20
 
-## Process
+Pass threshold: `>= 90`.
 
-1. **Identify Anchor Points**: Determine where the eye naturally rests. Place a Seed or Pebble at the end of a primary reading path (bottom-right).
-2. **Apply "[DEPRECATED_STYLE] Drift"**: Offset secondary elements by a small, non-standard amount (e.g., 7.5% instead of 8%).
-3. **Layer for Depth**: Use the Z-index system to stack kr-motif cards (Stones).
-4. **Slop Prevention**: Ensure every container has an archetype and radii are asymmetric.
+## Output Contract
+```json
+{
+  "screen": "Landing",
+  "score": 93,
+  "placements": [
+    {
+      "slot": "hero_background",
+      "asset_id": "KR-SOLID-034",
+      "z_index": 0,
+      "token_refs": ["--sys-color-charcoalBackground-base"],
+      "status": "applied"
+    }
+  ],
+  "unresolved": [],
+  "notes": []
+}
+```
 
-## Core Principles
-
-1. **Strategic Asymmetry**: Avoid perfect grid alignment for decorative elements.
-2. **Archetype Integrity**: Correct use of Seeds, Pebbles, Lenses, and Stones.
-3. **kr-motif Mounting**: Treat content as if it were pinned in a kr-solidaritysity cabinet.
-
-## Verification Checklist
-
-- [ ] Does the layout feel "found" rather than "built"?
-- [ ] Are the corner radii asymmetric and intentional?
-- [ ] Is there a clear focal point (Seed/Lens)?
-- [ ] Does the element respond to touch/hover with a "tactile" spring?
+## Validation Checklist
+- [ ] No hardcoded hex values added in target implementation files
+- [ ] All referenced assets exist in manifest and filesystem
+- [ ] No unresolved `TODO[asset]` markers for audited targets
+- [ ] Hero sections include layered depth with documented intent
+- [ ] Final score `>= 90`

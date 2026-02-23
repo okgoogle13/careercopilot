@@ -67,3 +67,4 @@ celery
 pypdf
 defusedxml
 python-docx
+weasyprint

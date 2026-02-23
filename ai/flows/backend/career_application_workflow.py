@@ -16,6 +16,8 @@ from app.core.ai_error_handling import with_ai_error_handling
 from app.core.input_validation import InputSanitizer, InputValidationError
 
 from .ksc_generator import STAR_Response, generateKscResponse
+from .resume_optimizer import optimize_resume
+from ai.schemas.backend.document_models import CareerProfile, TailoredResumeResult
 
 # Import required flows
 from .resume_intelligence_pipeline import (
@@ -49,15 +51,7 @@ except ImportError:
 gemini_pro = get_ai_config().get_model_config("gemini-3.0-flash")
 
 
-class TailoredResumeResult(BaseModel):
-    """Result structure for tailored resume generation"""
-
-    tailored_content: str = Field(description="Tailored resume content optimized for the job")
-    original_score: int = Field(description="Original resume analysis score", ge=0, le=100)
-    tailored_score: int = Field(description="Improved score after tailoring", ge=0, le=100)
-    improvements_made: List[str] = Field(description="Specific improvements applied")
-    keyword_matches: List[str] = Field(description="Job keywords incorporated")
-    competitive_advantages: List[str] = Field(description="Highlighted competitive strengths")
+# ... TailoredResumeResult now imported from document_models ...
 
 
 class KSCResponsesResult(BaseModel):
@@ -154,30 +148,36 @@ async def generate_application_package(
 
         # Sanitize inputs
         sanitized_job_desc = InputSanitizer.sanitize_text_input(job_description)
-        sanitized_profile = InputSanitizer.sanitize_dict_input(user_profile)
+        sanitized_profile_dict = InputSanitizer.sanitize_dict_input(user_profile)
+
+        # Build unified CareerProfile
+        profile = CareerProfile.from_legacy_dict(
+            sanitized_profile_dict, 
+            sanitized_job_desc.sanitized_content
+        )
 
         print("Starting application package generation...")
 
         # Step 1: Resume Intelligence Analysis
         print("Step 1: Analyzing resume and generating intelligence report...")
         try:
-            resume_content = sanitized_profile.get("resume_content", "")
+            resume_content = sanitized_profile_dict.get("resume_content", "")
             if not resume_content:
                 # Try alternative profile fields
                 resume_content = (
-                    sanitized_profile.get("profile_summary", "")
+                    sanitized_profile_dict.get("profile_summary", "")
                     + "\n"
-                    + str(sanitized_profile.get("experience", []))
+                    + str(sanitized_profile_dict.get("experience", []))
                     + "\n"
-                    + str(sanitized_profile.get("skills", []))
+                    + str(sanitized_profile_dict.get("skills", []))
                 )
 
             if resume_content:
                 result.resume_intelligence = await generate_resume_intelligence_report(
                     resume_content=resume_content,
-                    target_industry=sanitized_profile.get("target_industry"),
-                    career_goals=sanitized_profile.get("career_goals"),
-                    experience_level=sanitized_profile.get("experience_level", "mid_level"),
+                    target_industry=sanitized_profile_dict.get("target_industry"),
+                    career_goals=sanitized_profile_dict.get("career_goals"),
+                    experience_level=sanitized_profile_dict.get("experience_level", "mid_level"),
                 )
                 result.components_generated.append("resume_intelligence")
                 print("✓ Resume intelligence analysis completed")
@@ -192,7 +192,7 @@ async def generate_application_package(
         print("Step 2: Conducting company research...")
         try:
             company_name = _extract_company_name(sanitized_job_desc.sanitized_content)
-            industry = sanitized_profile.get("target_industry", "Technology")
+            industry = sanitized_profile_dict.get("target_industry", "Technology")
             job_role = _extract_job_role(sanitized_job_desc.sanitized_content)
 
             if company_name:
@@ -212,13 +212,14 @@ async def generate_application_package(
         print("Step 3: Creating tailored resume...")
         try:
             if result.resume_intelligence:
-                result.tailored_resume = await _generate_tailored_resume(
-                    sanitized_job_desc.sanitized_content,
-                    sanitized_profile,
-                    result.resume_intelligence,
+                # Use missing keywords from intelligence report if available
+                missing_keywords = result.resume_intelligence.resume_analysis.missing_elements or []
+                result.tailored_resume = await optimize_resume(
+                    profile=profile,
+                    missing_keywords=missing_keywords
                 )
                 result.components_generated.append("tailored_resume")
-                print("✓ Tailored resume generated")
+                print("✓ Tailored resume generated via optimize_resume flow")
             else:
                 print("⚠ Skipping tailored resume (no resume intelligence)")
 
@@ -232,7 +233,7 @@ async def generate_application_package(
             company_info = result.company_research.dict() if result.company_research else None
 
             result.cover_letter = await generate_smart_cover_letter(
-                candidate_profile=sanitized_profile,
+                profile=profile,
                 job_description=sanitized_job_desc.sanitized_content,
                 company_info=company_info,
                 style="professional",
@@ -251,7 +252,7 @@ async def generate_application_package(
             ksc_criteria = _detect_ksc_criteria(sanitized_job_desc.sanitized_content)
 
             if ksc_criteria:
-                result.ksc_responses = await _generate_ksc_responses(ksc_criteria, sanitized_profile)
+                result.ksc_responses = await _generate_ksc_responses(ksc_criteria, profile)
                 result.components_generated.append("ksc_responses")
                 print(f"✓ Generated {len(ksc_criteria)} KSC responses")
             else:
@@ -291,106 +292,26 @@ async def generate_application_package(
         return result
 
 
-async def _generate_tailored_resume(
-    job_description: str,
-    user_profile: Dict,
-    resume_intelligence: ResumeIntelligenceReport,
-) -> TailoredResumeResult:
-    """Generate a tailored resume optimized for the specific job."""
-
-    prompt = f"""
-As an expert resume writer and career strategist, create a tailored version of this resume
-optimized specifically for the target job opportunity.
-
-ORIGINAL RESUME INTELLIGENCE ANALYSIS:
-{json.dumps(resume_intelligence.resume_analysis.dict(), separators=(\',\', \':\'))}
-
-JOB DESCRIPTION:
-{job_description}
-
-USER PROFILE:
-{json.dumps(user_profile, separators=(\',\', \':\'))}
-
-RESUME TAILORING REQUIREMENTS:
-
-1. KEYWORD OPTIMIZATION:
-   - Identify key terms and phrases from job description
-   - Naturally incorporate relevant keywords into resume content
-   - Maintain authentic language while improving ATS compatibility
-
-2. CONTENT PRIORITIZATION:
-   - Reorder and emphasize most relevant experiences
-   - Highlight achievements that align with job requirements
-   - De-emphasize less relevant information
-
-3. SKILL ALIGNMENT:
-   - Prominently feature skills mentioned in job posting
-   - Group related skills strategically
-   - Add missing relevant skills if authentically possessed
-
-4. ACHIEVEMENT ENHANCEMENT:
-   - Quantify accomplishments using metrics relevant to target role
-   - Strengthen impact statements with job-relevant language
-   - Add context that demonstrates fit for specific role
-
-5. FORMAT OPTIMIZATION:
-   - Ensure ATS-friendly formatting
-   - Optimize section order for this specific role
-   - Maintain professional presentation
-
-Generate the tailored resume content along with analysis of improvements made.
-Focus on authentic enhancements that genuinely improve job alignment.
-
-Respond with valid JSON matching the structure expected for tailored resume results.
-"""
-
-    response = gemini_pro.generate(
-        prompt,
-        config={
-            "response_mime_type": "application/json",
-            "temperature": 0.3,
-        },
-    )
-
-    # Parse and structure the response
-    tailored_data = response.output()
-
-    return TailoredResumeResult(
-        tailored_content=tailored_data.get("tailored_content", ""),
-        original_score=resume_intelligence.resume_analysis.overall_score,
-        tailored_score=min(
-            resume_intelligence.resume_analysis.overall_score + 15, 100
-        ),  # Improved score
-        improvements_made=tailored_data.get("improvements_made", []),
-        keyword_matches=tailored_data.get("keyword_matches", []),
-        competitive_advantages=tailored_data.get("competitive_advantages", []),
-    )
-
-
-async def _generate_ksc_responses(ksc_criteria: List[str], user_profile: Dict) -> KSCResponsesResult:
-    """Generate STAR responses for detected KSC criteria."""
-
-    generated_responses = []
-    total_criteria = len(ksc_criteria)
-
-    for criterion in ksc_criteria[:5]:  # Limit to 5 criteria to avoid timeout
+async def _generate_ksc_responses(
+    criteria: List[str], profile: CareerProfile
+) -> KSCResponsesResult:
+    """Generate STAR responses for all identified KSC criteria."""
+    responses = []
+    
+    for criterion in criteria:
         try:
-            response = await generateKscResponse(user_profile_data=user_profile, ksc_statement=criterion)
-            generated_responses.append({criterion: response})
+            star_response = await generateKscResponse(
+                profile=profile, ksc_statement=criterion
+            )
+            responses.append({criterion: star_response})
         except Exception as e:
-            print(f"Failed to generate KSC response for '{criterion}': {str(e)}")
-
-    coverage = (
-        "full"
-        if len(generated_responses) == total_criteria
-        else "partial" if len(generated_responses) > 0 else "minimal"
-    )
-
+            print(f"  ⚠ Failed to generate response for criterion: {criterion[:30]}... ({str(e)})")
+            
     return KSCResponsesResult(
-        generated_responses=generated_responses,
-        total_criteria_addressed=len(generated_responses),
-        coverage_completeness=coverage,
-        response_quality_score=85 if generated_responses else 0,
+        generated_responses=responses,
+        total_criteria_addressed=len(responses),
+        coverage_completeness="full" if len(responses) == len(criteria) else "partial",
+        response_quality_score=85 if responses else 0,
     )
 
 

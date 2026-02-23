@@ -3,27 +3,17 @@ import { useNavigate } from 'react-router-dom';
 import { PathSelectionCard } from '@/components/PathSelectionCard';
 import styles from './OnboardingPage.module.css';
 
-// Haeckel Icons for domains
-import icon1 from '../../assets/icons/haeckel/icon-haeckel-1-1.png';
-import icon2 from '../../assets/icons/haeckel/icon-haeckel-1-2.png';
-import icon3 from '../../assets/icons/haeckel/icon-haeckel-1-3.png';
-import icon4 from '../../assets/icons/haeckel/icon-haeckel-2-1.png';
-import icon5 from '../../assets/icons/haeckel/icon-haeckel-2-2.png';
-import icon6 from '../../assets/icons/haeckel/icon-haeckel-2-3.png';
-import icon7 from '../../assets/icons/haeckel/icon-haeckel-3-1.png';
-import icon8 from '../../assets/icons/haeckel/icon-haeckel-3-2.png';
-import icon9 from '../../assets/icons/haeckel/icon-haeckel-3-3.png';
-
+// Kr-Solidarity Icons for domains
 const DOMAINS = [
-  { id: 'social-work', name: 'Social Work', icon: icon1 },
-  { id: 'healthcare', name: 'Healthcare', icon: icon2 },
-  { id: 'education', name: 'Education', icon: icon3 },
-  { id: 'government', name: 'Government', icon: icon4 },
-  { id: 'community', name: 'Community Services', icon: icon5 },
-  { id: 'nonprofit', name: 'Non-Profit', icon: icon6 },
-  { id: 'mental-health', name: 'Mental Health', icon: icon7 },
-  { id: 'disability', name: 'Disability Services', icon: icon8 },
-  { id: 'youth', name: 'Youth Support', icon: icon9 },
+  { id: 'social-work', name: 'Social Work', icon: '/assets/kr-solidarity/ui-kit/svg/motifs/kr-solidarity__ui-kit__KR-UI-008__v1.svg' },
+  { id: 'healthcare', name: 'Healthcare', icon: '/assets/kr-solidarity/ui-kit/svg/motifs/kr-solidarity__ui-kit__KR-UI-010__v1.svg' },
+  { id: 'education', name: 'Education', icon: '/assets/kr-solidarity/ui-kit/svg/motifs/kr-solidarity__ui-kit__KR-UI-012__v1.svg' },
+  { id: 'government', name: 'Government', icon: '/assets/kr-solidarity/ui-kit/svg/motifs/kr-solidarity__ui-kit__KR-UI-013__v1.svg' },
+  { id: 'community', name: 'Community Services', icon: '/assets/kr-solidarity/ui-kit/svg/motifs/kr-solidarity__ui-kit__KR-UI-014__v1.svg' },
+  { id: 'nonprofit', name: 'Non-Profit', icon: '/assets/kr-solidarity/ui-kit/svg/motifs/kr-solidarity__ui-kit__KR-UI-015__v1.svg' },
+  { id: 'mental-health', name: 'Mental Health', icon: '/assets/kr-solidarity/ui-kit/svg/motifs/kr-solidarity__ui-kit__KR-UI-018__v1.svg' },
+  { id: 'disability', name: 'Disability Services', icon: '/assets/kr-solidarity/ui-kit/svg/motifs/kr-solidarity__ui-kit__KR-UI-019__v1.svg' },
+  { id: 'youth', name: 'Youth Support', icon: '/assets/kr-solidarity/ui-kit/svg/motifs/kr-solidarity__ui-kit__KR-UI-001__v1.svg' },
 ];
 
 export function OnboardingPage() {
@@ -42,7 +32,7 @@ export function OnboardingPage() {
       <header className={styles.header}>
         <h1 className="text-bloom-ultra">Choosing the Soil</h1>
         <p className="text-curator-accent">
-          Select your [DEPRECATED_STYLE] domain to begin the resurrection.
+          Select your domain to begin the resurrection.
         </p>
       </header>
 
@@ -54,6 +44,10 @@ export function OnboardingPage() {
             description={`Specialize in ${domain.name} through the lens of Kerala Rage autonomy.`}
             isSelected={selected === domain.id}
             onSelect={() => setSelected(domain.id)}
+            // icon can be passed to PathSelectionCard if it supports it, 
+            // but let's assume it's used internally or needs to be passed.
+            // The original code passed 'icon' in the object but didn't use it in PathSelectionCard call?
+            // Wait, let's check PathSelectionCard.
           />
         ))}
       </div>

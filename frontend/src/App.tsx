@@ -9,7 +9,7 @@ import {
   useLocation,
 } from 'react-router-dom';
 import { Toaster } from 'sonner';
-import texturePattern from './assets/textures/paper-grain.png';
+const texturePattern = '/assets/kr-solidarity/texture/kr-solidarity__substrate__kr-solidarity--texture--melbourne-laneway--v1__v1.png';
 import { TokenTest } from './components/debug/TokenTest';
 import { getModeForRoute } from './config/routeModeMap';
 import { useAuth } from './context/AuthContext';

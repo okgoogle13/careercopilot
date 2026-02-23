@@ -99,9 +99,9 @@ def generate_tailwind_patch(tokens):
         'borderRadius': {},
         'boxShadow': {},
         'transitionTimingFunction': {},
-        'transitionDuration': {},
-        'extend': {}
+        'transitionDuration': {}
     }
+
 
     # Map Colors
     if 'color' in tokens:
@@ -196,6 +196,11 @@ def main():
     # Resolve $value references
     print("RESOLVING DTCG values...")
     tokens = resolve_values(root)
+    
+    # Filter out top-level compliance or documentation keys
+    if isinstance(tokens, dict):
+        tokens = {k: v for k, v in tokens.items() if k not in ['compliance', 'documentation']}
+
     
     if not tokens:
         print("❌ No tokens found after resolution")

@@ -9,8 +9,8 @@ import { CheckCircle, FileText, Fingerprint, Microscope } from 'lucide-react';
 import React, { useState } from 'react';
 
 // KrDark Assets
-import naturesClockwork from '../assets/KrMotifs/natures_clockwork.jpg';
-import paperGrain from '../assets/textures/paper-grain.png';
+const naturesClockwork = '/assets/kr-solidarity/specimen/kr-solidarity__specimen__triage-natural-history__v1.png';
+const paperGrain = '/assets/kr-solidarity/texture/kr-solidarity__substrate__kr-solidarity--texture--melbourne-laneway--v1__v1.png';
 
 type UploadStage = 'idle' | 'uploading' | 'extracting' | 'processing' | 'embedding' | 'complete';
 

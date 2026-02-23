@@ -15,7 +15,7 @@ class ManifestReconciler:
         self.repo_root = Path(__file__).parent.parent.parent
         self.manifest_path = self.repo_root / 'frontend/public/assets/kerala-rage-kr-solidarity-manifest.json'
         self.token_map_path = self.repo_root / 'frontend/public/assets/kr-solidarity-ui-token-map.json'
-        self.hero_registry_path = self.repo_root / 'frontend/public/assets/kr-solidarity-hero-registry.json'
+        self.hero_registry_path = self.repo_root / 'frontend/public/assets/kr-solidarity/kr-solidarity.hero-registry.json'
 
     def load_json(self, path: Path) -> Dict:
         with open(path, 'r') as f:

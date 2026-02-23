@@ -17,12 +17,14 @@ Bandwidth Optimization:
 """
 
 import json
+import os
 from datetime import datetime, timedelta
 from typing import Any
 
 from pydantic import BaseModel
 
 from app.core.cloud_storage import cloud_storage_client
+from app.core.supabase_repository import supabase_repo
 from app.core.loguru_config import get_logger
 
 logger = get_logger(__name__)
@@ -94,8 +96,10 @@ class DocumentExportService:
         user_id: str,
         job_title: str,
         company_name: str | None = None,
-        format: str = "pdf",
-        expiration_hours: float | None = None
+        format: str = "docx",
+        expiration_hours: float | None = None,
+        theme_id: str = "minimal",
+        candidate_name: str | None = None,
     ) -> DocumentExportResult:
         """
         Export cover letter to file and generate signed URL.
@@ -118,7 +122,7 @@ class DocumentExportService:
         expiration_hours = expiration_hours or self.default_expiration_hours
 
         if format not in ["pdf", "docx", "txt", "json"]:
-            raise ValueError(f"Unsupported format: {format}")
+            raise ValueError(f"Unsupported format: {format}")  # 'txt' is now a first-class format
 
         try:
             logger.info(
@@ -142,24 +146,29 @@ class DocumentExportService:
                 }
                 file_content = json.dumps(data, indent=2).encode("utf-8")
                 content_type = "application/json"
-            else:
-                # PDF and DOCX would require additional libraries
-                # For now, store as JSON
-                logger.warning(
-                    f"Format {format} not yet implemented, using JSON",
-                    user_id=user_id
+            elif format == "docx":
+                from app.core.docx_renderer import render_cover_letter_docx
+                file_content = render_cover_letter_docx(
+                    content=content,
+                    candidate_name=candidate_name,
+                    theme_id=theme_id,
                 )
-                data = {
-                    "type": "cover_letter",
-                    "job_title": job_title,
-                    "company_name": company_name,
-                    "content": content,
-                    "exported_at": datetime.utcnow().isoformat(),
-                    "note": "PDF/DOCX generation requires additional dependencies"
-                }
-                file_content = json.dumps(data, indent=2).encode("utf-8")
-                content_type = "application/json"
-                format = "json"
+                content_type = (
+                    "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                )
+            elif format == "pdf":
+                from app.core.pdf_renderer import render_cover_letter_pdf
+                file_content = render_cover_letter_pdf(
+                    content=content,
+                    candidate_name=candidate_name,
+                    theme_id=theme_id,
+                )
+                content_type = "application/pdf"
+            else:
+                logger.warning(f"Format '{format}' not recognised, falling back to txt", user_id=user_id)
+                file_content = content.encode("utf-8")
+                content_type = "text/plain"
+                format = "txt"
 
             # Generate storage path
             storage_path = self._get_storage_path(user_id, "cover_letter", format)
@@ -198,6 +207,22 @@ class DocumentExportService:
                 storage_path=storage_path
             )
 
+            # Persist to Supabase DB (Phase 4)
+            supabase_repo.create_user_asset(
+                user_id=user_id,
+                document_type="cover_letter",
+                file_name=os.path.basename(storage_path),
+                file_type=format,
+                storage_uri=gs_uri,
+                extracted_data={
+                    "job_title": job_title,
+                    "company_name": company_name,
+                    "content": content,
+                    "theme_id": theme_id
+                },
+                file_size_bytes=file_size
+            )
+
             return DocumentExportResult(
                 success=True,
                 document_type="cover_letter",
@@ -223,8 +248,10 @@ class DocumentExportService:
         content: dict[str, Any],
         user_id: str,
         job_title: str,
-        format: str = "pdf",
-        expiration_hours: float | None = None
+        format: str = "docx",
+        expiration_hours: float | None = None,
+        theme_id: str = "minimal",
+        candidate_name: str | None = None,
     ) -> DocumentExportResult:
         """
         Export resume to file and generate signed URL.
@@ -252,13 +279,38 @@ class DocumentExportService:
                 format=format
             )
 
-            # Handle both dict and string content
-            if isinstance(content, dict):
-                file_content = json.dumps(content, indent=2).encode("utf-8")
-            else:
-                file_content = content.encode("utf-8")
+            # Generate file content based on format
+            if format == "json":
+                if isinstance(content, dict):
+                    file_content = json.dumps(content, indent=2).encode("utf-8")
+                else:
+                    file_content = content.encode("utf-8")
+                content_type = "application/json"
+            elif format == "docx":
+                from app.core.docx_renderer import render_resume_docx
+                sections = json.loads(content) if isinstance(content, str) else content
+                file_content = render_resume_docx(
+                    sections=sections,
+                    candidate_name=candidate_name,
+                    theme_id=theme_id,
+                )
+                content_type = (
+                    "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                )
+            elif format == "pdf":
+                from app.core.pdf_renderer import render_resume_pdf
+                sections = json.loads(content) if isinstance(content, str) else content
+                file_content = render_resume_pdf(
+                    sections=sections,
+                    candidate_name=candidate_name,
+                    theme_id=theme_id,
+                )
+                content_type = "application/pdf"
 
-            content_type = "application/json" if format in ["json", "pdf", "docx"] else "text/plain"
+            else:
+                # Handle plain text or other
+                file_content = content.encode("utf-8") if isinstance(content, str) else json.dumps(content).encode("utf-8")
+                content_type = "text/plain"
 
             # Generate storage path
             storage_path = self._get_storage_path(user_id, "resume", format)
@@ -294,6 +346,17 @@ class DocumentExportService:
                 file_size=file_size
             )
 
+            # Persist to Supabase DB (Phase 4)
+            supabase_repo.create_user_asset(
+                user_id=user_id,
+                document_type="resume",
+                file_name=os.path.basename(storage_path),
+                file_type=format,
+                storage_uri=gs_uri,
+                extracted_data=sections if isinstance(sections, dict) else {"content": sections},
+                file_size_bytes=file_size
+            )
+
             return DocumentExportResult(
                 success=True,
                 document_type="resume",
@@ -319,8 +382,9 @@ class DocumentExportService:
         response_data: dict[str, Any],
         user_id: str,
         job_title: str,
-        format: str = "json",
-        expiration_hours: float | None = None
+        format: str = "docx",
+        expiration_hours: float | None = None,
+        theme_id: str = "minimal",
     ) -> DocumentExportResult:
         """
         Export KSC response to file and generate signed URL.
@@ -337,7 +401,7 @@ class DocumentExportService:
         """
         expiration_hours = expiration_hours or self.default_expiration_hours
 
-        if format not in ["json", "pdf"]:
+        if format not in ["json", "pdf", "docx"]:
             raise ValueError(f"Unsupported format: {format}")
 
         try:
@@ -348,8 +412,35 @@ class DocumentExportService:
                 format=format
             )
 
-            file_content = json.dumps(response_data, indent=2).encode("utf-8")
-            content_type = "application/json"
+            # Generate file content based on format
+            if format == "json":
+                file_content = json.dumps(response_data, indent=2).encode("utf-8")
+                content_type = "application/json"
+            elif format == "docx":
+                from app.core.docx_renderer import render_ksc_docx
+                # Renderer expects a list of response dicts
+                responses = [response_data] if isinstance(response_data, dict) else response_data
+                file_content = render_ksc_docx(
+                    responses=responses,
+                    job_title=job_title
+                )
+                content_type = (
+                    "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                )
+            elif format == "pdf":
+                from app.core.pdf_renderer import render_ksc_pdf
+                responses = [response_data] if isinstance(response_data, dict) else response_data
+                file_content = render_ksc_pdf(
+                    responses=responses,
+                    job_title=job_title,
+                    theme_id=theme_id
+                )
+                content_type = "application/pdf"
+
+            else:
+                file_content = json.dumps(response_data, indent=2).encode("utf-8")
+                content_type = "application/json"
+                format = "json"
 
             storage_path = self._get_storage_path(user_id, "ksc_response", format)
 
@@ -380,6 +471,17 @@ class DocumentExportService:
                 user_id=user_id,
                 format=format,
                 file_size=file_size
+            )
+
+            # Persist to Supabase DB (Phase 4)
+            supabase_repo.create_user_asset(
+                user_id=user_id,
+                document_type="ksc_response",
+                file_name=os.path.basename(storage_path),
+                file_type=format,
+                storage_uri=gs_uri,
+                extracted_data=responses if isinstance(responses, list) else [response_data],
+                file_size_bytes=file_size
             )
 
             return DocumentExportResult(

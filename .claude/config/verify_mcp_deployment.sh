@@ -41,9 +41,9 @@ echo ""
 
 # Check 4: Python Virtual Environment
 echo "4. Checking Python Virtual Environment..."
-if [ -f "/Users/okgoogle13/Desktop/careercopilot/.venv/bin/python3" ]; then
+if [ -f "/Users/okgoogle13/Desktop/careercopilot/venv/bin/python" ]; then
     echo -e "${GREEN}✅ Python venv exists${NC}"
-    /Users/okgoogle13/Desktop/careercopilot/.venv/bin/python3 --version
+    /Users/okgoogle13/Desktop/careercopilot/venv/bin/python --version
 else
     echo -e "${RED}❌ Python venv NOT found${NC}"
 fi

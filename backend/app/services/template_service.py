@@ -157,12 +157,12 @@ Career Transition Context:
         if template_type == TemplateType.EMAIL_APPLICATION:
             return f"""{base_context}
 
-Generate a professional job application email template for someone transitioning from finance to social work.
+Generate a professional job application email template for someone transitioning from {self.career_context['transition_from']} to {self.career_context['transition_to']}.
 
 Requirements:
 - Professional subject line with placeholders
 - Compelling opening that addresses career transition positively
-- Body that highlights transferable finance skills relevant to social work
+- Body that highlights transferable {self.career_context['transition_from']} skills relevant to {self.career_context['transition_to']}
 - Clear call to action
 - Professional closing
 - Include placeholder system: [COMPANY_NAME], [JOB_TITLE], [CONTACT_NAME], [SPECIFIC_SKILL], [RELEVANT_EXPERIENCE]
@@ -188,13 +188,13 @@ Format as JSON with: subject_line, email_body, placeholders, customization_tips
         elif template_type == TemplateType.NETWORKING_EMAIL:
             return f"""{base_context}
 
-Generate a networking email template for career transition outreach.
+Generate a networking email template for career transition from {self.career_context['transition_from']} to {self.career_context['transition_to']}.
 
 Requirements:
 - Engaging subject line
 - Brief introduction with career transition story
 - Specific ask (informational interview, advice, etc.)
-- Value proposition of finance background in social work
+- Value proposition of {self.career_context['transition_from']} background in {self.career_context['transition_to']}
 - Professional closing
 
 Format as JSON with: subject_line, email_body, placeholders, customization_tips
@@ -208,7 +208,7 @@ Generate a post-interview thank you email template.
 Requirements:
 - Appreciative subject line
 - Thank interviewer for time
-- Reiterate interest and key qualifications from finance background
+- Reiterate interest and key qualifications from {self.career_context['transition_from']} background
 - Address any concerns about career transition
 - Professional closing
 
@@ -233,12 +233,12 @@ Format as JSON with: subject_line, email_body, placeholders, customization_tips
         elif template_type == TemplateType.COVER_LETTER:
             return f"""{base_context}
 
-Generate a cover letter template for career transition from finance to social work.
+Generate a cover letter template for career transition from {self.career_context['transition_from']} to {self.career_context['transition_to']}.
 
 Requirements:
 - Strong opening paragraph addressing career change
 - 2-3 body paragraphs highlighting transferable skills
-- Specific examples of finance skills relevant to social work
+- Specific examples of {self.career_context['transition_from']} skills relevant to {self.career_context['transition_to']}
 - Compelling closing with call to action
 - Professional format
 
@@ -340,17 +340,17 @@ Format as JSON with: cover_letter_content, placeholders, customization_tips
                 "subject_line": "Application for [JOB_TITLE] Position - [YOUR_NAME]",
                 "content": """Dear [CONTACT_NAME],
 
-I am writing to express my strong interest in the [JOB_TITLE] position at [COMPANY_NAME]. As a finance professional transitioning into social work, I bring a unique combination of analytical skills, client relationship experience, and genuine passion for community impact.
+I am writing to express my strong interest in the [JOB_TITLE] position at [COMPANY_NAME]. As a {self.career_context['transition_from']} professional transitioning into {self.career_context['transition_to']}, I bring a unique combination of skills and genuine passion for [TARGET_DOMAIN].
 
-My background in [RELEVANT_EXPERIENCE] has equipped me with valuable transferable skills including [SPECIFIC_SKILL], budget management, and stakeholder engagement - all directly applicable to social work practice. I am particularly drawn to [COMPANY_NAME] because of [COMPANY_VALUE].
+My background in [RELEVANT_EXPERIENCE] has equipped me with valuable transferable skills including [SPECIFIC_SKILL] and stakeholder engagement - all directly applicable to {self.career_context['transition_to']} practice. I am particularly drawn to [COMPANY_NAME] because of [COMPANY_VALUE].
 
-I would welcome the opportunity to discuss how my finance background can bring fresh perspective and analytical rigor to your social work team. Thank you for considering my application.
+I would welcome the opportunity to discuss how my {self.career_context['transition_from']} background can bring fresh perspective to your {self.career_context['transition_to']} team. Thank you for considering my application.
 
 Best regards,
 [YOUR_NAME]""",
                 "tips": [
                     "Research the organization's funding model",
-                    "Highlight specific finance skills relevant to the role",
+                    "Highlight specific {self.career_context['transition_from']} skills relevant to the role",
                     "Address the career transition positively",
                 ],
             },
@@ -360,7 +360,7 @@ Best regards,
 
 I hope this email finds you well. I wanted to follow up on my application for the [JOB_TITLE] position submitted on [DATE].
 
-My transition from finance to social work reflects my commitment to direct community impact, and I believe my analytical background would bring valuable perspective to [COMPANY_NAME]'s mission.
+My transition from {self.career_context['transition_from']} to {self.career_context['transition_to']} reflects my commitment to this field, and I believe my background would bring valuable perspective to [COMPANY_NAME]'s mission.
 
 I remain very interested in this opportunity and would appreciate any updates on the hiring timeline. Please let me know if you need any additional information.
 
@@ -375,14 +375,14 @@ Best regards,
                 ],
             },
             TemplateType.NETWORKING_EMAIL: {
-                "subject_line": "Finance to Social Work Transition - Seeking Guidance",
+                "subject_line": f"{self.career_context['transition_from']} to {self.career_context['transition_to']} Transition - Seeking Guidance",
                 "content": """Dear [CONTACT_NAME],
 
-I hope this message finds you well. I am [YOUR_NAME], currently transitioning from a finance career to social work, and I came across your profile through [CONNECTION_SOURCE].
+I hope this message finds you well. I am [YOUR_NAME], currently transitioning from a {self.career_context['transition_from']} career to {self.career_context['transition_to']}, and I came across your profile through [CONNECTION_SOURCE].
 
 Your experience at [COMPANY_NAME] particularly resonates with me as I navigate this career change. I would be grateful for 15-20 minutes of your time to learn about your journey and gain insights about the social work field from your perspective.
 
-My finance background has given me strong analytical and client relationship skills that I'm excited to apply in a social work context. I'd love to hear your thoughts on how these skills might translate to community service work.
+My {self.career_context['transition_from']} background has given me strong skills that I'm excited to apply in a {self.career_context['transition_to']} context. I'd love to hear your thoughts on how these skills might translate to this field.
 
 Would you be available for a brief coffee chat or phone call in the coming weeks? I'm happy to work around your schedule.
 
@@ -399,11 +399,11 @@ Best regards,
             TemplateType.COVER_LETTER: {
                 "content": """Dear Hiring Manager,
 
-I am writing to express my strong interest in the [JOB_TITLE] position at [COMPANY_NAME]. As a finance professional making a purposeful transition into social work, I am excited to bring my analytical skills, client relationship experience, and genuine commitment to community impact to your team.
+I am writing to express my strong interest in the [JOB_TITLE] position at [COMPANY_NAME]. As a {self.career_context['transition_from']} professional making a purposeful transition into {self.career_context['transition_to']}, I am excited to bring my skills and genuine commitment to your team.
 
-Throughout my career in finance, I have developed strong transferable skills that directly apply to social work practice. My experience in [RELEVANT_EXPERIENCE] has given me excellent client assessment abilities, budget management expertise, and stakeholder engagement skills. I have consistently demonstrated my ability to build trust with diverse clients, manage complex cases, and work collaboratively with multidisciplinary teams.
+Throughout my career in {self.career_context['transition_from']}, I have developed strong transferable skills that directly apply to {self.career_context['transition_to']} practice. My experience in [RELEVANT_EXPERIENCE] has given me excellent assessment abilities and stakeholder engagement skills. I have consistently demonstrated my ability to build trust with diverse clients and work collaboratively with multidisciplinary teams.
 
-What draws me to social work is my passion for directly supporting vulnerable populations and addressing systemic inequalities I observed in my finance career. My analytical background enables me to approach case management with data-driven decision making while maintaining the empathy and cultural sensitivity essential to effective social work practice.
+What draws me to {self.career_context['transition_to']} is my passion for this field. My background enables me to approach challenges with a fresh perspective while maintaining the sensitivity essential to effective practice.
 
 I am particularly drawn to [COMPANY_NAME] because of [COMPANY_VALUE]. Your commitment to [SPECIFIC_PROGRAM] aligns perfectly with my values and career goals. I would welcome the opportunity to discuss how my unique background can contribute to your team's mission.
 
@@ -413,9 +413,9 @@ Sincerely,
 [YOUR_NAME]""",
                 "tips": [
                     "Research the organization's specific programs",
-                    "Highlight transferable skills from finance",
+                    "Highlight transferable skills from {self.career_context['transition_from']}",
                     "Address the career transition positively",
-                    "Show understanding of social work values",
+                    "Show understanding of {self.career_context['transition_to']} values",
                 ],
             },
         }
@@ -424,7 +424,7 @@ Sincerely,
             template_type,
             {
                 "subject_line": f"Professional {template_type.value.replace('_', ' ').title()}",
-                "content": f"Professional {template_type.value} template for career transition from finance to social work.",
+                "content": f"Professional {template_type.value} template for career transition from {self.career_context['transition_from']} to {self.career_context['transition_to']}.",
                 "tips": ["Customize with specific details", "Review before sending"],
             },
         )
