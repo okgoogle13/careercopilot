@@ -1,0 +1,421 @@
+{
+  "execution_date": "2026-02-23",
+  "strategy_version": "2.1.0",
+  "total_screens": 5,
+  "screens": [
+    {
+      "screen_name": "Landing",
+      "priority": "P0",
+      "emotional_register": "Defiance",
+      "asset_density": "Maximum",
+      "placements": [
+        {
+          "slot": "substrate_background",
+          "asset_id": "KR-SOLID-033",
+          "asset_name": "Melbourne Laneway V1",
+          "z_index": 0,
+          "layer": "substrate",
+          "aspect_ratio": "1:1",
+          "size": "100% cover",
+          "opacity": "22-25%",
+          "token_refs": ["--sys-color-asphaltBlack", "--sys-color-surfaceDim"],
+          "status": "applied",
+          "rationale": "Static substrate foundation; Melbourne laneway establishes cultural anchor. Opacity creates visual softness over typography.",
+          "confidence": "HIGH"
+        },
+        {
+          "slot": "atmospheric_overlay",
+          "asset_id": "KR-SOLID-011",
+          "asset_name": "Abstract -solidarity-kerala-rage-rad",
+          "z_index": 1,
+          "layer": "atmospheric",
+          "aspect_ratio": "11:6",
+          "size": "100% cover",
+          "opacity": "12-18%",
+          "token_refs": ["--sys-color-kr-ink-gold"],
+          "status": "applied",
+          "rationale": "Ink atmosphere overlay; adds compositional depth without competing with hero content. Aspect ratio matches landscape hero.",
+          "confidence": "HIGH"
+        },
+        {
+          "slot": "accent_overlay",
+          "asset_id": "KR-SOLID-029",
+          "asset_name": "Paint Splash V1",
+          "z_index": 2,
+          "layer": "atmospheric",
+          "aspect_ratio": "1:1",
+          "size": "Flexible",
+          "opacity": "35-60%",
+          "token_refs": ["--sys-color-waratahRed"],
+          "status": "applied",
+          "rationale": "Dynamic expressive overlay; paint splash creates editorial energy. Flexible sizing allows positioning at accent points.",
+          "confidence": "HIGH"
+        },
+        {
+          "slot": "hero_wheat_paste",
+          "asset_id": "KR-UI-001",
+          "asset_name": "Wheat Paste Tear",
+          "z_index": 2,
+          "layer": "ui-kit",
+          "aspect_ratio": "flexible",
+          "size": "320px width",
+          "position": "top: -20px; right: 0",
+          "opacity": "100%",
+          "token_refs": ["--sys-color-paperWhite"],
+          "behavior": "Parallax (translateY at 0.1x scroll speed)",
+          "status": "applied",
+          "rationale": "Poster-torn aesthetic framing hero content; creates visual intrigue and suggests street-art provenance.",
+          "confidence": "HIGH"
+        },
+        {
+          "slot": "hero_halo",
+          "asset_id": "KR-UI-002",
+          "asset_name": "Halo Disk",
+          "z_index": 2,
+          "layer": "ui-kit",
+          "aspect_ratio": "1:1",
+          "size": "280px diameter",
+          "position": "bottom: -60px; left: -40px",
+          "opacity": "100%",
+          "token_refs": ["--sys-color-kr-ink-gold"],
+          "behavior": "Static anchor, inkGold tint",
+          "status": "applied",
+          "rationale": "Radiating optimism; halo disk provides visual weight and focal anchoring for hero hierarchy.",
+          "confidence": "HIGH"
+        },
+        {
+          "slot": "grit_particles",
+          "asset_id": "KR-UI-003",
+          "asset_name": "Screenprint Grit",
+          "z_index": 3,
+          "layer": "ui-kit",
+          "aspect_ratio": "N/A",
+          "size": "8-16px particles",
+          "position": "Scattered, viewport-relative",
+          "opacity": "40-80%",
+          "token_refs": ["--sys-color-concreteGrey"],
+          "behavior": "CSS animation: float + opacity pulse (8s loop, staggered)",
+          "status": "applied",
+          "rationale": "Tactile atmosphere; grit particles add screenprint texture without competing with typography.",
+          "confidence": "HIGH"
+        }
+      ],
+      "scoring": {
+        "wireframe_alignment_z_order": 35,
+        "token_compliance": 25,
+        "manifest_validity": 20,
+        "hero_depth_lighting": 20,
+        "total_score": 100,
+        "grade": "A+",
+        "pass_threshold": "≥90",
+        "status": "PASS"
+      },
+      "unresolved": [],
+      "notes": [
+        "All placements token-compliant (--sys-color-* only)",
+        "Z-index progression respects wireframe layer hierarchy (0→1→2→3)",
+        "All assets found in manifest v6.0.0",
+        "Hero depth strategy: substrate + atmospheric + ui-kit = intentional layering",
+        "Responsive degradation: Mobile removes wheat-paste & grit, retains substrate at 15%"
+      ]
+    },
+    {
+      "screen_name": "Authentication",
+      "priority": "P0",
+      "emotional_register": "Trust",
+      "asset_density": "Minimal",
+      "placements": [
+        {
+          "slot": "substrate_background",
+          "asset_id": "KR-SOLID-033",
+          "asset_name": "Melbourne Laneway V1",
+          "z_index": 0,
+          "layer": "substrate",
+          "aspect_ratio": "1:1",
+          "size": "100% cover",
+          "opacity": "12-15%",
+          "token_refs": ["--sys-color-asphaltBlack"],
+          "status": "applied",
+          "rationale": "Static substrate (darker than landing for focus on form)",
+          "confidence": "HIGH"
+        },
+        {
+          "slot": "atmospheric_overlay",
+          "asset_id": "KR-SOLID-011",
+          "asset_name": "Abstract -solidarity-kerala-rage-rad",
+          "z_index": 1,
+          "layer": "atmospheric",
+          "aspect_ratio": "11:6",
+          "size": "100% cover",
+          "opacity": "8-12%",
+          "token_refs": ["--sys-color-kr-ink-gold"],
+          "status": "applied",
+          "rationale": "Very subtle atmospheric overlay; prioritizes form focus over decoration",
+          "confidence": "HIGH"
+        },
+        {
+          "slot": "card_halo",
+          "asset_id": "KR-UI-002",
+          "asset_name": "Halo Disk",
+          "z_index": 1,
+          "layer": "ui-kit",
+          "aspect_ratio": "1:1",
+          "size": "180px diameter",
+          "position": "40px below card",
+          "opacity": "60%",
+          "token_refs": ["--sys-color-kr-ink-gold"],
+          "behavior": "Subtle rotation on input focus (±5°, 0.4s ease)",
+          "status": "applied",
+          "rationale": "Subtle rotation signal for input focus; suggests gate metaphor",
+          "confidence": "HIGH"
+        },
+        {
+          "slot": "grit_particles",
+          "asset_id": "KR-UI-003",
+          "asset_name": "Screenprint Grit",
+          "z_index": 3,
+          "layer": "ui-kit",
+          "aspect_ratio": "N/A",
+          "size": "8-12px",
+          "position": "Card-adjacent, sparse",
+          "opacity": "30-60%",
+          "token_refs": ["--sys-color-concreteGrey"],
+          "behavior": "Slower animation (12s loop), suggesting watchful presence",
+          "status": "applied",
+          "rationale": "Watchful presence without distraction; slower animation suggests gate-keeping",
+          "confidence": "HIGH"
+        }
+      ],
+      "scoring": {
+        "wireframe_alignment_z_order": 35,
+        "token_compliance": 25,
+        "manifest_validity": 20,
+        "hero_depth_lighting": 18,
+        "total_score": 98,
+        "grade": "A+",
+        "pass_threshold": "≥90",
+        "status": "PASS"
+      },
+      "unresolved": [],
+      "notes": [
+        "Minimal asset density maintains form focus",
+        "Halo disk animation adds interactive feedback",
+        "Mobile: Remove halo disk and grit particles for clarity"
+      ]
+    },
+    {
+      "screen_name": "Onboarding",
+      "priority": "P0",
+      "emotional_register": "Possibility",
+      "asset_density": "Structural",
+      "placements": [
+        {
+          "slot": "base_substrate",
+          "asset_id": "KR-UI-005",
+          "asset_name": "Charcoal Paper",
+          "z_index": 0,
+          "layer": "ui-kit",
+          "aspect_ratio": "flexible",
+          "size": "100% cover",
+          "opacity": "100%",
+          "token_refs": ["--sys-color-surfaceBase"],
+          "status": "applied",
+          "rationale": "Base substrate; charcoal paper establishes measurement surface",
+          "confidence": "HIGH"
+        },
+        {
+          "slot": "grid_overlay",
+          "asset_id": "KR-UI-004",
+          "asset_name": "Blueprint Grid",
+          "z_index": 1,
+          "layer": "ui-kit",
+          "aspect_ratio": "flexible",
+          "size": "100% cover",
+          "opacity": "8%",
+          "token_refs": ["--sys-color-surfaceVariant"],
+          "status": "applied",
+          "rationale": "Static grid overlay; suggests precision documentation of user choice",
+          "confidence": "HIGH"
+        }
+      ],
+      "scoring": {
+        "wireframe_alignment_z_order": 35,
+        "token_compliance": 25,
+        "manifest_validity": 20,
+        "hero_depth_lighting": 16,
+        "total_score": 96,
+        "grade": "A+",
+        "pass_threshold": "≥90",
+        "status": "PASS"
+      },
+      "unresolved": [],
+      "notes": [
+        "Structural assets only; no decorative elements (intentional design choice)",
+        "Grid creates measurement metaphor without competing with selection cards",
+        "Mobile: Reduce grid opacity to 4%"
+      ]
+    },
+    {
+      "screen_name": "Ingestion",
+      "priority": "P0",
+      "emotional_register": "Gravity",
+      "asset_density": "Structural + Functional",
+      "placements": [
+        {
+          "slot": "base_substrate",
+          "asset_id": "KR-UI-005",
+          "asset_name": "Charcoal Paper",
+          "z_index": 0,
+          "layer": "ui-kit",
+          "aspect_ratio": "flexible",
+          "size": "100% cover",
+          "opacity": "100%",
+          "token_refs": ["--sys-color-surfaceBase"],
+          "status": "applied",
+          "rationale": "Base substrate; charcoal provides recycled-paper aesthetic",
+          "confidence": "HIGH"
+        },
+        {
+          "slot": "watermark_grid",
+          "asset_id": "KR-UI-004",
+          "asset_name": "Blueprint Layout",
+          "z_index": 1,
+          "layer": "ui-kit",
+          "aspect_ratio": "flexible",
+          "size": "100% cover",
+          "opacity": "4-6%",
+          "token_refs": ["--sys-color-surfaceVariant"],
+          "status": "applied",
+          "rationale": "Whisper-quiet background grid; suggests archival precision",
+          "confidence": "HIGH"
+        },
+        {
+          "slot": "success_motif",
+          "asset_id": "KR-UI-008",
+          "asset_name": "Success Stamp (motif)",
+          "z_index": 2,
+          "layer": "ui-kit",
+          "aspect_ratio": "1:1",
+          "size": "64-96px",
+          "position": "Success state overlay",
+          "opacity": "100%",
+          "token_refs": ["--sys-color-primary-50"],
+          "behavior": "Viscous overshoot easing (spring physics)",
+          "status": "applied",
+          "rationale": "Functional feedback; stamp provides satisfying confirmation",
+          "confidence": "MEDIUM"
+        }
+      ],
+      "scoring": {
+        "wireframe_alignment_z_order": 34,
+        "token_compliance": 25,
+        "manifest_validity": 20,
+        "hero_depth_lighting": 17,
+        "total_score": 96,
+        "grade": "A+",
+        "pass_threshold": "≥90",
+        "status": "PASS"
+      },
+      "unresolved": [],
+      "notes": [
+        "Structural assets create precision aesthetic",
+        "Success stamp adds functional feedback with M3 Expressive spring physics",
+        "Desktop-first responsive strategy; mobile keeps all layers"
+      ]
+    },
+    {
+      "screen_name": "AnalysisDashboard",
+      "priority": "P0",
+      "emotional_register": "Clarity",
+      "asset_density": "Structural",
+      "placements": [
+        {
+          "slot": "base_substrate",
+          "asset_id": "KR-UI-005",
+          "asset_name": "Charcoal Paper",
+          "z_index": 0,
+          "layer": "ui-kit",
+          "aspect_ratio": "flexible",
+          "size": "100% cover",
+          "opacity": "100%",
+          "token_refs": ["--sys-color-surfaceBase"],
+          "status": "applied",
+          "rationale": "Base substrate; data-focused aesthetic",
+          "confidence": "HIGH"
+        },
+        {
+          "slot": "measurement_grid",
+          "asset_id": "KR-UI-004",
+          "asset_name": "Blueprint Grid",
+          "z_index": 1,
+          "layer": "ui-kit",
+          "aspect_ratio": "flexible",
+          "size": "100% cover",
+          "opacity": "6-8%",
+          "token_refs": ["--sys-color-surfaceVariant"],
+          "status": "applied",
+          "rationale": "Grid overlay; suggests measurement surfaces and data precision",
+          "confidence": "HIGH"
+        },
+        {
+          "slot": "optional_symbolic_anchor",
+          "asset_id": "KR-SOLID-035",
+          "asset_name": "Kerala Elephant V1",
+          "z_index": 2,
+          "layer": "cultural",
+          "aspect_ratio": "1:1",
+          "size": "96-128px",
+          "position": "Optional corner accent",
+          "opacity": "60%",
+          "token_refs": ["--sys-color-primary-70"],
+          "behavior": "Static or subtle hover scale (1.05x)",
+          "status": "applied",
+          "rationale": "Optional symbolic anchor; represents revelation and insight (emotional intent)",
+          "confidence": "LOW"
+        }
+      ],
+      "scoring": {
+        "wireframe_alignment_z_order": 33,
+        "token_compliance": 25,
+        "manifest_validity": 20,
+        "hero_depth_lighting": 16,
+        "total_score": 94,
+        "grade": "A+",
+        "pass_threshold": "≥90",
+        "status": "PASS"
+      },
+      "unresolved": [
+        {
+          "slot": "optional_symbolic_anchor",
+          "reason": "Design team approval needed for Kerala Elephant symbolic placement",
+          "suggested_resolution": "Schedule design sync to confirm cultural anchor intent"
+        }
+      ],
+      "notes": [
+        "Analysis screen prioritizes data clarity; symbolic anchor is optional",
+        "Kerala Elephant (revelation) aligns with dashboard insight narrative",
+        "LOW confidence on cultural anchor; needs stakeholder approval",
+        "Mobile: Remove symbolic anchor, keep grid at reduced opacity"
+      ]
+    }
+  ],
+  "summary": {
+    "total_screens_evaluated": 5,
+    "screens_passing": 5,
+    "screens_failing": 0,
+    "average_score": 96.8,
+    "min_score": 94,
+    "max_score": 100,
+    "compliance_status": "ALL PASS (≥90 threshold)",
+    "token_compliance": "100% (--sys-color-* only)",
+    "manifest_validity": "100% (all assets exist)",
+    "unresolved_count": 1,
+    "design_team_approvals_needed": 1
+  },
+  "next_actions": [
+    "1. Schedule design sync for optional symbolic anchors (AnalysisDashboard)",
+    "2. Trigger component-builder for all 5 P0 screens",
+    "3. Validate React components with component-visual-audit",
+    "4. Commit approved placements to hero-registry.json"
+  ]
+}
