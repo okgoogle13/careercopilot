@@ -167,3 +167,15 @@ libs/assets/uncategorized/northcote-*
 run_northcote_workflow.py
 tools/scripts/maintenance/run_northcote_workflow.py
 tools/scripts/workflow/run_northcote_workflow.py
+
+# Local tooling / generated
+.venv/
+.ai_batches/
+.backups/
+.temp_artifact_build/
+.claude*/
+.codex/
+.windsurf/
+.idx/
+.agent/
+.agents/

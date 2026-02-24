@@ -49,7 +49,7 @@ Claude will recognize the context and use this skill automatically.
 
 - Python 3.9+ (for scripts)
 - Pillow library: `pip install Pillow`
-- Manifest file at: `/Users/okgoogle13/Desktop/careercopilot/assets/kerala-rage-kr-solidarity-manifest.json`
+- Manifest file at: `/Users/okgoogle13/Projects/careercopilot/assets/kerala-rage-kr-solidarity-manifest.json`
 
 ## Integration
 

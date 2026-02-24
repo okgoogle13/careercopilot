@@ -224,7 +224,7 @@
     "filesystem": {
       "batch_reads": true,
       "response_format": "compact",
-      "root": "/Users/okgoogle13/Desktop/careercopilot"
+      "root": "/Users/okgoogle13/Projects/careercopilot"
     },
     "git": {
       "filter": "components-only",

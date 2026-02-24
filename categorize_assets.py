@@ -6,7 +6,7 @@ import re
 import shlex
 
 # --- Configuration ---
-ROOT_DIR = '/Users/okgoogle13/Desktop/careercopilot'
+ROOT_DIR = '/Users/okgoogle13/Projects/careercopilot'
 DIRECTORIES = {
     'CANONICAL': os.path.join(ROOT_DIR, 'assets'),
     'NEW_SOURCE': os.path.join(ROOT_DIR, '[DEPRECATED_STYLE] images phase 3'),

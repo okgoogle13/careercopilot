@@ -1,8 +1,8 @@
 # MCP Optimization Build Checklist
 
 ## Pre-Build Setup
-- [ ] Read: `/Users/okgoogle13/Desktop/careercopilot/MCP_OPTIMIZATION_HANDOVER.md`
-- [ ] Read: `/Users/okgoogle13/Desktop/careercopilot/servers/flash_sidekick.py` (current implementation)
+- [ ] Read: `/Users/okgoogle13/Projects/careercopilot/MCP_OPTIMIZATION_HANDOVER.md`
+- [ ] Read: `/Users/okgoogle13/Projects/careercopilot/servers/flash_sidekick.py` (current implementation)
 - [ ] Env vars configured (GEMINI_API_KEY set)
 
 ## Phase 2: Async Refactor + P0 Tools (5 hours)
@@ -43,7 +43,7 @@
 ## Verification
 ```bash
 # Check flash-sidekick starts
-python3 /Users/okgoogle13/Desktop/careercopilot/servers/flash_sidekick.py
+python3 /Users/okgoogle13/Projects/careercopilot/servers/flash_sidekick.py
 
 # Verify all 12 tools in output
 # Send: {"jsonrpc": "2.0", "id": 1, "method": "tools/list"}

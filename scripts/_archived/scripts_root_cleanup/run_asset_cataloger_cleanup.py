@@ -7,9 +7,9 @@ from datetime import datetime
 from pathlib import Path
 
 # Configuration
-SOURCE_DIR = Path("/Users/okgoogle13/Desktop/careercopilot/frontend/public/assets/uncategorized")
-TARGET_JSON = Path("/Users/okgoogle13/Desktop/careercopilot/assets/asset_triage_plan.json")
-INVENTORY_FILE = Path("/Users/okgoogle13/Desktop/careercopilot/.claude/skills/kerala-rage-asset-cataloger/references/asset-inventory.md")
+SOURCE_DIR = Path("/Users/okgoogle13/Projects/careercopilot/frontend/public/assets/uncategorized")
+TARGET_JSON = Path("/Users/okgoogle13/Projects/careercopilot/assets/asset_triage_plan.json")
+INVENTORY_FILE = Path("/Users/okgoogle13/Projects/careercopilot/.claude/skills/kerala-rage-asset-cataloger/references/asset-inventory.md")
 
 # Regex for "Generated Image"
 GEN_IMG_PATTERN = re.compile(r"Generated Image .*")

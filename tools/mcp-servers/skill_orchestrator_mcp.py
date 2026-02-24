@@ -43,7 +43,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # Configuration
-SKILLS_PATH = os.getenv("CLAUDE_SKILLS_PATH", "/Users/okgoogle13/Desktop/careercopilot/.claude/skills")
+SKILLS_PATH = os.getenv("CLAUDE_SKILLS_PATH", "/Users/okgoogle13/Projects/careercopilot/.claude/skills")
 MAX_EXECUTION_TIME_SEC = int(os.getenv("MAX_EXECUTION_TIME_SEC", "300"))
 WORKFLOW_DEFAULT_MIN_SCORE = int(os.getenv("WORKFLOW_DEFAULT_MIN_SCORE", "320"))
 WORKFLOW_SCHEMA_PATH = Path(

@@ -1,22 +1,22 @@
 [
   {
     "name": "kerala-rageButton",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/kerala-rageButton.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/ui/kerala-rageButton.tsx",
     "relativePath": "src/components/ui/kerala-rageButton.tsx",
     "category": "ui",
     "usageCount": 11,
     "importedBy": [
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/analysis/AssetLibrary.tsx",
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/applications/ApplicationCard.tsx",
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/auth/Login.tsx",
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/auth/Register.tsx",
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/documents/DocumentStack.tsx",
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/sandbox/components/SplitEditor.tsx",
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/views/kr-darkLanding.tsx",
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/components/GlobalHeader.tsx",
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/components/NavRail.tsx",
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/components/anchors/AnalysisAnchor.tsx",
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/components/anchors/DocumentStackAnchor.tsx"
+      "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/analysis/AssetLibrary.tsx",
+      "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/applications/ApplicationCard.tsx",
+      "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/auth/Login.tsx",
+      "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/auth/Register.tsx",
+      "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/documents/DocumentStack.tsx",
+      "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/sandbox/components/SplitEditor.tsx",
+      "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/views/kr-darkLanding.tsx",
+      "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/components/GlobalHeader.tsx",
+      "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/components/NavRail.tsx",
+      "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/components/anchors/AnalysisAnchor.tsx",
+      "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/components/anchors/DocumentStackAnchor.tsx"
     ],
     "exports": [
       "kerala-rageButtonProps",
@@ -42,13 +42,13 @@
   },
   {
     "name": "Pebble",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/Pebble.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/ui/Pebble.tsx",
     "relativePath": "src/components/ui/Pebble.tsx",
     "category": "ui",
     "usageCount": 2,
     "importedBy": [
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/Cabinet.tsx",
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/Signal.tsx"
+      "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/ui/Cabinet.tsx",
+      "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/ui/Signal.tsx"
     ],
     "exports": [
       "M3Button",
@@ -77,13 +77,13 @@
   },
   {
     "name": "StatusBadge",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/StatusBadge/StatusBadge.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/ui/StatusBadge/StatusBadge.tsx",
     "relativePath": "src/components/ui/StatusBadge/StatusBadge.tsx",
     "category": "ui",
     "usageCount": 2,
     "importedBy": [
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/shared/StatusChip.tsx",
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/applications/ApplicationCard.tsx"
+      "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/shared/StatusChip.tsx",
+      "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/applications/ApplicationCard.tsx"
     ],
     "exports": [
       "StatusBadgeVariant",
@@ -108,13 +108,13 @@
   },
   {
     "name": "GlassLeafCard",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/kr-dark/GlassLeafCard.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/kr-dark/GlassLeafCard.tsx",
     "relativePath": "src/features/kr-dark/GlassLeafCard.tsx",
     "category": "features",
     "usageCount": 2,
     "importedBy": [
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/views/kr-darkFeed.tsx",
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/views/kr-darkKanban.tsx"
+      "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/views/kr-darkFeed.tsx",
+      "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/views/kr-darkKanban.tsx"
     ],
     "exports": [
       "GlassLeafCard"
@@ -139,12 +139,12 @@
   },
   {
     "name": "AuroraHeader",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/AuroraHeader.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/ui/AuroraHeader.tsx",
     "relativePath": "src/components/ui/AuroraHeader.tsx",
     "category": "ui",
     "usageCount": 1,
     "importedBy": [
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/sandbox/EcosystemSandbox.tsx"
+      "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/sandbox/EcosystemSandbox.tsx"
     ],
     "exports": [
       "AuroraHeader",
@@ -167,12 +167,12 @@
   },
   {
     "name": "NativeAnchor",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/NativeAnchor.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/ui/NativeAnchor.tsx",
     "relativePath": "src/components/ui/NativeAnchor.tsx",
     "category": "ui",
     "usageCount": 1,
     "importedBy": [
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/sandbox/EcosystemSandbox.tsx"
+      "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/sandbox/EcosystemSandbox.tsx"
     ],
     "exports": [
       "NativeAnchor",
@@ -195,12 +195,12 @@
   },
   {
     "name": "Stone",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/Stone.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/ui/Stone.tsx",
     "relativePath": "src/components/ui/Stone.tsx",
     "category": "ui",
     "usageCount": 1,
     "importedBy": [
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/Cabinet.tsx"
+      "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/ui/Cabinet.tsx"
     ],
     "exports": [
       "M3Card",
@@ -233,12 +233,12 @@
   },
   {
     "name": "AssetLibrary",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/analysis/AssetLibrary.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/analysis/AssetLibrary.tsx",
     "relativePath": "src/features/analysis/AssetLibrary.tsx",
     "category": "features",
     "usageCount": 1,
     "importedBy": [
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/src/App.tsx"
+      "/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx"
     ],
     "exports": [
       "AssetLibrary"
@@ -262,12 +262,12 @@
   },
   {
     "name": "TechCard",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/analysis/TechCard.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/analysis/TechCard.tsx",
     "relativePath": "src/features/analysis/TechCard.tsx",
     "category": "features",
     "usageCount": 1,
     "importedBy": [
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/components/anchors/AnalysisAnchor.tsx"
+      "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/components/anchors/AnalysisAnchor.tsx"
     ],
     "exports": [
       "TechCard"
@@ -292,12 +292,12 @@
   },
   {
     "name": "ApplicationTracker",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/applications/ApplicationTracker.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/applications/ApplicationTracker.tsx",
     "relativePath": "src/features/applications/ApplicationTracker.tsx",
     "category": "features",
     "usageCount": 1,
     "importedBy": [
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/src/App.tsx"
+      "/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx"
     ],
     "exports": [
       "ApplicationTracker",
@@ -324,12 +324,12 @@
   },
   {
     "name": "Login",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/auth/Login.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/auth/Login.tsx",
     "relativePath": "src/features/auth/Login.tsx",
     "category": "features",
     "usageCount": 1,
     "importedBy": [
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/src/App.tsx"
+      "/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx"
     ],
     "exports": [
       "Login"
@@ -354,12 +354,12 @@
   },
   {
     "name": "Register",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/auth/Register.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/auth/Register.tsx",
     "relativePath": "src/features/auth/Register.tsx",
     "category": "features",
     "usageCount": 1,
     "importedBy": [
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/src/App.tsx"
+      "/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx"
     ],
     "exports": [
       "Register"
@@ -384,12 +384,12 @@
   },
   {
     "name": "Dashboard",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/dashboard/Dashboard.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/dashboard/Dashboard.tsx",
     "relativePath": "src/features/dashboard/Dashboard.tsx",
     "category": "features",
     "usageCount": 1,
     "importedBy": [
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/src/App.tsx"
+      "/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx"
     ],
     "exports": [
       "Dashboard"
@@ -411,12 +411,12 @@
   },
   {
     "name": "Documents",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/documents/Documents.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/documents/Documents.tsx",
     "relativePath": "src/features/documents/Documents.tsx",
     "category": "features",
     "usageCount": 1,
     "importedBy": [
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/src/App.tsx"
+      "/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx"
     ],
     "exports": [
       "Documents",
@@ -445,12 +445,12 @@
   },
   {
     "name": "EvidenceUploader",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/ingestion/components/EvidenceUploader.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/ingestion/components/EvidenceUploader.tsx",
     "relativePath": "src/features/ingestion/components/EvidenceUploader.tsx",
     "category": "features",
     "usageCount": 1,
     "importedBy": [
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/src/pages/AnalysisPage.tsx"
+      "/Users/okgoogle13/Projects/careercopilot/frontend/src/pages/AnalysisPage.tsx"
     ],
     "exports": [
       "EvidenceUploader"
@@ -475,12 +475,12 @@
   },
   {
     "name": "KSCGenerator",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/ksc-generator/KSCGenerator.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/ksc-generator/KSCGenerator.tsx",
     "relativePath": "src/features/ksc-generator/KSCGenerator.tsx",
     "category": "features",
     "usageCount": 1,
     "importedBy": [
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/src/App.tsx"
+      "/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx"
     ],
     "exports": [
       "KSCGenerator"
@@ -506,12 +506,12 @@
   },
   {
     "name": "LandingPage",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/landing/LandingPage.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/landing/LandingPage.tsx",
     "relativePath": "src/features/landing/LandingPage.tsx",
     "category": "features",
     "usageCount": 1,
     "importedBy": [
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/src/App.tsx"
+      "/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx"
     ],
     "exports": [
       "LandingPage",
@@ -540,12 +540,12 @@
   },
   {
     "name": "NotFound",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/not-found/NotFound.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/not-found/NotFound.tsx",
     "relativePath": "src/features/not-found/NotFound.tsx",
     "category": "features",
     "usageCount": 1,
     "importedBy": [
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/src/App.tsx"
+      "/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx"
     ],
     "exports": [
       "NotFound"
@@ -567,12 +567,12 @@
   },
   {
     "name": "ValidationDashboard",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/onboarding/components/ValidationDashboard.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/onboarding/components/ValidationDashboard.tsx",
     "relativePath": "src/features/onboarding/components/ValidationDashboard.tsx",
     "category": "features",
     "usageCount": 1,
     "importedBy": [
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/src/pages/IngestionPage.tsx"
+      "/Users/okgoogle13/Projects/careercopilot/frontend/src/pages/IngestionPage.tsx"
     ],
     "exports": [
       "ValidationDashboard"
@@ -600,12 +600,12 @@
   },
   {
     "name": "Opportunities",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/opportunities/Opportunities.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/opportunities/Opportunities.tsx",
     "relativePath": "src/features/opportunities/Opportunities.tsx",
     "category": "features",
     "usageCount": 1,
     "importedBy": [
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/src/App.tsx"
+      "/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx"
     ],
     "exports": [
       "Opportunities"
@@ -630,12 +630,12 @@
   },
   {
     "name": "ProfileView",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/profile/components/ProfileView.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/profile/components/ProfileView.tsx",
     "relativePath": "src/features/profile/components/ProfileView.tsx",
     "category": "features",
     "usageCount": 1,
     "importedBy": [
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/src/App.tsx"
+      "/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx"
     ],
     "exports": [
       "ProfileView"
@@ -659,12 +659,12 @@
   },
   {
     "name": "ResumeUploader",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/profile/components/ResumeUploader.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/profile/components/ResumeUploader.tsx",
     "relativePath": "src/features/profile/components/ResumeUploader.tsx",
     "category": "features",
     "usageCount": 1,
     "importedBy": [
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/profile/components/ProfileView.tsx"
+      "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/profile/components/ProfileView.tsx"
     ],
     "exports": [
       "default"
@@ -689,12 +689,12 @@
   },
   {
     "name": "EvidenceSidebar",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/sandbox/components/EvidenceSidebar.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/sandbox/components/EvidenceSidebar.tsx",
     "relativePath": "src/features/sandbox/components/EvidenceSidebar.tsx",
     "category": "features",
     "usageCount": 1,
     "importedBy": [
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/sandbox/EcosystemSandbox.tsx"
+      "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/sandbox/EcosystemSandbox.tsx"
     ],
     "exports": [
       "EvidenceSidebar"
@@ -716,12 +716,12 @@
   },
   {
     "name": "SplitEditor",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/sandbox/components/SplitEditor.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/sandbox/components/SplitEditor.tsx",
     "relativePath": "src/features/sandbox/components/SplitEditor.tsx",
     "category": "features",
     "usageCount": 1,
     "importedBy": [
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/sandbox/EcosystemSandbox.tsx"
+      "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/sandbox/EcosystemSandbox.tsx"
     ],
     "exports": [
       "SplitEditor"
@@ -748,12 +748,12 @@
   },
   {
     "name": "EcosystemSandbox",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/sandbox/EcosystemSandbox.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/sandbox/EcosystemSandbox.tsx",
     "relativePath": "src/features/sandbox/EcosystemSandbox.tsx",
     "category": "features",
     "usageCount": 1,
     "importedBy": [
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/sandbox/components/SplitEditor.tsx"
+      "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/sandbox/components/SplitEditor.tsx"
     ],
     "exports": [
       "EcosystemSandbox",
@@ -782,12 +782,12 @@
   },
   {
     "name": "Settings",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/settings/Settings.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/settings/Settings.tsx",
     "relativePath": "src/features/settings/Settings.tsx",
     "category": "features",
     "usageCount": 1,
     "importedBy": [
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/src/App.tsx"
+      "/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx"
     ],
     "exports": [
       "Settings"
@@ -811,12 +811,12 @@
   },
   {
     "name": "StyleGuide",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/style-guide/StyleGuide.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/style-guide/StyleGuide.tsx",
     "relativePath": "src/features/style-guide/StyleGuide.tsx",
     "category": "features",
     "usageCount": 1,
     "importedBy": [
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/src/App.tsx"
+      "/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx"
     ],
     "exports": [
       "StyleGuide"
@@ -841,12 +841,12 @@
   },
   {
     "name": "Fireflies",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/components/Fireflies.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/components/Fireflies.tsx",
     "relativePath": "src/layouts/kr-darkShell/components/Fireflies.tsx",
     "category": "layout",
     "usageCount": 1,
     "importedBy": [
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/kr-darkShell.tsx"
+      "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/kr-darkShell.tsx"
     ],
     "exports": [
       "Fireflies"
@@ -868,12 +868,12 @@
   },
   {
     "name": "kr-darkDock",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/components/kr-darkDock.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/components/kr-darkDock.tsx",
     "relativePath": "src/layouts/kr-darkShell/components/kr-darkDock.tsx",
     "category": "layout",
     "usageCount": 1,
     "importedBy": [
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/kr-darkShell.tsx"
+      "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/kr-darkShell.tsx"
     ],
     "exports": [
       "kr-darkDock"
@@ -897,12 +897,12 @@
   },
   {
     "name": "kr-darkAuth",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/views/kr-darkAuth.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/views/kr-darkAuth.tsx",
     "relativePath": "src/layouts/kr-darkShell/views/kr-darkAuth.tsx",
     "category": "layout",
     "usageCount": 1,
     "importedBy": [
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/kr-darkShell.tsx"
+      "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/kr-darkShell.tsx"
     ],
     "exports": [
       "kr-darkAuth"
@@ -924,12 +924,12 @@
   },
   {
     "name": "kr-darkDashboard",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/views/kr-darkDashboard.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/views/kr-darkDashboard.tsx",
     "relativePath": "src/layouts/kr-darkShell/views/kr-darkDashboard.tsx",
     "category": "layout",
     "usageCount": 1,
     "importedBy": [
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/kr-darkShell.tsx"
+      "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/kr-darkShell.tsx"
     ],
     "exports": [
       "kr-darkDashboard"
@@ -951,12 +951,12 @@
   },
   {
     "name": "kr-darkFeed",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/views/kr-darkFeed.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/views/kr-darkFeed.tsx",
     "relativePath": "src/layouts/kr-darkShell/views/kr-darkFeed.tsx",
     "category": "layout",
     "usageCount": 1,
     "importedBy": [
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/kr-darkShell.tsx"
+      "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/kr-darkShell.tsx"
     ],
     "exports": [
       "kr-darkFeed"
@@ -982,12 +982,12 @@
   },
   {
     "name": "kr-darkKanban",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/views/kr-darkKanban.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/views/kr-darkKanban.tsx",
     "relativePath": "src/layouts/kr-darkShell/views/kr-darkKanban.tsx",
     "category": "layout",
     "usageCount": 1,
     "importedBy": [
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/kr-darkShell.tsx"
+      "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/kr-darkShell.tsx"
     ],
     "exports": [
       "kr-darkKanban"
@@ -1012,12 +1012,12 @@
   },
   {
     "name": "kr-darkLanding",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/views/kr-darkLanding.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/views/kr-darkLanding.tsx",
     "relativePath": "src/layouts/kr-darkShell/views/kr-darkLanding.tsx",
     "category": "layout",
     "usageCount": 1,
     "importedBy": [
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/kr-darkShell.tsx"
+      "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/kr-darkShell.tsx"
     ],
     "exports": [
       "kr-darkLanding"
@@ -1041,12 +1041,12 @@
   },
   {
     "name": "kr-darkOnboarding",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/views/kr-darkOnboarding.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/views/kr-darkOnboarding.tsx",
     "relativePath": "src/layouts/kr-darkShell/views/kr-darkOnboarding.tsx",
     "category": "layout",
     "usageCount": 1,
     "importedBy": [
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/kr-darkShell.tsx"
+      "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/kr-darkShell.tsx"
     ],
     "exports": [
       "kr-darkOnboarding"
@@ -1068,12 +1068,12 @@
   },
   {
     "name": "AnalysisAnchor",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/components/anchors/AnalysisAnchor.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/components/anchors/AnalysisAnchor.tsx",
     "relativePath": "src/layouts/kr-darkShell/components/anchors/AnalysisAnchor.tsx",
     "category": "layout",
     "usageCount": 1,
     "importedBy": [
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/components/MainCanvas.tsx"
+      "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/components/MainCanvas.tsx"
     ],
     "exports": [
       "AnalysisAnchor"
@@ -1099,12 +1099,12 @@
   },
   {
     "name": "DocumentStackAnchor",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/components/anchors/DocumentStackAnchor.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/components/anchors/DocumentStackAnchor.tsx",
     "relativePath": "src/layouts/kr-darkShell/components/anchors/DocumentStackAnchor.tsx",
     "category": "layout",
     "usageCount": 1,
     "importedBy": [
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/components/MainCanvas.tsx"
+      "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/components/MainCanvas.tsx"
     ],
     "exports": [
       "DocumentStackAnchor"
@@ -1128,12 +1128,12 @@
   },
   {
     "name": "GlobalHeader",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/components/GlobalHeader.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/components/GlobalHeader.tsx",
     "relativePath": "src/layouts/kr-darkShell/components/GlobalHeader.tsx",
     "category": "layout",
     "usageCount": 1,
     "importedBy": [
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/LayoutShell.tsx"
+      "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/LayoutShell.tsx"
     ],
     "exports": [
       "GlobalHeader"
@@ -1158,12 +1158,12 @@
   },
   {
     "name": "MainCanvas",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/components/MainCanvas.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/components/MainCanvas.tsx",
     "relativePath": "src/layouts/kr-darkShell/components/MainCanvas.tsx",
     "category": "layout",
     "usageCount": 1,
     "importedBy": [
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/LayoutShell.tsx"
+      "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/LayoutShell.tsx"
     ],
     "exports": [
       "MainCanvas"
@@ -1188,12 +1188,12 @@
   },
   {
     "name": "NavRail",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/components/NavRail.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/components/NavRail.tsx",
     "relativePath": "src/layouts/kr-darkShell/components/NavRail.tsx",
     "category": "layout",
     "usageCount": 1,
     "importedBy": [
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/LayoutShell.tsx"
+      "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/LayoutShell.tsx"
     ],
     "exports": [
       "NavRail"
@@ -1218,12 +1218,12 @@
   },
   {
     "name": "SidePanel",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/components/SidePanel.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/components/SidePanel.tsx",
     "relativePath": "src/layouts/kr-darkShell/components/SidePanel.tsx",
     "category": "layout",
     "usageCount": 1,
     "importedBy": [
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/LayoutShell.tsx"
+      "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/LayoutShell.tsx"
     ],
     "exports": [
       "SidePanel"
@@ -1245,12 +1245,12 @@
   },
   {
     "name": "Layout",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/Layout.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/Layout.tsx",
     "relativePath": "src/layouts/Layout.tsx",
     "category": "layout",
     "usageCount": 1,
     "importedBy": [
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/src/App.tsx"
+      "/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx"
     ],
     "exports": [
       "Layout"
@@ -1274,12 +1274,12 @@
   },
   {
     "name": "Sidebar",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/Sidebar.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/Sidebar.tsx",
     "relativePath": "src/layouts/Sidebar.tsx",
     "category": "layout",
     "usageCount": 1,
     "importedBy": [
-      "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/Layout.tsx"
+      "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/Layout.tsx"
     ],
     "exports": [
       "Sidebar"
@@ -1301,7 +1301,7 @@
   },
   {
     "name": "button",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/button.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/ui/button.tsx",
     "relativePath": "src/components/ui/button.tsx",
     "category": "ui",
     "usageCount": 0,
@@ -1329,7 +1329,7 @@
   },
   {
     "name": "Cabinet",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/Cabinet.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/ui/Cabinet.tsx",
     "relativePath": "src/components/ui/Cabinet.tsx",
     "category": "ui",
     "usageCount": 0,
@@ -1359,7 +1359,7 @@
   },
   {
     "name": "chart",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/chart.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/ui/chart.tsx",
     "relativePath": "src/components/ui/chart.tsx",
     "category": "ui",
     "usageCount": 0,
@@ -1388,7 +1388,7 @@
   },
   {
     "name": "collapsible",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/collapsible.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/ui/collapsible.tsx",
     "relativePath": "src/components/ui/collapsible.tsx",
     "category": "ui",
     "usageCount": 0,
@@ -1415,7 +1415,7 @@
   },
   {
     "name": "form",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/form.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/ui/form.tsx",
     "relativePath": "src/components/ui/form.tsx",
     "category": "ui",
     "usageCount": 0,
@@ -1449,7 +1449,7 @@
   },
   {
     "name": "HaeckelIcon",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/HaeckelIcon.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/ui/HaeckelIcon.tsx",
     "relativePath": "src/components/ui/HaeckelIcon.tsx",
     "category": "ui",
     "usageCount": 0,
@@ -1475,7 +1475,7 @@
   },
   {
     "name": "icon-badge",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/icon-badge.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/ui/icon-badge.tsx",
     "relativePath": "src/components/ui/icon-badge.tsx",
     "category": "ui",
     "usageCount": 0,
@@ -1500,7 +1500,7 @@
   },
   {
     "name": "Jar",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/Jar.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/ui/Jar.tsx",
     "relativePath": "src/components/ui/Jar.tsx",
     "category": "ui",
     "usageCount": 0,
@@ -1527,7 +1527,7 @@
   },
   {
     "name": "Lens",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/Lens.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/ui/Lens.tsx",
     "relativePath": "src/components/ui/Lens.tsx",
     "category": "ui",
     "usageCount": 0,
@@ -1557,7 +1557,7 @@
   },
   {
     "name": "Mark",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/Mark.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/ui/Mark.tsx",
     "relativePath": "src/components/ui/Mark.tsx",
     "category": "ui",
     "usageCount": 0,
@@ -1585,7 +1585,7 @@
   },
   {
     "name": "metric-card",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/metric-card.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/ui/metric-card.tsx",
     "relativePath": "src/components/ui/metric-card.tsx",
     "category": "ui",
     "usageCount": 0,
@@ -1610,7 +1610,7 @@
   },
   {
     "name": "Seed",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/Seed.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/ui/Seed.tsx",
     "relativePath": "src/components/ui/Seed.tsx",
     "category": "ui",
     "usageCount": 0,
@@ -1636,7 +1636,7 @@
   },
   {
     "name": "Signal",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/Signal.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/ui/Signal.tsx",
     "relativePath": "src/components/ui/Signal.tsx",
     "category": "ui",
     "usageCount": 0,
@@ -1670,7 +1670,7 @@
   },
   {
     "name": "SplitHeader",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/SplitHeader.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/ui/SplitHeader.tsx",
     "relativePath": "src/components/ui/SplitHeader.tsx",
     "category": "ui",
     "usageCount": 0,
@@ -1696,7 +1696,7 @@
   },
   {
     "name": "table",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/table.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/ui/table.tsx",
     "relativePath": "src/components/ui/table.tsx",
     "category": "ui",
     "usageCount": 0,
@@ -1728,7 +1728,7 @@
   },
   {
     "name": "Valve",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/Valve.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/ui/Valve.tsx",
     "relativePath": "src/components/ui/Valve.tsx",
     "category": "ui",
     "usageCount": 0,
@@ -1754,7 +1754,7 @@
   },
   {
     "name": "Vessel",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/Vessel.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/ui/Vessel.tsx",
     "relativePath": "src/components/ui/Vessel.tsx",
     "category": "ui",
     "usageCount": 0,
@@ -1781,7 +1781,7 @@
   },
   {
     "name": "Analysis",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/analysis/Analysis.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/analysis/Analysis.tsx",
     "relativePath": "src/features/analysis/Analysis.tsx",
     "category": "features",
     "usageCount": 0,
@@ -1815,7 +1815,7 @@
   },
   {
     "name": "AuditDial",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/analysis/AuditDial.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/analysis/AuditDial.tsx",
     "relativePath": "src/features/analysis/AuditDial.tsx",
     "category": "features",
     "usageCount": 0,
@@ -1841,7 +1841,7 @@
   },
   {
     "name": "ImpactEnhancements",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/analysis/ImpactEnhancements.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/analysis/ImpactEnhancements.tsx",
     "relativePath": "src/features/analysis/ImpactEnhancements.tsx",
     "category": "features",
     "usageCount": 0,
@@ -1868,7 +1868,7 @@
   },
   {
     "name": "MetricCard",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/analysis/MetricCard.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/analysis/MetricCard.tsx",
     "relativePath": "src/features/analysis/MetricCard.tsx",
     "category": "features",
     "usageCount": 0,
@@ -1893,7 +1893,7 @@
   },
   {
     "name": "ApplicationCard",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/applications/ApplicationCard.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/applications/ApplicationCard.tsx",
     "relativePath": "src/features/applications/ApplicationCard.tsx",
     "category": "features",
     "usageCount": 0,
@@ -1921,7 +1921,7 @@
   },
   {
     "name": "ModeContext",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/context/ModeContext.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/context/ModeContext.tsx",
     "relativePath": "src/features/context/ModeContext.tsx",
     "category": "features",
     "usageCount": 0,
@@ -1947,7 +1947,7 @@
   },
   {
     "name": "JobCard",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/dashboard/components/JobCard.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/dashboard/components/JobCard.tsx",
     "relativePath": "src/features/dashboard/components/JobCard.tsx",
     "category": "features",
     "usageCount": 0,
@@ -1973,7 +1973,7 @@
   },
   {
     "name": "DocumentStack",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/documents/DocumentStack.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/documents/DocumentStack.tsx",
     "relativePath": "src/features/documents/DocumentStack.tsx",
     "category": "features",
     "usageCount": 0,
@@ -2001,7 +2001,7 @@
   },
   {
     "name": "EvidenceCard",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/editor/components/EvidenceCard.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/editor/components/EvidenceCard.tsx",
     "relativePath": "src/features/editor/components/EvidenceCard.tsx",
     "category": "features",
     "usageCount": 0,
@@ -2027,7 +2027,7 @@
   },
   {
     "name": "IconBadge",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/kr-dark/IconBadge.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/kr-dark/IconBadge.tsx",
     "relativePath": "src/features/kr-dark/IconBadge.tsx",
     "category": "features",
     "usageCount": 0,
@@ -2052,7 +2052,7 @@
   },
   {
     "name": "DropZone",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/ingestion/components/DropZone.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/ingestion/components/DropZone.tsx",
     "relativePath": "src/features/ingestion/components/DropZone.tsx",
     "category": "features",
     "usageCount": 0,
@@ -2078,7 +2078,7 @@
   },
   {
     "name": "ProfileCardMUI",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/profile/components/ProfileCardMUI.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/profile/components/ProfileCardMUI.tsx",
     "relativePath": "src/features/profile/components/ProfileCardMUI.tsx",
     "category": "features",
     "usageCount": 0,
@@ -2108,7 +2108,7 @@
   },
   {
     "name": "ProfileComparison",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/profile/components/ProfileComparison.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/profile/components/ProfileComparison.tsx",
     "relativePath": "src/features/profile/components/ProfileComparison.tsx",
     "category": "features",
     "usageCount": 0,
@@ -2134,7 +2134,7 @@
   },
   {
     "name": "M3ExpressiveComponents",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/style-guide/M3ExpressiveComponents.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/style-guide/M3ExpressiveComponents.tsx",
     "relativePath": "src/features/style-guide/M3ExpressiveComponents.tsx",
     "category": "features",
     "usageCount": 0,
@@ -2161,7 +2161,7 @@
   },
   {
     "name": "kr-darkShell",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/kr-darkShell.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/kr-darkShell.tsx",
     "relativePath": "src/layouts/kr-darkShell/kr-darkShell.tsx",
     "category": "layout",
     "usageCount": 0,
@@ -2196,7 +2196,7 @@
   },
   {
     "name": "kr-darkPlaceholders",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/views/kr-darkPlaceholders.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/views/kr-darkPlaceholders.tsx",
     "relativePath": "src/layouts/kr-darkShell/views/kr-darkPlaceholders.tsx",
     "category": "layout",
     "usageCount": 0,
@@ -2226,7 +2226,7 @@
   },
   {
     "name": "LayoutShell",
-    "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/LayoutShell.tsx",
+    "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/LayoutShell.tsx",
     "relativePath": "src/layouts/kr-darkShell/LayoutShell.tsx",
     "category": "layout",
     "usageCount": 0,

@@ -3,7 +3,7 @@ import re
 import datetime
 
 # --- Configuration ---
-ROOT_DIR = '/Users/okgoogle13/Desktop/careercopilot'
+ROOT_DIR = '/Users/okgoogle13/Projects/careercopilot'
 FRONTEND_DIR = os.path.join(ROOT_DIR, 'frontend', 'src')
 DOCS_DIR = os.path.join(ROOT_DIR, 'docs', 'design-system')
 MIGRATION_REPORT_PATH = os.path.join(DOCS_DIR, 'MIGRATION.md')

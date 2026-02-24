@@ -87,7 +87,7 @@ def generate_standard_name(asset):
 
 def main():
     # Paths
-    PROJECT_ROOT = Path("/Users/okgoogle13/Desktop/careercopilot")
+    PROJECT_ROOT = Path("/Users/okgoogle13/Projects/careercopilot")
     MANIFEST_PATH = PROJECT_ROOT / "assets" / "northcote-[DEPRECATED_STYLE]-manifest.json"
     OUTPUT_DIR = Path("packaged_assets")
     

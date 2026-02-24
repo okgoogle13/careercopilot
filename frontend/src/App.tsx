@@ -33,6 +33,7 @@ import { AnalysisPage } from './pages/AnalysisPage';
 import { IngestionPage } from './pages/IngestionPage';
 import { JobQueue } from './pages/JobQueue';
 import { useModeStore } from './stores/useModeStore';
+import DesignSidekick from './features/design-sidekick/DesignSidekick';
 
 /**
  * ModeSync Component
@@ -174,6 +175,10 @@ export default function App() {
           <Route
             path="/register"
             element={<Register />}
+          />
+          <Route
+            path="/design-sidekick"
+            element={<DesignSidekick />}
           />
           <Route
             path="*"

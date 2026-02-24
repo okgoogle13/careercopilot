@@ -319,7 +319,7 @@ Add to `claude-code.config.json`:
       "command": "node",
       "args": ["mcp-servers/filesystem.js"],
       "env": {
-        "ROOT_PATH": "/Users/okgoogle13/Desktop/careercopilot",
+        "ROOT_PATH": "/Users/okgoogle13/Projects/careercopilot",
         "BATCH_READS": true,
         "RESPONSE_FORMAT": "compact"
       }
@@ -328,7 +328,7 @@ Add to `claude-code.config.json`:
       "command": "node",
       "args": ["mcp-servers/git.js"],
       "env": {
-        "REPO_PATH": "/Users/okgoogle13/Desktop/careercopilot",
+        "REPO_PATH": "/Users/okgoogle13/Projects/careercopilot",
         "FILTER": "components-only",
         "DIFF_FORMAT": "compact"
       }
@@ -337,7 +337,7 @@ Add to `claude-code.config.json`:
       "command": "node",
       "args": ["mcp-servers/testing.js"],
       "env": {
-        "REPO_PATH": "/Users/okgoogle13/Desktop/careercopilot",
+        "REPO_PATH": "/Users/okgoogle13/Projects/careercopilot",
         "OUTPUT_FORMAT": "json",
         "VERBOSE": false
       }

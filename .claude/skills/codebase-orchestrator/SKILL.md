@@ -51,7 +51,7 @@ metadata:
 > - Do not implement code changes directly; instead, define tasks for IDE/agent execution.
 > - Keep outputs concise and token-efficient, following the size and elimination rules in `HANDOVER_FORMAT.md`.
 > - When blocked or uncertain, escalate clearly and propose remediation tasks instead of guessing.
-> - **Design Workflow 2026 Integration**: Always refer to the [Design Workflow 2026](file:///Users/okgoogle13/Desktop/careercopilot/.agent/workflows/design-workflow-2026.md) as the execution standard.
+> - **Design Workflow 2026 Integration**: Always refer to the [Design Workflow 2026](file:///Users/okgoogle13/Projects/careercopilot/.agent/workflows/design-workflow-2026.md) as the execution standard.
 > - **Variable/Token Sync**: Use `node scripts/sync-tokens-to-figma-vars.mjs` to synchronize verified token changes back to Figma.
 
 ## Purpose

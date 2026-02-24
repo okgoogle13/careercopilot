@@ -72,6 +72,9 @@ export const ROUTE_MODE_MAP: RouteModeConfig[] = [
   // Job queue & background processing
   { path: '/job-queue', mode: 'KrDark' },
 
+  // Design sidekick (orchestration tool)
+  { path: '/design-sidekick', mode: 'KrDark' },
+
   // Development & style guide
   { path: '/style-guide', mode: 'KrDark' },
 ];

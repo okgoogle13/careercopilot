@@ -87,7 +87,7 @@ Manifest sorted successfully
 ## Command: python3 scripts/kr/manifest-reconciler-mcp.py
 ```text
 {
-  "timestamp": "/Users/okgoogle13/Desktop/careercopilot",
+  "timestamp": "/Users/okgoogle13/Projects/careercopilot",
   "status": "valid",
   "issues": [],
   "stats": {

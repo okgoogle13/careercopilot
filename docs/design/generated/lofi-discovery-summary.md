@@ -5,20 +5,20 @@ This document consolidates discovery data from all 14 screens in the screen plan
 ## 📱 Screens & Artifacts
 | Screen | Wireframe | Status |
 | :--- | :--- | :--- |
-| **Solidarity Landing** | [solidaritylanding-screen.md](file:///Users/okgoogle13/Desktop/careercopilot/docs/design/generated/wireframes/solidaritylanding-screen.md) | ✅ Reviewed |
-| **Authentication** | [authentication-screen.md](file:///Users/okgoogle13/Desktop/careercopilot/docs/design/generated/wireframes/authentication-screen.md) | ✅ Reviewed |
-| **Onboarding** | [onboarding-screen.md](file:///Users/okgoogle13/Desktop/careercopilot/docs/design/generated/wireframes/onboarding-screen.md) | ✅ Reviewed |
-| **Ingestion** | [ingestion-screen.md](file:///Users/okgoogle13/Desktop/careercopilot/docs/design/generated/wireframes/ingestion-screen.md) | ✅ Reviewed |
-| **Analysis Dashboard** | [analysisdashboard-screen.md](file:///Users/okgoogle13/Desktop/careercopilot/docs/design/generated/wireframes/analysisdashboard-screen.md) | ✅ Reviewed |
-| **Opportunity Feed** | [opportunityfeed-screen.md](file:///Users/okgoogle13/Desktop/careercopilot/docs/design/generated/wireframes/opportunityfeed-screen.md) | ✅ Reviewed |
-| **Job Search Flow** | [jobsearchflow-screen.md](file:///Users/okgoogle13/Desktop/careercopilot/docs/design/generated/wireframes/jobsearchflow-screen.md) | ✅ Reviewed |
-| **Kanban Board** | [kanbanboard-screen.md](file:///Users/okgoogle13/Desktop/careercopilot/docs/design/generated/wireframes/kanbanboard-screen.md) | ✅ Reviewed |
-| **Application Form Flow** | [applicationformflow-screen.md](file:///Users/okgoogle13/Desktop/careercopilot/docs/design/generated/wireframes/applicationformflow-screen.md) | ✅ Reviewed |
-| **Split Screen Editor** | [splitscreeneditor-screen.md](file:///Users/okgoogle13/Desktop/careercopilot/docs/design/generated/wireframes/splitscreeneditor-screen.md) | ✅ Reviewed |
-| **Studio Designer** | [studiodesigner-screen.md](file:///Users/okgoogle13/Desktop/careercopilot/docs/design/generated/wireframes/studiodesigner-screen.md) | ✅ Reviewed |
-| **Settings** | [settings-screen.md](file:///Users/okgoogle13/Desktop/careercopilot/docs/design/generated/wireframes/settings-screen.md) | ✅ Reviewed |
-| **Profile Settings** | [profilesettings-screen.md](file:///Users/okgoogle13/Desktop/careercopilot/docs/design/generated/wireframes/profilesettings-screen.md) | ✅ Reviewed |
-| **Dashboard Overview** | [dashboardoverview-screen.md](file:///Users/okgoogle13/Desktop/careercopilot/docs/design/generated/wireframes/dashboardoverview-screen.md) | ✅ Reviewed |
+| **Solidarity Landing** | [solidaritylanding-screen.md](file:///Users/okgoogle13/Projects/careercopilot/docs/design/generated/wireframes/solidaritylanding-screen.md) | ✅ Reviewed |
+| **Authentication** | [authentication-screen.md](file:///Users/okgoogle13/Projects/careercopilot/docs/design/generated/wireframes/authentication-screen.md) | ✅ Reviewed |
+| **Onboarding** | [onboarding-screen.md](file:///Users/okgoogle13/Projects/careercopilot/docs/design/generated/wireframes/onboarding-screen.md) | ✅ Reviewed |
+| **Ingestion** | [ingestion-screen.md](file:///Users/okgoogle13/Projects/careercopilot/docs/design/generated/wireframes/ingestion-screen.md) | ✅ Reviewed |
+| **Analysis Dashboard** | [analysisdashboard-screen.md](file:///Users/okgoogle13/Projects/careercopilot/docs/design/generated/wireframes/analysisdashboard-screen.md) | ✅ Reviewed |
+| **Opportunity Feed** | [opportunityfeed-screen.md](file:///Users/okgoogle13/Projects/careercopilot/docs/design/generated/wireframes/opportunityfeed-screen.md) | ✅ Reviewed |
+| **Job Search Flow** | [jobsearchflow-screen.md](file:///Users/okgoogle13/Projects/careercopilot/docs/design/generated/wireframes/jobsearchflow-screen.md) | ✅ Reviewed |
+| **Kanban Board** | [kanbanboard-screen.md](file:///Users/okgoogle13/Projects/careercopilot/docs/design/generated/wireframes/kanbanboard-screen.md) | ✅ Reviewed |
+| **Application Form Flow** | [applicationformflow-screen.md](file:///Users/okgoogle13/Projects/careercopilot/docs/design/generated/wireframes/applicationformflow-screen.md) | ✅ Reviewed |
+| **Split Screen Editor** | [splitscreeneditor-screen.md](file:///Users/okgoogle13/Projects/careercopilot/docs/design/generated/wireframes/splitscreeneditor-screen.md) | ✅ Reviewed |
+| **Studio Designer** | [studiodesigner-screen.md](file:///Users/okgoogle13/Projects/careercopilot/docs/design/generated/wireframes/studiodesigner-screen.md) | ✅ Reviewed |
+| **Settings** | [settings-screen.md](file:///Users/okgoogle13/Projects/careercopilot/docs/design/generated/wireframes/settings-screen.md) | ✅ Reviewed |
+| **Profile Settings** | [profilesettings-screen.md](file:///Users/okgoogle13/Projects/careercopilot/docs/design/generated/wireframes/profilesettings-screen.md) | ✅ Reviewed |
+| **Dashboard Overview** | [dashboardoverview-screen.md](file:///Users/okgoogle13/Projects/careercopilot/docs/design/generated/wireframes/dashboardoverview-screen.md) | ✅ Reviewed |
 
 ## 🏗️ Candidate Component Backlog (Unified)
 

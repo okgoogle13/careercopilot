@@ -4,7 +4,7 @@ import os
 import sys
 
 # Configuration
-ROOT_DIR = '/Users/okgoogle13/Desktop/careercopilot/frontend/public'
+ROOT_DIR = '/Users/okgoogle13/Projects/careercopilot/frontend/public'
 MANIFEST_PATH = os.path.join(ROOT_DIR, 'assets/kerala-rage-kr-solidarity-manifest.json')
 
 def verify_manifest():

@@ -9,7 +9,7 @@
 
 ### Before (Multiple Sources of Truth)
 ```
-❌ /Users/okgoogle13/Desktop/careercopilot/claude_desktop_config.json
+❌ /Users/okgoogle13/Projects/careercopilot/claude_desktop_config.json
 ✅ /Users/okgoogle13/.gemini/antigravity/mcp_config.json
 ```
 
@@ -18,8 +18,8 @@
 ### After (Single Source of Truth)
 ```
 ✅ /Users/okgoogle13/.gemini/antigravity/mcp_config.json (PRIMARY)
-🔗 /Users/okgoogle13/Desktop/careercopilot/mcp_config.json (SYMLINK)
-📦 /Users/okgoogle13/Desktop/careercopilot/claude_desktop_config.json.backup (ARCHIVED)
+🔗 /Users/okgoogle13/Projects/careercopilot/mcp_config.json (SYMLINK)
+📦 /Users/okgoogle13/Projects/careercopilot/claude_desktop_config.json.backup (ARCHIVED)
 ```
 
 **Solution**: One config to rule them all
@@ -58,13 +58,13 @@
 code ~/.gemini/antigravity/mcp_config.json
 
 # Option 2: Edit via project symlink (same file)
-code /Users/okgoogle13/Desktop/careercopilot/mcp_config.json
+code /Users/okgoogle13/Projects/careercopilot/mcp_config.json
 ```
 
 ### Verify Configuration
 ```bash
 # Check symlink
-ls -la /Users/okgoogle13/Desktop/careercopilot/mcp_config.json
+ls -la /Users/okgoogle13/Projects/careercopilot/mcp_config.json
 
 # Validate JSON
 cat ~/.gemini/antigravity/mcp_config.json | python3 -m json.tool
@@ -117,7 +117,7 @@ cat ~/.gemini/antigravity/mcp_config.json | jq '.mcpServers | keys'
 
 2. **Delete backup** (after verification)
    ```bash
-   rm /Users/okgoogle13/Desktop/careercopilot/claude_desktop_config.json.backup
+   rm /Users/okgoogle13/Projects/careercopilot/claude_desktop_config.json.backup
    ```
 
 3. **Update any scripts** that reference `claude_desktop_config.json`
@@ -132,11 +132,11 @@ If you need to revert:
 
 ```bash
 # Remove symlink
-rm /Users/okgoogle13/Desktop/careercopilot/mcp_config.json
+rm /Users/okgoogle13/Projects/careercopilot/mcp_config.json
 
 # Restore backup
-mv /Users/okgoogle13/Desktop/careercopilot/claude_desktop_config.json.backup \
-   /Users/okgoogle13/Desktop/careercopilot/claude_desktop_config.json
+mv /Users/okgoogle13/Projects/careercopilot/claude_desktop_config.json.backup \
+   /Users/okgoogle13/Projects/careercopilot/claude_desktop_config.json
 ```
 
 ---

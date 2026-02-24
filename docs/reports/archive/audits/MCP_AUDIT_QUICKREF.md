@@ -116,7 +116,7 @@ export OPENROUTER_API_KEY="<new-openrouter-key>" # From openrouter.ai
 
 ### Recommended (Set in ~/.zshrc)
 ```bash
-export CAREERCOPILOT_ROOT="/Users/okgoogle13/Desktop/careercopilot"
+export CAREERCOPILOT_ROOT="/Users/okgoogle13/Projects/careercopilot"
 export CAREERCOPILOT_VENV="${CAREERCOPILOT_ROOT}/.venv"
 export CAREERCOPILOT_VENV_BIN="${CAREERCOPILOT_VENV}/bin"
 export GITHUB_REPOSITORY="okgoogle13/careercopilot"
@@ -128,16 +128,16 @@ export GITHUB_REPOSITORY="okgoogle13/careercopilot"
 
 ### Critical
 - [ ] `~/.claude/claude_desktop_config.json` - Contains hardcoded GitHub token
-- [ ] `/Users/okgoogle13/Desktop/careercopilot/backend/.env` - Contains 3 API keys
-- [ ] `/Users/okgoogle13/Desktop/careercopilot/frontend/.env.local` - Contains Supabase key
+- [ ] `/Users/okgoogle13/Projects/careercopilot/backend/.env` - Contains 3 API keys
+- [ ] `/Users/okgoogle13/Projects/careercopilot/frontend/.env.local` - Contains Supabase key
 
 ### Configuration
-- [ ] `/Users/okgoogle13/Desktop/careercopilot/mcp_config.json` - Project MCP config
+- [ ] `/Users/okgoogle13/Projects/careercopilot/mcp_config.json` - Project MCP config
 - [ ] `~/.mcp.json` - Orphaned config with broken paths
 - [ ] `/Users/okgoogle13/.gemini/antigravity/mcp_config.json` - Gemini-specific config
 
 ### Reference
-- [ ] `/Users/okgoogle13/Desktop/careercopilot/.env.mcp.example` - Environment template
+- [ ] `/Users/okgoogle13/Projects/careercopilot/.env.mcp.example` - Environment template
 
 ---
 

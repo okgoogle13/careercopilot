@@ -249,7 +249,7 @@ Verify output includes:
 export GOOGLE_APPLICATION_CREDENTIALS="~/gcp-key.json"
 
 python scripts/orchestrate-asset-workflow.py \
-  --png /Users/okgoogle13/Desktop/careercopilot/frontend/ChatGPT*.png \
+  --png /Users/okgoogle13/Projects/careercopilot/frontend/ChatGPT*.png \
   --category kr-motifs --force-package
 ```
 

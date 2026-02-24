@@ -23,7 +23,7 @@
 
 **Discovery**:
 ```bash
-/Users/okgoogle13/Desktop/careercopilot/.venv/bin/python3 
+/Users/okgoogle13/Projects/careercopilot/.venv/bin/python3 
   → /Users/okgoogle13/.pyenv/versions/3.12.3/bin/python3
 ```
 
@@ -104,10 +104,10 @@ Create a proper isolated venv:
 
 ```bash
 # Remove symlink
-rm -rf /Users/okgoogle13/Desktop/careercopilot/.venv
+rm -rf /Users/okgoogle13/Projects/careercopilot/.venv
 
 # Create true venv
-cd /Users/okgoogle13/Desktop/careercopilot
+cd /Users/okgoogle13/Projects/careercopilot
 python3 -m venv .venv
 
 # Activate and install dependencies
@@ -122,7 +122,7 @@ pip install \
   sentry-sdk
 
 # Update MCP config to use new venv path
-# (Already correct: /Users/okgoogle13/Desktop/careercopilot/.venv/bin/python3)
+# (Already correct: /Users/okgoogle13/Projects/careercopilot/.venv/bin/python3)
 ```
 
 ---
@@ -172,8 +172,8 @@ python-dotenv
 ### Step 2: Test Server Startup
 ```bash
 # Should start without errors
-timeout 3 /Users/okgoogle13/Desktop/careercopilot/.venv/bin/python3 \
-  /Users/okgoogle13/Desktop/careercopilot/servers/flash_sidekick.py
+timeout 3 /Users/okgoogle13/Projects/careercopilot/.venv/bin/python3 \
+  /Users/okgoogle13/Projects/careercopilot/servers/flash_sidekick.py
 
 # Expected: Server starts, waits for input, timeout after 3s (normal)
 # Error: ModuleNotFoundError = dependencies still missing
@@ -250,7 +250,7 @@ After installing dependencies:
 
 ```bash
 # Create servers/requirements.txt
-cat > /Users/okgoogle13/Desktop/careercopilot/servers/requirements.txt << 'EOF'
+cat > /Users/okgoogle13/Projects/careercopilot/servers/requirements.txt << 'EOF'
 # MCP Server Dependencies
 mcp>=1.0.0
 fastmcp>=0.1.0

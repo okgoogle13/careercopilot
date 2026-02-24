@@ -1,231 +1,121 @@
-# Kerala Rage — Asset Playbook
+# Kerala Rage — Master Asset Playbook
 
-> **Status:** Canonical, merged source of truth (Kr-Solidarity V3.1) ✅
-> **Scope:** Visual identity, symbolic system, AI generation playbook, asset usage, and product integration.
-> **Audience:** Designers, developers, collaborators, AI operators.
+> **Status:** Canonical Master Source of Truth (Kr-Solidarity V3.1) ✅  
+> **Scope:** Brand identity, symbolic anchors, specific asset briefs, and AI generation orchestration.  
+> **Related SOPs:** Operational guides for batch processing and feedback loops are located in `docs/design/assets/`.
 
 ---
 
 ## 0. Canon Principles (Non‑Negotiable)
 
-- **Dark-only. One mode.** No light UI, no alternates.
-- **English-only.** Cultural identity is expressed visually and typographically, not via multilingual UI text.
+- **Dark-only.** One mode. No light UI, no alternates. No white backgrounds.
+- **English-only.** Cultural identity is expressed visually and typographically, not via multilingual text.
 - **No bureaucracy.** No visas, passports, forms, stickers, or administrative aesthetics.
-- **No institutional state symbols.** Fading aesthetics are implicit, never iconographic.
-- **Not propaganda.** This system is declarative, mythic, archival — never instructional or recruitment‑style.
-- **Cultural safety over novelty.** Reject cleverness that weakens meaning.
+- **No institutional state symbols.** Resistance equals the people, not the state.
+- **Not propaganda.** Mythic, archival, and declarative. Never instructional.
+- **Matte Charcoal Substrate.** All assets live on a #1A1714 substrate.
 
 ---
 
-## 1. Visual Moodboard & DNA
+## 1. STRATEGIC DESIGN DNA
 
-The Kerala Rage system draws from **screenprint poster culture**, **wheat‑paste street surfaces**, **devotional statuary**, and **archival resistance imagery**. Assets should feel *found on a wall at night*, not designed in a studio.
+The Kerala Rage system is a synthesis of **Keralan revolutionary history** and **Australian urban street culture**. 
 
-### Global Visual DNA
-- **Screenprint illustration** (Primary technique)
-- **Wheat‑paste / street poster texture** (Secondary technique)
-- **Matte charcoal background** (The substrate)
-- **Limited ink palette** (3–5 colours per asset)
-- **Flat fills, rough edges, visible grain**
-- **Slight misregistration allowed**
-- ❌ **No gradients, ❌ no photorealism**
+### Visual Identity
+- **Screenprint / Woodblock Illustration**: Primary technique for figures and symbols.
+- **Materiality**: Ink spread, misregistration, and heavy paper grain.
+- **Atmosphere**: "The Night Manifesto." Found on a wall at 2 AM.
+- **Colors**: Asphalt Black (#1A1714), Solidarity Red (#C84032), Ink Gold (#D4A84B), Worker Ash / Concrete Grey (#7A7570).
 
-### Cultural & Safety Locks
-- **English-only text.**
-- ❌ **No corporate or stock-photo aesthetics.**
-
-**First Nations (Australia)**
-- Aboriginal flag colours **only in situ** on placards or graffiti.
-- Allowed text only: **“ALWAYS WAS ALWAYS WILL BE”** or **“TREATY NOW”**.
-- ❌ No Aboriginal art styles or decorative abstraction.
-
-**Devotional (Hindu)**
-- Shiva imagery must be **reverent, statue-inspired, grounded**.
-- ❌ No irony, ❌ no slogans, ❌ no fantasy glow.
+### Cultural Locks
+- **First Nations (Australia)**: Aboriginal colors only in-situ (placards/graffiti). No decorative art appropriation. Explicit text allowed: "ALWAYS WAS ALWAYS WILL BE," "TREATY NOW."
+- **Devotional (Hindu)**: Shiva imagery must be reverent and statue-grounded. No irony. No fantasy glows. Focus on monumental stone textures.
 
 ---
 
-## 2. Symbolic Anchor System (Usage Rules)
+## 2. SYMBOLIC ANCHOR SYSTEM
 
-**Symbolic Anchors** are low‑frequency, high‑meaning assets (e.g., Shiva Statue, Kerala Elephant, Resistance Portraits). They are not decoration.
+Anchors are high-meaning, low-frequency assets (Shiva, Elephant, Resistance Portraits).
 
-### Usage Rules
-- **Max one** symbolic anchor per screen.
-- **Z-layer:** Always behind content (`Z-layer-1` or `Z-layer-2`).
-- **Allowed Pages:** Landing, Dashboard Overview, Analysis Overview, Editorial.
-- **Forbidden Pages:** Authentication, Ingestion, Editor, Settings.
-- **Responsive:** Tablet reduces opacity by 30%; Mobile removes the anchor entirely.
+- **Max One** symbolic anchor per screen.
+- **Z-Layer**: Always behind content (`Z-layer: 10-40`).
+- **Placement**: Landing, Dashboard, Analysis, Editorial. 
+- **Exclusion**: Never use anchors on utility pages (Settings, Ingestion, Auth).
+- **Negative Space**: Preserve **35–45% in the Upper-Left** for UI typography.
 
 ---
 
-## 3. Small‑UI Safety Matrix
+## 3. SMALL-UI SAFETY MATRIX
 
-| Motif | Category | Small UI Safe (24–48px) | Notes |
+| Motif | Category | Small UI Safe (24px) | Role |
 |------|----------|------------------------|------|
-| Shiva statue | Devotional | ❌ | Hero / anchor only |
-| Trishula + damru | Symbol | ✅ | Primary icon candidate |
-| Kerala elephant | Symbol | ⚠️ | Cards, dividers |
-| Kerala landscape | Symbol | ❌ | Background panels |
-| Tipu Sultan | Portrait | ❌ | Editorial only |
-| Bhagat Singh | Portrait | ❌ | Editorial only |
-| Treaty Now graffiti | Street | ⚠️ | Context tiles |
-| First Nations placard | Street | ❌ | Solidarity context |
-| Liberatory graffiti | Street | ⚠️ | Interruption tiles |
-| Paint splash | Abstract | ✅ | Transitions |
-| Typography pressure | Abstract | ✅ | Motion backplates |
-| Laneway texture | Texture | ✅ | Substrate |
+| Shiva Statue | Devotional | ❌ | Hero Anchor |
+| Kerala Elephant | Symbol | ⚠️ | Card/Divider |
+| Trishula/Damru | Symbol | ✅ | Status Icons |
+| Bhagat Singh | Portrait | ❌ | Editorial |
+| Laneway Texture | Texture | ✅ | Global Substrate |
+| Typography Pressure| Abstract | ✅ | Motion Backplates |
+| Paint Splash | Abstract | ✅ | Transitions |
 
 ---
 
-## 4. AI Generation Playbook (Gemini Nano)
+## 4. GLOBAL ASSET CATALOG & BRIEFS
 
-### Tooling & Optimization
-- **Primary:** Gemini 3 Flash / Pro (The "Hero Engine").
-- **Strategy:** Modular, structured prompts. Avoid narrative; use technical layer declarations.
-- **Rules:** 
-  1. Repeat constraints explicitly in every batch.
-  2. Reserve **35–45% negative space** (upper-left) for UI typography.
-  3. Embed export metadata directly in the prompt.
+### Batch 1: The Identity Anchors
+| Asset ID | Name | Role | Prompt Logic |
+|----------|------|------|--------------|
+| `KR-SOLID-001` | Shiva Statue | Mythic Hero | "Stone-like, monumental, temple light, granite texture. No text." |
+| `KR-SOLID-005` | Bhagat Singh | Resistance Hero | "Agitprop stencil, high contrast, gold martyr halo. Text: INQUILAB ZINDABAD." |
+| `KR-SOLID-006` | Tipu Sultan | Historical Noble | "Editorial screenprint, green turban, subtle tiger motifs. No text." |
+| `KR-SOLID-009` | Kerala Elephant | Cultural Symbol | "Temple elephant, gold Nettipattam, palm vignettes. Opacity: 15%." |
 
-### Layer Generation Order
-1. **Substrate** (Base) -> 2. **Atmospheric** (Overlay) -> 3. **Cultural** (Mid) -> 4. **Anchor** (Foreground).
+### Batch 2: Street & Textural Substrates
+| Asset ID | Name | Role | Prompt Logic |
+|----------|------|------|--------------|
+| `KR-SOLID-033` | Melbourne Laneway | Global Substrate | "Brick mortar, wheat-paste residue, urban grime. Seamless tileable." |
+| `KR-SOLID-031` | Treaty Placard | Solidarity | "Hand-painted sign, Raw paint strokes. Text: ALWAYS WAS ALWAYS WILL BE." |
+| `KR-SOLID-015` | Paint Splash | Transition | "Kinetic ink energy, [DEPRECATED_STYLE] splatters. Monochrome." |
 
 ---
 
-## 5. The Hero Engine (Layered Composition)
+## 5. HERO COMPOSITION ENGINE (Gemini Prompting)
 
-To generate high-fidelity hero compositions, follow this structured template.
+To generate new heroes using the `gemini-hero-generator.ts`, compositions must follow these rules:
 
-### Production Template
+### Composition Layers (Bottom to Top)
+1. **Substrate** (MANDATORY): Charcoal Paper or Laneway Texture.
+2. **Atmospheric**: Paint Splashes or Abstract Solidarity.
+3. **Mid-Layer (Optional)**: Kerala Landscapes or Elephant.
+4. **Foreground Anchor**: Shiva Statue or Resistance Portraits.
+
+### The "Hero Engine" Prompt Template
 ```text
 PROJECT: Kerala Rage – kr-solidarity (v6.0)
-STYLE: Screenprint illustration, Melbourne street texture.
-EXECUTION: Dark-only, English-only. NO gradients. NO bureaucracy.
-
-LAYER ORDER (bottom to top):
-1. Substrate: [Select from Manifest: Charcoal Paper / Laneway]
-2. Atmospheric: [Select from Manifest: Abstract Solidarity / Paint Splash]
-3. Cultural (Optional): [Select: Kerala Landscape / Elephant]
-4. Foreground Anchor: [Select: Shiva / Bhagat Singh / Tipu Sultan]
-
-COMPOSITION RULES:
-- Max 1 spiritual anchor OR 1 resistance portrait per image.
-- Preserve 40% negative space in upper-left quadrant.
-- Base Color: #1A1A1A | Accent: #F14714 (Red), #DAF674 (Gold).
-```
-
-### Variant Strategies
-- **Devotional Hero:** foreground: Shiva Statue. Atmospheric opacity: 20%.
-- **Resistance Hero:** foreground: Bhagat Singh/Tipu Sultan. Street assets (placards) allowed in mid-layer.
-
----
-
-## 6. Master Prompt Library (DHS Enabled)
-
-### GLOBAL PREFIX (Prepend to EVERY prompt)
-```
-You are generating assets for a dark-only, screenprint-illustration design system.
-All visuals must express layered diasporic identity (Indian + Australian lived reality + First Nations grounding) in a single frame.
-No segregation of identities. No state symbols. No bureaucracy. No decorative Aboriginal art.
-English-only text if present. Charcoal background. Limited ink palette (3–5 colours).
-Heavy screenprint grain and wheat-paste texture.
+OBJECTIVE: Generate a layered hero composition as a single flattened PNG.
+STYLE: Screenprint illustration, Melbourne street grit, anti-colonial aesthetic.
+CONSTRAINTS: Dark-only, English-only. NO gradients. NO monarchy symbols.
+COMPOSITION: 
+- Foreground: [ANCHOR_ID]
+- Substrate: [TEXTURE_ID]
+- Negative Space: 40% reserved in Upper-Left corner.
+- Palette: #1A1714 (Base), #C84032 (Red), #D4A84B (Gold).
 ```
 
 ---
 
-### GROUP 1: Composite & Hero Assets
+## 6. EXECUTION & VALIDATION PLAN
 
-#### 1️⃣ LANDING HERO — LAYERED MYTHIC COMPOSITE
-```
-Generate a cinematic landing hero illustration. A central Shiva statue–inspired figure rendered as a solid, sculptural silhouette, integrated into contemporary Australian urban textures (brick laneways, protest residue), with Aboriginal flag colours subtly embedded in the ground, roots, or horizon glow. All identities must coexist in one image.
-```
-- **Filename:** `hero_layered_shiva_landing_16x9_v1.webp`
-- **Output Path:** `/public/assets/hero/`
-- **Specs:** 16:9 | 3840 × 2160 px | 72 DPI
+### Tool Selection
+- **Imagen 3**: Optimized for substrates, material authenticity, and expressive textures.
+- **DALL-E**: Optimized for geometric UI elements, clean transparent backgrounds, and specific symbols.
 
-#### 2️⃣ EDITORIAL BACKGROUND — LAYERED ABSTRACT FIELD
-```
-Generate an abstract editorial background for long-scroll content. Kerala greens and reds bleeding into Australian urban textures, paint splashes, torn poster edges, screenprint grain, Aboriginal flag colours faintly layered beneath the surface like soil strata. No figures. No text.
-```
-- **Filename:** `bg_editorial_layeredfield_9x16_v1.webp`
-- **Output Path:** `/public/assets/backgrounds/`
-- **Specs:** 9:16 | 2160 × 3840 px | 72 DPI
+### Validation Checklist (Post-Generation)
+- [ ] **Technical**: 2560x1440 resolution, <100KB (WebP) or Transparent PNG.
+- [ ] **Aesthetic**: Does it feel "found" (street-paste), not clean/digital?
+- [ ] **Canon**: No bureaucracy? English-only? Charcoal background confirmed?
+- [ ] **Space**: Is the 40% upper-left negative space actually preserved?
+- [ ] **Manifest**: Asset ID assigned and integrated into global manifest.
 
 ---
 
-### GROUP 2: Symbolic Anchors
-
-#### 3️⃣ SHIVA DEVOTIONAL ANCHOR — SCULPTURAL OBJECT
-```
-Screenprint image of a Shiva statue, stone-like and monumental. Calm, reverent, statue-inspired, grounded. The figure should feel embedded in lived space, not fantasy imagery. Centered composition. Muted gold halo disk. No text.
-```
-- **Filename:** `motif_shiva_sculptural_anchor_1x1_v1.webp`
-- **Output Path:** `/public/assets/motifs/`
-- **Specs:** 1:1 | 2048 × 2048 px
-
-#### 4️⃣ TRISHULA + DAMRU — ICONIC SYMBOL
-```
-Bold screenprint icon of a trishula with damru. Thick line weight, simplified silhouette, high stasis. Recognizable at small scales. 3-5 ink colors. No text.
-```
-- **Filename:** `symbol_trishula_damru_1x1_v1.svg`
-- **Output Path:** `/public/assets/symbols/`
-- **Specs:** 1:1 | 1024 × 1024 px
-
-#### 5️⃣ KERALA ELEPHANT — CULTURAL SYMBOL
-```
-Screenprint illustration of a Kerala elephant with simplified temple ornaments (Nettipattam), palm framing, and a subtle halo disk. Celebration and cultural richness. No text.
-```
-- **Filename:** `symbol_kerala_elephant_1x1_v1.webp`
-- **Output Path:** `/public/assets/symbols/`
-- **Specs:** 1:1 | 2048 × 2048 px
-
----
-
-### GROUP 3: Portraits
-
-#### 6️⃣ REVOLUTIONARY PORTRAIT — BHAGAT SINGH
-```
-Agitprop stencil screenprint portrait of Bhagat Singh. Profile with hat. Distinct thin gold "Martyr's Halo" ring behind head. Text included: "INQUILAB ZINDABAD". Heavy grain, limited palette.
-```
-- **Filename:** `portrait_bhagatsingh_editorial_3x4_v1.webp`
-- **Output Path:** `/public/assets/portraits/`
-- **Specs:** 3:4 | 2400 × 3200 px
-
-#### 7️⃣ RESISTANCE PORTRAIT — TIPU SULTAN
-```
-Screenprint portrait of Tipu Sultan. Green turban. Subtle tiger motifs integrated into shading. Defiant, intellectual expression. No historical realism. No text.
-```
-- **Filename:** `portrait_tipu_sultan_editorial_3x4_v1.webp`
-- **Output Path:** `/public/assets/portraits/`
-- **Specs:** 3:4 | 2400 × 3200 px
-
----
-
-### GROUP 4: Street & Solidarity
-
-#### 8️⃣ MELBOURNE STREET TEXTURE — SUBSTRATE
-```
-Melbourne street texture asset. Brick walls, wheat-paste residue, graffiti remains. Screenprint texture, material-first. No readable text.
-```
-- **Filename:** `texture_melbourne_street_1x1_v1.webp`
-- **Output Path:** `/public/assets/textures/`
-- **Specs:** 1:1 | 2048 × 2048 px
-
-#### 9️⃣ FIRST NATIONS SOLIDARITY — PROTEST PLACARD
-```
-Protest placard reading "ALWAYS WAS ALWAYS WILL BE". Raw paint strokes, urgent lettering, embedded in an atmospheric street context.
-```
-- **Filename:** `solidarity_firstnations_placard_4x5_v1.webp`
-- **Output Path:** `/public/assets/solidarity/`
-- **Specs:** 4:5 | 2160 × 2700 px
-
----
-
-## 7. Final Acceptance Test
-1. Does this feel **found** (street-paste), not designed?
-2. Is the **negative space** preserved for typography?
-3. Does it follow the **Substrate > Mid > Foreground** layer logic?
-4. Is it **dark-only** and **English-only**?
-5. Does it match its **Filename and Export Path** exactly?
-
-If yes → **Accept**. If no → **Regenerate**.
+**Folder Note:** Technical Operating Procedures for the batch pipeline (e.g., how to run the python reconcilers) are maintained in the `docs/design/assets/` folder to separate strategy from execution.

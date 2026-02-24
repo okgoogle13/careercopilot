@@ -5,7 +5,7 @@ This guide describes how to check the target state of the component library and 
 ## 🎯 Checking Target State
 
 The target state for the current batch of components is defined in:
-[component-batch-plan.yaml](file:///Users/okgoogle13/Desktop/careercopilot/docs/design/component-batch-plan.yaml)
+[component-batch-plan.yaml](file:///Users/okgoogle13/Projects/careercopilot/docs/design/component-batch-plan.yaml)
 
 This file lists components and whether they should be `new` or `migrate`.
 

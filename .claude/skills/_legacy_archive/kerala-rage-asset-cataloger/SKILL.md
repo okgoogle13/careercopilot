@@ -126,7 +126,7 @@ Low quality, noise, test artifacts, no clear use.
 
 ## Manifest Integration
 
-**Source**: `/Users/okgoogle13/Desktop/careercopilot/assets/kerala-rage-manifest.json`
+**Source**: `/Users/okgoogle13/Projects/careercopilot/assets/kerala-rage-manifest.json`
 
 **Gap Analysis**: Load manifest, filter `status: "Missing"`, match ASSET-7 through ASSET-19 against uncategorized assets.
 

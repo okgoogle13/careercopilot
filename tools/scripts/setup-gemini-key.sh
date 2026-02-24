@@ -37,24 +37,24 @@ echo "   ✅ Stored in Keychain"
 
 echo ""
 echo "2️⃣ Creating .env file..."
-cat > /Users/okgoogle13/Desktop/careercopilot/.env << EOF
+cat > /Users/okgoogle13/Projects/careercopilot/.env << EOF
 # CareerCopilot Environment Configuration
 # Generated: $(date)
 # CRITICAL: This file is git-ignored. Never commit it.
 
 GEMINI_API_KEY=$NEW_KEY
 EOF
-chmod 600 /Users/okgoogle13/Desktop/careercopilot/.env
+chmod 600 /Users/okgoogle13/Projects/careercopilot/.env
 echo "   ✅ Created .env with restricted permissions (600)"
 
 echo ""
 echo "3️⃣ Updating .env.local..."
-cat > /Users/okgoogle13/Desktop/careercopilot/.env.local << EOF
+cat > /Users/okgoogle13/Projects/careercopilot/.env.local << EOF
 # CareerCopilot Local Environment Configuration
 # GEMINI_API_KEY is loaded from keychain via .zshrc
 # This file is git-ignored for security
 EOF
-chmod 600 /Users/okgoogle13/Desktop/careercopilot/.env.local
+chmod 600 /Users/okgoogle13/Projects/careercopilot/.env.local
 echo "   ✅ Cleared .env.local"
 
 echo ""
