@@ -33,25 +33,25 @@ Add the `design-system-sidekick` server to your existing MCP servers configurati
   "mcpServers": {
     "flash-sidekick": {
       "command": "python3",
-      "args": ["/Users/okgoogle13/Desktop/careercopilot/servers/flash_sidekick.py"],
+      "args": ["/Users/okgoogle13/Projects/careercopilot/servers/flash_sidekick.py"],
       "env": {
         "GEMINI_API_KEY": "${GEMINI_API_KEY}"
       }
     },
     "design-system-sidekick": {
       "command": "python3",
-      "args": ["/Users/okgoogle13/Desktop/careercopilot/servers/design_system_sidekick.py"],
+      "args": ["/Users/okgoogle13/Projects/careercopilot/servers/design_system_sidekick.py"],
       "env": {
         "GEMINI_API_KEY": "${GEMINI_API_KEY}"
       }
     },
     "agent-handoff": {
       "command": "python3",
-      "args": ["/Users/okgoogle13/Desktop/careercopilot/servers/agent_handoff.py"]
+      "args": ["/Users/okgoogle13/Projects/careercopilot/servers/agent_handoff.py"]
     },
     "cloud-ops": {
       "command": "python3",
-      "args": ["/Users/okgoogle13/Desktop/careercopilot/servers/cloud_ops.py"],
+      "args": ["/Users/okgoogle13/Projects/careercopilot/servers/cloud_ops.py"],
       "env": {
         "GOOGLE_CLOUD_PROJECT": "${GOOGLE_CLOUD_PROJECT}",
         "FIREBASE_PROJECT_ID": "${FIREBASE_PROJECT_ID}"
@@ -59,7 +59,7 @@ Add the `design-system-sidekick` server to your existing MCP servers configurati
     },
     "docker": {
       "command": "python3",
-      "args": ["/Users/okgoogle13/Desktop/careercopilot/servers/docker_mcp.py"]
+      "args": ["/Users/okgoogle13/Projects/careercopilot/servers/docker_mcp.py"]
     }
   },
   "globalShortcut": "Cmd+Shift+Space"
@@ -302,7 +302,7 @@ tail -100 /tmp/mcp-design-system-sidekick.log
 
 **Test server standalone:**
 ```bash
-cd /Users/okgoogle13/Desktop/careercopilot/servers
+cd /Users/okgoogle13/Projects/careercopilot/servers
 python3 design_system_sidekick.py
 # Should start and wait for JSON-RPC input
 ```

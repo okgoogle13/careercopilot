@@ -38,5 +38,5 @@ The literal strings below are extracted from the hi-fi blueprints. They have bee
 ## Next Steps
 1. **Register Tokens**: Update `frontend/public/assets/kr-solidarity-ui-token-map.json` to include IDs `KR-UI-008` through `KR-UI-019` with the paths specified above.
 2. **Assign Semantic Matchers**: Update `scripts/kr/replace-asset-tokens.mjs` to include these exact patterns mapping to their new tokens.
-3. **Generate Assets**: Use the [Asset Playbook](file:///Users/okgoogle13/Desktop/careercopilot/docs/design/asset-playbook.md) to generate the SVGs.
+3. **Generate Assets**: Use the [Asset Playbook](file:///Users/okgoogle13/Projects/careercopilot/docs/design/asset-playbook.md) to generate the SVGs.
 4. **Re-run Orchestration**: Execute `./scripts/orchestrate-stage2.sh` to complete the integration.

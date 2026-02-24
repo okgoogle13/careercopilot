@@ -3,7 +3,7 @@
  * 
  * DYNAMIC REGISTRY: This file now imports data from the canonical manifest.json.
  * 
- * @see /Users/okgoogle13/Desktop/careercopilot/frontend/public/assets/kerala-rage-kr-solidarity-manifest.json
+ * @see /Users/okgoogle13/Projects/careercopilot/frontend/public/assets/kerala-rage-kr-solidarity-manifest.json
  */
 
 import manifest from '../../public/assets/kerala-rage-kr-solidarity-manifest.json';

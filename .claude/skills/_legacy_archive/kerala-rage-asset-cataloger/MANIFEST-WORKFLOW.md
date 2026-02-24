@@ -16,7 +16,7 @@ Batch Processor → parallel IDF extraction + deployment
 
 ## Manifest Location
 
-`/Users/okgoogle13/Desktop/careercopilot/assets/kerala-rage-kr-solidarity-manifest.json`
+`/Users/okgoogle13/Projects/careercopilot/assets/kerala-rage-kr-solidarity-manifest.json`
 
 ## Complete Workflow
 
@@ -25,7 +25,7 @@ Batch Processor → parallel IDF extraction + deployment
 **Small batch (1-15 images)**:
 ```bash
 python3 scripts/catalog_assets.py \
-  /Users/okgoogle13/Desktop/careercopilot/assets/kerala-rage-kr-solidarity-manifest.json \
+  /Users/okgoogle13/Projects/careercopilot/assets/kerala-rage-kr-solidarity-manifest.json \
   catalog-$(date +%Y%m%d).json \
   *.jpg *.png
 ```
@@ -34,7 +34,7 @@ python3 scripts/catalog_assets.py \
 ```bash
 # Generate MCP payload
 python3 scripts/flash_batch.py \
-  /Users/okgoogle13/Desktop/careercopilot/assets/kerala-rage-kr-solidarity-manifest.json \
+  /Users/okgoogle13/Projects/careercopilot/assets/kerala-rage-kr-solidarity-manifest.json \
   image*.jpg
 
 # Then call: flash-sidekick:batch_file_analysis
@@ -44,7 +44,7 @@ python3 scripts/flash_batch.py \
 
 ```bash
 python3 scripts/standardize_png.py \
-  /Users/okgoogle13/Desktop/careercopilot/assets/kerala-rage-kr-solidarity-manifest.json \
+  /Users/okgoogle13/Projects/careercopilot/assets/kerala-rage-kr-solidarity-manifest.json \
   /tmp/standardized \
   raw-image1.jpg raw-image2.jpeg
 ```
@@ -58,7 +58,7 @@ python3 scripts/standardize_png.py \
 ### Phase 3: Package Assets
 
 ```bash
-cd /Users/okgoogle13/Desktop/careercopilot/AIStudioAssets
+cd /Users/okgoogle13/Projects/careercopilot/AIStudioAssets
 python3 package_assets.py
 ```
 

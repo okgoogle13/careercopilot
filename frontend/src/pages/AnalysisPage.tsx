@@ -11,8 +11,8 @@ import { composeHero } from '../utils/heroComposer';
 import type { SolidarityManifest } from '../design/hero/heroTypes';
 
 // KrDark Assets
-import grindingStone from '../assets/kr-solidarity/specimen/kr-solidarity__specimen__triage-natural-history__v1.png';
-import paperGrain from '../assets/kr-solidarity/texture/kr-solidarity__substrate__kr-solidarity--texture--melbourne-laneway--v1__v1.png';
+const grindingStone = '/assets/kr-solidarity/specimen/kr-solidarity__specimen__triage-natural-history__v1.png';
+const paperGrain = '/assets/kr-solidarity/texture/kr-solidarity__substrate__kr-solidarity--texture--melbourne-laneway--v1__v1.png';
 
 interface AtsResult {
   overallScore: number;

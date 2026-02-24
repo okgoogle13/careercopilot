@@ -151,6 +151,7 @@
     "zod": "^4.2.1"
   },
   "devDependencies": {
+    "@google/generative-ai": "^0.24.1",
     "@storybook/addon-links": "^8.1.11",
     "@storybook/addon-onboarding": "^8.1.11",
     "@storybook/blocks": "^8.1.11",
@@ -170,6 +171,7 @@
     "@vitest/coverage-v8": "^4.0.0",
     "chromatic": "^13.3.5",
     "clean-jsdoc-theme": "^4.3.0",
+    "dotenv": "^17.3.1",
     "husky": "^9.0.11",
     "jsdoc": "^4.0.3",
     "playwright": "^1.45.0",
@@ -178,6 +180,7 @@
     "storybook": "^8.1.11",
     "ts-morph": "^23.0.0",
     "ts-node": "^10.9.2",
+    "tsx": "^4.21.0",
     "typescript": "^5.5.3",
     "vitest": "^4.0.0"
   },

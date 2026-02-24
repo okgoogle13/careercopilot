@@ -9,13 +9,13 @@
 
 ## Quick Start
 
-**If you have 5 minutes**: Read `/Users/okgoogle13/Desktop/careercopilot/MCP_AUDIT_SUMMARY.txt`
+**If you have 5 minutes**: Read `/Users/okgoogle13/Projects/careercopilot/MCP_AUDIT_SUMMARY.txt`
 
-**If you have 15 minutes**: Read `/Users/okgoogle13/Desktop/careercopilot/MCP_AUDIT_QUICKREF.md`
+**If you have 15 minutes**: Read `/Users/okgoogle13/Projects/careercopilot/MCP_AUDIT_QUICKREF.md`
 
-**If you have 1 hour**: Read `/Users/okgoogle13/Desktop/careercopilot/MCP_AUDIT_REPORT.md`
+**If you have 1 hour**: Read `/Users/okgoogle13/Projects/careercopilot/MCP_AUDIT_REPORT.md`
 
-**If you need to implement fixes**: Read `/Users/okgoogle13/Desktop/careercopilot/MCP_REMEDIATION_PLAN.md`
+**If you need to implement fixes**: Read `/Users/okgoogle13/Projects/careercopilot/MCP_REMEDIATION_PLAN.md`
 
 ---
 
@@ -426,7 +426,7 @@ START HERE → MCP_AUDIT_INDEX.md (this file)
 For questions or clarification, refer to the specific document corresponding to your role and needs. All documents are located in:
 
 ```
-/Users/okgoogle13/Desktop/careercopilot/MCP_AUDIT_*
+/Users/okgoogle13/Projects/careercopilot/MCP_AUDIT_*
 ```
 
 ---

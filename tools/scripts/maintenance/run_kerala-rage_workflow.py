@@ -25,7 +25,7 @@ except ImportError as e:
 
 # Configuration
 ASSETS_DIR = "/Users/okgoogle13/Downloads"
-DOCS_FILE = "/Users/okgoogle13/Desktop/careercopilot/docs/northcote-asset-generation-patterns.md"
+DOCS_FILE = "/Users/okgoogle13/Projects/careercopilot/docs/northcote-asset-generation-patterns.md"
 
 # Define the Assets (Simulated Manifest)
 ASSETS = [

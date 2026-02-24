@@ -8,23 +8,23 @@ This workflow implements the "Iterative Chains" approach for AI-assisted UI/UX d
 
 ## Step 1: Research & Briefing
 
-1. Use the [design-brief.md](file:///Users/okgoogle13/Desktop/careercopilot/prompts/library/design-brief.md) template to turn raw insights into a structured brief.
+1. Use the [design-brief.md](file:///Users/okgoogle13/Projects/careercopilot/prompts/library/design-brief.md) template to turn raw insights into a structured brief.
 2. **Human Check**: Review the brief for equity, inclusion, and strategic alignment.
 
 ## Step 2: Ideation & Flows
 
-1. Use the [user-flows.md](file:///Users/okgoogle13/Desktop/careercopilot/prompts/library/user-flows.md) template to generate alternative journeys and edge cases.
+1. Use the [user-flows.md](file:///Users/okgoogle13/Projects/careercopilot/prompts/library/user-flows.md) template to generate alternative journeys and edge cases.
 2. **Human Check**: Select the most ethical and feasible flow.
 
 ## Step 3: Wireframing
 
-1. Use the [wirefra222mes-lowfi.md](file:///Users/okgoogle13/Desktop/careercopilot/prompts/library/wireframes-lowfi.md) template or the `wireframe-annotator` skill.
+1. Use the [wirefra222mes-lowfi.md](file:///Users/okgoogle13/Projects/careercopilot/prompts/library/wireframes-lowfi.md) template or the `wireframe-annotator` skill.
 2. Ensure the output includes `<layout>`, `<tokens>`, and `<accessibility>` blocks.
 
 ## Step 4: UI Specification
 
-1. Use the [ui-spec-hifi.md](file:///Users/okgoogle13/Desktop/careercopilot/prompts/library/ui-spec-hifi.md) template to translate wireframes into developer-ready specs.
-2. Apply the [Asset Generation Prompting Strategy](file:///Users/okgoogle13/Desktop/careercopilot/Asset%20Generation%20Prompting%20Strategy.md) for refined visual assets.
+1. Use the [ui-spec-hifi.md](file:///Users/okgoogle13/Projects/careercopilot/prompts/library/ui-spec-hifi.md) template to translate wireframes into developer-ready specs.
+2. Apply the [Asset Generation Prompting Strategy](file:///Users/okgoogle13/Projects/careercopilot/Asset%20Generation%20Prompting%20Strategy.md) for refined visual assets.
 
 ## Step 5: Accessibility Audit
 

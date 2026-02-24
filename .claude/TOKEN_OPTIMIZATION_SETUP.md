@@ -89,7 +89,7 @@ To verify the setup:
 grep "customInstructions" ~/.claude/claude_desktop_config.json
 
 # Check project config has customInstructions
-grep "customInstructions" /Users/okgoogle13/Desktop/careercopilot/.claude/settings.local.json
+grep "customInstructions" /Users/okgoogle13/Projects/careercopilot/.claude/settings.local.json
 
 # Verify flash-sidekick is enabled in Claude Desktop
 grep -A 10 '"flash-sidekick"' ~/.claude/claude_desktop_config.json

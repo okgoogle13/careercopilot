@@ -343,7 +343,7 @@ grep "TODO\[asset\]" docs/design/hifi/*.md | grep -v "KR-SOLID\|KR-UI"
 **Solution:** Verify script paths relative to execution location:
 ```bash
 # Always run from project root
-cd /Users/okgoogle13/Desktop/careercopilot
+cd /Users/okgoogle13/Projects/careercopilot
 ./scripts/orchestrate-stage2.sh
 ```
 

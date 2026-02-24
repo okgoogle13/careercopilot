@@ -41,9 +41,9 @@ echo ""
 
 # Check 4: Python Virtual Environment
 echo "4. Checking Python Virtual Environment..."
-if [ -f "/Users/okgoogle13/Desktop/careercopilot/venv/bin/python" ]; then
+if [ -f "/Users/okgoogle13/Projects/careercopilot/venv/bin/python" ]; then
     echo -e "${GREEN}✅ Python venv exists${NC}"
-    /Users/okgoogle13/Desktop/careercopilot/venv/bin/python --version
+    /Users/okgoogle13/Projects/careercopilot/venv/bin/python --version
 else
     echo -e "${RED}❌ Python venv NOT found${NC}"
 fi
@@ -51,9 +51,9 @@ echo ""
 
 # Check 5: Flash Sidekick Server File
 echo "5. Checking Flash Sidekick Server..."
-if [ -f "/Users/okgoogle13/Desktop/careercopilot/servers/flash_sidekick.py" ]; then
+if [ -f "/Users/okgoogle13/Projects/careercopilot/servers/flash_sidekick.py" ]; then
     echo -e "${GREEN}✅ flash_sidekick.py exists${NC}"
-    ls -lh /Users/okgoogle13/Desktop/careercopilot/servers/flash_sidekick.py
+    ls -lh /Users/okgoogle13/Projects/careercopilot/servers/flash_sidekick.py
 else
     echo -e "${RED}❌ flash_sidekick.py NOT found${NC}"
 fi
@@ -61,8 +61,8 @@ echo ""
 
 # Check 6: GEMINI_API_KEY
 echo "6. Checking GEMINI_API_KEY..."
-if [ -f "/Users/okgoogle13/Desktop/careercopilot/.env" ]; then
-    if grep -q "GEMINI_API_KEY" /Users/okgoogle13/Desktop/careercopilot/.env; then
+if [ -f "/Users/okgoogle13/Projects/careercopilot/.env" ]; then
+    if grep -q "GEMINI_API_KEY" /Users/okgoogle13/Projects/careercopilot/.env; then
         echo -e "${GREEN}✅ GEMINI_API_KEY configured in .env${NC}"
     else
         echo -e "${YELLOW}⚠️  GEMINI_API_KEY not found in .env${NC}"

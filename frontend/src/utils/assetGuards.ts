@@ -24,7 +24,7 @@
  * Consider supporting route/layout IDs (e.g., 'route:/' or 'layout:KrDarkShell')
  * to make the system more resilient to component renames.
  * 
- * @see /Users/okgoogle13/Desktop/careercopilot/docs/ASSET_GOVERNANCE.md
+ * @see /Users/okgoogle13/Projects/careercopilot/docs/ASSET_GOVERNANCE.md
  */
 
 import { useMemo } from 'react';

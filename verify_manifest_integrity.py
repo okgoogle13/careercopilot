@@ -4,7 +4,7 @@ import os
 import sys
 
 # Configuration
-ROOT_DIR = '/Users/okgoogle13/Desktop/careercopilot'
+ROOT_DIR = '/Users/okgoogle13/Projects/careercopilot'
 MANIFEST_PATH = os.path.join(ROOT_DIR, 'assets/northcote-[DEPRECATED_STYLE]-manifest.json')
 
 def verify_manifest():

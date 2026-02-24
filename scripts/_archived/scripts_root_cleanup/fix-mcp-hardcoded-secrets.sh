@@ -9,7 +9,7 @@ echo "=================================================="
 # Define config file paths
 CLAUDE_DESKTOP_CONFIG="$HOME/Library/Application Support/Claude/claude_desktop_config.json"
 ANTIGRAVITY_CONFIG="$HOME/.gemini/antigravity/mcp_config.json"
-VSCODE_CONFIG="/Users/okgoogle13/Desktop/careercopilot/.claude/config/vscode_mcp_optimized.json"
+VSCODE_CONFIG="/Users/okgoogle13/Projects/careercopilot/.claude/config/vscode_mcp_optimized.json"
 
 # Function to fix a config file
 fix_config() {

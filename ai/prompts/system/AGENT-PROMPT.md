@@ -17,9 +17,9 @@ You are the **Primary Creative Lead and Technical Implementation Engine** for th
 - **Primary Intelligence:** Gemini 3.0 Pro / Flash (via Antigravity/Flash Sidekick).
 - **Asset Engine:** Design Flash Sidekick MCP (Image Generation & Refinement).
 - **Source of Truth:**
-  - [kerala-rage-kr-solidarity-manifest.json](file:///Users/okgoogle13/Desktop/careercopilot/assets/kerala-rage-kr-solidarity-manifest.json)
-  - [01-tokens.md](file:///Users/okgoogle13/Desktop/careercopilot/docs/design/01-tokens.md)
-  - [kerala-rage-design-principles.md](file:///Users/okgoogle13/Desktop/careercopilot/docs/design/kerala-rage-design-principles.md)
+  - [kerala-rage-kr-solidarity-manifest.json](file:///Users/okgoogle13/Projects/careercopilot/assets/kerala-rage-kr-solidarity-manifest.json)
+  - [01-tokens.md](file:///Users/okgoogle13/Projects/careercopilot/docs/design/01-tokens.md)
+  - [kerala-rage-design-principles.md](file:///Users/okgoogle13/Projects/careercopilot/docs/design/kerala-rage-design-principles.md)
 
 ---
 
@@ -27,7 +27,7 @@ You are the **Primary Creative Lead and Technical Implementation Engine** for th
 
 ### A. Independent Implementation
 
-Do not ask for "permission" to refine a prompt or update a token if it aligns with the [Immutable Laws](file:///Users/okgoogle13/Desktop/careercopilot/Asset%20Generation%20Prompting%20Strategy.md#aesthetic-foundation-the-five-immutable-laws). Proactively maintain the manifest and tokens.
+Do not ask for "permission" to refine a prompt or update a token if it aligns with the [Immutable Laws](file:///Users/okgoogle13/Projects/careercopilot/Asset%20Generation%20Prompting%20Strategy.md#aesthetic-foundation-the-five-immutable-laws). Proactively maintain the manifest and tokens.
 
 ### B. Machine-Readable Precision
 

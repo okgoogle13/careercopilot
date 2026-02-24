@@ -74,13 +74,13 @@
   "topNotMigrated": [
     {
       "name": "Button",
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/Button/Button.tsx",
+      "path": "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/Button/Button.tsx",
       "relativePath": "packages/ui/src/components/Button/Button.tsx",
       "category": "ui_package",
       "usageCount": 2,
       "importedBy": [
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/index.ts",
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/Button/Button.stories.tsx"
+        "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/index.ts",
+        "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/Button/Button.stories.tsx"
       ],
       "exports": [
         "ButtonVariant",
@@ -104,7 +104,7 @@
     },
     {
       "name": "chart",
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/legacy/ui/chart.tsx",
+      "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/legacy/ui/chart.tsx",
       "relativePath": "src/legacy/ui/chart.tsx",
       "category": "legacy",
       "usageCount": 0,
@@ -133,7 +133,7 @@
     },
     {
       "name": "collapsible",
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/legacy/ui/collapsible.tsx",
+      "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/legacy/ui/collapsible.tsx",
       "relativePath": "src/legacy/ui/collapsible.tsx",
       "category": "legacy",
       "usageCount": 0,
@@ -160,7 +160,7 @@
     },
     {
       "name": "metric-card",
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/legacy/ui/metric-card.tsx",
+      "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/legacy/ui/metric-card.tsx",
       "relativePath": "src/legacy/ui/metric-card.tsx",
       "category": "legacy",
       "usageCount": 0,
@@ -187,22 +187,22 @@
   "topMixed": [
     {
       "name": "kerala-rageButton",
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/kerala-rageButton.tsx",
+      "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/ui/kerala-rageButton.tsx",
       "relativePath": "src/components/ui/kerala-rageButton.tsx",
       "category": "ui",
       "usageCount": 11,
       "importedBy": [
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/analysis/AssetLibrary.tsx",
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/applications/ApplicationCard.tsx",
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/auth/Login.tsx",
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/auth/Register.tsx",
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/documents/DocumentStack.tsx",
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/sandbox/components/SplitEditor.tsx",
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/views/kr-darkLanding.tsx",
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/components/GlobalHeader.tsx",
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/components/NavRail.tsx",
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/components/anchors/AnalysisAnchor.tsx",
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/components/anchors/DocumentStackAnchor.tsx"
+        "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/analysis/AssetLibrary.tsx",
+        "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/applications/ApplicationCard.tsx",
+        "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/auth/Login.tsx",
+        "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/auth/Register.tsx",
+        "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/documents/DocumentStack.tsx",
+        "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/sandbox/components/SplitEditor.tsx",
+        "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/views/kr-darkLanding.tsx",
+        "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/components/GlobalHeader.tsx",
+        "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/components/NavRail.tsx",
+        "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/components/anchors/AnalysisAnchor.tsx",
+        "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/components/anchors/DocumentStackAnchor.tsx"
       ],
       "exports": [
         "kerala-rageButtonProps",
@@ -228,13 +228,13 @@
     },
     {
       "name": "Pebble",
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/Pebble.tsx",
+      "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/ui/Pebble.tsx",
       "relativePath": "src/components/ui/Pebble.tsx",
       "category": "ui",
       "usageCount": 2,
       "importedBy": [
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/Cabinet.tsx",
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/Signal.tsx"
+        "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/ui/Cabinet.tsx",
+        "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/ui/Signal.tsx"
       ],
       "exports": [
         "M3Button",
@@ -263,12 +263,12 @@
     },
     {
       "name": "EditableField",
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/shared/EditableField.tsx",
+      "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/shared/EditableField.tsx",
       "relativePath": "src/components/shared/EditableField.tsx",
       "category": "shared",
       "usageCount": 1,
       "importedBy": [
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/onboarding/components/ValidationDashboard.tsx"
+        "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/onboarding/components/ValidationDashboard.tsx"
       ],
       "exports": [
         "EditableField"
@@ -292,12 +292,12 @@
     },
     {
       "name": "M3ErrorAlert",
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/shared/M3ErrorAlert.tsx",
+      "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/shared/M3ErrorAlert.tsx",
       "relativePath": "src/components/shared/M3ErrorAlert.tsx",
       "category": "shared",
       "usageCount": 1,
       "importedBy": [
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/pages/JobQueue.tsx"
+        "/Users/okgoogle13/Projects/careercopilot/frontend/src/pages/JobQueue.tsx"
       ],
       "exports": [
         "M3ErrorAlert"
@@ -321,12 +321,12 @@
     },
     {
       "name": "Stone",
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/Stone.tsx",
+      "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/ui/Stone.tsx",
       "relativePath": "src/components/ui/Stone.tsx",
       "category": "ui",
       "usageCount": 1,
       "importedBy": [
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/Cabinet.tsx"
+        "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/ui/Cabinet.tsx"
       ],
       "exports": [
         "M3Card",
@@ -359,12 +359,12 @@
     },
     {
       "name": "TechCard",
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/analysis/TechCard.tsx",
+      "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/analysis/TechCard.tsx",
       "relativePath": "src/features/analysis/TechCard.tsx",
       "category": "features",
       "usageCount": 1,
       "importedBy": [
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/kr-darkShell/components/anchors/AnalysisAnchor.tsx"
+        "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/components/anchors/AnalysisAnchor.tsx"
       ],
       "exports": [
         "TechCard"
@@ -389,12 +389,12 @@
     },
     {
       "name": "M3Button",
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/legacy/ui/M3Button.tsx",
+      "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/legacy/ui/M3Button.tsx",
       "relativePath": "src/legacy/ui/M3Button.tsx",
       "category": "legacy",
       "usageCount": 1,
       "importedBy": [
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/legacy/ui/M3Alert.tsx"
+        "/Users/okgoogle13/Projects/careercopilot/frontend/src/legacy/ui/M3Alert.tsx"
       ],
       "exports": [
         "M3ButtonProps",
@@ -423,12 +423,12 @@
     },
     {
       "name": "M3Card",
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/legacy/ui/M3Card.tsx",
+      "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/legacy/ui/M3Card.tsx",
       "relativePath": "src/legacy/ui/M3Card.tsx",
       "category": "legacy",
       "usageCount": 1,
       "importedBy": [
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/legacy/ui/MetricCard.tsx"
+        "/Users/okgoogle13/Projects/careercopilot/frontend/src/legacy/ui/MetricCard.tsx"
       ],
       "exports": [
         "M3CardProps",
@@ -456,12 +456,12 @@
     },
     {
       "name": "AnalysisPage",
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/pages/AnalysisPage.tsx",
+      "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/pages/AnalysisPage.tsx",
       "relativePath": "src/pages/AnalysisPage.tsx",
       "category": "pages",
       "usageCount": 1,
       "importedBy": [
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/App.tsx"
+        "/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx"
       ],
       "exports": [
         "AnalysisPage"
@@ -487,12 +487,12 @@
     },
     {
       "name": "JobQueue",
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/pages/JobQueue.tsx",
+      "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/pages/JobQueue.tsx",
       "relativePath": "src/pages/JobQueue.tsx",
       "category": "pages",
       "usageCount": 1,
       "importedBy": [
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/App.tsx"
+        "/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx"
       ],
       "exports": [
         "JobQueue"
@@ -520,7 +520,7 @@
     },
     {
       "name": "Cabinet",
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/Cabinet.tsx",
+      "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/ui/Cabinet.tsx",
       "relativePath": "src/components/ui/Cabinet.tsx",
       "category": "ui",
       "usageCount": 0,
@@ -550,7 +550,7 @@
     },
     {
       "name": "Jar",
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/Jar.tsx",
+      "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/ui/Jar.tsx",
       "relativePath": "src/components/ui/Jar.tsx",
       "category": "ui",
       "usageCount": 0,
@@ -577,7 +577,7 @@
     },
     {
       "name": "Lens",
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/Lens.tsx",
+      "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/ui/Lens.tsx",
       "relativePath": "src/components/ui/Lens.tsx",
       "category": "ui",
       "usageCount": 0,
@@ -607,7 +607,7 @@
     },
     {
       "name": "Mark",
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/Mark.tsx",
+      "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/ui/Mark.tsx",
       "relativePath": "src/components/ui/Mark.tsx",
       "category": "ui",
       "usageCount": 0,
@@ -635,7 +635,7 @@
     },
     {
       "name": "Seed",
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/Seed.tsx",
+      "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/ui/Seed.tsx",
       "relativePath": "src/components/ui/Seed.tsx",
       "category": "ui",
       "usageCount": 0,
@@ -661,7 +661,7 @@
     },
     {
       "name": "Signal",
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/Signal.tsx",
+      "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/ui/Signal.tsx",
       "relativePath": "src/components/ui/Signal.tsx",
       "category": "ui",
       "usageCount": 0,
@@ -695,7 +695,7 @@
     },
     {
       "name": "Valve",
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/Valve.tsx",
+      "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/ui/Valve.tsx",
       "relativePath": "src/components/ui/Valve.tsx",
       "category": "ui",
       "usageCount": 0,
@@ -721,7 +721,7 @@
     },
     {
       "name": "Vessel",
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/Vessel.tsx",
+      "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/ui/Vessel.tsx",
       "relativePath": "src/components/ui/Vessel.tsx",
       "category": "ui",
       "usageCount": 0,
@@ -748,7 +748,7 @@
     },
     {
       "name": "AuroraHeader",
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/legacy/ui/AuroraHeader.tsx",
+      "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/legacy/ui/AuroraHeader.tsx",
       "relativePath": "src/legacy/ui/AuroraHeader.tsx",
       "category": "legacy",
       "usageCount": 0,
@@ -776,7 +776,7 @@
     },
     {
       "name": "M3Alert",
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/legacy/ui/M3Alert.tsx",
+      "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/legacy/ui/M3Alert.tsx",
       "relativePath": "src/legacy/ui/M3Alert.tsx",
       "category": "legacy",
       "usageCount": 0,
@@ -808,7 +808,7 @@
     },
     {
       "name": "M3Checkbox",
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/legacy/ui/M3Checkbox.tsx",
+      "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/legacy/ui/M3Checkbox.tsx",
       "relativePath": "src/legacy/ui/M3Checkbox.tsx",
       "category": "legacy",
       "usageCount": 0,
@@ -837,7 +837,7 @@
     },
     {
       "name": "M3Select",
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/legacy/ui/M3Select.tsx",
+      "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/legacy/ui/M3Select.tsx",
       "relativePath": "src/legacy/ui/M3Select.tsx",
       "category": "legacy",
       "usageCount": 0,
@@ -865,7 +865,7 @@
     },
     {
       "name": "M3TextField",
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/legacy/ui/M3TextField.tsx",
+      "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/legacy/ui/M3TextField.tsx",
       "relativePath": "src/legacy/ui/M3TextField.tsx",
       "category": "legacy",
       "usageCount": 0,
@@ -896,7 +896,7 @@
     },
     {
       "name": "MetricCard",
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/legacy/ui/MetricCard.tsx",
+      "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/legacy/ui/MetricCard.tsx",
       "relativePath": "src/legacy/ui/MetricCard.tsx",
       "category": "legacy",
       "usageCount": 0,

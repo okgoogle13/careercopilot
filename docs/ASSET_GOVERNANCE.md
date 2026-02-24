@@ -344,10 +344,10 @@ If you encounter:
 
 ## References
 
-- [Kerala Rage Design System Canon](file:///Users/okgoogle13/Desktop/careercopilot/docs/design/KERALA_RAGE_DESIGN_SYSTEM_CANON.md)
-- [Asset Manifest JSON](file:///Users/okgoogle13/Desktop/careercopilot/frontend/public/assets/kerala-rage-kr-solidarity-manifest.json)
-- [Asset Registry Source](file:///Users/okgoogle13/Desktop/careercopilot/frontend/src/lib/krSolidarityAssets.ts)
-- [Runtime Guards Source](file:///Users/okgoogle13/Desktop/careercopilot/frontend/src/utils/assetGuards.ts)
+- [Kerala Rage Design System Canon](file:///Users/okgoogle13/Projects/careercopilot/docs/design/KERALA_RAGE_DESIGN_SYSTEM_CANON.md)
+- [Asset Manifest JSON](file:///Users/okgoogle13/Projects/careercopilot/frontend/public/assets/kerala-rage-kr-solidarity-manifest.json)
+- [Asset Registry Source](file:///Users/okgoogle13/Projects/careercopilot/frontend/src/lib/krSolidarityAssets.ts)
+- [Runtime Guards Source](file:///Users/okgoogle13/Projects/careercopilot/frontend/src/utils/assetGuards.ts)
 
 ---
 

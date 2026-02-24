@@ -3,7 +3,7 @@ import re
 import yaml
 from pathlib import Path
 
-SKILLS_DIR = Path("/Users/okgoogle13/Desktop/careercopilot/.claude/skills")
+SKILLS_DIR = Path("/Users/okgoogle13/Projects/careercopilot/.claude/skills")
 
 def get_frontmatter(content):
     if content.startswith("---"):

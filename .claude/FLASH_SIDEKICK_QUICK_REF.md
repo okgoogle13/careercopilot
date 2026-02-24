@@ -125,8 +125,8 @@ rm ~/Library/Logs/Claude/mcp.log
 
 # Test flash-sidekick
 echo '{"jsonrpc":"2.0","method":"tools/list","id":1}' | \
-  /Users/okgoogle13/Desktop/careercopilot/.venv/bin/python3 \
-  /Users/okgoogle13/Desktop/careercopilot/servers/flash_sidekick.py
+  /Users/okgoogle13/Projects/careercopilot/.venv/bin/python3 \
+  /Users/okgoogle13/Projects/careercopilot/servers/flash_sidekick.py
 ```
 
 ---

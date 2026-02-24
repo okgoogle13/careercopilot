@@ -1,45 +1,45 @@
 # Context Setup & Task Brief for Claude Desktop
 
 ## Project Overview
-You are working on **Career Copilot**, a full-stack application for career management and job applications. The project is located at `/Users/okgoogle13/Desktop/careercopilot`.
+You are working on **Career Copilot**, a full-stack application for career management and job applications. The project is located at `/Users/okgoogle13/Projects/careercopilot`.
 
 ## Step 1: Required Reading (Use `read_text_file` tool)
 
 Before proceeding, read these files to understand project standards and current state:
 
 ### Core Documentation
-1. **`/Users/okgoogle13/Desktop/careercopilot/docs/AI_RULES.md`**
+1. **`/Users/okgoogle13/Projects/careercopilot/docs/AI_RULES.md`**
    - Mandatory rules for AI agents
    - Folder structure, naming conventions, component architecture
    - File placement guidelines
 
-2. **`/Users/okgoogle13/Desktop/careercopilot/docs/CONTRIBUTING.md`**
+2. **`/Users/okgoogle13/Projects/careercopilot/docs/CONTRIBUTING.md`**
    - Developer guidelines and best practices
    - Code style and testing procedures
 
-3. **`/Users/okgoogle13/Desktop/careercopilot/docs/CURRENT_STATUS.md`**
+3. **`/Users/okgoogle13/Projects/careercopilot/docs/CURRENT_STATUS.md`**
    - Current phase and progress metrics
    - Recent changes and blockers
    - Next priorities
 
-4. **`/Users/okgoogle13/Desktop/careercopilot/docs/project/active/MASTER_MIGRATION_PLAN_v2.md`**
+4. **`/Users/okgoogle13/Projects/careercopilot/docs/project/active/MASTER_MIGRATION_PLAN_v2.md`**
    - Overall project roadmap
    - Phase breakdown and milestones
 
-5. **`/Users/okgoogle13/Desktop/careercopilot/docs/project/active/DEPLOYMENT_READY.md`**
+5. **`/Users/okgoogle13/Projects/careercopilot/docs/project/active/DEPLOYMENT_READY.md`**
    - Pre-launch checklist
    - Production readiness criteria
 
 ### Current Inventory & Tokens
-6. **`/Users/okgoogle13/Desktop/careercopilot/frontend/component-inventory.json`**
+6. **`/Users/okgoogle13/Projects/careercopilot/frontend/component-inventory.json`**
    - **CRITICAL**: This is the source of truth for component migration status
    - Contains: migrationSummary, kr-solidarityAdoption, component details
    - Schema: migrated/mixed/not_migrated/unknown + usageCount + design token adoption
 
-7. **`/Users/okgoogle13/Desktop/careercopilot/frontend/src/theme/tokens.json`**
+7. **`/Users/okgoogle13/Projects/careercopilot/frontend/src/theme/tokens.json`**
    - Canonical kerala-rage kr-solidarity design tokens
 
-8. **`/Users/okgoogle13/Desktop/careercopilot/frontend/src/theme/kerala-rage.css`**
+8. **`/Users/okgoogle13/Projects/careercopilot/frontend/src/theme/kerala-rage.css`**
    - kerala-rage kr-solidarity CSS variables and mode system
 
 ## Step 2: Acknowledge Context
@@ -129,7 +129,7 @@ The orchestrator should produce:
 
 ## MCP Tools Available
 
-1. **filesystem** - Read/write files in `/Users/okgoogle13/Desktop/careercopilot`
+1. **filesystem** - Read/write files in `/Users/okgoogle13/Projects/careercopilot`
 2. **flashsidekick** - AI analysis (auto-loads `AI_RULES.md`)
 3. **github** - Repository operations
 4. **playwright** - Browser automation

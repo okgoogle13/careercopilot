@@ -81,7 +81,7 @@ The skill uses Claude's vision capabilities to:
 
 **Key Test**: Can a first-time user understand the action within 2 seconds?
 
-_See [DOC-006 Voice Tier System](file:///Users/okgoogle13/Desktop/careercopilot/docs/archive/atomic-v2/DOC-006_Voice_and_Microcopy.md) for voice guidelines._
+_See [DOC-006 Voice Tier System](file:///Users/okgoogle13/Projects/careercopilot/docs/archive/atomic-v2/DOC-006_Voice_and_Microcopy.md) for voice guidelines._
 
 ## Usage Examples
 

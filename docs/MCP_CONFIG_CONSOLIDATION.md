@@ -14,7 +14,7 @@
 
 **Project Symlink** (for convenience):
 ```
-/Users/okgoogle13/Desktop/careercopilot/mcp_config.json → ~/.gemini/antigravity/mcp_config.json
+/Users/okgoogle13/Projects/careercopilot/mcp_config.json → ~/.gemini/antigravity/mcp_config.json
 ```
 
 ---
@@ -23,7 +23,7 @@
 
 Previously, there were **two separate MCP configurations**:
 
-1. ❌ `/Users/okgoogle13/Desktop/careercopilot/claude_desktop_config.json` (Claude Desktop)
+1. ❌ `/Users/okgoogle13/Projects/careercopilot/claude_desktop_config.json` (Claude Desktop)
 2. ✅ `/Users/okgoogle13/.gemini/antigravity/mcp_config.json` (Antigravity)
 
 This caused:
@@ -77,7 +77,7 @@ All servers are configured in `/Users/okgoogle13/.gemini/antigravity/mcp_config.
 code ~/.gemini/antigravity/mcp_config.json
 
 # Or use the project symlink
-code /Users/okgoogle13/Desktop/careercopilot/mcp_config.json
+code /Users/okgoogle13/Projects/careercopilot/mcp_config.json
 ```
 
 **Restart Antigravity** to apply changes (no restart needed for live config updates in most cases).
@@ -109,7 +109,7 @@ code /Users/okgoogle13/Desktop/careercopilot/mcp_config.json
 3. **Verify**:
    ```bash
    # Check symlink is intact
-   ls -la /Users/okgoogle13/Desktop/careercopilot/mcp_config.json
+   ls -la /Users/okgoogle13/Projects/careercopilot/mcp_config.json
    
    # Validate JSON
    cat ~/.gemini/antigravity/mcp_config.json | python3 -m json.tool
@@ -121,7 +121,7 @@ code /Users/okgoogle13/Desktop/careercopilot/mcp_config.json
 
 The old Claude Desktop config has been backed up:
 ```
-/Users/okgoogle13/Desktop/careercopilot/claude_desktop_config.json.backup
+/Users/okgoogle13/Projects/careercopilot/claude_desktop_config.json.backup
 ```
 
 You can safely delete this after verifying the consolidated config works.
@@ -165,7 +165,7 @@ source ~/.zshrc
 
 2. **Verify server path**:
    ```bash
-   ls -la /Users/okgoogle13/Desktop/careercopilot/servers/flash_sidekick.py
+   ls -la /Users/okgoogle13/Projects/careercopilot/servers/flash_sidekick.py
    ```
 
 3. **Check environment variables**:
@@ -190,7 +190,7 @@ If you accidentally edit the wrong file:
 
 2. **Verify symlink**:
    ```bash
-   ls -la /Users/okgoogle13/Desktop/careercopilot/mcp_config.json
+   ls -la /Users/okgoogle13/Projects/careercopilot/mcp_config.json
    # Should show: mcp_config.json -> /Users/okgoogle13/.gemini/antigravity/mcp_config.json
    ```
 

@@ -12,7 +12,7 @@ interface LayeredHeroProps {
 }
 
 const DEFAULT_M3_BEZIER = 'cubic-bezier(0.34, 1.56, 0.64, 1)';
-const BASE_MATTE = '#1A1714';
+const BASE_MATTE = 'var(--sys-color-charcoalBackground-base)';
 
 export const LayeredHero: React.FC<LayeredHeroProps> = ({
   layers,
@@ -118,8 +118,11 @@ export const LayeredHero: React.FC<LayeredHeroProps> = ({
         style={typographyStyle}
       >
         <h1
-          className="text-6xl md:text-8xl font-bold text-white mb-4"
+          className={`text-6xl md:text-8xl font-bold mb-4 leading-tight ${
+            (typography as any).font_family === 'nabla' ? 'font-nabla' : 'font-proclamation'
+          }`}
           style={{
+            color: (typography as any).font_family === 'nabla' ? 'inherit' : 'var(--sys-color-stencilYellow-base)',
             textShadow: '0 4px 16px rgba(0, 0, 0, 0.8)',
             transform: animation?.scroll_behavior === 'scale_expansion' 
               ? `scale(${1 + scrollProgress * 0.2})` 
@@ -129,8 +132,9 @@ export const LayeredHero: React.FC<LayeredHeroProps> = ({
           {typography.headline}
         </h1>
         <p
-          className="text-xl md:text-2xl text-white/90"
+          className="text-xl md:text-2xl font-body leading-relaxed max-w-2xl"
           style={{
+            color: 'var(--sys-color-worker-ash-base)',
             textShadow: '0 2px 8px rgba(0, 0, 0, 0.6)',
           }}
         >

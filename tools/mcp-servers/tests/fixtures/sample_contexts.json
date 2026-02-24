@@ -5,7 +5,7 @@
     "stages_completed": ["wireframe-annotator"],
     "shared_context": {
       "project_name": "careercopilot",
-      "design_tokens_path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/design/tokens/tokens.json",
+      "design_tokens_path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/design/tokens/tokens.json",
       "target_component": "LoginCard"
     },
     "stage_outputs": {
@@ -28,7 +28,7 @@
     "stages_completed": ["wireframe-annotator", "m3-expressive-ui-evaluator"],
     "shared_context": {
       "project_name": "careercopilot",
-      "design_tokens_path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/design/tokens/tokens.json",
+      "design_tokens_path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/design/tokens/tokens.json",
       "design_brief": "/tmp/design-brief-login.md",
       "target_component": "AuthenticationFlow"
     },
@@ -57,7 +57,7 @@
     "stages_completed": [],
     "shared_context": {
       "project_name": "careercopilot",
-      "design_tokens_path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/design/tokens/tokens.json",
+      "design_tokens_path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/design/tokens/tokens.json",
       "mode": "solidarity"
     },
     "stage_outputs": {},

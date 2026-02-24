@@ -156,6 +156,7 @@ const config: Config = {
         annotation: (getValue('typography.fontFamily.annotation') || '')
           .replace(/'/g, '')
           .split(', '),
+        nabla: (getValue('typography.fontFamily.colorAccent') || '').replace(/'/g, '').split(', '),
       },
 
       fontSize: {

@@ -182,7 +182,7 @@ tail -f /tmp/mcp-design-system-sidekick.log
 grep "customInstructions" ~/.claude/claude_desktop_config.json
 
 # Claude Code
-grep "customInstructions" /Users/okgoogle13/Desktop/careercopilot/.claude/settings.local.json
+grep "customInstructions" /Users/okgoogle13/Projects/careercopilot/.claude/settings.local.json
 ```
 
 ### Check Server Registration

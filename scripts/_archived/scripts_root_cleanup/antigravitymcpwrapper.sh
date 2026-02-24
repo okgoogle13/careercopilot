@@ -4,7 +4,7 @@
 
 set -euo pipefail
 
-WORKSPACE_ROOT="/Users/okgoogle13/Desktop/careercopilot"
+WORKSPACE_ROOT="/Users/okgoogle13/Projects/careercopilot"
 CONFIG_FILE="$WORKSPACE_ROOT/.antigravity/mcp.json"
 CLAUDE_DESKTOP_CONFIG="$HOME/Library/Application Support/Claude/claude_desktop_config.json"
 
