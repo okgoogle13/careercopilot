@@ -1,6 +1,6 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useMemo } from 'react';
 import type { ResolvedLayer } from '../../utils/heroComposer';
-import type { Typography, AnimationProfile, LayerType } from '../../design/hero/heroTypes';
+import type { Typography, AnimationProfile, LayerType, ColorBleedConfig, KineticLayerConfig } from '../../design/hero/heroTypes';
 import { calculatePressure } from '../../utils/typographyPressure';
 
 interface LayeredHeroProps {
@@ -9,10 +9,20 @@ interface LayeredHeroProps {
   animation?: AnimationProfile;
   zIndexMap?: Record<LayerType, number>;
   className?: string;
+  colorBleed?: ColorBleedConfig;
+  kinetic?: KineticLayerConfig;
 }
 
 const DEFAULT_M3_BEZIER = 'cubic-bezier(0.34, 1.56, 0.64, 1)';
 const BASE_MATTE = 'var(--sys-color-charcoalBackground-base)';
+
+/** Map substrate semantic weight to CSS color variable for color bleed */
+const BLEED_COLOR_MAP: Record<string, string> = {
+  'grounded-grit': 'var(--sys-color-solidaritySmokeOrange-steps-3)',
+  'industrial-decay': 'var(--sys-color-solidarityRed-steps-4)',
+  'heritage-urban': 'var(--sys-color-stencilYellow-steps-3)',
+  'futuristic-contemplative': 'var(--sys-color-labWrenMetalBlue-steps-3)',
+};
 
 export const LayeredHero: React.FC<LayeredHeroProps> = ({
   layers,
@@ -20,9 +30,23 @@ export const LayeredHero: React.FC<LayeredHeroProps> = ({
   animation,
   zIndexMap,
   className = '',
+  colorBleed,
+  kinetic,
 }) => {
   const [scrollProgress, setScrollProgress] = useState(0);
   const heroRef = useRef<HTMLDivElement>(null);
+
+  // Resolve color bleed CSS variable from substrate layer semantic weight
+  const bleedStyle = useMemo(() => {
+    if (!colorBleed?.enabled) return {};
+    const sourceLayer = layers.find(l => l.type === colorBleed.source_layer);
+    const semanticWeight = (sourceLayer as any)?.semanticWeight;
+    const bleedColor = BLEED_COLOR_MAP[semanticWeight] ?? 'var(--sys-color-solidarityRed-steps-4)';
+    return {
+      '--bleed-color': bleedColor,
+      '--bleed-opacity': String(colorBleed.opacity),
+    } as React.CSSProperties;
+  }, [colorBleed, layers]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -71,28 +95,30 @@ export const LayeredHero: React.FC<LayeredHeroProps> = ({
   return (
     <div
       ref={heroRef}
-      className={`relative w-full h-screen overflow-hidden ${className}`}
-      style={{ backgroundColor: BASE_MATTE }}
+      className={`relative w-full h-screen overflow-hidden ${colorBleed?.enabled ? 'hero-color-bleed' : ''} ${className}`}
+      style={{ backgroundColor: BASE_MATTE, ...bleedStyle }}
     >
       {/* Render layers */}
       {layers.map((layer, index) => {
         const zIndex = zIndexMap ? (zIndexMap[layer.type] || layer.zIndex) : layer.zIndex;
-        
-        // Calculate parallax if enabled
+
+        // Calculate parallax offset — kinetic layers move at multiplied speed
+        const isKineticTarget = kinetic?.enabled && layer.type === 'atmospheric';
+        const speedMultiplier = isKineticTarget ? (kinetic.speed_multiplier ?? 1) : 1;
         const parallaxOffset = (animation?.parallax && layer.type !== 'substrate')
-          ? (index * 50 * scrollProgress)
+          ? (index * 50 * scrollProgress * speedMultiplier)
           : 0;
 
         return (
           <div
             key={`layer-${index}`}
-            className="absolute inset-0"
+            className={`absolute inset-0 ${isKineticTarget ? 'kinetic-layer' : ''}`}
             style={{
               zIndex,
               opacity: layer.opacity,
               mixBlendMode: layer.blendMode as any,
               transform: `translateY(${parallaxOffset}px)`,
-              transition: `transform 100ms linear`,
+              transition: isKineticTarget ? 'transform 80ms linear' : 'transform 100ms linear',
             }}
           >
             <img
@@ -114,7 +140,7 @@ export const LayeredHero: React.FC<LayeredHeroProps> = ({
 
       {/* Typography overlay */}
       <div
-        className="absolute inset-0 flex flex-col items-center justify-center z-50 text-center px-4"
+        className="hero-typography absolute inset-0 flex flex-col items-center justify-center z-50 text-center px-4"
         style={typographyStyle}
       >
         <h1

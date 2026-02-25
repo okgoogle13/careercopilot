@@ -22,7 +22,7 @@ This skill validates components against M3 Expressive standards, which extend Ma
 
 | Principle      | M3 Baseline                   | M3 Expressive                                                       |
 | -------------- | ----------------------------- | ------------------------------------------------------------------- |
-| **Typography** | Clean, professional (Roboto)  | Variable fonts, extreme contrasts (Sora, Plus Jakarta Sans 300-900) |
+| **Typography** | Clean, professional (Roboto)  | Solidarity Stack, 9× contrasts (Fraunces, Work Sans) |
 | **Color**      | Semantic tokens, neutral      | Vibrant semantic tokens, high saturation (40-80%)                   |
 | **Motion**     | Efficient (250-300ms, linear) | Springy, playful (250-400ms, cubic-bezier overshoot)                |
 | **Layout**     | Grid-aligned, mechanical      | [DEPRECATED_STYLE] asymmetry, intentional "imperfection"                       |
@@ -56,19 +56,20 @@ Use this skill when you need to:
 
 ### 1. Typography Audit
 
-**Pass**: Distinctive variable fonts (Sora, Poppins, Plus Jakarta Sans) with extreme weight contrasts (3x+ ratio: 300-900). Optical sizing enabled. Clear hierarchy.
+**Pass**: Distinctive Solidarity stacks (Fraunces, Work Sans, Libre Bodoni) with extreme weight contrasts (9× ratio: 100-900). Optical sizing enabled. Clear hierarchy. Decorative Nabla glyphs used as occasional icons/flourishes.
 
-**Needs Refinement**: Correct fonts but timid contrasts (1.25x ratio) or hierarchy unclear.
+**Needs Refinement**: Correct fonts but timid contrasts (1.25x ratio) or hierarchy unclear. Nabla used as a primary text font.
 
-**Fail**: Generic fonts (Inter, Roboto, Arial alone) or undefined hierarchy.
+**Fail**: Generic fonts (Inter, Roboto, Arial alone), generic M3 Expressive fonts (Sora, Poppins), or undefined hierarchy.
 
 **Specifics to Check:**
 
-- Font family: Sora/Poppins/Plus Jakarta Sans Variable (not Inter/Roboto)
-- Weight contrast: 3x+ ratio (100 vs 900, not 400 vs 500)
-- Size contrast: 3x+ ratio (57px vs 12px, not 24px vs 16px)
+- Font family: Fraunces/Work Sans/Libre Bodoni (not Sora/Poppins/Inter/Roboto)
+- Nabla Usage: **Decorative, icon-scale glyphs only**. NEVER primary text.
+- Weight contrast: 9× ratio (100 vs 900, not 400 vs 700)
+- Size contrast: 6× ratio (72px vs 12px)
 - Optical sizing: Enabled (font-optical-sizing: auto)
-- Hierarchy: Display → Headline → Body → Label clear
+- Hierarchy: Display (Fraunces) → Proclamation (Bodoni) → Body (Work Sans) clear
 
 ### 2. Color Audit
 
@@ -80,11 +81,11 @@ Use this skill when you need to:
 
 **M3 Expressive Specific Checks:**
 
-- ✅ Primary token uses vibrant tone (not baseline)
-- ✅ Secondary token uses vibrant tone (not baseline)
-- ✅ Tertiary token uses vibrant tone (not baseline)
+- ✅ Primary / Step 0 background (#0F0F0F) used
+- ✅ Solidarity Red / Ink Gold accents used
 - ✅ Saturation 40-80% (vibrant, not muted)
 - ❌ No purple gradients (#7C4DFF → #9C27B0)
+- ❌ No WHITE backgrounds (#FFFFFF)
 - ❌ No generic Material Blue (#2196F3)
 - ✅ Tonal variants have purpose (on-surface for text, container for backgrounds)
 - ✅ Dark mode uses vibrant tokens, not desaturated versions
@@ -205,8 +206,9 @@ Structured JSON output for integration with compliance dashboards:
         "findings": "Plus Jakarta Sans Variable, weight 600, distinctive personality",
         "m3_expressive_assessment": "Excellent - uses vibrant variable font with extreme weight contrast",
         "specifics": {
-          "font_family": "Plus Jakarta Sans Variable",
-          "weight_applied": 600,
+          "font_family": "Fraunces Variable / Work Sans Variable",
+          "nabla_usage": "decorative_icon_only",
+          "weight_applied": 900,
           "hierarchy_clarity": "clear",
           "distinctiveness": "high",
           "generic_font_risk": "none"

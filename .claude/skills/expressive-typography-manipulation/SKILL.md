@@ -35,11 +35,13 @@ This skill implements **three-tier typography system** for M3 Expressive:
 
 | Tier                             | Font                       | Weight Range | Purpose                             |
 | -------------------------------- | -------------------------- | ------------ | ----------------------------------- |
-| **Display (Hero/Emphasis)**      | Sora Variable              | 300-900      | Headlines, key announcements, drama |
-| **Body (Workhorse/Readability)** | Plus Jakarta Sans Variable | 200-800      | Body text, labels, supporting       |
-| **Accent (Flourish/Signal)**     | Poppins Variable           | 100-900      | Alerts, special states, emphasis    |
+| **Display (Hero/Emphasis)**      | Fraunces Variable          | 100-900      | Headlines, visual drama, streetprint |
+| **Proclamation (Editorial)**     | Libre Bodoni               | Extreme      | Declarative statements, interruptions |
+| **Body (Workhorse/Navigation)**  | Work Sans Variable         | 100-900      | Content, labels, navigation         |
+| **Curator (Hand-Signed)**        | Caveat Variable            | 100-900      | Metadata, annotations, human touch  |
+| **Accent (Color Click)**         | Nabla (COLRv1)             | N/A          | **Decorative icon-scale glyphs only**|
 
-Each tier uses **variable fonts** with **extreme weight manipulation** to create M3 Expressive visual drama.
+Each tier uses **variable fonts** or **color fonts** with **extreme weight/palette manipulation** to create visual drama.
 
 ---
 
@@ -49,31 +51,26 @@ Define these CSS Variables to control M3 Expressive typography globally.
 
 ```css
 :root {
-  /* --- M3 Expressive Display (Headlines) --- */
-  --font-display: "Sora Variable", sans-serif;
-  --type-display-weight-light: 300;
+  /* --- Solidarity Display (Fraunces) --- */
+  --font-display: "Fraunces Variable", serif;
+  --type-display-weight-light: 100;
   --type-display-weight-bold: 900;
   --type-display-optical-sizing: auto;
 
-  /* --- M3 Expressive Body (Workhorse/Text) --- */
-  --font-body: "Plus Jakarta Sans Variable", sans-serif;
-  --type-body-weight-light: 200;
+  /* --- Solidarity Workhorse (Work Sans) --- */
+  --font-body: "Work Sans Variable", sans-serif;
+  --type-body-weight-light: 100;
   --type-body-weight-regular: 400;
-  --type-body-weight-bold: 700;
-  --type-body-weight-extra-bold: 800;
-  --type-body-optical-sizing: auto;
+  --type-body-weight-bold: 900;
 
-  /* --- M3 Expressive Accent (Emphasis/States) --- */
-  --font-accent: "Poppins Variable", sans-serif;
-  --type-accent-weight-light: 100;
-  --type-accent-weight-bold: 900;
-  --type-accent-optical-sizing: auto;
+  /* --- Solidarity Accent (Nabla) --- */
+  --font-hero: "Nabla";
+  --font-hero-palette: --nabla-solidarity;
 
-  /* --- M3 Expressive Motion (Shared) --- */
+  /* --- Solidarity Motion (Spring Slam) --- */
   --sys-motion-easing-expressive: cubic-bezier(0.34, 1.56, 0.64, 1);
-  --sys-motion-duration-short: 50ms;
-  --sys-motion-duration-medium: 250ms;
-  --sys-motion-duration-long: 500ms;
+  --sys-motion-duration-short: 150ms;
+  --sys-motion-duration-medium: 300ms;
 }
 ```
 
@@ -398,16 +395,20 @@ When implementing typography in components:
 
 ### Typography Checks
 
-1. **Font Choice** (M3 Expressive Specific)
-   - ❌ FORBIDDEN: Inter, Roboto, Arial, system fonts (alone)
-   - ✅ REQUIRED: Sora (display), Plus Jakarta Sans (body), Poppins (accent)
-   - ✅ REQUIRED: All fonts are variable (.woff2)
+1. **Font Choice** (Solidarity Mode Specific)
+   - ❌ FORBIDDEN: Inter, Roboto, Sora, Poppins, system fonts
+   - ✅ REQUIRED: Work Sans (Body), Fraunces (Display), Libre Bodoni (Proclamation)
+   - ✅ REQUIRED: All fonts are variable (.woff2) or COLRv1 (Nabla)
 
-2. **Weight Ranges** (M3 Expressive Extremes)
-   - Display (Sora): 300 (light) → 900 (bold)
-   - Body (Plus Jakarta Sans): 200 (thin) → 800 (heavy)
-   - Accent (Poppins): 100 (ultra-light) → 900 (ultra-bold)
-   - ✅ Minimum contrast: 3x weight ratio (not 1.25x)
+2. **Weight Ranges** (Solidarity Extremes)
+   - Display (Fraunces): 100 (ultra-thin) → 900 (ultra-bold)
+   - Workhorse (Work Sans): 100 (thin) → 900 (heavy)
+   - ✅ Mandatory ratio: 9× weight ratio for contrast.
+
+3. **Nabla Usage** (Color Font Constraints)
+   - ✅ REQUIRED: Used only as icon-scale decorative glyphs.
+   - ✅ REQUIRED: Layered usage only; never a primary headline font.
+   - ✅ REQUIRED: Must define `@font-palette-values --nabla-solidarity`.
 
 3. **Optical Sizing** (M3 Expressive Critical)
    - ✅ REQUIRED: `font-optical-sizing: auto` on `:root`

@@ -441,6 +441,100 @@
   }
 
   /* ═══════════════════════════════════════════════════════════════════════
+     V3.2 STRATEGIC REPORT COMPOSITIONS — Melbourne Grit + Color Bleed
+     Gap fills: atmospheric glue, substrate variety, contemporary resistance
+     ═══════════════════════════════════════════════════════════════════════ */
+
+  /* Pattern A: The Street Canon — Industrial resistance, high aggression */
+  .hero-street-canon {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-street-canon .hero-typography {
+    font-family: 'Work Sans', sans-serif;
+    font-variation-settings: 'wght' 900, 'wdth' 75;
+    letter-spacing: 0em;
+    text-transform: uppercase;
+    color: var(--sys-color-solidarityRed-base);
+    text-shadow:
+      2px 2px 0px var(--sys-color-inkGold-base),
+      0 0 24px rgba(241, 71, 20, 0.4);
+  }
+
+  /* Pattern B: The Spiritual Anchor — Contemplative, reflective */
+  .hero-spiritual-anchor .hero-typography {
+    font-family: 'Fraunces', serif;
+    font-variation-settings: 'wght' 475, 'wdth' 98, 'SOFT' 50, 'WONK' 1;
+    letter-spacing: 0em;
+    color: var(--sys-color-worker-ash-steps-6);
+    text-shadow: 0 0 32px rgba(72, 218, 139, 0.2);
+  }
+
+  /* Pattern C: Brutalist Intersection — Dual offset, minimal impact */
+  .hero-brutalist-intersection .hero-typography {
+    font-family: 'Libre Bodoni', serif;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--sys-color-stencilYellow-base);
+    text-shadow:
+      2px 2px 0px var(--sys-color-solidarityRed-base),
+      0 4px 16px rgba(0, 0, 0, 0.8);
+  }
+
+  /* Grit overlay treatment classes — atmospheric connective tissue */
+  .grit-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-repeat: repeat;
+    background-size: cover;
+  }
+
+  .grit-overlay--film-grain {
+    mix-blend-mode: screen;
+    opacity: 0.15;
+  }
+
+  .grit-overlay--wet-pavement {
+    mix-blend-mode: screen;
+    opacity: 0.25;
+  }
+
+  .grit-overlay--urban-steam {
+    mix-blend-mode: screen;
+    opacity: 0.12;
+  }
+
+  /* Dynamic color bleed — substrate-to-typography halo effect */
+  .hero-color-bleed {
+    --bleed-color: var(--sys-color-solidarityRed-steps-4);
+    --bleed-opacity: 0.3;
+  }
+
+  .hero-color-bleed .hero-typography {
+    text-shadow:
+      0 0 48px color-mix(in srgb, var(--bleed-color) calc(var(--bleed-opacity) * 100%), transparent),
+      0 4px 16px rgba(0, 0, 0, 0.8);
+  }
+
+  /* Solidarity Bleed glow — urgent modal/hero accent */
+  .solidarity-bleed-glow {
+    box-shadow: 0 0 12px var(--sys-color-solidarityRed-steps-4);
+  }
+
+  /* Ink Offset shadow — screenprint 2D depth */
+  .ink-offset-shadow {
+    box-shadow: 2px 2px 0px var(--sys-color-inkGold-base);
+  }
+
+  /* Kinetic layer — 1.5x scroll speed for motion blur simulation */
+  .kinetic-layer {
+    will-change: transform;
+    transition: transform 80ms linear;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════════
      TYPOGRAPHY UTILITIES - V3.1 PLAYFUL MIXING
      ═══════════════════════════════════════════════════════════════════════ */
 
