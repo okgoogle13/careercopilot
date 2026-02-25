@@ -2,7 +2,7 @@ from typing import Callable, Type, TypeVar, cast
 
 from pydantic import BaseModel
 
-from app.core.genkit_init import get_model
+from app.core.genkit import get_model
 from app.genkit_flows.flow_decorator import create_flow_wrapper
 
 

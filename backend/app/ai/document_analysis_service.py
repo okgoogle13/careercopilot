@@ -15,7 +15,7 @@ from pydantic import BaseModel, Field
 
 from app.core.ai_error_handling import AIError, AIErrorType
 from app.core.config import settings
-from app.core.genkit_init import get_model
+from app.core.genkit import get_model
 from app.core.prompt_service import format_prompt, get_prompt_service
 
 from .base_service import BaseAIService

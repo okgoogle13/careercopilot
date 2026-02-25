@@ -24,7 +24,7 @@ This skill is fully implemented and relies on the following infrastructure:
 {
   "image_path": "frontend/public/assets/kr-solidarity/...png",
   "asset_id": "KR-SOLID-001",
-  "wireframe_ref": "docs/design/annotated-wireframes.md",
+  "wireframe_ref": "docs/design/hifi/consolidated-hifi-wireframes.md",
   "manifest_path": "frontend/public/assets/kerala-rage-kr-solidarity-manifest.json",
   "hero_registry_path": "frontend/public/assets/kr-solidarity-hero-registry.json",
   "target_score": 90

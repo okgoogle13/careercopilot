@@ -9,9 +9,8 @@ Modernized to use async patterns and current Genkit architecture.
 
 from pydantic import BaseModel, Field
 from typing import List, Optional
-from app.genkit_flows.flow_decorator import async_genkit_flow
-from app.core.genkit_init import get_model
-from app.core.ats_gate import ats_gate
+from ai.flows.backend.flow_decorator import async_genkit_flow
+from app.core.genkit import get_model
 from app.core.prompt_service import format_prompt
 from ai.schemas.backend.document_models import CareerProfile, TailoredResumeResult
 import logging
@@ -24,7 +23,6 @@ logger = logging.getLogger(__name__)
     name="optimize_resume",
     output_schema=TailoredResumeResult
 )
-@ats_gate("resume", on_fail="warn")
 async def optimize_resume(
     profile: CareerProfile,
     missing_keywords: List[str],
@@ -47,9 +45,13 @@ async def optimize_resume(
     if not missing_keywords:
         resume_text = profile.raw_resume_text or profile.summary or "Resume content not provided"
         logger.info("No missing keywords to integrate, returning original resume")
-        return OptimizedResume(
-            resume_text=resume_text,
-            keywords_integrated=[]
+        return TailoredResumeResult(
+            tailored_text=resume_text,
+            original_score=0,
+            tailored_score=0,
+            improvements_made=[],
+            keywords_integrated=[],
+            competitive_advantages=[]
         )
 
     keywords_str = ", ".join(missing_keywords)
@@ -74,7 +76,7 @@ async def optimize_resume(
                 "temperature": 0.2,  # Lower temperature for focused, less creative output
                 "response_mime_type": "application/json"
             },
-            output_schema=OptimizedResume
+            output_schema=TailoredResumeResult
         )
 
         # Parse the response
@@ -83,7 +85,11 @@ async def optimize_resume(
     except Exception as e:
         logger.error(f"Resume optimization failed: {str(e)}", exc_info=True)
         # Return original resume summary/raw text on failure
-        return OptimizedResume(
-            resume_text=profile.raw_resume_text or profile.summary or "Optimization failed",
-            keywords_integrated=[]
+        return TailoredResumeResult(
+            tailored_text=profile.raw_resume_text or profile.summary or "Optimization failed",
+            original_score=0,
+            tailored_score=0,
+            improvements_made=[],
+            keywords_integrated=[],
+            competitive_advantages=[]
         )

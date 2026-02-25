@@ -2,7 +2,7 @@ import logging
 import json
 from typing import Optional
 
-from app.core.genkit_init import get_model
+from app.core.genkit import get_model
 from app.genkit_flows.flow_decorator import async_genkit_flow
 from app.schemas.chrome_extension import JobPostingData, JobAnalysisOutput
 

@@ -67,7 +67,7 @@ genkit_flow: Any = getattr(genkit, "flow", _noop_flow) if GENKIT_AVAILABLE else 
 load_dotenv()
 
 # Initialize genkit using centralized initialization
-from app.core.genkit_init import init_genkit
+from app.core.genkit import init_genkit
 init_genkit()
 
 

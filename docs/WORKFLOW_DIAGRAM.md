@@ -133,6 +133,73 @@ Supabase)]
 
 ---
 
+## 3. Ownership Workflow Map
+This map illustrates the "Ownership" of various modules based on Git history and contribution volume. `jonasdougall` appears as the primary architect and frontend owner, while `okgoogle13` maintains a heavy focus on the backend and core business logic.
+
+```mermaid
+graph TD
+    subgraph Core_Contributors [Project Owners]
+        JD[jonasdougall]
+        OK[okgoogle13]
+    end
+
+    subgraph Specialized_Agents [Assisted Maintenance]
+        CL[Claude AI]
+        BOTS[Renovate/Copilot Bots]
+    end
+
+    %% Ownership assignments
+    JD ---|Primary Owner| FE[Frontend / UI]
+    JD ---|Maintainer| DS[Design System / Storybook]
+    JD ---|Architect| AI[Genkit AI Flows]
+    
+    OK ---|Primary Owner| BE[Backend / FastAPI]
+    OK ---|Contributor| FE
+    
+    CL ---|Styling & Tokens| DS
+    BOTS ---|Dependency Updates| ROOT[Monorepo Root]
+
+    style JD fill:#4a90e2,stroke:#fff,color:#fff
+    style OK fill:#50c878,stroke:#fff,color:#fff
+    style CL fill:#ff6b6b,stroke:#fff,color:#fff
+```
+
+---
+
+## 4. Module Dependency Workflow
+This workflow diagrams how data and dependencies flow between the internal packages. The architecture follows a token-driven design system and a decoupled service pattern.
+
+```mermaid
+flowchart LR
+    subgraph Design_Layer [Design & Tokens]
+        DS[Design System] -->|Tokens/Styles| FE
+    end
+
+    subgraph Application_Layer [Client & Edge]
+        FE[React Frontend] <-->|API Calls| BE
+        FE <-->|Cloud Events| FN[Firebase Functions]
+        UI[@careercopilot/ui] -->|Component Library| FE
+    end
+
+    subgraph Service_Layer [Business Logic & AI]
+        BE[Python Backend] -->|Vertex AI| GEN[Genkit Flows]
+        BE -->|Alembic| DB[(PostgreSQL Database)]
+        FN -->|Triggers| DB
+    end
+
+    %% Deployment & Sync
+    ROOT[Root Scripts] -->|Sync| DS
+    ROOT -->|Orchestrate| BE
+    ROOT -->|Deploy| FN
+
+    style FE fill:#61dafb,stroke:#333
+    style BE fill:#ffd43b,stroke:#333
+    style GEN fill:#f39c12,stroke:#333,color:#fff
+    style DS fill:#6c5ce7,stroke:#fff,color:#fff
+```
+
+---
+
 ## Key Components
 
 | Component | File | Responsibility |

@@ -27,7 +27,7 @@ from app.genkit_flows.unified_job_analyzer import (
 from fastapi import APIRouter, HTTPException, status
 from pydantic import BaseModel
 
-from app.core.genkit_init import is_genkit_enabled
+from app.core.genkit import is_genkit_enabled
 
 router = APIRouter()
 

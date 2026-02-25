@@ -7,7 +7,7 @@ from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
 from app.core.database import SessionLocal
-from app.core.genkit_init import get_model
+from app.core.genkit import get_model
 from app.core.prompt_service import format_prompt
 from app.core.secrets import get_user_secret
 from app.genkit_flows.flow_decorator import simple_genkit_flow

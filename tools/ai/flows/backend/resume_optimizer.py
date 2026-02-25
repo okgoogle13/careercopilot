@@ -10,7 +10,7 @@ Modernized to use async patterns and current Genkit architecture.
 from pydantic import BaseModel, Field
 from typing import List, Optional
 from app.genkit_flows.flow_decorator import async_genkit_flow
-from app.core.genkit_init import get_model
+from app.core.genkit import get_model
 import logging
 import json
 

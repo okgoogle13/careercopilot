@@ -1,22 +1,13 @@
+import logging
 import json
-
-from pydantic import BaseModel
-
 from app.core.prompt_service import format_prompt, get_prompt_service
-from app.core.genkit_init import get_model
+from app.core.genkit import get_model
 from app.genkit_flows.flow_decorator import async_genkit_flow
-from ai.schemas.backend.document_models import CareerProfile
+from ai.schemas.backend.document_models import CareerDatabase
 from app.core.monitoring import monitor_performance
+from app.core.ai_response_validation import KSCResponseComplete, STARResponse
 
-
-# ── Output schemas ───────────────────────────────────────────────────────────
-
-class STAR_Response(BaseModel):
-    situation: str
-    task: str
-    action: str
-    result: str
-
+logger = logging.getLogger(__name__)
 
 # ── Detail level constants (loaded from prompt_config.json) ───────────────────
 
@@ -28,30 +19,15 @@ def _get_detail_instruction(level: str = "simple") -> str:
         'Return a JSON object with exactly four string keys: "situation", "task", "action", "result".',
     )
 
-
-# ── Flow ─────────────────────────────────────────────────────────────────────
-
-
-# ... (other imports) ...
-
-@async_genkit_flow(output_schema=STAR_Response)
+@async_genkit_flow(output_schema=STARResponse)
 @monitor_performance("ksc_generator")
 async def generateKscResponse(
-    profile: CareerProfile,
+    profile: CareerDatabase,
     ksc_statement: str,
     detail_level: str = "simple",
-) -> STAR_Response:
+) -> STARResponse:
     """
     Generate a STAR response for a Key Selection Criterion.
-
-    Args:
-        profile:       The user's career profile (CareerProfile model).
-        ksc_statement: The KSC text to respond to.
-        detail_level:  "simple" (default) returns 4 STAR fields.
-                       "full" returns extended analysis.
-
-    Returns:
-        STAR_Response with situation, task, action, result fields.
     """
     prompt = format_prompt(
         "ksc_response",
@@ -67,10 +43,37 @@ async def generateKscResponse(
             "response_mime_type": "application/json",
             "temperature": 0.5,
         },
-        output_schema=STAR_Response,
+        output_schema=STARResponse,
     )
 
-    return await response.output()
+    return response.output
 
+@async_genkit_flow(output_schema=KSCResponseComplete)
+@monitor_performance("ksc_complete_generator")
+async def generateCompleteKscResponse(
+    profile: CareerDatabase,
+    ksc_statement: str,
+    response_length: str = "comprehensive",
+) -> KSCResponseComplete:
+    """
+    Generate a complete KSC response including analysis, experience selection, and STAR.
+    """
+    prompt = format_prompt(
+        "ksc_star_response",
+        ksc_statement=ksc_statement,
+        user_profile=profile.model_dump_json(),
+        focus_achievements="",
+        length_instruction=get_prompt_service().get_length_instruction(response_length),
+    )
 
-# Flow is automatically registered by the @async_genkit_flow decorator
+    model = get_model()
+    response = await model.generate(
+        prompt=prompt,
+        config={
+            "response_mime_type": "application/json",
+            "temperature": 0.6,
+        },
+        output_schema=KSCResponseComplete,
+    )
+
+    return response.output

@@ -2,7 +2,7 @@ import json
 import logging
 from typing import Dict, Any
 
-from app.core.genkit_init import get_model
+from app.core.genkit import get_model
 from app.core.prompt_service import format_prompt
 from app.genkit_flows.flow_decorator import async_genkit_flow
 

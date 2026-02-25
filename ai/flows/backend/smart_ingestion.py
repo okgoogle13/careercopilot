@@ -24,7 +24,7 @@ from app.core.enhanced_ai_error_handling import (
     create_fallback_strategy,
     enhanced_ai_handler,
 )
-from app.core.genkit_init import get_model
+from app.core.genkit import get_model
 from app.genkit_flows.flow_decorator import genkit_flow
 from app.models.asset_library_schema import VoiceProfile
 from app.models.ingestion_schemas import SuggestedTags

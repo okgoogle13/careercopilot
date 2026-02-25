@@ -311,7 +311,7 @@ class AIClientManager:
         """Generate text using the appropriate model and provider"""
 
         # 1. Try Genkit awareness if enabled
-        from app.core.genkit_init import get_model, is_genkit_enabled
+        from app.core.genkit import get_model, is_genkit_enabled
         if is_genkit_enabled():
             model = get_model()
             if model:
