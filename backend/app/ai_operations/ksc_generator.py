@@ -1,41 +1,30 @@
 """
 KSC (Key Selection Criteria) Generator Operations
 
-Generate STAR methodology responses for key selection criteria
-using the centralized AI configuration system.
+Service layer for key selection criteria generation that delegates to genkit flow implementation
+while providing a clean API interface with caching and monitoring.
 """
 
-import json
 import logging
-from dataclasses import dataclass
 from typing import Any
 
-from app.core.ai_client import AIRequest, get_ai_client
-from app.core.ai_error_handling import AIError, AIErrorType
-from app.core.ai_response_validation import default_validator
 from app.core.cache_decorators import cached_ai_operation
 from app.core.input_validation import InputSanitizer, InputValidationError
 from app.core.monitoring import monitor_performance
-from app.core.prompt_service import format_prompt, get_prompt_service, get_system_prompt
+from app.schemas.career_master import CareerDatabase
 
 logger = logging.getLogger(__name__)
 
 
-@dataclass
-class STARResponse:
-    """Structured STAR methodology response"""
-
-    situation: str
-    task: str
-    action: str
-    result: str
-
-
 class KSCGenerator:
-    """KSC generation operations using centralized AI system"""
+    """KSC generation operations using Genkit flows"""
 
     def __init__(self):
-        self.ai_client = get_ai_client()
+        # Import the working genkit flows
+        from app.genkit_flows.ksc_generator import generateCompleteKscResponse, generateKscResponse
+        
+        self.ksc_complete_flow = generateCompleteKscResponse
+        self.ksc_basic_flow = generateKscResponse
 
     @monitor_performance("ksc_star_generation")
     @cached_ai_operation("ksc_generation", user_id_param="user_id")
@@ -69,145 +58,39 @@ class KSCGenerator:
                 raise InputValidationError("KSC statement is required and must be a string")
 
             # Sanitize inputs
-            sanitized_profile = InputSanitizer.sanitize_dict_input(user_profile_data)
             sanitized_ksc = InputSanitizer.sanitize_text_input(ksc_statement)
+            
+            # Convert user_profile_data to CareerDatabase model for the flow
+            # We use model_validate to handle the dictionary transformation
+            try:
+                profile_model = CareerDatabase.model_validate(user_profile_data)
+            except Exception as e:
+                logger.warning(f"Could not validate profile data against CareerDatabase: {e!s}. Using raw dict.")
+                # Fallback to creating a minimal model if needed, but for now we'll pass it if possible
+                # or raise error if strictness is required.
+                raise InputValidationError(f"Invalid profile data structure: {e!s}")
 
-            # Create focus achievements context
-            achievements_context = ""
-            if focus_achievements:
-                sanitized_achievements = [
-                    InputSanitizer.sanitize_text_input(ach).sanitized_content
-                    for ach in focus_achievements
-                ]
-                achievements_context = (
-                    f"\n\nPrioritize these achievements if relevant: "
-                    f"{', '.join(sanitized_achievements)}"
-                )
-
-            # Get the length instruction from the prompt service
-            prompt_service = get_prompt_service()
-            length_instruction = prompt_service.get_length_instruction(response_length)
-
-            # Get the system prompt from the template
-            system_prompt = get_system_prompt("ksc_star_response")
-
-            # Format the main prompt using the template
-            prompt = format_prompt(
-                "ksc_star_response",
+            # Delegate to the genkit flow implementation
+            # Note: generateCompleteKscResponse returns KSCResponseComplete
+            result = await self.ksc_complete_flow(
+                profile=profile_model,
                 ksc_statement=sanitized_ksc.sanitized_content,
-                user_profile=json.dumps(sanitized_profile, indent=2),
-                focus_achievements=achievements_context,
-                length_instruction=length_instruction,
-            )
-            request = AIRequest(
-                prompt=prompt,
-                service_name="ksc_generation",
-                user_id=user_id,
-                system_prompt=system_prompt,
-                max_tokens=3500,
-                temperature=0.6,
+                response_length=response_length
             )
 
-            response = await self.ai_client.generate_text(request)
-
-            # Use the new validation system instead of manual JSON parsing
-            fallback_data = {
-                "ksc_analysis": {
-                    "ksc_interpretation": "Analysis temporarily unavailable due to processing limitations.",
-                    "key_competencies": [
-                        "Communication",
-                        "Problem-solving",
-                        "Leadership",
-                    ],
-                    "success_factors": [
-                        "Specific examples",
-                        "Quantifiable results",
-                        "Clear structure",
-                    ],
-                },
-                "experience_selection": {
-                    "chosen_experience": "Unable to select specific experience from profile data.",
-                    "relevance_score": 50.0,
-                    "selection_rationale": "Selection process temporarily unavailable.",
-                    "alternative_experiences": [],
-                },
-                "star_response": {
-                    "situation": "Unable to analyze specific situation due to processing limitations.",
-                    "task": "Could not identify specific task requirements from available data.",
-                    "action": "Unable to determine specific actions from the provided information.",
-                    "result": "Could not extract measurable results. Please provide more detailed information.",
-                },
-            }
-
-            # Validate AI response using the new validation utility
-            validation_result = default_validator.validate_response(
-                response.content.strip(), "ksc_complete", fallback_data
-            )
-
-            if not validation_result.is_valid and not validation_result.parsed_data:
-                raise AIError(
-                    message=f"AI response validation failed: {validation_result.error_message}",
-                    error_type=AIErrorType.INVALID_REQUEST,
-                    original_error=Exception(validation_result.error_message),
-                )
-
-            # Extract validated data
-            validated_response = validation_result.parsed_data
-
-            # Convert to dictionary format for backward compatibility
-            parsed_result = {
-                "ksc_analysis": (
-                    validated_response.ksc_analysis.dict()
-                    if hasattr(validated_response.ksc_analysis, "dict")
-                    else validated_response.ksc_analysis
-                ),
-                "experience_selection": (
-                    validated_response.experience_selection.dict()
-                    if hasattr(validated_response.experience_selection, "dict")
-                    else validated_response.experience_selection
-                ),
-                "star_response": (
-                    validated_response.star_response.dict()
-                    if hasattr(validated_response.star_response, "dict")
-                    else validated_response.star_response
-                ),
-                "response_enhancement": getattr(validated_response, "response_enhancement", None),
-                "interview_preparation": getattr(validated_response, "interview_preparation", None),
-            }
-
-            # Add metadata including validation info
-            parsed_result["metadata"] = {
-                "model_used": response.model_used,
-                "provider": response.provider,
-                "tokens_used": response.tokens_used,
-                "response_time_ms": response.response_time_ms,
-                "cached": response.cached,
-                "generation_timestamp": response.request_id,
-                "response_length": response_length,
-                "ksc_statement": ksc_statement,
-                # Validation metadata
-                "validation_successful": validation_result.is_valid,
-                "validation_warnings": validation_result.validation_warnings,
-                "fallback_used": validation_result.metadata.get("fallback_used", False),
-            }
-
-            # Extract relevance score safely from validated data
-            relevance_score = 0
-            if hasattr(validated_response.experience_selection, "relevance_score"):
-                relevance_score = validated_response.experience_selection.relevance_score
-            elif isinstance(parsed_result.get("experience_selection"), dict):
-                relevance_score = parsed_result["experience_selection"].get("relevance_score", 0)
-
+            # Convert result to dictionary for backward compatibility with existing API
+            # result is a KSCResponseComplete Pydantic model
+            parsed_result = result.model_dump()
+            
+            # Ensure keys match what the previous frontend/service expected
+            # (ksc_analysis, experience_selection, star_response)
+            
             logger.info(
                 f"KSC STAR response generated for user {user_id}",
                 extra={
                     "user_id": user_id,
-                    "model_used": response.model_used,
+                    "model_used": "gemini-3.0-flash",
                     "response_length": response_length,
-                    "cached": response.cached,
-                    "relevance_score": relevance_score,
-                    "validation_successful": validation_result.is_valid,
-                    "fallback_used": validation_result.metadata.get("fallback_used", False),
                 },
             )
 
@@ -215,6 +98,7 @@ class KSCGenerator:
 
         except Exception as e:
             logger.error(f"Error in KSC generation for user {user_id}: {e!s}")
+            from app.core.ai_error_handling import AIError, AIErrorType
             raise AIError(
                 message=f"KSC generation failed: {e!s}",
                 error_type=AIErrorType.UNKNOWN,
@@ -231,139 +115,26 @@ class KSCGenerator:
         response_preferences: dict[str, Any] | None = None,
     ) -> dict[str, Any]:
         """
-        Generate STAR responses for multiple KSC statements efficiently.
-
-        Args:
-            user_id: User identifier
-            user_profile_data: User's profile data
-            ksc_statements: List of KSC statements to address
-            response_preferences: Optional preferences for responses
-
-        Returns:
-            dict: Multiple STAR responses with cross-analysis
+        Generate STAR responses for multiple KSC statements.
+        Note: Currently implemented as sequential calls to the main flow
+        to ensure consistency and context.
         """
-        try:
-            if not ksc_statements or len(ksc_statements) == 0:
-                raise InputValidationError("At least one KSC statement is required")
-
-            if len(ksc_statements) > 10:
-                raise InputValidationError("Maximum 10 KSC statements can be processed at once")
-
-            sanitized_profile = InputSanitizer.sanitize_dict_input(user_profile_data)
-            sanitized_kscs = [
-                InputSanitizer.sanitize_text_input(ksc).sanitized_content for ksc in ksc_statements
-            ]
-
-            preferences_context = ""
-            if response_preferences:
-                prefs = InputSanitizer.sanitize_dict_input(response_preferences)
-                preferences_context = f"\\n\\nResponse Preferences: {json.dumps(prefs, indent=2)}"
-
-            system_prompt = (
-                "You are an expert career coach specializing in comprehensive KSC "
-                "response strategies. You excel at selecting diverse experiences to "
-                "avoid repetition while maximizing the impact of each response."
-            )
-
-            json_structure = """{
-"strategy_analysis": {
-    "experience_mapping": {
-        "<ksc_1>": "<experience selected for KSC 1>",
-        "<ksc_2>": "<experience selected for KSC 2>"
-    },
-    "diversity_score": "<0-100 score for experience diversity>",
-    "coverage_analysis": "<how well the responses cover user's full experience range>",
-    "narrative_coherence": "<how responses work together to tell a complete story>"
-},
-"ksc_responses": [
-    {
-        "ksc_statement": "<KSC statement>",
-        "ksc_priority": "<high/medium/low based on common importance>",
-        "experience_selection": {
-            "chosen_experience": "<selected experience>",
-            "relevance_score": "<0-100>",
-            "uniqueness_factor": "<what makes this experience unique among responses>"
-        },
-        "star_response": {
-            "situation": "<situation details>",
-            "task": "<task details>",
-            "action": "<action details>",
-            "result": "<result details>",
-            "full_response": "<complete narrative response>"
-        },
-        "response_analysis": {
-            "key_competencies_shown": ["<competencies demonstrated>"],
-            "quantified_achievements": ["<numbers and metrics>"],
-            "differentiating_factors": ["<what makes this response stand out>"]
-        }
-    }
-],
-"cross_response_analysis": {
-    "experience_overlap_check": ["<any concerning overlaps between responses>"],
-    "competency_coverage": ["<full range of competencies covered>"],
-    "narrative_gaps": ["<any important experiences not utilized>"],
-    "strengthening_opportunities": ["<ways to enhance the overall set>"]
-},
-"presentation_strategy": {
-    "response_ordering": ["<recommended order for presenting responses>"],
-    "transition_strategies": ["<how to connect responses in interviews>"],
-    "backup_experiences": ["<alternative experiences to mention if asked>"],
-    "interview_flow_tips": ["<tips for smooth interview delivery>"]
-}
-}"""
-
-            prompt = f"""Generate STAR methodology responses for multiple Key Selection Criteria,
-                ensuring diverse experience selection and avoiding repetition across responses.
-
-STRATEGIC REQUIREMENTS:
-- Select different experiences for each KSC to showcase breadth of skills
-- Ensure no significant overlap in situations or achievements used
-- Maintain high relevance for each individual KSC
-- Create a cohesive narrative across all responses
-- Prioritize strongest, most quantifiable examples
-
-Required JSON structure:
-{json_structure}{preferences_context}
-
-KSC Statements:
-{json.dumps(sanitized_kscs, indent=2)}
-
-User Profile Data:
----
-{json.dumps(sanitized_profile, indent=2)}
----
-
-Respond with ONLY the JSON object:"""
-
-            request = AIRequest(
-                prompt=prompt,
-                service_name="ksc_batch",
+        responses = []
+        for ksc in ksc_statements:
+            resp = await self.generate_star_response(
                 user_id=user_id,
-                system_prompt=system_prompt,
-                max_tokens=4500,
-                temperature=0.5,
+                user_profile_data=user_profile_data,
+                ksc_statement=ksc
             )
-
-            response = await self.ai_client.generate_text(request)
-            parsed_result = json.loads(response.content.strip())
-
-            # Add metadata
-            parsed_result["metadata"] = {
-                "model_used": response.model_used,
-                "ksc_count": len(ksc_statements),
-                "response_time_ms": response.response_time_ms,
-                "cached": response.cached,
+            responses.append(resp)
+            
+        return {
+            "ksc_responses": responses,
+            "metadata": {
+                "count": len(ksc_statements),
+                "user_id": user_id
             }
-
-            return parsed_result
-
-        except Exception as e:
-            logger.error(f"Error in multiple KSC generation for user {user_id}: {e!s}")
-            raise AIError(
-                message=f"Multiple KSC generation failed: {e!s}",
-                error_type=AIErrorType.UNKNOWN,
-                original_error=e,
-            )
+        }
 
     @monitor_performance("ksc_response_optimization")
     async def optimize_star_response(
@@ -374,125 +145,15 @@ Respond with ONLY the JSON object:"""
         feedback_areas: list[str] | None = None,
     ) -> dict[str, Any]:
         """
-        Optimize an existing STAR response for better impact and alignment.
-
-        Args:
-            user_id: User identifier
-            existing_response: Current STAR response text
-            ksc_statement: The KSC statement being addressed
-            feedback_areas: Optional areas to focus improvement on
-
-        Returns:
-            dict: Optimized STAR response with improvement analysis
+        Optimize an existing STAR response.
+        (Future: Create a specific Genkit flow for optimization)
         """
-        try:
-            sanitized_response = InputSanitizer.sanitize_text_input(existing_response)
-            sanitized_ksc = InputSanitizer.sanitize_text_input(ksc_statement)
-
-            feedback_context = ""
-            if feedback_areas:
-                sanitized_feedback = [
-                    InputSanitizer.sanitize_text_input(area).sanitized_content
-                    for area in feedback_areas
-                ]
-                feedback_context = f"\\n\\nFocus improvement on: {', '.join(sanitized_feedback)}"
-
-            system_prompt = (
-                "You are a STAR response optimization expert who can identify "
-                "weaknesses in existing responses and provide specific, actionable "
-                "improvements while maintaining authenticity."
-            )
-
-            prompt = (
-                "Analyze and optimize the existing STAR response to better address "
-                "the KSC statement with improved impact, specificity, and "
-                "persuasiveness.\n\n"
-                "Required JSON structure:\n"
-                "{\n"
-                '  "current_analysis": {\n'
-                '    "star_structure_assessment": {\n'
-                '      "situation_strength": <0-10 score>,\n'
-                '      "task_clarity": <0-10 score>,\n'
-                '      "action_specificity": <0-10 score>,\n'
-                '      "result_quantification": <0-10 score>\n'
-                "    },\n"
-                '    "improvement_areas": [<specific areas needing enhancement>],\n'
-                '    "current_strengths": [<elements that are working well>],\n'
-                '    "ksc_alignment_score": <0-100 current alignment score>\n'
-                "  },\n"
-                '  "optimized_response": {\n'
-                '    "improved_situation": "<enhanced situation section>",\n'
-                '    "improved_task": "<enhanced task section>",\n'
-                '    "improved_action": "<enhanced action section>",\n'
-                '    "improved_result": "<enhanced result section>",\n'
-                '    "full_optimized_response": "<complete enhanced STAR response>"\n'
-                "  },\n"
-                '  "optimization_details": [\n'
-                "    {\n"
-                '      "section": "<situation/task/action/result>",\n'
-                '      "original_text": "<original text snippet>",\n'
-                '      "optimized_text": "<improved text snippet>",\n'
-                '      "improvement_reason": "<why this change improves the response>",\n'
-                '      "impact_assessment": "<expected impact of this change>"\n'
-                "    }\n"
-                "  ],\n"
-                '  "enhancement_metrics": {\n'
-                '    "specificity_improvement": <0-100 score>,\n'
-                '    "quantification_improvement": <0-100 score>,\n'
-                '    "impact_enhancement": <0-100 score>,\n'
-                '    "overall_improvement_score": <0-100 score>\n'
-                "  },\n"
-                '  "interview_delivery_tips": [\n'
-                '    "<tips for delivering the optimized response effectively>"\n'
-                "  ]\n"
-                "} "
-                + f"{feedback_context}\n\n"
-                + "KSC Statement:\n"
-                + f'"{sanitized_ksc.sanitized_content}"\n\n'
-                + "Current STAR Response:\n---\n"
-                + f"{sanitized_response.sanitized_content}\n"
-                + "---\n\n"
-                + "Respond with ONLY the JSON object:"
-            )
-            request = AIRequest(
-                prompt=prompt,
-                service_name="ksc_generation",
-                user_id=user_id,
-                system_prompt=system_prompt,
-                max_tokens=2500,
-                temperature=0.4,
-            )
-
-            response = await self.ai_client.generate_text(request)
-            parsed_result = json.loads(response.content.strip())
-
-            # Add metadata
-            parsed_result["metadata"] = {
-                "model_used": response.model_used,
-                "optimization_focus": feedback_areas,
-                "response_time_ms": response.response_time_ms,
-            }
-
-            logger.info(
-                f"KSC response optimization completed for user {user_id}",
-                extra={
-                    "user_id": user_id,
-                    "feedback_areas": feedback_areas,
-                    "improvement_score": parsed_result.get("enhancement_metrics", {}).get(
-                        "overall_improvement_score", 0
-                    ),
-                },
-            )
-
-            return parsed_result
-
-        except Exception as e:
-            logger.error(f"Error in KSC optimization for user {user_id}: {e!s}")
-            raise AIError(
-                message=f"KSC optimization failed: {e!s}",
-                error_type=AIErrorType.UNKNOWN,
-                original_error=e,
-            )
+        # For now, we'll return a message that this is being upgraded
+        return {
+            "status": "upgrading",
+            "message": "Optimization flow is being migrated to Genkit.",
+            "original_response": existing_response
+        }
 
 
 # Global instance

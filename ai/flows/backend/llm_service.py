@@ -1,6 +1,6 @@
 from typing import Any
 
-from app.core.genkit_init import get_model
+from app.core.genkit import get_model
 from app.core.monitoring import monitor_performance
 from app.genkit_flows.flow_decorator import async_genkit_flow
 from app.schemas.ai import LlmRequest, LlmResponse

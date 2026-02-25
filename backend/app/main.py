@@ -27,7 +27,7 @@ from app.api.endpoints.job_scout import router as job_scout_router
 from app.api.router import api_router
 from app.core.cache_middleware import add_cache_middleware
 from app.core.database import init_database
-from app.core.genkit_init import check_genkit_health, startup_genkit
+from app.core.genkit import check_genkit_health, startup_genkit
 from app.core.loguru_config import configure_loguru, get_logger
 from app.core.monitoring import setup_prometheus_monitoring
 from app.core.secure_config import SecureSettings

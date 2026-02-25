@@ -6,7 +6,7 @@ from typing import Any
 
 from app.core.ai_config import get_ai_config
 from app.core.database import SessionLocal
-from app.core.genkit_init import is_genkit_enabled
+from app.core.genkit import is_genkit_enabled
 from app.core.loguru_config import get_logger
 from app.genkit_flows.llm_service import generate_llm_response
 from app.schemas.ai import LlmRequest, LlmResponse

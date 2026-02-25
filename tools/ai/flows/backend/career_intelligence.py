@@ -3,7 +3,7 @@ import json
 from typing import Any, Dict, Optional, List
 from pydantic import BaseModel, Field
 
-from app.core.genkit_init import get_model
+from app.core.genkit import get_model
 from app.genkit_flows.flow_decorator import async_genkit_flow
 from app.schemas.ai import (
     CareerIntelligenceRequest,

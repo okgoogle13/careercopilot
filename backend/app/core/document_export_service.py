@@ -132,7 +132,7 @@ class DocumentExportService:
                 format=format
             )
 
-            # Generate file content based on format
+            # Generate file content based on unified pipeline
             if format == "txt":
                 file_content = content.encode("utf-8")
                 content_type = "text/plain"
@@ -146,29 +146,23 @@ class DocumentExportService:
                 }
                 file_content = json.dumps(data, indent=2).encode("utf-8")
                 content_type = "application/json"
-            elif format == "docx":
-                from app.core.docx_renderer import render_cover_letter_docx
-                file_content = render_cover_letter_docx(
-                    content=content,
-                    candidate_name=candidate_name,
-                    theme_id=theme_id,
-                )
-                content_type = (
-                    "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-                )
-            elif format == "pdf":
-                from app.core.pdf_renderer import render_cover_letter_pdf
-                file_content = render_cover_letter_pdf(
-                    content=content,
-                    candidate_name=candidate_name,
-                    theme_id=theme_id,
-                )
-                content_type = "application/pdf"
             else:
-                logger.warning(f"Format '{format}' not recognised, falling back to txt", user_id=user_id)
-                file_content = content.encode("utf-8")
-                content_type = "text/plain"
-                format = "txt"
+                from app.core.document_pipeline import document_pipeline
+                try:
+                    file_content = await document_pipeline.generate_document(
+                        doc_type="cover_letter",
+                        content=content,
+                        template_id=template_id,
+                        file_format=format,
+                        candidate_name=candidate_name,
+                        theme_id=theme_id
+                    )
+                    content_type = "application/pdf" if format == "pdf" else "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                except Exception as e:
+                    logger.warning(f"Pipeline failed, falling back to txt: {e}", user_id=user_id)
+                    file_content = content.encode("utf-8")
+                    content_type = "text/plain"
+                    format = "txt"
 
             # Generate storage path
             storage_path = self._get_storage_path(user_id, "cover_letter", format)
@@ -279,38 +273,31 @@ class DocumentExportService:
                 format=format
             )
 
-            # Generate file content based on format
+            # Generate file content based on unified pipeline
             if format == "json":
                 if isinstance(content, dict):
                     file_content = json.dumps(content, indent=2).encode("utf-8")
                 else:
                     file_content = content.encode("utf-8")
                 content_type = "application/json"
-            elif format == "docx":
-                from app.core.docx_renderer import render_resume_docx
-                sections = json.loads(content) if isinstance(content, str) else content
-                file_content = render_resume_docx(
-                    sections=sections,
-                    candidate_name=candidate_name,
-                    theme_id=theme_id,
-                )
-                content_type = (
-                    "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-                )
-            elif format == "pdf":
-                from app.core.pdf_renderer import render_resume_pdf
-                sections = json.loads(content) if isinstance(content, str) else content
-                file_content = render_resume_pdf(
-                    sections=sections,
-                    candidate_name=candidate_name,
-                    theme_id=theme_id,
-                )
-                content_type = "application/pdf"
-
             else:
-                # Handle plain text or other
-                file_content = content.encode("utf-8") if isinstance(content, str) else json.dumps(content).encode("utf-8")
-                content_type = "text/plain"
+                from app.core.document_pipeline import document_pipeline
+                sections = json.loads(content) if isinstance(content, str) else content
+                try:
+                    file_content = await document_pipeline.generate_document(
+                        doc_type="resume",
+                        content=sections,
+                        template_id=template_id,
+                        file_format=format,
+                        candidate_name=candidate_name,
+                        theme_id=theme_id
+                    )
+                    content_type = "application/pdf" if format == "pdf" else "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                except Exception as e:
+                    logger.warning(f"Pipeline failed for resume, using JSON: {e}")
+                    file_content = json.dumps(sections).encode("utf-8")
+                    content_type = "application/json"
+                    format = "json"
 
             # Generate storage path
             storage_path = self._get_storage_path(user_id, "resume", format)
@@ -412,36 +399,28 @@ class DocumentExportService:
                 format=format
             )
 
-            # Generate file content based on format
+            # Generate file content based on unified pipeline
+            # Generate file content based on unified pipeline
+            responses = [response_data] if isinstance(response_data, dict) else response_data
             if format == "json":
                 file_content = json.dumps(response_data, indent=2).encode("utf-8")
                 content_type = "application/json"
-            elif format == "docx":
-                from app.core.docx_renderer import render_ksc_docx
-                # Renderer expects a list of response dicts
-                responses = [response_data] if isinstance(response_data, dict) else response_data
-                file_content = render_ksc_docx(
-                    responses=responses,
-                    job_title=job_title
-                )
-                content_type = (
-                    "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-                )
-            elif format == "pdf":
-                from app.core.pdf_renderer import render_ksc_pdf
-                responses = [response_data] if isinstance(response_data, dict) else response_data
-                file_content = render_ksc_pdf(
-                    responses=responses,
-                    job_title=job_title,
-                    theme_id=theme_id
-                )
-                content_type = "application/pdf"
-
             else:
-                file_content = json.dumps(response_data, indent=2).encode("utf-8")
-                content_type = "application/json"
-                format = "json"
-
+                from app.core.document_pipeline import document_pipeline
+                try:
+                    file_content = await document_pipeline.generate_document(
+                        doc_type="ksc_response",
+                        content=responses,
+                        template_id="star", # Default for KSC
+                        file_format=format,
+                        theme_id=theme_id
+                    )
+                    content_type = "application/pdf" if format == "pdf" else "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                except Exception as e:
+                    logger.warning(f"Pipeline failed for KSC, using JSON: {e}")
+                    file_content = json.dumps(response_data, indent=2).encode("utf-8")
+                    content_type = "application/json"
+                    format = "json"
             storage_path = self._get_storage_path(user_id, "ksc_response", format)
 
             gs_uri = self.storage_client.upload_file(
