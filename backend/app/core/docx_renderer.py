@@ -9,6 +9,7 @@ from typing import Any, Dict, List, Optional
 from docx import Document
 from docx.shared import Pt, RGBColor
 from docx.enum.text import WD_ALIGN_PARAGRAPH
+from app.core.theme_tokens import get_theme_tokens
 
 def render_cover_letter_docx(
     content: str,
@@ -20,16 +21,18 @@ def render_cover_letter_docx(
     """
     doc = Document()
     
-    # Set default font to Calibri (ATS-safe)
+    tokens = get_theme_tokens(theme_id)
+    
+    # Set default font
     style = doc.styles['Normal']
     font = style.font
-    font.name = 'Calibri'
-    font.size = Pt(11)
+    font.name = tokens["font"]["name"]
+    font.size = Pt(tokens["font"]["size_pt"])
 
     # Header
     if candidate_name:
         h = doc.add_heading(candidate_name, level=0)
-        h.alignment = WD_ALIGN_PARAGRAPH.LEFT
+        h.alignment = tokens["alignment"]["heading"]
 
     # Body
     # Split content by newlines to handle paragraphs properly
@@ -37,7 +40,7 @@ def render_cover_letter_docx(
     for p_text in paragraphs:
         if p_text.strip():
             p = doc.add_paragraph(p_text.strip())
-            p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+            p.alignment = tokens["alignment"]["body"]
 
     # Save to buffer
     target_stream = io.BytesIO()
@@ -55,11 +58,13 @@ def render_resume_docx(
     """
     doc = Document()
     
+    tokens = get_theme_tokens(theme_id)
+    
     # Set default font
     style = doc.styles['Normal']
     font = style.font
-    font.name = 'Calibri'
-    font.size = Pt(11)
+    font.name = tokens["font"]["name"]
+    font.size = Pt(tokens["font"]["size_pt"])
 
     # Header
     basics = sections.get("basics", {})
@@ -74,7 +79,7 @@ def render_resume_docx(
     
     if contact_parts:
         p = doc.add_paragraph(" | ".join(contact_parts))
-        p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        p.alignment = tokens["alignment"]["contact"]
 
     # Summary
     if sections.get("summary"):
@@ -133,12 +138,15 @@ def render_ksc_docx(
     """
     doc = Document()
     
+    tokens = get_theme_tokens(theme_id)
+    
     style = doc.styles['Normal']
     font = style.font
-    font.name = 'Calibri'
-    font.size = Pt(11)
+    font.name = tokens["font"]["name"]
+    font.size = Pt(tokens["font"]["size_pt"])
 
-    doc.add_heading(f"Selection Criteria: {job_title}", level=0)
+    h = doc.add_heading(f"Selection Criteria: {job_title}", level=0)
+    h.alignment = tokens["alignment"]["heading"]
 
     for item in responses:
         criterion = item.get("criterion", "Criterion")
