@@ -61,6 +61,21 @@ export interface Typography {
   contrast_mode?: 'extreme' | 'standard' | 'muted';
 }
 
+export interface ColorBleedConfig {
+  enabled: boolean;
+  source_layer: LayerType;
+  extract_mode: 'dominant-shadow' | 'dominant-highlight' | 'average';
+  apply_to: 'typography-halo' | 'border-accent' | 'background-tint';
+  blend_mode: BlendMode;
+  opacity: number;
+}
+
+export interface KineticLayerConfig {
+  enabled: boolean;
+  speed_multiplier: number; // e.g., 1.5x scroll speed
+  direction: 'horizontal' | 'vertical' | 'diagonal';
+}
+
 export interface HeroComposition {
   id: string;
   name: string;
@@ -69,6 +84,8 @@ export interface HeroComposition {
   motion?: AnimationProfile; // Legacy support
   animation?: AnimationProfile;
   z_index_map?: Record<LayerType, number>;
+  color_bleed?: ColorBleedConfig;
+  kinetic?: KineticLayerConfig;
 }
 
 export interface HeroRegistry {

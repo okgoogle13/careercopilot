@@ -19,7 +19,7 @@ metadata:
 
 **Version:** 1.0
 **Purpose:** Design evaluation, wireframe analysis, and high-fidelity mockup generation
-**Design System:** kerala-rage kr-solidarity V3.1
+**Design System:** Kerala Rage — Solidarity Mode (V3.1)
 
 ---
 
@@ -77,12 +77,12 @@ INPUT → ANALYZE → EVALUATE → DESIGN → DELIVER
 
 **A. kerala-rage kr-solidarity V3.1 Compliance (100 pts)**
 
-- ✅ Uses Federation Typography Stack (Curator, Proclamation, Bloom, Field Note, Annotation)
-- ✅ Asymmetric [DEPRECATED_STYLE] shapes (no uniform border-radius)
-- ✅ [DEPRECATED_STYLE] color palette (Wattle Gold, [DEPRECATED_STYLE] Red, kr-leafus Smoke)
-- ✅ Mode-appropriate (kr-dark vs kr-dark)
-- ✅ V3.1 playful mixing
-- ❌ Anti-Slop violations (Inter/Roboto, purple gradients, uniform corners)
+- ✅ Uses Solidarity Typography Stack (Work Sans, Fraunces, Libre Bodoni, JetBrains Mono, Caveat)
+- ✅ Asymmetric "Stone/Slab" shapes (no uniform border-radius)
+- ✅ Solidarity color palette (Step 0 Bg, Solidarity Red, Ink Gold)
+- ✅ Nabla used only as decorative icon-scale glyphs
+- ✅ 9× weight ratio contrast
+- ❌ Anti-Slop violations (Inter/Roboto, white backgrounds, perfect circles)
 
 **B. Accessibility (100 pts)**
 
@@ -104,8 +104,9 @@ INPUT → ANALYZE → EVALUATE → DESIGN → DELIVER
 
 **D. Visual Hierarchy & Typography (100 pts)**
 
-- ✅ Clear typographic scale (Display → Body)
-- ✅ Proper use of Federation Typography Stack
+- ✅ Clear typographic scale (6× size ratio)
+- ✅ Proper use of Solidarity Typography Stack
+- ✅ 9× weight ratio enforced (100 vs 900)
 - ✅ Visual weight guides attention
 - ✅ Spacing creates rhythm
 - ✅ Alignment and grid consistency
@@ -129,10 +130,11 @@ INPUT → ANALYZE → EVALUATE → DESIGN → DELIVER
 
 **Step 2: Component Mapping**
 
-- Map wireframe elements to kerala-rage components
-- Apply design tokens automatically
-- Use Federation Typography Stack
-- Apply asymmetric [DEPRECATED_STYLE] shapes
+- Map wireframe elements to Solidarity components
+- Apply design tokens (Step 0-6 system)
+- Use Solidarity Typography Stack
+- Apply asymmetric radii (Stone/Slab/Pebble)
+- Apply Nabla as layered glyph only
 
 **Step 3: Layout Construction**
 
@@ -234,16 +236,17 @@ background: var(--nc-asphalt-black-300);
 
 ```css
 /* Wireframe: "large heading" */
-/* kr-dark: */
-font-family: var(--nc-font-bloom);
-font-variation-settings:
-  "SOFT" 100,
-  "WONK" 1,
-  "wght" 800;
+font-family: var(--nc-font-fraunces);
+font-variation-settings: "SOFT" 50, "WONK" 1, "wght" 900;
 
-/* kr-dark: */
-font-family: var(--nc-font-field-note);
-font-weight: 700;
+/* Wireframe: "technical data" */
+font-family: var(--nc-font-mono); /* JetBrains Mono */
+font-weight: 400;
+
+/* Wireframe: "decorative accent" */
+font-family: var(--nc-font-nabla);
+font-palette: --nabla-solidarity;
+font-size: 24px; /* Icon-scale only */
 ```
 
 **Shapes:**
@@ -411,10 +414,13 @@ Before delivering a mockup, verify:
 
 ### V3.1 Typography
 
-- [ ] 5 fonts properly used (Curator, Proclamation, Bloom, Field Note, Annotation)
-- [ ] Cursive ONLY in kr-dark mode hero/annotations
-- [ ] Fraunces uses extreme axes in kr-dark (SOFT=100, WONK=1)
-- [ ] Work Sans full range utilized (100-900 if weight mixing)
+- [ ] uses only Solidarity Typography Stack (no Inter/Roboto/Sora)
+- [ ] Nabla used ONLY as decorative icon-scale glyph
+- [ ] 9× weight ratio enforced (100 vs 900)
+- [ ] 6× size ratio enforced (72px vs 12px)
+- [ ] All shapes are asymmetric (no radius: 50%)
+- [ ] Colors from Step 0-6 palette (Background: #0F0F0F)
+- [ ] NO white backgrounds (#FFFFFF)
 
 ### Accessibility
 

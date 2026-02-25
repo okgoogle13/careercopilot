@@ -34,41 +34,35 @@ Orchestrates the kerala-rage kr-solidarity "Maximum Expressive Playful" typograp
 
 ### 1. Primary "Workhorse" (Body & UI)
 
-**Role**: High-readability, functional backbone.
-**Font**: **Lora Variable** (or _Crimson Pro Variable_ if available).
+**Role**: High-readability, functional backbone for navigation and content.
+**Font**: **Work Sans Variable**.
 **M3 Category**: Baseline.
 **Playfulness Strategy**:
-
-- **Layout-Safe Hover**: Use the **Grade (`GRAD`)** axis for hover states.
-  - _Why?_ Increases visual weight _without_ changing character width. No layout shift.
-  - _Effect_: Text comfortably "swells" when touched.
+- **Grade (`GRAD`)**: Use for layout-safe hover effects (swelling).
+- **Scale Contrast**: Enforce 6× size ratio (12px body vs 72px+ display).
 
 ### 2. Secondary "Expressive" (Display & Headlines)
 
-**Role**: The "kerala-streetprint Voice". Extreme variability and personality.
-**Font**: **Fraunces Variable** (The kerala-rage Crown Jewel).
+**Role**: The "Solidarity Voice". High impact and personality.
+**Font**: **Fraunces Variable** (Hero Headlines) & **Libre Bodoni** (Proclamation).
 **M3 Category**: Emphasized.
 **Playfulness Strategy**:
+- **Fraunces Softness/Wonk**: Animate `SOFT` (0-100) and `WONK` (0-1) for "streetprint" personality.
+- **Bodoni Declarations**: Use for declarative statements and editorial "Interruptions".
+- **Optical Size (`opsz`)**: Mandatory auto-scaling for high-contrast elegance.
 
-- **Softness (`SOFT`)**: Animate from sharp (0) to soft (100) on scroll or mood shift.
-- **Wonk (`WONK`)**: The "kerala-streetprint Hand" axis. Increase `WONK` for "human" irregularity in headers.
-- **Optical Size (`opsz`)**: _Mandatory_. Auto-scale details. Small = legible; Large = high-contrast elegance.
-- **Motion**: Map `wdth` (Width) to scroll position. Headers "breathe" (expand/compress) as they enter the viewport.
+### 3. Tertiary "Accent" (Layered Flourish & Annotations)
 
-### 3. Tertiary "Accent" (Flourish & Special)
-
-**Role**: High-impact, "alive" brand moments.
-**Options**:
-
-- **Option A (kerala-streetprint Hand)**: **Variable Script** (e.g., _Birthstone Bounce_ or _Petit Formal_).
-  - _Effect_: Authentic 19th-century penmanship.
-- **Option B (Cyberpunk)**: **COLRv1 Color Fonts** (e.g., _Nabla_). \* _Effect_: Modern, digital-native flourish.
-  **M3 Category**: Accent/Decor.
-  **Playfulness Strategy**:
-
-* **The "Dramatic Juxtaposition"**: Pair ultra-clean Sans/Serif with unexpected "Wild Cursive" headers.
-* **Palette Switching**: Use CSS `@font-palette-values` to instantly re-theme flourishes from "Sepia/Ink" (Day) to "Neon/Gaslight" (Night).
-* **Depth Animation**: Animate internal COLRv1 axes (like shadow depth or highlight position) on user interaction.
+**Role**: High-impact brand moments and personal touches.
+**Primary Stack**: **Caveat** (Curator/Annotations) & **JetBrains Mono** (Technical).
+**Color Accent**: **Nabla (COLRv1)**.
+- **Usage Rule**: Decorative, **icon-scale color glyphs** only.
+- **Layering Check**: Used VERY OCCASIONALLY as an additional layer for "Hero Moments".
+**M3 Category**: Accent/Decor.
+**Playfulness Strategy**:
+* **The "Hand-Signed"**: Use **Caveat** for metadata/annotations against the strict grid.
+* **Nabla Pulses**: Use CSS `@font-palette-values --nabla-solidarity` for icon-scale flourishes.
+* **Depth Animation**: Animate Nabla's internal axes on interaction.
 
 ---
 
@@ -113,7 +107,7 @@ _Standard boldness shifts break layouts. Grade (`GRAD`) does not._
 
 ```css
 .kerala-rage-button {
-  font-family: "Lora Variable", serif;
+  font-family: "Work Sans Variable", sans-serif;
   font-weight: 500;
   font-variation-settings: "GRAD" 0;
   transition: font-variation-settings 0.3s ease;
@@ -176,9 +170,9 @@ _kerala-streetprint Day -> Cyberpunk Night._
 | Dimension             | Implementation                                                          |
 | --------------------- | ----------------------------------------------------------------------- |
 | **Scholarly Rigor**   | `Fraunces`, `WONK: 0`, `SOFT: 0`, `opsz: 144` (Sharp, High Contrast)    |
-| **kerala-streetprint Warmth**  | `Fraunces`, `WONK: 1`, `SOFT: 50`, `opsz: 14` (Soft, Irregular, "Inky") |
-| **Urgent Attention**  | `Lora`, `wght: 800`, `slnt: -10` (Heavy Italic "Shout")                 |
-| **Interactive Pulse** | `GRAD` animation (0 -> 100 -> 0) on success states                      |
+| **Street Truth**      | `Libre Bodoni`, extreme weight/contrast                                |
+| **Melancholy Breath** | `Fraunces`, `WONK: 1`, `SOFT: 50`, `opsz: 14` (Soft, Inky)             |
+| **Interactive Pulse** | `Work Sans`, `GRAD` animation (0 -> 150) on interact                    |
 
 ---
 
@@ -197,21 +191,23 @@ Typography tiers reinforce the voice tier system defined in [DOC-006](file:///Us
 
 | Typography Tier           | Font                      | Voice Tier                      | Copy Style                  |
 | :------------------------ | :------------------------ | :------------------------------ | :-------------------------- |
-| **Workhorse (Lora)**      | Primary body/UI           | Tier 1 (Functional)             | Clear, direct labels        |
-| **Expressive (Fraunces)** | Display headers           | Tier 2-3 (Contextual/Character) | Playful, kerala-streetprint          |
-| **Accent (Script/Color)** | Annotations, celebrations | Tier 3 (Character)              | Flourishes, "human" touches |
+| **Workhorse**             | Work Sans                 | Tier 1 (Functional)             | Clear, direct labels        |
+| **Expressive**            | Fraunces / Libre Bodoni   | Tier 2-3 (Contextual/Character) | Playful, Stencilled         |
+| **Accent (Curator)**      | Caveat / Nabla            | Tier 3 (Character)              | Flourishes, icon-glyphs     |
 
-**Rule**: If the typography is Workhorse (Lora/Work Sans), the copy should be Tier 1 (functional). Personality flourishes belong with Expressive typography.
+**Rule**: If the typography is Workhorse (Work Sans), the copy should be Tier 1 (functional). Personality flourishes belong with Expressive typography.
 
 ---
 
 ## Checklist for Implementation
 
-1.  **Load Variable Files**: Ensure `Fraunces[SOFT,WONK,opsz,wght].woff2` and `Lora[wght].woff2` are loaded.
+1.  **Load Variable Files**: Ensure `Fraunces[SOFT,WONK,opsz,wght].woff2` and `WorkSans[wght].woff2` are loaded.
 2.  **Define CSS Tokens**:
     ```css
     --sys-typescale-display-large-font: "Fraunces Variable";
+    --sys-typescale-display-accent: "Nabla"; /* RESTRICTED: Layered icon-scale only */
     --sys-typescale-display-large-variations: "SOFT" 50, "WONK" 1, "wght" 300;
     ```
 3.  **Enable Optical Sizing**: Global CSS `html { font-optical-sizing: auto; }`.
-4.  **Register Palettes**: Define `@font-palette-values` in `global.css`.
+4.  **Register Palettes**: Define `@font-palette-values --nabla-solidarity` in `global.css`.
+5.  **Audit Layering**: Ensure Nabla is never the sole font in a headline; it must complement the Solidarity stack.
