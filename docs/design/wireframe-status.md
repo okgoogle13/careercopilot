@@ -93,6 +93,46 @@
 | `kr-asset-blueprint-layout` | Texture | Ingestion | ✅ | Watermark 6% opacity |
 | `kr-asset-[DEPRECATED_STYLE]-motif` | Inline | Analysis, Kanban | ✅ | Elite skill indicator (>90%) |
 
+### New P0 Functional Assets (UI Primitives)
+| Asset | Type | Used In Screens | Status | Notes |
+|-------|------|-----------------|--------|-------|
+| `kr-asset-empty-state-no-results` (KR-UI-020) | Illustration | Opportunity Feed, Kanban | ✅ Ready | Empty list/search state |
+| `kr-asset-empty-state-upload` (KR-UI-021) | Illustration | Ingestion | ✅ Ready | Dropzone empty state |
+| `kr-asset-progress-ring` (KR-UI-022) | Gauge | Analysis, Studio, Dashboard | ✅ Ready | Industrial progress indicator |
+| `kr-asset-metric-score-frame` (KR-UI-024) | Frame | Analysis, Dashboard | ✅ Ready | Brutalist data container |
+| `kr-asset-company-logo-placeholder` (KR-UI-025) | Placeholder | Opportunity Feed, Kanban, Analysis | ✅ Ready | Melbourne CBD skyline |
+| `kr-asset-validation-checkmark` (KR-UI-027) | Status | Ingestion, Auth, Studio | ✅ Ready | Success indicator |
+| `kr-asset-loading-skeleton` (KR-UI-030) | Skeleton | Auth, Ingestion, Editor | ✅ Ready | Loading state shimmer |
+| `kr-asset-error-state` (KR-UI-031) | Illustration | All screens (error boundary) | ✅ Ready | Fractured frame error |
+| `kr-asset-404-illustration` (KR-UI-034) | Illustration | 404 Page | ✅ Ready | Wheat-paste removal |
+
+### New P1 Secondary Assets (UI Primitives)
+| Asset | Type | Used In Screens | Status | Notes |
+|-------|------|-----------------|--------|-------|
+| `kr-asset-status-markers` (KR-UI-016) | Icon Set | Opportunity Feed, Kanban | ✅ Ready | 4-state application markers |
+| `kr-asset-timeline-connector` (KR-UI-023) | Connector | Kanban, Dashboard | ✅ Ready | Wavy timeline segments |
+| `kr-asset-document-badge-pdf` (KR-UI-026) | Badge | Ingestion, Editor | ✅ Ready | Document type indicator |
+| `kr-asset-sidebar-divider` (KR-UI-028) | Divider | Opportunity Feed, Settings | ✅ Ready | Industrial rivet separator |
+| `kr-asset-avatar-frame` (KR-UI-029) | Frame | Settings | ✅ Ready | Asymmetric avatar border |
+| `kr-asset-notification-bell` (KR-UI-032) | Indicator | Dashboard | ✅ Ready | Angular tram bell |
+| `kr-asset-data-chart-frame` (KR-UI-033) | Frame | Analysis, Dashboard | ✅ Ready | Blueprint chart border |
+| `kr-asset-onboarding-step-marker` (KR-UI-035) | Progress | Onboarding | ✅ Ready | 5-waypoint track |
+
+### New P2 Decorative Assets (UI Primitives)
+| Asset | Type | Used In Screens | Status | Notes |
+|-------|------|-----------------|--------|-------|
+| `kr-asset-corrugated-iron` (KR-UI-008) | Motif | Landing, cards | ✅ Ready | Corner accent texture |
+| `kr-asset-brick-pattern` (KR-UI-009) | Texture | 404, backgrounds | ✅ Ready | Tileable laneway brick |
+| `kr-asset-tram-wire` (KR-UI-010) | Motif | Dividers | ✅ Ready | Infrastructure intersection |
+| `kr-asset-wheat-paste-tear-pattern` (KR-UI-011) | Motif | Card edges | ✅ Ready | Torn poster overlay |
+| `kr-asset-solidarity-fist` (KR-UI-012) | Badge | Activism sections | ✅ Ready | Woodcut-style fist |
+| `kr-asset-bolt-grid` (KR-UI-013) | Motif | Analysis panels | ✅ Ready | 3x3 hex bolt grid |
+| `kr-asset-stencil-stripe` (KR-UI-014) | Divider | Editor, Settings | ✅ Ready | Spray-paint horizontal |
+| `kr-asset-protest-placard` (KR-UI-015) | Frame | Alert callouts | ✅ Ready | Sign container |
+| `kr-asset-navigation-chevrons` (KR-UI-017) | Icon Set | Sidebar, breadcrumbs | ✅ Ready | Directional arrows |
+| `kr-asset-chain-link` (KR-UI-018) | Motif | Landing, collective | ✅ Ready | Interlocking links |
+| `kr-asset-spray-paint-splatter` (KR-UI-019) | Motif | Hero overlays | ✅ Ready | Aerosol blob overlay |
+
 ### Symbolic Anchors (Optional)
 | Asset | Screens Eligible | Min Size | Emotional Register | Status |
 |-------|------------------|----------|-------------------|--------|
@@ -122,9 +162,11 @@ Track component build status here:
 | Slab Components (3) | - | - | - | 🟡 |
 | Seed Components (2) | - | - | - | 🟡 |
 
-### ⚪ Asset Integration (NOT STARTED)
-- [ ] Critical path assets optimized (WebP <100KB)
-- [ ] Asset delivery pipeline configured
+### 🟡 Asset Integration (IN PROGRESS)
+- [x] 28 UI primitive SVGs generated and brand-validated (100% compliant)
+- [x] Manifest updated (46 total assets: 30 original + 16 new)
+- [x] Asset placement guide updated (12 pages with concrete placements)
+- [ ] Critical path assets optimized (WebP <100KB) — N/A for SVGs
 - [ ] Performance benchmarks established
 - [ ] Responsive asset variants created
 

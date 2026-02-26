@@ -51,11 +51,11 @@ if os.getenv("SENTRY_DSN"):
 # --- Config ---
 # --- Config ---
 GEMINI_VISION_CANDIDATES = [
-    # Prioritize 2.5 Pro for complex reasoning on ambiguity (Gallery vs Lab)
-    "models/gemini-3-pro-preview",
-    "models/gemini-3-flash-preview",
+    "models/gemini-2.5-flash",
+    "models/gemini-2.0-flash",
     "models/gemini-2.5-pro",
-    "models/gemini-2.5-flash"
+    "models/gemini-3-pro-preview",
+    "models/gemini-3-flash-preview"
 ]
 
 
@@ -305,85 +305,84 @@ async def catalog_assets_task(args):
     logger.info(f"Found {len(files)} assets to process.")
 
     catalog = {"assets": [], "summary": {"total_assets": len(files)}}
+    semaphore = asyncio.Semaphore(2)  # Limit concurrency to avoid hitting rate limits too hard
 
     async def process_file(filename):
-        file_path = os.path.join(input_dir, filename)
-        logger.info(f"Processing {filename}...")
+        async with semaphore:
+            file_path = os.path.join(input_dir, filename)
+            logger.info(f"Processing {filename}...")
 
-        prompt = f"""
-        Analyze this asset for the Kerala Rage — Solidarity Mode catalog.
+            prompt = f"""
+            Analyze this asset for the Kerala Rage — Solidarity Mode catalog.
 
-        System Context:
-        {design_philosophy}
+            System Context:
+            {design_philosophy}
 
-        Task:
-        1. Identify type (motif, icon, texture, pattern, illustration).
-        2. Determine aesthetic mode:
-           - Screenprint: Bold, high-contrast, street-poster aesthetic with organic shapes
-           - Wheat-paste: Layered, torn-edge, activist poster aesthetic
-           - Technical: Schematic, blueprint, data visualization style
-        3. Suggest a filename following: {{type}}-{{mode}}-{{category}}-{{variant}}.png
-        4. Extract dominant colors and check against Kerala Rage palette:
-           - Solidarity Red (#F14714), Charcoal (#1A1A1A), Activist Smoke Green (#48DA8B)
-           - Signal Green (#48F0E5), Ink Gold (#DAF674), Worker Ash (#DAF6B3)
-        5. Check Kerala Rage compliance:
-           - Dark backgrounds only (no white/light backgrounds)
-           - No crowns, bureaucratic aesthetics, perfect circles
-           - No Aboriginal art imitation
-           - Cultural safety (First Nations solidarity in-situ only)
+            Task:
+            1. Identify type (motif, icon, texture, pattern, illustration).
+            2. Determine aesthetic mode:
+               - Screenprint: Bold, high-contrast, street-poster aesthetic with organic shapes
+               - Wheat-paste: Layered, torn-edge, activist poster aesthetic
+               - Technical: Schematic, blueprint, data visualization style
+            3. Suggest a filename following: {{type}}-{{mode}}-{{category}}-{{variant}}.png
+            4. Extract dominant colors and check against Kerala Rage palette:
+               - Solidarity Red (#F14714), Charcoal (#1A1A1A), Activist Smoke Green (#48DA8B)
+               - Signal Green (#48F0E5), Ink Gold (#DAF674), Worker Ash (#DAF6B3)
+            5. Check Kerala Rage compliance:
+               - Dark backgrounds only (no white/light backgrounds)
+               - No crowns, bureaucratic aesthetics, perfect circles
+               - No Aboriginal art imitation
+               - Cultural safety (First Nations solidarity in-situ only)
 
-        Return ONLY valid JSON (no markdown) with keys: 
-        original_path, suggested_name, mode, category, dimensions, dominant_colors, 
-        kerala_rage_compliance (object with cultural_safety boolean, dark_mode boolean, banned_elements array), 
-        duplicate_of (null if new).
-        """
+            Return ONLY valid JSON (no markdown) with keys: 
+            original_path, suggested_name, mode, category, dimensions, dominant_colors, 
+            kerala_rage_compliance (object with cultural_safety boolean, dark_mode boolean, banned_elements array), 
+            duplicate_of (null if new).
+            """
 
-        # Use existing validate_asset_compliance internal logic or similar
-        # But we need raw generation, validate_asset_compliance returns specific schema.
-        # Let's use _get_vision_model directly similar to validate tool but for this prompt.
+            result_text = None
+            max_retries = 3
+            for attempt in range(max_retries):
+                model = _get_vision_model()
+                if model:
+                    try:
+                        with open(file_path, "rb") as f: img_bytes = f.read()
+                        loop = asyncio.get_event_loop()
+                        def sync_vision():
+                            config = {"response_mime_type": "application/json"}
+                            parts = [prompt, {"mime_type": "image/jpeg", "data": img_bytes}]
+                            resp = model.generate_content(parts, generation_config=config)
+                            return resp.text
+                        result_text = await loop.run_in_executor(executor, sync_vision)
+                        if result_text:
+                            break
+                    except Exception as e:
+                        logger.warning(f"Gemini vision failed (attempt {attempt+1}): {e}")
+                        if "429" in str(e):
+                            await asyncio.sleep(10 * (attempt + 1)) # Backoff
+                        else:
+                            break 
+            
+            if result_text:
+                try:
+                    cleaned_json = result_text.strip()
+                    if cleaned_json.startswith("```json"):
+                        cleaned_json = cleaned_json[7:]
+                    if cleaned_json.startswith("```"):
+                        cleaned_json = cleaned_json.strip("`")
+                    if cleaned_json.endswith("```"):
+                        cleaned_json = cleaned_json[:-3]
 
-        result_text = None
-        model = _get_vision_model()
-        if model:
-            try:
-                with open(file_path, "rb") as f: img_bytes = f.read()
-                loop = asyncio.get_event_loop()
-                def sync_vision():
-                    # Check if model supports system instruction - pass in prompt
-                    config = {"response_mime_type": "application/json"}
-                    # construct parts
-                    parts = [prompt, {"mime_type": "image/jpeg", "data": img_bytes}]
-                    resp = model.generate_content(parts, generation_config=config)
-                    return resp.text
-                result_text = await loop.run_in_executor(executor, sync_vision)
-            except Exception as e:
-                logger.warning(f"Gemini vision failed: {e}")
+                    data = json.loads(cleaned_json)
+                    if isinstance(data, list) and len(data) > 0: data = data[0]
 
-        # Fallback to GH Vision if needed (not implemented full reuse here to save space, but relying on Pro as requested)
-        # If result_text is None, we skip or could implement fallback.
-        # For now, let's assume Pro hits.
-
-        if result_text:
-            try:
-                 # Sanitize if Markdown code blocks are present
-                cleaned_json = result_text.strip()
-                if cleaned_json.startswith("```json"):
-                    cleaned_json = cleaned_json[7:]
-                if cleaned_json.startswith("```"):
-                    cleaned_json = cleaned_json.strip("`")
-                if cleaned_json.endswith("```"):
-                    cleaned_json = cleaned_json[:-3]
-
-                data = json.loads(cleaned_json)
-                if isinstance(data, list) and len(data) > 0: data = data[0]
-
-                if isinstance(data, dict):
-                    data['original_path'] = file_path # keep relative as processed
-                    return data
-            except json.JSONDecodeError:
-                logger.error(f"Failed to decode JSON for {filename}")
-                return None
-        return None
+                    if isinstance(data, dict):
+                        data['original_path'] = file_path 
+                        return data
+                except json.JSONDecodeError:
+                    logger.error(f"Failed to decode JSON for {filename}")
+                    return None
+            return None
 
     results = await asyncio.gather(*[process_file(f) for f in files])
     valid_results = [r for r in results if r]
@@ -391,9 +390,9 @@ async def catalog_assets_task(args):
     catalog["assets"] = valid_results
 
     # Calculate summary
-    catalog["summary"]["screenprint_mode"] = sum(1 for a in valid_results if a.get('mode') == 'screenprint')
-    catalog["summary"]["wheat_paste_mode"] = sum(1 for a in valid_results if a.get('mode') == 'wheat-paste')
-    catalog["summary"]["technical_mode"] = sum(1 for a in valid_results if a.get('mode') == 'technical')
+    catalog["summary"]["screenprint_mode"] = sum(1 for a in valid_results if str(a.get('mode', '')).lower().replace(' ', '-') == 'screenprint')
+    catalog["summary"]["wheat_paste_mode"] = sum(1 for a in valid_results if str(a.get('mode', '')).lower().replace(' ', '-') == 'wheat-paste')
+    catalog["summary"]["technical_mode"] = sum(1 for a in valid_results if str(a.get('mode', '')).lower().replace(' ', '-') == 'technical')
 
     with open(output_file, 'w') as f:
         json.dump(catalog, f, indent=2)
