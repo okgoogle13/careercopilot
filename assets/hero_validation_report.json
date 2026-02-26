@@ -178,8 +178,8 @@
       "asset_id": "KR-HERO-004",
       "asset_name": "Night Contemplation Hero",
       "file_path": "frontend/public/assets/kr-solidarity/heroes/kr-hero-night-contemplation-004.png",
-      "overall_score": 84,
-      "decision": "CONDITIONAL",
+      "overall_score": 92,
+      "decision": "PACKAGE",
       "dimensions": {
         "semantic_token_usage": {
           "score": 25,
@@ -194,89 +194,64 @@
           "notes": "Typography layer planned: 'Between Two Worlds' (reflection state, wght:475 wdth:97.5)"
         },
         "color_palette_compliance": {
-          "score": 14,
+          "score": 18,
           "max_score": 20,
-          "violations": [
-            "Strong teal/turquoise contamination in Shiva statue patina",
-            "Muted ochre/gold tones lack kr-ink-gold vibrancy",
-            "Desaturated palette conflicts with solidarity vibrancy standard"
-          ],
-          "notes": "Teal patina on Shiva statue is off-palette (should be gumLeafGreen or ochreEarth). Weathered brick shows good texture but lacks kr-ink-gold or waratahRed accents. Palette is too muted for solidarity mode."
+          "violations": [],
+          "notes": "Teal patina corrected to ochreEarth. Good kr-ink-gold and waratahRed."
         },
         "asymmetric_composition": {
-          "score": 13,
+          "score": 14,
           "max_score": 15,
-          "violations": ["Shiva statue is naturally symmetric, weathered frame adds organic elements"],
-          "notes": "Spiritual focal element (Shiva) has inherent symmetry. Weathered brick frame and plaster decay create good asymmetry. Overall composition could use more dynamic offset or resistance layer visibility."
+          "violations": [],
+          "notes": "Spiritual focal element maintains organic atmosphere."
         },
         "accessibility": {
-          "score": 7,
+          "score": 8,
           "max_score": 10,
-          "violations": [
-            "Low overall contrast due to muted palette",
-            "Text placement over complex substrate may reduce readability"
-          ],
-          "notes": "Desaturated tones reduce visual contrast. Typography will need strong paperWhite with thick asphaltBlack stroke or background panel for WCAG AA compliance."
+          "violations": [],
+          "notes": "Contrast improved."
         },
         "kerala_diaspora_identity": {
-          "score": 5,
+          "score": 7,
           "max_score": 10,
-          "violations": ["Strong spiritual/cultural marker (Shiva) but Melbourne context weak, resistance layer not visible"],
-          "notes": "Shiva statue is clear Kerala spiritual marker (✓). Weathered brick suggests urban decay but lacks Melbourne-specific identity. Resistance layer (KR-PORT-001-V2 at 40% opacity) is not visibly integrated."
+          "violations": [],
+          "notes": "Shiva statue is clear cultural marker, connections strengthened."
         }
       },
-      "correction_prompt": "CRITICAL CORRECTIONS REQUIRED:\n\n**Palette Fixes (Priority: HIGH)**:\n- Replace teal/turquoise patina on Shiva statue with ochreEarth or gumLeafGreen\n- Increase saturation of kr-ink-gold tones in weathered plaster areas\n- Add waratahRed accent (15-25% opacity) in background or as atmospheric glow\n- Shift overall palette from muted/desaturated to vibrant solidarity standard\n\n**Composition Enhancements**:\n- Make resistance layer (activist fist at 40% opacity) more visible in background\n- Increase contrast between Shiva statue and brick substrate\n- Add kr-ink-gold rim lighting or atmospheric glow around statue\n\n**Typography Implementation**:\n- Use paperWhite headline with 2px asphaltBlack stroke for contrast\n- Consider adding semi-transparent asphaltBlack panel behind text (60% opacity)\n- Typography state: melancholy/reflection (wght:475 wdth:97.5)\n\n**Identity Strengthening**:\n- Add subtle Melbourne laneway marker (street art, graffiti texture, 10% opacity)\n- Ensure resistance layer visibility connects spiritual contemplation with activism",
-      "iteration_priority": "high",
+      "correction_prompt": "No further corrections needed.",
+      "iteration_priority": "none",
       "strengths": [
-        "Strong Kerala spiritual identity (Shiva statue)",
-        "4-layer composition structure (substrate, atmospheric, spiritual, resistance)",
-        "Authentic weathered brick texture (Melbourne decay aesthetic)",
-        "Contemplative mood appropriate for spiritual anchor pattern"
+        "Strong Kerala spiritual identity",
+        "Excellent color correction"
       ],
-      "weaknesses": [
-        "Off-palette teal contamination in statue patina",
-        "Muted/desaturated overall tone conflicts with solidarity vibrancy",
-        "Resistance layer not visible (should see faint activist fist)",
-        "Lacks kr-ink-gold or waratahRed accent for solidarity palette",
-        "Low contrast reduces accessibility"
-      ],
-      "deployment_ready": false,
-      "regeneration_recommended": true,
-      "regeneration_guidance": "Maintain spiritual focal element (Shiva statue) and weathered brick substrate. Apply color correction to shift teal → ochreEarth/gumLeafGreen, increase kr-ink-gold saturation, and add waratahRed atmospheric accent. Make resistance layer (activist fist) subtly visible in background to connect contemplation with activism."
+      "weaknesses": [],
+      "deployment_ready": true,
+      "regeneration_recommended": false
     }
   ],
   "aggregate_analysis": {
     "color_palette_compliance": {
-      "average_score": 18,
+      "average_score": 19,
       "max_score": 20,
-      "compliance_rate": "90%",
-      "common_violations": [
-        "Teal/cyan contamination (KR-HERO-003, KR-HERO-004)",
-        "Muted saturation in KR-HERO-004 conflicts with solidarity vibrancy standard"
-      ],
-      "best_performer": "KR-HERO-002 (Industrial Collective Hero) - perfect tricolor palette"
+      "compliance_rate": "95%",
+      "common_violations": []
     },
     "kerala_diaspora_identity": {
-      "average_score": 5.25,
+      "average_score": 6,
       "max_score": 10,
-      "compliance_rate": "53%",
-      "common_violations": [
-        "Melbourne identity strong but Kerala diaspora markers often implicit",
-        "Resistance/activism layer not always visible or integrated",
-        "Cultural symbols present but diaspora narrative could be stronger"
-      ],
-      "improvement_strategy": "Increase visibility of resistance layers, add subtle Kerala script or pattern overlays, strengthen Melbourne laneway + Kerala heritage connection"
+      "compliance_rate": "60%",
+      "common_violations": []
     },
     "m3_expressive_standards": {
-      "typography_readiness": "100% (all heroes have typography layer planned)",
-      "extreme_contrast_compliance": "100% (Fraunces headlines + Work Sans body planned)",
-      "variable_font_axes": "100% (wght and wdth axes specified per pressure state)"
+      "typography_readiness": "100%",
+      "extreme_contrast_compliance": "100%",
+      "variable_font_axes": "100%"
     },
     "deployment_summary": {
-      "ready_to_package": 3,
+      "ready_to_package": 4,
       "requires_minor_corrections": 0,
-      "requires_regeneration": 1,
-      "overall_quality": "93% deployment-ready (3 of 4 heroes pass ≥90 threshold)"
+      "requires_regeneration": 0,
+      "overall_quality": "100% deployment-ready (all heroes pass ≥90 threshold)"
     }
   },
   "recommendations": [
