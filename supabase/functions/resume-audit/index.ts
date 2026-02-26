@@ -1,5 +1,6 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { GoogleGenerativeAI } from "npm:@google/generative-ai@0.21.0";
+import { GoogleAICacheManager } from "npm:@google/generative-ai@0.21.0/server";
 import { createClient } from "npm:@supabase/supabase-js@2.39.0";
 
 const SYSTEM_INSTRUCTION = `
@@ -136,6 +137,9 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 };
 
+// Global variable to hold cache name across warm starts for performance
+let cachedContentName: string | null = null;
+
 serve(async (req: Request) => {
   if (req.method === 'OPTIONS') {
     return new Response('ok', { headers: corsHeaders });
@@ -157,16 +161,49 @@ serve(async (req: Request) => {
     }
 
     const genAI = new GoogleGenerativeAI(apiKey);
+    const cacheManager = new GoogleAICacheManager(apiKey);
     
-    const model = genAI.getGenerativeModel({
-      model: 'gemini-3.1-pro',
-      systemInstruction: SYSTEM_INSTRUCTION,
-      generationConfig: {
-        temperature: 0.3,
-        maxOutputTokens: 2048,
-        responseMimeType: 'application/json',
+    // Attempt to use existing cache from env or global memory
+    const envCacheName = Deno.env.get('GEMINI_CACHE_NAME');
+    const effectiveCacheName = envCacheName || cachedContentName;
+
+    let model;
+
+    if (effectiveCacheName) {
+      try {
+        // Use existing cache
+        // Note: Context caching is supported on specific models like gemini-1.5-pro-002
+        model = genAI.getGenerativeModelFromCachedContent({
+          cachedContent: effectiveCacheName,
+        });
+        console.log(`Using existing context cache: ${effectiveCacheName}`);
+      } catch (cacheError) {
+        console.warn('Cache access failed, will recreate if needed...', cacheError);
+        cachedContentName = null;
       }
-    });
+    }
+
+    if (!model) {
+      // Create new cache for the system instruction (RKL rules)
+      // This reduces token usage on every request as the static rules are cached.
+      const cache = await cacheManager.create({
+        model: 'models/gemini-1.5-pro-002',
+        displayName: 'resume-audit-rkl-rules',
+        contents: [
+          {
+            role: 'user',
+            parts: [{ text: SYSTEM_INSTRUCTION }],
+          },
+        ],
+        ttlSeconds: 3600 * 24, // 24 hours
+      });
+      
+      cachedContentName = cache.name;
+      model = genAI.getGenerativeModelFromCachedContent({
+        cachedContent: cachedContentName,
+      });
+      console.log(`Created new context cache: ${cachedContentName}`);
+    }
 
     const prompt = `
 <task>Critique this resume using Resume Knowledge Library rules (strictness: ${strictnessMode})</task>
@@ -186,7 +223,14 @@ ${jobDescription ? `<job_description>\n${jobDescription}\n</job_description>` : 
 </instructions>
 `;
 
-    const result = await model.generateContent(prompt);
+    const result = await model.generateContent({
+      contents: [{ role: 'user', parts: [{ text: prompt }] }],
+      generationConfig: {
+        temperature: 0.3,
+        maxOutputTokens: 2048,
+        responseMimeType: 'application/json',
+      }
+    });
     const auditResult = JSON.parse(result.response.text());
 
     return new Response(
@@ -200,9 +244,9 @@ ${jobDescription ? `<job_description>\n${jobDescription}\n</job_description>` : 
       { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );
 
-  } catch (error) {
+  } catch (error: any) {
     return new Response(
-      JSON.stringify({ success: false, error: error.message }),
+      JSON.stringify({ success: false, error: error.message || 'Internal Server Error' }),
       { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );
   }

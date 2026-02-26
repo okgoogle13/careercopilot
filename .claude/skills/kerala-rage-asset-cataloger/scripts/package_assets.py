@@ -12,6 +12,43 @@ from pathlib import Path
 from datetime import datetime
 from PIL import Image
 
+
+def resolve_manifest_path(project_root):
+    """
+    Resolve manifest path with canonical-first precedence and legacy fallback.
+    Supports override via KERALA_RAGE_MANIFEST_PATH.
+    """
+    override = os.getenv("KERALA_RAGE_MANIFEST_PATH")
+    if override:
+        override_path = Path(override)
+        if override_path.exists():
+            return override_path
+
+    candidates = [
+        project_root / "frontend" / "public" / "assets" / "kerala-rage-kr-solidarity-manifest.json",
+        project_root / "assets" / "kerala-rage-kr-solidarity-manifest.json",  # legacy location
+    ]
+    for candidate in candidates:
+        if candidate.exists():
+            return candidate
+    return candidates[0]
+
+
+def resolve_asset_source(project_root, rel_path):
+    """
+    Resolve manifest file_path entries to an existing on-disk source asset.
+    Canonical assets live under frontend/public/assets/.
+    """
+    candidates = [
+        project_root / "frontend" / "public" / rel_path,
+        project_root / rel_path,  # legacy location fallback
+    ]
+    for candidate in candidates:
+        if candidate.exists():
+            return candidate
+    return candidates[0]
+
+
 def load_manifest(path):
     """Load manifest JSON."""
     with open(path, 'r') as f:
@@ -88,14 +125,17 @@ def generate_standard_name(asset):
 def main():
     # Paths
     PROJECT_ROOT = Path("/Users/okgoogle13/Projects/careercopilot")
-    MANIFEST_PATH = PROJECT_ROOT / "assets" / "kerala-rage-kr-solidarity-manifest.json"
+    MANIFEST_PATH = resolve_manifest_path(PROJECT_ROOT)
     OUTPUT_DIR = Path("packaged_assets")
     
     print("🎨 Kerala Rage Asset Packager v2.0")
     print(f"   Manifest: {MANIFEST_PATH}\n")
     
     if not MANIFEST_PATH.exists():
-        print(f"❌ Manifest not found")
+        print("❌ Manifest not found")
+        print("   Checked:")
+        print(f"   - {PROJECT_ROOT / 'frontend' / 'public' / 'assets' / 'kerala-rage-kr-solidarity-manifest.json'}")
+        print(f"   - {PROJECT_ROOT / 'assets' / 'kerala-rage-kr-solidarity-manifest.json'}")
         return
     
     manifest = load_manifest(MANIFEST_PATH)
@@ -113,7 +153,7 @@ def main():
         
         # Source path
         rel_path = asset['file_path'].lstrip('/')
-        src = PROJECT_ROOT / rel_path
+        src = resolve_asset_source(PROJECT_ROOT, rel_path)
         
         if not src.exists():
             print(f"⚠️  {asset_id}: Missing {src.name}")

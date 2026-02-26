@@ -1,7 +1,7 @@
 # Mode Compliance: Kerala Rage Solidarity
 
 **Status**: Active and required. This is the only supported mode for this skill.
-**Last Updated**: 2026-02-23
+**Last Updated**: 2026-02-26
 
 ## Linked Artifacts
 
@@ -14,7 +14,7 @@
 | Dimension | Required | Reject |
 |---|---|---|
 | Theme | Contemporary Australian, solidarity-forward | Clinical/lab, colonial nostalgia, generic cyberpunk |
-| Palette | Asphalt `#1A1714`, Paper `#F5F0E8`, Wattle `#D4A84B`, Ochre `#B8733D`, Concrete `#A39B8F`, Gum `#6B7F6E` | Clinical blue/steel palettes, off-system hex values |
+| Palette | Semantic tokens only (`--sys-color-*`) mapped to solidarity palette roles (surface, on-surface, primary/accent, structural neutrals, growth accent) | Hardcoded off-system hex values, clinical blue/steel palettes |
 | Typography | Fraunces (heading), Work Sans (body), Caveat (accent) | Inter, Roboto, Arial |
 | Composition | Bold contrast, expressive asymmetry, readable focal hierarchy | Flat template layouts, decorative clutter, unclear hierarchy |
 | Subject Framing | Living endemic species and social context | Museum-cabinet framing, archival nostalgia |
@@ -69,8 +69,7 @@ Current ID: {{asset_id}}
 Manifest Path: frontend/public/assets/kerala-rage-kr-solidarity-manifest.json
 
 Evaluate strictly against these rules:
-1) Palette must remain within solidarity tokens:
-   #1A1714, #F5F0E8, #D4A84B, #B8733D, #A39B8F, #6B7F6E.
+1) Palette must use semantic token references only (`--sys-color-*`), aligned to the approved solidarity roles.
 2) Visual direction must be contemporary Australian, solidarity-forward, and non-clinical.
 3) Typography and composition must be expressive and readable (no generic defaults).
 4) Reject colonial nostalgia, museum framing, and technical-lab motif language.
