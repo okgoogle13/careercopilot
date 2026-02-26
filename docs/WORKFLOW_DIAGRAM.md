@@ -42,29 +42,32 @@ resume_optimizer flow]
 smart_cover_letter flow]
     M --> P[🎯 Generate KSC Responses
 ksc_generator flow]
-    M --> Q[🏢 Research Company
-company_context flow]
+    M --> Q[🕵️ Resume Audit
+resume-audit edge function]
+    M --> R[🧠 Intelligence Report
+resume_intelligence flow]
 
-    N --> R{Accept Suggestions?}
-    R -- Yes --> S[(Save to Supabase
+    N --> S{Accept Suggestions?}
+    S -- Yes --> T[(Save to Supabase
 Document Store)]
-    R -- No --> N
+    S -- No --> N
 
-    O --> S
-    P --> S
-    Q --> S
+    O --> T
+    P --> T
+    Q --> T
+    R --> T
 
-    S --> T[📥 Export: PDF · DOCX · Markdown]
-    T --> U[📬 Submit Application]
-    U --> V[📋 Application Tracker
+    T --> U[📥 Export: PDF · DOCX · Markdown]
+    U --> V[📬 Submit Application]
+    V --> W[📋 Application Tracker
 Kanban Board]
-    V --> W([🎉 Hired!])
+    W --> X([🎉 Hired!])
 
     style A fill:#D4A84B,color:#1A1714,stroke:#D4A84B
-    style W fill:#6B7F6E,color:#F5F0E8,stroke:#6B7F6E
+    style X fill:#6B7F6E,color:#F5F0E8,stroke:#6B7F6E
     style D fill:#1A1714,color:#D4A84B,stroke:#A39B8F
     style K fill:#1A1714,color:#D4A84B,stroke:#A39B8F
-    style S fill:#1A1714,color:#D4A84B,stroke:#A39B8F
+    style T fill:#1A1714,color:#D4A84B,stroke:#A39B8F
 ```
 
 ---
@@ -83,23 +86,31 @@ flowchart LR
     subgraph Ingestion["🔄 Ingestion Layer"]
         P[IngestionService
 pdfminer · python-docx]
-        JA[Job Analyzer
+        JA[Unified Job Analyzer
 Scrape + NLP]
     end
 
     subgraph AI["🤖 AI Flows  ·  Gemini via Genkit"]
+        direction TB
         ATS[ATS Scoring
 ats_scoring.py]
+        RI[Intelligence Pipeline
+resume_intelligence.py]
         RO[Resume Optimizer
 resume_optimizer.py]
-        CL[Cover Letter Generator
-cover_letter_generator.py]
+        CL[SCL Generator
+smart_cover_letter_system.py]
         KSC[KSC Generator
 ksc_generator.py]
         CC[Company Context
 company_context.py]
-        JM[Job Matcher
-advanced_job_matching.py]
+    end
+
+    subgraph Edge["⚡ Serverless Edge"]
+        AUDIT[Resume Auditor
+resume-audit edge function]
+        CACHE[Context Cache
+Gemini RKL Rules]
     end
 
     subgraph Store["🗄️ Data Layer"]
@@ -113,89 +124,27 @@ Supabase)]
         OD[Optimised Resume]
         OCL[Cover Letter]
         OKSC[KSC Responses]
-        OA[Application Package]
+        OAR[Audit Report]
+        OIR[Intelligence Report]
     end
 
     R --> P --> VS
     J --> JA --> ATS
-    VS --> ATS
-    ATS --> RO & CL & KSC & CC & JM
+    VS --> ATS & RI & AUDIT
+    CACHE --> AUDIT
+    ATS --> RO & CL & KSC & CC
+    RI --> OIR --> DB
+    AUDIT --> OAR --> DB
     RO --> OD --> DB
     CL --> OCL --> DB
     KSC --> OKSC --> DB
-    OD & OCL & OKSC --> OA
+    OD & OCL & OKSC & OAR & OIR --> OA[Application Package]
 
     style AI fill:#1A1714,color:#F5F0E8,stroke:#D4A84B
+    style Edge fill:#1A1714,color:#F5F0E8,stroke:#6B7F6E
     style Store fill:#1A1714,color:#F5F0E8,stroke:#A39B8F
     style Input fill:#2A1F0B,color:#F5F0E8,stroke:#D4A84B
     style Output fill:#0B2A1A,color:#F5F0E8,stroke:#6B7F6E
-```
-
----
-
-## 3. Ownership Workflow Map
-This map illustrates the "Ownership" of various modules based on Git history and contribution volume. `jonasdougall` appears as the primary architect and frontend owner, while `okgoogle13` maintains a heavy focus on the backend and core business logic.
-
-```mermaid
-graph TD
-    subgraph Core_Contributors [Project Owners]
-        JD[jonasdougall]
-        OK[okgoogle13]
-    end
-
-    subgraph Specialized_Agents [Assisted Maintenance]
-        CL[Claude AI]
-        BOTS[Renovate/Copilot Bots]
-    end
-
-    %% Ownership assignments
-    JD ---|Primary Owner| FE[Frontend / UI]
-    JD ---|Maintainer| DS[Design System / Storybook]
-    JD ---|Architect| AI[Genkit AI Flows]
-    
-    OK ---|Primary Owner| BE[Backend / FastAPI]
-    OK ---|Contributor| FE
-    
-    CL ---|Styling & Tokens| DS
-    BOTS ---|Dependency Updates| ROOT[Monorepo Root]
-
-    style JD fill:#4a90e2,stroke:#fff,color:#fff
-    style OK fill:#50c878,stroke:#fff,color:#fff
-    style CL fill:#ff6b6b,stroke:#fff,color:#fff
-```
-
----
-
-## 4. Module Dependency Workflow
-This workflow diagrams how data and dependencies flow between the internal packages. The architecture follows a token-driven design system and a decoupled service pattern.
-
-```mermaid
-flowchart LR
-    subgraph Design_Layer [Design & Tokens]
-        DS[Design System] -->|Tokens/Styles| FE
-    end
-
-    subgraph Application_Layer [Client & Edge]
-        FE[React Frontend] <-->|API Calls| BE
-        FE <-->|Cloud Events| FN[Firebase Functions]
-        UI[@careercopilot/ui] -->|Component Library| FE
-    end
-
-    subgraph Service_Layer [Business Logic & AI]
-        BE[Python Backend] -->|Vertex AI| GEN[Genkit Flows]
-        BE -->|Alembic| DB[(PostgreSQL Database)]
-        FN -->|Triggers| DB
-    end
-
-    %% Deployment & Sync
-    ROOT[Root Scripts] -->|Sync| DS
-    ROOT -->|Orchestrate| BE
-    ROOT -->|Deploy| FN
-
-    style FE fill:#61dafb,stroke:#333
-    style BE fill:#ffd43b,stroke:#333
-    style GEN fill:#f39c12,stroke:#333,color:#fff
-    style DS fill:#6c5ce7,stroke:#fff,color:#fff
 ```
 
 ---
@@ -205,10 +154,12 @@ flowchart LR
 | Component | File | Responsibility |
 |---|---|---|
 | Ingestion Service | `backend/app/services/ingestion_service.py` | Parse PDF/DOCX resumes |
-| Job Analyzer | `ai/flows/backend/job_analyzer.py` | Scrape & extract job requirements |
+| Job Analyzer | `ai/flows/backend/unified_job_analyzer.py` | Scrape & extract job requirements |
 | ATS Scoring | `ai/flows/backend/ats_scoring.py` | Score resume against job description |
+| Resume Intelligence | `ai/flows/backend/resume_intelligence_pipeline.py` | Deep career insights & progression |
+| Resume Auditor | `supabase/functions/resume-audit/` | Australian rule-based auditing |
 | Resume Optimizer | `ai/flows/backend/resume_optimizer.py` | Suggest keyword improvements |
-| Cover Letter Generator | `ai/flows/backend/cover_letter_generator.py` | Draft tailored cover letters |
+| Smart Cover Letter | `ai/flows/backend/smart_cover_letter_system.py` | Draft tailored cover letters |
 | KSC Generator | `ai/flows/backend/ksc_generator.py` | Draft STAR-format KSC responses |
 | Company Context | `ai/flows/backend/company_context.py` | Research company background |
 | Vector Store | `backend/app/services/vector_store.py` | Semantic search (pgvector) |

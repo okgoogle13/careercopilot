@@ -26,7 +26,7 @@
     "design-system-sidekick": {
       "command": "/Users/okgoogle13/Projects/careercopilot/venv/bin/python",
       "args": [
-        "/Users/okgoogle13/Projects/careercopilot/servers/design_system_sidekick.py"
+        "/Users/okgoogle13/Projects/careercopilot/tools/mcp-servers/design_system_sidekick.py"
       ],
       "env": {
         "GEMINI_API_KEY": "${GEMINI_API_KEY}"

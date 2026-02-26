@@ -45,26 +45,28 @@ flowchart TD
     M --> N[✍️ Optimise Resume\nresume_optimizer flow]
     M --> O[📝 Generate Cover Letter\nsmart_cover_letter flow]
     M --> P[🎯 Generate KSC Responses\nksc_generator flow]
-    M --> Q[🏢 Research Company\ncompany_context flow]
+    M --> Q[🕵️ Resume Audit\nresume-audit edge function]
+    M --> R[🧠 Intelligence Report\nresume_intelligence flow]
 
-    N --> R{Accept Suggestions?}
-    R -- Yes --> S[(Save to Supabase\nDocument Store)]
-    R -- No --> N
+    N --> S{Accept Suggestions?}
+    S -- Yes --> T[(Save to Supabase\nDocument Store)]
+    S -- No --> N
 
-    O --> S
-    P --> S
-    Q --> S
+    O --> T
+    P --> T
+    Q --> T
+    R --> T
 
-    S --> T[📥 Export: PDF · DOCX · Markdown]
-    T --> U[📬 Submit Application]
-    U --> V[📋 Application Tracker\nKanban Board]
-    V --> W([🎉 Hired!])
+    T --> U[📥 Export: PDF · DOCX · Markdown]
+    U --> V[📬 Submit Application]
+    V --> W[📋 Application Tracker\nKanban Board]
+    W --> X([🎉 Hired!])
 
     style A fill:#D4A84B,color:#1A1714,stroke:#D4A84B
-    style W fill:#6B7F6E,color:#F5F0E8,stroke:#6B7F6E
+    style X fill:#6B7F6E,color:#F5F0E8,stroke:#6B7F6E
     style D fill:#1A1714,color:#D4A84B,stroke:#A39B8F
     style K fill:#1A1714,color:#D4A84B,stroke:#A39B8F
-    style S fill:#1A1714,color:#D4A84B,stroke:#A39B8F
+    style T fill:#1A1714,color:#D4A84B,stroke:#A39B8F
 """
 
 AI_FLOW_DIAGRAM = """\
@@ -76,16 +78,22 @@ flowchart LR
 
     subgraph Ingestion["🔄 Ingestion Layer"]
         P[IngestionService\npdfminer · python-docx]
-        JA[Job Analyzer\nScrape + NLP]
+        JA[Unified Job Analyzer\nScrape + NLP]
     end
 
     subgraph AI["🤖 AI Flows  ·  Gemini via Genkit"]
+        direction TB
         ATS[ATS Scoring\nats_scoring.py]
+        RI[Intelligence Pipeline\nresume_intelligence.py]
         RO[Resume Optimizer\nresume_optimizer.py]
-        CL[Cover Letter Generator\ncover_letter_generator.py]
+        CL[SCL Generator\nsmart_cover_letter_system.py]
         KSC[KSC Generator\nksc_generator.py]
         CC[Company Context\ncompany_context.py]
-        JM[Job Matcher\nadvanced_job_matching.py]
+    end
+
+    subgraph Edge["⚡ Serverless Edge"]
+        AUDIT[Resume Auditor\nresume-audit edge function]
+        CACHE[Context Cache\nGemini RKL Rules]
     end
 
     subgraph Store["🗄️ Data Layer"]
@@ -97,19 +105,24 @@ flowchart LR
         OD[Optimised Resume]
         OCL[Cover Letter]
         OKSC[KSC Responses]
-        OA[Application Package]
+        OAR[Audit Report]
+        OIR[Intelligence Report]
     end
 
     R --> P --> VS
     J --> JA --> ATS
-    VS --> ATS
-    ATS --> RO & CL & KSC & CC & JM
+    VS --> ATS & RI & AUDIT
+    CACHE --> AUDIT
+    ATS --> RO & CL & KSC & CC
+    RI --> OIR --> DB
+    AUDIT --> OAR --> DB
     RO --> OD --> DB
     CL --> OCL --> DB
     KSC --> OKSC --> DB
-    OD & OCL & OKSC --> OA
+    OD & OCL & OKSC & OAR & OIR --> OA[Application Package]
 
     style AI fill:#1A1714,color:#F5F0E8,stroke:#D4A84B
+    style Edge fill:#1A1714,color:#F5F0E8,stroke:#6B7F6E
     style Store fill:#1A1714,color:#F5F0E8,stroke:#A39B8F
     style Input fill:#2A1F0B,color:#F5F0E8,stroke:#D4A84B
     style Output fill:#0B2A1A,color:#F5F0E8,stroke:#6B7F6E
@@ -155,10 +168,12 @@ How the Genkit AI flows connect inputs, vector storage, and generated outputs.
 | Component | File | Responsibility |
 |---|---|---|
 | Ingestion Service | `backend/app/services/ingestion_service.py` | Parse PDF/DOCX resumes |
-| Job Analyzer | `ai/flows/backend/job_analyzer.py` | Scrape & extract job requirements |
+| Job Analyzer | `ai/flows/backend/unified_job_analyzer.py` | Scrape & extract job requirements |
 | ATS Scoring | `ai/flows/backend/ats_scoring.py` | Score resume against job description |
+| Resume Intelligence | `ai/flows/backend/resume_intelligence_pipeline.py` | Deep career insights & progression |
+| Resume Auditor | `supabase/functions/resume-audit/` | Australian rule-based auditing |
 | Resume Optimizer | `ai/flows/backend/resume_optimizer.py` | Suggest keyword improvements |
-| Cover Letter Generator | `ai/flows/backend/cover_letter_generator.py` | Draft tailored cover letters |
+| Smart Cover Letter | `ai/flows/backend/smart_cover_letter_system.py` | Draft tailored cover letters |
 | KSC Generator | `ai/flows/backend/ksc_generator.py` | Draft STAR-format KSC responses |
 | Company Context | `ai/flows/backend/company_context.py` | Research company background |
 | Vector Store | `backend/app/services/vector_store.py` | Semantic search (pgvector) |

@@ -40,7 +40,7 @@ The **Solidarity Mode** design system embodies:
 | **Hi-Fi Spec** | [06-wireframes.md](06-wireframes.md#page-1-landing-the-solidarity-manifesto) (PAGE 1, Lines 71-141) |
 | **Emotional Register** | Defiance |
 | **Key Components** | ManifestoCard (slab), Feature Cards (stone), Nav Buttons (pebble) |
-| **Primary Assets** | `kr-asset-wheat-paste-tear`, `kr-asset-screenprint-grit`, `kr-asset-halo-disk` |
+| **Primary Assets** | `kr-asset-wheat-paste-tear`, `kr-asset-screenprint-grit`, `kr-asset-halo-disk`, `KR-UI-008`, `KR-UI-018`, `KR-UI-019` |
 | **Symbolic Anchor** | ✅ Optional (Shiva/Bhagat Singh, bottom-left/top-right, ≥96px) |
 | **Implementation Status** | 🟢 Ready |
 
@@ -59,7 +59,7 @@ The **Solidarity Mode** design system embodies:
 | **Hi-Fi Spec** | [06-wireframes.md](06-wireframes.md#page-2-authentication-the-verification) (PAGE 2, Lines 144-182) |
 | **Emotional Register** | Trust |
 | **Key Components** | AuthContainer (stone, 480px), TextInput (pebble), SignButton (pebble) |
-| **Primary Assets** | `kr-asset-screenprint-grit`, `kr-asset-halo-disk` (60% opacity) |
+| **Primary Assets** | `kr-asset-screenprint-grit`, `kr-asset-halo-disk`, `KR-UI-027`, `KR-UI-030` |
 | **Symbolic Anchor** | ❌ Forbidden (security/trust focus) |
 | **Implementation Status** | 🟢 Ready |
 
@@ -78,7 +78,7 @@ The **Solidarity Mode** design system embodies:
 | **Hi-Fi Spec** | [06-wireframes.md](06-wireframes.md#page-3-onboarding-the-collective-choice) (PAGE 3, Lines 185-207) |
 | **Emotional Register** | Possibility |
 | **Key Components** | PathSelectionCard (stone, 3 variants: Tech/Care/Creative) |
-| **Primary Assets** | `kr-asset-blueprint-grid` (8% opacity) |
+| **Primary Assets** | `kr-asset-blueprint-grid`, `KR-UI-035`, `KR-UI-008–019` (domain icons) |
 | **Symbolic Anchor** | ⚠️ Not specified |
 | **Implementation Status** | 🟢 Ready |
 
@@ -96,7 +96,7 @@ The **Solidarity Mode** design system embodies:
 | **Hi-Fi Spec** | [06-wireframes.md](06-wireframes.md#page-4-ingestion-the-deposition) (PAGE 4, Lines 209-251) |
 | **Emotional Register** | Gravity |
 | **Key Components** | IngestionSlab (slab), DropZone (pebble, dashed border), PrimaryAction (pebble) |
-| **Primary Assets** | `kr-asset-charcoal-paper`, `kr-asset-blueprint-layout` (watermark), `kr-asset-screenprint-grit` |
+| **Primary Assets** | `kr-asset-charcoal-paper`, `kr-asset-blueprint-layout`, `kr-asset-screenprint-grit`, `KR-UI-021`, `KR-UI-026`, `KR-UI-027`, `KR-UI-030` |
 | **Symbolic Anchor** | ⚠️ Not specified |
 | **Implementation Status** | 🟢 Ready |
 
@@ -115,7 +115,7 @@ The **Solidarity Mode** design system embodies:
 | **Hi-Fi Spec** | [06-wireframes.md](06-wireframes.md#page-5-analysis-dashboard-the-audit-microscope) (PAGE 5, Lines 254-277) |
 | **Emotional Register** | Revelation |
 | **Key Components** | SkillTile (stone, 2x3 grid), MasteryVisualizer (complex), Score Gauge (halo disk) |
-| **Primary Assets** | `kr-asset-charcoal-paper`, `kr-asset-blueprint-grid` (8% opacity) |
+| **Primary Assets** | `kr-asset-charcoal-paper`, `kr-asset-blueprint-grid`, `KR-UI-013`, `KR-UI-022`, `KR-UI-024`, `KR-UI-025`, `KR-UI-033` |
 | **Symbolic Anchor** | ✅ Optional (Kerala elephant/Shiva, sidebar/header, ≥96px) |
 | **Implementation Status** | 🟢 Ready |
 
@@ -134,7 +134,7 @@ The **Solidarity Mode** design system embodies:
 | **Hi-Fi Spec** | [06-wireframes.md](06-wireframes.md#page-6-opportunity-feed-the-lookout) (PAGE 6, Lines 280-302) |
 | **Emotional Register** | Discovery |
 | **Key Components** | OpportunityItem (stone), PriorityBadge (pebble), Sidebar Filters (240px, pebble toggles) |
-| **Primary Assets** | `kr-asset-screenprint-substrate` (22% opacity), `kr-asset-halo-disk` (priority items) |
+| **Primary Assets** | `kr-asset-screenprint-substrate`, `kr-asset-halo-disk`, `KR-UI-016`, `KR-UI-020`, `KR-UI-025`, `KR-UI-028` |
 | **Symbolic Anchor** | ⚠️ Not specified |
 | **Implementation Status** | 🟢 Ready |
 
@@ -153,7 +153,7 @@ The **Solidarity Mode** design system embodies:
 | **Hi-Fi Spec** | [06-wireframes.md](06-wireframes.md#page-7-kanban-board-the-command-center) (PAGE 7, Lines 305-326) |
 | **Emotional Register** | Control |
 | **Key Components** | KanbanColumn (stone, 4 columns), KanbanCard (stone, draggable) |
-| **Primary Assets** | `kr-asset-charcoal-paper` |
+| **Primary Assets** | `kr-asset-charcoal-paper`, `KR-UI-016`, `KR-UI-020`, `KR-UI-023`, `KR-UI-025` |
 | **Symbolic Anchor** | ⚠️ Not specified |
 | **Implementation Status** | 🟢 Ready |
 
@@ -172,7 +172,7 @@ The **Solidarity Mode** design system embodies:
 | **Hi-Fi Spec** | [06-wireframes.md](06-wireframes.md#page-8-split-screen-editor-the-writing-workbench) (PAGE 8, Lines 329-354) |
 | **Emotional Register** | Craft |
 | **Key Components** | Evidence Panel (30%, stone cards), Editor Panel (70%, slab container) |
-| **Primary Assets** | `kr-asset-charcoal-paper`, `kr-asset-blueprint-grid` (5% opacity, editor only) |
+| **Primary Assets** | `kr-asset-charcoal-paper`, `kr-asset-blueprint-grid`, `KR-UI-014`, `KR-UI-026`, `KR-UI-030` |
 | **Symbolic Anchor** | ⚠️ Not specified |
 | **Implementation Status** | 🟢 Ready |
 
@@ -190,7 +190,7 @@ The **Solidarity Mode** design system embodies:
 | **Hi-Fi Spec** | [06-wireframes.md](06-wireframes.md#page-9-studio-designer-the-manifesto-finalization) (PAGE 9, Lines 357-380) |
 | **Emotional Register** | Refinement |
 | **Key Components** | Controls Panel (25%, pebble toggles), Preview Panel (75%, stone container) |
-| **Primary Assets** | `kr-asset-charcoal-paper` (increased grain) |
+| **Primary Assets** | `kr-asset-charcoal-paper`, `KR-UI-022`, `KR-UI-027` |
 | **Symbolic Anchor** | ⚠️ Not specified |
 | **Implementation Status** | 🟢 Ready |
 
@@ -208,7 +208,7 @@ The **Solidarity Mode** design system embodies:
 | **Hi-Fi Spec** | [06-wireframes.md](06-wireframes.md#page-10-settings-the-archive-vault) (PAGE 10, Lines 383-410) |
 | **Emotional Register** | Storage |
 | **Key Components** | 4 Setting Cards (stone): Profile/Privacy/Data/Export |
-| **Primary Assets** | `kr-asset-charcoal-paper`, `kr-asset-blueprint-grid` (6% opacity, behind cards) |
+| **Primary Assets** | `kr-asset-charcoal-paper`, `kr-asset-blueprint-grid`, `KR-UI-014`, `KR-UI-028`, `KR-UI-029` |
 | **Symbolic Anchor** | ⚠️ Not specified |
 | **Implementation Status** | 🟢 Ready |
 
@@ -226,13 +226,33 @@ The **Solidarity Mode** design system embodies:
 | **Hi-Fi Spec** | [06-wireframes.md](06-wireframes.md#page-11-dashboard-overview-the-collective) (PAGE 11, Lines 413-445) |
 | **Emotional Register** | Altitude |
 | **Key Components** | 3 Metric Cards (stone): Active Apps/Skills Tracked/Progress Metrics |
-| **Primary Assets** | `kr-asset-screenprint-substrate` (25%), `kr-asset-wheat-paste-tear`, `kr-asset-halo-disk` |
+| **Primary Assets** | `kr-asset-screenprint-substrate`, `kr-asset-wheat-paste-tear`, `kr-asset-halo-disk`, `KR-UI-022`, `KR-UI-023`, `KR-UI-024`, `KR-UI-032`, `KR-UI-033` |
 | **Symbolic Anchor** | ✅ Optional (Bhagat Singh/Treaty Now, top-left/bottom-right, ≥96px) |
 | **Implementation Status** | 🟢 Ready |
 
 **Key Differences Lo-Fi → Hi-Fi**:
 - Hi-fi uses dramatic wheat-paste tear at top-left
 - Hi-fi includes gold halo disk at bottom-right for visual balance
+
+---
+
+### 12. 404 Not Found ("The Removed Poster")
+
+| Aspect | Details |
+|--------|---------|
+| **Lo-Fi Spec** | N/A (standard error page) |
+| **Hi-Fi Spec** | [06b-asset-placement.md](06b-asset-placement.md#page-12-404-not-found-the-removed-poster) (PAGE 12) |
+| **Emotional Register** | Disorientation + Urban Decay |
+| **Key Components** | Error container (slab), Navigation links (pebble) |
+| **Primary Assets** | `kr-asset-charcoal-paper`, `KR-UI-009`, `KR-UI-031`, `KR-UI-034` |
+| **Symbolic Anchor** | N/A (error state) |
+| **Implementation Status** | 🟢 Ready |
+
+**Key Features**:
+- KR-UI-034: Hero 404 illustration (wheat-paste removal + W-class tram)
+- KR-UI-031: Fractured frame error state context
+- KR-UI-009: Laneway brick pattern atmospheric texture
+- Charcoal paper substrate maintains system consistency
 
 ---
 
