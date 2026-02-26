@@ -179,3 +179,10 @@ tools/scripts/workflow/run_northcote_workflow.py
 .idx/
 .agent/
 .agents/
+
+# Recovery and Emergency Backups (prevent "Corruption" death-spirals)
+.git_corrupt_backup/
+.git_corrupt_backup_safe/
+purge/
+_backup_*/
+cleanup_backup_*/

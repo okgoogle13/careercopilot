@@ -1,84 +1,86 @@
 # DOC-008 Missing Assets Reference
 
-High-priority gaps from wireframe requirements.
+High-priority gap targets for the Kerala Rage solidarity system.
+
+**Mode Policy**: `kerala-rage-solidarity` is the only supported mode.
 
 ## Background Textures
 
-### pattern-kr-wheat-paste
-- **Description**: Full viewport background, silhouettes on dark
-- **Use**: Background pattern at 18-25% opacity across multiple pages
-- **Mode**: kr-dark
+### pattern-solidarity-wheat-paste
+- **Description**: Full-viewport background pattern with grounded silhouettes
+- **Use**: Global substrate at 18-25% opacity
+- **Mode**: kerala-rage-solidarity
 
-### texture-kr-dark-paper-white
-- **Description**: Aged field note paper, warm beige/cream, subtle grain
-- **Use**: Background texture for all kr-dark mode pages
-- **Mode**: kr-dark
+### texture-solidarity-paper-white
+- **Description**: Warm off-white field-note paper texture with subtle grain
+- **Use**: Texture layer for paper-like surfaces
+- **Mode**: kerala-rage-solidarity
 
-### texture-kr-dark-grid-major
-- **Description**: Graph paper grid, 100px spacing, etching lines
-- **Use**: Preview panels, 8-15% opacity
-- **Mode**: kr-dark
+### texture-solidarity-grid-major
+- **Description**: Technical grid with major lines at ~100px spacing
+- **Use**: Preview and analysis panels, 8-15% opacity
+- **Mode**: kerala-rage-solidarity
 
-### texture-kr-dark-grid-minor
-- **Description**: Fine grid, 20px subdivisions
-- **Use**: Behind settings cards, 5-6% opacity
-- **Mode**: kr-dark
+### texture-solidarity-grid-minor
+- **Description**: Fine subdivision grid (~20px)
+- **Use**: Secondary overlays behind cards, 5-6% opacity
+- **Mode**: kerala-rage-solidarity
 
 ## Core Utility Motifs
 
-### motif-kr-dark-skeleton-etch
-- **Description**: Anatomical line drawing, skeletal structure
-- **Use**: Watermark behind upload zones, 4-8% opacity
-- **Mode**: kr-dark
+### motif-solidarity-skeleton-etch
+- **Description**: Line-art structural sketch motif
+- **Use**: Low-opacity watermark behind upload zones
+- **Mode**: kerala-rage-solidarity
 
-### motif-kr-dark-compass
-- **Description**: Brass compass rose, navigation instrument
-- **Use**: Functional gauge for match scores, orientation marker
-- **Mode**: kr-dark
+### motif-solidarity-compass
+- **Description**: Brass compass rose navigation motif
+- **Use**: Orientation marker and score instrumentation
+- **Mode**: kerala-rage-solidarity
 
-### motif-kr-dark-stamp-verified
-- **Description**: Wax seal or fossil impression, verification mark
-- **Use**: Success state indicator with animation
-- **Mode**: kr-dark
+### motif-solidarity-stamp-verified
+- **Description**: Verified seal imprint
+- **Use**: Success-state indicator and status badges
+- **Mode**: kerala-rage-solidarity
 
-## Botanical and Character Motifs
+## Endemic and Character Motifs
 
-### motif-kr-dark-firefly-sprite
-- **Description**: Bioluminescent glow, 8-16px, atmospheric
-- **Use**: Animated floating elements, 6-16 instances/page
-- **Mode**: kr-dark
+### motif-solidarity-firefly-sprite
+- **Description**: Micro glow sprite (8-16px scale)
+- **Use**: Ambient motion accents (6-16 instances/page)
+- **Mode**: kerala-rage-solidarity
 
-### motif-kr-dark-telopea-bloom
-- **Description**: Telopea bloom, red/crimson
-- **Use**: Page 3 onboarding, top-left corner anchor
-- **Mode**: kr-dark
+### motif-solidarity-telopea-bloom
+- **Description**: Telopea bloom anchor motif
+- **Use**: Hero corner anchor on onboarding and landing frames
+- **Mode**: kerala-rage-solidarity
 
-### motif-kr-dark-wattle
-- **Description**: Acacia pycnantha spray/branch
-- **Use**: Page 3 bottom-right, extends beyond viewport
-- **Mode**: kr-dark
+### motif-solidarity-wattle
+- **Description**: Acacia pycnantha branch spray
+- **Use**: Counterbalance motif for lower composition edge
+- **Mode**: kerala-rage-solidarity
 
-### motif-kr-dark-kr-flower
-- **Description**: kr-flower cone or flower
-- **Use**: Page 3 mid-edge, 40% opacity
-- **Mode**: kr-dark
+### motif-solidarity-waratah
+- **Description**: Waratah-like bloom/cone motif
+- **Use**: Mid-edge anchor at reduced opacity
+- **Mode**: kerala-rage-solidarity
 
-### motif-kr-dark-wattle-hanging
-- **Description**: Wattle branch from above, 180-320px extension
-- **Use**: Top-right corner with parallax, Page 1+
-- **Mode**: kr-dark
+### motif-solidarity-wattle-hanging
+- **Description**: Hanging branch extension motif
+- **Use**: Top-right depth anchor with subtle parallax
+- **Mode**: kerala-rage-solidarity
 
-### motif-kr-dark-kr-leafus-hanging
-- **Description**: kr-leafus leaves hanging, 'Ceiling Gum'
-- **Use**: Page 11 Dashboard, top-left, 400px+ width, parallax 0.15x
-- **Mode**: kr-dark
+### motif-solidarity-leafus-hanging
+- **Description**: Hanging leaf canopy motif
+- **Use**: Dashboard top-left anchor, large-format framing
+- **Mode**: kerala-rage-solidarity
 
-### motif-kr-dark-kr-flower-pot
-- **Description**: Potted kr-flower, grounding element
-- **Use**: Bottom corner anchor, extends 40-60px beyond viewport
-- **Mode**: kr-dark
+### motif-solidarity-waratah-pot
+- **Description**: Potted bloom grounding motif
+- **Use**: Bottom-corner anchor extending beyond viewport
+- **Mode**: kerala-rage-solidarity
 
-### motif-kr-dark-sentry-kr-shiva
-- **Description**: kr-shiva bird, mascot
-- **Use**: Perched on navigation, Page 6 and Page 11
-- **Mode**: kr-dark
+### motif-solidarity-sentry-shiva
+- **Description**: Sentry bird mascot motif
+- **Use**: Navigation and dashboard companion placement
+- **Mode**: kerala-rage-solidarity

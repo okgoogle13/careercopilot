@@ -12,6 +12,9 @@ const KscGeneratorPage = lazy(() =>
 const SettingsPage = lazy(() =>
   import('./pages/SettingsPage').then((m) => ({ default: m.SettingsPage }))
 );
+const ResumeAuditPage = lazy(() =>
+  import('./pages/ResumeAuditPage').then((m) => ({ default: m.ResumeAuditPage }))
+);
 
 // Loading fallback
 const LoadingFallback = () => (
@@ -27,6 +30,7 @@ export function AppRouter() {
         <Route path="/" element={<DashboardPage />} />
         <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="/ksc-generator" element={<KscGeneratorPage />} />
+        <Route path="/resume-audit" element={<ResumeAuditPage />} />
         <Route path="/settings" element={<SettingsPage />} />
         <Route path="*" element={<Navigate to="/dashboard" replace />} />
       </Routes>
