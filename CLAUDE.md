@@ -66,45 +66,46 @@ scripts/               # Root-level deployment & utility scripts
 
 ## Design System: kerala-rage kr-solidarity (M3 Expressive)
 
-**Single mode: Solidarity** (unified product experience). Identity: Kerala diaspora + Naarm/Melbourne aesthetics. No bureaucratic motifs.
+**Single mode: Solidarity** (dark-only, unified product experience). Identity: Kerala diaspora + Naarm/Melbourne street aesthetics (screenprint + wheat-paste) + First Nations solidarity. No bureaucratic motifs, no white backgrounds.
 
 ### Semantic Color Variables (The Truth)
 
 All colors are **semantic** (usage-driven), not generic. **Truth lives in `frontend/src/design/tokens/tokens.json`** (DTCG format).
 
-**CSS Variable Convention**: `--sys-color-{name}` or `--sys-color-{role}-{step}`
+**CSS Variable Convention**: `--sys-color-{name}-base` (base value) or `--sys-color-{name}-steps` (tonal ramp)
 
-| Semantic Name | CSS Variable Base | Usage Intent | Base Hex |
+| Semantic Name | CSS Variable | Usage Intent | Base Hex |
 |---|---|---|---|
-| **asphaltBlack** | `--sys-color-asphaltBlack` | Global floor, backgrounds, dark text | `#1A1714` |
-| **paperWhite** | `--sys-color-paperWhite` | Text on dark, high contrast surfaces | `#F5F0E8` |
-| **kr-ink-gold** | `--sys-color-kr-ink-gold` | Primary brand, varying opacity overlays | `#D4A84B` |
-| **waratahRed** | `--sys-color-waratahRed` | Secondary brand, urgent actions | `#C45C4B` |
-| **ochreEarth** | `--sys-color-ochreEarth` | Tertiary brand, grounded elements | `#B8733D` |
-| **gumLeafGreen** | `--sys-color-gumLeafGreen` | Shadows, natural accents | `#6B7F6E` |
-| **concreteGrey** | `--sys-color-concreteGrey` | Neutral UI, borders, disabled states | `#A39B8F` |
+| **charcoalBackground** | `--sys-color-charcoalBackground-base` | Foundational canvas; all backgrounds. Never use white. | `#1A1A1A` |
+| **solidarityRed** | `--sys-color-solidarityRed-base` | Primary buttons, key icon hits, small glows | `#F14714` |
+| **kr-charcoalRed** | `--sys-color-kr-charcoalRed-base` | Errors, destructive actions, critical prompts | `#F14844` |
+| **kr-activistSmokeGreen** | `--sys-color-kr-activistSmokeGreen-base` | Backwater motifs, palm frames, calmer UI sections | `#48DA8B` |
+| **signalGreen** | `--sys-color-signalGreen-base` | Small accents, links, paint-splash moments | `#48F0E5` |
+| **inkGold** | `--sys-color-inkGold-base` | Halo/saint disks, ornament hits, celebratory states | `#DAF674` |
+| **stencilYellow** | `--sys-color-stencilYellow-base` | Large poster words, key UI warnings (non-bureaucratic) | `#F6E748` |
+| **worker-ash** | `--sys-color-worker-ash-base` | Primary readable ink on dark surfaces | `#DAF6B3` |
+| **solidaritySmokeOrange** | `--sys-color-solidaritySmokeOrange-base` | Portrait warmth, paper aging, earth layers | `#DA8B48` |
+| **labWrenMetalBlue** | `--sys-color-labWrenMetalBlue-base` | Ripples, quiet tech accents | `#48B3DA` |
+| **aboriginalFlagRed** | `--sys-color-aboriginalFlagRed-base` | **Restricted** — First Nations solidarity contexts only | `#D81E05` |
+| **aboriginalFlagYellow** | `--sys-color-aboriginalFlagYellow-base` | **Restricted** — First Nations solidarity contexts only | `#FCD116` |
+| **aboriginalFlagBlack** | `--sys-color-aboriginalFlagBlack-base` | **Restricted** — First Nations solidarity contexts only | `#000000` |
 
-**Tonal Steps** (M3 Standard 0-100):
-Roles like `primary`, `secondary`, `tertiary`, `error`, `neutral` have full tonal palettes:
-```css
-/* Example: primary (based on kr-ink-gold) */
---sys-color-primary-0: #000000;
---sys-color-primary-10: #2A1F0B; /* Darkest container */
---sys-color-primary-40: #8B7A35; /* Standard container */
---sys-color-primary-50: #D4A84B; /* Base */
---sys-color-primary-90: #FFF8EB; /* Lightest surface */
---sys-color-primary-100: #FFFFFF;
-```
+**Tonal Steps**: Each color has a `steps` array (dark → light ramp). Use `base` for primary UI assignments, reference `steps` for hover/pressed/disabled state variants.
 
-**When Building UIs**: Use the semantic roles (`--sys-color-primary-*`) when possible, or the named primitives (`--sys-color-kr-ink-gold`) for specific brand moments.
+**When Building UIs**: Use `--sys-color-{name}-base` for color assignments. Do not mix token names from other design systems.
 
 ### Typography (Variable Fonts Only)
 
-- **Headlines**: Fraunces (wght 700, wdth 100) — expressive, warm, identity
-- **Body/UI**: Work Sans (wght 400–600) — modern, legible, hierarchy
-- **Code/Data**: JetBrains Mono (wght 400–600) — monospace, technical clarity
+| Role | Font | Usage |
+|---|---|---|
+| **primary** | Work Sans (Variable, wght 100–900) | Body, UI labels, navigation — workhorse |
+| **display** | Fraunces (Variable opsz, wght, SOFT, WONK) | Headlines, hero text, expressive moments |
+| **proclamation** | Libre Bodoni | Authoritative text, formal proclamation style |
+| **mono** | JetBrains Mono (wght 400–600) | Code, data, technical annotations |
+| **curator** | Caveat | Handwritten accents, curator notes |
+| **colorAccent** | Nabla | **Restricted** — hero moments only, color font |
 
-No Inter, Roboto, or Arial as primary. Extreme contrast typography is the M3 Expressive standard.
+No Inter, Roboto, or Arial. Extreme contrast typography is the M3 Expressive standard. Enable `font-optical-sizing: auto` globally.
 
 ### UI Archetypes (Components)
 
@@ -115,13 +116,17 @@ Located in `frontend/src/components/ui/`:
 - **Jar**: Card, list item, container (simple frame)
 - **Cabinet**: Grid layout, multi-column structure (complex layout)
 - **Stone**: Divider, spacer, border primitive (structural element)
+- **Valve**: Interactive toggle/switch control
+- **Vessel**: Container with fluid/organic shape treatment
+- **Mark**: Brand mark / logo primitive
+- **Signal**: Status and notification indicator
 
 **All archetypes MUST use `--sys-color-*` CSS variables, never hardcoded hex.**
 
 ### Design System Sources of Truth (Hierarchy)
 
 1. **Tokens**: `frontend/src/design/tokens/tokens.json` (DTCG, hand-authored, canonical)
-2. **CSS Variables**: `frontend/src/styles/design-tokens.css` (auto-generated, `--sys-*` prefix, rebuilt via `python3 scripts/build-m3-tokens.py`)
+2. **CSS Variables**: `frontend/src/design/styles/design-tokens.css` (auto-generated, `--sys-*` prefix, rebuilt via `python3 scripts/build-m3-tokens.py` from repo root)
 3. **Components**: `frontend/src/components/ui/*` (consume CSS variables via `className="..."` or `getTokenValue()`)
 4. **Figma**: Figma variables synced via `node scripts/sync-tokens-to-figma-vars.mjs` (bi-directional)
 5. **Deprecated**: `design-system/tokens.json` (Material Design 3 only, incomplete — do not use)
@@ -134,16 +139,18 @@ Located in `frontend/src/components/ui/`:
 
 ### Anti-Patterns
 
-- ❌ Hardcoded colors like `#1A1714` (use `--sys-color-asphaltBlack` or `--sys-color-surface-dim` instead)
+- ❌ Hardcoded colors like `#1A1A1A` (use `--sys-color-charcoalBackground-base` instead)
+- ❌ White or light backgrounds (Solidarity is dark-only; `charcoalBackground` is the canvas)
 - ❌ Generic shape radius (use asymmetric shapes per archetype design)
-- ❌ Purple gradients (Solidarity uses red, gold, green only)
-- ❌ Using legacy colors like `solidarityRed` or `signalGreen` (deprecated)
+- ❌ Purple gradients (Solidarity palette: red, gold, green, orange, blue)
+- ❌ Using Aboriginal Flag colors or Nabla font outside their restricted contexts
 - ❌ Uniform font weights (use variable fonts with semantic weights)
 - ❌ Button states without token variables
-- ✅ All colors from semantic tokens (`--sys-color-*`)
-- ✅ All fonts from {Fraunces, Work Sans, JetBrains Mono}
-- ✅ Asymmetric spacing and border radius per design spec
+- ✅ All colors from semantic tokens (`--sys-color-{name}-base`)
+- ✅ All fonts from {Work Sans, Fraunces, Libre Bodoni, JetBrains Mono, Caveat, Nabla}
+- ✅ Asymmetric spacing and border radius per archetype design spec
 - ✅ Extreme contrast typography (M3 Expressive standard)
+- ✅ `font-optical-sizing: auto` enabled globally
 
 ---
 
@@ -232,11 +239,18 @@ yarn dev  # http://localhost:5173
 
 ### Design Token Sync
 
-**Rebuild CSS variables from tokens.json**:
+**Rebuild CSS variables from tokens.json** (run from repo root):
+```bash
+python3 scripts/build-m3-tokens.py  # Generates frontend/src/design/styles/design-tokens.css
+cd frontend && npm run kr:validate   # Verify manifest compliance
+```
+
+**KR asset pipeline**:
 ```bash
 cd frontend
-node scripts/build-m3-tokens.py  # Generates design-tokens.css
-npm run kr:validate              # Verify DTCG compliance
+npm run kr:sync     # Regenerate manifest + hero registry
+npm run kr:validate # Validate asset manifest integrity
+npm run kr:watch    # Watch assets for changes
 ```
 
 **Sync tokens to Figma** (after token updates):
@@ -356,7 +370,7 @@ black app && isort app && mypy app
 - **Python version**: 3.10 minimum (pyproject.toml)
 - **Node version**: 18+ (package.json)
 - **Design tokens DTCG**: `frontend/src/design/tokens/tokens.json` is the source of truth (complete Kerala Rage system)
-- **CSS variables**: `frontend/src/styles/design-tokens.css` (auto-generated, `--sys-*` prefix, rebuilt via `npm run tokens:build`)
+- **CSS variables**: `frontend/src/design/styles/design-tokens.css` (auto-generated, `--sys-*` prefix, rebuilt via `python3 scripts/build-m3-tokens.py` from repo root)
 - **Token sync to Figma**: `node scripts/sync-tokens-to-figma-vars.mjs`
 - **M3 Expressive**: Variable fonts + extreme contrast typography
 - **Type safety**: Frontend uses strict TS; backend uses mypy (strict)
