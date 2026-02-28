@@ -1,13 +1,12 @@
 ---
 name: ui-design-evaluator
 description: Evaluate design assets, analyze annotated wireframes, and create high-fidelity
-  interactive mockups with kerala-rage kr-solidarity V3.1 compliance. Use when evaluating
+  interactive mockups with kerala-rage kr-solidarity compliance. Use when evaluating
   designs, analyzing wireframes, creating mockups from annotations, scoring design
   system compliance, or generating interactive prototypes.
 metadata:
-  legacy_frontmatter:
-    version: 1.0.0
-    tags:
+  version: 2.0.0
+  tags:
     - design
     - research
     - ui
@@ -15,21 +14,21 @@ metadata:
     - kerala-rage-kr-solidarity
 ---
 
-# UI Design Evaluator & Mockup Creator
+# UI Design Evaluator & HiFi Mockup Creator
 
-**Version:** 1.0
+**Version:** 2.0
 **Purpose:** Design evaluation, wireframe analysis, and high-fidelity mockup generation
-**Design System:** Kerala Rage — Solidarity Mode (V3.1)
+**Design System:** Kerala Rage — Solidarity Mode Only
 
 ---
 
 ## Purpose
 
-Evaluate design assets, analyze annotated wireframes, and create high-fidelity interactive mockups with kerala-rage kr-solidarity V3.1 compliance.
+Evaluate design assets, analyze annotated wireframes, and create high-fidelity interactive mockups with kerala-rage kr-solidarity compliance.
 
 This skill enables comprehensive UI design workflows:
 
-1. **Evaluate** existing designs against kerala-rage kr-solidarity V3.1 standards
+1. **Evaluate** existing designs against kerala-rage kr-solidarity standards
 2. **Analyze** annotated wireframes to extract components and flows
 3. **Design** high-fidelity mockups with design token compliance
 4. **Deliver** interactive prototypes, React components, and evaluation reports
@@ -38,10 +37,13 @@ This skill enables comprehensive UI design workflows:
 
 ## When to Use
 
-- When evaluating existing designs against kerala-rage kr-solidarity standards.
-- When creating high-fidelity mockups from annotated wireframes.
-- When scoring design system compliance (400-point system).
-- When generating interactive prototypes or React component specifications.
+- Evaluating existing designs against kerala-rage kr-solidarity standards
+- Creating high-fidelity mockups from annotated wireframes
+- Scoring design system compliance (400-point system)
+- Generating interactive prototypes or React component specifications
+- Validating asset placement before component build
+
+---
 
 ## Process
 
@@ -51,40 +53,37 @@ INPUT → ANALYZE → EVALUATE → DESIGN → DELIVER
 
 ### 1. INPUT Phase
 
-**Accept Multiple Input Types:**
-
+Accept multiple input types:
 - Screenshots of existing designs
 - Annotated wireframes (image or text description)
 - Figma/Sketch export images
-- Hand-drawn sketches uploaded as photos
-- Markdown wireframe descriptions
+- Markdown wireframe descriptions (from `wireframe-annotator`)
 - Component requirement lists
 
 ### 2. ANALYZE Phase
 
-**Extract Design Intent:**
-
+Extract design intent:
 - Parse annotations and notes
-- Identify components needed (buttons, cards, forms, etc.)
+- Identify components needed — map to archetypes (Seed / Pebble / Lens / Jar / Cabinet / Stone)
 - Map user flows and interactions
-- Determine kr-dark vs kr-dark mode
 - Extract content hierarchy
 - Note accessibility requirements
+- Identify asset placement slots (Z-0 through Z-3+)
 
 ### 3. EVALUATE Phase
 
 **Score Against 4 Criteria (400 points total):**
 
-**A. kerala-rage kr-solidarity V3.1 Compliance (100 pts)**
+#### A. Kerala Rage kr-solidarity Compliance (100 pts)
 
-- ✅ Uses Solidarity Typography Stack (Work Sans, Fraunces, Libre Bodoni, JetBrains Mono, Caveat)
-- ✅ Asymmetric "Stone/Slab" shapes (no uniform border-radius)
-- ✅ Solidarity color palette (Step 0 Bg, Solidarity Red, Ink Gold)
-- ✅ Nabla used only as decorative icon-scale glyphs
-- ✅ 9× weight ratio contrast
-- ❌ Anti-Slop violations (Inter/Roboto, white backgrounds, perfect circles)
+- ✅ Uses Kerala Rage Typography Stack (Fraunces, Work Sans, JetBrains Mono)
+- ✅ Asymmetric shapes — no uniform border-radius
+- ✅ Solidarity color palette via `--sys-color-*` tokens only
+- ✅ Extreme weight contrast (wght 300 vs 900+, M3 Expressive standard)
+- ✅ Component archetype assigned (Seed/Pebble/Lens/Jar/Cabinet/Stone)
+- ❌ Anti-Slop violations: Inter/Roboto, white (#FFF) backgrounds, hardcoded hex, purple gradients
 
-**B. Accessibility (100 pts)**
+#### B. Accessibility (100 pts)
 
 - ✅ WCAG AA contrast ratios (4.5:1 minimum)
 - ✅ ARIA labels on interactive elements
@@ -93,7 +92,7 @@ INPUT → ANALYZE → EVALUATE → DESIGN → DELIVER
 - ✅ Screen reader friendly structure
 - ✅ Color not sole indicator
 
-**C. User Flow Logic (100 pts)**
+#### C. User Flow Logic (100 pts)
 
 - ✅ Clear information hierarchy
 - ✅ Logical interaction patterns
@@ -102,535 +101,203 @@ INPUT → ANALYZE → EVALUATE → DESIGN → DELIVER
 - ✅ Loading state design
 - ✅ Empty state design
 
-**D. Visual Hierarchy & Typography (100 pts)**
+#### D. Visual Hierarchy & Typography (100 pts)
 
-- ✅ Clear typographic scale (6× size ratio)
-- ✅ Proper use of Solidarity Typography Stack
-- ✅ 9× weight ratio enforced (100 vs 900)
+- ✅ Clear typographic scale (Fraunces → Work Sans → JetBrains Mono)
+- ✅ Extreme weight contrasts (M3 Expressive — not subtle)
 - ✅ Visual weight guides attention
 - ✅ Spacing creates rhythm
 - ✅ Alignment and grid consistency
 
-**Scoring:**
+**Grade Scale:**
+- **360+ (90%)**: Excellent — Production ready
+- **320–359 (80–89%)**: Good — Minor refinements
+- **280–319 (70–79%)**: Satisfactory — Needs work
+- **240–279 (60–69%)**: Needs significant improvement
+- **<240 (<60%)**: Does not meet standards
 
-- **A (90-100%):** Excellent — Production ready
-- **B (80-89%):** Good — Minor refinements
-- **C (70-79%):** Satisfactory — Needs work
-- **D (60-69%):** Needs significant improvement
-- **F (<60%):** Does not meet standards
+---
 
 ### 4. DESIGN Phase
 
 **Generate High-Fidelity Mockup:**
 
-**Step 1: Mode Selection**
+#### Step 1: Component Mapping
 
-- **kr-dark Mode:** Expressive, warm, cursive allowed, extreme Fraunces.
-- **kr-dark Mode:** Restrained, cool, no cursive, clean typography.
+Map wireframe elements to kr-solidarity archetypes:
+- Atomic elements → **Seed** (button, chip, badge)
+- Sequential stacks → **Pebble** (progress, stacked items)
+- Focal overlays → **Lens** (modal, popover, drawer)
+- Framed containers → **Jar** (card, list item, panel)
+- Complex grids → **Cabinet** (dashboard, multi-column)
+- Structural dividers → **Stone** (divider, spacer)
 
-**Step 2: Component Mapping**
+#### Step 2: Token Application
 
-- Map wireframe elements to Solidarity components
-- Apply design tokens (Step 0-6 system)
-- Use Solidarity Typography Stack
-- Apply asymmetric radii (Stone/Slab/Pebble)
-- Apply Nabla as layered glyph only
+**Colors — `--sys-color-*` only:**
+```css
+/* Backgrounds */
+background: var(--sys-color-asphaltBlack);        /* #1A1714 */
+surface: var(--sys-color-primary-10);              /* Dark container */
 
-**Step 3: Layout Construction**
+/* Brand */
+accent: var(--sys-color-kr-ink-gold);             /* #D4A84B */
+action: var(--sys-color-waratahRed);              /* #C45C4B */
+grounded: var(--sys-color-ochreEarth);            /* #B8733D */
+natural: var(--sys-color-gumLeafGreen);           /* #6B7F6E */
+neutral: var(--sys-color-concreteGrey);           /* #A39B8F */
+
+/* Text */
+text-primary: var(--sys-color-paperWhite);        /* #F5F0E8 */
+text-muted: var(--sys-color-concreteGrey);
+```
+
+**Typography:**
+```css
+/* Hero / headline — Fraunces variable */
+font-family: var(--sys-type-font-fraunces);
+font-variation-settings: "wght" 700, "SOFT" 50, "WONK" 0;
+
+/* Body / UI — Work Sans */
+font-family: var(--sys-type-font-work-sans);
+font-weight: 400; /* to 600 */
+
+/* Code / data — JetBrains Mono */
+font-family: var(--sys-type-font-mono);
+font-weight: 400;
+```
+
+**Shapes — asymmetric kr-solidarity:**
+```css
+/* Seed (button) */
+border-radius: 40px 12px 40px 12px;
+
+/* Jar (card) */
+border-radius: 32px 8px 28px 12px;
+
+/* Lens (modal) */
+border-radius: 24px 8px 20px 8px;
+```
+
+**Motion — spring physics:**
+```css
+transition: all 250ms cubic-bezier(0.34, 1.56, 0.64, 1);
+/* Or Framer Motion: type: 'spring', stiffness: 400, damping: 20 */
+```
+
+#### Step 3: Layout Construction
 
 - Build responsive HTML structure
-- Apply CSS with design tokens
+- Apply CSS with `--sys-color-*` design tokens
 - Add interactive states (hover, focus, active)
 - Implement accessibility attributes
 
-**Step 4: Enhancement**
+#### Step 4: Asset Integration
 
-- Add Framer Motion physics
-- Apply V3.1 playful mixing (if appropriate)
-- Add wallpaper background (if hero section)
-- Implement viscous breeze motion
+- Place Kerala Rage assets using `asset-placement-strategy` z-index rules
+- Z-0: substrate/base texture
+- Z-1–2: atmospheric overlays
+- Z-3+: UI foreground accents
+
+---
 
 ### 5. DELIVER Phase
 
-**Output Multiple Formats:**
-
 **A. Interactive HTML Artifact**
-
 ```html
 <!-- Viewable directly in Claude interface -->
 <!-- Full design with interactions -->
-<!-- Uses design tokens via CSS custom properties -->
+<!-- Uses --sys-color-* tokens via CSS custom properties -->
+<!-- Fraunces + Work Sans + JetBrains Mono only -->
 ```
 
 **B. React Component Code**
-
 ```tsx
 // Production-ready TypeScript/React
-// 100% design token compliance
+// 100% --sys-color-* token compliance
 // ARIA accessibility built-in
-// Framer Motion physics included
+// Framer Motion spring physics
+// Archetype annotated (e.g., // Archetype: Jar)
 ```
 
 **C. Evaluation Report**
-
 ```markdown
 ## Design Evaluation Report
 
-- kerala-rage kr-solidarity V3.1 Compliance: 95/100 (A)
+- kr-solidarity Compliance: 95/100 (A)
 - Accessibility: 88/100 (B)
 - User Flow Logic: 92/100 (A)
 - Visual Hierarchy: 90/100 (A)
 - **Overall:** 365/400 (91% — Excellent)
 
 ### Strengths
-
-- Perfect Federation Typography Stack usage
-- Excellent asymmetric shapes
-- Strong color palette
+- Correct Kerala Rage typography stack (Fraunces headlines)
+- Asymmetric shapes on all archetypes
+- --sys-color-* tokens throughout
 
 ### Improvements Needed
-
 - Add focus states to form inputs
 - Increase contrast on secondary text
 ```
 
 **D. Component Specifications**
-
 ```markdown
 ## Components Required
 
-1. HeroSection (kr-dark mode)
-   - Cursive + Serif mix hero
-   - [DEPRECATED_STYLE] wallpaper background
-   - CTA buttons with Wattle Gold
+1. HeroSection — Archetype: Cabinet
+   - Fraunces wght 700 headline
+   - KR asset hero background (Z-0), overlay (Z-1)
+   - SeedButton CTAs with --sys-color-kr-ink-gold
 
-2. MetricCard (kr-dark mode)
-   - Clean typography (Work Sans)
-   - Asymmetric radius (pebble shape)
-   - Restrained color palette
+2. MetricCard — Archetype: Jar
+   - Work Sans body text
+   - Asymmetric radius (32px 8px 28px 12px)
+   - --sys-color-primary-10 surface
 ```
 
 ---
 
-## 🎨 Design Token Application
-
-### Automatic Token Mapping
-
-**Colors:**
-
-```css
-/* Wireframe: "primary button - blue" */
-/* Maps to: */
-background: var(--nc-wattle-gold-300);
-
-/* Wireframe: "error state - red" */
-/* Maps to: */
-color: var(--nc-[DEPRECATED_STYLE]-red-400);
-
-/* Wireframe: "background - dark" */
-/* Maps to: */
-background: var(--nc-asphalt-black-300);
-```
-
-**Typography:**
-
-```css
-/* Wireframe: "large heading" */
-font-family: var(--nc-font-fraunces);
-font-variation-settings: "SOFT" 50, "WONK" 1, "wght" 900;
-
-/* Wireframe: "technical data" */
-font-family: var(--nc-font-mono); /* JetBrains Mono */
-font-weight: 400;
-
-/* Wireframe: "decorative accent" */
-font-family: var(--nc-font-nabla);
-font-palette: --nabla-solidarity;
-font-size: 24px; /* Icon-scale only */
-```
-
-**Shapes:**
-
-```css
-/* Wireframe: "card" */
-/* Maps to: */
-border-radius: 32px 8px 28px 12px; /* kr-motif shape */
-
-/* Wireframe: "button" */
-/* Maps to: */
-border-radius: 40px 12px 40px 12px; /* wattle shape */
-```
-
-**Motion:**
-
-```css
-/* Wireframe: "smooth transition" */
-/* Maps to: */
-transition: all 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
-```
-
----
-
-## 📋 Input Format Examples
-
-### Example 1: Text Wireframe Description
-
-```
-Create a landing page hero section with:
-- Large headline: "Career Intelligence"
-- Subheadline with cursive accent
-- Two CTA buttons (primary + secondary)
-- Background: [DEPRECATED_STYLE] wallpaper
-- Mode: kr-dark (expressive)
-```
-
-**Output:** Interactive HTML hero with cursive+serif mix, wallpaper background, Wattle Gold CTAs
-
----
-
-### Example 2: Annotated Screenshot
-
-```
-[User uploads screenshot with annotations:]
-- "This should be more expressive" (pointing to header)
-- "Use [DEPRECATED_STYLE] shapes" (pointing to cards)
-- "Add cursive accent here" (pointing to subtitle)
-- Mode: kr-dark
-```
-
-**Process:**
-
-1.  **Analyze:** Header needs Bloom ultra-wonky, cards need asymmetric radii, subtitle needs Caveat cursive
-2.  **Evaluate:** Current design scores 60% (generic fonts, uniform corners)
-3.  **Design:** Rebuild with V3.1 tokens
-4.  **Deliver:** Interactive mockup + evaluation report
-
----
-
-### Example 3: Component List
-
-```
-Dashboard page needs:
-1. PageHeader with title and breadcrumbs
-2. 4x MetricCard showing KPIs
-3. ChartPane with data visualization
-4. ActionButton for primary action
-
-Mode: kr-dark (data-focused)
-```
-
-**Output:**
-
-- Interactive dashboard mockup
-- 4 separate React components
-- kr-dark mode styling (restrained, clean)
-- Evaluation report with accessibility score
-
----
-
-## 🎭 kr-dark vs kr-dark Mode
-
-### kr-dark Mode (Expressive, Warm)
-
-**Typography:**
-
-- ✅ Caveat cursive for hero/annotations
-- ✅ Extreme Fraunces (SOFT=100, WONK=1, wght=900)
-- ✅ Playful mixing utilities
-- ✅ Shadow layering, weight contrast, rotation
-
-**Colors:**
-
-- Full [DEPRECATED_STYLE] palette (Wattle Gold, [DEPRECATED_STYLE] Red)
-- High contrast and emotional
-- Glowing accents
-
-**Shapes:**
-
-- Maximum [DEPRECATED_STYLE] asymmetry
-- Dramatic radius variations
-- [DEPRECATED_STYLE]-inspired forms
-
-**Motion:**
-
-- Framer Motion physics
-- Variable font axis animations
-- Viscous breeze easing
-
-**Wallpaper:**
-
-- Full visibility (0.65-0.85 opacity)
-- Parallax effects
-- Hot zones typography positioning
-
----
-
-### kr-dark Mode (Restrained, Cool)
-
-**Typography:**
-
-- ❌ NO cursive (ever)
-- Restrained Fraunces (SOFT=20, WONK=0)
-- Work Sans sans-serif primary
-- JetBrains Mono for data
-
-**Colors:**
-
-- Muted kr-leaf smoke palette
-- Low contrast and clinical
-- Minimal gold accents
-
-**Shapes:**
-
-- Subtle asymmetry
-- Functional [DEPRECATED_STYLE] shapes
-- Grid-aligned layouts
-
-**Motion:**
-
-- Minimal animations
-- Fast, efficient transitions
-- No playful physics
-
-**Wallpaper:**
-
-- Barely visible (0.05 opacity)
-- Heavily desaturated
-- Functional background only
-
----
-
-## ✅ Compliance Checklist
+## Compliance Checklist
 
 Before delivering a mockup, verify:
 
-### Design System Compliance
-
-- [ ] Uses only Federation Typography Stack (no Inter/Roboto)
+### Design System
+- [ ] Uses only Kerala Rage typography stack (Fraunces / Work Sans / JetBrains Mono)
+- [ ] No forbidden fonts: Inter, Roboto, Arial, Helvetica, Sora, Plus Jakarta Sans
 - [ ] All shapes are asymmetric (no uniform border-radius)
-- [ ] Colors from [DEPRECATED_STYLE] palette
-- [ ] Motion uses viscous breeze easing
-- [ ] Mode-appropriate styling (kr-dark vs kr-dark)
+- [ ] All colors from `--sys-color-*` tokens — zero hardcoded hex
+- [ ] Motion uses spring physics (cubic-bezier(0.34, 1.56, 0.64, 1))
+- [ ] Component assigned to archetype (Seed/Pebble/Lens/Jar/Cabinet/Stone)
 
-### V3.1 Typography
-
-- [ ] uses only Solidarity Typography Stack (no Inter/Roboto/Sora)
-- [ ] Nabla used ONLY as decorative icon-scale glyph
-- [ ] 9× weight ratio enforced (100 vs 900)
-- [ ] 6× size ratio enforced (72px vs 12px)
-- [ ] All shapes are asymmetric (no radius: 50%)
-- [ ] Colors from Step 0-6 palette (Background: #0F0F0F)
-- [ ] NO white backgrounds (#FFFFFF)
+### Anti-Slop
+- [ ] NO white (#FFFFFF) backgrounds — use `--sys-color-paperWhite` on dark only
+- [ ] NO purple or blue gradients
+- [ ] NO generic SaaS aesthetic
+- [ ] NO uniform corners (e.g., `rounded-lg` on everything)
 
 ### Accessibility
-
 - [ ] 4.5:1 contrast ratio minimum (7:1 for AAA)
 - [ ] ARIA labels on all interactive elements
 - [ ] Keyboard navigation support
 - [ ] Focus states visible
 - [ ] No color-only indicators
 
-### Anti-Slop Protocol
-
-- [ ] NO forbidden fonts (Inter, Roboto, Arial, Helvetica)
-- [ ] NO uniform corners (must be asymmetric)
-- [ ] NO purple/blue gradients
-- [ ] NO generic SaaS aesthetic
-
 ---
 
-## 🚀 Usage Examples
+## Related Skills
 
-### Example 1: Evaluate Existing Design
-
-**User:** "Evaluate this dashboard design"
-[Uploads screenshot]
-
-**Claude:**
-
-1.  Analyzes design visually
-2.  Scores against 4 criteria
-3.  Generates evaluation report:
-
-    ```
-    kerala-rage kr-solidarity Compliance: 45/100 (F)
-    - Uses Inter font (forbidden)
-    - Uniform 8px border-radius
-    - Generic blue color scheme
-
-    Accessibility: 75/100 (C)
-    - Contrast ratios adequate
-    - Missing focus states
-
-    Recommendations:
-    1. Replace Inter with Federation Typography Stack
-    2. Apply asymmetric [DEPRECATED_STYLE] shapes
-    3. Use [DEPRECATED_STYLE] color palette
-    ```
-
----
-
-### Example 2: Create Mockup from Wireframe
-
-**User:** "Create a high-fidelity hero section from this wireframe. kr-dark mode."
-[Uploads wireframe sketch with annotations]
-
-**Claude:**
-
-1.  **Analyzes:**
-    - Hero needs large headline
-    - Subtitle with cursive accent
-    - Two CTA buttons
-    - Wallpaper background
-
-2.  **Designs:**
-    - Cursive+serif mix hero (Proclamation + Caveat)
-    - Wallpaper at 0.75 opacity with hot zones positioning
-    - Wattle Gold primary button, [DEPRECATED_STYLE] secondary
-    - V3.1 playful mixing (shadow layering on hero text)
-
-3.  **Delivers:**
-    - Interactive HTML artifact (viewable immediately)
-    - React component code
-    - Evaluation report (98/100 - Excellent)
-
----
-
-### Example 3: Multi-Page Flow
-
-**User:** "Analyze this 5-page onboarding flow wireframe and create mockups for each page. kr-dark mode."
-
-**Claude:**
-
-1.  **Analyzes:**
-    - Extracts components from all 5 pages
-    - Maps user flow (Step 1 → Step 2 → ... → Complete)
-    - Identifies reusable components
-
-2.  **Evaluates:**
-    - Flow logic: 90/100
-    - Accessibility: Need focus states
-    - Typography: Will use Work Sans + JetBrains Mono
-
-3.  **Designs:**
-    - Creates 5 interactive HTML pages
-    - Consistent component library
-    - kr-dark mode styling (restrained, clean)
-    - Navigation between pages
-
-4.  **Delivers:**
-    - 5 interactive HTML artifacts
-    - Shared component code
-    - Flow diagram
-    - Evaluation report
-
----
-
-## 🎨 Interactive Mockup Features
-
-**HTML Artifacts Include:**
-
-- ✅ Hover states (buttons, cards, links)
-- ✅ Focus states (keyboard navigation)
-- ✅ Active states (button press)
-- ✅ Animations (Framer Motion physics if kr-dark)
-- ✅ Responsive breakpoints (mobile, tablet, desktop)
-- ✅ Dark mode support (kerala-rage is dark-first)
-- ✅ Real design tokens via CSS custom properties
-
-**Interactions Demonstrated:**
-
-- Button hover → Color shift + elevation
-- Card hover → Scale + shadow
-- Input focus → Border glow + label animation
-- Typography hover → Variable font axis shift (kr-dark mode)
-- Scroll → Parallax wallpaper (kr-dark hero sections)
-
----
-
-## 📖 Best Practices
-
-### When to Use This Skill
-
-**✅ USE FOR:**
-
-- Evaluating existing designs for kerala-rage compliance
-- Creating high-fidelity mockups from wireframes
-- Generating interactive prototypes for user testing
-- Converting design specifications to code
-- Validating accessibility before development
-
-**❌ DON'T USE FOR:**
-
-- Production-ready backend integration (use component-builder)
-- Complex state management (use component-builder)
-- Component migration (use component-transformer)
-- Design token auditing (use kerala-rage-kr-solidarity-audit)
-
-### Skill Integration
-
-**Workflow Integration:**
-
+**Workflow chain:**
 ```
-ui-design-evaluator (mockup)
-  → component-builder (production code)
-  → jest-test-scaffolder (tests)
-  → storybook-scaffolder (docs)
+wireframe-annotator → ui-design-evaluator → component-builder → jest-test-scaffolder
 ```
 
----
-
-## 🎯 Quick Reference
-
-### Evaluation Scoring
-
-**400 Points Total:**
-
-- kerala-rage kr-solidarity V3.1 Compliance: 100 pts
-- Accessibility (WCAG AA): 100 pts
-- User Flow Logic: 100 pts
-- Visual Hierarchy & Typography: 100 pts
-
-**Grades:**
-
-- 360+ (90%) = A (Excellent)
-- 320-359 (80-89%) = B (Good)
-- 280-319 (70-79%) = C (Satisfactory)
-- 240-279 (60-69%) = D (Needs work)
-- <240 (<60%) = F (Does not meet standards)
-
-### Mode Selection
-
-**kr-dark Mode:**
-
-- Landing pages
-- Marketing pages
-- Hero sections
-- Feature callouts
-- Profile pages
-
-**kr-dark Mode:**
-
-- Dashboards
-- Data tables
-- Forms
-- Settings
-- Technical tools
+- `wireframe-annotator` — Upstream annotated wireframe source
+- `asset-placement-strategy` — Asset slot and z-index validation
+- `component-builder` — Convert mockup specs to production code
+- `component-transformer` — Migrate legacy components to kr-solidarity
+- `component-visual-audit` — Screenshot-based compliance audit
+- `hifi-blueprint-linter` — Validate wireframe document correctness
 
 ---
 
-## 📚 Related Skills
-
-**Use Together With:**
-
-- `component-builder` — Convert mockups to production code
-- `asset-placement-strategy` — Typography on wallpaper positioning
-- `kerala-rage-visual-audit` — Validate final design token compliance
-- `compliance-dashboard` — Track overall design system adoption
-
----
-
-**Status:** ✅ Production Ready
-**Version:** 1.0.0
-**V3.1 Compatible:** Yes
-**Last Updated:** 2026-02-08
+**Status:** Production Ready | **Version:** 2.0.0 | **Last Updated:** 2026-02-28
