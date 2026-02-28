@@ -1,5 +1,6 @@
 import { Jar, Pebble, Stone } from '@/components/ui';
 import { m3Toast } from '@/utils/toast';
+import { validateFile } from '@/utils/fileValidation';
 import { FileText, UploadCloud } from 'lucide-react';
 import React, { useState } from 'react';
 
@@ -14,6 +15,13 @@ export const EvidenceUploader: React.FC = () => {
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
+
+    const validation = validateFile(file, ['.pdf', '.docx', '.txt']);
+    if (!validation.valid) {
+      m3Toast.error('Invalid File', validation.error!);
+      e.target.value = '';
+      return;
+    }
 
     setIsUploading(true);
     const formData = new FormData();
