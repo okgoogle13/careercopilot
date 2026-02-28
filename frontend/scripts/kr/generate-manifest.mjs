@@ -21,7 +21,15 @@ const BASE_DIR = join(__dirname, '../../public/assets/kr-solidarity');
 const OUTPUT_PATH = join(__dirname, '../../public/assets/kerala-rage-kr-solidarity-manifest.json');
 
 // Layer mapping based on category
+// Supports both direct layer names (from filename encoding) and legacy subdirectory names
 const CATEGORY_TO_LAYER = {
+  // Direct layer names (encoded in kr-solidarity__<layer>__... filename convention)
+  atmospheric: 'atmospheric',
+  spiritual: 'spiritual',
+  resistance: 'resistance',
+  cultural: 'cultural',
+  substrate: 'substrate',
+  // Legacy subdirectory category names
   devotional: 'spiritual',
   portrait: 'resistance',
   hero: 'resistance',
@@ -29,18 +37,29 @@ const CATEGORY_TO_LAYER = {
   abstract: 'atmospheric',
   street: 'resistance',
   texture: 'substrate',
-  'ui-kit': 'ui-kit'
+  landmark: 'substrate',
+  'ui-kit': 'ui-kit',
+  uncategorized: 'atmospheric' // temporary staging layer
 };
 
 // Priority mapping
 const CATEGORY_TO_PRIORITY = {
+  // Direct layer names
+  atmospheric: 'HIGH',
+  spiritual: 'CRITICAL',
+  resistance: 'CRITICAL',
+  cultural: 'HIGH',
+  substrate: 'HIGH',
+  // Legacy subdirectory names
   devotional: 'CRITICAL',
   portrait: 'CRITICAL',
   symbol: 'HIGH',
   abstract: 'HIGH',
   street: 'HIGH',
   texture: 'HIGH',
-  'ui-kit': 'MEDIUM'
+  landmark: 'HIGH',
+  'ui-kit': 'MEDIUM',
+  uncategorized: 'MEDIUM'
 };
 
 // Semantic mapping
@@ -199,22 +218,50 @@ function parseSolidarityFilename(filepath) {
 
 /**
  * Extract metadata from UI Kit filename (SVG)
- * Format: KR-UI-XXX.svg
+ * Supports two conventions:
+ *   New: kr-solidarity__ui-kit__KR-UI-XXX__v1.svg
+ *   Legacy: KR-UI-XXX.svg | KR-BRUTALIST-MASK-XXX.svg
  */
 function parseUiKitFilename(filepath) {
   const filename = basename(filepath, '.svg');
-  if (!filename.startsWith('KR-UI-')) {
-      return null;
+
+  // New convention: kr-solidarity__ui-kit__<ID>__v<ver>
+  if (filename.includes('__')) {
+    const parts = filename.split('__');
+    if (parts.length >= 3 && parts[1] === 'ui-kit') {
+      const id = parts[2]; // e.g. KR-UI-001 or KR-BRUTALIST-MASK-001
+      // Build readable name from ID
+      const name = id
+        .replace(/^KR-/, '')
+        .replace(/-/g, ' ')
+        .replace(/\b\w/g, c => c.toUpperCase());
+      return {
+        category: 'ui-kit',
+        name: `UI Asset — ${name}`,
+        filename,
+        type: 'ui-kit',
+        id
+      };
+    }
+    return null;
   }
-  
-  // For UI Kit, name and category are inferred or hardcoded if not in filename
-  return {
-    category: 'ui-kit',
-    name: `UI Asset ${filename}`, // Default name, ideally populated from a map or metadata file
-    filename,
-    type: 'ui-kit',
-    id: filename // Reuse filename ID for UI kit
-  };
+
+  // Legacy convention: KR-UI-XXX or KR-BRUTALIST-MASK-XXX
+  if (filename.startsWith('KR-UI-') || filename.startsWith('KR-BRUTALIST-')) {
+    const name = filename
+      .replace(/^KR-/, '')
+      .replace(/-/g, ' ')
+      .replace(/\b\w/g, c => c.toUpperCase());
+    return {
+      category: 'ui-kit',
+      name: `UI Asset — ${name}`,
+      filename,
+      type: 'ui-kit',
+      id: filename
+    };
+  }
+
+  return null;
 }
 
 /**
@@ -345,11 +392,15 @@ async function generateManifest() {
     }
   }
 
-  // UI Kit Assets (Use filename IDs)
+  // UI Kit Assets (Use filename IDs) — deduplicate by ID (subdirs copy main dir files)
+  const seenUiKitIds = new Set();
   svgFiles.sort();
   for (let i = 0; i < svgFiles.length; i++) {
       const entry = await generateManifestEntry(svgFiles[i], 0, 'ui-kit');
-      if (entry) entries.push(entry);
+      if (entry && !seenUiKitIds.has(entry.id)) {
+          seenUiKitIds.add(entry.id);
+          entries.push(entry);
+      }
   }
   
   // Build manifest
