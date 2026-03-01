@@ -416,12 +416,14 @@ async def apply_catalog_task(args):
 
     logger.info(f"Applying catalog with {len(catalog['assets'])} items.")
 
+    base_dest = args.output if args.output else "frontend/public/assets"
+    
     for asset in catalog['assets']:
         original = asset['original_path']
         new_name = asset['suggested_name']
         category = asset.get('category', 'misc')
 
-        dest_folder = os.path.join("assets", category)
+        dest_folder = os.path.join(base_dest, category)
         if not os.path.exists(dest_folder):
             if execute: os.makedirs(dest_folder, exist_ok=True)
 
