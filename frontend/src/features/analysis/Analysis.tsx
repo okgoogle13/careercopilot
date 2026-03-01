@@ -18,7 +18,6 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 import { toast } from 'sonner';
-import pileaPlant from '../../assets/images/pilea-plant.jpg';
 import { MetricCard } from '../../components/shared/MetricCard';
 import { KeywordTag } from '../../components/shared/KeywordTag';
 import { PageHeader } from '../../components/shared/PageHeader';
@@ -210,21 +209,6 @@ export function Analysis() {
 
   return (
     <div id="analysis-content" className="p-6 md:p-12 max-w-7xl relative animate-in fade-in zoom-in-95 duration-500 ease-spring">
-      {/* Pilea Plant Decoration - Bottom Left Corner */}
-      <div className="fixed bottom-0 left-0 lg:left-[280px] md:left-[72px] pointer-events-none w-[300px] z-[1] opacity-55 scale-x-[-1]">
-        <img
-          src={pileaPlant}
-          alt=""
-          className="w-full h-auto mix-blend-screen"
-          style={{
-            WebkitMaskImage:
-              'linear-gradient(to top, transparent 0%, rgba(0,0,0,0.35) 8%, rgba(0,0,0,0.65) 18%, rgba(0,0,0,0.85) 28%, black 40%)',
-            maskImage:
-              'linear-gradient(to top, transparent 0%, rgba(0,0,0,0.35) 8%, rgba(0,0,0,0.65) 18%, rgba(0,0,0,0.85) 28%, black 40%)',
-          }}
-        />
-      </div>
-
       <div className="relative z-10">
         {/* Header with Actions */}
         <div className="flex items-center justify-between mb-8">

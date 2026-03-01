@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion';
 import React from 'react';
 import { NorthcoteButton } from '../../../components/ui/NorthcoteButton';
-import sentrySrc from '../../../assets/specimens/sentry_kookaburra.png';
 
 export const GalleryLanding: React.FC = () => {
   return (
@@ -19,11 +18,6 @@ export const GalleryLanding: React.FC = () => {
         >
           {/* The Sentry: Kookaburra Mascot */}
           <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-primary-specimen-night/30 max-w-sm mx-auto transform rotate-1 hover:rotate-0 transition-transform duration-700">
-            <img
-              src={sentrySrc}
-              alt="The Sentry - Kookaburra Mascot"
-              className="w-full h-auto object-cover"
-            />
             {/* Vignette Overlay */}
             <div className="absolute inset-0 ring-1 ring-inset ring-white/10 pointer-events-none rounded-2xl" />
           </div>

@@ -1,7 +1,7 @@
 {
   "project": "kerala-rage kr-solidarity",
   "version": "6.0.0",
-  "last_updated": "2026-02-28",
+  "last_updated": "2026-03-01",
   "strategy": "Layered Identity System",
   "total_assets": 71,
   "layers": [
@@ -973,7 +973,7 @@
     },
     {
       "id": "KR-BRUTALIST-MASK-001",
-      "name": "UI Asset — BRUTALIST MASK 001",
+      "name": "UI Asset \u2014 BRUTALIST MASK 001",
       "category": "ui-kit",
       "layer": "ui-kit",
       "aspect_ratio": "1:1",
@@ -1004,7 +1004,7 @@
     },
     {
       "id": "KR-UI-016",
-      "name": "UI Asset — UI 016",
+      "name": "UI Asset \u2014 UI 016",
       "category": "ui-kit",
       "layer": "ui-kit",
       "aspect_ratio": "1:1",
@@ -1035,7 +1035,7 @@
     },
     {
       "id": "KR-UI-017",
-      "name": "UI Asset — UI 017",
+      "name": "UI Asset \u2014 UI 017",
       "category": "ui-kit",
       "layer": "ui-kit",
       "aspect_ratio": "1:1",
@@ -1066,7 +1066,7 @@
     },
     {
       "id": "KR-UI-001",
-      "name": "UI Asset — UI 001",
+      "name": "UI Asset \u2014 UI 001",
       "category": "ui-kit",
       "layer": "ui-kit",
       "aspect_ratio": "1:1",
@@ -1097,7 +1097,7 @@
     },
     {
       "id": "KR-UI-002",
-      "name": "UI Asset — UI 002",
+      "name": "UI Asset \u2014 UI 002",
       "category": "ui-kit",
       "layer": "ui-kit",
       "aspect_ratio": "1:1",
@@ -1128,7 +1128,7 @@
     },
     {
       "id": "KR-UI-003",
-      "name": "UI Asset — UI 003",
+      "name": "UI Asset \u2014 UI 003",
       "category": "ui-kit",
       "layer": "ui-kit",
       "aspect_ratio": "1:1",
@@ -1159,7 +1159,7 @@
     },
     {
       "id": "KR-UI-004",
-      "name": "UI Asset — UI 004",
+      "name": "UI Asset \u2014 UI 004",
       "category": "ui-kit",
       "layer": "ui-kit",
       "aspect_ratio": "1:1",
@@ -1190,7 +1190,7 @@
     },
     {
       "id": "KR-UI-005",
-      "name": "UI Asset — UI 005",
+      "name": "UI Asset \u2014 UI 005",
       "category": "ui-kit",
       "layer": "ui-kit",
       "aspect_ratio": "1:1",
@@ -1221,7 +1221,7 @@
     },
     {
       "id": "KR-UI-006",
-      "name": "UI Asset — UI 006",
+      "name": "UI Asset \u2014 UI 006",
       "category": "ui-kit",
       "layer": "ui-kit",
       "aspect_ratio": "1:1",
@@ -1252,7 +1252,7 @@
     },
     {
       "id": "KR-UI-007",
-      "name": "UI Asset — UI 007",
+      "name": "UI Asset \u2014 UI 007",
       "category": "ui-kit",
       "layer": "ui-kit",
       "aspect_ratio": "1:1",
@@ -1283,7 +1283,7 @@
     },
     {
       "id": "KR-UI-008",
-      "name": "UI Asset — UI 008",
+      "name": "UI Asset \u2014 UI 008",
       "category": "ui-kit",
       "layer": "ui-kit",
       "aspect_ratio": "1:1",
@@ -1314,7 +1314,7 @@
     },
     {
       "id": "KR-UI-009",
-      "name": "UI Asset — UI 009",
+      "name": "UI Asset \u2014 UI 009",
       "category": "ui-kit",
       "layer": "ui-kit",
       "aspect_ratio": "1:1",
@@ -1345,7 +1345,7 @@
     },
     {
       "id": "KR-UI-010",
-      "name": "UI Asset — UI 010",
+      "name": "UI Asset \u2014 UI 010",
       "category": "ui-kit",
       "layer": "ui-kit",
       "aspect_ratio": "1:1",
@@ -1376,7 +1376,7 @@
     },
     {
       "id": "KR-UI-011",
-      "name": "UI Asset — UI 011",
+      "name": "UI Asset \u2014 UI 011",
       "category": "ui-kit",
       "layer": "ui-kit",
       "aspect_ratio": "1:1",
@@ -1407,7 +1407,7 @@
     },
     {
       "id": "KR-UI-012",
-      "name": "UI Asset — UI 012",
+      "name": "UI Asset \u2014 UI 012",
       "category": "ui-kit",
       "layer": "ui-kit",
       "aspect_ratio": "1:1",
@@ -1438,7 +1438,7 @@
     },
     {
       "id": "KR-UI-013",
-      "name": "UI Asset — UI 013",
+      "name": "UI Asset \u2014 UI 013",
       "category": "ui-kit",
       "layer": "ui-kit",
       "aspect_ratio": "1:1",
@@ -1469,7 +1469,7 @@
     },
     {
       "id": "KR-UI-014",
-      "name": "UI Asset — UI 014",
+      "name": "UI Asset \u2014 UI 014",
       "category": "ui-kit",
       "layer": "ui-kit",
       "aspect_ratio": "1:1",
@@ -1500,7 +1500,7 @@
     },
     {
       "id": "KR-UI-015",
-      "name": "UI Asset — UI 015",
+      "name": "UI Asset \u2014 UI 015",
       "category": "ui-kit",
       "layer": "ui-kit",
       "aspect_ratio": "1:1",
@@ -1531,7 +1531,7 @@
     },
     {
       "id": "KR-UI-018",
-      "name": "UI Asset — UI 018",
+      "name": "UI Asset \u2014 UI 018",
       "category": "ui-kit",
       "layer": "ui-kit",
       "aspect_ratio": "1:1",
@@ -1562,7 +1562,7 @@
     },
     {
       "id": "KR-UI-019",
-      "name": "UI Asset — UI 019",
+      "name": "UI Asset \u2014 UI 019",
       "category": "ui-kit",
       "layer": "ui-kit",
       "aspect_ratio": "1:1",
@@ -1593,7 +1593,7 @@
     },
     {
       "id": "KR-UI-020",
-      "name": "UI Asset — UI 020",
+      "name": "UI Asset \u2014 UI 020",
       "category": "ui-kit",
       "layer": "ui-kit",
       "aspect_ratio": "1:1",
@@ -1624,7 +1624,7 @@
     },
     {
       "id": "KR-UI-021",
-      "name": "UI Asset — UI 021",
+      "name": "UI Asset \u2014 UI 021",
       "category": "ui-kit",
       "layer": "ui-kit",
       "aspect_ratio": "1:1",
@@ -1655,7 +1655,7 @@
     },
     {
       "id": "KR-UI-022",
-      "name": "UI Asset — UI 022",
+      "name": "UI Asset \u2014 UI 022",
       "category": "ui-kit",
       "layer": "ui-kit",
       "aspect_ratio": "1:1",
@@ -1686,7 +1686,7 @@
     },
     {
       "id": "KR-UI-023",
-      "name": "UI Asset — UI 023",
+      "name": "UI Asset \u2014 UI 023",
       "category": "ui-kit",
       "layer": "ui-kit",
       "aspect_ratio": "1:1",
@@ -1717,7 +1717,7 @@
     },
     {
       "id": "KR-UI-024",
-      "name": "UI Asset — UI 024",
+      "name": "UI Asset \u2014 UI 024",
       "category": "ui-kit",
       "layer": "ui-kit",
       "aspect_ratio": "1:1",
@@ -1748,7 +1748,7 @@
     },
     {
       "id": "KR-UI-025",
-      "name": "UI Asset — UI 025",
+      "name": "UI Asset \u2014 UI 025",
       "category": "ui-kit",
       "layer": "ui-kit",
       "aspect_ratio": "1:1",
@@ -1779,7 +1779,7 @@
     },
     {
       "id": "KR-UI-026",
-      "name": "UI Asset — UI 026",
+      "name": "UI Asset \u2014 UI 026",
       "category": "ui-kit",
       "layer": "ui-kit",
       "aspect_ratio": "1:1",
@@ -1810,7 +1810,7 @@
     },
     {
       "id": "KR-UI-027",
-      "name": "UI Asset — UI 027",
+      "name": "UI Asset \u2014 UI 027",
       "category": "ui-kit",
       "layer": "ui-kit",
       "aspect_ratio": "1:1",
@@ -1841,7 +1841,7 @@
     },
     {
       "id": "KR-UI-028",
-      "name": "UI Asset — UI 028",
+      "name": "UI Asset \u2014 UI 028",
       "category": "ui-kit",
       "layer": "ui-kit",
       "aspect_ratio": "1:1",
@@ -1872,7 +1872,7 @@
     },
     {
       "id": "KR-UI-029",
-      "name": "UI Asset — UI 029",
+      "name": "UI Asset \u2014 UI 029",
       "category": "ui-kit",
       "layer": "ui-kit",
       "aspect_ratio": "1:1",
@@ -1903,7 +1903,7 @@
     },
     {
       "id": "KR-UI-030",
-      "name": "UI Asset — UI 030",
+      "name": "UI Asset \u2014 UI 030",
       "category": "ui-kit",
       "layer": "ui-kit",
       "aspect_ratio": "1:1",
@@ -1934,7 +1934,7 @@
     },
     {
       "id": "KR-UI-031",
-      "name": "UI Asset — UI 031",
+      "name": "UI Asset \u2014 UI 031",
       "category": "ui-kit",
       "layer": "ui-kit",
       "aspect_ratio": "1:1",
@@ -1965,7 +1965,7 @@
     },
     {
       "id": "KR-UI-032",
-      "name": "UI Asset — UI 032",
+      "name": "UI Asset \u2014 UI 032",
       "category": "ui-kit",
       "layer": "ui-kit",
       "aspect_ratio": "1:1",
@@ -1996,7 +1996,7 @@
     },
     {
       "id": "KR-UI-033",
-      "name": "UI Asset — UI 033",
+      "name": "UI Asset \u2014 UI 033",
       "category": "ui-kit",
       "layer": "ui-kit",
       "aspect_ratio": "1:1",
@@ -2027,7 +2027,7 @@
     },
     {
       "id": "KR-UI-034",
-      "name": "UI Asset — UI 034",
+      "name": "UI Asset \u2014 UI 034",
       "category": "ui-kit",
       "layer": "ui-kit",
       "aspect_ratio": "1:1",
@@ -2058,7 +2058,7 @@
     },
     {
       "id": "KR-UI-035",
-      "name": "UI Asset — UI 035",
+      "name": "UI Asset \u2014 UI 035",
       "category": "ui-kit",
       "layer": "ui-kit",
       "aspect_ratio": "1:1",
@@ -2089,7 +2089,7 @@
     },
     {
       "id": "KR-UI-036",
-      "name": "UI Asset — UI 036",
+      "name": "UI Asset \u2014 UI 036",
       "category": "ui-kit",
       "layer": "ui-kit",
       "aspect_ratio": "1:1",
@@ -2120,7 +2120,7 @@
     },
     {
       "id": "KR-UI-037",
-      "name": "UI Asset — UI 037",
+      "name": "UI Asset \u2014 UI 037",
       "category": "ui-kit",
       "layer": "ui-kit",
       "aspect_ratio": "1:1",
@@ -2151,7 +2151,7 @@
     },
     {
       "id": "KR-UI-038",
-      "name": "UI Asset — UI 038",
+      "name": "UI Asset \u2014 UI 038",
       "category": "ui-kit",
       "layer": "ui-kit",
       "aspect_ratio": "20:3",
