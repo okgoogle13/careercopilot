@@ -27,6 +27,8 @@ export type { SeedProps } from './Seed';
 
 export { KeralaRageButton } from './KeralaRageButton';
 export type { KeralaRageButtonProps } from './KeralaRageButton';
+export { KrIcon } from './KrIcon';
+export type { KrIconName, KrIconProps } from './KrIcon';
 
 export { AuroraHeader } from './AuroraHeader';
 export { Mark } from './Mark';

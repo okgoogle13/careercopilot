@@ -1,8 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { GlobalHeader } from './components/GlobalHeader';
 import { MainCanvas } from './components/MainCanvas';
 import { NavRail } from './components/NavRail';
 import { SidePanel } from './components/SidePanel';
+
+const KR_LOGO_SRC = '/assets/kr-solidarity/ui-kit/svg/KR-LOGO-001-primary.svg';
 
 /**
  * LayoutShell
@@ -35,6 +38,28 @@ export const LayoutShell: React.FC<{ children?: React.ReactNode }> = ({ children
             <SidePanel />
           </aside>
         </div>
+
+        <footer className="flex-none border-t border-surface-KrDark-slate-smoke-highest bg-surface-KrDark-slate-smoke-high px-6 py-4">
+          <Link
+            to="/"
+            aria-label="Kerala Rage CareerCopilot"
+            className="flex items-center justify-center gap-3 lg:justify-start"
+          >
+            <img
+              src={KR_LOGO_SRC}
+              alt="Kerala Rage CareerCopilot"
+              className="h-auto max-h-[60px] w-auto rounded-xl"
+            />
+            <div className="flex flex-col">
+              <span className="font-proclamation text-sm uppercase tracking-[0.2em] text-ink-gold">
+                Built with Solidarity
+              </span>
+              <span className="text-[10px] font-annotation uppercase tracking-widest text-secondary-flannel-dim">
+                Navigation and workspace shell branding
+              </span>
+            </div>
+          </Link>
+        </footer>
       </div>
     </div>
   );
