@@ -42,7 +42,8 @@ export function Fireflies({ count = 16, className = "fixed inset-0 pointer-event
                             style={{
                                 width: firefly.size * 2,
                                 height: 4,
-                                background: 'linear-gradient(90deg, transparent, #D4A84B)',
+                                background:
+                                  'linear-gradient(90deg, transparent, var(--sys-color-inkGold-base))',
                                 filter: 'blur(4px)',
                                 transformOrigin: 'left center',
                             }}
@@ -63,9 +64,10 @@ export function Fireflies({ count = 16, className = "fixed inset-0 pointer-event
                         style={{
                             width: firefly.size,
                             height: firefly.size,
-                            background: 'radial-gradient(circle, #D4A84B 0%, rgba(212, 168, 75, 0.8) 30%, rgba(212, 168, 75, 0.4) 60%, transparent 100%)',
+                            background:
+                              'radial-gradient(circle, var(--sys-color-inkGold-base) 0%, var(--sys-color-stencilYellow-base) 35%, var(--sys-color-solidaritySmokeOrange-base) 65%, transparent 100%)',
                             filter: 'blur(2px)',
-                            boxShadow: '0 0 8px rgba(212, 168, 75, 0.6)',
+                            boxShadow: '0 0 8px var(--sys-color-inkGold-base)',
                         }}
                         animate={{
                             opacity: [0.4, 1, 0.4],

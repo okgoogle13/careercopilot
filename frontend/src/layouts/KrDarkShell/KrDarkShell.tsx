@@ -24,7 +24,7 @@ type KrDarkView = 'landing' | 'auth' | 'onboarding' | 'feed' | 'dashboard' | 'ka
 /**
  * KrDarkShell
  *
- * The atmospheric container for the KeralaStreetprint [DEPRECATED_STYLE] experience.
+ * The atmospheric container for the active Kerala Rage shell.
  * Orchestrates global KrDark state and visual effects.
  */
 export const KrDarkShell: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
@@ -85,7 +85,7 @@ export const KrDarkShell: React.FC<{ children?: React.ReactNode }> = ({ children
       <Fireflies count={20} />
 
       {/* Background Gradient Mesh (Subtle) */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(44,39,35,0.4)_0%,rgba(26,23,20,0.8)_100%)] pointer-events-none z-0" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,var(--sys-color-solidaritySmokeOrange-base)_0%,var(--sys-color-charcoalBackground-base)_100%)] opacity-20 pointer-events-none z-0" />
 
       {/* Floating Dock with View Switching */}
       <KrDarkDock

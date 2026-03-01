@@ -127,6 +127,46 @@ module.exports = {
                   "2": "var(--sys-color-aboriginalFlagBlack-steps-2)",
                   "3": "var(--sys-color-aboriginalFlagBlack-steps-3)",
                   "4": "var(--sys-color-aboriginalFlagBlack-steps-4)"
+            },
+            "asphaltBlack": {
+                  "DEFAULT": "var(--sys-color-asphaltBlack-base)",
+                  "0": "var(--sys-color-asphaltBlack-steps-0)",
+                  "1": "var(--sys-color-asphaltBlack-steps-1)",
+                  "2": "var(--sys-color-asphaltBlack-steps-2)",
+                  "3": "var(--sys-color-asphaltBlack-steps-3)",
+                  "4": "var(--sys-color-asphaltBlack-steps-4)"
+            },
+            "concreteGrey": {
+                  "DEFAULT": "var(--sys-color-concreteGrey-base)",
+                  "0": "var(--sys-color-concreteGrey-steps-0)",
+                  "1": "var(--sys-color-concreteGrey-steps-1)",
+                  "2": "var(--sys-color-concreteGrey-steps-2)",
+                  "3": "var(--sys-color-concreteGrey-steps-3)",
+                  "4": "var(--sys-color-concreteGrey-steps-4)"
+            },
+            "gumLeafGreen": {
+                  "DEFAULT": "var(--sys-color-gumLeafGreen-base)",
+                  "0": "var(--sys-color-gumLeafGreen-steps-0)",
+                  "1": "var(--sys-color-gumLeafGreen-steps-1)",
+                  "2": "var(--sys-color-gumLeafGreen-steps-2)",
+                  "3": "var(--sys-color-gumLeafGreen-steps-3)",
+                  "4": "var(--sys-color-gumLeafGreen-steps-4)"
+            },
+            "ochreEarth": {
+                  "DEFAULT": "var(--sys-color-ochreEarth-base)",
+                  "0": "var(--sys-color-ochreEarth-steps-0)",
+                  "1": "var(--sys-color-ochreEarth-steps-1)",
+                  "2": "var(--sys-color-ochreEarth-steps-2)",
+                  "3": "var(--sys-color-ochreEarth-steps-3)",
+                  "4": "var(--sys-color-ochreEarth-steps-4)"
+            },
+            "paperWhite": {
+                  "DEFAULT": "var(--sys-color-paperWhite-base)",
+                  "0": "var(--sys-color-paperWhite-steps-0)",
+                  "1": "var(--sys-color-paperWhite-steps-1)",
+                  "2": "var(--sys-color-paperWhite-steps-2)",
+                  "3": "var(--sys-color-paperWhite-steps-3)",
+                  "4": "var(--sys-color-paperWhite-steps-4)"
             }
       },
       "fontFamily": {

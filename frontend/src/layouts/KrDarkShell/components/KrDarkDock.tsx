@@ -15,13 +15,7 @@ export const KrDarkDock: React.FC<KrDarkDockProps> = ({ currentView, onViewChang
 
     return (
         <motion.nav
-            className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 px-6 py-3 flex items-center gap-4"
-            style={{
-                background: 'rgba(44, 39, 35, 0.75)',
-                backdropFilter: 'blur(32px)',
-                borderRadius: 'var(--radius-pebble)',
-                border: '1px solid rgba(212, 168, 75, 0.25)',
-            }}
+            className="fixed bottom-8 left-1/2 z-50 flex -translate-x-1/2 items-center gap-4 rounded-[var(--radius-pebble)] border border-ink-gold/25 bg-surface-KrDark-slate-smoke-high/80 px-6 py-3 backdrop-blur-3xl"
             initial={{ y: 100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{

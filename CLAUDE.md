@@ -121,6 +121,8 @@ Located in `frontend/src/components/ui/`:
 - **Mark**: Brand mark / logo primitive
 - **Signal**: Status and notification indicator
 
+Use `KrIcon` for KR-ICON-001 through KR-ICON-004 when the icon needs inline SVG rendering with semantic token colors.
+
 **All archetypes MUST use `--sys-color-*` CSS variables, never hardcoded hex.**
 
 ### Design System Sources of Truth (Hierarchy)

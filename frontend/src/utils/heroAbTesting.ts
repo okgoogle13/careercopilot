@@ -10,23 +10,12 @@ export interface AbTestConfig {
   };
 }
 
-const STORAGE_KEY_PREFIX = 'kr_hero_ab_';
-
 /**
- * Gets or assigns a variant (A or B) for a specific test ID.
- * Persists the choice in localStorage.
+ * Derives a stable default variant without using browser storage.
  */
-export function getAssignedVariant(testId: string): AbVariant {
-  const storageKey = `${STORAGE_KEY_PREFIX}${testId}`;
-  const saved = localStorage.getItem(storageKey);
-
-  if (saved === 'A' || saved === 'B') {
-    return saved as AbVariant;
-  }
-
-  const assigned: AbVariant = Math.random() < 0.5 ? 'A' : 'B';
-  localStorage.setItem(storageKey, assigned);
-  return assigned;
+export function getDefaultVariant(testId: string): AbVariant {
+  const checksum = Array.from(testId).reduce((sum, char) => sum + char.charCodeAt(0), 0);
+  return checksum % 2 === 0 ? 'A' : 'B';
 }
 
 /**
@@ -34,10 +23,11 @@ export function getAssignedVariant(testId: string): AbVariant {
  */
 export function getHeroForVariant(
   registry: HeroRegistry,
-  config: AbTestConfig
+  config: AbTestConfig,
+  variant?: AbVariant,
 ): HeroComposition | undefined {
-  const variant = getAssignedVariant(config.testId);
-  const heroId = config.variants[variant];
+  const resolvedVariant = variant ?? getDefaultVariant(config.testId);
+  const heroId = config.variants[resolvedVariant];
   return registry.compositions.find((c) => c.id === heroId);
 }
 
@@ -48,7 +38,7 @@ export function getHeroForVariant(
 export const LANDING_HERO_AB_CONFIG: AbTestConfig = {
   testId: 'landing_hero_register',
   variants: {
-    A: 'bhagat-singh-resistance', // Defiance
-    B: 'shiva-monolith-spiritual', // Reflection
+    A: 'kr-hero-industrial-collective-005', // Industrial Collective
+    B: 'kr-hero-digital-sovereignty-006', // Digital Sovereignty
   },
 };

@@ -72,7 +72,11 @@ def create_task(
 
 @mcp.tool()
 def claim_task(task_id: str, agent: str) -> Dict[str, Any]:
-    """Mark a task as in-progress by an agent."""
+    """Mark a task as in-progress by an agent.
+    
+    CRITICAL: After claiming a task, your immediate next step MUST be to execute a plan
+    to fulfill the task requirements. Do not just create a list. You must take action.
+    """
     tasks = _load_queue()
     task = _get_task(task_id, tasks)
 
@@ -92,11 +96,16 @@ def claim_task(task_id: str, agent: str) -> Dict[str, Any]:
     })
 
     _save_queue(tasks)
+    
+    task["_agent_instruction"] = "CLAIM SUCCESSFUL. NEXT STEP: EXECUTING A PLAN. You must now implement/execute the necessary actions to fulfill the task inputs. Do not just list steps or summarize."
     return task
 
 @mcp.tool()
 def complete_task(task_id: str, outputs: Dict[str, Any]) -> Dict[str, Any]:
-    """Mark a task as completed and optionally create the next task."""
+    """Mark a task as completed and optionally create the next task.
+    
+    IMPORTANT: Only call this AFTER you have actually executed a plan and completed the work.
+    """
     tasks = _load_queue()
     task = _get_task(task_id, tasks)
 

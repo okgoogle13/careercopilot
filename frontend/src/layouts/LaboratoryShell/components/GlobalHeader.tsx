@@ -1,6 +1,9 @@
 import { useMode } from '@/hooks/use-mode';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { KeralaRageButton } from '../../../components/ui/KeralaRageButton';
+
+const KR_LOGO_SRC = '/assets/kr-solidarity/ui-kit/svg/KR-LOGO-001-primary.svg';
 
 export const GlobalHeader: React.FC = () => {
   const { mode, toggleMode } = useMode();
@@ -8,15 +11,25 @@ export const GlobalHeader: React.FC = () => {
   return (
     <header className="h-16 border-b border-surface-KrDark-slate-smoke-highest bg-surface-KrDark-slate-smoke-high flex items-center justify-between px-6 shadow-sm z-20 relative">
       <div className="flex items-center gap-4">
-        {/* Branding */}
-        <div className="flex flex-col">
-          <h1 className="font-proclamation text-xl text-ink-gold tracking-tight">
-            KeralaRage KrSolidarity
-          </h1>
-          <span className="text-[10px] font-annotation uppercase tracking-widest text-secondary-flannel-dim opacity-70">
-            Field Station Alpha
-          </span>
-        </div>
+        <Link
+          to="/"
+          aria-label="Kerala Rage CareerCopilot"
+          className="flex items-center gap-3 rounded-xl px-2 py-1 transition-colors hover:bg-surface-KrDark-slate-smoke-highest/70"
+        >
+          <img
+            src={KR_LOGO_SRC}
+            alt="Kerala Rage CareerCopilot"
+            className="h-auto max-h-10 w-auto rounded-lg"
+          />
+          <div className="flex flex-col">
+            <h1 className="font-proclamation text-xl text-ink-gold tracking-tight">
+              KeralaRage KrSolidarity
+            </h1>
+            <span className="text-[10px] font-annotation uppercase tracking-widest text-secondary-flannel-dim opacity-70">
+              Field Station Alpha
+            </span>
+          </div>
+        </Link>
       </div>
 
       <div className="flex items-center gap-3">
