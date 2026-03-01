@@ -1,0 +1,44 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <title>Melbourne Tram</title>
+  <desc>Iconic Naarm/Melbourne public transport symbol for navigation and journey metaphors</desc>
+
+  <g id="base">
+    <ellipse cx="254" cy="265" rx="95" ry="88" fill="var(--sys-color-charcoalBackground-base)" opacity="0.5"/>
+  </g>
+
+  <g id="content">
+    <!-- Main tram body -->
+    <rect x="175" y="190" width="165" height="135" rx="8" ry="6" fill="var(--sys-color-inkGold-base)" stroke="var(--sys-color-charcoalBackground-base)" stroke-width="4" stroke-linejoin="round"/>
+
+    <!-- Front windows (asymmetric) -->
+    <rect x="192" y="210" width="60" height="50" rx="4" fill="var(--sys-color-charcoalBackground-base)" opacity="0.85"/>
+    <rect x="265" y="210" width="58" height="50" rx="4" fill="var(--sys-color-charcoalBackground-base)" opacity="0.85"/>
+
+    <!-- Destination panel -->
+    <rect x="192" y="270" width="131" height="16" rx="2" fill="var(--sys-color-charcoalBackground-base)"/>
+    <line x1="200" y1="278" x2="310" y2="278" stroke="var(--sys-color-solidarityRed-base)" stroke-width="2" stroke-linecap="round"/>
+
+    <!-- Lower panel -->
+    <rect x="185" y="295" width="145" height="22" fill="var(--sys-color-charcoalBackground-base)" opacity="0.25"/>
+
+    <!-- Wheels (asymmetric) -->
+    <circle cx="208" cy="330" r="13" fill="var(--sys-color-charcoalBackground-base)" stroke="var(--sys-color-worker-ash-base)" stroke-width="3"/>
+    <circle cx="305" cy="330" r="13" fill="var(--sys-color-charcoalBackground-base)" stroke="var(--sys-color-worker-ash-base)" stroke-width="3"/>
+
+    <!-- Pantograph (overhead power connector) -->
+    <line x1="256" y1="190" x2="260" y2="148" stroke="var(--sys-color-inkGold-base)" stroke-width="4" stroke-linecap="round"/>
+    <line x1="238" y1="148" x2="278" y2="148" stroke="var(--sys-color-inkGold-base)" stroke-width="3" stroke-linecap="round"/>
+  </g>
+
+  <g id="accent">
+    <!-- Headlights (asymmetric) -->
+    <circle cx="195" cy="310" r="5" fill="var(--sys-color-stencilYellow-base)" opacity="0.9"/>
+    <circle cx="318" cy="310" r="6" fill="var(--sys-color-stencilYellow-base)" opacity="0.85"/>
+
+    <!-- Door indicator -->
+    <rect x="255" y="295" width="3" height="22" fill="var(--sys-color-solidarityRed-base)" opacity="0.7"/>
+
+    <!-- Route number accent -->
+    <circle cx="258" cy="220" r="8" fill="var(--sys-color-solidarityRed-base)" opacity="0.6"/>
+  </g>
+</svg>
