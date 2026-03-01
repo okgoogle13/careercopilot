@@ -1,6 +1,7 @@
 import { useState, useCallback } from 'react';
 import { CareerDatabase } from '@/types/api';
 import { useAuth } from '@/context/AuthContext';
+import { validateFiles } from '@/utils/fileValidation';
 
 interface UseCareerIngestionResult {
     submitDocuments: (files: File[]) => Promise<CareerDatabase>;
@@ -15,6 +16,12 @@ export const useCareerIngestion = (): UseCareerIngestionResult => {
     const { session } = useAuth();
 
     const submitDocuments = useCallback(async (files: File[]): Promise<CareerDatabase> => {
+        const validation = validateFiles(files, ['.pdf', '.docx', '.txt']);
+        if (!validation.valid) {
+            setError(validation.error!);
+            throw new Error(validation.error!);
+        }
+
         setIsLoading(true);
         setError(null);
 

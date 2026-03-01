@@ -1,8 +1,10 @@
 import React, { useCallback, useState } from 'react';
 import { motion } from 'framer-motion';
+import { validateFile } from '@/utils/fileValidation';
 
 interface DropZoneProps {
     onFileDrop?: (files: File[]) => void;
+    onValidationError?: (error: string) => void;
     maxFiles?: number;
     acceptedTypes?: string[];
     isProcessing?: boolean;
@@ -10,6 +12,7 @@ interface DropZoneProps {
 
 export const DropZone: React.FC<DropZoneProps> = ({
     onFileDrop,
+    onValidationError,
     maxFiles = 5,
     acceptedTypes = ['.pdf', '.docx', '.txt'],
     isProcessing = false,
@@ -26,27 +29,43 @@ export const DropZone: React.FC<DropZoneProps> = ({
         setIsDragOver(false);
     }, []);
 
+    const filterValidFiles = useCallback(
+        (files: File[]): File[] => {
+            const valid: File[] = [];
+            for (const file of files) {
+                const result = validateFile(file, acceptedTypes);
+                if (result.valid) {
+                    valid.push(file);
+                } else if (onValidationError) {
+                    onValidationError(result.error!);
+                }
+            }
+            return valid;
+        },
+        [acceptedTypes, onValidationError]
+    );
+
     const handleDrop = useCallback(
         (e: React.DragEvent) => {
             e.preventDefault();
             setIsDragOver(false);
 
-            const files = Array.from(e.dataTransfer.files);
-            if (onFileDrop) {
+            const files = filterValidFiles(Array.from(e.dataTransfer.files));
+            if (onFileDrop && files.length > 0) {
                 onFileDrop(files.slice(0, maxFiles));
             }
         },
-        [onFileDrop, maxFiles]
+        [onFileDrop, maxFiles, filterValidFiles]
     );
 
     const handleFileInput = useCallback(
         (e: React.ChangeEvent<HTMLInputElement>) => {
-            const files = Array.from(e.target.files || []);
-            if (onFileDrop) {
+            const files = filterValidFiles(Array.from(e.target.files || []));
+            if (onFileDrop && files.length > 0) {
                 onFileDrop(files.slice(0, maxFiles));
             }
         },
-        [onFileDrop, maxFiles]
+        [onFileDrop, maxFiles, filterValidFiles]
     );
 
     // Visual states from DOC-004
