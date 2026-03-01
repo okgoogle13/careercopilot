@@ -1,10 +1,11 @@
 # Skills Registry
 
-_Last updated: 2026-02-23_
+_Last updated: 2026-02-28_
 
 ## Summary
 - Active skills: **67**
 - Legacy/placeholder cleanup applied: **yes**
+- Manifest v6.0.0 — 71 assets (32 PNG + 39 SVG), all validated ✅
 - Recommended asset audit combo: **vision-scorer-mcp + asset-placement-strategy + batch-processor**
 
 ## Asset Audit Workflow (>=90)
@@ -12,6 +13,65 @@ _Last updated: 2026-02-23_
 2. Reconcile manifest and hero registries (no gaps/broken refs).
 3. Check wireframe-aligned placement and z-layer intent.
 4. Run vision scoring and require score >= 90 before package/deploy.
+
+## Best Skills to Package (Priority Order)
+
+### Tier 1 — Core Asset Pipeline (Package First)
+These skills form the mandatory production packaging sequence. Ship as a cohesive bundle:
+
+| Priority | Skill | Role in Pipeline |
+|---|---|---|
+| ⭐ 1 | **manifest-reconciler** | Gate-keeper: validate no orphans/gaps before any packaging |
+| ⭐ 2 | **auto-validator** | Pre-manifest quality gate — score ≥90 to proceed |
+| ⭐ 3 | **asset-packager** | Convert validated PNG + IDF JSON → production bundle |
+| ⭐ 4 | **vision-scorer-mcp** | Post-manifest deterministic compliance scoring (100-point rubric) |
+| ⭐ 5 | **batch-processor** | Orchestrate parallel asset-audit pipeline with aggregated gates |
+
+### Tier 2 — Design System Integrity (Package with Tier 1)
+| Priority | Skill | Role |
+|---|---|---|
+| 6 | **kerala-rage-asset-cataloger** | Triage uncategorized assets → MANIFEST_MATCH / NEW_CANDIDATE / DISCARD |
+| 7 | **asset-placement-strategy** | Wireframe slot → manifest asset matching with z-layer validation |
+| 8 | **asset-token-replacer** | Replace `TODO[asset]` placeholders with canonical KR-SOLID tokens |
+| 9 | **asset-path-validator** | Deep-scan all src/url attributes for broken asset references |
+| 10 | **hero-composition-injector** | Inject new hero compositions into hero-registry.json |
+
+### Tier 3 — Token & Component Compliance (Package for Full Design System Release)
+| Priority | Skill | Role |
+|---|---|---|
+| 11 | **token-orchestrator** | DTCG compliance + Kerala Rage palette rules + Tailwind integration |
+| 12 | **asset-metadata-enricher** | Semantic metadata (alt-text, political significance) via Gemini |
+| 13 | **component-builder** | M3 Expressive production components with 100% token compliance |
+| 14 | **wireframe-annotator** | Annotated ASCII wireframes with `<layout>`, `<tokens>`, `<accessibility>` |
+| 15 | **kr-svg** | Generate KR-SOLID SVG primitives (strict tokens, organic asymmetry) |
+
+### Tier 4 — Validation & Audit Support (Package for QA Releases)
+| Priority | Skill | Role |
+|---|---|---|
+| 16 | **compliance-dashboard** | Real-time migration % and visual audit pass rates |
+| 17 | **m3-expressive-ui-evaluator** | 400-point M3 Expressive scoring (typography, spring physics, vibrant tokens) |
+| 18 | **hifi-blueprint-linter** | Validate hi-fi wireframe content against KR design specs |
+| 19 | **component-visual-audit** | Screenshot audit against kr-solidarity standards |
+| 20 | **design-token-validator** | DTCG compliance + circular reference detection + WCAG contrast |
+
+## Asset Generator Scripts (Frontend)
+Run these in order to regenerate manifests from filesystem:
+```bash
+cd frontend
+node scripts/kr/generate-manifest.mjs      # → public/assets/kerala-rage-kr-solidarity-manifest.json
+node scripts/kr/validate-manifest.mjs      # Must pass: 0 errors
+node scripts/kr/generate-hero-registry.mjs # → public/assets/kr-solidarity-hero-registry.json
+```
+
+## KR Asset Naming Convention (Canonical)
+```
+kr-solidarity__{layer}__{descriptor}--{detail}--{version}.png
+kr-solidarity__ui-kit__{ID}__v{n}.svg
+```
+- `{layer}`: atmospheric | spiritual | resistance | cultural | substrate
+- `{descriptor}`: category-name (portrait, texture, abstract, hero, symbol, landmark, devotional)
+- `{ID}`: KR-UI-001 through KR-UI-038 (current max)
+- Never use: ChatGPT-generated filenames, spaces in names, missing layer segment
 
 ## Active Skills
 

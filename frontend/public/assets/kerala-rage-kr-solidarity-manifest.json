@@ -1,3 +1,2184 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:057ac170bcf8238eb9515b95c470bb375ffc4f23866a3edc52a0920beaafffe8
-size 40781
+{
+  "project": "kerala-rage kr-solidarity",
+  "version": "6.0.0",
+  "last_updated": "2026-02-28",
+  "strategy": "Layered Identity System",
+  "total_assets": 71,
+  "layers": [
+    "substrate",
+    "atmospheric",
+    "cultural",
+    "resistance",
+    "spiritual",
+    "ui-kit"
+  ],
+  "assets": [
+    {
+      "id": "KR-SOLID-002",
+      "name": "Abstract -solidarity-chatgpt-image-f",
+      "category": "atmospheric",
+      "layer": "atmospheric",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/abstract/kr-solidarity__atmospheric__abstract---solidarity-chatgpt-image-f__v1.png",
+      "priority": "HIGH",
+      "semantics": {
+        "functional_role": "background-texture",
+        "semantic_weight": "atmospheric",
+        "layering_role": "overlay"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "hero",
+          "section"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate"
+        ],
+        "cannot_overlay_with": [
+          "atmospheric"
+        ]
+      }
+    },
+    {
+      "id": "KR-SOLID-003",
+      "name": "Abstract -solidarity-dalle-2026-01-",
+      "category": "atmospheric",
+      "layer": "atmospheric",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/abstract/kr-solidarity__atmospheric__abstract---solidarity-dalle-2026-01-__v1.png",
+      "priority": "HIGH",
+      "semantics": {
+        "functional_role": "background-texture",
+        "semantic_weight": "atmospheric",
+        "layering_role": "overlay"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "hero",
+          "section"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate"
+        ],
+        "cannot_overlay_with": [
+          "atmospheric"
+        ]
+      }
+    },
+    {
+      "id": "KR-SOLID-004",
+      "name": "Abstract -solidarity-kr-solidarity ",
+      "category": "atmospheric",
+      "layer": "atmospheric",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/abstract/kr-solidarity__atmospheric__abstract---solidarity-kr-solidarity--__v1.png",
+      "priority": "HIGH",
+      "semantics": {
+        "functional_role": "background-texture",
+        "semantic_weight": "atmospheric",
+        "layering_role": "overlay"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "hero",
+          "section"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate"
+        ],
+        "cannot_overlay_with": [
+          "atmospheric"
+        ]
+      }
+    },
+    {
+      "id": "KR-SOLID-005",
+      "name": "Abstract -solidarity-moodboard-12-ti",
+      "category": "atmospheric",
+      "layer": "atmospheric",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/abstract/kr-solidarity__atmospheric__abstract---solidarity-moodboard-12-ti__v1.png",
+      "priority": "HIGH",
+      "semantics": {
+        "functional_role": "background-texture",
+        "semantic_weight": "atmospheric",
+        "layering_role": "overlay"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "hero",
+          "section"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate"
+        ],
+        "cannot_overlay_with": [
+          "atmospheric"
+        ]
+      }
+    },
+    {
+      "id": "KR-SOLID-006",
+      "name": "Abstract -solidarity",
+      "category": "atmospheric",
+      "layer": "atmospheric",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/abstract/kr-solidarity__atmospheric__abstract---solidarity__v1.png",
+      "priority": "HIGH",
+      "semantics": {
+        "functional_role": "background-texture",
+        "semantic_weight": "atmospheric",
+        "layering_role": "overlay"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "hero",
+          "section"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate"
+        ],
+        "cannot_overlay_with": [
+          "atmospheric"
+        ]
+      }
+    },
+    {
+      "id": "KR-SOLID-007",
+      "name": "Abstract Solidarity-light-burst V2",
+      "category": "atmospheric",
+      "layer": "atmospheric",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/abstract/kr-solidarity__atmospheric__abstract--solidarity-light-burst--v2.png",
+      "priority": "HIGH",
+      "semantics": {
+        "functional_role": "background-texture",
+        "semantic_weight": "atmospheric",
+        "layering_role": "overlay"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "hero",
+          "section"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate"
+        ],
+        "cannot_overlay_with": [
+          "atmospheric"
+        ]
+      }
+    },
+    {
+      "id": "KR-SOLID-008",
+      "name": "Paint-splash V1",
+      "category": "atmospheric",
+      "layer": "atmospheric",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/abstract/kr-solidarity__atmospheric__kr-solidarity--abstract--paint-splash--v1__v1.png",
+      "priority": "HIGH",
+      "semantics": {
+        "functional_role": "background-texture",
+        "semantic_weight": "atmospheric",
+        "layering_role": "overlay"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "hero",
+          "section"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate"
+        ],
+        "cannot_overlay_with": [
+          "atmospheric"
+        ]
+      }
+    },
+    {
+      "id": "KR-SOLID-009",
+      "name": "Devotional -cultural-anchor",
+      "category": "spiritual",
+      "layer": "spiritual",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/devotional/kr-solidarity__spiritual__devotional---cultural-anchor__v1.png",
+      "priority": "CRITICAL",
+      "semantics": {
+        "functional_role": "symbolic-anchor",
+        "semantic_weight": "mythic",
+        "layering_role": "foreground-dominant"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "hero-only",
+          "large-section"
+        ],
+        "small_ui_safe": false
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric"
+        ],
+        "cannot_overlay_with": [
+          "spiritual",
+          "resistance"
+        ]
+      }
+    },
+    {
+      "id": "KR-SOLID-010",
+      "name": "Devotional -solidarity",
+      "category": "spiritual",
+      "layer": "spiritual",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/devotional/kr-solidarity__spiritual__devotional---solidarity__v1.png",
+      "priority": "CRITICAL",
+      "semantics": {
+        "functional_role": "symbolic-anchor",
+        "semantic_weight": "mythic",
+        "layering_role": "foreground-dominant"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "hero-only",
+          "large-section"
+        ],
+        "small_ui_safe": false
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric"
+        ],
+        "cannot_overlay_with": [
+          "spiritual",
+          "resistance"
+        ]
+      }
+    },
+    {
+      "id": "KR-SOLID-011",
+      "name": "Shiva-statue V1",
+      "category": "spiritual",
+      "layer": "spiritual",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/devotional/kr-solidarity__spiritual__kr-solidarity--devotional--shiva-statue--v1__v1.png",
+      "priority": "CRITICAL",
+      "semantics": {
+        "functional_role": "symbolic-anchor",
+        "semantic_weight": "mythic",
+        "layering_role": "foreground-dominant"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "hero-only",
+          "large-section"
+        ],
+        "small_ui_safe": false
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric"
+        ],
+        "cannot_overlay_with": [
+          "spiritual",
+          "resistance"
+        ]
+      }
+    },
+    {
+      "id": "KR-SOLID-012",
+      "name": "Shiva-statue-street V1",
+      "category": "spiritual",
+      "layer": "spiritual",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/devotional/kr-solidarity__spiritual__kr-solidarity--devotional--shiva-statue-street--v1__v1.png",
+      "priority": "CRITICAL",
+      "semantics": {
+        "functional_role": "symbolic-anchor",
+        "semantic_weight": "mythic",
+        "layering_role": "foreground-dominant"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "hero-only",
+          "large-section"
+        ],
+        "small_ui_safe": false
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric"
+        ],
+        "cannot_overlay_with": [
+          "spiritual",
+          "resistance"
+        ]
+      }
+    },
+    {
+      "id": "KR-SOLID-013",
+      "name": "Shiva-urban-protest V1",
+      "category": "spiritual",
+      "layer": "spiritual",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/devotional/kr-solidarity__spiritual__kr-solidarity--devotional--shiva-urban-protest--v1__v1.png",
+      "priority": "CRITICAL",
+      "semantics": {
+        "functional_role": "symbolic-anchor",
+        "semantic_weight": "mythic",
+        "layering_role": "foreground-dominant"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "hero-only",
+          "large-section"
+        ],
+        "small_ui_safe": false
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric"
+        ],
+        "cannot_overlay_with": [
+          "spiritual",
+          "resistance"
+        ]
+      }
+    },
+    {
+      "id": "KR-SOLID-018",
+      "name": "Hero Collective-uprising V5",
+      "category": "resistance",
+      "layer": "resistance",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/heroes/kr-solidarity__resistance__hero--collective-uprising--v5.png",
+      "priority": "CRITICAL",
+      "semantics": {
+        "functional_role": "editorial-hero",
+        "semantic_weight": "heroic",
+        "layering_role": "foreground"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "hero-only",
+          "feature"
+        ],
+        "small_ui_safe": false
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric"
+        ],
+        "cannot_overlay_with": [
+          "resistance",
+          "spiritual"
+        ]
+      }
+    },
+    {
+      "id": "KR-SOLID-019",
+      "name": "Resistance-portrait",
+      "category": "resistance",
+      "layer": "resistance",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/heroes/kr-solidarity__resistance__resistance-portrait__v1.png",
+      "priority": "CRITICAL",
+      "semantics": {
+        "functional_role": "editorial-hero",
+        "semantic_weight": "heroic",
+        "layering_role": "foreground"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "hero-only",
+          "feature"
+        ],
+        "small_ui_safe": false
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric"
+        ],
+        "cannot_overlay_with": [
+          "resistance",
+          "spiritual"
+        ]
+      }
+    },
+    {
+      "id": "KR-SOLID-020",
+      "name": "Landmark Flinders-street-station-night V1",
+      "category": "substrate",
+      "layer": "substrate",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/landmark/kr-solidarity__substrate__landmark--flinders-street-station-night--v1.png",
+      "priority": "HIGH",
+      "semantics": {
+        "functional_role": "material-base",
+        "semantic_weight": "material",
+        "layering_role": "background-base"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "hero-background",
+          "global-overlay"
+        ],
+        "small_ui_safe": false
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [],
+        "cannot_overlay_with": [
+          "substrate"
+        ]
+      }
+    },
+    {
+      "id": "KR-SOLID-021",
+      "name": "Bhagat-singh V1",
+      "category": "resistance",
+      "layer": "resistance",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/portrait/kr-solidarity__resistance__kr-solidarity--portrait--bhagat-singh--v1__v1.png",
+      "priority": "CRITICAL",
+      "semantics": {
+        "functional_role": "editorial-hero",
+        "semantic_weight": "heroic",
+        "layering_role": "foreground"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "hero-only",
+          "feature"
+        ],
+        "small_ui_safe": false
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric"
+        ],
+        "cannot_overlay_with": [
+          "resistance",
+          "spiritual"
+        ]
+      }
+    },
+    {
+      "id": "KR-SOLID-022",
+      "name": "Tipu-sultan V1",
+      "category": "resistance",
+      "layer": "resistance",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/portrait/kr-solidarity__resistance__kr-solidarity--portrait--tipu-sultan--v1__v1.png",
+      "priority": "CRITICAL",
+      "semantics": {
+        "functional_role": "editorial-hero",
+        "semantic_weight": "heroic",
+        "layering_role": "foreground"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "hero-only",
+          "feature"
+        ],
+        "small_ui_safe": false
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric"
+        ],
+        "cannot_overlay_with": [
+          "resistance",
+          "spiritual"
+        ]
+      }
+    },
+    {
+      "id": "KR-SOLID-023",
+      "name": "Turbaned-man V1",
+      "category": "resistance",
+      "layer": "resistance",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/portrait/kr-solidarity__resistance__kr-solidarity--portrait--turbaned-man--v1__v1.png",
+      "priority": "CRITICAL",
+      "semantics": {
+        "functional_role": "editorial-hero",
+        "semantic_weight": "heroic",
+        "layering_role": "foreground"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "hero-only",
+          "feature"
+        ],
+        "small_ui_safe": false
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric"
+        ],
+        "cannot_overlay_with": [
+          "resistance",
+          "spiritual"
+        ]
+      }
+    },
+    {
+      "id": "KR-SOLID-024",
+      "name": "Portrait -resistance-history",
+      "category": "resistance",
+      "layer": "resistance",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/portrait/kr-solidarity__resistance__portrait---resistance-history__v1.png",
+      "priority": "CRITICAL",
+      "semantics": {
+        "functional_role": "editorial-hero",
+        "semantic_weight": "heroic",
+        "layering_role": "foreground"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "hero-only",
+          "feature"
+        ],
+        "small_ui_safe": false
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric"
+        ],
+        "cannot_overlay_with": [
+          "resistance",
+          "spiritual"
+        ]
+      }
+    },
+    {
+      "id": "KR-SOLID-025",
+      "name": "Portrait Activist-fist-radiance V2",
+      "category": "resistance",
+      "layer": "resistance",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/portrait/kr-solidarity__resistance__portrait--activist-fist-radiance--v2.png",
+      "priority": "CRITICAL",
+      "semantics": {
+        "functional_role": "editorial-hero",
+        "semantic_weight": "heroic",
+        "layering_role": "foreground"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "hero-only",
+          "feature"
+        ],
+        "small_ui_safe": false
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric"
+        ],
+        "cannot_overlay_with": [
+          "resistance",
+          "spiritual"
+        ]
+      }
+    },
+    {
+      "id": "KR-SOLID-026",
+      "name": "Portrait Collective-hands-solidarity V2",
+      "category": "resistance",
+      "layer": "resistance",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/portrait/kr-solidarity__resistance__portrait--collective-hands-solidarity--v2.png",
+      "priority": "CRITICAL",
+      "semantics": {
+        "functional_role": "editorial-hero",
+        "semantic_weight": "heroic",
+        "layering_role": "foreground"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "hero-only",
+          "feature"
+        ],
+        "small_ui_safe": false
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric"
+        ],
+        "cannot_overlay_with": [
+          "resistance",
+          "spiritual"
+        ]
+      }
+    },
+    {
+      "id": "KR-SOLID-027",
+      "name": "Digital-resistance-hacker",
+      "category": "resistance",
+      "layer": "resistance",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/resistance/kr-solidarity__resistance__digital-resistance-hacker__v1.png",
+      "priority": "CRITICAL",
+      "semantics": {
+        "functional_role": "editorial-hero",
+        "semantic_weight": "heroic",
+        "layering_role": "foreground"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "hero-only",
+          "feature"
+        ],
+        "small_ui_safe": false
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric"
+        ],
+        "cannot_overlay_with": [
+          "resistance",
+          "spiritual"
+        ]
+      }
+    },
+    {
+      "id": "KR-SOLID-028",
+      "name": "First-nations-placard V1",
+      "category": "resistance",
+      "layer": "resistance",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/street/kr-solidarity__resistance__kr-solidarity--street--first-nations-placard--v1__v1.png",
+      "priority": "CRITICAL",
+      "semantics": {
+        "functional_role": "editorial-hero",
+        "semantic_weight": "heroic",
+        "layering_role": "foreground"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "hero-only",
+          "feature"
+        ],
+        "small_ui_safe": false
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric"
+        ],
+        "cannot_overlay_with": [
+          "resistance",
+          "spiritual"
+        ]
+      }
+    },
+    {
+      "id": "KR-SOLID-029",
+      "name": "Treaty-now-poster V1",
+      "category": "resistance",
+      "layer": "resistance",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/street/kr-solidarity__resistance__kr-solidarity--street--treaty-now-poster--v1__v1.png",
+      "priority": "CRITICAL",
+      "semantics": {
+        "functional_role": "editorial-hero",
+        "semantic_weight": "heroic",
+        "layering_role": "foreground"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "hero-only",
+          "feature"
+        ],
+        "small_ui_safe": false
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric"
+        ],
+        "cannot_overlay_with": [
+          "resistance",
+          "spiritual"
+        ]
+      }
+    },
+    {
+      "id": "KR-SOLID-030",
+      "name": "Street -resistance-historyactivist",
+      "category": "resistance",
+      "layer": "resistance",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/street/kr-solidarity__resistance__street---resistance-historyactivist__v1.png",
+      "priority": "CRITICAL",
+      "semantics": {
+        "functional_role": "editorial-hero",
+        "semantic_weight": "heroic",
+        "layering_role": "foreground"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "hero-only",
+          "feature"
+        ],
+        "small_ui_safe": false
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric"
+        ],
+        "cannot_overlay_with": [
+          "resistance",
+          "spiritual"
+        ]
+      }
+    },
+    {
+      "id": "KR-SOLID-031",
+      "name": "Kerala-elephant V1",
+      "category": "cultural",
+      "layer": "cultural",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/symbol/kr-solidarity__cultural__kr-solidarity--symbol--kerala-elephant--v1__v1.png",
+      "priority": "HIGH",
+      "semantics": {
+        "functional_role": "icon-anchor",
+        "semantic_weight": "iconic",
+        "layering_role": "mid-layer"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "hero",
+          "section",
+          "card"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric"
+        ],
+        "cannot_overlay_with": [
+          "cultural"
+        ]
+      }
+    },
+    {
+      "id": "KR-SOLID-032",
+      "name": "Kerala-landscape V1",
+      "category": "cultural",
+      "layer": "cultural",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/symbol/kr-solidarity__cultural__kr-solidarity--symbol--kerala-landscape--v1__v1.png",
+      "priority": "HIGH",
+      "semantics": {
+        "functional_role": "icon-anchor",
+        "semantic_weight": "iconic",
+        "layering_role": "mid-layer"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "hero",
+          "section",
+          "card"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric"
+        ],
+        "cannot_overlay_with": [
+          "cultural"
+        ]
+      }
+    },
+    {
+      "id": "KR-SOLID-033",
+      "name": "Texture Asphalt-grain V2",
+      "category": "atmospheric",
+      "layer": "atmospheric",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/texture/kr-solidarity__atmospheric__texture--asphalt-grain--v2.png",
+      "priority": "HIGH",
+      "semantics": {
+        "functional_role": "background-texture",
+        "semantic_weight": "atmospheric",
+        "layering_role": "overlay"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "hero",
+          "section"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate"
+        ],
+        "cannot_overlay_with": [
+          "atmospheric"
+        ]
+      }
+    },
+    {
+      "id": "KR-SOLID-034",
+      "name": "Texture Wet-pavement-reflections V2",
+      "category": "atmospheric",
+      "layer": "atmospheric",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/texture/kr-solidarity__atmospheric__texture--wet-pavement-reflections--v2.png",
+      "priority": "HIGH",
+      "semantics": {
+        "functional_role": "background-texture",
+        "semantic_weight": "atmospheric",
+        "layering_role": "overlay"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "hero",
+          "section"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate"
+        ],
+        "cannot_overlay_with": [
+          "atmospheric"
+        ]
+      }
+    },
+    {
+      "id": "KR-SOLID-035",
+      "name": "Melbourne-laneway V1",
+      "category": "substrate",
+      "layer": "substrate",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/texture/kr-solidarity__substrate__kr-solidarity--texture--melbourne-laneway--v1__v1.png",
+      "priority": "HIGH",
+      "semantics": {
+        "functional_role": "material-base",
+        "semantic_weight": "material",
+        "layering_role": "background-base"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "hero-background",
+          "global-overlay"
+        ],
+        "small_ui_safe": false
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [],
+        "cannot_overlay_with": [
+          "substrate"
+        ]
+      }
+    },
+    {
+      "id": "KR-SOLID-036",
+      "name": "Texture Night-pylon-sunset V2",
+      "category": "substrate",
+      "layer": "substrate",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/texture/kr-solidarity__substrate__texture--night-pylon-sunset--v2.png",
+      "priority": "HIGH",
+      "semantics": {
+        "functional_role": "material-base",
+        "semantic_weight": "material",
+        "layering_role": "background-base"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "hero-background",
+          "global-overlay"
+        ],
+        "small_ui_safe": false
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [],
+        "cannot_overlay_with": [
+          "substrate"
+        ]
+      }
+    },
+    {
+      "id": "KR-SOLID-037",
+      "name": "Texture Woven-linen-fiber V3",
+      "category": "substrate",
+      "layer": "substrate",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/texture/kr-solidarity__substrate__texture--woven-linen-fiber--v3.png",
+      "priority": "HIGH",
+      "semantics": {
+        "functional_role": "material-base",
+        "semantic_weight": "material",
+        "layering_role": "background-base"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "hero-background",
+          "global-overlay"
+        ],
+        "small_ui_safe": false
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [],
+        "cannot_overlay_with": [
+          "substrate"
+        ]
+      }
+    },
+    {
+      "id": "KR-BRUTALIST-MASK-001",
+      "name": "UI Asset — BRUTALIST MASK 001",
+      "category": "ui-kit",
+      "layer": "ui-kit",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/ui-kit/svg/KR-BRUTALIST-MASK-001.svg",
+      "priority": "MEDIUM",
+      "semantics": {
+        "functional_role": "ui-element",
+        "semantic_weight": "utility",
+        "layering_role": "interface"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "ui-component",
+          "icon"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric",
+          "cultural",
+          "resistance",
+          "spiritual"
+        ],
+        "cannot_overlay_with": []
+      }
+    },
+    {
+      "id": "KR-UI-016",
+      "name": "UI Asset — UI 016",
+      "category": "ui-kit",
+      "layer": "ui-kit",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/ui-kit/svg/icons/kr-solidarity__ui-kit__KR-UI-016__v1.svg",
+      "priority": "MEDIUM",
+      "semantics": {
+        "functional_role": "ui-element",
+        "semantic_weight": "utility",
+        "layering_role": "interface"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "ui-component",
+          "icon"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric",
+          "cultural",
+          "resistance",
+          "spiritual"
+        ],
+        "cannot_overlay_with": []
+      }
+    },
+    {
+      "id": "KR-UI-017",
+      "name": "UI Asset — UI 017",
+      "category": "ui-kit",
+      "layer": "ui-kit",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/ui-kit/svg/icons/kr-solidarity__ui-kit__KR-UI-017__v1.svg",
+      "priority": "MEDIUM",
+      "semantics": {
+        "functional_role": "ui-element",
+        "semantic_weight": "utility",
+        "layering_role": "interface"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "ui-component",
+          "icon"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric",
+          "cultural",
+          "resistance",
+          "spiritual"
+        ],
+        "cannot_overlay_with": []
+      }
+    },
+    {
+      "id": "KR-UI-001",
+      "name": "UI Asset — UI 001",
+      "category": "ui-kit",
+      "layer": "ui-kit",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__KR-UI-001__v1.svg",
+      "priority": "MEDIUM",
+      "semantics": {
+        "functional_role": "ui-element",
+        "semantic_weight": "utility",
+        "layering_role": "interface"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "ui-component",
+          "icon"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric",
+          "cultural",
+          "resistance",
+          "spiritual"
+        ],
+        "cannot_overlay_with": []
+      }
+    },
+    {
+      "id": "KR-UI-002",
+      "name": "UI Asset — UI 002",
+      "category": "ui-kit",
+      "layer": "ui-kit",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__KR-UI-002__v1.svg",
+      "priority": "MEDIUM",
+      "semantics": {
+        "functional_role": "ui-element",
+        "semantic_weight": "utility",
+        "layering_role": "interface"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "ui-component",
+          "icon"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric",
+          "cultural",
+          "resistance",
+          "spiritual"
+        ],
+        "cannot_overlay_with": []
+      }
+    },
+    {
+      "id": "KR-UI-003",
+      "name": "UI Asset — UI 003",
+      "category": "ui-kit",
+      "layer": "ui-kit",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__KR-UI-003__v1.svg",
+      "priority": "MEDIUM",
+      "semantics": {
+        "functional_role": "ui-element",
+        "semantic_weight": "utility",
+        "layering_role": "interface"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "ui-component",
+          "icon"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric",
+          "cultural",
+          "resistance",
+          "spiritual"
+        ],
+        "cannot_overlay_with": []
+      }
+    },
+    {
+      "id": "KR-UI-004",
+      "name": "UI Asset — UI 004",
+      "category": "ui-kit",
+      "layer": "ui-kit",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__KR-UI-004__v1.svg",
+      "priority": "MEDIUM",
+      "semantics": {
+        "functional_role": "ui-element",
+        "semantic_weight": "utility",
+        "layering_role": "interface"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "ui-component",
+          "icon"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric",
+          "cultural",
+          "resistance",
+          "spiritual"
+        ],
+        "cannot_overlay_with": []
+      }
+    },
+    {
+      "id": "KR-UI-005",
+      "name": "UI Asset — UI 005",
+      "category": "ui-kit",
+      "layer": "ui-kit",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__KR-UI-005__v1.svg",
+      "priority": "MEDIUM",
+      "semantics": {
+        "functional_role": "ui-element",
+        "semantic_weight": "utility",
+        "layering_role": "interface"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "ui-component",
+          "icon"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric",
+          "cultural",
+          "resistance",
+          "spiritual"
+        ],
+        "cannot_overlay_with": []
+      }
+    },
+    {
+      "id": "KR-UI-006",
+      "name": "UI Asset — UI 006",
+      "category": "ui-kit",
+      "layer": "ui-kit",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__KR-UI-006__v1.svg",
+      "priority": "MEDIUM",
+      "semantics": {
+        "functional_role": "ui-element",
+        "semantic_weight": "utility",
+        "layering_role": "interface"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "ui-component",
+          "icon"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric",
+          "cultural",
+          "resistance",
+          "spiritual"
+        ],
+        "cannot_overlay_with": []
+      }
+    },
+    {
+      "id": "KR-UI-007",
+      "name": "UI Asset — UI 007",
+      "category": "ui-kit",
+      "layer": "ui-kit",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__KR-UI-007__v1.svg",
+      "priority": "MEDIUM",
+      "semantics": {
+        "functional_role": "ui-element",
+        "semantic_weight": "utility",
+        "layering_role": "interface"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "ui-component",
+          "icon"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric",
+          "cultural",
+          "resistance",
+          "spiritual"
+        ],
+        "cannot_overlay_with": []
+      }
+    },
+    {
+      "id": "KR-UI-008",
+      "name": "UI Asset — UI 008",
+      "category": "ui-kit",
+      "layer": "ui-kit",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__KR-UI-008__v1.svg",
+      "priority": "MEDIUM",
+      "semantics": {
+        "functional_role": "ui-element",
+        "semantic_weight": "utility",
+        "layering_role": "interface"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "ui-component",
+          "icon"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric",
+          "cultural",
+          "resistance",
+          "spiritual"
+        ],
+        "cannot_overlay_with": []
+      }
+    },
+    {
+      "id": "KR-UI-009",
+      "name": "UI Asset — UI 009",
+      "category": "ui-kit",
+      "layer": "ui-kit",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__KR-UI-009__v1.svg",
+      "priority": "MEDIUM",
+      "semantics": {
+        "functional_role": "ui-element",
+        "semantic_weight": "utility",
+        "layering_role": "interface"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "ui-component",
+          "icon"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric",
+          "cultural",
+          "resistance",
+          "spiritual"
+        ],
+        "cannot_overlay_with": []
+      }
+    },
+    {
+      "id": "KR-UI-010",
+      "name": "UI Asset — UI 010",
+      "category": "ui-kit",
+      "layer": "ui-kit",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__KR-UI-010__v1.svg",
+      "priority": "MEDIUM",
+      "semantics": {
+        "functional_role": "ui-element",
+        "semantic_weight": "utility",
+        "layering_role": "interface"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "ui-component",
+          "icon"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric",
+          "cultural",
+          "resistance",
+          "spiritual"
+        ],
+        "cannot_overlay_with": []
+      }
+    },
+    {
+      "id": "KR-UI-011",
+      "name": "UI Asset — UI 011",
+      "category": "ui-kit",
+      "layer": "ui-kit",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__KR-UI-011__v1.svg",
+      "priority": "MEDIUM",
+      "semantics": {
+        "functional_role": "ui-element",
+        "semantic_weight": "utility",
+        "layering_role": "interface"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "ui-component",
+          "icon"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric",
+          "cultural",
+          "resistance",
+          "spiritual"
+        ],
+        "cannot_overlay_with": []
+      }
+    },
+    {
+      "id": "KR-UI-012",
+      "name": "UI Asset — UI 012",
+      "category": "ui-kit",
+      "layer": "ui-kit",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__KR-UI-012__v1.svg",
+      "priority": "MEDIUM",
+      "semantics": {
+        "functional_role": "ui-element",
+        "semantic_weight": "utility",
+        "layering_role": "interface"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "ui-component",
+          "icon"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric",
+          "cultural",
+          "resistance",
+          "spiritual"
+        ],
+        "cannot_overlay_with": []
+      }
+    },
+    {
+      "id": "KR-UI-013",
+      "name": "UI Asset — UI 013",
+      "category": "ui-kit",
+      "layer": "ui-kit",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__KR-UI-013__v1.svg",
+      "priority": "MEDIUM",
+      "semantics": {
+        "functional_role": "ui-element",
+        "semantic_weight": "utility",
+        "layering_role": "interface"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "ui-component",
+          "icon"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric",
+          "cultural",
+          "resistance",
+          "spiritual"
+        ],
+        "cannot_overlay_with": []
+      }
+    },
+    {
+      "id": "KR-UI-014",
+      "name": "UI Asset — UI 014",
+      "category": "ui-kit",
+      "layer": "ui-kit",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__KR-UI-014__v1.svg",
+      "priority": "MEDIUM",
+      "semantics": {
+        "functional_role": "ui-element",
+        "semantic_weight": "utility",
+        "layering_role": "interface"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "ui-component",
+          "icon"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric",
+          "cultural",
+          "resistance",
+          "spiritual"
+        ],
+        "cannot_overlay_with": []
+      }
+    },
+    {
+      "id": "KR-UI-015",
+      "name": "UI Asset — UI 015",
+      "category": "ui-kit",
+      "layer": "ui-kit",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__KR-UI-015__v1.svg",
+      "priority": "MEDIUM",
+      "semantics": {
+        "functional_role": "ui-element",
+        "semantic_weight": "utility",
+        "layering_role": "interface"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "ui-component",
+          "icon"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric",
+          "cultural",
+          "resistance",
+          "spiritual"
+        ],
+        "cannot_overlay_with": []
+      }
+    },
+    {
+      "id": "KR-UI-018",
+      "name": "UI Asset — UI 018",
+      "category": "ui-kit",
+      "layer": "ui-kit",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__KR-UI-018__v1.svg",
+      "priority": "MEDIUM",
+      "semantics": {
+        "functional_role": "ui-element",
+        "semantic_weight": "utility",
+        "layering_role": "interface"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "ui-component",
+          "icon"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric",
+          "cultural",
+          "resistance",
+          "spiritual"
+        ],
+        "cannot_overlay_with": []
+      }
+    },
+    {
+      "id": "KR-UI-019",
+      "name": "UI Asset — UI 019",
+      "category": "ui-kit",
+      "layer": "ui-kit",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__KR-UI-019__v1.svg",
+      "priority": "MEDIUM",
+      "semantics": {
+        "functional_role": "ui-element",
+        "semantic_weight": "utility",
+        "layering_role": "interface"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "ui-component",
+          "icon"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric",
+          "cultural",
+          "resistance",
+          "spiritual"
+        ],
+        "cannot_overlay_with": []
+      }
+    },
+    {
+      "id": "KR-UI-020",
+      "name": "UI Asset — UI 020",
+      "category": "ui-kit",
+      "layer": "ui-kit",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__KR-UI-020__v1.svg",
+      "priority": "MEDIUM",
+      "semantics": {
+        "functional_role": "ui-element",
+        "semantic_weight": "utility",
+        "layering_role": "interface"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "ui-component",
+          "icon"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric",
+          "cultural",
+          "resistance",
+          "spiritual"
+        ],
+        "cannot_overlay_with": []
+      }
+    },
+    {
+      "id": "KR-UI-021",
+      "name": "UI Asset — UI 021",
+      "category": "ui-kit",
+      "layer": "ui-kit",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__KR-UI-021__v1.svg",
+      "priority": "MEDIUM",
+      "semantics": {
+        "functional_role": "ui-element",
+        "semantic_weight": "utility",
+        "layering_role": "interface"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "ui-component",
+          "icon"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric",
+          "cultural",
+          "resistance",
+          "spiritual"
+        ],
+        "cannot_overlay_with": []
+      }
+    },
+    {
+      "id": "KR-UI-022",
+      "name": "UI Asset — UI 022",
+      "category": "ui-kit",
+      "layer": "ui-kit",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__KR-UI-022__v1.svg",
+      "priority": "MEDIUM",
+      "semantics": {
+        "functional_role": "ui-element",
+        "semantic_weight": "utility",
+        "layering_role": "interface"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "ui-component",
+          "icon"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric",
+          "cultural",
+          "resistance",
+          "spiritual"
+        ],
+        "cannot_overlay_with": []
+      }
+    },
+    {
+      "id": "KR-UI-023",
+      "name": "UI Asset — UI 023",
+      "category": "ui-kit",
+      "layer": "ui-kit",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__KR-UI-023__v1.svg",
+      "priority": "MEDIUM",
+      "semantics": {
+        "functional_role": "ui-element",
+        "semantic_weight": "utility",
+        "layering_role": "interface"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "ui-component",
+          "icon"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric",
+          "cultural",
+          "resistance",
+          "spiritual"
+        ],
+        "cannot_overlay_with": []
+      }
+    },
+    {
+      "id": "KR-UI-024",
+      "name": "UI Asset — UI 024",
+      "category": "ui-kit",
+      "layer": "ui-kit",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__KR-UI-024__v1.svg",
+      "priority": "MEDIUM",
+      "semantics": {
+        "functional_role": "ui-element",
+        "semantic_weight": "utility",
+        "layering_role": "interface"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "ui-component",
+          "icon"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric",
+          "cultural",
+          "resistance",
+          "spiritual"
+        ],
+        "cannot_overlay_with": []
+      }
+    },
+    {
+      "id": "KR-UI-025",
+      "name": "UI Asset — UI 025",
+      "category": "ui-kit",
+      "layer": "ui-kit",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__KR-UI-025__v1.svg",
+      "priority": "MEDIUM",
+      "semantics": {
+        "functional_role": "ui-element",
+        "semantic_weight": "utility",
+        "layering_role": "interface"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "ui-component",
+          "icon"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric",
+          "cultural",
+          "resistance",
+          "spiritual"
+        ],
+        "cannot_overlay_with": []
+      }
+    },
+    {
+      "id": "KR-UI-026",
+      "name": "UI Asset — UI 026",
+      "category": "ui-kit",
+      "layer": "ui-kit",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__KR-UI-026__v1.svg",
+      "priority": "MEDIUM",
+      "semantics": {
+        "functional_role": "ui-element",
+        "semantic_weight": "utility",
+        "layering_role": "interface"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "ui-component",
+          "icon"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric",
+          "cultural",
+          "resistance",
+          "spiritual"
+        ],
+        "cannot_overlay_with": []
+      }
+    },
+    {
+      "id": "KR-UI-027",
+      "name": "UI Asset — UI 027",
+      "category": "ui-kit",
+      "layer": "ui-kit",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__KR-UI-027__v1.svg",
+      "priority": "MEDIUM",
+      "semantics": {
+        "functional_role": "ui-element",
+        "semantic_weight": "utility",
+        "layering_role": "interface"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "ui-component",
+          "icon"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric",
+          "cultural",
+          "resistance",
+          "spiritual"
+        ],
+        "cannot_overlay_with": []
+      }
+    },
+    {
+      "id": "KR-UI-028",
+      "name": "UI Asset — UI 028",
+      "category": "ui-kit",
+      "layer": "ui-kit",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__KR-UI-028__v1.svg",
+      "priority": "MEDIUM",
+      "semantics": {
+        "functional_role": "ui-element",
+        "semantic_weight": "utility",
+        "layering_role": "interface"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "ui-component",
+          "icon"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric",
+          "cultural",
+          "resistance",
+          "spiritual"
+        ],
+        "cannot_overlay_with": []
+      }
+    },
+    {
+      "id": "KR-UI-029",
+      "name": "UI Asset — UI 029",
+      "category": "ui-kit",
+      "layer": "ui-kit",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__KR-UI-029__v1.svg",
+      "priority": "MEDIUM",
+      "semantics": {
+        "functional_role": "ui-element",
+        "semantic_weight": "utility",
+        "layering_role": "interface"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "ui-component",
+          "icon"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric",
+          "cultural",
+          "resistance",
+          "spiritual"
+        ],
+        "cannot_overlay_with": []
+      }
+    },
+    {
+      "id": "KR-UI-030",
+      "name": "UI Asset — UI 030",
+      "category": "ui-kit",
+      "layer": "ui-kit",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__KR-UI-030__v1.svg",
+      "priority": "MEDIUM",
+      "semantics": {
+        "functional_role": "ui-element",
+        "semantic_weight": "utility",
+        "layering_role": "interface"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "ui-component",
+          "icon"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric",
+          "cultural",
+          "resistance",
+          "spiritual"
+        ],
+        "cannot_overlay_with": []
+      }
+    },
+    {
+      "id": "KR-UI-031",
+      "name": "UI Asset — UI 031",
+      "category": "ui-kit",
+      "layer": "ui-kit",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__KR-UI-031__v1.svg",
+      "priority": "MEDIUM",
+      "semantics": {
+        "functional_role": "ui-element",
+        "semantic_weight": "utility",
+        "layering_role": "interface"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "ui-component",
+          "icon"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric",
+          "cultural",
+          "resistance",
+          "spiritual"
+        ],
+        "cannot_overlay_with": []
+      }
+    },
+    {
+      "id": "KR-UI-032",
+      "name": "UI Asset — UI 032",
+      "category": "ui-kit",
+      "layer": "ui-kit",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__KR-UI-032__v1.svg",
+      "priority": "MEDIUM",
+      "semantics": {
+        "functional_role": "ui-element",
+        "semantic_weight": "utility",
+        "layering_role": "interface"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "ui-component",
+          "icon"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric",
+          "cultural",
+          "resistance",
+          "spiritual"
+        ],
+        "cannot_overlay_with": []
+      }
+    },
+    {
+      "id": "KR-UI-033",
+      "name": "UI Asset — UI 033",
+      "category": "ui-kit",
+      "layer": "ui-kit",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__KR-UI-033__v1.svg",
+      "priority": "MEDIUM",
+      "semantics": {
+        "functional_role": "ui-element",
+        "semantic_weight": "utility",
+        "layering_role": "interface"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "ui-component",
+          "icon"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric",
+          "cultural",
+          "resistance",
+          "spiritual"
+        ],
+        "cannot_overlay_with": []
+      }
+    },
+    {
+      "id": "KR-UI-034",
+      "name": "UI Asset — UI 034",
+      "category": "ui-kit",
+      "layer": "ui-kit",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__KR-UI-034__v1.svg",
+      "priority": "MEDIUM",
+      "semantics": {
+        "functional_role": "ui-element",
+        "semantic_weight": "utility",
+        "layering_role": "interface"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "ui-component",
+          "icon"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric",
+          "cultural",
+          "resistance",
+          "spiritual"
+        ],
+        "cannot_overlay_with": []
+      }
+    },
+    {
+      "id": "KR-UI-035",
+      "name": "UI Asset — UI 035",
+      "category": "ui-kit",
+      "layer": "ui-kit",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__KR-UI-035__v1.svg",
+      "priority": "MEDIUM",
+      "semantics": {
+        "functional_role": "ui-element",
+        "semantic_weight": "utility",
+        "layering_role": "interface"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "ui-component",
+          "icon"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric",
+          "cultural",
+          "resistance",
+          "spiritual"
+        ],
+        "cannot_overlay_with": []
+      }
+    },
+    {
+      "id": "KR-UI-036",
+      "name": "UI Asset — UI 036",
+      "category": "ui-kit",
+      "layer": "ui-kit",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__KR-UI-036__v1.svg",
+      "priority": "MEDIUM",
+      "semantics": {
+        "functional_role": "ui-element",
+        "semantic_weight": "utility",
+        "layering_role": "interface"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "ui-component",
+          "icon"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric",
+          "cultural",
+          "resistance",
+          "spiritual"
+        ],
+        "cannot_overlay_with": []
+      }
+    },
+    {
+      "id": "KR-UI-037",
+      "name": "UI Asset — UI 037",
+      "category": "ui-kit",
+      "layer": "ui-kit",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__KR-UI-037__v1.svg",
+      "priority": "MEDIUM",
+      "semantics": {
+        "functional_role": "ui-element",
+        "semantic_weight": "utility",
+        "layering_role": "interface"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "ui-component",
+          "icon"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric",
+          "cultural",
+          "resistance",
+          "spiritual"
+        ],
+        "cannot_overlay_with": []
+      }
+    },
+    {
+      "id": "KR-UI-038",
+      "name": "UI Asset — UI 038",
+      "category": "ui-kit",
+      "layer": "ui-kit",
+      "aspect_ratio": "20:3",
+      "file_path": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__KR-UI-038__v1.svg",
+      "priority": "MEDIUM",
+      "semantics": {
+        "functional_role": "ui-element",
+        "semantic_weight": "utility",
+        "layering_role": "interface"
+      },
+      "usage_rules": {
+        "scale_suitability": [
+          "ui-component",
+          "icon"
+        ],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [
+          "substrate",
+          "atmospheric",
+          "cultural",
+          "resistance",
+          "spiritual"
+        ],
+        "cannot_overlay_with": []
+      }
+    }
+  ]
+}

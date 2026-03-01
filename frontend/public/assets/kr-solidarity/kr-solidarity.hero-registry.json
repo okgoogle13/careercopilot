@@ -1,3 +1,286 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:9ed150fe750ad9f8038f9c00f605d6e96d13e1e96b728f5c45583e0a78cb2a86
-size 10464
+{
+  "version": "3.0.0",
+  "registry_name": "kerala-rage-kr-solidarity-local-hero-registry",
+  "description": "Local hero composition registry for kr-solidarity asset layer. Sources from manifest v6.0.0. Finalized 2026-02-28.",
+  "last_updated": "2026-02-28",
+  "manifest_version": "6.0.0",
+  "total_assets_in_manifest": 71,
+  "m3_expressive_bezier": [0.34, 1.56, 0.64, 1],
+  "layer_inventory": {
+    "substrate": 4,
+    "atmospheric": 9,
+    "cultural": 2,
+    "resistance": 12,
+    "spiritual": 5,
+    "ui_kit": 39,
+    "total": 71
+  },
+  "new_assets_finalized": [
+    {
+      "id": "KR-SOLID-007",
+      "name": "Solidarity Light Burst (Atmospheric)",
+      "file": "abstract/kr-solidarity__atmospheric__abstract--solidarity-light-burst--v2.png",
+      "origin": "Renamed from uncategorized (ChatGPT Feb 25 2026)"
+    },
+    {
+      "id": "KR-SOLID-018",
+      "name": "Collective Uprising Hero (Resistance)",
+      "file": "heroes/kr-solidarity__resistance__hero--collective-uprising--v5.png",
+      "origin": "Renamed from uncategorized (ChatGPT Feb 26 2026)"
+    },
+    {
+      "id": "KR-SOLID-037",
+      "name": "Woven Linen Fiber Texture (Substrate)",
+      "file": "texture/kr-solidarity__substrate__texture--woven-linen-fiber--v3.png",
+      "origin": "Renamed from uncategorized (ChatGPT Feb 26 2026)"
+    },
+    {
+      "id": "KR-UI-036",
+      "name": "Substrate Grain Overlay",
+      "file": "ui-kit/svg/kr-solidarity__ui-kit__KR-UI-036__v1.svg",
+      "origin": "New SVG primitive — full-bleed organic grain for substrate layer"
+    },
+    {
+      "id": "KR-UI-037",
+      "name": "Hero Anchor Halo — Solidarity Fist",
+      "file": "ui-kit/svg/kr-solidarity__ui-kit__KR-UI-037__v1.svg",
+      "origin": "New SVG primitive — resistance fist with gold radiance halo for hero layer"
+    },
+    {
+      "id": "KR-UI-038",
+      "name": "Cultural Binding Border — Kerala Vine Scroll",
+      "file": "ui-kit/svg/kr-solidarity__ui-kit__KR-UI-038__v1.svg",
+      "origin": "New SVG primitive — 800x120 Kerala vine motif divider for cultural layer"
+    }
+  ],
+  "hero_compositions": [
+    {
+      "id": "collective-uprising-hero",
+      "name": "Collective Uprising",
+      "description": "Feature hero using the newly finalized collective uprising resistance image with atmospheric light burst overlay and solidarity fist halo primitive.",
+      "emotional_register": "defiance",
+      "layers": [
+        {
+          "type": "substrate",
+          "asset_id": "KR-SOLID-020",
+          "z_index": 0,
+          "opacity": 0.45,
+          "blend_mode": "normal",
+          "position": "cover",
+          "note": "Flinders Street Station night — Melbourne ground layer"
+        },
+        {
+          "type": "atmospheric",
+          "asset_id": "KR-SOLID-007",
+          "z_index": 1,
+          "opacity": 0.38,
+          "blend_mode": "screen",
+          "position": "cover",
+          "note": "Solidarity light burst — newly finalized atmospheric"
+        },
+        {
+          "type": "resistance",
+          "asset_id": "KR-SOLID-018",
+          "z_index": 2,
+          "opacity": 1.0,
+          "blend_mode": "normal",
+          "position": "center",
+          "note": "Collective uprising hero — newly finalized resistance foreground"
+        },
+        {
+          "type": "ui-kit",
+          "asset_id": "KR-UI-037",
+          "z_index": 3,
+          "opacity": 0.55,
+          "blend_mode": "overlay",
+          "position": "center",
+          "note": "Hero anchor halo SVG — gold radiance emanation above figure"
+        }
+      ],
+      "typography": {
+        "headline": "The Rage Never Dies",
+        "supporting": "Collective resistance — Kerala, Naarm, Global",
+        "font_family": "Fraunces",
+        "pressure_state": { "wght": 900, "wdth": 75 },
+        "solidarity_state": { "wght": 700, "wdth": 100 },
+        "melancholy_state": { "wght": 300, "wdth": 125 }
+      },
+      "animation_profile": {
+        "easing": [0.34, 1.56, 0.64, 1],
+        "parallax_layers": [
+          { "layer": "substrate", "speed": 0.2, "direction": "down" },
+          { "layer": "atmospheric", "speed": 0.5, "direction": "up" },
+          { "layer": "resistance", "speed": 0.85, "direction": "up" }
+        ],
+        "scroll_reveal": { "opacity_start": 0, "transform_start": "translateY(24px)", "duration_ms": 600 }
+      }
+    },
+    {
+      "id": "devotional-anchor-hero",
+      "name": "Devotional Anchor",
+      "description": "Spiritual foreground with woven linen substrate and atmospheric overlay.",
+      "emotional_register": "reflection",
+      "layers": [
+        {
+          "type": "substrate",
+          "asset_id": "KR-SOLID-037",
+          "z_index": 0,
+          "opacity": 0.4,
+          "blend_mode": "normal",
+          "position": "cover",
+          "note": "Woven linen fiber — newly finalized substrate"
+        },
+        {
+          "type": "atmospheric",
+          "asset_id": "KR-SOLID-002",
+          "z_index": 1,
+          "opacity": 0.28,
+          "blend_mode": "overlay",
+          "position": "cover"
+        },
+        {
+          "type": "spiritual",
+          "asset_id": "KR-SOLID-009",
+          "z_index": 2,
+          "opacity": 1.0,
+          "blend_mode": "normal",
+          "position": "center"
+        }
+      ],
+      "typography": {
+        "headline": "Solidarity Across Borders",
+        "supporting": "First Nations, Kerala, Global Resistance",
+        "font_family": "Fraunces",
+        "pressure_state": { "wght": 900, "wdth": 75 },
+        "solidarity_state": { "wght": 700, "wdth": 100 },
+        "melancholy_state": { "wght": 300, "wdth": 125 }
+      },
+      "animation_profile": {
+        "easing": [0.34, 1.56, 0.64, 1],
+        "parallax_layers": [
+          { "layer": "substrate", "speed": 0.15, "direction": "down" },
+          { "layer": "spiritual", "speed": 0.75, "direction": "up" }
+        ],
+        "scroll_reveal": { "opacity_start": 0, "transform_start": "translateY(16px)", "duration_ms": 450 }
+      }
+    },
+    {
+      "id": "resistance-portrait-hero",
+      "name": "Resistance Portrait",
+      "description": "Editorial resistance hero with atmospheric overlay — historical defiance.",
+      "emotional_register": "defiance",
+      "layers": [
+        {
+          "type": "substrate",
+          "asset_id": "KR-SOLID-036",
+          "z_index": 0,
+          "opacity": 0.5,
+          "blend_mode": "normal",
+          "position": "cover",
+          "note": "Night pylon sunset substrate"
+        },
+        {
+          "type": "atmospheric",
+          "asset_id": "KR-SOLID-003",
+          "z_index": 1,
+          "opacity": 0.22,
+          "blend_mode": "multiply",
+          "position": "cover"
+        },
+        {
+          "type": "resistance",
+          "asset_id": "KR-SOLID-019",
+          "z_index": 2,
+          "opacity": 1.0,
+          "blend_mode": "normal",
+          "position": "center"
+        }
+      ],
+      "typography": {
+        "headline": "The Rage Never Dies",
+        "supporting": "Legacy of Resistance",
+        "font_family": "Fraunces",
+        "pressure_state": { "wght": 900, "wdth": 75 },
+        "solidarity_state": { "wght": 700, "wdth": 100 },
+        "melancholy_state": { "wght": 300, "wdth": 125 }
+      },
+      "animation_profile": {
+        "easing": [0.34, 1.56, 0.64, 1],
+        "parallax_layers": [
+          { "layer": "substrate", "speed": 0.2, "direction": "down" },
+          { "layer": "resistance", "speed": 0.9, "direction": "up" }
+        ],
+        "scroll_reveal": { "opacity_start": 0, "transform_start": "translateY(20px)", "duration_ms": 500 }
+      }
+    },
+    {
+      "id": "cultural-symbol-hero",
+      "name": "Cultural Symbol",
+      "description": "Kerala cultural icon with gold radiance — heritage as resistance. Uses KR-UI-038 Kerala vine border.",
+      "emotional_register": "discovery",
+      "layers": [
+        {
+          "type": "substrate",
+          "asset_id": "KR-SOLID-035",
+          "z_index": 0,
+          "opacity": 0.45,
+          "blend_mode": "normal",
+          "position": "cover",
+          "note": "Melbourne laneway substrate"
+        },
+        {
+          "type": "atmospheric",
+          "asset_id": "KR-SOLID-004",
+          "z_index": 1,
+          "opacity": 0.35,
+          "blend_mode": "overlay",
+          "position": "cover"
+        },
+        {
+          "type": "cultural",
+          "asset_id": "KR-SOLID-034",
+          "z_index": 2,
+          "opacity": 1.0,
+          "blend_mode": "normal",
+          "position": "center"
+        },
+        {
+          "type": "ui-kit",
+          "asset_id": "KR-UI-038",
+          "z_index": 3,
+          "opacity": 0.7,
+          "blend_mode": "overlay",
+          "position": "bottom",
+          "note": "Cultural binding border SVG — Kerala vine motif at base"
+        }
+      ],
+      "typography": {
+        "headline": "Cultural Roots, Global Struggle",
+        "supporting": "Heritage as Resistance",
+        "font_family": "Fraunces",
+        "pressure_state": { "wght": 900, "wdth": 75 },
+        "solidarity_state": { "wght": 700, "wdth": 100 },
+        "melancholy_state": { "wght": 300, "wdth": 125 }
+      },
+      "animation_profile": {
+        "easing": [0.34, 1.56, 0.64, 1],
+        "parallax_layers": [
+          { "layer": "substrate", "speed": 0.15, "direction": "down" },
+          { "layer": "cultural", "speed": 0.8, "direction": "up" }
+        ],
+        "scroll_reveal": { "opacity_start": 0, "transform_start": "translateY(20px)", "duration_ms": 550 }
+      }
+    }
+  ],
+  "gap_closure_summary": {
+    "assets_renamed_from_uncategorized": 3,
+    "new_svg_primitives_added": 3,
+    "hero_compositions_total": 4,
+    "manifest_version": "6.0.0",
+    "manifest_total_assets": 71,
+    "manifest_validated": true,
+    "duplicate_ids_resolved": true,
+    "category_mapping_fixed": true,
+    "generator_bugs_fixed": ["CATEGORY_TO_LAYER missing direct layer mappings", "parseUiKitFilename wrong naming convention", "SVG subdirectory duplicate IDs"]
+  }
+}
