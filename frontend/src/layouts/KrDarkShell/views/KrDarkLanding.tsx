@@ -10,7 +10,6 @@ import type { SolidarityManifest } from '../../../design/hero/heroTypes';
 import { loadHeroRegistry } from '../../../design/hero/heroRegistry';
 import { composeHero } from '../../../utils/heroComposer';
 import { getHeroForVariant, LANDING_HERO_AB_CONFIG, AbVariant } from '../../../utils/heroAbTesting';
-import sentryKrShivaSrc from '../../../assets/KrMotifs/sentry_kr-shiva.png';
 
 /**
  * KrDarkLanding (Hi-Fi)
@@ -99,11 +98,6 @@ export const KrDarkLanding: React.FC = () => {
           {/* TODO[asset]: Elephant Motif overlay (Z-1) */}
           <div className="absolute inset-0 bg-ink-gold/5 blur-[120px] rounded-full scale-150" />
           <div className="relative aspect-[3/4] bg-asphalt-black rounded-stone border border-white/5 overflow-hidden shadow-viscous group-hover:border-ink-gold/20 transition-colors duration-700">
-             <img 
-               src={sentryKrShivaSrc} 
-               alt="The Sentry" 
-               className="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-1000"
-             />
              <div className="absolute inset-0 bg-gradient-to-t from-asphalt-black via-asphalt-black/40 to-transparent" />
              <div className="absolute bottom-6 left-6">
                <span className="font-mono text-[10px] uppercase tracking-widest text-paper-white/30">

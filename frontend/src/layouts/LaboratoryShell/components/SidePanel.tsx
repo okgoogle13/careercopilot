@@ -1,5 +1,4 @@
 import React from 'react';
-import labSentrySrc from '../../../assets/KrMotifs/sentry_kr-shiva.png';
 
 export const SidePanel: React.FC = () => {
   return (
@@ -10,11 +9,6 @@ export const SidePanel: React.FC = () => {
       <div className="p-4 flex-1 overflow-y-auto">
         <div className="mb-6 relative">
           <div className="relative rounded-xl overflow-hidden shadow-lg border-2 border-surface-KrDark-slate-smoke-highest bg-surface-KrDark-charcoal-slate max-w-[120px] mx-auto">
-            <img
-              src={labSentrySrc}
-              alt="The Auditor - Echidna Mascot"
-              className="w-full h-auto object-cover opacity-80"
-            />
           </div>
         </div>
         <div className="p-4 border border-dashed border-secondary-flannel-dim rounded-lg text-secondary-flannel-dim text-sm font-annotation text-center opacity-60">
