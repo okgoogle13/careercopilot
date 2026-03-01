@@ -14,6 +14,7 @@ import {
   UploadAndTagResponse,
   uploadAndTagResponseSchema,
 } from '../schemas/api.schema';
+import { validateFile } from '../utils/fileValidation';
 
 /**
  * Custom error class for API service-related issues.
@@ -43,6 +44,11 @@ export const uploadAndTagFile = async (
   file: File,
   onUploadProgress: (progress: number) => void
 ): Promise<UploadAndTagResponse> => {
+  const validation = validateFile(file);
+  if (!validation.valid) {
+    throw new ApiServiceError(validation.error!, 400, null);
+  }
+
   const formData = new FormData();
   formData.append('file', file);
 
