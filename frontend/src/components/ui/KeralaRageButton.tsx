@@ -1,4 +1,3 @@
-import { useMode } from '../../hooks/use-mode';
 import { motion, type HTMLMotionProps } from 'framer-motion';
 import React from 'react';
 import { cn } from '../../lib/utils';
@@ -13,7 +12,18 @@ export interface KeralaRageButtonProps extends Omit<HTMLMotionProps<'button'>, '
 }
 
 /**
- * KeralaRageButton - Production-ready button component for KeralaRage KrSolidarity design system
+ * KeralaRageButton (Seed Archetype)
+ *
+ * Kerala Rage kr-solidarity button component implementing the Seed archetype.
+ * Production-ready button with semantic token support and loading states.
+ *
+ * Design Principles:
+ * 1. Uses --sys-color-* semantic tokens (never hardcoded colors)
+ * 2. Work Sans typography via CSS variable
+ * 3. Asymmetric border radius per Seed archetype (40px 12px 40px 12px)
+ * 4. Spring physics with viscous-breeze easing
+ * 5. WCAG AA compliant focus states
+ * 6. Solidarity mode only (no mode-switching)
  */
 export const KeralaRageButton = React.forwardRef<HTMLButtonElement, KeralaRageButtonProps>(
   (
@@ -30,8 +40,6 @@ export const KeralaRageButton = React.forwardRef<HTMLButtonElement, KeralaRageBu
     },
     ref
   ) => {
-    const { mode } = useMode();
-
     // Size variants
     const sizeClasses = {
       sm: 'h-10 px-4 text-sm',
@@ -39,94 +47,49 @@ export const KeralaRageButton = React.forwardRef<HTMLButtonElement, KeralaRageBu
       lg: 'h-14 px-8 text-lg',
     };
 
-    // Variant styles using KeralaRage KrSolidarity tokens
-    const variantStyles: any = {
+    // Variant styles using semantic tokens (Solidarity mode only)
+    const variantStyles = {
       primary: {
-        'KrDark': {
-          background: 'bg-ink-gold',
-          text: 'text-primary-on-primary',
-          hover: 'hover:bg-primary-ink-glow',
-          shadow: 'shadow-sm hover:shadow-[var(--elevation-shadow-glow-gold)]',
-          border: '',
-        },
-        'KrLight': { // Assuming kr-light exists or use KrDark as fallback
-          background: 'bg-ink-gold',
-          text: 'text-primary-on-primary',
-          hover: 'hover:bg-primary-ink-glow',
-          shadow: 'shadow-sm hover:shadow-[var(--elevation-shadow-hover)]',
-          border: '',
-        },
+        backgroundColor: 'var(--sys-color-inkGold-base)',
+        color: 'var(--sys-color-charcoalBackground-base)',
+        boxShadow: '0 0 12px rgba(218, 246, 116, 0.15)',
+        border: 'none',
       },
       secondary: {
-        'KrDark' : {
-          background: 'bg-surface-KrDark-concrete-grey-high',
-          text: 'text-secondary-concrete-grey',
-          hover: 'hover:bg-surface-KrDark-concrete-grey-highest',
-          shadow: 'shadow-sm',
-          border: 'border-2 border-secondary-concrete-grey',
-        },
-        'KrLight': {
-          background: 'bg-surface-KrDark-slate-smoke-high',
-          text: 'text-secondary-concrete-grey',
-          hover: 'hover:bg-surface-KrDark-slate-smoke-highest',
-          shadow: 'shadow-sm',
-          border: 'border border-secondary-flannel-dim',
-        },
+        backgroundColor: 'var(--sys-color-charcoalBackground-steps-3)',
+        color: 'var(--sys-color-concreteGrey-base)',
+        border: '2px solid var(--sys-color-concreteGrey-base)',
+        boxShadow: 'none',
       },
       tertiary: {
-        'KrDark': {
-          background: 'bg-tertiary-solidarity-container',
-          text: 'text-tertiary-solidarity-red',
-          hover: 'hover:bg-tertiary-solidarity-red hover:text-on-surface-paper-white',
-          shadow: 'shadow-sm',
-          border: 'border border-tertiary-solidarity-red',
-        },
-        'KrLight': {
-          background: 'bg-status-KrDark-clinical-alert-container',
-          text: 'text-status-KrDark-clinical-alert',
-          hover: 'hover:bg-status-KrDark-clinical-alert hover:text-on-surface-paper-white',
-          shadow: 'shadow-sm',
-          border: 'border border-status-KrDark-clinical-alert',
-        },
+        backgroundColor: 'transparent',
+        color: 'var(--sys-color-solidarityRed-base)',
+        border: '2px solid var(--sys-color-solidarityRed-base)',
+        boxShadow: 'none',
       },
     };
-
-    // Fix: provide fallback for variantStyles access
-    const currentVariant = (variantStyles[variant] && variantStyles[variant][mode]) || variantStyles.primary['KrDark'];
 
     return (
       <motion.button
         ref={ref}
+        style={{
+          fontFamily: 'var(--sys-type-font-work-sans, "Work Sans", sans-serif)',
+          borderRadius: '40px 12px 40px 12px', // Seed archetype asymmetric radius
+          fontVariationSettings: "'wght' 600, 'GRAD' var(--grad, 0)",
+          ...variantStyles[variant],
+        }}
         className={cn(
           // Base styles
           'font-bold uppercase tracking-wide',
-          'transition-colors duration-[var(--duration-fast)]',
+          'transition-colors duration-150',
+          'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--sys-color-inkGold-base)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--sys-color-charcoalBackground-base)]',
           'disabled:opacity-50 disabled:cursor-not-allowed',
 
           // Size
           sizeClasses[size],
 
-          // Variant colors
-          currentVariant.background,
-          currentVariant.text,
-          currentVariant.hover,
-          currentVariant.shadow,
-          currentVariant.border,
-
-          // Rounded pebble in KrDark, sharper stone in KrLight.
-          mode === 'KrDark'
-            ? 'rounded-[var(--radius-pebble)]'
-            : 'rounded-[var(--radius-stone)]',
-
           className
         )}
-        style={
-          {
-            borderRadius: mode === 'KrDark' ? 'var(--radius-pebble)' : 'var(--radius-stone)',
-            fontFamily: 'var(--font-field-note)',
-            fontVariationSettings: "'wght' 600, 'GRAD' var(--grad, 0)",
-          } as any
-        }
         whileHover={
           !disabled
             ? {
@@ -150,24 +113,24 @@ export const KeralaRageButton = React.forwardRef<HTMLButtonElement, KeralaRageBu
               }
             : undefined
         }
-        disabled={disabled}
+        disabled={disabled || loading}
         {...props}
       >
         {loading ? (
           <motion.div
             animate={{ rotate: 360 }}
             transition={{ repeat: Infinity, duration: 1, ease: [0.34, 1.56, 0.64, 1] }}
-            className="mr-2"
+            className="mr-2 inline-flex"
           >
             <span className="block w-4 h-4 border-2 border-current border-t-transparent rounded-full" />
           </motion.div>
         ) : startIcon ? (
-          <span className="mr-2 flex items-center">{startIcon}</span>
+          <span className="mr-2 inline-flex items-center">{startIcon}</span>
         ) : null}
 
         {children}
 
-        {!loading && endIcon && <span className="ml-2 flex items-center">{endIcon}</span>}
+        {!loading && endIcon && <span className="ml-2 inline-flex items-center">{endIcon}</span>}
       </motion.button>
     );
   }

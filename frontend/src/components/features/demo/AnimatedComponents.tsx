@@ -149,7 +149,7 @@ export function AnimatedTabs({
         </div>
       </div>
       <div className="mt-4">
-        <AnimatePresence mode="wait">
+        <AnimatePresence>
           <motion.div
             key={activeTab}
             initial={{ opacity: 0, y: 10 }}

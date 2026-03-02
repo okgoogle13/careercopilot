@@ -208,7 +208,7 @@ export const AnalysisPage: React.FC = () => {
           <EvidenceUploader />
 
           <Stone
-            mode="KrDark"
+           
             elevation="raised"
             className="border-concrete-grey/10 p-10 bg-asphalt-black/20"
           >
@@ -282,7 +282,7 @@ export const AnalysisPage: React.FC = () => {
         <aside className="space-y-8">
           {strategyResult && strategyResult.corporate_profile && (
             <Stone
-              mode="KrDark"
+             
               elevation="floating"
               className="p-0 border-ink-gold/20 overflow-hidden bg-asphalt-black-dark"
             >
@@ -375,7 +375,7 @@ export const AnalysisPage: React.FC = () => {
       {(strategyResult || atsResult) && (
         <div className="mt-8 relative z-10 animate-in fade-in slide-in-from-bottom-8 duration-700">
           <Stone
-            mode="KrDark"
+           
             elevation="floating"
             className="border-ink-gold/30 p-0 overflow-hidden"
             header={

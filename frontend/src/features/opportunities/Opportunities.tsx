@@ -89,7 +89,7 @@ export function Opportunities() {
 
         {/* Lookout Controls: The Search Deck */}
         <Stone
-          mode="KrDark"
+         
           elevation="raised"
           className="mb-12 p-8 border-concrete-grey/10 bg-asphalt-black/40 backdrop-blur-md"
         >

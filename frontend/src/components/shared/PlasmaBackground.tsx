@@ -148,7 +148,7 @@ export const PlasmaBackground = () => {
                         <feGaussianBlur in="SourceGraphic" stdDeviation="40" result="blur" />
                         <feColorMatrix
                             in="blur"
-                            mode="matrix"
+                           
                             values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7"
                             result="goo"
                         />

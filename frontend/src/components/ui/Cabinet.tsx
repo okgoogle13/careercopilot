@@ -75,7 +75,7 @@ export const Cabinet: React.FC<CabinetProps> = ({
         onClick={onClose}
       />
       <Stone
-        mode={variant === 'tech' ? 'KrDark' : 'KrDark'}
+       
         elevation="floating"
         className={`relative w-full ${maxWidthClasses[maxWidth]} shadow-2xl animate-in zoom-in-95 duration-300`}
       >

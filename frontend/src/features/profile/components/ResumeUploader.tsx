@@ -121,7 +121,7 @@ export default function ResumeUploader({ onUploadSuccess }: ResumeUploaderProps)
                     onChange={handleFileSelect}
                 />
 
-                <AnimatePresence mode="wait">
+                <AnimatePresence>
                     {status === 'idle' && (
                         <motion.div
                             key="idle"

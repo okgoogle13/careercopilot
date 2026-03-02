@@ -199,7 +199,7 @@ export function KSCGenerator() {
         transition={KrDarkSpring}
         className="bg-surface-container rounded-leaf p-8 border border-outline-variant shadow-elevation-1 relative overflow-hidden"
       >
-        <AnimatePresence mode="wait">
+        <AnimatePresence>
           {/* Step 1: Criteria Input */}
           {step === 1 && (
             <motion.div 

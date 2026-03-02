@@ -1,13 +1,12 @@
 import React from 'react';
 import { motion, HTMLMotionProps, useReducedMotion } from 'framer-motion';
 import { cn } from '@/lib/utils';
-import { useMode } from '@/hooks/use-mode';
 
 /**
  * ManifestoSlabProps
- * 
- * @property title - High-impact declaration title (uses energetic/restrained Fraunces preset).
- * @property subtitle - Optional supporting declaration (uses curator's hand accent).
+ *
+ * @property title - High-impact declaration title (uses Fraunces display font).
+ * @property subtitle - Optional supporting declaration.
  */
 export interface ManifestoSlabProps extends HTMLMotionProps<'div'> {
   title: string;
@@ -15,12 +14,17 @@ export interface ManifestoSlabProps extends HTMLMotionProps<'div'> {
 }
 
 /**
- * ManifestoSlab (Slab)
- * 
- * Structural primitive for high-impact headlines and hero sections.
- * Implements the "Slab" primitive with sharp but softened radii.
- * 
- * @mission Technically solid, accessible, and correctly wired to the Fraunces presets.
+ * ManifestoSlab (Cabinet Archetype)
+ *
+ * Kerala Rage kr-solidarity hero section component implementing the Cabinet archetype.
+ * Structural primitive for high-impact headlines and manifestos.
+ *
+ * Design Principles:
+ * 1. Uses --sys-color-* semantic tokens (never hardcoded colors)
+ * 2. Fraunces display typography with variable font axes
+ * 3. Minimal border radius (Cabinet archetype is structural)
+ * 4. Spring physics with viscous-breeze easing
+ * 5. Extreme contrast typography (M3 Expressive standard)
  */
 export const ManifestoSlab: React.FC<ManifestoSlabProps> = ({
   title,
@@ -28,54 +32,59 @@ export const ManifestoSlab: React.FC<ManifestoSlabProps> = ({
   className,
   ...props
 }) => {
-  const { mode } = useMode();
   const shouldReduceMotion = useReducedMotion();
-
-  // Fraunces Preset: Energetic for hero typography, Restrained for supporting copy.
-  const frauncesPreset = mode === 'KrDark' ? 'var(--type-energetic)' : 'var(--type-restrained)';
 
   const motionProps = shouldReduceMotion
     ? { initial: { opacity: 0 }, animate: { opacity: 1 } }
     : {
         initial: { opacity: 0, scale: 0.95 },
         animate: { opacity: 1, scale: 1 },
+        transition: {
+          type: 'spring',
+          stiffness: 400,
+          damping: 30,
+        },
       };
 
   return (
     <motion.div
-      transition={{ 
-        type: 'spring', 
-        stiffness: 400, 
-        damping: 30,
-        ease: [0.34, 1.56, 0.64, 1]
+      style={{
+        backgroundColor: 'var(--sys-color-charcoalBackground-base)',
+        borderLeft: '6px solid var(--sys-color-solidarityRed-steps-2)',
+        borderRadius: '8px 0 8px 0', // Cabinet archetype minimal structural radius
+        boxShadow: '0 12px 32px rgba(0, 0, 0, 0.35)',
       }}
       className={cn(
-        'bg-asphalt-black border-solidarity-red/20 border-l-[6px] p-10 md:p-16',
-        'rounded-sm relative overflow-hidden z-20',
-        'shadow-elevated',
+        'p-10 md:p-16 relative overflow-hidden z-20',
         className
       )}
       {...motionProps}
       {...props}
     >
-      {/* TODO[asset]: Human will replace with a motif background overlay. */}
+      {/* TODO[asset]: Replace with Kerala Rage motif background overlay from manifest */}
       {/* <div className="absolute top-0 right-0 w-64 h-64 opacity-5 pointer-events-none z-0 bg-motif-signal" /> */}
 
       <div className="relative z-10 flex flex-col gap-4">
         {subtitle && (
-          <span 
-            className="font-curator text-solidarity-red text-2xl rotate-quirky-ccw"
-            aria-hidden="true"
+          <span
+            style={{
+              fontFamily: 'var(--sys-type-font-work-sans, "Work Sans", sans-serif)',
+              color: 'var(--sys-color-solidarityRed-base)',
+            }}
+            className="text-2xl font-semibold"
+            aria-label={subtitle}
           >
             {subtitle}
           </span>
         )}
-        <h1 
-          className="font-proclamation text-paper-white text-display-hero leading-none uppercase break-words"
+        <h1
           style={{
-            fontFamily: 'Fraunces, serif',
-            fontVariationSettings: frauncesPreset,
+            fontFamily: 'var(--sys-type-font-fraunces, "Fraunces", serif)',
+            color: 'var(--sys-color-worker-ash-base)',
+            fontWeight: 700,
+            fontVariationSettings: '"wght" 700, "SOFT" 0, "WONK" 1',
           }}
+          className="text-6xl md:text-8xl leading-none uppercase break-words"
         >
           {title}
         </h1>

@@ -130,22 +130,22 @@ export const Lens = forwardRef<HTMLInputElement, LensProps>(
 
     // Variant-specific styles (KeralaRage KrSolidarity)
     const containerStyle = {
-      borderRadius: 'var(--radius-leaf)',
-      backgroundColor: variant === 'filled' ? 'rgba(44, 39, 35, 0.4)' : 'transparent',
+      borderRadius: '24px 8px 20px 4px', // Lens archetype asymmetric radius
+      backgroundColor: variant === 'filled' ? 'var(--sys-color-charcoalBackground-steps-3)' : 'transparent',
       border: '2px solid',
       borderColor: error
-        ? 'var(--color-solidarity-red)'
+        ? 'var(--sys-color-solidarityRed-base)'
         : isFocused
-          ? 'var(--color-ink-gold)'
-          : 'var(--color-concrete-grey-base)',
-      color: 'var(--color-paper-white)',
-      transition: 'all var(--duration-standard) var(--ease-viscous-breeze)',
+          ? 'var(--sys-color-inkGold-base)'
+          : 'var(--sys-color-concreteGrey-base)',
+      color: 'var(--sys-color-worker-ash-base)',
+      transition: 'all 300ms cubic-bezier(0.34, 1.56, 0.64, 1)',
     };
 
     const containerClasses = `
     ${fullWidth ? 'w-full' : 'w-auto'}
     ${disabled ? 'opacity-50 cursor-not-allowed' : ''}
-    ${isFocused && !error ? 'shadow-[0_0_15px_rgba(212,168,75,0.2)]' : ''}
+    ${isFocused && !error ? 'shadow-[0_0_15px_var(--sys-color-inkGold-steps-0)]' : ''}
     ${containerClassName}
   `;
 
@@ -313,16 +313,16 @@ export const LensArea = forwardRef<HTMLTextAreaElement, LensAreaProps>(
     };
 
     const containerStyle = {
-      borderRadius: 'var(--radius-leaf)',
-      backgroundColor: variant === 'filled' ? 'rgba(44, 39, 35, 0.4)' : 'transparent',
+      borderRadius: '24px 8px 20px 4px', // Lens archetype asymmetric radius
+      backgroundColor: variant === 'filled' ? 'var(--sys-color-charcoalBackground-steps-3)' : 'transparent',
       border: '2px solid',
       borderColor: error
-        ? 'var(--color-solidarity-red)'
+        ? 'var(--sys-color-solidarityRed-base)'
         : isFocused
-          ? 'var(--color-ink-gold)'
-          : 'var(--color-concrete-grey-base)',
-      color: 'var(--color-paper-white)',
-      transition: 'all var(--duration-standard) var(--ease-viscous-breeze)',
+          ? 'var(--sys-color-inkGold-base)'
+          : 'var(--sys-color-concreteGrey-base)',
+      color: 'var(--sys-color-worker-ash-base)',
+      transition: 'all 300ms cubic-bezier(0.34, 1.56, 0.64, 1)',
     };
 
     const showError = error && errorMessage;
@@ -358,7 +358,7 @@ export const LensArea = forwardRef<HTMLTextAreaElement, LensAreaProps>(
           focus:outline-none
           resize-vertical
           font-field-note
-          ${isFocused && !error ? 'shadow-[0_0_15px_rgba(212,168,75,0.2)]' : ''}
+          ${isFocused && !error ? 'shadow-[0_0_15px_var(--sys-color-inkGold-steps-0)]' : ''}
           ${containerClassName}
           ${className}
         `}

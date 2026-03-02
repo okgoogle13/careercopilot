@@ -28,7 +28,7 @@ figma.connect(
             content: figma.string("Content Text"),
         },
         example: ({ mode, elevation, hasHeader, hasFooter, content }) => (
-            <Stone mode={mode} elevation={elevation}
+            <Stone elevation={elevation}
                 header={hasHeader ? <h3>Header</h3> : undefined}
                 footer={hasFooter ? <button>Action</button> : undefined}
             >
