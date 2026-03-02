@@ -8,17 +8,10 @@ interface AuroraHeaderProps {
 }
 
 /**
-<<<<<<< HEAD
- * AuroraHeader -  Parametric Header
- * 
- * Features:
- * - Tri-color gradient text (Wattle Gold → Waratah Crimson → Flannel Flower)
-=======
  * AuroraHeader - KeralaRage KrSolidarity Parametric Header
  * 
  * Features:
  * - Tri-color gradient text (Ink Gold → Solidarity Red → Concrete Grey)
->>>>>>> restoration-KR-Rage-Figma-v2.0
  * - Shimmer animation on hover
  * - Variable font axis animation (Fraunces 'SOFT' and 'WONK')
  * - Optional tag and witty subtitle
@@ -51,11 +44,7 @@ export const AuroraHeader: React.FC<AuroraHeaderProps> = ({
                     className="font-mono text-xs uppercase tracking-widest"
                     style={{
                         fontFamily: "'JetBrains Mono', monospace",
-<<<<<<< HEAD
-                        color: '#A8A097', // Flannel Flower
-=======
                         color: 'var(--sys-color-worker-ash-base)', // Worker Ash (replaces Concrete Grey)
->>>>>>> restoration-KR-Rage-Figma-v2.0
                     }}
                 >
                     {tag}
@@ -77,13 +66,8 @@ export const AuroraHeader: React.FC<AuroraHeaderProps> = ({
                 <motion.span
                     className="bg-clip-text text-transparent"
                     style={{
-<<<<<<< HEAD
-                        backgroundImage: 'linear-gradient(135deg, #D4A84B 0%, #C45C4B 50%, #A8A097 100%)',
-                        // Wattle Gold → Waratah Crimson → Flannel Flower
-=======
                         backgroundImage: 'linear-gradient(135deg, var(--sys-color-inkGold-base) 0%, var(--sys-color-solidarityRed-base) 50%, var(--sys-color-worker-ash-base) 100%)',
                         // Ink Gold → Solidarity Red → Worker Ash
->>>>>>> restoration-KR-Rage-Figma-v2.0
                         backgroundSize: '200% 200%',
                     }}
                     animate={{
@@ -119,11 +103,7 @@ export const AuroraHeader: React.FC<AuroraHeaderProps> = ({
                     style={{
                         fontFamily: "'Fraunces', serif",
                         fontVariationSettings: "'wght' 400, 'SOFT' 100, 'WONK' 1",
-<<<<<<< HEAD
-                        color: '#C45C4B', // Waratah Crimson
-=======
                         color: 'var(--sys-color-solidarityRed-base)', // Solidarity Red
->>>>>>> restoration-KR-Rage-Figma-v2.0
                     }}
                 >
                     {wittySubtitle}
@@ -133,8 +113,4 @@ export const AuroraHeader: React.FC<AuroraHeaderProps> = ({
     );
 };
 
-<<<<<<< HEAD
 export default AuroraHeader;
-=======
-export default AuroraHeader;
->>>>>>> restoration-KR-Rage-Figma-v2.0

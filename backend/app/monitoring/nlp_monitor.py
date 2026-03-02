@@ -8,11 +8,7 @@ including metrics collection and health checks.
 import logging
 import time
 from functools import wraps
-<<<<<<< HEAD
-from typing import Any, Dict, Optional
-=======
 from typing import Any
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 import psutil
 
@@ -26,11 +22,7 @@ class NLPMonitor:
 
     def __new__(cls):
         if cls._instance is None:
-<<<<<<< HEAD
-            cls._instance = super(NLPMonitor, cls).__new__(cls)
-=======
             cls._instance = super().__new__(cls)
->>>>>>> restoration-KR-Rage-Figma-v2.0
             cls._instance._initialized = False
         return cls._instance
 
@@ -56,11 +48,7 @@ class NLPMonitor:
                     return result
                 except Exception as e:
                     status = "error"
-<<<<<<< HEAD
-                    logger.error(f"Error in {name}: {str(e)}")
-=======
                     logger.error(f"Error in {name}: {e!s}")
->>>>>>> restoration-KR-Rage-Figma-v2.0
                     raise
                 finally:
                     duration = time.time() - start_time
@@ -79,29 +67,17 @@ class NLPMonitor:
 
         return decorator
 
-<<<<<<< HEAD
-    def record_metric(self, name: str, value: float, labels: Optional[Dict[str, str]] = None):
-=======
     def record_metric(self, name: str, value: float, labels: dict[str, str] | None = None):
->>>>>>> restoration-KR-Rage-Figma-v2.0
         """Record a metric with optional labels."""
         if name not in self._metrics:
             self._metrics[name] = []
         self._metrics[name].append((value, labels or {}))
 
-<<<<<<< HEAD
-    def get_metrics(self) -> Dict[str, Any]:
-        """Get all recorded metrics."""
-        return self._metrics
-
-    def get_health(self) -> Dict[str, Any]:
-=======
     def get_metrics(self) -> dict[str, Any]:
         """Get all recorded metrics."""
         return self._metrics
 
     def get_health(self) -> dict[str, Any]:
->>>>>>> restoration-KR-Rage-Figma-v2.0
         """Get health status of the NLP service."""
         process = psutil.Process()
         memory_info = process.memory_info()
@@ -119,11 +95,7 @@ class NLPMonitor:
 nlp_monitor = NLPMonitor()
 
 
-<<<<<<< HEAD
-def get_nlp_health() -> Dict[str, Any]:
-=======
 def get_nlp_health() -> dict[str, Any]:
->>>>>>> restoration-KR-Rage-Figma-v2.0
     """Get the health status of the NLP service."""
     return nlp_monitor.get_health()
 

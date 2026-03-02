@@ -1,72 +1,36 @@
 # Context Setup & Task Brief for Claude Desktop
 
 ## Project Overview
-<<<<<<< HEAD
-You are working on **Career Copilot**, a full-stack application for career management and job applications. The project is located at `/Users/okgoogle13/Desktop/careercopilot`.
-=======
 You are working on **Career Copilot**, a full-stack application for career management and job applications. The project is located at `/Users/okgoogle13/Projects/careercopilot`.
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 ## Step 1: Required Reading (Use `read_text_file` tool)
 
 Before proceeding, read these files to understand project standards and current state:
 
 ### Core Documentation
-<<<<<<< HEAD
-1. **`/Users/okgoogle13/Desktop/careercopilot/docs/AI_RULES.md`**
-=======
 1. **`/Users/okgoogle13/Projects/careercopilot/docs/AI_RULES.md`**
->>>>>>> restoration-KR-Rage-Figma-v2.0
    - Mandatory rules for AI agents
    - Folder structure, naming conventions, component architecture
    - File placement guidelines
 
-<<<<<<< HEAD
-2. **`/Users/okgoogle13/Desktop/careercopilot/docs/CONTRIBUTING.md`**
-   - Developer guidelines and best practices
-   - Code style and testing procedures
-
-3. **`/Users/okgoogle13/Desktop/careercopilot/docs/CURRENT_STATUS.md`**
-=======
 2. **`/Users/okgoogle13/Projects/careercopilot/docs/CONTRIBUTING.md`**
    - Developer guidelines and best practices
    - Code style and testing procedures
 
 3. **`/Users/okgoogle13/Projects/careercopilot/docs/CURRENT_STATUS.md`**
->>>>>>> restoration-KR-Rage-Figma-v2.0
    - Current phase and progress metrics
    - Recent changes and blockers
    - Next priorities
 
-<<<<<<< HEAD
-4. **`/Users/okgoogle13/Desktop/careercopilot/docs/project/active/MASTER_MIGRATION_PLAN_v2.md`**
-   - Overall project roadmap
-   - Phase breakdown and milestones
-
-5. **`/Users/okgoogle13/Desktop/careercopilot/docs/project/active/DEPLOYMENT_READY.md`**
-=======
 4. **`/Users/okgoogle13/Projects/careercopilot/docs/project/active/MASTER_MIGRATION_PLAN_v2.md`**
    - Overall project roadmap
    - Phase breakdown and milestones
 
 5. **`/Users/okgoogle13/Projects/careercopilot/docs/project/active/DEPLOYMENT_READY.md`**
->>>>>>> restoration-KR-Rage-Figma-v2.0
    - Pre-launch checklist
    - Production readiness criteria
 
 ### Current Inventory & Tokens
-<<<<<<< HEAD
-6. **`/Users/okgoogle13/Desktop/careercopilot/frontend/component-inventory.json`**
-   - **CRITICAL**: This is the source of truth for component migration status
-   - Contains: migrationSummary, curioAdoption, component details
-   - Schema: migrated/mixed/not_migrated/unknown + usageCount + design token adoption
-
-7. **`/Users/okgoogle13/Desktop/careercopilot/frontend/src/theme/tokens.json`**
-   - Canonical  design tokens
-
-8. **`/Users/okgoogle13/Desktop/careercopilot/frontend/src/theme/northcote.css`**
-   -  CSS variables and mode system
-=======
 6. **`/Users/okgoogle13/Projects/careercopilot/frontend/component-inventory.json`**
    - **CRITICAL**: This is the source of truth for component migration status
    - Contains: migrationSummary, kr-solidarityAdoption, component details
@@ -77,7 +41,6 @@ Before proceeding, read these files to understand project standards and current 
 
 8. **`/Users/okgoogle13/Projects/careercopilot/frontend/src/theme/kerala-rage.css`**
    - kerala-rage kr-solidarity CSS variables and mode system
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 ## Step 2: Acknowledge Context
 
@@ -92,20 +55,12 @@ After reading all files above, provide:
 ## Step 3: Your Task - Update Planning/Orchestrator Skill
 
 ### Goal
-<<<<<<< HEAD
-Update the custom "planning/orchestrator" skill to derive migration plans from the **current component inventory report** (`frontend/component-inventory.json`), NOT older M3 Expressive docs. Align everything to **** (gallery/laboratory) and the new inventory schema.
-=======
 Update the custom "planning/orchestrator" skill to derive migration plans from the **current component inventory report** (`frontend/component-inventory.json`), NOT older M3 Expressive docs. Align everything to **kerala-rage kr-solidarity** (kr-dark/kr-dark) and the new inventory schema.
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 ### Repository Context
 - **Inventory script**: `frontend/scripts/component-inventory.ts`
 - **Inventory output**: `frontend/component-inventory.json` (source of truth)
-<<<<<<< HEAD
-- **Canonical tokens**: `frontend/src/theme/tokens.json` + `frontend/src/theme/northcote.css`
-=======
 - **Canonical tokens**: `frontend/src/theme/tokens.json` + `frontend/src/theme/kerala-rage.css`
->>>>>>> restoration-KR-Rage-Figma-v2.0
 - **Status doc**: `docs/CURRENT_STATUS.md`
 - **Rule**: Avoid root markdown per `docs/AI_RULES.md`
 
@@ -124,11 +79,7 @@ Parse the new `component-inventory.json` schema:
 
 **Migration Summary Fields:**
 - `migrationSummary`: `migrated`, `mixed`, `not_migrated`, `unknown`
-<<<<<<< HEAD
-- `curioAdoption`: `withCurioTokens`, `withModeSystem`, `legacyMUI`, `legacyM3`, `fullyCurio`
-=======
 - `kr-solidarityAdoption`: `withkr-solidarityTokens`, `withModeSystem`, `legacyMUI`, `legacyM3`, `fullykr-solidarity`
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 **Component Entry Fields:**
 - `usageCount` - Number of times component is imported
@@ -140,27 +91,16 @@ Parse the new `component-inventory.json` schema:
 
 #### 3. Update Planning Logic
 **Prioritization Order:**
-<<<<<<< HEAD
-1. **Mixed components first** (Curio + legacy coexisting)
-=======
 1. **Mixed components first** (kr-solidarity + legacy coexisting)
->>>>>>> restoration-KR-Rage-Figma-v2.0
 2. **Not migrated** (legacy-only components)
 3. **Unknown** (classify: unused → archive; used → migrate)
 
 **Within each group, prioritize by:**
 - `usageCount` (higher = more critical)
-<<<<<<< HEAD
-- Critical flows: auth, onboarding, gallery/lab shells, applications, documents
-
-#### 4. Update Terminology
-- Replace all references to **"M3 Expressive"** with **""**
-=======
 - Critical flows: auth, onboarding, kr-dark/lab shells, applications, documents
 
 #### 4. Update Terminology
 - Replace all references to **"M3 Expressive"** with **"kerala-rage kr-solidarity"**
->>>>>>> restoration-KR-Rage-Figma-v2.0
 - Remove dependencies on:
   - `frontend/reports/summary.json`
   - `frontend/reports/migration-breakdown.json`
@@ -178,11 +118,7 @@ The orchestrator should produce:
    - Include: name, usageCount, current status, reason for priority
 
 3. **Proposed 3-Phase Plan**
-<<<<<<< HEAD
-   - **Phase 1**: Mixed components (Curio + legacy)
-=======
    - **Phase 1**: Mixed components (kr-solidarity + legacy)
->>>>>>> restoration-KR-Rage-Figma-v2.0
    - **Phase 2**: Legacy-only components
    - **Phase 3**: Unknown components (classify & migrate)
 
@@ -193,11 +129,7 @@ The orchestrator should produce:
 
 ## MCP Tools Available
 
-<<<<<<< HEAD
-1. **filesystem** - Read/write files in `/Users/okgoogle13/Desktop/careercopilot`
-=======
 1. **filesystem** - Read/write files in `/Users/okgoogle13/Projects/careercopilot`
->>>>>>> restoration-KR-Rage-Figma-v2.0
 2. **flashsidekick** - AI analysis (auto-loads `AI_RULES.md`)
 3. **github** - Repository operations
 4. **playwright** - Browser automation

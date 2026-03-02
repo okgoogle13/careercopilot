@@ -10,16 +10,6 @@
 ## Navigation Regression
 
 - Verify `?tool=` routing and back/forward navigation.
-<<<<<<< HEAD
-- Check Gallery + Laboratory key flows.
-
-##  Visual Verification
-
-- Confirm `frontend/src/globals.css` loads  tokens.
-- Verify `NorthcoteButton` hover uses GRAD physics (no layout shift).
-- Verify `StatusBadge` breathing animation present.
-- Spot-check Gallery + Laboratory pages for tokenized colors and shapes.
-=======
 - Check kr-dark + kr-dark key flows.
 
 ## kerala-rage kr-solidarity Visual Verification
@@ -28,7 +18,6 @@
 - Verify `kerala-rageButton` hover uses GRAD physics (no layout shift).
 - Verify `StatusBadge` breathing animation present.
 - Spot-check kr-dark + kr-dark pages for tokenized colors and shapes.
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 ## Lighthouse
 

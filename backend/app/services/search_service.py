@@ -1,39 +1,23 @@
 import logging
 import os
-<<<<<<< HEAD
-import requests
-from typing import List, Optional
-from pydantic import BaseModel
-from dotenv import load_dotenv
-=======
 
 import httpx
 from dotenv import load_dotenv
 from pydantic import BaseModel
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 load_dotenv()
 
 class SearchResult(BaseModel):
     content: str
-<<<<<<< HEAD
-    citations: List[str] = []
-=======
     citations: list[str] = []
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 class SearchService:
     """
     Service for performing deep web research using Perplexity API.
     Uses 'sonar-pro' (formerly sonar-reasoning-pro) for high-quality, reasoned synthesis.
-<<<<<<< HEAD
-    """
-    
-=======
     Now uses async httpx client for better performance in async contexts.
     """
 
->>>>>>> restoration-KR-Rage-Figma-v2.0
     def __init__(self):
         self.api_key = os.getenv("PERPLEXITY_API_KEY")
         self.base_url = "https://api.perplexity.ai/chat/completions"
@@ -42,11 +26,7 @@ class SearchService:
         if not self.api_key:
             self.logger.warning("PERPLEXITY_API_KEY is not set. Search capabilities will be disabled.")
 
-<<<<<<< HEAD
-    def research_company(self, company_name: str) -> Optional[str]:
-=======
     async def research_company(self, company_name: str) -> str | None:
->>>>>>> restoration-KR-Rage-Figma-v2.0
         """
         Conduct deep research on a company to extract intelligence for job applications.
         returns a synthesized text summary of the company's mission, values, and culture.
@@ -82,11 +62,7 @@ class SearchService:
             "temperature": 0.2,
             "max_tokens": 1000,
         }
-<<<<<<< HEAD
-        
-=======
 
->>>>>>> restoration-KR-Rage-Figma-v2.0
         headers = {
             "Authorization": f"Bearer {self.api_key}",
             "Content-Type": "application/json"
@@ -94,21 +70,6 @@ class SearchService:
 
         try:
             self.logger.info(f"Sending Perplexity request for: {company_name}")
-<<<<<<< HEAD
-            response = requests.post(self.base_url, json=payload, headers=headers, timeout=60)
-            response.raise_for_status()
-            
-            data = response.json()
-            # Extract the content from the first choice
-            content = data["choices"][0]["message"]["content"]
-            return content
-
-        except requests.exceptions.RequestException as e:
-            self.logger.error(f"Perplexity API request failed for {company_name}: {str(e)}")
-            return None
-        except (KeyError, IndexError) as e:
-             self.logger.error(f"Failed to parse Perplexity response: {str(e)}")
-=======
             # Use async httpx client instead of synchronous requests for better performance
             async with httpx.AsyncClient() as client:
                 response = await client.post(
@@ -129,5 +90,4 @@ class SearchService:
             return None
         except (KeyError, IndexError) as e:
              self.logger.error(f"Failed to parse Perplexity response: {e!s}")
->>>>>>> restoration-KR-Rage-Figma-v2.0
              return None

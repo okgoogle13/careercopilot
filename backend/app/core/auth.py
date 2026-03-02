@@ -5,18 +5,11 @@ Authentication system using Supabase JWTs.
 import logging
 import os
 from datetime import datetime, timedelta
-<<<<<<< HEAD
-from typing import Any, Dict, Optional
-
-from fastapi import Depends, HTTPException, status
-from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
-=======
 from typing import Any
 
 from fastapi import Depends, HTTPException, status
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 
->>>>>>> restoration-KR-Rage-Figma-v2.0
 try:
     from jose import JWTError, jwt
 except ImportError:  # pragma: no cover - optional dependency in test/CI
@@ -29,25 +22,13 @@ except ImportError:  # pragma: no cover - optional dependency in test/CI
 
     jwt = _JwtStub()
 from sqlalchemy.orm import Session
-
 from app.core.database import get_db
-<<<<<<< HEAD
-=======
-from app.core.secure_config import settings
->>>>>>> restoration-KR-Rage-Figma-v2.0
-from app.models.database import User
+from app.core.secure_config import SecureSettings
+from app.models.user import User
 
-logger = logging.getLogger(__name__)
-
-# Security configuration
-# In Supabase, this is the "JWT Secret" found in Project Settings -> API
-<<<<<<< HEAD
-SECRET_KEY = os.getenv("JWT_SECRET_KEY") 
-ALGORITHM = "HS256"
-=======
+settings = SecureSettings()
 SECRET_KEY = settings.JWT_SECRET_KEY
 ALGORITHM = settings.ALGORITHM
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 # JWT Bearer token scheme
 security = HTTPBearer()
@@ -55,28 +36,17 @@ security = HTTPBearer()
 class AuthManager:
     """Handles authentication operations via Supabase JWTs"""
 
-<<<<<<< HEAD
-    def verify_token(self, token: str) -> Optional[Dict[str, Any]]:
-=======
     def verify_token(self, token: str) -> dict[str, Any] | None:
->>>>>>> restoration-KR-Rage-Figma-v2.0
         """Verify JWT token and return payload"""
         try:
             # Supabase tokens are signed with the project secret
             if not SECRET_KEY:
                 logger.error("JWT_SECRET_KEY is not set!")
                 return None
-<<<<<<< HEAD
-                
-            payload = jwt.decode(
-                token, 
-                SECRET_KEY, 
-=======
 
             payload = jwt.decode(
                 token,
                 SECRET_KEY,
->>>>>>> restoration-KR-Rage-Figma-v2.0
                 algorithms=[ALGORITHM],
                 options={"verify_aud": False} # Supabase 'aud' can vary (authenticated, etc)
             )
@@ -114,21 +84,6 @@ async def get_current_user(
         if user_id is None:
             raise credentials_exception
 
-<<<<<<< HEAD
-        # Check if user exists in our local abstract 'users' table
-        # If user logs in via Supabase but isn't in our public table yet, we might need to create them
-        # or wait for the webhook. For now, we enforce existence.
-        user = db.query(User).filter(User.id == user_id).first()
-        if user is None:
-            # Optional: JIT Provisioning (Just In Time)
-            # If valid Supabase token but no user record, create one?
-            # For now, simplistic approach: raise error
-            logger.warning(f"User {user_id} authenticated but record not found in public.users")
-            raise credentials_exception
-
-        return user
-
-=======
         # Sync user with local database (Just-In-Time Provisioning)
         user = db.query(User).filter(User.id == user_id).first()
         if user is None:
@@ -164,20 +119,14 @@ async def get_current_user(
 
     except HTTPException:
         raise
->>>>>>> restoration-KR-Rage-Figma-v2.0
     except Exception as e:
         logger.warning(f"Authentication failed: {e}")
         raise credentials_exception
 
 async def get_current_user_optional(
     db: Session = Depends(get_db),
-<<<<<<< HEAD
-    credentials: Optional[HTTPAuthorizationCredentials] = Depends(security),
-) -> Optional[User]:
-=======
     credentials: HTTPAuthorizationCredentials | None = Depends(security),
 ) -> User | None:
->>>>>>> restoration-KR-Rage-Figma-v2.0
     """Optional authentication"""
     if not credentials:
         return None
@@ -197,11 +146,7 @@ def create_user_token(user: User) -> str:
 # Simple rate limiter (unchanged)
 class RateLimiter:
     def __init__(self):
-<<<<<<< HEAD
-        self.requests = {} 
-=======
         self.requests = {}
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
     def check_rate_limit(self, user_id: str, limit: int = 100, window: int = 3600) -> bool:
         now = datetime.utcnow()

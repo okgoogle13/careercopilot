@@ -8,11 +8,7 @@ import logging
 import os
 import threading
 import time
-<<<<<<< HEAD
-from typing import Any, Dict, Optional
-=======
 from typing import Any
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 from prometheus_client import Counter, Gauge, Histogram, start_http_server
 
@@ -30,11 +26,7 @@ class NLPMetricsService:
     def __new__(cls):
         with cls._lock:
             if cls._instance is None:
-<<<<<<< HEAD
-                cls._instance = super(NLPMetricsService, cls).__new__(cls)
-=======
                 cls._instance = super().__new__(cls)
->>>>>>> restoration-KR-Rage-Figma-v2.0
                 cls._instance._initialized = False
         return cls._instance
 
@@ -42,17 +34,10 @@ class NLPMetricsService:
         if self._initialized:
             return
 
-<<<<<<< HEAD
-        self._metrics: Dict[str, Any] = {}
-        self._initialized = True
-        self._running = False
-        self._thread: Optional[threading.Thread] = None
-=======
         self._metrics: dict[str, Any] = {}
         self._initialized = True
         self._running = False
         self._thread: threading.Thread | None = None
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
         # Initialize Prometheus metrics
         self._init_prometheus_metrics()
@@ -108,11 +93,7 @@ class NLPMetricsService:
             logger.info(f"Started Prometheus metrics server on port {config.METRICS_PORT}")
 
         except Exception as e:
-<<<<<<< HEAD
-            logger.error(f"Failed to start metrics server: {str(e)}")
-=======
             logger.error(f"Failed to start metrics server: {e!s}")
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
     def _run_metrics_server(self):
         """Run the Prometheus metrics server."""
@@ -121,11 +102,7 @@ class NLPMetricsService:
             while self._running:
                 time.sleep(1)
         except Exception as e:
-<<<<<<< HEAD
-            logger.error(f"Metrics server error: {str(e)}")
-=======
             logger.error(f"Metrics server error: {e!s}")
->>>>>>> restoration-KR-Rage-Figma-v2.0
             self._running = False
 
     def stop_metrics_server(self):

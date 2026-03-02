@@ -5,17 +5,6 @@ This module contains parameterized pytest tests that verify the robustness
 of cover letter generation flows under various edge cases and stress conditions.
 """
 
-<<<<<<< HEAD
-from typing import Any, Dict
-from unittest.mock import MagicMock, patch
-
-import pytest
-
-from app.core.ai_error_handling import AIError
-from app.genkit_flows.cover_letter_generator import generate_tailored_cover_letter
-from app.genkit_flows.smart_cover_letter_system import generate_smart_cover_letter
-
-=======
 from typing import Any
 from unittest.mock import MagicMock, patch
 
@@ -25,35 +14,22 @@ from app.genkit_flows.smart_cover_letter_system import generate_smart_cover_lett
 
 from app.core.ai_error_handling import AIError
 
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 class TestCoverLetterRobustness:
     """Test suite for cover letter generation robustness."""
 
     @pytest.fixture
-<<<<<<< HEAD
-    def minimal_profile_data(self) -> Dict[str, Any]:
-=======
     def minimal_profile_data(self) -> dict[str, Any]:
->>>>>>> restoration-KR-Rage-Figma-v2.0
         """Minimal profile data for testing."""
         return {"name": "Test User", "email": "test@example.com", "experience": []}
 
     @pytest.fixture
-<<<<<<< HEAD
-    def minimal_job_analysis(self) -> Dict[str, Any]:
-=======
     def minimal_job_analysis(self) -> dict[str, Any]:
->>>>>>> restoration-KR-Rage-Figma-v2.0
         """Minimal job analysis data for testing."""
         return {"title": "Test Position", "company": "Test Company", "requirements": []}
 
     @pytest.fixture
-<<<<<<< HEAD
-    def minimal_candidate_profile(self) -> Dict[str, Any]:
-=======
     def minimal_candidate_profile(self) -> dict[str, Any]:
->>>>>>> restoration-KR-Rage-Figma-v2.0
         """Minimal candidate profile for smart cover letter generation."""
         return {
             "personal_info": {
@@ -107,13 +83,8 @@ class TestCoverLetterRobustness:
         self,
         job_description: str,
         scenario_name: str,
-<<<<<<< HEAD
-        minimal_profile_data: Dict[str, Any],
-        minimal_job_analysis: Dict[str, Any],
-=======
         minimal_profile_data: dict[str, Any],
         minimal_job_analysis: dict[str, Any],
->>>>>>> restoration-KR-Rage-Figma-v2.0
     ):
         """
         Test that generate_tailored_cover_letter handles various edge cases robustly.
@@ -198,11 +169,7 @@ class TestCoverLetterRobustness:
         self,
         job_description: str,
         scenario_name: str,
-<<<<<<< HEAD
-        minimal_candidate_profile: Dict[str, Any],
-=======
         minimal_candidate_profile: dict[str, Any],
->>>>>>> restoration-KR-Rage-Figma-v2.0
     ):
         """
         Test that generate_smart_cover_letter handles various edge cases robustly.
@@ -271,11 +238,7 @@ class TestCoverLetterRobustness:
 
     @pytest.mark.skip(reason="gemini_pro model removed - test needs refactoring")
     def test_model_failure_handling(
-<<<<<<< HEAD
-        self, minimal_profile_data: Dict[str, Any], minimal_job_analysis: Dict[str, Any]
-=======
         self, minimal_profile_data: dict[str, Any], minimal_job_analysis: dict[str, Any]
->>>>>>> restoration-KR-Rage-Figma-v2.0
     ):
         """
         Test that the functions handle AI model failures gracefully.
@@ -294,11 +257,7 @@ class TestCoverLetterRobustness:
             assert "AI model unavailable" in str(exc_info.value)
 
     @pytest.mark.skip(reason="gemini_pro model removed - test needs refactoring")
-<<<<<<< HEAD
-    def test_memory_intensive_input(self, minimal_profile_data: Dict[str, Any]):
-=======
     def test_memory_intensive_input(self, minimal_profile_data: dict[str, Any]):
->>>>>>> restoration-KR-Rage-Figma-v2.0
         """
         Test with extremely large inputs that could cause memory issues.
         """
@@ -332,11 +291,7 @@ class TestCoverLetterRobustness:
                 pytest.fail(f"Unhandled exception with large input: {type(e).__name__}: {e}")
 
     @pytest.mark.skip(reason="gemini_pro model removed - test needs refactoring")
-<<<<<<< HEAD
-    def test_unicode_edge_cases(self, minimal_candidate_profile: Dict[str, Any]):
-=======
     def test_unicode_edge_cases(self, minimal_candidate_profile: dict[str, Any]):
->>>>>>> restoration-KR-Rage-Figma-v2.0
         """
         Test various Unicode edge cases and encoding issues.
         """

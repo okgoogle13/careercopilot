@@ -5,17 +5,10 @@ Provides easy-to-use decorators for caching AI function results
 """
 
 import functools
-<<<<<<< HEAD
-import inspect
-import logging
-from datetime import timedelta
-from typing import Any, Callable, Dict, List, Optional, TypeVar, cast
-=======
 import logging
 from collections.abc import Callable
 from datetime import timedelta
 from typing import Any, TypeVar, cast
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 from .personal_cache import get_ai_cache
 
@@ -25,13 +18,8 @@ logger = logging.getLogger(__name__)
 def cached_ai_operation(
     operation_type: str,
     user_id_param: str = "user_id",
-<<<<<<< HEAD
-    cache_key_params: Optional[List[str]] = None,
-    exclude_params: Optional[List[str]] = None,
-=======
     cache_key_params: list[str] | None = None,
     exclude_params: list[str] | None = None,
->>>>>>> restoration-KR-Rage-Figma-v2.0
 ):
     """
     Decorator to cache AI operation results
@@ -61,34 +49,10 @@ def cached_ai_operation(
                     user_id = kwargs[user_id_param]
                 else:
                     # Try to find user_id in args based on function signature
-<<<<<<< HEAD
-=======
-                    import inspect
-
->>>>>>> restoration-KR-Rage-Figma-v2.0
-                    sig = inspect.signature(func)
-                    param_names = list(sig.parameters.keys())
-                    if user_id_param in param_names:
-                        param_index = param_names.index(user_id_param)
-                        if param_index < len(args):
-                            user_id = args[param_index]
-
-                if not user_id:
-                    logger.warning(f"Could not extract user_id for caching {operation_type}")
-                    return await func(*args, **kwargs)
-
-                # Prepare cache input data
-<<<<<<< HEAD
-                input_data = _prepare_cache_input(args, kwargs, cache_key_params, exclude_params)
-
-                # Try to get from cache
-                cached_result = await cache.get_ai_operation(operation_type, input_data, user_id)
-=======
                 _prepare_cache_input(args, kwargs, cache_key_params, exclude_params)
 
                 # Try to get from cache
                 cached_result = await cache.get(operation_type, user_id)
->>>>>>> restoration-KR-Rage-Figma-v2.0
                 if cached_result is not None:
                     return cached_result
 
@@ -98,21 +62,11 @@ def cached_ai_operation(
                 # Cache the result with TTL from cache config
                 cache_config = cache.CACHE_CONFIGS.get("default", {})
                 ttl_seconds = cache_config.get("ttl", 3600)  # Default 1 hour TTL
-<<<<<<< HEAD
-                ttl = timedelta(seconds=ttl_seconds) if ttl_seconds else timedelta(hours=1)
-
-                # Convert result to dict if it's not already
-                cache_value = result if isinstance(result, dict) else {"value": result}
-                await cache.cache_ai_operation(
-                    operation_type, input_data, cache_value, user_id, ttl
-                )
-=======
                 ttl = timedelta(seconds=ttl_seconds) if ttl_seconds else None
 
                 # Convert result to dict if it's not already
                 cache_value = result if isinstance(result, dict) else {"value": result}
                 await cache.set(operation_type, user_id, cache_value, ttl=ttl)
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
                 return result
 
@@ -129,15 +83,9 @@ def cached_ai_operation(
 def _prepare_cache_input(
     args: tuple,
     kwargs: dict,
-<<<<<<< HEAD
-    cache_key_params: Optional[List[str]] = None,
-    exclude_params: Optional[List[str]] = None,
-) -> Dict[str, Any]:
-=======
     cache_key_params: list[str] | None = None,
     exclude_params: list[str] | None = None,
 ) -> dict[str, Any]:
->>>>>>> restoration-KR-Rage-Figma-v2.0
     """Prepare input data for cache key generation"""
 
     cache_input = {}
@@ -163,11 +111,7 @@ T = TypeVar("T", bound=Callable[..., Any])
 
 
 def invalidate_user_ai_cache(
-<<<<<<< HEAD
-    user_id: str, operation_types: Optional[List[str]] = None
-=======
     user_id: str, operation_types: list[str] | None = None
->>>>>>> restoration-KR-Rage-Figma-v2.0
 ) -> Callable[[T], T]:
     """
     Decorator to invalidate user cache after function execution
@@ -209,13 +153,7 @@ class CacheContext:
         self.result = None
 
     async def __aenter__(self):
-<<<<<<< HEAD
-        self.result = await self.cache.get_ai_operation(
-            self.operation_type, self.input_data, self.user_id
-        )
-=======
         self.result = await self.cache.get(self.operation_type, self.user_id, self.input_data)
->>>>>>> restoration-KR-Rage-Figma-v2.0
         return self
 
     async def __aexit__(self, exc_type, exc_val, exc_tb):
@@ -224,15 +162,7 @@ class CacheContext:
 
     async def set_result(self, result: Any) -> bool:
         """Cache a result within the context"""
-<<<<<<< HEAD
-        # Convert result to dict if needed
-        result_data = result if isinstance(result, dict) else {"value": result}
-        return await self.cache.cache_ai_operation(
-            self.operation_type, self.input_data, result_data, self.user_id
-        )
-=======
         return await self.cache.set(self.operation_type, self.user_id, self.input_data, result)
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 
 # Usage example with context manager:

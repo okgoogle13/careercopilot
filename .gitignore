@@ -39,78 +39,7 @@ build/
 # IDE files
 .vscode/
 .idea/
-<<<<<<< HEAD
-=======
-.antigravity/mcp.json
->>>>>>> restoration-KR-Rage-Figma-v2.0
-*.swp
-*.swo
-
-# OS files
-.DS_Store
-Thumbs.db
-
-# Firebase
-.firebase/
-
-# Logs
-logs/
-*.log
-
-# Coverage
-htmlcov/
-.coverage
-
-# Backup directories
-frontend-pre-migration-backup/
-frontend-broken/
-coverage/
-.nyc_output
-
-# Temporary folders
-tmp/
-temp/
-.tmp.driveupload/
-
-# Cache directories
-.eslintcache
-.npm
-.rpt2_cache/
-.tsbuildinfo
-.yarn/install-state.gz
-
-# Python cache files
-__pycache__/
-*.py[cod]
-*$py.class
-careercopilot/frontend/.env
-
-# Generated frontend assets
-public/assets/
-/Applications/careercopilot/backend/firebase-prod-key.json
-.env.production
-
-# Ignore backup directories created by cleanup script
-cleanup_backup_*
-!.env.example
-*.db
-*.zip
-*.html
-cleanup_backup_*/
-/backend/data/
-/frontend/test-results/
-.frontend-coverage/
-/frontend/playwright-report/
-.env.aws-ses
-
-*storybook.log
-storybook-static
-frontend/Figma UI Files/
-.claude-backup-*.tar.gz
-<<<<<<< HEAD
-=======
 *.bak
->>>>>>> restoration-KR-Rage-Figma-v2.0
 *.bak.*
 claude-artifact-runner/
 
@@ -118,10 +47,6 @@ claude-artifact-runner/
 /.ai_reports/
 .archive_legacy/
 .venv/
-<<<<<<< HEAD
-venv/
-=======
->>>>>>> restoration-KR-Rage-Figma-v2.0
 test-results/
 
 # Local Environments and Logs
@@ -148,8 +73,6 @@ consolidation_log.txt
 setup-ci-secrets.sh
 .asset_backup_*
 .asset_backup_*
-<<<<<<< HEAD
-=======
 _archive/
 venv/
 
@@ -198,4 +121,3 @@ tools/scripts/workflow/run_northcote_workflow.py
 purge/
 _backup_*/
 cleanup_backup_*/
->>>>>>> restoration-KR-Rage-Figma-v2.0

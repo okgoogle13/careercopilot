@@ -3,15 +3,8 @@ backend/app/agents/ghostwriter.py
 ----------------------------------
 AI Agent for generating tailored cover letters based on job details and user resume.
 """
-<<<<<<< HEAD
-import os
 import logging
 from pathlib import Path
-from typing import Dict, Optional
-=======
-import logging
-from pathlib import Path
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 from app.services.flash_sidekick_service import FlashSidekickService
 
@@ -41,26 +34,16 @@ class GhostwriterAgent:
         if not RESUME_PATH.exists():
             logger.warning(f"[Ghostwriter] Resume not found at {RESUME_PATH}")
             return "Candidate Resume: [No resume found in user_profile/resume.md]. Please add your resume to generate personalized cover letters."
-<<<<<<< HEAD
-        
-=======
 
->>>>>>> restoration-KR-Rage-Figma-v2.0
         try:
             resume_content = RESUME_PATH.read_text(encoding="utf-8")
             logger.info(f"[Ghostwriter] Resume loaded: {len(resume_content)} characters")
             return resume_content
         except Exception as e:
             logger.error(f"[Ghostwriter] Error reading resume: {e}")
-<<<<<<< HEAD
-            return f"Error loading resume: {str(e)}"
-
-    async def generate_cover_letter(self, job_data: Dict) -> str:
-=======
             return f"Error loading resume: {e!s}"
 
     async def generate_cover_letter(self, job_data: dict) -> str:
->>>>>>> restoration-KR-Rage-Figma-v2.0
         """
         Generates a compelling, professional cover letter using AI.
         
@@ -72,16 +55,6 @@ class GhostwriterAgent:
         """
         # Load the user's resume
         resume_content = await self.load_resume()
-<<<<<<< HEAD
-        
-        # Extract job details
-        job_title = job_data.get('title', 'the position')
-        company = job_data.get('company', 'your organization')
-        job_description = job_data.get('description', job_data.get('url', 'See job posting'))
-        salary = job_data.get('salary', 'Not specified')
-        deadline = job_data.get('deadline', 'Not specified')
-        
-=======
 
         # Extract job details
         job_title = job_data.get("title", "the position")
@@ -90,7 +63,6 @@ class GhostwriterAgent:
         salary = job_data.get("salary", "Not specified")
         deadline = job_data.get("deadline", "Not specified")
 
->>>>>>> restoration-KR-Rage-Figma-v2.0
         # Construct the AI prompt
         prompt = f"""
 ROLE: Expert Career Coach & Professional Copywriter specializing in application materials.
@@ -125,20 +97,12 @@ Start directly with "Dear Hiring Manager," or similar greeting.
 """
 
         logger.info(f"[Ghostwriter] Drafting cover letter for {company} - {job_title}")
-<<<<<<< HEAD
-        
-=======
 
->>>>>>> restoration-KR-Rage-Figma-v2.0
         try:
             # Use Flash Sidekick's AI generation (Pro model for better quality)
             # Note: For production, you may want to use the consult_pro method for higher quality
             cover_letter = await self.ai_service.quick_summarize(prompt)
-<<<<<<< HEAD
-            
-=======
 
->>>>>>> restoration-KR-Rage-Figma-v2.0
             # Clean up any markdown formatting if present
             if "```" in cover_letter:
                 # Extract content between code blocks if the AI wrapped it
@@ -147,15 +111,6 @@ Start directly with "Dear Hiring Manager," or similar greeting.
                     if part.strip() and not part.startswith("markdown") and not part.startswith("text"):
                         cover_letter = part.strip()
                         break
-<<<<<<< HEAD
-            
-            logger.info(f"[Ghostwriter] ✓ Cover letter generated: {len(cover_letter)} characters")
-            return cover_letter
-            
-        except Exception as e:
-            logger.error(f"[Ghostwriter] Error generating cover letter: {e}")
-            
-=======
 
             logger.info(f"[Ghostwriter] ✓ Cover letter generated: {len(cover_letter)} characters")
             return cover_letter
@@ -163,7 +118,6 @@ Start directly with "Dear Hiring Manager," or similar greeting.
         except Exception as e:
             logger.error(f"[Ghostwriter] Error generating cover letter: {e}")
 
->>>>>>> restoration-KR-Rage-Figma-v2.0
             # Fallback to a template-based approach if AI fails
             fallback_letter = f"""Dear Hiring Manager at {company},
 
@@ -178,11 +132,7 @@ Sincerely,
 
 ---
 Note: AI generation failed. This is a fallback template. Please customize before sending.
-<<<<<<< HEAD
-Error: {str(e)}
-=======
 Error: {e!s}
->>>>>>> restoration-KR-Rage-Figma-v2.0
 """
             return fallback_letter
 
@@ -190,16 +140,6 @@ Error: {e!s}
 if __name__ == "__main__":
     # Smoke test the agent
     import asyncio
-<<<<<<< HEAD
-    
-    async def test_ghostwriter():
-        agent = GhostwriterAgent()
-        
-        # Test resume loading
-        resume = await agent.load_resume()
-        print(f"Resume loaded: {len(resume)} characters")
-        
-=======
 
     async def test_ghostwriter():
         agent = GhostwriterAgent()
@@ -208,7 +148,6 @@ if __name__ == "__main__":
         resume = await agent.load_resume()
         print(f"Resume loaded: {len(resume)} characters")
 
->>>>>>> restoration-KR-Rage-Figma-v2.0
         # Test cover letter generation
         test_job = {
             "title": "Senior Python Developer",
@@ -217,20 +156,12 @@ if __name__ == "__main__":
             "salary": "$120k - $150k + Super",
             "deadline": "January 15, 2026"
         }
-<<<<<<< HEAD
-        
-=======
 
->>>>>>> restoration-KR-Rage-Figma-v2.0
         cover_letter = await agent.generate_cover_letter(test_job)
         print("\n" + "="*50)
         print("GENERATED COVER LETTER:")
         print("="*50)
         print(cover_letter)
         print("="*50)
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> restoration-KR-Rage-Figma-v2.0
     asyncio.run(test_ghostwriter())

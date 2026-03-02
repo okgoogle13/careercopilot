@@ -8,78 +8,28 @@ import logging
 import threading
 import time
 from collections import defaultdict, deque
-<<<<<<< HEAD
-=======
-from collections.abc import Callable
->>>>>>> restoration-KR-Rage-Figma-v2.0
-from contextlib import asynccontextmanager
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from functools import wraps
-<<<<<<< HEAD
-from typing import Any, Callable, Dict, List, Optional
-=======
-from typing import Any
->>>>>>> restoration-KR-Rage-Figma-v2.0
+from typing import Any, Callable, AsyncIterator
+from contextlib import asynccontextmanager
 
 try:
     import psutil
 except ImportError:  # pragma: no cover - optional dependency in CI/test envs
     psutil = None
 from fastapi import FastAPI, Request, Response
-<<<<<<< HEAD
-=======
-
->>>>>>> restoration-KR-Rage-Figma-v2.0
-try:
-    from prometheus_client import (
-        CONTENT_TYPE_LATEST,
-        REGISTRY,
-        Counter,
-        Histogram,
-        generate_latest,
-    )
-except ImportError:  # pragma: no cover - optional dependency in CI/test envs
-    CONTENT_TYPE_LATEST = "text/plain"
-
-    class _NoopMetric:
-        def __init__(self, *args, **kwargs):
-            pass
-
-        def labels(self, **kwargs):
-            return self
-
-        def inc(self, amount: int = 1):
-            return None
-
-        def observe(self, value: float):
-            return None
-
-    class _NoopRegistry:
-        _collector_to_names = {}
-
-    REGISTRY = _NoopRegistry()
-    Counter = _NoopMetric
-    Histogram = _NoopMetric
-
-    def generate_latest(_registry):
-        return b""
+from prometheus_client import REGISTRY, Counter, Histogram, generate_latest, CONTENT_TYPE_LATEST
 from starlette.middleware.base import BaseHTTPMiddleware
-
-logger = logging.getLogger(__name__)
 
 
 @dataclass
 class MetricPoint:
-    """Single metric data point"""
+    """A single data point for a metric"""
 
     timestamp: datetime
     value: float
-<<<<<<< HEAD
-    labels: Dict[str, str] = field(default_factory=dict)
-=======
     labels: dict[str, str] = field(default_factory=dict)
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 
 @dataclass
@@ -91,11 +41,7 @@ class PerformanceMetrics:
     min_time: float = float("inf")
     max_time: float = 0.0
     error_count: int = 0
-<<<<<<< HEAD
-    last_error: Optional[str] = None
-=======
     last_error: str | None = None
->>>>>>> restoration-KR-Rage-Figma-v2.0
     recent_times: deque = field(default_factory=lambda: deque(maxlen=100))
 
     @property
@@ -119,17 +65,6 @@ class MetricsCollector:
     """Central metrics collection system"""
 
     def __init__(self):
-<<<<<<< HEAD
-        self.metrics: Dict[str, List[MetricPoint]] = defaultdict(list)
-        self.performance_metrics: Dict[str, PerformanceMetrics] = defaultdict(PerformanceMetrics)
-        self.counters: Dict[str, int] = defaultdict(int)
-        self.gauges: Dict[str, float] = {}
-        self.histograms: Dict[str, List[float]] = defaultdict(list)
-        self._lock = threading.Lock()
-        self._start_time = datetime.now(timezone.utc)
-
-    def increment_counter(self, name: str, value: int = 1, labels: Optional[Dict[str, str]] = None):
-=======
         self.metrics: dict[str, list[MetricPoint]] = defaultdict(list)
         self.performance_metrics: dict[str, PerformanceMetrics] = defaultdict(PerformanceMetrics)
         self.counters: dict[str, int] = defaultdict(int)
@@ -139,29 +74,20 @@ class MetricsCollector:
         self._start_time = datetime.now(timezone.utc)
 
     def increment_counter(self, name: str, value: int = 1, labels: dict[str, str] | None = None):
->>>>>>> restoration-KR-Rage-Figma-v2.0
         """Increment a counter metric"""
         with self._lock:
             full_name = self._build_metric_name(name, labels)
             self.counters[full_name] += value
             self._add_metric_point(name, value, labels)
 
-<<<<<<< HEAD
-    def set_gauge(self, name: str, value: float, labels: Optional[Dict[str, str]] = None):
-=======
     def set_gauge(self, name: str, value: float, labels: dict[str, str] | None = None):
->>>>>>> restoration-KR-Rage-Figma-v2.0
         """Set a gauge metric value"""
         with self._lock:
             full_name = self._build_metric_name(name, labels)
             self.gauges[full_name] = value
             self._add_metric_point(name, value, labels)
 
-<<<<<<< HEAD
-    def record_histogram(self, name: str, value: float, labels: Optional[Dict[str, str]] = None):
-=======
     def record_histogram(self, name: str, value: float, labels: dict[str, str] | None = None):
->>>>>>> restoration-KR-Rage-Figma-v2.0
         """Record a value in a histogram"""
         with self._lock:
             full_name = self._build_metric_name(name, labels)
@@ -176,11 +102,7 @@ class MetricsCollector:
         operation: str,
         duration: float,
         success: bool = True,
-<<<<<<< HEAD
-        error: Optional[str] = None,
-=======
         error: str | None = None,
->>>>>>> restoration-KR-Rage-Figma-v2.0
     ):
         """Record performance metrics for an operation"""
         with self._lock:
@@ -195,11 +117,7 @@ class MetricsCollector:
                 metrics.error_count += 1
                 metrics.last_error = error
 
-<<<<<<< HEAD
-    def _build_metric_name(self, name: str, labels: Optional[Dict[str, str]] = None) -> str:
-=======
     def _build_metric_name(self, name: str, labels: dict[str, str] | None = None) -> str:
->>>>>>> restoration-KR-Rage-Figma-v2.0
         """Build a full metric name including labels"""
         if not labels:
             return name
@@ -207,11 +125,7 @@ class MetricsCollector:
         label_str = ",".join(f"{k}={v}" for k, v in sorted(labels.items()))
         return f"{name}{{{label_str}}}"
 
-<<<<<<< HEAD
-    def _add_metric_point(self, name: str, value: float, labels: Optional[Dict[str, str]] = None):
-=======
     def _add_metric_point(self, name: str, value: float, labels: dict[str, str] | None = None):
->>>>>>> restoration-KR-Rage-Figma-v2.0
         """Add a metric point to the time series"""
         point = MetricPoint(timestamp=datetime.now(timezone.utc), value=value, labels=labels or {})
         self.metrics[name].append(point)
@@ -220,11 +134,7 @@ class MetricsCollector:
         if len(self.metrics[name]) > 1000:
             self.metrics[name] = self.metrics[name][-1000:]
 
-<<<<<<< HEAD
-    def get_metrics_summary(self) -> Dict[str, Any]:
-=======
     def get_metrics_summary(self) -> dict[str, Any]:
->>>>>>> restoration-KR-Rage-Figma-v2.0
         """Get a summary of all collected metrics"""
         with self._lock:
             uptime = (datetime.now(timezone.utc) - self._start_time).total_seconds()
@@ -261,11 +171,7 @@ class MetricsCollector:
                 },
             }
 
-<<<<<<< HEAD
-    def _percentile(self, values: List[float], percentile: float) -> float:
-=======
     def _percentile(self, values: list[float], percentile: float) -> float:
->>>>>>> restoration-KR-Rage-Figma-v2.0
         """Calculate percentile from a list of values"""
         if not values:
             return 0.0
@@ -328,11 +234,7 @@ def get_metrics_collector() -> MetricsCollector:
 # Decorators for automatic metrics collection
 
 
-<<<<<<< HEAD
-def monitor_performance(operation_name: Optional[str] = None, record_args: bool = False):
-=======
 def monitor_performance(operation_name: str | None = None, record_args: bool = False):
->>>>>>> restoration-KR-Rage-Figma-v2.0
     """
     Decorator to monitor function performance
 
@@ -497,11 +399,7 @@ class SystemMonitor:
     def __init__(self, collection_interval: float = 60.0):
         self.collection_interval = collection_interval
         self.collector = get_metrics_collector()
-<<<<<<< HEAD
-        self._monitoring_task: Optional[asyncio.Task] = None
-=======
         self._monitoring_task: asyncio.Task | None = None
->>>>>>> restoration-KR-Rage-Figma-v2.0
         self._running = False
 
     async def start(self):
@@ -589,11 +487,7 @@ class SystemMonitor:
 
 
 # Global system monitor instance
-<<<<<<< HEAD
-_system_monitor: Optional[SystemMonitor] = None
-=======
 _system_monitor: SystemMonitor | None = None
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 
 async def start_system_monitoring(interval: float = 60.0) -> SystemMonitor:
@@ -633,11 +527,7 @@ def track_user_action(action: str, user_id: str, **metadata):
 def track_ai_usage(
     operation_type: str,
     user_id: str,
-<<<<<<< HEAD
-    tokens_used: Optional[int] = None,
-=======
     tokens_used: int | None = None,
->>>>>>> restoration-KR-Rage-Figma-v2.0
     cached: bool = False,
 ):
     """Track AI operation usage for cost monitoring"""
@@ -667,11 +557,7 @@ def track_ai_usage(
     )
 
 
-<<<<<<< HEAD
-def track_error(error_type: str, component: str, error_message: str, user_id: Optional[str] = None):
-=======
 def track_error(error_type: str, component: str, error_message: str, user_id: str | None = None):
->>>>>>> restoration-KR-Rage-Figma-v2.0
     """Track application errors for monitoring"""
     collector = get_metrics_collector()
 

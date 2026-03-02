@@ -8,9 +8,6 @@ from fastapi import APIRouter
 
 # Import endpoint modules
 # Import endpoint modules
-<<<<<<< HEAD
-from .endpoints import analysis, config, documents, workflows, opportunities, applications, chrome_extension, genkit
-=======
 from .endpoints import (
     analysis,
     applications,
@@ -23,7 +20,6 @@ from .endpoints import (
     workflows,
 )
 
->>>>>>> restoration-KR-Rage-Figma-v2.0
 # from .routers import ingestion
 
 api_router = APIRouter()
@@ -31,11 +27,7 @@ api_router = APIRouter()
 # Include all routers with their respective prefixes
 routers = [
     (analysis.router, "/analysis", "Analysis"),
-<<<<<<< HEAD
-    # (auth.router, "/auth", "Authentication"),
-=======
     (auth.router, "/auth", "Authentication"),
->>>>>>> restoration-KR-Rage-Figma-v2.0
     (config.router, "/config", "Configuration"),
     (documents.router, "/documents", "Documents"),
     (workflows.router, "/workflows", "Workflows"),

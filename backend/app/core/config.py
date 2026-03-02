@@ -6,11 +6,7 @@ with support for loading secrets from Google Cloud Secret Manager.
 """
 
 from dataclasses import dataclass, field
-<<<<<<< HEAD
-from typing import Dict, List, Any, Optional
-=======
 from typing import Any
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 from pydantic_settings import BaseSettings
 
@@ -43,11 +39,7 @@ class Settings(BaseSettings):
 
     # Document processing
     max_document_size_mb: int = 10
-<<<<<<< HEAD
-    allowed_document_types: List[str] = field(
-=======
     allowed_document_types: list[str] = field(
->>>>>>> restoration-KR-Rage-Figma-v2.0
         default_factory=lambda: ["application/pdf", "text/plain", "text/markdown"]
     )
 
@@ -75,11 +67,7 @@ class Settings(BaseSettings):
     cache_collection: str = secure_settings.CACHE_COLLECTION
 
     # ATS Scoring Configuration
-<<<<<<< HEAD
-    ats_scoring_weights: Dict[str, float] = field(
-=======
     ats_scoring_weights: dict[str, float] = field(
->>>>>>> restoration-KR-Rage-Figma-v2.0
         default_factory=lambda: {"keyword": 0.45, "semantic": 0.35, "formatting": 0.20}
     )
 
@@ -102,11 +90,7 @@ class PersonalCareerConfig:
     location: str = "Northcote, VIC, Australia"
     career_transition_from: str = "Finance"
     career_transition_to: str = "Social Work/Community Services"
-<<<<<<< HEAD
-    target_industries: List[str] = field(
-=======
     target_industries: list[str] = field(
->>>>>>> restoration-KR-Rage-Figma-v2.0
         default_factory=lambda: [
             "Healthcare",
             "Education",
@@ -114,28 +98,17 @@ class PersonalCareerConfig:
             "Government",
         ]
     )
-<<<<<<< HEAD
-    target_roles: List[str] = field(
-=======
     target_roles: list[str] = field(
->>>>>>> restoration-KR-Rage-Figma-v2.0
         default_factory=lambda: [
             "Social Worker",
             "Case Manager",
             "Community Services Worker",
         ]
     )
-<<<<<<< HEAD
-    salary_range: Dict[str, Any] = field(
-        default_factory=lambda: {"min": 60000, "max": 85000, "currency": "AUD"}
-    )
-    transferable_skills: List[str] = field(
-=======
     salary_range: dict[str, Any] = field(
         default_factory=lambda: {"min": 60000, "max": 85000, "currency": "AUD"}
     )
     transferable_skills: list[str] = field(
->>>>>>> restoration-KR-Rage-Figma-v2.0
         default_factory=lambda: [
             "Financial Analysis",
             "Data Analysis",
@@ -145,11 +118,7 @@ class PersonalCareerConfig:
             "Report Writing",
         ]
     )
-<<<<<<< HEAD
-    personal_story: Dict[str, str] = field(
-=======
     personal_story: dict[str, str] = field(
->>>>>>> restoration-KR-Rage-Figma-v2.0
         default_factory=lambda: {
             "background": "Finance professional transitioning to social work",
             "motivation": "Direct community impact and social justice",
@@ -160,11 +129,7 @@ class PersonalCareerConfig:
 
 # Global configuration instances
 settings = Settings()
-<<<<<<< HEAD
-_personal_config: Optional[PersonalCareerConfig] = None
-=======
 _personal_config: PersonalCareerConfig | None = None
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 
 def get_personal_config() -> PersonalCareerConfig:

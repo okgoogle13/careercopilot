@@ -1,13 +1,5 @@
 # backend/app/core/prompts/ci_auditor.py
 
-<<<<<<< HEAD
-from typing import List, Optional
-from pydantic import BaseModel, Field
-
-class CodeAuditRequest(BaseModel):
-    """Structure for passing context to the AI Auditor."""
-    file_paths: List[str] = Field(
-=======
 
 from pydantic import BaseModel, Field
 
@@ -15,7 +7,6 @@ from pydantic import BaseModel, Field
 class CodeAuditRequest(BaseModel):
     """Structure for passing context to the AI Auditor."""
     file_paths: list[str] = Field(
->>>>>>> restoration-KR-Rage-Figma-v2.0
         description="List of file paths to audit (relative or absolute)"
     )
     tech_stack: str = Field(
@@ -26,19 +17,11 @@ class CodeAuditRequest(BaseModel):
         default="Google Cloud Run",
         description="Target deployment platform (e.g., Cloud Run, Vercel, AWS Lambda)"
     )
-<<<<<<< HEAD
-    focus_area: Optional[str] = Field(
-        default=None,
-        description="Specific audit focus (e.g., 'security', 'performance', 'DRY violations')"
-    )
-    
-=======
     focus_area: str | None = Field(
         default=None,
         description="Specific audit focus (e.g., 'security', 'performance', 'DRY violations')"
     )
 
->>>>>>> restoration-KR-Rage-Figma-v2.0
 class CIAuditorPrompts:
     """
     Centralized prompt logic for Pre-Deployment Code Reviews.
@@ -60,38 +43,23 @@ class CIAuditorPrompts:
             "You are a Principal DevOps Engineer and Lead Solutions Architect with 15+ years "
             "of experience in production systems at scale. Your code reviews are legendary for "
             "catching subtle bugs before they reach production.\n\n"
-<<<<<<< HEAD
-            
-            "**Mission**: Perform ruthless pre-flight code audits focused on deployment readiness, "
-            "production stability, security, and long-term maintainability.\n\n"
-            
-=======
 
             "**Mission**: Perform ruthless pre-flight code audits focused on deployment readiness, "
             "production stability, security, and long-term maintainability.\n\n"
 
->>>>>>> restoration-KR-Rage-Figma-v2.0
             "**Rules**:\n"
             "1. Be specific: Provide exact line numbers, file paths, and code examples\n"
             "2. Be actionable: Offer concrete refactoring suggestions, not generic advice\n"
             "3. Prioritize safety: Any issue that could break production is CRITICAL\n"
             "4. Think compounding debt: Flag patterns that will multiply as the codebase grows\n"
             "5. Challenge assumptions: Question hardcoded values, missing error handling, and implicit dependencies\n\n"
-<<<<<<< HEAD
-            
-=======
 
->>>>>>> restoration-KR-Rage-Figma-v2.0
             "**What NOT to do**:\n"
             "- Do NOT provide superficial 'looks good' assessments\n"
             "- Do NOT ignore issues because 'it currently works'\n"
             "- Do NOT skip security issues, even if they seem unlikely to be exploited\n"
             "- Do NOT accept 'we'll fix it later' technical debt without flagging it\n\n"
-<<<<<<< HEAD
-            
-=======
 
->>>>>>> restoration-KR-Rage-Figma-v2.0
             "Your output should be structured JSON that categorizes findings by severity."
         )
 
@@ -107,11 +75,7 @@ class CIAuditorPrompts:
             Formatted prompt string ready for LLM consumption
         """
         focus_area = context.focus_area if context.focus_area else "General Production Readiness"
-<<<<<<< HEAD
-        
-=======
 
->>>>>>> restoration-KR-Rage-Figma-v2.0
         return f"""
 # DEPLOYMENT READINESS REVIEW
 

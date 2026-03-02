@@ -2,21 +2,12 @@
 
 import hashlib
 import json
-<<<<<<< HEAD
-from typing import Any, Dict
-
-from app.core.loguru_config import get_logger
-from app.core.ai_config import get_ai_config
-from app.core.genkit_init import is_genkit_enabled
-from app.core.database import SessionLocal
-=======
 from typing import Any
 
 from app.core.ai_config import get_ai_config
 from app.core.database import SessionLocal
-from app.core.genkit import is_genkit_enabled
+from app.core.genkit_init import is_genkit_enabled
 from app.core.loguru_config import get_logger
->>>>>>> restoration-KR-Rage-Figma-v2.0
 from app.genkit_flows.llm_service import generate_llm_response
 from app.schemas.ai import LlmRequest, LlmResponse
 from app.services.cache_store import SQLAlchemyCacheStore
@@ -108,11 +99,7 @@ def clear_cache_pattern(pattern: str = "llm:") -> int:
     """Clear cached LLM responses matching a pattern."""
     return get_cache_store().clear_pattern(pattern)
 
-<<<<<<< HEAD
-def get_cache_stats() -> Dict[str, Any]:
-=======
 def get_cache_stats() -> dict[str, Any]:
->>>>>>> restoration-KR-Rage-Figma-v2.0
     """Get cache statistics."""
     # Placeholder as SQLAlchemyCacheStore doesn't have get_stats yet
     return {"status": "ok", "backend": "sqlalchemy"}

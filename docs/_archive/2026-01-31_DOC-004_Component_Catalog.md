@@ -1,15 +1,9 @@
 -# DOC-004: Component Catalog ("The Cabinet")
 
 **Document ID:** DOC-004-CATALOG
-<<<<<<< HEAD
-**Version:** 2.0 (Northcote Curio Edition)
-**Status:** DEFINITIVE
-**Context:** The physical artifacts of the interface. Each component is a handcrafted object in the Curio Cabinet.
-=======
 **Version:** 2.0 (kerala-rage kr-solidarity Edition)
 **Status:** DEFINITIVE
 **Context:** The physical artifacts of the interface. Each component is a handcrafted object in the kr-solidarity Cabinet.
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 ---
 
@@ -19,11 +13,7 @@
 *   **Token:** `radius-pebble` (`20px 6px 16px 28px`)
 *   **Texture:** Matte finish, "Worn River Stone."
 *   **State:**
-<<<<<<< HEAD
-    *   *Rest:* Wattle Gold (Solid) or Specimen Night (Outline).
-=======
     *   *Rest:* Wattle Gold (Solid) or Asphalt Black (Outline).
->>>>>>> restoration-KR-Rage-Figma-v2.0
     *   *Hover:* "The Bloom" (Inflates, Lifts).
     *   *Active:* Pressed into the sand (Scale 0.98).
 *   **Usage:** Primary Actions (Save, Analyze, Apply).
@@ -31,11 +21,7 @@
 ### The Lens (Input Field)
 *   **Token:** `radius-stone` (Inverted)
 *   **Texture:** Glass and Brass.
-<<<<<<< HEAD
-*   **Style:** `bg-surface-container` (Eucalypt Smoke) with a `border-b` of Flannel Flower.
-=======
 *   **Style:** `bg-surface-container` (Concrete Grey) with a `border-b` of Concrete Grey.
->>>>>>> restoration-KR-Rage-Figma-v2.0
 *   **Focus:** Border lights up with Wattle Gold ("The Filament").
 *   **Usage:** Text inputs, Search bars.
 
@@ -46,23 +32,14 @@
 ### The Stone (Card)
 *   **Token:** `radius-stone` (`16px 4px 12px 24px`)
 *   **Texture:** Dark Ironbark or Velvet.
-<<<<<<< HEAD
-*   **Style:** `bg-surface-container` (Eucalypt Smoke).
-=======
 *   **Style:** `bg-surface-container` (Concrete Grey).
->>>>>>> restoration-KR-Rage-Figma-v2.0
 *   **Shadow:** "Ink Pool" (Diffuse, bottom-heavy).
 *   **Usage:** Job Cards, Skill Groups.
 
 ### The Leaf (Hero Wrapper)
 *   **Token:** `radius-leaf` (`24px 8px 20px 4px`)
-<<<<<<< HEAD
-*   **Vibe:** Organic, sweeping.
-*   **Style:** Often holds the "Banksia Composition" pattern.
-=======
 *   **Vibe:** [DEPRECATED_STYLE], sweeping.
 *   **Style:** Often holds the "kr-flower Composition" pattern.
->>>>>>> restoration-KR-Rage-Figma-v2.0
 *   **Usage:** Page Headers, Main Dashboards.
 
 ---
@@ -71,13 +48,8 @@
 
 ### The Seed (Badge/Tag)
 *   **Token:** `radius-seed` (`8px 4px 10px 6px`)
-<<<<<<< HEAD
-*   **Texture:** Small, precise, organic.
-*   **Style:** `bg-muted` (Flannel Flower) or `bg-accent` (Waratah Crimson) for alerts.
-=======
 *   **Texture:** Small, precise, [DEPRECATED_STYLE].
 *   **Style:** `bg-muted` (Concrete Grey) or `bg-accent` ([DEPRECATED_STYLE] Red) for alerts.
->>>>>>> restoration-KR-Rage-Figma-v2.0
 *   **Typography:** JetBrains Mono (The Annotation).
 *   **Usage:** Skill tags, Status indicators.
 
@@ -96,11 +68,7 @@
 
 ### The Unfolding Pattern (Card Hover)
 
-<<<<<<< HEAD
-When a user hovers over a Job Card in Gallery Mode, trigger a **three-phase cascade**:
-=======
 When a user hovers over a Job Card in kr-dark Mode, trigger a **three-phase cascade**:
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 ```css
 /* Phase 1: Card Lifts (0-200ms) */
@@ -152,17 +120,10 @@ When a user hovers over a Job Card in kr-dark Mode, trigger a **three-phase casc
 }
 ```
 
-<<<<<<< HEAD
-### Mode Switch Animation (Gallery ↔ Laboratory)
-
-```css
-/* Gallery to Laboratory Transition */
-=======
 ### Mode Switch Animation (kr-dark ↔ kr-dark)
 
 ```css
 /* kr-dark to kr-dark Transition */
->>>>>>> restoration-KR-Rage-Figma-v2.0
 @keyframes modeSwitch {
   0% {
     background-image: url('gouache-grain.png');
@@ -173,11 +134,7 @@ When a user hovers over a Job Card in kr-dark Mode, trigger a **three-phase casc
     filter: blur(4px);
   }
   100% {
-<<<<<<< HEAD
-    background-image: url('aged-parchment.png');
-=======
     background-image: url('aged-paper-white.png');
->>>>>>> restoration-KR-Rage-Figma-v2.0
     filter: hue-rotate(-15deg) saturate(0.8);
   }
 }
@@ -230,11 +187,7 @@ When a user hovers over a Job Card in kr-dark Mode, trigger a **three-phase casc
 **Key Principle:** Each animation phase should have:
 1. **Staggered timing** (overlapping start times)
 2. **Multiple properties animating** (transform + shadow + typography)
-<<<<<<< HEAD
-3. **Organic easing** (gentle overshoot, not linear)
-=======
 3. **[DEPRECATED_STYLE] easing** (gentle overshoot, not linear)
->>>>>>> restoration-KR-Rage-Figma-v2.0
 4. **Meaningful duration** (600ms+, not instant)
 
 This creates the sensation of **natural unfolding**, not mechanical state changes.

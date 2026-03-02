@@ -14,10 +14,7 @@ import {
   UploadAndTagResponse,
   uploadAndTagResponseSchema,
 } from '../schemas/api.schema';
-<<<<<<< HEAD
-=======
 import { validateFile } from '../utils/fileValidation';
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 /**
  * Custom error class for API service-related issues.
@@ -47,14 +44,11 @@ export const uploadAndTagFile = async (
   file: File,
   onUploadProgress: (progress: number) => void
 ): Promise<UploadAndTagResponse> => {
-<<<<<<< HEAD
-=======
   const validation = validateFile(file);
   if (!validation.valid) {
     throw new ApiServiceError(validation.error!, 400, null);
   }
 
->>>>>>> restoration-KR-Rage-Figma-v2.0
   const formData = new FormData();
   formData.append('file', file);
 

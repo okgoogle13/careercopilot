@@ -10,28 +10,17 @@ interface ApplicationCardProps {
 }
 
 import { StatusBadge, type StatusBadgeVariant } from '@/components/ui/StatusBadge/StatusBadge';
-<<<<<<< HEAD
 import { KeralaRageButton } from '@/components/ui/KeralaRageButton';
-=======
-import { KeralaRageButton } from '@/components/ui/KeralaRageButton';
->>>>>>> restoration-KR-Rage-Figma-v2.0
 import { motion } from 'framer-motion';
 
 /**
  * ApplicationCard - M3 Compliant Job Application Tracker Card
  * 
  * Displays job application information with a multi-step progress indicator.
-<<<<<<< HEAD
- * Built using Material Design 3  design tokens.
- * 
- * **M3 Design Token Usage:**
- * - Shape: `rounded-pebble` → `--sys-shape-pebble` (20px 20px 32px 32px) - Organic asymmetric corners ✅
-=======
  * Built using Material Design 3 KeralaRage KrSolidarity design tokens.
  * 
  * **M3 Design Token Usage:**
  * - Shape: `rounded-pebble` → `--sys-shape-pebble` (20px 20px 32px 32px) - [DEPRECATED_STYLE] asymmetric corners ✅
->>>>>>> restoration-KR-Rage-Figma-v2.0
  * - Elevation: `shadow-elevation-1` → `shadow-elevation-2` on hover (M3 depth levels)
  * - Spacing: `p-space-xl` (32px) for card padding
  * - Motion: `duration-medium-1` (250ms) with `ease-spring` (expressive cubic-bezier)
@@ -76,21 +65,13 @@ export function ApplicationCard({
             showDot
           />
           {onUpdateStatus && (
-<<<<<<< HEAD
             <KeralaRageButton
-=======
-            <KeralaRageButton
->>>>>>> restoration-KR-Rage-Figma-v2.0
               onClick={onUpdateStatus}
               variant="secondary"
               size="md"
             >
               Update Status
-<<<<<<< HEAD
             </KeralaRageButton>
-=======
-            </KeralaRageButton>
->>>>>>> restoration-KR-Rage-Figma-v2.0
           )}
         </div>
       </div>

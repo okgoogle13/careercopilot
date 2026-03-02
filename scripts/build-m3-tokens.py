@@ -10,7 +10,7 @@ import sys
 # Define I/O paths (Kerala Rage locations)
 TOKEN_SOURCE_FILE = 'frontend/src/design/tokens/tokens.json'
 CSS_OUTPUT_FILE = 'frontend/src/design/styles/design-tokens.css'
-TAILWIND_CONFIG_PATCH = 'frontend/tailwind-m3-patch.js'
+TAILWIND_CONFIG_PATCH = 'frontend/tailwind-m3-patch.ts'
 
 def load_tokens():
     """Loads the Kerala Rage JSON tokens."""
@@ -67,27 +67,24 @@ def generate_css_variables(tokens):
             var_name = f"--sys-{key}"
             content.append(f"  {var_name}: {value};\n")
     content.append("}\n")
-    # Optional utility classes
+    
+    # Utility classes based on actual Kerala Rage tokens
     content.extend([
-        "/* ===== UTILITY CLASSES ===== */\n",
+        "\n/* ===== KERALA RAGE UTILITY CLASSES ===== */\n",
         ".surface {\n",
-        "  background-color: var(--md-sys-color-surface-default);\n",
-        "  color: var(--md-sys-color-neutral-10);\n",
+        "  background-color: var(--sys-color-charcoalBackground-base);\n",
+        "  color: var(--sys-color-worker-ash-base);\n",
         "}\n\n",
         ".surface-container {\n",
-        "  background-color: var(--md-sys-color-surface-container);\n",
+        "  background-color: var(--sys-color-charcoalBackground-steps-2);\n",
         "}\n\n",
         ".primary {\n",
-        "  background-color: var(--md-sys-color-primary-50);\n",
-        "  color: var(--md-sys-color-primary-100);\n",
-        "}\n\n",
-        ".secondary {\n",
-        "  background-color: var(--md-sys-color-secondary-50);\n",
-        "  color: var(--md-sys-color-secondary-100);\n",
+        "  background-color: var(--sys-color-solidarityRed-base);\n",
+        "  color: var(--sys-color-paperWhite-base);\n",
         "}\n\n",
         ".tertiary {\n",
-        "  background-color: var(--md-sys-color-tertiary-50);\n",
-        "  color: var(--md-sys-color-tertiary-100);\n",
+        "  background-color: var(--sys-color-inkGold-base);\n",
+        "  color: var(--sys-color-charcoalBackground-base);\n",
         "}\n",
     ])
     with open(CSS_OUTPUT_FILE, 'w') as f:
@@ -99,63 +96,68 @@ def generate_tailwind_patch(tokens):
     """Generates Tailwind config patch for Kerala Rage tokens."""
     print(f"Generating Tailwind patch at {TAILWIND_CONFIG_PATCH}...")
     os.makedirs(os.path.dirname(TAILWIND_CONFIG_PATCH), exist_ok=True)
+    
     # Build Tailwind color palette
     tw_colors = {}
     colors = tokens.get('color', {})
-    for color_role, tones in colors.items():
-        if isinstance(tones, dict):
-            tw_colors[color_role] = {
-                str(tone): f"var(--md-sys-color-{color_role.replace('_', '-')}-{tone})"
-                for tone, value in tones.items()
-            }
+    for color_role, value_node in colors.items():
+        if isinstance(value_node, dict):
+            # Map subkeys like base, steps (list), etc.
+            role_dict = {}
+            for subkey, subvalue in value_node.items():
+                if isinstance(subvalue, list):
+                    for i, _ in enumerate(subvalue):
+                        role_dict[f"{subkey}-{i}"] = f"var(--sys-color-{color_role}-{subkey}-{i})"
+                else:
+                    role_dict[subkey] = f"var(--sys-color-{color_role}-{subkey})"
+            tw_colors[color_role] = role_dict
         else:
-            tw_colors[color_role] = f"var(--md-sys-color-{color_role.replace('_', '-')})"
-    # Build Tailwind spacing scale
-    tw_spacing = {
-        str(name): value
-        for name, value in tokens.get('spacing', {}).get('scale', {}).items()
+            tw_colors[color_role] = f"var(--sys-color-{color_role})"
+
+    # Build Tailwind font families
+    type_tokens = tokens.get('type', {})
+    tw_fonts = {
+        name: [value]
+        for name, value in type_tokens.get('fontFamilies', {}).items()
     }
+    
+    # Build Tailwind font sizes (scale)
+    tw_font_sizes = {
+        name: f"var(--sys-type-scale-{name})"
+        for name in type_tokens.get('scale', {}).keys()
+    }
+    
     # Build Tailwind border radius
     tw_radius = {
-        name.replace('_', '-'): value
-        for name, value in tokens.get('shape', {}).get('corner', {}).items()
+        name.replace('radius-', ''): f"var(--sys-shape-{name})"
+        for name in tokens.get('shape', {}).keys()
     }
+    
     # Build Tailwind shadows
     tw_shadows = {
-        name.replace('_', '-'): value
-        for name, value in tokens.get('elevation', {}).items()
+        name: f"var(--sys-shadow-{name})"
+        for name in tokens.get('shadow', {}).keys()
     }
-    # Build Tailwind font families
-    tw_fonts = {
-        name: [f"var(--md-sys-typescale-font-{name})"]
-        for name in tokens.get('typography', {}).get('fontFamily', {}).keys()
-    }
-    # Build Tailwind font sizes
-    tw_font_sizes = {
-        name.replace('_', '-'): f"var(--md-sys-typescale-{name.replace('_', '-')}-size)"
-        for name in tokens.get('typography', {}).get('size', {}).keys()
-    }
+
     patch_content = f"""// Kerala Rage Tailwind Patch
 // Auto-generated by scripts/build-m3-tokens.py
-module.exports = {{
+export default {{
   theme: {{
     extend: {{
       colors: {json.dumps(tw_colors, indent=8)},
-      spacing: {json.dumps(tw_spacing, indent=8)},
       borderRadius: {json.dumps(tw_radius, indent=8)},
       boxShadow: {json.dumps(tw_shadows, indent=8)},
       fontFamily: {json.dumps(tw_fonts, indent=8)},
       fontSize: {json.dumps(tw_font_sizes, indent=8)},
       transitionTimingFunction: {{
-        'emphasized-decelerate': 'var(--md-sys-motion-easing-emphasizedDecelerate)',
-        'emphasized-accelerate': 'var(--md-sys-motion-easing-emphasizedAccelerate)',
-        'standard': 'var(--md-sys-motion-easing-standard)',
+        'm3-expressive': 'cubic-bezier(0.34, 1.56, 0.64, 1)',
+        'standard': 'cubic-bezier(0.2, 0, 0, 1)',
       }},
       transitionDuration: {{
-        'short1': 'var(--md-sys-motion-duration-short1)',
-        'short2': 'var(--md-sys-motion-duration-short2)',
-        'medium1': 'var(--md-sys-motion-duration-medium1)',
-        'long1': 'var(--md-sys-motion-duration-long1)',
+        'short1': '100ms',
+        'short2': '200ms',
+        'medium1': '400ms',
+        'long1': '600ms',
       }}
     }}
   }}
@@ -183,7 +185,7 @@ def main():
     tokens = resolve_values(root)
     # Filter out top-level compliance or documentation keys
     if isinstance(tokens, dict):
-        tokens = {k: v for k, v in tokens.items() if k not in ['compliance', 'documentation']}
+        tokens = {k: v for k, v in tokens.items() if k not in ['compliance', 'documentation', 'metadata']}
     if not tokens:
         print("❌ No tokens found after resolution")
         sys.exit(1)

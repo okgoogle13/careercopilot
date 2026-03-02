@@ -18,11 +18,7 @@ export const EvidenceCard: React.FC<EvidenceCardProps> = ({
 }) => {
     const getScoreColor = () => {
         if (matchScore >= 80) return 'text-sage';
-<<<<<<< HEAD
-        if (matchScore >= 60) return 'text-wattle';
-=======
         if (matchScore >= 60) return 'text-ink';
->>>>>>> restoration-KR-Rage-Figma-v2.0
         return 'text-terracotta';
     };
 

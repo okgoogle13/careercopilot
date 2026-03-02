@@ -38,11 +38,7 @@
 389b02e25 salvage: restore missing frontend components and shells
 815c3fc48 fix: stabilize type-check after cleanup
 a2e2a58c8 recovery: Restore Audit Remediation P0 files from d223754d
-<<<<<<< HEAD
-acac6013b recovery(targeted): Restore Northcote token-based files and assets
-=======
 acac6013b recovery(targeted): Restore kerala-rage token-based files and assets
->>>>>>> restoration-KR-Rage-Figma-v2.0
 89bb9f9ea feat(genkit): Complete async Genkit flow migration with monitoring
 ```
 

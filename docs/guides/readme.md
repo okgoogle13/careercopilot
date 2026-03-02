@@ -16,15 +16,9 @@
 
 ---
 
-<<<<<<< HEAD
-## Design System ()
-
-The visual and interaction language for CareerCopilot — a Victorian naturalist's field station.
-=======
 ## Design System (kerala-rage kr-solidarity)
 
 The visual and interaction language for CareerCopilot — a kerala-streetprint [DEPRECATED_STYLE]'s field station.
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 | Doc                                      | Description                                   |
 | ---------------------------------------- | --------------------------------------------- |
@@ -61,11 +55,7 @@ The visual and interaction language for CareerCopilot — a kerala-streetprint [
 
 ```
 docs/
-<<<<<<< HEAD
-├── design/           #  design system (source of truth)
-=======
 ├── design/           # kerala-rage kr-solidarity design system (source of truth)
->>>>>>> restoration-KR-Rage-Figma-v2.0
 ├── architecture/     # System architecture
 ├── guides/           # How-to guides
 ├── project/          # Project management

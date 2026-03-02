@@ -1,20 +1,3 @@
-<<<<<<< HEAD
-/* eslint-env jest */
-/* global describe, it, expect, beforeAll, afterEach, beforeEach */
-import {getAuthedFirestore} from "../../test/setup";
-import {
-  doc,
-  setDoc,
-  getDoc,
-  updateDoc,
-  deleteDoc,
-  collection,
-  query,
-  getDocs,
-  writeBatch,
-} from "firebase/firestore";
-import {Firestore} from "firebase/firestore";
-=======
 // @ts-nocheck
 /* eslint-env jest */
 /* global describe, it, expect, beforeAll, afterEach, beforeEach */
@@ -32,7 +15,6 @@ import {
   updateDoc,
   writeBatch,
 } from "firebase/firestore";
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 // Test user data
 const TEST_USER = {

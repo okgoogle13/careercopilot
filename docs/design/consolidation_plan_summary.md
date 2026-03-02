@@ -10,15 +10,9 @@
 | Subdirectory | File Count | Notes |
 | :--- | :--- | :--- |
 | `/assets` | 1 | ✅ Validated |
-<<<<<<< HEAD
-| `/fauna` | 3 | ✅ Validated |
-| `/plates` | 5 | ✅ Validated |
-| `/specimens` | 11 | ✅ Validated |
-=======
 | `/kr-symbol` | 3 | ✅ Validated |
 | `/plates` | 5 | ✅ Validated |
 | `/kr-motifs` | 11 | ✅ Validated |
->>>>>>> restoration-KR-Rage-Figma-v2.0
 | `/textures` | 10 | ✅ Validated |
 | `/ui` | 4 | ✅ Validated |
 | `/uncategorized` | 46 | ⚠️ Requires manual review |

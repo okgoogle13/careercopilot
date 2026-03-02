@@ -75,28 +75,16 @@
   "phase": "phase_2",
   "component_name": "Lens",
   "semantic_name": "TextField",
-<<<<<<< HEAD
-  "description": "Migrate Lens component from Material 3 to Northcote",
-=======
   "description": "Migrate Lens component from Material 3 to kerala-rage",
->>>>>>> restoration-KR-Rage-Figma-v2.0
   "file": "frontend/src/components/inputs/Lens.tsx",
   "blocking": "Core form input - blocks form adoption",
   "dependencies": ["token-system"],
   "transforms": {
-<<<<<<< HEAD
-    "M3Color": "ncColor.botanical",
-    "fontFamily:Roboto": "ncFont.body",
-    "fontFamily:Inter": "ncFont.body",
-    "elevation": "ncShadow.organic",
-    "borderRadius:8px": "borderRadius:organic"
-=======
     "M3Color": "ncColor.[DEPRECATED_STYLE]",
     "fontFamily:Roboto": "ncFont.body",
     "fontFamily:Inter": "ncFont.body",
     "elevation": "ncShadow.[DEPRECATED_STYLE]",
     "borderRadius:8px": "borderRadius:[DEPRECATED_STYLE]"
->>>>>>> restoration-KR-Rage-Figma-v2.0
   },
   "token_refs": {
     "colors": "ncColorBotanical",
@@ -105,11 +93,7 @@
     "shadows": "ncShadow*"
   },
   "test": "npm test -- --testPathPattern=Lens --json",
-<<<<<<< HEAD
-  "commit_msg": "refactor(components): migrate Lens to Northcote",
-=======
   "commit_msg": "refactor(components): migrate Lens to kerala-rage",
->>>>>>> restoration-KR-Rage-Figma-v2.0
   "tokens_estimate": 1800,
   "success_criteria": [
     "All tests passing",
@@ -153,11 +137,7 @@
 ```json
 {
   "refs": {
-<<<<<<< HEAD
-    "tokens": "frontend/src/design-tokens/northcote-tokens.ts",
-=======
     "tokens": "frontend/src/design-tokens/kerala-rage-tokens.ts",
->>>>>>> restoration-KR-Rage-Figma-v2.0
     "examples": [
       "frontend/src/components/core/Pebble.tsx",
       "frontend/src/components/core/Stone.tsx"
@@ -296,11 +276,7 @@ At each checkpoint, Gemini reports:
       }
     ],
     "refs": {
-<<<<<<< HEAD
-      "tokens": "frontend/src/design-tokens/northcote-tokens.ts",
-=======
       "tokens": "frontend/src/design-tokens/kerala-rage-tokens.ts",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "examples": [
         "frontend/src/components/core/Pebble.tsx",
         "frontend/src/components/core/Stone.tsx"
@@ -380,11 +356,7 @@ Gemini commits changes:
 {
   "operation": "commit",
   "files": ["Lens.tsx"],
-<<<<<<< HEAD
-  "message": "refactor(components): migrate Lens to Northcote"
-=======
   "message": "refactor(components): migrate Lens to kerala-rage"
->>>>>>> restoration-KR-Rage-Figma-v2.0
 }
 ```
 

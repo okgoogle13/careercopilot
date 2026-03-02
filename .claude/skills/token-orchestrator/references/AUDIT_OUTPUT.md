@@ -27,17 +27,10 @@ Exit code: 0
 
 **Error output**:
 ```
-<<<<<<< HEAD
-❌ Missing $value property: color.primary.wattleGold
-❌ Invalid dimension (no units): spacing.16 = 16
-❌ Circular reference detected: color.alias.primary → color.alias.base → color.alias.primary
-⚠️  Low contrast (3.2:1): parchment on eucalyptSmoke (requires 4.5:1)
-=======
 ❌ Missing $value property: color.primary.kr-ink-gold
 ❌ Invalid dimension (no units): spacing.16 = 16
 ❌ Circular reference detected: color.alias.primary → color.alias.base → color.alias.primary
 ⚠️  Low contrast (3.2:1): kr-laneway on kr-leafSmoke (requires 4.5:1)
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 ❌ Structure validation failed
 Exit code: 1
@@ -59,17 +52,10 @@ Exit code: 0
 **Error output**:
 ```
 ❌ Token path not found: color.semantic.wattle-gold.value
-<<<<<<< HEAD
-   → Should be: color.semantic.primary.wattleGold
-❌ getValue() returned undefined: spacing.16.$value
-   → Should be: spacing.16
-⚠️  Case mismatch: eucalypt-smoke vs eucalyptSmoke
-=======
    → Should be: color.semantic.primary.kr-ink-gold
 ❌ getValue() returned undefined: spacing.16.$value
    → Should be: spacing.16
 ⚠️  Case mismatch: kr-leaf-smoke vs kr-leafSmoke
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 ❌ Found 3 getValue() errors
 Exit code: 1
@@ -81,21 +67,6 @@ Exit code: 1
 
 **Output**:
 ```
-<<<<<<< HEAD
-📊 Northcote Palette Compliance Score: 87/100
-
-Dimension Scores:
-✓ Geographic Authenticity: 95/100 (Australian botanical names)
-✓ Translucency Physics: 90/100 (Glassmorphism present)
-✓ Scale Hierarchy: 85/100 (Display→body typography)
-⚠️ Density Zones: 72/100 (Gallery/Lab contrast needs work)
-✓ Background Color: 100/100 (#1A1714 specimen night)
-✓ Typography: 88/100 (Fraunces, Libre Bodoni, Work Sans)
-
-Violations:
-❌ Electric blue detected: button.accent = #0080FF
-⚠️ Pure black used: border.divider = #000000 (use specimenNight)
-=======
 📊 kerala-rage Palette Compliance Score: 87/100
 
 Dimension Scores:
@@ -109,7 +80,6 @@ Dimension Scores:
 Violations:
 ❌ Electric blue detected: button.accent = #0080FF
 ⚠️ Pure black used: border.divider = #000000 (use kr-charcoal)
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 Exit code: 0 (score >= 85)
 ```
@@ -120,13 +90,8 @@ Exit code: 0 (score >= 85)
 
 **Success output**:
 ```
-<<<<<<< HEAD
-✓ All Gallery tokens have Laboratory equivalents
-✓ All Laboratory tokens have Gallery equivalents
-=======
 ✓ All kr-dark tokens have kr-dark equivalents
 ✓ All kr-dark tokens have kr-dark equivalents
->>>>>>> restoration-KR-Rage-Figma-v2.0
 ✓ Type consistency maintained
 
 ✅ Mode parity: 100% (347/347 tokens matched)
@@ -135,15 +100,6 @@ Exit code: 0
 
 **Error output**:
 ```
-<<<<<<< HEAD
-⚠️  Missing Laboratory equivalents (2):
-  color.surface.laboratory.eucalyptSmokeHighest
-  color.status.laboratory.banksiaOrange
-
-⚠️  Type mismatch (1):
-  gallery.cardShadow: shadow
-  laboratory.cardShadow: color
-=======
 ⚠️  Missing kr-dark equivalents (2):
   color.surface.kr-dark.kr-leafSmokeHighest
   color.status.kr-dark.kr-flowerOrange
@@ -151,7 +107,6 @@ Exit code: 0
 ⚠️  Type mismatch (1):
   kr-dark.cardShadow: shadow
   kr-dark.cardShadow: color
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 📊 Mode parity: 98% (340/347 tokens matched)
 Exit code: 2

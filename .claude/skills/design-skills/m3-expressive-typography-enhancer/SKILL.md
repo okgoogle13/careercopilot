@@ -1,8 +1,5 @@
 ---
 name: m3-expressive-typography-enhancer
-<<<<<<< HEAD
-description: Elevate typography with variable fonts, extreme weight contrasts (100 vs 900), and emotional tone guidance. Validates against generic fonts (Inter, Roboto) and enforces M3 expressive principles with high-contrast pairings.
-=======
 description: Elevate typography with Material Design 3 Expressive variable fonts,
   extreme weight contrasts (100 vs 900), optical sizing, and emotional tone mapping.
   Transforms generic defaults into intentional, memorable typography by enforcing
@@ -11,7 +8,6 @@ metadata:
   legacy_frontmatter:
     version: 3.1.0
     tags: []
->>>>>>> restoration-KR-Rage-Figma-v2.0
 ---
 
 # M3 Expressive Typography Enhancer
@@ -24,41 +20,18 @@ Elevate typography beyond basic token replacement with variable fonts, extreme w
 
 Use this skill when you need to:
 
-<<<<<<< HEAD
-- **Choose expressive fonts** that avoid generic defaults (Inter, Roboto, Arial)
-- **Implement variable fonts** with fluid weight transitions
-- **Create extreme contrasts** (9x weight difference, not 1.25x)
-- **Map typography to emotion** (playful, confident, elegant, technical)
-- **Validate font choices** against M3 Expressive principles
-- **Establish font pairings** (display + monospace, serif + geometric)
-=======
 - **Configure expressive typography** for a new design system
 - **Implement variable fonts** with fluid weight/width transitions
 - **Create extreme contrasts** (9x weight difference, not 1.25x)
 - **Map typography to emotion** (playful, confident, elegant, technical)
 - **Validate font choices** against M3 Expressive principles (Variable capability)
 - **Establish font pairings** (Display + Body + Accent)
->>>>>>> restoration-KR-Rage-Figma-v2.0
 - **Upgrade existing typography** from timid to dramatic
 
 **Trigger scenarios:**
 
 - "This typography feels generic and boring"
 - "How do I make typography more expressive?"
-<<<<<<< HEAD
-- "What font conveys confidence and professionalism?"
-- "Replace Inter with something distinctive"
-
-## Overview
-
-This skill enhances M3 typography with M3 Expressive principles:
-
-1. **Variable Font Integration** - Font-variation-settings for fluid weight/width transitions
-2. **Extreme Weight Contrasts** - 100 vs 900 (not 400 vs 600), 3x+ size jumps
-3. **Emotional Tone Mapping** - Typography that conveys personality
-4. **Anti-Slop Validation** - Reject generic fonts (Inter, Roboto, Arial)
-5. **Expressive Font Pairing** - High-contrast combinations
-=======
 - "Define the variable font strategy for this brand"
 - "Replace default system fonts with something intentional"
 
@@ -89,32 +62,11 @@ Material Design 3 Expressive uses a semantic type scale. Map your chosen fonts t
 - **Display Large (Hero)**: `wght: 100` @ 57px (Thin & Tall)
 - **Body Strong (Support)**: `wght: 900` @ 14px (Bold & Small)
 - **Ratio**: 9x weight difference + 4x size difference = Visual Drama
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 ## M3 Expressive Typography Principles
 
 ### 1. Variable Fonts (Fluid Typography)
 
-<<<<<<< HEAD
-**Recommended Variable Fonts:**
-
-- **Plus Jakarta Sans** (200-800) - Modern, professional
-- **Poppins** (100-900) - Elegant, versatile
-- **Montserrat** (100-900) - Bold, geometric
-- **Sora** (100-800) - Tech-forward, unique
-
-**Example:**
-
-```css
-.expressive-heading {
-  font-family: "Plus Jakarta Sans Variable", sans-serif;
-  font-variation-settings: "wght" 800;
-  transition: font-variation-settings 300ms var(--sys-motion-easing-expressive);
-}
-
-.expressive-heading:hover {
-  font-variation-settings: "wght" 900;
-=======
 **Requirement**: All fonts MUST be Variable Fonts (`.woff2`) supporting at least the `wght` axis.
 
 **Why**: Static fonts require loading multiple files (Regular, Bold, ExtraBold), limiting your palette. Variable fonts allow you to animate from `300` to `800` smoothly, creating "living" typography.
@@ -136,7 +88,6 @@ Material Design 3 Expressive uses a semantic type scale. Map your chosen fonts t
 
 .expressive-heading:hover {
   font-variation-settings: "wght" 900; /* Fluid shift */
->>>>>>> restoration-KR-Rage-Figma-v2.0
 }
 ```
 
@@ -155,69 +106,16 @@ Material Design 3 Expressive uses a semantic type scale. Map your chosen fonts t
 ```tsx
 // ✅ Extreme contrast - 9x ratio
 <h1 style={{
-<<<<<<< HEAD
-  fontWeight: 100,
-=======
   fontWeight: 100, // Hairline
->>>>>>> restoration-KR-Rage-Figma-v2.0
   fontSize: 'var(--sys-type-display-large-size)',
   letterSpacing: '-0.02em'
 }}>Heading</h1>
 <p style={{
-<<<<<<< HEAD
-  fontWeight: 900,
-=======
   fontWeight: 900, // Black
->>>>>>> restoration-KR-Rage-Figma-v2.0
   fontSize: 'var(--sys-type-body-small-size)'
 }}>Subtext</p>
 ```
 
-<<<<<<< HEAD
-### 3. Emotional Tone Mapping
-
-**Playful & Energetic** → Montserrat 900 + Nunito 400
-**Confident & Professional** → Plus Jakarta Sans 800 + Inter 400
-**Elegant & Premium** → Poppins 300 + Open Sans 400
-**Tech-Forward** → Sora 700 + Inter 400
-
-### 4. Anti-Slop Validation
-
-**FORBIDDEN FONTS:**
-
-- ❌ Inter (alone), Roboto, Open Sans, Arial, Helvetica, System fonts
-
-**Alternatives:**
-
-- Inter → Plus Jakarta Sans Variable
-- Roboto → Poppins
-- Arial → Montserrat
-
-### 5. Expressive Font Pairing
-
-**Display + Monospace:** Plus Jakarta Sans + JetBrains Mono
-**Serif + Geometric:** Playfair Display + Poppins
-**Variable Across Weights:** Montserrat 900 + Montserrat 300
-
-## Usage
-
-```bash
-m3-expressive-typography-enhancer \
-  --file frontend/src/components/ui/Card/Card.tsx \
-  --tone "confident-professional" \
-  --validate-anti-slop
-```
-
-## Validation Checklist
-
-- [ ] No forbidden fonts used alone
-- [ ] Weight contrast ratio ≥ 3x
-- [ ] Size contrast ratio ≥ 3x
-- [ ] Variable fonts enabled
-- [ ] Emotional tone matches context
-- [ ] High-contrast font pairing
-- [ ] Letter spacing applied correctly
-=======
 ### 3. Optical Sizing (Critical for M3 Expressive)
 
 Optical sizing automatically adjusts font details (stroke thickness, letter spacing) for readability at different sizes.
@@ -317,37 +215,11 @@ When you describe typography that needs enhancement, Claude will apply M3 Expres
 - [ ] **Animation**: Typography responds to user interaction (scroll, hover) via variable axes.
 - [ ] **Motion Easing**: Uses M3 Expressive easing (cubic-bezier overshoot), not linear.
 - [ ] **No AI Slop**: Typography feels intentional, not generic.
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 ## Troubleshooting
 
 ### Variable Fonts Not Loading
 
-<<<<<<< HEAD
-**Solution:**
-
-```html
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200..800&display=swap" rel="stylesheet" />
-```
-
-### Weight Contrast Too Extreme
-
-**Solution:**
-Start with 300 vs 700, gradually increase to 100 vs 900
-
-### Font Pairing Incoherent
-
-**Solution:**
-Use same family at different weights or ensure emotional tone consistency
-
-## Related Skills
-
-- [m3-anti-slop-validator](../m3-anti-slop-validator/SKILL.md) - Validate typography against slop patterns
-
----
-
-**Version:** 2.0.0 (Optimized)
-=======
 **Solution:** Ensure you are importing the full variable range (e.g., `wght 100..900`), not just specific weights.
 
 ### Weight Contrast Too Extreme
@@ -368,5 +240,4 @@ Use same family at different weights or ensure emotional tone consistency
 ---
 
 **Version:** 3.1.0 (M3 Expressive - Font Agnostic)
->>>>>>> restoration-KR-Rage-Figma-v2.0
 **Status:** Production Ready

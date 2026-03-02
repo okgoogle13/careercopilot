@@ -149,6 +149,20 @@ export interface IntelligencePackage {
     headlineSuggestions: string[];
 }
 
+export interface ImprovedBullet {
+    original: string;
+    improved: string;
+    rationale: string;
+    metric_type: string;
+}
+
+export interface SkillsGap {
+    matched: string[];
+    missing: string[];
+    adjacent: string[];
+    match_score: number;
+}
+
 export interface Job {
     jobTitle: string;
     companyName: string;

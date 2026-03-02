@@ -48,17 +48,17 @@ export const KeralaRageButton = React.forwardRef<HTMLButtonElement, KeralaRageBu
       lg: 'h-14 px-8 text-lg',
     };
 
-    // Variant styles using  tokens
+    // Variant styles using tokens
     const variantStyles = {
       primary: {
-        gallery: {
+        KrDark: {
           background: 'bg-wattle-gold',
           text: 'text-primary-on-primary',
           hover: 'hover:bg-primary-wattle-glow',
           shadow: 'shadow-sm hover:shadow-[var(--elevation-shadow-glow-gold)]',
           border: '',
         },
-        laboratory: {
+        KrLight: {
           background: 'bg-wattle-gold',
           text: 'text-primary-on-primary',
           hover: 'hover:bg-primary-wattle-glow',
@@ -67,14 +67,14 @@ export const KeralaRageButton = React.forwardRef<HTMLButtonElement, KeralaRageBu
         },
       },
       secondary: {
-        gallery: {
+        KrDark: {
           background: 'bg-surface-gallery-eucalypt-smoke-high',
           text: 'text-secondary-flannel-flower',
           hover: 'hover:bg-surface-gallery-eucalypt-smoke-highest',
           shadow: 'shadow-sm',
           border: 'border-2 border-secondary-flannel-flower',
         },
-        laboratory: {
+        KrLight: {
           background: 'bg-surface-laboratory-slate-smoke-high',
           text: 'text-secondary-flannel-flower',
           hover: 'hover:bg-surface-laboratory-slate-smoke-highest',
@@ -83,14 +83,14 @@ export const KeralaRageButton = React.forwardRef<HTMLButtonElement, KeralaRageBu
         },
       },
       tertiary: {
-        gallery: {
+        KrDark: {
           background: 'bg-tertiary-waratah-container',
           text: 'text-tertiary-waratah-crimson',
           hover: 'hover:bg-tertiary-waratah-crimson hover:text-on-surface-parchment',
           shadow: 'shadow-sm',
           border: 'border border-tertiary-waratah-crimson',
         },
-        laboratory: {
+        KrLight: {
           background: 'bg-status-laboratory-clinical-alert-container',
           text: 'text-status-laboratory-clinical-alert',
           hover: 'hover:bg-status-laboratory-clinical-alert hover:text-on-surface-parchment',
@@ -100,15 +100,15 @@ export const KeralaRageButton = React.forwardRef<HTMLButtonElement, KeralaRageBu
       },
     };
 
-    const currentVariant = variantStyles[variant][mode];
+    const currentVariant = (variantStyles[variant] as any)[mode] || variantStyles[variant].KrDark;
 
     return (
       <motion.button
         ref={ref}
         className={cn(
           // Base styles
-          'font-bold uppercase tracking-wide', // Removed font-field-note to use Roboto Flex override
-          'transition-colors duration-[var(--duration-fast)]', // Removed generic transition-all to let motion handle physics
+          'font-bold uppercase tracking-wide', 
+          'transition-colors duration-[var(--duration-fast)]', 
           'disabled:opacity-50 disabled:cursor-not-allowed',
 
           // Size
@@ -121,16 +121,16 @@ export const KeralaRageButton = React.forwardRef<HTMLButtonElement, KeralaRageBu
           currentVariant.shadow,
           currentVariant.border,
 
-          // Organic asymmetry (Gallery) or precise (Laboratory)
-          mode === 'gallery'
-            ? 'rounded-[var(--radius-pebble)]' // 20px 6px 16px 28px
-            : 'rounded-[var(--radius-stone)]', // 16px 4px 12px 24px
+          // Organic asymmetry (KrDark) or precise (KrLight)
+          mode === 'KrDark'
+            ? 'rounded-[var(--radius-pebble)]' 
+            : 'rounded-[var(--radius-stone)]', 
 
           className
         )}
         style={
           {
-            borderRadius: mode === 'gallery' ? 'var(--radius-pebble)' : 'var(--radius-stone)',
+            borderRadius: mode === 'KrDark' ? 'var(--radius-pebble)' : 'var(--radius-stone)',
             fontFamily: 'var(--font-field-note)',
             fontVariationSettings: "'wght' 600, 'GRAD' var(--grad, 0)",
           } as any

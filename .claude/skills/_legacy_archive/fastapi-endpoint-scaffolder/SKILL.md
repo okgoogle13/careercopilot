@@ -1,12 +1,8 @@
 ---
 name: fastapi-endpoint-scaffolder
-<<<<<<< HEAD
-description: "Scaffolds a new FastAPI endpoint with Pydantic models, router registration, and tests. Use when creating new backend API endpoints. Related: pydantic-model-scaffolder for complex model validation."
-=======
 description: 'Scaffolds a new FastAPI endpoint with Pydantic models, router registration,
   and tests. Use when creating new backend API endpoints. Related: pydantic-model-scaffolder
   for complex model validation.'
->>>>>>> restoration-KR-Rage-Figma-v2.0
 ---
 
 # FastAPI Endpoint Scaffolder Workflow

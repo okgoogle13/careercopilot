@@ -47,8 +47,4 @@ export const CustomColor: Story = {
         iconColor: 'text-[#e2725b]',
         variant: 'outlined',
     },
-<<<<<<< HEAD
 };
-=======
-};
->>>>>>> restoration-KR-Rage-Figma-v2.0

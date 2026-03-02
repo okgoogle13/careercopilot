@@ -101,17 +101,10 @@ export function ApplicationTracker() {
                     'text-[var(--color-text-tertiary)] bg-[var(--color-surface-container)] opacity-60';
 
                   if (isCurrent) {
-<<<<<<< HEAD
-                    variant = 'primary'; // Northcote primary (Leaf)
-                    className = 'font-bold shadow-sm scale-105 border-[var(--color-leaf-base)]';
-                  } else if (isCompleted) {
-                    variant = 'secondary'; // Northcote secondary (Wattle) for completed
-=======
                     variant = 'primary'; // KeralaRage primary (Leaf)
                     className = 'font-bold shadow-sm scale-105 border-[var(--color-leaf-base)]';
                   } else if (isCompleted) {
                     variant = 'secondary'; // KeralaRage secondary (Ink) for completed
->>>>>>> restoration-KR-Rage-Figma-v2.0
                     className = 'opacity-100';
                   }
 

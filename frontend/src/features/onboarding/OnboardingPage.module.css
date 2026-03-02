@@ -4,13 +4,8 @@
   flex-direction: column;
   align-items: center;
   padding: 4rem 2rem;
-<<<<<<< HEAD
-  background-color: var(--color-specimen-night);
-  color: var(--color-parchment);
-=======
   background-color: var(--color-asphalt-black);
   color: var(--color-paper-white);
->>>>>>> restoration-KR-Rage-Figma-v2.0
   overflow-y: auto;
 }
 
@@ -22,11 +17,7 @@
 .header h1 {
   font-size: 4rem;
   margin-bottom: 1rem;
-<<<<<<< HEAD
-  color: var(--color-wattle-gold);
-=======
   color: var(--color-ink-gold);
->>>>>>> restoration-KR-Rage-Figma-v2.0
 }
 
 .grid {
@@ -53,21 +44,13 @@
 .leafCard:hover {
   transform: translateY(-8px) scale(1.02);
   background: rgba(44, 39, 35, 0.6);
-<<<<<<< HEAD
-  border-color: var(--color-wattle-gold);
-=======
   border-color: var(--color-ink-gold);
->>>>>>> restoration-KR-Rage-Figma-v2.0
   box-shadow: var(--shadow-elevated);
 }
 
 .leafCard.selected {
   background: rgba(212, 168, 75, 0.1);
-<<<<<<< HEAD
-  border-color: var(--color-wattle-gold);
-=======
   border-color: var(--color-ink-gold);
->>>>>>> restoration-KR-Rage-Figma-v2.0
   box-shadow: 0 0 40px rgba(212, 168, 75, 0.2);
   transform: scale(1.05);
 }
@@ -90,11 +73,7 @@
 .iconWrapper img {
   max-width: 100%;
   max-height: 100%;
-<<<<<<< HEAD
-  filter: sepia(1) saturate(2) hue-rotate(-10deg); /* Wattle-gold-ish filter */
-=======
   filter: sepia(1) saturate(2) hue-rotate(-10deg); /* Ink-gold-ish filter */
->>>>>>> restoration-KR-Rage-Figma-v2.0
 }
 
 .footer {

@@ -1,8 +1,5 @@
 ---
 name: m3-anti-slop-validator
-<<<<<<< HEAD
-description: Detect and prevent generic AI aesthetics (purple gradients, flat layouts, predictable patterns) in M3 components. Validates typography, colors, and layout against expressive design standards with 0-100 quality scoring.
-=======
 description: Detect and prevent generic AI aesthetics in Material Design 3 Expressive
   components. Forbids purple gradients, flat layouts, generic fonts (Inter, Roboto,
   Arial). Validates typography, colors, motion, and layout against M3 Expressive standards
@@ -11,16 +8,12 @@ metadata:
   legacy_frontmatter:
     version: 1.0.0
     tags: []
->>>>>>> restoration-KR-Rage-Figma-v2.0
 ---
 
 # M3 Anti-Slop Validator
 
 ## Purpose
 
-<<<<<<< HEAD
-Enforce M3 Expressive aesthetic standards by detecting and preventing generic "AI slop" patterns: purple gradients, flat layouts, timid contrasts, and cookie-cutter designs. Provides automated validation with aesthetic quality scoring (0-100) and actionable remediation steps.
-=======
 Enforce Material Design 3 Expressive aesthetic standards by detecting and preventing generic "AI slop" patterns: purple gradients, flat layouts, timid contrasts, cookie-cutter designs, and generic fonts. Provides automated validation with aesthetic quality scoring (0-100) and actionable remediation steps.
 
 **M3 Expressive Core Principles Enforced**:
@@ -31,7 +24,6 @@ Enforce Material Design 3 Expressive aesthetic standards by detecting and preven
 - ✅ Vibrant semantic tokens (M3 Expressive tones, not baseline)
 - ✅ [DEPRECATED_STYLE] asymmetry (no mechanical grid, no uniform border-radius)
 - ✅ No purple gradients, no generic blue (#2196F3)
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 ## When to Use
 
@@ -52,11 +44,7 @@ Use this skill when you need to:
 - "Why does this feel like AI-generated slop?"
 - "Score this component's aesthetic quality"
 
-<<<<<<< HEAD
-## Overview
-=======
 ## Process
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 This skill enforces M3 Expressive aesthetic standards by:
 
@@ -116,44 +104,10 @@ Scans code for forbidden font families. If found alone (without distinctive disp
 **Pass:** High-contrast pairings, extreme weights (100 vs 900), spring-physics hover
 **Fail:** Same font family, timid contrasts, no interactions
 
-<<<<<<< HEAD
-=======
-### 5. Motion Quality (New for M3 Expressive)
-
-**Forbidden Motion Patterns:**
-
-- ❌ Static components (no hover feedback)
-- ❌ Timid transitions (duration <250ms without reason)
-- ❌ Linear easing (no overshoot, no personality)
-- ❌ Instant state changes (no motion guidance)
-
-**M3 Expressive Motion Standards:**
-
-- ✅ Spring physics on interactions (cubic-bezier(0.34, 1.56, 0.64, 1) — "viscous breeze")
-- ✅ Hover states with "bloom" effect (scale: 1.02-1.05, elevation increase)
-- ✅ Duration tokens: short (50ms), medium (250ms), long (500ms)
-- ✅ Easing curves: emphasized, standard, or decelerate (per M3 spec)
-- ✅ Motion supports clarity, doesn't distract
-
-**Pass**: Spring physics hover, duration tokens applied, easing intentional
-**Fail**: Static components, linear easing, arbitrary durations
-
->>>>>>> restoration-KR-Rage-Figma-v2.0
-## Aesthetic Quality Score (0-100)
-
-**Scoring Algorithm:**
-
-<<<<<<< HEAD
-- **Typography (25 points)**: Font distinctiveness, weight contrast, size contrast
-- **Color (25 points)**: Palette vibrancy, saturation, dominance
-- **Layout (25 points)**: Depth effects, elevation, spacing rhythm
-- **Interaction (25 points)**: Hover states, animations, spring physics
-=======
 - **Typography (25 points)**: Font distinctiveness (no Inter/Roboto alone), weight contrast (3x+ ratio), size contrast (3x+), variable fonts used
 - **Color (25 points)**: Palette vibrancy (M3 Expressive vibrant, not baseline), saturation (40-80%), dominance (not evenly distributed), no purple gradients
 - **Layout (25 points)**: [DEPRECATED_STYLE] asymmetry (not grid-mechanical), elevation tokens used (dramatic depth), spacing rhythm intentional (varied, not uniform)
 - **Motion (25 points)**: Spring physics easing on interactions (cubic-bezier overshoot), hover states with bloom/lift effect, duration tokens applied (50/250/500ms), motion supports clarity
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 **Grade Scale:**
 
@@ -163,66 +117,6 @@ Scans code for forbidden font families. If found alone (without distinctive disp
 - **D (60-69)**: Below standards - Review violations
 - **F (<60)**: Critical - Complete redesign recommended
 
-<<<<<<< HEAD
-=======
-## M3 Expressive Design Principles
-
-This skill enforces five core M3 Expressive principles:
-
-### 1. Distinctive Typography
-
-Generic fonts alone (Inter, Roboto, Arial) are forbidden. Require:
-
-- Variable fonts with extreme weight contrasts (100 vs 900)
-- Optical sizing enabled
-- Emotional tone alignment (playful, confident, elegant, technical)
-
-### 2. Vibrant Color
-
-M3 Expressive uses semantic tokens at higher saturation than baseline:
-
-- Vibrant tones instead of muted (40-80% saturation)
-- Dominant color in palette (not evenly distributed)
-- Forbidden: Purple gradients, generic blue (#2196F3)
-
-### 3. [DEPRECATED_STYLE] Layout
-
-No mechanical, grid-aligned layouts:
-
-- Asymmetric shapes (varied border-radius, [DEPRECATED_STYLE] curves)
-- Intentional spacing rhythm (8px, 16px, 24px, 40px)
-- Dramatic elevation (layered depth, not subtle shadows)
-
-### 4. Spring Physics Motion
-
-Interactions feel alive and responsive:
-
-- Hover states with bloom/lift effect (scale + elevation)
-- Spring easing curves (cubic-bezier with overshoot)
-- Motion duration tokens (50ms short, 250ms medium, 500ms long)
-
-### 5. Intentional Distinctiveness
-
-Every component should feel intentionally designed, not generic:
-
-- No cookie-cutter designs
-- Personality appropriate to purpose
-- High-contrast visual hierarchy
-
->>>>>>> restoration-KR-Rage-Figma-v2.0
-## Validation Report Format
-
-```json
-{
-  "aestheticQuality": {
-    "total": 72,
-    "breakdown": {
-      "typography": 18,
-      "color": 20,
-      "layout": 15,
-<<<<<<< HEAD
-      "interaction": 19
-=======
       "motion": 19
     },
     "m3_expressive_compliance": {
@@ -231,7 +125,6 @@ Every component should feel intentionally designed, not generic:
       "vibrant_tokens_used": true,
       "organic_asymmetry": true,
       "expressive_score": "B (80-89%)"
->>>>>>> restoration-KR-Rage-Figma-v2.0
     },
     "grade": "C",
     "recommendation": "Acceptable design. Focus on improving typography and color for more impact."
@@ -290,9 +183,6 @@ if (validation.aestheticQuality.total < 80) {
 - [ ] Weight contrast ≥ 3x (100 vs 900, not 400 vs 500)
 - [ ] Size contrast ≥ 3x (57px vs 12px, not 24px vs 16px)
 - [ ] Hover states with spring physics
-<<<<<<< HEAD
-- [ ] Aesthetic quality score ≥ 80
-=======
 
 ### M3 Expressive Specific Checklist
 
@@ -308,7 +198,6 @@ if (validation.aestheticQuality.total < 80) {
 - [ ] Elevation tokens used for dramatic depth (not subtle shadows)
 - [ ] Motion duration tokens applied (50ms, 250ms, 500ms)
 - [ ] Aesthetic quality score ≥ 80 (Grade B minimum)
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 ## Troubleshooting
 
@@ -337,15 +226,6 @@ if (validation.aestheticQuality.total < 80) {
 
 ## Related Skills
 
-<<<<<<< HEAD
-- [m3-expressive-typography-enhancer](../m3-expressive-typography-enhancer/SKILL.md) - Enhance typography with variable fonts
-- [m3-atmospheric-backgrounds](../m3-atmospheric-backgrounds/SKILL.md) - Create layered atmospheric effects
-- [m3-spring-motion-choreography](../m3-spring-motion-choreography/SKILL.md) - Add spring-physics interactions
-
----
-
-**Version:** 2.0.0 (Optimized)
-=======
 - [m3-expressive-typography-enhancer](../m3-expressive-typography-enhancer/SKILL.md) - Enhance typography with variable fonts, extreme weight contrasts
 - [m3-visual-audit](../../../m3-visual-audit/SKILL.md) - Audit components against M3 Expressive visual standards
 - [brand-brief-optimizer](../../../brand-brief-optimizer/SKILL.md) - Stress-test briefs for M3 Expressive clarity
@@ -355,5 +235,4 @@ if (validation.aestheticQuality.total < 80) {
 ---
 
 **Version:** 3.0.0 (M3 Expressive)
->>>>>>> restoration-KR-Rage-Figma-v2.0
 **Status:** Production Ready

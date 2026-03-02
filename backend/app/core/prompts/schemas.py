@@ -1,11 +1,7 @@
 # backend/app/core/prompts/schemas.py
 
-<<<<<<< HEAD
-from typing import List, Literal
-=======
 from typing import Literal
 
->>>>>>> restoration-KR-Rage-Figma-v2.0
 from pydantic import BaseModel, Field
 
 
@@ -60,26 +56,16 @@ class AuditSummary(BaseModel):
 
 class CIAuditResponse(BaseModel):
     """Complete structured response from the CI Auditor."""
-<<<<<<< HEAD
-    critical_issues: List[CriticalIssue] = Field(default_factory=list)
-    redundancy_report: List[RedundancyIssue] = Field(default_factory=list)
-    optimization_wins: List[OptimizationWin] = Field(default_factory=list)
-=======
     critical_issues: list[CriticalIssue] = Field(default_factory=list)
     redundancy_report: list[RedundancyIssue] = Field(default_factory=list)
     optimization_wins: list[OptimizationWin] = Field(default_factory=list)
->>>>>>> restoration-KR-Rage-Figma-v2.0
     summary: AuditSummary
 
     def has_blockers(self) -> bool:
         """Returns True if any critical issues were found."""
         return len(self.critical_issues) > 0
 
-<<<<<<< HEAD
-    def get_priority_issues(self, top_n: int = 5) -> List[RedundancyIssue]:
-=======
     def get_priority_issues(self, top_n: int = 5) -> list[RedundancyIssue]:
->>>>>>> restoration-KR-Rage-Figma-v2.0
         """Returns the top N redundancy issues by severity."""
         severity_order = {"high": 3, "medium": 2, "low": 1}
         sorted_issues = sorted(
@@ -92,27 +78,16 @@ class CIAuditResponse(BaseModel):
     def to_markdown(self) -> str:
         """Generates a Markdown-formatted report for PR comments or docs."""
         lines = ["# 🔍 CI/CD Audit Report\n"]
-<<<<<<< HEAD
-        
-=======
 
->>>>>>> restoration-KR-Rage-Figma-v2.0
         # Summary section
         lines.append(f"**Deployment Ready**: {'✅ Yes' if self.summary.deployment_ready else '❌ No'}\n")
         lines.append(f"- **Critical Issues**: {self.summary.total_critical}")
         lines.append(f"- **Refactoring Opportunities**: {self.summary.total_refactoring}")
         lines.append(f"- **Optimization Wins**: {self.summary.total_optimizations}\n")
-<<<<<<< HEAD
-        
-        if self.summary.blocker_summary:
-            lines.append(f"⛔ **Blocker**: {self.summary.blocker_summary}\n")
-        
-=======
 
         if self.summary.blocker_summary:
             lines.append(f"⛔ **Blocker**: {self.summary.blocker_summary}\n")
 
->>>>>>> restoration-KR-Rage-Figma-v2.0
         # Critical issues
         if self.critical_issues:
             lines.append("## ⛔ Critical Issues\n")
@@ -122,11 +97,7 @@ class CIAuditResponse(BaseModel):
                 lines.append(f"**Category**: {issue.category.upper()}")
                 lines.append(f"\n{issue.description}\n")
                 lines.append(f"**Fix**:\n```\n{issue.fix}\n```\n")
-<<<<<<< HEAD
-        
-=======
 
->>>>>>> restoration-KR-Rage-Figma-v2.0
         # Redundancy report
         if self.redundancy_report:
             lines.append("## 🔄 DRY Violations\n")
@@ -137,11 +108,7 @@ class CIAuditResponse(BaseModel):
                 lines.append(f"**Suggestion**: {redundancy.suggestion}\n")
                 if redundancy.example_code:
                     lines.append(f"```\n{redundancy.example_code}\n```\n")
-<<<<<<< HEAD
-        
-=======
 
->>>>>>> restoration-KR-Rage-Figma-v2.0
         # Optimizations
         if self.optimization_wins:
             lines.append("## ⚡ Optimization Wins\n")
@@ -150,11 +117,7 @@ class CIAuditResponse(BaseModel):
                 lines.append(f"**Type**: {opt.type}")
                 lines.append(f"**Impact**: {opt.estimated_impact}")
                 lines.append(f"\n{opt.improvement}\n")
-<<<<<<< HEAD
-        
-=======
 
->>>>>>> restoration-KR-Rage-Figma-v2.0
         return "\n".join(lines)
 
 
@@ -169,21 +132,12 @@ class QuickScanIssue(BaseModel):
 
 class QuickScanResponse(BaseModel):
     """Response schema for quick CI gate checks."""
-<<<<<<< HEAD
-    issues: List[QuickScanIssue]
-    
-    def has_blockers(self) -> bool:
-        return any(i.severity == "BLOCKER" for i in self.issues)
-    
-    def to_slack_blocks(self) -> List[dict]:
-=======
     issues: list[QuickScanIssue]
 
     def has_blockers(self) -> bool:
         return any(i.severity == "BLOCKER" for i in self.issues)
 
     def to_slack_blocks(self) -> list[dict]:
->>>>>>> restoration-KR-Rage-Figma-v2.0
         """Generates Slack Block Kit JSON for notifications."""
         blocks = [
             {
@@ -194,11 +148,7 @@ class QuickScanResponse(BaseModel):
                 }
             }
         ]
-<<<<<<< HEAD
-        
-=======
 
->>>>>>> restoration-KR-Rage-Figma-v2.0
         for issue in self.issues:
             emoji = {"BLOCKER": "⛔", "CRITICAL": "🔴", "WARNING": "⚠️"}
             blocks.append({
@@ -208,9 +158,5 @@ class QuickScanResponse(BaseModel):
                     "text": f"{emoji[issue.severity]} *{issue.file}:{issue.line}*\n{issue.issue}\n_Fix: {issue.fix}_"
                 }
             })
-<<<<<<< HEAD
-        
-=======
 
->>>>>>> restoration-KR-Rage-Figma-v2.0
         return blocks

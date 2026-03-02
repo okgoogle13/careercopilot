@@ -1,0 +1,8 @@
+[   10131ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:5173/src/utils/toast.tsx?t=1772466604338:0
+[   10131ms] [ERROR] [vite] Failed to reload /src/pages/AnalysisPage.tsx. This could be due to syntax errors or importing non-existent modules. (see errors above) @ http://localhost:5173/@vite/client:808
+[   10132ms] [ERROR] [vite] Failed to reload /src/features/onboarding/components/ValidationDashboard.tsx. This could be due to syntax errors or importing non-existent modules. (see errors above) @ http://localhost:5173/@vite/client:808
+[   10132ms] [ERROR] [vite] Failed to reload /src/pages/IngestionPage.tsx. This could be due to syntax errors or importing non-existent modules. (see errors above) @ http://localhost:5173/@vite/client:808
+[   10132ms] [ERROR] [vite] Failed to reload /src/pages/JobQueue.tsx. This could be due to syntax errors or importing non-existent modules. (see errors above) @ http://localhost:5173/@vite/client:808
+[   10132ms] [ERROR] [vite] Failed to reload /src/features/ingestion/components/EvidenceUploader.tsx. This could be due to syntax errors or importing non-existent modules. (see errors above) @ http://localhost:5173/@vite/client:808
+[   23523ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:5173/src/utils/toast.tsx?t=1772466604338:0
+[   34352ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:5173/src/utils/toast.tsx?t=1772466604338:0

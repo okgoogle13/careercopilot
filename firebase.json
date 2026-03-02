@@ -8,12 +8,8 @@
         ".git",
         "firebase-debug.log",
         "firebase-debug.*.log",
-<<<<<<< HEAD
-        "*.local"
-=======
         "*.local",
         "lib"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "runtime": "nodejs20",
       "predeploy": [

@@ -1,32 +1,18 @@
-
-<<<<<<< HEAD
-from sqlalchemy import Column, String, Integer, ForeignKey, JSON
-=======
 from sqlalchemy import JSON, Column, ForeignKey, String
 
->>>>>>> restoration-KR-Rage-Figma-v2.0
 try:
     from pgvector.sqlalchemy import Vector
 except ImportError:  # pragma: no cover - optional dependency in test/CI
     Vector = None
 from app.models.database import Base, BaseMixin
 
-<<<<<<< HEAD
-=======
-
->>>>>>> restoration-KR-Rage-Figma-v2.0
 class DocumentEmbedding(Base, BaseMixin):
     """
     Stores document embeddings for vector search.
     Replaces local ChromaDB.
     """
     __tablename__ = "document_embeddings"
-<<<<<<< HEAD
-    __table_args__ = {'extend_existing': True}
-=======
     __table_args__ = {"extend_existing": True}
->>>>>>> restoration-KR-Rage-Figma-v2.0
-
 
     user_id = Column(String, ForeignKey("users.id"), nullable=False, index=True)
     content = Column(String, nullable=False)

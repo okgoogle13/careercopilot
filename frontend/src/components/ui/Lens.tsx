@@ -39,19 +39,6 @@ export interface LensProps extends Omit<React.InputHTMLAttributes<HTMLInputEleme
 }
 
 /**
-<<<<<<< HEAD
- * Lens -  Text Input
- *
- * A comprehensive text input component using the  design system.
- * Supports filled and outlined variants with proper Kerala Rage states and validation.
- *
- * **Kerala Rage Design Token Usage:**
- * - Shape: `--radius-leaf` (organic shape) for inputs
- * - Colors: Kerala Rage botanical palette (Wattle Gold, Waratah Crimson, Eucalypt Smoke)
- * - Typography: Kerala Rage field-note font family
- * - Motion: Viscous-breeze easing for organic transitions
- * - Visual: Glassmorphism with subtle backdrop blur
-=======
  * Lens - KeralaRage KrSolidarity Text Input
  *
  * A comprehensive text input component using the KeralaRage KrSolidarity design system.
@@ -63,18 +50,12 @@ export interface LensProps extends Omit<React.InputHTMLAttributes<HTMLInputEleme
  * - Typography: KeralaRage field-note font family
  * - Motion: Viscous-breeze easing for [DEPRECATED_STYLE] transitions
  * - Visual: KrScreenprint with subtle backdrop blur
->>>>>>> restoration-KR-Rage-Figma-v2.0
  *
  * **States:**
  * - Default: Outlined with subtle border
  * - Hover: Border color intensifies
-<<<<<<< HEAD
- * - Focus: Wattle Gold accent with glow
- * - Error: Waratah Crimson with error message
-=======
  * - Focus: Ink Gold accent with glow
  * - Error: Solidarity Red with error message
->>>>>>> restoration-KR-Rage-Figma-v2.0
  * - Disabled: Reduced opacity
  *
  * @example
@@ -147,20 +128,6 @@ export const Lens = forwardRef<HTMLInputElement, LensProps>(
       },
     };
 
-<<<<<<< HEAD
-    // Variant-specific styles ()
-    const containerStyle = {
-      borderRadius: 'var(--radius-leaf)',
-      backgroundColor: variant === 'filled' ? 'rgba(44, 39, 35, 0.4)' : 'transparent',
-      border: '2px solid',
-      borderColor: error
-        ? 'var(--color-waratah-crimson)'
-        : isFocused
-          ? 'var(--color-wattle-gold)'
-          : 'var(--color-eucalypt-smoke-base)',
-      color: 'var(--color-parchment)',
-      transition: 'all var(--duration-standard) var(--ease-viscous-breeze)',
-=======
     // Variant-specific styles (KeralaRage KrSolidarity)
     const containerStyle = {
       borderRadius: '24px 8px 20px 4px', // Lens archetype asymmetric radius
@@ -173,17 +140,12 @@ export const Lens = forwardRef<HTMLInputElement, LensProps>(
           : 'var(--sys-color-concreteGrey-base)',
       color: 'var(--sys-color-worker-ash-base)',
       transition: 'all 300ms cubic-bezier(0.34, 1.56, 0.64, 1)',
->>>>>>> restoration-KR-Rage-Figma-v2.0
     };
 
     const containerClasses = `
     ${fullWidth ? 'w-full' : 'w-auto'}
     ${disabled ? 'opacity-50 cursor-not-allowed' : ''}
-<<<<<<< HEAD
-    ${isFocused && !error ? 'shadow-[0_0_15px_rgba(212,168,75,0.2)]' : ''}
-=======
     ${isFocused && !error ? 'shadow-[0_0_15px_var(--sys-color-inkGold-steps-0)]' : ''}
->>>>>>> restoration-KR-Rage-Figma-v2.0
     ${containerClassName}
   `;
 
@@ -209,21 +171,12 @@ export const Lens = forwardRef<HTMLInputElement, LensProps>(
           <label
             className={`
           mb-2 text-sm font-medium transition-colors duration-200
-<<<<<<< HEAD
-          ${error ? 'text-[var(--color-waratah-crimson)]' : 'text-[var(--color-flannel-flower)]'}
-          ${isFocused && !error ? 'text-[var(--color-wattle-gold)]' : ''}
-        `}
-          >
-            {label}
-            {required && <span className="text-[var(--color-waratah-crimson)] ml-1">*</span>}
-=======
           ${error ? 'text-[var(--color-solidarity-red)]' : 'text-[var(--color-concrete-grey)]'}
           ${isFocused && !error ? 'text-[var(--color-ink-gold)]' : ''}
         `}
           >
             {label}
             {required && <span className="text-[var(--color-solidarity-red)] ml-1">*</span>}
->>>>>>> restoration-KR-Rage-Figma-v2.0
           </label>
         )}
 
@@ -238,11 +191,7 @@ export const Lens = forwardRef<HTMLInputElement, LensProps>(
               <div
                 className={`
               flex-shrink-0 ml-3 ${sizeClasses[size].adornment}
-<<<<<<< HEAD
-              ${error ? 'text-[var(--color-waratah-crimson)]' : 'text-[var(--color-flannel-flower-dark)]'}
-=======
               ${error ? 'text-[var(--color-solidarity-red)]' : 'text-[var(--color-concrete-grey-dark)]'}
->>>>>>> restoration-KR-Rage-Figma-v2.0
             `}
               >
                 {startAdornment}
@@ -269,11 +218,7 @@ export const Lens = forwardRef<HTMLInputElement, LensProps>(
               <div
                 className={`
               flex-shrink-0 mr-3 ${sizeClasses[size].adornment}
-<<<<<<< HEAD
-              ${error ? 'text-[var(--color-waratah-crimson)]' : 'text-[var(--color-flannel-flower-dark)]'}
-=======
               ${error ? 'text-[var(--color-solidarity-red)]' : 'text-[var(--color-concrete-grey-dark)]'}
->>>>>>> restoration-KR-Rage-Figma-v2.0
             `}
               >
                 {endAdornment}
@@ -290,11 +235,7 @@ export const Lens = forwardRef<HTMLInputElement, LensProps>(
                 id={`${props.id}-helper-text`}
                 className={`
                 text-xs
-<<<<<<< HEAD
-                ${error ? 'text-[var(--color-waratah-crimson)]' : 'text-[var(--color-flannel-flower-dark)]'}
-=======
                 ${error ? 'text-[var(--color-solidarity-red)]' : 'text-[var(--color-concrete-grey-dark)]'}
->>>>>>> restoration-KR-Rage-Figma-v2.0
               `}
               >
                 {displayHelperText}
@@ -305,11 +246,7 @@ export const Lens = forwardRef<HTMLInputElement, LensProps>(
               <p
                 className={`
               text-xs
-<<<<<<< HEAD
-              ${charCount > maxLength ? 'text-[var(--color-waratah-crimson)]' : 'text-[var(--color-flannel-flower-dark)]'}
-=======
               ${charCount > maxLength ? 'text-[var(--color-solidarity-red)]' : 'text-[var(--color-concrete-grey-dark)]'}
->>>>>>> restoration-KR-Rage-Figma-v2.0
               ml-auto
             `}
               >
@@ -329,11 +266,7 @@ Lens.displayName = 'Lens';
  * LensArea - Multi-line text input variant
  *
  * Same API as Lens but renders a textarea for multi-line input.
-<<<<<<< HEAD
- * Uses  design tokens for consistent organic styling.
-=======
  * Uses KeralaRage KrSolidarity design tokens for consistent [DEPRECATED_STYLE] styling.
->>>>>>> restoration-KR-Rage-Figma-v2.0
  */
 export interface LensAreaProps extends Omit<
   React.TextareaHTMLAttributes<HTMLTextAreaElement>,
@@ -380,18 +313,6 @@ export const LensArea = forwardRef<HTMLTextAreaElement, LensAreaProps>(
     };
 
     const containerStyle = {
-<<<<<<< HEAD
-      borderRadius: 'var(--radius-leaf)',
-      backgroundColor: variant === 'filled' ? 'rgba(44, 39, 35, 0.4)' : 'transparent',
-      border: '2px solid',
-      borderColor: error
-        ? 'var(--color-waratah-crimson)'
-        : isFocused
-          ? 'var(--color-wattle-gold)'
-          : 'var(--color-eucalypt-smoke-base)',
-      color: 'var(--color-parchment)',
-      transition: 'all var(--duration-standard) var(--ease-viscous-breeze)',
-=======
       borderRadius: '24px 8px 20px 4px', // Lens archetype asymmetric radius
       backgroundColor: variant === 'filled' ? 'var(--sys-color-charcoalBackground-steps-3)' : 'transparent',
       border: '2px solid',
@@ -402,7 +323,6 @@ export const LensArea = forwardRef<HTMLTextAreaElement, LensAreaProps>(
           : 'var(--sys-color-concreteGrey-base)',
       color: 'var(--sys-color-worker-ash-base)',
       transition: 'all 300ms cubic-bezier(0.34, 1.56, 0.64, 1)',
->>>>>>> restoration-KR-Rage-Figma-v2.0
     };
 
     const showError = error && errorMessage;
@@ -414,21 +334,12 @@ export const LensArea = forwardRef<HTMLTextAreaElement, LensAreaProps>(
           <label
             className={`
           mb-2 text-sm font-medium transition-colors duration-200
-<<<<<<< HEAD
-          ${error ? 'text-[var(--color-waratah-crimson)]' : 'text-[var(--color-flannel-flower)]'}
-          ${isFocused && !error ? 'text-[var(--color-wattle-gold)]' : ''}
-        `}
-          >
-            {label}
-            {required && <span className="text-[var(--color-waratah-crimson)] ml-1">*</span>}
-=======
           ${error ? 'text-[var(--color-solidarity-red)]' : 'text-[var(--color-concrete-grey)]'}
           ${isFocused && !error ? 'text-[var(--color-ink-gold)]' : ''}
         `}
           >
             {label}
             {required && <span className="text-[var(--color-solidarity-red)] ml-1">*</span>}
->>>>>>> restoration-KR-Rage-Figma-v2.0
           </label>
         )}
 
@@ -447,11 +358,7 @@ export const LensArea = forwardRef<HTMLTextAreaElement, LensAreaProps>(
           focus:outline-none
           resize-vertical
           font-field-note
-<<<<<<< HEAD
-          ${isFocused && !error ? 'shadow-[0_0_15px_rgba(212,168,75,0.2)]' : ''}
-=======
           ${isFocused && !error ? 'shadow-[0_0_15px_var(--sys-color-inkGold-steps-0)]' : ''}
->>>>>>> restoration-KR-Rage-Figma-v2.0
           ${containerClassName}
           ${className}
         `}
@@ -473,11 +380,7 @@ export const LensArea = forwardRef<HTMLTextAreaElement, LensAreaProps>(
                 id={`${props.id}-helper-text`}
                 className={`
                 text-xs
-<<<<<<< HEAD
-                ${error ? 'text-[var(--color-waratah-crimson)]' : 'text-[var(--color-flannel-flower-dark)]'}
-=======
                 ${error ? 'text-[var(--color-solidarity-red)]' : 'text-[var(--color-concrete-grey-dark)]'}
->>>>>>> restoration-KR-Rage-Figma-v2.0
               `}
               >
                 {displayHelperText}
@@ -488,11 +391,7 @@ export const LensArea = forwardRef<HTMLTextAreaElement, LensAreaProps>(
               <p
                 className={`
               text-xs
-<<<<<<< HEAD
-              ${charCount > maxLength ? 'text-[var(--color-waratah-crimson)]' : 'text-[var(--color-flannel-flower-dark)]'}
-=======
               ${charCount > maxLength ? 'text-[var(--color-solidarity-red)]' : 'text-[var(--color-concrete-grey-dark)]'}
->>>>>>> restoration-KR-Rage-Figma-v2.0
               ml-auto
             `}
               >
@@ -510,8 +409,4 @@ LensArea.displayName = 'LensArea';
 
 // Legacy M3 exports for backward compatibility
 export { LensArea as M3TextArea, Lens as M3TextField };
-<<<<<<< HEAD
 export type { LensAreaProps as M3TextAreaProps, LensProps as M3TextFieldProps };
-=======
-export type { LensAreaProps as M3TextAreaProps, LensProps as M3TextFieldProps };
->>>>>>> restoration-KR-Rage-Figma-v2.0

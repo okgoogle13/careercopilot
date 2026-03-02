@@ -13,22 +13,7 @@ All endpoints require Firebase authentication.
 import logging
 import os
 from datetime import datetime
-<<<<<<< HEAD
-from typing import Dict
 
-from fastapi import APIRouter, Depends, File, HTTPException, UploadFile, status
-from fastapi.responses import JSONResponse
-
-from app.core.auth import get_current_user
-from app.core.enhanced_ai_error_handling import create_detailed_error_message
-from app.core.file_upload_decorators import FileUploadConfig, require_valid_file_upload
-from app.core.supabase import get_supabase_client, get_supabase_storage
-from app.core.database import get_db
-from sqlalchemy.orm import Session
-from app.models.user_asset import UserAsset
-=======
-
->>>>>>> restoration-KR-Rage-Figma-v2.0
 from app.genkit_flows.smart_ingestion import (
     contextTaggerFlow,
     kscExtractorFlow,
@@ -36,9 +21,6 @@ from app.genkit_flows.smart_ingestion import (
     skillsExtractorFlow,
     voiceProfileExtractorFlow,
 )
-<<<<<<< HEAD
-from app.models.asset_library_schema import AssetDocument, AssetMetadata, ContextTags
-=======
 from fastapi import APIRouter, Depends, File, HTTPException, UploadFile, status
 from fastapi.responses import JSONResponse
 from sqlalchemy.orm import Session
@@ -49,54 +31,13 @@ from app.core.enhanced_ai_error_handling import create_detailed_error_message
 from app.core.file_upload_decorators import FileUploadConfig, require_valid_file_upload
 from app.core.supabase import get_supabase_storage
 from app.models.asset_library_schema import AssetDocument, AssetMetadata
->>>>>>> restoration-KR-Rage-Figma-v2.0
 from app.models.ingestion_schemas import (
     ExtractAndSaveRequest,
     ExtractAndSaveResponse,
     IngestionErrorResponse,
     UploadAndTagResponse,
 )
-<<<<<<< HEAD
-=======
-from app.models.user_asset import UserAsset
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
-logger = logging.getLogger(__name__)
-
-# Create router
-router = APIRouter(tags=["Smart Ingestion"])
-
-
-# ============================================================================
-# Helper Functions
-# ============================================================================
-
-
-async def _upload_to_storage(
-    file: UploadFile, user_id: str, folder: str = "temp_ingestions"
-) -> tuple[str, int]:
-    """
-    Upload file to Google Cloud Storage.
-
-    Args:
-        file: The uploaded file
-        user_id: Firebase UID of the user
-        folder: Storage folder (default: temp_ingestions)
-
-    Returns:
-        Tuple of (storage_uri, file_size_bytes)
-
-    Raises:
-        HTTPException: If upload fails
-    """
-    try:
-        storage = get_supabase_storage()
-        bucket_name = os.getenv("SUPABASE_STORAGE_BUCKET", "user_assets")
-<<<<<<< HEAD
-        
-=======
-
->>>>>>> restoration-KR-Rage-Figma-v2.0
         # Generate unique filename with timestamp
         timestamp = int(datetime.now().timestamp())
         filename = f"{user_id}/{timestamp}_{file.filename}"
@@ -120,17 +61,10 @@ async def _upload_to_storage(
         return storage_uri, file_size
 
     except Exception as e:
-<<<<<<< HEAD
-        logger.error(f"Failed to upload file to storage: {str(e)}", exc_info=True)
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Failed to upload file: {str(e)}",
-=======
         logger.error(f"Failed to upload file to storage: {e!s}", exc_info=True)
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Failed to upload file: {e!s}",
->>>>>>> restoration-KR-Rage-Figma-v2.0
         )
 
 
@@ -149,24 +83,14 @@ async def _read_file_from_storage(storage_uri: str) -> str:
     """
     try:
         storage = get_supabase_storage()
-<<<<<<< HEAD
-        
-=======
 
->>>>>>> restoration-KR-Rage-Figma-v2.0
         # Extract bucket and path from URI (storage://bucket/path)
         uri_parts = storage_uri.replace("storage://", "").split("/", 1)
         if len(uri_parts) < 2:
             raise ValueError(f"Invalid storage URI: {storage_uri}")
-<<<<<<< HEAD
-            
-        bucket_name, file_path = uri_parts
-        
-=======
 
         bucket_name, file_path = uri_parts
 
->>>>>>> restoration-KR-Rage-Figma-v2.0
         # Download as binary and convert to text
         res = storage.from_(bucket_name).download(file_path)
         content = res.decode("utf-8")
@@ -175,17 +99,10 @@ async def _read_file_from_storage(storage_uri: str) -> str:
         return content
 
     except Exception as e:
-<<<<<<< HEAD
-        logger.error(f"Failed to read file from storage: {str(e)}", exc_info=True)
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Failed to read file from storage: {str(e)}",
-=======
         logger.error(f"Failed to read file from storage: {e!s}", exc_info=True)
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Failed to read file from storage: {e!s}",
->>>>>>> restoration-KR-Rage-Figma-v2.0
         )
 
 
@@ -205,24 +122,11 @@ async def _move_file_in_storage(source_uri: str, user_id: str) -> str:
     """
     try:
         storage = get_supabase_storage()
-<<<<<<< HEAD
-        
-=======
 
->>>>>>> restoration-KR-Rage-Figma-v2.0
         # Extract bucket and path
         uri_parts = source_uri.replace("storage://", "").split("/", 1)
         if len(uri_parts) < 2:
             return source_uri
-<<<<<<< HEAD
-            
-        bucket_name, source_path = uri_parts
-        filename = os.path.basename(source_path)
-        
-        # Permanent path: resumes/{user_id}/filename or assets/{user_id}/filename
-        dest_path = f"permanent/{user_id}/{filename}"
-        
-=======
 
         bucket_name, source_path = uri_parts
         filename = os.path.basename(source_path)
@@ -230,7 +134,6 @@ async def _move_file_in_storage(source_uri: str, user_id: str) -> str:
         # Permanent path: resumes/{user_id}/filename or assets/{user_id}/filename
         dest_path = f"permanent/{user_id}/{filename}"
 
->>>>>>> restoration-KR-Rage-Figma-v2.0
         # Supabase doesn't have a direct "move", so copy + delete
         storage.from_(bucket_name).copy(source_path, dest_path)
         storage.from_(bucket_name).remove([source_path])
@@ -241,11 +144,7 @@ async def _move_file_in_storage(source_uri: str, user_id: str) -> str:
         return new_uri
 
     except Exception as e:
-<<<<<<< HEAD
-        logger.error(f"Failed to move file in storage: {str(e)}", exc_info=True)
-=======
         logger.error(f"Failed to move file in storage: {e!s}", exc_info=True)
->>>>>>> restoration-KR-Rage-Figma-v2.0
         # Non-fatal error - file can stay in temp location
         logger.warning("File will remain in temporary location")
         return source_uri
@@ -276,11 +175,7 @@ async def _save_to_database(
             file_size_bytes=asset_doc.metadata.fileSizeBytes,
             schema_version=asset_doc.schemaVersion
         )
-<<<<<<< HEAD
-        
-=======
 
->>>>>>> restoration-KR-Rage-Figma-v2.0
         db.add(db_asset)
         db.commit()
         db.refresh(db_asset)
@@ -290,17 +185,10 @@ async def _save_to_database(
         return str(db_asset.id)
 
     except Exception as e:
-<<<<<<< HEAD
-        logger.error(f"Failed to save to Firestore: {str(e)}", exc_info=True)
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Failed to save asset to database: {str(e)}",
-=======
         logger.error(f"Failed to save to Firestore: {e!s}", exc_info=True)
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Failed to save asset to database: {e!s}",
->>>>>>> restoration-KR-Rage-Figma-v2.0
         )
 
 
@@ -374,17 +262,10 @@ async def upload_and_tag(
         # Re-raise HTTP exceptions
         raise
     except Exception as e:
-<<<<<<< HEAD
-        logger.error(f"Upload-and-tag failed for user {user_id}: {str(e)}", exc_info=True)
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Failed to process document: {str(e)}",
-=======
         logger.error(f"Upload-and-tag failed for user {user_id}: {e!s}", exc_info=True)
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Failed to process document: {e!s}",
->>>>>>> restoration-KR-Rage-Figma-v2.0
         )
 
 
@@ -493,11 +374,7 @@ async def extract_and_save(
                 )
             except Exception as e:
                 # Log but don't fail the entire ingestion if skills extraction fails
-<<<<<<< HEAD
-                logger.warning(f"Skills extraction failed (non-critical): {str(e)}")
-=======
                 logger.warning(f"Skills extraction failed (non-critical): {e!s}")
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
             extracted_data = master_profile.model_dump(mode="json")
 
@@ -538,11 +415,7 @@ async def extract_and_save(
         # Since we are using Supabase storage, metadata is handled differently
         detected_mime_type = "application/pdf" if ".pdf" in permanent_uri.lower() else "application/octet-stream"
         file_size = 0 # Can be improved by fetching from Supabase Client if needed
-<<<<<<< HEAD
-        
-=======
 
->>>>>>> restoration-KR-Rage-Figma-v2.0
         # Step 6: Create AssetDocument
         asset_doc = AssetDocument(
             documentType=document_type,
@@ -582,11 +455,7 @@ async def extract_and_save(
         # Re-raise HTTP exceptions
         raise
     except Exception as e:
-<<<<<<< HEAD
-        logger.error(f"Extract-and-save failed for user {user_id}: {str(e)}", exc_info=True)
-=======
         logger.error(f"Extract-and-save failed for user {user_id}: {e!s}", exc_info=True)
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
         # Create detailed error message
         error_message = create_detailed_error_message(
@@ -596,11 +465,7 @@ async def extract_and_save(
 
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-<<<<<<< HEAD
-            detail=error_message or f"Failed to extract and save document: {str(e)}",
-=======
             detail=error_message or f"Failed to extract and save document: {e!s}",
->>>>>>> restoration-KR-Rage-Figma-v2.0
         )
 
 

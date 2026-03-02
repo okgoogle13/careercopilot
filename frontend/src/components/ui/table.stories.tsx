@@ -113,8 +113,4 @@ export const Applications: Story = {
             </TableBody>
         </Table>
     ),
-<<<<<<< HEAD
 };
-=======
-};
->>>>>>> restoration-KR-Rage-Figma-v2.0

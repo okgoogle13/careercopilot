@@ -8,20 +8,13 @@ import logging
 import os
 from contextlib import asynccontextmanager
 from datetime import datetime, timezone
-<<<<<<< HEAD
-from typing import Any, Dict, Optional
-=======
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 from fastapi import FastAPI, Request
 from starlette.middleware.base import BaseHTTPMiddleware
 
 from app.core.database import SessionLocal
 from app.services.cache_store import SQLAlchemyCacheStore
-<<<<<<< HEAD
-=======
 
->>>>>>> restoration-KR-Rage-Figma-v2.0
 from .personal_cache import PersonalCache, get_ai_cache
 
 logger = logging.getLogger(__name__)
@@ -148,11 +141,7 @@ class CacheInvalidationMiddleware(BaseHTTPMiddleware):
             if operation_types:
                 # Invalidate file-based cache
                 invalidated_personal = await self.cache.invalidate_user_cache(user_id, operation_types)
-<<<<<<< HEAD
-                
-=======
 
->>>>>>> restoration-KR-Rage-Figma-v2.0
                 # Invalidate SQL cache
                 invalidated_sql = 0
                 db = SessionLocal()
@@ -162,11 +151,7 @@ class CacheInvalidationMiddleware(BaseHTTPMiddleware):
                         invalidated_sql += sql_cache.clear_pattern(f"{op_type}:{user_id}")
                 finally:
                     db.close()
-<<<<<<< HEAD
-                
-=======
 
->>>>>>> restoration-KR-Rage-Figma-v2.0
                 logger.info(
                     f"Invalidated {invalidated_personal + invalidated_sql} entries for user {user_id}"
                 )
@@ -174,11 +159,7 @@ class CacheInvalidationMiddleware(BaseHTTPMiddleware):
         except Exception as e:
             logger.error(f"Cache invalidation error: {e}")
 
-<<<<<<< HEAD
-    async def _extract_user_id(self, request: Request) -> Optional[str]:
-=======
     async def _extract_user_id(self, request: Request) -> str | None:
->>>>>>> restoration-KR-Rage-Figma-v2.0
         if hasattr(request.state, "user_id"):
             return request.state.user_id
         path_parts = request.url.path.split("/")

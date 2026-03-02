@@ -1,15 +1,9 @@
 # DOC-002: Architecture Schema ("The Machinery")
 
 **Document ID:** DOC-002-ARCH
-<<<<<<< HEAD
-**Version:** 2.0 (Northcote Curio Edition)
-**Status:** DEFINITIVE
-**Context:** The mechanical underpinnings of the Field Station. How the "Gallery" (Frontend) talks to the "Archive" (Backend) and the "Naturalist" (AI).
-=======
 **Version:** 2.0 (kerala-rage kr-solidarity Edition)
 **Status:** DEFINITIVE
 **Context:** The mechanical underpinnings of the Field Station. How the "kr-dark" (Frontend) talks to the "Archive" (Backend) and the "[DEPRECATED_STYLE]" (AI).
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 ---
 
@@ -17,13 +11,8 @@
 
 We employ a **Hybrid Intelligence Architecture**:
 
-<<<<<<< HEAD
-*   **The Gallery (Frontend):** *React 19, Vite, Tailwind.*
-    The user-facing conservatory. Renders the "Northcote Curio" aesthetic.
-=======
 *   **The kr-dark (Frontend):** *React 19, Vite, Tailwind.*
     The user-facing conservatory. Renders the "kerala-rage kr-solidarity" aesthetic.
->>>>>>> restoration-KR-Rage-Figma-v2.0
     *   *Role:* Presentation, Animation, User Interaction.
     *   *Hosting:* Firebase Hosting.
 
@@ -32,13 +21,8 @@ We employ a **Hybrid Intelligence Architecture**:
     *   *Role:* Persistence, Auth, Real-time subscriptions.
     *   *Schema:* Relational (Users, Resumes, Analyses).
 
-<<<<<<< HEAD
-*   **The Naturalist (AI Engine):** *Google Genkit + Gemini 1.5 Pro.*
-    The intelligence that dissects the specimens.
-=======
 *   **The [DEPRECATED_STYLE] (AI Engine):** *Google Genkit + Gemini 1.5 Pro.*
     The intelligence that dissects the kr-motifs.
->>>>>>> restoration-KR-Rage-Figma-v2.0
     *   *Role:* Resume Parsing, Gap Analysis, Career Strategy.
     *   *Deployment:* Cloud Run (Serverless).
 
@@ -54,15 +38,9 @@ We employ a **Hybrid Intelligence Architecture**:
 Identity and preference settings.
 *   `id`: UUID (Primary Key)
 *   `email`: String
-<<<<<<< HEAD
-*   `mode_preference`: "Gallery" | "Laboratory" (Default: "Gallery")
-
-#### `resumes` (The Specimen)
-=======
 *   `mode_preference`: "kr-dark" | "kr-dark" (Default: "kr-dark")
 
 #### `resumes` (The kr-motif)
->>>>>>> restoration-KR-Rage-Figma-v2.0
 The raw biological material provided by the user.
 *   `id`: UUID
 *   `user_id`: UUID (FK)
@@ -71,11 +49,7 @@ The raw biological material provided by the user.
 *   `created_at`: Timestamp
 
 #### `analyses` (The Dissection)
-<<<<<<< HEAD
-The AI's breakdown of the specimen.
-=======
 The AI's breakdown of the kr-motif.
->>>>>>> restoration-KR-Rage-Figma-v2.0
 *   `id`: UUID
 *   `resume_id`: UUID (FK)
 *   `status`: "processing" | "complete" | "failed"
@@ -103,10 +77,6 @@ The AI's breakdown of the kr-motif.
 
 ## 4. Security & Permissions
 
-<<<<<<< HEAD
-*   **Row Level Security (RLS):** Enabled on ALL tables. Users can only see their own biological specimens.
-=======
 *   **Row Level Security (RLS):** Enabled on ALL tables. Users can only see their own biological kr-motifs.
->>>>>>> restoration-KR-Rage-Figma-v2.0
 *   **Auth:** Supabase Auth (Email/Password + OAuth).
 *   **API Security:** All Genkit endpoints require Bearer Token validation.

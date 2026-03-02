@@ -1,9 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-<<<<<<< HEAD
-import { Jar } from '../components/ui/M3Select';
-=======
 import { M3Select } from '../legacy/ui/M3Select';
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 const meta: Meta<typeof M3Select> = {
     title: 'M3 Components/Select',

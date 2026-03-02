@@ -6,14 +6,9 @@ into existing flows with minimal code changes.
 """
 
 import logging
-<<<<<<< HEAD
-from functools import wraps
-from typing import Any, Callable, Dict, Optional, Type, TypeVar, get_origin
-=======
 from collections.abc import Callable
 from functools import wraps
 from typing import Any, TypeVar
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 from .ai_error_handling import AIError, AIErrorType
 from .ai_response_validation import (
@@ -30,15 +25,9 @@ T = TypeVar("T", bound=BaseAIResponseSchema)
 
 
 def validate_ai_flow_response(
-<<<<<<< HEAD
-    schema_class: Type[T],
-    fallback_data: Optional[Dict[str, Any]] = None,
-    validator: Optional[AIResponseValidator] = None,
-=======
     schema_class: type[T],
     fallback_data: dict[str, Any] | None = None,
     validator: AIResponseValidator | None = None,
->>>>>>> restoration-KR-Rage-Figma-v2.0
 ):
     """
     Decorator to automatically validate AI flow responses
@@ -81,11 +70,7 @@ def validate_ai_flow_response(
                 if isinstance(e, AIError):
                     raise
 
-<<<<<<< HEAD
-                logger.error(f"Error in validated AI flow {func.__name__}: {str(e)}")
-=======
                 logger.error(f"Error in validated AI flow {func.__name__}: {e!s}")
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
                 # Try to create fallback result
                 if fallback_data:
@@ -101,11 +86,7 @@ def validate_ai_flow_response(
                         pass
 
                 raise AIError(
-<<<<<<< HEAD
-                    message=f"AI flow execution failed: {str(e)}",
-=======
                     message=f"AI flow execution failed: {e!s}",
->>>>>>> restoration-KR-Rage-Figma-v2.0
                     error_type=AIErrorType.UNKNOWN,
                     original_error=e,
                 )
@@ -138,11 +119,7 @@ def extract_validated_data(validation_result: ValidationResult) -> Any:
 
 
 def create_fallback_response(
-<<<<<<< HEAD
-    schema_class: Type[T], error_message: str = "Processing temporarily unavailable"
-=======
     schema_class: type[T], error_message: str = "Processing temporarily unavailable"
->>>>>>> restoration-KR-Rage-Figma-v2.0
 ) -> T:
     """
     Create a fallback response for common schema types
@@ -205,33 +182,6 @@ def create_fallback_response(
         # Generic fallback - try to create with minimal data
         try:
             # Get required fields and provide default values
-<<<<<<< HEAD
-            required_fields: Dict[str, Any] = {}
-            fields = getattr(schema_class, "model_fields", schema_class.__fields__)
-
-            for field_name, field_info in fields.items():
-                if hasattr(field_info, "is_required"):
-                    is_required = field_info.is_required()
-                    annotation = field_info.annotation
-                else:
-                    is_required = field_info.required
-                    annotation = field_info.type_
-
-                if not is_required:
-                    continue
-
-                origin = get_origin(annotation)
-                if annotation == str:
-                    required_fields[field_name] = error_message
-                elif annotation == float:
-                    required_fields[field_name] = 0.0
-                elif annotation == int:
-                    required_fields[field_name] = 0
-                elif annotation == list or origin == list:
-                    required_fields[field_name] = []
-                elif annotation == dict or origin == dict:
-                    required_fields[field_name] = {}
-=======
             required_fields = {}
             for field_name, field_info in schema_class.__fields__.items():
                 if field_info.required:
@@ -245,7 +195,6 @@ def create_fallback_response(
                         required_fields[field_name] = []
                     elif field_info.type_ == dict:
                         required_fields[field_name] = {}
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
             return schema_class(**required_fields)
         except Exception:
@@ -257,26 +206,15 @@ class AIFlowManager:
     Manager class for handling AI flows with validation
     """
 
-<<<<<<< HEAD
-    def __init__(self, validator: Optional[AIResponseValidator] = None):
-        self.validator = validator or default_validator
-        self.registered_flows: Dict[str, Dict[str, Any]] = {}
-=======
     def __init__(self, validator: AIResponseValidator | None = None):
         self.validator = validator or default_validator
         self.registered_flows: dict[str, dict[str, Any]] = {}
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
     def register_flow(
         self,
         name: str,
-<<<<<<< HEAD
-        schema_class: Type[BaseAIResponseSchema],
-        fallback_data: Optional[Dict[str, Any]] = None,
-=======
         schema_class: type[BaseAIResponseSchema],
         fallback_data: dict[str, Any] | None = None,
->>>>>>> restoration-KR-Rage-Figma-v2.0
     ):
         """Register a flow with its schema and fallback data"""
         self.registered_flows[name] = {
@@ -318,11 +256,7 @@ class AIFlowManager:
             return result
 
         except Exception as e:
-<<<<<<< HEAD
-            logger.error(f"Error executing flow {flow_name}: {str(e)}")
-=======
             logger.error(f"Error executing flow {flow_name}: {e!s}")
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
             # Try to create fallback result
             if fallback_data:
@@ -339,19 +273,11 @@ class AIFlowManager:
 
             return ValidationResult(
                 is_valid=False,
-<<<<<<< HEAD
-                error_message=f"Flow execution failed: {str(e)}",
-                error_type=ValidationErrorType.MALFORMED_STRUCTURE,
-            )
-
-    def get_flow_schema(self, flow_name: str) -> Optional[Type[BaseAIResponseSchema]]:
-=======
                 error_message=f"Flow execution failed: {e!s}",
                 error_type=ValidationErrorType.MALFORMED_STRUCTURE,
             )
 
     def get_flow_schema(self, flow_name: str) -> type[BaseAIResponseSchema] | None:
->>>>>>> restoration-KR-Rage-Figma-v2.0
         """Get the schema class for a registered flow"""
         if flow_name in self.registered_flows:
             return self.registered_flows[flow_name]["schema_class"]
@@ -365,13 +291,8 @@ default_flow_manager = AIFlowManager()
 # Migration helpers for existing flows
 def migrate_json_parsing(
     original_json_parse_code: str,
-<<<<<<< HEAD
-    schema_class: Type[T],
-    fallback_data: Optional[Dict[str, Any]] = None,
-=======
     schema_class: type[T],
     fallback_data: dict[str, Any] | None = None,
->>>>>>> restoration-KR-Rage-Figma-v2.0
 ) -> ValidationResult:
     """
     Helper to migrate existing json.loads() calls to use validation
@@ -395,13 +316,8 @@ def migrate_json_parsing(
 
 def create_migration_wrapper(
     original_function: Callable,
-<<<<<<< HEAD
-    schema_class: Type[T],
-    fallback_data: Optional[Dict[str, Any]] = None,
-=======
     schema_class: type[T],
     fallback_data: dict[str, Any] | None = None,
->>>>>>> restoration-KR-Rage-Figma-v2.0
 ):
     """
     Create a wrapper that adds validation to an existing function
@@ -457,11 +373,7 @@ def create_migration_wrapper(
 
             return ValidationResult(
                 is_valid=False,
-<<<<<<< HEAD
-                error_message=f"Migration wrapper error: {str(e)}",
-=======
                 error_message=f"Migration wrapper error: {e!s}",
->>>>>>> restoration-KR-Rage-Figma-v2.0
                 error_type=ValidationErrorType.MALFORMED_STRUCTURE,
             )
 

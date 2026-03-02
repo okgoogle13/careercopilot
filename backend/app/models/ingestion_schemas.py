@@ -5,11 +5,7 @@ Pydantic models for API request and response validation for the Smart Ingestion 
 These models define the data contracts between the FastAPI backend and React frontend.
 """
 
-<<<<<<< HEAD
-from typing import List, Literal
-=======
 from typing import Literal
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 from pydantic import BaseModel, Field
 
@@ -23,11 +19,7 @@ class SuggestedTags(BaseModel):
         ...,
         description="AI-suggested primary role type (e.g., 'Social Worker', 'Software Engineer')",
     )
-<<<<<<< HEAD
-    subsectors: List[str] = Field(
-=======
     subsectors: list[str] = Field(
->>>>>>> restoration-KR-Rage-Figma-v2.0
         default_factory=list,
         description="AI-suggested industry subsectors (e.g., ['Healthcare', 'Community Services'])",
     )

@@ -2,70 +2,6 @@
 NLP Service Metrics for Prometheus monitoring
 """
 
-<<<<<<< HEAD
-import logging
-
-from prometheus_client import Counter, Gauge, Histogram, start_http_server
-
-logger = logging.getLogger(__name__)
-
-# Initialize metrics with safe registration to avoid duplicates
-_nlp_metrics_initialized = False
-NLP_REQUESTS_TOTAL = None
-NLP_REQUEST_DURATION = None
-NLP_TOKENS_PROCESSED = None
-NLP_MODEL_LOAD_TIME = None
-NLP_MODEL_MEMORY_USAGE = None
-
-
-def _initialize_nlp_metrics():
-    """Initialize NLP Prometheus metrics only once."""
-    global _nlp_metrics_initialized, NLP_REQUESTS_TOTAL, NLP_REQUEST_DURATION
-    global NLP_TOKENS_PROCESSED, NLP_MODEL_LOAD_TIME, NLP_MODEL_MEMORY_USAGE
-
-    if _nlp_metrics_initialized:
-        return
-
-    try:
-        NLP_REQUESTS_TOTAL = Counter(
-            "nlp_requests_total",
-            "Total number of NLP requests",
-            ["endpoint", "model", "status"],
-        )
-
-        NLP_REQUEST_DURATION = Histogram(
-            "nlp_request_duration_seconds",
-            "Time spent processing NLP requests",
-            ["endpoint", "model"],
-            buckets=(0.01, 0.05, 0.1, 0.25, 0.5, 1.0, 2.5, 5.0, 10.0, float("inf")),
-        )
-
-        NLP_TOKENS_PROCESSED = Counter(
-            "nlp_tokens_processed_total",
-            "Total number of tokens processed",
-            ["model", "operation"],
-        )
-
-        NLP_MODEL_LOAD_TIME = Gauge(
-            "nlp_model_load_time_seconds", "Time taken to load NLP models", ["model"]
-        )
-
-        NLP_MODEL_MEMORY_USAGE = Gauge(
-            "nlp_model_memory_usage_bytes", "Memory usage of loaded NLP models", ["model"]
-        )
-
-        _nlp_metrics_initialized = True
-    except ValueError as e:
-        if "Duplicated timeseries" in str(e):
-            logger.warning("NLP metrics already registered, reusing existing metrics")
-            _nlp_metrics_initialized = True
-        else:
-            raise
-
-
-# Initialize metrics on module import
-_initialize_nlp_metrics()
-=======
 from prometheus_client import Counter, Gauge, Histogram, start_http_server
 
 # Initialize metrics
@@ -95,7 +31,6 @@ NLP_MODEL_LOAD_TIME = Gauge(
 NLP_MODEL_MEMORY_USAGE = Gauge(
     "nlp_model_memory_usage_bytes", "Memory usage of loaded NLP models", ["model"]
 )
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 
 def start_metrics_server(port=8001):

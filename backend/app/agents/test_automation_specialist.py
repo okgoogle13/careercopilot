@@ -1,15 +1,7 @@
-<<<<<<< HEAD
-import asyncio
-import logging
-from typing import Any, Dict
-
-from .orchestrator import BaseAgent, get_ai_client
-=======
 import logging
 from typing import Any
 
 from .orchestrator import BaseAgent
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 logger = logging.getLogger(__name__)
 
@@ -36,11 +28,7 @@ class TestAutomationSpecialistAgent(BaseAgent):
         self.dependencies = []
         self.priority = 3  # high priority to ensure tests exist early.
 
-<<<<<<< HEAD
-    async def _run_task(self, context: Dict[str, Any]) -> Dict[str, Any]:
-=======
     async def _run_task(self, context: dict[str, Any]) -> dict[str, Any]:
->>>>>>> restoration-KR-Rage-Figma-v2.0
         logger.info("🔧 Starting automated test generation workflow")
         # 1️⃣ Analyze current coverage (placeholder).
         logger.info("📊 Analyzing test coverage")

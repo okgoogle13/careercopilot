@@ -12,11 +12,7 @@ import logging.config
 import os
 from datetime import datetime, timezone
 from pathlib import Path
-<<<<<<< HEAD
-from typing import Any, Dict, List, Optional
-=======
 from typing import Any
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 
 class StructuredFormatter(logging.Formatter):
@@ -100,11 +96,7 @@ class RequestContextFilter(logging.Filter):
         return True
 
 
-<<<<<<< HEAD
-def get_logging_config(environment: Optional[str] = None) -> Dict[str, Any]:
-=======
 def get_logging_config(environment: str | None = None) -> dict[str, Any]:
->>>>>>> restoration-KR-Rage-Figma-v2.0
     """
     Generate logging configuration based on environment
 
@@ -116,11 +108,7 @@ def get_logging_config(environment: str | None = None) -> dict[str, Any]:
         environment = os.getenv("ENV", "development").lower()
 
     # Base configuration
-<<<<<<< HEAD
-    config: Dict[str, Any] = {
-=======
     config: dict[str, Any] = {
->>>>>>> restoration-KR-Rage-Figma-v2.0
         "version": 1,
         "disable_existing_loggers": False,
         "formatters": {
@@ -233,11 +221,7 @@ def get_logging_config(environment: str | None = None) -> dict[str, Any]:
     return config
 
 
-<<<<<<< HEAD
-def setup_logging(environment: Optional[str] = None, log_dir: str = "logs") -> None:
-=======
 def setup_logging(environment: str | None = None, log_dir: str = "logs") -> None:
->>>>>>> restoration-KR-Rage-Figma-v2.0
     """
     Setup application logging configuration
 
@@ -285,11 +269,7 @@ class LoggerMixin:
         return logging.getLogger(f"{self.__class__.__module__}.{self.__class__.__name__}")
 
 
-<<<<<<< HEAD
-def log_function_call(logger: Optional[logging.Logger] = None, level: int = logging.DEBUG):
-=======
 def log_function_call(logger: logging.Logger | None = None, level: int = logging.DEBUG):
->>>>>>> restoration-KR-Rage-Figma-v2.0
     """
     Decorator to log function calls with parameters and results
 
@@ -379,17 +359,10 @@ def log_function_call(logger: logging.Logger | None = None, level: int = logging
 
 # Context managers for request tracking
 
-<<<<<<< HEAD
-request_id_context: contextvars.ContextVar[Optional[str]] = contextvars.ContextVar(
-    "request_id", default=None
-)
-user_id_context: contextvars.ContextVar[Optional[str]] = contextvars.ContextVar(
-=======
 request_id_context: contextvars.ContextVar[str | None] = contextvars.ContextVar(
     "request_id", default=None
 )
 user_id_context: contextvars.ContextVar[str | None] = contextvars.ContextVar(
->>>>>>> restoration-KR-Rage-Figma-v2.0
     "user_id", default=None
 )
 
@@ -397,19 +370,11 @@ user_id_context: contextvars.ContextVar[str | None] = contextvars.ContextVar(
 class RequestContextLogger:
     """Context manager for adding request context to logs"""
 
-<<<<<<< HEAD
-    def __init__(self, request_id: str, user_id: Optional[str] = None, **extra_context):
-        self.request_id = request_id
-        self.user_id = user_id
-        self.extra_context = extra_context
-        self.tokens: List[contextvars.Token] = []
-=======
     def __init__(self, request_id: str, user_id: str | None = None, **extra_context):
         self.request_id = request_id
         self.user_id = user_id
         self.extra_context = extra_context
         self.tokens: list[contextvars.Token] = []
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
     def __enter__(self):
         self.tokens.append(request_id_context.set(self.request_id))

@@ -39,8 +39,4 @@ export function IconBadge({
       <Icon className={`${iconSizeClasses[size]} ${color}`} />
     </div>
   );
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> restoration-KR-Rage-Figma-v2.0

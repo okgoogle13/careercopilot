@@ -61,8 +61,4 @@ export function M3ErrorAlert({
       )}
     </div>
   );
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> restoration-KR-Rage-Figma-v2.0

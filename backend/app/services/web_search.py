@@ -5,20 +5,12 @@ Provides web search functionality for salary research and job market analysis
 
 import asyncio
 import logging
-<<<<<<< HEAD
-from typing import Any, Dict, List, Optional
-=======
 from typing import Any
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 logger = logging.getLogger(__name__)
 
 
-<<<<<<< HEAD
-async def web_search(query: str, max_results: int = 5) -> List[Dict[str, Any]]:
-=======
 async def web_search(query: str, max_results: int = 5) -> list[dict[str, Any]]:
->>>>>>> restoration-KR-Rage-Figma-v2.0
     """
     Perform web search for the given query
 
@@ -90,11 +82,7 @@ async def web_search(query: str, max_results: int = 5) -> list[dict[str, Any]]:
         return []
 
 
-<<<<<<< HEAD
-async def search_company_info(company_name: str) -> Optional[Dict[str, Any]]:
-=======
 async def search_company_info(company_name: str) -> dict[str, Any] | None:
->>>>>>> restoration-KR-Rage-Figma-v2.0
     """
     Search for company information
 
@@ -124,11 +112,7 @@ async def search_company_info(company_name: str) -> dict[str, Any] | None:
         return None
 
 
-<<<<<<< HEAD
-async def search_job_market_trends(industry: str, location: str) -> Dict[str, Any]:
-=======
 async def search_job_market_trends(industry: str, location: str) -> dict[str, Any]:
->>>>>>> restoration-KR-Rage-Figma-v2.0
     """
     Search for job market trends in specific industry and location
 

@@ -32,11 +32,7 @@
 | --------------- | ------------------------------- | ------------------------------------------------ |
 | **Colors**      | Conservative (blue, purple)     | Vibrant, personalized, 40+ tonal shades          |
 | **Typography**  | Roboto (generic)                | Display fonts, variable fonts, expressive scales |
-<<<<<<< HEAD
-| **Shapes**      | Standard radii (4px, 8px, 12px) | Organic, playful radii, squircles                |
-=======
 | **Shapes**      | Standard radii (4px, 8px, 12px) | [DEPRECATED_STYLE], playful radii, squircles                |
->>>>>>> restoration-KR-Rage-Figma-v2.0
 | **Motion**      | Basic transitions               | Dynamic animations, expressive easing curves     |
 | **Personality** | Functional, corporate           | Expressive, personalized, emotional              |
 
@@ -80,11 +76,7 @@
 - Secondary: Warm coral (#FF6F61)
 - Accent: Electric purple (#7C4DFF)
 - Typography: 'Plus Jakarta Sans' (display), 'Inter' (body)
-<<<<<<< HEAD
-- Shape: Organic radii (4px, 16px, 28px)
-=======
 - Shape: [DEPRECATED_STYLE] radii (4px, 16px, 28px)
->>>>>>> restoration-KR-Rage-Figma-v2.0
 - Motion: Bouncy, expressive easing
 
 **Preset 2: Calm Confidence**
@@ -141,11 +133,7 @@
 
 ### Advanced Shape Tokens
 
-<<<<<<< HEAD
-- Organic radii: 4px, 12px, 20px, 28px (expressive)
-=======
 - [DEPRECATED_STYLE] radii: 4px, 12px, 20px, 28px (expressive)
->>>>>>> restoration-KR-Rage-Figma-v2.0
 - Squircles: iOS-style continuous curves
 - Asymmetric radii: top-left != bottom-right for dynamic feel
 
@@ -162,11 +150,7 @@
 
 - `m3-tonal-palette-generator` - Generate 40+ shades
 - `m3-motion-token-generator` - Animation tokens
-<<<<<<< HEAD
-- `m3-advanced-shape-generator` - Organic shapes
-=======
 - `m3-advanced-shape-generator` - [DEPRECATED_STYLE] shapes
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 **File Location:** `.claude/agents/design-systems-architect.md`
 **Estimated Enhancement:** +100 lines, 4 new sections

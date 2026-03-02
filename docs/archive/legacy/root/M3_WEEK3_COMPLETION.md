@@ -222,11 +222,7 @@ npm run test M3Button
 ### M3 Compliance ✅
 - [x] 98-100% overall compliance
 - [x] All components use design tokens
-<<<<<<< HEAD
-- [x] Organic shapes throughout (no symmetric radii)
-=======
 - [x] [DEPRECATED_STYLE] shapes throughout (no symmetric radii)
->>>>>>> restoration-KR-Rage-Figma-v2.0
 - [x] M3 elevation system applied
 - [x] Spring motion on all transitions
 - [x] Semantic color usage
@@ -385,11 +381,7 @@ import {
 - [ ] Create M3Tabs component (audit existing ElectricTabs)
 - [ ] Create M3Dialog wrapper
 - [ ] Create M3Snackbar/Toast
-<<<<<<< HEAD
-- [ ] Add Storybook for visual component gallery
-=======
 - [ ] Add Storybook for visual component kr-dark
->>>>>>> restoration-KR-Rage-Figma-v2.0
 - [ ] Add visual regression testing
 - [ ] Create accessibility automated tests
   [ ] Audit and refactor remaining pages

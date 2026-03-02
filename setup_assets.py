@@ -68,11 +68,7 @@ def git_stage_file(filepath):
          print("⚠️  Warning: Git command not found. Skipping staging.")
 
 def main():
-<<<<<<< HEAD
-    print("--- Starting  Asset Setup ---")
-=======
     print("--- Starting Northcote [DEPRECATED_STYLE] Asset Setup ---")
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
     # 1. Create target directory
     ensure_directory(TARGET_DIR)

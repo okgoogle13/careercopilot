@@ -10,7 +10,7 @@ interface GalleryDockProps {
 
 export const GalleryDock: React.FC<GalleryDockProps> = ({ currentView, onViewChange }) => {
     const navItems = NAVIGATION_SCHEMA.filter(item =>
-        item.modeAvailability === 'gallery' || item.modeAvailability === 'both'
+        item.modeAvailability === 'KrDark' || item.modeAvailability === 'both'
     );
 
     return (

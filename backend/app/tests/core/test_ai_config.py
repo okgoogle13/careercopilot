@@ -22,19 +22,11 @@ def test_validate_configuration_no_errors(monkeypatch):
     # Mock environment variables to ensure credentials exist
     monkeypatch.setenv("GOOGLE_AI_API_KEY", "test-key")
     monkeypatch.setenv("ANTHROPIC_API_KEY", "test-key")
-<<<<<<< HEAD
-    
-    # Reload config to pick up env vars
-    from app.core.ai_config import reload_ai_config
-    config = reload_ai_config()
-    
-=======
 
     # Reload config to pick up env vars
     from app.core.ai_config import reload_ai_config
     config = reload_ai_config()
 
->>>>>>> restoration-KR-Rage-Figma-v2.0
     issues = config.validate_configuration()
     # The method returns a list of issues directly
     assert isinstance(issues, list)

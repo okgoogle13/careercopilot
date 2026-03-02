@@ -1,35 +1,21 @@
 import React from 'react';
-<<<<<<< HEAD
-=======
 import { Link } from 'react-router-dom';
->>>>>>> restoration-KR-Rage-Figma-v2.0
 import { GlobalHeader } from './components/GlobalHeader';
 import { MainCanvas } from './components/MainCanvas';
 import { NavRail } from './components/NavRail';
 import { SidePanel } from './components/SidePanel';
 
-<<<<<<< HEAD
-/**
- * LayoutShell
- *
- * The primary container for the Laboratory Workspace.
-=======
 const KR_LOGO_SRC = '/assets/kr-solidarity/ui-kit/svg/KR-LOGO-001-primary.svg';
 
 /**
  * LayoutShell
  *
  * The primary container for the KrDark Workspace.
->>>>>>> restoration-KR-Rage-Figma-v2.0
  * Orchestrates the grid layout and provides the ModeContext.
  */
 export const LayoutShell: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
   return (
-<<<<<<< HEAD
-    <div className="flex h-screen w-screen overflow-hidden bg-surface-laboratory-slate-smoke-high text-on-surface-parchment font-field-note antialiased">
-=======
     <div className="flex h-screen w-screen overflow-hidden bg-surface-KrDark-slate-smoke-high text-on-surface-paper-white font-field-note antialiased">
->>>>>>> restoration-KR-Rage-Figma-v2.0
       {/* Nav Rail - Fixed Width Left */}
       <div className="flex-none z-30">
         <NavRail />
@@ -48,12 +34,6 @@ export const LayoutShell: React.FC<{ children?: React.ReactNode }> = ({ children
           <main className="flex-1 overflow-auto relative z-0">{children || <MainCanvas />}</main>
 
           {/* Side Panel - Fixed Width Right (Collapsible logic to be added later) */}
-<<<<<<< HEAD
-          <aside className="flex-none w-80 border-l border-surface-laboratory-slate-smoke-highest bg-surface-laboratory-slate-smoke-high z-10 hidden lg:block">
-            <SidePanel />
-          </aside>
-        </div>
-=======
           <aside className="flex-none w-80 border-l border-surface-KrDark-slate-smoke-highest bg-surface-KrDark-slate-smoke-high z-10 hidden lg:block">
             <SidePanel />
           </aside>
@@ -80,7 +60,6 @@ export const LayoutShell: React.FC<{ children?: React.ReactNode }> = ({ children
             </div>
           </Link>
         </footer>
->>>>>>> restoration-KR-Rage-Figma-v2.0
       </div>
     </div>
   );

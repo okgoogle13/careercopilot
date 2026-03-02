@@ -63,12 +63,7 @@ CareerCopilot uses a layered configuration system:
 ### Prerequisites
 - Node.js 18+ and Yarn 4+
 - Python 3.9+
-<<<<<<< HEAD
-- Firebase CLI (`npm install -g firebase-tools`) for Functions deployment
-- Vercel account for frontend deployment ([DEPLOYMENT.md](./DEPLOYMENT.md))
-=======
 - Docker and Docker Compose (optional)
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 ### Step 1: Environment File
 Create or edit `.env.local`:

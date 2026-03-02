@@ -10,11 +10,7 @@ import logging
 from dataclasses import dataclass, field
 from datetime import datetime
 from pathlib import Path
-<<<<<<< HEAD
-from typing import Any, Dict, List, Optional
-=======
 from typing import Any
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 logger = logging.getLogger(__name__)
 
@@ -28,19 +24,11 @@ class PromptTemplate:
     category: str
     version: str
     template: str
-<<<<<<< HEAD
-    parameters: List[str]
-    output_format: str
-    system_prompt: Optional[str] = None
-    has_system_prompt: bool = False
-    metadata: Dict[str, Any] = field(default_factory=dict)
-=======
     parameters: list[str]
     output_format: str
     system_prompt: str | None = None
     has_system_prompt: bool = False
     metadata: dict[str, Any] = field(default_factory=dict)
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
     def format(self, **kwargs: Any) -> str:
         """Format the template with provided parameters"""
@@ -62,27 +50,16 @@ class PromptTemplate:
         except KeyError as e:
             raise ValueError(f"Template formatting failed: missing parameter {e}")
         except Exception as e:
-<<<<<<< HEAD
-            raise ValueError(f"Template formatting failed: {str(e)}")
-=======
             raise ValueError(f"Template formatting failed: {e!s}")
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 
 class PromptService:
     """Service for managing AI prompts from JSON templates"""
 
-<<<<<<< HEAD
-    def __init__(self, prompts_dir: Optional[str] = None):
-        self.prompts_dir = Path(prompts_dir or self._get_default_prompts_dir())
-        self._templates: Dict[str, PromptTemplate] = {}
-        self._config: Dict[str, Any] = {}
-=======
     def __init__(self, prompts_dir: str | None = None):
         self.prompts_dir = Path(prompts_dir or self._get_default_prompts_dir())
         self._templates: dict[str, PromptTemplate] = {}
         self._config: dict[str, Any] = {}
->>>>>>> restoration-KR-Rage-Figma-v2.0
         self._cached = False
 
         # Load configuration and templates on initialization
@@ -99,11 +76,7 @@ class PromptService:
         """Load prompt configuration from JSON"""
         config_path = self.prompts_dir / "prompt_config.json"
         try:
-<<<<<<< HEAD
-            with open(config_path, "r", encoding="utf-8") as f:
-=======
             with open(config_path, encoding="utf-8") as f:
->>>>>>> restoration-KR-Rage-Figma-v2.0
                 self._config = json.load(f)
             logger.info(f"Loaded prompt configuration from {config_path}")
         except FileNotFoundError:
@@ -113,11 +86,7 @@ class PromptService:
             logger.error(f"Invalid JSON in prompt config: {e}")
             self._config = self._get_default_config()
 
-<<<<<<< HEAD
-    def _get_default_config(self) -> Dict[str, Any]:
-=======
     def _get_default_config(self) -> dict[str, Any]:
->>>>>>> restoration-KR-Rage-Figma-v2.0
         """Get default configuration when config file is missing"""
         return {
             "prompt_management": {
@@ -141,11 +110,7 @@ class PromptService:
 
         for template_file in template_files:
             try:
-<<<<<<< HEAD
-                with open(template_file, "r", encoding="utf-8") as f:
-=======
                 with open(template_file, encoding="utf-8") as f:
->>>>>>> restoration-KR-Rage-Figma-v2.0
                     templates_data = json.load(f)
 
                 for template_id, template_data in templates_data.items():
@@ -162,11 +127,7 @@ class PromptService:
         self._cached = True
         logger.info(f"Total templates loaded: {len(self._templates)}")
 
-<<<<<<< HEAD
-    def _create_template(self, template_id: str, template_data: Dict[str, Any]) -> PromptTemplate:
-=======
     def _create_template(self, template_id: str, template_data: dict[str, Any]) -> PromptTemplate:
->>>>>>> restoration-KR-Rage-Figma-v2.0
         """Create a PromptTemplate object from JSON data"""
         return PromptTemplate(
             name=template_data.get("name", template_id),
@@ -181,21 +142,6 @@ class PromptService:
             metadata=template_data.get("metadata", {}),
         )
 
-<<<<<<< HEAD
-    def get_template(self, template_id: str) -> Optional[PromptTemplate]:
-        """Get a specific prompt template by ID"""
-        return self._templates.get(template_id)
-
-    def get_templates_by_category(self, category: str) -> List[PromptTemplate]:
-        """Get all templates in a specific category"""
-        return [template for template in self._templates.values() if template.category == category]
-
-    def list_templates(self) -> List[str]:
-        """List all available template IDs"""
-        return list(self._templates.keys())
-
-    def list_categories(self) -> List[str]:
-=======
     def get_template(self, template_id: str) -> PromptTemplate | None:
         """Get a specific prompt template by ID"""
         return self._templates.get(template_id)
@@ -209,7 +155,6 @@ class PromptService:
         return list(self._templates.keys())
 
     def list_categories(self) -> list[str]:
->>>>>>> restoration-KR-Rage-Figma-v2.0
         """List all available categories"""
         return list({template.category for template in self._templates.values()})
 
@@ -226,34 +171,13 @@ class PromptService:
 
         return template.format(**kwargs)
 
-<<<<<<< HEAD
-    def get_system_prompt(self, template_id: str) -> Optional[str]:
-=======
     def get_system_prompt(self, template_id: str) -> str | None:
->>>>>>> restoration-KR-Rage-Figma-v2.0
         """Get the system prompt for a template if it exists"""
         template = self.get_template(template_id)
         if template and template.has_system_prompt:
             return template.system_prompt
         return None
 
-<<<<<<< HEAD
-    def get_category_config(self, category: str) -> Dict[str, Any]:
-        """Get configuration for a specific category"""
-        categories = self._config.get("categories", {})
-        from typing import cast as _cast
-        return _cast(Dict[str, Any], categories.get(category, {}))
-
-    def get_length_instruction(self, length_type: str) -> str:
-        """Get length instruction text for a specific type"""
-        from typing import Dict as _Dict, cast as _cast
-        length_instructions = _cast(_Dict[str, str], self._config.get("length_instructions", {}))
-        return length_instructions.get(length_type, length_instructions.get("standard", ""))
-
-    def validate_template_parameters(
-        self, template_id: str, parameters: Dict[str, Any]
-    ) -> List[str]:
-=======
     def get_category_config(self, category: str) -> dict[str, Any]:
         """Get configuration for a specific category"""
         categories = self._config.get("categories", {})
@@ -269,7 +193,6 @@ class PromptService:
     def validate_template_parameters(
         self, template_id: str, parameters: dict[str, Any]
     ) -> list[str]:
->>>>>>> restoration-KR-Rage-Figma-v2.0
         """Validate parameters for a template and return any validation errors"""
         template = self.get_template(template_id)
         if not template:
@@ -293,11 +216,7 @@ class PromptService:
         self._load_templates()
         logger.info("Templates reloaded from disk")
 
-<<<<<<< HEAD
-    def get_template_metadata(self, template_id: str) -> Dict[str, Any]:
-=======
     def get_template_metadata(self, template_id: str) -> dict[str, Any]:
->>>>>>> restoration-KR-Rage-Figma-v2.0
         """Get metadata for a specific template"""
         template = self.get_template(template_id)
         if not template:
@@ -313,11 +232,7 @@ class PromptService:
 
 
 # Global instance
-<<<<<<< HEAD
-_prompt_service: Optional[PromptService] = None
-=======
 _prompt_service: PromptService | None = None
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 
 def get_prompt_service() -> PromptService:
@@ -335,10 +250,6 @@ def format_prompt(template_id: str, **kwargs: Any) -> str:
     return service.format_prompt(template_id, **kwargs)
 
 
-<<<<<<< HEAD
-def get_system_prompt(template_id: str) -> Optional[str]:
-=======
 def get_system_prompt(template_id: str) -> str | None:
->>>>>>> restoration-KR-Rage-Figma-v2.0
     """Convenience function to get a system prompt"""
     return get_prompt_service().get_system_prompt(template_id)

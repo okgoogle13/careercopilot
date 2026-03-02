@@ -5,13 +5,8 @@ Supports PostgreSQL (production) and SQLite (development/testing).
 
 import logging
 import os
-<<<<<<< HEAD
-from contextlib import contextmanager
-from typing import Generator
-=======
 from collections.abc import Generator
 from contextlib import contextmanager
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 from sqlalchemy import create_engine, event, text
 from sqlalchemy.orm import Session, sessionmaker

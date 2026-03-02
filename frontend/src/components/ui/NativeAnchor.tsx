@@ -1,10 +1,6 @@
 import { motion } from 'framer-motion';
 
-<<<<<<< HEAD
-type NativeVariant = 'waratah' | 'bottlebrush' | 'banksia' | 'kangaroo' | 'gum' | 'fern';
-=======
 type NativeVariant = 'solidarity' | 'bottlebrush' | 'KrFlower' | 'kangaroo' | 'gum' | 'fern';
->>>>>>> restoration-KR-Rage-Figma-v2.0
 type AnchorPoint = 'hanging-left' | 'hanging-right' | 'floor-left' | 'floor-right' | 'center-stage' | 'ceiling-left' | 'ceiling-right';
 
 interface NativeAnchorProps {
@@ -18,32 +14,19 @@ interface NativeAnchorProps {
  * Asset paths for Australian Native Plants
  */
 const assets: Record<NativeVariant, string> = {
-<<<<<<< HEAD
-    waratah: '/assets/plants/native-waratah-hanging.png',
-    bottlebrush: '/assets/plants/native-bottlebrush.png',
-    banksia: '/assets/plants/native-banksia.png',
-    kangaroo: '/assets/plants/native-kangaroo.png',
-    gum: '/assets/plants/native-gum-hanging.png',
-    fern: '/assets/specimens/leaf-fern.png',
-=======
     solidarity: '/assets/plants/native-solidarity-hanging.png',
     bottlebrush: '/assets/plants/native-bottlebrush.png',
     KrFlower: '/assets/plants/native-KrFlower.png',
     kangaroo: '/assets/plants/native-kangaroo.png',
     gum: '/assets/plants/native-gum-hanging.png',
     fern: '/assets/kr-solidarity/specimen/kr-solidarity__specimen__triage-natural-history__v1.png',
->>>>>>> restoration-KR-Rage-Figma-v2.0
 };
 
 /**
  * NativeAnchor - Australian Native Plant Decorative Component
  * 
  * Renders plant illustrations with physics-based animations:
-<<<<<<< HEAD
- * - Hanging plants (waratah, gum): Gentle sway + bob
-=======
  * - Hanging plants (solidarity, gum): Gentle sway + bob
->>>>>>> restoration-KR-Rage-Figma-v2.0
  * - Standing plants (others): Breathing animation
  * 
  * Features:
@@ -67,11 +50,7 @@ export const NativeAnchor = ({
     className = ''
 }: NativeAnchorProps) => {
     // 1. Determine if plant is hanging or standing
-<<<<<<< HEAD
-    const isHanging = variant === 'waratah' || variant === 'gum';
-=======
     const isHanging = variant === 'solidarity' || variant === 'gum';
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
     // 2. Define physics-based animations
     const animations = {
@@ -149,8 +128,4 @@ export const NativeAnchor = ({
     );
 };
 
-<<<<<<< HEAD
 export default NativeAnchor;
-=======
-export default NativeAnchor;
->>>>>>> restoration-KR-Rage-Figma-v2.0

@@ -1,15 +1,3 @@
-<<<<<<< HEAD
-import os
-import shutil
-import zipfile
-import tempfile
-import random
-import logging
-import html
-from pathlib import Path
-from datetime import datetime, timezone
-from typing import List, Dict, Any, Optional
-=======
 import logging
 import random
 import tempfile
@@ -17,7 +5,6 @@ import zipfile
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 # Requires: pip install defusedxml pypdf
 try:
@@ -46,11 +33,7 @@ class DocumentIntelligenceService:
         self.working_dir = Path(working_dir)
         self.working_dir.mkdir(parents=True, exist_ok=True)
 
-<<<<<<< HEAD
-    def apply_redlines_to_docx(self, input_path: str, output_path: str, edits: List[Dict[str, str]], author: str = "CareerCopilot") -> bool:
-=======
     def apply_redlines_to_docx(self, input_path: str, output_path: str, edits: list[dict[str, str]], author: str = "CareerCopilot") -> bool:
->>>>>>> restoration-KR-Rage-Figma-v2.0
         """
         Applies a list of text replacements as native Word Tracked Changes.
         edits format: [{'original': 'text to find', 'replacement': 'new text'}]
@@ -58,15 +41,9 @@ class DocumentIntelligenceService:
         try:
             with tempfile.TemporaryDirectory() as temp_dir:
                 temp_path = Path(temp_dir)
-<<<<<<< HEAD
-                
-                # 1. Unpack DOCX
-                with zipfile.ZipFile(input_path, 'r') as zip_ref:
-=======
 
                 # 1. Unpack DOCX
                 with zipfile.ZipFile(input_path, "r") as zip_ref:
->>>>>>> restoration-KR-Rage-Figma-v2.0
                     zip_ref.extractall(temp_path)
 
                 # 2. Modify document.xml
@@ -75,17 +52,6 @@ class DocumentIntelligenceService:
                     raise FileNotFoundError("Invalid DOCX: word/document.xml not found")
 
                 editor = _DocxXmlEditor(doc_xml_path, author=author)
-<<<<<<< HEAD
-                
-                # 3. Apply edits
-                for edit in edits:
-                    original = edit.get('original')
-                    replacement = edit.get('replacement')
-                    
-                    if not original or replacement is None:
-                        continue
-                        
-=======
 
                 # 3. Apply edits
                 for edit in edits:
@@ -95,7 +61,6 @@ class DocumentIntelligenceService:
                     if not original or replacement is None:
                         continue
 
->>>>>>> restoration-KR-Rage-Figma-v2.0
                     # Simple heuristic finder
                     node = editor.find_run_containing_text(original)
                     if node:
@@ -107,29 +72,17 @@ class DocumentIntelligenceService:
                 editor.save()
 
                 # 5. Repack DOCX
-<<<<<<< HEAD
-                with zipfile.ZipFile(output_path, 'w', zipfile.ZIP_DEFLATED) as zip_out:
-                    for file_path in temp_path.rglob('*'):
-=======
                 with zipfile.ZipFile(output_path, "w", zipfile.ZIP_DEFLATED) as zip_out:
                     for file_path in temp_path.rglob("*"):
->>>>>>> restoration-KR-Rage-Figma-v2.0
                         if file_path.is_file():
                             arcname = file_path.relative_to(temp_path)
                             zip_out.write(file_path, arcname)
             return True
         except Exception as e:
-<<<<<<< HEAD
-            logger.error(f"DOCX Redlining failed: {str(e)}")
-            return False
-
-    def fill_pdf_form(self, input_path: str, output_path: str, field_data: Dict[str, Any]) -> bool:
-=======
             logger.error(f"DOCX Redlining failed: {e!s}")
             return False
 
     def fill_pdf_form(self, input_path: str, output_path: str, field_data: dict[str, Any]) -> bool:
->>>>>>> restoration-KR-Rage-Figma-v2.0
         """
         Fills Acrobat Forms (AcroForms) in a PDF.
         """
@@ -141,11 +94,7 @@ class DocumentIntelligenceService:
             reader = PdfReader(input_path)
             writer = PdfWriter()
             writer.append(reader)
-<<<<<<< HEAD
-            
-=======
 
->>>>>>> restoration-KR-Rage-Figma-v2.0
             fields = reader.get_fields()
             if not fields:
                 logger.warning("No fillable fields found in PDF.")
@@ -154,19 +103,11 @@ class DocumentIntelligenceService:
             updates = {}
             for field_name, value in field_data.items():
                 if field_name in fields:
-<<<<<<< HEAD
-                    field_type = fields[field_name].get('/FT')
-                    
-                    if field_type == '/Btn': # Checkbox
-                        if isinstance(value, bool):
-                            updates[field_name] = '/Yes' if value else '/Off'
-=======
                     field_type = fields[field_name].get("/FT")
 
                     if field_type == "/Btn": # Checkbox
                         if isinstance(value, bool):
                             updates[field_name] = "/Yes" if value else "/Off"
->>>>>>> restoration-KR-Rage-Figma-v2.0
                         else:
                             updates[field_name] = value
                     else: # Text
@@ -179,11 +120,7 @@ class DocumentIntelligenceService:
                 writer.write(f)
             return True
         except Exception as e:
-<<<<<<< HEAD
-            logger.error(f"PDF Filling failed: {str(e)}")
-=======
             logger.error(f"PDF Filling failed: {e!s}")
->>>>>>> restoration-KR-Rage-Figma-v2.0
             return False
 
 class _DocxXmlEditor:
@@ -191,22 +128,14 @@ class _DocxXmlEditor:
     def __init__(self, xml_path: Path, author: str):
         self.xml_path = xml_path
         self.author = author
-<<<<<<< HEAD
-        with open(self.xml_path, 'r', encoding='utf-8') as f:
-=======
         with open(self.xml_path, encoding="utf-8") as f:
->>>>>>> restoration-KR-Rage-Figma-v2.0
             self.dom = minidom.parseString(f.read())
 
     def find_run_containing_text(self, text: str):
         text_nodes = self.dom.getElementsByTagName("w:t")
         for node in text_nodes:
             if node.firstChild and node.firstChild.nodeValue and text in node.firstChild.nodeValue:
-<<<<<<< HEAD
-                return node.parentNode 
-=======
                 return node.parentNode
->>>>>>> restoration-KR-Rage-Figma-v2.0
         return None
 
     def apply_tracked_change(self, run_node, original_text: str, new_text: str):
@@ -243,9 +172,5 @@ class _DocxXmlEditor:
         paragraph.insertBefore(del_node, ins_node)
 
     def save(self):
-<<<<<<< HEAD
-        with open(self.xml_path, 'w', encoding='utf-8') as f:
-=======
         with open(self.xml_path, "w", encoding="utf-8") as f:
->>>>>>> restoration-KR-Rage-Figma-v2.0
             f.write(self.dom.toxml())

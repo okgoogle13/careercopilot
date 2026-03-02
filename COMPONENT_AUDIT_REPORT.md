@@ -17,11 +17,7 @@ The following components are the most imported across the codebase. Ensuring the
 | **Analysis** | `frontend/src/features/analysis/Analysis.tsx` | 26 | 658 | No | ❌ | ❌ |
 | **Settings** | `frontend/src/features/settings/Settings.tsx` | 18 | 221 | Yes | ❌ | ❌ |
 | **Pebble** | `frontend/src/components/ui/Pebble.tsx` | 15 | 312 | Yes | ❌ | ❌ |
-<<<<<<< HEAD
-| **NorthcoteButton** | `frontend/src/components/ui/NorthcoteButton.tsx` | 11 | 171 | Yes | ❌ | ❌ |
-=======
 | **kerala-rageButton** | `frontend/src/components/ui/kerala-rageButton.tsx` | 11 | 171 | Yes | ❌ | ❌ |
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 ---
 
@@ -40,19 +36,11 @@ These components are specifically flagged as `migrated` in `ui_package` and use 
 ---
 
 ## 3. Design Token Integration
-<<<<<<< HEAD
-The following strategic components are driving the "Northcote" design language via design tokens:
-- `Pebble.tsx` (Core Primitive)
-- `Stone.tsx` (Layout/Card Primitive)
-- `Leaf.tsx` (Utility Primitive)
-- `NorthcoteButton.tsx` (Main Action Component)
-=======
 The following strategic components are driving the "kerala-rage" design language via design tokens:
 - `Pebble.tsx` (Core Primitive)
 - `Stone.tsx` (Layout/Card Primitive)
 - `Leaf.tsx` (Utility Primitive)
 - `kerala-rageButton.tsx` (Main Action Component)
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 ---
 

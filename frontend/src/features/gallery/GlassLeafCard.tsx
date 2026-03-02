@@ -20,9 +20,9 @@ const GlassLeafCard = React.forwardRef<HTMLDivElement, GlassLeafCardProps>(
         };
 
         const bgOpacity = {
-            light: mode === 'gallery' ? 'bg-surface-gallery-glass-medium/60' : 'bg-surface-laboratory-glass-medium/60',
-            medium: mode === 'gallery' ? 'bg-surface-gallery-glass-medium/75' : 'bg-surface-laboratory-glass-medium/80',
-            heavy: mode === 'gallery' ? 'bg-surface-gallery-glass-medium/90' : 'bg-surface-laboratory-glass-medium/90',
+            light: mode === 'KrDark' ? 'bg-surface-gallery-glass-medium/60' : 'bg-surface-laboratory-glass-medium/60',
+            medium: mode === 'KrDark' ? 'bg-surface-gallery-glass-medium/75' : 'bg-surface-laboratory-glass-medium/80',
+            heavy: mode === 'KrDark' ? 'bg-surface-gallery-glass-medium/90' : 'bg-surface-laboratory-glass-medium/90',
         };
 
         return (
@@ -32,14 +32,14 @@ const GlassLeafCard = React.forwardRef<HTMLDivElement, GlassLeafCardProps>(
                     'relative overflow-hidden border',
                     blurIntensity[intensity],
                     bgOpacity[intensity],
-                    mode === 'gallery'
+                    mode === 'KrDark'
                         ? 'border-white/10'
                         : 'border-white/5',
                     className
                 )}
                 style={{
-                    borderRadius: mode === 'gallery' ? 'var(--radius-leaf)' : '12px',
-                    boxShadow: mode === 'gallery'
+                    borderRadius: mode === 'KrDark' ? 'var(--radius-leaf)' : '12px',
+                    boxShadow: mode === 'KrDark'
                         ? '0 8px 32px rgba(20, 18, 16, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
                         : '0 4px 24px rgba(20, 18, 16, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05)',
                 }}
@@ -54,14 +54,14 @@ const GlassLeafCard = React.forwardRef<HTMLDivElement, GlassLeafCardProps>(
                 <div
                     className="absolute inset-0 pointer-events-none"
                     style={{
-                        background: mode === 'gallery'
+                        background: mode === 'KrDark'
                             ? 'linear-gradient(135deg, rgba(212, 168, 75, 0.1) 0%, transparent 50%, rgba(196, 92, 75, 0.05) 100%)'
                             : 'linear-gradient(135deg, rgba(107, 158, 122, 0.08) 0%, transparent 50%, rgba(138, 136, 149, 0.05) 100%)',
                     }}
                 />
 
                 {/* Leaf-shaped highlight (top-left corner) */}
-                {mode === 'gallery' && (
+                {mode === 'KrDark' && (
                     <motion.div
                         className="absolute -top-12 -left-12 w-32 h-32 rounded-full opacity-20 pointer-events-none"
                         style={{
@@ -89,7 +89,7 @@ const GlassLeafCard = React.forwardRef<HTMLDivElement, GlassLeafCardProps>(
                 <div
                     className="absolute bottom-0 left-0 right-0 h-px"
                     style={{
-                        background: mode === 'gallery'
+                        background: mode === 'KrDark'
                             ? 'linear-gradient(90deg, transparent, rgba(212, 168, 75, 0.5), transparent)'
                             : 'linear-gradient(90deg, transparent, rgba(138, 136, 149, 0.3), transparent)',
                     }}

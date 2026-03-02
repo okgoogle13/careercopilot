@@ -1,15 +1,8 @@
 """User models for authentication and profiles."""
 
-<<<<<<< HEAD
-from datetime import datetime
-from typing import TYPE_CHECKING, Any, Dict, List, Optional
-
-from sqlalchemy import JSON, ForeignKey, String
-=======
 from typing import TYPE_CHECKING
 
 from sqlalchemy import JSON, String
->>>>>>> restoration-KR-Rage-Figma-v2.0
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from .base import Base, BaseMixin
@@ -29,24 +22,6 @@ class User(Base, BaseMixin):
 
     email: Mapped[str] = mapped_column(String(255), unique=True, nullable=False, index=True)
     name: Mapped[str] = mapped_column(String(255), nullable=False)
-<<<<<<< HEAD
-    career_transition_from: Mapped[Optional[str]] = mapped_column(String(100), nullable=True)
-    career_transition_to: Mapped[Optional[str]] = mapped_column(String(100), nullable=True)
-    location: Mapped[Optional[str]] = mapped_column(String(100), nullable=True)
-    target_roles: Mapped[List[str]] = mapped_column(JSON, default=list)
-    salary_range: Mapped[Dict[str, int]] = mapped_column(JSON, default=dict)
-
-    # Relationships
-    jobs: Mapped[List["Job"]] = relationship("Job", back_populates="user")
-    applications: Mapped[List["Application"]] = relationship("Application", back_populates="user")
-    ai_interactions: Mapped[List["AIInteraction"]] = relationship(
-        "AIInteraction", back_populates="user"
-    )
-    agent_sessions: Mapped[List["AgentSession"]] = relationship(
-        "AgentSession", back_populates="user"
-    )
-    cache_entries: Mapped[List["Cache"]] = relationship("Cache", back_populates="user")
-=======
     career_transition_from: Mapped[str | None] = mapped_column(String(100), nullable=True)
     career_transition_to: Mapped[str | None] = mapped_column(String(100), nullable=True)
     location: Mapped[str | None] = mapped_column(String(100), nullable=True)
@@ -63,7 +38,6 @@ class User(Base, BaseMixin):
         "AgentSession", back_populates="user"
     )
     cache_entries: Mapped[list["Cache"]] = relationship("Cache", back_populates="user")
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
     def __repr__(self) -> str:
         return f"<User {self.email}>"

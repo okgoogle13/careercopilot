@@ -28,13 +28,8 @@
 
 ```json
 "flash-sidekick": {
-<<<<<<< HEAD
-  "command": "/Users/okgoogle13/Desktop/careercopilot/.venv/bin/python3",
-  "args": ["/Users/okgoogle13/Desktop/careercopilot/servers/flash_sidekick.py"],
-=======
   "command": "/Users/okgoogle13/Projects/careercopilot/.venv/bin/python3",
   "args": ["/Users/okgoogle13/Projects/careercopilot/servers/flash_sidekick.py"],
->>>>>>> restoration-KR-Rage-Figma-v2.0
   "env": {
     "GEMINI_API_KEY": "${GEMINI_API_KEY}"
   }

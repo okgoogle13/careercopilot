@@ -19,11 +19,7 @@ export function StyleGuide() {
       <div className="animate-in slide-in-from-top-4 fade-in duration-700 ease-spring-decelerate">
         <PageHeader
           title="Living Style Guide"
-<<<<<<< HEAD
-          description="The source of truth for the  aesthetic"
-=======
           description="The source of truth for the KeralaRage KrSolidarity aesthetic"
->>>>>>> restoration-KR-Rage-Figma-v2.0
           highlightedWord="Style Guide"
         />
       </div>
@@ -49,11 +45,7 @@ export function StyleGuide() {
               .rounded-leaf
             </code>
             <p className="mt-4 text-on-surface-variant">
-<<<<<<< HEAD
-              Organic, growing asymmetry. Used for content containers, cards, and sections that feel
-=======
               [DEPRECATED_STYLE], growing asymmetry. Used for content containers, cards, and sections that feel
->>>>>>> restoration-KR-Rage-Figma-v2.0
               "alive."
               <br />
               <span className="text-xs opacity-70 font-mono">Radius: 32px 12px 32px 12px</span>
@@ -73,11 +65,7 @@ export function StyleGuide() {
               .rounded-tech
             </code>
             <p className="mt-4 text-on-surface-variant">
-<<<<<<< HEAD
-              Digital precision with a slight organic touch. Used for data-heavy panes, settings,
-=======
               Digital precision with a slight [DEPRECATED_STYLE] touch. Used for data-heavy panes, settings,
->>>>>>> restoration-KR-Rage-Figma-v2.0
               and tools.
               <br />
               <span className="text-xs opacity-70 font-mono">Radius: 24px 4px 24px 20px</span>
@@ -181,11 +169,7 @@ export function StyleGuide() {
               Display Large (Weight 900)
             </p>
             <h1 className="text-display-large font-black transition-all duration-300 group-hover:tracking-wider cursor-default">
-<<<<<<< HEAD
-              
-=======
               KeralaRage KrSolidarity
->>>>>>> restoration-KR-Rage-Figma-v2.0
             </h1>
           </div>
           <div className="group">

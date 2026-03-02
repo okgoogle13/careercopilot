@@ -113,8 +113,4 @@ export const CustomSteps: Story = {
         steps: ['Applied', 'Phone Screen', 'Take-Home', 'Technical', 'Final', 'Offer'],
         onUpdateStatus: () => console.log('Update status clicked'),
     },
-<<<<<<< HEAD
 };
-=======
-};
->>>>>>> restoration-KR-Rage-Figma-v2.0

@@ -9,11 +9,7 @@
 ### 1. Claude Desktop Config (`~/.claude/claude_desktop_config.json`)
 Added:
 - **flash-sidekick** MCP server (already configured)
-<<<<<<< HEAD
-- **design-system-sidekick** MCP server (NEW—for Northcote validation)
-=======
 - **design-system-sidekick** MCP server (NEW—for kerala-rage validation)
->>>>>>> restoration-KR-Rage-Figma-v2.0
 - `customInstructions` field with routing policy for both
 
 **Key points:**
@@ -28,11 +24,7 @@ Added detailed `customInstructions` for Claude Code with:
 - Flash-sidekick decision matrix and examples
 - Design-system-sidekick usage patterns
 - Token savings percentages and ratios
-<<<<<<< HEAD
-- Gallery vs. Laboratory mode guidance
-=======
 - kr-dark vs. kr-dark mode guidance
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 **Key points:**
 - Provides specific Task syntax examples
@@ -43,11 +35,7 @@ Added detailed `customInstructions` for Claude Code with:
 
 ### 3. MCP Servers Registered
 - ✅ **flash-sidekick** — General analysis, code quality, documentation
-<<<<<<< HEAD
-- ✅ **design-system-sidekick** — Northcote Curio validation & asset orchestration
-=======
 - ✅ **design-system-sidekick** — kerala-rage kr-solidarity validation & asset orchestration
->>>>>>> restoration-KR-Rage-Figma-v2.0
 - ✅ Existing policies:
   - `.claude/mcp-usage-policy.md` — Comprehensive decision matrix
   - `CLAUDE.md` — MCP task routing table
@@ -67,11 +55,7 @@ When you ask me to:
 **Design-System-Sidekick (Design Tasks)**
 When you ask me to:
 1. **Validate design assets** → `validate_asset_compliance` tool
-<<<<<<< HEAD
-2. **Check Northcote compliance** → Design-system-sidekick MCP
-=======
 2. **Check kerala-rage compliance** → Design-system-sidekick MCP
->>>>>>> restoration-KR-Rage-Figma-v2.0
 3. **Generate component scaffolding** → `generate_implementation_package` tool
 4. **Create design implementation packages** → Design-system-sidekick
 
@@ -105,11 +89,7 @@ To verify the setup:
 grep "customInstructions" ~/.claude/claude_desktop_config.json
 
 # Check project config has customInstructions
-<<<<<<< HEAD
-grep "customInstructions" /Users/okgoogle13/Desktop/careercopilot/.claude/settings.local.json
-=======
 grep "customInstructions" /Users/okgoogle13/Projects/careercopilot/.claude/settings.local.json
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 # Verify flash-sidekick is enabled in Claude Desktop
 grep -A 10 '"flash-sidekick"' ~/.claude/claude_desktop_config.json

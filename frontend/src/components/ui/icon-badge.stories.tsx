@@ -49,8 +49,4 @@ export const Custom: Story = {
         color: 'text-red-400',
         background: 'bg-red-400/10',
     },
-<<<<<<< HEAD
 };
-=======
-};
->>>>>>> restoration-KR-Rage-Figma-v2.0

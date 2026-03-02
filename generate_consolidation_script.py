@@ -21,11 +21,7 @@ script_lines = [
     "mkdir -p \"$BACKUP_DIR\"",
     "cp -r assets \"$BACKUP_DIR/assets_canonical\" 2>/dev/null || echo 'No canonical assets to backup'",
     "cp -r \"frontend/public/assets\" \"$BACKUP_DIR/frontend_public\" 2>/dev/null || echo 'No frontend assets to backup'",
-<<<<<<< HEAD
-    "cp -r \"Curio images phase 3\" \"$BACKUP_DIR/phase3_source\" 2>/dev/null || echo 'No phase 3 assets to backup'",
-=======
     "cp -r \"[DEPRECATED_STYLE] images phase 3\" \"$BACKUP_DIR/phase3_source\" 2>/dev/null || echo 'No phase 3 assets to backup'",
->>>>>>> restoration-KR-Rage-Figma-v2.0
     "",
     "# 2. Structure Phase",
     "echo 'Ensuring canonical directory structure...'",

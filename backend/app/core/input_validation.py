@@ -5,11 +5,7 @@ Prevents prompt injection and ensures safe processing of user inputs.
 
 import html
 import re
-<<<<<<< HEAD
-from typing import Any, Dict, Optional
-=======
 from typing import Any
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 from pydantic import BaseModel
 
@@ -24,12 +20,6 @@ class SanitizedInput(BaseModel):
     original_length: int
     sanitized_content: str
     warnings: list[str] = []
-<<<<<<< HEAD
-    
-    class Config:
-        arbitrary_types_allowed = True
-=======
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 
 class InputSanitizer:
@@ -59,11 +49,7 @@ class InputSanitizer:
     HTML_TAGS = re.compile(r"<[^>]+>")
 
     @classmethod
-<<<<<<< HEAD
-    def sanitize_text_input(cls, text: str, max_length: Optional[int] = None) -> SanitizedInput:
-=======
     def sanitize_text_input(cls, text: str, max_length: int | None = None) -> SanitizedInput:
->>>>>>> restoration-KR-Rage-Figma-v2.0
         """
         Sanitize text input for AI processing.
 
@@ -125,11 +111,7 @@ class InputSanitizer:
         )
 
     @classmethod
-<<<<<<< HEAD
-    def sanitize_dict_input(cls, data: Dict[str, Any]) -> Dict[str, Any]:
-=======
     def sanitize_dict_input(cls, data: dict[str, Any]) -> dict[str, Any]:
->>>>>>> restoration-KR-Rage-Figma-v2.0
         """
         Recursively sanitize dictionary values.
 
@@ -139,11 +121,7 @@ class InputSanitizer:
         Returns:
             Dictionary with sanitized values
         """
-<<<<<<< HEAD
-        sanitized: Dict[str, Any] = {}
-=======
         sanitized = {}
->>>>>>> restoration-KR-Rage-Figma-v2.0
         for key, value in data.items():
             if isinstance(value, str):
                 try:
@@ -159,13 +137,8 @@ class InputSanitizer:
             elif isinstance(value, list):
                 sanitized[key] = [
                     (
-<<<<<<< HEAD
-                        cls.sanitize_text_input(str(item)).sanitized_content
-                        if isinstance(item, str) or item is None
-=======
                         cls.sanitize_text_input(item).sanitized_content
                         if isinstance(item, str)
->>>>>>> restoration-KR-Rage-Figma-v2.0
                         else item
                     )
                     for item in value
@@ -175,11 +148,7 @@ class InputSanitizer:
         return sanitized
 
     @classmethod
-<<<<<<< HEAD
-    def create_safe_prompt(cls, template: str, **kwargs: Any) -> str:
-=======
     def create_safe_prompt(cls, template: str, **kwargs) -> str:
->>>>>>> restoration-KR-Rage-Figma-v2.0
         """
         Create a safe prompt by sanitizing all input variables.
 
@@ -200,12 +169,7 @@ class InputSanitizer:
                 sanitized = cls.sanitize_text_input(value)
                 safe_kwargs[key] = sanitized.sanitized_content
             elif isinstance(value, dict):
-<<<<<<< HEAD
-                # Convert dict to string representation for safety
-                safe_kwargs[key] = str(cls.sanitize_dict_input(value))
-=======
                 safe_kwargs[key] = cls.sanitize_dict_input(value)
->>>>>>> restoration-KR-Rage-Figma-v2.0
             else:
                 safe_kwargs[key] = str(value)  # Convert to string safely
 
@@ -239,19 +203,5 @@ def sanitize_job_description(job_description: str) -> str:
 
 
 def create_analysis_prompt(template: str, resume: str, job_desc: str) -> str:
-<<<<<<< HEAD
-    """
-    Create a safe analysis prompt with sanitized inputs.
-    
-    Args:
-        template: The prompt template string with placeholders
-        resume: The resume text to be sanitized
-        job_desc: The job description text to be sanitized
-        
-    Returns:
-        A sanitized prompt string with the provided inputs
-    """
-=======
     """Create a safe analysis prompt with sanitized inputs."""
->>>>>>> restoration-KR-Rage-Figma-v2.0
     return InputSanitizer.create_safe_prompt(template, resume_text=resume, job_description=job_desc)

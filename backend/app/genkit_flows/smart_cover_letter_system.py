@@ -148,13 +148,13 @@ As an expert cover letter strategist and career coach, create a highly personali
 compelling cover letter that demonstrates deep understanding of the role and company.
 
 CANDIDATE PROFILE:
-{json.dumps(sanitized_profile, separators=(\',\', \':\'))}
+{json.dumps(sanitized_profile, separators=(',', ':'))}
 
 JOB DESCRIPTION:
 {sanitized_job.sanitized_content}
 
 COMPANY INFORMATION:
-{json.dumps(sanitized_company, separators=(\',\', \':\')) if sanitized_company else "Limited company information available"}
+{json.dumps(sanitized_company, separators=(',', ':')) if sanitized_company else "Limited company information available"}
 
 STYLE: {style}
 FORMAT: {format_type}
@@ -384,10 +384,10 @@ JOB DESCRIPTION:
 {sanitized_job.sanitized_content}
 
 CANDIDATE PROFILE:
-{json.dumps(sanitized_profile, separators=(\',\', \':\'))}
+{json.dumps(sanitized_profile, separators=(',', ':'))}
 
 COMPANY INSIGHTS:
-{json.dumps(sanitized_insights, separators=(\',\', \':\')) if sanitized_insights else "No additional company insights available"}
+{json.dumps(sanitized_insights, separators=(',', ':')) if sanitized_insights else "No additional company insights available"}
 
 OPTIMIZATION ANALYSIS:
 
@@ -492,13 +492,13 @@ As a comprehensive application strategy specialist, create a complete suite
 of personalized application materials in multiple formats for this opportunity.
 
 CANDIDATE PROFILE:
-{json.dumps(sanitized_profile, separators=(\',\', \':\'))}
+{json.dumps(sanitized_profile, separators=(',', ':'))}
 
 JOB DESCRIPTION:
 {sanitized_job.sanitized_content}
 
 COMPANY INSIGHTS:
-{json.dumps(sanitized_insights, separators=(\',\', \':\')) if sanitized_insights else "Limited company information available"}
+{json.dumps(sanitized_insights, separators=(',', ':')) if sanitized_insights else "Limited company information available"}
 
 MULTI-FORMAT SUITE REQUIREMENTS:
 
