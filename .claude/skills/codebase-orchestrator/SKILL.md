@@ -26,7 +26,7 @@ Use Codebase-Orchestrator when you need to:
 - **Coordinate multi-server orchestration** to avoid token bloat from redundant queries
 - **Evaluate component migration progress** from Material 3 to Northcote metaphors
 - **Track design system health** (what percentage of components follow Northcote standards?)
-- **Delegate next-step planning** to IDE agents (Claude Code, Codex CLI) with comprehensive context
+- **Delegate next-step planning** to IDE agents (Claude Code and similar local CLIs) with comprehensive context
 
 ## How It Works
 

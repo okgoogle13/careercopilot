@@ -2,7 +2,7 @@
 
 Career Copilot is an AI-powered job application assistant built with React, FastAPI, Google Genkit, and Firestore. This document guides AI models and coding agents on project conventions, workflows, dependencies, code style, testing, security, and boundaries.
 
-**Note**: This file complements README.md by providing detailed context for AI agents and coding assistants across multiple platforms (GitHub Copilot, OpenAI Codex, Claude, etc.).
+**Note**: This file complements README.md by providing detailed context for AI agents and coding assistants across multiple platforms (GitHub Copilot, Claude Code, and other compatible agents).
 
 ## Quick Commands
 
@@ -474,16 +474,15 @@ Include timing in agent metadata for monitoring.
 - **Performance problems**: Profile with monitoring; avoid speculative optimizations
 - **Firestore/auth issues**: Use emulator locally; check security rules
 
-## Agent & Codex Compatibility
+## Agent Compatibility
 
 This AGENTS.md file is compatible with:
 
 - **GitHub Copilot** – Provides context for Copilot chat and inline suggestions
-- **OpenAI Codex** – Structured per Codex AGENTS.md conventions with environment setup, testing, and style guidance
 - **Claude Code** – Full AI agent support with boundary specifications and workflow documentation
 - **agents.md standard** – Follows the open agents.md specification for cross-platform compatibility
 
-**For Codex users**: The document is organized for optimal parsing. Run tests with commands listed in "Quick Commands" section. Update this file if project structure or conventions change.
+**For Claude Code users**: The document is organized for optimal parsing. Run tests with commands listed in "Quick Commands" section. Update this file if project structure or conventions change.
 
 ## Domain Knowledge: Community Services
 

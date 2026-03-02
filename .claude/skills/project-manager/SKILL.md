@@ -1,6 +1,6 @@
 ---
 name: project-manager
-description: Orchestrate multi-phase projects across kickoff, execution, phase gates, and delivery. Use when Codex needs to build or update a project plan, manage milestones and dependencies, coordinate multiple teams or specialist skills, assess cross-phase blockers and risks, or produce project-level status dashboards.
+description: Orchestrate multi-phase projects across kickoff, execution, phase gates, and delivery. Use when Claude Code needs to build or update a project plan, manage milestones and dependencies, coordinate multiple teams or specialist skills, assess cross-phase blockers and risks, or produce project-level status dashboards.
 ---
 
 # Project Manager

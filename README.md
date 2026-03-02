@@ -56,7 +56,8 @@ python3 run_copilot.py
 ### 1. Prerequisites
 - Node.js v18+ & Yarn 4
 - Python 3.12+ & pip
-- Docker Desktop (Optional, for containerized run)
+- Firebase CLI (`npm install -g firebase-tools`)
+- Vercel account (for deployment) → [vercel.com](https://vercel.com)
 
 ### 2. Installation
 
@@ -144,13 +145,6 @@ cd chrome-extension
 yarn dev
 # Load unpacked from 'chrome-extension/dist' in chrome://extensions
 ```
-```
-
-### Option B: Docker Compose
-```bash
-docker compose up --build
-```
-
 ---
 
 ## 🧪 Testing Scope

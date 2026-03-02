@@ -13,10 +13,8 @@ const jobListingExtractor = new JobListingExtractor();
 
 // Core services
 export {uploadAndTag} from "./uploadAndTag";
-// TODO: Implement these modules or remove references entirely
-// See .temp-functions-investigation-handover.md for decision on these functions
-// export {extractAndSave} from "./extractAndSave";
-// export {healthCheck} from "./healthCheck";
+export {extractAndSave} from "./extractAndSave";
+export {healthCheck} from "./healthCheck";
 
 
 // Background processing functions
