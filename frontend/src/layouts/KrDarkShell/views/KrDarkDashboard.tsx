@@ -9,8 +9,8 @@ import {
 /**
  * KrDarkDashboard (Hi-Fi)
  * 
- * tactical central command.
- * Features high-stasis metric cards, a simulated "Live Archive" feed, and [DEPRECATED_STYLE] heartbeat motifs.
+ * Tactical central command.
+ * Features high-stasis metric cards, a simulated "Live Archive" feed, and heartbeat motifs.
  */
 
 const ValueReveal = ({ value, shouldReduceMotion }: { value: string, shouldReduceMotion: boolean }) => {
@@ -104,7 +104,7 @@ export const KrDarkDashboard: React.FC = () => {
         className="w-full"
       >
         <SolidarityCard className="w-full p-12 relative overflow-hidden bg-asphalt-black group">
-          <div className="flex justify-between items-center mb-8 border-b border-white/5 pb-6">
+          <div className="flex justify-between items-center mb-8 border-b border-surface-KrDark-concrete-grey-high/20 pb-6">
              <div className="flex items-center gap-4">
                 <div className="w-2 h-2 rounded-full bg-ink-gold animate-pulse" />
                 <h3 className="font-proclamation text-2xl uppercase text-paper-white/80">Live Archive Stream</h3>
@@ -116,7 +116,7 @@ export const KrDarkDashboard: React.FC = () => {
           
           <div className="space-y-6">
              {[1, 2, 3].map(i => (
-               <div key={i} className="flex gap-8 items-center border-b border-white/5 pb-4 last:border-0 opacity-40 hover:opacity-100 transition-opacity">
+               <div key={i} className="flex gap-8 items-center border-b border-surface-KrDark-concrete-grey-high/20 pb-4 last:border-0 opacity-40 hover:opacity-100 transition-opacity">
                   <span className="font-mono text-[10px] text-ink-gold">0{i}_REG</span>
                   <p className="font-body text-base text-paper-white/60 italic">"Historical resistance record {i} successfully extracted and aligned with current mission parameters."</p>
                   <span className="ml-auto font-mono text-[9px] text-paper-white/20">2m ago</span>
@@ -132,7 +132,7 @@ export const KrDarkDashboard: React.FC = () => {
 
       {/* Deployment Metadata */}
       <div className="flex flex-col items-center gap-4 opacity-10">
-         <div className="h-px w-64 bg-white/5" />
+         <div className="h-px w-64 bg-surface-KrDark-concrete-grey-high/20" />
          <span className="font-mono text-[8px] uppercase tracking-[0.5em]">KERALA_RAGE_CORE // CMD_CTR_ENABLE</span>
       </div>
     </div>

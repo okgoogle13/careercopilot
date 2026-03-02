@@ -47,7 +47,7 @@ export const KrDarkAuth: React.FC = () => {
               <input 
                 type="text" 
                 placeholder="PROX_IDENTIFIER" 
-                className="w-full bg-asphalt-black/50 border border-white/5 rounded-stone px-6 py-4 font-mono text-sm text-paper-white focus:outline-none focus:border-ink-gold/40 transition-colors"
+                className="w-full bg-asphalt-black/50 border border-surface-KrDark-concrete-grey-high/20 rounded-stone px-6 py-4 font-mono text-sm text-paper-white focus:outline-none focus:border-ink-gold/40 transition-colors"
               />
             </div>
 
@@ -56,14 +56,14 @@ export const KrDarkAuth: React.FC = () => {
               <input 
                 type="password" 
                 placeholder="••••••••" 
-                className="w-full bg-asphalt-black/50 border border-white/5 rounded-stone px-6 py-4 font-mono text-sm text-paper-white focus:outline-none focus:border-ink-gold/40 transition-colors"
+                className="w-full bg-asphalt-black/50 border border-surface-KrDark-concrete-grey-high/20 rounded-stone px-6 py-4 font-mono text-sm text-paper-white focus:outline-none focus:border-ink-gold/40 transition-colors"
               />
             </div>
 
             <ActionButton variant="primary" label="ESTABLISH CONNECTION" className="w-full py-4 text-xs tracking-[0.2em]" />
           </div>
 
-          <div className="pt-6 border-t border-white/5 w-full text-center">
+          <div className="pt-6 border-t border-surface-KrDark-concrete-grey-high/20 w-full text-center">
             <p className="font-body text-xs text-paper-white/30 italic">
               "Collective security through individual defiance."
             </p>

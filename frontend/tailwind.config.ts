@@ -56,77 +56,112 @@ const config: Config = {
 
       // ============================================
       colors: {
-        // Surfaces - Shared
-        'asphalt-black': getValue('color.semantic.asphalt-black'),
+        // ============================================
+        // KERALA RAGE SEMANTIC COLORS (--sys-color-*)
+        // ============================================
 
-        // Surfaces - kr-dark Mode
-        // Note: Mapping closest available semantic tokens since exact kr-dark/lab split
-        // structure might differ in the JSON source. Using robust fallbacks.
-        'charcoal-bark': getValue('color.semantic.asphalt-black'), // Fallback map
-        // 'concrete-grey': getValue('color.families.concrete-grey.base'), // Removed duplicate
-        'concrete-grey-high': getValue('color.families.concrete-grey.light'),
-        'concrete-grey-highest': getValue('color.families.concrete-grey.lightest'),
+        // Charcoal Background - Foundational canvas
+        'charcoal-background': getValue('sys.color.charcoalBackground.base.$value'),
 
-        // Surfaces - kr-dark Mode
-        'charcoal-slate': '#16141A', // Retaining specific hex if not in token.json
+        // Solidarity Red - Primary CTA
+        'solidarity-red': getValue('sys.color.solidarityRed.base.$value'),
+
+        // Charcoal Red - Errors & warnings
+        'kr-charcoal-red': getValue('sys.color.kr-charcoalRed.base.$value'),
+        'clinical-alert': getValue('sys.color.kr-charcoalRed.base.$value'), // Alias for compatibility
+
+        // Activist Smoke Green - Landscape accents
+        'activist-smoke-green': getValue('sys.color.kr-activistSmokeGreen.base.$value'),
+        'kr-activist-smoke-green': getValue('sys.color.kr-activistSmokeGreen.base.$value'),
+
+        // Signal Green - Accent chips
+        'signal-green': getValue('sys.color.signalGreen.base.$value'),
+
+        // Ink Gold - Halo disks
+        'ink-gold': getValue('sys.color.inkGold.base.$value'),
+        'kr-ink-gold': getValue('sys.color.inkGold.base.$value'),
+
+        // Stencil Yellow - Attention markers
+        'stencil-yellow': getValue('sys.color.stencilYellow.base.$value'),
+
+        // Worker Ash - Primary readable text
+        'worker-ash': getValue('sys.color.worker-ash.base.$value'),
+
+        // Solidarity Smoke Orange - Portrait warmth
+        'solidarity-smoke-orange': getValue('sys.color.solidaritySmokeOrange.base.$value'),
+
+        // Lab Wren Metal Blue - Ripples & accents
+        'lab-wren-metal-blue': getValue('sys.color.labWrenMetalBlue.base.$value'),
+
+        // Asphalt Black - Street textures
+        'asphalt-black': getValue('sys.color.asphaltBlack.base.$value'),
+
+        // Concrete Grey - Borders & urban textures
+        'concrete-grey': getValue('sys.color.concreteGrey.base.$value'),
+
+        // Gum Leaf Green - Flora accents
+        'gum-leaf-green': getValue('sys.color.gumLeafGreen.base.$value'),
+
+        // Ochre Earth - Warm earth tones
+        'ochre-earth': getValue('sys.color.ochreEarth.base.$value'),
+
+        // Paper White - High-contrast text
+        'paper-white': getValue('sys.color.paperWhite.base.$value'),
+
+        // ============================================
+        // LEGACY COMPATIBILITY ALIASES
+        // ============================================
+
+        // Surfaces (charcoal background variants)
+        'charcoal-bark': getValue('sys.color.asphaltBlack.base.$value'),
+        'charcoal-slate': '#16141A', // Legacy fallback
         'slate-smoke': '#252230',
         'slate-smoke-high': '#32303D',
         'slate-smoke-highest': '#3F3D4A',
 
-        // Primary - Wattle Gold
-        'wattle-shadow': getValue('color.families.wattle-gold.darkest'),
-        'wattle-gold': getValue('color.semantic.wattle-gold'),
-        'wattle-glow': getValue('color.families.wattle-gold.light'),
-        'wattle-bloom': getValue('color.families.wattle-gold.lightest'),
-        'wattle-gold-container': 'rgba(212, 168, 75, 0.12)', // Hardcoded transparency until utility available
-        'on-primary': '#1D3314',
+        // Concrete grey variants (from steps)
+        'concrete-grey-high': '#C4BDB3', // From concreteGrey steps
+        'concrete-grey-highest': '#E0DBD3',
+        'flannel-dim': '#7D7669',
+        'flannel-faint': '#5C564E',
 
-        // Tertiary - [DEPRECATED_STYLE] Red
-        '[DEPRECATED_STYLE]-stem': getValue('color.families.[DEPRECATED_STYLE]-red.darkest'),
-        '[DEPRECATED_STYLE]-red': getValue('color.semantic.[DEPRECATED_STYLE]-red'),
-        '[DEPRECATED_STYLE]-glow': getValue('color.families.[DEPRECATED_STYLE]-red.light'),
-        '[DEPRECATED_STYLE]-bloom': getValue('color.families.[DEPRECATED_STYLE]-red.lightest'),
-        '[DEPRECATED_STYLE]-container': 'rgba(196, 92, 75, 0.15)',
+        // Paper white variants (from steps)
+        'paper-white-dim': '#D4CEC3',
+        'paper-white-aged': '#B8B0A3',
 
-        // Status Colors (Hardcoded fallbacks if completely missing from token.json)
-        'ghost-gum': '#7A9E82',
-        'ghost-gum-container': 'rgba(122, 158, 130, 0.15)',
-        'native-violet': '#9B8AAD',
+        // Status Colors (Kerala Rage compatible)
+        'ghost-gum': getValue('sys.color.gumLeafGreen.base.$value'), // Use gum leaf
+        'ghost-gum-container': 'rgba(107, 127, 110, 0.15)',
+        'native-violet': '#9B8AAD', // Legacy (consider removing)
         'native-violet-container': 'rgba(155, 138, 173, 0.15)',
-        'kr-flower-orange': '#D4885C',
-        'kr-flower-container': 'rgba(212, 136, 92, 0.15)',
+        'kr-flower-orange': getValue('sys.color.solidaritySmokeOrange.base.$value'), // Use smoke orange
+        'kr-flower-container': 'rgba(218, 139, 72, 0.15)',
 
-        'clinical-sage': '#6B9E7A',
-        'clinical-sage-container': 'rgba(107, 158, 122, 0.12)',
-        'clinical-alert': '#B85450',
-        'clinical-alert-container': 'rgba(184, 84, 80, 0.12)',
+        'clinical-sage': getValue('sys.color.gumLeafGreen.base.$value'),
+        'clinical-sage-container': 'rgba(107, 127, 110, 0.12)',
+        'clinical-alert-container': 'rgba(241, 72, 68, 0.12)',
         'clinical-neutral': '#8A8895',
         'clinical-neutral-container': 'rgba(138, 136, 149, 0.1)',
 
-        // Secondary - Concrete Grey
-        'concrete-grey': getValue('color.semantic.concrete-grey'),
-        'flannel-dim': getValue('color.families.concrete-grey.dark'),
-        'flannel-faint': getValue('color.families.concrete-grey.darkest'),
+        // Etching (Kerala Rage compatible)
+        'etching-line': 'rgba(218, 246, 116, 0.15)', // inkGold based
+        'etching-line-strong': 'rgba(218, 246, 116, 0.25)',
+        'etching-fill': 'rgba(218, 246, 116, 0.05)',
+        'annotation-ink': getValue('sys.color.concreteGrey.base.$value'),
 
-        // On Surface - Paper White
-        'paper-white': getValue('color.semantic.paper-white'),
-        'paper-white-dim': '#D9D4CC',
-        'paper-white-aged': '#C4BFB5',
-
-        // Etching
-        'etching-line': 'rgba(212, 190, 150, 0.15)',
-        'etching-line-strong': 'rgba(212, 190, 150, 0.25)',
-        'etching-fill': 'rgba(212, 190, 150, 0.05)',
-        'annotation-ink': '#A89F8C',
-
-        // kr-screenprint
-        'glass-kr-dark-surface': 'rgba(20, 18, 16, 0.70)',
-        'glass-kr-dark-surface-elevated': 'rgba(20, 18, 16, 0.85)',
+        // Glass effects (Kerala Rage charcoal)
+        'glass-kr-dark-surface': 'rgba(26, 26, 26, 0.70)',
+        'glass-kr-dark-surface-elevated': 'rgba(26, 26, 26, 0.85)',
         'glass-kr-dark-border': 'rgba(255, 255, 255, 0.08)',
 
-        'glass-lab-surface': 'rgba(245, 242, 235, 0.90)',
+        'glass-lab-surface': 'rgba(245, 240, 232, 0.90)',
         'glass-lab-surface-elevated': 'rgba(255, 255, 255, 0.60)',
         'glass-lab-border': 'rgba(44, 39, 35, 0.08)',
+
+        // Aboriginal Flag (restricted use - in-situ only)
+        'aboriginal-flag-red': getValue('sys.color.aboriginalFlagRed.base.$value'),
+        'aboriginal-flag-yellow': getValue('sys.color.aboriginalFlagYellow.base.$value'),
+        'aboriginal-flag-black': getValue('sys.color.aboriginalFlagBlack.base.$value'),
       },
 
       // ============================================

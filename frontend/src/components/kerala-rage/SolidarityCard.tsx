@@ -4,10 +4,10 @@ import { cn } from '@/lib/utils';
 
 /**
  * SolidarityCardProps
- * 
+ *
  * @property variant - The elevation/state of the card (standard, ghost, or active).
- * @property tone - [Hi-Fi Hook] The emotional color tone of the card.
- * @property density - [Hi-Fi Hook] The vertical rhythm/padding scale.
+ * @property tone - The emotional color tone of the card.
+ * @property density - The vertical rhythm/padding scale.
  * @property children - The content to be rendered within the card.
  */
 export interface SolidarityCardProps extends HTMLMotionProps<'div'> {
@@ -18,15 +18,17 @@ export interface SolidarityCardProps extends HTMLMotionProps<'div'> {
 }
 
 /**
- * SolidarityCard (Stone)
- * 
- * Foundational container for the Kerala Rage design system. 
- * Implements the "Stone" primitive with [DEPRECATED_STYLE] radii and viscous shadows.
- * 
- * Pattern Principles:
- * 1. Reduced-motion compliance (opacity-only fallback).
- * 2. Accessible focus-within treatment for keyboard navigation.
- * 3. TODO[asset] blocks for human/vision-agent image integration.
+ * SolidarityCard (Jar Archetype)
+ *
+ * Kerala Rage kr-solidarity card component implementing the Jar archetype.
+ * Provides semantic color token support and M3 Expressive motion physics.
+ *
+ * Design Principles:
+ * 1. Uses --sys-color-* semantic tokens (never hardcoded colors)
+ * 2. Reduced-motion compliance (opacity-only fallback)
+ * 3. Accessible focus-within treatment for keyboard navigation
+ * 4. Asymmetric border radius per Jar archetype (32px 8px 28px 12px)
+ * 5. Spring physics with viscous-breeze easing
  */
 export const SolidarityCard: React.FC<SolidarityCardProps> = ({
   variant = 'standard',
@@ -38,17 +40,18 @@ export const SolidarityCard: React.FC<SolidarityCardProps> = ({
 }) => {
   const shouldReduceMotion = useReducedMotion();
 
+  // Variant styles using semantic tokens
   const variantStyles = {
-    standard: 'bg-asphalt-black border-white/5 shadow-viscous',
-    ghost: 'bg-transparent border-ink-gold shadow-none',
-    active: 'bg-asphalt-black border-ink-gold shadow-ink-glow scale-[1.02]',
+    standard: 'border-[var(--sys-color-concreteGrey-steps-2)]/20',
+    ghost: 'bg-transparent border-[var(--sys-color-inkGold-base)]',
+    active: 'border-[var(--sys-color-inkGold-base)] scale-[1.02]',
   };
 
-  // Tone & Density Hooks (Ready for Hi-Fi mapping in Stage 2)
+  // Tone styles mapped to kerala-rage kr-solidarity tokens
   const toneStyles = {
     neutral: '',
-    success: '', // TODO[hifi]: Map to gumLeafGreen variants
-    danger: '',  // TODO[hifi]: Map to solidarityRed variants
+    success: 'border-[var(--sys-color-kr-activistSmokeGreen-base)]/40',
+    danger: 'border-[var(--sys-color-solidarityRed-base)]/40',
   };
 
   const densityStyles = {
@@ -77,9 +80,18 @@ export const SolidarityCard: React.FC<SolidarityCardProps> = ({
   return (
     <motion.div
       layout
+      style={{
+        backgroundColor: variant === 'ghost' ? 'transparent' : 'var(--sys-color-charcoalBackground-base)',
+        borderRadius: '32px 8px 28px 12px', // Jar archetype asymmetric radius
+        boxShadow: variant === 'standard'
+          ? '0 4px 16px rgba(0, 0, 0, 0.25)'
+          : variant === 'active'
+          ? '0 0 24px rgba(218, 246, 116, 0.2), 0 4px 16px rgba(0, 0, 0, 0.25)'
+          : 'none',
+      }}
       className={cn(
-        'rounded-stone border relative overflow-hidden',
-        'focus-within:ring-2 focus-within:ring-ink-gold focus-within:ring-offset-2 focus-within:ring-offset-asphalt-black',
+        'border relative overflow-hidden',
+        'focus-within:ring-2 focus-within:ring-[var(--sys-color-inkGold-base)] focus-within:ring-offset-2 focus-within:ring-offset-[var(--sys-color-charcoalBackground-base)]',
         variantStyles[variant],
         toneStyles[tone],
         densityStyles[density],
@@ -88,9 +100,9 @@ export const SolidarityCard: React.FC<SolidarityCardProps> = ({
       {...motionProps}
       {...props}
     >
-      {/* TODO[asset]: Human will replace with screenprint-grit texture asset. */}
+      {/* TODO[asset]: Replace with screenprint-grit texture asset from kr-solidarity manifest */}
       {/* <div className="absolute inset-0 pointer-events-none opacity-[0.03] bg-texture-grit" /> */}
-      
+
       <div className="relative z-10">
         {children}
       </div>

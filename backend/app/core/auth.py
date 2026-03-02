@@ -24,14 +24,15 @@ except ImportError:  # pragma: no cover - optional dependency in test/CI
 from sqlalchemy.orm import Session
 
 from app.core.database import get_db
+from app.core.secure_config import settings
 from app.models.database import User
 
 logger = logging.getLogger(__name__)
 
 # Security configuration
 # In Supabase, this is the "JWT Secret" found in Project Settings -> API
-SECRET_KEY = os.getenv("JWT_SECRET_KEY")
-ALGORITHM = "HS256"
+SECRET_KEY = settings.JWT_SECRET_KEY
+ALGORITHM = settings.ALGORITHM
 
 # JWT Bearer token scheme
 security = HTTPBearer()
@@ -87,19 +88,41 @@ async def get_current_user(
         if user_id is None:
             raise credentials_exception
 
-        # Check if user exists in our local abstract 'users' table
-        # If user logs in via Supabase but isn't in our public table yet, we might need to create them
-        # or wait for the webhook. For now, we enforce existence.
+        # Sync user with local database (Just-In-Time Provisioning)
         user = db.query(User).filter(User.id == user_id).first()
         if user is None:
-            # Optional: JIT Provisioning (Just In Time)
-            # If valid Supabase token but no user record, create one?
-            # For now, simplistic approach: raise error
-            logger.warning(f"User {user_id} authenticated but record not found in public.users")
-            raise credentials_exception
+            # Extract metadata for JIT provisioning
+            email = payload.get("email")
+            # Supabase stores name in user_metadata
+            user_metadata = payload.get("user_metadata", {})
+            name = user_metadata.get("full_name") or user_metadata.get("name") or email.split("@")[0] if email else "Supabase User"
+            
+            if not email:
+                logger.error(f"Token for {user_id} missing email, required for provisioning")
+                raise credentials_exception
+
+            logger.info(f"Provisioning new user record for {email} ({user_id})")
+            user = User(
+                id=user_id,
+                email=email,
+                name=name
+            )
+            db.add(user)
+            try:
+                db.commit()
+                db.refresh(user)
+            except Exception as e:
+                db.rollback()
+                logger.error(f"Failed to provision user {user_id}: {e}")
+                # Possible race condition if multiple requests come in at once
+                user = db.query(User).filter(User.id == user_id).first()
+                if not user:
+                    raise credentials_exception
 
         return user
 
+    except HTTPException:
+        raise
     except Exception as e:
         logger.warning(f"Authentication failed: {e}")
         raise credentials_exception

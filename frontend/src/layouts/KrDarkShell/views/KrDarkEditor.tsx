@@ -5,7 +5,7 @@ import { SolidarityCard, ActionButton } from '../../../components/kerala-rage';
 /**
  * KrDarkEditor (Hi-Fi)
  * 
- * tactical blueprint development.
+ * Tactical blueprint development.
  * Features dual-pane "Archive vs. Edit" logic, monospaced metadata, and the JETBRAINS_MONO code core.
  */
 export const KrDarkEditor: React.FC = () => {
@@ -17,7 +17,7 @@ export const KrDarkEditor: React.FC = () => {
       <motion.div 
         initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
-        className="flex justify-between items-center bg-asphalt-black border border-white/5 p-4 rounded-stone shadow-viscous"
+        className="flex justify-between items-center bg-asphalt-black border border-surface-KrDark-concrete-grey-high/20 p-4 rounded-stone shadow-viscous"
       >
         <div className="flex items-center gap-6">
           <div className="flex gap-2">
@@ -45,7 +45,7 @@ export const KrDarkEditor: React.FC = () => {
           className="flex-1 overflow-hidden"
         >
           <SolidarityCard className="w-full h-full p-0 flex flex-col bg-asphalt-black overflow-hidden relative">
-            <div className="bg-white/5 px-6 py-3 border-b border-white/5 flex justify-between">
+            <div className="bg-surface-KrDark-concrete-grey-high/10 px-6 py-3 border-b border-surface-KrDark-concrete-grey-high/20 flex justify-between">
               <span className="font-annotation text-[9px] uppercase tracking-widest text-paper-white/30">Source Architecture</span>
               <span className="font-mono text-[9px] text-paper-white/20">UTF-8</span>
             </div>
@@ -64,7 +64,7 @@ tactics:
     path: "/src/core"
     payload: "optimized-mesh-routing"
     stamina: 0.85
-  - type: "[DEPRECATED_STYLE]-shift"
+  - type: "signal-shift"
     alignment: "SOLIDARITY_RED"
     
 governance:
@@ -83,7 +83,7 @@ governance:
           className="flex-1 overflow-hidden"
         >
           <SolidarityCard className="w-full h-full p-0 flex flex-col bg-asphalt-black overflow-hidden group">
-            <div className="bg-ink-gold/5 px-6 py-3 border-b border-white/5 group-hover:bg-ink-gold/10 transition-colors flex justify-between">
+            <div className="bg-ink-gold/5 px-6 py-3 border-b border-surface-KrDark-concrete-grey-high/20 group-hover:bg-ink-gold/10 transition-colors flex justify-between">
               <span className="font-annotation text-[9px] uppercase tracking-widest text-ink-gold/60">Extracted Preview</span>
               <div className="flex gap-4">
                 <div className="w-2 h-2 rounded-full bg-ink-gold animate-pulse" />
@@ -107,7 +107,7 @@ governance:
       {/* SECTION 3: Technical Metadata Footer */}
       <div className="flex justify-between items-center opacity-30 mt-2">
          <span className="font-mono text-[9px] uppercase tracking-tighter text-paper-white/40">BRANCH: feature/kerala-rage</span>
-         <div className="h-px w-32 bg-white/5 mx-4 shrink" />
+         <div className="h-px w-32 bg-surface-KrDark-concrete-grey-high/20 mx-4 shrink" />
          <span className="font-mono text-[9px] uppercase tracking-tighter text-paper-white/40">LOC: 48 // CRC: 0xA4F2</span>
       </div>
 

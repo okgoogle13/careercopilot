@@ -17,9 +17,9 @@ export const KrDarkDesigner: React.FC = () => {
       <motion.div 
         initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
-        className="h-20 bg-asphalt-black border-b border-white/5 flex items-center px-10 gap-6 shadow-viscous"
+        className="h-20 bg-asphalt-black border-b border-surface-KrDark-concrete-grey-high/20 flex items-center px-10 gap-6 shadow-viscous"
       >
-        <div className="flex gap-3 pr-6 border-r border-white/5">
+        <div className="flex gap-3 pr-6 border-r border-surface-KrDark-concrete-grey-high/20">
           <ActionButton variant="secondary" label="SELECT" size="sm" className="px-4 py-2 text-[9px] tracking-widest" />
           <ActionButton variant="secondary" label="LAYOUT" size="sm" className="px-4 py-2 text-[9px] tracking-widest" />
           <ActionButton variant="secondary" label="PREVIEW" size="sm" className="px-4 py-2 text-[9px] tracking-widest" />
@@ -41,28 +41,28 @@ export const KrDarkDesigner: React.FC = () => {
           initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.3 }}
-          className="w-80 bg-asphalt-black border-r border-white/5 p-8 flex flex-col gap-8 overflow-y-auto custom-scrollbar"
+          className="w-80 bg-asphalt-black border-r border-surface-KrDark-concrete-grey-high/20 p-8 flex flex-col gap-8 overflow-y-auto custom-scrollbar"
         >
            <div className="space-y-2">
              <h4 className="text-[10px] font-annotation uppercase tracking-[0.4em] text-paper-white/40">Asset Reservoir</h4>
-             <div className="h-px w-full bg-white/5" />
+             <div className="h-px w-full bg-surface-KrDark-concrete-grey-high/20" />
            </div>
 
            <div className="grid grid-cols-2 gap-4">
              {[1, 2, 3, 4, 5, 6].map(i => (
                <motion.div 
                  key={i} 
-                 whileHover={shouldReduceMotion ? {} : { scale: 1.05, borderColor: 'rgba(212, 175, 55, 0.4)' }}
-                 className="aspect-square bg-white/5 rounded-stone border border-white/5 flex items-center justify-center cursor-move transition-all duration-300 group shadow-viscous"
+                 whileHover={shouldReduceMotion ? {} : { scale: 1.05 }}
+                 className="aspect-square bg-surface-KrDark-concrete-grey-high/10 rounded-stone border border-surface-KrDark-concrete-grey-high/20 hover:border-ink-gold/30 flex items-center justify-center cursor-move transition-all duration-300 group shadow-viscous"
                >
-                 <div className="w-10 h-10 bg-paper-white/5 rounded-pebble group-hover:bg-ink-gold/10 transition-colors flex items-center justify-center">
+                 <div className="w-10 h-10 bg-surface-KrDark-concrete-grey-high/15 rounded-pebble group-hover:bg-ink-gold/10 transition-colors flex items-center justify-center">
                     <span className="font-mono text-[8px] text-paper-white/20 select-none">M_0{i}</span>
                  </div>
                </motion.div>
              ))}
            </div>
 
-           <div className="mt-auto pt-8 border-t border-white/5">
+           <div className="mt-auto pt-8 border-t border-surface-KrDark-concrete-grey-high/20">
              <p className="font-body text-[10px] text-paper-white/20 italic">
                "Drag elements onto the assembly canvas for tactical registration."
              </p>
@@ -74,8 +74,8 @@ export const KrDarkDesigner: React.FC = () => {
           {/* TODO[asset]: Studio Grid Motif overlay (Z-1, parallax enabled on mouse move) */}
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-paper-white/[0.02] via-transparent to-transparent pointer-events-none" />
           
-          <SolidarityCard className="w-full h-full max-w-5xl max-h-[90%] border-dashed border-white/10 flex flex-col items-center justify-center bg-asphalt-black/40 backdrop-blur-[2px] relative cursor-crosshair">
-            <div className="absolute inset-4 border border-white/5 rounded-stone border-dashed pointer-events-none opacity-40" />
+          <SolidarityCard className="w-full h-full max-w-5xl max-h-[90%] border-dashed border-surface-KrDark-concrete-grey-high/25 flex flex-col items-center justify-center bg-asphalt-black/40 backdrop-blur-[2px] relative cursor-crosshair">
+            <div className="absolute inset-4 border border-surface-KrDark-concrete-grey-high/20 rounded-stone border-dashed pointer-events-none opacity-40" />
             
             <div className="text-center space-y-6">
               <span className="font-proclamation text-6xl uppercase tracking-tighter text-paper-white/5 select-none">

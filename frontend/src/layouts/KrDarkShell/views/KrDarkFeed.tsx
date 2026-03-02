@@ -6,7 +6,7 @@ import { SolidarityCard, ActionButton, ManifestoSlab } from '../../../components
  * KrDarkFeed (Hi-Fi)
  * 
  * Strategic opportunity broadcast stream.
- * Features [DEPRECATED_STYLE] growth motifs, tactical result cards, and match-score pulse logic.
+ * Features growth motifs, tactical result cards, and match-score pulse logic.
  * Standardized on SolidarityCard and ActionButton for ecosystem cohesion.
  */
 export const KrDarkFeed: React.FC = () => {
@@ -27,7 +27,7 @@ export const KrDarkFeed: React.FC = () => {
       company: 'Archive Prime', 
       timestamp: '15m ago',
       match: 94,
-      desc: 'Audit and consolidate legacy records into the [DEPRECATED_STYLE] substrate. Requires mastery in extraction tactics.'
+      desc: 'Audit and consolidate legacy records into the active substrate. Requires mastery in extraction tactics.'
     },
     { 
       id: 'OPP_03', 
@@ -68,13 +68,13 @@ export const KrDarkFeed: React.FC = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2 + (idx * 0.1), duration: 0.6 }}
           >
-            <SolidarityCard className="p-10 group relative border-white/5 hover:border-ink-gold/20 transition-all duration-500 overflow-hidden">
-              {/* TODO[asset]: [DEPRECATED_STYLE] Growth Motif overlay (Z-1, 5% opacity) */}
+            <SolidarityCard className="p-10 group relative border-surface-KrDark-concrete-grey-high/20 hover:border-ink-gold/20 transition-all duration-500 overflow-hidden">
+              {/* TODO[asset]: Growth Motif overlay (Z-1, 5% opacity) */}
               
               <div className="flex flex-col md:flex-row gap-10 relative z-10">
                 {/* Visual Anchor */}
                 <div className="shrink-0 flex items-center justify-center">
-                  <div className="w-16 h-16 rounded-full border border-white/5 bg-asphalt-black flex items-center justify-center group-hover:border-ink-gold/30 transition-colors">
+                  <div className="w-16 h-16 rounded-full border border-surface-KrDark-concrete-grey-high/20 bg-asphalt-black flex items-center justify-center group-hover:border-ink-gold/30 transition-colors">
                      <span className="font-mono text-[10px] text-paper-white/20">{item.match}%</span>
                   </div>
                 </div>
