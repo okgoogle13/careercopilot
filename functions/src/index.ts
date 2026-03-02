@@ -156,39 +156,35 @@ export const extractJobListing = functions.https.onCall(
 
 /**
  * Find similar job listings
- *
- * TODO: Re-enable when FirebaseVectorSearch is properly implemented
- * Currently disabled because FirebaseVectorSearch.search() is a stub that returns empty results
- * See .temp-functions-investigation-handover.md for vector search implementation plan
  */
-// export const findSimilarListings = functions.https.onCall(
-//   async (
-//     data: {
-//       query: string | Record<string, unknown>;
-//       limit?: number;
-//       minScore?: number;
-//       filters?: Record<string, unknown>;
-//     },
-//     context: functions.https.CallableContext
-//   ) => {
-//     if (!context.auth) {
-//       throw new functions.https.HttpsError('unauthenticated', 'User must be authenticated');
-//     }
-//     try {
-//       const results = await jobListingExtractor.findSimilar({
-//         query: data.query,
-//         limit: data.limit || 5,
-//         minScore: data.minScore || 0.7,
-//         filters: data.filters || {},
-//       });
-//       return {success: true, data: results};
-//     } catch (error) {
-//       console.error('Error finding similar listings:', error);
-//       throw new functions.https.HttpsError(
-//         'internal',
-//         'Failed to find similar job listings',
-//         error instanceof Error ? error : new Error(String(error))
-//       );
-//     }
-//   }
-// );
+export const findSimilarListings = functions.https.onCall(
+  async (
+    data: {
+      query: string | Record<string, unknown>;
+      limit?: number;
+      minScore?: number;
+      filters?: Record<string, unknown>;
+    },
+    context: functions.https.CallableContext
+  ) => {
+    if (!context.auth) {
+      throw new functions.https.HttpsError('unauthenticated', 'User must be authenticated');
+    }
+    try {
+      const results = await jobListingExtractor.findSimilar({
+        query: data.query as any,
+        limit: data.limit || 5,
+        minScore: data.minScore || 0.7,
+        filters: data.filters || {},
+      });
+      return {success: true, data: results};
+    } catch (error) {
+      console.error('Error finding similar listings:', error);
+      throw new functions.https.HttpsError(
+        'internal',
+        'Failed to find similar job listings',
+        error instanceof Error ? error : new Error(String(error))
+      );
+    }
+  }
+);
