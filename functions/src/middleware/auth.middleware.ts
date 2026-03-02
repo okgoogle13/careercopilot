@@ -1,8 +1,8 @@
 // @ts-expect-error - TS2497: esModuleInterop is enabled, but TypeScript 5.9 still complains about namespace import
 import * as admin from "firebase-admin";
-import type { Request, Response, NextFunction } from "express";
-import { sendResponse } from "../utils/api.utils";
-import { AuthResponse } from "../types/api.types";
+import type {Request, Response, NextFunction} from "express";
+import {sendResponse} from "../utils/api.utils";
+import {AuthResponse} from "../types/api.types";
 
 // Extend Express Request type to include our custom properties
 declare global {
@@ -34,7 +34,7 @@ export const validateFirebaseIdToken = async (
       'or by passing a "__session" cookie.',
     );
     res.status(403).send("Unauthorized");
-    return { userId: null };
+    return {userId: null};
   }
 
   let idToken;
@@ -47,24 +47,24 @@ export const validateFirebaseIdToken = async (
   } else {
     // No cookie
     res.status(403).send("Unauthorized");
-    return { userId: null };
+    return {userId: null};
   }
 
   try {
     const decodedIdToken = await admin.auth().verifyIdToken(idToken);
     console.log("ID Token correctly decoded", decodedIdToken);
     req.user = decodedIdToken;
-    return { userId: decodedIdToken.uid };
+    return {userId: decodedIdToken.uid};
   } catch (error) {
     console.error("Error while verifying Firebase ID token:", error);
     res.status(403).send("Unauthorized");
-    return { userId: null, error: "Unauthorized" };
+    return {userId: null, error: "Unauthorized"};
   }
 };
 
 // Middleware to check if user is authenticated
 export const isAuthenticated = async (req: Request, res: Response, next: NextFunction) => {
-  const { userId, error } = await validateFirebaseIdToken(req, res);
+  const {userId, error} = await validateFirebaseIdToken(req, res);
   if (!userId || error) {
     sendResponse(res, 401, null, error || "Unauthorized");
     return;

@@ -2,7 +2,7 @@
 import * as functions from 'firebase-functions';
 // @ts-expect-error - TS2497: esModuleInterop enabled but TS 5.9 namespace import quirk
 import * as admin from 'firebase-admin';
-import { JobListingExtractor } from './services/job_listing_extractor';
+import {JobListingExtractor} from './services/job_listing_extractor';
 
 const jobListingExtractor = new JobListingExtractor();
 
@@ -70,7 +70,7 @@ export const extractAndSave = functions.https.onCall(
         savedAt: admin.firestore.FieldValue.serverTimestamp(),
       });
 
-      return { success: true, jobId: jobListing.id, data: jobListing };
+      return {success: true, jobId: jobListing.id, data: jobListing};
     } catch (error) {
       console.error('[extractAndSave] Error:', error);
       throw new functions.https.HttpsError(

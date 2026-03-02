@@ -70,7 +70,14 @@
       "WebFetch(domain:github.com)",
       "WebFetch(domain:agents.md)",
       "Bash(unzip:*)",
-      "Bash(npm run build:*)"
+      "Bash(npm run build:*)",
+      "Bash(firebase login:list:*)",
+      "Bash(firebase use:*)",
+      "Bash(firebase projects:list:*)",
+      "Bash(firebase deploy:*)",
+      "Bash(npm install:*)",
+      "Bash(yarn add:*)",
+      "Bash(npm run lint)"
     ],
     "deny": [],
     "ask": []

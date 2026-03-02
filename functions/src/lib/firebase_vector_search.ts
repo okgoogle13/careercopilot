@@ -62,7 +62,7 @@ export class FirebaseVectorSearch<T> {
         metadata,
         updatedAt: Date.now(),
       },
-      { merge: true }
+      {merge: true}
     );
   }
 
@@ -83,7 +83,7 @@ export class FirebaseVectorSearch<T> {
       filters?: Record<string, unknown>;
     } = {}
   ): Promise<Array<{ id: string; score: number; metadata: T }>> {
-    const { limit = 5, minScore = 0.5, filters = {} } = options;
+    const {limit = 5, minScore = 0.5, filters = {}} = options;
 
     // Build the base query — apply equality filters from caller
     let query: admin.firestore.Query = this.entriesRef();

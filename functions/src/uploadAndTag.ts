@@ -2,7 +2,7 @@
 import * as functions from 'firebase-functions';
 // @ts-expect-error - TS2497: esModuleInterop is enabled, but TypeScript 5.9 still complains about namespace import
 import * as admin from 'firebase-admin';
-import { getStorage } from 'firebase-admin/storage';
+import {getStorage} from 'firebase-admin/storage';
 
 /**
  * uploadAndTag
@@ -38,7 +38,7 @@ export const uploadAndTag = functions.https.onCall(
       );
     }
 
-    const { filename, mimeType, base64Content, tags = [] } = data;
+    const {filename, mimeType, base64Content, tags = []} = data;
 
     if (!filename || !mimeType || !base64Content) {
       throw new functions.https.HttpsError(
@@ -70,7 +70,7 @@ export const uploadAndTag = functions.https.onCall(
     await file.save(buffer, {
       metadata: {
         contentType: mimeType,
-        metadata: { uploadedBy: userId, fileId },
+        metadata: {uploadedBy: userId, fileId},
       },
     });
 
@@ -94,6 +94,6 @@ export const uploadAndTag = functions.https.onCall(
 
     await admin.firestore().collection('uploads').doc(fileId).set(docData);
 
-    return { fileId, storagePath, downloadUrl, tags: allTags };
+    return {fileId, storagePath, downloadUrl, tags: allTags};
   }
 );
