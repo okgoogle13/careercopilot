@@ -1,0 +1,67 @@
+name: Cleanup Stale Branches
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run (show what would be deleted without deleting)'
+        type: boolean
+        default: true
+        required: false
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: List branches to delete
+        id: list
+        run: |
+          echo "Branches that will be deleted (all except main and develop):"
+          git branch -r | grep -v 'origin/HEAD' | grep -v 'origin/main$' | grep -v 'origin/develop$' | sed 's/  origin\///' || true
+
+      - name: Delete stale branches
+        if: ${{ inputs.dry_run == false }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          BRANCHES=$(git branch -r | grep -v 'origin/HEAD' | grep -v 'origin/main$' | grep -v 'origin/develop$' | sed 's|  origin/||')
+
+          if [ -z "$BRANCHES" ]; then
+            echo "No branches to delete."
+            exit 0
+          fi
+
+          echo "Deleting the following branches:"
+          echo "$BRANCHES"
+
+          while IFS= read -r branch; do
+            echo "Deleting branch: $branch"
+            gh api repos/${{ github.repository }}/git/refs/heads/"$branch" -X DELETE \
+              && echo "  ✅ Deleted: $branch" \
+              || echo "  ❌ Failed to delete: $branch"
+          done <<< "$BRANCHES"
+
+      - name: Summary
+        run: |
+          echo "### Branch Cleanup Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          if ${{ inputs.dry_run }}; then
+            echo "**Mode: DRY RUN** (no branches were deleted)" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "Branches that WOULD be deleted:" >> $GITHUB_STEP_SUMMARY
+            git branch -r | grep -v 'origin/HEAD' | grep -v 'origin/main$' | grep -v 'origin/develop$' | sed 's/  origin\///' | sed 's/^/- /' >> $GITHUB_STEP_SUMMARY || echo "- (none)" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "**Mode: LIVE** (branches deleted)" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "Remaining branches:" >> $GITHUB_STEP_SUMMARY
+            git fetch origin >> /dev/null 2>&1
+            git branch -r | grep -v 'origin/HEAD' | sed 's/  origin\///' | sed 's/^/- /' >> $GITHUB_STEP_SUMMARY
+          fi
