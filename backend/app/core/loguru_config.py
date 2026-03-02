@@ -8,7 +8,11 @@ better performance, and simplified configuration compared to the standard loggin
 import os
 import sys
 from pathlib import Path
+<<<<<<< HEAD
 from typing import Any, Optional
+=======
+from typing import Any
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 try:
     from loguru import logger
@@ -47,7 +51,11 @@ except ImportError:  # pragma: no cover - optional dependency in test/CI
 
 
 def configure_loguru(
+<<<<<<< HEAD
     environment: Optional[str] = None,
+=======
+    environment: str | None = None,
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     log_dir: str = "logs",
     service_name: str = "careercopilot",
 ) -> None:
@@ -197,7 +205,11 @@ def get_logger(name: str) -> Any:
     return logger.bind(context=name)
 
 
+<<<<<<< HEAD
 def add_request_context(request_id: str, user_id: Optional[str] = None, **extra: Any) -> Any:
+=======
+def add_request_context(request_id: str, user_id: str | None = None, **extra: Any) -> Any:
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     """
     Add request context to Loguru logger.
 
@@ -268,7 +280,11 @@ def log_function_call(level: str = "DEBUG", exclude_args: bool = True):
                 return result
             except Exception as e:
                 func_logger.error(
+<<<<<<< HEAD
                     f"Function {func.__name__} failed: {str(e)}",
+=======
+                    f"Function {func.__name__} failed: {e!s}",
+>>>>>>> restoration-KR-Rage-Figma-v2.0
                     function=func.__name__,
                     error_type=type(e).__name__,
                     exc_info=True,
@@ -301,7 +317,11 @@ def log_function_call(level: str = "DEBUG", exclude_args: bool = True):
                 return result
             except Exception as e:
                 func_logger.error(
+<<<<<<< HEAD
                     f"Async function {func.__name__} failed: {str(e)}",
+=======
+                    f"Async function {func.__name__} failed: {e!s}",
+>>>>>>> restoration-KR-Rage-Figma-v2.0
                     function=func.__name__,
                     error_type=type(e).__name__,
                     exc_info=True,

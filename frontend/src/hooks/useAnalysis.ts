@@ -1,10 +1,16 @@
 import { useState, useCallback } from 'react';
 import type { AuditResponse, JobAnalysis, UserProfile } from '../types/intelligence';
+<<<<<<< HEAD
 import { analyzeJobDescription, analyzeJobFromUrl, generateIntelligencePackage, enhanceResumeWithMetrics } from '../services/aiInterface';
 import type { ImprovedBullet, SkillsGap } from '../services/aiInterface';
 import { EXPERT_RESUME_AUDITOR_PROMPT } from '../services/prompts';
 
 
+=======
+import { analyzeJobDescription, analyzeJobFromUrl, generateIntelligencePackage } from '../services/aiInterface';
+import { EXPERT_RESUME_AUDITOR_PROMPT } from '../services/prompts';
+
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 /**
  * Analysis Hook - Enhanced with Portable Intelligence Engine
  * Implements 4-Quadrant Scoring Rubric + The Quantifier
@@ -15,8 +21,11 @@ import { EXPERT_RESUME_AUDITOR_PROMPT } from '../services/prompts';
  * - Expert Resume Auditor persona from MiniMe
  */
 
+<<<<<<< HEAD
 export type { ImprovedBullet, SkillsGap };
 
+=======
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 export interface AnalysisScore {
     overall: number; // 0-100
     hardSkills: number; // 0-100
@@ -53,9 +62,12 @@ export function useAnalysis() {
     const [analyzing, setAnalyzing] = useState(false);
     const [result, setResult] = useState<AnalysisResult | null>(null);
     const [jobAnalysis, setJobAnalysis] = useState<JobAnalysis | null>(null);
+<<<<<<< HEAD
     const [improvedBullets, setImprovedBullets] = useState<ImprovedBullet[]>([]);
     const [skillsGap, setSkillsGap] = useState<SkillsGap | null>(null);
     const [enhancing, setEnhancing] = useState(false);
+=======
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
     /**
      * Analyze Job Description - Extract intelligence
@@ -193,6 +205,7 @@ export function useAnalysis() {
         }
     }, [jobAnalysis]);
 
+<<<<<<< HEAD
     /**
      * Enhance Resume with Metrics
      * Calls POST /api/analysis/enhance-resume and stores improved bullets + skills gap.
@@ -214,10 +227,13 @@ export function useAnalysis() {
         }
     }, []);
 
+=======
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     return {
         analyzeDocument,
         analyzeJob,
         analyzeJobUrl,
+<<<<<<< HEAD
         enhanceResume,
         analyzing,
         enhancing,
@@ -225,6 +241,11 @@ export function useAnalysis() {
         jobAnalysis,
         improvedBullets,
         skillsGap,
+=======
+        analyzing,
+        result,
+        jobAnalysis,
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     };
 }
 
@@ -315,6 +336,7 @@ function extractKeywords(text: string): string[] {
     return [...new Set(words.filter((w) => !stopWords.has(w)))];
 }
 
+<<<<<<< HEAD
 function countActionVerbs(text: string): number {
     const actionVerbs = [
         'led', 'managed', 'created', 'developed', 'implemented', 'designed',
@@ -323,6 +345,22 @@ function countActionVerbs(text: string): number {
     ];
     const lowerText = text.toLowerCase();
     return actionVerbs.filter((verb) => lowerText.includes(verb)).length;
+=======
+const ACTION_VERBS = [
+    'led', 'managed', 'created', 'developed', 'implemented', 'designed',
+    'achieved', 'improved', 'increased', 'reduced', 'optimized', 'coordinated',
+    'facilitated', 'mentored', 'trained', 'delivered', 'executed', 'launched',
+];
+const ACTION_VERB_PATTERN = new RegExp(`\\b(?:${ACTION_VERBS.join('|')})\\b`, 'gi');
+
+function countActionVerbs(text: string): number {
+    const matches = text.match(ACTION_VERB_PATTERN);
+    if (!matches) {
+        return 0;
+    }
+    const normalizedMatches = matches.map((match) => match.toLowerCase());
+    return new Set(normalizedMatches).size;
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 }
 
 function detectQuantifiers(text: string): string[] {

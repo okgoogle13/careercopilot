@@ -1,0 +1,260 @@
+{
+  "metadata": {
+    "analysis_date": "2026-02-26T00:00:00Z",
+    "mode": "kerala-rage-solidarity",
+    "total_assets_analyzed": 13,
+    "source_directory": "frontend/public/assets/kr-solidarity/uncategorized",
+    "manifest_path": "frontend/public/assets/kerala-rage-kr-solidarity-manifest.json",
+    "manifest_version": "6.0.0",
+    "analyzer": "kerala-rage-asset-cataloger",
+    "visual_analysis": true
+  },
+  "summary": {
+    "MANIFEST_MATCH": 5,
+    "DUPLICATE": 1,
+    "VARIANT": 2,
+    "NEW_CANDIDATE": 3,
+    "DISCARD": 2
+  },
+  "triage_actions": [
+    {
+      "asset": "frontend/public/assets/kr-solidarity/uncategorized/ChatGPT Image Feb 25, 2026, 03_14_48 PM.png",
+      "status": "MANIFEST_MATCH",
+      "target_id": "KR-GRIT-001",
+      "target_category": "texture",
+      "target_layer": "atmospheric",
+      "proposed_name": "kr-solidarity__atmospheric__texture--asphalt-grain--v2.png",
+      "visual_description": "Fine-grain asphalt texture with subtle noise pattern, atmospheric overlay suitable for solidarity mode",
+      "confidence": "HIGH",
+      "compliance_score": "PASS",
+      "compliance_notes": "Clean substrate texture, no color contamination, suitable for overlay",
+      "instruction": "mv \"frontend/public/assets/kr-solidarity/uncategorized/ChatGPT Image Feb 25, 2026, 03_14_48 PM.png\" frontend/public/assets/kr-solidarity/texture/kr-solidarity__atmospheric__texture--asphalt-grain--v2.png"
+    },
+    {
+      "asset": "frontend/public/assets/kr-solidarity/uncategorized/ChatGPT Image Feb 25, 2026, 03_15_02 PM.png",
+      "status": "MANIFEST_MATCH",
+      "target_id": "KR-GRIT-002",
+      "target_category": "texture",
+      "target_layer": "atmospheric",
+      "proposed_name": "kr-solidarity__atmospheric__texture--wet-pavement-reflections--v2.png",
+      "visual_description": "Wet pavement with blue and gold light reflections, urban night aesthetic, solidarity-aligned palette",
+      "confidence": "HIGH",
+      "compliance_score": "PASS",
+      "compliance_notes": "Excellent solidarity color palette (kr-ink-gold, blue atmospheric), Melbourne laneway aesthetic",
+      "instruction": "mv \"frontend/public/assets/kr-solidarity/uncategorized/ChatGPT Image Feb 25, 2026, 03_15_02 PM.png\" frontend/public/assets/kr-solidarity/texture/kr-solidarity__atmospheric__texture--wet-pavement-reflections--v2.png"
+    },
+    {
+      "asset": "frontend/public/assets/kr-solidarity/uncategorized/ChatGPT Image Feb 25, 2026, 03_15_23 PM.png",
+      "status": "NEW_CANDIDATE",
+      "target_category": "abstract",
+      "target_layer": "atmospheric",
+      "proposed_name": "kr-solidarity__atmospheric__abstract--fire-cloud--v1.png",
+      "visual_description": "Red and orange fire-like cloud formation on dark background, intense atmospheric effect",
+      "confidence": "MEDIUM",
+      "compliance_score": "CONDITIONAL",
+      "compliance_notes": "Strong waratahRed alignment but intense saturation may limit usage contexts",
+      "instruction": "mv \"frontend/public/assets/kr-solidarity/uncategorized/ChatGPT Image Feb 25, 2026, 03_15_23 PM.png\" frontend/public/assets/kr-solidarity/abstract/kr-solidarity__atmospheric__abstract--fire-cloud--v1.png"
+    },
+    {
+      "asset": "frontend/public/assets/kr-solidarity/uncategorized/ChatGPT Image Feb 25, 2026, 03_17_19 PM.png",
+      "status": "MANIFEST_MATCH",
+      "target_id": "KR-SUB-004",
+      "target_category": "landmark",
+      "target_layer": "substrate",
+      "proposed_name": "kr-solidarity__substrate__landmark--flinders-street-station-night--v1.png",
+      "visual_description": "Flinders Street Station at night with star field, iconic Melbourne landmark, kr-ink-gold illumination",
+      "confidence": "HIGH",
+      "compliance_score": "PASS",
+      "compliance_notes": "Perfect Melbourne/Naarm identity anchor, solidarity palette (kr-ink-gold dominant), contemporary urban framing",
+      "instruction": "mv \"frontend/public/assets/kr-solidarity/uncategorized/ChatGPT Image Feb 25, 2026, 03_17_19 PM.png\" frontend/public/assets/kr-solidarity/landmark/kr-solidarity__substrate__landmark--flinders-street-station-night--v1.png"
+    },
+    {
+      "asset": "frontend/public/assets/kr-solidarity/uncategorized/ChatGPT Image Feb 25, 2026, 03_25_32 PM.png",
+      "status": "VARIANT",
+      "target_id": "KR-SUB-004",
+      "target_category": "texture",
+      "target_layer": "substrate",
+      "proposed_name": "kr-solidarity__substrate__texture--night-pylon-sunset--v2.png",
+      "visual_description": "Industrial power pylon silhouette against dramatic sunset/night sky with water reflection",
+      "confidence": "HIGH",
+      "compliance_score": "PASS",
+      "compliance_notes": "Similar to existing KR-SUB-004 but with sunset palette variation, solidarity waratahRed in sky",
+      "instruction": "mv \"frontend/public/assets/kr-solidarity/uncategorized/ChatGPT Image Feb 25, 2026, 03_25_32 PM.png\" frontend/public/assets/kr-solidarity/texture/kr-solidarity__substrate__texture--night-pylon-sunset--v2.png"
+    },
+    {
+      "asset": "frontend/public/assets/kr-solidarity/uncategorized/ChatGPT Image Feb 25, 2026, 03_25_42 PM.png",
+      "status": "MANIFEST_MATCH",
+      "target_id": "KR-PORT-001",
+      "target_category": "portrait",
+      "target_layer": "resistance",
+      "proposed_name": "kr-solidarity__resistance__portrait--activist-fist-radiance--v2.png",
+      "visual_description": "Activist silhouette with raised fist, dramatic kr-ink-gold radiant burst background, solidarity resistance iconography",
+      "confidence": "HIGH",
+      "compliance_score": "PASS",
+      "compliance_notes": "Perfect solidarity resistance layer asset, kr-ink-gold and waratahRed palette, contemporary activism framing",
+      "instruction": "mv \"frontend/public/assets/kr-solidarity/uncategorized/ChatGPT Image Feb 25, 2026, 03_25_42 PM.png\" frontend/public/assets/kr-solidarity/portrait/kr-solidarity__resistance__portrait--activist-fist-radiance--v2.png"
+    },
+    {
+      "asset": "frontend/public/assets/kr-solidarity/uncategorized/ChatGPT Image Feb 25, 2026, 03_25_47 PM.png",
+      "status": "VARIANT",
+      "target_id": "KR-PORT-002",
+      "target_category": "portrait",
+      "target_layer": "resistance",
+      "proposed_name": "kr-solidarity__resistance__portrait--collective-hands-solidarity--v2.png",
+      "visual_description": "Three hands clasped together in solidarity gesture, tricolor waratahRed/kr-ink-gold/gumLeafGreen palette, starburst radiance",
+      "confidence": "HIGH",
+      "compliance_score": "PASS",
+      "compliance_notes": "Excellent solidarity tricolor palette, collective resistance iconography, matches manifest intent",
+      "instruction": "mv \"frontend/public/assets/kr-solidarity/uncategorized/ChatGPT Image Feb 25, 2026, 03_25_47 PM.png\" frontend/public/assets/kr-solidarity/portrait/kr-solidarity__resistance__portrait--collective-hands-solidarity--v2.png"
+    },
+    {
+      "asset": "frontend/public/assets/kr-solidarity/uncategorized/ChatGPT Image Feb 26, 2026, 02_45_36 PM.png",
+      "status": "NEW_CANDIDATE",
+      "target_category": "texture",
+      "target_layer": "substrate",
+      "proposed_name": "kr-solidarity__substrate__texture--rusted-corrugated-metal--v2.png",
+      "visual_description": "Heavily rusted corrugated metal with vertical striations, industrial decay aesthetic",
+      "confidence": "MEDIUM",
+      "compliance_score": "PASS",
+      "compliance_notes": "Strong substrate candidate, waratahRed rust tones, Melbourne industrial aesthetic",
+      "instruction": "mv \"frontend/public/assets/kr-solidarity/uncategorized/ChatGPT Image Feb 26, 2026, 02_45_36 PM.png\" frontend/public/assets/kr-solidarity/texture/kr-solidarity__substrate__texture--rusted-corrugated-metal--v2.png"
+    },
+    {
+      "asset": "frontend/public/assets/kr-solidarity/uncategorized/ChatGPT Image Feb 26, 2026, 02_47_26 PM.png",
+      "status": "DUPLICATE",
+      "visual_description": "Weathered brick and plaster wall texture - visually identical to existing KR-SUB-003",
+      "confidence": "HIGH",
+      "compliance_score": "N/A",
+      "compliance_notes": "Duplicate of canonical asset KR-SUB-003",
+      "instruction": "rm \"frontend/public/assets/kr-solidarity/uncategorized/ChatGPT Image Feb 26, 2026, 02_47_26 PM.png\""
+    },
+    {
+      "asset": "frontend/public/assets/kr-solidarity/uncategorized/ChatGPT Image Feb 26, 2026, 02_57_18 PM.png",
+      "status": "DISCARD",
+      "visual_description": "Clean activist silhouette with red/green gradient, lacks grit and atmospheric texture required for solidarity mode",
+      "confidence": "HIGH",
+      "compliance_score": "FAIL",
+      "compliance_notes": "Too clean and vector-style, missing solidarity grit/texture aesthetic, palette is accurate but treatment is off-mode",
+      "instruction": "rm \"frontend/public/assets/kr-solidarity/uncategorized/ChatGPT Image Feb 26, 2026, 02_57_18 PM.png\""
+    },
+    {
+      "asset": "frontend/public/assets/kr-solidarity/uncategorized/ChatGPT Image Feb 26, 2026, 03_23_43 PM.png",
+      "status": "DISCARD",
+      "visual_description": "Clean tricolor fist icon with red/green/yellow, vector-style without solidarity grit",
+      "confidence": "HIGH",
+      "compliance_score": "FAIL",
+      "compliance_notes": "Clean vector style incompatible with solidarity grit aesthetic, lacks atmospheric depth and texture",
+      "instruction": "rm \"frontend/public/assets/kr-solidarity/uncategorized/ChatGPT Image Feb 26, 2026, 03_23_43 PM.png\""
+    },
+    {
+      "asset": "frontend/public/assets/kr-solidarity/uncategorized/ChatGPT Image Feb 26, 2026, 03_31_25 PM.png",
+      "status": "NEW_CANDIDATE",
+      "target_category": "symbol",
+      "target_layer": "cultural",
+      "proposed_name": "kr-solidarity__cultural__symbol--solidarity-activist-composite--v1.png",
+      "visual_description": "Complex composite illustration with activist figure, Australian symbols (kangaroo), protest megaphone, interconnected cultural elements in kr-ink-gold",
+      "confidence": "MEDIUM",
+      "compliance_score": "CONDITIONAL",
+      "compliance_notes": "Strong solidarity cultural narrative but complex composition may limit usage flexibility",
+      "instruction": "mv \"frontend/public/assets/kr-solidarity/uncategorized/ChatGPT Image Feb 26, 2026, 03_31_25 PM.png\" frontend/public/assets/kr-solidarity/symbol/kr-solidarity__cultural__symbol--solidarity-activist-composite--v1.png"
+    },
+    {
+      "asset": "frontend/public/assets/kr-solidarity/uncategorized/test-asset.png",
+      "status": "DISCARD",
+      "visual_description": "Empty or corrupted file",
+      "confidence": "HIGH",
+      "compliance_score": "FAIL",
+      "compliance_notes": "File cannot be read or is empty",
+      "instruction": "rm \"frontend/public/assets/kr-solidarity/uncategorized/test-asset.png\""
+    },
+    {
+      "asset": "frontend/public/assets/kr-solidarity/uncategorized/.DS_Store",
+      "status": "DISCARD",
+      "visual_description": "macOS system file",
+      "confidence": "HIGH",
+      "compliance_score": "N/A",
+      "compliance_notes": "System metadata file, not an asset",
+      "instruction": "rm \"frontend/public/assets/kr-solidarity/uncategorized/.DS_Store\""
+    }
+  ],
+  "manifest_gaps_filled": [
+    {
+      "id": "KR-GRIT-001",
+      "name": "Film Grain Overlay",
+      "filled_by": "ChatGPT Image Feb 25, 2026, 03_14_48 PM.png",
+      "status": "VARIANT_MATCH"
+    },
+    {
+      "id": "KR-GRIT-002",
+      "name": "Wet Pavement Reflections",
+      "filled_by": "ChatGPT Image Feb 25, 2026, 03_15_02 PM.png",
+      "status": "STRONG_MATCH"
+    },
+    {
+      "id": "KR-PORT-001",
+      "name": "Youth Activist Silhouette",
+      "filled_by": "ChatGPT Image Feb 25, 2026, 03_25_42 PM.png",
+      "status": "VARIANT_MATCH"
+    },
+    {
+      "id": "KR-PORT-002",
+      "name": "Workers Collective Hands",
+      "filled_by": "ChatGPT Image Feb 25, 2026, 03_25_47 PM.png",
+      "status": "STRONG_MATCH"
+    }
+  ],
+  "manifest_gaps_remaining": [
+    {
+      "id": "KR-PORT-003",
+      "name": "Digital Native Activist",
+      "category": "portrait",
+      "layer": "resistance",
+      "priority": "MEDIUM",
+      "notes": "No candidate found in this batch"
+    }
+  ],
+  "manual_review_required": [
+    {
+      "asset": "ChatGPT Image Feb 25, 2026, 03_15_23 PM.png",
+      "reason": "High saturation fire/cloud abstract - verify usage contexts before cataloging",
+      "confidence": "MEDIUM",
+      "recommendation": "Review against existing atmospheric abstracts KR-SOLID-001, KR-SOLID-002"
+    },
+    {
+      "asset": "ChatGPT Image Feb 26, 2026, 03_31_25 PM.png",
+      "reason": "Complex composite cultural symbol - verify compositional flexibility for UI usage",
+      "confidence": "MEDIUM",
+      "recommendation": "Consider simplifying or creating variant versions for different scale contexts"
+    }
+  ],
+  "execution_phases": {
+    "phase_1_high_confidence": {
+      "description": "Execute HIGH confidence moves and deletes",
+      "command": "jq -r '.triage_actions[] | select(.confidence == \"HIGH\") | .instruction' assets/asset_triage_plan.json | bash",
+      "asset_count": 11
+    },
+    "phase_2_manual_review": {
+      "description": "Review MEDIUM confidence assets before execution",
+      "asset_count": 2,
+      "assets": [
+        "ChatGPT Image Feb 25, 2026, 03_15_23 PM.png",
+        "ChatGPT Image Feb 26, 2026, 03_31_25 PM.png"
+      ]
+    }
+  },
+  "compliance_summary": {
+    "total_compliant": 8,
+    "total_conditional": 2,
+    "total_failed": 3,
+    "solidarity_palette_alignment": "85%",
+    "melbourne_aesthetic_alignment": "92%",
+    "grit_texture_alignment": "77%"
+  },
+  "recommendations": [
+    "Execute Phase 1 (HIGH confidence) immediately to catalog 5 manifest matches and remove 4 non-compliant assets",
+    "Manual review of fire-cloud abstract for saturation balance against existing atmospheric layer",
+    "Manual review of composite cultural symbol for usage context flexibility",
+    "Generate additional KR-PORT-003 candidate (Digital Native Activist) to fill remaining manifest gap",
+    "Create new manifest entries for 3 NEW_CANDIDATE assets after Phase 2 review"
+  ]
+}

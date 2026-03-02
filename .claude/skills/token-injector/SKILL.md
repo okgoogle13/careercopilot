@@ -1,14 +1,26 @@
 ---
 name: token-injector
-description: Automated CSS variable injection from tokens.json. Parses design tokens → generates CSS custom properties → injects into stylesheets → replaces hardcoded values.
+description: "Automated CSS variable injection from tokens.json. Parses design tokens\
+  \ \u2192 generates CSS custom properties \u2192 injects into stylesheets \u2192\
+  \ replaces hardcoded values."
+metadata:
+  legacy_frontmatter:
+    version: 1.0.0
+    tags: []
 ---
 
 # Token-Injector Skill
 
-## Function
+## Purpose
 
 Input: `tokens.json` + target CSS files
 Output: Updated stylesheets with CSS variables
+
+## When to Use
+
+- When updating the project's design tokens in `tokens.json`.
+- When automating the conversion of raw tokens into production-ready CSS variables.
+- When replacing hardcoded style values with token-based custom properties.
 
 ## Process
 
@@ -21,50 +33,55 @@ Output: Updated stylesheets with CSS variables
 ## Token Mapping
 
 **tokens.json:**
+
 ```json
 {
   "background": "#1A1714",
   "palette": {
-    "waratah_crimson": "#C45C4B",
-    "wattle_gold": "#D4A84B",
-    "eucalyptus_sage": "#7A9E82"
+    "solidarity_red": "#F14714",
+    "ink_gold": "#DAF674",
+    "activist_green": "#48DA8B"
   }
 }
 ```
 
 **Generated CSS:**
+
 ```css
 :root {
-  --color-specimen-night: #1A1714;
-  --color-waratah-crimson: #C45C4B;
-  --color-wattle-gold: #D4A84B;
-  --color-eucalyptus-sage: #7A9E82;
+  --color-asphalt-black: #1a1714;
+  --color-solidarity-red: #f14714;
+  --color-ink-gold: #daf674;
+  --color-activist-green: #48da8b;
 }
 ```
 
 ## Replacement Logic
 
 **Before:**
+
 ```css
 .card {
-  background: #1A1714;
-  border: 1px solid #C45C4B;
+  background: #1a1714;
+  border: 1px solid #c45c4b;
 }
 ```
 
 **After:**
+
 ```css
 .card {
-  background: var(--color-specimen-night);
-  border: 1px solid var(--color-waratah-crimson);
+  background: var(--color-asphalt-black);
+  border: 1px solid var(--color-solidarity-red);
 }
 ```
 
 ## Batch Mode
 
 Process all asset `tokens.json` files:
+
 ```bash
-token-injector --input /assets/*/tokens.json --output /frontend/src/styles/northcote-tokens.css
+token-injector --input /assets/*/tokens.json --output /frontend/src/styles/kerala-rage-tokens.css
 ```
 
 ## Integration
@@ -81,4 +98,4 @@ token-injector --input /assets/*/tokens.json --output /frontend/src/styles/north
 
 ---
 
-*Tokens → CSS variables → automatic injection. Manual replacement eliminated.*
+_Tokens → CSS variables → automatic injection. Manual replacement eliminated._

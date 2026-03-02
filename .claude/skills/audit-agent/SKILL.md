@@ -1,17 +1,32 @@
 ---
 name: audit-agent
-description: "Comprehensive security and code quality audit. Use for thorough security, vulnerability, and code quality analysis. Related: project-health-checker for quick diagnostic checks."
-version: 1.0.0
-tags:
-  - security
-  - audit
-  - quality
-  - scanning
+description: 'Comprehensive security and code quality audit. Use for thorough security,
+  vulnerability, and code quality analysis. Related: project-health-checker for quick
+  diagnostic checks.'
+metadata:
+  legacy_frontmatter:
+    version: 1.0.0
+    tags:
+    - security
+    - audit
+    - quality
+    - scanning
 ---
 
 # Audit Agent
 
 This skill performs comprehensive security and code quality audits across your codebase.
+
+## Purpose
+
+Provides automated security vulnerability scanning, dependency auditing, and code quality analysis to identify risks and maintain code health across the CareerCopilot codebase.
+
+## Process
+
+1. **Security Scan**: Check for hardcoded secrets, SQL injection, XSS vulnerabilities, and auth/authorization issues
+2. **Dependency Audit**: Scan package manifests for known CVEs and outdated packages
+3. **Code Quality Analysis**: Identify unused code, duplication, complexity issues, and error handling patterns
+4. **Report Generation**: Create prioritized findings with remediation steps and code examples
 
 ## Features
 

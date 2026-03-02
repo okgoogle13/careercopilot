@@ -7,8 +7,13 @@ repeated validation logic across different endpoints.
 
 import logging
 import os
+<<<<<<< HEAD
 from functools import wraps
 from typing import Callable, List, Optional, Set
+=======
+from collections.abc import Callable
+from functools import wraps
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 from fastapi import HTTPException, UploadFile, status
 
@@ -26,6 +31,7 @@ class FileUploadConfig:
 
     def __init__(
         self,
+<<<<<<< HEAD
         allowed_extensions: Optional[Set[str]] = None,
         allowed_content_types: Optional[Set[str]] = None,
         max_file_size_mb: Optional[int] = None,
@@ -33,6 +39,15 @@ class FileUploadConfig:
         require_filename: bool = True,
         allowed_filename_patterns: Optional[List[str]] = None,
         forbidden_filename_patterns: Optional[List[str]] = None,
+=======
+        allowed_extensions: set[str] | None = None,
+        allowed_content_types: set[str] | None = None,
+        max_file_size_mb: int | None = None,
+        max_files: int = 1,
+        require_filename: bool = True,
+        allowed_filename_patterns: list[str] | None = None,
+        forbidden_filename_patterns: list[str] | None = None,
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     ):
         """Initialize file upload configuration.
 
@@ -147,11 +162,19 @@ def validate_file_upload(
                     f"maximum allowed size {config.max_file_size_mb}MB"
                 )
         except Exception as e:
+<<<<<<< HEAD
             logger.warning(f"Could not check file size: {str(e)}")
 
 
 def validate_multiple_files(
     files: List[UploadFile],
+=======
+            logger.warning(f"Could not check file size: {e!s}")
+
+
+def validate_multiple_files(
+    files: list[UploadFile],
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     config: FileUploadConfig,
 ) -> None:
     """Validate multiple file uploads.
@@ -176,11 +199,19 @@ def validate_multiple_files(
         try:
             validate_file_upload(file, config)
         except FileValidationError as e:
+<<<<<<< HEAD
             raise FileValidationError(f"File {i + 1} validation failed: {str(e)}")
 
 
 def require_valid_file_upload(
     config: Optional[FileUploadConfig] = None,
+=======
+            raise FileValidationError(f"File {i + 1} validation failed: {e!s}")
+
+
+def require_valid_file_upload(
+    config: FileUploadConfig | None = None,
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     single_file: bool = True,
 ) -> Callable:
     """
@@ -259,13 +290,21 @@ def require_valid_file_upload(
                 return await func(*args, **kwargs)
 
             except FileValidationError as e:
+<<<<<<< HEAD
                 logger.warning(f"File validation failed: {str(e)}")
+=======
+                logger.warning(f"File validation failed: {e!s}")
+>>>>>>> restoration-KR-Rage-Figma-v2.0
                 raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
             except HTTPException:
                 # Re-raise HTTP exceptions
                 raise
             except Exception as e:
+<<<<<<< HEAD
                 logger.error(f"Unexpected error in file validation: {str(e)}", exc_info=True)
+=======
+                logger.error(f"Unexpected error in file validation: {e!s}", exc_info=True)
+>>>>>>> restoration-KR-Rage-Figma-v2.0
                 raise HTTPException(
                     status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                     detail="Internal server error during file validation",
@@ -326,7 +365,11 @@ def require_valid_job_description_upload(max_size_mb: int = 5) -> Callable:
 
 
 def require_valid_document_upload(
+<<<<<<< HEAD
     allowed_types: Optional[Set[str]] = None, max_size_mb: int = 10, max_files: int = 1
+=======
+    allowed_types: set[str] | None = None, max_size_mb: int = 10, max_files: int = 1
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 ) -> Callable:
     """
     Flexible decorator for various document types.

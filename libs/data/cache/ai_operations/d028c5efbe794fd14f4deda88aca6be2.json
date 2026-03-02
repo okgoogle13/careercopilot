@@ -1,0 +1,16 @@
+{
+  "key": "ats_scoring_user_789_dab0090cff1c6a6a",
+  "value": {
+    "result": {
+      "result": "ats_scoring_result"
+    },
+    "operation_type": "ats_scoring",
+    "input_hash": "dab0090cff1c6a6a",
+    "user_id": "user_789",
+    "cached_at": "2025-11-22T20:57:26.422892"
+  },
+  "timestamp": "2025-11-22T20:57:26.422919",
+  "expires_at": "2025-11-25T20:57:26.422919",
+  "ttl_hours": 72.0,
+  "category": "ai_operations"
+}

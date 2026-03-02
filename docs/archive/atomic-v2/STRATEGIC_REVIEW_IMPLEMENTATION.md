@@ -8,7 +8,11 @@
 
 ## Overview
 
+<<<<<<< HEAD
 This implementation addresses the strategic design feedback for Northcote Curio v2.0, focusing on operationalizing the expressiveness architecture that was already built but not fully inhabited. The feedback correctly identified that we had created the foundation for a distinctive personality but hadn't yet specified how to execute it.
+=======
+This implementation addresses the strategic design feedback for kerala-rage kr-solidarity v2.0, focusing on operationalizing the expressiveness architecture that was already built but not fully inhabited. The feedback correctly identified that we had created the foundation for a distinctive personality but hadn't yet specified how to execute it.
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 ---
 
@@ -22,14 +26,22 @@ This implementation addresses the strategic design feedback for Northcote Curio 
 
 - **Section 3: The Personality Matrix (Typography Orchestration)**
   - The Bloom Effect table mapping Fraunces variable axes (`SOFT`, `WONK`) to interaction states
+<<<<<<< HEAD
   - Context-specific typography mappings for Gallery Mode, Laboratory Mode, and Interactive Cards
+=======
+  - Context-specific typography mappings for kr-dark Mode, kr-dark Mode, and Interactive Cards
+>>>>>>> restoration-KR-Rage-Figma-v2.0
   - Explicit CSS specifications for how variable axes should respond to user interaction
 
 **Impact:**
 
 - Transforms static typography into dynamic, responsive personality
 - Provides developers with precise specifications for implementing variable font behavior
+<<<<<<< HEAD
 - Operationalizes the "eccentric, curious" persona through typographic response
+=======
+- Operationalizes the "eccentric, kr-solidarityus" persona through typographic response
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 **Example:**
 
@@ -52,7 +64,11 @@ transition: font-variation-settings 600ms cubic-bezier(0.34, 1.56, 0.64, 1);
 
 - **Tonal Vegetation Stacks (Depth Variants)** section
   - Wattle Gold Family: 4 tonal variants (Shadow, Base, Glow, Bloom)
+<<<<<<< HEAD
   - Waratah Family: 4 tonal variants (Stem, Base, Glow, Bloom)
+=======
+  - [DEPRECATED_STYLE] Family: 4 tonal variants (Stem, Base, Glow, Bloom)
+>>>>>>> restoration-KR-Rage-Figma-v2.0
   - CSS variable naming conventions
   - Usage guidance for each tonal level
 
@@ -60,7 +76,11 @@ transition: font-variation-settings 600ms cubic-bezier(0.34, 1.56, 0.64, 1);
 
 - Enables subtle depth and layering without breaking palette coherence
 - Provides tonal range for hover states, borders, shadows, and backgrounds
+<<<<<<< HEAD
 - Maintains botanical naming convention across all color variants
+=======
+- Maintains [DEPRECATED_STYLE] naming convention across all color variants
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 - Low implementation effort, high visual sophistication
 
 **Example:**
@@ -90,7 +110,11 @@ transition: font-variation-settings 600ms cubic-bezier(0.34, 1.56, 0.64, 1);
 
 - Provides clear guidance for implementing bold, vintage-poster-style hero typography
 - Prevents timid size ratios (1.5x-2x) in favor of dramatic contrast
+<<<<<<< HEAD
 - Aligns with vintage naturalist classification sheets and Federation-era broadsides
+=======
+- Aligns with vintage [DEPRECATED_STYLE] classification sheets and Federation-era broadsides
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 **Example:**
 
@@ -116,16 +140,27 @@ transition: font-variation-settings 600ms cubic-bezier(0.34, 1.56, 0.64, 1);
   - Philosophy of compound, staggered animations
   - The Unfolding Pattern (3-phase card hover cascade)
   - Pebble Button interaction specifications
+<<<<<<< HEAD
   - Mode Switch animation (Gallery ↔ Laboratory)
   - Seed Badge interaction
   - Leaf Hero appearance (page load)
   - Key principles for organic motion
+=======
+  - Mode Switch animation (kr-dark ↔ kr-dark)
+  - Seed Badge interaction
+  - Leaf Hero appearance (page load)
+  - Key principles for [DEPRECATED_STYLE] motion
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 **Impact:**
 
 - Transforms simple hover states into premium, multi-phase animations
 - Provides production-ready CSS for compound animations
+<<<<<<< HEAD
 - Establishes pattern of staggered timing, multiple properties, and organic easing
+=======
+- Establishes pattern of staggered timing, multiple properties, and [DEPRECATED_STYLE] easing
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 - Separates "premium" from "functional" through motion complexity
 
 **Example:**
@@ -144,10 +179,17 @@ transition: font-variation-settings 600ms cubic-bezier(0.34, 1.56, 0.64, 1);
 
 **What was added:**
 
+<<<<<<< HEAD
 - Complete micro-copy translation table (Generic SaaS → Northcote Curio)
 - Voice principles and characteristics
 - Context-specific voice shifts (Gallery vs Laboratory)
 - Specimen labels and annotations
+=======
+- Complete micro-copy translation table (Generic SaaS → kerala-rage kr-solidarity)
+- Voice principles and characteristics
+- Context-specific voice shifts (kr-dark vs kr-dark)
+- kr-motif labels and annotations
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 - Animated empty state copy
 - Error messages (graceful failures)
 - Onboarding and first-time user experience
@@ -159,13 +201,21 @@ transition: font-variation-settings 600ms cubic-bezier(0.34, 1.56, 0.64, 1);
 
 **Impact:**
 
+<<<<<<< HEAD
 - Operationalizes the "eccentric, curious naturalist" personality through language
+=======
+- Operationalizes the "eccentric, kr-solidarityus [DEPRECATED_STYLE]" personality through language
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 - **v3.0 Update:** Introduces tiered voice system (T1 Functional, T2 Contextual, T3 Character)
 - Provides developers with exact copy replacements for generic SaaS language
 - Ensures clarity on primary UI while preserving personality for celebrations/states
 
 **Example Translations (Tiered):**
+<<<<<<< HEAD
 | Generic | Northcote Curio | Voice Tier |
+=======
+| Generic | kerala-rage kr-solidarity | Voice Tier |
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 |:---|:---|:---|
 | Upload resume | Upload Resume | T1 (Functional) |
 | Loading... | Searching jobs... | T1 (Functional) |
@@ -183,7 +233,11 @@ transition: font-variation-settings 600ms cubic-bezier(0.34, 1.56, 0.64, 1);
 - Complete AI code generation guidelines
 - Quick reference for color system, typography, shapes, motion
 - Component patterns with CSS examples
+<<<<<<< HEAD
 - Mode-specific rules (Gallery vs Laboratory)
+=======
+- Mode-specific rules (kr-dark vs kr-dark)
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 - Micro-copy translation table
 - Forbidden patterns and required patterns
 - Asset library reference
@@ -191,7 +245,11 @@ transition: font-variation-settings 600ms cubic-bezier(0.34, 1.56, 0.64, 1);
 
 **Impact:**
 
+<<<<<<< HEAD
 - Ensures AI code generation tools (Figma, Copilot, etc.) follow Northcote Curio patterns
+=======
+- Ensures AI code generation tools (Figma, Copilot, etc.) follow kerala-rage kr-solidarity patterns
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 - Provides developers with a single-page quick reference
 - Prevents "slop" by explicitly forbidding generic patterns
 - Complements the full documentation suite
@@ -230,9 +288,15 @@ transition: font-variation-settings 600ms cubic-bezier(0.34, 1.56, 0.64, 1);
 ### After (Operationalized)
 
 - ✅ **Typography responds to interaction** (Bloom Effect)
+<<<<<<< HEAD
 - ✅ **Color depth through tonal families** (Wattle/Waratah stacks)
 - ✅ **Motion is compound and cascading** (The Unfolding)
 - ✅ **Voice is consistent and distinctive** (Naturalist's Marginalia)
+=======
+- ✅ **Color depth through tonal families** (Wattle/[DEPRECATED_STYLE] stacks)
+- ✅ **Motion is compound and cascading** (The Unfolding)
+- ✅ **Voice is consistent and distinctive** ([DEPRECATED_STYLE]'s Marginalia)
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 - ✅ **Size contrast is dramatic** (Proclamation Maximalism)
 - ✅ **AI tools follow design system** (Guidelines.md)
 
@@ -245,7 +309,11 @@ transition: font-variation-settings 600ms cubic-bezier(0.34, 1.56, 0.64, 1);
 1. Update Fraunces font loading to include variable axes
 2. Implement Bloom Effect on interactive cards
 3. Add hover state transitions with `font-variation-settings`
+<<<<<<< HEAD
 4. Test across Gallery Mode components
+=======
+4. Test across kr-dark Mode components
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 **Estimated Effort:** 4-6 hours
 **Impact:** Immediate personality boost
@@ -257,7 +325,11 @@ transition: font-variation-settings 600ms cubic-bezier(0.34, 1.56, 0.64, 1);
 1. Add tonal stack CSS variables to theme
 2. Update component styles to use tonal variants
 3. Apply `Wattle Glow` to hover states
+<<<<<<< HEAD
 4. Use `Waratah Stem` for error states
+=======
+4. Use `[DEPRECATED_STYLE] Stem` for error states
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 **Estimated Effort:** 2-3 hours
 **Impact:** Subtle depth, professional polish
@@ -281,7 +353,11 @@ transition: font-variation-settings 600ms cubic-bezier(0.34, 1.56, 0.64, 1);
 1. Create `copy.ts` constants file from DOC-006
 2. Apply **tiered voice system**: T1 (functional) for navigation/actions, T2 (contextual) for success/empty states
 3. Update button labels to use clear functional language
+<<<<<<< HEAD
 4. Preserve personality in celebrations and Laboratory mode
+=======
+4. Preserve personality in celebrations and kr-dark mode
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 **Estimated Effort:** 4-5 hours
 **Impact:** Consistent world-building with clear user actions
@@ -292,7 +368,11 @@ transition: font-variation-settings 600ms cubic-bezier(0.34, 1.56, 0.64, 1);
 
 1. Identify hero moments (Dashboard, Landing, Analysis)
 2. Implement 240px hero typography with 5x ratios
+<<<<<<< HEAD
 3. Apply Libre Bodoni Condensed to proclamations
+=======
+3. Apply kr-serif-bold Condensed to proclamations
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 4. Test responsive scaling
 
 **Estimated Effort:** 3-4 hours
@@ -324,11 +404,19 @@ transition: font-variation-settings 600ms cubic-bezier(0.34, 1.56, 0.64, 1);
 
 The following recommendations were excluded per user request:
 
+<<<<<<< HEAD
 - ❌ **Specimen-Based Iconography** (LOW) - Custom 20-icon set requires high design effort
 - ❌ **Botanical Frames in Gallery Mode** (LOW) - Decorative layer, risk of visual clutter
 - ❌ **Animated Empty States (Kookaburra Sentry)** (LOW) - Charming but scope creep
 - ❌ **Specimen Labels with "Fig. 14" notation** (VERY LOW) - Nice-to-have detail
 - ❌ **Add "Specimen Iconography" to DOC-004** (VERY LOW) - Dependent on unimplemented icon set
+=======
+- ❌ **kr-motif-Based Iconography** (LOW) - Custom 20-icon set requires high design effort
+- ❌ **[DEPRECATED_STYLE] Frames in kr-dark Mode** (LOW) - Decorative layer, risk of visual clutter
+- ❌ **Animated Empty States (kr-shiva Sentry)** (LOW) - Charming but scope creep
+- ❌ **kr-motif Labels with "Fig. 14" notation** (VERY LOW) - Nice-to-have detail
+- ❌ **Add "kr-motif Iconography" to DOC-004** (VERY LOW) - Dependent on unimplemented icon set
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 These can be revisited in future iterations once core expressiveness is implemented.
 
@@ -346,13 +434,24 @@ These can be revisited in future iterations once core expressiveness is implemen
 
 ## Conclusion
 
+<<<<<<< HEAD
 The strategic design review was correct: **you've built the architecture for expressiveness but haven't yet inhabited it fully.** These documentation updates provide the missing specifications to operationalize the Northcote Curio personality.
+=======
+The strategic design review was correct: **you've built the architecture for expressiveness but haven't yet inhabited it fully.** These documentation updates provide the missing specifications to operationalize the kerala-rage kr-solidarity personality.
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 The changes are:
 
 - **Actionable** (production-ready CSS and copy)
 - **Prioritized** (VERY HIGH → MEDIUM, excluding LOW)
+<<<<<<< HEAD
 - **Cohesive** (all reinforce the naturalist metaphor)
 - **Testable** (clear success metrics)
 
 You're no longer building a SaaS product. You're building a **cabinet of curiosities**.
+=======
+- **Cohesive** (all reinforce the [DEPRECATED_STYLE] metaphor)
+- **Testable** (clear success metrics)
+
+You're no longer building a SaaS product. You're building a **cabinet of kr-solidaritysities**.
+>>>>>>> restoration-KR-Rage-Figma-v2.0

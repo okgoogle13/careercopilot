@@ -1,0 +1,67 @@
+{
+  "wireframe-to-code-example": {
+    "conversation_id": "123e4567-e89b-12d3-a456-426614174000",
+    "workflow_name": "wireframe-to-code",
+    "stages_completed": ["wireframe-annotator"],
+    "shared_context": {
+      "project_name": "careercopilot",
+      "design_tokens_path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/design/tokens/tokens.json",
+      "target_component": "LoginCard"
+    },
+    "stage_outputs": {
+      "wireframe-annotator": {
+        "file_path": "/tmp/wireframe-001.md",
+        "score": 340,
+        "annotations": {
+          "layout": "Grid-based container with asymmetric spacing",
+          "tokens": "Uses --sys-color-primary-50, --sys-color-asphaltBlack",
+          "accessibility": "WCAG 2.2 AA compliant, keyboard navigation support"
+        }
+      }
+    },
+    "created_at": "2026-02-15T10:00:00Z",
+    "updated_at": "2026-02-15T10:05:00Z"
+  },
+  "multi-stage-workflow-example": {
+    "conversation_id": "234e5678-e89b-12d3-a456-426614174001",
+    "workflow_name": "mockup-generation",
+    "stages_completed": ["wireframe-annotator", "m3-expressive-ui-evaluator"],
+    "shared_context": {
+      "project_name": "careercopilot",
+      "design_tokens_path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/design/tokens/tokens.json",
+      "design_brief": "/tmp/design-brief-login.md",
+      "target_component": "AuthenticationFlow"
+    },
+    "stage_outputs": {
+      "wireframe-annotator": {
+        "file_path": "/tmp/wireframe-002.md",
+        "score": 360,
+        "layout_type": "Cabinet",
+        "archetype": "multi-column grid"
+      },
+      "m3-expressive-ui-evaluator": {
+        "file_path": "/tmp/wireframe-002.md",
+        "evaluation_score": 385,
+        "typography_score": 95,
+        "color_score": 90,
+        "feedback": "Excellent use of variable fonts. Consider increasing contrast on secondary CTAs.",
+        "passed_validation": true
+      }
+    },
+    "created_at": "2026-02-15T09:30:00Z",
+    "updated_at": "2026-02-15T09:45:00Z"
+  },
+  "fresh-workflow-example": {
+    "conversation_id": "345e6789-e89b-12d3-a456-426614174002",
+    "workflow_name": "ui-spec-generation",
+    "stages_completed": [],
+    "shared_context": {
+      "project_name": "careercopilot",
+      "design_tokens_path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/design/tokens/tokens.json",
+      "mode": "solidarity"
+    },
+    "stage_outputs": {},
+    "created_at": "2026-02-15T11:00:00Z",
+    "updated_at": "2026-02-15T11:00:00Z"
+  }
+}

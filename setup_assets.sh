@@ -4,7 +4,11 @@
 BASE_DIR="frontend/public/assets/northcote_v1"
 
 # 1. Create the Directory Structure
+<<<<<<< HEAD
 echo "🏛️  Creating Northcote Curio Asset Structure..."
+=======
+echo "🏛️  Creating Northcote [DEPRECATED_STYLE] Asset Structure..."
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 mkdir -p "$BASE_DIR/backgrounds"
 mkdir -p "$BASE_DIR/botanicals"
 mkdir -p "$BASE_DIR/icons"
@@ -16,14 +20,22 @@ echo "📝 Generating _manifest.json..."
 
 cat > "$BASE_DIR/_manifest.json" <<EOF
 {
+<<<<<<< HEAD
   "project": "Northcote Curio Design System",
+=======
+  "project": "Northcote [DEPRECATED_STYLE] Design System",
+>>>>>>> restoration-KR-Rage-Figma-v2.0
   "version": "1.0",
   "last_audit": "$(date +%Y-%m-%d)",
   "assets": {
     "backgrounds": {
       "asset_01_wallpaper": {
         "status": "MISSING",
+<<<<<<< HEAD
         "desc": "The Curio Wallpaper (Gallery Master)",
+=======
+        "desc": "The [DEPRECATED_STYLE] Wallpaper (Gallery Master)",
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         "source": "Gemini Asset 1"
       },
       "asset_03_parchment": {
@@ -48,7 +60,11 @@ cat > "$BASE_DIR/_manifest.json" <<EOF
       "asset_09_waratah": {
         "status": "READY",
         "file": "waratah_hero_master.png",
+<<<<<<< HEAD
         "desc": "Waratah Hero Closeup",
+=======
+        "desc": "[DEPRECATED_STYLE] Hero Closeup",
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         "source": "Claude Archive (92/100)"
       }
     },

@@ -128,4 +128,8 @@ export const JobCard: React.FC<JobCardProps> = ({
       </div>
     </Stone>
   );
+<<<<<<< HEAD
 };
+=======
+};
+>>>>>>> restoration-KR-Rage-Figma-v2.0

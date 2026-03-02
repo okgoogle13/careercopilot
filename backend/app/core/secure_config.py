@@ -1,4 +1,5 @@
 """
+<<<<<<< HEAD
 Secure configuration management using Google Cloud Secret Manager.
 
 This module provides a centralized way to access configuration values,
@@ -25,6 +26,27 @@ except ImportError:
 
 class SecureSettings(BaseSettings):
     """Application settings with secure secret management."""
+=======
+Secure configuration management using environment variables.
+
+This module provides a centralized way to access configuration values,
+ensuring consistent settings across the application.
+"""
+
+import os
+from typing import Any
+
+try:
+    from pydantic_settings import BaseSettings
+except ImportError:  # pragma: no cover
+    from pydantic import BaseModel as BaseSettings
+
+from .secret_manager import get_database_url, get_secret, get_secret_key
+
+
+class SecureSettings(BaseSettings):
+    """Application settings using environment variables."""
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
     # Environment
     ENV: str = "development"
@@ -33,6 +55,7 @@ class SecureSettings(BaseSettings):
     LOG_LEVEL: str = "INFO"
     PORT: int = 8000
     FRONTEND_URL: str = "http://localhost:3000"
+<<<<<<< HEAD
 
     # Database
     DATABASE_URL: str = "sqlite:///data/careercopilot-dev.db"
@@ -51,6 +74,34 @@ class SecureSettings(BaseSettings):
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 1440  # 24 hours
 
+=======
+    APP_URL: str = "http://localhost:8000"
+
+    # Database (Supabase PostgreSQL)
+    DATABASE_URL: str = "sqlite:///data/careercopilot-dev.db"
+
+    # Supabase Configuration
+    SUPABASE_URL: str | None = None
+    SUPABASE_ANON_KEY: str | None = None
+    SUPABASE_SERVICE_ROLE_KEY: str | None = None
+    SUPABASE_STORAGE_BUCKET: str = "user_assets"
+
+    # Authentication
+    JWT_SECRET_KEY: str = "insecure-default-secret-key"
+    ALGORITHM: str = "HS256"
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = 1440  # 24 hours
+
+    # AI Services
+    GEMINI_API_KEY: str | None = None
+    ANTHROPIC_API_KEY: str | None = None
+
+    # AWS (for SES/S3 fallback)
+    AWS_ACCESS_KEY_ID: str | None = None
+    AWS_SECRET_ACCESS_KEY: str | None = None
+    AWS_REGION: str = "us-east-1"
+    SES_SENDER_EMAIL: str | None = None
+
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     def __init__(self, **kwargs: Any) -> None:
         super().__init__(**kwargs)
         # Handle ENVIRONMENT alias
@@ -59,6 +110,7 @@ class SecureSettings(BaseSettings):
         elif os.getenv("ENVIRONMENT"):
             self.ENV = os.getenv("ENVIRONMENT", "development")
 
+<<<<<<< HEAD
         # Override with secure values for production or staging
         if SECRET_MANAGER_AVAILABLE and self.ENV in ["production", "staging"]:
             try:
@@ -147,11 +199,33 @@ class SecureSettings(BaseSettings):
     # Development Settings
     ENABLE_HOT_RELOAD: bool = False
     SHOW_DEBUG_INFO: bool = False
+=======
+        # Load values
+        try:
+            self.JWT_SECRET_KEY = get_secret_key()
+            self.DATABASE_URL = get_database_url()
+
+            # Load AI API keys
+            self.GEMINI_API_KEY = get_secret("GEMINI_API_KEY", default=self.GEMINI_API_KEY)
+            self.ANTHROPIC_API_KEY = get_secret("ANTHROPIC_API_KEY", default=self.ANTHROPIC_API_KEY)
+
+            # Load Supabase config
+            self.SUPABASE_URL = get_secret("SUPABASE_URL", default=self.SUPABASE_URL)
+            self.SUPABASE_ANON_KEY = get_secret("SUPABASE_ANON_KEY", default=self.SUPABASE_ANON_KEY)
+            self.SUPABASE_SERVICE_ROLE_KEY = get_secret("SUPABASE_SERVICE_ROLE_KEY", default=self.SUPABASE_SERVICE_ROLE_KEY)
+
+        except Exception as e:
+            if self.ENV in ["production", "staging"]:
+                raise RuntimeError(f"Failed to load production configuration: {e}")
+            else:
+                print(f"Warning: Failed to load some configuration: {e}")
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
     class Config:
         env_file = ".env"
         env_file_encoding = "utf-8"
         case_sensitive = True
+<<<<<<< HEAD
         extra = "allow"  # Allow extra fields from environment
 
         @classmethod
@@ -217,6 +291,17 @@ class SecureSettings(BaseSettings):
 
 # Create a single instance of the settings
 settings: 'SecureSettings' = SecureSettings()
+=======
+        extra = "allow"
+
+
+# Create a single instance of the settings
+settings: "SecureSettings" = SecureSettings()
+
+
+# Create a single instance of the settings
+settings: "SecureSettings" = SecureSettings()
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 # For backward compatibility
 if __name__ == "__main__":

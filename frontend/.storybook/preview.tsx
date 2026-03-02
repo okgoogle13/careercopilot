@@ -3,7 +3,11 @@ import type { Preview } from '@storybook/react';
 import { BrowserRouter } from 'react-router-dom';
 import { AuthProvider } from '../src/context/AuthContext';
 import '../src/index.css';
+<<<<<<< HEAD
 import '../src/theme/northcote.css';
+=======
+import '../src/theme/kerala-rage.css';
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 const preview: Preview = {
   parameters: {

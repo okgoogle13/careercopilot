@@ -1,6 +1,10 @@
 # Theme & Design Token Evidence List
 
+<<<<<<< HEAD
 This document provides a verified locations list for the Northcote Design System's theme and token infrastructure.
+=======
+This document provides a verified locations list for the kerala-rage Design System's theme and token infrastructure.
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 ## 1. Design Tokens
 
@@ -28,10 +32,17 @@ This document provides a verified locations list for the Northcote Design System
 - **Location:** `frontend/src/globals.css`
 - **Purpose:** The main content file loaded by the application. It acts as an orchestrator, importing the unified theme file.
 
+<<<<<<< HEAD
 ### **Northcote Theme Styles**
 
 - **Location:** `frontend/src/design/styles/northcote.css`
 - **Purpose:** Contains the CSS variable definitions (`:root { ... }`) and foundational class styles for the Northcote theme. It is here that the abstract tokens are bound to actual CSS Custom Properties.
+=======
+### **kerala-rage Theme Styles**
+
+- **Location:** `frontend/src/design/styles/kerala-rage.css`
+- **Purpose:** Contains the CSS variable definitions (`:root { ... }`) and foundational class styles for the kerala-rage theme. It is here that the abstract tokens are bound to actual CSS Custom Properties.
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 ### **Legacy Support**
 

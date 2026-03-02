@@ -160,8 +160,13 @@ STATUS: READY TO LAUNCH ✨
 **Theme Confirmed:**
 - Electric Alchemist aesthetic applied
 - M3 design system active
+<<<<<<< HEAD
 - Organic shapes and gradients rendering
 - Glassmorphism effects present
+=======
+- [DEPRECATED_STYLE] shapes and gradients rendering
+- kr-screenprint effects present
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 ### Backend Verification
 ```bash

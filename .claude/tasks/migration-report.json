@@ -1,0 +1,236 @@
+{
+  "total_migrated": 45,
+  "total_failed": 0,
+  "total_skipped": 0,
+  "operations": {
+    "success": [
+      {
+        "filename": "kerala-rage-gen-raw-20260214-002.jpeg",
+        "category": "abstract",
+        "target": "kr-solidarity/abstract/kr-solidarity__abstract__generative-gradient-01__v1.jpeg"
+      },
+      {
+        "filename": "kerala-rage-gen-raw-20260214-003.jpeg",
+        "category": "abstract",
+        "target": "kr-solidarity/abstract/kr-solidarity__abstract__generative-gradient-02__v1.jpeg"
+      },
+      {
+        "filename": "kerala-rage-gen-raw-20260214-005.jpeg",
+        "category": "abstract",
+        "target": "kr-solidarity/abstract/kr-solidarity__abstract__generative-gradient-03__v1.jpeg"
+      },
+      {
+        "filename": "kerala-rage-gen-raw-20260214-009.jpeg",
+        "category": "abstract",
+        "target": "kr-solidarity/abstract/kr-solidarity__abstract__generative-gradient-04__v1.jpeg"
+      },
+      {
+        "filename": "kerala-rage-gen-raw-20260214-011.jpeg",
+        "category": "abstract",
+        "target": "kr-solidarity/abstract/kr-solidarity__abstract__generative-gradient-05__v1.jpeg"
+      },
+      {
+        "filename": "kerala-rage-gen-raw-20260214-012.jpeg",
+        "category": "abstract",
+        "target": "kr-solidarity/abstract/kr-solidarity__abstract__generative-gradient-06__v1.jpeg"
+      },
+      {
+        "filename": "kerala-rage-gen-raw-20260214-015.jpeg",
+        "category": "abstract",
+        "target": "kr-solidarity/abstract/kr-solidarity__abstract__generative-gradient-07__v1.jpeg"
+      },
+      {
+        "filename": "kerala-rage-gen-raw-20260214-018.jpeg",
+        "category": "abstract",
+        "target": "kr-solidarity/abstract/kr-solidarity__abstract__generative-gradient-08__v1.jpeg"
+      },
+      {
+        "filename": "kerala-rage-gen-raw-20260214-021.jpeg",
+        "category": "abstract",
+        "target": "kr-solidarity/abstract/kr-solidarity__abstract__generative-gradient-09__v1.jpeg"
+      },
+      {
+        "filename": "kerala-rage-gen-raw-20260214-022.jpeg",
+        "category": "abstract",
+        "target": "kr-solidarity/abstract/kr-solidarity__abstract__generative-gradient-10__v1.jpeg"
+      },
+      {
+        "filename": "kerala-rage-upload-20260214-029.webp",
+        "category": "abstract",
+        "target": "kr-solidarity/abstract/kr-solidarity__abstract__user-uploaded-abstract-01__v1.webp"
+      },
+      {
+        "filename": "kerala-rage-upload-20260214-034.webp",
+        "category": "abstract",
+        "target": "kr-solidarity/abstract/kr-solidarity__abstract__user-uploaded-abstract-02__v1.webp"
+      },
+      {
+        "filename": "kerala-rage-gen-raw-20260214-004.jpeg",
+        "category": "texture",
+        "target": "kr-solidarity/texture/kr-solidarity__texture__generative-substrate-pattern__v1.jpeg"
+      },
+      {
+        "filename": "kerala-rage-gen-raw-20260214-007.jpeg",
+        "category": "texture",
+        "target": "kr-solidarity/texture/kr-solidarity__texture__generative-substrate-02__v1.jpeg"
+      },
+      {
+        "filename": "kerala-rage-gen-raw-20260214-010.jpeg",
+        "category": "texture",
+        "target": "kr-solidarity/texture/kr-solidarity__texture__generative-substrate-03__v1.jpeg"
+      },
+      {
+        "filename": "kerala-rage-gen-raw-20260214-013.jpeg",
+        "category": "texture",
+        "target": "kr-solidarity/texture/kr-solidarity__texture__generative-substrate-04__v1.jpeg"
+      },
+      {
+        "filename": "kerala-rage-gen-raw-20260214-017.jpeg",
+        "category": "texture",
+        "target": "kr-solidarity/texture/kr-solidarity__texture__generative-substrate-05__v1.jpeg"
+      },
+      {
+        "filename": "kerala-rage-gen-raw-20260214-020.jpeg",
+        "category": "texture",
+        "target": "kr-solidarity/texture/kr-solidarity__texture__generative-substrate-06__v1.jpeg"
+      },
+      {
+        "filename": "kerala-rage-gen-raw-20260214-023.jpeg",
+        "category": "texture",
+        "target": "kr-solidarity/texture/kr-solidarity__texture__generative-substrate-07__v1.jpeg"
+      },
+      {
+        "filename": "kerala-rage-triage-20260214-039.webp",
+        "category": "texture",
+        "target": "kr-solidarity/texture/kr-solidarity__texture__triage-tactile-substrate__v1.webp"
+      },
+      {
+        "filename": "kerala-rage-triage-20260214-040.webp",
+        "category": "texture",
+        "target": "kr-solidarity/texture/kr-solidarity__texture__triage-substrate-02__v1.webp"
+      },
+      {
+        "filename": "kerala-rage-triage-20260214-048.png",
+        "category": "texture",
+        "target": "kr-solidarity/texture/kr-solidarity__texture__triage-substrate-03__v1.png"
+      },
+      {
+        "filename": "kerala-rage-upload-20260214-030.webp",
+        "category": "texture",
+        "target": "kr-solidarity/texture/kr-solidarity__texture__user-uploaded-substrate-01__v1.webp"
+      },
+      {
+        "filename": "kerala-rage-upload-20260214-036.webp",
+        "category": "texture",
+        "target": "kr-solidarity/texture/kr-solidarity__texture__user-uploaded-substrate-02__v1.webp"
+      },
+      {
+        "filename": "kerala-rage-gen-raw-20260214-006.jpeg",
+        "category": "motif",
+        "target": "kr-solidarity/motif/kr-solidarity__motif__generative-pattern-botanical__v1.jpeg"
+      },
+      {
+        "filename": "kerala-rage-gen-raw-20260214-016.jpeg",
+        "category": "motif",
+        "target": "kr-solidarity/motif/kr-solidarity__motif__generative-pattern-02__v1.jpeg"
+      },
+      {
+        "filename": "kerala-rage-triage-20260214-001.png",
+        "category": "motif",
+        "target": "kr-solidarity/motif/kr-solidarity__motif__triage-botanical-motif__v1.png"
+      },
+      {
+        "filename": "kerala-rage-triage-20260214-043.jpg",
+        "category": "motif",
+        "target": "kr-solidarity/motif/kr-solidarity__motif__triage-symbolic-pattern__v1.jpg"
+      },
+      {
+        "filename": "kerala-rage-triage-20260214-049.png",
+        "category": "motif",
+        "target": "kr-solidarity/motif/kr-solidarity__motif__triage-botanical-pattern-02__v1.png"
+      },
+      {
+        "filename": "kerala-rage-upload-20260214-031.webp",
+        "category": "motif",
+        "target": "kr-solidarity/motif/kr-solidarity__motif__user-uploaded-pattern-01__v1.webp"
+      },
+      {
+        "filename": "kerala-rage-upload-20260214-038.webp",
+        "category": "motif",
+        "target": "kr-solidarity/motif/kr-solidarity__motif__user-uploaded-pattern-02__v1.webp"
+      },
+      {
+        "filename": "kerala-rage-gen-raw-20260214-008.jpeg",
+        "category": "landscape",
+        "target": "kr-solidarity/landscape/kr-solidarity__landscape__generative-atmospheric-scene__v1.jpeg"
+      },
+      {
+        "filename": "kerala-rage-gen-raw-20260214-014.jpeg",
+        "category": "landscape",
+        "target": "kr-solidarity/landscape/kr-solidarity__landscape__generative-scene-02__v1.jpeg"
+      },
+      {
+        "filename": "kerala-rage-gen-raw-20260214-019.jpeg",
+        "category": "landscape",
+        "target": "kr-solidarity/landscape/kr-solidarity__landscape__generative-scene-03__v1.jpeg"
+      },
+      {
+        "filename": "kerala-rage-gen-raw-20260214-024.jpeg",
+        "category": "landscape",
+        "target": "kr-solidarity/landscape/kr-solidarity__landscape__generative-scene-04__v1.jpeg"
+      },
+      {
+        "filename": "kerala-rage-triage-20260214-044.png",
+        "category": "landscape",
+        "target": "kr-solidarity/landscape/kr-solidarity__landscape__triage-kerala-terrain__v1.png"
+      },
+      {
+        "filename": "kerala-rage-upload-20260214-032.webp",
+        "category": "landscape",
+        "target": "kr-solidarity/landscape/kr-solidarity__landscape__user-uploaded-scene-01__v1.webp"
+      },
+      {
+        "filename": "kerala-rage-triage-20260214-041.png",
+        "category": "portrait",
+        "target": "kr-solidarity/portrait/kr-solidarity__portrait__triage-cultural-portrait__v1.png"
+      },
+      {
+        "filename": "kerala-rage-triage-20260214-046.png",
+        "category": "portrait",
+        "target": "kr-solidarity/portrait/kr-solidarity__portrait__triage-resistance-figure__v1.png"
+      },
+      {
+        "filename": "kerala-rage-upload-20260214-033.webp",
+        "category": "portrait",
+        "target": "kr-solidarity/portrait/kr-solidarity__portrait__user-uploaded-figure-01__v1.webp"
+      },
+      {
+        "filename": "kerala-rage-triage-20260214-042.png",
+        "category": "devotional",
+        "target": "kr-solidarity/devotional/kr-solidarity__devotional__triage-spiritual-element__v1.png"
+      },
+      {
+        "filename": "kerala-rage-triage-20260214-047.png",
+        "category": "devotional",
+        "target": "kr-solidarity/devotional/kr-solidarity__devotional__triage-ancestral-imagery__v1.png"
+      },
+      {
+        "filename": "kerala-rage-upload-20260214-035.webp",
+        "category": "devotional",
+        "target": "kr-solidarity/devotional/kr-solidarity__devotional__user-uploaded-sacred-01__v1.webp"
+      },
+      {
+        "filename": "kerala-rage-triage-20260214-045.png",
+        "category": "specimen",
+        "target": "kr-solidarity/specimen/kr-solidarity__specimen__triage-natural-history__v1.png"
+      },
+      {
+        "filename": "kerala-rage-upload-20260214-037.webp",
+        "category": "specimen",
+        "target": "kr-solidarity/specimen/kr-solidarity__specimen__user-uploaded-natural-history__v1.webp"
+      }
+    ],
+    "failed": [],
+    "skipped": []
+  }
+}

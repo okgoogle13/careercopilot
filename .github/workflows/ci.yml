@@ -24,7 +24,12 @@ permissions:
   contents: read
 
 concurrency:
+<<<<<<< HEAD
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+=======
+  # Prevent concurrent CI runs on the same branch to avoid git lock conflicts
+  group: ci-${{ github.event.pull_request.number || github.ref }}
+>>>>>>> restoration-KR-Rage-Figma-v2.0
   cancel-in-progress: true
 
 env:

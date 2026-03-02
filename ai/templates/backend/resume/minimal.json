@@ -1,0 +1,36 @@
+{
+  "id": "minimal",
+  "name": "Minimal ATS Classic",
+  "atsProfile": {
+    "columns": 1,
+    "allowsTables": false,
+    "allowsImages": false
+  },
+  "blocks": [
+    {
+      "kind": "section",
+      "title": "Contact",
+      "fields": ["name", "email", "phone"]
+    },
+    {
+      "kind": "section",
+      "title": "Summary",
+      "fields": ["summary_text"]
+    },
+    {
+      "kind": "section",
+      "title": "Experience",
+      "fields": ["jobs"]
+    },
+    {
+      "kind": "section",
+      "title": "Education",
+      "fields": ["degrees"]
+    },
+    {
+      "kind": "section",
+      "title": "Skills",
+      "fields": ["skills_list"]
+    }
+  ]
+}

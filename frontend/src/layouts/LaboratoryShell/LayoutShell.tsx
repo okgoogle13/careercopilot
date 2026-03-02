@@ -1,18 +1,35 @@
 import React from 'react';
+<<<<<<< HEAD
+=======
+import { Link } from 'react-router-dom';
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 import { GlobalHeader } from './components/GlobalHeader';
 import { MainCanvas } from './components/MainCanvas';
 import { NavRail } from './components/NavRail';
 import { SidePanel } from './components/SidePanel';
 
+<<<<<<< HEAD
 /**
  * LayoutShell
  *
  * The primary container for the Laboratory Workspace.
+=======
+const KR_LOGO_SRC = '/assets/kr-solidarity/ui-kit/svg/KR-LOGO-001-primary.svg';
+
+/**
+ * LayoutShell
+ *
+ * The primary container for the KrDark Workspace.
+>>>>>>> restoration-KR-Rage-Figma-v2.0
  * Orchestrates the grid layout and provides the ModeContext.
  */
 export const LayoutShell: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
   return (
+<<<<<<< HEAD
     <div className="flex h-screen w-screen overflow-hidden bg-surface-laboratory-slate-smoke-high text-on-surface-parchment font-field-note antialiased">
+=======
+    <div className="flex h-screen w-screen overflow-hidden bg-surface-KrDark-slate-smoke-high text-on-surface-paper-white font-field-note antialiased">
+>>>>>>> restoration-KR-Rage-Figma-v2.0
       {/* Nav Rail - Fixed Width Left */}
       <div className="flex-none z-30">
         <NavRail />
@@ -31,10 +48,39 @@ export const LayoutShell: React.FC<{ children?: React.ReactNode }> = ({ children
           <main className="flex-1 overflow-auto relative z-0">{children || <MainCanvas />}</main>
 
           {/* Side Panel - Fixed Width Right (Collapsible logic to be added later) */}
+<<<<<<< HEAD
           <aside className="flex-none w-80 border-l border-surface-laboratory-slate-smoke-highest bg-surface-laboratory-slate-smoke-high z-10 hidden lg:block">
             <SidePanel />
           </aside>
         </div>
+=======
+          <aside className="flex-none w-80 border-l border-surface-KrDark-slate-smoke-highest bg-surface-KrDark-slate-smoke-high z-10 hidden lg:block">
+            <SidePanel />
+          </aside>
+        </div>
+
+        <footer className="flex-none border-t border-surface-KrDark-slate-smoke-highest bg-surface-KrDark-slate-smoke-high px-6 py-4">
+          <Link
+            to="/"
+            aria-label="Kerala Rage CareerCopilot"
+            className="flex items-center justify-center gap-3 lg:justify-start"
+          >
+            <img
+              src={KR_LOGO_SRC}
+              alt="Kerala Rage CareerCopilot"
+              className="h-auto max-h-[60px] w-auto rounded-xl"
+            />
+            <div className="flex flex-col">
+              <span className="font-proclamation text-sm uppercase tracking-[0.2em] text-ink-gold">
+                Built with Solidarity
+              </span>
+              <span className="text-[10px] font-annotation uppercase tracking-widest text-secondary-flannel-dim">
+                Navigation and workspace shell branding
+              </span>
+            </div>
+          </Link>
+        </footer>
+>>>>>>> restoration-KR-Rage-Figma-v2.0
       </div>
     </div>
   );

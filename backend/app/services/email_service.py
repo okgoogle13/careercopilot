@@ -5,7 +5,10 @@ Provides email sending functionality using Amazon Simple Email Service (SES).
 """
 
 import os
+<<<<<<< HEAD
 from typing import Optional
+=======
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 import boto3
 from botocore.exceptions import ClientError
@@ -16,10 +19,17 @@ class SESEmailService:
 
     def __init__(
         self,
+<<<<<<< HEAD
         aws_access_key_id: Optional[str] = None,
         aws_secret_access_key: Optional[str] = None,
         aws_region: Optional[str] = None,
         sender_email: Optional[str] = None,
+=======
+        aws_access_key_id: str | None = None,
+        aws_secret_access_key: str | None = None,
+        aws_region: str | None = None,
+        sender_email: str | None = None,
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     ):
         """
         Initialize SES email service.
@@ -54,7 +64,11 @@ class SESEmailService:
         to_email: str,
         subject: str,
         html_content: str,
+<<<<<<< HEAD
         text_content: Optional[str] = None,
+=======
+        text_content: str | None = None,
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     ) -> dict:
         """
         Send an email via AWS SES.
@@ -99,7 +113,11 @@ class SESEmailService:
 
 
 # Global instance (initialized on first use)
+<<<<<<< HEAD
 _email_service: Optional[SESEmailService] = None
+=======
+_email_service: SESEmailService | None = None
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 
 def get_email_service() -> SESEmailService:

@@ -292,12 +292,21 @@
           - [component.test.tsx.tpl](./.claude/skills/jest-test-scaffolder/templates/component.test.tsx.tpl)
           - [hook.test.tsx.tpl](./.claude/skills/jest-test-scaffolder/templates/hook.test.tsx.tpl)
           - [integration.test.tsx.tpl](./.claude/skills/jest-test-scaffolder/templates/integration.test.tsx.tpl)
+<<<<<<< HEAD
       - `northcote-typography-strategy/`
         - [SKILL 2.md](./.claude/skills/northcote-typography-strategy/SKILL 2.md)
         - [SKILL.md](./.claude/skills/northcote-typography-strategy/SKILL.md)
       - `northcote-visual-audit/`
         - [SKILL 2.md](./.claude/skills/northcote-visual-audit/SKILL 2.md)
         - [SKILL.md](./.claude/skills/northcote-visual-audit/SKILL.md)
+=======
+      - `kerala-rage-typography-strategy/`
+        - [SKILL 2.md](./.claude/skills/kerala-rage-typography-strategy/SKILL 2.md)
+        - [SKILL.md](./.claude/skills/kerala-rage-typography-strategy/SKILL.md)
+      - `kerala-rage-visual-audit/`
+        - [SKILL 2.md](./.claude/skills/kerala-rage-visual-audit/SKILL 2.md)
+        - [SKILL.md](./.claude/skills/kerala-rage-visual-audit/SKILL.md)
+>>>>>>> restoration-KR-Rage-Figma-v2.0
       - `project-health-checker/`
         - [SKILL.md](./.claude/skills/project-health-checker/SKILL.md)
       - `pydantic-model-scaffolder/`
@@ -4457,7 +4466,11 @@
           - [WEEKLY_TRACKER_2026-W03.md](./docs/project/archive/weekly-logs/WEEKLY_TRACKER_2026-W03.md)
     - `prompts/`
       - [google-ai-studio-anatomical-extremes.md](./docs/prompts/google-ai-studio-anatomical-extremes.md)
+<<<<<<< HEAD
       - [northcote-curio-botanical-plate.md](./docs/prompts/northcote-curio-botanical-plate.md)
+=======
+      - [kerala-rage-kr-solidarity-[DEPRECATED_STYLE]-plate.md](./docs/prompts/kerala-rage-kr-solidarity-[DEPRECATED_STYLE]-plate.md)
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     - `setup/`
       - [AI_AGENTS_UPDATE_GUIDE.md](./docs/setup/AI_AGENTS_UPDATE_GUIDE.md)
       - [CLAUDE_CODE_AGENT_CONFIGURATION.md](./docs/setup/CLAUDE_CODE_AGENT_CONFIGURATION.md)
@@ -4726,6 +4739,7 @@
       - [favicon.ico](./frontend/public/favicon.ico)
       - `assets/`
         - `plants/`
+<<<<<<< HEAD
           - [native-banksia.png](./frontend/public/assets/plants/native-banksia.png)
           - [native-bottlebrush.png](./frontend/public/assets/plants/native-bottlebrush.png)
           - [native-gum-hanging.png](./frontend/public/assets/plants/native-gum-hanging.png)
@@ -4755,6 +4769,37 @@
           - [gallery-nocturnal.webp](./frontend/public/assets/wallpapers/gallery-nocturnal.webp)
           - [lab-technical.webp](./frontend/public/assets/wallpapers/lab-technical.webp)
           - [texture-gallery-curio-wallpaper-2048.jpg](./frontend/public/assets/wallpapers/texture-gallery-curio-wallpaper-2048.jpg)
+=======
+          - [native-kr-flower.png](./frontend/public/assets/plants/native-kr-flower.png)
+          - [native-bottlebrush.png](./frontend/public/assets/plants/native-bottlebrush.png)
+          - [native-gum-hanging.png](./frontend/public/assets/plants/native-gum-hanging.png)
+          - [native-kangaroo.png](./frontend/public/assets/plants/native-kangaroo.png)
+          - [native-[DEPRECATED_STYLE]-hanging.png](./frontend/public/assets/plants/native-[DEPRECATED_STYLE]-hanging.png)
+        - `kr-motifs/`
+          - [leaf-fern.png](./frontend/public/assets/kr-motifs/leaf-fern.png)
+          - [motif-kr-dark-core-kr-motif-series.png](./frontend/public/assets/kr-motifs/motif-kr-dark-core-kr-motif-series.png)
+          - [motif-kr-dark-dryandra-hero.png](./frontend/public/assets/kr-motifs/motif-kr-dark-dryandra-hero.png)
+          - [motif-kr-dark-kr-leafus-kr-motif.png](./frontend/public/assets/kr-motifs/motif-kr-dark-kr-leafus-kr-motif.png)
+          - [motif-kr-dark-sentry-kr-shiva-1024.png](./frontend/public/assets/kr-motifs/motif-kr-dark-sentry-kr-shiva-1024.png)
+          - [motif-kr-dark-anatomical-grid.png](./frontend/public/assets/kr-motifs/motif-kr-dark-anatomical-grid.png)
+          - [motif-kr-dark-arborist-notes.png](./frontend/public/assets/kr-motifs/motif-kr-dark-arborist-notes.png)
+          - [motif-reference-archival-plate.png](./frontend/public/assets/kr-motifs/motif-reference-archival-plate.png)
+          - [motif-reference-field-guide.png](./frontend/public/assets/kr-motifs/motif-reference-field-guide.png)
+        - `textures/`
+          - [noise-grain.png](./frontend/public/assets/textures/noise-grain.png)
+          - [texture-kr-dark-midnight-garden.jpg](./frontend/public/assets/textures/texture-kr-dark-midnight-garden.jpg)
+          - [texture-kr-dark-nocturnal-tile.png](./frontend/public/assets/textures/texture-kr-dark-nocturnal-tile.png)
+          - [texture-kr-dark-asphalt-black-variant.jpg](./frontend/public/assets/textures/texture-kr-dark-asphalt-black-variant.jpg)
+          - [texture-kr-dark-paper-white-source-1.png](./frontend/public/assets/textures/texture-kr-dark-paper-white-source-1.png)
+          - [texture-kr-dark-paper-white-source-2.png](./frontend/public/assets/textures/texture-kr-dark-paper-white-source-2.png)
+          - [texture-kr-dark-paper-white-source-3.png](./frontend/public/assets/textures/texture-kr-dark-paper-white-source-3.png)
+          - [texture-kr-dark-paper-white-source-4.png](./frontend/public/assets/textures/texture-kr-dark-paper-white-source-4.png)
+          - [texture-kr-dark-paper-white-tile.jpg](./frontend/public/assets/textures/texture-kr-dark-paper-white-tile.jpg)
+        - `wallpapers/`
+          - [kr-dark-nocturnal.webp](./frontend/public/assets/wallpapers/kr-dark-nocturnal.webp)
+          - [lab-technical.webp](./frontend/public/assets/wallpapers/lab-technical.webp)
+          - [texture-kr-dark-kr-solidarity-wallpaper-2048.jpg](./frontend/public/assets/wallpapers/texture-kr-dark-kr-solidarity-wallpaper-2048.jpg)
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     - `reports/`
       - [INFRASTRUCTURE_VERIFICATION_REPORT.md](./frontend/reports/INFRASTRUCTURE_VERIFICATION_REPORT.md)
       - [essential.csv](./frontend/reports/essential.csv)
@@ -4885,12 +4930,21 @@
           - [snake_plant.png](./frontend/src/assets/images/snake_plant.png)
           - [texture-pattern.png](./frontend/src/assets/images/texture-pattern.png)
         - `motifs/`
+<<<<<<< HEAD
           - [motif-laboratory-lichen-texture.png](./frontend/src/assets/motifs/motif-laboratory-lichen-texture.png)
         - `specimens/`
           - [beetle-scarab.png](./frontend/src/assets/specimens/beetle-scarab.png)
           - [leaf-fern.png](./frontend/src/assets/specimens/leaf-fern.png)
           - [motif-gallery-frillneck-warning.png](./frontend/src/assets/specimens/motif-gallery-frillneck-warning.png)
           - [the-sentry.jpg](./frontend/src/assets/specimens/the-sentry.jpg)
+=======
+          - [motif-kr-dark-lichen-texture.png](./frontend/src/assets/motifs/motif-kr-dark-lichen-texture.png)
+        - `kr-motifs/`
+          - [beetle-scarab.png](./frontend/src/assets/kr-motifs/beetle-scarab.png)
+          - [leaf-fern.png](./frontend/src/assets/kr-motifs/leaf-fern.png)
+          - [motif-kr-dark-frillneck-warning.png](./frontend/src/assets/kr-motifs/motif-kr-dark-frillneck-warning.png)
+          - [the-sentry.jpg](./frontend/src/assets/kr-motifs/the-sentry.jpg)
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         - `textures/`
           - [dust-overlay.png](./frontend/src/assets/textures/dust-overlay.png)
           - [grid-mesh.png](./frontend/src/assets/textures/grid-mesh.png)
@@ -4947,7 +5001,11 @@
           - [Lens.tsx](./frontend/src/components/ui/Lens.tsx)
           - [Mark.tsx](./frontend/src/components/ui/Mark.tsx)
           - [NativeAnchor.tsx](./frontend/src/components/ui/NativeAnchor.tsx)
+<<<<<<< HEAD
           - [NorthcoteButton.tsx](./frontend/src/components/ui/NorthcoteButton.tsx)
+=======
+          - [kerala-rageButton.tsx](./frontend/src/components/ui/kerala-rageButton.tsx)
+>>>>>>> restoration-KR-Rage-Figma-v2.0
           - [Pebble.figma 2.tsx](./frontend/src/components/ui/Pebble.figma 2.tsx)
           - [Pebble.figma.tsx](./frontend/src/components/ui/Pebble.figma.tsx)
           - [Pebble.tsx](./frontend/src/components/ui/Pebble.tsx)
@@ -5028,9 +5086,15 @@
         - `editor/`
           - `components/`
             - [EvidenceCard.tsx](./frontend/src/features/editor/components/EvidenceCard.tsx)
+<<<<<<< HEAD
         - `gallery/`
           - [GlassLeafCard.tsx](./frontend/src/features/gallery/GlassLeafCard.tsx)
           - [IconBadge.tsx](./frontend/src/features/gallery/IconBadge.tsx)
+=======
+        - `kr-dark/`
+          - [GlassLeafCard.tsx](./frontend/src/features/kr-dark/GlassLeafCard.tsx)
+          - [IconBadge.tsx](./frontend/src/features/kr-dark/IconBadge.tsx)
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         - `ingestion/`
           - `components/`
             - [DropZone.tsx](./frontend/src/features/ingestion/components/DropZone.tsx)
@@ -5080,12 +5144,17 @@
         - [useCareerIngestion.test.ts](./frontend/src/hooks/useCareerIngestion.test.ts)
         - [useCareerIngestion.ts](./frontend/src/hooks/useCareerIngestion.ts)
         - [useFileUpload.ts](./frontend/src/hooks/useFileUpload.ts)
+<<<<<<< HEAD
         - [useGalleryData.ts](./frontend/src/hooks/useGalleryData.ts)
+=======
+        - [usekr-darkData.ts](./frontend/src/hooks/usekr-darkData.ts)
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         - [useKanban.ts](./frontend/src/hooks/useKanban.ts)
       - `layouts/`
         - [Layout.stories.tsx](./frontend/src/layouts/Layout.stories.tsx)
         - [Layout.tsx](./frontend/src/layouts/Layout.tsx)
         - [Sidebar.tsx](./frontend/src/layouts/Sidebar.tsx)
+<<<<<<< HEAD
         - `GalleryShell/`
           - [GalleryShell.tsx](./frontend/src/layouts/GalleryShell/GalleryShell.tsx)
           - `components/`
@@ -5109,6 +5178,31 @@
             - `anchors/`
               - [AnalysisAnchor.tsx](./frontend/src/layouts/LaboratoryShell/components/anchors/AnalysisAnchor.tsx)
               - [DocumentStackAnchor.tsx](./frontend/src/layouts/LaboratoryShell/components/anchors/DocumentStackAnchor.tsx)
+=======
+        - `kr-darkShell/`
+          - [kr-darkShell.tsx](./frontend/src/layouts/kr-darkShell/kr-darkShell.tsx)
+          - `components/`
+            - [Fireflies.tsx](./frontend/src/layouts/kr-darkShell/components/Fireflies.tsx)
+            - [kr-darkDock.tsx](./frontend/src/layouts/kr-darkShell/components/kr-darkDock.tsx)
+          - `views/`
+            - [kr-darkAuth.tsx](./frontend/src/layouts/kr-darkShell/views/kr-darkAuth.tsx)
+            - [kr-darkDashboard.tsx](./frontend/src/layouts/kr-darkShell/views/kr-darkDashboard.tsx)
+            - [kr-darkFeed.tsx](./frontend/src/layouts/kr-darkShell/views/kr-darkFeed.tsx)
+            - [kr-darkKanban.tsx](./frontend/src/layouts/kr-darkShell/views/kr-darkKanban.tsx)
+            - [kr-darkLanding.tsx](./frontend/src/layouts/kr-darkShell/views/kr-darkLanding.tsx)
+            - [kr-darkOnboarding.tsx](./frontend/src/layouts/kr-darkShell/views/kr-darkOnboarding.tsx)
+            - [kr-darkPlaceholders.tsx](./frontend/src/layouts/kr-darkShell/views/kr-darkPlaceholders.tsx)
+        - `kr-darkShell/`
+          - [LayoutShell.tsx](./frontend/src/layouts/kr-darkShell/LayoutShell.tsx)
+          - `components/`
+            - [GlobalHeader.tsx](./frontend/src/layouts/kr-darkShell/components/GlobalHeader.tsx)
+            - [MainCanvas.tsx](./frontend/src/layouts/kr-darkShell/components/MainCanvas.tsx)
+            - [NavRail.tsx](./frontend/src/layouts/kr-darkShell/components/NavRail.tsx)
+            - [SidePanel.tsx](./frontend/src/layouts/kr-darkShell/components/SidePanel.tsx)
+            - `anchors/`
+              - [AnalysisAnchor.tsx](./frontend/src/layouts/kr-darkShell/components/anchors/AnalysisAnchor.tsx)
+              - [DocumentStackAnchor.tsx](./frontend/src/layouts/kr-darkShell/components/anchors/DocumentStackAnchor.tsx)
+>>>>>>> restoration-KR-Rage-Figma-v2.0
       - `legacy/`
         - `ui/`
           - [AuroraHeader.tsx](./frontend/src/legacy/ui/AuroraHeader.tsx)
@@ -5221,8 +5315,13 @@
         - [design-tokens.css](./frontend/src/theme/design-tokens.css)
         - [motion-presets.ts](./frontend/src/theme/motion-presets.ts)
         - [motion-tokens.json](./frontend/src/theme/motion-tokens.json)
+<<<<<<< HEAD
         - [northcote.css](./frontend/src/theme/northcote.css)
         - [northcote.css.bak](./frontend/src/theme/northcote.css.bak)
+=======
+        - [kerala-rage.css](./frontend/src/theme/kerala-rage.css)
+        - [kerala-rage.css.bak](./frontend/src/theme/kerala-rage.css.bak)
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         - [tokens.json](./frontend/src/theme/tokens.json)
       - `types/`
         - [ai.ts](./frontend/src/types/ai.ts)
@@ -5524,9 +5623,15 @@
     - `design-compliance-dashboard/`
       - [SKILL.md](./skills/design-compliance-dashboard/SKILL.md)
     - `design-compliance-dashboard 2/`
+<<<<<<< HEAD
     - `northcote-curio-audit/`
       - [SKILL.md](./skills/northcote-curio-audit/SKILL.md)
     - `northcote-curio-audit 2/`
+=======
+    - `kerala-rage-kr-solidarity-audit/`
+      - [SKILL.md](./skills/kerala-rage-kr-solidarity-audit/SKILL.md)
+    - `kerala-rage-kr-solidarity-audit 2/`
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     - `token-orchestrator/`
       - [QUICK_START.md](./skills/token-orchestrator/QUICK_START.md)
       - [SKILL.md](./skills/token-orchestrator/SKILL.md)

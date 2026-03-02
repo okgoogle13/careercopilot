@@ -16,6 +16,7 @@ export interface MarkProps extends Omit<React.InputHTMLAttributes<HTMLInputEleme
 }
 
 /**
+<<<<<<< HEAD
  * Mark - Northcote Curio Checkbox
  *
  * A custom checkbox component using Northcote Curio design tokens with enhanced UX.
@@ -24,14 +25,30 @@ export interface MarkProps extends Omit<React.InputHTMLAttributes<HTMLInputEleme
  * **Northcote Design Token Usage:**
  * - Shape: `--radius-seed` (subtle organic corners)
  * - Colors: Botanical palette (Wattle Gold, Waratah Crimson, Eucalypt Smoke)
+=======
+ * Mark - KeralaRage KrSolidarity Checkbox
+ *
+ * A custom checkbox component using KeralaRage KrSolidarity design tokens with enhanced UX.
+ * Features [DEPRECATED_STYLE] shapes with Seed radius, spring animations, and proper state indicators.
+ *
+ * **KeralaRage Design Token Usage:**
+ * - Shape: `--radius-seed` (subtle [DEPRECATED_STYLE] corners)
+ * - Colors: [DEPRECATED_STYLE] palette (Ink Gold, Solidarity Red, Concrete Grey)
+>>>>>>> restoration-KR-Rage-Figma-v2.0
  * - Motion: Viscous-breeze easing for smooth check transition
  * - Typography: Field-note font for labels
  *
  * **States:**
  * - Unchecked: Outlined box
+<<<<<<< HEAD
  * - Checked: Filled with checkmark (Wattle Gold)
  * - Indeterminate: Filled with dash (for partial selection)
  * - Error: Waratah Crimson theme
+=======
+ * - Checked: Filled with checkmark (Ink Gold)
+ * - Indeterminate: Filled with dash (for partial selection)
+ * - Error: Solidarity Red theme
+>>>>>>> restoration-KR-Rage-Figma-v2.0
  * - Disabled: Reduced opacity
  *
  * @example
@@ -104,12 +121,21 @@ export const Mark = forwardRef<HTMLInputElement, MarkProps>(
         border-2
         ${
           error
+<<<<<<< HEAD
             ? 'border-[var(--color-waratah-crimson)]'
             : isChecked
               ? 'border-[var(--color-wattle-gold)] bg-[var(--color-wattle-gold)]'
               : 'border-[var(--color-eucalypt-smoke-base)]'
         }
         ${!disabled && !isChecked ? 'hover:border-[var(--color-flannel-flower)]' : ''}
+=======
+            ? 'border-[var(--color-solidarity-red)]'
+            : isChecked
+              ? 'border-[var(--color-ink-gold)] bg-[var(--color-ink-gold)]'
+              : 'border-[var(--color-concrete-grey-base)]'
+        }
+        ${!disabled && !isChecked ? 'hover:border-[var(--color-concrete-grey)]' : ''}
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         transition-all duration-standard var(--ease-viscous-breeze)
         ${className}
       `}
@@ -122,14 +148,22 @@ export const Mark = forwardRef<HTMLInputElement, MarkProps>(
                 <Minus
                   className={`
                 w-3.5 h-3.5
+<<<<<<< HEAD
                 ${error ? 'text-on-error' : 'text-[var(--color-specimen-night)]'}
+=======
+                ${error ? 'text-on-error' : 'text-[var(--color-asphalt-black)]'}
+>>>>>>> restoration-KR-Rage-Figma-v2.0
               `}
                 />
               ) : (
                 <Check
                   className={`
                 w-3.5 h-3.5
+<<<<<<< HEAD
                 ${error ? 'text-on-error' : 'text-[var(--color-specimen-night)]'}
+=======
+                ${error ? 'text-on-error' : 'text-[var(--color-asphalt-black)]'}
+>>>>>>> restoration-KR-Rage-Figma-v2.0
               `}
                 />
               )}
@@ -142,7 +176,11 @@ export const Mark = forwardRef<HTMLInputElement, MarkProps>(
           <span
             className={`
           text-sm font-field-note font-medium
+<<<<<<< HEAD
           ${error ? 'text-[var(--color-waratah-crimson)]' : 'text-[var(--color-parchment)]'}
+=======
+          ${error ? 'text-[var(--color-solidarity-red)]' : 'text-[var(--color-paper-white)]'}
+>>>>>>> restoration-KR-Rage-Figma-v2.0
           select-none
         `}
           >
@@ -157,9 +195,15 @@ export const Mark = forwardRef<HTMLInputElement, MarkProps>(
 Mark.displayName = 'Mark';
 
 /**
+<<<<<<< HEAD
  * MarkRadio - Northcote Curio Radio Button
  *
  * Radio button variant with consistent Northcote design language.
+=======
+ * MarkRadio - KeralaRage KrSolidarity Radio Button
+ *
+ * Radio button variant with consistent KeralaRage design language.
+>>>>>>> restoration-KR-Rage-Figma-v2.0
  */
 export interface MarkRadioProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type'> {
   label?: string;
@@ -207,12 +251,21 @@ export const MarkRadio = forwardRef<HTMLInputElement, MarkRadioProps>(
         border-2
         ${
           error
+<<<<<<< HEAD
             ? 'border-[var(--color-waratah-crimson)]'
             : checked
               ? 'border-[var(--color-wattle-gold)]'
               : 'border-[var(--color-eucalypt-smoke-base)]'
         }
         ${!disabled && !checked ? 'hover:border-[var(--color-flannel-flower)]' : ''}
+=======
+            ? 'border-[var(--color-solidarity-red)]'
+            : checked
+              ? 'border-[var(--color-ink-gold)]'
+              : 'border-[var(--color-concrete-grey-base)]'
+        }
+        ${!disabled && !checked ? 'hover:border-[var(--color-concrete-grey)]' : ''}
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         transition-all duration-standard var(--ease-viscous-breeze)
         ${className}
       `}
@@ -228,7 +281,11 @@ export const MarkRadio = forwardRef<HTMLInputElement, MarkRadioProps>(
                 className={`
               w-2.5 h-2.5
              rounded-full
+<<<<<<< HEAD
               ${error ? 'bg-[var(--color-waratah-crimson)]' : 'bg-[var(--color-wattle-gold)]'}
+=======
+              ${error ? 'bg-[var(--color-solidarity-red)]' : 'bg-[var(--color-ink-gold)]'}
+>>>>>>> restoration-KR-Rage-Figma-v2.0
               scale-100
             `}
               />
@@ -241,7 +298,11 @@ export const MarkRadio = forwardRef<HTMLInputElement, MarkRadioProps>(
           <span
             className={`
           text-sm font-field-note font-medium
+<<<<<<< HEAD
           ${error ? 'text-[var(--color-waratah-crimson)]' : 'text-[var(--color-parchment)]'}
+=======
+          ${error ? 'text-[var(--color-solidarity-red)]' : 'text-[var(--color-paper-white)]'}
+>>>>>>> restoration-KR-Rage-Figma-v2.0
           select-none
         `}
           >
@@ -257,4 +318,8 @@ MarkRadio.displayName = 'MarkRadio';
 
 // Legacy M3 exports for backward compatibility
 export { Mark as M3Checkbox, MarkRadio as M3Radio };
+<<<<<<< HEAD
 export type { MarkProps as M3CheckboxProps, MarkRadioProps as M3RadioProps };
+=======
+export type { MarkProps as M3CheckboxProps, MarkRadioProps as M3RadioProps };
+>>>>>>> restoration-KR-Rage-Figma-v2.0

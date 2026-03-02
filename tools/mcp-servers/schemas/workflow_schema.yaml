@@ -1,0 +1,99 @@
+schema_version: "1.0"
+title: "Skill Orchestrator Workflow Definition"
+description: "Schema for multi-stage skill orchestration workflows."
+
+workflow:
+  type: object
+  required:
+    - name
+    - stages
+  properties:
+    name:
+      type: string
+      description: "Unique workflow name."
+      examples:
+        - "wireframe-to-code"
+    description:
+      type: string
+      description: "Human-readable workflow description."
+    shared_context:
+      type: object
+      description: "Workflow-wide context available to all stages."
+      additionalProperties: true
+    stages:
+      type: array
+      minItems: 1
+      items:
+        type: object
+        required:
+          - skill_name
+        properties:
+          name:
+            type: string
+            description: "Optional stage alias for reporting."
+          skill_name:
+            type: string
+            description: "Skill identifier to execute."
+          arguments:
+            type: object
+            description: "Arguments passed to execute_skill."
+            additionalProperties: true
+          validation:
+            type: object
+            description: "Validation thresholds for stage output score."
+            properties:
+              min_score:
+                type: integer
+                default: 320
+              max_retries:
+                type: integer
+                default: 0
+              retry_strategy:
+                type: string
+                enum: ["immediate", "exponential_backoff", "linear_backoff"]
+                default: "immediate"
+                description: "Retry timing strategy: immediate (no delay), exponential_backoff (2^attempt seconds), linear_backoff (attempt * 2 seconds)"
+              retry_delay_base:
+                type: number
+                default: 2.0
+                description: "Base delay in seconds for backoff strategies (default: 2.0)"
+            additionalProperties: false
+          max_retries:
+            type: integer
+            description: "Overrides validation.max_retries when present."
+            minimum: 0
+          retry_strategy:
+            type: string
+            enum: ["immediate", "exponential_backoff", "linear_backoff"]
+            description: "Overrides validation.retry_strategy when present."
+
+example:
+  workflow:
+    name: "wireframe-to-code"
+    description: "Generate wireframe, evaluate quality, build component, run tests."
+    shared_context:
+      project_name: "CareerCopilot"
+      design_tokens_path: "frontend/src/design/tokens/tokens.json"
+    stages:
+      - name: "wireframe"
+        skill_name: "wireframe-annotator"
+        arguments:
+          brief_path: "/tmp/design-brief.md"
+          force_validation_fail_once: true
+        validation:
+          min_score: 320
+          max_retries: 1
+      - name: "evaluate"
+        skill_name: "m3-expressive-ui-evaluator"
+        arguments: {}
+        validation:
+          min_score: 320
+          max_retries: 1
+      - name: "component"
+        skill_name: "component-builder"
+        arguments:
+          component_name: "DashboardCard"
+      - name: "test"
+        skill_name: "jest-test-scaffolder"
+        arguments:
+          target: "DashboardCard"

@@ -13,6 +13,7 @@ Available modules:
 
 from .ci_auditor import CIAuditorPrompts, CodeAuditRequest
 from .schemas import (
+<<<<<<< HEAD
     CIAuditResponse,
     CriticalIssue,
     RedundancyIssue,
@@ -32,4 +33,25 @@ __all__ = [
     "AuditSummary",
     "QuickScanResponse",
     "QuickScanIssue",
+=======
+    AuditSummary,
+    CIAuditResponse,
+    CriticalIssue,
+    OptimizationWin,
+    QuickScanIssue,
+    QuickScanResponse,
+    RedundancyIssue,
+)
+
+__all__ = [
+    "AuditSummary",
+    "CIAuditResponse",
+    "CIAuditorPrompts",
+    "CodeAuditRequest",
+    "CriticalIssue",
+    "OptimizationWin",
+    "QuickScanIssue",
+    "QuickScanResponse",
+    "RedundancyIssue",
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 ]

@@ -17,10 +17,17 @@ export interface ValveProps extends Omit<
 }
 
 /**
+<<<<<<< HEAD
  * Valve - Northcote Curio Toggle Switch
  *
  * An organic, viscous-motion toggle switch using Northcote botanical palette.
  * Features smooth transitions with viscous-breeze easing and botanical color theming.
+=======
+ * Valve - KeralaRage KrSolidarity Toggle Switch
+ *
+ * An [DEPRECATED_STYLE], viscous-motion toggle switch using KeralaRage [DEPRECATED_STYLE] palette.
+ * Features smooth transitions with viscous-breeze easing and [DEPRECATED_STYLE] color theming.
+>>>>>>> restoration-KR-Rage-Figma-v2.0
  */
 export const Valve = forwardRef<HTMLInputElement, ValveProps>(
   (
@@ -83,9 +90,15 @@ export const Valve = forwardRef<HTMLInputElement, ValveProps>(
                         ${
                           isChecked
                             ? `bg-[var(--ref-palette-${color}-40)]`
+<<<<<<< HEAD
                             : 'bg-[var(--color-eucalypt-smoke-base)]'
                         }
                         peer-focus:ring-2 peer-focus:ring-[var(--color-wattle-gold)]/30
+=======
+                            : 'bg-[var(--color-concrete-grey-base)]'
+                        }
+                        peer-focus:ring-2 peer-focus:ring-[var(--color-ink-gold)]/30
+>>>>>>> restoration-KR-Rage-Figma-v2.0
                         border border-white/10
                     `}
             />
@@ -95,7 +108,11 @@ export const Valve = forwardRef<HTMLInputElement, ValveProps>(
               className={`
                         absolute top-0.5 left-0.5
                         ${currentSize.thumb}
+<<<<<<< HEAD
                         bg-[var(--color-parchment)]
+=======
+                        bg-[var(--color-paper-white)]
+>>>>>>> restoration-KR-Rage-Figma-v2.0
                         rounded-full
                         shadow-sm
                         transition-all duration-300 var(--ease-viscous-breeze)
@@ -105,7 +122,11 @@ export const Valve = forwardRef<HTMLInputElement, ValveProps>(
           </div>
 
           {label && (
+<<<<<<< HEAD
             <span className="text-sm font-field-note font-medium text-[var(--color-parchment)]">
+=======
+            <span className="text-sm font-field-note font-medium text-[var(--color-paper-white)]">
+>>>>>>> restoration-KR-Rage-Figma-v2.0
               {label}
             </span>
           )}
@@ -113,7 +134,11 @@ export const Valve = forwardRef<HTMLInputElement, ValveProps>(
 
         {helperText && (
           <p
+<<<<<<< HEAD
             className={`text-xs px-1 ${error ? 'text-[var(--color-waratah-crimson)]' : 'text-[var(--color-flannel-flower-dark)]'}`}
+=======
+            className={`text-xs px-1 ${error ? 'text-[var(--color-solidarity-red)]' : 'text-[var(--color-concrete-grey-dark)]'}`}
+>>>>>>> restoration-KR-Rage-Figma-v2.0
           >
             {helperText}
           </p>
@@ -127,4 +152,8 @@ Valve.displayName = 'Valve';
 
 // Legacy M3 exports for backward compatibility
 export { Valve as M3Switch };
+<<<<<<< HEAD
 export type { ValveProps as M3SwitchProps };
+=======
+export type { ValveProps as M3SwitchProps };
+>>>>>>> restoration-KR-Rage-Figma-v2.0

@@ -1,0 +1,45 @@
+{
+  "full_letter": {
+    "label": "Full Cover Letter",
+    "word_count": { "min": 300, "max": 500 },
+    "paragraphs": { "min": 3, "max": 4 },
+    "required_sections": ["opening", "body", "closing"],
+    "ats_safe": true,
+    "prohibited": ["tables", "columns", "images", "text_boxes"]
+  },
+  "email_application": {
+    "label": "Email Application",
+    "word_count": { "min": 150, "max": 250 },
+    "paragraphs": { "min": 2, "max": 3 },
+    "required_sections": ["subject_line", "opening", "body", "closing"],
+    "ats_safe": true,
+    "prohibited": ["tables", "columns", "images"]
+  },
+  "linkedin_message": {
+    "label": "LinkedIn Message",
+    "char_count": { "max": 300 },
+    "required_sections": ["opening", "value_proposition", "call_to_action"],
+    "ats_safe": false
+  },
+  "networking_email": {
+    "label": "Networking Email",
+    "word_count": { "min": 100, "max": 200 },
+    "required_sections": ["opening", "ask", "closing"],
+    "ats_safe": true
+  },
+  "resume": {
+    "label": "Resume",
+    "required_sections": ["contact", "summary", "experience", "skills"],
+    "optional_sections": ["education", "certifications", "volunteer"],
+    "ats_safe": true,
+    "prohibited": ["tables", "columns", "images", "text_boxes", "headers_footers_with_content"],
+    "section_order": ["contact", "summary", "experience", "education", "skills", "certifications"],
+    "heading_style": "ALL_CAPS or Title Case only"
+  },
+  "ksc_star": {
+    "label": "KSC STAR Response",
+    "required_sections": ["situation", "task", "action", "result"],
+    "word_count_per_section": { "min": 50, "max": 150 },
+    "ats_safe": true
+  }
+}

@@ -17,15 +17,25 @@ Bandwidth Optimization:
 """
 
 import json
+<<<<<<< HEAD
 import logging
 from datetime import datetime, timedelta
 from io import BytesIO
 from typing import Optional, Dict, Any, List
 from pathlib import Path
+=======
+import os
+from datetime import datetime, timedelta
+from typing import Any
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 from pydantic import BaseModel
 
 from app.core.cloud_storage import cloud_storage_client
+<<<<<<< HEAD
+=======
+from app.core.supabase_repository import supabase_repo
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 from app.core.loguru_config import get_logger
 
 logger = get_logger(__name__)
@@ -96,9 +106,17 @@ class DocumentExportService:
         content: str,
         user_id: str,
         job_title: str,
+<<<<<<< HEAD
         company_name: Optional[str] = None,
         format: str = "pdf",
         expiration_hours: Optional[float] = None
+=======
+        company_name: str | None = None,
+        format: str = "docx",
+        expiration_hours: float | None = None,
+        theme_id: str = "minimal",
+        candidate_name: str | None = None,
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     ) -> DocumentExportResult:
         """
         Export cover letter to file and generate signed URL.
@@ -121,7 +139,11 @@ class DocumentExportService:
         expiration_hours = expiration_hours or self.default_expiration_hours
 
         if format not in ["pdf", "docx", "txt", "json"]:
+<<<<<<< HEAD
             raise ValueError(f"Unsupported format: {format}")
+=======
+            raise ValueError(f"Unsupported format: {format}")  # 'txt' is now a first-class format
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
         try:
             logger.info(
@@ -131,9 +153,15 @@ class DocumentExportService:
                 format=format
             )
 
+<<<<<<< HEAD
             # Generate file content based on format
             if format == "txt":
                 file_content = content.encode('utf-8')
+=======
+            # Generate file content based on unified pipeline
+            if format == "txt":
+                file_content = content.encode("utf-8")
+>>>>>>> restoration-KR-Rage-Figma-v2.0
                 content_type = "text/plain"
             elif format == "json":
                 data = {
@@ -143,6 +171,7 @@ class DocumentExportService:
                     "content": content,
                     "exported_at": datetime.utcnow().isoformat()
                 }
+<<<<<<< HEAD
                 file_content = json.dumps(data, indent=2).encode('utf-8')
                 content_type = "application/json"
             else:
@@ -163,6 +192,27 @@ class DocumentExportService:
                 file_content = json.dumps(data, indent=2).encode('utf-8')
                 content_type = "application/json"
                 format = "json"
+=======
+                file_content = json.dumps(data, indent=2).encode("utf-8")
+                content_type = "application/json"
+            else:
+                from app.core.document_pipeline import document_pipeline
+                try:
+                    file_content = await document_pipeline.generate_document(
+                        doc_type="cover_letter",
+                        content=content,
+                        template_id=template_id,
+                        file_format=format,
+                        candidate_name=candidate_name,
+                        theme_id=theme_id
+                    )
+                    content_type = "application/pdf" if format == "pdf" else "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                except Exception as e:
+                    logger.warning(f"Pipeline failed, falling back to txt: {e}", user_id=user_id)
+                    file_content = content.encode("utf-8")
+                    content_type = "text/plain"
+                    format = "txt"
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
             # Generate storage path
             storage_path = self._get_storage_path(user_id, "cover_letter", format)
@@ -201,6 +251,25 @@ class DocumentExportService:
                 storage_path=storage_path
             )
 
+<<<<<<< HEAD
+=======
+            # Persist to Supabase DB (Phase 4)
+            supabase_repo.create_user_asset(
+                user_id=user_id,
+                document_type="cover_letter",
+                file_name=os.path.basename(storage_path),
+                file_type=format,
+                storage_uri=gs_uri,
+                extracted_data={
+                    "job_title": job_title,
+                    "company_name": company_name,
+                    "content": content,
+                    "theme_id": theme_id
+                },
+                file_size_bytes=file_size
+            )
+
+>>>>>>> restoration-KR-Rage-Figma-v2.0
             return DocumentExportResult(
                 success=True,
                 document_type="cover_letter",
@@ -223,11 +292,21 @@ class DocumentExportService:
 
     async def export_resume(
         self,
+<<<<<<< HEAD
         content: Dict[str, Any],
         user_id: str,
         job_title: str,
         format: str = "pdf",
         expiration_hours: Optional[float] = None
+=======
+        content: dict[str, Any],
+        user_id: str,
+        job_title: str,
+        format: str = "docx",
+        expiration_hours: float | None = None,
+        theme_id: str = "minimal",
+        candidate_name: str | None = None,
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     ) -> DocumentExportResult:
         """
         Export resume to file and generate signed URL.
@@ -255,6 +334,7 @@ class DocumentExportService:
                 format=format
             )
 
+<<<<<<< HEAD
             # Handle both dict and string content
             if isinstance(content, dict):
                 file_content = json.dumps(content, indent=2).encode('utf-8')
@@ -262,6 +342,33 @@ class DocumentExportService:
                 file_content = content.encode('utf-8')
 
             content_type = "application/json" if format in ["json", "pdf", "docx"] else "text/plain"
+=======
+            # Generate file content based on unified pipeline
+            if format == "json":
+                if isinstance(content, dict):
+                    file_content = json.dumps(content, indent=2).encode("utf-8")
+                else:
+                    file_content = content.encode("utf-8")
+                content_type = "application/json"
+            else:
+                from app.core.document_pipeline import document_pipeline
+                sections = json.loads(content) if isinstance(content, str) else content
+                try:
+                    file_content = await document_pipeline.generate_document(
+                        doc_type="resume",
+                        content=sections,
+                        template_id=template_id,
+                        file_format=format,
+                        candidate_name=candidate_name,
+                        theme_id=theme_id
+                    )
+                    content_type = "application/pdf" if format == "pdf" else "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                except Exception as e:
+                    logger.warning(f"Pipeline failed for resume, using JSON: {e}")
+                    file_content = json.dumps(sections).encode("utf-8")
+                    content_type = "application/json"
+                    format = "json"
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
             # Generate storage path
             storage_path = self._get_storage_path(user_id, "resume", format)
@@ -297,6 +404,20 @@ class DocumentExportService:
                 file_size=file_size
             )
 
+<<<<<<< HEAD
+=======
+            # Persist to Supabase DB (Phase 4)
+            supabase_repo.create_user_asset(
+                user_id=user_id,
+                document_type="resume",
+                file_name=os.path.basename(storage_path),
+                file_type=format,
+                storage_uri=gs_uri,
+                extracted_data=sections if isinstance(sections, dict) else {"content": sections},
+                file_size_bytes=file_size
+            )
+
+>>>>>>> restoration-KR-Rage-Figma-v2.0
             return DocumentExportResult(
                 success=True,
                 document_type="resume",
@@ -319,11 +440,20 @@ class DocumentExportService:
 
     async def export_ksc_response(
         self,
+<<<<<<< HEAD
         response_data: Dict[str, Any],
         user_id: str,
         job_title: str,
         format: str = "json",
         expiration_hours: Optional[float] = None
+=======
+        response_data: dict[str, Any],
+        user_id: str,
+        job_title: str,
+        format: str = "docx",
+        expiration_hours: float | None = None,
+        theme_id: str = "minimal",
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     ) -> DocumentExportResult:
         """
         Export KSC response to file and generate signed URL.
@@ -340,7 +470,11 @@ class DocumentExportService:
         """
         expiration_hours = expiration_hours or self.default_expiration_hours
 
+<<<<<<< HEAD
         if format not in ["json", "pdf"]:
+=======
+        if format not in ["json", "pdf", "docx"]:
+>>>>>>> restoration-KR-Rage-Figma-v2.0
             raise ValueError(f"Unsupported format: {format}")
 
         try:
@@ -351,9 +485,34 @@ class DocumentExportService:
                 format=format
             )
 
+<<<<<<< HEAD
             file_content = json.dumps(response_data, indent=2).encode('utf-8')
             content_type = "application/json"
 
+=======
+            # Generate file content based on unified pipeline
+            # Generate file content based on unified pipeline
+            responses = [response_data] if isinstance(response_data, dict) else response_data
+            if format == "json":
+                file_content = json.dumps(response_data, indent=2).encode("utf-8")
+                content_type = "application/json"
+            else:
+                from app.core.document_pipeline import document_pipeline
+                try:
+                    file_content = await document_pipeline.generate_document(
+                        doc_type="ksc_response",
+                        content=responses,
+                        template_id="star", # Default for KSC
+                        file_format=format,
+                        theme_id=theme_id
+                    )
+                    content_type = "application/pdf" if format == "pdf" else "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                except Exception as e:
+                    logger.warning(f"Pipeline failed for KSC, using JSON: {e}")
+                    file_content = json.dumps(response_data, indent=2).encode("utf-8")
+                    content_type = "application/json"
+                    format = "json"
+>>>>>>> restoration-KR-Rage-Figma-v2.0
             storage_path = self._get_storage_path(user_id, "ksc_response", format)
 
             gs_uri = self.storage_client.upload_file(
@@ -385,6 +544,20 @@ class DocumentExportService:
                 file_size=file_size
             )
 
+<<<<<<< HEAD
+=======
+            # Persist to Supabase DB (Phase 4)
+            supabase_repo.create_user_asset(
+                user_id=user_id,
+                document_type="ksc_response",
+                file_name=os.path.basename(storage_path),
+                file_type=format,
+                storage_uri=gs_uri,
+                extracted_data=responses if isinstance(responses, list) else [response_data],
+                file_size_bytes=file_size
+            )
+
+>>>>>>> restoration-KR-Rage-Figma-v2.0
             return DocumentExportResult(
                 success=True,
                 document_type="ksc_response",
@@ -407,11 +580,19 @@ class DocumentExportService:
 
     async def export_application_package(
         self,
+<<<<<<< HEAD
         package_data: Dict[str, Any],
         user_id: str,
         job_id: str,
         format: str = "json",
         expiration_hours: Optional[float] = None,
+=======
+        package_data: dict[str, Any],
+        user_id: str,
+        job_id: str,
+        format: str = "json",
+        expiration_hours: float | None = None,
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         include_files: bool = True
     ) -> DocumentExportResult:
         """
@@ -447,16 +628,27 @@ class DocumentExportService:
 
             if format == "json":
                 # Simple JSON export
+<<<<<<< HEAD
                 file_content = json.dumps(package_data, indent=2).encode('utf-8')
+=======
+                file_content = json.dumps(package_data, indent=2).encode("utf-8")
+>>>>>>> restoration-KR-Rage-Figma-v2.0
                 content_type = "application/json"
             else:
                 # ZIP format would require zipfile library
                 # For now, export as JSON
                 logger.warning(
+<<<<<<< HEAD
                     f"ZIP format not yet implemented, using JSON",
                     user_id=user_id
                 )
                 file_content = json.dumps(package_data, indent=2).encode('utf-8')
+=======
+                    "ZIP format not yet implemented, using JSON",
+                    user_id=user_id
+                )
+                file_content = json.dumps(package_data, indent=2).encode("utf-8")
+>>>>>>> restoration-KR-Rage-Figma-v2.0
                 content_type = "application/json"
                 format = "json"
 
@@ -515,9 +707,15 @@ class DocumentExportService:
     async def generate_batch_download(
         self,
         user_id: str,
+<<<<<<< HEAD
         document_types: List[str],
         expiration_hours: Optional[float] = None
     ) -> Dict[str, str]:
+=======
+        document_types: list[str],
+        expiration_hours: float | None = None
+    ) -> dict[str, str]:
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         """
         Generate signed URLs for batch download of multiple documents.
 

@@ -27,6 +27,7 @@ dependencies = [
     "pydantic",
     "pydantic-settings",
     "python-multipart",
+<<<<<<< HEAD
     "firebase-admin",
     "google-api-python-client",
     "google-cloud-storage",
@@ -35,12 +36,18 @@ dependencies = [
     "psycopg2-binary",
     "alembic",
     "anthropic",
+=======
+    "sqlalchemy",
+    "psycopg2-binary",
+    "alembic",
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     "genkit",
     "genkit-plugin-google-genai",
     "python-jose[cryptography]",
     "passlib[bcrypt]",
     "email-validator",
     "PyJWT",
+<<<<<<< HEAD
     "google-auth",
     "pdfplumber",
     "pypdfium2",
@@ -53,16 +60,26 @@ dependencies = [
     "numpy",
     "scikit-learn",
     "pandas",
+=======
+    "pypdf",
+    "defusedxml",
+    "beautifulsoup4",
+    "spacy",
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     "prometheus-client",
     "psutil",
     "httpx[http2]",
     "requests",
     "slowapi",
+<<<<<<< HEAD
     "boto3",
     "loguru",
     "opencensus",
     "opencensus-ext-stackdriver",
     "celery",
+=======
+    "loguru",
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 ]
 
 [project.optional-dependencies]
@@ -234,6 +251,7 @@ dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
     "S101",  # Use of assert detected
     "ARG001", # Unused method argument
 ]
+<<<<<<< HEAD
 
 # Jupyter Notebook support
 [tool.ruff.jupyter]
@@ -260,3 +278,5 @@ keep-runtime-typing = true
 # isort configuration
 [tool.ruff.isort]
 known-first-party = ["app"]
+=======
+>>>>>>> restoration-KR-Rage-Figma-v2.0

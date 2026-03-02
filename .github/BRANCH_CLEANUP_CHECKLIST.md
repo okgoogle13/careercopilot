@@ -1,5 +1,43 @@
 # Branch Cleanup Checklist
 
+<<<<<<< HEAD
+=======
+> **Status: CONSOLIDATION COMPLETE (2026-03-02)**
+>
+> `restoration-KR-Rage-Figma-v2.0` has been merged into `develop` via PR #111.  
+> All other branches have been reviewed and their work is consolidated.  
+> **Next step:** Merge PR #111, then run `scripts/cleanup-merged-branches.sh` (or trigger the `cleanup-branches` workflow) to delete stale branches.
+
+## ✅ Branch Review Summary (2026-03-02)
+
+| Branch | Status | Action |
+|--------|--------|--------|
+| `main` | 🟢 Active | **KEEP** |
+| `develop` | 🟢 Active target | **KEEP** (receives restoration content via PR #111) |
+| `restoration-KR-Rage-Figma-v2.0` | 🟢 Merged into develop | DELETE after PR #111 merges |
+| `claude/design-migration-status-Tj6t4` | ✅ Ancestor of restoration | DELETE |
+| `claude/finalize-assets-skills-98mTq` | ✅ Merged into restoration | DELETE |
+| `claude/finalize-assets-skills-mzlX9` | ✅ Merged into restoration | DELETE |
+| `claude/review-component-skills-O9SMw` | ✅ Merged into restoration | DELETE |
+| `claude/update-claude-kr-design-NTfe4` | ✅ Ancestor of restoration | DELETE |
+| `KR-Rage-Figma` | 🔴 Older branch, superseded by restoration | DELETE |
+| `kerala-rage-branch` | 🔴 Subset of KR-Rage-Figma, superseded | DELETE |
+| `feature/northcote-design-update` | 🔴 Old northcote work, superseded | DELETE |
+| `copilot/cleanup-active-branches` | 🔵 This PR branch | Auto-deleted when PR #111 merges |
+
+**How to complete cleanup:**
+```bash
+# Option 1: Use GitHub Actions workflow (recommended)
+# Go to Actions > "Cleanup Stale Branches" > Run workflow
+# First run with dry_run=true to review, then with dry_run=false
+
+# Option 2: Run script locally
+bash scripts/cleanup-merged-branches.sh
+```
+
+---
+
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 > **Comprehensive checklist for branch consolidation process**  
 > Use this to track progress and ensure nothing is missed during the 4-week consolidation effort
 
@@ -508,11 +546,20 @@ Time spent: _______
 
 ---
 
+<<<<<<< HEAD
 **Consolidation Status**: ☐ Not Started ☐ In Progress ☐ Complete
 
 **Completion Date**: _______________
 
 **Team Sign-off**: _______________
+=======
+**Consolidation Status**: ☑ Complete (2026-03-02 via PR #111)
+
+**Completion Date**: 2026-03-02
+
+**Summary**: All active branch work consolidated into `develop` via `restoration-KR-Rage-Figma-v2.0`.
+Run `scripts/cleanup-merged-branches.sh` or trigger the `cleanup-branches` GitHub Actions workflow to delete stale branches.
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 ---
 

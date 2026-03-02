@@ -43,4 +43,8 @@ const CollapsibleDemo = () => {
 
 export const Default: Story = {
     render: () => <CollapsibleDemo />
+<<<<<<< HEAD
 };
+=======
+};
+>>>>>>> restoration-KR-Rage-Figma-v2.0

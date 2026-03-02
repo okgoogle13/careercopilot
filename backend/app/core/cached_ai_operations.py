@@ -9,7 +9,11 @@ import asyncio
 import hashlib
 import logging
 from datetime import datetime, timezone
+<<<<<<< HEAD
 from typing import Any, Dict, Optional
+=======
+from typing import Any
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 from .cache_decorators import CacheContext, cached_ai_operation
 from .personal_cache import get_ai_cache
@@ -24,7 +28,11 @@ class CachedAIOperations:
     @cached_ai_operation("resume_analysis", user_id_param="user_id")
     async def analyze_resume_cached(
         user_id: str, resume_text: str, analysis_type: str = "comprehensive"
+<<<<<<< HEAD
     ) -> Dict[str, Any]:
+=======
+    ) -> dict[str, Any]:
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         """
         Cached version of resume analysis
 
@@ -52,8 +60,13 @@ class CachedAIOperations:
     @staticmethod
     @cached_ai_operation("job_analysis", user_id_param="user_id")
     async def analyze_job_description_cached(
+<<<<<<< HEAD
         user_id: str, job_description: str, company_info: Optional[str] = None
     ) -> Dict[str, Any]:
+=======
+        user_id: str, job_description: str, company_info: str | None = None
+    ) -> dict[str, Any]:
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         """Cached version of job description analysis"""
 
         logger.info(f"Performing job analysis for user {user_id} (not cached)")
@@ -76,7 +89,11 @@ class CachedAIOperations:
     @cached_ai_operation("ats_scoring", user_id_param="user_id")
     async def calculate_ats_score_cached(
         user_id: str, resume_text: str, job_description: str
+<<<<<<< HEAD
     ) -> Dict[str, Any]:
+=======
+    ) -> dict[str, Any]:
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         """Cached version of ATS scoring"""
 
         logger.info(f"Performing ATS scoring for user {user_id} (not cached)")
@@ -104,7 +121,11 @@ class CachedAIOperations:
 
     @staticmethod
     @cached_ai_operation("voice_profile", user_id_param="user_id")
+<<<<<<< HEAD
     async def generate_voice_profile_cached(user_id: str, document_texts: list) -> Dict[str, Any]:
+=======
+    async def generate_voice_profile_cached(user_id: str, document_texts: list) -> dict[str, Any]:
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         """
         Cached version of voice profile generation.
 
@@ -148,10 +169,17 @@ class CachedAIOperations:
     async def generate_cover_letter_cached(
         user_id: str,
         job_description: str,
+<<<<<<< HEAD
         resume_data: Dict[str, Any],
         company_name: str,
         position_title: str,
     ) -> Dict[str, Any]:
+=======
+        resume_data: dict[str, Any],
+        company_name: str,
+        position_title: str,
+    ) -> dict[str, Any]:
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         """Cached version of cover letter generation"""
 
         logger.info(f"Generating cover letter for user {user_id} (not cached)")
@@ -190,8 +218,13 @@ Sincerely,
     @staticmethod
     @cached_ai_operation("ksc_response", user_id_param="user_id")
     async def generate_ksc_response_cached(
+<<<<<<< HEAD
         user_id: str, question: str, context: Optional[str] = None
     ) -> Dict[str, Any]:
+=======
+        user_id: str, question: str, context: str | None = None
+    ) -> dict[str, Any]:
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         """Cached version of KSC (Knowledge, Skills, Competencies) response generation"""
 
         logger.info(f"Generating KSC response for user {user_id} (not cached)")

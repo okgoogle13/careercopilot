@@ -1,8 +1,16 @@
 import React, { useCallback, useState } from 'react';
 import { motion } from 'framer-motion';
+<<<<<<< HEAD
 
 interface DropZoneProps {
     onFileDrop?: (files: File[]) => void;
+=======
+import { validateFile } from '@/utils/fileValidation';
+
+interface DropZoneProps {
+    onFileDrop?: (files: File[]) => void;
+    onValidationError?: (error: string) => void;
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     maxFiles?: number;
     acceptedTypes?: string[];
     isProcessing?: boolean;
@@ -10,6 +18,10 @@ interface DropZoneProps {
 
 export const DropZone: React.FC<DropZoneProps> = ({
     onFileDrop,
+<<<<<<< HEAD
+=======
+    onValidationError,
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     maxFiles = 5,
     acceptedTypes = ['.pdf', '.docx', '.txt'],
     isProcessing = false,
@@ -26,27 +38,64 @@ export const DropZone: React.FC<DropZoneProps> = ({
         setIsDragOver(false);
     }, []);
 
+<<<<<<< HEAD
+=======
+    const filterValidFiles = useCallback(
+        (files: File[]): File[] => {
+            const valid: File[] = [];
+            for (const file of files) {
+                const result = validateFile(file, acceptedTypes);
+                if (result.valid) {
+                    valid.push(file);
+                } else if (onValidationError) {
+                    onValidationError(result.error!);
+                }
+            }
+            return valid;
+        },
+        [acceptedTypes, onValidationError]
+    );
+
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     const handleDrop = useCallback(
         (e: React.DragEvent) => {
             e.preventDefault();
             setIsDragOver(false);
 
+<<<<<<< HEAD
             const files = Array.from(e.dataTransfer.files);
             if (onFileDrop) {
                 onFileDrop(files.slice(0, maxFiles));
             }
         },
         [onFileDrop, maxFiles]
+=======
+            const files = filterValidFiles(Array.from(e.dataTransfer.files));
+            if (onFileDrop && files.length > 0) {
+                onFileDrop(files.slice(0, maxFiles));
+            }
+        },
+        [onFileDrop, maxFiles, filterValidFiles]
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     );
 
     const handleFileInput = useCallback(
         (e: React.ChangeEvent<HTMLInputElement>) => {
+<<<<<<< HEAD
             const files = Array.from(e.target.files || []);
             if (onFileDrop) {
                 onFileDrop(files.slice(0, maxFiles));
             }
         },
         [onFileDrop, maxFiles]
+=======
+            const files = filterValidFiles(Array.from(e.target.files || []));
+            if (onFileDrop && files.length > 0) {
+                onFileDrop(files.slice(0, maxFiles));
+            }
+        },
+        [onFileDrop, maxFiles, filterValidFiles]
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     );
 
     // Visual states from DOC-004
@@ -111,7 +160,11 @@ export const DropZone: React.FC<DropZoneProps> = ({
                 <>
                     {/* Chaos Script Text */}
                     <motion.p
+<<<<<<< HEAD
                         className="font-vine mb-4 text-4xl text-wattle"
+=======
+                        className="font-vine mb-4 text-4xl text-ink"
+>>>>>>> restoration-KR-Rage-Figma-v2.0
                         style={{ transform: 'rotate(-3.5deg)' }}
                         animate={{ rotate: [-3.5, -2.5, -3.5] }}
                         transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}

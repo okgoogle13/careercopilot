@@ -12,10 +12,17 @@ Supports:
 
 import logging
 import re
+<<<<<<< HEAD
 from typing import Optional, List, Tuple
 from urllib.parse import urljoin, urlparse
 import requests
 from io import BytesIO
+=======
+from io import BytesIO
+from urllib.parse import urljoin
+
+import requests
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 logger = logging.getLogger(__name__)
 
@@ -112,10 +119,17 @@ def extract_text_from_docx(file_content: bytes) -> str:
         return text
     except Exception as e:
         logger.error(f"Word document extraction failed: {e}")
+<<<<<<< HEAD
         raise RuntimeError(f"Failed to extract Word document: {str(e)}")
 
 
 def detect_document_links(html_content: str, base_url: str) -> List[Tuple[str, str]]:
+=======
+        raise RuntimeError(f"Failed to extract Word document: {e!s}")
+
+
+def detect_document_links(html_content: str, base_url: str) -> list[tuple[str, str]]:
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     """
     Detect PDF and Word document links in HTML content.
 
@@ -136,13 +150,21 @@ def detect_document_links(html_content: str, base_url: str) -> List[Tuple[str, s
     for match in re.finditer(pdf_pattern, html_content, re.IGNORECASE):
         url = match.group(1)
         absolute_url = urljoin(base_url, url)
+<<<<<<< HEAD
         documents.append((absolute_url, 'pdf'))
+=======
+        documents.append((absolute_url, "pdf"))
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
     # Find Word document links
     for match in re.finditer(docx_pattern, html_content, re.IGNORECASE):
         url = match.group(1)
         absolute_url = urljoin(base_url, url)
+<<<<<<< HEAD
         documents.append((absolute_url, 'docx'))
+=======
+        documents.append((absolute_url, "docx"))
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
     logger.info(f"Detected {len(documents)} document links: {documents}")
     return documents
@@ -161,13 +183,21 @@ def download_document(url: str, timeout: int = 30) -> bytes:
     """
     try:
         response = requests.get(url, timeout=timeout, headers={
+<<<<<<< HEAD
             'User-Agent': 'Mozilla/5.0 (compatible; JobAnalyzer/1.0)'
+=======
+            "User-Agent": "Mozilla/5.0 (compatible; JobAnalyzer/1.0)"
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         })
         response.raise_for_status()
         return response.content
     except Exception as e:
         logger.error(f"Failed to download document from {url}: {e}")
+<<<<<<< HEAD
         raise RuntimeError(f"Document download failed: {str(e)}")
+=======
+        raise RuntimeError(f"Document download failed: {e!s}")
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 
 def extract_documents_from_page(html_content: str, base_url: str) -> str:
@@ -194,9 +224,15 @@ def extract_documents_from_page(html_content: str, base_url: str) -> str:
             logger.info(f"Downloading {doc_type} from {doc_url}")
             content = download_document(doc_url)
 
+<<<<<<< HEAD
             if doc_type == 'pdf':
                 text = extract_text_from_pdf(content)
             elif doc_type == 'docx':
+=======
+            if doc_type == "pdf":
+                text = extract_text_from_pdf(content)
+            elif doc_type == "docx":
+>>>>>>> restoration-KR-Rage-Figma-v2.0
                 text = extract_text_from_docx(content)
             else:
                 logger.warning(f"Unknown document type: {doc_type}")

@@ -1,0 +1,31 @@
+{
+  "id": "standard",
+  "name": "Standard Cover Letter",
+  "atsProfile": {
+    "columns": 1,
+    "allowsTables": false,
+    "allowsImages": false
+  },
+  "blocks": [
+    {
+      "kind": "section",
+      "title": "Contact",
+      "fields": ["name", "email", "phone"]
+    },
+    {
+      "kind": "section",
+      "title": "Opening",
+      "fields": ["opening_paragraph"]
+    },
+    {
+      "kind": "section",
+      "title": "Body",
+      "fields": ["body_paragraphs"]
+    },
+    {
+      "kind": "section",
+      "title": "Closing",
+      "fields": ["closing_paragraph"]
+    }
+  ]
+}

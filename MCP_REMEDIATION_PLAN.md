@@ -276,7 +276,11 @@ cp ~/.mcp.json ~/mcp-backups/.mcp.json.$(date +%Y%m%d) 2>/dev/null || true
 
 ```bash
 # CareerCopilot MCP Configuration
+<<<<<<< HEAD
 export CAREERCOPILOT_ROOT="/Users/okgoogle13/Desktop/careercopilot"
+=======
+export CAREERCOPILOT_ROOT="/Users/okgoogle13/Projects/careercopilot"
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 export CAREERCOPILOT_VENV="${CAREERCOPILOT_ROOT}/.venv"
 export CAREERCOPILOT_VENV_BIN="${CAREERCOPILOT_VENV}/bin"
 
@@ -316,7 +320,11 @@ EOF
 GITHUB_TOKEN=<YOUR_NEW_TOKEN> npx -y @modelcontextprotocol/server-github --help
 
 # Verify Flash-Sidekick server works
+<<<<<<< HEAD
 GEMINI_API_KEY=<YOUR_NEW_KEY> /Users/okgoogle13/Desktop/careercopilot/.venv/bin/python3 /Users/okgoogle13/Desktop/careercopilot/servers/flash_sidekick.py --help
+=======
+GEMINI_API_KEY=<YOUR_NEW_KEY> /Users/okgoogle13/Projects/careercopilot/.venv/bin/python3 /Users/okgoogle13/Projects/careercopilot/servers/flash_sidekick.py --help
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 ```
 
 ---
@@ -327,7 +335,11 @@ GEMINI_API_KEY=<YOUR_NEW_KEY> /Users/okgoogle13/Desktop/careercopilot/.venv/bin/
 
 ### Update backend/.env
 
+<<<<<<< HEAD
 **File**: `/Users/okgoogle13/Desktop/careercopilot/backend/.env`
+=======
+**File**: `/Users/okgoogle13/Projects/careercopilot/backend/.env`
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 Remove hardcoded keys and use .local overrides:
 
@@ -354,7 +366,11 @@ chmod 600 backend/.env backend/.env.local 2>/dev/null || true
 
 ### Update frontend/.env.local
 
+<<<<<<< HEAD
 **File**: `/Users/okgoogle13/Desktop/careercopilot/frontend/.env.local`
+=======
+**File**: `/Users/okgoogle13/Projects/careercopilot/frontend/.env.local`
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 ```bash
 # Backup
@@ -423,7 +439,11 @@ cat > ~/scripts/setup-mcp-env.sh << 'EOFSCRIPT'
 #!/bin/bash
 # Setup MCP Environment Variables
 
+<<<<<<< HEAD
 export CAREERCOPILOT_ROOT="/Users/okgoogle13/Desktop/careercopilot"
+=======
+export CAREERCOPILOT_ROOT="/Users/okgoogle13/Projects/careercopilot"
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 export CAREERCOPILOT_VENV="${CAREERCOPILOT_ROOT}/.venv"
 export CAREERCOPILOT_VENV_BIN="${CAREERCOPILOT_VENV}/bin"
 

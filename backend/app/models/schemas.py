@@ -9,7 +9,11 @@ AI-powered features in the Careercopilot application.
 """
 
 from datetime import datetime  # Make sure datetime is imported
+<<<<<<< HEAD
 from typing import List, Literal, Optional
+=======
+from typing import Literal
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 from pydantic import BaseModel, Field
 
@@ -25,8 +29,13 @@ class ProfileVariation(BaseModel):
     id: str
     name: str
     description: str
+<<<<<<< HEAD
     target_roles: List[str]
     skills_emphasis: List[str]
+=======
+    target_roles: list[str]
+    skills_emphasis: list[str]
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     experience_focus: str
     created_at: datetime  # Use datetime for better type handling
     is_default: bool = False
@@ -37,8 +46,13 @@ class CreateProfileVariationRequest(BaseModel):
 
     name: str
     description: str
+<<<<<<< HEAD
     target_roles: List[str]
     skills_emphasis: List[str]
+=======
+    target_roles: list[str]
+    skills_emphasis: list[str]
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     experience_focus: str
 
 
@@ -72,9 +86,15 @@ class GenerateKscRequest(BaseModel):
 
 
 class GenerateKscResponse(BaseModel):
+<<<<<<< HEAD
     criteria: List[KscCriterion]
     responses: List[KscResponse]
     processing_time: Optional[float] = None
+=======
+    criteria: list[KscCriterion]
+    responses: list[KscResponse]
+    processing_time: float | None = None
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 
 # =============================================================================
@@ -89,7 +109,11 @@ class CoverLetterRequest(BaseModel):
 
 class CoverLetterResponse(BaseModel):
     cover_letter: str
+<<<<<<< HEAD
     subject_line: Optional[str] = None
+=======
+    subject_line: str | None = None
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 
 # =============================================================================
@@ -105,7 +129,11 @@ class CategoryScore(BaseModel):
     status: Literal["good", "warning", "poor"] = Field(
         ..., description="The qualitative status of the score."
     )
+<<<<<<< HEAD
     suggestions: List[str] = Field(
+=======
+    suggestions: list[str] = Field(
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         ..., description="A list of AI-generated suggestions for this category."
     )
 
@@ -117,8 +145,13 @@ class User(BaseModel):
     """Pydantic model representing an authenticated user."""
 
     uid: str
+<<<<<<< HEAD
     email: Optional[str] = None
     name: Optional[str] = None
+=======
+    email: str | None = None
+    name: str | None = None
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 
 class Recommendation(BaseModel):
@@ -158,7 +191,11 @@ class UserPreferences(BaseModel):
     """Stores user-specific preferences."""
 
     themeId: str
+<<<<<<< HEAD
     targetRoles: List[str]
+=======
+    targetRoles: list[str]
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     voiceProfile: VoiceProfile
 
 
@@ -168,17 +205,28 @@ class PersonalInfo(BaseModel):
     name: str
     phone: str
     location: str
+<<<<<<< HEAD
     linkedIn: Optional[str] = None
+=======
+    linkedIn: str | None = None
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 
 class MasterProfile(BaseModel):
     """The core master profile containing all professional information."""
 
     summary: str
+<<<<<<< HEAD
     skills: List[str]
     experience: List[ExperienceItem]
     education: List[EducationItem]
     certifications: List[str]
+=======
+    skills: list[str]
+    experience: list[ExperienceItem]
+    education: list[EducationItem]
+    certifications: list[str]
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 
 # =============================================================================
@@ -193,11 +241,19 @@ class ATSScoreResponse(BaseModel):
     """
 
     overall_score: int = Field(..., alias="score", description="The composite ATS score (0-100).")
+<<<<<<< HEAD
     categories: List[CategoryScore] = Field(..., alias="breakdown", description="A breakdown of scores by category.")
     matched_keywords: List[str] = Field(
         ..., alias="matchedKeywords", description="Keywords found in both the resume and job description."
     )
     missing_keywords: List[str] = Field(
+=======
+    categories: list[CategoryScore] = Field(..., alias="breakdown", description="A breakdown of scores by category.")
+    matched_keywords: list[str] = Field(
+        ..., alias="matchedKeywords", description="Keywords found in both the resume and job description."
+    )
+    missing_keywords: list[str] = Field(
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         ..., alias="missingKeywords", description="Keywords found in the job description but not the resume."
     )
 
@@ -211,10 +267,17 @@ class KeywordAnalysisResponse(BaseModel):
     Corresponds to Ref #25 in the UI Mapping.
     """
 
+<<<<<<< HEAD
     matched: List[str] = Field(
         ..., description="Keywords found in both the resume and job description."
     )
     missing: List[str] = Field(
+=======
+    matched: list[str] = Field(
+        ..., description="Keywords found in both the resume and job description."
+    )
+    missing: list[str] = Field(
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         ..., description="Keywords found in the job description but not the resume."
     )
 
@@ -225,7 +288,11 @@ class AIRecommendationsResponse(BaseModel):
     Corresponds to Ref #27 in the UI Mapping.
     """
 
+<<<<<<< HEAD
     recommendations: List[Recommendation] = Field(
+=======
+    recommendations: list[Recommendation] = Field(
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         ..., description="A list of actionable recommendations."
     )
 
@@ -242,12 +309,21 @@ class JobOpportunity(BaseModel):
     title: str
     company: str
     description: str
+<<<<<<< HEAD
     deadline: Optional[datetime] = None
     applicationStatus: Literal["detected", "in_progress", "applied"]
     documents: List[str] = Field(
         ..., description="A list of generated document IDs related to this opportunity."
     )
     calendarEventId: Optional[str] = None
+=======
+    deadline: datetime | None = None
+    applicationStatus: Literal["detected", "in_progress", "applied"]
+    documents: list[str] = Field(
+        ..., description="A list of generated document IDs related to this opportunity."
+    )
+    calendarEventId: str | None = None
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     created: datetime
 
 
@@ -277,6 +353,7 @@ class JobListingDetails(BaseModel):
     Ported from the TypeScript JobDetails interface.
     """
 
+<<<<<<< HEAD
     due_date: Optional[str] = Field(None, description="The application due date.")
     company_name: Optional[str] = Field(
         None, description="The name of the hiring organization or company."
@@ -308,6 +385,39 @@ class JobListingDetails(BaseModel):
         description="A list of key duties, tasks, or responsibilities associated with the role.",
     )
     full_description: Optional[str] = Field(
+=======
+    due_date: str | None = Field(None, description="The application due date.")
+    company_name: str | None = Field(
+        None, description="The name of the hiring organization or company."
+    )
+    role_title: str | None = Field(None, description="The title of the role.")
+    hiring_manager: str | None = Field(None, description="The name of the hiring manager.")
+    manager_contact: str | None = Field(
+        None, description="Contact details (email or phone) for the hiring manager."
+    )
+    essential_criteria: list[str] = Field(
+        default_factory=list,
+        description="A list of key selection criteria that are explicitly mentioned as essential, mandatory, or required.",
+    )
+    desirable_criteria: list[str] = Field(
+        default_factory=list,
+        description="A list of key selection criteria that are explicitly mentioned as desirable, preferred, or 'nice to have'.",
+    )
+    role_type: str | None = Field(
+        None,
+        description="The classified role type: 'Frontline/Support', 'PM/Delivery', or 'Other'.",
+    )
+    subsectors: list[str] = Field(
+        default_factory=list,
+        description="A list of relevant community service subsectors this role operates in.",
+    )
+    location: str | None = Field(None, description="The location, suburb, or region of the role.")
+    key_responsibilities: list[str] = Field(
+        default_factory=list,
+        description="A list of key duties, tasks, or responsibilities associated with the role.",
+    )
+    full_description: str | None = Field(
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         None,
         description="The complete, unprocessed job description text for use with AI features.",
     )

@@ -1,10 +1,10 @@
 ---
+name: northcote-visual-audit
 description: Analyze component screenshots and design artifacts against Northcote
   Curio visual standards. Validate typography (distinctiveness, Victorian craftsmanship),
   color palette (Australian botanical colors), layout (organic spacing, asymmetry),
   and botanical motif integration. Generate compliance assessments and design evolution
   analysis.
-name: northcote-visual-audit
 ---
 
 # Northcote Visual Audit Skill
@@ -77,7 +77,7 @@ The skill uses Claude's vision capabilities to:
 
 **Key Test**: Can a first-time user understand the action within 2 seconds?
 
-_See [DOC-006 Voice Tier System](file:///Users/okgoogle13/Desktop/careercopilot/docs/archive/atomic-v2/DOC-006_Voice_and_Microcopy.md) for voice guidelines._
+_See [DOC-006 Voice Tier System](file:///Users/okgoogle13/Projects/careercopilot/docs/archive/atomic-v2/DOC-006_Voice_and_Microcopy.md) for voice guidelines._
 
 ## Usage Examples
 

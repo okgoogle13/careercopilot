@@ -4,13 +4,22 @@ import os
 import re
 
 # Configuration
+<<<<<<< HEAD
 MANIFEST_PATH = 'assets/northcote-curio-manifest.json'
 PHASE3_DIR = 'Curio images phase 3'
+=======
+MANIFEST_PATH = 'assets/northcote-[DEPRECATED_STYLE]-manifest.json'
+PHASE3_DIR = '[DEPRECATED_STYLE] images phase 3'
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 # Keywords to match descriptions/filenames against specific Asset IDs
 ASSET_KEYWORDS = {
     'ASSET-11': ['obsidian', 'mirror', 'black', 'reflection'],
+<<<<<<< HEAD
     'ASSET-12': ['fern', 'fiddlehead', 'spiral', 'botanical'],
+=======
+    'ASSET-12': ['fern', 'fiddlehead', 'spiral', '[DEPRECATED_STYLE]'],
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     'ASSET-13': ['cicada', 'wing', 'insect', 'transparent'],
     'ASSET-14': ['quartz', 'crystal', 'cluster', 'mineral'],
     'ASSET-15': ['x-ray', 'leaf', 'skeleton', 'veins'],
@@ -55,7 +64,11 @@ def analyze_phase3_catalog():
                 break # Simple first-match wins
 
         # Get Manifest Details if matched
+<<<<<<< HEAD
         manifest_name = "Unknown Specimen"
+=======
+        manifest_name = "Unknown [DEPRECATED_STYLE]"
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         if possible_match and possible_match in manifest_assets:
             manifest_name = manifest_assets[possible_match].get('name', 'Unknown')
 

@@ -3,6 +3,7 @@ import React from 'react';
 export const SidePanel: React.FC = () => {
   return (
     <div className="h-full flex flex-col">
+<<<<<<< HEAD
       <div className="p-4 border-b border-surface-laboratory-slate-smoke-highest">
         <h3 className="font-bloom text-lg text-wattle-gold">Context</h3>
       </div>
@@ -14,6 +15,14 @@ export const SidePanel: React.FC = () => {
               alt="The Auditor - Echidna Mascot"
               className="w-full h-auto object-cover opacity-80"
             />
+=======
+      <div className="p-4 border-b border-surface-KrDark-slate-smoke-highest">
+        <h3 className="font-bloom text-lg text-ink-gold">Context</h3>
+      </div>
+      <div className="p-4 flex-1 overflow-y-auto">
+        <div className="mb-6 relative">
+          <div className="relative rounded-xl overflow-hidden shadow-lg border-2 border-surface-KrDark-slate-smoke-highest bg-surface-KrDark-charcoal-slate max-w-[120px] mx-auto">
+>>>>>>> restoration-KR-Rage-Figma-v2.0
           </div>
         </div>
         <div className="p-4 border border-dashed border-secondary-flannel-dim rounded-lg text-secondary-flannel-dim text-sm font-annotation text-center opacity-60">

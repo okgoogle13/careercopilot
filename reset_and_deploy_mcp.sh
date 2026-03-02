@@ -36,16 +36,26 @@ fi
 echo "🚀 Deploying new optimized configurations..."
 
 # Copy new files
+<<<<<<< HEAD
 cp /Users/okgoogle13/Desktop/careercopilot/.claude/config/cline_mcp_settings_optimized.json "$ANTIGRAVITY_CONFIG"
 cp /Users/okgoogle13/Desktop/careercopilot/.claude/config/vscode_mcp_optimized.json "$CLAUDE_CODE_CONFIG"
 cp /Users/okgoogle13/Desktop/careercopilot/.claude/config/claude_desktop_config_optimized.json "$CLAUDE_DESKTOP_CONFIG"
+=======
+cp /Users/okgoogle13/Projects/careercopilot/.claude/config/cline_mcp_settings_optimized.json "$ANTIGRAVITY_CONFIG"
+cp /Users/okgoogle13/Projects/careercopilot/.claude/config/vscode_mcp_optimized.json "$CLAUDE_CODE_CONFIG"
+cp /Users/okgoogle13/Projects/careercopilot/.claude/config/claude_desktop_config_optimized.json "$CLAUDE_DESKTOP_CONFIG"
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 echo "✅ Antigravity config deployed"
 echo "✅ Claude Code config deployed"
 echo "✅ Claude Desktop config deployed"
 
 # Permissions fix
+<<<<<<< HEAD
 chmod +x /Users/okgoogle13/Desktop/careercopilot/servers/flash_sidekick.py
+=======
+chmod +x /Users/okgoogle13/Projects/careercopilot/servers/flash_sidekick.py
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 echo " "
 echo "🎉 EXECUTION COMPLETE"

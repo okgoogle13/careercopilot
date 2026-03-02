@@ -1,0 +1,22 @@
+{
+  "version": "1.0.0",
+  "project": "kerala-rage",
+  "templates": [
+    {
+      "id": "deterministic-layered-hero",
+      "description": "Deterministic hero composition generator based on manifest constraints",
+      "prompt": "You are generating a layered hero composition for the Kerala Rage kr-solidarity system.\n\nYou MUST follow strict layering rules.\n\nSYSTEM LAYERS (back to front):\n1. substrate\n2. atmospheric\n3. cultural OR resistance OR spiritual (never combine spiritual and resistance)\n4. typography overlay\n5. UI overlay\n\nSTRICT RULES:\n- Only one spiritual OR resistance asset may appear.\n- Spiritual and resistance layers must never coexist.\n- Atmospheric assets may not stack with other atmospheric assets.\n- Substrate must always exist.\n- Typography must apply variable pressure shifts (low, medium, high contrast states).\n- Composition must support M3 expressive cubic-bezier [0.34, 1.56, 0.64, 1].\n\nCANON PALETTE:\nPrimary: #C84032\nSecondary: #1A1714\nAccent: #D4A84B\n\nOUTPUT FORMAT:\nReturn a JSON object with:\n{\n  \"hero_id\": \"\",\n  \"name\": \"\",\n  \"layers\": [\n    {\n      \"type\": \"\",\n      \"asset_id\": \"\",\n      \"z_index\": 1,\n      \"opacity\": 1.0,\n      \"blend_mode\": \"normal\",\n      \"position\": \"center\"\n    }\n  ],\n  \"typography\": {\n    \"headline\": \"\",\n    \"supporting\": \"\",\n    \"pressure_profile\": {\n      \"register\": \"defiance|reflection|discovery|control|craft\",\n      \"weight_range\": [start, end],\n      \"tracking_range\": [start, end],\n      \"contrast_ratio\": 9\n    },\n    \"scale_ratio\": 9,\n    \"contrast_mode\": \"extreme\"\n  },\n  \"animation\": {\n    \"bezier\": [0.34, 1.56, 0.64, 1],\n    \"parallax\": true,\n    \"scroll_behavior\": \"weight_shift\",\n    \"transition_duration\": 400\n  },\n  \"z_index_map\": {\n    \"substrate\": 1,\n    \"atmospheric\": 2,\n    \"resistance\": 3,\n    \"spiritual\": 3,\n    \"cultural\": 2\n  }\n}",
+      "register_context": "Generate a composition for emotional register: 'Defiance'. Use resistance layer. Ensure cinematic asymmetry."
+    },
+    {
+      "id": "cinematic-spiritual-hero",
+      "description": "Devotional-focused hero generator for Shiva or spiritual themes",
+      "prompt": "Generate a cinematic layered hero scene using the Kerala Rage layered identity system.\n\nConstraints:\n- Spiritual layer only (no resistance)\n- Substrate: textured charcoal or laneway\n- Atmospheric: subtle ink drift or paint splash\n- Spiritual focal point: Shiva asset\n- No protest text\n\nComposition mood:\nMythic, grounded, solemn.\n\nLighting:\nDirectional warm accent (#D4A84B halo radiance).\n\nTypography:\nHeavy top-line weight\nCompressed tracking\nVariable pressure shift on scroll\n\nOutput:\nA structured JSON object (same schema as deterministic-layered-hero).\n\nDo not generate prose. Return only JSON."
+    },
+    {
+      "id": "nabla-accented-hero",
+      "description": "Occasional accent hero using the Nabla colored font for specialized moments",
+      "prompt": "Generate a high-impact occasional hero composition.\n\nTypography Accent:\n- The headline MUST use the Nabla font (font_family: 'nabla' in the JSON).\n- The colored font should be used for festive, high-tech, or disruptive 'Melbourne laneway' vibes.\n\nConstraints:\n- Use 'atmospheric' layer with paint splashes.\n- Substrate required.\n- Resistance layer optional.\n\nOutput:\nA structured JSON object (same schema as deterministic-layered-hero, but include \"font_family\": \"nabla\" in the typography object)."
+    }
+  ]
+}

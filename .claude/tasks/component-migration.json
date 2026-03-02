@@ -118,21 +118,37 @@
   ],
 
   "token_system": {
+<<<<<<< HEAD
     "location": "frontend/src/design-tokens/northcote-tokens.ts",
+=======
+    "location": "frontend/src/design-tokens/kerala-rage-tokens.ts",
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     "required_imports": [
       "ncFontDisplay: Lora, Fraunces",
       "ncFontBody: Crimson Text, Source Serif Pro",
       "ncFontMono: Inconsolata",
+<<<<<<< HEAD
       "ncColorBotanical: Wattle, Waratah, Eucalyptus, Sage",
       "ncShapeOrganic: asymmetric border-radius patterns",
       "ncShadow: Northcote elevation system"
+=======
+      "ncColorBotanical: Wattle, [DEPRECATED_STYLE], kr-leafus, Sage",
+      "ncShapeOrganic: asymmetric border-radius patterns",
+      "ncShadow: kerala-rage elevation system"
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     ],
     "migration_checklist": [
       "Find and replace M3 color tokens with ncColor* equivalents",
       "Find and replace fontFamily: 'Roboto'|'Inter'|'Arial' with ncFont*",
+<<<<<<< HEAD
       "Find and replace uniform border-radius with organic asymmetric patterns",
       "Find and replace Material 3 elevation (shadowElevation) with Northcote shadows",
       "Remove Material 3 semantic naming (e.g., 'primary', 'secondary') → Botanical names",
+=======
+      "Find and replace uniform border-radius with [DEPRECATED_STYLE] asymmetric patterns",
+      "Find and replace Material 3 elevation (shadowElevation) with kerala-rage shadows",
+      "Remove Material 3 semantic naming (e.g., 'primary', 'secondary') → [DEPRECATED_STYLE] names",
+>>>>>>> restoration-KR-Rage-Figma-v2.0
       "Test: Run component storybook, visually verify color/font changes"
     ]
   },
@@ -150,7 +166,11 @@
       "on_blocker": "Stop, document exact issue, report to Claude Code",
       "on_import_error": "Check token system imports, run npm install if needed"
     },
+<<<<<<< HEAD
     "commit_message_format": "refactor(components): migrate <ComponentName> to Northcote",
+=======
+    "commit_message_format": "refactor(components): migrate <ComponentName> to kerala-rage",
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     "test_command": "npm test -- --testPathPattern=<ComponentName> --json"
   },
 
@@ -188,12 +208,20 @@
     },
     {
       "blocker": "INCONSISTENT NAMING",
+<<<<<<< HEAD
       "impact": "Northcote semantic names hide M3 origins (confusing for audit)",
+=======
+      "impact": "kerala-rage semantic names hide M3 origins (confusing for audit)",
+>>>>>>> restoration-KR-Rage-Figma-v2.0
       "resolution": "Documentation only - flag these in audit phase"
     },
     {
       "blocker": "MISSING TOKENS",
+<<<<<<< HEAD
       "impact": "Token system may not have all Northcote design values yet",
+=======
+      "impact": "Token system may not have all kerala-rage design values yet",
+>>>>>>> restoration-KR-Rage-Figma-v2.0
       "resolution": "If token missing, report to Claude Code before proceeding"
     }
   ],
@@ -201,7 +229,11 @@
   "resources": {
     "documentation": [
       ".claude/plans/component-migration-handover.md",
+<<<<<<< HEAD
       "frontend/src/design-tokens/northcote-tokens.ts",
+=======
+      "frontend/src/design-tokens/kerala-rage-tokens.ts",
+>>>>>>> restoration-KR-Rage-Figma-v2.0
       ".github/DESIGN_SYSTEM.md"
     ],
     "reference_components": [
@@ -224,7 +256,11 @@
     "filesystem": {
       "batch_reads": true,
       "response_format": "compact",
+<<<<<<< HEAD
       "root": "/Users/okgoogle13/Desktop/careercopilot"
+=======
+      "root": "/Users/okgoogle13/Projects/careercopilot"
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     },
     "git": {
       "filter": "components-only",

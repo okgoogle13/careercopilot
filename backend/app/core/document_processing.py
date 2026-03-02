@@ -9,7 +9,11 @@ processing, and RAG document handling.
 import json
 import logging
 from abc import ABC, abstractmethod
+<<<<<<< HEAD
 from typing import Any, Dict, List, Optional, Type, TypeVar
+=======
+from typing import Any, TypeVar
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 from pydantic import BaseModel
 
@@ -31,7 +35,11 @@ class PromptTemplate(BaseModel):
     """Template for AI prompts with placeholders."""
 
     template: str
+<<<<<<< HEAD
     required_variables: List[str]
+=======
+    required_variables: list[str]
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     instructions: str = ""
     expected_format: str = "json"
 
@@ -55,7 +63,11 @@ class PromptTemplate(BaseModel):
 class DocumentProcessor(ABC):
     """Abstract base class for document processors."""
 
+<<<<<<< HEAD
     def __init__(self, config: Optional[Dict[str, Any]] = None):
+=======
+    def __init__(self, config: dict[str, Any] | None = None):
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         """Initialize the document processor."""
         self.config = config or {}
         self.ai_client = get_ai_client()
@@ -68,7 +80,11 @@ class DocumentProcessor(ABC):
     def parse_response(self, response: str) -> BaseModel:
         """Parse the AI response into a structured result."""
 
+<<<<<<< HEAD
     def validate_input(self, **kwargs) -> Dict[str, Any]:
+=======
+    def validate_input(self, **kwargs) -> dict[str, Any]:
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         """Validate and sanitize input parameters."""
         return kwargs
 
@@ -76,8 +92,13 @@ class DocumentProcessor(ABC):
 async def process_document(
     file_content: str,
     prompt_template: PromptTemplate,
+<<<<<<< HEAD
     response_model: Type[T],
     processor_config: Optional[Dict[str, Any]] = None,
+=======
+    response_model: type[T],
+    processor_config: dict[str, Any] | None = None,
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     **template_variables,
 ) -> T:
     """
@@ -126,8 +147,13 @@ async def process_document(
         return result
 
     except Exception as e:
+<<<<<<< HEAD
         logger.error(f"Document processing failed: {str(e)}", exc_info=True)
         raise DocumentProcessingError(f"Failed to process document: {str(e)}") from e
+=======
+        logger.error(f"Document processing failed: {e!s}", exc_info=True)
+        raise DocumentProcessingError(f"Failed to process document: {e!s}") from e
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 
 async def _make_ai_request(prompt: str, model: str, max_tokens: int, temperature: float) -> str:
@@ -146,7 +172,11 @@ async def _make_ai_request(prompt: str, model: str, max_tokens: int, temperature
         return response.choices[0].message.content
 
     except Exception as e:
+<<<<<<< HEAD
         logger.error(f"AI request failed: {str(e)}", exc_info=True)
+=======
+        logger.error(f"AI request failed: {e!s}", exc_info=True)
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         raise AIError(
             error_type=AIErrorType.API_ERROR,
             message="Failed to process AI request",
@@ -154,7 +184,11 @@ async def _make_ai_request(prompt: str, model: str, max_tokens: int, temperature
         )
 
 
+<<<<<<< HEAD
 def _parse_ai_response(response: str, response_model: Type[T]) -> T:
+=======
+def _parse_ai_response(response: str, response_model: type[T]) -> T:
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     """Parse the AI response into a structured result."""
     try:
         # Clean the response - remove any non-JSON content
@@ -173,7 +207,11 @@ def _parse_ai_response(response: str, response_model: Type[T]) -> T:
         return response_model.model_validate(data)
 
     except json.JSONDecodeError as e:
+<<<<<<< HEAD
         logger.error(f"Failed to parse AI response as JSON: {str(e)}")
+=======
+        logger.error(f"Failed to parse AI response as JSON: {e!s}")
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         logger.debug(f"Response content: {response[:500]}...")
         raise AIError(
             error_type=AIErrorType.PARSE_ERROR,
@@ -181,7 +219,11 @@ def _parse_ai_response(response: str, response_model: Type[T]) -> T:
             details={"error": str(e), "response_sample": response[:200]},
         )
     except Exception as e:
+<<<<<<< HEAD
         logger.error(f"Error processing AI response: {str(e)}", exc_info=True)
+=======
+        logger.error(f"Error processing AI response: {e!s}", exc_info=True)
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         raise AIError(
             error_type=AIErrorType.PROCESSING_ERROR,
             message="Error processing AI response",
@@ -195,8 +237,13 @@ class GenericDocumentProcessor(DocumentProcessor):
     def __init__(
         self,
         prompt_template: PromptTemplate,
+<<<<<<< HEAD
         response_model: Type[BaseModel],
         config: Optional[Dict[str, Any]] = None,
+=======
+        response_model: type[BaseModel],
+        config: dict[str, Any] | None = None,
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     ):
         """Initialize with custom template and response model."""
         super().__init__(config)
@@ -337,9 +384,15 @@ Format your response as a JSON object with the following structure:
 
 
 # Convenience functions for common operations
+<<<<<<< HEAD
 async def process_resume(resume_text: str, config: Optional[Dict[str, Any]] = None) -> Any:
     """Process a resume using the standard resume analysis template."""
     from app.schemas.resume import ResumeAnalysisResult
+=======
+async def process_resume(resume_text: str, config: dict[str, Any] | None = None) -> Any:
+    """Process a resume using the standard resume analysis template."""
+    from app.ai.resume_service import ResumeAnalysisResult
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
     return await process_document(
         file_content=resume_text,
@@ -349,7 +402,11 @@ async def process_resume(resume_text: str, config: Optional[Dict[str, Any]] = No
     )
 
 
+<<<<<<< HEAD
 async def process_job_description(job_text: str, config: Optional[Dict[str, Any]] = None) -> Any:
+=======
+async def process_job_description(job_text: str, config: dict[str, Any] | None = None) -> Any:
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     """Process a job description using the standard job analysis template."""
 
     # This would need a JobDescriptionResult model to be defined
@@ -370,7 +427,11 @@ async def process_job_description(job_text: str, config: Optional[Dict[str, Any]
 
 
 async def compare_resume_to_job(
+<<<<<<< HEAD
     resume_text: str, job_description: str, config: Optional[Dict[str, Any]] = None
+=======
+    resume_text: str, job_description: str, config: dict[str, Any] | None = None
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 ) -> Any:
     """Compare a resume to a job description."""
 

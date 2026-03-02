@@ -1,6 +1,7 @@
 ---
 name: jest-test-scaffolder
-description: "Scaffolds Jest unit tests for React components and hooks. Use when creating tests for frontend components."
+description: Scaffolds Jest unit tests for React components and hooks. Use when creating
+  tests for frontend components.
 ---
 
 # Jest Test Scaffolder Workflow

@@ -6,4 +6,8 @@ export { JobCard } from './JobCard';
 export { KeywordTag } from './KeywordTag';
 export { MetricCard } from './MetricCard';
 export { PageHeader } from './PageHeader';
+<<<<<<< HEAD
 export { StatCard } from './StatCard';
+=======
+export { StatCard } from './StatCard';
+>>>>>>> restoration-KR-Rage-Figma-v2.0

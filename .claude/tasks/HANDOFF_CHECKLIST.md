@@ -23,7 +23,7 @@
 - [ ] Node.js available: `node --version`
 
 ### 4. Token System Available
-- [ ] Token system file exists: `frontend/src/design-tokens/northcote-tokens.ts`
+- [ ] Token system file exists: `frontend/src/design-tokens/kerala-rage-tokens.ts`
 - [ ] Contains required exports:
   - [ ] ncFontDisplay
   - [ ] ncFontBody
@@ -168,7 +168,7 @@ git status  # Should be clean after each commit
 
 ### Phase 4 Planning (Claude Code)
 After Gemini completes:
-1. Run `northcote-visual-audit` on 6 migrated components
+1. Run `kerala-rage-visual-audit` on 6 migrated components
 2. Compare before/after visuals
 3. Generate compliance report
 4. Plan Phase 5 (secondary components) and Phase 6 (shared components)
@@ -236,7 +236,7 @@ ls frontend/src/components/containers/Cabinet.tsx
 # Expected: All 6 files readable
 
 # 4. Token system exists
-ls frontend/src/design-tokens/northcote-tokens.ts
+ls frontend/src/design-tokens/kerala-rage-tokens.ts
 # Expected: File exists and contains ncColor*, ncFont*, ncShape* exports
 
 # 5. Tests pass

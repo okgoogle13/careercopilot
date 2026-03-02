@@ -8,6 +8,16 @@ module.exports = {
     extend: {
       colors: {
         ...{
+<<<<<<< HEAD
+=======
+          "asphaltBlack": "var(--sys-color-asphaltBlack)",
+          "paperWhite": "var(--sys-color-paperWhite)",
+          "kr-ink-gold": "var(--sys-color-kr-ink-gold)",
+          "waratahRed": "var(--sys-color-waratahRed)",
+          "ochreEarth": "var(--sys-color-ochreEarth)",
+          "concreteGrey": "var(--sys-color-concreteGrey)",
+          "gumLeafGreen": "var(--sys-color-gumLeafGreen)",
+>>>>>>> restoration-KR-Rage-Figma-v2.0
           "primary": "var(--sys-color-primary)",
           "secondary": "var(--sys-color-secondary)",
           "tertiary": "var(--sys-color-tertiary)",
@@ -22,12 +32,16 @@ module.exports = {
           "inverseOnSurface": "var(--sys-color-inverseOnSurface)",
           "inversePrimary": "var(--sys-color-inversePrimary)",
           "disabled": "var(--sys-color-disabled)",
+<<<<<<< HEAD
           "seed": "var(--sys-color-seed)",
+=======
+>>>>>>> restoration-KR-Rage-Figma-v2.0
           "neutral": "var(--sys-color-neutral)",
           "neutralVariant": "var(--sys-color-neutralVariant)"
 }
       },
       spacing: {
+<<<<<<< HEAD
         ...{
           "0": "0px",
           "1": "4px",
@@ -91,6 +105,15 @@ module.exports = {
                     "cut": "cut"
           }
 }
+=======
+        ...{}
+      },
+      boxShadow: {
+        ...{}
+      },
+      borderRadius: {
+        ...{}
+>>>>>>> restoration-KR-Rage-Figma-v2.0
       },
       fontFamily: {
         ...{

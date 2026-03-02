@@ -1,3 +1,14 @@
+<<<<<<< HEAD
+=======
+---
+name: mcp-routing-specialist
+description: MCP Routing Specialist workflow and guidance. Use when this exact skill's
+  domain is requested.
+metadata:
+  legacy_frontmatter_rebuilt: true
+---
+
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 # MCP Routing Specialist
 
 **Description:** Routes tasks to optimal MCP servers based on delegationStrategy in ~/.mcp.json. Enforces token optimization by preventing expensive Claude analysis when cheaper alternatives (Gemini, local cache) are available. Use when analyzing code, debugging errors, retrieving configuration, or executing flows.

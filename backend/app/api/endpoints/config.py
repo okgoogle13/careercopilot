@@ -5,9 +5,15 @@ Configuration API endpoints.
 Provides secure access to configuration values for the frontend.
 """
 
+<<<<<<< HEAD
 import os
 import logging
 from typing import Dict
+=======
+import logging
+import os
+
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 from fastapi import APIRouter, HTTPException
 
 logger = logging.getLogger(__name__)
@@ -15,7 +21,11 @@ logger = logging.getLogger(__name__)
 router = APIRouter()
 
 
+<<<<<<< HEAD
 @router.get("/supabase-config", response_model=Dict[str, str])
+=======
+@router.get("/supabase-config", response_model=dict[str, str])
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 async def get_supabase_config():
     """
     Get Supabase configuration for frontend.

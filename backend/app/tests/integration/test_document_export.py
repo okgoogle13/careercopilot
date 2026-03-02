@@ -17,6 +17,7 @@ These tests validate:
 """
 
 import json
+<<<<<<< HEAD
 import pytest
 from datetime import datetime, timedelta
 from typing import Dict, Any
@@ -34,6 +35,16 @@ from app.models.document_export_schemas import (
     DocumentExportResponse
 )
 
+=======
+from datetime import datetime
+from unittest.mock import MagicMock, patch
+
+import pytest
+
+from app.core.document_export_service import (
+    DocumentExportService,
+)
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 # ============================================================================
 # Fixtures
@@ -161,7 +172,11 @@ async def test_export_cover_letter_json(
     """Test exporting cover letter to JSON format."""
     with patch.object(
         document_export_service,
+<<<<<<< HEAD
         'storage_client',
+=======
+        "storage_client",
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         mock_cloud_storage
     ):
         result = await document_export_service.export_cover_letter(
@@ -197,7 +212,11 @@ async def test_export_cover_letter_txt(
     """Test exporting cover letter to plain text."""
     with patch.object(
         document_export_service,
+<<<<<<< HEAD
         'storage_client',
+=======
+        "storage_client",
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         mock_cloud_storage
     ):
         result = await document_export_service.export_cover_letter(
@@ -243,7 +262,11 @@ async def test_export_cover_letter_bandwidth_optimization(
     """
     with patch.object(
         document_export_service,
+<<<<<<< HEAD
         'storage_client',
+=======
+        "storage_client",
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         mock_cloud_storage
     ):
         result = await document_export_service.export_cover_letter(
@@ -279,7 +302,11 @@ async def test_export_resume_json(
     """Test exporting resume to JSON format."""
     with patch.object(
         document_export_service,
+<<<<<<< HEAD
         'storage_client',
+=======
+        "storage_client",
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         mock_cloud_storage
     ):
         result = await document_export_service.export_resume(
@@ -327,7 +354,11 @@ async def test_export_ksc_response(
     """Test exporting KSC response."""
     with patch.object(
         document_export_service,
+<<<<<<< HEAD
         'storage_client',
+=======
+        "storage_client",
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         mock_cloud_storage
     ):
         result = await document_export_service.export_ksc_response(
@@ -358,7 +389,11 @@ async def test_export_application_package(
     """Test exporting complete application package."""
     with patch.object(
         document_export_service,
+<<<<<<< HEAD
         'storage_client',
+=======
+        "storage_client",
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         mock_cloud_storage
     ):
         result = await document_export_service.export_application_package(
@@ -384,7 +419,11 @@ async def test_export_application_package_bandwidth_optimization(
     """Test bandwidth optimization for large application package."""
     with patch.object(
         document_export_service,
+<<<<<<< HEAD
         'storage_client',
+=======
+        "storage_client",
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         mock_cloud_storage
     ):
         result = await document_export_service.export_application_package(
@@ -399,7 +438,11 @@ async def test_export_application_package_bandwidth_optimization(
 
     # Relaxed check for small test samples
     assert url_size < content_size, \
+<<<<<<< HEAD
         f"URL should be smaller than content"
+=======
+        "URL should be smaller than content"
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
     print(f"Package optimization: {content_size} bytes → {url_size} bytes (URL) "
           f"({url_size / content_size * 100:.1f}%)")
@@ -420,7 +463,11 @@ async def test_export_custom_expiration(
     """Test custom signed URL expiration."""
     with patch.object(
         document_export_service,
+<<<<<<< HEAD
         'storage_client',
+=======
+        "storage_client",
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         mock_cloud_storage
     ):
         result = await document_export_service.export_cover_letter(
@@ -432,8 +479,13 @@ async def test_export_custom_expiration(
         )
 
     # Parse expiration time and verify it's approximately 72 hours from now
+<<<<<<< HEAD
     expires_dt = datetime.fromisoformat(result.expires_at.replace('Z', '+00:00'))
     
+=======
+    expires_dt = datetime.fromisoformat(result.expires_at.replace("Z", "+00:00"))
+
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     # Use timezone-aware UTC datetime for comparison
     from datetime import timezone
     now = datetime.now(timezone.utc)
@@ -453,7 +505,11 @@ async def test_export_min_max_expiration(
     """Test minimum and maximum expiration values."""
     with patch.object(
         document_export_service,
+<<<<<<< HEAD
         'storage_client',
+=======
+        "storage_client",
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         mock_cloud_storage
     ):
         # Test minimum (1 hour)
@@ -496,7 +552,11 @@ def test_storage_path_format(
     # Format: exports/{user_id}/{document_type}/{timestamp}.{format}
     assert path.startswith(f"exports/{user_id}/cover_letter/")
     assert path.endswith(".json")
+<<<<<<< HEAD
     assert len(path.split('/')) == 4  # 4 path components
+=======
+    assert len(path.split("/")) == 4  # 4 path components
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 
 def test_storage_path_uniqueness(
@@ -541,7 +601,11 @@ async def test_export_storage_failure(
 
     with patch.object(
         document_export_service,
+<<<<<<< HEAD
         'storage_client',
+=======
+        "storage_client",
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         mock_cloud_storage
     ):
         with pytest.raises(Exception, match="Storage unavailable"):
@@ -575,7 +639,11 @@ async def test_complete_export_flow(
     """
     with patch.object(
         document_export_service,
+<<<<<<< HEAD
         'storage_client',
+=======
+        "storage_client",
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         mock_cloud_storage
     ):
         # Step 1: Export cover letter
@@ -639,7 +707,11 @@ async def test_export_performance(
 
     with patch.object(
         document_export_service,
+<<<<<<< HEAD
         'storage_client',
+=======
+        "storage_client",
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         mock_cloud_storage
     ):
         start_time = time.time()

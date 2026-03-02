@@ -1,0 +1,70 @@
+# MCP Optimization Build Checklist
+
+## Pre-Build Setup
+- [ ] Read: `/Users/okgoogle13/Projects/careercopilot/MCP_OPTIMIZATION_HANDOVER.md`
+- [ ] Read: `/Users/okgoogle13/Projects/careercopilot/servers/flash_sidekick.py` (current implementation)
+- [ ] Env vars configured (GEMINI_API_KEY set)
+
+## Phase 2: Async Refactor + P0 Tools (5 hours)
+- [ ] Add `import asyncio` to flash_sidekick.py
+- [ ] Create async wrapper for Gemini calls
+- [ ] Keep existing 3 tools working (backward compatible)
+- [ ] Implement `batch_file_analysis` (parallel file analysis)
+- [ ] Implement `web_research_synthesis` (with Search Grounding)
+- [ ] Test: Both tools respond with valid JSON-RPC
+
+## Phase 3: P1 Tools (4 hours)
+- [ ] `analyze_code_quality` - Fast code review scoring
+- [ ] `generate_docstrings` - Insert docs in code
+- [ ] `generate_unit_tests` - Create test scaffolding
+- [ ] Test: All 3 tools work with sample inputs
+
+## Phase 3: P2/P3 Tools (6 hours)
+- [ ] `suggest_refactoring` (1.5h)
+- [ ] `create_readme` (1.5h)
+- [ ] `extract_dependencies` (1h)
+- [ ] `generate_api_docs` (1h)
+- [ ] `generate_integration_tests` (1.5h)
+- [ ] Test: All 5 tools functional
+
+## Phase 4: Optimization (4 hours)
+- [ ] Rate limiting (backoff for 60 req/min)
+- [ ] Smart delegation helper
+- [ ] JSON structured output mode
+- [ ] Response pagination for large results
+
+## Phase 5: Testing & Deploy (2 hours)
+- [ ] Unit test each tool with samples
+- [ ] Integration test in Claude Desktop
+- [ ] Integration test in Cline
+- [ ] Measure token reduction (batch: 67%, web_research: 75%)
+- [ ] Create PR with all tools
+
+## Verification
+```bash
+# Check flash-sidekick starts
+python3 /Users/okgoogle13/Projects/careercopilot/servers/flash_sidekick.py
+
+# Verify all 12 tools in output
+# Send: {"jsonrpc": "2.0", "id": 1, "method": "tools/list"}
+# Should see 15 tools (3 original + 12 new)
+```
+
+## Success Criteria
+✅ All 12 tools implemented
+✅ 60-70% token savings on batch tasks
+✅ 75% token savings on web research
+✅ Response times: flash <2s, pro <10s
+✅ Rate limiting prevents quota errors
+✅ Tests pass in all 3 MCP environments
+
+## Timeline
+- **Week 1**: Phase 2-3 (9 hours)
+- **Week 2**: Phase 3-4 (10 hours)
+- **Week 3**: Phase 5 + Deploy (5 hours)
+- **Total**: ~24 hours
+
+---
+
+**Model Requirement**: Claude Opus 4.5 (complex async implementation)
+**Ready to start**: YES ✅

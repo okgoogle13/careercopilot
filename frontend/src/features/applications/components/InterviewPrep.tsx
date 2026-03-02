@@ -30,7 +30,11 @@ const questionCategories = [
     id: 'situational',
     title: 'Situational Questions',
     description: 'Hypothetical scenarios to assess problem-solving skills',
+<<<<<<< HEAD
     color: 'var(--color-wattle-base)', // #86EFAC
+=======
+    color: 'var(--color-ink-base)', // #86EFAC
+>>>>>>> restoration-KR-Rage-Figma-v2.0
   },
   {
     id: 'technical',

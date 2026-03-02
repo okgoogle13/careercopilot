@@ -30,11 +30,19 @@ export const SplitHeader: React.FC<SplitHeaderProps> = ({
 
     return (
         <div className={`relative ${className}`}>
+<<<<<<< HEAD
             {/* The Proclamation (Libre Bodoni) - Structural Anchor */}
             <motion.h1
                 className="relative z-0 text-6xl font-black uppercase tracking-tight text-white md:text-7xl lg:text-8xl"
                 style={{
                     fontFamily: "'Libre Bodoni', 'Playfair Display', serif",
+=======
+            {/* The Proclamation (KrSerifBold) - Structural Anchor */}
+            <motion.h1
+                className="relative z-0 text-6xl font-black uppercase tracking-tight text-[var(--sys-color-worker-ash-base)] md:text-7xl lg:text-8xl"
+                style={{
+                    fontFamily: "'KrSerifBold', 'Playfair Display', serif",
+>>>>>>> restoration-KR-Rage-Figma-v2.0
                     fontStretch: 'condensed',
                     letterSpacing: '-0.03em',
                 }}
@@ -51,7 +59,11 @@ export const SplitHeader: React.FC<SplitHeaderProps> = ({
                 style={{
                     fontFamily: "'Fraunces', serif",
                     fontVariationSettings: "'wght' 600, 'SOFT' 50, 'WONK' 1",
+<<<<<<< HEAD
                     color: '#D4A84B', // Wattle Gold
+=======
+                    color: 'var(--sys-color-kr-ink-gold)', // Ink Gold
+>>>>>>> restoration-KR-Rage-Figma-v2.0
                     transform: `rotate(${vineRotation}deg)`,
                 }}
                 initial={{ opacity: 0, scale: 0.8, rotate: 0 }}
@@ -64,4 +76,8 @@ export const SplitHeader: React.FC<SplitHeaderProps> = ({
     );
 };
 
+<<<<<<< HEAD
 export default SplitHeader;
+=======
+export default SplitHeader;
+>>>>>>> restoration-KR-Rage-Figma-v2.0

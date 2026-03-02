@@ -5,7 +5,11 @@ This module contains production-specific settings and configurations.
 """
 
 import os
+<<<<<<< HEAD
 from typing import Any, Dict
+=======
+from typing import Any
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 
 class ProductionConfig:
@@ -39,7 +43,11 @@ class ProductionConfig:
     CACHE_TTL = int(os.getenv("CACHE_TTL_HOURS", "24")) * 3600  # Convert hours to seconds
 
     @classmethod
+<<<<<<< HEAD
     def to_dict(cls) -> Dict[str, Any]:
+=======
+    def to_dict(cls) -> dict[str, Any]:
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         """Convert configuration to dictionary, excluding private and callable attributes."""
         return {
             key: value

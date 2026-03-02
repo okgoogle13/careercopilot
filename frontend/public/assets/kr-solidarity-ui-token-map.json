@@ -1,0 +1,844 @@
+{
+  "version": "1.3.0",
+  "updated": "2026-02-26T18:00:00.000Z",
+  "description": "Central mapping file resolving both KR-SOLID assets and future KR-UI assets",
+  "tokens": {
+    "kr-asset-screenprint-substrate": {
+      "ref": "KR-SOLID-037",
+      "path": "/assets/kr-solidarity/texture/kr-solidarity__substrate__kr-solidarity--texture--melbourne-laneway--v1__v1.png",
+      "type": "kr-solidarity",
+      "status": "ready",
+      "layer": "substrate",
+      "description": "Melbourne-laneway V1 - Canonical substrate base"
+    },
+    "kr-asset-paint-splash": {
+      "ref": "KR-SOLID-029",
+      "path": "/assets/kr-solidarity/portrait/kr-solidarity__resistance__kr-solidarity--portrait--turbaned-man--v1__v1.png",
+      "type": "kr-solidarity",
+      "status": "ready",
+      "layer": "atmospheric",
+      "description": "Paint splash - dynamic expressive overlay"
+    },
+    "kr-asset-screenprint-grit": {
+      "ref": "KR-UI-003",
+      "path": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__KR-UI-003__v1.svg",
+      "type": "ui-kit",
+      "status": "ready",
+      "description": "Screenprint grit particles (tile + sprite set) for floating texture"
+    },
+    "kr-asset-charcoal-paper": {
+      "ref": "KR-UI-005",
+      "path": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__KR-UI-005__v1.svg",
+      "type": "ui-kit",
+      "status": "ready",
+      "description": "Neutral charcoal paper substrate distinct from laneway texture"
+    },
+    "kr-asset-wheat-paste-tear": {
+      "ref": "KR-UI-001",
+      "path": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__KR-UI-001__v1.svg",
+      "type": "ui-kit",
+      "status": "ready",
+      "description": "Wheat paste tear (large + small variants) for torn poster edges"
+    },
+    "kr-asset-halo-disk": {
+      "ref": "KR-UI-002",
+      "path": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__KR-UI-002__v1.svg",
+      "type": "ui-kit",
+      "status": "ready",
+      "description": "Halo disk (plain + gauge version) for radiant circle elements"
+    },
+    "kr-asset-blueprint-grid": {
+      "ref": "KR-UI-004",
+      "path": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__KR-UI-004__v1.svg",
+      "type": "ui-kit",
+      "status": "ready",
+      "description": "Blueprint grid overlay (transparent) for technical grid patterns"
+    },
+    "kr-asset-blueprint-layout": {
+      "ref": "KR-UI-006",
+      "path": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__KR-UI-006__v1.svg",
+      "type": "ui-kit",
+      "status": "ready",
+      "description": "Blueprint layout watermark (transparent) for structural documentation"
+    },
+    "kr-asset-screenprint-stamp": {
+      "ref": "KR-UI-007",
+      "path": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__KR-UI-007__v1.svg",
+      "type": "ui-kit",
+      "status": "ready",
+      "description": "Screenprint stamp 'VERIFIED' (transparent) for approval indicators"
+    },
+    "kr-asset-field-grid": {
+      "ref": "KR-UI-004",
+      "path": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__KR-UI-004__v1.svg",
+      "type": "ui-kit",
+      "status": "ready",
+      "description": "Alias for blueprint-grid - technical grid overlay"
+    },
+    "kr-asset-field-layout": {
+      "ref": "KR-UI-006",
+      "path": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__KR-UI-006__v1.svg",
+      "type": "ui-kit",
+      "status": "ready",
+      "description": "Alias for blueprint-layout - technical layout watermark"
+    },
+    "kr-asset-ink-slam-mark": {
+      "ref": "KR-UI-007",
+      "path": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__KR-UI-007__v1.svg",
+      "type": "ui-kit",
+      "status": "ready",
+      "description": "Alias for screenprint-stamp - verification stamp"
+    },
+    "kr-asset-abstract-abstract-solidarity": {
+      "ref": "KR-SOLID-001",
+      "path": "/assets/kr-solidarity/abstract/kr-solidarity__atmospheric__abstract---solidarity-chatgpt-image-f__v1.png",
+      "type": "kr-solidarity",
+      "status": "ready",
+      "layer": "atmospheric",
+      "description": "Abstract -solidarity"
+    },
+    "kr-asset-abstract-abstract-solidarity-kr-solid-014": {
+      "ref": "KR-SOLID-017",
+      "path": "/assets/kr-solidarity/abstract/kr-solidarity__atmospheric__abstract---solidarity-kr-solidarity--__v1.png",
+      "type": "kr-solidarity",
+      "status": "ready",
+      "layer": "atmospheric",
+      "description": "Abstract -solidarity-kr-solid-014"
+    },
+    "kr-asset-abstract-abstract-solidarity-moodboard-12-ti": {
+      "ref": "KR-SOLID-018",
+      "path": "/assets/kr-solidarity/abstract/kr-solidarity__atmospheric__abstract---solidarity-moodboard-12-ti__v1.png",
+      "type": "kr-solidarity",
+      "status": "ready",
+      "layer": "atmospheric",
+      "description": "Abstract -solidarity-moodboard-12-ti"
+    },
+    "kr-asset-abstract-paint-splash-v1": {
+      "ref": "KR-SOLID-019",
+      "path": "/assets/kr-solidarity/abstract/kr-solidarity__atmospheric__abstract---solidarity__v1.png",
+      "type": "kr-solidarity",
+      "status": "ready",
+      "layer": "atmospheric",
+      "description": "Paint-splash V1"
+    },
+    "kr-asset-devotional-devotional-cultural-anchor": {
+      "ref": "KR-SOLID-020",
+      "path": "/assets/kr-solidarity/abstract/kr-solidarity__atmospheric__kr-solidarity--abstract--paint-splash--v1__v1.png",
+      "type": "kr-solidarity",
+      "status": "ready",
+      "layer": "spiritual",
+      "description": "Devotional -cultural-anchor"
+    },
+    "kr-asset-devotional-shiva-statue-v1": {
+      "ref": "KR-SOLID-021",
+      "path": "/assets/kr-solidarity/devotional/kr-solidarity__spiritual__devotional---cultural-anchor__v1.png",
+      "type": "kr-solidarity",
+      "status": "ready",
+      "layer": "spiritual",
+      "description": "Shiva-statue V1"
+    },
+    "kr-asset-devotional-shiva-statue-street-v1": {
+      "ref": "KR-SOLID-022",
+      "path": "/assets/kr-solidarity/devotional/kr-solidarity__spiritual__devotional---solidarity__v1.png",
+      "type": "kr-solidarity",
+      "status": "ready",
+      "layer": "spiritual",
+      "description": "Shiva-statue-street V1"
+    },
+    "kr-asset-devotional-shiva-urban-protest-v1": {
+      "ref": "KR-SOLID-023",
+      "path": "/assets/kr-solidarity/devotional/kr-solidarity__spiritual__kr-solidarity--devotional--shiva-statue--v1__v1.png",
+      "type": "kr-solidarity",
+      "status": "ready",
+      "layer": "spiritual",
+      "description": "Shiva-urban-protest V1"
+    },
+    "kr-asset-portrait-bhagat-singh-v1": {
+      "ref": "KR-SOLID-024",
+      "path": "/assets/kr-solidarity/devotional/kr-solidarity__spiritual__kr-solidarity--devotional--shiva-statue-street--v1__v1.png",
+      "type": "kr-solidarity",
+      "status": "ready",
+      "layer": "resistance",
+      "description": "Bhagat-singh V1"
+    },
+    "kr-asset-portrait-portrait-resistance-history": {
+      "ref": "KR-SOLID-025",
+      "path": "/assets/kr-solidarity/devotional/kr-solidarity__spiritual__kr-solidarity--devotional--shiva-urban-protest--v1__v1.png",
+      "type": "kr-solidarity",
+      "status": "ready",
+      "layer": "resistance",
+      "description": "Portrait -resistance-history"
+    },
+    "kr-asset-portrait-tipu-sultan-v1": {
+      "ref": "KR-SOLID-026",
+      "path": "/assets/kr-solidarity/heroes/kr-solidarity__resistance__resistance-portrait__v1.png",
+      "type": "kr-solidarity",
+      "status": "ready",
+      "layer": "resistance",
+      "description": "Tipu-sultan V1"
+    },
+    "kr-asset-portrait-turbaned-man-v1": {
+      "ref": "KR-SOLID-027",
+      "path": "/assets/kr-solidarity/portrait/kr-solidarity__resistance__kr-solidarity--portrait--bhagat-singh--v1__v1.png",
+      "type": "kr-solidarity",
+      "status": "ready",
+      "layer": "resistance",
+      "description": "Turbaned-man V1"
+    },
+    "kr-asset-street-first-nations-placard-v1": {
+      "ref": "KR-SOLID-028",
+      "path": "/assets/kr-solidarity/portrait/kr-solidarity__resistance__kr-solidarity--portrait--tipu-sultan--v1__v1.png",
+      "type": "kr-solidarity",
+      "status": "ready",
+      "layer": "resistance",
+      "description": "First-nations-placard V1"
+    },
+    "kr-asset-street-treaty-now-poster-v1": {
+      "ref": "KR-SOLID-030",
+      "path": "/assets/kr-solidarity/portrait/kr-solidarity__resistance__portrait---resistance-history__v1.png",
+      "type": "kr-solidarity",
+      "status": "ready",
+      "layer": "resistance",
+      "description": "Treaty-now-poster V1"
+    },
+    "kr-asset-symbol-kerala-elephant-v1": {
+      "ref": "KR-SOLID-031",
+      "path": "/assets/kr-solidarity/street/kr-solidarity__resistance__kr-solidarity--street--first-nations-placard--v1__v1.png",
+      "type": "kr-solidarity",
+      "status": "ready",
+      "layer": "cultural",
+      "description": "Kerala-elephant V1"
+    },
+    "kr-asset-symbol-kerala-landscape-v1": {
+      "ref": "KR-SOLID-032",
+      "path": "/assets/kr-solidarity/street/kr-solidarity__resistance__kr-solidarity--street--treaty-now-poster--v1__v1.png",
+      "type": "kr-solidarity",
+      "status": "ready",
+      "layer": "cultural",
+      "description": "Kerala-landscape V1"
+    },
+    "kr-asset-portrait-resistance-hero": {
+      "ref": "KR-SOLID-034",
+      "path": "/assets/kr-solidarity/street/kr-solidarity__resistance__street---resistance-historyactivist__v1.png",
+      "type": "kr-solidarity",
+      "status": "ready",
+      "layer": "resistance",
+      "description": "Resistance Hero Portrait - Identified as Orphan"
+    },
+    "kr-asset-elite-mastery-motif-accents": {
+      "ref": "KR-UI-008",
+      "path": "/assets/kr-solidarity/ui-kit/svg/motifs/kr-solidarity__ui-kit__KR-UI-008__v1.svg",
+      "type": "ui-kit",
+      "id": "KR-UI-008",
+      "name": "Elite Mastery Motif Accents",
+      "kind": "motif_overlay",
+      "render_mode": "overlay",
+      "scale_safe": true,
+      "status": "ready",
+      "opacity_default": 0.65,
+      "description": "Motif overlay accents for Elite/High-Mastery skill indicators"
+    },
+    "kr-asset-mastery-chart-patterns": {
+      "ref": "KR-UI-009",
+      "path": "/assets/kr-solidarity/ui-kit/svg/patterns/kr-solidarity__ui-kit__KR-UI-009__v1.svg",
+      "type": "ui-kit",
+      "id": "KR-UI-009",
+      "name": "Mastery Chart Patterns",
+      "kind": "pattern",
+      "render_mode": "chartFill",
+      "scale_safe": true,
+      "status": "ready",
+      "description": "SVG/Canvas patterns for mastery chart fills"
+    },
+    "kr-asset-success-screen-motif-overlay": {
+      "ref": "KR-UI-010",
+      "path": "/assets/kr-solidarity/ui-kit/svg/motifs/kr-solidarity__ui-kit__KR-UI-010__v1.svg",
+      "type": "ui-kit",
+      "id": "KR-UI-010",
+      "name": "Success Screen Motif Overlay",
+      "kind": "motif_overlay",
+      "render_mode": "backgroundZ0",
+      "scale_safe": true,
+      "status": "ready",
+      "opacity_default": 0.15,
+      "description": "Background motif overlay for success screen (Z-0)"
+    },
+    "kr-asset-historical-record-background-texture": {
+      "ref": "KR-UI-011",
+      "path": "/assets/kr-solidarity/ui-kit/svg/patterns/kr-solidarity__ui-kit__KR-UI-011__v1.svg",
+      "type": "ui-kit",
+      "id": "KR-UI-011",
+      "name": "Historical Record Background Texture",
+      "kind": "pattern",
+      "render_mode": "backgroundZ0",
+      "scale_safe": true,
+      "status": "ready",
+      "opacity_default": 0.05,
+      "description": "Background texture pattern for historical records (Z-0, 5% opacity)"
+    },
+    "kr-asset-metric-graphical-motifs": {
+      "ref": "KR-UI-012",
+      "path": "/assets/kr-solidarity/ui-kit/svg/motifs/kr-solidarity__ui-kit__KR-UI-012__v1.svg",
+      "type": "ui-kit",
+      "id": "KR-UI-012",
+      "name": "Metric Graphical Motifs",
+      "kind": "motif_glyph",
+      "render_mode": "inline24",
+      "scale_safe": true,
+      "status": "ready",
+      "description": "Metric-specific mini-chart glyphs and symbols"
+    },
+    "kr-asset-scanning-holographic-motif": {
+      "ref": "KR-UI-013",
+      "path": "/assets/kr-solidarity/ui-kit/svg/motifs/kr-solidarity__ui-kit__KR-UI-013__v1.svg",
+      "type": "ui-kit",
+      "id": "KR-UI-013",
+      "name": "Scanning Holographic Motif",
+      "kind": "motif_overlay",
+      "render_mode": "overlay",
+      "scale_safe": true,
+      "status": "ready",
+      "opacity_default": 0.7,
+      "description": "Scanning holographic overlay for primary CTA buttons"
+    },
+    "kr-asset-resolved-card-motif-accents": {
+      "ref": "KR-UI-014",
+      "path": "/assets/kr-solidarity/ui-kit/svg/motifs/kr-solidarity__ui-kit__KR-UI-014__v1.svg",
+      "type": "ui-kit",
+      "id": "KR-UI-014",
+      "name": "Resolved Card Motif Accents",
+      "kind": "motif_corner",
+      "render_mode": "frame",
+      "scale_safe": true,
+      "status": "ready",
+      "description": "Corner motif accents for Resolved cards"
+    },
+    "kr-asset-priority-indicator-halo-variant": {
+      "ref": "KR-UI-015",
+      "path": "/assets/kr-solidarity/ui-kit/svg/motifs/kr-solidarity__ui-kit__KR-UI-015__v1.svg",
+      "type": "ui-kit",
+      "id": "KR-UI-015",
+      "name": "Priority Indicator Halo Variant",
+      "kind": "motif_glyph",
+      "render_mode": "inline24",
+      "scale_safe": true,
+      "status": "ready",
+      "description": "Halo-variant priority indicator motif glyphs"
+    },
+    "kr-asset-status-icons-set": {
+      "ref": "KR-UI-016",
+      "path": "/assets/kr-solidarity/ui-kit/svg/icons/kr-solidarity__ui-kit__KR-UI-016__v1.svg",
+      "type": "ui-kit",
+      "id": "KR-UI-016",
+      "name": "Status Icons Set",
+      "kind": "icon_set",
+      "render_mode": "inline24",
+      "scale_safe": true,
+      "status": "ready",
+      "description": "Status-specific icon set for list items"
+    },
+    "kr-asset-skill-achievement-badge-set": {
+      "ref": "KR-UI-017",
+      "path": "/assets/kr-solidarity/ui-kit/svg/icons/kr-solidarity__ui-kit__KR-UI-017__v1.svg",
+      "type": "ui-kit",
+      "id": "KR-UI-017",
+      "name": "Skill Achievement Badge Set",
+      "kind": "badge_set",
+      "render_mode": "inline24",
+      "scale_safe": true,
+      "status": "ready",
+      "description": "Badge icons for specific skill achievements"
+    },
+    "kr-asset-grid-line-corner-motifs": {
+      "ref": "KR-UI-018",
+      "path": "/assets/kr-solidarity/ui-kit/svg/motifs/kr-solidarity__ui-kit__KR-UI-018__v1.svg",
+      "type": "ui-kit",
+      "id": "KR-UI-018",
+      "name": "Grid Line Corner Motifs",
+      "kind": "motif_corner",
+      "render_mode": "frame",
+      "scale_safe": true,
+      "status": "ready",
+      "description": "Decorative grid line motifs for panel corners"
+    },
+    "kr-asset-motif-reservoir-items": {
+      "ref": "KR-UI-019",
+      "path": "/assets/kr-solidarity/ui-kit/svg/motifs/kr-solidarity__ui-kit__KR-UI-019__v1.svg",
+      "type": "ui-kit",
+      "id": "KR-UI-019",
+      "name": "Motif Reservoir Items",
+      "kind": "reservoir",
+      "render_mode": "tile",
+      "scale_safe": true,
+      "status": "ready",
+      "description": "Reservoir of reusable tiling motif elements"
+    },
+    "kr-asset-cultural-kerala-elephant-v1": {
+      "ref": "KR-SOLID-035",
+      "path": "/assets/kr-solidarity/symbol/kr-solidarity__cultural__kr-solidarity--symbol--kerala-elephant--v1__v1.png",
+      "type": "kr-solidarity",
+      "status": "ready",
+      "layer": "cultural",
+      "description": "Kerala-elephant V1"
+    },
+    "kr-asset-atmospheric-abstract--solidarity-dalle-2026-01-": {
+      "ref": "KR-SOLID-002",
+      "path": "/assets/kr-solidarity/abstract/kr-solidarity__atmospheric__abstract---solidarity-dalle-2026-01-__v1.png",
+      "type": "kr-solidarity",
+      "status": "ready",
+      "layer": "atmospheric",
+      "description": "Abstract -solidarity-dalle-2026-01-"
+    },
+    "kr-asset-cultural-kerala-landscape-v1": {
+      "ref": "KR-SOLID-036",
+      "path": "/assets/kr-solidarity/symbol/kr-solidarity__cultural__kr-solidarity--symbol--kerala-landscape--v1__v1.png",
+      "type": "kr-solidarity",
+      "status": "ready",
+      "layer": "cultural",
+      "description": "Kerala-landscape V1"
+    },
+    "kr-asset-grit-film-grain": {
+      "ref": "KR-GRIT-001",
+      "path": "/assets/kr-solidarity/texture/kr-solidarity__atmospheric__texture--asphalt-grain--v2.png",
+      "type": "kr-solidarity",
+      "status": "ready",
+      "layer": "atmospheric",
+      "description": "1970s documentary film grain overlay for atmospheric glue between portraits and substrates"
+    },
+    "kr-asset-grit-wet-pavement": {
+      "ref": "KR-GRIT-002",
+      "path": "/assets/kr-solidarity/texture/kr-solidarity__atmospheric__texture--wet-pavement-reflections--v2.png",
+      "type": "kr-solidarity",
+      "status": "ready",
+      "layer": "atmospheric",
+      "description": "Melbourne laneway wet pavement reflection texture with labWrenMetalBlue ripples"
+    },
+    "kr-asset-grit-urban-steam": {
+      "ref": "KR-GRIT-003",
+      "path": "/assets/kr-solidarity/texture/kr-solidarity__atmospheric__texture--urban-steam--v1__v1.png",
+      "type": "kr-solidarity",
+      "status": "pending-generation",
+      "layer": "atmospheric",
+      "description": "Urban steam and aerosol haze diffusion layer with subtle solidarityRed tint"
+    },
+    "kr-asset-substrate-rusted-iron": {
+      "ref": "KR-SUB-002",
+      "path": "/assets/kr-solidarity/texture/kr-solidarity__substrate__texture--rusted-iron--v1__v1.png",
+      "type": "kr-solidarity",
+      "status": "pending-generation",
+      "layer": "substrate",
+      "description": "Aged rusted corrugated metal sheet wall, Melbourne industrial warehouse aesthetic"
+    },
+    "kr-asset-substrate-weathered-brick": {
+      "ref": "KR-SUB-003",
+      "path": "/assets/kr-solidarity/texture/kr-solidarity__substrate__texture--weathered-brick--v1__v1.png",
+      "type": "kr-solidarity",
+      "status": "pending-generation",
+      "layer": "substrate",
+      "description": "Weathered brick wall with peeling plaster and graffiti remnants, heritage urban context"
+    },
+    "kr-asset-substrate-night-pylon-sky": {
+      "ref": "KR-SUB-004",
+      "path": "/assets/kr-solidarity/texture/kr-solidarity__substrate__texture--night-pylon-sky--v1__v1.png",
+      "type": "kr-solidarity",
+      "status": "pending-generation",
+      "layer": "substrate",
+      "description": "Night sky with industrial pylon silhouette, futuristic-contemplative atmosphere"
+    },
+    "kr-asset-portrait-activist-fist": {
+      "ref": "KR-PORT-001",
+      "path": "/assets/kr-solidarity/portrait/kr-solidarity__resistance__portrait--activist-fist-radiance--v2.png",
+      "type": "kr-solidarity",
+      "status": "ready",
+      "layer": "resistance",
+      "description": "Contemporary youth activist silhouette with raised fist, stencil art style"
+    },
+    "kr-asset-portrait-collective-hands": {
+      "ref": "KR-PORT-002",
+      "path": "/assets/kr-solidarity/portrait/kr-solidarity__resistance__portrait--collective-hands-solidarity--v2.png",
+      "type": "kr-solidarity",
+      "status": "ready",
+      "layer": "resistance",
+      "description": "Multiple interlinked hands in solidarity, woodcut print aesthetic"
+    },
+    "kr-asset-portrait-digital-activist": {
+      "ref": "KR-PORT-003",
+      "path": "/assets/kr-solidarity/resistance/kr-solidarity__resistance__digital-resistance-hacker__v1.png",
+      "type": "kr-solidarity",
+      "status": "ready",
+      "layer": "resistance",
+      "description": "Tech-savvy activist figure with digital elements, cyberpunk-activist hybrid"
+    },
+    "kr-asset-empty-state-no-results": {
+      "ref": "KR-UI-020",
+      "path": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__KR-UI-020__v1.svg",
+      "type": "ui-kit",
+      "id": "KR-UI-020",
+      "name": "Empty State: No Results",
+      "kind": "illustration",
+      "render_mode": "section",
+      "scale_safe": true,
+      "status": "ready",
+      "opacity_default": 1.0,
+      "description": "Empty state illustration for empty search results or lists"
+    },
+    "kr-asset-empty-state-upload": {
+      "ref": "KR-UI-021",
+      "path": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__KR-UI-021__v1.svg",
+      "type": "ui-kit",
+      "id": "KR-UI-021",
+      "name": "Empty State: Upload Prompt",
+      "kind": "illustration",
+      "render_mode": "section",
+      "scale_safe": true,
+      "status": "ready",
+      "opacity_default": 1.0,
+      "description": "Empty state illustration for file upload dropzones"
+    },
+    "kr-asset-progress-ring": {
+      "ref": "KR-UI-022",
+      "path": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__KR-UI-022__v1.svg",
+      "type": "ui-kit",
+      "id": "KR-UI-022",
+      "name": "Progress Ring: Industrial Gauge",
+      "kind": "gauge",
+      "render_mode": "inline48",
+      "scale_safe": true,
+      "status": "ready",
+      "opacity_default": 1.0,
+      "description": "Progress indicator with irregular ellipse track for application stages"
+    },
+    "kr-asset-timeline-connector": {
+      "ref": "KR-UI-023",
+      "path": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__KR-UI-023__v1.svg",
+      "type": "ui-kit",
+      "id": "KR-UI-023",
+      "name": "Timeline Connector Segment",
+      "kind": "connector",
+      "render_mode": "inline",
+      "scale_safe": true,
+      "status": "ready",
+      "opacity_default": 1.0,
+      "description": "Wavy line connector with pebble nodes for timeline views"
+    },
+    "kr-asset-metric-score-frame": {
+      "ref": "KR-UI-024",
+      "path": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__KR-UI-024__v1.svg",
+      "type": "ui-kit",
+      "id": "KR-UI-024",
+      "name": "Metric Score Card Frame",
+      "kind": "frame",
+      "render_mode": "section",
+      "scale_safe": true,
+      "status": "ready",
+      "opacity_default": 1.0,
+      "description": "Brutalist slab frame for ATS scores and metric displays"
+    },
+    "kr-asset-company-logo-placeholder": {
+      "ref": "KR-UI-025",
+      "path": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__KR-UI-025__v1.svg",
+      "type": "ui-kit",
+      "id": "KR-UI-025",
+      "name": "Company Logo Placeholder",
+      "kind": "placeholder",
+      "render_mode": "inline48",
+      "scale_safe": true,
+      "status": "ready",
+      "opacity_default": 1.0,
+      "description": "Melbourne CBD skyline silhouette for job listings without company logos"
+    },
+    "kr-asset-document-badge-pdf": {
+      "ref": "KR-UI-026",
+      "path": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__KR-UI-026__v1.svg",
+      "type": "ui-kit",
+      "id": "KR-UI-026",
+      "name": "Document Type Badge: PDF",
+      "kind": "badge",
+      "render_mode": "inline24",
+      "scale_safe": true,
+      "status": "ready",
+      "opacity_default": 1.0,
+      "description": "Document format indicator with geometric PDF letterforms"
+    },
+    "kr-asset-validation-checkmark": {
+      "ref": "KR-UI-027",
+      "path": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__KR-UI-027__v1.svg",
+      "type": "ui-kit",
+      "id": "KR-UI-027",
+      "name": "Validation Checkmark",
+      "kind": "status",
+      "render_mode": "inline24",
+      "scale_safe": true,
+      "status": "ready",
+      "opacity_default": 1.0,
+      "description": "Angular checkmark in organic shield for success/verification states"
+    },
+    "kr-asset-sidebar-divider": {
+      "ref": "KR-UI-028",
+      "path": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__KR-UI-028__v1.svg",
+      "type": "ui-kit",
+      "id": "KR-UI-028",
+      "name": "Sidebar Section Divider",
+      "kind": "divider",
+      "render_mode": "inline",
+      "scale_safe": true,
+      "status": "ready",
+      "opacity_default": 1.0,
+      "description": "Industrial rivet divider for navigation group separators"
+    },
+    "kr-asset-avatar-frame": {
+      "ref": "KR-UI-029",
+      "path": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__KR-UI-029__v1.svg",
+      "type": "ui-kit",
+      "id": "KR-UI-029",
+      "name": "Avatar Frame: Sentry",
+      "kind": "frame",
+      "render_mode": "inline48",
+      "scale_safe": true,
+      "status": "ready",
+      "opacity_default": 1.0,
+      "description": "Asymmetric avatar border with flat bottom for profile images"
+    },
+    "kr-asset-loading-skeleton": {
+      "ref": "KR-UI-030",
+      "path": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__KR-UI-030__v1.svg",
+      "type": "ui-kit",
+      "id": "KR-UI-030",
+      "name": "Loading Skeleton Block",
+      "kind": "skeleton",
+      "render_mode": "section",
+      "scale_safe": true,
+      "status": "ready",
+      "opacity_default": 0.6,
+      "description": "Ghost content placeholder for loading states with shimmer animation"
+    },
+    "kr-asset-error-state": {
+      "ref": "KR-UI-031",
+      "path": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__KR-UI-031__v1.svg",
+      "type": "ui-kit",
+      "id": "KR-UI-031",
+      "name": "Error State Illustration",
+      "kind": "illustration",
+      "render_mode": "section",
+      "scale_safe": true,
+      "status": "ready",
+      "opacity_default": 1.0,
+      "description": "Fractured frame illustration for API errors and broken states"
+    },
+    "kr-asset-notification-bell": {
+      "ref": "KR-UI-032",
+      "path": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__KR-UI-032__v1.svg",
+      "type": "ui-kit",
+      "id": "KR-UI-032",
+      "name": "Notification Bell Accent",
+      "kind": "indicator",
+      "render_mode": "inline24",
+      "scale_safe": true,
+      "status": "ready",
+      "opacity_default": 1.0,
+      "description": "Angular tram bell for header notification indicators"
+    },
+    "kr-asset-data-chart-frame": {
+      "ref": "KR-UI-033",
+      "path": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__KR-UI-033__v1.svg",
+      "type": "ui-kit",
+      "id": "KR-UI-033",
+      "name": "Data Chart Frame",
+      "kind": "frame",
+      "render_mode": "section",
+      "scale_safe": true,
+      "status": "ready",
+      "opacity_default": 1.0,
+      "description": "Engineering blueprint frame for analysis charts"
+    },
+    "kr-asset-404-illustration": {
+      "ref": "KR-UI-034",
+      "path": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__KR-UI-034__v1.svg",
+      "type": "ui-kit",
+      "id": "KR-UI-034",
+      "name": "404 Page Illustration",
+      "kind": "illustration",
+      "render_mode": "hero",
+      "scale_safe": true,
+      "status": "ready",
+      "opacity_default": 1.0,
+      "description": "Wheat-paste removal aesthetic with W-class tram for 404 pages"
+    },
+    "kr-asset-onboarding-step-marker": {
+      "ref": "KR-UI-035",
+      "path": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__KR-UI-035__v1.svg",
+      "type": "ui-kit",
+      "id": "KR-UI-035",
+      "name": "Onboarding Step Marker",
+      "kind": "progress",
+      "render_mode": "inline48",
+      "scale_safe": true,
+      "status": "ready",
+      "opacity_default": 1.0,
+      "description": "5-waypoint progress track for multi-stage onboarding flows"
+    }
+  },
+  "ui_kit_gaps": [
+    {
+      "id": "KR-UI-001",
+      "name": "Wheat Paste Tear",
+      "description": "Torn poster edge decoration (large + small variants)",
+      "usage": "Street poster framing effect",
+      "status": "ready"
+    },
+    {
+      "id": "KR-UI-002",
+      "name": "Halo Disk",
+      "description": "Radiant circle element (plain + gauge version)",
+      "usage": "Navigation marker and data visualization",
+      "status": "ready"
+    },
+    {
+      "id": "KR-UI-003",
+      "name": "Screenprint Grit Particles",
+      "description": "Floating texture particles (tile + sprite set)",
+      "usage": "Atmospheric depth and tactile presence",
+      "status": "ready"
+    },
+    {
+      "id": "KR-UI-004",
+      "name": "Blueprint Grid Overlay",
+      "description": "Technical grid overlay (transparent)",
+      "usage": "Measurement and structural context",
+      "status": "ready"
+    },
+    {
+      "id": "KR-UI-005",
+      "name": "Charcoal Paper Substrate",
+      "description": "Neutral charcoal paper base texture",
+      "usage": "Stable background for structural pages",
+      "status": "ready"
+    },
+    {
+      "id": "KR-UI-006",
+      "name": "Blueprint Layout Watermark",
+      "description": "Technical layout overlay (transparent)",
+      "usage": "Architectural presence and documentation context",
+      "status": "ready"
+    },
+    {
+      "id": "KR-UI-007",
+      "name": "Screenprint Stamp",
+      "description": "Verification stamp (VERIFIED)",
+      "usage": "Official approval indicator",
+      "status": "ready"
+    },
+    {
+      "id": "KR-UI-020",
+      "name": "Empty State: No Results",
+      "description": "Empty state illustration for search results or lists",
+      "usage": "Display when no data matches search criteria",
+      "status": "ready"
+    },
+    {
+      "id": "KR-UI-021",
+      "name": "Empty State: Upload Prompt",
+      "description": "Empty state illustration for file upload dropzones",
+      "usage": "Display in empty upload areas prompting file selection",
+      "status": "ready"
+    },
+    {
+      "id": "KR-UI-022",
+      "name": "Progress Ring: Industrial Gauge",
+      "description": "Progress indicator with irregular ellipse track",
+      "usage": "Application stage progress and percentage indicators",
+      "status": "ready"
+    },
+    {
+      "id": "KR-UI-023",
+      "name": "Timeline Connector Segment",
+      "description": "Wavy line connector with pebble nodes",
+      "usage": "Connect timeline events in dashboard views",
+      "status": "ready"
+    },
+    {
+      "id": "KR-UI-024",
+      "name": "Metric Score Card Frame",
+      "description": "Brutalist slab frame for metric displays",
+      "usage": "Frame ATS scores and metric cards",
+      "status": "ready"
+    },
+    {
+      "id": "KR-UI-025",
+      "name": "Company Logo Placeholder",
+      "description": "Melbourne CBD skyline silhouette",
+      "usage": "Fallback when company logo unavailable",
+      "status": "ready"
+    },
+    {
+      "id": "KR-UI-026",
+      "name": "Document Type Badge: PDF",
+      "description": "Document format indicator with geometric letterforms",
+      "usage": "Display document type next to file names",
+      "status": "ready"
+    },
+    {
+      "id": "KR-UI-027",
+      "name": "Validation Checkmark",
+      "description": "Angular checkmark in organic shield",
+      "usage": "Success and verification state indicators",
+      "status": "ready"
+    },
+    {
+      "id": "KR-UI-028",
+      "name": "Sidebar Section Divider",
+      "description": "Industrial rivet divider",
+      "usage": "Separate navigation groups in sidebars",
+      "status": "ready"
+    },
+    {
+      "id": "KR-UI-029",
+      "name": "Avatar Frame: Sentry",
+      "description": "Asymmetric avatar border with flat bottom",
+      "usage": "Frame profile images in settings and headers",
+      "status": "ready"
+    },
+    {
+      "id": "KR-UI-030",
+      "name": "Loading Skeleton Block",
+      "description": "Ghost content placeholder with shimmer",
+      "usage": "Display during content loading states",
+      "status": "ready"
+    },
+    {
+      "id": "KR-UI-031",
+      "name": "Error State Illustration",
+      "description": "Fractured frame for error states",
+      "usage": "Display on API errors and system failures",
+      "status": "ready"
+    },
+    {
+      "id": "KR-UI-032",
+      "name": "Notification Bell Accent",
+      "description": "Angular tram bell indicator",
+      "usage": "Header notification alerts",
+      "status": "ready"
+    },
+    {
+      "id": "KR-UI-033",
+      "name": "Data Chart Frame",
+      "description": "Engineering blueprint frame for charts",
+      "usage": "Frame analysis charts and data visualizations",
+      "status": "ready"
+    },
+    {
+      "id": "KR-UI-034",
+      "name": "404 Page Illustration",
+      "description": "Wheat-paste removal aesthetic with W-class tram",
+      "usage": "404 Not Found error pages",
+      "status": "ready"
+    },
+    {
+      "id": "KR-UI-035",
+      "name": "Onboarding Step Marker",
+      "description": "5-waypoint progress track",
+      "usage": "Multi-stage onboarding progress indication",
+      "status": "ready"
+    }
+  ]
+}

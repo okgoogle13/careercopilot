@@ -277,14 +277,87 @@ curl -H "Authorization: token YOUR_TOKEN" https://api.github.com/user
 
 ---
 
+<<<<<<< HEAD
+=======
+---
+
+## 🔧 Codex CLI Configuration
+
+For users of Codex CLI (the terminal-based AI assistant), MCP configuration uses a different format.
+
+### Configuration File Location
+
+Codex CLI uses TOML configuration files:
+- **Project-specific**: `.codex/config.toml` (in repository root)
+- **Global**: `~/.config/codex/config.toml` (macOS/Linux)
+- **Global**: `%APPDATA%\codex\config.toml` (Windows)
+
+### Setup GitHub MCP for Codex CLI
+
+**Quick Setup:**
+```bash
+# Run the automated setup script
+./scripts/setup-codex-github-mcp.sh
+```
+
+**Manual Setup:**
+
+1. Create configuration file:
+   ```toml
+   # .codex/config.toml
+   [mcp_servers.github]
+   bearer_token_env_var = "CODEX_GITHUB_PERSONAL_ACCESS_TOKEN"
+   ```
+
+2. Set environment variable:
+   ```bash
+   # Add to ~/.zshrc or ~/.bashrc
+   export CODEX_GITHUB_PERSONAL_ACCESS_TOKEN="ghp_your_token_here"
+   ```
+
+3. Reload shell and restart Codex CLI:
+   ```bash
+   source ~/.zshrc
+   ```
+
+### Common Issue: "MCP startup incomplete (failed: github)"
+
+**Error Message:**
+```
+GitHub MCP does not support OAuth. Log in by adding a personal access token
+[mcp_servers.github]
+bearer_token_env_var = CODEX_GITHUB_PERSONAL_ACCESS_TOKEN
+
+⚠ MCP startup incomplete (failed: github)
+```
+
+**Solution:**
+Follow the detailed guide at [`docs/guides/CODEX_CLI_SETUP.md`](./CODEX_CLI_SETUP.md) or run:
+```bash
+./scripts/setup-codex-github-mcp.sh
+```
+
+---
+
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 ## 📚 Additional Resources
 
 - [Playwright MCP Documentation](https://github.com/modelcontextprotocol/servers)
 - [GitHub MCP Server](https://github.com/modelcontextprotocol/servers/tree/main/src/github)
 - [MCP Specification](https://spec.modelcontextprotocol.io/)
+<<<<<<< HEAD
 
 ---
 
 **Generated:** 2026-01-06
 **Project:** CareerCopilot Frontend
+=======
+- [Codex CLI Setup Guide](./CODEX_CLI_SETUP.md) ⭐ NEW
+
+---
+
+**Generated:** 2026-01-06  
+**Updated:** 2026-02-14 (Added Codex CLI configuration)  
+**Project:** CareerCopilot Frontend  
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 **Status:** Configuration Ready ✅

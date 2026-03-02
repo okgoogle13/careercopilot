@@ -1,0 +1,256 @@
+{
+  "cover_letter_smart_generate": {
+    "name": "Smart Cover Letter Generation",
+    "description": "Generates a highly personalised, multi-section cover letter with company research integration and quality analysis.",
+    "category": "cover_letter",
+    "version": "2.0",
+    "system_prompt": "You are an expert cover letter strategist and career coach with 15+ years of experience crafting compelling, highly personalised cover letters that secure interviews.",
+    "has_system_prompt": true,
+    "template": "Create a highly personalised, compelling cover letter that demonstrates deep understanding of the role and company.\n\nCANDIDATE PROFILE:\n{candidate_profile}\n\nJOB DESCRIPTION:\n{job_description}\n\nCOMPANY INFORMATION:\n{company_information}\n\nSTYLE: {style}\nFORMAT: {format_type}\nSPECIAL INSTRUCTIONS: {special_instructions}\n\nREQUIREMENTS:\n1. STRATEGIC POSITIONING: Lead with strongest qualifications, connect experience to job requirements, highlight value proposition.\n2. PERSONALISATION: Reference specific job requirements, company values, recent developments. Include quantifiable achievements.\n3. COMPELLING NARRATIVE: Logical flow from opening to closing, balance confidence with genuine interest, strong call to action.\n4. STYLE ADAPTATION: {style} tone throughout, length appropriate for {format_type}.\n5. MULTI-VERSION OUTPUT: Primary version in requested style, alternative versions, section-by-section breakdown.\n\nRespond with valid JSON matching the SmartCoverLetter schema.",
+    "parameters": ["candidate_profile", "job_description", "company_information", "style", "format_type", "special_instructions"],
+    "output_format": "structured_json",
+    "output_schema": "SmartCoverLetter",
+    "metadata": { "created_at": "2026-02-23", "usage_count": 0 }
+  },
+  "cover_letter_company_research": {
+    "name": "Company Research for Cover Letter",
+    "description": "Generates company research insights to inform personalised cover letter strategy.",
+    "category": "cover_letter",
+    "version": "2.0",
+    "system_prompt": "You are a company research specialist with deep expertise in analysing organisations for job application strategy.",
+    "has_system_prompt": true,
+    "template": "Provide comprehensive insights about this company to inform a personalised job application strategy.\n\nCOMPANY: {company_name}\nINDUSTRY: {industry}\nTARGET ROLE: {job_role}\nADDITIONAL CONTEXT: {additional_context}\n\nRESEARCH ANALYSIS REQUIRED:\n1. Company overview (history, model, size, culture)\n2. Recent developments (news, launches, leadership changes, awards)\n3. Culture & values (mission, DEI commitments, work environment)\n4. Business initiatives (key projects, digital transformation, R&D)\n5. Market position (industry standing, competitors, growth trajectory)\n6. Application strategy (value propositions that resonate, cultural fit elements, ways to demonstrate interest)\n\nRespond with valid JSON matching the CompanyResearchInsights schema.",
+    "parameters": ["company_name", "industry", "job_role", "additional_context"],
+    "output_format": "structured_json",
+    "output_schema": "CompanyResearchInsights",
+    "metadata": { "created_at": "2026-02-23", "usage_count": 0 }
+  },
+  "cover_letter_optimize": {
+    "name": "Cover Letter Optimisation",
+    "description": "Optimises an existing cover letter for better impact and job alignment with scored before/after comparison.",
+    "category": "cover_letter",
+    "version": "2.0",
+    "system_prompt": "You are a cover letter optimisation expert with extensive experience improving job applications for maximum impact and interview conversion.",
+    "has_system_prompt": true,
+    "template": "Analyse this existing cover letter and create an improved version with enhanced impact and job alignment.\n\nEXISTING COVER LETTER:\n{existing_cover_letter}\n\nJOB DESCRIPTION:\n{job_description}\n\nCANDIDATE PROFILE:\n{candidate_profile}\n\nCOMPANY INSIGHTS:\n{company_insights}\n\nOPTIMISATION REQUIREMENTS:\n1. Score current quality (0-100), identify strengths and gaps, assess job alignment.\n2. Strengthen opening, improve job requirement alignment, enhance personalisation.\n3. Add missing qualifications, stronger action verbs, quantifiable achievements.\n4. Eliminate weak/generic language, optimise length and structure.\n5. Provide specific before/after comparisons with clear rationale for each change.\n\nRespond with valid JSON matching the CoverLetterOptimizationResult schema.",
+    "parameters": ["existing_cover_letter", "job_description", "candidate_profile", "company_insights"],
+    "output_format": "structured_json",
+    "output_schema": "CoverLetterOptimizationResult",
+    "metadata": { "created_at": "2026-02-23", "usage_count": 0 }
+  },
+  "cover_letter_multi_format": {
+    "name": "Multi-Format Cover Letter Suite",
+    "description": "Creates a complete suite: full letter, email, LinkedIn message, networking email, and follow-up templates.",
+    "category": "cover_letter",
+    "version": "2.0",
+    "system_prompt": "You are a comprehensive application strategy specialist with expertise in crafting consistent, compelling messaging across multiple communication channels.",
+    "has_system_prompt": true,
+    "template": "Create a complete suite of personalised application materials in multiple formats.\n\nCANDIDATE PROFILE:\n{candidate_profile}\n\nJOB DESCRIPTION:\n{job_description}\n\nCOMPANY INSIGHTS:\n{company_insights}\n\nSUITE REQUIREMENTS:\n1. FULL COVER LETTER: 3-4 paragraphs, 300-500 words, professional format with strong opening and closing.\n2. EMAIL VERSION: 2-3 paragraphs, 150-250 words, with clear subject line.\n3. LINKEDIN MESSAGE: under 300 characters, value proposition + call to action.\n4. NETWORKING EMAIL: 100-200 words, informational interview request, relationship-building focus.\n5. FOLLOW-UP TEMPLATES: after application, after no response (2 weeks), interview thank you, post-interview.\n6. USAGE GUIDELINES: timing recommendations, customisation tips, personalisation strategies.\n\nMaintain consistent messaging across all formats. Optimise each for its specific channel.\n\nRespond with valid JSON matching the MultiFormatCoverLetterSuite schema.",
+    "parameters": ["candidate_profile", "job_description", "company_insights"],
+    "output_format": "structured_json",
+    "output_schema": "MultiFormatCoverLetterSuite",
+    "metadata": { "created_at": "2026-02-23", "usage_count": 0 }
+  },
+  "semantic_analysis":
+ {
+    "name": "Semantic Analysis",
+    "description": "Compares resume against job description for semantic similarity",
+    "category": "ats_scoring",
+    "version": "1.0",
+    "template": "Compare the resume against the job description.\nProvide a semantic similarity score from 0-100 and a brief explanation.\nResume: \"{resume_text}\"\nJob Description: \"{job_description}\"",
+    "parameters": [
+      "resume_text",
+      "job_description"
+    ],
+    "output_format": "structured_json",
+    "metadata": {
+      "created_at": "2024-09-11",
+      "last_updated": "2024-09-11",
+      "usage_count": 0
+    }
+  },
+  "comprehensive_resume_analysis": {
+    "name": "Comprehensive Resume Analysis",
+    "description": "Performs detailed resume analysis with scoring and recommendations",
+    "category": "resume_intelligence",
+    "version": "1.0",
+    "template": "As an expert resume analyst and career strategist, perform a comprehensive analysis\nof this resume. Provide detailed scoring, insights, and actionable recommendations.\n\nRESUME CONTENT:\n{resume_content}\n\nTARGET INDUSTRY: {target_industry}\n\nCOMPREHENSIVE ANALYSIS REQUIREMENTS:\n1. Overall Quality Scoring (0-100 scale):\n   - ATS compatibility and parsing friendliness\n   - Human readability and visual appeal\n   - Achievement impact and quantification\n\n2. Section-by-Section Analysis:\n   - Score each resume section (contact, summary, experience, education, skills)\n   - Identify strengths and improvement areas per section\n\n3. Experience Deep Dive:\n   - Analyze each role for impact and achievement\n   - Score responsibilities vs achievements balance\n   - Assess skill demonstration and career progression\n\n4. Skills Assessment:\n   - Categorize skills by proficiency level\n   - Evaluate market demand for each skill\n   - Identify skill gaps and growth opportunities\n\n5. Strategic Recommendations:\n   - Immediate quick-win improvements\n   - Long-term strategic positioning advice\n   - Industry alignment and competitive positioning\n\n6. Market Readiness:\n   - How competitive this resume is in current market\n   - Unique differentiators and value propositions\n   - Positioning advice for target roles\n\nSCORING CRITERIA:\n- 90-100: Exceptional, market-leading resume\n- 80-89: Strong, competitive resume\n- 70-79: Good foundation, some improvements needed\n- 60-69: Average, significant improvements required\n- 50-59: Below average, major restructuring needed\n- Below 50: Poor quality, comprehensive rewrite required\n\nFocus on actionable, specific feedback that leads to measurable improvements.\nRespond with valid JSON matching the ResumeAnalysisResult schema.",
+    "parameters": [
+      "resume_content",
+      "target_industry"
+    ],
+    "output_format": "structured_json",
+    "metadata": {
+      "created_at": "2024-09-11",
+      "last_updated": "2024-09-11",
+      "usage_count": 0
+    }
+  },
+  "career_progression_analysis": {
+    "name": "Career Progression Analysis",
+    "description": "Analyzes career trajectory and provides advancement strategy",
+    "category": "resume_intelligence",
+    "version": "1.0",
+    "template": "As a senior career strategist, analyze the career progression patterns in this resume\nand provide strategic guidance for continued advancement.\n\nRESUME CONTENT:\n{resume_content}\n\nCAREER GOALS: {career_goals}\n\nCAREER PROGRESSION ANALYSIS:\n1. Trajectory Assessment:\n   - Analyze progression of roles, titles, and responsibilities\n   - Identify upward, lateral, or unclear progression patterns\n   - Score overall career growth trajectory (0-100)\n\n2. Skill Evolution Analysis:\n   - Track how skills developed across roles\n   - Identify skill-building patterns and strategic development\n   - Map skills growth to career advancement\n\n3. Gap and Opportunity Identification:\n   - Identify career gaps or inconsistencies\n   - Spot opportunities for stronger positioning\n   - Highlight missing experiences for target advancement\n\n4. Growth Pattern Recognition:\n   - Identify patterns of professional development\n   - Recognize strategic career moves and decisions\n   - Analyze risk-taking and growth mindset evidence\n\n5. Future Trajectory Planning:\n   - Predict logical next career moves\n   - Identify roles that build on current foundation\n   - Suggest strategic skill development priorities\n\n6. Advancement Positioning:\n   - How to position for next-level opportunities\n   - Leverage current experience for advancement\n   - Bridge gaps between current role and aspirations\n\nProvide strategic, actionable guidance for continued career growth and positioning.\nRespond with valid JSON matching the CareerProgressionAnalysis schema.",
+    "parameters": [
+      "resume_content",
+      "career_goals"
+    ],
+    "output_format": "structured_json",
+    "metadata": {
+      "created_at": "2024-09-11",
+      "last_updated": "2024-09-11",
+      "usage_count": 0
+    }
+  },
+  "resume_optimize": {
+    "name": "Resume Keyword Optimization",
+    "description": "Seamlessly integrates missing keywords into a resume without fabricating experience.",
+    "category": "resume_intelligence",
+    "version": "2.0",
+    "system_prompt": "You are an expert resume editor and career coach specializing in ATS optimization. Your goal is to revise resumes to naturally integrate missing keywords while maintaining authenticity and professional tone.",
+    "has_system_prompt": true,
+    "template": "Revise the provided resume to seamlessly integrate a list of missing keywords. The goal is to make the resume a stronger match for the target job description without inventing new experiences or skills.\n\n**Target Job Description:**\n---\n{job_description}\n---\n\n**Original Resume / Profile:**\n---\n{career_profile}\n---\n\n**Keywords to Integrate:**\n- {missing_keywords}\n\n**Instructions:**\n1. **Analyze Context:** Read the job description and the profile to understand the candidate's experience and the employer's needs.\n2. **Integrate Naturally:** Weave the keywords into the existing text. Rephrase bullet points or summaries where appropriate.\n3. **Score Impact:** Assess the resume's match for the job before and after your changes (0-100).\n4. **Competitive Advantages:** Identify 2-3 key strengths this candidate has for this specific role.\n5. **Do Not Fabricate:** You must not add new job roles, invent new skills, or create experiences the candidate does not have.\n\n**Output Format:**\nReturn a JSON object matching the TailoredResumeResult schema with: tailored_text, original_score, tailored_score, improvements_made, keywords_integrated, competitive_advantages.",
+    "parameters": ["job_description", "career_profile", "missing_keywords"],
+    "output_format": "structured_json",
+    "output_schema": "TailoredResumeResult",
+    "metadata": { "created_at": "2026-02-23", "usage_count": 0 }
+  },
+  "ksc_response": {
+    "name": "KSC STAR Response Generation",
+    "description": "Generates STAR methodology responses for Key Selection Criteria. detail_instruction controls output depth: 'simple' returns 4 fields; 'full' returns extended analysis with ksc_analysis, experience_selection, star_response, and optimization_suggestions.",
+    "category": "ksc_generation",
+    "version": "2.0",
+    "system_prompt": "You are an expert career coach specialising in the STAR (Situation, Task, Action, Result) methodology for Key Selection Criteria responses in Australian public sector and community sector job applications. You identify the most relevant real-world experience and craft compelling, evidence-based responses. You never fabricate experience.",
+    "has_system_prompt": true,
+    "template": "As an expert career coach, generate a STAR response for the following Key Selection Criterion.\n\n**KSC Statement:** \"{ksc_statement}\"\n\n**User Profile:**\n```json\n{user_profile_data}\n```\n\n**Instructions:**\n1. Identify the single most relevant real-world example from the profile.\n2. Write a complete STAR response using that example only. Do not fabricate experience or skills.\n3. {detail_instruction}\n\n**Output:** Return valid JSON only. No markdown fences, no explanatory text.",
+    "parameters": [
+      "ksc_statement",
+      "user_profile_data",
+      "detail_instruction"
+    ],
+    "output_format": "structured_json",
+    "metadata": {
+      "created_at": "2024-09-11",
+      "last_updated": "2026-02-23",
+      "usage_count": 0,
+      "replaces": ["ksc_simple_response", "ksc_star_response"]
+    }
+  },
+  "tailored_cover_letter_simple": {
+    "name": "Tailored Cover Letter (Simple)",
+    "description": "Generates a simple tailored cover letter with voice profile matching",
+    "category": "cover_letter",
+    "version": "1.0",
+    "template": "As a professional career coach, your task is to write a compelling and professional cover letter\nfrom a job applicant to a potential employer.\n\n**Instructions:**\n1.  **Use the Applicant's Profile:** Base the cover letter on the applicant's provided profile data.\n    Highlight 2-3 of their most relevant experiences and skills that align with the job.\n2.  **Address the Job's Needs:** Directly reference the key requirements and skills mentioned in the\n    job analysis data. Show how the applicant is a strong match for this specific role.\n3.  **Maintain Authenticity:** It is crucial that the cover letter sounds like it was written by the\n    applicant. Adapt your writing style to match the provided voice profile.\n\n**Applicant's Base Profile:**\n---\n{base_profile_data}\n---\n\n**Analysis of the Target Job:**\n---\n{job_analysis_data}\n---\n\n{voice_profile_section}\n\nNow, write the cover letter. The output should be only the full text of the letter itself.",
+    "parameters": [
+      "base_profile_data",
+      "job_analysis_data",
+      "voice_profile_section"
+    ],
+    "output_format": "text",
+    "metadata": {
+      "created_at": "2024-09-11",
+      "last_updated": "2024-09-11",
+      "usage_count": 0
+    }
+  },
+  "tailored_cover_letter_advanced": {
+    "name": "Tailored Cover Letter (Advanced)",
+    "description": "Generates a comprehensive cover letter with detailed analysis and customization",
+    "category": "cover_letter",
+    "version": "1.0",
+    "system_prompt": "You are an expert career coach and professional writer with 15+ years of experience crafting compelling cover letters that land interviews. You understand how to match writing styles, highlight relevant experience, and create persuasive value propositions.",
+    "template": "Create a compelling, tailored cover letter that showcases the applicant as an ideal candidate for the specific role. The letter must sound authentic to the applicant's voice and directly address the job requirements.\n\nREQUIREMENTS:\n- Write in the applicant's authentic voice and style\n- Address 2-3 most relevant experiences that align with job requirements\n- Include specific achievements and quantifiable results when possible\n- Reference the company and role specifically\n- Create a strong opening that captures attention\n- End with a compelling call to action\n- Maintain professional standards while matching the applicant's voice\n- Length should be 300-500 words unless specified otherwise\n\nSTRUCTURE:\n1. Professional header with contact information\n2. Compelling opening paragraph that hooks the reader\n3. 2-3 body paragraphs showcasing relevant experience and achievements\n4. Strong closing paragraph with call to action\n5. Professional sign-off\n\nReturn ONLY a JSON object with this structure:\n{{\n  \"cover_letter\": {{\n    \"header\": \"{{\\\"applicant_name\\\": \\\"<name from profile>\\\", \\n               \\\"contact_info\\\": \\\"<formatted contact information>\\\", \\n               \\\"date\\\": \\\"<current date>\\\", \\n               \\\"employer_info\\\": \\\"<hiring manager/company information>\\\" }}\",\n    \"opening_paragraph\": \"<compelling opening that references the role>\",\n    \"body_paragraphs\": [\n      \"<paragraph 1: most relevant experience/achievement>\",\n      \"<paragraph 2: additional relevant experience/skills>\",\n      \"<paragraph 3: value proposition and cultural fit (optional)>\"\n    ],\n    \"closing_paragraph\": \"<strong closing with call to action>\",\n    \"sign_off\": \"<professional sign-off with name>\",\n    \"full_letter\": \"<complete formatted cover letter>\"\n  }},\n  \"letter_analysis\": {{\n    \"word_count\": <number of words>,\n    \"key_strengths_highlighted\": [<list of key strengths emphasized>],\n    \"job_requirements_addressed\": [<list of job requirements directly addressed>],\n    \"achievements_mentioned\": [<list of specific achievements included>],\n    \"tone_assessment\": \"<assessment of letter tone and style>\",\n    \"improvement_suggestions\": [<optional minor improvements>]\n  }},\n  \"customization_details\": {{\n    \"voice_matching_elements\": [<elements that match the voice profile>],\n    \"job_specific_elements\": [<elements specifically tailored to this job>],\n    \"company_research_elements\": [<elements showing company knowledge>],\n    \"differentiating_factors\": [<what makes this letter stand out>]\n  }}\n}}\n\nApplicant's Profile Data:\n---\n{base_profile_data}\n---\n\nTarget Job Analysis:\n---\n{job_analysis_data}\n---{voice_section}{customization_section}\n\nGenerate the tailored cover letter as a JSON object:",
+    "parameters": [
+      "base_profile_data",
+      "job_analysis_data",
+      "voice_section",
+      "customization_section"
+    ],
+    "output_format": "structured_json",
+    "has_system_prompt": true,
+    "metadata": {
+      "created_at": "2024-09-11",
+      "last_updated": "2024-09-11",
+      "usage_count": 0
+    }
+  },
+  "job_description_analysis": {
+    "name": "Job Description Analysis",
+    "description": "Analyzes job descriptions to extract key information and requirements",
+    "category": "job_analysis",
+    "version": "1.0",
+    "template": "Analyze the following job description and extract the key information in a structured JSON format.\nThe JSON object should include the following fields:\n- job_title (string)\n- key_skills (list of strings)\n- required_qualifications (list of strings)\n- company_culture_summary (string)\n\nJob Description:\n{job_description}",
+    "parameters": [
+      "job_description"
+    ],
+    "output_format": "structured_json",
+    "metadata": {
+      "created_at": "2024-09-11",
+      "last_updated": "2024-09-11",
+      "usage_count": 0
+    }
+  },
+  "resume_job_comparison": {
+    "name": "Resume to Job Comparison",
+    "description": "Compares a resume against job analysis data and provides detailed feedback",
+    "category": "resume_analysis",
+    "version": "1.0",
+    "template": "As an expert career coach, analyze the provided resume against the structured job analysis data. Your goal is to provide a detailed comparison and actionable feedback.\n\nIMPORTANT: You must respond ONLY with a valid JSON object. No additional text or explanations.\n\nThe output must be a valid JSON object with the following structure:\n- \"match_score\": An integer between 0 and 100 representing how well the resume matches the job.\n- \"matching_skills\": A list of skills found in both the resume and the job's key skills.\n- \"missing_skills\": A list of key skills required for the job that are not found in the resume.\n- \"improvement_suggestions\": A list of specific, actionable suggestions for the user to improve their resume for this job.\n\nResume Text:\n{resume_text}\n\nJob Analysis Data:\n{job_analysis_data}",
+    "parameters": [
+      "resume_text",
+      "job_analysis_data"
+    ],
+    "output_format": "structured_json",
+    "metadata": {
+      "created_at": "2024-09-11",
+      "last_updated": "2024-09-11",
+      "usage_count": 0
+    }
+  },
+  "email_job_extraction": {
+    "name": "Email Job Details Extraction",
+    "description": "Extracts structured job information from email content",
+    "category": "email_processing",
+    "version": "1.0",
+    "template": "Analyze the following email content and extract structured information about a job opportunity.\nThe output must be a valid JSON object with the fields: \"company\", \"title\", \"deadline\" (in YYYY-MM-DD format), and \"source_url\".\nIf any field is not present, use a value of null.\nIf no clear job opportunity is found, return an empty JSON object {}.\n\nEmail Content:\n---\n{email_content}\n---",
+    "parameters": [
+      "email_content"
+    ],
+    "output_format": "structured_json",
+    "metadata": {
+      "created_at": "2024-09-11",
+      "last_updated": "2024-09-11",
+      "usage_count": 0
+    }
+  },
+  "job_listing_extractor": {
+    "name": "Job Listing Extractor",
+    "description": "Extracts structured details from a job listing's text content.",
+    "category": "job_analysis",
+    "version": "1.0",
+    "template": "Your task is to act as an expert recruitment assistant and extract the following specific pieces of information from the provided job description text. If a piece of information is not present, you must return null for that field for strings or an empty array for lists.\n\n1.  **Due Date**: The closing date for applications.\n2.  **Company Name**: The name of the organization hiring for the role. IMPORTANT: If the job is posted by a recruitment agency (e.g., Michael Page, Hays), try to identify the *client* company if mentioned. If the client is anonymous (e.g., \"Values-driven NGO\"), use that description.\n3.  **Role Title**: The official title of the position.\n4.  **Hiring Manager**: The name of the hiring manager or main contact person.\n5.  **Hiring Manager's Contact**: Any contact details provided for the hiring manager.\n6.  **Essential Criteria**: Skills/qualifications stated as 'essential', 'required', etc.\n7.  **Desirable Criteria**: Skills/qualifications stated as 'desirable', 'preferred', etc.\n8.  **Role Type**: Classify the role as 'Frontline/Support', 'PM/Delivery', or 'Other'.\n9.  **Subsectors**: Identify relevant community service subsectors like 'Homelessness', 'AOD', 'Mental Health'.\n10. **Location**: The location, suburb, or region of the role.\n11. **Key Responsibilities**: A list of key duties, tasks, or responsibilities associated with the role.\n\nPlease provide the output in the specified JSON format.\n\nJob Description Text:\n---\n{job_listing_text}\n---",
+    "parameters": [
+      "job_listing_text"
+    ],
+    "output_format": "structured_json"
+  },
+  "job_listing_advanced_analysis": {
+    "name": "Job Listing Advanced Analysis",
+    "description": "Performs an advanced analysis on structured job details based on a user's request.",
+    "category": "job_analysis",
+    "version": "1.1",
+    "template": "You are a world-class career coach and recruitment expert. Your task is to perform an advanced analysis based on the provided job details and a user's request.\n\n**Job Details:**\n- Role Title: {role_title}\n- Company: {company_name}\n- Essential Criteria: {essential_criteria}\n- Desirable Criteria: {desirable_criteria}\n- Role Type: {role_type}\n- Subsectors: {subsectors}\n\n**User's Request:**\n{user_prompt}\n\nPlease provide a comprehensive, well-structured response to the user's request, leveraging your deep expertise.",
+    "parameters": [
+      "role_title",
+      "company_name",
+      "essential_criteria",
+      "desirable_criteria",
+      "role_type",
+      "subsectors",
+      "user_prompt"
+    ],
+    "output_format": "text"
+  }
+}

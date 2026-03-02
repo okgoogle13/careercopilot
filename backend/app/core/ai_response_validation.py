@@ -10,7 +10,11 @@ import json
 import logging
 from datetime import datetime
 from enum import Enum
+<<<<<<< HEAD
 from typing import Any, Dict, List, Optional, Type, TypeVar
+=======
+from typing import Any, TypeVar
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 from pydantic import BaseModel, Field, ValidationError, validator
 
@@ -38,9 +42,15 @@ class AIResponseValidationError(Exception):
         self,
         message: str,
         error_type: ValidationErrorType,
+<<<<<<< HEAD
         original_error: Optional[Exception] = None,
         response_content: Optional[str] = None,
         expected_schema: Optional[str] = None,
+=======
+        original_error: Exception | None = None,
+        response_content: str | None = None,
+        expected_schema: str | None = None,
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     ):
         self.error_type = error_type
         self.original_error = original_error
@@ -53,11 +63,19 @@ class ValidationResult(BaseModel):
     """Result of AI response validation"""
 
     is_valid: bool
+<<<<<<< HEAD
     parsed_data: Optional[Any] = None
     error_message: Optional[str] = None
     error_type: Optional[ValidationErrorType] = None
     validation_warnings: List[str] = Field(default_factory=list)
     metadata: Dict[str, Any] = Field(default_factory=dict)
+=======
+    parsed_data: Any | None = None
+    error_message: str | None = None
+    error_type: ValidationErrorType | None = None
+    validation_warnings: list[str] = Field(default_factory=list)
+    metadata: dict[str, Any] = Field(default_factory=dict)
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 
 class BaseAIResponseSchema(BaseModel):
@@ -92,9 +110,15 @@ class KSCAnalysis(BaseAIResponseSchema):
     """Key Selection Criteria analysis schema"""
 
     ksc_interpretation: str = Field(..., description="Analysis of what the KSC is asking for")
+<<<<<<< HEAD
     key_competencies: List[str] = Field(..., description="Key skills/competencies tested")
     success_factors: List[str] = Field(..., description="What makes a strong response")
     common_pitfalls: List[str] = Field(default_factory=list, description="Common mistakes to avoid")
+=======
+    key_competencies: list[str] = Field(..., description="Key skills/competencies tested")
+    success_factors: list[str] = Field(..., description="What makes a strong response")
+    common_pitfalls: list[str] = Field(default_factory=list, description="Common mistakes to avoid")
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 
 class ExperienceSelection(BaseAIResponseSchema):
@@ -103,7 +127,11 @@ class ExperienceSelection(BaseAIResponseSchema):
     chosen_experience: str = Field(..., description="Description of selected experience")
     relevance_score: float = Field(..., ge=0, le=100, description="Relevance score 0-100")
     selection_rationale: str = Field(..., description="Why this experience was chosen")
+<<<<<<< HEAD
     alternative_experiences: List[str] = Field(
+=======
+    alternative_experiences: list[str] = Field(
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         default_factory=list, description="Other potential experiences"
     )
 
@@ -114,8 +142,13 @@ class KSCResponseComplete(BaseAIResponseSchema):
     ksc_analysis: KSCAnalysis
     experience_selection: ExperienceSelection
     star_response: STARResponse
+<<<<<<< HEAD
     response_enhancement: Optional[Dict[str, Any]] = None
     interview_preparation: Optional[Dict[str, Any]] = None
+=======
+    response_enhancement: dict[str, Any] | None = None
+    interview_preparation: dict[str, Any] | None = None
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 
 class SemanticAnalysis(BaseAIResponseSchema):
@@ -125,7 +158,11 @@ class SemanticAnalysis(BaseAIResponseSchema):
     explanation: str = Field(..., min_length=10, description="Explanation for the score")
 
     # Legacy field name support
+<<<<<<< HEAD
     similarityScore: Optional[float] = None
+=======
+    similarityScore: float | None = None
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
     @validator("similarityScore", pre=True, always=True)
     def handle_legacy_field(cls, v, values):
@@ -137,6 +174,7 @@ class SemanticAnalysis(BaseAIResponseSchema):
 class JobRequirements(BaseAIResponseSchema):
     """Job requirements extraction schema"""
 
+<<<<<<< HEAD
     required_skills: List[str] = Field(default_factory=list, description="Required skills")
     preferred_skills: List[str] = Field(default_factory=list, description="Preferred skills")
     experience_level: str = Field(default="", description="Required experience level")
@@ -148,6 +186,19 @@ class JobRequirements(BaseAIResponseSchema):
     preferredSkills: Optional[List[str]] = None
     experienceLevel: Optional[str] = None
     educationLevel: Optional[str] = None
+=======
+    required_skills: list[str] = Field(default_factory=list, description="Required skills")
+    preferred_skills: list[str] = Field(default_factory=list, description="Preferred skills")
+    experience_level: str = Field(default="", description="Required experience level")
+    education_level: str = Field(default="", description="Required education level")
+    responsibilities: list[str] = Field(default_factory=list, description="Key responsibilities")
+
+    # Legacy field name support
+    requiredSkills: list[str] | None = None
+    preferredSkills: list[str] | None = None
+    experienceLevel: str | None = None
+    educationLevel: str | None = None
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
     @validator("requiredSkills", pre=True, always=True)
     def handle_legacy_required_skills(cls, v, values):
@@ -165,21 +216,36 @@ class JobRequirements(BaseAIResponseSchema):
 class ResumeEntities(BaseAIResponseSchema):
     """Resume entities extraction schema"""
 
+<<<<<<< HEAD
     skills: List[str] = Field(default_factory=list, description="Extracted skills")
     experience: List[Dict[str, Any]] = Field(default_factory=list, description="Work experience")
     education: List[Dict[str, Any]] = Field(
         default_factory=list, description="Education background"
     )
     achievements: List[str] = Field(default_factory=list, description="Key achievements")
+=======
+    skills: list[str] = Field(default_factory=list, description="Extracted skills")
+    experience: list[dict[str, Any]] = Field(default_factory=list, description="Work experience")
+    education: list[dict[str, Any]] = Field(
+        default_factory=list, description="Education background"
+    )
+    achievements: list[str] = Field(default_factory=list, description="Key achievements")
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 
 class CoverLetterResponse(BaseAIResponseSchema):
     """Cover letter generation response schema"""
 
     cover_letter_content: str = Field(..., min_length=100, description="Generated cover letter")
+<<<<<<< HEAD
     tone_analysis: Optional[Dict[str, Any]] = None
     customization_notes: List[str] = Field(default_factory=list)
     word_count: Optional[int] = None
+=======
+    tone_analysis: dict[str, Any] | None = None
+    customization_notes: list[str] = Field(default_factory=list)
+    word_count: int | None = None
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
     @validator("word_count", always=True)
     def calculate_word_count(cls, v, values):
@@ -196,9 +262,15 @@ class ATSScoreBreakdown(BaseAIResponseSchema):
     formatting_score: float = Field(..., ge=0, le=100)
 
     # Legacy field name support
+<<<<<<< HEAD
     keywordScore: Optional[float] = None
     semanticScore: Optional[float] = None
     formattingScore: Optional[float] = None
+=======
+    keywordScore: float | None = None
+    semanticScore: float | None = None
+    formattingScore: float | None = None
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
     @validator("keywordScore", pre=True, always=True)
     def handle_legacy_keyword_score(cls, v, values):
@@ -212,6 +284,7 @@ class ATSResult(BaseAIResponseSchema):
 
     overall_score: float = Field(..., ge=0, le=100, description="Overall ATS score")
     breakdown: ATSScoreBreakdown
+<<<<<<< HEAD
     matched_keywords: List[str] = Field(default_factory=list)
     missing_keywords: List[str] = Field(default_factory=list)
     recommendations: List[str] = Field(default_factory=list)
@@ -220,6 +293,16 @@ class ATSResult(BaseAIResponseSchema):
     overallScore: Optional[float] = None
     matchedKeywords: Optional[List[str]] = None
     missingKeywords: Optional[List[str]] = None
+=======
+    matched_keywords: list[str] = Field(default_factory=list)
+    missing_keywords: list[str] = Field(default_factory=list)
+    recommendations: list[str] = Field(default_factory=list)
+
+    # Legacy field name support
+    overallScore: float | None = None
+    matchedKeywords: list[str] | None = None
+    missingKeywords: list[str] | None = None
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
     @validator("overallScore", pre=True, always=True)
     def handle_legacy_overall_score(cls, v, values):
@@ -246,7 +329,11 @@ class AIResponseValidator:
         """
         self.enable_warnings = enable_warnings
         self.strict_mode = strict_mode
+<<<<<<< HEAD
         self._schema_registry: Dict[str, Type[BaseAIResponseSchema]] = {}
+=======
+        self._schema_registry: dict[str, type[BaseAIResponseSchema]] = {}
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         self._register_default_schemas()
 
     def _register_default_schemas(self):
@@ -265,7 +352,11 @@ class AIResponseValidator:
             }
         )
 
+<<<<<<< HEAD
     def register_schema(self, name: str, schema_class: Type[BaseAIResponseSchema]):
+=======
+    def register_schema(self, name: str, schema_class: type[BaseAIResponseSchema]):
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         """Register a custom schema"""
         self._schema_registry[name] = schema_class
         logger.info(f"Registered custom schema: {name}")
@@ -274,7 +365,11 @@ class AIResponseValidator:
         self,
         response_content: str,
         schema_name: str,
+<<<<<<< HEAD
         fallback_data: Optional[Dict[str, Any]] = None,
+=======
+        fallback_data: dict[str, Any] | None = None,
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     ) -> ValidationResult:
         """
         Validate AI response against a registered schema
@@ -314,14 +409,22 @@ class AIResponseValidator:
             try:
                 parsed_json = json.loads(cleaned_content)
             except json.JSONDecodeError as e:
+<<<<<<< HEAD
                 logger.warning(f"JSON parsing failed for {schema_name}: {str(e)}")
+=======
+                logger.warning(f"JSON parsing failed for {schema_name}: {e!s}")
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
                 if fallback_data:
                     return self._create_fallback_result(schema_class, fallback_data, schema_name)
 
                 return ValidationResult(
                     is_valid=False,
+<<<<<<< HEAD
                     error_message=f"Invalid JSON: {str(e)}",
+=======
+                    error_message=f"Invalid JSON: {e!s}",
+>>>>>>> restoration-KR-Rage-Figma-v2.0
                     error_type=ValidationErrorType.INVALID_JSON,
                     metadata={"original_content": response_content[:200]},
                 )
@@ -345,27 +448,43 @@ class AIResponseValidator:
                 )
 
             except ValidationError as e:
+<<<<<<< HEAD
                 logger.error(f"Schema validation failed for {schema_name}: {str(e)}")
+=======
+                logger.error(f"Schema validation failed for {schema_name}: {e!s}")
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
                 if fallback_data:
                     return self._create_fallback_result(schema_class, fallback_data, schema_name)
 
                 return ValidationResult(
                     is_valid=False,
+<<<<<<< HEAD
                     error_message=f"Schema validation failed: {str(e)}",
+=======
+                    error_message=f"Schema validation failed: {e!s}",
+>>>>>>> restoration-KR-Rage-Figma-v2.0
                     error_type=ValidationErrorType.FAILED_CUSTOM_VALIDATION,
                     metadata={"validation_errors": e.errors()},
                 )
 
         except Exception as e:
+<<<<<<< HEAD
             logger.error(f"Unexpected error validating {schema_name}: {str(e)}")
+=======
+            logger.error(f"Unexpected error validating {schema_name}: {e!s}")
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
             if fallback_data:
                 return self._create_fallback_result(schema_class, fallback_data, schema_name)
 
             return ValidationResult(
                 is_valid=False,
+<<<<<<< HEAD
                 error_message=f"Validation error: {str(e)}",
+=======
+                error_message=f"Validation error: {e!s}",
+>>>>>>> restoration-KR-Rage-Figma-v2.0
                 error_type=ValidationErrorType.MALFORMED_STRUCTURE,
             )
 
@@ -405,8 +524,13 @@ class AIResponseValidator:
         return content
 
     def _collect_warnings(
+<<<<<<< HEAD
         self, data: Dict[str, Any], schema_class: Type[BaseAIResponseSchema]
     ) -> List[str]:
+=======
+        self, data: dict[str, Any], schema_class: type[BaseAIResponseSchema]
+    ) -> list[str]:
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         """Collect validation warnings for potential issues"""
         warnings = []
 
@@ -423,8 +547,13 @@ class AIResponseValidator:
 
     def _create_fallback_result(
         self,
+<<<<<<< HEAD
         schema_class: Type[BaseAIResponseSchema],
         fallback_data: Dict[str, Any],
+=======
+        schema_class: type[BaseAIResponseSchema],
+        fallback_data: dict[str, Any],
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         schema_name: str,
     ) -> ValidationResult:
         """Create a validation result using fallback data"""
@@ -443,15 +572,24 @@ class AIResponseValidator:
         except Exception as e:
             return ValidationResult(
                 is_valid=False,
+<<<<<<< HEAD
                 error_message=f"Fallback data validation failed: {str(e)}",
+=======
+                error_message=f"Fallback data validation failed: {e!s}",
+>>>>>>> restoration-KR-Rage-Figma-v2.0
                 error_type=ValidationErrorType.FAILED_CUSTOM_VALIDATION,
             )
 
     def validate_and_parse(
         self,
         response_content: str,
+<<<<<<< HEAD
         expected_schema: Type[T],
         fallback_data: Optional[Dict[str, Any]] = None,
+=======
+        expected_schema: type[T],
+        fallback_data: dict[str, Any] | None = None,
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     ) -> ValidationResult:
         """
         Direct validation with schema class (alternative to registry approach)
@@ -504,8 +642,13 @@ class AIResponseValidator:
 def validate_ai_response(
     response_content: str,
     schema_name: str,
+<<<<<<< HEAD
     validator: Optional[AIResponseValidator] = None,
     fallback_data: Optional[Dict[str, Any]] = None,
+=======
+    validator: AIResponseValidator | None = None,
+    fallback_data: dict[str, Any] | None = None,
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 ) -> ValidationResult:
     """
     Convenience function for validating AI responses
@@ -549,7 +692,11 @@ default_validator = AIResponseValidator()
 
 # Decorator for automatic response validation
 def validate_ai_response_decorator(
+<<<<<<< HEAD
     schema_name: str, fallback_data: Optional[Dict[str, Any]] = None
+=======
+    schema_name: str, fallback_data: dict[str, Any] | None = None
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 ):
     """
     Decorator for automatic AI response validation
@@ -571,7 +718,11 @@ def validate_ai_response_decorator(
             except Exception as e:
                 return ValidationResult(
                     is_valid=False,
+<<<<<<< HEAD
                     error_message=f"Function execution failed: {str(e)}",
+=======
+                    error_message=f"Function execution failed: {e!s}",
+>>>>>>> restoration-KR-Rage-Figma-v2.0
                     error_type=ValidationErrorType.MALFORMED_STRUCTURE,
                 )
 

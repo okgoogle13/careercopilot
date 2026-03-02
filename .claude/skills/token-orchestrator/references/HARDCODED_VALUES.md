@@ -26,7 +26,11 @@ border: 1px solid rgba(212, 168, 75, 0.12);
 **After** (using tokens):
 ```css
 background: var(--sys-color-wattle-gold);
+<<<<<<< HEAD
 color: var(--sys-color-specimen-night);
+=======
+color: var(--sys-color-kr-motif-night);
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 border: 1px solid var(--sys-color-wattle-gold-container);
 ```
 

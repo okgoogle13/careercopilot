@@ -41,17 +41,27 @@
     '''password''',
     '''secret''',
   ]
+<<<<<<< HEAD
 
 [allowlist.commits]
   # Add specific commit SHAs to ignore if needed
   # Example: "abc123def456"
+=======
+  # Add specific commit SHAs to ignore if needed
+  # Example: "abc123def456"
+  commits = []
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 [[rules]]
   description = "Generic API Key"
   id = "generic-api-key"
   regex = '''(?i)(api[_-]?key|apikey|api[_-]?token)[\s]*[=:>][\s]*['"]?([a-zA-Z0-9_\-]{20,})['"]?'''
 
+<<<<<<< HEAD
   [[rules.allowlist]]
+=======
+  [rules.allowlist]
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     regexes = [
       '''EXAMPLE''',
       '''TEST''',

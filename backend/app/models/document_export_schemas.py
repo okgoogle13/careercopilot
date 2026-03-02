@@ -9,10 +9,17 @@ Pydantic models for document export functionality, supporting:
 - Bandwidth-optimized response structures
 """
 
+<<<<<<< HEAD
 from typing import Optional, Dict, Any, List
 from datetime import datetime
 from pydantic import BaseModel, Field, HttpUrl
 
+=======
+from datetime import datetime
+from typing import Any
+
+from pydantic import BaseModel, Field
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 # ============================================================================
 # Export Request Models
@@ -44,7 +51,11 @@ class CoverLetterExportRequest(DocumentExportRequest):
         min_length=1,
         max_length=200
     )
+<<<<<<< HEAD
     company_name: Optional[str] = Field(
+=======
+    company_name: str | None = Field(
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         default=None,
         description="Company name (optional)",
         max_length=200
@@ -79,7 +90,11 @@ class ApplicationPackageExportRequest(DocumentExportRequest):
 class BatchExportRequest(BaseModel):
     """Request for batch export of multiple documents"""
 
+<<<<<<< HEAD
     document_types: List[str] = Field(
+=======
+    document_types: list[str] = Field(
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         ...,
         description="Document types to export: cover_letter, resume, ksc_response, application_package",
         min_items=1
@@ -174,7 +189,11 @@ class BatchExportResponse(BaseModel):
     success: bool = Field(
         description="Whether all exports were successful"
     )
+<<<<<<< HEAD
     exports: List[DocumentExportResponse] = Field(
+=======
+    exports: list[DocumentExportResponse] = Field(
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         description="List of export results for each document type"
     )
     total_size_bytes: int = Field(
@@ -263,7 +282,11 @@ class CoverLetterResponseWithExport(BaseModel):
     success: bool = Field(
         description="Whether generation was successful"
     )
+<<<<<<< HEAD
     coverLetter: Optional[str] = Field(
+=======
+    coverLetter: str | None = Field(
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         description="Generated cover letter content (for immediate use)"
     )
     message: str = Field(
@@ -272,7 +295,11 @@ class CoverLetterResponseWithExport(BaseModel):
     processingTimeSeconds: float = Field(
         description="Total processing time"
     )
+<<<<<<< HEAD
     export_options: Optional[Dict[str, str]] = Field(
+=======
+    export_options: dict[str, str] | None = Field(
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         default=None,
         description="Available export formats and endpoints to retrieve signed URLs"
     )
@@ -285,7 +312,11 @@ class ResumeResponseWithExport(BaseModel):
     success: bool = Field(
         description="Whether generation was successful"
     )
+<<<<<<< HEAD
     resume: Optional[Dict[str, Any]] = Field(
+=======
+    resume: dict[str, Any] | None = Field(
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         description="Generated resume data (for immediate use)"
     )
     message: str = Field(
@@ -294,7 +325,11 @@ class ResumeResponseWithExport(BaseModel):
     processingTimeSeconds: float = Field(
         description="Total processing time"
     )
+<<<<<<< HEAD
     export_options: Optional[Dict[str, str]] = Field(
+=======
+    export_options: dict[str, str] | None = Field(
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         default=None,
         description="Available export formats and endpoints"
     )
@@ -306,7 +341,11 @@ class KSCResponseWithExport(BaseModel):
     success: bool = Field(
         description="Whether generation was successful"
     )
+<<<<<<< HEAD
     response: Optional[Dict[str, str]] = Field(
+=======
+    response: dict[str, str] | None = Field(
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         description="Generated STAR response (for immediate use)"
     )
     message: str = Field(
@@ -315,7 +354,11 @@ class KSCResponseWithExport(BaseModel):
     processingTimeSeconds: float = Field(
         description="Total processing time"
     )
+<<<<<<< HEAD
     export_options: Optional[Dict[str, str]] = Field(
+=======
+    export_options: dict[str, str] | None = Field(
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         default=None,
         description="Available export formats and endpoints"
     )
@@ -330,6 +373,10 @@ class CoverLetterResponseLegacy(BaseModel):
     """Legacy cover letter response (before export support)"""
 
     success: bool = Field(description="Whether generation was successful")
+<<<<<<< HEAD
     coverLetter: Optional[str] = Field(description="Generated cover letter content")
+=======
+    coverLetter: str | None = Field(description="Generated cover letter content")
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     message: str = Field(description="Success or error message")
     processingTimeSeconds: float = Field(description="Total processing time")

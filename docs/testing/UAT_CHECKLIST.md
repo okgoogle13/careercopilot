@@ -50,7 +50,11 @@
 
 #### M3 Compliance:
 - ✅ Plus Jakarta Sans typography (no browser defaults)
+<<<<<<< HEAD
 - ✅ Organic gradient blobs (no solid backgrounds)
+=======
+- ✅ [DEPRECATED_STYLE] gradient blobs (no solid backgrounds)
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 - ✅ Elevation shadows for depth
 - ✅ Spring-physics hover states
 - ✅ Size contrast: 3.18x (3.5rem / 1.1rem)
@@ -77,7 +81,11 @@
 #### M3 Elements:
 - StatCard component (M3-compliant)
 - Staggered entry animations (motion choreography)
+<<<<<<< HEAD
 - Organic shape tokens
+=======
+- [DEPRECATED_STYLE] shape tokens
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 ---
 
@@ -142,7 +150,11 @@
 - "Ready to find your next role." message
 
 #### M3 Elements:
+<<<<<<< HEAD
 - Organic rounded corners (rounded-pebble)
+=======
+- [DEPRECATED_STYLE] rounded corners (rounded-pebble)
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 - M3 color tokens (primary, secondary, tertiary)
 - M3 typography scale
 - Elevation shadows (shadow-elevation-1, shadow-elevation-2)
@@ -162,7 +174,11 @@
 
 #### M3 Elements:
 - ApplicationCard component
+<<<<<<< HEAD
 - Organic pebble corners (rounded-pebble)
+=======
+- [DEPRECATED_STYLE] pebble corners (rounded-pebble)
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 - Spring easing animation (ease-spring)
 - Fade-in + zoom-in-95 entrance animation
 
@@ -247,17 +263,29 @@
 | Category | Implementation | Status |
 |----------|----------------|--------|
 | **Typography** | Plus Jakarta Sans (Google Fonts) | ✅ No browser defaults |
+<<<<<<< HEAD
 | **Shapes** | 32px organic corners (rounded-pebble, rounded-tech) | ✅ Organic Contradiction system |
+=======
+| **Shapes** | 32px [DEPRECATED_STYLE] corners (rounded-pebble, rounded-tech) | ✅ [DEPRECATED_STYLE] Contradiction system |
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 | **Colors** | Custom "Electric Alchemist" palette via CSS tokens | ✅ Vibrant, not generic |
 | **Elevation** | shadow-elevation-1 through shadow-elevation-4 | ✅ Layered depth |
 | **Motion** | Spring easing (ease-spring), framer-motion animations | ✅ Physics-based |
 | **Components** | M3Card, M3Button, StatusBadge, M3IconButton | ✅ Custom M3 library |
+<<<<<<< HEAD
 | **Spacing** | M3 spacing scale (consistent rhythm) | ✅ Varied, organic |
+=======
+| **Spacing** | M3 spacing scale (consistent rhythm) | ✅ Varied, [DEPRECATED_STYLE] |
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 | **State Feedback** | Loading states, hover effects, transitions | ✅ Interactive polish |
 
 ### **🔍 AREAS TO VERIFY DURING VISUAL AUDIT (Phase 3)**
 
+<<<<<<< HEAD
 1. **Text Clipping in Organic Shapes**
+=======
+1. **Text Clipping in [DEPRECATED_STYLE] Shapes**
+>>>>>>> restoration-KR-Rage-Figma-v2.0
    - Check if long job titles clip inside M3Card pebble corners
    - Verify StatusBadge text doesn't overflow
 

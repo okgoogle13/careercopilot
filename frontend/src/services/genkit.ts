@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { auth } from '../config/firebase';
+=======
+import { supabase } from '../config/supabase';
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 // Configuration
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080/api';
@@ -7,8 +11,13 @@ const USE_MOCK = import.meta.env.VITE_USE_MOCK_API !== 'false';
 // Helper for Auth Token
 const getAuthToken = async () => {
   if (import.meta.env.DEV) return 'dev-token';
+<<<<<<< HEAD
   const user = auth.currentUser;
   return user ? await user.getIdToken() : '';
+=======
+  const { data } = await supabase.auth.getSession();
+  return data.session?.access_token || '';
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 };
 
 // Types
@@ -26,6 +35,17 @@ export interface KSCRequest {
   ksc_statement: string;
 }
 
+<<<<<<< HEAD
+=======
+export interface ProfileSummaryRequest {
+  user_profile_data: any;
+}
+
+export interface ProfileSummaryResponse {
+  summary: string;
+}
+
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 export interface SmartCoverLetter {
   letter_content: string;
   subject_line?: string;
@@ -139,6 +159,16 @@ const mockGenkitApi = {
     };
   },
 
+<<<<<<< HEAD
+=======
+  async generateProfileSummary(data: ProfileSummaryRequest): Promise<ProfileSummaryResponse> {
+    await new Promise((resolve) => setTimeout(resolve, 2500));
+    return {
+      summary: `[Mock AI Summary] Innovative and mission-driven professional with expertise in community care and crisis intervention. Proven track record of delivering high-impact solutions in complex environments.`,
+    };
+  },
+
+>>>>>>> restoration-KR-Rage-Figma-v2.0
   async getCompanyContext(data: CompanyContextRequest): Promise<CompanyContext> {
     await new Promise((resolve) => setTimeout(resolve, 1500));
     return {
@@ -309,6 +339,28 @@ const realGenkitApi = {
 
     return await response.json();
   },
+<<<<<<< HEAD
+=======
+
+  async generateProfileSummary(data: ProfileSummaryRequest): Promise<ProfileSummaryResponse> {
+    const token = await getAuthToken();
+    const response = await fetch(`${API_URL}/genkit/profile/summary`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(errorData.detail || 'Failed to generate profile summary');
+    }
+
+    return await response.json();
+  },
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 };
 
 export const genkitApi = USE_MOCK ? mockGenkitApi : realGenkitApi;

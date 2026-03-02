@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 // @ts-expect-error - TS2497: esModuleInterop is enabled, but TypeScript 5.9 still complains about namespace import
 import * as admin from "firebase-admin";
+=======
+import admin from "firebase-admin";
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 export interface JobListing {
   id: string;

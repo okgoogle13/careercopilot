@@ -6,10 +6,17 @@ import { Loader2 } from 'lucide-react';
 export interface PebbleProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     /**
      * The visual style variant.
+<<<<<<< HEAD
      * - Primary: Wattle Gold (Action)
      * - Secondary: Surface Elevated (Navigation/Option)
      * - Ghost: Transparent (Subtle)
      * - Destructive: Waratah Crimson (Danger)
+=======
+     * - Primary: Ink Gold (Action)
+     * - Secondary: Surface Elevated (Navigation/Option)
+     * - Ghost: Transparent (Subtle)
+     * - Destructive: Solidarity Red (Danger)
+>>>>>>> restoration-KR-Rage-Figma-v2.0
      */
     variant?: 'primary' | 'secondary' | 'ghost' | 'destructive';
 
@@ -38,7 +45,11 @@ export interface PebbleProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
  * **THE PEBBLE**
  * 
  * A smooth, organically shaped action element.
+<<<<<<< HEAD
  * Corresponds to the 'Leaf' (Primary) and 'Pebble' (Container) shapes in Northcote Curio.
+=======
+ * Corresponds to the 'Leaf' (Primary) and 'Pebble' (Container) shapes in KeralaRage KrSolidarity.
+>>>>>>> restoration-KR-Rage-Figma-v2.0
  * 
  * @example
  * <Pebble variant="primary" onClick={doSomething}>Click Me</Pebble>
@@ -89,4 +100,8 @@ export const Pebble = React.forwardRef<HTMLButtonElement, PebbleProps>(
     }
 );
 
+<<<<<<< HEAD
 Pebble.displayName = "Pebble";
+=======
+Pebble.displayName = "Pebble";
+>>>>>>> restoration-KR-Rage-Figma-v2.0

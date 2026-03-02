@@ -3,7 +3,11 @@
 "V-002","Page 1","Background","MEDIUM","Opacity tuning needed for nocturnal canopy","Adjust CSS opacity to 25%","15m"
 "V-003","Page 2","Assets","HIGH","Leaf Fern used instead of Laboratory Compass","Replace asset import with Compass","15m"
 "V-004","Page 2","Background","MEDIUM","Used Parchment (Lab) instead of Nocturnal Canopy (Gallery)","Switch background-image in Login.tsx","15m"
+<<<<<<< HEAD
 "V-005","Page 3","Assets","HIGH","Missing botanical anchor motifs (Waratah, Wattle, Banksia)","Add background motif layers to CSS","1h"
+=======
+"V-005","Page 3","Assets","HIGH","Missing [DEPRECATED_STYLE] anchor motifs ([DEPRECATED_STYLE], Wattle, Banksia)","Add background motif layers to CSS","1h"
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 "V-006","Page 4","Token","BREAKING","Drop Zone uses Gallery tokens instead of Laboratory tokens","Refactor border/bg colors to slateSmoke/charcoalSlate","45m"
 "V-007","Page 5","Typography","HIGH","Metrics use Bold weight instead of Thin (200)","Update typography utility classes","30m"
 "V-008","Page 6","Behavior","MEDIUM","Kookaburra Sentry missing idle animation loop","Add CSS keyframes for head tilt","1h"

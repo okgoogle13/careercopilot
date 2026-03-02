@@ -1,6 +1,8 @@
 ---
 name: prompt-composer
-description: Automated prompt generation from pattern library. Input asset specifications → output production-ready Gemini prompt with validated patterns, negative constraints, and previous attempt corrections applied.
+description: "Automated prompt generation from pattern library. Input asset specifications\
+  \ \u2192 output production-ready Gemini prompt with validated patterns, negative\
+  \ constraints, and previous attempt corrections applied."
 ---
 
 # Prompt-Composer Skill
@@ -30,7 +32,7 @@ Eliminates manual prompt construction. Loads pattern library → applies templat
 
 ## Pattern Library Integration
 
-Loads validated patterns from `/docs/northcote-asset-generation-patterns.md`:
+Loads validated patterns from `/docs/kerala-rage-asset-generation-patterns.md`:
 
 **Pattern 1: Production Intent**
 

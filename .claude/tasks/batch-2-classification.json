@@ -1,0 +1,96 @@
+{
+  "batch_number": 2,
+  "total_assets": 10,
+  "classifications": [
+    {
+      "filename": "kerala-rage-gen-raw-20260214-012.jpeg",
+      "category": "abstract",
+      "descriptor": "generative-gradient-06",
+      "confidence_score": 0.84,
+      "justification": "Continuation of gen-raw batch; atmospheric background material",
+      "proposed_name": "kr-solidarity__abstract__generative-gradient-06__v1.jpeg"
+    },
+    {
+      "filename": "kerala-rage-gen-raw-20260214-013.jpeg",
+      "category": "texture",
+      "descriptor": "generative-substrate-04",
+      "confidence_score": 0.81,
+      "justification": "Substrate layer candidate",
+      "proposed_name": "kr-solidarity__texture__generative-substrate-04__v1.jpeg"
+    },
+    {
+      "filename": "kerala-rage-gen-raw-20260214-014.jpeg",
+      "category": "landscape",
+      "descriptor": "generative-scene-02",
+      "confidence_score": 0.79,
+      "justification": "Geographic/scenic variation in generation batch",
+      "proposed_name": "kr-solidarity__landscape__generative-scene-02__v1.jpeg"
+    },
+    {
+      "filename": "kerala-rage-gen-raw-20260214-015.jpeg",
+      "category": "abstract",
+      "descriptor": "generative-gradient-07",
+      "confidence_score": 0.85,
+      "justification": "Abstract atmospheric content",
+      "proposed_name": "kr-solidarity__abstract__generative-gradient-07__v1.jpeg"
+    },
+    {
+      "filename": "kerala-rage-gen-raw-20260214-016.jpeg",
+      "category": "motif",
+      "descriptor": "generative-pattern-02",
+      "confidence_score": 0.78,
+      "justification": "Pattern/motif variation in batch",
+      "proposed_name": "kr-solidarity__motif__generative-pattern-02__v1.jpeg"
+    },
+    {
+      "filename": "kerala-rage-gen-raw-20260214-017.jpeg",
+      "category": "texture",
+      "descriptor": "generative-substrate-05",
+      "confidence_score": 0.82,
+      "justification": "Tactile material candidate for layering",
+      "proposed_name": "kr-solidarity__texture__generative-substrate-05__v1.jpeg"
+    },
+    {
+      "filename": "kerala-rage-gen-raw-20260214-018.jpeg",
+      "category": "abstract",
+      "descriptor": "generative-gradient-08",
+      "confidence_score": 0.84,
+      "justification": "Atmospheric gradient content",
+      "proposed_name": "kr-solidarity__abstract__generative-gradient-08__v1.jpeg"
+    },
+    {
+      "filename": "kerala-rage-gen-raw-20260214-019.jpeg",
+      "category": "landscape",
+      "descriptor": "generative-scene-03",
+      "confidence_score": 0.80,
+      "justification": "Scenic variation in generation batch",
+      "proposed_name": "kr-solidarity__landscape__generative-scene-03__v1.jpeg"
+    },
+    {
+      "filename": "kerala-rage-gen-raw-20260214-020.jpeg",
+      "category": "texture",
+      "descriptor": "generative-substrate-06",
+      "confidence_score": 0.81,
+      "justification": "Material substrate for layering system",
+      "proposed_name": "kr-solidarity__texture__generative-substrate-06__v1.jpeg"
+    },
+    {
+      "filename": "kerala-rage-gen-raw-20260214-021.jpeg",
+      "category": "abstract",
+      "descriptor": "generative-gradient-09",
+      "confidence_score": 0.85,
+      "justification": "Final asset in batch 2; atmospheric background",
+      "proposed_name": "kr-solidarity__abstract__generative-gradient-09__v1.jpeg"
+    }
+  ],
+  "summary": {
+    "abstract": 5,
+    "motif": 1,
+    "texture": 3,
+    "portrait": 0,
+    "devotional": 0,
+    "landscape": 2,
+    "specimen": 0,
+    "discard": 0
+  }
+}

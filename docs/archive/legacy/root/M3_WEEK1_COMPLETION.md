@@ -140,7 +140,11 @@ import { m3Theme } from './theme/mui-theme';
 
 | Before (MUI) | After (M3) | Benefit |
 |--------------|------------|---------|
+<<<<<<< HEAD
 | `<Card sx={{ borderRadius: 2 }}>` | `<M3Card variant="pebble" elevation={1}>` | Organic shape ✅ |
+=======
+| `<Card sx={{ borderRadius: 2 }}>` | `<M3Card variant="pebble" elevation={1}>` | [DEPRECATED_STYLE] shape ✅ |
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 | `<Button variant="contained" color="primary">` | `<M3Button variant="filled" color="primary">` | M3 semantic colors ✅ |
 | `<Chip color="warning">` | `<StatusBadge variant="neutral">` | M3 tokens ✅ |
 | `<Dialog>`  hard-coded styles | `<M3Card variant="tech">` custom dialog | M3 elevation ✅ |
@@ -317,7 +321,11 @@ function MyPage() {
 
 ### 1. **Visual Regression Testing**
 - [ ] Screenshot comparison before/after refactor
+<<<<<<< HEAD
 - [ ] Verify all shapes are organic (no symmetric radii)
+=======
+- [ ] Verify all shapes are [DEPRECATED_STYLE] (no symmetric radii)
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 - [ ] Confirm shadows are visible on hover
 - [ ] Check motion feels "springy" not linear
 

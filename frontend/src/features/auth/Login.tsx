@@ -2,6 +2,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+<<<<<<< HEAD
 import { Link, useNavigate } from 'react-router-dom';
 import { z } from 'zod';
 import { NorthcoteButton } from '../../components/ui/NorthcoteButton';
@@ -10,6 +11,16 @@ import { useAuth } from '../../context/AuthContext';
 // Northcote Assets
 import specimenGrid from '../../assets/specimens/leaf-fern.png'; // Using available specimen
 import parchmentGrid from '../../assets/textures/paper-grain.png'; // Using available texture
+=======
+import { useNavigate } from 'react-router-dom';
+import { z } from 'zod';
+import { LoginCard, type LoginCredentials } from '../../components/LoginCard';
+import { useAuth } from '../../context/AuthContext';
+
+// KeralaRage Assets
+const KrMotifGrid = '/assets/kr-solidarity/specimen/kr-solidarity__specimen__triage-natural-history__v1.png';
+const paperWhiteGrid = '/assets/kr-solidarity/texture/kr-solidarity__substrate__kr-solidarity--texture--melbourne-laneway--v1__v1.png';
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 const loginSchema = z.object({
   email: z.string().email('Please enter a valid email'),
@@ -43,6 +54,7 @@ export function Login() {
   };
 
   return (
+<<<<<<< HEAD
     <div className="min-h-screen bg-specimen-night-darkest flex items-center justify-center p-8 animate-in fade-in duration-500 relative overflow-hidden">
       {/* Atmosphere Layer */}
       <div
@@ -161,6 +173,37 @@ export function Login() {
             </button>
           </div>
         </motion.div>
+=======
+    <div className="min-h-screen bg-asphalt-black-darkest flex items-center justify-center p-8 animate-in fade-in duration-500 relative overflow-hidden">
+      {/* Atmosphere Layer */}
+      <div
+        className="absolute inset-0 opacity-10 pointer-events-none"
+        style={{ backgroundImage: `url(${paperWhiteGrid})`, backgroundRepeat: 'repeat' }}
+      />
+
+      <div className="relative z-10">
+        <LoginCard
+          onLogin={(credentials: LoginCredentials) => {
+            const values: LoginValues = {
+              email: credentials.email,
+              password: credentials.password ?? '',
+            };
+            void onSubmit(values);
+          }}
+          onRegisterClick={() => navigate('/register')}
+          isLoading={isSubmitting}
+        />
+        
+        {authError && (
+          <motion.div
+            initial={{ y: 10, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            className="mt-8 p-4 rounded-pebble bg-solidarity-red/10 text-solidarity-red border border-solidarity-red/20 text-center font-jetbrains-mono text-xs uppercase"
+          >
+            Verification Fault: {authError}
+          </motion.div>
+        )}
+>>>>>>> restoration-KR-Rage-Figma-v2.0
       </div>
     </div>
   );

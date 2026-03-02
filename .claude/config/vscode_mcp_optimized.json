@@ -2,9 +2,15 @@
   "servers": {
     "flash-sidekick": {
       "type": "stdio",
+<<<<<<< HEAD
       "command": "/Users/okgoogle13/Desktop/careercopilot/.venv/bin/python3",
       "args": [
         "/Users/okgoogle13/Desktop/careercopilot/servers/flash_sidekick.py"
+=======
+      "command": "/Users/okgoogle13/Projects/careercopilot/venv/bin/python",
+      "args": [
+        "/Users/okgoogle13/Projects/careercopilot/servers/flash_sidekick.py"
+>>>>>>> restoration-KR-Rage-Figma-v2.0
       ]
     },
     "github": {
@@ -49,8 +55,13 @@
         "-u",
         "NODE_OPTIONS",
         "/Users/okgoogle13/.nvm/versions/node/v20.19.5/bin/node",
+<<<<<<< HEAD
         "/Users/okgoogle13/Desktop/careercopilot/functions/node_modules/.bin/tsx",
         "/Users/okgoogle13/Desktop/careercopilot/functions/src/mcp_server.ts"
+=======
+        "/Users/okgoogle13/Projects/careercopilot/functions/node_modules/.bin/tsx",
+        "/Users/okgoogle13/Projects/careercopilot/functions/src/mcp_server.ts"
+>>>>>>> restoration-KR-Rage-Figma-v2.0
       ]
     }
   },

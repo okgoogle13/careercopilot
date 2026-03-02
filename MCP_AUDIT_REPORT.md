@@ -26,7 +26,11 @@ This comprehensive MCP audit reveals **critical security vulnerabilities** along
 | File Location                                             | Status       | Servers Defined                                            | Notes                                          |
 | --------------------------------------------------------- | ------------ | ---------------------------------------------------------- | ---------------------------------------------- |
 | `~/.claude/claude_desktop_config.json`                    | **ACTIVE**   | 3 (github, playwright, docker)                             | Primary Claude Desktop config                  |
+<<<<<<< HEAD
 | `/Users/okgoogle13/Desktop/careercopilot/mcp_config.json` | **ACTIVE**   | 7 (flash-sidekick\*, playwright, docker, filesystem, etc.) | Project-level config                           |
+=======
+| `/Users/okgoogle13/Projects/careercopilot/mcp_config.json` | **ACTIVE**   | 7 (flash-sidekick\*, playwright, docker, filesystem, etc.) | Project-level config                           |
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 | `~/.mcp.json`                                             | **ORPHANED** | 14 (includes gemini-wrapper, claude-skills, etc.)          | Points to `/Applications/careercopilot/` paths |
 | `~/.claude/claude_desktop_config.json.backup`             | **INACTIVE** | 1 (mcp-gsuite)                                             | Backup with placeholder paths                  |
 | `~/.gemini/antigravity/mcp_config.json`                   | **EXTERNAL** | 7 (flash-sidekick, playwright, docker, etc.)               | Gemini-specific config                         |
@@ -90,7 +94,11 @@ This comprehensive MCP audit reveals **critical security vulnerabilities** along
 ### CRITICAL #2: Hardcoded Credentials in Backend .env
 
 **Severity**: 🔴 **CRITICAL**
+<<<<<<< HEAD
 **File**: `/Users/okgoogle13/Desktop/careercopilot/backend/.env`
+=======
+**File**: `/Users/okgoogle13/Projects/careercopilot/backend/.env`
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 ```
 OPENAI_API_KEY=[REDACTED]
@@ -117,7 +125,11 @@ GEMINI_API_KEY=[REDACTED]
 ### CRITICAL #3: Hardcoded Frontend Supabase Key
 
 **Severity**: 🔴 **CRITICAL**
+<<<<<<< HEAD
 **File**: `/Users/okgoogle13/Desktop/careercopilot/frontend/.env.local`
+=======
+**File**: `/Users/okgoogle13/Projects/careercopilot/frontend/.env.local`
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 ```
 VITE_SUPABASE_ANON_KEY=sb_publishable_W8ClxR0YD-iQiAkONTWi7w_2ZZfnMxO
@@ -290,7 +302,11 @@ chmod 700 ~/.claude/
 ### HIGH #3: Flash-Sidekick Server References Non-Standard Model Names
 
 **Severity**: 🟠 **HIGH**
+<<<<<<< HEAD
 **File**: `/Users/okgoogle13/Desktop/careercopilot/mcp_config.json` (Lines 8-25)
+=======
+**File**: `/Users/okgoogle13/Projects/careercopilot/mcp_config.json` (Lines 8-25)
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 ```json
 "env": {
@@ -350,10 +366,17 @@ chmod 700 ~/.claude/
 ### HIGH #5: Python Virtual Environment Path Hardcoded
 
 **Severity**: 🟠 **HIGH**
+<<<<<<< HEAD
 **File**: `/Users/okgoogle13/Desktop/careercopilot/mcp_config.json` (Lines 4, 15, 36)
 
 ```json
 "command": "/Users/okgoogle13/Desktop/careercopilot/.venv/bin/python3"
+=======
+**File**: `/Users/okgoogle13/Projects/careercopilot/mcp_config.json` (Lines 4, 15, 36)
+
+```json
+"command": "/Users/okgoogle13/Projects/careercopilot/.venv/bin/python3"
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 ```
 
 **Problem**:
@@ -542,7 +565,11 @@ Default service: laravel_app
 ### MEDIUM #3: Unused MCP Servers Not Disabled
 
 **Severity**: 🟡 **MEDIUM**
+<<<<<<< HEAD
 **File**: `/Users/okgoogle13/Desktop/careercopilot/mcp_config.json` (All servers)
+=======
+**File**: `/Users/okgoogle13/Projects/careercopilot/mcp_config.json` (All servers)
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 ```json
 "disabled": false
@@ -852,7 +879,11 @@ Legend: ✓ = Defined, ✗ = Not defined
 | GitHub         | `npx -y @modelcontextprotocol/server-github`                                           | ✓ PASS                   | "GitHub MCP Server running on stdio"                  |
 | Playwright     | `/Users/okgoogle13/.nvm/versions/node/v20.19.5/bin/npx -y @playwright/mcp`             | ✓ PASS                   | Version 0.0.61                                        |
 | Docker         | `npx -y mcp-server-docker`                                                             | ✓ PASS                   | "MCP Server Docker started" (⚠️ default: laravel_app) |
+<<<<<<< HEAD
 | Flash-Sidekick | `/Users/okgoogle13/Desktop/careercopilot/.venv/bin/python3 /servers/flash_sidekick.py` | ⚠️ Not in Claude Desktop | Not tested                                            |
+=======
+| Flash-Sidekick | `/Users/okgoogle13/Projects/careercopilot/.venv/bin/python3 /servers/flash_sidekick.py` | ⚠️ Not in Claude Desktop | Not tested                                            |
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 ---
 
@@ -862,11 +893,19 @@ Legend: ✓ = Defined, ✗ = Not defined
 
 | Path                                                                     | Exists          | Purpose           |
 | ------------------------------------------------------------------------ | --------------- | ----------------- |
+<<<<<<< HEAD
 | `/Users/okgoogle13/Desktop/careercopilot/.venv/bin/python3`              | ✓ YES (symlink) | Python venv       |
 | `/Users/okgoogle13/Desktop/careercopilot/servers/flash_sidekick.py`      | ✓ YES           | AI server         |
 | `/Users/okgoogle13/Desktop/careercopilot/servers/flash_sidekick_fast.py` | ✓ YES           | Fast AI server    |
 | `/Users/okgoogle13/Desktop/careercopilot/servers/docker_mcp.py`          | ✓ YES           | Docker wrapper    |
 | `/Users/okgoogle13/Desktop/careercopilot/servers/cloud_ops.py`           | ✓ YES           | Cloud ops         |
+=======
+| `/Users/okgoogle13/Projects/careercopilot/.venv/bin/python3`              | ✓ YES (symlink) | Python venv       |
+| `/Users/okgoogle13/Projects/careercopilot/servers/flash_sidekick.py`      | ✓ YES           | AI server         |
+| `/Users/okgoogle13/Projects/careercopilot/servers/flash_sidekick_fast.py` | ✓ YES           | Fast AI server    |
+| `/Users/okgoogle13/Projects/careercopilot/servers/docker_mcp.py`          | ✓ YES           | Docker wrapper    |
+| `/Users/okgoogle13/Projects/careercopilot/servers/cloud_ops.py`           | ✓ YES           | Cloud ops         |
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 | `/Users/okgoogle13/.nvm/versions/node/v20.19.5/bin/npx`                  | ✓ YES (symlink) | Node-specific npx |
 | `/Applications/careercopilot/*` (in ~/.mcp.json)                         | ✗ NO            | **BROKEN**        |
 
@@ -1155,11 +1194,19 @@ chmod 600 ~/.claude/claude_desktop_config.json
 chmod 700 ~/.claude/
 
 # Fix backend .env files
+<<<<<<< HEAD
 chmod 600 /Users/okgoogle13/Desktop/careercopilot/backend/.env
 chmod 600 /Users/okgoogle13/Desktop/careercopilot/backend/.env.local
 
 # Fix frontend .env files
 chmod 600 /Users/okgoogle13/Desktop/careercopilot/frontend/.env.local
+=======
+chmod 600 /Users/okgoogle13/Projects/careercopilot/backend/.env
+chmod 600 /Users/okgoogle13/Projects/careercopilot/backend/.env.local
+
+# Fix frontend .env files
+chmod 600 /Users/okgoogle13/Projects/careercopilot/frontend/.env.local
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 ```
 
 ---

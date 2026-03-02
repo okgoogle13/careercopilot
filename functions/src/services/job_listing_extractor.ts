@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // @ts-expect-error - TS2497: esModuleInterop is enabled, but TypeScript 5.9 still complains about namespace import
 import * as admin from "firebase-admin";
 import * as firebase from "firebase-admin/firestore";
@@ -8,6 +9,18 @@ import https from "https";
 export class JobListingExtractor {
   private vectorSearch: FirebaseVectorSearch<JobListing>;
   private db: firebase.Firestore;
+=======
+import admin from "firebase-admin";
+import {z} from "genkit";
+import https from "https";
+import {ai} from "../genkit";
+import {FirebaseVectorSearch} from "../lib/firebase_vector_search";
+import {JobListing} from "../types/job_listing";
+
+export class JobListingExtractor {
+  private vectorSearch: FirebaseVectorSearch<JobListing>;
+  private db = admin.firestore();
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
   constructor() {
     this.db = admin.firestore();
@@ -15,6 +28,7 @@ export class JobListingExtractor {
   }
 
   /**
+<<<<<<< HEAD
    * Extract job listing from text or URL
    */
   async extract(data: {
@@ -47,21 +61,104 @@ export class JobListingExtractor {
 
     return jobListing;
   }
+=======
+   * Extract job listing data from a source (text or URL)
+   */
+  extract = ai.defineFlow(
+    {
+      name: "extractJobListing",
+      inputSchema: z.object({
+        source: z.union([z.string(), z.object({url: z.string()})]),
+        options: z
+          .object({
+            extractSkills: z.boolean().default(true),
+            extractSalary: z.boolean().default(true),
+            extractLocation: z.boolean().default(true),
+          })
+          .optional(),
+      }),
+      outputSchema: z.object({
+        id: z.string(),
+        title: z.string(),
+        company: z.string(),
+        description: z.string(),
+        skills: z.array(z.string()),
+        salary: z
+          .object({
+            min: z.number().optional(),
+            max: z.number().optional(),
+            currency: z.string().optional(),
+          })
+          .optional(),
+        location: z.string().optional(),
+        source: z.union([z.string(), z.string()]), // Simplified for now
+        createdAt: z.any(), // Timestamp type handling can be tricky with Zod/Genkit
+      }),
+    },
+    async (input) => {
+      // Cast input to expected type since inference might be failing
+      const typedInput = input as {
+        source: string | { url: string };
+        options?: {
+          extractSkills: boolean;
+          extractSalary: boolean;
+          extractLocation: boolean;
+        };
+      };
+
+      const {
+        source,
+        options = {extractSkills: true, extractSalary: true, extractLocation: true},
+      } = typedInput;
+      const text = typeof source === "string" ? source : await this.fetchUrl(source.url);
+
+      // Basic job listing extraction
+      const jobListing: JobListing = {
+        id: this.generateId(),
+        title: this.extractTitle(text),
+        company: this.extractCompany(text),
+        description: text,
+        skills: options?.extractSkills ? this.extractSkills(text) : [],
+        salary: options?.extractSalary ? this.extractSalary(text) : undefined,
+        location: options?.extractLocation ? this.extractLocation(text) : undefined,
+        source: typeof source === "string" ? "text" : source.url,
+        createdAt: admin.firestore.FieldValue.serverTimestamp(),
+      };
+
+      // Generate and store embedding
+      const embedding = await this.generateEmbedding(jobListing);
+      await this.vectorSearch.upsert(jobListing.id, embedding, jobListing);
+
+      return jobListing;
+    },
+  );
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
   /**
    * Find similar job listings
    */
   async findSimilar(data: {
+<<<<<<< HEAD
     query: string | JobListing;
+=======
+    query: string | JobListing | Record<string, unknown>;
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     limit?: number;
     minScore?: number;
     filters?: Record<string, unknown>;
   }): Promise<Array<{ job: JobListing; score: number }>> {
     // Use Genkit's semantic search
     const queryEmbedding = await this.generateEmbedding({
+<<<<<<< HEAD
       title: typeof data.query === "string" ? data.query : data.query.title || "",
       description: typeof data.query === "string" ? data.query : data.query.description || "",
       company: typeof data.query === "string" ? "" : data.query.company || "",
+=======
+      title: typeof data.query === "string" ? data.query : (data.query as any).title || "",
+      description:
+        typeof data.query === "string" ? data.query : (data.query as any).description || "",
+      company: typeof data.query === "string" ? "" : (data.query as any).company || "",
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     });
 
     const results = await this.vectorSearch.search(queryEmbedding, {
@@ -69,10 +166,19 @@ export class JobListingExtractor {
       minScore: data.minScore,
       filters: data.filters,
     });
+<<<<<<< HEAD
     return results.map(({id: _id, score, metadata}) => ({
       job: metadata,
       score,
     }));
+=======
+    return results.map(
+      ({id: _id, score, metadata}: { id: string; score: number; metadata: JobListing }) => ({
+        job: metadata,
+        score,
+      }),
+    );
+>>>>>>> restoration-KR-Rage-Figma-v2.0
   }
 
   private async fetchUrl(url: string): Promise<string> {
@@ -165,6 +271,7 @@ export class JobListingExtractor {
   }): Promise<number[]> {
     const text = `${job.title} ${job.company || ""} ${job.description}`.trim();
 
+<<<<<<< HEAD
     // Simple hash-based embedding (for deployment unblocking)
     // TODO: Replace with proper embedding model (Vertex AI, OpenAI, etc.)
     const hash = this.hashString(text);
@@ -173,6 +280,16 @@ export class JobListingExtractor {
       vector.push(((hash + i) % 1000) / 1000);
     }
     return this.normalizeVector(vector);
+=======
+    // Use Genkit to generate embeddings
+    const response = await ai.embed({
+      embedder: "gemini-1.5-flash",
+      content: text,
+      // taskType: "retrieval_document", // might be optional or different in v1
+    });
+
+    return response[0].embedding;
+>>>>>>> restoration-KR-Rage-Figma-v2.0
   }
 
   private hashString(str: string): number {

@@ -1,9 +1,14 @@
 """Cache models for storing temporary data."""
 
 from datetime import datetime
+<<<<<<< HEAD
 from typing import Any, Dict, Optional
 
 from sqlalchemy import Column, DateTime, ForeignKey, Integer, String, Text
+=======
+
+from sqlalchemy import DateTime, ForeignKey, Integer, String, Text
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 from sqlalchemy.orm import Mapped, mapped_column
 
 from .base import Base, BaseMixin
@@ -20,8 +25,13 @@ class Cache(Base, BaseMixin):
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
     expires_at: Mapped[datetime] = mapped_column(DateTime, nullable=False)
     hit_count: Mapped[int] = mapped_column(Integer, default=0)
+<<<<<<< HEAD
     size_bytes: Mapped[Optional[int]] = mapped_column(Integer, nullable=True)
     user_id: Mapped[Optional[str]] = mapped_column(
+=======
+    size_bytes: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    user_id: Mapped[str | None] = mapped_column(
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         String(36), ForeignKey("users.id"), nullable=True
     )
 

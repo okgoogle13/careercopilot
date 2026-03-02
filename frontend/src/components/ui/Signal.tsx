@@ -37,9 +37,15 @@ export type M3AlertSeverity = 'info' | 'success' | 'warning' | 'error';
 export type SignalVariant = 'filled' | 'outlined' | 'tonal';
 
 /**
+<<<<<<< HEAD
  * Signal - Northcote Curio Alert Component
  *
  * Alert/notification component using Northcote botanical palette and organic shapes.
+=======
+ * Signal - KeralaRage KrSolidarity Alert Component
+ *
+ * Alert/notification component using KeralaRage [DEPRECATED_STYLE] palette and [DEPRECATED_STYLE] shapes.
+>>>>>>> restoration-KR-Rage-Figma-v2.0
  * Supports info, success, warning, and error states with filled, outlined, or tonal variants.
  */
 export function Signal({
@@ -156,4 +162,8 @@ export const SignalDescription: React.FC<{ children: React.ReactNode }> = ({ chi
 
 // Legacy M3 exports for backward compatibility
 export { Signal as M3Alert, SignalDescription as M3AlertDescription, SignalTitle as M3AlertTitle };
+<<<<<<< HEAD
 export type { SignalProps as M3AlertProps };
+=======
+export type { SignalProps as M3AlertProps };
+>>>>>>> restoration-KR-Rage-Figma-v2.0

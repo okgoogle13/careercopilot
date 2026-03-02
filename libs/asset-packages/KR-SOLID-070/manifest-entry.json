@@ -1,0 +1,24 @@
+{
+  "id": "KR-SOLID-070",
+  "name": "Abstract - Solidarity (gemini_generate)",
+  "category": "abstract",
+  "file_path": "/assets/kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-gemini-generate__v1.png",
+  "priority": "HIGH",
+  "status": "ready",
+  "intended_context": "Analysis failed",
+  "components_allowed": [],
+  "specs": {
+    "aspect_ratio": "2752:1536",
+    "style": "mixed",
+    "text_content": null,
+    "visual_anchors": {
+      "halo": null,
+      "framing": null,
+      "subject": "error fallback"
+    },
+    "color_palette": {
+      "primary": "#1A1714",
+      "secondary": "#D4A84B"
+    }
+  }
+}

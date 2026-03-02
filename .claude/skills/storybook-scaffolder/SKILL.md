@@ -1,7 +1,9 @@
 ---
 name: storybook-scaffolder
-description: "Generates a Storybook story file (*.stories.tsx) with M3 design token imports and interactive variant stories. Use when documenting React components for development and QA testing."
-version: 2.0.0
+description: Generates a Storybook story file (*.stories.tsx) with M3 design token
+  imports and interactive variant stories. Use when documenting React components for
+  development and QA testing, or when the user asks to create a Storybook story, scaffold
+  a story file, or document a component in Storybook.
 ---
 
 # Storybook Scaffolder Workflow (v2)

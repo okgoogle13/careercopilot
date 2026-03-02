@@ -1,0 +1,26 @@
+{
+  "version": "1.0",
+  "templates": [
+    {
+      "id": "minimal",
+      "name": "Minimal ATS Classic",
+      "docType": "resume",
+      "description": "A clean, basic 1-column layout optimized for ATS.",
+      "path": "resume/minimal.json"
+    },
+    {
+      "id": "standard",
+      "name": "Standard Cover Letter",
+      "docType": "full_letter",
+      "description": "A traditional 1-column cover letter, matching ATS requirements.",
+      "path": "full_letter/standard.json"
+    },
+    {
+      "id": "standard",
+      "name": "Standard KSC STAR",
+      "docType": "ksc_star",
+      "description": "Key Selection Criteria document mapped to STAR methodology.",
+      "path": "ksc_star/standard.json"
+    }
+  ]
+}

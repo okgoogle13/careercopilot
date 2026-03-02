@@ -1,17 +1,24 @@
 ---
-description: Evaluate and strengthen Northcote Curio brand style briefs by identifying
-  vague language, testing applicability across component types, and suggesting specific
-  examples that clarify edge cases and decision frameworks.
 name: brand-brief-optimizer
+description: Evaluate and strengthen design system briefs by identifying vague language,
+  testing applicability across component types, and suggesting specific examples that
+  clarify edge cases and decision frameworks. Works with Material Design 3, custom
+  systems, or any design philosophy.
+metadata:
+  legacy_frontmatter:
+    version: 1.0.0
+    tags: []
 ---
 
 # Brand Brief Optimizer Skill
 
-## Overview
+## Purpose
 
 Transforms brand briefs from aspirational documents into **living standards** that reliably guide design decisions. Tests brief language against real-world component decisions to reveal gaps and ambiguities.
 
 A powerful brief answers the questions your team will actually ask. This skill helps you write those answers clearly.
+
+Works with **any design system**—Material Design 3, custom systems, hybrid approaches—by stress-testing clarity, coherence, and real-world applicability.
 
 ## When to Use This Skill
 
@@ -26,42 +33,50 @@ Use this skill when you need to:
 - **Strengthen brief language** through iterative refinement
 - **Create brief coherence score** (how likely is this to guide decisions?)
 
-## How It Works
+## Process
 
 The optimizer analyzes your brief across five dimensions:
 
 ### 1. Clarity Assessment
+
 Are specific sections clear enough to guide decisions, or do they hedge?
 
-**Weak**: "Use distinctive fonts that feel crafted"  
-**Strong**: "Display typography (Lora/Fraunces) should evoke hand-lettered precision. Opt for Lora when scholarly rigor matters, Fraunces for warmth and personality."
+**Weak**: "Use distinctive fonts that feel expressive"
+**Strong**: "Display typography uses Roboto Flex with weight range 300-800 and optical sizing enabled. Use weights 300-400 for readable body text, 600-800 for headlines with semantic emphasis. Optical sizing auto-adjusts finesse at all sizes."
 
 ### 2. Coherence Check
+
 Do principles work together, or do they contradict?
 
-Example: If brief says "maximize botanical motifs" but also "information clarity first," the contradiction needs resolving.
+Example: If brief says "maximize semantic tokens" but also "designers can use arbitrary hex values for special moments," the contradiction needs resolving.
 
 ### 3. Applicability Testing
+
 Can someone actually follow this brief across different component types?
 
 The optimizer tests brief language against:
-- Information-heavy components (job listings, dashboards)
-- Emotional landing pages (career inspiration, pathway)
-- Forms & input contexts (applications, data entry)
-- Navigation & structure (side panels, headers)
+
+- Information-heavy components (dashboards, data tables, list views)
+- Emotional/hero moments (landing pages, empty states, call-to-action)
+- Form contexts (inputs, validation, error states)
+- Navigation & structure (headers, side panels, footers)
 
 ### 4. Edge Case Identification
+
 What questions will your team ask that the brief doesn't answer?
 
 Examples:
-- "Can I use a purple accent?"
-- "How do I handle dark mode while preserving warmth?"
-- "What's the maximum botanical motif before it feels decorative?"
+
+- "Can I deviate from the color palette for accessibility needs?"
+- "How do I apply the design system to dark mode?"
+- "What's the decision tree when two principles conflict?"
 
 ### 5. Coherence Scoring
+
 Quantifies brief quality across all dimensions. Not to compare against others, but to track your own improvement as you refine.
 
 Scores 0-100:
+
 - 80-100: Ready to deploy (team can use with confidence)
 - 60-79: Close (needs targeted refinement)
 - 40-59: Foundational (significant work needed)
@@ -70,9 +85,11 @@ Scores 0-100:
 ## Usage Examples
 
 ### Example 1: Stress-Test Draft Brief
-"Evaluate this draft Northcote brief for clarity and coherence"
+
+"Evaluate this Material Design 3 brief for clarity and coherence"
 
 Claude will:
+
 1. Analyze each section for vagueness
 2. Test against example component decisions
 3. Identify edge cases not addressed
@@ -81,19 +98,23 @@ Claude will:
 6. Provide targeted recommendations
 
 ### Example 2: Test Applicability
-"Can this brief guide typography decisions across info-heavy dashboards, emotional landing pages, and form contexts?"
+
+"Can this brief guide color decisions across dashboards, landing pages, and dark mode contexts?"
 
 Claude will:
-1. Take brief's typography guidance
+
+1. Take brief's color guidance
 2. Imagine decisions needed in each context
 3. Test whether brief provides clear answer
 4. Identify where guidance breaks down
 5. Suggest clarifications needed
 
 ### Example 3: Edge Case Generation
+
 "What questions will my team ask about this brief that it doesn't clearly answer?"
 
 Claude will:
+
 1. Identify assumed knowledge
 2. Spot vague pronouncements
 3. Generate likely edge cases
@@ -101,9 +122,11 @@ Claude will:
 5. Produce list of clarifications needed
 
 ### Example 4: Iterative Refinement
+
 "I've incorporated your feedback. Here's the revised section. Is it clearer?"
 
 Claude will:
+
 1. Compare old vs. new language
 2. Assess if revision added specificity
 3. Identify remaining vagueness
@@ -115,10 +138,11 @@ Claude will:
 ```json
 {
   "brief_evaluation": {
-    "brief_name": "Northcote Curio Brand Brief",
-    "evaluation_date": "2026-01-28",
+    "brief_name": "Material Design 3 Brand Brief",
+    "design_system": "Material Design 3",
+    "evaluation_date": "2026-02-05",
     "overall_coherence_score": 0-100,
-    
+
     "dimension_scores": {
       "clarity": 0-100,
       "coherence": 0-100,
@@ -126,36 +150,36 @@ Claude will:
       "edge_case_coverage": 0-100,
       "distinctiveness": 0-100
     },
-    
+
     "clarity_findings": {
-      "clear_sections": ["...", "..."],
-      "vague_sections": ["...", "..."],
-      "hedge_language": ["...", "..."],
-      "recommendations": ["Make X more specific", "..."]
+      "clear_sections": ["Color semantic tokens defined with use cases", "..."],
+      "vague_sections": ["Motion guidance lacks easing curve specifics", "..."],
+      "hedge_language": ["Components should look polished", "..."],
+      "recommendations": ["Define easing curves (emphasized vs. standard)", "..."]
     },
-    
+
     "coherence_findings": {
-      "working_together": ["Typography + color establish dialogue", "..."],
-      "potential_conflicts": ["Botanical maximalism vs. clarity priority", "..."],
-      "resolution_suggestions": ["...", "..."]
+      "working_together": ["Semantic tokens + dark mode support create accessibility", "..."],
+      "potential_conflicts": ["Maximum icon density vs. clarity priority", "..."],
+      "resolution_suggestions": ["Define density by context (dashboard vs. form)", "..."]
     },
-    
+
     "applicability_testing": {
-      "information_heavy_context": "Brief guidance works for dashboards",
+      "information_heavy_context": "Brief guidance works well for dashboards",
       "emotional_context": "Brief guidance works for landing pages",
-      "form_context": "Brief guidance struggles with form inputs",
-      "navigation_context": "Brief guidance works for headers/panels",
+      "form_context": "Brief guidance needs clarification for error states",
+      "navigation_context": "Brief guidance clear for headers/panels",
       "summary": "Applicable in 3/4 tested contexts"
     },
-    
+
     "uncovered_edge_cases": [
-      "How to handle dark mode while preserving warmth?",
-      "Maximum botanical motif before decorative?",
-      "Purple accent usage?",
-      "Text over botanical elements clarity?"
+      "How to handle high-contrast mode while maintaining design aesthetic?",
+      "When to deviate from semantic tokens for accessibility?",
+      "Guidance for motion in reduced-motion contexts?",
+      "Decision tree for conflicting principles?"
     ],
-    
-    "overall_assessment": "Brief is close to deployment quality but needs targeted refinement in three areas..."
+
+    "overall_assessment": "Brief is solid but needs targeted refinement in three areas..."
   }
 }
 ```
@@ -163,28 +187,37 @@ Claude will:
 ## Key Capabilities
 
 ### Clarity Analysis
+
 Identifies:
+
 - Specific vs. vague language
 - Rules vs. values (which guides better decisions?)
 - Assumed knowledge (what does team need to know?)
 - Ambiguities in terminology
 
 ### Coherence Validation
+
 Checks:
+
 - Do principles work together?
 - Are there contradictions?
 - Is hierarchy of values clear?
 - Do examples support stated principles?
 
 ### Real-World Testing
+
 Simulates decisions in:
+
 - Information-dense contexts (clarity needed)
 - Emotional communication (impact needed)
 - Structural components (consistency needed)
 - Forms & interaction (precision needed)
+- Accessibility contexts (inclusive design needed)
 
 ### Gap Identification
+
 Reveals:
+
 - Edge cases not addressed
 - Assumed knowledge not stated
 - Contradictions needing resolution
@@ -205,29 +238,37 @@ This produces briefs that actually guide work, not just aspire to.
 ## Integration with Other Skills
 
 ### With Frontend-Design
+
 Compare brief aesthetic philosophy against frontend-design thinking—do they align?
 
-### With Northcote-Typography-Strategy
-Test whether brief's typography guidance is specific and defensible.
+### With M3-Visual-Audit (or system-specific audit)
 
-### With Northcote-Visual-Audit
 Brief clarity measured by whether audit results are consistent (clear brief = consistent audits).
 
+### With Token-Orchestrator
+
+Test whether brief's token guidance is specific and defensible.
+
 ### With Compliance-Dashboard
+
 Dashboard tracks whether brief is actually guiding component development (visible through compliance patterns).
+
+### With Component-Builder
+
+Verify that brief guidance produces coherent components across different types.
 
 ## Limitations
 
 This skill:
 
-✅ Identifies vague and unclear language  
-✅ Tests brief against realistic scenarios  
-✅ Generates edge cases you haven't considered  
-✅ Provides coherence scoring for improvement tracking  
+✅ Identifies vague and unclear language
+✅ Tests brief against realistic scenarios
+✅ Generates edge cases you haven't considered
+✅ Provides coherence scoring for improvement tracking
 
-❌ Cannot write the brief for you (refining language is your work)  
-❌ Cannot guarantee every team member interprets the same way  
-❌ Doesn't replace human review and discussion  
+❌ Cannot write the brief for you (refining language is your work)
+❌ Cannot guarantee every team member interprets the same way
+❌ Doesn't replace human review and discussion
 ❌ Coherence score is relative, not absolute
 
 ## Success Criteria
@@ -238,7 +279,7 @@ A brief is ready for deployment when it:
 2. **Answers likely edge cases** (team knows what to do when uncertain)
 3. **Works across component types** (applicable to your full product)
 4. **Speaks to values, not just rules** (team internalizes, doesn't just follow)
-5. **Distinguishes your brand** (brief reveals what makes you Northcote)
+5. **Distinguishes your system** (brief reveals your design philosophy)
 
 ## Key Principle
 
@@ -252,4 +293,4 @@ That shift changes everything.
 
 ---
 
-*A great brief doesn't just guide design decisions—it shifts how your team thinks about design.*
+_A great brief doesn't just guide design decisions—it shifts how your team thinks about design._

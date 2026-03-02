@@ -1,6 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Briefcase, Star } from 'lucide-react';
+<<<<<<< HEAD
 import { NorthcoteButton } from '../components/ui/NorthcoteButton';
+=======
+import { KeralaRageButton } from '../components/ui/KeralaRageButton';
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 import { Stone } from '../components/ui/Stone';
 
 const meta: Meta<typeof Stone> = {
@@ -8,10 +12,13 @@ const meta: Meta<typeof Stone> = {
   component: Stone,
   tags: ['autodocs'],
   argTypes: {
+<<<<<<< HEAD
     mode: {
       control: 'select',
       options: ['gallery', 'laboratory'],
     },
+=======
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     elevation: {
       control: 'select',
       options: ['flat', 'raised', 'floating'],
@@ -24,7 +31,10 @@ type Story = StoryObj<typeof Stone>;
 
 export const Default: Story = {
   args: {
+<<<<<<< HEAD
     mode: 'gallery',
+=======
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     elevation: 'raised',
     header: (
       <div className="flex items-center gap-3">
@@ -43,6 +53,7 @@ export const Default: Story = {
     ),
     footer: (
       <div className="flex justify-end gap-3">
+<<<<<<< HEAD
         <NorthcoteButton
           variant="text"
           size="sm"
@@ -50,14 +61,28 @@ export const Default: Story = {
           Later
         </NorthcoteButton>
         <NorthcoteButton size="sm">Apply Now</NorthcoteButton>
+=======
+        <KeralaRageButton
+          variant="tertiary"
+          size="sm"
+        >
+          Later
+        </KeralaRageButton>
+        <KeralaRageButton size="sm">Apply Now</KeralaRageButton>
+>>>>>>> restoration-KR-Rage-Figma-v2.0
       </div>
     ),
   },
 };
 
+<<<<<<< HEAD
 export const Laboratory: Story = {
   args: {
     mode: 'laboratory',
+=======
+export const Floating: Story = {
+  args: {
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     elevation: 'floating',
     header: (
       <div className="flex items-center justify-between w-full">

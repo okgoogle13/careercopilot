@@ -19,4 +19,8 @@ export function KeywordTag({ keyword, variant = 'matched', className = '' }: Key
       {keyword}
     </span>
   );
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> restoration-KR-Rage-Figma-v2.0

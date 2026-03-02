@@ -24,7 +24,11 @@ export function PageHeader({
     return (
       <>
         {parts[0]}
+<<<<<<< HEAD
         <span className="text-secondary-waratah-crimson cursive text-curator-large px-1">{highlightedWord}</span>
+=======
+        <span className="text-secondary-solidarity-red cursive text-curator-large px-1">{highlightedWord}</span>
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         {parts[1]}
       </>
     );
@@ -51,4 +55,8 @@ export function PageHeader({
       )}
     </div>
   );
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> restoration-KR-Rage-Figma-v2.0

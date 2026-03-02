@@ -39,6 +39,10 @@ build/
 # IDE files
 .vscode/
 .idea/
+<<<<<<< HEAD
+=======
+.antigravity/mcp.json
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 *.swp
 *.swo
 
@@ -103,6 +107,10 @@ cleanup_backup_*/
 storybook-static
 frontend/Figma UI Files/
 .claude-backup-*.tar.gz
+<<<<<<< HEAD
+=======
+*.bak
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 *.bak.*
 claude-artifact-runner/
 
@@ -110,7 +118,10 @@ claude-artifact-runner/
 /.ai_reports/
 .archive_legacy/
 .venv/
+<<<<<<< HEAD
 venv/
+=======
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 test-results/
 
 # Local Environments and Logs
@@ -137,3 +148,54 @@ consolidation_log.txt
 setup-ci-secrets.sh
 .asset_backup_*
 .asset_backup_*
+<<<<<<< HEAD
+=======
+_archive/
+venv/
+
+# ============================================================
+# DEPRECATED LEGACY ASSETS — Northcote/Curio is DEAD
+# These paths must NEVER be re-tracked
+# ============================================================
+assets/specimens/
+assets/ui/
+assets/textures/
+assets/fauna/
+assets/KrMotifs/
+assets/kr-motifs/
+assets/_triage/
+assets/mockups/
+assets/placeholders/
+assets/plates/
+assets/templates/
+frontend/public/assets/specimens/
+frontend/public/assets/ui/
+frontend/public/assets/textures/
+frontend/public/assets/fauna/
+frontend/public/assets/KrMotifs/
+frontend/public/assets/kr-motifs/
+frontend/public/assets/_triage/
+libs/assets/uncategorized/northcote-*
+run_northcote_workflow.py
+tools/scripts/maintenance/run_northcote_workflow.py
+tools/scripts/workflow/run_northcote_workflow.py
+
+# Local tooling / generated
+.venv/
+.ai_batches/
+.backups/
+.temp_artifact_build/
+.claude*/
+.codex/
+.windsurf/
+.idx/
+.agent/
+.agents/
+
+# Recovery and Emergency Backups (prevent "Corruption" death-spirals)
+.git_corrupt_backup/
+.git_corrupt_backup_safe/
+purge/
+_backup_*/
+cleanup_backup_*/
+>>>>>>> restoration-KR-Rage-Figma-v2.0

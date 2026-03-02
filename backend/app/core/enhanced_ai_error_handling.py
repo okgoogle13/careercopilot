@@ -7,11 +7,19 @@ for individual AI service operations within complex flows.
 
 import asyncio
 import logging
+<<<<<<< HEAD
+=======
+from collections.abc import AsyncIterator, Awaitable, Callable
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 from contextlib import asynccontextmanager
 from dataclasses import dataclass, field
 from datetime import datetime
 from enum import Enum
+<<<<<<< HEAD
 from typing import Any, Callable, Dict, List, Optional, AsyncIterator, Awaitable, Tuple
+=======
+from typing import Any
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 from .ai_error_handling import AIError, AIErrorType, AIOperationHandler, RetryConfig
 
@@ -38,7 +46,11 @@ class AIOperationContext:
     service_type: AIServiceType
     user_id: str
     input_size: int = 0
+<<<<<<< HEAD
     metadata: Dict[str, Any] = field(default_factory=dict)
+=======
+    metadata: dict[str, Any] = field(default_factory=dict)
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     timestamp: datetime = field(default_factory=datetime.now)
 
 
@@ -48,9 +60,15 @@ class AIOperationResult:
 
     success: bool
     data: Any = None
+<<<<<<< HEAD
     error: Optional[AIError] = None
     fallback_used: bool = False
     context: Optional[AIOperationContext] = None
+=======
+    error: AIError | None = None
+    fallback_used: bool = False
+    context: AIOperationContext | None = None
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     execution_time: float = 0.0
 
 
@@ -59,7 +77,11 @@ class FallbackStrategy:
     """Configuration for fallback mechanisms"""
 
     enabled: bool = True
+<<<<<<< HEAD
     fallback_function: Optional[Callable[..., Awaitable[Any] | Any]] = None
+=======
+    fallback_function: Callable[..., Awaitable[Any] | Any] | None = None
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     fallback_data: Any = None
     use_cached_result: bool = True
     degraded_mode: bool = False
@@ -69,7 +91,11 @@ class EnhancedAIErrorHandler:
     """Enhanced error handler with granular control and fallbacks"""
 
     def __init__(self) -> None:
+<<<<<<< HEAD
         self.operation_handlers: Dict[AIServiceType, AIOperationHandler] = {
+=======
+        self.operation_handlers: dict[AIServiceType, AIOperationHandler] = {
+>>>>>>> restoration-KR-Rage-Figma-v2.0
             AIServiceType.GEMINI_EXTRACTION: AIOperationHandler(
                 RetryConfig(max_attempts=3, base_delay=1.0, max_delay=30.0)
             ),
@@ -92,13 +118,21 @@ class EnhancedAIErrorHandler:
                 RetryConfig(max_attempts=2, base_delay=0.5, max_delay=10.0)
             ),
         }
+<<<<<<< HEAD
         self.operation_stats: Dict[str, List[AIOperationResult]] = {}
+=======
+        self.operation_stats: dict[str, list[AIOperationResult]] = {}
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
     async def execute_ai_operation(
         self,
         operation: Callable[..., Awaitable[Any] | Any],
         context: AIOperationContext,
+<<<<<<< HEAD
         fallback_strategy: Optional[FallbackStrategy] = None,
+=======
+        fallback_strategy: FallbackStrategy | None = None,
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         *args: Any,
         **kwargs: Any,
     ) -> AIOperationResult:
@@ -186,7 +220,11 @@ class EnhancedAIErrorHandler:
 
             logger.error(
                 f"Unexpected error in AI operation: {context.operation_name} "
+<<<<<<< HEAD
                 f"[{context.service_type.value}] - {str(e)}",
+=======
+                f"[{context.service_type.value}] - {e!s}",
+>>>>>>> restoration-KR-Rage-Figma-v2.0
                 exc_info=True,
             )
 
@@ -247,9 +285,15 @@ class EnhancedAIErrorHandler:
                 logger.warning(f"All fallback attempts failed for {context.operation_name}")
 
         except Exception as e:
+<<<<<<< HEAD
             logger.error(f"Fallback execution failed: {str(e)}", exc_info=True)
             result.error = AIError(
                 message=f"Fallback failed: {str(e)}",
+=======
+            logger.error(f"Fallback execution failed: {e!s}", exc_info=True)
+            result.error = AIError(
+                message=f"Fallback failed: {e!s}",
+>>>>>>> restoration-KR-Rage-Figma-v2.0
                 error_type=AIErrorType.UNKNOWN,
                 original_error=e,
             )
@@ -258,7 +302,11 @@ class EnhancedAIErrorHandler:
 
     async def _get_cached_result(
         self, context: AIOperationContext, *args: Any, **kwargs: Any
+<<<<<<< HEAD
     ) -> Optional[Any]:
+=======
+    ) -> Any | None:
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         """Try to retrieve cached result for operation"""
         # This would integrate with your existing cache system
         # For now, return None - implement based on your cache strategy
@@ -314,7 +362,11 @@ class EnhancedAIErrorHandler:
         if len(self.operation_stats[operation_name]) > 100:
             self.operation_stats[operation_name] = self.operation_stats[operation_name][-100:]
 
+<<<<<<< HEAD
     def get_operation_health(self, operation_name: str) -> Dict[str, Any]:
+=======
+    def get_operation_health(self, operation_name: str) -> dict[str, Any]:
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         """Get health metrics for an operation"""
         if operation_name not in self.operation_stats:
             return {"status": "no_data"}
@@ -343,7 +395,11 @@ class EnhancedAIErrorHandler:
         operation_name: str,
         service_type: AIServiceType,
         user_id: str,
+<<<<<<< HEAD
         fallback_strategy: Optional[FallbackStrategy] = None,
+=======
+        fallback_strategy: FallbackStrategy | None = None,
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         **metadata: Any,
     ) -> AsyncIterator[AIOperationContext]:
         """Context manager for AI operations with automatic error handling"""
@@ -358,7 +414,11 @@ class EnhancedAIErrorHandler:
             yield context
         except Exception as e:
             logger.error(
+<<<<<<< HEAD
                 f"Error in AI operation context {operation_name}: {str(e)}",
+=======
+                f"Error in AI operation context {operation_name}: {e!s}",
+>>>>>>> restoration-KR-Rage-Figma-v2.0
                 exc_info=True,
             )
             raise
@@ -374,7 +434,11 @@ async def execute_with_enhanced_handling(
     operation_name: str,
     service_type: AIServiceType,
     user_id: str,
+<<<<<<< HEAD
     fallback_strategy: Optional[FallbackStrategy] = None,
+=======
+    fallback_strategy: FallbackStrategy | None = None,
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     *args: Any,
     **kwargs: Any,
 ) -> AIOperationResult:
@@ -390,7 +454,11 @@ async def execute_with_enhanced_handling(
 
 def create_fallback_strategy(
     enabled: bool = True,
+<<<<<<< HEAD
     fallback_function: Optional[Callable[..., Awaitable[Any] | Any]] = None,
+=======
+    fallback_function: Callable[..., Awaitable[Any] | Any] | None = None,
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     fallback_data: Any = None,
     use_cached_result: bool = False,
     degraded_mode: bool = False,

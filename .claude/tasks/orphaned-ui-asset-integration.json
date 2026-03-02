@@ -1,0 +1,156 @@
+{
+  "metadata": {
+    "title": "Orphaned UI Asset Integration",
+    "description": "Audit and integrate 12 orphaned UI SVG files into manifest and design system",
+    "total_tasks": 4,
+    "total_assets": 12,
+    "priority": "normal",
+    "created_at": "2026-02-22T00:00:00Z"
+  },
+  "tasks": [
+    {
+      "task_id": "audit-orphaned-svgs",
+      "assigned_to": "claude-code",
+      "status": "pending",
+      "priority": "normal",
+      "inputs": {
+        "action": "audit_orphaned_assets",
+        "directories": [
+          "frontend/public/assets/kr-solidarity/ui-kit/svg/",
+          "frontend/public/assets/kr-solidarity/ui-kit/svg/motifs/",
+          "frontend/public/assets/kr-solidarity/ui-kit/svg/icons/",
+          "frontend/public/assets/kr-solidarity/ui-kit/svg/patterns/"
+        ],
+        "manifest_path": "frontend/src/design/tokens/kerala-rage-kr-solidarity-manifest.json",
+        "file_extensions": [".svg"],
+        "find_orphaned": true,
+        "output_file": "orphaned-svgs-audit.json",
+        "audit_scope": {
+          "check_filesystem": true,
+          "check_manifest": true,
+          "identify_mismatches": true,
+          "categorize_by_type": true
+        }
+      },
+      "next_task": "classify-svg-purpose",
+      "next_assigned_to": "gemini"
+    },
+    {
+      "task_id": "classify-svg-purpose",
+      "assigned_to": "gemini",
+      "status": "pending",
+      "priority": "normal",
+      "inputs": {
+        "action": "visual_classification",
+        "audit_file": "orphaned-svgs-audit.json",
+        "assets": [
+          "KR-UI-008.svg",
+          "KR-UI-009.svg",
+          "KR-UI-010.svg",
+          "KR-UI-011.svg",
+          "KR-UI-012.svg",
+          "KR-UI-013.svg",
+          "KR-UI-014.svg",
+          "KR-UI-015.svg",
+          "KR-UI-016.svg",
+          "KR-UI-017.svg",
+          "KR-UI-018.svg",
+          "KR-UI-019.svg"
+        ],
+        "asset_directory": "frontend/public/assets/kr-solidarity/ui-kit/svg/",
+        "classification_fields": {
+          "semantic_purpose": "What UI function does this serve? (button, icon, motif, pattern, primitive, etc.)",
+          "component_type": "UI component archetype (Seed, Pebble, Lens, Jar, Cabinet, Stone)",
+          "layer": "Design layer (UI Kit)",
+          "usage_context": "Where/how is this SVG typically used?",
+          "status": "Can integrate? (integrate / needs_revision / archive / discard)"
+        },
+        "output_file": "svg-classification.json",
+        "success_criteria": {
+          "all_assets_analyzed": true,
+          "confidence_score_minimum": 0.8,
+          "status_assigned": true
+        }
+      },
+      "next_task": "integrate-into-manifest",
+      "next_assigned_to": "claude-code"
+    },
+    {
+      "task_id": "integrate-into-manifest",
+      "assigned_to": "claude-code",
+      "status": "pending",
+      "priority": "normal",
+      "inputs": {
+        "action": "update_manifest",
+        "classification_file": "svg-classification.json",
+        "manifest_path": "frontend/src/design/tokens/kerala-rage-kr-solidarity-manifest.json",
+        "operations": [
+          "add_orphaned_svgs_to_manifest",
+          "assign_asset_ids",
+          "set_layer_uikit",
+          "verify_no_duplicates",
+          "update_manifest_version"
+        ],
+        "manifest_schema": {
+          "asset_id": "auto-incremented",
+          "name": "From filename (KR-UI-XXX)",
+          "category": "UI Component",
+          "layer": "UI Kit",
+          "file_path": "relative path in public/assets/",
+          "semantic_purpose": "From classification",
+          "component_type": "From classification",
+          "status": "active"
+        },
+        "expected_additions": 12,
+        "output_file": "manifest-update-log.json"
+      },
+      "next_task": "verify-integration",
+      "next_assigned_to": "claude-code"
+    },
+    {
+      "task_id": "verify-integration",
+      "assigned_to": "claude-code",
+      "status": "pending",
+      "priority": "normal",
+      "inputs": {
+        "action": "verify_integration",
+        "checks": [
+          "all_12_assets_in_manifest",
+          "no_duplicate_entries",
+          "no_orphaned_svgs_remain",
+          "manifest_schema_valid",
+          "asset_ids_unique",
+          "file_paths_correct"
+        ],
+        "manifest_path": "frontend/src/design/tokens/kerala-rage-kr-solidarity-manifest.json",
+        "asset_directory": "frontend/public/assets/kr-solidarity/ui-kit/svg/",
+        "file_extensions": [".svg"],
+        "validation_rules": {
+          "require_asset_id": true,
+          "require_file_path": true,
+          "require_category": true,
+          "require_layer": true,
+          "file_must_exist": true
+        },
+        "output_file": "integration-verification-report.json",
+        "success_criteria": {
+          "zero_orphaned": true,
+          "all_validated": true,
+          "manifest_valid": true
+        }
+      },
+      "success_criteria": {
+        "all_assets_integrated": true,
+        "manifest_consistency": 1.0,
+        "zero_orphaned": true,
+        "file_integrity": true
+      }
+    }
+  ],
+  "rollback_procedures": {
+    "on_failure": "Revert manifest to backup; restore orphaned asset list; review error in verification report",
+    "git_branch_safe": true,
+    "manifest_backup_created": true,
+    "estimated_recovery_time_minutes": 5
+  }
+}

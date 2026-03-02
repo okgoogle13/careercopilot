@@ -4,8 +4,8 @@ import { HelmetProvider } from 'react-helmet-async';
 
 const queryClient = new QueryClient();
 
-// Northcote Curio consolidated theme
-import './design/styles/northcote.css';
+// KeralaRage KrSolidarity consolidated theme
+import './design/styles/kerala-rage.css';
 
 import * as Sentry from '@sentry/react';
 import App from './App';
