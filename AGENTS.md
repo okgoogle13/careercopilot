@@ -106,7 +106,7 @@ cd frontend && yarn test:e2e
 **Stack**: React 18 + TypeScript · FastAPI · Google Genkit · Firestore · GCP
 **Frontend**: `frontend/` (Vite, Tailwind v4, Zustand, TanStack Query)
 **Backend**: `backend/` (FastAPI, SQLAlchemy, async/await)
-**Design System**: Northcote Curio (M3 variant with Australian botanical palette)
+**Design System**:  (M3 variant with Australian botanical palette)
 **Target Users**: Transitioning to social work, community services, government/nonprofit roles
 
 ## Key Technologies
@@ -189,7 +189,7 @@ backend/
 
 frontend/
 ├── src/
-│   ├── components/                # React components (Northcote Curio compliant)
+│   ├── components/                # React components ( compliant)
 │   │   ├── DocumentGeneration/    # Resume/cover letter generation UI
 │   │   ├── AtsAnalyzer/           # ATS scoring interface
 │   │   ├── ProfileForm/           # User profile input
@@ -201,7 +201,7 @@ frontend/
 │   └── tests/                     # Jest, Playwright e2e tests
 
 design-system/
-└── tokens.json                    # Northcote Curio design tokens (colors, typography, spacing)
+└── tokens.json                    #  design tokens (colors, typography, spacing)
 =======
 │   ├── api/endpoints/             # API route handlers (analysis, documents, workflows, genkit, job_scout, ingest)
 │   ├── core/                      # Auth (Supabase JWT), database, Genkit init, config
@@ -246,7 +246,7 @@ design-system/
 - ✅ Include confidence scores (0-1) and error details in all AI responses
 - ✅ Use async/await in FastAPI endpoints and Genkit flows
 - ✅ Use TypeScript strict mode (`tsconfig.json: "strict": true`)
-- ✅ Apply Northcote Curio design tokens for all UI (no hardcoded colors)
+- ✅ Apply  design tokens for all UI (no hardcoded colors)
 =======
 - ✅ Use Supabase client config from `frontend/src/config/supabase.ts` for auth/storage
 - ✅ Use Supabase auth helpers in `backend/app/core/auth.py` and `backend/app/core/dependencies.py`
@@ -356,7 +356,7 @@ Use MCP servers to keep context small, reduce latency, and avoid heavy local par
 
 **Primary MCP servers used in this repo:**
 - **flash-sidekick**: fast analysis over large code/data, batching, and search grounding.
-- **design-system-sidekick**: Northcote Curio design validation, token extraction, and visual compliance checks.
+- **design-system-sidekick**:  design validation, token extraction, and visual compliance checks.
 =======
 Use MCP servers to keep context small, reduce latency, and avoid heavy local parsing. Prefer the smallest capable MCP tool first, then fall back to local commands if MCP is unavailable.
 
@@ -412,7 +412,7 @@ elif task == "git_history":
 ### Design System Sidekick Routing
 
 <<<<<<< HEAD
-Use **design-system-sidekick** whenever a task requires **visual validation**, **token extraction**, or **Northcote Curio compliance**. This includes:
+Use **design-system-sidekick** whenever a task requires **visual validation**, **token extraction**, or ** compliance**. This includes:
 - Validating newly generated assets (e.g., wallpaper, motifs, specimens).
 =======
 Use **design-system-sidekick** whenever a task requires **visual validation**, **token extraction**, or **kerala-rage kr-solidarity compliance**. This includes:
@@ -863,7 +863,7 @@ Key document requirements:
 - **Linter**: ESLint with TypeScript parser
 - **Component style**: Functional components with hooks
 <<<<<<< HEAD
-- **Styling**: Tailwind CSS with Northcote Curio design tokens only (no hardcoded colors)
+- **Styling**: Tailwind CSS with  design tokens only (no hardcoded colors)
 =======
 - **Styling**: Tailwind CSS with kerala-rage kr-solidarity design tokens only (no hardcoded colors)
 >>>>>>> restoration-KR-Rage-Figma-v2.0

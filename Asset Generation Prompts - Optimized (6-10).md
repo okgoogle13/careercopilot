@@ -1,5 +1,5 @@
 <<<<<<< HEAD
-# Northcote Curio Asset Generation Prompts
+#  Asset Generation Prompts
 =======
 # kerala-rage kr-solidarity Asset Generation Prompts
 >>>>>>> restoration-KR-Rage-Figma-v2.0
@@ -45,7 +45,7 @@ CRITICAL REQUIREMENTS (Non-Negotiable):
    - "Fig. [N]. [Scientific Name] ([Description])"
    - "[Geographic Location], [Region/Territory]"
    - "[Material/Classification], [Age/Period]"
-   - Separate card: "Northcote Curio Collection — Plate [N]"
+   - Separate card: " Collection — Plate [N]"
 =======
 1. BACKGROUND: Pure Asphalt Black (#1A1714) theatrical void
    EXCLUDE: Cream, beige, tan, paper-white, white backgrounds ❌
@@ -149,7 +149,7 @@ TYPOGRAPHY (kerala-streetprint Scholarly Standard):
   * "Silica skeleton, 200-500m depth"
 - Plate Attribution (bottom right, separate cream card):
 <<<<<<< HEAD
-  * "Northcote Curio Collection — Plate VI"
+  * " Collection — Plate VI"
 =======
   * "kerala-rage kr-solidarity Collection — Plate VI"
 >>>>>>> restoration-KR-Rage-Figma-v2.0
@@ -409,7 +409,7 @@ TYPOGRAPHY (Victorian Scholarly Standard):
   * "Eastern Australia, Eucalyptus Forests"
   * "Endemic fungus, Phallaceae family"
 - Plate Attribution (bottom right, separate cream card):
-  * "Northcote Curio Collection — Plate VII"
+  * " Collection — Plate VII"
 =======
 - Color: Pure Asphalt Black (#1A1714)
 - Effect: Theatrical void, absolute darkness
@@ -690,7 +690,7 @@ TYPOGRAPHY (kerala-streetprint Scholarly Standard):
   * "Megabat skeleton, Vulnerable species"
 - Plate Attribution (bottom right, separate cream card):
 <<<<<<< HEAD
-  * "Northcote Curio Collection — Plate VIII"
+  * " Collection — Plate VIII"
 =======
   * "kerala-rage kr-solidarity Collection — Plate VIII"
 >>>>>>> restoration-KR-Rage-Figma-v2.0
@@ -972,7 +972,7 @@ TYPOGRAPHY (kerala-streetprint Scholarly Standard):
   * "Scleractinian coral, 5-20m depth"
 - Plate Attribution (bottom right, separate cream card):
 <<<<<<< HEAD
-  * "Northcote Curio Collection — Plate IX"
+  * " Collection — Plate IX"
 =======
   * "kerala-rage kr-solidarity Collection — Plate IX"
 >>>>>>> restoration-KR-Rage-Figma-v2.0
@@ -1233,7 +1233,7 @@ TYPOGRAPHY (kerala-streetprint Scholarly Standard):
   * "Echinoid skeleton, 50-200m depth"
 - Plate Attribution (bottom right, separate cream card):
 <<<<<<< HEAD
-  * "Northcote Curio Collection — Plate X"
+  * " Collection — Plate X"
 =======
   * "kerala-rage kr-solidarity Collection — Plate X"
 >>>>>>> restoration-KR-Rage-Figma-v2.0

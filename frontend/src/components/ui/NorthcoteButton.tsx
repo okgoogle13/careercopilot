@@ -13,7 +13,7 @@ export interface NorthcoteButtonProps extends Omit<HTMLMotionProps<'button'>, 'r
 }
 
 /**
- * NorthcoteButton - Production-ready button component for Northcote Curio design system
+ * NorthcoteButton - Production-ready button component for  design system
  *
  * Features:
  * - 100% semantic token usage (no hardcoded values)
@@ -48,7 +48,7 @@ export const NorthcoteButton = React.forwardRef<HTMLButtonElement, NorthcoteButt
       lg: 'h-14 px-8 text-lg',
     };
 
-    // Variant styles using Northcote Curio tokens
+    // Variant styles using  tokens
     const variantStyles = {
       primary: {
         gallery: {

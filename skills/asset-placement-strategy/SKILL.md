@@ -1,11 +1,11 @@
 ---
 name: asset-placement-strategy
-description: Specialized logic for strategic placement of Northcote Curio design artifacts (Seeds, Pebbles, Lenses, Stones) based on biological asymmetry and curiosity specimen aesthetics. Ensures organic balance and avoids "slop" by enforcing strict archetype constraints and structural integrity.
+description: Specialized logic for strategic placement of  design artifacts (Seeds, Pebbles, Lenses, Stones) based on biological asymmetry and curiosity specimen aesthetics. Ensures organic balance and avoids "slop" by enforcing strict archetype constraints and structural integrity.
 ---
 
 # Asset Placement Strategy Skill
 
-This skill provides a framework for placing design "artifacts" within the Northcote Curio design system. It moves beyond standard layouts to prioritize **biological asymmetry**, **tactility**, and **curiosity-specimen** aesthetics.
+This skill provides a framework for placing design "artifacts" within the  design system. It moves beyond standard layouts to prioritize **biological asymmetry**, **tactility**, and **curiosity-specimen** aesthetics.
 
 ## Core Principles
 

@@ -22,7 +22,7 @@ import { motion } from 'framer-motion';
  * 
  * Displays job application information with a multi-step progress indicator.
 <<<<<<< HEAD
- * Built using Material Design 3 Northcote Curio design tokens.
+ * Built using Material Design 3  design tokens.
  * 
  * **M3 Design Token Usage:**
  * - Shape: `rounded-pebble` → `--sys-shape-pebble` (20px 20px 32px 32px) - Organic asymmetric corners ✅

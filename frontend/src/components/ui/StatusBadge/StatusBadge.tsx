@@ -26,7 +26,7 @@ export interface StatusBadgeProps {
 
 /**
 <<<<<<< HEAD
- * StatusBadge - Northcote Curio Status Indicator
+ * StatusBadge -  Status Indicator
  *
  * Supports both Gallery (warm, botanical) and Laboratory (clinical, precise) modes.
  *
@@ -69,7 +69,7 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({
     showDot = false,
     className = '',
 }) => {
-    // Northcote Curio Palette Mappings
+    //  Palette Mappings
     const getVariantStyles = () => {
         const colorMap: Record<StatusBadgeVariant, string> = {
             success: 'primary',    // Sage (Botanical)

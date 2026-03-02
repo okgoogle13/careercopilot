@@ -1,7 +1,7 @@
 <<<<<<< HEAD
 # Component Catalog
 
-> Part of [Northcote Curio Design System](00-overview.md)
+> Part of [ Design System](00-overview.md)
 
 ---
 

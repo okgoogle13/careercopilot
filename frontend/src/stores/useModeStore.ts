@@ -1,6 +1,6 @@
 /**
 <<<<<<< HEAD
- * Northcote Curio Mode Store (Zustand)
+ *  Mode Store (Zustand)
  *
  * Manages Gallery ↔ Laboratory mode switching with persistence.
  * Gallery: User-facing, emotional, high wallpaper opacity

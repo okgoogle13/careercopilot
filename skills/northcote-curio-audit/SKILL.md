@@ -7,11 +7,11 @@ description: Analyze component screenshots and design artifacts against Northcot
 name: northcote-curio-audit
 ---
 
-# Northcote Curio Audit Skill
+#  Audit Skill
 
 ## Overview
 
-Closes the gap between specification and reality. Uses Claude's vision capabilities to visually analyze component screenshots and validate them against Northcote Curio design standards.
+Closes the gap between specification and reality. Uses Claude's vision capabilities to visually analyze component screenshots and validate them against  design standards.
 
 This skill transforms design system management from **specification-heavy and hope-driven** to **visually-grounded and continuously validated**.
 

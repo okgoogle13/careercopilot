@@ -9,7 +9,7 @@
 ## Overview
 
 <<<<<<< HEAD
-This implementation addresses the strategic design feedback for Northcote Curio v2.0, focusing on operationalizing the expressiveness architecture that was already built but not fully inhabited. The feedback correctly identified that we had created the foundation for a distinctive personality but hadn't yet specified how to execute it.
+This implementation addresses the strategic design feedback for  v2.0, focusing on operationalizing the expressiveness architecture that was already built but not fully inhabited. The feedback correctly identified that we had created the foundation for a distinctive personality but hadn't yet specified how to execute it.
 =======
 This implementation addresses the strategic design feedback for kerala-rage kr-solidarity v2.0, focusing on operationalizing the expressiveness architecture that was already built but not fully inhabited. The feedback correctly identified that we had created the foundation for a distinctive personality but hadn't yet specified how to execute it.
 >>>>>>> restoration-KR-Rage-Figma-v2.0
@@ -180,7 +180,7 @@ transition: font-variation-settings 600ms cubic-bezier(0.34, 1.56, 0.64, 1);
 **What was added:**
 
 <<<<<<< HEAD
-- Complete micro-copy translation table (Generic SaaS → Northcote Curio)
+- Complete micro-copy translation table (Generic SaaS → )
 - Voice principles and characteristics
 - Context-specific voice shifts (Gallery vs Laboratory)
 - Specimen labels and annotations
@@ -212,7 +212,7 @@ transition: font-variation-settings 600ms cubic-bezier(0.34, 1.56, 0.64, 1);
 
 **Example Translations (Tiered):**
 <<<<<<< HEAD
-| Generic | Northcote Curio | Voice Tier |
+| Generic |  | Voice Tier |
 =======
 | Generic | kerala-rage kr-solidarity | Voice Tier |
 >>>>>>> restoration-KR-Rage-Figma-v2.0
@@ -246,7 +246,7 @@ transition: font-variation-settings 600ms cubic-bezier(0.34, 1.56, 0.64, 1);
 **Impact:**
 
 <<<<<<< HEAD
-- Ensures AI code generation tools (Figma, Copilot, etc.) follow Northcote Curio patterns
+- Ensures AI code generation tools (Figma, Copilot, etc.) follow  patterns
 =======
 - Ensures AI code generation tools (Figma, Copilot, etc.) follow kerala-rage kr-solidarity patterns
 >>>>>>> restoration-KR-Rage-Figma-v2.0
@@ -435,7 +435,7 @@ These can be revisited in future iterations once core expressiveness is implemen
 ## Conclusion
 
 <<<<<<< HEAD
-The strategic design review was correct: **you've built the architecture for expressiveness but haven't yet inhabited it fully.** These documentation updates provide the missing specifications to operationalize the Northcote Curio personality.
+The strategic design review was correct: **you've built the architecture for expressiveness but haven't yet inhabited it fully.** These documentation updates provide the missing specifications to operationalize the  personality.
 =======
 The strategic design review was correct: **you've built the architecture for expressiveness but haven't yet inhabited it fully.** These documentation updates provide the missing specifications to operationalize the kerala-rage kr-solidarity personality.
 >>>>>>> restoration-KR-Rage-Figma-v2.0

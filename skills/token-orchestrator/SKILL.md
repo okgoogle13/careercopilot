@@ -1,6 +1,6 @@
 ---
 name: token-orchestrator
-description: Specialized logic for auditing components, detecting hardcoded values, and mapping them to the Northcote Curio design token set. Streamlines the transformation from generic CSS/Tailwind to localized, theme-aware tokens.
+description: Specialized logic for auditing components, detecting hardcoded values, and mapping them to the  design token set. Streamlines the transformation from generic CSS/Tailwind to localized, theme-aware tokens.
 ---
 
 # Token Orchestrator Skill

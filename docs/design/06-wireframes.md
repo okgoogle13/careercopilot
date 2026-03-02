@@ -1,5 +1,5 @@
 <<<<<<< HEAD
-# The Northcote Curio Wireframe Audit
+# The  Wireframe Audit
 
 ## A Critical Assessment & Asset Integration Manifest
 
@@ -1591,7 +1591,7 @@ Firefly animations should use `will-change: transform, opacity` and be limited t
 
 ---
 
-_This document serves as the definitive implementation guide for the Northcote Curio interface. Each page specification balances functional requirements with the atmospheric intention that distinguishes this system from generic dashboard patterns. The Victorian Naturalist doesn't merely organize data—they curate a collection worthy of wonder._
+_This document serves as the definitive implementation guide for the  interface. Each page specification balances functional requirements with the atmospheric intention that distinguishes this system from generic dashboard patterns. The Victorian Naturalist doesn't merely organize data—they curate a collection worthy of wonder._
 
 ---
 

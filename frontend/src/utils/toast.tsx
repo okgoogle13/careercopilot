@@ -4,7 +4,7 @@ import { CheckCircle, AlertCircle, Info, AlertTriangle } from 'lucide-react';
 
 /**
 <<<<<<< HEAD
- * m3Toast - Northcote Curio Themed Notifications
+ * m3Toast -  Themed Notifications
  * 
  * A wrapper around sonner that applies Curio design tokens and organic styling.
 =======

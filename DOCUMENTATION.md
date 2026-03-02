@@ -176,7 +176,7 @@ See `agents.md` Quick Commands for full reference.
 **A**: Run `firebase emulators:start`. Then set `FIREBASE_EMULATOR_HOST=localhost:8080` in `.env.local`.
 
 <<<<<<< HEAD
-### Q: What's the Northcote Curio design system?
+### Q: What's the  design system?
 **A**: Custom design system with botanical aesthetic (Australian palette, Victorian craftsmanship). See `agents.md` Standards & Patterns and `design-system/tokens.json`.
 =======
 ### Q: What's the kerala-rage kr-solidarity design system?

@@ -55,7 +55,7 @@ const config: Config = {
     extend: {
 <<<<<<< HEAD
       // ============================================
-      // COLORS - Northcote Curio Palette
+      // COLORS -  Palette
       // ============================================
       colors: {
         // Surfaces - Shared

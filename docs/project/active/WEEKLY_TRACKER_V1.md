@@ -1,5 +1,5 @@
 <<<<<<< HEAD
-# Weekly Status Tracker (Northcote Curio Migration)
+# Weekly Status Tracker ( Migration)
 =======
 # Weekly Status Tracker (kerala-rage kr-solidarity Migration)
 >>>>>>> restoration-KR-Rage-Figma-v2.0

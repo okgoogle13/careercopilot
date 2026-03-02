@@ -13,7 +13,7 @@ Career Copilot architectural planning guide for AI agents and developers. This d
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 <<<<<<< HEAD
-│ Frontend Layer (React 18 + TypeScript + Northcote Curio)        │
+│ Frontend Layer (React 18 + TypeScript + )        │
 =======
 │ Frontend Layer (React 18 + TypeScript + kerala-rage kr-solidarity)        │
 >>>>>>> restoration-KR-Rage-Figma-v2.0
@@ -63,7 +63,7 @@ Career Copilot architectural planning guide for AI agents and developers. This d
 | **File Storage**       | Cloud Storage        | Native Firebase integration, resume versioning             | S3, local filesystem     |
 | **Hosting**            | Cloud Run + Firebase | Managed, serverless, automatic scaling, cost-effective     | EC2, Heroku, Railway     |
 <<<<<<< HEAD
-| **Design System**      | Northcote Curio      | Distinctive, botanical aesthetic, M3 compliant             | Material Design, Shadcn  |
+| **Design System**      |       | Distinctive, botanical aesthetic, M3 compliant             | Material Design, Shadcn  |
 =======
 | **Design System**      | kerala-rage kr-solidarity      | Distinctive, [DEPRECATED_STYLE] aesthetic, M3 compliant             | Material Design, Shadcn  |
 >>>>>>> restoration-KR-Rage-Figma-v2.0
@@ -584,10 +584,10 @@ if not profile:
 ## Decision Log
 
 <<<<<<< HEAD
-### Why Northcote Curio over Material Design 3?
+### Why  over Material Design 3?
 
 **Date**: 2025-10-15
-**Decision**: Use Northcote Curio (botanical aesthetic) over Material Design 3
+**Decision**: Use  (botanical aesthetic) over Material Design 3
 **Rationale**:
 
 - Distinctive brand identity (not generic Material)

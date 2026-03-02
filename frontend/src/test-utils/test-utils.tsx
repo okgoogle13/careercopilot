@@ -2,7 +2,7 @@
 <<<<<<< HEAD
  * NORTHCOTE CURIO: TEST UTILITIES
  *
- * Testing utilities for React Testing Library with Northcote Curio design system support.
+ * Testing utilities for React Testing Library with  design system support.
 =======
  * KeralaRage KrSolidarity: TEST UTILITIES
  *

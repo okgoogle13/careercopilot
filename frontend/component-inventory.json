@@ -6476,9 +6476,9 @@
     "71 reusable components lack Storybook stories. Consider documenting: NorthcoteButton, button, PageHeader, Pebble, KeywordTag...",
     "85 components appear unused. Consider archiving or removing them.",
     "23 components are marked as complex (>200 LOC or >10 dependencies). Consider refactoring: Pebble, AnalysisPage, JobQueue, Documents, KSCGenerator...",
-    "24 components mix Northcote Curio tokens with legacy MUI/M3 usage. Consolidate to Curio-only: NorthcoteButton, Pebble, AnalysisPage, JobQueue, EditableField...",
-    "4 components still rely on legacy MUI/M3 without Curio tokens. Migrate to Northcote Curio: Button, chart, collapsible, metric-card",
-    "Northcote Curio Adoption: 48.5% (83/171) fully adopted. Target: 80%+ for complete Curio migration."
+    "24 components mix  tokens with legacy MUI/M3 usage. Consolidate to Curio-only: NorthcoteButton, Pebble, AnalysisPage, JobQueue, EditableField...",
+    "4 components still rely on legacy MUI/M3 without Curio tokens. Migrate to : Button, chart, collapsible, metric-card",
+    " Adoption: 48.5% (83/171) fully adopted. Target: 80%+ for complete Curio migration."
 =======
     "169 components lack test coverage. Consider adding tests for: kerala-rageButton, button, PageHeader, Pebble, KeywordTag...",
     "71 reusable components lack Storybook stories. Consider documenting: kerala-rageButton, button, PageHeader, Pebble, KeywordTag...",

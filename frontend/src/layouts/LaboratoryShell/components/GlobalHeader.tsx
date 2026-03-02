@@ -19,7 +19,7 @@ export const GlobalHeader: React.FC = () => {
         {/* Branding */}
         <div className="flex flex-col">
           <h1 className="font-proclamation text-xl text-wattle-gold tracking-tight">
-            Northcote Curio
+            
           </h1>
           <span className="text-[10px] font-annotation uppercase tracking-widest text-secondary-flannel-dim opacity-70">
             Field Station Alpha

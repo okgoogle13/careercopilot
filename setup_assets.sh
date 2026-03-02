@@ -5,7 +5,7 @@ BASE_DIR="frontend/public/assets/northcote_v1"
 
 # 1. Create the Directory Structure
 <<<<<<< HEAD
-echo "🏛️  Creating Northcote Curio Asset Structure..."
+echo "🏛️  Creating  Asset Structure..."
 =======
 echo "🏛️  Creating Northcote [DEPRECATED_STYLE] Asset Structure..."
 >>>>>>> restoration-KR-Rage-Figma-v2.0
@@ -21,7 +21,7 @@ echo "📝 Generating _manifest.json..."
 cat > "$BASE_DIR/_manifest.json" <<EOF
 {
 <<<<<<< HEAD
-  "project": "Northcote Curio Design System",
+  "project": " Design System",
 =======
   "project": "Northcote [DEPRECATED_STYLE] Design System",
 >>>>>>> restoration-KR-Rage-Figma-v2.0

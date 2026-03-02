@@ -1,6 +1,6 @@
 """
 Token Orchestrator Engine - Component Parser & Token Mapper
-Phase 3 automation for Northcote Curio token integration
+Phase 3 automation for  token integration
 """
 
 import re

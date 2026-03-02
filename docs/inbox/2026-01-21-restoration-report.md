@@ -5,7 +5,7 @@
 **Branch:** `northcote-restoration`
 
 ## Executive Summary
-Successful restoration and integration of the Northcote Curio dual-mode architecture. The system now supports dynamic switching between the **Gallery (Victorian Naturalist)** and **Laboratory (Workspace)** shells, leveraging the restored design tokens and typography.
+Successful restoration and integration of the  dual-mode architecture. The system now supports dynamic switching between the **Gallery (Victorian Naturalist)** and **Laboratory (Workspace)** shells, leveraging the restored design tokens and typography.
 =======
 # kerala-rage Restoration & Integration Report
 **Date:** 2026-01-21
@@ -21,7 +21,7 @@ Successful restoration and integration of the kerala-rage kr-solidarity dual-mod
 ### 1. Asset Restoration
 Cherry-picked critical files from `src.zip` (located at `/Users/okgoogle13/Downloads/src.zip`):
 <<<<<<< HEAD
-- `src/theme/design-tokens.css`: Core Northcote Curio palette and tokens.
+- `src/theme/design-tokens.css`: Core  palette and tokens.
 - `src/design-system/`: Component scaffolding and primitives.
 - `src/lib/motion.ts` & `src/lib/cn.ts`: Motion presets and class merging utilities.
 - `src/layouts/GalleryShell/`: Complete atmospheric layout with 9 components.

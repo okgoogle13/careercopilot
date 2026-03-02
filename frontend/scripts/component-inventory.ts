@@ -1,10 +1,10 @@
 #!/usr/bin/env ts-node
 /**
 <<<<<<< HEAD
- * Component Inventory Generator - Northcote Curio Edition
+ * Component Inventory Generator -  Edition
  *
  * This script analyzes the frontend codebase to generate an accurate inventory
- * of all components, their usage patterns, and Northcote Curio migration status.
+ * of all components, their usage patterns, and  migration status.
 =======
  * Component Inventory Generator - KeralaRage KrSolidarity Edition
  *
@@ -16,13 +16,13 @@
  * - Uses TypeScript AST analysis via ts-morph for accuracy
  * - Detects all import patterns (default, named, dynamic)
 <<<<<<< HEAD
- * - Tracks component dependencies and Northcote Curio migration status
+ * - Tracks component dependencies and  migration status
  * - Identifies test/story file coverage
  * - Categorizes components by type
- * - Analyzes Northcote Curio adoption (token usage, mode system, legacy usage)
+ * - Analyzes  adoption (token usage, mode system, legacy usage)
  * - Generates detailed JSON report with migration recommendations
  *
- * Migration Status Detection (Northcote Curio):
+ * Migration Status Detection ():
  * - 'migrated': Uses Curio tokens/mode system, no legacy MUI/M3 dependencies
  * - 'mixed': Uses Curio tokens/mode system alongside legacy MUI/M3
  * - 'not_migrated': Uses legacy MUI/M3 without Curio tokens
@@ -86,7 +86,7 @@ interface ComponentInfo {
   isDemo: boolean;
   migrationStatus: 'migrated' | 'mixed' | 'not_migrated' | 'unknown';
 <<<<<<< HEAD
-  // Northcote Curio specific fields
+  //  specific fields
 =======
   // KeralaRage KrSolidarity specific fields
 >>>>>>> restoration-KR-Rage-Figma-v2.0
@@ -261,7 +261,7 @@ function analyzeComponents(): InventoryReport {
     });
 
 <<<<<<< HEAD
-    // Determine migration flags and Northcote Curio adoption
+    // Determine migration flags and  adoption
 =======
     // Determine migration flags and KeralaRage KrSolidarity adoption
 >>>>>>> restoration-KR-Rage-Figma-v2.0
@@ -326,7 +326,7 @@ function analyzeComponents(): InventoryReport {
     let migrationStatus: ComponentInfo['migrationStatus'] = 'unknown';
 
 <<<<<<< HEAD
-    // Determine migration status with Northcote Curio detection
+    // Determine migration status with  detection
     const usesCurioSignals = usesDesignTokens || usesModeSystem;
     const usesLegacy = usesMUI || usesLegacyM3;
 
@@ -493,11 +493,11 @@ function analyzeComponents(): InventoryReport {
   }
 
 <<<<<<< HEAD
-  // Northcote Curio specific recommendations
+  //  specific recommendations
   const mixedComponents = components.filter((c) => c.migrationStatus === 'mixed');
   if (mixedComponents.length > 0) {
     recommendations.push(
-      `${mixedComponents.length} components mix Northcote Curio tokens with legacy MUI/M3 usage. Consolidate to Curio-only: ` +
+      `${mixedComponents.length} components mix  tokens with legacy MUI/M3 usage. Consolidate to Curio-only: ` +
 =======
   // KeralaRage KrSolidarity specific recommendations
   const mixedComponents = components.filter((c) => c.migrationStatus === 'mixed');
@@ -517,7 +517,7 @@ function analyzeComponents(): InventoryReport {
   if (notMigratedComponents.length > 0) {
     recommendations.push(
 <<<<<<< HEAD
-      `${notMigratedComponents.length} components still rely on legacy MUI/M3 without Curio tokens. Migrate to Northcote Curio: ` +
+      `${notMigratedComponents.length} components still rely on legacy MUI/M3 without Curio tokens. Migrate to : ` +
 =======
       `${notMigratedComponents.length} components still rely on legacy MUI/M3 without KrSolidarity tokens. Migrate to KeralaRage KrSolidarity: ` +
 >>>>>>> restoration-KR-Rage-Figma-v2.0
@@ -544,7 +544,7 @@ function analyzeComponents(): InventoryReport {
   );
 
 <<<<<<< HEAD
-  // Northcote Curio adoption metrics
+  //  adoption metrics
   const curioAdoption = {
     withCurioTokens: components.filter((c) => c.usesDesignTokens).length,
     withModeSystem: components.filter((c) => c.usesModeSystem).length,
@@ -586,7 +586,7 @@ function analyzeComponents(): InventoryReport {
     100
   ).toFixed(1);
   recommendations.push(
-    `Northcote Curio Adoption: ${fullyCurioPercent}% (${curioAdoption.fullyCurio}/${components.length}) fully adopted. ` +
+    ` Adoption: ${fullyCurioPercent}% (${curioAdoption.fullyCurio}/${components.length}) fully adopted. ` +
       `Target: 80%+ for complete Curio migration.`
 =======
   const fullyKrSolidarityPercent = (
@@ -638,7 +638,7 @@ function main() {
     });
 
 <<<<<<< HEAD
-    console.log(`\n=== Northcote Curio Migration Status ===`);
+    console.log(`\n===  Migration Status ===`);
     console.log(`Migrated (Curio Only): ${report.migrationSummary.migrated}`);
     console.log(`Mixed (Curio + Legacy): ${report.migrationSummary.mixed}`);
     console.log(`Not Migrated (Legacy Only): ${report.migrationSummary.not_migrated}`);

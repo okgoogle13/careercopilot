@@ -166,7 +166,7 @@ Many unique assets (Compass, Specific Botanicals) are currently represented by t
 ## Conclusion
 
 <<<<<<< HEAD
-The application is functionally robust but **aesthetically misaligned** with the specific "Naturalist/Scientific" duality designated in DOC-008. Bringing the tokens and assets into compliance is critical to achieving the intended "Northcote Curio" atmosphere.
+The application is functionally robust but **aesthetically misaligned** with the specific "Naturalist/Scientific" duality designated in DOC-008. Bringing the tokens and assets into compliance is critical to achieving the intended "" atmosphere.
 =======
 The application is functionally robust but **aesthetically misaligned** with the specific "[DEPRECATED_STYLE]/Scientific" duality designated in DOC-008. Bringing the tokens and assets into compliance is critical to achieving the intended "kerala-rage kr-solidarity" atmosphere.
 >>>>>>> restoration-KR-Rage-Figma-v2.0

@@ -62,10 +62,10 @@ Before proceeding, read these files to understand project standards and current 
    - Schema: migrated/mixed/not_migrated/unknown + usageCount + design token adoption
 
 7. **`/Users/okgoogle13/Desktop/careercopilot/frontend/src/theme/tokens.json`**
-   - Canonical Northcote Curio design tokens
+   - Canonical  design tokens
 
 8. **`/Users/okgoogle13/Desktop/careercopilot/frontend/src/theme/northcote.css`**
-   - Northcote Curio CSS variables and mode system
+   -  CSS variables and mode system
 =======
 6. **`/Users/okgoogle13/Projects/careercopilot/frontend/component-inventory.json`**
    - **CRITICAL**: This is the source of truth for component migration status
@@ -93,7 +93,7 @@ After reading all files above, provide:
 
 ### Goal
 <<<<<<< HEAD
-Update the custom "planning/orchestrator" skill to derive migration plans from the **current component inventory report** (`frontend/component-inventory.json`), NOT older M3 Expressive docs. Align everything to **Northcote Curio** (gallery/laboratory) and the new inventory schema.
+Update the custom "planning/orchestrator" skill to derive migration plans from the **current component inventory report** (`frontend/component-inventory.json`), NOT older M3 Expressive docs. Align everything to **** (gallery/laboratory) and the new inventory schema.
 =======
 Update the custom "planning/orchestrator" skill to derive migration plans from the **current component inventory report** (`frontend/component-inventory.json`), NOT older M3 Expressive docs. Align everything to **kerala-rage kr-solidarity** (kr-dark/kr-dark) and the new inventory schema.
 >>>>>>> restoration-KR-Rage-Figma-v2.0
@@ -154,7 +154,7 @@ Parse the new `component-inventory.json` schema:
 - Critical flows: auth, onboarding, gallery/lab shells, applications, documents
 
 #### 4. Update Terminology
-- Replace all references to **"M3 Expressive"** with **"Northcote Curio"**
+- Replace all references to **"M3 Expressive"** with **""**
 =======
 - Critical flows: auth, onboarding, kr-dark/lab shells, applications, documents
 

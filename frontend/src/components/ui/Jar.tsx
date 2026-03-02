@@ -47,9 +47,9 @@ export interface JarProps {
 
 /**
 <<<<<<< HEAD
- * Jar - Northcote Curio Select Dropdown
+ * Jar -  Select Dropdown
  *
- * A custom select component using Northcote Curio design tokens with enhanced UX.
+ * A custom select component using  design tokens with enhanced UX.
  * Features organic shapes, proper elevation, and smooth animations.
  *
  * **Northcote Design Token Usage:**

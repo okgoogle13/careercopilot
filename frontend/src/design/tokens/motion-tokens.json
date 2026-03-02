@@ -1,7 +1,7 @@
 {
     "$schema": "https://design-tokens.org/schema.json",
 <<<<<<< HEAD
-    "name": "Northcote Curio Motion Library",
+    "name": " Motion Library",
     "version": "1.0.0",
     "description": "Comprehensive motion token library quantifying 'Viscous Breeze' physics for Gallery and Laboratory modes",
     "motion": {

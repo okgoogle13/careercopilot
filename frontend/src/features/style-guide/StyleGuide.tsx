@@ -20,7 +20,7 @@ export function StyleGuide() {
         <PageHeader
           title="Living Style Guide"
 <<<<<<< HEAD
-          description="The source of truth for the Northcote Curio aesthetic"
+          description="The source of truth for the  aesthetic"
 =======
           description="The source of truth for the KeralaRage KrSolidarity aesthetic"
 >>>>>>> restoration-KR-Rage-Figma-v2.0
@@ -182,7 +182,7 @@ export function StyleGuide() {
             </p>
             <h1 className="text-display-large font-black transition-all duration-300 group-hover:tracking-wider cursor-default">
 <<<<<<< HEAD
-              Northcote Curio
+              
 =======
               KeralaRage KrSolidarity
 >>>>>>> restoration-KR-Rage-Figma-v2.0
