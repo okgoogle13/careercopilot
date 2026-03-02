@@ -1,7 +1,9 @@
 import { useState, useCallback } from 'react';
 import type { AuditResponse, JobAnalysis, UserProfile } from '../types/intelligence';
-import { analyzeJobDescription, analyzeJobFromUrl, generateIntelligencePackage } from '../services/aiInterface';
+import { analyzeJobDescription, analyzeJobFromUrl, generateIntelligencePackage, enhanceResumeWithMetrics } from '../services/aiInterface';
+import type { ImprovedBullet, SkillsGap } from '../services/aiInterface';
 import { EXPERT_RESUME_AUDITOR_PROMPT } from '../services/prompts';
+
 
 /**
  * Analysis Hook - Enhanced with Portable Intelligence Engine
@@ -12,6 +14,8 @@ import { EXPERT_RESUME_AUDITOR_PROMPT } from '../services/prompts';
  * - AuditResponse 4-quadrant scoring
  * - Expert Resume Auditor persona from MiniMe
  */
+
+export type { ImprovedBullet, SkillsGap };
 
 export interface AnalysisScore {
     overall: number; // 0-100
@@ -49,6 +53,9 @@ export function useAnalysis() {
     const [analyzing, setAnalyzing] = useState(false);
     const [result, setResult] = useState<AnalysisResult | null>(null);
     const [jobAnalysis, setJobAnalysis] = useState<JobAnalysis | null>(null);
+    const [improvedBullets, setImprovedBullets] = useState<ImprovedBullet[]>([]);
+    const [skillsGap, setSkillsGap] = useState<SkillsGap | null>(null);
+    const [enhancing, setEnhancing] = useState(false);
 
     /**
      * Analyze Job Description - Extract intelligence
@@ -186,13 +193,38 @@ export function useAnalysis() {
         }
     }, [jobAnalysis]);
 
+    /**
+     * Enhance Resume with Metrics
+     * Calls POST /api/analysis/enhance-resume and stores improved bullets + skills gap.
+     */
+    const enhanceResume = useCallback(async (
+        resumeText: string,
+        jobDescription: string,
+    ): Promise<void> => {
+        setEnhancing(true);
+        try {
+            const data = await enhanceResumeWithMetrics(resumeText, jobDescription);
+            setImprovedBullets(data.improved_bullets);
+            setSkillsGap(data.skills_gap);
+        } catch (error) {
+            console.error('Resume enhancement failed:', error);
+            throw error;
+        } finally {
+            setEnhancing(false);
+        }
+    }, []);
+
     return {
         analyzeDocument,
         analyzeJob,
         analyzeJobUrl,
+        enhanceResume,
         analyzing,
+        enhancing,
         result,
         jobAnalysis,
+        improvedBullets,
+        skillsGap,
     };
 }
 
