@@ -67,7 +67,7 @@ export function ProfileView() {
           {/* Main Column - Career Strata */}
           <div className="lg:col-span-8 space-y-12">
             <Stone
-              mode="KrDark"
+             
               elevation="raised"
               className="p-10 border-concrete-grey/10 bg-asphalt-black/40 backdrop-blur-md"
             >
@@ -121,7 +121,7 @@ export function ProfileView() {
           {/* Sidebar Column - Traits & Filaments */}
           <div className="lg:col-span-4 space-y-8">
             <Stone
-              mode="KrDark"
+             
               elevation="floating"
               className="p-8 border-concrete-grey/10 bg-asphalt-black/20"
             >
@@ -155,7 +155,7 @@ export function ProfileView() {
             </Stone>
 
             <Stone
-              mode="KrDark"
+             
               elevation="floating"
               className="p-8 border-concrete-grey/10 bg-asphalt-black/20"
             >
@@ -219,7 +219,7 @@ function TimelineItem({
 }) {
   return (
     <Stone
-      mode="KrDark"
+     
       elevation="flat"
       className="p-6 border-concrete-grey/5 bg-white/5 hover:border-ink-gold/20 transition-all group overflow-hidden relative"
     >

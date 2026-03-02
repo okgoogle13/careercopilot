@@ -134,8 +134,8 @@ export function Jar({
   };
 
   const buttonStyle: React.CSSProperties = {
-    borderRadius: 'var(--radius-stone)',
-    backgroundColor: 'rgba(44, 39, 35, 0.4)',
+    borderRadius: '32px 8px 28px 12px', // Jar archetype asymmetric radius
+    backgroundColor: 'var(--sys-color-charcoalBackground-steps-3)',
     border: '2px solid',
     borderColor: error
       ? 'var(--sys-color-solidarityRed-base)'
@@ -143,7 +143,7 @@ export function Jar({
         ? 'var(--sys-color-inkGold-base)'
         : 'var(--sys-color-worker-ash-base)',
     color: 'var(--sys-color-worker-ash-base)',
-    transition: 'all var(--duration-standard) var(--ease-viscous-breeze)',
+    transition: 'all 300ms cubic-bezier(0.34, 1.56, 0.64, 1)',
   };
 
   return (
@@ -173,7 +173,7 @@ export function Jar({
           ${fullWidth ? 'w-full' : 'w-auto min-w-[200px]'}
           px-4 py-3
           flex items-center justify-between gap-3
-          ${isOpen && !error ? 'shadow-[0_0_15px_rgba(212,168,75,0.2)]' : ''}
+          ${isOpen && !error ? 'shadow-[0_0_15px_var(--sys-color-inkGold-steps-0)]' : ''}
           ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:border-[var(--color-concrete-grey-dark)]'}
           ${className}
         `}

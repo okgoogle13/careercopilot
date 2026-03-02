@@ -167,7 +167,7 @@ function ApplicationLeaf({ application }: { application: Application }) {
       animate={{ opacity: 1, y: 0 }}
     >
       <Stone
-        mode="KrDark"
+       
         elevation="floating"
         className="p-5 border-concrete-grey/10 bg-asphalt-black/40 backdrop-blur-sm group relative overflow-hidden"
       >

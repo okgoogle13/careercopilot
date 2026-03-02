@@ -61,18 +61,17 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({
             border: `var(--ref-palette-${base}-80)`,
         };
 
-        // Dark mode overrides (KrDark/KrDark root is deep charcoal)
-        // Adjusting for high contrast on dark backgrounds
+        // Solidarity mode color overrides using semantic tokens
         if (base === 'neutral') {
-            styles.bg = 'rgba(230, 225, 214, 0.1)';
-            styles.text = 'var(--color-concrete-grey)';
-            styles.dot = 'var(--color-concrete-grey-dark)';
-            styles.border = 'rgba(230, 225, 214, 0.2)';
+            styles.bg = 'var(--sys-color-concreteGrey-steps-0)';
+            styles.text = 'var(--sys-color-concreteGrey-base)';
+            styles.dot = 'var(--sys-color-concreteGrey-steps-4)';
+            styles.border = 'var(--sys-color-concreteGrey-steps-1)';
         } else if (base === 'warning') {
-            styles.text = 'var(--color-ink-gold)';
-            styles.bg = 'rgba(212, 168, 75, 0.15)';
-            styles.border = 'rgba(212, 168, 75, 0.3)';
-            styles.dot = 'var(--color-ink-gold)';
+            styles.text = 'var(--sys-color-inkGold-base)';
+            styles.bg = 'var(--sys-color-inkGold-steps-0)';
+            styles.border = 'var(--sys-color-inkGold-steps-2)';
+            styles.dot = 'var(--sys-color-inkGold-base)';
         }
 
         return styles;

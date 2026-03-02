@@ -117,7 +117,7 @@ export const IngestionPage: React.FC = () => {
       <div className="absolute bottom-10 right-10 w-96 h-96 grayscale opacity-5 pointer-events-none border-l border-t border-concrete-grey/20 rounded-tl-[120px]" />
 
       <Stone
-        mode="KrDark"
+       
         elevation="floating"
         className="max-w-2xl w-full border-2 border-concrete-grey/5 shadow-maximum relative z-10"
       >

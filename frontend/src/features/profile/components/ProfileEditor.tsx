@@ -138,7 +138,7 @@ export const ProfileEditor: React.FC<ProfileEditorProps> = ({ onNext, onBack }) 
           {/* Left Column - The "Glass Case" Visual (ASSET-07) */}
           <motion.div variants={KrDarkSpring} className="lg:col-span-4 space-y-8">
             <Stone
-              mode="KrDark"
+             
               elevation="floating"
               className="aspect-[4/5] overflow-hidden relative border-bark-base/20 group"
             >
@@ -256,7 +256,7 @@ export const ProfileEditor: React.FC<ProfileEditorProps> = ({ onNext, onBack }) 
                   disabled={isGenerating}
                   className="flex items-center gap-2 font-mono text-[10px] text-leaf-dark uppercase tracking-widest hover:text-leaf-base disabled:opacity-50 transition-colors group"
                 >
-                  <AnimatePresence mode="wait">
+                  <AnimatePresence>
                     {isGenerating ? (
                       <motion.div
                         key="loading"
