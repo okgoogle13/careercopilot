@@ -1,3 +1,17 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:4814b83d54c3f59f51d49751a4ada38293284662b1ebc42b1922375e81e7dbc2
-size 3572
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="KR-UI-017-title KR-UI-017-desc">
+  <title id="KR-UI-017-title">KR-UI-017 Skill Achievement Badge Set</title>
+  <desc id="KR-UI-017-desc">Contract-valid placeholder for KR-UI-017</desc>
+  <g id="base">
+    <rect x="32" y="32" width="448" height="448" rx="32" fill="var(--kr-surface)" stroke="var(--kr-text)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <g id="content">
+    <path d="M96 352 L176 272 L256 320 L336 208 L416 256" fill="none" stroke="var(--kr-primary)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="176" cy="272" r="16" fill="var(--kr-secondary)"/>
+    <circle cx="336" cy="208" r="16" fill="var(--kr-secondary)"/>
+  </g>
+  <g id="accent">
+    <path d="M128 128 Q256 64 384 128" fill="none" stroke="var(--kr-tertiary)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M128 384 Q256 448 384 384" fill="none" stroke="var(--kr-text)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>

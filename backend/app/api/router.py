@@ -11,6 +11,7 @@ from fastapi import APIRouter
 from .endpoints import (
     analysis,
     applications,
+    auth,
     chrome_extension,
     config,
     documents,
@@ -26,7 +27,7 @@ api_router = APIRouter()
 # Include all routers with their respective prefixes
 routers = [
     (analysis.router, "/analysis", "Analysis"),
-    # (auth.router, "/auth", "Authentication"),
+    (auth.router, "/auth", "Authentication"),
     (config.router, "/config", "Configuration"),
     (documents.router, "/documents", "Documents"),
     (workflows.router, "/workflows", "Workflows"),

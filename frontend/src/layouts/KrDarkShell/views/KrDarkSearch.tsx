@@ -15,7 +15,7 @@ export const KrDarkSearch: React.FC = () => {
     { title: 'Logistics Coordinator', company: 'Global Front', match: '98%', id: 'JOB_A' },
     { title: 'Security Architect', company: 'Sentry Core', match: '94%', id: 'JOB_B' },
     { title: 'Community Liaison', company: 'Collective Hub', match: '89%', id: 'JOB_C' },
-    { title: 'Data [DEPRECATED_STYLE]', company: 'Archive Prime', match: '85%', id: 'JOB_D' },
+    { title: 'Data Steward', company: 'Archive Prime', match: '85%', id: 'JOB_D' },
     { title: 'Tactical Analyst', company: 'Mission Control', match: '82%', id: 'JOB_E' },
   ];
 
@@ -28,7 +28,7 @@ export const KrDarkSearch: React.FC = () => {
           <input 
             type="text" 
             placeholder="PROBE THE COLLECTIVE ARCHIVE..."
-            className="w-full bg-asphalt-black/40 border border-white/5 rounded-pebble px-8 py-5 font-mono text-sm text-paper-white focus:outline-none focus:border-ink-gold/40 focus:ring-1 focus:ring-ink-gold/20 transition-all duration-500 shadow-viscous"
+            className="w-full rounded-pebble border border-surface-KrDark-concrete-grey-high/20 bg-asphalt-black/40 px-8 py-5 font-mono text-sm text-paper-white shadow-viscous transition-all duration-500 focus:border-ink-gold/40 focus:outline-none focus:ring-1 focus:ring-ink-gold/20"
           />
           <div className="absolute right-6 top-1/2 -translate-y-1/2 opacity-20 pointer-events-none">
             <span className="font-mono text-[10px] tracking-widest uppercase">CTRL_S</span>
@@ -41,14 +41,14 @@ export const KrDarkSearch: React.FC = () => {
         {/* SECTION 2: Filter Column */}
         <UnifiedColumn 
           title="TACTICAL_FILTERS" 
-          className="w-72 shrink-0 h-full hidden lg:block border-r border-white/5 pr-8"
+          className="w-72 shrink-0 h-full hidden lg:block border-r border-surface-KrDark-concrete-grey-high/20 pr-8"
         >
           <div className="space-y-10">
             <div className="space-y-4">
               <label className="font-annotation text-[9px] uppercase tracking-[0.4em] text-paper-white/30">Sector Density</label>
               <div className="flex flex-wrap gap-2">
                 {['Logistics', 'Defense', 'Extraction', 'Community'].map(tag => (
-                  <span key={tag} className="px-3 py-1 bg-white/5 border border-white/5 rounded-pebble text-[10px] font-mono font-bold uppercase text-paper-white/40 hover:text-ink-gold hover:border-ink-gold/20 cursor-pointer transition-colors">
+                  <span key={tag} className="rounded-pebble border border-surface-KrDark-concrete-grey-high/20 bg-surface-KrDark-concrete-grey-high/10 px-3 py-1 text-[10px] font-mono font-bold uppercase text-paper-white/40 transition-colors cursor-pointer hover:border-ink-gold/20 hover:text-ink-gold">
                     {tag}
                   </span>
                 ))}
@@ -57,7 +57,7 @@ export const KrDarkSearch: React.FC = () => {
 
             <div className="space-y-4">
               <label className="font-annotation text-[9px] uppercase tracking-[0.4em] text-paper-white/30">Match Minimum</label>
-              <div className="relative h-1 bg-white/5 rounded-full overflow-hidden">
+              <div className="relative h-1 rounded-full overflow-hidden bg-surface-KrDark-concrete-grey-high/20">
                 <div className="absolute left-0 top-0 h-full w-3/4 bg-ink-gold/40" />
               </div>
               <div className="flex justify-between font-mono text-[10px] text-paper-white/20">

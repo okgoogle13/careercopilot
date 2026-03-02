@@ -38,6 +38,14 @@
           "opacity": 1,
           "blend_mode": "normal",
           "position": "center"
+        },
+        {
+          "type": "atmospheric",
+          "asset_id": "KR-SOLID-009",
+          "z_index": 4,
+          "opacity": 0.5,
+          "blend_mode": "screen",
+          "position": "center"
         }
       ],
       "typography": {
@@ -97,6 +105,14 @@
           "z_index": 3,
           "opacity": 1,
           "blend_mode": "normal",
+          "position": "center"
+        },
+        {
+          "type": "atmospheric",
+          "asset_id": "KR-SOLID-002",
+          "z_index": 4,
+          "opacity": 0.4,
+          "blend_mode": "overlay",
           "position": "center"
         }
       ],
@@ -226,6 +242,14 @@
           "opacity": 1,
           "blend_mode": "normal",
           "position": "center"
+        },
+        {
+          "type": "atmospheric",
+          "asset_id": "KR-SOLID-003",
+          "z_index": 4,
+          "opacity": 0.3,
+          "blend_mode": "soft-light",
+          "position": "center"
         }
       ],
       "typography": {
@@ -346,6 +370,14 @@
           "opacity": 1.0,
           "blend_mode": "normal",
           "position": "center"
+        },
+        {
+          "type": "atmospheric",
+          "asset_id": "KR-SOLID-004",
+          "z_index": 4,
+          "opacity": 0.2,
+          "blend_mode": "overlay",
+          "position": "center"
         }
       ],
       "typography": {
@@ -398,6 +430,22 @@
           "opacity": 1.0,
           "blend_mode": "normal",
           "position": "center"
+        },
+        {
+          "type": "atmospheric",
+          "asset_id": "KR-SOLID-008",
+          "z_index": 3,
+          "opacity": 0.6,
+          "blend_mode": "color-dodge",
+          "position": "center"
+        },
+        {
+          "type": "atmospheric",
+          "asset_id": "KR-SOLID-006",
+          "z_index": 4,
+          "opacity": 0.25,
+          "blend_mode": "screen",
+          "position": "right"
         }
       ],
       "typography": {

@@ -6,7 +6,7 @@ import { ManifestoSlab, SolidarityCard, ActionButton } from '../../../components
  * KrDarkApplication (Hi-Fi)
  * 
  * Formal engagement submission flow.
- * Features multi-step induction logic, drafting aesthetics, and [DEPRECATED_STYLE] motivation prompts.
+ * Features multi-step induction logic, drafting aesthetics, and motivation prompts.
  */
 export const KrDarkApplication: React.FC = () => {
   const shouldReduceMotion = useReducedMotion() ?? false;
@@ -43,7 +43,7 @@ export const KrDarkApplication: React.FC = () => {
             
             <div className="relative">
               <textarea 
-                className="w-full h-64 bg-asphalt-black/50 border border-white/5 rounded-stone p-8 font-body text-lg leading-relaxed text-paper-white placeholder:text-paper-white/10 focus:outline-none focus:border-ink-gold/40 focus:ring-1 focus:ring-ink-gold/10 transition-all duration-500 resize-none shadow-viscous"
+                className="w-full h-64 bg-asphalt-black/50 border border-surface-KrDark-concrete-grey-high/20 rounded-stone p-8 font-body text-lg leading-relaxed text-paper-white placeholder:text-paper-white/10 focus:outline-none focus:border-ink-gold/40 focus:ring-1 focus:ring-ink-gold/10 transition-all duration-500 resize-none shadow-viscous"
                 placeholder="Declare why your extracted mastery aligns with this specific tactical front line..."
               />
               <div className="absolute bottom-4 right-6 pointer-events-none opacity-20">
@@ -52,13 +52,13 @@ export const KrDarkApplication: React.FC = () => {
             </div>
           </div>
 
-          <div className="flex flex-col md:flex-row justify-between items-center gap-8 pt-10 border-t border-white/5">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-8 pt-10 border-t border-surface-KrDark-concrete-grey-high/20">
             <div className="flex items-center gap-4">
               <span className="font-mono text-[9px] text-paper-white/30 uppercase tracking-widest mr-4">SEQUENCE:</span>
               <div className="flex gap-3">
                 <div className="w-5 h-1 bg-ink-gold rounded-full shadow-ink-glow" />
-                <div className="w-5 h-1 bg-white/10 rounded-full" />
-                <div className="w-5 h-1 bg-white/10 rounded-full" />
+                <div className="w-5 h-1 bg-surface-KrDark-concrete-grey-high/25 rounded-full" />
+                <div className="w-5 h-1 bg-surface-KrDark-concrete-grey-high/25 rounded-full" />
               </div>
               <span className="font-mono text-[10px] text-paper-white/40 ml-4 group-hover:text-ink-gold transition-colors">01 / 03</span>
             </div>

@@ -1095,7 +1095,7 @@
       "category": "ui-kit",
       "layer": "ui-kit",
       "aspect_ratio": "1:1",
-      "file_path": "/assets/kr-solidarity/ui-kit/svg/icons/kr-solidarity__ui-kit__KR-UI-016__v1.svg",
+      "file_path": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__KR-UI-016__v1.svg",
       "priority": "MEDIUM",
       "semantics": {
         "functional_role": "ui-element",
@@ -1126,7 +1126,7 @@
       "category": "ui-kit",
       "layer": "ui-kit",
       "aspect_ratio": "1:1",
-      "file_path": "/assets/kr-solidarity/ui-kit/svg/icons/kr-solidarity__ui-kit__KR-UI-017__v1.svg",
+      "file_path": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__KR-UI-017__v1.svg",
       "priority": "MEDIUM",
       "semantics": {
         "functional_role": "ui-element",
@@ -2335,7 +2335,7 @@
       "category": "brand",
       "layer": "ui-kit",
       "aspect_ratio": "16:9",
-      "file_path": "/assets/kr-solidarity/ui-kit/logos/KR-LOGO-001-primary.svg",
+      "file_path": "/assets/kr-solidarity/ui-kit/svg/KR-LOGO-001-primary.svg",
       "priority": "CRITICAL",
       "semantics": {
         "functional_role": "brand-identity",
@@ -2364,7 +2364,7 @@
       "category": "brand",
       "layer": "ui-kit",
       "aspect_ratio": "1:1",
-      "file_path": "/assets/kr-solidarity/ui-kit/logos/KR-LOGO-002-poster.svg",
+      "file_path": "/assets/kr-solidarity/ui-kit/svg/KR-LOGO-002-poster.svg",
       "priority": "HIGH",
       "semantics": {
         "functional_role": "brand-identity",
@@ -2393,7 +2393,7 @@
       "category": "brand",
       "layer": "ui-kit",
       "aspect_ratio": "1:1",
-      "file_path": "/assets/kr-solidarity/ui-kit/logos/KR-LOGO-003-mono.svg",
+      "file_path": "/assets/kr-solidarity/ui-kit/svg/KR-LOGO-003-mono.svg",
       "priority": "MEDIUM",
       "semantics": {
         "functional_role": "brand-identity",
@@ -2422,7 +2422,7 @@
       "category": "icons",
       "layer": "ui-kit",
       "aspect_ratio": "1:1",
-      "file_path": "/assets/kr-solidarity/ui-kit/icons/KR-ICON-001-leaf.svg",
+      "file_path": "/assets/kr-solidarity/ui-kit/svg/KR-ICON-001-leaf.svg",
       "priority": "MEDIUM",
       "semantics": {
         "functional_role": "icon-anchor",
@@ -2451,7 +2451,7 @@
       "category": "icons",
       "layer": "ui-kit",
       "aspect_ratio": "1:1",
-      "file_path": "/assets/kr-solidarity/ui-kit/icons/KR-ICON-002-tram.svg",
+      "file_path": "/assets/kr-solidarity/ui-kit/svg/KR-ICON-002-tram.svg",
       "priority": "MEDIUM",
       "semantics": {
         "functional_role": "icon-anchor",
@@ -2480,7 +2480,7 @@
       "category": "icons",
       "layer": "ui-kit",
       "aspect_ratio": "1:1",
-      "file_path": "/assets/kr-solidarity/ui-kit/icons/KR-ICON-003-lotus.svg",
+      "file_path": "/assets/kr-solidarity/ui-kit/svg/KR-ICON-003-lotus.svg",
       "priority": "MEDIUM",
       "semantics": {
         "functional_role": "icon-anchor",
@@ -2509,7 +2509,7 @@
       "category": "icons",
       "layer": "ui-kit",
       "aspect_ratio": "1:1",
-      "file_path": "/assets/kr-solidarity/ui-kit/icons/KR-ICON-004-wheat.svg",
+      "file_path": "/assets/kr-solidarity/ui-kit/svg/KR-ICON-004-wheat.svg",
       "priority": "MEDIUM",
       "semantics": {
         "functional_role": "icon-anchor",

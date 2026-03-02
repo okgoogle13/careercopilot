@@ -8,7 +8,7 @@ export interface StatusBadgeProps {
     label: string;
     /** Semantic status variant */
     variant?: StatusBadgeVariant;
-    /** Theme mode: KrDark (warm, [DEPRECATED_STYLE]) or KrDark (clinical, precise) */
+    /** Theme mode: KrDark (warm) or KrLight (clinical, precise) */
     mode?: StatusBadgeMode;
     /** Optional dot indicator */
     showDot?: boolean;
@@ -19,12 +19,12 @@ export interface StatusBadgeProps {
 /**
  * StatusBadge - KeralaRage KrSolidarity Status Indicator
  *
- * Supports both KrDark (warm, [DEPRECATED_STYLE]) and KrDark (clinical, precise) modes.
+ * Supports both KrDark (warm) and KrLight (clinical, precise) modes.
  *
  * **KeralaRage Token Usage:**
  * - Typography: `font-annotation` (Uppercase, tracked)
  * - Color: Semantic status colors (success, warning, error, info)
- * - Shape: `radius-seed` ([DEPRECATED_STYLE] asymmetry for badges)
+ * - Shape: `radius-seed` (subtle asymmetry for badges)
  * - Motion: `ease-viscous` (Hover animation)
  *
  * **Variants:**
@@ -44,7 +44,7 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({
     // KeralaRage KrSolidarity Palette Mappings
     const getVariantStyles = () => {
         const colorMap: Record<StatusBadgeVariant, string> = {
-            success: 'primary',    // Sage ([DEPRECATED_STYLE])
+            success: 'primary',    // Sage
             warning: 'warning',    // Gold (Highlight)
             error: 'error',        // Crimson (Alert)
             info: 'secondary',     // Coral (Dynamic)

@@ -60,12 +60,12 @@ export const KrDarkSettings: React.FC = () => {
               <h2 className="font-proclamation text-2xl uppercase text-paper-white/80 shrink-0">
                 {cat.title}
               </h2>
-              <div className="h-px flex-1 bg-white/5" />
+              <div className="h-px flex-1 bg-surface-KrDark-concrete-grey-high/20" />
             </div>
 
             <div className="space-y-4">
               {cat.settings.map((setting) => (
-                <SolidarityCard key={setting.label} className="p-10 group hover:border-white/10 transition-colors">
+                <SolidarityCard key={setting.label} className="p-10 group hover:border-surface-KrDark-concrete-grey-high/30 transition-colors">
                   <div className="flex items-center justify-between gap-12">
                     <div className="space-y-2">
                        <h4 className="font-proclamation text-xl uppercase text-paper-white/90 group-hover:text-ink-gold transition-colors">
@@ -77,7 +77,7 @@ export const KrDarkSettings: React.FC = () => {
                     </div>
 
                     {/* Toggle Interaction */}
-                    <div className={`w-14 h-7 rounded-full relative cursor-pointer transition-colors duration-500 pb-px ${setting.active ? 'bg-ink-gold' : 'bg-white/5 border border-white/5 shadow-inner'}`}>
+                    <div className={`w-14 h-7 rounded-full relative cursor-pointer transition-colors duration-500 pb-px ${setting.active ? 'bg-ink-gold' : 'bg-surface-KrDark-concrete-grey-high/10 border border-surface-KrDark-concrete-grey-high/20 shadow-inner'}`}>
                       <motion.div 
                         animate={setting.active ? { x: 28 } : { x: 4 }}
                         className={`absolute top-1 w-5 h-5 rounded-full shadow-viscous ${setting.active ? 'bg-asphalt-black' : 'bg-paper-white/20'}`}
@@ -110,7 +110,7 @@ export const KrDarkSettings: React.FC = () => {
       </div>
 
       {/* SECTION 3: The Command Linkage */}
-      <div className="flex justify-end items-center gap-8 mt-12 py-10 border-t border-white/5">
+      <div className="flex justify-end items-center gap-8 mt-12 py-10 border-t border-surface-KrDark-concrete-grey-high/20">
         <ActionButton variant="secondary" label="RESET DEFAULTS" className="px-10 py-4 text-[10px] tracking-widest text-paper-white/20" />
         <ActionButton variant="primary" label="COMMIT CHANGES" className="px-16 py-4 text-[10px] tracking-[0.2em] shadow-viscous" />
       </div>

@@ -113,7 +113,7 @@ export const KeralaRageButton = React.forwardRef<HTMLButtonElement, KeralaRageBu
           currentVariant.shadow,
           currentVariant.border,
 
-          // [DEPRECATED_STYLE] asymmetry (KrDark) or precise (KrDark)
+          // Rounded pebble in KrDark, sharper stone in KrLight.
           mode === 'KrDark'
             ? 'rounded-[var(--radius-pebble)]'
             : 'rounded-[var(--radius-stone)]',
