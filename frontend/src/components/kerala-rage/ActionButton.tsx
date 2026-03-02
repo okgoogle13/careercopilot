@@ -90,8 +90,8 @@ export const ActionButton = React.forwardRef<HTMLButtonElement, ActionButtonProp
           sizeStyles[size],
           className
         )}
-        {...motionProps}
-        {...props}
+        {...(motionProps as any)}
+        {...(props as any)}
       >
         {label}
       </motion.button>

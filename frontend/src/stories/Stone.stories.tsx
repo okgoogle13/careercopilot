@@ -8,10 +8,6 @@ const meta: Meta<typeof Stone> = {
   component: Stone,
   tags: ['autodocs'],
   argTypes: {
-    mode: {
-      control: 'select',
-      options: ['KrDark', 'KrDark'],
-    },
     elevation: {
       control: 'select',
       options: ['flat', 'raised', 'floating'],
@@ -24,7 +20,6 @@ type Story = StoryObj<typeof Stone>;
 
 export const Default: Story = {
   args: {
-    mode: 'KrDark',
     elevation: 'raised',
     header: (
       <div className="flex items-center gap-3">
@@ -55,9 +50,8 @@ export const Default: Story = {
   },
 };
 
-export const KrDark: Story = {
+export const Floating: Story = {
   args: {
-    mode: 'KrDark',
     elevation: 'floating',
     header: (
       <div className="flex items-center justify-between w-full">

@@ -58,8 +58,8 @@ export const ManifestoSlab: React.FC<ManifestoSlabProps> = ({
         'p-10 md:p-16 relative overflow-hidden z-20',
         className
       )}
-      {...motionProps}
-      {...props}
+      {...(motionProps as any)}
+      {...(props as any)}
     >
       {/* TODO[asset]: Replace with Kerala Rage motif background overlay from manifest */}
       {/* <div className="absolute top-0 right-0 w-64 h-64 opacity-5 pointer-events-none z-0 bg-motif-signal" /> */}

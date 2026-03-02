@@ -1,4 +1,4 @@
-aimport admin from "firebase-admin";
+import admin from "firebase-admin";
 import {z} from "genkit";
 import https from "https";
 import {ai} from "../genkit";
