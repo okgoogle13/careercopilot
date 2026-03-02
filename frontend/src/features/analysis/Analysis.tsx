@@ -24,6 +24,8 @@ import { KeywordTag } from '../../components/shared/KeywordTag';
 import { PageHeader } from '../../components/shared/PageHeader';
 import { ChartPane } from '../../components/shared/ChartPane';
 import { ImpactEnhancements } from '../../components/shared/ImpactEnhancements';
+import { BulletMetricsSuggestor } from './BulletMetricsSuggestor';
+import { SkillsMatchPanel } from './SkillsMatchPanel';
 import { Button } from '@careercopilot/ui';
 import { Textarea } from '@careercopilot/ui';
 import { useAnalysis } from '../../hooks/useAnalysis';
@@ -118,7 +120,7 @@ const MISSING_KEYWORDS: string[] = [
 // ============================================================================
 
 export function Analysis() {
-  const { analyzeDocument, analyzeJobUrl, analyzing, result, jobAnalysis } = useAnalysis();
+  const { analyzeDocument, analyzeJobUrl, analyzing, result, jobAnalysis, enhanceResume, enhancing, improvedBullets, skillsGap } = useAnalysis();
   const [documentText, setDocumentText] = useState('');
   const [jobDescription, setJobDescription] = useState('');
   const [jobUrl, setJobUrl] = useState('');
@@ -543,6 +545,13 @@ export function Analysis() {
           </div>
         </ChartPane>
 
+        {/* Skills Match Panel – shown when enhanced data is available */}
+        {skillsGap && (
+          <div className="mt-8">
+            <SkillsMatchPanel skillsGap={skillsGap} />
+          </div>
+        )}
+
         {/* Verified Sources - Citations from Google Search Grounding */}
         {jobAnalysis?.sources && (
           <div className="mt-8 bg-surface-container rounded-tech p-8 border border-outline-variant shadow-elevation-1">
@@ -650,6 +659,26 @@ export function Analysis() {
         {result?.quantifiers && result.quantifiers.length > 0 && (
           <div className="mt-8">
             <ImpactEnhancements suggestions={result.quantifiers} />
+          </div>
+        )}
+
+        {/* Bullet Metrics Suggestor – always visible below resume inputs */}
+        {(!showInputs || documentText) && (
+          <div className="mt-8">
+            <BulletMetricsSuggestor
+              bullets={improvedBullets}
+              onSuggestMetrics={() =>
+                toast.promise(
+                  enhanceResume(documentText, jobDescription),
+                  {
+                    loading: 'Enhancing bullets with metrics…',
+                    success: 'Metrics added! Scroll down to review.',
+                    error: 'Enhancement failed. Please try again.',
+                  }
+                )
+              }
+              loading={enhancing}
+            />
           </div>
         )}
       </div>

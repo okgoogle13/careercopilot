@@ -244,3 +244,52 @@ export const generateIntelligencePackage = async (
   if (!responseText) throw new Error('AI failed to generate response.');
   return JSON.parse(responseText) as IntelligencePackage;
 };
+
+// ---------------------------------------------------------------------------
+// Resume Optimizer – Metrics Enhancement (calls FastAPI backend)
+// ---------------------------------------------------------------------------
+
+export interface ImprovedBullet {
+  original: string;
+  improved: string;
+  metric_type: 'number' | 'percentage' | 'timeframe' | 'scale';
+  rationale: string;
+}
+
+export interface SkillsGap {
+  matched: string[];
+  missing: string[];
+  adjacent: string[];
+  match_score: number;
+}
+
+export interface EnhanceResumeResult {
+  improved_bullets: ImprovedBullet[];
+  skills_gap: SkillsGap;
+}
+
+/**
+ * Calls POST /api/analysis/enhance-resume on the FastAPI backend.
+ * Returns improved bullets (Google XYZ formula) + a structured skills-gap block.
+ */
+export const enhanceResumeWithMetrics = async (
+  resumeText: string,
+  jobDescription: string
+): Promise<EnhanceResumeResult> => {
+  const apiBase = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:8000';
+  const url = `${apiBase}/api/analysis/enhance-resume`;
+
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    credentials: 'include',
+    body: JSON.stringify({ resume_text: resumeText, job_description: jobDescription }),
+  });
+
+  if (!response.ok) {
+    const detail = await response.text();
+    throw new Error(`enhance-resume failed (${response.status}): ${detail}`);
+  }
+
+  return response.json() as Promise<EnhanceResumeResult>;
+};
