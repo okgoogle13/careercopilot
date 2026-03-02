@@ -19,7 +19,7 @@ const VERSION = process.env.npm_package_version ?? 'unknown';
 export const healthCheck = functions.https.onRequest(async (req, res) => {
   // Only allow GET
   if (req.method !== 'GET') {
-    res.status(405).json({ error: 'Method Not Allowed' });
+    res.status(405).json({error: 'Method Not Allowed'});
     return;
   }
 

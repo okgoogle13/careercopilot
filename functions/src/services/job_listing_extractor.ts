@@ -1,16 +1,9 @@
 // @ts-expect-error - TS2497: esModuleInterop is enabled, but TypeScript 5.9 still complains about namespace import
 import * as admin from "firebase-admin";
 import * as firebase from "firebase-admin/firestore";
-// @ts-expect-error - TS2305: Module '@genkit-ai/core' has no exported member 'genkit' (Genkit API mismatch)
-import { genkit } from "@genkit-ai/core";
-// @ts-expect-error - TS2307: Cannot find module '@genkit-ai/flow' (package may not be installed)
-import { defineFlow } from "@genkit-ai/flow";
-import { JobListing } from "../types/job_listing";
-import { FirebaseVectorSearch } from "../lib/firebase_vector_search";
+import {JobListing} from "../types/job_listing";
+import {FirebaseVectorSearch} from "../lib/firebase_vector_search";
 import https from "https";
-
-// Configure Genkit to use the default model
-const model = genkit.model("gemini-pro");
 
 export class JobListingExtractor {
   private vectorSearch: FirebaseVectorSearch<JobListing>;
@@ -24,57 +17,36 @@ export class JobListingExtractor {
   /**
    * Extract job listing from text or URL
    */
-  extract = defineFlow(
-    {
-      name: "extractJobListing",
-      inputSchema: {
-        type: "object",
-        properties: {
-          source: { type: "string" },
-          options: {
-            type: "object",
-            properties: {
-              extractSkills: { type: "boolean", default: true },
-              extractSalary: { type: "boolean", default: true },
-              extractLocation: { type: "boolean", default: true },
-            },
-          },
-        },
-      },
-      outputSchema: {
-        type: "object",
-        properties: {
-          job: { $ref: "JobListing" },
-          metadata: { type: "object" },
-        },
-      },
-    },
-    async ({
-      source,
-      options = { extractSkills: true, extractSalary: true, extractLocation: true },
-    }) => {
-      const text = typeof source === "string" ? source : await this.fetchUrl(source.url);
+  async extract(data: {
+    source: string | { url: string };
+    options?: {
+      extractSkills?: boolean;
+      extractSalary?: boolean;
+      extractLocation?: boolean;
+    };
+  }): Promise<JobListing> {
+    const {source, options = {extractSkills: true, extractSalary: true, extractLocation: true}} = data;
+    const text = typeof source === "string" ? source : await this.fetchUrl(source.url);
 
-      // Basic job listing extraction
-      const jobListing: JobListing = {
-        id: this.generateId(),
-        title: this.extractTitle(text),
-        company: this.extractCompany(text),
-        description: text,
-        skills: options.extractSkills ? this.extractSkills(text) : [],
-        salary: options.extractSalary ? this.extractSalary(text) : undefined,
-        location: options.extractLocation ? this.extractLocation(text) : undefined,
-        source: typeof source === "string" ? "text" : source.url,
-        createdAt: admin.firestore.FieldValue.serverTimestamp(),
-      };
+    // Basic job listing extraction
+    const jobListing: JobListing = {
+      id: this.generateId(),
+      title: this.extractTitle(text),
+      company: this.extractCompany(text),
+      description: text,
+      skills: options.extractSkills ? this.extractSkills(text) : [],
+      salary: options.extractSalary ? this.extractSalary(text) : undefined,
+      location: options.extractLocation ? this.extractLocation(text) : undefined,
+      source: typeof source === "string" ? "text" : source.url,
+      createdAt: admin.firestore.FieldValue.serverTimestamp(),
+    };
 
-      // Generate and store embedding
-      const embedding = await this.generateEmbedding(jobListing);
-      await this.vectorSearch.upsert(jobListing.id, embedding, jobListing);
+    // Generate and store embedding
+    const embedding = await this.generateEmbedding(jobListing);
+    await this.vectorSearch.upsert(jobListing.id, embedding, jobListing);
 
-      return jobListing;
-    },
-  );
+    return jobListing;
+  }
 
   /**
    * Find similar job listings
@@ -97,7 +69,7 @@ export class JobListingExtractor {
       minScore: data.minScore,
       filters: data.filters,
     });
-    return results.map(({ id: _id, score, metadata }) => ({
+    return results.map(({id: _id, score, metadata}) => ({
       job: metadata,
       score,
     }));
@@ -193,13 +165,14 @@ export class JobListingExtractor {
   }): Promise<number[]> {
     const text = `${job.title} ${job.company || ""} ${job.description}`.trim();
 
-    // Use Genkit to generate embeddings
-    const response = await model.embed({
-      content: text,
-      taskType: "retrieval_document",
-    });
-
-    return response.embedding;
+    // Simple hash-based embedding (for deployment unblocking)
+    // TODO: Replace with proper embedding model (Vertex AI, OpenAI, etc.)
+    const hash = this.hashString(text);
+    const vector: number[] = [];
+    for (let i = 0; i < 384; i++) {
+      vector.push(((hash + i) % 1000) / 1000);
+    }
+    return this.normalizeVector(vector);
   }
 
   private hashString(str: string): number {

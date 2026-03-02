@@ -1,0 +1,4 @@
+interface:
+  display_name: "Sprint Coordinator"
+  short_description: "Run sprint planning and release cadence"
+  default_prompt: "Use $sprint-coordinator to turn sprint goals into milestones, task dependencies, readiness scoring, and daily status artifacts."

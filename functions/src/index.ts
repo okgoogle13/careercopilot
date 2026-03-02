@@ -40,37 +40,43 @@ export const enqueueJobProcessing = functions.https.onCall(
         createdAt: admin.firestore.FieldValue.serverTimestamp(),
       });
 
-      // Enqueue the background task
-      await processJobListing.enqueue({
-        jobId: jobRef.id,
+      // Process immediately (simplified version - TODO: add Cloud Tasks integration)
+      const result = await jobListingExtractor.extract({
         source: data.source,
+        options: {
+          extractSkills: true,
+          extractSalary: true,
+          extractLocation: true,
+        },
       });
 
-      return {success: true, jobId: jobRef.id};
+      await jobRef.update({
+        status: 'completed',
+        result: result,
+        completedAt: admin.firestore.FieldValue.serverTimestamp(),
+      });
+
+      return {success: true, jobId: jobRef.id, result};
     } catch (error) {
-      console.error('Error enqueuing job processing:', error);
+      console.error('Error processing job listing:', error);
       throw new functions.https.HttpsError(
         'internal',
-        'Failed to enqueue job processing',
+        'Failed to process job listing',
         error
       );
     }
   }
 );
 
-export const processJobListing = functions.tasks
-  .taskQueue({
-    retryConfig: {
-      maxAttempts: 5,
-      minBackoffSeconds: 60,
-      maxBackoutSeconds: 600,
-      maxDoublings: 3,
-    },
-    rateLimits: {
-      maxConcurrentDispatches: 10,
-    },
-  })
-  .onDispatch(async (data: { jobId: string; source: string | { url: string } }) => {
+export const processJobListing = functions.https.onCall(
+  async (
+    data: { jobId: string; source: string | { url: string } },
+    context: functions.https.CallableContext
+  ) => {
+    if (!context.auth) {
+      throw new functions.https.HttpsError('unauthenticated', 'User must be authenticated');
+    }
+
     try {
       const {jobId, source} = data;
       const result = await jobListingExtractor.extract({
@@ -92,7 +98,7 @@ export const processJobListing = functions.tasks
       return {success: true, jobId};
     } catch (error) {
       console.error('Error processing job listing:', error);
-      
+
       // Update the job status with error
       if (data.jobId) {
         await admin.firestore().collection('jobProcesses').doc(data.jobId).update({
@@ -101,14 +107,15 @@ export const processJobListing = functions.tasks
           failedAt: admin.firestore.FieldValue.serverTimestamp(),
         });
       }
-      
+
       throw new functions.https.HttpsError(
         'internal',
         'Failed to process job listing',
-        error
+        error instanceof Error ? error : new Error(String(error))
       );
     }
-  });
+  }
+);
 
 // Application API endpoints
 export {

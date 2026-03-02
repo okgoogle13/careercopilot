@@ -8,8 +8,7 @@
         ".git",
         "firebase-debug.log",
         "firebase-debug.*.log",
-        "*.local",
-        "lib"
+        "*.local"
       ],
       "runtime": "nodejs20",
       "predeploy": [

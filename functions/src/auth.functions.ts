@@ -1,6 +1,6 @@
 import functions from "firebase-functions";
 import admin from "firebase-admin";
-import { db, storage } from "./firebase";
+import {db, storage} from "./firebase";
 
 if (admin.apps.length === 0) {
   admin.initializeApp();
@@ -23,8 +23,8 @@ export const cleanupUserData = functions.https.onCall(
     concurrency: 1,
   },
   async (data: CleanupRequestData, context: functions.https.CallableContext) => {
-    const { uid } = data;
-    const { auth } = context;
+    const {uid} = data;
+    const {auth} = context;
 
     if (!auth || (auth.uid !== uid && !auth.token.admin)) {
       throw new functions.https.HttpsError(
@@ -77,7 +77,7 @@ export const adminCleanupUser = functions.https.onRequest(
   async (request: functions.https.Request, response: functions.Response) => {
     try {
       if (request.method !== "POST") {
-        response.status(405).json({ error: "Method not allowed" });
+        response.status(405).json({error: "Method not allowed"});
         return;
       }
 
@@ -85,21 +85,21 @@ export const adminCleanupUser = functions.https.onRequest(
       if (!authHeader || !authHeader.startsWith("Bearer ")) {
         response
           .status(401)
-          .json({ error: "Unauthorized: Missing or invalid Authorization header" });
+          .json({error: "Unauthorized: Missing or invalid Authorization header"});
         return;
       }
 
       const token = authHeader.split("Bearer ")[1];
       const expectedAdminKey = process.env.ADMIN_CLEANUP_KEY || "default-admin-key";
       if (token !== expectedAdminKey) {
-        response.status(403).json({ error: "Forbidden: Invalid admin key" });
+        response.status(403).json({error: "Forbidden: Invalid admin key"});
         return;
       }
 
-      const { uid } = request.body;
+      const {uid} = request.body;
 
       if (!uid) {
-        response.status(400).json({ error: "Missing uid parameter" });
+        response.status(400).json({error: "Missing uid parameter"});
         return;
       }
 

@@ -1,7 +1,7 @@
-import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
-import { z } from "zod";
-import { extractJobListing } from "./index";
+import {McpServer} from "@modelcontextprotocol/sdk/server/mcp.js";
+import {StdioServerTransport} from "@modelcontextprotocol/sdk/server/stdio.js";
+import {z} from "zod";
+import {extractJobListing} from "./index";
 
 // Create server instance
 const server = new McpServer({
@@ -42,7 +42,7 @@ server.tool(
     flowName: z.string().describe("Name of the flow to run (e.g. 'extractJobListing')"),
     input: z.string().describe("JSON string representing the input data for the flow")
   },
-  async ({ flowName, input }) => {
+  async ({flowName, input}) => {
     const flow = flows[flowName as keyof typeof flows];
     
     if (!flow) {
