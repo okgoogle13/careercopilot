@@ -1,9 +1,27 @@
-// Dummy Firebase Config for Build Fix
-// If moving to Supabase, this should eventually be removed.
-export const auth = {
-    onAuthStateChanged: () => () => {},
-    signInWithEmailAndPassword: async () => {},
-    createUserWithEmailAndPassword: async () => {},
-    signOut: async () => {},
-    updateProfile: async () => {},
-} as any;
+/**
+ * firebase.ts
+ * Initialises the Firebase Web SDK app and exports the auth instance.
+ * All required values are injected at build time via VITE_FIREBASE_* env vars.
+ *
+ * Set these in:
+ *   - Local dev:      frontend/.env.local
+ *   - Vercel:         Project Settings → Environment Variables
+ *   - CI/CD:          GitHub Actions secrets
+ */
+import { initializeApp, getApps, getApp } from 'firebase/app';
+import { getAuth } from 'firebase/auth';
+
+const firebaseConfig = {
+  apiKey:            import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain:        import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId:         import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket:     import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId:             import.meta.env.VITE_FIREBASE_APP_ID,
+};
+
+// Prevent duplicate app initialisation in hot-reload environments
+const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
+
+export const auth = getAuth(app);
+export default app;

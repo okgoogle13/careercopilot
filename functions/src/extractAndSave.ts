@@ -1,6 +1,6 @@
-// @ts-expect-error - TS2497: esModuleInterop namespace import required for firebase-functions
+// @ts-expect-error - TS2497: esModuleInterop enabled but TS 5.9 namespace import quirk
 import * as functions from 'firebase-functions';
-// @ts-expect-error - TS2497: esModuleInterop namespace import required for firebase-admin
+// @ts-expect-error - TS2497: esModuleInterop enabled but TS 5.9 namespace import quirk
 import * as admin from 'firebase-admin';
 import { JobListingExtractor } from './services/job_listing_extractor';
 

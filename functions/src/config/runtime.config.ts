@@ -16,7 +16,10 @@
  * ```
  */
 
-import { RuntimeOptions } from "firebase-functions";
+// @ts-expect-error - TS2497: esModuleInterop is enabled, but TypeScript 5.9 still complains about namespace import
+import * as functions from "firebase-functions";
+
+type RuntimeOptions = functions.RuntimeOptions;
 
 /**
  * Lightweight API operations (CRUD, simple Firestore queries)

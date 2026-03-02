@@ -1,13 +1,12 @@
-name: Supabase Database Checks
+name: Supabase Database Checks (ARCHIVED)
+# ⚠️  ARCHIVED: Supabase has been removed from this project (2026-03-02).
+# The frontend now uses Firebase Auth and the backend uses Firebase/Firestore.
+# This workflow is retained for reference only and will never trigger.
 
 on:
-  pull_request:
-    paths:
-      - 'supabase/**'
-      - 'backend/app/core/supabase.py'
-  push:
-    branches: [main, develop]
   workflow_dispatch:
+    # Manual trigger only — kept for historical reference
+
 
 permissions:
   contents: read

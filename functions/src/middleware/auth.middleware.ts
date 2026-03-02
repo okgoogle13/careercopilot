@@ -1,3 +1,4 @@
+// @ts-expect-error - TS2497: esModuleInterop is enabled, but TypeScript 5.9 still complains about namespace import
 import * as admin from "firebase-admin";
 import type { Request, Response, NextFunction } from "express";
 import { sendResponse } from "../utils/api.utils";

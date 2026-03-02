@@ -110,6 +110,7 @@ claude-artifact-runner/
 /.ai_reports/
 .archive_legacy/
 .venv/
+venv/
 test-results/
 
 # Local Environments and Logs

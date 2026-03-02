@@ -69,7 +69,8 @@
       "Bash(claude:*)",
       "WebFetch(domain:github.com)",
       "WebFetch(domain:agents.md)",
-      "Bash(unzip:*)"
+      "Bash(unzip:*)",
+      "Bash(npm run build:*)"
     ],
     "deny": [],
     "ask": []

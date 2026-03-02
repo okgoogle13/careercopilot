@@ -95,7 +95,7 @@ git commit -m "feat(assets): Add batch theatrical specimens - Assets 3,4,6"
 - Batch mode trigger
 - Receives array instead of single asset
 
-**Codex CLI:**
+**Claude Code:**
 - Executes batch file operations
 - Handles git operations
 

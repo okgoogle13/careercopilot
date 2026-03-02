@@ -1,7 +1,7 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { z } from "zod";
-import { extractJobListing, findSimilarListings } from "./index";
+import { extractJobListing } from "./index";
 
 // Create server instance
 const server = new McpServer({
@@ -12,7 +12,7 @@ const server = new McpServer({
 // Helper to get flow metadata
 const flows = {
   "extractJobListing": extractJobListing,
-  "findSimilarListings": findSimilarListings
+  // "findSimilarListings": findSimilarListings // Temporarily disabled - vector search not implemented
 };
 
 /**
@@ -93,7 +93,7 @@ server.tool(
 );
 
 async function main() {
-  consttransport = new StdioServerTransport();
+  const transport = new StdioServerTransport();
   await server.connect(transport);
   console.error("Genkit MCP Server running on stdio");
 }

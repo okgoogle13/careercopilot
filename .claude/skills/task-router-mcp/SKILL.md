@@ -17,7 +17,7 @@ Claude Desktop (Orchestrator)
     ↓ creates tasks
 Task Queue (JSON file-based)
     ↓ agents poll
-[Gemini | Claude Code | Codex CLI]
+[Gemini | Claude Code | Local CLI]
     ↓ claim → execute → complete
 Next Task Auto-assigned
 ```
