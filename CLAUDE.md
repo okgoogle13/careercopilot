@@ -107,21 +107,16 @@ All colors are **semantic** (usage-driven), not generic. **Truth lives in `front
 
 No Inter, Roboto, or Arial. Extreme contrast typography is the M3 Expressive standard. Enable `font-optical-sizing: auto` globally.
 
-### UI Archetypes (Components)
-
-Located in `frontend/src/components/ui/`:
-- **Seed**: Atomic button, chip, badge (single element)
-- **Pebble**: Stacked chips, progress indicator (linear composition)
-- **Lens**: Modal, popover, inspection overlay (focal container)
-- **Jar**: Card, list item, container (simple frame)
-- **Cabinet**: Grid layout, multi-column structure (complex layout)
-- **Stone**: Divider, spacer, border primitive (structural element)
-- **Valve**: Interactive toggle/switch control
-- **Vessel**: Container with fluid/organic shape treatment
-- **Mark**: Brand mark / logo primitive
-- **Signal**: Status and notification indicator
-
-Use `KrIcon` for KR-ICON-001 through KR-ICON-004 when the icon needs inline SVG rendering with semantic token colors.
+### Gold Standard Components (Reference)
+These components are 100% compliant with `kr-solidarity` and should be used as the source of truth:
+- **ActionButton.tsx** (`Seed`): Atomic primary button with high-intensity motion.
+- **KeralaRageButton.tsx** (`Seed`): Standard UI button with loading and icon states.
+- **SolidarityCard.tsx** (`Jar`): Primary container for content sections.
+- **Jar.tsx** (`Jar`): Standard select/dropdown component.
+- **ManifestoSlab.tsx** (`Cabinet`): Complex layout container for text-heavy content.
+- **Stone.tsx** (`Stone`): Structural divider and spacing primitive.
+- **Lens.tsx** (`Lens`): Comprehensive text input and focal container.
+- **StatusBadge.tsx** (`Signal`): Status and notification indicator.
 
 **All archetypes MUST use `--sys-color-*` CSS variables, never hardcoded hex.**
 

@@ -46,7 +46,7 @@ echo "  - develop (active development)"
 echo ""
 
 read -rp "Proceed with deleting ${#BRANCHES_TO_DELETE[@]} remote branches? [y/N] " confirm
-if [[ "${confirm,,}" != "y" ]]; then
+if [[ "$confirm" != "y" && "$confirm" != "Y" ]]; then
   echo "Aborted."
   exit 0
 fi
