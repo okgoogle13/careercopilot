@@ -15,13 +15,8 @@ import { useState } from 'react';
 import { PageHeader } from '../../components/shared/PageHeader';
 
 // Assets
-<<<<<<< HEAD
-import leafFern from '../../assets/specimens/leaf-fern.png';
-import wallpaper from '../../assets/textures/wallpaper.png';
-=======
 const leafFern = '/assets/kr-solidarity/specimen/kr-solidarity__specimen__triage-natural-history__v1.png';
 const wallpaper = '/assets/kr-solidarity/texture/kr-solidarity__substrate__kr-solidarity--texture--melbourne-laneway--v1__v1.png';
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 interface Application {
   id: number;
@@ -84,23 +79,14 @@ const MOCK_APPLICATIONS: Application[] = [
  * The Greenhouse (Application Tracker / Kanban Board)
  *
  * V3.1 Mixed Mode implementation.
-<<<<<<< HEAD
- * A Victorian greenhouse aesthetic where job applications are treated
- * as specimens in various growth stages.
-=======
  * A KeralaStreetprint greenhouse aesthetic where job applications are treated
  * as KrMotifs in various growth stages.
->>>>>>> restoration-KR-Rage-Figma-v2.0
  */
 export function ApplicationTracker() {
   const [applications] = useState<Application[]>(MOCK_APPLICATIONS);
 
   return (
-<<<<<<< HEAD
-    <div className="min-h-screen bg-specimen-night relative overflow-hidden pb-12 w-full">
-=======
     <div className="min-h-screen bg-asphalt-black relative overflow-hidden pb-12 w-full">
->>>>>>> restoration-KR-Rage-Figma-v2.0
       {/* Dynamic Stagecraft: Greenhouse Glass & Vines */}
       <div
         className="absolute inset-0 opacity-5 pointer-events-none mix-blend-overlay"
@@ -132,17 +118,6 @@ export function ApplicationTracker() {
             >
               <div className="mb-6 px-2">
                 <div className="flex items-center justify-between mb-1">
-<<<<<<< HEAD
-                  <h3 className="font-bloom text-lg font-black text-parchment uppercase tracking-tighter flex items-center gap-2">
-                    <stage.icon className="w-4 h-4 text-wattle-gold" />
-                    {stage.name}
-                  </h3>
-                  <span className="font-annotation text-[9px] text-flannel-flower bg-flannel-flower/5 px-2 py-0.5 border border-flannel-flower/10">
-                    {applications.filter((a) => a.stage === stage.id).length} UNITS
-                  </span>
-                </div>
-                <p className="font-annotation text-[10px] text-flannel-flower uppercase tracking-[0.2em] opacity-60">
-=======
                   <h3 className="font-bloom text-lg font-black text-paper-white uppercase tracking-tighter flex items-center gap-2">
                     <stage.icon className="w-4 h-4 text-ink-gold" />
                     {stage.name}
@@ -152,17 +127,12 @@ export function ApplicationTracker() {
                   </span>
                 </div>
                 <p className="font-annotation text-[10px] text-concrete-grey uppercase tracking-[0.2em] opacity-60">
->>>>>>> restoration-KR-Rage-Figma-v2.0
                   {stage.description}
                 </p>
               </div>
 
               {/* Glass Column Shell */}
-<<<<<<< HEAD
-              <div className="space-y-4 min-h-[500px] rounded-lg border border-dashed border-flannel-flower/5 bg-bark-light/[0.02] p-2">
-=======
               <div className="space-y-4 min-h-[500px] rounded-lg border border-dashed border-concrete-grey/5 bg-bark-light/[0.02] p-2">
->>>>>>> restoration-KR-Rage-Figma-v2.0
                 {applications
                   .filter((app) => app.stage === stage.id)
                   .map((app) => (
@@ -173,11 +143,7 @@ export function ApplicationTracker() {
                   ))}
 
                 {/* Seedling Dispatch (Add Button) */}
-<<<<<<< HEAD
-                <button className="w-full py-4 border border-dashed border-flannel-flower/10 rounded-sm flex items-center justify-center text-flannel-flower/30 hover:border-wattle-gold/40 hover:text-wattle-gold transition-all group">
-=======
                 <button className="w-full py-4 border border-dashed border-concrete-grey/10 rounded-sm flex items-center justify-center text-concrete-grey/30 hover:border-ink-gold/40 hover:text-ink-gold transition-all group">
->>>>>>> restoration-KR-Rage-Figma-v2.0
                   <Plus className="w-5 h-5 group-hover:rotate-90 transition-transform" />
                 </button>
               </div>
@@ -191,11 +157,7 @@ export function ApplicationTracker() {
 
 /**
  * ApplicationLeaf component
-<<<<<<< HEAD
- * A single job application card styled as a specimen leaf.
-=======
  * A single job application card styled as a KrMotif leaf.
->>>>>>> restoration-KR-Rage-Figma-v2.0
  */
 function ApplicationLeaf({ application }: { application: Application }) {
   return (
@@ -205,21 +167,12 @@ function ApplicationLeaf({ application }: { application: Application }) {
       animate={{ opacity: 1, y: 0 }}
     >
       <Stone
-<<<<<<< HEAD
-        mode="gallery"
-        elevation="floating"
-        className="p-5 border-flannel-flower/10 bg-specimen-night/40 backdrop-blur-sm group relative overflow-hidden"
-      >
-        {/* Stage Indicator Notch */}
-        <div className="absolute top-0 left-0 w-1 h-full bg-wattle-gold opacity-40 group-hover:opacity-100 transition-opacity" />
-=======
        
         elevation="floating"
         className="p-5 border-concrete-grey/10 bg-asphalt-black/40 backdrop-blur-sm group relative overflow-hidden"
       >
         {/* Stage Indicator Notch */}
         <div className="absolute top-0 left-0 w-1 h-full bg-ink-gold opacity-40 group-hover:opacity-100 transition-opacity" />
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
         <div className="flex flex-col gap-3">
           <div className="flex justify-between items-start">
@@ -228,65 +181,37 @@ function ApplicationLeaf({ application }: { application: Application }) {
               variant="success"
               showDot
             />
-<<<<<<< HEAD
-            <button className="text-flannel-flower/40 hover:text-wattle-gold">
-=======
             <button className="text-concrete-grey/40 hover:text-ink-gold">
->>>>>>> restoration-KR-Rage-Figma-v2.0
               <MoreHorizontal className="w-4 h-4" />
             </button>
           </div>
 
           <div>
-<<<<<<< HEAD
-            <h4 className="font-bloom text-base font-bold text-parchment uppercase leading-none mb-1">
-              {application.title}
-            </h4>
-            <p className="font-field-note italic text-xs text-flannel-flower">
-=======
             <h4 className="font-bloom text-base font-bold text-paper-white uppercase leading-none mb-1">
               {application.title}
             </h4>
             <p className="font-field-note italic text-xs text-concrete-grey">
->>>>>>> restoration-KR-Rage-Figma-v2.0
               {application.company}
             </p>
           </div>
 
           <div className="pt-2 space-y-2">
-<<<<<<< HEAD
-            <div className="flex items-center gap-2 text-[10px] font-annotation text-flannel-flower/60 uppercase tracking-widest">
-              <MapPin className="w-3 h-3" /> {application.location}
-            </div>
-            <div className="flex items-center gap-2 text-[10px] font-annotation text-flannel-flower/40 uppercase tracking-widest">
-=======
             <div className="flex items-center gap-2 text-[10px] font-annotation text-concrete-grey/60 uppercase tracking-widest">
               <MapPin className="w-3 h-3" /> {application.location}
             </div>
             <div className="flex items-center gap-2 text-[10px] font-annotation text-concrete-grey/40 uppercase tracking-widest">
->>>>>>> restoration-KR-Rage-Figma-v2.0
               <Calendar className="w-3 h-3" /> {application.appliedDate}
             </div>
           </div>
 
-<<<<<<< HEAD
-          <div className="pt-3 flex justify-between items-center border-t border-flannel-flower/5">
-            <span className="font-mono text-[8px] text-flannel-flower/30 uppercase tracking-[0.2em]">
-              SPECIMEN_ID: {application.id.toString().padStart(3, '0')}
-=======
           <div className="pt-3 flex justify-between items-center border-t border-concrete-grey/5">
             <span className="font-mono text-[8px] text-concrete-grey/30 uppercase tracking-[0.2em]">
               KrMotif_ID: {application.id.toString().padStart(3, '0')}
->>>>>>> restoration-KR-Rage-Figma-v2.0
             </span>
             <Pebble
               variant="ghost"
               size="sm"
-<<<<<<< HEAD
-              className="h-6 text-[10px] uppercase font-bold tracking-tighter hover:text-wattle-gold"
-=======
               className="h-6 text-[10px] uppercase font-bold tracking-tighter hover:text-ink-gold"
->>>>>>> restoration-KR-Rage-Figma-v2.0
             >
               DETAILS
             </Pebble>

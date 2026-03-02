@@ -1,61 +1,54 @@
 """
-<<<<<<< HEAD
-Secure configuration management using Google Cloud Secret Manager.
+Secure configuration management using environment variables and optional Secret Manager.
 
-This module provides a centralized way to access configuration values,
-falling back to environment variables when not in production.
+This module provides a centralized way to access configuration values while
+falling back to local environment variables during development.
 """
 
 import os
 from typing import Any, Dict, Optional, Tuple, cast
 
 from pydantic import validator
+
 try:
     from pydantic_settings import BaseSettings
 except ImportError:  # pragma: no cover - optional dependency in test/CI
     from pydantic import BaseModel as BaseSettings
 
-# Try to import the secret manager, but don't fail if not available
 try:
     from .secret_manager import get_database_url, get_secret, get_secret_key
 
     SECRET_MANAGER_AVAILABLE = True
-except ImportError:
+except ImportError:  # pragma: no cover - local fallback
     SECRET_MANAGER_AVAILABLE = False
+
+    def get_database_url() -> str:
+        return os.getenv("DATABASE_URL", "sqlite:///data/careercopilot-dev.db")
+
+    def get_secret(secret_id: str, default: Optional[str] = None, **_: Any) -> str:
+        value = os.getenv(secret_id) or os.getenv(secret_id.upper().replace("-", "_"))
+        if value:
+            return value
+        if default is not None:
+            return default
+        raise RuntimeError(f"Secret {secret_id} not found")
+
+    def get_secret_key() -> str:
+        return os.getenv("JWT_SECRET_KEY", os.getenv("SECRET_KEY", "insecure-default-secret-key"))
 
 
 class SecureSettings(BaseSettings):
     """Application settings with secure secret management."""
-=======
-Secure configuration management using environment variables.
-
-This module provides a centralized way to access configuration values,
-ensuring consistent settings across the application.
-"""
-
-import os
-from typing import Any
-
-try:
-    from pydantic_settings import BaseSettings
-except ImportError:  # pragma: no cover
-    from pydantic import BaseModel as BaseSettings
-
-from .secret_manager import get_database_url, get_secret, get_secret_key
-
-
-class SecureSettings(BaseSettings):
-    """Application settings using environment variables."""
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
     # Environment
     ENV: str = "development"
-    ENVIRONMENT: str = "development"  # Alias for ENV
+    ENVIRONMENT: str = "development"
     DEBUG: bool = True
     LOG_LEVEL: str = "INFO"
     PORT: int = 8000
     FRONTEND_URL: str = "http://localhost:3000"
-<<<<<<< HEAD
+    APP_URL: str = "http://localhost:8000"
+    DISABLE_AUTH: bool = False
 
     # Database
     DATABASE_URL: str = "sqlite:///data/careercopilot-dev.db"
@@ -65,81 +58,22 @@ class SecureSettings(BaseSettings):
     DB_NAME: str = "careercopilot"
     DB_USER: str = "careercopilot"
 
-    # Cache configuration (using Firestore instead of Redis)
-    CACHE_COLLECTION: str = "redis_cache"  # Firestore collection for caching
+    # Supabase
+    SUPABASE_URL: Optional[str] = None
+    SUPABASE_ANON_KEY: Optional[str] = None
+    SUPABASE_SERVICE_ROLE_KEY: Optional[str] = None
+    SUPABASE_STORAGE_BUCKET: str = "user_assets"
+
+    # Cache configuration
+    CACHE_COLLECTION: str = "redis_cache"
 
     # Authentication
     SECRET_KEY: str = "insecure-default-secret-key"
-    JWT_SECRET_KEY: str = "insecure-default-secret-key"  # Alias for SECRET_KEY
-    ALGORITHM: str = "HS256"
-    ACCESS_TOKEN_EXPIRE_MINUTES: int = 1440  # 24 hours
-
-=======
-    APP_URL: str = "http://localhost:8000"
-
-    # Database (Supabase PostgreSQL)
-    DATABASE_URL: str = "sqlite:///data/careercopilot-dev.db"
-
-    # Supabase Configuration
-    SUPABASE_URL: str | None = None
-    SUPABASE_ANON_KEY: str | None = None
-    SUPABASE_SERVICE_ROLE_KEY: str | None = None
-    SUPABASE_STORAGE_BUCKET: str = "user_assets"
-
-    # Authentication
     JWT_SECRET_KEY: str = "insecure-default-secret-key"
     ALGORITHM: str = "HS256"
-    ACCESS_TOKEN_EXPIRE_MINUTES: int = 1440  # 24 hours
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = 1440
 
-    # AI Services
-    GEMINI_API_KEY: str | None = None
-    ANTHROPIC_API_KEY: str | None = None
-
-    # AWS (for SES/S3 fallback)
-    AWS_ACCESS_KEY_ID: str | None = None
-    AWS_SECRET_ACCESS_KEY: str | None = None
-    AWS_REGION: str = "us-east-1"
-    SES_SENDER_EMAIL: str | None = None
-
->>>>>>> restoration-KR-Rage-Figma-v2.0
-    def __init__(self, **kwargs: Any) -> None:
-        super().__init__(**kwargs)
-        # Handle ENVIRONMENT alias
-        if "ENVIRONMENT" in kwargs:
-            self.ENV = kwargs["ENVIRONMENT"]
-        elif os.getenv("ENVIRONMENT"):
-            self.ENV = os.getenv("ENVIRONMENT", "development")
-
-<<<<<<< HEAD
-        # Override with secure values for production or staging
-        if SECRET_MANAGER_AVAILABLE and self.ENV in ["production", "staging"]:
-            try:
-                self.SECRET_KEY = get_secret_key()
-                self.JWT_SECRET_KEY = self.SECRET_KEY
-                self.DATABASE_URL = get_database_url()
-
-                # Load AI API keys from Secret Manager
-                self.GEMINI_API_KEY = get_secret("GEMINI_API_KEY", default=self.GEMINI_API_KEY)
-                self.ANTHROPIC_API_KEY = get_secret(
-                    "ANTHROPIC_API_KEY", default=self.ANTHROPIC_API_KEY
-                )
-
-                # Load Firebase credentials
-                self.FIREBASE_PROJECT_ID = get_secret(
-                    "FIREBASE_PROJECT_ID", default=self.FIREBASE_PROJECT_ID
-                )
-                self.GOOGLE_APPLICATION_CREDENTIALS_JSON = get_secret(
-                    "GOOGLE_APPLICATION_CREDENTIALS_JSON",
-                    default=self.GOOGLE_APPLICATION_CREDENTIALS_JSON,
-                )
-            except Exception as e:
-                raise RuntimeError(f"Failed to load production secrets: {e}")
-        elif self.ENV in ["production", "staging"]:
-            # Fail fast in production if secrets are not properly configured
-            if self.SECRET_KEY == "insecure-default-secret-key":
-                raise RuntimeError("Production environment requires secure secret configuration")
-
-    # Firebase Configuration
+    # Firebase
     FIREBASE_PROJECT_ID: Optional[str] = None
     FIREBASE_STORAGE_BUCKET: str = ""
     FIREBASE_DATABASE_URL: str = ""
@@ -147,23 +81,7 @@ class SecureSettings(BaseSettings):
     FIREBASE_STORAGE_EMULATOR_HOST: Optional[str] = None
     FIREBASE_DATABASE_EMULATOR_HOST: Optional[str] = None
     FIREBASE_EMULATOR: bool = False
-
-    # Firebase Admin SDK Credentials (JSON string)
     FIREBASE_CREDENTIALS_JSON: Optional[str] = None
-
-    @validator("FIREBASE_CREDENTIALS_JSON", pre=True)
-    def validate_firebase_creds(cls, v: Optional[str], values: Dict[str, Any]) -> Optional[str]:
-        if not v and values.get("FIREBASE_PROJECT_ID"):
-            # Try to load from Google Cloud's default credentials
-            try:
-                import google.auth
-
-                credentials, project = google.auth.default()  # type: ignore[no-untyped-call]
-                if project == values.get("FIREBASE_PROJECT_ID"):
-                    return None  # Will use default credentials
-            except Exception:
-                pass
-        return v
 
     # Google Cloud
     GOOGLE_CLOUD_PROJECT: Optional[str] = None
@@ -175,11 +93,7 @@ class SecureSettings(BaseSettings):
     GEMINI_API_KEY: Optional[str] = None
     ANTHROPIC_API_KEY: Optional[str] = None
 
-    # RAG Configuration - REMOVED: Vector search functionality simplified
-    # RAG features have been removed in favor of direct AI integration
-    EMBEDDING_MODEL: str = "text-embedding-004"
-
-    # Email - AWS SES
+    # Email
     AWS_ACCESS_KEY_ID: Optional[str] = None
     AWS_SECRET_ACCESS_KEY: Optional[str] = None
     AWS_REGION: str = "us-east-1"
@@ -188,6 +102,7 @@ class SecureSettings(BaseSettings):
     # Performance
     MAX_WORKERS: int = 2
     DB_POOL_SIZE: int = 3
+    EMBEDDING_MODEL: str = "text-embedding-004"
 
     # Feature Flags
     ENABLE_MULTI_AGENT: bool = False
@@ -199,34 +114,79 @@ class SecureSettings(BaseSettings):
     # Development Settings
     ENABLE_HOT_RELOAD: bool = False
     SHOW_DEBUG_INFO: bool = False
-=======
-        # Load values
+
+    def __init__(self, **kwargs: Any) -> None:
+        super().__init__(**kwargs)
+
+        if "ENVIRONMENT" in kwargs:
+            self.ENV = kwargs["ENVIRONMENT"]
+        elif os.getenv("ENVIRONMENT"):
+            self.ENV = os.getenv("ENVIRONMENT", "development")
+
+        self.ENVIRONMENT = self.ENV
+
+        # Keep the alias synchronized in non-production contexts.
+        if self.SECRET_KEY == "insecure-default-secret-key" and self.JWT_SECRET_KEY != self.SECRET_KEY:
+            self.SECRET_KEY = self.JWT_SECRET_KEY
+
         try:
             self.JWT_SECRET_KEY = get_secret_key()
+            self.SECRET_KEY = self.JWT_SECRET_KEY
             self.DATABASE_URL = get_database_url()
 
-            # Load AI API keys
             self.GEMINI_API_KEY = get_secret("GEMINI_API_KEY", default=self.GEMINI_API_KEY)
             self.ANTHROPIC_API_KEY = get_secret("ANTHROPIC_API_KEY", default=self.ANTHROPIC_API_KEY)
 
-            # Load Supabase config
-            self.SUPABASE_URL = get_secret("SUPABASE_URL", default=self.SUPABASE_URL)
-            self.SUPABASE_ANON_KEY = get_secret("SUPABASE_ANON_KEY", default=self.SUPABASE_ANON_KEY)
-            self.SUPABASE_SERVICE_ROLE_KEY = get_secret("SUPABASE_SERVICE_ROLE_KEY", default=self.SUPABASE_SERVICE_ROLE_KEY)
+            self.FIREBASE_PROJECT_ID = get_secret(
+                "FIREBASE_PROJECT_ID",
+                default=self.FIREBASE_PROJECT_ID,
+            )
+            self.FIREBASE_STORAGE_BUCKET = get_secret(
+                "FIREBASE_STORAGE_BUCKET",
+                default=self.FIREBASE_STORAGE_BUCKET,
+            )
+            self.FIREBASE_CREDENTIALS_JSON = get_secret(
+                "FIREBASE_CREDENTIALS_JSON",
+                default=self.FIREBASE_CREDENTIALS_JSON,
+            )
 
-        except Exception as e:
+            self.SUPABASE_URL = get_secret("SUPABASE_URL", default=self.SUPABASE_URL)
+            self.SUPABASE_ANON_KEY = get_secret(
+                "SUPABASE_ANON_KEY",
+                default=self.SUPABASE_ANON_KEY,
+            )
+            self.SUPABASE_SERVICE_ROLE_KEY = get_secret(
+                "SUPABASE_SERVICE_ROLE_KEY",
+                default=self.SUPABASE_SERVICE_ROLE_KEY,
+            )
+        except Exception as exc:
             if self.ENV in ["production", "staging"]:
-                raise RuntimeError(f"Failed to load production configuration: {e}")
-            else:
-                print(f"Warning: Failed to load some configuration: {e}")
->>>>>>> restoration-KR-Rage-Figma-v2.0
+                raise RuntimeError(f"Failed to load production configuration: {exc}") from exc
+            print(f"Warning: Failed to load some configuration: {exc}")
+
+    @validator("FIREBASE_CREDENTIALS_JSON", pre=True)
+    def validate_firebase_creds(
+        cls,
+        value: Optional[str],
+        values: Dict[str, Any],
+    ) -> Optional[str]:
+        """Allow ADC fallback when the project matches and explicit JSON is absent."""
+        if not value and values.get("FIREBASE_PROJECT_ID"):
+            try:
+                import google.auth
+
+                _, project = google.auth.default()  # type: ignore[no-untyped-call]
+                if project == values.get("FIREBASE_PROJECT_ID"):
+                    return None
+            except Exception:
+                pass
+        return value
 
     class Config:
         env_file = ".env"
         env_file_encoding = "utf-8"
         case_sensitive = True
-<<<<<<< HEAD
-        extra = "allow"  # Allow extra fields from environment
+        extra = "allow"
 
         @classmethod
         def customise_sources(
@@ -235,53 +195,18 @@ class SecureSettings(BaseSettings):
             env_settings: Any,
             file_secret_settings: Any,
         ) -> Tuple[Any, Dict[str, str], Any]:
-            """Customize how settings are loaded."""
+            """Load values from init, environment, then file secrets."""
             if not SECRET_MANAGER_AVAILABLE:
-                # If secret manager is not available, just use the default sources
                 return (
                     init_settings,
-                    env_settings,
+                    cast(Dict[str, str], env_settings()),
                     file_secret_settings,
                 )
 
-            # Load settings from environment first
             settings: Dict[str, str] = {
                 **os.environ,
                 **cast(Dict[str, str], env_settings()),
             }
-
-            # Then try to get values from secret manager
-            try:
-                # Only try to get secrets in production/staging or if explicitly enabled
-                current_env = settings.get("ENV") or settings.get("ENVIRONMENT")
-                if (
-                    current_env in ["production", "staging"]
-                    or settings.get("USE_SECRET_MANAGER", "").lower() == "true"
-                ):
-                    # Get database URL from secret manager
-                    if not settings.get("DATABASE_URL"):
-                        settings["DATABASE_URL"] = get_database_url()
-
-                    # Get secret key from secret manager
-                    if not settings.get("SECRET_KEY"):
-                        settings["SECRET_KEY"] = get_secret_key()
-
-                    # Get other secrets
-                    for secret in [
-                        "GEMINI_API_KEY",
-                        "ANTHROPIC_API_KEY",
-                        "AWS_ACCESS_KEY_ID",
-                        "AWS_SECRET_ACCESS_KEY",
-                        "SES_SENDER_EMAIL",
-                    ]:
-                        if not settings.get(secret):
-                            try:
-                                settings[secret] = get_secret(secret)
-                            except Exception as e:
-                                print(f"Warning: Could not load secret {secret}: {e}")
-            except Exception as e:
-                print(f"Warning: Could not load secrets from Secret Manager: {e}")
-
             return (
                 init_settings,
                 settings,
@@ -289,26 +214,15 @@ class SecureSettings(BaseSettings):
             )
 
 
-# Create a single instance of the settings
-settings: 'SecureSettings' = SecureSettings()
-=======
-        extra = "allow"
-
-
-# Create a single instance of the settings
 settings: "SecureSettings" = SecureSettings()
 
 
-# Create a single instance of the settings
-settings: "SecureSettings" = SecureSettings()
->>>>>>> restoration-KR-Rage-Figma-v2.0
-
-# For backward compatibility
 if __name__ == "__main__":
-    # Print all settings (without sensitive values)
     print("Current settings:")
-    for field, value in settings.dict().items():
-        if any(sensitive in field.lower() for sensitive in ["key", "secret", "token", "password"]):
+    dump_method = getattr(settings, "model_dump", None)
+    values = dump_method() if callable(dump_method) else settings.dict()
+    for field, value in values.items():
+        if any(token in field.lower() for token in ["key", "secret", "token", "password"]):
             print(f"{field}: {'*' * 8} (hidden)")
         else:
             print(f"{field}: {value}")

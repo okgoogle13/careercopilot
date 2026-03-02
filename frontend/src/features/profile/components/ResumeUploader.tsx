@@ -3,10 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Upload, FileText, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@careercopilot/ui'; // Assuming shadcn button exists
-<<<<<<< HEAD
-=======
 import { validateFile } from '@/utils/fileValidation';
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 import { useAuth } from '@/context/AuthContext';
 
@@ -47,8 +44,6 @@ export default function ResumeUploader({ onUploadSuccess }: ResumeUploaderProps)
     }, []);
 
     const processUpload = async (file: File) => {
-<<<<<<< HEAD
-=======
         const validation = validateFile(file, ['.pdf', '.txt']);
         if (!validation.valid) {
             setStatus('error');
@@ -56,7 +51,6 @@ export default function ResumeUploader({ onUploadSuccess }: ResumeUploaderProps)
             return;
         }
 
->>>>>>> restoration-KR-Rage-Figma-v2.0
         setStatus('uploading');
         setErrorMessage('');
 
@@ -127,11 +121,7 @@ export default function ResumeUploader({ onUploadSuccess }: ResumeUploaderProps)
                     onChange={handleFileSelect}
                 />
 
-<<<<<<< HEAD
-                <AnimatePresence mode="wait">
-=======
                 <AnimatePresence>
->>>>>>> restoration-KR-Rage-Figma-v2.0
                     {status === 'idle' && (
                         <motion.div
                             key="idle"

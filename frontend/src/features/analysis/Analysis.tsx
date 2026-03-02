@@ -18,20 +18,11 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 import { toast } from 'sonner';
-<<<<<<< HEAD
-import pileaPlant from '../../assets/images/pilea-plant.jpg';
-=======
->>>>>>> restoration-KR-Rage-Figma-v2.0
 import { MetricCard } from '../../components/shared/MetricCard';
 import { KeywordTag } from '../../components/shared/KeywordTag';
 import { PageHeader } from '../../components/shared/PageHeader';
 import { ChartPane } from '../../components/shared/ChartPane';
 import { ImpactEnhancements } from '../../components/shared/ImpactEnhancements';
-<<<<<<< HEAD
-import { BulletMetricsSuggestor } from './BulletMetricsSuggestor';
-import { SkillsMatchPanel } from './SkillsMatchPanel';
-=======
->>>>>>> restoration-KR-Rage-Figma-v2.0
 import { Button } from '@careercopilot/ui';
 import { Textarea } from '@careercopilot/ui';
 import { useAnalysis } from '../../hooks/useAnalysis';
@@ -126,11 +117,7 @@ const MISSING_KEYWORDS: string[] = [
 // ============================================================================
 
 export function Analysis() {
-<<<<<<< HEAD
-  const { analyzeDocument, analyzeJobUrl, analyzing, result, jobAnalysis, enhanceResume, enhancing, improvedBullets, skillsGap } = useAnalysis();
-=======
   const { analyzeDocument, analyzeJobUrl, analyzing, result, jobAnalysis } = useAnalysis();
->>>>>>> restoration-KR-Rage-Figma-v2.0
   const [documentText, setDocumentText] = useState('');
   const [jobDescription, setJobDescription] = useState('');
   const [jobUrl, setJobUrl] = useState('');
@@ -222,24 +209,6 @@ export function Analysis() {
 
   return (
     <div id="analysis-content" className="p-6 md:p-12 max-w-7xl relative animate-in fade-in zoom-in-95 duration-500 ease-spring">
-<<<<<<< HEAD
-      {/* Pilea Plant Decoration - Bottom Left Corner */}
-      <div className="fixed bottom-0 left-0 lg:left-[280px] md:left-[72px] pointer-events-none w-[300px] z-[1] opacity-55 scale-x-[-1]">
-        <img
-          src={pileaPlant}
-          alt=""
-          className="w-full h-auto mix-blend-screen"
-          style={{
-            WebkitMaskImage:
-              'linear-gradient(to top, transparent 0%, rgba(0,0,0,0.35) 8%, rgba(0,0,0,0.65) 18%, rgba(0,0,0,0.85) 28%, black 40%)',
-            maskImage:
-              'linear-gradient(to top, transparent 0%, rgba(0,0,0,0.35) 8%, rgba(0,0,0,0.65) 18%, rgba(0,0,0,0.85) 28%, black 40%)',
-          }}
-        />
-      </div>
-
-=======
->>>>>>> restoration-KR-Rage-Figma-v2.0
       <div className="relative z-10">
         {/* Header with Actions */}
         <div className="flex items-center justify-between mb-8">
@@ -558,16 +527,6 @@ export function Analysis() {
           </div>
         </ChartPane>
 
-<<<<<<< HEAD
-        {/* Skills Match Panel – shown when enhanced data is available */}
-        {skillsGap && (
-          <div className="mt-8">
-            <SkillsMatchPanel skillsGap={skillsGap} />
-          </div>
-        )}
-
-=======
->>>>>>> restoration-KR-Rage-Figma-v2.0
         {/* Verified Sources - Citations from Google Search Grounding */}
         {jobAnalysis?.sources && (
           <div className="mt-8 bg-surface-container rounded-tech p-8 border border-outline-variant shadow-elevation-1">
@@ -677,29 +636,6 @@ export function Analysis() {
             <ImpactEnhancements suggestions={result.quantifiers} />
           </div>
         )}
-<<<<<<< HEAD
-
-        {/* Bullet Metrics Suggestor – always visible below resume inputs */}
-        {(!showInputs || documentText) && (
-          <div className="mt-8">
-            <BulletMetricsSuggestor
-              bullets={improvedBullets}
-              onSuggestMetrics={() =>
-                toast.promise(
-                  enhanceResume(documentText, jobDescription),
-                  {
-                    loading: 'Enhancing bullets with metrics…',
-                    success: 'Metrics added! Scroll down to review.',
-                    error: 'Enhancement failed. Please try again.',
-                  }
-                )
-              }
-              loading={enhancing}
-            />
-          </div>
-        )}
-=======
->>>>>>> restoration-KR-Rage-Figma-v2.0
       </div>
     </div>
   );

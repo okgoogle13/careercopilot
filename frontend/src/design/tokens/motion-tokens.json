@@ -1,18 +1,5 @@
 {
     "$schema": "https://design-tokens.org/schema.json",
-<<<<<<< HEAD
-    "name": " Motion Library",
-    "version": "1.0.0",
-    "description": "Comprehensive motion token library quantifying 'Viscous Breeze' physics for Gallery and Laboratory modes",
-    "motion": {
-        "physics": {
-            "$description": "Spring physics parameters for natural, physics-based animations",
-            "gallery": {
-                "stiffness": {
-                    "$value": 500,
-                    "$type": "number",
-                    "$description": "Gallery mode spring stiffness — gentle, expressive"
-=======
     "name": "kerala-rage kr-solidarity Motion Library",
     "version": "1.0.0",
     "description": "Comprehensive motion token library quantifying 'Viscous Breeze' physics for kr-dark and kr-dark modes",
@@ -24,16 +11,11 @@
                     "$value": 500,
                     "$type": "number",
                     "$description": "kr-dark mode spring stiffness — gentle, expressive"
->>>>>>> restoration-KR-Rage-Figma-v2.0
                 },
                 "damping": {
                     "$value": 27,
                     "$type": "number",
-<<<<<<< HEAD
-                    "$description": "Gallery mode damping — allows overshoot, air resistance"
-=======
                     "$description": "kr-dark mode damping — allows overshoot, air resistance"
->>>>>>> restoration-KR-Rage-Figma-v2.0
                 },
                 "mass": {
                     "$value": 1,
@@ -46,28 +28,16 @@
                     "$description": "Initial velocity"
                 }
             },
-<<<<<<< HEAD
-            "laboratory": {
-                "stiffness": {
-                    "$value": 800,
-                    "$type": "number",
-                    "$description": "Laboratory mode spring stiffness — precise, controlled"
-=======
             "kr-dark": {
                 "stiffness": {
                     "$value": 800,
                     "$type": "number",
                     "$description": "kr-dark mode spring stiffness — precise, controlled"
->>>>>>> restoration-KR-Rage-Figma-v2.0
                 },
                 "damping": {
                     "$value": 40,
                     "$type": "number",
-<<<<<<< HEAD
-                    "$description": "Laboratory mode damping — minimal overshoot, clinical precision"
-=======
                     "$description": "kr-dark mode damping — minimal overshoot, clinical precision"
->>>>>>> restoration-KR-Rage-Figma-v2.0
                 },
                 "mass": {
                     "$value": 1,
@@ -86,20 +56,12 @@
             "viscous": {
                 "$value": "cubic-bezier(0.34, 1.56, 0.64, 1)",
                 "$type": "cubicBezier",
-<<<<<<< HEAD
-                "$description": "Viscous Breeze — Gallery mode primary, gentle overshoot"
-=======
                 "$description": "Viscous Breeze — kr-dark mode primary, gentle overshoot"
->>>>>>> restoration-KR-Rage-Figma-v2.0
             },
             "precise": {
                 "$value": "cubic-bezier(0.25, 0.46, 0.45, 0.94)",
                 "$type": "cubicBezier",
-<<<<<<< HEAD
-                "$description": "Laboratory mode — no overshoot, controlled"
-=======
                 "$description": "kr-dark mode — no overshoot, controlled"
->>>>>>> restoration-KR-Rage-Figma-v2.0
             },
             "settle": {
                 "$value": "cubic-bezier(0.25, 0.46, 0.45, 0.94)",
@@ -114,11 +76,7 @@
             "elastic": {
                 "$value": "cubic-bezier(0.68, -0.55, 0.265, 1.55)",
                 "$type": "cubicBezier",
-<<<<<<< HEAD
-                "$description": "Pronounced bounce — Gallery mode accents only"
-=======
                 "$description": "Pronounced bounce — kr-dark mode accents only"
->>>>>>> restoration-KR-Rage-Figma-v2.0
             },
             "linear": {
                 "$value": "linear",
@@ -200,11 +158,7 @@
                 },
                 "link": {
                     "color": {
-<<<<<<< HEAD
-                        "$value": "{color.primary.wattleGlow}",
-=======
                         "$value": "{color.primary.inkGlow}",
->>>>>>> restoration-KR-Rage-Figma-v2.0
                         "$type": "color"
                     },
                     "underlineOffset": {
@@ -266,11 +220,7 @@
                         "$type": "shadow"
                     },
                     "borderColor": {
-<<<<<<< HEAD
-                        "$value": "{color.primary.wattleGold}",
-=======
                         "$value": "{color.primary.kr-ink-gold}",
->>>>>>> restoration-KR-Rage-Figma-v2.0
                         "$type": "color"
                     },
                     "duration": {
@@ -377,11 +327,7 @@
         },
         "modeSpecific": {
             "$description": "Mode-specific motion overrides",
-<<<<<<< HEAD
-            "gallery": {
-=======
             "kr-dark": {
->>>>>>> restoration-KR-Rage-Figma-v2.0
                 "defaultEasing": {
                     "$value": "{motion.easing.viscous}",
                     "$type": "cubicBezier"
@@ -395,11 +341,7 @@
                     "$type": "boolean"
                 }
             },
-<<<<<<< HEAD
-            "laboratory": {
-=======
             "kr-dark": {
->>>>>>> restoration-KR-Rage-Figma-v2.0
                 "defaultEasing": {
                     "$value": "{motion.easing.precise}",
                     "$type": "cubicBezier"

@@ -1,9 +1,5 @@
 import { FileText, Upload, Download, Trash2 } from 'lucide-react';
-<<<<<<< HEAD
 import { KeralaRageButton } from '../../components/ui/KeralaRageButton';
-=======
-import { KeralaRageButton } from '../../components/ui/KeralaRageButton';
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 export function AssetLibrary() {
   const assets = [
@@ -22,17 +18,6 @@ export function AssetLibrary() {
       {/* Header */}
       <div className="flex items-center justify-between mb-12">
         <div>
-<<<<<<< HEAD
-          <h1 className="text-display-large-gallery font-bloom font-black tracking-tight text-on-surface-parchment leading-tight">
-            Asset{' '}
-            <span className="font-proclamation italic font-light text-wattle-gold">
-              Library
-            </span>
-          </h1>
-          <p className="text-on-surface-variant mt-2 text-body-large-gallery font-field-note">Store and manage your career documents and media</p>
-        </div>
-        <KeralaRageButton
-=======
           <h1 className="text-display-large-KrDark font-bloom font-black tracking-tight text-on-surface-paper-white leading-tight">
             Asset{' '}
             <span className="font-proclamation italic font-light text-ink-gold">
@@ -42,17 +27,12 @@ export function AssetLibrary() {
           <p className="text-on-surface-variant mt-2 text-body-large-KrDark font-field-note">Store and manage your career documents and media</p>
         </div>
         <KeralaRageButton
->>>>>>> restoration-KR-Rage-Figma-v2.0
           variant="primary"
           size="lg"
           startIcon={<Upload className="w-5 h-5" />}
         >
           Upload Asset
-<<<<<<< HEAD
         </KeralaRageButton>
-=======
-        </KeralaRageButton>
->>>>>>> restoration-KR-Rage-Figma-v2.0
       </div>
 
       {/* Assets Grid */}
@@ -60,30 +40,17 @@ export function AssetLibrary() {
         {assets.map((asset) => (
           <div
             key={asset.id}
-<<<<<<< HEAD
-            className="bg-surface-gallery-eucalypt-smoke rounded-[var(--radius-leaf)] p-8 border border-outline-variant/30 hover:bg-surface-gallery-eucalypt-smoke-high transition-all duration-500 cursor-pointer group shadow-[var(--elevation-shadow-rest)] hover:shadow-[var(--elevation-shadow-glow-gold)] hover:-translate-y-1"
-          >
-            {/* Icon */}
-            <div className="flex items-center justify-center mb-6">
-              <div className="w-16 h-16 rounded-[var(--radius-pebble)] bg-wattle-gold/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
-                <FileText className="w-8 h-8 text-wattle-gold" />
-=======
             className="bg-surface-KrDark-concrete-grey rounded-[var(--radius-leaf)] p-8 border border-outline-variant/30 hover:bg-surface-KrDark-concrete-grey-high transition-all duration-500 cursor-pointer group shadow-[var(--elevation-shadow-rest)] hover:shadow-[var(--elevation-shadow-glow-gold)] hover:-translate-y-1"
           >
             {/* Icon */}
             <div className="flex items-center justify-center mb-6">
               <div className="w-16 h-16 rounded-[var(--radius-pebble)] bg-ink-gold/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
                 <FileText className="w-8 h-8 text-ink-gold" />
->>>>>>> restoration-KR-Rage-Figma-v2.0
               </div>
             </div>
 
             {/* Asset Name */}
-<<<<<<< HEAD
-            <h4 className="text-on-surface-parchment font-bloom font-bold mb-2 truncate text-lg">{asset.name}</h4>
-=======
             <h4 className="text-on-surface-paper-white font-bloom font-bold mb-2 truncate text-lg">{asset.name}</h4>
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
             {/* Upload Time */}
             <p className="text-on-surface-variant-dim text-xs mb-6 font-field-note uppercase tracking-widest opacity-70">
@@ -92,17 +59,10 @@ export function AssetLibrary() {
 
             {/* Actions */}
             <div className="flex gap-3 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
-<<<<<<< HEAD
-              <button className="flex-1 bg-surface-gallery-eucalypt-smoke-highest hover:bg-wattle-gold hover:text-primary-on-primary text-wattle-gold rounded-[var(--radius-seed)] py-2.5 flex items-center justify-center transition-all duration-300 border border-primary-wattle-gold/20">
-                <Download className="w-4 h-4" />
-              </button>
-              <button className="flex-1 bg-surface-gallery-eucalypt-smoke-highest hover:bg-error hover:text-on-error text-error rounded-[var(--radius-seed)] py-2.5 flex items-center justify-center transition-all duration-300 border border-error/20">
-=======
               <button className="flex-1 bg-surface-KrDark-concrete-grey-highest hover:bg-ink-gold hover:text-primary-on-primary text-ink-gold rounded-[var(--radius-seed)] py-2.5 flex items-center justify-center transition-all duration-300 border border-primary-ink-gold/20">
                 <Download className="w-4 h-4" />
               </button>
               <button className="flex-1 bg-surface-KrDark-concrete-grey-highest hover:bg-error hover:text-on-error text-error rounded-[var(--radius-seed)] py-2.5 flex items-center justify-center transition-all duration-300 border border-error/20">
->>>>>>> restoration-KR-Rage-Figma-v2.0
                 <Trash2 className="w-4 h-4" />
               </button>
             </div>

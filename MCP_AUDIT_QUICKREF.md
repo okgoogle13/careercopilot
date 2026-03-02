@@ -30,8 +30,8 @@ chmod 700 ~/.claude/
 ```bash
 # Files with hardcoded secrets:
 ~/.claude/claude_desktop_config.json       # Line 10: GITHUB_PERSONAL_ACCESS_TOKEN
-~/Desktop/careercopilot/backend/.env       # 3 API keys
-~/Desktop/careercopilot/frontend/.env.local # 1 Supabase key
+~/Projects/careercopilot/backend/.env       # 3 API keys
+~/Projects/careercopilot/frontend/.env.local # 1 Supabase key
 ~/.gemini/antigravity/mcp_config.json      # 1 Gemini key
 ```
 
@@ -51,13 +51,13 @@ nano ~/.zshrc ~/.zshenv ~/.bashrc ~/.bash_profile
 
 | Issue | Severity | Location | Fix |
 |-------|----------|----------|-----|
-| Multiple MCP configs (3 active, 1 orphaned) | HIGH | ~/.claude, ~/Desktop, ~/.mcp.json | Consolidate to 1 file |
+| Multiple MCP configs (3 active, 1 orphaned) | HIGH | ~/.claude, ~/Projects, ~/.mcp.json | Consolidate to 1 file |
 | Flash-Sidekick not in Claude Desktop | HIGH | ~/.claude/claude_desktop_config.json | Add server definition |
 | Playwright implementation differs | HIGH | Claude Desktop vs Project config | Standardize to official |
 | Docker MCP missing ALLOWED_CONTAINERS | HIGH | ~/.claude/claude_desktop_config.json | Add env config |
 | Non-existent model: gemini-3-pro-preview | HIGH | mcp_config.json | Change to gemini-2.5-pro |
 | Hardcoded Node version path | HIGH | ~/.claude/claude_desktop_config.json line 14 | Use generic npx |
-| Hardcoded venv paths | HIGH | ~/Desktop/careercopilot/mcp_config.json | Use env variables |
+| Hardcoded venv paths | HIGH | ~/Projects/careercopilot/mcp_config.json | Use env variables |
 | Backup config is stale (Sep 2025) | MEDIUM | ~/.claude/claude_desktop_config.json.backup | Delete or update |
 | Inconsistent env var naming | LOW | GITHUB_TOKEN vs GITHUB_PERSONAL_ACCESS_TOKEN | Standardize |
 
@@ -91,7 +91,7 @@ GEMINI_API_KEY=test ~/.venv/bin/python3 servers/flash_sidekick.py --help 2>&1 | 
 CONFIG FILE COMPARISON:
 ┌──────────────────────┬──────────────┬──────────────┬──────────────┐
 │ Server               │ Claude       │ Project      │ Gemini       │
-├──────────────────────┼──────────────┼──────────────┼──────────────┤
+|----------------------|--------------|--------------|--------------|
 │ github               │ ✓            │ ✗            │ ✗            │
 │ flash-sidekick       │ ✗            │ ✓            │ ✓            │
 │ playwright           │ ✓            │ ✓            │ ✓            │
@@ -116,11 +116,7 @@ export OPENROUTER_API_KEY="<new-openrouter-key>" # From openrouter.ai
 
 ### Recommended (Set in ~/.zshrc)
 ```bash
-<<<<<<< HEAD
-export CAREERCOPILOT_ROOT="/Users/okgoogle13/Desktop/careercopilot"
-=======
 export CAREERCOPILOT_ROOT="/Users/okgoogle13/Projects/careercopilot"
->>>>>>> restoration-KR-Rage-Figma-v2.0
 export CAREERCOPILOT_VENV="${CAREERCOPILOT_ROOT}/.venv"
 export CAREERCOPILOT_VENV_BIN="${CAREERCOPILOT_VENV}/bin"
 export GITHUB_REPOSITORY="okgoogle13/careercopilot"
@@ -132,28 +128,16 @@ export GITHUB_REPOSITORY="okgoogle13/careercopilot"
 
 ### Critical
 - [ ] `~/.claude/claude_desktop_config.json` - Contains hardcoded GitHub token
-<<<<<<< HEAD
-- [ ] `/Users/okgoogle13/Desktop/careercopilot/backend/.env` - Contains 3 API keys
-- [ ] `/Users/okgoogle13/Desktop/careercopilot/frontend/.env.local` - Contains Supabase key
-
-### Configuration
-- [ ] `/Users/okgoogle13/Desktop/careercopilot/mcp_config.json` - Project MCP config
-=======
 - [ ] `/Users/okgoogle13/Projects/careercopilot/backend/.env` - Contains 3 API keys
 - [ ] `/Users/okgoogle13/Projects/careercopilot/frontend/.env.local` - Contains Supabase key
 
 ### Configuration
 - [ ] `/Users/okgoogle13/Projects/careercopilot/mcp_config.json` - Project MCP config
->>>>>>> restoration-KR-Rage-Figma-v2.0
 - [ ] `~/.mcp.json` - Orphaned config with broken paths
 - [ ] `/Users/okgoogle13/.gemini/antigravity/mcp_config.json` - Gemini-specific config
 
 ### Reference
-<<<<<<< HEAD
-- [ ] `/Users/okgoogle13/Desktop/careercopilot/.env.mcp.example` - Environment template
-=======
 - [ ] `/Users/okgoogle13/Projects/careercopilot/.env.mcp.example` - Environment template
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 ---
 
@@ -201,7 +185,7 @@ After implementing fixes, verify:
 
 ```bash
 # ✓ No hardcoded secrets in any config file
-grep -r "github_pat_\|AIzaSy\|sk-proj-\|sk-ant-api" ~/.claude ~/Desktop/careercopilot
+grep -r "github_pat_\|AIzaSy\|sk-proj-\|sk-ant-api" ~/.claude ~/Projects/careercopilot
 
 # ✓ All credentials use ${VAR_NAME} substitution
 grep -E "\$\{GITHUB_TOKEN\}|\$\{GEMINI_API_KEY\}" ~/.claude/claude_desktop_config.json
@@ -231,8 +215,8 @@ MAIN CLAUDE DESKTOP CONFIG:
 ~/.claude/claude_desktop_config.json (CURRENT - 3 servers)
 
 PROJECT CONFIGS:
-~/Desktop/careercopilot/mcp_config.json (7 servers - CONSOLIDATE)
-~/Desktop/careercopilot/.env.mcp.example (Template)
+~/Projects/careercopilot/mcp_config.json (7 servers - CONSOLIDATE)
+~/Projects/careercopilot/.env.mcp.example (Template)
 
 ORPHANED CONFIGS:
 ~/.mcp.json (14 servers with broken paths - ARCHIVE)
@@ -279,7 +263,7 @@ echo ""
 
 echo "1. Checking for hardcoded credentials..."
 CREDS=$(grep -r "github_pat_\|AIzaSy\|sk-proj-\|sk-ant-api\|pplx-" \
-  ~/.claude ~/Desktop/careercopilot 2>/dev/null | wc -l)
+  ~/.claude ~/Projects/careercopilot 2>/dev/null | wc -l)
 [ "$CREDS" -eq 0 ] && echo "✓ PASS: No hardcoded credentials found" || \
   echo "✗ FAIL: Found $CREDS credential occurrences"
 

@@ -11,13 +11,8 @@
   },
   "topEssential": [
     {
-<<<<<<< HEAD
-      "name": "NorthcoteButton",
-      "path": "src/components/ui/NorthcoteButton.tsx",
-=======
       "name": "kerala-rageButton",
       "path": "src/components/ui/kerala-rageButton.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "category": "ui",
       "usageCount": 11,
       "migrationStatus": "mixed",
@@ -50,11 +45,7 @@
     },
     {
       "name": "GlassLeafCard",
-<<<<<<< HEAD
-      "path": "src/features/gallery/GlassLeafCard.tsx",
-=======
       "path": "src/features/kr-dark/GlassLeafCard.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "category": "features",
       "usageCount": 2,
       "migrationStatus": "migrated",
@@ -288,13 +279,8 @@
   ],
   "topMixed": [
     {
-<<<<<<< HEAD
-      "name": "NorthcoteButton",
-      "path": "src/components/ui/NorthcoteButton.tsx",
-=======
       "name": "kerala-rageButton",
       "path": "src/components/ui/kerala-rageButton.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "category": "ui",
       "usageCount": 11,
       "migrationStatus": "mixed",

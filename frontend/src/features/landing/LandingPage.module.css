@@ -1,27 +1,14 @@
-<<<<<<< HEAD
-@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Fredoka:wght@300..700&display=swap');
-
-=======
->>>>>>> restoration-KR-Rage-Figma-v2.0
 .container {
   position: relative;
   width: 100vw;
   height: 100vh;
-<<<<<<< HEAD
-  background-color: var(--color-specimen-night-darkest, #050403);
-=======
   background-color: var(--color-asphalt-black-darkest, #050403);
->>>>>>> restoration-KR-Rage-Figma-v2.0
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
   font-family: var(--font-field-note, sans-serif);
-<<<<<<< HEAD
-  color: var(--color-parchment, #f0ead6);
-=======
   color: var(--color-paper-white, #f0ead6);
->>>>>>> restoration-KR-Rage-Figma-v2.0
 }
 
 /* ==========================================
@@ -42,11 +29,7 @@
 }
 
 /* ==========================================
-<<<<<<< HEAD
-   LAYER 1: Organic Blobs (Warm Gallery Tones)
-=======
    LAYER 1: Organic Blobs (Warm kr-dark Tones)
->>>>>>> restoration-KR-Rage-Figma-v2.0
 ========================================== */
 .blobCanvas {
   position: absolute;
@@ -65,11 +48,7 @@
 .blobA {
   width: 50vw;
   height: 50vh;
-<<<<<<< HEAD
-  background: radial-gradient(circle, var(--color-wattle-gold, #d4a84b) 0%, transparent 70%);
-=======
   background: radial-gradient(circle, var(--color-ink-gold, #d4a84b) 0%, transparent 70%);
->>>>>>> restoration-KR-Rage-Figma-v2.0
   top: -10%;
   left: -10%;
   animation: floating var(--duration-slow) infinite alternate ease-in-out;
@@ -78,11 +57,7 @@
 .blobB {
   width: 40vw;
   height: 40vh;
-<<<<<<< HEAD
-  background: radial-gradient(circle, var(--color-waratah-crimson, #c45c4b) 0%, transparent 70%);
-=======
   background: radial-gradient(circle, var(--color-solidarity-red, #c45c4b) 0%, transparent 70%);
->>>>>>> restoration-KR-Rage-Figma-v2.0
   bottom: -5%;
   right: -5%;
   animation: floating 8s infinite alternate-reverse ease-in-out;
@@ -93,11 +68,7 @@
   height: 30vh;
   background: radial-gradient(
     circle,
-<<<<<<< HEAD
-    var(--color-wattle-gold-lightest, #e8c77a) 0%,
-=======
     var(--color-ink-gold-lightest, #e8c77a) 0%,
->>>>>>> restoration-KR-Rage-Figma-v2.0
     transparent 70%
   );
   top: 40%;
@@ -115,15 +86,9 @@
 }
 
 /* ==========================================
-<<<<<<< HEAD
-   LAYER 2: Specimen Anchors
-========================================== */
-.specimenLayer {
-=======
    LAYER 2: kr-motif Anchors
 ========================================== */
 .kr-motifLayer {
->>>>>>> restoration-KR-Rage-Figma-v2.0
   position: absolute;
   inset: 0;
   z-index: 3;
@@ -155,20 +120,12 @@
 }
 
 /* ==========================================
-<<<<<<< HEAD
-   LAYER 3: Hero Card (The Gallery Glass)
-=======
    LAYER 3: Hero Card (The kr-dark Glass)
->>>>>>> restoration-KR-Rage-Figma-v2.0
 ========================================== */
 .heroCard {
   position: relative;
   z-index: 10;
-<<<<<<< HEAD
-  background: rgba(44, 39, 35, 0.7); /* Eucalypt Smoke Base approx */
-=======
   background: rgba(44, 39, 35, 0.7); /* Concrete Grey Base approx */
->>>>>>> restoration-KR-Rage-Figma-v2.0
   backdrop-filter: blur(32px);
   -webkit-backdrop-filter: blur(32px);
   padding: 5rem 4rem;
@@ -176,11 +133,7 @@
   text-align: center;
   max-width: 540px;
   width: 90%;
-<<<<<<< HEAD
-  border: 1px solid rgba(230, 225, 214, 0.1); /* Flannel Flower Border */
-=======
   border: 1px solid rgba(230, 225, 214, 0.1); /* Concrete Grey Border */
->>>>>>> restoration-KR-Rage-Figma-v2.0
   box-shadow: var(--shadow-maximum);
   transition: transform var(--duration-standard) var(--ease-viscous-breeze);
 }
@@ -196,11 +149,7 @@
   font-variation-settings:
     'SOFT' 80,
     'WONK' 1;
-<<<<<<< HEAD
-  color: var(--color-flannel-flower, #e6e1d6);
-=======
   color: var(--color-concrete-grey, #e6e1d6);
->>>>>>> restoration-KR-Rage-Figma-v2.0
   margin-top: 2rem;
   opacity: 0.9;
 }
@@ -215,13 +164,8 @@
 }
 
 .btnPebbleFilled {
-<<<<<<< HEAD
-  background-color: var(--color-wattle-gold);
-  color: var(--color-specimen-night-darkest);
-=======
   background-color: var(--color-ink-gold);
   color: var(--color-asphalt-black-darkest);
->>>>>>> restoration-KR-Rage-Figma-v2.0
   padding: 1.25rem 2.5rem;
   border-radius: var(--radius-pebble);
   font-family: var(--font-field-note);
@@ -235,27 +179,16 @@
 
 .btnPebbleFilled:hover {
   transform: translateY(-4px) scale(1.05);
-<<<<<<< HEAD
-  background-color: var(--color-wattle-gold-light);
-=======
   background-color: var(--color-ink-gold-light);
->>>>>>> restoration-KR-Rage-Figma-v2.0
   box-shadow: var(--shadow-elevated);
 }
 
 .btnPebbleOutlined {
   background-color: transparent;
-<<<<<<< HEAD
-  color: var(--color-wattle-gold);
-  padding: 1.25rem 2.5rem;
-  border-radius: var(--radius-pebble);
-  border: 2px solid var(--color-wattle-gold);
-=======
   color: var(--color-ink-gold);
   padding: 1.25rem 2.5rem;
   border-radius: var(--radius-pebble);
   border: 2px solid var(--color-ink-gold);
->>>>>>> restoration-KR-Rage-Figma-v2.0
   font-family: var(--font-field-note);
   font-weight: 700;
   text-transform: uppercase;
@@ -270,11 +203,7 @@
 }
 
 .btnLink {
-<<<<<<< HEAD
-  color: var(--color-flannel-flower-dark);
-=======
   color: var(--color-concrete-grey-dark);
->>>>>>> restoration-KR-Rage-Figma-v2.0
   font-family: var(--font-annotation);
   text-decoration: underline;
   text-underline-offset: 4px;
@@ -293,11 +222,7 @@
   bottom: 3rem;
   left: 3rem;
   font-size: 3rem;
-<<<<<<< HEAD
-  color: var(--color-wattle-gold);
-=======
   color: var(--color-ink-gold);
->>>>>>> restoration-KR-Rage-Figma-v2.0
   opacity: 0.2;
   pointer-events: none;
 }

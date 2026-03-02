@@ -19,12 +19,19 @@ sys.path.insert(0, str(Path(__file__).parent.parent / "backend"))
 try:
     from app.core.secure_config import settings
     from app.core.secret_manager import get_app_secret, get_firebase_config
-    from google.cloud import secretmanager
     import requests
 except ImportError as e:
     print(f"❌ Import error: {e}")
     print("Make sure you're running from the project root and dependencies are installed")
     sys.exit(1)
+
+try:
+    from google.cloud import secretmanager
+
+    SECRET_MANAGER_AVAILABLE = True
+except ImportError:
+    secretmanager = None  # type: ignore[assignment]
+    SECRET_MANAGER_AVAILABLE = False
 
 
 class ConfigurationTester:
@@ -77,6 +84,15 @@ class ConfigurationTester:
     def test_secret_manager_connectivity(self) -> bool:
         """Test Google Cloud Secret Manager connectivity."""
         self.print_header("SECRET MANAGER CONNECTIVITY TEST")
+
+        if not SECRET_MANAGER_AVAILABLE:
+            self.print_test(
+                "Secret Manager Client",
+                "WARN",
+                "google.cloud.secretmanager is not installed in this environment",
+            )
+            self.warnings.append("Secret Manager client library not installed")
+            return False
 
         try:
             client = secretmanager.SecretManagerServiceClient()

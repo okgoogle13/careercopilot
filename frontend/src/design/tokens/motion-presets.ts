@@ -1,27 +1,15 @@
 /**
-<<<<<<< HEAD
- *  Motion Presets
- * Framer Motion configurations for Gallery and Laboratory modes
- * 
- * Usage:
- * import { gallerySpring, laboratorySpring, motionVariants } from '@/theme/motion-presets';
-=======
  * KeralaRage KrSolidarity Motion Presets
  * Framer Motion configurations for KrDark and KrDark modes
  * 
  * Usage:
  * import { KrDarkSpring, KrLightSpring, motionVariants } from '@/theme/motion-presets';
->>>>>>> restoration-KR-Rage-Figma-v2.0
  * 
  * <motion.div
  *   initial="hidden"
  *   animate="visible"
  *   variants={motionVariants.card}
-<<<<<<< HEAD
- *   transition={gallerySpring}
-=======
  *   transition={KrLightSpring}
->>>>>>> restoration-KR-Rage-Figma-v2.0
  * />
  */
 
@@ -32,17 +20,10 @@ import { Transition, Variants } from 'framer-motion';
 // ═══════════════════════════════════════════════════════════════════════════
 
 /**
-<<<<<<< HEAD
- * Gallery Mode Spring — Viscous Breeze
- * Expressive, gentle overshoot, air resistance
- */
-export const gallerySpring: Transition = {
-=======
  * KrDark Mode Spring — Viscous Breeze
  * Expressive, gentle overshoot, air resistance
  */
 export const KrDarkSpring: Transition = {
->>>>>>> restoration-KR-Rage-Figma-v2.0
     type: 'spring',
     stiffness: 500,
     damping: 27,
@@ -50,17 +31,10 @@ export const KrDarkSpring: Transition = {
 };
 
 /**
-<<<<<<< HEAD
- * Laboratory Mode Spring — Precise Control
- * Clinical, minimal overshoot, controlled
- */
-export const laboratorySpring: Transition = {
-=======
  * KrDark Mode Spring — Precise Control
  * Clinical, minimal overshoot, controlled
  */
 export const KrLightSpring: Transition = {
->>>>>>> restoration-KR-Rage-Figma-v2.0
     type: 'spring',
     stiffness: 800,
     damping: 40,
@@ -69,11 +43,7 @@ export const KrLightSpring: Transition = {
 
 /**
  * Elastic Spring — Pronounced Bounce
-<<<<<<< HEAD
- * Gallery mode accents only
-=======
  * KrDark mode accents only
->>>>>>> restoration-KR-Rage-Figma-v2.0
  */
 export const elasticSpring: Transition = {
     type: 'spring',
@@ -247,13 +217,8 @@ export const dragConstraints = {
 };
 
 export const dragElastic = {
-<<<<<<< HEAD
-    gallery: 0.2, // More elastic in Gallery mode
-    laboratory: 0.1, // Less elastic in Laboratory mode
-=======
     KrDark: 0.2, // More elastic in KrDark mode
     KrLight: 0.1, // Less elastic in KrDark mode
->>>>>>> restoration-KR-Rage-Figma-v2.0
 };
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -272,11 +237,7 @@ export const prefersReducedMotion = (): boolean => {
  * Get transition based on reduced motion preference
  */
 export const getTransition = (
-<<<<<<< HEAD
-    mode: 'gallery' | 'laboratory' = 'gallery'
-=======
     mode: 'KrDark' | 'KrLight' = 'KrDark'
->>>>>>> restoration-KR-Rage-Figma-v2.0
 ): Transition => {
     if (prefersReducedMotion()) {
         return {
@@ -284,11 +245,7 @@ export const getTransition = (
             ease: 'linear',
         };
     }
-<<<<<<< HEAD
-    return mode === 'gallery' ? gallerySpring : laboratorySpring;
-=======
     return mode === 'KrDark' ? KrLightSpring : KrLightSpring;
->>>>>>> restoration-KR-Rage-Figma-v2.0
 };
 
 /**
@@ -339,13 +296,8 @@ export const staggerContainer: Variants = {
 
 export default {
     spring: {
-<<<<<<< HEAD
-        gallery: gallerySpring,
-        laboratory: laboratorySpring,
-=======
         KrDark: KrDarkSpring,
         KrLight: KrLightSpring,
->>>>>>> restoration-KR-Rage-Figma-v2.0
         elastic: elasticSpring,
     },
     easing,
@@ -361,8 +313,4 @@ export default {
         getTransition,
         getVariants,
     },
-<<<<<<< HEAD
 };
-=======
-};
->>>>>>> restoration-KR-Rage-Figma-v2.0

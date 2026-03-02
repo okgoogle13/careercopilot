@@ -20,11 +20,7 @@ export function EcosystemSandbox() {
                 <div className="flex-none mb-6 flex flex-col md:flex-row md:items-end justify-between gap-4">
                     <AuroraHeader
                         title="Ecosystem Sandbox"
-<<<<<<< HEAD
-                        tag="LABORATORY"
-=======
                         tag="KrDark"
->>>>>>> restoration-KR-Rage-Figma-v2.0
                         wittySubtitle="Where evidence meets execution"
                     />
 

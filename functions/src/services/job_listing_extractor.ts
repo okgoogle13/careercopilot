@@ -1,15 +1,3 @@
-<<<<<<< HEAD
-// @ts-expect-error - TS2497: esModuleInterop is enabled, but TypeScript 5.9 still complains about namespace import
-import * as admin from "firebase-admin";
-import * as firebase from "firebase-admin/firestore";
-import {JobListing} from "../types/job_listing";
-import {FirebaseVectorSearch} from "../lib/firebase_vector_search";
-import https from "https";
-
-export class JobListingExtractor {
-  private vectorSearch: FirebaseVectorSearch<JobListing>;
-  private db: firebase.Firestore;
-=======
 import admin from "firebase-admin";
 import {z} from "genkit";
 import https from "https";
@@ -20,7 +8,6 @@ import {JobListing} from "../types/job_listing";
 export class JobListingExtractor {
   private vectorSearch: FirebaseVectorSearch<JobListing>;
   private db = admin.firestore();
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
   constructor() {
     this.db = admin.firestore();
@@ -28,40 +15,6 @@ export class JobListingExtractor {
   }
 
   /**
-<<<<<<< HEAD
-   * Extract job listing from text or URL
-   */
-  async extract(data: {
-    source: string | { url: string };
-    options?: {
-      extractSkills?: boolean;
-      extractSalary?: boolean;
-      extractLocation?: boolean;
-    };
-  }): Promise<JobListing> {
-    const {source, options = {extractSkills: true, extractSalary: true, extractLocation: true}} = data;
-    const text = typeof source === "string" ? source : await this.fetchUrl(source.url);
-
-    // Basic job listing extraction
-    const jobListing: JobListing = {
-      id: this.generateId(),
-      title: this.extractTitle(text),
-      company: this.extractCompany(text),
-      description: text,
-      skills: options.extractSkills ? this.extractSkills(text) : [],
-      salary: options.extractSalary ? this.extractSalary(text) : undefined,
-      location: options.extractLocation ? this.extractLocation(text) : undefined,
-      source: typeof source === "string" ? "text" : source.url,
-      createdAt: admin.firestore.FieldValue.serverTimestamp(),
-    };
-
-    // Generate and store embedding
-    const embedding = await this.generateEmbedding(jobListing);
-    await this.vectorSearch.upsert(jobListing.id, embedding, jobListing);
-
-    return jobListing;
-  }
-=======
    * Extract job listing data from a source (text or URL)
    */
   extract = ai.defineFlow(
@@ -91,7 +44,7 @@ export class JobListingExtractor {
           })
           .optional(),
         location: z.string().optional(),
-        source: z.union([z.string(), z.string()]), // Simplified for now
+        source: z.string(),
         createdAt: z.any(), // Timestamp type handling can be tricky with Zod/Genkit
       }),
     },
@@ -132,33 +85,22 @@ export class JobListingExtractor {
       return jobListing;
     },
   );
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
   /**
    * Find similar job listings
    */
   async findSimilar(data: {
-<<<<<<< HEAD
-    query: string | JobListing;
-=======
     query: string | JobListing | Record<string, unknown>;
->>>>>>> restoration-KR-Rage-Figma-v2.0
     limit?: number;
     minScore?: number;
     filters?: Record<string, unknown>;
   }): Promise<Array<{ job: JobListing; score: number }>> {
     // Use Genkit's semantic search
     const queryEmbedding = await this.generateEmbedding({
-<<<<<<< HEAD
-      title: typeof data.query === "string" ? data.query : data.query.title || "",
-      description: typeof data.query === "string" ? data.query : data.query.description || "",
-      company: typeof data.query === "string" ? "" : data.query.company || "",
-=======
       title: typeof data.query === "string" ? data.query : (data.query as any).title || "",
       description:
         typeof data.query === "string" ? data.query : (data.query as any).description || "",
       company: typeof data.query === "string" ? "" : (data.query as any).company || "",
->>>>>>> restoration-KR-Rage-Figma-v2.0
     });
 
     const results = await this.vectorSearch.search(queryEmbedding, {
@@ -166,19 +108,12 @@ export class JobListingExtractor {
       minScore: data.minScore,
       filters: data.filters,
     });
-<<<<<<< HEAD
-    return results.map(({id: _id, score, metadata}) => ({
-      job: metadata,
-      score,
-    }));
-=======
     return results.map(
       ({id: _id, score, metadata}: { id: string; score: number; metadata: JobListing }) => ({
         job: metadata,
         score,
       }),
     );
->>>>>>> restoration-KR-Rage-Figma-v2.0
   }
 
   private async fetchUrl(url: string): Promise<string> {
@@ -271,41 +206,13 @@ export class JobListingExtractor {
   }): Promise<number[]> {
     const text = `${job.title} ${job.company || ""} ${job.description}`.trim();
 
-<<<<<<< HEAD
-    // Simple hash-based embedding (for deployment unblocking)
-    // TODO: Replace with proper embedding model (Vertex AI, OpenAI, etc.)
-    const hash = this.hashString(text);
-    const vector: number[] = [];
-    for (let i = 0; i < 384; i++) {
-      vector.push(((hash + i) % 1000) / 1000);
-    }
-    return this.normalizeVector(vector);
-=======
     // Use Genkit to generate embeddings
     const response = await ai.embed({
       embedder: "gemini-1.5-flash",
       content: text,
-      // taskType: "retrieval_document", // might be optional or different in v1
     });
 
     return response[0].embedding;
->>>>>>> restoration-KR-Rage-Figma-v2.0
-  }
-
-  private hashString(str: string): number {
-    let hash = 0;
-    for (let i = 0; i < str.length; i++) {
-      const char = str.charCodeAt(i);
-      hash = (hash << 5) - hash + char;
-      hash = hash & hash; // Convert to 32bit integer
-    }
-    return Math.abs(hash);
-  }
-
-  private normalizeVector(vector: number[]): number[] {
-    const norm = Math.sqrt(vector.reduce((sum, val) => sum + val * val, 0));
-    if (norm === 0) return vector;
-    return vector.map((val) => val / norm);
   }
 
   private generateId(): string {
