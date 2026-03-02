@@ -1,6 +1,6 @@
 /**
 <<<<<<< HEAD
- * Northcote Curio Motion Presets
+ *  Motion Presets
  * Framer Motion configurations for Gallery and Laboratory modes
  * 
  * Usage:

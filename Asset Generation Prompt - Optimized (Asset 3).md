@@ -1,4 +1,4 @@
-# Northcote Curio Asset Generation Prompt: Asset 3
+#  Asset Generation Prompt: Asset 3
 
 ## ASSET 3: LABORATORY PARCHMENT TEXTURE
 
@@ -94,7 +94,7 @@ VICTORIAN SCHOLARLY RIGOR:
 
 NORTHCOTE VISION EMBODIMENT:
 - Geometric Beauty: Mathematics as a foundation for nature.
-- Master Narrative: This is the canvas upon which the Northcote Curio specimens
+- Master Narrative: This is the canvas upon which the  specimens
   are studied and documented.
 
 ---

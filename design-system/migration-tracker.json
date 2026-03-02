@@ -4,7 +4,7 @@
   "components": {
     "components/M3Button/M3Button.tsx": {
       "status": "migrated",
-      "notes": "Northcote Curio: Lavender/Lilac colors, full token support"
+      "notes": ": Lavender/Lilac colors, full token support"
     },
     "components/ErrorBoundary.tsx": {
       "status": "pending",
@@ -348,7 +348,7 @@
     },
     "components/ui/date-picker.tsx": {
       "status": "migrated",
-      "notes": "Northcote Curio: Date picker with MUI calendar, primary selection"
+      "notes": ": Date picker with MUI calendar, primary selection"
     },
     "components/ui/breadcrumb.tsx": {
       "status": "pending",
@@ -384,11 +384,11 @@
     },
     "components/ui/toast.tsx": {
       "status": "migrated",
-      "notes": "Northcote Curio: Toast notification with surface container, error/success variants"
+      "notes": ": Toast notification with surface container, error/success variants"
     },
     "components/ui/button.tsx": {
       "status": "migrated",
-      "notes": "Northcote Curio: Base button component with MUI integration"
+      "notes": ": Base button component with MUI integration"
     },
     "components/ui/skeleton.tsx": {
       "status": "pending",
@@ -408,7 +408,7 @@
     },
     "components/ui/select.tsx": {
       "status": "migrated",
-      "notes": "Northcote Curio: Select/dropdown with MUI base, elevated menu"
+      "notes": ": Select/dropdown with MUI base, elevated menu"
     },
     "components/ui/EmptyState.tsx": {
       "status": "pending",
@@ -508,67 +508,67 @@
     },
     "components/M3Card/M3Card.tsx": {
       "status": "migrated",
-      "notes": "Northcote Curio: Surface container colors, elevation tokens"
+      "notes": ": Surface container colors, elevation tokens"
     },
     "components/M3Badge/M3Badge.tsx": {
       "status": "migrated",
-      "notes": "Northcote Curio: Status badge with secondary/tertiary/error colors"
+      "notes": ": Status badge with secondary/tertiary/error colors"
     },
     "components/M3Input/M3Input.tsx": {
       "status": "migrated",
-      "notes": "Northcote Curio: Outlined input with primary focus state, error colors"
+      "notes": ": Outlined input with primary focus state, error colors"
     },
     "components/M3Dialog/M3Dialog.tsx": {
       "status": "migrated",
-      "notes": "Northcote Curio: Dialog with scrim, elevated surface, scale animation"
+      "notes": ": Dialog with scrim, elevated surface, scale animation"
     },
     "components/M3Progress/M3Progress.tsx": {
       "status": "migrated",
-      "notes": "Northcote Curio: Linear/circular progress with primary color indicators"
+      "notes": ": Linear/circular progress with primary color indicators"
     },
     "components/M3Textarea/M3Textarea.tsx": {
       "status": "migrated",
-      "notes": "Northcote Curio: Textarea with floating label, outlined variant"
+      "notes": ": Textarea with floating label, outlined variant"
     },
     "components/M3SearchInput/M3SearchInput.tsx": {
       "status": "migrated",
-      "notes": "Northcote Curio: Search input with icon, outlined variant"
+      "notes": ": Search input with icon, outlined variant"
     },
     "components/M3Tabs/M3Tabs.tsx": {
       "status": "migrated",
-      "notes": "Northcote Curio: Tab navigation with animated indicator, primary underline"
+      "notes": ": Tab navigation with animated indicator, primary underline"
     },
     "components/M3Select/M3Select.tsx": {
       "status": "migrated",
-      "notes": "Northcote Curio: Dropdown select with menu elevation, outlined variant"
+      "notes": ": Dropdown select with menu elevation, outlined variant"
     },
     "components/M3Sidebar/M3Sidebar.tsx": {
       "status": "migrated",
-      "notes": "Northcote Curio: Sidebar navigation with surface container"
+      "notes": ": Sidebar navigation with surface container"
     },
     "components/M3DatePicker/M3DatePicker.tsx": {
       "status": "migrated",
-      "notes": "Northcote Curio: Date picker with calendar grid, primary highlight"
+      "notes": ": Date picker with calendar grid, primary highlight"
     },
     "components/M3Breadcrumb/M3Breadcrumb.tsx": {
       "status": "migrated",
-      "notes": "Northcote Curio: Breadcrumb navigation with primary links"
+      "notes": ": Breadcrumb navigation with primary links"
     },
     "components/M3Switch/M3Switch.tsx": {
       "status": "migrated",
-      "notes": "Northcote Curio: Toggle switch with primary color, on/off states"
+      "notes": ": Toggle switch with primary color, on/off states"
     },
     "components/M3Slider/M3Slider.tsx": {
       "status": "migrated",
-      "notes": "Northcote Curio: Range slider with primary track, thumb indicator"
+      "notes": ": Range slider with primary track, thumb indicator"
     },
     "components/M3RadioGroup/M3RadioGroup.tsx": {
       "status": "migrated",
-      "notes": "Northcote Curio: Radio button group with primary color, state layers"
+      "notes": ": Radio button group with primary color, state layers"
     },
     "components/M3Checkbox/M3Checkbox.tsx": {
       "status": "migrated",
-      "notes": "Northcote Curio: Checkbox with primary color, indeterminate state"
+      "notes": ": Checkbox with primary color, indeterminate state"
     }
   },
   "batches": []

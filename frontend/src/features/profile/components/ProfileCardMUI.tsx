@@ -1,7 +1,7 @@
 /**
  * NORTHCOTE CURIO: PROFILE CARD (MUI Replacement)
  *
- * Profile card component using Northcote Curio Design System v4.4.
+ * Profile card component using  Design System v4.4.
  * Refactored to use CSS variables from unified design tokens.
  */
 

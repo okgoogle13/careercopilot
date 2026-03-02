@@ -1,8 +1,8 @@
-# Northcote Curio Design Principles
+#  Design Principles
 
 ## Core Philosophy: Victorian Anatomical Extremism
 
-Northcote Curio is built on the collision of **Australian Endemic Specimens** and **Geometric Precision**. We reject the generic, the "cute," and the sepia-toned paths of traditional vintage design.
+ is built on the collision of **Australian Endemic Specimens** and **Geometric Precision**. We reject the generic, the "cute," and the sepia-toned paths of traditional vintage design.
 
 ### 1. The Void (Atmosphere)
 

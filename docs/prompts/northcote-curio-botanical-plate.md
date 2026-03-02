@@ -1,4 +1,4 @@
-# Northcote Curio Botanical Plate — Google AI Studio Prompt
+#  Botanical Plate — Google AI Studio Prompt
 
 **Version:** 1.0
 **Last Updated:** 2026-01-29
@@ -82,7 +82,7 @@ Label styling:
 
 === ADDITIONAL DETAILS ===
 - Include one small compass rose or decorative element in bottom-right corner
-- Add plate attribution: "Northcote Curio Collection — Plate [Roman numeral]"
+- Add plate attribution: " Collection — Plate [Roman numeral]"
 - Cross-section or cutaway details welcome (agate slice, seed pod interior)
 - Fine stippling or hatching texture on specimens for authenticity
 - No modern elements, frames, or device mockups
@@ -116,7 +116,7 @@ Organic asymmetrical composition like a cabinet of curiosities. No grid alignmen
 
 Color palette: coral-red, terracotta, ochre, sage green, warm brown only. NO purple, blue, or neon.
 
-Include bottom-right attribution: "Northcote Curio Collection — Plate VII". Hyperdetailed museum-quality rendering with fine stippling texture. 19th-century scientific illustration style.
+Include bottom-right attribution: " Collection — Plate VII". Hyperdetailed museum-quality rendering with fine stippling texture. 19th-century scientific illustration style.
 ```
 
 ---
@@ -151,7 +151,7 @@ Customize these for different plates:
 | Primary Subject | Waratah, Banksia, Kangaroo Paw, Sturt's Desert Pea          |
 | Fauna           | Frill-neck, Echidna, Platypus, Kookaburra, Wombat           |
 | Plate Number    | I, II, III, IV, V, VI, VII, VIII, IX, X                     |
-| Collection      | "Northcote Curio Collection", "Victorian Botanical Studies" |
+| Collection      | " Collection", "Victorian Botanical Studies" |
 
 ---
 
@@ -178,4 +178,4 @@ Customize these for different plates:
 
 ---
 
-_Prompt optimized for Northcote Curio design system compliance_
+_Prompt optimized for  design system compliance_

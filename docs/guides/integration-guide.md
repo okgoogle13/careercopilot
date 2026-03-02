@@ -3,7 +3,7 @@
 ## Overview
 
 <<<<<<< HEAD
-This document defines how the Northcote Curio Design System acts as a **Shared Source of Truth (SSoT)** for cross-platform agents and automated tools.
+This document defines how the  Design System acts as a **Shared Source of Truth (SSoT)** for cross-platform agents and automated tools.
 =======
 This document defines how the kerala-rage kr-solidarity Design System acts as a **Shared Source of Truth (SSoT)** for cross-platform agents and automated tools.
 >>>>>>> restoration-KR-Rage-Figma-v2.0

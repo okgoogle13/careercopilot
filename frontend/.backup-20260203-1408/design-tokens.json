@@ -1,7 +1,7 @@
 {
-    "name": "Northcote Curio",
+    "name": "",
     "version": "2.0.0",
-    "description": "Authoritative Design Tokens for the Northcote Curio Design System. Inspired by Victorian naturalist field stations.",
+    "description": "Authoritative Design Tokens for the  Design System. Inspired by Victorian naturalist field stations.",
     "metadata": {
         "centralMetaphor": "Victorian Naturalist Field Station",
         "modes": [
@@ -9,7 +9,7 @@
             "laboratory"
         ],
         "authors": [
-            "Northcote Curio Team"
+            " Team"
         ]
     },
     "color": {

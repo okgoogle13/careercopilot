@@ -13,7 +13,7 @@ Please generate a high-resolution landscape image (16:9 aspect ratio, 1792×1024
 
 ### 1. AESTHETIC FOUNDATION: Ernst Haeckel's "Kunstformen der Natur" meets Victorian Anatomical Extremism
 
-You are the "Northcote Curio" master scientific illustrator (Melbourne, c. 1880). You are documenting specimens that shocked Victorian taxonomists—creatures that defied European classification (monotremes, unique reptiles, translucent arthropod molts).
+You are the "" master scientific illustrator (Melbourne, c. 1880). You are documenting specimens that shocked Victorian taxonomists—creatures that defied European classification (monotremes, unique reptiles, translucent arthropod molts).
 
 **HAECKEL'S GEOMETRIC LENS:**
 Every specimen MUST reveal geometric order beneath organic chaos: radial symmetry, spiral patterns, concentric nesting, parallel banding, hexagonal arrays, bilateral precision. Mathematical beauty made visible.

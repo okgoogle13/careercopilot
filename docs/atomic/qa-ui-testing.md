@@ -13,9 +13,9 @@
 <<<<<<< HEAD
 - Check Gallery + Laboratory key flows.
 
-## Northcote Curio Visual Verification
+##  Visual Verification
 
-- Confirm `frontend/src/globals.css` loads Northcote Curio tokens.
+- Confirm `frontend/src/globals.css` loads  tokens.
 - Verify `NorthcoteButton` hover uses GRAD physics (no layout shift).
 - Verify `StatusBadge` breathing animation present.
 - Spot-check Gallery + Laboratory pages for tokenized colors and shapes.

@@ -18,7 +18,7 @@ export interface ValveProps extends Omit<
 
 /**
 <<<<<<< HEAD
- * Valve - Northcote Curio Toggle Switch
+ * Valve -  Toggle Switch
  *
  * An organic, viscous-motion toggle switch using Northcote botanical palette.
  * Features smooth transitions with viscous-breeze easing and botanical color theming.

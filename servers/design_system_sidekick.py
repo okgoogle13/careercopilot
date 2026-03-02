@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-MCP Design System Sidekick - Northcote Curio Validation & Asset Orchestration
+MCP Design System Sidekick -  Validation & Asset Orchestration
 
 Specialized MCP server bridging Claude Desktop's creative direction with
 programmatic asset validation and implementation synthesis.

@@ -1,4 +1,4 @@
-# Northcote Curio: Atmospheric Asset Briefs (Optimized)
+# : Atmospheric Asset Briefs (Optimized)
 
 **Phase 3: UI & Atmospheric Elements**
 

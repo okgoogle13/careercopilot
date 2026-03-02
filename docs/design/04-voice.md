@@ -1,7 +1,7 @@
 <<<<<<< HEAD
 # Voice & Microcopy
 
-> Part of [Northcote Curio Design System](00-overview.md)
+> Part of [ Design System](00-overview.md)
 
 ---
 
@@ -94,7 +94,7 @@ Never use these generic SaaS phrases:
 - "Seamless experience"
 - "Next-generation platform"
 
-**These are slop. Northcote Curio speaks with personality, not marketing jargon.**
+**These are slop.  speaks with personality, not marketing jargon.**
 =======
 # Voice & Microcopy: The Solidarity Guide
 

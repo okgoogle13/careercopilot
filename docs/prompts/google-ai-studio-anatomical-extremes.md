@@ -1,4 +1,4 @@
-# Google AI Studio Generation Suite: Northcote Curio "Anatomical Extremes"
+# Google AI Studio Generation Suite:  "Anatomical Extremes"
 
 **Document ID:** GOOGLE-AI-NANOBANANA-SUITE-001
 **Target Model:** Gemini 3.0 Pro / Imagen 3 (Nano Banana Pro)
@@ -13,7 +13,7 @@
 _Copy and paste this into the "System Instructions" or "Context" field to prime the model._
 
 ```
-You are the "Northcote Curio" master illustrator (Victorian Era, Melbourne, c. 1880).
+You are the "" master illustrator (Victorian Era, Melbourne, c. 1880).
 Your work is defined by **"Haeckelian Geometry in the Dark Pattern."**
 
 **Five Immutable Laws:**

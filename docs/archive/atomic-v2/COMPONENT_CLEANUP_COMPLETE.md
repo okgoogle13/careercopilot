@@ -8,7 +8,7 @@
 ## Summary
 
 <<<<<<< HEAD
-All forbidden fonts have been successfully purged from the codebase. The Northcote Curio design system is now fully implemented across all layers.
+All forbidden fonts have been successfully purged from the codebase. The  design system is now fully implemented across all layers.
 =======
 All forbidden fonts have been successfully purged from the codebase. The kerala-rage kr-solidarity design system is now fully implemented across all layers.
 >>>>>>> restoration-KR-Rage-Figma-v2.0
@@ -49,11 +49,11 @@ All forbidden fonts have been successfully purged from the codebase. The kerala-
 4. **`frontend/src/features/style-guide/M3ExpressiveComponents.tsx`** ✅
    - Replaced: Plus Jakarta Sans → Work Sans (3 occurrences)
 <<<<<<< HEAD
-   - Updated: All interactive demos now use Northcote Curio fonts
+   - Updated: All interactive demos now use  fonts
 
 ### Theme Configuration
 5. **`frontend/src/theme/mui-theme.ts`** ✅
-   - Updated: Header comments to reference Northcote Curio
+   - Updated: Header comments to reference 
    - Updated: Color mappings to Wattle Gold, Waratah Crimson, Flannel Flower
 =======
    - Updated: All interactive demos now use kerala-rage kr-solidarity fonts
@@ -92,7 +92,7 @@ All forbidden fonts have been successfully purged from the codebase. The kerala-
 - **Roboto Flex:** 3 remaining (all in debug validators)
 
 <<<<<<< HEAD
-### ✅ Northcote Curio Fonts: **ACTIVE**
+### ✅  Fonts: **ACTIVE**
 - **Libre Bodoni:** 13 references
 =======
 ### ✅ kerala-rage kr-solidarity Fonts: **ACTIVE**
@@ -135,7 +135,7 @@ All forbidden fonts have been successfully purged from the codebase. The kerala-
 
 ### Core Layer ✅ 100% Complete
 <<<<<<< HEAD
-- `frontend/src/theme/tokens.json` - Northcote Curio spec
+- `frontend/src/theme/tokens.json` -  spec
 =======
 - `frontend/src/theme/tokens.json` - kerala-rage kr-solidarity spec
 >>>>>>> restoration-KR-Rage-Figma-v2.0
@@ -188,7 +188,7 @@ All forbidden fonts have been successfully purged from the codebase. The kerala-
 ## Conclusion
 
 <<<<<<< HEAD
-**The Northcote Curio design system is now fully operational.**
+**The  design system is now fully operational.**
 
 All critical code paths use the correct fonts. The remaining 4 references are in comments/documentation and do not affect runtime behavior. The old Flora & Fauna design has been successfully purged and backed up.
 =======

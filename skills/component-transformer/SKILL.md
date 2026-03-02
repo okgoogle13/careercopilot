@@ -1,6 +1,6 @@
 ---
 name: component-transformer
-description: Orchestrates the migration of legacy MUI or generic components to the Northcote Curio design system. Specializes in "Refactor-on-Port" logic, ensuring visual transformation while preserving business state and behavioral integrity.
+description: Orchestrates the migration of legacy MUI or generic components to the  design system. Specializes in "Refactor-on-Port" logic, ensuring visual transformation while preserving business state and behavioral integrity.
 ---
 
 # Component Transformer Skill
@@ -52,4 +52,4 @@ Ensure no business logic, event handlers, or state management is lost or altered
 
 ## Usage Example
 
-"Transform Header.tsx to the Northcote Curio system. It should be in Gallery mode."
+"Transform Header.tsx to the  system. It should be in Gallery mode."

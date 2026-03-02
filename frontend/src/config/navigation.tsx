@@ -3,7 +3,7 @@
  * NORTHCOTE CURIO: NAVIGATION CONFIGURATION
  *
  * Navigation structure using lucide-react icons instead of MUI icons.
- * Uses Northcote Curio design system tokens.
+ * Uses  design system tokens.
 =======
  * KeralaRage KrSolidarity: NAVIGATION CONFIGURATION
  *

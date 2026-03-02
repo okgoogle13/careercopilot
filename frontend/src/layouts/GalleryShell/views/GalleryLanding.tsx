@@ -29,7 +29,7 @@ export const GalleryLanding: React.FC = () => {
         </motion.div>
 
         <span className="font-annotation text-wattle-gold tracking-[0.2em] text-sm uppercase mb-4 block">
-          Northcote Curio
+          
         </span>
         <h1 className="font-proclamation text-6xl md:text-8xl text-parchment mb-6 leading-tight">
           Victorian

@@ -17,7 +17,7 @@
 ---
 
 <<<<<<< HEAD
-## Design System (Northcote Curio)
+## Design System ()
 
 The visual and interaction language for CareerCopilot — a Victorian naturalist's field station.
 =======
@@ -62,7 +62,7 @@ The visual and interaction language for CareerCopilot — a kerala-streetprint [
 ```
 docs/
 <<<<<<< HEAD
-├── design/           # Northcote Curio design system (source of truth)
+├── design/           #  design system (source of truth)
 =======
 ├── design/           # kerala-rage kr-solidarity design system (source of truth)
 >>>>>>> restoration-KR-Rage-Figma-v2.0

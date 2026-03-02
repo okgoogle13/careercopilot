@@ -69,7 +69,7 @@ def git_stage_file(filepath):
 
 def main():
 <<<<<<< HEAD
-    print("--- Starting Northcote Curio Asset Setup ---")
+    print("--- Starting  Asset Setup ---")
 =======
     print("--- Starting Northcote [DEPRECATED_STYLE] Asset Setup ---")
 >>>>>>> restoration-KR-Rage-Figma-v2.0

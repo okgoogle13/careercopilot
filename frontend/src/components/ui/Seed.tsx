@@ -21,7 +21,7 @@ export interface SeedProps {
 
 /**
 <<<<<<< HEAD
- * M3Badge - Northcote Curio Notification Badge
+ * M3Badge -  Notification Badge
  *
  * An organic badge overlay for icons and components.
 =======

@@ -14,7 +14,7 @@ interface MetricCardProps {
 
 /**
 <<<<<<< HEAD
- * MetricCard - Northcote Curio V3.1 Metric Display Component
+ * MetricCard -  V3.1 Metric Display Component
 =======
  * MetricCard - KeralaRage KrSolidarity V3.1 Metric Display Component
 >>>>>>> restoration-KR-Rage-Figma-v2.0

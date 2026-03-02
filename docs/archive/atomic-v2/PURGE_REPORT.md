@@ -1,5 +1,5 @@
 <<<<<<< HEAD
-# Design System Purge Report - Northcote Curio V2.0
+# Design System Purge Report -  V2.0
 =======
 # Design System Purge Report - kerala-rage kr-solidarity V2.0
 >>>>>>> restoration-KR-Rage-Figma-v2.0
@@ -15,7 +15,7 @@
 - **Action:** Completely regenerated from `tokens.json` specification
 <<<<<<< HEAD
 - **Backup:** Created `design-tokens.css.backup-flora-fauna` (16KB)
-- **New File:** 13KB of pure Northcote Curio tokens
+- **New File:** 13KB of pure  tokens
 - **Changes:**
   - ❌ Removed: Sage Green (`#B4D8AE`), Soft Coral (`#D97C65`)
   - ✅ Added: Wattle Gold (`#D4A84B`), Specimen Night (`#1A1714`), Waratah Crimson (`#C45C4B`)
@@ -73,7 +73,7 @@
 ### ✅ Typography: COMPLIANT (Core Files)
 <<<<<<< HEAD
 - `design-tokens.css`: ✅ Uses Libre Bodoni, Fraunces, Work Sans, JetBrains Mono
-- `index.css`: ✅ Font imports updated to Northcote Curio stack
+- `index.css`: ✅ Font imports updated to  stack
 =======
 - `design-tokens.css`: ✅ Uses kr-serif-bold, Fraunces, Work Sans, JetBrains Mono
 - `index.css`: ✅ Font imports updated to kerala-rage kr-solidarity stack
@@ -146,7 +146,7 @@
 ### Medium Priority
 4. **Update Tailwind config** (if exists)
 <<<<<<< HEAD
-   - Ensure font families point to Northcote Curio stack
+   - Ensure font families point to  stack
 
 5. **Visual QA**
    - Test Gallery mode rendering
@@ -186,7 +186,7 @@ grep -r "Work Sans" frontend/src --include="*.css"
 
 **Core Design System:** ✅ **PURGED AND COMPLIANT**
 <<<<<<< HEAD
-- The foundation (`design-tokens.css` + `tokens.json`) is now 100% Northcote Curio
+- The foundation (`design-tokens.css` + `tokens.json`) is now 100% 
 - Old Flora & Fauna design has been backed up and replaced
 =======
 - The foundation (`design-tokens.css` + `tokens.json`) is now 100% kerala-rage kr-solidarity

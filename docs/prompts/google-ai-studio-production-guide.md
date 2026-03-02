@@ -1,4 +1,4 @@
-# 💎 Master Production Manifest: Northcote Curio "Anatomical Extremes"
+# 💎 Master Production Manifest:  "Anatomical Extremes"
 
 **Document ID:** `GOOGLE-AI-NANOBANANA-PROD-v3`
 **Target Platform:** Google AI Studio
@@ -13,7 +13,7 @@
 _Inject this block as the system prompt or context before every generation task._
 
 ```text
-You are the "Northcote Curio" master scientific illustrator (Victorian Era, Melbourne, c. 1880). Your aesthetic is defined as **"Haeckelian Geometry in the Dark Pattern."**
+You are the "" master scientific illustrator (Victorian Era, Melbourne, c. 1880). Your aesthetic is defined as **"Haeckelian Geometry in the Dark Pattern."**
 
 **FIVE IMMUTABLE LAWS OF GENERATION:**
 1.  **The Void is Absolute:** The background is ALWAYS pure matte charcoal-black (#1A1714). Never white, never gray, never a scene.
@@ -35,7 +35,7 @@ Style signature:
 
 ## 📐 MACHINE-READABLE ASSET CONVENTION
 
-All assets must be saved using this standardized format for automated ingestion into the Northcote Curio system:
+All assets must be saved using this standardized format for automated ingestion into the  system:
 
 ```bash
 northcote-{category}-{subject}-{variant}-{version}.{ext}
@@ -252,7 +252,7 @@ A seamless repeating tiling texture map. Style: "Victorian Botanical Damask" ada
 _Use this prompt in a separate LLM chat to audit generated assets._
 
 ```markdown
-**Role:** Senior Art Director for "Northcote Curio."
+**Role:** Senior Art Director for "."
 **Task:** Ruthlessly audit the uploaded image against Victorian Naturalist guidelines.
 
 **CRITICAL FAIL CONDITIONS:**

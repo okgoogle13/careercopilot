@@ -17,9 +17,9 @@ export interface MarkProps extends Omit<React.InputHTMLAttributes<HTMLInputEleme
 
 /**
 <<<<<<< HEAD
- * Mark - Northcote Curio Checkbox
+ * Mark -  Checkbox
  *
- * A custom checkbox component using Northcote Curio design tokens with enhanced UX.
+ * A custom checkbox component using  design tokens with enhanced UX.
  * Features organic shapes with Seed radius, spring animations, and proper state indicators.
  *
  * **Northcote Design Token Usage:**
@@ -196,7 +196,7 @@ Mark.displayName = 'Mark';
 
 /**
 <<<<<<< HEAD
- * MarkRadio - Northcote Curio Radio Button
+ * MarkRadio -  Radio Button
  *
  * Radio button variant with consistent Northcote design language.
 =======

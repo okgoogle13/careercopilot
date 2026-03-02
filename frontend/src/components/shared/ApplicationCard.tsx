@@ -13,11 +13,11 @@ import { StatusBadge, type StatusBadgeVariant } from '../ui/StatusBadge';
 
 /**
 <<<<<<< HEAD
- * ApplicationCard - Northcote Curio V3.1 Job Application Tracker Card
+ * ApplicationCard -  V3.1 Job Application Tracker Card
  *
  * Displays job application information with a multi-step progress indicator.
  *
- * **Northcote Curio V3.1 Usage:**
+ * ** V3.1 Usage:**
  * - Shape: `rounded-pebble` → Organic asymmetric corners ✅
  * - Elevation: `shadow-standard` → `shadow-maximum` on hover
  * - Typography: `text-bloom-gallery` (SOFT=100) for titles

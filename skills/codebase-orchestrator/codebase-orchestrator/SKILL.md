@@ -16,7 +16,7 @@ Coordinates multiple Model Context Protocol (MCP) servers to provide comprehensi
 - **Git MCP**: Version control status and commit history
 - **Testing MCP**: Test coverage metrics and execution status
 
-Used in conjunction with the Compliance-Dashboard skill to track design system maturity across CareerCopilot's Northcote Curio component ecosystem.
+Used in conjunction with the Compliance-Dashboard skill to track design system maturity across CareerCopilot's  component ecosystem.
 
 ## When to Use This Skill
 

@@ -1,5 +1,5 @@
 <<<<<<< HEAD
-# Northcote Curio Design System
+#  Design System
 
 > **Navigation**: [Tokens](01-tokens.md) · [Typography](02-typography.md) · [Components](03-components.md) · [Voice](04-voice.md) · [Assets](05-assets.md) · [Wireframes](06-wireframes.md)
 

@@ -8,7 +8,7 @@
 - **Profile Ingestion Engine**: Upload PDFs/IDFs, extract data via Google Genkit, and structure career history.
 - **Resume Optimizer** ✨ NEW: AI-powered keyword integration for ATS optimization with company-specific tailoring.
 - **Company Analyzer** ✨ NEW: Analyze company websites to extract keywords and communication tone for targeted resumes.
-- **Validation Dashboard**: Review and edit AI-extracted career data with Northcote Curio M3 Expressive UI.
+- **Validation Dashboard**: Review and edit AI-extracted career data with  M3 Expressive UI.
 - **Dual-Engine AI**: Leveraging Gemini Flash (Speed) and Gemini Pro (Reasoning).
 - **Automated UAT**: Full end-to-end testing suite with Playwright.
 - **Chrome Extension**: Intelligent job capture with auto-deadline extraction and calendar reminders.
@@ -17,8 +17,8 @@
 
 ### Frontend (`/frontend`)
 - **Core**: React 18, TypeScript, Vite
-- **UI System**: Material-UI (MUI v5) + Northcote Curio M3 Expressive Design System
-- **Design Tokens**: Northcote Curio token system (color, shape, elevation, motion)
+- **UI System**: Material-UI (MUI v5) +  M3 Expressive Design System
+- **Design Tokens**:  token system (color, shape, elevation, motion)
 - **State**: React Context + Hooks
 - **Testing**: Playwright (E2E), Jest (Unit)
 
@@ -114,7 +114,7 @@ Create `.env` files in `backend/` and `frontend/` (see `.env.example`).
 - Genkit (AI flow orchestration)
 
 **Design:**
-- Northcote Curio M3 Expressive design system
+-  M3 Expressive design system
 - Organic shapes (Pebble, Tech archetypes)
 - Spring motion effects
 - Sage Green + Soft Coral palette

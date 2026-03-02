@@ -2,7 +2,7 @@
 <<<<<<< HEAD
  * NORTHCOTE CURIO: MOTION PRESETS
  *
- * Framer Motion configuration presets for the Northcote Curio
+ * Framer Motion configuration presets for the 
  * design system physics.
  */
 

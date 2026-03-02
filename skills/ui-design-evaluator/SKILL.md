@@ -1,13 +1,13 @@
 ---
 name: ui-design-evaluator
-description: Evaluate design assets, analyze annotated wireframes, and create high-fidelity interactive mockups with Northcote Curio V3.1 compliance. Use when evaluating designs, analyzing wireframes, creating mockups from annotations, scoring design system compliance, or generating interactive prototypes. Supports Gallery (expressive, warm) and Laboratory (restrained, cool) modes.
+description: Evaluate design assets, analyze annotated wireframes, and create high-fidelity interactive mockups with  V3.1 compliance. Use when evaluating designs, analyzing wireframes, creating mockups from annotations, scoring design system compliance, or generating interactive prototypes. Supports Gallery (expressive, warm) and Laboratory (restrained, cool) modes.
 ---
 
 # UI Design Evaluator & Mockup Creator
 
 **Version:** 1.0
 **Purpose:** Design evaluation, wireframe analysis, and high-fidelity mockup generation
-**Design System:** Northcote Curio V3.1 (Victorian Naturalist Field Station)
+**Design System:**  V3.1 (Victorian Naturalist Field Station)
 
 ---
 
@@ -15,7 +15,7 @@ description: Evaluate design assets, analyze annotated wireframes, and create hi
 
 This skill enables comprehensive UI design workflows:
 
-1. **Evaluate** existing designs against Northcote Curio V3.1 standards
+1. **Evaluate** existing designs against  V3.1 standards
 2. **Analyze** annotated wireframes to extract components and flows
 3. **Design** high-fidelity mockups with design token compliance
 4. **Deliver** interactive prototypes, React components, and evaluation reports
@@ -49,7 +49,7 @@ INPUT → ANALYZE → EVALUATE → DESIGN → DELIVER
 ### 3. EVALUATE Phase
 **Score Against 4 Criteria (400 points total):**
 
-**A. Northcote Curio V3.1 Compliance (100 pts)**
+**A.  V3.1 Compliance (100 pts)**
 - ✅ Uses Federation Typography Stack (Curator, Proclamation, Bloom, Field Note, Annotation)
 - ✅ Asymmetric organic shapes (no uniform border-radius)
 - ✅ Botanical color palette (Wattle Gold, Waratah Crimson, Eucalyptus Smoke)
@@ -133,7 +133,7 @@ INPUT → ANALYZE → EVALUATE → DESIGN → DELIVER
 **C. Evaluation Report**
 ```markdown
 ## Design Evaluation Report
-- Northcote Curio V3.1 Compliance: 95/100 (A)
+-  V3.1 Compliance: 95/100 (A)
 - Accessibility: 88/100 (B)
 - User Flow Logic: 92/100 (A)
 - Visual Hierarchy: 90/100 (A)
@@ -366,7 +366,7 @@ Before delivering a mockup, verify:
 2. Scores against 4 criteria
 3. Generates evaluation report:
    ```
-   Northcote Curio Compliance: 45/100 (F)
+    Compliance: 45/100 (F)
    - Uses Inter font (forbidden)
    - Uniform 8px border-radius
    - Generic blue color scheme
@@ -491,7 +491,7 @@ ui-design-evaluator (mockup)
 ### Evaluation Scoring
 
 **400 Points Total:**
-- Northcote Curio V3.1 Compliance: 100 pts
+-  V3.1 Compliance: 100 pts
 - Accessibility (WCAG AA): 100 pts
 - User Flow Logic: 100 pts
 - Visual Hierarchy & Typography: 100 pts

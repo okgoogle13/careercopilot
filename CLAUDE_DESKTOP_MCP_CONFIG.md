@@ -2,7 +2,7 @@
 
 **Last Updated:** 2026-01-29  
 <<<<<<< HEAD
-**Purpose:** Register Design System Sidekick server for Northcote Curio asset workflows
+**Purpose:** Register Design System Sidekick server for  asset workflows
 =======
 **Purpose:** Register Design System Sidekick server for kerala-rage kr-solidarity asset workflows
 >>>>>>> restoration-KR-Rage-Figma-v2.0
@@ -353,7 +353,7 @@ https://spec.modelcontextprotocol.io/
 
 **Configuration Complete**  
 <<<<<<< HEAD
-**Design System Sidekick Ready for Northcote Curio Asset Workflows**
+**Design System Sidekick Ready for  Asset Workflows**
 =======
 **Design System Sidekick Ready for kerala-rage kr-solidarity Asset Workflows**
 >>>>>>> restoration-KR-Rage-Figma-v2.0

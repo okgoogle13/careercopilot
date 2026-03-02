@@ -9,7 +9,7 @@ interface AuroraHeaderProps {
 
 /**
 <<<<<<< HEAD
- * AuroraHeader - Northcote Curio Parametric Header
+ * AuroraHeader -  Parametric Header
  * 
  * Features:
  * - Tri-color gradient text (Wattle Gold → Waratah Crimson → Flannel Flower)

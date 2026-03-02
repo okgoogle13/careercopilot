@@ -25,12 +25,12 @@ export interface CabinetProps {
   maxWidth?: 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 
 <<<<<<< HEAD
-  /** Visual variant - Northcote Curio compatible */
+  /** Visual variant -  compatible */
   variant?: 'tech' | 'organic' | 'standard';
 }
 
 /**
- * Cabinet - Northcote Curio Modal Component
+ * Cabinet -  Modal Component
  *
  * Modal dialog component with Northcote design system styling.
  * Features:

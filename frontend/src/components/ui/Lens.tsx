@@ -40,9 +40,9 @@ export interface LensProps extends Omit<React.InputHTMLAttributes<HTMLInputEleme
 
 /**
 <<<<<<< HEAD
- * Lens - Northcote Curio Text Input
+ * Lens -  Text Input
  *
- * A comprehensive text input component using the Northcote Curio design system.
+ * A comprehensive text input component using the  design system.
  * Supports filled and outlined variants with proper Northcote states and validation.
  *
  * **Northcote Design Token Usage:**
@@ -148,7 +148,7 @@ export const Lens = forwardRef<HTMLInputElement, LensProps>(
     };
 
 <<<<<<< HEAD
-    // Variant-specific styles (Northcote Curio)
+    // Variant-specific styles ()
     const containerStyle = {
       borderRadius: 'var(--radius-leaf)',
       backgroundColor: variant === 'filled' ? 'rgba(44, 39, 35, 0.4)' : 'transparent',
@@ -330,7 +330,7 @@ Lens.displayName = 'Lens';
  *
  * Same API as Lens but renders a textarea for multi-line input.
 <<<<<<< HEAD
- * Uses Northcote Curio design tokens for consistent organic styling.
+ * Uses  design tokens for consistent organic styling.
 =======
  * Uses KeralaRage KrSolidarity design tokens for consistent [DEPRECATED_STYLE] styling.
 >>>>>>> restoration-KR-Rage-Figma-v2.0

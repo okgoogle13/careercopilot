@@ -38,7 +38,7 @@ export type SignalVariant = 'filled' | 'outlined' | 'tonal';
 
 /**
 <<<<<<< HEAD
- * Signal - Northcote Curio Alert Component
+ * Signal -  Alert Component
  *
  * Alert/notification component using Northcote botanical palette and organic shapes.
 =======

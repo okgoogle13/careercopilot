@@ -1,5 +1,5 @@
 <<<<<<< HEAD
-# Northcote Curio: Content & Asset Integration Draft
+# : Content & Asset Integration Draft
 
 **Document ID:** CONTENT-001-DRAFT
 **Status:** Creative Draft
