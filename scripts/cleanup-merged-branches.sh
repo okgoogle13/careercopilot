@@ -1,53 +1,68 @@
 #!/usr/bin/env bash
 # cleanup-merged-branches.sh
-# Deletes remote branches that have been merged into restoration-KR-Rage-Figma-v2.0
+# Final branch consolidation: delete all branches except develop and main.
+#
+# Context: restoration-KR-Rage-Figma-v2.0 was merged into develop via PR #111.
+# All other branches have been reviewed and their work is consolidated into develop.
 #
 # Usage: bash scripts/cleanup-merged-branches.sh
-# Requires: git with push access to the repository
+# Requires: git with push access, or gh CLI authenticated
+#
+# Branch review summary:
+#   claude/design-migration-status-Tj6t4   - included in restoration (33586b26 ancestor)
+#   claude/finalize-assets-skills-98mTq    - merged into restoration (ba0be597)
+#   claude/finalize-assets-skills-mzlX9    - merged into restoration (c40b4259)
+#   claude/review-component-skills-O9SMw   - merged into restoration (56538c81)
+#   claude/update-claude-kr-design-NTfe4   - included in restoration (37869e62 ancestor)
+#   KR-Rage-Figma                          - older branch, superseded by restoration
+#   kerala-rage-branch                     - subset of KR-Rage-Figma, superseded
+#   feature/northcote-design-update        - old northcote design work, superseded
+#   restoration-KR-Rage-Figma-v2.0        - merged into develop via PR #111
 
 set -euo pipefail
 
-TARGET_BRANCH="restoration-KR-Rage-Figma-v2.0"
-
-# These branches were explicitly merged into restoration-KR-Rage-Figma-v2.0
-# as confirmed by merge commits in the branch history:
-#   c40b4259 - Merge 'origin/claude/finalize-assets-skills-mzlX9'
-#   ba0be597 - Merge 'origin/claude/finalize-assets-skills-98mTq'
-#   56538c81 - Merge 'origin/claude/review-component-skills-O9SMw'
-#   0128c526 - Merge 'origin/claude/design-migration-status-Tj6t4'
-MERGED_BRANCHES=(
+BRANCHES_TO_DELETE=(
   "claude/design-migration-status-Tj6t4"
   "claude/finalize-assets-skills-98mTq"
   "claude/finalize-assets-skills-mzlX9"
   "claude/review-component-skills-O9SMw"
+  "claude/update-claude-kr-design-NTfe4"
+  "KR-Rage-Figma"
+  "kerala-rage-branch"
+  "feature/northcote-design-update"
+  "restoration-KR-Rage-Figma-v2.0"
 )
 
-echo "=== Branch Cleanup: ${TARGET_BRANCH} ==="
+echo "=== Final Branch Consolidation Cleanup ==="
 echo ""
-echo "The following branches were merged into ${TARGET_BRANCH} and will be deleted:"
-for branch in "${MERGED_BRANCHES[@]}"; do
+echo "Branches to be deleted (work consolidated into develop):"
+for branch in "${BRANCHES_TO_DELETE[@]}"; do
   echo "  - ${branch}"
 done
 echo ""
+echo "Branches to KEEP:"
+echo "  - main (production)"
+echo "  - develop (active development)"
+echo ""
 
-read -rp "Proceed with deleting these ${#MERGED_BRANCHES[@]} remote branches? [y/N] " confirm
+read -rp "Proceed with deleting ${#BRANCHES_TO_DELETE[@]} remote branches? [y/N] " confirm
 if [[ "${confirm,,}" != "y" ]]; then
   echo "Aborted."
   exit 0
 fi
 
 echo ""
-echo "Deleting merged branches..."
+echo "Deleting branches..."
 failed=()
 deleted=()
 
-for branch in "${MERGED_BRANCHES[@]}"; do
+for branch in "${BRANCHES_TO_DELETE[@]}"; do
   echo -n "  Deleting origin/${branch} ... "
   if git push origin --delete "${branch}" 2>/dev/null; then
     echo "✓ deleted"
     deleted+=("${branch}")
   else
-    echo "✗ failed (branch may not exist or already deleted)"
+    echo "✗ skipped (may not exist or already deleted)"
     failed+=("${branch}")
   fi
 done
@@ -55,14 +70,8 @@ done
 echo ""
 echo "=== Summary ==="
 echo "Deleted (${#deleted[@]}): ${deleted[*]:-none}"
-echo "Failed  (${#failed[@]}): ${failed[*]:-none}"
+echo "Skipped (${#failed[@]}): ${failed[*]:-none}"
 echo ""
-echo "Branches NOT deleted (active / not merged):"
-echo "  - KR-Rage-Figma"
-echo "  - claude/update-claude-kr-design-NTfe4"
-echo "  - develop"
-echo "  - feature/northcote-design-update"
-echo "  - kerala-rage-branch"
-echo "  - main"
-echo "  - restoration-KR-Rage-Figma-v2.0 (the target branch - keep)"
+echo "Active branches remaining:"
+git branch -r | grep -v 'origin/HEAD' | sed 's|  origin/||'
 
