@@ -2,18 +2,27 @@
 
 ## Overview
 
+<<<<<<< HEAD
 This document defines how the Northcote Curio Design System acts as a **Shared Source of Truth (SSoT)** for cross-platform agents and automated tools.
+=======
+This document defines how the kerala-rage kr-solidarity Design System acts as a **Shared Source of Truth (SSoT)** for cross-platform agents and automated tools.
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 ## The Triad of Truth
 
 To ensure perfect alignment between design vision, AI generation, and frontend implementation, three core documents work in unison:
 
+<<<<<<< HEAD
 ### 1. The Design Principles ([northcote-design-principles.md](file:///Users/okgoogle13/Desktop/careercopilot/docs/design/northcote-design-principles.md))
+=======
+### 1. The Design Principles ([kerala-rage-design-principles.md](file:///Users/okgoogle13/Projects/careercopilot/docs/design/kerala-rage-design-principles.md))
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 - **Role:** Aesthetic Governance.
 - **Used by:** Gemini (Self-Correction) and DALL-E (via Design Flash Sidekick).
 - **Contents:** Translucency bands, color policies, motif philosophies (Anatomical vs Geometric).
 
+<<<<<<< HEAD
 ### 2. The Design Tokens ([01-tokens.md](file:///Users/okgoogle13/Desktop/careercopilot/docs/design/01-tokens.md))
 
 - **Role:** Technical Implementation.
@@ -21,6 +30,15 @@ To ensure perfect alignment between design vision, AI generation, and frontend i
 - **Contents:** Color Hectors, Border Radii, Motion Curves, and Grid/Annotation System specifications.
 
 ### 3. The Asset Manifest ([northcote-curio-manifest.json](file:///Users/okgoogle13/Desktop/careercopilot/assets/northcote-curio-manifest.json))
+=======
+### 2. The Design Tokens ([01-tokens.md](file:///Users/okgoogle13/Projects/careercopilot/docs/design/01-tokens.md))
+
+- **Role:** Technical Implementation.
+- **Used by:** Gemini (Implementation Engine), Frontend Developers, and kr-dark Mode UI controllers.
+- **Contents:** Color Hectors, Border Radii, Motion Curves, and Grid/Annotation System specifications.
+
+### 3. The Asset Manifest ([kerala-rage-kr-solidarity-manifest.json](file:///Users/okgoogle13/Projects/careercopilot/assets/kerala-rage-kr-solidarity-manifest.json))
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 - **Role:** Production & Automation.
 - **Used by:** Asset pipelines, validation scripts, and dynamic UI loading logic.
@@ -32,6 +50,7 @@ To ensure perfect alignment between design vision, AI generation, and frontend i
 
 ### For Image Generation (via Design Flash Sidekick MCP)
 
+<<<<<<< HEAD
 1. **Reference** the [Universal System Instructions](file:///Users/okgoogle13/Desktop/careercopilot/Asset%20Generation%20Prompting%20Strategy.md#system-instructions).
 2. **Execute** generation using the Design Flash Sidekick toolset.
 3. **Audit** results against the [Immutable Laws](file:///Users/okgoogle13/Desktop/careercopilot/Asset%20Generation%20Prompting%20Strategy.md#aesthetic-foundation-the-five-immutable-laws).
@@ -39,6 +58,15 @@ To ensure perfect alignment between design vision, AI generation, and frontend i
 ### For UI Implementation (Gemini-Lead)
 
 1. **Query** the [Manifest](file:///Users/okgoogle13/Desktop/careercopilot/assets/northcote-curio-manifest.json) independently.
+=======
+1. **Reference** the [Universal System Instructions](file:///Users/okgoogle13/Projects/careercopilot/Asset%20Generation%20Prompting%20Strategy.md#system-instructions).
+2. **Execute** generation using the Design Flash Sidekick toolset.
+3. **Audit** results against the [Immutable Laws](file:///Users/okgoogle13/Projects/careercopilot/Asset%20Generation%20Prompting%20Strategy.md#aesthetic-foundation-the-five-immutable-laws).
+
+### For UI Implementation (Gemini-Lead)
+
+1. **Query** the [Manifest](file:///Users/okgoogle13/Projects/careercopilot/assets/kerala-rage-kr-solidarity-manifest.json) independently.
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 2. **Implement** changes using the repo-aware code modification tools.
 3. **Verify** compliance using the technical tokens in `01-tokens.md`.
 

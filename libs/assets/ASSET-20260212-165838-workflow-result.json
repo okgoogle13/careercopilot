@@ -1,0 +1,17 @@
+{
+  "status": "PACKAGE_COMPLETE",
+  "asset_id": "ASSET-20260212-165838",
+  "asset_dir": "/Users/okgoogle13/Projects/careercopilot/assets/ASSET-20260212-165838-test-asset",
+  "production_file": "/Users/okgoogle13/Projects/careercopilot/frontend/public/assets/kr-motifs/kr-moti-kr-dark-test-asset-1024.png",
+  "production_url": "/assets/kr-motifs/kr-moti-kr-dark-test-asset-1024.png",
+  "validation_score": 75,
+  "category": "kr-motif-variant",
+  "variance": "dark-mode",
+  "next_steps": [
+    "1. Review placement-guide.md for layout suggestions",
+    "2. Integrate asset URL into component",
+    "3. Test opacity in Gallery and Laboratory modes",
+    "4. Verify responsiveness across breakpoints",
+    "5. Commit changes and request design review"
+  ]
+}

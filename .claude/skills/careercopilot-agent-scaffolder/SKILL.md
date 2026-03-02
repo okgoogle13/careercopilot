@@ -1,12 +1,28 @@
 ---
 name: careercopilot-agent-scaffolder
-description: "Scaffolds a new Python agent for autonomous AI tasks in 'src/agents/'. Agents are autonomous components that handle complex operations (resume analysis, job matching, KSC generation). Use when asked to create a new AI agent or automation component."
+description: Scaffolds a new Python agent for autonomous AI tasks in 'src/agents/'.
+  Agents are autonomous components that handle complex operations (resume analysis,
+  job matching, KSC generation). Use when asked to create a new AI agent or automation
+  component.
+metadata:
+  legacy_frontmatter:
+    version: 1.0.0
+    tags: []
 ---
 
-# Agent Scaffolder Workflow
+## Purpose
 
-1.  Ask the user for the new agent's name (e.g., `resume_analyzer_agent`).
-2.  Read the template: `cat .claude/skills/careercopilot-agent-scaffolder/templates/agent.py.tpl`
-3.  Replace the `{{AGENT_NAME}}` placeholder with the user's provided name (e.g., `resume_analyzer_agent`).
-4.  Write the new file to `src/agents/{{AGENT_NAME}}.py`.
-5.  Report success and show the path to the new file.
+Scaffolds new Python agents in `src/agents/` to handle autonomous, complex AI operations like analysis or matching.
+
+## When to Use
+
+- When creating a new specialized agent component.
+- When establishing a new autonomous workflow within the project.
+
+## Process
+
+1. **Input**: Ask for the new agent's name.
+2. **Template**: Read the agent template from `templates/agent.py.tpl`.
+3. **Injection**: Replace `{{AGENT_NAME}}` placeholder.
+4. **Creation**: Write the file to `src/agents/`.
+5. **Reporting**: Show the path to the newly created agent.

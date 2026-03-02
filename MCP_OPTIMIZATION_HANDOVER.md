@@ -13,7 +13,11 @@
 
 ## What Needs Building
 
+<<<<<<< HEAD
 **File to Modify**: `/Users/okgoogle13/Desktop/careercopilot/servers/flash_sidekick.py`
+=======
+**File to Modify**: `/Users/okgoogle13/Projects/careercopilot/servers/flash_sidekick.py`
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 ### Phase 2: Async Refactor (2 hours)
 - Add `import asyncio` + `import json` for async handling
@@ -154,7 +158,11 @@ class RateLimiter:
 ---
 
 ## Critical Files
+<<<<<<< HEAD
 - `/Users/okgoogle13/Desktop/careercopilot/servers/flash_sidekick.py` - Main file (add 12 tools)
+=======
+- `/Users/okgoogle13/Projects/careercopilot/servers/flash_sidekick.py` - Main file (add 12 tools)
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 - `/Users/okgoogle13/Library/Application Support/Claude/claude_desktop_config.json` - ✅ Done
 - `/Users/okgoogle13/.config/Code/User/globalStorage/saoudrizwan.claude-dev/settings/cline_mcp_settings.json` - ✅ Done
 

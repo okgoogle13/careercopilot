@@ -760,7 +760,11 @@ Material 3 Expressive creates interfaces that feel:
 **Key Features:**
 
 - Layered gradients (multi-stop, radial + linear)
+<<<<<<< HEAD
 - Geometric patterns (grid, dots, stripes, organic blobs)
+=======
+- Geometric patterns (grid, dots, stripes, [DEPRECATED_STYLE] blobs)
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 - Contextual effects (playful, professional, elegant)
 - Performance (CSS-only, GPU-accelerated)
 
@@ -848,7 +852,11 @@ Material 3 Expressive creates interfaces that feel:
 **Background:**
 
 - Layered gradients (≥ 2 layers)
+<<<<<<< HEAD
 - Geometric patterns (grid, dots, organic)
+=======
+- Geometric patterns (grid, dots, [DEPRECATED_STYLE])
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 - Atmospheric effects (mesh, aurora, noise)
 - CSS-only, GPU-accelerated
 

@@ -1,4 +1,8 @@
 import axios, { type AxiosError } from 'axios';
+<<<<<<< HEAD
+=======
+import { supabase } from '../config/supabase';
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 // Safe environment access for both Vite (browser) and Jest (node)
 // Safe environment access for both Vite (browser) and Jest (node)
@@ -15,16 +19,26 @@ export const axiosInstance = axios.create({
 
 // Add request interceptor for token
 axiosInstance.interceptors.request.use(
+<<<<<<< HEAD
   (config) => {
     const token = localStorage.getItem('access_token');
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
+=======
+  async (config) => {
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+    if (session?.access_token) {
+      config.headers.Authorization = `Bearer ${session.access_token}`;
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     }
     return config;
   },
   (error) => Promise.reject(error)
 );
 
+<<<<<<< HEAD
 // Add response interceptor for token refresh
 axiosInstance.interceptors.response.use(
   (response) => response,
@@ -55,6 +69,18 @@ axiosInstance.interceptors.response.use(
       }
     }
 
+=======
+// Add response interceptor for error handling
+axiosInstance.interceptors.response.use(
+  (response) => response,
+  async (error: AxiosError) => {
+    if (error.response?.status === 401) {
+      // 401 Unauthorized - could mean the Supabase token is expired or invalid
+      // Supabase-js usually handles refresh automatically, but if we get a 401,
+      // we might want to trigger a sign-out or session check.
+      console.warn('Backend returned 401 Unauthorized');
+    }
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     return Promise.reject(error);
   }
 );

@@ -1,13 +1,27 @@
 ---
 name: pydantic-model-scaffolder
-description: "Scaffolds Pydantic models for request/response validation with advanced validation rules. Use for complex data models. Related: fastapi-endpoint-scaffolder for quick endpoint creation."
+description: 'Scaffolds Pydantic models for request/response validation with advanced
+  validation rules. Use for complex data models. Related: fastapi-endpoint-scaffolder
+  for quick endpoint creation.'
+metadata:
+  legacy_frontmatter:
+    version: 1.0.0
+    tags: []
 ---
 
 # Pydantic Model Scaffolder Workflow
 
-This skill creates type-safe Pydantic models with validation, documentation, and examples.
+## Purpose
 
-## Workflow Steps
+Scaffolds type-safe Pydantic models for request/response validation, incorporating advanced validation rules, documentation, and examples.
+
+## When to Use
+
+- When creating new API request or response schemas for FastAPI.
+- When defining database models with specific validation constraints.
+- When establishing consistent data structures across the backend services.
+
+## Process
 
 1. **Ask for model details:**
    - Model name (PascalCase, e.g., `NotificationPreferences`, `EmailTemplate`)

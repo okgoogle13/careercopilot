@@ -28,7 +28,11 @@ Electric Alchemist is a **premium, expressive design system** that combines:
 border-radius: 24px 64px 24px 8px;
 ```
 **Purpose:** Signature shape, hero elements, content cards  
+<<<<<<< HEAD
 **Psychology:** Organic growth, premium feel  
+=======
+**Psychology:** [DEPRECATED_STYLE] growth, premium feel  
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 **Usage:** Landing page hero, major feature cards, analysis sections
 
 **Examples:**
@@ -134,7 +138,11 @@ border-radius: 40px 8px 40px 8px;
 ### **Surface Colors (Dark Theme)**
 ```css
 --surface: #1C1B1F;                    /* surface-container */
+<<<<<<< HEAD
 --surface-dim: #141218;                /* surface-dim */
+=======
+--surface-dim: #1A1714;                /* surface-dim */
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 --surface-container-low: #1C1B1F;
 --surface-container: #211F26;
 --surface-container-high: #2B2930;

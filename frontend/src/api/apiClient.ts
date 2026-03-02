@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { getIdToken } from './authService';
 import { ApiResponse, ApiError, isApiError, createErrorResponse } from '@/types/api';
@@ -110,6 +111,16 @@ apiClient.interceptors.response.use(
 
 export { apiClient };
 
+=======
+import { ApiError, ApiResponse, createErrorResponse, isApiError } from '@/types/api';
+import { AxiosRequestConfig } from 'axios';
+import { axiosInstance as apiClient } from './axiosConfig';
+
+export { apiClient };
+
+import axios from 'axios';
+
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 /**
  * Handles API errors consistently and returns an ApiError object
  */

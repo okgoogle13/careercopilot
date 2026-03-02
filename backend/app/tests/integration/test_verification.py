@@ -2,6 +2,7 @@
 Integration test for verifying the system refactoring (UserAsset, Application, Health).
 """
 
+<<<<<<< HEAD
 import pytest
 from sqlalchemy.orm import Session
 from datetime import datetime, timezone
@@ -13,6 +14,16 @@ from app.core.database import SessionLocal, db_config
 from app.core.monitoring_middleware import HealthCheckMiddleware
 from starlette.requests import Request
 from starlette.responses import JSONResponse
+=======
+
+import pytest
+
+from app.core.database import SessionLocal, db_config
+from app.core.monitoring_middleware import HealthCheckMiddleware
+from app.models.database import Application, Job, User
+from app.models.user_asset import UserAsset
+
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 @pytest.mark.asyncio
 class TestSystemVerification:
@@ -40,7 +51,11 @@ class TestSystemVerification:
         2. Create UserAsset (Ingestion)
         3. Create Job and Application (Email Scanner/Chrome Ext)
         """
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         # 1. Create User
         user_id = "verify-user-001"
         user = User(
@@ -65,7 +80,11 @@ class TestSystemVerification:
         )
         db_session.add(asset)
         db_session.commit()
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         saved_asset = db_session.query(UserAsset).filter(UserAsset.user_id == user_id).first()
         assert saved_asset is not None
         assert saved_asset.extracted_data["skills"] == ["Python", "SQL"]
@@ -84,7 +103,11 @@ class TestSystemVerification:
         )
         db_session.add(job)
         db_session.commit()
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         app = Application(
             user_id=user_id,
             job_id=job.id,
@@ -94,17 +117,26 @@ class TestSystemVerification:
         )
         db_session.add(app)
         db_session.commit()
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         saved_app = db_session.query(Application).filter(Application.user_id == user_id).first()
         assert saved_app is not None
         assert saved_app.job_id == job.id
         assert saved_app.job_title == "Senior Dev"
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         print("✅ Core Data Models Verified")
 
     async def test_health_check_logic(self):
         """Verify the health check middleware logic (DB check)."""
         middleware = HealthCheckMiddleware(app=None) # Mock app
+<<<<<<< HEAD
         
         # Test DB check
         db_status = await middleware._check_database()
@@ -112,4 +144,13 @@ class TestSystemVerification:
         assert db_status["service"] == "postgresql" # It returns 'postgresql' even if using sqlite in test config? 
         # Actually logic is: return {"healthy": True, "service": "postgresql"}
         
+=======
+
+        # Test DB check
+        db_status = await middleware._check_database()
+        assert db_status["healthy"] is True
+        assert db_status["service"] == "postgresql" # It returns 'postgresql' even if using sqlite in test config?
+        # Actually logic is: return {"healthy": True, "service": "postgresql"}
+
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         print("✅ Health Check Logic Verified")

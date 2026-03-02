@@ -2,13 +2,20 @@ import logging
 
 from app.bridges.legacy_wrapper import ats_scorer
 from app.core.database import SessionLocal
+<<<<<<< HEAD
 from app.models.database import UserAsset
+=======
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 from app.core.enhanced_ai_error_handling import (
     AIOperationContext,
     AIServiceType,
     create_fallback_strategy,
     enhanced_ai_handler,
 )
+<<<<<<< HEAD
+=======
+from app.models.database import UserAsset
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 logger = logging.getLogger(__name__)
 
@@ -39,7 +46,11 @@ async def process_ats_score_task(user_id, document_id, resume_text, job_descript
             ),
             create_fallback_strategy(enabled=True, degraded_mode=True),
         )
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         # Save result to Database
         asset = db.query(UserAsset).filter(UserAsset.id == document_id).first()
         if asset:

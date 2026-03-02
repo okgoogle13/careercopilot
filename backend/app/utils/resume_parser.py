@@ -11,13 +11,18 @@ AFTER: Using cached model from singleton (FAST)
 import logging
 import re
 from dataclasses import dataclass
+<<<<<<< HEAD
 from typing import Any, Dict, List, Optional, Set
+=======
+from typing import Any
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 from app.core.nlp_model_manager import get_spacy_model, load_spacy_model
 
 logger = logging.getLogger(__name__)
 
 
+<<<<<<< HEAD
 # Pre-compile regex patterns for better performance
 EMAIL_PATTERN = re.compile(r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b")
 PHONE_PATTERN = re.compile(r"(?:\+?1[-.\s]?)?\(?([0-9]{3})\)?[-.\s]?([0-9]{3})[-.\s]?([0-9]{4})")
@@ -45,16 +50,27 @@ SECTION_PATTERNS = {
 }
 
 
+=======
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 @dataclass
 class ResumeParseResult:
     """Structured result from resume parsing."""
 
+<<<<<<< HEAD
     skills: List[str]
     entities: Dict[str, List[str]]
     education: List[Dict[str, str]]
     experience: List[Dict[str, str]]
     contact_info: Dict[str, Optional[str]]
     sections: Dict[str, str]
+=======
+    skills: list[str]
+    entities: dict[str, list[str]]
+    education: list[dict[str, str]]
+    experience: list[dict[str, str]]
+    contact_info: dict[str, str | None]
+    sections: dict[str, str]
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     word_count: int
     sentence_count: int
     parsing_time_ms: float
@@ -116,7 +132,11 @@ class OptimizedResumeParser:
                 experience=self._extract_experience(doc, resume_text),
                 contact_info=self._extract_contact_info(doc, resume_text),
                 sections=self._extract_sections(resume_text),
+<<<<<<< HEAD
                 word_count=sum(1 for token in doc if not token.is_space),
+=======
+                word_count=len([token for token in doc if not token.is_space]),
+>>>>>>> restoration-KR-Rage-Figma-v2.0
                 sentence_count=len(list(doc.sents)),
                 parsing_time_ms=round((time.time() - start_time) * 1000, 2),
             )
@@ -129,10 +149,17 @@ class OptimizedResumeParser:
             return result
 
         except Exception as e:
+<<<<<<< HEAD
             logger.error(f"Error parsing resume: {str(e)}")
             raise
 
     def _extract_skills(self, doc: Any, text: str) -> List[str]:
+=======
+            logger.error(f"Error parsing resume: {e!s}")
+            raise
+
+    def _extract_skills(self, doc: Any, text: str) -> list[str]:
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         """Extract skills from the resume."""
         skills = set()
 
@@ -153,14 +180,22 @@ class OptimizedResumeParser:
 
         return sorted(list(skills))
 
+<<<<<<< HEAD
     def _extract_entities(self, doc: Any) -> Dict[str, List[str]]:
         """Extract named entities by category."""
         entities = {}
         
+=======
+    def _extract_entities(self, doc: Any) -> dict[str, list[str]]:
+        """Extract named entities by category."""
+        entities = {}
+
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         for ent in doc.ents:
             if ent.label_ not in entities:
                 entities[ent.label_] = []
             entities[ent.label_].append(ent.text)
+<<<<<<< HEAD
         
         # Remove duplicates and sort
         for label in entities:
@@ -169,6 +204,16 @@ class OptimizedResumeParser:
         return entities
 
     def _extract_education(self, doc: Any, text: str) -> List[Dict[str, str]]:
+=======
+
+        # Remove duplicates and sort
+        for label in entities:
+            entities[label] = sorted(list(set(entities[label])))
+
+        return entities
+
+    def _extract_education(self, doc: Any, text: str) -> list[dict[str, str]]:
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         """Extract education information."""
         education = []
 
@@ -191,7 +236,11 @@ class OptimizedResumeParser:
 
         return education
 
+<<<<<<< HEAD
     def _extract_experience(self, doc: Any, text: str) -> List[Dict[str, str]]:
+=======
+    def _extract_experience(self, doc: Any, text: str) -> list[dict[str, str]]:
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         """Extract work experience information."""
         experience = []
 
@@ -203,6 +252,7 @@ class OptimizedResumeParser:
 
         return experience
 
+<<<<<<< HEAD
     def _extract_contact_info(self, doc: Any, text: str) -> Dict[str, Optional[str]]:
         """Extract contact information using pre-compiled patterns."""
         contact = {"email": None, "phone": None, "linkedin": None, "github": None}
@@ -221,11 +271,39 @@ class OptimizedResumeParser:
             contact["linkedin"] = linkedin_match.group()
 
         github_match = GITHUB_PATTERN.search(text)
+=======
+    def _extract_contact_info(self, doc: Any, text: str) -> dict[str, str | None]:
+        """Extract contact information."""
+        contact = {"email": None, "phone": None, "linkedin": None, "github": None}
+
+        # Email pattern
+        email_pattern = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
+        email_match = re.search(email_pattern, text)
+        if email_match:
+            contact["email"] = email_match.group()
+
+        # Phone pattern
+        phone_pattern = r"(?:\+?1[-.\s]?)?\(?([0-9]{3})\)?[-.\s]?([0-9]{3})[-.\s]?([0-9]{4})"
+        phone_match = re.search(phone_pattern, text)
+        if phone_match:
+            contact["phone"] = phone_match.group()
+
+        # LinkedIn pattern
+        linkedin_pattern = r"linkedin\.com/in/([A-Za-z0-9-]+)"
+        linkedin_match = re.search(linkedin_pattern, text, re.IGNORECASE)
+        if linkedin_match:
+            contact["linkedin"] = linkedin_match.group()
+
+        # GitHub pattern
+        github_pattern = r"github\.com/([A-Za-z0-9-]+)"
+        github_match = re.search(github_pattern, text, re.IGNORECASE)
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         if github_match:
             contact["github"] = github_match.group()
 
         return contact
 
+<<<<<<< HEAD
     def _extract_sections(self, text: str) -> Dict[str, str]:
         """Extract different sections of the resume using pre-compiled patterns."""
         sections = {}
@@ -233,12 +311,31 @@ class OptimizedResumeParser:
         # Use pre-compiled patterns for better performance
         for section_name, pattern in SECTION_PATTERNS.items():
             match = pattern.search(text)
+=======
+    def _extract_sections(self, text: str) -> dict[str, str]:
+        """Extract different sections of the resume."""
+        sections = {}
+
+        section_patterns = {
+            "summary": r"(?i)(summary|objective|profile)[\s:]*([^\n]+(?:\n[^\n]+)*?)(?=\n\s*[A-Z][^:\n]*:|\n\s*$)",
+            "experience": r"(?i)(experience|employment|work history)[\s:]*([^\n]+(?:\n[^\n]+)*?)(?=\n\s*[A-Z][^:\n]*:|\n\s*$)",
+            "education": r"(?i)(education|academic)[\s:]*([^\n]+(?:\n[^\n]+)*?)(?=\n\s*[A-Z][^:\n]*:|\n\s*$)",
+            "skills": r"(?i)(skills|competencies|expertise)[\s:]*([^\n]+(?:\n[^\n]+)*?)(?=\n\s*[A-Z][^:\n]*:|\n\s*$)",
+        }
+
+        for section_name, pattern in section_patterns.items():
+            match = re.search(pattern, text, re.MULTILINE | re.DOTALL)
+>>>>>>> restoration-KR-Rage-Figma-v2.0
             if match:
                 sections[section_name] = match.group(2).strip()
 
         return sections
 
+<<<<<<< HEAD
     def _load_skill_patterns(self) -> List[str]:
+=======
+    def _load_skill_patterns(self) -> list[str]:
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         """Load common skill patterns for extraction."""
         return [
             r"\b(Python|Java|JavaScript|C\+\+|C#|Ruby|Go|Rust|Swift|Kotlin)\b",
@@ -249,7 +346,11 @@ class OptimizedResumeParser:
             r"\b(Agile|Scrum|DevOps|CI/CD|TDD|BDD|API|REST|GraphQL)\b",
         ]
 
+<<<<<<< HEAD
     def _get_common_words(self) -> Set[str]:
+=======
+    def _get_common_words(self) -> set[str]:
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         """Get common words to filter out from skill extraction."""
         return {
             "the",
@@ -320,8 +421,13 @@ def parse_resume_optimized(
 
 
 def parse_resume_batch(
+<<<<<<< HEAD
     resume_texts: List[str], model_name: str = "en_core_web_sm"
 ) -> List[ResumeParseResult]:
+=======
+    resume_texts: list[str], model_name: str = "en_core_web_sm"
+) -> list[ResumeParseResult]:
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     """
     Parse multiple resumes efficiently using cached models.
 

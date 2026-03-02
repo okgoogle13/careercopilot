@@ -1,7 +1,11 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "M3-styled Wireframe Schema",
+<<<<<<< HEAD
   "description": "Schema for defining Northcote Curio layout blueprints using M3 wireframing components.",
+=======
+  "description": "Schema for defining kerala-rage kr-solidarity layout blueprints using M3 wireframing components.",
+>>>>>>> restoration-KR-Rage-Figma-v2.0
   "type": "object",
   "properties": {
     "version": {

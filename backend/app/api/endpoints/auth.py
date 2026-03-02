@@ -3,18 +3,31 @@ Authentication endpoints for user registration, login, and session management.
 """
 
 import logging
+<<<<<<< HEAD
 from datetime import datetime
 from typing import Dict, List, Optional
 
+=======
+
+from app.genkit_flows.onboarding_voice_workflow import (
+    VoiceProfileInput,
+    analyze_and_create_voice_profile,
+)
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 from fastapi import APIRouter, Depends, HTTPException, status
 from pydantic import BaseModel, EmailStr
 from sqlalchemy.orm import Session
 
+<<<<<<< HEAD
 from app.core.auth import auth_manager, create_user_token, get_current_user, session_manager
 from app.models.user_asset import UserAsset
 from app.core.database import get_db
 from app.genkit_flows.smart_ingestion import voiceProfileExtractorFlow
 from app.models.asset_library_schema import AssetDocument, AssetMetadata, ContextTags
+=======
+from app.core.auth import get_current_user
+from app.core.database import get_db
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 from app.models.database import User
 
 logger = logging.getLogger(__name__)
@@ -28,7 +41,11 @@ class UserRegistrationRequest(BaseModel):
     email: EmailStr
     name: str
     password: str
+<<<<<<< HEAD
     documents: Optional[List[str]] = None  # Optional documents for voice profile analysis
+=======
+    documents: list[str] | None = None  # Optional documents for voice profile analysis
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 
 class UserRegistrationResponse(BaseModel):
@@ -68,6 +85,7 @@ class TokenResponse(BaseModel):
     token_type: str = "bearer"
 
 
+<<<<<<< HEAD
 @router.post("/register", response_model=UserRegistrationResponse)
 async def register_user(
     request: UserRegistrationRequest, db: Session = Depends(get_db)
@@ -280,6 +298,30 @@ async def create_voice_profile(
 ) -> Dict[str, str]:
     """
     Create or update voice profile for existing user using voiceProfileExtractorFlow.
+=======
+
+@router.get("/me", response_model=dict[str, str])
+async def get_current_user_info(
+    current_user: User = Depends(get_current_user),
+) -> dict[str, str]:
+    """
+    Get information for the current Supabase-authenticated user.
+    """
+    return {
+        "user_id": str(current_user.id),
+        "email": current_user.email,
+        "name": current_user.name,
+        "message": "User information retrieved from local cache",
+    }
+
+
+@router.post("/voice-profile", response_model=dict[str, str])
+async def create_voice_profile(
+    documents: list[str], current_user: User = Depends(get_current_user)
+) -> dict[str, str]:
+    """
+    Create or update voice profile for existing user.
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     """
     try:
         if not documents or not any(doc.strip() for doc in documents):
@@ -290,6 +332,7 @@ async def create_voice_profile(
 
         logger.info(f"Creating voice profile for existing user: {current_user.email}")
 
+<<<<<<< HEAD
         # Combine all documents into one writing sample
         combined_text = "\n\n---\n\n".join([doc for doc in documents if doc.strip()])
 
@@ -315,6 +358,13 @@ async def create_voice_profile(
         )
         db.add(db_asset)
         db.commit()
+=======
+        # Create voice profile input
+        voice_input = VoiceProfileInput(user_id=current_user.id, documents=documents)
+
+        # Run the voice profile analysis flow
+        await analyze_and_create_voice_profile(voice_input)
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
         logger.info(f"Voice profile created successfully for user: {current_user.email}")
 

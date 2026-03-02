@@ -1,14 +1,26 @@
+<<<<<<< HEAD
 # Northcote Curio: Content & Asset Integration Draft
 
 **Document ID:** CONTENT-001-DRAFT
 **Status:** Creative Draft
 **Dependencies:** `docs/design/06-wireframes.md`, `ASSET-001-CURIO`
+=======
+# kerala-rage kr-solidarity: Content & Asset Integration Draft
+
+**Document ID:** CONTENT-001-DRAFT
+**Status:** Creative Draft
+**Dependencies:** `docs/design/06-wireframes.md`, `ASSET-001-kr-solidarity`
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 ---
 
 ## Executive Summary
 
+<<<<<<< HEAD
 This document provides the specific "Victorian Naturalist" copy and precise asset placement instructions for the pages identified as having **Critical Asset Gaps**. It orchestrates the "Northcote Typography Strategy" (Expressive/Workhorse/Accent) alongside the missing assets to ensure a cohesive implementation once assets are generated.
+=======
+This document provides the specific "kerala-streetprint [DEPRECATED_STYLE]" copy and precise asset placement instructions for the pages identified as having **Critical Asset Gaps**. It orchestrates the "kerala-rage Typography Strategy" (Expressive/Workhorse/Accent) alongside the missing assets to ensure a cohesive implementation once assets are generated.
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 ---
 
@@ -16,28 +28,47 @@ This document provides the specific "Victorian Naturalist" copy and precise asse
 
 **Missing Assets:**
 
+<<<<<<< HEAD
 - `ASSET-7` (Firefly Sprite)
 - `ASSET-16` (Wattle Hanging Branch)
 - `ASSET-9` (Waratah Hero Closeup) -> _Proposed as "Future Specimen" container background or Hero accent._
+=======
+- `{KR-UI-003}` **UI-KIT REQUIRED** (Screenprint Grit Particles)
+- `{KR-SOLID-011}` or `{KR-SOLID-029}` (Atmospheric/Paint Splash overlay) → _Available as atmospheric accent or expressive overlay_
+- `{KR-SOLID-002}` (Shiva) or `{KR-SOLID-005}`/`{KR-SOLID-006}` (Resistance portraits) → _Proposed as symbolic anchor (Z-1/Z-2 only, optional)_
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 ### Copy & Typography Strategy
 
 | Element           | Draft Copy                                                       | Typography Token / Settings                                                                                  |
 | :---------------- | :--------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------- |
+<<<<<<< HEAD
 | **Hero Headline** | THE<br>RESURRECTION                                              | **Font:** Libre Bodoni Italic<br>**Size:** 96px (Display Hero)<br>**Color:** `wattleGold`                    |
 | **Subhead**       | _Your professional history, re-catalogued as a living specimen._ | **Font:** Fraunces Variable<br>**Settings:** `opsz`=144, `WONK`=1, `SOFT`=50<br>**Color:** `parchment` (80%) |
+=======
+| **Hero Headline** | THE<br>RESURRECTION                                              | **Font:** kr-serif-bold Italic<br>**Size:** 96px (Display Hero)<br>**Color:** `kr-ink-gold`                    |
+| **Subhead**       | _Your professional history, re-catalogued as a living kr-motif._ | **Font:** Fraunces Variable<br>**Settings:** `opsz`=144, `WONK`=1, `SOFT`=50<br>**Color:** `paper-white` (80%) |
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 | **CTA Primary**   | COMMENCE EXCAVATION                                              | **Font:** JetBrains Mono<br>**Settings:** Uppercase, tracking 0.2em                                          |
 | **CTA Secondary** | VIEW THE CATALOGUE                                               | **Font:** Work Sans (Body)<br>**Weight:** 400                                                                |
 
 ### Asset Integration Guide (Gap Fill)
 
+<<<<<<< HEAD
 > **[DEFINED: ASSET-16 Wattle Hanging Branch]**
+=======
+> **[DEFINED: ASSET-16 Ink Hanging Branch]**
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 >
 > - **Location:** Top-Right Viewport Corner (`position: absolute; top: -15%; right: -5%`).
 > - **Dimensions:** ~600x400px (Natural aspect ratio).
 > - **Z-Index:** 2 (Content Layer).
 > - **Interaction:** Parallax factor 0.15 (slower than scroll). Subtle mouse-reactive sway (max 2deg rotation).
+<<<<<<< HEAD
 > - **Context:** Organic Frame - drapes over the "Login" utility, softening the digital edge with "Victorian Greenhouse" aesthetics.
+=======
+> - **Context:** [DEPRECATED_STYLE] Frame - drapes over the "Login" utility, softening the digital edge with "kerala-streetprint Greenhouse" aesthetics.
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 > **[DEFINED: ASSET-7 Firefly Sprite]**
 >
@@ -48,12 +79,21 @@ This document provides the specific "Victorian Naturalist" copy and precise asse
 > - **Scale:** Randomize between 0.8 and 1.2.
 > - **Context:** Bioluminescent Atmospherics - eliminates "flat black" by adding depth and life to "The Void".
 
+<<<<<<< HEAD
 > **[DEFINED: ASSET-9 Waratah Hero Closeup]**
 >
 > - **Location:** Absolute center of `glassmorphism.hero-container`.
 > - **Blend Mode:** `luminosity` at 40% opacity (Ghosted) OR `normal` at 100% if used as main subject.
 > - **Animation:** Fade-in from black on load (1.5s duration).
 > - **Context:** The "Future Specimen" - the vibrant potential of the user's career, captured in macro detail.
+=======
+> **[DEFINED: ASSET-9 Solidarity Hero Closeup]**
+>
+> - **Location:** Absolute center of `kr-screenprint.hero-container`.
+> - **Blend Mode:** `luminosity` at 40% opacity (Ghosted) OR `normal` at 100% if used as main subject.
+> - **Animation:** Fade-in from black on load (1.5s duration).
+> - **Context:** The "Future kr-motif" - the vibrant potential of the user's career, captured in macro detail.
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 ---
 
@@ -61,15 +101,24 @@ This document provides the specific "Victorian Naturalist" copy and precise asse
 
 **Missing Assets:**
 
+<<<<<<< HEAD
 - `ASSET-7` (Firefly Sprite)
 - `ASSET-15` (Brass Compass Navigation) -> _Critical Gap_
+=======
+- `{KR-UI-003}` **UI-KIT REQUIRED** (Screenprint Grit Particles)
+- `{KR-UI-002}` **UI-KIT REQUIRED** (Halo Disk / Compass Navigation) -> _Critical Gap_
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 ### Copy & Typography Strategy
 
 | Element         | Draft Copy                           | Typography Token / Settings                                                  |
 | :-------------- | :----------------------------------- | :--------------------------------------------------------------------------- |
 | **Card Header** | IDENTIFY YOURSELF                    | **Font:** Fraunces Variable<br>**Settings:** `WONK`=0, `SOFT`=100 (Inviting) |
+<<<<<<< HEAD
 | **Helper Text** | _Access the Northcote Conservatory._ | **Font:** Lora Variable (Italic)                                             |
+=======
+| **Helper Text** | _Access the kerala-rage Conservatory._ | **Font:** Lora Variable (Italic)                                             |
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 ### Asset Integration Guide (Gap Fill)
 
@@ -90,17 +139,29 @@ This document provides the specific "Victorian Naturalist" copy and precise asse
 
 **Missing Assets:**
 
+<<<<<<< HEAD
 - `ASSET-14` (Skeleton Anatomical Etching) -> _Critical Gap for background_
 - `ASSET-8` (Fossil Verification Mark) -> _The "Success" State_
 - `ASSET-15` (Compass)
+=======
+- `{KR-UI-005}` **UI-KIT REQUIRED** (Charcoal Paper Base)
+- `{KR-UI-007}` **UI-KIT REQUIRED** (Verification Stamp) -> _The "Success" State_
+- `{KR-UI-002}` **UI-KIT REQUIRED** (Halo Disk / Compass)
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 ### Copy & Typography Strategy
 
 | Element             | Draft Copy                                        | Typography Token / Settings                                                |
 | :------------------ | :------------------------------------------------ | :------------------------------------------------------------------------- |
+<<<<<<< HEAD
 | **Headline**        | DEPOSIT SPECIMEN                                  | **Font:** Fraunces Variable<br>**Settings:** `WONK`=0, `SOFT`=0 (Clinical) |
 | **Drop Zone Label** | DROP PDF HERE<br>FOR DISSECTION                   | **Font:** JetBrains Mono<br>**Style:** Dashed border context               |
 | **Success Message** | _Specimen Verified. Organic integrity confirmed._ | **Font:** Lora Variable<br>**Color:** `wattleGold`                         |
+=======
+| **Headline**        | DEPOSIT kr-motif                                  | **Font:** Fraunces Variable<br>**Settings:** `WONK`=0, `SOFT`=0 (Clinical) |
+| **Drop Zone Label** | DROP PDF HERE<br>FOR DISSECTION                   | **Font:** JetBrains Mono<br>**Style:** Dashed border context               |
+| **Success Message** | _kr-motif Verified. [DEPRECATED_STYLE] integrity confirmed._ | **Font:** Lora Variable<br>**Color:** `kr-ink-gold`                         |
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 ### Asset Integration Guide (Gap Fill)
 
@@ -108,7 +169,11 @@ This document provides the specific "Victorian Naturalist" copy and precise asse
 >
 > - **Location:** Centered strictly behind the Drop Zone.
 > - **Opacity:** 4-6% (Watermark).
+<<<<<<< HEAD
 > - **Blend Mode:** `multiply` against Parchment background.
+=======
+> - **Blend Mode:** `multiply` against Paper White background.
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 > - **Subject:** Osteologically accurate ribcage or vertebrae.
 > - **Context:** Analysis Depth - suggests the resume is being X-rayed and analyzed down to its structural bones.
 >
@@ -126,8 +191,13 @@ This document provides the specific "Victorian Naturalist" copy and precise asse
 
 **Missing Assets:**
 
+<<<<<<< HEAD
 - `ASSET-12` (Laboratory Grid Major)
 - `ASSET-15` (Compass - Functioning Gauge)
+=======
+- `{KR-UI-004}` **UI-KIT REQUIRED** (Blueprint Grid Major)
+- `{KR-UI-002}` **UI-KIT REQUIRED** (Halo Disk - Functioning Gauge)
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 ### Copy & Typography Strategy
 
@@ -138,7 +208,11 @@ This document provides the specific "Victorian Naturalist" copy and precise asse
 
 ### Asset Integration Guide (Gap Fill)
 
+<<<<<<< HEAD
 > **[DEFINED: ASSET-12 Laboratory Grid Major]**
+=======
+> **[DEFINED: ASSET-12 kr-dark Grid Major]**
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 >
 > - **Type:** SVG Pattern coverage.
 > - **Style:** 1px stroke, Spacing 100px.
@@ -160,8 +234,13 @@ This document provides the specific "Victorian Naturalist" copy and precise asse
 
 **Missing Assets:**
 
+<<<<<<< HEAD
 - `ASSET-17` (Eucalyptus Hanging Ceiling Gum) -> _Critical for "Greenhouse" feel_
 - `ASSET-19` (Eucalyptus Kanban Column) -> _Structural separator_
+=======
+- `{KR-UI-001}` **UI-KIT REQUIRED** (Wheat Paste Tear - Column Headers) -> _Critical for visual aesthetic_
+- `{KR-UI-003}` **UI-KIT REQUIRED** (Screenprint Grit Particles)
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 ### Copy & Typography Strategy
 
@@ -172,7 +251,11 @@ This document provides the specific "Victorian Naturalist" copy and precise asse
 
 ### Asset Integration Guide (Gap Fill)
 
+<<<<<<< HEAD
 > **[DEFINED: ASSET-17 Eucalyptus Hanging Ceiling Gum]**
+=======
+> **[DEFINED: ASSET-17 kr-activist Hanging Ceiling Gum]**
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 >
 > - **Location:** Spanning entire Top Viewport Edge (`width: 100vw`).
 > - **Height:** ~25vh.
@@ -180,12 +263,20 @@ This document provides the specific "Victorian Naturalist" copy and precise asse
 > - **Effect:** Parallax Factor 0.25 (Faster than background). Blur: 2px (Depth of Field).
 > - **Context:** "Canopy Immersion" - places the user physically _under_ the tree, looking up/out at their work.
 >
+<<<<<<< HEAD
 > **[DEFINED: ASSET-19 Eucalyptus Kanban Column]**
+=======
+> **[DEFINED: ASSET-19 kr-activist Kanban Column]**
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 >
 > - **Location:** Vertical separator between columns.
 > - **Width:** ~40-60px (Natural stem width).
 > - **Opacity:** 100% (Solid biome element).
+<<<<<<< HEAD
 > - **Context:** Structural Vegetation - replaces sterile CSS borders with organic verticality to frame the "Garden" of tasks.
+=======
+> - **Context:** Structural Vegetation - replaces sterile CSS borders with [DEPRECATED_STYLE] verticality to frame the "Garden" of tasks.
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 ---
 
@@ -193,18 +284,31 @@ This document provides the specific "Victorian Naturalist" copy and precise asse
 
 **Missing Assets:**
 
+<<<<<<< HEAD
 - `ASSET-17` (Eucalyptus Hanging)
 - `ASSET-7` (Firefly Sprite)
+=======
+- `{KR-SOLID-011}` or `{KR-SOLID-029}` (Atmospheric/Paint Splash overlay) → _Available for expressive overlay_
+- `{KR-UI-003}` **UI-KIT REQUIRED** (Screenprint Grit Particles)
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 ### Copy & Typography Strategy
 
 | Element           | Draft Copy                   | Typography Token / Settings                     |
 | :---------------- | :--------------------------- | :---------------------------------------------- |
+<<<<<<< HEAD
 | **Hero Greeting** | _The ecosystem is thriving._ | **Font:** Libre Bodoni Italic<br>**Size:** 48px |
 
 ### Asset Integration Guide (Gap Fill)
 
 > **[DEFINED: ASSET-17 Eucalyptus Hanging]**
+=======
+| **Hero Greeting** | _The ecosystem is thriving._ | **Font:** kr-serif-bold Italic<br>**Size:** 48px |
+
+### Asset Integration Guide (Gap Fill)
+
+> **[DEFINED: ASSET-17 kr-activist Hanging]**
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 >
 > - **Location:** Dramatic Top-Left Foreground.
 > - **Z-Index:** 4 (Highest).

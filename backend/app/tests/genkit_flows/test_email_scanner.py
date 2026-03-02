@@ -1,7 +1,10 @@
 from unittest.mock import Mock, patch
 
 import pytest
+<<<<<<< HEAD
 
+=======
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 from app.genkit_flows.email_scanner import extract_job_details_from_email
 
 

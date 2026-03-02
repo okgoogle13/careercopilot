@@ -22,7 +22,11 @@
 #### 🎨 **Design System Implementation**
 
 - [x] **26 Electric Components** - Button, Card, Badge, Alert, Avatar, etc.
+<<<<<<< HEAD
 - [x] **Deep Violet Void Theme** - #141218, #EADDFF, #1D1B20 color palette
+=======
+- [x] **Deep Violet Void Theme** - #1A1714, #EADDFF, #1D1B20 color palette
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 - [x] **Variable Font Typography** - Hero, Human, Data, Hologram tiers
 - [x] **Tactile Press Physics** - 0.98/0.95 scale animations
 - [x] **Complete Theme Infrastructure** - tokens.json, globals.css, typography.css

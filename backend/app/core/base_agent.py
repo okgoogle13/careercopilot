@@ -8,7 +8,11 @@ import json
 import logging
 from abc import ABC, abstractmethod
 from datetime import datetime, timedelta
+<<<<<<< HEAD
 from typing import Any, Dict, List, Optional
+=======
+from typing import Any
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 from app.core.ai_client import get_ai_client
 from app.core.personal_cache import get_personal_cache
@@ -34,7 +38,11 @@ class BaseAgent(ABC):
 
         self.logger.info(f"BaseAgent {agent_name} initialized with caching")
 
+<<<<<<< HEAD
     def _generate_prompt_hash(self, prompt: str, context: Optional[Dict] = None) -> str:
+=======
+    def _generate_prompt_hash(self, prompt: str, context: dict | None = None) -> str:
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         """Generate hash for prompt and context for caching"""
         prompt_data = {
             "prompt": prompt,
@@ -44,7 +52,11 @@ class BaseAgent(ABC):
         prompt_str = json.dumps(prompt_data, sort_keys=True, default=str)
         return hashlib.sha256(prompt_str.encode()).hexdigest()[:16]
 
+<<<<<<< HEAD
     async def execute_with_monitoring(self, task_data: Dict[str, Any]) -> Dict[str, Any]:
+=======
+    async def execute_with_monitoring(self, task_data: dict[str, Any]) -> dict[str, Any]:
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         """Execute agent task with monitoring, caching, and error handling"""
 
         start_time = datetime.now()
@@ -110,10 +122,17 @@ class BaseAgent(ABC):
             return self._format_error_response(str(e))
 
     @abstractmethod
+<<<<<<< HEAD
     async def _execute_core_logic(self, task_data: Dict[str, Any]) -> Dict[str, Any]:
         """Core agent logic to be implemented by subclasses"""
 
     def _generate_task_cache_key(self, task_data: Dict[str, Any]) -> str:
+=======
+    async def _execute_core_logic(self, task_data: dict[str, Any]) -> dict[str, Any]:
+        """Core agent logic to be implemented by subclasses"""
+
+    def _generate_task_cache_key(self, task_data: dict[str, Any]) -> str:
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         """Generate cache key for task data"""
         # Create a stable hash of relevant task data
         relevant_data = {
@@ -127,19 +146,31 @@ class BaseAgent(ABC):
         }
         return self._generate_prompt_hash(json.dumps(relevant_data, sort_keys=True))
 
+<<<<<<< HEAD
     def _hash_dict(self, data: Dict[str, Any]) -> str:
+=======
+    def _hash_dict(self, data: dict[str, Any]) -> str:
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         """Create hash of dictionary data"""
         return hashlib.md5(json.dumps(data, sort_keys=True, default=str).encode()).hexdigest()[:8]
 
     def _is_cache_suitable(
+<<<<<<< HEAD
         self, cached_result: Dict[str, Any], current_task_data: Dict[str, Any]
+=======
+        self, cached_result: dict[str, Any], current_task_data: dict[str, Any]
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     ) -> bool:
         """Check if cached result is suitable for current task"""
         # For now, simple TTL check is done in cache layer
         # Could add more sophisticated logic here
         return True
 
+<<<<<<< HEAD
     def _format_success_response(self, result: Dict[str, Any]) -> Dict[str, Any]:
+=======
+    def _format_success_response(self, result: dict[str, Any]) -> dict[str, Any]:
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         """Format successful response with metadata"""
         return {
             "success": True,
@@ -148,7 +179,11 @@ class BaseAgent(ABC):
             "data": result,
         }
 
+<<<<<<< HEAD
     def _format_error_response(self, error_message: str) -> Dict[str, Any]:
+=======
+    def _format_error_response(self, error_message: str) -> dict[str, Any]:
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         """Format error response with metadata"""
         return {
             "success": False,
@@ -161,8 +196,13 @@ class BaseAgent(ABC):
     async def generate_ai_response_with_cache(
         self,
         prompt: str,
+<<<<<<< HEAD
         context: Optional[Dict] = None,
         model: str = "gemini-3.0-flash",
+=======
+        context: dict | None = None,
+        model: str = "gemini-2.0-flash",
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         temperature: float = 0.7,
     ) -> str:
         """Generate AI response with caching support using unified AIPromptBuilder"""
@@ -201,11 +241,19 @@ class BaseAgent(ABC):
 
         except Exception as e:
             self.logger.error(f"AI response generation failed: {e}")
+<<<<<<< HEAD
             return f"Error generating AI response: {str(e)}"
 
     async def generate_structured_ai_response_with_cache(
         self, prompt: str, schema: Dict[str, Any], context: Optional[Dict] = None
     ) -> Dict[str, Any]:
+=======
+            return f"Error generating AI response: {e!s}"
+
+    async def generate_structured_ai_response_with_cache(
+        self, prompt: str, schema: dict[str, Any], context: dict | None = None
+    ) -> dict[str, Any]:
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         """Generate structured AI response with JSON output and caching"""
 
         # Create structured prompt
@@ -234,9 +282,15 @@ class BaseAgent(ABC):
 
         except Exception as e:
             self.logger.error(f"Failed to parse structured response: {e}")
+<<<<<<< HEAD
             return {"error": f"Could not parse structured response: {str(e)}"}
 
     def add_personal_context_to_prompt(self, base_prompt: str, user_profile: Dict[str, Any]) -> str:
+=======
+            return {"error": f"Could not parse structured response: {e!s}"}
+
+    def add_personal_context_to_prompt(self, base_prompt: str, user_profile: dict[str, Any]) -> str:
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         """Add personal context to any prompt"""
 
         career_info = user_profile.get("career_transition", {})
@@ -269,8 +323,13 @@ class PersonalizedAgent(BaseAgent):
     async def learn_from_success(
         self,
         task_type: str,
+<<<<<<< HEAD
         successful_result: Dict[str, Any],
         user_profile: Dict[str, Any],
+=======
+        successful_result: dict[str, Any],
+        user_profile: dict[str, Any],
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     ) -> None:
         """Learn from successful applications for future improvements"""
 
@@ -305,7 +364,11 @@ class PersonalizedAgent(BaseAgent):
         except Exception as e:
             self.logger.error(f"Error learning from success: {e}")
 
+<<<<<<< HEAD
     async def get_success_patterns(self, task_type: str) -> List[Dict[str, Any]]:
+=======
+    async def get_success_patterns(self, task_type: str) -> list[dict[str, Any]]:
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         """Get successful patterns for task type"""
 
         try:
@@ -318,7 +381,11 @@ class PersonalizedAgent(BaseAgent):
             return []
 
     async def generate_with_success_context(
+<<<<<<< HEAD
         self, prompt: str, task_type: str, user_profile: Dict[str, Any]
+=======
+        self, prompt: str, task_type: str, user_profile: dict[str, Any]
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     ) -> str:
         """Generate AI response using successful patterns as context"""
 

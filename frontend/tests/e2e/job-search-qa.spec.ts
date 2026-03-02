@@ -331,14 +331,24 @@ test.describe('Job Search Flow - Visual QA', () => {
 
         console.log('Card Styles:', m3Compliance);
 
+<<<<<<< HEAD
         // Check for organic border radius (pebble shape would be: 20px 20px 32px 32px)
+=======
+        // Check for [DEPRECATED_STYLE] border radius (pebble shape would be: 20px 20px 32px 32px)
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         const hasOrganicRadius = m3Compliance.borderRadius.includes('px') &&
             m3Compliance.borderRadius.split(' ').length > 1;
 
         if (!hasOrganicRadius) {
+<<<<<<< HEAD
             console.log('⚠️ QA Issue: Card not using M3 organic border radius (should be asymmetric like pebble)');
         } else {
             console.log('✅ Card uses organic border radius');
+=======
+            console.log('⚠️ QA Issue: Card not using M3 [DEPRECATED_STYLE] border radius (should be asymmetric like pebble)');
+        } else {
+            console.log('✅ Card uses [DEPRECATED_STYLE] border radius');
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         }
 
         // Check for elevation shadow

@@ -338,12 +338,9 @@ test.describe('Career Database Ingestion - Complete UAT', () => {
 
         await page.goto('http://localhost:5173/career/ingest?demo=true', { waitUntil: 'domcontentloaded' });
 
-        // Try uploading an invalid file type
-        const invalidFilePath = path.resolve('tests/fixtures/test-image.png');
-        const fileInput = page.locator('input[type="file"]');
-        await fileInput.setInputFiles(invalidFilePath);
+        await page.locator('input[type="file"]').setInputFiles(invalidFilePath);
 
-        await page.click('button:has-text("Upload & Analyze")');
+        await page.getByRole('button', { name: /initialize harvesting/i }).click();
 
         // Verify error message appears
         await expect(page.locator('text=/No readable text found/i')).toBeVisible({ timeout: 10000 });

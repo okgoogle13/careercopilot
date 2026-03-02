@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // @ts-expect-error - TS2497: esModuleInterop is enabled, but TypeScript 5.9 still complains about namespace import
 import * as functions from "firebase-functions";
 // @ts-expect-error - TS2497: esModuleInterop is enabled, but TypeScript 5.9 still complains about namespace import
@@ -9,6 +10,17 @@ import {handleError, sendResponse} from "../utils/api.utils";
 import PDFDocument from "pdfkit";
 import {Document, Packer, Paragraph, TextRun, HeadingLevel} from "docx";
 import {Buffer} from "buffer";
+=======
+import {Buffer} from "buffer";
+import {Document, HeadingLevel, Packer, Paragraph, TextRun} from "docx";
+import type {Request, Response} from "express";
+import admin from "firebase-admin";
+import type {QueryDocumentSnapshot} from "firebase-admin/firestore";
+import functions from "firebase-functions";
+import {validateFirebaseIdToken} from "../middleware/auth.middleware";
+import {handleError, sendResponse} from "../utils/api.utils";
+import PDFDocument = require("pdfkit");
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 // Initialize Firebase Admin if not already initialized
 if (!admin.apps.length) {
@@ -161,7 +173,13 @@ export const listApplications = functions.https.onRequest(async (req: Request, r
     }
 
     const snapshot = await query.orderBy("updatedAt", "desc").get();
+<<<<<<< HEAD
     const applications = snapshot.docs.map((doc) => applicationFromFirestore(doc));
+=======
+    const applications = snapshot.docs.map((doc: QueryDocumentSnapshot) =>
+      applicationFromFirestore(doc),
+    );
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
     return sendResponse(res, 200, applications);
   } catch (error) {
@@ -370,10 +388,19 @@ export const exportApplications = functions.https.onRequest(async (req: Request,
     }
 
     const snapshot = await query.get();
+<<<<<<< HEAD
     const applications = snapshot.docs.map((doc) => applicationFromFirestore(doc));
     const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
 
     let exportData: string | Buffer;
+=======
+    const applications = snapshot.docs.map((doc: QueryDocumentSnapshot) =>
+      applicationFromFirestore(doc),
+    );
+    const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
+
+    let exportData: string | Buffer | null = null;
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     let contentType: string;
     let filename: string;
 
@@ -401,10 +428,17 @@ export const exportApplications = functions.https.onRequest(async (req: Request,
 
         const csvRows = [
           headers.join(","),
+<<<<<<< HEAD
           ...applications.map((app) =>
             headers
               .map((field) => {
                 const value = (app as Record<string, unknown>)[field] ?? "";
+=======
+          ...applications.map((app: Application) =>
+            headers
+              .map((field: string, index: number) => {
+                const value = (app as unknown as Record<string, unknown>)[field] ?? "";
+>>>>>>> restoration-KR-Rage-Figma-v2.0
                 // CSV escaping: double double-quotes to escape quotes per RFC 4180
                 return `"${value.toString().replace(/"/g, '""')}"`;
               })
@@ -430,7 +464,11 @@ export const exportApplications = functions.https.onRequest(async (req: Request,
         doc.fontSize(20).text("Job Applications", {align: "center"});
         doc.moveDown();
 
+<<<<<<< HEAD
         applications.forEach((app, index) => {
+=======
+        applications.forEach((app: Application, index: number) => {
+>>>>>>> restoration-KR-Rage-Figma-v2.0
           doc
             .fontSize(14)
             .text(`${index + 1}. ${app.companyName} - ${app.jobTitle} (${app.status})`);
@@ -464,7 +502,11 @@ export const exportApplications = functions.https.onRequest(async (req: Request,
                   heading: HeadingLevel.HEADING_1,
                   spacing: {after: 200},
                 }),
+<<<<<<< HEAD
                 ...applications.flatMap((app, index) => [
+=======
+                ...applications.flatMap((app: Application, index: number) => [
+>>>>>>> restoration-KR-Rage-Figma-v2.0
                   new Paragraph({
                     text: `${index + 1}. ${app.companyName} - ${app.jobTitle}`,
                     heading: HeadingLevel.HEADING_2,
@@ -508,6 +550,13 @@ export const exportApplications = functions.https.onRequest(async (req: Request,
     res.setHeader("Content-Type", `${contentType}; charset=utf-8`);
     res.setHeader("Content-Disposition", `attachment; filename="${filename}"`);
 
+<<<<<<< HEAD
+=======
+    if (!exportData) {
+      return sendResponse(res, 500, {error: "Export data generation failed"});
+    }
+
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     // For binary data (PDF, DOCX)
     if (Buffer.isBuffer(exportData)) {
       res.setHeader("Content-Length", exportData.length);

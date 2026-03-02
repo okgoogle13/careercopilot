@@ -1,0 +1,60 @@
+{
+  "prompt_management": {
+    "version": "1.0",
+    "default_language": "en",
+    "cache_prompts": true,
+    "validate_parameters": true,
+    "auto_reload": false
+  },
+
+  "categories": {
+    "ats_scoring": {
+      "name": "ATS Scoring",
+      "description": "Prompts for Applicant Tracking System scoring and analysis",
+      "default_temperature": 0.2,
+      "default_max_tokens": 2000
+    },
+    "resume_intelligence": {
+      "name": "Resume Intelligence",
+      "description": "Prompts for comprehensive resume analysis and insights",
+      "default_temperature": 0.2,
+      "default_max_tokens": 3000
+    },
+    "ksc_generation": {
+      "name": "KSC Generation",
+      "description": "Prompts for Key Selection Criteria responses",
+      "default_temperature": 0.3,
+      "default_max_tokens": 2500
+    },
+    "cover_letter": {
+      "name": "Cover Letter Generation",
+      "description": "Prompts for generating tailored cover letters",
+      "default_temperature": 0.4,
+      "default_max_tokens": 1500
+    },
+    "interview_prep": {
+      "name": "Interview Preparation",
+      "description": "Prompts for interview questions and preparation",
+      "default_temperature": 0.3,
+      "default_max_tokens": 2000
+    }
+  },
+
+  "length_instructions": {
+    "concise": "Keep each section concise (2-3 sentences each). Total response should be 200-300 words.",
+    "standard": "Provide detailed but focused responses (3-4 sentences each). Total response should be 300-450 words.",
+    "comprehensive": "Provide comprehensive, detailed responses (4-6 sentences each). Total response should be 450-600 words."
+  },
+
+  "ksc_detail_levels": {
+    "simple": "Return a JSON object with exactly four string keys: \"situation\", \"task\", \"action\", \"result\". Each value should be a clear, specific paragraph of 2-4 sentences.",
+    "full": "Return a JSON object with keys: \"ksc_analysis\" (object with: ksc_interpretation string, key_competencies array, success_factors array, common_pitfalls array), \"experience_selection\" (object with: chosen_experience string, relevance_score integer 0-100, selection_rationale string, alternative_experiences array), \"star_response\" (object with: situation string, task string, action string, result string, full_response string), \"optimization_suggestions\" (object with: strength_areas array, improvement_areas array, alternative_approaches array)."
+  },
+
+  "validation_rules": {
+    "required_parameters": true,
+    "parameter_type_checking": true,
+    "template_syntax_validation": true,
+    "output_format_validation": true
+  }
+}

@@ -1,8 +1,15 @@
 import logging
+<<<<<<< HEAD
 from typing import Any, Dict, List, Optional
 
 from app.core.cache_decorators import cached_ai_operation
 from app.core.input_validation import InputSanitizer, InputValidationError
+=======
+from typing import Any
+
+from app.core.cache_decorators import cached_ai_operation
+from app.core.input_validation import InputSanitizer
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 from app.core.monitoring import monitor_performance
 from app.genkit_flows.ats_scoring import atsScoring
 from app.schemas.legacy_migration import ATSScoringInput
@@ -22,8 +29,13 @@ class ATSScorer:
         user_id: str,
         resume_text: str,
         job_description: str,
+<<<<<<< HEAD
         profile_keywords: Optional[List[str]] = None,
     ) -> Dict[str, Any]:
+=======
+        profile_keywords: list[str] | None = None,
+    ) -> dict[str, Any]:
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         """
         Perform comprehensive ATS analysis by delegating to the genkit flow.
 
@@ -83,7 +95,11 @@ class ATSScorer:
             return result_dict
 
         except Exception as e:
+<<<<<<< HEAD
             logger.error(f"Error in ATS analysis Bridge for user {user_id}: {str(e)}")
+=======
+            logger.error(f"Error in ATS analysis Bridge for user {user_id}: {e!s}")
+>>>>>>> restoration-KR-Rage-Figma-v2.0
             raise
 
 # Global instance for import compatibility

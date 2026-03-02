@@ -1,6 +1,10 @@
 import { useState } from 'react';
 import { SplitSquareHorizontal, Save, Sparkles, Wand2, ShieldCheck } from 'lucide-react';
+<<<<<<< HEAD
 import { NorthcoteButton } from '@/components/ui/NorthcoteButton';
+=======
+import { KeralaRageButton } from '@/components/ui/KeralaRageButton';
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 import { scaffoldKSCResponse, STARInput } from '../logic';
 import { toast } from 'sonner';
 import { useAnalysis, type AnalysisResult } from '@/hooks/useAnalysis';
@@ -89,21 +93,36 @@ export function SplitEditor({ activeTab, onTabChange, archetype }: SplitEditorPr
                 </div>
 
                 <div className="flex items-center gap-2">
+<<<<<<< HEAD
                     <NorthcoteButton variant="secondary" className="h-8 w-8 p-0 rounded-full" title="Split View (Coming Soon)">
                         <SplitSquareHorizontal className="w-4 h-4 text-on-surface-variant" />
                     </NorthcoteButton>
                     <NorthcoteButton
+=======
+                    <KeralaRageButton variant="secondary" className="h-8 w-8 p-0 rounded-full" title="Split View (Coming Soon)">
+                        <SplitSquareHorizontal className="w-4 h-4 text-on-surface-variant" />
+                    </KeralaRageButton>
+                    <KeralaRageButton
+>>>>>>> restoration-KR-Rage-Figma-v2.0
                         onClick={handleAnalyze}
                         disabled={analyzing}
                         className="h-8 px-4 text-label-small bg-tertiary-container text-on-tertiary-container hover:bg-tertiary hover:text-on-tertiary transition-colors"
                     >
                         <ShieldCheck className="w-3 h-3 mr-2" />
                         {analyzing ? 'Auditing...' : 'Analyze'}
+<<<<<<< HEAD
                     </NorthcoteButton>
                     <NorthcoteButton className="h-8 px-4 text-label-small bg-primary text-on-primary">
                         <Save className="w-3 h-3 mr-2" />
                         Save Draft
                     </NorthcoteButton>
+=======
+                    </KeralaRageButton>
+                    <KeralaRageButton className="h-8 px-4 text-label-small bg-primary text-on-primary">
+                        <Save className="w-3 h-3 mr-2" />
+                        Save Draft
+                    </KeralaRageButton>
+>>>>>>> restoration-KR-Rage-Figma-v2.0
                 </div>
             </div>
 

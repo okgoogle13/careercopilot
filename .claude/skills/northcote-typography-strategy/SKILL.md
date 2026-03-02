@@ -1,8 +1,8 @@
 ---
+name: northcote-typography-strategy
 description: Apply "Maximum Expressive Playful" Northcote Curio typography using Variable
   and Color fonts. Orchestrates 3 interaction tiers (Workhorse, Expressive, Accent)
   with dynamic axes (GRAD, WONK, SOFT) for Victorian-meets-Cyberpunk aesthetic.
-name: northcote-typography-strategy
 ---
 
 # Northcote Typography Strategy: Maximum Expressive Playful
@@ -176,7 +176,7 @@ _Victorian Day -> Cyberpunk Night._
 
 ## Typography-Voice Alignment
 
-Typography tiers reinforce the voice tier system defined in [DOC-006](file:///Users/okgoogle13/Desktop/careercopilot/docs/archive/atomic-v2/DOC-006_Voice_and_Microcopy.md):
+Typography tiers reinforce the voice tier system defined in [DOC-006](file:///Users/okgoogle13/Projects/careercopilot/docs/archive/atomic-v2/DOC-006_Voice_and_Microcopy.md):
 
 | Typography Tier           | Font                      | Voice Tier                      | Copy Style                  |
 | :------------------------ | :------------------------ | :------------------------------ | :-------------------------- |

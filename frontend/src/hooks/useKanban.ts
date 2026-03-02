@@ -23,7 +23,11 @@ export function useKanban() {
             {
                 id: 'app-1',
                 role: 'Product Designer',
+<<<<<<< HEAD
                 company: 'Northcote Curio',
+=======
+                company: 'KeralaRage KrSolidarity',
+>>>>>>> restoration-KR-Rage-Figma-v2.0
                 location: 'Remote',
                 updatedAt: '2d ago',
                 status: 'Applied',

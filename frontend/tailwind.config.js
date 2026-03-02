@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 import defaultTheme from 'tailwindcss/defaultTheme';
+<<<<<<< HEAD
 import tokens from './src/theme/tokens.json';
 
 // Helper to safely access tokens
@@ -7,6 +8,14 @@ const t = tokens.color.semantic;
 
 export default {
   darkMode: ["class"],
+=======
+import m3Patch from './tailwind-m3-patch.js';
+// Helper to safely access tokens
+// const t = tokens.color.semantic;
+
+export default {
+  darkMode: ['class'],
+>>>>>>> restoration-KR-Rage-Figma-v2.0
   content: [
     './pages/**/*.{ts,tsx}',
     './components/**/*.{ts,tsx}',
@@ -17,6 +26,7 @@ export default {
   theme: {
     container: {
       center: true,
+<<<<<<< HEAD
       padding: "2rem",
       screens: {
         "2xl": "1400px",
@@ -28,16 +38,36 @@ export default {
       // ═══════════════════════════════════════════════════════════════════════
       fontFamily: {
         proclamation: ['"Libre Bodoni"', '"Playfair Display"', ...defaultTheme.fontFamily.serif],
+=======
+      padding: '2rem',
+      screens: {
+        '2xl': '1400px',
+      },
+    },
+    extend: {
+      ...(m3Patch?.theme?.extend || {}),
+      // ═══════════════════════════════════════════════════════════════════════
+      // THE FEDERATION TYPOGRAPHY STACK
+
+      // ═══════════════════════════════════════════════════════════════════════
+      fontFamily: {
+        proclamation: ['"kr-serif-bold"', '"Playfair Display"', ...defaultTheme.fontFamily.serif],
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         bloom: ['"Fraunces"', ...defaultTheme.fontFamily.serif],
         'field-note': ['"Work Sans"', ...defaultTheme.fontFamily.sans],
         annotation: ['"JetBrains Mono"', ...defaultTheme.fontFamily.mono],
         curator: ['"Caveat"', 'cursive'],
+<<<<<<< HEAD
+=======
+        'color-accent': ['"Nabla"', 'display'],
+>>>>>>> restoration-KR-Rage-Figma-v2.0
       },
 
       // ═══════════════════════════════════════════════════════════════════════
       // MOONLIGHT ON VELVET PALETTE
       // ═══════════════════════════════════════════════════════════════════════
       colors: {
+<<<<<<< HEAD
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -96,10 +126,71 @@ export default {
           success: t.status.gallery.ghostGum.value,
           warning: t.status.gallery.banksiaOrange.value,
           info: t.status.gallery.nativeViolet.value,
+=======
+        border: 'hsl(var(--border))',
+        input: 'hsl(var(--input))',
+        ring: 'hsl(var(--ring))',
+        background: 'hsl(var(--background))',
+        foreground: 'hsl(var(--foreground))',
+
+        // Use Asphalt Black as the global floor
+        black: 'var(--color-asphalt-black)',
+        white: 'var(--color-paper-white)', // Paper White instead of white
+
+        // Core Botanic Families
+        'asphalt-black': 'var(--color-asphalt-black)',
+        'asphalt-black-light': 'var(--color-asphalt-black-light)',
+
+        wattle: {
+          vault: 'var(--color-ink-gold-darkest)', // Mapped to closest step
+          shadow: 'var(--color-ink-gold-dark)',
+          gold: 'var(--color-ink-gold)',
+          glow: 'var(--color-ink-gold-light)',
+          bloom: 'var(--color-ink-gold-lightest)',
+          container: 'var(--sys-color-inkGold-container)', // Fallback to sys var if semantic missing
+        },
+        'wattle-gold': 'var(--color-ink-gold)',
+
+        [DEPRECATED_STYLE]: {
+          stem: 'var(--color-solidarity-red-darkest)',
+          root: 'var(--color-solidarity-red-darkest)',
+          crimson: 'var(--color-solidarity-red)',
+          glow: 'var(--color-solidarity-red-light)',
+          bloom: 'var(--color-solidarity-red-lightest)',
+          container: 'var(--sys-color-solidarityRed-container)',
+        },
+        '[DEPRECATED_STYLE]-red': 'var(--color-solidarity-red)',
+
+        'kr-leaf': {
+          night: 'var(--color-asphalt-black)',
+          ash: 'var(--color-concrete-grey-darkest)',
+          smoke: 'var(--color-concrete-grey-dark)',
+          dusk: 'var(--color-concrete-grey)',
+          mist: 'var(--color-concrete-grey-light)',
+        },
+
+        flannel: {
+          deep: 'var(--color-concrete-grey-dark)',
+          medium: 'var(--color-concrete-grey)',
+          flower: 'var(--color-concrete-grey-light)',
+          light: 'var(--color-concrete-grey-lightest)',
+          bloom: 'var(--color-paper-white)',
+        },
+        'concrete-grey': 'var(--color-concrete-grey)',
+
+        'paper-white': 'var(--color-paper-white)',
+
+        // Semantic Semantic (Legacy/Functional) support
+        semantic: {
+          success: 'var(--sys-color-kr-activistSmokeGreen-base)',
+          warning: 'var(--sys-color-stencilYellow-base)',
+          info: 'var(--sys-color-labWrenMetalBlue-base)',
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         },
 
         // Shadcn UI Mapping (Retaining for component compatibility)
         primary: {
+<<<<<<< HEAD
           DEFAULT: t.primary.wattleGold.value,
           foreground: t.surface.shared.specimenNight.value,
           container: t.primary.wattleGoldContainer.value,
@@ -127,11 +218,47 @@ export default {
         card: {
           DEFAULT: t.surface.gallery.eucalyptSmoke.value,
           foreground: t.onSurface.parchment.value,
+=======
+          DEFAULT: 'var(--color-ink-gold)',
+          foreground: 'var(--color-asphalt-black)',
+          container: 'var(--sys-color-inkGold-container)',
+        },
+        secondary: {
+          DEFAULT: 'var(--color-concrete-grey)',
+          foreground: 'var(--color-asphalt-black)',
+        },
+        destructive: {
+          DEFAULT: 'var(--color-solidarity-red)',
+          foreground: 'var(--color-paper-white)',
+        },
+        muted: {
+          DEFAULT: 'var(--color-concrete-grey-dark)',
+          foreground: 'var(--color-concrete-grey-lightest)',
+        },
+        accent: {
+          DEFAULT: 'var(--color-solidarity-red)',
+          foreground: 'var(--color-paper-white)',
+        },
+        popover: {
+          DEFAULT: 'var(--color-asphalt-black-light)',
+          foreground: 'var(--color-paper-white)',
+        },
+        card: {
+          DEFAULT: 'var(--color-asphalt-black)',
+          foreground: 'var(--color-paper-white)',
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         },
       },
 
       fontSize: {
+<<<<<<< HEAD
         'display-hero': ['120px', { lineHeight: '1.0', fontWeight: '100', letterSpacing: '-0.04em' }],
+=======
+        'display-hero': [
+          '120px',
+          { lineHeight: '1.0', fontWeight: '100', letterSpacing: '-0.04em' },
+        ],
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         'display-lg': ['240px', { lineHeight: '1.1', fontWeight: '700', letterSpacing: '-2px' }],
         'display-md': ['160px', { lineHeight: '1.1', fontWeight: '700', letterSpacing: '-1px' }],
         'display-sm': ['96px', { lineHeight: '1.2', fontWeight: '600' }],
@@ -144,9 +271,39 @@ export default {
         'body-lg': ['16px', { lineHeight: '1.6', fontWeight: '400', letterSpacing: '0.5px' }],
         'body-md': ['14px', { lineHeight: '1.5', fontWeight: '400', letterSpacing: '0.25px' }],
         'body-sm': ['12px', { lineHeight: '1.5', fontWeight: '400', letterSpacing: '0.4px' }],
+<<<<<<< HEAD
         'label-lg': ['13px', { lineHeight: '1.5', fontWeight: '500', letterSpacing: '0.5px', textTransform: 'uppercase' }],
         'label-md': ['11px', { lineHeight: '1.4', fontWeight: '500', letterSpacing: '0.5px', textTransform: 'uppercase' }],
         'label-sm': ['10px', { lineHeight: '1.3', fontWeight: '600', letterSpacing: '0.8px', textTransform: 'uppercase' }],
+=======
+        'label-lg': [
+          '13px',
+          {
+            lineHeight: '1.5',
+            fontWeight: '500',
+            letterSpacing: '0.5px',
+            textTransform: 'uppercase',
+          },
+        ],
+        'label-md': [
+          '11px',
+          {
+            lineHeight: '1.4',
+            fontWeight: '500',
+            letterSpacing: '0.5px',
+            textTransform: 'uppercase',
+          },
+        ],
+        'label-sm': [
+          '10px',
+          {
+            lineHeight: '1.3',
+            fontWeight: '600',
+            letterSpacing: '0.8px',
+            textTransform: 'uppercase',
+          },
+        ],
+>>>>>>> restoration-KR-Rage-Figma-v2.0
       },
 
       // ========================================
@@ -163,7 +320,11 @@ export default {
       },
 
       // ========================================
+<<<<<<< HEAD
       // BORDER RADIUS: Organic Asymmetry
+=======
+      // BORDER RADIUS: [DEPRECATED_STYLE] Asymmetry
+>>>>>>> restoration-KR-Rage-Figma-v2.0
       // ========================================
       borderRadius: {
         pebble: '20px 6px 16px 28px',
@@ -173,9 +334,15 @@ export default {
         sentry: '98%',
 
         // Shadcn fallbacks
+<<<<<<< HEAD
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+=======
+        lg: 'var(--radius)',
+        md: 'calc(var(--radius) - 2px)',
+        sm: 'calc(var(--radius) - 4px)',
+>>>>>>> restoration-KR-Rage-Figma-v2.0
       },
 
       // ========================================
@@ -190,7 +357,11 @@ export default {
 
         'wattle-glow': '0 0 0 24px rgba(212, 168, 75, 0.2)',
         'wattle-glow-sm': '0 0 0 12px rgba(212, 168, 75, 0.15)',
+<<<<<<< HEAD
         'waratah-glow': '0 0 0 24px rgba(196, 92, 75, 0.2)',
+=======
+        '[DEPRECATED_STYLE]-glow': '0 0 0 24px rgba(196, 92, 75, 0.2)',
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
         'focus-ring': '0 0 0 4px rgba(212, 168, 75, 0.5)',
       },
@@ -215,13 +386,19 @@ export default {
         bloom: 'bloom 600ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards',
         'bloom-lift': 'bloomLift 200ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards',
         'bloom-glow': 'bloomGlow 300ms cubic-bezier(0.25, 0.46, 0.45, 0.94) 100ms forwards',
+<<<<<<< HEAD
         'bloom-typography': 'bloomTypography 400ms cubic-bezier(0.34, 1.56, 0.64, 1) 200ms forwards',
+=======
+        'bloom-typography':
+          'bloomTypography 400ms cubic-bezier(0.34, 1.56, 0.64, 1) 200ms forwards',
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         unfold: 'unfold 600ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards',
         shimmer: 'shimmer 2000ms linear infinite',
         pulse: 'pulse 2000ms cubic-bezier(0.4, 0, 0.6, 1) infinite',
         press: 'press 150ms cubic-bezier(0.2, 0, 0, 1) forwards',
 
         // Shadcn Accordion
+<<<<<<< HEAD
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
@@ -229,6 +406,23 @@ export default {
         bloom: {
           '0%': { transform: 'translateY(0px)', opacity: '1', boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)' },
           '100%': { transform: 'translateY(-12px)', opacity: '1', boxShadow: '0 0 0 24px rgba(212, 168, 75, 0.2), 0 4px 16px rgba(0, 0, 0, 0.25)' },
+=======
+        'accordion-down': 'accordion-down 0.2s ease-out',
+        'accordion-up': 'accordion-up 0.2s ease-out',
+      },
+      keyframes: {
+        bloom: {
+          '0%': {
+            transform: 'translateY(0px)',
+            opacity: '1',
+            boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)',
+          },
+          '100%': {
+            transform: 'translateY(-12px)',
+            opacity: '1',
+            boxShadow: '0 0 0 24px rgba(212, 168, 75, 0.2), 0 4px 16px rgba(0, 0, 0, 0.25)',
+          },
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         },
         bloomLift: {
           '0%': { transform: 'translateY(0px)', opacity: '1' },
@@ -259,23 +453,42 @@ export default {
           '50%': { transform: 'scale(0.98)' },
           '100%': { transform: 'scale(0.98)' },
         },
+<<<<<<< HEAD
         "accordion-down": {
           from: { height: 0 },
           to: { height: "var(--radix-accordion-content-height)" },
         },
         "accordion-up": {
           from: { height: "var(--radix-accordion-content-height)" },
+=======
+        'accordion-down': {
+          from: { height: 0 },
+          to: { height: 'var(--radix-accordion-content-height)' },
+        },
+        'accordion-up': {
+          from: { height: 'var(--radix-accordion-content-height)' },
+>>>>>>> restoration-KR-Rage-Figma-v2.0
           to: { height: 0 },
         },
       },
       backgroundImage: {
         'texture-gouache': "url('/textures/gouache-grain-warm.png')",
+<<<<<<< HEAD
         'gallery-gradient': "radial-gradient(ellipse 60% 50% at 85% 15%, rgba(212, 168, 75, 0.08) 0%, transparent 50%), radial-gradient(ellipse 40% 60% at 20% 60%, rgba(196, 92, 75, 0.05) 0%, transparent 40%)",
       }
     },
   },
   plugins: [
     require("tailwindcss-animate"),
+=======
+        'kr-dark-gradient':
+          'radial-gradient(ellipse 60% 50% at 85% 15%, rgba(212, 168, 75, 0.08) 0%, transparent 50%), radial-gradient(ellipse 40% 60% at 20% 60%, rgba(196, 92, 75, 0.05) 0%, transparent 40%)',
+      },
+    },
+  },
+  plugins: [
+    require('tailwindcss-animate'),
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     // Variable Font Axis Support (M3 Expressive)
     function ({ matchUtilities, theme }) {
       matchUtilities(
@@ -305,6 +518,12 @@ export default {
           '@apply': 'outline-none ring-2 ring-offset-0 ring-wattle-gold',
         },
       });
+<<<<<<< HEAD
     }
   ],
 }
+=======
+    },
+  ],
+};
+>>>>>>> restoration-KR-Rage-Figma-v2.0

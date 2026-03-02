@@ -1,4 +1,8 @@
 import { Pebble, Signal, Stone } from '@/components/ui';
+<<<<<<< HEAD
+=======
+import { ApplicationForm } from '@/components/ApplicationForm';
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 import { ValidationDashboard } from '@/features/onboarding/components/ValidationDashboard';
 import { useCareerIngestion } from '@/hooks/useCareerIngestion';
 import { CareerDatabase } from '@/types/api';
@@ -7,13 +11,20 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { CheckCircle, FileText, Fingerprint, Microscope } from 'lucide-react';
 import React, { useState } from 'react';
 
+<<<<<<< HEAD
 // Laboratory Assets
 import naturesClockwork from '../assets/specimens/natures_clockwork.jpg';
 import paperGrain from '../assets/textures/paper-grain.png';
+=======
+// KrDark Assets
+const naturesClockwork = '/assets/kr-solidarity/specimen/kr-solidarity__specimen__triage-natural-history__v1.png';
+const paperGrain = '/assets/kr-solidarity/texture/kr-solidarity__substrate__kr-solidarity--texture--melbourne-laneway--v1__v1.png';
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 type UploadStage = 'idle' | 'uploading' | 'extracting' | 'processing' | 'embedding' | 'complete';
 
 /**
+<<<<<<< HEAD
  * CareerCopilot Ingestion Page ("The Mulch / Specimen Tray")
  *
  * V3.1 Laboratory Mode Implementation:
@@ -21,6 +32,15 @@ type UploadStage = 'idle' | 'uploading' | 'extracting' | 'processing' | 'embeddi
  * ✓ Texture-Laboratory-Parchment overlay
  * ✓ Skeleton Etch Motif metaphors
  * ✓ Clinical palette restricted to Obsidian/Parchment/Wattle
+=======
+ * CareerCopilot Ingestion Page ("The Mulch / KrMotif Tray")
+ *
+ * V3.1 KrDark Mode Implementation:
+ * ✓ ASSET-08 Verification Stamp Integration
+ * ✓ Texture-KrDark-Paper White overlay
+ * ✓ Skeleton Etch Motif metaphors
+ * ✓ Clinical palette restricted to Obsidian/Paper White/Ink
+>>>>>>> restoration-KR-Rage-Figma-v2.0
  */
 export const IngestionPage: React.FC = () => {
   const { submitDocuments, updateCareerDatabase, isLoading, error } = useCareerIngestion();
@@ -59,7 +79,11 @@ export const IngestionPage: React.FC = () => {
       setUploadStage('complete');
       setProgress(100);
       setCareerData(result);
+<<<<<<< HEAD
       m3Toast.success('Ingestion Complete', 'Specimen data archived successfully.');
+=======
+      m3Toast.success('Ingestion Complete', 'KrMotif data archived successfully.');
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     } catch (err) {
       console.error('Upload failed:', err);
       setUploadStage('idle');
@@ -93,7 +117,11 @@ export const IngestionPage: React.FC = () => {
       case 'extracting':
         return 'Harvesting Semantic DNA...';
       case 'processing':
+<<<<<<< HEAD
         return 'Analyzing Career Specimen...';
+=======
+        return 'Analyzing Career KrMotif...';
+>>>>>>> restoration-KR-Rage-Figma-v2.0
       case 'embedding':
         return 'Mapping Professional Vector...';
       case 'complete':
@@ -104,14 +132,20 @@ export const IngestionPage: React.FC = () => {
   };
 
   return (
+<<<<<<< HEAD
     <div className="min-h-screen bg-specimen-night-darkest flex items-center justify-center p-6 relative overflow-hidden">
       {/* Texture Layer: Laboratory Parchment */}
+=======
+    <div className="min-h-screen bg-asphalt-black-darkest flex items-center justify-center p-6 relative overflow-hidden">
+      {/* Texture Layer: KrDark Paper White */}
+>>>>>>> restoration-KR-Rage-Figma-v2.0
       <div
         className="absolute inset-0 opacity-5 pointer-events-none mix-blend-overlay"
         style={{ backgroundImage: `url(${paperGrain})`, backgroundRepeat: 'repeat' }}
       />
 
       {/* Background Motifs */}
+<<<<<<< HEAD
       <div className="absolute top-10 left-10 w-64 h-64 grayscale opacity-10 pointer-events-none border border-flannel-flower/20 rounded-full" />
       <div className="absolute bottom-10 right-10 w-96 h-96 grayscale opacity-5 pointer-events-none border-l border-t border-flannel-flower/20 rounded-tl-[120px]" />
 
@@ -119,6 +153,15 @@ export const IngestionPage: React.FC = () => {
         mode="laboratory"
         elevation="floating"
         className="max-w-2xl w-full border-2 border-flannel-flower/5 shadow-maximum relative z-10"
+=======
+      <div className="absolute top-10 left-10 w-64 h-64 grayscale opacity-10 pointer-events-none border border-concrete-grey/20 rounded-full" />
+      <div className="absolute bottom-10 right-10 w-96 h-96 grayscale opacity-5 pointer-events-none border-l border-t border-concrete-grey/20 rounded-tl-[120px]" />
+
+      <Stone
+       
+        elevation="floating"
+        className="max-w-2xl w-full border-2 border-concrete-grey/5 shadow-maximum relative z-10"
+>>>>>>> restoration-KR-Rage-Figma-v2.0
       >
         {/* Verification Stamp Shadowplay (ASSET-08) */}
         <AnimatePresence>
@@ -131,7 +174,11 @@ export const IngestionPage: React.FC = () => {
               <img
                 src={naturesClockwork}
                 alt="Verified"
+<<<<<<< HEAD
                 className="w-full h-full object-contain rounded-full border-4 border-wattle-gold"
+=======
+                className="w-full h-full object-contain rounded-full border-4 border-ink-gold"
+>>>>>>> restoration-KR-Rage-Figma-v2.0
               />
             </motion.div>
           )}
@@ -139,6 +186,7 @@ export const IngestionPage: React.FC = () => {
 
         {/* Header: Clinical Focus */}
         <header className="text-center mb-12">
+<<<<<<< HEAD
           <div className="w-24 h-24 bg-wattle-gold/5 rounded-stone flex items-center justify-center mx-auto mb-6 border border-wattle-gold/10 relative">
             <div className="absolute inset-0 animate-pulse border border-wattle-gold/5 rounded-stone scale-110" />
             <Microscope className="w-12 h-12 text-wattle-gold" />
@@ -147,6 +195,16 @@ export const IngestionPage: React.FC = () => {
             Specimen Ingestion
           </h1>
           <p className="font-annotation text-xs text-flannel-flower-dark mt-3 tracking-[0.3em] uppercase opacity-60">
+=======
+          <div className="w-24 h-24 bg-ink-gold/5 rounded-stone flex items-center justify-center mx-auto mb-6 border border-ink-gold/10 relative">
+            <div className="absolute inset-0 animate-pulse border border-ink-gold/5 rounded-stone scale-110" />
+            <Microscope className="w-12 h-12 text-ink-gold" />
+          </div>
+          <h1 className="text-5xl font-bloom font-bold text-paper-white tracking-tighter uppercase">
+            KrMotif Ingestion
+          </h1>
+          <p className="font-annotation text-xs text-concrete-grey-dark mt-3 tracking-[0.3em] uppercase opacity-60">
+>>>>>>> restoration-KR-Rage-Figma-v2.0
             [ PHASE.01: SEMANTIC_EXTRACTION ]
           </p>
         </header>
@@ -162,6 +220,7 @@ export const IngestionPage: React.FC = () => {
           </Signal>
         )}
 
+<<<<<<< HEAD
         {/* File Ingestion Zone (The Mulch) */}
         <div
           className={`
@@ -223,6 +282,16 @@ export const IngestionPage: React.FC = () => {
               ))}
             </div>
           )}
+=======
+        {/* File Ingestion Zone (ApplicationForm) */}
+        <div className="mb-10">
+          <ApplicationForm
+            onUpload={(file) => {
+              setSelectedFiles([file]);
+            }}
+            isVerifying={isLoading}
+          />
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         </div>
 
         {/* Synthesis Trigger */}
@@ -237,6 +306,7 @@ export const IngestionPage: React.FC = () => {
           {isLoading ? getStageMessage() : 'Initialize Harvesting'}
         </Pebble>
 
+<<<<<<< HEAD
         {/* Clinical Progress Visualization */}
         {isLoading && (
           <div className="mt-10 transition-all animate-in fade-in slide-in-from-top-4">
@@ -264,6 +334,13 @@ export const IngestionPage: React.FC = () => {
           <Microscope className="w-8 h-8 text-wattle-gold/40 shrink-0" />
           <p className="font-field-note text-[11px] text-parchment/50 leading-relaxed italic">
             <strong className="text-parchment font-annotation uppercase tracking-wider not-italic">
+=======
+        {/* KrDark Technical Audit */}
+        <div className="mt-12 p-6 bg-asphalt-black/40 rounded-stone border border-concrete-grey/10 flex gap-5">
+          <Microscope className="w-8 h-8 text-ink-gold/40 shrink-0" />
+          <p className="font-field-note text-[11px] text-paper-white/50 leading-relaxed italic">
+            <strong className="text-paper-white font-annotation uppercase tracking-wider not-italic">
+>>>>>>> restoration-KR-Rage-Figma-v2.0
               Clinical Audit:
             </strong>{' '}
             Professional vectors are extracted via Gemini 3.0 Pro. This process mandates biological

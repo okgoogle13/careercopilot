@@ -1,332 +1,328 @@
 ---
-description: Real-time compliance tracking for Northcote Curio design system. Monitors
-  component migration progress (Material 3 to Northcote metaphors), visual audit pass
-  rates, typography distinctiveness, botanical palette adherence, and overall design
-  system maturity. Feeds data from visual audits and component inventories into health
-  metrics.
 name: compliance-dashboard
+description: Real-time compliance tracking for kerala-rage kr-solidarity design system.
+  Monitors component migration progress (Material 3 to kerala-rage metaphors), visual
+  audit pass rates, typography distinctiveness, [DEPRECATED_STYLE] palette adherence,
+  and overall design system maturity. Feeds data from visual audits and component
+  inventories into health metrics.
+metadata:
+  legacy_frontmatter:
+    version: 1.0.0
+    tags: []
 ---
 
 # Compliance Dashboard Skill
 
-## Overview
+## Purpose
 
-Transforms design system validation from **point-in-time audits** into **continuous visibility**. Tracks Northcote Curio adoption across your component library, reveals trends (improving or diverging?), and identifies high-priority refinement targets.
+Real-time compliance tracking CLI for kerala-rage kr-solidarity design system. Aggregates data from component specs, audit results, inventory analysis, and design token compliance to provide instant visibility into design system health.
 
-A brief is only successful if the system reflects it. A dashboard makes that visible.
+Run the tool to get:
+- **Overall compliance %** (target: 80%)
+- **Per-dimension metrics** (typography, color, layout, [DEPRECATED_STYLE])
+- **Component-level status** (aligned vs needs refinement)
+- **Prioritized work queues** (which components to focus on next)
 
-## When to Use This Skill
+## Quick Start
 
-Use this skill when you need to:
+```bash
+# Full report (human-readable)
+python3 .claude/skills/compliance-dashboard/run.py
 
-- **Track design system health** over time (quarterly reviews, maturity assessment)
-- **Monitor component migration** progress (Material 3 → Northcote naming/aesthetics)
-- **Identify compliance trends** (is your system becoming more Northcote-aligned?)
-- **Spot components needing refresh** (which ones diverge most from standards?)
-- **Measure brief effectiveness** (how well is your brief guiding work?)
-- **Communicate progress** to stakeholders (visual evidence of maturation)
-- **Make prioritization decisions** (where should team focus next?)
-- **Celebrate milestones** (we've hit 80% Northcote compliance!)
+# JSON output (for CI/CD integration)
+python3 .claude/skills/compliance-dashboard/run.py --json
 
-## How It Works
+# Single component analysis
+python3 .claude/skills/compliance-dashboard/run.py --component LoginCard
 
-The skill aggregates data from multiple sources:
-
-1. **Visual Audit Results** (from northcote-visual-audit skill)
-   - Component pass/fail/needs-refinement status
-   - Specific assessment per dimension (typography, color, layout, botanical)
-   - Timestamp and iteration tracking
-
-2. **Component Inventory** (from codebase-orchestrator skill)
-   - Total components in system
-   - Material 3 vs. Northcote naming count
-   - Component categorization
-
-3. **Historical Trends** (accumulated over time)
-   - Compliance score progression
-   - Migration percentage over quarters
-   - Average audit pass rate
-
-4. **Manual Input** (optional human verification)
-   - Justifications for components that "fail" but are acceptable
-   - Context for edge cases
-   - Team notes on strategic decisions
-
-## The Compliance Metrics
-
-### Core Metrics
-
-| Metric | What It Measures | Green | Yellow | Red |
-|---|---|---|---|---|
-| **Overall Compliance** | % of components passing audit | 80%+ | 60-79% | <60% |
-| **Typography Distinctiveness** | % using Northcote fonts, not defaults | 90%+ | 70-89% | <70% |
-| **Color Palette Adherence** | % using Australian botanical colors | 85%+ | 65-84% | <65% |
-| **Layout Intentionality** | % with organic spacing, not mechanical | 80%+ | 60-79% | <60% |
-| **Botanical Integration** | % with meaningful (not decorative) motifs | 70%+ | 50-69% | <50% |
-| **Component Migration** | % using Northcote names (Pebble, Stone, etc.) | 100% | 80-99% | <80% |
-
-### Trend Metrics
-
-| Metric | Meaning | Good Trend | Bad Trend |
-|---|---|---|---|
-| **Compliance Trajectory** | Is system getting more or less Northcote? | Upward | Downward |
-| **Audit Consistency** | Are results becoming more predictable? | Stabilizing | Diverging |
-| **Refinement Rate** | How many components improve per quarter? | High | Low |
-
-### Strategic Metrics
-
-| Metric | What It Reveals |
-|---|---|
-| **Brief Effectiveness** | Do audit results match brief guidance? (Consistency = brief is working) |
-| **Component Maturity** | Average number of audit iterations before pass |
-| **Priority Gap** | Which dimensions most commonly fail (where to focus)? |
-
-## Dashboard Views
-
-### View 1: Health Overview (30-second snapshot)
-
-```
-NORTHCOTE CURIO DESIGN SYSTEM HEALTH
-Last Updated: 2026-01-28
-
-Overall Compliance:     78% ▲ (was 72% last quarter)
-Typography:             85% ✓
-Color Palette:          82% ✓
-Layout Intentionality:  74% ▼ (was 78%)
-Botanical Integration:  68% ▲ (was 65%)
-Component Migration:    92% ✓
-
-Trend: Improving overall, slight layout regression
-Status: Approaching 80% threshold (production ready)
+# Component + JSON
+python3 .claude/skills/compliance-dashboard/run.py --component LoginCard --json
 ```
 
-### View 2: Component Breakdown
+## Data Sources
 
-List of every component with status:
+The tool aggregates from multiple sources to compute component health:
 
-```
-Component Name      | Type   | Status | Last Audit | Iterations
-Pebble (Button)     | Input  | PASS   | 2026-01-27 | 2
-Stone (Card)        | Layout | PASS   | 2026-01-25 | 3
-Sediment (List)     | Layout | NEEDS  | 2026-01-24 | 4
-Leaf (Badge)        | Input  | FAIL   | 2026-01-20 | 1
-...                 | ...    | ...    | ...        | ...
-```
+1. **docs/design/component-batch-plan.yaml**
+   - Component metadata (name, mode, priority)
+   - Target state (stage1, stage2, tests, tokens)
 
-Click each to see detailed audit findings.
+2. **docs/design/audits/<ComponentName>.json**
+   - Visual audit results (if exist)
+   - Dimension scores (typography, color, layout, [DEPRECATED_STYLE])
+   - Overall compliance score
 
-### View 3: Migration Progress
+3. **docs/design/generated/specs/**
+   - Component specifications (existence check)
 
-Visual representation of Material 3 → Northcote journey:
+4. **frontend/src/components/**
+   - Component code (existence check)
+   - Located in `components/<Name>/index.tsx` or `ui/<Name>.tsx`
 
-```
-Component Naming Migration
-████████░░ 92% complete
+5. **frontend/src/components/__tests__/**
+   - Unit/integration tests (existence check)
 
-Material 3 Legacy Names:    3 components (M3Button, M3Card, M3List)
-Northcote Metaphor Names:   47 components (Pebble, Stone, Sediment, etc.)
+6. **scripts/simple-component-inventory.sh --json**
+   - Hardcoded values detection (colors, spacing, shadows)
+   - Duplicate component detection
 
-Remaining Migration Work:
-- M3Button → Pebble (high priority, input heavy)
-- M3Card → Stone (medium priority, legacy code)
-- M3List → Sediment (low priority, being refactored)
-```
+## Output Schema
 
-### View 4: Quarterly Trends
+### JSON Mode (`--json`)
 
-```
-Compliance Score Progression
+Complete structured output:
 
-Q4 2025: ████░░░░░░ 45%
-Q1 2026: ████████░░ 78%
-
-Trend: Strong improvement (33 point gain)
-Trajectory: On pace for 90% by Q2 2026
-Milestone: Production-ready (80%) achieved Jan 2026
-```
-
-### View 5: Dimension Deep-Dive
-
-Which dimensions need focus?
-
-```
-Dimension Performance (Latest Audit Round)
-
-Typography:              ████████░░ 85% STRONG
-Color:                  ████████░░ 82% STRONG
-Layout:                 ███████░░░ 74% GOOD
-Botanical:              ██████░░░░ 68% NEEDS WORK
-Overall Coherence:      ███████░░░ 76% GOOD
-
-Priority for Next Sprint: Improve botanical integration
-Expected Effort: Medium
-Impact on Overall: +3-5% compliance
-```
-
-## Integration with Other Skills
-
-### With Northcote-Visual-Audit
-Each visual audit automatically feeds results into the dashboard. Monthly automated audits create historical baseline.
-
-### With Codebase-Orchestrator
-Component inventory data feeds dashboard to track migration completion percentage.
-
-### With Brand-Brief-Optimizer
-If brief clarity score is high but component compliance is low, the brief isn't guiding work effectively (signals need for training/alignment).
-
-### With Northcote-Typography-Strategy
-Typography audit results feed directly into compliance metrics, showing which components have distinctive fonts vs. generic defaults.
-
-## Handover Integration
-
-Compliance dashboard automatically integrates with orchestrator handover mode to prioritize migration tasks:
-
-**Priority Calculation:**
-Dashboard calculates handover task sequence based on:
-1. **Compliance Score**: Components with lowest scores prioritized (highest impact)
-2. **Blocking Dependencies**: Components blocking other migrations moved up
-3. **Usage Frequency**: Most-used components prioritized (highest user impact)
-
-**Handover Contribution:**
-Dashboard feeds orchestrator with:
-- Component visual audit status (pass/fail/needs-refinement)
-- Compliance dimensions needing focus (typography, color, layout, botanical)
-- Historical trend data (improving or regressing?)
-- Dimension-specific gaps (where to focus effort)
-
-**Output Example:**
 ```json
 {
-  "compliance_metrics": {...},
-  "handover_priorities": [
+  "summary": {
+    "overall_compliance": 0.78,
+    "typography": 0.85,
+    "color": 0.82,
+    "layout": 0.74,
+    "[DEPRECATED_STYLE]": 0.68,
+    "migration": 0.92,
+    "generated_at": "2026-02-10T02:07:37.749610+00:00"
+  },
+  "components": [
     {
-      "component": "Lens",
-      "priority": 1,
-      "compliance_score": 42,
-      "blocking": "form adoption",
-      "dimensions_failing": ["typography", "color"],
-      "usage_frequency": "high"
-    },
-    {
-      "component": "Mark",
-      "priority": 2,
-      "compliance_score": 38,
-      "blocking": "bulk actions",
-      "dimensions_failing": ["layout", "botanical"],
-      "usage_frequency": "medium"
+      "name": "LoginCard",
+      "mode": "new",
+      "priority": "high",
+      "scores": {
+        "overall": null,
+        "typography": null,
+        "color": null,
+        "layout": null,
+        "[DEPRECATED_STYLE]": null
+      },
+      "status": "aligned|needs_refinement",
+      "needs": [
+        "needs_typography_fix",
+        "needs_color_fix",
+        "needs_layout_refine",
+        "needs_botanical_integration",
+        "needs_migration_cleanup",
+        "needs_tests",
+        "needs_stage2",
+        "needs_spec"
+      ],
+      "has_spec": true,
+      "has_mockup": false,
+      "has_component_code": true,
+      "has_tests": true,
+      "hardcoded_values": false,
+      "duplicate": false,
+      "last_audit": "2026-02-10T00:00:00Z",
+      "iterations": 2
     }
   ]
 }
 ```
 
-**Workflow:**
-1. Orchestrator identifies components needing migration
-2. Dashboard scores compliance and identifies gaps
-3. Dashboard calculates priority (impact + blocking + frequency)
-4. Orchestrator packages as handover tasks in priority order
-5. Gemini executes highest-impact migrations first
-6. Post-migration, dashboard visual audit validates improvements
+### Human-Readable Output (default)
 
-## Workflow: Continuous Monitoring
+```
+Kerala Rage Compliance Dashboard
+================================
+Generated: 2026-02-10T02:07:37
 
-### Monthly (Automated)
-1. Screenshot deployed components
-2. Run visual audits
-3. Update compliance metrics
-4. Generate dashboard report
-5. Identify new issues
+Overall Compliance: 78% ▲ (Target: 80%)
+  Typography        85% ✓
+  Color             82% ✓
+  Layout            74% ▼
+  [DEPRECATED_STYLE]         68% ▲
+  Migration        100% ✓
 
-### Quarterly (Manual Review)
-1. Analyze trends
-2. Discuss compliance trajectory with team
-3. Identify strategic focus areas
-4. Set next quarter priorities
-5. Celebrate milestones
+Status: Approaching production-ready threshold
 
-### Annually (Comprehensive)
-1. Review full year of compliance data
-2. Assess design system maturity
-3. Update brief based on learnings
-4. Plan next year's migration/improvement work
+Top Components Needing Refinement:
+  1. Lens (high priority)
+     - needs_typography_fix
+     - needs_tests
+     - needs_migration_cleanup
 
-## Key Insights the Dashboard Reveals
+  2. Jar (high priority)
+     - needs_color_fix
+     - needs_tests
 
-### Insight 1: Brief Effectiveness
-If visual audits are consistently passing, your brief is clear and guiding work.  
-If audits are inconsistent, brief language needs clarification.
+  3. NewModule (high priority)
+     - needs_stage2
+```
 
-### Insight 2: Component Maturity
-If components need many audit iterations to pass, your standards are complex or brief isn't clear.  
-If most pass on first audit, team understands brief well.
+## Per-Component Logic
 
-### Insight 3: Strategic Gaps
-Which dimension fails most often? That's where to invest in brief clarity and training.
+### Status Derivation
 
-### Insight 4: Timeline to Excellence
-Current trajectory projected forward shows when you'll hit 90% compliance (production excellence).
+A component is **"aligned"** when:
+- ✅ Spec exists (docs/design/generated/specs/<Name>.md)
+- ✅ Component code exists (frontend/src/components/<Name>/index.tsx)
+- ✅ Tests exist (if target.tests ≠ "none")
+- ✅ All dimension scores ≥ 0.8 (if audit exists)
+- ✅ No hardcoded values (if target.tokens = "strict")
+- ✅ Stage 2 complete (if target.stage2 = "complete")
 
-## Example Scenarios
+Otherwise: **"needs_refinement"**
 
-### Scenario 1: Strong Compliance, Downward Trend
-**Problem**: Something changed (new team member, brief misunderstanding, pressure to ship fast)  
-**Response**: Identify what changed, re-align team, potentially update brief if standards evolved
+### Needs Flags
 
-### Scenario 2: Weak Compliance, Upward Trend
-**Good news**: You're moving in right direction  
-**Response**: Accelerate effort, add resources, celebrate progress
+Computed from gaps:
 
-### Scenario 3: Strong Typography, Weak Botanical
-**Insight**: Typography strategy is clear and guiding decisions  
-Botanical guidance needs clarification or examples
+| Flag | Condition |
+|------|-----------|
+| `needs_typography_fix` | typography score < 0.8 |
+| `needs_color_fix` | color score < 0.8 |
+| `needs_layout_refine` | layout score < 0.8 |
+| `needs_botanical_integration` | [DEPRECATED_STYLE] score < 0.7 |
+| `needs_migration_cleanup` | mode = "migrate" AND hardcoded_values = true |
+| `needs_tests` | target.tests ≠ "none" AND no test file |
+| `needs_stage2` | target.stage2 = "complete" AND (no mockup OR no code) |
+| `needs_spec` | spec file missing |
 
-### Scenario 4: Stalled Progress
-**Problem**: Compliance stuck at 70% for two quarters  
-**Response**: Analyze why, could be unclear standards, resource constraints, or competing priorities
+### Dimension Scores
 
-## Creating a Culture of Excellence Through Visibility
+If audit JSON exists:
+- **Score source**: `audit.dimensions.<dimension>.status`
+- **Mapping**: pass=1.0, needs_refinement=0.7, fail=0.3
+- **Alternative**: `audit.compliance_score / 100`
 
-The dashboard's real power is psychological. When your team sees:
+If no audit JSON:
+- **All scores**: `null`
+- **Iterations**: 0
+- **Last audit**: `null`
 
-- "We've gone from 45% to 78% in one quarter"
-- "Typography distinctiveness is at 85%"
-- "We're on pace for production-ready design system by Q2"
+## Global Metrics
 
-They understand: **This matters. We're succeeding. Keep going.**
+### Overall Compliance
+Percentage of components with `status = "aligned"`
 
-That visibility transforms design system work from thankless compliance to **visible progress toward excellence**.
+```
+overall_compliance = count(status = "aligned") / total_components
+```
+
+### Per-Dimension Averages
+Average score across components with audit data:
+
+```
+typography_avg = mean(comp.scores.typography for comp in components if score exists)
+color_avg = mean(comp.scores.color for comp in components if score exists)
+layout_avg = mean(comp.scores.layout for comp in components if score exists)
+botanical_avg = mean(comp.scores.[DEPRECATED_STYLE] for comp in components if score exists)
+```
+
+### Migration Compliance
+Percentage of components using kerala-rage naming (not M3*):
+
+```
+migration = count(not name.startswith("M3")) / total_components
+```
+
+## Use Cases
+
+### 1. Daily Status Check
+```bash
+python3 .claude/skills/compliance-dashboard/run.py
+```
+
+Get instant health snapshot. Identify which components need attention today.
+
+### 2. CI/CD Integration
+```bash
+python3 .claude/skills/compliance-dashboard/run.py --json > compliance-report.json
+```
+
+Export JSON for automated dashboards, slack notifications, or PR comments.
+
+### 3. Component Deep Dive
+```bash
+python3 .claude/skills/compliance-dashboard/run.py --component Lens --json
+```
+
+Analyze single component: what's missing? What audit scores exist? What needs to be done?
+
+### 4. Compliance Thresholds
+- 🟢 **Green** (≥80%): Production-ready
+- 🟡 **Yellow** (60-79%): Approaching threshold
+- 🔴 **Red** (<60%): Significant work needed
+
+## Error Handling
+
+| Error | Behavior |
+|-------|----------|
+| Missing `component-batch-plan.yaml` | Exit code 1 |
+| `--component <Name>` not found | Exit code 1 |
+| Missing audit JSON | Scores = null, no error |
+| Missing component code/tests/specs | Flags = false, status = needs_refinement |
+| Inventory script fails | Continue with empty inventory data |
+
+## Integration with Other Skills
+
+### With kerala-rage-visual-audit
+After running `kerala-rage-visual-audit` on components, the tool automatically picks up audit JSON files from `docs/design/audits/` and includes scores in output.
+
+### With simple-component-inventory.sh
+Tool runs this script automatically to detect:
+- Hardcoded colors/spacing/shadows
+- Duplicate component names
+
+### With component-batch-plan.yaml
+Uses target state to determine:
+- Whether tests are required
+- Whether stage 2 is complete
+- Token strictness level
+- Component priority
+
+## Example: Full Workflow
+
+```bash
+# 1. Run compliance dashboard
+python3 .claude/skills/compliance-dashboard/run.py
+
+# Output shows Lens needs refinement with needs_typography_fix
+
+# 2. Run visual audit on Lens
+python3 .claude/skills/kerala-rage-visual-audit/run.py --component Lens
+
+# 3. Review audit results, create docs/design/audits/Lens.json
+
+# 4. Re-run compliance dashboard
+python3 .claude/skills/compliance-dashboard/run.py
+
+# Output now includes Lens audit scores + status update
+```
+
+## Implementation
+
+- **Language**: Python 3
+- **Location**: `.claude/skills/compliance-dashboard/run.py`
+- **Dependencies**: PyYAML, standard library
+- **Runtime**: < 5 seconds (all components)
+
+## Exit Codes
+
+- **0**: Success (even if compliance is low)
+- **1**: Error (missing files, invalid input)
 
 ## Limitations
 
-This skill:
+✅ Tracks compliance across all components
+✅ Integrates audit data automatically
+✅ Detects hardcoded values and duplicates
+✅ Validates against target state
 
-✅ Tracks compliance trends over time  
-✅ Aggregates data from multiple audit sources  
-✅ Reveals strategic gaps in brief or execution  
-✅ Provides visible progress indicators  
+❌ Cannot fix components (only identifies gaps)
+❌ Requires manual audit JSON creation (can use kerala-rage-visual-audit skill)
+❌ Metrics are relative to your standards, not benchmarks
 
-❌ Cannot guarantee consistency across auditors (human judgment involved)  
-❌ Doesn't fix components (only reveals what needs fixing)  
-❌ Requires regular audit data (skipped months create gaps)  
-❌ Metrics are relative to your standards, not industry benchmarks
+## Next Steps
 
-## Success Criteria
+After running the dashboard:
 
-Dashboard is valuable when it:
-
-1. **Shows clear trend** (system is measurably improving)
-2. **Identifies priority work** (next focus area is obvious)
-3. **Tracks milestone achievement** (80% compliance celebrated)
-4. **Reveals brief effectiveness** (consistent results validate brief clarity)
-5. **Motivates team** (visible progress sustains momentum)
-
-## Key Principle
-
-You can't improve what you don't measure. A compliance dashboard makes design system maturity **visible, trackable, and achievable**.
-
-It transforms the question from "Are we Northcote?" to "How Northcote are we becoming?"
-
-That shift from binary to directional thinking enables continuous improvement.
+1. **Review top-priority needs** (high priority + needs_refinement)
+2. **Run visual audits** on components missing scores
+3. **Create audit JSON files** (docs/design/audits/<Name>.json)
+4. **Re-run dashboard** to track progress
+5. **Celebrate milestones** (80% compliance reached!)
 
 ---
 
-*A great design system is measured in its ability to guide consistent, excellent work. The dashboard shows whether you're achieving that.*
+_Design systems are measured by their ability to guide consistent, excellent work. This dashboard shows whether you're achieving that._

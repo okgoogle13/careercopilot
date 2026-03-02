@@ -1,0 +1,36 @@
+{
+  "id": "standard",
+  "name": "Standard KSC STAR",
+  "atsProfile": {
+    "columns": 1,
+    "allowsTables": false,
+    "allowsImages": false
+  },
+  "blocks": [
+    {
+      "kind": "section",
+      "title": "Criterion",
+      "fields": ["ksc_title"]
+    },
+    {
+      "kind": "section",
+      "title": "Situation",
+      "fields": ["context"]
+    },
+    {
+      "kind": "section",
+      "title": "Task",
+      "fields": ["responsibility"]
+    },
+    {
+      "kind": "section",
+      "title": "Action",
+      "fields": ["steps_taken"]
+    },
+    {
+      "kind": "section",
+      "title": "Result",
+      "fields": ["outcome_metrics"]
+    }
+  ]
+}

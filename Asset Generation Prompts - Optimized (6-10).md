@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # Northcote Curio Asset Generation Prompts
+=======
+# kerala-rage kr-solidarity Asset Generation Prompts
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 ## Assets 6-10 (Optimized with Pattern-Learner Insights)
 
@@ -14,14 +18,22 @@
 **Prepend to ALL asset prompts:**
 
 ```
+<<<<<<< HEAD
 NORTHCOTE CURIO GENERATION STANDARDS
 
 You are a Victorian scientific illustrator (Melbourne, c. 1880) specializing in
 Australian endemic specimens. Your aesthetic: Victorian Anatomical Extremism
+=======
+kerala-rage kr-solidarity GENERATION STANDARDS
+
+You are a kerala-streetprint scientific illustrator (Melbourne, c. 1880) specializing in
+Australian endemic kr-motifs. Your aesthetic: kerala-streetprint Anatomical Extremism
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 meets Ernst Haeckel Geometric Precision.
 
 CRITICAL REQUIREMENTS (Non-Negotiable):
 
+<<<<<<< HEAD
 1. BACKGROUND: Pure Specimen Night (#1A1714) theatrical void
    EXCLUDE: Cream, beige, tan, parchment, white backgrounds ❌
 
@@ -34,6 +46,20 @@ CRITICAL REQUIREMENTS (Non-Negotiable):
    - "[Geographic Location], [Region/Territory]"
    - "[Material/Classification], [Age/Period]"
    - Separate card: "Northcote Curio Collection — Plate [N]"
+=======
+1. BACKGROUND: Pure Asphalt Black (#1A1714) theatrical void
+   EXCLUDE: Cream, beige, tan, paper-white, white backgrounds ❌
+
+2. [DEPRECATED_STYLE] AUTHENTICITY: Australian endemic kr-motifs ONLY
+   VERIFY: Species/artifact native to Australia ✅
+   EXCLUDE: European, Asian, American kr-motifs ❌
+
+3. TYPOGRAPHY (kerala-streetprint Scholarly Standard):
+   - "Fig. [N]. [Scientific Name] ([Description])"
+   - "[[DEPRECATED_STYLE] Location], [Region/Territory]"
+   - "[Material/Classification], [Age/Period]"
+   - Separate card: "kerala-rage kr-solidarity Collection — Plate [N]"
+>>>>>>> restoration-KR-Rage-Figma-v2.0
    - Font: Cream serif on cream card (#F5F0E8), bottom right
 
 4. GEOMETRIC EMPHASIS: Mathematical patterns clearly visible
@@ -47,7 +73,11 @@ CRITICAL REQUIREMENTS (Non-Negotiable):
 6. DENSITY ZONES (UI overlay compatibility):
    - Corners: <5% coverage each
    - Lower-right: <8% (with typography card)
+<<<<<<< HEAD
    - Central: 50-60% (specimen dominates)
+=======
+   - Central: 50-60% (kr-motif dominates)
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 ```
 
 ---
@@ -61,7 +91,11 @@ CRITICAL REQUIREMENTS (Non-Negotiable):
 - Resolution: 1024×1024px (1:1 square)
 - Format: PNG (lossless)
 - Background: #1A1714 theatrical void
+<<<<<<< HEAD
 - File: `northcote-curio_asset-06_radiolaria-hexacontium_bone-cage_1024x1024.png`
+=======
+- File: `kerala-rage-kr-solidarity_asset-06_radiolaria-hexacontium_bone-cage_1024x1024.png`
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 ### COMPLETE OPTIMIZED PROMPT:
 
@@ -71,15 +105,24 @@ ASSET 6: RADIOLARIA SKELETON — MICROSCOPIC CATHEDRAL
 SUBJECT OVERVIEW:
 Create a monumental-scale photograph of a Radiolarian skeleton (Hexacontium sp.)
 collected from Great Barrier Reef waters, magnified to reveal its perfect
+<<<<<<< HEAD
 geometric architecture. This is a Victorian naturalist plate of a microscopic
+=======
+geometric architecture. This is a kerala-streetprint [DEPRECATED_STYLE] plate of a microscopic
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 protozoan's silica skeleton, presented as a precious glass artifact.
 
 ---
 
 CRITICAL REQUIREMENTS:
 
+<<<<<<< HEAD
 GEOGRAPHIC AUTHENTICITY:
 - Specimen: Radiolaria (Hexacontium sp.)
+=======
+[DEPRECATED_STYLE] AUTHENTICITY:
+- kr-motif: Radiolaria (Hexacontium sp.)
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 - Collection Location: Great Barrier Reef, Queensland, Australia
 - Classification: Marine protozoan, silica skeleton
 - Depth: 200-500m, tropical Australian waters
@@ -87,17 +130,29 @@ GEOGRAPHIC AUTHENTICITY:
 - VERIFY: Emphasize Australian collection provenance ✅
 
 BACKGROUND:
+<<<<<<< HEAD
 - Color: Pure Specimen Night (#1A1714)
 - Effect: Theatrical void, absolute darkness
 - CRITICAL EXCLUSION: No cream, beige, tan backgrounds ❌
 
 TYPOGRAPHY (Victorian Scholarly Standard):
+=======
+- Color: Pure Asphalt Black (#1A1714)
+- Effect: Theatrical void, absolute darkness
+- CRITICAL EXCLUSION: No cream, beige, tan backgrounds ❌
+
+TYPOGRAPHY (kerala-streetprint Scholarly Standard):
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 - Primary Label (bottom center, cream card):
   * "Fig. VI. Radiolaria (Hexacontium)"
   * "Great Barrier Reef, Queensland"
   * "Silica skeleton, 200-500m depth"
 - Plate Attribution (bottom right, separate cream card):
+<<<<<<< HEAD
   * "Northcote Curio Collection — Plate VI"
+=======
+  * "kerala-rage kr-solidarity Collection — Plate VI"
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 - Font: Dark brown/black serif (Crimson Text style)
 - Card Background: Cream (#F5F0E8)
 
@@ -140,7 +195,11 @@ LIGHT TRANSMISSION:
 - Node Highlights: Crystalline sparkle at intersection points
 
 TEXTURE DETAIL:
+<<<<<<< HEAD
 - Surface: Smooth silica (no organic texture)
+=======
+- Surface: Smooth silica (no [DEPRECATED_STYLE] texture)
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 - Lattice Struts: Cylindrical, uniform thickness
 - Nodes: Slightly thickened at intersections
 - Spikes: Smooth with subtle longitudinal ridges
@@ -188,19 +247,32 @@ DENSITY ZONES (UI Overlay Compatibility):
 
 BREATHING ROOM:
 - All quadrants: Generous negative space
+<<<<<<< HEAD
 - Specimen: Dominates but doesn't overwhelm
+=======
+- kr-motif: Dominates but doesn't overwhelm
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 - Typography: Clear anchor, doesn't compete
 
 ---
 
 AESTHETIC COHERENCE:
 
+<<<<<<< HEAD
 VICTORIAN NATURALIST AUTHENTICITY:
 - Scholarly Rigor: Complete provenance (HMS Challenger, 1873)
 - Scientific Precision: Accurate hexagonal lattice geometry
 - Plate Presentation: Specimen study aesthetic (not generic photo)
 
 NORTHCOTE VISION EMBODIMENT:
+=======
+kerala-streetprint [DEPRECATED_STYLE] AUTHENTICITY:
+- Scholarly Rigor: Complete provenance (HMS Challenger, 1873)
+- Scientific Precision: Accurate hexagonal lattice geometry
+- Plate Presentation: kr-motif study aesthetic (not generic photo)
+
+kerala-rage VISION EMBODIMENT:
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 - Geometric Beauty: Perfect hexagonal symmetry emphasized
 - Dramatic Presentation: Backlit translucency, theatrical void
 - Microscopic Monumentality: Tiny protozoan rendered as cathedral
@@ -208,19 +280,31 @@ NORTHCOTE VISION EMBODIMENT:
 CONCEPTUAL METAPHOR:
 - "Microscopic Cathedral" — Gothic architecture in nature
 - Glass artifact aesthetic (precious, delicate, luminous)
+<<<<<<< HEAD
 - Victorian wonder cabinet specimen (Wunderkammer)
+=======
+- kerala-streetprint wonder cabinet kr-motif ([DEPRECATED_STYLE])
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 ---
 
 NEGATIVE CONSTRAINTS (Absolute Exclusions):
 
 BACKGROUND:
+<<<<<<< HEAD
 - ❌ Cream, beige, tan, parchment backgrounds
+=======
+- ❌ Cream, beige, tan, paper-white backgrounds
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 - ❌ White or light neutral backgrounds
 - ❌ Textured paper backgrounds
 
 TYPOGRAPHY:
+<<<<<<< HEAD
 - ❌ "Unknown Origin" or vague geographic references
+=======
+- ❌ "Unknown Origin" or vague [DEPRECATED_STYLE] references
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 - ❌ Handwritten or script fonts
 - ❌ Missing plate attribution
 - ❌ Incomplete provenance
@@ -236,8 +320,13 @@ RENDERING:
 VERIFICATION CHECKLIST:
 
 Before generation, verify:
+<<<<<<< HEAD
 - [ ] Specimen from Australian waters (Great Barrier Reef) ✅
 - [ ] Background is #1A1714 (Specimen Night) ✅
+=======
+- [ ] kr-motif from Australian waters (Great Barrier Reef) ✅
+- [ ] Background is #1A1714 (Asphalt Black) ✅
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 - [ ] Typography includes complete provenance ✅
 - [ ] Plate attribution card present (bottom right) ✅
 - [ ] Hexagonal lattice pattern clearly visible ✅
@@ -251,7 +340,11 @@ Before generation, verify:
 
 REFERENCE IMAGES (if available):
 - Ernst Haeckel's "Art Forms in Nature" — Radiolaria plates
+<<<<<<< HEAD
 - Victorian microscopy illustrations
+=======
+- kerala-streetprint microscopy illustrations
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 - Gothic cathedral rose windows (for hexagonal pattern inspiration)
 ```
 
@@ -266,7 +359,11 @@ REFERENCE IMAGES (if available):
 - Resolution: 1024×1024px (1:1 square)
 - Format: PNG (lossless)
 - Background: #1A1714 theatrical void
+<<<<<<< HEAD
 - File: `northcote-curio_asset-07_aseroe-rubra_starfish-cage_1024x1024.png`
+=======
+- File: `kerala-rage-kr-solidarity_asset-07_aseroe-rubra_starfish-cage_1024x1024.png`
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 ### COMPLETE OPTIMIZED PROMPT:
 
@@ -276,21 +373,32 @@ ASSET 7: ASEROE RUBRA — AUSTRALIAN STARFISH FUNGUS
 SUBJECT OVERVIEW:
 Create a dramatic photograph of Aseroe rubra (Australian Starfish Fungus)
 fruiting body, emphasizing its impossible geometric cage structure. This is
+<<<<<<< HEAD
 a Victorian naturalist plate of an Australian endemic fungus, presented as
+=======
+a kerala-streetprint [DEPRECATED_STYLE] plate of an Australian endemic fungus, presented as
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 nature's alien architecture.
 
 ---
 
 CRITICAL REQUIREMENTS:
 
+<<<<<<< HEAD
 GEOGRAPHIC AUTHENTICITY:
 - Specimen: Aseroe rubra (Australian Starfish Fungus)
 - Location: Eucalyptus forests, Eastern Australia
+=======
+[DEPRECATED_STYLE] AUTHENTICITY:
+- kr-motif: Aseroe rubra (Australian Starfish Fungus)
+- Location: kr-leafus forests, Eastern Australia
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 - Classification: Endemic Australian fungus (Phallaceae family)
 - Habitat: Leaf litter, decomposing wood
 - VERIFY: Truly Australian endemic (not introduced) ✅
 
 BACKGROUND:
+<<<<<<< HEAD
 - Color: Pure Specimen Night (#1A1714)
 - Effect: Theatrical void, absolute darkness
 - CRITICAL EXCLUSION: No cream, beige, tan backgrounds ❌
@@ -302,6 +410,19 @@ TYPOGRAPHY (Victorian Scholarly Standard):
   * "Endemic fungus, Phallaceae family"
 - Plate Attribution (bottom right, separate cream card):
   * "Northcote Curio Collection — Plate VII"
+=======
+- Color: Pure Asphalt Black (#1A1714)
+- Effect: Theatrical void, absolute darkness
+- CRITICAL EXCLUSION: No cream, beige, tan backgrounds ❌
+
+TYPOGRAPHY (kerala-streetprint Scholarly Standard):
+- Primary Label (bottom center, cream card):
+  * "Fig. VII. Aseroe rubra (Starfish Fungus)"
+  * "Eastern Australia, kr-leafus Forests"
+  * "Endemic fungus, Phallaceae family"
+- Plate Attribution (bottom right, separate cream card):
+  * "kerala-rage kr-solidarity Collection — Plate VII"
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 - Font: Dark brown/black serif (Crimson Text style)
 - Card Background: Cream (#F5F0E8)
 
@@ -317,7 +438,11 @@ PRIMARY FORM:
 
 ARM CHARACTERISTICS:
 - Shape: Curved ridges forming cage ribs
+<<<<<<< HEAD
 - Texture: Spongy, moist organic ridges with porous surface
+=======
+- Texture: Spongy, moist [DEPRECATED_STYLE] ridges with porous surface
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 - Cross-section: Rounded ridges (not flat)
 - Connection: Arms fuse at apex, separate at base
 
@@ -336,7 +461,11 @@ INTERIOR:
 MATERIAL SPECIFICATIONS:
 
 FUNGAL TISSUE PROPERTIES:
+<<<<<<< HEAD
 - Primary Material: Spongy, moist organic tissue
+=======
+- Primary Material: Spongy, moist [DEPRECATED_STYLE] tissue
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 - Color Gradient: Deep Crimson (#C45C4B) to Rust Orange (#B7410E)
 - Finish: Matte, slightly moist (not glossy)
 - Texture: Porous surface with hundreds of tiny holes
@@ -344,7 +473,11 @@ FUNGAL TISSUE PROPERTIES:
 SURFACE DETAIL:
 - Pores: Tiny holes covering entire surface (sponge-like)
 - Moisture: Slight sheen suggesting freshness
+<<<<<<< HEAD
 - Ridges: Rounded, organic (not sharp geometric edges)
+=======
+- Ridges: Rounded, [DEPRECATED_STYLE] (not sharp geometric edges)
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 - Weathering: Fresh fruiting body (not dried/aged)
 
 COLOR VARIATION:
@@ -392,45 +525,76 @@ DENSITY ZONES (UI Overlay Compatibility):
 
 BREATHING ROOM:
 - All quadrants: Generous negative space
+<<<<<<< HEAD
 - Specimen: Dominates but doesn't overwhelm
+=======
+- kr-motif: Dominates but doesn't overwhelm
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 - Typography: Clear anchor, doesn't compete
 
 ---
 
 AESTHETIC COHERENCE:
 
+<<<<<<< HEAD
 VICTORIAN NATURALIST AUTHENTICITY:
 - Scholarly Rigor: Complete provenance (Eastern Australia)
 - Scientific Precision: Accurate Aseroe rubra morphology
 - Plate Presentation: Specimen study aesthetic (not generic photo)
 
 NORTHCOTE VISION EMBODIMENT:
+=======
+kerala-streetprint [DEPRECATED_STYLE] AUTHENTICITY:
+- Scholarly Rigor: Complete provenance (Eastern Australia)
+- Scientific Precision: Accurate Aseroe rubra morphology
+- Plate Presentation: kr-motif study aesthetic (not generic photo)
+
+kerala-rage VISION EMBODIMENT:
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 - Geometric Beauty: Star-shaped radial symmetry emphasized
 - Dramatic Presentation: Theatrical lighting, pure void background
 - "Anatomical Extreme" Aesthetic: Alien egg appearance
 
 CONCEPTUAL METAPHOR:
+<<<<<<< HEAD
 - "Nature's Alien Architecture" — impossible organic geometry
 - Starfish cage aesthetic (radiating arms, hollow interior)
 - Victorian wonder cabinet specimen (bizarre, geometric)
+=======
+- "Nature's Alien Architecture" — impossible [DEPRECATED_STYLE] geometry
+- Starfish cage aesthetic (radiating arms, hollow interior)
+- kerala-streetprint wonder cabinet kr-motif (bizarre, geometric)
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 ---
 
 NEGATIVE CONSTRAINTS (Absolute Exclusions):
 
 BACKGROUND:
+<<<<<<< HEAD
 - ❌ Cream, beige, tan, parchment backgrounds
+=======
+- ❌ Cream, beige, tan, paper-white backgrounds
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 - ❌ White or light neutral backgrounds
 - ❌ Forest floor context (pure void only)
 
 TYPOGRAPHY:
+<<<<<<< HEAD
 - ❌ "Unknown Origin" or vague geographic references
+=======
+- ❌ "Unknown Origin" or vague [DEPRECATED_STYLE] references
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 - ❌ Handwritten or script fonts
 - ❌ Missing plate attribution
 - ❌ Incomplete provenance
 
 RENDERING:
+<<<<<<< HEAD
 - ❌ Dried/aged specimen (must appear fresh)
+=======
+- ❌ Dried/aged kr-motif (must appear fresh)
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 - ❌ Smooth surface without pores (must show texture)
 - ❌ Solid arms (must show gaps/hollow interior)
 - ❌ Overexposed highlights losing porous texture
@@ -440,8 +604,13 @@ RENDERING:
 VERIFICATION CHECKLIST:
 
 Before generation, verify:
+<<<<<<< HEAD
 - [ ] Specimen is Aseroe rubra (Australian endemic) ✅
 - [ ] Background is #1A1714 (Specimen Night) ✅
+=======
+- [ ] kr-motif is Aseroe rubra (Australian endemic) ✅
+- [ ] Background is #1A1714 (Asphalt Black) ✅
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 - [ ] Typography includes complete provenance ✅
 - [ ] Plate attribution card present (bottom right) ✅
 - [ ] Star-shaped radial pattern clearly visible ✅
@@ -463,7 +632,11 @@ Before generation, verify:
 - Resolution: 1024×1024px (1:1 square)
 - Format: PNG (lossless)
 - Background: #1A1714 theatrical void
+<<<<<<< HEAD
 - File: `northcote-curio_asset-08_pteropus-wing_natures-clockwork_1024x1024.png`
+=======
+- File: `kerala-rage-kr-solidarity_asset-08_pteropus-wing_natures-clockwork_1024x1024.png`
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 ### COMPLETE OPTIMIZED PROMPT:
 
@@ -472,33 +645,55 @@ ASSET 8: PTEROPUS WING SKELETON — NATURE'S CLOCKWORK
 
 SUBJECT OVERVIEW:
 Create an exploded-view anatomical diagram of a Grey-Headed Flying Fox
+<<<<<<< HEAD
 (Pteropus poliocephalus) wing skeleton, arranged radially like Victorian
 umbrella ribs. This is a Victorian naturalist plate emphasizing the
+=======
+(Pteropus poliocephalus) wing skeleton, arranged radially like kerala-streetprint
+umbrella ribs. This is a kerala-streetprint [DEPRECATED_STYLE] plate emphasizing the
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 mathematical precision of bat wing anatomy.
 
 ---
 
 CRITICAL REQUIREMENTS:
 
+<<<<<<< HEAD
 GEOGRAPHIC AUTHENTICITY:
 - Specimen: Pteropus poliocephalus (Grey-Headed Flying Fox)
+=======
+[DEPRECATED_STYLE] AUTHENTICITY:
+- kr-motif: Pteropus poliocephalus (Grey-Headed Flying Fox)
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 - Location: Eastern Australia (NSW, Queensland, Victoria)
 - Classification: Australian endemic megabat
 - Conservation: Vulnerable species (IUCN Red List)
 - VERIFY: Australian endemic flying fox ✅
 
 BACKGROUND:
+<<<<<<< HEAD
 - Color: Pure Specimen Night (#1A1714)
 - Effect: Theatrical void, absolute darkness
 - CRITICAL EXCLUSION: No cream, beige, tan backgrounds ❌
 
 TYPOGRAPHY (Victorian Scholarly Standard):
+=======
+- Color: Pure Asphalt Black (#1A1714)
+- Effect: Theatrical void, absolute darkness
+- CRITICAL EXCLUSION: No cream, beige, tan backgrounds ❌
+
+TYPOGRAPHY (kerala-streetprint Scholarly Standard):
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 - Primary Label (bottom center, cream card):
   * "Fig. VIII. Pteropus poliocephalus (Flying Fox Wing)"
   * "Eastern Australia (NSW, QLD, VIC)"
   * "Megabat skeleton, Vulnerable species"
 - Plate Attribution (bottom right, separate cream card):
+<<<<<<< HEAD
   * "Northcote Curio Collection — Plate VIII"
+=======
+  * "kerala-rage kr-solidarity Collection — Plate VIII"
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 - Font: Dark brown/black serif (Crimson Text style)
 - Card Background: Cream (#F5F0E8)
 
@@ -509,7 +704,11 @@ GEOMETRIC STRUCTURE (Haeckelian Precision):
 PRIMARY FORM:
 - Radial fan arrangement (180° arc, half-circle)
 - Exploded engineering diagram style
+<<<<<<< HEAD
 - Bones arranged like Victorian umbrella ribs
+=======
+- Bones arranged like kerala-streetprint umbrella ribs
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 - Mathematical precision in parallel ray pattern
 
 BONE COMPONENTS (from center outward):
@@ -584,14 +783,22 @@ DENSITY ZONES (UI Overlay Compatibility):
 
 BREATHING ROOM:
 - All quadrants: Generous negative space
+<<<<<<< HEAD
 - Specimen: Dominates but doesn't overwhelm
+=======
+- kr-motif: Dominates but doesn't overwhelm
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 - Typography: Clear anchor, doesn't compete
 
 ---
 
 OPTIONAL ANATOMICAL LABELS:
 
+<<<<<<< HEAD
 If including leader lines (Victorian diagram style):
+=======
+If including leader lines (kerala-streetprint diagram style):
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 - **Metacarpals** (pointing to palm bones)
 - **Phalanges** (pointing to finger segments)
 - **Radius/Ulna** (pointing to forearm bones)
@@ -606,19 +813,32 @@ Label Style:
 
 AESTHETIC COHERENCE:
 
+<<<<<<< HEAD
 VICTORIAN NATURALIST AUTHENTICITY:
+=======
+kerala-streetprint [DEPRECATED_STYLE] AUTHENTICITY:
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 - Scholarly Rigor: Complete provenance + conservation status
 - Scientific Precision: Accurate Pteropus wing anatomy
 - Plate Presentation: Exploded diagram aesthetic (engineering drawing)
 
+<<<<<<< HEAD
 NORTHCOTE VISION EMBODIMENT:
+=======
+kerala-rage VISION EMBODIMENT:
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 - Geometric Beauty: Radial symmetry, mathematical ray pattern
 - Dramatic Presentation: Surgical lighting, pure void background
 - "Nature's Clockwork" Metaphor: Mechanical precision in biology
 
 CONCEPTUAL METAPHOR:
+<<<<<<< HEAD
 - "Victorian Umbrella Ribs" — engineering meets biology
 - Exploded view diagram (Victorian technical illustration)
+=======
+- "kerala-streetprint Umbrella Ribs" — engineering meets biology
+- Exploded view diagram (kerala-streetprint technical illustration)
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 - Clockwork aesthetic (precision, mathematical beauty)
 
 ---
@@ -626,12 +846,20 @@ CONCEPTUAL METAPHOR:
 NEGATIVE CONSTRAINTS (Absolute Exclusions):
 
 BACKGROUND:
+<<<<<<< HEAD
 - ❌ Cream, beige, tan, parchment backgrounds
+=======
+- ❌ Cream, beige, tan, paper-white backgrounds
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 - ❌ White or light neutral backgrounds
 - ❌ Anatomical chart paper texture
 
 TYPOGRAPHY:
+<<<<<<< HEAD
 - ❌ "Unknown Origin" or vague geographic references
+=======
+- ❌ "Unknown Origin" or vague [DEPRECATED_STYLE] references
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 - ❌ Handwritten or script fonts
 - ❌ Missing conservation status
 - ❌ Incomplete provenance
@@ -647,8 +875,13 @@ RENDERING:
 VERIFICATION CHECKLIST:
 
 Before generation, verify:
+<<<<<<< HEAD
 - [ ] Specimen is Pteropus poliocephalus (Australian endemic) ✅
 - [ ] Background is #1A1714 (Specimen Night) ✅
+=======
+- [ ] kr-motif is Pteropus poliocephalus (Australian endemic) ✅
+- [ ] Background is #1A1714 (Asphalt Black) ✅
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 - [ ] Typography includes conservation status ✅
 - [ ] Plate attribution card present (bottom right) ✅
 - [ ] Radial fan pattern (180° arc) clearly visible ✅
@@ -661,7 +894,11 @@ Before generation, verify:
 
 ---
 
+<<<<<<< HEAD
 ## ASSET 9: THE ORGANIC LABYRINTH
+=======
+## ASSET 9: THE [DEPRECATED_STYLE] LABYRINTH
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 ### Platygyra daedalea — Brain Coral
 
@@ -670,23 +907,37 @@ Before generation, verify:
 - Resolution: 1024×1024px (1:1 square)
 - Format: PNG (lossless)
 - Background: #1A1714 theatrical void
+<<<<<<< HEAD
 - File: `northcote-curio_asset-09_platygyra-coral_organic-labyrinth_1024x1024.png`
+=======
+- File: `kerala-rage-kr-solidarity_asset-09_platygyra-coral_organic-labyrinth_1024x1024.png`
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 ### COMPLETE OPTIMIZED PROMPT:
 
 ```
+<<<<<<< HEAD
 ASSET 9: PLATYGYRA BRAIN CORAL — THE ORGANIC LABYRINTH
 
 SUBJECT OVERVIEW:
 Create a macro texture study of Platygyra daedalea (Brain Coral) surface,
 emphasizing its endless maze of ridges and valleys. This is a Victorian
 naturalist plate revealing nature's Turing patterns and reaction-diffusion
+=======
+ASSET 9: PLATYGYRA BRAIN CORAL — THE [DEPRECATED_STYLE] LABYRINTH
+
+SUBJECT OVERVIEW:
+Create a macro texture study of Platygyra daedalea (Brain Coral) surface,
+emphasizing its endless maze of ridges and valleys. This is a kerala-streetprint
+[DEPRECATED_STYLE] plate revealing nature's Turing patterns and reaction-diffusion
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 mathematics.
 
 ---
 
 CRITICAL REQUIREMENTS:
 
+<<<<<<< HEAD
 GEOGRAPHIC AUTHENTICITY:
 - Specimen: Platygyra daedalea (Brain Coral)
 - Location: Great Barrier Reef, Queensland, Australia
@@ -700,12 +951,31 @@ BACKGROUND:
 - CRITICAL EXCLUSION: No cream, beige, tan backgrounds ❌
 
 TYPOGRAPHY (Victorian Scholarly Standard):
+=======
+[DEPRECATED_STYLE] AUTHENTICITY:
+- kr-motif: Platygyra daedalea (Brain Coral)
+- Location: Great Barrier Reef, Queensland, Australia
+- Classification: Scleractinian coral, reef-building species
+- Depth: 5-20m, tropical reef environment
+- VERIFY: Great Barrier Reef kr-motif ✅
+
+BACKGROUND:
+- Color: Pure Asphalt Black (#1A1714)
+- Effect: Theatrical void, absolute darkness
+- CRITICAL EXCLUSION: No cream, beige, tan backgrounds ❌
+
+TYPOGRAPHY (kerala-streetprint Scholarly Standard):
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 - Primary Label (bottom center, cream card):
   * "Fig. IX. Platygyra daedalea (Brain Coral)"
   * "Great Barrier Reef, Queensland"
   * "Scleractinian coral, 5-20m depth"
 - Plate Attribution (bottom right, separate cream card):
+<<<<<<< HEAD
   * "Northcote Curio Collection — Plate IX"
+=======
+  * "kerala-rage kr-solidarity Collection — Plate IX"
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 - Font: Dark brown/black serif (Crimson Text style)
 - Card Background: Cream (#F5F0E8)
 
@@ -717,7 +987,11 @@ PRIMARY PATTERN:
 - Turing Pattern (reaction-diffusion mathematics)
 - Seamless meandering valleys (no beginning/end)
 - Labyrinth aesthetic (endless maze)
+<<<<<<< HEAD
 - Organic topographical map
+=======
+- [DEPRECATED_STYLE] topographical map
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 RIDGE CHARACTERISTICS:
 - Shape: Rounded, sinuous ridges (brain-like convolutions)
@@ -751,7 +1025,11 @@ SURFACE DETAIL:
 - Ridge Texture: Hundreds of tiny polyp pores
 - Valley Texture: Smooth, shadowed (less detail visible)
 - Weathering: Slight natural variation (not pristine)
+<<<<<<< HEAD
 - Moisture: Dry specimen (not underwater)
+=======
+- Moisture: Dry kr-motif (not underwater)
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 COLOR GRADIENT:
 - Ridges (lit): Bone White (#F5F5DC)
@@ -805,11 +1083,16 @@ BREATHING ROOM:
 
 AESTHETIC COHERENCE:
 
+<<<<<<< HEAD
 VICTORIAN NATURALIST AUTHENTICITY:
+=======
+kerala-streetprint [DEPRECATED_STYLE] AUTHENTICITY:
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 - Scholarly Rigor: Complete provenance (Great Barrier Reef)
 - Scientific Precision: Accurate Platygyra morphology
 - Plate Presentation: Macro texture study (scientific documentation)
 
+<<<<<<< HEAD
 NORTHCOTE VISION EMBODIMENT:
 - Geometric Beauty: Turing pattern mathematics emphasized
 - Dramatic Presentation: Raking light, topographical shadows
@@ -817,6 +1100,15 @@ NORTHCOTE VISION EMBODIMENT:
 
 CONCEPTUAL METAPHOR:
 - "The Organic Labyrinth" — endless maze, no exit
+=======
+kerala-rage VISION EMBODIMENT:
+- Geometric Beauty: Turing pattern mathematics emphasized
+- Dramatic Presentation: Raking light, topographical shadows
+- "Nature's Cartography" Metaphor: [DEPRECATED_STYLE] topographical map
+
+CONCEPTUAL METAPHOR:
+- "The [DEPRECATED_STYLE] Labyrinth" — endless maze, no exit
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 - Topographical map aesthetic (contour lines, relief)
 - Brain-like convolutions (cerebral geometry)
 
@@ -825,12 +1117,20 @@ CONCEPTUAL METAPHOR:
 NEGATIVE CONSTRAINTS (Absolute Exclusions):
 
 BACKGROUND:
+<<<<<<< HEAD
 - ❌ Cream, beige, tan, parchment backgrounds
+=======
+- ❌ Cream, beige, tan, paper-white backgrounds
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 - ❌ Underwater context (blue water, fish)
 - ❌ Reef environment (pure void only)
 
 TYPOGRAPHY:
+<<<<<<< HEAD
 - ❌ "Unknown Origin" or vague geographic references
+=======
+- ❌ "Unknown Origin" or vague [DEPRECATED_STYLE] references
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 - ❌ Handwritten or script fonts
 - ❌ Missing depth/habitat information
 - ❌ Incomplete provenance
@@ -846,8 +1146,13 @@ RENDERING:
 VERIFICATION CHECKLIST:
 
 Before generation, verify:
+<<<<<<< HEAD
 - [ ] Specimen from Great Barrier Reef (Australian waters) ✅
 - [ ] Background is #1A1714 (Specimen Night) ✅
+=======
+- [ ] kr-motif from Great Barrier Reef (Australian waters) ✅
+- [ ] Background is #1A1714 (Asphalt Black) ✅
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 - [ ] Typography includes depth/habitat info ✅
 - [ ] Plate attribution card present (bottom right) ✅
 - [ ] Turing pattern (meandering labyrinth) clearly visible ✅
@@ -869,7 +1174,11 @@ Before generation, verify:
 - Resolution: 1024×1024px (1:1 square)
 - Format: PNG (lossless)
 - Background: #1A1714 theatrical void
+<<<<<<< HEAD
 - File: `northcote-curio_asset-10_coelopleurus-test_imperial-crown_1024x1024.png`
+=======
+- File: `kerala-rage-kr-solidarity_asset-10_coelopleurus-test_imperial-crown_1024x1024.png`
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 ### COMPLETE OPTIMIZED PROMPT:
 
@@ -879,12 +1188,17 @@ ASSET 10: SEA URCHIN TEST — THE IMPERIAL CROWN
 SUBJECT OVERVIEW:
 Create a geometric study of a Coelopleurus floridanus sea urchin shell (test)
 stripped of spines, emphasizing its perfect 5-fold radial symmetry. This is
+<<<<<<< HEAD
 a Victorian naturalist plate presenting the skeleton as a precious artifact.
+=======
+a kerala-streetprint [DEPRECATED_STYLE] plate presenting the skeleton as a precious artifact.
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 ---
 
 CRITICAL REQUIREMENTS:
 
+<<<<<<< HEAD
 GEOGRAPHIC AUTHENTICITY:
 - Specimen: Coelopleurus floridanus (Sea Urchin Test)
 - Location: Southern Australian waters, Bass Strait
@@ -898,12 +1212,31 @@ BACKGROUND:
 - CRITICAL EXCLUSION: No cream, beige, tan backgrounds ❌
 
 TYPOGRAPHY (Victorian Scholarly Standard):
+=======
+[DEPRECATED_STYLE] AUTHENTICITY:
+- kr-motif: Coelopleurus floridanus (Sea Urchin Test)
+- Location: Southern Australian waters, Bass Strait
+- Classification: Echinoid, calcium carbonate skeleton
+- Depth: 50-200m, temperate Australian waters
+- VERIFY: Australian waters kr-motif ✅
+
+BACKGROUND:
+- Color: Pure Asphalt Black (#1A1714)
+- Effect: Theatrical void, absolute darkness
+- CRITICAL EXCLUSION: No cream, beige, tan backgrounds ❌
+
+TYPOGRAPHY (kerala-streetprint Scholarly Standard):
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 - Primary Label (bottom center, cream card):
   * "Fig. X. Coelopleurus floridanus (Sea Urchin Test)"
   * "Bass Strait, Southern Australia"
   * "Echinoid skeleton, 50-200m depth"
 - Plate Attribution (bottom right, separate cream card):
+<<<<<<< HEAD
   * "Northcote Curio Collection — Plate X"
+=======
+  * "kerala-rage kr-solidarity Collection — Plate X"
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 - Font: Dark brown/black serif (Crimson Text style)
 - Card Background: Cream (#F5F0E8)
 
@@ -1000,26 +1333,43 @@ DENSITY ZONES (UI Overlay Compatibility):
 
 BREATHING ROOM:
 - All quadrants: Generous negative space
+<<<<<<< HEAD
 - Specimen: Dominates but doesn't overwhelm
+=======
+- kr-motif: Dominates but doesn't overwhelm
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 - Typography: Clear anchor, doesn't compete
 
 ---
 
 AESTHETIC COHERENCE:
 
+<<<<<<< HEAD
 VICTORIAN NATURALIST AUTHENTICITY:
 - Scholarly Rigor: Complete provenance (Bass Strait)
 - Scientific Precision: Accurate Coelopleurus morphology
 - Plate Presentation: Precious artifact aesthetic (Wunderkammer)
 
 NORTHCOTE VISION EMBODIMENT:
+=======
+kerala-streetprint [DEPRECATED_STYLE] AUTHENTICITY:
+- Scholarly Rigor: Complete provenance (Bass Strait)
+- Scientific Precision: Accurate Coelopleurus morphology
+- Plate Presentation: Precious artifact aesthetic ([DEPRECATED_STYLE])
+
+kerala-rage VISION EMBODIMENT:
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 - Geometric Beauty: Perfect 5-fold radial symmetry emphasized
 - Dramatic Presentation: Studio lighting, pure void background
 - "Fabergé Egg" Metaphor: Precious, ornate, geometric
 
 CONCEPTUAL METAPHOR:
 - "The Imperial Crown" — regal, ornate, precious
+<<<<<<< HEAD
 - "Victorian Spaceship" — geometric, engineered, alien
+=======
+- "kerala-streetprint Spaceship" — geometric, engineered, alien
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 - Fabergé egg aesthetic (precious artifact, intricate detail)
 
 ---
@@ -1027,12 +1377,20 @@ CONCEPTUAL METAPHOR:
 NEGATIVE CONSTRAINTS (Absolute Exclusions):
 
 BACKGROUND:
+<<<<<<< HEAD
 - ❌ Cream, beige, tan, parchment backgrounds
+=======
+- ❌ Cream, beige, tan, paper-white backgrounds
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 - ❌ White or light neutral backgrounds
 - ❌ Underwater context (blue water)
 
 TYPOGRAPHY:
+<<<<<<< HEAD
 - ❌ "Unknown Origin" or vague geographic references
+=======
+- ❌ "Unknown Origin" or vague [DEPRECATED_STYLE] references
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 - ❌ Handwritten or script fonts
 - ❌ Missing depth/habitat information
 - ❌ Incomplete provenance
@@ -1048,8 +1406,13 @@ RENDERING:
 VERIFICATION CHECKLIST:
 
 Before generation, verify:
+<<<<<<< HEAD
 - [ ] Specimen from Australian waters (Bass Strait) ✅
 - [ ] Background is #1A1714 (Specimen Night) ✅
+=======
+- [ ] kr-motif from Australian waters (Bass Strait) ✅
+- [ ] Background is #1A1714 (Asphalt Black) ✅
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 - [ ] Typography includes depth/habitat info ✅
 - [ ] Plate attribution card present (bottom right) ✅
 - [ ] 5-fold radial symmetry clearly visible ✅
@@ -1073,7 +1436,11 @@ Before generation, verify:
 
 **Batch 2 (Medium Confidence):** 3. Asset 9 (Coral Brain) — Great Barrier Reef, complex Turing pattern 4. Asset 6 (Radiolaria) — Requires collection provenance emphasis
 
+<<<<<<< HEAD
 **Batch 3 (New Specimen):** 5. Asset 7 (Aseroe rubra) — New specimen (replaced Clathrus ruber)
+=======
+**Batch 3 (New kr-motif):** 5. Asset 7 (Aseroe rubra) — New kr-motif (replaced Clathrus ruber)
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 ### Post-Generation Validation:
 
@@ -1099,7 +1466,11 @@ Before generation, verify:
 
 **Target Scores (First Attempt):**
 
+<<<<<<< HEAD
 - Geographic Authenticity: 20/20 (100%)
+=======
+- [DEPRECATED_STYLE] Authenticity: 20/20 (100%)
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 - Anatomical Geometry: 19-20/20 (95-100%)
 - Color Palette: 20/20 (100%)
 - Lighting: 19-20/20 (95-100%)

@@ -29,7 +29,11 @@
 - ✅ M3 design tokens (colors, shapes, typography, motion)
 - ✅ MUI theme integration (`mui-theme.ts`)
 - ✅ Error/Warning color palettes
+<<<<<<< HEAD
 - ✅ Organic shape system (pebble, tech, leaf, gem)
+=======
+- ✅ [DEPRECATED_STYLE] shape system (pebble, tech, leaf, gem)
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 - ✅ Spring motion choreography
 
 ### Documentation ✅
@@ -67,7 +71,11 @@ cd frontend && npm run test
 #### 3. Visual Verification 🔍
 **Task**: Open app in browser and verify:
 - [ ] Navigate to `/job-queue` page
+<<<<<<< HEAD
 - [ ] Verify organic shapes visible (asymmetric corners on cards)
+=======
+- [ ] Verify [DEPRECATED_STYLE] shapes visible (asymmetric corners on cards)
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 - [ ] Verify colors match Electric Alchemist palette
 - [ ] Check dark mode toggle works
 - [ ] Verify M3 components render correctly
@@ -118,7 +126,11 @@ cd frontend && npm run dev
 **Effort**: 1-2 hours  
 **Value**: User feedback for actions
 
+<<<<<<< HEAD
 #### 6. Storybook Component Gallery
+=======
+#### 6. Storybook Component kr-dark
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 **Current**: Components documented in markdown  
 **Effort**: 2-3 hours  
 **Value**: Interactive component playground

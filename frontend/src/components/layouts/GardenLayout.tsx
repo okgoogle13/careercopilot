@@ -61,4 +61,8 @@ export const GardenLayout: React.FC<GardenLayoutProps> = ({ children }) => {
     );
 };
 
+<<<<<<< HEAD
 export default GardenLayout;
+=======
+export default GardenLayout;
+>>>>>>> restoration-KR-Rage-Figma-v2.0

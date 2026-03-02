@@ -70,6 +70,7 @@ export const exportToPdf = async (
     }
 };
 
+<<<<<<< HEAD
 /**
  * Multi-page PDF export for long documents
  * Automatically handles pagination
@@ -132,3 +133,6 @@ export const exportMultiPagePdf = async (
         throw new Error(`Failed to export multi-page PDF: ${error instanceof Error ? error.message : 'Unknown error'}`);
     }
 };
+=======
+
+>>>>>>> restoration-KR-Rage-Figma-v2.0

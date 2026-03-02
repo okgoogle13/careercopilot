@@ -6,6 +6,7 @@ Now using Supabase-aligned auth.
 """
 
 import logging
+<<<<<<< HEAD
 from typing import Optional
 from fastapi import Depends, Request
 from sqlalchemy.orm import Session
@@ -13,6 +14,15 @@ from sqlalchemy.orm import Session
 from app.core.database import get_db
 from app.core.auth import get_current_user as supabase_get_current_user
 from app.core.auth import get_current_user_optional as supabase_get_current_user_optional
+=======
+
+from fastapi import Depends, Request
+from sqlalchemy.orm import Session
+
+from app.core.auth import get_current_user as supabase_get_current_user
+from app.core.auth import get_current_user_optional as supabase_get_current_user_optional
+from app.core.database import get_db
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 from app.models.database import User
 from app.services.cache_store import SQLAlchemyCacheStore
 
@@ -25,7 +35,11 @@ def get_current_user(user: User = Depends(supabase_get_current_user)) -> User:
     """
     return user
 
+<<<<<<< HEAD
 def get_current_user_optional(user: Optional[User] = Depends(supabase_get_current_user_optional)) -> Optional[User]:
+=======
+def get_current_user_optional(user: User | None = Depends(supabase_get_current_user_optional)) -> User | None:
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     """
     Optional authentication dependency.
     """

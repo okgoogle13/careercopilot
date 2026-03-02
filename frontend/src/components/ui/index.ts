@@ -25,8 +25,15 @@ export type { StoneProps } from './Stone';
 export { Seed } from './Seed';
 export type { SeedProps } from './Seed';
 
+<<<<<<< HEAD
 export { NorthcoteButton } from './NorthcoteButton';
 export type { NorthcoteButtonProps } from './NorthcoteButton';
+=======
+export { KeralaRageButton } from './KeralaRageButton';
+export type { KeralaRageButtonProps } from './KeralaRageButton';
+export { KrIcon } from './KrIcon';
+export type { KrIconName, KrIconProps } from './KrIcon';
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 export { AuroraHeader } from './AuroraHeader';
 export { Mark } from './Mark';

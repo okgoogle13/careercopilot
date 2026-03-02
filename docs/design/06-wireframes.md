@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # The Northcote Curio Wireframe Audit
 
 ## A Critical Assessment & Asset Integration Manifest
@@ -237,11 +238,44 @@ Every page must breathe. No interface should feel entirely constructed—somewhe
 | **Last Updated**            | January 14, 2026      |
 | **Token Reference**         | DOC-004 / Tokens V7   |
 | **Asset Library Reference** | ASSET-001-CURIO       |
+=======
+# Kerala Rage Wireframes: The Solidarity System
+
+> Part of [Kerala Rage Design System – Contemporary Australian](00-overview.md)
+
+---
+
+## Document Control
+
+| Field                       | Value                        |
+| --------------------------- | ---------------------------- |
+| **Document ID**             | WIRE-003-SOLIDARITY          |
+| **Version**                 | 4.0                          |
+| **Status**                  | Implementation Ready         |
+| **Last Updated**            | February 9, 2026             |
+| **Token Reference**         | tokens.json V3.2             |
+| **Asset Library Reference** | See `06b-asset-placement.md` |
+
+---
+
+## Design Philosophy: The Manifesto Press
+
+These wireframes embody the **Solidarity Mode** design system—a high-contrast, screenprint-inspired interface that rejects bureaucratic neutrality in favor of tactical, human-centered design. Every page is a canvas for resistance, where career development becomes collective documentation rather than individual optimization.
+
+### Core Principles
+
+1. **Charcoal Substrate**: Every interface uses `#1A1A1A` as the foundational canvas—matte, tactile, non-reflective.
+2. **Screenprint Logic**: Visual elements behave like ink layers on paper—high contrast, visible texture, deliberate registration.
+3. **Street Art Geometry**: Asymmetric radii (Stone, Slab, Pebble) replace perfect circles and uniform corners.
+4. **Tactical Typography**: Recursive Variable for manifesto headlines, Inter Variable for precision UI, JetBrains Mono for data.
+5. **Anti-Slop Protocol**: No light mode, no perfect circles, no bureaucratic imagery (passports/forms/borders).
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 ---
 
 ## System Constants
 
+<<<<<<< HEAD
 ### Modal Biomes
 
 **Mode A: The Nocturnal Canopy (Gallery)**
@@ -283,19 +317,58 @@ Every page must breathe. No interface should feel entirely constructed—somewhe
 | Body           | Work Sans           | 400                  | 14-16px                         | Paragraph text             |
 | Data           | JetBrains Mono      | 400                  | 12px                            | Parsed content, skill tags |
 | Annotation     | JetBrains Mono      | 500                  | 10px, uppercase, 0.1em tracking | Labels, specimen markers   |
+=======
+### Solidarity Palette
+
+Based on **Kerala Rage — Solidarity Mode** (`tokens.json` V3.2).
+
+- **Substrate:** `charcoalBackground` (#1A1A1A). Matte charcoal, weathered brick texture.
+- **Primary Ink:** `inkGold` (#DAF674). Temple radiance, optimistic defiance.
+- **Secondary Ink:** `signalGreen` (#48F0E5). Hybrid identity pop.
+- **Accent Ink:** `solidarityRed` (#F14714). Resistance heat, urgency.
+- **Typography Ink:** `worker-ash` (#DAF6B3). High-contrast readable text.
+- **Background Texture:** `{kr-asset-screenprint-substrate}` at 15-25% opacity.
+
+### Shape Tokens (Border Radius)
+
+| Token           | Value              | Application                  |
+| --------------- | ------------------ | ---------------------------- |
+| `radius-pebble` | 20px 6px 16px 28px | Buttons, primary actions     |
+| `radius-stone`  | 16px 4px 12px 24px | Cards, containers            |
+| `radius-slab`   | 4px                | Structural panels, low-drama |
+| `radius-seed`   | 8px 4px 10px 6px   | Badges, tags, small elements |
+
+### Typography Scale
+
+| Role          | Font Family        | Weight           | Size  | Use Case                        |
+| ------------- | ------------------ | ---------------- | ----- | ------------------------------- |
+| Display Hero  | Recursive Variable | 900 (Slam)       | 144px | Manifesto lines, big statements |
+| Display Large | Recursive Variable | 800 (Solidarity) | 72px  | Page titles, poster headlines   |
+| Headline      | Sora Variable      | 700              | 48px  | Section headers                 |
+| Subhead       | Inter Variable     | 500              | 24px  | Card titles, group labels       |
+| Body          | Inter Variable     | 400              | 16px  | Paragraph text                  |
+| Metadata      | JetBrains Mono     | 400              | 12px  | Technical detail, annotations   |
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 ---
 
 ## Page Specifications
 
+<<<<<<< HEAD
 ### PAGE 1: Landing ("The Resurrection")
 
 **Classification:** Mode A (Gallery) | Entry Point | Emotional Register: Wonder
+=======
+### PAGE 1: Landing ("The Solidarity Manifesto")
+
+**Classification:** Solidarity Mode | Entry Point | Emotional Register: Defiance
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 #### Layout Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
+<<<<<<< HEAD
 │ Z-2: motif-gallery-wattle-hanging (top-right)               │
 │                                                             │
 │  Z-3: firefly-sprite (scattered, 12-16 instances)          │
@@ -307,21 +380,45 @@ Every page must breathe. No interface should feel entirely constructed—somewhe
 │                                                             │
 │    ┌──────────┐  ┌──────────┐  ┌──────────┐               │
 │    │ Fig. A   │  │ Fig. B   │  │ Fig. C   │  Z-1          │
+=======
+│ Z-2: {kr-asset-wheat-paste-tear} (top-right)                │
+│                                                             │
+│  Z-3: {kr-asset-screenprint-grit} (scattered particles)     │
+│                                                             │
+│         ┌─────────────────────────────────┐                │
+│         │    "THE SOLIDARITY"             │  Z-1           │
+│         │    "MANIFESTO"                  │                │
+│         │    Slab Container               │                │
+│         └─────────────────────────────────┘                │
+│                                                             │
+│    ┌──────────┐  ┌──────────┐  ┌──────────┐               │
+│    │ Build    │  │ Archive  │  │ Resist   │  Z-1          │
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 │    │ Stone    │  │ Stone    │  │ Stone    │               │
 │    └──────────┘  └──────────┘  └──────────┘               │
 │                                                             │
 │                  ┌─────────────────┐                       │
+<<<<<<< HEAD
 │                  │ Nav Dock/Pebble │  Z-2                  │
 │                  └─────────────────┘                       │
 │                                                             │
 │ Z-2: motif-gallery-banksia-pot (bottom-left)               │
 │                                                             │
 │ Z-0: pattern-nocturnal-canopy (25% opacity)                │
+=======
+│                  │ Enter / Pebble  │  Z-2                  │
+│                  └─────────────────┘                       │
+│                                                             │
+│ Z-2: {kr-asset-halo-disk} (bottom-left, inkGold)          │
+│                                                             │
+│ Z-0: {kr-asset-screenprint-substrate} (25% opacity)         │
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 └─────────────────────────────────────────────────────────────┘
 ```
 
 #### Functional Annotations
 
+<<<<<<< HEAD
 | Element              | Specification                             | Token Reference                               |
 | -------------------- | ----------------------------------------- | --------------------------------------------- |
 | **Background**       | `pattern-nocturnal-canopy`                | `texture.gallery.background` + asset overlay  |
@@ -367,23 +464,75 @@ Every page must breathe. No interface should feel entirely constructed—somewhe
 ### PAGE 2: Authentication ("The Entry Gate")
 
 **Classification:** Mode A (Gallery) | Security Gateway | Emotional Register: Trust
+=======
+| Element              | Specification                        | Token Reference                    |
+| -------------------- | ------------------------------------ | ---------------------------------- |
+| **Background**       | `{kr-asset-screenprint-substrate}`   | Custom asset + charcoalBackground  |
+| **Opacity**          | 25%                                  | Custom (not tokenized)             |
+| **Gradient Overlay** | Bottom-up, `charcoal` to transparent | `color.charcoalBackground.steps.0` |
+
+#### Content Annotations
+
+| Element           | Content                                                 | Typography Token                 |
+| ----------------- | ------------------------------------------------------- | -------------------------------- |
+| **Headline**      | "THE SOLIDARITY<br>MANIFESTO"                           | Display Hero (Recursive, 144px)  |
+| **Subhead**       | "Your career, re-documented for the collective future." | Headline (Sora, 48px)            |
+| **Feature Cards** | "Build Your Story", "Archive Evidence", "Resist Slop"   | Subhead (Inter, 24px) for titles |
+
+#### Design Annotations
+
+| Element            | Shape           | Surface              | Border                    |
+| ------------------ | --------------- | -------------------- | ------------------------- |
+| **Hero Container** | `radius-slab`   | `charcoalBackground` | 2px solid `blueprintGrey` |
+| **Feature Cards**  | `radius-stone`  | `charcoalBackground` | 1px solid `blueprintGrey` |
+| **Nav Buttons**    | `radius-pebble` | `inkGold`           | None                      |
+
+#### Interaction Annotations
+
+| Element            | Trigger | Animation                       | Token Reference                  |
+| ------------------ | ------- | ------------------------------- | -------------------------------- |
+| **Feature Cards**  | Hover   | translateY(-4px), shadow deepen | `motion.m3Expressive`            |
+| **Nav Buttons**    | Hover   | translateY(-2px), glow increase | `motion.patterns.typeSpringSlam` |
+| **Grit Particles** | Ambient | Float + opacity pulse, 8s loop  | Custom CSS animation             |
+
+#### Asset Placement
+
+See `06b-asset-placement.md` for detailed asset integration specifications.
+
+**Symbolic Anchor (Optional)**: This page MAY include ONE Symbolic Anchor (e.g., `shiva-statue-reference.png`, `bhagat-singh-reference.png`) at Z-1, positioned in bottom-left or top-right corner, minimum 96px. Must align with defiant emotional register.
+
+---
+
+### PAGE 2: Authentication ("The Verification")
+
+**Classification:** Solidarity Mode | Security Gateway | Emotional Register: Trust
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 #### Layout Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │                                                             │
+<<<<<<< HEAD
 │  Z-3: firefly-sprite (sparse, 6-8 instances, card-adjacent) │
 │                                                             │
 │              ┌─────────────────────────┐                   │
 │              │                         │                   │
 │              │    Authentication       │  Z-2              │
+=======
+│  Z-3: {kr-asset-screenprint-grit} (card-adjacent)           │
+│                                                             │
+│              ┌─────────────────────────┐                   │
+│              │                         │                   │
+│              │    "VERIFY IDENTITY"    │  Z-2              │
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 │              │    Stone Container      │                   │
 │              │    480px width          │                   │
 │              │                         │                   │
 │              └─────────────────────────┘                   │
 │                                                             │
 │              ┌─────────────────────────┐                   │
+<<<<<<< HEAD
 │              │  motif-laboratory-      │  Z-1              │
 │              │  compass (60% opacity)  │                   │
 │              └─────────────────────────┘                   │
@@ -438,11 +587,38 @@ Every page must breathe. No interface should feel entirely constructed—somewhe
 ### PAGE 3: Onboarding ("Choosing the Soil")
 
 **Classification:** Mode A (Gallery) | Selection Flow | Emotional Register: Possibility
+=======
+│              │  {kr-asset-halo-disk}   │  Z-1              │
+│              │  (60% opacity)          │                   │
+│              └─────────────────────────┘                   │
+│                                                             │
+│ Z-0: {kr-asset-screenprint-substrate} (15% opacity)         │
+└─────────────────────────────────────────────────────────────┘
+```
+
+#### Content Annotations
+
+| Element              | Content                | Typography Token          |
+| -------------------- | ---------------------- | ------------------------- |
+| **Card Title**       | "VERIFY IDENTITY"      | Display Large (Recursive) |
+| **Input Labels**     | "Email", "Password"    | Metadata (JetBrains Mono) |
+| **Primary Action**   | "Enter Archive"        | Subhead (Inter, 24px)     |
+| **Secondary Action** | "Create Collective ID" | Body (Inter, 16px)        |
+
+**Symbolic Anchor (Forbidden)**: Authentication pages must NOT include Symbolic Anchors. Focus is on security and trust, not cultural narrative.
+
+---
+
+### PAGE 3: Onboarding ("The Collective Choice")
+
+**Classification:** Solidarity Mode | Selection Flow | Emotional Register: Possibility
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 #### Layout Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
+<<<<<<< HEAD
 │ Z-2: motif-gallery-botanical-waratah (top-left, cropped)   │
 │                                                             │
 │         ┌────────┐  ┌────────┐  ┌────────┐                │
@@ -511,11 +687,33 @@ Every page must breathe. No interface should feel entirely constructed—somewhe
 ### PAGE 4: Ingestion ("The Mulch & Mineral Setup")
 
 **Classification:** Mode B (Laboratory) | Document Upload | Emotional Register: Precision
+=======
+│                                                             │
+│         "CHOOSE YOUR SOLIDARITY PATH"                       │
+│         Display Large (Recursive, 72px)                     │
+│                                                             │
+│    ┌──────────┐  ┌──────────┐  ┌──────────┐               │
+│    │ Tech     │  │ Care     │  │ Creative │               │
+│    │ Worker   │  │ Worker   │  │ Worker   │               │
+│    │ Stone    │  │ Stone    │  │ Stone    │               │
+│    └──────────┘  └──────────┘  └──────────┘               │
+│                                                             │
+│ Z-0: {kr-asset-blueprint-grid} (8% opacity)                 │
+└─────────────────────────────────────────────────────────────┘
+```
+
+---
+
+### PAGE 4: Ingestion ("The Deposition")
+
+**Classification:** Solidarity Mode | Data Ingestion | Emotional Register: Gravity
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 #### Layout Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
+<<<<<<< HEAD
 │                    Z-2: motif-laboratory-compass            │
 │                         (top-right, 30% opacity)            │
 │                                                             │
@@ -578,17 +776,58 @@ Every page must breathe. No interface should feel entirely constructed—somewhe
 | `motif-laboratory-skeleton-etch`  | Centered behind drop zone | 60% viewport width | Z-1     | Static, 6% opacity  |
 | `motif-laboratory-compass`        | `top: 40px; right: 40px`  | 120px              | Z-2     | Static, 30% opacity |
 | `motif-laboratory-stamp-verified` | Drop zone bottom-right    | 140px              | Z-3     | Animated on success |
+=======
+│                                                             │
+│         "DEPOSIT HISTORY"                                   │
+│         Display Large (Recursive, 72px, inkGold)           │
+│                                                             │
+│              ┌─────────────────────────┐                   │
+│              │                         │                   │
+│              │   DROP PDF HERE         │  Z-2              │
+│              │   FOR ANALYSIS          │                   │
+│              │   Slab Container        │                   │
+│              │   Dashed border         │                   │
+│              │                         │                   │
+│              └─────────────────────────┘                   │
+│                                                             │
+│ Z-1: {kr-asset-blueprint-layout} (6% opacity, watermark)    │
+│                                                             │
+│ Z-0: {kr-asset-charcoal-paper}                              │
+└─────────────────────────────────────────────────────────────┘
+```
+
+#### Content Annotations
+
+| Element             | Content                                  | Typography Token          |
+| ------------------- | ---------------------------------------- | ------------------------- |
+| **Headline**        | "DEPOSIT HISTORY"                        | Display Large (Recursive) |
+| **Drop Zone Label** | "DROP PDF HERE<br>FOR ANALYSIS"          | Metadata (JetBrains Mono) |
+| **Success Message** | "History Verified. Integrity confirmed." | Subhead (Inter, inkGold) |
+
+#### Interaction Annotations
+
+| Element                 | Trigger          | Animation                                  |
+| ----------------------- | ---------------- | ------------------------------------------ |
+| **Drop Zone**           | File drag-over   | Border shifts to `solidarityRed`, glow effect |
+| **Verification Stamp**  | Upload success   | Scale from 2.0→1.0, rotate -30deg→-5deg    |
+| **Blueprint Watermark** | Upload in-flight | Opacity fade 6%→12%                        |
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 ---
 
 ### PAGE 5: Analysis Dashboard ("The Audit Microscope")
 
+<<<<<<< HEAD
 **Classification:** Mode B (Laboratory) | Data Visualization | Emotional Register: Revelation
+=======
+**Classification:** Solidarity Mode | Data Review | Emotional Register: Revelation
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 #### Layout Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
+<<<<<<< HEAD
 │ Z-1: texture-laboratory-grid-major (full viewport, 8%)     │
 │                                                             │
 │  ┌──────────────┐  ┌────────────────────────────────────┐  │
@@ -653,11 +892,35 @@ Every page must breathe. No interface should feel entirely constructed—somewhe
 ### PAGE 6: Opportunity Feed ("The Sentry Lookout")
 
 **Classification:** Mode A (Gallery) | Content Browse | Emotional Register: Discovery
+=======
+│                                                             │
+│  ┌──────────────┐  ┌─────────────────────────────────┐    │
+│  │              │  │                                 │    │
+│  │  Score Gauge │  │  Skill Breakdown Grid           │    │
+│  │  (Halo Disk) │  │  2x3 Stone Cards                │    │
+│  │              │  │                                 │    │
+│  └──────────────┘  └─────────────────────────────────┘    │
+│                                                             │
+│ Z-1: {kr-asset-blueprint-grid} (8% opacity, full viewport)  │
+│                                                             │
+│ Z-0: {kr-asset-charcoal-paper}                              │
+└─────────────────────────────────────────────────────────────┘
+```
+
+**Symbolic Anchor (Optional)**: This page MAY include ONE Symbolic Anchor (e.g., `kerala-elephant-reference.png`, `shiva-statue-reference.png`) at Z-1, positioned in sidebar or header area, minimum 96px. Must align with revelation emotional register.
+
+---
+
+### PAGE 6: Opportunity Feed ("The Lookout")
+
+**Classification:** Solidarity Mode | Content Browse | Emotional Register: Discovery
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 #### Layout Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
+<<<<<<< HEAD
 │           Z-2: motif-gallery-wattle-hanging (top-right)    │
 │                                                             │
 │  ┌────────────┐  ┌───────────────────────────────────────┐ │
@@ -730,11 +993,34 @@ Every page must breathe. No interface should feel entirely constructed—somewhe
 ### PAGE 7: Kanban Board ("The Command Center Greenhouse")
 
 **Classification:** Mode A (Gallery) | Task Management | Emotional Register: Growth
+=======
+│  Sidebar (240px)          │  Feed Area                      │
+│  ┌─────────────┐          │                                 │
+│  │ Filters     │          │  ┌──────────────────────┐       │
+│  │ Pebble      │          │  │ Opportunity Card     │       │
+│  │ Toggles     │          │  │ Stone Container      │       │
+│  └─────────────┘          │  └──────────────────────┘       │
+│                           │                                 │
+│                           │  ┌──────────────────────┐       │
+│                           │  │ Opportunity Card     │       │
+│                           │  └──────────────────────┘       │
+│                                                             │
+│ Z-0: {kr-asset-screenprint-substrate} (22% opacity)         │
+└─────────────────────────────────────────────────────────────┘
+```
+
+---
+
+### PAGE 7: Kanban Board ("The Command Center")
+
+**Classification:** Solidarity Mode | Task Management | Emotional Register: Control
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 #### Layout Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
+<<<<<<< HEAD
 │ Z-2: motif-gallery-eucalyptus-hanging (column tops)        │
 │                                                             │
 │  ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌───────┐│
@@ -799,16 +1085,38 @@ Every page must breathe. No interface should feel entirely constructed—somewhe
 | `motif-gallery-banksia-pot`        | `bottom: -40px; left: -30px`     | 200px       | Z-2     | Static              |
 | `motif-gallery-firefly-sprite`     | Concentrated near "Offer" column | 8-16px      | Z-3     | Increased density   |
 
+=======
+│                                                             │
+│  "THE CULTIVATION CYCLE"                                    │
+│  Display Large (Recursive, 72px)                            │
+│                                                             │
+│  ┌─────────┐  ┌─────────┐  ┌─────────┐  ┌─────────┐       │
+│  │ Applied │  │ Screen  │  │ Interview│ │ Offer   │       │
+│  │         │  │         │  │         │  │         │       │
+│  │ [Card]  │  │ [Card]  │  │ [Card]  │  │ [Card]  │       │
+│  │ [Card]  │  │         │  │         │  │         │       │
+│  └─────────┘  └─────────┘  └─────────┘  └─────────┘       │
+│                                                             │
+│ Z-0: {kr-asset-charcoal-paper}                              │
+└─────────────────────────────────────────────────────────────┘
+```
+
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 ---
 
 ### PAGE 8: Split-Screen Editor ("The Writing Workbench")
 
+<<<<<<< HEAD
 **Classification:** Mode B (Laboratory) | Content Creation | Emotional Register: Craft
+=======
+**Classification:** Solidarity Mode | Content Creation | Emotional Register: Craft
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 #### Layout Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
+<<<<<<< HEAD
 │                                                             │
 │  ┌───────────────────────┐  ┌───────────────────────────┐  │
 │  │                       │  │ "SPECIMEN DRAWER"         │  │
@@ -877,11 +1185,37 @@ Every page must breathe. No interface should feel entirely constructed—somewhe
 ### PAGE 9: Studio Designer ("The Specimen Finalization")
 
 **Classification:** Mode B (Laboratory) | Document Preview | Emotional Register: Refinement
+=======
+│  Evidence Panel (30%)     │  Editor Panel (70%)             │
+│  ┌─────────────┐          │                                 │
+│  │ Evidence    │          │  ┌──────────────────────┐       │
+│  │ Card 1      │          │  │                      │       │
+│  │ Stone       │          │  │  Text Editor         │       │
+│  └─────────────┘          │  │  Slab Container      │       │
+│                           │  │                      │       │
+│  ┌─────────────┐          │  └──────────────────────┘       │
+│  │ Evidence    │          │                                 │
+│  │ Card 2      │          │                                 │
+│  └─────────────┘          │                                 │
+│                                                             │
+│ Z-1: {kr-asset-blueprint-grid} (5% opacity, editor only)    │
+│                                                             │
+│ Z-0: {kr-asset-charcoal-paper}                              │
+└─────────────────────────────────────────────────────────────┘
+```
+
+---
+
+### PAGE 9: Studio Designer ("The Manifesto Finalization")
+
+**Classification:** Solidarity Mode | Document Review | Emotional Register: Refinement
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 #### Layout Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
+<<<<<<< HEAD
 │                                                             │
 │  ┌─────────────────────────────┐  ┌───────────────────────┐│
 │  │                             │  │ Z-2: compass (header) ││
@@ -949,16 +1283,39 @@ Every page must breathe. No interface should feel entirely constructed—somewhe
 | `motif-laboratory-compass`        | Control panel header       | 80px       | Z-2     | Static, 40% opacity                 |
 | `motif-laboratory-stamp-verified` | Preview panel, on finalize | 160px      | Z-3     | Animated on action                  |
 
+=======
+│  Controls (25%)           │  Preview Panel (75%)            │
+│  ┌─────────────┐          │                                 │
+│  │ Format      │          │  ┌──────────────────────┐       │
+│  │ Toggles     │          │  │                      │       │
+│  │ Pebble      │          │  │  Document Preview    │       │
+│  └─────────────┘          │  │  Stone Container     │       │
+│                           │  │                      │       │
+│  ┌─────────────┐          │  └──────────────────────┘       │
+│  │ Finalize    │          │                                 │
+│  │ Button      │          │                                 │
+│  └─────────────┘          │                                 │
+│                                                             │
+│ Z-0: {kr-asset-charcoal-paper} (increased grain)            │
+└─────────────────────────────────────────────────────────────┘
+```
+
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 ---
 
 ### PAGE 10: Settings ("The Archive Vault")
 
+<<<<<<< HEAD
 **Classification:** Mode B (Laboratory) | Configuration | Emotional Register: Storage
+=======
+**Classification:** Solidarity Mode | Configuration | Emotional Register: Storage
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 #### Layout Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
+<<<<<<< HEAD
 │                 Z-2: compass (header nav)                   │
 │                                                             │
 │              ┌─────────────────────────────┐               │
@@ -1030,11 +1387,39 @@ Every page must breathe. No interface should feel entirely constructed—somewhe
 ### PAGE 11: Dashboard Overview ("The Canopy View")
 
 **Classification:** Mode A (Gallery) | Overview | Emotional Register: Altitude
+=======
+│                                                             │
+│         "ARCHIVE CONFIGURATION"                             │
+│         Display Large (Recursive, 72px)                     │
+│                                                             │
+│    ┌──────────────────┐  ┌──────────────────┐             │
+│    │ Profile Settings │  │ Privacy Controls │             │
+│    │ Stone Container  │  │ Stone Container  │             │
+│    └──────────────────┘  └──────────────────┘             │
+│                                                             │
+│    ┌──────────────────┐  ┌──────────────────┐             │
+│    │ Data Management  │  │ Export Options   │             │
+│    │ Stone Container  │  │ Stone Container  │             │
+│    └──────────────────┘  └──────────────────┘             │
+│                                                             │
+│ Z-1: {kr-asset-blueprint-grid} (6% opacity, behind cards)   │
+│                                                             │
+│ Z-0: {kr-asset-charcoal-paper}                              │
+└─────────────────────────────────────────────────────────────┘
+```
+
+---
+
+### PAGE 11: Dashboard Overview ("The Collective")
+
+**Classification:** Solidarity Mode | Status Overview | Emotional Register: Altitude
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 #### Layout Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
+<<<<<<< HEAD
 │ Z-2: motif-gallery-eucalyptus-hanging (top-left, dramatic) │
 │       └── Z-3: kookaburra-sentry (nested within)           │
 │                                                             │
@@ -1106,10 +1491,31 @@ Every page must breathe. No interface should feel entirely constructed—somewhe
 | `motif-gallery-banksia-pot`        | `bottom: -50px; right: -30px` | 220px       | Z-2     | Static              |
 | `motif-gallery-firefly-sprite`     | Ambient, throughout           | 8-16px      | Z-3     | Animated            |
 
+=======
+│                                                             │
+│  Z-2: {kr-asset-wheat-paste-tear} (top-left, dramatic)      │
+│                                                             │
+│         "THE COLLECTIVE IS THRIVING"                        │
+│         Display Large (Recursive, 72px, inkGold)           │
+│                                                             │
+│    ┌──────────┐  ┌──────────┐  ┌──────────┐               │
+│    │ Active   │  │ Skills   │  │ Progress │               │
+│    │ Apps     │  │ Tracked  │  │ Metrics  │               │
+│    │ Stone    │  │ Stone    │  │ Stone    │               │
+│    └──────────┘  └──────────┘  └──────────┘               │
+│                                                             │
+│ Z-2: {kr-asset-halo-disk} (bottom-right, inkGold)          │
+│                                                             │
+│ Z-0: {kr-asset-screenprint-substrate} (25% opacity)         │
+└─────────────────────────────────────────────────────────────┘
+```
+
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 ---
 
 ## Asset Library Reference
 
+<<<<<<< HEAD
 ### File Naming Convention
 
 All assets follow this pattern for traceability:
@@ -1144,11 +1550,19 @@ All assets follow this pattern for traceability:
 | **ASSET-16** | Wattle Hanging Branch        | `northcote-wattle-hanging.png`            | Gallery    | 🔴 **Missing/Gap** |
 | **ASSET-17** | Eucalyptus Hanging (Ceiling) | `northcote-eucalyptus-hanging.png`        | Gallery    | 🔴 **Missing/Gap** |
 | **ASSET-19** | Eucalyptus Kanban (Column)   | `northcote-eucalyptus-kanban.png`         | Gallery    | 🔴 **Missing/Gap** |
+=======
+**Symbolic Anchor (Optional)**: This page MAY include ONE Symbolic Anchor (e.g., `bhagat-singh-reference.png`, `treaty-now-laneway.png`) at Z-1, positioned in top-left or bottom-right corner, minimum 96px. Must align with altitude/collective emotional register.
+
+For detailed asset placement specifications, opacity values, animation behaviors, and responsive considerations, see:
+
+- **[06b-asset-placement.md](06b-asset-placement.md)** - Complete asset integration guide
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 ---
 
 ## Implementation Notes
 
+<<<<<<< HEAD
 ### Z-Index Layering System
 
 | Layer      | Z-Index | Content                                       |
@@ -1194,3 +1608,30 @@ _This document serves as the definitive implementation guide for the Northcote C
 - **Asset Consolidation Details**: [asset-consolidation-inventory.md](asset-consolidation-inventory.md)
 - **Theme Location Evidence**: [theme_evidence_list.md](theme_evidence_list.md)
 - **Content & Asset Draft**: [07-wireframe-content-draft.md](07-wireframe-content-draft.md)
+=======
+### Z-Index Layering
+
+| Layer  | Z-Index | Contents                                    |
+| ------ | ------- | ------------------------------------------- |
+| Base   | Z-0     | Background textures, substrate patterns     |
+| Grid   | Z-1     | Blueprint grids, watermark elements         |
+| UI     | Z-2     | Cards, containers, primary interface        |
+| Accent | Z-3     | Grit particles, floating elements, overlays |
+
+### Responsive Considerations
+
+- **Desktop (1440px+)**: Full asset presence, maximum atmospheric density.
+- **Tablet (768-1439px)**: Reduce grit particle count by 50%, simplify wheat-paste tears.
+- **Mobile (<768px)**: Remove decorative assets, retain only structural elements (blueprint grids at 4% opacity).
+
+### Performance Guidelines
+
+- All background textures must be optimized WebP format, <100KB.
+- Grit particles use CSS `will-change: transform, opacity` for GPU acceleration.
+- Parallax effects disabled on mobile and when `prefers-reduced-motion: reduce`.
+
+---
+
+**Last Updated**: February 9, 2026  
+**Next Review**: Asset generation phase completion
+>>>>>>> restoration-KR-Rage-Figma-v2.0

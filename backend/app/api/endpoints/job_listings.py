@@ -7,13 +7,22 @@ It exposes the Genkit flows for extracting job details from text and URLs,
 and for performing advanced analysis on the extracted data.
 """
 
+<<<<<<< HEAD
 from fastapi import APIRouter, HTTPException
 from genkit import run
 
+=======
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 from app.genkit_flows.job_listing_extractor import (
     advanced_job_analysis_flow,
     extract_job_listing_details_flow,
 )
+<<<<<<< HEAD
+=======
+from fastapi import APIRouter, HTTPException
+from genkit import run
+
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 from app.models.schemas import (
     AdvancedAnalysisRequest,
     JobListingDetails,
@@ -38,7 +47,11 @@ async def extract_from_text(request: JobListingTextRequest):
         return details
     except Exception as e:
         # Catch potential errors from the flow (e.g., AI model failure)
+<<<<<<< HEAD
         raise HTTPException(status_code=500, detail=f"An unexpected error occurred: {str(e)}")
+=======
+        raise HTTPException(status_code=500, detail=f"An unexpected error occurred: {e!s}")
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 
 @router.post(
@@ -54,12 +67,21 @@ async def extract_from_url(request: JobListingUrlRequest):
         # Pass the source as a dictionary to the flow
         details = await run(extract_job_listing_details_flow, {"url": request.url})
         return details
+<<<<<<< HEAD
     except IOError as e:
         # Catch scraping-specific errors
         raise HTTPException(status_code=422, detail=f"Failed to process the URL: {str(e)}")
     except Exception as e:
         # Catch other potential errors from the flow
         raise HTTPException(status_code=500, detail=f"An unexpected error occurred: {str(e)}")
+=======
+    except OSError as e:
+        # Catch scraping-specific errors
+        raise HTTPException(status_code=422, detail=f"Failed to process the URL: {e!s}")
+    except Exception as e:
+        # Catch other potential errors from the flow
+        raise HTTPException(status_code=500, detail=f"An unexpected error occurred: {e!s}")
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 
 @router.post(
@@ -81,5 +103,9 @@ async def advanced_analysis(request: AdvancedAnalysisRequest):
         return analysis_result
     except Exception as e:
         raise HTTPException(
+<<<<<<< HEAD
             status_code=500, detail=f"An unexpected error occurred during analysis: {str(e)}"
+=======
+            status_code=500, detail=f"An unexpected error occurred during analysis: {e!s}"
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         )

@@ -3,6 +3,7 @@ Database models for CareerCopilot production system.
 Supports both PostgreSQL (production) and SQLite (development).
 """
 
+<<<<<<< HEAD
 import json
 import uuid
 from datetime import datetime, timezone
@@ -23,11 +24,20 @@ from typing import (
     Union,
     cast,
     overload,
+=======
+import uuid
+from datetime import datetime, timezone
+from typing import (
+    Any,
+    Optional,
+    TypeVar,
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 )
 
 from sqlalchemy import (
     JSON,
     Boolean,
+<<<<<<< HEAD
     Column,
     DateTime,
     Float,
@@ -66,6 +76,23 @@ from sqlalchemy.orm.query import Query
 from sqlalchemy.sql.elements import ColumnElement
 from sqlalchemy.sql.expression import Executable
 from sqlalchemy.types import TypeDecorator
+=======
+    DateTime,
+    Float,
+    ForeignKey,
+    Index,
+    Integer,
+    String,
+    Text,
+    func,
+)
+from sqlalchemy.orm import (
+    DeclarativeBase,
+    Mapped,
+    mapped_column,
+    relationship,
+)
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 # Type variable for generic types
 T = TypeVar("T", bound="Base")
@@ -97,12 +124,20 @@ class Base(DeclarativeBase, BaseMixin):
     __abstract__ = True
     __mapper_args__ = {"eager_defaults": True}
 
+<<<<<<< HEAD
     def to_dict(self) -> Dict[str, Any]:
+=======
+    def to_dict(self) -> dict[str, Any]:
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         """Convert model instance to dictionary"""
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}  # type: ignore
 
     @classmethod
+<<<<<<< HEAD
     def from_dict(cls: Type[T], data: Dict[str, Any]) -> T:
+=======
+    def from_dict(cls: type[T], data: dict[str, Any]) -> T:
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         """Create model instance from dictionary"""
         return cls(**{k: v for k, v in data.items() if k in cls.__table__.columns})  # type: ignore
 
@@ -120,6 +155,7 @@ class User(Base):
         comment="User's email address (must be unique)",
     )
     name: Mapped[str] = mapped_column(String(255), nullable=False, comment="User's full name")
+<<<<<<< HEAD
     career_transition_from: Mapped[Optional[str]] = mapped_column(
         String(100), nullable=True, comment="User's current or previous career field"
     )
@@ -133,10 +169,26 @@ class User(Base):
         JSON, default=list, nullable=False, comment="List of target job roles"
     )
     salary_range: Mapped[Dict[str, int]] = mapped_column(
+=======
+    career_transition_from: Mapped[str | None] = mapped_column(
+        String(100), nullable=True, comment="User's current or previous career field"
+    )
+    career_transition_to: Mapped[str | None] = mapped_column(
+        String(100), nullable=True, comment="User's target career field"
+    )
+    location: Mapped[str | None] = mapped_column(
+        String(100), nullable=True, comment="User's preferred job location"
+    )
+    target_roles: Mapped[list[str]] = mapped_column(
+        JSON, default=list, nullable=False, comment="List of target job roles"
+    )
+    salary_range: Mapped[dict[str, int]] = mapped_column(
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         JSON, default=dict, nullable=False, comment="Expected salary range (min, max)"
     )
 
     # Relationships
+<<<<<<< HEAD
     jobs: Mapped[List["Job"]] = relationship(
         "Job", back_populates="user", cascade="all, delete-orphan"
     )
@@ -150,6 +202,21 @@ class User(Base):
         "AgentSession", back_populates="user", cascade="all, delete-orphan"
     )
     cache_entries: Mapped[List["Cache"]] = relationship(
+=======
+    jobs: Mapped[list["Job"]] = relationship(
+        "Job", back_populates="user", cascade="all, delete-orphan"
+    )
+    applications: Mapped[list["Application"]] = relationship(
+        "Application", back_populates="user", cascade="all, delete-orphan"
+    )
+    ai_interactions: Mapped[list["AIInteraction"]] = relationship(
+        "AIInteraction", back_populates="user", cascade="all, delete-orphan"
+    )
+    agent_sessions: Mapped[list["AgentSession"]] = relationship(
+        "AgentSession", back_populates="user", cascade="all, delete-orphan"
+    )
+    cache_entries: Mapped[list["Cache"]] = relationship(
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         "Cache", back_populates="user", cascade="all, delete-orphan", lazy="selectin"
     )
 
@@ -190,16 +257,25 @@ class Job(Base):
     )
     title: Mapped[str] = mapped_column(String(255), nullable=False, comment="Job title")
     company: Mapped[str] = mapped_column(String(255), nullable=False, comment="Company name")
+<<<<<<< HEAD
     location: Mapped[Optional[str]] = mapped_column(
+=======
+    location: Mapped[str | None] = mapped_column(
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         String(255), nullable=True, comment="Job location (can be remote)"
     )
 
     # Job details
+<<<<<<< HEAD
     description: Mapped[Optional[str]] = mapped_column(
+=======
+    description: Mapped[str | None] = mapped_column(
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         Text, nullable=True, comment="Job description in HTML or plain text"
     )
 
     # Requirements and qualifications
+<<<<<<< HEAD
     requirements: Mapped[List[str]] = mapped_column(
         JSON, default=list, nullable=False, comment="List of required qualifications"
     )
@@ -207,10 +283,20 @@ class Job(Base):
         JSON, default=list, nullable=False, comment="List of preferred qualifications"
     )
     skill_requirements: Mapped[List[str]] = mapped_column(
+=======
+    requirements: Mapped[list[str]] = mapped_column(
+        JSON, default=list, nullable=False, comment="List of required qualifications"
+    )
+    preferred_qualifications: Mapped[list[str]] = mapped_column(
+        JSON, default=list, nullable=False, comment="List of preferred qualifications"
+    )
+    skill_requirements: Mapped[list[str]] = mapped_column(
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         JSON, default=list, nullable=False, comment="List of required skills"
     )
 
     # Salary information
+<<<<<<< HEAD
     salary_range: Mapped[Dict[str, int]] = mapped_column(
         JSON, default=dict, nullable=False, comment="Salary range with min/max values"
     )
@@ -221,16 +307,36 @@ class Job(Base):
         Integer, nullable=True, comment="Maximum salary (extracted)"
     )
     salary_text: Mapped[Optional[str]] = mapped_column(
+=======
+    salary_range: Mapped[dict[str, int]] = mapped_column(
+        JSON, default=dict, nullable=False, comment="Salary range with min/max values"
+    )
+    salary_min: Mapped[int | None] = mapped_column(
+        Integer, nullable=True, comment="Minimum salary (extracted)"
+    )
+    salary_max: Mapped[int | None] = mapped_column(
+        Integer, nullable=True, comment="Maximum salary (extracted)"
+    )
+    salary_text: Mapped[str | None] = mapped_column(
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         String(100), nullable=True, comment="Raw salary text as it appears in the posting"
     )
 
     # Job type and details
+<<<<<<< HEAD
     job_type: Mapped[Optional[str]] = mapped_column(
+=======
+    job_type: Mapped[str | None] = mapped_column(
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         String(100),
         nullable=True,
         comment="Type of employment (Full-time, Part-time, Contract, etc.)",
     )
+<<<<<<< HEAD
     experience_level: Mapped[Optional[str]] = mapped_column(
+=======
+    experience_level: Mapped[str | None] = mapped_column(
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         String(100), nullable=True, comment="Required experience level (Entry, Mid, Senior, etc.)"
     )
     remote_ok: Mapped[bool] = mapped_column(
@@ -238,10 +344,17 @@ class Job(Base):
     )
 
     # Application details
+<<<<<<< HEAD
     application_url: Mapped[Optional[str]] = mapped_column(
         String(500), nullable=True, comment="URL to apply for the job"
     )
     application_deadline: Mapped[Optional[datetime]] = mapped_column(
+=======
+    application_url: Mapped[str | None] = mapped_column(
+        String(500), nullable=True, comment="URL to apply for the job"
+    )
+    application_deadline: Mapped[datetime | None] = mapped_column(
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         DateTime, nullable=True, comment="Application deadline (if any)"
     )
 
@@ -249,6 +362,7 @@ class Job(Base):
     is_active: Mapped[bool] = mapped_column(
         Boolean, default=True, nullable=False, comment="Whether this job is still active"
     )
+<<<<<<< HEAD
     source: Mapped[Optional[str]] = mapped_column(
         String(100), nullable=True, comment="Source of the job listing (e.g., 'linkedin', 'indeed')"
     )
@@ -256,17 +370,34 @@ class Job(Base):
         String(255), nullable=True, index=True, comment="Original ID from the source"
     )
     url: Mapped[Optional[str]] = mapped_column(
+=======
+    source: Mapped[str | None] = mapped_column(
+        String(100), nullable=True, comment="Source of the job listing (e.g., 'linkedin', 'indeed')"
+    )
+    source_id: Mapped[str | None] = mapped_column(
+        String(255), nullable=True, index=True, comment="Original ID from the source"
+    )
+    url: Mapped[str | None] = mapped_column(
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         String(500), nullable=True, comment="URL to the original job posting"
     )
 
     # Timestamps
+<<<<<<< HEAD
     posted_date: Mapped[Optional[datetime]] = mapped_column(
+=======
+    posted_date: Mapped[datetime | None] = mapped_column(
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         DateTime, nullable=True, comment="When the job was posted"
     )
     discovered_at: Mapped[datetime] = mapped_column(
         DateTime, server_default=func.now(), nullable=False, comment="When the job was discovered"
     )
+<<<<<<< HEAD
     last_analyzed: Mapped[Optional[datetime]] = mapped_column(
+=======
+    last_analyzed: Mapped[datetime | None] = mapped_column(
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         DateTime, nullable=True, comment="When the job was last analyzed"
     )
     last_updated: Mapped[datetime] = mapped_column(
@@ -278,17 +409,28 @@ class Job(Base):
     )
 
     # Additional data
+<<<<<<< HEAD
     job_metadata: Mapped[Dict[str, Any]] = mapped_column(
+=======
+    job_metadata: Mapped[dict[str, Any]] = mapped_column(
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         JSON,
         name="metadata",  # Keep the column name as 'metadata' in the database
         default=dict,
         nullable=False,
         comment="Additional metadata in JSON format",
     )
+<<<<<<< HEAD
     match_score: Mapped[Optional[float]] = mapped_column(
         Float, nullable=True, comment="Relevance score (0-1) for the user"
     )
     analysis_summary: Mapped[Optional[str]] = mapped_column(
+=======
+    match_score: Mapped[float | None] = mapped_column(
+        Float, nullable=True, comment="Relevance score (0-1) for the user"
+    )
+    analysis_summary: Mapped[str | None] = mapped_column(
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         Text, nullable=True, comment="AI-generated analysis of the job"
     )
 
@@ -298,7 +440,11 @@ class Job(Base):
         back_populates="jobs",
         lazy="selectin",  # Use selectin loading for better performance
     )
+<<<<<<< HEAD
     applications: Mapped[List["Application"]] = relationship(
+=======
+    applications: Mapped[list["Application"]] = relationship(
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         "Application", back_populates="job", cascade="all, delete-orphan", lazy="selectin"
     )
 
@@ -329,13 +475,18 @@ class Application(Base):
         index=True,
         comment="Reference to the user who owns this application",
     )
+<<<<<<< HEAD
     job_id: Mapped[Optional[str]] = mapped_column(
+=======
+    job_id: Mapped[str | None] = mapped_column(
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         String(36),
         ForeignKey("jobs.id", ondelete="CASCADE"),
         nullable=True,
         index=True,
         comment="Reference to the job being applied to (if exists)",
     )
+<<<<<<< HEAD
     job_title: Mapped[Optional[str]] = mapped_column(
         String(255), nullable=True, comment="Job title (for manual entries)"
     )
@@ -343,6 +494,15 @@ class Application(Base):
         String(255), nullable=True, comment="Company name (for manual entries)"
     )
     job_description: Mapped[Optional[str]] = mapped_column(
+=======
+    job_title: Mapped[str | None] = mapped_column(
+        String(255), nullable=True, comment="Job title (for manual entries)"
+    )
+    company_name: Mapped[str | None] = mapped_column(
+        String(255), nullable=True, comment="Company name (for manual entries)"
+    )
+    job_description: Mapped[str | None] = mapped_column(
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         Text, nullable=True, comment="Job description (for manual entries)"
     )
     status: Mapped[str] = mapped_column(
@@ -354,6 +514,7 @@ class Application(Base):
     )
 
     # Application content and materials
+<<<<<<< HEAD
     cover_letter: Mapped[Optional[str]] = mapped_column(
         Text, nullable=True, comment="Generated cover letter content in HTML or plain text"
     )
@@ -370,6 +531,24 @@ class Application(Base):
         JSON, default=dict, nullable=False, comment="Structured application form data"
     )
     custom_answers: Mapped[Dict[str, str]] = mapped_column(
+=======
+    cover_letter: Mapped[str | None] = mapped_column(
+        Text, nullable=True, comment="Generated cover letter content in HTML or plain text"
+    )
+    resume: Mapped[dict[str, Any] | None] = mapped_column(
+        JSON, nullable=True, comment="Resume data in structured format (JSON)"
+    )
+    resume_text: Mapped[str | None] = mapped_column(
+        Text, nullable=True, comment="Plain text version of the resume for search and analysis"
+    )
+    resume_file: Mapped[str | None] = mapped_column(
+        String(500), nullable=True, comment="Path or URL to the resume file"
+    )
+    application_form: Mapped[dict[str, Any]] = mapped_column(
+        JSON, default=dict, nullable=False, comment="Structured application form data"
+    )
+    custom_answers: Mapped[dict[str, str]] = mapped_column(
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         JSON,
         default=dict,
         nullable=False,
@@ -377,6 +556,7 @@ class Application(Base):
     )
 
     # Application metadata
+<<<<<<< HEAD
     applied_date: Mapped[Optional[datetime]] = mapped_column(
         DateTime, nullable=True, comment="When the application was submitted to the employer"
     )
@@ -384,14 +564,30 @@ class Application(Base):
         DateTime, nullable=True, comment="Scheduled date for following up on this application"
     )
     source: Mapped[Optional[str]] = mapped_column(
+=======
+    applied_date: Mapped[datetime | None] = mapped_column(
+        DateTime, nullable=True, comment="When the application was submitted to the employer"
+    )
+    follow_up_date: Mapped[datetime | None] = mapped_column(
+        DateTime, nullable=True, comment="Scheduled date for following up on this application"
+    )
+    source: Mapped[str | None] = mapped_column(
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         String(100),
         nullable=True,
         comment="Source of the application (e.g., 'company_website', 'linkedin', 'indeed')",
     )
+<<<<<<< HEAD
     application_url: Mapped[Optional[str]] = mapped_column(
         String(500), nullable=True, comment="URL to track the application in the company's system"
     )
     application_id: Mapped[Optional[str]] = mapped_column(
+=======
+    application_url: Mapped[str | None] = mapped_column(
+        String(500), nullable=True, comment="URL to track the application in the company's system"
+    )
+    application_id: Mapped[str | None] = mapped_column(
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         String(255), nullable=True, comment="Application reference ID in the employer's system"
     )
     is_referred: Mapped[bool] = mapped_column(
@@ -400,15 +596,26 @@ class Application(Base):
         nullable=False,
         comment="Whether the application was submitted with an employee referral",
     )
+<<<<<<< HEAD
     referral_contact: Mapped[Optional[Dict[str, Any]]] = mapped_column(
         JSON, nullable=True, comment="Information about the person who referred this application"
     )
     notes: Mapped[Optional[str]] = mapped_column(
+=======
+    referral_contact: Mapped[dict[str, Any] | None] = mapped_column(
+        JSON, nullable=True, comment="Information about the person who referred this application"
+    )
+    notes: Mapped[str | None] = mapped_column(
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         Text,
         nullable=True,
         comment="User notes, reminders, or additional information about this application",
     )
+<<<<<<< HEAD
     application_metadata: Mapped[Dict[str, Any]] = mapped_column(
+=======
+    application_metadata: Mapped[dict[str, Any]] = mapped_column(
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         JSON,
         default=dict,
         nullable=False,
@@ -426,7 +633,11 @@ class Application(Base):
         back_populates="applications",
         lazy="selectin",  # Optimize for frequent job data access
     )
+<<<<<<< HEAD
     interactions: Mapped[List["AIInteraction"]] = relationship(
+=======
+    interactions: Mapped[list["AIInteraction"]] = relationship(
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         "AIInteraction",
         back_populates="application",
         cascade="all, delete-orphan",
@@ -465,7 +676,11 @@ class AIInteraction(Base):
     )
 
     # Optional user reference
+<<<<<<< HEAD
     user_id: Mapped[Optional[str]] = mapped_column(
+=======
+    user_id: Mapped[str | None] = mapped_column(
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         String(36),
         ForeignKey("users.id", ondelete="CASCADE"),
         nullable=True,
@@ -473,7 +688,11 @@ class AIInteraction(Base):
         comment="Reference to the user who initiated the interaction",
     )
 
+<<<<<<< HEAD
     application_id: Mapped[Optional[str]] = mapped_column(
+=======
+    application_id: Mapped[str | None] = mapped_column(
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         String(36),
         ForeignKey("applications.id", ondelete="CASCADE"),
         nullable=True,
@@ -486,17 +705,29 @@ class AIInteraction(Base):
     )
 
     # Model and performance metrics
+<<<<<<< HEAD
     model_used: Mapped[Optional[str]] = mapped_column(
+=======
+    model_used: Mapped[str | None] = mapped_column(
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         String(100),
         nullable=True,
         comment="Identifier of the AI model used (e.g., 'gemini-3.0-flash', 'gemini-2.5-pro')",
     )
+<<<<<<< HEAD
     tokens_used: Mapped[Optional[int]] = mapped_column(
+=======
+    tokens_used: Mapped[int | None] = mapped_column(
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         Integer,
         nullable=True,
         comment="Total number of tokens used in the interaction (input + output)",
     )
+<<<<<<< HEAD
     response_time_ms: Mapped[Optional[int]] = mapped_column(
+=======
+    response_time_ms: Mapped[int | None] = mapped_column(
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         Integer, nullable=True, comment="Time taken to receive the response in milliseconds"
     )
 
@@ -510,12 +741,20 @@ class AIInteraction(Base):
         nullable=False,
         comment="Whether the operation completed successfully",
     )
+<<<<<<< HEAD
     error_message: Mapped[Optional[str]] = mapped_column(
+=======
+    error_message: Mapped[str | None] = mapped_column(
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         Text, nullable=True, comment="Error message if the interaction failed"
     )
 
     # User feedback
+<<<<<<< HEAD
     user_feedback: Mapped[Optional[int]] = mapped_column(
+=======
+    user_feedback: Mapped[int | None] = mapped_column(
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         Integer, nullable=True, comment="User rating or feedback score (1-5)"
     )
 
@@ -581,6 +820,7 @@ class AgentSession(Base):
     )
 
     # Agent tracking
+<<<<<<< HEAD
     active_agents: Mapped[List[str]] = mapped_column(
         JSON, default=list, nullable=False, comment="List of currently active agent names"
     )
@@ -588,17 +828,34 @@ class AgentSession(Base):
         JSON, default=list, nullable=False, comment="List of completed agent names"
     )
     agent_results: Mapped[Dict[str, Any]] = mapped_column(
+=======
+    active_agents: Mapped[list[str]] = mapped_column(
+        JSON, default=list, nullable=False, comment="List of currently active agent names"
+    )
+    completed_agents: Mapped[list[str]] = mapped_column(
+        JSON, default=list, nullable=False, comment="List of completed agent names"
+    )
+    agent_results: Mapped[dict[str, Any]] = mapped_column(
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         JSON, default=dict, nullable=False, comment="Results from each agent in the session"
     )
 
     # Session data
+<<<<<<< HEAD
     input_data: Mapped[Dict[str, Any]] = mapped_column(
+=======
+    input_data: Mapped[dict[str, Any]] = mapped_column(
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         JSON,
         default=dict,
         nullable=False,
         comment="Input data and configuration for the session",
     )
+<<<<<<< HEAD
     final_result: Mapped[Dict[str, Any]] = mapped_column(
+=======
+    final_result: Mapped[dict[str, Any]] = mapped_column(
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         JSON, default=dict, nullable=False, comment="Final result and output of the session"
     )
 
@@ -609,20 +866,35 @@ class AgentSession(Base):
         nullable=False,
         comment="When the session was started",
     )
+<<<<<<< HEAD
     completed_at: Mapped[Optional[datetime]] = mapped_column(
+=======
+    completed_at: Mapped[datetime | None] = mapped_column(
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         DateTime(timezone=True),
         nullable=True,
         comment="When the session was completed or terminated",
     )
+<<<<<<< HEAD
     total_duration_ms: Mapped[Optional[int]] = mapped_column(
+=======
+    total_duration_ms: Mapped[int | None] = mapped_column(
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         Integer, nullable=True, comment="Total duration of the session in milliseconds"
     )
 
     # Error tracking
+<<<<<<< HEAD
     error_message: Mapped[Optional[str]] = mapped_column(
         Text, nullable=True, comment="Error message if the session failed"
     )
     error_details: Mapped[Optional[Dict[str, Any]]] = mapped_column(
+=======
+    error_message: Mapped[str | None] = mapped_column(
+        Text, nullable=True, comment="Error message if the session failed"
+    )
+    error_details: Mapped[dict[str, Any] | None] = mapped_column(
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         JSON,
         default=dict,
         nullable=True,
@@ -656,7 +928,11 @@ class AgentSession(Base):
         """
         return self.status == "active"
 
+<<<<<<< HEAD
     def mark_completed(self, result: Optional[Dict[str, Any]] = None) -> None:
+=======
+    def mark_completed(self, result: dict[str, Any] | None = None) -> None:
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         """Mark the session as completed with optional result.
 
         Args:
@@ -667,7 +943,11 @@ class AgentSession(Base):
         if result is not None:
             self.final_result = result
 
+<<<<<<< HEAD
     def mark_failed(self, error: str, details: Optional[Dict[str, Any]] = None) -> None:
+=======
+    def mark_failed(self, error: str, details: dict[str, Any] | None = None) -> None:
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         """Mark the session as failed with an error message.
 
         Args:
@@ -691,7 +971,11 @@ class MarketAnalysis(Base):
         String(100), nullable=False, comment="Industry field (e.g., social_work, finance, etc.)"
     )
     location: Mapped[str] = mapped_column(
+<<<<<<< HEAD
         String(100), nullable=False, comment="Geographic location for this analysis"
+=======
+        String(100), nullable=False, comment="[DEPRECATED_STYLE] location for this analysis"
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     )
     analysis_date: Mapped[datetime] = mapped_column(
         DateTime, default=datetime.utcnow, nullable=False
@@ -701,10 +985,17 @@ class MarketAnalysis(Base):
     total_jobs_found: Mapped[int] = mapped_column(
         Integer, nullable=False, default=0, comment="Total number of jobs found in the analysis"
     )
+<<<<<<< HEAD
     average_salary: Mapped[Optional[int]] = mapped_column(
         Integer, nullable=True, comment="Average salary in USD for the analyzed field and location"
     )
     salary_range: Mapped[Dict[str, Any]] = mapped_column(
+=======
+    average_salary: Mapped[int | None] = mapped_column(
+        Integer, nullable=True, comment="Average salary in USD for the analyzed field and location"
+    )
+    salary_range: Mapped[dict[str, Any]] = mapped_column(
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         JSON,
         default=dict,
         nullable=False,
@@ -712,16 +1003,27 @@ class MarketAnalysis(Base):
     )
 
     # Skill trends
+<<<<<<< HEAD
     top_skills: Mapped[List[str]] = mapped_column(
         JSON, default=list, nullable=False, comment="List of most in-demand skills"
     )
     emerging_skills: Mapped[List[str]] = mapped_column(
+=======
+    top_skills: Mapped[list[str]] = mapped_column(
+        JSON, default=list, nullable=False, comment="List of most in-demand skills"
+    )
+    emerging_skills: Mapped[list[str]] = mapped_column(
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         JSON,
         default=list,
         nullable=False,
         comment="List of emerging skills with growing demand",
     )
+<<<<<<< HEAD
     skill_frequency: Mapped[Dict[str, int]] = mapped_column(
+=======
+    skill_frequency: Mapped[dict[str, int]] = mapped_column(
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         JSON,
         default=dict,
         nullable=False,
@@ -729,13 +1031,21 @@ class MarketAnalysis(Base):
     )
 
     # Company insights
+<<<<<<< HEAD
     top_employers: Mapped[List[Dict[str, Any]]] = mapped_column(
+=======
+    top_employers: Mapped[list[dict[str, Any]]] = mapped_column(
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         JSON,
         default=list,
         nullable=False,
         comment="List of top employers in the field with job counts",
     )
+<<<<<<< HEAD
     company_hiring_trends: Mapped[Dict[str, Any]] = mapped_column(
+=======
+    company_hiring_trends: Mapped[dict[str, Any]] = mapped_column(
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         JSON,
         default=dict,
         nullable=False,
@@ -743,13 +1053,21 @@ class MarketAnalysis(Base):
     )
 
     # Predictions
+<<<<<<< HEAD
     demand_forecast: Mapped[Dict[str, Any]] = mapped_column(
+=======
+    demand_forecast: Mapped[dict[str, Any]] = mapped_column(
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         JSON,
         default=dict,
         nullable=False,
         comment="Future demand forecast for the field and location",
     )
+<<<<<<< HEAD
     competition_level: Mapped[Optional[str]] = mapped_column(
+=======
+    competition_level: Mapped[str | None] = mapped_column(
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         String(50), nullable=True, comment="Level of competition (low, medium, high)"
     )
 
@@ -807,10 +1125,17 @@ class Cache(Base):
         nullable=False,
         comment="Number of times this cache entry has been accessed",
     )
+<<<<<<< HEAD
     size_bytes: Mapped[Optional[int]] = mapped_column(
         Integer, nullable=True, comment="Size of the cached value in bytes, used for cache eviction"
     )
     user_id: Mapped[Optional[str]] = mapped_column(
+=======
+    size_bytes: Mapped[int | None] = mapped_column(
+        Integer, nullable=True, comment="Size of the cached value in bytes, used for cache eviction"
+    )
+    user_id: Mapped[str | None] = mapped_column(
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         String(36),
         ForeignKey("users.id", ondelete="CASCADE"),
         nullable=True,

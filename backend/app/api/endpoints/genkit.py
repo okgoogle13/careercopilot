@@ -2,6 +2,7 @@
 API Endpoints for Genkit AI Flows
 """
 
+<<<<<<< HEAD
 from typing import Any, Dict, List, Optional
 
 from fastapi import APIRouter, HTTPException, status
@@ -29,11 +30,40 @@ from app.genkit_flows.unified_job_analyzer import (
 )
 from app.core.genkit_init import is_genkit_enabled
 
+=======
+from typing import Any
+
+from app.genkit_flows.company_context import (
+    CompanyContext,
+    generate_company_context,
+)
+from app.genkit_flows.ksc_generator import (
+    STAR_Response,
+    generateKscResponse,
+)
+from app.genkit_flows.resume_optimizer import (
+    OptimizedResume,
+    optimize_resume,
+)
+from app.genkit_flows.smart_cover_letter_system import (
+    SmartCoverLetter,
+    generate_smart_cover_letter,
+)
+from app.genkit_flows.unified_job_analyzer import (
+    UnifiedJobAnalysis,
+    analyze_job_from_url,
+)
+from fastapi import APIRouter, HTTPException, status
+from pydantic import BaseModel
+
+from app.core.genkit import is_genkit_enabled
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 router = APIRouter()
 
 
 class CoverLetterRequest(BaseModel):
+<<<<<<< HEAD
     candidate_profile: Dict[str, Any]
     job_description: str
     company_info: Optional[Dict[str, Any]] = None
@@ -44,6 +74,18 @@ class CoverLetterRequest(BaseModel):
 
 class KSCRequest(BaseModel):
     user_profile_data: Dict[str, Any]
+=======
+    candidate_profile: dict[str, Any]
+    job_description: str
+    company_info: dict[str, Any] | None = None
+    style: str = "professional"
+    format_type: str = "full_letter"
+    special_instructions: str | None = None
+
+
+class KSCRequest(BaseModel):
+    user_profile_data: dict[str, Any]
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     ksc_statement: str
 
 
@@ -75,7 +117,11 @@ async def generate_cover_letter_endpoint(request: CoverLetterRequest) -> SmartCo
     except Exception as e:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+<<<<<<< HEAD
             detail=f"Cover letter generation failed: {str(e)}",
+=======
+            detail=f"Cover letter generation failed: {e!s}",
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         )
 
 
@@ -102,13 +148,21 @@ async def generate_ksc_endpoint(request: KSCRequest) -> STAR_Response:
     except Exception as e:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+<<<<<<< HEAD
             detail=f"KSC generation failed: {str(e)}",
+=======
+            detail=f"KSC generation failed: {e!s}",
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         )
 
 
 class OptimizeResumeRequest(BaseModel):
     resume_text: str
+<<<<<<< HEAD
     missing_keywords: List[str]
+=======
+    missing_keywords: list[str]
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     job_description: str
 
 
@@ -140,7 +194,11 @@ async def analyze_job_url_endpoint(request: AnalyzeJobUrlRequest) -> UnifiedJobA
     except Exception as e:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+<<<<<<< HEAD
             detail=f"Job URL analysis failed: {str(e)}",
+=======
+            detail=f"Job URL analysis failed: {e!s}",
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         )
 
 
@@ -167,7 +225,11 @@ async def optimize_resume_endpoint(request: OptimizeResumeRequest) -> OptimizedR
     except Exception as e:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+<<<<<<< HEAD
             detail=f"Resume optimization failed: {str(e)}",
+=======
+            detail=f"Resume optimization failed: {e!s}",
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         )
 
 
@@ -193,5 +255,9 @@ async def get_company_context_endpoint(request: CompanyContextRequest) -> Compan
     except Exception as e:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+<<<<<<< HEAD
             detail=f"Company context generation failed: {str(e)}",
+=======
+            detail=f"Company context generation failed: {e!s}",
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         )

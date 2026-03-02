@@ -1,0 +1,88 @@
+# Example GitHub Actions workflow for Docker build and push
+# This demonstrates the correct regional configuration for us-central1
+
+name: Build and Push Docker Images
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+env:
+  PROJECT_ID: careercopilot-468811
+  REGION: us-central1
+  REGISTRY: us-central1-docker.pkg.dev
+  REPOSITORY: careercopilot
+
+jobs:
+  docker-build-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Setup Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Configure Docker for Artifact Registry
+        run: |
+          gcloud auth configure-docker ${{ env.REGISTRY }}
+
+      - name: Build Docker Images
+        run: |
+          # Backend image
+          docker build \
+            -t ${{ env.REGISTRY }}/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/backend:${{ github.sha }} \
+            -t ${{ env.REGISTRY }}/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/backend:latest \
+            ./backend
+
+          # You can add more images here (e.g., frontend if needed)
+
+      - name: Push Docker Images
+        run: |
+          # Push backend image with both tags
+          docker push ${{ env.REGISTRY }}/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/backend:${{ github.sha }}
+          docker push ${{ env.REGISTRY }}/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/backend:latest
+
+      - name: Deploy to Cloud Run (if main branch)
+        if: github.ref == 'refs/heads/main'
+        run: |
+          gcloud run deploy careercopilot-backend \
+            --image ${{ env.REGISTRY }}/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/backend:${{ github.sha }} \
+            --platform managed \
+            --region ${{ env.REGION }} \
+            --project ${{ env.PROJECT_ID }} \
+            --allow-unauthenticated \
+            --timeout 1200s \
+            --cpu 2 \
+            --memory 4Gi \
+            --min-instances 1 \
+            --max-instances 100
+
+  # Health check after deployment
+  health-check:
+    needs: docker-build-push
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Health Check
+        run: |
+          # Wait for deployment to be ready
+          sleep 30
+
+          # Check service health
+          SERVICE_URL=$(gcloud run services describe careercopilot-backend \
+            --region=${{ env.REGION }} \
+            --project=${{ env.PROJECT_ID }} \
+            --format='value(status.url)')
+
+          echo "Service URL: $SERVICE_URL"
+          curl -f "$SERVICE_URL/health" || exit 1

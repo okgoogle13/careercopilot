@@ -26,4 +26,8 @@ export function ChartPane({ title, children, className = '' }: ChartPaneProps) {
       </div>
     </div>
   );
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> restoration-KR-Rage-Figma-v2.0

@@ -1,13 +1,26 @@
 ---
 name: pytest-test-scaffolder
-description: Scaffolds pytest unit tests for Python backend functions and classes. Use when creating tests for FastAPI endpoints, services, and utilities.
+description: Scaffolds pytest unit tests for Python backend functions and classes.
+  Use when creating tests for FastAPI endpoints, services, and utilities.
+metadata:
+  legacy_frontmatter:
+    version: 1.0.0
+    tags: []
 ---
 
 # Pytest Test Scaffolder
 
-Generates comprehensive unit tests for Python backend code using pytest with Pydantic validation, Firestore mocking, and Genkit integration testing patterns.
+## Purpose
 
-## Workflow
+Generates comprehensive unit tests for Python backend code using pytest with Pydantic validation, Firestore mocking, and Genkit integration patterns.
+
+## When to Use
+
+- When creating unit tests for FastAPI endpoints, services, or utilities.
+- When validating Pydantic models and error handling in the backend.
+- When mocking external services like Firestore or Genkit in tests.
+
+## Process
 
 1. **Identify function/class to test:**
    - Ask for file path (e.g., `backend/app/api/endpoints/profiles.py`)

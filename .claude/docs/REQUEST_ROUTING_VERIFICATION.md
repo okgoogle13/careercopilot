@@ -44,7 +44,7 @@ Look for evidence of routing in recent task logs:
 
 ```bash
 # Check if routing enforcement is active
-grep -r "TASK CLASSIFICATION\|ROUTING PATH\|TOKEN SAVINGS" /Users/okgoogle13/Desktop/careercopilot/.claude --include="*.log" 2>/dev/null | tail -20
+grep -r "TASK CLASSIFICATION\|ROUTING PATH\|TOKEN SAVINGS" /Users/okgoogle13/Projects/careercopilot/.claude --include="*.log" 2>/dev/null | tail -20
 ```
 
 **What to look for:**
@@ -60,7 +60,7 @@ Verify token monitoring is operational:
 
 ```bash
 # Check if token budget config exists
-cat /Users/okgoogle13/Desktop/careercopilot/.claude/config/mcp-gemini-config.json | jq '.agent_config'
+cat /Users/okgoogle13/Projects/careercopilot/.claude/config/mcp-gemini-config.json | jq '.agent_config'
 ```
 
 **Expected output:**
@@ -88,7 +88,7 @@ Verify the routing rules are configured:
 
 ```bash
 # Show routing priorities
-cat /Users/okgoogle13/Desktop/careercopilot/.claude/config/mcp-gemini-config.json | jq '.mcp_servers | keys'
+cat /Users/okgoogle13/Projects/careercopilot/.claude/config/mcp-gemini-config.json | jq '.mcp_servers | keys'
 ```
 
 **Routing Priority Table:**
@@ -147,7 +147,7 @@ Track your token usage across sessions:
 
 ```bash
 # Find token monitoring logs
-find /Users/okgoogle13/Desktop/careercopilot -name "*token*" -o -name "*monitor*" -type f 2>/dev/null | grep -v venv | grep -v node_modules | head -10
+find /Users/okgoogle13/Projects/careercopilot -name "*token*" -o -name "*monitor*" -type f 2>/dev/null | grep -v venv | grep -v node_modules | head -10
 ```
 
 **Key monitoring files:**
@@ -222,7 +222,7 @@ Is the KSC generation flow working?
 
 ```bash
 # Show current session token usage
-python /Users/okgoogle13/Desktop/careercopilot/backend/scripts/monitor_token_usage.py
+python /Users/okgoogle13/Projects/careercopilot/backend/scripts/monitor_token_usage.py
 ```
 
 **Output format:**
@@ -302,7 +302,7 @@ tail -50 /tmp/mcp-*.log 2>/dev/null
 **Command:**
 ```bash
 # Analyze last 5 requests
-python /Users/okgoogle13/Desktop/careercopilot/.claude/tools/analyze_routing_efficiency.py --last 5
+python /Users/okgoogle13/Projects/careercopilot/.claude/tools/analyze_routing_efficiency.py --last 5
 ```
 
 ---

@@ -75,4 +75,8 @@ export const SingleMetric: Story = {
             </BarChart>
         ),
     },
+<<<<<<< HEAD
 };
+=======
+};
+>>>>>>> restoration-KR-Rage-Figma-v2.0

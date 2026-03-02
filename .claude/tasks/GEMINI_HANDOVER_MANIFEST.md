@@ -11,7 +11,7 @@
 
 **Current Status:**
 - Total Components: 46
-- Migrated to Northcote: 8 (17%)
+- Migrated to kerala-rage: 8 (17%)
 - Material 3 Legacy: 9 (20%)
 - Unaddressed: 29 (63%)
 
@@ -82,18 +82,18 @@ For **EACH** component:
    - boxShadow: elevation[4]
    - uniform border-radius: '8px'
 
-   REPLACE WITH (from frontend/src/design-tokens/northcote-tokens.ts):
+   REPLACE WITH (from frontend/src/design-tokens/kerala-rage-tokens.ts):
    - fontFamily: 'Crimson Text' or 'Lora'
-   - ncColor.botanical.wattle or ncColor.botanical.waratah
-   - ncShadow.organic.elevated
-   - border-radius: '40px 12px 40px 12px' (asymmetric/organic)
+   - ncColor.[DEPRECATED_STYLE].wattle or ncColor.[DEPRECATED_STYLE].[DEPRECATED_STYLE]
+   - ncShadow.[DEPRECATED_STYLE].elevated
+   - border-radius: '40px 12px 40px 12px' (asymmetric/[DEPRECATED_STYLE])
    ```
 
 3. **Make edits:**
-   - Search & replace M3 colors → Northcote botanical colors
+   - Search & replace M3 colors → kerala-rage [DEPRECATED_STYLE] colors
    - Search & replace fonts → ncFont* imports
    - Search & replace elevation → ncShadow*
-   - Search & replace uniform corners → organic asymmetric patterns
+   - Search & replace uniform corners → [DEPRECATED_STYLE] asymmetric patterns
 
 4. **Run component tests** (Testing MCP)
    ```bash
@@ -104,7 +104,7 @@ For **EACH** component:
 
 5. **Commit changes**
    ```bash
-   git commit -m "refactor(components): migrate <ComponentName> to Northcote"
+   git commit -m "refactor(components): migrate <ComponentName> to kerala-rage"
    ```
 
 ---
@@ -187,7 +187,7 @@ For **EACH** component:
    - Commit history: Clean (8 commits)
 
    🔄 NEXT STEPS (For Claude Code)
-   - Phase 4: Run northcote-visual-audit on 6 migrated components
+   - Phase 4: Run kerala-rage-visual-audit on 6 migrated components
    - Phase 5: Migrate secondary components (Seed, Vessel, etc.)
    - Phase 6: Audit shared components (11 legacy remaining)
    ```

@@ -1,5 +1,6 @@
 # backend/app/api/v1/analysis.py (Revised for Supabase Alignment & Genkit 0.4.0 fix)
 
+<<<<<<< HEAD
 from fastapi import APIRouter, Body, Depends, HTTPException
 from pydantic import BaseModel, Field
 from typing import Any, Dict, List, Optional, cast
@@ -15,6 +16,18 @@ from app.genkit_flows.resume_optimizer import (
     SkillsGap,
     EnhancedResumeResult,
 )
+=======
+import asyncio
+from concurrent.futures import ThreadPoolExecutor
+from typing import Any
+
+from app.genkit_flows.resume_optimizer import optimizeResume
+from fastapi import APIRouter, Body, Depends, HTTPException
+from pydantic import BaseModel, Field
+
+from app.core.dependencies import get_current_user
+
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 # from app.genkit_flows.corporate_intelligence import research_company, CorporateProfile # Optional: Import if needed
 
 router = APIRouter()
@@ -24,13 +37,18 @@ executor = ThreadPoolExecutor(max_workers=3)
 
 class OptimizeResumeRequest(BaseModel):
     job_description: str
+<<<<<<< HEAD
     company_url: Optional[str] = None
+=======
+    company_url: str | None = None
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     resume_text: str = Field(default="") # Added for direct testing
 
 class OptimizeResumeResponse(BaseModel):
     optimized_text: str
 
 
+<<<<<<< HEAD
 class EnhanceResumeRequest(BaseModel):
     """Request body for POST /enhance-resume."""
     resume_text: str = Field(..., description="Raw resume text to enhance.")
@@ -57,6 +75,8 @@ class EnhanceResumeResponse(BaseModel):
     skills_gap: SkillsGapResponse
 
 
+=======
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 # --- Active Routes ---
 
 @router.post(
@@ -81,7 +101,11 @@ async def optimize_resume(
 
         # Missing keywords would come from ATS score usually.
         # For this simplified version, we'll ask the model to infer them or pass empty.
+<<<<<<< HEAD
         missing_keywords = [] 
+=======
+        missing_keywords = []
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
         # Call optimizer synchronously in threadpool
         loop = asyncio.get_event_loop()
@@ -102,6 +126,7 @@ async def optimize_resume(
         print(f"Resume optimization error: {e}")
         raise HTTPException(
             status_code=500,
+<<<<<<< HEAD
             detail=f"An unexpected error occurred during resume optimization: {str(e)}",
         )
 
@@ -159,6 +184,9 @@ async def enhance_resume(
         raise HTTPException(
             status_code=500,
             detail=f"Resume enhancement failed: {str(e)}",
+=======
+            detail=f"An unexpected error occurred during resume optimization: {e!s}",
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         )
 
 
@@ -170,8 +198,13 @@ async def get_analysis_data(current_user: Any = Depends(get_current_user)):
     # ... Original logic ...
     # Simplified for verify
     return {
+<<<<<<< HEAD
         "atsScoreHistory": [{"month": 'Jan', "score": 82}],
         "applicationStatus": [{"name": 'Applied', "value": 1, "color": '#D0BCFF'}],
+=======
+        "atsScoreHistory": [{"month": "Jan", "score": 82}],
+        "applicationStatus": [{"name": "Applied", "value": 1, "color": "#D0BCFF"}],
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         "keywordMatch": [],
         "matchedKeywords": ["Python", "FastAPI"],
         "missingKeywords": ["Genkit 0.4.0"]

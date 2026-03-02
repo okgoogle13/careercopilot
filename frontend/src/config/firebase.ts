@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /**
  * firebase.ts
  * Initialises the Firebase Web SDK app and exports the auth instance.
@@ -25,3 +26,9 @@ const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
 
 export const auth = getAuth(app);
 export default app;
+=======
+// [DEPRECATED]
+// This file is no longer used by the frontend authentication system.
+// Retained temporarily for reference or potential Genkit utility usage.
+export const auth = null;
+>>>>>>> restoration-KR-Rage-Figma-v2.0

@@ -10,7 +10,11 @@ interface StatusChipProps {
 /**
  * StatusChip - Unified Status Indicator
  * 
+<<<<<<< HEAD
  * Re-routes to StatusBadge for centralized Curio design system management.
+=======
+ * Re-routes to StatusBadge for centralized KrSolidarity design system management.
+>>>>>>> restoration-KR-Rage-Figma-v2.0
  */
 export const StatusChip: React.FC<StatusChipProps> = ({
     needsReview,
@@ -26,4 +30,7 @@ export const StatusChip: React.FC<StatusChipProps> = ({
         />
     );
 };
+<<<<<<< HEAD
 
+=======
+>>>>>>> restoration-KR-Rage-Figma-v2.0

@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 from genkit.ai import Genkit
 from pydantic import BaseModel, ConfigDict
+=======
+from pydantic import BaseModel, ConfigDict
+
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 from app.core.genkit import ai
 from app.schemas.career import CareerDatabase
 

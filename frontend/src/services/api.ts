@@ -14,7 +14,12 @@ import {
   MOCK_USER_PROFILE,
   MOCK_OPPORTUNITIES,
 } from './mockData';
+<<<<<<< HEAD
 import { auth } from '../config/firebase';
+=======
+import { syncEngine } from '../lib/syncEngine';
+import { supabase } from '../config/supabase';
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 // Configuration
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080/api';
@@ -24,6 +29,7 @@ const USE_MOCK = import.meta.env.VITE_USE_MOCK_API !== 'false';
 // Simulate API delay
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
+<<<<<<< HEAD
 // In-memory state to persist changes during session (for mock mode)
 let applications = [...MOCK_APPLICATIONS];
 let documents = [...MOCK_DOCUMENTS];
@@ -40,10 +46,51 @@ export const mockApi = {
   async getApplications(): Promise<Application[]> {
     await delay(500);
     return applications;
+=======
+const getAuthToken = async () => {
+    // In dev mode with mock api enabled, return a dummy token
+    if (import.meta.env.DEV && import.meta.env.VITE_USE_MOCK_API !== 'false') {
+        return 'dev-token';
+    }
+    
+    // Get session from Supabase client
+    const { data } = await supabase.auth.getSession();
+    return data.session?.access_token || '';
+};
+
+// Keys for syncEngine
+const APPS_KEY = 'persistent_applications';
+const OPP_KEY = 'persistent_opportunities';
+const KSC_DRAFT_KEY = 'persistent_ksc_draft';
+const PROFILE_KEY = 'persistent_user_profile';
+
+export interface KSCDraft {
+  criteria: string;
+  star: {
+    situation: string;
+    task: string;
+    action: string;
+    result: string;
+  };
+  step: number;
+}
+
+export const mockApi = {
+  async getApplications(): Promise<Application[]> {
+    await delay(500);
+    let apps = await syncEngine.get<Application[]>(APPS_KEY);
+    if (!apps) {
+      // Seed with initial mock data
+      apps = [...MOCK_APPLICATIONS];
+      await syncEngine.set(APPS_KEY, apps);
+    }
+    return apps;
+>>>>>>> restoration-KR-Rage-Figma-v2.0
   },
 
   async updateApplicationStatus(id: number | string, currentStep: number): Promise<Application> {
     await delay(500);
+<<<<<<< HEAD
     const appIndex = applications.findIndex((a) => a.id === id);
     if (appIndex === -1) throw new Error('Application not found');
 
@@ -52,21 +99,49 @@ export const mockApi = {
       currentStep,
     };
     return applications[appIndex];
+=======
+    const apps = await this.getApplications();
+    const appIndex = apps.findIndex((a) => a.id === id);
+    if (appIndex === -1) throw new Error('Application not found');
+
+    apps[appIndex] = {
+      ...apps[appIndex],
+      currentStep,
+    };
+    await syncEngine.set(APPS_KEY, apps);
+    return apps[appIndex];
+>>>>>>> restoration-KR-Rage-Figma-v2.0
   },
 
   async getDocuments(): Promise<Document[]> {
     await delay(500);
+<<<<<<< HEAD
     return documents;
+=======
+    return MOCK_DOCUMENTS;
+>>>>>>> restoration-KR-Rage-Figma-v2.0
   },
 
   async getUserStats(): Promise<UserStats> {
     await delay(300);
+<<<<<<< HEAD
     return MOCK_USER_STATS;
+=======
+    const apps = await this.getApplications();
+    return {
+      ...MOCK_USER_STATS,
+      activeApplications: apps.length,
+    };
+>>>>>>> restoration-KR-Rage-Figma-v2.0
   },
 
   async getKSCResponses(): Promise<KSCResponse[]> {
     await delay(500);
+<<<<<<< HEAD
     return kscResponses;
+=======
+    return MOCK_KSC_RESPONSES;
+>>>>>>> restoration-KR-Rage-Figma-v2.0
   },
 
   async generateKSCResponse(
@@ -75,15 +150,21 @@ export const mockApi = {
   ): Promise<KSCResponse> {
     await delay(2000); // Longer delay for "AI generation"
 
+<<<<<<< HEAD
     // Simulation of AI generation (responseText logic removed as it was unused)
 
+=======
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     const newResponse: KSCResponse = {
       id: Date.now(),
       criteria,
       response: `Based on the selection criteria you provided, here's a tailored response:\n\n${criteria}\n\nI have demonstrated extensive experience in this area through my work at... (Generated ${new Date().toLocaleTimeString()})`,
       dateGenerated: new Date().toISOString(),
     };
+<<<<<<< HEAD
     kscResponses = [newResponse, ...kscResponses];
+=======
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     return newResponse;
   },
 
@@ -93,13 +174,47 @@ export const mockApi = {
   },
 
   async getUserProfile(): Promise<UserProfile> {
+<<<<<<< HEAD
     await delay(300);
     return MOCK_USER_PROFILE;
+=======
+    const profile = await syncEngine.get<UserProfile>(PROFILE_KEY);
+    if (!profile) {
+      await syncEngine.set(PROFILE_KEY, MOCK_USER_PROFILE);
+      return MOCK_USER_PROFILE;
+    }
+    return profile;
+  },
+
+  async saveUserProfile(profile: UserProfile): Promise<void> {
+    await syncEngine.set(PROFILE_KEY, profile);
+>>>>>>> restoration-KR-Rage-Figma-v2.0
   },
 
   async getOpportunities(): Promise<Opportunity[]> {
     await delay(500);
+<<<<<<< HEAD
     return MOCK_OPPORTUNITIES;
+=======
+    let opps = await syncEngine.get<Opportunity[]>(OPP_KEY);
+    if (!opps) {
+      opps = [...MOCK_OPPORTUNITIES];
+      await syncEngine.set(OPP_KEY, opps);
+    }
+    return opps;
+  },
+
+  async saveKSCDraft(draft: KSCDraft): Promise<void> {
+    await syncEngine.set(KSC_DRAFT_KEY, draft);
+  },
+
+  async getKSCDraft(): Promise<KSCDraft | null> {
+    return await syncEngine.get<KSCDraft>(KSC_DRAFT_KEY);
+  },
+
+  async clearKSCDraft(): Promise<void> {
+    await syncEngine.delete(KSC_DRAFT_KEY);
+>>>>>>> restoration-KR-Rage-Figma-v2.0
   },
 };
 
@@ -189,6 +304,25 @@ export const realApi = {
     if (!response.ok) throw new Error('Failed to fetch opportunities');
     return await response.json();
   },
+<<<<<<< HEAD
+=======
+
+  async saveKSCDraft(draft: KSCDraft): Promise<void> {
+    return mockApi.saveKSCDraft(draft);
+  },
+
+  async getKSCDraft(): Promise<KSCDraft | null> {
+    return mockApi.getKSCDraft();
+  },
+
+  async clearKSCDraft(): Promise<void> {
+    return mockApi.clearKSCDraft();
+  },
+
+  async saveUserProfile(profile: UserProfile): Promise<void> {
+    return mockApi.saveUserProfile(profile);
+  },
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 };
 
 // Export the selected API implementation

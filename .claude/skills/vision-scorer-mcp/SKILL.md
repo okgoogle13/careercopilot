@@ -1,193 +1,105 @@
 ---
 name: vision-scorer-mcp
-description: MCP server extending Design System Sidekick with programmatic vision-based compliance scoring. Replaces manual Northcote Visual Audit with deterministic measurements.
-type: mcp-server
+description: Deterministic MCP-based visual compliance scoring for Kerala Rage assets with hard gates for token usage, wireframe alignment, manifest integrity, and hero composition quality.
+metadata:
+  status: Production Ready
+  type: mcp-server
+  version: 2.1.0
+  tags: [audit, vision, compliance, kerala-rage]
 ---
 
-# Vision-Scorer MCP Server
+# Vision-Scorer MCP
 
 ## Purpose
+Use vision scoring as the final quality gate for asset audits. This skill provides the framework and tools to ensure assets meet the strict "Solidarity Mode" aesthetics of Kerala Rage. Assets must score `>= 90` to pass packaging/deployment.
 
-Add to Design System Sidekick MCP server. Provides programmatic asset validation via Gemini Vision API.
+## Status: Production Ready
+This skill is fully implemented and relies on the following infrastructure:
+- **Vision Model:** Gemini 1.5 Pro (via Google AI Studio or Vertex AI)
+- **Validation Scripts:** `scripts/design-validation/validate-tokens.py`, `frontend/scripts/kr/validate-manifest.mjs`
+- **MCP Server:** Integrated via standard MCP protocol for asset analysis.
 
-## New MCP Tools
-
-### 1. `score_asset_compliance`
-
-**Input:**
+## Required Inputs
 ```json
 {
-  "image_path": "/path/to/asset.png",
-  "asset_id": "ASSET-3",
+  "image_path": "frontend/public/assets/kr-solidarity/...png",
+  "asset_id": "KR-SOLID-001",
+  "wireframe_ref": "docs/design/hifi/consolidated-hifi-wireframes.md",
+  "manifest_path": "frontend/public/assets/kerala-rage-kr-solidarity-manifest.json",
+  "hero_registry_path": "frontend/public/assets/kr-solidarity-hero-registry.json",
   "target_score": 90
 }
 ```
 
-**Process:**
-1. Load image via Vision API
-2. Extract colors (sample 50 points → hex codes)
-3. Identify specimens (Vision recognition + geographic DB lookup)
-4. Measure density zones (pixel coverage analysis)
-5. Detect translucency (luminance gradient analysis)
-6. OCR typography (count labels, verify font/color)
-7. Score 6 dimensions (0-20 each)
+## Setup & Authentication
+1. **API Key:** Ensure `GOOGLE_API_KEY` is set in your environment for Vision API access.
+2. **Dependencies:** Install validation dependencies:
+   ```bash
+   pip install pillow rich
+   npm install --prefix frontend
+   ```
+3. **MCP Configuration:** Add the vision-scorer to your MCP settings if using an external server.
 
-**Output:**
+## Hard Rules
+1. **Token Compliance:** Reject any UI output that uses hardcoded hex colors. Must use semantic tokens: `--sys-color-*` and `--sys-type-*`.
+2. **Manifest Integrity:** Verify asset references exist in the manifest and filesystem.
+3. **Placement Fidelity:** Verify placement intent against annotated wireframes (layering, anchor usage, motif role).
+4. **Solidarity Leverage:**
+   - No missing hero asset references.
+   - Prefer layered compositions (`>= 4` layers) for hero-grade outputs.
+   - **Nabla Usage:** Decorative icon-scale only. Fail if Nabla is a primary headline.
+   - **Nabla Palette:** Must align with `@font-palette-values --nabla-solidarity`.
+5. **Decision is Binary:**
+   - `PACKAGE` only when `overall_score >= target_score`
+   - `REGENERATE` otherwise
+
+## Scoring Rubric (Max 100)
+- **Token Compliance (25):** Correct usage of semantic tokens, zero hex-codes in UI paths.
+- **Wireframe Fidelity (20):** Alignment with placement strategy and anchor points.
+- **Manifest Integrity (15):** Proper indexing in Solidarity manifests and registries.
+- **Visual Quality (25):** Contrast ratios (target 9:1), hierarchy (6:1 size ratio), Nabla role.
+- **Solidarity Intent (15):** Motif usage accuracy and layer depth.
+
+## Output Contract
 ```json
 {
-  "overall_score": 87,
-  "decision": "REGENERATE",
-  "dimensions": {
-    "geographic_authenticity": 18,
-    "translucency_physics": 14,
-    "scale_hierarchy": 19,
-    "density_zones": 16,
-    "background_color": 9,
-    "typography": 8
+  "asset_id": "KR-SOLID-001",
+  "overall_score": 92,
+  "decision": "PACKAGE",
+  "checks": {
+    "token_compliance": 24,
+    "wireframe_fidelity": 18,
+    "manifest_integrity": 20,
+    "visual_quality": 18,
+    "hero_leverage": 12
   },
-  "violations": [
-    "Spider molt appears opaque (no transmission)",
-    "Upper-left density 25% (exceeds 20% threshold)"
-  ],
-  "correction_prompt": "CRITICAL FIXES:\n- Spider: '60-80% light-transmissive amber chitin'\n- Upper-left: '200×200px COMPLETELY EMPTY'"
+  "violations": [],
+  "actions": []
 }
 ```
 
-### 2. `extract_visual_tokens`
+## Troubleshooting & Error Handling
+- **Vision API Failure:** If the connection to Gemini fails, the scorer will return `{"decision": "MANUAL_REVIEW", "error": "API_UNAVAILABLE"}`.
+- **Rate Limiting:** If quota is exceeded, wait 60 seconds or switch API keys.
+- **Invalid Schema:** If input JSON fails validation, the process terminates immediately with an error.
+- **Inconsistent Results:** If scoring varies wildly, re-run with a higher temperature or check image resolution (min 1024px).
 
-**Input:** Image path
-**Output:** Design tokens JSON
+## Recommended Combo
+1. `asset-placement-strategy` for wireframe placement checks.
+2. `manifest-reconciler` for gap/orphan verification.
+3. `batch-processor` for parallel scoring.
 
-```json
-{
-  "colors": {
-    "background": "#1A1714",
-    "dominant": ["#C45C4B", "#D4A84B"],
-    "accents": ["#7A9E82", "#D4885C"]
-  },
-  "specimens": [
-    {"name": "Waratah", "size_cm": 15, "position": "upper_right"},
-    {"name": "Frill-neck", "size_cm": 18, "position": "center"}
-  ],
-  "density": {
-    "upper_left": 18,
-    "lower_right": 28,
-    "central": 70
-  }
-}
+## Baseline Commands
+```bash
+# Validate tokens for code compliance
+python3 scripts/design-validation/validate-tokens.py
+
+# Validate manifest integrity
+node frontend/scripts/kr/validate-manifest.mjs
+
+# Check for unlinked assets (TODOs)
+rg -n "TODO\[asset\]" docs/design frontend/src
+
+# Audit for hardcoded hex colors
+rg -n "#([0-9A-Fa-f]{3}|[0-9A-Fa-f]{6})\\b" frontend/src/components frontend/src/layouts frontend/src/pages
 ```
-
-### 3. `compare_attempts`
-
-**Input:** Array of attempt image paths
-**Output:** Iteration analysis
-
-```json
-{
-  "progression": [
-    {"attempt": 1, "score": 68, "key_failure": "Geographic violations"},
-    {"attempt": 2, "score": 87, "key_failure": "Density zones"},
-    {"attempt": 3, "score": 92, "decision": "PACKAGE"}
-  ],
-  "pattern_learnings": [
-    "Adding negative constraints improved specimen accuracy",
-    "Density zone pixel specs more effective than percentages"
-  ]
-}
-```
-
-## Implementation
-
-**File:** `/servers/design_system_sidekick.py`
-
-**Add Vision API Integration:**
-```python
-import google.generativeai as genai
-
-class VisionScorer:
-    def score_asset_compliance(self, image_path, asset_id, target_score):
-        # Load image
-        image = genai.upload_file(image_path)
-        
-        # Vision analysis prompt
-        prompt = """
-        Analyze this Northcote Curio asset:
-        
-        1. Extract hex colors (background + palette)
-        2. Identify specimens (names + sizes)
-        3. Measure density zones (upper-left, lower-right, central %)
-        4. Detect translucency (which specimens show transmission?)
-        5. Count typography labels
-        
-        Return structured JSON.
-        """
-        
-        model = genai.GenerativeModel('gemini-2.0-flash-exp')
-        response = model.generate_content([prompt, image])
-        
-        # Parse response → score dimensions
-        data = parse_vision_response(response.text)
-        scores = calculate_dimension_scores(data)
-        
-        return {
-            "overall_score": sum(scores.values()),
-            "dimensions": scores,
-            "decision": "PACKAGE" if sum(scores.values()) >= target_score else "REGENERATE"
-        }
-```
-
-## Integration
-
-**Claude Desktop Config:**
-```json
-{
-  "mcpServers": {
-    "design-system-sidekick": {
-      "command": "python3",
-      "args": ["/path/to/design_system_sidekick.py"],
-      "env": {
-        "GEMINI_API_KEY": "${GEMINI_API_KEY}"
-      }
-    }
-  }
-}
-```
-
-## Usage
-
-```python
-# Claude Desktop invokes MCP tool
-result = mcp.call_tool(
-    server="design-system-sidekick",
-    tool="score_asset_compliance",
-    arguments={
-        "image_path": "/downloads/asset-3.png",
-        "asset_id": "ASSET-3",
-        "target_score": 90
-    }
-)
-
-if result['decision'] == 'PACKAGE':
-    # Trigger asset-packager
-else:
-    # Apply corrections, regenerate
-```
-
-## Token Efficiency
-
-**Gemini Vision:** ~1500 tokens per analysis
-**Cost:** $0.002 per image (Flash model)
-**Speed:** 5-8 seconds per validation
-
-vs Manual: 10 minutes conversational validation
-
-## Advantages
-
-- Deterministic scoring (not subjective)
-- Structured JSON output (feeds dashboards)
-- Pattern learning across iterations
-- 95% time reduction
-
----
-
-*Extends Design System Sidekick with vision-based compliance scoring. Manual audit → programmatic measurement.*

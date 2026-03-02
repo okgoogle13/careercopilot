@@ -1,0 +1,175 @@
+# CareerCopilot Production Monitoring Alerts
+# Prometheus Alert Rules for Critical System Monitoring
+
+groups:
+- name: careercopilot.alerts
+  rules:
+
+  # High-Priority Infrastructure Alerts
+  - alert: ServiceDown
+    expr: up == 0
+    for: 30s
+    labels:
+      severity: critical
+      component: infrastructure
+    annotations:
+      summary: "{{ $labels.instance }} service is down"
+      description: "{{ $labels.job }} on {{ $labels.instance }} has been down for more than 30 seconds"
+
+  - alert: HighMemoryUsage
+    expr: (node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes) / node_memory_MemTotal_bytes * 100 > 85
+    for: 2m
+    labels:
+      severity: warning
+      component: infrastructure
+    annotations:
+      summary: "High memory usage detected"
+      description: "Memory usage is above 85% for more than 2 minutes"
+
+  - alert: HighCPUUsage
+    expr: 100 - (avg by (instance) (rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 80
+    for: 5m
+    labels:
+      severity: warning
+      component: infrastructure
+    annotations:
+      summary: "High CPU usage detected"
+      description: "CPU usage is above 80% for more than 5 minutes"
+
+  - alert: DiskSpaceLow
+    expr: (node_filesystem_avail_bytes{mountpoint="/"} / node_filesystem_size_bytes{mountpoint="/"}) * 100 < 10
+    for: 1m
+    labels:
+      severity: critical
+      component: infrastructure
+    annotations:
+      summary: "Low disk space"
+      description: "Disk space is below 10%"
+
+  # Application-Specific Alerts
+  - alert: BackendHighErrorRate
+    expr: rate(http_requests_total{status=~"5.."}[5m]) / rate(http_requests_total[5m]) * 100 > 5
+    for: 2m
+    labels:
+      severity: critical
+      component: backend
+    annotations:
+      summary: "High backend error rate"
+      description: "Backend error rate is above 5% for more than 2 minutes"
+
+  - alert: BackendHighLatency
+    expr: histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m])) > 2
+    for: 3m
+    labels:
+      severity: warning
+      component: backend
+    annotations:
+      summary: "High backend latency"
+      description: "95th percentile latency is above 2s for more than 3 minutes"
+
+  # Database Alerts
+  - alert: DatabaseConnectionsHigh
+    expr: pg_stat_activity_count > 80
+    for: 2m
+    labels:
+      severity: warning
+      component: database
+    annotations:
+      summary: "High database connections"
+      description: "PostgreSQL connections are above 80"
+
+  - alert: DatabaseReplicationLag
+    expr: pg_replication_lag_seconds > 60
+    for: 1m
+    labels:
+      severity: critical
+      component: database
+    annotations:
+      summary: "Database replication lag high"
+      description: "Replication lag is above 60 seconds"
+
+  # AI Service Alerts
+  - alert: AIServiceHighLatency
+    expr: ai_request_duration_seconds{quantile="0.95"} > 10
+    for: 3m
+    labels:
+      severity: warning
+      component: ai
+    annotations:
+      summary: "AI service high latency"
+      description: "AI service 95th percentile latency is above 10s"
+
+  - alert: AIServiceErrorRate
+    expr: rate(ai_requests_total{status="error"}[5m]) / rate(ai_requests_total[5m]) * 100 > 10
+    for: 2m
+    labels:
+      severity: critical
+      component: ai
+    annotations:
+      summary: "AI service high error rate"
+      description: "AI service error rate is above 10%"
+
+  - alert: AITokenUsageHigh
+    expr: ai_token_usage_hourly > 50000
+    for: 5m
+    labels:
+      severity: warning
+      component: ai
+      cost_impact: high
+    annotations:
+      summary: "High AI token usage detected"
+      description: "Hourly token usage is above 50,000 - potential cost impact"
+
+  # Frontend Alerts (if metrics available)
+  - alert: FrontendHighErrorRate
+    expr: rate(frontend_errors_total[5m]) > 10
+    for: 2m
+    labels:
+      severity: warning
+      component: frontend
+    annotations:
+      summary: "High frontend error rate"
+      description: "Frontend is generating more than 10 errors per second"
+
+  # Firebase Alerts
+  - alert: FirebaseQuotaExceeded
+    expr: firebase_quota_usage > 0.9
+    for: 1m
+    labels:
+      severity: critical
+      component: firebase
+      cost_impact: high
+    annotations:
+      summary: "Firebase quota near limit"
+      description: "Firebase quota usage is above 90%"
+
+  - alert: FirebaseFunctionErrors
+    expr: rate(firebase_function_errors_total[5m]) > 5
+    for: 2m
+    labels:
+      severity: warning
+      component: firebase
+    annotations:
+      summary: "Firebase function errors"
+      description: "Firebase functions are generating more than 5 errors per second"
+
+  # Security Alerts
+  - alert: UnauthorizedAccessAttempts
+    expr: rate(auth_failed_attempts_total[5m]) > 50
+    for: 1m
+    labels:
+      severity: critical
+      component: security
+    annotations:
+      summary: "High failed auth attempts"
+      description: "More than 50 failed authentication attempts per second detected"
+
+  - alert: SuspiciousTraffic
+    expr: rate(http_requests_total{status="403"}[5m]) > 20
+    for: 2m
+    labels:
+      severity: warning
+      component: security
+    annotations:
+      summary: "High 403 error rate"
+      description: "Potentially suspicious traffic - high 403 error rate detected"

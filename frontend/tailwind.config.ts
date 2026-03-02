@@ -1,6 +1,12 @@
 // frontend/tailwind.config.ts
 import type { Config } from 'tailwindcss';
 import tokens from './src/design/tokens/tokens.json';
+<<<<<<< HEAD
+=======
+// @ts-ignore
+import m3Patch from './tailwind-m3-patch.js';
+
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 /**
  * Safely extract token values from DTCG-formatted tokens.json
@@ -47,6 +53,7 @@ const config: Config = {
       },
     },
     extend: {
+<<<<<<< HEAD
       // ============================================
       // COLORS - Northcote Curio Palette
       // ============================================
@@ -64,10 +71,78 @@ const config: Config = {
 
         // Surfaces - Laboratory Mode
         'charcoal-slate': '#16141A', // Retaining specific hex if not in token.json
+=======
+      ...(m3Patch?.theme?.extend || {}),
+      // ============================================
+      // COLORS - kerala-rage kr-solidarity Palette
+
+      // ============================================
+      colors: {
+        // ============================================
+        // KERALA RAGE SEMANTIC COLORS (--sys-color-*)
+        // ============================================
+
+        // Charcoal Background - Foundational canvas
+        'charcoal-background': getValue('sys.color.charcoalBackground.base.$value'),
+
+        // Solidarity Red - Primary CTA
+        'solidarity-red': getValue('sys.color.solidarityRed.base.$value'),
+
+        // Charcoal Red - Errors & warnings
+        'kr-charcoal-red': getValue('sys.color.kr-charcoalRed.base.$value'),
+        'clinical-alert': getValue('sys.color.kr-charcoalRed.base.$value'), // Alias for compatibility
+
+        // Activist Smoke Green - Landscape accents
+        'activist-smoke-green': getValue('sys.color.kr-activistSmokeGreen.base.$value'),
+        'kr-activist-smoke-green': getValue('sys.color.kr-activistSmokeGreen.base.$value'),
+
+        // Signal Green - Accent chips
+        'signal-green': getValue('sys.color.signalGreen.base.$value'),
+
+        // Ink Gold - Halo disks
+        'ink-gold': getValue('sys.color.inkGold.base.$value'),
+        'kr-ink-gold': getValue('sys.color.inkGold.base.$value'),
+
+        // Stencil Yellow - Attention markers
+        'stencil-yellow': getValue('sys.color.stencilYellow.base.$value'),
+
+        // Worker Ash - Primary readable text
+        'worker-ash': getValue('sys.color.worker-ash.base.$value'),
+
+        // Solidarity Smoke Orange - Portrait warmth
+        'solidarity-smoke-orange': getValue('sys.color.solidaritySmokeOrange.base.$value'),
+
+        // Lab Wren Metal Blue - Ripples & accents
+        'lab-wren-metal-blue': getValue('sys.color.labWrenMetalBlue.base.$value'),
+
+        // Asphalt Black - Street textures
+        'asphalt-black': getValue('sys.color.asphaltBlack.base.$value'),
+
+        // Concrete Grey - Borders & urban textures
+        'concrete-grey': getValue('sys.color.concreteGrey.base.$value'),
+
+        // Gum Leaf Green - Flora accents
+        'gum-leaf-green': getValue('sys.color.gumLeafGreen.base.$value'),
+
+        // Ochre Earth - Warm earth tones
+        'ochre-earth': getValue('sys.color.ochreEarth.base.$value'),
+
+        // Paper White - High-contrast text
+        'paper-white': getValue('sys.color.paperWhite.base.$value'),
+
+        // ============================================
+        // LEGACY COMPATIBILITY ALIASES
+        // ============================================
+
+        // Surfaces (charcoal background variants)
+        'charcoal-bark': getValue('sys.color.asphaltBlack.base.$value'),
+        'charcoal-slate': '#16141A', // Legacy fallback
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         'slate-smoke': '#252230',
         'slate-smoke-high': '#32303D',
         'slate-smoke-highest': '#3F3D4A',
 
+<<<<<<< HEAD
         // Primary - Wattle Gold
         'wattle-shadow': getValue('color.families.wattle-gold.darkest'),
         'wattle-gold': getValue('color.semantic.wattle-gold'),
@@ -122,6 +197,51 @@ const config: Config = {
         'glass-lab-surface': 'rgba(245, 242, 235, 0.90)',
         'glass-lab-surface-elevated': 'rgba(255, 255, 255, 0.60)',
         'glass-lab-border': 'rgba(44, 39, 35, 0.08)',
+=======
+        // Concrete grey variants (from steps)
+        'concrete-grey-high': '#C4BDB3', // From concreteGrey steps
+        'concrete-grey-highest': '#E0DBD3',
+        'flannel-dim': '#7D7669',
+        'flannel-faint': '#5C564E',
+
+        // Paper white variants (from steps)
+        'paper-white-dim': '#D4CEC3',
+        'paper-white-aged': '#B8B0A3',
+
+        // Status Colors (Kerala Rage compatible)
+        'ghost-gum': getValue('sys.color.gumLeafGreen.base.$value'), // Use gum leaf
+        'ghost-gum-container': 'rgba(107, 127, 110, 0.15)',
+        'native-violet': '#9B8AAD', // Legacy (consider removing)
+        'native-violet-container': 'rgba(155, 138, 173, 0.15)',
+        'kr-flower-orange': getValue('sys.color.solidaritySmokeOrange.base.$value'), // Use smoke orange
+        'kr-flower-container': 'rgba(218, 139, 72, 0.15)',
+
+        'clinical-sage': getValue('sys.color.gumLeafGreen.base.$value'),
+        'clinical-sage-container': 'rgba(107, 127, 110, 0.12)',
+        'clinical-alert-container': 'rgba(241, 72, 68, 0.12)',
+        'clinical-neutral': '#8A8895',
+        'clinical-neutral-container': 'rgba(138, 136, 149, 0.1)',
+
+        // Etching (Kerala Rage compatible)
+        'etching-line': 'rgba(218, 246, 116, 0.15)', // inkGold based
+        'etching-line-strong': 'rgba(218, 246, 116, 0.25)',
+        'etching-fill': 'rgba(218, 246, 116, 0.05)',
+        'annotation-ink': getValue('sys.color.concreteGrey.base.$value'),
+
+        // Glass effects (Kerala Rage charcoal)
+        'glass-kr-dark-surface': 'rgba(26, 26, 26, 0.70)',
+        'glass-kr-dark-surface-elevated': 'rgba(26, 26, 26, 0.85)',
+        'glass-kr-dark-border': 'rgba(255, 255, 255, 0.08)',
+
+        'glass-lab-surface': 'rgba(245, 240, 232, 0.90)',
+        'glass-lab-surface-elevated': 'rgba(255, 255, 255, 0.60)',
+        'glass-lab-border': 'rgba(44, 39, 35, 0.08)',
+
+        // Aboriginal Flag (restricted use - in-situ only)
+        'aboriginal-flag-red': getValue('sys.color.aboriginalFlagRed.base.$value'),
+        'aboriginal-flag-yellow': getValue('sys.color.aboriginalFlagYellow.base.$value'),
+        'aboriginal-flag-black': getValue('sys.color.aboriginalFlagBlack.base.$value'),
+>>>>>>> restoration-KR-Rage-Figma-v2.0
       },
 
       // ============================================
@@ -131,7 +251,11 @@ const config: Config = {
         // The Bloom - Fraunces variable serif
         display: (getValue('typography.fontFamily.bloom') || '').replace(/'/g, '').split(', '),
 
+<<<<<<< HEAD
         // The Proclamation - Libre Bodoni
+=======
+        // The Proclamation - kr-serif-bold
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         proclamation: (getValue('typography.fontFamily.proclamation') || '')
           .replace(/'/g, '')
           .split(', '),
@@ -151,13 +275,21 @@ const config: Config = {
         annotation: (getValue('typography.fontFamily.annotation') || '')
           .replace(/'/g, '')
           .split(', '),
+<<<<<<< HEAD
+=======
+        nabla: (getValue('typography.fontFamily.colorAccent') || '').replace(/'/g, '').split(', '),
+>>>>>>> restoration-KR-Rage-Figma-v2.0
       },
 
       fontSize: {
         // Direct Mappings if available in new token file, otherwise using fixed scale
         // Note: The new token file uses 'typography.axes' but not detailed Scale/Size map yet
         // defaulting to values from previous config for stability unless verified in token.json
+<<<<<<< HEAD
         'display-lg-gallery': [
+=======
+        'display-lg-kr-dark': [
+>>>>>>> restoration-KR-Rage-Figma-v2.0
           '48px',
           { lineHeight: '1.1', letterSpacing: '-0.02em', fontWeight: '700' },
         ],
@@ -165,7 +297,11 @@ const config: Config = {
           '48px',
           { lineHeight: '1.1', letterSpacing: '-0.02em', fontWeight: '700' },
         ],
+<<<<<<< HEAD
         'display-sm-gallery': [
+=======
+        'display-sm-kr-dark': [
+>>>>>>> restoration-KR-Rage-Figma-v2.0
           '32px',
           { lineHeight: '1.2', letterSpacing: '0', fontWeight: '600' },
         ],
@@ -274,11 +410,19 @@ const config: Config = {
       // BACKGROUND IMAGE
       // ============================================
       backgroundImage: {
+<<<<<<< HEAD
         // Fallbacks as texture paths might need adjustment
         'gallery-texture': 'url("/assets/textures/wallpaper.png")',
         'lab-texture': 'url("/assets/textures/paper-grain.png")',
         'grid-major': 'url("/assets/textures/grid-major.png")',
         'grid-minor': 'url("/assets/textures/grid-minor.png")',
+=======
+        // Updated to Kr-Solidarity standardized assets
+        'kr-dark-texture': 'url("/assets/kr-solidarity/texture/kr-solidarity__substrate__kr-solidarity--texture--melbourne-laneway--v1__v1.png")',
+        'lab-texture': 'url("/assets/kr-solidarity/texture/kr-solidarity__substrate__kr-solidarity--texture--melbourne-laneway--v1__v1.png")',
+        'grid-major': 'url("/assets/kr-solidarity/ui-kit/svg/motifs/kr-solidarity__ui-kit__KR-UI-010__v1.svg")',
+        'grid-minor': 'url("/assets/kr-solidarity/ui-kit/svg/motifs/kr-solidarity__ui-kit__KR-UI-008__v1.svg")',
+>>>>>>> restoration-KR-Rage-Figma-v2.0
       },
     },
   },

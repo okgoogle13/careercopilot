@@ -1,6 +1,7 @@
 
 import asyncio
 import os
+<<<<<<< HEAD
 import shutil
 import sys
 from typing import Optional
@@ -12,6 +13,11 @@ except ImportError:  # pragma: no cover - optional dependency in test/CI
     ClientSession = None
     StdioServerParameters = None
     stdio_client = None
+=======
+
+from app.services.mcp_utils import require_mcp_client
+
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 class PlaywrightService:
     """
@@ -31,8 +37,14 @@ class PlaywrightService:
         Navigates to a URL and returns the page content (HTML text).
         Uses the 'Playwright_navigate' and 'Playwright_get_visible_text' tools.
         """
+<<<<<<< HEAD
         if not ClientSession or not StdioServerParameters or not stdio_client:
             raise RuntimeError("MCP Playwright client not installed")
+=======
+        ClientSession, StdioServerParameters, stdio_client = require_mcp_client(
+            "MCP Playwright client not installed"
+        )
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
         server_params = StdioServerParameters(
             command=self.server_command,
@@ -51,13 +63,22 @@ class PlaywrightService:
                         "playwright_navigate",
                         arguments={
                             "url": url,
+<<<<<<< HEAD
                             "waitUntil": "domcontentloaded" 
+=======
+                            "waitUntil": "domcontentloaded"
+>>>>>>> restoration-KR-Rage-Figma-v2.0
                         }
                     )
 
                     # 2. Extract Visible Text (or HTML if preferred for parsing)
+<<<<<<< HEAD
                     # Getting pure text is often safer for LLMs to process than raw HTML 
                     # unless structure is strictly needed. 
+=======
+                    # Getting pure text is often safer for LLMs to process than raw HTML
+                    # unless structure is strictly needed.
+>>>>>>> restoration-KR-Rage-Figma-v2.0
                     # For extraction tasks, HTML might be better. Let's get HTML for maximum context.
                     result = await session.call_tool(
                         "playwright_get_visible_html", # Assuming this tool exists or similar
@@ -66,7 +87,11 @@ class PlaywrightService:
                              "removeScripts": True
                         }
                     )
+<<<<<<< HEAD
                     
+=======
+
+>>>>>>> restoration-KR-Rage-Figma-v2.0
                     # Fallback if specific tool fails or name differs - check available tools
                     # tools = await session.list_tools()
                     # print(tools)
@@ -74,12 +99,20 @@ class PlaywrightService:
                     # The result structure from call_tool usually has a 'content' list
                     if result.content and len(result.content) > 0:
                         return result.content[0].text
+<<<<<<< HEAD
                     
+=======
+
+>>>>>>> restoration-KR-Rage-Figma-v2.0
                     return ""
 
         except Exception as e:
             # Propagate error with context
+<<<<<<< HEAD
             raise RuntimeError(f"Playwright MCP Service Failed for {url}: {str(e)}") from e
+=======
+            raise RuntimeError(f"Playwright MCP Service Failed for {url}: {e!s}") from e
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 # Simple synchronous wrapper for non-async calling contexts if needed
 def scrape_url_sync(url: str) -> str:

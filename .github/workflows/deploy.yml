@@ -22,8 +22,14 @@ permissions:
   id-token: write
 
 concurrency:
+<<<<<<< HEAD
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
+=======
+  # Prevent concurrent deployments to avoid conflicts
+  group: deploy-${{ github.ref }}-${{ inputs.environment || 'auto' }}
+  cancel-in-progress: false  # Queue deployments instead of canceling
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 env:
   GCP_REGION: us-central1

@@ -5,17 +5,28 @@ This module contains pytest tests that verify the ats_scoring.py Genkit flow
 functionality with mocked AI models.
 """
 
+<<<<<<< HEAD
 from typing import List
 from unittest.mock import AsyncMock, Mock, patch
 
 import pytest
 
 from app.core.enhanced_ai_error_handling import AIOperationResult
+=======
+from unittest.mock import AsyncMock, Mock, patch
+
+import pytest
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 from app.genkit_flows.ats_scoring import AtsResult, ScoreBreakdown, atsScoring
 from app.genkit_flows.extract_job_requirements import JobRequirements
 from app.genkit_flows.extract_resume_entities import ResumeEntities
 from app.genkit_flows.keyword_placer import KeywordPlacementSuggestion
 
+<<<<<<< HEAD
+=======
+from app.core.enhanced_ai_error_handling import AIOperationResult
+
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 class TestAtsScoring:
     """Test suite for the ATS scoring flow."""
@@ -90,7 +101,11 @@ class TestAtsScoring:
         )
 
     @pytest.fixture
+<<<<<<< HEAD
     def mock_keyword_placement_suggestions(self) -> List[KeywordPlacementSuggestion]:
+=======
+    def mock_keyword_placement_suggestions(self) -> list[KeywordPlacementSuggestion]:
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         """Mock keyword placement suggestions."""
         return [
             KeywordPlacementSuggestion(
@@ -107,7 +122,11 @@ class TestAtsScoring:
         sample_job_description: str,
         mock_job_requirements: JobRequirements,
         mock_resume_entities: ResumeEntities,
+<<<<<<< HEAD
         mock_keyword_placement_suggestions: List[KeywordPlacementSuggestion],
+=======
+        mock_keyword_placement_suggestions: list[KeywordPlacementSuggestion],
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     ):
         """
         Test that atsScoring flow returns a response with the expected AtsResult structure.

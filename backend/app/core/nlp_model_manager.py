@@ -17,7 +17,11 @@ import os
 import threading
 import time
 from functools import lru_cache, wraps
+<<<<<<< HEAD
 from typing import Any, Dict, Optional
+=======
+from typing import Any, Optional
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 import psutil
 
@@ -60,8 +64,13 @@ class NLPModelManager:
         if hasattr(self, "_initialized") and self._initialized:
             return
 
+<<<<<<< HEAD
         self._models: Dict[str, Any] = {}
         self._model_info: Dict[str, Dict[str, Any]] = {}
+=======
+        self._models: dict[str, Any] = {}
+        self._model_info: dict[str, dict[str, Any]] = {}
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         self._loading_lock = threading.RLock()
         self._initialized = True
 
@@ -81,7 +90,11 @@ class NLPModelManager:
                     return result
                 except Exception as e:
                     status = "error"
+<<<<<<< HEAD
                     logger.error(f"Error in {endpoint}: {str(e)}")
+=======
+                    logger.error(f"Error in {endpoint}: {e!s}")
+>>>>>>> restoration-KR-Rage-Figma-v2.0
                     raise
                 finally:
                     duration = time.time() - start_time
@@ -161,7 +174,11 @@ class NLPModelManager:
                 return model
 
             except Exception as e:
+<<<<<<< HEAD
                 logger.error(f"Failed to load {model_type} model {model_name}: {str(e)}")
+=======
+                logger.error(f"Failed to load {model_type} model {model_name}: {e!s}")
+>>>>>>> restoration-KR-Rage-Figma-v2.0
                 track_nlp_request("load_model", model_name, "error")
                 raise
 
@@ -184,7 +201,11 @@ class NLPModelManager:
         """
         return self.load_model(model_name, "spacy", force_reload)
 
+<<<<<<< HEAD
     def get_model(self, model_name: str) -> Optional[Any]:
+=======
+    def get_model(self, model_name: str) -> Any | None:
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         """
         Get a cached model by name.
 
@@ -200,11 +221,19 @@ class NLPModelManager:
         """Check if a model is already loaded and cached."""
         return model_name in self._models
 
+<<<<<<< HEAD
     def get_model_info(self, model_name: str) -> Dict[str, Any]:
         """Get information about a cached model."""
         return self._model_info.get(model_name, {})
 
     def list_loaded_models(self) -> Dict[str, Dict[str, Any]]:
+=======
+    def get_model_info(self, model_name: str) -> dict[str, Any]:
+        """Get information about a cached model."""
+        return self._model_info.get(model_name, {})
+
+    def list_loaded_models(self) -> dict[str, dict[str, Any]]:
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         """List all loaded models with their info."""
         return self._model_info.copy()
 
@@ -235,7 +264,11 @@ class NLPModelManager:
             self._model_info.clear()
             logger.info(f"Cleared {model_count} cached models")
 
+<<<<<<< HEAD
     def get_memory_usage(self) -> Dict[str, Any]:
+=======
+    def get_memory_usage(self) -> dict[str, Any]:
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         """Get estimated memory usage of all cached models."""
         total_mb = sum(info.get("memory_usage", 0) for info in self._model_info.values())
 
@@ -247,7 +280,11 @@ class NLPModelManager:
             },
         }
 
+<<<<<<< HEAD
     def health_check(self) -> Dict[str, Any]:
+=======
+    def health_check(self) -> dict[str, Any]:
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         """Perform health check on all cached models."""
         status = {
             "status": "healthy",
@@ -270,7 +307,11 @@ class NLPModelManager:
                     status["models"][model_name] = {"status": "unknown"}
 
             except Exception as e:
+<<<<<<< HEAD
                 issue = f"Model '{model_name}' health check failed: {str(e)}"
+=======
+                issue = f"Model '{model_name}' health check failed: {e!s}"
+>>>>>>> restoration-KR-Rage-Figma-v2.0
                 status["issues"].append(issue)
                 status["models"][model_name] = {"status": "unhealthy", "error": str(e)}
 
@@ -308,7 +349,11 @@ def load_spacy_model(model_name: str = "en_core_web_sm", force_reload: bool = Fa
     return nlp_model_manager.load_spacy_model(model_name, force_reload)
 
 
+<<<<<<< HEAD
 def get_spacy_model(model_name: str = "en_core_web_sm") -> Optional[Any]:
+=======
+def get_spacy_model(model_name: str = "en_core_web_sm") -> Any | None:
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     """Convenience function to get a cached spaCy model."""
     return nlp_model_manager.get_model(model_name)
 
@@ -339,7 +384,11 @@ def preload_models() -> None:
                 logger.info(f"Preloaded {model_type} model: {model_name}")
                 track_nlp_request("preload_models", model_name, "success")
         except Exception as e:
+<<<<<<< HEAD
             logger.error(f"Failed to preload {model_type} model {model_name}: {str(e)}")
+=======
+            logger.error(f"Failed to preload {model_type} model {model_name}: {e!s}")
+>>>>>>> restoration-KR-Rage-Figma-v2.0
             track_nlp_request("preload_models", model_name, "error")
             # Continue with other models even if one fails
 
@@ -351,6 +400,10 @@ def preload_models() -> None:
     )
 
 
+<<<<<<< HEAD
 def health_check_models() -> Dict[str, Any]:
+=======
+def health_check_models() -> dict[str, Any]:
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     """Perform health check on all loaded models."""
     return nlp_model_manager.health_check()

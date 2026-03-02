@@ -1,14 +1,60 @@
 ---
+name: codebase-orchestrator
 description: Multi-MCP deployment tool for Claude Desktop that coordinates filesystem,
   git, and testing servers to assess deployment readiness across build status, test
   coverage, code quality, and component migration progress. Integrates with Compliance-Dashboard
   skill for design system validation.
-name: codebase-orchestrator
+metadata:
+  legacy_frontmatter:
+    version: 1.0.0
+    tags: []
 ---
 
 # Codebase Orchestrator Skill
 
-## Overview
+## System Prompt
+
+> You are the **Codebase Orchestrator** for the CareerCopilot / kerala-rage kr-solidarity codebase.
+>
+> Responsibilities:
+>
+> 1. Use MCP servers (filesystem, git, testing, design-system-sidekick, vision-scorer, task-router, and others configured for this project) to assess the codebase across:
+>    - Build status
+>    - Test coverage and results
+>    - Code quality
+>    - Deployment readiness
+>    - Component migration and design-system compliance
+> 2. Apply the workflow defined in `codebase-orchestrator/SKILL.md` and `USAGE.md`:
+>    - ASSESS → REVIEW → GATE → DELEGATE → TRACK.
+> 3. Never load entire file contents unless specifically required; prefer MCP metadata queries and targeted reads to avoid token bloat.
+> 4. Make explicit decisions: `READY_FOR_DEPLOYMENT`, `READY_WITH_CAUTION`, or `BLOCKED`, with clear rationale.
+>
+> When delegating work for implementation:
+>
+> - Prefer **machine-readable outputs** over prose.
+> - Always include a `handover` object when appropriate, following `HANDOVER_FORMAT.md` v1.0:
+>   - `v`, `target` (use `"gemini-3-pro-mcp"`), `transport` (`fs`, `git`, `test` flags), `budgettokens`, `tasks[]`, `refs`, `recovery`, `checkpoints`.
+> - For queued execution, also create tasks via the **Task-Router MCP**:
+>   - Use `task-router.create_task` to assign tasks to agents like `gemini-code-executor`, `gemini-design-sidekick`, or `codex-cli`.
+>   - For each task, include: `task_id`, `assigned_to`, `priority`, `inputs` (handover slice or task payload), `next_task`, and `next_assigned_to` where relevant.
+>
+> Output format:
+>
+> - Always return a top-level JSON object with:
+>   - `orchestrationsummary`: status, key findings, dimension assessments, recommendations.
+>   - `handover` (optional): when you determine Gemini 3 Pro or other executors should act autonomously.
+>   - `tasks_enqueued` (optional): a list of task-router task descriptors you created or intend to create.
+>
+> Behaviour:
+>
+> - Use MCP servers first for all inspection and metrics.
+> - Do not implement code changes directly; instead, define tasks for IDE/agent execution.
+> - Keep outputs concise and token-efficient, following the size and elimination rules in `HANDOVER_FORMAT.md`.
+> - When blocked or uncertain, escalate clearly and propose remediation tasks instead of guessing.
+> - **Design Workflow 2026 Integration**: Always refer to the [Design Workflow 2026](file:///Users/okgoogle13/Projects/careercopilot/.agent/workflows/design-workflow-2026.md) as the execution standard.
+> - **Variable/Token Sync**: Use `node scripts/sync-tokens-to-figma-vars.mjs` to synchronize verified token changes back to Figma.
+
+## Purpose
 
 Coordinates multiple Model Context Protocol (MCP) servers to provide comprehensive codebase status assessment. Enables deterministic evaluation of deployment readiness by orchestrating:
 
@@ -16,7 +62,7 @@ Coordinates multiple Model Context Protocol (MCP) servers to provide comprehensi
 - **Git MCP**: Version control status and commit history
 - **Testing MCP**: Test coverage metrics and execution status
 
-Used in conjunction with the Compliance-Dashboard skill to track design system maturity across CareerCopilot's Northcote Curio component ecosystem.
+Used in conjunction with the Compliance-Dashboard skill to track design system maturity across CareerCopilot's kerala-rage kr-solidarity component ecosystem.
 
 ## When to Use This Skill
 
@@ -24,26 +70,29 @@ Use Codebase-Orchestrator when you need to:
 
 - **Assess deployment readiness** across build, test, quality, and migration metrics
 - **Coordinate multi-server orchestration** to avoid token bloat from redundant queries
-- **Evaluate component migration progress** from Material 3 to Northcote metaphors
-- **Track design system health** (what percentage of components follow Northcote standards?)
-- **Delegate next-step planning** to IDE agents (Claude Code and similar local CLIs) with comprehensive context
+- **Evaluate component migration progress** from Material 3 to kerala-rage metaphors
+- **Track design system health** (what percentage of components follow kerala-rage standards?)
+- **Delegate next-step planning** to IDE agents (Claude Code, Codex CLI) with comprehensive context
 
-## How It Works
+## Process
 
 The skill operates as an orchestrator that:
 
-1. **Scans codebase** using filesystem MCP to understand structure
-2. **Evaluates git status** using git MCP to track changes and history
-3. **Runs test suite** using testing MCP to assess code quality
-4. **Synthesizes results** into deployment readiness assessment
-5. **Identifies gaps** and recommends next steps for improvement
+1. **SCANS codebase** using filesystem MCP to understand structure.
+2. **EVALUATES git status** using git MCP.
+3. **AUDITS Design Tokens** using `design-system-sidekick`.
+4. **DELEGATES tasks** via `task-router` if gaps are found (e.g., to `codex-cli` for script fixes).
+5. **VERIFIES results** and triggers `scripts/sync-tokens-to-figma-vars.mjs` for high-fidelity handoff.
+6. **SYNTHESIZES results** into deployment readiness assessment.
 
 ## Usage Examples
 
 ### Example 1: Pre-Deployment Assessment
+
 "Run codebase orchestrator to assess if CareerCopilot is ready for production deployment"
 
 Claude will:
+
 1. Check build status
 2. Verify test coverage
 3. Assess code quality metrics
@@ -51,20 +100,24 @@ Claude will:
 5. Report readiness score
 
 ### Example 2: Component Migration Tracking
-"How far along are we with Material 3 → Northcote component migration?"
+
+"How far along are we with Material 3 → kerala-rage component migration?"
 
 Claude will:
+
 1. Scan components directory
 2. Identify legacy Material 3 components (M3Button, M3Card, etc.)
-3. Count migrated Northcote components (Pebble, Stone, Sediment, etc.)
+3. Count migrated kerala-rage components (Pebble, Stone, Sediment, etc.)
 4. Calculate migration percentage
 5. Identify remaining work
 
 ### Example 3: Design System Compliance Integration
+
 "Use codebase orchestrator to feed metrics into the compliance dashboard"
 
 Claude will:
-1. Assess current component compliance with Northcote standards
+
+1. Assess current component compliance with kerala-rage standards
 2. Track trend (improving or diverging?)
 3. Identify high-priority refinement targets
 4. Report progress toward design system maturity
@@ -75,12 +128,12 @@ Claude will:
 
 Evaluates across four dimensions:
 
-| Dimension | What It Checks | Status Indicators |
-|---|---|---|
-| **Build Status** | Codebase compilation, dependency resolution | Green/Yellow/Red |
-| **Test Coverage** | Unit test execution, coverage percentage | % Covered |
-| **Code Quality** | Linting, type safety, common issues | Pass/Fail per metric |
-| **Migration Progress** | Material 3 → Northcote component transformation | % Complete |
+| Dimension              | What It Checks                                  | Status Indicators    |
+| ---------------------- | ----------------------------------------------- | -------------------- |
+| **Build Status**       | Codebase compilation, dependency resolution     | Green/Yellow/Red     |
+| **Test Coverage**      | Unit test execution, coverage percentage        | % Covered            |
+| **Code Quality**       | Linting, type safety, common issues             | Pass/Fail per metric |
+| **Migration Progress** | Material 3 → kerala-rage component transformation | % Complete           |
 
 ### MCP Coordination Strategy
 
@@ -135,12 +188,14 @@ Results are delivered as:
 When invoked for autonomous task handoff to Gemini 3 Pro, orchestrator embeds compact, machine-readable handover data directly in output:
 
 **Usage Pattern:**
+
 ```
 use codebase-orchestrator to assess component migration and prepare handover for gemini-3-pro
 ```
 
 **Embedded Handover Output:**
 Adds `handover` key to standard JSON containing:
+
 - Executable task array (prioritized, with dependencies)
 - Token system references (paths only, no duplication)
 - MCP transport hints (which servers needed)
@@ -148,6 +203,7 @@ Adds `handover` key to standard JSON containing:
 - Progress checkpoints (reporting gates)
 
 **Compact Format Example:**
+
 ```json
 {
   "handover": {
@@ -172,16 +228,16 @@ Adds `handover` key to standard JSON containing:
         "blocking": "Core form input",
         "deps": ["token-system"],
         "transforms": {
-          "M3Color": "ncColor.botanical",
+          "M3Color": "ncColor.[DEPRECATED_STYLE]",
           "fontFamily:Roboto": "ncFont.body",
-          "elevation": "ncShadow.organic"
+          "elevation": "ncShadow.[DEPRECATED_STYLE]"
         },
         "test": "npm test -- --testPathPattern=Lens",
-        "commit_msg": "refactor(components): migrate Lens to Northcote"
+        "commit_msg": "refactor(components): migrate Lens to kerala-rage"
       }
     ],
     "refs": {
-      "tokens": "frontend/src/design-tokens/northcote-tokens.ts",
+      "tokens": "frontend/src/design-tokens/kerala-rage-tokens.ts",
       "examples": ["frontend/src/components/core/Pebble.tsx"]
     },
     "recovery": {
@@ -195,12 +251,14 @@ Adds `handover` key to standard JSON containing:
 ```
 
 **Token Efficiency:**
+
 - Standard orchestrator output: ~1K tokens
 - With embedded handover: ~3K tokens (+2K overhead)
 - vs. separate handover documents: ~15K tokens
 - **Total savings: 87% reduction**
 
 **Workflow:**
+
 1. Orchestrator generates assessment + embedded handover
 2. Gemini 3 Pro receives output via MCP (Filesystem)
 3. Parses `handover.tasks` array (machine-readable)
@@ -213,7 +271,7 @@ Seamlessly coordinates with Compliance-Dashboard which prioritizes components by
 
 ## Examples of What This Skill Reveals
 
-- "85% of components have migrated to Northcote naming conventions"
+- "85% of components have migrated to kerala-rage naming conventions"
 - "Test coverage is 92% but 3 critical paths uncovered"
 - "Build passes but 2 peer dependencies need updating"
 - "Component audit ready; 12 components awaiting visual validation"
@@ -228,7 +286,7 @@ Seamlessly coordinates with Compliance-Dashboard which prioritizes components by
 ## Related Skills
 
 - **Compliance-Dashboard**: Visual tracking of design system health metrics
-- **Northcote-Visual-Audit**: Component visual validation (feeds into compliance tracking)
+- **kerala-rage-Visual-Audit**: Component visual validation (feeds into compliance tracking)
 - **Component-Transformer**: Executes migrations identified by this skill
 
 ---
@@ -236,12 +294,14 @@ Seamlessly coordinates with Compliance-Dashboard which prioritizes components by
 ## Technical Notes
 
 The skill is language-agnostic and works across:
+
 - Python-based codebases
 - TypeScript/JavaScript projects
 - Mixed-language monorepos
 - Multi-package structures
 
 Token efficiency is achieved through:
+
 - Single consolidated query to orchestrate multiple MCPs
 - Batch processing to minimize round-trips
 - Early termination when blocking issues identified
@@ -249,4 +309,4 @@ Token efficiency is achieved through:
 
 ---
 
-*This skill is the foundation for understanding your codebase's state at scale. Use it before major decisions about deployment, migration, or design system evolution.*
+_This skill is the foundation for understanding your codebase's state at scale. Use it before major decisions about deployment, migration, or design system evolution._

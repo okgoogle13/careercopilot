@@ -1,19 +1,14 @@
 {
   "compilerOptions": {
     "module": "commonjs",
-    "moduleResolution": "node",
     "target": "es2020",
     "outDir": "lib",
-    "rootDir": "src",
-    "strict": false,
-    "noImplicitAny": false,
+    "strict": true,
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true,
     "types": ["node", "jest"]
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "lib", "__tests__", "test"]
+  "include": ["src", "__tests__", "test", "*.ts", "*.js"],
+  "exclude": ["node_modules", "lib"]
 }

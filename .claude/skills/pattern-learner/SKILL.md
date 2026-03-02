@@ -1,13 +1,25 @@
 ---
 name: pattern-learner
-description: Self-improving pattern database. Analyzes successful assets (≥95/100) → extracts effective prompt language → abstracts reusable patterns → updates library automatically.
+description: "Self-improving pattern database. Analyzes successful assets (\u2265\
+  95/100) \u2192 extracts effective prompt language \u2192 abstracts reusable patterns\
+  \ \u2192 updates library automatically."
+metadata:
+  legacy_frontmatter:
+    version: 1.0.0
+    tags: []
 ---
 
 # Pattern-Learner Skill
 
-## Trigger
+## Purpose
 
-Asset scores ≥95/100
+Self-improving pattern database that analyzes successful assets (score ≥95) to extract effective prompt language and abstract reusable patterns for the kerala-rage library.
+
+## When to Use
+
+- When an asset achieves a score ≥95, to capture the "winning" prompt language.
+- When needing to update the global pattern library with newly discovered best practices.
+- When analyzing iterations to understand which specific changes drove compliance improvements.
 
 ## Process
 
@@ -15,16 +27,18 @@ Asset scores ≥95/100
 2. Extract language that drove compliance improvement
 3. Abstract reusable pattern from specific instance
 4. Tag effectiveness (high/medium/low based on first-attempt success)
-5. Update `/docs/northcote-asset-generation-patterns.md`
+5. Update `/docs/kerala-rage-asset-generation-patterns.md`
 
 ## Example Learning
 
 **Input:**
+
 - Asset 4 (Wattle + Beetle) scored 96/100 on first attempt
 - Previous generic metallic prompts failed (opaque flat paint)
 - Success prompt: "Faceted geometric surface with prismatic color shift green→gold→copper"
 
 **Extracted Pattern:**
+
 ```markdown
 ## Pattern: Metallic Iridescence (Asset 4, 96/100)
 
@@ -39,6 +53,7 @@ Specifies viewing angle dependence (not flat metallic paint)
 **Effectiveness:** HIGH (validated 1st attempt)
 
 **Apply To:**
+
 - Jewel beetles, metallic spiders, iridescent wings
 ```
 
@@ -85,13 +100,15 @@ Specifies viewing angle dependence (not flat metallic paint)
 ## Efficiency
 
 **Without Learning:**
+
 - Asset 10 requires same trial-error as Asset 1
 - No institutional knowledge accumulation
 
 **With Learning:**
+
 - Asset 10 leverages 9 previous successes
 - First-attempt success rate increases exponentially
 
 ---
 
-*Pattern library evolves with each success. System learns its own best practices.*
+_Pattern library evolves with each success. System learns its own best practices._

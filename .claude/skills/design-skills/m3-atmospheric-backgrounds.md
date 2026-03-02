@@ -88,10 +88,17 @@ This skill implements M3 Expressive background principles:
 }
 ```
 
+<<<<<<< HEAD
 **Organic Blob (Soft, Premium):**
 
 ```css
 .background-organic {
+=======
+**[DEPRECATED_STYLE] Blob (Soft, Premium):**
+
+```css
+.background-[DEPRECATED_STYLE] {
+>>>>>>> restoration-KR-Rage-Figma-v2.0
   background:
     /* Blob 1: Top-right */
     radial-gradient(ellipse 800px 600px at 80% 10%, rgba(var(--sys-color-primary-rgb), 0.1), transparent),
@@ -141,7 +148,11 @@ This skill implements M3 Expressive background principles:
 ```css
 .background-elegant {
   background:
+<<<<<<< HEAD
     /* Soft organic blobs */
+=======
+    /* Soft [DEPRECATED_STYLE] blobs */
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     radial-gradient(ellipse 1000px 800px at 70% 20%, rgba(159, 168, 218, 0.08) 0%, /* Lavender */ transparent 60%),
     radial-gradient(ellipse 800px 1000px at 30% 80%, rgba(255, 112, 67, 0.06) 0%, /* Orange */ transparent 60%),
     /* Subtle texture */ repeating-linear-gradient(0deg, transparent 0px, rgba(0, 0, 0, 0.01) 1px, transparent 2px),

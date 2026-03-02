@@ -106,8 +106,13 @@ npm run dev
 **Visual Elements Present:**
 - ✅ Plus Jakarta Sans typography (verified in browser)
 - ✅ M3 color tokens (`bg-surface`, `text-primary`, etc.) applied
+<<<<<<< HEAD
 - ✅ Organic shapes and gradients in landing page
 - ✅ Glassmorphism effects in components
+=======
+- ✅ [DEPRECATED_STYLE] shapes and gradients in landing page
+- ✅ kr-screenprint effects in components
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 - ✅ Plant illustrations loading (monstera, fiddle leaf, pilea, snake plant)
 
 **Component Rendering:**

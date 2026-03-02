@@ -98,4 +98,8 @@ export const Large: Story = {
     children: 'Large Button',
     size: 'lg',
   },
+<<<<<<< HEAD
 };
+=======
+};
+>>>>>>> restoration-KR-Rage-Figma-v2.0

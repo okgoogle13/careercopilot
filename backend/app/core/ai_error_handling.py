@@ -6,10 +6,18 @@ Provides consistent error handling across all Genkit flows.
 import asyncio
 import logging
 import time
+<<<<<<< HEAD
 from dataclasses import dataclass
 from enum import Enum
 from functools import wraps
 from typing import Any, Callable, Optional, TypeVar, Awaitable, cast, overload
+=======
+from collections.abc import Callable
+from dataclasses import dataclass
+from enum import Enum
+from functools import wraps
+from typing import Any
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 logger = logging.getLogger(__name__)
 
@@ -42,10 +50,17 @@ class AIError(Exception):
 
     message: str
     error_type: AIErrorType
+<<<<<<< HEAD
     original_error: Optional[Exception] = None
     retry_after: Optional[int] = None
 
     def __str__(self) -> str:
+=======
+    original_error: Exception | None = None
+    retry_after: int | None = None
+
+    def __str__(self):
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         return f"{self.error_type.value}: {self.message}"
 
 
@@ -60,6 +75,7 @@ class RetryConfig:
     jitter: bool = True
 
 
+<<<<<<< HEAD
 R = TypeVar("R")
 
 
@@ -67,6 +83,12 @@ class AIOperationHandler:
     """Handles AI operations with error handling and retry logic."""
 
     def __init__(self, retry_config: Optional[RetryConfig] = None) -> None:
+=======
+class AIOperationHandler:
+    """Handles AI operations with error handling and retry logic."""
+
+    def __init__(self, retry_config: RetryConfig | None = None):
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         self.retry_config = retry_config or RetryConfig()
 
     def classify_error(self, error: Exception) -> AIErrorType:
@@ -120,12 +142,16 @@ class AIOperationHandler:
 
         return delay
 
+<<<<<<< HEAD
     async def execute_with_retry(
         self,
         operation: Callable[..., R] | Callable[..., Awaitable[R]],
         *args: Any,
         **kwargs: Any,
     ) -> R:
+=======
+    async def execute_with_retry(self, operation: Callable, *args, **kwargs) -> Any:
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         """
         Execute an AI operation with retry logic.
 
@@ -149,11 +175,17 @@ class AIOperationHandler:
 
                 # Execute the operation
                 if asyncio.iscoroutinefunction(operation):
+<<<<<<< HEAD
                     coro_op = cast(Callable[..., Awaitable[R]], operation)
                     result = await coro_op(*args, **kwargs)
                 else:
                     sync_op = cast(Callable[..., R], operation)
                     result = sync_op(*args, **kwargs)
+=======
+                    result = await operation(*args, **kwargs)
+                else:
+                    result = operation(*args, **kwargs)
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
                 # Validate result
                 if result is None:
@@ -170,7 +202,11 @@ class AIOperationHandler:
                 error_type = self.classify_error(e)
 
                 logger.warning(
+<<<<<<< HEAD
                     f"AI operation failed on attempt {attempt}: {error_type.value} - {str(e)}"
+=======
+                    f"AI operation failed on attempt {attempt}: {error_type.value} - {e!s}"
+>>>>>>> restoration-KR-Rage-Figma-v2.0
                 )
 
                 # Don't retry certain error types
@@ -192,15 +228,23 @@ class AIOperationHandler:
         raise AIError(
             message=(
                 f"Operation failed after {self.retry_config.max_attempts} attempts: "
+<<<<<<< HEAD
                 f"{str(last_error)}"
+=======
+                f"{last_error!s}"
+>>>>>>> restoration-KR-Rage-Figma-v2.0
             ),
             error_type=(self.classify_error(last_error) if last_error else AIErrorType.UNKNOWN),
             original_error=last_error,
         )
 
+<<<<<<< HEAD
     def execute_with_retry_sync(
         self, operation: Callable[..., R], *args: Any, **kwargs: Any
     ) -> R:
+=======
+    def execute_with_retry_sync(self, operation: Callable, *args, **kwargs) -> Any:
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         """Synchronous variant of execute_with_retry for non-async operations."""
         last_error = None
 
@@ -226,7 +270,11 @@ class AIOperationHandler:
                 error_type = self.classify_error(e)
 
                 logger.warning(
+<<<<<<< HEAD
                     f"AI operation (sync) failed on attempt {attempt}: {error_type.value} - {str(e)}"
+=======
+                    f"AI operation (sync) failed on attempt {attempt}: {error_type.value} - {e!s}"
+>>>>>>> restoration-KR-Rage-Figma-v2.0
                 )
 
                 if not self.should_retry(error_type):
@@ -244,16 +292,24 @@ class AIOperationHandler:
         raise AIError(
             message=(
                 f"Operation failed after {self.retry_config.max_attempts} attempts: "
+<<<<<<< HEAD
                 f"{str(last_error)}"
+=======
+                f"{last_error!s}"
+>>>>>>> restoration-KR-Rage-Figma-v2.0
             ),
             error_type=(self.classify_error(last_error) if last_error else AIErrorType.UNKNOWN),
             original_error=last_error,
         )
 
 
+<<<<<<< HEAD
 def with_ai_error_handling(
     retry_config: Optional[RetryConfig] = None,
 ) -> Callable[[Callable[..., Any]], Callable[..., Any]]:
+=======
+def with_ai_error_handling(retry_config: RetryConfig | None = None):
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     """
     Decorator to add error handling and retry logic to AI operations.
 
@@ -267,6 +323,7 @@ def with_ai_error_handling(
             pass
     """
 
+<<<<<<< HEAD
     def decorator(func: Callable[..., Any]) -> Callable[..., Any]:
         if asyncio.iscoroutinefunction(func):
 
@@ -275,15 +332,30 @@ def with_ai_error_handling(
                 handler = AIOperationHandler(retry_config)
                 result = await handler.execute_with_retry(func, *args, **kwargs)
                 return result
+=======
+    def decorator(func: Callable) -> Callable:
+        if asyncio.iscoroutinefunction(func):
+
+            @wraps(func)
+            async def async_wrapper(*args, **kwargs):
+                handler = AIOperationHandler(retry_config)
+                return await handler.execute_with_retry(func, *args, **kwargs)
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
             return async_wrapper
         else:
 
             @wraps(func)
+<<<<<<< HEAD
             def sync_wrapper(*args: Any, **kwargs: Any) -> Any:
                 handler = AIOperationHandler(retry_config)
                 result2 = handler.execute_with_retry_sync(func, *args, **kwargs)
                 return result2
+=======
+            def sync_wrapper(*args, **kwargs):
+                handler = AIOperationHandler(retry_config)
+                return handler.execute_with_retry_sync(func, *args, **kwargs)
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
             return sync_wrapper
 
@@ -326,10 +398,16 @@ patient_handler = AIOperationHandler(RetryConfig(max_attempts=5, max_delay=120.0
 
 
 # Convenience functions
+<<<<<<< HEAD
 async def safe_ai_call(operation: Callable[..., R] | Callable[..., Awaitable[R]], *args: Any, **kwargs: Any) -> R:
     """Execute AI operation with default error handling."""
     result = await default_handler.execute_with_retry(operation, *args, **kwargs)
     return result
+=======
+async def safe_ai_call(operation: Callable, *args, **kwargs) -> Any:
+    """Execute AI operation with default error handling."""
+    return await default_handler.execute_with_retry(operation, *args, **kwargs)
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 
 def create_user_friendly_error(ai_error: AIError) -> str:

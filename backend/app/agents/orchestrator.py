@@ -17,12 +17,20 @@ import logging
 import uuid
 from datetime import datetime, timedelta
 from enum import Enum
+<<<<<<< HEAD
 from typing import Any, Dict, List
+=======
+from typing import Any
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 from app.core.ai_client import get_ai_client
 from app.core.cache_decorators import cached_ai_operation
 from app.core.database import get_db_session
 from app.models.database import AgentSession
+<<<<<<< HEAD
+=======
+
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 from .test_automation_specialist import TestAutomationSpecialistAgent
 
 logger = logging.getLogger(__name__)
@@ -60,7 +68,11 @@ class BaseAgent:
 
         self.ai_client = get_ai_client()
 
+<<<<<<< HEAD
     async def execute(self, context: Dict[str, Any]) -> Dict[str, Any]:
+=======
+    async def execute(self, context: dict[str, Any]) -> dict[str, Any]:
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         """Execute the agent's main task"""
         self.status = AgentStatus.RUNNING
         self.started_at = datetime.utcnow()
@@ -78,6 +90,7 @@ class BaseAgent:
             logger.error(f"Agent {self.name} failed: {e}")
             raise
 
+<<<<<<< HEAD
     async def _run_task(self, context: Dict[str, Any]) -> Dict[str, Any]:
         """Override this method in derived classes"""
         raise NotImplementedError("Derived classes must implement _run_task")
@@ -87,6 +100,17 @@ class BaseAgent:
         return all(dep in completed_agents for dep in self.dependencies)
 
     def get_status_info(self) -> Dict[str, Any]:
+=======
+    async def _run_task(self, context: dict[str, Any]) -> dict[str, Any]:
+        """Override this method in derived classes"""
+        raise NotImplementedError("Derived classes must implement _run_task")
+
+    def can_run(self, completed_agents: list[str]) -> bool:
+        """Check if this agent can run based on dependencies"""
+        return all(dep in completed_agents for dep in self.dependencies)
+
+    def get_status_info(self) -> dict[str, Any]:
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         """Get detailed status information"""
         duration = None
         if self.started_at:
@@ -117,7 +141,11 @@ class JobScoutAgent(BaseAgent):
         self.priority = AgentPriority.HIGH
 
     @cached_ai_operation("job_discovery")
+<<<<<<< HEAD
     async def _run_task(self, context: Dict[str, Any]) -> Dict[str, Any]:
+=======
+    async def _run_task(self, context: dict[str, Any]) -> dict[str, Any]:
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         # user_id = context.get("user_id")  # Available but unused in current implementation
         search_criteria = context.get("search_criteria", {})
 
@@ -142,7 +170,11 @@ class JobScoutAgent(BaseAgent):
             "search_criteria": search_criteria,
         }
 
+<<<<<<< HEAD
     async def _discover_jobs(self, criteria: Dict[str, Any]) -> List[Dict[str, Any]]:
+=======
+    async def _discover_jobs(self, criteria: dict[str, Any]) -> list[dict[str, Any]]:
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         """Simulate job discovery from multiple sources"""
         # In production, this would integrate with:
         # - Seek.com.au API
@@ -170,8 +202,13 @@ class JobScoutAgent(BaseAgent):
         return mock_jobs
 
     async def _analyze_job_relevance(
+<<<<<<< HEAD
         self, job: Dict[str, Any], context: Dict[str, Any]
     ) -> Dict[str, Any]:
+=======
+        self, job: dict[str, Any], context: dict[str, Any]
+    ) -> dict[str, Any]:
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         """Analyze job relevance using AI"""
         # Future: Use this prompt with actual AI analysis
         # user_profile = context.get("user_profile", {})
@@ -219,7 +256,11 @@ class MarketAnalystAgent(BaseAgent):
         self.priority = AgentPriority.MEDIUM
 
     @cached_ai_operation("market_analysis")
+<<<<<<< HEAD
     async def _run_task(self, context: Dict[str, Any]) -> Dict[str, Any]:
+=======
+    async def _run_task(self, context: dict[str, Any]) -> dict[str, Any]:
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         job_data = context.get("job_scout_results", {})
         # user_profile = context.get("user_profile", {})  # Available for future use
 
@@ -245,7 +286,11 @@ class MarketAnalystAgent(BaseAgent):
             "analysis_date": datetime.utcnow().isoformat(),
         }
 
+<<<<<<< HEAD
     async def _analyze_salary_trends(self, job_data: Dict, context: Dict) -> Dict[str, Any]:
+=======
+    async def _analyze_salary_trends(self, job_data: dict, context: dict) -> dict[str, Any]:
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         """Analyze salary trends from job data"""
         jobs = job_data.get("all_jobs", [])
 
@@ -270,7 +315,11 @@ class MarketAnalystAgent(BaseAgent):
 
         return {"error": "No salary data available"}
 
+<<<<<<< HEAD
     async def _analyze_skill_trends(self, job_data: Dict, context: Dict) -> Dict[str, Any]:
+=======
+    async def _analyze_skill_trends(self, job_data: dict, context: dict) -> dict[str, Any]:
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         """Analyze skill requirements trends"""
         # jobs = job_data.get("all_jobs", [])  # Available for future NLP analysis
 
@@ -294,7 +343,11 @@ class MarketAnalystAgent(BaseAgent):
             "skills_gap_analysis": "Strong match for finance background in budgeting and analysis",
         }
 
+<<<<<<< HEAD
     async def _analyze_competition(self, job_data: Dict, context: Dict) -> Dict[str, Any]:
+=======
+    async def _analyze_competition(self, job_data: dict, context: dict) -> dict[str, Any]:
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         """Analyze competition level in the market"""
         # jobs = job_data.get("all_jobs", [])  # Available for future competition analysis
 
@@ -317,7 +370,11 @@ class MarketAnalystAgent(BaseAgent):
 
     async def _generate_market_insights(
         self, salary_data, skills_data, competition_data, context
+<<<<<<< HEAD
     ) -> List[str]:
+=======
+    ) -> list[str]:
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         """Generate actionable market insights"""
         return [
             "Social work roles in Melbourne are experiencing 15% salary growth year-over-year",
@@ -340,7 +397,11 @@ class ApplicationAgent(BaseAgent):
         self.dependencies = ["job_scout", "market_analyst"]
         self.priority = AgentPriority.HIGH
 
+<<<<<<< HEAD
     async def _run_task(self, context: Dict[str, Any]) -> Dict[str, Any]:
+=======
+    async def _run_task(self, context: dict[str, Any]) -> dict[str, Any]:
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         target_jobs = context.get("target_jobs", [])
         user_profile = context.get("user_profile", {})
         market_insights = context.get("market_analyst_results", {})
@@ -365,8 +426,13 @@ class ApplicationAgent(BaseAgent):
         }
 
     async def _generate_job_materials(
+<<<<<<< HEAD
         self, job: Dict, profile: Dict, market_data: Dict
     ) -> Dict[str, Any]:
+=======
+        self, job: dict, profile: dict, market_data: dict
+    ) -> dict[str, Any]:
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         """Generate complete application package for a specific job"""
 
         # Generate cover letter
@@ -389,7 +455,11 @@ class ApplicationAgent(BaseAgent):
             ],
         }
 
+<<<<<<< HEAD
     async def _generate_cover_letter(self, job: Dict, profile: Dict, market_data: Dict) -> str:
+=======
+    async def _generate_cover_letter(self, job: dict, profile: dict, market_data: dict) -> str:
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         """Generate personalized cover letter"""
         # Mock cover letter generation (use actual AI in production)
         career_from = profile.get("career_from", "finance")
@@ -421,7 +491,11 @@ Sincerely,
 [Your Name]
         """.strip()
 
+<<<<<<< HEAD
     async def _generate_email_application(self, job: Dict, profile: Dict) -> Dict[str, str]:
+=======
+    async def _generate_email_application(self, job: dict, profile: dict) -> dict[str, str]:
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         """Generate email application"""
         return {
             "subject": f"Application for {job['title']} - [Your Name]",
@@ -441,7 +515,11 @@ Best regards,
             """.strip(),
         }
 
+<<<<<<< HEAD
     async def _generate_follow_up_templates(self, job: Dict, profile: Dict) -> Dict[str, str]:
+=======
+    async def _generate_follow_up_templates(self, job: dict, profile: dict) -> dict[str, str]:
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         """Generate follow-up email templates"""
         return {
             "one_week": "Professional follow-up after one week",
@@ -458,7 +536,11 @@ class AgentOrchestrator:
         self.session_id = None
         self.user_id = None
 
+<<<<<<< HEAD
     def _initialize_agents(self) -> Dict[str, BaseAgent]:
+=======
+    def _initialize_agents(self) -> dict[str, BaseAgent]:
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         """Initialize all available agents"""
         return {
             "job_scout": JobScoutAgent(),
@@ -468,7 +550,11 @@ class AgentOrchestrator:
             # Add more agents as needed
         }
 
+<<<<<<< HEAD
     async def run_workflow(self, workflow_type: str, context: Dict[str, Any]) -> Dict[str, Any]:
+=======
+    async def run_workflow(self, workflow_type: str, context: dict[str, Any]) -> dict[str, Any]:
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         """Run a complete multi-agent workflow"""
         self.user_id = context.get("user_id")
         self.session_id = str(uuid.uuid4())
@@ -500,7 +586,11 @@ class AgentOrchestrator:
                     session.status = "failed"
             raise
 
+<<<<<<< HEAD
     async def _run_daily_discovery_workflow(self, context: Dict[str, Any]) -> Dict[str, Any]:
+=======
+    async def _run_daily_discovery_workflow(self, context: dict[str, Any]) -> dict[str, Any]:
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         """Run daily job discovery workflow with multiple agents"""
         results = {}
         completed_agents = []
@@ -557,13 +647,21 @@ class AgentOrchestrator:
             "success": len(completed_agents) > 0,
         }
 
+<<<<<<< HEAD
     async def _run_application_prep_workflow(self, context: Dict[str, Any]) -> Dict[str, Any]:
+=======
+    async def _run_application_prep_workflow(self, context: dict[str, Any]) -> dict[str, Any]:
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         """Run application preparation workflow"""
         # Similar to daily discovery but focused on application materials
         # Implementation would follow same pattern
         return {}
 
+<<<<<<< HEAD
     def get_session_status(self, session_id: str) -> Dict[str, Any]:
+=======
+    def get_session_status(self, session_id: str) -> dict[str, Any]:
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         """Get detailed status of a workflow session"""
         with get_db_session() as db:
             session = db.query(AgentSession).filter(AgentSession.id == session_id).first()

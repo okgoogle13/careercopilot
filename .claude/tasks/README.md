@@ -131,7 +131,7 @@
 
 Each component:
 - Read file
-- Replace M3 patterns with Northcote tokens
+- Replace M3 patterns with kerala-rage tokens
 - Run tests
 - Commit
 
@@ -180,7 +180,7 @@ Each component:
 - ✅ frontend/src/components/inputs/Valve.tsx
 - ✅ frontend/src/components/feedback/Signal.tsx
 - ✅ frontend/src/components/containers/Cabinet.tsx
-- ✅ frontend/src/design-tokens/northcote-tokens.ts
+- ✅ frontend/src/design-tokens/kerala-rage-tokens.ts
 
 **Reference components (for patterns):**
 - ✅ frontend/src/components/core/Pebble.tsx (already migrated)
@@ -213,7 +213,7 @@ Each component:
 Claude Code will:
 1. Pull latest changes
 2. Run full test suite locally
-3. Run northcote-visual-audit on 6 components
+3. Run kerala-rage-visual-audit on 6 components
 4. Create PR with Gemini's commits
 5. Plan Phase 4-6 (remaining components)
 

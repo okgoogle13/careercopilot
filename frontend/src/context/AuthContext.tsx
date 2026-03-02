@@ -1,5 +1,6 @@
 /**
  * Authentication Context
+<<<<<<< HEAD
  * Manages global authentication state via Firebase or Offline Mock
  */
 
@@ -27,6 +28,29 @@ export interface User extends Partial<FirebaseUser> {
   // Add any custom fields you expect on top of Firebase User if needed
   role?: string;
   email: string | null;
+=======
+ * Manages global authentication state via Supabase or Offline Mock
+ */
+
+import { User as SupabaseUser } from '@supabase/supabase-js';
+import {
+  ReactNode,
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
+import { supabase } from '../config/supabase';
+
+// Define types locally
+export interface User extends Partial<SupabaseUser> {
+  // Add any custom fields you expect
+  role?: string;
+  email?: string; // Changed to optional/undefined to match Partial<SupabaseUser>
+  // Supabase stores display name in user_metadata
+>>>>>>> restoration-KR-Rage-Figma-v2.0
   displayName: string | null;
   uid: string;
   access_token?: string | null;
@@ -58,6 +82,24 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
+<<<<<<< HEAD
+=======
+  // Helper to map Supabase user to our internal User type
+  const mapSupabaseUser = (sbUser: SupabaseUser | null): User | null => {
+    if (!sbUser) return null;
+    return {
+      ...sbUser,
+      uid: sbUser.id,
+      displayName:
+        sbUser.user_metadata?.full_name ||
+        sbUser.user_metadata?.displayName ||
+        sbUser.email?.split('@')[0] ||
+        null,
+      email: sbUser.email || undefined,
+    };
+  };
+
+>>>>>>> restoration-KR-Rage-Figma-v2.0
   // Monitor auth state
   useEffect(() => {
     if (isOfflineMode) {
@@ -70,6 +112,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       return;
     }
 
+<<<<<<< HEAD
     // CRITICAL FIX: Set a timeout to prevent infinite loading
     // If Firebase doesn't respond in 2 seconds (likely misconfigured), assume no user
     const timeoutId = setTimeout(() => {
@@ -80,12 +123,41 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       clearTimeout(timeoutId); // Clear timeout if auth responds
       setUser(currentUser as User);
+=======
+    // Initial session check
+    const checkSession = async () => {
+      try {
+        const {
+          data: { session },
+        } = await supabase.auth.getSession();
+        if (session?.user) {
+          setUser(mapSupabaseUser(session.user));
+        }
+      } catch (error) {
+        console.error('Error checking initial session:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    checkSession();
+
+    // Subscribe to changes
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange(async (_event, session) => {
+      setUser(mapSupabaseUser(session?.user || null));
+>>>>>>> restoration-KR-Rage-Figma-v2.0
       setLoading(false);
     });
 
     return () => {
+<<<<<<< HEAD
       clearTimeout(timeoutId);
       unsubscribe();
+=======
+      subscription.unsubscribe();
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     };
   }, []);
 
@@ -97,6 +169,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
           uid: 'mock-user-123',
           email,
           displayName: 'Dev User',
+<<<<<<< HEAD
           emailVerified: true,
           isAnonymous: false,
           metadata: {},
@@ -115,6 +188,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
           }),
           reload: async () => { },
           toJSON: () => ({}),
+=======
+>>>>>>> restoration-KR-Rage-Figma-v2.0
           role: 'user',
         } as unknown as User;
         setUser(mockUser);
@@ -123,7 +198,17 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       }
       throw new Error('Invalid credentials');
     }
+<<<<<<< HEAD
     await signInWithEmailAndPassword(auth, email, password);
+=======
+
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (error) throw error;
+>>>>>>> restoration-KR-Rage-Figma-v2.0
   }, []);
 
   const register = useCallback(async (email: string, password: string, displayName: string) => {
@@ -132,6 +217,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         uid: 'mock-user-new-' + Date.now(),
         email,
         displayName: displayName || 'New Dev User',
+<<<<<<< HEAD
         emailVerified: true,
         isAnonymous: false,
         metadata: {},
@@ -150,6 +236,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         }),
         reload: async () => { },
         toJSON: () => ({}),
+=======
+>>>>>>> restoration-KR-Rage-Figma-v2.0
         role: 'user',
       } as unknown as User;
       setUser(mockUser);
@@ -157,11 +245,30 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       return;
     }
 
+<<<<<<< HEAD
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
     if (displayName) {
       await firebaseUpdateProfile(userCredential.user, { displayName });
       // Force refresh user to get updated display name
       setUser({ ...userCredential.user, displayName } as User);
+=======
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        data: {
+          full_name: displayName,
+          displayName: displayName, // support for legacy field backup
+        },
+      },
+    });
+
+    if (error) throw error;
+
+    if (data.user) {
+      // Force refresh user to get updated display name
+      setUser(mapSupabaseUser(data.user));
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     }
   }, []);
 
@@ -171,7 +278,11 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       localStorage.removeItem('mockUser');
       return;
     }
+<<<<<<< HEAD
     await firebaseSignOut(auth);
+=======
+    await supabase.auth.signOut();
+>>>>>>> restoration-KR-Rage-Figma-v2.0
   }, []);
 
   const contextValue = useMemo(

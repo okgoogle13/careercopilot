@@ -174,7 +174,11 @@ Allocate **2-3 hours** for comprehensive manual testing using the provided check
 | M3 Principle | Compliance | Evidence |
 |--------------|------------|----------|
 | **Typography** | ✅ | Plus Jakarta Sans (no browser defaults) |
+<<<<<<< HEAD
 | **Organic Shapes** | ✅ | 32px rounded-pebble, rounded-tech variants |
+=======
+| **[DEPRECATED_STYLE] Shapes** | ✅ | 32px rounded-pebble, rounded-tech variants |
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 | **Color Palette** | ✅ | Custom "Electric Alchemist" tokens |
 | **Elevation** | ✅ | shadow-elevation-1 through -4 |
 | **Motion** | ✅ | Spring easing (ease-spring), framer-motion |

@@ -1,5 +1,9 @@
 import { Jar, Pebble, Stone } from '@/components/ui';
 import { m3Toast } from '@/utils/toast';
+<<<<<<< HEAD
+=======
+import { validateFile } from '@/utils/fileValidation';
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 import { FileText, UploadCloud } from 'lucide-react';
 import React, { useState } from 'react';
 
@@ -15,6 +19,16 @@ export const EvidenceUploader: React.FC = () => {
     const file = e.target.files?.[0];
     if (!file) return;
 
+<<<<<<< HEAD
+=======
+    const validation = validateFile(file, ['.pdf', '.docx', '.txt']);
+    if (!validation.valid) {
+      m3Toast.error('Invalid File', validation.error!);
+      e.target.value = '';
+      return;
+    }
+
+>>>>>>> restoration-KR-Rage-Figma-v2.0
     setIsUploading(true);
     const formData = new FormData();
     formData.append('file', file);
@@ -49,6 +63,7 @@ export const EvidenceUploader: React.FC = () => {
 
   return (
     <Stone
+<<<<<<< HEAD
       mode="laboratory"
       className="p-0 border-2 border-dashed border-[var(--color-eucalypt-smoke-base)]/30 bg-transparent overflow-hidden"
     >
@@ -61,6 +76,20 @@ export const EvidenceUploader: React.FC = () => {
             Strategic Evidence Uploader
           </h3>
           <p className="font-field-note text-sm text-[var(--color-flannel-flower-dark)]">
+=======
+     
+      className="p-0 border-2 border-dashed border-[var(--color-concrete-grey-base)]/30 bg-transparent overflow-hidden"
+    >
+      <div className="p-6 flex items-center gap-4">
+        <div className="w-12 h-12 rounded-full bg-[var(--color-ink-gold)]/10 flex items-center justify-center">
+          <UploadCloud className="w-6 h-6 text-[var(--color-ink-gold)]" />
+        </div>
+        <div className="flex-grow">
+          <h3 className="font-bloom text-lg font-bold text-[var(--color-paper-white)]">
+            Strategic Evidence Uploader
+          </h3>
+          <p className="font-field-note text-sm text-[var(--color-concrete-grey-dark)]">
+>>>>>>> restoration-KR-Rage-Figma-v2.0
             Upload historical artifacts to enrich your professional vector.
           </p>
         </div>

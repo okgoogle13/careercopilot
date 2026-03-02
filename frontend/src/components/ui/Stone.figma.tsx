@@ -28,7 +28,11 @@ figma.connect(
             content: figma.string("Content Text"),
         },
         example: ({ mode, elevation, hasHeader, hasFooter, content }) => (
+<<<<<<< HEAD
             <Stone mode={mode} elevation={elevation}
+=======
+            <Stone elevation={elevation}
+>>>>>>> restoration-KR-Rage-Figma-v2.0
                 header={hasHeader ? <h3>Header</h3> : undefined}
                 footer={hasFooter ? <button>Action</button> : undefined}
             >

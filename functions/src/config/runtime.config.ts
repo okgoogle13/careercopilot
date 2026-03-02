@@ -16,10 +16,14 @@
  * ```
  */
 
+<<<<<<< HEAD
 // @ts-expect-error - TS2497: esModuleInterop is enabled, but TypeScript 5.9 still complains about namespace import
 import * as functions from "firebase-functions";
 
 type RuntimeOptions = functions.RuntimeOptions;
+=======
+// import { RuntimeOptions } from "firebase-functions"; // Removed invalid import
+>>>>>>> restoration-KR-Rage-Figma-v2.0
 
 /**
  * Lightweight API operations (CRUD, simple Firestore queries)
@@ -31,7 +35,11 @@ type RuntimeOptions = functions.RuntimeOptions;
  * Expected execution time: < 1s
  * Memory usage: 30-80MB
  */
+<<<<<<< HEAD
 export const lightweightApi: RuntimeOptions = {
+=======
+export const lightweightApi = {
+>>>>>>> restoration-KR-Rage-Figma-v2.0
   region: "us-central1",
   memory: "128MB",
   timeoutSeconds: 10,
@@ -48,7 +56,11 @@ export const lightweightApi: RuntimeOptions = {
  * Expected execution time: 1-5s
  * Memory usage: 80-150MB
  */
+<<<<<<< HEAD
 export const mediumApi: RuntimeOptions = {
+=======
+export const mediumApi = {
+>>>>>>> restoration-KR-Rage-Figma-v2.0
   region: "us-central1",
   memory: "256MB",
   timeoutSeconds: 30,
@@ -65,7 +77,11 @@ export const mediumApi: RuntimeOptions = {
  * Expected execution time: 5-30s
  * Memory usage: 150-400MB
  */
+<<<<<<< HEAD
 export const heavyApi: RuntimeOptions = {
+=======
+export const heavyApi = {
+>>>>>>> restoration-KR-Rage-Figma-v2.0
   region: "us-central1",
   memory: "512MB",
   timeoutSeconds: 60,
@@ -84,7 +100,11 @@ export const heavyApi: RuntimeOptions = {
  *
  * Note: Set minInstances: 1 during peak hours to reduce cold starts
  */
+<<<<<<< HEAD
 export const aiProcessing: RuntimeOptions = {
+=======
+export const aiProcessing = {
+>>>>>>> restoration-KR-Rage-Figma-v2.0
   region: "us-central1",
   memory: "1GB",
   timeoutSeconds: 180,
@@ -101,7 +121,11 @@ export const aiProcessing: RuntimeOptions = {
  * Expected execution time: 5-60s
  * Memory usage: 100-200MB
  */
+<<<<<<< HEAD
 export const userCleanup: RuntimeOptions = {
+=======
+export const userCleanup = {
+>>>>>>> restoration-KR-Rage-Figma-v2.0
   region: "us-central1",
   memory: "256MB",
   timeoutSeconds: 60,
@@ -117,7 +141,11 @@ export const userCleanup: RuntimeOptions = {
  * Expected execution time: 30-180s
  * Memory usage: 200-500MB
  */
+<<<<<<< HEAD
 export const backgroundTask: RuntimeOptions = {
+=======
+export const backgroundTask = {
+>>>>>>> restoration-KR-Rage-Figma-v2.0
   region: "us-central1",
   memory: "512MB",
   timeoutSeconds: 120,
@@ -144,10 +172,14 @@ export const RUNTIME_CONFIGS = {
  * @param overrides - Custom overrides
  * @returns Merged runtime configuration
  */
+<<<<<<< HEAD
 export function createCustomConfig(
   baseConfig: RuntimeOptions,
   overrides: Partial<RuntimeOptions>,
 ): RuntimeOptions {
+=======
+export function createCustomConfig(baseConfig: any, overrides: Partial<any>): any {
+>>>>>>> restoration-KR-Rage-Figma-v2.0
   return {
     ...baseConfig,
     ...overrides,
@@ -158,7 +190,11 @@ export function createCustomConfig(
  * Peak hours configuration (keeps instances warm)
  * Use this for critical functions during business hours
  */
+<<<<<<< HEAD
 export function withPeakHoursWarmup(config: RuntimeOptions): RuntimeOptions {
+=======
+export function withPeakHoursWarmup(config: any): any {
+>>>>>>> restoration-KR-Rage-Figma-v2.0
   return {
     ...config,
     minInstances: 1,
@@ -169,7 +205,11 @@ export function withPeakHoursWarmup(config: RuntimeOptions): RuntimeOptions {
  * Cost-optimized configuration (aggressive scaling down)
  * Use this for low-traffic, non-critical functions
  */
+<<<<<<< HEAD
 export function withCostOptimization(config: RuntimeOptions): RuntimeOptions {
+=======
+export function withCostOptimization(config: any): any {
+>>>>>>> restoration-KR-Rage-Figma-v2.0
   return {
     ...config,
     minInstances: 0,

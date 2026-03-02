@@ -1,6 +1,11 @@
 ---
 name: skill-reviewer
-description: Evaluates skill effectiveness, suggests improvements to instructions, identifies missing edge cases, and recommends structure changes.
+description: Evaluates skill effectiveness, suggests improvements to instructions,
+  identifies missing edge cases, and recommends structure changes.
+metadata:
+  legacy_frontmatter:
+    version: 1.0.0
+    tags: []
 ---
 
 # Skill Reviewer
@@ -144,6 +149,14 @@ The Skill Reviewer provides comprehensive quality assurance and improvement reco
 - ✅ Appropriate scope (not too broad)
 - ✅ Progressive content disclosure
 - ✅ Links to related resources
+
+## Process
+
+1. **Initial Audit**: Validate metadata (YAML, naming) and documentation structure.
+2. **Structural Assessment**: Verify file organization and size constraints.
+3. **Functional Review**: Identify missing capabilities and unhandled edge cases.
+4. **Compliance Check**: Verify adherence to Anthropic and project standards.
+5. **Report Generation**: Produce a comprehensive evaluation report with scoring and a prioritized roadmap.
 
 ## Usage
 
