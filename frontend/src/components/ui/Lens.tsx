@@ -43,12 +43,12 @@ export interface LensProps extends Omit<React.InputHTMLAttributes<HTMLInputEleme
  * Lens -  Text Input
  *
  * A comprehensive text input component using the  design system.
- * Supports filled and outlined variants with proper Northcote states and validation.
+ * Supports filled and outlined variants with proper Kerala Rage states and validation.
  *
- * **Northcote Design Token Usage:**
+ * **Kerala Rage Design Token Usage:**
  * - Shape: `--radius-leaf` (organic shape) for inputs
- * - Colors: Northcote botanical palette (Wattle Gold, Waratah Crimson, Eucalypt Smoke)
- * - Typography: Northcote field-note font family
+ * - Colors: Kerala Rage botanical palette (Wattle Gold, Waratah Crimson, Eucalypt Smoke)
+ * - Typography: Kerala Rage field-note font family
  * - Motion: Viscous-breeze easing for organic transitions
  * - Visual: Glassmorphism with subtle backdrop blur
 =======

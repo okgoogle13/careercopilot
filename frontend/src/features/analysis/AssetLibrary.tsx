@@ -1,6 +1,6 @@
 import { FileText, Upload, Download, Trash2 } from 'lucide-react';
 <<<<<<< HEAD
-import { NorthcoteButton } from '../../components/ui/NorthcoteButton';
+import { KeralaRageButton } from '../../components/ui/KeralaRageButton';
 =======
 import { KeralaRageButton } from '../../components/ui/KeralaRageButton';
 >>>>>>> restoration-KR-Rage-Figma-v2.0
@@ -31,7 +31,7 @@ export function AssetLibrary() {
           </h1>
           <p className="text-on-surface-variant mt-2 text-body-large-gallery font-field-note">Store and manage your career documents and media</p>
         </div>
-        <NorthcoteButton
+        <KeralaRageButton
 =======
           <h1 className="text-display-large-KrDark font-bloom font-black tracking-tight text-on-surface-paper-white leading-tight">
             Asset{' '}
@@ -49,7 +49,7 @@ export function AssetLibrary() {
         >
           Upload Asset
 <<<<<<< HEAD
-        </NorthcoteButton>
+        </KeralaRageButton>
 =======
         </KeralaRageButton>
 >>>>>>> restoration-KR-Rage-Figma-v2.0

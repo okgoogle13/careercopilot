@@ -1,6 +1,6 @@
 import React from 'react';
 <<<<<<< HEAD
-import { NorthcoteButton } from '../../../components/ui/NorthcoteButton';
+import { KeralaRageButton } from '../../../components/ui/KeralaRageButton';
 =======
 import { KeralaRageButton } from '../../../components/ui/KeralaRageButton';
 >>>>>>> restoration-KR-Rage-Figma-v2.0
@@ -31,7 +31,7 @@ export const NavRail: React.FC = () => {
                     return (
                         <Link key={item.id} to={item.route} className="w-full">
 <<<<<<< HEAD
-                            <NorthcoteButton
+                            <KeralaRageButton
 =======
                             <KeralaRageButton
 >>>>>>> restoration-KR-Rage-Figma-v2.0
@@ -42,7 +42,7 @@ export const NavRail: React.FC = () => {
                             >
                                 {item.label.substring(0, 2).toUpperCase()}
 <<<<<<< HEAD
-                            </NorthcoteButton>
+                            </KeralaRageButton>
 =======
                             </KeralaRageButton>
 >>>>>>> restoration-KR-Rage-Figma-v2.0

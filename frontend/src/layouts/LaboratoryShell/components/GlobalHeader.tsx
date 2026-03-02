@@ -1,7 +1,7 @@
 import { useMode } from '@/hooks/use-mode';
 import React from 'react';
 <<<<<<< HEAD
-import { NorthcoteButton } from '../../../components/ui/NorthcoteButton';
+import { KeralaRageButton } from '../../../components/ui/KeralaRageButton';
 =======
 import { Link } from 'react-router-dom';
 import { KeralaRageButton } from '../../../components/ui/KeralaRageButton';
@@ -100,7 +100,7 @@ export const GlobalHeader: React.FC = () => {
 
         {/* User / Settings Actions */}
 <<<<<<< HEAD
-        <NorthcoteButton
+        <KeralaRageButton
 =======
         <KeralaRageButton
 >>>>>>> restoration-KR-Rage-Figma-v2.0
@@ -109,7 +109,7 @@ export const GlobalHeader: React.FC = () => {
         >
           Settings
 <<<<<<< HEAD
-        </NorthcoteButton>
+        </KeralaRageButton>
 =======
         </KeralaRageButton>
 >>>>>>> restoration-KR-Rage-Figma-v2.0

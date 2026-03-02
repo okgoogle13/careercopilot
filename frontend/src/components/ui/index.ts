@@ -26,8 +26,8 @@ export { Seed } from './Seed';
 export type { SeedProps } from './Seed';
 
 <<<<<<< HEAD
-export { NorthcoteButton } from './NorthcoteButton';
-export type { NorthcoteButtonProps } from './NorthcoteButton';
+export { KeralaRageButton } from './KeralaRageButton';
+export type { KeralaRageButtonProps } from './KeralaRageButton';
 =======
 export { KeralaRageButton } from './KeralaRageButton';
 export type { KeralaRageButtonProps } from './KeralaRageButton';

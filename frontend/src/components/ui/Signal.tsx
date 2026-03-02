@@ -40,7 +40,7 @@ export type SignalVariant = 'filled' | 'outlined' | 'tonal';
 <<<<<<< HEAD
  * Signal -  Alert Component
  *
- * Alert/notification component using Northcote botanical palette and organic shapes.
+ * Alert/notification component using Kerala Rage botanical palette and organic shapes.
 =======
  * Signal - KeralaRage KrSolidarity Alert Component
  *

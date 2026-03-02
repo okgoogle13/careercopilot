@@ -11,7 +11,7 @@ interface ApplicationCardProps {
 
 import { StatusBadge, type StatusBadgeVariant } from '@/components/ui/StatusBadge/StatusBadge';
 <<<<<<< HEAD
-import { NorthcoteButton } from '@/components/ui/NorthcoteButton';
+import { KeralaRageButton } from '@/components/ui/KeralaRageButton';
 =======
 import { KeralaRageButton } from '@/components/ui/KeralaRageButton';
 >>>>>>> restoration-KR-Rage-Figma-v2.0
@@ -77,7 +77,7 @@ export function ApplicationCard({
           />
           {onUpdateStatus && (
 <<<<<<< HEAD
-            <NorthcoteButton
+            <KeralaRageButton
 =======
             <KeralaRageButton
 >>>>>>> restoration-KR-Rage-Figma-v2.0
@@ -87,7 +87,7 @@ export function ApplicationCard({
             >
               Update Status
 <<<<<<< HEAD
-            </NorthcoteButton>
+            </KeralaRageButton>
 =======
             </KeralaRageButton>
 >>>>>>> restoration-KR-Rage-Figma-v2.0

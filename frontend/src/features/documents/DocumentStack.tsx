@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FileText, Upload, MoreVertical, FileCode, FileType, CheckCircle, Clock } from 'lucide-react';
 import { cn } from '@/lib/utils';
 <<<<<<< HEAD
-import { NorthcoteButton } from '@/components/ui/NorthcoteButton';
+import { KeralaRageButton } from '@/components/ui/KeralaRageButton';
 =======
 import { KeralaRageButton } from '@/components/ui/KeralaRageButton';
 >>>>>>> restoration-KR-Rage-Figma-v2.0
@@ -87,10 +87,10 @@ export const DocumentStack: React.FC = () => {
                     </p>
                 </div>
 <<<<<<< HEAD
-                <NorthcoteButton variant="primary" size="md" className="gap-2">
+                <KeralaRageButton variant="primary" size="md" className="gap-2">
                     <Upload className="w-4 h-4" />
                     Upload Document
-                </NorthcoteButton>
+                </KeralaRageButton>
 =======
                 <KeralaRageButton variant="primary" size="md" className="gap-2">
                     <Upload className="w-4 h-4" />

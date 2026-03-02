@@ -52,11 +52,11 @@ export interface JarProps {
  * A custom select component using  design tokens with enhanced UX.
  * Features organic shapes, proper elevation, and smooth animations.
  *
- * **Northcote Design Token Usage:**
+ * **Kerala Rage Design Token Usage:**
  * - Shape: `--radius-stone` for select button, `--radius-pebble` for dropdown
  * - Elevation: `--shadow-maximum` for dropdown menu
  * - Motion: Viscous-breeze easing for smooth open/close
- * - Colors: Northcote botanical palette (Wattle Gold, Waratah Crimson)
+ * - Colors: Kerala Rage botanical palette (Wattle Gold, Waratah Crimson)
 =======
  * Jar - KeralaRage KrSolidarity Select Dropdown
  *

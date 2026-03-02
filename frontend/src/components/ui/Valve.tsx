@@ -20,7 +20,7 @@ export interface ValveProps extends Omit<
 <<<<<<< HEAD
  * Valve -  Toggle Switch
  *
- * An organic, viscous-motion toggle switch using Northcote botanical palette.
+ * An organic, viscous-motion toggle switch using Kerala Rage botanical palette.
  * Features smooth transitions with viscous-breeze easing and botanical color theming.
 =======
  * Valve - KeralaRage KrSolidarity Toggle Switch
