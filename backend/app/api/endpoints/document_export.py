@@ -17,22 +17,6 @@ Example flow:
     4. Client downloads directly from Cloud Storage
 """
 
-<<<<<<< HEAD
-from typing import Dict, Optional, Any
-from fastapi import APIRouter, HTTPException, status, Depends
-from fastapi.responses import JSONResponse
-
-from app.core.document_export_service import (
-    document_export_service,
-    DocumentExportResult
-)
-from app.models.document_export_schemas import (
-    CoverLetterExportRequest,
-    CoverLetterExportResponse,
-    ResumeExportRequest,
-    ResumeExportResponse,
-    KSCResponseExportResponse,
-=======
 from typing import Any
 
 from fastapi import APIRouter, Depends, HTTPException, status
@@ -40,16 +24,10 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from app.core.document_export_service import DocumentExportResult, document_export_service
 from app.core.loguru_config import get_logger
 from app.models.document_export_schemas import (
->>>>>>> restoration-KR-Rage-Figma-v2.0
     ApplicationPackageExportRequest,
     ApplicationPackageExportResponse,
     BatchExportRequest,
     BatchExportResponse,
-<<<<<<< HEAD
-    DocumentExportResponse
-)
-from app.core.loguru_config import get_logger
-=======
     CoverLetterExportRequest,
     CoverLetterExportResponse,
     DocumentExportResponse,
@@ -57,7 +35,6 @@ from app.core.loguru_config import get_logger
     ResumeExportRequest,
     ResumeExportResponse,
 )
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 logger = get_logger(__name__)
 
@@ -177,11 +154,7 @@ async def export_cover_letter(
         logger.warning("Invalid format requested", error=str(e), user_id=user_id)
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-<<<<<<< HEAD
-            detail=f"Invalid format: {str(e)}"
-=======
             detail=f"Invalid format: {e!s}"
->>>>>>> restoration-KR-Rage-Figma-v2.0
         )
     except Exception as e:
         logger.error(
@@ -217,11 +190,7 @@ async def export_cover_letter(
 )
 async def export_resume(
     request: ResumeExportRequest,
-<<<<<<< HEAD
-    content: Dict[str, Any],
-=======
     content: dict[str, Any],
->>>>>>> restoration-KR-Rage-Figma-v2.0
     user_id: str = Depends(get_current_user_id),
 ) -> ResumeExportResponse:
     """
@@ -257,11 +226,7 @@ async def export_resume(
         logger.warning("Invalid format requested", error=str(e), user_id=user_id)
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-<<<<<<< HEAD
-            detail=f"Invalid format: {str(e)}"
-=======
             detail=f"Invalid format: {e!s}"
->>>>>>> restoration-KR-Rage-Figma-v2.0
         )
     except Exception as e:
         logger.error(
@@ -298,11 +263,7 @@ async def export_resume(
 )
 async def export_ksc_response(
     request: DocumentExportResponse,  # Reuse base export request
-<<<<<<< HEAD
-    response_data: Dict[str, Any],
-=======
     response_data: dict[str, Any],
->>>>>>> restoration-KR-Rage-Figma-v2.0
     job_title: str,
     user_id: str = Depends(get_current_user_id),
 ) -> KSCResponseExportResponse:
@@ -340,11 +301,7 @@ async def export_ksc_response(
         logger.warning("Invalid format requested", error=str(e), user_id=user_id)
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-<<<<<<< HEAD
-            detail=f"Invalid format: {str(e)}"
-=======
             detail=f"Invalid format: {e!s}"
->>>>>>> restoration-KR-Rage-Figma-v2.0
         )
     except Exception as e:
         logger.error(
@@ -387,11 +344,7 @@ async def export_ksc_response(
 )
 async def export_application_package(
     request: ApplicationPackageExportRequest,
-<<<<<<< HEAD
-    package_data: Dict[str, Any],
-=======
     package_data: dict[str, Any],
->>>>>>> restoration-KR-Rage-Figma-v2.0
     user_id: str = Depends(get_current_user_id),
 ) -> ApplicationPackageExportResponse:
     """
@@ -428,11 +381,7 @@ async def export_application_package(
         logger.warning("Invalid format requested", error=str(e), user_id=user_id)
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-<<<<<<< HEAD
-            detail=f"Invalid format: {str(e)}"
-=======
             detail=f"Invalid format: {e!s}"
->>>>>>> restoration-KR-Rage-Figma-v2.0
         )
     except Exception as e:
         logger.error(
@@ -472,11 +421,7 @@ async def export_application_package(
 )
 async def export_batch(
     request: BatchExportRequest,
-<<<<<<< HEAD
-    documents: Dict[str, Any],
-=======
     documents: dict[str, Any],
->>>>>>> restoration-KR-Rage-Figma-v2.0
     user_id: str = Depends(get_current_user_id),
 ) -> BatchExportResponse:
     """
@@ -530,11 +475,7 @@ async def export_batch(
     summary="Check export service health",
     description="Verify that the document export service and Cloud Storage are accessible.",
 )
-<<<<<<< HEAD
-async def health_check() -> Dict[str, str]:
-=======
 async def health_check() -> dict[str, str]:
->>>>>>> restoration-KR-Rage-Figma-v2.0
     """
     Check health of document export service.
 

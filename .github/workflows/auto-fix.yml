@@ -29,15 +29,10 @@ permissions:
   checks: write
 
 concurrency:
-<<<<<<< HEAD
-  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
-  cancel-in-progress: true
-=======
   # Prevent multiple auto-fix runs on the same PR/branch
   # Using github.sha ensures we queue runs instead of canceling
   group: auto-fix-${{ github.event.pull_request.number || github.ref }}-${{ github.sha }}
   cancel-in-progress: false  # Queue runs instead of canceling to avoid losing fixes
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 env:
   PYTHON_VERSION: "3.13"
@@ -56,200 +51,6 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
 
-<<<<<<< HEAD
-=======
-      - name: Verify git repository state
-        run: |
-          echo "🔍 Checking git repository state..."
-          
-          # Remove any stale lock files from previous failed runs
-          find .git -name "*.lock" -type f -delete 2>/dev/null || true
-          
-          # Verify repository is in good state
-          git status
-          
-          # Display git configuration for debugging
-          echo "📋 Git configuration:"
-          git config --list --local
-          
-          echo "✅ Git repository state verified"
-
->>>>>>> restoration-KR-Rage-Figma-v2.0
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: ${{ env.PYTHON_VERSION }}
-          cache: "pip"
-
-      - name: Enable Corepack for Yarn 4+
-        run: corepack enable
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: "yarn"
-          cache-dependency-path: "yarn.lock"
-
-      # ============================================================
-      # PYTHON AUTO-FIXES
-      # ============================================================
-      - name: Install Python formatting tools
-        if: github.event.inputs.fix_type == 'all' || github.event.inputs.fix_type == 'formatting' || github.event_name == 'pull_request'
-        run: |
-          python -m pip install --upgrade pip
-          pip install black==24.3.0 isort==5.13.2 flake8==7.0.0 autoflake==2.3.1
-
-      - name: Apply Python formatting fixes
-        if: github.event.inputs.fix_type == 'all' || github.event.inputs.fix_type == 'formatting' || github.event_name == 'pull_request'
-        run: |
-          echo "🐍 Applying Python formatting fixes..."
-          black backend/ --line-length=100
-          isort backend/ --profile=black --line-length=100
-          autoflake --remove-all-unused-imports --remove-unused-variables --in-place --recursive backend/
-          echo "✅ Python formatting complete"
-
-      # ============================================================
-      # TYPESCRIPT AUTO-FIXES
-      # ============================================================
-      - name: Install Node dependencies
-        run: YARN_ENABLE_IMMUTABLE_INSTALLS=false yarn install
-
-      - name: Run TypeScript auto-fix (unused imports, organize imports)
-        if: github.event.inputs.fix_type == 'all' || github.event.inputs.fix_type == 'typescript' || github.event_name == 'pull_request'
-        run: |
-          echo "🔷 Running TypeScript auto-fixes..."
-
-          # Create a Node.js script to fix TypeScript issues using ts-morph
-          cat > ts-autofix.mjs << 'EOFSCRIPT'
-          import { Project } from 'ts-morph';
-          import { existsSync } from 'fs';
-
-          async function fixTypeScriptIssues() {
-            if (!existsSync('./frontend/tsconfig.json')) {
-              console.error('❌ tsconfig.json not found in frontend/');
-              return;
-            }
-
-            const project = new Project({
-              tsConfigFilePath: './frontend/tsconfig.json',
-            });
-
-            const sourceFiles = project.getSourceFiles();
-            let fixedCount = 0;
-
-            for (const sourceFile of sourceFiles) {
-              const filePath = sourceFile.getFilePath();
-
-              if (filePath.includes('node_modules') || 
-                  filePath.includes('/dist/') || 
-                  filePath.includes('.test.')) {
-                continue;
-              }
-
-              sourceFile.fixUnusedIdentifiers();
-              sourceFile.organizeImports({
-                ensureNewLineAtEndOfFile: true,
-              });
-
-              await sourceFile.save();
-              fixedCount++;
-            }
-
-            console.log(`\n✅ Fixed ${fixedCount} TypeScript files`);
-          }
-
-          fixTypeScriptIssues().catch(console.error);
-          EOFSCRIPT
-
-          node ts-autofix.mjs
-          echo "✅ TypeScript auto-fix complete"
-
-      # ============================================================
-      # ESLINT AUTO-FIXES
-      # ============================================================
-      - name: Apply ESLint auto-fixes
-        if: github.event.inputs.fix_type == 'all' || github.event.inputs.fix_type == 'linting' || github.event_name == 'pull_request'
-        run: |
-          echo "🔧 Applying ESLint fixes..."
-          yarn workspace careercopilot-frontend lint:fix
-          yarn workspace functions lint:fix
-          echo "✅ ESLint fixes complete"
-
-      # ============================================================
-      # PRETTIER AUTO-FIXES
-      # ============================================================
-      - name: Apply Prettier formatting
-        if: github.event.inputs.fix_type == 'all' || github.event.inputs.fix_type == 'formatting' || github.event_name == 'pull_request'
-        run: |
-          echo "💅 Applying Prettier formatting..."
-          yarn workspace careercopilot-frontend format
-          echo "✅ Prettier formatting complete"
-
-      # ============================================================
-      # STORYBOOK AUTOMATION
-      # ============================================================
-      - name: Check for missing stories
-        id: storybook-check
-        if: github.event.inputs.fix_type == 'all' || github.event.inputs.fix_type == 'storybook' || github.event_name == 'pull_request'
-        run: |
-          echo "📚 Scanning for components without stories..."
-          MISSING_STORIES=0
-          for component in frontend/src/components/ui/*.tsx; do
-            if [[ "$component" == *"utils.ts"* ]] || [[ "$component" == *"index.ts"* ]]; then continue; fi
-            filename=$(basename -- "$component")
-            basename="${filename%.*}"
-            if [ ! -f "frontend/src/components/ui/${basename}.stories.tsx" ]; then
-              echo "⚠️  Missing story for: ${basename}"
-              MISSING_STORIES=$((MISSING_STORIES + 1))
-            fi
-          done
-          echo "missing_count=$MISSING_STORIES" >> $GITHUB_OUTPUT
-          if [ $MISSING_STORIES -gt 0 ]; then
-            echo "::warning::$MISSING_STORIES components are missing Storybook stories."
-          fi
-
-      # ============================================================
-      # ELECTRIC ALCHEMIST / M3 TOKEN COMPLIANCE
-      # ============================================================
-      - name: Check Electric Alchemist Token Compliance
-        id: design-check
-        run: |
-          echo "🎨 Checking Electric Alchemist token compliance..."
-
-          # Improved check: look for hardcoded hex codes AND non-tokenized CSS vars
-          # Exceptions: black/white and valid design tokens
-          HARDCODED_COLORS=$(grep -rnE "color:\s*#[0-9a-fA-F]{3,6}" frontend/src/ --include="*.tsx" --include="*.css" | grep -v "000" | grep -v "fff" | wc -l)
-          RAW_PIXELS=$(grep -rnE "(padding|margin|gap|border-radius):\s*[0-9]{2,}px" frontend/src/ --include="*.tsx" --include="*.css" | wc -l)
-
-          echo "❌ Found $HARDCODED_COLORS hardcoded color values"
-          echo "❌ Found $RAW_PIXELS large hardcoded pixel values (>10px)"
-
-          if [ $HARDCODED_COLORS -gt 0 ] || [ $RAW_PIXELS -gt 0 ]; then
-            echo "violations=true" >> $GITHUB_OUTPUT
-          else
-            echo "violations=false" >> $GITHUB_OUTPUT
-          fi
-
-      # ============================================================
-      # COMMIT CHANGES
-      # ============================================================
-      - name: Check for changes
-        id: git-check
-        run: |
-          git diff --exit-code || echo "changes_made=true" >> $GITHUB_OUTPUT
-
-<<<<<<< HEAD
-      - name: Commit and push changes
-        if: steps.git-check.outputs.changes_made == 'true'
-        run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "GitHub Actions Auto-Fix Bot"
-          git add .
-          git commit -m "style(auto): Apply Electric Alchemist auto-fixes [skip ci]" \
-            -m "Applied standard formatting and linting for TS, Python, and CSS."
-          git push
-=======
       - name: Clean up stale git locks
         if: steps.git-check.outputs.changes_made == 'true'
         run: |
@@ -310,7 +111,6 @@ jobs:
               fi
             fi
           done
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
       # ============================================================
       # PR NOTIFICATIONS

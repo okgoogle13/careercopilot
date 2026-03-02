@@ -10,10 +10,6 @@ This schema is designed for:
 - Comprehensive career data representation
 """
 
-<<<<<<< HEAD
-from typing import List, Optional
-=======
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 from pydantic import BaseModel, EmailStr, Field, HttpUrl
 
@@ -23,13 +19,8 @@ class PersonalInfo(BaseModel):
 
     name: str = Field(..., description="Full name of the individual")
     email: EmailStr = Field(..., description="Primary contact email address")
-<<<<<<< HEAD
-    phone: Optional[str] = Field(None, description="Primary contact phone number")
-    location: Optional[str] = Field(
-=======
     phone: str | None = Field(None, description="Primary contact phone number")
     location: str | None = Field(
->>>>>>> restoration-KR-Rage-Figma-v2.0
         None,
         description="Current city and state/country (e.g., 'Naarm, VIC', 'London, UK')",
     )
@@ -37,17 +28,10 @@ class PersonalInfo(BaseModel):
         ...,
         description="A 2-4 sentence professional summary or objective highlighting key experience and goals",
     )
-<<<<<<< HEAD
-    linkedin: Optional[HttpUrl] = Field(
-        None, description="URL of the LinkedIn profile, if available"
-    )
-    portfolio: Optional[HttpUrl] = Field(
-=======
     linkedin: HttpUrl | None = Field(
         None, description="URL of the LinkedIn profile, if available"
     )
     portfolio: HttpUrl | None = Field(
->>>>>>> restoration-KR-Rage-Figma-v2.0
         None, description="URL of a personal portfolio or website, if available"
     )
 
@@ -65,26 +49,11 @@ class WorkExperience(BaseModel):
         description="Job title held. Combine multiple titles with ' / ' if roles were consolidated",
     )
     company: str = Field(..., description="Name of the company or organization")
-<<<<<<< HEAD
-    location: Optional[str] = Field(
-=======
     location: str | None = Field(
->>>>>>> restoration-KR-Rage-Figma-v2.0
         None, description="City and state/country where the job was located"
     )
     startDate: str = Field(..., description="Start date in YYYY-MM format (e.g., '2022-03')")
     endDate: str = Field(..., description="End date in YYYY-MM format or 'Present'")
-<<<<<<< HEAD
-    responsibilities: List[str] = Field(
-        default_factory=list,
-        description="List of general duties and responsibilities for the role. DO NOT include quantifiable achievements here",
-    )
-    achievements: List[str] = Field(
-        default_factory=list,
-        description="List of specific, quantifiable accomplishments or results achieved in the role (STAR format preferred). DO NOT list general duties here",
-    )
-    skillsUsed: List[str] = Field(
-=======
     responsibilities: list[str] = Field(
         default_factory=list,
         description="List of general duties and responsibilities for the role. DO NOT include quantifiable achievements here",
@@ -94,7 +63,6 @@ class WorkExperience(BaseModel):
         description="List of specific, quantifiable accomplishments or results achieved in the role (STAR format preferred). DO NOT list general duties here",
     )
     skillsUsed: list[str] = Field(
->>>>>>> restoration-KR-Rage-Figma-v2.0
         default_factory=list,
         description="Specific skills (technical, tools, methodologies) utilized in THIS role. MUST be populated if skills are mentioned for the role",
     )
@@ -105,17 +73,10 @@ class Project(BaseModel):
 
     projectName: str = Field(..., description="Name of the project")
     description: str = Field(..., description="Brief description of the project and your role")
-<<<<<<< HEAD
-    startDate: Optional[str] = Field(None, description="Start date in YYYY-MM format")
-    endDate: Optional[str] = Field(None, description="End date in YYYY-MM format or 'Ongoing'")
-    link: Optional[HttpUrl] = Field(None, description="URL to the project, if available")
-    technologiesUsed: List[str] = Field(
-=======
     startDate: str | None = Field(None, description="Start date in YYYY-MM format")
     endDate: str | None = Field(None, description="End date in YYYY-MM format or 'Ongoing'")
     link: HttpUrl | None = Field(None, description="URL to the project, if available")
     technologiesUsed: list[str] = Field(
->>>>>>> restoration-KR-Rage-Figma-v2.0
         default_factory=list, description="Key technologies or skills used"
     )
 
@@ -128,15 +89,6 @@ class Education(BaseModel):
         ...,
         description="Degree or qualification obtained (e.g., 'Master of Finance', 'Diploma of Community Services')",
     )
-<<<<<<< HEAD
-    fieldOfStudy: Optional[str] = Field(
-        None,
-        description="Major or field of study (e.g., 'Finance', 'Community Services', 'Marketing'). Extract ONLY the core field (e.g., 'Marketing' not 'Business in Marketing')",
-    )
-    startDate: Optional[str] = Field(None, description="Start date in YYYY-MM or YYYY format")
-    endDate: str = Field(..., description="End date or graduation date in YYYY-MM or YYYY format")
-    notes: Optional[str] = Field(None, description="Optional: GPA, honors, relevant coursework")
-=======
     fieldOfStudy: str | None = Field(
         None,
         description="Major or field of study (e.g., 'Finance', 'Community Services', 'Marketing'). Extract ONLY the core field (e.g., 'Marketing' not 'Business in Marketing')",
@@ -144,7 +96,6 @@ class Education(BaseModel):
     startDate: str | None = Field(None, description="Start date in YYYY-MM or YYYY format")
     endDate: str = Field(..., description="End date or graduation date in YYYY-MM or YYYY format")
     notes: str | None = Field(None, description="Optional: GPA, honors, relevant coursework")
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 
 class Skills(BaseModel):
@@ -155,21 +106,6 @@ class Skills(BaseModel):
     soft skills, and methodologies for maximum utility in job applications.
     """
 
-<<<<<<< HEAD
-    technical: List[str] = Field(
-        default_factory=list,
-        description="Specific technical expertise relevant to the field (e.g., 'AOD services', 'Pharmacokinetics', 'Case Management', 'Data Entry')",
-    )
-    tools: List[str] = Field(
-        default_factory=list,
-        description="Software, hardware, or specific tools proficiency (e.g., 'Microsoft Office Suite', 'Excel', 'Salesforce', 'Jira', 'Asana', 'Oracle BPM'). MUST NOT be empty if tools are mentioned anywhere in the document",
-    )
-    soft: List[str] = Field(
-        default_factory=list,
-        description="Interpersonal and professional skills (e.g., 'Stakeholder Management', 'Communication', 'Empathy', 'Adaptability')",
-    )
-    methodologies: List[str] = Field(
-=======
     technical: list[str] = Field(
         default_factory=list,
         description="Specific technical expertise relevant to the field (e.g., 'AOD services', 'Pharmacokinetics', 'Case Management', 'Data Entry')",
@@ -183,7 +119,6 @@ class Skills(BaseModel):
         description="Interpersonal and professional skills (e.g., 'Stakeholder Management', 'Communication', 'Empathy', 'Adaptability')",
     )
     methodologies: list[str] = Field(
->>>>>>> restoration-KR-Rage-Figma-v2.0
         default_factory=list,
         description="Frameworks, processes, or ways of working (e.g., 'Project Management', 'Agile', 'Scrum', 'Co-design Facilitation', 'SMART Recovery Facilitation')",
     )
@@ -199,11 +134,7 @@ class KeySelectionCriteriaExample(BaseModel):
 
     criteria: str = Field(..., description="The KSC question or statement")
     example: str = Field(..., description="The full example response")
-<<<<<<< HEAD
-    relatedSkills: List[str] = Field(
-=======
     relatedSkills: list[str] = Field(
->>>>>>> restoration-KR-Rage-Figma-v2.0
         ...,
         description="Skills demonstrated in this example. MUST be populated by analyzing the 'example' text",
     )
@@ -220,17 +151,6 @@ class MasterCareerProfile(BaseModel):
     """
 
     personalInfo: PersonalInfo = Field(..., description="Basic contact and summary information")
-<<<<<<< HEAD
-    workExperience: List[WorkExperience] = Field(
-        default_factory=list,
-        description="Chronological list of professional work experiences. Consolidate multiple roles at the same company with overlapping dates into ONE entry",
-    )
-    projects: List[Project] = Field(
-        default_factory=list,
-        description="Significant personal or professional projects",
-    )
-    education: List[Education] = Field(
-=======
     workExperience: list[WorkExperience] = Field(
         default_factory=list,
         description="Chronological list of professional work experiences. Consolidate multiple roles at the same company with overlapping dates into ONE entry",
@@ -240,7 +160,6 @@ class MasterCareerProfile(BaseModel):
         description="Significant personal or professional projects",
     )
     education: list[Education] = Field(
->>>>>>> restoration-KR-Rage-Figma-v2.0
         default_factory=list,
         description="List of educational qualifications",
     )
@@ -248,19 +167,11 @@ class MasterCareerProfile(BaseModel):
         ...,
         description="Categorized list of ALL skills mentioned in the document",
     )
-<<<<<<< HEAD
-    certifications: List[str] = Field(
-        default_factory=list,
-        description="List of professional certifications or licenses",
-    )
-    keySelectionCriteriaExamples: List[KeySelectionCriteriaExample] = Field(
-=======
     certifications: list[str] = Field(
         default_factory=list,
         description="List of professional certifications or licenses",
     )
     keySelectionCriteriaExamples: list[KeySelectionCriteriaExample] = Field(
->>>>>>> restoration-KR-Rage-Figma-v2.0
         default_factory=list,
         description="Specific examples written in response to Key Selection Criteria (KSC) or using STAR format. Only extract if explicitly present",
     )

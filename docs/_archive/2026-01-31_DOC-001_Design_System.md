@@ -1,11 +1,7 @@
 # DOC-001: Design System ("The Skin")
 
 **Document ID:** DOC-001-DESIGN-SYSTEM
-<<<<<<< HEAD
-**Version:** 2.0 (Northcote Curio Edition)
-=======
 **Version:** 2.0 (kerala-rage kr-solidarity Edition)
->>>>>>> restoration-KR-Rage-Figma-v2.0
 **Status:** ACTIVE Source of Truth
 **Context:** Defines the "Moonlight on Velvet" aesthetic. This file translates the `DOC-000` soul into hard tokens for Tailwind and Figma.
 
@@ -17,18 +13,6 @@
 
 | Token Name | Hex | CSS Variable | Usage |
 | --- | --- | --- | --- |
-<<<<<<< HEAD
-| **Specimen Night** | `#1A1714` | `--color-surface` | **The Floor.** A warm, charred umber (not black). |
-| **Wattle Gold** | `#D4A84B` | `--color-primary` | **The Protagonist.** Actions, Focus, "Candlelight". |
-| **Waratah Crimson** | `#C45C4B` | `--color-accent` | **The Spark.** Alerts, Urgency, "Heartbeat". |
-| **Eucalypt Smoke** | `#2C2723` | `--color-container` | **The Container.** Cards, Panels (Woodsmoke at dusk). |
-| **Flannel Flower** | `#A8A097` | `--color-muted` | **The Detail.** Metadata, Secondary Text (Dusty Mauve). |
-| **Parchment** | `#F5F0E8` | `--color-text` | **The Ink.** Primary text contrast. |
-
-### Tonal Vegetation Stacks (Depth Variants)
-
-*Expanding tonal range within each botanical family for layered depth.*
-=======
 | **Asphalt Black** | `#1A1714` | `--color-surface` | **The Floor.** A warm, charred umber (not black). |
 | **Wattle Gold** | `#D4A84B` | `--color-primary` | **The Protagonist.** Actions, Focus, "Candlelight". |
 | **[DEPRECATED_STYLE] Red** | `#C45C4B` | `--color-accent` | **The Spark.** Alerts, Urgency, "Heartbeat". |
@@ -39,7 +23,6 @@
 ### Tonal Vegetation Stacks (Depth Variants)
 
 *Expanding tonal range within each [DEPRECATED_STYLE] family for layered depth.*
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 #### 🌼 Wattle Gold Family (Primary Tones)
 | Token Name | Hex | CSS Variable | Usage |
@@ -47,19 +30,6 @@
 | **Wattle Shadow** | `#8B7A35` | `--color-primary-dark` | Deep ochre, pressed petals. Borders, shadows. |
 | **Wattle Base** | `#D4A84B` | `--color-primary` | Luminous protagonist. Primary actions. |
 | **Wattle Glow** | `#E8C963` | `--color-primary-light` | Lighter, almost fluorescent. Hover states, highlights. |
-<<<<<<< HEAD
-| **Wattle Bloom** | `#F5DDAA` | `--color-primary-pale` | Nearly parchment, barely visible. Subtle accents, backgrounds. |
-
-#### 🌺 Waratah Family (Accent Tones)
-| Token Name | Hex | CSS Variable | Usage |
-| --- | --- | --- | --- |
-| **Waratah Stem** | `#7A3A2E` | `--color-accent-dark` | Deep wine, grounded. Error states, critical alerts. |
-| **Waratah Base** | `#C45C4B` | `--color-accent` | Heartbeat, alert. Standard accent. |
-| **Waratah Glow** | `#E07865` | `--color-accent-light` | Neon-ish, urgent. Hover on accent elements. |
-| **Waratah Bloom** | `#F5A89A` | `--color-accent-pale` | Pale, softened. Subtle warnings, info states. |
-
-**Design Principle:** Use tonal stacks to create **subtle depth** without breaking palette coherence. Example: A card might use `Eucalypt Smoke` (container) with a `Wattle Glow` accent line—instantly familiar, instantly deeper.
-=======
 | **Wattle Bloom** | `#F5DDAA` | `--color-primary-pale` | Nearly paper-white, barely visible. Subtle accents, backgrounds. |
 
 #### 🌺 [DEPRECATED_STYLE] Family (Accent Tones)
@@ -71,7 +41,6 @@
 | **[DEPRECATED_STYLE] Bloom** | `#F5A89A` | `--color-accent-pale` | Pale, softened. Subtle warnings, info states. |
 
 **Design Principle:** Use tonal stacks to create **subtle depth** without breaking palette coherence. Example: A card might use `Concrete Grey` (container) with a `Wattle Glow` accent line—instantly familiar, instantly deeper.
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 ---
 
@@ -79,15 +48,9 @@
 
 *A marriage of the broadsheet poster and the field notebook.*
 
-<<<<<<< HEAD
-### 🏛️ The Proclamation (Libre Bodoni / Playfair Display)
-
-* **Role:** Gallery Headers, Hero Moments.
-=======
 ### 🏛️ The Proclamation (kr-serif-bold / Playfair Display)
 
 * **Role:** kr-dark Headers, Hero Moments.
->>>>>>> restoration-KR-Rage-Figma-v2.0
 * **Visual:** Condensed, High-Contrast, Massive.
 * **Usage:** "The Hook" messages in Mode A.
 * **Logic:** Use `font-stretch: condensed` if supported, or tracking `-0.03em`.
@@ -95,13 +58,8 @@
 ### 🌸 The Bloom (Fraunces Variable)
 
 * **Role:** Sub-headers, Emotional Accents.
-<<<<<<< HEAD
-* **Axes:** `SOFT: 50`, `WONK: 1` (Gallery) → `WONK: 0` (Laboratory).
-* **Visual:** Hand-lettered, organic, "wonky".
-=======
 * **Axes:** `SOFT: 50`, `WONK: 1` (kr-dark) → `WONK: 0` (kr-dark).
 * **Visual:** Hand-lettered, [DEPRECATED_STYLE], "wonky".
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 ### 📝 The Field Note (Work Sans)
 
@@ -111,15 +69,9 @@
 
 ### 🔬 The Annotation (JetBrains Mono)
 
-<<<<<<< HEAD
-* **Role:** **Laboratory Data Only.** Parsed skills, coordinates, JSON output.
-* **Visual:** Technical, precise, etched.
-* **Color:** Often paired with `Flannel Flower` or `Wattle Gold`.
-=======
 * **Role:** **kr-dark Data Only.** Parsed skills, coordinates, JSON output.
 * **Visual:** Technical, precise, etched.
 * **Color:** Often paired with `Concrete Grey` or `Wattle Gold`.
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 ---
 
@@ -134,21 +86,13 @@
 | **Interaction State** | **SOFT Axis** | **WONK Axis** | **Weight** | **Psychological Effect** |
 |:---|:---:|:---:|:---:|:---|
 | **Rest** (Body Text) | 50 | 0 | 400 | Neutral, composed, approachable |
-<<<<<<< HEAD
-| **Hover** (Interactive Elements) | 30 | 0.5 | 600 | Starting to lean in, curious |
-=======
 | **Hover** (Interactive Elements) | 30 | 0.5 | 600 | Starting to lean in, kr-solidarityus |
->>>>>>> restoration-KR-Rage-Figma-v2.0
 | **Active** (Engaged/Clicked) | 0 | 1 | 700 | Fully "wonky," hand-lettered personality |
 | **Focus** (Attention/Selected) | 0 | 1 | 800 | Maximum expressiveness, confident |
 
 ### Context-Specific Typography Mapping
 
-<<<<<<< HEAD
-#### Gallery Mode (Dashboard Hero)
-=======
 #### kr-dark Mode (Dashboard Hero)
->>>>>>> restoration-KR-Rage-Figma-v2.0
 ```css
 font-family: 'Fraunces', serif;
 font-weight: 700;
@@ -158,28 +102,16 @@ color: var(--color-primary); /* Wattle Gold */
 /* Effect: Vintage poster announcement */
 ```
 
-<<<<<<< HEAD
-#### Laboratory Mode (Data Labels)
-=======
 #### kr-dark Mode (Data Labels)
->>>>>>> restoration-KR-Rage-Figma-v2.0
 ```css
 font-family: 'JetBrains Mono', monospace;
 font-weight: 500;
 font-size: 11px;
-<<<<<<< HEAD
-color: var(--color-muted); /* Flannel Flower */
-/* Effect: Brass instrument measurement marking */
-```
-
-#### Interactive Cards (Gallery)
-=======
 color: var(--color-muted); /* Concrete Grey */
 /* Effect: Brass instrument measurement marking */
 ```
 
 #### Interactive Cards (kr-dark)
->>>>>>> restoration-KR-Rage-Figma-v2.0
 ```css
 /* Rest State */
 font-family: 'Fraunces', serif;
@@ -194,11 +126,7 @@ transition: font-variation-settings 600ms cubic-bezier(0.34, 1.56, 0.64, 1);
 
 ### Proclamation Maximalism (Size Contrast)
 
-<<<<<<< HEAD
-**Principle:** Adopt **extreme size ratios** (5x or greater) in Gallery Mode hero moments, inspired by vintage naturalist classification sheets and Federation-era broadsides.
-=======
 **Principle:** Adopt **extreme size ratios** (5x or greater) in kr-dark Mode hero moments, inspired by vintage [DEPRECATED_STYLE] classification sheets and Federation-era broadsides.
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 **Example Hero Composition:**
 ```
@@ -215,11 +143,7 @@ Track your growth through seasonal moments.
 **Implementation:**
 ```css
 .hero-proclamation {
-<<<<<<< HEAD
-  font-family: 'Libre Bodoni', serif;
-=======
   font-family: 'kr-serif-bold', serif;
->>>>>>> restoration-KR-Rage-Figma-v2.0
   font-stretch: condensed; /* or letter-spacing: -0.03em */
   font-size: 240px;
   line-height: 0.9;
@@ -230,11 +154,7 @@ Track your growth through seasonal moments.
   font-family: 'Work Sans', sans-serif;
   font-size: 48px; /* 5x ratio: 240px / 48px */
   font-weight: 400;
-<<<<<<< HEAD
-  color: var(--color-text); /* Parchment */
-=======
   color: var(--color-text); /* Paper White */
->>>>>>> restoration-KR-Rage-Figma-v2.0
 }
 ```
 
@@ -246,24 +166,11 @@ Track your growth through seasonal moments.
 
 *The interface shifts texture based on intent.*
 
-<<<<<<< HEAD
-### Mode A: The Gallery (Wonder)
-=======
 ### Mode A: The kr-dark (Wonder)
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 * **Context:** Landing, Dashboard, Opportunity Feed.
 * **Texture:** `gouache-grain.png` overlay (Warm).
 * **Lighting:** "Candlelight" (Radial gradients of Wattle Gold).
-<<<<<<< HEAD
-* **Motifs:** **Botanical.** Waratahs, Banksias, Gum Leaves.
-* **Guardian:** The Kookaburra.
-
-### Mode B: The Laboratory (Rigor)
-
-* **Context:** Ingestion, Analysis, Quality Gate.
-* **Texture:** `aged-parchment.png` overlay (Cool/Sepia).
-=======
 * **Motifs:** **[DEPRECATED_STYLE].** Waratahs, kr-flowers, Gum Leaves.
 * **Guardian:** The kr-shiva.
 
@@ -271,18 +178,13 @@ Track your growth through seasonal moments.
 
 * **Context:** Ingestion, Analysis, Quality Gate.
 * **Texture:** `aged-paper-white.png` overlay (Cool/Sepia).
->>>>>>> restoration-KR-Rage-Figma-v2.0
 * **Lighting:** "Inspection Lamp" (Even, flat lighting).
 * **Motifs:** **Anatomical.** Grid lines, skeletal sketches, brass instruments.
 * **Rule:** **NO FLOWERS.** Only structural truths.
 
 ---
 
-<<<<<<< HEAD
-## 4. Morphology (Organic Asymmetry)
-=======
 ## 4. Morphology ([DEPRECATED_STYLE] Asymmetry)
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 *Eroded stones, not CAD-generated rectangles.*
 
@@ -308,19 +210,6 @@ Track your growth through seasonal moments.
 
 ---
 
-<<<<<<< HEAD
-## 6. The Curio Cabinet (Asset Library)
-
-*Check `frontend/src/assets` folder for latest sources.*
-
-### Gallery Assets (The Garden)
-
-* `native-waratah-hanging.png` (Top-Right Anchor)
-* `native-banksia-cluster.png` (Bottom-Right Floor)
-* `kookaburra-sentry.png` (Welcome/Empty States)
-
-### Laboratory Assets (The Study)
-=======
 ## 6. The kr-solidarity Cabinet (Asset Library)
 
 *Check `frontend/src/assets` folder for latest sources.*
@@ -332,7 +221,6 @@ Track your growth through seasonal moments.
 * `kr-shiva-sentry.png` (Welcome/Empty States)
 
 ### kr-dark Assets (The Study)
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 * `da-vinci-skeleton.png` (Resume Structure)
 * `brass-calipers.png` (Measurement Tools)

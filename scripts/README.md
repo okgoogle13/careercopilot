@@ -293,8 +293,6 @@ Run validation test suite.
 
 Use these scripts for routine maintenance and utility functions:
 
-<<<<<<< HEAD
-=======
 #### `git-safe.sh`
 
 Safe wrapper for `git add`, `git commit`, and `git push` with lock/LFS preflight checks.
@@ -314,7 +312,6 @@ One-shot diagnosis for stale lock files, fsmonitor issues, LFS runtime health, a
 ./scripts/git-lock-diagnose.sh
 ```
 
->>>>>>> restoration-KR-Rage-Figma-v2.0
 #### `rotate-api-keys.sh`
 
 Securely rotate API keys.

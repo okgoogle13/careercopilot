@@ -125,11 +125,7 @@ Result: 100K tokens → 2K tokens (98% saved)
 ### When Design Validation is Requested
 
 ```
-<<<<<<< HEAD
-User: "Validate this Figma export against Northcote"
-=======
 User: "Validate this Figma export against kerala-rage"
->>>>>>> restoration-KR-Rage-Figma-v2.0
      ↓
 Claude: Detects design asset validation
      ↓
@@ -186,11 +182,7 @@ tail -f /tmp/mcp-design-system-sidekick.log
 grep "customInstructions" ~/.claude/claude_desktop_config.json
 
 # Claude Code
-<<<<<<< HEAD
-grep "customInstructions" /Users/okgoogle13/Desktop/careercopilot/.claude/settings.local.json
-=======
 grep "customInstructions" /Users/okgoogle13/Projects/careercopilot/.claude/settings.local.json
->>>>>>> restoration-KR-Rage-Figma-v2.0
 ```
 
 ### Check Server Registration

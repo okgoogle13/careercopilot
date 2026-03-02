@@ -5,11 +5,7 @@ import { cn } from '../../lib/utils';
 export interface LeafProps extends React.HTMLAttributes<HTMLDivElement> {
     /**
      * The structural role of this text block.
-<<<<<<< HEAD
-     * - Hero: The Banksia Composition (Vine + Trunk)
-=======
      * - Hero: The KrFlower Composition (Vine + Trunk)
->>>>>>> restoration-KR-Rage-Figma-v2.0
      * - Title: Section headers (Bloom)
      * - Body: Standard content (Leaf)
      * - Data: Monospace metrics (JetBrains)
@@ -22,11 +18,7 @@ export interface LeafProps extends React.HTMLAttributes<HTMLDivElement> {
     children: React.ReactNode;
 
     /**
-<<<<<<< HEAD
-     * Optional decorative label overlay (for Banksia).
-=======
      * Optional decorative label overlay (for KrFlower).
->>>>>>> restoration-KR-Rage-Figma-v2.0
      */
     label?: string;
 
@@ -46,31 +38,18 @@ export interface LeafProps extends React.HTMLAttributes<HTMLDivElement> {
 export const Leaf = React.forwardRef<HTMLDivElement, LeafProps>(
     ({ className, role = 'body', label, children, as, ...props }, ref) => {
 
-<<<<<<< HEAD
-        // Banksia Composition Logic (Hero)
-        if (role === 'hero') {
-            return (
-                <div ref={ref} className={cn("banksia-composition relative py-4", className)} {...props}>
-                    {/* The Trunk (Base) */}
-                    <h1 className="banksia-trunk text-7xl md:text-9xl tracking-tight text-white mb-2 z-10 relative">
-=======
         // KrFlower Composition Logic (Hero)
         if (role === 'hero') {
             return (
                 <div ref={ref} className={cn("KrFlower-composition relative py-4", className)} {...props}>
                     {/* The Trunk (Base) */}
                     <h1 className="KrFlower-trunk text-7xl md:text-9xl tracking-tight text-white mb-2 z-10 relative">
->>>>>>> restoration-KR-Rage-Figma-v2.0
                         {children}
                     </h1>
 
                     {/* The Vine (Overlay) */}
                     {label && (
-<<<<<<< HEAD
-                        <span className="banksia-vine absolute -top-2 -left-4 text-4xl md:text-6xl text-primary mix-blend-exclusion z-20">
-=======
                         <span className="KrFlower-vine absolute -top-2 -left-4 text-4xl md:text-6xl text-primary mix-blend-exclusion z-20">
->>>>>>> restoration-KR-Rage-Figma-v2.0
                             {label}
                         </span>
                     )}
@@ -101,8 +80,4 @@ export const Leaf = React.forwardRef<HTMLDivElement, LeafProps>(
     }
 );
 
-<<<<<<< HEAD
 Leaf.displayName = "Leaf";
-=======
-Leaf.displayName = "Leaf";
->>>>>>> restoration-KR-Rage-Figma-v2.0

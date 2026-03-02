@@ -27,59 +27,25 @@ dependencies = [
     "pydantic",
     "pydantic-settings",
     "python-multipart",
-<<<<<<< HEAD
-    "firebase-admin",
-    "google-api-python-client",
-    "google-cloud-storage",
-    "google-cloud-secret-manager",
     "sqlalchemy",
     "psycopg2-binary",
     "alembic",
-    "anthropic",
-=======
-    "sqlalchemy",
-    "psycopg2-binary",
-    "alembic",
->>>>>>> restoration-KR-Rage-Figma-v2.0
     "genkit",
     "genkit-plugin-google-genai",
     "python-jose[cryptography]",
     "passlib[bcrypt]",
     "email-validator",
     "PyJWT",
-<<<<<<< HEAD
-    "google-auth",
-    "pdfplumber",
-    "pypdfium2",
-    "pypdf",
-    "defusedxml",
-    "beautifulsoup4",
-    "jinja2",
-    "spacy",
-    "google-cloud-aiplatform",
-    "numpy",
-    "scikit-learn",
-    "pandas",
-=======
     "pypdf",
     "defusedxml",
     "beautifulsoup4",
     "spacy",
->>>>>>> restoration-KR-Rage-Figma-v2.0
     "prometheus-client",
     "psutil",
     "httpx[http2]",
     "requests",
     "slowapi",
-<<<<<<< HEAD
-    "boto3",
     "loguru",
-    "opencensus",
-    "opencensus-ext-stackdriver",
-    "celery",
-=======
-    "loguru",
->>>>>>> restoration-KR-Rage-Figma-v2.0
 ]
 
 [project.optional-dependencies]
@@ -251,32 +217,3 @@ dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
     "S101",  # Use of assert detected
     "ARG001", # Unused method argument
 ]
-<<<<<<< HEAD
-
-# Jupyter Notebook support
-[tool.ruff.jupyter]
-enabled = true
-
-# Type checking rules
-[tool.ruff.type-checking]
-strict = true
-
-# Flake8-quotes configuration
-[tool.ruff.flake8-quotes]
-docstring-quotes = "double"
-inline-quotes = "double"
-multiline-quotes = "double"
-
-# Flake8-bugbear configuration
-[tool.ruff.flake8-bugbear]
-extend-immutable-calls = ["fastapi.Depends"]
-
-# Pyupgrade configuration
-[tool.ruff.pyupgrade]
-keep-runtime-typing = true
-
-# isort configuration
-[tool.ruff.isort]
-known-first-party = ["app"]
-=======
->>>>>>> restoration-KR-Rage-Figma-v2.0

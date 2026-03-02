@@ -51,11 +51,7 @@ const mockJobs = [
     salary: '$90k - $120k',
     type: 'Full-time',
     postedAt: '3 days ago',
-<<<<<<< HEAD
-    description: 'Lead our growth marketing initiatives across paid and organic channels...',
-=======
     description: 'Lead our growth marketing initiatives across paid and [DEPRECATED_STYLE] channels...',
->>>>>>> restoration-KR-Rage-Figma-v2.0
     logo: 'https://logo.clearbit.com/growthco.com',
     tags: ['SEO', 'Content Strategy', 'Analytics'],
   },

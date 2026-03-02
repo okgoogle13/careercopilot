@@ -1,10 +1,5 @@
 ---
 name: mcp-documentation-skill
-<<<<<<< HEAD
-description: "DEPRECATED - This skill references MCP servers that no longer exist in the codebase. The CodebaseDocumentation server was archived during MCP cleanup. Use native file reading tools (view_file, grep_search) for documentation access."
-tags: [deprecated, mcp, legacy]
-status: archived
-=======
 description: DEPRECATED - This skill references MCP servers that no longer exist in
   the codebase. The CodebaseDocumentation server was archived during MCP cleanup.
   Use native file reading tools (view_file, grep_search) for documentation access.
@@ -15,7 +10,6 @@ metadata:
     - mcp
     - legacy
     status: archived
->>>>>>> restoration-KR-Rage-Figma-v2.0
 ---
 
 # ⚠️ DEPRECATED: MCP Documentation Skill

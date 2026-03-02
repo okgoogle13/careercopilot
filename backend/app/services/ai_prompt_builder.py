@@ -5,18 +5,6 @@ Centralizes all AI prompt generation logic with templates, context injection,
 and consistent formatting across the entire application by delegating to Genkit flows.
 """
 
-<<<<<<< HEAD
-import json
-import logging
-from dataclasses import dataclass, field
-from enum import Enum
-from typing import Any, Dict, Optional
-
-from app.genkit_flows.career_intelligence import careerIntelligenceFlow
-from app.schemas.ai import CareerIntelligenceRequest
-from app.core.config import get_personal_config
-from app.core.personal_cache import get_personal_cache
-=======
 import logging
 from dataclasses import dataclass, field
 from enum import Enum
@@ -26,7 +14,6 @@ from app.core.config import get_personal_config
 from app.core.personal_cache import get_personal_cache
 from app.genkit_flows.career_intelligence import careerIntelligenceFlow
 from app.schemas.ai import CareerIntelligenceRequest
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 logger = logging.getLogger(__name__)
 
@@ -47,21 +34,12 @@ class PromptType(Enum):
 class PromptContext:
     """Context data for AI prompt generation"""
 
-<<<<<<< HEAD
-    user_config: Optional[Dict[str, Any]] = None
-    career_context: Optional[Dict[str, str]] = None
-    location_context: Optional[str] = None
-    job_context: Optional[Dict[str, Any]] = None
-    company_context: Optional[Dict[str, Any]] = None
-    custom_data: Dict[str, Any] = field(default_factory=dict)
-=======
     user_config: dict[str, Any] | None = None
     career_context: dict[str, str] | None = None
     location_context: str | None = None
     job_context: dict[str, Any] | None = None
     company_context: dict[str, Any] | None = None
     custom_data: dict[str, Any] = field(default_factory=dict)
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 
 class AIPromptBuilder:
@@ -91,11 +69,7 @@ class AIPromptBuilder:
         self,
         prompt_type: PromptType,
         task_prompt: str,
-<<<<<<< HEAD
-        context: Optional[PromptContext] = None,
-=======
         context: PromptContext | None = None,
->>>>>>> restoration-KR-Rage-Figma-v2.0
         model: str = "gemini-3.0-flash",
         use_cache: bool = True,
     ) -> str:
@@ -129,19 +103,11 @@ class AIPromptBuilder:
 
         except Exception as e:
             logger.error(f"Bridged AI prompt generation failed: {e}")
-<<<<<<< HEAD
-            return f"Error generating AI response: {str(e)}"
-
-
-# Global instance
-_ai_prompt_builder: Optional[AIPromptBuilder] = None
-=======
             return f"Error generating AI response: {e!s}"
 
 
 # Global instance
 _ai_prompt_builder: AIPromptBuilder | None = None
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 
 def get_ai_prompt_builder() -> AIPromptBuilder:

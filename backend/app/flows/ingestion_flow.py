@@ -1,17 +1,9 @@
-<<<<<<< HEAD
-import genkit
-from genkit.core.typing import GenerateRequest
-from app.schemas.career_master import CareerDatabase
-import logging
-
-=======
 import logging
 
 import genkit
 
 from app.schemas.career_master import CareerDatabase
 
->>>>>>> restoration-KR-Rage-Figma-v2.0
 logger = logging.getLogger(__name__)
 
 # The Master Prompt from ingestion_prompts.md
@@ -339,16 +331,9 @@ def ingest_career_history(text_content: str) -> CareerDatabase:
     # This is a big assumption about Genkit's API, but it's the only way to incorporate the `genai.GenerativeModel` part.
 
     # Let's try this.import genkit
-<<<<<<< HEAD
-from genkit.core.typing import GenerateRequest
-from app.schemas.career_master import CareerDatabase
-import logging
-import google.generativeai as genai # Added import for genai
-=======
 import logging
 
 from app.schemas.career_master import CareerDatabase
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 logger = logging.getLogger(__name__)
 

@@ -1,10 +1,6 @@
 from unittest.mock import Mock, patch
 
 import pytest
-<<<<<<< HEAD
-
-=======
->>>>>>> restoration-KR-Rage-Figma-v2.0
 from app.genkit_flows.job_analyzer import analyze_job_description
 
 

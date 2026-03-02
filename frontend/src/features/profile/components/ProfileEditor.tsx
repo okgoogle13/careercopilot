@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from 'sonner';
 import { api } from '@/services/api';
 import { genkitApi } from '@/services/genkit';
-import { KrDarkSpring, staggerContainer } from '@/design/tokens/motion-presets';
+import { KrDarkSpring, staggerContainer, motionVariants } from '@/design/tokens/motion-presets';
 import { UserProfile } from '@/services/mockData';
 
 // Lab Assets
@@ -113,7 +113,7 @@ export const ProfileEditor: React.FC<ProfileEditorProps> = ({ onNext, onBack }) 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Lab Header */}
         <motion.header 
-          variants={KrDarkSpring}
+          variants={motionVariants.slideUp}
           className="mb-16 border-b border-bark-base/10 pb-8 flex justify-between items-end"
         >
           <div>
@@ -136,7 +136,7 @@ export const ProfileEditor: React.FC<ProfileEditorProps> = ({ onNext, onBack }) 
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
           {/* Left Column - The "Glass Case" Visual (ASSET-07) */}
-          <motion.div variants={KrDarkSpring} className="lg:col-span-4 space-y-8">
+          <motion.div variants={motionVariants.slideUp} className="lg:col-span-4 space-y-8">
             <Stone
              
               elevation="floating"
@@ -191,7 +191,7 @@ export const ProfileEditor: React.FC<ProfileEditorProps> = ({ onNext, onBack }) 
           {/* Right Column - Lab Forms */}
           <div className="lg:col-span-8 space-y-12">
             {/* Personal Records */}
-            <motion.section variants={KrDarkSpring} className="space-y-6">
+            <motion.section variants={motionVariants.slideUp} className="space-y-6">
               <div className="flex items-center gap-3 border-b border-bark-base/5 pb-2">
                 <User
                   size={18}
@@ -240,7 +240,7 @@ export const ProfileEditor: React.FC<ProfileEditorProps> = ({ onNext, onBack }) 
             </motion.section>
 
             {/* Professional Summary - The "Synthesis" */}
-            <motion.section variants={KrDarkSpring} className="space-y-6">
+            <motion.section variants={motionVariants.slideUp} className="space-y-6">
               <div className="flex justify-between items-center border-b border-bark-base/5 pb-2">
                 <div className="flex items-center gap-3">
                   <Briefcase
@@ -293,7 +293,7 @@ export const ProfileEditor: React.FC<ProfileEditorProps> = ({ onNext, onBack }) 
 
             {/* Experience & Skills - KrMotif List */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-              <motion.section variants={KrDarkSpring} className="space-y-6">
+              <motion.section variants={motionVariants.slideUp} className="space-y-6">
                 <div className="flex items-center gap-3 border-b border-bark-base/5 pb-2">
                   <Archive
                     size={18}
@@ -327,7 +327,7 @@ export const ProfileEditor: React.FC<ProfileEditorProps> = ({ onNext, onBack }) 
                 </div>
               </motion.section>
 
-              <motion.section variants={KrDarkSpring} className="space-y-6">
+              <motion.section variants={motionVariants.slideUp} className="space-y-6">
                 <div className="flex items-center gap-3 border-b border-bark-base/5 pb-2">
                   <Award
                     size={18}
@@ -358,7 +358,7 @@ export const ProfileEditor: React.FC<ProfileEditorProps> = ({ onNext, onBack }) 
 
         {/* Global Action Footer */}
         <motion.footer 
-          variants={KrDarkSpring}
+          variants={motionVariants.slideUp}
           className="mt-20 pt-8 border-t border-bark-base/10 flex justify-between items-center"
         >
           <Pebble

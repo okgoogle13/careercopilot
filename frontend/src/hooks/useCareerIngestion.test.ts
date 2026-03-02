@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-import React from 'react';
-import { renderHook, act } from '@testing-library/react';
-import { useCareerIngestion } from './useCareerIngestion';
-import { CareerDatabase } from '../types/api';
-import { AuthContext } from '../context/AuthContext';
-=======
 import { jest } from '@jest/globals';
 
 // Mock AuthContext
@@ -17,16 +10,11 @@ const mockSession = { access_token: 'test-token', user: { email: 'test@example.c
 
 import React from 'react';
 import { renderHook, act } from '@testing-library/react';
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 // Mock global fetch
 global.fetch = jest.fn();
 
-<<<<<<< HEAD
-const mockCareerData: CareerDatabase = {
-=======
 const mockCareerData = {
->>>>>>> restoration-KR-Rage-Figma-v2.0
     Personal_Information: {
         FullName: 'John Doe',
         Phone: '123-456-7890',
@@ -55,19 +43,6 @@ const mockContextValue = {
     logout: jest.fn(),
 } as any;
 
-<<<<<<< HEAD
-// Use React.createElement to avoid potential JSX parsing issues if configuration is strict
-const wrapper = ({ children }: { children: React.ReactNode }) =>
-    React.createElement(AuthContext.Provider, { value: mockContextValue }, children);
-
-describe('useCareerIngestion', () => {
-    beforeEach(() => {
-        jest.clearAllMocks();
-    });
-
-    it('updateCareerDatabase calls correct endpoint with PATCH and data', async () => {
-        mockGetIdToken.mockResolvedValue('test-token');
-=======
 describe('useCareerIngestion', () => {
     let useCareerIngestion: any;
 
@@ -88,17 +63,12 @@ describe('useCareerIngestion', () => {
     });
 
     it('updateCareerDatabase calls correct endpoint with PATCH and data', async () => {
->>>>>>> restoration-KR-Rage-Figma-v2.0
         (global.fetch as jest.Mock).mockResolvedValue({
             ok: true,
             json: async () => mockCareerData,
         });
 
-<<<<<<< HEAD
-        const { result } = renderHook(() => useCareerIngestion(), { wrapper });
-=======
         const { result } = renderHook(() => useCareerIngestion());
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
         await act(async () => {
             await result.current.updateCareerDatabase(mockCareerData);
@@ -118,21 +88,13 @@ describe('useCareerIngestion', () => {
     });
 
     it('submitDocuments calls correct endpoint with POST and files', async () => {
-<<<<<<< HEAD
-        mockGetIdToken.mockResolvedValue('test-token');
-=======
         // mockSession already has token
->>>>>>> restoration-KR-Rage-Figma-v2.0
         (global.fetch as jest.Mock).mockResolvedValue({
             ok: true,
             json: async () => mockCareerData,
         });
 
-<<<<<<< HEAD
-        const { result } = renderHook(() => useCareerIngestion(), { wrapper });
-=======
         const { result } = renderHook(() => useCareerIngestion());
->>>>>>> restoration-KR-Rage-Figma-v2.0
         const files = [new File([''], 'test.pdf', { type: 'application/pdf' })];
 
         await act(async () => {
@@ -146,10 +108,6 @@ describe('useCareerIngestion', () => {
             },
         }));
 
-<<<<<<< HEAD
-        const callArgs = (global.fetch as jest.Mock).mock.calls[0];
-        expect(callArgs[0]).toBe('/api/v1/ingest');
-=======
         expect(global.fetch).toHaveBeenCalledWith('/api/v1/ingest', expect.objectContaining({
             method: 'POST',
             headers: {
@@ -158,27 +116,18 @@ describe('useCareerIngestion', () => {
         }));
 
         const callArgs = (global.fetch as jest.Mock).mock.calls[0];
->>>>>>> restoration-KR-Rage-Figma-v2.0
         expect(callArgs[1].body).toBeInstanceOf(FormData);
     });
 
     it('handles errors correctly', async () => {
-<<<<<<< HEAD
-        mockGetIdToken.mockResolvedValue('test-token');
-=======
         // mockSession already has token
->>>>>>> restoration-KR-Rage-Figma-v2.0
         (global.fetch as jest.Mock).mockResolvedValue({
             ok: false,
             text: async () => 'Internal Server Error',
             statusText: 'Internal Server Error'
         });
 
-<<<<<<< HEAD
-        const { result } = renderHook(() => useCareerIngestion(), { wrapper });
-=======
         const { result } = renderHook(() => useCareerIngestion());
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
         await act(async () => {
             try {

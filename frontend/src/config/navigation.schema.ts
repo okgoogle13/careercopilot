@@ -1,4 +1,4 @@
-export type NavigationModeAvailability = 'KrDark' | 'KrDark' | 'both';
+export type NavigationModeAvailability = 'KrDark' | 'both';
 
 export interface NavigationItem {
     id: string;

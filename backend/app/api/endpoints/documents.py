@@ -8,19 +8,6 @@ FastAPI endpoints for document generation including:
 """
 
 import json
-<<<<<<< HEAD
-import time
-from typing import Dict, Optional, List, Any
-
-from fastapi import APIRouter, HTTPException, status, Depends, UploadFile, File, Form
-from fastapi.responses import FileResponse
-import shutil
-import tempfile
-import os
-from app.services.doc_intelligence import DocumentIntelligenceService
-from app.core.dependencies import get_current_user
-from pydantic import BaseModel, Field
-=======
 import os
 import shutil
 import tempfile
@@ -30,7 +17,6 @@ from fastapi.responses import FileResponse
 
 from app.core.dependencies import get_current_user
 from app.services.doc_intelligence import DocumentIntelligenceService
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 # Legacy Genkit flows disabled
 # from app.genkit_flows.cover_letter_generator import generate_tailored_cover_letter
@@ -43,19 +29,12 @@ router = APIRouter()
 # Endpoints
 # ============================================================================
 
-<<<<<<< HEAD
-from app.core.database import get_db
-from app.models.database import User
-from app.models.user_asset import UserAsset
-from sqlalchemy.orm import Session
-=======
 from sqlalchemy.orm import Session
 
 from app.core.database import get_db
 from app.models.database import User
 from app.models.user_asset import UserAsset
 
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 @router.get("/", status_code=status.HTTP_200_OK)
 async def get_documents(
@@ -83,24 +62,14 @@ async def redline_document(file: UploadFile = File(...), edits: str = Form(...))
                Example: '[{"original": "old text", "replacement": "new text"}]'
     """
     service = DocumentIntelligenceService()
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> restoration-KR-Rage-Figma-v2.0
     # Create temp files
     with tempfile.NamedTemporaryFile(delete=False, suffix=".docx") as input_tmp:
         shutil.copyfileobj(file.file, input_tmp)
         input_path = input_tmp.name
-<<<<<<< HEAD
-    
-    output_path = input_path.replace(".docx", "_redlined.docx")
-    
-=======
 
     output_path = input_path.replace(".docx", "_redlined.docx")
 
->>>>>>> restoration-KR-Rage-Figma-v2.0
     try:
         try:
             edits_list = json.loads(edits)
@@ -108,15 +77,6 @@ async def redline_document(file: UploadFile = File(...), edits: str = Form(...))
             raise HTTPException(status_code=400, detail="Invalid JSON for edits")
 
         success = service.apply_redlines_to_docx(input_path, output_path, edits_list)
-<<<<<<< HEAD
-        
-        if not success:
-             raise HTTPException(status_code=500, detail="Redlining failed")
-             
-        return FileResponse(
-            output_path, 
-            media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document", 
-=======
 
         if not success:
              raise HTTPException(status_code=500, detail="Redlining failed")
@@ -124,7 +84,6 @@ async def redline_document(file: UploadFile = File(...), edits: str = Form(...))
         return FileResponse(
             output_path,
             media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
->>>>>>> restoration-KR-Rage-Figma-v2.0
             filename=f"redlined_{file.filename}"
         )
 

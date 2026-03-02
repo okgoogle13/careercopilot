@@ -11,11 +11,8 @@ import { cleanup } from '@testing-library/react';
   meta: {
     env: {
       VITE_API_URL: 'http://localhost:8000',
-<<<<<<< HEAD
-=======
       VITE_SUPABASE_URL: 'https://test.supabase.co',
       VITE_SUPABASE_ANON_KEY: 'test-anon-key',
->>>>>>> restoration-KR-Rage-Figma-v2.0
       VITE_FIREBASE_API_KEY: 'test-api-key',
       VITE_FIREBASE_AUTH_DOMAIN: 'test.firebaseapp.com',
       VITE_FIREBASE_PROJECT_ID: 'test-project',
@@ -41,11 +38,7 @@ afterEach(() => {
 // Mock window.matchMedia for Material-UI components
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
-<<<<<<< HEAD
-  value: jest.fn().mockImplementation((query) => ({
-=======
   value: jest.fn().mockImplementation((query: any) => ({
->>>>>>> restoration-KR-Rage-Figma-v2.0
     matches: false,
     media: query,
     onchange: null,

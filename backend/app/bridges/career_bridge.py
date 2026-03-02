@@ -1,19 +1,10 @@
 import logging
-<<<<<<< HEAD
-from typing import Any, Dict, Optional, List
-from enum import Enum
-
-from app.genkit_flows.career_intelligence import careerIntelligenceFlow
-from app.schemas.ai import CareerIntelligenceRequest
-from app.core.config import get_personal_config
-=======
 from enum import Enum
 from typing import Any
 
 from app.core.config import get_personal_config
 from app.genkit_flows.career_intelligence import careerIntelligenceFlow
 from app.schemas.ai import CareerIntelligenceRequest
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 logger = logging.getLogger(__name__)
 
@@ -48,11 +39,7 @@ class AIPromptBuilderBridge:
         self,
         prompt_type: PromptType,
         task_prompt: str,
-<<<<<<< HEAD
-        context: Optional[Any] = None,
-=======
         context: Any | None = None,
->>>>>>> restoration-KR-Rage-Figma-v2.0
         model: str = "gemini-3.0-flash",
         use_cache: bool = True
     ) -> str:
@@ -83,11 +70,7 @@ class AIPromptBuilderBridge:
             return response.content
         except Exception as e:
             logger.error(f"Bridge failed to execute flow: {e}")
-<<<<<<< HEAD
-            return f"Error: {str(e)}"
-=======
             return f"Error: {e!s}"
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 # Global instance for easy replacement
 _builder_bridge = AIPromptBuilderBridge()

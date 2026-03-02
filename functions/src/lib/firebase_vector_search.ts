@@ -96,7 +96,7 @@ export class FirebaseVectorSearch<T> {
 
     // Score every entry and filter under minScore
     const scored = snapshot.docs
-      .map((doc) => {
+      .map((doc: admin.firestore.QueryDocumentSnapshot) => {
         const data = doc.data() as {
           id: string;
           embedding: number[];
@@ -108,8 +108,8 @@ export class FirebaseVectorSearch<T> {
           metadata: data.metadata,
         };
       })
-      .filter((entry) => entry.score >= minScore)
-      .sort((a, b) => b.score - a.score)
+      .filter((entry: { score: number }) => entry.score >= minScore)
+      .sort((a: { score: number }, b: { score: number }) => b.score - a.score)
       .slice(0, limit);
 
     return scored;

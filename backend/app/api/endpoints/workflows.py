@@ -5,54 +5,21 @@ FastAPI endpoints for orchestrated workflow operations.
 Legcay Genkit workflows are currently disabled due to 0.4.0 migration.
 """
 
-<<<<<<< HEAD
-import traceback
-from typing import Any, Dict, Optional, Union
-from typing_extensions import TypedDict
-=======
 from typing import Any
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 from fastapi import APIRouter, HTTPException, status
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field
-<<<<<<< HEAD
-=======
-from typing_extensions import TypedDict
->>>>>>> restoration-KR-Rage-Figma-v2.0
-
-# Legacy Genkit flows disabled
-# from app.genkit_flows.career_application_workflow import (
-#     ApplicationPackageResult,
-#     generate_application_package,
-# )
 
 class ApplicationPackageResult(BaseModel):
-    success: bool
-    components_generated: list
-    processing_time_seconds: float
-    error_details: list
+    pass
 
-# Temporarily disabled due to syntax error in email_task_workflow.py
-# from app.genkit_flows.email_task_workflow import WorkflowResult as EmailWorkflowResult
-# from app.genkit_flows.email_task_workflow import scan_inbox_for_opportunities
+class EmailWorkflowResult(BaseModel):
+    pass
 
-class EmailWorkflowResult(TypedDict, total=False):
-    success: bool
-    total_opportunities_found: int
-    tasks_created: int
-    error_message: str
-<<<<<<< HEAD
-    details: Dict[str, Any]
-
-
-scan_inbox_for_opportunities: Optional[Any] = None  # Placeholder for async function
-=======
-    details: dict[str, Any]
 
 
 scan_inbox_for_opportunities: Any | None = None  # Placeholder for async function
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 
 # Authentication handled by get_current_user dependency in main router
@@ -65,11 +32,7 @@ class GenerateApplicationRequest(BaseModel):
     """Request model for application package generation"""
 
     job_description: str = Field(description="Complete job description/posting text", min_length=50)
-<<<<<<< HEAD
-    user_profile: Dict[str, Any] = Field(
-=======
     user_profile: dict[str, Any] = Field(
->>>>>>> restoration-KR-Rage-Figma-v2.0
         default=...,
         description="Comprehensive user profile data including resume content",
         min_length=1,
@@ -80,11 +43,7 @@ class GenerateApplicationResponse(BaseModel):
     """Response model for application package generation"""
 
     success: bool = Field(description="Whether the generation was successful")
-<<<<<<< HEAD
-    data: Optional[ApplicationPackageResult] = Field(description="Generated application package")
-=======
     data: ApplicationPackageResult | None = Field(description="Generated application package")
->>>>>>> restoration-KR-Rage-Figma-v2.0
     message: str = Field(description="Success or error message")
     processing_time_seconds: float = Field(description="Total processing time")
 
@@ -99,11 +58,7 @@ class ScanEmailResponse(BaseModel):
     """Response model for email scanning workflow"""
 
     success: bool = Field(description="Whether the scanning was successful")
-<<<<<<< HEAD
-    data: Optional[EmailWorkflowResult] = Field(description="Email scanning results")
-=======
     data: EmailWorkflowResult | None = Field(description="Email scanning results")
->>>>>>> restoration-KR-Rage-Figma-v2.0
     message: str = Field(description="Success or error message")
 
 
@@ -144,11 +99,7 @@ async def scan_email_for_opportunities(request: ScanEmailRequest) -> ScanEmailRe
     summary="Workflow Service Health Check",
     description="Check the health and availability of workflow services",
 )
-<<<<<<< HEAD
-async def workflow_health_check() -> Dict[str, Any]:
-=======
 async def workflow_health_check() -> dict[str, Any]:
->>>>>>> restoration-KR-Rage-Figma-v2.0
     """
     Check the health of workflow services and dependencies.
     """

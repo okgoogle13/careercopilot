@@ -12,16 +12,6 @@ interface ApplicationCardProps {
 import { StatusBadge, type StatusBadgeVariant } from '../ui/StatusBadge';
 
 /**
-<<<<<<< HEAD
- * ApplicationCard -  V3.1 Job Application Tracker Card
- *
- * Displays job application information with a multi-step progress indicator.
- *
- * ** V3.1 Usage:**
- * - Shape: `rounded-pebble` → Organic asymmetric corners ✅
- * - Elevation: `shadow-standard` → `shadow-maximum` on hover
- * - Typography: `text-bloom-gallery` (SOFT=100) for titles
-=======
  * ApplicationCard - KeralaRage KrSolidarity V3.1 Job Application Tracker Card
  *
  * Displays job application information with a multi-step progress indicator.
@@ -30,7 +20,6 @@ import { StatusBadge, type StatusBadgeVariant } from '../ui/StatusBadge';
  * - Shape: `rounded-pebble` → [DEPRECATED_STYLE] asymmetric corners ✅
  * - Elevation: `shadow-standard` → `shadow-maximum` on hover
  * - Typography: `text-bloom-KrDark` (SOFT=100) for titles
->>>>>>> restoration-KR-Rage-Figma-v2.0
  * - Annotations: `text-curator-annotation` for curator notes
  */
 export function ApplicationCard({
@@ -48,11 +37,7 @@ export function ApplicationCard({
       {/* Header Section */}
       <div className="flex items-start justify-between mb-8">
         <div className="flex-1">
-<<<<<<< HEAD
-          <h3 className="text-bloom-gallery text-xl mb-1">{title}</h3>
-=======
           <h3 className="text-bloom-KrDark text-xl mb-1">{title}</h3>
->>>>>>> restoration-KR-Rage-Figma-v2.0
           <p className="text-on-surface-variant font-field-note italic text-lg">{company}</p>
           <div className="flex items-center gap-2 mt-2">
             <span className="text-curator-annotation text-sm">→ {location}</span>
@@ -112,8 +97,4 @@ function getStatusVariant(status: string): StatusBadgeVariant {
   if (norm.includes('interview') || norm.includes('screening')) return 'info';
   if (norm.includes('applied')) return 'warning';
   return 'neutral';
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> restoration-KR-Rage-Figma-v2.0

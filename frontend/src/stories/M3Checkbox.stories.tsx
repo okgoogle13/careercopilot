@@ -1,10 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-<<<<<<< HEAD
-import { M3Checkbox, M3Radio } from '../components/ui/M3Checkbox';
-=======
 import { M3Checkbox, M3Radio } from '../components/ui/Mark';
 import { Mark } from '../components/ui/Mark';
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 const meta: Meta<typeof M3Checkbox> = {
     title: 'M3 Components/Selection Controls',
@@ -69,15 +65,9 @@ export const MixedStates: StoryObj<typeof M3Checkbox> = {
             </div>
             <div className="flex flex-col gap-2">
                 <h3 className="text-title-medium">Radio Variants</h3>
-<<<<<<< HEAD
-                <M3Radio groupName="r" label="Default Radio" />
-                <M3Radio groupName="r" label="Selected Radio" checked />
-                <M3Radio groupName="r" label="Disabled Radio" disabled />
-=======
                 <M3Radio name="r" label="Default Radio" />
                 <M3Radio name="r" label="Selected Radio" checked />
                 <M3Radio name="r" label="Disabled Radio" disabled />
->>>>>>> restoration-KR-Rage-Figma-v2.0
             </div>
         </div>
     ),

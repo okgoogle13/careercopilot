@@ -1,11 +1,5 @@
-<<<<<<< HEAD
-import os
-from typing import List, Literal
-from pydantic import BaseModel
-=======
 from typing import Literal
 
->>>>>>> restoration-KR-Rage-Figma-v2.0
 try:
     from pdfminer.high_level import extract_text
 except ImportError:  # pragma: no cover - optional dependency in test/CI
@@ -14,17 +8,11 @@ try:
     import docx
 except ImportError:  # pragma: no cover - optional dependency in test/CI
     docx = None
-<<<<<<< HEAD
-from app.services.vector_store import VectorStore, CareerArtifact
-import io
-
-=======
 import io
 
 from app.services.vector_store import CareerArtifact, VectorStore
 
 
->>>>>>> restoration-KR-Rage-Figma-v2.0
 class IngestionService:
     """
     Handles parsing of raw files (PDF, DOCX, TXT) and ingesting them
@@ -39,16 +27,6 @@ class IngestionService:
         Parses file content and adds it to the vector store.
         """
         text = ""
-<<<<<<< HEAD
-        file_ext = filename.split('.')[-1].lower()
-
-        if file_ext == 'pdf':
-            text = self._parse_pdf(file_content)
-        elif file_ext in ['docx', 'doc']:
-            text = self._parse_docx(file_content)
-        elif file_ext == 'txt':
-            text = file_content.decode('utf-8')
-=======
         file_ext = filename.split(".")[-1].lower()
 
         if file_ext == "pdf":
@@ -57,7 +35,6 @@ class IngestionService:
             text = self._parse_docx(file_content)
         elif file_ext == "txt":
             text = file_content.decode("utf-8")
->>>>>>> restoration-KR-Rage-Figma-v2.0
         else:
             raise ValueError(f"Unsupported file type: {file_ext}")
 
@@ -78,11 +55,7 @@ class IngestionService:
                     # derived_skills could be added here via a lightweight Gemini call if we wanted active enrichment
                 )
                 self.vector_store.add_artifact(artifact, user_id=user_id)
-<<<<<<< HEAD
-        
-=======
 
->>>>>>> restoration-KR-Rage-Figma-v2.0
         print(f"Successfully processed {filename} into {len(chunks)} chunks.")
 
     def _parse_pdf(self, file_content: bytes) -> str:
@@ -98,20 +71,12 @@ class IngestionService:
             doc = docx.Document(f)
             return "\n".join([para.text for para in doc.paragraphs])
 
-<<<<<<< HEAD
-    def _semantic_chunking(self, text: str, max_chunk_size: int = 1000) -> List[str]:
-=======
     def _semantic_chunking(self, text: str, max_chunk_size: int = 1000) -> list[str]:
->>>>>>> restoration-KR-Rage-Figma-v2.0
         """
         Splits text into chunks. Respects paragraph boundaries.
         Accumulates paragraphs until max_chunk_size is reached.
         """
-<<<<<<< HEAD
-        paragraphs = text.split('\n')
-=======
         paragraphs = text.split("\n")
->>>>>>> restoration-KR-Rage-Figma-v2.0
         chunks = []
         current_chunk = ""
 
@@ -119,11 +84,7 @@ class IngestionService:
             para = para.strip()
             if not para:
                 continue
-<<<<<<< HEAD
-                
-=======
 
->>>>>>> restoration-KR-Rage-Figma-v2.0
             if len(current_chunk) + len(para) > max_chunk_size:
                 chunks.append(current_chunk)
                 current_chunk = para
@@ -132,15 +93,8 @@ class IngestionService:
                     current_chunk += "\n" + para
                 else:
                     current_chunk = para
-<<<<<<< HEAD
-        
-        if current_chunk:
-            chunks.append(current_chunk)
-            
-=======
 
         if current_chunk:
             chunks.append(current_chunk)
 
->>>>>>> restoration-KR-Rage-Figma-v2.0
         return chunks

@@ -1,13 +1,6 @@
 """
 Integration test for Career Ingestion Flow
 """
-<<<<<<< HEAD
-import pytest
-from fastapi.testclient import TestClient
-from unittest.mock import Mock, patch, AsyncMock
-from app.main import app
-
-=======
 from unittest.mock import AsyncMock, Mock, patch
 
 import pytest
@@ -16,7 +9,6 @@ from fastapi.testclient import TestClient
 from app.main import app
 
 
->>>>>>> restoration-KR-Rage-Figma-v2.0
 @pytest.fixture
 def client():
     return TestClient(app)
@@ -32,17 +24,10 @@ def test_ingestion_endpoint_exists(client):
     """Test that the /api/v1/ingest endpoint is registered"""
     response = client.get("/openapi.json")
     assert response.status_code == 200
-<<<<<<< HEAD
-    
-    openapi_spec = response.json()
-    assert "/api/v1/ingest" in openapi_spec["paths"]
-    
-=======
 
     openapi_spec = response.json()
     assert "/api/v1/ingest" in openapi_spec["paths"]
 
->>>>>>> restoration-KR-Rage-Figma-v2.0
 def test_ingestion_requires_auth(client):
     """Test that ingestion endpoint requires authentication"""
     response = client.post(
@@ -68,11 +53,7 @@ async def test_ingestion_success_flow(
     # Setup mocks
     mock_auth.return_value = mock_user
     mock_extract_text.return_value = "Sample resume text with achievements"
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> restoration-KR-Rage-Figma-v2.0
     mock_career_db = Mock()
     mock_career_db.model_dump.return_value = {
         "Personal_Information": {
@@ -93,21 +74,13 @@ async def test_ingestion_success_flow(
     }
     mock_ingest_flow.return_value = mock_career_db
     mock_profile_service.update_user_profile = AsyncMock()
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> restoration-KR-Rage-Figma-v2.0
     # Make request
     response = client.post(
         "/api/v1/ingest",
         files={"files": ("resume.txt", b"Software Engineer with 5 years experience", "text/plain")}
     )
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> restoration-KR-Rage-Figma-v2.0
     # Verify
     assert response.status_code == 200
     data = response.json()

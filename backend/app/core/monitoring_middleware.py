@@ -9,14 +9,9 @@ import json
 import logging
 import time
 import uuid
-<<<<<<< HEAD
-from datetime import datetime, timezone
-from typing import Any, Callable, Dict, List, Optional
-=======
 from collections.abc import Callable
 from datetime import datetime, timezone
 from typing import Any
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 from fastapi import FastAPI, Request, Response
 from fastapi.responses import JSONResponse
@@ -38,11 +33,7 @@ class RequestMonitoringMiddleware(BaseHTTPMiddleware):
         include_request_body: bool = False,
         include_response_body: bool = False,
         max_body_size: int = 1024 * 1024,  # 1MB
-<<<<<<< HEAD
-        exclude_paths: Optional[List[str]] = None,
-=======
         exclude_paths: list[str] | None = None,
->>>>>>> restoration-KR-Rage-Figma-v2.0
     ):
         super().__init__(app)
         self.include_request_body = include_request_body
@@ -190,11 +181,7 @@ class RequestMonitoringMiddleware(BaseHTTPMiddleware):
                 headers={"X-Request-ID": request_id},
             )
 
-<<<<<<< HEAD
-    def _extract_user_id(self, request: Request) -> Optional[str]:
-=======
     def _extract_user_id(self, request: Request) -> str | None:
->>>>>>> restoration-KR-Rage-Figma-v2.0
         """Extract user ID from request"""
         # Try to get from Authorization header (if using custom auth)
         auth_header = request.headers.get("Authorization")
@@ -247,11 +234,7 @@ class RequestMonitoringMiddleware(BaseHTTPMiddleware):
 
         return path
 
-<<<<<<< HEAD
-    async def _build_request_info(self, request: Request) -> Dict[str, Any]:
-=======
     async def _build_request_info(self, request: Request) -> dict[str, Any]:
->>>>>>> restoration-KR-Rage-Figma-v2.0
         """Build additional request information"""
         info = {}
 
@@ -274,11 +257,7 @@ class RequestMonitoringMiddleware(BaseHTTPMiddleware):
 
         return info
 
-<<<<<<< HEAD
-    async def _build_response_info(self, response: Response) -> Dict[str, Any]:
-=======
     async def _build_response_info(self, response: Response) -> dict[str, Any]:
->>>>>>> restoration-KR-Rage-Figma-v2.0
         """Build additional response information"""
         info = {}
 
@@ -472,14 +451,6 @@ class HealthCheckMiddleware(BaseHTTPMiddleware):
                 status_code=503,
             )
 
-<<<<<<< HEAD
-    async def _check_database(self) -> Dict[str, Any]:
-        """Check database connectivity"""
-        try:
-            from app.core.database import SessionLocal
-            from sqlalchemy import text
-            
-=======
     async def _check_database(self) -> dict[str, Any]:
         """Check database connectivity"""
         try:
@@ -487,7 +458,6 @@ class HealthCheckMiddleware(BaseHTTPMiddleware):
 
             from app.core.database import SessionLocal
 
->>>>>>> restoration-KR-Rage-Figma-v2.0
             db = SessionLocal()
             try:
                 db.execute(text("SELECT 1"))
@@ -497,11 +467,7 @@ class HealthCheckMiddleware(BaseHTTPMiddleware):
         except Exception as e:
             return {"healthy": False, "service": "postgresql", "error": str(e)}
 
-<<<<<<< HEAD
-    async def _check_cache(self) -> Dict[str, Any]:
-=======
     async def _check_cache(self) -> dict[str, Any]:
->>>>>>> restoration-KR-Rage-Figma-v2.0
         """Check cache system health"""
         try:
             from app.core.cache_middleware import cache_health_check
@@ -516,11 +482,7 @@ class HealthCheckMiddleware(BaseHTTPMiddleware):
         except Exception as e:
             return {"healthy": False, "service": "cache", "error": str(e)}
 
-<<<<<<< HEAD
-    async def _check_external_services(self) -> Dict[str, Any]:
-=======
     async def _check_external_services(self) -> dict[str, Any]:
->>>>>>> restoration-KR-Rage-Figma-v2.0
         """Check external service dependencies"""
         # This would check AI services, email services, etc.
         # For now, return healthy as these are temporarily disabled
@@ -531,11 +493,7 @@ class HealthCheckMiddleware(BaseHTTPMiddleware):
         }
 
 
-<<<<<<< HEAD
-def add_monitoring_middleware(app: FastAPI, config: Optional[Dict[str, Any]] = None):
-=======
 def add_monitoring_middleware(app: FastAPI, config: dict[str, Any] | None = None):
->>>>>>> restoration-KR-Rage-Figma-v2.0
     """Add all monitoring middleware to the FastAPI application"""
 
     config = config or {}

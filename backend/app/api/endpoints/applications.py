@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-from typing import List, Optional
-=======
->>>>>>> restoration-KR-Rage-Figma-v2.0
 from datetime import datetime, timezone
 
 from fastapi import APIRouter, Depends, HTTPException, status
@@ -10,11 +6,7 @@ from sqlalchemy.orm import Session
 from app.core.database import get_db
 from app.core.dependencies import get_current_user
 from app.models.application_schemas import ApplicationCreate, ApplicationResponse
-<<<<<<< HEAD
-from app.models.database import User, Application
-=======
 from app.models.database import Application, User
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 router = APIRouter()
 
@@ -23,24 +15,14 @@ router = APIRouter()
     "/", response_model=ApplicationResponse, status_code=status.HTTP_201_CREATED
 )
 async def create_application(
-<<<<<<< HEAD
-    application: ApplicationCreate, 
-=======
     application: ApplicationCreate,
->>>>>>> restoration-KR-Rage-Figma-v2.0
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
 ):
     """Create a new job application for the current user."""
-<<<<<<< HEAD
-    
-    application_data = application.model_dump(by_alias=True, exclude_unset=True)
-    
-=======
 
     application_data = application.model_dump(by_alias=True, exclude_unset=True)
 
->>>>>>> restoration-KR-Rage-Figma-v2.0
     new_application = Application(
         user_id=current_user.id,
         job_title=application.job_title,
@@ -50,19 +32,11 @@ async def create_application(
         source="manual",
         applied_date=datetime.now(timezone.utc)
     )
-<<<<<<< HEAD
-    
-    db.add(new_application)
-    db.commit()
-    db.refresh(new_application)
-    
-=======
 
     db.add(new_application)
     db.commit()
     db.refresh(new_application)
 
->>>>>>> restoration-KR-Rage-Figma-v2.0
     return new_application.to_dict()
 
 
@@ -72,11 +46,7 @@ async def create_application(
     status_code=status.HTTP_200_OK,
 )
 async def get_application(
-<<<<<<< HEAD
-    application_id: str, 
-=======
     application_id: str,
->>>>>>> restoration-KR-Rage-Figma-v2.0
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
 ):
@@ -94,11 +64,7 @@ async def get_application(
 
 @router.get(
     "/",
-<<<<<<< HEAD
-    response_model=List[ApplicationResponse],
-=======
     response_model=list[ApplicationResponse],
->>>>>>> restoration-KR-Rage-Figma-v2.0
     status_code=status.HTTP_200_OK,
 )
 async def get_all_applications(
@@ -149,11 +115,7 @@ async def update_application(
     "/{application_id}", status_code=status.HTTP_204_NO_CONTENT
 )
 async def delete_application(
-<<<<<<< HEAD
-    application_id: str, 
-=======
     application_id: str,
->>>>>>> restoration-KR-Rage-Figma-v2.0
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
 ):

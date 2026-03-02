@@ -6,11 +6,7 @@
       "command": "node",
       "args": ["./mcp-servers/filesystem.js"],
       "env": {
-<<<<<<< HEAD
-        "ROOT_PATH": "/Users/okgoogle13/Desktop/careercopilot",
-=======
         "ROOT_PATH": "/Users/okgoogle13/Projects/careercopilot",
->>>>>>> restoration-KR-Rage-Figma-v2.0
         "BATCH_READS": "true",
         "RESPONSE_FORMAT": "compact",
         "AUTO_MKDIR": "false"
@@ -25,19 +21,11 @@
       "command": "node",
       "args": ["./mcp-servers/git.js"],
       "env": {
-<<<<<<< HEAD
-        "REPO_PATH": "/Users/okgoogle13/Desktop/careercopilot",
-        "AUTO_COMMIT": "true",
-        "FILTER": "components-only",
-        "DIFF_FORMAT": "compact",
-        "COMMIT_TEMPLATE": "refactor(components): migrate {component_name} to Northcote"
-=======
         "REPO_PATH": "/Users/okgoogle13/Projects/careercopilot",
         "AUTO_COMMIT": "true",
         "FILTER": "components-only",
         "DIFF_FORMAT": "compact",
         "COMMIT_TEMPLATE": "refactor(components): migrate {component_name} to kerala-rage"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       },
       "description": "Git operations for version control and commits",
       "optimization": "Incremental commits prevent context bloat"
@@ -49,11 +37,7 @@
       "command": "node",
       "args": ["./mcp-servers/testing.js"],
       "env": {
-<<<<<<< HEAD
-        "REPO_PATH": "/Users/okgoogle13/Desktop/careercopilot",
-=======
         "REPO_PATH": "/Users/okgoogle13/Projects/careercopilot",
->>>>>>> restoration-KR-Rage-Figma-v2.0
         "TEST_FRAMEWORK": "jest",
         "OUTPUT_FORMAT": "json",
         "VERBOSE": "false",
@@ -220,11 +204,7 @@
     "when_complete": "Gemini reports final metrics with completion percentage",
     "handback_to": "Claude Code",
     "next_phases": [
-<<<<<<< HEAD
-      "Phase 4: northcote-visual-audit on 6 migrated components",
-=======
       "Phase 4: kerala-rage-visual-audit on 6 migrated components",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "Phase 5: Migrate secondary components (Seed, Vessel, etc.)",
       "Phase 6: Audit remaining 11 shared components"
     ],

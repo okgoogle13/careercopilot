@@ -5,107 +5,15 @@ This module contains pytest tests that verify the ats_scoring.py Genkit flow
 functionality with mocked AI models.
 """
 
-<<<<<<< HEAD
-from typing import List
 from unittest.mock import AsyncMock, Mock, patch
 
 import pytest
-
-from app.core.enhanced_ai_error_handling import AIOperationResult
-=======
-from unittest.mock import AsyncMock, Mock, patch
-
-import pytest
->>>>>>> restoration-KR-Rage-Figma-v2.0
 from app.genkit_flows.ats_scoring import AtsResult, ScoreBreakdown, atsScoring
 from app.genkit_flows.extract_job_requirements import JobRequirements
 from app.genkit_flows.extract_resume_entities import ResumeEntities
 from app.genkit_flows.keyword_placer import KeywordPlacementSuggestion
 
-<<<<<<< HEAD
-=======
-from app.core.enhanced_ai_error_handling import AIOperationResult
-
->>>>>>> restoration-KR-Rage-Figma-v2.0
-
-class TestAtsScoring:
-    """Test suite for the ATS scoring flow."""
-
-    @pytest.fixture
-    def sample_resume_text(self) -> str:
-        """Provide sample resume text for testing."""
-        return """
-        John Doe
-        Senior Software Engineer
-
-        EXPERIENCE:
-        - 5 years of Python development
-        - React and JavaScript experience
-        - Led team of 4 developers
-        - Built scalable web applications
-
-        SKILLS:
-        Python, React, JavaScript, Docker, AWS, PostgreSQL
-
-        EDUCATION:
-        BS Computer Science, University of Technology
-        """
-
-    @pytest.fixture
-    def sample_job_description(self) -> str:
-        """Provide sample job description for testing."""
-        return """
-        Senior Software Engineer
-
-        We are seeking a Senior Software Engineer with:
-        - 3+ years Python experience
-        - React/JavaScript skills
-        - Leadership experience
-        - AWS cloud experience
-        - Database knowledge (PostgreSQL preferred)
-
-        Requirements:
-        - Bachelor's degree in Computer Science
-        - Strong communication skills
-        - Experience with containerization (Docker)
-        """
-
-    @pytest.fixture
-    def mock_job_requirements(self) -> JobRequirements:
-        """Mock job requirements extraction result."""
-        return JobRequirements(
-            requiredSkills=["Python", "React", "Bachelor's degree", "AWS"],
-            preferredSkills=["Leadership", "Communication", "Docker", "PostgreSQL"],
-            experienceLevel="Senior",
-        )
-
-    @pytest.fixture
-    def mock_resume_entities(self) -> ResumeEntities:
-        """Mock resume entities extraction result."""
-        return ResumeEntities(
-            skills=["Python", "React", "JavaScript", "Docker", "AWS", "PostgreSQL"],
-            experience=[
-                {
-                    "title": "Senior Software Engineer",
-                    "company": "Tech Corp",
-                    "duration": "5 years",
-                }
-            ],
-            education=[
-                {
-                    "degree": "Bachelor's",
-                    "field": "Computer Science",
-                    "institution": "University",
-                }
-            ],
-        )
-
-    @pytest.fixture
-<<<<<<< HEAD
-    def mock_keyword_placement_suggestions(self) -> List[KeywordPlacementSuggestion]:
-=======
     def mock_keyword_placement_suggestions(self) -> list[KeywordPlacementSuggestion]:
->>>>>>> restoration-KR-Rage-Figma-v2.0
         """Mock keyword placement suggestions."""
         return [
             KeywordPlacementSuggestion(
@@ -122,11 +30,7 @@ class TestAtsScoring:
         sample_job_description: str,
         mock_job_requirements: JobRequirements,
         mock_resume_entities: ResumeEntities,
-<<<<<<< HEAD
-        mock_keyword_placement_suggestions: List[KeywordPlacementSuggestion],
-=======
         mock_keyword_placement_suggestions: list[KeywordPlacementSuggestion],
->>>>>>> restoration-KR-Rage-Figma-v2.0
     ):
         """
         Test that atsScoring flow returns a response with the expected AtsResult structure.

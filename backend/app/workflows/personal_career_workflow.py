@@ -5,11 +5,7 @@ the advanced intelligence features for career management.
 
 import asyncio
 import json
-<<<<<<< HEAD
-from typing import Any, Dict, List
-=======
 from typing import Any
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 from app.core.ai_client import get_ai_client
 from app.core.cache_decorators import cached_ai_operation
@@ -35,11 +31,7 @@ class PersonalCareerWorkflow:
     @cached_ai_operation("salary_intelligence")
     async def salary_intelligence(
         self, job_title: str, company: str, location: str
-<<<<<<< HEAD
-    ) -> Dict[str, Any]:
-=======
     ) -> dict[str, Any]:
->>>>>>> restoration-KR-Rage-Figma-v2.0
         """
         Researches salary, generates negotiation points for a specific role.
 
@@ -102,11 +94,7 @@ class PersonalCareerWorkflow:
         return json.loads(ai_response_str)
 
     @cached_ai_operation("skills_trends")
-<<<<<<< HEAD
-    async def analyze_skills_trends(self, job_listings: List[Dict]) -> Dict[str, Any]:
-=======
     async def analyze_skills_trends(self, job_listings: list[dict]) -> dict[str, Any]:
->>>>>>> restoration-KR-Rage-Figma-v2.0
         """
         Analyzes skill trends from job listings and creates a development plan.
 
@@ -147,13 +135,8 @@ class PersonalCareerWorkflow:
 
     @cached_ai_operation("interview_prep")
     async def generate_interview_prep(
-<<<<<<< HEAD
-        self, job_description: str, company_research: Dict
-    ) -> Dict[str, Any]:
-=======
         self, job_description: str, company_research: dict
     ) -> dict[str, Any]:
->>>>>>> restoration-KR-Rage-Figma-v2.0
         """
         Generates interview preparation materials for a specific job.
 
@@ -195,11 +178,7 @@ class PersonalCareerWorkflow:
         )
         return json.loads(ai_response_str)
 
-<<<<<<< HEAD
-    async def daily_job_discovery(self) -> Dict[str, Any]:
-=======
     async def daily_job_discovery(self) -> dict[str, Any]:
->>>>>>> restoration-KR-Rage-Figma-v2.0
         """
         Daily job discovery routine - simplified version without agent orchestration
         """
@@ -250,11 +229,7 @@ class PersonalCareerWorkflow:
         except Exception as e:
             return {"success": False, "error": str(e)}
 
-<<<<<<< HEAD
-    async def apply_to_job(self, job_url: str) -> Dict[str, Any]:
-=======
     async def apply_to_job(self, job_url: str) -> dict[str, Any]:
->>>>>>> restoration-KR-Rage-Figma-v2.0
         """
         Complete application process for a specific job with template generation
         """
@@ -365,11 +340,7 @@ class PersonalCareerWorkflow:
         except Exception as e:
             return {"success": False, "error": str(e)}
 
-<<<<<<< HEAD
-    async def quick_company_research(self, job_url: str) -> Dict[str, Any]:
-=======
     async def quick_company_research(self, job_url: str) -> dict[str, Any]:
->>>>>>> restoration-KR-Rage-Figma-v2.0
         """
         Generate company research and application strategy - simplified without agents
         """
@@ -429,11 +400,7 @@ class PersonalCareerWorkflow:
         except Exception as e:
             return {"success": False, "error": str(e)}
 
-<<<<<<< HEAD
-    async def weekly_review(self) -> Dict[str, Any]:
-=======
     async def weekly_review(self) -> dict[str, Any]:
->>>>>>> restoration-KR-Rage-Figma-v2.0
         """
         Weekly review of applications and progress - simplified without agents
         """
@@ -492,11 +459,7 @@ class PersonalCareerWorkflow:
         job_title: str = None,
         company_name: str = None,
         contact_name: str = None,
-<<<<<<< HEAD
-    ) -> Dict[str, Any]:
-=======
     ) -> dict[str, Any]:
->>>>>>> restoration-KR-Rage-Figma-v2.0
         """
         Generate specific email template for job applications
 
@@ -551,11 +514,7 @@ class PersonalCareerWorkflow:
 
     async def generate_cover_letter_template(
         self, job_title: str = None, company_name: str = None
-<<<<<<< HEAD
-    ) -> Dict[str, Any]:
-=======
     ) -> dict[str, Any]:
->>>>>>> restoration-KR-Rage-Figma-v2.0
         """
         Generate cover letter template with career transition context
 

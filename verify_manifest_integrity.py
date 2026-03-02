@@ -4,13 +4,8 @@ import os
 import sys
 
 # Configuration
-<<<<<<< HEAD
-ROOT_DIR = '/Users/okgoogle13/Desktop/careercopilot'
-MANIFEST_PATH = os.path.join(ROOT_DIR, 'assets/northcote-curio-manifest.json')
-=======
 ROOT_DIR = '/Users/okgoogle13/Projects/careercopilot'
 MANIFEST_PATH = os.path.join(ROOT_DIR, 'assets/northcote-[DEPRECATED_STYLE]-manifest.json')
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 def verify_manifest():
     print(f"Verifying Manifest Integrity: {MANIFEST_PATH}")

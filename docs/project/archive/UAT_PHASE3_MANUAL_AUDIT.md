@@ -62,11 +62,7 @@ Due to technical limitations with the Antigravity Browser Extension, Phase 3 req
   - Interviews Scheduled
   - Offers Received
   - Response Rate
-<<<<<<< HEAD
-- [ ] **StatCard Shapes:** Organic rounded corners (not perfect rectangles)
-=======
 - [ ] **StatCard Shapes:** [DEPRECATED_STYLE] rounded corners (not perfect rectangles)
->>>>>>> restoration-KR-Rage-Figma-v2.0
 - [ ] **Plant Banner:** `plant-banner.png` visible in background
 - [ ] **Staggered Animation:** Cards should appear one by one (not all at once)
 - [ ] **Profile Cards:** 3 mock profile cards displayed
@@ -78,15 +74,9 @@ Due to technical limitations with the Antigravity Browser Extension, Phase 3 req
 3. **Responsive Test:** Switch to tablet view (768px) - should show 2-column grid
 
 #### M3 Design Tokens to Verify:
-<<<<<<< HEAD
-- Background: `bg-[#141218]` (dark purple-gray)
-- Text: `text-[#E6E1E5]` (off-white)
-- Cards: Organic shapes, not sharp corners
-=======
 - Background: `bg-[#1A1714]` (dark purple-gray)
 - Text: `text-[#E6E1E5]` (off-white)
 - Cards: [DEPRECATED_STYLE] shapes, not sharp corners
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 #### Screenshot Checklist:
 - [ ] Full dashboard (desktop)
@@ -221,11 +211,7 @@ Due to technical limitations with the Antigravity Browser Extension, Phase 3 req
    - Gradient mask should make bottom invisible
 
 2. **ApplicationCard Shapes:**
-<<<<<<< HEAD
-   - Cards should use `rounded-pebble` (organic corners)
-=======
    - Cards should use `rounded-pebble` ([DEPRECATED_STYLE] corners)
->>>>>>> restoration-KR-Rage-Figma-v2.0
    - Spacing between cards: consistent rhythm
 
 3. **Progress Tracker Visual:**
@@ -558,11 +544,7 @@ Based on the M3 design system principles from conversation history:
 | **Spring Physics** | Animations use spring easing, not linear | [ ] | Check button hovers |
 | **Size Contrast** | Min 2:1 ratio between heading and body text | [ ] | Verify typography scale |
 | **Weight Contrast** | Min 1.5:1 ratio (e.g., 800 vs 400) | [ ] | Hero title should be bold |
-<<<<<<< HEAD
-| **Organic Shapes** | 32px corners, not standard radius | [ ] | M3Card pebble variant |
-=======
 | **[DEPRECATED_STYLE] Shapes** | 32px corners, not standard radius | [ ] | M3Card pebble variant |
->>>>>>> restoration-KR-Rage-Figma-v2.0
 | **Color Uniqueness** | Not generic blue/gray SaaS palette | [ ] | "Electric Alchemist" verification |
 | **Interactive Motion** | Hover states are animated, not instant | [ ] | All buttons should scale/glow |
 | **Varied Spacing** | Not uniform gaps, has rhythm | [ ] | Check margin/padding patterns |

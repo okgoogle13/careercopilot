@@ -7,11 +7,7 @@
 ### `typography.scale.displayHero`
 
 - **Context**: Page 1 (Landing) - Main "Resurrection" text.
-<<<<<<< HEAD
-- **Spec**: Libre Bodoni, 96px, 700 weight.
-=======
 - **Spec**: kr-serif-bold, 96px, 700 weight.
->>>>>>> restoration-KR-Rage-Figma-v2.0
 - **Current State**: Missing. Uses `displayLarge` (48px) or custom overrides.
 - **Action**: Add to `tokens.json`.
 
@@ -24,16 +20,6 @@
 
 ## 2. Color/Mode Gaps
 
-<<<<<<< HEAD
-### `color.semantic.surface.laboratory.slateSmoke`
-
-- **Context**: Page 4 (Drop Zone) & Page 5 (Cards).
-- **Spec**: Distinct "Laboratory" dark mode background, cooler/bluer than Gallery charcoal.
-- **Current State**: Ambiguous. Code often reuses `eucalypt-smoke` (Gallery).
-- **Action**: Define explicit Lab palette to prevent mode contamination.
-
-### `color.semantic.border.laboratory.charcoalSlate`
-=======
 ### `color.semantic.surface.kr-dark.slateSmoke`
 
 - **Context**: Page 4 (Drop Zone) & Page 5 (Cards).
@@ -42,7 +28,6 @@
 - **Action**: Define explicit Lab palette to prevent mode contamination.
 
 ### `color.semantic.border.kr-dark.charcoalSlate`
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 - **Context**: Page 4 Drop Zone Border.
 - **Spec**: Technical border color.
@@ -53,10 +38,6 @@
 ### `shape.organicAsymmetry.seed`
 
 - **Context**: Page 6 (Match Badges).
-<<<<<<< HEAD
-- **Spec**: Small, organic shape for badges.
-=======
 - **Spec**: Small, [DEPRECATED_STYLE] shape for badges.
->>>>>>> restoration-KR-Rage-Figma-v2.0
 - **Current State**: Uses `radius-pebble` or `rounded-full`.
 - **Action**: Verify if `radius-seed` exists (it seems to be in `tokens.json` as `8px 4px 10px 6px` - need to verify usage).

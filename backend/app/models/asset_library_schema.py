@@ -9,19 +9,10 @@ including extracted data, contextual tags, and metadata.
 """
 
 from datetime import datetime
-<<<<<<< HEAD
-from typing import Any, Dict, List, Literal, Optional
-
-from pydantic import BaseModel, Field
-
-from .master_profile_schema import MasterCareerProfile
-
-=======
 from typing import Any, Literal
 
 from pydantic import BaseModel, Field
 
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 class ContextTags(BaseModel):
     """Contextual tags for categorizing and organizing career assets."""
@@ -30,11 +21,7 @@ class ContextTags(BaseModel):
         ...,
         description="The primary role type this asset is relevant for (e.g., 'Social Worker', 'Software Engineer', 'Project Manager')",
     )
-<<<<<<< HEAD
-    subsectors: List[str] = Field(
-=======
     subsectors: list[str] = Field(
->>>>>>> restoration-KR-Rage-Figma-v2.0
         default_factory=list,
         description="Industry subsectors or specializations (e.g., 'Healthcare', 'Community Services', 'Mental Health')",
     )
@@ -56,11 +43,7 @@ class AssetMetadata(BaseModel):
         ...,
         description="Google Cloud Storage URI where the document is stored (e.g., 'gs://bucket-name/user_assets/user_id/filename.pdf')",
     )
-<<<<<<< HEAD
-    fileSizeBytes: Optional[int] = Field(None, description="Size of the uploaded file in bytes")
-=======
     fileSizeBytes: int | None = Field(None, description="Size of the uploaded file in bytes")
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 
 class VoiceProfile(BaseModel):
@@ -83,19 +66,11 @@ class VoiceProfile(BaseModel):
         ...,
         description="Vocabulary sophistication level (e.g., 'Simple', 'Moderate', 'Advanced', 'Technical')",
     )
-<<<<<<< HEAD
-    sentenceComplexity: Optional[str] = Field(
-        None,
-        description="Average sentence complexity (e.g., 'Simple sentences', 'Compound sentences', 'Complex structures')",
-    )
-    preferredPhrasing: List[str] = Field(
-=======
     sentenceComplexity: str | None = Field(
         None,
         description="Average sentence complexity (e.g., 'Simple sentences', 'Compound sentences', 'Complex structures')",
     )
     preferredPhrasing: list[str] = Field(
->>>>>>> restoration-KR-Rage-Figma-v2.0
         default_factory=list,
         description="Common phrases or expressions the user frequently uses",
     )
@@ -115,11 +90,7 @@ class AssetDocument(BaseModel):
         ...,
         description="Type of document: 'resume' for full resumes, 'ksc' for Key Selection Criteria responses, 'voice' for writing samples",
     )
-<<<<<<< HEAD
-    extractedData: Dict[str, Any] = Field(
-=======
     extractedData: dict[str, Any] = Field(
->>>>>>> restoration-KR-Rage-Figma-v2.0
         ...,
         description="The main extracted data object. For 'resume' and 'ksc' types, this is a MasterCareerProfile. For 'voice' type, this is a VoiceProfile",
     )

@@ -25,8 +25,4 @@ const useExampleStore = create<ExampleState>((set) => ({
   },
 }));
 
-<<<<<<< HEAD
 export default useExampleStore;
-=======
-export default useExampleStore;
->>>>>>> restoration-KR-Rage-Figma-v2.0

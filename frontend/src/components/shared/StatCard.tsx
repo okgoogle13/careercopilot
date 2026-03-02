@@ -51,8 +51,4 @@ export function StatCard({
       </div>
     </motion.div>
   );
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> restoration-KR-Rage-Figma-v2.0

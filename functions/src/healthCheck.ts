@@ -16,7 +16,7 @@ const VERSION = process.env.npm_package_version ?? 'unknown';
  *
  * Also verifies Firestore connectivity; returns 503 if unavailable.
  */
-export const healthCheck = functions.https.onRequest(async (req, res) => {
+export const healthCheck = functions.https.onRequest(async (req: functions.https.Request, res: functions.Response) => {
   // Only allow GET
   if (req.method !== 'GET') {
     res.status(405).json({error: 'Method Not Allowed'});

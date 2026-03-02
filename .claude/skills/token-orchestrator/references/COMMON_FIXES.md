@@ -36,11 +36,7 @@ const colors = {
 **After** (fixed):
 ```typescript
 const colors = {
-<<<<<<< HEAD
-  primary: getValue('color.semantic.primary.wattleGold')
-=======
   primary: getValue('color.semantic.primary.kr-ink-gold')
->>>>>>> restoration-KR-Rage-Figma-v2.0
 }
 ```
 
@@ -79,11 +75,7 @@ getValue('color.semantic.wattle-gold')
 
 **After** (fixed):
 ```typescript
-<<<<<<< HEAD
-getValue('color.semantic.primary.wattleGold')
-=======
 getValue('color.semantic.primary.kr-ink-gold')
->>>>>>> restoration-KR-Rage-Figma-v2.0
 ```
 
 Token keys use camelCase in DTCG format. Run `audit_tailwind.py` to find all mismatches.
@@ -160,22 +152,14 @@ Run `analyze-m3-styling-consistency.sh` to find all hardcoded values.
 
 ## 6. Missing Token Definitions
 
-<<<<<<< HEAD
-**Error**: `Token path not found: color.status.gallery.ghostGum`
-=======
 **Error**: `Token path not found: color.status.kr-dark.ghostGum`
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 **Fix**: Add to tokens.json:
 ```json
 {
   "color": {
     "status": {
-<<<<<<< HEAD
-      "gallery": {
-=======
       "kr-dark": {
->>>>>>> restoration-KR-Rage-Figma-v2.0
         "ghostGum": {
           "$value": "#7A9E82",
           "$type": "color",

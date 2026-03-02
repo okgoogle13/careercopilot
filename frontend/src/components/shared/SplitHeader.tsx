@@ -32,7 +32,7 @@ const SplitHeader: React.FC<SplitHeaderProps> = ({
                 <motion.h1
                     className={cn(
                         "font-proclamation font-black uppercase tracking-tighter leading-none",
-                        mode === 'gallery' ? 'text-6xl md:text-7xl' : 'text-5xl md:text-6xl',
+                        mode === 'KrDark' ? 'text-6xl md:text-7xl' : 'text-5xl md:text-6xl',
                         "text-parchment"
                     )}
                     initial={{ opacity: 0, y: 20 }}
@@ -46,21 +46,21 @@ const SplitHeader: React.FC<SplitHeaderProps> = ({
                 <motion.span
                     className={cn(
                         "font-bloom absolute text-wattle-gold",
-                        mode === 'gallery' ? 'text-5xl md:text-6xl' : 'text-4xl md:text-5xl'
+                        mode === 'KrDark' ? 'text-5xl md:text-6xl' : 'text-4xl md:text-5xl'
                     )}
                     style={{
-                        fontVariationSettings: mode === 'gallery'
+                        fontVariationSettings: mode === 'KrDark'
                             ? "'SOFT' 50, 'WONK' 1, 'wght' 600"
                             : "'SOFT' 20, 'WONK' 0, 'wght' 500",
-                        transform: mode === 'gallery' ? 'rotate(-2deg)' : 'rotate(0deg)',
-                        top: mode === 'gallery' ? '-0.5rem' : '0',
-                        left: mode === 'gallery' ? '1rem' : '0.5rem',
+                        transform: mode === 'KrDark' ? 'rotate(-2deg)' : 'rotate(0deg)',
+                        top: mode === 'KrDark' ? '-0.5rem' : '0',
+                        left: mode === 'KrDark' ? '1rem' : '0.5rem',
                     }}
                     initial={{ opacity: 0, scale: 0.9, rotate: -5 }}
                     animate={{
                         opacity: 1,
                         scale: 1,
-                        rotate: mode === 'gallery' ? -2 : 0
+                        rotate: mode === 'KrDark' ? -2 : 0
                     }}
                     transition={{
                         duration: 0.8,
@@ -79,7 +79,7 @@ const SplitHeader: React.FC<SplitHeaderProps> = ({
                 <motion.p
                     className={cn(
                         "font-field-note text-secondary-flannel-flower max-w-2xl",
-                        mode === 'gallery' ? 'text-lg' : 'text-base'
+                        mode === 'KrDark' ? 'text-lg' : 'text-base'
                     )}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}

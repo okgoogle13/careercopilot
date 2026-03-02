@@ -10,13 +10,13 @@
  *
  * export const myFunction = functions
  *   .runWith(RUNTIME_CONFIGS.lightweightApi)
- *   .https.onRequest(async (req, res) => {
+ *   .https.onRequest(async (req: functions.https.Request, res: functions.Response) => {
  *     // ... function logic
  *   });
  * ```
  */
 
-import * as functions from "firebase-functions";
+import functions from "firebase-functions";
 
 type RuntimeOptions = functions.RuntimeOptions;
 

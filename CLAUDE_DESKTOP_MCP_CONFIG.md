@@ -1,11 +1,7 @@
 # Claude Desktop MCP Configuration - Design System Integration
 
 **Last Updated:** 2026-01-29  
-<<<<<<< HEAD
-**Purpose:** Register Design System Sidekick server for  asset workflows
-=======
 **Purpose:** Register Design System Sidekick server for kerala-rage kr-solidarity asset workflows
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 ---
 
@@ -37,41 +33,25 @@ Add the `design-system-sidekick` server to your existing MCP servers configurati
   "mcpServers": {
     "flash-sidekick": {
       "command": "python3",
-<<<<<<< HEAD
-      "args": ["/Users/okgoogle13/Desktop/careercopilot/servers/flash_sidekick.py"],
-=======
       "args": ["/Users/okgoogle13/Projects/careercopilot/servers/flash_sidekick.py"],
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "env": {
         "GEMINI_API_KEY": "${GEMINI_API_KEY}"
       }
     },
     "design-system-sidekick": {
       "command": "python3",
-<<<<<<< HEAD
-      "args": ["/Users/okgoogle13/Desktop/careercopilot/servers/design_system_sidekick.py"],
-=======
       "args": ["/Users/okgoogle13/Projects/careercopilot/servers/design_system_sidekick.py"],
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "env": {
         "GEMINI_API_KEY": "${GEMINI_API_KEY}"
       }
     },
     "agent-handoff": {
       "command": "python3",
-<<<<<<< HEAD
-      "args": ["/Users/okgoogle13/Desktop/careercopilot/servers/agent_handoff.py"]
-    },
-    "cloud-ops": {
-      "command": "python3",
-      "args": ["/Users/okgoogle13/Desktop/careercopilot/servers/cloud_ops.py"],
-=======
       "args": ["/Users/okgoogle13/Projects/careercopilot/servers/agent_handoff.py"]
     },
     "cloud-ops": {
       "command": "python3",
       "args": ["/Users/okgoogle13/Projects/careercopilot/servers/cloud_ops.py"],
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "env": {
         "GOOGLE_CLOUD_PROJECT": "${GOOGLE_CLOUD_PROJECT}",
         "FIREBASE_PROJECT_ID": "${FIREBASE_PROJECT_ID}"
@@ -79,11 +59,7 @@ Add the `design-system-sidekick` server to your existing MCP servers configurati
     },
     "docker": {
       "command": "python3",
-<<<<<<< HEAD
-      "args": ["/Users/okgoogle13/Desktop/careercopilot/servers/docker_mcp.py"]
-=======
       "args": ["/Users/okgoogle13/Projects/careercopilot/servers/docker_mcp.py"]
->>>>>>> restoration-KR-Rage-Figma-v2.0
     }
   },
   "globalShortcut": "Cmd+Shift+Space"
@@ -192,11 +168,7 @@ python3 -m pip install --upgrade google-generativeai
 ### Validate DALL-E Output
 
 ```
-<<<<<<< HEAD
-I've generated Asset 1 (Curio Wallpaper). Can you validate it against Northcote compliance criteria?
-=======
 I've generated Asset 1 (kr-solidarity Wallpaper). Can you validate it against kerala-rage compliance criteria?
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 [Upload image or provide path]
 ```
@@ -228,11 +200,7 @@ Extract color palette and scale hierarchy from this validated asset.
 
 Claude will call `extract_visual_design_tokens` with vision analysis to identify:
 - Hex codes with token matches
-<<<<<<< HEAD
-- Specimen size relationships
-=======
 - kr-motif size relationships
->>>>>>> restoration-KR-Rage-Figma-v2.0
 - Density zone coverage
 
 ---
@@ -334,11 +302,7 @@ tail -100 /tmp/mcp-design-system-sidekick.log
 
 **Test server standalone:**
 ```bash
-<<<<<<< HEAD
-cd /Users/okgoogle13/Desktop/careercopilot/servers
-=======
 cd /Users/okgoogle13/Projects/careercopilot/servers
->>>>>>> restoration-KR-Rage-Figma-v2.0
 python3 design_system_sidekick.py
 # Should start and wait for JSON-RPC input
 ```
@@ -352,8 +316,4 @@ https://spec.modelcontextprotocol.io/
 ---
 
 **Configuration Complete**  
-<<<<<<< HEAD
-**Design System Sidekick Ready for  Asset Workflows**
-=======
 **Design System Sidekick Ready for kerala-rage kr-solidarity Asset Workflows**
->>>>>>> restoration-KR-Rage-Figma-v2.0

@@ -148,11 +148,7 @@ export const PlasmaBackground = () => {
                         <feGaussianBlur in="SourceGraphic" stdDeviation="40" result="blur" />
                         <feColorMatrix
                             in="blur"
-<<<<<<< HEAD
-                            mode="matrix"
-=======
                            
->>>>>>> restoration-KR-Rage-Figma-v2.0
                             values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7"
                             result="goo"
                         />

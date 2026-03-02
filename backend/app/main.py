@@ -1,9 +1,5 @@
 # backend/app/main.py (Production Ready)
 
-<<<<<<< HEAD
-import json
-=======
->>>>>>> restoration-KR-Rage-Figma-v2.0
 import os
 import sys
 
@@ -17,45 +13,24 @@ if "/app/app" not in sys.path:
 # Ensure PORT environment variable is set correctly
 
 import sentry_sdk
-<<<<<<< HEAD
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.middleware.gzip import GZipMiddleware
 from sentry_sdk.integrations.fastapi import FastApiIntegration
 from sentry_sdk.integrations.starlette import StarletteIntegration
 
-from fastapi import FastAPI
-from fastapi.middleware.gzip import GZipMiddleware
-from fastapi.middleware.cors import CORSMiddleware
+from app.api.endpoints import ingest
 
-from app.api.router import api_router
 # from app.api.routes.career import router as career_router
 # from app.api.routes.ingestion import router as ingestion_router
 from app.api.endpoints.job_scout import router as job_scout_router
-from app.api.endpoints import ingest
+from app.api.router import api_router
+from app.core.cache_middleware import add_cache_middleware
+from app.core.database import init_database
 from app.core.genkit_init import check_genkit_health, startup_genkit
-from app.core.loguru_config import configure_loguru, get_logger, log_security_event
-from app.core.monitoring import setup_prometheus_monitoring
-from app.core.secure_config import SecureSettings
-from app.core.database import init_database
-from app.core.cache_middleware import add_cache_middleware
-=======
-from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
-from fastapi.middleware.gzip import GZipMiddleware
-from sentry_sdk.integrations.fastapi import FastApiIntegration
-from sentry_sdk.integrations.starlette import StarletteIntegration
-
-from app.api.endpoints import ingest
-
-# from app.api.routes.career import router as career_router
-# from app.api.routes.ingestion import router as ingestion_router
-from app.api.endpoints.job_scout import router as job_scout_router
-from app.api.router import api_router
-from app.core.cache_middleware import add_cache_middleware
-from app.core.database import init_database
-from app.core.genkit import check_genkit_health, startup_genkit
 from app.core.loguru_config import configure_loguru, get_logger
 from app.core.monitoring import setup_prometheus_monitoring
 from app.core.secure_config import SecureSettings
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 # Initialize secure configuration
 settings = SecureSettings()

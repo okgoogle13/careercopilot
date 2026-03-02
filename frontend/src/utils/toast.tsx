@@ -15,7 +15,6 @@ export const m3Toast = {
         toast.success(message, {
             description,
             icon: <CheckCircle className="w-5 h-5 text-[var(--ref-palette-primary-60)]" />,
-            className: 'curio-toast success',
             className: 'KrSolidarity-toast success',
         });
     },
@@ -23,7 +22,6 @@ export const m3Toast = {
         toast.error(message, {
             description,
             icon: <AlertCircle className="w-5 h-5 text-[var(--ref-palette-error-60)]" />,
-            className: 'curio-toast error',
             className: 'KrSolidarity-toast error',
         });
     },
@@ -31,7 +29,6 @@ export const m3Toast = {
         toast.warning(message, {
             description,
             icon: <AlertTriangle className="w-5 h-5 text-[var(--ref-palette-warning-60)]" />,
-            className: 'curio-toast warning',
             className: 'KrSolidarity-toast warning',
         });
     },
@@ -39,7 +36,6 @@ export const m3Toast = {
         toast.info(message, {
             description,
             icon: <Info className="w-5 h-5 text-[var(--ref-palette-secondary-60)]" />,
-            className: 'curio-toast info',
             className: 'KrSolidarity-toast info',
         });
     },

@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-# Weekly Status Tracker ( Migration)
-=======
 # Weekly Status Tracker (kerala-rage kr-solidarity Migration)
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 ## Gate 1 Components
 
@@ -26,11 +22,7 @@
 
 ## Phase 3: Page Consolidation
 
-<<<<<<< HEAD
-| Page | Status | MUI Dependency | Curio Adoption |
-=======
 | Page | Status | MUI Dependency | kr-solidarity Adoption |
->>>>>>> restoration-KR-Rage-Figma-v2.0
 |------|--------|----------------|----------------|
 | **AnalysisPage** | 🟡 Mixed | High | Moderate |
 | **JobQueue** | 🟡 Mixed | Moderate | Low |
