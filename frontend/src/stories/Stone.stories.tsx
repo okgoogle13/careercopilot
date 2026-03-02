@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Briefcase, Star } from 'lucide-react';
 <<<<<<< HEAD
-import { NorthcoteButton } from '../components/ui/NorthcoteButton';
+import { KeralaRageButton } from '../components/ui/KeralaRageButton';
 =======
 import { KeralaRageButton } from '../components/ui/KeralaRageButton';
 >>>>>>> restoration-KR-Rage-Figma-v2.0
@@ -54,13 +54,13 @@ export const Default: Story = {
     footer: (
       <div className="flex justify-end gap-3">
 <<<<<<< HEAD
-        <NorthcoteButton
+        <KeralaRageButton
           variant="text"
           size="sm"
         >
           Later
-        </NorthcoteButton>
-        <NorthcoteButton size="sm">Apply Now</NorthcoteButton>
+        </KeralaRageButton>
+        <KeralaRageButton size="sm">Apply Now</KeralaRageButton>
 =======
         <KeralaRageButton
           variant="tertiary"

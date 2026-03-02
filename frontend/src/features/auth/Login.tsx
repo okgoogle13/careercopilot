@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 <<<<<<< HEAD
 import { Link, useNavigate } from 'react-router-dom';
 import { z } from 'zod';
-import { NorthcoteButton } from '../../components/ui/NorthcoteButton';
+import { KeralaRageButton } from '../../components/ui/KeralaRageButton';
 import { useAuth } from '../../context/AuthContext';
 
 // Northcote Assets
@@ -146,7 +146,7 @@ export function Login() {
               )}
             </div>
 
-            <NorthcoteButton
+            <KeralaRageButton
               variant="primary"
               size="lg"
               type="submit"
@@ -154,7 +154,7 @@ export function Login() {
               className="w-full mt-4"
             >
               {isSubmitting ? 'Validating...' : 'Authenticate'}
-            </NorthcoteButton>
+            </KeralaRageButton>
           </form>
 
           {/* Helper Links */}

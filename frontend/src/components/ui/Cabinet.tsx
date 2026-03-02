@@ -32,10 +32,10 @@ export interface CabinetProps {
 /**
  * Cabinet -  Modal Component
  *
- * Modal dialog component with Northcote design system styling.
+ * Modal dialog component with Kerala Rage design system styling.
  * Features:
  * - Managed focus and ESC key support
- * - Northcote botanical palette and organic shapes
+ * - Kerala Rage botanical palette and organic shapes
  * - Stone card wrapper with glassmorphism
 =======
   /** Visual variant - KeralaRage KrSolidarity compatible */

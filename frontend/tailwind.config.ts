@@ -1,12 +1,12 @@
 // frontend/tailwind.config.ts
 import type { Config } from 'tailwindcss';
 import tokens from './src/design/tokens/tokens.json';
-<<<<<<< HEAD
-=======
+
+
 // @ts-ignore
 import m3Patch from './tailwind-m3-patch.js';
 
->>>>>>> restoration-KR-Rage-Figma-v2.0
+
 
 /**
  * Safely extract token values from DTCG-formatted tokens.json
@@ -53,7 +53,7 @@ const config: Config = {
       },
     },
     extend: {
-<<<<<<< HEAD
+
       // ============================================
       // COLORS -  Palette
       // ============================================
@@ -71,7 +71,7 @@ const config: Config = {
 
         // Surfaces - Laboratory Mode
         'charcoal-slate': '#16141A', // Retaining specific hex if not in token.json
-=======
+
       ...(m3Patch?.theme?.extend || {}),
       // ============================================
       // COLORS - kerala-rage kr-solidarity Palette
@@ -137,12 +137,12 @@ const config: Config = {
         // Surfaces (charcoal background variants)
         'charcoal-bark': getValue('sys.color.asphaltBlack.base.$value'),
         'charcoal-slate': '#16141A', // Legacy fallback
->>>>>>> restoration-KR-Rage-Figma-v2.0
+
         'slate-smoke': '#252230',
         'slate-smoke-high': '#32303D',
         'slate-smoke-highest': '#3F3D4A',
 
-<<<<<<< HEAD
+
         // Primary - Wattle Gold
         'wattle-shadow': getValue('color.families.wattle-gold.darkest'),
         'wattle-gold': getValue('color.semantic.wattle-gold'),
@@ -197,7 +197,7 @@ const config: Config = {
         'glass-lab-surface': 'rgba(245, 242, 235, 0.90)',
         'glass-lab-surface-elevated': 'rgba(255, 255, 255, 0.60)',
         'glass-lab-border': 'rgba(44, 39, 35, 0.08)',
-=======
+
         // Concrete grey variants (from steps)
         'concrete-grey-high': '#C4BDB3', // From concreteGrey steps
         'concrete-grey-highest': '#E0DBD3',
@@ -241,7 +241,7 @@ const config: Config = {
         'aboriginal-flag-red': getValue('sys.color.aboriginalFlagRed.base.$value'),
         'aboriginal-flag-yellow': getValue('sys.color.aboriginalFlagYellow.base.$value'),
         'aboriginal-flag-black': getValue('sys.color.aboriginalFlagBlack.base.$value'),
->>>>>>> restoration-KR-Rage-Figma-v2.0
+
       },
 
       // ============================================
@@ -251,11 +251,11 @@ const config: Config = {
         // The Bloom - Fraunces variable serif
         display: (getValue('typography.fontFamily.bloom') || '').replace(/'/g, '').split(', '),
 
-<<<<<<< HEAD
+
         // The Proclamation - Libre Bodoni
-=======
+
         // The Proclamation - kr-serif-bold
->>>>>>> restoration-KR-Rage-Figma-v2.0
+
         proclamation: (getValue('typography.fontFamily.proclamation') || '')
           .replace(/'/g, '')
           .split(', '),
@@ -275,21 +275,21 @@ const config: Config = {
         annotation: (getValue('typography.fontFamily.annotation') || '')
           .replace(/'/g, '')
           .split(', '),
-<<<<<<< HEAD
-=======
+
+
         nabla: (getValue('typography.fontFamily.colorAccent') || '').replace(/'/g, '').split(', '),
->>>>>>> restoration-KR-Rage-Figma-v2.0
+
       },
 
       fontSize: {
         // Direct Mappings if available in new token file, otherwise using fixed scale
         // Note: The new token file uses 'typography.axes' but not detailed Scale/Size map yet
         // defaulting to values from previous config for stability unless verified in token.json
-<<<<<<< HEAD
+
         'display-lg-gallery': [
-=======
+
         'display-lg-kr-dark': [
->>>>>>> restoration-KR-Rage-Figma-v2.0
+
           '48px',
           { lineHeight: '1.1', letterSpacing: '-0.02em', fontWeight: '700' },
         ],
@@ -297,11 +297,11 @@ const config: Config = {
           '48px',
           { lineHeight: '1.1', letterSpacing: '-0.02em', fontWeight: '700' },
         ],
-<<<<<<< HEAD
+
         'display-sm-gallery': [
-=======
+
         'display-sm-kr-dark': [
->>>>>>> restoration-KR-Rage-Figma-v2.0
+
           '32px',
           { lineHeight: '1.2', letterSpacing: '0', fontWeight: '600' },
         ],
@@ -410,19 +410,19 @@ const config: Config = {
       // BACKGROUND IMAGE
       // ============================================
       backgroundImage: {
-<<<<<<< HEAD
+
         // Fallbacks as texture paths might need adjustment
         'gallery-texture': 'url("/assets/textures/wallpaper.png")',
         'lab-texture': 'url("/assets/textures/paper-grain.png")',
         'grid-major': 'url("/assets/textures/grid-major.png")',
         'grid-minor': 'url("/assets/textures/grid-minor.png")',
-=======
+
         // Updated to Kr-Solidarity standardized assets
         'kr-dark-texture': 'url("/assets/kr-solidarity/texture/kr-solidarity__substrate__kr-solidarity--texture--melbourne-laneway--v1__v1.png")',
         'lab-texture': 'url("/assets/kr-solidarity/texture/kr-solidarity__substrate__kr-solidarity--texture--melbourne-laneway--v1__v1.png")',
         'grid-major': 'url("/assets/kr-solidarity/ui-kit/svg/motifs/kr-solidarity__ui-kit__KR-UI-010__v1.svg")',
         'grid-minor': 'url("/assets/kr-solidarity/ui-kit/svg/motifs/kr-solidarity__ui-kit__KR-UI-008__v1.svg")',
->>>>>>> restoration-KR-Rage-Figma-v2.0
+
       },
     },
   },

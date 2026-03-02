@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import React from 'react';
-import { NorthcoteButton } from '../../../components/ui/NorthcoteButton';
+import { KeralaRageButton } from '../../../components/ui/KeralaRageButton';
 
 export const GalleryLanding: React.FC = () => {
   return (
@@ -42,12 +42,12 @@ export const GalleryLanding: React.FC = () => {
         </p>
 
         <div className="flex justify-center gap-4">
-          <NorthcoteButton
+          <KeralaRageButton
             variant="primary"
             size="lg"
           >
             Enter Collection
-          </NorthcoteButton>
+          </KeralaRageButton>
         </div>
       </motion.div>
     </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { FileText, Plus } from 'lucide-react';
 <<<<<<< HEAD
-import { NorthcoteButton } from '@/components/ui/NorthcoteButton';
+import { KeralaRageButton } from '@/components/ui/KeralaRageButton';
 =======
 import { KeralaRageButton } from '@/components/ui/KeralaRageButton';
 >>>>>>> restoration-KR-Rage-Figma-v2.0
@@ -19,9 +19,9 @@ export const DocumentStackAnchor: React.FC = () => {
                 <h3 className="font-field-note text-sm text-secondary-flannel-flower uppercase tracking-wider">
                     Evidence Locker
                 </h3>
-                <NorthcoteButton variant="secondary" size="sm">
+                <KeralaRageButton variant="secondary" size="sm">
                     <Plus className="w-3 h-3 mr-1" /> Add
-                </NorthcoteButton>
+                </KeralaRageButton>
 =======
         <div className="flex flex-col h-full bg-surface-KrDark-glass-low border border-white/5 rounded-lg p-4 backdrop-blur-sm">
             <div className="flex justify-between items-center mb-4 border-b border-white/5 pb-2">

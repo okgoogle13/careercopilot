@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { z } from 'zod';
 <<<<<<< HEAD
-import { NorthcoteButton } from '../../components/ui/NorthcoteButton';
+import { KeralaRageButton } from '../../components/ui/KeralaRageButton';
 import { useAuth } from '../../context/AuthContext';
 
 // Northcote Assets
@@ -257,7 +257,7 @@ export function Register() {
             )}
 
 <<<<<<< HEAD
-            <NorthcoteButton
+            <KeralaRageButton
 =======
             <KeralaRageButton
 >>>>>>> restoration-KR-Rage-Figma-v2.0
@@ -269,7 +269,7 @@ export function Register() {
             >
               {isSubmitting ? 'Recording...' : 'Register'}
 <<<<<<< HEAD
-            </NorthcoteButton>
+            </KeralaRageButton>
           </form>
 
           <div className="text-center mt-10 pt-6 border-t border-flannel-flower/10">

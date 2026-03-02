@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { TechCard } from '@/features/analysis/TechCard';
 import { Activity, ShieldCheck, Zap, RefreshCw, FileText } from 'lucide-react';
 <<<<<<< HEAD
-import { NorthcoteButton } from '@/components/ui/NorthcoteButton';
+import { KeralaRageButton } from '@/components/ui/KeralaRageButton';
 =======
 import { KeralaRageButton } from '@/components/ui/KeralaRageButton';
 >>>>>>> restoration-KR-Rage-Figma-v2.0
@@ -145,14 +145,14 @@ export const AnalysisAnchor: React.FC = () => {
 
                 <div className="mt-auto pt-4 flex gap-3">
 <<<<<<< HEAD
-                    <NorthcoteButton variant="primary">
+                    <KeralaRageButton variant="primary">
                         <FileText className="w-4 h-4 mr-2" />
                         Generate Report
-                    </NorthcoteButton>
-                    <NorthcoteButton variant="secondary" onClick={handleReAnalyze}>
+                    </KeralaRageButton>
+                    <KeralaRageButton variant="secondary" onClick={handleReAnalyze}>
                         <RefreshCw className="w-4 h-4 mr-2" />
                         Re-Analyze
-                    </NorthcoteButton>
+                    </KeralaRageButton>
 =======
                     <KeralaRageButton variant="primary">
                         <FileText className="w-4 h-4 mr-2" />

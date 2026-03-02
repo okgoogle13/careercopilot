@@ -22,7 +22,7 @@ export interface MarkProps extends Omit<React.InputHTMLAttributes<HTMLInputEleme
  * A custom checkbox component using  design tokens with enhanced UX.
  * Features organic shapes with Seed radius, spring animations, and proper state indicators.
  *
- * **Northcote Design Token Usage:**
+ * **Kerala Rage Design Token Usage:**
  * - Shape: `--radius-seed` (subtle organic corners)
  * - Colors: Botanical palette (Wattle Gold, Waratah Crimson, Eucalypt Smoke)
 =======
@@ -198,7 +198,7 @@ Mark.displayName = 'Mark';
 <<<<<<< HEAD
  * MarkRadio -  Radio Button
  *
- * Radio button variant with consistent Northcote design language.
+ * Radio button variant with consistent Kerala Rage design language.
 =======
  * MarkRadio - KeralaRage KrSolidarity Radio Button
  *

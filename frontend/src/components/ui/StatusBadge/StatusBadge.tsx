@@ -30,7 +30,7 @@ export interface StatusBadgeProps {
  *
  * Supports both Gallery (warm, botanical) and Laboratory (clinical, precise) modes.
  *
- * **Northcote Token Usage:**
+ * **Kerala Rage Token Usage:**
  * - Typography: `font-annotation` (Uppercase, tracked)
  * - Color: Semantic status colors (success, warning, error, info)
  * - Shape: `radius-seed` (Organic asymmetry for badges)
