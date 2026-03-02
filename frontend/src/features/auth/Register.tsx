@@ -4,21 +4,12 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { z } from 'zod';
-<<<<<<< HEAD
-import { KeralaRageButton } from '../../components/ui/KeralaRageButton';
-import { useAuth } from '../../context/AuthContext';
-
-// Northcote Assets
-import specimenGrid from '../../assets/specimens/leaf-fern.png';
-import parchmentGrid from '../../assets/textures/paper-grain.png';
-=======
 import { KeralaRageButton } from '../../components/ui/KeralaRageButton';
 import { useAuth } from '../../context/AuthContext';
 
 // KeralaRage Assets
 const KrMotifGrid = '/assets/kr-solidarity/specimen/kr-solidarity__specimen__triage-natural-history__v1.png';
 const paperWhiteGrid = '/assets/kr-solidarity/texture/kr-solidarity__substrate__kr-solidarity--texture--melbourne-laneway--v1__v1.png';
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 const registerSchema = z
   .object({
@@ -59,40 +50,23 @@ export function Register() {
   };
 
   return (
-<<<<<<< HEAD
-    <div className="min-h-screen bg-specimen-night-darkest flex items-center justify-center p-8 animate-in fade-in duration-500 relative overflow-hidden">
-      {/* Atmosphere Layer */}
-      <div
-        className="absolute inset-0 opacity-10 pointer-events-none"
-        style={{ backgroundImage: `url(${parchmentGrid})`, backgroundRepeat: 'repeat' }}
-=======
     <div className="min-h-screen bg-asphalt-black-darkest flex items-center justify-center p-8 animate-in fade-in duration-500 relative overflow-hidden">
       {/* Atmosphere Layer */}
       <div
         className="absolute inset-0 opacity-10 pointer-events-none"
         style={{ backgroundImage: `url(${paperWhiteGrid})`, backgroundRepeat: 'repeat' }}
->>>>>>> restoration-KR-Rage-Figma-v2.0
       />
 
       <div className="w-full max-w-md relative z-10">
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
-<<<<<<< HEAD
-          className="bg-eucalypt-smoke/80 backdrop-blur-xl rounded-stone p-10 border border-flannel-flower/10 shadow-maximum overflow-hidden relative"
-        >
-          {/* Specimen Decoration */}
-          <div className="absolute top-[-40px] left-[-40px] w-32 h-32 opacity-20 pointer-events-none transform rotate-180">
-            <img
-              src={specimenGrid}
-=======
           className="bg-concrete-grey/80 backdrop-blur-xl rounded-stone p-10 border border-concrete-grey/10 shadow-maximum overflow-hidden relative"
         >
           {/* KrMotif Decoration */}
           <div className="absolute top-[-40px] left-[-40px] w-32 h-32 opacity-20 pointer-events-none transform rotate-180">
             <img
               src={KrMotifGrid}
->>>>>>> restoration-KR-Rage-Figma-v2.0
               alt=""
               className="animate-spin-slow"
               style={{ animationDuration: '80s' }}
@@ -100,13 +74,8 @@ export function Register() {
           </div>
 
           <div className="text-center mb-10">
-<<<<<<< HEAD
-            <h1 className="text-6xl text-bloom-ultra text-wattle-gold mb-2">New Specimen</h1>
-            <p className="text-curator-accent text-flannel-flower opacity-70">
-=======
             <h1 className="text-6xl text-bloom-ultra text-ink-gold mb-2">New KrMotif</h1>
             <p className="text-curator-accent text-concrete-grey opacity-70">
->>>>>>> restoration-KR-Rage-Figma-v2.0
               Register with the station
             </p>
           </div>
@@ -115,11 +84,7 @@ export function Register() {
             <motion.div
               initial={{ x: -10, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
-<<<<<<< HEAD
-              className="mb-8 p-4 rounded-pebble bg-waratah-crimson/20 text-waratah-crimson border border-waratah-crimson/30 font-annotation text-xs"
-=======
               className="mb-8 p-4 rounded-pebble bg-solidarity-red/20 text-solidarity-red border border-solidarity-red/30 font-annotation text-xs"
->>>>>>> restoration-KR-Rage-Figma-v2.0
             >
               ⚠️ [FAILED_REG]: {authError}
             </motion.div>
@@ -133,11 +98,7 @@ export function Register() {
             <div className="group">
               <label
                 htmlFor="displayName"
-<<<<<<< HEAD
-                className="block text-xs text-wattle-gold mb-2 font-annotation tracking-widest uppercase"
-=======
                 className="block text-xs text-ink-gold mb-2 font-annotation tracking-widest uppercase"
->>>>>>> restoration-KR-Rage-Figma-v2.0
               >
                 Common Name (Display Name)
               </label>
@@ -145,19 +106,11 @@ export function Register() {
                 id="displayName"
                 type="text"
                 placeholder="Field Investigator Jones"
-<<<<<<< HEAD
-                className="w-full px-6 bg-specimen-night/50 border border-flannel-flower/20 text-parchment rounded-stone h-12 focus:outline-none focus:border-wattle-gold transition-all font-field-note"
-                {...register('displayName')}
-              />
-              {errors.displayName && (
-                <p className="text-waratah-crimson text-[10px] mt-1 font-annotation uppercase">
-=======
                 className="w-full px-6 bg-asphalt-black/50 border border-concrete-grey/20 text-paper-white rounded-stone h-12 focus:outline-none focus:border-ink-gold transition-all font-field-note"
                 {...register('displayName')}
               />
               {errors.displayName && (
                 <p className="text-solidarity-red text-[10px] mt-1 font-annotation uppercase">
->>>>>>> restoration-KR-Rage-Figma-v2.0
                   {errors.displayName.message}
                 </p>
               )}
@@ -166,11 +119,7 @@ export function Register() {
             <div className="group">
               <label
                 htmlFor="email"
-<<<<<<< HEAD
-                className="block text-xs text-wattle-gold mb-2 font-annotation tracking-widest uppercase"
-=======
                 className="block text-xs text-ink-gold mb-2 font-annotation tracking-widest uppercase"
->>>>>>> restoration-KR-Rage-Figma-v2.0
               >
                 Station ID (Email)
               </label>
@@ -178,19 +127,11 @@ export function Register() {
                 id="email"
                 type="email"
                 placeholder="investigator@station.net"
-<<<<<<< HEAD
-                className="w-full px-6 bg-specimen-night/50 border border-flannel-flower/20 text-parchment rounded-stone h-12 focus:outline-none focus:border-wattle-gold transition-all font-field-note"
-                {...register('email')}
-              />
-              {errors.email && (
-                <p className="text-waratah-crimson text-[10px] mt-1 font-annotation uppercase">
-=======
                 className="w-full px-6 bg-asphalt-black/50 border border-concrete-grey/20 text-paper-white rounded-stone h-12 focus:outline-none focus:border-ink-gold transition-all font-field-note"
                 {...register('email')}
               />
               {errors.email && (
                 <p className="text-solidarity-red text-[10px] mt-1 font-annotation uppercase">
->>>>>>> restoration-KR-Rage-Figma-v2.0
                   {errors.email.message}
                 </p>
               )}
@@ -201,11 +142,7 @@ export function Register() {
                 <label
                   htmlFor="password"
                   title="Keychain"
-<<<<<<< HEAD
-                  className="block text-xs text-wattle-gold mb-2 font-annotation tracking-widest uppercase overflow-hidden text-ellipsis whitespace-nowrap"
-=======
                   className="block text-xs text-ink-gold mb-2 font-annotation tracking-widest uppercase overflow-hidden text-ellipsis whitespace-nowrap"
->>>>>>> restoration-KR-Rage-Figma-v2.0
                 >
                   Keychain
                 </label>
@@ -213,11 +150,7 @@ export function Register() {
                   id="password"
                   type="password"
                   placeholder="••••••••"
-<<<<<<< HEAD
-                  className="w-full px-4 bg-specimen-night/50 border border-flannel-flower/20 text-parchment rounded-stone h-12 focus:outline-none focus:border-wattle-gold transition-all font-field-note"
-=======
                   className="w-full px-4 bg-asphalt-black/50 border border-concrete-grey/20 text-paper-white rounded-stone h-12 focus:outline-none focus:border-ink-gold transition-all font-field-note"
->>>>>>> restoration-KR-Rage-Figma-v2.0
                   {...register('password')}
                 />
               </div>
@@ -225,11 +158,7 @@ export function Register() {
                 <label
                   htmlFor="confirmPassword"
                   title="Verify"
-<<<<<<< HEAD
-                  className="block text-xs text-wattle-gold mb-2 font-annotation tracking-widest uppercase overflow-hidden text-ellipsis whitespace-nowrap"
-=======
                   className="block text-xs text-ink-gold mb-2 font-annotation tracking-widest uppercase overflow-hidden text-ellipsis whitespace-nowrap"
->>>>>>> restoration-KR-Rage-Figma-v2.0
                 >
                   Verify
                 </label>
@@ -237,30 +166,18 @@ export function Register() {
                   id="confirmPassword"
                   type="password"
                   placeholder="••••••••"
-<<<<<<< HEAD
-                  className="w-full px-4 bg-specimen-night/50 border border-flannel-flower/20 text-parchment rounded-stone h-12 focus:outline-none focus:border-wattle-gold transition-all font-field-note"
-=======
                   className="w-full px-4 bg-asphalt-black/50 border border-concrete-grey/20 text-paper-white rounded-stone h-12 focus:outline-none focus:border-ink-gold transition-all font-field-note"
->>>>>>> restoration-KR-Rage-Figma-v2.0
                   {...register('confirmPassword')}
                 />
               </div>
             </div>
             {(errors.password || errors.confirmPassword) && (
-<<<<<<< HEAD
-              <p className="text-waratah-crimson text-[10px] font-annotation uppercase">
-=======
               <p className="text-solidarity-red text-[10px] font-annotation uppercase">
->>>>>>> restoration-KR-Rage-Figma-v2.0
                 {errors.password?.message || errors.confirmPassword?.message}
               </p>
             )}
 
-<<<<<<< HEAD
             <KeralaRageButton
-=======
-            <KeralaRageButton
->>>>>>> restoration-KR-Rage-Figma-v2.0
               variant="primary"
               size="lg"
               type="submit"
@@ -268,15 +185,6 @@ export function Register() {
               className="w-full mt-4"
             >
               {isSubmitting ? 'Recording...' : 'Register'}
-<<<<<<< HEAD
-            </KeralaRageButton>
-          </form>
-
-          <div className="text-center mt-10 pt-6 border-t border-flannel-flower/10">
-            <Link
-              to="/login"
-              className="text-curator-accent text-sm text-flannel-flower hover:text-wattle-gold transition-colors"
-=======
             </KeralaRageButton>
           </form>
 
@@ -284,7 +192,6 @@ export function Register() {
             <Link
               to="/login"
               className="text-curator-accent text-sm text-concrete-grey hover:text-ink-gold transition-colors"
->>>>>>> restoration-KR-Rage-Figma-v2.0
             >
               Already registered? Sign in.
             </Link>

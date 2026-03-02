@@ -1,15 +1,7 @@
-<<<<<<< HEAD
-// @ts-expect-error - TS2497: esModuleInterop is enabled, but TypeScript 5.9 still complains about namespace import
-import * as admin from "firebase-admin";
-import type {Request, Response, NextFunction} from "express";
-import {sendResponse} from "../utils/api.utils";
-import {AuthResponse} from "../types/api.types";
-=======
 import type {NextFunction, Request, Response} from "express";
 import admin from "firebase-admin";
 import {AuthResponse} from "../types/api.types";
 import {sendResponse} from "../utils/api.utils";
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 // Extend Express Request type to include our custom properties
 declare global {

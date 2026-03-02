@@ -1,30 +1,58 @@
 """
-<<<<<<< HEAD
-Secret Manager integration for secure configuration management.
+Secret Manager abstraction for configuration management.
 
-This module provides functions to access secrets stored in Google Cloud Secret Manager
-in a way that falls back to environment variables for local development.
+This module prefers environment variables for local development and can
+optionally read from Google Cloud Secret Manager when the client library is
+available and a project is configured.
 """
 
+import json
 import os
-from typing import Optional, Dict, Any, cast
+from typing import Any, Dict, Optional
 
-from google.api_core.exceptions import NotFound
-from google.cloud import secretmanager
+try:
+    from google.api_core.exceptions import NotFound
+    from google.cloud import secretmanager
 
-# Lazy initialization of Secret Manager client
-_client: Optional[secretmanager.SecretManagerServiceClient] = None
-_client_init_failed: bool = False
+    SECRET_MANAGER_AVAILABLE = True
+except ImportError:  # pragma: no cover - optional dependency
+    NotFound = Exception  # type: ignore[assignment]
+    secretmanager = None  # type: ignore[assignment]
+    SECRET_MANAGER_AVAILABLE = False
+
+_client: Any = None
+_client_init_failed = False
 
 
-def _get_client() -> Optional[secretmanager.SecretManagerServiceClient]:
+def _env_candidates(secret_id: str) -> list[str]:
+    """Return likely environment variable names for a given secret id."""
+    normalized = secret_id.upper().replace("-", "_")
+    candidates = [secret_id, normalized]
+    candidates.extend(f"DEFAULT_{name}" for name in list(candidates))
+    return candidates
+
+
+def _get_env_secret(secret_id: str) -> Optional[str]:
+    """Return a secret from the environment if present."""
+    for candidate in _env_candidates(secret_id):
+        value = os.getenv(candidate)
+        if value:
+            return value
+    return None
+
+
+def _get_client() -> Any:
     """Get or initialize the Secret Manager client."""
     global _client, _client_init_failed
+
+    if not SECRET_MANAGER_AVAILABLE:
+        return None
+
     if _client is None and not _client_init_failed:
         try:
             _client = secretmanager.SecretManagerServiceClient()
-        except Exception as e:
-            print(f"Warning: Could not initialize Secret Manager client: {e}")
+        except Exception as exc:  # pragma: no cover - environment specific
+            print(f"Warning: Could not initialize Secret Manager client: {exc}")
             _client_init_failed = True
             _client = None
     return _client
@@ -37,260 +65,119 @@ def get_secret(
     default: Optional[str] = None,
 ) -> str:
     """
-    Retrieve a secret from Google Cloud Secret Manager or fall back to environment variables.
+    Retrieve a secret from environment variables or Secret Manager.
 
-    Args:
-        secret_id: The ID of the secret to retrieve
-        project_id: GCP project ID (defaults to GOOGLE_CLOUD_PROJECT environment variable)
-        version: Version of the secret (defaults to "latest")
-        default: Default value if secret not found
-
-    Returns:
-        The secret value as a string
-
-    Raises:
-        RuntimeError: If the secret is not found and no environment variable fallback exists
+    Environment variables are checked first so local development does not depend
+    on cloud access.
     """
-    # First try to get from environment variables (for local development)
-    env_var = os.getenv(secret_id)
-    if env_var:
-        return env_var
+    env_value = _get_env_secret(secret_id)
+    if env_value:
+        return env_value
 
-    # If not in environment, try Secret Manager
     if not project_id:
         project_id = os.getenv("GOOGLE_CLOUD_PROJECT") or os.getenv("GCP_PROJECT_ID")
-        current_env = os.getenv("ENV") or os.getenv("ENVIRONMENT", "development")
-        if not project_id and current_env not in ["production", "staging"]:
-            # Don't crash in dev if not found
-            pass
-        elif not project_id:
-            raise RuntimeError(
-                "Neither GOOGLE_CLOUD_PROJECT nor GCP_PROJECT_ID environment variable is set"
-            )
 
-    # Build the secret version name
-    name = f"projects/{project_id}/secrets/{secret_id}/versions/{version}"
-
-    # Get the client, return environment fallback if not available
     client = _get_client()
-    if client is None:
-        # Secret Manager not available, try environment variable fallback
-        env_var = os.getenv(f"DEFAULT_{secret_id}")
-        if env_var:
-            return env_var
-        if default is not None:
-            return default
-        raise RuntimeError(
-            f"Secret Manager not available and no environment fallback for {secret_id}"
-        )
-
-    try:
-        # Access the secret version
-        response = client.access_secret_version(name=name)
-        return response.payload.data.decode("UTF-8")
-    except NotFound:
-        # If secret not found, check if we have a default value in environment
-        env_var = os.getenv(f"DEFAULT_{secret_id}")
-        if env_var:
-            return env_var
-        if default is not None:
-            return default
-        raise RuntimeError(
-            f"Secret {secret_id} not found in Secret Manager and no default provided"
-        )
-    except Exception as e:
-        if default is not None:
-            return default
-        raise RuntimeError(f"Failed to access secret {secret_id}: {str(e)}")
-
-
-# Helper functions for specific secret types
-def get_database_url() -> str:
-    """Get the database URL from secrets or environment."""
-    try:
-        return get_secret("DATABASE_URL")
-    except RuntimeError:
-        # Default fallback for local development
-        return "sqlite:///data/careercopilot-dev.db"
-=======
-Secret Manager abstraction for configuration management.
-
-This module provides functions to access configuration values from environment variables,
-ensuring a consistent interface for the application.
-"""
-
-import logging
-import os
-
-logger = logging.getLogger(__name__)
-
-def get_secret(
-    secret_id: str,
-    default: str | None = None,
-) -> str:
-    """
-    Retrieve a configuration value from environment variables.
-
-    Args:
-        secret_id: The ID of the environment variable to retrieve
-        default: Default value if not found
-
-    Returns:
-        The configuration value as a string
-
-    Raises:
-        RuntimeError: If the value is not found and no default exists
-    """
-    # Try to get from environment variables
-    value = os.getenv(secret_id.upper().replace("-", "_")) or os.getenv(secret_id)
-
-    if value:
-        return value
+    if client and project_id:
+        name = f"projects/{project_id}/secrets/{secret_id}/versions/{version}"
+        try:
+            response = client.access_secret_version(name=name)
+            return response.payload.data.decode("UTF-8")
+        except NotFound:
+            pass
+        except Exception as exc:
+            if default is None:
+                raise RuntimeError(f"Failed to access secret {secret_id}: {exc}") from exc
 
     if default is not None:
         return default
 
-    raise RuntimeError(f"Configuration value {secret_id} not found in environment variables")
+    raise RuntimeError(f"Secret {secret_id} not found in environment or Secret Manager")
 
 
 def get_database_url() -> str:
-    """Get the database URL from environment."""
+    """Get the database URL from secrets or environment."""
     return get_secret("DATABASE_URL", default="sqlite:///data/careercopilot-dev.db")
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 
 def get_secret_key() -> str:
     """Get the secret key for JWT tokens."""
-<<<<<<< HEAD
-    return get_secret("SECRET_KEY")
+    jwt_secret = _get_env_secret("JWT_SECRET_KEY")
+    if jwt_secret:
+        return jwt_secret
+    return get_secret("SECRET_KEY", default="insecure-default-secret-key")
 
 
 def get_firebase_credentials() -> Optional[Dict[str, Any]]:
-    """
-    Get Firebase Admin SDK credentials from Secret Manager.
-
-    Returns:
-        dict: Parsed JSON credentials or None if not found
-    """
+    """Get Firebase Admin SDK credentials as parsed JSON."""
     try:
-        creds_json = get_secret("firebase-credentials-json")
+        creds_json = get_secret("firebase-credentials-json", default="")
         if creds_json:
-            import json
-
-            return cast(Dict[str, Any], json.loads(creds_json))
-    except Exception as e:
-        print(f"Warning: Could not load Firebase credentials: {e}")
+            return json.loads(creds_json)
+    except Exception as exc:
+        print(f"Warning: Could not load Firebase credentials: {exc}")
     return None
 
 
 def get_firebase_config() -> Dict[str, Any]:
-    """
-    Get Firebase configuration from Secret Manager or environment variables.
-
-    Returns:
-        dict: Firebase configuration
-    """
-    try:
-        config: Dict[str, Any] = {
-            "project_id": get_secret(
-                "firebase-project-id", default=os.getenv("GCP_PROJECT_ID", "")
-            ),
-            "storage_bucket": get_secret("firebase-storage-bucket", default=""),
-            "database_url": get_secret("firebase-database-url", default=""),
-            "use_emulator": get_secret("firebase-emulator", default="false").lower() == "true",
-            "auth_emulator_host": get_secret("firebase-auth-emulator-host", default=""),
-            "storage_emulator_host": get_secret("firebase-storage-emulator-host", default=""),
-            "database_emulator_host": get_secret("firebase-database-emulator-host", default=""),
-        }
-        return config
-    except Exception:
-        # Fallback to environment variables
-        return {
-            "project_id": os.getenv("FIREBASE_PROJECT_ID", os.getenv("GCP_PROJECT_ID", "")),
-            "storage_bucket": os.getenv("FIREBASE_STORAGE_BUCKET", ""),
-            "database_url": os.getenv("FIREBASE_DATABASE_URL", ""),
-            "use_emulator": os.getenv("FIREBASE_EMULATOR", "false").lower() == "true",
-            "auth_emulator_host": os.getenv("FIREBASE_AUTH_EMULATOR_HOST", ""),
-            "storage_emulator_host": os.getenv("FIREBASE_STORAGE_EMULATOR_HOST", ""),
-            "database_emulator_host": os.getenv("FIREBASE_DATABASE_EMULATOR_HOST", ""),
-        }
+    """Get Firebase configuration from secrets or environment variables."""
+    return {
+        "project_id": get_secret(
+            "firebase-project-id",
+            default=os.getenv("FIREBASE_PROJECT_ID", os.getenv("GCP_PROJECT_ID", "")),
+        ),
+        "storage_bucket": get_secret(
+            "firebase-storage-bucket",
+            default=os.getenv("FIREBASE_STORAGE_BUCKET", ""),
+        ),
+        "database_url": get_secret(
+            "firebase-database-url",
+            default=os.getenv("FIREBASE_DATABASE_URL", ""),
+        ),
+        "use_emulator": get_secret(
+            "firebase-emulator",
+            default=os.getenv("FIREBASE_EMULATOR", "false"),
+        ).lower()
+        == "true",
+        "auth_emulator_host": get_secret(
+            "firebase-auth-emulator-host",
+            default=os.getenv("FIREBASE_AUTH_EMULATOR_HOST", ""),
+        ),
+        "storage_emulator_host": get_secret(
+            "firebase-storage-emulator-host",
+            default=os.getenv("FIREBASE_STORAGE_EMULATOR_HOST", ""),
+        ),
+        "database_emulator_host": get_secret(
+            "firebase-database-emulator-host",
+            default=os.getenv("FIREBASE_DATABASE_EMULATOR_HOST", ""),
+        ),
+    }
 
 
 def get_firebase_frontend_config() -> Dict[str, Any]:
-    """
-    Get Firebase frontend configuration from Secret Manager or environment variables.
-
-    Returns:
-        dict: Firebase frontend configuration for VITE environment variables
-    """
-    try:
-        config = {
-            "api_key": get_secret("vite-firebase-api-key", default=""),
-            "auth_domain": get_secret("vite-firebase-auth-domain", default=""),
-            "project_id": get_secret(
-                "firebase-project-id", default=os.getenv("GCP_PROJECT_ID", "")
-            ),
-            "storage_bucket": get_secret("firebase-storage-bucket", default=""),
-            "messaging_sender_id": get_secret("vite-firebase-messaging-sender-id", default=""),
-            "app_id": get_secret("vite-firebase-app-id", default=""),
-        }
-        return config
-    except Exception:
-        # Fallback to environment variables
-        return {
-            "api_key": os.getenv("VITE_FIREBASE_API_KEY", ""),
-            "auth_domain": os.getenv("VITE_FIREBASE_AUTH_DOMAIN", ""),
-            "project_id": os.getenv("FIREBASE_PROJECT_ID", os.getenv("GCP_PROJECT_ID", "")),
-            "storage_bucket": os.getenv("FIREBASE_STORAGE_BUCKET", ""),
-            "messaging_sender_id": os.getenv("VITE_FIREBASE_MESSAGING_SENDER_ID", ""),
-            "app_id": os.getenv("VITE_FIREBASE_APP_ID", ""),
-        }
+    """Get Firebase frontend configuration for Vite environment variables."""
+    return {
+        "api_key": get_secret("vite-firebase-api-key", default=os.getenv("VITE_FIREBASE_API_KEY", "")),
+        "auth_domain": get_secret(
+            "vite-firebase-auth-domain",
+            default=os.getenv("VITE_FIREBASE_AUTH_DOMAIN", ""),
+        ),
+        "project_id": get_secret(
+            "firebase-project-id",
+            default=os.getenv("FIREBASE_PROJECT_ID", os.getenv("GCP_PROJECT_ID", "")),
+        ),
+        "storage_bucket": get_secret(
+            "firebase-storage-bucket",
+            default=os.getenv("FIREBASE_STORAGE_BUCKET", ""),
+        ),
+        "messaging_sender_id": get_secret(
+            "vite-firebase-messaging-sender-id",
+            default=os.getenv("VITE_FIREBASE_MESSAGING_SENDER_ID", ""),
+        ),
+        "app_id": get_secret("vite-firebase-app-id", default=os.getenv("VITE_FIREBASE_APP_ID", "")),
+    }
 
 
 def get_app_secret(secret_name: str, default: Optional[str] = None) -> str:
-    """
-    Get an application secret with the modern naming convention.
-
-    This function is compatible with the secrets.py module and provides
-    a consistent interface for accessing secrets with fallbacks.
-
-    Args:
-        secret_name: Name of the secret (e.g., 'openai-api-key')
-        default: Default value if secret not found
-
-    Returns:
-        Secret value as string
-
-    Raises:
-        RuntimeError: If secret not found and no default provided
-    """
-    try:
-        return get_secret(secret_name.upper().replace("-", "_"))
-    except RuntimeError:
-        # Try with the original format
-        try:
-            return get_secret(secret_name)
-        except RuntimeError:
-            if default is not None:
-                return default
-            raise RuntimeError(f"Secret {secret_name} not found")
-=======
-    return get_secret("JWT_SECRET_KEY", default="insecure-default-secret-key")
-
-
-def get_app_secret(secret_name: str, default: str | None = None) -> str:
-    """
-    Get an application configuration value.
-
-    Args:
-        secret_name: Name of the configuration (e.g., 'openai-api-key')
-        default: Default value if not found
-
-    Returns:
-        Value as string
-
-    Raises:
-        RuntimeError: If not found and no default provided
-    """
+    """Get an application secret using either hyphenated or env-style naming."""
     return get_secret(secret_name, default=default)
->>>>>>> restoration-KR-Rage-Figma-v2.0

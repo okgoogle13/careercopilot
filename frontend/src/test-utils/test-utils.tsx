@@ -1,13 +1,7 @@
 /**
-<<<<<<< HEAD
- * NORTHCOTE CURIO: TEST UTILITIES
- *
- * Testing utilities for React Testing Library with  design system support.
-=======
  * KeralaRage KrSolidarity: TEST UTILITIES
  *
  * Testing utilities for React Testing Library with KeralaRage KrSolidarity design system support.
->>>>>>> restoration-KR-Rage-Figma-v2.0
  * Replaces MUI ThemeProvider with design system context.
  */
 

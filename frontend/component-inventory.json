@@ -15,20 +15,12 @@
   "components": [
     {
       "name": "accordion",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/accordion/accordion.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/accordion/accordion.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "packages/ui/src/components/accordion/accordion.tsx",
       "category": "ui_package",
       "usageCount": 1,
       "importedBy": [
-<<<<<<< HEAD
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/accordion/accordion.stories.tsx"
-=======
         "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/accordion/accordion.stories.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "Accordion",
@@ -55,11 +47,7 @@
     },
     {
       "name": "alert-dialog",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/alert-dialog/alert-dialog.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/alert-dialog/alert-dialog.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "packages/ui/src/components/alert-dialog/alert-dialog.tsx",
       "category": "ui_package",
       "usageCount": 0,
@@ -97,20 +85,12 @@
     },
     {
       "name": "alert",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/alert/alert.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/alert/alert.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "packages/ui/src/components/alert/alert.tsx",
       "category": "ui_package",
       "usageCount": 1,
       "importedBy": [
-<<<<<<< HEAD
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/alert/alert.stories.tsx"
-=======
         "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/alert/alert.stories.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "Alert",
@@ -136,11 +116,7 @@
     },
     {
       "name": "aspect-ratio",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/aspect-ratio/aspect-ratio.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/aspect-ratio/aspect-ratio.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "packages/ui/src/components/aspect-ratio/aspect-ratio.tsx",
       "category": "ui_package",
       "usageCount": 0,
@@ -165,20 +141,12 @@
     },
     {
       "name": "avatar",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/avatar/avatar.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/avatar/avatar.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "packages/ui/src/components/avatar/avatar.tsx",
       "category": "ui_package",
       "usageCount": 1,
       "importedBy": [
-<<<<<<< HEAD
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/avatar/avatar.stories.tsx"
-=======
         "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/avatar/avatar.stories.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "Avatar",
@@ -204,20 +172,12 @@
     },
     {
       "name": "badge",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/badge/badge.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/badge/badge.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "packages/ui/src/components/badge/badge.tsx",
       "category": "ui_package",
       "usageCount": 1,
       "importedBy": [
-<<<<<<< HEAD
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/badge/badge.stories.tsx"
-=======
         "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/badge/badge.stories.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "Badge",
@@ -242,20 +202,12 @@
     },
     {
       "name": "breadcrumb",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/breadcrumb/breadcrumb.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/breadcrumb/breadcrumb.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "packages/ui/src/components/breadcrumb/breadcrumb.tsx",
       "category": "ui_package",
       "usageCount": 1,
       "importedBy": [
-<<<<<<< HEAD
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/breadcrumb/breadcrumb.stories.tsx"
-=======
         "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/breadcrumb/breadcrumb.stories.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "Breadcrumb",
@@ -285,22 +237,13 @@
     },
     {
       "name": "Button",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/Button/Button.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/Button/Button.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "packages/ui/src/components/Button/Button.tsx",
       "category": "ui_package",
       "usageCount": 2,
       "importedBy": [
-<<<<<<< HEAD
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/index.ts",
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/Button/Button.stories.tsx"
-=======
         "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/index.ts",
         "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/Button/Button.stories.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "ButtonVariant",
@@ -324,11 +267,7 @@
     },
     {
       "name": "calendar",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/calendar/calendar.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/calendar/calendar.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "packages/ui/src/components/calendar/calendar.tsx",
       "category": "ui_package",
       "usageCount": 0,
@@ -356,20 +295,12 @@
     },
     {
       "name": "card",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/card/card.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/card/card.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "packages/ui/src/components/card/card.tsx",
       "category": "ui_package",
       "usageCount": 1,
       "importedBy": [
-<<<<<<< HEAD
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/card/card.stories.tsx"
-=======
         "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/card/card.stories.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "Card",
@@ -399,11 +330,7 @@
     },
     {
       "name": "carousel",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/carousel/carousel.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/carousel/carousel.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "packages/ui/src/components/carousel/carousel.tsx",
       "category": "ui_package",
       "usageCount": 0,
@@ -436,11 +363,7 @@
     },
     {
       "name": "chart",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/chart/chart.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/chart/chart.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "packages/ui/src/components/chart/chart.tsx",
       "category": "ui_package",
       "usageCount": 0,
@@ -473,20 +396,12 @@
     },
     {
       "name": "checkbox",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/checkbox/checkbox.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/checkbox/checkbox.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "packages/ui/src/components/checkbox/checkbox.tsx",
       "category": "ui_package",
       "usageCount": 1,
       "importedBy": [
-<<<<<<< HEAD
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/checkbox/checkbox.stories.tsx"
-=======
         "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/checkbox/checkbox.stories.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "Checkbox"
@@ -510,11 +425,7 @@
     },
     {
       "name": "collapsible",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/collapsible/collapsible.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/collapsible/collapsible.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "packages/ui/src/components/collapsible/collapsible.tsx",
       "category": "ui_package",
       "usageCount": 0,
@@ -541,11 +452,7 @@
     },
     {
       "name": "command",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/command/command.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/command/command.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "packages/ui/src/components/command/command.tsx",
       "category": "ui_package",
       "usageCount": 0,
@@ -581,11 +488,7 @@
     },
     {
       "name": "context-menu",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/context-menu/context-menu.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/context-menu/context-menu.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "packages/ui/src/components/context-menu/context-menu.tsx",
       "category": "ui_package",
       "usageCount": 0,
@@ -626,22 +529,13 @@
     },
     {
       "name": "dialog",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/dialog/dialog.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/dialog/dialog.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "packages/ui/src/components/dialog/dialog.tsx",
       "category": "ui_package",
       "usageCount": 2,
       "importedBy": [
-<<<<<<< HEAD
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/command/command.tsx",
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/dialog/dialog.stories.tsx"
-=======
         "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/command/command.tsx",
         "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/dialog/dialog.stories.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "Dialog",
@@ -674,11 +568,7 @@
     },
     {
       "name": "drawer",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/drawer/drawer.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/drawer/drawer.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "packages/ui/src/components/drawer/drawer.tsx",
       "category": "ui_package",
       "usageCount": 0,
@@ -714,20 +604,12 @@
     },
     {
       "name": "dropdown-menu",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/dropdown-menu/dropdown-menu.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/dropdown-menu/dropdown-menu.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "packages/ui/src/components/dropdown-menu/dropdown-menu.tsx",
       "category": "ui_package",
       "usageCount": 1,
       "importedBy": [
-<<<<<<< HEAD
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/dropdown-menu/dropdown-menu.stories.tsx"
-=======
         "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/dropdown-menu/dropdown-menu.stories.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "DropdownMenu",
@@ -765,11 +647,7 @@
     },
     {
       "name": "form",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/form/form.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/form/form.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "packages/ui/src/components/form/form.tsx",
       "category": "ui_package",
       "usageCount": 0,
@@ -804,11 +682,7 @@
     },
     {
       "name": "hover-card",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/hover-card/hover-card.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/hover-card/hover-card.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "packages/ui/src/components/hover-card/hover-card.tsx",
       "category": "ui_package",
       "usageCount": 0,
@@ -837,11 +711,7 @@
     },
     {
       "name": "icon-badge",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/icon-badge/icon-badge.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/icon-badge/icon-badge.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "packages/ui/src/components/icon-badge/icon-badge.tsx",
       "category": "ui_package",
       "usageCount": 0,
@@ -866,11 +736,7 @@
     },
     {
       "name": "input-otp",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/input-otp/input-otp.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/input-otp/input-otp.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "packages/ui/src/components/input-otp/input-otp.tsx",
       "category": "ui_package",
       "usageCount": 0,
@@ -900,22 +766,13 @@
     },
     {
       "name": "input",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/input/input.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/input/input.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "packages/ui/src/components/input/input.tsx",
       "category": "ui_package",
       "usageCount": 2,
       "importedBy": [
-<<<<<<< HEAD
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/input/input.stories.tsx",
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/sidebar/sidebar.tsx"
-=======
         "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/input/input.stories.tsx",
         "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/sidebar/sidebar.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "Input"
@@ -939,11 +796,7 @@
     },
     {
       "name": "keyword-tag",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/keyword-tag/keyword-tag.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/keyword-tag/keyword-tag.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "packages/ui/src/components/keyword-tag/keyword-tag.tsx",
       "category": "ui_package",
       "usageCount": 0,
@@ -968,20 +821,12 @@
     },
     {
       "name": "label",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/label/label.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/label/label.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "packages/ui/src/components/label/label.tsx",
       "category": "ui_package",
       "usageCount": 1,
       "importedBy": [
-<<<<<<< HEAD
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/form/form.tsx"
-=======
         "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/form/form.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "Label"
@@ -1005,11 +850,7 @@
     },
     {
       "name": "menubar",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/menubar/menubar.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/menubar/menubar.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "packages/ui/src/components/menubar/menubar.tsx",
       "category": "ui_package",
       "usageCount": 0,
@@ -1051,11 +892,7 @@
     },
     {
       "name": "metric-card",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/metric-card/metric-card.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/metric-card/metric-card.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "packages/ui/src/components/metric-card/metric-card.tsx",
       "category": "ui_package",
       "usageCount": 0,
@@ -1080,11 +917,7 @@
     },
     {
       "name": "navigation-menu",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/navigation-menu/navigation-menu.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/navigation-menu/navigation-menu.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "packages/ui/src/components/navigation-menu/navigation-menu.tsx",
       "category": "ui_package",
       "usageCount": 0,
@@ -1119,11 +952,7 @@
     },
     {
       "name": "page-header",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/page-header/page-header.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/page-header/page-header.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "packages/ui/src/components/page-header/page-header.tsx",
       "category": "ui_package",
       "usageCount": 0,
@@ -1148,11 +977,7 @@
     },
     {
       "name": "pagination",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/pagination/pagination.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/pagination/pagination.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "packages/ui/src/components/pagination/pagination.tsx",
       "category": "ui_package",
       "usageCount": 0,
@@ -1186,11 +1011,7 @@
     },
     {
       "name": "popover",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/popover/popover.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/popover/popover.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "packages/ui/src/components/popover/popover.tsx",
       "category": "ui_package",
       "usageCount": 0,
@@ -1220,20 +1041,12 @@
     },
     {
       "name": "progress",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/progress/progress.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/progress/progress.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "packages/ui/src/components/progress/progress.tsx",
       "category": "ui_package",
       "usageCount": 1,
       "importedBy": [
-<<<<<<< HEAD
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/progress/progress.stories.tsx"
-=======
         "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/progress/progress.stories.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "Progress"
@@ -1257,11 +1070,7 @@
     },
     {
       "name": "radio-group",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/radio-group/radio-group.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/radio-group/radio-group.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "packages/ui/src/components/radio-group/radio-group.tsx",
       "category": "ui_package",
       "usageCount": 0,
@@ -1289,11 +1098,7 @@
     },
     {
       "name": "resizable",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/resizable/resizable.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/resizable/resizable.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "packages/ui/src/components/resizable/resizable.tsx",
       "category": "ui_package",
       "usageCount": 0,
@@ -1322,11 +1127,7 @@
     },
     {
       "name": "scroll-area",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/scroll-area/scroll-area.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/scroll-area/scroll-area.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "packages/ui/src/components/scroll-area/scroll-area.tsx",
       "category": "ui_package",
       "usageCount": 0,
@@ -1354,20 +1155,12 @@
     },
     {
       "name": "select",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/select/select.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/select/select.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "packages/ui/src/components/select/select.tsx",
       "category": "ui_package",
       "usageCount": 1,
       "importedBy": [
-<<<<<<< HEAD
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/select/select.stories.tsx"
-=======
         "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/select/select.stories.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "Select",
@@ -1400,22 +1193,13 @@
     },
     {
       "name": "separator",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/separator/separator.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/separator/separator.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "packages/ui/src/components/separator/separator.tsx",
       "category": "ui_package",
       "usageCount": 2,
       "importedBy": [
-<<<<<<< HEAD
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/separator/separator.stories.tsx",
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/sidebar/sidebar.tsx"
-=======
         "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/separator/separator.stories.tsx",
         "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/sidebar/sidebar.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "Separator"
@@ -1439,27 +1223,11 @@
     },
     {
       "name": "button",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/shadcn-button/button.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/shadcn-button/button.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "packages/ui/src/components/shadcn-button/button.tsx",
       "category": "ui_package",
       "usageCount": 10,
       "importedBy": [
-<<<<<<< HEAD
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/alert-dialog/alert-dialog.tsx",
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/calendar/calendar.tsx",
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/card/card.stories.tsx",
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/carousel/carousel.tsx",
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/dialog/dialog.stories.tsx",
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/dropdown-menu/dropdown-menu.stories.tsx",
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/pagination/pagination.tsx",
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/sheet/sheet.stories.tsx",
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/sidebar/sidebar.tsx",
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/tooltip/tooltip.stories.tsx"
-=======
         "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/alert-dialog/alert-dialog.tsx",
         "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/calendar/calendar.tsx",
         "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/card/card.stories.tsx",
@@ -1470,7 +1238,6 @@
         "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/sheet/sheet.stories.tsx",
         "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/sidebar/sidebar.tsx",
         "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/tooltip/tooltip.stories.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "ButtonProps",
@@ -1496,22 +1263,13 @@
     },
     {
       "name": "sheet",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/sheet/sheet.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/sheet/sheet.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "packages/ui/src/components/sheet/sheet.tsx",
       "category": "ui_package",
       "usageCount": 2,
       "importedBy": [
-<<<<<<< HEAD
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/sheet/sheet.stories.tsx",
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/sidebar/sidebar.tsx"
-=======
         "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/sheet/sheet.stories.tsx",
         "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/sidebar/sidebar.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "Sheet",
@@ -1542,11 +1300,7 @@
     },
     {
       "name": "sidebar",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/sidebar/sidebar.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/sidebar/sidebar.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "packages/ui/src/components/sidebar/sidebar.tsx",
       "category": "ui_package",
       "usageCount": 0,
@@ -1603,20 +1357,12 @@
     },
     {
       "name": "use-mobile",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/sidebar/use-mobile.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/sidebar/use-mobile.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "packages/ui/src/components/sidebar/use-mobile.tsx",
       "category": "ui_package",
       "usageCount": 1,
       "importedBy": [
-<<<<<<< HEAD
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/sidebar/sidebar.tsx"
-=======
         "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/sidebar/sidebar.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "useIsMobile"
@@ -1638,22 +1384,13 @@
     },
     {
       "name": "skeleton",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/skeleton/skeleton.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/skeleton/skeleton.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "packages/ui/src/components/skeleton/skeleton.tsx",
       "category": "ui_package",
       "usageCount": 2,
       "importedBy": [
-<<<<<<< HEAD
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/sidebar/sidebar.tsx",
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/skeleton/skeleton.stories.tsx"
-=======
         "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/sidebar/sidebar.tsx",
         "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/skeleton/skeleton.stories.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "Skeleton"
@@ -1677,20 +1414,12 @@
     },
     {
       "name": "slider",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/slider/slider.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/slider/slider.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "packages/ui/src/components/slider/slider.tsx",
       "category": "ui_package",
       "usageCount": 1,
       "importedBy": [
-<<<<<<< HEAD
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/slider/slider.stories.tsx"
-=======
         "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/slider/slider.stories.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "Slider"
@@ -1714,11 +1443,7 @@
     },
     {
       "name": "sonner",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/sonner/sonner.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/sonner/sonner.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "packages/ui/src/components/sonner/sonner.tsx",
       "category": "ui_package",
       "usageCount": 0,
@@ -1743,11 +1468,7 @@
     },
     {
       "name": "stat-card",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/stat-card/stat-card.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/stat-card/stat-card.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "packages/ui/src/components/stat-card/stat-card.tsx",
       "category": "ui_package",
       "usageCount": 0,
@@ -1772,20 +1493,12 @@
     },
     {
       "name": "switch",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/switch/switch.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/switch/switch.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "packages/ui/src/components/switch/switch.tsx",
       "category": "ui_package",
       "usageCount": 1,
       "importedBy": [
-<<<<<<< HEAD
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/switch/switch.stories.tsx"
-=======
         "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/switch/switch.stories.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "Switch"
@@ -1809,11 +1522,7 @@
     },
     {
       "name": "table",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/table/table.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/table/table.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "packages/ui/src/components/table/table.tsx",
       "category": "ui_package",
       "usageCount": 0,
@@ -1847,20 +1556,12 @@
     },
     {
       "name": "tabs",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/tabs/tabs.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/tabs/tabs.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "packages/ui/src/components/tabs/tabs.tsx",
       "category": "ui_package",
       "usageCount": 1,
       "importedBy": [
-<<<<<<< HEAD
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/tabs/tabs.stories.tsx"
-=======
         "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/tabs/tabs.stories.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "Tabs",
@@ -1887,11 +1588,7 @@
     },
     {
       "name": "textarea",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/textarea/textarea.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/textarea/textarea.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "packages/ui/src/components/textarea/textarea.tsx",
       "category": "ui_package",
       "usageCount": 0,
@@ -1918,11 +1615,7 @@
     },
     {
       "name": "toggle-group",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/toggle-group/toggle-group.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/toggle-group/toggle-group.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "packages/ui/src/components/toggle-group/toggle-group.tsx",
       "category": "ui_package",
       "usageCount": 0,
@@ -1951,20 +1644,12 @@
     },
     {
       "name": "toggle",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/toggle/toggle.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/toggle/toggle.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "packages/ui/src/components/toggle/toggle.tsx",
       "category": "ui_package",
       "usageCount": 1,
       "importedBy": [
-<<<<<<< HEAD
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/toggle-group/toggle-group.tsx"
-=======
         "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/toggle-group/toggle-group.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "Toggle",
@@ -1989,22 +1674,13 @@
     },
     {
       "name": "tooltip",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/tooltip/tooltip.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/tooltip/tooltip.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "packages/ui/src/components/tooltip/tooltip.tsx",
       "category": "ui_package",
       "usageCount": 2,
       "importedBy": [
-<<<<<<< HEAD
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/sidebar/sidebar.tsx",
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/packages/ui/src/components/tooltip/tooltip.stories.tsx"
-=======
         "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/sidebar/sidebar.tsx",
         "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/tooltip/tooltip.stories.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "Tooltip",
@@ -2031,11 +1707,7 @@
     },
     {
       "name": "Tabs",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/atomic/tabs/Tabs.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/atomic/tabs/Tabs.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/components/atomic/tabs/Tabs.tsx",
       "category": "components",
       "usageCount": 0,
@@ -2064,11 +1736,7 @@
     },
     {
       "name": "Leaf.figma",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/core/Leaf.figma.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/core/Leaf.figma.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/components/core/Leaf.figma.tsx",
       "category": "core",
       "usageCount": 0,
@@ -2093,20 +1761,12 @@
     },
     {
       "name": "Leaf",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/core/Leaf.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/core/Leaf.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/components/core/Leaf.tsx",
       "category": "core",
       "usageCount": 1,
       "importedBy": [
-<<<<<<< HEAD
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/core/Leaf.figma.tsx"
-=======
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/core/Leaf.figma.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "LeafProps",
@@ -2131,11 +1791,7 @@
     },
     {
       "name": "Pebble.figma",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/core/Pebble.figma.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/core/Pebble.figma.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/components/core/Pebble.figma.tsx",
       "category": "core",
       "usageCount": 0,
@@ -2160,22 +1816,13 @@
     },
     {
       "name": "Pebble",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/core/Pebble.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/core/Pebble.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/components/core/Pebble.tsx",
       "category": "core",
       "usageCount": 2,
       "importedBy": [
-<<<<<<< HEAD
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/core/Pebble.figma.tsx",
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/GalleryShell/views/GalleryFeed.tsx"
-=======
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/core/Pebble.figma.tsx",
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/views/kr-darkFeed.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "PebbleProps",
@@ -2200,11 +1847,7 @@
     },
     {
       "name": "Stone.figma",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/core/Stone.figma.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/core/Stone.figma.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/components/core/Stone.figma.tsx",
       "category": "core",
       "usageCount": 0,
@@ -2229,20 +1872,12 @@
     },
     {
       "name": "Stone",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/core/Stone.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/core/Stone.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/components/core/Stone.tsx",
       "category": "core",
       "usageCount": 1,
       "importedBy": [
-<<<<<<< HEAD
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/core/Stone.figma.tsx"
-=======
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/core/Stone.figma.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "StoneProps",
@@ -2267,11 +1902,7 @@
     },
     {
       "name": "ElectricTabs",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/electric/tabs/ElectricTabs.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/electric/tabs/ElectricTabs.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/components/electric/tabs/ElectricTabs.tsx",
       "category": "components",
       "usageCount": 0,
@@ -2300,11 +1931,7 @@
     },
     {
       "name": "ImageWithFallback",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/figma/ImageWithFallback.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/figma/ImageWithFallback.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/components/figma/ImageWithFallback.tsx",
       "category": "components",
       "usageCount": 0,
@@ -2329,20 +1956,12 @@
     },
     {
       "name": "GardenLayout",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/layouts/GardenLayout.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/layouts/GardenLayout.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/components/layouts/GardenLayout.tsx",
       "category": "components",
       "usageCount": 1,
       "importedBy": [
-<<<<<<< HEAD
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/sandbox/EcosystemSandbox.tsx"
-=======
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/sandbox/EcosystemSandbox.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "GardenLayout",
@@ -2365,20 +1984,12 @@
     },
     {
       "name": "ApplicationCard",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/shared/ApplicationCard.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/shared/ApplicationCard.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/components/shared/ApplicationCard.tsx",
       "category": "shared",
       "usageCount": 1,
       "importedBy": [
-<<<<<<< HEAD
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/applications/ApplicationTracker.tsx"
-=======
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/applications/ApplicationTracker.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "ApplicationCard"
@@ -2402,20 +2013,12 @@
     },
     {
       "name": "ChartPane",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/shared/ChartPane.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/shared/ChartPane.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/components/shared/ChartPane.tsx",
       "category": "shared",
       "usageCount": 1,
       "importedBy": [
-<<<<<<< HEAD
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/analysis/Analysis.tsx"
-=======
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/analysis/Analysis.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "ChartPane"
@@ -2437,11 +2040,7 @@
     },
     {
       "name": "CodePreview",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/shared/CodePreview.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/shared/CodePreview.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/components/shared/CodePreview.tsx",
       "category": "shared",
       "usageCount": 0,
@@ -2466,20 +2065,12 @@
     },
     {
       "name": "EditableField",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/shared/EditableField.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/shared/EditableField.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/components/shared/EditableField.tsx",
       "category": "shared",
       "usageCount": 1,
       "importedBy": [
-<<<<<<< HEAD
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/onboarding/components/ValidationDashboard.tsx"
-=======
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/onboarding/components/ValidationDashboard.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "EditableField"
@@ -2503,11 +2094,7 @@
     },
     {
       "name": "IconBadge",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/shared/IconBadge.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/shared/IconBadge.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/components/shared/IconBadge.tsx",
       "category": "shared",
       "usageCount": 0,
@@ -2532,20 +2119,12 @@
     },
     {
       "name": "ImpactEnhancements",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/shared/ImpactEnhancements.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/shared/ImpactEnhancements.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/components/shared/ImpactEnhancements.tsx",
       "category": "shared",
       "usageCount": 1,
       "importedBy": [
-<<<<<<< HEAD
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/analysis/Analysis.tsx"
-=======
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/analysis/Analysis.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "ImpactEnhancements"
@@ -2569,22 +2148,13 @@
     },
     {
       "name": "KeywordTag",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/shared/KeywordTag.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/shared/KeywordTag.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/components/shared/KeywordTag.tsx",
       "category": "shared",
       "usageCount": 2,
       "importedBy": [
-<<<<<<< HEAD
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/analysis/Analysis.tsx",
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/style-guide/StyleGuide.tsx"
-=======
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/analysis/Analysis.tsx",
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/style-guide/StyleGuide.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "KeywordTag"
@@ -2606,20 +2176,12 @@
     },
     {
       "name": "M3ErrorAlert",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/shared/M3ErrorAlert.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/shared/M3ErrorAlert.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/components/shared/M3ErrorAlert.tsx",
       "category": "shared",
       "usageCount": 1,
       "importedBy": [
-<<<<<<< HEAD
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/pages/JobQueue.tsx"
-=======
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/pages/JobQueue.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "M3ErrorAlert"
@@ -2643,20 +2205,12 @@
     },
     {
       "name": "MetricCard",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/shared/MetricCard.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/shared/MetricCard.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/components/shared/MetricCard.tsx",
       "category": "shared",
       "usageCount": 1,
       "importedBy": [
-<<<<<<< HEAD
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/analysis/Analysis.tsx"
-=======
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/analysis/Analysis.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "MetricCard"
@@ -2678,25 +2232,11 @@
     },
     {
       "name": "PageHeader",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/shared/PageHeader.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/shared/PageHeader.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/components/shared/PageHeader.tsx",
       "category": "shared",
       "usageCount": 8,
       "importedBy": [
-<<<<<<< HEAD
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/pages/JobQueue.tsx",
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/analysis/Analysis.tsx",
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/applications/ApplicationTracker.tsx",
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/documents/Documents.tsx",
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/ksc-generator/KSCGenerator.tsx",
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/opportunities/Opportunities.tsx",
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/settings/Settings.tsx",
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/style-guide/StyleGuide.tsx"
-=======
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/pages/JobQueue.tsx",
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/analysis/Analysis.tsx",
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/applications/ApplicationTracker.tsx",
@@ -2705,7 +2245,6 @@
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/opportunities/Opportunities.tsx",
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/settings/Settings.tsx",
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/style-guide/StyleGuide.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "PageHeader"
@@ -2727,11 +2266,7 @@
     },
     {
       "name": "PlasmaBackground",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/shared/PlasmaBackground.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/shared/PlasmaBackground.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/components/shared/PlasmaBackground.tsx",
       "category": "shared",
       "usageCount": 0,
@@ -2756,11 +2291,7 @@
     },
     {
       "name": "SplitHeader",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/shared/SplitHeader.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/shared/SplitHeader.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/components/shared/SplitHeader.tsx",
       "category": "shared",
       "usageCount": 0,
@@ -2788,11 +2319,7 @@
     },
     {
       "name": "StatCard",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/shared/StatCard.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/shared/StatCard.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/components/shared/StatCard.tsx",
       "category": "shared",
       "usageCount": 0,
@@ -2817,20 +2344,12 @@
     },
     {
       "name": "StatusChip",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/shared/StatusChip.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/shared/StatusChip.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/components/shared/StatusChip.tsx",
       "category": "shared",
       "usageCount": 1,
       "importedBy": [
-<<<<<<< HEAD
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/onboarding/components/ValidationDashboard.tsx"
-=======
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/onboarding/components/ValidationDashboard.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "StatusChip"
@@ -2854,11 +2373,7 @@
     },
     {
       "name": "TechCard.figma",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/shared/TechCard.figma.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/shared/TechCard.figma.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/components/shared/TechCard.figma.tsx",
       "category": "shared",
       "usageCount": 0,
@@ -2883,20 +2398,12 @@
     },
     {
       "name": "TechCard",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/shared/TechCard.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/shared/TechCard.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/components/shared/TechCard.tsx",
       "category": "shared",
       "usageCount": 1,
       "importedBy": [
-<<<<<<< HEAD
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/shared/TechCard.figma.tsx"
-=======
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/shared/TechCard.figma.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "TechCard"
@@ -2918,11 +2425,7 @@
     },
     {
       "name": "TestCard",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/TestCard/TestCard.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/TestCard/TestCard.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/components/TestCard/TestCard.tsx",
       "category": "components",
       "usageCount": 0,
@@ -2950,20 +2453,12 @@
     },
     {
       "name": "AuroraHeader",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/AuroraHeader.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/ui/AuroraHeader.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/components/ui/AuroraHeader.tsx",
       "category": "ui",
       "usageCount": 1,
       "importedBy": [
-<<<<<<< HEAD
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/sandbox/EcosystemSandbox.tsx"
-=======
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/sandbox/EcosystemSandbox.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "AuroraHeader",
@@ -2986,11 +2481,7 @@
     },
     {
       "name": "button",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/button.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/ui/button.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/components/ui/button.tsx",
       "category": "ui",
       "usageCount": 0,
@@ -3018,11 +2509,7 @@
     },
     {
       "name": "Cabinet",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/Cabinet.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/ui/Cabinet.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/components/ui/Cabinet.tsx",
       "category": "ui",
       "usageCount": 0,
@@ -3052,11 +2539,7 @@
     },
     {
       "name": "chart",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/chart.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/ui/chart.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/components/ui/chart.tsx",
       "category": "ui",
       "usageCount": 0,
@@ -3085,11 +2568,7 @@
     },
     {
       "name": "collapsible",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/collapsible.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/ui/collapsible.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/components/ui/collapsible.tsx",
       "category": "ui",
       "usageCount": 0,
@@ -3116,11 +2595,7 @@
     },
     {
       "name": "form",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/form.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/ui/form.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/components/ui/form.tsx",
       "category": "ui",
       "usageCount": 0,
@@ -3154,11 +2629,7 @@
     },
     {
       "name": "HaeckelIcon",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/HaeckelIcon.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/ui/HaeckelIcon.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/components/ui/HaeckelIcon.tsx",
       "category": "ui",
       "usageCount": 0,
@@ -3184,11 +2655,7 @@
     },
     {
       "name": "icon-badge",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/icon-badge.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/ui/icon-badge.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/components/ui/icon-badge.tsx",
       "category": "ui",
       "usageCount": 0,
@@ -3213,11 +2680,7 @@
     },
     {
       "name": "Jar",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/Jar.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/ui/Jar.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/components/ui/Jar.tsx",
       "category": "ui",
       "usageCount": 0,
@@ -3244,11 +2707,7 @@
     },
     {
       "name": "Lens",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/Lens.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/ui/Lens.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/components/ui/Lens.tsx",
       "category": "ui",
       "usageCount": 0,
@@ -3278,11 +2737,7 @@
     },
     {
       "name": "Mark",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/Mark.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/ui/Mark.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/components/ui/Mark.tsx",
       "category": "ui",
       "usageCount": 0,
@@ -3310,11 +2765,7 @@
     },
     {
       "name": "metric-card",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/metric-card.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/ui/metric-card.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/components/ui/metric-card.tsx",
       "category": "ui",
       "usageCount": 0,
@@ -3339,20 +2790,12 @@
     },
     {
       "name": "NativeAnchor",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/NativeAnchor.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/ui/NativeAnchor.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/components/ui/NativeAnchor.tsx",
       "category": "ui",
       "usageCount": 1,
       "importedBy": [
-<<<<<<< HEAD
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/sandbox/EcosystemSandbox.tsx"
-=======
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/sandbox/EcosystemSandbox.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "NativeAnchor",
@@ -3374,29 +2817,6 @@
       "usesModeSystem": false
     },
     {
-<<<<<<< HEAD
-      "name": "NorthcoteButton",
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/NorthcoteButton.tsx",
-      "relativePath": "src/components/ui/NorthcoteButton.tsx",
-      "category": "ui",
-      "usageCount": 11,
-      "importedBy": [
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/analysis/AssetLibrary.tsx",
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/applications/ApplicationCard.tsx",
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/auth/Login.tsx",
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/auth/Register.tsx",
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/documents/DocumentStack.tsx",
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/sandbox/components/SplitEditor.tsx",
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/GalleryShell/views/GalleryLanding.tsx",
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/LaboratoryShell/components/GlobalHeader.tsx",
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/LaboratoryShell/components/NavRail.tsx",
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/LaboratoryShell/components/anchors/AnalysisAnchor.tsx",
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/LaboratoryShell/components/anchors/DocumentStackAnchor.tsx"
-      ],
-      "exports": [
-        "NorthcoteButtonProps",
-        "NorthcoteButton"
-=======
       "name": "kerala-rageButton",
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/ui/kerala-rageButton.tsx",
       "relativePath": "src/components/ui/kerala-rageButton.tsx",
@@ -3418,7 +2838,6 @@
       "exports": [
         "kerala-rageButtonProps",
         "kerala-rageButton"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "hasTests": false,
       "hasStories": false,
@@ -3440,22 +2859,13 @@
     },
     {
       "name": "Pebble",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/Pebble.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/ui/Pebble.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/components/ui/Pebble.tsx",
       "category": "ui",
       "usageCount": 2,
       "importedBy": [
-<<<<<<< HEAD
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/Cabinet.tsx",
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/Signal.tsx"
-=======
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/ui/Cabinet.tsx",
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/ui/Signal.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "M3Button",
@@ -3484,11 +2894,7 @@
     },
     {
       "name": "Seed",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/Seed.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/ui/Seed.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/components/ui/Seed.tsx",
       "category": "ui",
       "usageCount": 0,
@@ -3514,11 +2920,7 @@
     },
     {
       "name": "Signal",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/Signal.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/ui/Signal.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/components/ui/Signal.tsx",
       "category": "ui",
       "usageCount": 0,
@@ -3552,11 +2954,7 @@
     },
     {
       "name": "SplitHeader",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/SplitHeader.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/ui/SplitHeader.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/components/ui/SplitHeader.tsx",
       "category": "ui",
       "usageCount": 0,
@@ -3582,22 +2980,13 @@
     },
     {
       "name": "StatusBadge",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/StatusBadge/StatusBadge.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/ui/StatusBadge/StatusBadge.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/components/ui/StatusBadge/StatusBadge.tsx",
       "category": "ui",
       "usageCount": 2,
       "importedBy": [
-<<<<<<< HEAD
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/shared/StatusChip.tsx",
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/applications/ApplicationCard.tsx"
-=======
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/shared/StatusChip.tsx",
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/applications/ApplicationCard.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "StatusBadgeVariant",
@@ -3622,20 +3011,12 @@
     },
     {
       "name": "Stone",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/Stone.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/ui/Stone.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/components/ui/Stone.tsx",
       "category": "ui",
       "usageCount": 1,
       "importedBy": [
-<<<<<<< HEAD
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/Cabinet.tsx"
-=======
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/ui/Cabinet.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "M3Card",
@@ -3668,11 +3049,7 @@
     },
     {
       "name": "table",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/table.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/ui/table.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/components/ui/table.tsx",
       "category": "ui",
       "usageCount": 0,
@@ -3704,11 +3081,7 @@
     },
     {
       "name": "Valve",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/Valve.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/ui/Valve.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/components/ui/Valve.tsx",
       "category": "ui",
       "usageCount": 0,
@@ -3734,11 +3107,7 @@
     },
     {
       "name": "Vessel",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/components/ui/Vessel.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/ui/Vessel.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/components/ui/Vessel.tsx",
       "category": "ui",
       "usageCount": 0,
@@ -3765,11 +3134,7 @@
     },
     {
       "name": "Analysis",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/analysis/Analysis.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/analysis/Analysis.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/features/analysis/Analysis.tsx",
       "category": "features",
       "usageCount": 0,
@@ -3803,20 +3168,12 @@
     },
     {
       "name": "AssetLibrary",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/analysis/AssetLibrary.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/analysis/AssetLibrary.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/features/analysis/AssetLibrary.tsx",
       "category": "features",
       "usageCount": 1,
       "importedBy": [
-<<<<<<< HEAD
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/App.tsx"
-=======
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "AssetLibrary"
@@ -3827,11 +3184,7 @@
       "linesOfCode": 66,
       "complexity": "medium",
       "dependencies": [
-<<<<<<< HEAD
-        "../../components/ui/NorthcoteButton"
-=======
         "../../components/ui/kerala-rageButton"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "isReusable": false,
       "usesMUI": false,
@@ -3844,11 +3197,7 @@
     },
     {
       "name": "AuditDial",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/analysis/AuditDial.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/analysis/AuditDial.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/features/analysis/AuditDial.tsx",
       "category": "features",
       "usageCount": 0,
@@ -3874,11 +3223,7 @@
     },
     {
       "name": "ImpactEnhancements",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/analysis/ImpactEnhancements.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/analysis/ImpactEnhancements.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/features/analysis/ImpactEnhancements.tsx",
       "category": "features",
       "usageCount": 0,
@@ -3905,11 +3250,7 @@
     },
     {
       "name": "MetricCard",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/analysis/MetricCard.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/analysis/MetricCard.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/features/analysis/MetricCard.tsx",
       "category": "features",
       "usageCount": 0,
@@ -3934,20 +3275,12 @@
     },
     {
       "name": "TechCard",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/analysis/TechCard.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/analysis/TechCard.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/features/analysis/TechCard.tsx",
       "category": "features",
       "usageCount": 1,
       "importedBy": [
-<<<<<<< HEAD
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/LaboratoryShell/components/anchors/AnalysisAnchor.tsx"
-=======
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/components/anchors/AnalysisAnchor.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "TechCard"
@@ -3972,11 +3305,7 @@
     },
     {
       "name": "ApplicationCard",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/applications/ApplicationCard.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/applications/ApplicationCard.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/features/applications/ApplicationCard.tsx",
       "category": "features",
       "usageCount": 0,
@@ -3991,11 +3320,7 @@
       "complexity": "medium",
       "dependencies": [
         "@/components/ui/StatusBadge/StatusBadge",
-<<<<<<< HEAD
-        "@/components/ui/NorthcoteButton"
-=======
         "@/components/ui/kerala-rageButton"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "isReusable": false,
       "usesMUI": false,
@@ -4008,20 +3333,12 @@
     },
     {
       "name": "ApplicationTracker",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/applications/ApplicationTracker.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/applications/ApplicationTracker.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/features/applications/ApplicationTracker.tsx",
       "category": "features",
       "usageCount": 1,
       "importedBy": [
-<<<<<<< HEAD
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/App.tsx"
-=======
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "ApplicationTracker",
@@ -4048,20 +3365,12 @@
     },
     {
       "name": "Login",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/auth/Login.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/auth/Login.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/features/auth/Login.tsx",
       "category": "features",
       "usageCount": 1,
       "importedBy": [
-<<<<<<< HEAD
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/App.tsx"
-=======
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "Login"
@@ -4073,11 +3382,7 @@
       "complexity": "medium",
       "dependencies": [
         "../../context/AuthContext",
-<<<<<<< HEAD
-        "../../components/ui/NorthcoteButton"
-=======
         "../../components/ui/kerala-rageButton"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "isReusable": false,
       "usesMUI": false,
@@ -4090,20 +3395,12 @@
     },
     {
       "name": "Register",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/auth/Register.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/auth/Register.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/features/auth/Register.tsx",
       "category": "features",
       "usageCount": 1,
       "importedBy": [
-<<<<<<< HEAD
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/App.tsx"
-=======
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "Register"
@@ -4115,11 +3412,7 @@
       "complexity": "medium",
       "dependencies": [
         "../../context/AuthContext",
-<<<<<<< HEAD
-        "../../components/ui/NorthcoteButton"
-=======
         "../../components/ui/kerala-rageButton"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "isReusable": false,
       "usesMUI": false,
@@ -4132,11 +3425,7 @@
     },
     {
       "name": "ModeContext",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/context/ModeContext.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/context/ModeContext.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/features/context/ModeContext.tsx",
       "category": "features",
       "usageCount": 0,
@@ -4162,11 +3451,7 @@
     },
     {
       "name": "JobCard",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/dashboard/components/JobCard.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/dashboard/components/JobCard.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/features/dashboard/components/JobCard.tsx",
       "category": "features",
       "usageCount": 0,
@@ -4192,20 +3477,12 @@
     },
     {
       "name": "Dashboard",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/dashboard/Dashboard.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/dashboard/Dashboard.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/features/dashboard/Dashboard.tsx",
       "category": "features",
       "usageCount": 1,
       "importedBy": [
-<<<<<<< HEAD
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/App.tsx"
-=======
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "Dashboard"
@@ -4227,20 +3504,12 @@
     },
     {
       "name": "Documents",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/documents/Documents.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/documents/Documents.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/features/documents/Documents.tsx",
       "category": "features",
       "usageCount": 1,
       "importedBy": [
-<<<<<<< HEAD
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/App.tsx"
-=======
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "Documents",
@@ -4269,11 +3538,7 @@
     },
     {
       "name": "DocumentStack",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/documents/DocumentStack.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/documents/DocumentStack.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/features/documents/DocumentStack.tsx",
       "category": "features",
       "usageCount": 0,
@@ -4288,11 +3553,7 @@
       "complexity": "medium",
       "dependencies": [
         "@/lib/utils",
-<<<<<<< HEAD
-        "@/components/ui/NorthcoteButton"
-=======
         "@/components/ui/kerala-rageButton"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "isReusable": false,
       "usesMUI": false,
@@ -4305,11 +3566,7 @@
     },
     {
       "name": "EvidenceCard",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/editor/components/EvidenceCard.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/editor/components/EvidenceCard.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/features/editor/components/EvidenceCard.tsx",
       "category": "features",
       "usageCount": 0,
@@ -4335,15 +3592,6 @@
     },
     {
       "name": "GlassLeafCard",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/gallery/GlassLeafCard.tsx",
-      "relativePath": "src/features/gallery/GlassLeafCard.tsx",
-      "category": "features",
-      "usageCount": 2,
-      "importedBy": [
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/GalleryShell/views/GalleryFeed.tsx",
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/GalleryShell/views/GalleryKanban.tsx"
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/kr-dark/GlassLeafCard.tsx",
       "relativePath": "src/features/kr-dark/GlassLeafCard.tsx",
       "category": "features",
@@ -4351,7 +3599,6 @@
       "importedBy": [
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/views/kr-darkFeed.tsx",
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/views/kr-darkKanban.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "GlassLeafCard"
@@ -4376,13 +3623,8 @@
     },
     {
       "name": "IconBadge",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/gallery/IconBadge.tsx",
-      "relativePath": "src/features/gallery/IconBadge.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/kr-dark/IconBadge.tsx",
       "relativePath": "src/features/kr-dark/IconBadge.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "category": "features",
       "usageCount": 0,
       "importedBy": [],
@@ -4406,11 +3648,7 @@
     },
     {
       "name": "DropZone",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/ingestion/components/DropZone.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/ingestion/components/DropZone.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/features/ingestion/components/DropZone.tsx",
       "category": "features",
       "usageCount": 0,
@@ -4436,20 +3674,12 @@
     },
     {
       "name": "EvidenceUploader",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/ingestion/components/EvidenceUploader.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/ingestion/components/EvidenceUploader.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/features/ingestion/components/EvidenceUploader.tsx",
       "category": "features",
       "usageCount": 1,
       "importedBy": [
-<<<<<<< HEAD
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/pages/AnalysisPage.tsx"
-=======
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/pages/AnalysisPage.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "EvidenceUploader"
@@ -4474,20 +3704,12 @@
     },
     {
       "name": "KSCGenerator",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/ksc-generator/KSCGenerator.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/ksc-generator/KSCGenerator.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/features/ksc-generator/KSCGenerator.tsx",
       "category": "features",
       "usageCount": 1,
       "importedBy": [
-<<<<<<< HEAD
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/App.tsx"
-=======
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "KSCGenerator"
@@ -4513,20 +3735,12 @@
     },
     {
       "name": "LandingPage",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/landing/LandingPage.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/landing/LandingPage.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/features/landing/LandingPage.tsx",
       "category": "features",
       "usageCount": 1,
       "importedBy": [
-<<<<<<< HEAD
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/App.tsx"
-=======
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "LandingPage",
@@ -4555,20 +3769,12 @@
     },
     {
       "name": "NotFound",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/not-found/NotFound.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/not-found/NotFound.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/features/not-found/NotFound.tsx",
       "category": "features",
       "usageCount": 1,
       "importedBy": [
-<<<<<<< HEAD
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/App.tsx"
-=======
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "NotFound"
@@ -4590,20 +3796,12 @@
     },
     {
       "name": "ValidationDashboard",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/onboarding/components/ValidationDashboard.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/onboarding/components/ValidationDashboard.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/features/onboarding/components/ValidationDashboard.tsx",
       "category": "features",
       "usageCount": 1,
       "importedBy": [
-<<<<<<< HEAD
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/pages/IngestionPage.tsx"
-=======
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/pages/IngestionPage.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "ValidationDashboard"
@@ -4631,20 +3829,12 @@
     },
     {
       "name": "Opportunities",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/opportunities/Opportunities.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/opportunities/Opportunities.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/features/opportunities/Opportunities.tsx",
       "category": "features",
       "usageCount": 1,
       "importedBy": [
-<<<<<<< HEAD
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/App.tsx"
-=======
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "Opportunities"
@@ -4669,11 +3859,7 @@
     },
     {
       "name": "ProfileCardMUI",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/profile/components/ProfileCardMUI.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/profile/components/ProfileCardMUI.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/features/profile/components/ProfileCardMUI.tsx",
       "category": "features",
       "usageCount": 0,
@@ -4703,11 +3889,7 @@
     },
     {
       "name": "ProfileComparison",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/profile/components/ProfileComparison.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/profile/components/ProfileComparison.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/features/profile/components/ProfileComparison.tsx",
       "category": "features",
       "usageCount": 0,
@@ -4733,20 +3915,12 @@
     },
     {
       "name": "ProfileView",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/profile/components/ProfileView.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/profile/components/ProfileView.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/features/profile/components/ProfileView.tsx",
       "category": "features",
       "usageCount": 1,
       "importedBy": [
-<<<<<<< HEAD
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/App.tsx"
-=======
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "ProfileView"
@@ -4770,20 +3944,12 @@
     },
     {
       "name": "ResumeUploader",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/profile/components/ResumeUploader.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/profile/components/ResumeUploader.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/features/profile/components/ResumeUploader.tsx",
       "category": "features",
       "usageCount": 1,
       "importedBy": [
-<<<<<<< HEAD
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/profile/components/ProfileView.tsx"
-=======
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/profile/components/ProfileView.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "default"
@@ -4808,20 +3974,12 @@
     },
     {
       "name": "EvidenceSidebar",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/sandbox/components/EvidenceSidebar.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/sandbox/components/EvidenceSidebar.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/features/sandbox/components/EvidenceSidebar.tsx",
       "category": "features",
       "usageCount": 1,
       "importedBy": [
-<<<<<<< HEAD
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/sandbox/EcosystemSandbox.tsx"
-=======
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/sandbox/EcosystemSandbox.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "EvidenceSidebar"
@@ -4843,20 +4001,12 @@
     },
     {
       "name": "SplitEditor",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/sandbox/components/SplitEditor.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/sandbox/components/SplitEditor.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/features/sandbox/components/SplitEditor.tsx",
       "category": "features",
       "usageCount": 1,
       "importedBy": [
-<<<<<<< HEAD
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/sandbox/EcosystemSandbox.tsx"
-=======
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/sandbox/EcosystemSandbox.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "SplitEditor"
@@ -4867,11 +4017,7 @@
       "linesOfCode": 134,
       "complexity": "medium",
       "dependencies": [
-<<<<<<< HEAD
-        "@/components/ui/NorthcoteButton",
-=======
         "@/components/ui/kerala-rageButton",
->>>>>>> restoration-KR-Rage-Figma-v2.0
         "../logic",
         "@/hooks/useAnalysis",
         "../EcosystemSandbox"
@@ -4887,20 +4033,12 @@
     },
     {
       "name": "EcosystemSandbox",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/sandbox/EcosystemSandbox.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/sandbox/EcosystemSandbox.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/features/sandbox/EcosystemSandbox.tsx",
       "category": "features",
       "usageCount": 1,
       "importedBy": [
-<<<<<<< HEAD
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/sandbox/components/SplitEditor.tsx"
-=======
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/sandbox/components/SplitEditor.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "EcosystemSandbox",
@@ -4929,20 +4067,12 @@
     },
     {
       "name": "Settings",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/settings/Settings.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/settings/Settings.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/features/settings/Settings.tsx",
       "category": "features",
       "usageCount": 1,
       "importedBy": [
-<<<<<<< HEAD
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/App.tsx"
-=======
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "Settings"
@@ -4966,11 +4096,7 @@
     },
     {
       "name": "M3ExpressiveComponents",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/style-guide/M3ExpressiveComponents.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/style-guide/M3ExpressiveComponents.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/features/style-guide/M3ExpressiveComponents.tsx",
       "category": "features",
       "usageCount": 0,
@@ -4997,20 +4123,12 @@
     },
     {
       "name": "StyleGuide",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/features/style-guide/StyleGuide.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/style-guide/StyleGuide.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/features/style-guide/StyleGuide.tsx",
       "category": "features",
       "usageCount": 1,
       "importedBy": [
-<<<<<<< HEAD
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/App.tsx"
-=======
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "StyleGuide"
@@ -5035,21 +4153,12 @@
     },
     {
       "name": "Fireflies",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/GalleryShell/components/Fireflies.tsx",
-      "relativePath": "src/layouts/GalleryShell/components/Fireflies.tsx",
-      "category": "layout",
-      "usageCount": 1,
-      "importedBy": [
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/GalleryShell/GalleryShell.tsx"
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/components/Fireflies.tsx",
       "relativePath": "src/layouts/kr-darkShell/components/Fireflies.tsx",
       "category": "layout",
       "usageCount": 1,
       "importedBy": [
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/kr-darkShell.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "Fireflies"
@@ -5070,18 +4179,6 @@
       "usesModeSystem": false
     },
     {
-<<<<<<< HEAD
-      "name": "GalleryDock",
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/GalleryShell/components/GalleryDock.tsx",
-      "relativePath": "src/layouts/GalleryShell/components/GalleryDock.tsx",
-      "category": "layout",
-      "usageCount": 1,
-      "importedBy": [
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/GalleryShell/GalleryShell.tsx"
-      ],
-      "exports": [
-        "GalleryDock"
-=======
       "name": "kr-darkDock",
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/components/kr-darkDock.tsx",
       "relativePath": "src/layouts/kr-darkShell/components/kr-darkDock.tsx",
@@ -5092,7 +4189,6 @@
       ],
       "exports": [
         "kr-darkDock"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "hasTests": false,
       "hasStories": false,
@@ -5112,24 +4208,14 @@
       "usesModeSystem": false
     },
     {
-<<<<<<< HEAD
-      "name": "GalleryShell",
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/GalleryShell/GalleryShell.tsx",
-      "relativePath": "src/layouts/GalleryShell/GalleryShell.tsx",
-=======
       "name": "kr-darkShell",
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/kr-darkShell.tsx",
       "relativePath": "src/layouts/kr-darkShell/kr-darkShell.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "category": "layout",
       "usageCount": 0,
       "importedBy": [],
       "exports": [
-<<<<<<< HEAD
-        "GalleryShell"
-=======
         "kr-darkShell"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "hasTests": false,
       "hasStories": false,
@@ -5139,15 +4225,6 @@
       "dependencies": [
         "../../context/ModeContext",
         "./components/Fireflies",
-<<<<<<< HEAD
-        "./components/GalleryDock",
-        "./views/GalleryLanding",
-        "./views/GalleryAuth",
-        "./views/GalleryOnboarding",
-        "./views/GalleryFeed",
-        "./views/GalleryDashboard",
-        "./views/GalleryKanban"
-=======
         "./components/kr-darkDock",
         "./views/kr-darkLanding",
         "./views/kr-darkAuth",
@@ -5155,7 +4232,6 @@
         "./views/kr-darkFeed",
         "./views/kr-darkDashboard",
         "./views/kr-darkKanban"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "isReusable": false,
       "usesMUI": false,
@@ -5167,18 +4243,6 @@
       "usesModeSystem": true
     },
     {
-<<<<<<< HEAD
-      "name": "GalleryAuth",
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/GalleryShell/views/GalleryAuth.tsx",
-      "relativePath": "src/layouts/GalleryShell/views/GalleryAuth.tsx",
-      "category": "layout",
-      "usageCount": 1,
-      "importedBy": [
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/GalleryShell/GalleryShell.tsx"
-      ],
-      "exports": [
-        "GalleryAuth"
-=======
       "name": "kr-darkAuth",
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/views/kr-darkAuth.tsx",
       "relativePath": "src/layouts/kr-darkShell/views/kr-darkAuth.tsx",
@@ -5189,7 +4253,6 @@
       ],
       "exports": [
         "kr-darkAuth"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "hasTests": false,
       "hasStories": false,
@@ -5207,18 +4270,6 @@
       "usesModeSystem": false
     },
     {
-<<<<<<< HEAD
-      "name": "GalleryDashboard",
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/GalleryShell/views/GalleryDashboard.tsx",
-      "relativePath": "src/layouts/GalleryShell/views/GalleryDashboard.tsx",
-      "category": "layout",
-      "usageCount": 1,
-      "importedBy": [
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/GalleryShell/GalleryShell.tsx"
-      ],
-      "exports": [
-        "GalleryDashboard"
-=======
       "name": "kr-darkDashboard",
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/views/kr-darkDashboard.tsx",
       "relativePath": "src/layouts/kr-darkShell/views/kr-darkDashboard.tsx",
@@ -5229,7 +4280,6 @@
       ],
       "exports": [
         "kr-darkDashboard"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "hasTests": false,
       "hasStories": false,
@@ -5247,18 +4297,6 @@
       "usesModeSystem": false
     },
     {
-<<<<<<< HEAD
-      "name": "GalleryFeed",
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/GalleryShell/views/GalleryFeed.tsx",
-      "relativePath": "src/layouts/GalleryShell/views/GalleryFeed.tsx",
-      "category": "layout",
-      "usageCount": 1,
-      "importedBy": [
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/GalleryShell/GalleryShell.tsx"
-      ],
-      "exports": [
-        "GalleryFeed"
-=======
       "name": "kr-darkFeed",
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/views/kr-darkFeed.tsx",
       "relativePath": "src/layouts/kr-darkShell/views/kr-darkFeed.tsx",
@@ -5269,7 +4307,6 @@
       ],
       "exports": [
         "kr-darkFeed"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "hasTests": false,
       "hasStories": false,
@@ -5278,13 +4315,8 @@
       "complexity": "medium",
       "dependencies": [
         "@/components/core/Pebble",
-<<<<<<< HEAD
-        "@/features/gallery/GlassLeafCard",
-        "@/hooks/useGalleryData"
-=======
         "@/features/kr-dark/GlassLeafCard",
         "@/hooks/usekr-darkData"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "isReusable": false,
       "usesMUI": false,
@@ -5296,18 +4328,6 @@
       "usesModeSystem": false
     },
     {
-<<<<<<< HEAD
-      "name": "GalleryKanban",
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/GalleryShell/views/GalleryKanban.tsx",
-      "relativePath": "src/layouts/GalleryShell/views/GalleryKanban.tsx",
-      "category": "layout",
-      "usageCount": 1,
-      "importedBy": [
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/GalleryShell/GalleryShell.tsx"
-      ],
-      "exports": [
-        "GalleryKanban"
-=======
       "name": "kr-darkKanban",
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/views/kr-darkKanban.tsx",
       "relativePath": "src/layouts/kr-darkShell/views/kr-darkKanban.tsx",
@@ -5318,7 +4338,6 @@
       ],
       "exports": [
         "kr-darkKanban"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "hasTests": false,
       "hasStories": false,
@@ -5327,11 +4346,7 @@
       "complexity": "medium",
       "dependencies": [
         "@/hooks/useKanban",
-<<<<<<< HEAD
-        "@/features/gallery/GlassLeafCard"
-=======
         "@/features/kr-dark/GlassLeafCard"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "isReusable": false,
       "usesMUI": false,
@@ -5343,18 +4358,6 @@
       "usesModeSystem": false
     },
     {
-<<<<<<< HEAD
-      "name": "GalleryLanding",
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/GalleryShell/views/GalleryLanding.tsx",
-      "relativePath": "src/layouts/GalleryShell/views/GalleryLanding.tsx",
-      "category": "layout",
-      "usageCount": 1,
-      "importedBy": [
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/GalleryShell/GalleryShell.tsx"
-      ],
-      "exports": [
-        "GalleryLanding"
-=======
       "name": "kr-darkLanding",
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/views/kr-darkLanding.tsx",
       "relativePath": "src/layouts/kr-darkShell/views/kr-darkLanding.tsx",
@@ -5365,7 +4368,6 @@
       ],
       "exports": [
         "kr-darkLanding"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "hasTests": false,
       "hasStories": false,
@@ -5373,11 +4375,7 @@
       "linesOfCode": 43,
       "complexity": "simple",
       "dependencies": [
-<<<<<<< HEAD
-        "../../../components/ui/NorthcoteButton"
-=======
         "../../../components/ui/kerala-rageButton"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "isReusable": false,
       "usesMUI": false,
@@ -5389,18 +4387,6 @@
       "usesModeSystem": false
     },
     {
-<<<<<<< HEAD
-      "name": "GalleryOnboarding",
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/GalleryShell/views/GalleryOnboarding.tsx",
-      "relativePath": "src/layouts/GalleryShell/views/GalleryOnboarding.tsx",
-      "category": "layout",
-      "usageCount": 1,
-      "importedBy": [
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/GalleryShell/GalleryShell.tsx"
-      ],
-      "exports": [
-        "GalleryOnboarding"
-=======
       "name": "kr-darkOnboarding",
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/views/kr-darkOnboarding.tsx",
       "relativePath": "src/layouts/kr-darkShell/views/kr-darkOnboarding.tsx",
@@ -5411,7 +4397,6 @@
       ],
       "exports": [
         "kr-darkOnboarding"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "hasTests": false,
       "hasStories": false,
@@ -5429,32 +4414,18 @@
       "usesModeSystem": false
     },
     {
-<<<<<<< HEAD
-      "name": "GalleryPlaceholders",
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/GalleryShell/views/GalleryPlaceholders.tsx",
-      "relativePath": "src/layouts/GalleryShell/views/GalleryPlaceholders.tsx",
-=======
       "name": "kr-darkPlaceholders",
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/views/kr-darkPlaceholders.tsx",
       "relativePath": "src/layouts/kr-darkShell/views/kr-darkPlaceholders.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "category": "layout",
       "usageCount": 0,
       "importedBy": [],
       "exports": [
-<<<<<<< HEAD
-        "GalleryAuth",
-        "GalleryOnboarding",
-        "GalleryDashboard",
-        "GalleryKanban",
-        "GalleryPlaceholders",
-=======
         "kr-darkAuth",
         "kr-darkOnboarding",
         "kr-darkDashboard",
         "kr-darkKanban",
         "kr-darkPlaceholders",
->>>>>>> restoration-KR-Rage-Figma-v2.0
         "default"
       ],
       "hasTests": false,
@@ -5474,21 +4445,12 @@
     },
     {
       "name": "AnalysisAnchor",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/LaboratoryShell/components/anchors/AnalysisAnchor.tsx",
-      "relativePath": "src/layouts/LaboratoryShell/components/anchors/AnalysisAnchor.tsx",
-      "category": "layout",
-      "usageCount": 1,
-      "importedBy": [
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/LaboratoryShell/components/MainCanvas.tsx"
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/components/anchors/AnalysisAnchor.tsx",
       "relativePath": "src/layouts/kr-darkShell/components/anchors/AnalysisAnchor.tsx",
       "category": "layout",
       "usageCount": 1,
       "importedBy": [
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/components/MainCanvas.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "AnalysisAnchor"
@@ -5500,11 +4462,7 @@
       "complexity": "medium",
       "dependencies": [
         "@/features/analysis/TechCard",
-<<<<<<< HEAD
-        "@/components/ui/NorthcoteButton",
-=======
         "@/components/ui/kerala-rageButton",
->>>>>>> restoration-KR-Rage-Figma-v2.0
         "@/hooks/useAnalysis"
       ],
       "isReusable": false,
@@ -5518,21 +4476,12 @@
     },
     {
       "name": "DocumentStackAnchor",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/LaboratoryShell/components/anchors/DocumentStackAnchor.tsx",
-      "relativePath": "src/layouts/LaboratoryShell/components/anchors/DocumentStackAnchor.tsx",
-      "category": "layout",
-      "usageCount": 1,
-      "importedBy": [
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/LaboratoryShell/components/MainCanvas.tsx"
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/components/anchors/DocumentStackAnchor.tsx",
       "relativePath": "src/layouts/kr-darkShell/components/anchors/DocumentStackAnchor.tsx",
       "category": "layout",
       "usageCount": 1,
       "importedBy": [
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/components/MainCanvas.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "DocumentStackAnchor"
@@ -5543,11 +4492,7 @@
       "linesOfCode": 44,
       "complexity": "simple",
       "dependencies": [
-<<<<<<< HEAD
-        "@/components/ui/NorthcoteButton"
-=======
         "@/components/ui/kerala-rageButton"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "isReusable": false,
       "usesMUI": false,
@@ -5560,21 +4505,12 @@
     },
     {
       "name": "GlobalHeader",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/LaboratoryShell/components/GlobalHeader.tsx",
-      "relativePath": "src/layouts/LaboratoryShell/components/GlobalHeader.tsx",
-      "category": "layout",
-      "usageCount": 1,
-      "importedBy": [
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/LaboratoryShell/LayoutShell.tsx"
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/components/GlobalHeader.tsx",
       "relativePath": "src/layouts/kr-darkShell/components/GlobalHeader.tsx",
       "category": "layout",
       "usageCount": 1,
       "importedBy": [
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/LayoutShell.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "GlobalHeader"
@@ -5586,11 +4522,7 @@
       "complexity": "simple",
       "dependencies": [
         "../../../context/ModeContext",
-<<<<<<< HEAD
-        "../../../components/ui/NorthcoteButton"
-=======
         "../../../components/ui/kerala-rageButton"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "isReusable": false,
       "usesMUI": false,
@@ -5603,21 +4535,12 @@
     },
     {
       "name": "MainCanvas",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/LaboratoryShell/components/MainCanvas.tsx",
-      "relativePath": "src/layouts/LaboratoryShell/components/MainCanvas.tsx",
-      "category": "layout",
-      "usageCount": 1,
-      "importedBy": [
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/LaboratoryShell/LayoutShell.tsx"
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/components/MainCanvas.tsx",
       "relativePath": "src/layouts/kr-darkShell/components/MainCanvas.tsx",
       "category": "layout",
       "usageCount": 1,
       "importedBy": [
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/LayoutShell.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "MainCanvas"
@@ -5642,21 +4565,12 @@
     },
     {
       "name": "NavRail",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/LaboratoryShell/components/NavRail.tsx",
-      "relativePath": "src/layouts/LaboratoryShell/components/NavRail.tsx",
-      "category": "layout",
-      "usageCount": 1,
-      "importedBy": [
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/LaboratoryShell/LayoutShell.tsx"
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/components/NavRail.tsx",
       "relativePath": "src/layouts/kr-darkShell/components/NavRail.tsx",
       "category": "layout",
       "usageCount": 1,
       "importedBy": [
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/LayoutShell.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "NavRail"
@@ -5667,11 +4581,7 @@
       "linesOfCode": 31,
       "complexity": "simple",
       "dependencies": [
-<<<<<<< HEAD
-        "../../../components/ui/NorthcoteButton",
-=======
         "../../../components/ui/kerala-rageButton",
->>>>>>> restoration-KR-Rage-Figma-v2.0
         "../../../config/navigation.schema"
       ],
       "isReusable": false,
@@ -5685,21 +4595,12 @@
     },
     {
       "name": "SidePanel",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/LaboratoryShell/components/SidePanel.tsx",
-      "relativePath": "src/layouts/LaboratoryShell/components/SidePanel.tsx",
-      "category": "layout",
-      "usageCount": 1,
-      "importedBy": [
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/LaboratoryShell/LayoutShell.tsx"
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/components/SidePanel.tsx",
       "relativePath": "src/layouts/kr-darkShell/components/SidePanel.tsx",
       "category": "layout",
       "usageCount": 1,
       "importedBy": [
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/LayoutShell.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "SidePanel"
@@ -5721,13 +4622,8 @@
     },
     {
       "name": "LayoutShell",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/LaboratoryShell/LayoutShell.tsx",
-      "relativePath": "src/layouts/LaboratoryShell/LayoutShell.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/LayoutShell.tsx",
       "relativePath": "src/layouts/kr-darkShell/LayoutShell.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "category": "layout",
       "usageCount": 0,
       "importedBy": [],
@@ -5757,20 +4653,12 @@
     },
     {
       "name": "Layout",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/Layout.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/Layout.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/layouts/Layout.tsx",
       "category": "layout",
       "usageCount": 1,
       "importedBy": [
-<<<<<<< HEAD
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/App.tsx"
-=======
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "Layout"
@@ -5794,20 +4682,12 @@
     },
     {
       "name": "Sidebar",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/Sidebar.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/Sidebar.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/layouts/Sidebar.tsx",
       "category": "layout",
       "usageCount": 1,
       "importedBy": [
-<<<<<<< HEAD
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/layouts/Layout.tsx"
-=======
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/Layout.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "Sidebar"
@@ -5829,11 +4709,7 @@
     },
     {
       "name": "AuroraHeader",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/legacy/ui/AuroraHeader.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/legacy/ui/AuroraHeader.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/legacy/ui/AuroraHeader.tsx",
       "category": "legacy",
       "usageCount": 0,
@@ -5861,11 +4737,7 @@
     },
     {
       "name": "chart",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/legacy/ui/chart.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/legacy/ui/chart.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/legacy/ui/chart.tsx",
       "category": "legacy",
       "usageCount": 0,
@@ -5894,11 +4766,7 @@
     },
     {
       "name": "collapsible",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/legacy/ui/collapsible.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/legacy/ui/collapsible.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/legacy/ui/collapsible.tsx",
       "category": "legacy",
       "usageCount": 0,
@@ -5925,11 +4793,7 @@
     },
     {
       "name": "M3Alert",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/legacy/ui/M3Alert.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/legacy/ui/M3Alert.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/legacy/ui/M3Alert.tsx",
       "category": "legacy",
       "usageCount": 0,
@@ -5961,20 +4825,12 @@
     },
     {
       "name": "M3Button",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/legacy/ui/M3Button.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/legacy/ui/M3Button.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/legacy/ui/M3Button.tsx",
       "category": "legacy",
       "usageCount": 1,
       "importedBy": [
-<<<<<<< HEAD
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/legacy/ui/M3Alert.tsx"
-=======
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/legacy/ui/M3Alert.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "M3ButtonProps",
@@ -6003,20 +4859,12 @@
     },
     {
       "name": "M3Card",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/legacy/ui/M3Card.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/legacy/ui/M3Card.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/legacy/ui/M3Card.tsx",
       "category": "legacy",
       "usageCount": 1,
       "importedBy": [
-<<<<<<< HEAD
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/legacy/ui/MetricCard.tsx"
-=======
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/legacy/ui/MetricCard.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "M3CardProps",
@@ -6044,11 +4892,7 @@
     },
     {
       "name": "M3Checkbox",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/legacy/ui/M3Checkbox.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/legacy/ui/M3Checkbox.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/legacy/ui/M3Checkbox.tsx",
       "category": "legacy",
       "usageCount": 0,
@@ -6077,11 +4921,7 @@
     },
     {
       "name": "M3Select",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/legacy/ui/M3Select.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/legacy/ui/M3Select.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/legacy/ui/M3Select.tsx",
       "category": "legacy",
       "usageCount": 0,
@@ -6109,11 +4949,7 @@
     },
     {
       "name": "M3TextField",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/legacy/ui/M3TextField.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/legacy/ui/M3TextField.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/legacy/ui/M3TextField.tsx",
       "category": "legacy",
       "usageCount": 0,
@@ -6144,11 +4980,7 @@
     },
     {
       "name": "metric-card",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/legacy/ui/metric-card.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/legacy/ui/metric-card.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/legacy/ui/metric-card.tsx",
       "category": "legacy",
       "usageCount": 0,
@@ -6173,11 +5005,7 @@
     },
     {
       "name": "MetricCard",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/legacy/ui/MetricCard.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/legacy/ui/MetricCard.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/legacy/ui/MetricCard.tsx",
       "category": "legacy",
       "usageCount": 0,
@@ -6206,20 +5034,12 @@
     },
     {
       "name": "AnalysisPage",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/pages/AnalysisPage.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/pages/AnalysisPage.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/pages/AnalysisPage.tsx",
       "category": "pages",
       "usageCount": 1,
       "importedBy": [
-<<<<<<< HEAD
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/App.tsx"
-=======
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "AnalysisPage"
@@ -6245,20 +5065,12 @@
     },
     {
       "name": "IngestionPage",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/pages/IngestionPage.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/pages/IngestionPage.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/pages/IngestionPage.tsx",
       "category": "pages",
       "usageCount": 1,
       "importedBy": [
-<<<<<<< HEAD
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/App.tsx"
-=======
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "IngestionPage"
@@ -6286,20 +5098,12 @@
     },
     {
       "name": "JobQueue",
-<<<<<<< HEAD
-      "path": "/Users/okgoogle13/Desktop/careercopilot/frontend/src/pages/JobQueue.tsx",
-=======
       "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/pages/JobQueue.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "relativePath": "src/pages/JobQueue.tsx",
       "category": "pages",
       "usageCount": 1,
       "importedBy": [
-<<<<<<< HEAD
-        "/Users/okgoogle13/Desktop/careercopilot/frontend/src/App.tsx"
-=======
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       ],
       "exports": [
         "JobQueue"
@@ -6362,17 +5166,10 @@
     "src/features/applications/ApplicationCard.tsx",
     "src/features/context/ModeContext.tsx",
     "src/features/documents/DocumentStack.tsx",
-<<<<<<< HEAD
-    "src/features/gallery/IconBadge.tsx",
-    "src/features/style-guide/M3ExpressiveComponents.tsx",
-    "src/layouts/GalleryShell/GalleryShell.tsx",
-    "src/layouts/LaboratoryShell/LayoutShell.tsx",
-=======
     "src/features/kr-dark/IconBadge.tsx",
     "src/features/style-guide/M3ExpressiveComponents.tsx",
     "src/layouts/kr-darkShell/kr-darkShell.tsx",
     "src/layouts/kr-darkShell/LayoutShell.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
     "src/legacy/ui/AuroraHeader.tsx",
     "src/legacy/ui/chart.tsx",
     "src/legacy/ui/collapsible.tsx",
@@ -6389,11 +5186,7 @@
     "src/features/ingestion/components/DropZone.tsx",
     "src/features/profile/components/ProfileCardMUI.tsx",
     "src/features/profile/components/ProfileComparison.tsx",
-<<<<<<< HEAD
-    "src/layouts/GalleryShell/views/GalleryPlaceholders.tsx",
-=======
     "src/layouts/kr-darkShell/views/kr-darkPlaceholders.tsx",
->>>>>>> restoration-KR-Rage-Figma-v2.0
     "packages/ui/src/components/alert-dialog/alert-dialog.tsx",
     "packages/ui/src/components/aspect-ratio/aspect-ratio.tsx",
     "packages/ui/src/components/calendar/calendar.tsx",
@@ -6426,11 +5219,7 @@
   ],
   "mostUsedComponents": [
     {
-<<<<<<< HEAD
-      "name": "NorthcoteButton",
-=======
       "name": "kerala-rageButton",
->>>>>>> restoration-KR-Rage-Figma-v2.0
       "count": 11
     },
     {
@@ -6471,15 +5260,6 @@
     }
   ],
   "recommendations": [
-<<<<<<< HEAD
-    "169 components lack test coverage. Consider adding tests for: NorthcoteButton, button, PageHeader, Pebble, KeywordTag...",
-    "71 reusable components lack Storybook stories. Consider documenting: NorthcoteButton, button, PageHeader, Pebble, KeywordTag...",
-    "85 components appear unused. Consider archiving or removing them.",
-    "23 components are marked as complex (>200 LOC or >10 dependencies). Consider refactoring: Pebble, AnalysisPage, JobQueue, Documents, KSCGenerator...",
-    "24 components mix  tokens with legacy MUI/M3 usage. Consolidate to Curio-only: NorthcoteButton, Pebble, AnalysisPage, JobQueue, EditableField...",
-    "4 components still rely on legacy MUI/M3 without Curio tokens. Migrate to : Button, chart, collapsible, metric-card",
-    " Adoption: 48.5% (83/171) fully adopted. Target: 80%+ for complete Curio migration."
-=======
     "169 components lack test coverage. Consider adding tests for: kerala-rageButton, button, PageHeader, Pebble, KeywordTag...",
     "71 reusable components lack Storybook stories. Consider documenting: kerala-rageButton, button, PageHeader, Pebble, KeywordTag...",
     "85 components appear unused. Consider archiving or removing them.",
@@ -6487,7 +5267,6 @@
     "24 components mix kerala-rage kr-solidarity tokens with legacy MUI/M3 usage. Consolidate to kr-solidarity-only: kerala-rageButton, Pebble, AnalysisPage, JobQueue, EditableField...",
     "4 components still rely on legacy MUI/M3 without kr-solidarity tokens. Migrate to kerala-rage kr-solidarity: Button, chart, collapsible, metric-card",
     "kerala-rage kr-solidarity Adoption: 48.5% (83/171) fully adopted. Target: 80%+ for complete kr-solidarity migration."
->>>>>>> restoration-KR-Rage-Figma-v2.0
   ],
   "migrationSummary": {
     "migrated": 83,
@@ -6495,20 +5274,11 @@
     "not_migrated": 4,
     "unknown": 60
   },
-<<<<<<< HEAD
-  "curioAdoption": {
-    "withCurioTokens": 107,
-    "withModeSystem": 12,
-    "legacyMUI": 1,
-    "legacyM3": 27,
-    "fullyCurio": 83
-=======
   "kr-solidarityAdoption": {
     "withkr-solidarityTokens": 107,
     "withModeSystem": 12,
     "legacyMUI": 1,
     "legacyM3": 27,
     "fullykr-solidarity": 83
->>>>>>> restoration-KR-Rage-Figma-v2.0
   }
 }

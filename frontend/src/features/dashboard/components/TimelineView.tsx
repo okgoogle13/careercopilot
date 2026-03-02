@@ -150,11 +150,7 @@ const TimelineEventComponent: React.FC<TimelineEventComponentProps> = ({
       case 'in-progress':
         return 'text-[var(--color-flower-base)]';
       case 'upcoming':
-<<<<<<< HEAD
-        return 'text-[var(--color-wattle-base)]';
-=======
         return 'text-[var(--color-ink-base)]';
->>>>>>> restoration-KR-Rage-Figma-v2.0
       case 'cancelled':
         return 'text-[var(--color-bark-base)]';
       default:
@@ -217,11 +213,7 @@ const TimelineEventComponent: React.FC<TimelineEventComponentProps> = ({
             event.color === 'primary'
               ? 'bg-[var(--color-leaf-base)]'
               : event.color === 'secondary'
-<<<<<<< HEAD
-                ? 'bg-[var(--color-wattle-base)]'
-=======
                 ? 'bg-[var(--color-ink-base)]'
->>>>>>> restoration-KR-Rage-Figma-v2.0
                 : event.color === 'tertiary'
                   ? 'bg-[var(--color-flower-base)]'
                   : event.color === 'error'

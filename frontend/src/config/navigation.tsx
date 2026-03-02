@@ -1,15 +1,8 @@
 /**
-<<<<<<< HEAD
- * NORTHCOTE CURIO: NAVIGATION CONFIGURATION
- *
- * Navigation structure using lucide-react icons instead of MUI icons.
- * Uses  design system tokens.
-=======
  * KeralaRage KrSolidarity: NAVIGATION CONFIGURATION
  *
  * Navigation structure using lucide-react icons instead of MUI icons.
  * Uses KeralaRage KrSolidarity design system tokens.
->>>>>>> restoration-KR-Rage-Figma-v2.0
  */
 
 import {

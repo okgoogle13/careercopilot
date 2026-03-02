@@ -1,15 +1,9 @@
 import { test, expect } from '@playwright/test';
 
 /**
-<<<<<<< HEAD
- * Responsive Design Audit: M3 Organic Shapes
- * 
- * Tests the responsive behavior of M3 organic border-radius shapes
-=======
  * Responsive Design Audit: M3 [DEPRECATED_STYLE] Shapes
  * 
  * Tests the responsive behavior of M3 [DEPRECATED_STYLE] border-radius shapes
->>>>>>> restoration-KR-Rage-Figma-v2.0
  * across mobile (iPhone 14) and tablet (iPad Pro) viewports.
  * 
  * Checks for:
@@ -114,11 +108,7 @@ test.describe('Responsive M3 Design Audit', () => {
             const jobCards = page.locator('div.rounded-pebble, div.rounded-leaf');
             const cardCount = await jobCards.count();
 
-<<<<<<< HEAD
-            console.log(`📱 ${viewport.name} - Found ${cardCount} cards with organic shapes`);
-=======
             console.log(`📱 ${viewport.name} - Found ${cardCount} cards with [DEPRECATED_STYLE] shapes`);
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
             if (cardCount > 0) {
                 // Check first card
@@ -137,11 +127,7 @@ test.describe('Responsive M3 Design Audit', () => {
                     };
                 });
 
-<<<<<<< HEAD
-                console.log(`📱 ${viewport.name} - Card Organic Shape:`, cardStyles);
-=======
                 console.log(`📱 ${viewport.name} - Card [DEPRECATED_STYLE] Shape:`, cardStyles);
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
                 // Check if border radius values are too large for small screens
                 const radii = [

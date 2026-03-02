@@ -1,18 +1,11 @@
 import { Pebble, StatusBadge, Stone } from '@/components/ui';
 import { motion } from 'framer-motion';
 import { FileText, Layout, Plus, Sparkles, Target, Zap } from 'lucide-react';
-<<<<<<< HEAD
-
-// Gallery Assets
-import organicLabyrinth from '../../assets/specimens/organic-labyrinth.jpg';
-import wallpaper from '../../assets/textures/wallpaper.png';
-=======
 import { useEffect, useState } from 'react';
 import { LayeredHero } from '../../components/kerala-rage/LayeredHero';
 import { loadHeroRegistry } from '../../design/hero/heroRegistry';
 import { composeHero } from '../../utils/heroComposer';
 import type { SolidarityManifest } from '../../design/hero/heroTypes';
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
 // ============================================================================
 // TYPE DEFINITIONS
@@ -39,14 +32,6 @@ const PROFILES: Profile[] = [
 /**
  * CareerCopilot Dashboard ("The Canopy View")
  *
-<<<<<<< HEAD
- * V3.1 Gallery Mode Implementation:
- * ✓ ASSET-09 Organic Labyrinth (Ceiling Motifs)
- * ✓ High-fidelity Hero Metric Bar
- * ✓ 2x2 Specimen Grid with Blur Bloom effects
- */
-export function Dashboard() {
-=======
  * V3.1 KrDark Mode Implementation:
  * ✓ ASSET-09 [DEPRECATED_STYLE] Labyrinth (Ceiling Motifs)
  * ✓ High-fidelity Hero Metric Bar
@@ -89,7 +74,6 @@ export function Dashboard() {
     loadHero();
   }, []);
 
->>>>>>> restoration-KR-Rage-Figma-v2.0
   const container = {
     hidden: { opacity: 0 },
     show: {
@@ -115,32 +99,6 @@ export function Dashboard() {
   };
 
   return (
-<<<<<<< HEAD
-    <div className="min-h-screen bg-specimen-night relative overflow-hidden p-8 md:p-12 lg:p-16">
-      {/* Background Layer: The Nocturnal Canopy */}
-      <div
-        className="absolute inset-0 opacity-20 pointer-events-none mix-blend-soft-light"
-        style={{
-          backgroundImage: `url(${wallpaper})`,
-          backgroundSize: 'cover',
-          backgroundAttachment: 'fixed',
-        }}
-      />
-
-      {/* ASSET-09: Ceiling Gum Motif (Top Left) */}
-      <motion.div
-        initial={{ y: -50, x: -50, opacity: 0, rotate: -5 }}
-        animate={{ y: 0, x: 0, opacity: 0.4, rotate: 0 }}
-        transition={{ duration: 2, ease: 'easeOut' }}
-        className="absolute -top-32 -left-32 w-[600px] h-[600px] pointer-events-none mix-blend-screen grayscale brightness-125"
-      >
-        <img
-          src={organicLabyrinth}
-          alt=""
-          className="w-full h-full object-cover rounded-full blur-3xl"
-        />
-      </motion.div>
-=======
     <div className="min-h-screen bg-asphalt-black relative overflow-hidden p-8 md:p-12 lg:p-16">
       {/* Background Layer: Hero Engine Integration */}
       {heroData && (
@@ -154,7 +112,6 @@ export function Dashboard() {
           />
         </div>
       )}
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
       <motion.div
         variants={container as any}
@@ -163,24 +120,11 @@ export function Dashboard() {
         className="max-w-[1440px] mx-auto relative z-10 space-y-12"
       >
         {/* Header Section */}
-<<<<<<< HEAD
-        <header className="flex flex-col md:flex-row md:items-end justify-between gap-8 border-b border-flannel-flower/10 pb-12">
-=======
         <header className="flex flex-col md:flex-row md:items-end justify-between gap-8 border-b border-concrete-grey/10 pb-12">
->>>>>>> restoration-KR-Rage-Figma-v2.0
           <motion.div
             variants={item as any}
             className="space-y-2"
           >
-<<<<<<< HEAD
-            <p className="font-annotation text-xs text-wattle-gold tracking-[0.6em] uppercase opacity-60">
-              [ STATION.REPORT_SUMMARY ]
-            </p>
-            <h1 className="font-bloom text-7xl font-black text-parchment tracking-tighter uppercase leading-[0.9]">
-              THE CANOPY <span className="text-wattle-gold">VIEW</span>
-            </h1>
-            <p className="font-field-note text-lg text-flannel-flower opacity-70 italic">
-=======
             <p className="font-annotation text-xs text-ink-gold tracking-[0.6em] uppercase opacity-60">
               [ STATION.REPORT_SUMMARY ]
             </p>
@@ -188,7 +132,6 @@ export function Dashboard() {
               THE CANOPY <span className="text-ink-gold">VIEW</span>
             </h1>
             <p className="font-field-note text-lg text-concrete-grey opacity-70 italic">
->>>>>>> restoration-KR-Rage-Figma-v2.0
               "Archival synthesis reveals multiple growing opportunities."
             </p>
           </motion.div>
@@ -199,19 +142,6 @@ export function Dashboard() {
             className="flex gap-6"
           >
             <div className="text-right">
-<<<<<<< HEAD
-              <span className="block font-annotation text-[10px] text-flannel-flower-dark uppercase tracking-widest">
-                Growth Rate
-              </span>
-              <span className="text-2xl font-black text-parchment">+14%</span>
-            </div>
-            <div className="w-px bg-flannel-flower/20 h-10" />
-            <div className="text-right">
-              <span className="block font-annotation text-[10px] text-flannel-flower-dark uppercase tracking-widest">
-                Specimens Found
-              </span>
-              <span className="text-2xl font-black text-parchment">42</span>
-=======
               <span className="block font-annotation text-[10px] text-concrete-grey-dark uppercase tracking-widest">
                 Growth Rate
               </span>
@@ -223,7 +153,6 @@ export function Dashboard() {
                 KrMotifs Found
               </span>
               <span className="text-2xl font-black text-paper-white">42</span>
->>>>>>> restoration-KR-Rage-Figma-v2.0
             </div>
           </motion.div>
         </header>
@@ -231,41 +160,24 @@ export function Dashboard() {
         {/* Hero Metric Bar: High Fidelity Calibration */}
         <motion.div variants={item as any}>
           <Stone
-<<<<<<< HEAD
-            mode="gallery"
-            elevation="raised"
-            className="p-8 md:p-12 bg-specimen-night/40 border-wattle-gold/20 flex flex-col md:flex-row items-center gap-12 overflow-hidden relative"
-          >
-            {/* Glossy Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-tr from-wattle-gold/5 via-transparent to-transparent pointer-events-none" />
-=======
            
             elevation="raised"
             className="p-8 md:p-12 bg-asphalt-black/40 border-ink-gold/20 flex flex-col md:flex-row items-center gap-12 overflow-hidden relative"
           >
             {/* Glossy Overlay */}
             <div className="absolute inset-0 bg-gradient-to-tr from-ink-gold/5 via-transparent to-transparent pointer-events-none" />
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-12 w-full relative z-10">
               {/* Active Inquiries */}
               <div className="space-y-1">
-<<<<<<< HEAD
-                <div className="flex items-center gap-3 text-wattle-gold mb-3">
-=======
                 <div className="flex items-center gap-3 text-ink-gold mb-3">
->>>>>>> restoration-KR-Rage-Figma-v2.0
                   <FileText className="w-6 h-6" />
                   <span className="font-annotation text-[10px] uppercase tracking-[0.3em] font-bold">
                     Active Inquiries
                   </span>
                 </div>
                 <div className="flex items-baseline gap-2">
-<<<<<<< HEAD
-                  <span className="text-7xl font-black text-parchment leading-none tracking-tighter">
-=======
                   <span className="text-7xl font-black text-paper-white leading-none tracking-tighter">
->>>>>>> restoration-KR-Rage-Figma-v2.0
                     08
                   </span>
                   <StatusBadge
@@ -277,28 +189,17 @@ export function Dashboard() {
 
               {/* Calibrated Matches */}
               <div className="space-y-1">
-<<<<<<< HEAD
-                <div className="flex items-center gap-3 text-flannel-flower mb-3">
-=======
                 <div className="flex items-center gap-3 text-concrete-grey mb-3">
->>>>>>> restoration-KR-Rage-Figma-v2.0
                   <Target className="w-6 h-6" />
                   <span className="font-annotation text-[10px] uppercase tracking-[0.3em] font-bold">
                     High Calibration
                   </span>
                 </div>
                 <div className="flex items-baseline gap-2">
-<<<<<<< HEAD
-                  <span className="text-7xl font-black text-parchment leading-none tracking-tighter">
-                    03
-                  </span>
-                  <span className="text-[10px] font-annotation text-wattle-gold uppercase opacity-50 tracking-widest leading-none">
-=======
                   <span className="text-7xl font-black text-paper-white leading-none tracking-tighter">
                     03
                   </span>
                   <span className="text-[10px] font-annotation text-ink-gold uppercase opacity-50 tracking-widest leading-none">
->>>>>>> restoration-KR-Rage-Figma-v2.0
                     ≥ 90% Match
                   </span>
                 </div>
@@ -318,17 +219,10 @@ export function Dashboard() {
                       initial={{ width: 0 }}
                       animate={{ width: '75%' }}
                       transition={{ duration: 1.5, ease: 'circOut' }}
-<<<<<<< HEAD
-                      className="h-full bg-gradient-to-r from-wattle-gold to-flannel-flower shadow-[0_0_10px_rgba(var(--color-wattle-gold),0.5)]"
-                    />
-                  </div>
-                  <p className="text-[9px] font-annotation text-parchment opacity-40 mt-3 uppercase tracking-widest text-right">
-=======
                       className="h-full bg-gradient-to-r from-ink-gold to-concrete-grey shadow-[0_0_10px_rgba(var(--color-ink-gold),0.5)]"
                     />
                   </div>
                   <p className="text-[9px] font-annotation text-paper-white opacity-40 mt-3 uppercase tracking-widest text-right">
->>>>>>> restoration-KR-Rage-Figma-v2.0
                     Optimal throughput maintained
                   </p>
                 </div>
@@ -347,11 +241,7 @@ export function Dashboard() {
             size="lg"
             className="h-16 px-10 font-bold uppercase tracking-wider shadow-glow-gold"
           >
-<<<<<<< HEAD
-            <Plus className="w-5 h-5 mr-3" /> Deposit Specimen
-=======
             <Plus className="w-5 h-5 mr-3" /> Deposit KrMotif
->>>>>>> restoration-KR-Rage-Figma-v2.0
           </Pebble>
           <Pebble
             variant="secondary"
@@ -363,23 +253,6 @@ export function Dashboard() {
           <Pebble
             variant="ghost"
             size="lg"
-<<<<<<< HEAD
-            className="h-16 px-10 font-bold uppercase tracking-wider border-flannel-flower/20 hover:bg-flannel-flower/5"
-          >
-            <Sparkles className="w-5 h-5 mr-3 text-wattle-gold" /> Automated Synthesis
-          </Pebble>
-        </motion.div>
-
-        {/* 2x2 Specimen Grid: Optimized Application Profiles */}
-        <section className="space-y-8">
-          <div className="flex items-baseline gap-4">
-            <h2 className="font-bloom text-3xl font-bold text-parchment uppercase tracking-tight">
-              RECENT <span className="text-wattle-gold">SYNTHESIS</span>
-            </h2>
-            <div className="flex-1 h-px bg-flannel-flower/10" />
-            <span className="font-annotation text-[9px] text-flannel-flower opacity-50 uppercase tracking-[0.4em]">
-              SPECIMEN.LOG
-=======
             className="h-16 px-10 font-bold uppercase tracking-wider border-concrete-grey/20 hover:bg-concrete-grey/5"
           >
             <Sparkles className="w-5 h-5 mr-3 text-ink-gold" /> Automated Synthesis
@@ -395,7 +268,6 @@ export function Dashboard() {
             <div className="flex-1 h-px bg-concrete-grey/10" />
             <span className="font-annotation text-[9px] text-concrete-grey opacity-50 uppercase tracking-[0.4em]">
               KrMotif.LOG
->>>>>>> restoration-KR-Rage-Figma-v2.0
             </span>
           </div>
 
@@ -408,36 +280,20 @@ export function Dashboard() {
                 className="group"
               >
                 <Stone
-<<<<<<< HEAD
-                  mode="gallery"
-                  elevation="floating"
-                  className="p-8 border-flannel-flower/10 bg-specimen-night/20 group-hover:bg-specimen-night/40 group-hover:border-wattle-gold/30 transition-all duration-500 overflow-hidden relative"
-                >
-                  {/* Hover Bloom Effect */}
-                  <div className="absolute -inset-20 bg-wattle-gold/5 blur-[100px] opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none" />
-=======
                  
                   elevation="floating"
                   className="p-8 border-concrete-grey/10 bg-asphalt-black/20 group-hover:bg-asphalt-black/40 group-hover:border-ink-gold/30 transition-all duration-500 overflow-hidden relative"
                 >
                   {/* Hover Bloom Effect */}
                   <div className="absolute -inset-20 bg-ink-gold/5 blur-[100px] opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none" />
->>>>>>> restoration-KR-Rage-Figma-v2.0
 
                   <div className="relative z-10 flex justify-between items-start">
                     <div className="space-y-4">
                       <div>
-<<<<<<< HEAD
-                        <p className="font-annotation text-[10px] text-wattle-gold uppercase tracking-[0.2em] opacity-80 mb-1">
-                          {profile.company}
-                        </p>
-                        <h3 className="font-bloom text-2xl font-black text-parchment tracking-tight leading-tight uppercase group-hover:text-wattle-gold transition-colors">
-=======
                         <p className="font-annotation text-[10px] text-ink-gold uppercase tracking-[0.2em] opacity-80 mb-1">
                           {profile.company}
                         </p>
                         <h3 className="font-bloom text-2xl font-black text-paper-white tracking-tight leading-tight uppercase group-hover:text-ink-gold transition-colors">
->>>>>>> restoration-KR-Rage-Figma-v2.0
                           {profile.name}
                         </h3>
                       </div>
@@ -448,40 +304,24 @@ export function Dashboard() {
                           variant={profile.status === 'EXCELLENT' ? 'success' : 'warning'}
                           showDot
                         />
-<<<<<<< HEAD
-                        <span className="font-annotation text-[9px] text-flannel-flower opacity-40 uppercase tracking-widest leading-none">
-=======
                         <span className="font-annotation text-[9px] text-concrete-grey opacity-40 uppercase tracking-widest leading-none">
->>>>>>> restoration-KR-Rage-Figma-v2.0
                           Last Audit: 2m ago
                         </span>
                       </div>
                     </div>
 
                     <div className="text-right">
-<<<<<<< HEAD
-                      <div className="text-6xl font-black text-parchment tracking-tighter leading-none mb-1 tabular-nums group-hover:scale-110 transition-transform origin-right">
-                        {profile.score}
-                      </div>
-                      <p className="font-annotation text-[9px] text-wattle-gold uppercase tracking-widest font-bold opacity-60">
-=======
                       <div className="text-6xl font-black text-paper-white tracking-tighter leading-none mb-1 tabular-nums group-hover:scale-110 transition-transform origin-right">
                         {profile.score}
                       </div>
                       <p className="font-annotation text-[9px] text-ink-gold uppercase tracking-widest font-bold opacity-60">
->>>>>>> restoration-KR-Rage-Figma-v2.0
                         Calibration
                       </p>
                     </div>
                   </div>
 
-<<<<<<< HEAD
-                  <div className="mt-8 pt-6 border-t border-flannel-flower/5 flex justify-between items-center relative z-10">
-                    <button className="text-[10px] font-annotation text-flannel-flower uppercase tracking-widest hover:text-parchment transition-colors">
-=======
                   <div className="mt-8 pt-6 border-t border-concrete-grey/5 flex justify-between items-center relative z-10">
                     <button className="text-[10px] font-annotation text-concrete-grey uppercase tracking-widest hover:text-paper-white transition-colors">
->>>>>>> restoration-KR-Rage-Figma-v2.0
                       Generate Artifacts →
                     </button>
                   </div>
@@ -501,11 +341,7 @@ export function Dashboard() {
           y: [0, -20, 0],
         }}
         transition={{ duration: 15, repeat: Infinity, ease: 'linear' }}
-<<<<<<< HEAD
-        className="absolute -bottom-64 -right-64 w-[800px] h-[800px] rounded-full bg-gradient-to-tl from-flannel-flower/10 via-transparent to-transparent blur-3xl pointer-events-none"
-=======
         className="absolute -bottom-64 -right-64 w-[800px] h-[800px] rounded-full bg-gradient-to-tl from-concrete-grey/10 via-transparent to-transparent blur-3xl pointer-events-none"
->>>>>>> restoration-KR-Rage-Figma-v2.0
       />
     </div>
   );

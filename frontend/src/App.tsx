@@ -9,11 +9,7 @@ import {
   useLocation,
 } from 'react-router-dom';
 import { Toaster } from 'sonner';
-<<<<<<< HEAD
-import texturePattern from './assets/textures/paper-grain.png';
-=======
 const texturePattern = '/assets/kr-solidarity/texture/kr-solidarity__substrate__kr-solidarity--texture--melbourne-laneway--v1__v1.png';
->>>>>>> restoration-KR-Rage-Figma-v2.0
 import { TokenTest } from './components/debug/TokenTest';
 import { getModeForRoute } from './config/routeModeMap';
 import { useAuth } from './context/AuthContext';
@@ -37,18 +33,11 @@ import { AnalysisPage } from './pages/AnalysisPage';
 import { IngestionPage } from './pages/IngestionPage';
 import { JobQueue } from './pages/JobQueue';
 import { useModeStore } from './stores/useModeStore';
-<<<<<<< HEAD
-
-/**
- * ModeSync Component
- * Automatically switches between Gallery and Laboratory modes based on the current route
-=======
 import DesignSidekick from './features/design-sidekick/DesignSidekick';
 
 /**
  * ModeSync Component
  * Automatically switches between KrDark and KrDark modes based on the current route
->>>>>>> restoration-KR-Rage-Figma-v2.0
  */
 function ModeSync() {
   const location = useLocation();
@@ -77,11 +66,7 @@ const ProtectedLayout = () => {
 
   if (loading) {
     return (
-<<<<<<< HEAD
-      <div className="min-h-screen bg-[#141218] flex items-center justify-center text-[#E6E1E5]">
-=======
       <div className="min-h-screen bg-[#1A1714] flex items-center justify-center text-[#E6E1E5]">
->>>>>>> restoration-KR-Rage-Figma-v2.0
         Loading...
       </div>
     );
@@ -99,11 +84,7 @@ const ProtectedLayout = () => {
 
   return (
     <Layout>
-<<<<<<< HEAD
-      <AnimatePresence mode="wait">
-=======
       <AnimatePresence>
->>>>>>> restoration-KR-Rage-Figma-v2.0
         <motion.div
           key={location.pathname}
           initial={{ opacity: 0, y: 40 }}
@@ -125,11 +106,7 @@ const ProtectedLayout = () => {
 // Public Layout (Login/Register/Landing)
 const PublicLayout = () => {
   return (
-<<<<<<< HEAD
-    <div className="min-h-screen bg-[#141218] relative">
-=======
     <div className="min-h-screen bg-[#1A1714] relative">
->>>>>>> restoration-KR-Rage-Figma-v2.0
       {/* Textured Background */}
       <div
         className="fixed inset-0 pointer-events-none z-0 opacity-30 mix-blend-overlay"
@@ -200,13 +177,10 @@ export default function App() {
             element={<Register />}
           />
           <Route
-<<<<<<< HEAD
-=======
             path="/design-sidekick"
             element={<DesignSidekick />}
           />
           <Route
->>>>>>> restoration-KR-Rage-Figma-v2.0
             path="*"
             element={<NotFound />}
           />
