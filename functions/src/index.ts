@@ -1,31 +1,30 @@
- whicimport * as admin from 'firebase-admin';
+import admin from 'firebase-admin';
+// @ts-expect-error - TS2497: esModuleInterop is enabled, but TypeScript 5.9 still complains about namespace import
 import * as functions from 'firebase-functions';
-import {genkit} from '@genkit-ai/core';
-import {onFlow} from '@genkit-ai/firebase';
 import {JobListingExtractor} from './services/job_listing_extractor';
 
 // Initialize Firebase Admin
 admin.initializeApp();
 
-// Configure Genkit
-genkit.configure({
-  plugins: [
-    // Add any Genkit plugins here
-  ],
-  logLevel: 'debug',
-});
+// Genkit configuration is handled in ./genkit.ts
 
 // Initialize services
 const jobListingExtractor = new JobListingExtractor();
 
 // Core services
 export {uploadAndTag} from "./uploadAndTag";
-export {extractAndSave} from "./extractAndSave";
-export {healthCheck} from "./healthCheck";
+// TODO: Implement these modules or remove references entirely
+// See .temp-functions-investigation-handover.md for decision on these functions
+// export {extractAndSave} from "./extractAndSave";
+// export {healthCheck} from "./healthCheck";
+
 
 // Background processing functions
 export const enqueueJobProcessing = functions.https.onCall(
-  async (data: { source: string | { url: string } }, context) => {
+  async (
+    data: { source: string | { url: string } },
+    context: functions.https.CallableContext
+  ) => {
     // Verify authentication
     if (!context.auth) {
       throw new functions.https.HttpsError(
@@ -114,28 +113,28 @@ export const processJobListing = functions.tasks
   });
 
 // Application API endpoints
-export { 
+export {
   createApplication,
   listApplications,
   getApplication,
   updateApplication,
   deleteApplication,
   bulkUpdateApplications,
-  addContact,
   scheduleInterview,
-  getApplicationsByStatus,
   exportApplications
 } from './api/applications.controller';
 
 /**
  * Extract job listing from text or URL
  */
-export const extractJobListing = onFlow(
-  {
-    name: 'extractJobListing',
-    authPolicy: 'authenticated',
-  },
-  async (data: { source: string | { url: string } }, {_user}) => {
+export const extractJobListing = functions.https.onCall(
+  async (
+    data: { source: string | { url: string } },
+    context: functions.https.CallableContext
+  ) => {
+    if (!context.auth) {
+      throw new functions.https.HttpsError('unauthenticated', 'User must be authenticated');
+    }
     try {
       const result = await jobListingExtractor.extract({
         source: data.source,
@@ -151,7 +150,7 @@ export const extractJobListing = onFlow(
       throw new functions.https.HttpsError(
         'internal',
         'Failed to extract job listing',
-        error
+        error instanceof Error ? error : new Error(String(error))
       );
     }
   }
@@ -159,36 +158,39 @@ export const extractJobListing = onFlow(
 
 /**
  * Find similar job listings
+ *
+ * TODO: Re-enable when FirebaseVectorSearch is properly implemented
+ * Currently disabled because FirebaseVectorSearch.search() is a stub that returns empty results
+ * See .temp-functions-investigation-handover.md for vector search implementation plan
  */
-export const findSimilarListings = onFlow(
-  {
-    name: 'findSimilarListings',
-    authPolicy: 'authenticated',
-  },
-  async (
-    data: { 
-      query: string | Record<string, unknown>;
-      limit?: number;
-      minScore?: number;
-      filters?: Record<string, unknown>;
-    },
-    {_user}
-  ) => {
-    try {
-      const results = await jobListingExtractor.findSimilar({
-        query: data.query,
-        limit: data.limit || 5,
-        minScore: data.minScore || 0.7,
-        filters: data.filters || {},
-      });
-      return {success: true, data: results};
-    } catch (error) {
-      console.error('Error finding similar listings:', error);
-      throw new functions.https.HttpsError(
-        'internal',
-        'Failed to find similar job listings',
-        error
-      );
-    }
-  }
-);
+// export const findSimilarListings = functions.https.onCall(
+//   async (
+//     data: {
+//       query: string | Record<string, unknown>;
+//       limit?: number;
+//       minScore?: number;
+//       filters?: Record<string, unknown>;
+//     },
+//     context: functions.https.CallableContext
+//   ) => {
+//     if (!context.auth) {
+//       throw new functions.https.HttpsError('unauthenticated', 'User must be authenticated');
+//     }
+//     try {
+//       const results = await jobListingExtractor.findSimilar({
+//         query: data.query,
+//         limit: data.limit || 5,
+//         minScore: data.minScore || 0.7,
+//         filters: data.filters || {},
+//       });
+//       return {success: true, data: results};
+//     } catch (error) {
+//       console.error('Error finding similar listings:', error);
+//       throw new functions.https.HttpsError(
+//         'internal',
+//         'Failed to find similar job listings',
+//         error instanceof Error ? error : new Error(String(error))
+//       );
+//     }
+//   }
+// );

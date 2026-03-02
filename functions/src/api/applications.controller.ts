@@ -1,10 +1,12 @@
+// @ts-expect-error - TS2497: esModuleInterop is enabled, but TypeScript 5.9 still complains about namespace import
 import * as functions from "firebase-functions";
+// @ts-expect-error - TS2497: esModuleInterop is enabled, but TypeScript 5.9 still complains about namespace import
 import * as admin from "firebase-admin";
 import type { QueryDocumentSnapshot } from "firebase-admin/firestore";
 import type { Request, Response } from "express";
 import { validateFirebaseIdToken } from "../middleware/auth.middleware";
 import { handleError, sendResponse } from "../utils/api.utils";
-import * as PDFDocument from "pdfkit";
+import PDFDocument from "pdfkit";
 import { Document, Packer, Paragraph, TextRun, HeadingLevel } from "docx";
 import { Buffer } from "buffer";
 
