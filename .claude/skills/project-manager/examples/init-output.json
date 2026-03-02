@@ -1,0 +1,46 @@
+{
+  "project_id": "cc-kr-solidarity-rollout",
+  "name": "CareerCopilot Kerala Rage kr-solidarity Rollout",
+  "status": "PLANNING",
+  "start_date": "2026-02-17T00:00:00Z",
+  "target_end_date": "2026-03-17T00:00:00Z",
+  "phases": [
+    {
+      "phase_id": "phase-1-heroes",
+      "sequence": 1,
+      "name": "Hero Component Creation",
+      "status": "COMPLETE",
+      "progress_percent": 100,
+      "metrics": {
+        "hours_spent": 45,
+        "hours_estimated": 60
+      }
+    },
+    {
+      "phase_id": "phase-2-tokens",
+      "sequence": 2,
+      "name": "Token Compliance Migration",
+      "status": "PENDING",
+      "gates_required": [
+        "Phase 1 complete (MET)",
+        "Build passing"
+      ],
+      "gates_met": [true, true],
+      "milestones": [
+        {
+          "name": "Component Audit",
+          "status": "PENDING",
+          "effort_hours": 0.33
+        },
+        {
+          "name": "Token Injection",
+          "status": "PENDING",
+          "effort_hours": 0.5
+        }
+      ],
+      "progress_percent": 0,
+      "estimated_hours_remaining": 90
+    }
+  ],
+  "created_at": "2026-02-17T10:00:00Z"
+}
