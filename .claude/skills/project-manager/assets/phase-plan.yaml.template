@@ -1,0 +1,14 @@
+phase_id: "{{phase_id}}"
+name: "{{phase_name}}"
+owner: "{{owner_id}}"
+status: PENDING
+gates_required:
+  - "previous_phase.status == COMPLETE"
+goals:
+  - "Deliverable 1"
+success_criteria:
+  - "Metric 1 > Value"
+milestones:
+  - name: "Kickoff"
+    effort_hours: 1
+    status: PENDING

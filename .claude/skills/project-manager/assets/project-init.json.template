@@ -1,0 +1,19 @@
+{
+  "project_name": "{{project_name}}",
+  "start_date": "{{today}}",
+  "target_end_date": "{{future_date}}",
+  "phases": [
+    {
+      "name": "Phase 1: Setup",
+      "status": "PLANNING",
+      "goals": ["Goal 1", "Goal 2"]
+    }
+  ],
+  "teams": [
+    {
+      "name": "Default Team",
+      "lead": "lead@example.com",
+      "capacity_hours": 160
+    }
+  ]
+}
