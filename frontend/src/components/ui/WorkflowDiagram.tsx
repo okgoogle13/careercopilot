@@ -148,7 +148,7 @@ function loadMermaid(): Promise<void> {
     script.src = 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js';
     script.async = true;
     script.onload = () => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+       
       (window as any).mermaid?.initialize({
         startOnLoad: false,
         theme: 'dark',
@@ -196,7 +196,7 @@ const MermaidDiagram: React.FC<MermaidDiagramProps> = ({ diagram, className = ''
       .then(async () => {
         if (cancelled || !containerRef.current) return;
         try {
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+           
           const mermaid = (window as any).mermaid;
           const { svg } = await mermaid.render(`mermaid-${uid}`, diagram);
           if (!cancelled && containerRef.current) {
