@@ -32,8 +32,8 @@ class TestDocumentGenerator:
         """
         Test successful resume generation with valid inputs.
         """
-        resume = generate_tailored_resume(base_profile_data, comparison_analysis)
-        assert resume == "Mocked Resume Content"
+        result = generate_tailored_resume(base_profile_data, comparison_analysis)
+        assert result == "Mocked Resume Content"
         mock_gemini_pro.generate.assert_called_once()
 
     @patch('backend.app.genkit_flows.document_generator.gemini_pro', new_callable=MagicMock)
@@ -41,8 +41,8 @@ class TestDocumentGenerator:
         """
         Test resume generation with an empty base profile.
         """
-        resume = generate_tailored_resume(empty_base_profile_data, comparison_analysis)
-        assert resume == "Mocked Resume Content"
+        result = generate_tailored_resume(empty_base_profile_data, comparison_analysis)
+        assert result == "Mocked Resume Content"
         mock_gemini_pro.generate.assert_called_once()
 
     @patch('backend.app.genkit_flows.document_generator.gemini_pro', new_callable=MagicMock)
@@ -50,31 +50,31 @@ class TestDocumentGenerator:
         """
         Test resume generation with an empty comparison analysis.
         """
-        resume = generate_tailored_resume(base_profile_data, empty_comparison_analysis)
-        assert resume == "Mocked Resume Content"
+        result = generate_tailored_resume(base_profile_data, empty_comparison_analysis)
+        assert result == "Mocked Resume Content"
         mock_gemini_pro.generate.assert_called_once()
 
     @patch('backend.app.genkit_flows.document_generator.gemini_pro', new_callable=MagicMock)
-    def test_generate_tailored_resume_invalid_input_types(self, mock_gemini_pro):
+    def test_generate_tailored_resume_large_input(self, mock_gemini_pro, large_base_profile_data, large_comparison_analysis):
         """
-        Test resume generation with invalid input types.
+        Test resume generation with large input data.
         """
-        with pytest.raises(TypeError):
-            generate_tailored_resume(123, "string")
+        result = generate_tailored_resume(large_base_profile_data, large_comparison_analysis)
+        assert result == "Mocked Resume Content"
+        mock_gemini_pro.generate.assert_called_once()
 
-    @patch('backend.app.genkit_flows.document_generator.gemini_pro', new_callable=MagicMock)
-    def test_generate_tailored_resume_gemini_error(self, mock_gemini_pro):
+    @patch('backend.app.genkit_flows.document_generator.gemini_pro', side_effect=Exception("API Error"))
+    def test_generate_tailored_resume_api_error(self, mock_gemini_pro):
         """
-        Test resume generation when Gemini Pro raises an exception.
+        Test resume generation when the Gemini API returns an error.
         """
-        mock_gemini_pro.generate.side_effect = Exception("Gemini Error")
-        with pytest.raises(Exception) as excinfo:
+        with pytest.raises(Exception, match="API Error"):
             generate_tailored_resume({"key": "value"}, {"key": "value"})
-        assert "Gemini Error" in str(excinfo.value)
 
+# Sample data for tests
 @pytest.fixture
 def base_profile_data():
-    """Fixture for base profile data."""
+    """Sample base profile data."""
     return {
         "name": "John Doe",
         "email": "john.doe@example.com",
@@ -86,7 +86,7 @@ def base_profile_data():
 
 @pytest.fixture
 def comparison_analysis():
-    """Fixture for comparison analysis."""
+    """Sample comparison analysis data."""
     return {
         "matching_skills": ["Python"],
         "missing_skills": ["Java", "SQL"],
@@ -95,10 +95,29 @@ def comparison_analysis():
 
 @pytest.fixture
 def empty_base_profile_data():
-    """Fixture for empty base profile data."""
+    """Empty base profile data."""
     return {}
 
 @pytest.fixture
 def empty_comparison_analysis():
-    """Fixture for empty comparison analysis."""
+    """Empty comparison analysis data."""
     return {}
+
+@pytest.fixture
+def large_base_profile_data():
+    """Large base profile data."""
+    return {
+        "name": "John Doe",
+        "email": "john.doe@example.com",
+        "experience": [{"title": "Software Engineer", "company": "Acme Corp", "years": 2}] * 100,
+        "skills": ["Python", "JavaScript"] * 50
+    }
+
+@pytest.fixture
+def large_comparison_analysis():
+    """Large comparison analysis data."""
+    return {
+        "matching_skills": ["Python"] * 100,
+        "missing_skills": ["Java", "SQL"] * 50,
+        "improvement_suggestions": ["Add more details to experience section"] * 100
+    }

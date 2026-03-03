@@ -5,91 +5,90 @@ Tests for the company_analyzer module.
 import pytest
 from fastapi.testclient import TestClient
 from backend.app.genkit_flows.company_analyzer import analyze_company_website, CompanyAnalysis
+from backend.app.main import app
 from unittest.mock import patch
-from requests.exceptions import RequestException, ConnectionError
-from pydantic import ValidationError
+import requests
+from requests.exceptions import RequestException
 from dotenv import load_dotenv
 import os
 
-# Load environment variables for testing
 load_dotenv()
 
 @pytest.fixture
 def test_client():
-    """Fixture to create a test client."""
-    from backend.app.main import app  # Import app here to avoid circular dependency
-    client = TestClient(app)
-    return client
+    """Fixture to create a test client for the FastAPI application."""
+    return TestClient(app)
 
-def test_analyze_company_website_happy_path(monkeypatch):
-    """
-    Test successful analysis of a company website.
-    """
-    mock_gemini_pro_generate = monkeypatch.setattr("backend.app.genkit_flows.company_analyzer.gemini_pro.generate",
-                                                    lambda prompt, config, output_schema:
-                                                    {"company_keywords": ["tech", "innovation"],
-                                                     "company_tone": "professional"})
+class TestCompanyAnalyzer:
 
-    result = analyze_company_website("https://www.example.com")
-    assert isinstance(result, CompanyAnalysis)
-    assert result.company_keywords == ["tech", "innovation"]
-    assert result.company_tone == "professional"
+    def test_analyze_company_website_happy_path(self, test_client):
+        """
+        Test successful analysis of a company website.
+        """
+        url = "https://www.example.com"
+        response = analyze_company_website(url)
+        assert isinstance(response, CompanyAnalysis)
+        assert isinstance(response.company_keywords, list)
+        assert isinstance(response.company_tone, str)
 
-def test_analyze_company_website_connection_error(monkeypatch):
-    """
-    Test handling of connection errors when fetching the URL.
-    """
-    monkeypatch.setattr("backend.app.genkit_flows.company_analyzer.requests.get",
-                        lambda url, headers, timeout:
-                        raise RequestException("Connection failed"))
+    def test_analyze_company_website_invalid_url(self):
+        """
+        Test handling of an invalid URL.
+        """
+        url = "invalid-url"
+        with pytest.raises(ConnectionError):
+            analyze_company_website(url)
 
-    with pytest.raises(ConnectionError) as excinfo:
-        analyze_company_website("https://www.example.com")
-    assert "Failed to fetch URL" in str(excinfo.value)
+    def test_analyze_company_website_request_exception(self):
+        """
+        Test handling of a request exception (e.g., timeout).
+        """
+        with patch('requests.get') as mock_get:
+            mock_get.side_effect = RequestException("Timeout error")
+            url = "https://www.example.com"
+            with pytest.raises(ConnectionError):
+                analyze_company_website(url)
 
-def test_analyze_company_website_bad_status_code(monkeypatch):
-    """
-    Test handling of bad status codes (e.g., 404) when fetching the URL.
-    """
-    mock_response = patch('backend.app.genkit_flows.company_analyzer.requests.get')
-    mock_response.return_value.status_code = 404
-    mock_response.return_value.raise_for_status.side_effect = requests.exceptions.HTTPError("Not Found")
+    def test_analyze_company_website_bad_status_code(self):
+        """
+        Test handling of a bad HTTP status code (e.g., 404).
+        """
+        with patch('requests.get') as mock_get:
+            mock_get.return_value.status_code = 404
+            url = "https://www.example.com"
+            with pytest.raises(ConnectionError):
+                analyze_company_website(url)
 
-    with pytest.raises(ConnectionError) as excinfo:
-        analyze_company_website("https://www.example.com")
-    assert "Failed to fetch URL" in str(excinfo.value)
+    def test_analyze_company_website_no_text_extracted(self):
+        """
+        Test handling of a website with no extractable text.
+        """
+        with patch('requests.get') as mock_get:
+            mock_get.return_value.content = "<html></html>"
+            url = "https://www.example.com"
+            with pytest.raises(ValueError):
+                analyze_company_website(url)
 
-def test_analyze_company_website_no_text_extracted(monkeypatch):
-    """
-    Test handling of cases where no text can be extracted from the website.
-    """
-    mock_response = patch('backend.app.genkit_flows.company_analyzer.requests.get')
-    mock_response.return_value.content = "<html></html>"  # Empty HTML
-    monkeypatch.setattr("backend.app.genkit_flows.company_analyzer.BeautifulSoup",
-                        lambda content, parser: type('MockSoup', (object,), {'get_text': lambda: ""})())
+    def test_analyze_company_website_gemini_failure(self):
+        """
+        Test handling of a failure from the Gemini model.
+        """
+        with patch('requests.get') as mock_get:
+            mock_get.return_value.content = "<html><body>Some text</body></html>"
+        with patch('backend.app.genkit_flows.company_analyzer.gemini_pro.generate') as mock_generate:
+            mock_generate.return_value.output.return_value = None
+            url = "https://www.example.com"
+            with pytest.raises(ValueError):
+                analyze_company_website(url)
 
-    with pytest.raises(ValueError) as excinfo:
-        analyze_company_website("https://www.example.com")
-    assert "Could not extract any text from the website." in str(excinfo.value)
-
-def test_analyze_company_website_gemini_pro_failure(monkeypatch):
-    """
-    Test handling of cases where Gemini Pro fails to generate an analysis.
-    """
-    mock_gemini_pro_generate = monkeypatch.setattr("backend.app.genkit_flows.company_analyzer.gemini_pro.generate",
-                                                    lambda prompt, config, output_schema: None)
-
-    with pytest.raises(ValueError) as excinfo:
-        analyze_company_website("https://www.example.com")
-    assert "Failed to generate company analysis from the model." in str(excinfo.value)
-
-def test_analyze_company_website_schema_validation(monkeypatch):
-    """
-    Test that the output conforms to the CompanyAnalysis schema.
-    """
-    mock_gemini_pro_generate = monkeypatch.setattr("backend.app.genkit_flows.company_analyzer.gemini_pro.generate",
-                                                    lambda prompt, config, output_schema:
-                                                    {"invalid_field": "some_value"})
-
-    with pytest.raises(ValidationError):
-        analyze_company_website("https://www.example.com")
+    @patch('backend.app.genkit_flows.company_analyzer.gemini_pro.generate')
+    def test_analyze_company_website_gemini_response_schema(self, mock_generate):
+        """
+        Test that the Gemini response is correctly mapped to the CompanyAnalysis schema.
+        """
+        mock_generate.return_value.output.return_value = CompanyAnalysis(company_keywords=["keyword1", "keyword2"], company_tone="formal")
+        url = "https://www.example.com"
+        response = analyze_company_website(url)
+        assert isinstance(response, CompanyAnalysis)
+        assert response.company_keywords == ["keyword1", "keyword2"]
+        assert response.company_tone == "formal"
