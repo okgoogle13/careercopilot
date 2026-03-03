@@ -6,9 +6,9 @@ export default {
       colors: {
         "semantic": {
                 "specimen-night": "var(--sys-color-semantic-specimen-night)",
-                "wattle-gold": "var(--sys-color-semantic-wattle-gold)",
-                "waratah-crimson": "var(--sys-color-semantic-waratah-crimson)",
-                "flannel-flower": "var(--sys-color-semantic-flannel-flower)",
+                "solidarity-gold": "var(--sys-color-semantic-solidarity-gold)",
+                "solidarity-crimson": "var(--sys-color-semantic-solidarity-crimson)",
+                "ash-grey": "var(--sys-color-semantic-ash-grey)",
                 "parchment": "var(--sys-color-semantic-parchment)"
         },
         "charcoalBackground": {

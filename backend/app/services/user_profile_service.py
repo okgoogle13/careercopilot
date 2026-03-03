@@ -76,11 +76,11 @@ class UserProfileService:
             for key, value in update_data.items():
                 if hasattr(user, key):
                     setattr(user, key, value)
-                elif key == "career_profile":
-                    # If we have a career_profile field in Firestore, map it to our structured fields if possible
-                    # or store it in a JSON field if we have one. In our current User model, we have
-                    # career_transition_from, career_transition_to, target_roles, etc.
-                    pass
+                else:
+                    # Save unhandled keys in user_metadata for flexibility (e.g., career_profile, career_database)
+                    if not user.user_metadata:
+                        user.user_metadata = {}
+                    user.user_metadata[key] = value
 
             db.commit()
             db.refresh(user)

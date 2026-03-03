@@ -7,17 +7,20 @@ from app.flows.career_ingest import IngestInput, ingest_career_docs
 from app.models import User
 from app.schemas.career import CareerDatabase
 from app.services.user_profile_service import user_profile_service
+from app.core.database import get_db
+from sqlalchemy.orm import Session
 
 router = APIRouter()
 
 @router.post("/ingest", response_model=CareerDatabase)
 async def ingest_documents_endpoint(
     files: list[UploadFile] = File(...),
-    current_user: User = Depends(get_current_user)
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
 ):
     """
     Uploads PDFs, extracts text, and uses Genkit AI to structure the data.
-    Saves the result to the user's career profile in Firestore.
+    Saves the result to the user's career profile in PostgreSQL.
     """
     try:
         combined_text = []
@@ -34,9 +37,10 @@ async def ingest_documents_endpoint(
         # Trigger Genkit Flow
         result = await ingest_career_docs(IngestInput(raw_text=full_text))
 
-        # Save to Firestore (Profile Persistence)
+        # Save to PostgreSQL (Profile Persistence)
         await user_profile_service.update_user_profile(
-            user_id=current_user.uid,
+            db=db,
+            user_id=current_user.id,
             update_data={"career_profile": result.model_dump()}
         )
 

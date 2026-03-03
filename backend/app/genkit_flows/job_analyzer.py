@@ -27,23 +27,44 @@ async def analyze_job_description(job_description: str) -> str:
     """
     logger.info("Running analyze_job_description flow")
     
-    # Use the centralized prompt service
-    prompt = format_prompt("job_description_analysis", job_description=job_description)
+    # Default fallback data
+    fallback_data = {
+        "title": "Unknown Title",
+        "company": "Unknown Company",
+        "location": "Unknown Location",
+        "summary": "AI analysis unavailable",
+        "key_requirements": [],
+        "technical_skills": [],
+        "soft_skills": [],
+        "experience_level": "Unknown"
+    }
 
-    # Generate the response using the centralized model
-    model = get_model()
-    if not model:
-        raise RuntimeError("Genkit model not available")
+    try:
+        # Use the centralized prompt service
+        prompt = format_prompt("job_description_analysis", job_description=job_description)
 
-    response = await model.generate(
-        prompt=prompt,
-        config={
-            "response_mime_type": "application/json",
-        },
-    )
+        # Generate the response using the centralized model
+        model = get_model()
+        if not model:
+            logger.warning("Genkit model not available, using fallback")
+            return json.dumps(fallback_data)
 
-    # Return as JSON string to maintain compatibility with legacy callers like JobsService
-    output = response.output()
-    if isinstance(output, str):
-        return output
-    return json.dumps(output)
+        response = await model.generate(
+            prompt=prompt,
+            config={
+                "response_mime_type": "application/json",
+            },
+        )
+
+        # Return as JSON string to maintain compatibility with legacy callers like JobsService
+        output = response.output()
+        if not output:
+            return json.dumps(fallback_data)
+            
+        if isinstance(output, str):
+            return output
+        return json.dumps(output)
+        
+    except Exception as e:
+        logger.error(f"Error in analyze_job_description: {e}")
+        return json.dumps(fallback_data)

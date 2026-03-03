@@ -43,17 +43,12 @@ def cached_ai_operation(
             cache = get_ai_cache()
 
             try:
-                # Extract user ID from parameters
-                user_id = None
-                if user_id_param in kwargs:
-                    user_id = kwargs[user_id_param]
-                else:
-                    # Try to find user_id in args based on function signature
-                    pass
-                _prepare_cache_input(args, kwargs, cache_key_params, exclude_params)
+                # Try to find user_id in args based on function signature
+                user_id = kwargs.get(user_id_param, "default")
+                cache_input = _prepare_cache_input(args, kwargs, cache_key_params, exclude_params)
 
                 # Try to get from cache
-                cached_result = await cache.get(operation_type, user_id)
+                cached_result = await cache.get(operation_type, user_id, cache_input)
                 if cached_result is not None:
                     return cached_result
 
@@ -67,7 +62,7 @@ def cached_ai_operation(
 
                 # Convert result to dict if it's not already
                 cache_value = result if isinstance(result, dict) else {"value": result}
-                await cache.set(operation_type, user_id, cache_value, ttl=ttl)
+                await cache.set(operation_type, user_id, cache_input, cache_value, ttl=ttl)
 
                 return result
 
@@ -147,6 +142,8 @@ class CacheContext:
     """Context manager for cache operations"""
 
     def __init__(self, operation_type: str, user_id: str, input_data: Any):
+        if not operation_type or not user_id:
+            raise ValueError("Operation type and User ID are required for CacheContext")
         self.operation_type = operation_type
         self.user_id = user_id
         self.input_data = input_data
@@ -161,9 +158,27 @@ class CacheContext:
         # Cache cleanup or additional logic could go here
         pass
 
-    async def set_result(self, result: Any) -> bool:
+    @property
+    def cached(self) -> bool:
+        """Check if result was retrieved from cache"""
+        return self.result is not None
+
+    async def get_result(self) -> Any | None:
+        """Retrieve the cached result"""
+        return self.result
+
+    async def set_result(self, result: Any, ttl: timedelta | int | None = None) -> bool:
         """Cache a result within the context"""
-        return await self.cache.set(self.operation_type, self.user_id, self.input_data, result)
+        # If result is assigned to the context instance, consider it cached
+        self.result = result
+        return await self.cache.set(self.operation_type, self.user_id, self.input_data, result, ttl=ttl)
+
+    @property
+    def cache_key(self) -> str:
+        """Get the cache key for this context"""
+        if hasattr(self.cache, "_generate_key"):
+            return self.cache._generate_key(self.operation_type, self.user_id, self.input_data)
+        return f"{self.operation_type}:{self.user_id}"
 
 
 # Usage example with context manager:

@@ -33,50 +33,159 @@ class PersonalCache:
     def _get_store(self, db) -> SQLAlchemyCacheStore:
         return SQLAlchemyCacheStore(db)
 
-    async def get(self, key: str, category: str = "general") -> Any | None:
-        """Retrieve cached value from PostgreSQL"""
-        with get_db_session() as db:
-            store = self._get_store(db)
-            # We combine key and category or use category as operation_type
-            # For better compatibility with original PersonalCache:
-            full_key = f"{category}:{key}"
-            return store.get(full_key)
+    async def get(self, key: str, *args, **kwargs) -> Any | None:
+        """Retrieve cached value from PostgreSQL.
+        Supports:
+        - get(key, category)
+        - get(operation_type, user_id, input_data)
+        """
+        try:
+            # Handle different signature styles
+            category = "general"
+            input_data = None
+            
+            if len(args) >= 1:
+                # Check if 2nd arg is user_id or category
+                # If 3rd arg exists, then 1st is operation_type, 2nd is user_id, 3rd is input_data
+                if len(args) >= 2 or "input_data" in kwargs:
+                    user_id = args[0]
+                    input_data = args[1] if len(args) >= 2 else kwargs.get("input_data")
+                    operation_type = key
+                    full_key = self._generate_key(operation_type, user_id, input_data)
+                else:
+                    # Style: get(key, category)
+                    full_key = f"{args[0]}:{key}"
+            else:
+                category = kwargs.get("category", "general")
+                full_key = f"{category}:{key}"
+            
+            logger.debug(f"[PersonalCache] GET key: {full_key}")
+            with get_db_session() as db:
+                store = self._get_store(db)
+                return store.get(full_key)
+        except Exception as e:
+            logger.error(f"Error reading from cache: {e}")
+            return None
 
     async def set(
         self,
         key: str,
-        value: Any,
-        ttl: timedelta | None = None,
-        category: str = "general",
+        value: Any = None,
+        *args,
+        **kwargs,
     ) -> bool:
-        """Store value in cache with TTL in PostgreSQL"""
-        if ttl is None:
-            ttl = self.default_ttl
-        
-        ttl_seconds = int(ttl.total_seconds())
-        full_key = f"{category}:{key}"
+        """Store value in cache with TTL in PostgreSQL.
+        Supports:
+        - set(key, value, ttl, category)
+        - set(operation_type, user_id, input_data, value, ttl)
+        """
+        try:
+            ttl = kwargs.get("ttl")
+            category = "general"
+            
+            # Determine signature style
+            if len(args) >= 2: # Style: set(op_type, user_id, input_data, value, ttl)
+                operation_type = key
+                user_id = value
+                input_data = args[0]
+                value = args[1]
+                if len(args) >= 3:
+                    ttl = args[2]
+                full_key = self._generate_key(operation_type, user_id, input_data)
+                category = operation_type
+            else:
+                # Style: set(key, value, ttl, category)
+                if len(args) >= 1:
+                    ttl = args[0]
+                if len(args) >= 2:
+                    category = args[1]
+                else:
+                    category = kwargs.get("category", "general")
+                full_key = f"{category}:{key}"
+            
+            logger.debug(f"[PersonalCache] SET key: {full_key}")
+            if ttl is None:
+                ttl = self.default_ttl
+            
+            if isinstance(ttl, (int, float)):
+                ttl_seconds = int(ttl)
+            else:
+                ttl_seconds = int(ttl.total_seconds())
 
-        with get_db_session() as db:
-            store = self._get_store(db)
-            return store.set(
-                key=full_key,
-                value=value,
-                operation_type=category,
-                ttl_seconds=ttl_seconds
-            )
+            with get_db_session() as db:
+                store = self._get_store(db)
+                return store.set(
+                    key=full_key,
+                    value=value,
+                    operation_type=category,
+                    ttl_seconds=ttl_seconds
+                )
+        except Exception as e:
+            logger.error(f"Error writing to cache: {e}")
+            return False
+
+    def _generate_key(self, operation_type: str, user_id: str, input_data: Any) -> str:
+        """Generate a consistent cache key"""
+        import hashlib
+        import json
+        input_str = json.dumps(input_data, sort_keys=True, default=str)
+        input_hash = hashlib.md5(input_str.encode()).hexdigest()[:16]
+        return f"{operation_type}:{user_id}:{input_hash}"
 
     async def delete(self, key: str, category: str = "general") -> bool:
         """Delete cached value from PostgreSQL"""
-        full_key = f"{category}:{key}"
-        with get_db_session() as db:
-            store = self._get_store(db)
-            return store.delete(full_key)
+        try:
+            full_key = f"{category}:{key}"
+            with get_db_session() as db:
+                store = self._get_store(db)
+                return store.delete(full_key)
+        except Exception as e:
+            logger.error(f"Error deleting from cache: {e}")
+            return False
 
     async def clear_expired(self, category: str | None = None) -> int:
         """Remove all expired cache entries from PostgreSQL"""
         with get_db_session() as db:
             store = self._get_store(db)
             return store.cleanup_expired()
+
+    async def clear_all(self) -> int:
+        """Clear all cache entries (for testing)"""
+        try:
+            with get_db_session() as db:
+                from sqlalchemy import text
+                result = db.execute(text("DELETE FROM cache"))
+                db.commit()
+                return result.rowcount
+        except Exception as e:
+            logger.error(f"Error clearing cache: {e}")
+            return 0
+
+    async def invalidate_user_cache(self, user_id: str, categories: list[str] | None = None) -> int:
+        """Invalidate cache entries for a specific user"""
+        try:
+            with get_db_session() as db:
+                from sqlalchemy import text
+                if categories:
+                    # Specific categories
+                    count = 0
+                    for category in categories:
+                        query = "DELETE FROM cache WHERE key LIKE :pattern"
+                        pattern = f"{category}:{user_id}:%"
+                        result = db.execute(text(query), {"pattern": pattern})
+                        count += result.rowcount
+                    db.commit()
+                    return count
+                else:
+                    # All categories for this user
+                    query = "DELETE FROM cache WHERE key LIKE :pattern"
+                    pattern = f"%:{user_id}:%"
+                    result = db.execute(text(query), {"pattern": pattern})
+                    db.commit()
+                    return result.rowcount
+        except Exception as e:
+            logger.error(f"Error invalidating user cache: {e}")
+            return 0
 
     async def cleanup_expired(self) -> int:
         """Alias for clear_expired"""

@@ -23,15 +23,29 @@ async def test_career_ingest_flow(client, mock_db):
     # Create clean Pydantic model to return (emulating Genkit success)
     mock_ai_result = CareerDatabase(**golden_data)
 
+    from app.models.database import User, Base
+    from app.core.database import SessionLocal, get_db
+    
     # 2. Patch dependencies
     # We patch the FLOW function imported in the router.
-    # Note: If the router does `from ... import ingest_career_docs`, we must patch `app.api.routes.career.ingest_career_docs`.
     with patch("app.api.routes.career.ingest_career_docs", new_callable=AsyncMock) as mock_flow:
         mock_flow.return_value = mock_ai_result
 
         # Mock the PDF parser too, just to avoid filesystem/PDF issues
         with patch("app.api.routes.career.extract_text_from_upload", new_callable=AsyncMock) as mock_parser:
             mock_parser.return_value = "Raw resume text content..."
+
+            # Ensure tables are created and user exists in the SQLite memory DB
+            # Use a fresh session for setup
+            db = SessionLocal()
+            
+            # Create user if not exists
+            user_id = "test_user_id"
+            user = db.query(User).filter(User.id == user_id).first()
+            if not user:
+                user = User(id=user_id, email="test@example.com", name="Test User")
+                db.add(user)
+                db.commit()
 
             # 3. Simulate Request
             # Upload a dummy PDF
@@ -51,8 +65,5 @@ async def test_career_ingest_flow(client, mock_db):
             assert data["achievements"][0]["metric"] == "50%"
 
             # Validation: Persistence
-            # Check if Firestore write was attempted
-            # The UserProfileService calls db.collection(...).document(...).set(...)
-            # mock_db is a MagicMock
-            assert mock_db.collection.called
-            mock_db.collection.assert_called_with("users")
+            db.refresh(user)
+            assert user.user_metadata["career_profile"]["personal_info"]["full_name"] == "Jane Doe"

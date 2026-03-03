@@ -15,26 +15,43 @@ async def compare_resume_to_job(resume_text: str, job_analysis_data: dict) -> st
     """
     logger.info("Running compare_resume_to_job flow")
 
-    # Use the centralized prompt service
-    prompt = format_prompt(
-        "resume_job_comparison",
-        resume_text=resume_text,
-        job_analysis_data=json.dumps(job_analysis_data, separators=(',', ':')),
-    )
+    fallback_data = {
+        "match_score": 0,
+        "matched_skills": [],
+        "missing_skills": [],
+        "overall_fit": "Analysis unavailable",
+        "recommendations": "Please try again later."
+    }
 
-    # Generate the response using the centralized model
-    model = get_model()
-    if not model:
-        raise RuntimeError("Genkit model not available")
+    try:
+        # Use the centralized prompt service
+        prompt = format_prompt(
+            "resume_job_comparison",
+            resume_text=resume_text,
+            job_analysis_data=json.dumps(job_analysis_data, separators=(',', ':')),
+        )
 
-    response = await model.generate(
-        prompt=prompt,
-        config={
-            "response_mime_type": "application/json",
-        },
-    )
+        # Generate the response using the centralized model
+        model = get_model()
+        if not model:
+            logger.warning("Genkit model not available, using fallback")
+            return json.dumps(fallback_data)
 
-    output = response.output()
-    if isinstance(output, str):
-        return output
-    return json.dumps(output)
+        response = await model.generate(
+            prompt=prompt,
+            config={
+                "response_mime_type": "application/json",
+            },
+        )
+
+        output = response.output()
+        if not output:
+            return json.dumps(fallback_data)
+
+        if isinstance(output, str):
+            return output
+        return json.dumps(output)
+        
+    except Exception as e:
+        logger.error(f"Error in compare_resume_to_job: {e}")
+        return json.dumps(fallback_data)

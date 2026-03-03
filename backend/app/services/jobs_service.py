@@ -21,7 +21,7 @@ class JobsService:
         try:
             # Step A: Analyze the job description
             logger.info("Analyzing job description via Genkit...")
-            job_analysis_str = await analyze_job_description.run(job_description_text)
+            job_analysis_str = await analyze_job_description(job_description_text)
             job_analysis_data = json.loads(job_analysis_str)
 
             # Step B: Fetch the user's resume text from SQL (UserAsset)
@@ -43,7 +43,7 @@ class JobsService:
 
             # Step C: Compare the resume to the job analysis
             logger.info("Comparing resume to job via Genkit...")
-            comparison_result_str = await compare_resume_to_job.run(
+            comparison_result_str = await compare_resume_to_job(
                 resume_text=resume_text, job_analysis_data=job_analysis_data
             )
             comparison_result = json.loads(comparison_result_str)

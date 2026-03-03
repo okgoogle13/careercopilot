@@ -8,14 +8,15 @@ from app.core.enhanced_ai_error_handling import (
     create_fallback_strategy,
     enhanced_ai_handler,
 )
-from app.models.database import UserAsset
+from app.models.user_asset import UserAsset
 
 logger = logging.getLogger(__name__)
 
 
 async def process_ats_score_task(user_id, document_id, resume_text, job_description):
-    db = SessionLocal()
+    db = None
     try:
+        db = SessionLocal()
 
         async def ai_operation():
             return await ats_scorer.comprehensive_ats_analysis(
@@ -51,4 +52,5 @@ async def process_ats_score_task(user_id, document_id, resume_text, job_descript
             f"Background ATS score task failed for user {user_id}, asset {document_id}: {e}"
         )
     finally:
-        db.close()
+        if db:
+            db.close()

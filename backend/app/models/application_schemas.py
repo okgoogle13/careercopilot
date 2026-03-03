@@ -51,6 +51,7 @@ class ApplicationCreate(BaseModel):
     job_description: str = Field(..., alias="jobDescription", min_length=50)
     deadline: datetime | None = None
     documents: DocumentReferences | None = None
+    application_metadata: dict[str, Any] = Field(default_factory=dict)
 
 
 class ApplicationResponse(BaseModel):
@@ -72,6 +73,6 @@ class ApplicationResponse(BaseModel):
     rating: int | None = Field(None, ge=1, le=5)
     salary: SalaryRange | None = None
     integrations: dict[str, str] | None = None
-    metadata: dict[str, Any] = Field(default_factory=dict)
+    application_metadata: dict[str, Any] = Field(default_factory=dict)
     created_at: datetime = Field(..., alias="createdAt")
     updated_at: datetime = Field(..., alias="updatedAt")
