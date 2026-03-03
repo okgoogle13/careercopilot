@@ -35,13 +35,6 @@ env:
   PYTHONDONTWRITEBYTECODE: "1"
   PIP_DISABLE_PIP_VERSION_CHECK: "1"
 
-  # Define Docker image location components (used by build job)
-  GCP_REGION: us-central1
-  GCP_REGISTRY: us-central1-docker.pkg.dev
-  GCP_IMAGE_NAME: backend
-  GCP_PROJECT_ID: careercopilot-468811
-  GCP_REPOSITORY: careercopilot
-
 jobs:
   changes:
     name: Detect Code Changes
@@ -81,7 +74,6 @@ jobs:
             e2e:
               - *frontend-paths
               - *backend-paths
-              - 'docker-compose.e2e.yml'
             performance:
               - *backend-paths
             extension:
@@ -285,28 +277,14 @@ jobs:
           python-version: ${{ env.PYTHON_VERSION }}
           install-mode: "full"
           cache-prefix: "tests"
-      - name: Setup Testcontainers Cloud Client
-        uses: AtomicJar/testcontainers-cloud-setup-action@v1
-        with:
-          token: ${{ secrets.TC_CLOUD_TOKEN }}
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-      - name: Build test image with cache
-        uses: docker/build-push-action@v5
-        with:
-          context: ./backend
-          load: true
-          tags: backend-test:latest
-          target: test
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
-      - name: Run all backend tests in container
+      - name: Run backend tests
         run: |
-          docker run --network="host" \
-            -e DATABASE_URL="postgresql://test:test@localhost:5432/test_db" \
-            -e ENVIRONMENT="test" \
-            -e GEMINI_API_KEY="${{ secrets.GEMINI_API_KEY_STAGING }}" \
-            backend-test:latest
+          cd backend
+          python -m pytest app/tests/ -v --tb=short --cov=app --cov-report=xml
+        env:
+          DATABASE_URL: "postgresql://test:test@localhost:5432/test_db"
+          ENVIRONMENT: "test"
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY_STAGING }}
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
         with:
@@ -408,32 +386,39 @@ jobs:
           cache-dependency-path: yarn.lock
       - name: Install dependencies
         run: yarn install --immutable
-      - name: Cache and Install Playwright browsers
+      - name: Cache Playwright browsers
         uses: actions/cache@v4
         with:
           path: ~/.cache/ms-playwright
-          key: ${{ runner.os }}-playwright-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}-playwright-chromium-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
-            ${{ runner.os }}-playwright-
-      - name: Start the stack
+            ${{ runner.os }}-playwright-chromium-
+      - name: Install Playwright browsers
         run: |
-          docker compose -f docker-compose.e2e.yml up -d --build
-      - name: Verify status again
+          yarn workspace careercopilot-frontend playwright install --with-deps chromium
+      - name: Setup Backend Environment
+        uses: ./.github/actions/setup-backend
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          install-mode: "full"
+      - name: Start backend dev server
         run: |
-          docker compose -f docker-compose.e2e.yml ps
-      - name: Tail logs if needed
+          cd backend
+          uvicorn app.main:app --host 0.0.0.0 --port 8000 &
+          echo $! >> /tmp/server.pids
+          timeout 30 bash -c 'until curl -s http://localhost:8000/health > /dev/null 2>&1; do sleep 2; done' || true
+        env:
+          ENVIRONMENT: test
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY_STAGING }}
+      - name: Serve frontend build
         run: |
-          docker compose -f docker-compose.e2e.yml logs --tail=50
-      - name: Once both services show Up, proceed with Playwright tests
+          npx serve -s frontend/dist -l 5173 &
+          echo $! >> /tmp/server.pids
+          timeout 30 bash -c 'until curl -s http://localhost:5173 > /dev/null 2>&1; do sleep 2; done'
+          echo "✅ Frontend server ready"
+      - name: Run Playwright tests
         run: |
-          yarn workspace careercopilot-frontend playwright install --with-deps
           yarn workspace careercopilot-frontend playwright test
-      - name: Docker diagnostics on failure
-        if: failure()
-        run: |
-          echo " Collecting docker-compose diagnostics..."
-          docker compose -f docker-compose.e2e.yml ps || true
-          docker compose -f docker-compose.e2e.yml logs --no-color > docker-compose-e2e-logs.txt || true
       - name: Upload E2E test results
         if: always()
         uses: actions/upload-artifact@v4
@@ -443,9 +428,12 @@ jobs:
             frontend/test-results/
             frontend/playwright-report/
           if-no-files-found: warn
-      - name: Cleanup services
+      - name: Stop dev servers
         if: always()
-        run: docker compose -f docker-compose.e2e.yml down
+        run: |
+          if [[ -f /tmp/server.pids ]]; then
+            xargs kill < /tmp/server.pids || true
+          fi
 
   performance-tests:
     name: Performance Tests
@@ -633,17 +621,25 @@ jobs:
           cd frontend
           npx playwright install --with-deps ${{ matrix.browser }}
 
-      - name: Start the stack
-        run: docker compose -f docker-compose.e2e.yml up -d --build
+      - name: Setup Backend Environment
+        uses: ./.github/actions/setup-backend
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          install-mode: "full"
 
-      - name: Wait for services
+      - name: Start backend dev server
         run: |
-          echo "⏳ Waiting for services to be ready..."
-          timeout 60 bash -c 'until curl -s http://localhost:5173 > /dev/null; do sleep 2; done' || {
-            echo "❌ Frontend failed to start"
-            docker compose -f docker-compose.e2e.yml logs
-            exit 1
-          }
+          cd backend
+          uvicorn app.main:app --host 0.0.0.0 --port 8000 &
+          timeout 30 bash -c 'until curl -s http://localhost:8000/health > /dev/null 2>&1; do sleep 2; done' || true
+        env:
+          ENVIRONMENT: test
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY_STAGING }}
+
+      - name: Serve frontend build
+        run: |
+          npx serve -s frontend/dist -l 5173 &
+          timeout 30 bash -c 'until curl -s http://localhost:5173 > /dev/null 2>&1; do sleep 2; done'
           echo "✅ Services ready"
 
       - name: Run Playwright tests (sharded)
@@ -669,10 +665,6 @@ jobs:
           path: frontend/playwright-report/
           retention-days: 7
           if-no-files-found: warn
-
-      - name: Cleanup services
-        if: always()
-        run: docker compose -f docker-compose.e2e.yml down
 
   quality-gate:
     name: Quality Gate
@@ -739,95 +731,3 @@ jobs:
               repo: context.repo.repo,
               body: comment,
             });
-
-  build-and-push-backend:
-    name: Build and Push Backend Image
-    runs-on: ubuntu-latest
-    needs: [changes, frontend-build, backend-tests, backend-static-checks]
-    # Build if frontend passes, allow backend tests to fail
-    if: |
-      always() &&
-      !cancelled() &&
-      (needs.frontend-build.result == 'success' || needs.frontend-build.result == 'skipped') &&
-      (needs.backend-static-checks.result == 'success' || needs.backend-static-checks.result == 'skipped') &&
-      (github.event_name == 'workflow_dispatch' || needs.changes.outputs.backend == 'true' || needs.changes.outputs.frontend == 'true') &&
-      (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop')
-    permissions:
-      id-token: write
-      contents: read
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4 # v4.1.7
-      - name: Download frontend artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: frontend-dist
-          path: backend/dist
-      # Determine Target Environment based on branch
-      - name: Determine Target Environment
-        id: env-vars
-        run: |
-          if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
-            echo "TARGET_PROJECT_ID=${{ env.GCP_PROJECT_ID }}" >> $GITHUB_ENV
-            echo "TARGET_REPOSITORY=${{ env.GCP_REPOSITORY }}" >> $GITHUB_ENV
-            echo "GCP_WORKLOAD_IDENTITY_PROVIDER=${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}" >> $GITHUB_ENV
-            echo "GCP_SERVICE_ACCOUNT=${{ secrets.GCP_SERVICE_ACCOUNT }}" >> $GITHUB_ENV
-          elif [[ "${{ github.ref }}" == "refs/heads/develop" ]]; then
-            echo "TARGET_PROJECT_ID=careercopilot-staging" >> $GITHUB_ENV
-            echo "TARGET_REPOSITORY=careercopilot-repo" >> $GITHUB_ENV
-            echo "GCP_WORKLOAD_IDENTITY_PROVIDER=${{ secrets.GCP_STAGING_WORKLOAD_IDENTITY_PROVIDER }}" >> $GITHUB_ENV
-            echo "GCP_SERVICE_ACCOUNT=${{ secrets.GCP_STAGING_SERVICE_ACCOUNT }}" >> $GITHUB_ENV
-          fi
-      - name: Authenticate to Google Cloud
-        uses: google-github-actions/auth@v2
-        with:
-          workload_identity_provider: ${{ env.GCP_WORKLOAD_IDENTITY_PROVIDER }}
-          service_account: ${{ env.GCP_SERVICE_ACCOUNT }}
-      - name: Setup Google Cloud SDK
-        uses: google-github-actions/setup-gcloud@v2
-        with:
-          version: 'latest'
-          project_id: ${{ steps.env-vars.outputs.TARGET_PROJECT_ID }}
-      - name: Configure Docker for GCR
-        run: gcloud auth configure-docker ${{ env.GCP_REGISTRY }} --quiet
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-      - name: Build and push Docker image with BuildKit cache
-        run: |
-          IMAGE_BASE="${{ env.GCP_REGISTRY }}/${{ steps.env-vars.outputs.TARGET_PROJECT_ID }}/${{ steps.env-vars.outputs.TARGET_REPOSITORY }}/${{ env.GCP_IMAGE_NAME }}"
-          # Use short SHA (first 7 chars) to match git convention
-          SHORT_SHA="${{ github.sha }}"
-          SHORT_SHA="${SHORT_SHA:0:7}"
-          IMAGE_SHA="${IMAGE_BASE}:${SHORT_SHA}"
-          IMAGE_LATEST="${IMAGE_BASE}:latest"
-          CACHE_IMAGE="${IMAGE_BASE}:buildcache"
-
-          echo "Building Docker image with BuildKit cache..."
-          docker buildx build \
-            --platform linux/amd64 \
-            --target production \
-            --cache-from type=registry,ref=${CACHE_IMAGE} \
-            --cache-to type=registry,ref=${CACHE_IMAGE},mode=max \
-            --tag "${IMAGE_SHA}" \
-            --tag "${IMAGE_LATEST}" \
-            --push \
-            ./backend
-
-          echo "IMAGE_SHA=${IMAGE_SHA}" >> $GITHUB_OUTPUT
-          echo "IMAGE_LATEST=${IMAGE_LATEST}" >> $GITHUB_OUTPUT
-
-      - name: Add build summary
-        run: |
-          IMAGE_BASE="${{ env.GCP_REGISTRY }}/${{ steps.env-vars.outputs.TARGET_PROJECT_ID }}/${{ steps.env-vars.outputs.TARGET_REPOSITORY }}/${{ env.GCP_IMAGE_NAME }}"
-          echo "### Backend Image Pushed (${{ github.ref_name }})" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "Image successfully pushed to Google Artifact Registry with BuildKit caching enabled." >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**Target Project:** ${{ steps.env-vars.outputs.TARGET_PROJECT_ID }}" >> $GITHUB_STEP_SUMMARY
-          echo "**Target Repository:** ${{ steps.env-vars.outputs.TARGET_REPOSITORY }}" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**Image Tags:**" >> $GITHUB_STEP_SUMMARY
-          echo '```' >> $GITHUB_STEP_SUMMARY
-          echo "${IMAGE_BASE}:${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
-          echo "${IMAGE_BASE}:latest" >> $GITHUB_STEP_SUMMARY
-          echo '```' >> $GITHUB_STEP_SUMMARY
