@@ -60,16 +60,11 @@ jobs:
       - name: Install Playwright
         run: yarn workspace careercopilot-frontend playwright install --with-deps chromium
 
-      - name: Start Services via Docker Compose
+      - name: Start backend dev server
         run: |
-          # Use the E2E compose file which is specifically for this
-          docker compose -f docker-compose.e2e.yml up -d --build
-
-          # Wait for health with retries
-          echo "Waiting for services to be healthy..."
-          sleep 10
-
-          # Check backend health (retry up to 30 times, 2s apart = 60s max)
+          cd backend
+          uvicorn app.main:app --host 0.0.0.0 --port 8000 &
+          echo $! > /tmp/backend.pid
           echo "Checking backend health..."
           for i in {1..30}; do
             if curl -f http://localhost:8000/health 2>/dev/null; then
@@ -79,8 +74,14 @@ jobs:
             echo "Attempt $i/30: Backend not ready yet..."
             sleep 2
           done
+        env:
+          ENVIRONMENT: test
 
-          # Check frontend health (retry up to 30 times, 2s apart = 60s max)
+      - name: Build and serve frontend
+        run: |
+          yarn workspace careercopilot-frontend build
+          npx serve -s frontend/dist -l 5173 &
+          echo $! > /tmp/frontend.pid
           echo "Checking frontend health..."
           for i in {1..30}; do
             if curl -f http://localhost:5173 2>/dev/null; then
@@ -90,13 +91,6 @@ jobs:
             echo "Attempt $i/30: Frontend not ready yet..."
             sleep 2
           done
-
-          # Extra buffer for service stabilization
-          echo "Services ready, waiting 10s for stabilization..."
-          sleep 10
-
-          # Show service status
-          docker compose -f docker-compose.e2e.yml ps
 
       - name: Run E2E UAT Tests
         env:
@@ -113,7 +107,9 @@ jobs:
 
       - name: Cleanup
         if: always()
-        run: docker compose -f docker-compose.e2e.yml down
+        run: |
+          kill $(cat /tmp/backend.pid) 2>/dev/null || true
+          kill $(cat /tmp/frontend.pid) 2>/dev/null || true
 
   visual-regression:
     name: Visual Regression Testing
