@@ -1,37 +1,9 @@
 """Expanded unit tests for the ingestion service."""
 
-import sys
-from dataclasses import dataclass, field
-from types import ModuleType, SimpleNamespace
+from types import SimpleNamespace
 from unittest.mock import MagicMock
 
 import pytest
-
-vector_store_module = sys.modules.setdefault(
-    "app.services.vector_store", ModuleType("app.services.vector_store")
-)
-
-
-@dataclass
-class _CareerArtifact:
-    """Minimal artifact model for isolated ingestion tests."""
-
-    content: str
-    source_type: str
-    source_filename: str
-    derived_skills: list[str] = field(default_factory=list)
-    date: str = ""
-
-
-class _VectorStore:
-    """Minimal vector-store placeholder for import-time compatibility."""
-
-    def add_artifact(self, artifact, user_id="legacy_user"):
-        return None
-
-
-vector_store_module.CareerArtifact = getattr(vector_store_module, "CareerArtifact", _CareerArtifact)
-vector_store_module.VectorStore = getattr(vector_store_module, "VectorStore", _VectorStore)
 
 import app.services.ingestion as ingestion_module
 from app.services.ingestion import IngestionService

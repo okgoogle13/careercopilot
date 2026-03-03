@@ -118,6 +118,21 @@ def test_template_service_initializes_career_context(template_service):
     }
 
 
+def test_build_template_prompt_covers_remaining_template_types(template_service):
+    """Prompt building should handle all remaining enum branches and fallback types."""
+    interview_prompt = template_service._build_template_prompt(TemplateType.INTERVIEW_THANK_YOU)
+    reference_prompt = template_service._build_template_prompt(TemplateType.REFERENCE_REQUEST)
+    cover_letter_prompt = template_service._build_template_prompt(TemplateType.COVER_LETTER)
+    custom_prompt = template_service._build_template_prompt(
+        SimpleNamespace(value="custom_template")
+    )
+
+    assert "post-interview thank you" in interview_prompt
+    assert "reference request email" in reference_prompt
+    assert "cover letter template" in cover_letter_prompt
+    assert "custom_template" in custom_prompt
+
+
 def test_parse_template_response_parses_structured_email_json(template_service):
     """JSON AI responses should be converted into GeneratedTemplate objects."""
     result = template_service._parse_template_response(
@@ -145,7 +160,48 @@ def test_parse_template_response_uses_raw_content_for_non_json(template_service)
         "[COMPANY_NAME]": "Company name",
         "[JOB_TITLE]": "Job title or role",
     }
-    assert result.customization_tips == ["Customize with specific details about the role and company"]
+    assert result.customization_tips == [
+        "Customize with specific details about the role and company"
+    ]
+
+
+def test_parse_template_response_parses_cover_letter_json(template_service):
+    """Cover letter JSON should read from cover_letter_content."""
+    result = template_service._parse_template_response(
+        TemplateType.COVER_LETTER,
+        '{"cover_letter_content":"Letter body","placeholders":{"[COMPANY_NAME]":"Company name"}}',
+        None,
+    )
+
+    assert result.content == "Letter body"
+    assert result.subject_line is None
+    assert result.placeholders == {"[COMPANY_NAME]": "Company name"}
+
+
+def test_parse_template_response_uses_generic_content_branch(template_service):
+    """Non-email, non-cover-letter templates should use the generic content field."""
+    custom_type = SimpleNamespace(value="custom_template")
+    result = template_service._parse_template_response(
+        custom_type,
+        '{"content":"Custom body","subject_line":"Custom subject"}',
+        None,
+    )
+
+    assert result.content == "Custom body"
+    assert result.subject_line == "Custom subject"
+
+
+def test_parse_template_response_returns_safe_fallback_on_parse_error(template_service):
+    """Malformed JSON should fall back to review guidance."""
+    result = template_service._parse_template_response(
+        TemplateType.EMAIL_APPLICATION,
+        '{"email_body":"broken"',
+        None,
+    )
+
+    assert result.content == '{"email_body":"broken"'
+    assert result.placeholders == {}
+    assert result.customization_tips == ["Review and customize before using"]
 
 
 def test_extract_placeholders_maps_known_and_unknown_tokens(template_service):
@@ -178,7 +234,9 @@ def test_generate_template_returns_parsed_ai_response(template_service, fake_ai_
         custom_data={"tone": "warm"},
     )
 
-    result = asyncio.run(template_service.generate_template(TemplateType.EMAIL_APPLICATION, context))
+    result = asyncio.run(
+        template_service.generate_template(TemplateType.EMAIL_APPLICATION, context)
+    )
 
     assert result.subject_line == "Application"
     assert result.content == "Hello there"
@@ -196,7 +254,9 @@ def test_generate_template_returns_parsed_ai_response(template_service, fake_ai_
     assert prompt_context.custom_data["tone"] == "warm"
 
 
-def test_generate_template_uses_fallback_for_generic_ai_marker(template_service, fake_ai_prompt_builder):
+def test_generate_template_uses_fallback_for_generic_ai_marker(
+    template_service, fake_ai_prompt_builder
+):
     """Generic bridge fallback text should route into the local fallback templates."""
     expected = GeneratedTemplate(template_type=TemplateType.NETWORKING_EMAIL, content="fallback")
     fake_ai_prompt_builder.generate_ai_response.return_value = "Enhanced AI response for generic"
@@ -217,6 +277,17 @@ def test_generate_template_uses_fallback_when_ai_raises(template_service, fake_a
     template_service._generate_fallback_template = MagicMock(return_value=expected)
 
     result = asyncio.run(template_service.generate_template(TemplateType.FOLLOW_UP_EMAIL))
+
+    assert result is expected
+
+
+def test_generate_template_uses_fallback_when_prompt_building_fails(template_service):
+    """Top-level prompt-building failures should also fall back safely."""
+    expected = GeneratedTemplate(template_type=TemplateType.COVER_LETTER, content="fallback")
+    template_service._build_template_prompt = MagicMock(side_effect=RuntimeError("bad prompt"))
+    template_service._generate_fallback_template = MagicMock(return_value=expected)
+
+    result = asyncio.run(template_service.generate_template(TemplateType.COVER_LETTER))
 
     assert result is expected
 
@@ -259,9 +330,9 @@ def test_generate_application_materials_returns_empty_dict_on_failure(template_s
     assert (
         asyncio.run(
             template_service.generate_application_materials(
-            job_title="Case Manager",
-            company_name="Community First",
-        )
+                job_title="Case Manager",
+                company_name="Community First",
+            )
         )
         == {}
     )
