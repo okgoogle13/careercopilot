@@ -29,7 +29,7 @@ from app.core.auth import get_current_user
 from app.core.database import get_db
 from app.core.enhanced_ai_error_handling import create_detailed_error_message
 from app.core.file_upload_decorators import FileUploadConfig, require_valid_file_upload
-from app.core.supabase import get_supabase_storage
+from app.core.cloud_storage import cloud_storage_client
 from app.models.asset_library_schema import AssetDocument, AssetMetadata
 from app.models.ingestion_schemas import (
     ExtractAndSaveRequest,
@@ -38,26 +38,38 @@ from app.models.ingestion_schemas import (
     UploadAndTagResponse,
 )
 
+async def _upload_to_storage(
+    file: UploadFile, user_id: str, folder: str = "uploads"
+) -> tuple[str, int]:
+    """
+    Upload a file to Firebase Storage.
+
+    Args:
+        file: The uploaded file
+        user_id: User identifier
+        folder: Top-level folder
+
+    Returns:
+        tuple: (storage_uri, file_size)
+    """
+    try:
         # Generate unique filename with timestamp
         timestamp = int(datetime.now().timestamp())
-        filename = f"{user_id}/{timestamp}_{file.filename}"
+        filename = f"{folder}/{user_id}/{timestamp}_{file.filename}"
 
         # Reset file pointer and get content
         await file.seek(0)
         file_content = await file.read()
         file_size = len(file_content)
 
-        # Upload to Supabase Storage
-        # Supabase python client storage.upload expects (path, file, file_options)
-        storage.from_(bucket_name).upload(
-            path=filename,
-            file=file_content,
-            file_options={"content-type": file.content_type}
+        # Upload to Firebase Storage via CloudStorageClient
+        storage_uri = cloud_storage_client.upload_file(
+            file_content=file_content,
+            destination_blob_name=filename,
+            content_type=file.content_type or "application/octet-stream"
         )
 
-        storage_uri = f"storage://{bucket_name}/{filename}"
         logger.info(f"File uploaded successfully to {storage_uri}, size: {file_size} bytes")
-
         return storage_uri, file_size
 
     except Exception as e:
@@ -70,33 +82,28 @@ from app.models.ingestion_schemas import (
 
 async def _read_file_from_storage(storage_uri: str) -> str:
     """
-    Read text content from Google Cloud Storage.
+    Read text content from Firebase Storage.
 
     Args:
-        storage_uri: GCS URI (gs://bucket-name/path/to/file)
+        storage_uri: storage://bucket-name/path/to/file
 
     Returns:
         File content as text
-
-    Raises:
-        HTTPException: If read fails
     """
     try:
-        storage = get_supabase_storage()
-
-        # Extract bucket and path from URI (storage://bucket/path)
+        # Extract path from URI
         uri_parts = storage_uri.replace("storage://", "").split("/", 1)
         if len(uri_parts) < 2:
             raise ValueError(f"Invalid storage URI: {storage_uri}")
 
         bucket_name, file_path = uri_parts
 
-        # Download as binary and convert to text
-        res = storage.from_(bucket_name).download(file_path)
-        content = res.decode("utf-8")
-        logger.info(f"Successfully read {len(content)} characters from {storage_uri}")
+        # Download via client
+        content, _ = cloud_storage_client.download_file(file_path)
+        text_content = content.decode("utf-8")
+        logger.info(f"Successfully read {len(text_content)} characters from {storage_uri}")
 
-        return content
+        return text_content
 
     except Exception as e:
         logger.error(f"Failed to read file from storage: {e!s}", exc_info=True)
@@ -108,22 +115,17 @@ async def _read_file_from_storage(storage_uri: str) -> str:
 
 async def _move_file_in_storage(source_uri: str, user_id: str) -> str:
     """
-    Move file from temp_ingestions to permanent user_assets folder.
+    Move file from temp_ingestions to permanent folder.
 
     Args:
-        source_uri: Source GCS URI
-        user_id: Firebase UID of the user
+        source_uri: Source storage URI
+        user_id: User identifier
 
     Returns:
-        New permanent GCS URI
-
-    Raises:
-        HTTPException: If move fails
+        New permanent storage URI
     """
     try:
-        storage = get_supabase_storage()
-
-        # Extract bucket and path
+        # Extract path
         uri_parts = source_uri.replace("storage://", "").split("/", 1)
         if len(uri_parts) < 2:
             return source_uri
@@ -131,12 +133,18 @@ async def _move_file_in_storage(source_uri: str, user_id: str) -> str:
         bucket_name, source_path = uri_parts
         filename = os.path.basename(source_path)
 
-        # Permanent path: resumes/{user_id}/filename or assets/{user_id}/filename
+        # Permanent path
         dest_path = f"permanent/{user_id}/{filename}"
 
-        # Supabase doesn't have a direct "move", so copy + delete
-        storage.from_(bucket_name).copy(source_path, dest_path)
-        storage.from_(bucket_name).remove([source_path])
+        # Use Firebase bucket directly for move (copy + delete)
+        bucket = cloud_storage_client.bucket
+        if bucket:
+            blob = bucket.blob(source_path)
+            bucket.copy_blob(blob, bucket, dest_path)
+            blob.delete()
+        else:
+            logger.error("Storage bucket not available for move operation")
+            return source_uri
 
         new_uri = f"storage://{bucket_name}/{dest_path}"
         logger.info(f"File moved from {source_uri} to {new_uri}")
@@ -145,7 +153,6 @@ async def _move_file_in_storage(source_uri: str, user_id: str) -> str:
 
     except Exception as e:
         logger.error(f"Failed to move file in storage: {e!s}", exc_info=True)
-        # Non-fatal error - file can stay in temp location
         logger.warning("File will remain in temporary location")
         return source_uri
 
@@ -154,11 +161,11 @@ async def _save_to_database(
     asset_doc: AssetDocument, user_id: str, db: Session
 ) -> str:
     """
-    Save asset document to PostgreSQL (Supabase) via SQLAlchemy.
+    Save asset document to PostgreSQL via SQLAlchemy.
     
     Args:
         asset_doc: The asset document to save (Pydantic)
-        user_id: User UUID
+        user_id: User identifier
         db: SQLAlchemy session
     """
     try:
@@ -411,10 +418,10 @@ async def extract_and_save(
         # Step 4: Move file to permanent storage
         permanent_uri = await _move_file_in_storage(request.fileId, user_id)
 
-        # Step 5: For Supabase, we already have some metadata or can set defaults
-        # Since we are using Supabase storage, metadata is handled differently
+        # Step 5: For Firebase, we already have some metadata or can set defaults
+        # Since we are using Firebase storage, metadata is handled via blob.metadata
         detected_mime_type = "application/pdf" if ".pdf" in permanent_uri.lower() else "application/octet-stream"
-        file_size = 0 # Can be improved by fetching from Supabase Client if needed
+        file_size = 0 # Can be improved by fetching from Firebase Storage if needed
 
         # Step 6: Create AssetDocument
         asset_doc = AssetDocument(
@@ -477,7 +484,7 @@ async def extract_and_save(
 @router.get(
     "/health",
     summary="Health check for Smart Ingestion service",
-    description="Check if all required services (Supabase, Database, Genkit) are available",
+    description="Check if all required services (Firebase, Database, Genkit) are available",
 )
 async def health_check() -> JSONResponse:
     """Check health of Smart Ingestion dependencies."""

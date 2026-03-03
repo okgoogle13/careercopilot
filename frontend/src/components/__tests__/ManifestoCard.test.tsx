@@ -1,6 +1,5 @@
-import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
-import { ManifestoCard } from '../ManifestoCard';
+import { ManifestoCard } from '../kerala-rage/ManifestoCard';
 import React from 'react';
 
 describe('ManifestoCard', () => {
@@ -8,7 +7,7 @@ describe('ManifestoCard', () => {
     title: 'Solidarity Forever',
     content: 'The collective history of our work is the foundation of our future.',
     actionLabel: 'JOIN STATION',
-    onAction: vi.fn(),
+    onAction: jest.fn(),
   };
 
   it('renders title and content correctly', () => {

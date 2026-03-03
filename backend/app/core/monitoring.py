@@ -22,6 +22,8 @@ from fastapi import FastAPI, Request, Response
 from prometheus_client import REGISTRY, Counter, Histogram, generate_latest, CONTENT_TYPE_LATEST
 from starlette.middleware.base import BaseHTTPMiddleware
 
+logger = logging.getLogger(__name__)
+
 
 @dataclass
 class MetricPoint:

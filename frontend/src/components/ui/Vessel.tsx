@@ -19,17 +19,17 @@ export const M3Accordion: React.FC<VesselProps> = ({
     const [isExpanded, setIsExpanded] = useState(defaultExpanded);
 
     return (
-        <div className={`border border-[var(--color-concrete-grey-base)]/20 rounded-[var(--radius-pebble)] overflow-hidden mb-4 bg-white/5 transition-all duration-300 ${className}`}>
+        <div className={`border border-[var(--sys-color-concreteGrey-base)]/20 rounded-[var(--radius-pebble)] overflow-hidden mb-4 bg-white/5 transition-all duration-300 ${className}`}>
             <button
                 onClick={() => setIsExpanded(!isExpanded)}
                 className="w-full flex items-center justify-between p-5 text-left hover:bg-white/5 transition-colors focus:outline-none"
             >
                 <div className="flex items-center gap-4">
-                    {icon && <div className="text-[var(--color-ink-gold)]">{icon}</div>}
-                    <h3 className="font-bloom text-lg font-bold text-[var(--color-paper-white)]">{title}</h3>
+                    {icon && <div className="text-[var(--sys-color-inkGold-base)]">{icon}</div>}
+                    <h3 className="font-bloom text-lg font-bold text-[var(--sys-color-worker-ash-base)]">{title}</h3>
                 </div>
                 <ChevronDown
-                    className={`w-5 h-5 text-[var(--color-concrete-grey-dark)] transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}
+                    className={`w-5 h-5 text-[var(--sys-color-concreteGrey-steps-4)] transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}
                 />
             </button>
             <div

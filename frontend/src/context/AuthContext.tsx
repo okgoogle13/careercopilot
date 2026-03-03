@@ -1,9 +1,12 @@
-/**
- * Authentication Context
- * Manages global authentication state via Supabase or Offline Mock
- */
-
-import { User as SupabaseUser } from '@supabase/supabase-js';
+import { 
+  User as FirebaseUser, 
+  onAuthStateChanged, 
+  signInWithEmailAndPassword, 
+  createUserWithEmailAndPassword, 
+  updateProfile, 
+  signOut as firebaseSignOut,
+  getIdToken
+} from 'firebase/auth';
 import {
   ReactNode,
   createContext,
@@ -13,17 +16,16 @@ import {
   useMemo,
   useState,
 } from 'react';
-import { supabase } from '../config/supabase';
+import { auth } from '../config/firebase';
 
 // Define types locally
-export interface User extends Partial<SupabaseUser> {
-  // Add any custom fields you expect
-  role?: string;
-  email?: string; // Changed to optional/undefined to match Partial<SupabaseUser>
-  // Supabase stores display name in user_metadata
-  displayName: string | null;
+export interface User {
   uid: string;
+  email?: string;
+  displayName: string | null;
+  role?: string;
   access_token?: string | null;
+  photoURL?: string | null;
 }
 
 interface AuthContextType {
@@ -52,18 +54,19 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
-  // Helper to map Supabase user to our internal User type
-  const mapSupabaseUser = (sbUser: SupabaseUser | null): User | null => {
-    if (!sbUser) return null;
+  // Helper to map Firebase user to our internal User type
+  const mapFirebaseUser = async (fbUser: FirebaseUser | null): Promise<User | null> => {
+    if (!fbUser) return null;
+    
+    const token = await getIdToken(fbUser);
+    
     return {
-      ...sbUser,
-      uid: sbUser.id,
-      displayName:
-        sbUser.user_metadata?.full_name ||
-        sbUser.user_metadata?.displayName ||
-        sbUser.email?.split('@')[0] ||
-        null,
-      email: sbUser.email || undefined,
+      uid: fbUser.uid,
+      email: fbUser.email || undefined,
+      displayName: fbUser.displayName || fbUser.email?.split('@')[0] || null,
+      photoURL: fbUser.photoURL,
+      access_token: token,
+      role: 'user', // Default role
     };
   };
 
@@ -79,35 +82,18 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       return;
     }
 
-    // Initial session check
-    const checkSession = async () => {
-      try {
-        const {
-          data: { session },
-        } = await supabase.auth.getSession();
-        if (session?.user) {
-          setUser(mapSupabaseUser(session.user));
-        }
-      } catch (error) {
-        console.error('Error checking initial session:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    checkSession();
-
     // Subscribe to changes
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange(async (_event, session) => {
-      setUser(mapSupabaseUser(session?.user || null));
+    const unsubscribe = onAuthStateChanged(auth, async (fbUser) => {
+      if (fbUser) {
+        const mappedUser = await mapFirebaseUser(fbUser);
+        setUser(mappedUser);
+      } else {
+        setUser(null);
+      }
       setLoading(false);
     });
 
-    return () => {
-      subscription.unsubscribe();
-    };
+    return () => unsubscribe();
   }, []);
 
   const login = useCallback(async (email: string, password: string) => {
@@ -119,7 +105,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
           email,
           displayName: 'Dev User',
           role: 'user',
-        } as unknown as User;
+        };
         setUser(mockUser);
         localStorage.setItem('mockUser', JSON.stringify(mockUser));
         return;
@@ -127,12 +113,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       throw new Error('Invalid credentials');
     }
 
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
-
-    if (error) throw error;
+    await signInWithEmailAndPassword(auth, email, password);
   }, []);
 
   const register = useCallback(async (email: string, password: string, displayName: string) => {
@@ -142,28 +123,21 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         email,
         displayName: displayName || 'New Dev User',
         role: 'user',
-      } as unknown as User;
+      };
       setUser(mockUser);
       localStorage.setItem('mockUser', JSON.stringify(mockUser));
       return;
     }
 
-    const { data, error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        data: {
-          full_name: displayName,
-          displayName: displayName, // support for legacy field backup
-        },
-      },
-    });
-
-    if (error) throw error;
-
-    if (data.user) {
-      // Force refresh user to get updated display name
-      setUser(mapSupabaseUser(data.user));
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    
+    if (userCredential.user) {
+      await updateProfile(userCredential.user, {
+        displayName: displayName
+      });
+      
+      const mappedUser = await mapFirebaseUser(userCredential.user);
+      setUser(mappedUser);
     }
   }, []);
 
@@ -173,7 +147,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       localStorage.removeItem('mockUser');
       return;
     }
-    await supabase.auth.signOut();
+    await firebaseSignOut(auth);
   }, []);
 
   const contextValue = useMemo(

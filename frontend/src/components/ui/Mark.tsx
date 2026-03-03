@@ -16,22 +16,23 @@ export interface MarkProps extends Omit<React.InputHTMLAttributes<HTMLInputEleme
 }
 
 /**
- * Mark - KeralaRage KrSolidarity Checkbox
+ * Mark - Kerala Rage kr-solidarity Checkbox
  *
- * A custom checkbox component using KeralaRage KrSolidarity design tokens with enhanced UX.
- * Features [DEPRECATED_STYLE] shapes with Seed radius, spring animations, and proper state indicators.
+ * A custom checkbox component using Kerala Rage kr-solidarity semantic tokens with enhanced UX.
+ * Features asymmetric Seed radius, spring animations, and proper state indicators.
+ * Archetype: Seed (atomic input primitive)
  *
- * **KeralaRage Design Token Usage:**
- * - Shape: `--radius-seed` (subtle [DEPRECATED_STYLE] corners)
- * - Colors: [DEPRECATED_STYLE] palette (Ink Gold, Solidarity Red, Concrete Grey)
- * - Motion: Viscous-breeze easing for smooth check transition
- * - Typography: Field-note font for labels
+ * **Kerala Rage Design Token Usage:**
+ * - Shape: `--radius-seed` (subtle asymmetric corners)
+ * - Colors: Kerala Rage kr-solidarity semantic palette (inkGold, solidarityRed, concreteGrey, worker-ash)
+ * - Motion: Spring physics cubic-bezier(0.34, 1.56, 0.64, 1) for smooth check transition
+ * - Typography: Work Sans (field-note font for labels)
  *
  * **States:**
- * - Unchecked: Outlined box
- * - Checked: Filled with checkmark (Ink Gold)
+ * - Unchecked: Outlined box with concreteGrey border
+ * - Checked: Filled with checkmark (inkGold background, charcoalBackground icon)
  * - Indeterminate: Filled with dash (for partial selection)
- * - Error: Solidarity Red theme
+ * - Error: solidarityRed theme
  * - Disabled: Reduced opacity
  *
  * @example
@@ -104,12 +105,12 @@ export const Mark = forwardRef<HTMLInputElement, MarkProps>(
         border-2
         ${
           error
-            ? 'border-[var(--color-solidarity-red)]'
+            ? 'border-[var(--sys-color-solidarityRed-base)]'
             : isChecked
-              ? 'border-[var(--color-ink-gold)] bg-[var(--color-ink-gold)]'
-              : 'border-[var(--color-concrete-grey-base)]'
+              ? 'border-[var(--sys-color-inkGold-base)] bg-[var(--sys-color-inkGold-base)]'
+              : 'border-[var(--sys-color-concreteGrey-base)]'
         }
-        ${!disabled && !isChecked ? 'hover:border-[var(--color-concrete-grey)]' : ''}
+        ${!disabled && !isChecked ? 'hover:border-[var(--sys-color-concreteGrey-steps-4)]' : ''}
         transition-all duration-standard var(--ease-viscous-breeze)
         ${className}
       `}
@@ -122,14 +123,14 @@ export const Mark = forwardRef<HTMLInputElement, MarkProps>(
                 <Minus
                   className={`
                 w-3.5 h-3.5
-                ${error ? 'text-on-error' : 'text-[var(--color-asphalt-black)]'}
+                ${error ? 'text-on-error' : 'text-[var(--sys-color-charcoalBackground-base)]'}
               `}
                 />
               ) : (
                 <Check
                   className={`
                 w-3.5 h-3.5
-                ${error ? 'text-on-error' : 'text-[var(--color-asphalt-black)]'}
+                ${error ? 'text-on-error' : 'text-[var(--sys-color-charcoalBackground-base)]'}
               `}
                 />
               )}
@@ -142,7 +143,7 @@ export const Mark = forwardRef<HTMLInputElement, MarkProps>(
           <span
             className={`
           text-sm font-field-note font-medium
-          ${error ? 'text-[var(--color-solidarity-red)]' : 'text-[var(--color-paper-white)]'}
+          ${error ? 'text-[var(--sys-color-solidarityRed-base)]' : 'text-[var(--sys-color-worker-ash-base)]'}
           select-none
         `}
           >
@@ -207,12 +208,12 @@ export const MarkRadio = forwardRef<HTMLInputElement, MarkRadioProps>(
         border-2
         ${
           error
-            ? 'border-[var(--color-solidarity-red)]'
+            ? 'border-[var(--sys-color-solidarityRed-base)]'
             : checked
-              ? 'border-[var(--color-ink-gold)]'
-              : 'border-[var(--color-concrete-grey-base)]'
+              ? 'border-[var(--sys-color-inkGold-base)]'
+              : 'border-[var(--sys-color-concreteGrey-base)]'
         }
-        ${!disabled && !checked ? 'hover:border-[var(--color-concrete-grey)]' : ''}
+        ${!disabled && !checked ? 'hover:border-[var(--sys-color-concreteGrey-steps-4)]' : ''}
         transition-all duration-standard var(--ease-viscous-breeze)
         ${className}
       `}
@@ -228,7 +229,7 @@ export const MarkRadio = forwardRef<HTMLInputElement, MarkRadioProps>(
                 className={`
               w-2.5 h-2.5
              rounded-full
-              ${error ? 'bg-[var(--color-solidarity-red)]' : 'bg-[var(--color-ink-gold)]'}
+              ${error ? 'bg-[var(--sys-color-solidarityRed-base)]' : 'bg-[var(--sys-color-inkGold-base)]'}
               scale-100
             `}
               />
@@ -241,7 +242,7 @@ export const MarkRadio = forwardRef<HTMLInputElement, MarkRadioProps>(
           <span
             className={`
           text-sm font-field-note font-medium
-          ${error ? 'text-[var(--color-solidarity-red)]' : 'text-[var(--color-paper-white)]'}
+          ${error ? 'text-[var(--sys-color-solidarityRed-base)]' : 'text-[var(--sys-color-worker-ash-base)]'}
           select-none
         `}
           >

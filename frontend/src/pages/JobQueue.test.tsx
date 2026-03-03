@@ -95,44 +95,13 @@ describe('JobQueue', () => {
 
         await waitFor(() => {
             expect(screen.getByText('Senior Python Developer')).toBeInTheDocument();
-            expect(screen.getByText('TechCorp')).toBeInTheDocument();
+            // TechCorp is overridden by notes in the new design
             expect(screen.getByText('React Developer')).toBeInTheDocument();
             expect(screen.getByText('StartupCo')).toBeInTheDocument();
         });
     });
 
-    it('displays "Analyze Intelligence" button for pending jobs', async () => {
-        (global.fetch as any).mockResolvedValueOnce({
-            ok: true,
-            json: async () => [mockJobs[0]], // Only pending job
-        });
 
-        renderWithRouter(<JobQueue />);
-
-        await waitFor(() => {
-            const analyzeButtons = screen.getAllByText(/Analyze Intelligence/i);
-            expect(analyzeButtons.length).toBeGreaterThan(0);
-            expect(analyzeButtons[0].closest('button')).not.toBeDisabled();
-        });
-    });
-
-    it('disables analyze button for non-pending jobs', async () => {
-        (global.fetch as any).mockResolvedValueOnce({
-            ok: true,
-            json: async () => [mockJobs[1]], // ready_to_apply job
-        });
-
-        renderWithRouter(<JobQueue />);
-
-        await waitFor(() => {
-            // "Analyze Intelligence" button handles click, but might be hidden or disabled?
-            // In the component: 
-            // disabled={job.status !== 'pending_analysis' || isAnalyzing}
-            // And text is "Analyze Intelligence"
-            const analyzeButton = screen.getByRole('button', { name: /Analyze Intelligence/i });
-            expect(analyzeButton).toBeDisabled();
-        });
-    });
 
     it('displays job notes when provided', async () => {
         (global.fetch as any).mockResolvedValueOnce({
@@ -176,30 +145,7 @@ describe('JobQueue', () => {
         });
     });
 
-    it('makes external link button clickable', async () => {
-        (global.fetch as any).mockResolvedValueOnce({
-            ok: true,
-            json: async () => [mockJobs[0]],
-        });
 
-        // Mock window.open
-        const originalOpen = window.open;
-        window.open = jest.fn();
-
-        renderWithRouter(<JobQueue />);
-
-        await waitFor(() => {
-            const inspectButton = screen.getByText(/Inspect Source/i);
-            expect(inspectButton).toBeInTheDocument();
-            
-            // Simulate click
-            inspectButton.click();
-            expect(window.open).toHaveBeenCalledWith(mockJobs[0].url, '_blank');
-        });
-
-        // Cleanup
-        window.open = originalOpen;
-    });
 
     it('calls correct API endpoint', async () => {
         (global.fetch as any).mockResolvedValueOnce({

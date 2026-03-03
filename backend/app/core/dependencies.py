@@ -10,22 +10,22 @@ import logging
 from fastapi import Depends, Request
 from sqlalchemy.orm import Session
 
-from app.core.auth import get_current_user as supabase_get_current_user
-from app.core.auth import get_current_user_optional as supabase_get_current_user_optional
+from app.core.auth import get_current_user as auth_get_current_user
+from app.core.auth import get_current_user_optional as auth_get_current_user_optional
 from app.core.database import get_db
 from app.models.database import User
 from app.services.cache_store import SQLAlchemyCacheStore
 
 logger = logging.getLogger(__name__)
 
-def get_current_user(user: User = Depends(supabase_get_current_user)) -> User:
+def get_current_user(user: User = Depends(auth_get_current_user)) -> User:
     """
     Dependency to get current authenticated user.
-    Proxies to the Supabase auth implementation in app.core.auth.
+    Proxies to the Firebase auth implementation in app.core.auth.
     """
     return user
 
-def get_current_user_optional(user: User | None = Depends(supabase_get_current_user_optional)) -> User | None:
+def get_current_user_optional(user: User | None = Depends(auth_get_current_user_optional)) -> User | None:
     """
     Optional authentication dependency.
     """

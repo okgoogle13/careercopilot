@@ -52,7 +52,7 @@ export function MetricCard({
     >
       <div className="flex items-center gap-3 mb-3">
         <motion.div
-          className="w-10 h-10 bg-[var(--color-asphalt-black)]-light rounded-seed flex items-center justify-center text-ink-gold"
+          className="w-10 h-10 bg-[var(--color-asphalt-black)]-light rounded-compact flex items-center justify-center text-ink-gold"
           whileHover={{ scale: 1.05 }}
           transition={{ type: 'spring', stiffness: 500, damping: 27 }}
         >

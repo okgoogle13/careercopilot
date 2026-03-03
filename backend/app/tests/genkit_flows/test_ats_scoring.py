@@ -12,7 +12,9 @@ from app.genkit_flows.ats_scoring import AtsResult, ScoreBreakdown, atsScoring
 from app.genkit_flows.extract_job_requirements import JobRequirements
 from app.genkit_flows.extract_resume_entities import ResumeEntities
 from app.genkit_flows.keyword_placer import KeywordPlacementSuggestion
+class TestAtsScoringFlow:
 
+    @pytest.fixture
     def mock_keyword_placement_suggestions(self) -> list[KeywordPlacementSuggestion]:
         """Mock keyword placement suggestions."""
         return [

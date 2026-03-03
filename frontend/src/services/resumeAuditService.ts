@@ -1,9 +1,5 @@
-import { createClient } from '@supabase/supabase-js';
-
-const supabase = createClient(
-  import.meta.env.VITE_SUPABASE_URL as string,
-  import.meta.env.VITE_SUPABASE_ANON_KEY as string
-);
+import { axiosInstance } from '../api/axiosConfig';
+import { auth } from '../config/firebase';
 
 export interface AuditRequest {
   resumeText: string;
@@ -36,24 +32,20 @@ export interface AuditResponse {
 }
 
 export const auditResume = async (request: AuditRequest): Promise<AuditResult> => {
-  const { data, error } = await supabase.functions.invoke<AuditResponse>('resume-audit', {
-    body: request
-  });
+  const response = await axiosInstance.post<AuditResponse>('/resume-audit/evaluate', request);
+  
+  if (!response.data?.success) {
+    throw new Error('Audit failed');
+  }
 
-  if (error) throw new Error(`Audit failed: ${error.message}`);
-  // @ts-ignore - Supabase invoke returns the data property directly or error
-  if (!data?.success) throw new Error(data?.error || 'Unknown error');
-
-  return data.data;
+  return response.data.data;
 };
 
 export const getAuditHistory = async (limit = 10) => {
-  const { data, error } = await supabase
-    .from('resume_audits')
-    .select('*')
-    .order('created_at', { ascending: false })
-    .limit(limit);
-
-  if (error) throw error;
-  return data;
+  // Assuming we have an endpoint for this in the backend
+  const response = await axiosInstance.get('/resume-audit/history', {
+    params: { limit }
+  });
+  
+  return response.data;
 };

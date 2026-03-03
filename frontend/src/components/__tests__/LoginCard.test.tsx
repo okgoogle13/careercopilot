@@ -1,26 +1,25 @@
-import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { LoginCard } from '../LoginCard';
 import React from 'react';
 
 describe('LoginCard', () => {
-  const mockOnLogin = vi.fn();
-  const mockOnRegister = vi.fn();
+  const mockOnLogin = jest.fn();
+  const mockOnRegister = jest.fn();
 
-  it('renders login form with identifier and keychain fields', () => {
+  it('renders login form with email and password fields', () => {
     render(<LoginCard onLogin={mockOnLogin} onRegisterClick={mockOnRegister} />);
-    expect(screen.getByLabelText(/Investigator ID/i)).toBeDefined();
-    expect(screen.getByLabelText(/Access Keychain/i)).toBeDefined();
+    expect(screen.getByText(/Email Address/i)).toBeInTheDocument();
+    expect(screen.getByText(/Password/i)).toBeInTheDocument();
   });
 
-  it('calls onLogin with credentials on submit', async () => {
-    render(<LoginCard onLogin={mockOnLogin} onRegisterClick={mockOnRegister} />);
+  it('calls onLogin with credentials on submit', () => {
+    const { container } = render(<LoginCard onLogin={mockOnLogin} onRegisterClick={mockOnRegister} />);
     
-    // Note: We'd typically use userEvent here, but fireEvent is basic for DOM testing
-    fireEvent.change(screen.getByLabelText(/Investigator ID/i), { target: { value: 'test@example.com' } });
-    fireEvent.change(screen.getByLabelText(/Access Keychain/i), { target: { value: 'password123' } });
+    const inputs = container.querySelectorAll('input');
+    fireEvent.change(inputs[0], { target: { value: 'test@example.com' } });
+    fireEvent.change(inputs[1], { target: { value: 'password123' } });
     
-    fireEvent.click(screen.getByRole('button', { name: /Authenticate/i }));
+    fireEvent.click(screen.getByRole('button', { name: /ENTER ARCHIVE/i }));
     
     expect(mockOnLogin).toHaveBeenCalledWith({
       email: 'test@example.com',
@@ -30,7 +29,7 @@ describe('LoginCard', () => {
 
   it('triggers onRegisterClick when register link is clicked', () => {
     render(<LoginCard onLogin={mockOnLogin} onRegisterClick={mockOnRegister} />);
-    fireEvent.click(screen.getByText(/New Prospect/i));
+    fireEvent.click(screen.getByText(/Create Collective ID/i));
     expect(mockOnRegister).toHaveBeenCalled();
   });
 });

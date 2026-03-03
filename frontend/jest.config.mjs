@@ -35,7 +35,6 @@ export default {
   testPathIgnorePatterns: [
     '<rootDir>/node_modules/',
     '<rootDir>/src/components_OLD/',
-    '<rootDir>/src/features/',
   ],
   collectCoverageFrom: [
     'src/**/*.{js,jsx,ts,tsx}',

@@ -5,6 +5,10 @@ Handles interactions with Google Tasks and Calendar.
 """
 import datetime
 import os
+from google.oauth2 import service_account
+from googleapiclient.discovery import build
+
+SCOPES = [
     "https://www.googleapis.com/auth/calendar",
     "https://www.googleapis.com/auth/tasks",
     "https://www.googleapis.com/auth/documents"

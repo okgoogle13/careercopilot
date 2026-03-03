@@ -1,4 +1,3 @@
-import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { UnifiedColumn } from '../UnifiedColumn';
 import React from 'react';

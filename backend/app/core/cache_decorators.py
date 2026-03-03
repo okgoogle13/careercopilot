@@ -49,6 +49,7 @@ def cached_ai_operation(
                     user_id = kwargs[user_id_param]
                 else:
                     # Try to find user_id in args based on function signature
+                    pass
                 _prepare_cache_input(args, kwargs, cache_key_params, exclude_params)
 
                 # Try to get from cache

@@ -1,4 +1,3 @@
-import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { JobList } from '../JobList';
 import React from 'react';
@@ -10,7 +9,7 @@ describe('JobList', () => {
   ];
 
   it('renders the list of jobs', () => {
-    render(<JobList jobs={jobs} onJobSelect={vi.fn()} />);
+    render(<JobList jobs={jobs} onJobSelect={jest.fn()} />);
     expect(screen.getByText('Lead Engineer')).toBeDefined();
     expect(screen.getByText('Auditor')).toBeDefined();
     expect(screen.getByText('Melbourne')).toBeDefined();
@@ -18,7 +17,7 @@ describe('JobList', () => {
   });
 
   it('shows empty state when no jobs are provided', () => {
-    render(<JobList jobs={[]} onJobSelect={vi.fn()} />);
+    render(<JobList jobs={[]} onJobSelect={jest.fn()} />);
     expect(screen.getByText(/NO OPPORTUNITIES FOUND/i)).toBeDefined();
   });
 });
