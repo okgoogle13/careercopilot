@@ -25,10 +25,10 @@ jobs:
     name: Deploy to ${{ inputs.environment }}
     runs-on: ubuntu-latest
     environment: ${{ inputs.environment }}
-    timeout-minutes: 20
+    timeout-minutes: 30
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4 # v4.1.7
+        uses: actions/checkout@v4
 
       - name: Set environment variables
         id: env-vars
@@ -36,23 +36,18 @@ jobs:
           if [[ "${{ inputs.environment }}" == "staging" ]]; then
             echo "GCP_PROJECT_ID=careercopilot-staging" >> $GITHUB_ENV
             echo "GCP_REPOSITORY=careercopilot-repo" >> $GITHUB_ENV
-            echo "FIREBASE_PROJECT=staging" >> $GITHUB_ENV
             echo "WIF_PROVIDER=${{ secrets.STAGING_GCP_WORKLOAD_IDENTITY_PROVIDER }}" >> $GITHUB_ENV
             echo "SERVICE_ACCOUNT=${{ secrets.STAGING_GCP_SERVICE_ACCOUNT }}" >> $GITHUB_ENV
+            echo "VERCEL_ENV=preview" >> $GITHUB_ENV
           elif [[ "${{ inputs.environment }}" == "production" ]]; then
             echo "GCP_PROJECT_ID=careercopilot-468811" >> $GITHUB_ENV
             echo "GCP_REPOSITORY=careercopilot" >> $GITHUB_ENV
-            echo "FIREBASE_PROJECT=production" >> $GITHUB_ENV
             echo "WIF_PROVIDER=${{ secrets.PROD_GCP_WORKLOAD_IDENTITY_PROVIDER }}" >> $GITHUB_ENV
             echo "SERVICE_ACCOUNT=${{ secrets.PROD_GCP_SERVICE_ACCOUNT }}" >> $GITHUB_ENV
+            echo "VERCEL_ENV=production" >> $GITHUB_ENV
           fi
 
-      - name: Download frontend artifact
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          echo "Downloading frontend artifact from CI run ${{ inputs.ci-run-id }}"
-          gh run download ${{ inputs.ci-run-id }} --name frontend-dist --dir frontend/dist || exit 1
+      # ── Frontend: Deploy to Vercel ───────────────────────────────────────────
 
       - name: Enable Corepack
         run: corepack enable
@@ -64,71 +59,88 @@ jobs:
           cache: 'yarn'
           cache-dependency-path: yarn.lock
 
-      - name: Build frontend if artifact unavailable
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Install Vercel CLI
+        run: npm install -g vercel@latest
+
+      - name: Pull Vercel environment information
+        run: vercel pull --yes --environment=${{ env.VERCEL_ENV }} --token=${{ secrets.VERCEL_TOKEN }}
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+      - name: Build frontend with Vercel
+        run: vercel build ${{ inputs.environment == 'production' && '--prod' || '' }} --token=${{ secrets.VERCEL_TOKEN }}
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+      - name: Deploy frontend to Vercel
+        id: deploy-frontend
         run: |
-          if [ ! -d "frontend/dist" ] || [ -z "$(ls -A frontend/dist)" ]; then
-            echo "Frontend dist is empty, building frontend..."
-            yarn install --immutable
-            yarn workspace careercopilot-frontend build
+          if [[ "${{ inputs.environment }}" == "production" ]]; then
+            DEPLOY_URL=$(vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }})
           else
-            echo "Frontend artifact found, skipping build"
+            DEPLOY_URL=$(vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }})
           fi
+          echo "deploy_url=${DEPLOY_URL}" >> $GITHUB_OUTPUT
+          echo "🚀 Frontend deployed to: ${DEPLOY_URL}"
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+      # ── Backend: Build Docker image and deploy to Cloud Run ──────────────────
 
       - name: Authenticate to Google Cloud
         id: auth
-        uses: google-github-actions/auth@v2 # v2.1.3
+        uses: google-github-actions/auth@v2
         with:
           workload_identity_provider: ${{ env.WIF_PROVIDER }}
           service_account: ${{ env.SERVICE_ACCOUNT }}
           create_credentials_file: true
 
-      - name: Install Firebase CLI
-        run: npm install -g firebase-tools
-
-      - name: Deploy Frontend to Firebase Hosting
-        run: |
-          echo "Deploying to Firebase Hosting (${{ env.FIREBASE_PROJECT }})"
-          echo "Project ID: ${{ env.GCP_PROJECT_ID }}"
-          echo "Using WIF credentials from: $GOOGLE_APPLICATION_CREDENTIALS"
-
-          # Verify frontend build exists
-          if [ ! -d "frontend/dist" ] || [ -z "$(ls -A frontend/dist)" ]; then
-            echo "::error::Frontend dist directory is empty or doesn't exist"
-            exit 1
-          fi
-
-          # Deploy using Firebase CLI with WIF credentials
-          firebase deploy --only hosting --project ${{ env.FIREBASE_PROJECT }} --non-interactive
-
       - name: Setup Google Cloud SDK
-        uses: google-github-actions/setup-gcloud@v2 # v2.1.0
+        uses: google-github-actions/setup-gcloud@v2
 
-      - name: Verify Backend Image Tag Exists
-        id: verify-image
+      - name: Configure Docker for Artifact Registry
+        run: gcloud auth configure-docker ${{ env.GCP_REGISTRY }} --quiet
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and push backend image
+        id: build-image
         run: |
           SHORT_SHA="${{ inputs.commit-sha }}"
-          IMAGE_TAG_SHA="${SHORT_SHA:0:7}"
-          IMAGE_PATH="${{ env.GCP_REGISTRY }}/${{ env.GCP_PROJECT_ID }}/${{ env.GCP_REPOSITORY }}/${{ env.GCP_IMAGE_NAME }}"
-          echo "Checking for image tag: $IMAGE_TAG_SHA in $IMAGE_PATH"
-          if gcloud artifacts docker tags list "$IMAGE_PATH" --format="value(tag)" | grep -q "^${IMAGE_TAG_SHA}$"; then
-            echo "Image tag $IMAGE_TAG_SHA verified."
-            echo "image_tag=${IMAGE_TAG_SHA}" >> $GITHUB_OUTPUT
-          else
-            echo "::error::Image tag $IMAGE_TAG_SHA not found."
-            exit 1
-          fi
+          IMAGE_TAG="${SHORT_SHA:0:7}"
+          IMAGE_BASE="${{ env.GCP_REGISTRY }}/${{ env.GCP_PROJECT_ID }}/${{ env.GCP_REPOSITORY }}/${{ env.GCP_IMAGE_NAME }}"
+          CACHE_IMAGE="${IMAGE_BASE}:buildcache"
 
-      - name: Deploy Backend to Cloud Run
+          docker buildx build \
+            --platform linux/amd64 \
+            --target production \
+            --cache-from type=registry,ref=${CACHE_IMAGE} \
+            --cache-to type=registry,ref=${CACHE_IMAGE},mode=max \
+            --tag "${IMAGE_BASE}:${IMAGE_TAG}" \
+            --tag "${IMAGE_BASE}:latest" \
+            --push \
+            ./backend
+
+          echo "image_tag=${IMAGE_TAG}" >> $GITHUB_OUTPUT
+          echo "image_uri=${IMAGE_BASE}:${IMAGE_TAG}" >> $GITHUB_OUTPUT
+
+      - name: Deploy backend to Cloud Run
         id: deploy-backend
-        uses: google-github-actions/deploy-cloudrun@v2 # v2.1.0
+        uses: google-github-actions/deploy-cloudrun@v2
         with:
           service: backend
-          image: ${{ env.GCP_REGISTRY }}/${{ env.GCP_PROJECT_ID }}/${{ env.GCP_REPOSITORY }}/${{ env.GCP_IMAGE_NAME }}:${{ steps.verify-image.outputs.image_tag }}
+          image: ${{ steps.build-image.outputs.image_uri }}
           region: ${{ env.GCP_REGION }}
           project_id: ${{ env.GCP_PROJECT_ID }}
 
       - name: Health check for backend
-        id: health-check
         run: |
           SERVICE_URL="${{ steps.deploy-backend.outputs.url }}"
           echo "Checking health of backend at $SERVICE_URL/health"
@@ -137,13 +149,21 @@ jobs:
           for i in $(seq 1 $MAX_RETRIES); do
             HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$SERVICE_URL/health" || echo "000")
             if [ "$HTTP_STATUS" = "200" ]; then
-              echo "Backend is healthy"
+              echo "✅ Backend is healthy"
               exit 0
             fi
-            if [ $i -lt $MAX_RETRIES ]; then
-              echo "Backend not ready yet (attempt $i/$MAX_RETRIES), HTTP status: $HTTP_STATUS. Retrying in $RETRY_DELAY seconds..."
-              sleep $RETRY_DELAY
-            fi
+            echo "Backend not ready (attempt $i/$MAX_RETRIES), status: $HTTP_STATUS. Retrying..."
+            sleep $RETRY_DELAY
           done
-          echo "Backend health check failed after $MAX_RETRIES attempts"
+          echo "::error::Backend health check failed after $MAX_RETRIES attempts"
           exit 1
+
+      - name: Deployment summary
+        run: |
+          echo "## 🚀 Deployment to ${{ inputs.environment }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Component | Status | URL |" >> $GITHUB_STEP_SUMMARY
+          echo "|-----------|--------|-----|" >> $GITHUB_STEP_SUMMARY
+          echo "| Frontend (Vercel) | ✅ Deployed | ${{ steps.deploy-frontend.outputs.deploy_url }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Backend (Cloud Run) | ✅ Deployed | ${{ steps.deploy-backend.outputs.url }} |" >> $GITHUB_STEP_SUMMARY
+

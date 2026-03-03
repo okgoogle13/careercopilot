@@ -9,8 +9,8 @@ on:
   push:
     branches: [main, develop]
   schedule:
-    # Run every 6 hours
-    - cron: '0 */6 * * *'
+    # Run weekly on Monday at 3am UTC
+    - cron: '0 3 * * 1'
   workflow_dispatch:
 
 permissions:
