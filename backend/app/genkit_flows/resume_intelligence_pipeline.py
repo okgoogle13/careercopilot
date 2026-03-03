@@ -35,59 +35,14 @@ class ModelConfigProtocol:
         ...
 
 
-# Type for genkit flow
-def _noop_flow(*args: Any, **kwargs: Any) -> Callable[[Callable[P, R]], Callable[P, R]]:
-    """No-op flow decorator for when genkit is not available."""
-    def _decorator(fn: Callable[P, R]) -> Callable[P, R]:
-        return fn
-    return _decorator
-
-
-
-
-# Type stubs for genkit if not available
-try:
-    import genkit
-    from genkit import ai
-    from genkit.plugins import google_genai
-    GENKIT_AVAILABLE = True
-except ImportError:
-    GENKIT_AVAILABLE = False
-    import logging
-    logger = logging.getLogger(__name__)
-    logger.info(f"Genkit available: {GENKIT_AVAILABLE}")
-    genkit = None  # type: ignore[assignment]
-    ai = None  # type: ignore[assignment]
-    google_genai = None  # type: ignore[assignment]
-
-# Initialize genkit flow decorator
-genkit_flow: Any = getattr(genkit, "flow", _noop_flow) if GENKIT_AVAILABLE else _noop_flow
+from app.genkit_flows.flow_decorator import async_genkit_flow
 
 # Load environment variables
 load_dotenv()
 
 # Initialize genkit using centralized initialization
-from app.core.genkit_init import init_genkit
+from app.core.genkit_init import get_model, init_genkit
 init_genkit()
-
-
-# Get model configuration (lazy loading - only when needed)
-# This allows the backend to start even if AI config isn't fully set up
-_gemini_model_cache: Optional[ModelConfigProtocol] = None
-
-def get_gemini_model() -> ModelConfigProtocol:
-    """Get Gemini model configuration, loading it only when needed."""
-    global _gemini_model_cache
-    if _gemini_model_cache is None:
-        try:
-            model_config = get_ai_config().get_model_config("gemini-3.0-flash")
-            if model_config is None:
-                raise RuntimeError("Failed to load model configuration: gemini-3.0-flash not found")
-            _gemini_model_cache = cast(ModelConfigProtocol, model_config)
-        except Exception as e:
-            # Re-raise with context - this will only happen when the function is called
-            raise RuntimeError(f"Failed to load Gemini model configuration: {e}")
-    return _gemini_model_cache
 
 
 # Core Data Models
@@ -192,9 +147,9 @@ class ResumeIntelligenceReport(BaseModel):
     role_recommendations: List[str] = Field(description="Suitable roles based on profile")
 
 
-@genkit_flow  # type: ignore[misc]
+@async_genkit_flow(output_schema=ResumeAnalysisResult)
 @with_ai_error_handling()
-def analyze_resume_comprehensive(
+async def analyze_resume_comprehensive(
     resume_content: str, target_industry: Optional[str] = None
 ) -> ResumeAnalysisResult:
     """
@@ -219,7 +174,11 @@ def analyze_resume_comprehensive(
             target_industry=target_industry or "General analysis",
         )
 
-        response = get_gemini_model().generate(
+        model = get_model()
+        if not model:
+            raise RuntimeError("Genkit model not available")
+
+        response = await model.generate(
             prompt,
             config={
                 "response_mime_type": "application/json",
@@ -239,9 +198,9 @@ def analyze_resume_comprehensive(
         )
 
 
-@genkit_flow  # type: ignore[misc]
+@async_genkit_flow(output_schema=CareerProgressionAnalysis)
 @with_ai_error_handling()
-def analyze_career_progression(
+async def analyze_career_progression(
     resume_content: str, career_goals: Optional[str] = None
 ) -> CareerProgressionAnalysis:
     """
@@ -266,7 +225,11 @@ def analyze_career_progression(
             ),
         )
 
-        response = get_gemini_model().generate(
+        model = get_model()
+        if not model:
+            raise RuntimeError("Genkit model not available")
+
+        response = await model.generate(
             prompt,
             config={
                 "response_mime_type": "application/json",
@@ -285,7 +248,7 @@ def analyze_career_progression(
         )
 
 
-@genkit_flow  # type: ignore[misc]
+@async_genkit_flow(output_schema=ResumeIntelligenceReport)
 @with_ai_error_handling()
 async def generate_resume_intelligence_report(
     resume_content: str,
@@ -362,15 +325,15 @@ measurable actions for career advancement and market positioning.
 Respond with valid JSON matching the ResumeIntelligenceReport schema.
 """
 
-        response = get_gemini_model().generate(
+        model = get_model()
+        if not model:
+            raise RuntimeError("Genkit model not available")
+
+        response = await model.generate(
             prompt=prompt,
             config={"response_mime_type": "application/json"},
             output_schema=ResumeIntelligenceReport,
         )
-
-        # Ensure the response has the expected output method
-        if not hasattr(response, 'output') or not callable(response.output):
-            raise RuntimeError("Invalid response from model: missing output method")
 
         result = response.output()
         if not isinstance(result, ResumeIntelligenceReport):
@@ -393,7 +356,7 @@ Respond with valid JSON matching the ResumeIntelligenceReport schema.
 
 # Utility function for batch resume analysis
 @with_ai_error_handling()
-def analyze_resume_batch(
+async def analyze_resume_batch(
     resume_contents: List[str], target_industry: Optional[str] = None
 ) -> List[Dict[str, Any]]:
     """
@@ -409,13 +372,18 @@ def analyze_resume_batch(
     if len(resume_contents) > 5:
         raise InputValidationError("Batch analysis limited to 5 resumes per request")
 
+    tasks = []
+    for resume_content in resume_contents:
+        tasks.append(analyze_resume_comprehensive(resume_content, target_industry))
+    
+    responses = await asyncio.gather(*tasks, return_exceptions=True)
+    
     results = []
-    for i, resume_content in enumerate(resume_contents):
-        try:
-            analysis = analyze_resume_comprehensive(resume_content, target_industry)
-            results.append({"resume_index": i, "analysis": analysis.dict(), "status": "success"})
-        except Exception as e:
-            results.append({"resume_index": i, "error": str(e), "status": "failed"})
+    for i, response in enumerate(responses):
+        if isinstance(response, Exception):
+            results.append({"resume_index": i, "error": str(response), "status": "failed"})
+        else:
+            results.append({"resume_index": i, "analysis": response.dict(), "status": "success"})
 
     return results
 
@@ -434,9 +402,9 @@ class SkillsGapAnalysis(BaseModel):
     )
 
 
-@genkit_flow  # type: ignore[misc]
+@async_genkit_flow(output_schema=SkillsGapAnalysis)
 @with_ai_error_handling()
-def analyze_skills_gap_for_transition(
+async def analyze_skills_gap_for_transition(
     resume_content: str,
     target_role_description: str,
     current_industry: str,
@@ -477,7 +445,11 @@ Provide specific, actionable guidance for successful career transition.
 Respond with valid JSON matching the SkillsGapAnalysis schema.
 """
 
-        response = get_gemini_model().generate(
+        model = get_model()
+        if not model:
+            raise RuntimeError("Genkit model not available")
+
+        response = await model.generate(
             prompt,
             config={
                 "response_mime_type": "application/json",

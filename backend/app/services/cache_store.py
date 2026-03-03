@@ -32,7 +32,12 @@ class SQLAlchemyCacheStore:
                 return None
 
             # Check TTL
-            if cache_entry.expires_at < datetime.now(timezone.utc):
+            now = datetime.now(timezone.utc).replace(tzinfo=None)
+            expires_at = cache_entry.expires_at
+            if expires_at.tzinfo is not None:
+                expires_at = expires_at.replace(tzinfo=None)
+
+            if expires_at < now:
                 # Delete expired entry
                 self.db.delete(cache_entry)
                 self.db.commit()
@@ -67,7 +72,7 @@ class SQLAlchemyCacheStore:
         Store a value in the cache.
         """
         try:
-            expires_at = datetime.now(timezone.utc) + timedelta(seconds=ttl_seconds)
+            expires_at = (datetime.now(timezone.utc) + timedelta(seconds=ttl_seconds)).replace(tzinfo=None)
 
             # Serialize value
             if not isinstance(value, str):
@@ -141,7 +146,7 @@ class SQLAlchemyCacheStore:
         Remove all expired cache entries using bulk delete for performance.
         """
         try:
-            now = datetime.now(timezone.utc)
+            now = datetime.now(timezone.utc).replace(tzinfo=None)
             # Use bulk delete instead of iterating - fixes N+1 query problem
             count = self.db.query(Cache).filter(Cache.expires_at < now).delete()
             self.db.commit()

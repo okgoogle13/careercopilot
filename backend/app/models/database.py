@@ -98,6 +98,13 @@ class User(Base):
     salary_range: Mapped[dict[str, int]] = mapped_column(
         JSON, default=dict, nullable=False, comment="Expected salary range (min, max)"
     )
+    user_metadata: Mapped[dict[str, Any]] = mapped_column(
+        JSON,
+        name="metadata",
+        default=dict,
+        nullable=False,
+        comment="Additional user metadata (e.g., career_profile, career_database)",
+    )
 
     # Relationships
     jobs: Mapped[list["Job"]] = relationship(
@@ -111,9 +118,6 @@ class User(Base):
     )
     agent_sessions: Mapped[list["AgentSession"]] = relationship(
         "AgentSession", back_populates="user", cascade="all, delete-orphan"
-    )
-    cache_entries: Mapped[list["Cache"]] = relationship(
-        "Cache", back_populates="user", cascade="all, delete-orphan", lazy="selectin"
     )
 
     def __repr__(self) -> str:
@@ -718,7 +722,7 @@ class MarketAnalysis(Base):
 
     # Data freshness
     expires_at: Mapped[datetime] = mapped_column(
-        DateTime, nullable=False, comment="When this analysis should be considered stale"
+        DateTime(timezone=True), nullable=False, comment="When this analysis should be considered stale"
     )
     source_count: Mapped[int] = mapped_column(
         Integer, default=0, nullable=False, comment="Number of data sources used for this analysis"
@@ -753,13 +757,13 @@ class Cache(Base):
         comment="Type of operation being cached (e.g., 'job_search', 'resume_analysis')",
     )
     created_at: Mapped[datetime] = mapped_column(
-        DateTime,
+        DateTime(timezone=True),
         default=lambda: datetime.now(timezone.utc),
         nullable=False,
         comment="When this cache entry was created",
     )
     expires_at: Mapped[datetime] = mapped_column(
-        DateTime,
+        DateTime(timezone=True),
         nullable=False,
         index=True,
         comment="When this cache entry should expire and be considered stale",
@@ -775,11 +779,9 @@ class Cache(Base):
     )
     user_id: Mapped[str | None] = mapped_column(
         String(36),
-        ForeignKey("users.id", ondelete="CASCADE"),
         nullable=True,
         index=True,
-        comment="User who owns this cache entry, if user-specific",
+        comment="User ID associated with this cache entry",
     )
 
     # Relationship
-    user: Mapped[Optional["User"]] = relationship("User", back_populates="cache_entries")

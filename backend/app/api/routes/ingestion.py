@@ -13,6 +13,9 @@ from app.models import User
 from app.schemas.career_master import CareerDatabase
 from app.services.user_profile_service import user_profile_service
 
+from app.core.database import get_db
+from sqlalchemy.orm import Session
+
 logger = logging.getLogger(__name__)
 
 router = APIRouter()
@@ -20,7 +23,8 @@ router = APIRouter()
 @router.post("/ingest", response_model=CareerDatabase, status_code=status.HTTP_200_OK)
 async def ingest_career_documents(
     files: list[UploadFile] = File(...),
-    current_user: User = Depends(get_current_user)
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
 ):
     """
     Upload career documents (PDF, DOCX, TXT) for AI analysis.
@@ -64,10 +68,11 @@ async def ingest_career_documents(
         # Persist to Firestore (optional - user's master career profile)
         try:
             await user_profile_service.update_user_profile(
-                user_id=current_user.uid,
+                db=db,
+                user_id=current_user.id,
                 update_data={"career_database": career_db.model_dump(by_alias=True)}
             )
-            logger.info(f"Saved career database for user {current_user.uid}")
+            logger.info(f"Saved career database for user {current_user.id}")
         except Exception as e:
             logger.warning(f"Failed to persist to Firestore: {e}. Continuing with response.")
 

@@ -14,6 +14,7 @@ from app.core.personal_cache import get_ai_cache
 
 
 @pytest.fixture(autouse=True)
+@pytest.mark.asyncio
 async def clear_cache():
     """Clear the cache before each test."""
     cache = get_ai_cache()
@@ -109,13 +110,26 @@ class TestAICache:
     """Test the main AI cache functionality"""
 
     @pytest.fixture
-    async def cache(self):
-        cache = get_ai_cache()
-        await cache.clear_all()
-        return cache
+    def ai_cache(self):
+        import asyncio
+        cache_obj = get_ai_cache()
+        # Ensure we clean it up synchronously
+        try:
+            loop = asyncio.get_event_loop()
+        except RuntimeError:
+            loop = asyncio.new_event_loop()
+            asyncio.set_event_loop(loop)
+            
+        if loop.is_running():
+            # Special handling for already running loop (like in some pytest-asyncio modes)
+            # but usually, we can just call it in an async test
+            pass
+        else:
+            loop.run_until_complete(cache_obj.clear_all())
+        return cache_obj
 
     @pytest.mark.asyncio
-    async def test_cache_miss_and_set(self, cache):
+    async def test_cache_miss_and_set(self, ai_cache):
         """Test basic cache get/set operations"""
         user_id = "user_123"
         operation_type = "resume_analysis"
@@ -135,7 +149,7 @@ class TestAICache:
             assert cached_result == test_result
 
     @pytest.mark.asyncio
-    async def test_cache_key_consistency(self, cache):
+    async def test_cache_key_consistency(self, ai_cache):
         """Test that cache keys are consistent and unique"""
         user_id = "user_456"
         operation_type = "job_analysis"
@@ -157,7 +171,7 @@ class TestAICache:
             assert key3 != key1, "Different inputs should generate different cache keys"
 
     @pytest.mark.asyncio
-    async def test_cache_ttl(self, cache):
+    async def test_cache_ttl(self, ai_cache):
         """Test that cache respects TTL"""
         user_id = "user_ttl"
         operation_type = "test_ttl"
@@ -180,9 +194,10 @@ class TestAICache:
             assert ctx.cached is False
 
     @pytest.mark.asyncio
-    async def test_user_cache_invalidation(self, cache):
+    async def test_user_cache_invalidation(self, ai_cache):
         """Test that user cache invalidation works correctly"""
         user_id = "user_789"
+        cache = ai_cache
 
         # Set multiple cache entries for user using CacheContext
         operations = [

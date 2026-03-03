@@ -25,6 +25,8 @@ class MockDB:
             obj.status = "draft"
         if not getattr(obj, "source", None):
             obj.source = "manual"
+        if not getattr(obj, "application_metadata", None):
+            obj.application_metadata = {}
 
     def commit(self, *args, **kwargs): pass
     def refresh(self, *args, **kwargs): pass
@@ -42,6 +44,7 @@ class MockDB:
             job_description="Standard description that meets the 50 char minimum length requirement." * 2,
             status="draft",
             source="manual",
+            application_metadata={},
             created_at=datetime.now(),
             updated_at=datetime.now()
         )

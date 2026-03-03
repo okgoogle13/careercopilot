@@ -12,6 +12,7 @@ from app.genkit_flows.ats_scoring import AtsResult, ScoreBreakdown, atsScoring
 from app.genkit_flows.extract_job_requirements import JobRequirements
 from app.genkit_flows.extract_resume_entities import ResumeEntities
 from app.genkit_flows.keyword_placer import KeywordPlacementSuggestion
+from app.core.enhanced_ai_error_handling import AIOperationResult
 class TestAtsScoringFlow:
 
     @pytest.fixture
@@ -51,11 +52,9 @@ class TestAtsScoringFlow:
                         "app.genkit_flows.ats_scoring.enhanced_ai_handler"
                     ) as mock_ai_handler:
                         # Configure mock returns for supporting flows
-                        mock_extract_job.run = AsyncMock(return_value=mock_job_requirements)
-                        mock_extract_resume.run = AsyncMock(return_value=mock_resume_entities)
-                        mock_keyword_placement.run = AsyncMock(
-                            return_value=mock_keyword_placement_suggestions
-                        )
+                        mock_extract_job.return_value = mock_job_requirements
+                        mock_extract_resume.return_value = mock_resume_entities
+                        mock_keyword_placement.return_value = mock_keyword_placement_suggestions
 
                         # Mock the enhanced AI handler to return AIOperationResult objects
                         mock_ai_handler.execute_ai_operation = AsyncMock()
