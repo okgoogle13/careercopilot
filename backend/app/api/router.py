@@ -12,7 +12,6 @@ from .endpoints import (
     analysis,
     applications,
     auth,
-    chrome_extension,
     config,
     documents,
     genkit,
@@ -34,7 +33,6 @@ routers = [
     # (ingestion.router, "/ingestion", "Smart Ingestion"),
     (applications.router, "/applications", "Applications"),
     (opportunities.router, "/opportunities", "Opportunities"),
-    (chrome_extension.router, "/chrome-extension", "Chrome Extension"),
     (genkit.router, "/genkit", "Genkit AI"),
 ]
 
