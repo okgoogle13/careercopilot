@@ -23,6 +23,41 @@ from app.core.ai_client import get_ai_client
 from app.core.cache_decorators import cached_ai_operation
 from app.core.database import get_db_session
 from app.models.database import AgentSession
+
+logger = logging.getLogger(__name__)
+
+
+class AgentStatus(Enum):
+    """Agent execution status"""
+    PENDING = "pending"
+    RUNNING = "running"
+    COMPLETED = "completed"
+    FAILED = "failed"
+
+
+class AgentPriority(Enum):
+    """Agent execution priority"""
+    LOW = "low"
+    NORMAL = "normal"
+    HIGH = "high"
+    CRITICAL = "critical"
+
+
+class BaseAgent:
+    """Base agent class for orchestrator with execution tracking"""
+
+    def __init__(self, agent_id: str, name: str, description: str, dependencies: list[str] | None = None):
+        self.agent_id = agent_id
+        self.name = name
+        self.description = description
+        self.dependencies = dependencies or []
+        self.status = AgentStatus.PENDING
+        self.priority = AgentPriority.NORMAL
+        self.started_at = None
+        self.completed_at = None
+        self.results = None
+        self.error_message = None
+
     async def execute(self, context: dict[str, Any]) -> dict[str, Any]:
         """Execute the agent's main task"""
         self.status = AgentStatus.RUNNING
