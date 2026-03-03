@@ -1,12 +1,6 @@
 name: Supabase Database Checks
 
 on:
-  pull_request:
-    paths:
-      - 'supabase/**'
-      - 'backend/app/core/supabase.py'
-  push:
-    branches: [main, develop]
   workflow_dispatch:
 
 permissions:
@@ -20,8 +14,6 @@ jobs:
   schema-drift:
     name: Detect Schema Drift
     runs-on: ubuntu-latest
-    # Skip if supabase directory doesn't exist
-    if: github.event_name == 'workflow_dispatch'
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -88,7 +80,7 @@ jobs:
           retention-days: 7
 
       - name: Comment on PR if drift detected
-        if: steps.drift.outputs.drift == 'true' && github.event_name == 'pull_request'
+        if: steps.drift.outputs.drift == 'true'
         uses: actions/github-script@v7
         with:
           script: |
@@ -123,8 +115,6 @@ jobs:
   migration-safety:
     name: Test Migration Safety
     runs-on: ubuntu-latest
-    # Skip if supabase directory doesn't exist
-    if: github.event_name == 'workflow_dispatch'
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -184,8 +174,6 @@ jobs:
   rls-policy-tests:
     name: Test Row Level Security Policies
     runs-on: ubuntu-latest
-    # Skip if supabase directory doesn't exist
-    if: github.event_name == 'workflow_dispatch'
     steps:
       - name: Checkout
         uses: actions/checkout@v4
