@@ -20,6 +20,79 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ---
 
+## Task Delegation Strategy (Token Conservation) ⚡
+
+**RULE: Default to delegation via polling agent, NOT local execution.**
+
+The CareerCopilot project uses an autonomous task queue system to conserve Claude Code tokens. **Before writing code locally, check if the task should be delegated to Gemini.**
+
+### Delegate to Gemini (via `/tmp/kerala-rage-task-queue.json`)
+
+**Heavy lifting tasks** — Always delegate these:
+- ✅ Test generation (pytest, Jest, Playwright)
+- ✅ Security analysis and fix application
+- ✅ Code refactoring and cleanup
+- ✅ Codebase analysis (coverage gaps, complexity, API mapping)
+- ✅ Documentation generation
+- ✅ Report generation (deployment readiness, etc.)
+
+**Decision checklist:**
+- Does this involve generating >50 lines of code? → Delegate
+- Will this consume >15K tokens? → Consider delegation
+- Can this run autonomously without human review? → Delegate
+- Is this test/security/analysis work? → Delegate
+
+### Keep in Claude Code (Local Execution)
+
+**Human judgment tasks** — Keep these local:
+- 🔍 Code review and approval
+- 🐛 Bug fixes with architectural decisions
+- 🔗 Integration and deployment work
+- 🧪 Manual testing and validation
+- 📝 Git operations and commits
+
+### How to Delegate
+
+1. **Create a task in the queue** (`/tmp/kerala-rage-task-queue.json`):
+   ```json
+   {
+     "task_id": "test-generation-batch-1",
+     "assigned_to": "gemini",
+     "status": "pending",
+     "priority": "high",
+     "inputs": {
+       "task_type": "test_generation",
+       "description": "Generate tests for X",
+       "requirements": ["..."],
+       "reference_files": ["..."],
+       "output_path": "/Users/okgoogle13/Projects/careercopilot/.claude/reports/output.json"
+     }
+   }
+   ```
+
+2. **Polling agent auto-executes:**
+   ```bash
+   ./scripts/task-poller-control.sh status  # Check progress
+   ./scripts/task-poller-control.sh logs     # Watch execution
+   ./scripts/task-poller-control.sh pending  # See next tasks
+   ```
+
+3. **Validate outputs** in `/Users/okgoogle13/Projects/careercopilot/.claude/reports/`
+
+### Token Budget Targets
+- **Claude Code**: Max 150K per sprint (75% of 200K budget)
+- **Gemini (delegated)**: Min 200K+ (unlimited via delegation)
+- **Target ratio**: 70% Gemini / 30% Claude Code
+
+### Red Flags (Indicates Token Waste)
+- ❌ Writing 50+ lines of test code locally
+- ❌ Generating security/coverage analysis in Claude Code
+- ❌ Manual code generation that could be templated
+- ❌ Using >50K tokens on a single task type
+- ❌ Not checking if task is in delegation list
+
+---
+
 ## Workspace Structure
 
 ```
