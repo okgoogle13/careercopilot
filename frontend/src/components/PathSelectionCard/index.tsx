@@ -37,7 +37,7 @@ export const PathSelectionCard: React.FC<PathSelectionCardProps> = ({
       whileTap={{ scale: 0.95 }}
       onClick={onSelect}
       className={cn(
-        "relative w-[320px] p-8 bg-charcoal-100 border-2 transition-all",
+        "relative w-full p-8 bg-charcoal-100 border-2 transition-all flex flex-col min-h-[400px]",
         "rounded-stone shadow-viscous cursor-pointer overflow-hidden",
         isSelected ? "border-ink-gold ring-4 ring-ink-gold/20" : "border-blueprint-grey/20"
       )}
@@ -47,9 +47,9 @@ export const PathSelectionCard: React.FC<PathSelectionCardProps> = ({
       {/* Blueprint Grid Background */}
       <div className="absolute inset-0 opacity-[0.08] pointer-events-none bg-[url('/assets/blueprint-grid.svg')] z-0" />
 
-      <div className="relative z-10 flex flex-col gap-12 h-full">
+      <div className="relative z-10 flex flex-col gap-8 h-full">
         <h2 className={cn(
-          "text-[72px] leading-[0.85] font-solidarity-900 uppercase tracking-tighter",
+          "text-4xl xl:text-5xl leading-[0.85] font-solidarity-900 uppercase tracking-tighter",
           isSelected ? "text-ink-gold" : "text-signal-green transition-colors"
         )}>
           {title}

@@ -67,3 +67,71 @@ export const Disabled: Story = {
     children: 'Disabled Button',
   },
 };
+
+export const SmallSize: Story = {
+  args: {
+    variant: 'primary',
+    size: 'sm',
+    children: 'Small Button',
+  },
+};
+
+export const LargeSize: Story = {
+  args: {
+    variant: 'primary',
+    size: 'lg',
+    children: 'Large Button',
+  },
+};
+
+export const WithStartIcon: Story = {
+  args: {
+    variant: 'primary',
+    size: 'md',
+    startIcon: <span>→</span>,
+    children: 'With Start Icon',
+  },
+};
+
+export const WithEndIcon: Story = {
+  args: {
+    variant: 'primary',
+    size: 'md',
+    endIcon: <span>←</span>,
+    children: 'With End Icon',
+  },
+};
+
+export const SecondaryLarge: Story = {
+  args: {
+    variant: 'secondary',
+    size: 'lg',
+    children: 'Secondary Large',
+  },
+};
+
+export const TertiarySmall: Story = {
+  args: {
+    variant: 'tertiary',
+    size: 'sm',
+    children: 'Tertiary Small',
+  },
+};
+
+export const LoadingSecondary: Story = {
+  args: {
+    variant: 'secondary',
+    size: 'md',
+    loading: true,
+    children: 'Loading Secondary',
+  },
+};
+
+export const DisabledTertiary: Story = {
+  args: {
+    variant: 'tertiary',
+    size: 'md',
+    disabled: true,
+    children: 'Disabled Tertiary',
+  },
+};
