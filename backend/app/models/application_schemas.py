@@ -22,6 +22,7 @@ class ApplicationStatus(str, Enum):
 
 
 class Contact(BaseModel):
+    model_config = {"populate_by_name": True, "from_attributes": True}
     name: str
     email: str | None = None
     phone: str | None = None
@@ -30,6 +31,7 @@ class Contact(BaseModel):
 
 
 class InterviewSchedule(BaseModel):
+    model_config = {"populate_by_name": True, "from_attributes": True}
     interview_date: datetime = Field(..., alias="interviewDate")
     interview_type: Literal["phone", "video", "onsite", "take-home"] = Field(..., alias="interviewType")
     interviewer_names: list[str] = Field(default_factory=list, alias="interviewerNames")
@@ -43,6 +45,7 @@ class SalaryRange(BaseModel):
 
 
 class ApplicationCreate(BaseModel):
+    model_config = {"populate_by_name": True, "from_attributes": True}
     job_title: str = Field(..., alias="jobTitle", min_length=1)
     company_name: str = Field(..., alias="companyName", min_length=1)
     job_description: str = Field(..., alias="jobDescription", min_length=50)
@@ -51,6 +54,7 @@ class ApplicationCreate(BaseModel):
 
 
 class ApplicationResponse(BaseModel):
+    model_config = {"populate_by_name": True, "from_attributes": True}
     id: str
     user_id: str = Field(..., alias="userId")
     job_id: str | None = Field(None, alias="jobId")

@@ -1,4 +1,3 @@
-import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { PathSelectionCard } from '../PathSelectionCard';
 import React from 'react';
@@ -7,7 +6,7 @@ describe('PathSelectionCard', () => {
   const props = {
     title: 'COLLECTIVE',
     description: 'The foundation of all paths.',
-    onSelect: vi.fn(),
+    onSelect: jest.fn(),
   };
 
   it('renders title and description', () => {

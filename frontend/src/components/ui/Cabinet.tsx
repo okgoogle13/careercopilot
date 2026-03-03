@@ -83,7 +83,7 @@ export const Cabinet: React.FC<CabinetProps> = ({
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-white/5">
           {title ? (
-            <h3 className="font-bloom text-2xl font-bold text-[var(--color-paper-white)]">{title}</h3>
+            <h3 className="font-bloom text-2xl font-bold text-[var(--sys-color-worker-ash-base)]">{title}</h3>
           ) : (
             <div />
           )}

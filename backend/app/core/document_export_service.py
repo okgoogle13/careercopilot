@@ -24,6 +24,76 @@ from typing import Any
 from pydantic import BaseModel
 
 from app.core.cloud_storage import cloud_storage_client
+from app.core.loguru_config import get_logger
+
+logger = get_logger(__name__)
+
+
+class DocumentExportOptions(BaseModel):
+    """Options for document export and signed URL generation."""
+    format: str  # 'pdf', 'docx', 'txt', 'json', 'zip'
+    expiration_hours: float = 24.0  # Signed URL expiration (1-168 hours)
+    include_metadata: bool = True
+    compression: bool = True  # Enable gzip compression
+
+
+class DocumentExportResult(BaseModel):
+    """Result of document export operation."""
+    success: bool
+    document_type: str  # 'cover_letter', 'resume', 'ksc_response', 'application_package'
+    file_format: str  # 'pdf', 'docx', 'json', 'zip'
+    download_url: str  # Signed URL (expires in 24 hours)
+    file_size_bytes: int
+    storage_path: str  # gs://bucket/path (for audit/retrieval)
+    expires_at: str  # ISO 8601 timestamp
+    message: str
+
+
+class DocumentExportService:
+    """
+    Service for exporting documents and generating signed URLs.
+
+    Usage:
+        service = DocumentExportService()
+        result = await service.export_cover_letter(
+            content="Dear Hiring Manager...",
+            user_id="user123",
+            job_title="Software Engineer"
+        )
+        # Return signed URL to client instead of content
+    """
+
+    def __init__(self):
+        """Initialize the document export service."""
+        self.storage_client = cloud_storage_client
+        self.default_expiration_hours = 24.0
+        self.max_expiration_hours = 168.0  # 7 days
+
+    def _get_storage_path(
+        self,
+        user_id: str,
+        document_type: str,
+        file_format: str
+    ) -> str:
+        """
+        Generate Cloud Storage path for exported document.
+
+        Path structure: exports/{user_id}/{document_type}/{timestamp}.{format}
+        Example: exports/user123/cover_letter/2025-01-18_14-30-45-123456.pdf
+        """
+        timestamp = datetime.utcnow().strftime("%Y-%m-%d_%H-%M-%S-%f")
+        return f"exports/{user_id}/{document_type}/{timestamp}.{file_format}"
+
+    def _get_expiration_time(self, expiration_hours: float) -> str:
+        """Get ISO 8601 timestamp for URL expiration."""
+        expires_at = datetime.utcnow() + timedelta(hours=expiration_hours)
+        return expires_at.isoformat() + "Z"
+
+    async def export_cover_letter(
+        self,
+        content: str,
+        user_id: str,
+        job_title: str,
         company_name: str | None = None,
         format: str = "docx",
         expiration_hours: float | None = None,
@@ -130,6 +200,29 @@ from app.core.cloud_storage import cloud_storage_client
                 storage_path=storage_path
             )
 
+
+            return DocumentExportResult(
+                success=True,
+                document_type="cover_letter",
+                file_format=format,
+                download_url=signed_url,
+                file_size_bytes=file_size,
+                storage_path=gs_uri,
+                expires_at=expires_at,
+                message=f"Cover letter exported as {format.upper()}"
+            )
+
+        except Exception as e:
+            logger.error(
+                "Failed to export cover letter",
+                user_id=user_id,
+                error=str(e),
+                exc_info=True
+            )
+            raise
+
+    async def export_resume(
+        self,
         content: dict[str, Any],
         user_id: str,
         job_title: str,
@@ -224,6 +317,31 @@ from app.core.cloud_storage import cloud_storage_client
                 file_size=file_size
             )
 
+
+
+
+            return DocumentExportResult(
+                success=True,
+                document_type="resume",
+                file_format=format,
+                download_url=signed_url,
+                file_size_bytes=file_size,
+                storage_path=gs_uri,
+                expires_at=expires_at,
+                message=f"Resume exported as {format.upper()}"
+            )
+
+        except Exception as e:
+            logger.error(
+                "Failed to export resume",
+                user_id=user_id,
+                error=str(e),
+                exc_info=True
+            )
+            raise
+
+    async def export_ksc_response(
+        self,
         response_data: dict[str, Any],
         user_id: str,
         job_title: str,
@@ -310,6 +428,31 @@ from app.core.cloud_storage import cloud_storage_client
                 file_size=file_size
             )
 
+
+
+
+            return DocumentExportResult(
+                success=True,
+                document_type="ksc_response",
+                file_format=format,
+                download_url=signed_url,
+                file_size_bytes=file_size,
+                storage_path=gs_uri,
+                expires_at=expires_at,
+                message=f"KSC response exported as {format.upper()}"
+            )
+
+        except Exception as e:
+            logger.error(
+                "Failed to export KSC response",
+                user_id=user_id,
+                error=str(e),
+                exc_info=True
+            )
+            raise
+
+    async def export_application_package(
+        self,
         package_data: dict[str, Any],
         user_id: str,
         job_id: str,

@@ -17,10 +17,17 @@ export interface ValveProps extends Omit<
 }
 
 /**
- * Valve - KeralaRage KrSolidarity Toggle Switch
+ * Valve - Kerala Rage kr-solidarity Toggle Switch
  *
- * An [DEPRECATED_STYLE], viscous-motion toggle switch using KeralaRage [DEPRECATED_STYLE] palette.
- * Features smooth transitions with viscous-breeze easing and [DEPRECATED_STYLE] color theming.
+ * A toggle switch using Kerala Rage kr-solidarity semantic tokens with spring physics motion.
+ * Features smooth transitions with viscous-breeze easing and semantic color theming.
+ * Archetype: Stone (structural toggle control)
+ *
+ * **Kerala Rage Design Token Usage:**
+ * - Colors: Kerala Rage kr-solidarity semantic palette (signalGreen, kr-activistSmokeGreen, inkGold, concreteGrey, worker-ash)
+ * - Shape: Circular track and thumb (rounded-full)
+ * - Motion: Spring physics cubic-bezier(0.34, 1.56, 0.64, 1)
+ * - Typography: Work Sans (field-note font for labels)
  */
 export const Valve = forwardRef<HTMLInputElement, ValveProps>(
   (
@@ -82,10 +89,14 @@ export const Valve = forwardRef<HTMLInputElement, ValveProps>(
                         transition-all duration-300 var(--ease-viscous-breeze)
                         ${
                           isChecked
-                            ? `bg-[var(--ref-palette-${color}-40)]`
-                            : 'bg-[var(--color-concrete-grey-base)]'
+                            ? color === 'primary'
+                              ? 'bg-[var(--sys-color-signalGreen-base)]'
+                              : color === 'secondary'
+                                ? 'bg-[var(--sys-color-kr-activistSmokeGreen-base)]'
+                                : 'bg-[var(--sys-color-inkGold-base)]'
+                            : 'bg-[var(--sys-color-concreteGrey-base)]'
                         }
-                        peer-focus:ring-2 peer-focus:ring-[var(--color-ink-gold)]/30
+                        peer-focus:ring-2 peer-focus:ring-[var(--sys-color-inkGold-base)]/30
                         border border-white/10
                     `}
             />
@@ -95,7 +106,7 @@ export const Valve = forwardRef<HTMLInputElement, ValveProps>(
               className={`
                         absolute top-0.5 left-0.5
                         ${currentSize.thumb}
-                        bg-[var(--color-paper-white)]
+                        bg-[var(--sys-color-worker-ash-base)]
                         rounded-full
                         shadow-sm
                         transition-all duration-300 var(--ease-viscous-breeze)
@@ -105,7 +116,7 @@ export const Valve = forwardRef<HTMLInputElement, ValveProps>(
           </div>
 
           {label && (
-            <span className="text-sm font-field-note font-medium text-[var(--color-paper-white)]">
+            <span className="text-sm font-field-note font-medium text-[var(--sys-color-worker-ash-base)]">
               {label}
             </span>
           )}
@@ -113,7 +124,7 @@ export const Valve = forwardRef<HTMLInputElement, ValveProps>(
 
         {helperText && (
           <p
-            className={`text-xs px-1 ${error ? 'text-[var(--color-solidarity-red)]' : 'text-[var(--color-concrete-grey-dark)]'}`}
+            className={`text-xs px-1 ${error ? 'text-[var(--sys-color-solidarityRed-base)]' : 'text-[var(--sys-color-concreteGrey-steps-4)]'}`}
           >
             {helperText}
           </p>

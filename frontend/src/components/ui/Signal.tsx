@@ -37,10 +37,11 @@ export type M3AlertSeverity = 'info' | 'success' | 'warning' | 'error';
 export type SignalVariant = 'filled' | 'outlined' | 'tonal';
 
 /**
- * Signal - KeralaRage KrSolidarity Alert Component
+ * Signal - KeralaRage kr-solidarity Alert Component
  *
- * Alert/notification component using KeralaRage [DEPRECATED_STYLE] palette and [DEPRECATED_STYLE] shapes.
+ * Alert/notification component using Kerala Rage kr-solidarity palette and asymmetric shapes.
  * Supports info, success, warning, and error states with filled, outlined, or tonal variants.
+ * Archetype: Signal (status indicator)
  */
 export function Signal({
   title,
@@ -77,26 +78,44 @@ export function Signal({
       transition: 'all var(--duration-standard) var(--ease-viscous-breeze)',
     };
 
-    const colorMap: Record<M3AlertSeverity, string> = {
-      info: 'primary',
-      success: 'secondary',
-      warning: 'warning',
-      error: 'error',
+    // Kerala Rage kr-solidarity semantic color mapping
+    const semanticColorMap: Record<M3AlertSeverity, { bg: string; text: string; border?: string }> = {
+      info: {
+        bg: 'var(--sys-color-signalGreen-base)',
+        text: 'var(--sys-color-charcoalBackground-base)',
+        border: 'var(--sys-color-signalGreen-base)',
+      },
+      success: {
+        bg: 'var(--sys-color-kr-activistSmokeGreen-base)',
+        text: 'var(--sys-color-charcoalBackground-base)',
+        border: 'var(--sys-color-kr-activistSmokeGreen-base)',
+      },
+      warning: {
+        bg: 'var(--sys-color-stencilYellow-base)',
+        text: 'var(--sys-color-charcoalBackground-base)',
+        border: 'var(--sys-color-stencilYellow-base)',
+      },
+      error: {
+        bg: 'var(--sys-color-kr-charcoalRed-base)',
+        text: 'var(--sys-color-worker-ash-base)',
+        border: 'var(--sys-color-kr-charcoalRed-base)',
+      },
     };
 
-    const color = colorMap[severity];
+    const colors = semanticColorMap[severity];
 
     if (variant === 'filled') {
-      styles.backgroundColor = `var(--ref-palette-${color}-40)`;
-      styles.color = `var(--ref-palette-${color}-100)`;
+      styles.backgroundColor = colors.bg;
+      styles.color = colors.text;
     } else if (variant === 'outlined') {
-      styles.border = `1px solid var(--ref-palette-${color}-50)`;
-      styles.color = `var(--ref-palette-${color}-50)`;
+      styles.border = `1px solid ${colors.border}`;
+      styles.color = colors.border;
       styles.backgroundColor = 'transparent';
     } else {
-      // tonal
-      styles.backgroundColor = `var(--ref-palette-${color}-90)`;
-      styles.color = `var(--ref-palette-${color}-10)`;
+      // tonal - lighter background with semantic color text
+      styles.backgroundColor = 'var(--sys-color-charcoalBackground-steps-2)';
+      styles.color = colors.bg;
+      styles.borderLeft = `4px solid ${colors.bg}`;
     }
 
     return styles;

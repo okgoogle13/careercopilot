@@ -1,5 +1,4 @@
 import { render, screen } from '@testing-library/react';
-import { describe, it, expect } from 'vitest';
 import { SkillsMatchPanel } from './SkillsMatchPanel';
 import type { SkillsGap } from '../../services/aiInterface';
 

@@ -45,6 +45,25 @@ The `project-manager` tracks phases through the following states:
 - **`transition_to_phase(target_id)`**: Triggered when the current phase reaches `PHASE_COMPLETE` and the next phase's gates are satisfied.
 - **`auto_escalate(blocker_id)`**: Triggered when a `CRITICAL` blocker remains `OPEN` beyond its `escalation_timeout_hours`.
 
+### Phase Completion Protocol
+
+When `transition_to_phase(target_id)` is triggered or when a phase reaches `PHASE_COMPLETE`:
+
+1. **Generate Completion Report**:
+   - Summarize phase deliverables (milestones completed, gates passed)
+   - Report phase metrics (duration, velocity, blocker resolution time)
+   - Calculate compliance/quality scores from specialist skills (codebase-orchestrator, compliance-dashboard, audit-agent)
+
+2. **Recommend Next Actions**:
+   - If next phase exists: Suggest phase kickoff preparation items (2-3 specific tasks with owners)
+   - If project complete: Suggest retrospective and archive actions (with timeline)
+   - If blockers exist: Escalate and suggest mitigation timeline (owner + ETA)
+
+3. **Set Expectations**:
+   - Provide estimated timeline for next phase kickoff (based on team velocity and dependencies)
+   - List critical dependencies that must be resolved first
+   - Include celebration acknowledgment of team achievement
+
 ## Data Architecture
 
 - **Primary Storage**: PostgreSQL (Relational integrity for complex dependency graphs).

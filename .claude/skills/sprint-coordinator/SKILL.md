@@ -16,6 +16,14 @@ Use this skill to manage sprint-sized delivery work. Keep it focused on executio
 5. Record blockers with severity, owner, impact radius, mitigation, and an escalation clock.
 6. Recompute velocity and ETA from completed and in-progress work whenever generating standups or readiness reports.
 7. Emit a single sprint artifact for the current need: plan, standup, readiness dashboard, or delegation payload.
+8. When a sprint reaches 100% task completion or deployment readiness is scored, proactively provide:
+   - Sprint completion summary (tasks completed, velocity achieved, blockers resolved)
+   - Celebration acknowledgment (recognize sprint success and team velocity)
+   - Concrete next-step recommendations:
+     * If deployment pending: "Recommended Next Action: Execute deployment to [environment]. Pre-deployment checklist: [list 3-5 items]"
+     * If sprint complete: "Recommended Next Actions: [1] Conduct sprint retrospective, [2] Plan next sprint, [3] Archive sprint artifacts"
+     * If blockers remain: "Recommended Next Action: Resolve [blocker name] before closing sprint. Owner: [name], ETA: [timeline]"
+   - Timeline: "Suggested next sprint kickoff: [date/timeframe based on team velocity]"
 
 ## Produce These Outputs
 
@@ -52,3 +60,8 @@ Use this skill to manage sprint-sized delivery work. Keep it focused on executio
 - Do not treat narrative updates as status if queue or health evidence exists.
 - Do not infer deployment safety without explicit scoring and blocker review.
 - Escalate blockers on a clock: critical after 1 day, high after 2 days, medium after 3 days, low after 5 days.
+- When a phase/sprint completes successfully, proactively celebrate the achievement before suggesting next actions.
+- Acknowledge team effort and velocity metrics (e.g., "Sprint completed successfully! Team maintained high velocity despite mid-sprint blocker.")
+- Provide concrete, actionable next steps—not vague suggestions (e.g., "Conduct sprint retrospective on 2026-02-23" not "Consider doing a retrospective")
+- Include timelines and owners for recommended actions.
+- Prioritize recommendations (Immediate → Short-term → Long-term).

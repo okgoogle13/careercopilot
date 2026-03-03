@@ -31,9 +31,9 @@ class TestProfileCreation:
             session.close()
 
     @pytest.fixture
-    def profile_service(self, db_session):
+    def profile_service(self):
         """Create a UserProfileService instance for testing."""
-        return UserProfileService(db_session)
+        return UserProfileService()
 
     @pytest.fixture(autouse=True)
     def cleanup_test_data(self, db_session):
@@ -54,7 +54,7 @@ class TestProfileCreation:
         location = "Sydney, Australia"
 
         result = await profile_service.create_user_profile(
-            user_id=user_id, email=email, name=name, location=location
+            db=db_session, user_id=user_id, email=email, name=name, location=location
         )
 
         assert result["id"] == user_id
@@ -75,8 +75,8 @@ class TestProfileCreation:
         email = "retrieve@example.com"
         name = "Retrieve User"
 
-        await profile_service.create_user_profile(user_id=user_id, email=email, name=name)
-        retrieved_profile = await profile_service.get_user_profile(user_id)
+        await profile_service.create_user_profile(db=db_session, user_id=user_id, email=email, name=name)
+        retrieved_profile = await profile_service.get_user_profile(db=db_session, user_id=user_id)
 
         assert retrieved_profile is not None
         assert retrieved_profile["id"] == user_id

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { supabase } from '../config/supabase';
+import { auth } from '../config/firebase';
 
 // Create generic Axios instance
 const api = axios.create({
@@ -9,14 +9,13 @@ const api = axios.create({
   },
 });
 
-// Add a request interceptor to include the Supabase JWT
+// Add a request interceptor to include the Firebase JWT
 api.interceptors.request.use(
   async (config) => {
     try {
-      const { data } = await supabase.auth.getSession();
-      const token = data.session?.access_token;
-
-      if (token) {
+      const user = auth.currentUser;
+      if (user) {
+        const token = await user.getIdToken();
         config.headers.Authorization = `Bearer ${token}`;
       }
     } catch (error) {

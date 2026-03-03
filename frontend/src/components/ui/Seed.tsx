@@ -20,9 +20,16 @@ export interface SeedProps {
 }
 
 /**
- * M3Badge - KeralaRage KrSolidarity Notification Badge
+ * Seed - Kerala Rage kr-solidarity Notification Badge
  *
- * An [DEPRECATED_STYLE] badge overlay for icons and components.
+ * A notification badge overlay for icons and components using Kerala Rage kr-solidarity semantic tokens.
+ * Archetype: Seed (atomic notification primitive)
+ *
+ * **Kerala Rage Design Token Usage:**
+ * - Colors: Kerala Rage kr-solidarity semantic palette (solidarityRed, inkGold, signalGreen, stencilYellow)
+ * - Shape: Circular (rounded-full)
+ * - Motion: Spring physics cubic-bezier(0.34, 1.56, 0.64, 1) with zoom-in animation
+ * - Typography: Work Sans (annotation font)
  */
 export const Seed: React.FC<SeedProps> = ({
   content,
@@ -37,11 +44,11 @@ export const Seed: React.FC<SeedProps> = ({
   if (invisible) return <>{children}</>;
 
   const colorClasses = {
-    primary: 'bg-[var(--ref-palette-primary-40)] text-[var(--ref-palette-primary-100)]',
-    secondary: 'bg-[var(--ref-palette-secondary-40)] text-[var(--ref-palette-secondary-100)]',
-    error: 'bg-[var(--ref-palette-error-40)] text-[var(--ref-palette-error-100)]',
-    warning: 'bg-[var(--ref-palette-warning-40)] text-[var(--ref-palette-warning-10)]',
-    neutral: 'bg-[var(--color-concrete-grey-dark)] text-[var(--color-paper-white)]',
+    primary: 'bg-[var(--sys-color-signalGreen-base)] text-[var(--sys-color-charcoalBackground-base)]',
+    secondary: 'bg-[var(--sys-color-kr-activistSmokeGreen-base)] text-[var(--sys-color-charcoalBackground-base)]',
+    error: 'bg-[var(--sys-color-solidarityRed-base)] text-[var(--sys-color-worker-ash-base)]',
+    warning: 'bg-[var(--sys-color-stencilYellow-base)] text-[var(--sys-color-charcoalBackground-base)]',
+    neutral: 'bg-[var(--sys-color-concreteGrey-steps-4)] text-[var(--sys-color-worker-ash-base)]',
   };
 
   const sizeClasses = {
@@ -63,7 +70,7 @@ export const Seed: React.FC<SeedProps> = ({
                     ${colorClasses[color]}
                     ${sizeClasses[size]}
                     ${overlapClasses}
-                    border border-[var(--color-asphalt-black)]
+                    border border-[var(--sys-color-charcoalBackground-base)]
                     transition-all duration-300 var(--ease-viscous-breeze)
                     animate-in zoom-in duration-200
                 `}

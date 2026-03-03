@@ -1,4 +1,3 @@
-import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { SkillBreakdownCard } from '../SkillBreakdownCard';
 import React from 'react';
@@ -10,7 +9,7 @@ describe('SkillBreakdownCard', () => {
       { label: 'Technical Mastery', value: 90 },
       { label: 'Solidarity', value: 80 }
     ],
-    onAction: vi.fn()
+    onAction: jest.fn()
   };
 
   it('renders overall score and categories', () => {

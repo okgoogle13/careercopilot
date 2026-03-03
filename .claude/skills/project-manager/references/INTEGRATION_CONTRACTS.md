@@ -58,3 +58,47 @@ The `project-manager` listens for the following signals to update the global das
 - **Build Status**: From CI/CD pipelines.
 - **Git Tags**: To identify production releases.
 - **Sentry Alerts**: To trigger risk-based blockers in post-deployment phases.
+
+## 4. Phase Completion Handoff
+
+When `project-manager` reaches `PHASE_COMPLETE` state, it emits a completion event with next-step recommendations.
+
+### Contract: Phase Completion Event
+
+Broadcast from **project-manager** to stakeholders and downstream systems.
+
+```json
+{
+  "event": "phase_complete",
+  "phase_id": "phase-2",
+  "phase_name": "Component Migration Remediation",
+  "completion_date": "2026-02-22T18:45:00Z",
+  "metrics": {
+    "duration_days": 7,
+    "tasks_completed": 12,
+    "compliance_achieved": 99,
+    "velocity": 1.7
+  },
+  "next_recommendations": [
+    "Conduct sprint retrospective",
+    "Monitor production deployment",
+    "Plan next sprint"
+  ],
+  "next_phase": {
+    "phase_id": "phase-3",
+    "phase_name": "StatusBadge Migration",
+    "kickoff_suggested": "2026-02-26",
+    "preparation_items": [
+      "Review Phase 2 lessons learned",
+      "Verify no UI regressions from token migrations",
+      "Prepare component-transformer for remaining legacy tokens"
+    ]
+  }
+}
+```
+
+### Workflow Actions
+
+1. **Notify Stakeholders**: Publish completion summary to designated communication channels (Slack, email, etc.)
+2. **Trigger Next Phase**: If applicable, initiate phase kickoff preparation workflow
+3. **Archive Artifacts**: Tag release in Git, close completed tasks in task-router queue, update project documentation

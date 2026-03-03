@@ -39,23 +39,24 @@ export interface LensProps extends Omit<React.InputHTMLAttributes<HTMLInputEleme
 }
 
 /**
- * Lens - KeralaRage KrSolidarity Text Input
+ * Lens - Kerala Rage kr-solidarity Text Input
  *
- * A comprehensive text input component using the KeralaRage KrSolidarity design system.
- * Supports filled and outlined variants with proper KeralaRage states and validation.
+ * A comprehensive text input component using the Kerala Rage kr-solidarity design system.
+ * Supports filled and outlined variants with proper semantic token states and validation.
+ * Archetype: Lens (focal container)
  *
- * **KeralaRage Design Token Usage:**
- * - Shape: `--radius-leaf` ([DEPRECATED_STYLE] shape) for inputs
- * - Colors: KeralaRage [DEPRECATED_STYLE] palette (Ink Gold, Solidarity Red, Concrete Grey)
- * - Typography: KeralaRage field-note font family
- * - Motion: Viscous-breeze easing for [DEPRECATED_STYLE] transitions
- * - Visual: KrScreenprint with subtle backdrop blur
+ * **Kerala Rage Design Token Usage:**
+ * - Shape: Asymmetric 24px 8px 20px 4px (Lens archetype)
+ * - Colors: Kerala Rage kr-solidarity semantic palette (inkGold, solidarityRed, concreteGrey, worker-ash)
+ * - Typography: Work Sans (field-note font family)
+ * - Motion: Spring physics cubic-bezier(0.34, 1.56, 0.64, 1) for smooth transitions
+ * - Visual: Kerala Rage screenprint aesthetic with subtle focus glow
  *
  * **States:**
- * - Default: Outlined with subtle border
+ * - Default: Outlined with subtle concreteGrey border
  * - Hover: Border color intensifies
- * - Focus: Ink Gold accent with glow
- * - Error: Solidarity Red with error message
+ * - Focus: inkGold accent with semantic glow
+ * - Error: solidarityRed with error message
  * - Disabled: Reduced opacity
  *
  * @example
@@ -171,12 +172,12 @@ export const Lens = forwardRef<HTMLInputElement, LensProps>(
           <label
             className={`
           mb-2 text-sm font-medium transition-colors duration-200
-          ${error ? 'text-[var(--color-solidarity-red)]' : 'text-[var(--color-concrete-grey)]'}
-          ${isFocused && !error ? 'text-[var(--color-ink-gold)]' : ''}
+          ${error ? 'text-[var(--sys-color-solidarityRed-base)]' : 'text-[var(--sys-color-concreteGrey-base)]'}
+          ${isFocused && !error ? 'text-[var(--sys-color-inkGold-base)]' : ''}
         `}
           >
             {label}
-            {required && <span className="text-[var(--color-solidarity-red)] ml-1">*</span>}
+            {required && <span className="text-[var(--sys-color-solidarityRed-base)] ml-1">*</span>}
           </label>
         )}
 
@@ -191,7 +192,7 @@ export const Lens = forwardRef<HTMLInputElement, LensProps>(
               <div
                 className={`
               flex-shrink-0 ml-3 ${sizeClasses[size].adornment}
-              ${error ? 'text-[var(--color-solidarity-red)]' : 'text-[var(--color-concrete-grey-dark)]'}
+              ${error ? 'text-[var(--sys-color-solidarityRed-base)]' : 'text-[var(--sys-color-concreteGrey-base-dark)]'}
             `}
               >
                 {startAdornment}
@@ -218,7 +219,7 @@ export const Lens = forwardRef<HTMLInputElement, LensProps>(
               <div
                 className={`
               flex-shrink-0 mr-3 ${sizeClasses[size].adornment}
-              ${error ? 'text-[var(--color-solidarity-red)]' : 'text-[var(--color-concrete-grey-dark)]'}
+              ${error ? 'text-[var(--sys-color-solidarityRed-base)]' : 'text-[var(--sys-color-concreteGrey-base-dark)]'}
             `}
               >
                 {endAdornment}
@@ -235,7 +236,7 @@ export const Lens = forwardRef<HTMLInputElement, LensProps>(
                 id={`${props.id}-helper-text`}
                 className={`
                 text-xs
-                ${error ? 'text-[var(--color-solidarity-red)]' : 'text-[var(--color-concrete-grey-dark)]'}
+                ${error ? 'text-[var(--sys-color-solidarityRed-base)]' : 'text-[var(--sys-color-concreteGrey-base-dark)]'}
               `}
               >
                 {displayHelperText}
@@ -246,7 +247,7 @@ export const Lens = forwardRef<HTMLInputElement, LensProps>(
               <p
                 className={`
               text-xs
-              ${charCount > maxLength ? 'text-[var(--color-solidarity-red)]' : 'text-[var(--color-concrete-grey-dark)]'}
+              ${charCount > maxLength ? 'text-[var(--sys-color-solidarityRed-base)]' : 'text-[var(--sys-color-concreteGrey-base-dark)]'}
               ml-auto
             `}
               >
@@ -266,7 +267,8 @@ Lens.displayName = 'Lens';
  * LensArea - Multi-line text input variant
  *
  * Same API as Lens but renders a textarea for multi-line input.
- * Uses KeralaRage KrSolidarity design tokens for consistent [DEPRECATED_STYLE] styling.
+ * Uses Kerala Rage kr-solidarity semantic tokens for consistent styling.
+ * Archetype: Lens (focal container, textarea variant)
  */
 export interface LensAreaProps extends Omit<
   React.TextareaHTMLAttributes<HTMLTextAreaElement>,
@@ -334,12 +336,12 @@ export const LensArea = forwardRef<HTMLTextAreaElement, LensAreaProps>(
           <label
             className={`
           mb-2 text-sm font-medium transition-colors duration-200
-          ${error ? 'text-[var(--color-solidarity-red)]' : 'text-[var(--color-concrete-grey)]'}
-          ${isFocused && !error ? 'text-[var(--color-ink-gold)]' : ''}
+          ${error ? 'text-[var(--sys-color-solidarityRed-base)]' : 'text-[var(--sys-color-concreteGrey-base)]'}
+          ${isFocused && !error ? 'text-[var(--sys-color-inkGold-base)]' : ''}
         `}
           >
             {label}
-            {required && <span className="text-[var(--color-solidarity-red)] ml-1">*</span>}
+            {required && <span className="text-[var(--sys-color-solidarityRed-base)] ml-1">*</span>}
           </label>
         )}
 
@@ -380,7 +382,7 @@ export const LensArea = forwardRef<HTMLTextAreaElement, LensAreaProps>(
                 id={`${props.id}-helper-text`}
                 className={`
                 text-xs
-                ${error ? 'text-[var(--color-solidarity-red)]' : 'text-[var(--color-concrete-grey-dark)]'}
+                ${error ? 'text-[var(--sys-color-solidarityRed-base)]' : 'text-[var(--sys-color-concreteGrey-base-dark)]'}
               `}
               >
                 {displayHelperText}
@@ -391,7 +393,7 @@ export const LensArea = forwardRef<HTMLTextAreaElement, LensAreaProps>(
               <p
                 className={`
               text-xs
-              ${charCount > maxLength ? 'text-[var(--color-solidarity-red)]' : 'text-[var(--color-concrete-grey-dark)]'}
+              ${charCount > maxLength ? 'text-[var(--sys-color-solidarityRed-base)]' : 'text-[var(--sys-color-concreteGrey-base-dark)]'}
               ml-auto
             `}
               >

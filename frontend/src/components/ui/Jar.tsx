@@ -46,17 +46,18 @@ export interface JarProps {
 }
 
 /**
- * Jar - KeralaRage KrSolidarity Select Dropdown
+ * Jar - Kerala Rage kr-solidarity Select Dropdown
  *
- * A custom select component using KeralaRage KrSolidarity design tokens with enhanced UX.
- * Features [DEPRECATED_STYLE] shapes, proper elevation, and smooth animations.
+ * A custom select component using Kerala Rage kr-solidarity semantic tokens with enhanced UX.
+ * Features asymmetric shapes, proper elevation, and spring physics animations.
+ * Archetype: Jar (simple frame container)
  *
- * **KeralaRage Design Token Usage:**
- * - Shape: `--radius-stone` for select button, `--radius-pebble` for dropdown
- * - Elevation: `--shadow-maximum` for dropdown menu
- * - Motion: Viscous-breeze easing for smooth open/close
- * - Colors: KeralaRage [DEPRECATED_STYLE] palette (Ink Gold, Solidarity Red)
- * - Typography: Field-note font family
+ * **Kerala Rage Design Token Usage:**
+ * - Shape: Asymmetric 32px 8px 28px 12px (Jar archetype)
+ * - Elevation: `--sys-shadow-elevation4Float` for dropdown menu
+ * - Motion: Spring physics cubic-bezier(0.34, 1.56, 0.64, 1)
+ * - Colors: Kerala Rage kr-solidarity semantic palette (inkGold, solidarityRed, worker-ash)
+ * - Typography: Work Sans (field-note font family)
  *
  * @example
  * ```tsx
@@ -161,7 +162,7 @@ export function Jar({
         `}
         >
           {label}
-          {required && <span className="text-[var(--color-solidarity-red)] ml-1">*</span>}
+          {required && <span className="text-[var(--sys-color-solidarityRed-base)] ml-1">*</span>}
         </label>
       )}
 
@@ -174,7 +175,7 @@ export function Jar({
           px-4 py-3
           flex items-center justify-between gap-3
           ${isOpen && !error ? 'shadow-[0_0_15px_var(--sys-color-inkGold-steps-0)]' : ''}
-          ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:border-[var(--color-concrete-grey-dark)]'}
+          ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:border-[var(--sys-color-concreteGrey-steps-4)]'}
           ${className}
         `}
         onClick={() => !disabled && setIsOpen(!isOpen)}
@@ -193,7 +194,7 @@ export function Jar({
         </span>
         <ChevronDown
           className={`
-            w-5 h-5 text-[var(--color-concrete-grey-dark)]
+            w-5 h-5 text-[var(--sys-color-concreteGrey-steps-4)]
             transition-transform duration-[var(--duration-standard)]
             ${isOpen ? 'rotate-180' : 'rotate-0'}
           `}
@@ -238,7 +239,7 @@ export function Jar({
                 >
                   <span className="font-field-note">{option.label}</span>
                   {isSelected && (
-                    <Check className="w-5 h-5 flex-shrink-0 text-[var(--color-ink-gold)]" />
+                    <Check className="w-5 h-5 flex-shrink-0 text-[var(--sys-color-inkGold-base)]" />
                   )}
                 </div>
               );

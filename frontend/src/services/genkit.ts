@@ -1,4 +1,4 @@
-import { supabase } from '../config/supabase';
+import { auth } from '../config/firebase';
 
 // Configuration
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080/api';
@@ -7,8 +7,11 @@ const USE_MOCK = import.meta.env.VITE_USE_MOCK_API !== 'false';
 // Helper for Auth Token
 const getAuthToken = async () => {
   if (import.meta.env.DEV) return 'dev-token';
-  const { data } = await supabase.auth.getSession();
-  return data.session?.access_token || '';
+  const user = auth.currentUser;
+  if (user) {
+    return await user.getIdToken();
+  }
+  return '';
 };
 
 // Types

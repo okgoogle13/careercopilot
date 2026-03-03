@@ -77,7 +77,14 @@
       "Bash(firebase deploy:*)",
       "Bash(npm install:*)",
       "Bash(yarn add:*)",
-      "Bash(npm run lint)"
+      "Bash(npm run lint)",
+      "Bash(gh repo view:*)",
+      "Bash(__NEW_LINE_219f463e5c560185__ echo \"=== Checking symlink target ===\")",
+      "Bash(__NEW_LINE_219f463e5c560185__ echo -e \"\\\\n=== Checking task-router in source file ===\")",
+      "Bash(__NEW_LINE_219f463e5c560185__ echo -e \"\\\\n=== Verifying both paths point to same file ===\")",
+      "Bash(./scripts/task-poller-control.sh:*)",
+      "Bash(__NEW_LINE_786b72f85b07e668__ echo \"\")",
+      "Bash(__NEW_LINE_9b190d747c5ebd61__ echo \"\")"
     ],
     "deny": [],
     "ask": []
