@@ -30,100 +30,112 @@ flowchart TD
 
     E --> F[🏠 Dashboard]
 
-    F --> G[📄 Upload Resume / Paste Text]
-    F --> H[🔍 Paste Job URL · Description]
+    F --> G[📄 Upload Prior Artifacts]
+    F --> H[🔍 Paste Job URL]
+    F --> I[📝 Paste Resume Text]
 
-    G --> I[(Ingestion Service\npdfminer · python-docx)]
-    H --> J[🤖 Job Analyzer Flow\nScrape + Extract Requirements]
+    G --> J[📥 POST /api/ingest/artifacts/upload]
+    J --> K[(IngestionService\nParse + Chunk)]
+    K --> L[(VectorStore\npgvector Career Artifacts)]
 
-    I --> K[(Vector Store\npgvector + Gemini Embeddings)]
-    J --> L[📊 ATS Scoring Flow\nKeyword Gap Analysis]
+    H --> M[🤖 POST /api/genkit/job/analyze-url]
+    M --> N[📊 Unified Job Analysis\nRole + Requirements]
+    N --> O[🏢 Company Context]
 
-    K --> L
-    L --> M{Choose Next Action}
+    I --> P{Choose Next Action}
+    N --> P
+    L -. Reference prior artifacts .-> P
 
-    M --> N[✍️ Optimise Resume\nresume_optimizer flow]
-    M --> O[📝 Generate Cover Letter\nsmart_cover_letter flow]
-    M --> P[🎯 Generate KSC Responses\nksc_generator flow]
-    M --> Q[🕵️ Resume Audit\nresume-audit edge function]
-    M --> R[🧠 Intelligence Report\nresume_intelligence flow]
+    P --> Q[✍️ POST /api/genkit/resume/optimize]
+    P --> R[🛠️ POST /api/analysis/optimize-resume]
+    P --> S[📝 POST /api/genkit/cover-letter/generate]
+    P --> T[🎯 POST /api/genkit/ksc/generate]
+    P --> U[🔎 POST /api/genkit/company/context]
 
-    N --> S{Accept Suggestions?}
-    S -- Yes --> T[(Save to Supabase\nDocument Store)]
-    S -- No --> N
+    Q --> V[📄 Updated Resume Draft]
+    R --> V
+    S --> W[📨 Tailored Cover Letter]
+    T --> X[✅ STAR KSC Responses]
+    U --> Y[🏛️ Employer Research Notes]
+    O --> Y
 
-    O --> T
-    P --> T
-    Q --> T
-    R --> T
+    V --> Z[👀 Review · Edit · Reuse]
+    W --> Z
+    X --> Z
+    Y --> Z
 
-    T --> U[📥 Export: PDF · DOCX · Markdown]
-    U --> V[📬 Submit Application]
-    V --> W[📋 Application Tracker\nKanban Board]
-    W --> X([🎉 Hired!])
+    Z --> AA[📬 Submit Application]
+    AA --> AB[📋 Track Progress]
+    AB --> AC([🎯 Interview Pipeline])
 
     style A fill:#D4A84B,color:#1A1714,stroke:#D4A84B
-    style X fill:#6B7F6E,color:#F5F0E8,stroke:#6B7F6E
+    style AC fill:#6B7F6E,color:#F5F0E8,stroke:#6B7F6E
     style D fill:#1A1714,color:#D4A84B,stroke:#A39B8F
-    style K fill:#1A1714,color:#D4A84B,stroke:#A39B8F
-    style T fill:#1A1714,color:#D4A84B,stroke:#A39B8F
+    style L fill:#1A1714,color:#D4A84B,stroke:#A39B8F
+    style Z fill:#1A1714,color:#D4A84B,stroke:#A39B8F
 """
 
 AI_FLOW_DIAGRAM = """\
 flowchart LR
     subgraph Input["📥 User Input"]
-        R[Resume / Profile]
-        J[Job Description / URL]
+        ART[Artifact Files\nResume / Cover Letter / KSC]
+        RES[Resume Text / Candidate Profile]
+        URL[Job URL]
+        JD[Job Description]
     end
 
     subgraph Ingestion["🔄 Ingestion Layer"]
-        P[IngestionService\npdfminer · python-docx]
-        JA[Unified Job Analyzer\nScrape + NLP]
+        APII[/POST /api/ingest/artifacts/upload/]
+        ING[IngestionService\npdfminer · python-docx]
+        VS[(VectorStore\npgvector)]
     end
 
-    subgraph AI["🤖 AI Flows  ·  Gemini via Genkit"]
+    subgraph Analysis["🧭 Analysis + Genkit Endpoints"]
         direction TB
-        ATS[ATS Scoring\nats_scoring.py]
-        RI[Intelligence Pipeline\nresume_intelligence.py]
-        RO[Resume Optimizer\nresume_optimizer.py]
-        CL[SCL Generator\nsmart_cover_letter_system.py]
-        KSC[KSC Generator\nksc_generator.py]
-        CC[Company Context\ncompany_context.py]
-    end
-
-    subgraph Edge["⚡ Serverless Edge"]
-        AUDIT[Resume Auditor\nresume-audit edge function]
-        CACHE[Context Cache\nGemini RKL Rules]
-    end
-
-    subgraph Store["🗄️ Data Layer"]
-        VS[(Vector Store\npgvector)]
-        DB[(Postgres\nSupabase)]
+        JAPI[/POST /api/genkit/job/analyze-url/]
+        JOB[unified_job_analyzer.py]
+        CC[company_context.py]
+        ROPT[/POST /api/genkit/resume/optimize/]
+        AOPT[/POST /api/analysis/optimize-resume/]
+        RO[resume_optimizer.py]
+        CLAPI[/POST /api/genkit/cover-letter/generate/]
+        CL[smart_cover_letter_system.py]
+        KAPI[/POST /api/genkit/ksc/generate/]
+        KSC[ksc_generator.py]
+        CAPI[/POST /api/genkit/company/context/]
     end
 
     subgraph Output["📤 Output"]
-        OD[Optimised Resume]
+        JOUT[Structured Job Brief]
+        OD[Optimized Resume]
         OCL[Cover Letter]
         OKSC[KSC Responses]
-        OAR[Audit Report]
-        OIR[Intelligence Report]
+        OCTX[Company Research]
     end
 
-    R --> P --> VS
-    J --> JA --> ATS
-    VS --> ATS & RI & AUDIT
-    CACHE --> AUDIT
-    ATS --> RO & CL & KSC & CC
-    RI --> OIR --> DB
-    AUDIT --> OAR --> DB
-    RO --> OD --> DB
-    CL --> OCL --> DB
-    KSC --> OKSC --> DB
-    OD & OCL & OKSC & OAR & OIR --> OA[Application Package]
+    ART --> APII --> ING --> VS
+    URL --> JAPI --> JOB --> JOUT
+    JAPI --> CC --> OCTX
+    JD --> ROPT
+    JD --> AOPT
+    JD --> CLAPI
+    JD --> CAPI
+    RES --> ROPT --> RO --> OD
+    RES --> AOPT --> RO
+    RES --> CLAPI --> CL --> OCL
+    RES --> KAPI --> KSC --> OKSC
+    JOUT --> ROPT
+    JOUT --> CLAPI
+    JOUT --> KAPI
+    JOUT --> CAPI
+    CAPI --> CC
+    VS -. Retrieval context .-> RO
+    VS -. Retrieval context .-> CL
+    VS -. Retrieval context .-> KSC
+    CC --> OCTX
 
-    style AI fill:#1A1714,color:#F5F0E8,stroke:#D4A84B
-    style Edge fill:#1A1714,color:#F5F0E8,stroke:#6B7F6E
-    style Store fill:#1A1714,color:#F5F0E8,stroke:#A39B8F
+    style Analysis fill:#1A1714,color:#F5F0E8,stroke:#D4A84B
+    style Ingestion fill:#1A1714,color:#F5F0E8,stroke:#A39B8F
     style Input fill:#2A1F0B,color:#F5F0E8,stroke:#D4A84B
     style Output fill:#0B2A1A,color:#F5F0E8,stroke:#6B7F6E
 """
@@ -145,7 +157,7 @@ def build_markdown(user_journey: str, ai_flow: str) -> str:
 
 ## 1. User Journey
 
-End-to-end flow from landing on the app through to submitting a job application.
+Modular user journey for artifact ingestion, job analysis, and targeted drafting flows.
 
 ```mermaid
 {user_journey.strip()}
@@ -155,7 +167,7 @@ End-to-end flow from landing on the app through to submitting a job application.
 
 ## 2. AI Flow Architecture
 
-How the Genkit AI flows connect inputs, vector storage, and generated outputs.
+How the live API endpoints connect ingestion, Genkit flows, and generated outputs.
 
 ```mermaid
 {ai_flow.strip()}
@@ -167,17 +179,17 @@ How the Genkit AI flows connect inputs, vector storage, and generated outputs.
 
 | Component | File | Responsibility |
 |---|---|---|
-| Ingestion Service | `backend/app/services/ingestion_service.py` | Parse PDF/DOCX resumes |
-| Job Analyzer | `ai/flows/backend/unified_job_analyzer.py` | Scrape & extract job requirements |
-| ATS Scoring | `ai/flows/backend/ats_scoring.py` | Score resume against job description |
-| Resume Intelligence | `ai/flows/backend/resume_intelligence_pipeline.py` | Deep career insights & progression |
-| Resume Auditor | `supabase/functions/resume-audit/` | Australian rule-based auditing |
-| Resume Optimizer | `ai/flows/backend/resume_optimizer.py` | Suggest keyword improvements |
-| Smart Cover Letter | `ai/flows/backend/smart_cover_letter_system.py` | Draft tailored cover letters |
-| KSC Generator | `ai/flows/backend/ksc_generator.py` | Draft STAR-format KSC responses |
-| Company Context | `ai/flows/backend/company_context.py` | Research company background |
-| Vector Store | `backend/app/services/vector_store.py` | Semantic search (pgvector) |
-| Application Tracker | `frontend/src/features/applications/` | Kanban board for job tracking |
+| Ingestion API | `backend/app/api/endpoints/ingest.py` | Upload career artifacts for parsing |
+| Ingestion Service | `backend/app/services/ingestion.py` | Parse PDF/DOCX/TXT and chunk content |
+| Genkit API | `backend/app/api/endpoints/genkit.py` | Expose modular AI drafting endpoints |
+| Analysis API | `backend/app/api/endpoints/analysis.py` | Resume optimization endpoint |
+| Job Analyzer | `backend/app/genkit_flows/unified_job_analyzer.py` | Extract structured job details from URLs |
+| Resume Optimizer | `backend/app/genkit_flows/resume_optimizer.py` | Refine resume content against job context |
+| Smart Cover Letter | `backend/app/genkit_flows/smart_cover_letter_system.py` | Draft tailored cover letters |
+| KSC Generator | `backend/app/genkit_flows/ksc_generator.py` | Draft STAR-format KSC responses |
+| Company Context | `backend/app/genkit_flows/company_context.py` | Generate employer research context |
+| Vector Store | `backend/app/services/vector_store.py` | Store and retrieve prior career artifacts |
+| Cover Letter UI | `frontend/src/features/applications/CoverLetterGenerator.tsx` | Compose job analysis + letter generation |
 """
 
 

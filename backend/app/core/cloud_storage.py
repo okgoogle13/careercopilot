@@ -2,24 +2,26 @@
 import logging
 import os
 from typing import Any
+from datetime import timedelta
 
-from app.core.supabase import get_supabase_storage
+from app.core.firebase import get_storage
 
 logger = logging.getLogger(__name__)
 
 class CloudStorageClient:
-    """Supabase Storage implementation of the Cloud Storage client.
-    Replaces Google Cloud Storage implementation.
+    """Firebase Storage implementation of the Cloud Storage client.
+    Replaces Supabase Storage implementation.
     """
 
     def __init__(self, bucket_name: str | None = None):
-        """Initialize with Supabase bucket name.
+        """Initialize with Firebase bucket.
         
         Args:
-            bucket_name: Optional override for bucket name. Defaults to SUPABASE_STORAGE_BUCKET.
+            bucket_name: Optional override for bucket name.
         """
-        self.bucket_name = bucket_name or os.getenv("SUPABASE_STORAGE_BUCKET", "user_assets")
-        self.storage = get_supabase_storage()
+        self.bucket = get_storage()
+        if not self.bucket:
+            logger.error("Firebase Storage bucket not initialized!")
 
     def upload_file(
         self,
@@ -29,59 +31,71 @@ class CloudStorageClient:
         metadata: dict[str, str] | None = None,
         cache_control: str = "public, max-age=3600"
     ) -> str:
-        """Uploads a file to Supabase bucket and returns its URI.
+        """Uploads a file to Firebase bucket and returns its URI.
         
         Args:
             file_content: The file content to upload
             destination_blob_name: The path/name of the blob in the bucket
             content_type: The MIME type of the file
-            metadata: Optional metadata to attach (Supabase metadata handled via options)
+            metadata: Optional metadata to attach
             cache_control: Cache-Control header value
             
         Returns:
             The internal storage:// URI of the uploaded file
         """
+        if not self.bucket:
+            raise RuntimeError("Storage bucket not available")
+
         destination_blob_name = destination_blob_name.strip("/")
+        blob = self.bucket.blob(destination_blob_name)
+        
+        # Set blob properties
+        blob.cache_control = cache_control
+        if metadata:
+            blob.metadata = metadata
 
-        # Supabase options
-        file_options = {
-            "content-type": content_type,
-            "cache-control": cache_control,
-        }
-
-        # Metadata in Supabase is typically handled via a separate DB table if extensive,
-        # but ‘upsert’ flag can be passed in options.
-
-        self.storage.from_(self.bucket_name).upload(
-            path=destination_blob_name,
-            file=file_content,
-            file_options=file_options
+        blob.upload_from_string(
+            file_content,
+            content_type=content_type
         )
 
-        logger.info(f"File uploaded to Supabase Storage: {self.bucket_name}/{destination_blob_name}")
-        return f"storage://{self.bucket_name}/{destination_blob_name}"
+        logger.info(f"File uploaded to Firebase Storage: {self.bucket.name}/{destination_blob_name}")
+        return f"storage://{self.bucket.name}/{destination_blob_name}"
 
     def download_file(self, source_blob_name: str) -> tuple[bytes, dict[str, Any]]:
-        """Downloads a blob from the Supabase bucket.
+        """Downloads a blob from the Firebase bucket.
         """
-        source_blob_name = source_blob_name.strip("/")
-        res = self.storage.from_(self.bucket_name).download(source_blob_name)
+        if not self.bucket:
+            raise RuntimeError("Storage bucket not available")
 
-        # Supabase download returns bytes. Metadata is NOT returned with download.
-        # Minimal metadata dictionary for compatibility
-        return res, {
-            "content_type": "application/octet-stream", # Supabase storage-js doesn't return this in simple download
-            "size": len(res)
+        source_blob_name = source_blob_name.strip("/")
+        blob = self.bucket.blob(source_blob_name)
+        
+        content = blob.download_as_bytes()
+        
+        # Get metadata
+        blob.reload()
+        metadata = {
+            "content_type": blob.content_type or "application/octet-stream",
+            "size": blob.size,
+            "metadata": blob.metadata or {}
         }
+        
+        return content, metadata
 
     def delete_file(self, blob_name: str) -> bool:
-        """Deletes a blob from the Supabase bucket.
+        """Deletes a blob from the Firebase bucket.
         """
+        if not self.bucket:
+            return False
+
         blob_name = blob_name.strip("/")
+        blob = self.bucket.blob(blob_name)
         try:
-            self.storage.from_(self.bucket_name).remove([blob_name])
+            blob.delete()
             return True
-        except Exception:
+        except Exception as e:
+            logger.error(f"Failed to delete file from Firebase: {e}")
             return False
 
     def generate_signed_url(
@@ -91,22 +105,29 @@ class CloudStorageClient:
         method: str = "GET",
         content_type: str | None = None
     ) -> str:
-        """Generate a signed URL for a Supabase blob.
+        """Generate a signed URL for a Firebase blob.
         """
-        blob_name = blob_name.strip("/")
-        expires_in_seconds = int(expiration_hours * 3600)
+        if not self.bucket:
+            return ""
 
-        res = self.storage.from_(self.bucket_name).create_signed_url(
-            path=blob_name,
-            expires_in=expires_in_seconds
+        blob_name = blob_name.strip("/")
+        blob = self.bucket.blob(blob_name)
+        
+        url = blob.generate_signed_url(
+            version="v4",
+            expiration=timedelta(hours=expiration_hours),
+            method=method,
+            content_type=content_type
         )
-        # res looks like {'signedURL': '...'} or {'signedUrl': '...'}
-        return res.get("signedURL") or res.get("signedUrl", "")
+        return url
 
     def get_public_url(self, blob_name: str) -> str:
         """Get the public URL for a blob.
         """
+        if not self.bucket:
+            return ""
+            
         blob_name = blob_name.strip("/")
-        return self.storage.from_(self.bucket_name).get_public_url(blob_name)
-
+        blob = self.bucket.blob(blob_name)
+        return blob.public_url
 cloud_storage_client = CloudStorageClient()

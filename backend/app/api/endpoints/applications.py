@@ -21,23 +21,23 @@ async def create_application(
 ):
     """Create a new job application for the current user."""
 
-    application_data = application.model_dump(by_alias=True, exclude_unset=True)
-
+    app_data = application.model_dump(by_alias=False)
+    
     new_application = Application(
         user_id=current_user.id,
-        job_title=application.job_title,
-        company_name=application.company_name,
-        job_description=application.job_description,
         status="draft",
-        source="manual",
-        applied_date=datetime.now(timezone.utc)
+        source="manual"
     )
+
+    for key, value in app_data.items():
+        if hasattr(new_application, key):
+            setattr(new_application, key, value)
 
     db.add(new_application)
     db.commit()
     db.refresh(new_application)
 
-    return new_application.to_dict()
+    return new_application
 
 
 @router.get(
@@ -59,7 +59,7 @@ async def get_application(
     if not application:
         raise HTTPException(status_code=404, detail="Application not found.")
 
-    return application.to_dict()
+    return application
 
 
 @router.get(
@@ -78,7 +78,7 @@ async def get_all_applications(
         Application.user_id == current_user.id
     ).offset(skip).limit(limit).all()
 
-    return [app.to_dict() for app in applications]
+    return applications
 
 
 @router.put(
@@ -108,7 +108,7 @@ async def update_application(
 
     db.commit()
     db.refresh(db_application)
-    return db_application.to_dict()
+    return db_application
 
 
 @router.delete(

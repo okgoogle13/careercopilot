@@ -24,7 +24,7 @@ def test_user_asset():
     return UserAsset(
         id="asset-123",
         user_id="user-123",
-        asset_type="resume",
+        document_type="resume",
         extracted_data={
             "fullText": "Senior Software Engineer with 5+ years experience in Python and React"
         }
@@ -86,7 +86,7 @@ class TestCompareResumeToJob:
         asset_no_text = UserAsset(
             id="asset-123",
             user_id="user-123",
-            asset_type="resume",
+            document_type="resume",
             extracted_data={}  # No fullText
         )
         mock_db.query.return_value.filter.return_value.first.return_value = asset_no_text
@@ -163,7 +163,7 @@ class TestJobsServiceIntegration:
             UserAsset(
                 id=f"asset-{i}",
                 user_id="user-123",
-                asset_type="resume",
+                document_type="resume",
                 extracted_data={"fullText": f"Resume {i}"}
             )
             for i in range(3)

@@ -95,7 +95,7 @@ export const AuditDial: React.FC<AuditDialProps> = ({
                 >
                     {Math.round(score)}
                 </motion.span>
-                <span className="font-leaf text-sm uppercase tracking-wide text-white/60">
+                <span className="font-primary text-sm uppercase tracking-wide text-white/60">
                     {isLoading ? 'Calculating...' : isGateOpen ? 'Pass' : 'Review'}
                 </span>
             </div>

@@ -26,7 +26,7 @@ def mock_current_user(monkeypatch):
             id="test-user-123",
             email="test@example.com",
             name="Test User",
-            auth_provider="supabase"
+            auth_provider="firebase"
         )
 
     from app.core import dependencies
@@ -38,14 +38,14 @@ class TestGetOpportunities:
 
     def test_get_opportunities_returns_list(self, client, mock_current_user):
         """Test that endpoint returns list of opportunities."""
-        response = client.get("/opportunities/")
+        response = client.get("/api/opportunities/")
         assert response.status_code == 200
         assert isinstance(response.json(), list)
         assert len(response.json()) > 0
 
     def test_get_opportunities_response_structure(self, client, mock_current_user):
         """Test that response has correct structure."""
-        response = client.get("/opportunities/")
+        response = client.get("/api/opportunities/")
         assert response.status_code == 200
 
         opportunities = response.json()
@@ -61,7 +61,7 @@ class TestGetOpportunities:
 
     def test_get_opportunities_data_types(self, client, mock_current_user):
         """Test that response data has correct types."""
-        response = client.get("/opportunities/")
+        response = client.get("/api/opportunities/")
         assert response.status_code == 200
 
         opportunities = response.json()
@@ -76,7 +76,7 @@ class TestGetOpportunities:
 
     def test_get_opportunities_match_score_range(self, client, mock_current_user):
         """Test that match scores are in valid range."""
-        response = client.get("/opportunities/")
+        response = client.get("/api/opportunities/")
         assert response.status_code == 200
 
         for opp in response.json():
@@ -87,14 +87,14 @@ class TestGetOpportunities:
         """Test that endpoint requires authentication."""
         # This should fail without authentication
         # (depends on actual auth implementation)
-        response = client.get("/opportunities/")
+        response = client.get("/api/opportunities/")
         # Status code depends on auth setup
         # Just verify endpoint exists and responds
         assert response.status_code in [200, 401, 403]
 
     def test_get_opportunities_empty_list_valid(self, client, mock_current_user):
         """Test that empty list is valid response."""
-        response = client.get("/opportunities/")
+        response = client.get("/api/opportunities/")
         assert response.status_code == 200
         # Empty list is valid, just ensure it's a list
         assert isinstance(response.json(), list)
@@ -105,7 +105,7 @@ class TestOpportunitiesBusiness:
 
     def test_critical_paths_present(self, client, mock_current_user):
         """Test that critical job paths are included."""
-        response = client.get("/opportunities/")
+        response = client.get("/api/opportunities/")
         assert response.status_code == 200
 
         opportunities = response.json()
@@ -114,7 +114,7 @@ class TestOpportunitiesBusiness:
 
     def test_opportunities_sorted_by_match_score(self, client, mock_current_user):
         """Test that opportunities are reasonably ranked."""
-        response = client.get("/opportunities/")
+        response = client.get("/api/opportunities/")
         assert response.status_code == 200
 
         opportunities = response.json()
@@ -125,7 +125,7 @@ class TestOpportunitiesBusiness:
 
     def test_remote_opportunities_included(self, client, mock_current_user):
         """Test that remote opportunities are available."""
-        response = client.get("/opportunities/")
+        response = client.get("/api/opportunities/")
         assert response.status_code == 200
 
         opportunities = response.json()
@@ -140,7 +140,7 @@ class TestOpportunitiesIntegration:
     def test_opportunities_workflow(self, client, mock_current_user):
         """Test complete opportunities viewing workflow."""
         # Step 1: Get opportunities
-        response = client.get("/opportunities/")
+        response = client.get("/api/opportunities/")
         assert response.status_code == 200
 
         opportunities = response.json()

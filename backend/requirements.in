@@ -7,7 +7,7 @@ pydantic-settings
 python-multipart
 
 # Firebase and Google Cloud essentials
-
+firebase-admin
 google-api-python-client
 google-cloud-storage
 google-cloud-secret-manager
@@ -17,7 +17,6 @@ sqlalchemy
 psycopg2-binary
 alembic
 pgvector
-supabase
 
 # Core AI Integration - Essential only
 anthropic

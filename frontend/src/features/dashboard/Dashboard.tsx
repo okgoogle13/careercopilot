@@ -30,12 +30,12 @@ const PROFILES: Profile[] = [
 ];
 
 /**
- * CareerCopilot Dashboard ("The Canopy View")
+ * CareerCopilot Dashboard ("Solidarity Hub")
  *
  * V3.1 KrDark Mode Implementation:
- * ✓ ASSET-09 [DEPRECATED_STYLE] Labyrinth (Ceiling Motifs)
+ * ✓ ASSET-09 [SOLIDARITY_STYLE] Labyrinth (Ceiling Motifs)
  * ✓ High-fidelity Hero Metric Bar
- * ✓ 2x2 KrMotif Grid with Blur Bloom effects
+ * ✓ 2x2 KrMotif Grid with Expressive Synthesis effects
  */
 export function Dashboard() {
   const [heroData, setHeroData] = useState<{
@@ -126,13 +126,13 @@ export function Dashboard() {
             className="space-y-2"
           >
             <p className="font-annotation text-xs text-ink-gold tracking-[0.6em] uppercase opacity-60">
-              [ STATION.REPORT_SUMMARY ]
+              [ SOLIDARITY.REPORT_SUMMARY ]
             </p>
-            <h1 className="font-bloom text-7xl font-black text-paper-white tracking-tighter uppercase leading-[0.9]">
-              THE CANOPY <span className="text-ink-gold">VIEW</span>
+            <h1 className="font-display text-7xl font-black text-paper-white tracking-tighter uppercase leading-[0.9]">
+              SOLIDARITY <span className="text-ink-gold">HUB</span>
             </h1>
-            <p className="font-field-note text-lg text-concrete-grey opacity-70 italic">
-              "Archival synthesis reveals multiple growing opportunities."
+            <p className="font-primary text-lg text-concrete-grey opacity-70 italic">
+              "Archival synthesis reveals multiple resistance pathways."
             </p>
           </motion.div>
 
@@ -205,12 +205,12 @@ export function Dashboard() {
                 </div>
               </div>
 
-              {/* Station Energy / Velocity */}
+              {/* Solidarity Energy / Velocity */}
               <div className="space-y-1">
                 <div className="flex items-center gap-3 text-tertiary mb-3">
                   <Zap className="w-6 h-6" />
                   <span className="font-annotation text-[10px] uppercase tracking-[0.3em] font-bold">
-                    Inquiry Velocity
+                    Synthesis Velocity
                   </span>
                 </div>
                 <div className="relative pt-4">
@@ -262,7 +262,7 @@ export function Dashboard() {
         {/* 2x2 KrMotif Grid: Optimized Application Profiles */}
         <section className="space-y-8">
           <div className="flex items-baseline gap-4">
-            <h2 className="font-bloom text-3xl font-bold text-paper-white uppercase tracking-tight">
+            <h2 className="font-display text-3xl font-bold text-paper-white uppercase tracking-tight">
               RECENT <span className="text-ink-gold">SYNTHESIS</span>
             </h2>
             <div className="flex-1 h-px bg-concrete-grey/10" />
@@ -284,7 +284,7 @@ export function Dashboard() {
                   elevation="floating"
                   className="p-8 border-concrete-grey/10 bg-asphalt-black/20 group-hover:bg-asphalt-black/40 group-hover:border-ink-gold/30 transition-all duration-500 overflow-hidden relative"
                 >
-                  {/* Hover Bloom Effect */}
+                  {/* Active Synthesis Effect */}
                   <div className="absolute -inset-20 bg-ink-gold/5 blur-[100px] opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none" />
 
                   <div className="relative z-10 flex justify-between items-start">
@@ -293,7 +293,7 @@ export function Dashboard() {
                         <p className="font-annotation text-[10px] text-ink-gold uppercase tracking-[0.2em] opacity-80 mb-1">
                           {profile.company}
                         </p>
-                        <h3 className="font-bloom text-2xl font-black text-paper-white tracking-tight leading-tight uppercase group-hover:text-ink-gold transition-colors">
+                        <h3 className="font-display text-2xl font-black text-paper-white tracking-tight leading-tight uppercase group-hover:text-ink-gold transition-colors">
                           {profile.name}
                         </h3>
                       </div>

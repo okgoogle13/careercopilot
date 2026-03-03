@@ -16,6 +16,14 @@ Use this skill as the top-level orchestration layer for work that spans multiple
 5. Recalculate status from evidence: update progress based on completed milestones, failed gates, active blockers, and current capacity rather than narrative estimates alone.
 6. Escalate blockers early: record severity, owner, impact radius, mitigation, and the next checkpoint where the blocker must be re-evaluated.
 7. Publish an executive snapshot: summarize current phase, completion percent, key risks, dependencies at risk, next gates, and the single highest-priority decision.
+8. When a phase reaches PHASE_COMPLETE state, proactively provide:
+   - Phase completion summary (deliverables, metrics achieved, time taken)
+   - Celebration acknowledgment (recognize team effort and milestone achievement)
+   - Concrete next-step recommendations:
+     * If next phase exists: "Recommended Next Action: Initiate Phase [N+1]: [Name]. Key preparation: [list 2-3 items]"
+     * If project complete: "Recommended Next Actions: [1] Conduct project retrospective, [2] Archive project artifacts, [3] Update stakeholder documentation"
+     * If blockers remain: "Recommended Next Action: Resolve [blocker name] before advancing. Escalation path: [owner + timeline]"
+   - Timeline: "Suggested timeline for Phase [N+1] kickoff: [date/timeframe]"
 
 ## Use The Bundled Resources
 
@@ -33,3 +41,8 @@ Use this skill as the top-level orchestration layer for work that spans multiple
 - Refuse to advance a phase without a concrete gate and a named owner.
 - Prefer measurable delivery signals over subjective progress summaries.
 - Preserve traceability between phases, tasks, blockers, and downstream handoffs.
+- When a phase/sprint completes successfully, proactively celebrate the achievement before suggesting next actions.
+- Acknowledge team effort and velocity metrics (e.g., "Sprint completed successfully! Team maintained high velocity despite mid-sprint blocker.")
+- Provide concrete, actionable next steps—not vague suggestions (e.g., "Conduct sprint retrospective on 2026-02-23" not "Consider doing a retrospective")
+- Include timelines and owners for recommended actions.
+- Prioritize recommendations (Immediate → Short-term → Long-term).

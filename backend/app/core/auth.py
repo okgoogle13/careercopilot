@@ -1,5 +1,5 @@
 """
-Authentication system using Supabase JWTs.
+Authentication system using Firebase ID tokens.
 """
 
 import logging
@@ -9,63 +9,34 @@ from typing import Any
 
 from fastapi import Depends, HTTPException, status
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
-
-try:
-    from jose import JWTError, jwt
-except ImportError:  # pragma: no cover - optional dependency in test/CI
-    class JWTError(Exception):
-        pass
-
-    class _JwtStub:
-        def decode(self, *args, **kwargs):
-            raise JWTError("python-jose not installed")
-
-    jwt = _JwtStub()
 from sqlalchemy.orm import Session
+
 from app.core.database import get_db
-from app.core.secure_config import SecureSettings
+from app.core.firebase import verify_id_token
 from app.models.user import User
 
-settings = SecureSettings()
-SECRET_KEY = settings.JWT_SECRET_KEY
-ALGORITHM = settings.ALGORITHM
+logger = logging.getLogger(__name__)
 
 # JWT Bearer token scheme
 security = HTTPBearer()
 
 class AuthManager:
-    """Handles authentication operations via Supabase JWTs"""
+    """Handles authentication operations via Firebase ID tokens"""
 
     def verify_token(self, token: str) -> dict[str, Any] | None:
-        """Verify JWT token and return payload"""
-        try:
-            # Supabase tokens are signed with the project secret
-            if not SECRET_KEY:
-                logger.error("JWT_SECRET_KEY is not set!")
-                return None
-
-            payload = jwt.decode(
-                token,
-                SECRET_KEY,
-                algorithms=[ALGORITHM],
-                options={"verify_aud": False} # Supabase 'aud' can vary (authenticated, etc)
-            )
-            return payload
-        except JWTError as e:
-            logger.warning(f"Token verification failed: {e}")
-            return None
+        """Verify Firebase ID token and return payload"""
+        return verify_id_token(token)
 
 # Global auth manager instance
 auth_manager = AuthManager()
-
 
 async def get_current_user(
     credentials: HTTPAuthorizationCredentials = Depends(security),
     db: Session = Depends(get_db),
 ) -> User:
     """
-    FastAPI dependency to get current authenticated user from JWT token.
-    Validates the Supabase Token and ensures the user exists in our local cache (users table).
+    FastAPI dependency to get current authenticated user from Firebase ID token.
+    Validates the Firebase Token and ensures the user exists in our local cache (users table).
     """
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
@@ -79,8 +50,8 @@ async def get_current_user(
         if payload is None:
             raise credentials_exception
 
-        # Supabase stores the UUID in 'sub'
-        user_id: str = payload.get("sub")
+        # Firebase stores the UUID in 'sub' or 'uid'
+        user_id: str = payload.get("sub") or payload.get("uid")
         if user_id is None:
             raise credentials_exception
 
@@ -89,9 +60,8 @@ async def get_current_user(
         if user is None:
             # Extract metadata for JIT provisioning
             email = payload.get("email")
-            # Supabase stores name in user_metadata
-            user_metadata = payload.get("user_metadata", {})
-            name = user_metadata.get("full_name") or user_metadata.get("name") or email.split("@")[0] if email else "Supabase User"
+            # Firebase stores name directly or in 'name'
+            name = payload.get("name") or email.split("@")[0] if email else "Firebase User"
             
             if not email:
                 logger.error(f"Token for {user_id} missing email, required for provisioning")
@@ -138,10 +108,9 @@ async def get_current_user_optional(
 
 def create_user_token(user: User) -> str:
     """
-    Legacy helper - Supabase handles token generation.
-    Leaving this stub or raising error if used.
+    Legacy helper - Firebase handles token generation.
     """
-    raise NotImplementedError("Tokens are managed by Supabase Auth")
+    raise NotImplementedError("Tokens are managed by Firebase Auth")
 
 # Simple rate limiter (unchanged)
 class RateLimiter:

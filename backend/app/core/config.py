@@ -8,6 +8,7 @@ with support for loading secrets from Google Cloud Secret Manager.
 from dataclasses import dataclass, field
 from typing import Any
 
+from pydantic import Field
 from pydantic_settings import BaseSettings
 
 # Import the secure settings

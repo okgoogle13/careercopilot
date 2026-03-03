@@ -15,25 +15,28 @@ import {
   MOCK_OPPORTUNITIES,
 } from './mockData';
 import { syncEngine } from '../lib/syncEngine';
-import { supabase } from '../config/supabase';
+import { auth } from '../config/firebase';
 
 // Configuration
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080/api';
+const API_URL = import.meta.env?.VITE_API_URL || 'http://localhost:8080/api';
 // Default to using mock API unless explicitly disabled
-const USE_MOCK = import.meta.env.VITE_USE_MOCK_API !== 'false';
+const USE_MOCK = import.meta.env?.VITE_USE_MOCK_API !== 'false';
 
 // Simulate API delay
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const getAuthToken = async () => {
     // In dev mode with mock api enabled, return a dummy token
-    if (import.meta.env.DEV && import.meta.env.VITE_USE_MOCK_API !== 'false') {
+    if (import.meta.env?.DEV && import.meta.env?.VITE_USE_MOCK_API !== 'false') {
         return 'dev-token';
     }
     
-    // Get session from Supabase client
-    const { data } = await supabase.auth.getSession();
-    return data.session?.access_token || '';
+    // Get token from Firebase client
+    const user = auth.currentUser;
+    if (user) {
+        return await user.getIdToken();
+    }
+    return '';
 };
 
 // Keys for syncEngine

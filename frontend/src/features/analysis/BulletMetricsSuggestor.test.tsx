@@ -1,5 +1,4 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import { describe, it, expect, vi } from 'vitest';
 import { BulletMetricsSuggestor } from './BulletMetricsSuggestor';
 import type { ImprovedBullet } from '../../services/aiInterface';
 
@@ -23,7 +22,7 @@ describe('BulletMetricsSuggestor', () => {
     render(
       <BulletMetricsSuggestor
         bullets={[]}
-        onSuggestMetrics={vi.fn()}
+        onSuggestMetrics={jest.fn()}
         loading={false}
       />
     );
@@ -34,7 +33,7 @@ describe('BulletMetricsSuggestor', () => {
     render(
       <BulletMetricsSuggestor
         bullets={[]}
-        onSuggestMetrics={vi.fn()}
+        onSuggestMetrics={jest.fn()}
         loading={false}
       />
     );
@@ -43,7 +42,7 @@ describe('BulletMetricsSuggestor', () => {
   });
 
   it('calls onSuggestMetrics when the button is clicked', () => {
-    const onSuggestMetrics = vi.fn();
+    const onSuggestMetrics = jest.fn();
     render(
       <BulletMetricsSuggestor
         bullets={[]}
@@ -52,14 +51,14 @@ describe('BulletMetricsSuggestor', () => {
       />
     );
     fireEvent.click(screen.getByTestId('suggest-metrics-btn'));
-    expect(onSuggestMetrics).toHaveBeenCalledOnce();
+    expect(onSuggestMetrics).toHaveBeenCalledTimes(1);
   });
 
   it('disables the button and shows loader when loading', () => {
     render(
       <BulletMetricsSuggestor
         bullets={[]}
-        onSuggestMetrics={vi.fn()}
+        onSuggestMetrics={jest.fn()}
         loading={true}
       />
     );
@@ -72,18 +71,18 @@ describe('BulletMetricsSuggestor', () => {
     render(
       <BulletMetricsSuggestor
         bullets={[]}
-        onSuggestMetrics={vi.fn()}
+        onSuggestMetrics={jest.fn()}
         loading={false}
       />
     );
-    expect(screen.getByText(/Click.*Suggest Metrics/i)).toBeInTheDocument();
+    expect(screen.getByText(/generate quantifiable rewrites/i)).toBeInTheDocument();
   });
 
   it('does not show the empty state when bullets are present', () => {
     render(
       <BulletMetricsSuggestor
         bullets={sampleBullets}
-        onSuggestMetrics={vi.fn()}
+        onSuggestMetrics={jest.fn()}
         loading={false}
       />
     );
@@ -95,7 +94,7 @@ describe('BulletMetricsSuggestor', () => {
     render(
       <BulletMetricsSuggestor
         bullets={sampleBullets}
-        onSuggestMetrics={vi.fn()}
+        onSuggestMetrics={jest.fn()}
         loading={false}
       />
     );
@@ -107,7 +106,7 @@ describe('BulletMetricsSuggestor', () => {
     render(
       <BulletMetricsSuggestor
         bullets={sampleBullets}
-        onSuggestMetrics={vi.fn()}
+        onSuggestMetrics={jest.fn()}
         loading={false}
       />
     );
@@ -119,7 +118,7 @@ describe('BulletMetricsSuggestor', () => {
     render(
       <BulletMetricsSuggestor
         bullets={sampleBullets}
-        onSuggestMetrics={vi.fn()}
+        onSuggestMetrics={jest.fn()}
         loading={false}
       />
     );
@@ -133,7 +132,7 @@ describe('BulletMetricsSuggestor', () => {
     render(
       <BulletMetricsSuggestor
         bullets={sampleBullets}
-        onSuggestMetrics={vi.fn()}
+        onSuggestMetrics={jest.fn()}
         loading={false}
       />
     );

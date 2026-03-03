@@ -46,7 +46,7 @@ const COMMON_HARD_SKILLS = [
   'kubernetes',
   'fastapi',
   'genkit',
-  'supabase',
+  'firebase',
   'power bi',
   'excel',
   'salesforce',

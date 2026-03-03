@@ -95,7 +95,7 @@ describe('useCareerIngestion', () => {
         });
 
         const { result } = renderHook(() => useCareerIngestion());
-        const files = [new File([''], 'test.pdf', { type: 'application/pdf' })];
+        const files = [new File(['dummy content'], 'test.pdf', { type: 'application/pdf' })];
 
         await act(async () => {
             await result.current.submitDocuments(files);

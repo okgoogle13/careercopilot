@@ -1,7 +1,6 @@
 import axios, { type AxiosError } from 'axios';
-import { supabase } from '../config/supabase';
+import { auth } from '../config/firebase';
 
-// Safe environment access for both Vite (browser) and Jest (node)
 // Safe environment access for both Vite (browser) and Jest (node)
 const metaEnv = import.meta.env;
 const envApiUrl = metaEnv?.VITE_API_URL || 'http://localhost:8000';
@@ -17,11 +16,10 @@ export const axiosInstance = axios.create({
 // Add request interceptor for token
 axiosInstance.interceptors.request.use(
   async (config) => {
-    const {
-      data: { session },
-    } = await supabase.auth.getSession();
-    if (session?.access_token) {
-      config.headers.Authorization = `Bearer ${session.access_token}`;
+    const user = auth.currentUser;
+    if (user) {
+      const token = await user.getIdToken();
+      config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
   },

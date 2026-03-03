@@ -2,19 +2,28 @@ import React from 'react';
 import { render, screen, waitFor, act } from '@testing-library/react';
 import { jest } from '@jest/globals';
 
-// Mock Supabase config
-const mockSupabase = {
-    auth: {
-        getSession: jest.fn(),
-        onAuthStateChange: jest.fn(),
-        signInWithPassword: jest.fn(),
-        signUp: jest.fn(),
-        signOut: jest.fn(),
-    },
+// Mock Firebase config
+const mockAuth = {
+    onAuthStateChanged: jest.fn(),
+    signInWithEmailAndPassword: jest.fn(),
+    createUserWithEmailAndPassword: jest.fn(),
+    signOut: jest.fn(),
+    currentUser: null,
 };
 
-(jest as any).unstable_mockModule('@/config/supabase', () => ({
-    supabase: mockSupabase,
+(jest as any).unstable_mockModule('firebase/auth', () => ({
+    onAuthStateChanged: (auth: any, callback: any) => mockAuth.onAuthStateChanged(callback),
+    signInWithEmailAndPassword: mockAuth.signInWithEmailAndPassword,
+    createUserWithEmailAndPassword: mockAuth.createUserWithEmailAndPassword,
+    signOut: mockAuth.signOut,
+    getIdToken: jest.fn().mockResolvedValue('test-token'),
+    updateProfile: jest.fn(),
+}));
+
+(jest as any).unstable_mockModule('@/config/firebase', () => ({
+    auth: mockAuth,
+    db: {},
+    storage: {},
 }));
 
 // Dynamic import after mocking
@@ -45,19 +54,13 @@ describe('AuthContext', () => {
     beforeEach(() => {
         jest.clearAllMocks();
         // Default behavior: no user
-        mockSupabase.auth.getSession.mockResolvedValue({ data: { session: null }, error: null });
-        mockSupabase.auth.onAuthStateChange.mockReturnValue({
-            data: { subscription: { unsubscribe: jest.fn() } },
+        mockAuth.onAuthStateChanged.mockImplementation((callback: any) => {
+            callback(null);
+            return jest.fn(); // Unsubscribe mock
         });
     });
 
     it('shows loading initially', async () => {
-        // We can't easily test the loading state *before* useEffect runs in this setup without delaying the promise,
-        // but we can check initial render if needed.
-        // However, with `await import`, the component might render fast.
-        // We'll skip precise "initial loading" frame check and focus on eventual states or use a delayed mock.
-        
-        // Let's verify it renders.
         render(
             <AuthProvider>
                 <TestComponent />
@@ -69,11 +72,11 @@ describe('AuthContext', () => {
         });
     });
 
-    it('provides user object when logged in via getSession', async () => {
-        const mockUser = { id: '123', email: 'test@example.com', user_metadata: { full_name: 'Test User' } };
-        mockSupabase.auth.getSession.mockResolvedValue({
-            data: { session: { user: mockUser } },
-            error: null,
+    it('provides user object when logged in via onAuthStateChanged', async () => {
+        const mockUser = { uid: '123', email: 'test@example.com', displayName: 'Test User' };
+        mockAuth.onAuthStateChanged.mockImplementation((callback: any) => {
+            callback(mockUser);
+            return jest.fn();
         });
 
         render(
@@ -87,9 +90,7 @@ describe('AuthContext', () => {
         });
     });
 
-    it('calls signInWithPassword on login', async () => {
-        mockSupabase.auth.signInWithPassword.mockResolvedValue({ data: { user: {} }, error: null });
-
+    it('calls signInWithEmailAndPassword on login', async () => {
         render(
             <AuthProvider>
                 <TestComponent />
@@ -102,17 +103,18 @@ describe('AuthContext', () => {
             screen.getByText('Login').click();
         });
 
-        expect(mockSupabase.auth.signInWithPassword).toHaveBeenCalledWith({
-            email: 'test@example.com',
-            password: 'password',
-        });
+        expect(mockAuth.signInWithEmailAndPassword).toHaveBeenCalledWith(
+            expect.any(Object),
+            'test@example.com',
+            'password'
+        );
     });
 
     it('calls signOut on logout', async () => {
-        const mockUser = { id: '123', email: 'test@example.com' };
-        mockSupabase.auth.getSession.mockResolvedValue({
-            data: { session: { user: mockUser } },
-            error: null,
+        const mockUser = { uid: '123', email: 'test@example.com' };
+        mockAuth.onAuthStateChanged.mockImplementation((callback: any) => {
+            callback(mockUser);
+            return jest.fn();
         });
 
         render(
@@ -127,6 +129,6 @@ describe('AuthContext', () => {
             screen.getByText('Logout').click();
         });
 
-        expect(mockSupabase.auth.signOut).toHaveBeenCalled();
+        expect(mockAuth.signOut).toHaveBeenCalled();
     });
 });

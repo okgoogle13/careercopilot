@@ -15,29 +15,35 @@ logger = logging.getLogger(__name__)
 router = APIRouter()
 
 
-@router.get("/supabase-config", response_model=dict[str, str])
-async def get_supabase_config():
-    """
-    Get Supabase configuration for frontend.
+from app.core.secret_manager import get_firebase_frontend_config
 
-    Returns:
-        dict: Supabase configuration for frontend
+@router.get("/firebase-config", response_model=dict[str, str])
+async def get_firebase_config():
+    """
+    Get Firebase configuration for frontend.
     """
     try:
-        supabase_url = os.getenv("SUPABASE_URL")
-        supabase_key = os.getenv("SUPABASE_ANON_KEY")
-
-        if not supabase_url or not supabase_key:
-            logger.warning("Supabase configuration incomplete")
-            raise HTTPException(status_code=503, detail="Supabase configuration not available")
-
-        return {
-            "url": supabase_url,
-            "anonKey": supabase_key,
+        # Use secret_manager which handles both env vars and GCP Secret Manager
+        frontend_config = get_firebase_frontend_config()
+        
+        # Map to CamelCase keys expected by Firebase JS SDK
+        config = {
+            "apiKey": frontend_config["api_key"],
+            "authDomain": frontend_config["auth_domain"],
+            "projectId": frontend_config["project_id"],
+            "storageBucket": frontend_config["storage_bucket"],
+            "messagingSenderId": frontend_config["messaging_sender_id"],
+            "appId": frontend_config["app_id"],
         }
+
+        if not config["projectId"]:
+            logger.warning("Firebase configuration incomplete: missing projectId")
+            raise HTTPException(status_code=503, detail="Firebase configuration not available")
+
+        return config
 
     except HTTPException:
         raise
     except Exception as e:
-        logger.error(f"Failed to get Supabase configuration: {e}")
-        raise HTTPException(status_code=500, detail="Failed to retrieve Supabase configuration")
+        logger.error(f"Failed to get Firebase configuration: {e}")
+        raise HTTPException(status_code=500, detail="Failed to retrieve Firebase configuration")

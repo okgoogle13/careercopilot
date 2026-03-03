@@ -1,13 +1,13 @@
 /**
  * ═══════════════════════════════════════════════════════════════════════════
  * kerala-rage kr-solidarity TYPOGRAPHY - THE FEDERATION STACK
- * kerala-streetprint Naturalist Field Station Design System V3.1 (EXPRESSIVE MAXIMALISM)
+ * kerala-streetprint Solidarity Mode Design System V3.1 (EXPRESSIVE MAXIMALISM)
  * ═══════════════════════════════════════════════════════════════════════════
  *
  * 🎭 CURATOR'S HAND (Caveat)        — Hero Accents, Annotations
  * 🏛️ PROCLAMATION   (Libre Bodoni) — kr-dark Headers, Hero Moments
- * 🌸 BLOOM         (Fraunces)       — Sub-headers, Emotional Accents
- * 📝 FIELD NOTE    (Work Sans)      — Body Text, UI Elements
+ * 📢 DISPLAY        (Fraunces)       — Sub-headers, Emotional Accents
+ * 📝 PRIMARY        (Work Sans)      — Body Text, UI Elements
  * 🔬 ANNOTATION    (JetBrains Mono) — kr-dark Data, Technical Precision
  * 🌈 HERO ACCENT   (Nabla)          — DASHBOARD HERO ONLY
  *
@@ -58,9 +58,10 @@
   --spacing-xxxl: 48px;
   --radius-pebble: 20px 6px 16px 28px;
   --radius-stone: 16px 4px 12px 24px;
-  --radius-leaf: 24px 8px 20px 4px;
-  --radius-seed: 8px 4px 10px 6px;
+  --radius-organic: 24px 8px 20px 4px;
+  --radius-compact: 8px 4px 10px 6px;
   --radius-sentry: 98%;
+  /* Shadow Variables */
   --shadow-subtle: 0 2px 4px rgba(0, 0, 0, 0.15);
   --shadow-standard: 0 4px 8px rgba(0, 0, 0, 0.2);
   --shadow-elevated: 0 8px 16px rgba(0, 0, 0, 0.25);
@@ -71,10 +72,10 @@
   --duration-slow: 500ms;
   --duration-quick: 200ms;
 
-  /* Leaf Axis Defaults (MANDATORY for body rendering) */
-  --leaf-opsz: 12;
-  --leaf-grad: 0;
-  --leaf-xtra: 400;
+  /* Dynamic Axis Defaults (MANDATORY for body rendering) */
+  --font-opsz: 12;
+  --font-grad: 0;
+  --font-xtra: 400;
 }
 
 /* Standard Solidarity Mode axis configurations */
@@ -92,12 +93,12 @@
   body {
     background-color: var(--color-asphalt-black);
     color: var(--color-paper-white);
-    font-family: var(--font-field-note);
+    font-family: var(--font-primary);
     overflow-x: hidden;
     font-variation-settings:
-      'opsz' var(--leaf-opsz),
-      'GRAD' var(--leaf-grad),
-      'XTRA' var(--leaf-xtra);
+      'opsz' var(--font-opsz),
+      'GRAD' var(--font-grad),
+      'XTRA' var(--font-xtra);
   }
 
   /* ═══════════════════════════════════════════════════════════════════════
@@ -114,42 +115,42 @@
   }
 
   h2 {
-    font-family: var(--font-bloom);
+    font-family: var(--font-display);
     font-size: 72px;
     line-height: 1.2;
     font-weight: 600;
   }
 
   h3 {
-    font-family: var(--font-bloom);
+    font-family: var(--font-display);
     font-size: 48px;
     line-height: 1.3;
     font-weight: 600;
   }
 
   h4 {
-    font-family: var(--font-bloom);
+    font-family: var(--font-display);
     font-size: 32px;
     line-height: 1.4;
     font-weight: 600;
   }
 
   h5 {
-    font-family: var(--font-field-note);
+    font-family: var(--font-primary);
     font-size: 24px;
     line-height: 1.4;
     font-weight: 600;
   }
 
   h6 {
-    font-family: var(--font-field-note);
+    font-family: var(--font-primary);
     font-size: 18px;
     line-height: 1.5;
     font-weight: 600;
   }
 
   p {
-    font-family: var(--font-field-note);
+    font-family: var(--font-primary);
     font-size: 16px;
     line-height: 1.6;
     color: var(--color-concrete-grey);
@@ -157,7 +158,7 @@
 
   small,
   .text-small {
-    font-family: var(--font-field-note);
+    font-family: var(--font-primary);
     font-size: 12px;
     line-height: 1.5;
   }
@@ -174,7 +175,7 @@
   /* BUTTON BASE */
   button,
   .btn {
-    font-family: var(--font-field-note);
+    font-family: var(--font-primary);
     font-weight: 600;
     font-size: 14px;
     line-height: 1.5;
@@ -242,11 +243,12 @@
   }
 
   /* ═══════════════════════════════════════════════════════════════════════
-     THE BLOOM (Fraunces) — Sub-headers, Emotional Accents
+     THE DISPLAY (Fraunces) — Sub-headers, Emotional Accents
      ═══════════════════════════════════════════════════════════════════════ */
 
   .text-title,
-  .text-bloom {
+  .text-display,
+  .font-display {
     font-family: 'Fraunces', serif;
     font-weight: 500;
     font-variation-settings:
@@ -257,8 +259,8 @@
     color: rgba(255, 255, 255, 0.9);
   }
 
-  /* Bloom Soft (maximum native irregularity) */
-  .text-bloom-soft {
+  /* Display Soft (maximum native irregularity) */
+  .text-display-soft {
     font-family: 'Fraunces', serif;
     font-variation-settings:
       'SOFT' 100,
@@ -267,8 +269,8 @@
     font-style: italic;
   }
 
-  /* Bloom kr-dark (Expressive) - V3.1 ENHANCED */
-  .text-bloom-kr-expressive {
+  /* Display kr-dark (Expressive) - V3.1 ENHANCED */
+  .text-display-kr-expressive {
     font-family: 'Fraunces', serif;
     font-variation-settings:
       'SOFT' 100,
@@ -277,8 +279,8 @@
     color: var(--color-ink-gold);
   }
 
-  /* Bloom Ultra (Hero Moments) - NEW V3.1 */
-  .text-bloom-ultra {
+  /* Display Ultra (Hero Moments) - NEW V3.1 */
+  .text-display-ultra {
     font-family: 'Fraunces', serif;
     font-variation-settings:
       'SOFT' 100,
@@ -287,8 +289,8 @@
     color: var(--color-ink-gold);
   }
 
-  /* Bloom Editorial (Light) - NEW V3.1 */
-  .text-bloom-editorial {
+  /* Display Editorial (Light) - NEW V3.1 */
+  .text-display-editorial {
     font-family: 'Fraunces', serif;
     font-variation-settings:
       'SOFT' 100,
@@ -296,8 +298,8 @@
       'wght' 300;
   }
 
-  /* Bloom kr-dark (Restrained) */
-  .text-bloom-kr-restrained {
+  /* Display kr-dark (Restrained) */
+  .text-display-kr-restrained {
     font-family: 'Fraunces', serif;
     font-variation-settings:
       'SOFT' 20,
@@ -352,24 +354,25 @@
   }
 
   /* ═══════════════════════════════════════════════════════════════════════
-     THE FIELD NOTE (Work Sans) — Body Text, UI Elements
+     THE PRIMARY (Work Sans) — Body Text, UI Elements
      ═══════════════════════════════════════════════════════════════════════ */
 
   .text-body,
-  .text-field-note {
+  .text-primary,
+  .font-primary {
     font-family: 'Work Sans', sans-serif;
     font-weight: 400;
     line-height: 150%;
     color: rgba(255, 255, 255, 0.9);
   }
 
-  .text-field-note-medium {
+  .text-primary-medium {
     font-family: 'Work Sans', sans-serif;
     font-weight: 500;
     line-height: 140%;
   }
 
-  .text-field-note-bold {
+  .text-primary-bold {
     font-family: 'Work Sans', sans-serif;
     font-weight: 600;
     line-height: 140%;
@@ -573,12 +576,12 @@
      kr-flower COMPOSITION — Hero Moment Typography Duet
      ═══════════════════════════════════════════════════════════════════════ */
 
-  .kr-flower-composition {
+  .kr-solidarity-composition {
     position: relative;
     display: block;
   }
 
-  .kr-flower-proclamation {
+  .kr-solidarity-proclamation {
     font-family: 'kr-serif-bold', 'Playfair Display', serif;
     font-weight: 900;
     font-stretch: condensed;
@@ -588,7 +591,7 @@
     text-transform: uppercase;
   }
 
-  .kr-flower-bloom {
+  .kr-solidarity-display {
     font-family: 'Fraunces', serif;
     font-variation-settings:
       'SOFT' 50,
