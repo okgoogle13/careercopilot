@@ -1,6 +1,6 @@
 ---
 name: sprint-coordinator
-description: Coordinate sprint execution across planning, standups, release readiness, and delegated task batches. Use when Codex needs to turn goals into sprint milestones and tasks, summarize daily sprint status, compute a go or no-go release view from existing health signals, or prepare task-router style delegation payloads for parallel execution.
+description: Coordinate sprint execution across planning, standups, release readiness, and delegated task batches. Use when Codex or Claude Code needs to turn goals into sprint milestones and tasks, summarize daily sprint status, compute a go or no-go release view from existing health signals, or prepare task-router style delegation payloads for parallel execution.
 ---
 
 # Sprint Coordinator

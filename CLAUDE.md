@@ -116,7 +116,7 @@ These components are 100% compliant with `kr-solidarity` and should be used as t
 - **ManifestoSlab.tsx** (`Cabinet`): Complex layout container for text-heavy content.
 - **Stone.tsx** (`Stone`): Structural divider and spacing primitive.
 - **Lens.tsx** (`Lens`): Comprehensive text input and focal container.
-- **StatusBadge.tsx** (`Signal`): Status and notification indicator.
+- **Signal.tsx** (`Signal`): Status and notification indicator.
 
 **All archetypes MUST use `--sys-color-*` CSS variables, never hardcoded hex.**
 

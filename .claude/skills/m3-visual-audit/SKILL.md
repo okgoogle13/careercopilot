@@ -2,7 +2,7 @@
 name: m3-visual-audit
 description: Analyze component screenshots against Material Design 3 Expressive standards.
   Validate typography (variable fonts, extreme contrasts), color (vibrant tokens),
-  layout ([DEPRECATED_STYLE] asymmetry), motion (spring physics), and expressive distinctiveness.
+  layout (kr-solidarity organic asymmetry), motion (spring physics), and expressive distinctiveness.
   Generate compliance assessments with 0-100 scoring.
 metadata:
   legacy_frontmatter:
@@ -25,7 +25,7 @@ This skill validates components against M3 Expressive standards, which extend Ma
 | **Typography** | Clean, professional (Roboto)  | Solidarity Stack, 9× contrasts (Fraunces, Work Sans) |
 | **Color**      | Semantic tokens, neutral      | Vibrant semantic tokens, high saturation (40-80%)                   |
 | **Motion**     | Efficient (250-300ms, linear) | Springy, playful (250-400ms, cubic-bezier overshoot)                |
-| **Layout**     | Grid-aligned, mechanical      | [DEPRECATED_STYLE] asymmetry, intentional "imperfection"                       |
+| **Layout**     | Grid-aligned, mechanical      | kr-solidarity organic asymmetry, intentional "imperfection"                       |
 | **Components** | Predictable, minimal          | Personality-driven, visually distinctive                            |
 
 This audit validates the **Expressive** layer, not just baseline M3 compliance.
@@ -37,7 +37,7 @@ Use this skill when you need to:
 - **Audit a component screenshot** against M3 Expressive standards
 - **Validate typography choices** (are fonts distinctive and intentional?)
 - **Check color palette adherence** (are colors vibrant and M3 Expressive compliant?)
-- **Assess layout coherence** (is spacing [DEPRECATED_STYLE] or mechanical?)
+- **Assess layout coherence** (is spacing kr-solidarity organic or mechanical?)
 - **Evaluate motion quality** (spring physics vs. linear easing?)
 - **Compare component evolution** (Baseline M3 → M3 Expressive transformation)
 
@@ -48,7 +48,7 @@ Use this skill when you need to:
 3. **Audit Dimensions**:
    - Typography (Variable fonts, 3x+ weight ratio)
    - Color (Vibrant tokens, 40-80% saturation)
-   - Layout ([DEPRECATED_STYLE] asymmetry, varied spacing)
+   - Layout (kr-solidarity organic asymmetry, varied spacing)
    - Motion (Spring physics, bloom effect)
 4. **Generate Report**: Produce a structured JSON assessment with a 0-100 score and specific remediation steps.
 
@@ -56,16 +56,16 @@ Use this skill when you need to:
 
 ### 1. Typography Audit
 
-**Pass**: Distinctive Solidarity stacks (Fraunces, Work Sans, Libre Bodoni) with extreme weight contrasts (9× ratio: 100-900). Optical sizing enabled. Clear hierarchy. Decorative Nabla glyphs used as occasional icons/flourishes.
+**Pass**: Distinctive Solidarity stacks (Fraunces, Work Sans, Libre Bodoni) with extreme weight contrasts (9× ratio: 100-900). Optical sizing enabled. Clear hierarchy. Nabla used ONLY in First Nations solidarity contexts (decorative, icon-scale).
 
-**Needs Refinement**: Correct fonts but timid contrasts (1.25x ratio) or hierarchy unclear. Nabla used as a primary text font.
+**Needs Refinement**: Correct fonts but timid contrasts (1.25x ratio) or hierarchy unclear. Nabla misused outside solidarity context.
 
-**Fail**: Generic fonts (Inter, Roboto, Arial alone), generic M3 Expressive fonts (Sora, Poppins), or undefined hierarchy.
+**Fail**: Forbidden fonts (Inter, Roboto, Arial, Plus Jakarta Sans, Sora, Poppins, Montserrat, Space Grotesk, Crimson Pro, Playfair Display) or undefined hierarchy.
 
 **Specifics to Check:**
 
-- Font family: Fraunces/Work Sans/Libre Bodoni (not Sora/Poppins/Inter/Roboto)
-- Nabla Usage: **Decorative, icon-scale glyphs only**. NEVER primary text.
+- Font family: Work Sans Variable (wght 100-900), Fraunces Variable (opsz, wght, SOFT, WONK), Libre Bodoni, JetBrains Mono, Caveat ONLY
+- Nabla Usage: **RESTRICTED to First Nations solidarity contexts**. Decorative icon-scale only. NEVER primary text or generic decoration.
 - Weight contrast: 9× ratio (100 vs 900, not 400 vs 700)
 - Size contrast: 6× ratio (72px vs 12px)
 - Optical sizing: Enabled (font-optical-sizing: auto)
@@ -81,8 +81,8 @@ Use this skill when you need to:
 
 **M3 Expressive Specific Checks:**
 
-- ✅ Primary / Step 0 background (#0F0F0F) used
-- ✅ Solidarity Red / Ink Gold accents used
+- ✅ charcoalBackground (#1A1714) used (NOT #0F0F0F)
+- ✅ solidarityRed (#F14714) / inkGold (#DAF674) accents used
 - ✅ Saturation 40-80% (vibrant, not muted)
 - ❌ No purple gradients (#7C4DFF → #9C27B0)
 - ❌ No WHITE backgrounds (#FFFFFF)
@@ -92,7 +92,7 @@ Use this skill when you need to:
 
 ### 3. Layout Audit
 
-**Pass**: [DEPRECATED_STYLE] spacing, intentional asymmetry, clear visual hierarchy, varied spacing rhythm (8px, 16px, 24px, 40px).
+**Pass**: kr-solidarity organic spacing, intentional asymmetry, clear visual hierarchy, varied spacing rhythm (8px, 16px, 24px, 40px).
 
 **Needs Refinement**: Good spacing but feels slightly mechanical or hierarchy ambiguous.
 
@@ -151,7 +151,7 @@ Use this skill when you need to:
 
 - Font distinctiveness: Does typography show personality? (not Inter alone)
 - Weight contrast: Are weight differences extreme (3x+)? or timid (1.25x)?
-- Shape distinctiveness: Does component have [DEPRECATED_STYLE] asymmetry? or mechanical uniformity?
+- Shape distinctiveness: Does component have kr-solidarity organic asymmetry? or mechanical uniformity?
 - Visual hierarchy: Is hierarchy dramatic and clear? or subtle and timid?
 - Color personality: Do colors feel intentional and vibrant? or safe and muted?
 - Motion personality: Do interactions feel springy and alive? or stiff and functional?
@@ -161,7 +161,7 @@ Use this skill when you need to:
 
 - [ ] Typography shows personality (not generic font alone)
 - [ ] Weight/size contrasts are extreme (3x+, not timid)
-- [ ] Shapes show [DEPRECATED_STYLE] asymmetry (not mechanical grid)
+- [ ] Shapes show kr-solidarity organic asymmetry (not mechanical grid)
 - [ ] Colors feel vibrant and intentional (not safe/muted)
 - [ ] Interactions show spring physics (cubic-bezier overshoot)
 - [ ] Overall personality clear (this is M3 Expressive, not baseline)
@@ -171,7 +171,7 @@ Use this skill when you need to:
 
 **Pass (M3 Baseline)**: Component clearly embodies Material Design 3 standards; unmistakably intentional and on-spec.
 
-**Pass (M3 Expressive)**: Component clearly embodies M3 Expressive principles (distinctive personality, extreme contrasts, spring physics, vibrant tokens, [DEPRECATED_STYLE] asymmetry); unmistakably intentional and personality-driven, not generic/slop.
+**Pass (M3 Expressive)**: Component clearly embodies M3 Expressive principles (distinctive personality, extreme contrasts, spring physics, vibrant tokens, kr-solidarity organic asymmetry); unmistakably intentional and personality-driven, not generic/slop.
 
 **Needs Refinement**: Good direction but missing some M3 Expressive coherence (colors too muted, typography too restrained, motion too stiff, shapes too mechanical, personality unclear).
 
@@ -203,7 +203,7 @@ Structured JSON output for integration with compliance dashboards:
     "dimensions": {
       "typography": {
         "status": "pass|needs_refinement|fail",
-        "findings": "Plus Jakarta Sans Variable, weight 600, distinctive personality",
+        "findings": "Work Sans Variable, weight 600, distinctive personality",
         "m3_expressive_assessment": "Excellent - uses vibrant variable font with extreme weight contrast",
         "specifics": {
           "font_family": "Fraunces Variable / Work Sans Variable",
@@ -266,7 +266,7 @@ Structured JSON output for integration with compliance dashboards:
       "Hover bloom effect could include slight rotation (±2deg) for maximum personality"
     ],
 
-    "design_narrative": "This button demonstrates strong M3 Expressive mastery: Plus Jakarta Sans 600 weight creates personality without being overly bold, vibrant primary token shows intentional color choice, spring physics easing on hover creates the characteristic 'alive' feel of M3 Expressive. Zero generic markers. Production-ready."
+    "design_narrative": "This button demonstrates strong M3 Expressive mastery: Work Sans Variable 600 weight creates personality without being overly bold, vibrant solidarityRed token shows intentional color choice, spring physics easing on hover creates the characteristic 'alive' feel of M3 Expressive. Zero generic markers. Production-ready."
   }
 }
 ```
@@ -292,7 +292,7 @@ Before checking off a component as audit-complete, ensure it passes the **Materi
 - [ ] **No Generic Blue:** Zero use of #2196F3 or similar generic Material Blue
 - [ ] **Spring Physics Motion:** Easing uses cubic-bezier(0.34, 1.56, 0.64, 1) on interactions
 - [ ] **Hover Bloom Effect:** Hover states show scale increase + elevation increase
-- [ ] **[DEPRECATED_STYLE] Asymmetry:** Shapes show intentional asymmetry (not uniform border-radius)
+- [ ] **kr-solidarity organic Asymmetry:** Shapes show intentional asymmetry (not uniform border-radius)
 - [ ] **Intentional Personality:** Component feels distinctive, not generic/slop
 - [ ] **Zero AI Slop Markers:** No flat layouts, no timid contrasts, no cookie-cutter design
 
@@ -302,10 +302,10 @@ This audit validates five core M3 Expressive principles:
 
 ### 1. Distinctive Typography (No Generic Fonts)
 
-- ❌ Forbidden: Inter, Roboto, Arial, system fonts (alone)
-- ✅ Required: Variable fonts (Plus Jakarta Sans, Sora, Poppins) with extreme weight contrasts
+- ❌ Forbidden: Inter, Roboto, Arial, Plus Jakarta Sans, Sora, Poppins, Montserrat, Space Grotesk, system fonts
+- ✅ Required: Variable fonts (Work Sans wght 100-900, Fraunces opsz/wght/SOFT/WONK, Libre Bodoni, JetBrains Mono, Caveat, Nabla-restricted) with extreme weight contrasts
 - ✅ Required: Optical sizing enabled (font-optical-sizing: auto)
-- ✅ Required: 3x+ weight ratio (100 vs 900, not 400 vs 500)
+- ✅ Required: 9x+ weight ratio (100 vs 900, not 400 vs 500)
 
 ### 2. Extreme Contrasts (Visual Drama)
 
@@ -329,7 +329,7 @@ This audit validates five core M3 Expressive principles:
 - ❌ No purple gradients (clichéd)
 - ❌ No generic blue #2196F3 (baseline Material)
 
-### 5. [DEPRECATED_STYLE] Asymmetry (Intentional Distinctiveness)
+### 5. kr-solidarity organic Asymmetry (Intentional Distinctiveness)
 
 - ✅ Layout: Varied spacing and alignment (not grid-mechanical)
 - ✅ Shapes: Asymmetric border-radius (pebble, stone, leaf-inspired)

@@ -1,8 +1,8 @@
 ---
 name: component-visual-audit
 description: Analyze UI component screenshots against kerala-rage kr-solidarity standards.
-  Validate typography (distinctiveness, hierarchy), color palette (Australian [DEPRECATED_STYLE]),
-  layout ([DEPRECATED_STYLE] spacing, asymmetry), [DEPRECATED_STYLE] motif integration.
+  Validate typography (distinctiveness, hierarchy), color palette (Kerala Rage kr-solidarity),
+  layout (organic spacing, asymmetry), cultural motif integration.
   Generate compliance assessments with narrative feedback and design evolution tracking.
 metadata:
   legacy_frontmatter:
@@ -20,7 +20,7 @@ metadata:
 
 ## Purpose
 
-Validate **UI component screenshots** against kerala-rage kr-solidarity visual standards using Claude's vision capabilities. Designed specifically for component coherence auditing, not asset generation. Ensures typography, color, and layout align with the kerala-streetprint-[DEPRECATED_STYLE] aesthetic.
+Validate **UI component screenshots** against kerala-rage kr-solidarity visual standards using Claude's vision capabilities. Designed specifically for component coherence auditing, not asset generation. Ensures typography, color, and layout align with the Kerala Rage kr-solidarity aesthetic (Kerala diaspora + Naarm/Melbourne screenprint + wheat-paste poster aesthetics).
 
 ## When to Use This Skill
 
@@ -28,8 +28,8 @@ Use this skill when you need to:
 
 - **Audit a component screenshot** against kerala-rage design standards
 - **Validate typography choices** (are fonts distinctive and intentional?)
-- **Check color palette adherence** (are colors true to Australian [DEPRECATED_STYLE] palette?)
-- **Assess layout coherence** (is spacing [DEPRECATED_STYLE] or mechanical?)
+- **Check color palette adherence** (are colors true to Kerala Rage kr-solidarity palette?)
+- **Assess layout coherence** (is spacing organic or mechanical?)
 - **Compare component evolution** (Material Design → kerala-rage transformation)
 - **Generate compliance reports** (pass/fail/needs-refinement assessments)
 - **Identify design system drift** (are components becoming more or less kerala-rage?)
@@ -48,25 +48,33 @@ The skill uses Claude's vision capabilities to:
 
 ### 1. Typography Audit
 
-**Pass**: Distinctive fonts (Lora, Crimson Text, Fraunces) with clear display+body pairing
+**Pass**: Distinctive fonts from Kerala Rage stack (Work Sans Variable wght 100-900 for body/UI, Fraunces Variable for headlines, Libre Bodoni for authoritative text, JetBrains Mono for code, Caveat for handwritten accents, Nabla for RESTRICTED hero moments) with clear display+body pairing
 **Needs Refinement**: Good fonts but pairing unclear or emotion undefined
-**Fail**: Generic fonts (Inter, Arial, Roboto, Space Grotesk) or undefined hierarchy
+**Fail**: Generic fonts (Inter, Arial, Roboto, Space Grotesk, Plus Jakarta Sans, Sora, Poppins) or undefined hierarchy
 
 ### 2. Color Audit
 
-**Pass**: Australian [DEPRECATED_STYLE] palette (sage, terracotta, ochre, gold) with cohesive harmony
+**Pass**: Kerala Rage kr-solidarity palette with cohesive harmony:
+- charcoalBackground (#1A1714) - foundational canvas (never white)
+- solidarityRed (#F14714) - primary actions
+- kr-activistSmokeGreen (#48DA8B) - calm sections
+- inkGold (#DAF674) - celebratory states
+- stencilYellow (#F6E748) - warnings
+- worker-ash (#DAF6B3) - readable ink
+- solidaritySmokeOrange (#DA8B48) - warmth
+- labWrenMetalBlue (#48B3DA) - quiet accents
 **Needs Refinement**: Correct colors but harmony feels off or theme inconsistent
-**Fail**: Colors disconnected from [DEPRECATED_STYLE] inspiration or purple gradients (generic default)
+**Fail**: Colors disconnected from kr-solidarity inspiration, purple gradients (generic default), or white backgrounds
 
 ### 3. Layout Audit
 
-**Pass**: [DEPRECATED_STYLE] spacing, intentional asymmetry, clear visual hierarchy
+**Pass**: Organic spacing, intentional asymmetry (per archetype: Seed 40px 12px 40px 12px, Jar 32px 8px 28px 12px, Stone 16px 4px 12px 24px), clear visual hierarchy
 **Needs Refinement**: Good spacing but feels slightly mechanical or hierarchy ambiguous
 **Fail**: Grid-rigid, mechanical patterns or predictable cookie-cutter layouts
 
-### 4. [DEPRECATED_STYLE] Elements Audit
+### 4. Cultural Motif Integration Audit
 
-**Pass**: [DEPRECATED_STYLE] motifs integrated meaningfully, supporting hierarchy or clarity
+**Pass**: Kerala diaspora / First Nations solidarity motifs integrated meaningfully (screenprint layering, wheat-paste texture, backwater palm frames), supporting hierarchy or clarity
 **Needs Refinement**: Motifs present but feel slightly ornamental or purpose unclear
 **Fail**: No motifs (when expected) or motifs feel decorative/bolted-on
 
@@ -152,27 +160,27 @@ Structured JSON output for integration with compliance dashboards:
         "status": "pass|needs_refinement|fail",
         "findings": "Lora display + Crimson Text body established",
         "specifics": {
-          "display_font": "Lora",
-          "body_font": "Crimson Text",
+          "display_font": "Fraunces Variable",
+          "body_font": "Work Sans Variable",
           "hierarchy_clarity": "clear",
           "distinctiveness": "high"
         }
       },
       "color": {
         "status": "pass|needs_refinement|fail",
-        "findings": "Sage primary, terracotta accent, within [DEPRECATED_STYLE] palette",
+        "findings": "solidarityRed primary, inkGold accent, within Kerala Rage kr-solidarity palette",
         "palette_adherence": "100%",
-        "theme_consistency": "light_mode_cohesive"
+        "theme_consistency": "solidarity_mode_cohesive"
       },
       "layout": {
         "status": "pass|needs_refinement|fail",
-        "findings": "[DEPRECATED_STYLE] spacing with intentional asymmetry",
-        "spacing_quality": "[DEPRECATED_STYLE]",
+        "findings": "Organic spacing with intentional asymmetry",
+        "spacing_quality": "organic",
         "hierarchy_clarity": "strong"
       },
-      "botanical_elements": {
+      "cultural_motifs": {
         "status": "pass|needs_refinement|fail",
-        "findings": "Subtle sage motif supports visual weight",
+        "findings": "Screenprint layering supports visual weight",
         "integration_quality": "meaningful",
         "ornamental_risk": "low"
       }
@@ -181,7 +189,7 @@ Structured JSON output for integration with compliance dashboards:
     "assessment": "Component strongly embodies kerala-rage vision",
     "recommendations": [
       "Consider slightly warmer undertone in accent color",
-      "[DEPRECATED_STYLE] motif could be slightly more prominent without becoming decorative"
+      "Screenprint motif could be slightly more prominent without becoming decorative"
     ],
 
     "design_narrative": "This button demonstrates intentional design mastery..."
@@ -197,9 +205,9 @@ Claude can identify:
 
 - Actual fonts rendered (not what you hoped)
 - Exact color usage (hex values or descriptions)
-- Spacing patterns ([DEPRECATED_STYLE] vs. mechanical)
+- Spacing patterns (organic vs. mechanical)
 - Visual hierarchy establishment
-- [DEPRECATED_STYLE] motif presence and integration
+- Cultural motif presence and integration (screenprint, wheat-paste aesthetics)
 
 ### Comparative Analysis
 
@@ -263,10 +271,20 @@ This skill:
 
 Before checking off an asset as audit-complete, ensure it passes the **kerala-rage Visual Audit**:
 
-- [ ] **Palette Compliance:** Is the red _Waratah Red_ (#C45C4B)? Is the gold _Wattle Gold_ (#D4A84B)? **Are there any forbidden blues/purples?**
-- [ ] **Anatomical Geometry:** Does the Echidna spine cluster look mathematical? Does the kr-flower pod show a spiral?
-- [ ] **Lighting:** Is the background pure black (#1A1714)? Is there dramatic contrast?
-- [ ] **Typology:** If text is present, is it a cream serif font (e.g., "Fig. II")?
+- [ ] **Palette Compliance:** Is the red _solidarityRed_ (#F14714)? Is the gold _inkGold_ (#DAF674)? **Are there any forbidden purples or white backgrounds?**
+- [ ] **Typography:** Are fonts from the approved stack (Work Sans, Fraunces, Libre Bodoni, JetBrains Mono, Caveat)? No Inter, Roboto, or generic system fonts?
+- [ ] **Layout Asymmetry:** Does the component use asymmetric border radius per archetype specification?
+- [ ] **Background:** Is the background charcoalBackground (#1A1714)? Is there dramatic contrast?
+- [ ] **Cultural Context:** Does the design reflect Kerala diaspora / Naarm solidarity aesthetics (screenprint, wheat-paste)?
+
+## Kerala Rage Identity Context
+
+The kerala-rage kr-solidarity design system embodies:
+
+- **Screenprint Aesthetic**: Layered, textured visual language inspired by grassroots poster art
+- **Wheat-Paste Poster Feel**: Urban, guerrilla aesthetics with intentional imperfection
+- **First Nations Solidarity Symbolism**: Restricted use of Aboriginal Flag colors (red #D81E05, yellow #FCD116, black #000000) in solidarity contexts only
+- **Kerala Diaspora Cultural References**: Backwater motifs, palm frames, activist smoke green tones
 
 ## Validation Questions
 
@@ -282,8 +300,8 @@ If yes to all, the audit is reliable.
 
 ## Related Documentation
 
-- **`references/component-visual-spec.md`** – Detailed audit criteria for each dimension (typography, color, layout, [DEPRECATED_STYLE] elements, coherence, microcopy)
-- **`references/passing-components.md`** – Real examples of pass/fail/needs-refinement components across Pebble, Lens, Stone archetypes
+- **`references/component-visual-spec.md`** – Detailed audit criteria for each dimension (typography, color, layout, cultural motif elements, coherence, microcopy)
+- **`references/passing-components.md`** – Real examples of pass/fail/needs-refinement components across Seed, Jar, Stone, Lens archetypes
 - **`references/design-evolution-tracking.md`** – Methodology for documenting component maturity progression (v1 → v5), portfolio-level tracking, and design narrative
 
 ---

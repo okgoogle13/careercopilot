@@ -6,3 +6,4 @@
 2026-03-03 03:03:37 | INFO     | app.main:on_startup:89 | Starting CareerCopilot API application
 2026-03-03 03:03:37 | INFO     | app.main:on_startup:94 | Database initialized successfully
 2026-03-03 03:03:37 | INFO     | app.main:on_startup:103 | Genkit AI framework initialized successfully
+2026-03-03 05:15:05 | INFO     | app.core.loguru_config:configure_loguru:179 | Loguru logging configured
