@@ -1,6 +1,6 @@
 # Claude Desktop MCP Configuration - Design System Integration
 
-**Last Updated:** 2026-01-29  
+**Last Updated:** 2026-01-29
 **Purpose:** Register Design System Sidekick server for kerala-rage kr-solidarity asset workflows
 
 ---
@@ -57,10 +57,6 @@ Add the `design-system-sidekick` server to your existing MCP servers configurati
         "FIREBASE_PROJECT_ID": "${FIREBASE_PROJECT_ID}"
       }
     },
-    "docker": {
-      "command": "python3",
-      "args": ["/Users/okgoogle13/Projects/careercopilot/servers/docker_mcp.py"]
-    }
   },
   "globalShortcut": "Cmd+Shift+Space"
 }
@@ -315,5 +311,5 @@ https://spec.modelcontextprotocol.io/
 
 ---
 
-**Configuration Complete**  
+**Configuration Complete**
 **Design System Sidekick Ready for kerala-rage kr-solidarity Asset Workflows**

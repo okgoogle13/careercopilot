@@ -29,6 +29,7 @@ logger = logging.getLogger(__name__)
 
 class AgentStatus(Enum):
     """Agent execution status"""
+
     PENDING = "pending"
     RUNNING = "running"
     COMPLETED = "completed"
@@ -37,6 +38,7 @@ class AgentStatus(Enum):
 
 class AgentPriority(Enum):
     """Agent execution priority"""
+
     LOW = "low"
     NORMAL = "normal"
     HIGH = "high"
@@ -46,7 +48,9 @@ class AgentPriority(Enum):
 class BaseAgent:
     """Base agent class for orchestrator with execution tracking"""
 
-    def __init__(self, agent_id: str, name: str, description: str, dependencies: list[str] | None = None):
+    def __init__(
+        self, agent_id: str, name: str, description: str, dependencies: list[str] | None = None
+    ):
         self.agent_id = agent_id
         self.name = name
         self.description = description
@@ -458,6 +462,8 @@ class AgentOrchestrator:
 
     def _initialize_agents(self) -> dict[str, BaseAgent]:
         """Initialize all available agents"""
+        from .test_automation_specialist import TestAutomationSpecialistAgent
+
         return {
             "job_scout": JobScoutAgent(),
             "market_analyst": MarketAnalystAgent(),

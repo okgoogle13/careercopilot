@@ -34,3 +34,4 @@ jobs:
         uses: gitleaks/gitleaks-action@v2
         with:
           config-path: .gitleaks.toml
+          github-token: ${{ secrets.GITHUB_TOKEN }}

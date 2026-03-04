@@ -12,7 +12,7 @@ from datetime import datetime
 from enum import Enum
 from typing import Any, TypeVar
 
-from pydantic import BaseModel, Field, ValidationError, validator
+from pydantic import BaseModel, Field, ValidationError, model_validator, validator
 
 logger = logging.getLogger(__name__)
 
@@ -42,6 +42,7 @@ class AIResponseValidationError(Exception):
         response_content: str | None = None,
         expected_schema: str | None = None,
     ):
+        self.message = message
         self.error_type = error_type
         self.original_error = original_error
         self.response_content = response_content
@@ -127,11 +128,13 @@ class SemanticAnalysis(BaseAIResponseSchema):
     # Legacy field name support
     similarityScore: float | None = None
 
-    @validator("similarityScore", pre=True, always=True)
-    def handle_legacy_field(cls, v, values):
-        if v is not None:
-            values["similarity_score"] = v
-        return v
+    @model_validator(mode="before")
+    @classmethod
+    def handle_legacy_field(cls, values: Any) -> Any:
+        if isinstance(values, dict) and values.get("similarityScore") is not None:
+            values = values.copy()
+            values["similarity_score"] = values["similarityScore"]
+        return values
 
 
 class JobRequirements(BaseAIResponseSchema):
@@ -149,17 +152,25 @@ class JobRequirements(BaseAIResponseSchema):
     experienceLevel: str | None = None
     educationLevel: str | None = None
 
-    @validator("requiredSkills", pre=True, always=True)
-    def handle_legacy_required_skills(cls, v, values):
-        if v is not None:
-            values["required_skills"] = v
-        return v
+    @model_validator(mode="before")
+    @classmethod
+    def handle_legacy_fields(cls, values: Any) -> Any:
+        if not isinstance(values, dict):
+            return values
 
-    @validator("preferredSkills", pre=True, always=True)
-    def handle_legacy_preferred_skills(cls, v, values):
-        if v is not None:
-            values["preferred_skills"] = v
-        return v
+        values = values.copy()
+        legacy_mappings = {
+            "requiredSkills": "required_skills",
+            "preferredSkills": "preferred_skills",
+            "experienceLevel": "experience_level",
+            "educationLevel": "education_level",
+        }
+
+        for legacy_name, current_name in legacy_mappings.items():
+            if values.get(legacy_name) is not None:
+                values[current_name] = values[legacy_name]
+
+        return values
 
 
 class ResumeEntities(BaseAIResponseSchema):
@@ -200,11 +211,24 @@ class ATSScoreBreakdown(BaseAIResponseSchema):
     semanticScore: float | None = None
     formattingScore: float | None = None
 
-    @validator("keywordScore", pre=True, always=True)
-    def handle_legacy_keyword_score(cls, v, values):
-        if v is not None:
-            values["keyword_score"] = v
-        return v
+    @model_validator(mode="before")
+    @classmethod
+    def handle_legacy_scores(cls, values: Any) -> Any:
+        if not isinstance(values, dict):
+            return values
+
+        values = values.copy()
+        legacy_mappings = {
+            "keywordScore": "keyword_score",
+            "semanticScore": "semantic_score",
+            "formattingScore": "formatting_score",
+        }
+
+        for legacy_name, current_name in legacy_mappings.items():
+            if values.get(legacy_name) is not None:
+                values[current_name] = values[legacy_name]
+
+        return values
 
 
 class ATSResult(BaseAIResponseSchema):
@@ -221,11 +245,24 @@ class ATSResult(BaseAIResponseSchema):
     matchedKeywords: list[str] | None = None
     missingKeywords: list[str] | None = None
 
-    @validator("overallScore", pre=True, always=True)
-    def handle_legacy_overall_score(cls, v, values):
-        if v is not None:
-            values["overall_score"] = v
-        return v
+    @model_validator(mode="before")
+    @classmethod
+    def handle_legacy_fields(cls, values: Any) -> Any:
+        if not isinstance(values, dict):
+            return values
+
+        values = values.copy()
+        legacy_mappings = {
+            "overallScore": "overall_score",
+            "matchedKeywords": "matched_keywords",
+            "missingKeywords": "missing_keywords",
+        }
+
+        for legacy_name, current_name in legacy_mappings.items():
+            if values.get(legacy_name) is not None:
+                values[current_name] = values[legacy_name]
+
+        return values
 
 
 # --- AI Response Validator Class ---
@@ -502,8 +539,8 @@ class AIResponseValidator:
 
 
 def validate_ai_response(
-    response_content: str,
-    schema_name: str,
+    response_content: Any,
+    schema_name: str | type[BaseAIResponseSchema],
     validator: AIResponseValidator | None = None,
     fallback_data: dict[str, Any] | None = None,
 ) -> ValidationResult:
@@ -511,8 +548,8 @@ def validate_ai_response(
     Convenience function for validating AI responses
 
     Args:
-        response_content: Raw AI response content
-        schema_name: Name of registered schema
+        response_content: Raw AI response content or parsed response object
+        schema_name: Name of registered schema or schema class
         validator: Optional custom validator instance
         fallback_data: Optional fallback data
 
@@ -521,6 +558,74 @@ def validate_ai_response(
     """
     if validator is None:
         validator = AIResponseValidator()
+
+    if isinstance(schema_name, type) and issubclass(schema_name, BaseAIResponseSchema):
+        schema_class = schema_name
+
+        if response_content is None or response_content == "" or response_content == {}:
+            return ValidationResult(
+                is_valid=False,
+                error_message="Empty response content",
+                error_type=ValidationErrorType.EMPTY_RESPONSE,
+            )
+
+        if isinstance(response_content, (dict, list)):
+            parsed_json = response_content
+        elif isinstance(response_content, str):
+            try:
+                cleaned_content = validator._clean_json_response(response_content)
+                parsed_json = json.loads(cleaned_content)
+            except json.JSONDecodeError as exc:
+                return ValidationResult(
+                    is_valid=False,
+                    error_message=f"Invalid JSON: {exc!s}",
+                    error_type=ValidationErrorType.INVALID_JSON,
+                )
+        else:
+            return ValidationResult(
+                is_valid=False,
+                error_message=f"Unsupported response content type: {type(response_content).__name__}",
+                error_type=ValidationErrorType.MALFORMED_STRUCTURE,
+            )
+
+        try:
+            validated_data = schema_class(**parsed_json)
+            return ValidationResult(
+                is_valid=True,
+                parsed_data=validated_data,
+                metadata={
+                    "schema_used": schema_class.__name__,
+                    "validation_timestamp": datetime.utcnow().isoformat(),
+                },
+            )
+        except ValidationError as exc:
+            errors = exc.errors()
+            missing_fields = [error for error in errors if error.get("type") == "missing"]
+            field_names = set(schema_class.model_fields)
+            has_known_fields = isinstance(parsed_json, dict) and any(
+                field in parsed_json for field in field_names
+            )
+
+            if missing_fields and not has_known_fields:
+                error_type = ValidationErrorType.MALFORMED_STRUCTURE
+            elif missing_fields:
+                error_type = ValidationErrorType.MISSING_REQUIRED_FIELDS
+            else:
+                error_type = ValidationErrorType.INVALID_FIELD_TYPE
+
+            return ValidationResult(
+                is_valid=False,
+                error_message=f"Schema validation failed: {exc!s}",
+                error_type=error_type,
+                metadata={"validation_errors": errors},
+            )
+
+        except Exception as exc:
+            return ValidationResult(
+                is_valid=False,
+                error_message=f"Validation error: {exc!s}",
+                error_type=ValidationErrorType.MALFORMED_STRUCTURE,
+            )
 
     return validator.validate_response(response_content, schema_name, fallback_data)
 
@@ -548,9 +653,7 @@ default_validator = AIResponseValidator()
 
 
 # Decorator for automatic response validation
-def validate_ai_response_decorator(
-    schema_name: str, fallback_data: dict[str, Any] | None = None
-):
+def validate_ai_response_decorator(schema_name: str, fallback_data: dict[str, Any] | None = None):
     """
     Decorator for automatic AI response validation
 

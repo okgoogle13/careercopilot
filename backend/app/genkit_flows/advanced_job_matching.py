@@ -7,7 +7,7 @@ of compatibility between candidates and job opportunities.
 
 import json
 import os
-from typing import Dict, List, Optional
+from typing import Any, Dict, List, Optional
 
 from dotenv import load_dotenv
 from pydantic import BaseModel, Field
@@ -20,8 +20,8 @@ try:
     import genkit
     from genkit.plugins import google_genai
 except Exception:
-    genkit = None
-    google_genai = None
+    genkit: Any = None
+    google_genai: Any = None
 
 
 def _noop_flow(*args, **kwargs):
@@ -39,7 +39,7 @@ load_dotenv()
 if genkit and getattr(genkit, "get_plugin", None) and not genkit.get_plugin("googleai"):
     genkit.init(plugins=[google_genai.init(api_key=os.getenv("GEMINI_API_KEY"))])
 
-gemini_pro = get_ai_config().get_model_config("gemini-3.0-flash")
+gemini_pro: Any = get_ai_config().get_model_config("gemini-3.0-flash")
 
 
 # Pydantic models for structured outputs
@@ -146,7 +146,7 @@ As an expert career coach and talent acquisition specialist, perform a comprehen
 Analyze how well this candidate fits the job opportunity across multiple dimensions.
 
 CANDIDATE PROFILE:
-{json.dumps(sanitized_profile, separators=(\',\', \':\'))}
+{json.dumps(sanitized_profile, separators=(",", ":"))}
 
 JOB DESCRIPTION:
 {sanitized_job.sanitized_content}
@@ -234,10 +234,10 @@ As an expert career strategist, rank these job opportunities for the candidate f
 Consider overall fit, success probability, career growth potential, and strategic value.
 
 CANDIDATE PROFILE:
-{json.dumps(sanitized_profile, separators=(\',\', \':\'))}
+{json.dumps(sanitized_profile, separators=(",", ":"))}
 
 JOB OPPORTUNITIES:
-{json.dumps(sanitized_jobs, separators=(\',\', \':\'))}
+{json.dumps(sanitized_jobs, separators=(",", ":"))}
 
 RANKING CRITERIA:
 1. Overall match quality (skills, experience, background)
@@ -316,7 +316,7 @@ As a career strategist and market analyst, analyze this candidate's competitive 
 for their target role in the specified market.
 
 CANDIDATE PROFILE:
-{json.dumps(sanitized_profile, separators=(\',\', \':\'))}
+{json.dumps(sanitized_profile, separators=(",", ":"))}
 
 TARGET ROLE: {sanitized_role.sanitized_content}
 LOCATION/MARKET: {sanitized_location.sanitized_content}

@@ -1,6 +1,6 @@
 # MCP Orchestration Patterns - Quick Reference
 
-**Last Updated**: 2026-02-15  
+**Last Updated**: 2026-02-15
 **Purpose**: Correct patterns for orchestrating Gemini MCP servers in CareerCopilot workflows
 
 ---
@@ -187,12 +187,12 @@ async def process_component(component):
     analysis = await flash_sidekick.quick_summarize(
         text=f"Component: {component}"
     )
-    
+
     # Step 2: Validate
     validation = await vision_scorer_mcp.score_visual_design(
         image_path=f"mockups/{component}.png"
     )
-    
+
     # Step 3: Package if valid
     if validation.score >= 320:
         package = await design_system_sidekick.generate_implementation_package(
@@ -315,7 +315,7 @@ for component in components:
 ```python
 # ✅ RIGHT - Parallel (fast)
 results = await asyncio.gather(*[
-    flash_sidekick.quick_summarize(f"Component: {c}") 
+    flash_sidekick.quick_summarize(f"Component: {c}")
     for c in components
 ])
 ```
@@ -345,5 +345,5 @@ After implementing orchestration:
 
 ---
 
-**Status**: ✅ **Architecture Corrected**  
+**Status**: ✅ **Architecture Corrected**
 **Ready for**: Direct MCP tool orchestration testing

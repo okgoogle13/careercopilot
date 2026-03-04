@@ -1,6 +1,6 @@
 # MCP Configuration - Single Source of Truth
 
-**Last Updated**: 2026-02-15  
+**Last Updated**: 2026-02-15
 **Status**: ✅ Consolidated to Antigravity config
 
 ---
@@ -110,7 +110,7 @@ code /Users/okgoogle13/Projects/careercopilot/mcp_config.json
    ```bash
    # Check symlink is intact
    ls -la /Users/okgoogle13/Projects/careercopilot/mcp_config.json
-   
+
    # Validate JSON
    cat ~/.gemini/antigravity/mcp_config.json | python3 -m json.tool
    ```
@@ -212,5 +212,5 @@ If you accidentally edit the wrong file:
 
 ---
 
-**Maintained by**: Antigravity  
+**Maintained by**: Antigravity
 **Configuration File**: `/Users/okgoogle13/.gemini/antigravity/mcp_config.json`

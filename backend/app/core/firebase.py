@@ -6,6 +6,7 @@ with proper error handling and configuration using Google Cloud Secret Manager.
 """
 
 import logging
+import os
 from typing import Any
 
 import firebase_admin
@@ -91,8 +92,6 @@ def initialize_firebase() -> App | None:
         # Configure emulator hosts if needed
         if emulator:
             if firebase_config["auth_emulator_host"]:
-                import os
-
                 os.environ["FIREBASE_AUTH_EMULATOR_HOST"] = firebase_config["auth_emulator_host"]
             if firebase_config["storage_emulator_host"]:
                 os.environ["FIREBASE_STORAGE_EMULATOR_HOST"] = firebase_config[

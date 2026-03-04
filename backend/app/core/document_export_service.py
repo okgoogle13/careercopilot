@@ -31,6 +31,7 @@ logger = get_logger(__name__)
 
 class DocumentExportOptions(BaseModel):
     """Options for document export and signed URL generation."""
+
     format: str  # 'pdf', 'docx', 'txt', 'json', 'zip'
     expiration_hours: float = 24.0  # Signed URL expiration (1-168 hours)
     include_metadata: bool = True
@@ -39,6 +40,7 @@ class DocumentExportOptions(BaseModel):
 
 class DocumentExportResult(BaseModel):
     """Result of document export operation."""
+
     success: bool
     document_type: str  # 'cover_letter', 'resume', 'ksc_response', 'application_package'
     file_format: str  # 'pdf', 'docx', 'json', 'zip'
@@ -69,12 +71,7 @@ class DocumentExportService:
         self.default_expiration_hours = 24.0
         self.max_expiration_hours = 168.0  # 7 days
 
-    def _get_storage_path(
-        self,
-        user_id: str,
-        document_type: str,
-        file_format: str
-    ) -> str:
+    def _get_storage_path(self, user_id: str, document_type: str, file_format: str) -> str:
         """
         Generate Cloud Storage path for exported document.
 
@@ -125,10 +122,7 @@ class DocumentExportService:
 
         try:
             logger.info(
-                "Exporting cover letter",
-                user_id=user_id,
-                job_title=job_title,
-                format=format
+                "Exporting cover letter", user_id=user_id, job_title=job_title, format=format
             )
 
             # Generate file content based on unified pipeline
@@ -141,22 +135,27 @@ class DocumentExportService:
                     "job_title": job_title,
                     "company_name": company_name,
                     "content": content,
-                    "exported_at": datetime.utcnow().isoformat()
+                    "exported_at": datetime.utcnow().isoformat(),
                 }
                 file_content = json.dumps(data, indent=2).encode("utf-8")
                 content_type = "application/json"
             else:
                 from app.core.document_pipeline import document_pipeline
+
                 try:
                     file_content = await document_pipeline.generate_document(
                         doc_type="cover_letter",
                         content=content,
-                        template_id=template_id,
+                        template_id=None,
                         file_format=format,
                         candidate_name=candidate_name,
-                        theme_id=theme_id
+                        theme_id=theme_id,
                     )
-                    content_type = "application/pdf" if format == "pdf" else "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                    content_type = (
+                        "application/pdf"
+                        if format == "pdf"
+                        else "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                    )
                 except Exception as e:
                     logger.warning(f"Pipeline failed, falling back to txt: {e}", user_id=user_id)
                     file_content = content.encode("utf-8")
@@ -176,17 +175,15 @@ class DocumentExportService:
                     "job_title": job_title,
                     "company_name": company_name or "N/A",
                     "document_type": "cover_letter",
-                    "exported_at": datetime.utcnow().isoformat()
+                    "exported_at": datetime.utcnow().isoformat(),
                 },
-                cache_control="private, max-age=86400"  # Private cache, 24h
+                cache_control="private, max-age=86400",  # Private cache, 24h
             )
 
             # Generate signed URL
             blob_name = storage_path
             signed_url = self.storage_client.generate_signed_url(
-                blob_name=blob_name,
-                expiration_hours=expiration_hours,
-                method="GET"
+                blob_name=blob_name, expiration_hours=expiration_hours, method="GET"
             )
 
             expires_at = self._get_expiration_time(expiration_hours)
@@ -197,9 +194,8 @@ class DocumentExportService:
                 user_id=user_id,
                 format=format,
                 file_size=file_size,
-                storage_path=storage_path
+                storage_path=storage_path,
             )
-
 
             return DocumentExportResult(
                 success=True,
@@ -209,15 +205,12 @@ class DocumentExportService:
                 file_size_bytes=file_size,
                 storage_path=gs_uri,
                 expires_at=expires_at,
-                message=f"Cover letter exported as {format.upper()}"
+                message=f"Cover letter exported as {format.upper()}",
             )
 
         except Exception as e:
             logger.error(
-                "Failed to export cover letter",
-                user_id=user_id,
-                error=str(e),
-                exc_info=True
+                "Failed to export cover letter", user_id=user_id, error=str(e), exc_info=True
             )
             raise
 
@@ -250,12 +243,7 @@ class DocumentExportService:
             raise ValueError(f"Unsupported format: {format}")
 
         try:
-            logger.info(
-                "Exporting resume",
-                user_id=user_id,
-                job_title=job_title,
-                format=format
-            )
+            logger.info("Exporting resume", user_id=user_id, job_title=job_title, format=format)
 
             # Generate file content based on unified pipeline
             if format == "json":
@@ -266,17 +254,22 @@ class DocumentExportService:
                 content_type = "application/json"
             else:
                 from app.core.document_pipeline import document_pipeline
+
                 sections = json.loads(content) if isinstance(content, str) else content
                 try:
                     file_content = await document_pipeline.generate_document(
                         doc_type="resume",
                         content=sections,
-                        template_id=template_id,
+                        template_id=None,
                         file_format=format,
                         candidate_name=candidate_name,
-                        theme_id=theme_id
+                        theme_id=theme_id,
                     )
-                    content_type = "application/pdf" if format == "pdf" else "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                    content_type = (
+                        "application/pdf"
+                        if format == "pdf"
+                        else "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                    )
                 except Exception as e:
                     logger.warning(f"Pipeline failed for resume, using JSON: {e}")
                     file_content = json.dumps(sections).encode("utf-8")
@@ -295,30 +288,22 @@ class DocumentExportService:
                     "user_id": user_id,
                     "job_title": job_title,
                     "document_type": "resume",
-                    "exported_at": datetime.utcnow().isoformat()
+                    "exported_at": datetime.utcnow().isoformat(),
                 },
-                cache_control="private, max-age=86400"
+                cache_control="private, max-age=86400",
             )
 
             # Generate signed URL
             signed_url = self.storage_client.generate_signed_url(
-                blob_name=storage_path,
-                expiration_hours=expiration_hours,
-                method="GET"
+                blob_name=storage_path, expiration_hours=expiration_hours, method="GET"
             )
 
             expires_at = self._get_expiration_time(expiration_hours)
             file_size = len(file_content)
 
             logger.info(
-                "Resume exported successfully",
-                user_id=user_id,
-                format=format,
-                file_size=file_size
+                "Resume exported successfully", user_id=user_id, format=format, file_size=file_size
             )
-
-
-
 
             return DocumentExportResult(
                 success=True,
@@ -328,16 +313,11 @@ class DocumentExportService:
                 file_size_bytes=file_size,
                 storage_path=gs_uri,
                 expires_at=expires_at,
-                message=f"Resume exported as {format.upper()}"
+                message=f"Resume exported as {format.upper()}",
             )
 
         except Exception as e:
-            logger.error(
-                "Failed to export resume",
-                user_id=user_id,
-                error=str(e),
-                exc_info=True
-            )
+            logger.error("Failed to export resume", user_id=user_id, error=str(e), exc_info=True)
             raise
 
     async def export_ksc_response(
@@ -369,10 +349,7 @@ class DocumentExportService:
 
         try:
             logger.info(
-                "Exporting KSC response",
-                user_id=user_id,
-                job_title=job_title,
-                format=format
+                "Exporting KSC response", user_id=user_id, job_title=job_title, format=format
             )
 
             # Generate file content based on unified pipeline
@@ -383,15 +360,20 @@ class DocumentExportService:
                 content_type = "application/json"
             else:
                 from app.core.document_pipeline import document_pipeline
+
                 try:
                     file_content = await document_pipeline.generate_document(
                         doc_type="ksc_response",
                         content=responses,
-                        template_id="star", # Default for KSC
+                        template_id="star",  # Default for KSC
                         file_format=format,
-                        theme_id=theme_id
+                        theme_id=theme_id,
                     )
-                    content_type = "application/pdf" if format == "pdf" else "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                    content_type = (
+                        "application/pdf"
+                        if format == "pdf"
+                        else "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                    )
                 except Exception as e:
                     logger.warning(f"Pipeline failed for KSC, using JSON: {e}")
                     file_content = json.dumps(response_data, indent=2).encode("utf-8")
@@ -407,15 +389,13 @@ class DocumentExportService:
                     "user_id": user_id,
                     "job_title": job_title,
                     "document_type": "ksc_response",
-                    "exported_at": datetime.utcnow().isoformat()
+                    "exported_at": datetime.utcnow().isoformat(),
                 },
-                cache_control="private, max-age=86400"
+                cache_control="private, max-age=86400",
             )
 
             signed_url = self.storage_client.generate_signed_url(
-                blob_name=storage_path,
-                expiration_hours=expiration_hours,
-                method="GET"
+                blob_name=storage_path, expiration_hours=expiration_hours, method="GET"
             )
 
             expires_at = self._get_expiration_time(expiration_hours)
@@ -425,11 +405,8 @@ class DocumentExportService:
                 "KSC response exported successfully",
                 user_id=user_id,
                 format=format,
-                file_size=file_size
+                file_size=file_size,
             )
-
-
-
 
             return DocumentExportResult(
                 success=True,
@@ -439,15 +416,12 @@ class DocumentExportService:
                 file_size_bytes=file_size,
                 storage_path=gs_uri,
                 expires_at=expires_at,
-                message=f"KSC response exported as {format.upper()}"
+                message=f"KSC response exported as {format.upper()}",
             )
 
         except Exception as e:
             logger.error(
-                "Failed to export KSC response",
-                user_id=user_id,
-                error=str(e),
-                exc_info=True
+                "Failed to export KSC response", user_id=user_id, error=str(e), exc_info=True
             )
             raise
 
@@ -458,7 +432,7 @@ class DocumentExportService:
         job_id: str,
         format: str = "json",
         expiration_hours: float | None = None,
-        include_files: bool = True
+        include_files: bool = True,
     ) -> DocumentExportResult:
         """
         Export complete application package to file and generate signed URL.
@@ -485,10 +459,7 @@ class DocumentExportService:
 
         try:
             logger.info(
-                "Exporting application package",
-                user_id=user_id,
-                job_id=job_id,
-                format=format
+                "Exporting application package", user_id=user_id, job_id=job_id, format=format
             )
 
             if format == "json":
@@ -498,10 +469,7 @@ class DocumentExportService:
             else:
                 # ZIP format would require zipfile library
                 # For now, export as JSON
-                logger.warning(
-                    "ZIP format not yet implemented, using JSON",
-                    user_id=user_id
-                )
+                logger.warning("ZIP format not yet implemented, using JSON", user_id=user_id)
                 file_content = json.dumps(package_data, indent=2).encode("utf-8")
                 content_type = "application/json"
                 format = "json"
@@ -516,15 +484,13 @@ class DocumentExportService:
                     "user_id": user_id,
                     "job_id": job_id,
                     "document_type": "application_package",
-                    "exported_at": datetime.utcnow().isoformat()
+                    "exported_at": datetime.utcnow().isoformat(),
                 },
-                cache_control="private, max-age=2592000"  # Private cache, 30 days
+                cache_control="private, max-age=2592000",  # Private cache, 30 days
             )
 
             signed_url = self.storage_client.generate_signed_url(
-                blob_name=storage_path,
-                expiration_hours=expiration_hours,
-                method="GET"
+                blob_name=storage_path, expiration_hours=expiration_hours, method="GET"
             )
 
             expires_at = self._get_expiration_time(expiration_hours)
@@ -534,7 +500,7 @@ class DocumentExportService:
                 "Application package exported successfully",
                 user_id=user_id,
                 format=format,
-                file_size=file_size
+                file_size=file_size,
             )
 
             return DocumentExportResult(
@@ -545,7 +511,7 @@ class DocumentExportService:
                 file_size_bytes=file_size,
                 storage_path=gs_uri,
                 expires_at=expires_at,
-                message=f"Application package exported as {format.upper()}"
+                message=f"Application package exported as {format.upper()}",
             )
 
         except Exception as e:
@@ -554,15 +520,12 @@ class DocumentExportService:
                 user_id=user_id,
                 job_id=job_id,
                 error=str(e),
-                exc_info=True
+                exc_info=True,
             )
             raise
 
     async def generate_batch_download(
-        self,
-        user_id: str,
-        document_types: list[str],
-        expiration_hours: float | None = None
+        self, user_id: str, document_types: list[str], expiration_hours: float | None = None
     ) -> dict[str, str]:
         """
         Generate signed URLs for batch download of multiple documents.
@@ -584,7 +547,7 @@ class DocumentExportService:
             "Generating batch download URLs",
             user_id=user_id,
             document_types=document_types,
-            expiration_hours=expiration_hours
+            expiration_hours=expiration_hours,
         )
 
         # TODO: Integrate with Firestore to fetch stored documents

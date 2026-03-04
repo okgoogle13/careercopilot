@@ -71,9 +71,12 @@ class BaseAIService:
         if input_data is None:
             raise ValueError("Input cannot be None")
 
-        if required_fields and hasattr(input_data, "__getitem__"):
+        if required_fields:
             for field in required_fields:
-                if field not in input_data or input_data[field] is None:
+                if hasattr(input_data, "__getitem__"):
+                    if field not in input_data or input_data[field] is None:
+                        raise ValueError(f"Missing required field: {field}")
+                elif not hasattr(input_data, field) or getattr(input_data, field) is None:
                     raise ValueError(f"Missing required field: {field}")
 
     def handle_error(self, error: Exception, context: str = "") -> None:

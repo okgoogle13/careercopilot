@@ -2,15 +2,16 @@
 Tests for the orchestrator module.
 """
 
+from datetime import datetime, timedelta
+from typing import Any
+from unittest.mock import AsyncMock, patch
+
 import pytest
 from fastapi.testclient import TestClient
-from unittest.mock import patch, AsyncMock
-from datetime import datetime
-from typing import Any
 
 from app.agents.orchestrator import (
-    AgentStatus,
     AgentPriority,
+    AgentStatus,
     BaseAgent,
     JobScoutAgent,
 )
@@ -136,8 +137,8 @@ class TestJobScoutAgent:
         assert agent.priority == AgentPriority.HIGH
 
     @pytest.mark.asyncio
-    @patch('app.agents.orchestrator.JobScoutAgent._discover_jobs')
-    @patch('app.agents.orchestrator.JobScoutAgent._analyze_job_relevance')
+    @patch("app.agents.orchestrator.JobScoutAgent._discover_jobs")
+    @patch("app.agents.orchestrator.JobScoutAgent._analyze_job_relevance")
     async def test_run_task_success(self, mock_analyze, mock_discover):
         """Test the _run_task method with successful job discovery and analysis."""
         mock_discover.return_value = [
@@ -157,8 +158,8 @@ class TestJobScoutAgent:
         assert result["search_criteria"] == {"keyword": "test"}
 
     @pytest.mark.asyncio
-    @patch('app.agents.orchestrator.JobScoutAgent._discover_jobs')
-    @patch('app.agents.orchestrator.JobScoutAgent._analyze_job_relevance')
+    @patch("app.agents.orchestrator.JobScoutAgent._discover_jobs")
+    @patch("app.agents.orchestrator.JobScoutAgent._analyze_job_relevance")
     async def test_run_task_empty_jobs(self, mock_analyze, mock_discover):
         """Test the _run_task method with no jobs discovered."""
         mock_discover.return_value = []

@@ -1,8 +1,10 @@
-import google.generativeai as genai
-from pydantic import BaseModel, Field
-from typing import List, Optional
 import os
+from typing import List, Optional
+
+import google.generativeai as genai
 from dotenv import load_dotenv
+from pydantic import BaseModel, Field
+
 from app.services.vector_store import VectorStore
 
 load_dotenv()
@@ -10,12 +12,20 @@ load_dotenv()
 # Configure Gemini
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 
-model = genai.GenerativeModel('gemini-3.0-pro')
+model = genai.GenerativeModel("gemini-1.5-flash")
+
 
 class GapAnalysisResult(BaseModel):
-    missing_skills: List[str] = Field(description="List of critical skills found in JD but missing in Resume.")
-    evidence_found: List[str] = Field(description="Evidence found in user history for these missing skills.")
-    strategy_advice: str = Field(description="Advice on how to bridge the gap using the found evidence.")
+    missing_skills: List[str] = Field(
+        description="List of critical skills found in JD but missing in Resume."
+    )
+    evidence_found: List[str] = Field(
+        description="Evidence found in user history for these missing skills."
+    )
+    strategy_advice: str = Field(
+        description="Advice on how to bridge the gap using the found evidence."
+    )
+
 
 def gap_hunter_flow(resume_text: str, job_description: str) -> GapAnalysisResult:
     """
@@ -40,7 +50,7 @@ def gap_hunter_flow(resume_text: str, job_description: str) -> GapAnalysisResult
     response_gaps = model.generate_content(prompt_identify)
 
     missing_skills_text = response_gaps.text
-    missing_skills = [s.strip() for s in missing_skills_text.split(',') if s.strip()]
+    missing_skills = [s.strip() for s in missing_skills_text.split(",") if s.strip()]
 
     # Step 2: Hunt for Evidence
     found_evidence = []
@@ -51,9 +61,11 @@ def gap_hunter_flow(resume_text: str, job_description: str) -> GapAnalysisResult
 
         if results:
             best_match = results[0]
-            source = best_match['metadata'].get('source_type', 'Unknown Source')
-            evidence_snippet = best_match['content'][:200] + "..."
-            found_evidence.append(f"For '{skill}', found evidence in {source}: \"{evidence_snippet}\"")
+            source = best_match["metadata"].get("source_type", "Unknown Source")
+            evidence_snippet = best_match["content"][:200] + "..."
+            found_evidence.append(
+                f"For '{skill}', found evidence in {source}: \"{evidence_snippet}\""
+            )
 
     # Step 3: Generate Strategy Advice
     strategy_advice = "No major gaps found."
@@ -66,5 +78,5 @@ def gap_hunter_flow(resume_text: str, job_description: str) -> GapAnalysisResult
     return GapAnalysisResult(
         missing_skills=missing_skills,
         evidence_found=found_evidence,
-        strategy_advice=strategy_advice
+        strategy_advice=strategy_advice,
     )

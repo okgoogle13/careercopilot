@@ -6,7 +6,7 @@ opportunities from email, ranks them, and creates calendar tasks for the best ma
 """
 
 from datetime import datetime
-from typing import Dict, List
+from typing import Any, Dict, List
 
 from pydantic import BaseModel, Field
 
@@ -24,11 +24,11 @@ from .email_scanner import scanEmailsForJobOpportunities
 
 try:
     import genkit
-    from genkit.ai import flow as genkit_flow
+    from genkit.ai import flow as genkit_flow  # type: ignore[attr-defined]
 
     GENKIT_AVAILABLE = True
 except ImportError:
-    genkit = None
+    genkit: Any = None
     GENKIT_AVAILABLE = False
 
     def _noop_flow(*args, **kwargs):
@@ -91,6 +91,16 @@ async def scan_inbox_for_opportunities(user_id: str) -> WorkflowResult:
         WorkflowResult: Comprehensive workflow results including processing details
     """
     start_time = datetime.now()
+    workflow_result = WorkflowResult(
+        success=False,
+        total_opportunities_found=0,
+        opportunities_processed=0,
+        high_scoring_opportunities=0,
+        tasks_created=0,
+        processing_results=[],
+        workflow_timestamp=start_time.isoformat(),
+        execution_time_seconds=0.0,
+    )
 
     try:
         # Input validation
@@ -99,18 +109,6 @@ async def scan_inbox_for_opportunities(user_id: str) -> WorkflowResult:
 
         # Sanitize user_id
         sanitized_user_id = InputSanitizer.sanitize_text_input(user_id).sanitized_content
-
-        # Initialize workflow result
-        workflow_result = WorkflowResult(
-            success=False,
-            total_opportunities_found=0,
-            opportunities_processed=0,
-            high_scoring_opportunities=0,
-            tasks_created=0,
-            processing_results=[],
-            workflow_timestamp=start_time.isoformat(),
-            execution_time_seconds=0.0,
-        )
 
         # Step 1: Scan emails for job opportunities
         print(f"Starting email scan for user: {sanitized_user_id}")
@@ -254,7 +252,7 @@ async def _get_user_profile(user_id: str) -> Dict:
         # Extract relevant profile information for job matching
         profile = {
             "current_role": user_data.get("career_transition_from", ""),
-            "years_experience": 5, # Default since we don't have years_of_experience in User anymore
+            "years_experience": 5,  # Default since we don't have years_of_experience in User anymore
             "skills": user_data.get("target_roles", []),
             "education": [],
             "preferred_location": user_data.get("location", ""),

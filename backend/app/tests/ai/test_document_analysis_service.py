@@ -1,128 +1,152 @@
-"""
-Tests for the document analysis service.
-"""
+"""Focused tests for the document analysis service."""
+
+from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
-from fastapi.testclient import TestClient
-from unittest.mock import patch, AsyncMock
-from typing import Any, Dict
 
 from app.ai.document_analysis_service import (
     DocumentAnalysisService,
-    ResumeAnalysisResult,
     JobDescriptionAnalysisResult,
-    Education,
-    Experience,
-    SalaryRange,
+    ResumeAnalysisResult,
 )
 from app.core.config import settings
-from app.core.ai_error_handling import AIError, AIErrorType
-from app.core.prompt_service import PromptService
-from app.core.genkit import get_model
 
-# Mock Pydantic models for testing
-class MockBaseModel:
-    def __init__(self, **data):
-        self.__dict__.update(data)
+
+class _FakeResponse:
+    """Minimal Genkit-style response wrapper for tests."""
+
+    def __init__(self, value):
+        self._value = value
+
+    def output(self):
+        return self._value
+
 
 @pytest.fixture
 def document_analysis_service():
-    """Fixture for DocumentAnalysisService."""
-    return DocumentAnalysisService()
+    """Create a service instance with a mock prompt service."""
+    service = DocumentAnalysisService()
+    service.prompt_service = MagicMock()
+    service.prompt_service.get_system_prompt.return_value = "system prompt"
+    return service
 
-@pytest.fixture
-async def mock_prompt_service():
-    """Mock PromptService."""
-    mock_prompt_service = AsyncMock()
-    return mock_prompt_service
-
-@pytest.fixture
-async def mock_get_model():
-    """Mock get_model function."""
-    mock_get_model = AsyncMock()
-    return mock_get_model
 
 @pytest.mark.asyncio
-class TestDocumentAnalysisService:
-    @pytest.fixture
-    async def client(self, document_analysis_service, mock_prompt_service, mock_get_model):
-        """Test client fixture."""
-        document_analysis_service.prompt_service = mock_prompt_service
-        return document_analysis_service
+async def test_analyze_resume_success(document_analysis_service):
+    """Resume analysis should return the model output on success."""
+    expected = ResumeAnalysisResult(
+        skills=["Python", "SQL"],
+        summary="Experienced engineer",
+    )
+    mock_model = MagicMock()
+    mock_model.generate = AsyncMock(return_value=_FakeResponse(expected))
 
-    @pytest.mark.asyncio
-    async def test_analyze_resume_success(self, client, mock_get_model):
-        """Test successful resume analysis."""
-        resume_text = "Experienced software engineer..."
-        target_industry = "Technology"
-        mock_get_model.return_value = "mock_model"
-        mock_prompt_service.format_prompt.return_value = "formatted_prompt"
-        
-        result = await client.analyze_resume(resume_text, target_industry)
-        assert isinstance(result, ResumeAnalysisResult)
-        assert result.skills is not None
-        assert result.experience is not None
-        assert result.education is not None
+    with (
+        patch("app.ai.document_analysis_service.get_model", return_value=mock_model),
+        patch(
+            "app.ai.document_analysis_service.format_prompt",
+            return_value="formatted prompt",
+        ),
+    ):
+        result = await document_analysis_service.analyze_resume(
+            "Experienced software engineer with Python and SQL skills.",
+            "Technology",
+        )
 
-    @pytest.mark.asyncio
-    async def test_analyze_resume_no_target_industry(self, client, mock_get_model):
-        """Test resume analysis without target industry."""
-        resume_text = "Experienced software engineer..."
-        mock_get_model.return_value = "mock_model"
-        mock_prompt_service.format_prompt.return_value = "formatted_prompt"
+    assert result == expected
+    mock_model.generate.assert_awaited_once()
 
-        result = await client.analyze_resume(resume_text)
-        assert isinstance(result, ResumeAnalysisResult)
-        assert result.skills is not None
-        assert result.experience is not None
-        assert result.education is not None
 
-    @pytest.mark.asyncio
-    async def test_analyze_resume_ai_error(self, client, mock_get_model):
-        """Test resume analysis with AI error."""
-        resume_text = "Invalid resume content"
-        mock_get_model.side_effect = AIError(AIErrorType.MODEL_ERROR, "Model failed")
+@pytest.mark.asyncio
+async def test_analyze_resume_without_target_industry(document_analysis_service):
+    """Resume analysis should work when no target industry is provided."""
+    expected = ResumeAnalysisResult(skills=["Communication"])
+    mock_model = MagicMock()
+    mock_model.generate = AsyncMock(return_value=_FakeResponse(expected))
 
-        with pytest.raises(AIError):
-            await client.analyze_resume(resume_text)
+    with (
+        patch("app.ai.document_analysis_service.get_model", return_value=mock_model),
+        patch(
+            "app.ai.document_analysis_service.format_prompt",
+            return_value="formatted prompt",
+        ),
+    ):
+        result = await document_analysis_service.analyze_resume(
+            "Experienced software engineer with broad transferable skills."
+        )
 
-    @pytest.mark.asyncio
-    async def test_analyze_job_description_success(self, client, mock_get_model):
-        """Test successful job description analysis."""
-        job_description_text = "Software Engineer - Exciting opportunity..."
-        mock_get_model.return_value = "mock_model"
-        mock_prompt_service.format_prompt.return_value = "formatted_prompt"
+    assert result == expected
 
-        result = await client.analyze_job_description(job_description_text)
-        assert isinstance(result, JobDescriptionAnalysisResult)
-        assert result.title is not None
-        assert result.required_skills is not None
 
-    @pytest.mark.asyncio
-    async def test_analyze_job_description_ai_error(self, client, mock_get_model):
-        """Test job description analysis with AI error."""
-        job_description_text = "Invalid job description"
-        mock_get_model.side_effect = AIError(AIErrorType.MODEL_ERROR, "Model failed")
+@pytest.mark.asyncio
+async def test_analyze_resume_returns_default_result_on_ai_error(document_analysis_service):
+    """Resume analysis should fall back to a default result on model errors."""
+    with patch("app.ai.document_analysis_service.get_model", return_value=None):
+        result = await document_analysis_service.analyze_resume(
+            "Experienced software engineer with broad transferable skills."
+        )
 
-        with pytest.raises(AIError):
-            await client.analyze_job_description(job_description_text)
+    assert isinstance(result, ResumeAnalysisResult)
+    assert result.skills == []
+    assert "error" in (result.raw_data or {})
 
-    @pytest.mark.asyncio
-    async def test_service_enabled_status(self, document_analysis_service):
-        """Test service enabled status."""
-        assert document_analysis_service.config["enabled"] == settings.enable_ai_features
 
-    @pytest.mark.asyncio
-    async def test_service_model_config(self, document_analysis_service):
-        """Test service model config."""
-        assert document_analysis_service.config["model"] == settings.ai_model
+@pytest.mark.asyncio
+async def test_analyze_job_description_success(document_analysis_service):
+    """Job description analysis should return the model output on success."""
+    expected = JobDescriptionAnalysisResult(
+        title="Software Engineer",
+        company="Acme Corp",
+        required_skills=["Python"],
+    )
+    mock_model = MagicMock()
+    mock_model.generate = AsyncMock(return_value=_FakeResponse(expected))
 
-    @pytest.mark.asyncio
-    async def test_service_max_tokens_config(self, document_analysis_service):
-        """Test service max tokens config."""
-        assert document_analysis_service.config["max_tokens"] == settings.ai_max_tokens
+    with (
+        patch("app.ai.document_analysis_service.get_model", return_value=mock_model),
+        patch(
+            "app.ai.document_analysis_service.format_prompt",
+            return_value="formatted prompt",
+        ),
+    ):
+        result = await document_analysis_service.analyze_job_description(
+            "Software Engineer role at Acme Corp requiring Python and backend API experience."
+        )
 
-    @pytest.mark.asyncio
-    async def test_service_temperature_config(self, document_analysis_service):
-        """Test service temperature config."""
-        assert document_analysis_service.config["temperature"] == settings.ai_temperature
+    assert result == expected
+
+
+@pytest.mark.asyncio
+async def test_analyze_job_description_returns_default_result_on_ai_error(
+    document_analysis_service,
+):
+    """Job description analysis should fall back to a default result on model errors."""
+    with patch("app.ai.document_analysis_service.get_model", return_value=None):
+        result = await document_analysis_service.analyze_job_description(
+            "Software Engineer role at Acme Corp requiring Python and backend API experience."
+        )
+
+    assert isinstance(result, JobDescriptionAnalysisResult)
+    assert result.required_skills == []
+    assert "error" in (result.raw_data or {})
+
+
+def test_service_enabled_status(document_analysis_service):
+    """The service should inherit the global enabled flag by default."""
+    assert document_analysis_service.config["enabled"] == settings.enable_ai_features
+
+
+def test_service_model_config_uses_current_settings_name(document_analysis_service):
+    """The service should fall back to the current settings model field name."""
+    expected_model = getattr(settings, "ai_model", settings.model_name)
+    assert document_analysis_service.config["model"] == expected_model
+
+
+def test_service_max_tokens_config(document_analysis_service):
+    """The service should inherit the global max-token setting."""
+    assert document_analysis_service.config["max_tokens"] == settings.ai_max_tokens
+
+
+def test_service_temperature_config(document_analysis_service):
+    """The service should inherit the global temperature setting."""
+    assert document_analysis_service.config["temperature"] == settings.ai_temperature

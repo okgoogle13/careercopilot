@@ -1,4 +1,3 @@
-
 import logging
 from datetime import datetime
 
@@ -9,6 +8,7 @@ from app.core.database import get_db
 from app.models.database import Job
 
 logger = logging.getLogger(__name__)
+
 
 class SQLAlchemyJobStore:
     """
@@ -55,10 +55,14 @@ class SQLAlchemyJobStore:
             source=job_data.get("source"),
             source_id=job_data.get("source_id"),
             url=job_data.get("url"),
-            posted_date=datetime.fromisoformat(job_data["posted_date"]) if job_data.get("posted_date") else None,
+            posted_date=(
+                datetime.fromisoformat(job_data["posted_date"])
+                if job_data.get("posted_date")
+                else None
+            ),
             job_metadata=job_data.get("metadata", {}),
             match_score=job_data.get("match_score"),
-            analysis_summary=job_data.get("analysis_summary")
+            analysis_summary=job_data.get("analysis_summary"),
         )
 
         self.db.add(job)
@@ -117,9 +121,22 @@ class SQLAlchemyJobStore:
         self.db.commit()
         return True
 
+    def get_storage_mode(self) -> str:
+        """Return the active backing store identifier."""
+        return "postgresql"
+
+    def get_stats(self) -> dict[str, int | str]:
+        """Return lightweight storage metadata for monitoring endpoints."""
+        return {
+            "mode": self.get_storage_mode(),
+            "count": self.db.query(Job).count(),
+        }
+
+
 # Helper for dependency injection
 def get_job_store(db: Session = Depends(get_db)) -> SQLAlchemyJobStore:
     return SQLAlchemyJobStore(db)
+
 
 # Note: The singleton pattern with global _job_store is harder with DB sessions.
 # Recommended to use get_job_store as a FastAPI dependency.

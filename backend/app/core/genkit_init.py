@@ -5,10 +5,10 @@ Initializes and configures the Genkit framework for the CareerCopilot applicatio
 Handles AI model initialization, flow registration, and provides health monitoring.
 """
 
+import importlib
 import logging
 import os
-import importlib
-from typing import Any, Callable, Dict, Optional, List, cast
+from typing import Any, Callable, Dict, List, Optional, cast
 
 # Best-effort dynamic imports for Genkit
 GENKIT_AVAILABLE = False
@@ -58,6 +58,7 @@ def init_genkit() -> bool:
     # Configure API key from centralized secret manager
     try:
         from app.core.secret_manager import get_secret
+
         api_key = get_secret("GEMINI_API_KEY")
         if api_key:
             logger.info("Successfully retrieved GEMINI_API_KEY")
@@ -82,7 +83,7 @@ def init_genkit() -> bool:
                 google_ai_local = cast(Any, GoogleAI)
                 genkit_instance = genkit_local(
                     plugins=[google_ai_local(api_key=api_key)],
-                    model="googleai/gemini-3.0-flash",
+                    model="googleai/gemini-1.5-flash",
                 )
                 logger.info("Genkit initialized successfully with plugin")
                 initialized = True
@@ -108,7 +109,7 @@ def init_genkit() -> bool:
             class GenerativeAIWrapper:
                 def __init__(self, genai_module: Any):
                     self.genai = genai_module
-                    self.model_name = "gemini-3.0-flash"
+                    self.model_name = "gemini-1.5-flash"
 
                 def generate(self, prompt: str, **kwargs) -> Any:
                     """Generate content using Gemini"""
@@ -116,7 +117,9 @@ def init_genkit() -> bool:
                     return model.generate_content(prompt, **kwargs)
 
             genkit_instance = GenerativeAIWrapper(genai)
-            logger.info(f"Genkit initialized successfully with google-generativeai (found {len(models)} models)")
+            logger.info(
+                f"Genkit initialized successfully with google-generativeai (found {len(models)} models)"
+            )
             initialized = True
             return True
 
@@ -198,7 +201,9 @@ def startup_genkit() -> None:
         logger.info("Genkit initialization skipped (ENABLE_GENKIT_FLOWS is not 'true')")
 
 
-def register_flow_function(func: Callable[..., Any], name: Optional[str] = None) -> Callable[..., Any]:
+def register_flow_function(
+    func: Callable[..., Any], name: Optional[str] = None
+) -> Callable[..., Any]:
     """
     Register a flow function for tracking purposes.
 

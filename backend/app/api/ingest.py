@@ -16,7 +16,9 @@ class JobClipRequest(BaseModel):
     url: str
     source: str = "browser_extension"
     notes: str | None = None
-    # user_id will be injected from authentication, not from request body
+    # This is populated server-side from auth context before background processing.
+    user_id: str | None = None
+
 
 class JobQueueItem(BaseModel):
     id: str
@@ -26,6 +28,7 @@ class JobQueueItem(BaseModel):
     status: str  # "pending_analysis", "ready_to_apply", "applied"
     date_clipped: str
     notes: str | None = None
+
 
 async def process_job_clip(payload: JobClipRequest, job_store):
     """
@@ -45,7 +48,7 @@ async def process_job_clip(payload: JobClipRequest, job_store):
         "date_clipped": datetime.now().isoformat(),
         "notes": payload.notes or "",
         "source": payload.source,
-        "user_id": payload.user_id  # For multi-user support
+        "user_id": payload.user_id,  # For multi-user support
     }
 
     # Save to Firestore (or in-memory fallback)
@@ -63,13 +66,12 @@ async def process_job_clip(payload: JobClipRequest, job_store):
         # 1. Create a Task to apply
         await gw.create_task(
             title=f"Apply: New Opportunity via {payload.source}",
-            notes=f"URL: {payload.url}\n\nUser Notes: {payload.notes or 'No notes'}"
+            notes=f"URL: {payload.url}\n\nUser Notes: {payload.notes or 'No notes'}",
         )
 
         # 2. Block time tomorrow to do the work
         await gw.schedule_deep_work(
-            summary=f"Application Prep: {payload.url[:50]}...",
-            duration_minutes=45
+            summary=f"Application Prep: {payload.url[:50]}...", duration_minutes=45
         )
 
         logger.info("[+] Google Workspace integration: Task and calendar event created")
@@ -80,16 +82,17 @@ async def process_job_clip(payload: JobClipRequest, job_store):
 
     logger.info(f"[SUCCESS] Job {job_id} queued for processing: {payload.url}")
 
+
 @router.post("/clip")
 async def clip_job(
     payload: JobClipRequest,
     background_tasks: BackgroundTasks,
-    user_id: str | None = Depends(get_current_user_optional)  # OPTIONAL AUTH
+    user_id: str | None = Depends(get_current_user_optional),  # OPTIONAL AUTH
 ):
     """
     Receives job URLs from the Chrome Extension.
     Saves to Firestore and creates Google Workspace tasks.
-    
+
     **Authentication:** Optional. Works for single-user or multi-user deployments.
     """
     job_store = get_job_store()
@@ -101,16 +104,15 @@ async def clip_job(
         "status": "accepted",
         "message": "Job sent to CareerCopilot.",
         "storage_mode": job_store.get_storage_mode(),
-        "user_id": payload.user_id
+        "user_id": payload.user_id,
     }
 
+
 @router.get("/queue", response_model=list[JobQueueItem])
-async def get_job_queue(
-    user_id: str | None = Depends(get_current_user_optional)  # OPTIONAL AUTH
-):
+async def get_job_queue(user_id: str | None = Depends(get_current_user_optional)):  # OPTIONAL AUTH
     """
     Retrieves the list of clipped jobs from Firestore.
-    
+
     **Authentication:** Optional. If no auth, returns all jobs (single-user mode).
     If authenticated, returns only user's jobs (multi-user mode).
     """
@@ -120,21 +122,23 @@ async def get_job_queue(
         # Use "default" for single-user, or actual user_id for multi-user
         filter_user_id = user_id or "default"
         jobs = await job_store.get_all_jobs(user_id=filter_user_id)
-        logger.info(f"[API] Retrieved {len(jobs)} jobs for user {filter_user_id} from {job_store.get_storage_mode()} storage")
+        logger.info(
+            f"[API] Retrieved {len(jobs)} jobs for user {filter_user_id} from {job_store.get_storage_mode()} storage"
+        )
         return jobs
     except Exception as e:
         logger.error(f"[API] Failed to retrieve jobs: {e}")
         raise HTTPException(status_code=500, detail=f"Failed to retrieve job queue: {e!s}")
 
+
 @router.post("/{job_id}/analyze")
 async def trigger_analysis(
-    job_id: str,
-    user_id: str | None = Depends(get_current_user_optional)  # OPTIONAL AUTH
+    job_id: str, user_id: str | None = Depends(get_current_user_optional)  # OPTIONAL AUTH
 ):
     """
     Triggers the JobScout agent to analyze a specific job.
     Updates the job record in Firestore with extracted data.
-    
+
     **Authentication:** Optional (single-user friendly).
     """
     effective_user_id = user_id or "default"
@@ -149,8 +153,12 @@ async def trigger_analysis(
 
     # 2. Optional ownership check (only in multi-user mode)
     if user_id and job.get("user_id") != user_id:
-        logger.warning(f"[SECURITY] User {user_id} attempted to analyze job {job_id} owned by {job.get('user_id')}")
-        raise HTTPException(status_code=403, detail="You do not have permission to analyze this job")
+        logger.warning(
+            f"[SECURITY] User {user_id} attempted to analyze job {job_id} owned by {job.get('user_id')}"
+        )
+        raise HTTPException(
+            status_code=403, detail="You do not have permission to analyze this job"
+        )
 
     job_url = job["url"]
     logger.info(f"[API] Found job: {job_url}")
@@ -172,18 +180,20 @@ async def trigger_analysis(
             "salary": analysis_result.get("salary", "Not specified"),
             "deadline": analysis_result.get("deadline"),
             "status": analysis_result.get("status", "ready_to_apply"),
-            "last_analyzed": datetime.now().isoformat()
+            "last_analyzed": datetime.now().isoformat(),
         }
 
         await job_store.update_job(job_id, updates)
 
-        logger.info(f"[API] ✓ Job {job_id} analysis complete: {updates['title']} at {updates['company']}")
+        logger.info(
+            f"[API] ✓ Job {job_id} analysis complete: {updates['title']} at {updates['company']}"
+        )
 
         return {
             "status": "success",
             "message": f"Analyzed {updates['title']} at {updates['company']}",
             "data": analysis_result,
-            "storage_mode": job_store.get_storage_mode()
+            "storage_mode": job_store.get_storage_mode(),
         }
 
     except Exception as e:
@@ -195,25 +205,27 @@ async def trigger_analysis(
 async def draft_cover_letter(
     job_id: str,
     create_google_doc: bool = False,
-    user_id: str | None = Depends(get_current_user_optional)  # OPTIONAL AUTH
+    user_id: str | None = Depends(get_current_user_optional),  # OPTIONAL AUTH
 ):
     """
     Generates a tailored cover letter for a specific job using the Ghostwriter agent.
     Optionally creates a Google Doc with the cover letter.
     Saves the cover letter to Firestore.
-    
+
     **Authentication:** Optional (single-user friendly).
-    
+
     Args:
         job_id: The ID of the job to draft a cover letter for
         create_google_doc: If True, attempts to create a Google Doc
         user_id: Optional authenticated user ID
-        
+
     Returns:
         Dict containing the generated cover letter and metadata
     """
     effective_user_id = user_id or "default"
-    logger.info(f"[API] Draft cover letter request for job ID: {job_id} from user {effective_user_id}")
+    logger.info(
+        f"[API] Draft cover letter request for job ID: {job_id} from user {effective_user_id}"
+    )
 
     job_store = get_job_store()
 
@@ -224,14 +236,18 @@ async def draft_cover_letter(
 
     # 2. Optional ownership check (only in multi-user mode)
     if user_id and job.get("user_id") != user_id:
-        logger.warning(f"[SECURITY] User {user_id} attempted to draft for job {job_id} owned by {job.get('user_id')}")
-        raise HTTPException(status_code=403, detail="You do not have permission to draft cover letter for this job")
+        logger.warning(
+            f"[SECURITY] User {user_id} attempted to draft for job {job_id} owned by {job.get('user_id')}"
+        )
+        raise HTTPException(
+            status_code=403, detail="You do not have permission to draft cover letter for this job"
+        )
 
     # 2. Ensure job has been analyzed
     if job.get("status") == "pending_analysis":
         raise HTTPException(
             status_code=400,
-            detail="Job must be analyzed before drafting. Please run 'Analyze with JobScout' first."
+            detail="Job must be analyzed before drafting. Please run 'Analyze with JobScout' first.",
         )
 
     logger.info(f"[API] Drafting cover letter for: {job.get('title')} at {job.get('company')}")
@@ -244,7 +260,9 @@ async def draft_cover_letter(
         cover_letter = await agent.generate_cover_letter(job)
 
         if not cover_letter or len(cover_letter) < 50:
-            raise HTTPException(status_code=500, detail="Cover letter generation failed - insufficient content")
+            raise HTTPException(
+                status_code=500, detail="Cover letter generation failed - insufficient content"
+            )
 
         logger.info(f"[API] ✓ Cover letter drafted: {len(cover_letter)} characters")
 
@@ -253,7 +271,7 @@ async def draft_cover_letter(
             "cover_letter": cover_letter,
             "cover_letter_generated_at": datetime.now().isoformat(),
             "word_count": len(cover_letter.split()),
-            "character_count": len(cover_letter)
+            "character_count": len(cover_letter),
         }
 
         await job_store.update_job(job_id, cover_letter_data)
@@ -270,7 +288,9 @@ async def draft_cover_letter(
                 if google_doc_info and google_doc_info.get("status") == "success":
                     logger.info(f"[API] ✓ Google Doc created: {google_doc_info.get('webViewLink')}")
                     # Save Google Doc link to Firestore
-                    await job_store.update_job(job_id, {"google_doc_url": google_doc_info.get("webViewLink")})
+                    await job_store.update_job(
+                        job_id, {"google_doc_url": google_doc_info.get("webViewLink")}
+                    )
                 elif google_doc_info and google_doc_info.get("status") == "credentials_missing":
                     logger.warning("[API] Google Docs integration skipped - no credentials")
 
@@ -284,7 +304,7 @@ async def draft_cover_letter(
             "company": job.get("company"),
             "word_count": len(cover_letter.split()),
             "character_count": len(cover_letter),
-            "storage_mode": job_store.get_storage_mode()
+            "storage_mode": job_store.get_storage_mode(),
         }
 
         if google_doc_info:
@@ -293,7 +313,7 @@ async def draft_cover_letter(
         return {
             "status": "success",
             "message": f"Cover letter drafted for {job.get('title')} at {job.get('company')}",
-            "data": response_data
+            "data": response_data,
         }
 
     except Exception as e:
@@ -310,10 +330,4 @@ async def get_storage_status():
     job_store = get_job_store()
     stats = job_store.get_stats()
 
-    return {
-        "status": "ok",
-        "storage": stats,
-        "message": f"Using {stats['mode']} storage"
-    }
-
-
+    return {"status": "ok", "storage": stats, "message": f"Using {stats['mode']} storage"}

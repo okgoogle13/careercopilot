@@ -1,29 +1,56 @@
+import asyncio
+import inspect
+
 try:
     import google.generativeai as genai
 except ImportError:  # pragma: no cover - optional dependency in test/CI
     genai = None
+import json
 import os
+from typing import List, Optional
+
 from dotenv import load_dotenv
 from pydantic import BaseModel, Field
-from typing import List, Optional
+
 from app.services.search_service import SearchService
-import json
 
 # Load environment variables
 load_dotenv()
 if genai:
     genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 
-model = genai.GenerativeModel("gemini-3.0-pro") if genai else None
 
 class CorporateProfile(BaseModel):
     """Structured intelligence about a company."""
+
     name: str = Field(description="The canonical name of the company.")
     mission_statement: str = Field(description="Inferred or explicit mission statement.")
     core_values: List[str] = Field(description="List of core values or cultural pillars.")
     strategic_focus: str = Field(description="Current strategic focus or key business objectives.")
-    communication_style: str = Field(description="The tone and style of their communication (e.g., 'Formal', 'Disruptive', 'Academic').")
+    communication_style: str = Field(
+        description="The tone and style of their communication (e.g., 'Formal', 'Disruptive', 'Academic')."
+    )
     known_for: str = Field(description="What the company is primarily known for in the market.")
+
+
+def _resolve_search_summary(result: object) -> str | None:
+    """Resolve sync or async search-service results into plain text."""
+    if inspect.isawaitable(result):
+        try:
+            return asyncio.run(result)
+        except RuntimeError:
+            loop = asyncio.new_event_loop()
+            try:
+                return loop.run_until_complete(result)
+            finally:
+                loop.close()
+    return result if isinstance(result, str) else None
+
+
+def _get_model():
+    """Create the Gemini model lazily to avoid import-time side effects."""
+    return genai.GenerativeModel("gemini-3.0-pro") if genai else None
+
 
 def research_company(company_name: str) -> CorporateProfile:
     """
@@ -34,7 +61,7 @@ def research_company(company_name: str) -> CorporateProfile:
 
     # 1. Gather Deep Research from Perplexity
     # This returns a high-quality synthesis directly
-    research_summary = search_service.research_company(company_name)
+    research_summary = _resolve_search_summary(search_service.research_company(company_name))
 
     if not research_summary:
         # Fallback if API fails or key missing
@@ -44,9 +71,10 @@ def research_company(company_name: str) -> CorporateProfile:
             core_values=["Professionalism"],
             strategic_focus="General Industry Growth",
             communication_style="Professional",
-            known_for="Unknown"
+            known_for="Unknown",
         )
 
+    model = _get_model()
     if not genai or not model:
         return CorporateProfile(
             name=company_name,
@@ -86,9 +114,8 @@ def research_company(company_name: str) -> CorporateProfile:
         response = model.generate_content(
             prompt,
             generation_config=genai.GenerationConfig(
-                response_mime_type="application/json",
-                response_schema=CorporateProfile
-            )
+                response_mime_type="application/json", response_schema=CorporateProfile
+            ),
         )
         data = json.loads(response.text)
         return CorporateProfile(**data)
@@ -101,5 +128,5 @@ def research_company(company_name: str) -> CorporateProfile:
             core_values=["Error"],
             strategic_focus="Error",
             communication_style="Error",
-            known_for="Error"
+            known_for="Error",
         )

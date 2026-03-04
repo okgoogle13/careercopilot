@@ -3,6 +3,7 @@ backend/app/agents/ghostwriter.py
 ----------------------------------
 AI Agent for generating tailored cover letters based on job details and user resume.
 """
+
 import logging
 from pathlib import Path
 
@@ -27,7 +28,7 @@ class GhostwriterAgent:
     async def load_resume(self) -> str:
         """
         Loads the user's resume from the user_profile directory.
-        
+
         Returns:
             str: Resume content or placeholder message if not found
         """
@@ -46,10 +47,10 @@ class GhostwriterAgent:
     async def generate_cover_letter(self, job_data: dict) -> str:
         """
         Generates a compelling, professional cover letter using AI.
-        
+
         Args:
             job_data: Dictionary containing job details (title, company, description, etc.)
-            
+
         Returns:
             str: Generated cover letter text
         """
@@ -108,8 +109,15 @@ Start directly with "Dear Hiring Manager," or similar greeting.
                 # Extract content between code blocks if the AI wrapped it
                 parts = cover_letter.split("```")
                 for part in parts:
-                    if part.strip() and not part.startswith("markdown") and not part.startswith("text"):
-                        cover_letter = part.strip()
+                    cleaned_part = part.strip()
+                    if not cleaned_part:
+                        continue
+                    if cleaned_part.startswith("markdown"):
+                        cleaned_part = cleaned_part.removeprefix("markdown").strip()
+                    elif cleaned_part.startswith("text"):
+                        cleaned_part = cleaned_part.removeprefix("text").strip()
+                    if cleaned_part:
+                        cover_letter = cleaned_part
                         break
 
             logger.info(f"[Ghostwriter] ✓ Cover letter generated: {len(cover_letter)} characters")
@@ -154,14 +162,14 @@ if __name__ == "__main__":
             "company": "Tech Innovations Pty Ltd",
             "description": "We are seeking an experienced Python developer...",
             "salary": "$120k - $150k + Super",
-            "deadline": "January 15, 2026"
+            "deadline": "January 15, 2026",
         }
 
         cover_letter = await agent.generate_cover_letter(test_job)
-        print("\n" + "="*50)
+        print("\n" + "=" * 50)
         print("GENERATED COVER LETTER:")
-        print("="*50)
+        print("=" * 50)
         print(cover_letter)
-        print("="*50)
+        print("=" * 50)
 
     asyncio.run(test_ghostwriter())

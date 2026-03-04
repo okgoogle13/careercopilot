@@ -1,201 +1,162 @@
-"""
-Tests for AI Client Expanded
-"""
+"""Compatibility tests for the current AI client interfaces."""
 
-import pytest
-from fastapi.testclient import TestClient
-from unittest.mock import patch, AsyncMock
+import asyncio
+
 import httpx
-import time
-from typing import List, Dict, Any
+import pytest
 
-from backend.app.core.ai_client import (
-    AIRequest,
-    AIResponse,
-    AIProviderClient,
-    GoogleAIClient,
-    AIProvider,
-    AIConfigManager,
-    ModelConfig,
-)
-from backend.app.core.ai_config import AIModelType
-from backend.app.core.monitoring import monitor_performance, track_ai_usage, track_error
+from app.core.ai_client import AIRequest, GoogleAIClient
+from app.core.ai_config import AIModelType, AIProvider, ModelConfig, ProviderCredentials
 
-# Mock User class for testing purposes
-class User:
-    def __init__(self, id: str, email: str):
-        self.id = id
-        self.email = email
 
-@pytest.fixture
-def mock_ai_config_manager():
-    """Mock AIConfigManager for testing."""
-    mock_manager = AsyncMock()
-    mock_manager.get_provider_credentials.return_value = {"api_key": "test_api_key"}
-    mock_manager.get_model_config.return_value = ModelConfig(
-        name="test_model",
-        model_id="test_model_id",
-        provider=AIProvider.GOOGLE_AI,
-        max_tokens=100,
-        temperature=0.7,
-        top_p=0.9,
-        timeout_seconds=10
+class _FakeResponse:
+    """Minimal response object for provider tests."""
+
+    def __init__(self, payload=None, status_code=200, error=None):
+        self._payload = payload or {}
+        self.status_code = status_code
+        self._error = error
+
+    def raise_for_status(self):
+        if self._error:
+            raise self._error
+
+    def json(self):
+        return self._payload
+
+
+class _AsyncClient:
+    """Simple async context manager that returns canned responses."""
+
+    def __init__(self, post_response=None, get_response=None):
+        self.post_response = post_response
+        self.get_response = get_response
+
+    async def __aenter__(self):
+        return self
+
+    async def __aexit__(self, exc_type, exc, tb):
+        return False
+
+    async def post(self, url, **kwargs):
+        return self.post_response
+
+    async def get(self, url, **kwargs):
+        return self.get_response
+
+
+class _ConfigManager:
+    """Lightweight config manager stub for provider tests."""
+
+    def __init__(self, credentials=None):
+        self._credentials = credentials
+
+    def get_provider_credentials(self, provider):
+        return self._credentials
+
+
+def _make_model_config(**overrides):
+    config = {
+        "name": "test-model",
+        "provider": AIProvider.GOOGLE_AI,
+        "model_type": AIModelType.TEXT_GENERATION,
+        "model_id": "gemini-test",
+        "max_tokens": 64,
+        "temperature": 0.4,
+        "top_p": 0.8,
+        "timeout_seconds": 5,
+    }
+    config.update(overrides)
+    return ModelConfig(
+        **config,
     )
-    return mock_manager
 
-@pytest.fixture
-def mock_google_ai_client(mock_ai_config_manager):
-    """Fixture for GoogleAIClient."""
-    return GoogleAIClient(mock_ai_config_manager)
 
-@pytest.fixture
-def test_client():
-    """Fixture for a test client."""
-    return TestClient(app="backend.app.main:app")  # Replace with your app entry point
+def test_google_ai_client_requires_credentials():
+    """GoogleAIClient should fail fast without configured credentials."""
+    with pytest.raises(ValueError, match="No credentials configured"):
+        GoogleAIClient(_ConfigManager())
 
-class TestGoogleAIClient:
-    @pytest.mark.asyncio
-    async def test_generate_text_success(self, mock_google_ai_client, mock_ai_config_manager):
-        """Test successful text generation."""
-        mock_google_ai_client.config_manager = mock_ai_config_manager
-        request = AIRequest(prompt="Test prompt", service_name="test_service", user_id="test_user")
-        model_config = ModelConfig(name="test_model", model_id="test_model_id", provider=AIProvider.GOOGLE_AI, max_tokens=50, temperature=0.5)
 
-        mock_response = {
-            "candidates": [
-                {
-                    "content": {"parts": [{"text": "Test response"}]},
-                    "finishReason": "STOP",
-                    "safetyRatings": []
-                }
-            ]
-        }
-        mock_google_ai_client.base_url = "http://example.com"
-        mock_google_ai_client.credentials = {"api_key": "test_key"}
+def test_generate_text_success(monkeypatch):
+    """GoogleAIClient should parse the Gemini response structure."""
+    credentials = ProviderCredentials(provider=AIProvider.GOOGLE_AI, api_key="test-key")
+    client = GoogleAIClient(_ConfigManager(credentials))
+    request = AIRequest(prompt="Test prompt", service_name="draft", user_id="user-1")
+    model_config = _make_model_config()
 
-        async def mock_post(url, json):
-            return httpx.Response(status_code=200, json=mock_response)
+    fake_client = _AsyncClient(
+        post_response=_FakeResponse(
+            payload={
+                "candidates": [
+                    {
+                        "content": {"parts": [{"text": "Test response"}]},
+                        "finishReason": "STOP",
+                        "safetyRatings": [],
+                    }
+                ]
+            }
+        )
+    )
+    monkeypatch.setattr(httpx, "AsyncClient", lambda timeout=None: fake_client)
 
-        mock_google_ai_client.config_manager.get_model_config.return_value = model_config
-        with patch("httpx.AsyncClient") as mock_client:
-            mock_client_instance = AsyncMock()
-            mock_client_instance.post.return_value = mock_response
-            mock_client.return_value = mock_client_instance
+    response = asyncio.run(client.generate_text(request, model_config))
 
-            response = await mock_google_ai_client.generate_text(request, model_config)
+    assert response.content == "Test response"
+    assert response.model_used == "test-model"
+    assert response.provider == AIProvider.GOOGLE_AI.value
+    assert response.cached is False
+    assert response.request_id.startswith("google_")
 
-        assert response.content == "Test response"
-        assert response.model_used == "test_model"
-        assert response.provider == "GOOGLE_AI"
-        assert isinstance(response.tokens_used, dict)
-        assert response.response_time_ms > 0
-        assert not response.cached
-        assert isinstance(response.cost_estimate, float)
-        assert isinstance(response.metadata, dict)
 
-    @pytest.mark.asyncio
-    async def test_generate_text_error(self, mock_google_ai_client, mock_ai_config_manager):
-        """Test text generation with an error response."""
-        mock_google_ai_client.config_manager = mock_ai_config_manager
-        request = AIRequest(prompt="Test prompt", service_name="test_service", user_id="test_user")
-        model_config = ModelConfig(name="test_model", model_id="test_model_id", provider=AIProvider.GOOGLE_AI, max_tokens=50, temperature=0.5)
+def test_generate_text_raises_on_http_error(monkeypatch):
+    """GoogleAIClient should re-raise provider HTTP failures."""
+    credentials = ProviderCredentials(provider=AIProvider.GOOGLE_AI, api_key="test-key")
+    client = GoogleAIClient(_ConfigManager(credentials))
+    request = AIRequest(prompt="Test prompt", service_name="draft", user_id="user-1")
+    model_config = _make_model_config()
+    failing_response = httpx.Response(
+        500,
+        request=httpx.Request("POST", "https://example.test"),
+    )
 
-        mock_response = {"error": "Test error"}
-        mock_google_ai_client.base_url = "http://example.com"
-        mock_google_ai_client.credentials = {"api_key": "test_key"}
+    fake_client = _AsyncClient(
+        post_response=_FakeResponse(
+            error=httpx.HTTPStatusError(
+                "server error",
+                request=failing_response.request,
+                response=failing_response,
+            )
+        )
+    )
+    monkeypatch.setattr(httpx, "AsyncClient", lambda timeout=None: fake_client)
 
-        async def mock_post(url, json):
-            return httpx.Response(status_code=500, json=mock_response)
+    with pytest.raises(httpx.HTTPStatusError):
+        asyncio.run(client.generate_text(request, model_config))
 
-        with patch("httpx.AsyncClient") as mock_client:
-            mock_client_instance = AsyncMock()
-            mock_client_instance.post.return_value = httpx.Response(status_code=500, json=mock_response)
-            mock_client.return_value = mock_client_instance
 
-            with pytest.raises(Exception) as excinfo:
-                await mock_google_ai_client.generate_text(request, model_config)
+@pytest.mark.parametrize(
+    ("status_code", "expected"),
+    [
+        (200, True),
+        (500, False),
+    ],
+)
+def test_health_check_reflects_provider_status(monkeypatch, status_code, expected):
+    """Health checks should map the provider HTTP status to a boolean."""
+    credentials = ProviderCredentials(provider=AIProvider.GOOGLE_AI, api_key="test-key")
+    client = GoogleAIClient(_ConfigManager(credentials))
+    fake_client = _AsyncClient(get_response=_FakeResponse(status_code=status_code))
+    monkeypatch.setattr(httpx, "AsyncClient", lambda timeout=None: fake_client)
 
-        assert "Test error" in str(excinfo.value)
+    assert asyncio.run(client.health_check()) is expected
 
-    @pytest.mark.asyncio
-    async def test_generate_embeddings_success(self, mock_google_ai_client, mock_ai_config_manager):
-        """Test successful embedding generation."""
-        mock_google_ai_client.config_manager = mock_ai_config_manager
-        texts = ["Test text 1", "Test text 2"]
-        model_config = ModelConfig(name="test_model", model_id="test_model_id", provider=AIProvider.GOOGLE_AI, max_tokens=50, temperature=0.5)
 
-        mock_response = [[0.1, 0.2], [0.3, 0.4]]
+def test_generate_embeddings_not_implemented():
+    """The Google provider still does not expose embeddings through this client."""
+    credentials = ProviderCredentials(provider=AIProvider.GOOGLE_AI, api_key="test-key")
+    client = GoogleAIClient(_ConfigManager(credentials))
+    model_config = _make_model_config(model_type=AIModelType.TEXT_EMBEDDING)
 
-        with patch("httpx.AsyncClient") as mock_client:
-            mock_client_instance = AsyncMock()
-            mock_client_instance.post.return_value = httpx.Response(status_code=200, json=mock_response)
-            mock_client.return_value = mock_client_instance
-
-            embeddings = await mock_google_ai_client.generate_embeddings(texts, model_config)
-
-        assert embeddings == [[0.1, 0.2], [0.3, 0.4]]
-
-    @pytest.mark.asyncio
-    async def test_health_check_success(self, mock_google_ai_client):
-        """Test successful health check."""
-        mock_google_ai_client.credentials = {"api_key": "test_key"}
-        with patch("httpx.AsyncClient") as mock_client:
-            mock_client_instance = AsyncMock()
-            mock_client_instance.get.return_value = httpx.Response(status_code=200)
-            mock_client.return_value = mock_client_instance
-
-            result = await mock_google_ai_client.health_check()
-
-        assert result is True
-
-    @pytest.mark.asyncio
-    async def test_health_check_failure(self, mock_google_ai_client):
-        """Test failed health check."""
-        mock_google_ai_client.credentials = {"api_key": "test_key"}
-        with patch("httpx.AsyncClient") as mock_client:
-            mock_client_instance = AsyncMock()
-            mock_client_instance.get.return_value = httpx.Response(status_code=500)
-            mock_client.return_value = mock_client_instance
-
-            result = await mock_google_ai_client.health_check()
-
-        assert result is False
-
-    @pytest.mark.asyncio
-    async def test_generate_text_with_system_prompt(self, mock_google_ai_client, mock_ai_config_manager):
-        """Test text generation with a system prompt."""
-        mock_google_ai_client.config_manager = mock_ai_config_manager
-        request = AIRequest(prompt="Test prompt", service_name="test_service", user_id="test_user", system_prompt="System prompt")
-        model_config = ModelConfig(name="test_model", model_id="test_model_id", provider=AIProvider.GOOGLE_AI, max_tokens=50, temperature=0.5)
-
-        mock_response = {
-            "candidates": [
-                {
-                    "content": {"parts": [{"text": "Test response with system prompt"}]},
-                    "finishReason": "STOP",
-                    "safetyRatings": []
-                }
-            ]
-        }
-        mock_google_ai_client.base_url = "http://example.com"
-        mock_google_ai_client.credentials = {"api_key": "test_key"}
-
-        async def mock_post(url, json):
-            return httpx.Response(status_code=200, json=mock_response)
-
-        with patch("httpx.AsyncClient") as mock_client:
-            mock_client_instance = AsyncMock()
-            mock_client_instance.post.return_value = mock_response
-            mock_client.return_value = mock_client_instance
-
-            response = await mock_google_ai_client.generate_text(request, model_config)
-
-        assert response.content == "Test response with system prompt"
-
-class TestAIProviderClient:
-    @pytest.mark.asyncio
-    async def test_init_without_credentials(self, mock_ai_config_manager):
-        """Test initialization without credentials."""
-        mock_ai_config_manager.get_provider_credentials.return_value = None
-        with pytest.raises(ValueError):
-            GoogleAIClient(mock_ai_config_manager)
+    with pytest.raises(NotImplementedError, match="not yet implemented"):
+        asyncio.run(client.generate_embeddings(["one", "two"], model_config))

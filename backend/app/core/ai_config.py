@@ -205,8 +205,20 @@ class AIConfigManager:
             services: dict[str, AIServiceConfig] = {}
             issues: list[str] = []  # Initialize issues list
 
+            raw_models = config.get("models", {})
+            if isinstance(raw_models, list):
+                model_items = []
+                for model_data in raw_models:
+                    if isinstance(model_data, dict):
+                        model_name = str(model_data.get("name", ""))
+                        model_items.append((model_name, model_data))
+                    else:
+                        model_items.append(("", model_data))
+            else:
+                model_items = list(raw_models.items()) if isinstance(raw_models, dict) else []
+
             # Load models with type checking
-            for name, model_data in config.get("models", {}).items():
+            for name, model_data in model_items:
                 try:
                     if not isinstance(model_data, dict):
                         logger.warning(
@@ -219,8 +231,22 @@ class AIConfigManager:
                     logger.error(f"Error loading model {name}: {e}")
                     continue
 
+            raw_credentials = config.get("credentials", {})
+            if isinstance(raw_credentials, list):
+                credential_items = []
+                for cred_data in raw_credentials:
+                    if isinstance(cred_data, dict):
+                        provider_name = str(cred_data.get("provider", ""))
+                        credential_items.append((provider_name, cred_data))
+                    else:
+                        credential_items.append(("", cred_data))
+            else:
+                credential_items = (
+                    list(raw_credentials.items()) if isinstance(raw_credentials, dict) else []
+                )
+
             # Load credentials with type checking
-            for provider, cred_data in config.get("credentials", {}).items():
+            for provider, cred_data in credential_items:
                 try:
                     if not isinstance(cred_data, dict):
                         logger.warning(
@@ -233,8 +259,20 @@ class AIConfigManager:
                     logger.error(f"Error loading credentials for {provider}: {e}")
                     continue
 
+            raw_services = config.get("services", {})
+            if isinstance(raw_services, list):
+                service_items = []
+                for service_data in raw_services:
+                    if isinstance(service_data, dict):
+                        service_name = str(service_data.get("service_name", ""))
+                        service_items.append((service_name, service_data))
+                    else:
+                        service_items.append(("", service_data))
+            else:
+                service_items = list(raw_services.items()) if isinstance(raw_services, dict) else []
+
             # Load services with type checking
-            for name, service_data in config.get("services", {}).items():
+            for name, service_data in service_items:
                 try:
                     if not isinstance(service_data, dict):
                         logger.warning(
@@ -491,6 +529,9 @@ class AIConfigManager:
                 cost_budget_daily=10.0,
             ),
         }
+
+        self.models = default_models
+        self.services = default_services
 
     def get_model_config(self, model_name: str) -> ModelConfig | None:
         """Get configuration for a specific model"""
