@@ -85,6 +85,9 @@ def probe_server(server_name: str, server_def: dict, timeout: int = 8) -> tuple[
     Spawn the MCP server process, send an MCP 'initialize' request, and check
     whether it responds with a valid result.
 
+    The process is terminated after reading one response line; MCP servers are
+    long-running daemons and would otherwise block communicate() indefinitely.
+
     Returns (success: bool, detail: str).
     """
     command = server_def.get("command", "")
@@ -95,8 +98,8 @@ def probe_server(server_name: str, server_def: dict, timeout: int = 8) -> tuple[
         return False, "No command specified"
 
     # Resolve ${workspaceFolder} tokens in args
-    root = str(_project_root())
-    resolved_args = [a.replace("${workspaceFolder}", root) for a in args]
+    root = _project_root()
+    resolved_args = [a.replace("${workspaceFolder}", str(root)) for a in args]
 
     # Build environment: inherit current env, apply overrides
     env = os.environ.copy()
@@ -120,19 +123,48 @@ def probe_server(server_name: str, server_def: dict, timeout: int = 8) -> tuple[
             stderr=subprocess.PIPE,
             env=env,
             text=True,
+            cwd=root,
         )
         try:
-            stdout, stderr = proc.communicate(input=init_msg, timeout=timeout)
-        except subprocess.TimeoutExpired:
-            proc.kill()
-            return False, f"Timed out after {timeout}s (server did not respond)"
+            # Write the request and close stdin so the server knows input is done,
+            # then read exactly one response line within the timeout window.
+            proc.stdin.write(init_msg)
+            proc.stdin.close()
 
-        if not stdout.strip():
-            hint = stderr.strip().splitlines()[-1] if stderr.strip() else "no output"
+            import threading
+            result_lines: list[str] = []
+            read_error: list[str] = []
+
+            def _read_line() -> None:
+                try:
+                    line = proc.stdout.readline()
+                    if line:
+                        result_lines.append(line)
+                except Exception as exc:
+                    read_error.append(str(exc))
+
+            reader = threading.Thread(target=_read_line, daemon=True)
+            reader.start()
+            reader.join(timeout=timeout)
+        finally:
+            proc.kill()
+            proc.wait()
+
+        if read_error:
+            return False, f"Error reading server output: {read_error[0]}"
+
+        if not result_lines:
+            stderr_hint = ""
+            try:
+                stderr_data = proc.stderr.read(512)
+                if stderr_data:
+                    stderr_hint = stderr_data.strip().splitlines()[-1]
+            except Exception:
+                pass
+            hint = stderr_hint or "no output before timeout"
             return False, f"No response from server. Last stderr: {hint}"
 
-        # Parse the first JSON line
-        first_line = stdout.strip().splitlines()[0]
+        first_line = result_lines[0].strip()
         resp = json.loads(first_line)
         if "result" in resp and "serverInfo" in resp.get("result", {}):
             server_info = resp["result"]["serverInfo"]
@@ -186,7 +218,12 @@ def main() -> int:
             return 2
         servers = {args.server: servers[args.server]}
 
-    print(f"\n{INFO} Validating {len(servers)} MCP server(s) from {config_path.relative_to(root)}")
+    try:
+        config_display: Path = config_path.relative_to(root)
+    except ValueError:
+        config_display = config_path.resolve()
+
+    print(f"\n{INFO} Validating {len(servers)} MCP server(s) from {config_display}")
     print(f"   Mode: {'quick (env check only)' if args.quick else 'full (process probe)'}\n")
 
     failures = 0

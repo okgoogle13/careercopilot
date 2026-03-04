@@ -34,7 +34,7 @@ python3 scripts/validate-mcp.py --server flash-sidekick
 
 2. **Check JSON syntax** in `.vscode/mcp.json`:
    ```bash
-   python3 -c "import re,json; raw=open('.vscode/mcp.json').read(); json.loads(re.sub(r'//[^\n]*','',raw))"
+   python3 scripts/validate-mcp.py --quick --config .vscode/mcp.json
    ```
 
 3. **Check server logs:**

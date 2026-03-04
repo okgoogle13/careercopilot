@@ -1,9 +1,18 @@
 {
-  "_comment": "Claude Desktop / legacy MCP config. The canonical single source of truth is .vscode/mcp.json. Update that file first, then keep this in sync. Run 'python3 scripts/validate-mcp.py' to verify both configs.",
+  "_comment": [
+    "Claude Desktop / legacy MCP config — MIRROR of .vscode/mcp.json.",
+    "The canonical single source of truth is .vscode/mcp.json in the repo.",
+    "IMPORTANT: Claude Desktop is a global application; its working directory is NOT",
+    "the project root. Replace every occurrence of /ABSOLUTE/PATH/TO/PROJECT below",
+    "with the actual absolute path to your cloned repository before using this file.",
+    "Example (macOS): /Users/yourname/Projects/careercopilot",
+    "Example (Linux): /home/yourname/projects/careercopilot",
+    "Run 'python3 scripts/validate-mcp.py' from the repo root to verify server health."
+  ],
   "mcpServers": {
     "flash-sidekick": {
       "command": "python3",
-      "args": ["servers/flash_sidekick.py"],
+      "args": ["/ABSOLUTE/PATH/TO/PROJECT/servers/flash_sidekick.py"],
       "env": {
         "GEMINI_API_KEY": "${GEMINI_API_KEY}",
         "GITHUB_TOKEN": "${GITHUB_TOKEN}"
@@ -11,7 +20,7 @@
     },
     "design-system-sidekick": {
       "command": "python3",
-      "args": ["servers/design_system_sidekick.py"],
+      "args": ["/ABSOLUTE/PATH/TO/PROJECT/servers/design_system_sidekick.py"],
       "env": {
         "GEMINI_API_KEY": "${GEMINI_API_KEY}",
         "GITHUB_TOKEN": "${GITHUB_TOKEN}"
@@ -19,7 +28,7 @@
     },
     "vision-scorer-mcp": {
       "command": "python3",
-      "args": ["servers/vision_scorer_mcp.py"],
+      "args": ["/ABSOLUTE/PATH/TO/PROJECT/servers/vision_scorer_mcp.py"],
       "env": {
         "GEMINI_API_KEY": "${GEMINI_API_KEY}",
         "GITHUB_TOKEN": "${GITHUB_TOKEN}"
@@ -27,26 +36,35 @@
     },
     "perplexity": {
       "command": "python3",
-      "args": ["servers/perplexity_server.py"],
+      "args": ["/ABSOLUTE/PATH/TO/PROJECT/servers/perplexity_server.py"],
       "env": {
         "PERPLEXITY_API_KEY": "${PERPLEXITY_API_KEY}"
       }
     },
     "task-router": {
       "command": "python3",
-      "args": ["servers/task_router_mcp.py"]
+      "args": ["/ABSOLUTE/PATH/TO/PROJECT/servers/task_router_mcp.py"]
     },
     "filesystem": {
       "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-filesystem", "."]
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem@0.6.2",
+        "/ABSOLUTE/PATH/TO/PROJECT"
+      ]
     },
     "git": {
       "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-git", "--repository", "."]
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-git@0.6.2",
+        "--repository",
+        "/ABSOLUTE/PATH/TO/PROJECT"
+      ]
     },
     "github": {
       "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "args": ["-y", "@modelcontextprotocol/server-github@0.6.2"],
       "env": {
         "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_TOKEN}"
       }

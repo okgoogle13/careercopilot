@@ -129,9 +129,13 @@
 | Field | Value |
 |---|---|
 | **Purpose** | Read/write access to the project directory |
-| **Package** | `@modelcontextprotocol/server-filesystem` (npm) |
+| **Package** | `@modelcontextprotocol/server-filesystem@0.6.2` (npm, pinned) |
 | **Required env** | None |
 | **Status** | ✅ Active |
+
+> **Security note:** The npm package is pinned to a specific, audited version. Bump it
+> intentionally after reviewing the changelog. Do not use unversioned `npx` invocations,
+> which would silently execute the latest release on every run.
 
 ---
 
@@ -140,7 +144,7 @@
 | Field | Value |
 |---|---|
 | **Purpose** | Git repository operations (log, diff, blame, etc.) |
-| **Package** | `@modelcontextprotocol/server-git` (npm) |
+| **Package** | `@modelcontextprotocol/server-git@0.6.2` (npm, pinned) |
 | **Required env** | None |
 | **Status** | ✅ Active |
 
@@ -151,7 +155,7 @@
 | Field | Value |
 |---|---|
 | **Purpose** | GitHub API — issues, PRs, releases, search |
-| **Package** | `@modelcontextprotocol/server-github` (npm) |
+| **Package** | `@modelcontextprotocol/server-github@0.6.2` (npm, pinned) |
 | **Required env** | `GITHUB_TOKEN` |
 | **Status** | ✅ Active |
 
