@@ -121,7 +121,7 @@ class InputSanitizer:
         Returns:
             Dictionary with sanitized values
         """
-        sanitized = {}
+        sanitized: dict[str, Any] = {}
         for key, value in data.items():
             if isinstance(value, str):
                 try:
@@ -163,7 +163,7 @@ class InputSanitizer:
             InputValidationError: If template or inputs are invalid
         """
         # Sanitize all string inputs
-        safe_kwargs = {}
+        safe_kwargs: dict[str, Any] = {}
         for key, value in kwargs.items():
             if isinstance(value, str):
                 sanitized = cls.sanitize_text_input(value)

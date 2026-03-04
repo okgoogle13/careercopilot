@@ -1,23 +1,26 @@
-import os
-from types import SimpleNamespace
+from app.core.genkit_init import get_model
 
-import genkit
-from dotenv import load_dotenv
-from genkit.plugins import google_genai
 
-# Load environment variables from .env file
-load_dotenv()
+def _generate_text(prompt: str) -> str:
+    """Generate text lazily through the centralized Genkit runtime."""
+    model = get_model()
+    if model is None:
+        raise RuntimeError("Genkit model not available")
 
-# Initialize the Google AI plugin if not already initialized
-if getattr(genkit, "get_plugin", None) and not genkit.get_plugin("googleai"):
-    genkit.init(plugins=[google_genai.init(api_key=os.getenv("GEMINI_API_KEY"))])
+    response = model.generate(prompt=prompt)
 
-# Define the Gemini Pro model
-gemini_pro = getattr(
-    getattr(getattr(google_genai, "models", None), "gemini", None),
-    "GEMINI_1_5_PRO",
-    SimpleNamespace(generate=lambda *args, **kwargs: None),
-)
+    text_attr = getattr(response, "text", None)
+    if callable(text_attr):
+        return text_attr()
+    if isinstance(text_attr, str):
+        return text_attr
+
+    output_attr = getattr(response, "output", None)
+    if callable(output_attr):
+        output_value = output_attr()
+        return output_value if isinstance(output_value, str) else str(output_value)
+
+    return str(response)
 
 
 # Removed @genkit.flow()
@@ -49,6 +52,4 @@ def generate_tailored_resume(base_profile_data: dict, comparison_analysis: dict)
     ---
     """
 
-    response = gemini_pro.generate(prompt)
-
-    return response.text()
+    return _generate_text(prompt)

@@ -8,6 +8,7 @@ FastAPI endpoints for document generation including:
 """
 
 import json
+import logging
 import os
 import shutil
 import tempfile
@@ -15,6 +16,7 @@ import tempfile
 from fastapi import APIRouter, Depends, File, Form, HTTPException, UploadFile, status
 from fastapi.responses import FileResponse
 
+from app.api.endpoints._shared import run_endpoint_operation
 from app.core.dependencies import get_current_user
 from app.services.doc_intelligence import DocumentIntelligenceService
 
@@ -23,6 +25,7 @@ from app.services.doc_intelligence import DocumentIntelligenceService
 # from app.genkit_flows.ksc_generator import generateKscResponse
 
 router = APIRouter()
+logger = logging.getLogger(__name__)
 
 
 # ============================================================================
@@ -38,8 +41,7 @@ from app.models.user_asset import UserAsset
 
 @router.get("/", status_code=status.HTTP_200_OK)
 async def get_documents(
-    current_user: User = Depends(get_current_user),
-    db: Session = Depends(get_db)
+    current_user: User = Depends(get_current_user), db: Session = Depends(get_db)
 ):
     """
     Get all documents for the current user.
@@ -48,17 +50,18 @@ async def get_documents(
         assets = db.query(UserAsset).filter(UserAsset.user_id == current_user.id).all()
         return [asset.to_dict() for asset in assets]
     except Exception as e:
-        print(f"Error fetching documents: {e}")
+        logger.error("Error fetching documents: %s", e, exc_info=True)
         return []
+
 
 @router.post("/process/redline")
 async def redline_document(file: UploadFile = File(...), edits: str = Form(...)):
     """
     Apply tracked changes (redlines) to a DOCX file.
-    
+
     Args:
         file: The DOCX file to process.
-        edits: A JSON string representing a list of edits. 
+        edits: A JSON string representing a list of edits.
                Example: '[{"original": "old text", "replacement": "new text"}]'
     """
     service = DocumentIntelligenceService()
@@ -70,7 +73,7 @@ async def redline_document(file: UploadFile = File(...), edits: str = Form(...))
 
     output_path = input_path.replace(".docx", "_redlined.docx")
 
-    try:
+    async def operation() -> FileResponse:
         try:
             edits_list = json.loads(edits)
         except json.JSONDecodeError:
@@ -79,18 +82,20 @@ async def redline_document(file: UploadFile = File(...), edits: str = Form(...))
         success = service.apply_redlines_to_docx(input_path, output_path, edits_list)
 
         if not success:
-             raise HTTPException(status_code=500, detail="Redlining failed")
+            raise HTTPException(status_code=500, detail="Redlining failed")
 
         return FileResponse(
             output_path,
             media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-            filename=f"redlined_{file.filename}"
+            filename=f"redlined_{file.filename}",
         )
 
-    except HTTPException:
-        raise
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+    try:
+        return await run_endpoint_operation(
+            operation,
+            "Document redlining failed",
+            logger=logger,
+        )
     finally:
         # Minimal cleanup: input file only, keep output for serving (OS eventually cleans /tmp)
         if os.path.exists(input_path):

@@ -10,35 +10,11 @@ import os
 from enum import Enum
 from typing import Dict, List, Optional
 
-from dotenv import load_dotenv
 from pydantic import BaseModel, Field
 
-from app.core.ai_config import get_ai_config
 from app.core.ai_error_handling import AIError, AIErrorType, with_ai_error_handling
-from app.core.genkit_init import get_model
+from app.core.genkit_init import genkit_flow, get_model
 from app.core.input_validation import InputSanitizer, InputValidationError
-
-try:
-    import genkit
-    from genkit.plugins import google_genai
-except Exception:
-    genkit = None
-    googleai = None
-
-
-def _noop_flow(*args, **kwargs):
-    def _decorator(fn):
-        return fn
-
-    return _decorator
-
-
-genkit_flow = getattr(genkit, "flow", _noop_flow)
-
-# Load environment variables
-load_dotenv()
-# Removed top-level gemini_pro initialization to avoid import-time bugs.
-# Functions now use get_model() at call time.
 
 
 def _get_generation_model():

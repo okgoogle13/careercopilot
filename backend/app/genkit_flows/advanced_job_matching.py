@@ -9,37 +9,11 @@ import json
 import os
 from typing import Any, Dict, List, Optional
 
-from dotenv import load_dotenv
 from pydantic import BaseModel, Field
 
-from app.core.ai_config import get_ai_config
 from app.core.ai_error_handling import AIError, AIErrorType, with_ai_error_handling
+from app.core.genkit_init import genkit_flow, get_model
 from app.core.input_validation import InputSanitizer, InputValidationError
-
-try:
-    import genkit
-    from genkit.plugins import google_genai
-except Exception:
-    genkit: Any = None
-    google_genai: Any = None
-
-
-def _noop_flow(*args, **kwargs):
-    def _decorator(fn):
-        return fn
-
-    return _decorator
-
-
-# Use real genkit.flow if available; otherwise a no-op
-genkit_flow = getattr(genkit, "flow", _noop_flow)
-
-# Load environment variables
-load_dotenv()
-if genkit and getattr(genkit, "get_plugin", None) and not genkit.get_plugin("googleai"):
-    genkit.init(plugins=[google_genai.init(api_key=os.getenv("GEMINI_API_KEY"))])
-
-gemini_pro: Any = get_ai_config().get_model_config("gemini-3.0-flash")
 
 
 # Pydantic models for structured outputs
@@ -180,7 +154,11 @@ For skill analysis, rate both candidate level and required level (1-10 scale):
 Respond with a valid JSON object matching the JobMatchAnalysis schema.
 """
 
-        response = gemini_pro.generate(
+        model = get_model()
+        if model is None:
+            raise RuntimeError("Genkit model not available")
+
+        response = model.generate(
             prompt,
             config={
                 "response_mime_type": "application/json",
@@ -199,7 +177,7 @@ Respond with a valid JSON object matching the JobMatchAnalysis schema.
         )
 
 
-@genkit_flow(output_schema=List[JobOpportunityRanking])
+@genkit_flow()
 @with_ai_error_handling()
 def rank_job_opportunities(
     candidate_profile: Dict, job_opportunities: List[Dict]
@@ -256,7 +234,11 @@ For each job, provide:
 Return jobs ranked from best to worst match as a JSON array matching the JobOpportunityRanking schema.
 """
 
-        response = gemini_pro.generate(
+        model = get_model()
+        if model is None:
+            raise RuntimeError("Genkit model not available")
+
+        response = model.generate(
             prompt,
             config={
                 "response_mime_type": "application/json",
@@ -336,7 +318,11 @@ Provide strategic recommendations for maximizing market position.
 Respond with valid JSON matching the MarketPositioningAnalysis schema.
 """
 
-        response = gemini_pro.generate(
+        model = get_model()
+        if model is None:
+            raise RuntimeError("Genkit model not available")
+
+        response = model.generate(
             prompt,
             config={
                 "response_mime_type": "application/json",

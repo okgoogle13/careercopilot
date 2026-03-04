@@ -2,10 +2,9 @@ import json
 
 from pydantic import BaseModel
 
+from app.core.genkit_init import async_genkit_flow, get_model
+from app.core.observability import monitor_performance
 from app.core.prompt_service import format_prompt
-from app.core.genkit_init import get_model
-from app.genkit_flows.flow_decorator import async_genkit_flow
-from app.core.monitoring import monitor_performance
 
 
 # Define the structured output model using Pydantic
@@ -27,18 +26,21 @@ async def generateKscResponse(user_profile_data: dict, ksc_statement: str) -> ST
     prompt = format_prompt(
         "ksc_simple_response",
         ksc_statement=ksc_statement,
-        user_profile_data=json.dumps(user_profile_data, separators=(',', ':')),
+        user_profile_data=json.dumps(user_profile_data, separators=(",", ":")),
     )
 
     # Generate the response using Genkit model
     model = get_model()
+    if model is None:
+        raise RuntimeError("Genkit model not available")
+
     response = await model.generate(
         prompt=prompt,
         config={
             "response_mime_type": "application/json",
             "temperature": 0.5,
         },
-        output_schema=STAR_Response
+        output_schema=STAR_Response,
     )
 
     # Return structured response

@@ -4,13 +4,14 @@ Authentication endpoints for user registration, login, and session management.
 
 import logging
 
-from app.genkit_flows.smart_ingestion import voiceProfileExtractorFlow
 from fastapi import APIRouter, Depends, HTTPException, status
 from pydantic import BaseModel, EmailStr
 from sqlalchemy.orm import Session
 
+from app.api.endpoints._shared import run_endpoint_operation
 from app.core.auth import get_current_user
 from app.core.database import get_db
+from app.genkit_flows.smart_ingestion import voiceProfileExtractorFlow
 from app.models.database import User
 
 logger = logging.getLogger(__name__)
@@ -64,7 +65,6 @@ class TokenResponse(BaseModel):
     token_type: str = "bearer"
 
 
-
 @router.get("/me", response_model=dict[str, str])
 async def get_current_user_info(
     current_user: User = Depends(get_current_user),
@@ -87,7 +87,8 @@ async def create_voice_profile(
     """
     Create or update voice profile for existing user.
     """
-    try:
+
+    async def operation() -> dict[str, str]:
         if not documents or not any(doc.strip() for doc in documents):
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
@@ -113,11 +114,16 @@ async def create_voice_profile(
             "user_id": current_user.id,
         }
 
-    except HTTPException:
-        raise
-    except Exception as e:
-        logger.error(f"Voice profile creation failed for user {current_user.email}: {e}")
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="Voice profile creation failed",
+    try:
+        return await run_endpoint_operation(
+            operation,
+            "Voice profile creation failed",
+            logger=logger,
         )
+    except HTTPException as exc:
+        if exc.status_code == status.HTTP_500_INTERNAL_SERVER_ERROR:
+            raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail="Voice profile creation failed",
+            ) from exc
+        raise

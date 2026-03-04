@@ -10,36 +10,11 @@ import os
 from enum import Enum
 from typing import Dict, List, Optional
 
-from dotenv import load_dotenv
 from pydantic import BaseModel, Field
 
-from app.core.ai_config import get_ai_config
 from app.core.ai_error_handling import AIError, AIErrorType, with_ai_error_handling
+from app.core.genkit_init import genkit_flow, get_model
 from app.core.input_validation import InputSanitizer, InputValidationError
-
-try:
-    import genkit
-    from genkit.plugins import google_genai
-except Exception:
-    genkit = None
-    googleai = None
-
-
-def _noop_flow(*args, **kwargs):
-    def _decorator(fn):
-        return fn
-
-    return _decorator
-
-
-genkit_flow = getattr(genkit, "flow", _noop_flow) if genkit else _noop_flow
-
-# Load environment variables
-load_dotenv()
-if genkit and getattr(genkit, "get_plugin", None) and not genkit.get_plugin("googleai"):
-    genkit.init(plugins=[google_genai.init(api_key=os.getenv("GEMINI_API_KEY"))])
-
-gemini_pro = get_ai_config().get_model_config("gemini-3.0-flash")
 
 
 # Data Models
@@ -204,7 +179,11 @@ maintaining authenticity and professional standards.
 Respond with valid JSON matching the SmartCoverLetter schema.
 """
 
-        response = gemini_pro.generate(
+        model = get_model()
+        if model is None:
+            raise RuntimeError("Genkit model not available")
+
+        response = model.generate(
             prompt,
             config={
                 "response_mime_type": "application/json",
@@ -311,7 +290,11 @@ job applications that demonstrate genuine interest and understanding.
 Respond with valid JSON matching the CompanyResearchInsights schema.
 """
 
-        response = gemini_pro.generate(
+        model = get_model()
+        if model is None:
+            raise RuntimeError("Genkit model not available")
+
+        response = model.generate(
             prompt,
             config={
                 "response_mime_type": "application/json",
@@ -430,7 +413,11 @@ The optimized version should significantly outperform the original.
 Respond with valid JSON matching the CoverLetterOptimizationResult schema.
 """
 
-        response = gemini_pro.generate(
+        model = get_model()
+        if model is None:
+            raise RuntimeError("Genkit model not available")
+
+        response = model.generate(
             prompt,
             config={
                 "response_mime_type": "application/json",
@@ -544,7 +531,11 @@ while optimizing each for its specific use case and communication channel.
 Respond with valid JSON matching the MultiFormatCoverLetterSuite schema.
 """
 
-        response = gemini_pro.generate(
+        model = get_model()
+        if model is None:
+            raise RuntimeError("Genkit model not available")
+
+        response = model.generate(
             prompt,
             config={
                 "response_mime_type": "application/json",

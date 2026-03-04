@@ -5,10 +5,13 @@ This module provides a centralized way to access configuration values while
 falling back to local environment variables during development.
 """
 
+import logging
 import os
 from typing import Any, Dict, Optional, Tuple, cast
 
 from pydantic import validator
+
+logger = logging.getLogger(__name__)
 
 try:
     from pydantic_settings import BaseSettings
@@ -110,6 +113,7 @@ class SecureSettings(BaseSettings):
     ENABLE_WEB_SEARCH: bool = False
     ENABLE_EMAIL_NOTIFICATIONS: bool = False
     ENABLE_AI_FEATURES: bool = True
+    ENABLE_GENKIT_FLOWS: bool = True
 
     # Development Settings
     ENABLE_HOT_RELOAD: bool = False
@@ -126,7 +130,10 @@ class SecureSettings(BaseSettings):
         self.ENVIRONMENT = self.ENV
 
         # Keep the alias synchronized in non-production contexts.
-        if self.SECRET_KEY == "insecure-default-secret-key" and self.JWT_SECRET_KEY != self.SECRET_KEY:
+        if (
+            self.SECRET_KEY == "insecure-default-secret-key"
+            and self.JWT_SECRET_KEY != self.SECRET_KEY
+        ):
             self.SECRET_KEY = self.JWT_SECRET_KEY
 
         try:
@@ -162,7 +169,7 @@ class SecureSettings(BaseSettings):
         except Exception as exc:
             if self.ENV in ["production", "staging"]:
                 raise RuntimeError(f"Failed to load production configuration: {exc}") from exc
-            print(f"Warning: Failed to load some configuration: {exc}")
+            logger.debug("Some optional local configuration is unavailable: %s", exc)
 
     @validator("FIREBASE_CREDENTIALS_JSON", pre=True)
     def validate_firebase_creds(

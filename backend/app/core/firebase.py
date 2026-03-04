@@ -38,7 +38,12 @@ def initialize_firebase() -> App | None:
     firebase_config = get_firebase_config()
 
     if not firebase_config.get("project_id"):
-        logger.warning("Firebase project ID not configured. Firebase features will be disabled.")
+        environment = os.getenv("ENV", "development").lower()
+        log_message = "Firebase project ID not configured. Firebase features will be disabled."
+        if environment in {"production", "staging"}:
+            logger.warning(log_message)
+        else:
+            logger.debug(log_message)
         return None
 
     try:

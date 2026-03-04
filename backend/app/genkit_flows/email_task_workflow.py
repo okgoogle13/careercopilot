@@ -10,9 +10,9 @@ from typing import Any, Dict, List
 
 from pydantic import BaseModel, Field
 
-from app.core.ai_config import get_ai_config
 from app.core.ai_error_handling import with_ai_error_handling
 from app.core.database import SessionLocal
+from app.core.genkit_init import genkit_flow
 from app.core.input_validation import InputSanitizer, InputValidationError
 from app.models.database import User
 
@@ -21,25 +21,6 @@ from .calendar_manager import createCalendarEvent
 
 # Import required flows
 from .email_scanner import scanEmailsForJobOpportunities
-
-try:
-    import genkit
-    from genkit.ai import flow as genkit_flow  # type: ignore[attr-defined]
-
-    GENKIT_AVAILABLE = True
-except ImportError:
-    genkit: Any = None
-    GENKIT_AVAILABLE = False
-
-    def _noop_flow(*args, **kwargs):
-        def _decorator(fn):
-            return fn
-
-        return _decorator
-
-    genkit_flow = _noop_flow
-
-gemini_pro = get_ai_config().get_model_config("gemini-3.0-flash")
 
 
 class OpportunityTaskResult(BaseModel):

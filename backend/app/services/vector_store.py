@@ -1,23 +1,13 @@
-import os
 from typing import Literal
 
-from dotenv import load_dotenv
 from pydantic import BaseModel
-
-try:
-    import google.generativeai as genai
-except ImportError:  # pragma: no cover - optional dependency in test/CI
-    genai = None
 from sqlalchemy import select
 
 from app.core.database import get_db_session
+from app.core.google_genai_compat import get_configured_google_generativeai
+from app.core.secure_config import settings
 from app.models.document_embedding import DocumentEmbedding
 
-load_dotenv()
-
-# Configure Google AI for Embeddings
-if genai:
-    genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 
 class CareerArtifact(BaseModel):
     content: str
@@ -25,6 +15,7 @@ class CareerArtifact(BaseModel):
     source_filename: str
     derived_skills: list[str] = []
     date: str = ""
+
 
 class VectorStore:
     """
@@ -40,24 +31,22 @@ class VectorStore:
         """Generates embeddings using Gemini API."""
         if not texts:
             return []
+        genai = get_configured_google_generativeai(settings.GEMINI_API_KEY)
         if not genai:
             raise RuntimeError("Google Generative AI library not installed")
 
         results = genai.embed_content(
-            model=self.embedding_model,
-            content=texts,
-            task_type="retrieval_document"
+            model=self.embedding_model, content=texts, task_type="retrieval_document"
         )
         return results["embedding"]
 
     def _generate_query_embedding(self, text: str) -> list[float]:
         """Generates embedding for a single query."""
+        genai = get_configured_google_generativeai(settings.GEMINI_API_KEY)
         if not genai:
             raise RuntimeError("Google Generative AI library not installed")
         result = genai.embed_content(
-            model=self.embedding_model,
-            content=text,
-            task_type="retrieval_query"
+            model=self.embedding_model, content=text, task_type="retrieval_query"
         )
         return result["embedding"]
 
@@ -70,7 +59,7 @@ class VectorStore:
             "source_type": artifact.source_type,
             "source_filename": artifact.source_filename,
             "date": artifact.date,
-            "skills": artifact.derived_skills
+            "skills": artifact.derived_skills,
         }
 
         with get_db_session() as db:
@@ -78,26 +67,36 @@ class VectorStore:
                 user_id=user_id,
                 content=artifact.content,
                 embedding=embedding_vector,
-                metadata_json=metadata
+                metadata_json=metadata,
             )
             db.add(doc)
             # Commit handled by context manager
 
         print(f"DEBUG: Added artifact {artifact.source_filename} to Supabase VectorStore.")
 
-    def query_similar(self, query: str, n_results: int = 3, filter_source: str | None = None, user_id: str = "legacy_user") -> list[dict]:
+    def query_similar(
+        self,
+        query: str,
+        n_results: int = 3,
+        filter_source: str | None = None,
+        user_id: str = "legacy_user",
+    ) -> list[dict]:
         """Queries the vector store for similar artifacts."""
         query_embedding = self._generate_query_embedding(query)
 
         with get_db_session() as db:
             # Cosine distance operator is <=>
-            stmt = select(DocumentEmbedding).order_by(
-                DocumentEmbedding.embedding.cosine_distance(query_embedding)
-            ).limit(n_results)
+            stmt = (
+                select(DocumentEmbedding)
+                .order_by(DocumentEmbedding.embedding.cosine_distance(query_embedding))
+                .limit(n_results)
+            )
 
             if filter_source:
                 # Generic JSON filtering
-                stmt = stmt.filter(DocumentEmbedding.metadata_json["source_type"].as_string() == filter_source)
+                stmt = stmt.filter(
+                    DocumentEmbedding.metadata_json["source_type"].as_string() == filter_source
+                )
 
             if user_id:
                 stmt = stmt.filter(DocumentEmbedding.user_id == user_id)
@@ -106,12 +105,14 @@ class VectorStore:
 
             output = []
             for doc in results:
-                output.append({
-                    "id": doc.id,
-                    "content": doc.content,
-                    "metadata": doc.metadata_json,
-                    "distance": 0.0 # Distance calculation requires modification to select clause to return it
-                })
+                output.append(
+                    {
+                        "id": doc.id,
+                        "content": doc.content,
+                        "metadata": doc.metadata_json,
+                        "distance": 0.0,  # Distance calculation requires modification to select clause to return it
+                    }
+                )
 
             return output
 

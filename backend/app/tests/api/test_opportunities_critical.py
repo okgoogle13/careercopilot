@@ -1,37 +1,18 @@
 """Focused tests for the opportunities endpoint."""
 
-from types import SimpleNamespace
-
-from fastapi.testclient import TestClient
-
-from app.core.dependencies import get_current_user
-from app.main import app
-
-
-def _override_user():
-    return SimpleNamespace(
-        id="test-user-123",
-        email="test@example.com",
-        name="Test User",
-        auth_provider="firebase",
-    )
-
-
-def _client():
-    app.dependency_overrides[get_current_user] = _override_user
-    return TestClient(app)
+from app.tests.helpers.route_paths import OPPORTUNITIES_ROOT
 
 
 class TestGetOpportunities:
-    def test_get_opportunities_returns_list(self):
-        response = _client().get("/api/opportunities/")
+    def test_get_opportunities_returns_list(self, authenticated_client):
+        response = authenticated_client.get(OPPORTUNITIES_ROOT)
 
         assert response.status_code == 200
         assert isinstance(response.json(), list)
         assert len(response.json()) > 0
 
-    def test_get_opportunities_response_structure(self):
-        response = _client().get("/api/opportunities/")
+    def test_get_opportunities_response_structure(self, authenticated_client):
+        response = authenticated_client.get(OPPORTUNITIES_ROOT)
 
         required_fields = {
             "id",
@@ -52,8 +33,8 @@ class TestGetOpportunities:
         for opportunity in response.json():
             assert required_fields.issubset(opportunity.keys())
 
-    def test_get_opportunities_data_types(self):
-        response = _client().get("/api/opportunities/")
+    def test_get_opportunities_data_types(self, authenticated_client):
+        response = authenticated_client.get(OPPORTUNITIES_ROOT)
 
         assert response.status_code == 200
         for opportunity in response.json():
@@ -65,8 +46,8 @@ class TestGetOpportunities:
             assert isinstance(opportunity["isRemote"], bool)
             assert isinstance(opportunity["isFavorited"], bool)
 
-    def test_get_opportunities_match_score_range(self):
-        response = _client().get("/api/opportunities/")
+    def test_get_opportunities_match_score_range(self, authenticated_client):
+        response = authenticated_client.get(OPPORTUNITIES_ROOT)
 
         assert response.status_code == 200
         for opportunity in response.json():
@@ -74,14 +55,14 @@ class TestGetOpportunities:
 
 
 class TestOpportunitiesBusiness:
-    def test_remote_opportunities_included(self):
-        response = _client().get("/api/opportunities/")
+    def test_remote_opportunities_included(self, authenticated_client):
+        response = authenticated_client.get(OPPORTUNITIES_ROOT)
 
         assert response.status_code == 200
         assert any(opportunity["isRemote"] for opportunity in response.json())
 
-    def test_opportunities_include_high_match_scores(self):
-        response = _client().get("/api/opportunities/")
+    def test_opportunities_include_high_match_scores(self, authenticated_client):
+        response = authenticated_client.get(OPPORTUNITIES_ROOT)
 
         assert response.status_code == 200
         scores = [opportunity["matchScore"] for opportunity in response.json()]

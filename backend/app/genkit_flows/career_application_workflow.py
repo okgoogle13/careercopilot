@@ -13,7 +13,9 @@ from pydantic import BaseModel, Field
 
 from app.core.ai_config import get_ai_config
 from app.core.ai_error_handling import with_ai_error_handling
+from app.core.genkit_init import async_genkit_flow
 from app.core.input_validation import InputSanitizer, InputValidationError
+from app.core.observability import monitor_performance
 
 from .ksc_generator import STAR_Response, generateKscResponse
 
@@ -29,24 +31,13 @@ from .smart_cover_letter_system import (
     research_company_for_application,
 )
 
-try:
-    import genkit
-    from genkit.ai import flow as genkit_flow
 
-    GENKIT_AVAILABLE = True
-except ImportError:
-    genkit = None
-    GENKIT_AVAILABLE = False
-
-    def _noop_flow(*args, **kwargs):
-        def _decorator(fn):
-            return fn
-
-        return _decorator
-
-    genkit_flow = _noop_flow
-
-gemini_pro = get_ai_config().get_model_config("gemini-3.0-flash")
+def _get_generation_model():
+    """Resolve the configured generation model lazily at call time."""
+    model_config = get_ai_config().get_model_config("gemini-3.0-flash")
+    if model_config is None:
+        raise RuntimeError("Model configuration not available")
+    return model_config
 
 
 class TailoredResumeResult(BaseModel):
@@ -79,16 +70,22 @@ class ApplicationPackageResult(BaseModel):
     success: bool = Field(description="Whether package generation succeeded")
 
     # Core components
-    tailored_resume: Optional[TailoredResumeResult] = Field(description="Tailored resume result")
-    cover_letter: Optional[SmartCoverLetter] = Field(description="Generated cover letter")
-    ksc_responses: Optional[KSCResponsesResult] = Field(description="KSC responses if applicable")
+    tailored_resume: Optional[TailoredResumeResult] = Field(
+        default=None, description="Tailored resume result"
+    )
+    cover_letter: Optional[SmartCoverLetter] = Field(
+        default=None, description="Generated cover letter"
+    )
+    ksc_responses: Optional[KSCResponsesResult] = Field(
+        default=None, description="KSC responses if applicable"
+    )
 
     # Supporting analysis
     resume_intelligence: Optional[ResumeIntelligenceReport] = Field(
-        description="Resume intelligence analysis"
+        default=None, description="Resume intelligence analysis"
     )
     company_research: Optional[CompanyResearchInsights] = Field(
-        description="Company research insights"
+        default=None, description="Company research insights"
     )
 
     # Package metadata
@@ -251,7 +248,9 @@ async def generate_application_package(
             ksc_criteria = _detect_ksc_criteria(sanitized_job_desc.sanitized_content)
 
             if ksc_criteria:
-                result.ksc_responses = await _generate_ksc_responses(ksc_criteria, sanitized_profile)
+                result.ksc_responses = await _generate_ksc_responses(
+                    ksc_criteria, sanitized_profile
+                )
                 result.components_generated.append("ksc_responses")
                 print(f"✓ Generated {len(ksc_criteria)} KSC responses")
             else:
@@ -303,13 +302,13 @@ As an expert resume writer and career strategist, create a tailored version of t
 optimized specifically for the target job opportunity.
 
 ORIGINAL RESUME INTELLIGENCE ANALYSIS:
-{json.dumps(resume_intelligence.resume_analysis.dict(), separators=(\',\', \':\'))}
+{json.dumps(resume_intelligence.resume_analysis.dict(), separators=(",", ":"))}
 
 JOB DESCRIPTION:
 {job_description}
 
 USER PROFILE:
-{json.dumps(user_profile, separators=(\',\', \':\'))}
+{json.dumps(user_profile, separators=(",", ":"))}
 
 RESUME TAILORING REQUIREMENTS:
 
@@ -344,7 +343,7 @@ Focus on authentic enhancements that genuinely improve job alignment.
 Respond with valid JSON matching the structure expected for tailored resume results.
 """
 
-    response = gemini_pro.generate(
+    response = _get_generation_model().generate(
         prompt,
         config={
             "response_mime_type": "application/json",
@@ -367,7 +366,9 @@ Respond with valid JSON matching the structure expected for tailored resume resu
     )
 
 
-async def _generate_ksc_responses(ksc_criteria: List[str], user_profile: Dict) -> KSCResponsesResult:
+async def _generate_ksc_responses(
+    ksc_criteria: List[str], user_profile: Dict
+) -> KSCResponsesResult:
     """Generate STAR responses for detected KSC criteria."""
 
     generated_responses = []
@@ -375,7 +376,9 @@ async def _generate_ksc_responses(ksc_criteria: List[str], user_profile: Dict) -
 
     for criterion in ksc_criteria[:5]:  # Limit to 5 criteria to avoid timeout
         try:
-            response = await generateKscResponse(user_profile_data=user_profile, ksc_statement=criterion)
+            response = await generateKscResponse(
+                user_profile_data=user_profile, ksc_statement=criterion
+            )
             generated_responses.append({criterion: response})
         except Exception as e:
             print(f"Failed to generate KSC response for '{criterion}': {str(e)}")
@@ -398,7 +401,7 @@ def _generate_application_strategy(result: ApplicationPackageResult, job_descrip
     """Generate comprehensive application strategy and recommendations."""
 
     # Calculate overall match score based on available components
-    match_score = 50  # Base score
+    match_score = 50.0  # Base score
 
     if result.resume_intelligence:
         match_score += result.resume_intelligence.resume_analysis.overall_score * 0.3

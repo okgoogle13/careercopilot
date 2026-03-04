@@ -1,23 +1,14 @@
 import asyncio
 import inspect
-
-try:
-    import google.generativeai as genai
-except ImportError:  # pragma: no cover - optional dependency in test/CI
-    genai = None
 import json
-import os
-from typing import List, Optional
+from collections.abc import Coroutine
+from typing import Any, List, Optional, cast
 
-from dotenv import load_dotenv
 from pydantic import BaseModel, Field
 
+from app.core.google_genai_compat import get_configured_google_generativeai
+from app.core.secure_config import settings
 from app.services.search_service import SearchService
-
-# Load environment variables
-load_dotenv()
-if genai:
-    genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 
 
 class CorporateProfile(BaseModel):
@@ -36,20 +27,23 @@ class CorporateProfile(BaseModel):
 def _resolve_search_summary(result: object) -> str | None:
     """Resolve sync or async search-service results into plain text."""
     if inspect.isawaitable(result):
+        coroutine_result = cast(Coroutine[Any, Any, Any], result)
         try:
-            return asyncio.run(result)
+            resolved = asyncio.run(coroutine_result)
         except RuntimeError:
             loop = asyncio.new_event_loop()
             try:
-                return loop.run_until_complete(result)
+                resolved = loop.run_until_complete(coroutine_result)
             finally:
                 loop.close()
+        return resolved if isinstance(resolved, str) else None
     return result if isinstance(result, str) else None
 
 
 def _get_model():
     """Create the Gemini model lazily to avoid import-time side effects."""
-    return genai.GenerativeModel("gemini-3.0-pro") if genai else None
+    genai_client = get_configured_google_generativeai(settings.GEMINI_API_KEY)
+    return genai_client.GenerativeModel("gemini-3.0-pro") if genai_client else None
 
 
 def research_company(company_name: str) -> CorporateProfile:
@@ -74,8 +68,9 @@ def research_company(company_name: str) -> CorporateProfile:
             known_for="Unknown",
         )
 
+    genai_client = get_configured_google_generativeai(settings.GEMINI_API_KEY)
     model = _get_model()
-    if not genai or not model:
+    if not genai_client or not model:
         return CorporateProfile(
             name=company_name,
             mission_statement=research_summary or "Information not available (Search failed)",
@@ -113,7 +108,7 @@ def research_company(company_name: str) -> CorporateProfile:
     try:
         response = model.generate_content(
             prompt,
-            generation_config=genai.GenerationConfig(
+            generation_config=genai_client.GenerationConfig(
                 response_mime_type="application/json", response_schema=CorporateProfile
             ),
         )

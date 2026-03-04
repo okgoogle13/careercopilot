@@ -2,9 +2,7 @@ from typing import Callable, Type, TypeVar, cast
 
 from pydantic import BaseModel
 
-from app.core.genkit_init import get_model
-from app.genkit_flows.flow_decorator import create_flow_wrapper
-
+from app.core.genkit_init import create_flow_wrapper, get_model
 
 T = TypeVar("T", bound=BaseModel)
 
@@ -34,6 +32,8 @@ def create_extraction_flow(
 
         # Model availability is guaranteed by the decorator
         model = get_model()  # type: ignore[no-untyped-call]
+        if model is None:
+            raise RuntimeError("Genkit model not available")
 
         response = model.generate(
             prompt=prompt,

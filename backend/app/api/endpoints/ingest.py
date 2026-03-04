@@ -1,22 +1,27 @@
+import logging
 from typing import Any, Literal
 
 from fastapi import APIRouter, Depends, File, Form, HTTPException, UploadFile
 
+from app.api.endpoints._shared import run_endpoint_operation
 from app.core.dependencies import get_current_user
 from app.services.ingestion import IngestionService
 
 router = APIRouter()
+logger = logging.getLogger(__name__)
+
 
 @router.post("/artifacts/upload")
 async def upload_artifact(
     file: UploadFile = File(...),
     source_type: Literal["resume", "cover_letter", "ksc_response"] = Form(...),
-    current_user: Any = Depends(get_current_user)
+    current_user: Any = Depends(get_current_user),
 ):
     """
     Uploads a career artifact (PDF/DOCX) for ingestion into the RAG Vector Store.
     """
-    try:
+
+    async def operation() -> dict[str, str]:
         content = await file.read()
         service = IngestionService()
 
@@ -25,12 +30,19 @@ async def upload_artifact(
             file_content=content,
             filename=file.filename,
             source_type=source_type,
-            user_id=current_user.id
+            user_id=current_user.id,
         )
 
         return {"message": f"Successfully ingested {file.filename} as {source_type}"}
-    except ValueError as e:
-        raise HTTPException(status_code=400, detail=str(e))
-    except Exception as e:
-        print(f"Error ingesting artifact: {e}")
-        raise HTTPException(status_code=500, detail="Internal server error during ingestion")
+
+    try:
+        return await run_endpoint_operation(
+            operation,
+            "Internal server error during ingestion",
+            bad_request_exceptions=(ValueError,),
+            logger=logger,
+        )
+    except HTTPException as exc:
+        if exc.status_code == 500:
+            raise HTTPException(status_code=500, detail="Internal server error during ingestion")
+        raise

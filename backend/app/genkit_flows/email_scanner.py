@@ -1,17 +1,17 @@
 import base64
 from datetime import datetime, timezone
 
-from sqlalchemy.orm import Session
 from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
+from sqlalchemy.orm import Session
 
 from app.core.database import SessionLocal
 from app.core.genkit_init import get_model
 from app.core.prompt_service import format_prompt
 from app.core.secrets import get_user_secret
 from app.genkit_flows.flow_decorator import simple_genkit_flow
-from app.models.database import User, Application
+from app.models.database import Application, User
 
 # Import the new flows
 from .calendar_manager import createCalendarEvent
@@ -34,6 +34,8 @@ def extract_job_details_from_email(email_content: str) -> dict:
 
     prompt = format_prompt("email_job_extraction", email_content=email_content)
     model = get_model()
+    if model is None:
+        raise RuntimeError("Genkit model not available")
 
     response = model.generate(
         prompt=prompt,
@@ -108,7 +110,7 @@ async def scanUserEmails(user_id: str) -> list:
                 continue
 
             email_body = base64.urlsafe_b64decode(encoded_body).decode("utf-8")
-            job_details = await extract_job_details_from_email.run(email_body)
+            job_details = extract_job_details_from_email(email_body)
 
             if job_details and job_details.get("title"):
                 # Save to Applications table
@@ -119,7 +121,7 @@ async def scanUserEmails(user_id: str) -> list:
                     job_description=job_details.get("description", ""),
                     status="new",
                     source="email",
-                    applied_date=datetime.now(timezone.utc)
+                    applied_date=datetime.now(timezone.utc),
                 )
                 db.add(new_app)
                 db.commit()
@@ -132,13 +134,13 @@ async def scanUserEmails(user_id: str) -> list:
                 # 2. Create Calendar Event
                 if job_details.get("deadline"):
                     try:
-                        await createCalendarEvent.run(user_id, job_details)
+                        await createCalendarEvent(user_id, job_details)
                     except Exception as e:
                         print(f"Failed to create calendar event: {e}")
 
                 # 3. Send Notification Email
                 try:
-                    await sendNewOpportunityNotification.run(user_data, job_details)
+                    sendNewOpportunityNotification(user_data, job_details)
                 except Exception as e:
                     print(f"Failed to send notification: {e}")
 
