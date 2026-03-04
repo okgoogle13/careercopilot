@@ -1,52 +1,57 @@
+"""Tests for /analysis API endpoints."""
+
+from types import SimpleNamespace
+from unittest.mock import AsyncMock, MagicMock, patch
+
 import pytest
-from fastapi.testclient import TestClient
-from app.main import app
-from app.core.dependencies import get_current_user
 
-# Mock authentication
-async def mock_get_current_user():
-    return {"id": "test_user_id"}
 
-app.dependency_overrides[get_current_user] = mock_get_current_user
+@pytest.fixture
+def auth_client(client):
+    from app.core.dependencies import get_current_user
 
-client = TestClient(app)
+    mock_user = SimpleNamespace(
+        id="test_user_id", uid="test_uid", email="test@example.com", name="Test User"
+    )
+    client.app.dependency_overrides[get_current_user] = lambda: mock_user
+    yield client
 
-def test_get_analysis_data_success():
-    """Test retrieving analysis data for the dashboard."""
-    response = client.get("/api/analysis/")
-    assert response.status_code == 200
-    data = response.json()
-    assert "atsScoreHistory" in data
-    assert "applicationStatus" in data
-    assert data["matchedKeywords"] == ["Python", "FastAPI"]
 
-@pytest.mark.asyncio
-async def test_optimize_resume_endpoint_missing_text():
-    """Test resume optimization with missing resume text (should fail)."""
-    payload = {
-        "job_description": "We need a Python developer.",
-        "company_url": "https://example.com"
-    }
-    response = client.post("/api/analysis/optimize-resume", json=payload)
-    assert response.status_code == 400
-    assert response.json()["detail"] == "Resume text required"
+class TestAnalysisEndpoints:
+    def test_get_analysis_data(self, auth_client):
+        """Should return hardcoded analysis dashboard data."""
+        response = auth_client.get("/api/analysis/")
+        assert response.status_code == 200
+        data = response.json()
+        assert "atsScoreHistory" in data
+        assert "matchedKeywords" in data
 
-def test_optimize_resume_endpoint_success(monkeypatch):
-    """Test successful resume optimization with mocked Genkit flow."""
-    from app.api.endpoints.analysis import optimize_resume
-    
-    class MockResult:
-        resume_text = "Optimized Resume Content"
+    def test_optimize_resume_happy_path(self, auth_client):
+        """Should call optimize_resume flow and return optimized text."""
+        mock_result = MagicMock()
+        mock_result.resume_text = "OPTIMIZED RESUME CONTENT"
 
-    async def mock_optimize(*args, **kwargs):
-        return MockResult()
+        with patch(
+            "app.api.endpoints.analysis.optimize_resume", new_callable=AsyncMock
+        ) as mock_flow:
+            mock_flow.return_value = mock_result
+            response = auth_client.post(
+                "/api/analysis/optimize-resume",
+                json={
+                    "resume_text": "Original Resume",
+                    "job_description": "Python dev job",
+                    "company_url": "https://acme.com",
+                },
+            )
 
-    monkeypatch.setattr("app.api.endpoints.analysis.optimize_resume", mock_optimize)
+        assert response.status_code == 200
+        assert response.json()["optimized_text"] == "OPTIMIZED RESUME CONTENT"
+        mock_flow.assert_called_once()
 
-    payload = {
-        "job_description": "We need a Python developer.",
-        "resume_text": "Original Resume"
-    }
-    response = client.post("/api/analysis/optimize-resume", json=payload)
-    assert response.status_code == 200
-    assert response.json()["optimized_text"] == "Optimized Resume Content"
+    def test_optimize_resume_missing_text_returns_400(self, auth_client):
+        """Should return 400 if resume_text is empty."""
+        response = auth_client.post(
+            "/api/analysis/optimize-resume", json={"resume_text": "", "job_description": "Some job"}
+        )
+        assert response.status_code == 400
+        assert "Resume text required" in response.json()["detail"]

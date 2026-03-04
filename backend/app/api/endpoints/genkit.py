@@ -4,6 +4,11 @@ API Endpoints for Genkit AI Flows
 
 from typing import Any
 
+from fastapi import APIRouter
+from pydantic import BaseModel
+
+from app.api.endpoints._shared import run_genkit_endpoint
+from app.core.genkit_init import is_genkit_enabled
 from app.genkit_flows.company_context import (
     CompanyContext,
     generate_company_context,
@@ -24,10 +29,6 @@ from app.genkit_flows.unified_job_analyzer import (
     UnifiedJobAnalysis,
     analyze_job_from_url,
 )
-from fastapi import APIRouter, HTTPException, status
-from pydantic import BaseModel
-
-from app.core.genkit_init import is_genkit_enabled
 
 router = APIRouter()
 
@@ -53,16 +54,9 @@ class KSCRequest(BaseModel):
     description="Generates a personalized cover letter using Genkit AI.",
 )
 async def generate_cover_letter_endpoint(request: CoverLetterRequest) -> SmartCoverLetter:
-    if not is_genkit_enabled():
-        raise HTTPException(
-            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
-            detail="Genkit flows are disabled.",
-        )
-
-    try:
-        # Note: generate_smart_cover_letter is currently synchronous
-        # If it becomes async or needs to run in a threadpool, adjust accordingly
-        result = generate_smart_cover_letter(
+    async def operation() -> SmartCoverLetter:
+        # Note: generate_smart_cover_letter is currently synchronous.
+        return generate_smart_cover_letter(
             candidate_profile=request.candidate_profile,
             job_description=request.job_description,
             company_info=request.company_info,
@@ -70,12 +64,12 @@ async def generate_cover_letter_endpoint(request: CoverLetterRequest) -> SmartCo
             format_type=request.format_type,
             special_instructions=request.special_instructions,
         )
-        return result
-    except Exception as e:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Cover letter generation failed: {e!s}",
-        )
+
+    return await run_genkit_endpoint(
+        operation,
+        "Cover letter generation failed",
+        enabled_check=is_genkit_enabled,
+    )
 
 
 @router.post(
@@ -85,24 +79,17 @@ async def generate_cover_letter_endpoint(request: CoverLetterRequest) -> SmartCo
     description="Generates a STAR-formatted KSC response using Genkit AI.",
 )
 async def generate_ksc_endpoint(request: KSCRequest) -> STAR_Response:
-    if not is_genkit_enabled():
-        raise HTTPException(
-            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
-            detail="Genkit flows are disabled.",
-        )
-
-    try:
-        # generateKscResponse is defined as async
-        result = await generateKscResponse(
+    async def operation() -> STAR_Response:
+        return await generateKscResponse(
             user_profile_data=request.user_profile_data,
             ksc_statement=request.ksc_statement,
         )
-        return result
-    except Exception as e:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"KSC generation failed: {e!s}",
-        )
+
+    return await run_genkit_endpoint(
+        operation,
+        "KSC generation failed",
+        enabled_check=is_genkit_enabled,
+    )
 
 
 class OptimizeResumeRequest(BaseModel):
@@ -127,20 +114,14 @@ class AnalyzeJobUrlRequest(BaseModel):
     description="One-stop analysis: scrapes URL, extracts job details, and generates company context.",
 )
 async def analyze_job_url_endpoint(request: AnalyzeJobUrlRequest) -> UnifiedJobAnalysis:
-    if not is_genkit_enabled():
-        raise HTTPException(
-            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
-            detail="Genkit flows are disabled.",
-        )
+    async def operation() -> UnifiedJobAnalysis:
+        return await analyze_job_from_url(url=request.url)
 
-    try:
-        result = await analyze_job_from_url(url=request.url)
-        return result
-    except Exception as e:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Job URL analysis failed: {e!s}",
-        )
+    return await run_genkit_endpoint(
+        operation,
+        "Job URL analysis failed",
+        enabled_check=is_genkit_enabled,
+    )
 
 
 @router.post(
@@ -150,24 +131,18 @@ async def analyze_job_url_endpoint(request: AnalyzeJobUrlRequest) -> UnifiedJobA
     description="Optimizes resume by integrating missing keywords from ATS analysis.",
 )
 async def optimize_resume_endpoint(request: OptimizeResumeRequest) -> OptimizedResume:
-    if not is_genkit_enabled():
-        raise HTTPException(
-            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
-            detail="Genkit flows are disabled.",
-        )
-
-    try:
-        result = await optimize_resume(
+    async def operation() -> OptimizedResume:
+        return await optimize_resume(
             resume_text=request.resume_text,
             missing_keywords=request.missing_keywords,
             job_description=request.job_description,
         )
-        return result
-    except Exception as e:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Resume optimization failed: {e!s}",
-        )
+
+    return await run_genkit_endpoint(
+        operation,
+        "Resume optimization failed",
+        enabled_check=is_genkit_enabled,
+    )
 
 
 @router.post(
@@ -177,20 +152,14 @@ async def optimize_resume_endpoint(request: OptimizeResumeRequest) -> OptimizedR
     description="Generates company context for applications and interview prep using AI knowledge.",
 )
 async def get_company_context_endpoint(request: CompanyContextRequest) -> CompanyContext:
-    if not is_genkit_enabled():
-        raise HTTPException(
-            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
-            detail="Genkit flows are disabled.",
-        )
-
-    try:
-        result = await generate_company_context(
+    async def operation() -> CompanyContext:
+        return await generate_company_context(
             company_name=request.company_name,
             job_description=request.job_description,
         )
-        return result
-    except Exception as e:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Company context generation failed: {e!s}",
-        )
+
+    return await run_genkit_endpoint(
+        operation,
+        "Company context generation failed",
+        enabled_check=is_genkit_enabled,
+    )

@@ -3,17 +3,24 @@ import logging
 import os
 from functools import lru_cache
 
+
+class SecretManagerNotFound(Exception):
+    """Fallback not-found error when Google client libraries are unavailable."""
+
+
+SECRET_MANAGER_NOT_FOUND_EXCEPTIONS: tuple[type[Exception], ...]
+
+
 try:
-    from google.api_core.exceptions import NotFound
+    from google.api_core.exceptions import NotFound as GoogleSecretManagerNotFound
     from google.cloud import secretmanager
     from google.oauth2 import service_account
+
+    SECRET_MANAGER_NOT_FOUND_EXCEPTIONS = (GoogleSecretManagerNotFound,)
 except ImportError:  # pragma: no cover - optional dependency in test/CI
-
-    class NotFound(Exception):
-        """Fallback not-found error when Google client libraries are unavailable."""
-
-    secretmanager = None
-    service_account = None
+    SECRET_MANAGER_NOT_FOUND_EXCEPTIONS = (SecretManagerNotFound,)
+    secretmanager = None  # type: ignore[assignment]
+    service_account = None  # type: ignore[assignment]
 
 logger = logging.getLogger(__name__)
 
@@ -24,7 +31,7 @@ GCP_PROJECT_ID = os.getenv("GCP_PROJECT_ID", "careercopilot-468811")
 def _get_secret_manager_client():
     """Initialize Secret Manager client with proper authentication."""
     if secretmanager is None:
-        logger.warning("Google Secret Manager dependencies not available")
+        logger.debug("Google Secret Manager dependencies not available")
         return None
 
     try:
@@ -40,12 +47,10 @@ def _get_secret_manager_client():
             if cred_path and os.path.exists(cred_path):
                 return secretmanager.SecretManagerServiceClient()
             else:
-                logger.warning(
-                    "No valid Google Cloud credentials found - Secret Manager unavailable"
-                )
+                logger.debug("No valid Google Cloud credentials found - Secret Manager unavailable")
                 return None
     except Exception as e:
-        logger.warning(f"Secret Manager client initialization failed: {e}")
+        logger.debug(f"Secret Manager client initialization failed: {e}")
         return None
 
 
@@ -112,7 +117,7 @@ def delete_user_secret(user_id: str, secret_name: str):
     try:
         # Delete the secret itself. This will automatically delete all versions.
         client.delete_secret(request={"name": secret_path})
-    except NotFound:
+    except SECRET_MANAGER_NOT_FOUND_EXCEPTIONS:
         # If the secret doesn't exist, we can consider it a success.
         print(f"Secret {secret_id} not found, nothing to delete.")
     except Exception as e:
@@ -139,7 +144,10 @@ def get_app_secret(secret_name: str, version: str = "latest") -> str:
     """
     if not GCP_PROJECT_ID:
         logger.warning("GCP_PROJECT_ID not set, falling back to environment variables")
-        return os.getenv(secret_name.upper().replace("-", "_"))
+        env_value = os.getenv(secret_name.upper().replace("-", "_"))
+        if env_value:
+            return env_value
+        raise Exception(f"Secret {secret_name} not found in environment")
 
     if client:
         try:
@@ -199,7 +207,7 @@ def _secret_exists(secret_name: str) -> bool:
         secret_path = f"projects/{GCP_PROJECT_ID}/secrets/{secret_name}"
         client.get_secret(request={"name": secret_path})
         return True
-    except NotFound:
+    except SECRET_MANAGER_NOT_FOUND_EXCEPTIONS:
         return False
     except Exception:
         return False

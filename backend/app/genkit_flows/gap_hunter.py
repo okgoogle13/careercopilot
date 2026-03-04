@@ -1,18 +1,16 @@
-import os
 from typing import List, Optional
 
-import google.generativeai as genai
-from dotenv import load_dotenv
 from pydantic import BaseModel, Field
 
+from app.core.google_genai_compat import get_configured_google_generativeai
+from app.core.secure_config import settings
 from app.services.vector_store import VectorStore
 
-load_dotenv()
 
-# Configure Gemini
-genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
-
-model = genai.GenerativeModel("gemini-1.5-flash")
+def _get_generation_model():
+    """Configure and create the Gemini client lazily."""
+    genai = get_configured_google_generativeai(settings.GEMINI_API_KEY)
+    return genai.GenerativeModel("gemini-1.5-flash") if genai else None
 
 
 class GapAnalysisResult(BaseModel):
@@ -33,6 +31,13 @@ def gap_hunter_flow(resume_text: str, job_description: str) -> GapAnalysisResult
     to find evidence from the user's past (KSCs, Cover Letters) to fill those gaps.
     """
     vector_store = VectorStore()
+    generation_model = _get_generation_model()
+    if generation_model is None:
+        return GapAnalysisResult(
+            missing_skills=[],
+            evidence_found=[],
+            strategy_advice="Gap analysis unavailable because the AI model is not configured.",
+        )
 
     # Step 1: Identify Gaps using Gemini
     prompt_identify = f"""
@@ -47,7 +52,7 @@ def gap_hunter_flow(resume_text: str, job_description: str) -> GapAnalysisResult
     {resume_text[:3000]}
     """
 
-    response_gaps = model.generate_content(prompt_identify)
+    response_gaps = generation_model.generate_content(prompt_identify)
 
     missing_skills_text = response_gaps.text
     missing_skills = [s.strip() for s in missing_skills_text.split(",") if s.strip()]

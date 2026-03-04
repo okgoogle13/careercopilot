@@ -17,7 +17,7 @@ from sqlalchemy.orm import (
 from sqlalchemy.types import TypeDecorator
 
 # Type variable for generic types
-T = TypeVar("T", bound="Base")
+T = TypeVar("T", bound="BaseMixin")
 
 
 class JSONEncodedDict(TypeDecorator[dict[str, Any]]):

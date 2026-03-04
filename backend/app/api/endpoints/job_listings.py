@@ -7,13 +7,14 @@ It exposes the Genkit flows for extracting job details from text and URLs,
 and for performing advanced analysis on the extracted data.
 """
 
+from fastapi import APIRouter, HTTPException
+
+from app.api.endpoints._shared import run_endpoint_operation
+from app.core.genkit_init import run_flow_async
 from app.genkit_flows.job_listing_extractor import (
     advanced_job_analysis_flow,
     extract_job_listing_details_flow,
 )
-from fastapi import APIRouter, HTTPException
-from genkit import run
-
 from app.models.schemas import (
     AdvancedAnalysisRequest,
     JobListingDetails,
@@ -33,12 +34,14 @@ async def extract_from_text(request: JobListingTextRequest):
     """
     Accepts raw job description text and returns structured job details.
     """
-    try:
-        details = await run(extract_job_listing_details_flow, request.text)
-        return details
-    except Exception as e:
-        # Catch potential errors from the flow (e.g., AI model failure)
-        raise HTTPException(status_code=500, detail=f"An unexpected error occurred: {e!s}")
+
+    async def operation():
+        return await run_flow_async(extract_job_listing_details_flow, request.text)
+
+    return await run_endpoint_operation(
+        operation,
+        "An unexpected error occurred",
+    )
 
 
 @router.post(
@@ -50,16 +53,20 @@ async def extract_from_url(request: JobListingUrlRequest):
     """
     Accepts a URL, scrapes its content, and returns structured job details.
     """
-    try:
+
+    async def operation():
         # Pass the source as a dictionary to the flow
-        details = await run(extract_job_listing_details_flow, {"url": request.url})
-        return details
-    except OSError as e:
-        # Catch scraping-specific errors
-        raise HTTPException(status_code=422, detail=f"Failed to process the URL: {e!s}")
-    except Exception as e:
-        # Catch other potential errors from the flow
-        raise HTTPException(status_code=500, detail=f"An unexpected error occurred: {e!s}")
+        try:
+            return await run_flow_async(extract_job_listing_details_flow, {"url": request.url})
+        except OSError as exc:
+            raise HTTPException(
+                status_code=422, detail=f"Failed to process the URL: {exc!s}"
+            ) from exc
+
+    return await run_endpoint_operation(
+        operation,
+        "An unexpected error occurred",
+    )
 
 
 @router.post(
@@ -72,14 +79,15 @@ async def advanced_analysis(request: AdvancedAnalysisRequest):
     Accepts structured job details and a user prompt to perform a deeper,
     "Thinking Mode" analysis.
     """
-    try:
-        analysis_result = await run(
+
+    async def operation():
+        return await run_flow_async(
             advanced_job_analysis_flow,
             job_details=request.job_details,
             user_prompt=request.user_prompt,
         )
-        return analysis_result
-    except Exception as e:
-        raise HTTPException(
-            status_code=500, detail=f"An unexpected error occurred during analysis: {e!s}"
-        )
+
+    return await run_endpoint_operation(
+        operation,
+        "An unexpected error occurred during analysis",
+    )

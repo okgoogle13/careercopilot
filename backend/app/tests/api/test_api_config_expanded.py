@@ -1,15 +1,8 @@
 """Focused tests for the config API endpoints."""
 
-from fastapi import FastAPI
-from fastapi.testclient import TestClient
-
 from app.api.endpoints import config as module
-
-
-def _client():
-    app = FastAPI()
-    app.include_router(module.router)
-    return TestClient(app)
+from app.tests.helpers.config_factories import make_firebase_frontend_config
+from app.tests.helpers.router_clients import build_module_client
 
 
 def test_get_firebase_config_happy_path(monkeypatch):
@@ -17,17 +10,10 @@ def test_get_firebase_config_happy_path(monkeypatch):
     monkeypatch.setattr(
         module,
         "get_firebase_frontend_config",
-        lambda: {
-            "api_key": "test_api_key",
-            "auth_domain": "test_auth_domain",
-            "project_id": "test_project_id",
-            "storage_bucket": "test_storage_bucket",
-            "messaging_sender_id": "test_messaging_sender_id",
-            "app_id": "test_app_id",
-        },
+        lambda: make_firebase_frontend_config(),
     )
 
-    response = _client().get("/firebase-config")
+    response = build_module_client(module).get("/firebase-config")
 
     assert response.status_code == 200
     assert response.json() == {
@@ -45,17 +31,10 @@ def test_get_firebase_config_missing_project_id_returns_503(monkeypatch):
     monkeypatch.setattr(
         module,
         "get_firebase_frontend_config",
-        lambda: {
-            "api_key": "test_api_key",
-            "auth_domain": "test_auth_domain",
-            "project_id": "",
-            "storage_bucket": "test_storage_bucket",
-            "messaging_sender_id": "test_messaging_sender_id",
-            "app_id": "test_app_id",
-        },
+        lambda: make_firebase_frontend_config(project_id=""),
     )
 
-    response = _client().get("/firebase-config")
+    response = build_module_client(module).get("/firebase-config")
 
     assert response.status_code == 503
     assert response.json() == {"detail": "Firebase configuration not available"}
@@ -72,17 +51,10 @@ def test_get_firebase_config_logs_warning_for_missing_project_id(monkeypatch):
     monkeypatch.setattr(
         module,
         "get_firebase_frontend_config",
-        lambda: {
-            "api_key": "test_api_key",
-            "auth_domain": "test_auth_domain",
-            "project_id": "",
-            "storage_bucket": "test_storage_bucket",
-            "messaging_sender_id": "test_messaging_sender_id",
-            "app_id": "test_app_id",
-        },
+        lambda: make_firebase_frontend_config(project_id=""),
     )
 
-    response = _client().get("/firebase-config")
+    response = build_module_client(module).get("/firebase-config")
 
     assert response.status_code == 503
     assert warnings == ["Firebase configuration incomplete: missing projectId"]
@@ -96,7 +68,7 @@ def test_get_firebase_config_exception_returns_500(monkeypatch):
         lambda: (_ for _ in ()).throw(RuntimeError("boom")),
     )
 
-    response = _client().get("/firebase-config")
+    response = build_module_client(module).get("/firebase-config")
 
     assert response.status_code == 500
     assert response.json() == {"detail": "Failed to retrieve Firebase configuration"}

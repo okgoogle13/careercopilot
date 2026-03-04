@@ -7,28 +7,30 @@ Handles AI model initialization, flow registration, and provides health monitori
 
 import importlib
 import logging
-import os
+import warnings
 from typing import Any, Callable, Dict, List, Optional, cast
+
+from app.core.google_genai_compat import (
+    GOOGLE_GENERATIVEAI_AVAILABLE,
+    get_configured_google_generativeai,
+)
 
 # Best-effort dynamic imports for Genkit
 GENKIT_AVAILABLE = False
 genkit_ai: Any = None
 genkit_plugins_google: Any = None
 try:
-    genkit_ai = importlib.import_module("genkit.ai")
-    genkit_plugins_google = importlib.import_module("genkit.plugins.google_genai")
+    with warnings.catch_warnings():
+        warnings.filterwarnings(
+            "ignore",
+            message=r'Field name "schema".*',
+            category=UserWarning,
+        )
+        genkit_ai = importlib.import_module("genkit.ai")
+        genkit_plugins_google = importlib.import_module("genkit.plugins.google_genai")
     GENKIT_AVAILABLE = True
 except ImportError:
     GENKIT_AVAILABLE = False
-
-# Try to import google-generativeai as fallback
-GOOGLE_GENERATIVEAI_AVAILABLE = False
-google_generativeai: Any = None
-try:
-    google_generativeai = importlib.import_module("google.generativeai")
-    GOOGLE_GENERATIVEAI_AVAILABLE = True
-except ImportError:
-    GOOGLE_GENERATIVEAI_AVAILABLE = False
 
 # Setup logger for this module
 logger = logging.getLogger(__name__)
@@ -37,6 +39,21 @@ logger = logging.getLogger(__name__)
 initialized: bool = False
 genkit_instance: Any | None = None
 registered_flows: Dict[str, Any] = {}
+
+
+def _get_settings() -> Any:
+    """Load application settings lazily to avoid circular imports."""
+    from app.core.secure_config import settings as secure_settings
+
+    return secure_settings
+
+
+def _get_gemini_api_key() -> Optional[str]:
+    """Resolve the Gemini API key from centralized settings."""
+    settings = _get_settings()
+    api_key = getattr(settings, "GEMINI_API_KEY", None)
+    return api_key if isinstance(api_key, str) and api_key else None
+
 
 # --- Core Initialization ---
 
@@ -55,20 +72,16 @@ def init_genkit() -> bool:
         logger.info("Genkit already initialized")
         return True
 
-    # Configure API key from centralized secret manager
-    try:
-        from app.core.secret_manager import get_secret
+    if not is_genkit_enabled():
+        logger.info("Genkit initialization skipped because flows are disabled")
+        return False
 
-        api_key = get_secret("GEMINI_API_KEY")
-        if api_key:
-            logger.info("Successfully retrieved GEMINI_API_KEY")
-    except Exception as e:
-        # Fallback to direct env check if secret manager fails or is not available
-        api_key = os.getenv("GEMINI_API_KEY")
-        if not api_key:
-            logger.warning(f"Could not fetch API key: {str(e)}")
-            logger.warning("GEMINI_API_KEY not set. Some AI features will be disabled.")
-            return False
+    api_key = _get_gemini_api_key()
+    if not api_key:
+        logger.warning("GEMINI_API_KEY not set. Some AI features will be disabled.")
+        return False
+
+    logger.info("Successfully resolved GEMINI_API_KEY from settings")
 
     # Try Genkit first (primary method)
     if GENKIT_AVAILABLE:
@@ -96,8 +109,10 @@ def init_genkit() -> bool:
     # Fallback to google-generativeai (more reliable)
     if GOOGLE_GENERATIVEAI_AVAILABLE:
         try:
-            genai = cast(Any, google_generativeai)
-            genai.configure(api_key=api_key)
+            genai = cast(Any, get_configured_google_generativeai(api_key))
+            if genai is None:
+                logger.error("google-generativeai fallback is unavailable")
+                return False
 
             # Test the API key by listing models
             models = list(genai.list_models())
@@ -138,6 +153,8 @@ def get_model() -> Any | None:
     Returns:
         The Genkit instance, or None if not initialized
     """
+    if not is_genkit_enabled():
+        return None
     if not initialized:
         init_genkit()
     return genkit_instance
@@ -150,7 +167,11 @@ def is_genkit_enabled() -> bool:
     Returns:
         bool: True if Genkit flows are enabled
     """
-    return os.getenv("ENABLE_GENKIT_FLOWS", "true").lower() == "true"
+    settings = _get_settings()
+    return bool(
+        getattr(settings, "ENABLE_AI_FEATURES", True)
+        and getattr(settings, "ENABLE_GENKIT_FLOWS", True)
+    )
 
 
 def check_genkit_health() -> Dict[str, Any]:
@@ -161,7 +182,7 @@ def check_genkit_health() -> Dict[str, Any]:
         Dict containing health status information
     """
     # API key is present if either the env var is set OR the model is successfully initialized
-    api_key_present = bool(os.getenv("GEMINI_API_KEY")) or initialized
+    api_key_present = bool(_get_gemini_api_key()) or initialized
     errors: List[str] = []
     health_status: Dict[str, Any] = {
         "available": GENKIT_AVAILABLE or GOOGLE_GENERATIVEAI_AVAILABLE,
@@ -228,3 +249,89 @@ def get_registered_flows() -> Dict[str, Any]:
         Dictionary of registered flows
     """
     return registered_flows.copy()
+
+
+import functools
+import inspect
+
+from pydantic import BaseModel
+
+# --- Unified Decorator ---
+
+
+def genkit_flow(
+    _func: Optional[Callable[..., Any]] = None,
+    *,
+    name: Optional[str] = None,
+    output_schema: Optional[type[BaseModel]] = None,
+    **kwargs: Any,
+) -> Callable[[Callable[..., Any]], Any]:
+    """
+    Standardized Genkit flow decorator.
+    Gracefully handles missing framework and provides central registration.
+    """
+
+    def decorator(func: Callable[..., Any]) -> Callable[..., Any]:
+        flow_name = name or func.__name__
+        register_flow_function(func, flow_name)
+
+        # Wrap for logging and health checks
+        @functools.wraps(func)
+        async def async_wrapper(*args, **kwargs_inner):
+            logger.info(f"Executing AI Flow: {flow_name}")
+            return await func(*args, **kwargs_inner)
+
+        @functools.wraps(func)
+        def sync_wrapper(*args, **kwargs_inner):
+            logger.info(f"Executing AI Flow: {flow_name}")
+            return func(*args, **kwargs_inner)
+
+        wrapper = async_wrapper if inspect.iscoroutinefunction(func) else sync_wrapper
+
+        if GENKIT_AVAILABLE and is_genkit_enabled():
+            try:
+                # Use real genkit flow if possible
+                flow_dec = getattr(genkit_ai, "flow", None)
+                if flow_dec:
+                    real_flow = flow_dec(name=flow_name, output_schema=output_schema, **kwargs)
+                    return real_flow(wrapper)
+            except Exception as e:
+                logger.warning(f"Failed to apply real genkit flow to {flow_name}: {e}")
+        return wrapper
+
+    if _func is not None:
+        return decorator(_func)
+    return decorator
+
+
+# --- Aliases and Helpers for backward compatibility ---
+async_genkit_flow = genkit_flow
+
+
+def simple_genkit_flow(
+    output_schema: Optional[type[BaseModel]] = None,
+) -> Callable[[Callable[..., Any]], Any]:
+    return genkit_flow(output_schema=output_schema)
+
+
+def create_flow_wrapper(
+    func: Callable[..., Any],
+    name: Optional[str] = None,
+    output_schema: Optional[type[BaseModel]] = None,
+) -> Callable[..., Any]:
+    return genkit_flow(name=name, output_schema=output_schema)(func)
+
+
+def run_flow(flow_func: Callable[..., Any], **kwargs: Any) -> Any:
+    return flow_func(**kwargs)
+
+
+async def run_flow_async(flow_func: Callable[..., Any], *args: Any, **kwargs: Any) -> Any:
+    import asyncio
+    import functools
+
+    if inspect.iscoroutinefunction(flow_func):
+        return await flow_func(*args, **kwargs)
+    else:
+        loop = asyncio.get_event_loop()
+        return await loop.run_in_executor(None, functools.partial(flow_func, *args, **kwargs))

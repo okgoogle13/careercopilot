@@ -20,6 +20,7 @@ logger = logging.getLogger(__name__)
 # JWT Bearer token scheme
 security = HTTPBearer()
 
+
 class AuthManager:
     """Handles authentication operations via Firebase ID tokens"""
 
@@ -27,8 +28,10 @@ class AuthManager:
         """Verify Firebase ID token and return payload"""
         return verify_id_token(token)
 
+
 # Global auth manager instance
 auth_manager = AuthManager()
+
 
 async def get_current_user(
     credentials: HTTPAuthorizationCredentials = Depends(security),
@@ -51,8 +54,8 @@ async def get_current_user(
             raise credentials_exception
 
         # Firebase stores the UUID in 'sub' or 'uid'
-        user_id: str = payload.get("sub") or payload.get("uid")
-        if user_id is None:
+        user_id = payload.get("sub") or payload.get("uid")
+        if not isinstance(user_id, str):
             raise credentials_exception
 
         # Sync user with local database (Just-In-Time Provisioning)
@@ -62,17 +65,13 @@ async def get_current_user(
             email = payload.get("email")
             # Firebase stores name directly or in 'name'
             name = payload.get("name") or email.split("@")[0] if email else "Firebase User"
-            
+
             if not email:
                 logger.error(f"Token for {user_id} missing email, required for provisioning")
                 raise credentials_exception
 
             logger.info(f"Provisioning new user record for {email} ({user_id})")
-            user = User(
-                id=user_id,
-                email=email,
-                name=name
-            )
+            user = User(id=user_id, email=email, name=name)
             db.add(user)
             try:
                 db.commit()
@@ -93,6 +92,7 @@ async def get_current_user(
         logger.warning(f"Authentication failed: {e}")
         raise credentials_exception
 
+
 async def get_current_user_optional(
     db: Session = Depends(get_db),
     credentials: HTTPAuthorizationCredentials | None = Depends(security),
@@ -106,11 +106,13 @@ async def get_current_user_optional(
     except HTTPException:
         return None
 
+
 def create_user_token(user: User) -> str:
     """
     Legacy helper - Firebase handles token generation.
     """
     raise NotImplementedError("Tokens are managed by Firebase Auth")
+
 
 # Simple rate limiter (unchanged)
 class RateLimiter:
@@ -127,5 +129,6 @@ class RateLimiter:
             return False
         self.requests[user_id].append((now, 1))
         return True
+
 
 rate_limiter = RateLimiter()

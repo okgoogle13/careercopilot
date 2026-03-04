@@ -9,14 +9,12 @@ from __future__ import annotations
 
 import asyncio
 import json
-import os
 from datetime import datetime
 from enum import Enum
 from typing import Any, Callable, Dict, List, Optional, Type, TypeVar, cast
-from typing_extensions import ParamSpec
 
-from dotenv import load_dotenv
 from pydantic import BaseModel, Field
+from typing_extensions import ParamSpec
 
 from app.core.ai_config import get_ai_config
 from app.core.ai_error_handling import AIError, AIErrorType, with_ai_error_handling
@@ -24,25 +22,18 @@ from app.core.input_validation import InputSanitizer, InputValidationError
 from app.core.prompt_service import format_prompt
 
 # Type variables
-P = ParamSpec('P')
-R = TypeVar('R')
+P = ParamSpec("P")
+R = TypeVar("R")
+
 
 # Protocol for model configuration
 class ModelConfigProtocol:
     """Protocol for model configuration."""
 
-    def generate(self, prompt: str, **kwargs: Any) -> Any:
-        ...
+    def generate(self, prompt: str, **kwargs: Any) -> Any: ...
 
 
-from app.genkit_flows.flow_decorator import async_genkit_flow
-
-# Load environment variables
-load_dotenv()
-
-# Initialize genkit using centralized initialization
-from app.core.genkit_init import get_model, init_genkit
-init_genkit()
+from app.core.genkit_init import async_genkit_flow, get_model
 
 
 # Core Data Models
@@ -277,9 +268,7 @@ async def generate_resume_intelligence_report(
             analyze_career_progression(resume_content, career_goals)
         )
 
-        resume_analysis, career_progression = await asyncio.gather(
-            analysis_task, progression_task
-        )
+        resume_analysis, career_progression = await asyncio.gather(analysis_task, progression_task)
 
         # Prepare comprehensive analysis
 
@@ -375,15 +364,16 @@ async def analyze_resume_batch(
     tasks = []
     for resume_content in resume_contents:
         tasks.append(analyze_resume_comprehensive(resume_content, target_industry))
-    
+
     responses = await asyncio.gather(*tasks, return_exceptions=True)
-    
+
     results = []
     for i, response in enumerate(responses):
         if isinstance(response, Exception):
             results.append({"resume_index": i, "error": str(response), "status": "failed"})
         else:
-            results.append({"resume_index": i, "analysis": response.dict(), "status": "success"})
+            analysis = cast(ResumeAnalysisResult, response)
+            results.append({"resume_index": i, "analysis": analysis.dict(), "status": "success"})
 
     return results
 

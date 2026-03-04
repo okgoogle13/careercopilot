@@ -18,7 +18,7 @@ if TYPE_CHECKING:
 class User(Base, BaseMixin):
     """User profiles with authentication and preferences."""
 
-    __tablename__ = "users"
+    __tablename__: str = "users"  # type: ignore[assignment]
 
     email: Mapped[str] = mapped_column(String(255), unique=True, nullable=False, index=True)
     name: Mapped[str] = mapped_column(String(255), nullable=False)

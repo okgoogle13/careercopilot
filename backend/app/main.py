@@ -20,23 +20,18 @@ from sentry_sdk.integrations.fastapi import FastApiIntegration
 from sentry_sdk.integrations.starlette import StarletteIntegration
 
 from app.api.endpoints import ingest
-
-from app.api.routes.career import router as career_router
-from app.api.routes.ingestion import router as ingestion_router
+from app.api.endpoints.career import router as career_router
 from app.api.endpoints.job_scout import router as job_scout_router
+from app.api.endpoints.legacy_ingestion import router as ingestion_router
 from app.api.router import api_router
 from app.core.cache_middleware import add_cache_middleware
 from app.core.database import init_database
 from app.core.genkit_init import check_genkit_health, startup_genkit
-from app.core.loguru_config import configure_loguru, get_logger
-from app.core.monitoring import setup_prometheus_monitoring
+from app.core.observability import get_logger, setup_observability
 from app.core.secure_config import SecureSettings
 
 # Initialize secure configuration
 settings = SecureSettings()
-
-# Configure structured logging
-configure_loguru(environment=settings.ENV, log_dir="logs", service_name="careercopilot-api")
 
 # Get application logger
 logger = get_logger(__name__)
@@ -47,7 +42,7 @@ if os.getenv("SENTRY_DSN"):
         dsn=os.getenv("SENTRY_DSN"),
         integrations=[
             StarletteIntegration(transaction_style="endpoint"),
-            FastApiIntegration(at_exit=True),
+            FastApiIntegration(),
         ],
         send_default_pii=True,
         traces_sample_rate=1.0,
@@ -79,9 +74,6 @@ app.add_middleware(GZipMiddleware, minimum_size=1000)
 # Add Cache Middleware
 add_cache_middleware(app)
 
-# Set up Prometheus monitoring
-if settings.ENV != "test":
-    setup_prometheus_monitoring(app, environment=settings.ENV)
 
 @app.on_event("startup")
 def on_startup():
@@ -127,3 +119,9 @@ async def health_check():
 async def trigger_error():
     division_by_zero = 1 / 0
     return {"message": "You should not see this"}
+
+
+# Initialize consolidated logging, middleware, and metrics after routes are
+# declared so the explicit /health endpoint above remains the primary handler.
+if settings.ENV != "test":
+    setup_observability(app, environment=settings.ENV)

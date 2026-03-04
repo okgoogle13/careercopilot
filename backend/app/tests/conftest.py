@@ -4,6 +4,8 @@ from unittest.mock import MagicMock
 import pytest
 from fastapi.testclient import TestClient
 
+pytest_plugins = ("app.tests.helpers.endpoint_fixtures",)
+
 
 def pytest_configure(config):
     """
@@ -57,6 +59,7 @@ def mock_db():
 def mock_get_current_user():
     """Fixture to mock the get_current_user dependency."""
     from types import SimpleNamespace
+
     return lambda: SimpleNamespace(id="test_user_id", uid="test_user_id", email="test@example.com")
 
 
@@ -73,6 +76,7 @@ def client(monkeypatch, mock_db, mock_get_current_user):
 
     # Also patch the user_profile_service db instance
     from app.services.user_profile_service import user_profile_service
+
     user_profile_service.db = mock_db
 
     app.dependency_overrides[get_current_user] = mock_get_current_user
@@ -84,6 +88,7 @@ def client(monkeypatch, mock_db, mock_get_current_user):
 
 
 # --- Shared Test Data Fixtures ---
+
 
 @pytest.fixture
 def sample_resume_text() -> str:
@@ -111,6 +116,7 @@ def sample_job_description() -> str:
 def mock_job_requirements():
     """Mock JobRequirements instance."""
     from app.genkit_flows.extract_job_requirements import JobRequirements
+
     return JobRequirements(
         requiredSkills=["Python", "React", "AWS", "Docker"],
         preferredSkills=["System Design"],
@@ -122,6 +128,7 @@ def mock_job_requirements():
 def mock_resume_entities():
     """Mock ResumeEntities instance."""
     from app.genkit_flows.extract_resume_entities import ResumeEntities
+
     return ResumeEntities(
         skills=["Python", "React", "AWS", "JavaScript"],
         experience=[{"title": "Software Engineer", "duration": "5 years"}],
@@ -132,11 +139,11 @@ def mock_resume_entities():
 @pytest.fixture(autouse=True)
 def mock_genkit_model(monkeypatch):
     """Mock Genkit model to return predictable responses in tests."""
-    from unittest.mock import AsyncMock
 
     class MockResponse:
         def __init__(self, data):
             self.data = data
+
         def output(self):
             return self.data
 
@@ -146,35 +153,40 @@ def mock_genkit_model(monkeypatch):
             # Convert prompt to string if it's not
             prompt_str = str(prompt)
             if "job_description_analysis" in prompt_str:
-                return MockResponse({
-                    "title": "Mocked Senior Software Engineer",
-                    "company": "Mocked Tech Corp",
-                    "location": "Mocked City, Remote",
-                    "summary": "A mocked job analysis for testing purposes.",
-                    "key_requirements": ["Mocked Req 1", "Mocked Req 2"],
-                    "technical_skills": ["Python", "Pytest", "Mocking"],
-                    "soft_skills": ["Communication", "Problem Solving"],
-                    "experience_level": "Senior",
-                    "match_score": 85
-                })
-            elif "resume_comparison" in prompt_str or "compare_resume_to_job" in prompt_str:
-                return MockResponse({
-                    "overall_match_score": 90,
-                    "relevance_score": 92,
-                    "skill_alignment_score": 88,
-                    "experience_alignment_score": 90,
-                    "justification": "The candidate's skills are a mocked strong match.",
-                    "missing_skills": ["None"],
-                    "recommendations": ["Hire immediately (mocked)"]
-                })
-            
+                return MockResponse(
+                    {
+                        "title": "Mocked Senior Software Engineer",
+                        "company": "Mocked Tech Corp",
+                        "location": "Mocked City, Remote",
+                        "summary": "A mocked job analysis for testing purposes.",
+                        "key_requirements": ["Mocked Req 1", "Mocked Req 2"],
+                        "technical_skills": ["Python", "Pytest", "Mocking"],
+                        "soft_skills": ["Communication", "Problem Solving"],
+                        "experience_level": "Senior",
+                        "match_score": 85,
+                    }
+                )
+            if "resume_comparison" in prompt_str or "compare_resume_to_job" in prompt_str:
+                return MockResponse(
+                    {
+                        "overall_match_score": 90,
+                        "relevance_score": 92,
+                        "skill_alignment_score": 88,
+                        "experience_alignment_score": 90,
+                        "justification": "The candidate's skills are a mocked strong match.",
+                        "missing_skills": ["None"],
+                        "recommendations": ["Hire immediately (mocked)"],
+                    }
+                )
+
             # Default fallback for any other prompt
             return MockResponse({"mocked_response": "Generic mocked AI response"})
 
     mock_model = MockModel()
-    
+
     # Patch get_model in all relevant places
     import app.core.genkit_init
+
     monkeypatch.setattr(app.core.genkit_init, "get_model", lambda: mock_model)
-    
+
     return mock_model

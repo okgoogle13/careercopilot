@@ -1,41 +1,68 @@
-import logging
-import os
+"""Compatibility shim that re-exports the canonical Genkit runtime."""
+
+import inspect
 from typing import Any
 
-from genkit.ai import Genkit
-from genkit.plugins.google_genai import GoogleAI
-from app.core.ai_config import AIProvider, get_ai_config
+from app.core.genkit_init import get_model as _get_model
+from app.core.genkit_init import (
+    init_genkit,
+    is_genkit_enabled,
+    register_flow_function,
+)
 
-logger = logging.getLogger(__name__)
 
-# --- Initialization Logic ---
+def get_genkit_instance() -> Any | None:
+    """Return the lazily initialized Genkit runtime."""
+    return _get_model()
 
-def _initialize_genkit() -> Genkit:
-    """Initialize Genkit with centralized configuration."""
-    config_manager = get_ai_config()
-    creds = config_manager.get_provider_credentials(AIProvider.GOOGLE_AI)
-    
-    api_key = creds.api_key if creds else os.environ.get("GOOGLE_AI_API_KEY")
-    
-    if not api_key:
-        logger.warning("Google AI API Key not found. AI operations may fail.")
-    
-    # Check if flows are enabled
-    enable_flows = os.environ.get("ENABLE_GENKIT_FLOWS", "true").lower() == "true"
-    plugins = [GoogleAI(api_key=api_key)] if enable_flows and api_key else []
-    
-    return Genkit(
-        plugins=plugins,
-        model="googleai/gemini-3.0-flash" # Default model
-    )
 
-# Singleton instance
-ai = _initialize_genkit()
+def get_model() -> Any | None:
+    """Backward-compatible alias for the canonical runtime accessor."""
+    return _get_model()
 
-def get_genkit_instance() -> Genkit:
-    """Returns the singleton Genkit instance."""
-    return ai
 
-def get_model() -> Genkit:
-    """Alias for get_genkit_instance for backward compatibility with older flows."""
-    return ai
+class LazyGenkitProxy:
+    """Compatibility proxy that resolves the active runtime lazily."""
+
+    def _runtime(self) -> Any | None:
+        return _get_model()
+
+    def flow(self, *args: Any, **kwargs: Any):
+        runtime = self._runtime()
+        flow_attr = getattr(runtime, "flow", None) if runtime is not None else None
+        if callable(flow_attr):
+            return flow_attr(*args, **kwargs)
+
+        def _noop_decorator(func):
+            return func
+
+        return _noop_decorator
+
+    async def generate(self, *args: Any, **kwargs: Any) -> Any:
+        runtime = self._runtime()
+        if runtime is None:
+            raise RuntimeError("Genkit model not available")
+
+        result = runtime.generate(*args, **kwargs)
+        if inspect.isawaitable(result):
+            return await result
+        return result
+
+    def __getattr__(self, name: str) -> Any:
+        runtime = self._runtime()
+        if runtime is None:
+            raise AttributeError(name)
+        return getattr(runtime, name)
+
+
+ai = LazyGenkitProxy()
+
+
+__all__ = [
+    "ai",
+    "get_genkit_instance",
+    "get_model",
+    "init_genkit",
+    "is_genkit_enabled",
+    "register_flow_function",
+]

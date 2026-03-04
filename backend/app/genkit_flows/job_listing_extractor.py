@@ -11,26 +11,30 @@ It includes flows for:
 
 import json
 import logging
+from pathlib import Path
 from typing import Union
 
-from app.core.genkit_init import get_model
-from app.genkit_flows.flow_decorator import genkit_flow
+from app.core.genkit_init import genkit_flow, get_model
 from app.models.schemas import JobListingDetails
-from app.services.playwright_service import scrape_url_sync
 from app.services.document_extractor import extract_documents_from_page
+from app.services.playwright_service import scrape_url_sync
 
 logger = logging.getLogger(__name__)
 
 # Load prompts from the central template file
 try:
-    with open("app/prompts/prompt_templates.json", "r") as f:
+    prompt_templates_path = (
+        Path(__file__).resolve().parent.parent / "prompts" / "prompt_templates.json"
+    )
+    with prompt_templates_path.open(encoding="utf-8") as f:
         PROMPTS = json.load(f)
     JOB_EXTRACTOR_PROMPT = PROMPTS["job_listing_extractor"]["template"]
     ADVANCED_ANALYSIS_PROMPT = PROMPTS["job_listing_advanced_analysis"]["template"]
 except (FileNotFoundError, KeyError, json.JSONDecodeError) as e:
-    logger.error(f"Failed to load prompt templates: {e}")
+    logger.warning(f"Falling back to inline job-listing prompts: {e}")
     JOB_EXTRACTOR_PROMPT = "Extract job details from: {job_listing_text}"
     ADVANCED_ANALYSIS_PROMPT = "Analyze job: {user_prompt}"
+
 
 def _scrape_url_content(url: str) -> str:
     """
@@ -78,7 +82,7 @@ async def extract_job_listing_details_flow(source: Union[str, dict]) -> JobListi
     )
 
     result = response.output()
-    if hasattr(result, 'full_description'):
+    if hasattr(result, "full_description"):
         result.full_description = text_content
 
     return result

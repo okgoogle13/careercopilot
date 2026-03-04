@@ -1,24 +1,11 @@
-"""
-Integration test for Career Ingestion Flow
-"""
-from unittest.mock import AsyncMock, Mock, patch
+"""Integration test for the legacy career-ingestion API."""
 
-import pytest
-from fastapi.testclient import TestClient
+from unittest.mock import patch
 
-from app.main import app
+from app.schemas.career_master import CareerDatabase
+from app.tests.helpers.endpoint_fixtures import make_upload_payload
+from app.tests.helpers.route_paths import LEGACY_INGEST
 
-
-@pytest.fixture
-def client():
-    return TestClient(app)
-
-@pytest.fixture
-def mock_user():
-    user = Mock()
-    user.uid = "test_user_123"
-    user.email = "test@example.com"
-    return user
 
 def test_ingestion_endpoint_exists(client):
     """Test that the /api/v1/ingest endpoint is registered"""
@@ -26,59 +13,58 @@ def test_ingestion_endpoint_exists(client):
     assert response.status_code == 200
 
     openapi_spec = response.json()
-    assert "/api/v1/ingest" in openapi_spec["paths"]
+    assert LEGACY_INGEST in openapi_spec["paths"]
+
 
 def test_ingestion_requires_auth(client):
     """Test that ingestion endpoint requires authentication"""
     response = client.post(
-        "/api/v1/ingest",
-        files={"files": ("test.txt", b"Sample resume text", "text/plain")}
+        LEGACY_INGEST,
+        files=make_upload_payload("test.txt", b"Sample resume text"),
     )
     # Should return 401 or redirect to login
     assert response.status_code in [401, 403]
 
-@patch("app.api.routes.ingestion.get_current_user")
-@patch("app.api.routes.ingestion.extract_text_from_upload")
-@patch("app.api.routes.ingestion.ingest_career_history")
-@patch("app.api.routes.ingestion.user_profile_service")
-async def test_ingestion_success_flow(
-    mock_profile_service,
+
+@patch("app.api.endpoints._shared.extract_text_from_upload")
+@patch("app.api.endpoints.legacy_ingestion.ingest_career_history")
+@patch("app.api.endpoints.legacy_ingestion.persist_user_profile_snapshot")
+def test_ingestion_success_flow(
+    mock_persist,
     mock_ingest_flow,
     mock_extract_text,
-    mock_auth,
-    client,
-    mock_user
+    authenticated_client,
 ):
     """Test successful career ingestion flow"""
-    # Setup mocks
-    mock_auth.return_value = mock_user
     mock_extract_text.return_value = "Sample resume text with achievements"
+    mock_persist.return_value = True
 
-    mock_career_db = Mock()
-    mock_career_db.model_dump.return_value = {
+    payload = {
         "Personal_Information": {
             "FullName": "Test User",
             "Email": "test@example.com",
             "Phone": "123-456-7890",
             "Location": "Sydney, Australia",
-            "Portfolio_Website_URLs": []
+            "Portfolio_Website_URLs": [],
         },
         "Career_Profile": {
             "Target_Titles": ["Software Engineer"],
-            "Master_Summary_Points": ["Experienced developer"]
+            "Master_Summary_Points": ["Experienced developer"],
         },
         "Master_Skills_Inventory": [],
         "Career_Entries": [],
         "Structured_Achievements": [],
-        "KSC_Responses": []
+        "KSC_Responses": [],
     }
-    mock_ingest_flow.return_value = mock_career_db
-    mock_profile_service.update_user_profile = AsyncMock()
+    mock_ingest_flow.return_value = CareerDatabase.model_validate(payload)
 
     # Make request
-    response = client.post(
-        "/api/v1/ingest",
-        files={"files": ("resume.txt", b"Software Engineer with 5 years experience", "text/plain")}
+    response = authenticated_client.post(
+        LEGACY_INGEST,
+        files=make_upload_payload(
+            "resume.txt",
+            b"Software Engineer with 5 years experience",
+        ),
     )
 
     # Verify
@@ -86,6 +72,4 @@ async def test_ingestion_success_flow(
     data = response.json()
     assert "Personal_Information" in data
     assert data["Personal_Information"]["FullName"] == "Test User"
-
-if __name__ == "__main__":
-    pytest.main([__file__, "-v"])
+    mock_persist.assert_called_once()

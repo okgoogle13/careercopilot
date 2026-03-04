@@ -10,16 +10,22 @@ import json
 import os
 from typing import Any, Dict, Optional
 
+
+class SecretManagerNotFound(Exception):
+    """Fallback not-found error when Google client libraries are unavailable."""
+
+
+SECRET_MANAGER_NOT_FOUND_EXCEPTIONS: tuple[type[Exception], ...]
+
+
 try:
-    from google.api_core.exceptions import NotFound
+    from google.api_core.exceptions import NotFound as GoogleSecretManagerNotFound
     from google.cloud import secretmanager
 
+    SECRET_MANAGER_NOT_FOUND_EXCEPTIONS = (GoogleSecretManagerNotFound,)
     SECRET_MANAGER_AVAILABLE = True
 except ImportError:  # pragma: no cover - optional dependency
-
-    class NotFound(Exception):
-        """Fallback not-found error when Google client libraries are unavailable."""
-
+    SECRET_MANAGER_NOT_FOUND_EXCEPTIONS = (SecretManagerNotFound,)
     secretmanager = None  # type: ignore[assignment]
     SECRET_MANAGER_AVAILABLE = False
 
@@ -86,7 +92,7 @@ def get_secret(
         try:
             response = client.access_secret_version(name=name)
             return response.payload.data.decode("UTF-8")
-        except NotFound:
+        except SECRET_MANAGER_NOT_FOUND_EXCEPTIONS:
             pass
         except Exception as exc:
             if default is None:
