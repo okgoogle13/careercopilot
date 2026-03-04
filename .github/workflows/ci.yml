@@ -176,7 +176,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          # No cache here as we don't have a lockfile committed yet? 
+          # No cache here as we don't have a lockfile committed yet?
           # Assuming user committed lockfile. If not, npm install will generate one.
       - name: Install dependencies
         working-directory: chrome-extension
@@ -474,7 +474,7 @@ jobs:
       - name: Install MCP dependencies
         run: |
           pip install --upgrade pip
-          pip install anthropic google-generativeai
+          pip install -r servers/requirements.txt
 
       - name: Start Flash Sidekick in background
         env:
@@ -555,13 +555,13 @@ jobs:
           GENKIT_ENV: test
         run: |
           echo "🧪 Running Genkit smoke tests with mocked models..."
-          
+
           # Run smoke tests without real API calls
           cd backend
           python3 -c "
           import os
           os.environ['GENKIT_ENV'] = 'test'
-          
+
           print('✅ Genkit environment configured for testing')
           print('✅ Flow registration validated')
           print('✅ Model configurations verified')

@@ -27,11 +27,12 @@ class TestAutomationSpecialistAgent(BaseAgent):
         # No dependencies – can run independently before other agents.
         self.dependencies = []
         self.priority = 3  # high priority to ensure tests exist early.
+        self.logger = logger
 
     async def _run_task(self, context: dict[str, Any]) -> dict[str, Any]:
-        logger.info("🔧 Starting automated test generation workflow")
+        self.logger.info("🔧 Starting automated test generation workflow")
         # 1️⃣ Analyze current coverage (placeholder).
-        logger.info("📊 Analyzing test coverage")
+        self.logger.info("📊 Analyzing test coverage")
         # In a real implementation we would call a coverage‑analyzer skill.
         # Here we simulate a list of components with low coverage.
         low_coverage_components = [
@@ -43,19 +44,19 @@ class TestAutomationSpecialistAgent(BaseAgent):
         prioritized = low_coverage_components
 
         # 3️⃣ Parallel test generation via task‑delegator.
-        logger.info(f"🚀 Generating tests for {len(prioritized)} components in parallel")
+        self.logger.info(f"🚀 Generating tests for {len(prioritized)} components in parallel")
         # The real skill would look like:
         # await task_delegator.delegate_tasks({tasks: [...], concurrency: 5})
         # For now we just log each component.
         for comp in prioritized:
-            logger.info(f"🧪 Generating tests for {comp['name']} at {comp['path']}")
+            self.logger.info(f"🧪 Generating tests for {comp['name']} at {comp['path']}")
             # Placeholder for jest‑test‑scaffolder call.
             # await generate_test({component_path: comp['path'], template: 'component-m3.test.tsx.tpl'})
 
         # 4️⃣ Run the full test suite.
-        logger.info("✅ Running the full Jest test suite")
+        self.logger.info("✅ Running the full Jest test suite")
         # await test_runner.run_all()
 
         # 5️⃣ Report coverage improvement (placeholder values).
-        logger.info("📈 Coverage improvement: before 68%, after 82%")
+        self.logger.info("📈 Coverage improvement: before 68%, after 82%")
         return {"generated": len(prioritized), "status": "completed"}

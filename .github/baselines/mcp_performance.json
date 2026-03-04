@@ -6,7 +6,6 @@
     "flash_sidekick_startup_ms": 2000,
     "flash_sidekick_tool_call_ms": 500,
     "cloud_ops_startup_ms": 1000,
-    "docker_mcp_startup_ms": 800,
     "design_system_sidekick_startup_ms": 1500
   },
   "thresholds": {

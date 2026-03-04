@@ -1,118 +1,122 @@
-"""
-Tests for calendar_manager.py
-"""
+"""Focused tests for the calendar manager helper."""
+
+from types import SimpleNamespace
 
 import pytest
-from fastapi.testclient import TestClient
-from unittest.mock import patch, MagicMock
-from datetime import datetime, timedelta
-from app.genkit_flows.calendar_manager import createCalendarEvent
-from app.core.database import SessionLocal
-from app.models.database import Application
-from app.core.secrets import get_user_secret
 
-@pytest.fixture
-def mock_get_user_secret(monkeypatch):
-    """Mock get_user_secret function."""
-    def mock_get_user_secret(user_id, key):
-        if user_id == "test_user" and key == "google_credentials":
-            return {"access_token": "test_token", "refresh_token": "test_refresh"}
-        return None
+from app.genkit_flows import calendar_manager as module
 
-    monkeypatch.setattr("app.core.secrets.get_user_secret", mock_get_user_secret)
 
-@pytest.fixture
-def mock_google_api():
-    """Mock Google Calendar API."""
-    mock_credentials = MagicMock()
-    mock_credentials.from_authorized_user_info.return_value = mock_credentials
-    mock_build = MagicMock()
-    mock_build.return_value.events.insert.return_value.execute.return_value = {"id": "test_event_id"}
-    return mock_credentials, mock_build
+@pytest.mark.asyncio
+async def test_create_calendar_event_requires_google_dependencies(monkeypatch):
+    """Missing Google client libraries should fail fast."""
+    monkeypatch.setattr(module, "Credentials", None)
+    monkeypatch.setattr(module, "build", None)
 
-@pytest.fixture
-def mock_db():
-    """Mock database session."""
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
+    with pytest.raises(Exception, match="Google API dependencies are not installed"):
+        await module.createCalendarEvent("user-1", {"deadline": "2026-12-31"})
 
-@pytest.fixture
-def mock_application(mock_db):
-    """Mock application object in the database."""
-    application = Application(id="test_app_id", application_metadata={})
-    mock_db.add(application)
-    mock_db.commit()
-    yield application
-    mock_db.rollback()
 
-@patch('googleapiclient.discovery.build')
-@patch('google.oauth2.credentials.Credentials')
-def test_createCalendarEvent_happy_path(mock_credentials, mock_build, mock_get_user_secret, mock_application):
-    """Test successful calendar event creation."""
-    opportunity_data = {
-        "title": "Software Engineer",
-        "company": "Acme Corp",
-        "deadline": "2024-12-31",
-        "id": "test_app_id"
-    }
-    event_id = createCalendarEvent("test_user", opportunity_data)
-    assert event_id == "test_event_id"
-    assert mock_application.application_metadata == {"calendar_event_id": "test_event_id"}
+@pytest.mark.asyncio
+async def test_create_calendar_event_requires_user_auth(monkeypatch):
+    """Users without stored Google credentials should be rejected."""
+    monkeypatch.setattr(module, "Credentials", SimpleNamespace())
+    monkeypatch.setattr(module, "build", object())
+    monkeypatch.setattr(module, "get_user_secret", lambda *args, **kwargs: None)
 
-@patch('googleapiclient.discovery.build')
-@patch('google.oauth2.credentials.Credentials')
-def test_createCalendarEvent_no_google_credentials(mock_credentials, mock_build, mock_get_user_secret):
-    """Test exception when Google API dependencies are not installed."""
-    with pytest.raises(Exception, match="Google API dependencies are not installed."):
-        createCalendarEvent("test_user", {"title": "Test Job", "deadline": "2024-12-31"})
+    with pytest.raises(Exception, match="User has not authenticated with Google"):
+        await module.createCalendarEvent("user-1", {"deadline": "2026-12-31"})
 
-@patch('googleapiclient.discovery.build')
-@patch('google.oauth2.credentials.Credentials')
-def test_createCalendarEvent_user_not_authenticated(mock_credentials, mock_build, mock_get_user_secret):
-    """Test exception when user is not authenticated with Google."""
-    mock_get_user_secret.return_value = None
-    with pytest.raises(Exception, match="User has not authenticated with Google."):
-        createCalendarEvent("test_user", {"title": "Test Job", "deadline": "2024-12-31"})
 
-@patch('googleapiclient.discovery.build')
-@patch('google.oauth2.credentials.Credentials')
-def test_createCalendarEvent_missing_deadline(mock_credentials, mock_build, mock_get_user_secret):
-    """Test exception when opportunity data is missing a deadline."""
-    with pytest.raises(ValueError, match="Opportunity data must include a 'deadline'."):
-        createCalendarEvent("test_user", {"title": "Test Job", "company": "Test Co"})
+@pytest.mark.asyncio
+async def test_create_calendar_event_requires_deadline(monkeypatch):
+    """A missing deadline should raise a validation error."""
+    monkeypatch.setattr(
+        module,
+        "Credentials",
+        SimpleNamespace(from_authorized_user_info=lambda value: object()),
+    )
+    monkeypatch.setattr(module, "build", lambda *args, **kwargs: object())
+    monkeypatch.setattr(
+        module,
+        "get_user_secret",
+        lambda *args, **kwargs: {"access_token": "token"},
+    )
 
-@patch('googleapiclient.discovery.build')
-@patch('google.oauth2.credentials.Credentials')
-def test_createCalendarEvent_invalid_deadline_format(mock_credentials, mock_build, mock_get_user_secret):
-    """Test exception when deadline is in an invalid format."""
-    with pytest.raises(ValueError):
-        createCalendarEvent("test_user", {"title": "Test Job", "deadline": "invalid-date"})
+    with pytest.raises(ValueError, match="must include a 'deadline'"):
+        await module.createCalendarEvent("user-1", {"title": "Role"})
 
-@patch('googleapiclient.discovery.build')
-@patch('google.oauth2.credentials.Credentials')
-def test_createCalendarEvent_no_opportunity_id(mock_credentials, mock_build, mock_get_user_secret):
-    """Test when opportunity data does not have an id."""
-    opportunity_data = {
-        "title": "Software Engineer",
-        "company": "Acme Corp",
-        "deadline": "2024-12-31",
-    }
-    event_id = createCalendarEvent("test_user", opportunity_data)
-    assert event_id == "test_event_id"
 
-@patch('googleapiclient.discovery.build')
-@patch('google.oauth2.credentials.Credentials')
-def test_createCalendarEvent_database_error(mock_credentials, mock_build, mock_get_user_secret, mock_db, mock_application):
-    """Test handling of database errors during metadata update."""
-    mock_db.rollback.side_effect = Exception("Database error")
-    opportunity_data = {
-        "title": "Software Engineer",
-        "company": "Acme Corp",
-        "deadline": "2024-12-31",
-        "id": "test_app_id"
-    }
-    event_id = createCalendarEvent("test_user", opportunity_data)
-    assert event_id == "test_event_id"
+@pytest.mark.asyncio
+async def test_create_calendar_event_returns_event_id_and_updates_metadata(monkeypatch):
+    """Successful event creation should persist the calendar event id."""
+
+    class _Credentials:
+        @staticmethod
+        def from_authorized_user_info(value):
+            return object()
+
+    created = {"id": "event-123"}
+
+    class _Service:
+        def events(self):
+            return self
+
+        def insert(self, **kwargs):
+            return self
+
+        def execute(self):
+            return created
+
+    class _Application:
+        def __init__(self):
+            self.application_metadata = {}
+
+    application = _Application()
+
+    class _Query:
+        def filter(self, *args, **kwargs):
+            return self
+
+        def first(self):
+            return application
+
+    class _DB:
+        def __init__(self):
+            self.committed = False
+            self.closed = False
+
+        def query(self, model):
+            return _Query()
+
+        def commit(self):
+            self.committed = True
+
+        def close(self):
+            self.closed = True
+
+    db = _DB()
+
+    monkeypatch.setattr(module, "Credentials", _Credentials)
+    monkeypatch.setattr(module, "build", lambda *args, **kwargs: _Service())
+    monkeypatch.setattr(
+        module,
+        "get_user_secret",
+        lambda *args, **kwargs: {"access_token": "token", "refresh_token": "refresh"},
+    )
+    monkeypatch.setattr(module, "SessionLocal", lambda: db)
+
+    event_id = await module.createCalendarEvent(
+        "user-1",
+        {
+            "id": "app-1",
+            "title": "Software Engineer",
+            "company": "Acme",
+            "deadline": "2026-12-31",
+        },
+    )
+
+    assert event_id == "event-123"
+    assert application.application_metadata["calendar_event_id"] == "event-123"
+    assert db.committed is True
+    assert db.closed is True

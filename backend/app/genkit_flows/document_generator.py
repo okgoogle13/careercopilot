@@ -1,4 +1,5 @@
 import os
+from types import SimpleNamespace
 
 import genkit
 from dotenv import load_dotenv
@@ -8,11 +9,15 @@ from genkit.plugins import google_genai
 load_dotenv()
 
 # Initialize the Google AI plugin if not already initialized
-if not genkit.get_plugin("googleai"):
+if getattr(genkit, "get_plugin", None) and not genkit.get_plugin("googleai"):
     genkit.init(plugins=[google_genai.init(api_key=os.getenv("GEMINI_API_KEY"))])
 
 # Define the Gemini Pro model
-gemini_pro = google_genai.models.gemini.GEMINI_1_5_PRO
+gemini_pro = getattr(
+    getattr(getattr(google_genai, "models", None), "gemini", None),
+    "GEMINI_1_5_PRO",
+    SimpleNamespace(generate=lambda *args, **kwargs: None),
+)
 
 
 # Removed @genkit.flow()

@@ -1,147 +1,146 @@
-"""
-Tests for the Ghostwriter Agent.
-"""
+"""Focused tests for the Ghostwriter agent."""
+
+from pathlib import Path
+from unittest.mock import AsyncMock
 
 import pytest
-from fastapi.testclient import TestClient
-from unittest.mock import patch, AsyncMock
-from pathlib import Path
+
 from app.agents.ghostwriter import GhostwriterAgent
 from app.services.flash_sidekick_service import FlashSidekickService
 
-# Create a test client
-# client = TestClient(app)  # Assuming you have a FastAPI app instance
 
-# Mock data for testing
-TEST_JOB_DATA = {
-    "title": "Software Engineer",
-    "company": "Acme Corp",
-    "description": "Develop and maintain web applications.",
-    "salary": "$100,000 - $150,000",
-    "deadline": "2024-01-31",
-}
-
-# Create a dummy resume file for testing
-RESUME_CONTENT = """
-# John Doe
-## Summary
-A highly motivated software engineer with 5+ years of experience.
-
-## Experience
-- Software Engineer at XYZ Inc (2018-2023)
-"""
-RESUME_PATH = Path("user_profile/resume.md")
-RESUME_PATH.parent.mkdir(parents=True, exist_ok=True)
-RESUME_PATH.write_text(RESUME_CONTENT)
+@pytest.fixture
+def ghostwriter_agent():
+    """Create a GhostwriterAgent instance for tests."""
+    return GhostwriterAgent()
 
 
 @pytest.fixture
-async def ghostwriter_agent():
-    """Fixture to create a GhostwriterAgent instance."""
-    agent = GhostwriterAgent()
-    return agent
+def resume_path(tmp_path, monkeypatch):
+    """Point the agent at a temporary resume file path."""
+    path = tmp_path / "user_profile" / "resume.md"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    monkeypatch.setattr("app.agents.ghostwriter.RESUME_PATH", path)
+    return path
 
-@pytest.fixture
-async def mock_flash_sidekick_service():
-    """Fixture to mock the FlashSidekickService."""
-    mock_service = AsyncMock(spec=FlashSidekickService)
-    return mock_service
 
 @pytest.mark.asyncio
 async def test_ghostwriter_agent_initialization(ghostwriter_agent):
-    """Test that the GhostwriterAgent initializes correctly."""
+    """The agent should initialize with the expected AI service."""
     assert isinstance(ghostwriter_agent, GhostwriterAgent)
     assert isinstance(ghostwriter_agent.ai_service, FlashSidekickService)
 
-@pytest.mark.asyncio
-async def test_load_resume_success(ghostwriter_agent):
-    """Test that the load_resume method successfully loads the resume."""
-    resume_content = await ghostwriter_agent.load_resume()
-    assert resume_content == RESUME_CONTENT
 
 @pytest.mark.asyncio
-async def test_load_resume_file_not_found(ghostwriter_agent):
-    """Test that the load_resume method handles the case where the resume file is not found."""
-    Path("user_profile/resume.md").unlink()  # Remove the resume file
+async def test_load_resume_success(ghostwriter_agent, resume_path):
+    """The agent should load the current resume content."""
+    resume_path.write_text("# John Doe\nExperienced software engineer.\n", encoding="utf-8")
+
     resume_content = await ghostwriter_agent.load_resume()
+
+    assert "John Doe" in resume_content
+
+
+@pytest.mark.asyncio
+async def test_load_resume_file_not_found(ghostwriter_agent, resume_path):
+    """A missing resume should return the fallback guidance text."""
+    if resume_path.exists():
+        resume_path.unlink()
+
+    resume_content = await ghostwriter_agent.load_resume()
+
     assert "No resume found" in resume_content
 
-@pytest.mark.asyncio
-async def test_load_resume_error_reading(ghostwriter_agent):
-    """Test that the load_resume method handles errors when reading the resume file."""
-    # Create a file with invalid permissions
-    invalid_resume_path = Path("user_profile/invalid_resume.md")
-    invalid_resume_path.parent.mkdir(parents=True, exist_ok=True)
-    invalid_resume_path.write_text("test")
-    invalid_resume_path.chmod(0)  # Remove read permissions
-
-    try:
-        await ghostwriter_agent.load_resume()
-    except Exception as e:
-        pass
-    finally:
-        invalid_resume_path.chmod(0o644)
-        invalid_resume_path.unlink()
 
 @pytest.mark.asyncio
-@patch('app.agents.ghostwriter.FlashSidekickService.quick_summarize', new_callable=AsyncMock)
-async def test_generate_cover_letter_success(
-    ghostwriter_agent,
-    mock_quick_summarize,
-    mock_flash_sidekick_service
-):
-    """Test that the generate_cover_letter method successfully generates a cover letter."""
-    mock_quick_summarize.return_value = "Generated cover letter content."
-    cover_letter = await ghostwriter_agent.generate_cover_letter(TEST_JOB_DATA)
+async def test_load_resume_error_reading(ghostwriter_agent, resume_path, monkeypatch):
+    """Read errors should be surfaced in the returned message."""
+    resume_path.write_text("placeholder", encoding="utf-8")
+    monkeypatch.setattr(
+        Path,
+        "read_text",
+        lambda self, encoding="utf-8": (_ for _ in ()).throw(OSError("permission denied")),
+    )
+
+    resume_content = await ghostwriter_agent.load_resume()
+
+    assert "Error loading resume" in resume_content
+
+
+@pytest.mark.asyncio
+async def test_generate_cover_letter_success(ghostwriter_agent, resume_path):
+    """The agent should return AI output when summarization succeeds."""
+    resume_path.write_text("Resume content", encoding="utf-8")
+    ghostwriter_agent.ai_service = AsyncMock(spec=FlashSidekickService)
+    ghostwriter_agent.ai_service.quick_summarize.return_value = "Generated cover letter content."
+
+    cover_letter = await ghostwriter_agent.generate_cover_letter(
+        {
+            "title": "Software Engineer",
+            "company": "Acme Corp",
+            "description": "Develop and maintain web applications.",
+        }
+    )
+
     assert cover_letter == "Generated cover letter content."
-    mock_quick_summarize.assert_called_once()
+    ghostwriter_agent.ai_service.quick_summarize.assert_awaited_once()
+
 
 @pytest.mark.asyncio
-@patch('app.agents.ghostwriter.FlashSidekickService.quick_summarize', new_callable=AsyncMock)
-async def test_generate_cover_letter_ai_error(
-    ghostwriter_agent,
-    mock_quick_summarize,
-    mock_flash_sidekick_service
-):
-    """Test that the generate_cover_letter method handles errors from the AI service."""
-    mock_quick_summarize.side_effect = Exception("AI service error")
-    cover_letter = await ghostwriter_agent.generate_cover_letter(TEST_JOB_DATA)
-    assert "Error generating cover letter" in cover_letter
+async def test_generate_cover_letter_ai_error_uses_fallback(ghostwriter_agent, resume_path):
+    """AI errors should return the built-in fallback template."""
+    resume_path.write_text("Resume content", encoding="utf-8")
+    ghostwriter_agent.ai_service = AsyncMock(spec=FlashSidekickService)
+    ghostwriter_agent.ai_service.quick_summarize.side_effect = Exception("AI service error")
+
+    cover_letter = await ghostwriter_agent.generate_cover_letter(
+        {"title": "Software Engineer", "company": "Acme Corp"}
+    )
+
+    assert "Error: AI service error" in cover_letter
+    assert "Dear Hiring Manager at Acme Corp" in cover_letter
+
 
 @pytest.mark.asyncio
-async def test_generate_cover_letter_empty_job_data(ghostwriter_agent):
-    """Test that the generate_cover_letter method handles empty job data."""
-    cover_letter = await ghostwriter_agent.generate_cover_letter({})
-    assert "the position" in cover_letter
-    assert "your organization" in cover_letter
-    assert "See job posting" in cover_letter
+async def test_generate_cover_letter_empty_job_data(ghostwriter_agent, resume_path):
+    """Missing job data should use the default prompt placeholders."""
+    resume_path.write_text("Resume content", encoding="utf-8")
+    ghostwriter_agent.ai_service = AsyncMock(spec=FlashSidekickService)
+    ghostwriter_agent.ai_service.quick_summarize.return_value = "Prompt handled."
+
+    await ghostwriter_agent.generate_cover_letter({})
+
+    prompt = ghostwriter_agent.ai_service.quick_summarize.await_args.args[0]
+    assert "the position" in prompt
+    assert "your organization" in prompt
+    assert "See job posting" in prompt
+
 
 @pytest.mark.asyncio
-async def test_generate_cover_letter_markdown_cleanup(ghostwriter_agent):
-    """Test that the generate_cover_letter method cleans up markdown formatting."""
-    mock_flash_sidekick_service = AsyncMock(spec=FlashSidekickService)
-    mock_flash_sidekick_service.quick_summarize.return_value = "```markdown\nThis is a test.\n```"
-    ghostwriter_agent.ai_service = mock_flash_sidekick_service
-    cover_letter = await ghostwriter_agent.generate_cover_letter(TEST_JOB_DATA)
-    assert "This is a test." in cover_letter
-    assert "```" not in cover_letter
+async def test_generate_cover_letter_markdown_cleanup(ghostwriter_agent, resume_path):
+    """Markdown code fences should be stripped from AI output."""
+    resume_path.write_text("Resume content", encoding="utf-8")
+    ghostwriter_agent.ai_service = AsyncMock(spec=FlashSidekickService)
+    ghostwriter_agent.ai_service.quick_summarize.return_value = "```markdown\nThis is a test.\n```"
+
+    cover_letter = await ghostwriter_agent.generate_cover_letter(
+        {"title": "Software Engineer", "company": "Acme Corp"}
+    )
+
+    assert cover_letter == "This is a test."
+
 
 @pytest.mark.asyncio
-async def test_generate_cover_letter_long_job_description(ghostwriter_agent):
-    """Test that the generate_cover_letter method handles long job descriptions."""
-    long_description = "a" * 3001
-    job_data = {"description": long_description}
-    cover_letter = await ghostwriter_agent.generate_cover_letter(job_data)
-    assert "a" * 2000 in cover_letter
+async def test_generate_cover_letter_truncates_long_inputs(ghostwriter_agent, resume_path):
+    """Prompt generation should cap long resume and job description content."""
+    resume_path.write_text("b" * 4000, encoding="utf-8")
+    ghostwriter_agent.ai_service = AsyncMock(spec=FlashSidekickService)
+    ghostwriter_agent.ai_service.quick_summarize.return_value = "Prompt handled."
 
-@pytest.mark.asyncio
-async def test_generate_cover_letter_long_resume(ghostwriter_agent):
-    """Test that the generate_cover_letter method handles long resumes."""
-    long_resume = "b" * 3001
-    RESUME_PATH.write_text(long_resume)
-    cover_letter = await ghostwriter_agent.generate_cover_letter(TEST_JOB_DATA)
-    assert "b" * 3000 in cover_letter
-    RESUME_PATH.write_text(RESUME_CONTENT) # Restore original resume
+    await ghostwriter_agent.generate_cover_letter({"description": "a" * 3001})
 
-# Cleanup
-RESUME_PATH.unlink()
+    prompt = ghostwriter_agent.ai_service.quick_summarize.await_args.args[0]
+    assert "a" * 2000 in prompt
+    assert "a" * 2001 not in prompt
+    assert "b" * 3000 in prompt
+    assert "b" * 3001 not in prompt

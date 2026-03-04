@@ -47,7 +47,6 @@ jobs:
           required_servers=(
             "servers/flash_sidekick.py"
             "servers/cloud_ops.py"
-            "servers/docker_mcp.py"
             "servers/design_system_sidekick.py"
           )
           for server in "${required_servers[@]}"; do
@@ -80,7 +79,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install --upgrade pip
-          pip install anthropic google-generativeai
+          pip install -r servers/requirements.txt
 
       - name: Test Flash-Sidekick initialization
         env:
@@ -95,13 +94,13 @@ jobs:
               # Import the server module
               import flash_sidekick
               print('✅ Flash-Sidekick imported successfully')
-              
+
               # Check for required functions/classes
               if hasattr(flash_sidekick, '__name__'):
                   print('✅ Module structure valid')
               else:
                   print('⚠️  Module structure may need review')
-              
+
               print('✅ Flash-Sidekick server validation passed')
           except Exception as e:
               print(f'❌ Error: {e}')
@@ -120,6 +119,11 @@ jobs:
         with:
           python-version: ${{ env.PYTHON_VERSION }}
 
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r servers/requirements.txt
+
       - name: Test Cloud Ops server structure
         run: |
           echo "🧪 Testing Cloud Ops server..."
@@ -130,33 +134,6 @@ jobs:
           try:
               import cloud_ops
               print('✅ Cloud Ops server imported successfully')
-          except Exception as e:
-              print(f'❌ Error: {e}')
-              sys.exit(1)
-          "
-
-  test-docker-mcp:
-    name: Test Docker MCP Server
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: ${{ env.PYTHON_VERSION }}
-
-      - name: Test Docker MCP server structure
-        run: |
-          echo "🧪 Testing Docker MCP server..."
-          cd servers
-          python3 -c "
-          import sys
-          sys.path.insert(0, '.')
-          try:
-              import docker_mcp
-              print('✅ Docker MCP server imported successfully')
           except Exception as e:
               print(f'❌ Error: {e}')
               sys.exit(1)
@@ -178,7 +155,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install --upgrade pip
-          pip install anthropic google-generativeai
+          pip install -r servers/requirements.txt
 
       - name: Test Design System Sidekick
         env:
@@ -207,17 +184,17 @@ jobs:
       - name: Scan for hardcoded secrets
         run: |
           echo "🔒 Scanning for hardcoded secrets..."
-          
+
           # Check for common secret patterns
           if grep -r -E "(sk-[a-zA-Z0-9]{48}|api[_-]?key.*['\"][a-zA-Z0-9]{32,})" servers/ 2>/dev/null; then
             echo "❌ Potential hardcoded secrets found!"
             exit 1
           fi
-          
+
           if grep -r -E "(password.*=.*['\"][^'\"]+|token.*=.*['\"][^'\"]+)" servers/ | grep -v "# " 2>/dev/null; then
             echo "⚠️  Potential credentials found (manual review needed)"
           fi
-          
+
           echo "✅ No obvious hardcoded secrets detected"
 
       - name: Check file permissions
@@ -237,11 +214,11 @@ jobs:
       - name: Check MCP protocol version consistency
         run: |
           echo "🔍 Checking MCP protocol version consistency..."
-          
+
           # Check if servers use compatible MCP protocol versions
           echo "Scanning server files for MCP version references..."
           grep -r "mcp" servers/ --include="*.py" || echo "No explicit MCP version found"
-          
+
           echo "✅ MCP protocol compatibility check completed"
 
   report-summary:
@@ -251,7 +228,6 @@ jobs:
       validate-mcp-configs,
       test-flash-sidekick,
       test-cloud-ops,
-      test-docker-mcp,
       test-design-system-sidekick,
       security-scan-mcp-servers,
       compatibility-check
@@ -267,7 +243,6 @@ jobs:
           echo "| Config Validation | ${{ needs.validate-mcp-configs.result == 'success' && '✅ Pass' || '❌ Fail' }} |" >> $GITHUB_STEP_SUMMARY
           echo "| Flash-Sidekick | ${{ needs.test-flash-sidekick.result == 'success' && '✅ Pass' || '⚠️  Warn' }} |" >> $GITHUB_STEP_SUMMARY
           echo "| Cloud Ops | ${{ needs.test-cloud-ops.result == 'success' && '✅ Pass' || '❌ Fail' }} |" >> $GITHUB_STEP_SUMMARY
-          echo "| Docker MCP | ${{ needs.test-docker-mcp.result == 'success' && '✅ Pass' || '❌ Fail' }} |" >> $GITHUB_STEP_SUMMARY
           echo "| Design System | ${{ needs.test-design-system-sidekick.result == 'success' && '✅ Pass' || '❌ Fail' }} |" >> $GITHUB_STEP_SUMMARY
           echo "| Security Scan | ${{ needs.security-scan-mcp-servers.result == 'success' && '✅ Pass' || '❌ Fail' }} |" >> $GITHUB_STEP_SUMMARY
           echo "| Compatibility | ${{ needs.compatibility-check.result == 'success' && '✅ Pass' || '❌ Fail' }} |" >> $GITHUB_STEP_SUMMARY

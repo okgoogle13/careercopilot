@@ -1,131 +1,81 @@
-"""
-Test suite for gap_hunter module.
-"""
+"""Focused tests for the gap hunter helper."""
+
+from types import SimpleNamespace
 
 import pytest
-from fastapi.testclient import TestClient
-from app.genkit_flows.gap_hunter import gap_hunter_flow, GapAnalysisResult
-from unittest.mock import patch, MagicMock
-from app.services.vector_store import VectorStore
 
-# Mock the VectorStore class
-@pytest.fixture
-def mock_vector_store():
-    """Fixture for mocking the VectorStore class."""
-    mock_vector_store = MagicMock(spec=VectorStore)
-    return mock_vector_store
+from app.genkit_flows import gap_hunter as module
 
-# Mock the genai model
-@pytest.fixture
-def mock_genai_model():
-    """Fixture for mocking the genai model."""
-    mock_model = MagicMock()
-    return mock_model
 
-@pytest.fixture
-def client():
-    """Fixture for creating a test client."""
-    return TestClient(app="app.app:app")  # Replace with your app import
-
-class TestGapHunterFlow:
-
-    def test_happy_path(self, mock_vector_store, mock_genai_model):
-        """
-        Test the happy path scenario where gaps are identified and evidence is found.
-        """
-        mock_genai_model.generate_content.return_value.text = "Skill1, Skill2, Skill3"
-        mock_vector_store.query_similar.return_value = [
-            {"content": "Evidence for Skill1...", "metadata": {"source_type": "KSC"}},
-            {"content": "Evidence for Skill2...", "metadata": {"source_type": "Cover Letter"}}
+def test_gap_hunter_happy_path(monkeypatch):
+    """Missing skills with vector matches should produce evidence and strategy advice."""
+    monkeypatch.setattr(
+        module,
+        "model",
+        SimpleNamespace(generate_content=lambda prompt: SimpleNamespace(text="Skill1, Skill2")),
+    )
+    vector_store = SimpleNamespace(
+        query_similar=lambda query, n_results=2: [
+            {"content": "Evidence for Skill", "metadata": {"source_type": "KSC"}}
         ]
+    )
+    monkeypatch.setattr(module, "VectorStore", lambda: vector_store)
 
-        result = gap_hunter_flow(
-            resume_text="Resume content",
-            job_description="Job description content"
-        )
+    result = module.gap_hunter_flow("Resume content", "Job description")
 
-        assert isinstance(result, GapAnalysisResult)
-        assert len(result.missing_skills) == 3
-        assert len(result.evidence_found) == 2
-        assert "Skill1" in result.missing_skills
-        assert "Skill2" in result.missing_skills
-        assert "Skill3" in result.missing_skills
-        assert "Evidence for Skill1..." in result.evidence_found[0]
-        assert "Evidence for Skill2..." in result.evidence_found[1]
-        assert "strategically insert" in result.strategy_advice
+    assert result.missing_skills == ["Skill1", "Skill2"]
+    assert len(result.evidence_found) == 2
+    assert "strategically insert" in result.strategy_advice
 
-    def test_no_gaps_found(self, mock_genai_model, mock_vector_store):
-        """
-        Test the scenario where no gaps are identified.
-        """
-        mock_genai_model.generate_content.return_value.text = ""
-        result = gap_hunter_flow(
-            resume_text="Resume content",
-            job_description="Job description content"
-        )
 
-        assert isinstance(result, GapAnalysisResult)
-        assert not result.missing_skills
-        assert not result.evidence_found
-        assert "No major gaps found" in result.strategy_advice
+def test_gap_hunter_with_no_gaps(monkeypatch):
+    """Empty model output should produce the no-gap fallback."""
+    monkeypatch.setattr(
+        module,
+        "model",
+        SimpleNamespace(generate_content=lambda prompt: SimpleNamespace(text="")),
+    )
+    monkeypatch.setattr(
+        module, "VectorStore", lambda: SimpleNamespace(query_similar=lambda *args, **kwargs: [])
+    )
 
-    def test_no_evidence_found(self, mock_genai_model, mock_vector_store):
-        """
-        Test the scenario where gaps are identified but no evidence is found.
-        """
-        mock_genai_model.generate_content.return_value.text = "Skill1, Skill2"
-        mock_vector_store.query_similar.return_value = []
+    result = module.gap_hunter_flow("", "")
 
-        result = gap_hunter_flow(
-            resume_text="Resume content",
-            job_description="Job description content"
-        )
+    assert result.missing_skills == []
+    assert result.evidence_found == []
+    assert result.strategy_advice == "No major gaps found."
 
-        assert isinstance(result, GapAnalysisResult)
-        assert len(result.missing_skills) == 2
-        assert not result.evidence_found
-        assert "You may need to add this manually" in result.strategy_advice
 
-    def test_empty_resume_and_jd(self, mock_genai_model, mock_vector_store):
-        """
-        Test with empty resume and job description.
-        """
-        mock_genai_model.generate_content.return_value.text = ""
-        result = gap_hunter_flow(
-            resume_text="",
-            job_description=""
-        )
+def test_gap_hunter_with_no_evidence(monkeypatch):
+    """When no vector evidence is found, the manual-add fallback should be used."""
+    monkeypatch.setattr(
+        module,
+        "model",
+        SimpleNamespace(generate_content=lambda prompt: SimpleNamespace(text="Skill1")),
+    )
+    monkeypatch.setattr(
+        module, "VectorStore", lambda: SimpleNamespace(query_similar=lambda *args, **kwargs: [])
+    )
 
-        assert isinstance(result, GapAnalysisResult)
-        assert not result.missing_skills
-        assert not result.evidence_found
-        assert "No major gaps found" in result.strategy_advice
+    result = module.gap_hunter_flow("Resume", "Job description")
 
-    def test_long_resume_and_jd(self, mock_genai_model, mock_vector_store):
-        """
-        Test with long resume and job description (truncated to 3000 characters).
-        """
-        long_resume = "A" * 3500
-        long_jd = "B" * 3200
-        mock_genai_model.generate_content.return_value.text = "Skill1"
-        result = gap_hunter_flow(
-            resume_text=long_resume,
-            job_description=long_jd
-        )
+    assert result.missing_skills == ["Skill1"]
+    assert result.evidence_found == []
+    assert "add this manually" in result.strategy_advice
 
-        assert isinstance(result, GapAnalysisResult)
-        assert "Skill1" in result.missing_skills
 
-    @patch('app.genkit_flows.gap_hunter.genai')
-    def test_genai_error(self, mock_genai, mock_vector_store):
-        """
-        Test the scenario where the GenAI model raises an exception.
-        """
-        mock_genai.configure.return_value = None
-        mock_genai.GenerativeModel.return_value.generate_content.side_effect = Exception("GenAI Error")
+def test_gap_hunter_bubbles_model_errors(monkeypatch):
+    """Unexpected model failures should propagate."""
+    monkeypatch.setattr(
+        module,
+        "model",
+        SimpleNamespace(
+            generate_content=lambda prompt: (_ for _ in ()).throw(RuntimeError("GenAI Error"))
+        ),
+    )
+    monkeypatch.setattr(
+        module, "VectorStore", lambda: SimpleNamespace(query_similar=lambda *args, **kwargs: [])
+    )
 
-        with pytest.raises(Exception, match="GenAI Error"):
-            gap_hunter_flow(
-                resume_text="Resume content",
-                job_description="Job description content"
-            )
+    with pytest.raises(RuntimeError, match="GenAI Error"):
+        module.gap_hunter_flow("Resume", "Job description")

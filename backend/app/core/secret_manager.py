@@ -16,7 +16,10 @@ try:
 
     SECRET_MANAGER_AVAILABLE = True
 except ImportError:  # pragma: no cover - optional dependency
-    NotFound = Exception  # type: ignore[assignment]
+
+    class NotFound(Exception):
+        """Fallback not-found error when Google client libraries are unavailable."""
+
     secretmanager = None  # type: ignore[assignment]
     SECRET_MANAGER_AVAILABLE = False
 
@@ -157,7 +160,9 @@ def get_firebase_config() -> Dict[str, Any]:
 def get_firebase_frontend_config() -> Dict[str, Any]:
     """Get Firebase frontend configuration for Vite environment variables."""
     return {
-        "api_key": get_secret("vite-firebase-api-key", default=os.getenv("VITE_FIREBASE_API_KEY", "")),
+        "api_key": get_secret(
+            "vite-firebase-api-key", default=os.getenv("VITE_FIREBASE_API_KEY", "")
+        ),
         "auth_domain": get_secret(
             "vite-firebase-auth-domain",
             default=os.getenv("VITE_FIREBASE_AUTH_DOMAIN", ""),

@@ -103,23 +103,22 @@ class DocumentAnalysisService(BaseAIService):
                 - enabled: Whether the service is enabled
         """
         super().__init__(config or {})
+        default_model = getattr(
+            settings, "ai_model", getattr(settings, "model_name", "gemini-1.5-flash")
+        )
+        default_max_tokens = getattr(settings, "ai_max_tokens", 2000)
+        default_temperature = getattr(settings, "ai_temperature", 0.2)
+        default_enabled = getattr(settings, "enable_ai_features", True)
+
         self.config = {
-            "model": (config.get("model", settings.ai_model) if config else settings.ai_model),
+            "model": (config.get("model", default_model) if config else default_model),
             "max_tokens": (
-                config.get("max_tokens", settings.ai_max_tokens)
-                if config
-                else settings.ai_max_tokens
+                config.get("max_tokens", default_max_tokens) if config else default_max_tokens
             ),
             "temperature": (
-                config.get("temperature", settings.ai_temperature)
-                if config
-                else settings.ai_temperature
+                config.get("temperature", default_temperature) if config else default_temperature
             ),
-            "enabled": (
-                config.get("enabled", settings.enable_ai_features)
-                if config
-                else settings.enable_ai_features
-            ),
+            "enabled": (config.get("enabled", default_enabled) if config else default_enabled),
             "cache_enabled": True,
             "cache_ttl": 3600,  # 1 hour cache TTL
         }
@@ -259,7 +258,10 @@ class DocumentAnalysisService(BaseAIService):
         # Check if service is enabled
         if not self.config.get("enabled", True):
             logger.warning("Document analysis service is disabled")
-            raise AIError(AIErrorType.SERVICE_UNAVAILABLE, "Document analysis service is disabled")
+            raise AIError(
+                message="Document analysis service is disabled",
+                error_type=AIErrorType.SERVICE_UNAVAILABLE,
+            )
 
         try:
             # Sanitize input
@@ -299,8 +301,8 @@ class DocumentAnalysisService(BaseAIService):
         model = get_model()
         if not model:
             raise AIError(
-                AIErrorType.MODEL_UNAVAILABLE,
-                "AI model not available for document analysis",
+                message="AI model not available for document analysis",
+                error_type=AIErrorType.MODEL_UNAVAILABLE,
             )
 
         # Format the prompt using the centralized prompt service
@@ -309,8 +311,8 @@ class DocumentAnalysisService(BaseAIService):
             system_prompt = self.prompt_service.get_system_prompt(template_id)
         except Exception as e:
             raise AIError(
-                AIErrorType.PROMPT_FORMATTING_ERROR,
-                f"Failed to format prompt template {template_id}: {e!s}",
+                message=f"Failed to format prompt template {template_id}: {e!s}",
+                error_type=AIErrorType.PROMPT_FORMATTING_ERROR,
             )
 
         # Generate response using the model
@@ -339,8 +341,8 @@ class DocumentAnalysisService(BaseAIService):
 
         except Exception as e:
             raise AIError(
-                AIErrorType.GENERATION_ERROR,
-                f"Failed to generate analysis response: {e!s}",
+                message=f"Failed to generate analysis response: {e!s}",
+                error_type=AIErrorType.GENERATION_ERROR,
             )
 
     def _sanitize_text(self, text: str) -> str:

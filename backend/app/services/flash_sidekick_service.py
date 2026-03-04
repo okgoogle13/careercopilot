@@ -17,8 +17,39 @@ class FlashSidekickService:
         self.env = {
             **os.environ,
             "GEMINI_MODEL": "models/gemini-2.5-flash-lite",
-            "GEMINI_PRO_MODEL": "models/gemini-2.5-pro"
+            "GEMINI_PRO_MODEL": "models/gemini-2.5-pro",
         }
+
+    async def quick_summarize(self, text: str) -> str:
+        """
+        Summarize or transform text via the Flash Sidekick MCP server.
+
+        This restores the interface used by existing agents such as GhostwriterAgent.
+        If the MCP call fails, return the original text as a safe fallback.
+        """
+        ClientSession, StdioServerParameters, stdio_client = require_mcp_client()
+        server_params = StdioServerParameters(
+            command=self.server_command,
+            args=self.server_args,
+            env=self.env,
+        )
+
+        try:
+            async with stdio_client(server_params) as (read, write):
+                async with ClientSession(read, write) as session:
+                    await session.initialize()
+
+                    result = await session.call_tool(
+                        "consult_pro",
+                        arguments={"query": text[:30000]},
+                    )
+
+                    if result.content and len(result.content) > 0:
+                        return result.content[0].text.strip()
+        except Exception:
+            return text
+
+        return ""
 
     async def extract_links_from_search_results(self, html_content: str) -> list[str]:
         """
@@ -26,7 +57,7 @@ class FlashSidekickService:
         """
         ClientSession, StdioServerParameters, stdio_client = require_mcp_client()
         prompt = """
-        You are an HTML parser. 
+        You are an HTML parser.
         Input: Raw HTML from a Google Search result page.
         Task: Extract strictly the URLs that point to job listings (e.g., from ethicaljobs.com.au, seek.com.au, etc).
         Ignore navigation links (like 'Next', 'Privacy', 'Login', etc.).
@@ -40,12 +71,10 @@ class FlashSidekickService:
         # We'll use "consult_pro" for parsing logic or "extract_data" if we add that capability.
         # Let's use 'consult_pro' as it handles reasoning ("Ignore navigation links").
 
-        full_query = f"{prompt}\n\nHTML:\n{html_content[:30000]}" # Limit context to avoid overflow
+        full_query = f"{prompt}\n\nHTML:\n{html_content[:30000]}"  # Limit context to avoid overflow
 
         server_params = StdioServerParameters(
-            command=self.server_command,
-            args=self.server_args,
-            env=self.env
+            command=self.server_command, args=self.server_args, env=self.env
         )
 
         try:
@@ -54,10 +83,8 @@ class FlashSidekickService:
                     await session.initialize()
 
                     result = await session.call_tool(
-                        "consult_pro", # Using the Pro model for better extraction reasoning
-                        arguments={
-                            "query": full_query
-                        }
+                        "consult_pro",  # Using the Pro model for better extraction reasoning
+                        arguments={"query": full_query},
                     )
 
                     if result.content and len(result.content) > 0:
@@ -73,6 +100,7 @@ class FlashSidekickService:
         except Exception as e:
             print(f"Flash Sidekick Extraction Failed: {e}")
             return []
+
 
 # Synchronous wrapper
 def extract_links_sync(html: str) -> list[str]:

@@ -1,14 +1,13 @@
-"""
-Tests for the base AI service.
-"""
+"""Tests for the base AI service."""
+
+import logging
+from unittest.mock import patch
 
 import pytest
 from fastapi.testclient import TestClient
-from unittest.mock import patch
-from backend.app.ai.base_service import BaseAIService
-from backend.app.ai.base_service import T
 from pydantic import BaseModel
-import logging
+
+from app.ai.base_service import BaseAIService, T
 
 # Configure logging for tests
 logging.basicConfig(level=logging.INFO)
@@ -39,10 +38,8 @@ class TestBaseAIService:
 
     def test_initialize_failure(self):
         """Test initialization failure."""
-        with patch("backend.app.ai.base_service.importlib") as mock_importlib:
-            mock_importlib.import_module.side_effect = Exception("Test error")
+        with patch("app.ai.base_service.logger.info", side_effect=Exception("Test error")):
             service = BaseAIService(config={"enabled": True})
-            service._initialize()
             assert service.is_initialized is False
 
     def test_is_available_enabled_and_initialized(self):
@@ -53,7 +50,8 @@ class TestBaseAIService:
 
     def test_is_available_enabled_but_not_initialized(self):
         """Test is_available when enabled but not initialized."""
-        service = BaseAIService(config={"enabled": True})
+        service = BaseAIService(config={"enabled": False})
+        service.is_enabled = True
         assert service.is_available() is False
 
     def test_is_available_not_enabled(self):
@@ -106,10 +104,13 @@ class TestBaseAIService:
         service = BaseAIService(config={"enabled": False})
         assert str(service) == "BaseAIService(enabled=False)"
 
-class TestBaseAIServiceWithPydanticModel(BaseModel):
+
+class ExampleAIServiceModel(BaseModel):
     """A simple Pydantic model for testing."""
+
     name: str
     age: int
+
 
 class TestBaseAIServicePydanticIntegration:
     """Tests for BaseAIService integration with Pydantic models."""
@@ -117,14 +118,14 @@ class TestBaseAIServicePydanticIntegration:
     def test_validate_input_with_pydantic_model(self):
         """Test validate_input with a Pydantic model as input."""
         service = BaseAIService()
-        input_data = TestBaseAIServiceWithPydanticModel(name="Alice", age=30)
+        input_data = ExampleAIServiceModel(name="Alice", age=30)
         service.validate_input(input_data, ["name", "age"])
         assert True  # No exception raised
 
     def test_validate_input_missing_field_in_pydantic_model(self):
         """Test validate_input with a Pydantic model missing a required field."""
         service = BaseAIService()
-        input_data = TestBaseAIServiceWithPydanticModel(name="Alice")
+        input_data = ExampleAIServiceModel.model_construct(name="Alice")
         with pytest.raises(ValueError) as excinfo:
             service.validate_input(input_data, ["name", "age"])
         assert "Missing required field: age" in str(excinfo.value)

@@ -15,6 +15,7 @@ from pydantic import BaseModel, Field
 
 from app.core.ai_config import get_ai_config
 from app.core.ai_error_handling import AIError, AIErrorType, with_ai_error_handling
+from app.core.genkit_init import get_model
 from app.core.input_validation import InputSanitizer, InputValidationError
 
 try:
@@ -36,10 +37,16 @@ genkit_flow = getattr(genkit, "flow", _noop_flow)
 
 # Load environment variables
 load_dotenv()
-if genkit and getattr(genkit, "get_plugin", None) and not genkit.get_plugin("googleai"):
-    genkit.init(plugins=[google_genai.init(api_key=os.getenv("GEMINI_API_KEY"))])
+# Removed top-level gemini_pro initialization to avoid import-time bugs.
+# Functions now use get_model() at call time.
 
-gemini_pro = get_ai_config().get_model_config("gemini-3.0-flash")
+
+def _get_generation_model():
+    """Return the active model used for content optimization requests."""
+    model = get_model()
+    if model is not None:
+        return model
+    raise RuntimeError("Genkit model not available")
 
 
 # Enums and Models
@@ -179,7 +186,7 @@ Return optimized content that maintains authentic voice while maximizing job mat
 Respond with valid JSON matching the ContentOptimizationResult schema.
 """
 
-        response = gemini_pro.generate(
+        response = _get_generation_model().generate(
             prompt,
             config={
                 "response_mime_type": "application/json",
@@ -239,7 +246,7 @@ As a personal branding strategist and career coach, analyze the consistency and 
 of this candidate's personal brand across their career materials.
 
 CONTENT TO ANALYZE:
-{json.dumps(content_sections, separators=(\',\', \':\'))}
+{json.dumps(content_sections, separators=(',', ':'))}
 
 PERSONAL BRANDING ANALYSIS:
 1. Assess current brand strength and clarity
@@ -265,7 +272,7 @@ Provide actionable recommendations for strengthening personal brand impact.
 Respond with valid JSON matching the PersonalBrandingAnalysis schema.
 """
 
-        response = gemini_pro.generate(
+        response = _get_generation_model().generate(
             prompt,
             config={
                 "response_mime_type": "application/json",
@@ -357,7 +364,7 @@ professional relationships and demonstrating industry expertise.
 Respond with valid JSON matching the LinkedInOptimizationResult schema.
 """
 
-        response = gemini_pro.generate(
+        response = _get_generation_model().generate(
             prompt,
             config={
                 "response_mime_type": "application/json",
@@ -444,7 +451,7 @@ for each channel's specific requirements and audience expectations.
 Respond with valid JSON matching the MultiChannelOptimizationResult schema.
 """
 
-        response = gemini_pro.generate(
+        response = _get_generation_model().generate(
             prompt,
             config={
                 "response_mime_type": "application/json",

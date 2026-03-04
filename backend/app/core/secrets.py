@@ -8,7 +8,10 @@ try:
     from google.cloud import secretmanager
     from google.oauth2 import service_account
 except ImportError:  # pragma: no cover - optional dependency in test/CI
-    NotFound = Exception
+
+    class NotFound(Exception):
+        """Fallback not-found error when Google client libraries are unavailable."""
+
     secretmanager = None
     service_account = None
 

@@ -35,6 +35,7 @@ class AIErrorType(Enum):
     MODEL_UNAVAILABLE = "model_unavailable"
     PROMPT_FORMATTING_ERROR = "prompt_formatting_error"
     GENERATION_ERROR = "generation_error"
+    MODEL_ERROR = "model_error"
 
 
 @dataclass
@@ -71,12 +72,14 @@ class AIOperationHandler:
         """Classify an error to determine retry strategy."""
         error_str = str(error).lower()
 
-        if "rate limit" in error_str or "quota" in error_str or "too many requests" in error_str:
+        if "rate limit" in error_str or "too many requests" in error_str:
+            return AIErrorType.RATE_LIMIT
+        elif "quota exceeded" in error_str:
+            return AIErrorType.QUOTA_EXCEEDED
+        elif "quota" in error_str:
             return AIErrorType.RATE_LIMIT
         elif "timeout" in error_str or "deadline" in error_str:
             return AIErrorType.TIMEOUT
-        elif "quota exceeded" in error_str:
-            return AIErrorType.QUOTA_EXCEEDED
         elif "invalid" in error_str or "bad request" in error_str:
             return AIErrorType.INVALID_REQUEST
         elif "service unavailable" in error_str or "503" in error_str:

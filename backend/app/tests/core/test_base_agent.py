@@ -1,124 +1,165 @@
-"""
-Tests for base_agent module.
-"""
+"""Compatibility tests for the current BaseAgent contract."""
 
+import asyncio
 import hashlib
 import json
 from datetime import timedelta
-from unittest.mock import patch
 
 import pytest
-from fastapi import HTTPException
-from pytest_mock import MockerFixture
 
-from app.core.base_agent import BaseAgent, PromptType
-from app.core.ai_client import get_ai_client
-from app.core.personal_cache import get_personal_cache
-from app.services.ai_prompt_builder import get_ai_prompt_builder
+from app.core import base_agent as base_agent_module
 
 
-class TestBaseAgent:
-    @pytest.fixture
-    def base_agent(self):
-        return BaseAgent("test_agent")
+class _FakeCache:
+    """Small async cache stub used by the base-agent tests."""
 
-    def test_init(self, base_agent):
-        assert base_agent.agent_name == "test_agent"
-        assert isinstance(base_agent.ai_client, get_ai_client)
-        assert isinstance(base_agent.cache, get_personal_cache)
-        assert isinstance(base_agent.ai_prompt_builder, get_ai_prompt_builder)
-        assert base_agent.ai_response_ttl == timedelta(hours=72)
-        assert base_agent.user_profile_ttl == timedelta(days=7)
-        assert base_agent.company_research_ttl == timedelta(days=7)
+    def __init__(self):
+        self.by_namespace = {}
+        self.ai_responses = {}
+        self.last_cached = None
 
-    def test_generate_prompt_hash(self, base_agent):
-        prompt = "test prompt"
-        context = {"key": "value"}
-        hash_value = base_agent._generate_prompt_hash(prompt, context)
-        assert isinstance(hash_value, str)
-        assert len(hash_value) == 16
+    async def get(self, key, namespace):
+        return self.by_namespace.get((namespace, key))
 
-        prompt_data = {
-            "prompt": prompt,
-            "context": context,
-            "agent": base_agent.agent_name,
-        }
-        prompt_str = json.dumps(prompt_data, sort_keys=True, default=str)
-        expected_hash = hashlib.sha256(prompt_str.encode()).hexdigest()[:16]
-        assert hash_value == expected_hash
+    async def cache_ai_response(self, key, data, ttl):
+        self.by_namespace[("ai_responses", key)] = data
+        self.ai_responses[key] = data
+        self.last_cached = (key, data, ttl)
 
-        hash_value_no_context = base_agent._generate_prompt_hash(prompt)
-        assert isinstance(hash_value_no_context, str)
-        assert len(hash_value_no_context) == 16
+    async def get_ai_response(self, key):
+        return self.ai_responses.get(key)
 
-    @pytest.mark.asyncio
-    async def test_execute_with_monitoring_cache_hit(self, base_agent, mocker):
-        mock_cache = mocker.Mock()
-        mocker.patch("app.core.base_agent.get_personal_cache", return_value=mock_cache)
-        task_data = {"task_type": "test_task", "user_profile": {"name": "test"}}
-        cache_key = base_agent._generate_task_cache_key(task_data)
-        cached_result = {"data": "cached_data"}
-        mock_cache.get.return_value = cached_result
 
-        result = await base_agent.execute_with_monitoring(task_data)
-        assert result == {"data": "cached_data"}
-        mock_cache.get.assert_called_once_with(cache_key, "ai_responses")
+class _FakePromptBuilder:
+    """Prompt-builder stub that records calls."""
 
-    @pytest.mark.asyncio
-    async def test_execute_with_monitoring_cache_miss(self, base_agent, mocker):
-        mock_cache = mocker.Mock()
-        mocker.patch("app.core.base_agent.get_personal_cache", return_value=mock_cache)
-        mock_ai_client = mocker.Mock()
-        mocker.patch("app.core.base_agent.get_ai_client", return_value=mock_ai_client)
+    def __init__(self):
+        self.calls = []
+        self.response = "generated"
+        self.error = None
 
-        task_data = {"task_type": "test_task", "user_profile": {"name": "test"}}
-        cache_key = base_agent._generate_task_cache_key(task_data)
-        mock_cache.get.return_value = None
-        mock_ai_client.call_ai.return_value = {"result": "ai_result"}
+    async def generate_ai_response(self, prompt_type, prompt, prompt_context, model=None):
+        self.calls.append((prompt_type, prompt, prompt_context, model))
+        if self.error:
+            raise self.error
+        return self.response
 
-        result = await base_agent.execute_with_monitoring(task_data)
-        assert result == {"data": "ai_result"}
-        mock_cache.cache_ai_response.assert_called_once()
-        mock_ai_client.call_ai.assert_called_once()
 
-    @pytest.mark.asyncio
-    async def test_execute_with_monitoring_error(self, base_agent, mocker):
-        mock_cache = mocker.Mock()
-        mocker.patch("app.core.base_agent.get_personal_cache", return_value=mock_cache)
-        mock_ai_client = mocker.Mock()
-        mocker.patch("app.core.base_agent.get_ai_client", return_value=mock_ai_client)
+@pytest.fixture
+def base_agent(monkeypatch):
+    """Create a concrete BaseAgent wired to test doubles."""
+    cache = _FakeCache()
+    prompt_builder = _FakePromptBuilder()
+    ai_client = object()
 
-        task_data = {"task_type": "test_task"}
-        mock_ai_client.call_ai.side_effect = Exception("AI error")
+    monkeypatch.setattr(base_agent_module, "get_ai_client", lambda: ai_client)
+    monkeypatch.setattr(base_agent_module, "get_personal_cache", lambda: cache)
+    monkeypatch.setattr(base_agent_module, "get_ai_prompt_builder", lambda: prompt_builder)
 
-        result = await base_agent.execute_with_monitoring(task_data)
-        assert result == {"error": "AI error"}
+    class TestAgent(base_agent_module.BaseAgent):
+        async def _execute_core_logic(self, task_data):
+            if task_data.get("raise_error"):
+                raise RuntimeError("AI error")
+            return {"result": task_data.get("value", "ai_result")}
 
-    def test_generate_task_cache_key(self, base_agent):
-        task_data = {
-            "task_type": "test_task",
-            "user_profile": {"name": "test"},
-            "job_description": "test description",
-            "document_type": "resume",
-            "template_id": "123",
-        }
-        cache_key = base_agent._generate_task_cache_key(task_data)
-        assert isinstance(cache_key, str)
+    agent = TestAgent("test_agent")
+    agent._test_cache = cache
+    agent._test_prompt_builder = prompt_builder
+    agent._test_ai_client = ai_client
+    return agent
 
-    def test_hash_dict(self, base_agent):
-        data = {"name": "test", "age": 30}
-        hashed_data = base_agent._hash_dict(data)
-        assert isinstance(hashed_data, str)
 
-    @pytest.mark.asyncio
-    async def test_execute_with_monitoring_is_cache_suitable(self, base_agent, mocker):
-        mock_cache = mocker.Mock()
-        mocker.patch("app.core.base_agent.get_personal_cache", return_value=mock_cache)
-        task_data = {"task_type": "test_task", "user_profile": {"name": "test"}}
-        cache_key = base_agent._generate_task_cache_key(task_data)
-        cached_result = {"data": "cached_data", "agent": "test_agent", "task_data_hash": "hash"}
-        mock_cache.get.return_value = cached_result
+def test_init(base_agent):
+    """Initialization should use the injected collaborators."""
+    assert base_agent.agent_name == "test_agent"
+    assert base_agent.ai_client is base_agent._test_ai_client
+    assert base_agent.cache is base_agent._test_cache
+    assert base_agent.ai_prompt_builder is base_agent._test_prompt_builder
+    assert base_agent.ai_response_ttl == timedelta(hours=72)
+    assert base_agent.user_profile_ttl == timedelta(days=7)
+    assert base_agent.company_research_ttl == timedelta(days=7)
 
-        result = await base_agent.execute_with_monitoring(task_data)
-        assert result == {"data": "cached_data"}
-        mock_cache.get.assert_called_once_with(cache_key, "ai_responses")
+
+def test_generate_prompt_hash(base_agent):
+    """Prompt hashes should remain stable for the same serialized payload."""
+    prompt = "test prompt"
+    context = {"key": "value"}
+
+    hash_value = base_agent._generate_prompt_hash(prompt, context)
+    expected_hash = hashlib.sha256(
+        json.dumps(
+            {"prompt": prompt, "context": context, "agent": base_agent.agent_name},
+            sort_keys=True,
+            default=str,
+        ).encode()
+    ).hexdigest()[:16]
+
+    assert hash_value == expected_hash
+    assert len(base_agent._generate_prompt_hash(prompt)) == 16
+
+
+def test_execute_with_monitoring_cache_hit(base_agent):
+    """Cache hits should bypass core logic and return the wrapped response."""
+    task_data = {"task_type": "test_task", "user_profile": {"name": "test"}}
+    cache_key = base_agent._generate_task_cache_key(task_data)
+    base_agent._test_cache.by_namespace[("ai_responses", cache_key)] = {"data": {"cached": True}}
+
+    result = asyncio.run(base_agent.execute_with_monitoring(task_data))
+
+    assert result["success"] is True
+    assert result["data"] == {"cached": True}
+
+
+def test_execute_with_monitoring_cache_miss(base_agent):
+    """Cache misses should execute core logic and persist the result."""
+    result = asyncio.run(
+        base_agent.execute_with_monitoring(
+            {"task_type": "test_task", "user_profile": {"name": "test"}, "value": "fresh"}
+        )
+    )
+
+    assert result["success"] is True
+    assert result["data"] == {"result": "fresh"}
+    assert base_agent._test_cache.last_cached is not None
+
+
+def test_execute_with_monitoring_error(base_agent):
+    """Core failures should be returned through the standard error envelope."""
+    result = asyncio.run(
+        base_agent.execute_with_monitoring({"task_type": "test_task", "raise_error": True})
+    )
+
+    assert result["success"] is False
+    assert result["error"] == "AI error"
+    assert result["retry_after"] == 300
+
+
+def test_generate_task_cache_key_and_hash_dict(base_agent):
+    """Cache keys should be generated from hashable task metadata."""
+    task_data = {
+        "task_type": "test_task",
+        "user_profile": {"name": "test"},
+        "job_description": "test description",
+        "document_type": "resume",
+        "template_id": "123",
+    }
+
+    cache_key = base_agent._generate_task_cache_key(task_data)
+
+    assert isinstance(cache_key, str)
+    assert isinstance(base_agent._hash_dict({"name": "test", "age": 30}), str)
+
+
+def test_generate_ai_response_with_cache(base_agent):
+    """Generated AI responses should flow through the prompt builder and cache."""
+    result = asyncio.run(
+        base_agent.generate_ai_response_with_cache(
+            "test prompt",
+            {"tone": "warm"},
+            model="gemini-2.0-flash",
+        )
+    )
+
+    assert result == "generated"
+    assert base_agent._test_prompt_builder.calls[0][0] == base_agent_module.PromptType.GENERIC
+    assert base_agent._test_cache.last_cached is not None

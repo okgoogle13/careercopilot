@@ -10,13 +10,15 @@ This enables users to paste a job URL and get:
 - Ready for resume optimization and application
 """
 
+import logging
 from typing import Optional
+
 from pydantic import BaseModel, Field
+
+from app.genkit_flows.company_context import CompanyContext, generate_company_context
 from app.genkit_flows.flow_decorator import async_genkit_flow
 from app.genkit_flows.job_listing_extractor import extract_job_listing_details_flow
-from app.genkit_flows.company_context import generate_company_context, CompanyContext
 from app.models.schemas import JobListingDetails
-import logging
 
 logger = logging.getLogger(__name__)
 
@@ -28,23 +30,20 @@ class UnifiedJobAnalysis(BaseModel):
         description="Structured job listing details extracted from the URL"
     )
     company_context: Optional[CompanyContext] = Field(
-        None,
-        description="Company insights for applications and interviews"
+        None, description="Company insights for applications and interviews"
     )
     analysis_success: bool = Field(
-        default=True,
-        description="Whether the full analysis completed successfully"
+        default=True, description="Whether the full analysis completed successfully"
     )
     error_message: Optional[str] = Field(
-        None,
-        description="Error message if analysis partially failed"
+        None, description="Error message if analysis partially failed"
     )
 
 
 @async_genkit_flow(
     name="analyze_job_from_url",
     output_schema=UnifiedJobAnalysis,
-    require_model=False  # Job extractor handles its own model
+    require_model=False,  # Job extractor handles its own model
 )
 async def analyze_job_from_url(url: str) -> UnifiedJobAnalysis:
     """
@@ -74,7 +73,7 @@ async def analyze_job_from_url(url: str) -> UnifiedJobAnalysis:
     try:
         # Step 1: Extract job details from URL
         logger.info(f"Extracting job details from URL: {url}")
-        job_details = extract_job_listing_details_flow({"url": url})
+        job_details = await extract_job_listing_details_flow({"url": url})
 
         # Step 2: Generate company context if we have company name
         company_context = None
@@ -83,16 +82,14 @@ async def analyze_job_from_url(url: str) -> UnifiedJobAnalysis:
                 logger.info(f"Generating company context for: {job_details.company_name}")
                 company_context = await generate_company_context(
                     company_name=job_details.company_name,
-                    job_description=job_details.full_description
+                    job_description=job_details.full_description,
                 )
             except Exception as e:
                 logger.warning(f"Company context generation failed: {str(e)}")
                 # Continue without company context - not critical
 
         return UnifiedJobAnalysis(
-            job_details=job_details,
-            company_context=company_context,
-            analysis_success=True
+            job_details=job_details, company_context=company_context, analysis_success=True
         )
 
     except Exception as e:

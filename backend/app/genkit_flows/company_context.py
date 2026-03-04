@@ -8,12 +8,14 @@ This is a fresh implementation that replaces the fragile web scraping approaches
 from the stale branches with a more reliable AI-based solution.
 """
 
-from pydantic import BaseModel, Field
-from typing import List
-from app.genkit_flows.flow_decorator import async_genkit_flow
-from app.core.genkit_init import get_model
-import logging
 import json
+import logging
+from typing import List
+
+from pydantic import BaseModel, Field
+
+from app.core.genkit_init import get_model
+from app.genkit_flows.flow_decorator import async_genkit_flow
 
 logger = logging.getLogger(__name__)
 
@@ -22,39 +24,26 @@ class CompanyContext(BaseModel):
     """Company context for applications and interview prep"""
 
     recent_achievements: List[str] = Field(
-        description="2-3 recent notable achievements or initiatives",
-        default_factory=list
+        description="2-3 recent notable achievements or initiatives", default_factory=list
     )
-    core_values: List[str] = Field(
-        description="3-5 core company values",
-        default_factory=list
-    )
+    core_values: List[str] = Field(description="3-5 core company values", default_factory=list)
     recommended_tone: str = Field(
         description="Recommended tone: formal, conversational, or enthusiastic",
-        default="conversational"
+        default="conversational",
     )
     why_work_here_points: List[str] = Field(
-        description="Key talking points for 'Why this company?'",
-        default_factory=list
+        description="Key talking points for 'Why this company?'", default_factory=list
     )
     interview_questions: List[str] = Field(
-        description="3 intelligent questions to ask the interviewer",
-        default_factory=list
+        description="3 intelligent questions to ask the interviewer", default_factory=list
     )
     cultural_insights: str = Field(
-        description="Work style and communication preferences",
-        default=""
+        description="Work style and communication preferences", default=""
     )
 
 
-@async_genkit_flow(
-    name="generate_company_context",
-    output_schema=CompanyContext
-)
-async def generate_company_context(
-    company_name: str,
-    job_description: str
-) -> CompanyContext:
+@async_genkit_flow(name="generate_company_context", output_schema=CompanyContext)
+async def generate_company_context(company_name: str, job_description: str) -> CompanyContext:
     """
     Generate company context using AI knowledge (no web scraping).
     Useful for cover letters, KSC responses, and interview prep.
@@ -137,16 +126,16 @@ Keep responses concise and relevant for job applications.
             raise RuntimeError("Genkit model not available")
 
         # Generate company context using the model
-        response = model.generate(
+        response = await model.generate(
             prompt=prompt,
             generation_config={
                 "temperature": 0.3,  # Slightly higher for more varied insights
-                "response_mime_type": "application/json"
-            }
+                "response_mime_type": "application/json",
+            },
         )
 
         # Parse the response
-        if hasattr(response, 'text'):
+        if hasattr(response, "text"):
             result_data = json.loads(response.text)
 
             return CompanyContext(
@@ -155,7 +144,7 @@ Keep responses concise and relevant for job applications.
                 recommended_tone=result_data.get("recommended_tone", "conversational"),
                 why_work_here_points=result_data.get("why_work_here_points", []),
                 interview_questions=result_data.get("interview_questions", []),
-                cultural_insights=result_data.get("cultural_insights", "")
+                cultural_insights=result_data.get("cultural_insights", ""),
             )
         else:
             raise ValueError("Failed to generate company context from the model")
@@ -171,7 +160,7 @@ Keep responses concise and relevant for job applications.
             interview_questions=[
                 "What are the biggest challenges for this role?",
                 "How does the team measure success?",
-                "What opportunities exist for growth?"
+                "What opportunities exist for growth?",
             ],
-            cultural_insights="Research the company's culture through their website and employee reviews."
+            cultural_insights="Research the company's culture through their website and employee reviews.",
         )

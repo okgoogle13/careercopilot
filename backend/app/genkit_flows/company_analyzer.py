@@ -1,37 +1,59 @@
-import genkit
-from genkit.plugins import googleai
 import os
+from types import SimpleNamespace
+from typing import List
+
 import requests
 from bs4 import BeautifulSoup
-from pydantic import BaseModel, Field
-from typing import List
 from dotenv import load_dotenv
+from pydantic import BaseModel, Field
 
-# Load environment variables and initialize Genkit
-load_dotenv()
-if genkit.get_plugin("googleai") is None:
-    genkit.init(plugins=[googleai.init(api_key=os.getenv("GEMINI_API_KEY"))])
+try:
+    import genkit
+    from genkit.plugins import google_genai
+except Exception:
+    genkit = None
+    google_genai = None
 
-gemini_pro = googleai.gemini_pro
+# Removed top-level gemini_pro initialization to avoid import-time bugs.
+from app.core.genkit_init import get_model
+
+
+def _noop_flow(*args, **kwargs):
+    def _decorator(fn):
+        return fn
+
+    return _decorator
+
+
+genkit_flow = getattr(genkit, "flow", _noop_flow) if genkit else _noop_flow
+
 
 class CompanyAnalysis(BaseModel):
     """Structured analysis of a company's website."""
-    company_keywords: List[str] = Field(description="Keywords related to the company's technologies, products, and values.")
-    company_tone: str = Field(description="The overall tone and style of the company's communication (e.g., formal, casual, energetic).")
 
-@genkit.flow(output_schema=CompanyAnalysis)
+    company_keywords: List[str] = Field(
+        description="Keywords related to the company's technologies, products, and values."
+    )
+    company_tone: str = Field(
+        description="The overall tone and style of the company's communication (e.g., formal, casual, energetic)."
+    )
+
+
+@genkit_flow(output_schema=CompanyAnalysis)
 def analyze_company_website(url: str) -> CompanyAnalysis:
     """
     Scrapes a company's website, analyzes its content, and extracts key insights.
     """
     try:
-        headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'}
+        headers = {
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
+        }
         response = requests.get(url, headers=headers, timeout=10)
         response.raise_for_status()  # Raise an exception for bad status codes
     except requests.exceptions.RequestException as e:
         raise ConnectionError(f"Failed to fetch URL: {url}. Error: {e}")
 
-    soup = BeautifulSoup(response.content, 'html.parser')
+    soup = BeautifulSoup(response.content, "html.parser")
 
     # Remove script and style elements
     for script_or_style in soup(["script", "style"]):
@@ -40,7 +62,7 @@ def analyze_company_website(url: str) -> CompanyAnalysis:
     text = soup.get_text()
     lines = (line.strip() for line in text.splitlines())
     chunks = (phrase.strip() for line in lines for phrase in line.split("  "))
-    text = '\n'.join(chunk for chunk in chunks if chunk)
+    text = "\n".join(chunk for chunk in chunks if chunk)
 
     if not text:
         raise ValueError("Could not extract any text from the website.")
@@ -58,13 +80,17 @@ def analyze_company_website(url: str) -> CompanyAnalysis:
     Please provide the analysis in a structured format.
     """
 
-    analysis_response = gemini_pro.generate(
+    model = get_model()
+    if not model:
+        raise ValueError("Genkit model not available")
+
+    analysis_response = model.generate(
         prompt=prompt,
-        config=googleai.GenerationConfig(
-            temperature=0.2,
-            response_mime_type="application/json"
-        ),
-        output_schema=CompanyAnalysis
+        config={
+            "temperature": 0.2,
+            "response_mime_type": "application/json",
+        },
+        output_schema=CompanyAnalysis,
     )
 
     company_analysis = analysis_response.output()

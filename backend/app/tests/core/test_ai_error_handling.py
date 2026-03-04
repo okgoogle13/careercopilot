@@ -20,13 +20,18 @@ class TestAIOperationHandler:
 
         rate_limit_errors = [
             Exception("Rate limit exceeded"),
-            Exception("Quota exceeded for requests"),
             Exception("Too many requests"),
         ]
 
         for error in rate_limit_errors:
             error_type = handler.classify_error(error)
             assert error_type == AIErrorType.RATE_LIMIT
+
+        # Special case for quota exceeded
+        assert (
+            handler.classify_error(Exception("Quota exceeded for requests"))
+            == AIErrorType.QUOTA_EXCEEDED
+        )
 
     def test_classify_error_timeout(self):
         """Test classification of timeout errors."""

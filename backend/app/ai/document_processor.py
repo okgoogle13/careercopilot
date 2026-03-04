@@ -240,6 +240,9 @@ class DocumentProcessor(BaseAIService):
                 DocumentChunk(text=chunk_text, metadata=chunk_metadata, chunk_number=chunk_num)
             )
 
+            if end >= len(text):
+                break
+
             # Move to the next chunk with overlap
             start = end - self.chunk_overlap
             if start <= 0:

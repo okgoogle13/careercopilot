@@ -146,6 +146,8 @@ def validate_file_upload(
                     f"File size {file_size / 1024 / 1024:.1f}MB exceeds "
                     f"maximum allowed size {config.max_file_size_mb}MB"
                 )
+        except FileValidationError:
+            raise
         except Exception as e:
             logger.warning(f"Could not check file size: {e!s}")
 

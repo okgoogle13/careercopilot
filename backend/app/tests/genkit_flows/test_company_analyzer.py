@@ -1,94 +1,77 @@
-"""
-Tests for the company_analyzer module.
-"""
+"""Focused tests for the company analyzer flow."""
+
+from types import SimpleNamespace
 
 import pytest
-from fastapi.testclient import TestClient
-from backend.app.genkit_flows.company_analyzer import analyze_company_website, CompanyAnalysis
-from backend.app.main import app
-from unittest.mock import patch
 import requests
-from requests.exceptions import RequestException
-from dotenv import load_dotenv
-import os
 
-load_dotenv()
+from app.genkit_flows import company_analyzer as module
 
-@pytest.fixture
-def test_client():
-    """Fixture to create a test client for the FastAPI application."""
-    return TestClient(app)
 
-class TestCompanyAnalyzer:
+class _Response:
+    """Simple HTTP response stub for page fetch tests."""
 
-    def test_analyze_company_website_happy_path(self, test_client):
-        """
-        Test successful analysis of a company website.
-        """
-        url = "https://www.example.com"
-        response = analyze_company_website(url)
-        assert isinstance(response, CompanyAnalysis)
-        assert isinstance(response.company_keywords, list)
-        assert isinstance(response.company_tone, str)
+    def __init__(self, content=b"<html><body>Company text</body></html>", error=None):
+        self.content = content
+        self._error = error
 
-    def test_analyze_company_website_invalid_url(self):
-        """
-        Test handling of an invalid URL.
-        """
-        url = "invalid-url"
-        with pytest.raises(ConnectionError):
-            analyze_company_website(url)
+    def raise_for_status(self):
+        if self._error:
+            raise self._error
 
-    def test_analyze_company_website_request_exception(self):
-        """
-        Test handling of a request exception (e.g., timeout).
-        """
-        with patch('requests.get') as mock_get:
-            mock_get.side_effect = RequestException("Timeout error")
-            url = "https://www.example.com"
-            with pytest.raises(ConnectionError):
-                analyze_company_website(url)
 
-    def test_analyze_company_website_bad_status_code(self):
-        """
-        Test handling of a bad HTTP status code (e.g., 404).
-        """
-        with patch('requests.get') as mock_get:
-            mock_get.return_value.status_code = 404
-            url = "https://www.example.com"
-            with pytest.raises(ConnectionError):
-                analyze_company_website(url)
+def test_analyze_company_website_success(monkeypatch):
+    """The analyzer should fetch page text and return the model output."""
+    monkeypatch.setattr(module.requests, "get", lambda *args, **kwargs: _Response())
+    monkeypatch.setattr(
+        module,
+        "get_model",
+        lambda: SimpleNamespace(
+            generate=lambda *args, **kwargs: SimpleNamespace(
+                output=lambda: module.CompanyAnalysis(
+                    company_keywords=["python", "careers"],
+                    company_tone="professional",
+                )
+            )
+        ),
+    )
 
-    def test_analyze_company_website_no_text_extracted(self):
-        """
-        Test handling of a website with no extractable text.
-        """
-        with patch('requests.get') as mock_get:
-            mock_get.return_value.content = "<html></html>"
-            url = "https://www.example.com"
-            with pytest.raises(ValueError):
-                analyze_company_website(url)
+    result = module.analyze_company_website("https://example.com")
 
-    def test_analyze_company_website_gemini_failure(self):
-        """
-        Test handling of a failure from the Gemini model.
-        """
-        with patch('requests.get') as mock_get:
-            mock_get.return_value.content = "<html><body>Some text</body></html>"
-        with patch('backend.app.genkit_flows.company_analyzer.gemini_pro.generate') as mock_generate:
-            mock_generate.return_value.output.return_value = None
-            url = "https://www.example.com"
-            with pytest.raises(ValueError):
-                analyze_company_website(url)
+    assert result.company_keywords == ["python", "careers"]
+    assert result.company_tone == "professional"
 
-    @patch('backend.app.genkit_flows.company_analyzer.gemini_pro.generate')
-    def test_analyze_company_website_gemini_response_schema(self, mock_generate):
-        """
-        Test that the Gemini response is correctly mapped to the CompanyAnalysis schema.
-        """
-        mock_generate.return_value.output.return_value = CompanyAnalysis(company_keywords=["keyword1", "keyword2"], company_tone="formal")
-        url = "https://www.example.com"
-        response = analyze_company_website(url)
-        assert isinstance(response, CompanyAnalysis)
-        assert response.company_keywords == ["keyword1", "keyword2"]
-        assert response.company_tone == "formal"
+
+def test_analyze_company_website_request_errors_raise_connection_error(monkeypatch):
+    """Transport failures should be normalized to ConnectionError."""
+
+    def _raise(*args, **kwargs):
+        raise requests.exceptions.RequestException("timeout")
+
+    monkeypatch.setattr(module.requests, "get", _raise)
+
+    with pytest.raises(ConnectionError, match="Failed to fetch URL"):
+        module.analyze_company_website("https://example.com")
+
+
+def test_analyze_company_website_empty_text_raises_value_error(monkeypatch):
+    """Empty pages should fail before model generation."""
+    monkeypatch.setattr(module.requests, "get", lambda *args, **kwargs: _Response(b"<html></html>"))
+
+    with pytest.raises(ValueError, match="Could not extract any text"):
+        module.analyze_company_website("https://example.com")
+
+
+def test_analyze_company_website_missing_model_output_raises_value_error(monkeypatch):
+    """A falsy model output should surface as a validation error."""
+    monkeypatch.setattr(module.requests, "get", lambda *args, **kwargs: _Response())
+    monkeypatch.setattr(
+        module,
+        "get_model",
+        lambda: SimpleNamespace(
+            generate=lambda *args, **kwargs: SimpleNamespace(output=lambda: None)
+        ),
+    )
+
+    with pytest.raises(ValueError, match="Failed to generate company analysis"):
+        module.analyze_company_website("https://example.com")

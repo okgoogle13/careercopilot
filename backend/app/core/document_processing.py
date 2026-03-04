@@ -136,14 +136,16 @@ async def _make_ai_request(prompt: str, model: str, max_tokens: int, temperature
         ai_client = get_ai_client()
         request = AIRequest(
             prompt=prompt,
-            model=model,
+            service_name="document_processing",
+            user_id="system",
+            model_name=model,
             max_tokens=max_tokens,
             temperature=temperature,
             stream=False,
         )
 
-        response = await ai_client.generate(request)
-        return response.choices[0].message.content
+        response = await ai_client.generate_text(request)
+        return response.content
 
     except Exception as e:
         logger.error(f"AI request failed: {e!s}", exc_info=True)
@@ -380,7 +382,7 @@ async def compare_resume_to_job(
         # Add more fields as needed
 
     return await process_document(
-        file_content="",  # Not used in this template
+        file_content="comparison_request",  # Template does not use content, but processing requires non-empty text
         prompt_template=PromptTemplates.DOCUMENT_COMPARISON,
         response_model=ComparisonResult,
         processor_config=config,

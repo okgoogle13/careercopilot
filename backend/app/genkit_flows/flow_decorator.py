@@ -6,9 +6,10 @@ Handles common setup logic including model initialization, error handling, and f
 """
 
 import functools
-import logging
 import importlib
-from typing import Any, Callable, Optional, Type, TypeVar, ParamSpec, Awaitable, cast, overload
+import inspect
+import logging
+from typing import Any, Awaitable, Callable, Optional, ParamSpec, Type, TypeVar, cast, overload
 
 from pydantic import BaseModel
 
@@ -78,6 +79,18 @@ def genkit_flow(
     """
 
     def decorator(func: Callable[P, R]) -> Callable[P, R]:
+        if inspect.iscoroutinefunction(func):
+            # Delegate to async_genkit_flow for coroutine functions
+            return async_genkit_flow(
+                name=name,
+                output_schema=output_schema,
+                require_model=require_model,
+                auto_register=auto_register,
+                enable_logging=enable_logging,
+            )(
+                func
+            )  # type: ignore
+
         flow_name = name or func.__name__
 
         @functools.wraps(func)
@@ -249,10 +262,14 @@ def create_flow_wrapper(
 
 # Utility functions for application code
 @overload
-async def run_flow_async(flow_func: Callable[P, Awaitable[R]], **kwargs: Any) -> R: ...
+async def run_flow_async(
+    flow_func: Callable[P, Awaitable[R]], **kwargs: Any
+) -> R: ...  # noqa: E704
+
 
 @overload
-async def run_flow_async(flow_func: Callable[P, R], **kwargs: Any) -> R: ...
+async def run_flow_async(flow_func: Callable[P, R], **kwargs: Any) -> R: ...  # noqa: E704
+
 
 async def run_flow_async(
     flow_func: Callable[P, Awaitable[R]] | Callable[P, R],
@@ -277,6 +294,7 @@ async def run_flow_async(
     else:
         # Run sync function in thread pool to avoid blocking
         loop = asyncio.get_event_loop()
+
         def _call() -> R:
             res = flow_func(**kwargs)  # type: ignore[misc]
             return cast(R, res)

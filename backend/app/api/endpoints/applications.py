@@ -11,23 +11,17 @@ from app.models.database import Application, User
 router = APIRouter()
 
 
-@router.post(
-    "/", response_model=ApplicationResponse, status_code=status.HTTP_201_CREATED
-)
+@router.post("/", response_model=ApplicationResponse, status_code=status.HTTP_201_CREATED)
 async def create_application(
     application: ApplicationCreate,
     current_user: User = Depends(get_current_user),
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
 ):
     """Create a new job application for the current user."""
 
     app_data = application.model_dump(by_alias=False)
-    
-    new_application = Application(
-        user_id=current_user.id,
-        status="draft",
-        source="manual"
-    )
+
+    new_application = Application(user_id=current_user.id, status="draft", source="manual")
 
     for key, value in app_data.items():
         if hasattr(new_application, key):
@@ -48,13 +42,14 @@ async def create_application(
 async def get_application(
     application_id: str,
     current_user: User = Depends(get_current_user),
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
 ):
     """Retrieve a specific job application by its ID."""
-    application = db.query(Application).filter(
-        Application.id == application_id,
-        Application.user_id == current_user.id
-    ).first()
+    application = (
+        db.query(Application)
+        .filter(Application.id == application_id, Application.user_id == current_user.id)
+        .first()
+    )
 
     if not application:
         raise HTTPException(status_code=404, detail="Application not found.")
@@ -74,9 +69,13 @@ async def get_all_applications(
     limit: int = 100,
 ):
     """Retrieve all job applications for the current user with pagination."""
-    applications = db.query(Application).filter(
-        Application.user_id == current_user.id
-    ).offset(skip).limit(limit).all()
+    applications = (
+        db.query(Application)
+        .filter(Application.user_id == current_user.id)
+        .offset(skip)
+        .limit(limit)
+        .all()
+    )
 
     return applications
 
@@ -90,18 +89,19 @@ async def update_application(
     application_id: str,
     application: ApplicationCreate,
     current_user: User = Depends(get_current_user),
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
 ):
     """Update an existing job application."""
-    db_application = db.query(Application).filter(
-        Application.id == application_id,
-        Application.user_id == current_user.id
-    ).first()
+    db_application = (
+        db.query(Application)
+        .filter(Application.id == application_id, Application.user_id == current_user.id)
+        .first()
+    )
 
     if not db_application:
         raise HTTPException(status_code=404, detail="Application not found.")
 
-    update_data = application.model_dump(by_alias=True, exclude_unset=True)
+    update_data = application.model_dump(by_alias=False, exclude_unset=True)
     for key, value in update_data.items():
         if hasattr(db_application, key):
             setattr(db_application, key, value)
@@ -111,19 +111,18 @@ async def update_application(
     return db_application
 
 
-@router.delete(
-    "/{application_id}", status_code=status.HTTP_204_NO_CONTENT
-)
+@router.delete("/{application_id}", status_code=status.HTTP_204_NO_CONTENT)
 async def delete_application(
     application_id: str,
     current_user: User = Depends(get_current_user),
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
 ):
     """Delete a job application."""
-    db_application = db.query(Application).filter(
-        Application.id == application_id,
-        Application.user_id == current_user.id
-    ).first()
+    db_application = (
+        db.query(Application)
+        .filter(Application.id == application_id, Application.user_id == current_user.id)
+        .first()
+    )
 
     if not db_application:
         raise HTTPException(status_code=404, detail="Application not found.")

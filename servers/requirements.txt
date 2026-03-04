@@ -11,7 +11,6 @@ openai>=1.50.0
 azure-ai-inference>=1.0.0
 
 # Infrastructure & Utilities
-docker>=7.0.0
 python-dotenv>=1.0.0
 sentry-sdk>=2.0.0
 

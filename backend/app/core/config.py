@@ -34,7 +34,7 @@ class Settings(BaseSettings):
     show_debug_info: bool = secure_settings.SHOW_DEBUG_INFO
 
     # AI Settings
-    model_name: str = Field("gemini-3.0-flash", description="AI model to use")
+    model_name: str = Field("gemini-1.5-flash", description="AI model to use")
     ai_max_tokens: int = 2000
     ai_temperature: float = 0.2
 

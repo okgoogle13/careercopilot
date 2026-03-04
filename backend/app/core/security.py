@@ -99,6 +99,7 @@ def create_access_token(data: dict, expires_delta: timedelta | None = None) -> s
 # Firebase Authentication (Added for user authentication in job queue)
 # ============================================================================
 
+
 class AuthenticationError(HTTPException):
     """Custom exception for authentication failures."""
 
@@ -113,13 +114,13 @@ class AuthenticationError(HTTPException):
 async def verify_firebase_token(token: str) -> dict:
     """
     Verify a Firebase ID token and return the decoded claims.
-    
+
     Args:
         token: Firebase ID token (JWT)
-        
+
     Returns:
         dict: Decoded token claims including user_id (uid)
-        
+
     Raises:
         AuthenticationError: If token is invalid or expired
     """
@@ -129,10 +130,6 @@ async def verify_firebase_token(token: str) -> dict:
         logger.debug(f"Token verified for user: {decoded_token.get('uid')}")
         return decoded_token
 
-    except auth.InvalidIdTokenError as e:
-        logger.warning(f"Invalid Firebase token: {e}")
-        raise AuthenticationError("Invalid authentication token")
-
     except auth.ExpiredIdTokenError as e:
         logger.warning(f"Expired Firebase token: {e}")
         raise AuthenticationError("Authentication token has expired")
@@ -140,6 +137,10 @@ async def verify_firebase_token(token: str) -> dict:
     except auth.RevokedIdTokenError as e:
         logger.warning(f"Revoked Firebase token: {e}")
         raise AuthenticationError("Authentication token has been revoked")
+
+    except auth.InvalidIdTokenError as e:
+        logger.warning(f"Invalid Firebase token: {e}")
+        raise AuthenticationError("Invalid authentication token")
 
     except Exception as e:
         logger.error(f"Token verification failed: {e}")
@@ -149,18 +150,18 @@ async def verify_firebase_token(token: str) -> dict:
 async def get_current_user_id(authorization: str | None = Header(None)) -> str:
     """
     Extract and verify the current user's ID from the Authorization header.
-    
+
     This is a FastAPI dependency that can be used to protect endpoints.
-    
+
     Args:
         authorization: Authorization header value (format: "Bearer <token>")
-        
+
     Returns:
         str: User ID (Firebase UID)
-        
+
     Raises:
         AuthenticationError: If authentication fails
-        
+
     Usage:
         @router.get("/protected")
         async def protected_route(user_id: str = Depends(get_current_user_id)):
@@ -201,15 +202,15 @@ async def get_current_user_id(authorization: str | None = Header(None)) -> str:
 async def get_current_user_optional(authorization: str | None = Header(None)) -> str | None:
     """
     Extract user ID from Authorization header if present, otherwise return None.
-    
+
     This is useful for endpoints that work for both authenticated and anonymous users.
-    
+
     Args:
         authorization: Authorization header value (optional)
-        
+
     Returns:
         Optional[str]: User ID if authenticated, None if not
-        
+
     Usage:
         @router.get("/optional-auth")
         async def optional_route(user_id: Optional[str] = Depends(get_current_user_optional)):
@@ -225,4 +226,3 @@ async def get_current_user_optional(authorization: str | None = Header(None)) ->
     except AuthenticationError:
         # Don't fail, just return None for optional auth
         return None
-
