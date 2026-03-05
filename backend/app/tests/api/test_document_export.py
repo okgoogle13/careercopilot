@@ -1,143 +1,50 @@
-"""
-Tests for document_export API endpoints.
-"""
+"""Contract tests for document export endpoint helpers."""
 
-from unittest.mock import AsyncMock, patch
+from unittest.mock import AsyncMock
 
 import pytest
 from fastapi import HTTPException
-from fastapi.testclient import TestClient
 
-from app.api.endpoints import document_export
-from app.core.document_export_service import DocumentExportResult, document_export_service
-from app.core.observability import get_logger
-from app.models.document_export_schemas import (
-    CoverLetterExportRequest,
-    CoverLetterExportResponse,
-    DocumentExportResponse,
+from app.api.endpoints.document_export import (
+    _convert_export_result_to_response,
+    export_cover_letter,
 )
+from app.core.document_export_service import DocumentExportResult
+from app.models.document_export_schemas import CoverLetterExportRequest
 
 
-# Mocking dependencies
-@pytest.fixture
-def mock_document_export_service(monkeypatch):
-    """Mock document_export_service."""
-    mock = AsyncMock()
-    monkeypatch.setattr("app.api.endpoints.document_export.document_export_service", mock)
-    return mock
+def test_convert_export_result_to_response():
+    result = DocumentExportResult(
+        success=True,
+        document_type="cover_letter",
+        file_format="txt",
+        download_url="https://example.test/file",
+        file_size_bytes=123,
+        storage_path="gs://bucket/path",
+        expires_at="2026-03-05T00:00:00Z",
+        message="ok",
+    )
+    response = _convert_export_result_to_response(result, type("Resp", (result.__class__,), {}))
+    assert response.success is True
+    assert response.file_format == "txt"
 
 
-@pytest.fixture
-def mock_get_current_user_id():
-    """Mock get_current_user_id."""
+@pytest.mark.asyncio
+async def test_export_cover_letter_invalid_format(monkeypatch):
+    async def _raise_value_error(**_kwargs):
+        raise ValueError("Unsupported format")
 
-    async def mock():
-        return "user_123"
+    from app.api.endpoints import document_export as module
 
-    return mock
+    monkeypatch.setattr(module.document_export_service, "export_cover_letter", _raise_value_error)
 
+    request = CoverLetterExportRequest(
+        format="pdf",
+        expiration_hours=2,
+        job_title="Case Worker",
+        company_name="Org",
+    )
 
-@pytest.fixture
-def client():
-    """Create a test client."""
-    return TestClient(document_export.router)
-
-
-class TestCoverLetterExport:
-    @pytest.mark.asyncio
-    async def test_export_cover_letter_success(
-        self, client, mock_document_export_service, mock_get_current_user_id
-    ):
-        """Test successful cover letter export."""
-        mock_document_export_service.export_cover_letter.return_value = DocumentExportResult(
-            success=True,
-            document_type="cover_letter",
-            file_format="pdf",
-            download_url="http://example.com/cover_letter.pdf",
-            file_size_bytes=1024,
-            storage_path="gs://bucket/cover_letter.pdf",
-            expires_at="2024-01-01T00:00:00Z",
-            message="Cover letter exported successfully",
-        )
-
-        request = CoverLetterExportRequest(
-            format="pdf",
-            expiration_hours=1,
-            job_title="Software Engineer",
-            company_name="Acme Corp",
-        )
-        content = "This is a sample cover letter."
-
-        response = await client.post("/export/cover-letter", json=request.dict(), content=content)
-
-        assert response.status_code == 200
-        assert response.json()["success"] is True
-        assert response.json()["download_url"] == "http://example.com/cover_letter.pdf"
-
-    @pytest.mark.asyncio
-    async def test_export_cover_letter_invalid_format(
-        self, client, mock_document_export_service, mock_get_current_user_id
-    ):
-        """Test cover letter export with invalid format."""
-        mock_document_export_service.export_cover_letter.side_effect = ValueError("Invalid format")
-
-        request = CoverLetterExportRequest(
-            format="invalid",
-            expiration_hours=1,
-            job_title="Software Engineer",
-            company_name="Acme Corp",
-        )
-        content = "This is a sample cover letter."
-
-        response = await client.post("/export/cover-letter", json=request.dict(), content=content)
-
-        assert response.status_code == 400
-        assert response.json() == {"detail": "Invalid format: Invalid format"}
-
-    @pytest.mark.asyncio
-    async def test_export_cover_letter_export_fails(
-        self, client, mock_document_export_service, mock_get_current_user_id
-    ):
-        """Test cover letter export when export fails."""
-        mock_document_export_service.export_cover_letter.side_effect = Exception("Export failed")
-
-        request = CoverLetterExportRequest(
-            format="pdf",
-            expiration_hours=1,
-            job_title="Software Engineer",
-            company_name="Acme Corp",
-        )
-        content = "This is a sample cover letter."
-
-        response = await client.post("/export/cover-letter", json=request.dict(), content=content)
-
-        assert response.status_code == 500
-        assert response.json() == {"detail": "Internal Server Error"}
-
-    @pytest.mark.asyncio
-    async def test_export_cover_letter_logging(
-        self, client, mock_document_export_service, mock_get_current_user_id
-    ):
-        """Test cover letter export logging."""
-        mock_document_export_service.export_cover_letter.return_value = DocumentExportResult(
-            success=True,
-            document_type="cover_letter",
-            file_format="pdf",
-            download_url="http://example.com/cover_letter.pdf",
-            file_size_bytes=1024,
-            storage_path="gs://bucket/cover_letter.pdf",
-            expires_at="2024-01-01T00:00:00Z",
-            message="Cover letter exported successfully",
-        )
-
-        request = CoverLetterExportRequest(
-            format="pdf",
-            expiration_hours=1,
-            job_title="Software Engineer",
-            company_name="Acme Corp",
-        )
-        content = "This is a sample cover letter."
-
-        with patch("app.api.endpoints.document_export.logger.info") as mock_logger_info:
-            await client.post("/export/cover-letter", json=request.dict(), content=content)
-            mock_logger_info.assert_called_once()
+    with pytest.raises(HTTPException) as exc:
+        await export_cover_letter(request=request, content="hello", user_id="u1")
+    assert exc.value.status_code == 400

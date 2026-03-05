@@ -37,7 +37,9 @@ class FirebaseAuthBackend(HTTPBearer):
         """
         # Skip authentication for development if explicitly disabled
         if settings.ENVIRONMENT == "development" and settings.DISABLE_AUTH:
-            return {"uid": "dev-user", "email": "dev@example.com"}
+            user = {"uid": "dev-user", "email": "dev@example.com", "roles": ["admin"]}
+            request.state.user = user
+            return user
 
         # Get the authorization header
         credentials: HTTPAuthorizationCredentials = await super().__call__(request)
@@ -70,6 +72,8 @@ class FirebaseAuthBackend(HTTPBearer):
             request.state.user = decoded_token
             return decoded_token
 
+        except HTTPException:
+            raise
         except Exception as e:
             logger.error(f"Authentication error: {e!s}")
             raise HTTPException(
@@ -80,7 +84,7 @@ class FirebaseAuthBackend(HTTPBearer):
 
 
 # Create an instance of the auth backend
-auth_backend = FirebaseAuthBackend()
+auth_backend = FirebaseAuthBackend(auto_error=False)
 
 
 def get_current_user(
