@@ -70,7 +70,7 @@ def sample_artifact():
 
 @pytest.fixture
 def mock_genai(monkeypatch):
-    """Mock the Google Generative AI module."""
+    """Mock the Google Generative AI module via get_configured_google_generativeai."""
     mock_genai_module = SimpleNamespace()
     mock_embed = MagicMock(
         side_effect=lambda **kwargs: {
@@ -80,7 +80,10 @@ def mock_genai(monkeypatch):
         }
     )
     mock_genai_module.embed_content = mock_embed
-    monkeypatch.setattr(vector_store_module, "genai", mock_genai_module)
+    monkeypatch.setattr(
+        "app.services.vector_store.get_configured_google_generativeai",
+        lambda _key: mock_genai_module,
+    )
     return mock_embed
 
 def test_generate_embeddings(vector_store, mock_genai):
@@ -100,7 +103,10 @@ def test_generate_query_embedding(vector_store, mock_genai):
 
 def test_generate_query_embedding_raises_without_genai(vector_store, monkeypatch):
     """Test query embedding error handling when the optional dependency is missing."""
-    monkeypatch.setattr(vector_store_module, "genai", None)
+    monkeypatch.setattr(
+        "app.services.vector_store.get_configured_google_generativeai",
+        lambda _key: None,
+    )
 
     with pytest.raises(RuntimeError, match="Google Generative AI library not installed"):
         vector_store._generate_query_embedding("query text")

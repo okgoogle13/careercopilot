@@ -10,7 +10,7 @@ from collections.abc import Callable
 from dataclasses import dataclass
 from enum import Enum
 from functools import wraps
-from typing import Any
+from typing import Any, NoReturn
 
 logger = logging.getLogger(__name__)
 
@@ -121,6 +121,26 @@ class AIOperationHandler:
 
         return delay
 
+    def _raise_exhausted_error(self, last_error: Exception | None) -> NoReturn:
+        """Raise an AIError after all retry attempts have been exhausted.
+
+        Args:
+            last_error: The final exception caught during the last attempt, or
+                None if the loop exited without catching an exception.
+
+        Raises:
+            AIError: Always raised with a summary of the total attempts made.
+        """
+        logger.error(f"AI operation failed after {self.retry_config.max_attempts} attempts")
+        raise AIError(
+            message=(
+                f"Operation failed after {self.retry_config.max_attempts} attempts: "
+                f"{last_error!s}"
+            ),
+            error_type=(self.classify_error(last_error) if last_error else AIErrorType.UNKNOWN),
+            original_error=last_error,
+        )
+
     async def execute_with_retry(self, operation: Callable, *args, **kwargs) -> Any:
         """
         Execute an AI operation with retry logic.
@@ -181,16 +201,7 @@ class AIOperationHandler:
                 logger.info(f"Retrying in {delay:.2f} seconds...")
                 await asyncio.sleep(delay)
 
-        # All attempts failed
-        logger.error(f"AI operation failed after {self.retry_config.max_attempts} attempts")
-        raise AIError(
-            message=(
-                f"Operation failed after {self.retry_config.max_attempts} attempts: "
-                f"{last_error!s}"
-            ),
-            error_type=(self.classify_error(last_error) if last_error else AIErrorType.UNKNOWN),
-            original_error=last_error,
-        )
+        self._raise_exhausted_error(last_error)
 
     def execute_with_retry_sync(self, operation: Callable, *args, **kwargs) -> Any:
         """Synchronous variant of execute_with_retry for non-async operations."""
@@ -232,15 +243,7 @@ class AIOperationHandler:
                 logger.info(f"Retrying in {delay:.2f} seconds...")
                 time.sleep(delay)
 
-        logger.error(f"AI operation (sync) failed after {self.retry_config.max_attempts} attempts")
-        raise AIError(
-            message=(
-                f"Operation failed after {self.retry_config.max_attempts} attempts: "
-                f"{last_error!s}"
-            ),
-            error_type=(self.classify_error(last_error) if last_error else AIErrorType.UNKNOWN),
-            original_error=last_error,
-        )
+        self._raise_exhausted_error(last_error)
 
 
 def with_ai_error_handling(retry_config: RetryConfig | None = None):

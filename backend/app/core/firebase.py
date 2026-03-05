@@ -5,13 +5,28 @@ This module provides a centralized way to initialize and access Firebase service
 with proper error handling and configuration using Google Cloud Secret Manager.
 """
 
+from __future__ import annotations
+
 import logging
 import os
 from typing import Any
 
-import firebase_admin
-from firebase_admin import App, auth, credentials, db, firestore, storage
-from firebase_admin.exceptions import FirebaseError
+try:
+    import firebase_admin
+    from firebase_admin import App, auth, credentials, db, firestore, storage
+    from firebase_admin.exceptions import FirebaseError
+
+    _FIREBASE_AVAILABLE = True
+except ImportError:  # pragma: no cover
+    firebase_admin = None  # type: ignore[assignment]
+    App = None  # type: ignore[assignment,misc]
+    auth = None  # type: ignore[assignment]
+    credentials = None  # type: ignore[assignment]
+    db = None  # type: ignore[assignment]
+    firestore = None  # type: ignore[assignment]
+    storage = None  # type: ignore[assignment]
+    FirebaseError = Exception  # type: ignore[assignment,misc]
+    _FIREBASE_AVAILABLE = False
 
 from .secret_manager import get_firebase_config, get_firebase_credentials
 
@@ -30,6 +45,10 @@ def initialize_firebase() -> App | None:
         Optional[App]: Initialized Firebase app instance or None if initialization fails
     """
     global _firebase_app
+
+    if not _FIREBASE_AVAILABLE:
+        logger.debug("firebase_admin package not installed; Firebase features disabled.")
+        return None
 
     if _firebase_app is not None:
         return _firebase_app
