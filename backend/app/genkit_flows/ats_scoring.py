@@ -1,6 +1,6 @@
 import asyncio
 import logging
-from typing import List, Optional, Dict, Any, cast
+from typing import Any, Dict, List, Optional, cast
 
 from pydantic import BaseModel, Field
 
@@ -13,9 +13,8 @@ from app.core.enhanced_ai_error_handling import (
     create_fallback_strategy,
     enhanced_ai_handler,
 )
-from app.core.genkit_init import get_model
+from app.core.genkit_init import genkit_flow, get_model
 from app.core.prompt_service import format_prompt
-from app.genkit_flows.flow_decorator import genkit_flow
 
 # Import the supporting flows
 from .extract_job_requirements import JobRequirements, extractJobRequirements

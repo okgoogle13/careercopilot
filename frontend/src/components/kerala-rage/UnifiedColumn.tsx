@@ -8,16 +8,16 @@ interface UnifiedColumnProps {
   children?: React.ReactNode;
   className?: string;
   headerAction?: React.ReactNode;
-  tone?: 'neutral' | 'success'; 
+  tone?: 'neutral' | 'success';
   density?: 'cozy' | 'comfortable';
 }
 
 /**
  * UnifiedColumn (Stone)
- * 
+ *
  * A specialized "Stone" container for vertical content organization.
  * Used in Kanban boards, dashboards, and feeds.
- * 
+ *
  * Pattern Principles:
  * 1. Synchronous motion with SolidarityCard.
  * 2. Clear visual hierarchy for mission-level data.
@@ -57,8 +57,8 @@ export const UnifiedColumn: React.FC<UnifiedColumnProps> = ({
   return (
     <div
       className={cn(
-        "flex flex-col h-full min-w-[320px] max-w-[400px] bg-asphalt-black/50 rounded-stone border border-white/5 shadow-viscous",
-        tone === 'success' && "border-solidarity-green/20",
+        'flex flex-col h-full min-w-[320px] max-w-[400px] bg-asphalt-black/50 rounded-stone border border-white/5 shadow-viscous',
+        tone === 'success' && 'border-solidarity-green/20',
         className
       )}
     >
@@ -78,10 +78,10 @@ export const UnifiedColumn: React.FC<UnifiedColumnProps> = ({
       </div>
 
       {/* Content Area */}
-      <motion.div 
+      <motion.div
         layout
         {...motionProps}
-        className={cn("flex-1 overflow-y-auto custom-scrollbar", densityStyles[density])}
+        className={cn('flex-1 overflow-y-auto custom-scrollbar', densityStyles[density])}
       >
         {children}
       </motion.div>

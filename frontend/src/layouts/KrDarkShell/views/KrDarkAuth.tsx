@@ -4,7 +4,7 @@ import { SolidarityCard, ActionButton } from '../../../components/kerala-rage';
 
 /**
  * KrDarkAuth (Hi-Fi)
- * 
+ *
  * Secure entry to the Kerala Rage ecosystem.
  * Features atmospheric security motifs and federation typography.
  */
@@ -21,13 +21,13 @@ export const KrDarkAuth: React.FC = () => {
         className="w-full max-w-md relative"
       >
         {/* TODO[asset]: Authentication Shield Motif behind form (Z-1) */}
-        
+
         <SolidarityCard className="p-10 flex flex-col items-center gap-8 relative overflow-hidden">
           {/* Security Scanning Line (Atmospheric) */}
           {!shouldReduceMotion && (
-            <motion.div 
+            <motion.div
               animate={{ y: [0, 400, 0] }}
-              transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+              transition={{ duration: 4, repeat: Infinity, ease: 'linear' }}
               className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-ink-gold/20 to-transparent z-10 pointer-events-none"
             />
           )}
@@ -43,24 +43,32 @@ export const KrDarkAuth: React.FC = () => {
 
           <div className="w-full space-y-6">
             <div className="space-y-1">
-              <label className="font-mono text-[10px] uppercase text-paper-white/30 ml-2">ID_STRING</label>
-              <input 
-                type="text" 
-                placeholder="PROX_IDENTIFIER" 
+              <label className="font-mono text-[10px] uppercase text-paper-white/30 ml-2">
+                ID_STRING
+              </label>
+              <input
+                type="text"
+                placeholder="PROX_IDENTIFIER"
                 className="w-full bg-asphalt-black/50 border border-surface-KrDark-concrete-grey-high/20 rounded-stone px-6 py-4 font-mono text-sm text-paper-white focus:outline-none focus:border-ink-gold/40 transition-colors"
               />
             </div>
 
             <div className="space-y-1">
-              <label className="font-mono text-[10px] uppercase text-paper-white/30 ml-2">KEY_TOKEN</label>
-              <input 
-                type="password" 
-                placeholder="••••••••" 
+              <label className="font-mono text-[10px] uppercase text-paper-white/30 ml-2">
+                KEY_TOKEN
+              </label>
+              <input
+                type="password"
+                placeholder="••••••••"
                 className="w-full bg-asphalt-black/50 border border-surface-KrDark-concrete-grey-high/20 rounded-stone px-6 py-4 font-mono text-sm text-paper-white focus:outline-none focus:border-ink-gold/40 transition-colors"
               />
             </div>
 
-            <ActionButton variant="primary" label="ESTABLISH CONNECTION" className="w-full py-4 text-xs tracking-[0.2em]" />
+            <ActionButton
+              variant="primary"
+              label="ESTABLISH CONNECTION"
+              className="w-full py-4 text-xs tracking-[0.2em]"
+            />
           </div>
 
           <div className="pt-6 border-t border-surface-KrDark-concrete-grey-high/20 w-full text-center">
@@ -72,7 +80,7 @@ export const KrDarkAuth: React.FC = () => {
       </motion.div>
 
       {/* SECTION 2: Technical Footer */}
-      <motion.div 
+      <motion.div
         initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 10 }}
         animate={{ opacity: 0.3, y: 0 }}
         transition={{ delay: 1 }}

@@ -26,17 +26,17 @@ const USE_MOCK = import.meta.env?.VITE_USE_MOCK_API !== 'false';
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const getAuthToken = async () => {
-    // In dev mode with mock api enabled, return a dummy token
-    if (import.meta.env?.DEV && import.meta.env?.VITE_USE_MOCK_API !== 'false') {
-        return 'dev-token';
-    }
-    
-    // Get token from Firebase client
-    const user = auth.currentUser;
-    if (user) {
-        return await user.getIdToken();
-    }
-    return '';
+  // In dev mode with mock api enabled, return a dummy token
+  if (import.meta.env?.DEV && import.meta.env?.VITE_USE_MOCK_API !== 'false') {
+    return 'dev-token';
+  }
+
+  // Get token from Firebase client
+  const user = auth.currentUser;
+  if (user) {
+    return await user.getIdToken();
+  }
+  return '';
 };
 
 // Keys for syncEngine
@@ -106,7 +106,6 @@ export const mockApi = {
     _starData?: { situation: string; task: string; action: string; result: string }
   ): Promise<KSCResponse> {
     await delay(2000); // Longer delay for "AI generation"
-
 
     const newResponse: KSCResponse = {
       id: Date.now(),

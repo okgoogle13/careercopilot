@@ -50,7 +50,10 @@ describe('ApplicationCard Component', () => {
   it('highlights the current step', () => {
     render(
       <BrowserRouter>
-        <ApplicationCard {...defaultProps} currentStep={2} />
+        <ApplicationCard
+          {...defaultProps}
+          currentStep={2}
+        />
       </BrowserRouter>
     );
 

@@ -3,7 +3,7 @@ import { syncEngine } from '../lib/syncEngine';
 
 /**
  * useLocalSync Hook
- * 
+ *
  * Manages local-first data state with persistence in IndexedDB.
  * Handles loading, saving, and basic sync status tracking.
  */
@@ -35,35 +35,45 @@ export function useLocalSync<T>(key: string, initialData: T[]) {
   }, [key, initialData]);
 
   // Persist and update local state
-  const saveData = useCallback(async (newData: T[]) => {
-    try {
-      await syncEngine.set(key, newData);
-      setData(newData);
-    } catch (err) {
-      console.error(`[useLocalSync] Failed to save ${key}:`, err);
-      setError(err instanceof Error ? err : new Error(String(err)));
-    }
-  }, [key]);
+  const saveData = useCallback(
+    async (newData: T[]) => {
+      try {
+        await syncEngine.set(key, newData);
+        setData(newData);
+      } catch (err) {
+        console.error(`[useLocalSync] Failed to save ${key}:`, err);
+        setError(err instanceof Error ? err : new Error(String(err)));
+      }
+    },
+    [key]
+  );
 
   // Add item
-  const addItem = useCallback(async (item: T) => {
-    const newData = [...data, item];
-    await saveData(newData);
-  }, [data, saveData]);
+  const addItem = useCallback(
+    async (item: T) => {
+      const newData = [...data, item];
+      await saveData(newData);
+    },
+    [data, saveData]
+  );
 
   // Update item (assumes items have an 'id')
-  const updateItem = useCallback(async (id: string | number, updates: Partial<T>) => {
-    const newData = data.map((item: any) => 
-      item.id === id ? { ...item, ...updates } : item
-    );
-    await saveData(newData);
-  }, [data, saveData]);
+  const updateItem = useCallback(
+    async (id: string | number, updates: Partial<T>) => {
+      const newData = data.map((item: any) => (item.id === id ? { ...item, ...updates } : item));
+      await saveData(newData);
+    },
+    [data, saveData]
+  );
 
   // Delete item
-  const deleteItem = useCallback(async (id: string | number) => {
-    const newData = data.filter((item: any) => item.id !== id);
-    await saveData(newData);
-  }, [data, saveData]);
+  const deleteItem = useCallback(
+    async (id: string | number) => {
+      const newData = data.filter((item: any) => item.id !== id);
+      await saveData(newData);
+    },
+    [data, saveData]
+  );
 
   // Clear all data for this key
   const clearData = useCallback(async () => {

@@ -7,7 +7,11 @@ import { Cabinet } from '../Cabinet';
 describe('Cabinet', () => {
   it('does not render when closed', () => {
     render(
-      <Cabinet open={false} onClose={() => undefined} title="Draft details">
+      <Cabinet
+        open={false}
+        onClose={() => undefined}
+        title="Draft details"
+      >
         <p>Body</p>
       </Cabinet>
     );
@@ -17,7 +21,11 @@ describe('Cabinet', () => {
 
   it('renders title and content when open', () => {
     render(
-      <Cabinet open onClose={() => undefined} title="Draft details">
+      <Cabinet
+        open
+        onClose={() => undefined}
+        title="Draft details"
+      >
         <p>Body content</p>
       </Cabinet>
     );
@@ -31,7 +39,11 @@ describe('Cabinet', () => {
     const onClose = jest.fn();
 
     render(
-      <Cabinet open onClose={onClose} title="Closable modal">
+      <Cabinet
+        open
+        onClose={onClose}
+        title="Closable modal"
+      >
         <p>Body content</p>
       </Cabinet>
     );

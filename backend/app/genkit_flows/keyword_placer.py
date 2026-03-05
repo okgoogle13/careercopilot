@@ -2,8 +2,7 @@ from typing import List, cast
 
 from pydantic import BaseModel, Field
 
-from app.core.genkit_init import get_model
-from app.genkit_flows.flow_decorator import simple_genkit_flow
+from app.core.genkit_init import get_model, simple_genkit_flow
 
 # --- Pydantic Schemas for Structured Output ---
 
@@ -67,7 +66,8 @@ def suggestKeywordPlacement(
     """
 
     # Model availability is guaranteed by the decorator
-    model = get_model()  # type: ignore[no-untyped-call]
+    model = get_model()
+    assert model is not None, "Genkit model not initialized"
 
     response = model.generate(
         prompt=prompt,

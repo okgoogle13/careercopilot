@@ -1,25 +1,24 @@
-
 import React from 'react';
 import { cn } from '../../lib/utils';
 
 export interface StoneProps extends React.HTMLAttributes<HTMLDivElement> {
-    /**
-     * Elevation level.
-     * - Flat: No shadow, border only
-     * - Raised: Standard shadow
-     * - Floating: Deep shadow for modals/popovers
-     */
-    elevation?: 'flat' | 'raised' | 'floating';
+  /**
+   * Elevation level.
+   * - Flat: No shadow, border only
+   * - Raised: Standard shadow
+   * - Floating: Deep shadow for modals/popovers
+   */
+  elevation?: 'flat' | 'raised' | 'floating';
 
-    /**
-     * Optional header content.
-     */
-    header?: React.ReactNode;
+  /**
+   * Optional header content.
+   */
+  header?: React.ReactNode;
 
-    /**
-     * Optional footer content.
-     */
-    footer?: React.ReactNode;
+  /**
+   * Optional footer content.
+   */
+  footer?: React.ReactNode;
 }
 
 /**
@@ -36,61 +35,58 @@ export interface StoneProps extends React.HTMLAttributes<HTMLDivElement> {
  * 5. Elevation variants with semantic shadows
  */
 export const Stone = React.forwardRef<HTMLDivElement, StoneProps>(
-    ({ className, elevation = 'raised', header, footer, children, ...props }, ref) => {
+  ({ className, elevation = 'raised', header, footer, children, ...props }, ref) => {
+    const elevations = {
+      flat: 'shadow-none',
+      raised: '0 4px 16px rgba(0, 0, 0, 0.25)',
+      floating: '0 12px 32px rgba(0, 0, 0, 0.35)',
+    };
 
-        const elevations = {
-            flat: 'shadow-none',
-            raised: '0 4px 16px rgba(0, 0, 0, 0.25)',
-            floating: '0 12px 32px rgba(0, 0, 0, 0.35)',
-        };
+    return (
+      <div
+        ref={ref}
+        style={{
+          backgroundColor: 'var(--sys-color-charcoalBackground-steps-2)',
+          borderRadius: '16px 4px 12px 24px', // Stone archetype asymmetric
+          borderColor: 'var(--sys-color-concreteGrey-steps-2)',
+          borderWidth: '1px',
+          borderStyle: 'solid',
+          boxShadow: elevations[elevation],
+        }}
+        className={cn(
+          'relative overflow-hidden transition-all duration-300 backdrop-blur-xl',
+          className
+        )}
+        {...props}
+      >
+        {header && (
+          <div
+            style={{
+              backgroundColor: 'var(--sys-color-charcoalBackground-steps-1)',
+              borderBottomColor: 'var(--sys-color-concreteGrey-steps-1)',
+            }}
+            className="px-6 py-4 border-b"
+          >
+            {header}
+          </div>
+        )}
 
-        return (
-            <div
-                ref={ref}
-                style={{
-                    backgroundColor: 'var(--sys-color-charcoalBackground-steps-2)',
-                    borderRadius: '16px 4px 12px 24px', // Stone archetype asymmetric
-                    borderColor: 'var(--sys-color-concreteGrey-steps-2)',
-                    borderWidth: '1px',
-                    borderStyle: 'solid',
-                    boxShadow: elevations[elevation],
-                }}
-                className={cn(
-                    'relative overflow-hidden transition-all duration-300 backdrop-blur-xl',
-                    className
-                )}
-                {...props}
-            >
-                {header && (
-                    <div
-                        style={{
-                            backgroundColor: 'var(--sys-color-charcoalBackground-steps-1)',
-                            borderBottomColor: 'var(--sys-color-concreteGrey-steps-1)',
-                        }}
-                        className="px-6 py-4 border-b"
-                    >
-                        {header}
-                    </div>
-                )}
+        <div className="p-6">{children}</div>
 
-                <div className="p-6">
-                    {children}
-                </div>
-
-                {footer && (
-                    <div
-                        style={{
-                            backgroundColor: 'var(--sys-color-charcoalBackground-steps-0)',
-                            borderTopColor: 'var(--sys-color-concreteGrey-steps-1)',
-                        }}
-                        className="px-6 py-4 border-t"
-                    >
-                        {footer}
-                    </div>
-                )}
-            </div>
-        );
-    }
+        {footer && (
+          <div
+            style={{
+              backgroundColor: 'var(--sys-color-charcoalBackground-steps-0)',
+              borderTopColor: 'var(--sys-color-concreteGrey-steps-1)',
+            }}
+            className="px-6 py-4 border-t"
+          >
+            {footer}
+          </div>
+        )}
+      </div>
+    );
+  }
 );
 
-Stone.displayName = "Stone";
+Stone.displayName = 'Stone';

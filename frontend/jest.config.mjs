@@ -5,7 +5,10 @@ export default {
   testTimeout: 30000,
   rootDir: '.',
   roots: ['<rootDir>/src'],
-  testMatch: ['<rootDir>/src/**/__tests__/**/*.(test|spec).(js|jsx|ts|tsx)', '<rootDir>/src/**/*.(test|spec).(js|jsx|ts|tsx)'],
+  testMatch: [
+    '<rootDir>/src/**/__tests__/**/*.(test|spec).(js|jsx|ts|tsx)',
+    '<rootDir>/src/**/*.(test|spec).(js|jsx|ts|tsx)',
+  ],
   moduleDirectories: ['node_modules', 'src'],
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
@@ -32,10 +35,7 @@ export default {
   ],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
   collectCoverage: false,
-  testPathIgnorePatterns: [
-    '<rootDir>/node_modules/',
-    '<rootDir>/src/components_OLD/',
-  ],
+  testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/src/components_OLD/'],
   collectCoverageFrom: [
     'src/**/*.{js,jsx,ts,tsx}',
     '!src/**/*.d.ts',

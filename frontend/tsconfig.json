@@ -2,11 +2,7 @@
   "compilerOptions": {
     "target": "ES2020",
     "useDefineForClassFields": true,
-    "lib": [
-      "ES2020",
-      "DOM",
-      "DOM.Iterable"
-    ],
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
     "moduleResolution": "bundler",
@@ -21,27 +17,12 @@
     "esModuleInterop": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "./src/*"
-      ],
-      "@careercopilot/ui": [
-        "./packages/ui/src"
-      ]
+      "@/*": ["./src/*"],
+      "@careercopilot/ui": ["./packages/ui/src"]
     },
-    "types": [
-      "node",
-      "jest",
-      "vite/client"
-    ]
+    "types": ["node", "jest", "vite/client"]
   },
-  "include": [
-    "src",
-    "**/*.ts",
-    "**/*.tsx",
-    "src/main.tsx",
-    "src/images.d.ts",
-    "src/vite-env.d.ts"
-  ],
+  "include": ["src", "**/*.ts", "**/*.tsx", "src/main.tsx", "src/images.d.ts", "src/vite-env.d.ts"],
   "exclude": [
     "node_modules",
     "dist",

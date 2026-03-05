@@ -7,7 +7,10 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 // Configuration
-const MANIFEST_PATH = join(__dirname, '../../public/assets/kerala-rage-kr-solidarity-manifest.json');
+const MANIFEST_PATH = join(
+  __dirname,
+  '../../public/assets/kerala-rage-kr-solidarity-manifest.json'
+);
 const OUTPUT_PATH = join(__dirname, '../../public/assets/kr-solidarity-hero-registry.json');
 const REGISTRY_VERSION = '2.0.0';
 
@@ -18,30 +21,30 @@ const M3_EXPRESSIVE_BEZIER = [0.34, 1.56, 0.64, 1];
 const TYPOGRAPHY_STATES = {
   pressure_state: {
     wght: 900,
-    wdth: 75
+    wdth: 75,
   },
   solidarity_state: {
     wght: 800,
-    wdth: 120
+    wdth: 120,
   },
   melancholy_state: {
     wght: 475,
-    wdth: 97.5
-  }
+    wdth: 97.5,
+  },
 };
 
 // Motion configuration
 const MOTION_CONFIG = {
   bezier: M3_EXPRESSIVE_BEZIER,
   scroll_wght_range: [300, 800],
-  transition_duration: 400
+  transition_duration: 400,
 };
 
 /**
  * Get assets by layer from manifest
  */
 function getAssetsByLayer(manifest, layer) {
-  return manifest.assets.filter(asset => asset.layer === layer);
+  return manifest.assets.filter((asset) => asset.layer === layer);
 }
 
 /**
@@ -58,13 +61,13 @@ function getRandomAssetId(assets) {
  */
 function generateHeroCompositions(manifest) {
   const compositions = [];
-  
+
   // Get assets by layer
   const spiritualAssets = getAssetsByLayer(manifest, 'spiritual');
   const resistanceAssets = getAssetsByLayer(manifest, 'resistance');
   const atmosphericAssets = getAssetsByLayer(manifest, 'atmospheric');
   const substrateAssets = getAssetsByLayer(manifest, 'substrate');
-  
+
   // 1. Devotional Anchor Heroes (one for each spiritual asset)
   spiritualAssets.slice(0, 2).forEach((spiritualAsset, idx) => {
     compositions.push({
@@ -78,7 +81,7 @@ function generateHeroCompositions(manifest) {
           z_index: 1,
           opacity: 0.4,
           blend_mode: 'normal',
-          position: 'cover'
+          position: 'cover',
         },
         {
           type: 'atmospheric',
@@ -86,7 +89,7 @@ function generateHeroCompositions(manifest) {
           z_index: 2,
           opacity: 0.3,
           blend_mode: 'overlay',
-          position: 'center'
+          position: 'center',
         },
         {
           type: 'spiritual',
@@ -94,21 +97,21 @@ function generateHeroCompositions(manifest) {
           z_index: 3,
           opacity: 1,
           blend_mode: 'normal',
-          position: 'center'
-        }
+          position: 'center',
+        },
       ],
       typography: {
         headline: 'Solidarity Across Borders',
         supporting: 'First Nations, Kerala, Global Resistance',
-        ...TYPOGRAPHY_STATES
+        ...TYPOGRAPHY_STATES,
       },
-      motion: MOTION_CONFIG
+      motion: MOTION_CONFIG,
     });
   });
-  
+
   // 2. Resistance Portrait Heroes (one for each resistance portrait)
   resistanceAssets
-    .filter(asset => asset.category === 'portrait')
+    .filter((asset) => asset.category === 'portrait')
     .slice(0, 3)
     .forEach((resistanceAsset, idx) => {
       compositions.push({
@@ -122,7 +125,7 @@ function generateHeroCompositions(manifest) {
             z_index: 1,
             opacity: 0.5,
             blend_mode: 'normal',
-            position: 'cover'
+            position: 'cover',
           },
           {
             type: 'atmospheric',
@@ -130,7 +133,7 @@ function generateHeroCompositions(manifest) {
             z_index: 2,
             opacity: 0.2,
             blend_mode: 'multiply',
-            position: 'center'
+            position: 'center',
           },
           {
             type: 'resistance',
@@ -138,23 +141,23 @@ function generateHeroCompositions(manifest) {
             z_index: 3,
             opacity: 1,
             blend_mode: 'normal',
-            position: 'center'
-          }
+            position: 'center',
+          },
         ],
         typography: {
           headline: 'The Rage Never Dies',
           supporting: 'Legacy of Resistance',
-          ...TYPOGRAPHY_STATES
+          ...TYPOGRAPHY_STATES,
         },
-        motion: MOTION_CONFIG
+        motion: MOTION_CONFIG,
       });
     });
-  
+
   // 3. Layered Solidarity Hero (multi-layer composite)
-  const paintSplashAsset = manifest.assets.find(a => 
+  const paintSplashAsset = manifest.assets.find((a) =>
     a.name.toLowerCase().includes('paint splash')
   );
-  
+
   compositions.push({
     id: 'layered-solidarity-hero',
     name: 'Layered Solidarity Hero',
@@ -166,7 +169,7 @@ function generateHeroCompositions(manifest) {
         z_index: 1,
         opacity: 0.6,
         blend_mode: 'normal',
-        position: 'cover'
+        position: 'cover',
       },
       {
         type: 'atmospheric',
@@ -174,7 +177,7 @@ function generateHeroCompositions(manifest) {
         z_index: 2,
         opacity: 0.25,
         blend_mode: 'screen',
-        position: 'center'
+        position: 'center',
       },
       {
         type: 'resistance',
@@ -182,7 +185,7 @@ function generateHeroCompositions(manifest) {
         z_index: 3,
         opacity: 0.7,
         blend_mode: 'normal',
-        position: 'left'
+        position: 'left',
       },
       {
         type: 'atmospheric',
@@ -190,17 +193,17 @@ function generateHeroCompositions(manifest) {
         z_index: 4,
         opacity: 0.3,
         blend_mode: 'color-dodge',
-        position: 'right'
-      }
+        position: 'right',
+      },
     ],
     typography: {
       headline: 'Intersectional Resistance',
       supporting: 'Solidarity is Our Weapon',
-      ...TYPOGRAPHY_STATES
+      ...TYPOGRAPHY_STATES,
     },
-    motion: MOTION_CONFIG
+    motion: MOTION_CONFIG,
   });
-  
+
   // 4. Cultural Symbol Heroes
   const culturalAssets = getAssetsByLayer(manifest, 'cultural');
   culturalAssets.slice(0, 2).forEach((culturalAsset, idx) => {
@@ -215,7 +218,7 @@ function generateHeroCompositions(manifest) {
           z_index: 1,
           opacity: 0.45,
           blend_mode: 'normal',
-          position: 'cover'
+          position: 'cover',
         },
         {
           type: 'atmospheric',
@@ -223,7 +226,7 @@ function generateHeroCompositions(manifest) {
           z_index: 2,
           opacity: 0.35,
           blend_mode: 'overlay',
-          position: 'center'
+          position: 'center',
         },
         {
           type: 'cultural',
@@ -231,18 +234,18 @@ function generateHeroCompositions(manifest) {
           z_index: 3,
           opacity: 1,
           blend_mode: 'normal',
-          position: 'center'
-        }
+          position: 'center',
+        },
       ],
       typography: {
         headline: 'Cultural Roots, Global Struggle',
         supporting: 'Heritage as Resistance',
-        ...TYPOGRAPHY_STATES
+        ...TYPOGRAPHY_STATES,
       },
-      motion: MOTION_CONFIG
+      motion: MOTION_CONFIG,
     });
   });
-  
+
   return compositions;
 }
 
@@ -251,19 +254,19 @@ function generateHeroCompositions(manifest) {
  */
 function validateComposition(composition, manifest) {
   const warnings = [];
-  
+
   for (let i = 0; i < composition.layers.length; i++) {
     const layer1 = composition.layers[i];
-    
+
     for (let j = i + 1; j < composition.layers.length; j++) {
       const layer2 = composition.layers[j];
-      
+
       // Find asset in manifest
-      const asset1 = manifest.assets.find(a => a.id === layer1.asset_id);
-      const asset2 = manifest.assets.find(a => a.id === layer2.asset_id);
-      
+      const asset1 = manifest.assets.find((a) => a.id === layer1.asset_id);
+      const asset2 = manifest.assets.find((a) => a.id === layer2.asset_id);
+
       if (!asset1 || !asset2) continue;
-      
+
       // Check compatibility
       const cannotOverlay = asset1.layering_compatibility?.cannot_overlay_with || [];
       if (cannotOverlay.includes(asset2.layer)) {
@@ -273,7 +276,7 @@ function validateComposition(composition, manifest) {
       }
     }
   }
-  
+
   return warnings;
 }
 
@@ -282,7 +285,7 @@ function validateComposition(composition, manifest) {
  */
 function generateHeroRegistry() {
   console.log('🎨 Generating hero registry from manifest...');
-  
+
   // Read manifest
   let manifest;
   try {
@@ -293,26 +296,26 @@ function generateHeroRegistry() {
     console.error('   Run "npm run kr:manifest" first to generate the manifest.');
     process.exit(1);
   }
-  
+
   console.log(`📊 Loaded manifest v${manifest.version} with ${manifest.total_assets} assets`);
-  
+
   // Generate compositions
   const compositions = generateHeroCompositions(manifest);
-  
+
   console.log(`🎭 Generated ${compositions.length} hero compositions`);
-  
+
   // Validate compositions
   let allWarnings = [];
-  compositions.forEach(comp => {
+  compositions.forEach((comp) => {
     const warnings = validateComposition(comp, manifest);
     allWarnings = allWarnings.concat(warnings);
   });
-  
+
   if (allWarnings.length > 0) {
     console.warn('⚠️  Layer compatibility warnings:');
-    allWarnings.forEach(w => console.warn(`   ${w}`));
+    allWarnings.forEach((w) => console.warn(`   ${w}`));
   }
-  
+
   // Build registry
   const registry = {
     version: REGISTRY_VERSION,
@@ -320,12 +323,12 @@ function generateHeroRegistry() {
     last_updated: new Date().toISOString().split('T')[0],
     manifest_version: manifest.version,
     m3_expressive_bezier: M3_EXPRESSIVE_BEZIER,
-    compositions
+    compositions,
   };
-  
+
   // Write to file
   writeFileSync(OUTPUT_PATH, JSON.stringify(registry, null, 2));
-  
+
   console.log(`✅ Hero registry generated: ${OUTPUT_PATH}`);
   console.log(`🎨 Total compositions: ${compositions.length}`);
 }

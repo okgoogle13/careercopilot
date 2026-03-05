@@ -9,9 +9,9 @@ interface KanbanBoardProps {
 
 /**
  * KanbanBoard
- * 
+ *
  * A top-level container for managing multiple UnifiedColumns.
- * 
+ *
  * @mission Wave 3 - Complex layout orchestration.
  */
 export const KanbanBoard: React.FC<KanbanBoardProps> = ({
@@ -22,9 +22,9 @@ export const KanbanBoard: React.FC<KanbanBoardProps> = ({
   return (
     <div
       className={cn(
-        "flex h-full w-full gap-6 p-6 scroll-smooth",
-        horizontalScroll ? "overflow-x-auto overflow-y-hidden" : "flex-wrap overflow-y-auto",
-        "custom-scrollbar",
+        'flex h-full w-full gap-6 p-6 scroll-smooth',
+        horizontalScroll ? 'overflow-x-auto overflow-y-hidden' : 'flex-wrap overflow-y-auto',
+        'custom-scrollbar',
         className
       )}
     >

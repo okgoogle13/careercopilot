@@ -24,8 +24,7 @@ from app.core.enhanced_ai_error_handling import (
     create_fallback_strategy,
     enhanced_ai_handler,
 )
-from app.core.genkit_init import get_model
-from app.genkit_flows.flow_decorator import genkit_flow
+from app.core.genkit_init import genkit_flow, get_model
 from app.models.asset_library_schema import VoiceProfile
 from app.models.ingestion_schemas import SuggestedTags
 from app.models.master_profile_schema import (
@@ -452,7 +451,9 @@ class SkillsExtractionResult(BaseModel):
     technical: List[str] = Field(default_factory=list, description="Technical skills")
     tools: List[str] = Field(default_factory=list, description="Software and tools")
     soft: List[str] = Field(default_factory=list, description="Soft/interpersonal skills")
-    methodologies: List[str] = Field(default_factory=list, description="Methodologies and frameworks")
+    methodologies: List[str] = Field(
+        default_factory=list, description="Methodologies and frameworks"
+    )
 
 
 @genkit_flow(output_schema=SkillsExtractionResult, require_model=True)

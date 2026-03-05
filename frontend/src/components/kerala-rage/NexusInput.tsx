@@ -12,10 +12,10 @@ export interface NexusInputProps extends React.InputHTMLAttributes<HTMLInputElem
 
 /**
  * NexusInput (Pebble)
- * 
+ *
  * Unified input pattern for the Kerala Rage tactical interface.
  * Implements "Pebble" rounding with interactive focus states.
- * 
+ *
  * @mission Technical precision, accessible labeling, and fluid interaction.
  */
 export const NexusInput = React.forwardRef<HTMLInputElement, NexusInputProps>(
@@ -32,9 +32,9 @@ export const NexusInput = React.forwardRef<HTMLInputElement, NexusInputProps>(
       <div className="relative w-full group">
         {/* Input Container */}
         <motion.div
-           className={cn(
-            "relative flex items-center w-full",
-            "transition-all duration-300 ease-viscous-breeze"
+          className={cn(
+            'relative flex items-center w-full',
+            'transition-all duration-300 ease-viscous-breeze'
           )}
           {...motionProps}
         >
@@ -53,20 +53,21 @@ export const NexusInput = React.forwardRef<HTMLInputElement, NexusInputProps>(
             aria-label={label}
             className={cn(
               // Base Styles
-              "w-full bg-asphalt-black text-paper-white font-field-note",
-              "border-2 border-white/10 rounded-pebble",
-              "placeholder:text-white/30",
-              
+              'w-full bg-asphalt-black text-paper-white font-field-note',
+              'border-2 border-white/10 rounded-pebble',
+              'placeholder:text-white/30',
+
               // Spacing
-              "py-3",
-              icon === 'search' ? "pl-12 pr-4" : "px-6",
-              
+              'py-3',
+              icon === 'search' ? 'pl-12 pr-4' : 'px-6',
+
               // Focus State (Gold Glow)
-              "focus:outline-none focus:border-ink-gold focus:shadow-[0_0_15px_rgba(218,246,116,0.15)]",
-              
+              'focus:outline-none focus:border-ink-gold focus:shadow-[0_0_15px_rgba(218,246,116,0.15)]',
+
               // Error State
-              error && "border-solidarity-red focus:border-solidarity-red focus:shadow-[0_0_15px_rgba(241,71,20,0.15)]",
-              
+              error &&
+                'border-solidarity-red focus:border-solidarity-red focus:shadow-[0_0_15px_rgba(241,71,20,0.15)]',
+
               className
             )}
             style={{

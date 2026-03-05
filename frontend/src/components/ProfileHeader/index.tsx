@@ -23,7 +23,7 @@ export interface ProfileHeaderProps {
 
 /**
  * ProfileHeader
- * 
+ *
  * High-impact identity header for Kerala Rage.
  * Features screenprint-textured avatars and high-contrast typography.
  */
@@ -32,10 +32,13 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({
   bio,
   avatarUrl,
   identityTags,
-  landAcknowledgment = "Wurundjeri Woi-wurrung Country"
+  landAcknowledgment = 'Wurundjeri Woi-wurrung Country',
 }) => {
   return (
-    <header className="p-12 bg-charcoal-100 border-b border-blueprint-grey/20 relative overflow-hidden" role="banner">
+    <header
+      className="p-12 bg-charcoal-100 border-b border-blueprint-grey/20 relative overflow-hidden"
+      role="banner"
+    >
       {/* Solidarity Watermark */}
       <div className="absolute top-4 right-8 text-[10px] font-jetbrains-mono text-blueprint-grey/40 uppercase tracking-[0.4em]">
         Acknowledging: {landAcknowledgment}
@@ -55,9 +58,9 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({
               className="w-full h-full object-cover grayscale opacity-90 mix-blend-luminosity"
             />
           ) : (
-             <div className="w-full h-full flex items-center justify-center bg-charcoal font-solidarity text-ink-gold text-4xl">
-               {name.charAt(0)}
-             </div>
+            <div className="w-full h-full flex items-center justify-center bg-charcoal font-solidarity text-ink-gold text-4xl">
+              {name.charAt(0)}
+            </div>
           )}
           {/* Grain texture overlay */}
           <div className="absolute inset-0 opacity-20 pointer-events-none bg-[url('/assets/noise-texture.png')] mix-blend-overlay" />
@@ -65,19 +68,17 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({
 
         <div className="flex-1 flex flex-col gap-4 text-center md:text-left">
           <motion.h1
-             initial={{ x: -20, opacity: 0 }}
-             animate={{ x: 0, opacity: 1 }}
-             className="text-[84px] leading-none font-solidarity-900 text-ink-gold tracking-tighter uppercase"
+            initial={{ x: -20, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            className="text-[84px] leading-none font-solidarity-900 text-ink-gold tracking-tighter uppercase"
           >
             {name}
           </motion.h1>
-          
-          <p className="text-2xl font-medium text-signal-green italic tracking-tight">
-            {bio}
-          </p>
+
+          <p className="text-2xl font-medium text-signal-green italic tracking-tight">{bio}</p>
 
           <div className="flex gap-4 flex-wrap mt-4 justify-center md:justify-start">
-            {identityTags.map(tag => (
+            {identityTags.map((tag) => (
               <motion.span
                 key={tag}
                 whileHover={{ scale: 1.1, skewX: -12 }}

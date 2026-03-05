@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { cn } from '../../lib/utils';
 
@@ -8,7 +7,7 @@ export interface SeparatorProps extends React.HTMLAttributes<HTMLDivElement> {
    * @default 'horizontal'
    */
   orientation?: 'horizontal' | 'vertical';
-  
+
   /**
    * Whether the separator is purely decorative.
    * If true, it is hidden from assistive technologies.
@@ -25,35 +24,29 @@ export interface SeparatorProps extends React.HTMLAttributes<HTMLDivElement> {
 
 /**
  * **THE SEPARATOR** (Stone Gap)
- * 
+ *
  * A high-stasis structural division element.
  * Maps to the 'Stone' aesthetic with subtle transparency and [DEPRECATED_STYLE] ease.
  */
 export const Separator = React.forwardRef<HTMLDivElement, SeparatorProps>(
   (
-    {
-      className,
-      orientation = 'horizontal',
-      decorative = true,
-      mode = 'KrDark',
-      ...props
-    },
+    { className, orientation = 'horizontal', decorative = true, mode = 'KrDark', ...props },
     ref
   ) => {
     // Base structural classes
-    const baseStyles = "shrink-0 transition-colors duration-medium ease-settle";
+    const baseStyles = 'shrink-0 transition-colors duration-medium ease-settle';
 
     // Orientation-specific sizing
     const orientationStyles = {
-      horizontal: "h-[1px] w-full",
-      vertical: "h-full w-[1px]",
+      horizontal: 'h-[1px] w-full',
+      vertical: 'h-full w-[1px]',
     };
 
     // Mode-specific coloring (The Skin)
     // Using the same white/10 (dark) and black/10 (light) patterns from Stone/Pebble
     const modes = {
-      KrDark: "bg-white/10",
-      KrLight: "bg-black/10 shadow-sm",
+      KrDark: 'bg-white/10',
+      KrLight: 'bg-black/10 shadow-sm',
     };
 
     return (
@@ -61,12 +54,7 @@ export const Separator = React.forwardRef<HTMLDivElement, SeparatorProps>(
         ref={ref}
         role={decorative ? undefined : 'separator'}
         aria-orientation={decorative ? undefined : orientation}
-        className={cn(
-          baseStyles,
-          orientationStyles[orientation],
-          modes[mode],
-          className
-        )}
+        className={cn(baseStyles, orientationStyles[orientation], modes[mode], className)}
         {...props}
       />
     );

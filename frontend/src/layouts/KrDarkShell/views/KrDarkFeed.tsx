@@ -4,7 +4,7 @@ import { SolidarityCard, ActionButton, ManifestoSlab } from '../../../components
 
 /**
  * KrDarkFeed (Hi-Fi)
- * 
+ *
  * Strategic opportunity broadcast stream.
  * Features growth motifs, tactical result cards, and match-score pulse logic.
  * Standardized on SolidarityCard and ActionButton for ecosystem cohesion.
@@ -13,30 +13,30 @@ export const KrDarkFeed: React.FC = () => {
   const shouldReduceMotion = useReducedMotion() ?? false;
 
   const feed = [
-    { 
-      id: 'OPP_01', 
-      title: 'Infrastructure Strategist', 
-      company: 'Collective Reach', 
+    {
+      id: 'OPP_01',
+      title: 'Infrastructure Strategist',
+      company: 'Collective Reach',
       timestamp: '2m ago',
       match: 98,
-      desc: 'Coordinate the deployment of essential substrate across the Northcote sector. High-stacy involvement required.'
+      desc: 'Coordinate the deployment of essential substrate across the Northcote sector. High-stacy involvement required.',
     },
-    { 
-      id: 'OPP_02', 
-      title: 'Data Architect', 
-      company: 'Archive Prime', 
+    {
+      id: 'OPP_02',
+      title: 'Data Architect',
+      company: 'Archive Prime',
       timestamp: '15m ago',
       match: 94,
-      desc: 'Audit and consolidate legacy records into the active substrate. Requires mastery in extraction tactics.'
+      desc: 'Audit and consolidate legacy records into the active substrate. Requires mastery in extraction tactics.',
     },
-    { 
-      id: 'OPP_03', 
-      title: 'Security Lead', 
-      company: 'Sentry Core', 
+    {
+      id: 'OPP_03',
+      title: 'Security Lead',
+      company: 'Sentry Core',
       timestamp: '1h ago',
       match: 89,
-      desc: 'Defend the collective perimeter against lower-tier probes. Direct action protocol authorized.'
-    }
+      desc: 'Defend the collective perimeter against lower-tier probes. Direct action protocol authorized.',
+    },
   ];
 
   return (
@@ -48,14 +48,16 @@ export const KrDarkFeed: React.FC = () => {
         transition={{ duration: 0.6 }}
         className="flex justify-between items-end"
       >
-        <ManifestoSlab 
+        <ManifestoSlab
           title="Opportunity Feed"
           subtitle="Strategic broadcast of mission-critical roles."
           className="w-full"
         />
         <div className="flex items-center gap-3 pb-4">
-           <div className="w-2 h-2 rounded-full bg-ink-gold animate-pulse shadow-ink-glow" />
-           <span className="font-mono text-[9px] uppercase tracking-[0.4em] text-paper-white/30">Live_Broadcast</span>
+          <div className="w-2 h-2 rounded-full bg-ink-gold animate-pulse shadow-ink-glow" />
+          <span className="font-mono text-[9px] uppercase tracking-[0.4em] text-paper-white/30">
+            Live_Broadcast
+          </span>
         </div>
       </motion.div>
 
@@ -66,16 +68,16 @@ export const KrDarkFeed: React.FC = () => {
             key={item.id}
             initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.2 + (idx * 0.1), duration: 0.6 }}
+            transition={{ delay: 0.2 + idx * 0.1, duration: 0.6 }}
           >
             <SolidarityCard className="p-10 group relative border-surface-KrDark-concrete-grey-high/20 hover:border-ink-gold/20 transition-all duration-500 overflow-hidden">
               {/* TODO[asset]: Growth Motif overlay (Z-1, 5% opacity) */}
-              
+
               <div className="flex flex-col md:flex-row gap-10 relative z-10">
                 {/* Visual Anchor */}
                 <div className="shrink-0 flex items-center justify-center">
                   <div className="w-16 h-16 rounded-full border border-surface-KrDark-concrete-grey-high/20 bg-asphalt-black flex items-center justify-center group-hover:border-ink-gold/30 transition-colors">
-                     <span className="font-mono text-[10px] text-paper-white/20">{item.match}%</span>
+                    <span className="font-mono text-[10px] text-paper-white/20">{item.match}%</span>
                   </div>
                 </div>
 
@@ -91,7 +93,9 @@ export const KrDarkFeed: React.FC = () => {
                       </p>
                     </div>
                     <div className="text-right">
-                       <span className="font-mono text-[8px] text-paper-white/20 uppercase">ID: {item.id}</span>
+                      <span className="font-mono text-[8px] text-paper-white/20 uppercase">
+                        ID: {item.id}
+                      </span>
                     </div>
                   </div>
 
@@ -100,8 +104,16 @@ export const KrDarkFeed: React.FC = () => {
                   </p>
 
                   <div className="flex gap-4 pt-6 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-2 group-hover:translate-y-0">
-                    <ActionButton variant="secondary" label="DISMISS" className="px-8 py-3 text-[10px] tracking-widest" />
-                    <ActionButton variant="primary" label="INVESTIGATE" className="px-14 py-3 text-[10px] tracking-[0.2em] shadow-viscous" />
+                    <ActionButton
+                      variant="secondary"
+                      label="DISMISS"
+                      className="px-8 py-3 text-[10px] tracking-widest"
+                    />
+                    <ActionButton
+                      variant="primary"
+                      label="INVESTIGATE"
+                      className="px-14 py-3 text-[10px] tracking-[0.2em] shadow-viscous"
+                    />
                   </div>
                 </div>
               </div>
@@ -114,14 +126,14 @@ export const KrDarkFeed: React.FC = () => {
       </div>
 
       {/* SECTION 3: Stream Metadata */}
-      <motion.div 
+      <motion.div
         initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 10 }}
         animate={{ opacity: 0.2, y: 0 }}
         transition={{ delay: 1.5 }}
         className="mt-12 text-center"
       >
         <span className="font-mono text-[8px] uppercase tracking-tighter text-paper-white/40">
-           Showing 3 of 152 tactical matches // Filter: NORTHCOTE_PR_7
+          Showing 3 of 152 tactical matches // Filter: NORTHCOTE_PR_7
         </span>
       </motion.div>
     </div>

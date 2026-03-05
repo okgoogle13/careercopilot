@@ -11,8 +11,10 @@ def test_gap_hunter_happy_path(monkeypatch):
     """Missing skills with vector matches should produce evidence and strategy advice."""
     monkeypatch.setattr(
         module,
-        "model",
-        SimpleNamespace(generate_content=lambda prompt: SimpleNamespace(text="Skill1, Skill2")),
+        "_get_generation_model",
+        lambda: SimpleNamespace(
+            generate_content=lambda prompt: SimpleNamespace(text="Skill1, Skill2")
+        ),
     )
     vector_store = SimpleNamespace(
         query_similar=lambda query, n_results=2: [
@@ -32,8 +34,8 @@ def test_gap_hunter_with_no_gaps(monkeypatch):
     """Empty model output should produce the no-gap fallback."""
     monkeypatch.setattr(
         module,
-        "model",
-        SimpleNamespace(generate_content=lambda prompt: SimpleNamespace(text="")),
+        "_get_generation_model",
+        lambda: SimpleNamespace(generate_content=lambda prompt: SimpleNamespace(text="")),
     )
     monkeypatch.setattr(
         module, "VectorStore", lambda: SimpleNamespace(query_similar=lambda *args, **kwargs: [])
@@ -50,8 +52,8 @@ def test_gap_hunter_with_no_evidence(monkeypatch):
     """When no vector evidence is found, the manual-add fallback should be used."""
     monkeypatch.setattr(
         module,
-        "model",
-        SimpleNamespace(generate_content=lambda prompt: SimpleNamespace(text="Skill1")),
+        "_get_generation_model",
+        lambda: SimpleNamespace(generate_content=lambda prompt: SimpleNamespace(text="Skill1")),
     )
     monkeypatch.setattr(
         module, "VectorStore", lambda: SimpleNamespace(query_similar=lambda *args, **kwargs: [])
@@ -68,8 +70,8 @@ def test_gap_hunter_bubbles_model_errors(monkeypatch):
     """Unexpected model failures should propagate."""
     monkeypatch.setattr(
         module,
-        "model",
-        SimpleNamespace(
+        "_get_generation_model",
+        lambda: SimpleNamespace(
             generate_content=lambda prompt: (_ for _ in ()).throw(RuntimeError("GenAI Error"))
         ),
     )

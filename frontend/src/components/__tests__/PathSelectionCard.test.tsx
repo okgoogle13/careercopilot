@@ -28,7 +28,12 @@ describe('PathSelectionCard', () => {
   it('shows SELECTED state when isSelected is true', () => {
     const props = createProps();
 
-    render(<PathSelectionCard {...props} isSelected={true} />);
+    render(
+      <PathSelectionCard
+        {...props}
+        isSelected={true}
+      />
+    );
     expect(screen.getByText('SELECTED')).toBeDefined();
     expect(screen.getByRole('button')).toHaveAttribute('aria-pressed', 'true');
   });

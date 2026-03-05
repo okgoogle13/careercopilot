@@ -76,14 +76,14 @@ class ResumeAnalysisService(BaseAIService):
 
         Args:
             config: Configuration dictionary with the following optional keys:
-                - model: The AI model to use (default: settings.ai_model)
+                - model: The AI model to use (default: settings.model_name)
                 - max_tokens: Maximum tokens for AI response (default: settings.ai_max_tokens)
                 - temperature: Temperature for AI generation (default: settings.ai_temperature)
                 - enabled: Whether the service is enabled (default: settings.enable_ai_features)
         """
         super().__init__(config or {})
         self.config = {
-            "model": (config.get("model", settings.ai_model) if config else settings.ai_model),
+            "model": (config.get("model", settings.model_name) if config else settings.model_name),
             "max_tokens": (
                 config.get("max_tokens", settings.ai_max_tokens)
                 if config

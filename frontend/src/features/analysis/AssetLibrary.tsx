@@ -19,12 +19,11 @@ export function AssetLibrary() {
       <div className="flex items-center justify-between mb-12">
         <div>
           <h1 className="text-display-large-KrDark font-display font-black tracking-tight text-on-surface-paper-white leading-tight">
-            Asset{' '}
-            <span className="font-proclamation italic font-light text-ink-gold">
-              Library
-            </span>
+            Asset <span className="font-proclamation italic font-light text-ink-gold">Library</span>
           </h1>
-          <p className="text-on-surface-variant mt-2 text-body-large-KrDark font-primary">Store and manage your career documents and media</p>
+          <p className="text-on-surface-variant mt-2 text-body-large-KrDark font-primary">
+            Store and manage your career documents and media
+          </p>
         </div>
         <KeralaRageButton
           variant="primary"
@@ -50,7 +49,9 @@ export function AssetLibrary() {
             </div>
 
             {/* Asset Name */}
-            <h4 className="text-on-surface-paper-white font-display font-bold mb-2 truncate text-lg">{asset.name}</h4>
+            <h4 className="text-on-surface-paper-white font-display font-bold mb-2 truncate text-lg">
+              {asset.name}
+            </h4>
 
             {/* Upload Time */}
             <p className="text-on-surface-variant-dim text-xs mb-6 font-primary uppercase tracking-widest opacity-70">

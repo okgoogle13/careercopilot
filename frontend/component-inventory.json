@@ -22,20 +22,13 @@
       "importedBy": [
         "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/accordion/accordion.stories.tsx"
       ],
-      "exports": [
-        "Accordion",
-        "AccordionItem",
-        "AccordionTrigger",
-        "AccordionContent"
-      ],
+      "exports": ["Accordion", "AccordionItem", "AccordionTrigger", "AccordionContent"],
       "hasTests": false,
       "hasStories": true,
       "hasDocs": false,
       "linesOfCode": 58,
       "complexity": "medium",
-      "dependencies": [
-        "../../lib/utils"
-      ],
+      "dependencies": ["../../lib/utils"],
       "isReusable": true,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -70,10 +63,7 @@
       "hasDocs": false,
       "linesOfCode": 137,
       "complexity": "medium",
-      "dependencies": [
-        "../../lib/utils",
-        "../shadcn-button/button"
-      ],
+      "dependencies": ["../../lib/utils", "../shadcn-button/button"],
       "isReusable": true,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -92,19 +82,13 @@
       "importedBy": [
         "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/alert/alert.stories.tsx"
       ],
-      "exports": [
-        "Alert",
-        "AlertTitle",
-        "AlertDescription"
-      ],
+      "exports": ["Alert", "AlertTitle", "AlertDescription"],
       "hasTests": false,
       "hasStories": true,
       "hasDocs": false,
       "linesOfCode": 51,
       "complexity": "medium",
-      "dependencies": [
-        "../../lib/utils"
-      ],
+      "dependencies": ["../../lib/utils"],
       "isReusable": true,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -121,9 +105,7 @@
       "category": "ui_package",
       "usageCount": 0,
       "importedBy": [],
-      "exports": [
-        "AspectRatio"
-      ],
+      "exports": ["AspectRatio"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
@@ -148,19 +130,13 @@
       "importedBy": [
         "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/avatar/avatar.stories.tsx"
       ],
-      "exports": [
-        "Avatar",
-        "AvatarImage",
-        "AvatarFallback"
-      ],
+      "exports": ["Avatar", "AvatarImage", "AvatarFallback"],
       "hasTests": false,
       "hasStories": true,
       "hasDocs": false,
       "linesOfCode": 32,
       "complexity": "simple",
-      "dependencies": [
-        "../../lib/utils"
-      ],
+      "dependencies": ["../../lib/utils"],
       "isReusable": true,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -179,18 +155,13 @@
       "importedBy": [
         "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/badge/badge.stories.tsx"
       ],
-      "exports": [
-        "Badge",
-        "badgeVariants"
-      ],
+      "exports": ["Badge", "badgeVariants"],
       "hasTests": false,
       "hasStories": true,
       "hasDocs": false,
       "linesOfCode": 34,
       "complexity": "simple",
-      "dependencies": [
-        "../../lib/utils"
-      ],
+      "dependencies": ["../../lib/utils"],
       "isReusable": true,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -223,9 +194,7 @@
       "hasDocs": false,
       "linesOfCode": 94,
       "complexity": "medium",
-      "dependencies": [
-        "../../lib/utils"
-      ],
+      "dependencies": ["../../lib/utils"],
       "isReusable": true,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -245,11 +214,7 @@
         "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/index.ts",
         "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/Button/Button.stories.tsx"
       ],
-      "exports": [
-        "ButtonVariant",
-        "ButtonProps",
-        "default"
-      ],
+      "exports": ["ButtonVariant", "ButtonProps", "default"],
       "hasTests": false,
       "hasStories": true,
       "hasDocs": false,
@@ -272,18 +237,13 @@
       "category": "ui_package",
       "usageCount": 0,
       "importedBy": [],
-      "exports": [
-        "Calendar"
-      ],
+      "exports": ["Calendar"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
       "linesOfCode": 69,
       "complexity": "medium",
-      "dependencies": [
-        "../../lib/utils",
-        "../shadcn-button/button"
-      ],
+      "dependencies": ["../../lib/utils", "../shadcn-button/button"],
       "isReusable": true,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -316,9 +276,7 @@
       "hasDocs": false,
       "linesOfCode": 70,
       "complexity": "medium",
-      "dependencies": [
-        "../../lib/utils"
-      ],
+      "dependencies": ["../../lib/utils"],
       "isReusable": true,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -348,10 +306,7 @@
       "hasDocs": false,
       "linesOfCode": 202,
       "complexity": "complex",
-      "dependencies": [
-        "../../lib/utils",
-        "../shadcn-button/button"
-      ],
+      "dependencies": ["../../lib/utils", "../shadcn-button/button"],
       "isReusable": true,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -382,9 +337,7 @@
       "hasDocs": false,
       "linesOfCode": 278,
       "complexity": "complex",
-      "dependencies": [
-        "../../lib/utils"
-      ],
+      "dependencies": ["../../lib/utils"],
       "isReusable": true,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -403,17 +356,13 @@
       "importedBy": [
         "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/checkbox/checkbox.stories.tsx"
       ],
-      "exports": [
-        "Checkbox"
-      ],
+      "exports": ["Checkbox"],
       "hasTests": false,
       "hasStories": true,
       "hasDocs": false,
       "linesOfCode": 21,
       "complexity": "simple",
-      "dependencies": [
-        "../../lib/utils"
-      ],
+      "dependencies": ["../../lib/utils"],
       "isReusable": true,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -430,11 +379,7 @@
       "category": "ui_package",
       "usageCount": 0,
       "importedBy": [],
-      "exports": [
-        "Collapsible",
-        "CollapsibleTrigger",
-        "CollapsibleContent"
-      ],
+      "exports": ["Collapsible", "CollapsibleTrigger", "CollapsibleContent"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
@@ -473,10 +418,7 @@
       "hasDocs": false,
       "linesOfCode": 134,
       "complexity": "medium",
-      "dependencies": [
-        "../../lib/utils",
-        "../dialog/dialog"
-      ],
+      "dependencies": ["../../lib/utils", "../dialog/dialog"],
       "isReusable": true,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -515,9 +457,7 @@
       "hasDocs": false,
       "linesOfCode": 232,
       "complexity": "complex",
-      "dependencies": [
-        "../../lib/utils"
-      ],
+      "dependencies": ["../../lib/utils"],
       "isReusable": true,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -554,9 +494,7 @@
       "hasDocs": false,
       "linesOfCode": 124,
       "complexity": "medium",
-      "dependencies": [
-        "../../lib/utils"
-      ],
+      "dependencies": ["../../lib/utils"],
       "isReusable": true,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -590,9 +528,7 @@
       "hasDocs": false,
       "linesOfCode": 125,
       "complexity": "medium",
-      "dependencies": [
-        "../../lib/utils"
-      ],
+      "dependencies": ["../../lib/utils"],
       "isReusable": true,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -633,9 +569,7 @@
       "hasDocs": false,
       "linesOfCode": 236,
       "complexity": "complex",
-      "dependencies": [
-        "../../lib/utils"
-      ],
+      "dependencies": ["../../lib/utils"],
       "isReusable": true,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -667,10 +601,7 @@
       "hasDocs": false,
       "linesOfCode": 126,
       "complexity": "medium",
-      "dependencies": [
-        "../../lib/utils",
-        "../label/label"
-      ],
+      "dependencies": ["../../lib/utils", "../label/label"],
       "isReusable": true,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -687,19 +618,13 @@
       "category": "ui_package",
       "usageCount": 0,
       "importedBy": [],
-      "exports": [
-        "HoverCard",
-        "HoverCardTrigger",
-        "HoverCardContent"
-      ],
+      "exports": ["HoverCard", "HoverCardTrigger", "HoverCardContent"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
       "linesOfCode": 39,
       "complexity": "simple",
-      "dependencies": [
-        "../../lib/utils"
-      ],
+      "dependencies": ["../../lib/utils"],
       "isReusable": true,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -716,9 +641,7 @@
       "category": "ui_package",
       "usageCount": 0,
       "importedBy": [],
-      "exports": [
-        "IconBadge"
-      ],
+      "exports": ["IconBadge"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
@@ -741,20 +664,13 @@
       "category": "ui_package",
       "usageCount": 0,
       "importedBy": [],
-      "exports": [
-        "InputOTP",
-        "InputOTPGroup",
-        "InputOTPSlot",
-        "InputOTPSeparator"
-      ],
+      "exports": ["InputOTP", "InputOTPGroup", "InputOTPSlot", "InputOTPSeparator"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
       "linesOfCode": 66,
       "complexity": "medium",
-      "dependencies": [
-        "../../lib/utils"
-      ],
+      "dependencies": ["../../lib/utils"],
       "isReusable": true,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -774,17 +690,13 @@
         "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/input/input.stories.tsx",
         "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/sidebar/sidebar.tsx"
       ],
-      "exports": [
-        "Input"
-      ],
+      "exports": ["Input"],
       "hasTests": false,
       "hasStories": true,
       "hasDocs": false,
       "linesOfCode": 19,
       "complexity": "simple",
-      "dependencies": [
-        "../../lib/utils"
-      ],
+      "dependencies": ["../../lib/utils"],
       "isReusable": true,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -801,9 +713,7 @@
       "category": "ui_package",
       "usageCount": 0,
       "importedBy": [],
-      "exports": [
-        "KeywordTag"
-      ],
+      "exports": ["KeywordTag"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
@@ -828,17 +738,13 @@
       "importedBy": [
         "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/form/form.tsx"
       ],
-      "exports": [
-        "Label"
-      ],
+      "exports": ["Label"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
       "linesOfCode": 14,
       "complexity": "simple",
-      "dependencies": [
-        "../../lib/utils"
-      ],
+      "dependencies": ["../../lib/utils"],
       "isReusable": true,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -878,9 +784,7 @@
       "hasDocs": false,
       "linesOfCode": 254,
       "complexity": "complex",
-      "dependencies": [
-        "../../lib/utils"
-      ],
+      "dependencies": ["../../lib/utils"],
       "isReusable": true,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -897,9 +801,7 @@
       "category": "ui_package",
       "usageCount": 0,
       "importedBy": [],
-      "exports": [
-        "MetricCard"
-      ],
+      "exports": ["MetricCard"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
@@ -938,9 +840,7 @@
       "hasDocs": false,
       "linesOfCode": 145,
       "complexity": "medium",
-      "dependencies": [
-        "../../lib/utils"
-      ],
+      "dependencies": ["../../lib/utils"],
       "isReusable": true,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -957,9 +857,7 @@
       "category": "ui_package",
       "usageCount": 0,
       "importedBy": [],
-      "exports": [
-        "PageHeader"
-      ],
+      "exports": ["PageHeader"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
@@ -996,10 +894,7 @@
       "hasDocs": false,
       "linesOfCode": 97,
       "complexity": "medium",
-      "dependencies": [
-        "../../lib/utils",
-        "../shadcn-button/button"
-      ],
+      "dependencies": ["../../lib/utils", "../shadcn-button/button"],
       "isReusable": true,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -1016,20 +911,13 @@
       "category": "ui_package",
       "usageCount": 0,
       "importedBy": [],
-      "exports": [
-        "Popover",
-        "PopoverTrigger",
-        "PopoverContent",
-        "PopoverAnchor"
-      ],
+      "exports": ["Popover", "PopoverTrigger", "PopoverContent", "PopoverAnchor"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
       "linesOfCode": 47,
       "complexity": "simple",
-      "dependencies": [
-        "../../lib/utils"
-      ],
+      "dependencies": ["../../lib/utils"],
       "isReusable": true,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -1048,17 +936,13 @@
       "importedBy": [
         "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/progress/progress.stories.tsx"
       ],
-      "exports": [
-        "Progress"
-      ],
+      "exports": ["Progress"],
       "hasTests": false,
       "hasStories": true,
       "hasDocs": false,
       "linesOfCode": 21,
       "complexity": "simple",
-      "dependencies": [
-        "../../lib/utils"
-      ],
+      "dependencies": ["../../lib/utils"],
       "isReusable": true,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -1075,18 +959,13 @@
       "category": "ui_package",
       "usageCount": 0,
       "importedBy": [],
-      "exports": [
-        "RadioGroup",
-        "RadioGroupItem"
-      ],
+      "exports": ["RadioGroup", "RadioGroupItem"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
       "linesOfCode": 36,
       "complexity": "simple",
-      "dependencies": [
-        "../../lib/utils"
-      ],
+      "dependencies": ["../../lib/utils"],
       "isReusable": true,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -1103,19 +982,13 @@
       "category": "ui_package",
       "usageCount": 0,
       "importedBy": [],
-      "exports": [
-        "ResizablePanelGroup",
-        "ResizablePanel",
-        "ResizableHandle"
-      ],
+      "exports": ["ResizablePanelGroup", "ResizablePanel", "ResizableHandle"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
       "linesOfCode": 43,
       "complexity": "simple",
-      "dependencies": [
-        "../../lib/utils"
-      ],
+      "dependencies": ["../../lib/utils"],
       "isReusable": true,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -1132,18 +1005,13 @@
       "category": "ui_package",
       "usageCount": 0,
       "importedBy": [],
-      "exports": [
-        "ScrollArea",
-        "ScrollBar"
-      ],
+      "exports": ["ScrollArea", "ScrollBar"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
       "linesOfCode": 48,
       "complexity": "simple",
-      "dependencies": [
-        "../../lib/utils"
-      ],
+      "dependencies": ["../../lib/utils"],
       "isReusable": true,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -1179,9 +1047,7 @@
       "hasDocs": false,
       "linesOfCode": 168,
       "complexity": "medium",
-      "dependencies": [
-        "../../lib/utils"
-      ],
+      "dependencies": ["../../lib/utils"],
       "isReusable": true,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -1201,17 +1067,13 @@
         "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/separator/separator.stories.tsx",
         "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/sidebar/sidebar.tsx"
       ],
-      "exports": [
-        "Separator"
-      ],
+      "exports": ["Separator"],
       "hasTests": false,
       "hasStories": true,
       "hasDocs": false,
       "linesOfCode": 21,
       "complexity": "simple",
-      "dependencies": [
-        "../../lib/utils"
-      ],
+      "dependencies": ["../../lib/utils"],
       "isReusable": true,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -1239,19 +1101,13 @@
         "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/sidebar/sidebar.tsx",
         "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/tooltip/tooltip.stories.tsx"
       ],
-      "exports": [
-        "ButtonProps",
-        "Button",
-        "buttonVariants"
-      ],
+      "exports": ["ButtonProps", "Button", "buttonVariants"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
       "linesOfCode": 47,
       "complexity": "simple",
-      "dependencies": [
-        "../../lib/utils"
-      ],
+      "dependencies": ["../../lib/utils"],
       "isReusable": true,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -1286,9 +1142,7 @@
       "hasDocs": false,
       "linesOfCode": 133,
       "complexity": "medium",
-      "dependencies": [
-        "../../lib/utils"
-      ],
+      "dependencies": ["../../lib/utils"],
       "isReusable": true,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -1364,9 +1218,7 @@
       "importedBy": [
         "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/sidebar/sidebar.tsx"
       ],
-      "exports": [
-        "useIsMobile"
-      ],
+      "exports": ["useIsMobile"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
@@ -1392,17 +1244,13 @@
         "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/sidebar/sidebar.tsx",
         "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/skeleton/skeleton.stories.tsx"
       ],
-      "exports": [
-        "Skeleton"
-      ],
+      "exports": ["Skeleton"],
       "hasTests": false,
       "hasStories": true,
       "hasDocs": false,
       "linesOfCode": 10,
       "complexity": "simple",
-      "dependencies": [
-        "../../lib/utils"
-      ],
+      "dependencies": ["../../lib/utils"],
       "isReusable": true,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -1421,17 +1269,13 @@
       "importedBy": [
         "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/slider/slider.stories.tsx"
       ],
-      "exports": [
-        "Slider"
-      ],
+      "exports": ["Slider"],
       "hasTests": false,
       "hasStories": true,
       "hasDocs": false,
       "linesOfCode": 50,
       "complexity": "medium",
-      "dependencies": [
-        "../../lib/utils"
-      ],
+      "dependencies": ["../../lib/utils"],
       "isReusable": true,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -1448,9 +1292,7 @@
       "category": "ui_package",
       "usageCount": 0,
       "importedBy": [],
-      "exports": [
-        "Toaster"
-      ],
+      "exports": ["Toaster"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
@@ -1473,9 +1315,7 @@
       "category": "ui_package",
       "usageCount": 0,
       "importedBy": [],
-      "exports": [
-        "StatCard"
-      ],
+      "exports": ["StatCard"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
@@ -1500,17 +1340,13 @@
       "importedBy": [
         "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/switch/switch.stories.tsx"
       ],
-      "exports": [
-        "Switch"
-      ],
+      "exports": ["Switch"],
       "hasTests": false,
       "hasStories": true,
       "hasDocs": false,
       "linesOfCode": 21,
       "complexity": "simple",
-      "dependencies": [
-        "../../lib/utils"
-      ],
+      "dependencies": ["../../lib/utils"],
       "isReusable": true,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -1542,9 +1378,7 @@
       "hasDocs": false,
       "linesOfCode": 88,
       "complexity": "medium",
-      "dependencies": [
-        "../../lib/utils"
-      ],
+      "dependencies": ["../../lib/utils"],
       "isReusable": true,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -1563,20 +1397,13 @@
       "importedBy": [
         "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/tabs/tabs.stories.tsx"
       ],
-      "exports": [
-        "Tabs",
-        "TabsList",
-        "TabsTrigger",
-        "TabsContent"
-      ],
+      "exports": ["Tabs", "TabsList", "TabsTrigger", "TabsContent"],
       "hasTests": false,
       "hasStories": true,
       "hasDocs": false,
       "linesOfCode": 44,
       "complexity": "simple",
-      "dependencies": [
-        "../../lib/utils"
-      ],
+      "dependencies": ["../../lib/utils"],
       "isReusable": true,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -1593,17 +1420,13 @@
       "category": "ui_package",
       "usageCount": 0,
       "importedBy": [],
-      "exports": [
-        "Textarea"
-      ],
+      "exports": ["Textarea"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
       "linesOfCode": 13,
       "complexity": "simple",
-      "dependencies": [
-        "../../lib/utils"
-      ],
+      "dependencies": ["../../lib/utils"],
       "isReusable": true,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -1620,19 +1443,13 @@
       "category": "ui_package",
       "usageCount": 0,
       "importedBy": [],
-      "exports": [
-        "ToggleGroup",
-        "ToggleGroupItem"
-      ],
+      "exports": ["ToggleGroup", "ToggleGroupItem"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
       "linesOfCode": 57,
       "complexity": "medium",
-      "dependencies": [
-        "../../lib/utils",
-        "../toggle/toggle"
-      ],
+      "dependencies": ["../../lib/utils", "../toggle/toggle"],
       "isReusable": true,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -1651,18 +1468,13 @@
       "importedBy": [
         "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/toggle-group/toggle-group.tsx"
       ],
-      "exports": [
-        "Toggle",
-        "toggleVariants"
-      ],
+      "exports": ["Toggle", "toggleVariants"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
       "linesOfCode": 36,
       "complexity": "simple",
-      "dependencies": [
-        "../../lib/utils"
-      ],
+      "dependencies": ["../../lib/utils"],
       "isReusable": true,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -1682,20 +1494,13 @@
         "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/sidebar/sidebar.tsx",
         "/Users/okgoogle13/Projects/careercopilot/frontend/packages/ui/src/components/tooltip/tooltip.stories.tsx"
       ],
-      "exports": [
-        "Tooltip",
-        "TooltipTrigger",
-        "TooltipContent",
-        "TooltipProvider"
-      ],
+      "exports": ["Tooltip", "TooltipTrigger", "TooltipContent", "TooltipProvider"],
       "hasTests": false,
       "hasStories": true,
       "hasDocs": false,
       "linesOfCode": 55,
       "complexity": "medium",
-      "dependencies": [
-        "../../lib/utils"
-      ],
+      "dependencies": ["../../lib/utils"],
       "isReusable": true,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -1712,19 +1517,13 @@
       "category": "components",
       "usageCount": 0,
       "importedBy": [],
-      "exports": [
-        "Tab",
-        "TabsProps",
-        "Tabs"
-      ],
+      "exports": ["Tab", "TabsProps", "Tabs"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
       "linesOfCode": 83,
       "complexity": "medium",
-      "dependencies": [
-        "../../../lib/cn"
-      ],
+      "dependencies": ["../../../lib/cn"],
       "isReusable": false,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -1747,9 +1546,7 @@
       "hasDocs": false,
       "linesOfCode": 33,
       "complexity": "simple",
-      "dependencies": [
-        "./Leaf"
-      ],
+      "dependencies": ["./Leaf"],
       "isReusable": true,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -1768,18 +1565,13 @@
       "importedBy": [
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/core/Leaf.figma.tsx"
       ],
-      "exports": [
-        "LeafProps",
-        "Leaf"
-      ],
+      "exports": ["LeafProps", "Leaf"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
       "linesOfCode": 66,
       "complexity": "medium",
-      "dependencies": [
-        "../../lib/utils"
-      ],
+      "dependencies": ["../../lib/utils"],
       "isReusable": true,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -1802,9 +1594,7 @@
       "hasDocs": false,
       "linesOfCode": 41,
       "complexity": "simple",
-      "dependencies": [
-        "./Pebble"
-      ],
+      "dependencies": ["./Pebble"],
       "isReusable": true,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -1824,18 +1614,13 @@
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/core/Pebble.figma.tsx",
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/views/kr-darkFeed.tsx"
       ],
-      "exports": [
-        "PebbleProps",
-        "Pebble"
-      ],
+      "exports": ["PebbleProps", "Pebble"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
       "linesOfCode": 75,
       "complexity": "medium",
-      "dependencies": [
-        "../../lib/utils"
-      ],
+      "dependencies": ["../../lib/utils"],
       "isReusable": true,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -1858,9 +1643,7 @@
       "hasDocs": false,
       "linesOfCode": 33,
       "complexity": "simple",
-      "dependencies": [
-        "./Stone"
-      ],
+      "dependencies": ["./Stone"],
       "isReusable": true,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -1879,18 +1662,13 @@
       "importedBy": [
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/core/Stone.figma.tsx"
       ],
-      "exports": [
-        "StoneProps",
-        "Stone"
-      ],
+      "exports": ["StoneProps", "Stone"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
       "linesOfCode": 65,
       "complexity": "medium",
-      "dependencies": [
-        "../../lib/utils"
-      ],
+      "dependencies": ["../../lib/utils"],
       "isReusable": true,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -1907,19 +1685,13 @@
       "category": "components",
       "usageCount": 0,
       "importedBy": [],
-      "exports": [
-        "Tab",
-        "ElectricTabsProps",
-        "ElectricTabs"
-      ],
+      "exports": ["Tab", "ElectricTabsProps", "ElectricTabs"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
       "linesOfCode": 83,
       "complexity": "medium",
-      "dependencies": [
-        "../../../lib/cn"
-      ],
+      "dependencies": ["../../../lib/cn"],
       "isReusable": false,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -1936,9 +1708,7 @@
       "category": "components",
       "usageCount": 0,
       "importedBy": [],
-      "exports": [
-        "ImageWithFallback"
-      ],
+      "exports": ["ImageWithFallback"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
@@ -1963,10 +1733,7 @@
       "importedBy": [
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/sandbox/EcosystemSandbox.tsx"
       ],
-      "exports": [
-        "GardenLayout",
-        "default"
-      ],
+      "exports": ["GardenLayout", "default"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
@@ -1991,17 +1758,13 @@
       "importedBy": [
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/applications/ApplicationTracker.tsx"
       ],
-      "exports": [
-        "ApplicationCard"
-      ],
+      "exports": ["ApplicationCard"],
       "hasTests": false,
       "hasStories": true,
       "hasDocs": false,
       "linesOfCode": 94,
       "complexity": "medium",
-      "dependencies": [
-        "../ui/StatusBadge"
-      ],
+      "dependencies": ["../ui/StatusBadge"],
       "isReusable": true,
       "usesMUI": false,
       "usesCustomUI": true,
@@ -2020,9 +1783,7 @@
       "importedBy": [
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/analysis/Analysis.tsx"
       ],
-      "exports": [
-        "ChartPane"
-      ],
+      "exports": ["ChartPane"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
@@ -2045,9 +1806,7 @@
       "category": "shared",
       "usageCount": 0,
       "importedBy": [],
-      "exports": [
-        "CodePreview"
-      ],
+      "exports": ["CodePreview"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
@@ -2072,17 +1831,13 @@
       "importedBy": [
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/onboarding/components/ValidationDashboard.tsx"
       ],
-      "exports": [
-        "EditableField"
-      ],
+      "exports": ["EditableField"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
       "linesOfCode": 103,
       "complexity": "medium",
-      "dependencies": [
-        "@/components/ui"
-      ],
+      "dependencies": ["@/components/ui"],
       "isReusable": true,
       "usesMUI": false,
       "usesCustomUI": true,
@@ -2099,9 +1854,7 @@
       "category": "shared",
       "usageCount": 0,
       "importedBy": [],
-      "exports": [
-        "IconBadge"
-      ],
+      "exports": ["IconBadge"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
@@ -2126,17 +1879,13 @@
       "importedBy": [
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/analysis/Analysis.tsx"
       ],
-      "exports": [
-        "ImpactEnhancements"
-      ],
+      "exports": ["ImpactEnhancements"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
       "linesOfCode": 82,
       "complexity": "medium",
-      "dependencies": [
-        "../../hooks/useAnalysis"
-      ],
+      "dependencies": ["../../hooks/useAnalysis"],
       "isReusable": true,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -2156,9 +1905,7 @@
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/analysis/Analysis.tsx",
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/style-guide/StyleGuide.tsx"
       ],
-      "exports": [
-        "KeywordTag"
-      ],
+      "exports": ["KeywordTag"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
@@ -2180,20 +1927,14 @@
       "relativePath": "src/components/shared/M3ErrorAlert.tsx",
       "category": "shared",
       "usageCount": 1,
-      "importedBy": [
-        "/Users/okgoogle13/Projects/careercopilot/frontend/src/pages/JobQueue.tsx"
-      ],
-      "exports": [
-        "M3ErrorAlert"
-      ],
+      "importedBy": ["/Users/okgoogle13/Projects/careercopilot/frontend/src/pages/JobQueue.tsx"],
+      "exports": ["M3ErrorAlert"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
       "linesOfCode": 59,
       "complexity": "medium",
-      "dependencies": [
-        "../ui"
-      ],
+      "dependencies": ["../ui"],
       "isReusable": true,
       "usesMUI": false,
       "usesCustomUI": true,
@@ -2212,9 +1953,7 @@
       "importedBy": [
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/analysis/Analysis.tsx"
       ],
-      "exports": [
-        "MetricCard"
-      ],
+      "exports": ["MetricCard"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
@@ -2246,9 +1985,7 @@
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/settings/Settings.tsx",
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/style-guide/StyleGuide.tsx"
       ],
-      "exports": [
-        "PageHeader"
-      ],
+      "exports": ["PageHeader"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
@@ -2271,9 +2008,7 @@
       "category": "shared",
       "usageCount": 0,
       "importedBy": [],
-      "exports": [
-        "PlasmaBackground"
-      ],
+      "exports": ["PlasmaBackground"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
@@ -2296,18 +2031,13 @@
       "category": "shared",
       "usageCount": 0,
       "importedBy": [],
-      "exports": [
-        "SplitHeader"
-      ],
+      "exports": ["SplitHeader"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
       "linesOfCode": 84,
       "complexity": "medium",
-      "dependencies": [
-        "@/lib/utils",
-        "@/hooks/use-mode"
-      ],
+      "dependencies": ["@/lib/utils", "@/hooks/use-mode"],
       "isReusable": true,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -2324,9 +2054,7 @@
       "category": "shared",
       "usageCount": 0,
       "importedBy": [],
-      "exports": [
-        "StatCard"
-      ],
+      "exports": ["StatCard"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
@@ -2351,17 +2079,13 @@
       "importedBy": [
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/onboarding/components/ValidationDashboard.tsx"
       ],
-      "exports": [
-        "StatusChip"
-      ],
+      "exports": ["StatusChip"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
       "linesOfCode": 24,
       "complexity": "simple",
-      "dependencies": [
-        "../ui/StatusBadge/StatusBadge"
-      ],
+      "dependencies": ["../ui/StatusBadge/StatusBadge"],
       "isReusable": true,
       "usesMUI": false,
       "usesCustomUI": true,
@@ -2384,9 +2108,7 @@
       "hasDocs": false,
       "linesOfCode": 21,
       "complexity": "simple",
-      "dependencies": [
-        "./TechCard"
-      ],
+      "dependencies": ["./TechCard"],
       "isReusable": true,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -2405,9 +2127,7 @@
       "importedBy": [
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/shared/TechCard.figma.tsx"
       ],
-      "exports": [
-        "TechCard"
-      ],
+      "exports": ["TechCard"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
@@ -2430,18 +2150,13 @@
       "category": "components",
       "usageCount": 0,
       "importedBy": [],
-      "exports": [
-        "TestCardProps",
-        "TestCard"
-      ],
+      "exports": ["TestCardProps", "TestCard"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
       "linesOfCode": 31,
       "complexity": "simple",
-      "dependencies": [
-        "@/lib/utils"
-      ],
+      "dependencies": ["@/lib/utils"],
       "isReusable": false,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -2460,10 +2175,7 @@
       "importedBy": [
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/sandbox/EcosystemSandbox.tsx"
       ],
-      "exports": [
-        "AuroraHeader",
-        "default"
-      ],
+      "exports": ["AuroraHeader", "default"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
@@ -2486,18 +2198,13 @@
       "category": "ui",
       "usageCount": 0,
       "importedBy": [],
-      "exports": [
-        "Button",
-        "buttonVariants"
-      ],
+      "exports": ["Button", "buttonVariants"],
       "hasTests": false,
       "hasStories": true,
       "hasDocs": false,
       "linesOfCode": 47,
       "complexity": "simple",
-      "dependencies": [
-        "./utils"
-      ],
+      "dependencies": ["./utils"],
       "isReusable": true,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -2514,20 +2221,13 @@
       "category": "ui",
       "usageCount": 0,
       "importedBy": [],
-      "exports": [
-        "CabinetProps",
-        "M3Modal",
-        "Cabinet"
-      ],
+      "exports": ["CabinetProps", "M3Modal", "Cabinet"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
       "linesOfCode": 89,
       "complexity": "medium",
-      "dependencies": [
-        "./Pebble",
-        "./Stone"
-      ],
+      "dependencies": ["./Pebble", "./Stone"],
       "isReusable": true,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -2573,11 +2273,7 @@
       "category": "ui",
       "usageCount": 0,
       "importedBy": [],
-      "exports": [
-        "Collapsible",
-        "CollapsibleTrigger",
-        "CollapsibleContent"
-      ],
+      "exports": ["Collapsible", "CollapsibleTrigger", "CollapsibleContent"],
       "hasTests": false,
       "hasStories": true,
       "hasDocs": false,
@@ -2615,9 +2311,7 @@
       "hasDocs": false,
       "linesOfCode": 125,
       "complexity": "medium",
-      "dependencies": [
-        "./utils"
-      ],
+      "dependencies": ["./utils"],
       "isReusable": true,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -2634,10 +2328,7 @@
       "category": "ui",
       "usageCount": 0,
       "importedBy": [],
-      "exports": [
-        "HaeckelIconProps",
-        "HaeckelIcon"
-      ],
+      "exports": ["HaeckelIconProps", "HaeckelIcon"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
@@ -2660,9 +2351,7 @@
       "category": "ui",
       "usageCount": 0,
       "importedBy": [],
-      "exports": [
-        "IconBadge"
-      ],
+      "exports": ["IconBadge"],
       "hasTests": false,
       "hasStories": true,
       "hasDocs": false,
@@ -2685,11 +2374,7 @@
       "category": "ui",
       "usageCount": 0,
       "importedBy": [],
-      "exports": [
-        "M3Select",
-        "M3SelectOption",
-        "JarProps"
-      ],
+      "exports": ["M3Select", "M3SelectOption", "JarProps"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
@@ -2712,14 +2397,7 @@
       "category": "ui",
       "usageCount": 0,
       "importedBy": [],
-      "exports": [
-        "LensVariant",
-        "LensSize",
-        "LensProps",
-        "Lens",
-        "M3TextAreaProps",
-        "M3TextArea"
-      ],
+      "exports": ["LensVariant", "LensSize", "LensProps", "Lens", "M3TextAreaProps", "M3TextArea"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
@@ -2742,12 +2420,7 @@
       "category": "ui",
       "usageCount": 0,
       "importedBy": [],
-      "exports": [
-        "MarkProps",
-        "Mark",
-        "M3RadioProps",
-        "M3Radio"
-      ],
+      "exports": ["MarkProps", "Mark", "M3RadioProps", "M3Radio"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
@@ -2770,9 +2443,7 @@
       "category": "ui",
       "usageCount": 0,
       "importedBy": [],
-      "exports": [
-        "MetricCard"
-      ],
+      "exports": ["MetricCard"],
       "hasTests": false,
       "hasStories": true,
       "hasDocs": false,
@@ -2797,10 +2468,7 @@
       "importedBy": [
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/sandbox/EcosystemSandbox.tsx"
       ],
-      "exports": [
-        "NativeAnchor",
-        "default"
-      ],
+      "exports": ["NativeAnchor", "default"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
@@ -2835,19 +2503,13 @@
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/components/anchors/AnalysisAnchor.tsx",
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/components/anchors/DocumentStackAnchor.tsx"
       ],
-      "exports": [
-        "kerala-rageButtonProps",
-        "kerala-rageButton"
-      ],
+      "exports": ["kerala-rageButtonProps", "kerala-rageButton"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
       "linesOfCode": 150,
       "complexity": "medium",
-      "dependencies": [
-        "../../lib/utils",
-        "../../context/ModeContext"
-      ],
+      "dependencies": ["../../lib/utils", "../../context/ModeContext"],
       "isReusable": true,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -2899,10 +2561,7 @@
       "category": "ui",
       "usageCount": 0,
       "importedBy": [],
-      "exports": [
-        "SeedProps",
-        "M3Badge"
-      ],
+      "exports": ["SeedProps", "M3Badge"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
@@ -2940,9 +2599,7 @@
       "hasDocs": false,
       "linesOfCode": 123,
       "complexity": "medium",
-      "dependencies": [
-        "./Pebble"
-      ],
+      "dependencies": ["./Pebble"],
       "isReusable": true,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -2959,10 +2616,7 @@
       "category": "ui",
       "usageCount": 0,
       "importedBy": [],
-      "exports": [
-        "SplitHeader",
-        "default"
-      ],
+      "exports": ["SplitHeader", "default"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
@@ -2988,12 +2642,7 @@
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/shared/StatusChip.tsx",
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/applications/ApplicationCard.tsx"
       ],
-      "exports": [
-        "StatusBadgeVariant",
-        "StatusBadgeMode",
-        "StatusBadgeProps",
-        "StatusBadge"
-      ],
+      "exports": ["StatusBadgeVariant", "StatusBadgeMode", "StatusBadgeProps", "StatusBadge"],
       "hasTests": true,
       "hasStories": false,
       "hasDocs": false,
@@ -3086,10 +2735,7 @@
       "category": "ui",
       "usageCount": 0,
       "importedBy": [],
-      "exports": [
-        "ValveProps",
-        "Valve"
-      ],
+      "exports": ["ValveProps", "Valve"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
@@ -3112,11 +2758,7 @@
       "category": "ui",
       "usageCount": 0,
       "importedBy": [],
-      "exports": [
-        "VesselProps",
-        "M3Accordion",
-        "Vessel"
-      ],
+      "exports": ["VesselProps", "M3Accordion", "Vessel"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
@@ -3139,9 +2781,7 @@
       "category": "features",
       "usageCount": 0,
       "importedBy": [],
-      "exports": [
-        "Analysis"
-      ],
+      "exports": ["Analysis"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
@@ -3172,20 +2812,14 @@
       "relativePath": "src/features/analysis/AssetLibrary.tsx",
       "category": "features",
       "usageCount": 1,
-      "importedBy": [
-        "/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx"
-      ],
-      "exports": [
-        "AssetLibrary"
-      ],
+      "importedBy": ["/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx"],
+      "exports": ["AssetLibrary"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
       "linesOfCode": 66,
       "complexity": "medium",
-      "dependencies": [
-        "../../components/ui/kerala-rageButton"
-      ],
+      "dependencies": ["../../components/ui/kerala-rageButton"],
       "isReusable": false,
       "usesMUI": false,
       "usesCustomUI": true,
@@ -3202,10 +2836,7 @@
       "category": "features",
       "usageCount": 0,
       "importedBy": [],
-      "exports": [
-        "AuditDial",
-        "default"
-      ],
+      "exports": ["AuditDial", "default"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
@@ -3228,17 +2859,13 @@
       "category": "features",
       "usageCount": 0,
       "importedBy": [],
-      "exports": [
-        "ImpactEnhancements"
-      ],
+      "exports": ["ImpactEnhancements"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
       "linesOfCode": 82,
       "complexity": "medium",
-      "dependencies": [
-        "../../hooks/useAnalysis"
-      ],
+      "dependencies": ["../../hooks/useAnalysis"],
       "isReusable": false,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -3255,9 +2882,7 @@
       "category": "features",
       "usageCount": 0,
       "importedBy": [],
-      "exports": [
-        "MetricCard"
-      ],
+      "exports": ["MetricCard"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
@@ -3282,18 +2907,13 @@
       "importedBy": [
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/components/anchors/AnalysisAnchor.tsx"
       ],
-      "exports": [
-        "TechCard"
-      ],
+      "exports": ["TechCard"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
       "linesOfCode": 126,
       "complexity": "medium",
-      "dependencies": [
-        "@/lib/utils",
-        "@/hooks/use-mode"
-      ],
+      "dependencies": ["@/lib/utils", "@/hooks/use-mode"],
       "isReusable": false,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -3310,9 +2930,7 @@
       "category": "features",
       "usageCount": 0,
       "importedBy": [],
-      "exports": [
-        "ApplicationCard"
-      ],
+      "exports": ["ApplicationCard"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
@@ -3337,13 +2955,8 @@
       "relativePath": "src/features/applications/ApplicationTracker.tsx",
       "category": "features",
       "usageCount": 1,
-      "importedBy": [
-        "/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx"
-      ],
-      "exports": [
-        "ApplicationTracker",
-        "Application"
-      ],
+      "importedBy": ["/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx"],
+      "exports": ["ApplicationTracker", "Application"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
@@ -3369,21 +2982,14 @@
       "relativePath": "src/features/auth/Login.tsx",
       "category": "features",
       "usageCount": 1,
-      "importedBy": [
-        "/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx"
-      ],
-      "exports": [
-        "Login"
-      ],
+      "importedBy": ["/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx"],
+      "exports": ["Login"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
       "linesOfCode": 150,
       "complexity": "medium",
-      "dependencies": [
-        "../../context/AuthContext",
-        "../../components/ui/kerala-rageButton"
-      ],
+      "dependencies": ["../../context/AuthContext", "../../components/ui/kerala-rageButton"],
       "isReusable": false,
       "usesMUI": false,
       "usesCustomUI": true,
@@ -3399,21 +3005,14 @@
       "relativePath": "src/features/auth/Register.tsx",
       "category": "features",
       "usageCount": 1,
-      "importedBy": [
-        "/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx"
-      ],
-      "exports": [
-        "Register"
-      ],
+      "importedBy": ["/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx"],
+      "exports": ["Register"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
       "linesOfCode": 155,
       "complexity": "medium",
-      "dependencies": [
-        "../../context/AuthContext",
-        "../../components/ui/kerala-rageButton"
-      ],
+      "dependencies": ["../../context/AuthContext", "../../components/ui/kerala-rageButton"],
       "isReusable": false,
       "usesMUI": false,
       "usesCustomUI": true,
@@ -3430,10 +3029,7 @@
       "category": "features",
       "usageCount": 0,
       "importedBy": [],
-      "exports": [
-        "ModeProvider",
-        "useMode"
-      ],
+      "exports": ["ModeProvider", "useMode"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
@@ -3456,10 +3052,7 @@
       "category": "features",
       "usageCount": 0,
       "importedBy": [],
-      "exports": [
-        "JobCard",
-        "default"
-      ],
+      "exports": ["JobCard", "default"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
@@ -3481,12 +3074,8 @@
       "relativePath": "src/features/dashboard/Dashboard.tsx",
       "category": "features",
       "usageCount": 1,
-      "importedBy": [
-        "/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx"
-      ],
-      "exports": [
-        "Dashboard"
-      ],
+      "importedBy": ["/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx"],
+      "exports": ["Dashboard"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
@@ -3508,15 +3097,8 @@
       "relativePath": "src/features/documents/Documents.tsx",
       "category": "features",
       "usageCount": 1,
-      "importedBy": [
-        "/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx"
-      ],
-      "exports": [
-        "Documents",
-        "DocumentType",
-        "Document",
-        "DocumentTab"
-      ],
+      "importedBy": ["/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx"],
+      "exports": ["Documents", "DocumentType", "Document", "DocumentTab"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
@@ -3543,18 +3125,13 @@
       "category": "features",
       "usageCount": 0,
       "importedBy": [],
-      "exports": [
-        "DocumentStack"
-      ],
+      "exports": ["DocumentStack"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
       "linesOfCode": 136,
       "complexity": "medium",
-      "dependencies": [
-        "@/lib/utils",
-        "@/components/ui/kerala-rageButton"
-      ],
+      "dependencies": ["@/lib/utils", "@/components/ui/kerala-rageButton"],
       "isReusable": false,
       "usesMUI": false,
       "usesCustomUI": true,
@@ -3571,10 +3148,7 @@
       "category": "features",
       "usageCount": 0,
       "importedBy": [],
-      "exports": [
-        "EvidenceCard",
-        "default"
-      ],
+      "exports": ["EvidenceCard", "default"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
@@ -3600,18 +3174,13 @@
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/views/kr-darkFeed.tsx",
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/views/kr-darkKanban.tsx"
       ],
-      "exports": [
-        "GlassLeafCard"
-      ],
+      "exports": ["GlassLeafCard"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
       "linesOfCode": 89,
       "complexity": "medium",
-      "dependencies": [
-        "@/lib/utils",
-        "@/hooks/use-mode"
-      ],
+      "dependencies": ["@/lib/utils", "@/hooks/use-mode"],
       "isReusable": false,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -3628,9 +3197,7 @@
       "category": "features",
       "usageCount": 0,
       "importedBy": [],
-      "exports": [
-        "IconBadge"
-      ],
+      "exports": ["IconBadge"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
@@ -3653,10 +3220,7 @@
       "category": "features",
       "usageCount": 0,
       "importedBy": [],
-      "exports": [
-        "DropZone",
-        "default"
-      ],
+      "exports": ["DropZone", "default"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
@@ -3681,18 +3245,13 @@
       "importedBy": [
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/pages/AnalysisPage.tsx"
       ],
-      "exports": [
-        "EvidenceUploader"
-      ],
+      "exports": ["EvidenceUploader"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
       "linesOfCode": 92,
       "complexity": "medium",
-      "dependencies": [
-        "@/components/ui",
-        "@/utils/toast"
-      ],
+      "dependencies": ["@/components/ui", "@/utils/toast"],
       "isReusable": false,
       "usesMUI": false,
       "usesCustomUI": true,
@@ -3708,12 +3267,8 @@
       "relativePath": "src/features/ksc-generator/KSCGenerator.tsx",
       "category": "features",
       "usageCount": 1,
-      "importedBy": [
-        "/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx"
-      ],
-      "exports": [
-        "KSCGenerator"
-      ],
+      "importedBy": ["/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx"],
+      "exports": ["KSCGenerator"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
@@ -3739,13 +3294,8 @@
       "relativePath": "src/features/landing/LandingPage.tsx",
       "category": "features",
       "usageCount": 1,
-      "importedBy": [
-        "/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx"
-      ],
-      "exports": [
-        "LandingPage",
-        "default"
-      ],
+      "importedBy": ["/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx"],
+      "exports": ["LandingPage", "default"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
@@ -3773,12 +3323,8 @@
       "relativePath": "src/features/not-found/NotFound.tsx",
       "category": "features",
       "usageCount": 1,
-      "importedBy": [
-        "/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx"
-      ],
-      "exports": [
-        "NotFound"
-      ],
+      "importedBy": ["/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx"],
+      "exports": ["NotFound"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
@@ -3803,9 +3349,7 @@
       "importedBy": [
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/pages/IngestionPage.tsx"
       ],
-      "exports": [
-        "ValidationDashboard"
-      ],
+      "exports": ["ValidationDashboard"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
@@ -3833,21 +3377,14 @@
       "relativePath": "src/features/opportunities/Opportunities.tsx",
       "category": "features",
       "usageCount": 1,
-      "importedBy": [
-        "/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx"
-      ],
-      "exports": [
-        "Opportunities"
-      ],
+      "importedBy": ["/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx"],
+      "exports": ["Opportunities"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
       "linesOfCode": 145,
       "complexity": "medium",
-      "dependencies": [
-        "../../components/shared/PageHeader",
-        "../../config/api"
-      ],
+      "dependencies": ["../../components/shared/PageHeader", "../../config/api"],
       "isReusable": false,
       "usesMUI": false,
       "usesCustomUI": true,
@@ -3864,20 +3401,13 @@
       "category": "features",
       "usageCount": 0,
       "importedBy": [],
-      "exports": [
-        "Profile",
-        "ProfileCardMUIProps",
-        "ProfileCardMUI",
-        "default"
-      ],
+      "exports": ["Profile", "ProfileCardMUIProps", "ProfileCardMUI", "default"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
       "linesOfCode": 313,
       "complexity": "complex",
-      "dependencies": [
-        "@/lib/utils"
-      ],
+      "dependencies": ["@/lib/utils"],
       "isReusable": false,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -3894,10 +3424,7 @@
       "category": "features",
       "usageCount": 0,
       "importedBy": [],
-      "exports": [
-        "ProfileComparison",
-        "default"
-      ],
+      "exports": ["ProfileComparison", "default"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
@@ -3919,20 +3446,14 @@
       "relativePath": "src/features/profile/components/ProfileView.tsx",
       "category": "features",
       "usageCount": 1,
-      "importedBy": [
-        "/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx"
-      ],
-      "exports": [
-        "ProfileView"
-      ],
+      "importedBy": ["/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx"],
+      "exports": ["ProfileView"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
       "linesOfCode": 217,
       "complexity": "complex",
-      "dependencies": [
-        "./ResumeUploader"
-      ],
+      "dependencies": ["./ResumeUploader"],
       "isReusable": false,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -3951,18 +3472,13 @@
       "importedBy": [
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/profile/components/ProfileView.tsx"
       ],
-      "exports": [
-        "default"
-      ],
+      "exports": ["default"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
       "linesOfCode": 171,
       "complexity": "medium",
-      "dependencies": [
-        "@/lib/utils",
-        "@/context/AuthContext"
-      ],
+      "dependencies": ["@/lib/utils", "@/context/AuthContext"],
       "isReusable": false,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -3981,9 +3497,7 @@
       "importedBy": [
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/sandbox/EcosystemSandbox.tsx"
       ],
-      "exports": [
-        "EvidenceSidebar"
-      ],
+      "exports": ["EvidenceSidebar"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
@@ -4008,9 +3522,7 @@
       "importedBy": [
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/sandbox/EcosystemSandbox.tsx"
       ],
-      "exports": [
-        "SplitEditor"
-      ],
+      "exports": ["SplitEditor"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
@@ -4040,10 +3552,7 @@
       "importedBy": [
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/sandbox/components/SplitEditor.tsx"
       ],
-      "exports": [
-        "EcosystemSandbox",
-        "Archetype"
-      ],
+      "exports": ["EcosystemSandbox", "Archetype"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
@@ -4071,20 +3580,14 @@
       "relativePath": "src/features/settings/Settings.tsx",
       "category": "features",
       "usageCount": 1,
-      "importedBy": [
-        "/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx"
-      ],
-      "exports": [
-        "Settings"
-      ],
+      "importedBy": ["/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx"],
+      "exports": ["Settings"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
       "linesOfCode": 197,
       "complexity": "medium",
-      "dependencies": [
-        "../../components/shared/PageHeader"
-      ],
+      "dependencies": ["../../components/shared/PageHeader"],
       "isReusable": false,
       "usesMUI": false,
       "usesCustomUI": true,
@@ -4101,11 +3604,7 @@
       "category": "features",
       "usageCount": 0,
       "importedBy": [],
-      "exports": [
-        "MorphPreviewer",
-        "AxisVisualizer",
-        "SlopAuditor"
-      ],
+      "exports": ["MorphPreviewer", "AxisVisualizer", "SlopAuditor"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
@@ -4127,21 +3626,14 @@
       "relativePath": "src/features/style-guide/StyleGuide.tsx",
       "category": "features",
       "usageCount": 1,
-      "importedBy": [
-        "/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx"
-      ],
-      "exports": [
-        "StyleGuide"
-      ],
+      "importedBy": ["/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx"],
+      "exports": ["StyleGuide"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
       "linesOfCode": 149,
       "complexity": "medium",
-      "dependencies": [
-        "../../components/shared/KeywordTag",
-        "../../components/shared/PageHeader"
-      ],
+      "dependencies": ["../../components/shared/KeywordTag", "../../components/shared/PageHeader"],
       "isReusable": false,
       "usesMUI": false,
       "usesCustomUI": true,
@@ -4160,9 +3652,7 @@
       "importedBy": [
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/kr-darkShell.tsx"
       ],
-      "exports": [
-        "Fireflies"
-      ],
+      "exports": ["Fireflies"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
@@ -4187,17 +3677,13 @@
       "importedBy": [
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/kr-darkShell.tsx"
       ],
-      "exports": [
-        "kr-darkDock"
-      ],
+      "exports": ["kr-darkDock"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
       "linesOfCode": 45,
       "complexity": "simple",
-      "dependencies": [
-        "../../../config/navigation.schema"
-      ],
+      "dependencies": ["../../../config/navigation.schema"],
       "isReusable": false,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -4214,9 +3700,7 @@
       "category": "layout",
       "usageCount": 0,
       "importedBy": [],
-      "exports": [
-        "kr-darkShell"
-      ],
+      "exports": ["kr-darkShell"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
@@ -4251,9 +3735,7 @@
       "importedBy": [
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/kr-darkShell.tsx"
       ],
-      "exports": [
-        "kr-darkAuth"
-      ],
+      "exports": ["kr-darkAuth"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
@@ -4278,9 +3760,7 @@
       "importedBy": [
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/kr-darkShell.tsx"
       ],
-      "exports": [
-        "kr-darkDashboard"
-      ],
+      "exports": ["kr-darkDashboard"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
@@ -4305,9 +3785,7 @@
       "importedBy": [
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/kr-darkShell.tsx"
       ],
-      "exports": [
-        "kr-darkFeed"
-      ],
+      "exports": ["kr-darkFeed"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
@@ -4336,18 +3814,13 @@
       "importedBy": [
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/kr-darkShell.tsx"
       ],
-      "exports": [
-        "kr-darkKanban"
-      ],
+      "exports": ["kr-darkKanban"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
       "linesOfCode": 70,
       "complexity": "medium",
-      "dependencies": [
-        "@/hooks/useKanban",
-        "@/features/kr-dark/GlassLeafCard"
-      ],
+      "dependencies": ["@/hooks/useKanban", "@/features/kr-dark/GlassLeafCard"],
       "isReusable": false,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -4366,17 +3839,13 @@
       "importedBy": [
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/kr-darkShell.tsx"
       ],
-      "exports": [
-        "kr-darkLanding"
-      ],
+      "exports": ["kr-darkLanding"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
       "linesOfCode": 43,
       "complexity": "simple",
-      "dependencies": [
-        "../../../components/ui/kerala-rageButton"
-      ],
+      "dependencies": ["../../../components/ui/kerala-rageButton"],
       "isReusable": false,
       "usesMUI": false,
       "usesCustomUI": true,
@@ -4395,9 +3864,7 @@
       "importedBy": [
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/kr-darkShell.tsx"
       ],
-      "exports": [
-        "kr-darkOnboarding"
-      ],
+      "exports": ["kr-darkOnboarding"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
@@ -4452,9 +3919,7 @@
       "importedBy": [
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/components/MainCanvas.tsx"
       ],
-      "exports": [
-        "AnalysisAnchor"
-      ],
+      "exports": ["AnalysisAnchor"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
@@ -4483,17 +3948,13 @@
       "importedBy": [
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/components/MainCanvas.tsx"
       ],
-      "exports": [
-        "DocumentStackAnchor"
-      ],
+      "exports": ["DocumentStackAnchor"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
       "linesOfCode": 44,
       "complexity": "simple",
-      "dependencies": [
-        "@/components/ui/kerala-rageButton"
-      ],
+      "dependencies": ["@/components/ui/kerala-rageButton"],
       "isReusable": false,
       "usesMUI": false,
       "usesCustomUI": true,
@@ -4512,18 +3973,13 @@
       "importedBy": [
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/LayoutShell.tsx"
       ],
-      "exports": [
-        "GlobalHeader"
-      ],
+      "exports": ["GlobalHeader"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
       "linesOfCode": 45,
       "complexity": "simple",
-      "dependencies": [
-        "../../../context/ModeContext",
-        "../../../components/ui/kerala-rageButton"
-      ],
+      "dependencies": ["../../../context/ModeContext", "../../../components/ui/kerala-rageButton"],
       "isReusable": false,
       "usesMUI": false,
       "usesCustomUI": true,
@@ -4542,18 +3998,13 @@
       "importedBy": [
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/LayoutShell.tsx"
       ],
-      "exports": [
-        "MainCanvas"
-      ],
+      "exports": ["MainCanvas"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
       "linesOfCode": 23,
       "complexity": "simple",
-      "dependencies": [
-        "./anchors/AnalysisAnchor",
-        "./anchors/DocumentStackAnchor"
-      ],
+      "dependencies": ["./anchors/AnalysisAnchor", "./anchors/DocumentStackAnchor"],
       "isReusable": false,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -4572,9 +4023,7 @@
       "importedBy": [
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/LayoutShell.tsx"
       ],
-      "exports": [
-        "NavRail"
-      ],
+      "exports": ["NavRail"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
@@ -4602,9 +4051,7 @@
       "importedBy": [
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/kr-darkShell/LayoutShell.tsx"
       ],
-      "exports": [
-        "SidePanel"
-      ],
+      "exports": ["SidePanel"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
@@ -4627,9 +4074,7 @@
       "category": "layout",
       "usageCount": 0,
       "importedBy": [],
-      "exports": [
-        "LayoutShell"
-      ],
+      "exports": ["LayoutShell"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
@@ -4657,20 +4102,14 @@
       "relativePath": "src/layouts/Layout.tsx",
       "category": "layout",
       "usageCount": 1,
-      "importedBy": [
-        "/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx"
-      ],
-      "exports": [
-        "Layout"
-      ],
+      "importedBy": ["/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx"],
+      "exports": ["Layout"],
       "hasTests": false,
       "hasStories": true,
       "hasDocs": false,
       "linesOfCode": 16,
       "complexity": "simple",
-      "dependencies": [
-        "./Sidebar"
-      ],
+      "dependencies": ["./Sidebar"],
       "isReusable": false,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -4686,12 +4125,8 @@
       "relativePath": "src/layouts/Sidebar.tsx",
       "category": "layout",
       "usageCount": 1,
-      "importedBy": [
-        "/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/Layout.tsx"
-      ],
-      "exports": [
-        "Sidebar"
-      ],
+      "importedBy": ["/Users/okgoogle13/Projects/careercopilot/frontend/src/layouts/Layout.tsx"],
+      "exports": ["Sidebar"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
@@ -4714,18 +4149,13 @@
       "category": "legacy",
       "usageCount": 0,
       "importedBy": [],
-      "exports": [
-        "AuroraHeader",
-        "default"
-      ],
+      "exports": ["AuroraHeader", "default"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
       "linesOfCode": 104,
       "complexity": "medium",
-      "dependencies": [
-        "@/hooks/use-mode"
-      ],
+      "dependencies": ["@/hooks/use-mode"],
       "isReusable": false,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -4771,11 +4201,7 @@
       "category": "legacy",
       "usageCount": 0,
       "importedBy": [],
-      "exports": [
-        "Collapsible",
-        "CollapsibleTrigger",
-        "CollapsibleContent"
-      ],
+      "exports": ["Collapsible", "CollapsibleTrigger", "CollapsibleContent"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
@@ -4811,9 +4237,7 @@
       "hasDocs": false,
       "linesOfCode": 190,
       "complexity": "medium",
-      "dependencies": [
-        "./M3Button"
-      ],
+      "dependencies": ["./M3Button"],
       "isReusable": false,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -4829,9 +4253,7 @@
       "relativePath": "src/legacy/ui/M3Button.tsx",
       "category": "legacy",
       "usageCount": 1,
-      "importedBy": [
-        "/Users/okgoogle13/Projects/careercopilot/frontend/src/legacy/ui/M3Alert.tsx"
-      ],
+      "importedBy": ["/Users/okgoogle13/Projects/careercopilot/frontend/src/legacy/ui/M3Alert.tsx"],
       "exports": [
         "M3ButtonProps",
         "M3IconButtonProps",
@@ -4844,10 +4266,7 @@
       "hasDocs": false,
       "linesOfCode": 126,
       "complexity": "medium",
-      "dependencies": [
-        "@/lib/utils",
-        "@/hooks/use-mode"
-      ],
+      "dependencies": ["@/lib/utils", "@/hooks/use-mode"],
       "isReusable": false,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -4866,21 +4285,13 @@
       "importedBy": [
         "/Users/okgoogle13/Projects/careercopilot/frontend/src/legacy/ui/MetricCard.tsx"
       ],
-      "exports": [
-        "M3CardProps",
-        "cardVariants",
-        "M3Card",
-        "Stone"
-      ],
+      "exports": ["M3CardProps", "cardVariants", "M3Card", "Stone"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
       "linesOfCode": 81,
       "complexity": "medium",
-      "dependencies": [
-        "@/hooks/use-mode",
-        "@/lib/utils"
-      ],
+      "dependencies": ["@/hooks/use-mode", "@/lib/utils"],
       "isReusable": false,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -4897,13 +4308,7 @@
       "category": "legacy",
       "usageCount": 0,
       "importedBy": [],
-      "exports": [
-        "M3CheckboxMode",
-        "M3CheckboxProps",
-        "M3Checkbox",
-        "M3RadioProps",
-        "M3Radio"
-      ],
+      "exports": ["M3CheckboxMode", "M3CheckboxProps", "M3Checkbox", "M3RadioProps", "M3Radio"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
@@ -4926,12 +4331,7 @@
       "category": "legacy",
       "usageCount": 0,
       "importedBy": [],
-      "exports": [
-        "M3SelectOption",
-        "M3SelectMode",
-        "M3SelectProps",
-        "M3Select"
-      ],
+      "exports": ["M3SelectOption", "M3SelectMode", "M3SelectProps", "M3Select"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
@@ -4985,9 +4385,7 @@
       "category": "legacy",
       "usageCount": 0,
       "importedBy": [],
-      "exports": [
-        "MetricCard"
-      ],
+      "exports": ["MetricCard"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
@@ -5010,19 +4408,13 @@
       "category": "legacy",
       "usageCount": 0,
       "importedBy": [],
-      "exports": [
-        "MetricCard"
-      ],
+      "exports": ["MetricCard"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
       "linesOfCode": 49,
       "complexity": "medium",
-      "dependencies": [
-        "./M3Card",
-        "@/lib/utils",
-        "@/hooks/use-mode"
-      ],
+      "dependencies": ["./M3Card", "@/lib/utils", "@/hooks/use-mode"],
       "isReusable": false,
       "usesMUI": false,
       "usesCustomUI": false,
@@ -5038,12 +4430,8 @@
       "relativePath": "src/pages/AnalysisPage.tsx",
       "category": "pages",
       "usageCount": 1,
-      "importedBy": [
-        "/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx"
-      ],
-      "exports": [
-        "AnalysisPage"
-      ],
+      "importedBy": ["/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx"],
+      "exports": ["AnalysisPage"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
@@ -5069,12 +4457,8 @@
       "relativePath": "src/pages/IngestionPage.tsx",
       "category": "pages",
       "usageCount": 1,
-      "importedBy": [
-        "/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx"
-      ],
-      "exports": [
-        "IngestionPage"
-      ],
+      "importedBy": ["/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx"],
+      "exports": ["IngestionPage"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
@@ -5102,12 +4486,8 @@
       "relativePath": "src/pages/JobQueue.tsx",
       "category": "pages",
       "usageCount": 1,
-      "importedBy": [
-        "/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx"
-      ],
-      "exports": [
-        "JobQueue"
-      ],
+      "importedBy": ["/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx"],
+      "exports": ["JobQueue"],
       "hasTests": true,
       "hasStories": false,
       "hasDocs": false,

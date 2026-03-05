@@ -11,8 +11,10 @@ import { composeHero } from '../utils/heroComposer';
 import type { SolidarityManifest } from '../design/hero/heroTypes';
 
 // KrDark Assets
-const grindingStone = '/assets/kr-solidarity/specimen/kr-solidarity__specimen__triage-natural-history__v1.png';
-const paperGrain = '/assets/kr-solidarity/texture/kr-solidarity__substrate__kr-solidarity--texture--melbourne-laneway--v1__v1.png';
+const grindingStone =
+  '/assets/kr-solidarity/specimen/kr-solidarity__specimen__triage-natural-history__v1.png';
+const paperGrain =
+  '/assets/kr-solidarity/texture/kr-solidarity__substrate__kr-solidarity--texture--melbourne-laneway--v1__v1.png';
 
 interface AtsResult {
   overallScore: number;
@@ -208,7 +210,6 @@ export const AnalysisPage: React.FC = () => {
           <EvidenceUploader />
 
           <Stone
-           
             elevation="raised"
             className="border-concrete-grey/10 p-10 bg-asphalt-black/20"
           >
@@ -282,7 +283,6 @@ export const AnalysisPage: React.FC = () => {
         <aside className="space-y-8">
           {strategyResult && strategyResult.corporate_profile && (
             <Stone
-             
               elevation="floating"
               className="p-0 border-ink-gold/20 overflow-hidden bg-asphalt-black-dark"
             >
@@ -356,10 +356,10 @@ export const AnalysisPage: React.FC = () => {
           {atsResult && (
             <SkillBreakdownCard
               overallScore={atsResult.overallScore}
-              categories={atsResult.categories.map(cat => ({
+              categories={atsResult.categories.map((cat) => ({
                 label: cat.name,
                 value: cat.score,
-                details: cat.suggestions
+                details: cat.suggestions,
               }))}
               onAction={(type) => {
                 if (type === 'strengthen') {
@@ -375,7 +375,6 @@ export const AnalysisPage: React.FC = () => {
       {(strategyResult || atsResult) && (
         <div className="mt-8 relative z-10 animate-in fade-in slide-in-from-bottom-8 duration-700">
           <Stone
-           
             elevation="floating"
             className="border-ink-gold/30 p-0 overflow-hidden"
             header={

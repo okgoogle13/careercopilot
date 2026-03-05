@@ -22,7 +22,7 @@ from typing import Any
 from fastapi import APIRouter, Depends, HTTPException, status
 
 from app.core.document_export_service import DocumentExportResult, document_export_service
-from app.core.loguru_config import get_logger
+from app.core.observability import get_logger
 from app.models.document_export_schemas import (
     ApplicationPackageExportRequest,
     ApplicationPackageExportResponse,
@@ -47,8 +47,7 @@ router = APIRouter(prefix="/export", tags=["Document Export"])
 
 
 def _convert_export_result_to_response(
-    result: DocumentExportResult,
-    response_class
+    result: DocumentExportResult, response_class
 ) -> DocumentExportResponse:
     """Convert DocumentExportResult to appropriate response model."""
     return response_class(
@@ -59,7 +58,7 @@ def _convert_export_result_to_response(
         file_size_bytes=result.file_size_bytes,
         storage_path=result.storage_path,
         expires_at=result.expires_at,
-        message=result.message
+        message=result.message,
     )
 
 
@@ -136,7 +135,7 @@ async def export_cover_letter(
             "Cover letter export request",
             user_id=user_id,
             format=request.format,
-            job_title=request.job_title
+            job_title=request.job_title,
         )
 
         result = await document_export_service.export_cover_letter(
@@ -145,7 +144,7 @@ async def export_cover_letter(
             job_title=request.job_title,
             company_name=request.company_name,
             format=request.format,
-            expiration_hours=request.expiration_hours
+            expiration_hours=request.expiration_hours,
         )
 
         return _convert_export_result_to_response(result, CoverLetterExportResponse)
@@ -153,19 +152,13 @@ async def export_cover_letter(
     except ValueError as e:
         logger.warning("Invalid format requested", error=str(e), user_id=user_id)
         raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail=f"Invalid format: {e!s}"
+            status_code=status.HTTP_400_BAD_REQUEST, detail=f"Invalid format: {e!s}"
         )
     except Exception as e:
-        logger.error(
-            "Cover letter export failed",
-            error=str(e),
-            user_id=user_id,
-            exc_info=True
-        )
+        logger.error("Cover letter export failed", error=str(e), user_id=user_id, exc_info=True)
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="Failed to export cover letter"
+            detail="Failed to export cover letter",
         )
 
 
@@ -209,7 +202,7 @@ async def export_resume(
             "Resume export request",
             user_id=user_id,
             format=request.format,
-            job_title=request.job_title
+            job_title=request.job_title,
         )
 
         result = await document_export_service.export_resume(
@@ -217,7 +210,7 @@ async def export_resume(
             user_id=user_id,
             job_title=request.job_title,
             format=request.format,
-            expiration_hours=request.expiration_hours
+            expiration_hours=request.expiration_hours,
         )
 
         return _convert_export_result_to_response(result, ResumeExportResponse)
@@ -225,19 +218,12 @@ async def export_resume(
     except ValueError as e:
         logger.warning("Invalid format requested", error=str(e), user_id=user_id)
         raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail=f"Invalid format: {e!s}"
+            status_code=status.HTTP_400_BAD_REQUEST, detail=f"Invalid format: {e!s}"
         )
     except Exception as e:
-        logger.error(
-            "Resume export failed",
-            error=str(e),
-            user_id=user_id,
-            exc_info=True
-        )
+        logger.error("Resume export failed", error=str(e), user_id=user_id, exc_info=True)
         raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="Failed to export resume"
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="Failed to export resume"
         )
 
 
@@ -284,7 +270,7 @@ async def export_ksc_response(
             "KSC response export request",
             user_id=user_id,
             format=request.format,
-            job_title=job_title
+            job_title=job_title,
         )
 
         result = await document_export_service.export_ksc_response(
@@ -292,7 +278,7 @@ async def export_ksc_response(
             user_id=user_id,
             job_title=job_title,
             format=request.format,
-            expiration_hours=request.expiration_hours
+            expiration_hours=request.expiration_hours,
         )
 
         return _convert_export_result_to_response(result, KSCResponseExportResponse)
@@ -300,19 +286,13 @@ async def export_ksc_response(
     except ValueError as e:
         logger.warning("Invalid format requested", error=str(e), user_id=user_id)
         raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail=f"Invalid format: {e!s}"
+            status_code=status.HTTP_400_BAD_REQUEST, detail=f"Invalid format: {e!s}"
         )
     except Exception as e:
-        logger.error(
-            "KSC response export failed",
-            error=str(e),
-            user_id=user_id,
-            exc_info=True
-        )
+        logger.error("KSC response export failed", error=str(e), user_id=user_id, exc_info=True)
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="Failed to export KSC response"
+            detail="Failed to export KSC response",
         )
 
 
@@ -363,7 +343,7 @@ async def export_application_package(
             "Application package export request",
             user_id=user_id,
             format=request.format,
-            job_id=request.job_id
+            job_id=request.job_id,
         )
 
         result = await document_export_service.export_application_package(
@@ -372,7 +352,7 @@ async def export_application_package(
             job_id=request.job_id,
             format=request.format,
             expiration_hours=request.expiration_hours,
-            include_files=request.include_files
+            include_files=request.include_files,
         )
 
         return _convert_export_result_to_response(result, ApplicationPackageExportResponse)
@@ -380,19 +360,15 @@ async def export_application_package(
     except ValueError as e:
         logger.warning("Invalid format requested", error=str(e), user_id=user_id)
         raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail=f"Invalid format: {e!s}"
+            status_code=status.HTTP_400_BAD_REQUEST, detail=f"Invalid format: {e!s}"
         )
     except Exception as e:
         logger.error(
-            "Application package export failed",
-            error=str(e),
-            user_id=user_id,
-            exc_info=True
+            "Application package export failed", error=str(e), user_id=user_id, exc_info=True
         )
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="Failed to export application package"
+            detail="Failed to export application package",
         )
 
 
@@ -442,25 +418,19 @@ async def export_batch(
             "Batch export request",
             user_id=user_id,
             document_types=request.document_types,
-            format=request.format
+            format=request.format,
         )
 
         # TODO: Implement batch export
         raise HTTPException(
             status_code=status.HTTP_501_NOT_IMPLEMENTED,
-            detail="Batch export feature is coming soon"
+            detail="Batch export feature is coming soon",
         )
 
     except Exception as e:
-        logger.error(
-            "Batch export failed",
-            error=str(e),
-            user_id=user_id,
-            exc_info=True
-        )
+        logger.error("Batch export failed", error=str(e), user_id=user_id, exc_info=True)
         raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="Failed to export batch"
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="Failed to export batch"
         )
 
 
@@ -482,8 +452,4 @@ async def health_check() -> dict[str, str]:
     Returns:
         Dict with status information
     """
-    return {
-        "status": "ok",
-        "service": "document-export",
-        "cloud_storage": "connected"
-    }
+    return {"status": "ok", "service": "document-export", "cloud_storage": "connected"}

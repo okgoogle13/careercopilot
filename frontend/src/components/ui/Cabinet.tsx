@@ -42,7 +42,6 @@ export const Cabinet: React.FC<CabinetProps> = ({
   maxWidth = 'md',
   variant = 'standard',
 }) => {
-
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
@@ -76,14 +75,15 @@ export const Cabinet: React.FC<CabinetProps> = ({
         onClick={onClose}
       />
       <Stone
-       
         elevation="floating"
         className={`relative w-full ${maxWidthClasses[maxWidth]} shadow-2xl animate-in zoom-in-95 duration-300`}
       >
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-white/5">
           {title ? (
-            <h3 className="font-bloom text-2xl font-bold text-[var(--sys-color-worker-ash-base)]">{title}</h3>
+            <h3 className="font-bloom text-2xl font-bold text-[var(--sys-color-worker-ash-base)]">
+              {title}
+            </h3>
           ) : (
             <div />
           )}

@@ -57,7 +57,7 @@ export function KSCGenerator() {
   // Save draft whenever state changes
   useEffect(() => {
     if (isInitialLoading) return;
-    
+
     const saveDraft = async () => {
       await api.saveKSCDraft({
         criteria,
@@ -82,7 +82,6 @@ export function KSCGenerator() {
           setCriteria(result.job_details.essential_criteria.join('\n\n'));
           toast.success('Selection criteria extracted successfully!');
         } else if (result.job_details.full_description) {
-
           setCriteria(result.job_details.full_description);
           toast.success('Job description extracted (please manually refine criteria)');
         } else {
@@ -156,7 +155,7 @@ export function KSCGenerator() {
   }
 
   return (
-    <motion.div 
+    <motion.div
       initial="hidden"
       animate="visible"
       variants={staggerContainer}
@@ -174,7 +173,10 @@ export function KSCGenerator() {
         className="flex items-center justify-center mb-8 gap-4"
       >
         {[1, 2, 3].map((s) => (
-          <div key={s} className="flex items-center">
+          <div
+            key={s}
+            className="flex items-center"
+          >
             <div
               className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg transition-all duration-300 ${
                 step >= s
@@ -203,7 +205,7 @@ export function KSCGenerator() {
         <AnimatePresence>
           {/* Step 1: Criteria Input */}
           {step === 1 && (
-            <motion.div 
+            <motion.div
               key="step1"
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -253,7 +255,9 @@ export function KSCGenerator() {
                   <span className="w-full border-t border-outline-variant" />
                 </div>
                 <div className="relative flex justify-center text-xs uppercase">
-                  <span className="bg-surface px-2 text-on-surface-variant font-body">Or enter manually</span>
+                  <span className="bg-surface px-2 text-on-surface-variant font-body">
+                    Or enter manually
+                  </span>
                 </div>
               </div>
 
@@ -282,7 +286,7 @@ export function KSCGenerator() {
 
           {/* Step 2: STAR Method */}
           {step === 2 && (
-            <motion.div 
+            <motion.div
               key="step2"
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -290,11 +294,15 @@ export function KSCGenerator() {
               transition={KrDarkSpring}
               className="space-y-6"
             >
-              <h2 className="text-title-large font-display font-bold text-on-surface">Step 2: The STAR Method</h2>
+              <h2 className="text-title-large font-display font-bold text-on-surface">
+                Step 2: The STAR Method
+              </h2>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <label className="text-primary font-bold text-label-large font-body">S — Situation</label>
+                  <label className="text-primary font-bold text-label-large font-body">
+                    S — Situation
+                  </label>
                   <Textarea
                     value={star.situation}
                     onChange={(e) => setStar({ ...star, situation: e.target.value })}
@@ -303,7 +311,9 @@ export function KSCGenerator() {
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-secondary font-bold text-label-large font-body">T — Task</label>
+                  <label className="text-secondary font-bold text-label-large font-body">
+                    T — Task
+                  </label>
                   <Textarea
                     value={star.task}
                     onChange={(e) => setStar({ ...star, task: e.target.value })}
@@ -312,7 +322,9 @@ export function KSCGenerator() {
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-tertiary font-bold text-label-large font-body">A — Action</label>
+                  <label className="text-tertiary font-bold text-label-large font-body">
+                    A — Action
+                  </label>
                   <Textarea
                     value={star.action}
                     onChange={(e) => setStar({ ...star, action: e.target.value })}
@@ -321,7 +333,9 @@ export function KSCGenerator() {
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-error font-bold text-label-large font-body">R — Result</label>
+                  <label className="text-error font-bold text-label-large font-body">
+                    R — Result
+                  </label>
                   <Textarea
                     value={star.result}
                     onChange={(e) => setStar({ ...star, result: e.target.value })}
@@ -341,10 +355,14 @@ export function KSCGenerator() {
                 </Button>
                 <Button
                   onClick={handleGenerate}
-                  disabled={!star.situation || !star.task || !star.action || !star.result || loading}
+                  disabled={
+                    !star.situation || !star.task || !star.action || !star.result || loading
+                  }
                   className="bg-primary-container text-on-primary-container hover:bg-primary hover:text-on-primary rounded-pebble px-8 h-12 flex items-center gap-2 font-bold shadow-elevation-1 transition-all group"
                 >
-                  <Sparkles className={`w-5 h-5 ${loading ? 'animate-pulse text-tertiary' : 'group-hover:rotate-12 transition-transform'}`} />
+                  <Sparkles
+                    className={`w-5 h-5 ${loading ? 'animate-pulse text-tertiary' : 'group-hover:rotate-12 transition-transform'}`}
+                  />
                   {loading ? 'Honing Response...' : 'Generate KSC'}
                 </Button>
               </div>
@@ -353,7 +371,7 @@ export function KSCGenerator() {
 
           {/* Step 3: Review */}
           {step === 3 && (
-            <motion.div 
+            <motion.div
               key="step3"
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}

@@ -20,7 +20,11 @@ export const LandingPage: React.FC = () => {
           loadHeroRegistry(),
         ]);
 
-        const result = composeHero(manifest as SolidarityManifest, registry, 'devotional-anchor-hero');
+        const result = composeHero(
+          manifest as SolidarityManifest,
+          registry,
+          'devotional-anchor-hero'
+        );
 
         if (result.valid) {
           setHeroData({

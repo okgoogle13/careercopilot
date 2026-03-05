@@ -28,7 +28,7 @@ describe('KrIcon', () => {
         name="leaf"
         ariaLabel="Leaf motif"
         testId="kr-icon"
-      />,
+      />
     );
 
     const icon = screen.getByTestId('kr-icon');

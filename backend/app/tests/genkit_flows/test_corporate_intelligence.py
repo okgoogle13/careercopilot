@@ -52,7 +52,7 @@ def test_research_company_falls_back_without_genai(monkeypatch):
         "SearchService",
         lambda: SimpleNamespace(research_company=lambda name: "Test Research Summary"),
     )
-    monkeypatch.setattr(module, "genai", None)
+    monkeypatch.setattr(module, "get_configured_google_generativeai", lambda x: None)
     monkeypatch.setattr(module, "_get_model", lambda: None)
 
     profile = module.research_company("Test Company")

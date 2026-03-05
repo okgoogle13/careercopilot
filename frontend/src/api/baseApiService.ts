@@ -1,9 +1,9 @@
 /**
  * Base API Service Factory
- * 
+ *
  * Eliminates code duplication across API services by providing a reusable
  * API client factory with authentication and error handling built-in.
- * 
+ *
  * This replaces the pattern of creating axios instances in each service file
  * with auth interceptors and error handling duplicated 24+ times.
  */
@@ -40,25 +40,17 @@ export class BaseApiService {
     // Remove leading slash from endpoint if present
     const cleanEndpoint = endpoint.startsWith('/') ? endpoint.slice(1) : endpoint;
     // Remove trailing slash from basePath if present
-    const cleanBasePath = this.basePath.endsWith('/') 
-      ? this.basePath.slice(0, -1) 
-      : this.basePath;
-    
+    const cleanBasePath = this.basePath.endsWith('/') ? this.basePath.slice(0, -1) : this.basePath;
+
     return `${cleanBasePath}/${cleanEndpoint}`;
   }
 
   /**
    * GET request
    */
-  protected async get<T = any>(
-    endpoint: string, 
-    config?: AxiosRequestConfig
-  ): Promise<T> {
+  protected async get<T = any>(endpoint: string, config?: AxiosRequestConfig): Promise<T> {
     try {
-      const response: AxiosResponse<T> = await this.client.get(
-        this.buildUrl(endpoint),
-        config
-      );
+      const response: AxiosResponse<T> = await this.client.get(this.buildUrl(endpoint), config);
       return response.data;
     } catch (error) {
       throw handleApiError(error);
@@ -128,15 +120,9 @@ export class BaseApiService {
   /**
    * DELETE request
    */
-  protected async delete<T = any>(
-    endpoint: string,
-    config?: AxiosRequestConfig
-  ): Promise<T> {
+  protected async delete<T = any>(endpoint: string, config?: AxiosRequestConfig): Promise<T> {
     try {
-      const response: AxiosResponse<T> = await this.client.delete(
-        this.buildUrl(endpoint),
-        config
-      );
+      const response: AxiosResponse<T> = await this.client.delete(this.buildUrl(endpoint), config);
       return response.data;
     } catch (error) {
       throw handleApiError(error);
@@ -146,31 +132,31 @@ export class BaseApiService {
 
 /**
  * Example usage in a service file:
- * 
+ *
  * ```typescript
  * import { BaseApiService } from './baseApiService';
- * 
+ *
  * export class JobService extends BaseApiService {
  *   constructor() {
  *     super({ basePath: '/jobs' });
  *   }
- * 
+ *
  *   async getJobs(): Promise<Job[]> {
  *     return this.get<Job[]>('');
  *   }
- * 
+ *
  *   async getJob(id: string): Promise<Job> {
  *     return this.get<Job>(`/${id}`);
  *   }
- * 
+ *
  *   async createJob(data: JobCreateRequest): Promise<Job> {
  *     return this.post<Job>('', data);
  *   }
  * }
- * 
+ *
  * export const jobService = new JobService();
  * ```
- * 
+ *
  * This eliminates the need for:
  * - Creating axios instances in each service
  * - Adding auth interceptors in each service

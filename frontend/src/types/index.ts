@@ -19,3 +19,12 @@ export interface Template {
   name: string;
   type: DocumentType;
 }
+
+export type {
+  AtsComplianceInfo,
+  ColorConfig,
+  CoverLetterThemeConfig,
+  LayoutConfig,
+  ResumeThemeConfig,
+  TypographyConfig,
+} from './themeConfig';

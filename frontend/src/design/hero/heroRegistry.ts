@@ -58,5 +58,3 @@ export async function loadHeroRegistry(): Promise<HeroRegistry> {
     return FALLBACK_REGISTRY;
   }
 }
-
-

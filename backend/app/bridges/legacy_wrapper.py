@@ -3,11 +3,12 @@ from typing import Any
 
 from app.core.cache_decorators import cached_ai_operation
 from app.core.input_validation import InputSanitizer
-from app.core.monitoring import monitor_performance
+from app.core.observability import monitor_performance
 from app.genkit_flows.ats_scoring import atsScoring
 from app.schemas.legacy_migration import ATSScoringInput
 
 logger = logging.getLogger(__name__)
+
 
 class ATSScorer:
     """
@@ -42,7 +43,7 @@ class ATSScorer:
                 user_id=user_id,
                 resume_text=resume_text,
                 job_description=job_description,
-                profile_keywords=profile_keywords
+                profile_keywords=profile_keywords,
             )
 
             # 2. Sanitize (Legacy behavior)
@@ -85,6 +86,7 @@ class ATSScorer:
         except Exception as e:
             logger.error(f"Error in ATS analysis Bridge for user {user_id}: {e!s}")
             raise
+
 
 # Global instance for import compatibility
 ats_scorer = ATSScorer()

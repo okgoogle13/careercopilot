@@ -92,9 +92,7 @@ export const ROUTE_MODE_MAP: RouteModeConfig[] = [
  */
 export function getModeForRoute(pathname: string): AppMode {
   // Sort routes by path length descending (longest/most specific first)
-  const sortedRoutes = [...ROUTE_MODE_MAP].sort(
-    (a, b) => b.path.length - a.path.length
-  );
+  const sortedRoutes = [...ROUTE_MODE_MAP].sort((a, b) => b.path.length - a.path.length);
 
   // Find first matching route
   const matchedRoute = sortedRoutes.find((route) => {
@@ -136,7 +134,5 @@ export function shouldAutoSwitchMode(pathname: string): boolean {
  * @returns Array of route paths for the given mode
  */
 export function getRoutesForMode(mode: AppMode): string[] {
-  return ROUTE_MODE_MAP.filter((route) => route.mode === mode).map(
-    (route) => route.path
-  );
+  return ROUTE_MODE_MAP.filter((route) => route.mode === mode).map((route) => route.path);
 }

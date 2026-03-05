@@ -50,9 +50,7 @@ test.describe('Critical User Paths - Smoke Tests', () => {
 
       // Should either load dashboard or redirect to login
       const url = page.url();
-      expect(
-        url.includes('dashboard') || url.includes('login')
-      ).toBeTruthy();
+      expect(url.includes('dashboard') || url.includes('login')).toBeTruthy();
     });
   });
 
@@ -227,7 +225,7 @@ test.describe('Critical User Paths - Smoke Tests', () => {
     });
 
     test('handles network errors gracefully', async ({ page }) => {
-      await page.route('**/api/**', route => route.abort('failed'));
+      await page.route('**/api/**', (route) => route.abort('failed'));
 
       await page.goto(`${BASE_URL}/opportunities`);
       await page.waitForLoadState('networkidle');
@@ -237,7 +235,7 @@ test.describe('Critical User Paths - Smoke Tests', () => {
     });
 
     test('recovers from API timeout', async ({ page }) => {
-      await page.route('**/api/**', route => {
+      await page.route('**/api/**', (route) => {
         setTimeout(() => route.continue(), 10000); // 10s delay
       });
 

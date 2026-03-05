@@ -4,28 +4,9 @@ from typing import List
 
 import requests
 from bs4 import BeautifulSoup
-from dotenv import load_dotenv
 from pydantic import BaseModel, Field
 
-try:
-    import genkit
-    from genkit.plugins import google_genai
-except Exception:
-    genkit = None
-    google_genai = None
-
-# Removed top-level gemini_pro initialization to avoid import-time bugs.
-from app.core.genkit_init import get_model
-
-
-def _noop_flow(*args, **kwargs):
-    def _decorator(fn):
-        return fn
-
-    return _decorator
-
-
-genkit_flow = getattr(genkit, "flow", _noop_flow) if genkit else _noop_flow
+from app.core.genkit_init import genkit_flow, get_model
 
 
 class CompanyAnalysis(BaseModel):

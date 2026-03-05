@@ -15,8 +15,8 @@ from typing import Optional
 
 from pydantic import BaseModel, Field
 
+from app.core.genkit_init import async_genkit_flow
 from app.genkit_flows.company_context import CompanyContext, generate_company_context
-from app.genkit_flows.flow_decorator import async_genkit_flow
 from app.genkit_flows.job_listing_extractor import extract_job_listing_details_flow
 from app.models.schemas import JobListingDetails
 
@@ -89,7 +89,10 @@ async def analyze_job_from_url(url: str) -> UnifiedJobAnalysis:
                 # Continue without company context - not critical
 
         return UnifiedJobAnalysis(
-            job_details=job_details, company_context=company_context, analysis_success=True
+            job_details=job_details,
+            company_context=company_context,
+            analysis_success=True,
+            error_message=None,
         )
 
     except Exception as e:

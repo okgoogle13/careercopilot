@@ -1,5 +1,12 @@
 import { genkitApi } from './genkit';
-import type { IntelligencePackage, Job, JobAnalysis, UserProfile, ImprovedBullet, SkillsGap } from '../types/intelligence';
+import type {
+  IntelligencePackage,
+  Job,
+  JobAnalysis,
+  UserProfile,
+  ImprovedBullet,
+  SkillsGap,
+} from '../types/intelligence';
 export type { IntelligencePackage, Job, JobAnalysis, UserProfile, ImprovedBullet, SkillsGap };
 
 const STOP_WORDS = new Set([
@@ -155,7 +162,9 @@ function buildAnalysisFromText(text: string): JobAnalysis {
   const jobTitle =
     findTaggedValue(text, 'job title') ||
     findTaggedValue(text, 'role') ||
-    lines.find((line) => /manager|officer|specialist|coordinator|advisor|engineer|analyst/i.test(line)) ||
+    lines.find((line) =>
+      /manager|officer|specialist|coordinator|advisor|engineer|analyst/i.test(line)
+    ) ||
     'Unknown Role';
 
   const companyName =
@@ -165,7 +174,13 @@ function buildAnalysisFromText(text: string): JobAnalysis {
     'Unknown Company';
 
   const minimumRequirements = uniqueNonEmpty(
-    extractLinesByHints(lines, ['must', 'required', 'minimum', 'essential criteria', 'qualification'])
+    extractLinesByHints(lines, [
+      'must',
+      'required',
+      'minimum',
+      'essential criteria',
+      'qualification',
+    ])
   );
 
   const desirableAttributes = uniqueNonEmpty(
@@ -185,7 +200,10 @@ function buildAnalysisFromText(text: string): JobAnalysis {
   );
 
   const roleSpecificHardSkills = uniqueNonEmpty(extractHardSkills(text));
-  const keywords = uniqueNonEmpty([...extractKeywords(text), ...roleSpecificHardSkills]).slice(0, 20);
+  const keywords = uniqueNonEmpty([...extractKeywords(text), ...roleSpecificHardSkills]).slice(
+    0,
+    20
+  );
 
   return {
     jobTitle,
@@ -204,7 +222,15 @@ function buildAnalysisFromText(text: string): JobAnalysis {
 function profileToResumeText(profile: UserProfile): string {
   const skills = profile.skills.flatMap((category) => category.skillsList).join(', ');
   const experience = profile.experience
-    .map((entry) => [entry.jobTitle, entry.organization, entry.description, ...entry.responsibilities, entry.achievement].join('\n'))
+    .map((entry) =>
+      [
+        entry.jobTitle,
+        entry.organization,
+        entry.description,
+        ...entry.responsibilities,
+        entry.achievement,
+      ].join('\n')
+    )
     .join('\n\n');
   const certifications = profile.development.certifications.map((item) => item.name).join(', ');
 
@@ -230,7 +256,11 @@ function buildQuantificationSuggestions(profile: UserProfile): Array<{
   suggestedRewrite: string;
   contextualWhy: string;
 }> {
-  const suggestions: Array<{ originalText: string; suggestedRewrite: string; contextualWhy: string }> = [];
+  const suggestions: Array<{
+    originalText: string;
+    suggestedRewrite: string;
+    contextualWhy: string;
+  }> = [];
 
   for (const entry of profile.experience) {
     for (const responsibility of entry.responsibilities) {
@@ -253,7 +283,8 @@ function buildQuantificationSuggestions(profile: UserProfile): Array<{
   if (suggestions.length === 0) {
     suggestions.push({
       originalText: 'Delivered strong outcomes across key responsibilities.',
-      suggestedRewrite: 'Delivered strong outcomes, including a 25% reduction in processing time within one quarter.',
+      suggestedRewrite:
+        'Delivered strong outcomes, including a 25% reduction in processing time within one quarter.',
       contextualWhy: 'Quantified outcomes make impact easier to evaluate quickly.',
     });
   }
@@ -380,7 +411,11 @@ export const generateIntelligencePackage = async (
     const optimized = await genkitApi.optimizeResume({
       resume_text: resumeText,
       missing_keywords: missingKeywords.slice(0, 20),
-      job_description: [analysis.jobTitle, analysis.companyName, ...analysis.minimumRequirements].join('\n'),
+      job_description: [
+        analysis.jobTitle,
+        analysis.companyName,
+        ...analysis.minimumRequirements,
+      ].join('\n'),
     });
     optimizedResumeText = optimized.resume_text || resumeText;
   } catch {

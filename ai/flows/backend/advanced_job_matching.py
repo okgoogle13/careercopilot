@@ -7,7 +7,7 @@ of compatibility between candidates and job opportunities.
 
 import json
 import os
-from typing import Dict, List, Optional
+from typing import Any, Dict, List, Optional, cast
 
 from dotenv import load_dotenv
 from pydantic import BaseModel, Field
@@ -16,12 +16,14 @@ from app.core.ai_config import get_ai_config
 from app.core.ai_error_handling import AIError, AIErrorType, with_ai_error_handling
 from app.core.input_validation import InputSanitizer, InputValidationError
 
+from .types import ModelConfig as ModelConfigProtocol
+
 try:
     import genkit
     from genkit.plugins import google_genai
 except Exception:
-    genkit = None
-    google_genai = None
+    genkit = None  # type: ignore[assignment]
+    google_genai = None  # type: ignore[assignment]
 
 
 def _noop_flow(*args, **kwargs):
@@ -36,10 +38,12 @@ genkit_flow = getattr(genkit, "flow", _noop_flow)
 
 # Load environment variables
 load_dotenv()
-if genkit and getattr(genkit, "get_plugin", None) and not genkit.get_plugin("googleai"):
-    genkit.init(plugins=[google_genai.init(api_key=os.getenv("GEMINI_API_KEY"))])
+if genkit is not None:
+    genkit_module: Any = genkit
+    if getattr(genkit_module, "get_plugin", None) and not genkit_module.get_plugin("googleai"):  # type: ignore[attr-defined]
+        genkit_module.init(plugins=[google_genai.init(api_key=os.getenv("GEMINI_API_KEY"))])  # type: ignore[attr-defined]
 
-gemini_pro = get_ai_config().get_model_config("gemini-3.0-flash")
+gemini_pro: ModelConfigProtocol = cast(ModelConfigProtocol, get_ai_config().get_model_config("gemini-3.0-flash"))
 
 
 # Pydantic models for structured outputs
@@ -146,7 +150,7 @@ As an expert career coach and talent acquisition specialist, perform a comprehen
 Analyze how well this candidate fits the job opportunity across multiple dimensions.
 
 CANDIDATE PROFILE:
-{json.dumps(sanitized_profile, separators=(\',\', \':\'))}
+{json.dumps(sanitized_profile, separators=(",", ":"))}
 
 JOB DESCRIPTION:
 {sanitized_job.sanitized_content}
@@ -234,10 +238,10 @@ As an expert career strategist, rank these job opportunities for the candidate f
 Consider overall fit, success probability, career growth potential, and strategic value.
 
 CANDIDATE PROFILE:
-{json.dumps(sanitized_profile, separators=(\',\', \':\'))}
+{json.dumps(sanitized_profile, separators=(",", ":"))}
 
 JOB OPPORTUNITIES:
-{json.dumps(sanitized_jobs, separators=(\',\', \':\'))}
+{json.dumps(sanitized_jobs, separators=(",", ":"))}
 
 RANKING CRITERIA:
 1. Overall match quality (skills, experience, background)
@@ -316,7 +320,7 @@ As a career strategist and market analyst, analyze this candidate's competitive 
 for their target role in the specified market.
 
 CANDIDATE PROFILE:
-{json.dumps(sanitized_profile, separators=(\',\', \':\'))}
+{json.dumps(sanitized_profile, separators=(",", ":"))}
 
 TARGET ROLE: {sanitized_role.sanitized_content}
 LOCATION/MARKET: {sanitized_location.sanitized_content}

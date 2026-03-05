@@ -87,7 +87,11 @@
       "Bash(__NEW_LINE_9b190d747c5ebd61__ echo \"\")",
       "Bash(for file in app/tests/core/test_ai_client_expanded.py app/tests/agents/test_test_automation_specialist.py app/tests/genkit_flows/test_extract_resume_entities.py app/tests/genkit_flows/test_company_analyzer.py app/tests/genkit_flows/test_ksc_generator_expanded.py app/tests/genkit_flows/test_document_generator.py app/tests/genkit_flows/test_extract_job_requirements.py app/tests/ai/test_base_service.py)",
       "Bash(do sed -i '' 's/from backend\\\\.app\\\\./from app./g' \"$file\")",
-      "Bash(pkill:*)"
+      "Bash(pkill:*)",
+      "Bash(source:*)",
+      "Bash(./venv/bin/pip install:*)",
+      "Bash(venv/bin/pip install:*)",
+      "Bash(brew install:*)"
     ],
     "deny": [],
     "ask": []

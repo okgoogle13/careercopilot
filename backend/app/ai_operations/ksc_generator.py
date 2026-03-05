@@ -10,7 +10,7 @@ from typing import Any
 
 from app.core.cache_decorators import cached_ai_operation
 from app.core.input_validation import InputSanitizer, InputValidationError
-from app.core.monitoring import monitor_performance
+from app.core.observability import monitor_performance
 from app.schemas.career_master import CareerDatabase
 
 logger = logging.getLogger(__name__)
@@ -22,7 +22,7 @@ class KSCGenerator:
     def __init__(self):
         # Import the working genkit flows
         from app.genkit_flows.ksc_generator import generateCompleteKscResponse, generateKscResponse
-        
+
         self.ksc_complete_flow = generateCompleteKscResponse
         self.ksc_basic_flow = generateKscResponse
 
@@ -59,13 +59,15 @@ class KSCGenerator:
 
             # Sanitize inputs
             sanitized_ksc = InputSanitizer.sanitize_text_input(ksc_statement)
-            
+
             # Convert user_profile_data to CareerDatabase model for the flow
             # We use model_validate to handle the dictionary transformation
             try:
                 profile_model = CareerDatabase.model_validate(user_profile_data)
             except Exception as e:
-                logger.warning(f"Could not validate profile data against CareerDatabase: {e!s}. Using raw dict.")
+                logger.warning(
+                    f"Could not validate profile data against CareerDatabase: {e!s}. Using raw dict."
+                )
                 # Fallback to creating a minimal model if needed, but for now we'll pass it if possible
                 # or raise error if strictness is required.
                 raise InputValidationError(f"Invalid profile data structure: {e!s}")
@@ -75,16 +77,16 @@ class KSCGenerator:
             result = await self.ksc_complete_flow(
                 profile=profile_model,
                 ksc_statement=sanitized_ksc.sanitized_content,
-                response_length=response_length
+                response_length=response_length,
             )
 
             # Convert result to dictionary for backward compatibility with existing API
             # result is a KSCResponseComplete Pydantic model
             parsed_result = result.model_dump()
-            
+
             # Ensure keys match what the previous frontend/service expected
             # (ksc_analysis, experience_selection, star_response)
-            
+
             logger.info(
                 f"KSC STAR response generated for user {user_id}",
                 extra={
@@ -99,6 +101,7 @@ class KSCGenerator:
         except Exception as e:
             logger.error(f"Error in KSC generation for user {user_id}: {e!s}")
             from app.core.ai_error_handling import AIError, AIErrorType
+
             raise AIError(
                 message=f"KSC generation failed: {e!s}",
                 error_type=AIErrorType.UNKNOWN,
@@ -122,18 +125,13 @@ class KSCGenerator:
         responses = []
         for ksc in ksc_statements:
             resp = await self.generate_star_response(
-                user_id=user_id,
-                user_profile_data=user_profile_data,
-                ksc_statement=ksc
+                user_id=user_id, user_profile_data=user_profile_data, ksc_statement=ksc
             )
             responses.append(resp)
-            
+
         return {
             "ksc_responses": responses,
-            "metadata": {
-                "count": len(ksc_statements),
-                "user_id": user_id
-            }
+            "metadata": {"count": len(ksc_statements), "user_id": user_id},
         }
 
     @monitor_performance("ksc_response_optimization")
@@ -152,7 +150,7 @@ class KSCGenerator:
         return {
             "status": "upgrading",
             "message": "Optimization flow is being migrated to Genkit.",
-            "original_response": existing_response
+            "original_response": existing_response,
         }
 
 

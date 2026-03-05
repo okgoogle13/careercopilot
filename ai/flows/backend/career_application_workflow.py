@@ -15,7 +15,9 @@ from app.core.ai_config import get_ai_config
 from app.core.ai_error_handling import with_ai_error_handling
 from app.core.input_validation import InputSanitizer, InputValidationError
 
-from .ksc_generator import STAR_Response, generateKscResponse
+from app.genkit_flows.flow_decorator import async_genkit_flow
+from app.core.monitoring import monitor_performance
+from .ksc_generator import STARResponse, generateKscResponse
 from .resume_optimizer import optimize_resume
 from ai.schemas.backend.document_models import CareerProfile, TailoredResumeResult
 
@@ -37,7 +39,7 @@ try:
 
     GENKIT_AVAILABLE = True
 except ImportError:
-    genkit = None
+    genkit = None  # type: ignore[assignment]
     GENKIT_AVAILABLE = False
 
     def _noop_flow(*args, **kwargs):
@@ -57,13 +59,13 @@ gemini_pro = get_ai_config().get_model_config("gemini-3.0-flash")
 class KSCResponsesResult(BaseModel):
     """Result structure for KSC responses generation"""
 
-    generated_responses: List[Dict[str, STAR_Response]] = Field(
-        description="Generated KSC STAR responses"
+    generated_responses: List[Dict[str, STARResponse]] = Field(
+        default_factory=list, description="Generated KSC STAR responses"
     )
-    total_criteria_addressed: int = Field(description="Number of criteria addressed")
-    coverage_completeness: str = Field(description="full, partial, or minimal coverage")
+    total_criteria_addressed: int = Field(default=0, description="Number of criteria addressed")
+    coverage_completeness: str = Field(default="minimal", description="full, partial, or minimal coverage")
     response_quality_score: int = Field(
-        description="Overall response quality (0-100)", ge=0, le=100
+        default=0, description="Overall response quality (0-100)", ge=0, le=100
     )
 
 
@@ -73,35 +75,37 @@ class ApplicationPackageResult(BaseModel):
     success: bool = Field(description="Whether package generation succeeded")
 
     # Core components
-    tailored_resume: Optional[TailoredResumeResult] = Field(description="Tailored resume result")
-    cover_letter: Optional[SmartCoverLetter] = Field(description="Generated cover letter")
-    ksc_responses: Optional[KSCResponsesResult] = Field(description="KSC responses if applicable")
+    tailored_resume: Optional[TailoredResumeResult] = Field(default=None, description="Tailored resume result")
+    cover_letter: Optional[SmartCoverLetter] = Field(default=None, description="Generated cover letter")
+    ksc_responses: Optional[KSCResponsesResult] = Field(default=None, description="KSC responses if applicable")
 
     # Supporting analysis
     resume_intelligence: Optional[ResumeIntelligenceReport] = Field(
+        default=None,
         description="Resume intelligence analysis"
     )
     company_research: Optional[CompanyResearchInsights] = Field(
+        default=None,
         description="Company research insights"
     )
 
     # Package metadata
-    job_match_score: int = Field(description="Overall job match score (0-100)", ge=0, le=100)
-    application_strength: str = Field(description="excellent, strong, good, fair, or weak")
-    competitive_positioning: List[str] = Field(description="Key competitive advantages")
+    job_match_score: int = Field(default=0, description="Overall job match score (0-100)", ge=0, le=100)
+    application_strength: str = Field(default="weak", description="excellent, strong, good, fair, or weak")
+    competitive_positioning: List[str] = Field(default_factory=list, description="Key competitive advantages")
     success_probability: int = Field(
-        description="Estimated application success probability", ge=0, le=100
+        default=0, description="Estimated application success probability", ge=0, le=100
     )
 
     # Recommendations
-    application_strategy: List[str] = Field(description="Strategic recommendations for application")
-    interview_prep_focus: List[str] = Field(description="Key areas for interview preparation")
-    follow_up_recommendations: List[str] = Field(description="Follow-up strategy recommendations")
+    application_strategy: List[str] = Field(default_factory=list, description="Strategic recommendations for application")
+    interview_prep_focus: List[str] = Field(default_factory=list, description="Key areas for interview preparation")
+    follow_up_recommendations: List[str] = Field(default_factory=list, description="Follow-up strategy recommendations")
 
     # Processing details
-    generation_timestamp: str = Field(description="When package was generated")
-    processing_time_seconds: float = Field(description="Total processing time")
-    components_generated: List[str] = Field(description="Successfully generated components")
+    generation_timestamp: str = Field(default_factory=lambda: datetime.now().isoformat(), description="When package was generated")
+    processing_time_seconds: float = Field(default=0.0, description="Total processing time")
+    components_generated: List[str] = Field(default_factory=list, description="Successfully generated components")
     error_details: List[str] = Field(default_factory=list, description="Any errors encountered")
 
 
@@ -152,7 +156,7 @@ async def generate_application_package(
 
         # Build unified CareerProfile
         profile = CareerProfile.from_legacy_dict(
-            sanitized_profile_dict, 
+            sanitized_profile_dict,
             sanitized_job_desc.sanitized_content
         )
 
@@ -297,7 +301,7 @@ async def _generate_ksc_responses(
 ) -> KSCResponsesResult:
     """Generate STAR responses for all identified KSC criteria."""
     responses = []
-    
+
     for criterion in criteria:
         try:
             star_response = await generateKscResponse(
@@ -306,7 +310,7 @@ async def _generate_ksc_responses(
             responses.append({criterion: star_response})
         except Exception as e:
             print(f"  ⚠ Failed to generate response for criterion: {criterion[:30]}... ({str(e)})")
-            
+
     return KSCResponsesResult(
         generated_responses=responses,
         total_criteria_addressed=len(responses),
@@ -319,7 +323,7 @@ def _generate_application_strategy(result: ApplicationPackageResult, job_descrip
     """Generate comprehensive application strategy and recommendations."""
 
     # Calculate overall match score based on available components
-    match_score = 50  # Base score
+    match_score: float = 50.0  # Base score
 
     if result.resume_intelligence:
         match_score += result.resume_intelligence.resume_analysis.overall_score * 0.3

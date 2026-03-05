@@ -79,28 +79,29 @@ export function Signal({
     };
 
     // Kerala Rage kr-solidarity semantic color mapping
-    const semanticColorMap: Record<M3AlertSeverity, { bg: string; text: string; border?: string }> = {
-      info: {
-        bg: 'var(--sys-color-signalGreen-base)',
-        text: 'var(--sys-color-charcoalBackground-base)',
-        border: 'var(--sys-color-signalGreen-base)',
-      },
-      success: {
-        bg: 'var(--sys-color-kr-activistSmokeGreen-base)',
-        text: 'var(--sys-color-charcoalBackground-base)',
-        border: 'var(--sys-color-kr-activistSmokeGreen-base)',
-      },
-      warning: {
-        bg: 'var(--sys-color-stencilYellow-base)',
-        text: 'var(--sys-color-charcoalBackground-base)',
-        border: 'var(--sys-color-stencilYellow-base)',
-      },
-      error: {
-        bg: 'var(--sys-color-kr-charcoalRed-base)',
-        text: 'var(--sys-color-worker-ash-base)',
-        border: 'var(--sys-color-kr-charcoalRed-base)',
-      },
-    };
+    const semanticColorMap: Record<M3AlertSeverity, { bg: string; text: string; border?: string }> =
+      {
+        info: {
+          bg: 'var(--sys-color-signalGreen-base)',
+          text: 'var(--sys-color-charcoalBackground-base)',
+          border: 'var(--sys-color-signalGreen-base)',
+        },
+        success: {
+          bg: 'var(--sys-color-kr-activistSmokeGreen-base)',
+          text: 'var(--sys-color-charcoalBackground-base)',
+          border: 'var(--sys-color-kr-activistSmokeGreen-base)',
+        },
+        warning: {
+          bg: 'var(--sys-color-stencilYellow-base)',
+          text: 'var(--sys-color-charcoalBackground-base)',
+          border: 'var(--sys-color-stencilYellow-base)',
+        },
+        error: {
+          bg: 'var(--sys-color-kr-charcoalRed-base)',
+          text: 'var(--sys-color-worker-ash-base)',
+          border: 'var(--sys-color-kr-charcoalRed-base)',
+        },
+      };
 
     const colors = semanticColorMap[severity];
 

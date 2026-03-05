@@ -1,7 +1,11 @@
 """Unit tests for the web search service."""
+
+from unittest.mock import AsyncMock, patch
+
 import pytest
-from unittest.mock import patch, AsyncMock
-from app.services.web_search import web_search, search_company_info, search_job_market_trends
+
+from app.services.web_search import search_company_info, search_job_market_trends, web_search
+
 
 @pytest.mark.asyncio
 async def test_web_search_salary_query():
@@ -11,6 +15,7 @@ async def test_web_search_salary_query():
     assert any("Salary" in r["title"] or "PayScale" in r["title"] for r in results)
     assert any("https://www.seek.com.au" in r["url"] for r in results)
 
+
 @pytest.mark.asyncio
 async def test_web_search_social_work_query():
     """Test web search with a social work-related query."""
@@ -19,6 +24,7 @@ async def test_web_search_social_work_query():
     assert any("Social" in r["title"] for r in results)
     assert all("snippet" in r for r in results)
 
+
 @pytest.mark.asyncio
 async def test_web_search_general_query():
     """Test web search with a general query."""
@@ -26,12 +32,21 @@ async def test_web_search_general_query():
     assert len(results) == 1
     assert "Search results for: coding paradigms" in results[0]["title"]
 
+
+@pytest.mark.asyncio
+async def test_web_search_zero_max_results_returns_empty_list():
+    """Result limiting should support zero without errors."""
+    results = await web_search("salary benchmark", max_results=0)
+    assert results == []
+
+
 @pytest.mark.asyncio
 async def test_web_search_error_handling():
     """Test error handling in web search."""
     with patch("asyncio.sleep", side_effect=Exception("Async error")):
         results = await web_search("any query")
         assert results == []
+
 
 @pytest.mark.asyncio
 async def test_search_company_info():
@@ -41,6 +56,8 @@ async def test_search_company_info():
     assert info["name"] == "Google"
     assert "industry" in info
     assert "website" in info
+    assert info["website"] == "https://google.com.au"
+
 
 @pytest.mark.asyncio
 async def test_search_company_info_error():
@@ -48,6 +65,7 @@ async def test_search_company_info_error():
     with patch("asyncio.sleep", side_effect=RuntimeError("Search error")):
         info = await search_company_info("Any Company")
         assert info is None
+
 
 @pytest.mark.asyncio
 async def test_search_job_market_trends():
@@ -59,6 +77,7 @@ async def test_search_job_market_trends():
     assert "top_skills" in trends
     assert len(trends["top_skills"]) > 0
     assert "salary_trends" in trends
+
 
 @pytest.mark.asyncio
 async def test_search_job_market_trends_error():

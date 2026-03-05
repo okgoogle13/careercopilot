@@ -9,7 +9,10 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const HERO_REGISTRY_PATH = path.join(__dirname, '../../public/assets/kr-solidarity/kr-solidarity.hero-registry.json');
+const HERO_REGISTRY_PATH = path.join(
+  __dirname,
+  '../../public/assets/kr-solidarity/kr-solidarity.hero-registry.json'
+);
 
 const UI_KIT_LAYER_RULES = [
   {
@@ -53,19 +56,19 @@ function injectLayers(registry) {
   for (const composition of registry.compositions) {
     for (const rule of UI_KIT_LAYER_RULES) {
       // Check if rule applies to this composition type
-      const shouldApply = rule.applyTo.includes('*') ||
-                         rule.applyTo.some(type => composition.id.includes(type));
+      const shouldApply =
+        rule.applyTo.includes('*') || rule.applyTo.some((type) => composition.id.includes(type));
 
       if (!shouldApply) continue;
 
       // Check if layer already exists
-      if (composition.layers.some(l => l.asset_id === rule.assetId)) {
+      if (composition.layers.some((l) => l.asset_id === rule.assetId)) {
         console.log(`⏭️  ${composition.id}: ${rule.assetId} already present`);
         continue;
       }
 
       // Find insertion point
-      const insertIndex = composition.layers.findIndex(l => l.type === rule.insertAfter);
+      const insertIndex = composition.layers.findIndex((l) => l.type === rule.insertAfter);
       if (insertIndex === -1) {
         console.warn(`⚠️  ${composition.id}: insertion point '${rule.insertAfter}' not found`);
         continue;
@@ -99,7 +102,9 @@ function validateCompatibility(registry) {
       for (let j = i + 1; j < layers.length; j++) {
         const zIndexConflict = layers[i].z_index > layers[j].z_index && i > j;
         if (zIndexConflict) {
-          warnings.push(`⚠️  Z-index conflict in ${composition.id}: layer ${i} (z=${layers[i].z_index}) > layer ${j} (z=${layers[j].z_index})`);
+          warnings.push(
+            `⚠️  Z-index conflict in ${composition.id}: layer ${i} (z=${layers[i].z_index}) > layer ${j} (z=${layers[j].z_index})`
+          );
         }
       }
     }
@@ -122,7 +127,7 @@ function main() {
 
   if (warnings.length > 0) {
     console.log(`\n⚠️  Found ${warnings.length} warnings:`);
-    warnings.forEach(w => console.log(`  ${w}`));
+    warnings.forEach((w) => console.log(`  ${w}`));
     process.exit(1);
   }
 

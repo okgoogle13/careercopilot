@@ -24,7 +24,9 @@ export function PageHeader({
     return (
       <>
         {parts[0]}
-        <span className="text-secondary-solidarity-red cursive text-curator-large px-1">{highlightedWord}</span>
+        <span className="text-secondary-solidarity-red cursive text-curator-large px-1">
+          {highlightedWord}
+        </span>
         {parts[1]}
       </>
     );
@@ -38,7 +40,13 @@ export function PageHeader({
 
       {annotation && (
         <div className="mb-2">
-          <span className={cursiveAnnotation ? "text-curator-annotation rotate-quirky-ccw" : "text-annotation-data"}>
+          <span
+            className={
+              cursiveAnnotation
+                ? 'text-curator-annotation rotate-quirky-ccw'
+                : 'text-annotation-data'
+            }
+          >
             → {annotation}
           </span>
         </div>

@@ -10,7 +10,7 @@ from fastapi.testclient import TestClient
 from pydantic import BaseModel
 
 from app.core.genkit_init import get_model
-from app.core.monitoring import monitor_performance
+from app.core.observability import monitor_performance
 from app.core.prompt_service import format_prompt
 from app.genkit_flows.ksc_generator import STAR_Response, generateKscResponse
 

@@ -348,7 +348,7 @@ def track_ai_usage(
     )
 
 
-def track_error(error_type: str, component: str, error_message: str, user_id: str | None = None):
+def track_error(error_type: str, component: str, error_message: str, user_id: Optional[str] = None):
     """Track application errors (stub)."""
     logger.error(
         f"Error in {component}: {error_type} - {error_message}", extra={"user_id": user_id}

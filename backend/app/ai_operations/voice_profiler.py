@@ -10,7 +10,7 @@ from typing import Any
 
 from app.core.cache_decorators import cached_ai_operation
 from app.core.input_validation import InputSanitizer, InputValidationError
-from app.core.monitoring import monitor_performance
+from app.core.observability import monitor_performance
 
 logger = logging.getLogger(__name__)
 

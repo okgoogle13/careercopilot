@@ -11,7 +11,12 @@ const meta: Meta<typeof Seed> = {
     content: '3',
     variant: 'standard',
     color: 'error',
-    children: <Bell aria-label="Notifications" className="h-6 w-6 text-[var(--sys-color-worker-ash-steps-6)]" />,
+    children: (
+      <Bell
+        aria-label="Notifications"
+        className="h-6 w-6 text-[var(--sys-color-worker-ash-steps-6)]"
+      />
+    ),
   },
 };
 

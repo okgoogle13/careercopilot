@@ -33,7 +33,9 @@ export function ApplicationCard({
   className = '',
 }: ApplicationCardProps) {
   return (
-    <div className={`bg-surface-container rounded-pebble p-space-xl border border-outline-variant shadow-standard hover:shadow-maximum transition-all duration-300 ease-viscous-breeze ${className}`}>
+    <div
+      className={`bg-surface-container rounded-pebble p-space-xl border border-outline-variant shadow-standard hover:shadow-maximum transition-all duration-300 ease-viscous-breeze ${className}`}
+    >
       {/* Header Section */}
       <div className="flex items-start justify-between mb-8">
         <div className="flex-1">
@@ -74,11 +76,12 @@ export function ApplicationCard({
               key={idx}
               className={`
                 flex-1 px-4 py-3 rounded-full text-center transition-all duration-short-2 ease-spring
-                ${isCurrent
-                  ? 'bg-primary-container text-on-primary-container font-bold shadow-sm'
-                  : isCompleted
-                    ? 'bg-secondary-container text-on-secondary-container'
-                    : 'bg-surface-container-high text-on-surface-variant'
+                ${
+                  isCurrent
+                    ? 'bg-primary-container text-on-primary-container font-bold shadow-sm'
+                    : isCompleted
+                      ? 'bg-secondary-container text-on-secondary-container'
+                      : 'bg-surface-container-high text-on-surface-variant'
                 }
               `}
             >

@@ -9,13 +9,13 @@ Genkit flows for optimizing resumes:
 Modernized to use async patterns and current Genkit architecture.
 """
 
-from pydantic import BaseModel, Field
-from typing import List, Optional
-from app.genkit_flows.flow_decorator import async_genkit_flow
-from app.core.genkit_init import get_model
-import logging
 import json
+import logging
+from typing import List, Optional
 
+from pydantic import BaseModel, Field
+
+from app.core.genkit_init import async_genkit_flow, get_model
 from app.genkit_flows.extract_job_requirements import JobRequirements, extractJobRequirements
 from app.genkit_flows.extract_resume_entities import ResumeEntities, extractResumeEntities
 
@@ -30,18 +30,13 @@ class OptimizedResume(BaseModel):
     )
     keywords_integrated: List[str] = Field(
         default_factory=list,
-        description="List of keywords that were successfully integrated into the resume."
+        description="List of keywords that were successfully integrated into the resume.",
     )
 
 
-@async_genkit_flow(
-    name="optimize_resume",
-    output_schema=OptimizedResume
-)
+@async_genkit_flow(name="optimize_resume", output_schema=OptimizedResume)
 async def optimize_resume(
-    resume_text: str,
-    missing_keywords: List[str],
-    job_description: str
+    resume_text: str, missing_keywords: List[str], job_description: str
 ) -> OptimizedResume:
     """
     Analyzes a resume and a list of missing keywords, then rewrites the resume
@@ -68,10 +63,7 @@ async def optimize_resume(
 
     if not missing_keywords:
         logger.info("No missing keywords to integrate, returning original resume")
-        return OptimizedResume(
-            resume_text=resume_text,
-            keywords_integrated=[]
-        )
+        return OptimizedResume(resume_text=resume_text, keywords_integrated=[])
 
     keywords_str = ", ".join(missing_keywords)
 
@@ -117,17 +109,17 @@ Now, please generate the optimized resume.
             prompt=prompt,
             generation_config={
                 "temperature": 0.2,  # Lower temperature for focused, less creative output
-                "response_mime_type": "application/json"
-            }
+                "response_mime_type": "application/json",
+            },
         )
 
         # Parse the response
-        if hasattr(response, 'text'):
+        if hasattr(response, "text"):
             result_data = json.loads(response.text)
 
             return OptimizedResume(
                 resume_text=result_data.get("resume_text", resume_text),
-                keywords_integrated=result_data.get("keywords_integrated", missing_keywords)
+                keywords_integrated=result_data.get("keywords_integrated", missing_keywords),
             )
         else:
             raise ValueError("Failed to generate an optimized resume from the model")
@@ -135,10 +127,7 @@ Now, please generate the optimized resume.
     except Exception as e:
         logger.error(f"Resume optimization failed: {str(e)}", exc_info=True)
         # Return original resume on failure
-        return OptimizedResume(
-            resume_text=resume_text,
-            keywords_integrated=[]
-        )
+        return OptimizedResume(resume_text=resume_text, keywords_integrated=[])
 
 
 # ---------------------------------------------------------------------------
@@ -154,7 +143,9 @@ class ImprovedBullet(BaseModel):
     metric_type: str = Field(
         description="Type of metric added: 'number', 'percentage', 'timeframe', or 'scale'."
     )
-    rationale: str = Field(description="Brief explanation of why this metric strengthens the bullet.")
+    rationale: str = Field(
+        description="Brief explanation of why this metric strengthens the bullet."
+    )
 
 
 class SkillsGap(BaseModel):
@@ -197,6 +188,7 @@ class EnhancedResumeResult(BaseModel):
 # Helper: compute skills gap locally (pure function, no AI call)
 # ---------------------------------------------------------------------------
 
+
 def _compute_skills_gap(
     resume_entities: ResumeEntities,
     job_reqs: JobRequirements,
@@ -208,9 +200,7 @@ def _compute_skills_gap(
 
     all_job_skills_lower = {**required_lower, **preferred_lower}  # de-duped by lower-key
 
-    matched = [
-        all_job_skills_lower[k] for k in all_job_skills_lower if k in resume_skills_lower
-    ]
+    matched = [all_job_skills_lower[k] for k in all_job_skills_lower if k in resume_skills_lower]
     missing = [
         all_job_skills_lower[k] for k in all_job_skills_lower if k not in resume_skills_lower
     ]
@@ -218,8 +208,10 @@ def _compute_skills_gap(
     # Adjacent: resume skills whose first word matches a missing-skill first word
     missing_first_words = {m.split()[0].lower() for m in missing if m.split()}
     adjacent = [
-        s for s in resume_entities.skills
-        if s.split()[0].lower() in missing_first_words and s.lower() not in {m.lower() for m in matched}
+        s
+        for s in resume_entities.skills
+        if s.split()[0].lower() in missing_first_words
+        and s.lower() not in {m.lower() for m in matched}
     ]
 
     total_required = len(job_reqs.requiredSkills)

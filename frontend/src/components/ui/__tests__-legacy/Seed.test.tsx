@@ -16,7 +16,10 @@ describe('Seed', () => {
 
   it('shows badge content for standard variant', () => {
     render(
-      <Seed content="7" variant="standard">
+      <Seed
+        content="7"
+        variant="standard"
+      >
         <span>Anchor</span>
       </Seed>
     );
@@ -26,7 +29,10 @@ describe('Seed', () => {
 
   it('hides badge when invisible is true', () => {
     const { container } = render(
-      <Seed content="9" invisible>
+      <Seed
+        content="9"
+        invisible
+      >
         <span>Anchor</span>
       </Seed>
     );

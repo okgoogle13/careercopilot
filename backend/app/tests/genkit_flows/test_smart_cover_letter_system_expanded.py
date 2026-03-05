@@ -105,16 +105,17 @@ def valid_cover_letter():
 
 
 class TestGenerateSmartCoverLetter:
-    @patch("app.genkit_flows.smart_cover_letter_system.gemini_pro")
+    @patch("app.genkit_flows.smart_cover_letter_system.get_model")
     def test_generate_smart_cover_letter_happy_path(
         self,
-        mock_gemini,
+        mock_get_model,
         mock_candidate_profile,
         mock_job_description,
         mock_company_info,
         valid_cover_letter,
     ):
         """Test successful cover letter generation with valid inputs."""
+        mock_gemini = mock_get_model.return_value
         mock_gemini.generate.return_value.output.return_value = valid_cover_letter
 
         result = generate_smart_cover_letter(
@@ -129,15 +130,16 @@ class TestGenerateSmartCoverLetter:
         assert result.letter_content == "Test Cover Letter"
         assert result.analysis.readability_score == 80
 
-    @patch("app.genkit_flows.smart_cover_letter_system.gemini_pro")
+    @patch("app.genkit_flows.smart_cover_letter_system.get_model")
     def test_generate_smart_cover_letter_no_company_info(
         self,
-        mock_gemini,
+        mock_get_model,
         mock_candidate_profile,
         mock_job_description,
         valid_cover_letter,
     ):
         """Test cover letter generation without company info."""
+        mock_gemini = mock_get_model.return_value
         mock_gemini.generate.return_value.output.return_value = valid_cover_letter
 
         result = generate_smart_cover_letter(
@@ -148,14 +150,15 @@ class TestGenerateSmartCoverLetter:
 
         assert isinstance(result, SmartCoverLetter)
 
-    @patch("app.genkit_flows.smart_cover_letter_system.gemini_pro")
+    @patch("app.genkit_flows.smart_cover_letter_system.get_model")
     def test_generate_smart_cover_letter_ai_error(
         self,
-        mock_gemini,
+        mock_get_model,
         mock_candidate_profile,
         mock_job_description,
     ):
         """Test cover letter generation with an AI error."""
+        mock_gemini = mock_get_model.return_value
         mock_gemini.generate.side_effect = Exception("Test AI Error")
 
         with pytest.raises(AIError) as excinfo:

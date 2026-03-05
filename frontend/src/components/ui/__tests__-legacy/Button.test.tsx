@@ -25,7 +25,10 @@ describe('Button', () => {
     const onClick = jest.fn();
 
     render(
-      <Button disabled onClick={onClick}>
+      <Button
+        disabled
+        onClick={onClick}
+      >
         Disabled
       </Button>
     );

@@ -33,7 +33,7 @@ export interface FileValidationResult {
 export function validateFile(
   file: File,
   allowedExtensions: string[] = ['.pdf', '.docx', '.txt'],
-  maxSizeBytes: number = MAX_FILE_SIZE_BYTES,
+  maxSizeBytes: number = MAX_FILE_SIZE_BYTES
 ): FileValidationResult {
   if (file.size === 0) {
     return { valid: false, error: `"${file.name}" is empty.` };
@@ -77,7 +77,7 @@ export function validateFile(
 export function validateFiles(
   files: File[],
   allowedExtensions: string[] = ['.pdf', '.docx', '.txt'],
-  maxSizeBytes: number = MAX_FILE_SIZE_BYTES,
+  maxSizeBytes: number = MAX_FILE_SIZE_BYTES
 ): FileValidationResult {
   for (const file of files) {
     const result = validateFile(file, allowedExtensions, maxSizeBytes);

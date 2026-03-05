@@ -6,7 +6,7 @@ describe('ProfileHeader', () => {
   const props = {
     name: 'Nishant Dougall',
     bio: 'Architect',
-    identityTags: ['Engineer', 'Auditor']
+    identityTags: ['Engineer', 'Auditor'],
   };
 
   it('renders name and bio', () => {

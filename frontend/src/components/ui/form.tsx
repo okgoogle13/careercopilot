@@ -4,13 +4,13 @@ import * as LabelPrimitive from '@radix-ui/react-label';
 import { Slot } from '@radix-ui/react-slot';
 import * as React from 'react';
 import {
-    Controller,
-    FormProvider,
-    useFormContext,
-    useFormState,
-    type ControllerProps,
-    type FieldPath,
-    type FieldValues,
+  Controller,
+  FormProvider,
+  useFormContext,
+  useFormState,
+  type ControllerProps,
+  type FieldPath,
+  type FieldValues,
 } from 'react-hook-form';
 
 import { cn } from './utils';
@@ -91,7 +91,9 @@ function FormLabel({ className, ...props }: React.ComponentProps<typeof LabelPri
       data-error={!!error}
       className={cn(
         'text-sm font-field-note font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70',
-        error ? 'text-[var(--sys-color-solidarityRed-base)]' : 'text-[var(--sys-color-concreteGrey-base)]',
+        error
+          ? 'text-[var(--sys-color-solidarityRed-base)]'
+          : 'text-[var(--sys-color-concreteGrey-base)]',
         className
       )}
       htmlFor={formItemId}
@@ -121,7 +123,10 @@ function FormDescription({ className, ...props }: React.ComponentProps<'p'>) {
     <p
       data-slot="form-description"
       id={formDescriptionId}
-      className={cn('text-[var(--sys-color-concreteGrey-base-dark)] text-xs font-field-note font-medium opacity-70', className)}
+      className={cn(
+        'text-[var(--sys-color-concreteGrey-base-dark)] text-xs font-field-note font-medium opacity-70',
+        className
+      )}
       {...props}
     />
   );
@@ -139,7 +144,10 @@ function FormMessage({ className, ...props }: React.ComponentProps<'p'>) {
     <p
       data-slot="form-message"
       id={formMessageId}
-      className={cn('text-[var(--sys-color-solidarityRed-base)] text-xs font-field-note font-semibold animate-in fade-in slide-in-from-top-1 duration-standard', className)}
+      className={cn(
+        'text-[var(--sys-color-solidarityRed-base)] text-xs font-field-note font-semibold animate-in fade-in slide-in-from-top-1 duration-standard',
+        className
+      )}
       {...props}
     >
       {body}
@@ -148,7 +156,12 @@ function FormMessage({ className, ...props }: React.ComponentProps<'p'>) {
 }
 
 export {
-    Form, FormControl,
-    FormDescription, FormField, FormItem,
-    FormLabel, FormMessage, useFormField
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+  useFormField,
 };

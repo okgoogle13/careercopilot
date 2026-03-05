@@ -103,21 +103,43 @@ export function DocumentComparison({
         {/* Header */}
         <Box className="flex items-center justify-between mb-4">
           <Box className="flex items-center gap-2">
-            <FileText sx={{ fontSize: 20 }} className="text-primary" />
-            <Typography variant="h6" className="font-semibold truncate">
+            <FileText
+              sx={{ fontSize: 20 }}
+              className="text-primary"
+            />
+            <Typography
+              variant="h6"
+              className="font-semibold truncate"
+            >
               {document.title}
             </Typography>
           </Box>
-          <Button size="small" variant="outlined" onClick={() => onDocumentSelect?.(position)}>
+          <Button
+            size="small"
+            variant="outlined"
+            onClick={() => onDocumentSelect?.(position)}
+          >
             Change
           </Button>
         </Box>
 
         {/* Metadata */}
         <Box className="flex flex-wrap gap-2 mb-4">
-          <Chip label={document.type.replace('-', ' ')} size="small" variant="outlined" />
-          <Chip label={`${document.wordCount} words`} size="small" variant="outlined" />
-          <Chip label={`Modified: ${document.lastModified}`} size="small" variant="outlined" />
+          <Chip
+            label={document.type.replace('-', ' ')}
+            size="small"
+            variant="outlined"
+          />
+          <Chip
+            label={`${document.wordCount} words`}
+            size="small"
+            variant="outlined"
+          />
+          <Chip
+            label={`Modified: ${document.lastModified}`}
+            size="small"
+            variant="outlined"
+          />
         </Box>
 
         {/* Content */}
@@ -142,10 +164,18 @@ export function DocumentComparison({
 
         {/* Actions */}
         <Box className="flex gap-2 mt-4">
-          <Button size="small" variant="outlined" startIcon={<Eye sx={{ fontSize: 16 }} />}>
+          <Button
+            size="small"
+            variant="outlined"
+            startIcon={<Eye sx={{ fontSize: 16 }} />}
+          >
             Preview
           </Button>
-          <Button size="small" variant="outlined" startIcon={<Download sx={{ fontSize: 16 }} />}>
+          <Button
+            size="small"
+            variant="outlined"
+            startIcon={<Download sx={{ fontSize: 16 }} />}
+          >
             Download
           </Button>
         </Box>
@@ -158,10 +188,16 @@ export function DocumentComparison({
       {/* Header */}
       <Box className="flex items-center justify-between mb-6">
         <Box>
-          <Typography variant="h4" className="text-2xl font-bold mb-2">
+          <Typography
+            variant="h4"
+            className="text-2xl font-bold mb-2"
+          >
             Document Comparison
           </Typography>
-          <Typography variant="body1" color="text.secondary">
+          <Typography
+            variant="body1"
+            color="text.secondary"
+          >
             Compare different versions of your documents side by side
           </Typography>
         </Box>
@@ -174,7 +210,10 @@ export function DocumentComparison({
           >
             {showFullContent ? 'Compact View' : 'Full View'}
           </Button>
-          <Button variant="contained" className="bg-primary hover:bg-primary/90">
+          <Button
+            variant="contained"
+            className="bg-primary hover:bg-primary/90"
+          >
             Merge Changes
           </Button>
         </Box>
@@ -196,38 +235,67 @@ export function DocumentComparison({
 
       {/* Comparison Panels */}
       <Box className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <DocumentPanel document={leftDocument} position="left" isLeft={true} />
-        <DocumentPanel document={rightDocument} position="right" isLeft={false} />
+        <DocumentPanel
+          document={leftDocument}
+          position="left"
+          isLeft={true}
+        />
+        <DocumentPanel
+          document={rightDocument}
+          position="right"
+          isLeft={false}
+        />
       </Box>
 
       {/* Summary */}
       <Card className="mt-6">
         <CardContent className="p-4">
-          <Typography variant="h6" className="font-semibold mb-3">
+          <Typography
+            variant="h6"
+            className="font-semibold mb-3"
+          >
             Comparison Summary
           </Typography>
           <Box className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <Box className="text-center">
-              <Typography variant="h4" className="font-bold text-red-600">
+              <Typography
+                variant="h4"
+                className="font-bold text-red-600"
+              >
                 5
               </Typography>
-              <Typography variant="caption" color="text.secondary">
+              <Typography
+                variant="caption"
+                color="text.secondary"
+              >
                 Lines Modified
               </Typography>
             </Box>
             <Box className="text-center">
-              <Typography variant="h4" className="font-bold text-green-600">
+              <Typography
+                variant="h4"
+                className="font-bold text-green-600"
+              >
                 2
               </Typography>
-              <Typography variant="caption" color="text.secondary">
+              <Typography
+                variant="caption"
+                color="text.secondary"
+              >
                 Lines Added
               </Typography>
             </Box>
             <Box className="text-center">
-              <Typography variant="h4" className="font-bold text-blue-600">
+              <Typography
+                variant="h4"
+                className="font-bold text-blue-600"
+              >
                 10
               </Typography>
-              <Typography variant="caption" color="text.secondary">
+              <Typography
+                variant="caption"
+                color="text.secondary"
+              >
                 Words Difference
               </Typography>
             </Box>

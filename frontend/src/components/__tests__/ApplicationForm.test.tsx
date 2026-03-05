@@ -11,7 +11,12 @@ describe('ApplicationForm', () => {
   });
 
   it('shows verifying state when isVerifying is true', () => {
-    render(<ApplicationForm onUpload={jest.fn()} isVerifying={true} />);
+    render(
+      <ApplicationForm
+        onUpload={jest.fn()}
+        isVerifying={true}
+      />
+    );
     expect(screen.getByText(/Verifying Integrity/i)).toBeDefined();
   });
 
@@ -30,7 +35,12 @@ describe('ApplicationForm', () => {
     const onUpload = jest.fn();
     const file = new File(['resume'], 'resume.pdf', { type: 'application/pdf' });
 
-    render(<ApplicationForm onUpload={onUpload} acceptedFormats={['.pdf']} />);
+    render(
+      <ApplicationForm
+        onUpload={onUpload}
+        acceptedFormats={['.pdf']}
+      />
+    );
 
     const dropZone = screen.getByRole('region', { name: /Document Deposition/i });
     fireEvent.drop(dropZone, { dataTransfer: { files: [file] } });

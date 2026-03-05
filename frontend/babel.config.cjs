@@ -39,7 +39,11 @@ module.exports = {
               const varName = path.node.property.name;
               path.replaceWith({
                 type: 'MemberExpression',
-                object: { type: 'MemberExpression', object: { type: 'Identifier', name: 'process' }, property: { type: 'Identifier', name: 'env' } },
+                object: {
+                  type: 'MemberExpression',
+                  object: { type: 'Identifier', name: 'process' },
+                  property: { type: 'Identifier', name: 'env' },
+                },
                 property: { type: 'Identifier', name: varName },
               });
             }

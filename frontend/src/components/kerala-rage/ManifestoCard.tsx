@@ -15,8 +15,8 @@ export interface ManifestoCardProps {
 
 /**
  * ManifestoCard (Slab/Stone Hybrid)
- * 
- * High-impact component for bold declarations. 
+ *
+ * High-impact component for bold declarations.
  * Pattern Principles:
  * 1. Unified spring motion with the Stone primitive.
  * 2. Visual anchoring via the "Red Flag" accent.
@@ -24,7 +24,7 @@ export interface ManifestoCardProps {
 export const ManifestoCard: React.FC<ManifestoCardProps> = ({
   title,
   content,
-  actionLabel = "STRENGTH RISING",
+  actionLabel = 'STRENGTH RISING',
   onAction,
   showMotif = true,
   className,
@@ -59,8 +59,8 @@ export const ManifestoCard: React.FC<ManifestoCardProps> = ({
       layout
       {...motionProps}
       className={cn(
-        "relative p-8 md:p-12 max-w-2xl overflow-hidden",
-        "bg-asphalt-black rounded-stone border shadow-viscous",
+        'relative p-8 md:p-12 max-w-2xl overflow-hidden',
+        'bg-asphalt-black rounded-stone border shadow-viscous',
         toneStyles[tone],
         className
       )}
@@ -80,8 +80,8 @@ export const ManifestoCard: React.FC<ManifestoCardProps> = ({
 
       {/* Action CTA */}
       {actionLabel && (
-        <ActionButton 
-          variant="primary" 
+        <ActionButton
+          variant="primary"
           label={actionLabel}
           onClick={onAction}
           className="px-10 py-4 text-base"
@@ -91,7 +91,10 @@ export const ManifestoCard: React.FC<ManifestoCardProps> = ({
       {/* Background Motif: Placeholder SVG for Elephant */}
       {showMotif && (
         <div className="absolute bottom-[-10%] right-[-5%] w-64 h-64 opacity-5 pointer-events-none z-0">
-          <svg viewBox="0 0 100 100" className="w-full h-full fill-ink-gold">
+          <svg
+            viewBox="0 0 100 100"
+            className="w-full h-full fill-ink-gold"
+          >
             <path d="M70,30 C70,15 55,10 45,10 C30,10 20,25 20,40 C20,55 30,60 30,80 L40,85 C40,65 35,60 35,40 C35,30 40,25 50,25 C60,25 60,35 60,40 L60,80 L70,80 L70,30 Z" />
           </svg>
         </div>

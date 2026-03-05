@@ -287,12 +287,8 @@ describe('ProfileComparison', () => {
     });
 
     it('displays achievement highlights', () => {
-      expect(
-        screen.getAllByText(/Led development of scalable web applications/i)
-      ).toHaveLength(2);
-      expect(
-        screen.getAllByText(/Improved application performance by 40%/i)
-      ).toHaveLength(2);
+      expect(screen.getAllByText(/Led development of scalable web applications/i)).toHaveLength(2);
+      expect(screen.getAllByText(/Improved application performance by 40%/i)).toHaveLength(2);
     });
   });
 

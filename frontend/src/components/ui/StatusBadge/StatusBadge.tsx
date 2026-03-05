@@ -4,16 +4,16 @@ export type StatusBadgeVariant = 'success' | 'warning' | 'error' | 'info' | 'neu
 export type StatusBadgeMode = 'KrDark' | 'KrLight';
 
 export interface StatusBadgeProps {
-    /** The text label to display */
-    label: string;
-    /** Semantic status variant */
-    variant?: StatusBadgeVariant;
-    /** Theme mode: KrDark (warm) or KrLight (clinical, precise) */
-    mode?: StatusBadgeMode;
-    /** Optional dot indicator */
-    showDot?: boolean;
-    /** Additional CSS classes */
-    className?: string;
+  /** The text label to display */
+  label: string;
+  /** Semantic status variant */
+  variant?: StatusBadgeVariant;
+  /** Theme mode: KrDark (warm) or KrLight (clinical, precise) */
+  mode?: StatusBadgeMode;
+  /** Optional dot indicator */
+  showDot?: boolean;
+  /** Additional CSS classes */
+  className?: string;
 }
 
 /**
@@ -35,53 +35,53 @@ export interface StatusBadgeProps {
  * - neutral: Concrete Grey (gray)
  */
 export const StatusBadge: React.FC<StatusBadgeProps> = ({
-    label,
-    variant = 'neutral',
-    mode: _mode = 'KrDark',
-    showDot = false,
-    className = '',
+  label,
+  variant = 'neutral',
+  mode: _mode = 'KrDark',
+  showDot = false,
+  className = '',
 }) => {
-    // KeralaRage KrSolidarity Palette Mappings
-    const getVariantStyles = () => {
-        const colorMap: Record<StatusBadgeVariant, string> = {
-            success: 'primary',    // Sage
-            warning: 'warning',    // Gold (Highlight)
-            error: 'error',        // Crimson (Alert)
-            info: 'secondary',     // Coral (Dynamic)
-            neutral: 'neutral',    // Charcoal (Recessed)
-        };
-
-        const base = colorMap[variant];
-
-        // Mode-aware colors using palette tokens
-        const styles = {
-            bg: `var(--ref-palette-${base}-90)`,
-            text: `var(--on-${base}-container)`,
-            dot: `var(--ref-palette-${base}-40)`,
-            border: `var(--ref-palette-${base}-80)`,
-        };
-
-        // Solidarity mode color overrides using semantic tokens
-        if (base === 'neutral') {
-            styles.bg = 'var(--sys-color-concreteGrey-steps-0)';
-            styles.text = 'var(--sys-color-concreteGrey-base)';
-            styles.dot = 'var(--sys-color-concreteGrey-steps-4)';
-            styles.border = 'var(--sys-color-concreteGrey-steps-1)';
-        } else if (base === 'warning') {
-            styles.text = 'var(--sys-color-inkGold-base)';
-            styles.bg = 'var(--sys-color-inkGold-steps-0)';
-            styles.border = 'var(--sys-color-inkGold-steps-2)';
-            styles.dot = 'var(--sys-color-inkGold-base)';
-        }
-
-        return styles;
+  // KeralaRage KrSolidarity Palette Mappings
+  const getVariantStyles = () => {
+    const colorMap: Record<StatusBadgeVariant, string> = {
+      success: 'primary', // Sage
+      warning: 'warning', // Gold (Highlight)
+      error: 'error', // Crimson (Alert)
+      info: 'secondary', // Coral (Dynamic)
+      neutral: 'neutral', // Charcoal (Recessed)
     };
 
-    const currentStyle = getVariantStyles();
+    const base = colorMap[variant];
 
-    return (
-        <div
-            className={`
+    // Mode-aware colors using palette tokens
+    const styles = {
+      bg: `var(--ref-palette-${base}-90)`,
+      text: `var(--on-${base}-container)`,
+      dot: `var(--ref-palette-${base}-40)`,
+      border: `var(--ref-palette-${base}-80)`,
+    };
+
+    // Solidarity mode color overrides using semantic tokens
+    if (base === 'neutral') {
+      styles.bg = 'var(--sys-color-concreteGrey-steps-0)';
+      styles.text = 'var(--sys-color-concreteGrey-base)';
+      styles.dot = 'var(--sys-color-concreteGrey-steps-4)';
+      styles.border = 'var(--sys-color-concreteGrey-steps-1)';
+    } else if (base === 'warning') {
+      styles.text = 'var(--sys-color-inkGold-base)';
+      styles.bg = 'var(--sys-color-inkGold-steps-0)';
+      styles.border = 'var(--sys-color-inkGold-steps-2)';
+      styles.dot = 'var(--sys-color-inkGold-base)';
+    }
+
+    return styles;
+  };
+
+  const currentStyle = getVariantStyles();
+
+  return (
+    <div
+      className={`
                 inline-flex items-center gap-2
                 px-3 py-1
                 border
@@ -89,22 +89,20 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({
                 hover:scale-105 hover:brightness-110
                 ${className}
             `}
-            style={{
-                borderRadius: 'var(--radius-seed)',
-                backgroundColor: currentStyle.bg,
-                color: currentStyle.text,
-                borderColor: currentStyle.border,
-            }}
-        >
-            {showDot && (
-                <div
-                    className="w-2 h-2 rounded-full"
-                    style={{ backgroundColor: currentStyle.dot }}
-                />
-            )}
-            <span className="text-xs font-annotation font-bold tracking-widest uppercase">
-                {label}
-            </span>
-        </div>
-    );
+      style={{
+        borderRadius: 'var(--radius-seed)',
+        backgroundColor: currentStyle.bg,
+        color: currentStyle.text,
+        borderColor: currentStyle.border,
+      }}
+    >
+      {showDot && (
+        <div
+          className="w-2 h-2 rounded-full"
+          style={{ backgroundColor: currentStyle.dot }}
+        />
+      )}
+      <span className="text-xs font-annotation font-bold tracking-widest uppercase">{label}</span>
+    </div>
+  );
 };

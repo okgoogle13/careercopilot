@@ -148,7 +148,6 @@ function loadMermaid(): Promise<void> {
     script.src = 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js';
     script.async = true;
     script.onload = () => {
-       
       (window as any).mermaid?.initialize({
         startOnLoad: false,
         theme: 'dark',
@@ -196,7 +195,6 @@ const MermaidDiagram: React.FC<MermaidDiagramProps> = ({ diagram, className = ''
       .then(async () => {
         if (cancelled || !containerRef.current) return;
         try {
-           
           const mermaid = (window as any).mermaid;
           const { svg } = await mermaid.render(`mermaid-${uid}`, diagram);
           if (!cancelled && containerRef.current) {
@@ -307,7 +305,10 @@ export const WorkflowDiagram: React.FC<WorkflowDiagramProps> = ({
       {/* Diagram panel */}
       <div className="p-6">
         {tabs.map((tab) => (
-          <div key={tab.id} style={{ display: activeTab === tab.id ? 'block' : 'none' }}>
+          <div
+            key={tab.id}
+            style={{ display: activeTab === tab.id ? 'block' : 'none' }}
+          >
             <MermaidDiagram diagram={tab.diagram} />
           </div>
         ))}

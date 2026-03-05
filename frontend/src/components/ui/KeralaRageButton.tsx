@@ -107,8 +107,8 @@ export const KeralaRageButton = React.forwardRef<HTMLButtonElement, KeralaRageBu
         ref={ref}
         className={cn(
           // Base styles
-          'font-bold uppercase tracking-wide', 
-          'transition-colors duration-[var(--duration-fast)]', 
+          'font-bold uppercase tracking-wide',
+          'transition-colors duration-[var(--duration-fast)]',
           'disabled:opacity-50 disabled:cursor-not-allowed',
 
           // Size
@@ -122,9 +122,7 @@ export const KeralaRageButton = React.forwardRef<HTMLButtonElement, KeralaRageBu
           currentVariant.border,
 
           // Organic asymmetry (KrDark) or precise (KrLight)
-          mode === 'KrDark'
-            ? 'rounded-[var(--radius-pebble)]' 
-            : 'rounded-[var(--radius-stone)]', 
+          mode === 'KrDark' ? 'rounded-[var(--radius-pebble)]' : 'rounded-[var(--radius-stone)]',
 
           className
         )}

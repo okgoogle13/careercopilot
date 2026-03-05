@@ -93,7 +93,7 @@ def get_current_user(
     return credentials
 
 
-def require_role(required_roles: list[str] = None):
+def require_role(required_roles: list[str] | None = None):
     """Decorator to require specific roles for a route.
 
     Args:

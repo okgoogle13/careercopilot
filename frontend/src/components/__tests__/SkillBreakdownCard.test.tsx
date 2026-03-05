@@ -7,9 +7,9 @@ describe('SkillBreakdownCard', () => {
     overallScore: 85,
     categories: [
       { label: 'Technical Mastery', value: 90 },
-      { label: 'Solidarity', value: 80 }
+      { label: 'Solidarity', value: 80 },
     ],
-    onAction: jest.fn()
+    onAction: jest.fn(),
   });
 
   it('renders overall score and categories', () => {
@@ -36,7 +36,13 @@ describe('SkillBreakdownCard', () => {
   });
 
   it('renders action buttons even when categories are empty', () => {
-    render(<SkillBreakdownCard overallScore={10} categories={[]} onAction={jest.fn()} />);
+    render(
+      <SkillBreakdownCard
+        overallScore={10}
+        categories={[]}
+        onAction={jest.fn()}
+      />
+    );
 
     expect(screen.getByRole('button', { name: 'STRENGTHEN' })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'ARCHIVE' })).toBeInTheDocument();
