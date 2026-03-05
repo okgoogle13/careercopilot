@@ -54,7 +54,8 @@
     "kr:replace-markers": "node ../scripts/kr/replace-asset-tokens.mjs",
     "kr:update-tokens": "node ../scripts/kr/update-token-map.mjs",
     "kr:inject-layers": "node scripts/kr/inject-ui-kit-layers.mjs",
-    "kr:stage2": "bash ../scripts/orchestrate-stage2.sh"
+    "kr:stage2": "bash ../scripts/orchestrate-stage2.sh",
+    "validate:kr-hero-token-map": "npx tsx src/scripts/validate-kr-hero-token-map.ts"
   },
   "engines": {
     "node": ">=16.0.0"
@@ -171,6 +172,7 @@
     "@vitest/ui": "^4.0.16",
     "autoprefixer": "^10.4.23",
     "babel-jest": "^29.7.0",
+    "babel-plugin-transform-import-meta": "^2.3.3",
     "baseline-browser-mapping": "^2.8.32",
     "chokidar": "^3.6.0",
     "clean-jsdoc-theme": "^4.3.0",

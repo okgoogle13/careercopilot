@@ -1,0 +1,152 @@
+{
+  "version": "2.0.0",
+  "updated": "2026-03-06T00:00:00.000Z",
+  "description": "Hero token alias map. ref is the source of truth (manifest asset id). path is optional; compute from manifest at runtime.",
+  "token_schema": "kr.heroAssetToken.v2",
+  "tokens": {
+    "kr.hero.substrate.flinders-night": {
+      "ref": "KR-SOLID-021",
+      "layer": "substrate",
+      "status": "ready",
+      "tags": ["hero", "substrate", "melbourne", "night"],
+      "defaults": {
+        "blend_mode": "normal",
+        "opacity": 0.5,
+        "position": "cover"
+      },
+      "description": "Flinders Street Station night substrate (3:2). Strong structure, low distraction."
+    },
+    "kr.hero.atmospheric.light-burst": {
+      "ref": "KR-SOLID-008",
+      "layer": "atmospheric",
+      "status": "ready",
+      "tags": ["hero", "atmospheric", "radiance"],
+      "defaults": {
+        "blend_mode": "screen",
+        "opacity": 0.22,
+        "position": "cover"
+      },
+      "description": "Solidarity light burst overlay. Keep opacity <= 0.28 for text contrast."
+    },
+    "kr.hero.atmospheric.embers": {
+      "ref": "KR-SOLID-007",
+      "layer": "atmospheric",
+      "status": "ready",
+      "tags": ["hero", "atmospheric", "embers"],
+      "defaults": {
+        "blend_mode": "overlay",
+        "opacity": 0.18,
+        "position": "cover"
+      },
+      "description": "Embers overlay for depth and agitation without washing blacks."
+    },
+    "kr.hero.spiritual.shiva-statue": {
+      "ref": "KR-SOLID-012",
+      "layer": "spiritual",
+      "status": "ready",
+      "tags": ["hero", "spiritual", "anchor"],
+      "defaults": {
+        "blend_mode": "normal",
+        "opacity": 1.0,
+        "position": "center"
+      },
+      "description": "Shiva statue anchor (foreground dominant). Avoid stacking with resistance per manifest compatibility."
+    },
+    "kr.hero.spiritual.solidarity-banner": {
+      "ref": "KR-SOLID-011",
+      "layer": "spiritual",
+      "status": "ready",
+      "tags": ["hero", "spiritual", "banner"],
+      "defaults": {
+        "blend_mode": "normal",
+        "opacity": 1.0,
+        "position": "center"
+      },
+      "description": "Devotional solidarity banner (16:9). Use with quiet substrate + minimal atmospheric."
+    },
+    "kr.hero.resistance.collective-uprising": {
+      "ref": "KR-SOLID-019",
+      "layer": "resistance",
+      "status": "ready",
+      "tags": ["hero", "resistance", "editorial", "foreground"],
+      "defaults": {
+        "blend_mode": "normal",
+        "opacity": 1.0,
+        "position": "center"
+      },
+      "description": "Collective Uprising hero foreground (v5). Strong editorial silhouette and focal weight."
+    },
+    "kr.hero.resistance.resistance-portrait": {
+      "ref": "KR-SOLID-020",
+      "layer": "resistance",
+      "status": "ready",
+      "tags": ["hero", "resistance", "portrait", "editorial"],
+      "defaults": {
+        "blend_mode": "normal",
+        "opacity": 1.0,
+        "position": "center"
+      },
+      "description": "Resistance portrait hero foreground. Default landing hero candidate."
+    },
+    "kr.hero.cultural.elephant": {
+      "ref": "KR-SOLID-035",
+      "layer": "cultural",
+      "status": "ready",
+      "tags": ["hero", "cultural", "symbol"],
+      "defaults": {
+        "blend_mode": "overlay",
+        "opacity": 0.7,
+        "position": "bottom"
+      },
+      "description": "Kerala elephant symbol. Use as base divider or accent; keep out of text safe zone."
+    },
+
+    "kr.ui.overlay.blueprint-grid": {
+      "ref": "KR-UI-004",
+      "layer": "ui_kit",
+      "status": "ready",
+      "tags": ["ui-kit", "overlay", "grid"],
+      "defaults": {
+        "blend_mode": "overlay",
+        "opacity": 0.1,
+        "position": "cover"
+      },
+      "description": "Blueprint grid overlay. Use sparingly for technical editorial treatment."
+    },
+    "kr.ui.overlay.blueprint-layout": {
+      "ref": "KR-UI-006",
+      "layer": "ui_kit",
+      "status": "ready",
+      "tags": ["ui-kit", "overlay", "layout"],
+      "defaults": {
+        "blend_mode": "overlay",
+        "opacity": 0.08,
+        "position": "cover"
+      },
+      "description": "Blueprint layout watermark overlay. Low opacity only."
+    },
+    "kr.ui.overlay.screenprint-grit": {
+      "ref": "KR-UI-003",
+      "layer": "ui_kit",
+      "status": "ready",
+      "tags": ["ui-kit", "overlay", "grit"],
+      "defaults": {
+        "blend_mode": "soft-light",
+        "opacity": 0.14,
+        "position": "cover"
+      },
+      "description": "Screenprint grit particle overlay. Adds tactile noise; keep under text contrast threshold."
+    },
+
+    "kr.ui.overlay.field-grid": {
+      "alias_of": "kr.ui.overlay.blueprint-grid",
+      "status": "ready",
+      "description": "Alias for blueprint grid overlay."
+    },
+    "kr.ui.overlay.field-layout": {
+      "alias_of": "kr.ui.overlay.blueprint-layout",
+      "status": "ready",
+      "description": "Alias for blueprint layout overlay."
+    }
+  }
+}
