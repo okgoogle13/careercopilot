@@ -19,6 +19,7 @@ from .endpoints import (
     job_listings,
     manifest_integration,
     opportunities,
+    resume_audit,
     smart_ingestion,
     workflows,
 )
@@ -39,6 +40,7 @@ routers = [
     (job_listings.router, "/job-listings", "Job Listings"),
     (manifest_integration.router, "/manifest-integration", "Manifest Integration"),
     (asset_review.router, "/asset-review", "Asset Review"),
+    (resume_audit.router, "/resume-audit", "Resume Audit"),
 ]
 
 # Include all routers

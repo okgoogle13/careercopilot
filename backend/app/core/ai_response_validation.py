@@ -448,12 +448,24 @@ class AIResponseValidator:
         warnings = []
 
         # Check for empty string values in required fields
-        for field_name, field_info in schema_class.__fields__.items():
+        fields_obj = getattr(schema_class, "model_fields", None)
+        if isinstance(fields_obj, dict):
+            fields_map = fields_obj
+        else:
+            legacy_fields = getattr(schema_class, "__fields__", {})
+            fields_map = legacy_fields if isinstance(legacy_fields, dict) else {}
+
+        for field_name, field_info in fields_map.items():
             if field_name in data:
                 value = data[field_name]
-                if isinstance(value, str) and value.strip() == "" and field_info.required:
+                is_required = (
+                    field_info.is_required()
+                    if hasattr(field_info, "is_required")
+                    else field_info.required
+                )
+                if isinstance(value, str) and value.strip() == "" and is_required:
                     warnings.append(f"Required field '{field_name}' is empty")
-                elif isinstance(value, list) and len(value) == 0 and field_info.required:
+                elif isinstance(value, list) and len(value) == 0 and is_required:
                     warnings.append(f"Required list field '{field_name}' is empty")
 
         return warnings
@@ -589,6 +601,12 @@ def validate_ai_response(
             )
 
         try:
+            if not isinstance(parsed_json, dict):
+                return ValidationResult(
+                    is_valid=False,
+                    error_message="Parsed JSON must be an object for schema validation.",
+                    error_type=ValidationErrorType.MALFORMED_STRUCTURE,
+                )
             validated_data = schema_class(**parsed_json)
             return ValidationResult(
                 is_valid=True,

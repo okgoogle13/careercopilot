@@ -97,7 +97,8 @@ export const KrDarkApplication: React.FC = () => {
         className="text-center italic"
       >
         <p className="font-body text-xs text-paper-white/40">
-          "Your statement will be audited by the collective station within 48 mission cycles."
+          &quot;Your statement will be audited by the collective station within 48 mission
+          cycles.&quot;
         </p>
       </motion.div>
     </div>

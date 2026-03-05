@@ -2,7 +2,6 @@
 Integration tests for user profile creation using SQLAlchemy and PostgreSQL.
 """
 
-
 import pytest
 
 from app.core.database import SessionLocal, db_config
@@ -40,7 +39,9 @@ class TestProfileCreation:
         """Clean up test data after each test."""
         yield
         try:
-            db_session.query(User).filter(User.id.like("test-user%")).delete(synchronize_session=False)
+            db_session.query(User).filter(User.id.like("test-user%")).delete(
+                synchronize_session=False
+            )
             db_session.commit()
         except Exception as e:
             print(f"Warning: Failed to cleanup test data: {e}")
@@ -49,7 +50,7 @@ class TestProfileCreation:
     async def test_create_user_profile_basic(self, profile_service, db_session):
         """Test basic user profile creation."""
         user_id = "test-user-123"
-        email = "test@example.com"
+        email = f"{user_id}@example.com"
         name = "Test User"
         location = "Sydney, Australia"
 
@@ -75,7 +76,9 @@ class TestProfileCreation:
         email = "retrieve@example.com"
         name = "Retrieve User"
 
-        await profile_service.create_user_profile(db=db_session, user_id=user_id, email=email, name=name)
+        await profile_service.create_user_profile(
+            db=db_session, user_id=user_id, email=email, name=name
+        )
         retrieved_profile = await profile_service.get_user_profile(db=db_session, user_id=user_id)
 
         assert retrieved_profile is not None

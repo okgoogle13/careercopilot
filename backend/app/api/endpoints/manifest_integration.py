@@ -248,7 +248,7 @@ async def validate_manifest() -> ManifestValidationResult:
         total_assets=asset_count,
         by_category=by_category,
         by_priority=by_priority,
-        by_status={a.get("status"): 1 for a in manifest.get("assets", [])},
+        by_status={a.get("status", "unknown"): 1 for a in manifest.get("assets", [])},
         errors=errors,
         warnings=warnings,
         checks_passed=checks,

@@ -8,6 +8,7 @@ expected data.
 
 import pytest
 from fastapi.testclient import TestClient
+
 from app.main import app  # Assuming the FastAPI app instance is named 'app' in app/main.py
 
 
@@ -46,13 +47,15 @@ class TestSimpleEndpoint:
         response = client.get("/")
 
         # Assert the HTTP status code is 200 OK
-        assert response.status_code == 200, \
-            f"Expected status code 200, but got {response.status_code}"
+        assert (
+            response.status_code == 200
+        ), f"Expected status code 200, but got {response.status_code}"
 
         # Assert the response body matches the expected JSON
-        expected_response_data = {"message": "Welcome to the simple backend!"}
-        assert response.json() == expected_response_data, \
-            f"Expected JSON {expected_response_data}, but got {response.json()}"
+        expected_response_data = {"status": "ok"}
+        assert (
+            response.json() == expected_response_data
+        ), f"Expected JSON {expected_response_data}, but got {response.json()}"
 
         print(f"GET / successful. Response: {response.json()}")
 
@@ -68,12 +71,14 @@ class TestSimpleEndpoint:
         response = client.post("/")
 
         # Assert the HTTP status code is 405 Method Not Allowed
-        assert response.status_code == 405, \
-            f"Expected status code 405 for POST /, but got {response.status_code}"
+        assert (
+            response.status_code == 405
+        ), f"Expected status code 405 for POST /, but got {response.status_code}"
 
         # Optionally, check the detail message for clarity
         assert "detail" in response.json()
-        assert response.json()["detail"] == "Method Not Allowed", \
-            f"Expected detail 'Method Not Allowed', but got {response.json()['detail']}"
+        assert (
+            response.json()["detail"] == "Method Not Allowed"
+        ), f"Expected detail 'Method Not Allowed', but got {response.json()['detail']}"
 
         print(f"POST / correctly returned 405. Response: {response.json()}")

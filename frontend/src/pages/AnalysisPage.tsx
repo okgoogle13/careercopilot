@@ -7,7 +7,7 @@ import { Building, Compass, Copy, Gauge, Sparkles, Target } from 'lucide-react';
 import React, { useState, useEffect } from 'react';
 import { LayeredHero } from '../components/kerala-rage/LayeredHero';
 import { loadHeroRegistry } from '../design/hero/heroRegistry';
-import { composeHero } from '../utils/heroComposer';
+import { composeHero } from '../lib/composeHero';
 import type { SolidarityManifest } from '../design/hero/heroTypes';
 
 // KrDark Assets

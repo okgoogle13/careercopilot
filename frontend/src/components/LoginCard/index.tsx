@@ -72,10 +72,14 @@ export const LoginCard: React.FC<LoginCardProps> = ({
 
         <div className="flex flex-col gap-6 relative z-10">
           <div className="space-y-2">
-            <label className="text-blueprint-grey font-jetbrains-mono text-xs uppercase tracking-widest">
+            <label
+              htmlFor="email-input"
+              className="text-blueprint-grey font-jetbrains-mono text-xs uppercase tracking-widest"
+            >
               Email Address
             </label>
             <input
+              id="email-input"
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -88,10 +92,14 @@ export const LoginCard: React.FC<LoginCardProps> = ({
           </div>
 
           <div className="space-y-2">
-            <label className="text-blueprint-grey font-jetbrains-mono text-xs uppercase tracking-widest">
+            <label
+              htmlFor="password-input"
+              className="text-blueprint-grey font-jetbrains-mono text-xs uppercase tracking-widest"
+            >
               Password
             </label>
             <input
+              id="password-input"
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}

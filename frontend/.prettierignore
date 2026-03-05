@@ -41,3 +41,5 @@ coverage
 *.mdx
 *.md
 *.svg
+public/assets/asset_catalog.json
+src/design/styles/design-tokens.css

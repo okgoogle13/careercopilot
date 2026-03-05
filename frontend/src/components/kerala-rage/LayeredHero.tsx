@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef, useMemo } from 'react';
-import type { ResolvedLayer } from '../../utils/heroComposer';
+import type { ResolvedLayer } from '../../lib/composeHero';
 import type {
   Typography,
   AnimationProfile,
@@ -83,14 +83,15 @@ export const LayeredHero: React.FC<LayeredHeroProps> = ({
 
   const interpolatedWdth = typography.pressure_profile ? pressure.tracking : 75; // Legacy fallback
 
-  const bezier = animation?.bezier
-    ? `cubic-bezier(${animation.bezier.join(',')})`
+  const animLegacy = animation as any;
+  const bezier = animLegacy?.bezier
+    ? `cubic-bezier(${animLegacy.bezier.join(',')})`
     : DEFAULT_M3_BEZIER;
 
   const typographyStyle: React.CSSProperties = {
     fontVariationSettings: `'wght' ${interpolatedWght}, 'wdth' ${interpolatedWdth}`,
     fontOpticalSizing: 'auto',
-    transition: `font-variation-settings ${animation?.transition_duration || 400}ms ${bezier}`,
+    transition: `font-variation-settings ${animLegacy?.transition_duration || 400}ms ${bezier}`,
   };
 
   return (
@@ -107,7 +108,7 @@ export const LayeredHero: React.FC<LayeredHeroProps> = ({
         const isKineticTarget = kinetic?.enabled && layer.type === 'atmospheric';
         const speedMultiplier = isKineticTarget ? (kinetic.speed_multiplier ?? 1) : 1;
         const parallaxOffset =
-          animation?.parallax && layer.type !== 'substrate'
+          animLegacy?.parallax && layer.type !== 'substrate'
             ? index * 50 * scrollProgress * speedMultiplier
             : 0;
 
@@ -151,7 +152,7 @@ export const LayeredHero: React.FC<LayeredHeroProps> = ({
                 : 'var(--sys-color-stencilYellow-base)',
             textShadow: '0 4px 16px rgba(0, 0, 0, 0.8)',
             transform:
-              animation?.scroll_behavior === 'scale_expansion'
+              animLegacy?.scroll_behavior === 'scale_expansion'
                 ? `scale(${1 + scrollProgress * 0.2})`
                 : 'none',
           }}

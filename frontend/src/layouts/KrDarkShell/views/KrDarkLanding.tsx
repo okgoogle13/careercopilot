@@ -3,8 +3,9 @@ import { motion, useReducedMotion } from 'framer-motion';
 import { ManifestoSlab, ManifestoCard, ActionButton } from '../../../components/kerala-rage';
 import { LayeredHero } from '../../../components/kerala-rage/LayeredHero';
 import type { SolidarityManifest } from '../../../design/hero/heroTypes';
+import { composeHero } from '../../../lib/composeHero';
+import type { CompositionResult } from '../../../lib/composeHero';
 import { loadHeroRegistry } from '../../../design/hero/heroRegistry';
-import { composeHero } from '../../../utils/heroComposer';
 import {
   getDefaultVariant,
   getHeroForVariant,

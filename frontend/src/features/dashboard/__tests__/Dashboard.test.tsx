@@ -1,7 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { Dashboard } from '../Dashboard';
-import { jest, describe, it, expect } from '@jest/globals';
 
 // Mock the modules that might cause issues in a test environment
 jest.mock('@/components/ui', () => ({
@@ -18,7 +17,7 @@ jest.mock('@/design/hero/heroRegistry', () => ({
   loadHeroRegistry: jest.fn().mockResolvedValue({}),
 }));
 
-jest.mock('@/utils/heroComposer', () => ({
+jest.mock('@/lib/composeHero', () => ({
   composeHero: jest.fn().mockReturnValue({
     valid: true,
     resolvedLayers: [],

@@ -11,7 +11,7 @@ from app.schemas.career import CareerDatabase
 async def test_career_ingest_flow(client, mock_db):
     """
     Integration test for Career Ingest Flow.
-    Uses 'Hollow Brain' strategy: Mocks the AI generation (Genkit) 
+    Uses 'Hollow Brain' strategy: Mocks the AI generation (Genkit)
     but validates the entire HTTP -> Controller -> Service -> DB pipeline.
     """
 
@@ -23,22 +23,23 @@ async def test_career_ingest_flow(client, mock_db):
     # Create clean Pydantic model to return (emulating Genkit success)
     mock_ai_result = CareerDatabase(**golden_data)
 
-    from app.models.database import User, Base
     from app.core.database import SessionLocal, get_db
-    
-    # 2. Patch dependencies
-    # We patch the FLOW function imported in the router.
-    with patch("app.api.routes.career.ingest_career_docs", new_callable=AsyncMock) as mock_flow:
+    from app.models.database import Base, User
+
+    # 2. Patch dependencies in the canonical endpoint module.
+    with patch("app.api.endpoints.career.ingest_career_docs", new_callable=AsyncMock) as mock_flow:
         mock_flow.return_value = mock_ai_result
 
-        # Mock the PDF parser too, just to avoid filesystem/PDF issues
-        with patch("app.api.routes.career.extract_text_from_upload", new_callable=AsyncMock) as mock_parser:
+        # Mock text collection from uploads to avoid parsing/filesystem variability.
+        with patch(
+            "app.api.endpoints.career.collect_uploaded_text", new_callable=AsyncMock
+        ) as mock_parser:
             mock_parser.return_value = "Raw resume text content..."
 
             # Ensure tables are created and user exists in the SQLite memory DB
             # Use a fresh session for setup
             db = SessionLocal()
-            
+
             # Create user if not exists
             user_id = "test_user_id"
             user = db.query(User).filter(User.id == user_id).first()

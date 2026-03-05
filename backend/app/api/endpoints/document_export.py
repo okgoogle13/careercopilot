@@ -30,6 +30,7 @@ from app.models.document_export_schemas import (
     BatchExportResponse,
     CoverLetterExportRequest,
     CoverLetterExportResponse,
+    DocumentExportRequest,
     DocumentExportResponse,
     KSCResponseExportResponse,
     ResumeExportRequest,
@@ -154,6 +155,8 @@ async def export_cover_letter(
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST, detail=f"Invalid format: {e!s}"
         )
+    except HTTPException:
+        raise
     except Exception as e:
         logger.error("Cover letter export failed", error=str(e), user_id=user_id, exc_info=True)
         raise HTTPException(
@@ -220,6 +223,8 @@ async def export_resume(
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST, detail=f"Invalid format: {e!s}"
         )
+    except HTTPException:
+        raise
     except Exception as e:
         logger.error("Resume export failed", error=str(e), user_id=user_id, exc_info=True)
         raise HTTPException(
@@ -248,7 +253,7 @@ async def export_resume(
     """,
 )
 async def export_ksc_response(
-    request: DocumentExportResponse,  # Reuse base export request
+    request: DocumentExportRequest,  # Reuse base export request
     response_data: dict[str, Any],
     job_title: str,
     user_id: str = Depends(get_current_user_id),
@@ -288,6 +293,8 @@ async def export_ksc_response(
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST, detail=f"Invalid format: {e!s}"
         )
+    except HTTPException:
+        raise
     except Exception as e:
         logger.error("KSC response export failed", error=str(e), user_id=user_id, exc_info=True)
         raise HTTPException(
@@ -362,6 +369,8 @@ async def export_application_package(
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST, detail=f"Invalid format: {e!s}"
         )
+    except HTTPException:
+        raise
     except Exception as e:
         logger.error(
             "Application package export failed", error=str(e), user_id=user_id, exc_info=True
@@ -427,6 +436,8 @@ async def export_batch(
             detail="Batch export feature is coming soon",
         )
 
+    except HTTPException:
+        raise
     except Exception as e:
         logger.error("Batch export failed", error=str(e), user_id=user_id, exc_info=True)
         raise HTTPException(
