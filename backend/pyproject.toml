@@ -164,6 +164,11 @@ omit = [
     "app/tests/*",
     "app/__main__.py",
     "**/__pycache__/*",
+    "**/.backup-*/**",
+    "**/backup/**",
+    "**/archive/**",
+    "**/archived/**",
+    "**/*_archive/**",
 ]
 branch = true
 

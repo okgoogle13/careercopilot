@@ -28,8 +28,8 @@ from fastapi.middleware.gzip import GZipMiddleware
 
 from app.api.endpoints import ingest
 from app.api.endpoints.career import router as career_router
+from app.api.endpoints.career_ingestion import router as career_ingestion_router
 from app.api.endpoints.job_scout import router as job_scout_router
-from app.api.endpoints.legacy_ingestion import router as ingestion_router
 from app.api.router import api_router
 from app.core.cache_middleware import add_cache_middleware
 from app.core.database import init_database
@@ -107,7 +107,7 @@ def on_startup():
 # Include the main API router
 app.include_router(api_router, prefix="/api")
 app.include_router(career_router, prefix="/api/career", tags=["Career Database"])
-app.include_router(ingestion_router, prefix="/api/v1", tags=["Career Ingestion"])
+app.include_router(career_ingestion_router, prefix="/api/v1", tags=["Career Ingestion"])
 app.include_router(job_scout_router, prefix="/api/v1/job-scout", tags=["Job Scout"])
 app.include_router(ingest.router, prefix="/api/ingest", tags=["Ingestion"])
 

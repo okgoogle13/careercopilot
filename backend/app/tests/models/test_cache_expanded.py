@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
 
-from app.models.cache import Cache
+from app.models import Cache
 
 
 class TestCacheModel:

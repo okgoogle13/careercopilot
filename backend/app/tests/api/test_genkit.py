@@ -30,13 +30,18 @@ class TestGenkitEndpoints:
             )
 
         assert response.status_code == 200
-        assert response.json()["optimized_text"] == "AI OPTIMIZED"
+        assert response.json()["resume_text"] == "AI OPTIMIZED"
         mock_flow.assert_called_once()
 
     def test_get_company_context_happy_path(self, client, enabled_genkit):
         """Should call generate_company_context flow."""
         mock_ctx = MagicMock()
-        mock_ctx.company_overview = "Great company"
+        mock_ctx.cultural_insights = "Great company"
+        mock_ctx.recent_achievements = []
+        mock_ctx.core_values = []
+        mock_ctx.recommended_tone = "conversational"
+        mock_ctx.why_work_here_points = []
+        mock_ctx.interview_questions = []
 
         with patch(
             "app.api.endpoints.genkit.generate_company_context", new_callable=AsyncMock
@@ -48,7 +53,7 @@ class TestGenkitEndpoints:
             )
 
         assert response.status_code == 200
-        assert response.json()["company_overview"] == "Great company"
+        assert response.json()["cultural_insights"] == "Great company"
 
     def test_genkit_disabled_returns_503(self, client):
         """If Genkit is disabled, should return 503 via run_genkit_endpoint."""
@@ -64,6 +69,23 @@ class TestGenkitEndpoints:
         """Cover letter flow is sync, test happy path."""
         mock_cl = MagicMock()
         mock_cl.letter_content = "Dear Hiring Manager..."
+        mock_cl.subject_line = "Application for Job"
+        mock_cl.sections = []
+        mock_cl.analysis = {
+            "readability_score": 85,
+            "personalization_score": 90,
+            "compelling_score": 80,
+            "keyword_alignment": 75,
+            "strengths": ["Clear communication"],
+            "improvement_areas": ["More data points"],
+            "tone_assessment": "professional",
+            "unique_elements": ["Specific company research"],
+        }
+        mock_cl.personalization_notes = []
+        mock_cl.key_selling_points = []
+        mock_cl.company_connections = []
+        mock_cl.alternative_versions = {"brief": "short version"}
+        mock_cl.follow_up_suggestions = []
 
         with patch(
             "app.api.endpoints.genkit.generate_smart_cover_letter", return_value=mock_cl

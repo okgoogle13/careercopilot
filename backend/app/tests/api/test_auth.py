@@ -8,7 +8,7 @@ import pytest
 
 @pytest.fixture
 def auth_client(client):
-    from app.core.dependencies import get_current_user
+    from app.core.auth import get_current_user
 
     # Ensure name is present for the /me endpoint
     mock_user = SimpleNamespace(

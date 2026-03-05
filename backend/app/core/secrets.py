@@ -22,6 +22,8 @@ except ImportError:  # pragma: no cover - optional dependency in test/CI
     secretmanager = None  # type: ignore[assignment]
     service_account = None  # type: ignore[assignment]
 
+NotFound = SECRET_MANAGER_NOT_FOUND_EXCEPTIONS[0]
+
 logger = logging.getLogger(__name__)
 
 # Get the project ID from the environment

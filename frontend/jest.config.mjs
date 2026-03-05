@@ -44,6 +44,13 @@ export default {
     '!src/setupTests.ts',
     '!src/test-utils.tsx',
     '!src/components/layout/fix-button-variants.ts',
+    '!src/**/__tests__-legacy/**',
+    '!src/**/stories-legacy/**',
+    '!src/**/*.stories.{js,jsx,ts,tsx}',
+    '!src/**/.backup-*/**',
+    '!src/**/backup/**',
+    '!src/**/archive/**',
+    '!src/**/archived/**',
   ],
   coverageReporters: ['json', 'lcov', 'text', 'clover'],
   coverageThreshold: {

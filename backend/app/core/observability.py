@@ -155,26 +155,48 @@ _metrics: Dict[str, Any] = {}
 
 
 def _init_metrics():
-    """Initialize Prometheus metrics if available."""
+    """Initialize Prometheus metrics if available.
+    Checks REGISTRY to avoid "Duplicated timeseries" errors during re-imports or testing.
+    """
     if not PROMETHEUS_AVAILABLE:
         return
 
+    # Helper to check if metric is already registered
+    def is_registered(name):
+        return any(
+            c._name == name for c in REGISTRY._collector_to_names.keys() if hasattr(c, "_name")
+        )
+
     if "http_requests" not in _metrics:
-        _metrics["http_requests"] = Counter(
-            "http_requests_total", "Total HTTP requests", ["method", "endpoint", "status", "env"]
-        )
+        name = "http_requests_total"
+        if not is_registered(name):
+            _metrics["http_requests"] = Counter(
+                name, "Total HTTP requests", ["method", "endpoint", "status", "env"]
+            )
+        else:
+            # Re-bind if already registered in this process (e.g. during reload)
+            # This is a bit tricky with prometheus_client, but often just getting it from registry works
+            # For simplicity, we just skip if already there and it will be handled by the next check if needed
+            pass
+
     if "http_duration" not in _metrics:
-        _metrics["http_duration"] = Histogram(
-            "http_request_duration_seconds", "HTTP request duration", ["method", "endpoint", "env"]
-        )
+        name = "http_request_duration_seconds"
+        if not is_registered(name):
+            _metrics["http_duration"] = Histogram(
+                name, "HTTP request duration", ["method", "endpoint", "env"]
+            )
+
     if "ai_operations" not in _metrics:
-        _metrics["ai_operations"] = Counter(
-            "ai_operations_total", "Total AI operations", ["operation", "status", "env"]
-        )
+        name = "ai_operations_total"
+        if not is_registered(name):
+            _metrics["ai_operations"] = Counter(
+                name, "Total AI operations", ["operation", "status", "env"]
+            )
+
     if "ai_duration" not in _metrics:
-        _metrics["ai_duration"] = Histogram(
-            "ai_operation_duration_seconds", "AI operation duration", ["operation", "env"]
-        )
+        name = "ai_operation_duration_seconds"
+        if not is_registered(name):
+            _metrics["ai_duration"] = Histogram(name, "AI operation duration", ["operation", "env"])
 
 
 _init_metrics()

@@ -85,7 +85,7 @@ def _load_module():
 
     config_module = ModuleType("app.core.config")
     config_module.settings = SimpleNamespace(
-        ai_model="gemini-test",
+        model_name="gemini-test",
         ai_max_tokens=512,
         ai_temperature=0.3,
     )

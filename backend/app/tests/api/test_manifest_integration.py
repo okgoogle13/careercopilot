@@ -40,6 +40,8 @@ class TestManifestIntegrationEndpoints:
                     "file_path": "/assets/test.png",
                     "priority": "HIGH",
                     "status": "ready",
+                    "intended_context": "Testing manifest integration",
+                    "specs": {"aspect_ratio": "1:1", "style": "symbol"},
                 }
             ],
             "updated_by": "tester",

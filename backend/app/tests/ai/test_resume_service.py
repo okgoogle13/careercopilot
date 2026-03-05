@@ -18,7 +18,7 @@ from app.core.ai_client import get_ai_client
 from app.core.config import settings
 from app.core.dependencies import get_current_user
 from app.core.document_processing import PromptTemplates, process_document
-from app.models.user import User
+from app.models import User
 
 pytestmark = pytest.mark.asyncio
 

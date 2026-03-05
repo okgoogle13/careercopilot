@@ -21,11 +21,14 @@ const firebaseConfig = {
   measurementId: env.VITE_FIREBASE_MEASUREMENT_ID,
 };
 
+const isTestEnv =
+  (typeof process !== 'undefined' && process.env.NODE_ENV === 'test') || env.MODE === 'test';
+
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-export const auth = getAuth(app);
-export const storage = getStorage(app);
-export const db = getFirestore(app);
+export const auth = isTestEnv ? ({ currentUser: null } as any) : getAuth(app);
+export const storage = isTestEnv ? ({} as any) : getStorage(app);
+export const db = isTestEnv ? ({} as any) : getFirestore(app);
 
 export default app;

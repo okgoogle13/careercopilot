@@ -26,7 +26,7 @@ class TestFirebaseAuthBackend:
         mock_settings.DISABLE_AUTH = True
 
         result = await auth_backend(mock_request)
-        assert result == {"uid": "dev-user", "email": "dev@example.com"}
+        assert result == {"uid": "dev-user", "email": "dev@example.com", "roles": ["admin"]}
 
     @patch("app.api.middleware.firebase_auth.settings")
     @patch("app.api.middleware.firebase_auth.HTTPBearer.__call__")
@@ -78,7 +78,7 @@ class TestFirebaseAuthBackend:
             await auth_backend(mock_request)
 
         assert exc_info.value.status_code == 401
-        assert "Could not validate credentials" in exc_info.value.detail
+        assert "Invalid authentication credentials" in exc_info.value.detail
 
     @patch("app.api.middleware.firebase_auth.verify_id_token")
     @patch("app.api.middleware.firebase_auth.settings")

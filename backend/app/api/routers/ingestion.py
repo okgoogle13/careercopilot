@@ -1,4 +1,4 @@
-"""Legacy router wrapper for the canonical endpoint implementation."""
+"""Router wrapper for the smart ingestion implementation for compatibility."""
 
 from app.api.endpoints.smart_ingestion import router
 
