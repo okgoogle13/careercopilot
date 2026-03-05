@@ -5,6 +5,7 @@ Test suite for base_agent.py
 import hashlib
 import json
 from datetime import datetime, timedelta
+from typing import Any, Dict
 from unittest.mock import patch
 
 import pytest
@@ -17,10 +18,18 @@ from app.core.personal_cache import get_personal_cache
 from app.services.ai_prompt_builder import get_ai_prompt_builder
 
 
+class MockAgent(BaseAgent):
+    async def _execute_core_logic(self, task_data: dict[str, Any]) -> dict[str, Any]:
+        return {"result": "success"}
+
+
 class TestBaseAgent:
     @pytest.fixture
-    def base_agent(self):
-        return BaseAgent("test_agent")
+    def base_agent(self, mocker):
+        mocker.patch("app.core.base_agent.get_ai_client")
+        mocker.patch("app.core.base_agent.get_personal_cache")
+        mocker.patch("app.core.base_agent.get_ai_prompt_builder")
+        return MockAgent("test_agent")
 
     def test_init(self, base_agent):
         assert base_agent.agent_name == "test_agent"
@@ -53,8 +62,9 @@ class TestBaseAgent:
 
     @pytest.mark.asyncio
     async def test_execute_with_monitoring_cache_hit(self, base_agent, mocker):
-        mock_cache = mocker.MagicMock()
+        mock_cache = mocker.AsyncMock()
         mocker.patch("app.core.base_agent.get_personal_cache", return_value=mock_cache)
+        base_agent.cache = mock_cache
         mock_execute_core_logic = mocker.AsyncMock()
         base_agent._execute_core_logic = mock_execute_core_logic
 
@@ -65,15 +75,17 @@ class TestBaseAgent:
 
         result = await base_agent.execute_with_monitoring(task_data)
 
-        assert result == "cached_data"
+        assert result["success"] is True
+        assert result["data"] == "cached_data"
         mock_cache.get.assert_called_once_with(cache_key, "ai_responses")
         mock_execute_core_logic.assert_not_called()
         mock_cache.cache_ai_response.assert_not_called()
 
     @pytest.mark.asyncio
     async def test_execute_with_monitoring_cache_miss(self, base_agent, mocker):
-        mock_cache = mocker.MagicMock()
+        mock_cache = mocker.AsyncMock()
         mocker.patch("app.core.base_agent.get_personal_cache", return_value=mock_cache)
+        base_agent.cache = mock_cache
         mock_execute_core_logic = mocker.AsyncMock(return_value={"result": "executed_data"})
         base_agent._execute_core_logic = mock_execute_core_logic
 
@@ -83,25 +95,28 @@ class TestBaseAgent:
 
         result = await base_agent.execute_with_monitoring(task_data)
 
-        assert result == {"result": "executed_data"}
+        assert result["success"] is True
+        assert result["data"] == {"result": "executed_data"}
         mock_cache.get.assert_called_once_with(cache_key, "ai_responses")
         mock_execute_core_logic.assert_called_once_with(task_data)
         mock_cache.cache_ai_response.assert_called_once()
 
     @pytest.mark.asyncio
     async def test_execute_with_monitoring_error_handling(self, base_agent, mocker):
-        mock_cache = mocker.MagicMock()
+        mock_cache = mocker.AsyncMock()
         mocker.patch("app.core.base_agent.get_personal_cache", return_value=mock_cache)
+        base_agent.cache = mock_cache
         mock_execute_core_logic = mocker.AsyncMock(side_effect=Exception("test_error"))
         base_agent._execute_core_logic = mock_execute_core_logic
 
+        mock_cache.get.return_value = None
         task_data = {"task_type": "test_task"}
         result = await base_agent.execute_with_monitoring(task_data)
 
         assert isinstance(result, dict)
-        assert result["status"] == "error"
-        assert "message" in result
-        assert "test_error" in result["message"]
+        assert result["success"] is False
+        assert "error" in result
+        assert "test_error" in result["error"]
         mock_cache.get.assert_called_once_with(
             base_agent._generate_task_cache_key(task_data), "ai_responses"
         )
