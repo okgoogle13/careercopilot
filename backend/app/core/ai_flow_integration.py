@@ -179,12 +179,32 @@ def create_fallback_response(
         )
 
     else:
-        # Generic fallback - try to create with minimal data
+        # Generic fallback - support both Pydantic v1 (__fields__) and v2 (model_fields)
         try:
-            # Get required fields and provide default values
-            required_fields = {}
-            for field_name, field_info in schema_class.__fields__.items():
-                if field_info.required:
+            required_fields: dict[str, Any] = {}
+            model_fields = getattr(schema_class, "model_fields", None)
+
+            if model_fields is not None:
+                # Pydantic v2
+                for field_name, field_info in model_fields.items():
+                    if not field_info.is_required():
+                        continue
+                    ann = getattr(field_info, "annotation", None)
+                    if ann == str:
+                        required_fields[field_name] = error_message
+                    elif ann == float:
+                        required_fields[field_name] = 0.0
+                    elif ann == int:
+                        required_fields[field_name] = 0
+                    elif ann == list:
+                        required_fields[field_name] = []
+                    elif ann == dict:
+                        required_fields[field_name] = {}
+            else:
+                # Pydantic v1 fallback
+                for field_name, field_info in schema_class.__fields__.items():
+                    if not field_info.required:
+                        continue
                     if field_info.type_ == str:
                         required_fields[field_name] = error_message
                     elif field_info.type_ == float:

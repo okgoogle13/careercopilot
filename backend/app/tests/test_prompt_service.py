@@ -164,6 +164,52 @@ class TestPromptService:
         assert template.metadata["usage_count"] == original_count + 1
         assert "last_used" in template.metadata
 
+    def test_list_categories(self, temp_prompts_dir):
+        """Test listing categories"""
+        service = PromptService(temp_prompts_dir)
+        categories = service.list_categories()
+        assert "test_category" in categories
+
+    def test_get_category_config(self, temp_prompts_dir):
+        """Test getting category configuration"""
+        service = PromptService(temp_prompts_dir)
+        config = service.get_category_config("test_category")
+        assert config["name"] == "Test Category"
+
+        # Non-existent category
+        assert service.get_category_config("nonexistent") == {}
+
+    def test_get_template_metadata(self, temp_prompts_dir):
+        """Test getting template metadata"""
+        service = PromptService(temp_prompts_dir)
+        metadata = service.get_template_metadata("test_template")
+        assert "usage_count" in metadata
+
+        # Non-existent template
+        assert service.get_template_metadata("nonexistent") == {}
+
+    def test_reload_templates(self, temp_prompts_dir):
+        """Test reloading templates from disk"""
+        service = PromptService(temp_prompts_dir)
+        # Clear templates to ensure they are reloaded
+        service._templates.clear()
+        assert len(service._templates) == 0
+
+        service.reload_templates()
+        assert len(service._templates) == 2
+
+    def test_validate_parameters_template_not_found(self, temp_prompts_dir):
+        """Test validation when template is not found"""
+        service = PromptService(temp_prompts_dir)
+        errors = service.validate_template_parameters("nonexistent", {})
+        assert len(errors) == 1
+        assert "not found" in errors[0]
+
+    def test_update_template_usage_nonexistent(self, temp_prompts_dir):
+        """Test updating usage for non-existent template (should not crash)"""
+        service = PromptService(temp_prompts_dir)
+        service.update_template_usage("nonexistent")
+
 
 class TestPromptTemplate:
     """Test the PromptTemplate class"""
@@ -212,6 +258,21 @@ class TestPromptTemplate:
 
         result = template.format(name="Alice", status=None)
         assert result == "Hello Alice, status: Not specified"
+
+    def test_template_formatting_key_error(self):
+        """Test template formatting with missing key during format call"""
+        template = PromptTemplate(
+            name="Test",
+            description="Test template",
+            category="test",
+            version="1.0",
+            template="Hello {name}, {missing}",
+            parameters=["name"],  # Parameter missing from explicit param list
+            output_format="text",
+        )
+
+        with pytest.raises(ValueError, match="Template formatting failed"):
+            template.format(name="Alice")
 
 
 class TestConvenienceFunctions:
@@ -298,3 +359,25 @@ class TestErrorHandling:
 
         with pytest.raises(ValueError, match="Template 'nonexistent' not found"):
             service.format_prompt("nonexistent", param="value")
+
+    def test_get_default_prompts_dir(self):
+        """Test getting the default prompts directory"""
+        service = PromptService()
+        default_dir = service._get_default_prompts_dir()
+        assert "backend/app/prompts" in default_dir
+
+    def test_get_prompt_service_singleton(self):
+        """Test that get_prompt_service returns a singleton"""
+        from app.core.prompt_service import get_prompt_service
+
+        service1 = get_prompt_service()
+        service2 = get_prompt_service()
+        assert service1 is service2
+
+    def test_format_prompt_no_category_config(self, temp_prompts_dir):
+        """Test formatting a prompt without category config"""
+        service = PromptService(temp_prompts_dir)
+        # Manually clear category config to hit the negative branch in format_prompt
+        service._config["categories"] = {}
+        result = service.format_prompt("test_template", name="Alice", param="test")
+        assert result == "Hello Alice, this is a test with test."

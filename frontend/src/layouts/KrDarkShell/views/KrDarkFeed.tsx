@@ -89,7 +89,7 @@ export const KrDarkFeed: React.FC = () => {
                         {item.title}
                       </h3>
                       <p className="font-annotation text-[10px] uppercase tracking-widest text-paper-white/30">
-                        {item.company} // {item.timestamp}
+                        {item.company} · {item.timestamp}
                       </p>
                     </div>
                     <div className="text-right">
@@ -100,7 +100,7 @@ export const KrDarkFeed: React.FC = () => {
                   </div>
 
                   <p className="font-body text-base text-paper-white/50 leading-relaxed italic max-w-2xl">
-                    "{item.desc}"
+                    &quot;{item.desc}&quot;
                   </p>
 
                   <div className="flex gap-4 pt-6 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-2 group-hover:translate-y-0">

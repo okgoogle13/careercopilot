@@ -35,7 +35,7 @@ def _patched_modules(modules):
                 sys.modules[name] = original
 
 
-def _make_upload(filename="resume.pd", content=b"hello world", content_type="application/pdf"):
+def _make_upload(filename="resume.pdf", content=b"hello world", content_type="application/pdf"):
     """Build a small UploadFile for validation tests."""
     return UploadFile(
         filename=filename, file=io.BytesIO(content), headers={"content-type": content_type}
@@ -73,7 +73,7 @@ def test_file_upload_config_uses_settings_default():
     config = module.FileUploadConfig()
 
     assert config.max_file_size_mb == 10
-    assert ".pd" in config.allowed_extensions
+    assert ".pdf" in config.allowed_extensions
     assert "application/pdf" in config.allowed_content_types
 
 
@@ -98,7 +98,7 @@ def test_validate_file_upload_rejects_forbidden_filename_patterns():
     module = _load_module()
 
     with pytest.raises(module.FileValidationError, match="forbidden pattern"):
-        module.validate_file_upload(_make_upload(filename=".hidden.pd"), module.FileUploadConfig())
+        module.validate_file_upload(_make_upload(filename=".hidden.pdf"), module.FileUploadConfig())
 
 
 def test_validate_file_upload_enforces_allowed_pattern_list():
@@ -107,7 +107,7 @@ def test_validate_file_upload_enforces_allowed_pattern_list():
     config = module.FileUploadConfig(allowed_filename_patterns=[r".*resume.*"])
 
     with pytest.raises(module.FileValidationError, match="allowed patterns"):
-        module.validate_file_upload(_make_upload(filename="cover-letter.pd"), config)
+        module.validate_file_upload(_make_upload(filename="cover-letter.pdf"), config)
 
 
 def test_validate_file_upload_rejects_extension_and_content_type():
@@ -162,7 +162,7 @@ def test_validate_multiple_files_checks_count_and_wraps_indexed_failures():
 
     with pytest.raises(module.FileValidationError, match="File 1 validation failed"):
         module.validate_multiple_files(
-            [_make_upload(filename=".bad.pd")], module.FileUploadConfig()
+            [_make_upload(filename=".bad.pdf")], module.FileUploadConfig()
         )
 
 
@@ -179,7 +179,7 @@ def test_require_valid_file_upload_allows_valid_single_file():
     import asyncio
 
     payload = asyncio.run(endpoint(file=_make_upload()))
-    assert payload == {"filename": "resume.pd"}
+    assert payload == {"filename": "resume.pdf"}
 
 
 def test_require_valid_file_upload_returns_400_for_missing_single_file():
@@ -220,7 +220,7 @@ def test_require_valid_file_upload_handles_multiple_files_and_validation_failure
     assert result == {"count": 2}
 
     with pytest.raises(HTTPException) as exc_info:
-        asyncio.run(endpoint(files=[_make_upload(filename=".bad.pd")]))
+        asyncio.run(endpoint(files=[_make_upload(filename=".bad.pdf")]))
 
     assert exc_info.value.status_code == 400
 

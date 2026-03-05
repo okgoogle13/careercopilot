@@ -90,7 +90,7 @@ export const KrDarkDesigner: React.FC = () => {
 
           <div className="mt-auto pt-8 border-t border-surface-KrDark-concrete-grey-high/20">
             <p className="font-body text-[10px] text-paper-white/20 italic">
-              "Drag elements onto the assembly canvas for tactical registration."
+              &quot;Drag elements onto the assembly canvas for tactical registration.&quot;
             </p>
           </div>
         </motion.div>

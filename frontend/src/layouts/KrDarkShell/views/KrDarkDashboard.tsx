@@ -133,8 +133,8 @@ export const KrDarkDashboard: React.FC = () => {
               >
                 <span className="font-mono text-[10px] text-ink-gold">0{i}_REG</span>
                 <p className="font-body text-base text-paper-white/60 italic">
-                  "Historical resistance record {i} successfully extracted and aligned with current
-                  mission parameters."
+                  &quot;Historical resistance record {i} successfully extracted and aligned with
+                  current mission parameters.&quot;
                 </p>
                 <span className="ml-auto font-mono text-[9px] text-paper-white/20">2m ago</span>
               </div>

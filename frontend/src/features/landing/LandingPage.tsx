@@ -3,7 +3,8 @@ import { KrDarkShell } from '../../layouts/KrDarkShell/KrDarkShell';
 import { LayeredHero } from '../../components/kerala-rage/LayeredHero';
 import type { SolidarityManifest } from '../../design/hero/heroTypes';
 import { loadHeroRegistry } from '../../design/hero/heroRegistry';
-import { composeHero } from '../../utils/heroComposer';
+import { composeHero } from '../../lib/composeHero';
+import type { CompositionResult } from '../../lib/composeHero';
 
 export const LandingPage: React.FC = () => {
   const [heroData, setHeroData] = useState<{

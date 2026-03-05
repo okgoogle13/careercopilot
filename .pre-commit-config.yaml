@@ -68,7 +68,7 @@ repos:
         entry: bash -c 'cd frontend && yarn format'
         language: system
         files: ^frontend/.*\.(ts|tsx|js|jsx|css|scss|json|md|mdx|html|yml|yaml)$
-        exclude: ^frontend/(node_modules|dist|build)/
+        exclude: ^frontend/(node_modules|dist|build|public/assets)/
         pass_filenames: false
 
       - id: token-builder-validator
@@ -94,9 +94,11 @@ repos:
       - id: check-merge-conflict
       - id: check-yaml
       - id: check-json
+        exclude: ^frontend/public/assets/
       - id: check-case-conflict
       - id: check-toml
       - id: check-xml
+        exclude: ^frontend/public/assets/
 
   # Commit message validation
   - repo: https://github.com/alessandrojcm/commitlint-pre-commit-hook

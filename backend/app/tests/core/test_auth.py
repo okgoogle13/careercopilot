@@ -113,7 +113,7 @@ class TestGetCurrentUser:
         with pytest.raises(HTTPException) as exc_info:
             await get_current_user(credentials=invalid_credentials, db=mock_db_session)
         assert exc_info.value.status_code == 401
-        assert "Could not validate credentials" in exc_info.value.detail
+        assert "Not authenticated" in exc_info.value.detail
 
     @patch.object(auth_manager, "verify_token")
     @pytest.mark.asyncio

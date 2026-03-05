@@ -791,3 +791,38 @@ class Cache(Base):
     def __repr__(self) -> str:
         """Return a string representation of the cache entry."""
         return f"<Cache {self.key} ({self.operation_type})>"
+
+
+class ResumeAudit(Base):
+    """Stores Resume Knowledge Library (RKL) audit results."""
+
+    __tablename__ = "resume_audits"
+
+    # Required fields
+    user_id: Mapped[str | None] = mapped_column(
+        String(36),
+        ForeignKey("users.id", ondelete="CASCADE"),
+        nullable=True,
+        index=True,
+        comment="Reference to the user who ran the audit",
+    )
+    resume_hash: Mapped[str] = mapped_column(
+        Text, nullable=False, index=True, comment="Hash of the resume audited to detect duplicates"
+    )
+    audit_result: Mapped[dict[str, Any]] = mapped_column(
+        JSON, nullable=False, comment="The output from the AI audit flow"
+    )
+
+    # Optional metadata
+    strictness_mode: Mapped[str] = mapped_column(
+        String(50), default="moderate", nullable=False, comment="Rule strictness mode applied"
+    )
+    processing_time_ms: Mapped[int | None] = mapped_column(
+        Integer, nullable=True, comment="Time taken to process in milliseconds"
+    )
+
+    # Relationship
+    user: Mapped[Optional["User"]] = relationship("User", lazy="selectin")
+
+    def __repr__(self) -> str:
+        return f"<ResumeAudit {self.id}>"

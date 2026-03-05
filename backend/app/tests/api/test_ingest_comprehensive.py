@@ -41,7 +41,7 @@ def test_upload_artifact_returns_401_without_auth_override(monkeypatch):
             files={"file": ("resume.txt", b"resume body", "text/plain")},
         )
 
-    assert response.status_code == 403
+    assert response.status_code == 401
     assert response.json()["detail"] == "Not authenticated"
 
 

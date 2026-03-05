@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { LayeredHero } from '../../components/kerala-rage/LayeredHero';
 import { loadHeroRegistry } from '../../design/hero/heroRegistry';
-import { composeHero, CompositionResult } from '../../utils/heroComposer';
+import { composeHero } from '../../lib/composeHero';
+import type { CompositionResult } from '../../lib/composeHero';
 import { Stone, Pebble, StatusBadge } from '@/components/ui';
 import {
   Box,

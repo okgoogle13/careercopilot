@@ -1,0 +1,49 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <title>Sacred Lotus</title>
+  <desc>Cultural and spiritual Kerala heritage symbol for devotional and meditative contexts</desc>
+
+  <g id="base">
+    <!-- Water reflection -->
+    <ellipse cx="256" cy="380" rx="85" ry="25" fill="var(--sys-color-charcoalBackground-base)" opacity="0.4"/>
+    <ellipse cx="258" cy="378" rx="70" ry="20" fill="var(--sys-color-labWrenMetalBlue-base)" opacity="0.2"/>
+  </g>
+
+  <g id="content">
+    <!-- Outer petals (layer 1) -->
+    <ellipse cx="256" cy="260" rx="90" ry="45" fill="var(--sys-color-solidaritySmokeOrange-base)" opacity="0.7" transform="rotate(-15 256 260)"/>
+    <ellipse cx="256" cy="260" rx="90" ry="45" fill="var(--sys-color-solidaritySmokeOrange-base)" opacity="0.7" transform="rotate(15 256 260)"/>
+    <ellipse cx="256" cy="260" rx="90" ry="45" fill="var(--sys-color-solidaritySmokeOrange-base)" opacity="0.7" transform="rotate(45 256 260)"/>
+    <ellipse cx="256" cy="260" rx="90" ry="45" fill="var(--sys-color-solidaritySmokeOrange-base)" opacity="0.7" transform="rotate(-45 256 260)"/>
+
+    <!-- Middle petals (layer 2) -->
+    <ellipse cx="256" cy="255" rx="70" ry="38" fill="var(--sys-color-kr-activistSmokeGreen-base)" opacity="0.8" transform="rotate(0 256 255)"/>
+    <ellipse cx="256" cy="255" rx="70" ry="38" fill="var(--sys-color-kr-activistSmokeGreen-base)" opacity="0.8" transform="rotate(30 256 255)"/>
+    <ellipse cx="256" cy="255" rx="70" ry="38" fill="var(--sys-color-kr-activistSmokeGreen-base)" opacity="0.8" transform="rotate(-30 256 255)"/>
+    <ellipse cx="256" cy="255" rx="70" ry="38" fill="var(--sys-color-kr-activistSmokeGreen-base)" opacity="0.8" transform="rotate(60 256 255)"/>
+
+    <!-- Inner petals (layer 3) -->
+    <ellipse cx="256" cy="250" rx="50" ry="28" fill="var(--sys-color-worker-ash-base)" opacity="0.9" transform="rotate(10 256 250)"/>
+    <ellipse cx="256" cy="250" rx="50" ry="28" fill="var(--sys-color-worker-ash-base)" opacity="0.9" transform="rotate(-20 256 250)"/>
+    <ellipse cx="256" cy="250" rx="50" ry="28" fill="var(--sys-color-worker-ash-base)" opacity="0.9" transform="rotate(40 256 250)"/>
+
+    <!-- Center seed pod -->
+    <circle cx="256" cy="245" r="28" fill="var(--sys-color-inkGold-base)"/>
+
+    <!-- Stem (organic curve) -->
+    <path d="M 256 290 Q 250 330 245 370" stroke="var(--sys-color-kr-activistSmokeGreen-base)" stroke-width="6" stroke-linecap="round" fill="none"/>
+  </g>
+
+  <g id="accent">
+    <!-- Seed dots in center -->
+    <circle cx="248" cy="238" r="4" fill="var(--sys-color-charcoalBackground-base)" opacity="0.8"/>
+    <circle cx="264" cy="238" r="4" fill="var(--sys-color-charcoalBackground-base)" opacity="0.8"/>
+    <circle cx="256" cy="250" r="4" fill="var(--sys-color-charcoalBackground-base)" opacity="0.8"/>
+    <circle cx="248" cy="248" r="3" fill="var(--sys-color-charcoalBackground-base)" opacity="0.8"/>
+    <circle cx="264" cy="248" r="3" fill="var(--sys-color-charcoalBackground-base)" opacity="0.8"/>
+
+    <!-- Pollen highlights -->
+    <circle cx="256" cy="235" r="6" fill="var(--sys-color-stencilYellow-base)" opacity="0.6"/>
+    <circle cx="266" cy="245" r="4" fill="var(--sys-color-stencilYellow-base)" opacity="0.5"/>
+    <circle cx="246" cy="245" r="4" fill="var(--sys-color-stencilYellow-base)" opacity="0.5"/>
+  </g>
+</svg>

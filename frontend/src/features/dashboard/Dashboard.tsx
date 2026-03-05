@@ -4,7 +4,8 @@ import { FileText, Layout, Plus, Sparkles, Target, Zap } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { LayeredHero } from '../../components/kerala-rage/LayeredHero';
 import { loadHeroRegistry } from '../../design/hero/heroRegistry';
-import { composeHero } from '../../utils/heroComposer';
+import { composeHero } from '../../lib/composeHero';
+import type { CompositionResult } from '../../lib/composeHero';
 import type { SolidarityManifest } from '../../design/hero/heroTypes';
 
 // ============================================================================

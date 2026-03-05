@@ -73,7 +73,7 @@ export const KrDarkAuth: React.FC = () => {
 
           <div className="pt-6 border-t border-surface-KrDark-concrete-grey-high/20 w-full text-center">
             <p className="font-body text-xs text-paper-white/30 italic">
-              "Collective security through individual defiance."
+              &quot;Collective security through individual defiance.&quot;
             </p>
           </div>
         </SolidarityCard>

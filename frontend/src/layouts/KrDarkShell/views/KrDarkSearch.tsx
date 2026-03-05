@@ -92,7 +92,7 @@ export const KrDarkSearch: React.FC = () => {
                 <div className="flex justify-between items-start relative z-10">
                   <div className="space-y-3">
                     <span className="font-mono text-[9px] text-ink-gold uppercase tracking-[0.2em] opacity-60">
-                      ID: {job.id} // MATCH: {job.match}
+                      ID: {job.id} · MATCH: {job.match}
                     </span>
                     <h3 className="font-proclamation text-3xl uppercase text-paper-white group-hover:text-ink-gold transition-colors duration-500">
                       {job.title}
