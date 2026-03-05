@@ -11,12 +11,12 @@ import pytest
 @pytest.mark.skip(reason="Requires Genkit initialization and API keys")
 async def test_resume_optimizer_basic():
     """Test resume optimizer with missing keywords"""
-    from app.genkit_flows.resume_optimizer import optimizeResume
+    from app.genkit_flows.resume_optimizer import optimize_resume
 
-    result = await optimizeResume(
-        resumeText="Software engineer with Python experience",
-        missingKeywords=["React", "TypeScript"],
-        jobDescription="Looking for fullstack developer"
+    result = await optimize_resume(
+        resume_text="Software engineer with Python experience",
+        missing_keywords=["React", "TypeScript"],
+        job_description="Looking for fullstack developer"
     )
 
     assert result.resume_text
@@ -59,8 +59,8 @@ def test_genkit_flows_exist():
     """Verify that the Genkit flow files exist and can be imported"""
     try:
         from app.genkit_flows.company_analyzer import CompanyAnalysis, analyze_company_website
-        from app.genkit_flows.resume_optimizer import OptimizedResume, optimizeResume
-        assert optimizeResume is not None
+        from app.genkit_flows.resume_optimizer import OptimizedResume, optimize_resume
+        assert optimize_resume is not None
         assert analyze_company_website is not None
         assert OptimizedResume is not None
         assert CompanyAnalysis is not None
