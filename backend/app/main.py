@@ -12,12 +12,19 @@ if "/app/app" not in sys.path:
 
 # Ensure PORT environment variable is set correctly
 
-import sentry_sdk
+try:
+    import sentry_sdk
+    from sentry_sdk.integrations.fastapi import FastApiIntegration
+    from sentry_sdk.integrations.starlette import StarletteIntegration
+
+    _SENTRY_AVAILABLE = True
+except ImportError:  # pragma: no cover
+    sentry_sdk = None  # type: ignore[assignment]
+    _SENTRY_AVAILABLE = False
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.gzip import GZipMiddleware
-from sentry_sdk.integrations.fastapi import FastApiIntegration
-from sentry_sdk.integrations.starlette import StarletteIntegration
 
 from app.api.endpoints import ingest
 from app.api.endpoints.career import router as career_router
@@ -37,7 +44,7 @@ settings = SecureSettings()
 logger = get_logger(__name__)
 
 # Initialize Sentry
-if os.getenv("SENTRY_DSN"):
+if os.getenv("SENTRY_DSN") and _SENTRY_AVAILABLE:
     sentry_sdk.init(
         dsn=os.getenv("SENTRY_DSN"),
         integrations=[
