@@ -26,6 +26,9 @@ export default {
         },
         useESM: true,
         sourceMap: false,
+        babelConfig: {
+          plugins: ['babel-plugin-transform-import-meta'],
+        },
       },
     ],
   },

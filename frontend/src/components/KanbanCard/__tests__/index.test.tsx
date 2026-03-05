@@ -39,8 +39,8 @@ describe('KanbanCard', () => {
     render(<KanbanCard {...defaultProps} />);
 
     expect(screen.getByText('ID: TSK-001')).toBeInTheDocument();
-    expect(screen.getByText('IN PROGRESS')).toBeInTheDocument();
-    expect(screen.getByText('PROTOTYPE INTERFACE')).toBeInTheDocument();
+    expect(screen.getByText('In Progress')).toBeInTheDocument();
+    expect(screen.getByText('Prototype Interface')).toBeInTheDocument();
     expect(screen.getByText(defaultProps.description)).toBeInTheDocument();
     expect(screen.getByText('high')).toBeInTheDocument();
     expect(screen.getByText('Due: 2026-03-24')).toBeInTheDocument();

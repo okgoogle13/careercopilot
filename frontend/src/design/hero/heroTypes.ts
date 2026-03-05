@@ -70,6 +70,11 @@ export interface HeroLayer {
   blend_mode: BlendMode;
   position: PositionMode; // legacy renderer
   placement?: LayerPlacement; // v3.1+ deterministic placement
+  safe_zones?: SafeZones;
+  render_hints?: RenderHints;
+  landing_default?: boolean;
+  intended_layout?: string;
+  emotional_register?: EmotionalRegister;
 }
 
 export interface TypographyState {
