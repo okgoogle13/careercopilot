@@ -8,7 +8,7 @@ with AI-powered suggestions and ATS optimization.
 import json
 import os
 from enum import Enum
-from typing import Dict, List, Optional
+from typing import Any, Dict, List, Optional, cast
 
 from dotenv import load_dotenv
 from pydantic import BaseModel, Field
@@ -16,13 +16,14 @@ from pydantic import BaseModel, Field
 from app.core.ai_config import get_ai_config
 from app.core.ai_error_handling import AIError, AIErrorType, with_ai_error_handling
 from app.core.input_validation import InputSanitizer, InputValidationError
+from .types import ModelConfig as ModelConfigProtocol
 
 try:
     import genkit
     from genkit.plugins import google_genai
 except Exception:
-    genkit = None
-    googleai = None
+    genkit = None  # type: ignore[assignment]
+    google_genai = None  # type: ignore[assignment]
 
 
 def _noop_flow(*args, **kwargs):
@@ -36,10 +37,12 @@ genkit_flow = getattr(genkit, "flow", _noop_flow)
 
 # Load environment variables
 load_dotenv()
-if genkit and getattr(genkit, "get_plugin", None) and not genkit.get_plugin("googleai"):
-    genkit.init(plugins=[google_genai.init(api_key=os.getenv("GEMINI_API_KEY"))])
+if genkit is not None:
+    genkit_module: Any = genkit
+    if getattr(genkit_module, "get_plugin", None) and not genkit_module.get_plugin("googleai"):  # type: ignore[attr-defined]
+        genkit_module.init(plugins=[google_genai.init(api_key=os.getenv("GEMINI_API_KEY"))])  # type: ignore[attr-defined]
 
-gemini_pro = get_ai_config().get_model_config("gemini-3.0-flash")
+gemini_pro: ModelConfigProtocol = cast(ModelConfigProtocol, get_ai_config().get_model_config("gemini-3.0-flash"))
 
 
 # Enums and Models
@@ -239,7 +242,7 @@ As a personal branding strategist and career coach, analyze the consistency and 
 of this candidate's personal brand across their career materials.
 
 CONTENT TO ANALYZE:
-{json.dumps(content_sections, separators=(\',\', \':\'))}
+{json.dumps(content_sections, separators=(",", ":"))}
 
 PERSONAL BRANDING ANALYSIS:
 1. Assess current brand strength and clarity

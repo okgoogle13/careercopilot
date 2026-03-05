@@ -4,7 +4,12 @@ import { getStorage } from 'firebase/storage';
 import { getFirestore } from 'firebase/firestore';
 
 // Support both Vite (import.meta.env) and Jest (process.env)
-const env = (typeof import.meta !== 'undefined' && import.meta.env) ? import.meta.env : (typeof process !== 'undefined' ? process.env : {});
+const env =
+  typeof import.meta !== 'undefined' && import.meta.env
+    ? import.meta.env
+    : typeof process !== 'undefined'
+      ? process.env
+      : {};
 
 const firebaseConfig = {
   apiKey: env.VITE_FIREBASE_API_KEY || 'test-key',

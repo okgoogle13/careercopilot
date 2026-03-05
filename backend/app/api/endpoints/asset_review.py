@@ -16,7 +16,7 @@ from app.schemas.asset_review import (
     ReviewDashboardStats,
 )
 
-router = APIRouter(prefix="/api/asset-review", tags=["asset-review"])
+router = APIRouter()
 
 # In-memory storage (replace with database in production)
 REVIEWS_STORAGE = {}  # {asset_id: review_data}
@@ -26,6 +26,7 @@ OVERRIDES_STORAGE = {}  # {override_id: override_data}
 # ============================================================================
 # ENDPOINTS
 # ============================================================================
+
 
 @router.post("/submit", response_model=AssetReviewResponse)
 async def submit_asset_review(review: AssetReviewSubmission):
@@ -59,7 +60,7 @@ async def submit_asset_review(review: AssetReviewSubmission):
         "reviewed_by": review.reviewed_by,
         "review_timestamp": review.review_timestamp.isoformat(),
         "confidence": review.confidence,
-        "overrides": [o.dict() for o in review.overrides]
+        "overrides": [o.dict() for o in review.overrides],
     }
 
     # Store overrides
@@ -74,7 +75,7 @@ async def submit_asset_review(review: AssetReviewSubmission):
         asset_id=review.asset_id,
         decision=review.overall_decision,
         message=f"Review submitted for {review.asset_id}",
-        saved_at=datetime.utcnow()
+        saved_at=datetime.utcnow(),
     )
 
 
@@ -103,12 +104,9 @@ async def submit_bulk_review(bulk_review: BulkAssetReviewSubmission):
             "bulk_reason": bulk_review.reason,
             "reviewed_by": bulk_review.reviewed_by,
             "review_timestamp": bulk_review.review_timestamp.isoformat(),
-            "is_bulk": True
+            "is_bulk": True,
         }
-        results.append({
-            "asset_id": asset_id,
-            "status": "reviewed"
-        })
+        results.append({"asset_id": asset_id, "status": "reviewed"})
 
     print(f"  ✅ Bulk review saved for {len(bulk_review.asset_ids)} assets")
 
@@ -116,15 +114,13 @@ async def submit_bulk_review(bulk_review: BulkAssetReviewSubmission):
         "success": True,
         "assets_reviewed": len(bulk_review.asset_ids),
         "decision": bulk_review.bulk_decision,
-        "results": results
+        "results": results,
     }
 
 
 @router.get("/pending")
 async def get_pending_reviews(
-    status: str | None = None,
-    category: str | None = None,
-    limit: int = 50
+    status: str | None = None, category: str | None = None, limit: int = 50
 ) -> list[ReviewDashboardAsset]:
     """
     Get list of assets pending review.
@@ -154,7 +150,7 @@ async def get_pending_reviews(
             political_significance="activist",
             text_content="NO PRIDE IN GENOCIDE",
             color_palette={"primary": "#D4A84B", "secondary": "#C45C4B"},
-            sample_image_url="/assets/kr-solidarity/street/kr-solidarity__street__protest__v1.png"
+            sample_image_url="/assets/kr-solidarity/street/kr-solidarity__street__protest__v1.png",
         ),
         ReviewDashboardAsset(
             asset_id="KR-SOLID-014",
@@ -169,7 +165,7 @@ async def get_pending_reviews(
             political_significance="solidarity",
             text_content="ALWAYS WAS ALWAYS WILL BE",
             color_palette={"primary": "#1A1714", "secondary": "#D4A84B"},
-            sample_image_url="/assets/kr-solidarity/street/kr-solidarity__street__solidarity__v1.png"
+            sample_image_url="/assets/kr-solidarity/street/kr-solidarity__street__solidarity__v1.png",
         ),
         ReviewDashboardAsset(
             asset_id="KR-SOLID-015",
@@ -184,8 +180,8 @@ async def get_pending_reviews(
             political_significance="resistance-history",
             text_content=None,
             color_palette={"primary": "#B8733D", "secondary": "#D4A84B"},
-            sample_image_url="/assets/kr-solidarity/portrait/kr-solidarity__portrait__resistance__v1.png"
-        )
+            sample_image_url="/assets/kr-solidarity/portrait/kr-solidarity__portrait__resistance__v1.png",
+        ),
     ]
 
     # Apply filters
@@ -219,7 +215,7 @@ async def get_dashboard_stats() -> ReviewDashboardStats:
         assets_conditional=2,
         average_review_time=4.5,
         reviewers_active=["alice@example.com", "bob@example.com"],
-        pending_overrides=1
+        pending_overrides=1,
     )
 
     print(f"  Pending: {stats.total_assets_pending}")
@@ -232,9 +228,7 @@ async def get_dashboard_stats() -> ReviewDashboardStats:
 
 @router.post("/override/{asset_id}/{violation_id}")
 async def submit_governance_override(
-    asset_id: str,
-    violation_id: str,
-    override: GovernanceOverride
+    asset_id: str, violation_id: str, override: GovernanceOverride
 ):
     """
     Override a specific governance violation/warning.
@@ -253,7 +247,7 @@ async def submit_governance_override(
     OVERRIDES_STORAGE[override_id] = {
         "asset_id": asset_id,
         "violation_id": violation_id,
-        **override.dict()
+        **override.dict(),
     }
 
     print("  ✅ Override stored")
@@ -263,7 +257,7 @@ async def submit_governance_override(
         "override_id": override_id,
         "asset_id": asset_id,
         "violation_id": violation_id,
-        "decision": override.decision
+        "decision": override.decision,
     }
 
 
@@ -278,10 +272,7 @@ async def get_asset_review_history(asset_id: str):
     print(f"  Asset: {asset_id}")
 
     review = REVIEWS_STORAGE.get(asset_id)
-    overrides = [
-        v for k, v in OVERRIDES_STORAGE.items()
-        if k.startswith(asset_id)
-    ]
+    overrides = [v for k, v in OVERRIDES_STORAGE.items() if k.startswith(asset_id)]
 
     if not review:
         raise HTTPException(status_code=404, detail=f"No reviews found for {asset_id}")
@@ -289,18 +280,11 @@ async def get_asset_review_history(asset_id: str):
     print("  Review found")
     print(f"  Overrides: {len(overrides)}")
 
-    return {
-        "asset_id": asset_id,
-        "review": review,
-        "overrides": overrides
-    }
+    return {"asset_id": asset_id, "review": review, "overrides": overrides}
 
 
 @router.post("/export-reviews")
-async def export_reviews(
-    format: str = "json",
-    include_rejected: bool = False
-):
+async def export_reviews(format: str = "json", include_rejected: bool = False):
     """
     Export all reviews in specified format.
 
@@ -315,8 +299,7 @@ async def export_reviews(
     reviews_to_export = REVIEWS_STORAGE.copy()
     if not include_rejected:
         reviews_to_export = {
-            k: v for k, v in reviews_to_export.items()
-            if v.get("decision") != "rejected"
+            k: v for k, v in reviews_to_export.items() if v.get("decision") != "rejected"
         }
 
     if format == "json":
@@ -324,7 +307,7 @@ async def export_reviews(
             "exported_at": datetime.utcnow().isoformat(),
             "total_reviews": len(reviews_to_export),
             "reviews": reviews_to_export,
-            "overrides": OVERRIDES_STORAGE
+            "overrides": OVERRIDES_STORAGE,
         }
         print(f"  ✅ Exported {len(reviews_to_export)} reviews (JSON)")
         return export_data
@@ -335,19 +318,20 @@ async def export_reviews(
 
         output = StringIO()
         writer = csv.DictWriter(
-            output,
-            fieldnames=["asset_id", "decision", "reviewed_by", "confidence", "timestamp"]
+            output, fieldnames=["asset_id", "decision", "reviewed_by", "confidence", "timestamp"]
         )
         writer.writeheader()
 
         for asset_id, review in reviews_to_export.items():
-            writer.writerow({
-                "asset_id": asset_id,
-                "decision": review.get("decision"),
-                "reviewed_by": review.get("reviewed_by"),
-                "confidence": review.get("confidence"),
-                "timestamp": review.get("review_timestamp")
-            })
+            writer.writerow(
+                {
+                    "asset_id": asset_id,
+                    "decision": review.get("decision"),
+                    "reviewed_by": review.get("reviewed_by"),
+                    "confidence": review.get("confidence"),
+                    "timestamp": review.get("review_timestamp"),
+                }
+            )
 
         print(f"  ✅ Exported {len(reviews_to_export)} reviews (CSV)")
         return {"csv": output.getvalue()}
@@ -366,7 +350,6 @@ async def clear_all_reviews(confirm: bool = False):
     if not confirm:
         raise HTTPException(status_code=400, detail="Must confirm deletion with confirm=true")
 
-    global REVIEWS_STORAGE, OVERRIDES_STORAGE
     count_reviews = len(REVIEWS_STORAGE)
     count_overrides = len(OVERRIDES_STORAGE)
 
@@ -377,8 +360,4 @@ async def clear_all_reviews(confirm: bool = False):
     print(f"  Reviews deleted: {count_reviews}")
     print(f"  Overrides deleted: {count_overrides}")
 
-    return {
-        "success": True,
-        "reviews_deleted": count_reviews,
-        "overrides_deleted": count_overrides
-    }
+    return {"success": True, "reviews_deleted": count_reviews, "overrides_deleted": count_overrides}

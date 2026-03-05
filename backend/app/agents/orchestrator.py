@@ -41,6 +41,7 @@ class AgentPriority(Enum):
 
     LOW = "low"
     NORMAL = "normal"
+    MEDIUM = "medium"
     HIGH = "high"
     CRITICAL = "critical"
 
@@ -57,10 +58,10 @@ class BaseAgent:
         self.dependencies = dependencies or []
         self.status = AgentStatus.PENDING
         self.priority = AgentPriority.NORMAL
-        self.started_at = None
-        self.completed_at = None
-        self.results = None
-        self.error_message = None
+        self.started_at: datetime | None = None
+        self.completed_at: datetime | None = None
+        self.results: dict[str, Any] | None = None
+        self.error_message: str | None = None
 
     async def execute(self, context: dict[str, Any]) -> dict[str, Any]:
         """Execute the agent's main task"""
@@ -462,13 +463,13 @@ class AgentOrchestrator:
 
     def _initialize_agents(self) -> dict[str, BaseAgent]:
         """Initialize all available agents"""
-        from .test_automation_specialist import TestAutomationSpecialistAgent
+        from .automation_specialist import AutomationSpecialistAgent
 
         return {
             "job_scout": JobScoutAgent(),
             "market_analyst": MarketAnalystAgent(),
             "application_agent": ApplicationAgent(),
-            "test_automation_specialist": TestAutomationSpecialistAgent(),
+            "test_automation_specialist": AutomationSpecialistAgent(),
             # Add more agents as needed
         }
 
@@ -499,15 +500,17 @@ class AgentOrchestrator:
             logger.error(f"Workflow {workflow_type} failed: {e}")
             # Update session status
             with get_db_session() as db:
-                session = db.query(AgentSession).filter(AgentSession.id == self.session_id).first()
-                if session:
-                    session.status = "failed"
+                failed_session = (
+                    db.query(AgentSession).filter(AgentSession.id == self.session_id).first()
+                )
+                if failed_session:
+                    failed_session.status = "failed"
             raise
 
     async def _run_daily_discovery_workflow(self, context: dict[str, Any]) -> dict[str, Any]:
         """Run daily job discovery workflow with multiple agents"""
-        results = {}
-        completed_agents = []
+        results: dict[str, Any] = {}
+        completed_agents: list[str] = []
 
         # Agent execution order based on dependencies
         execution_order = ["job_scout", "market_analyst", "application_agent"]

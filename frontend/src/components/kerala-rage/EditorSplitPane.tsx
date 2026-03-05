@@ -11,7 +11,7 @@ interface EditorSplitPaneProps {
 
 /**
  * EditorSplitPane
- * 
+ *
  * High-interactivity component for side-by-side editing.
  */
 export const EditorSplitPane: React.FC<EditorSplitPaneProps> = ({
@@ -23,8 +23,13 @@ export const EditorSplitPane: React.FC<EditorSplitPaneProps> = ({
   const [split, setSplit] = useState(initialSplit);
 
   return (
-    <div className={cn("flex w-full h-full overflow-hidden bg-asphalt-black shadow-viscous", className)}>
-      <div 
+    <div
+      className={cn(
+        'flex w-full h-full overflow-hidden bg-asphalt-black shadow-viscous',
+        className
+      )}
+    >
+      <div
         style={{ width: `${split}%` }}
         className="h-full border-r border-white/10 overflow-auto custom-scrollbar"
       >
@@ -37,7 +42,7 @@ export const EditorSplitPane: React.FC<EditorSplitPaneProps> = ({
         </div>
       </div>
 
-      <div 
+      <div
         style={{ width: `${100 - split}%` }}
         className="h-full overflow-auto custom-scrollbar"
       >

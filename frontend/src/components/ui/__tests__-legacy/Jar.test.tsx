@@ -11,7 +11,13 @@ const options = [
 
 describe('Jar', () => {
   it('renders label and placeholder', () => {
-    render(<Jar label="Preferred role" options={options} placeholder="Select role" />);
+    render(
+      <Jar
+        label="Preferred role"
+        options={options}
+        placeholder="Select role"
+      />
+    );
 
     expect(screen.getByText('Preferred role')).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /select role/i })).toBeInTheDocument();
@@ -21,7 +27,13 @@ describe('Jar', () => {
     const user = userEvent.setup();
     const onChange = jest.fn();
 
-    render(<Jar label="Role" options={options} onChange={onChange} />);
+    render(
+      <Jar
+        label="Role"
+        options={options}
+        onChange={onChange}
+      />
+    );
 
     await user.click(screen.getByRole('button'));
     const listbox = screen.getByRole('listbox');
@@ -33,7 +45,13 @@ describe('Jar', () => {
   it('prevents opening when disabled', async () => {
     const user = userEvent.setup();
 
-    render(<Jar label="Role" options={options} disabled />);
+    render(
+      <Jar
+        label="Role"
+        options={options}
+        disabled
+      />
+    );
     const trigger = screen.getByRole('button');
 
     expect(trigger).toBeDisabled();

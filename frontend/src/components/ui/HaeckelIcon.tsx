@@ -2,10 +2,10 @@ import React from 'react';
 
 /**
  * HaeckelIcon component (REFACTORED)
- * 
+ *
  * Legacy Haeckel specimens have been purged. This component now maps
  * legacy grid coordinates to modern Kr-Solidarity UI motifs.
- * 
+ *
  * Grid lookup (Legacy): icon-haeckel-[row]-[col].png
  */
 

@@ -1,7 +1,17 @@
 import { useState } from 'react';
 import {
-  TrendingUp, Award, Target, Sparkles, Download, ExternalLink, Link2,
-  Loader2, Shield, CheckCircle2, BookOpen, AlertCircle
+  TrendingUp,
+  Award,
+  Target,
+  Sparkles,
+  Download,
+  ExternalLink,
+  Link2,
+  Loader2,
+  Shield,
+  CheckCircle2,
+  BookOpen,
+  AlertCircle,
 } from 'lucide-react';
 import {
   LineChart,
@@ -64,13 +74,13 @@ const ATS_SCORE_DATA: ATSScoreDataPoint[] = [
 
 // Map token colors for Recharts (must be hex)
 const CHART_COLORS = {
-  primary: '#D1C4E9',   // primary-80
+  primary: '#D1C4E9', // primary-80
   secondary: '#C7FFF4', // secondary-80
-  tertiary: '#FFD9E8',  // tertiary-80
-  error: '#FFB4AB',     // error-80
-  surface: '#1C1B1F',   // surface-container-low
+  tertiary: '#FFD9E8', // tertiary-80
+  error: '#FFB4AB', // error-80
+  surface: '#1C1B1F', // surface-container-low
   onSurface: '#E6E1E5', // neutral-90
-  grid: '#484649',      // neutral-30
+  grid: '#484649', // neutral-30
   heroHighlight: '#D0BCFF', // Electric Violet for hero moment
 };
 
@@ -151,8 +161,12 @@ export function Analysis() {
       const analysis = await analyzeJobUrl(jobUrl);
       toast.success('Job analysis complete! Verified sources extracted.');
       // Auto-populate job description from analysis
-      setJobDescription(analysis.keywords.join(', ') + '\n\n' +
-        'Requirements: ' + analysis.minimumRequirements.join(', '));
+      setJobDescription(
+        analysis.keywords.join(', ') +
+          '\n\n' +
+          'Requirements: ' +
+          analysis.minimumRequirements.join(', ')
+      );
     } catch (error) {
       toast.error('Failed to analyze job URL. Please try again.');
       console.error(error);
@@ -167,14 +181,11 @@ export function Analysis() {
       return;
     }
 
-    toast.promise(
-      analyzeDocument(documentText, jobDescription),
-      {
-        loading: 'Analyzing with 4-Quadrant Intelligence...',
-        success: 'Analysis complete! Check your scores below.',
-        error: 'Analysis failed. Please try again.',
-      }
-    );
+    toast.promise(analyzeDocument(documentText, jobDescription), {
+      loading: 'Analyzing with 4-Quadrant Intelligence...',
+      success: 'Analysis complete! Check your scores below.',
+      error: 'Analysis failed. Please try again.',
+    });
     setShowInputs(false);
   };
 
@@ -203,12 +214,13 @@ export function Analysis() {
     { name: 'Impact', value: scores.impact },
     { name: 'ATS', value: scores.atsReadability },
   ];
-  const heroQuadrant = quadrantScores.reduce((max, q) =>
-    q.value > max.value ? q : max
-  );
+  const heroQuadrant = quadrantScores.reduce((max, q) => (q.value > max.value ? q : max));
 
   return (
-    <div id="analysis-content" className="p-6 md:p-12 max-w-7xl relative animate-in fade-in zoom-in-95 duration-500 ease-spring">
+    <div
+      id="analysis-content"
+      className="p-6 md:p-12 max-w-7xl relative animate-in fade-in zoom-in-95 duration-500 ease-spring"
+    >
       <div className="relative z-10">
         {/* Header with Actions */}
         <div className="flex items-center justify-between mb-8">
@@ -232,9 +244,7 @@ export function Analysis() {
           <div className="bg-surface-container rounded-leaf p-8 border border-outline-variant shadow-elevation-1 mb-8">
             <div className="flex items-center gap-3 mb-6">
               <Sparkles className="w-6 h-6 text-primary" />
-              <h2 className="text-title-large font-bold text-on-surface">
-                Run Intelligence Audit
-              </h2>
+              <h2 className="text-title-large font-bold text-on-surface">Run Intelligence Audit</h2>
             </div>
 
             {/* Job URL Intelligence Extractor */}
@@ -283,7 +293,8 @@ export function Analysis() {
                 </div>
               )}
               <p className="text-body-small text-on-surface-variant mt-2">
-                Automatically extract keywords, requirements, and Australian sector compliance (APS, AASW, WWCC, NDIS) from job posting URLs.
+                Automatically extract keywords, requirements, and Australian sector compliance (APS,
+                AASW, WWCC, NDIS) from job posting URLs.
               </p>
             </div>
 
@@ -532,15 +543,14 @@ export function Analysis() {
           <div className="mt-8 bg-surface-container rounded-tech p-8 border border-outline-variant shadow-elevation-1">
             <div className="flex items-center gap-3 mb-6">
               <Link2 className="w-6 h-6 text-tertiary" />
-              <h2 className="text-title-large font-bold text-on-surface">
-                Verified Sources
-              </h2>
+              <h2 className="text-title-large font-bold text-on-surface">Verified Sources</h2>
             </div>
 
             {jobAnalysis.sources.length > 0 ? (
               <>
                 <p className="text-body-medium text-on-surface-variant mb-6">
-                  These sources were automatically discovered via Google Search grounding and verified for Australian sector compliance.
+                  These sources were automatically discovered via Google Search grounding and
+                  verified for Australian sector compliance.
                 </p>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -556,9 +566,13 @@ export function Analysis() {
                         <div className="flex-1">
                           <div className="flex items-center gap-2 mb-2">
                             <span className="px-2 py-1 rounded-pebble bg-primary-container text-on-primary-container text-label-small font-bold">
-                              {source.uri.includes('seek.com.au') ? 'SEEK' :
-                                source.uri.includes('linkedin.com') ? 'LinkedIn' :
-                                  source.uri.includes('.gov.au') ? 'Government' : 'Web'}
+                              {source.uri.includes('seek.com.au')
+                                ? 'SEEK'
+                                : source.uri.includes('linkedin.com')
+                                  ? 'LinkedIn'
+                                  : source.uri.includes('.gov.au')
+                                    ? 'Government'
+                                    : 'Web'}
                             </span>
                           </div>
                           <h3 className="text-body-large font-bold text-on-surface group-hover:text-primary mb-2 line-clamp-2">
@@ -581,7 +595,8 @@ export function Analysis() {
                   No Verified Sources Found
                 </h3>
                 <p className="text-body-medium text-on-surface-variant max-w-md mx-auto">
-                  Google Search grounding analyzed the URL but couldn't verify specific external citations.
+                  Google Search grounding analyzed the URL but couldn't verify specific external
+                  citations.
                 </p>
               </div>
             )}
@@ -604,27 +619,29 @@ export function Analysis() {
                   </div>
                 )}
 
-                {jobAnalysis.sectorInsights.compliance && jobAnalysis.sectorInsights.compliance.length > 0 && (
-                  <div className="mb-2">
-                    <span className="text-label-small font-bold text-on-tertiary-container uppercase tracking-wider">
-                      Compliance:
-                    </span>
-                    <span className="text-body-medium text-on-tertiary-container ml-2">
-                      {jobAnalysis.sectorInsights.compliance.join(', ')}
-                    </span>
-                  </div>
-                )}
+                {jobAnalysis.sectorInsights.compliance &&
+                  jobAnalysis.sectorInsights.compliance.length > 0 && (
+                    <div className="mb-2">
+                      <span className="text-label-small font-bold text-on-tertiary-container uppercase tracking-wider">
+                        Compliance:
+                      </span>
+                      <span className="text-body-medium text-on-tertiary-container ml-2">
+                        {jobAnalysis.sectorInsights.compliance.join(', ')}
+                      </span>
+                    </div>
+                  )}
 
-                {jobAnalysis.sectorInsights.standards && jobAnalysis.sectorInsights.standards.length > 0 && (
-                  <div>
-                    <span className="text-label-small font-bold text-on-tertiary-container uppercase tracking-wider">
-                      Standards:
-                    </span>
-                    <span className="text-body-medium text-on-tertiary-container ml-2">
-                      {jobAnalysis.sectorInsights.standards.join(', ')}
-                    </span>
-                  </div>
-                )}
+                {jobAnalysis.sectorInsights.standards &&
+                  jobAnalysis.sectorInsights.standards.length > 0 && (
+                    <div>
+                      <span className="text-label-small font-bold text-on-tertiary-container uppercase tracking-wider">
+                        Standards:
+                      </span>
+                      <span className="text-body-medium text-on-tertiary-container ml-2">
+                        {jobAnalysis.sectorInsights.standards.join(', ')}
+                      </span>
+                    </div>
+                  )}
               </div>
             )}
           </div>

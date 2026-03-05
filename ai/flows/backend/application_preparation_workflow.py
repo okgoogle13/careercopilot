@@ -317,7 +317,7 @@ GENERATED MATERIALS SUMMARY:
 - KSC Count: {len(ksc_detection.detected_criteria) if ksc_detection.detected_criteria else 0}
 
 USER PROFILE SUMMARY:
-{json.dumps(sanitized_profile, separators=(\',\', \':\'))[:1000]}...
+{json.dumps(sanitized_profile, separators=(",", ":"))[:1000]}...
 
 Create a comprehensive application strategy including:
 
@@ -462,7 +462,7 @@ JOB DESCRIPTION:
 {sanitized_job.sanitized_content}
 
 CANDIDATE PROFILE:
-{json.dumps(sanitized_profile, separators=(\',\', \':\'))}
+{json.dumps(sanitized_profile, separators=(",", ":"))}
 
 READINESS ASSESSMENT:
 

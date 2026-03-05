@@ -25,7 +25,10 @@ describe('Pebble', () => {
     const onClick = jest.fn();
 
     render(
-      <Pebble isLoading onClick={onClick}>
+      <Pebble
+        isLoading
+        onClick={onClick}
+      >
         Loading
       </Pebble>
     );

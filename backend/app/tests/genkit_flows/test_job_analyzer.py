@@ -1,11 +1,12 @@
 from unittest.mock import Mock, patch
 
 import pytest
+
 from app.genkit_flows.job_analyzer import analyze_job_description
 
 
 @pytest.mark.skip(reason="gemini_pro model removed - test needs refactoring for new model setup")
-@patch("app.genkit_flows.job_analyzer.gemini_pro")
+@patch("app.genkit_flows.job_analyzer.get_model")
 def test_analyze_job_description_flow(mock_gemini):
     mock_response = Mock()
     mock_response.generate.return_value.text.return_value = (

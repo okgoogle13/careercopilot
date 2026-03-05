@@ -22,7 +22,6 @@
 @config "../../../tailwind.config.ts";
 @source "../../**/*.{ts,tsx,js,jsx,html}";
 
-
 :root {
   --color-asphalt-black-lightest: var(--sys-color-charcoalBackground-steps-4);
   --color-asphalt-black-light: var(--sys-color-charcoalBackground-steps-2);
@@ -456,7 +455,9 @@
 
   .hero-street-canon .hero-typography {
     font-family: 'Work Sans', sans-serif;
-    font-variation-settings: 'wght' 900, 'wdth' 75;
+    font-variation-settings:
+      'wght' 900,
+      'wdth' 75;
     letter-spacing: 0em;
     text-transform: uppercase;
     color: var(--sys-color-solidarityRed-base);
@@ -468,7 +469,11 @@
   /* Pattern B: The Spiritual Anchor — Contemplative, reflective */
   .hero-spiritual-anchor .hero-typography {
     font-family: 'Fraunces', serif;
-    font-variation-settings: 'wght' 475, 'wdth' 98, 'SOFT' 50, 'WONK' 1;
+    font-variation-settings:
+      'wght' 475,
+      'wdth' 98,
+      'SOFT' 50,
+      'WONK' 1;
     letter-spacing: 0em;
     color: var(--sys-color-worker-ash-steps-6);
     text-shadow: 0 0 32px rgba(72, 218, 139, 0.2);

@@ -11,15 +11,17 @@ from fastapi import APIRouter
 from .endpoints import (
     analysis,
     applications,
+    asset_review,
     auth,
     config,
     documents,
     genkit,
+    job_listings,
+    manifest_integration,
     opportunities,
+    smart_ingestion,
     workflows,
 )
-
-# from .routers import ingestion
 
 api_router = APIRouter()
 
@@ -30,10 +32,13 @@ routers = [
     (config.router, "/config", "Configuration"),
     (documents.router, "/documents", "Documents"),
     (workflows.router, "/workflows", "Workflows"),
-    # (ingestion.router, "/ingestion", "Smart Ingestion"),
+    (smart_ingestion.router, "/smart-ingestion", "Smart Ingestion"),
     (applications.router, "/applications", "Applications"),
     (opportunities.router, "/opportunities", "Opportunities"),
     (genkit.router, "/genkit", "Genkit AI"),
+    (job_listings.router, "/job-listings", "Job Listings"),
+    (manifest_integration.router, "/manifest-integration", "Manifest Integration"),
+    (asset_review.router, "/asset-review", "Asset Review"),
 ]
 
 # Include all routers

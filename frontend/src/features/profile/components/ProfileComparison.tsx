@@ -13,7 +13,9 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from '@careercopilot/ui';
 
 // Mock component to satisfy build until custom components are migrated
 const ATSScoreCircle = ({ score, size }: { score: number; size?: string }) => (
-  <div className={`p-2 rounded-full border-2 border-primary flex items-center justify-center font-bold ${size === 'small' ? 'w-10 h-10 text-xs' : 'w-20 h-20 text-lg'}`}>
+  <div
+    className={`p-2 rounded-full border-2 border-primary flex items-center justify-center font-bold ${size === 'small' ? 'w-10 h-10 text-xs' : 'w-20 h-20 text-lg'}`}
+  >
     {score}
   </div>
 );
@@ -73,7 +75,16 @@ const sampleProfiles: ProfileData[] = [
     atsScore: 92,
     lastUpdated: '2024-01-20',
     avatarColor: 'primary',
-    skills: ['JavaScript', 'TypeScript', 'React', 'Node.js', 'Python', 'PostgreSQL', 'AWS', 'Docker'],
+    skills: [
+      'JavaScript',
+      'TypeScript',
+      'React',
+      'Node.js',
+      'Python',
+      'PostgreSQL',
+      'AWS',
+      'Docker',
+    ],
     experience: [
       {
         company: 'TechCorp',
@@ -140,14 +151,20 @@ export function ProfileComparison({
         </h4>
         <div className="space-y-4">
           {leftProfile.experience.map((exp, index) => (
-            <div key={index} className="border-l-2 border-outline-variant pl-4">
+            <div
+              key={index}
+              className="border-l-2 border-outline-variant pl-4"
+            >
               <h5 className="text-hero text-sm font-medium text-on-surface">{exp.position}</h5>
               <p className="text-human text-xs text-on-surface-variant">
                 {exp.company} • {exp.duration}
               </p>
               <ul className="mt-2 space-y-1 pl-4 list-disc">
                 {exp.highlights.map((highlight, hIndex) => (
-                  <li key={hIndex} className="text-human text-xs text-on-surface-variant">
+                  <li
+                    key={hIndex}
+                    className="text-human text-xs text-on-surface-variant"
+                  >
                     {highlight}
                   </li>
                 ))}
@@ -163,14 +180,20 @@ export function ProfileComparison({
         </h4>
         <div className="space-y-4">
           {rightProfile.experience.map((exp, index) => (
-            <div key={index} className="border-l-2 border-primary pl-4">
+            <div
+              key={index}
+              className="border-l-2 border-primary pl-4"
+            >
               <h5 className="text-hero text-sm font-medium text-on-surface">{exp.position}</h5>
               <p className="text-human text-xs text-on-surface-variant">
                 {exp.company} • {exp.duration}
               </p>
               <ul className="mt-2 space-y-1 pl-4 list-disc">
                 {exp.highlights.map((highlight, hIndex) => (
-                  <li key={hIndex} className="text-human text-xs text-on-surface-variant">
+                  <li
+                    key={hIndex}
+                    className="text-human text-xs text-on-surface-variant"
+                  >
                     {highlight}
                   </li>
                 ))}
@@ -195,8 +218,18 @@ export function ProfileComparison({
     { id: 'overview', label: 'Overview', content: renderOverview() },
     { id: 'skills', label: 'Skills', content: renderSkillsComparison() },
     { id: 'experience', label: 'Experience', content: renderExperienceComparison() },
-    { id: 'education', label: 'Education', content: <div className="p-4 text-center">Education comparison coming soon</div>, disabled: true },
-    { id: 'certifications', label: 'Certifications', content: <div className="p-4 text-center">Certifications comparison coming soon</div>, disabled: true },
+    {
+      id: 'education',
+      label: 'Education',
+      content: <div className="p-4 text-center">Education comparison coming soon</div>,
+      disabled: true,
+    },
+    {
+      id: 'certifications',
+      label: 'Certifications',
+      content: <div className="p-4 text-center">Certifications comparison coming soon</div>,
+      disabled: true,
+    },
   ];
 
   return (
@@ -204,16 +237,17 @@ export function ProfileComparison({
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-hero text-3xl font-bold text-on-surface mb-2">
-            Profile Comparison
-          </h1>
+          <h1 className="text-hero text-3xl font-bold text-on-surface mb-2">Profile Comparison</h1>
           <p className="text-human text-base text-on-surface-variant">
             Compare different versions of your profile side by side
           </p>
         </div>
 
         <div className="flex gap-2">
-          <Button variant="outlined" onClick={onSwapProfiles}>
+          <Button
+            variant="outlined"
+            onClick={onSwapProfiles}
+          >
             <SwapHoriz className="h-4 w-4 mr-2" />
             Swap Profiles
           </Button>
@@ -232,10 +266,12 @@ export function ProfileComparison({
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
         <div>
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-hero text-base font-medium text-on-surface">
-              Profile Version 1
-            </h3>
-            <Button variant="outlined" size="small" onClick={() => onProfileSelect?.('left')}>
+            <h3 className="text-hero text-base font-medium text-on-surface">Profile Version 1</h3>
+            <Button
+              variant="outlined"
+              size="small"
+              onClick={() => onProfileSelect?.('left')}
+            >
               Change Profile
             </Button>
           </div>
@@ -258,7 +294,10 @@ export function ProfileComparison({
                   {leftProfile.activeApplications}
                 </p>
               </div>
-              <ATSScoreCircle score={leftProfile.atsScore} size="small" />
+              <ATSScoreCircle
+                score={leftProfile.atsScore}
+                size="small"
+              />
             </div>
             <p className="text-human text-xs text-on-surface-variant">
               Last updated: {leftProfile.lastUpdated}
@@ -268,10 +307,12 @@ export function ProfileComparison({
 
         <div>
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-hero text-base font-medium text-on-surface">
-              Profile Version 2
-            </h3>
-            <Button variant="outlined" size="small" onClick={() => onProfileSelect?.('right')}>
+            <h3 className="text-hero text-base font-medium text-on-surface">Profile Version 2</h3>
+            <Button
+              variant="outlined"
+              size="small"
+              onClick={() => onProfileSelect?.('right')}
+            >
               Change Profile
             </Button>
           </div>
@@ -294,7 +335,10 @@ export function ProfileComparison({
                   {rightProfile.activeApplications}
                 </p>
               </div>
-              <ATSScoreCircle score={rightProfile.atsScore} size="small" />
+              <ATSScoreCircle
+                score={rightProfile.atsScore}
+                size="small"
+              />
             </div>
             <p className="text-human text-xs text-on-surface-variant">
               Last updated: {rightProfile.lastUpdated}
@@ -304,7 +348,10 @@ export function ProfileComparison({
       </div>
 
       {/* Section Navigation */}
-      <Tabs defaultValue="overview" className="w-full">
+      <Tabs
+        defaultValue="overview"
+        className="w-full"
+      >
         <TabsList className="mb-6">
           {tabs.map((tab) => (
             <TabsTrigger
@@ -317,7 +364,10 @@ export function ProfileComparison({
           ))}
         </TabsList>
         {tabs.map((tab) => (
-          <TabsContent key={tab.id} value={tab.id}>
+          <TabsContent
+            key={tab.id}
+            value={tab.id}
+          >
             {tab.content}
           </TabsContent>
         ))}
@@ -327,4 +377,3 @@ export function ProfileComparison({
 }
 
 export default ProfileComparison;
-

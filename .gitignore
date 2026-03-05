@@ -12,7 +12,6 @@ yarn-error.log*
 .env.production.local
 .env.production
 .env.staging
-.env.mcp
 backend/.env
 backend/.env.*
 frontend/.env.production
@@ -155,7 +154,6 @@ var/
 # Logs
 pip-log.txt
 pip-delete-this-directory.txt
-firebase-debug.log
 
 # Coverage
 .tox/

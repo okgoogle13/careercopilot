@@ -13,10 +13,10 @@ interface MetricCardProps {
 
 /**
  * MetricCard - M3 Compliant Metric Display Component
- * 
+ *
  * Displays key metrics with icon, label, and value in a compact card format.
  * Enhanced with M3 elevation and motion for visual hierarchy.
- * 
+ *
  * **M3 Design Token Usage:**
  * - Shape: `rounded-tech` (24px 4px 24px 20px) - Precision aesthetic
  * - Elevation: `shadow-elevation-1` → `shadow-elevation-2` on hover
@@ -41,10 +41,11 @@ export function MetricCard({
     <div
       className={`
       rounded-stone p-6
-      ${variant === 'outlined'
+      ${
+        variant === 'outlined'
           ? 'bg-transparent border border-concrete-grey/10'
           : 'bg-[var(--color-asphalt-black)]'
-        }
+      }
       ${elevationClasses}
       transition-all duration-300 ease-viscous-breeze
       ${className}

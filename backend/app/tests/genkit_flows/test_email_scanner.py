@@ -1,11 +1,12 @@
 from unittest.mock import Mock, patch
 
 import pytest
+
 from app.genkit_flows.email_scanner import extract_job_details_from_email
 
 
 @pytest.mark.skip(reason="gemini_pro model removed - test needs refactoring for new model setup")
-@patch("app.genkit_flows.email_scanner.gemini_pro")
+@patch("app.genkit_flows.email_scanner.get_model")
 def test_extract_job_details_from_email_flow(mock_gemini):
     mock_response = Mock()
     mock_response.generate.return_value.text.return_value = '{"company": "Acme", "title": "Engineer", "deadline": "2025-09-01", "source_url": "http://example.com"}'

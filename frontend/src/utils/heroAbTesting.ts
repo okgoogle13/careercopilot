@@ -24,7 +24,7 @@ export function getDefaultVariant(testId: string): AbVariant {
 export function getHeroForVariant(
   registry: HeroRegistry,
   config: AbTestConfig,
-  variant?: AbVariant,
+  variant?: AbVariant
 ): HeroComposition | undefined {
   const resolvedVariant = variant ?? getDefaultVariant(config.testId);
   const heroId = config.variants[resolvedVariant];

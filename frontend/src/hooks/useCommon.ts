@@ -1,6 +1,6 @@
 /**
  * Custom React Hooks for Common Patterns
- * 
+ *
  * Eliminates duplication of common state management patterns across components.
  */
 
@@ -8,12 +8,12 @@ import { useState, useCallback, ChangeEvent } from 'react';
 
 /**
  * Hook for managing form field state with validation
- * 
+ *
  * Replaces the pattern of:
  *   const [value, setValue] = useState('');
  *   const [error, setError] = useState('');
  *   const [isValid, setIsValid] = useState(false);
- * 
+ *
  * Used in: JobInput, UploadResume, LoginCard, EditableField, etc.
  */
 export interface UseFormFieldOptions<T = string> {
@@ -24,29 +24,32 @@ export interface UseFormFieldOptions<T = string> {
 
 export function useFormField<T = string>(options: UseFormFieldOptions<T> = {}) {
   const { initialValue, validate, onChange: onChangeCallback } = options;
-  
+
   const [value, setValue] = useState<T>(initialValue as T);
   const [error, setError] = useState<string | null>(null);
   const [touched, setTouched] = useState(false);
 
-  const handleChange = useCallback((newValue: T) => {
-    setValue(newValue);
-    
-    // Run validation if provided
-    if (validate) {
-      const validationError = validate(newValue);
-      setError(validationError);
-    }
-    
-    // Call external onChange handler
-    if (onChangeCallback) {
-      onChangeCallback(newValue);
-    }
-  }, [validate, onChangeCallback]);
+  const handleChange = useCallback(
+    (newValue: T) => {
+      setValue(newValue);
+
+      // Run validation if provided
+      if (validate) {
+        const validationError = validate(newValue);
+        setError(validationError);
+      }
+
+      // Call external onChange handler
+      if (onChangeCallback) {
+        onChangeCallback(newValue);
+      }
+    },
+    [validate, onChangeCallback]
+  );
 
   const handleBlur = useCallback(() => {
     setTouched(true);
-    
+
     // Run validation on blur
     if (validate && !error) {
       const validationError = validate(value);
@@ -72,7 +75,7 @@ export function useFormField<T = string>(options: UseFormFieldOptions<T> = {}) {
     // Convenience props for input elements
     inputProps: {
       value: value as any,
-      onChange: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => 
+      onChange: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
         handleChange(e.target.value as T),
       onBlur: handleBlur,
     },
@@ -81,12 +84,12 @@ export function useFormField<T = string>(options: UseFormFieldOptions<T> = {}) {
 
 /**
  * Hook for managing async operations with loading and error states
- * 
+ *
  * Replaces the pattern of:
  *   const [isLoading, setIsLoading] = useState(false);
  *   const [error, setError] = useState<string | null>(null);
  *   const [data, setData] = useState<T | null>(null);
- * 
+ *
  * Used extensively in service calls across components.
  */
 export interface UseAsyncOptions<T> {
@@ -96,37 +99,40 @@ export interface UseAsyncOptions<T> {
 
 export function useAsync<T = any>(options: UseAsyncOptions<T> = {}) {
   const { onSuccess, onError } = options;
-  
+
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
   const [data, setData] = useState<T | null>(null);
 
-  const execute = useCallback(async (asyncFunction: () => Promise<T>) => {
-    setIsLoading(true);
-    setError(null);
-    
-    try {
-      const result = await asyncFunction();
-      setData(result);
-      
-      if (onSuccess) {
-        onSuccess(result);
+  const execute = useCallback(
+    async (asyncFunction: () => Promise<T>) => {
+      setIsLoading(true);
+      setError(null);
+
+      try {
+        const result = await asyncFunction();
+        setData(result);
+
+        if (onSuccess) {
+          onSuccess(result);
+        }
+
+        return result;
+      } catch (err) {
+        const error = err instanceof Error ? err : new Error(String(err));
+        setError(error);
+
+        if (onError) {
+          onError(error);
+        }
+
+        throw error;
+      } finally {
+        setIsLoading(false);
       }
-      
-      return result;
-    } catch (err) {
-      const error = err instanceof Error ? err : new Error(String(err));
-      setError(error);
-      
-      if (onError) {
-        onError(error);
-      }
-      
-      throw error;
-    } finally {
-      setIsLoading(false);
-    }
-  }, [onSuccess, onError]);
+    },
+    [onSuccess, onError]
+  );
 
   const reset = useCallback(() => {
     setIsLoading(false);
@@ -145,7 +151,7 @@ export function useAsync<T = any>(options: UseAsyncOptions<T> = {}) {
 
 /**
  * Hook for managing debounced input
- * 
+ *
  * Prevents expensive operations from running on every keystroke.
  * Used in: JobSearch filter, search inputs, etc.
  */
@@ -167,14 +173,14 @@ export function useDebounce<T>(value: T, delay: number = 300): T {
 
 /**
  * Hook for managing toggle state
- * 
+ *
  * Simpler alternative to useState for boolean flags.
  */
 export function useToggle(initialValue: boolean = false) {
   const [value, setValue] = useState(initialValue);
 
   const toggle = useCallback(() => {
-    setValue(v => !v);
+    setValue((v) => !v);
   }, []);
 
   const setTrue = useCallback(() => {
@@ -190,7 +196,7 @@ export function useToggle(initialValue: boolean = false) {
 
 /**
  * Example usage:
- * 
+ *
  * ```typescript
  * // Form field with validation
  * const email = useFormField({
@@ -201,20 +207,20 @@ export function useToggle(initialValue: boolean = false) {
  *     return null;
  *   },
  * });
- * 
+ *
  * <input {...email.inputProps} />
  * {email.touched && email.error && <span>{email.error}</span>}
- * 
+ *
  * // Async operation
  * const apiCall = useAsync({
  *   onSuccess: (data) => console.log('Success:', data),
  *   onError: (error) => console.error('Error:', error),
  * });
- * 
+ *
  * const handleSubmit = async () => {
  *   await apiCall.execute(() => fetchData());
  * };
- * 
+ *
  * {apiCall.isLoading && <Spinner />}
  * {apiCall.error && <ErrorMessage error={apiCall.error} />}
  * {apiCall.data && <DataDisplay data={apiCall.data} />}

@@ -21,12 +21,7 @@ export interface TabsProps {
   className?: string;
 }
 
-export const Tabs: React.FC<TabsProps> = ({
-  tabs,
-  defaultTab,
-  onChange,
-  className,
-}) => {
+export const Tabs: React.FC<TabsProps> = ({ tabs, defaultTab, onChange, className }) => {
   const [activeTab, setActiveTab] = React.useState(defaultTab || tabs[0]?.id);
 
   const handleTabChange = (tabId: string) => {

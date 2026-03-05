@@ -59,7 +59,9 @@ export function Settings() {
             <div className="space-y-6">
               <div className="grid grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-sm text-on-surface-variant mb-2 font-medium">First Name</label>
+                  <label className="block text-sm text-on-surface-variant mb-2 font-medium">
+                    First Name
+                  </label>
                   <Input
                     value={firstName}
                     onChange={(e) => setFirstName(e.target.value)}
@@ -67,7 +69,9 @@ export function Settings() {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm text-on-surface-variant mb-2 font-medium">Last Name</label>
+                  <label className="block text-sm text-on-surface-variant mb-2 font-medium">
+                    Last Name
+                  </label>
                   <Input
                     value={lastName}
                     onChange={(e) => setLastName(e.target.value)}
@@ -77,7 +81,9 @@ export function Settings() {
               </div>
 
               <div>
-                <label className="block text-sm text-on-surface-variant mb-2 font-medium">Email</label>
+                <label className="block text-sm text-on-surface-variant mb-2 font-medium">
+                  Email
+                </label>
                 <Input
                   type="email"
                   value={email}
@@ -87,7 +93,9 @@ export function Settings() {
               </div>
 
               <div>
-                <label className="block text-sm text-on-surface-variant mb-2 font-medium">Bio</label>
+                <label className="block text-sm text-on-surface-variant mb-2 font-medium">
+                  Bio
+                </label>
                 <Textarea
                   value={bio}
                   onChange={(e) => setBio(e.target.value)}
@@ -115,7 +123,9 @@ export function Settings() {
               <div className="flex items-center justify-between py-4 border-b border-outline-variant">
                 <div>
                   <p className="text-on-surface font-medium">Dark Mode</p>
-                  <p className="text-sm text-on-surface-variant">Use dark theme throughout the app</p>
+                  <p className="text-sm text-on-surface-variant">
+                    Use dark theme throughout the app
+                  </p>
                 </div>
                 <Switch
                   checked={darkMode}
@@ -126,7 +136,9 @@ export function Settings() {
               <div className="flex items-center justify-between py-4 border-b border-outline-variant">
                 <div>
                   <p className="text-on-surface font-medium">Email Notifications</p>
-                  <p className="text-sm text-on-surface-variant">Receive email updates and notifications</p>
+                  <p className="text-sm text-on-surface-variant">
+                    Receive email updates and notifications
+                  </p>
                 </div>
                 <Switch
                   checked={emailNotifications}
@@ -143,7 +155,9 @@ export function Settings() {
             className="bg-surface-container rounded-tech p-8 border border-outline-variant shadow-elevation-1"
             style={cardStyle}
           >
-            <h3 className="text-on-surface mb-6 text-headline-small font-bold">Notification Settings</h3>
+            <h3 className="text-on-surface mb-6 text-headline-small font-bold">
+              Notification Settings
+            </h3>
             <div className="space-y-6">
               <div className="flex items-center justify-between py-4 border-b border-outline-variant">
                 <div>
@@ -180,10 +194,14 @@ export function Settings() {
             className="bg-surface-container rounded-tech p-8 border border-outline-variant shadow-elevation-1"
             style={cardStyle}
           >
-            <h3 className="text-on-surface mb-6 text-headline-small font-bold">Security Settings</h3>
+            <h3 className="text-on-surface mb-6 text-headline-small font-bold">
+              Security Settings
+            </h3>
             <div className="space-y-6">
               <div>
-                <label className="block text-sm text-on-surface-variant mb-2 font-medium">Current Password</label>
+                <label className="block text-sm text-on-surface-variant mb-2 font-medium">
+                  Current Password
+                </label>
                 <Input
                   type="password"
                   placeholder="••••••••"
@@ -192,7 +210,9 @@ export function Settings() {
               </div>
 
               <div>
-                <label className="block text-sm text-on-surface-variant mb-2 font-medium">New Password</label>
+                <label className="block text-sm text-on-surface-variant mb-2 font-medium">
+                  New Password
+                </label>
                 <Input
                   type="password"
                   placeholder="••••••••"
@@ -201,7 +221,9 @@ export function Settings() {
               </div>
 
               <div>
-                <label className="block text-sm text-on-surface-variant mb-2 font-medium">Confirm New Password</label>
+                <label className="block text-sm text-on-surface-variant mb-2 font-medium">
+                  Confirm New Password
+                </label>
                 <Input
                   type="password"
                   placeholder="••••••••"

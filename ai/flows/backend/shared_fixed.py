@@ -3,7 +3,7 @@ Fixed shared utilities for Genkit flows with correct imports
 """
 
 import os
-from typing import Callable, Type
+from typing import Any, Callable, Type, TypeVar
 
 import genkit
 from genkit.plugins import google_genai
@@ -39,10 +39,11 @@ _google_ai_initialized = initialize_google_ai()
 # Get the Gemini 3.0 Pro model constant
 GEMINI_1_5_PRO = google_genai.models.gemini.GEMINI_1_5_PRO
 
+T = TypeVar("T", bound=BaseModel)
 
 def create_extraction_flow(
-    name: str, prompt_template: str, output_schema: Type[BaseModel]
-) -> Callable[[str], BaseModel]:
+    name: str, prompt_template: str, output_schema: Type[T]
+) -> Callable[[str], T]:
     """
     Creates a reusable Genkit flow for extracting structured data from text.
 
@@ -59,7 +60,7 @@ def create_extraction_flow(
         raise RuntimeError("Google AI plugin not initialized. Check GEMINI_API_KEY.")
 
     @genkit.ai.flow(name)
-    async def extraction_flow(input_text: str) -> output_schema:
+    async def extraction_flow(input_text: str) -> T:
         prompt_text = prompt_template.format(input_text=input_text)
 
         # Use the generate method with the Gemini model

@@ -1,20 +1,21 @@
-import logging
 import json
-from typing import Any, Dict, Optional, List
+import logging
+from typing import Any, Dict, List, Optional
+
 from pydantic import BaseModel, Field
 
-from app.core.genkit_init import get_model
-from app.genkit_flows.flow_decorator import async_genkit_flow
+from app.core.genkit_init import async_genkit_flow, get_model
 from app.schemas.ai import (
-    CareerIntelligenceRequest,
     AIResponseModel,
+    CareerIntelligenceRequest,
+    CompanyResearchResponse,
+    InterviewPrepResponse,
     SalaryAnalysisResponse,
     SkillsAnalysisResponse,
-    InterviewPrepResponse,
-    CompanyResearchResponse
 )
 
 logger = logging.getLogger(__name__)
+
 
 def _build_system_context(request: CareerIntelligenceRequest) -> str:
     """Build standardized system context from request data"""
@@ -58,13 +59,16 @@ EXPERTISE AREAS:
 
     return base_context.strip()
 
+
 @async_genkit_flow(output_schema=AIResponseModel)
 async def careerIntelligenceFlow(request: CareerIntelligenceRequest) -> AIResponseModel:
     """
     Unified AI flow for career intelligence operations.
     Replaces legacy AIPromptBuilder and LLMService direct calls.
     """
-    logger.info(f"Executing careerIntelligenceFlow for user {request.user_id}, type {request.prompt_type}")
+    logger.info(
+        f"Executing careerIntelligenceFlow for user {request.user_id}, type {request.prompt_type}"
+    )
 
     model = get_model()
     if not model:
@@ -107,6 +111,7 @@ REQUIREMENTS:
         output_schema = CompanyResearchResponse
 
     import time
+
     start_time = time.time()
 
     try:
@@ -114,7 +119,7 @@ REQUIREMENTS:
             response = await model.generate(
                 prompt=final_prompt,
                 output_schema=output_schema,
-                config={"response_mime_type": "application/json"}
+                config={"response_mime_type": "application/json"},
             )
             content = json.dumps(response.output().model_dump())
         else:
@@ -130,7 +135,7 @@ REQUIREMENTS:
             content=content,
             model_used=getattr(model, "model_name", "gemini-3.0-flash"),
             response_time_ms=duration,
-            metadata={"prompt_type": request.prompt_type}
+            metadata={"prompt_type": request.prompt_type},
         )
 
     except Exception as e:

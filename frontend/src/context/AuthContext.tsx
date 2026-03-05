@@ -1,11 +1,11 @@
-import { 
-  User as FirebaseUser, 
-  onAuthStateChanged, 
-  signInWithEmailAndPassword, 
-  createUserWithEmailAndPassword, 
-  updateProfile, 
+import {
+  User as FirebaseUser,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  updateProfile,
   signOut as firebaseSignOut,
-  getIdToken
+  getIdToken,
 } from 'firebase/auth';
 import {
   ReactNode,
@@ -57,9 +57,9 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   // Helper to map Firebase user to our internal User type
   const mapFirebaseUser = async (fbUser: FirebaseUser | null): Promise<User | null> => {
     if (!fbUser) return null;
-    
+
     const token = await getIdToken(fbUser);
-    
+
     return {
       uid: fbUser.uid,
       email: fbUser.email || undefined,
@@ -130,12 +130,12 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     }
 
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-    
+
     if (userCredential.user) {
       await updateProfile(userCredential.user, {
-        displayName: displayName
+        displayName: displayName,
       });
-      
+
       const mappedUser = await mapFirebaseUser(userCredential.user);
       setUser(mappedUser);
     }

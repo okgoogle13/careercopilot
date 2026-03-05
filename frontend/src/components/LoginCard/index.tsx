@@ -24,14 +24,14 @@ export interface LoginCardProps {
 
 /**
  * LoginCard
- * 
+ *
  * The "Verification Gateway" for Kerala Rage.
  * Enforces Solidarity Mode geometry and motion.
  */
 export const LoginCard: React.FC<LoginCardProps> = ({
   onLogin,
   onRegisterClick,
-  isLoading = false
+  isLoading = false,
 }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -44,19 +44,21 @@ export const LoginCard: React.FC<LoginCardProps> = ({
   return (
     <div className="relative group">
       {/* Halo Disk Radiance */}
-      <div className={cn(
-        "absolute inset-0 -z-10 bg-ink-gold/20 blur-3xl rounded-full scale-150 transition-opacity",
-        isLoading ? "animate-pulse opacity-60" : "opacity-0 group-hover:opacity-40"
-      )} />
+      <div
+        className={cn(
+          'absolute inset-0 -z-10 bg-ink-gold/20 blur-3xl rounded-full scale-150 transition-opacity',
+          isLoading ? 'animate-pulse opacity-60' : 'opacity-0 group-hover:opacity-40'
+        )}
+      />
 
       <motion.form
         onSubmit={handleSubmit}
         initial={{ scale: 0.95, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         className={cn(
-          "w-[480px] p-12 bg-charcoal-100/90 backdrop-blur-md",
-          "border border-blueprint-grey/30 rounded-stone shadow-viscous",
-          "flex flex-col gap-8 relative overflow-hidden"
+          'w-[480px] p-12 bg-charcoal-100/90 backdrop-blur-md',
+          'border border-blueprint-grey/30 rounded-stone shadow-viscous',
+          'flex flex-col gap-8 relative overflow-hidden'
         )}
         aria-label="Verification Gateway"
         role="form"
@@ -78,8 +80,8 @@ export const LoginCard: React.FC<LoginCardProps> = ({
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className={cn(
-                "w-full bg-black/40 border border-blueprint-grey/20 p-4 rounded-slab",
-                "text-paper-white font-jetbrains-mono focus:border-ink-gold focus:outline-none transition-colors"
+                'w-full bg-black/40 border border-blueprint-grey/20 p-4 rounded-slab',
+                'text-paper-white font-jetbrains-mono focus:border-ink-gold focus:outline-none transition-colors'
               )}
               required
             />
@@ -94,8 +96,8 @@ export const LoginCard: React.FC<LoginCardProps> = ({
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className={cn(
-                "w-full bg-black/40 border border-blueprint-grey/20 p-4 rounded-slab",
-                "text-paper-white font-jetbrains-mono focus:border-ink-gold focus:outline-none transition-colors"
+                'w-full bg-black/40 border border-blueprint-grey/20 p-4 rounded-slab',
+                'text-paper-white font-jetbrains-mono focus:border-ink-gold focus:outline-none transition-colors'
               )}
               required
             />
@@ -107,12 +109,12 @@ export const LoginCard: React.FC<LoginCardProps> = ({
           whileTap={{ scale: 0.98 }}
           type="submit"
           className={cn(
-            "mt-4 py-5 bg-ink-gold text-charcoal font-bold uppercase tracking-[0.2em]",
-            "rounded-pebble shadow-hover-rise text-lg"
+            'mt-4 py-5 bg-ink-gold text-charcoal font-bold uppercase tracking-[0.2em]',
+            'rounded-pebble shadow-hover-rise text-lg'
           )}
           disabled={isLoading}
         >
-          {isLoading ? "VERIFYING..." : "ENTER ARCHIVE"}
+          {isLoading ? 'VERIFYING...' : 'ENTER ARCHIVE'}
         </motion.button>
 
         <button

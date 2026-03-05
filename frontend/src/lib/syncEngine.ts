@@ -1,6 +1,6 @@
 /**
  * Local-First Sync Engine — Core Persistence Layer (IndexedDB)
- * 
+ *
  * Provides a simple key-value interface to IndexedDB for persistent
  * application state. This serves as the foundation for the local-first POC.
  */
@@ -48,10 +48,10 @@ class SyncEngine {
     await this.init();
     return new Promise((resolve, reject) => {
       if (!this.db) return reject('DB not initialized');
-      
+
       const transaction = this.db.transaction([STORE_NAME], 'readwrite');
       const store = transaction.objectStore(STORE_NAME);
-      
+
       const item: SyncItem<T> = {
         id,
         data,
@@ -70,7 +70,7 @@ class SyncEngine {
     await this.init();
     return new Promise((resolve, reject) => {
       if (!this.db) return reject('DB not initialized');
-      
+
       const transaction = this.db.transaction([STORE_NAME], 'readonly');
       const store = transaction.objectStore(STORE_NAME);
       const request = store.get(id);
@@ -87,14 +87,14 @@ class SyncEngine {
     await this.init();
     return new Promise((resolve, reject) => {
       if (!this.db) return reject('DB not initialized');
-      
+
       const transaction = this.db.transaction([STORE_NAME], 'readonly');
       const store = transaction.objectStore(STORE_NAME);
       const request = store.getAll();
 
       request.onsuccess = () => {
         const items = request.result as SyncItem<T>[];
-        resolve(items.map(i => i.data));
+        resolve(items.map((i) => i.data));
       };
       request.onerror = () => reject(request.error);
     });
@@ -104,7 +104,7 @@ class SyncEngine {
     await this.init();
     return new Promise((resolve, reject) => {
       if (!this.db) return reject('DB not initialized');
-      
+
       const transaction = this.db.transaction([STORE_NAME], 'readwrite');
       const store = transaction.objectStore(STORE_NAME);
       const request = store.delete(id);
@@ -118,7 +118,7 @@ class SyncEngine {
     await this.init();
     return new Promise((resolve, reject) => {
       if (!this.db) return reject('DB not initialized');
-      
+
       const transaction = this.db.transaction([STORE_NAME], 'readwrite');
       const store = transaction.objectStore(STORE_NAME);
       const request = store.clear();

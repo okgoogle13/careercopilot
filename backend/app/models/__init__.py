@@ -8,8 +8,9 @@ Example:
 from app.models import UserProfile
 """
 
-
 from .database import User
+from .master_profile_schema import MasterCareerProfile as MasterProfile
+from .master_profile_schema import PersonalInfo
 from .schemas import (
     AIRecommendationsResponse,
     ATSScoreResponse,
@@ -19,29 +20,42 @@ from .schemas import (
     ExperienceItem,
     JobOpportunity,
     KeywordAnalysisResponse,
+    ProfileVariation,
     Recommendation,
     UserPreferences,
     UserProfile,
     VoiceProfile,
     VoiceProfileResponse,
-    ProfileVariation,
 )
-from .master_profile_schema import MasterCareerProfile as MasterProfile, PersonalInfo
+from .theme_config_schemas import (
+    AtsComplianceInfo,
+    ColorConfig,
+    CoverLetterThemeConfig,
+    LayoutConfig,
+    ResumeThemeConfig,
+    TypographyConfig,
+)
 from .user_asset import UserAsset
 
 __all__ = [
     "AIRecommendationsResponse",
     "ATSScoreResponse",
+    "AtsComplianceInfo",
     "CategoryScore",
+    "ColorConfig",
+    "CoverLetterThemeConfig",
     "CreateProfileVariationRequest",
     "EducationItem",
     "ExperienceItem",
     "JobOpportunity",
     "KeywordAnalysisResponse",
+    "LayoutConfig",
     "MasterProfile",
     "PersonalInfo",
     "ProfileVariation",
     "Recommendation",
+    "ResumeThemeConfig",
+    "TypographyConfig",
     "User",
     "UserPreferences",
     "UserProfile",

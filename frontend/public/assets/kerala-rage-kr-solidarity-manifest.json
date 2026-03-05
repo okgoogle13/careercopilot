@@ -4,14 +4,7 @@
   "last_updated": "2026-03-02",
   "strategy": "Layered Identity System",
   "total_assets": 87,
-  "layers": [
-    "substrate",
-    "atmospheric",
-    "cultural",
-    "resistance",
-    "spiritual",
-    "ui-kit"
-  ],
+  "layers": ["substrate", "atmospheric", "cultural", "resistance", "spiritual", "ui-kit"],
   "assets": [
     {
       "id": "KR-SOLID-002",
@@ -27,19 +20,12 @@
         "layering_role": "overlay"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "hero",
-          "section"
-        ],
+        "scale_suitability": ["hero", "section"],
         "small_ui_safe": true
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate"
-        ],
-        "cannot_overlay_with": [
-          "atmospheric"
-        ]
+        "can_overlay_with": ["substrate"],
+        "cannot_overlay_with": ["atmospheric"]
       }
     },
     {
@@ -56,19 +42,12 @@
         "layering_role": "overlay"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "hero",
-          "section"
-        ],
+        "scale_suitability": ["hero", "section"],
         "small_ui_safe": true
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate"
-        ],
-        "cannot_overlay_with": [
-          "atmospheric"
-        ]
+        "can_overlay_with": ["substrate"],
+        "cannot_overlay_with": ["atmospheric"]
       }
     },
     {
@@ -85,19 +64,12 @@
         "layering_role": "overlay"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "hero",
-          "section"
-        ],
+        "scale_suitability": ["hero", "section"],
         "small_ui_safe": true
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate"
-        ],
-        "cannot_overlay_with": [
-          "atmospheric"
-        ]
+        "can_overlay_with": ["substrate"],
+        "cannot_overlay_with": ["atmospheric"]
       }
     },
     {
@@ -114,19 +86,12 @@
         "layering_role": "overlay"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "hero",
-          "section"
-        ],
+        "scale_suitability": ["hero", "section"],
         "small_ui_safe": true
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate"
-        ],
-        "cannot_overlay_with": [
-          "atmospheric"
-        ]
+        "can_overlay_with": ["substrate"],
+        "cannot_overlay_with": ["atmospheric"]
       }
     },
     {
@@ -143,19 +108,12 @@
         "layering_role": "overlay"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "hero",
-          "section"
-        ],
+        "scale_suitability": ["hero", "section"],
         "small_ui_safe": true
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate"
-        ],
-        "cannot_overlay_with": [
-          "atmospheric"
-        ]
+        "can_overlay_with": ["substrate"],
+        "cannot_overlay_with": ["atmospheric"]
       }
     },
     {
@@ -172,19 +130,12 @@
         "layering_role": "overlay"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "hero",
-          "section"
-        ],
+        "scale_suitability": ["hero", "section"],
         "small_ui_safe": true
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate"
-        ],
-        "cannot_overlay_with": [
-          "atmospheric"
-        ]
+        "can_overlay_with": ["substrate"],
+        "cannot_overlay_with": ["atmospheric"]
       }
     },
     {
@@ -201,19 +152,12 @@
         "layering_role": "overlay"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "hero",
-          "section"
-        ],
+        "scale_suitability": ["hero", "section"],
         "small_ui_safe": true
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate"
-        ],
-        "cannot_overlay_with": [
-          "atmospheric"
-        ]
+        "can_overlay_with": ["substrate"],
+        "cannot_overlay_with": ["atmospheric"]
       }
     },
     {
@@ -230,19 +174,12 @@
         "layering_role": "overlay"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "hero",
-          "section"
-        ],
+        "scale_suitability": ["hero", "section"],
         "small_ui_safe": true
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate"
-        ],
-        "cannot_overlay_with": [
-          "atmospheric"
-        ]
+        "can_overlay_with": ["substrate"],
+        "cannot_overlay_with": ["atmospheric"]
       }
     },
     {
@@ -259,21 +196,12 @@
         "layering_role": "foreground-dominant"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "hero-only",
-          "large-section"
-        ],
+        "scale_suitability": ["hero-only", "large-section"],
         "small_ui_safe": false
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate",
-          "atmospheric"
-        ],
-        "cannot_overlay_with": [
-          "spiritual",
-          "resistance"
-        ]
+        "can_overlay_with": ["substrate", "atmospheric"],
+        "cannot_overlay_with": ["spiritual", "resistance"]
       }
     },
     {
@@ -290,21 +218,12 @@
         "layering_role": "foreground-dominant"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "hero-only",
-          "large-section"
-        ],
+        "scale_suitability": ["hero-only", "large-section"],
         "small_ui_safe": false
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate",
-          "atmospheric"
-        ],
-        "cannot_overlay_with": [
-          "spiritual",
-          "resistance"
-        ]
+        "can_overlay_with": ["substrate", "atmospheric"],
+        "cannot_overlay_with": ["spiritual", "resistance"]
       }
     },
     {
@@ -321,21 +240,12 @@
         "layering_role": "foreground-dominant"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "hero-only",
-          "large-section"
-        ],
+        "scale_suitability": ["hero-only", "large-section"],
         "small_ui_safe": false
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate",
-          "atmospheric"
-        ],
-        "cannot_overlay_with": [
-          "spiritual",
-          "resistance"
-        ]
+        "can_overlay_with": ["substrate", "atmospheric"],
+        "cannot_overlay_with": ["spiritual", "resistance"]
       }
     },
     {
@@ -352,21 +262,12 @@
         "layering_role": "foreground-dominant"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "hero-only",
-          "large-section"
-        ],
+        "scale_suitability": ["hero-only", "large-section"],
         "small_ui_safe": false
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate",
-          "atmospheric"
-        ],
-        "cannot_overlay_with": [
-          "spiritual",
-          "resistance"
-        ]
+        "can_overlay_with": ["substrate", "atmospheric"],
+        "cannot_overlay_with": ["spiritual", "resistance"]
       }
     },
     {
@@ -383,21 +284,12 @@
         "layering_role": "foreground-dominant"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "hero-only",
-          "large-section"
-        ],
+        "scale_suitability": ["hero-only", "large-section"],
         "small_ui_safe": false
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate",
-          "atmospheric"
-        ],
-        "cannot_overlay_with": [
-          "spiritual",
-          "resistance"
-        ]
+        "can_overlay_with": ["substrate", "atmospheric"],
+        "cannot_overlay_with": ["spiritual", "resistance"]
       }
     },
     {
@@ -414,21 +306,12 @@
         "layering_role": "foreground"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "hero-only",
-          "feature"
-        ],
+        "scale_suitability": ["hero-only", "feature"],
         "small_ui_safe": false
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate",
-          "atmospheric"
-        ],
-        "cannot_overlay_with": [
-          "resistance",
-          "spiritual"
-        ]
+        "can_overlay_with": ["substrate", "atmospheric"],
+        "cannot_overlay_with": ["resistance", "spiritual"]
       }
     },
     {
@@ -445,21 +328,12 @@
         "layering_role": "foreground"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "hero-only",
-          "feature"
-        ],
+        "scale_suitability": ["hero-only", "feature"],
         "small_ui_safe": false
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate",
-          "atmospheric"
-        ],
-        "cannot_overlay_with": [
-          "resistance",
-          "spiritual"
-        ]
+        "can_overlay_with": ["substrate", "atmospheric"],
+        "cannot_overlay_with": ["resistance", "spiritual"]
       }
     },
     {
@@ -476,17 +350,12 @@
         "layering_role": "background-base"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "hero-background",
-          "global-overlay"
-        ],
+        "scale_suitability": ["hero-background", "global-overlay"],
         "small_ui_safe": false
       },
       "layering_compatibility": {
         "can_overlay_with": [],
-        "cannot_overlay_with": [
-          "substrate"
-        ]
+        "cannot_overlay_with": ["substrate"]
       }
     },
     {
@@ -503,17 +372,12 @@
         "layering_role": "background-base"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "hero-background",
-          "global-overlay"
-        ],
+        "scale_suitability": ["hero-background", "global-overlay"],
         "small_ui_safe": false
       },
       "layering_compatibility": {
         "can_overlay_with": [],
-        "cannot_overlay_with": [
-          "substrate"
-        ]
+        "cannot_overlay_with": ["substrate"]
       }
     },
     {
@@ -530,21 +394,12 @@
         "layering_role": "foreground"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "hero-only",
-          "feature"
-        ],
+        "scale_suitability": ["hero-only", "feature"],
         "small_ui_safe": false
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate",
-          "atmospheric"
-        ],
-        "cannot_overlay_with": [
-          "resistance",
-          "spiritual"
-        ]
+        "can_overlay_with": ["substrate", "atmospheric"],
+        "cannot_overlay_with": ["resistance", "spiritual"]
       }
     },
     {
@@ -561,21 +416,12 @@
         "layering_role": "foreground"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "hero-only",
-          "feature"
-        ],
+        "scale_suitability": ["hero-only", "feature"],
         "small_ui_safe": false
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate",
-          "atmospheric"
-        ],
-        "cannot_overlay_with": [
-          "resistance",
-          "spiritual"
-        ]
+        "can_overlay_with": ["substrate", "atmospheric"],
+        "cannot_overlay_with": ["resistance", "spiritual"]
       }
     },
     {
@@ -592,21 +438,12 @@
         "layering_role": "foreground"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "hero-only",
-          "feature"
-        ],
+        "scale_suitability": ["hero-only", "feature"],
         "small_ui_safe": false
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate",
-          "atmospheric"
-        ],
-        "cannot_overlay_with": [
-          "resistance",
-          "spiritual"
-        ]
+        "can_overlay_with": ["substrate", "atmospheric"],
+        "cannot_overlay_with": ["resistance", "spiritual"]
       }
     },
     {
@@ -623,21 +460,12 @@
         "layering_role": "foreground"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "hero-only",
-          "feature"
-        ],
+        "scale_suitability": ["hero-only", "feature"],
         "small_ui_safe": false
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate",
-          "atmospheric"
-        ],
-        "cannot_overlay_with": [
-          "resistance",
-          "spiritual"
-        ]
+        "can_overlay_with": ["substrate", "atmospheric"],
+        "cannot_overlay_with": ["resistance", "spiritual"]
       }
     },
     {
@@ -654,21 +482,12 @@
         "layering_role": "foreground"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "hero-only",
-          "feature"
-        ],
+        "scale_suitability": ["hero-only", "feature"],
         "small_ui_safe": false
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate",
-          "atmospheric"
-        ],
-        "cannot_overlay_with": [
-          "resistance",
-          "spiritual"
-        ]
+        "can_overlay_with": ["substrate", "atmospheric"],
+        "cannot_overlay_with": ["resistance", "spiritual"]
       }
     },
     {
@@ -685,21 +504,12 @@
         "layering_role": "foreground"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "hero-only",
-          "feature"
-        ],
+        "scale_suitability": ["hero-only", "feature"],
         "small_ui_safe": false
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate",
-          "atmospheric"
-        ],
-        "cannot_overlay_with": [
-          "resistance",
-          "spiritual"
-        ]
+        "can_overlay_with": ["substrate", "atmospheric"],
+        "cannot_overlay_with": ["resistance", "spiritual"]
       }
     },
     {
@@ -716,21 +526,12 @@
         "layering_role": "foreground"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "hero-only",
-          "feature"
-        ],
+        "scale_suitability": ["hero-only", "feature"],
         "small_ui_safe": false
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate",
-          "atmospheric"
-        ],
-        "cannot_overlay_with": [
-          "resistance",
-          "spiritual"
-        ]
+        "can_overlay_with": ["substrate", "atmospheric"],
+        "cannot_overlay_with": ["resistance", "spiritual"]
       }
     },
     {
@@ -747,21 +548,12 @@
         "layering_role": "foreground"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "hero-only",
-          "feature"
-        ],
+        "scale_suitability": ["hero-only", "feature"],
         "small_ui_safe": false
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate",
-          "atmospheric"
-        ],
-        "cannot_overlay_with": [
-          "resistance",
-          "spiritual"
-        ]
+        "can_overlay_with": ["substrate", "atmospheric"],
+        "cannot_overlay_with": ["resistance", "spiritual"]
       }
     },
     {
@@ -778,21 +570,12 @@
         "layering_role": "foreground"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "hero-only",
-          "feature"
-        ],
+        "scale_suitability": ["hero-only", "feature"],
         "small_ui_safe": false
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate",
-          "atmospheric"
-        ],
-        "cannot_overlay_with": [
-          "resistance",
-          "spiritual"
-        ]
+        "can_overlay_with": ["substrate", "atmospheric"],
+        "cannot_overlay_with": ["resistance", "spiritual"]
       }
     },
     {
@@ -809,21 +592,12 @@
         "layering_role": "foreground"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "hero-only",
-          "feature"
-        ],
+        "scale_suitability": ["hero-only", "feature"],
         "small_ui_safe": false
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate",
-          "atmospheric"
-        ],
-        "cannot_overlay_with": [
-          "resistance",
-          "spiritual"
-        ]
+        "can_overlay_with": ["substrate", "atmospheric"],
+        "cannot_overlay_with": ["resistance", "spiritual"]
       }
     },
     {
@@ -840,21 +614,12 @@
         "layering_role": "mid-layer"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "hero",
-          "section",
-          "card"
-        ],
+        "scale_suitability": ["hero", "section", "card"],
         "small_ui_safe": true
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate",
-          "atmospheric"
-        ],
-        "cannot_overlay_with": [
-          "cultural"
-        ]
+        "can_overlay_with": ["substrate", "atmospheric"],
+        "cannot_overlay_with": ["cultural"]
       }
     },
     {
@@ -871,21 +636,12 @@
         "layering_role": "mid-layer"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "hero",
-          "section",
-          "card"
-        ],
+        "scale_suitability": ["hero", "section", "card"],
         "small_ui_safe": true
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate",
-          "atmospheric"
-        ],
-        "cannot_overlay_with": [
-          "cultural"
-        ]
+        "can_overlay_with": ["substrate", "atmospheric"],
+        "cannot_overlay_with": ["cultural"]
       }
     },
     {
@@ -902,21 +658,12 @@
         "layering_role": "mid-layer"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "hero",
-          "section",
-          "card"
-        ],
+        "scale_suitability": ["hero", "section", "card"],
         "small_ui_safe": true
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate",
-          "atmospheric"
-        ],
-        "cannot_overlay_with": [
-          "cultural"
-        ]
+        "can_overlay_with": ["substrate", "atmospheric"],
+        "cannot_overlay_with": ["cultural"]
       }
     },
     {
@@ -933,19 +680,12 @@
         "layering_role": "overlay"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "hero",
-          "section"
-        ],
+        "scale_suitability": ["hero", "section"],
         "small_ui_safe": true
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate"
-        ],
-        "cannot_overlay_with": [
-          "atmospheric"
-        ]
+        "can_overlay_with": ["substrate"],
+        "cannot_overlay_with": ["atmospheric"]
       }
     },
     {
@@ -962,19 +702,12 @@
         "layering_role": "overlay"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "hero",
-          "section"
-        ],
+        "scale_suitability": ["hero", "section"],
         "small_ui_safe": true
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate"
-        ],
-        "cannot_overlay_with": [
-          "atmospheric"
-        ]
+        "can_overlay_with": ["substrate"],
+        "cannot_overlay_with": ["atmospheric"]
       }
     },
     {
@@ -991,17 +724,12 @@
         "layering_role": "background-base"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "hero-background",
-          "global-overlay"
-        ],
+        "scale_suitability": ["hero-background", "global-overlay"],
         "small_ui_safe": false
       },
       "layering_compatibility": {
         "can_overlay_with": [],
-        "cannot_overlay_with": [
-          "substrate"
-        ]
+        "cannot_overlay_with": ["substrate"]
       }
     },
     {
@@ -1018,17 +746,12 @@
         "layering_role": "background-base"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "hero-background",
-          "global-overlay"
-        ],
+        "scale_suitability": ["hero-background", "global-overlay"],
         "small_ui_safe": false
       },
       "layering_compatibility": {
         "can_overlay_with": [],
-        "cannot_overlay_with": [
-          "substrate"
-        ]
+        "cannot_overlay_with": ["substrate"]
       }
     },
     {
@@ -1045,17 +768,12 @@
         "layering_role": "background-base"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "hero-background",
-          "global-overlay"
-        ],
+        "scale_suitability": ["hero-background", "global-overlay"],
         "small_ui_safe": false
       },
       "layering_compatibility": {
         "can_overlay_with": [],
-        "cannot_overlay_with": [
-          "substrate"
-        ]
+        "cannot_overlay_with": ["substrate"]
       }
     },
     {
@@ -1072,20 +790,11 @@
         "layering_role": "interface"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "ui-component",
-          "icon"
-        ],
+        "scale_suitability": ["ui-component", "icon"],
         "small_ui_safe": true
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate",
-          "atmospheric",
-          "cultural",
-          "resistance",
-          "spiritual"
-        ],
+        "can_overlay_with": ["substrate", "atmospheric", "cultural", "resistance", "spiritual"],
         "cannot_overlay_with": []
       }
     },
@@ -1103,20 +812,11 @@
         "layering_role": "interface"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "ui-component",
-          "icon"
-        ],
+        "scale_suitability": ["ui-component", "icon"],
         "small_ui_safe": true
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate",
-          "atmospheric",
-          "cultural",
-          "resistance",
-          "spiritual"
-        ],
+        "can_overlay_with": ["substrate", "atmospheric", "cultural", "resistance", "spiritual"],
         "cannot_overlay_with": []
       }
     },
@@ -1134,20 +834,11 @@
         "layering_role": "interface"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "ui-component",
-          "icon"
-        ],
+        "scale_suitability": ["ui-component", "icon"],
         "small_ui_safe": true
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate",
-          "atmospheric",
-          "cultural",
-          "resistance",
-          "spiritual"
-        ],
+        "can_overlay_with": ["substrate", "atmospheric", "cultural", "resistance", "spiritual"],
         "cannot_overlay_with": []
       }
     },
@@ -1165,20 +856,11 @@
         "layering_role": "interface"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "ui-component",
-          "icon"
-        ],
+        "scale_suitability": ["ui-component", "icon"],
         "small_ui_safe": true
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate",
-          "atmospheric",
-          "cultural",
-          "resistance",
-          "spiritual"
-        ],
+        "can_overlay_with": ["substrate", "atmospheric", "cultural", "resistance", "spiritual"],
         "cannot_overlay_with": []
       }
     },
@@ -1196,20 +878,11 @@
         "layering_role": "interface"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "ui-component",
-          "icon"
-        ],
+        "scale_suitability": ["ui-component", "icon"],
         "small_ui_safe": true
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate",
-          "atmospheric",
-          "cultural",
-          "resistance",
-          "spiritual"
-        ],
+        "can_overlay_with": ["substrate", "atmospheric", "cultural", "resistance", "spiritual"],
         "cannot_overlay_with": []
       }
     },
@@ -1227,20 +900,11 @@
         "layering_role": "interface"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "ui-component",
-          "icon"
-        ],
+        "scale_suitability": ["ui-component", "icon"],
         "small_ui_safe": true
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate",
-          "atmospheric",
-          "cultural",
-          "resistance",
-          "spiritual"
-        ],
+        "can_overlay_with": ["substrate", "atmospheric", "cultural", "resistance", "spiritual"],
         "cannot_overlay_with": []
       }
     },
@@ -1258,20 +922,11 @@
         "layering_role": "interface"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "ui-component",
-          "icon"
-        ],
+        "scale_suitability": ["ui-component", "icon"],
         "small_ui_safe": true
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate",
-          "atmospheric",
-          "cultural",
-          "resistance",
-          "spiritual"
-        ],
+        "can_overlay_with": ["substrate", "atmospheric", "cultural", "resistance", "spiritual"],
         "cannot_overlay_with": []
       }
     },
@@ -1289,20 +944,11 @@
         "layering_role": "interface"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "ui-component",
-          "icon"
-        ],
+        "scale_suitability": ["ui-component", "icon"],
         "small_ui_safe": true
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate",
-          "atmospheric",
-          "cultural",
-          "resistance",
-          "spiritual"
-        ],
+        "can_overlay_with": ["substrate", "atmospheric", "cultural", "resistance", "spiritual"],
         "cannot_overlay_with": []
       }
     },
@@ -1320,20 +966,11 @@
         "layering_role": "interface"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "ui-component",
-          "icon"
-        ],
+        "scale_suitability": ["ui-component", "icon"],
         "small_ui_safe": true
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate",
-          "atmospheric",
-          "cultural",
-          "resistance",
-          "spiritual"
-        ],
+        "can_overlay_with": ["substrate", "atmospheric", "cultural", "resistance", "spiritual"],
         "cannot_overlay_with": []
       }
     },
@@ -1351,20 +988,11 @@
         "layering_role": "interface"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "ui-component",
-          "icon"
-        ],
+        "scale_suitability": ["ui-component", "icon"],
         "small_ui_safe": true
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate",
-          "atmospheric",
-          "cultural",
-          "resistance",
-          "spiritual"
-        ],
+        "can_overlay_with": ["substrate", "atmospheric", "cultural", "resistance", "spiritual"],
         "cannot_overlay_with": []
       }
     },
@@ -1382,20 +1010,11 @@
         "layering_role": "interface"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "ui-component",
-          "icon"
-        ],
+        "scale_suitability": ["ui-component", "icon"],
         "small_ui_safe": true
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate",
-          "atmospheric",
-          "cultural",
-          "resistance",
-          "spiritual"
-        ],
+        "can_overlay_with": ["substrate", "atmospheric", "cultural", "resistance", "spiritual"],
         "cannot_overlay_with": []
       }
     },
@@ -1413,20 +1032,11 @@
         "layering_role": "interface"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "ui-component",
-          "icon"
-        ],
+        "scale_suitability": ["ui-component", "icon"],
         "small_ui_safe": true
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate",
-          "atmospheric",
-          "cultural",
-          "resistance",
-          "spiritual"
-        ],
+        "can_overlay_with": ["substrate", "atmospheric", "cultural", "resistance", "spiritual"],
         "cannot_overlay_with": []
       }
     },
@@ -1444,20 +1054,11 @@
         "layering_role": "interface"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "ui-component",
-          "icon"
-        ],
+        "scale_suitability": ["ui-component", "icon"],
         "small_ui_safe": true
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate",
-          "atmospheric",
-          "cultural",
-          "resistance",
-          "spiritual"
-        ],
+        "can_overlay_with": ["substrate", "atmospheric", "cultural", "resistance", "spiritual"],
         "cannot_overlay_with": []
       }
     },
@@ -1475,20 +1076,11 @@
         "layering_role": "interface"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "ui-component",
-          "icon"
-        ],
+        "scale_suitability": ["ui-component", "icon"],
         "small_ui_safe": true
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate",
-          "atmospheric",
-          "cultural",
-          "resistance",
-          "spiritual"
-        ],
+        "can_overlay_with": ["substrate", "atmospheric", "cultural", "resistance", "spiritual"],
         "cannot_overlay_with": []
       }
     },
@@ -1506,20 +1098,11 @@
         "layering_role": "interface"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "ui-component",
-          "icon"
-        ],
+        "scale_suitability": ["ui-component", "icon"],
         "small_ui_safe": true
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate",
-          "atmospheric",
-          "cultural",
-          "resistance",
-          "spiritual"
-        ],
+        "can_overlay_with": ["substrate", "atmospheric", "cultural", "resistance", "spiritual"],
         "cannot_overlay_with": []
       }
     },
@@ -1537,20 +1120,11 @@
         "layering_role": "interface"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "ui-component",
-          "icon"
-        ],
+        "scale_suitability": ["ui-component", "icon"],
         "small_ui_safe": true
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate",
-          "atmospheric",
-          "cultural",
-          "resistance",
-          "spiritual"
-        ],
+        "can_overlay_with": ["substrate", "atmospheric", "cultural", "resistance", "spiritual"],
         "cannot_overlay_with": []
       }
     },
@@ -1568,20 +1142,11 @@
         "layering_role": "interface"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "ui-component",
-          "icon"
-        ],
+        "scale_suitability": ["ui-component", "icon"],
         "small_ui_safe": true
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate",
-          "atmospheric",
-          "cultural",
-          "resistance",
-          "spiritual"
-        ],
+        "can_overlay_with": ["substrate", "atmospheric", "cultural", "resistance", "spiritual"],
         "cannot_overlay_with": []
       }
     },
@@ -1599,20 +1164,11 @@
         "layering_role": "interface"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "ui-component",
-          "icon"
-        ],
+        "scale_suitability": ["ui-component", "icon"],
         "small_ui_safe": true
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate",
-          "atmospheric",
-          "cultural",
-          "resistance",
-          "spiritual"
-        ],
+        "can_overlay_with": ["substrate", "atmospheric", "cultural", "resistance", "spiritual"],
         "cannot_overlay_with": []
       }
     },
@@ -1630,20 +1186,11 @@
         "layering_role": "interface"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "ui-component",
-          "icon"
-        ],
+        "scale_suitability": ["ui-component", "icon"],
         "small_ui_safe": true
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate",
-          "atmospheric",
-          "cultural",
-          "resistance",
-          "spiritual"
-        ],
+        "can_overlay_with": ["substrate", "atmospheric", "cultural", "resistance", "spiritual"],
         "cannot_overlay_with": []
       }
     },
@@ -1661,20 +1208,11 @@
         "layering_role": "interface"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "ui-component",
-          "icon"
-        ],
+        "scale_suitability": ["ui-component", "icon"],
         "small_ui_safe": true
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate",
-          "atmospheric",
-          "cultural",
-          "resistance",
-          "spiritual"
-        ],
+        "can_overlay_with": ["substrate", "atmospheric", "cultural", "resistance", "spiritual"],
         "cannot_overlay_with": []
       }
     },
@@ -1692,20 +1230,11 @@
         "layering_role": "interface"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "ui-component",
-          "icon"
-        ],
+        "scale_suitability": ["ui-component", "icon"],
         "small_ui_safe": true
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate",
-          "atmospheric",
-          "cultural",
-          "resistance",
-          "spiritual"
-        ],
+        "can_overlay_with": ["substrate", "atmospheric", "cultural", "resistance", "spiritual"],
         "cannot_overlay_with": []
       }
     },
@@ -1723,20 +1252,11 @@
         "layering_role": "interface"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "ui-component",
-          "icon"
-        ],
+        "scale_suitability": ["ui-component", "icon"],
         "small_ui_safe": true
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate",
-          "atmospheric",
-          "cultural",
-          "resistance",
-          "spiritual"
-        ],
+        "can_overlay_with": ["substrate", "atmospheric", "cultural", "resistance", "spiritual"],
         "cannot_overlay_with": []
       }
     },
@@ -1754,20 +1274,11 @@
         "layering_role": "interface"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "ui-component",
-          "icon"
-        ],
+        "scale_suitability": ["ui-component", "icon"],
         "small_ui_safe": true
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate",
-          "atmospheric",
-          "cultural",
-          "resistance",
-          "spiritual"
-        ],
+        "can_overlay_with": ["substrate", "atmospheric", "cultural", "resistance", "spiritual"],
         "cannot_overlay_with": []
       }
     },
@@ -1785,20 +1296,11 @@
         "layering_role": "interface"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "ui-component",
-          "icon"
-        ],
+        "scale_suitability": ["ui-component", "icon"],
         "small_ui_safe": true
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate",
-          "atmospheric",
-          "cultural",
-          "resistance",
-          "spiritual"
-        ],
+        "can_overlay_with": ["substrate", "atmospheric", "cultural", "resistance", "spiritual"],
         "cannot_overlay_with": []
       }
     },
@@ -1816,20 +1318,11 @@
         "layering_role": "interface"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "ui-component",
-          "icon"
-        ],
+        "scale_suitability": ["ui-component", "icon"],
         "small_ui_safe": true
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate",
-          "atmospheric",
-          "cultural",
-          "resistance",
-          "spiritual"
-        ],
+        "can_overlay_with": ["substrate", "atmospheric", "cultural", "resistance", "spiritual"],
         "cannot_overlay_with": []
       }
     },
@@ -1847,20 +1340,11 @@
         "layering_role": "interface"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "ui-component",
-          "icon"
-        ],
+        "scale_suitability": ["ui-component", "icon"],
         "small_ui_safe": true
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate",
-          "atmospheric",
-          "cultural",
-          "resistance",
-          "spiritual"
-        ],
+        "can_overlay_with": ["substrate", "atmospheric", "cultural", "resistance", "spiritual"],
         "cannot_overlay_with": []
       }
     },
@@ -1878,20 +1362,11 @@
         "layering_role": "interface"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "ui-component",
-          "icon"
-        ],
+        "scale_suitability": ["ui-component", "icon"],
         "small_ui_safe": true
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate",
-          "atmospheric",
-          "cultural",
-          "resistance",
-          "spiritual"
-        ],
+        "can_overlay_with": ["substrate", "atmospheric", "cultural", "resistance", "spiritual"],
         "cannot_overlay_with": []
       }
     },
@@ -1909,20 +1384,11 @@
         "layering_role": "interface"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "ui-component",
-          "icon"
-        ],
+        "scale_suitability": ["ui-component", "icon"],
         "small_ui_safe": true
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate",
-          "atmospheric",
-          "cultural",
-          "resistance",
-          "spiritual"
-        ],
+        "can_overlay_with": ["substrate", "atmospheric", "cultural", "resistance", "spiritual"],
         "cannot_overlay_with": []
       }
     },
@@ -1940,20 +1406,11 @@
         "layering_role": "interface"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "ui-component",
-          "icon"
-        ],
+        "scale_suitability": ["ui-component", "icon"],
         "small_ui_safe": true
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate",
-          "atmospheric",
-          "cultural",
-          "resistance",
-          "spiritual"
-        ],
+        "can_overlay_with": ["substrate", "atmospheric", "cultural", "resistance", "spiritual"],
         "cannot_overlay_with": []
       }
     },
@@ -1971,20 +1428,11 @@
         "layering_role": "interface"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "ui-component",
-          "icon"
-        ],
+        "scale_suitability": ["ui-component", "icon"],
         "small_ui_safe": true
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate",
-          "atmospheric",
-          "cultural",
-          "resistance",
-          "spiritual"
-        ],
+        "can_overlay_with": ["substrate", "atmospheric", "cultural", "resistance", "spiritual"],
         "cannot_overlay_with": []
       }
     },
@@ -2002,20 +1450,11 @@
         "layering_role": "interface"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "ui-component",
-          "icon"
-        ],
+        "scale_suitability": ["ui-component", "icon"],
         "small_ui_safe": true
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate",
-          "atmospheric",
-          "cultural",
-          "resistance",
-          "spiritual"
-        ],
+        "can_overlay_with": ["substrate", "atmospheric", "cultural", "resistance", "spiritual"],
         "cannot_overlay_with": []
       }
     },
@@ -2033,20 +1472,11 @@
         "layering_role": "interface"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "ui-component",
-          "icon"
-        ],
+        "scale_suitability": ["ui-component", "icon"],
         "small_ui_safe": true
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate",
-          "atmospheric",
-          "cultural",
-          "resistance",
-          "spiritual"
-        ],
+        "can_overlay_with": ["substrate", "atmospheric", "cultural", "resistance", "spiritual"],
         "cannot_overlay_with": []
       }
     },
@@ -2064,20 +1494,11 @@
         "layering_role": "interface"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "ui-component",
-          "icon"
-        ],
+        "scale_suitability": ["ui-component", "icon"],
         "small_ui_safe": true
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate",
-          "atmospheric",
-          "cultural",
-          "resistance",
-          "spiritual"
-        ],
+        "can_overlay_with": ["substrate", "atmospheric", "cultural", "resistance", "spiritual"],
         "cannot_overlay_with": []
       }
     },
@@ -2095,20 +1516,11 @@
         "layering_role": "interface"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "ui-component",
-          "icon"
-        ],
+        "scale_suitability": ["ui-component", "icon"],
         "small_ui_safe": true
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate",
-          "atmospheric",
-          "cultural",
-          "resistance",
-          "spiritual"
-        ],
+        "can_overlay_with": ["substrate", "atmospheric", "cultural", "resistance", "spiritual"],
         "cannot_overlay_with": []
       }
     },
@@ -2126,20 +1538,11 @@
         "layering_role": "interface"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "ui-component",
-          "icon"
-        ],
+        "scale_suitability": ["ui-component", "icon"],
         "small_ui_safe": true
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate",
-          "atmospheric",
-          "cultural",
-          "resistance",
-          "spiritual"
-        ],
+        "can_overlay_with": ["substrate", "atmospheric", "cultural", "resistance", "spiritual"],
         "cannot_overlay_with": []
       }
     },
@@ -2157,20 +1560,11 @@
         "layering_role": "interface"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "ui-component",
-          "icon"
-        ],
+        "scale_suitability": ["ui-component", "icon"],
         "small_ui_safe": true
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate",
-          "atmospheric",
-          "cultural",
-          "resistance",
-          "spiritual"
-        ],
+        "can_overlay_with": ["substrate", "atmospheric", "cultural", "resistance", "spiritual"],
         "cannot_overlay_with": []
       }
     },
@@ -2188,20 +1582,11 @@
         "layering_role": "interface"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "ui-component",
-          "icon"
-        ],
+        "scale_suitability": ["ui-component", "icon"],
         "small_ui_safe": true
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate",
-          "atmospheric",
-          "cultural",
-          "resistance",
-          "spiritual"
-        ],
+        "can_overlay_with": ["substrate", "atmospheric", "cultural", "resistance", "spiritual"],
         "cannot_overlay_with": []
       }
     },
@@ -2219,20 +1604,11 @@
         "layering_role": "interface"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "ui-component",
-          "icon"
-        ],
+        "scale_suitability": ["ui-component", "icon"],
         "small_ui_safe": true
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate",
-          "atmospheric",
-          "cultural",
-          "resistance",
-          "spiritual"
-        ],
+        "can_overlay_with": ["substrate", "atmospheric", "cultural", "resistance", "spiritual"],
         "cannot_overlay_with": []
       }
     },
@@ -2250,20 +1626,11 @@
         "layering_role": "interface"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "ui-component",
-          "icon"
-        ],
+        "scale_suitability": ["ui-component", "icon"],
         "small_ui_safe": true
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate",
-          "atmospheric",
-          "cultural",
-          "resistance",
-          "spiritual"
-        ],
+        "can_overlay_with": ["substrate", "atmospheric", "cultural", "resistance", "spiritual"],
         "cannot_overlay_with": []
       }
     },
@@ -2281,21 +1648,12 @@
         "layering_role": "foreground"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "hero-only",
-          "feature"
-        ],
+        "scale_suitability": ["hero-only", "feature"],
         "small_ui_safe": false
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate",
-          "atmospheric"
-        ],
-        "cannot_overlay_with": [
-          "resistance",
-          "spiritual"
-        ]
+        "can_overlay_with": ["substrate", "atmospheric"],
+        "cannot_overlay_with": ["resistance", "spiritual"]
       }
     },
     {
@@ -2312,21 +1670,12 @@
         "layering_role": "foreground"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "hero-only",
-          "feature"
-        ],
+        "scale_suitability": ["hero-only", "feature"],
         "small_ui_safe": false
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate",
-          "atmospheric"
-        ],
-        "cannot_overlay_with": [
-          "resistance",
-          "spiritual"
-        ]
+        "can_overlay_with": ["substrate", "atmospheric"],
+        "cannot_overlay_with": ["resistance", "spiritual"]
       }
     },
     {
@@ -2343,18 +1692,11 @@
         "layering_role": "foreground"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "hero",
-          "navigation",
-          "footer"
-        ],
+        "scale_suitability": ["hero", "navigation", "footer"],
         "small_ui_safe": true
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate",
-          "atmospheric"
-        ],
+        "can_overlay_with": ["substrate", "atmospheric"],
         "cannot_overlay_with": []
       }
     },
@@ -2372,18 +1714,11 @@
         "layering_role": "foreground"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "hero",
-          "poster"
-        ],
+        "scale_suitability": ["hero", "poster"],
         "small_ui_safe": false
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate",
-          "atmospheric",
-          "resistance"
-        ],
+        "can_overlay_with": ["substrate", "atmospheric", "resistance"],
         "cannot_overlay_with": []
       }
     },
@@ -2401,18 +1736,11 @@
         "layering_role": "interface"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "favicon",
-          "icon",
-          "small-ui"
-        ],
+        "scale_suitability": ["favicon", "icon", "small-ui"],
         "small_ui_safe": true
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate",
-          "atmospheric"
-        ],
+        "can_overlay_with": ["substrate", "atmospheric"],
         "cannot_overlay_with": []
       }
     },
@@ -2430,18 +1758,11 @@
         "layering_role": "interface"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "icon",
-          "button",
-          "navigation"
-        ],
+        "scale_suitability": ["icon", "button", "navigation"],
         "small_ui_safe": true
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate",
-          "atmospheric"
-        ],
+        "can_overlay_with": ["substrate", "atmospheric"],
         "cannot_overlay_with": []
       }
     },
@@ -2459,18 +1780,11 @@
         "layering_role": "interface"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "icon",
-          "button",
-          "navigation"
-        ],
+        "scale_suitability": ["icon", "button", "navigation"],
         "small_ui_safe": true
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate",
-          "atmospheric"
-        ],
+        "can_overlay_with": ["substrate", "atmospheric"],
         "cannot_overlay_with": []
       }
     },
@@ -2488,18 +1802,11 @@
         "layering_role": "interface"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "icon",
-          "button",
-          "navigation"
-        ],
+        "scale_suitability": ["icon", "button", "navigation"],
         "small_ui_safe": true
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate",
-          "atmospheric"
-        ],
+        "can_overlay_with": ["substrate", "atmospheric"],
         "cannot_overlay_with": []
       }
     },
@@ -2517,18 +1824,11 @@
         "layering_role": "interface"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "icon",
-          "button",
-          "navigation"
-        ],
+        "scale_suitability": ["icon", "button", "navigation"],
         "small_ui_safe": true
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate",
-          "atmospheric"
-        ],
+        "can_overlay_with": ["substrate", "atmospheric"],
         "cannot_overlay_with": []
       }
     },
@@ -2546,21 +1846,12 @@
         "layering_role": "foreground"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "hero-only",
-          "feature"
-        ],
+        "scale_suitability": ["hero-only", "feature"],
         "small_ui_safe": false
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate",
-          "atmospheric"
-        ],
-        "cannot_overlay_with": [
-          "cultural",
-          "spiritual"
-        ]
+        "can_overlay_with": ["substrate", "atmospheric"],
+        "cannot_overlay_with": ["cultural", "spiritual"]
       }
     },
     {
@@ -2577,21 +1868,12 @@
         "layering_role": "foreground"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "hero-only",
-          "feature"
-        ],
+        "scale_suitability": ["hero-only", "feature"],
         "small_ui_safe": false
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate",
-          "atmospheric"
-        ],
-        "cannot_overlay_with": [
-          "resistance",
-          "spiritual"
-        ]
+        "can_overlay_with": ["substrate", "atmospheric"],
+        "cannot_overlay_with": ["resistance", "spiritual"]
       }
     },
     {
@@ -2608,17 +1890,12 @@
         "layering_role": "background-base"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "hero-background",
-          "global-overlay"
-        ],
+        "scale_suitability": ["hero-background", "global-overlay"],
         "small_ui_safe": false
       },
       "layering_compatibility": {
         "can_overlay_with": [],
-        "cannot_overlay_with": [
-          "substrate"
-        ]
+        "cannot_overlay_with": ["substrate"]
       }
     },
     {
@@ -2635,19 +1912,12 @@
         "layering_role": "overlay"
       },
       "usage_rules": {
-        "scale_suitability": [
-          "hero",
-          "section"
-        ],
+        "scale_suitability": ["hero", "section"],
         "small_ui_safe": false
       },
       "layering_compatibility": {
-        "can_overlay_with": [
-          "substrate"
-        ],
-        "cannot_overlay_with": [
-          "atmospheric"
-        ]
+        "can_overlay_with": ["substrate"],
+        "cannot_overlay_with": ["atmospheric"]
       }
     }
   ]

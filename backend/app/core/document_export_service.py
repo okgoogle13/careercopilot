@@ -24,7 +24,7 @@ from typing import Any
 from pydantic import BaseModel
 
 from app.core.cloud_storage import cloud_storage_client
-from app.core.loguru_config import get_logger
+from app.core.observability import get_logger
 
 logger = get_logger(__name__)
 
@@ -146,7 +146,7 @@ class DocumentExportService:
                     file_content = await document_pipeline.generate_document(
                         doc_type="cover_letter",
                         content=content,
-                        template_id=None,
+                        template_id="",  # Use empty string instead of None
                         file_format=format,
                         candidate_name=candidate_name,
                         theme_id=theme_id,
@@ -250,17 +250,17 @@ class DocumentExportService:
                 if isinstance(content, dict):
                     file_content = json.dumps(content, indent=2).encode("utf-8")
                 else:
-                    file_content = content.encode("utf-8")
+                    file_content = str(content).encode("utf-8")
                 content_type = "application/json"
             else:
                 from app.core.document_pipeline import document_pipeline
 
-                sections = json.loads(content) if isinstance(content, str) else content
+                sections = content if isinstance(content, dict) else {}
                 try:
                     file_content = await document_pipeline.generate_document(
                         doc_type="resume",
                         content=sections,
-                        template_id=None,
+                        template_id="",  # Use empty string instead of None
                         file_format=format,
                         candidate_name=candidate_name,
                         theme_id=theme_id,

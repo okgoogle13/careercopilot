@@ -151,7 +151,11 @@ export function JobQueue() {
   if (loading) {
     return (
       <div className="flex flex-col justify-center items-center min-h-screen gap-4">
-        <div role="status" data-testid="job-queue-loader" className="w-12 h-12 border-4 border-[var(--color-ink-gold)]/20 border-t-[var(--color-ink-gold)] rounded-full animate-spin" />
+        <div
+          role="status"
+          data-testid="job-queue-loader"
+          className="w-12 h-12 border-4 border-[var(--color-ink-gold)]/20 border-t-[var(--color-ink-gold)] rounded-full animate-spin"
+        />
         <p className="font-annotation text-xs tracking-widest text-[var(--color-concrete-grey-dark)] uppercase">
           Synchronizing Queue
         </p>
@@ -181,7 +185,9 @@ export function JobQueue() {
           <div className="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-6 border border-white/10">
             <Sparkles className="w-10 h-10 text-[var(--color-concrete-grey-dark)]" />
           </div>
-          <h3 className="font-bloom text-3xl mb-2 text-[var(--color-paper-white)]">Empty Pipeline</h3>
+          <h3 className="font-bloom text-3xl mb-2 text-[var(--color-paper-white)]">
+            Empty Pipeline
+          </h3>
           <p className="font-field-note text-lg text-[var(--color-concrete-grey-dark)]">
             Clip opportunities from Seek or LinkedIn to populate your queue.
           </p>
@@ -202,8 +208,9 @@ export function JobQueue() {
                 priority="medium"
                 dueDate={formatDate(job.date_clipped)}
                 onSelect={() => {
-                   if (job.status === 'pending_analysis') handleAnalyze(job.id);
-                   else if (job.status === 'ready_to_apply') handleDraft(job.id, job.title, job.company);
+                  if (job.status === 'pending_analysis') handleAnalyze(job.id);
+                  else if (job.status === 'ready_to_apply')
+                    handleDraft(job.id, job.title, job.company);
                 }}
               />
             );

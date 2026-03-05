@@ -7,8 +7,10 @@ and multi-format output capabilities.
 
 import json
 import os
+from typing import Any, Dict, List, Optional, cast
 from enum import Enum
-from typing import Dict, List, Optional
+
+from .types import ModelConfig as ModelConfigProtocol
 
 from dotenv import load_dotenv
 from pydantic import BaseModel, Field
@@ -24,8 +26,8 @@ try:
     import genkit
     from genkit.plugins import google_genai
 except Exception:
-    genkit = None
-    googleai = None
+    genkit = None  # type: ignore[assignment]
+    googleai = None  # type: ignore[assignment]
 
 
 def _noop_flow(*args, **kwargs):
@@ -39,10 +41,12 @@ genkit_flow = getattr(genkit, "flow", _noop_flow) if genkit else _noop_flow
 
 # Load environment variables
 load_dotenv()
-if genkit and getattr(genkit, "get_plugin", None) and not genkit.get_plugin("googleai"):
-    genkit.init(plugins=[google_genai.init(api_key=os.getenv("GEMINI_API_KEY"))])
+if genkit is not None:
+    genkit_module: Any = genkit
+    if getattr(genkit_module, "get_plugin", None) and not genkit_module.get_plugin("googleai"):  # type: ignore[attr-defined]
+        genkit_module.init(plugins=[google_genai.init(api_key=os.getenv("GEMINI_API_KEY"))])  # type: ignore[attr-defined]
 
-gemini_pro = get_ai_config().get_model_config("gemini-3.0-flash")
+gemini_pro: ModelConfigProtocol = cast(ModelConfigProtocol, get_ai_config().get_model_config("gemini-3.0-flash"))
 
 
 # Data Models

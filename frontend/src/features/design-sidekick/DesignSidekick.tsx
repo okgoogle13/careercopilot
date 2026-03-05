@@ -4,7 +4,17 @@ import { LayeredHero } from '../../components/kerala-rage/LayeredHero';
 import { loadHeroRegistry } from '../../design/hero/heroRegistry';
 import { composeHero, CompositionResult } from '../../utils/heroComposer';
 import { Stone, Pebble, StatusBadge } from '@/components/ui';
-import { Box, Code, Layers, Layout, Maximize2, RefreshCw, Smartphone, Monitor, AlertTriangle } from 'lucide-react';
+import {
+  Box,
+  Code,
+  Layers,
+  Layout,
+  Maximize2,
+  RefreshCw,
+  Smartphone,
+  Monitor,
+  AlertTriangle,
+} from 'lucide-react';
 import type { SolidarityManifest, Typography } from '../../design/hero/heroTypes';
 
 const DesignSidekick: React.FC = () => {
@@ -20,12 +30,12 @@ const DesignSidekick: React.FC = () => {
       try {
         const [regData, manifestData] = await Promise.all([
           loadHeroRegistry(),
-          fetch('/assets/kerala-rage-kr-solidarity-manifest.json').then(r => r.json())
+          fetch('/assets/kerala-rage-kr-solidarity-manifest.json').then((r) => r.json()),
         ]);
-        
+
         setRegistry(regData);
         setManifest(manifestData);
-        
+
         if (regData.compositions && regData.compositions.length > 0) {
           const firstHero = regData.compositions[0] as any;
           setSelectedHeroId(firstHero.id || firstHero.composition_id || firstHero.hero_id);
@@ -40,7 +50,7 @@ const DesignSidekick: React.FC = () => {
   useEffect(() => {
     if (registry && manifest && selectedHeroId) {
       const result = composeHero(manifest, registry, selectedHeroId);
-      
+
       // Normalize typography for rendering
       if (result.valid) {
         const typo = result.typography as any;
@@ -51,7 +61,7 @@ const DesignSidekick: React.FC = () => {
           typo.supporting = typo.secondary_text.text;
         }
       }
-      
+
       setCompositionResult(result);
     }
   }, [selectedHeroId, registry, manifest]);
@@ -64,8 +74,8 @@ const DesignSidekick: React.FC = () => {
     );
   }
 
-  const selectedHero = registry.compositions.find((c: any) => 
-    (c.id || c.composition_id || c.hero_id) === selectedHeroId
+  const selectedHero = registry.compositions.find(
+    (c: any) => (c.id || c.composition_id || c.hero_id) === selectedHeroId
   );
 
   return (
@@ -97,9 +107,7 @@ const DesignSidekick: React.FC = () => {
                 <div className="text-paper-white font-bold text-sm">
                   {hero.name || hero.theme || 'Untitled Composition'}
                 </div>
-                <div className="text-[10px] text-concrete-grey font-mono mt-1 uppercase">
-                  {id}
-                </div>
+                <div className="text-[10px] text-concrete-grey font-mono mt-1 uppercase">{id}</div>
               </button>
             );
           })}
@@ -135,12 +143,18 @@ const DesignSidekick: React.FC = () => {
           </div>
 
           <div className="flex items-center gap-3">
-            <StatusBadge label="Live Preview" variant="info" className="bg-ink-gold/10 text-ink-gold border-ink-gold/20" />
+            <StatusBadge
+              label="Live Preview"
+              variant="info"
+              className="bg-ink-gold/10 text-ink-gold border-ink-gold/20"
+            />
           </div>
         </header>
 
         {/* Hero Stage or Error State */}
-        <div className={`flex-1 relative overflow-hidden transition-all duration-500 mx-auto w-full ${viewMode === 'mobile' ? 'max-w-[390px] border-x border-concrete-grey/20 my-8 rounded-[40px] shadow-2xl overflow-hidden' : ''}`}>
+        <div
+          className={`flex-1 relative overflow-hidden transition-all duration-500 mx-auto w-full ${viewMode === 'mobile' ? 'max-w-[390px] border-x border-concrete-grey/20 my-8 rounded-[40px] shadow-2xl overflow-hidden' : ''}`}
+        >
           {compositionResult?.valid ? (
             <LayeredHero
               layers={compositionResult.resolvedLayers}
@@ -152,7 +166,9 @@ const DesignSidekick: React.FC = () => {
           ) : (
             <div className="h-full flex flex-col items-center justify-center bg-black/40 p-12 text-center">
               <AlertTriangle className="w-16 h-16 text-ink-gold mb-6" />
-              <h3 className="text-paper-white font-bloom text-2xl uppercase font-black mb-4">Composition Fault</h3>
+              <h3 className="text-paper-white font-bloom text-2xl uppercase font-black mb-4">
+                Composition Fault
+              </h3>
               <p className="text-concrete-grey font-mono text-sm max-w-md">
                 {compositionResult?.error || 'Unknown rendering error'}
               </p>
@@ -175,20 +191,26 @@ const DesignSidekick: React.FC = () => {
         <div className="h-64 border-t border-concrete-grey/10 bg-asphalt-black overflow-y-auto p-6 z-10">
           <div className="flex items-center gap-2 mb-4">
             <Code className="w-4 h-4 text-concrete-grey" />
-            <span className="text-xs font-annotation text-concrete-grey uppercase tracking-widest">Composition Context</span>
+            <span className="text-xs font-annotation text-concrete-grey uppercase tracking-widest">
+              Composition Context
+            </span>
           </div>
           <div className="grid grid-cols-2 gap-8">
             <div>
-               <h4 className="text-[10px] font-annotation text-ink-gold uppercase mb-2">Resolved Manifest</h4>
-               <pre className="text-[10px] font-mono text-paper-white/60 bg-black/40 p-4 rounded border border-concrete-grey/5 overflow-x-auto">
-                 {JSON.stringify(compositionResult, null, 2)}
-               </pre>
+              <h4 className="text-[10px] font-annotation text-ink-gold uppercase mb-2">
+                Resolved Manifest
+              </h4>
+              <pre className="text-[10px] font-mono text-paper-white/60 bg-black/40 p-4 rounded border border-concrete-grey/5 overflow-x-auto">
+                {JSON.stringify(compositionResult, null, 2)}
+              </pre>
             </div>
             <div>
-               <h4 className="text-[10px] font-annotation text-ink-gold uppercase mb-2">Original Data</h4>
-               <pre className="text-[10px] font-mono text-paper-white/60 bg-black/40 p-4 rounded border border-concrete-grey/5 overflow-x-auto">
-                 {JSON.stringify(selectedHero, null, 2)}
-               </pre>
+              <h4 className="text-[10px] font-annotation text-ink-gold uppercase mb-2">
+                Original Data
+              </h4>
+              <pre className="text-[10px] font-mono text-paper-white/60 bg-black/40 p-4 rounded border border-concrete-grey/5 overflow-x-auto">
+                {JSON.stringify(selectedHero, null, 2)}
+              </pre>
             </div>
           </div>
         </div>

@@ -3,12 +3,7 @@
   "registry_name": "kerala-rage-hero-compositions",
   "last_updated": "2026-03-01",
   "manifest_version": "6.0.0",
-  "m3_expressive_bezier": [
-    0.34,
-    1.56,
-    0.64,
-    1
-  ],
+  "m3_expressive_bezier": [0.34, 1.56, 0.64, 1],
   "compositions": [
     {
       "id": "devotional-anchor-hero-1",
@@ -65,16 +60,8 @@
         }
       },
       "motion": {
-        "bezier": [
-          0.34,
-          1.56,
-          0.64,
-          1
-        ],
-        "scroll_wght_range": [
-          300,
-          800
-        ],
+        "bezier": [0.34, 1.56, 0.64, 1],
+        "scroll_wght_range": [300, 800],
         "transition_duration": 400
       }
     },
@@ -133,16 +120,8 @@
         }
       },
       "motion": {
-        "bezier": [
-          0.34,
-          1.56,
-          0.64,
-          1
-        ],
-        "scroll_wght_range": [
-          300,
-          800
-        ],
+        "bezier": [0.34, 1.56, 0.64, 1],
+        "scroll_wght_range": [300, 800],
         "transition_duration": 400
       }
     },
@@ -201,16 +180,8 @@
         }
       },
       "motion": {
-        "bezier": [
-          0.34,
-          1.56,
-          0.64,
-          1
-        ],
-        "scroll_wght_range": [
-          300,
-          800
-        ],
+        "bezier": [0.34, 1.56, 0.64, 1],
+        "scroll_wght_range": [300, 800],
         "transition_duration": 400
       }
     },
@@ -269,16 +240,8 @@
         }
       },
       "motion": {
-        "bezier": [
-          0.34,
-          1.56,
-          0.64,
-          1
-        ],
-        "scroll_wght_range": [
-          300,
-          800
-        ],
+        "bezier": [0.34, 1.56, 0.64, 1],
+        "scroll_wght_range": [300, 800],
         "transition_duration": 400
       }
     },
@@ -329,16 +292,8 @@
         }
       },
       "motion": {
-        "bezier": [
-          0.34,
-          1.56,
-          0.64,
-          1
-        ],
-        "scroll_wght_range": [
-          300,
-          800
-        ],
+        "bezier": [0.34, 1.56, 0.64, 1],
+        "scroll_wght_range": [300, 800],
         "transition_duration": 400
       }
     },
@@ -397,16 +352,8 @@
         }
       },
       "motion": {
-        "bezier": [
-          0.34,
-          1.56,
-          0.64,
-          1
-        ],
-        "scroll_wght_range": [
-          300,
-          800
-        ],
+        "bezier": [0.34, 1.56, 0.64, 1],
+        "scroll_wght_range": [300, 800],
         "transition_duration": 400
       }
     },
@@ -465,16 +412,8 @@
         }
       },
       "motion": {
-        "bezier": [
-          0.34,
-          1.56,
-          0.64,
-          1
-        ],
-        "scroll_wght_range": [
-          300,
-          800
-        ],
+        "bezier": [0.34, 1.56, 0.64, 1],
+        "scroll_wght_range": [300, 800],
         "transition_duration": 400
       }
     }

@@ -11,7 +11,7 @@ describe('KanbanCard', () => {
     priority: 'high' as const,
     onDragStart: jest.fn(),
     onSelect: jest.fn(),
-    dueDate: '2026-03-10'
+    dueDate: '2026-03-10',
   });
 
   it('renders task details correctly', () => {

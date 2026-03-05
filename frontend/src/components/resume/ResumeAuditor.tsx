@@ -7,20 +7,20 @@ export const ResumeAuditor: React.FC = () => {
   const [jobDescription, setJobDescription] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  
+
   const { strictnessMode, setAuditResult, setStrictness } = useResumeRulesStore();
 
   const handleAudit = async () => {
     setLoading(true);
     setError(null);
-    
+
     try {
       const result = await auditResume({
         resumeText,
         jobDescription: jobDescription || undefined,
-        strictnessMode
+        strictnessMode,
       });
-      
+
       setAuditResult(result);
       console.log('[Audit Complete]', result);
     } catch (err) {
@@ -37,16 +37,16 @@ export const ResumeAuditor: React.FC = () => {
       {/* Header */}
       <div className="flex justify-between items-center mb-md">
         <h2 className="text-display-kr-dark">Resume Audit</h2>
-        
+
         {/* Strictness Toggle */}
         <div className="flex gap-xs">
-          {(['strict', 'moderate', 'light'] as const).map(mode => (
+          {(['strict', 'moderate', 'light'] as const).map((mode) => (
             <button
               key={mode}
               onClick={() => setStrictness(mode)}
               className={`btn-pebble text-xs px-sm py-xs ${
-                strictnessMode === mode 
-                  ? 'bg-wattle-gold text-asphalt-black' 
+                strictnessMode === mode
+                  ? 'bg-wattle-gold text-asphalt-black'
                   : 'bg-asphalt-black-light text-concrete-grey-light'
               }`}
             >
@@ -67,9 +67,7 @@ export const ResumeAuditor: React.FC = () => {
           value={resumeText}
           onChange={(e) => setResumeText(e.target.value)}
         />
-        <p className="text-xs text-concrete-grey-dark mt-xs">
-          {resumeText.length} characters
-        </p>
+        <p className="text-xs text-concrete-grey-dark mt-xs">{resumeText.length} characters</p>
       </div>
 
       {/* Job Description Input (Optional) */}

@@ -8,8 +8,10 @@ import { KeralaRageButton } from '../../components/ui/KeralaRageButton';
 import { useAuth } from '../../context/AuthContext';
 
 // KeralaRage Assets
-const KrMotifGrid = '/assets/kr-solidarity/specimen/kr-solidarity__specimen__triage-natural-history__v1.png';
-const paperWhiteGrid = '/assets/kr-solidarity/texture/kr-solidarity__substrate__kr-solidarity--texture--melbourne-laneway--v1__v1.png';
+const KrMotifGrid =
+  '/assets/kr-solidarity/specimen/kr-solidarity__specimen__triage-natural-history__v1.png';
+const paperWhiteGrid =
+  '/assets/kr-solidarity/texture/kr-solidarity__substrate__kr-solidarity--texture--melbourne-laneway--v1__v1.png';
 
 const registerSchema = z
   .object({

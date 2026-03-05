@@ -11,19 +11,14 @@ interface ChipListProps {
 }
 
 const CHIP_STYLE: Record<ChipListProps['variant'], string> = {
-  matched:
-    'bg-secondary-container text-on-secondary-container border border-secondary/30',
-  missing:
-    'bg-error-container text-on-error-container border border-error/30',
-  adjacent:
-    'bg-tertiary-container text-on-tertiary-container border border-tertiary/30',
+  matched: 'bg-secondary-container text-on-secondary-container border border-secondary/30',
+  missing: 'bg-error-container text-on-error-container border border-error/30',
+  adjacent: 'bg-tertiary-container text-on-tertiary-container border border-tertiary/30',
 };
 
 function ChipList({ items, variant }: ChipListProps) {
   if (items.length === 0) {
-    return (
-      <p className="text-body-small text-on-surface-variant italic">None identified</p>
-    );
+    return <p className="text-body-small text-on-surface-variant italic">None identified</p>;
   }
   return (
     <div className="flex flex-wrap gap-2">
@@ -53,18 +48,10 @@ export function SkillsMatchPanel({ skillsGap }: SkillsMatchPanelProps) {
   const { matched, missing, adjacent, match_score } = skillsGap;
 
   const scoreColor =
-    match_score >= 70
-      ? 'text-secondary'
-      : match_score >= 40
-      ? 'text-tertiary'
-      : 'text-error';
+    match_score >= 70 ? 'text-secondary' : match_score >= 40 ? 'text-tertiary' : 'text-error';
 
   const barColor =
-    match_score >= 70
-      ? 'bg-secondary'
-      : match_score >= 40
-      ? 'bg-tertiary'
-      : 'bg-error';
+    match_score >= 70 ? 'bg-secondary' : match_score >= 40 ? 'bg-tertiary' : 'bg-error';
 
   return (
     <div
@@ -113,7 +100,10 @@ export function SkillsMatchPanel({ skillsGap }: SkillsMatchPanelProps) {
               {matched.length}
             </span>
           </div>
-          <ChipList items={matched} variant="matched" />
+          <ChipList
+            items={matched}
+            variant="matched"
+          />
         </div>
 
         {/* Missing */}
@@ -124,7 +114,10 @@ export function SkillsMatchPanel({ skillsGap }: SkillsMatchPanelProps) {
               {missing.length}
             </span>
           </div>
-          <ChipList items={missing} variant="missing" />
+          <ChipList
+            items={missing}
+            variant="missing"
+          />
         </div>
 
         {/* Adjacent */}
@@ -135,7 +128,10 @@ export function SkillsMatchPanel({ skillsGap }: SkillsMatchPanelProps) {
               {adjacent.length}
             </span>
           </div>
-          <ChipList items={adjacent} variant="adjacent" />
+          <ChipList
+            items={adjacent}
+            variant="adjacent"
+          />
           <p className="text-body-small text-on-surface-variant mt-2">
             Adjacent skills from your resume that are closely related to missing requirements.
           </p>

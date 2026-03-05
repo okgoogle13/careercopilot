@@ -4,7 +4,14 @@ import React from 'react';
 
 describe('UnifiedColumn', () => {
   it('renders title and count correctly', () => {
-    render(<UnifiedColumn title="IN RECOVERY" count={5}><div>Content</div></UnifiedColumn>);
+    render(
+      <UnifiedColumn
+        title="IN RECOVERY"
+        count={5}
+      >
+        <div>Content</div>
+      </UnifiedColumn>
+    );
     expect(screen.getByText('IN RECOVERY')).toBeDefined();
     expect(screen.getByText('5')).toBeDefined();
     expect(screen.getByText('Content')).toBeDefined();
@@ -12,7 +19,12 @@ describe('UnifiedColumn', () => {
 
   it('renders headerAction when provided', () => {
     const action = <button data-testid="test-action">Action</button>;
-    render(<UnifiedColumn title="TEST" headerAction={action} />);
+    render(
+      <UnifiedColumn
+        title="TEST"
+        headerAction={action}
+      />
+    );
     expect(screen.getByTestId('test-action')).toBeDefined();
   });
 });

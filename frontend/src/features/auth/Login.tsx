@@ -8,8 +8,10 @@ import { LoginCard, type LoginCredentials } from '../../components/LoginCard';
 import { useAuth } from '../../context/AuthContext';
 
 // KeralaRage Assets
-const KrMotifGrid = '/assets/kr-solidarity/specimen/kr-solidarity__specimen__triage-natural-history__v1.png';
-const paperWhiteGrid = '/assets/kr-solidarity/texture/kr-solidarity__substrate__kr-solidarity--texture--melbourne-laneway--v1__v1.png';
+const KrMotifGrid =
+  '/assets/kr-solidarity/specimen/kr-solidarity__specimen__triage-natural-history__v1.png';
+const paperWhiteGrid =
+  '/assets/kr-solidarity/texture/kr-solidarity__substrate__kr-solidarity--texture--melbourne-laneway--v1__v1.png';
 
 const loginSchema = z.object({
   email: z.string().email('Please enter a valid email'),
@@ -62,7 +64,7 @@ export function Login() {
           onRegisterClick={() => navigate('/register')}
           isLoading={isSubmitting}
         />
-        
+
         {authError && (
           <motion.div
             initial={{ y: 10, opacity: 0 }}

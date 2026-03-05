@@ -35,13 +35,15 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: 'bg-[var(--sys-color-inkGold-base)] text-[var(--sys-color-charcoalBackground-base)] hover:shadow-standard',
-        destructive:
-          'bg-[var(--sys-color-solidarityRed-base)] text-white hover:shadow-standard',
+        default:
+          'bg-[var(--sys-color-inkGold-base)] text-[var(--sys-color-charcoalBackground-base)] hover:shadow-standard',
+        destructive: 'bg-[var(--sys-color-solidarityRed-base)] text-white hover:shadow-standard',
         outline:
           'border-2 border-[var(--sys-color-concreteGrey-base)] bg-transparent text-[var(--sys-color-worker-ash-base)] hover:border-[var(--sys-color-concreteGrey-steps-4)] hover:bg-white/5',
-        secondary: 'bg-[var(--sys-color-concreteGrey-steps-2)] text-[var(--sys-color-charcoalBackground-base)] hover:bg-[var(--sys-color-concreteGrey-steps-3)]',
-        ghost: 'text-[var(--sys-color-concreteGrey-steps-4)] hover:bg-white/5 hover:text-[var(--sys-color-worker-ash-base)]',
+        secondary:
+          'bg-[var(--sys-color-concreteGrey-steps-2)] text-[var(--sys-color-charcoalBackground-base)] hover:bg-[var(--sys-color-concreteGrey-steps-3)]',
+        ghost:
+          'text-[var(--sys-color-concreteGrey-steps-4)] hover:bg-white/5 hover:text-[var(--sys-color-worker-ash-base)]',
         link: 'text-[var(--sys-color-inkGold-base)] underline-offset-4 hover:underline',
       },
       size: {

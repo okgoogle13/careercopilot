@@ -28,7 +28,7 @@ try:
 
     GENKIT_AVAILABLE = True
 except ImportError:
-    genkit = None
+    genkit = None  # type: ignore[assignment]
     GENKIT_AVAILABLE = False
 
     def _noop_flow(*args, **kwargs):

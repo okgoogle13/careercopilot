@@ -7,8 +7,10 @@ import { PageHeader } from '../../components/shared/PageHeader';
 import { API_ENDPOINTS } from '../../config/api';
 
 // Assets
-const sentryKrShiva = '/assets/kr-solidarity/specimen/kr-solidarity__specimen__triage-natural-history__v1.png';
-const wallpaper = '/assets/kr-solidarity/texture/kr-solidarity__substrate__kr-solidarity--texture--melbourne-laneway--v1__v1.png';
+const sentryKrShiva =
+  '/assets/kr-solidarity/specimen/kr-solidarity__specimen__triage-natural-history__v1.png';
+const wallpaper =
+  '/assets/kr-solidarity/texture/kr-solidarity__substrate__kr-solidarity--texture--melbourne-laneway--v1__v1.png';
 
 interface ScoutResponse {
   found_links: string[];
@@ -89,7 +91,6 @@ export function Opportunities() {
 
         {/* Lookout Controls: The Search Deck */}
         <Stone
-         
           elevation="raised"
           className="mb-12 p-8 border-concrete-grey/10 bg-asphalt-black/40 backdrop-blur-md"
         >
@@ -162,10 +163,10 @@ export function Opportunities() {
               <JobList
                 jobs={results.map((link, index) => ({
                   id: `node-0${index + 1}`,
-                  title: "Opportunity Match Potential",
-                  location: "Found via Search",
-                  salary: "Analysis Recommended",
-                  tags: ["High Match", "Scout Dispatch"]
+                  title: 'Opportunity Match Potential',
+                  location: 'Found via Search',
+                  salary: 'Analysis Recommended',
+                  tags: ['High Match', 'Scout Dispatch'],
                 }))}
                 onJobSelect={(id) => {
                   const index = parseInt(id.replace('node-0', '')) - 1;

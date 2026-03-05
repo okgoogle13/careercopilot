@@ -28,16 +28,12 @@ const RAW_ICON_MODULES: Record<string, () => Promise<string>> =
 const iconMarkupCache = new Map<KrIconName, string>();
 
 const escapeAttribute = (value: string): string =>
-  value
-    .replace(/&/g, '&amp;')
-    .replace(/"/g, '&quot;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;');
+  value.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
 const stripSvgRootAttributes = (attributes: string): string =>
   attributes.replace(
     /\s(?:width|height|focusable|role|aria-label|aria-hidden|class|style)=["'][^"']*["']/gi,
-    '',
+    ''
   );
 
 const normalizeSvgMarkup = (markup: string): string => {
@@ -112,7 +108,9 @@ export const KrIcon: React.FC<KrIconProps> = ({
     };
   }, [name]);
 
-  const wrapperClassName = ['inline-flex shrink-0 leading-none', className].filter(Boolean).join(' ');
+  const wrapperClassName = ['inline-flex shrink-0 leading-none', className]
+    .filter(Boolean)
+    .join(' ');
   const wrapperStyle: React.CSSProperties = {
     width: size,
     height: size,

@@ -20,7 +20,7 @@ def test_generate_tailored_resume_returns_model_text(monkeypatch):
             captured["prompt"] = prompt
             return _Response()
 
-    monkeypatch.setattr(module, "gemini_pro", _Model())
+    monkeypatch.setattr(module, "get_model", lambda: _Model())
 
     result = module.generate_tailored_resume(
         {"name": "Alex", "skills": ["Python"]},
@@ -43,7 +43,7 @@ def test_generate_tailored_resume_handles_empty_inputs(monkeypatch):
         def generate(self, prompt):
             return _Response()
 
-    monkeypatch.setattr(module, "gemini_pro", _Model())
+    monkeypatch.setattr(module, "get_model", lambda: _Model())
 
     assert module.generate_tailored_resume({}, {}) == "Resume from empty inputs"
 
@@ -55,7 +55,7 @@ def test_generate_tailored_resume_bubbles_model_errors(monkeypatch):
         def generate(self, prompt):
             raise RuntimeError("API Error")
 
-    monkeypatch.setattr(module, "gemini_pro", _Model())
+    monkeypatch.setattr(module, "get_model", lambda: _Model())
 
     with pytest.raises(RuntimeError, match="API Error"):
         module.generate_tailored_resume({"key": "value"}, {"key": "value"})

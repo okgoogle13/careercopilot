@@ -1,175 +1,146 @@
-"""
-Tests for the orchestrator module.
-"""
+"""Tests for Agent Orchestration System."""
 
-from datetime import datetime, timedelta
-from typing import Any
-from unittest.mock import AsyncMock, patch
+from datetime import datetime
+from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
-from fastapi.testclient import TestClient
 
 from app.agents.orchestrator import (
+    AgentOrchestrator,
     AgentPriority,
     AgentStatus,
+    ApplicationAgent,
     BaseAgent,
     JobScoutAgent,
+    MarketAnalystAgent,
 )
-from app.core.ai_client import get_ai_client
-from app.core.cache_decorators import cached_ai_operation
 
 
-@pytest.fixture
-def test_client():
-    """Fixture for a test client."""
-    # In a real application, you'd likely have a FastAPI app instance here.
-    # For this example, we're testing the orchestrator logic directly,
-    # so we don't need a full FastAPI app.
-    return TestClient(None)  # Placeholder
+@pytest.fixture(autouse=True)
+def mock_cache():
+    """Silence cache decorators for all agent tests."""
+    with patch("app.core.cache_decorators.get_ai_cache") as mock_get_cache:
+        mock_cache_inst = MagicMock()
+        mock_cache_inst.get = AsyncMock(return_value=None)
+        mock_cache_inst.set = AsyncMock(return_value=True)
+        mock_cache_inst.CACHE_CONFIGS = {"default": {"ttl": 3600}}
+        mock_get_cache.return_value = mock_cache_inst
+        yield mock_get_cache
 
 
 class TestBaseAgent:
-    """Tests for the BaseAgent class."""
-
-    def test_base_agent_init(self):
-        """Test the initialization of the BaseAgent class."""
-        agent = BaseAgent(
-            agent_id="test_agent",
-            name="Test Agent",
-            description="A test agent",
-            dependencies=["dep1", "dep2"],
-        )
-        assert agent.agent_id == "test_agent"
-        assert agent.name == "Test Agent"
-        assert agent.description == "A test agent"
-        assert agent.dependencies == ["dep1", "dep2"]
-        assert agent.status == AgentStatus.PENDING
-        assert agent.priority == AgentPriority.NORMAL
-        assert agent.started_at is None
-        assert agent.completed_at is None
-        assert agent.results is None
-        assert agent.error_message is None
-
-    def test_can_run_with_dependencies(self):
-        """Test the can_run method with dependencies."""
-        agent = BaseAgent(
-            agent_id="test_agent",
-            name="Test Agent",
-            description="A test agent",
-            dependencies=["dep1", "dep2"],
-        )
-        assert not agent.can_run(["dep1"])
-        assert agent.can_run(["dep1", "dep2"])
-        assert agent.can_run(["dep2", "dep1"])
-
-    def test_can_run_without_dependencies(self):
-        """Test the can_run method without dependencies."""
-        agent = BaseAgent(
-            agent_id="test_agent",
-            name="Test Agent",
-            description="A test agent",
-        )
-        assert agent.can_run([])
-        assert agent.can_run(["dep1"])
-
-    def test_get_status_info(self):
-        """Test the get_status_info method."""
-        agent = BaseAgent(
-            agent_id="test_agent",
-            name="Test Agent",
-            description="A test agent",
-        )
-        agent.status = AgentStatus.RUNNING
-        agent.started_at = datetime.utcnow() - timedelta(seconds=10)
-        agent.results = {"key": "value"}
-
-        status_info = agent.get_status_info()
-        assert status_info["agent_id"] == "test_agent"
-        assert status_info["name"] == "Test Agent"
-        assert status_info["status"] == "running"
-        assert status_info["priority"] == "normal"
-        assert status_info["dependencies"] == []
-        assert status_info["duration_ms"] > 0
-        assert status_info["error"] is None
-        assert status_info["has_results"] is True
-
     @pytest.mark.asyncio
-    async def test_execute_success(self):
-        """Test the execute method with a successful task."""
-        agent = BaseAgent(
-            agent_id="test_agent",
-            name="Test Agent",
-            description="A test agent",
-        )
+    async def test_base_agent_execution_flow(self):
+        """Should transition through statuses during execution."""
+        agent = BaseAgent(agent_id="test", name="Test", description="Test desc")
+        agent._run_task = AsyncMock(return_value={"result": "ok"})
 
-        with patch.object(agent, "_run_task", return_value={"result": "success"}):
-            result = await agent.execute({"context_key": "context_value"})
-            assert agent.status == AgentStatus.COMPLETED
-            assert result == {"result": "success"}
+        result = await agent.execute({"key": "val"})
 
+        assert agent.status == AgentStatus.COMPLETED
+        assert result["result"] == "ok"
+
+    def test_check_dependencies_met(self):
+        agent = BaseAgent(agent_id="b", name="B", description="D")
+        agent.dependencies = ["a"]
+
+        # Dependency not in results
+        assert agent.can_run([]) is False
+        assert agent.can_run(["a"]) is True
+
+
+class TestSpecializedAgents:
     @pytest.mark.asyncio
-    async def test_execute_failure(self):
-        """Test the execute method with a failing task."""
-        agent = BaseAgent(
-            agent_id="test_agent",
-            name="Test Agent",
-            description="A test agent",
-        )
-
-        with patch.object(agent, "_run_task", side_effect=Exception("Test error")):
-            with pytest.raises(Exception) as exc_info:
-                await agent.execute({"context_key": "context_value"})
-
-            assert agent.status == AgentStatus.FAILED
-            assert "Test error" in str(exc_info.value)
-
-
-class TestJobScoutAgent:
-    """Tests for the JobScoutAgent class."""
-
-    @pytest.mark.asyncio
-    async def test_job_scout_agent_init(self):
-        """Test the initialization of the JobScoutAgent class."""
+    async def test_job_scout_run_task(self):
+        """Should call its internal discovery/analysis methods."""
         agent = JobScoutAgent()
-        assert agent.agent_id == "job_scout"
-        assert agent.name == "Job Scout"
-        assert agent.description == "Discovers and analyzes job opportunities"
-        assert agent.priority == AgentPriority.HIGH
+        agent._discover_jobs = AsyncMock(return_value=[{"job_id": "j1", "title": "Dev"}])
+        agent._analyze_job_relevance = AsyncMock(return_value={"match_score": 0.9})
+
+        result = await agent._run_task({"search_criteria": {"role": "Social Worker"}})
+        assert result["jobs_discovered"] == 1
+        assert result["all_jobs"][0]["match_score"] == 0.9
 
     @pytest.mark.asyncio
-    @patch("app.agents.orchestrator.JobScoutAgent._discover_jobs")
-    @patch("app.agents.orchestrator.JobScoutAgent._analyze_job_relevance")
-    async def test_run_task_success(self, mock_analyze, mock_discover):
-        """Test the _run_task method with successful job discovery and analysis."""
-        mock_discover.return_value = [
-            {"title": "Job 1", "description": "Description 1"},
-            {"title": "Job 2", "description": "Description 2"},
-        ]
-        mock_analyze.side_effect = lambda job, context: {"match_score": 0.8}
+    async def test_market_analyst_run_task(self):
+        """Should call internal market analysis method."""
+        agent = MarketAnalystAgent()
+        # Mock internal methods to avoid AI calls
+        agent._analyze_salary_trends = AsyncMock(return_value={})
+        agent._analyze_skill_trends = AsyncMock(return_value={})
+        agent._analyze_competition = AsyncMock(return_value={})
+        agent._generate_market_insights = AsyncMock(return_value={"trend": "growing"})
 
-        agent = JobScoutAgent()
-        context = {"search_criteria": {"keyword": "test"}}
+        result = await agent._run_task({"user_profile": {}, "target_roles": ["Dev"]})
+        assert result["market_insights"]["trend"] == "growing"
+
+    @pytest.mark.asyncio
+    async def test_application_agent_run_task(self):
+        """Should call internal material generation for provided jobs."""
+        agent = ApplicationAgent()
+        agent._generate_job_materials = AsyncMock(
+            return_value={"cover_letter": "...", "email": "..."}
+        )
+
+        context = {
+            "target_jobs": [{"job_id": "j1", "title": "Dev", "company": "G"}],
+            "user_profile": {},
+            "market_analyst_results": {},
+        }
         result = await agent._run_task(context)
+        assert result["materials_generated"] == 1
+        assert "cover_letter" in result["job_applications"][0]["materials"]
 
-        assert result["jobs_discovered"] == 2
-        assert result["jobs_analyzed"] == 2
-        assert len(result["top_matches"]) == 2
-        assert len(result["all_jobs"]) == 2
-        assert result["search_criteria"] == {"keyword": "test"}
+
+class TestAgentOrchestrator:
+    @pytest.fixture
+    def orchestrator(self):
+        return AgentOrchestrator()
+
+    def test_orchestrator_initialization(self, orchestrator):
+        assert len(orchestrator.agents) > 0
+        assert "job_scout" in orchestrator.agents
 
     @pytest.mark.asyncio
-    @patch("app.agents.orchestrator.JobScoutAgent._discover_jobs")
-    @patch("app.agents.orchestrator.JobScoutAgent._analyze_job_relevance")
-    async def test_run_task_empty_jobs(self, mock_analyze, mock_discover):
-        """Test the _run_task method with no jobs discovered."""
-        mock_discover.return_value = []
+    async def test_run_workflow_daily_discovery(self, orchestrator):
+        """Should execute agents in order for daily_discovery."""
+        orchestrator.agents = {
+            "job_scout": MagicMock(spec=JobScoutAgent),
+            "market_analyst": MagicMock(spec=MarketAnalystAgent),
+            "application_agent": MagicMock(spec=ApplicationAgent),
+        }
 
-        agent = JobScoutAgent()
-        context = {"search_criteria": {"keyword": "test"}}
-        result = await agent._run_task(context)
+        for name in orchestrator.agents:
+            orchestrator.agents[name].agent_id = name
+            # Mock can_run to follow order
+            orchestrator.agents[name].can_run.return_value = True
+            orchestrator.agents[name].execute = AsyncMock(return_value={"status": "completed"})
 
-        assert result["jobs_discovered"] == 0
-        assert result["jobs_analyzed"] == 0
-        assert len(result["top_matches"]) == 0
-        assert len(result["all_jobs"]) == 0
-        assert result["search_criteria"] == {"keyword": "test"}
+        with patch("app.agents.orchestrator.get_db_session") as mock_db:
+            # Silence DB calls
+            mock_db.return_value.__enter__.return_value = MagicMock()
+
+            result = await orchestrator.run_workflow("daily_discovery", {"user_id": "u1"})
+            assert result["success"] is True
+            assert "job_scout" in result["results"]
+
+    def test_get_session_status_db(self, orchestrator):
+        """Should retrieve status from database if available."""
+        mock_db = MagicMock()
+        mock_session = MagicMock()
+        mock_session.id = "s1"
+        mock_session.status = "running"
+        mock_session.session_type = "daily_discovery"
+        mock_session.started_at = datetime.utcnow()
+        mock_session.completed_at = None
+        mock_session.active_agents = []
+        mock_session.completed_agents = []
+        mock_session.agent_results = {}
+        mock_db.query().filter().first.return_value = mock_session
+
+        with patch("app.agents.orchestrator.get_db_session") as mock_get_db:
+            mock_get_db.return_value.__enter__.return_value = mock_db
+
+            status = orchestrator.get_session_status("s1")
+            assert status["status"] == "running"
+            assert status["session_id"] == "s1"

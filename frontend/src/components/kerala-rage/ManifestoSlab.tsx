@@ -54,10 +54,7 @@ export const ManifestoSlab: React.FC<ManifestoSlabProps> = ({
         borderRadius: '8px 0 8px 0', // Cabinet archetype minimal structural radius
         boxShadow: '0 12px 32px rgba(0, 0, 0, 0.35)',
       }}
-      className={cn(
-        'p-10 md:p-16 relative overflow-hidden z-20',
-        className
-      )}
+      className={cn('p-10 md:p-16 relative overflow-hidden z-20', className)}
       {...(motionProps as any)}
       {...(props as any)}
     >

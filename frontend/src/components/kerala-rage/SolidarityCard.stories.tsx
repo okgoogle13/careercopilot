@@ -37,9 +37,7 @@ export const Ghost: Story = {
     children: (
       <div className="flex flex-col gap-2">
         <h3 className="font-proclamation text-ink-gold">Ghost Card</h3>
-        <p className="font-field-note text-paper-white/80">
-          This is a ghost card variant.
-        </p>
+        <p className="font-field-note text-paper-white/80">This is a ghost card variant.</p>
       </div>
     ),
   },
@@ -51,9 +49,7 @@ export const Active: Story = {
     children: (
       <div className="flex flex-col gap-2">
         <h3 className="font-proclamation text-white">Active Card</h3>
-        <p className="font-field-note text-paper-white/80">
-          This is an active card variant.
-        </p>
+        <p className="font-field-note text-paper-white/80">This is an active card variant.</p>
       </div>
     ),
   },

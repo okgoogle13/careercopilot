@@ -54,11 +54,11 @@ function hasMultiplePortrait(layers: HeroLayer[], manifest: SolidarityManifest):
 
 function hasStreetAboveDevotional(layers: HeroLayer[], manifest: SolidarityManifest): boolean {
   const sortedLayers = [...layers].sort((a, b) => a.z_index - b.z_index);
-  
+
   for (let i = 0; i < sortedLayers.length; i++) {
     const layer = sortedLayers[i];
     const asset = manifest.assets.find((a) => a.id === layer.asset_id);
-    
+
     if (asset?.category === 'devotional') {
       // Check if any street layers come after this devotional
       for (let j = i + 1; j < sortedLayers.length; j++) {
@@ -81,11 +81,11 @@ function selectAutoAsset(
   const candidates = manifest.assets.filter(
     (asset) => asset.layer === layerType && !usedAssetIds.has(asset.id)
   );
-  
+
   if (candidates.length === 0) {
     return null;
   }
-  
+
   const randomIndex = Math.floor(Math.random() * candidates.length);
   return candidates[randomIndex];
 }

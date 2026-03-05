@@ -6,7 +6,7 @@ from .orchestrator import BaseAgent
 logger = logging.getLogger(__name__)
 
 
-class TestAutomationSpecialistAgent(BaseAgent):
+class AutomationSpecialistAgent(BaseAgent):
     """Agent that generates missing Jest tests and validates M3 design‑token compliance.
 
     The implementation is a high‑level orchestration that calls existing skills:

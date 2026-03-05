@@ -15,17 +15,17 @@ import { motion } from 'framer-motion';
 
 /**
  * ApplicationCard - M3 Compliant Job Application Tracker Card
- * 
+ *
  * Displays job application information with a multi-step progress indicator.
  * Built using Material Design 3 KeralaRage KrSolidarity design tokens.
- * 
+ *
  * **M3 Design Token Usage:**
  * - Shape: `rounded-pebble` → `--sys-shape-pebble` (20px 20px 32px 32px) - [DEPRECATED_STYLE] asymmetric corners ✅
  * - Elevation: `shadow-elevation-1` → `shadow-elevation-2` on hover (M3 depth levels)
  * - Spacing: `p-space-xl` (32px) for card padding
  * - Motion: `duration-medium-1` (250ms) with `ease-spring` (expressive cubic-bezier)
  * - Colors: M3 semantic color roles (surface-container, primary-container, etc.)
- * 
+ *
  * @param {ApplicationCardProps} props - Component properties
  * @returns {JSX.Element} Rendered application card
  */
@@ -40,7 +40,9 @@ export function ApplicationCard({
   className = '',
 }: ApplicationCardProps) {
   return (
-    <div className={`bg-surface-container rounded-pebble p-space-xl border border-outline-variant shadow-elevation-1 hover:shadow-elevation-2 transition-all duration-medium-1 ease-spring ${className}`}>
+    <div
+      className={`bg-surface-container rounded-pebble p-space-xl border border-outline-variant shadow-elevation-1 hover:shadow-elevation-2 transition-all duration-medium-1 ease-spring ${className}`}
+    >
       {/* Header Section */}
       <div className="flex items-start justify-between mb-12">
         <div className="flex-1">
@@ -48,7 +50,7 @@ export function ApplicationCard({
             className="text-on-surface mb-1 text-headline-large"
             style={{
               fontWeight: 'var(--sys-type-weight-display)',
-              fontVariationSettings: "var(--sys-type-axes-hero)",
+              fontVariationSettings: 'var(--sys-type-axes-hero)',
             }}
           >
             {title}
@@ -87,11 +89,12 @@ export function ApplicationCard({
               key={idx}
               className={`
                 flex-1 px-4 py-3 text-center
-                ${isCurrent
-                  ? 'bg-primary-container text-on-primary-container font-bold shadow-sm'
-                  : isCompleted
-                    ? 'bg-secondary-container text-on-secondary-container'
-                    : 'bg-surface-container-high text-on-surface-variant'
+                ${
+                  isCurrent
+                    ? 'bg-primary-container text-on-primary-container font-bold shadow-sm'
+                    : isCompleted
+                      ? 'bg-secondary-container text-on-secondary-container'
+                      : 'bg-surface-container-high text-on-surface-variant'
                 }
               `}
               style={{ clipPath: 'var(--md-ref-shape-pebble)' }}

@@ -77,10 +77,7 @@ interface InventoryReport {
   unusedComponents: string[];
   mostUsedComponents: Array<{ name: string; count: number }>;
   recommendations: string[];
-  migrationSummary: Record<
-    'migrated' | 'mixed' | 'not_migrated' | 'unknown',
-    number
-  >;
+  migrationSummary: Record<'migrated' | 'mixed' | 'not_migrated' | 'unknown', number>;
   KrSolidarityAdoption: {
     withKrSolidarityTokens: number;
     withModeSystem: number;
@@ -302,7 +299,11 @@ function analyzeComponents(): InventoryReport {
       linesOfCode: lines.length,
       complexity: calculateComplexity(lines.length, dependencies.length),
       dependencies,
-      isReusable: category === 'ui' || category === 'shared' || category === 'core' || category === 'ui_package',
+      isReusable:
+        category === 'ui' ||
+        category === 'shared' ||
+        category === 'core' ||
+        category === 'ui_package',
       usesMUI,
       usesCustomUI,
       usesLegacyM3,
@@ -540,7 +541,9 @@ function main() {
     console.log(`Unknown: ${report.migrationSummary.unknown}`);
 
     console.log(`\n=== KrSolidarity Adoption ===`);
-    console.log(`Components with KrSolidarity Tokens: ${report.KrSolidarityAdoption.withKrSolidarityTokens}`);
+    console.log(
+      `Components with KrSolidarity Tokens: ${report.KrSolidarityAdoption.withKrSolidarityTokens}`
+    );
     console.log(`Components with Mode System: ${report.KrSolidarityAdoption.withModeSystem}`);
     console.log(`Legacy MUI Usage: ${report.KrSolidarityAdoption.legacyMUI}`);
     console.log(`Legacy M3 Usage: ${report.KrSolidarityAdoption.legacyM3}`);

@@ -25,7 +25,8 @@ export const Hover: Story = {
 
 export const Focus: Story = {
   args: {
-    containerClassName: 'ring-2 ring-[var(--sys-color-inkGold-base)] rounded-[var(--radius-seed)] p-1',
+    containerClassName:
+      'ring-2 ring-[var(--sys-color-inkGold-base)] rounded-[var(--radius-seed)] p-1',
   },
 };
 

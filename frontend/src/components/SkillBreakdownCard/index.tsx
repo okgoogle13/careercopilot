@@ -27,7 +27,7 @@ export interface SkillBreakdownCardProps {
 
 /**
  * SkillBreakdownCard
- * 
+ *
  * The "Audit Microscope" for skill verification.
  * Uses blueprint grids and high-vis score gauges.
  */
@@ -35,7 +35,7 @@ export const SkillBreakdownCard: React.FC<SkillBreakdownCardProps> = ({
   overallScore,
   categories,
   onAction,
-  isLoading = false
+  isLoading = false,
 }) => {
   return (
     <div className="p-8 bg-charcoal-100 rounded-stone shadow-viscous border border-blueprint-grey/10 relative overflow-hidden">
@@ -66,7 +66,7 @@ export const SkillBreakdownCard: React.FC<SkillBreakdownCardProps> = ({
                 strokeDasharray="351.85"
                 initial={{ strokeDashoffset: 351.85 }}
                 animate={{ strokeDashoffset: 351.85 - (351.85 * overallScore) / 100 }}
-                transition={{ duration: 1.5, ease: "easeOut" }}
+                transition={{ duration: 1.5, ease: 'easeOut' }}
                 className="text-ink-gold shadow-glow-ink"
               />
             </svg>
@@ -87,7 +87,10 @@ export const SkillBreakdownCard: React.FC<SkillBreakdownCardProps> = ({
 
         <div className="space-y-6">
           {categories.map((cat, idx) => (
-            <div key={cat.label} className="space-y-2">
+            <div
+              key={cat.label}
+              className="space-y-2"
+            >
               <div className="flex justify-between font-jetbrains-mono text-xs uppercase tracking-widest text-paper-white/80">
                 <span>{cat.label}</span>
                 <span>{cat.value}%</span>

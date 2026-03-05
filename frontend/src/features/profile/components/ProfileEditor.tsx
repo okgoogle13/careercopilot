@@ -1,7 +1,18 @@
 import { Lens, LensArea } from '@/components/ui/Lens';
 import { Pebble } from '@/components/ui/Pebble';
 import { Stone } from '@/components/ui/Stone';
-import { Archive, Award, Box, Briefcase, Loader2, Plus, Sparkles, User, MapPin, Globe } from 'lucide-react';
+import {
+  Archive,
+  Award,
+  Box,
+  Briefcase,
+  Loader2,
+  Plus,
+  Sparkles,
+  User,
+  MapPin,
+  Globe,
+} from 'lucide-react';
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from 'sonner';
@@ -11,8 +22,10 @@ import { KrDarkSpring, staggerContainer, motionVariants } from '@/design/tokens/
 import { UserProfile } from '@/services/mockData';
 
 // Lab Assets
-const starfishCage = '/assets/kr-solidarity/specimen/kr-solidarity__specimen__triage-natural-history__v1.png';
-const paperGrain = '/assets/kr-solidarity/texture/kr-solidarity__substrate__kr-solidarity--texture--melbourne-laneway--v1__v1.png';
+const starfishCage =
+  '/assets/kr-solidarity/specimen/kr-solidarity__specimen__triage-natural-history__v1.png';
+const paperGrain =
+  '/assets/kr-solidarity/texture/kr-solidarity__substrate__kr-solidarity--texture--melbourne-laneway--v1__v1.png';
 
 export interface ProfileEditorProps {
   onNext: () => void;
@@ -60,18 +73,18 @@ export const ProfileEditor: React.FC<ProfileEditorProps> = ({ onNext, onBack }) 
   }, [profile, isLoading]);
 
   const handleUpdate = (updates: Partial<UserProfile>) => {
-    setProfile(prev => prev ? { ...prev, ...updates } : null);
+    setProfile((prev) => (prev ? { ...prev, ...updates } : null));
   };
 
   const handleGenerateSummary = async () => {
     if (!profile) return;
     setIsGenerating(true);
-    
+
     try {
       const response = await genkitApi.generateProfileSummary({
-        user_profile_data: profile
+        user_profile_data: profile,
       });
-      
+
       handleUpdate({ title: response.summary });
       toast.success('Professional Brand Statement synthesized!');
     } catch (error) {
@@ -91,7 +104,7 @@ export const ProfileEditor: React.FC<ProfileEditorProps> = ({ onNext, onBack }) 
   }
 
   return (
-    <motion.div 
+    <motion.div
       initial="hidden"
       animate="visible"
       variants={staggerContainer}
@@ -112,7 +125,7 @@ export const ProfileEditor: React.FC<ProfileEditorProps> = ({ onNext, onBack }) 
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Lab Header */}
-        <motion.header 
+        <motion.header
           variants={motionVariants.slideUp}
           className="mb-16 border-b border-bark-base/10 pb-8 flex justify-between items-end"
         >
@@ -136,9 +149,11 @@ export const ProfileEditor: React.FC<ProfileEditorProps> = ({ onNext, onBack }) 
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
           {/* Left Column - The "Glass Case" Visual (ASSET-07) */}
-          <motion.div variants={motionVariants.slideUp} className="lg:col-span-4 space-y-8">
+          <motion.div
+            variants={motionVariants.slideUp}
+            className="lg:col-span-4 space-y-8"
+          >
             <Stone
-             
               elevation="floating"
               className="aspect-[4/5] overflow-hidden relative border-bark-base/20 group"
             >
@@ -191,7 +206,10 @@ export const ProfileEditor: React.FC<ProfileEditorProps> = ({ onNext, onBack }) 
           {/* Right Column - Lab Forms */}
           <div className="lg:col-span-8 space-y-12">
             {/* Personal Records */}
-            <motion.section variants={motionVariants.slideUp} className="space-y-6">
+            <motion.section
+              variants={motionVariants.slideUp}
+              className="space-y-6"
+            >
               <div className="flex items-center gap-3 border-b border-bark-base/5 pb-2">
                 <User
                   size={18}
@@ -219,7 +237,10 @@ export const ProfileEditor: React.FC<ProfileEditorProps> = ({ onNext, onBack }) 
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="relative">
-                  <MapPin size={14} className="absolute left-3 top-10 text-bark-base/40" />
+                  <MapPin
+                    size={14}
+                    className="absolute left-3 top-10 text-bark-base/40"
+                  />
                   <Lens
                     label="LOCAL_COORD (LOCATION)"
                     value={profile.location}
@@ -228,7 +249,10 @@ export const ProfileEditor: React.FC<ProfileEditorProps> = ({ onNext, onBack }) 
                   />
                 </div>
                 <div className="relative">
-                  <Globe size={14} className="absolute left-3 top-10 text-bark-base/40" />
+                  <Globe
+                    size={14}
+                    className="absolute left-3 top-10 text-bark-base/40"
+                  />
                   <Lens
                     label="NETWORK_URI (WEBSITE)"
                     value={profile.website}
@@ -240,7 +264,10 @@ export const ProfileEditor: React.FC<ProfileEditorProps> = ({ onNext, onBack }) 
             </motion.section>
 
             {/* Professional Summary - The "Synthesis" */}
-            <motion.section variants={motionVariants.slideUp} className="space-y-6">
+            <motion.section
+              variants={motionVariants.slideUp}
+              className="space-y-6"
+            >
               <div className="flex justify-between items-center border-b border-bark-base/5 pb-2">
                 <div className="flex items-center gap-3">
                   <Briefcase
@@ -264,7 +291,10 @@ export const ProfileEditor: React.FC<ProfileEditorProps> = ({ onNext, onBack }) 
                         animate={{ opacity: 1, rotate: 360 }}
                         exit={{ opacity: 0 }}
                       >
-                        <Loader2 size={12} className="animate-spin" />
+                        <Loader2
+                          size={12}
+                          className="animate-spin"
+                        />
                       </motion.div>
                     ) : (
                       <motion.div
@@ -293,7 +323,10 @@ export const ProfileEditor: React.FC<ProfileEditorProps> = ({ onNext, onBack }) 
 
             {/* Experience & Skills - KrMotif List */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-              <motion.section variants={motionVariants.slideUp} className="space-y-6">
+              <motion.section
+                variants={motionVariants.slideUp}
+                className="space-y-6"
+              >
                 <div className="flex items-center gap-3 border-b border-bark-base/5 pb-2">
                   <Archive
                     size={18}
@@ -327,7 +360,10 @@ export const ProfileEditor: React.FC<ProfileEditorProps> = ({ onNext, onBack }) 
                 </div>
               </motion.section>
 
-              <motion.section variants={motionVariants.slideUp} className="space-y-6">
+              <motion.section
+                variants={motionVariants.slideUp}
+                className="space-y-6"
+              >
                 <div className="flex items-center gap-3 border-b border-bark-base/5 pb-2">
                   <Award
                     size={18}
@@ -357,7 +393,7 @@ export const ProfileEditor: React.FC<ProfileEditorProps> = ({ onNext, onBack }) 
         </div>
 
         {/* Global Action Footer */}
-        <motion.footer 
+        <motion.footer
           variants={motionVariants.slideUp}
           className="mt-20 pt-8 border-t border-bark-base/10 flex justify-between items-center"
         >

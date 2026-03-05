@@ -16,9 +16,7 @@ export const TokenTest = () => {
       font-field-note text-body-large
     "
     >
-      <h2 className="font-proclamation text-display-small text-ink-gold mb-4">
-        Token System Test
-      </h2>
+      <h2 className="font-proclamation text-display-small text-ink-gold mb-4">Token System Test</h2>
 
       <div className="space-y-2">
         <p>

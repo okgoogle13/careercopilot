@@ -116,7 +116,7 @@ async def process_document(
         config = processor_config or {}
         ai_response = await _make_ai_request(
             prompt=formatted_prompt,
-            model=config.get("model", settings.ai_model),
+            model=config.get("model", settings.model_name),
             max_tokens=config.get("max_tokens", settings.ai_max_tokens),
             temperature=config.get("temperature", settings.ai_temperature),
         )

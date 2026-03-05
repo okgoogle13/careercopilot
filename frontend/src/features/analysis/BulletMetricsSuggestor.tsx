@@ -42,9 +42,7 @@ export function BulletMetricsSuggestor({
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-3">
           <Sparkles className="w-6 h-6 text-primary" />
-          <h2 className="text-title-large font-bold text-on-surface">
-            Bullet Metrics Suggestions
-          </h2>
+          <h2 className="text-title-large font-bold text-on-surface">Bullet Metrics Suggestions</h2>
         </div>
 
         <Button
@@ -68,8 +66,7 @@ export function BulletMetricsSuggestor({
       </div>
 
       <p className="text-body-medium text-on-surface-variant mb-6">
-        Rewrite your resume bullets using the{' '}
-        <strong>Google XYZ Formula</strong>:{' '}
+        Rewrite your resume bullets using the <strong>Google XYZ Formula</strong>:{' '}
         <em>Accomplished [X] as measured by [Y], by doing [Z]</em>
       </p>
 
@@ -78,8 +75,8 @@ export function BulletMetricsSuggestor({
         <div className="text-center py-10 bg-surface-container-low rounded-tech border border-outline-variant border-dashed">
           <Sparkles className="w-10 h-10 text-on-surface-variant mx-auto mb-3 opacity-40" />
           <p className="text-body-medium text-on-surface-variant">
-            Click <strong>Suggest Metrics</strong> to generate quantifiable
-            rewrites for your resume bullets.
+            Click <strong>Suggest Metrics</strong> to generate quantifiable rewrites for your resume
+            bullets.
           </p>
         </div>
       )}
@@ -106,16 +103,12 @@ export function BulletMetricsSuggestor({
               {/* Arrow */}
               <div className="flex items-center gap-2 mb-4">
                 <ArrowRight className="w-5 h-5 text-primary" />
-                <span className="text-label-medium text-primary font-bold uppercase">
-                  Enhanced
-                </span>
+                <span className="text-label-medium text-primary font-bold uppercase">Enhanced</span>
               </div>
 
               {/* Improved */}
               <div className="mb-4">
-                <p className="text-body-large font-bold text-on-surface">
-                  {bullet.improved}
-                </p>
+                <p className="text-body-large font-bold text-on-surface">{bullet.improved}</p>
               </div>
 
               {/* Rationale */}
@@ -133,8 +126,7 @@ export function BulletMetricsSuggestor({
               {/* Metric type badge */}
               <span
                 className={`inline-flex px-3 py-1 rounded-pebble text-label-small font-bold ${
-                  METRIC_BADGE[bullet.metric_type] ??
-                  'bg-surface-container text-on-surface'
+                  METRIC_BADGE[bullet.metric_type] ?? 'bg-surface-container text-on-surface'
                 }`}
                 data-testid="metric-badge"
               >

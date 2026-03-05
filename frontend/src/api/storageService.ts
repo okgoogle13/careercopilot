@@ -6,7 +6,7 @@ const BUCKET_NAME = 'user_assets';
 export const uploadFile = async (file: File, path: string) => {
   const fileRef = ref(storage, `${BUCKET_NAME}/${path}`);
   await uploadBytes(fileRef, file);
-  
+
   const publicUrl = await getDownloadURL(fileRef);
   return publicUrl;
 };
@@ -19,10 +19,10 @@ export const deleteFile = async (path: string) => {
 export const listFiles = async (path: string) => {
   const listRef = ref(storage, `${BUCKET_NAME}/${path}`);
   const res = await listAll(listRef);
-  
-  return res.items.map(item => ({
+
+  return res.items.map((item) => ({
     name: item.name,
-    path: item.fullPath
+    path: item.fullPath,
   }));
 };
 

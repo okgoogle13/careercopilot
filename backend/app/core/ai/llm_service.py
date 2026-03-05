@@ -7,16 +7,18 @@ from typing import Any
 from app.core.ai_config import get_ai_config
 from app.core.database import SessionLocal
 from app.core.genkit_init import is_genkit_enabled
-from app.core.loguru_config import get_logger
+from app.core.observability import get_logger
 from app.genkit_flows.llm_service import generate_llm_response
 from app.schemas.ai import LlmRequest, LlmResponse
 from app.services.cache_store import SQLAlchemyCacheStore
 
 logger = get_logger(__name__)
 
+
 def get_cache_store() -> SQLAlchemyCacheStore:
     """Helper to get a cache store with a fresh DB session."""
     return SQLAlchemyCacheStore(SessionLocal())
+
 
 def _build_cache_key(request: LlmRequest) -> str:
     request_payload = request.model_dump(mode="json", exclude_none=True)
@@ -95,9 +97,11 @@ async def get_llm_response(request: LlmRequest) -> LlmResponse:
             error=str(ai_err),
         )
 
+
 def clear_cache_pattern(pattern: str = "llm:") -> int:
     """Clear cached LLM responses matching a pattern."""
     return get_cache_store().clear_pattern(pattern)
+
 
 def get_cache_stats() -> dict[str, Any]:
     """Get cache statistics."""

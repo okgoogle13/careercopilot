@@ -4,20 +4,20 @@
  */
 
 export interface STARInput {
-    situation: string;
-    task: string;
-    action: string;
-    result: string;
+  situation: string;
+  task: string;
+  action: string;
+  result: string;
 }
 
 /**
  * Generate expert KSC response using APS ILS standards
  */
 export function scaffoldKSCResponse(criteria: string, star: STARInput): string {
-    const { situation, task, action, result } = star;
-    const metricsAnalysis = extractQuantifiableMetrics(result);
+  const { situation, task, action, result } = star;
+  const metricsAnalysis = extractQuantifiableMetrics(result);
 
-    return `# Key Selection Criteria Response
+  return `# Key Selection Criteria Response
 
 ## Addressing the Criterion
 **"${criteria || '[Insert Capability Framework Criterion]'}"**
@@ -70,16 +70,16 @@ ${metricsAnalysis}
  * Extract or suggest quantifiable metrics from the result
  */
 export function extractQuantifiableMetrics(result: string): string {
-    if (!result) return '';
+  if (!result) return '';
 
-    // Simple heuristic for numbers
-    const hasNumbers = /\d+/.test(result);
+  // Simple heuristic for numbers
+  const hasNumbers = /\d+/.test(result);
 
-    if (hasNumbers) {
-        return `The outcomes included specific measurable achievements detailed above, demonstrating tangible impact ($D_{star} boost applied).`;
-    }
+  if (hasNumbers) {
+    return `The outcomes included specific measurable achievements detailed above, demonstrating tangible impact ($D_{star} boost applied).`;
+  }
 
-    return `*Consider adding quantifiable metrics such as:*
+  return `*Consider adding quantifiable metrics such as:*
     - **Client outcomes:** Number of individuals/families supported
     - **Efficiency gains:** Percentage reduction in processing time
     - **Stakeholder engagement:** Number of partnerships established`;

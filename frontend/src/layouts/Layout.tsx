@@ -14,7 +14,9 @@ export function Layout({ children }: LayoutProps) {
         <Sidebar />
 
         {/* Main Content Area - Flex-1 fills remaining space */}
-        <main className="flex-1 min-h-screen w-full overflow-x-hidden bg-surface text-on-surface">{children}</main>
+        <main className="flex-1 min-h-screen w-full overflow-x-hidden bg-surface text-on-surface">
+          {children}
+        </main>
       </div>
     </div>
   );

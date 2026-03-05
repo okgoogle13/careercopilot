@@ -14,8 +14,7 @@ from typing import List
 
 from pydantic import BaseModel, Field
 
-from app.core.genkit_init import get_model
-from app.genkit_flows.flow_decorator import async_genkit_flow
+from app.core.genkit_init import async_genkit_flow, get_model
 
 logger = logging.getLogger(__name__)
 

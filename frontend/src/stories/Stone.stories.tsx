@@ -8,7 +8,6 @@ const meta: Meta<typeof Stone> = {
   component: Stone,
   tags: ['autodocs'],
   argTypes: {
-
     elevation: {
       control: 'select',
       options: ['flat', 'raised', 'floating'],
@@ -21,7 +20,6 @@ type Story = StoryObj<typeof Stone>;
 
 export const Default: Story = {
   args: {
-
     elevation: 'raised',
     header: (
       <div className="flex items-center gap-3">

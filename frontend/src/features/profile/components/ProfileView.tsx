@@ -15,8 +15,10 @@ import { useState } from 'react';
 import ResumeUploader from './ResumeUploader';
 
 // Assets
-const starfishCage = '/assets/kr-solidarity/specimen/kr-solidarity__specimen__triage-natural-history__v1.png';
-const wallpaper = '/assets/kr-solidarity/texture/kr-solidarity__substrate__kr-solidarity--texture--melbourne-laneway--v1__v1.png';
+const starfishCage =
+  '/assets/kr-solidarity/specimen/kr-solidarity__specimen__triage-natural-history__v1.png';
+const wallpaper =
+  '/assets/kr-solidarity/texture/kr-solidarity__substrate__kr-solidarity--texture--melbourne-laneway--v1__v1.png';
 
 /**
  * CareerCopilot Profile View ("The KrMotif Archive")
@@ -59,7 +61,9 @@ export function ProfileView() {
         <ProfileHeader
           name="Nishant Dougall"
           bio="Senior Full Stack Engineer / Metadata Architect"
-          identityTags={careerData?.skills?.slice(0, 3) || ['React.tsx', 'Neural.sys', 'Archival.Design']}
+          identityTags={
+            careerData?.skills?.slice(0, 3) || ['React.tsx', 'Neural.sys', 'Archival.Design']
+          }
           landAcknowledgment="Wurundjeri Woi-wurrung Country"
         />
 
@@ -67,7 +71,6 @@ export function ProfileView() {
           {/* Main Column - Career Strata */}
           <div className="lg:col-span-8 space-y-12">
             <Stone
-             
               elevation="raised"
               className="p-10 border-concrete-grey/10 bg-asphalt-black/40 backdrop-blur-md"
             >
@@ -121,7 +124,6 @@ export function ProfileView() {
           {/* Sidebar Column - Traits & Filaments */}
           <div className="lg:col-span-4 space-y-8">
             <Stone
-             
               elevation="floating"
               className="p-8 border-concrete-grey/10 bg-asphalt-black/20"
             >
@@ -155,7 +157,6 @@ export function ProfileView() {
             </Stone>
 
             <Stone
-             
               elevation="floating"
               className="p-8 border-concrete-grey/10 bg-asphalt-black/20"
             >
@@ -219,7 +220,6 @@ function TimelineItem({
 }) {
   return (
     <Stone
-     
       elevation="flat"
       className="p-6 border-concrete-grey/5 bg-white/5 hover:border-ink-gold/20 transition-all group overflow-hidden relative"
     >

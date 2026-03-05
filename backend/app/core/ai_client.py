@@ -12,7 +12,7 @@ from dataclasses import dataclass
 from typing import Any
 
 from .ai_config import AIConfigManager, AIModelType, AIProvider, ModelConfig
-from .monitoring import monitor_performance, track_ai_usage, track_error
+from .observability import monitor_performance, track_ai_usage, track_error
 
 # Remove OpenAI provider from supported providers
 SUPPORTED_PROVIDERS = [AIProvider.GOOGLE_AI, AIProvider.ANTHROPIC]
@@ -304,7 +304,7 @@ class AIClientManager:
             self.clients[AIProvider.ANTHROPIC] = AnthropicClient(self.config_manager)
 
         if not self.clients:
-                raise ValueError("No AI provider credentials found in configuration")
+            raise ValueError("No AI provider credentials found in configuration")
 
     @monitor_performance("ai_text_generation")
     async def generate_text(self, request: AIRequest) -> AIResponse:
@@ -312,6 +312,7 @@ class AIClientManager:
 
         # 1. Try Genkit awareness if enabled
         from app.core.genkit_init import get_model, is_genkit_enabled
+
         if is_genkit_enabled():
             model = get_model()
             if model:
@@ -339,10 +340,12 @@ class AIClientManager:
                         cached=False,
                         cost_estimate=0.0,
                         metadata={"genkit": True},
-                        request_id=f"genkit_{int(start_time)}"
+                        request_id=f"genkit_{int(start_time)}",
                     )
                 except Exception as e:
-                    logger.warning(f"Genkit managed generation failed: {e}. Falling back to legacy provider logic.")
+                    logger.warning(
+                        f"Genkit managed generation failed: {e}. Falling back to legacy provider logic."
+                    )
 
         # Get service configuration
         service_config = self.config_manager.get_service_config(request.service_name)

@@ -13,9 +13,13 @@ interface ResumeRulesState {
   violations: Violation[];
   overallScore: number | null;
   scanSimulation: string | null;
-  
+
   setStrictness: (mode: 'strict' | 'moderate' | 'light') => void;
-  setAuditResult: (result: { violations: Violation[]; overallScore: number; scanSimulation: string }) => void;
+  setAuditResult: (result: {
+    violations: Violation[];
+    overallScore: number;
+    scanSimulation: string;
+  }) => void;
   clearViolations: () => void;
 }
 
@@ -28,18 +32,20 @@ export const useResumeRulesStore = create<ResumeRulesState>()(
       scanSimulation: null,
 
       setStrictness: (mode) => set({ strictnessMode: mode }),
-      
-      setAuditResult: (result) => set({
-        violations: result.violations,
-        overallScore: result.overallScore,
-        scanSimulation: result.scanSimulation
-      }),
 
-      clearViolations: () => set({ 
-        violations: [], 
-        overallScore: null,
-        scanSimulation: null 
-      })
+      setAuditResult: (result) =>
+        set({
+          violations: result.violations,
+          overallScore: result.overallScore,
+          scanSimulation: result.scanSimulation,
+        }),
+
+      clearViolations: () =>
+        set({
+          violations: [],
+          overallScore: null,
+          scanSimulation: null,
+        }),
     }),
     { name: 'resume-rules-store' }
   )

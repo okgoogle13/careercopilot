@@ -33,7 +33,7 @@ export interface AuditResponse {
 
 export const auditResume = async (request: AuditRequest): Promise<AuditResult> => {
   const response = await axiosInstance.post<AuditResponse>('/resume-audit/evaluate', request);
-  
+
   if (!response.data?.success) {
     throw new Error('Audit failed');
   }
@@ -44,8 +44,8 @@ export const auditResume = async (request: AuditRequest): Promise<AuditResult> =
 export const getAuditHistory = async (limit = 10) => {
   // Assuming we have an endpoint for this in the backend
   const response = await axiosInstance.get('/resume-audit/history', {
-    params: { limit }
+    params: { limit },
   });
-  
+
   return response.data;
 };

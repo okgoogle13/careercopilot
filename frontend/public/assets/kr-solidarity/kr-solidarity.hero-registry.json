@@ -112,7 +112,11 @@
           { "layer": "atmospheric", "speed": 0.5, "direction": "up" },
           { "layer": "resistance", "speed": 0.85, "direction": "up" }
         ],
-        "scroll_reveal": { "opacity_start": 0, "transform_start": "translateY(24px)", "duration_ms": 600 }
+        "scroll_reveal": {
+          "opacity_start": 0,
+          "transform_start": "translateY(24px)",
+          "duration_ms": 600
+        }
       }
     },
     {
@@ -161,7 +165,11 @@
           { "layer": "substrate", "speed": 0.15, "direction": "down" },
           { "layer": "spiritual", "speed": 0.75, "direction": "up" }
         ],
-        "scroll_reveal": { "opacity_start": 0, "transform_start": "translateY(16px)", "duration_ms": 450 }
+        "scroll_reveal": {
+          "opacity_start": 0,
+          "transform_start": "translateY(16px)",
+          "duration_ms": 450
+        }
       }
     },
     {
@@ -210,7 +218,11 @@
           { "layer": "substrate", "speed": 0.2, "direction": "down" },
           { "layer": "resistance", "speed": 0.9, "direction": "up" }
         ],
-        "scroll_reveal": { "opacity_start": 0, "transform_start": "translateY(20px)", "duration_ms": 500 }
+        "scroll_reveal": {
+          "opacity_start": 0,
+          "transform_start": "translateY(20px)",
+          "duration_ms": 500
+        }
       }
     },
     {
@@ -268,7 +280,11 @@
           { "layer": "substrate", "speed": 0.15, "direction": "down" },
           { "layer": "cultural", "speed": 0.8, "direction": "up" }
         ],
-        "scroll_reveal": { "opacity_start": 0, "transform_start": "translateY(20px)", "duration_ms": 550 }
+        "scroll_reveal": {
+          "opacity_start": 0,
+          "transform_start": "translateY(20px)",
+          "duration_ms": 550
+        }
       }
     }
   ],
@@ -281,6 +297,10 @@
     "manifest_validated": true,
     "duplicate_ids_resolved": true,
     "category_mapping_fixed": true,
-    "generator_bugs_fixed": ["CATEGORY_TO_LAYER missing direct layer mappings", "parseUiKitFilename wrong naming convention", "SVG subdirectory duplicate IDs"]
+    "generator_bugs_fixed": [
+      "CATEGORY_TO_LAYER missing direct layer mappings",
+      "parseUiKitFilename wrong naming convention",
+      "SVG subdirectory duplicate IDs"
+    ]
   }
 }

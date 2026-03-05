@@ -19,7 +19,7 @@ from app.schemas.manifest_integration import (
     ManifestValidationResult,
 )
 
-router = APIRouter(prefix="/api/manifest-integration", tags=["manifest-integration"])
+router = APIRouter()
 
 # Manifest file path (update as needed)
 MANIFEST_PATH = Path("frontend/public/assets/kerala-rage-kr-solidarity-manifest.json")
@@ -29,6 +29,7 @@ ASSET_PACKAGES_DIR = Path("./asset-packages")
 # ============================================================================
 # MANIFEST MANAGEMENT
 # ============================================================================
+
 
 def load_manifest() -> dict:
     """Load current manifest."""
@@ -41,7 +42,7 @@ def load_manifest() -> dict:
         "last_updated": datetime.utcnow().isoformat(),
         "strategy": "Political/Cultural Design System",
         "assets": [],
-        "asset_summary": {"total_assets": 0, "by_category": {}, "by_priority": {}}
+        "asset_summary": {"total_assets": 0, "by_category": {}, "by_priority": {}},
     }
 
 
@@ -61,6 +62,7 @@ def save_manifest(manifest: dict) -> bool:
 # ============================================================================
 # ENDPOINTS
 # ============================================================================
+
 
 @router.post("/add-assets")
 async def add_assets_to_manifest(request: ManifestUpdateRequest):
@@ -97,9 +99,9 @@ async def add_assets_to_manifest(request: ManifestUpdateRequest):
     manifest["asset_summary"]["total_assets"] = len(manifest["assets"])
 
     # Recalculate summary by category and priority
-    by_category = {}
-    by_priority = {}
-    by_status = {}
+    by_category: dict[str, int] = {}
+    by_priority: dict[str, int] = {}
+    by_status: dict[str, int] = {}
 
     for asset in manifest["assets"]:
         category = asset.get("category", "unknown")
@@ -138,7 +140,7 @@ async def add_assets_to_manifest(request: ManifestUpdateRequest):
             "assets_added": added_count,
             "new_version": manifest["version"],
             "total_assets": manifest["asset_summary"]["total_assets"],
-            "summary": manifest["asset_summary"]
+            "summary": manifest["asset_summary"],
         }
     else:
         raise HTTPException(status_code=500, detail="Failed to save manifest")
@@ -183,8 +185,10 @@ async def validate_manifest() -> ManifestValidationResult:
         missing = [f for f in required_fields if f not in asset]
         if missing:
             errors.append(f"{asset.get('id', 'unknown')}: missing {missing}")
-    checks["required_fields"] = len([a for a in manifest.get("assets", [])
-                                     if all(f in a for f in required_fields)]) == asset_count
+    checks["required_fields"] = (
+        len([a for a in manifest.get("assets", []) if all(f in a for f in required_fields)])
+        == asset_count
+    )
     print(f"  • Required fields: {'✅' if checks['required_fields'] else '❌'}")
 
     # Check 4: Valid categories
@@ -212,8 +216,8 @@ async def validate_manifest() -> ManifestValidationResult:
     print(f"  • Valid priorities: {'✅' if checks['valid_priorities'] else '⚠️'}")
 
     # Check 6: Summary accuracy
-    by_category = {}
-    by_priority = {}
+    by_category: dict[str, int] = {}
+    by_priority: dict[str, int] = {}
     for asset in manifest.get("assets", []):
         cat = asset.get("category", "unknown")
         pri = asset.get("priority", "MEDIUM")
@@ -223,7 +227,7 @@ async def validate_manifest() -> ManifestValidationResult:
     manifest_by_cat = manifest.get("asset_summary", {}).get("by_category", {})
     manifest_by_pri = manifest.get("asset_summary", {}).get("by_priority", {})
 
-    summary_matches = (by_category == manifest_by_cat and by_priority == manifest_by_pri)
+    summary_matches = by_category == manifest_by_cat and by_priority == manifest_by_pri
     if not summary_matches:
         warnings.append("Summary statistics do not match asset list (run recalculate)")
     checks["summary_accuracy"] = summary_matches
@@ -241,7 +245,7 @@ async def validate_manifest() -> ManifestValidationResult:
         by_status={a.get("status"): 1 for a in manifest.get("assets", [])},
         errors=errors,
         warnings=warnings,
-        checks_passed=checks
+        checks_passed=checks,
     )
 
 
@@ -269,7 +273,7 @@ async def recalculate_manifest_summary():
         "total_assets": len(manifest.get("assets", [])),
         "by_category": by_category,
         "by_priority": by_priority,
-        "by_status": by_status
+        "by_status": by_status,
     }
 
     manifest["last_updated"] = datetime.utcnow().isoformat()
@@ -303,7 +307,9 @@ async def backfill_asset_metadata(request: BackfillAssetRequest) -> BackfillResu
             break
 
     if not asset:
-        raise HTTPException(status_code=404, detail=f"Asset {request.asset_id} not found in manifest")
+        raise HTTPException(
+            status_code=404, detail=f"Asset {request.asset_id} not found in manifest"
+        )
 
     # Update asset with new metadata
     asset["category"] = request.category
@@ -329,7 +335,7 @@ async def backfill_asset_metadata(request: BackfillAssetRequest) -> BackfillResu
             message=f"Metadata backfilled for {request.asset_id}",
             metadata_created=True,
             manifest_updated=True,
-            validation_status="pending"
+            validation_status="pending",
         )
     else:
         raise HTTPException(status_code=500, detail="Failed to save manifest")
@@ -349,6 +355,7 @@ async def run_integration_test(asset_id: str) -> AssetIntegrationTestResult:
     print(f"\n🧪 Running integration test for {asset_id}")
 
     import time
+
     start_time = time.time()
 
     try:
@@ -366,7 +373,7 @@ async def run_integration_test(asset_id: str) -> AssetIntegrationTestResult:
                 test_name="asset_exists",
                 passed=False,
                 error_message="Asset not found in manifest",
-                execution_time_ms=(time.time() - start_time) * 1000
+                execution_time_ms=(time.time() - start_time) * 1000,
             )
 
         # Test 1: File exists
@@ -380,7 +387,14 @@ async def run_integration_test(asset_id: str) -> AssetIntegrationTestResult:
         print(f"  • Required fields: {'✅' if has_required else '❌'}")
 
         # Test 3: Valid category
-        valid_category = asset.get("category") in {"devotional", "portrait", "symbol", "street", "abstract", "texture"}
+        valid_category = asset.get("category") in {
+            "devotional",
+            "portrait",
+            "symbol",
+            "street",
+            "abstract",
+            "texture",
+        }
         print(f"  • Valid category: {'✅' if valid_category else '❌'}")
 
         # Test 4: Specs complete
@@ -395,7 +409,7 @@ async def run_integration_test(asset_id: str) -> AssetIntegrationTestResult:
             test_name="component_integration",
             passed=passed,
             error_message=None if passed else "One or more checks failed",
-            execution_time_ms=(time.time() - start_time) * 1000
+            execution_time_ms=(time.time() - start_time) * 1000,
         )
 
     except Exception as e:
@@ -404,7 +418,7 @@ async def run_integration_test(asset_id: str) -> AssetIntegrationTestResult:
             test_name="component_integration",
             passed=False,
             error_message=str(e),
-            execution_time_ms=(time.time() - start_time) * 1000
+            execution_time_ms=(time.time() - start_time) * 1000,
         )
 
 
@@ -436,7 +450,7 @@ async def generate_deployment_plan(request: ManifestUpdateRequest) -> ManifestDe
             "Performance tests (load time < 2s)",
             "Accessibility audit (WCAG AA)",
             "Cross-browser compatibility",
-            "Review feedback verification"
+            "Review feedback verification",
         ],
         rollback_plan=(
             "1. Keep backup of previous manifest.json\n"
@@ -453,9 +467,9 @@ async def generate_deployment_plan(request: ManifestUpdateRequest) -> ManifestDe
             "[ ] Team notified of deployment window",
             "[ ] Monitoring dashboards active",
             "[ ] Rollback procedure documented",
-            "[ ] Post-deployment sanity checks planned"
+            "[ ] Post-deployment sanity checks planned",
         ],
-        estimated_deployment_time_minutes=5.0
+        estimated_deployment_time_minutes=5.0,
     )
 
     print("  ✅ Deployment plan generated")
@@ -473,11 +487,7 @@ async def export_manifest():
 
     manifest = load_manifest()
 
-    return {
-        "success": True,
-        "manifest": manifest,
-        "exported_at": datetime.utcnow().isoformat()
-    }
+    return {"success": True, "manifest": manifest, "exported_at": datetime.utcnow().isoformat()}
 
 
 @router.post("/import")
@@ -507,7 +517,7 @@ async def import_manifest(file: UploadFile = File(...)):
             return {
                 "success": True,
                 "message": "Manifest imported",
-                "asset_count": len(imported_manifest.get("assets", []))
+                "asset_count": len(imported_manifest.get("assets", [])),
             }
         else:
             raise Exception("Failed to save imported manifest")

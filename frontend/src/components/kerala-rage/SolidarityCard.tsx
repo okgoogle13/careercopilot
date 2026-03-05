@@ -81,13 +81,15 @@ export const SolidarityCard: React.FC<SolidarityCardProps> = ({
     <motion.div
       layout
       style={{
-        backgroundColor: variant === 'ghost' ? 'transparent' : 'var(--sys-color-charcoalBackground-base)',
+        backgroundColor:
+          variant === 'ghost' ? 'transparent' : 'var(--sys-color-charcoalBackground-base)',
         borderRadius: '32px 8px 28px 12px', // Jar archetype asymmetric radius
-        boxShadow: variant === 'standard'
-          ? '0 4px 16px rgba(0, 0, 0, 0.25)'
-          : variant === 'active'
-          ? '0 0 24px rgba(218, 246, 116, 0.2), 0 4px 16px rgba(0, 0, 0, 0.25)'
-          : 'none',
+        boxShadow:
+          variant === 'standard'
+            ? '0 4px 16px rgba(0, 0, 0, 0.25)'
+            : variant === 'active'
+              ? '0 0 24px rgba(218, 246, 116, 0.2), 0 4px 16px rgba(0, 0, 0, 0.25)'
+              : 'none',
       }}
       className={cn(
         'border relative overflow-hidden',
@@ -103,9 +105,7 @@ export const SolidarityCard: React.FC<SolidarityCardProps> = ({
       {/* TODO[asset]: Replace with screenprint-grit texture asset from kr-solidarity manifest */}
       {/* <div className="absolute inset-0 pointer-events-none opacity-[0.03] bg-texture-grit" /> */}
 
-      <div className="relative z-10">
-        {children}
-      </div>
+      <div className="relative z-10">{children}</div>
     </motion.div>
   );
 };

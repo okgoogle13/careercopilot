@@ -89,7 +89,7 @@ def _load_module():
     ai_config_module._global_config = AIConfigManager()
     ai_config_module.get_ai_config = lambda: ai_config_module._global_config
 
-    monitoring_module = ModuleType("app.core.monitoring")
+    monitoring_module = ModuleType("app.core.observability")
     monitoring_calls = {"usage": [], "errors": []}
 
     def monitor_performance(_name):
@@ -123,7 +123,7 @@ def _load_module():
         "app": app_module,
         "app.core": core_module,
         "app.core.ai_config": ai_config_module,
-        "app.core.monitoring": monitoring_module,
+        "app.core.observability": monitoring_module,
     }
 
     with _patched_modules(stubs):

@@ -46,7 +46,10 @@ export function MetricCard({
     >
       <div
         className="absolute inset-0 opacity-[0.02] pointer-events-none"
-        style={{ backgroundImage: 'radial-gradient(var(--color-paper-white) 1px, transparent 1px)', backgroundSize: '12px 12px' }}
+        style={{
+          backgroundImage: 'radial-gradient(var(--color-paper-white) 1px, transparent 1px)',
+          backgroundSize: '12px 12px',
+        }}
       />
 
       <div className="relative z-10">

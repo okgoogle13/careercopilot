@@ -160,7 +160,6 @@ export function Dashboard() {
         {/* Hero Metric Bar: High Fidelity Calibration */}
         <motion.div variants={item as any}>
           <Stone
-           
             elevation="raised"
             className="p-8 md:p-12 bg-asphalt-black/40 border-ink-gold/20 flex flex-col md:flex-row items-center gap-12 overflow-hidden relative"
           >
@@ -280,7 +279,6 @@ export function Dashboard() {
                 className="group"
               >
                 <Stone
-                 
                   elevation="floating"
                   className="p-8 border-concrete-grey/10 bg-asphalt-black/20 group-hover:bg-asphalt-black/40 group-hover:border-ink-gold/30 transition-all duration-500 overflow-hidden relative"
                 >

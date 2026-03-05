@@ -25,14 +25,14 @@ const config: Config = {
         ...(m3Patch?.theme?.extend?.colors || {}),
         // Lab Wren Metal Blue - Ripples & accents
         'lab-wren-metal-blue': 'var(--sys-color-labWrenMetalBlue-base)',
-        
+
         // Semantic Mappings (Kerala Rage KrSolidarity)
         border: 'var(--color-concrete-grey)',
         input: 'var(--color-concrete-grey)',
         ring: 'var(--color-ink-gold)',
         background: 'var(--color-asphalt-black)',
         foreground: 'var(--color-paper-white)',
-        
+
         primary: {
           DEFAULT: 'var(--color-ink-gold)',
           foreground: 'var(--color-asphalt-black)',

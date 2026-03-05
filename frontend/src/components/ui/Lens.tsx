@@ -132,7 +132,8 @@ export const Lens = forwardRef<HTMLInputElement, LensProps>(
     // Variant-specific styles (KeralaRage KrSolidarity)
     const containerStyle = {
       borderRadius: '24px 8px 20px 4px', // Lens archetype asymmetric radius
-      backgroundColor: variant === 'filled' ? 'var(--sys-color-charcoalBackground-steps-3)' : 'transparent',
+      backgroundColor:
+        variant === 'filled' ? 'var(--sys-color-charcoalBackground-steps-3)' : 'transparent',
       border: '2px solid',
       borderColor: error
         ? 'var(--sys-color-solidarityRed-base)'
@@ -316,7 +317,8 @@ export const LensArea = forwardRef<HTMLTextAreaElement, LensAreaProps>(
 
     const containerStyle = {
       borderRadius: '24px 8px 20px 4px', // Lens archetype asymmetric radius
-      backgroundColor: variant === 'filled' ? 'var(--sys-color-charcoalBackground-steps-3)' : 'transparent',
+      backgroundColor:
+        variant === 'filled' ? 'var(--sys-color-charcoalBackground-steps-3)' : 'transparent',
       border: '2px solid',
       borderColor: error
         ? 'var(--sys-color-solidarityRed-base)'

@@ -8,7 +8,7 @@ export interface CalculatedPressure {
 
 /**
  * Calculates variable typography settings based on scroll progress and a pressure profile.
- * 
+ *
  * @param scrollProgress A value between 0 and 1 representing the scroll position.
  * @param profile The typography pressure profile to apply.
  * @returns An object containing calculated weight, tracking (as a fraction of width), and contrast factor.
@@ -23,7 +23,7 @@ export function calculatePressure(
   // Fallback to a neutral state if no profile is provided
   if (!profile) {
     return {
-      weight: 400 + (progress * 300), // Default range 400->700
+      weight: 400 + progress * 300, // Default range 400->700
       tracking: 100, // Default width
       contrast: 1,
     };
@@ -82,5 +82,5 @@ export const DEFAULT_PROFILES: Record<string, TypographyPressureProfile> = {
     weight_range: [600, 700],
     tracking_range: [100, 100],
     contrast_ratio: 4,
-  }
+  },
 };

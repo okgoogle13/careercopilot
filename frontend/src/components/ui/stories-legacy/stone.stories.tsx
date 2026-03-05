@@ -9,7 +9,9 @@ const meta: Meta<typeof Stone> = {
   args: {
     mode: 'KrDark',
     elevation: 'raised',
-    children: <p className="text-[var(--sys-color-worker-ash-steps-6)]">Primary container content</p>,
+    children: (
+      <p className="text-[var(--sys-color-worker-ash-steps-6)]">Primary container content</p>
+    ),
   },
 };
 
@@ -39,6 +41,8 @@ export const Disabled: Story = {
 export const Error: Story = {
   args: {
     className: 'border-[var(--sys-color-solidarityRed-base)]',
-    children: <p className="text-[var(--sys-color-solidarityRed-base)]">Error emphasis container</p>,
+    children: (
+      <p className="text-[var(--sys-color-solidarityRed-base)]">Error emphasis container</p>
+    ),
   },
 };

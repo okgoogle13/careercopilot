@@ -4,7 +4,7 @@ import { ManifestoSlab, SolidarityCard, ActionButton } from '../../../components
 
 /**
  * KrDarkAnalysis (Hi-Fi)
- * 
+ *
  * Tactical capability audit.
  * Visualizes extracted mastery using staggered matrix and atmospheric radar elements.
  */
@@ -28,7 +28,7 @@ export const KrDarkAnalysis: React.FC = () => {
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.8 }}
       >
-        <ManifestoSlab 
+        <ManifestoSlab
           title="Identified Skill Sets"
           subtitle="Tactical extraction from the collective record."
           className="w-full"
@@ -42,7 +42,7 @@ export const KrDarkAnalysis: React.FC = () => {
             key={skill.title}
             initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 + (i * 0.1), duration: 0.6 }}
+            transition={{ delay: 0.2 + i * 0.1, duration: 0.6 }}
           >
             <SolidarityCard className="p-8 flex flex-col gap-8 relative group hover:border-ink-gold/30 transition-colors">
               <div className="flex justify-between items-start">
@@ -61,25 +61,31 @@ export const KrDarkAnalysis: React.FC = () => {
 
               <div className="space-y-4">
                 <div className="flex justify-between items-center">
-                  <span className="font-annotation text-[9px] uppercase tracking-widest text-paper-white/30">Mastery Level</span>
+                  <span className="font-annotation text-[9px] uppercase tracking-widest text-paper-white/30">
+                    Mastery Level
+                  </span>
                   <span className="font-mono text-[9px] text-paper-white/30">{skill.mastery}%</span>
                 </div>
                 <div className="w-full bg-surface-KrDark-concrete-grey-high/20 h-1.5 rounded-full overflow-hidden">
-                  <motion.div 
+                  <motion.div
                     initial={{ width: 0 }}
                     animate={{ width: `${skill.mastery}%` }}
-                    transition={shouldReduceMotion ? { duration: 0 } : { delay: 1 + (i * 0.1), duration: 1.5, ease: "circOut" }}
+                    transition={
+                      shouldReduceMotion
+                        ? { duration: 0 }
+                        : { delay: 1 + i * 0.1, duration: 1.5, ease: 'circOut' }
+                    }
                     className="bg-ink-gold h-full shadow-ink-glow"
                   />
                 </div>
               </div>
 
               <div className="pt-4 border-t border-surface-KrDark-concrete-grey-high/20 opacity-0 group-hover:opacity-100 transition-opacity">
-                <ActionButton 
-                  variant="secondary" 
-                  label="VIEW DETAILS" 
+                <ActionButton
+                  variant="secondary"
+                  label="VIEW DETAILS"
                   size="sm"
-                  className="w-full py-2 text-[9px] tracking-[0.2em]" 
+                  className="w-full py-2 text-[9px] tracking-[0.2em]"
                 />
               </div>
             </SolidarityCard>
@@ -89,17 +95,17 @@ export const KrDarkAnalysis: React.FC = () => {
 
       {/* SECTION 3: The Radar Ambient Layer */}
       {/* TODO[asset]: Analysis Radar Motif overlay (Fixed position, Z-0, 5% opacity) */}
-      
-      <motion.div 
+
+      <motion.div
         initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 10 }}
         animate={{ opacity: 0.4, y: 0 }}
         transition={{ delay: 2 }}
         className="mt-12 text-center"
       >
-        <ActionButton 
-          variant="primary" 
-          label="GENERATE CONSOLIDATED REPORT" 
-          className="px-16 py-4 text-xs tracking-widest shadow-viscous" 
+        <ActionButton
+          variant="primary"
+          label="GENERATE CONSOLIDATED REPORT"
+          className="px-16 py-4 text-xs tracking-widest shadow-viscous"
         />
       </motion.div>
     </div>

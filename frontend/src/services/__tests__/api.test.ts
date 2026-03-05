@@ -28,7 +28,7 @@ describe('realApi Service', () => {
     });
 
     const result = await realApi.getAnalysisData();
-    
+
     expect(global.fetch).toHaveBeenCalledWith(
       expect.stringContaining('/analysis/'),
       expect.any(Object)

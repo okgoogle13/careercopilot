@@ -1,15 +1,21 @@
 /**
  * Kerala Rage — KR Solidarity Asset Registry
- * 
+ *
  * DYNAMIC REGISTRY: This file now imports data from the canonical manifest.json.
- * 
+ *
  * @see /Users/okgoogle13/Projects/careercopilot/frontend/public/assets/kerala-rage-kr-solidarity-manifest.json
  */
 
 import manifest from '../../public/assets/kerala-rage-kr-solidarity-manifest.json';
 
 export type AssetPriority = 'CRITICAL' | 'HIGH' | 'MEDIUM';
-export type AssetCategory = 'devotional' | 'portrait' | 'symbol' | 'abstract' | 'street' | 'texture';
+export type AssetCategory =
+  | 'devotional'
+  | 'portrait'
+  | 'symbol'
+  | 'abstract'
+  | 'street'
+  | 'texture';
 
 export interface KRAssetSpecs {
   aspect_ratio: string;
@@ -43,7 +49,7 @@ export interface KRAssetMetadata {
   priority: AssetPriority;
   status: string;
   intended_context: string;
-  
+
   // Canon-grade prescriptive fields
   functional_role: string[];
   semantic_weight: 'heavy' | 'medium' | 'light';
@@ -52,7 +58,7 @@ export interface KRAssetMetadata {
   allowed_overlay_types: string[];
   recommended_pairings: string[];
   review_triggers: string[];
-  
+
   specs: KRAssetSpecs;
   components_allowed: string[];
 }
@@ -61,11 +67,15 @@ export interface KRAssetMetadata {
  * Central registry of all Kerala Rage solidarity assets.
  * Dynamically generated from manifest.json.
  */
-export const KR_SOLIDARITY_ASSETS: Record<string, KRAssetMetadata> = 
-  (manifest.assets as any[]).reduce((acc, asset) => {
+export const KR_SOLIDARITY_ASSETS: Record<string, KRAssetMetadata> = (
+  manifest.assets as any[]
+).reduce(
+  (acc, asset) => {
     acc[asset.id] = asset as KRAssetMetadata;
     return acc;
-  }, {} as Record<string, KRAssetMetadata>);
+  },
+  {} as Record<string, KRAssetMetadata>
+);
 
 /**
  * Get all asset IDs in the registry.
@@ -85,14 +95,14 @@ export function getAssetById(assetId: string): KRAssetMetadata | undefined {
  * Get all assets by category.
  */
 export function getAssetsByCategory(category: AssetCategory): KRAssetMetadata[] {
-  return Object.values(KR_SOLIDARITY_ASSETS).filter(asset => asset.category === category);
+  return Object.values(KR_SOLIDARITY_ASSETS).filter((asset) => asset.category === category);
 }
 
 /**
  * Get all assets by priority.
  */
 export function getAssetsByPriority(priority: AssetPriority): KRAssetMetadata[] {
-  return Object.values(KR_SOLIDARITY_ASSETS).filter(asset => asset.priority === priority);
+  return Object.values(KR_SOLIDARITY_ASSETS).filter((asset) => asset.priority === priority);
 }
 
 /**

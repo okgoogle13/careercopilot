@@ -10,14 +10,13 @@ const useFileUpload = (file: File | null, userId: string) => {
       return;
     }
 
-    console.warn("File upload not implemented in Supabase migration yet.");
+    console.warn('File upload not implemented in Supabase migration yet.');
     // Simulate upload
     setProgress(50);
     setTimeout(() => {
       setProgress(100);
-      setDownloadURL("https://placeholder.url/file.pdf");
+      setDownloadURL('https://placeholder.url/file.pdf');
     }, 1000);
-
   }, [file, userId]);
 
   return { progress, downloadURL, error };

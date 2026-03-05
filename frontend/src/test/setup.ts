@@ -9,12 +9,13 @@ Object.defineProperty(global, 'import', {
         VITE_FIREBASE_PROJECT_ID: 'test-project',
         VITE_FIREBASE_STORAGE_BUCKET: 'test-bucket',
         VITE_API_URL: 'http://localhost:8000',
-      }
-    }
-  }
-});import { cleanup } from '@testing-library/react';
+      },
+    },
+  },
+});
+import { cleanup } from '@testing-library/react';
 
 // Cleanup after each test
 afterEach(() => {
-    cleanup();
+  cleanup();
 });

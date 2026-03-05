@@ -4,7 +4,7 @@ import { SolidarityCard, ActionButton, UnifiedColumn } from '../../../components
 
 /**
  * KrDarkSearch (Hi-Fi)
- * 
+ *
  * Strategic opportunity discovery.
  * Features dense filter sidebar, tactical result cards, and atmospheric search pulses.
  */
@@ -25,8 +25,8 @@ export const KrDarkSearch: React.FC = () => {
       <div className="flex flex-col md:flex-row gap-6 items-center">
         <div className="relative flex-1 group">
           {/* TODO[asset]: Search Pulse motif overlay (Z-1) */}
-          <input 
-            type="text" 
+          <input
+            type="text"
             placeholder="PROBE THE COLLECTIVE ARCHIVE..."
             className="w-full rounded-pebble border border-surface-KrDark-concrete-grey-high/20 bg-asphalt-black/40 px-8 py-5 font-mono text-sm text-paper-white shadow-viscous transition-all duration-500 focus:border-ink-gold/40 focus:outline-none focus:ring-1 focus:ring-ink-gold/20"
           />
@@ -34,21 +34,30 @@ export const KrDarkSearch: React.FC = () => {
             <span className="font-mono text-[10px] tracking-widest uppercase">CTRL_S</span>
           </div>
         </div>
-        <ActionButton variant="primary" label="INITIATE PROBE" className="px-12 py-5 text-xs tracking-[0.2em] shrink-0" />
+        <ActionButton
+          variant="primary"
+          label="INITIATE PROBE"
+          className="px-12 py-5 text-xs tracking-[0.2em] shrink-0"
+        />
       </div>
 
       <div className="flex flex-1 gap-12 overflow-hidden">
         {/* SECTION 2: Filter Column */}
-        <UnifiedColumn 
-          title="TACTICAL_FILTERS" 
+        <UnifiedColumn
+          title="TACTICAL_FILTERS"
           className="w-72 shrink-0 h-full hidden lg:block border-r border-surface-KrDark-concrete-grey-high/20 pr-8"
         >
           <div className="space-y-10">
             <div className="space-y-4">
-              <label className="font-annotation text-[9px] uppercase tracking-[0.4em] text-paper-white/30">Sector Density</label>
+              <label className="font-annotation text-[9px] uppercase tracking-[0.4em] text-paper-white/30">
+                Sector Density
+              </label>
               <div className="flex flex-wrap gap-2">
-                {['Logistics', 'Defense', 'Extraction', 'Community'].map(tag => (
-                  <span key={tag} className="rounded-pebble border border-surface-KrDark-concrete-grey-high/20 bg-surface-KrDark-concrete-grey-high/10 px-3 py-1 text-[10px] font-mono font-bold uppercase text-paper-white/40 transition-colors cursor-pointer hover:border-ink-gold/20 hover:text-ink-gold">
+                {['Logistics', 'Defense', 'Extraction', 'Community'].map((tag) => (
+                  <span
+                    key={tag}
+                    className="rounded-pebble border border-surface-KrDark-concrete-grey-high/20 bg-surface-KrDark-concrete-grey-high/10 px-3 py-1 text-[10px] font-mono font-bold uppercase text-paper-white/40 transition-colors cursor-pointer hover:border-ink-gold/20 hover:text-ink-gold"
+                  >
                     {tag}
                   </span>
                 ))}
@@ -56,7 +65,9 @@ export const KrDarkSearch: React.FC = () => {
             </div>
 
             <div className="space-y-4">
-              <label className="font-annotation text-[9px] uppercase tracking-[0.4em] text-paper-white/30">Match Minimum</label>
+              <label className="font-annotation text-[9px] uppercase tracking-[0.4em] text-paper-white/30">
+                Match Minimum
+              </label>
               <div className="relative h-1 rounded-full overflow-hidden bg-surface-KrDark-concrete-grey-high/20">
                 <div className="absolute left-0 top-0 h-full w-3/4 bg-ink-gold/40" />
               </div>
@@ -90,12 +101,19 @@ export const KrDarkSearch: React.FC = () => {
                       {job.company} — Secure Station Area 7
                     </p>
                   </div>
-                  
+
                   <div className="flex flex-col items-end gap-6">
-                    <ActionButton variant="secondary" label="AUDIT POSITION" size="sm" className="px-6 py-2 text-[10px] tracking-widest" />
+                    <ActionButton
+                      variant="secondary"
+                      label="AUDIT POSITION"
+                      size="sm"
+                      className="px-6 py-2 text-[10px] tracking-widest"
+                    />
                     <div className="flex gap-2">
-                       <div className="w-1.5 h-1.5 rounded-full bg-ink-gold animate-pulse" />
-                       <span className="font-mono text-[9px] text-paper-white/20 uppercase">Active Broadcast</span>
+                      <div className="w-1.5 h-1.5 rounded-full bg-ink-gold animate-pulse" />
+                      <span className="font-mono text-[9px] text-paper-white/20 uppercase">
+                        Active Broadcast
+                      </span>
                     </div>
                   </div>
                 </div>

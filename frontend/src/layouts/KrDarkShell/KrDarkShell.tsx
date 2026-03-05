@@ -8,7 +8,7 @@ import { KrDarkAuth } from './views/KrDarkAuth';
 import { KrDarkDashboard } from './views/KrDarkDashboard';
 import { KrDarkFeed } from './views/KrDarkFeed';
 import { KrDarkKanban } from './views/KrDarkKanban';
-import { KrDarkLanding } from './views/KrDarkLanding'; 
+import { KrDarkLanding } from './views/KrDarkLanding';
 import { KrDarkOnboarding } from './views/KrDarkOnboarding';
 import { KrDarkIngestion } from './views/KrDarkIngestion';
 import { KrDarkAnalysis } from './views/KrDarkAnalysis';
@@ -19,7 +19,21 @@ import { KrDarkSettings } from './views/KrDarkSettings';
 import { KrDarkProfile } from './views/KrDarkProfile';
 import { KrDarkDesigner } from './views/KrDarkDesigner';
 
-type KrDarkView = 'landing' | 'auth' | 'onboarding' | 'feed' | 'dashboard' | 'kanban' | 'ingestion' | 'analysis' | 'search' | 'application' | 'editor' | 'settings' | 'profile' | 'designer';
+type KrDarkView =
+  | 'landing'
+  | 'auth'
+  | 'onboarding'
+  | 'feed'
+  | 'dashboard'
+  | 'kanban'
+  | 'ingestion'
+  | 'analysis'
+  | 'search'
+  | 'application'
+  | 'editor'
+  | 'settings'
+  | 'profile'
+  | 'designer';
 
 /**
  * KrDarkShell

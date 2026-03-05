@@ -9,8 +9,10 @@ import { CheckCircle, FileText, Fingerprint, Microscope } from 'lucide-react';
 import React, { useState } from 'react';
 
 // KrDark Assets
-const naturesClockwork = '/assets/kr-solidarity/specimen/kr-solidarity__specimen__triage-natural-history__v1.png';
-const paperGrain = '/assets/kr-solidarity/texture/kr-solidarity__substrate__kr-solidarity--texture--melbourne-laneway--v1__v1.png';
+const naturesClockwork =
+  '/assets/kr-solidarity/specimen/kr-solidarity__specimen__triage-natural-history__v1.png';
+const paperGrain =
+  '/assets/kr-solidarity/texture/kr-solidarity__substrate__kr-solidarity--texture--melbourne-laneway--v1__v1.png';
 
 type UploadStage = 'idle' | 'uploading' | 'extracting' | 'processing' | 'embedding' | 'complete';
 
@@ -117,7 +119,6 @@ export const IngestionPage: React.FC = () => {
       <div className="absolute bottom-10 right-10 w-96 h-96 grayscale opacity-5 pointer-events-none border-l border-t border-concrete-grey/20 rounded-tl-[120px]" />
 
       <Stone
-       
         elevation="floating"
         className="max-w-2xl w-full border-2 border-concrete-grey/5 shadow-maximum relative z-10"
       >

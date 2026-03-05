@@ -11,7 +11,11 @@ const meta: Meta<typeof Vessel> = {
     title: 'Application Milestones',
     icon: <Briefcase className="h-5 w-5" />,
     defaultExpanded: true,
-    children: <p className="text-[var(--sys-color-worker-ash-steps-6)]">Track draft, submitted, and interview stages.</p>,
+    children: (
+      <p className="text-[var(--sys-color-worker-ash-steps-6)]">
+        Track draft, submitted, and interview stages.
+      </p>
+    ),
   },
 };
 
@@ -42,6 +46,10 @@ export const Disabled: Story = {
 export const Error: Story = {
   args: {
     title: 'Validation Error',
-    children: <p className="text-[var(--sys-color-solidarityRed-base)]">Unable to load details for this accordion section.</p>,
+    children: (
+      <p className="text-[var(--sys-color-solidarityRed-base)]">
+        Unable to load details for this accordion section.
+      </p>
+    ),
   },
 };

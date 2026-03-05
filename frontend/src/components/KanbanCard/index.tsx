@@ -29,7 +29,7 @@ export interface KanbanCardProps {
 
 /**
  * KanbanCard
- * 
+ *
  * The "Command Center" task unit.
  * Features heavy tactile physics and high-contrast priority markers.
  */
@@ -41,10 +41,15 @@ export const KanbanCard: React.FC<KanbanCardProps> = ({
   priority,
   dueDate,
   onDragStart,
-  onSelect
+  onSelect,
 }) => {
-  const priorityColor = priority === 'high' ? 'text-solidarity-red' : priority === 'medium' ? 'text-ink-gold' : 'text-smoke-green';
-  
+  const priorityColor =
+    priority === 'high'
+      ? 'text-solidarity-red'
+      : priority === 'medium'
+        ? 'text-ink-gold'
+        : 'text-smoke-green';
+
   return (
     <motion.div
       layout
@@ -55,9 +60,9 @@ export const KanbanCard: React.FC<KanbanCardProps> = ({
       onDragStart={onDragStart}
       onClick={onSelect}
       className={cn(
-        "p-6 bg-charcoal-100 border border-blueprint-grey/20",
-        "rounded-stone shadow-viscous cursor-grab active:cursor-grabbing",
-        "relative flex flex-col gap-4 overflow-hidden"
+        'p-6 bg-charcoal-100 border border-blueprint-grey/20',
+        'rounded-stone shadow-viscous cursor-grab active:cursor-grabbing',
+        'relative flex flex-col gap-4 overflow-hidden'
       )}
       role="listitem"
       aria-label={`Kanban Task: ${title}`}
@@ -81,7 +86,7 @@ export const KanbanCard: React.FC<KanbanCardProps> = ({
       </div>
 
       <div className="flex justify-between items-end mt-4 relative z-10">
-        <div className={cn("text-xs font-bold uppercase tracking-widest", priorityColor)}>
+        <div className={cn('text-xs font-bold uppercase tracking-widest', priorityColor)}>
           {priority}
         </div>
         {dueDate && (

@@ -12,19 +12,10 @@ export interface ApiError {
 }
 
 export const isApiError = (error: any): error is ApiError => {
-  return (
-    error !== null &&
-    typeof error === 'object' &&
-    'code' in error &&
-    'message' in error
-  );
+  return error !== null && typeof error === 'object' && 'code' in error && 'message' in error;
 };
 
-export const createErrorResponse = (
-  code: string,
-  message: string,
-  details?: any
-): ApiError => {
+export const createErrorResponse = (code: string, message: string, details?: any): ApiError => {
   return {
     code,
     message,
@@ -32,13 +23,13 @@ export const createErrorResponse = (
   };
 };
 
-export type SkillProficiency = "Novice" | "Competent" | "Proficient" | "Expert" | "Master";
+export type SkillProficiency = 'Novice' | 'Competent' | 'Proficient' | 'Expert' | 'Master';
 
 export enum WorkType {
-  REMOTE = "Remote",
-  HYBRID = "Hybrid",
-  ONSITE = "On-site",
-  ANY = "Any"
+  REMOTE = 'Remote',
+  HYBRID = 'Hybrid',
+  ONSITE = 'On-site',
+  ANY = 'Any',
 }
 
 export interface PersonalInformation {
@@ -75,11 +66,11 @@ export interface MasterSkill {
 }
 
 export enum EntryType {
-  WORK_EXPERIENCE = "Work Experience",
-  PROJECT = "Project",
-  EDUCATION = "Education",
-  CERTIFICATION = "Certification",
-  VOLUNTEER = "Volunteer",
+  WORK_EXPERIENCE = 'Work Experience',
+  PROJECT = 'Project',
+  EDUCATION = 'Education',
+  CERTIFICATION = 'Certification',
+  VOLUNTEER = 'Volunteer',
 }
 
 export interface CareerEntry {

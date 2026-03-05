@@ -1,6 +1,12 @@
 import React, { useEffect, useState, useRef, useMemo } from 'react';
 import type { ResolvedLayer } from '../../utils/heroComposer';
-import type { Typography, AnimationProfile, LayerType, ColorBleedConfig, KineticLayerConfig } from '../../design/hero/heroTypes';
+import type {
+  Typography,
+  AnimationProfile,
+  LayerType,
+  ColorBleedConfig,
+  KineticLayerConfig,
+} from '../../design/hero/heroTypes';
 import { calculatePressure } from '../../utils/typographyPressure';
 
 interface LayeredHeroProps {
@@ -39,7 +45,7 @@ export const LayeredHero: React.FC<LayeredHeroProps> = ({
   // Resolve color bleed CSS variable from substrate layer semantic weight
   const bleedStyle = useMemo(() => {
     if (!colorBleed?.enabled) return {};
-    const sourceLayer = layers.find(l => l.type === colorBleed.source_layer);
+    const sourceLayer = layers.find((l) => l.type === colorBleed.source_layer);
     const semanticWeight = (sourceLayer as any)?.semanticWeight;
     const bleedColor = BLEED_COLOR_MAP[semanticWeight] ?? 'var(--sys-color-solidarityRed-steps-4)';
     return {
@@ -51,39 +57,34 @@ export const LayeredHero: React.FC<LayeredHeroProps> = ({
   useEffect(() => {
     const handleScroll = () => {
       if (!heroRef.current) return;
-      
+
       const rect = heroRef.current.getBoundingClientRect();
       const viewportHeight = window.innerHeight;
       const elementHeight = rect.height;
-      
+
       // Calculate progress from 0 to 1 as element scrolls out of view
-      const progress = Math.max(
-        0,
-        Math.min(1, 1 - (rect.bottom / (viewportHeight + elementHeight)))
-      );
-      
+      const progress = Math.max(0, Math.min(1, 1 - rect.bottom / (viewportHeight + elementHeight)));
+
       setScrollProgress(progress);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
-    
+
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   // Use dynamic pressure calculation if profile exists, else fallback to legacy
   const pressure = calculatePressure(scrollProgress, typography.pressure_profile);
-  
-  const interpolatedWght = typography.pressure_profile 
-    ? pressure.weight 
-    : Math.round(300 + (500 * scrollProgress)); // Legacy fallback
 
-  const interpolatedWdth = typography.pressure_profile
-    ? pressure.tracking
-    : 75; // Legacy fallback
+  const interpolatedWght = typography.pressure_profile
+    ? pressure.weight
+    : Math.round(300 + 500 * scrollProgress); // Legacy fallback
 
-  const bezier = animation?.bezier 
-    ? `cubic-bezier(${animation.bezier.join(',')})` 
+  const interpolatedWdth = typography.pressure_profile ? pressure.tracking : 75; // Legacy fallback
+
+  const bezier = animation?.bezier
+    ? `cubic-bezier(${animation.bezier.join(',')})`
     : DEFAULT_M3_BEZIER;
 
   const typographyStyle: React.CSSProperties = {
@@ -100,14 +101,15 @@ export const LayeredHero: React.FC<LayeredHeroProps> = ({
     >
       {/* Render layers */}
       {layers.map((layer, index) => {
-        const zIndex = zIndexMap ? (zIndexMap[layer.type] || layer.zIndex) : layer.zIndex;
+        const zIndex = zIndexMap ? zIndexMap[layer.type] || layer.zIndex : layer.zIndex;
 
         // Calculate parallax offset — kinetic layers move at multiplied speed
         const isKineticTarget = kinetic?.enabled && layer.type === 'atmospheric';
         const speedMultiplier = isKineticTarget ? (kinetic.speed_multiplier ?? 1) : 1;
-        const parallaxOffset = (animation?.parallax && layer.type !== 'substrate')
-          ? (index * 50 * scrollProgress * speedMultiplier)
-          : 0;
+        const parallaxOffset =
+          animation?.parallax && layer.type !== 'substrate'
+            ? index * 50 * scrollProgress * speedMultiplier
+            : 0;
 
         return (
           <div
@@ -124,14 +126,9 @@ export const LayeredHero: React.FC<LayeredHeroProps> = ({
             <img
               src={layer.assetUrl}
               alt=""
-              className={`w-full h-full object-${
-                layer.position === 'cover' ? 'cover' : 'contain'
-              }`}
+              className={`w-full h-full object-${layer.position === 'cover' ? 'cover' : 'contain'}`}
               style={{
-                objectPosition:
-                  layer.position === 'cover'
-                    ? 'center'
-                    : layer.position,
+                objectPosition: layer.position === 'cover' ? 'center' : layer.position,
               }}
             />
           </div>
@@ -148,11 +145,15 @@ export const LayeredHero: React.FC<LayeredHeroProps> = ({
             (typography as any).font_family === 'nabla' ? 'font-nabla' : 'font-proclamation'
           }`}
           style={{
-            color: (typography as any).font_family === 'nabla' ? 'inherit' : 'var(--sys-color-stencilYellow-base)',
+            color:
+              (typography as any).font_family === 'nabla'
+                ? 'inherit'
+                : 'var(--sys-color-stencilYellow-base)',
             textShadow: '0 4px 16px rgba(0, 0, 0, 0.8)',
-            transform: animation?.scroll_behavior === 'scale_expansion' 
-              ? `scale(${1 + scrollProgress * 0.2})` 
-              : 'none',
+            transform:
+              animation?.scroll_behavior === 'scale_expansion'
+                ? `scale(${1 + scrollProgress * 0.2})`
+                : 'none',
           }}
         >
           {typography.headline}
