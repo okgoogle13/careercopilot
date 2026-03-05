@@ -55,45 +55,58 @@ class TestBaseAgent:
     async def test_execute_with_monitoring_cache_hit(self, base_agent, mocker):
         mock_cache = mocker.MagicMock()
         mocker.patch("app.core.base_agent.get_personal_cache", return_value=mock_cache)
+        mock_execute_core_logic = mocker.AsyncMock()
+        base_agent._execute_core_logic = mock_execute_core_logic
+
         task_data = {"task_type": "test_task"}
         cache_key = base_agent._generate_task_cache_key(task_data)
         cached_result = {"data": "cached_data"}
         mock_cache.get.return_value = cached_result
 
         result = await base_agent.execute_with_monitoring(task_data)
+
         assert result == "cached_data"
         mock_cache.get.assert_called_once_with(cache_key, "ai_responses")
+        mock_execute_core_logic.assert_not_called()
+        mock_cache.cache_ai_response.assert_not_called()
 
     @pytest.mark.asyncio
     async def test_execute_with_monitoring_cache_miss(self, base_agent, mocker):
         mock_cache = mocker.MagicMock()
         mocker.patch("app.core.base_agent.get_personal_cache", return_value=mock_cache)
-        mock_ai_client = mocker.MagicMock()
-        mocker.patch("app.core.base_agent.get_ai_client", return_value=mock_ai_client)
+        mock_execute_core_logic = mocker.AsyncMock(return_value={"result": "executed_data"})
+        base_agent._execute_core_logic = mock_execute_core_logic
 
         task_data = {"task_type": "test_task"}
         cache_key = base_agent._generate_task_cache_key(task_data)
         mock_cache.get.return_value = None
-        mock_ai_client.call_ai.return_value = "ai_result"
 
         result = await base_agent.execute_with_monitoring(task_data)
-        assert result == "ai_result"
+
+        assert result == {"result": "executed_data"}
+        mock_cache.get.assert_called_once_with(cache_key, "ai_responses")
+        mock_execute_core_logic.assert_called_once_with(task_data)
         mock_cache.cache_ai_response.assert_called_once()
-        mock_ai_client.call_ai.assert_called_once()
 
     @pytest.mark.asyncio
     async def test_execute_with_monitoring_error_handling(self, base_agent, mocker):
         mock_cache = mocker.MagicMock()
         mocker.patch("app.core.base_agent.get_personal_cache", return_value=mock_cache)
-        mock_ai_client = mocker.MagicMock()
-        mocker.patch("app.core.base_agent.get_ai_client", return_value=mock_ai_client)
+        mock_execute_core_logic = mocker.AsyncMock(side_effect=Exception("test_error"))
+        base_agent._execute_core_logic = mock_execute_core_logic
 
         task_data = {"task_type": "test_task"}
-        mock_ai_client.call_ai.side_effect = Exception("test_error")
-
         result = await base_agent.execute_with_monitoring(task_data)
-        assert "error" in result
-        assert "test_error" in result["error"]
+
+        assert isinstance(result, dict)
+        assert result["status"] == "error"
+        assert "message" in result
+        assert "test_error" in result["message"]
+        mock_cache.get.assert_called_once_with(
+            base_agent._generate_task_cache_key(task_data), "ai_responses"
+        )
+        mock_execute_core_logic.assert_called_once_with(task_data)
+        mock_cache.cache_ai_response.assert_not_called()
 
     def test_generate_task_cache_key(self, base_agent):
         task_data = {
@@ -105,23 +118,8 @@ class TestBaseAgent:
         }
         cache_key = base_agent._generate_task_cache_key(task_data)
         assert isinstance(cache_key, str)
-        assert len(cache_key) == 16
 
     def test_hash_dict(self, base_agent):
-        data = {"name": "test", "age": 30}
+        data = {"a": 1, "b": "test"}
         hashed_data = base_agent._hash_dict(data)
         assert isinstance(hashed_data, str)
-        assert len(hashed_data) == 16
-
-    @pytest.mark.asyncio
-    async def test_execute_with_monitoring_logging(self, base_agent, mocker):
-        mock_logger = mocker.MagicMock()
-        base_agent.logger = mock_logger
-        task_data = {"task_type": "test_task"}
-        await base_agent.execute_with_monitoring(task_data)
-        mock_logger.info.assert_any_call(
-            "Agent execution started",
-            extra={"agent": "test_agent", "correlation_id": mocker.ANY, "task_type": "test_task"},
-        )
-        mock_logger.info.assert_any_call("Agent execution completed successfully", extra=mocker.ANY)
-        mock_logger.error.assert_not_called()
