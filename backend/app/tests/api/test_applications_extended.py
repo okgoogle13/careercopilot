@@ -77,24 +77,27 @@ async def mock_get_current_user():
     return User(id="test_user", email="test@example.com")
 
 
-app.dependency_overrides[get_db] = mock_get_db
-app.dependency_overrides[get_current_user] = mock_get_current_user
+@pytest.fixture
+def api_client():
+    app.dependency_overrides[get_db] = mock_get_db
+    app.dependency_overrides[get_current_user] = mock_get_current_user
+    with TestClient(app) as tc:
+        yield tc
+    app.dependency_overrides.clear()
 
-client = TestClient(app)
 
-
-def test_create_application_success():
+def test_create_application_success(api_client):
     payload = {
         "jobTitle": "Software Engineer",
         "companyName": "Google",
         "jobDescription": "Building AI at scale with modern machine learning frameworks and large scale distributed systems.",
     }
-    response = client.post("/api/applications/", json=payload)
+    response = api_client.post("/api/applications/", json=payload)
     assert response.status_code == 201
     assert response.json()["jobTitle"] == "Software Engineer"
 
 
-def test_get_application_not_found(monkeypatch):
+def test_get_application_not_found(api_client):
     # Change MockDB to return None for first()
     class MockDBEmpty(MockDB):
         def first(self, *args, **kwargs):
@@ -102,13 +105,12 @@ def test_get_application_not_found(monkeypatch):
 
     app.dependency_overrides[get_db] = lambda: MockDBEmpty()
 
-    response = client.get("/api/applications/non_existent")
+    response = api_client.get("/api/applications/non_existent")
     assert response.status_code == 404
     assert response.json()["detail"] == "Application not found."
 
 
-def test_get_all_applications():
-    app.dependency_overrides[get_db] = mock_get_db  # Restore
-    response = client.get("/api/applications/")
+def test_get_all_applications(api_client):
+    response = api_client.get("/api/applications/")
     assert response.status_code == 200
     assert isinstance(response.json(), list)

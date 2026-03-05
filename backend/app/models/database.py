@@ -722,7 +722,9 @@ class MarketAnalysis(Base):
 
     # Data freshness
     expires_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), nullable=False, comment="When this analysis should be considered stale"
+        DateTime(timezone=True),
+        nullable=False,
+        comment="When this analysis should be considered stale",
     )
     source_count: Mapped[int] = mapped_column(
         Integer, default=0, nullable=False, comment="Number of data sources used for this analysis"
@@ -740,9 +742,7 @@ class Cache(Base):
     """
 
     __tablename__ = "cache"
-    __table_args__ = (
-        Index("idx_cache_operation_user", "operation_type", "user_id"),
-    )
+    __table_args__ = (Index("idx_cache_operation_user", "operation_type", "user_id"),)
 
     key: Mapped[str] = mapped_column(
         String(255), unique=True, nullable=False, index=True, comment="Unique cache key for lookup"
@@ -779,9 +779,15 @@ class Cache(Base):
     )
     user_id: Mapped[str | None] = mapped_column(
         String(36),
+        ForeignKey("users.id", ondelete="SET NULL"),
         nullable=True,
         index=True,
         comment="User ID associated with this cache entry",
     )
 
     # Relationship
+    user: Mapped[Optional["User"]] = relationship("User", lazy="selectin")
+
+    def __repr__(self) -> str:
+        """Return a string representation of the cache entry."""
+        return f"<Cache {self.key} ({self.operation_type})>"

@@ -3,6 +3,6 @@ import sys
 
 class TestCacheModel:
     def test_cache_model_fields(self):
-        from app.models.cache import Cache
+        from app.models import Cache
 
         pass

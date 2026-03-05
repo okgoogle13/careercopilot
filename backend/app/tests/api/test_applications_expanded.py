@@ -89,60 +89,68 @@ async def mock_get_current_user():
     return User(id="test_user", email="test@example.com")
 
 
-app.dependency_overrides[get_db] = mock_get_db
-app.dependency_overrides[get_current_user] = mock_get_current_user
+@pytest.fixture
+def api_client():
+    app.dependency_overrides[get_db] = mock_get_db
+    app.dependency_overrides[get_current_user] = mock_get_current_user
+    with TestClient(app) as tc:
+        yield tc
+    app.dependency_overrides.clear()
 
-client = TestClient(app)
 
-
-def test_create_application_success():
+def test_create_application_success(api_client):
     payload = {
         "jobTitle": "Software Engineer",
         "companyName": "Google",
         "jobDescription": "Building AI at scale with modern machine learning frameworks and large scale distributed systems.",
     }
-    response = client.post("/api/applications/", json=payload)
+    response = api_client.post("/api/applications/", json=payload)
     assert response.status_code == status.HTTP_201_CREATED
     assert response.json()["jobTitle"] == "Software Engineer"
 
 
-def test_get_application_success():
-    response = client.get("/api/applications/app_123")
+def test_get_application_success(api_client):
+    response = api_client.get("/api/applications/app_123")
     assert response.status_code == status.HTTP_200_OK
     assert response.json()["id"] == "app_123"
 
 
-def test_get_application_not_found():
-    # Mocking a scenario where the application is not found
+def test_get_application_not_found(api_client):
+    # We use a trick if we want to dynamically change the mock DB,
+    # but for this test, we can just rely on the fact that 'non_existent'
+    # is handled by our MockDB in a way that returns something (oops).
+    # Actually, MockDB.first always returns an Application.
+    # To truly test 'not found', we'd need to re-override in the test.
+
     class MockDBEmpty(MockDB):
         def first(self, *args, **kwargs):
             return None
 
     app.dependency_overrides[get_db] = lambda: MockDBEmpty()
-    response = client.get("/api/applications/non_existent")
+    response = api_client.get("/api/applications/non_existent")
     assert response.status_code == status.HTTP_404_NOT_FOUND
-    app.dependency_overrides[get_db] = mock_get_db  # Restore
+    # Dependency overrides will be cleared by the fixture yield cleanup
 
 
-def test_get_all_applications():
-    response = client.get("/api/applications/")
+def test_get_all_applications(api_client):
+    response = api_client.get("/api/applications/")
     assert response.status_code == status.HTTP_200_OK
     assert isinstance(response.json(), list)
 
 
-def test_update_application_success():
+def test_update_application_success(api_client):
     payload = {
         "jobTitle": "Senior Engineer",
         "companyName": "AI Corp",
         "jobDescription": "Updated description that also meets the 50 char minimum length requirement."
         * 2,
     }
-    response = client.put("/api/applications/app_123", json=payload)
+    response = api_client.put("/api/applications/app_123", json=payload)
     assert response.status_code == status.HTTP_200_OK
     assert response.json()["jobTitle"] == "Senior Engineer"
 
 
-def test_update_application_not_found():
+def test_update_application_not_found(api_client):
     class MockDBEmpty(MockDB):
         def first(self, *args, **kwargs):
             return None
@@ -154,22 +162,20 @@ def test_update_application_not_found():
         "jobDescription": "Updated description that also meets the 50 char minimum length requirement."
         * 2,
     }
-    response = client.put("/api/applications/non_existent", json=payload)
+    response = api_client.put("/api/applications/non_existent", json=payload)
     assert response.status_code == status.HTTP_404_NOT_FOUND
-    app.dependency_overrides[get_db] = mock_get_db  # Restore
 
 
-def test_delete_application_success():
-    response = client.delete("/api/applications/app_123")
+def test_delete_application_success(api_client):
+    response = api_client.delete("/api/applications/app_123")
     assert response.status_code == status.HTTP_204_NO_CONTENT
 
 
-def test_delete_application_not_found():
+def test_delete_application_not_found(api_client):
     class MockDBEmpty(MockDB):
         def first(self, *args, **kwargs):
             return None
 
     app.dependency_overrides[get_db] = lambda: MockDBEmpty()
-    response = client.delete("/api/applications/non_existent")
+    response = api_client.delete("/api/applications/non_existent")
     assert response.status_code == status.HTTP_404_NOT_FOUND
-    app.dependency_overrides[get_db] = mock_get_db  # Restore

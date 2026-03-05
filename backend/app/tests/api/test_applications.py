@@ -22,42 +22,51 @@ class TestApplicationsEndpoints:
         response = auth_client.post(
             "/api/applications/",
             json={
-                "role_title": "Software Engineer",
-                "company_name": "Acme Corp",
-                "status": "applied",
-                "applied_at": "2024-03-05T12:00:00",
+                "jobTitle": "Software Engineer",
+                "companyName": "Acme Corp",
+                "jobDescription": "Full stack developer role involving Python and React with at least 5 years experience in building scalable web applications.",
+                "deadline": "2024-12-31T23:59:59",
             },
         )
         assert response.status_code == 201
         data = response.json()
-        assert data["role_title"] == "Software Engineer"
-        assert data["company_name"] == "Acme Corp"
+        assert data["jobTitle"] == "Software Engineer"
+        assert data["companyName"] == "Acme Corp"
         assert "id" in data
 
     def test_get_all_applications(self, auth_client):
         """Should return a list of applications for current user."""
         # Create two applications
-        auth_client.post("/api/applications/", json={"role_title": "Job 1", "company_name": "A"})
-        auth_client.post("/api/applications/", json={"role_title": "Job 2", "company_name": "B"})
+        desc = "Software Engineer role with focus on backend and cloud. Requires extensive knowledge of AWS."
+        auth_client.post(
+            "/api/applications/",
+            json={"jobTitle": "Job 1", "companyName": "A", "jobDescription": desc},
+        )
+        auth_client.post(
+            "/api/applications/",
+            json={"jobTitle": "Job 2", "companyName": "B", "jobDescription": desc},
+        )
 
         response = auth_client.get("/api/applications/")
         assert response.status_code == 200
         data = response.json()
         assert len(data) >= 2
-        titles = [app["role_title"] for app in data]
+        titles = [app["jobTitle"] for app in data]
         assert "Job 1" in titles
         assert "Job 2" in titles
 
     def test_get_single_application(self, auth_client):
         """Should retrieve a specific application by ID."""
+        desc = "Position for a senior data scientist with deep learning expertise and strong statistics background."
         create_res = auth_client.post(
-            "/api/applications/", json={"role_title": "FindMe", "company_name": "X"}
+            "/api/applications/",
+            json={"jobTitle": "FindMe", "companyName": "X", "jobDescription": desc},
         )
         app_id = create_res.json()["id"]
 
         response = auth_client.get(f"/api/applications/{app_id}")
         assert response.status_code == 200
-        assert response.json()["role_title"] == "FindMe"
+        assert response.json()["jobTitle"] == "FindMe"
 
     def test_get_nonexistent_application_404(self, auth_client):
         """Should return 404 for invalid ID."""
@@ -66,22 +75,30 @@ class TestApplicationsEndpoints:
 
     def test_update_application(self, auth_client):
         """Should update application fields."""
+        desc = "Marketing Manager position for a fast-growing startup in the fintech industry."
         create_res = auth_client.post(
-            "/api/applications/", json={"role_title": "Old", "company_name": "X"}
+            "/api/applications/",
+            json={"jobTitle": "Old", "companyName": "X", "jobDescription": desc},
         )
         app_id = create_res.json()["id"]
 
         response = auth_client.put(
             f"/api/applications/{app_id}",
-            json={"role_title": "New Title", "company_name": "X", "status": "interviewing"},
+            json={
+                "jobTitle": "New Title",
+                "companyName": "X",
+                "jobDescription": "New description that is long enough to pass the validation check of fifty characters.",
+            },
         )
         assert response.status_code == 200
-        assert response.json()["role_title"] == "New Title"
+        assert response.json()["jobTitle"] == "New Title"
 
     def test_delete_application(self, auth_client):
         """Should remove application from DB."""
+        desc = "Frontend Engineer with strong TypeScript and React skills. Knowledge of testing is a plus."
         create_res = auth_client.post(
-            "/api/applications/", json={"role_title": "To Delete", "company_name": "X"}
+            "/api/applications/",
+            json={"jobTitle": "To Delete", "companyName": "X", "jobDescription": desc},
         )
         app_id = create_res.json()["id"]
 

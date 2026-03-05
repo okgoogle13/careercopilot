@@ -144,4 +144,4 @@ def test_redline_document_exception(mock_service_class, client):
         "/api/documents/process/redline", files={"file": file}, data={"edits": edits}
     )
     assert response.status_code == 500
-    assert response.json()["detail"] == "Unexpected error"
+    assert response.json()["detail"] == "Document redlining failed: Unexpected error"

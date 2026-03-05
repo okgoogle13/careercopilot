@@ -50,8 +50,14 @@ def save_manifest(manifest: dict) -> bool:
     """Save manifest to file."""
     try:
         MANIFEST_PATH.parent.mkdir(parents=True, exist_ok=True)
+
+        def json_serial(obj):
+            if isinstance(obj, datetime):
+                return obj.isoformat()
+            raise TypeError(f"Type {type(obj)} not serializable")
+
         with open(MANIFEST_PATH, "w") as f:
-            json.dump(manifest, f, indent=2)
+            json.dump(manifest, f, indent=2, default=json_serial)
         print(f"✅ Manifest saved: {MANIFEST_PATH}")
         return True
     except Exception as e:
@@ -89,7 +95,7 @@ async def add_assets_to_manifest(request: ManifestUpdateRequest):
             print(f"  ⚠️  {asset_entry.id} already exists, skipping")
             continue
 
-        asset_dict = asset_entry.dict()
+        asset_dict = asset_entry.model_dump(mode="json")
         manifest["assets"].append(asset_dict)
         added_count += 1
         print(f"  ✅ Added: {asset_entry.id} ({asset_entry.name})")

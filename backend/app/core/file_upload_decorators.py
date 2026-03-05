@@ -47,7 +47,7 @@ class FileUploadConfig:
         """
         # Default values from settings or reasonable defaults
         self.allowed_extensions = allowed_extensions or {
-            ".pd",
+            ".pdf",
             ".doc",
             ".docx",
             ".txt",
@@ -231,22 +231,45 @@ def require_valid_file_upload(
                     "attachments",
                 ]
 
+                # Improved lookup: Check keys and types more flexibly
                 for name in file_param_names:
-                    if name in kwargs and isinstance(kwargs[name], UploadFile):
-                        file_param = kwargs[name]
-                        break
+                    if name in kwargs:
+                        val = kwargs[name]
+                        # Lenient check: hasattr approach to handle potential proxy/wrapper objects
+                        if hasattr(val, "filename") and hasattr(val, "file"):
+                            file_param = val
+                            break
 
                 for name in files_param_names:
                     if name in kwargs and isinstance(kwargs[name], list):
-                        files_param = kwargs[name]
-                        break
+                        val_list = kwargs[name]
+                        if val_list and all(hasattr(f, "filename") for f in val_list):
+                            files_param = val_list
+                            break
+
+                # Also check args if not found in kwargs (FastAPI might pass positionally)
+                if file_param is None and single_file:
+                    for arg in args:
+                        if hasattr(arg, "filename") and hasattr(arg, "file"):
+                            file_param = arg
+                            break
+
+                if files_param is None and not single_file:
+                    for arg in args:
+                        if isinstance(arg, list) and all(hasattr(f, "filename") for f in arg):
+                            files_param = arg
+                            break
 
                 # Validate based on what we found
                 if single_file:
                     if file_param is None:
+                        # For debugging purposes if it still fails
+                        kw_types = {k: type(v).__name__ for k, v in kwargs.items()}
+                        arg_types = [type(a).__name__ for a in args]
+                        logger.debug(f"Missing file param. Kwargs: {kw_types}, Args: {arg_types}")
                         raise HTTPException(
                             status_code=status.HTTP_400_BAD_REQUEST,
-                            detail="No file parameter found in request",
+                            detail=f"No file parameter found in request. Found kwargs: {list(kw_types.keys())}, args count: {len(args)}",
                         )
                     validate_file_upload(file_param, config)
                 else:
@@ -346,12 +369,12 @@ def require_valid_document_upload(
 
     # Map extensions to content types
     content_type_mapping = {
-        ".pd": "application/pdf",
+        ".pdf": "application/pdf",
         ".doc": "application/msword",
         ".docx": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
         ".txt": "text/plain",
         ".md": "text/markdown",
-        ".rt": "application/rtf",
+        ".rtf": "application/rtf",
     }
 
     allowed_content_types = {

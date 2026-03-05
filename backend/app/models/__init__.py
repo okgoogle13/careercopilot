@@ -8,7 +8,15 @@ Example:
 from app.models import UserProfile
 """
 
-from .database import User
+from .database import (
+    AgentSession,
+    AIInteraction,
+    Application,
+    Cache,
+    Job,
+    MarketAnalysis,
+    User,
+)
 from .master_profile_schema import MasterCareerProfile as MasterProfile
 from .master_profile_schema import PersonalInfo
 from .schemas import (
@@ -38,18 +46,24 @@ from .theme_config_schemas import (
 from .user_asset import UserAsset
 
 __all__ = [
+    "AIInteraction",
+    "AgentSession",
     "AIRecommendationsResponse",
+    "Application",
     "ATSScoreResponse",
     "AtsComplianceInfo",
+    "Cache",
     "CategoryScore",
     "ColorConfig",
     "CoverLetterThemeConfig",
     "CreateProfileVariationRequest",
     "EducationItem",
     "ExperienceItem",
+    "Job",
     "JobOpportunity",
     "KeywordAnalysisResponse",
     "LayoutConfig",
+    "MarketAnalysis",
     "MasterProfile",
     "PersonalInfo",
     "ProfileVariation",
@@ -57,6 +71,7 @@ __all__ = [
     "ResumeThemeConfig",
     "TypographyConfig",
     "User",
+    "UserAsset",
     "UserPreferences",
     "UserProfile",
     "VoiceProfile",

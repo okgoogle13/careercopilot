@@ -33,7 +33,7 @@ def test_upload_artifact_returns_401_without_auth_override(monkeypatch):
     from app.core.dependencies import get_current_user
     from app.main import app
 
-    app.dependency_overrides.pop(get_current_user, None)
+    app.dependency_overrides = {}
     with TestClient(app) as anon_client:
         response = anon_client.post(
             "/api/ingest/artifacts/upload",
@@ -41,7 +41,8 @@ def test_upload_artifact_returns_401_without_auth_override(monkeypatch):
             files={"file": ("resume.txt", b"resume body", "text/plain")},
         )
 
-    assert response.status_code == 401
+    assert response.status_code == 403
+    assert response.json()["detail"] == "Not authenticated"
 
 
 def test_upload_artifact_returns_500_for_service_error(client):

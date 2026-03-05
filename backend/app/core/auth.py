@@ -13,7 +13,7 @@ from sqlalchemy.orm import Session
 
 from app.core.database import get_db
 from app.core.firebase import verify_id_token
-from app.models.user import User
+from app.models import User
 
 logger = logging.getLogger(__name__)
 

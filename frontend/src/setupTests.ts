@@ -32,6 +32,23 @@ afterEach(() => {
 });
 
 // Mock Firebase - REMOVED
+jest.mock('firebase/app', () => ({
+  initializeApp: jest.fn(() => ({})),
+}));
+
+jest.mock('firebase/auth', () => ({
+  getAuth: jest.fn(() => ({
+    currentUser: null,
+  })),
+}));
+
+jest.mock('firebase/storage', () => ({
+  getStorage: jest.fn(() => ({})),
+}));
+
+jest.mock('firebase/firestore', () => ({
+  getFirestore: jest.fn(() => ({})),
+}));
 
 // Mock window.matchMedia for Material-UI components
 Object.defineProperty(window, 'matchMedia', {

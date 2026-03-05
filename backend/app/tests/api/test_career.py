@@ -9,8 +9,36 @@ class TestIngestDocumentsEndpoint:
     def test_ingest_happy_path(self, client):
         """Should return CareerDatabase after successful ingestion."""
         # Mock dependencies in career.py
+        mock_data = {
+            "personal_info": {
+                "full_name": "Test User",
+                "email": "test@example.com",
+                "phone": "1234567890",
+                "location": "Test City",
+                "summary": "Test Summary",
+            },
+            "career_profile": {"summary": "Tech expert"},
+            "experience": [],
+            "education": [],
+            "skills": {"technical": [], "tools": [], "soft": []},
+            "certifications": [],
+            "projects": [],
+        }
         mock_result = MagicMock()
-        mock_result.model_dump.return_value = {"personal_information": {}}
+        mock_result.personal_info.full_name = "Test User"
+        mock_result.personal_info.email = "test@example.com"
+        mock_result.personal_info.phone = "1234567890"
+        mock_result.personal_info.location = "Test City"
+        mock_result.personal_info.summary = "Test Summary"
+        mock_result.career_profile.summary = "Tech expert"
+        mock_result.experience = []
+        mock_result.education = []
+        mock_result.skills.technical = []
+        mock_result.skills.tools = []
+        mock_result.skills.soft = []
+        mock_result.certifications = []
+        mock_result.projects = []
+        mock_result.model_dump.return_value = mock_data
 
         # We need to patch where it's imported in app.api.endpoints.career
         with patch(
@@ -36,7 +64,7 @@ class TestIngestDocumentsEndpoint:
             db=ANY,
             user_id="test_user_id",
             field_name="career_profile",
-            payload={"personal_information": {}},
+            payload=mock_result.model_dump.return_value,
         )
 
     def test_ingest_failure_returns_500(self, client):

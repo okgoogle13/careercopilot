@@ -1,12 +1,18 @@
 import { auth } from '../config/firebase';
 
 // Configuration
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080/api';
-const USE_MOCK = import.meta.env.VITE_USE_MOCK_API !== 'false';
+const env =
+  typeof import.meta !== 'undefined' && import.meta.env
+    ? import.meta.env
+    : typeof process !== 'undefined'
+      ? process.env
+      : {};
+const API_URL = env.VITE_API_URL || 'http://localhost:8080/api';
+const USE_MOCK = env.VITE_USE_MOCK_API !== 'false';
 
 // Helper for Auth Token
 const getAuthToken = async () => {
-  if (import.meta.env.DEV) return 'dev-token';
+  if (env.DEV || env.MODE === 'test') return 'dev-token';
   const user = auth.currentUser;
   if (user) {
     return await user.getIdToken();

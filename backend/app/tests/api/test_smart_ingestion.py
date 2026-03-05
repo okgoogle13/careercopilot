@@ -8,7 +8,7 @@ import pytest
 
 @pytest.fixture
 def auth_client(client):
-    from app.core.dependencies import get_current_user
+    from app.core.auth import get_current_user
 
     mock_user = SimpleNamespace(id=1, uid="test_uid", email="test@example.com", name="Test User")
     client.app.dependency_overrides[get_current_user] = lambda: mock_user
@@ -28,10 +28,10 @@ class TestSmartIngestionEndpoints:
             "app.api.endpoints.smart_ingestion.upload_and_read_document", new_callable=AsyncMock
         ) as mock_upload:
             mock_upload.return_value = ("gs://test/doc.pdf", 100, "Sample Text")
-            with patch(
-                "app.api.endpoints.smart_ingestion.contextTaggerFlow.run", new_callable=AsyncMock
-            ) as mock_flow:
-                mock_flow.return_value = {"roleType": "Engineer", "subsectors": ["Tech"]}
+            with patch("app.api.endpoints.smart_ingestion.contextTaggerFlow") as mock_flow:
+                mock_flow.run = AsyncMock(
+                    return_value={"roleType": "Engineer", "subsectors": ["Tech"], "confidence": 0.9}
+                )
 
                 files = {"file": ("test.pdf", b"pdf...", "application/pdf")}
 

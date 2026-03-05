@@ -9,3 +9,9 @@
 2026-03-03 05:15:05 | INFO     | app.core.loguru_config:configure_loguru:179 | Loguru logging configured
 2026-03-03 17:28:00 | INFO     | app.core.loguru_config:configure_loguru:179 | Loguru logging configured
 2026-03-03 17:28:24 | INFO     | app.core.loguru_config:configure_loguru:179 | Loguru logging configured
+2026-03-05 23:12:19 | INFO     | e3a1cdec-85ef-4467-9e5d-5c7ab4cc9d15 | REST Request: POST /api/smart-ingestion/upload-and-tag
+2026-03-05 23:12:19 | INFO     | e3a1cdec-85ef-4467-9e5d-5c7ab4cc9d15 | REST Response: 400 in 0.009s
+2026-03-05 23:15:50 | INFO     | d79b49d4-0a07-446e-9542-f72eb922b1c9 | REST Request: POST /api/smart-ingestion/upload-and-tag
+2026-03-05 23:15:50 | INFO     | d79b49d4-0a07-446e-9542-f72eb922b1c9 | REST Response: 400 in 0.004s
+2026-03-05 23:16:21 | INFO     | f41f9f2e-21cf-4f89-8d74-b796a3f23126 | REST Request: POST /api/smart-ingestion/upload-and-tag
+2026-03-05 23:16:21 | INFO     | f41f9f2e-21cf-4f89-8d74-b796a3f23126 | REST Response: 200 in 0.005s
