@@ -9,21 +9,21 @@ import { CheckCircle, FileText, Fingerprint, Microscope } from 'lucide-react';
 import React, { useState } from 'react';
 
 // KrDark Assets
-const naturesClockwork =
-  '/assets/kr-solidarity/specimen/kr-solidarity__specimen__triage-natural-history__v1.png';
+const solidarityTexture =
+  '/assets/kr-solidarity/abstract/kr-solidarity__atmospheric__texture--solidarity-chatgpt-image-f--v1.png';
 const paperGrain =
-  '/assets/kr-solidarity/texture/kr-solidarity__substrate__kr-solidarity--texture--melbourne-laneway--v1__v1.png';
+  '/assets/kr-solidarity/texture/kr-solidarity__substrate__landmark--melbourne-laneway--v1.png';
 
 type UploadStage = 'idle' | 'uploading' | 'extracting' | 'processing' | 'embedding' | 'complete';
 
 /**
- * CareerCopilot Ingestion Page ("The Mulch / KrMotif Tray")
+ * CareerCopilot Ingestion Page ("The Deposit / Kr-Archive")
  *
- * V3.1 KrDark Mode Implementation:
- * ✓ ASSET-08 Verification Stamp Integration
- * ✓ Texture-KrDark-Paper White overlay
- * ✓ Skeleton Etch Motif metaphors
- * ✓ Clinical palette restricted to Obsidian/Paper White/Ink
+ * V5.0 KR Solidarity Implementation:
+ * ✓ KR-SOLID-030 Solidarity Approval Plate
+ * ✓ Texture-KrDark-Paper White overlay (Substrate)
+ * ✓ Industrial Stencil metaphors
+ * ✓ Clinical palette restricted to Charcoal/Paper White/Ink
  */
 export const IngestionPage: React.FC = () => {
   const { submitDocuments, updateCareerDatabase, isLoading, error } = useCareerIngestion();
@@ -62,12 +62,12 @@ export const IngestionPage: React.FC = () => {
       setUploadStage('complete');
       setProgress(100);
       setCareerData(result);
-      m3Toast.success('Ingestion Complete', 'KrMotif data archived successfully.');
+      m3Toast.success('Ingestion Complete', 'Professional data archived successfully.');
     } catch (err) {
       console.error('Upload failed:', err);
       setUploadStage('idle');
       setProgress(0);
-      m3Toast.error('Ingestion Failed', 'A biological error occurred during extraction.');
+      m3Toast.error('Ingestion Failed', 'A system fault occurred during extraction.');
     }
   };
 
@@ -94,13 +94,13 @@ export const IngestionPage: React.FC = () => {
       case 'uploading':
         return 'Depositing Payloads...';
       case 'extracting':
-        return 'Harvesting Semantic DNA...';
+        return 'Extracting Semantic Identity...';
       case 'processing':
-        return 'Analyzing Career KrMotif...';
+        return 'Analyzing Professional Profile...';
       case 'embedding':
-        return 'Mapping Professional Vector...';
+        return 'Mapping Career Vector...';
       case 'complete':
-        return 'Extraction Complete.';
+        return 'Archive Complete.';
       default:
         return '';
     }
@@ -114,15 +114,14 @@ export const IngestionPage: React.FC = () => {
         style={{ backgroundImage: `url(${paperGrain})`, backgroundRepeat: 'repeat' }}
       />
 
-      {/* Background Motifs */}
-      <div className="absolute top-10 left-10 w-64 h-64 grayscale opacity-10 pointer-events-none border border-concrete-grey/20 rounded-full" />
-      <div className="absolute bottom-10 right-10 w-96 h-96 grayscale opacity-5 pointer-events-none border-l border-t border-concrete-grey/20 rounded-tl-[120px]" />
+      {/* Background Motifs - RESTRICTED */}
+      <div className="absolute top-10 left-10 w-64 h-64 grayscale opacity-10 pointer-events-none border border-concrete-grey/20 rounded-stone" />
 
       <Stone
         elevation="floating"
         className="max-w-2xl w-full border-2 border-concrete-grey/5 shadow-maximum relative z-10"
       >
-        {/* Verification Stamp Shadowplay (ASSET-08) */}
+        {/* Solidarity Approval Plate (KR-SOLID-030 Metaphor) */}
         <AnimatePresence>
           {uploadStage === 'complete' && (
             <motion.div
@@ -131,9 +130,9 @@ export const IngestionPage: React.FC = () => {
               className="absolute top-10 right-10 w-48 h-48 pointer-events-none"
             >
               <img
-                src={naturesClockwork}
+                src={solidarityTexture}
                 alt="Verified"
-                className="w-full h-full object-contain rounded-full border-4 border-ink-gold"
+                className="w-full h-full object-contain rounded-stone border-4 border-ink-gold"
               />
             </motion.div>
           )}
@@ -146,10 +145,10 @@ export const IngestionPage: React.FC = () => {
             <Microscope className="w-12 h-12 text-ink-gold" />
           </div>
           <h1 className="text-5xl font-bloom font-bold text-paper-white tracking-tighter uppercase">
-            KrMotif Ingestion
+            Deposit Identity
           </h1>
           <p className="font-annotation text-xs text-concrete-grey-dark mt-3 tracking-[0.3em] uppercase opacity-60">
-            [ PHASE.01: SEMANTIC_EXTRACTION ]
+            [ PHASE.01: SEMANTIC_ARCHIVAL ]
           </p>
         </header>
 
@@ -183,7 +182,7 @@ export const IngestionPage: React.FC = () => {
           size="lg"
           className="w-full h-20 text-xl font-black rounded-stone"
         >
-          {isLoading ? getStageMessage() : 'Initialize Harvesting'}
+          {isLoading ? getStageMessage() : 'Initialize Archival'}
         </Pebble>
 
         {/* KrDark Technical Audit */}
@@ -191,10 +190,10 @@ export const IngestionPage: React.FC = () => {
           <Microscope className="w-8 h-8 text-ink-gold/40 shrink-0" />
           <p className="font-field-note text-[11px] text-paper-white/50 leading-relaxed italic">
             <strong className="text-paper-white font-annotation uppercase tracking-wider not-italic">
-              Clinical Audit:
+              Compliance Audit:
             </strong>{' '}
-            Professional vectors are extracted via Gemini 3.0 Pro. This process mandates biological
-            time for semantic harvesting. Do not terminate terminal session during synthesis.
+            Professional vectors are extracted via industrial-grade LLM processing. This process
+            mandates time for secure identity archival. Do not terminate session during synthesis.
           </p>
         </div>
       </Stone>

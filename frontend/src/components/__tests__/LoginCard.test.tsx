@@ -1,6 +1,8 @@
-import { render, screen, fireEvent } from '@testing-library/react';
-import { LoginCard } from '../LoginCard';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import React from 'react';
+import '@testing-library/jest-dom';
+
+const { LoginCard } = await import('../LoginCard');
 
 describe('LoginCard', () => {
   const createHandlers = () => ({
@@ -21,24 +23,28 @@ describe('LoginCard', () => {
     expect(screen.getByText(/Password/i)).toBeInTheDocument();
   });
 
-  it('calls onLogin with credentials on submit', () => {
+  it('calls onLogin with credentials on submit', async () => {
     const { mockOnLogin, mockOnRegister } = createHandlers();
-    const { container } = render(
+    render(
       <LoginCard
         onLogin={mockOnLogin}
         onRegisterClick={mockOnRegister}
       />
     );
 
-    const inputs = container.querySelectorAll('input');
-    fireEvent.change(inputs[0], { target: { value: 'test@example.com' } });
-    fireEvent.change(inputs[1], { target: { value: 'password123' } });
+    const emailInput = screen.getByTestId('email-input');
+    const passwordInput = screen.getByTestId('password-input');
+
+    fireEvent.change(emailInput, { target: { value: 'test@example.com' } });
+    fireEvent.change(passwordInput, { target: { value: 'password123' } });
 
     fireEvent.click(screen.getByRole('button', { name: /ENTER ARCHIVE/i }));
 
-    expect(mockOnLogin).toHaveBeenCalledWith({
-      email: 'test@example.com',
-      password: 'password123',
+    await waitFor(() => {
+      expect(mockOnLogin).toHaveBeenCalledWith({
+        email: 'test@example.com',
+        password: 'password123',
+      });
     });
   });
 

@@ -4,7 +4,7 @@ import React from 'react';
 import { cn } from '../../lib/utils';
 
 export interface KeralaRageButtonProps extends Omit<HTMLMotionProps<'button'>, 'ref'> {
-  variant?: 'primary' | 'secondary' | 'tertiary';
+  variant?: 'primary' | 'secondary' | 'tertiary' | 'defiance';
   size?: 'sm' | 'md' | 'lg';
   startIcon?: React.ReactNode;
   endIcon?: React.ReactNode;
@@ -13,16 +13,13 @@ export interface KeralaRageButtonProps extends Omit<HTMLMotionProps<'button'>, '
 }
 
 /**
- * KeralaRageButton - Production-ready button component for Kerala Rage kr-solidarity design system
+ * KeralaRageButton - Production-ready button for Kerala Rage kr-solidarity.
  *
- * Features:
- * - 100% semantic token usage (no hardcoded values)
- * - Solidarity mode only (dark-only design)
- * - Organic asymmetry (Pebble/Stone shapes)
- * - Motion tokens for transitions
- * - WCAG 2.1 Level AA accessibility
- *
- * Reference: ActionButton.tsx (Seed archetype, 100% compliant)
+ * Compliant with SOLIDARITY_SPEC_V5.md:
+ * - Uses --sys-shape-radius-pebble
+ * - Uses --sys-color-* tokens
+ * - Mandatory dark-substrate alignment
+ * - M3 Expressive motion spring
  */
 export const KeralaRageButton = React.forwardRef<HTMLButtonElement, KeralaRageButtonProps>(
   (
@@ -39,109 +36,85 @@ export const KeralaRageButton = React.forwardRef<HTMLButtonElement, KeralaRageBu
     },
     ref
   ) => {
+    // Note: System is now dark-only as per spec. mode choice is purely for transition stability.
     const { mode } = useMode();
 
     // Size variants
     const sizeClasses = {
-      sm: 'h-10 px-4 text-sm',
-      md: 'h-12 px-6 text-base',
-      lg: 'h-14 px-8 text-lg',
+      sm: 'h-10 px-4 text-xs tracking-tighter',
+      md: 'h-12 px-6 text-sm tracking-wide',
+      lg: 'h-14 px-8 text-base tracking-widest',
     };
 
-    // Variant styles using tokens
+    // Variant Styles mapping to --sys- tokens
     const variantStyles = {
       primary: {
-        KrDark: {
-          background: 'bg-wattle-gold',
-          text: 'text-primary-on-primary',
-          hover: 'hover:bg-primary-wattle-glow',
-          shadow: 'shadow-sm hover:shadow-[var(--elevation-shadow-glow-gold)]',
-          border: '',
-        },
-        KrLight: {
-          background: 'bg-wattle-gold',
-          text: 'text-primary-on-primary',
-          hover: 'hover:bg-primary-wattle-glow',
-          shadow: 'shadow-sm hover:shadow-[var(--elevation-shadow-hover)]',
-          border: '',
-        },
+        background: 'bg-[var(--sys-color-inkGold-base)]',
+        text: 'text-[var(--sys-color-charcoalBackground-base)]',
+        hover: 'hover:opacity-90',
+        shadow:
+          'shadow-[var(--sys-shadow-elevation1Pebble)] hover:shadow-[var(--sys-shadow-elevation3HoverLift)]',
+        border: 'border-none',
       },
       secondary: {
-        KrDark: {
-          background: 'bg-surface-gallery-eucalypt-smoke-high',
-          text: 'text-secondary-flannel-flower',
-          hover: 'hover:bg-surface-gallery-eucalypt-smoke-highest',
-          shadow: 'shadow-sm',
-          border: 'border-2 border-secondary-flannel-flower',
-        },
-        KrLight: {
-          background: 'bg-surface-laboratory-slate-smoke-high',
-          text: 'text-secondary-flannel-flower',
-          hover: 'hover:bg-surface-laboratory-slate-smoke-highest',
-          shadow: 'shadow-sm',
-          border: 'border border-secondary-flannel-dim',
-        },
+        background: 'bg-[var(--sys-color-charcoalBackground-steps-2)]',
+        text: 'text-[var(--sys-color-worker-ash-base)]',
+        hover: 'hover:bg-[var(--sys-color-charcoalBackground-steps-3)]',
+        shadow: 'shadow-[var(--sys-shadow-elevation1Pebble)]',
+        border: 'border border-[var(--sys-color-worker-ash-base)]/20',
       },
       tertiary: {
-        KrDark: {
-          background: 'bg-tertiary-waratah-container',
-          text: 'text-tertiary-waratah-crimson',
-          hover: 'hover:bg-tertiary-waratah-crimson hover:text-on-surface-parchment',
-          shadow: 'shadow-sm',
-          border: 'border border-tertiary-waratah-crimson',
-        },
-        KrLight: {
-          background: 'bg-status-laboratory-clinical-alert-container',
-          text: 'text-status-laboratory-clinical-alert',
-          hover: 'hover:bg-status-laboratory-clinical-alert hover:text-on-surface-parchment',
-          shadow: 'shadow-sm',
-          border: 'border border-status-laboratory-clinical-alert',
-        },
+        background: 'bg-transparent',
+        text: 'text-[var(--sys-color-inkGold-base)]',
+        hover: 'hover:bg-[var(--sys-color-inkGold-base)]/10',
+        shadow: '',
+        border: 'border border-[var(--sys-color-inkGold-base)]/40',
+      },
+      defiance: {
+        background: 'bg-[var(--sys-color-solidarityRed-base)]',
+        text: 'text-[var(--sys-color-paperWhite-base)]',
+        hover: 'hover:brightness-110',
+        shadow: 'shadow-[var(--sys-shadow-solidarityBleed)]',
+        border: 'border-none',
       },
     };
 
-    const currentVariant = (variantStyles[variant] as any)[mode] || variantStyles[variant].KrDark;
+    const styles = variantStyles[variant];
 
     return (
       <motion.button
         ref={ref}
         className={cn(
           // Base styles
-          'font-bold uppercase tracking-wide',
-          'transition-colors duration-[var(--duration-fast)]',
-          'disabled:opacity-50 disabled:cursor-not-allowed',
+          'font-bold uppercase inline-flex items-center justify-center relative overflow-hidden',
+          'transition-all duration-300',
+          'disabled:opacity-40 disabled:grayscale disabled:cursor-not-allowed',
 
-          // Size
+          // Size/Radius
           sizeClasses[size],
+          'rounded-[var(--sys-shape-radius-pebble)]',
 
           // Variant colors
-          currentVariant.background,
-          currentVariant.text,
-          currentVariant.hover,
-          currentVariant.shadow,
-          currentVariant.border,
-
-          // Organic asymmetry (KrDark) or precise (KrLight)
-          mode === 'KrDark' ? 'rounded-[var(--radius-pebble)]' : 'rounded-[var(--radius-stone)]',
+          styles.background,
+          styles.text,
+          styles.shadow,
+          styles.border,
 
           className
         )}
-        style={
-          {
-            borderRadius: mode === 'KrDark' ? 'var(--radius-pebble)' : 'var(--radius-stone)',
-            fontFamily: 'var(--font-field-note)',
-            fontVariationSettings: "'wght' 600, 'GRAD' var(--grad, 0)",
-          } as any
-        }
+        style={{
+          fontFamily: 'var(--sys-type-fontFamilies-primary)',
+          fontVariationSettings: "'wght' 700, 'GRAD' var(--grad, 0)",
+        }}
         whileHover={
           !disabled
             ? {
-                y: -2,
-                '--grad': 150,
+                scale: 1.03,
+                '--grad': 100,
                 transition: {
                   type: 'spring',
-                  stiffness: 500,
-                  damping: 27,
+                  stiffness: 400,
+                  damping: 15,
                   mass: 1,
                 },
               }
@@ -150,13 +123,12 @@ export const KeralaRageButton = React.forwardRef<HTMLButtonElement, KeralaRageBu
         whileTap={
           !disabled
             ? {
-                y: 0,
+                scale: 0.97,
                 '--grad': 0,
-                scale: 0.98,
               }
             : undefined
         }
-        disabled={disabled}
+        disabled={disabled || loading}
         {...props}
       >
         {loading ? (
@@ -171,9 +143,16 @@ export const KeralaRageButton = React.forwardRef<HTMLButtonElement, KeralaRageBu
           <span className="mr-2 flex items-center">{startIcon}</span>
         ) : null}
 
-        {children}
+        <span className="relative z-10 transition-transform duration-300 group-active:scale-95">
+          {children}
+        </span>
 
         {!loading && endIcon && <span className="ml-2 flex items-center">{endIcon}</span>}
+
+        {/* Subtle Screenprint Grit Hover Overlay */}
+        {!disabled && (
+          <div className="absolute inset-0 opacity-0 group-hover:opacity-[0.05] pointer-events-none transition-opacity bg-[url('/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__ui--kr-screenprint-grit--v1.svg')]" />
+        )}
       </motion.button>
     );
   }

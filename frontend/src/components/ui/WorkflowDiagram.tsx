@@ -223,7 +223,7 @@ const MermaidDiagram: React.FC<MermaidDiagramProps> = ({ diagram, className = ''
   if (error) {
     return (
       <div
-        className={`rounded-lg border border-[var(--sys-color-waratahRed)] bg-[var(--sys-color-asphaltBlack)] p-4 text-[var(--sys-color-waratahRed)] text-sm font-mono ${className}`}
+        className={`rounded-lg border border-[var(--sys-color-solidarityCrimson)] bg-[var(--sys-color-asphaltBlack)] p-4 text-[var(--sys-color-solidarityCrimson)] text-sm font-mono ${className}`}
       >
         <strong>Diagram render error:</strong> {error}
         <pre className="mt-2 whitespace-pre-wrap text-xs opacity-70">{diagram}</pre>

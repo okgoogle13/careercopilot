@@ -13,6 +13,8 @@ export default [
   {
     ignores: [
       'dist',
+      'playwright-report',
+      'test-results',
       'node_modules',
       '**/__mocks__/**',
       '**/test-utils.tsx',

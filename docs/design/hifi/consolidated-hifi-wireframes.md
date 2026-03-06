@@ -1248,12 +1248,12 @@ interface FormContainerProps {
 - **Blend Mode**: Screen/Lighten
 
 ### 2. Abstract Solidarity (Header)
-- **Asset**: `{KR-SOLID-011}`
+- **Asset**: `{KR-SOLID-002}` *(manifest v6.0.0 — `kr-solidarity__atmospheric__texture--solidarity-chatgpt-image-f--v1.png`)*
 - **Position**: Top edge/Header background
 - **Behavior**: Static, low opacity (10%) texture overlay
 
 ### 3. Melbourne Laneway (Global Substrate)
-- **Asset**: `{KR-SOLID-033}`
+- **Asset**: `{KR-SOLID-038}` *(manifest v6.0.0 — `kr-solidarity__substrate__landmark--melbourne-laneway--v1.png`)*
 - **Position**: Fixed background covering viewport
 - **Opacity**: 20%
 - **Effect**: Gritty, realistic texture grounding the digital form
@@ -1303,7 +1303,7 @@ interface FormContainerProps {
 ┌─────────────────────────────────────────────────────────────┐
 │  Layout Region: Global Backdrop                              │
 │  - Substrate: Asphalt Black (Hex #1A1714)                   │
-│  - Texture: Melbourne Laneway {KR-SOLID-033} (Opacity 0.3)  │
+│  - Texture: Melbourne Laneway {KR-SOLID-038} (Opacity 0.3)  │
 │  - Effect: Atmospheric Halo {KR-UI-002} (Pulse 40-60%)      │
 └─────────────────────────────────────────────────────────────┘
 
@@ -1406,10 +1406,10 @@ interface AuthContainerProps {
 ```tsx
 <div className="input-field-group">
   <label className="mono-label">{label}</label>
-  <input 
-    className="stone-input" 
-    type={type} 
-    placeholder={placeholder} 
+  <input
+    className="stone-input"
+    type={type}
+    placeholder={placeholder}
   />
   {error && <span className="error-msg">{error}</span>}
 </div>
@@ -1477,7 +1477,7 @@ interface AuthContainerProps {
 ## Accessibility (WCAG 2.2 AA)
 
 ### Validation Report
-- **Contrast**: 
+- **Contrast**:
   - Headlines (PaperWhite on Charcoal): 15:1 ✅ AAA
   - Placeholders (PaperWhite 50%): 4.5:1 ✅ AA
   - Error Text (Solidarity Red): 5.0:1 ✅ AA
@@ -1686,6 +1686,13 @@ interface ManifestoCardProps {
 **Mode**: kr-dark (Restrained, Data-Focused)
 **Target Score**: ≥360/400 (90% — Excellent)
 **Generated**: 2026-02-16
+**Last Synced (Manifest)**: 2026-03-06 — Manifest v6.0.0 / Hero Registry v3.1.0
+
+> **Hero Compositions** (from `kr-solidarity-hero-registry.json`):
+> - `layered-solidarity-hero` — Multi-layer solidarity composition (substrate + atmospheric + cultural)
+> - `kr-hero-industrial-collective-005` — Industrial collective hero for high-drama dashboard headers
+> - `kr-hero-digital-sovereignty-006` — Digital sovereignty hero for tech-forward views
+> Substrate layer for all: `KR-SOLID-021` (Flinders St Night). Atmospheric: resolved via `auto`.
 
 ---
 
@@ -2628,8 +2635,8 @@ interface DropzoneAreaProps {
 ```tsx
 <div className="progress-container">
   <div className="progress-track">
-    <div 
-      className="progress-fill" 
+    <div
+      className="progress-fill"
       style={{ width: `${percentage}%` }}
     />
   </div>
@@ -2916,7 +2923,7 @@ interface FilterSidebarProps {
 - **Effect**: Covers the entire "Results Area" background to suggest a workspace/planning table.
 
 ### 2. Melbourne Laneway (Substrate)
-- **Asset**: `{KR-SOLID-033}`
+- **Asset**: `{KR-SOLID-038}` *(manifest v6.0.0 — Melbourne Laneway substrate)*
 - **Role**: Global texture providing the "grit".
 
 ---
@@ -4637,8 +4644,8 @@ interface SettingsGroupProps {
 
 **Structure:**
 ```tsx
-<button 
-  role="switch" 
+<button
+  role="switch"
   aria-checked={isOn}
   onClick={toggle}
   className={`pebble-toggle ${isOn ? 'on' : 'off'}`}
@@ -4688,7 +4695,7 @@ interface SettingsGroupProps {
 ## Motif Slots
 
 ### 1. Melbourne Laneway (Global)
-- **Asset**: `{KR-SOLID-033}`
+- **Asset**: `{KR-SOLID-038}` *(manifest v6.0.0 — Melbourne Laneway substrate)*
 - **Opacity**: 20%
 
 ### 2. Blueprint Grid (Background)
@@ -4722,6 +4729,10 @@ interface SettingsGroupProps {
 **Mode**: kr-dark (Expressive, Landing Page)
 **Target Score**: ≥360/400 (90% — Excellent)
 **Generated**: 2026-02-16
+**Last Synced (Manifest)**: 2026-03-06 — Manifest v6.0.0 / Hero Registry v3.1.0
+
+> **Hero Composition**: Use `resistance-portrait-hero` composition ID from `kr-solidarity-hero-registry.json`.
+> Layers: substrate=`KR-SOLID-021` (Flinders St Night, Z-1), atmospheric=`auto` (Z-2), resistance=`KR-SOLID-020` (Resistance Portrait, Z-3).
 
 ---
 
@@ -6530,7 +6541,7 @@ All design system standards met or exceeded. No blocking issues. Ready for imple
 .studio-canvas {
   flex: 1;
   background-color: var(--sys-color-charcoalBackground-base);
-  background-image: 
+  background-image:
     linear-gradient(var(--sys-color-inkGold-steps-10) 1px, transparent 1px),
     linear-gradient(90deg, var(--sys-color-inkGold-steps-10) 1px, transparent 1px);
   background-size: 20px 20px; /* Dynamic based on zoom */
@@ -6575,7 +6586,7 @@ All design system standards met or exceeded. No blocking issues. Ready for imple
 - **Blend Mode**: Overlay
 
 ### 3. Abstract Solidarity (Decorative)
-- **Asset**: `{KR-SOLID-011}`
+- **Asset**: `{KR-SOLID-002}` *(manifest v6.0.0 — Abstract Solidarity atmospheric)*
 - **Position**: Edges of canvas bounds.
 
 ---
@@ -6595,4 +6606,3 @@ All design system standards met or exceeded. No blocking issues. Ready for imple
 
 
 ---
-

@@ -16,17 +16,17 @@ describe('KrIcon', () => {
   });
 
   it('maps icon names to the correct public asset paths', () => {
-    expect(resolveKrIconPath('leaf')).toBe(KR_ICON_PATHS.leaf);
+    expect(resolveKrIconPath('stencil')).toBe(KR_ICON_PATHS.stencil);
     expect(resolveKrIconPath('tram')).toBe(KR_ICON_PATHS.tram);
-    expect(resolveKrIconPath('lotus')).toBe(KR_ICON_PATHS.lotus);
+    expect(resolveKrIconPath('seal')).toBe(KR_ICON_PATHS.seal);
     expect(resolveKrIconPath('wheat')).toBe(KR_ICON_PATHS.wheat);
   });
 
   it('renders an accessible inline svg wrapper', async () => {
     render(
       <KrIcon
-        name="leaf"
-        ariaLabel="Leaf motif"
+        name="stencil"
+        ariaLabel="Stencil motif"
         testId="kr-icon"
       />
     );
@@ -37,9 +37,9 @@ describe('KrIcon', () => {
       expect(icon.innerHTML).toContain('<svg');
     });
 
-    expect(icon).toHaveAttribute('role', 'img');
-    expect(icon).toHaveAttribute('aria-label', 'Leaf motif');
-    expect(icon).toHaveAttribute('data-icon-path', KR_ICON_PATHS.leaf);
+    expect(icon.getAttribute('role')).toBe('img');
+    expect(icon.getAttribute('aria-label')).toBe('Stencil motif');
+    expect(icon.getAttribute('data-icon-path')).toBe(KR_ICON_PATHS.stencil);
     expect(icon.querySelector('svg')).not.toBeNull();
     expect(icon.querySelector('title')).toBeNull();
   });

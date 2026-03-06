@@ -250,7 +250,7 @@ export function Analysis() {
             {/* Job URL Intelligence Extractor */}
             <div className="mb-6 bg-surface-container-low rounded-tech p-6 border border-outline">
               <label className="block text-label-large font-bold text-on-surface mb-3">
-                🔗 Job URL (Optional - Australian Sector Intelligence)
+                🔗 Job URL (Optional - Naarm Sector Intelligence)
               </label>
               <div className="flex gap-3">
                 <input
@@ -293,7 +293,7 @@ export function Analysis() {
                 </div>
               )}
               <p className="text-body-small text-on-surface-variant mt-2">
-                Automatically extract keywords, requirements, and Australian sector compliance (APS,
+                Automatically extract keywords, requirements, and Naarm sector compliance (APS,
                 AASW, WWCC, NDIS) from job posting URLs.
               </p>
             </div>
@@ -550,7 +550,7 @@ export function Analysis() {
               <>
                 <p className="text-body-medium text-on-surface-variant mb-6">
                   These sources were automatically discovered via Google Search grounding and
-                  verified for Australian sector compliance.
+                  verified for Naarm sector compliance.
                 </p>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -601,11 +601,11 @@ export function Analysis() {
               </div>
             )}
 
-            {/* Australian Sector Insights */}
+            {/* Naarm Sector Insights */}
             {jobAnalysis.sectorInsights && (
               <div className="mt-6 bg-tertiary-container/20 rounded-pebble p-4 border-l-4 border-tertiary">
                 <h4 className="text-label-large font-bold text-on-tertiary-container mb-3 flex items-center gap-2">
-                  🇦🇺 Australian Sector Intelligence
+                  🇦🇺 Naarm Sector Intelligence
                 </h4>
 
                 {jobAnalysis.sectorInsights.framework && (

@@ -13,9 +13,9 @@ import {
   User,
 } from 'lucide-react';
 import React, { useCallback, useEffect, useState } from 'react';
-import { EditableField } from '../../../components/shared/EditableField';
-import { StatusChip } from '../../../components/shared/StatusChip';
-import { CareerDatabase, KSCResponse, StructuredAchievement } from '../../../types/api';
+import { EditableField } from '@/components/shared/EditableField';
+import { StatusChip } from '@/components/shared/StatusChip';
+import { CareerDatabase, KSCResponse, StructuredAchievement } from '@/types/api';
 
 interface ValidationDashboardProps {
   data: CareerDatabase;
@@ -302,6 +302,7 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
                   };
                   setLocalData(updated);
                   onUpdate(updated);
+                  addToHistory(updated);
                 }}
               />
               <EditableField
@@ -314,6 +315,7 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
                   };
                   setLocalData(updated);
                   onUpdate(updated);
+                  addToHistory(updated);
                 }}
               />
             </div>

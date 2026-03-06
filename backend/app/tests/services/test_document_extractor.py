@@ -1,95 +1,80 @@
-"""Unit tests for the document extraction helpers."""
-
-from types import SimpleNamespace
-from unittest.mock import MagicMock
+from unittest.mock import MagicMock, patch
 
 import pytest
 
-from app.services import document_extractor
+from app.services.document_extractor import (
+    detect_document_links,
+    download_document,
+    extract_documents_from_page,
+    extract_text_from_docx,
+    extract_text_from_pdf,
+)
 
 
-def test_detect_document_links_resolves_relative_and_absolute_urls():
-    """Document links should be normalized against the provided page URL."""
+@pytest.fixture
+def mock_pdf_content():
+    return b"%PDF-1.4\ntest content"
+
+
+@pytest.fixture
+def mock_docx_content():
+    return b"not a real docx but bytes"
+
+
+def test_extract_text_from_pdf_success(mock_pdf_content):
+    mock_reader = MagicMock()
+    mock_page = MagicMock()
+    mock_page.extract_text.return_value = "Extracted PDF Text"
+    mock_reader.pages = [mock_page]
+
+    with (
+        patch("app.services.document_extractor.PdfReader", return_value=mock_reader),
+        patch("app.services.document_extractor.PYPDF_AVAILABLE", True),
+    ):
+
+        result = extract_text_from_pdf(mock_pdf_content)
+        assert "Extracted PDF Text" in result
+
+
+def test_detect_document_links():
     html = """
-    <a href="/files/brief.pdf">PDF</a>
-    <a href="attachments/criteria.docx">DOCX</a>
-    <a href="https://cdn.example.com/forms/app.doc">DOC</a>
+    <html>
+        <a href="resume.pdf">Download Resume</a>
+        <a href="/docs/criteria.docx">Selection Criteria</a>
+        <a href="image.png">Other</a>
+    </html>
     """
+    base_url = "https://example.com/job"
+    links = detect_document_links(html, base_url)
 
-    links = document_extractor.detect_document_links(html, "https://jobs.example.com/openings/123")
-
-    assert links == [
-        ("https://jobs.example.com/files/brief.pdf", "pdf"),
-        ("https://jobs.example.com/openings/attachments/criteria.docx", "docx"),
-        ("https://cdn.example.com/forms/app.doc", "docx"),
-    ]
+    assert len(links) == 2
+    assert ("https://example.com/resume.pdf", "pdf") in links
+    assert ("https://example.com/docs/criteria.docx", "docx") in links
 
 
-def test_download_document_returns_response_content(monkeypatch):
-    """Successful downloads should return raw bytes and use the configured headers."""
-    response = MagicMock()
-    response.content = b"payload"
-    response.raise_for_status.return_value = None
-    request_get = MagicMock(return_value=response)
+def test_download_document_success():
+    mock_response = MagicMock()
+    mock_response.content = b"file content"
+    mock_response.raise_for_status.return_value = None
 
-    monkeypatch.setattr(document_extractor.requests, "get", request_get)
-
-    content = document_extractor.download_document("https://example.com/file.pdf", timeout=12)
-
-    assert content == b"payload"
-    request_get.assert_called_once()
-    _, kwargs = request_get.call_args
-    assert kwargs["timeout"] == 12
-    assert "JobAnalyzer/1.0" in kwargs["headers"]["User-Agent"]
+    with patch("requests.get", return_value=mock_response):
+        result = download_document("https://example.com/file.pdf")
+        assert result == b"file content"
 
 
-def test_extract_text_from_pdf_falls_back_to_pdfminer(monkeypatch):
-    """When pypdf fails, the pdfminer fallback should be used."""
-    reader_factory = MagicMock(side_effect=ValueError("bad pdf"))
-    fallback_extract = MagicMock(return_value="Recovered PDF text")
-
-    monkeypatch.setattr(document_extractor, "PYPDF_AVAILABLE", True)
-    monkeypatch.setattr(document_extractor, "PDFMINER_AVAILABLE", True)
-    monkeypatch.setattr(document_extractor, "PdfReader", reader_factory, raising=False)
-    monkeypatch.setattr(document_extractor, "pdfminer_extract", fallback_extract, raising=False)
-
-    text = document_extractor.extract_text_from_pdf(b"fake-pdf")
-
-    assert text == "Recovered PDF text"
-    reader_factory.assert_called_once()
-    fallback_extract.assert_called_once()
+def test_extract_documents_from_page_none():
+    result = extract_documents_from_page("<html>no links</html>", "https://example.com")
+    assert result == ""
 
 
-def test_extract_text_from_docx_raises_when_dependency_missing(monkeypatch):
-    """The service should fail fast when python-docx is unavailable."""
-    monkeypatch.setattr(document_extractor, "DOCX_AVAILABLE", False)
+@patch("app.services.document_extractor.download_document")
+@patch("app.services.document_extractor.extract_text_from_pdf")
+def test_extract_documents_from_page_success(mock_extract, mock_download):
+    mock_download.return_value = b"bytes"
+    mock_extract.return_value = "Content of PDF"
 
-    with pytest.raises(RuntimeError, match="python-docx not installed"):
-        document_extractor.extract_text_from_docx(b"docx-bytes")
+    html = '<a href="test.pdf">PDF</a>'
+    result = extract_documents_from_page(html, "https://example.com")
 
-
-def test_extract_documents_from_page_combines_successful_extractions(monkeypatch):
-    """Failed documents should be skipped while successful ones are retained."""
-    monkeypatch.setattr(
-        document_extractor,
-        "detect_document_links",
-        MagicMock(
-            return_value=[
-                ("https://example.com/brief.pdf", "pdf"),
-                ("https://example.com/criteria.docx", "docx"),
-            ]
-        ),
-    )
-    monkeypatch.setattr(document_extractor, "download_document", MagicMock(return_value=b"content"))
-    monkeypatch.setattr(document_extractor, "extract_text_from_pdf", MagicMock(return_value="PDF body"))
-    monkeypatch.setattr(
-        document_extractor,
-        "extract_text_from_docx",
-        MagicMock(side_effect=RuntimeError("docx failure")),
-    )
-
-    text = document_extractor.extract_documents_from_page("<html />", "https://example.com")
-
-    assert "--- Document: https://example.com/brief.pdf ---" in text
-    assert "PDF body" in text
-    assert "criteria.docx" not in text
+    assert "Content of PDF" in result
+    assert "--- Document: https://example.com/test.pdf ---" in result

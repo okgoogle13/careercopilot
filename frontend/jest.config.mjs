@@ -26,8 +26,28 @@ export default {
         },
         useESM: true,
         sourceMap: false,
-        babelConfig: {
-          plugins: ['babel-plugin-transform-import-meta'],
+        astTransformers: {
+          before: [
+            {
+              path: 'ts-jest-mock-import-meta',
+              options: {
+                metaObjectReplacement: {
+                  env: {
+                    DEV: true,
+                    PROD: false,
+                    MODE: 'test',
+                    VITE_API_URL: 'http://localhost:8000',
+                    VITE_FIREBASE_API_KEY: 'test-api-key',
+                    VITE_FIREBASE_AUTH_DOMAIN: 'test.firebaseapp.com',
+                    VITE_FIREBASE_PROJECT_ID: 'test-project',
+                    VITE_FIREBASE_STORAGE_BUCKET: 'test.appspot.com',
+                    VITE_FIREBASE_MESSAGING_SENDER_ID: '123456789',
+                    VITE_FIREBASE_APP_ID: '1:123456789:web:abcdef',
+                  },
+                },
+              },
+            },
+          ],
         },
       },
     ],

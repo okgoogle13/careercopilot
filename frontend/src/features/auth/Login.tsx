@@ -4,14 +4,14 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { z } from 'zod';
-import { LoginCard, type LoginCredentials } from '../../components/LoginCard';
-import { useAuth } from '../../context/AuthContext';
+import { LoginCard, type LoginCredentials } from '@/components/LoginCard';
+import { useAuth } from '@/context/AuthContext';
 
 // KeralaRage Assets
 const KrMotifGrid =
-  '/assets/kr-solidarity/specimen/kr-solidarity__specimen__triage-natural-history__v1.png';
+  '/assets/kr-solidarity/abstract/kr-solidarity__atmospheric__texture--solidarity-chatgpt-image-f--v1.png';
 const paperWhiteGrid =
-  '/assets/kr-solidarity/texture/kr-solidarity__substrate__kr-solidarity--texture--melbourne-laneway--v1__v1.png';
+  '/assets/kr-solidarity/texture/kr-solidarity__substrate__landmark--melbourne-laneway--v1.png';
 
 const loginSchema = z.object({
   email: z.string().email('Please enter a valid email'),

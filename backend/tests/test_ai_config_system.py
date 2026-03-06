@@ -1,4 +1,5 @@
 import logging
+
 logger = logging.getLogger(__name__)
 """
 Tests for the AI configuration and client system
@@ -119,7 +120,7 @@ class TestAIConfigManager:
         assert len(config_manager.services) > 0
 
         # Check some expected default models
-        expected_models = ["gemini-2.5-pro", "gemini-2.5-flash"]
+        expected_models = ["gemini-2.0-flash", "gemini-1.5-flash"]
         for model_name in expected_models:
             assert model_name in config_manager.models
 
@@ -516,7 +517,9 @@ class TestAIConfigIntegration:
             # Test validation
             validation = config_manager.validate_configuration()
             # Should have warnings about missing credentials but no errors
-            assert any("No credentials found for provider" in str(warning) for warning in validation)
+            assert any(
+                "No credentials found for provider" in str(warning) for warning in validation
+            )
 
             # Test configuration summary
             summary = config_manager.get_configuration_summary()

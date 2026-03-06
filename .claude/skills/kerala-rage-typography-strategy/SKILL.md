@@ -1,8 +1,8 @@
 ---
 name: kerala-rage-typography-strategy
-description: Apply "Maximum Expressive Playful" kerala-rage kr-solidarity typography
+description: Apply "Solidarity Extension" kerala-rage kr-solidarity typography
   using Variable and Color fonts. Orchestrates 3 interaction tiers (Workhorse, Expressive,
-  Accent) with dynamic axes (GRAD, WONK, SOFT) for kerala-streetprint-meets-Cyberpunk
+  Accent) with dynamic axes (GRAD, WONK, SOFT) for KR streetprint-meets-Migrant-Rage
   aesthetic.
 metadata:
   legacy_frontmatter:
@@ -12,11 +12,11 @@ metadata:
 
 ## Purpose
 
-Orchestrates the kerala-rage kr-solidarity "Maximum Expressive Playful" typography system using variable and color fonts across three interaction tiers (Workhorse, Expressive, Accent).
+Orchestrates the kerala-rage kr-solidarity "Solidarity Extension" typography system using variable and color fonts across three interaction tiers (Workhorse, Expressive, Accent).
 
 ## When to Use
 
-- When designing or implementing UI sections that require the kerala-rage kerala-streetprint-meets-Cyberpunk aesthetic.
+- When designing or implementing UI sections that require the KR streetprint-meets-Migrant-Rage aesthetic.
 - When applying dynamic font axes (GRAD, WONK, SOFT) for interactive or animated text.
 - When pairing script fonts with functional typography to balance readability and personality.
 
@@ -30,7 +30,7 @@ Orchestrates the kerala-rage kr-solidarity "Maximum Expressive Playful" typograp
 3. **Drafting**: Apply the "Dramatic Juxtaposition" strategy for script flourishes.
 4. **Verification**: Check against the Anti-Patterns list (no system fonts, no weight shifts on hover).
 
-## The Core Trinity (Magic Number 3)
+## The Solidarity Trinity (3 Tiers)
 
 ### 1. Primary "Workhorse" (Body & UI)
 
@@ -70,9 +70,9 @@ Orchestrates the kerala-rage kr-solidarity "Maximum Expressive Playful" typograp
 
 _How to mix Cursive with Clean for "Maximum Playfulness"._
 
-1. **The "Check signature"**: Use _Birthstone Bounce_ (Variable) for specific metadata (e.g., "Verified by Claude") against a strict grid of _Lora_.
+1. **The "Check signature"**: Use _Caveat_ for specific metadata (e.g., "Verified by Claude") against a strict grid of _Work Sans_.
    - _Why?_ It feels like a human signing a machine-generated document.
-2. **The "Interrupting Thought"**: Use Script font for <code>&lt;aside&gt;</code> notes that break the layout grid.
+2. **The "Interrupting Thought"**: Use _Caveat_ for <code>&lt;aside&gt;</code> notes that break the layout grid.
    - _Why?_ Visualizes the "Author's Voice" interrupting the "System's Data".
 3. **Motion**: Animate the `wght` (Weight) of the script font on scroll to simulate "ink drying" or pressure applied to the page.
 
@@ -95,7 +95,6 @@ _How to mix Cursive with Clean for "Maximum Playfulness"._
 | ------------ | ------ | -------------------- | -------------------------------------------------------------------------------------- |
 | **Wonky**    | `WONK` | Fraunces             | Introduces kerala-streetprint "typesetter irregularity". Use `WONK: 1` for "Hand-printed" feel. |
 | **Softness** | `SOFT` | Fraunces             | `SOFT: 50` creates "Ink Spread" effect (vintage paper feel).                           |
-| **Ascender** | `YTAS` | Roboto Flex / Others | "Stretch" the vertical rhythm of tall letters (`h`, `l`, `d`) for editorial headers.   |
 
 ---
 
@@ -137,7 +136,7 @@ _Map scroll to Width/Wonk for "alive" text._
 
 ### Pattern 3: Color Font Palette Switching
 
-_kerala-streetprint Day -> Cyberpunk Night._
+_KR-Solidarity Substrate -> Resistance Red._
 
 ```css
 @font-palette-values --kerala-rage-sepia {
@@ -167,18 +166,18 @@ _kerala-streetprint Day -> Cyberpunk Night._
 
 ## Typography Emotion Dimensions (Revised)
 
-| Dimension             | Implementation                                                          |
-| --------------------- | ----------------------------------------------------------------------- |
-| **Scholarly Rigor**   | `Fraunces`, `WONK: 0`, `SOFT: 0`, `opsz: 144` (Sharp, High Contrast)    |
-| **Street Truth**      | `Libre Bodoni`, extreme weight/contrast                                |
-| **Melancholy Breath** | `Fraunces`, `WONK: 1`, `SOFT: 50`, `opsz: 14` (Soft, Inky)             |
-| **Interactive Pulse** | `Work Sans`, `GRAD` animation (0 -> 150) on interact                    |
+| Dimension              | Implementation                                                          |
+| ---------------------- | ----------------------------------------------------------------------- |
+| **Solidarity Protest** | `Fraunces`, `wdth: 120`, `wght: 800`, `WONK: 1` (Collective Breath)     |
+| **Labor Pressure**     | `Fraunces`, `wdth: 75`, `wght: 900`, `WONK: 0` (Compressed Fatigue)     |
+| **Melancholy Longing** | `Fraunces`, `wght: 475`, `wdth: 98`, `SOFT: 50` (Subtle Instability)    |
+| **Interactive Pulse**  | `Work Sans`, `GRAD` animation (0 -> 150) on interact                    |
 
 ---
 
 ## Anti-Patterns (What NOT to do)
 
-❌ **Static Font Files**: Do not import `Lora-Bold.ttf`. Use `Lora-Variable.ttf`.
+❌ **Static Font Files**: Do not import `WorkSans-Bold.ttf`. Use `WorkSans-Variable.ttf`.
 ❌ **Weight Shifts on Hover**: `font-weight: bold` on hover causes "layout jump". Use `GRAD` instead.
 ❌ **Axis Overload**: Don't animate `wght`, `wdth`, `slnt`, and `opsz` all at once. "Visual Chaos" != Expressive.
 ❌ **System Fonts**: New kerala-rage standard **bans** usage of system fonts for "Workhorse" tier.
@@ -192,8 +191,8 @@ Typography tiers reinforce the voice tier system defined in [DOC-006](file:///Us
 | Typography Tier           | Font                      | Voice Tier                      | Copy Style                  |
 | :------------------------ | :------------------------ | :------------------------------ | :-------------------------- |
 | **Workhorse**             | Work Sans                 | Tier 1 (Functional)             | Clear, direct labels        |
-| **Expressive**            | Fraunces / Libre Bodoni   | Tier 2-3 (Contextual/Character) | Playful, Stencilled         |
-| **Accent (Curator)**      | Caveat / Nabla            | Tier 3 (Character)              | Flourishes, icon-glyphs     |
+| **Expressive**            | Fraunces / Libre Bodoni   | Tier 2-3 (Contextual/Character) | Solidarity, Resistance      |
+| **Accent (Curator)**      | Caveat / Nabla            | Tier 3 (Character)              | Hand-cut, stencil, icons    |
 
 **Rule**: If the typography is Workhorse (Work Sans), the copy should be Tier 1 (functional). Personality flourishes belong with Expressive typography.
 

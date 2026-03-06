@@ -5,7 +5,8 @@ import { MainCanvas } from './components/MainCanvas';
 import { NavRail } from './components/NavRail';
 import { SidePanel } from './components/SidePanel';
 
-const KR_LOGO_SRC = '/assets/kr-solidarity/ui-kit/svg/KR-LOGO-001-primary.svg';
+const KR_LOGO_SRC =
+  '/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__brand--careercopilot-primary-logo--v1.svg';
 
 /**
  * LayoutShell

@@ -1,33 +1,35 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import { LoginCard } from '../index';
-
 // Mock framer-motion
-jest.mock('framer-motion', () => ({
+(jest as any).unstable_mockModule('framer-motion', () => ({
   motion: {
-    form: ({ children, onSubmit, className, 'aria-label': ariaLabel, role }: any) => (
+    form: ({ children, onSubmit, className, 'aria-label': ariaLabel, role, ...props }: any) => (
       <form
         onSubmit={onSubmit}
         className={className}
         aria-label={ariaLabel}
         role={role}
         data-testid="motion-form"
+        {...props}
       >
         {children}
       </form>
     ),
-    button: ({ children, whileHover, whileTap, className, type, disabled }: any) => (
+    button: ({ children, whileHover, whileTap, className, type, disabled, ...props }: any) => (
       <button
         className={className}
         type={type}
         disabled={disabled}
         data-testid="motion-button"
+        {...props}
       >
         {children}
       </button>
     ),
   },
 }));
+
+const { LoginCard } = await import('../index');
 
 describe('LoginCard', () => {
   const onLogin = jest.fn();

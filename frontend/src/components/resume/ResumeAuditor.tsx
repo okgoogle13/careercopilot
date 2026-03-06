@@ -46,7 +46,7 @@ export const ResumeAuditor: React.FC = () => {
               onClick={() => setStrictness(mode)}
               className={`btn-pebble text-xs px-sm py-xs ${
                 strictnessMode === mode
-                  ? 'bg-wattle-gold text-asphalt-black'
+                  ? 'bg-ink-gold text-asphalt-black'
                   : 'bg-asphalt-black-light text-concrete-grey-light'
               }`}
             >
@@ -85,8 +85,8 @@ export const ResumeAuditor: React.FC = () => {
 
       {/* Error Display */}
       {error && (
-        <div className="border-l-4 border-waratah-red pl-md py-sm mb-md bg-asphalt-black-light">
-          <p className="text-body-medium text-waratah-red">{error}</p>
+        <div className="border-l-4 border-solidarity-crimson pl-md py-sm mb-md bg-asphalt-black-light">
+          <p className="text-body-medium text-solidarity-crimson">{error}</p>
         </div>
       )}
 
@@ -97,7 +97,7 @@ export const ResumeAuditor: React.FC = () => {
         className={`btn-pebble w-full py-md text-body-bold ${
           loading || resumeText.length < 100
             ? 'bg-concrete-grey-dark text-concrete-grey cursor-not-allowed'
-            : 'bg-wattle-gold text-asphalt-black hover:bg-wattle-gold-light'
+            : 'bg-ink-gold text-asphalt-black hover:bg-ink-gold-light'
         }`}
       >
         {loading ? 'Analyzing Resume...' : 'Audit Resume'}

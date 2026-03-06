@@ -44,7 +44,7 @@ export const KrDarkProfile: React.FC = () => {
             Archive_Naturalist_01
           </h1>
           <p className="font-annotation text-[10px] uppercase tracking-[0.5em] text-paper-white/30">
-            REGISTERED: 2024.01.12 // SECTOR: NORTHCOTE_PR_7
+            REGISTERED: 2024.01.12 // SECTOR: KERALA-RAGE_PR_7
           </p>
         </div>
       </motion.div>

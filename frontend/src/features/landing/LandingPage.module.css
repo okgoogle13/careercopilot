@@ -82,9 +82,9 @@
 }
 
 /* ==========================================
-   LAYER 2: kr-motif Anchors
+   LAYER 2: Motif Anchors
 ========================================== */
-.kr-motifLayer {
+.motifLayer {
   position: absolute;
   inset: 0;
   z-index: 3;

@@ -159,7 +159,7 @@ export const DropZone: React.FC<DropZoneProps> = ({
         </>
       )}
 
-      {/* Flora Asset (Bottom-Right) */}
+      {/* Landscape Asset (Bottom-Right) */}
       <div
         className="pointer-events-none absolute bottom-4 right-4 opacity-30"
         style={{ width: '120px', height: '120px' }}

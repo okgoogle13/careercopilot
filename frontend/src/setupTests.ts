@@ -31,24 +31,117 @@ afterEach(() => {
   cleanup();
 });
 
-// Mock Firebase - REMOVED
-jest.mock('firebase/app', () => ({
-  initializeApp: jest.fn(() => ({})),
+// Mock Firebase with ESM-friendly patterns
+(jest as any).unstable_mockModule('firebase/app', () => ({
+  initializeApp: (jest as any).fn(() => ({})),
+  getApps: (jest as any).fn(() => []),
+  getApp: (jest as any).fn(() => ({})),
+  terminate: (jest as any).fn(() => Promise.resolve()),
 }));
 
-jest.mock('firebase/auth', () => ({
-  getAuth: jest.fn(() => ({
+(jest as any).unstable_mockModule('firebase/auth', () => ({
+  getAuth: (jest as any).fn(() => ({
     currentUser: null,
+    onAuthStateChanged: (jest as any).fn(() => (jest as any).fn()),
   })),
+  signInWithEmailAndPassword: (jest as any).fn(),
+  createUserWithEmailAndPassword: (jest as any).fn(),
+  signOut: (jest as any).fn(),
 }));
 
-jest.mock('firebase/storage', () => ({
-  getStorage: jest.fn(() => ({})),
+(jest as any).unstable_mockModule('firebase/storage', () => ({
+  getStorage: (jest as any).fn(() => ({})),
+  ref: (jest as any).fn(),
+  uploadBytes: (jest as any).fn(),
+  getDownloadURL: (jest as any).fn(),
 }));
 
-jest.mock('firebase/firestore', () => ({
-  getFirestore: jest.fn(() => ({})),
+(jest as any).unstable_mockModule('firebase/firestore', () => ({
+  getFirestore: (jest as any).fn(() => ({})),
+  collection: (jest as any).fn(),
+  doc: (jest as any).fn(),
+  getDoc: (jest as any).fn(),
+  getDocs: (jest as any).fn(),
+  setDoc: (jest as any).fn(),
+  addDoc: (jest as any).fn(),
 }));
+
+import React from 'react';
+
+// Global mock for framer-motion to prevent animation leaks
+(jest as any).unstable_mockModule('framer-motion', () => {
+  const motionComponents = new Map();
+
+  const motion = new Proxy(
+    {},
+    {
+      get: (_target, prop) => {
+        if (typeof prop !== 'string') return undefined;
+
+        if (!motionComponents.has(prop)) {
+          const Component = React.forwardRef(({ children, ...props }: any, ref: any) => {
+            const {
+              transition,
+              animate,
+              initial,
+              whileHover,
+              whileTap,
+              whileInView,
+              variants,
+              layout,
+              exit,
+              onAnimationStart,
+              onAnimationComplete,
+              onUpdate,
+              ...domProps
+            } = props;
+            return React.createElement(prop, { ...domProps, ref }, children);
+          });
+          Component.displayName = `motion.${prop}`;
+          motionComponents.set(prop, Component);
+        }
+        return motionComponents.get(prop);
+      },
+    }
+  );
+
+  return {
+    motion,
+    AnimatePresence: ({ children }: any) => children,
+    useAnimation: () => ({
+      start: jest.fn(),
+      stop: jest.fn(),
+    }),
+    useReducedMotion: () => false,
+    useInView: () => true,
+    useScroll: () => ({ scrollY: { get: () => 0 }, scrollYProgress: { get: () => 0 } }),
+    useTransform: () => ({ get: () => 0 }),
+    useSpring: () => ({ get: () => 0 }),
+    variants: {},
+    LayoutGroup: ({ children }: any) => children,
+  };
+});
+
+// Ensure fetch is always mocked
+if (!global.fetch) {
+  (global as any).fetch = (jest as any).fn().mockImplementation(() =>
+    Promise.resolve({
+      ok: true,
+      json: () => Promise.resolve({}),
+    })
+  );
+} else if ((global.fetch as any).mockImplementation) {
+  // Already a mock, reuse
+} else {
+  (global as any).fetch = (jest as any).fn();
+}
+
+// Ensure clean state after each test
+afterEach(() => {
+  cleanup();
+  if ((global.fetch as any).mockClear) (global.fetch as any).mockClear();
+  (jest as any).clearAllTimers();
+});
 
 // Mock window.matchMedia for Material-UI components
 Object.defineProperty(window, 'matchMedia', {

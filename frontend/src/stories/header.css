@@ -2,9 +2,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid
+    color-mix(in srgb, var(--sys-color-worker-ash-base, #daf6b3) 12%, transparent);
   padding: 15px 20px;
-  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: var(--font-primary, 'Work Sans', sans-serif);
 }
 
 .storybook-header svg {
@@ -27,6 +28,6 @@
 
 .storybook-header .welcome {
   margin-right: 10px;
-  color: #333;
+  color: var(--sys-color-worker-ash-base, #daf6b3);
   font-size: 14px;
 }

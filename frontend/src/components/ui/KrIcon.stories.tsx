@@ -6,14 +6,14 @@ const meta: Meta<typeof KrIcon> = {
   component: KrIcon,
   tags: ['autodocs'],
   args: {
-    name: 'leaf',
+    name: 'stencil',
     size: 24,
-    ariaLabel: 'Leaf icon',
+    ariaLabel: 'Stencil icon',
   },
   argTypes: {
     name: {
       control: 'select',
-      options: ['leaf', 'tram', 'lotus', 'wheat'],
+      options: ['stencil', 'tram', 'seal', 'wheat'],
     },
     size: {
       control: { type: 'number', min: 16, max: 64, step: 4 },
@@ -29,7 +29,7 @@ export const Playground: Story = {};
 export const AllIcons: Story = {
   render: () => (
     <div className="flex flex-wrap items-center gap-6 bg-surface-KrDark-slate-smoke-high p-6 text-on-surface-paper-white">
-      {(['leaf', 'tram', 'lotus', 'wheat'] as const).map((name) => (
+      {(['stencil', 'tram', 'seal', 'wheat'] as const).map((name) => (
         <div
           key={name}
           className="flex flex-col items-center gap-2"
@@ -55,9 +55,9 @@ export const SizeVariants: Story = {
           className="flex flex-col items-center gap-2"
         >
           <KrIcon
-            name="lotus"
+            name="seal"
             size={size}
-            ariaLabel={`Lotus icon ${size}px`}
+            ariaLabel={`Seal icon ${size}px`}
           />
           <span className="font-annotation text-xs uppercase tracking-widest">{size}px</span>
         </div>
@@ -73,7 +73,7 @@ export const CustomClassName: Story = {
         name="wheat"
         size={48}
         ariaLabel="Wheat icon with framed wrapper"
-        className="rounded-full border border-wattle-gold/30 bg-surface-KrDark-slate-smoke-highest p-2 shadow-sm"
+        className="rounded-full border border-ink-gold/30 bg-surface-KrDark-slate-smoke-highest p-2 shadow-sm"
       />
     </div>
   ),

@@ -1,5 +1,5 @@
 /**
- * NORTHCOTE CURIO: PROFILE CARD (MUI Replacement)
+ * KERALA-RAGE SOLIDARITY: PROFILE CARD (MUI Replacement)
  *
  * Profile card component using  Design System v4.4.
  * Refactored to use CSS variables from unified design tokens.

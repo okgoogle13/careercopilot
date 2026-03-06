@@ -161,42 +161,56 @@ def _init_metrics():
     if not PROMETHEUS_AVAILABLE:
         return
 
-    # Helper to check if metric is already registered
-    def is_registered(name):
-        return any(
-            c._name == name for c in REGISTRY._collector_to_names.keys() if hasattr(c, "_name")
-        )
+    # Helper to get existing metric or create new one
+    def get_or_create(metric_class, name, description, labels):
+        # First, try to find it in the global registry to avoid ValueError
+        for collector in REGISTRY._collector_to_names.keys():
+            if hasattr(collector, "_name") and collector._name == name:
+                return collector
+
+        # If not found, try to create it (with safety)
+        try:
+            return metric_class(name, description, labels)
+        except ValueError:
+            # Fallback for race conditions or hidden registration
+            return None
 
     if "http_requests" not in _metrics:
-        name = "http_requests_total"
-        if not is_registered(name):
-            _metrics["http_requests"] = Counter(
-                name, "Total HTTP requests", ["method", "endpoint", "status", "env"]
-            )
-        else:
-            # Re-bind if already registered in this process (e.g. during reload)
-            # This is a bit tricky with prometheus_client, but often just getting it from registry works
-            # For simplicity, we just skip if already there and it will be handled by the next check if needed
-            pass
+        m = get_or_create(
+            Counter,
+            "http_requests_total",
+            "Total HTTP requests",
+            ["method", "endpoint", "status", "env"],
+        )
+        if m:
+            _metrics["http_requests"] = m
 
     if "http_duration" not in _metrics:
-        name = "http_request_duration_seconds"
-        if not is_registered(name):
-            _metrics["http_duration"] = Histogram(
-                name, "HTTP request duration", ["method", "endpoint", "env"]
-            )
+        m = get_or_create(
+            Histogram,
+            "http_request_duration_seconds",
+            "HTTP request duration",
+            ["method", "endpoint", "env"],
+        )
+        if m:
+            _metrics["http_duration"] = m
 
     if "ai_operations" not in _metrics:
-        name = "ai_operations_total"
-        if not is_registered(name):
-            _metrics["ai_operations"] = Counter(
-                name, "Total AI operations", ["operation", "status", "env"]
-            )
+        m = get_or_create(
+            Counter, "ai_operations_total", "Total AI operations", ["operation", "status", "env"]
+        )
+        if m:
+            _metrics["ai_operations"] = m
 
     if "ai_duration" not in _metrics:
-        name = "ai_operation_duration_seconds"
-        if not is_registered(name):
-            _metrics["ai_duration"] = Histogram(name, "AI operation duration", ["operation", "env"])
+        m = get_or_create(
+            Histogram,
+            "ai_operation_duration_seconds",
+            "AI operation duration",
+            ["operation", "env"],
+        )
+        if m:
+            _metrics["ai_duration"] = m
 
 
 _init_metrics()
@@ -221,7 +235,11 @@ def monitor_performance(operation_name: Optional[str] = None):
                 result = await func(*args, **kwargs)
                 duration = time.perf_counter() - start
 
-                if PROMETHEUS_AVAILABLE:
+                if (
+                    PROMETHEUS_AVAILABLE
+                    and "ai_operations" in _metrics
+                    and "ai_duration" in _metrics
+                ):
                     _metrics["ai_operations"].labels(
                         operation=op_name, status="success", env=env
                     ).inc()
@@ -236,7 +254,7 @@ def monitor_performance(operation_name: Optional[str] = None):
                 return result
             except Exception as e:
                 duration = time.perf_counter() - start
-                if PROMETHEUS_AVAILABLE:
+                if PROMETHEUS_AVAILABLE and "ai_operations" in _metrics:
                     _metrics["ai_operations"].labels(
                         operation=op_name, status="error", env=env
                     ).inc()
@@ -258,7 +276,11 @@ def monitor_performance(operation_name: Optional[str] = None):
                 result = func(*args, **kwargs)
                 duration = time.perf_counter() - start
 
-                if PROMETHEUS_AVAILABLE:
+                if (
+                    PROMETHEUS_AVAILABLE
+                    and "ai_operations" in _metrics
+                    and "ai_duration" in _metrics
+                ):
                     _metrics["ai_operations"].labels(
                         operation=op_name, status="success", env=env
                     ).inc()
@@ -273,7 +295,7 @@ def monitor_performance(operation_name: Optional[str] = None):
                 return result
             except Exception as e:
                 duration = time.perf_counter() - start
-                if PROMETHEUS_AVAILABLE:
+                if PROMETHEUS_AVAILABLE and "ai_operations" in _metrics:
                     _metrics["ai_operations"].labels(
                         operation=op_name, status="error", env=env
                     ).inc()

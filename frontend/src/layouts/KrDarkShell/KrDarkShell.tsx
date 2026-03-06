@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
-import { Fireflies } from './components/Fireflies';
+import { HaloPulses } from './components/HaloPulses';
 import { KrDarkDock } from './components/KrDarkDock';
 
 // Views
@@ -96,7 +96,7 @@ export const KrDarkShell: React.FC<{ children?: React.ReactNode }> = ({ children
   return (
     <div className="relative min-h-screen w-full overflow-hidden bg-surface-asphalt-black-base text-on-surface-paper-white font-primary antialiased selection:bg-ink-gold selection:text-surface-asphalt-black-base">
       {/* Atmospheric Effects */}
-      <Fireflies count={20} />
+      <HaloPulses count={20} />
 
       {/* Background Gradient Mesh (Subtle) */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,var(--sys-color-solidaritySmokeOrange-base)_0%,var(--sys-color-charcoalBackground-base)_100%)] opacity-20 pointer-events-none z-0" />

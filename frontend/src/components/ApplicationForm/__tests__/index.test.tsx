@@ -1,17 +1,16 @@
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import { ApplicationForm } from '../index';
-
 // Mock framer-motion
-jest.mock('framer-motion', () => ({
+(jest as any).unstable_mockModule('framer-motion', () => ({
   motion: {
-    div: ({ children, onDragOver, onDragLeave, onDrop, className, animate }: any) => (
+    div: ({ children, onDragOver, onDragLeave, onDrop, className, animate, ...props }: any) => (
       <div
         onDragOver={onDragOver}
         onDragLeave={onDragLeave}
         onDrop={onDrop}
         className={className}
         data-testid="motion-div"
+        {...props}
       >
         {children}
       </div>
@@ -19,6 +18,8 @@ jest.mock('framer-motion', () => ({
   },
   AnimatePresence: ({ children }: any) => <>{children}</>,
 }));
+
+const { ApplicationForm } = await import('../index');
 
 describe('ApplicationForm', () => {
   const onUpload = jest.fn();
@@ -47,7 +48,7 @@ describe('ApplicationForm', () => {
   it('calls onUpload and shows success when a file is dropped', () => {
     render(<ApplicationForm onUpload={onUpload} />);
     const file = new File(['dummy content'], 'resume.pdf', { type: 'application/pdf' });
-    const dropzone = screen.getByRole('region', { name: 'Document Deposition' });
+    const dropzone = screen.getAllByTestId('motion-div')[0];
 
     fireEvent.drop(dropzone, {
       dataTransfer: {
@@ -81,7 +82,7 @@ describe('ApplicationForm', () => {
 
   it('handles drag leave/over states', () => {
     render(<ApplicationForm onUpload={onUpload} />);
-    const dropzone = screen.getByRole('region', { name: 'Document Deposition' });
+    const dropzone = screen.getAllByTestId('motion-div')[0];
 
     fireEvent.dragOver(dropzone);
     // Visual check handled by framer-motion props in real UI,

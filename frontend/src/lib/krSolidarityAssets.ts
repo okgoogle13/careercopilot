@@ -37,7 +37,7 @@ export interface KRAssetInteractionScale {
 
 export interface KRAssetIdentityLayers {
   indian: 'dominant' | 'integrated' | 'present' | 'absent';
-  australian: 'dominant' | 'integrated' | 'present' | 'absent';
+  naarm: 'dominant' | 'integrated' | 'present' | 'absent';
   first_nations: 'dominant' | 'integrated' | 'present' | 'absent';
 }
 

@@ -24,7 +24,7 @@ export function useGalleryData() {
         title: 'Senior Product Designer',
         timestamp: 'Just now',
         description: 'New role aligned with your portfolio focus. Strong match for design systems.',
-        meta: { company: 'Northcote Labs', matchScore: 92 },
+        meta: { company: 'KeralaRage Labs', matchScore: 92 },
       },
       {
         id: 'feed-2',

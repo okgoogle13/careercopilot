@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { ManifestoSlab, ManifestoCard, ActionButton } from '../../../components/kerala-rage';
 import { LayeredHero } from '../../../components/kerala-rage/LayeredHero';
+import { NativeAnchor } from '../../../components/ui';
 import type { SolidarityManifest } from '../../../design/hero/heroTypes';
 import { composeHero } from '../../../lib/composeHero';
 import type { CompositionResult } from '../../../lib/composeHero';
@@ -90,23 +91,12 @@ export const KrDarkLanding: React.FC = () => {
       {/* SECTION 2: The Manifesto Core */}
       <div className="grid lg:grid-cols-5 gap-16 items-center w-full">
         {/* Visual Anchor */}
-        <motion.div
-          initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, x: -30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.8, duration: 1 }}
-          className="lg:col-span-2 relative group"
-        >
-          {/* TODO[asset]: Elephant Motif overlay (Z-1) */}
-          <div className="absolute inset-0 bg-ink-gold/5 blur-[120px] rounded-full scale-150" />
-          <div className="relative aspect-[3/4] bg-asphalt-black rounded-stone border border-surface-KrDark-concrete-grey-high/20 overflow-hidden shadow-viscous group-hover:border-ink-gold/20 transition-colors duration-700">
-            <div className="absolute inset-0 bg-gradient-to-t from-asphalt-black via-asphalt-black/40 to-transparent" />
-            <div className="absolute bottom-6 left-6">
-              <span className="font-mono text-[10px] uppercase tracking-widest text-paper-white/30">
-                REF: SENTRY_ARCHIVE_01
-              </span>
-            </div>
-          </div>
-        </motion.div>
+        <NativeAnchor
+          assetId="KR-SOLID-033"
+          register="Defiance"
+          className="lg:col-span-2"
+          zIndex={10}
+        />
 
         {/* The Manifesto Card */}
         <motion.div

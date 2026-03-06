@@ -5,7 +5,7 @@ import { CheckCircle, AlertCircle, Info, AlertTriangle } from 'lucide-react';
 /**
  * m3Toast -  Themed Notifications
  *
- * A wrapper around sonner that applies Curio design tokens and organic styling.
+ * A wrapper around sonner that applies Solidarity design tokens and organic styling.
  * m3Toast - KeralaRage KrSolidarity Themed Notifications
  *
  * A wrapper around sonner that applies KrSolidarity design tokens and [DEPRECATED_STYLE] styling.

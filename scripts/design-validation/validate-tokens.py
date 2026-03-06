@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Enhanced Design Token Validator
-Validates DTCG compliance, Kashmir Rage palette rules, circular references,
+Validates DTCG compliance, Kerala Rage palette rules, circular references,
 and consistency between tokens.json and generated CSS variables.
 
 Exit codes:
@@ -20,7 +20,7 @@ CSS_FILE = Path("frontend/src/design/styles/design-tokens.css")
 
 # Kerala Rage semantic color tokens that MUST exist
 REQUIRED_SEMANTIC_COLORS = {
-    "charcoalBackground": "#1A1A1A",
+    "charcoalBackground": "#1A1714",
     "solidarityRed": "#F14714",
     "kr-charcoalRed": "#F14844",
     "kr-activistSmokeGreen": "#48DA8B",
@@ -39,6 +39,23 @@ REQUIRED_FONTS = {
 
 # Expected structure for each color token
 EXPECTED_COLOR_STRUCTURE = ["base", "steps", "usage"]
+
+
+def is_color_token(node: Dict) -> bool:
+    """Return True when node matches the expected color token leaf shape."""
+    if not isinstance(node, dict):
+        return False
+    base = node.get("base")
+    steps = node.get("steps")
+    usage = node.get("usage")
+    return (
+        isinstance(base, dict)
+        and "$value" in base
+        and isinstance(steps, dict)
+        and "$value" in steps
+        and isinstance(usage, dict)
+        and "$value" in usage
+    )
 
 
 def load_tokens(path: Path) -> Dict:
@@ -187,6 +204,9 @@ def validate_css_generation(tokens: Dict, css_vars: Dict[str, str]) -> List[str]
     sys_colors = tokens.get("sys", {}).get("color", {})
 
     for color_name, color_token in sys_colors.items():
+        if not is_color_token(color_token):
+            # Skip non-color groups such as semantic aliases.
+            continue
         base_value = color_token.get("base", {}).get("$value", "")
         css_var_name = f"--sys-color-{color_name}-base"
 

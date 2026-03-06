@@ -80,6 +80,7 @@ export const LoginCard: React.FC<LoginCardProps> = ({
             </label>
             <input
               id="email-input"
+              data-testid="email-input"
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -100,6 +101,7 @@ export const LoginCard: React.FC<LoginCardProps> = ({
             </label>
             <input
               id="password-input"
+              data-testid="password-input"
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
