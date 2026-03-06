@@ -33,7 +33,8 @@ Centralize shared templates, design philosophies, and forbidden patterns that mu
 
 ### Brand & Philosophy
 
-- [kerala-rage_DESIGN_PHILOSOPHY.md](file:///.claude/skills/shared-references/kerala-rage_DESIGN_PHILOSOPHY.md): The "kerala-rage kr-solidarity" core aesthetic (kerala-streetprint [DEPRECATED_STYLE] vs. Modern Australian).
+- [kerala-rage_DESIGN_PHILOSOPHY.md](file:///.claude/skills/shared-references/kerala-rage_DESIGN_PHILOSOPHY.md): The KR Solidarity Migrant Rage core aesthetic — streetprint stencil, resistance portraiture, diaspora identity. No flora, no Australian endemic elements.
+- [KERALA_RAGE_MANIFESTO.md](file:///.claude/skills/shared-references/KERALA_RAGE_MANIFESTO.md): Agit-prop manifesto declaring what kerala-rage IS and IS NOT. Hard bans and doctrine.
 - [kerala-rage_FORBIDDEN_FONTS.md](file:///.claude/skills/shared-references/kerala-rage_FORBIDDEN_FONTS.md): Deny-list of fonts that undermine the project's unique character.
 
 ### Templates (Planned)

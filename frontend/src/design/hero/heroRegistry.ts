@@ -12,7 +12,7 @@ const FALLBACK_REGISTRY: HeroRegistry = {
       layers: [
         {
           type: 'substrate',
-          asset_id: 'KR-SOLID-033',
+          asset_id: 'KR-SOLID-038',
           z_index: 1,
           opacity: 0.6,
           blend_mode: 'normal',

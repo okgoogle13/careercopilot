@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-export type KrIconName = 'leaf' | 'tram' | 'lotus' | 'wheat';
+export type KrIconName = 'stencil' | 'tram' | 'seal' | 'wheat';
 
 export interface KrIconProps {
   name: KrIconName;
@@ -11,18 +11,21 @@ export interface KrIconProps {
 }
 
 export const KR_ICON_PATHS: Record<KrIconName, string> = {
-  leaf: '/assets/kr-solidarity/ui-kit/svg/KR-ICON-001-leaf.svg',
-  tram: '/assets/kr-solidarity/ui-kit/svg/KR-ICON-002-tram.svg',
-  lotus: '/assets/kr-solidarity/ui-kit/svg/KR-ICON-003-lotus.svg',
-  wheat: '/assets/kr-solidarity/ui-kit/svg/KR-ICON-004-wheat.svg',
+  stencil: '/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__icons--stencil-mark--v1.svg',
+  tram: '/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__icons--melbourne-tram-icon--v1.svg',
+  seal: '/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__icons--solidarity-seal--v1.svg',
+  wheat: '/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__icons--wheat-paste-icon--v1.svg',
 };
 
 const RAW_ICON_MODULES: Record<string, () => Promise<string>> =
   typeof import.meta.glob === 'function'
-    ? (import.meta.glob('../../../public/assets/kr-solidarity/ui-kit/svg/KR-ICON-*.svg', {
-        query: '?raw',
-        import: 'default',
-      }) as Record<string, () => Promise<string>>)
+    ? (import.meta.glob(
+        '../../../public/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__icons--*.svg',
+        {
+          query: '?raw',
+          import: 'default',
+        }
+      ) as Record<string, () => Promise<string>>)
     : {};
 
 const iconMarkupCache = new Map<KrIconName, string>();

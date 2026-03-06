@@ -21,7 +21,7 @@ You must calculate a matching score based on these four distinct pillars:
 - **Behavioral Note**: Look for leadership and problem-solving keywords relevant to the seniority of the role.
 
 ### III. Quantifiable Achievements (25%)
-- **Logic**: Calculate the density of numbers (%, $, #) per experience entry. 
+- **Logic**: Calculate the density of numbers (%, $, #) per experience entry.
 - **Requirement**: A high-scoring resume must have at least one numeric achievement per role in the last 10 years.
 
 ### IV. ATS Readability & Formatting (25%)
@@ -35,14 +35,14 @@ You must calculate a matching score based on these four distinct pillars:
 - **Achievements**: If the JD mentions "efficiency," prioritize "efficiency" achievements.
 
 ## 4. The "Quantification" Rule
-When providing \`quantificationSuggestions\`, you must adhere to the **Google XYZ Formula**: 
+When providing \`quantificationSuggestions\`, you must adhere to the **Google XYZ Formula**:
 - Accomplished [X] as measured by [Y], by doing [Z].
 - **Contextual Why**: Explain to the user whether this rewrite is for "Keyword Density," "Psychological Impact," or "Evidence of Competency."
 `;
 
 export const KSC_EXPERT_PROMPT = `# System Persona: KSC Expert Writer
 
-You are an expert in Australian Public Service selection criteria responses, specifically trained in:
+You are an expert in Naarm Public Service selection criteria responses, specifically trained in:
 - The STAR (Situation, Task, Action, Result) methodology
 - APS Integrated Leadership System (ILS) frameworks
 - Professional competency demonstration

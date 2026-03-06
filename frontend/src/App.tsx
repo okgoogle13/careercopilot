@@ -10,7 +10,7 @@ import {
 } from 'react-router-dom';
 import { Toaster } from 'sonner';
 const texturePattern =
-  '/assets/kr-solidarity/texture/kr-solidarity__substrate__kr-solidarity--texture--melbourne-laneway--v1__v1.png';
+  '/assets/kr-solidarity/texture/kr-solidarity__substrate__landmark--melbourne-laneway--v1.png';
 import { TokenTest } from './components/debug/TokenTest';
 import { getModeForRoute } from './config/routeModeMap';
 import { useAuth } from './context/AuthContext';

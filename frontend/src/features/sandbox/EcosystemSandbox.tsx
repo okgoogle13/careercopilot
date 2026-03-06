@@ -1,9 +1,7 @@
 import { useState } from 'react';
-import { GardenLayout } from '@/components/layouts/GardenLayout';
 import { AuroraHeader } from '@/components/ui/AuroraHeader';
 import { EvidenceSidebar } from './components/EvidenceSidebar';
 import { SplitEditor } from './components/SplitEditor';
-import { NativeAnchor } from '@/components/ui/NativeAnchor';
 import { Building2, Landmark } from 'lucide-react';
 
 export type Archetype = 'gov' | 'corp';
@@ -13,13 +11,7 @@ export function EcosystemSandbox() {
   const [archetype, setArchetype] = useState<Archetype>('gov');
 
   return (
-    <GardenLayout>
-      <NativeAnchor
-        variant="fern"
-        anchor="ceiling-left"
-        className="opacity-60"
-      />
-
+    <div className="relative min-h-screen bg-surface-KrDark-slate-smoke-high overflow-hidden">
       <div className="p-4 md:p-8 h-[calc(100vh)] flex flex-col animate-in fade-in zoom-in-95 duration-500">
         <div className="flex-none mb-6 flex flex-col md:flex-row md:items-end justify-between gap-4">
           <AuroraHeader
@@ -71,6 +63,6 @@ export function EcosystemSandbox() {
           </div>
         </div>
       </div>
-    </GardenLayout>
+    </div>
   );
 }

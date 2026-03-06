@@ -1,11 +1,17 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import { KanbanCard } from '../index';
-
 // Mock framer-motion
-jest.mock('framer-motion', () => ({
+(jest as any).unstable_mockModule('framer-motion', () => ({
   motion: {
-    div: ({ children, onClick, onDragStart, className, role, 'aria-label': ariaLabel }: any) => (
+    div: ({
+      children,
+      onClick,
+      onDragStart,
+      className,
+      role,
+      'aria-label': ariaLabel,
+      ...props
+    }: any) => (
       <div
         onClick={onClick}
         onDragStart={onDragStart}
@@ -13,12 +19,15 @@ jest.mock('framer-motion', () => ({
         role={role}
         aria-label={ariaLabel}
         data-testid="motion-div"
+        {...props}
       >
         {children}
       </div>
     ),
   },
 }));
+
+const { KanbanCard } = await import('../index');
 
 describe('KanbanCard', () => {
   const onSelect = jest.fn();

@@ -153,6 +153,33 @@ jobs:
           path: frontend/dist/
           retention-days: 1
 
+  frontend-brand-compliance:
+    name: Frontend Brand Compliance
+    runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch' || needs.changes.outputs.frontend == 'true'
+    needs: [changes]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      - name: Validate design tokens
+        run: |
+          python3 scripts/build-m3-tokens.py
+          python3 scripts/design-validation/validate-tokens.py
+      - name: Sweep legacy brand strings
+        run: |
+          set -e
+          if grep -RInE "(Nunito Sans|Helvetica Neue|kerala-streetprint|kr-motifLayer|LAYER 2: kr-motif Anchors)" \
+            frontend/src frontend/packages/ui/src \
+            --include="*.tsx" --include="*.css" --include="*.module.css"; then
+            echo "❌ Legacy brand strings detected. Please migrate to Kerala Rage token-compliant patterns."
+            exit 1
+          fi
+          echo "✅ Legacy brand sweep passed"
+
   docs-policy:
     name: Docs Policy Check
     runs-on: ubuntu-latest
@@ -675,6 +702,7 @@ jobs:
         codeql,
         frontend,
         frontend-build,
+        frontend-brand-compliance,
         backend-static-checks,
         backend-tests,
         functions,
@@ -695,6 +723,7 @@ jobs:
           if [[ "${{ needs.codeql.result }}" == "failure" ]]; then exit 1; fi
           if [[ "${{ needs.frontend.result }}" == "failure" ]]; then exit 1; fi
           if [[ "${{ needs.frontend-build.result }}" == "failure" ]]; then exit 1; fi
+          if [[ "${{ needs.frontend-brand-compliance.result }}" == "failure" ]]; then exit 1; fi
           if [[ "${{ needs.backend-static-checks.result }}" == "failure" ]]; then exit 1; fi
           if [[ "${{ needs.backend-tests.result }}" == "failure" ]]; then exit 1; fi
           if [[ "${{ needs.functions.result }}" == "failure" ]]; then exit 1; fi
@@ -714,6 +743,7 @@ jobs:
             if ('${{ needs.codeql.result }}' === 'failure') failedJobs.push('CodeQL Security Analysis');
             if ('${{ needs.frontend.result }}' === 'failure') failedJobs.push('Frontend Tests');
             if ('${{ needs.frontend-build.result }}' === 'failure') failedJobs.push('Frontend Build');
+            if ('${{ needs.frontend-brand-compliance.result }}' === 'failure') failedJobs.push('Frontend Brand Compliance');
             if ('${{ needs.backend-static-checks.result }}' === 'failure') failedJobs.push('Backend Static Checks');
             if ('${{ needs.backend-tests.result }}' === 'failure') failedJobs.push('Backend Tests');
             if ('${{ needs.functions.result }}' === 'failure') failedJobs.push('Functions Tests');

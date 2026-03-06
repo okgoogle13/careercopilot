@@ -85,8 +85,8 @@
 
       "safe_zones": {
         "text_left": { "x": 0.06, "y": 0.16, "w": 0.44, "h": 0.68 },
-        "cta_left": { "x": 0.06, "y": 0.72, "w": 0.40, "h": 0.20 },
-        "quiet_margin": { "x": 0.00, "y": 0.00, "w": 0.06, "h": 1.00 }
+        "cta_left": { "x": 0.06, "y": 0.72, "w": 0.4, "h": 0.2 },
+        "quiet_margin": { "x": 0.0, "y": 0.0, "w": 0.06, "h": 1.0 }
       },
 
       "render_hints": {
@@ -109,8 +109,12 @@
             "position": "cover",
             "objectFit": "cover",
             "anchor": "center",
-            "scale": { "desktop": 1.05, "tablet": 1.10, "mobile": 1.15 },
-            "translate": { "desktop": { "x": 0, "y": 0 }, "tablet": { "x": 0, "y": 2 }, "mobile": { "x": 0, "y": 4 } }
+            "scale": { "desktop": 1.05, "tablet": 1.1, "mobile": 1.15 },
+            "translate": {
+              "desktop": { "x": 0, "y": 0 },
+              "tablet": { "x": 0, "y": 2 },
+              "mobile": { "x": 0, "y": 4 }
+            }
           },
           "note": "Flinders Street Station night — Melbourne ground layer"
         },
@@ -125,8 +129,12 @@
             "position": "cover",
             "objectFit": "cover",
             "anchor": "center",
-            "scale": { "desktop": 1.10, "tablet": 1.15, "mobile": 1.20 },
-            "translate": { "desktop": { "x": 2, "y": 0 }, "tablet": { "x": 2, "y": -2 }, "mobile": { "x": 2, "y": -4 } }
+            "scale": { "desktop": 1.1, "tablet": 1.15, "mobile": 1.2 },
+            "translate": {
+              "desktop": { "x": 2, "y": 0 },
+              "tablet": { "x": 2, "y": -2 },
+              "mobile": { "x": 2, "y": -4 }
+            }
           },
           "note": "Solidarity light burst — tuned opacity to preserve silhouette/readability"
         },
@@ -141,8 +149,12 @@
             "position": "right",
             "objectFit": "contain",
             "anchor": "bottom-right",
-            "scale": { "desktop": 1.0, "tablet": 0.95, "mobile": 0.90 },
-            "translate": { "desktop": { "x": 6, "y": 6 }, "tablet": { "x": 4, "y": 6 }, "mobile": { "x": 0, "y": 8 } }
+            "scale": { "desktop": 1.0, "tablet": 0.95, "mobile": 0.9 },
+            "translate": {
+              "desktop": { "x": 6, "y": 6 },
+              "tablet": { "x": 4, "y": 6 },
+              "mobile": { "x": 0, "y": 8 }
+            }
           },
           "note": "Collective uprising hero — primary anchor"
         },
@@ -158,7 +170,11 @@
             "objectFit": "contain",
             "anchor": "center-right",
             "scale": { "desktop": 1.1, "tablet": 1.05, "mobile": 0.95 },
-            "translate": { "desktop": { "x": 4, "y": -2 }, "tablet": { "x": 2, "y": -2 }, "mobile": { "x": 0, "y": -2 } }
+            "translate": {
+              "desktop": { "x": 4, "y": -2 },
+              "tablet": { "x": 2, "y": -2 },
+              "mobile": { "x": 0, "y": -2 }
+            }
           },
           "note": "Hero halo SVG — keep subtle; avoid text zone overlap"
         }
@@ -197,8 +213,8 @@
       "landing_default": false,
 
       "safe_zones": {
-        "text_left": { "x": 0.08, "y": 0.18, "w": 0.50, "h": 0.62 },
-        "cta_left": { "x": 0.08, "y": 0.72, "w": 0.42, "h": 0.20 }
+        "text_left": { "x": 0.08, "y": 0.18, "w": 0.5, "h": 0.62 },
+        "cta_left": { "x": 0.08, "y": 0.72, "w": 0.42, "h": 0.2 }
       },
 
       "render_hints": {
@@ -213,9 +229,19 @@
           "asset_id": "KR-SOLID-037",
           "src": "/assets/kr-solidarity/texture/kr-solidarity__substrate__texture--woven-linen-fiber--v3.png",
           "z_index": 0,
-          "opacity": 0.40,
+          "opacity": 0.4,
           "blend_mode": "normal",
-          "placement": { "position": "cover", "objectFit": "cover", "anchor": "center", "scale": { "desktop": 1.05, "tablet": 1.10, "mobile": 1.15 }, "translate": { "desktop": { "x": 0, "y": 0 }, "tablet": { "x": 0, "y": 0 }, "mobile": { "x": 0, "y": 2 } } },
+          "placement": {
+            "position": "cover",
+            "objectFit": "cover",
+            "anchor": "center",
+            "scale": { "desktop": 1.05, "tablet": 1.1, "mobile": 1.15 },
+            "translate": {
+              "desktop": { "x": 0, "y": 0 },
+              "tablet": { "x": 0, "y": 0 },
+              "mobile": { "x": 0, "y": 2 }
+            }
+          },
           "note": "Woven linen fiber — substrate"
         },
         {
@@ -226,7 +252,17 @@
           "z_index": 10,
           "opacity": 0.22,
           "blend_mode": "overlay",
-          "placement": { "position": "cover", "objectFit": "cover", "anchor": "center", "scale": { "desktop": 1.1, "tablet": 1.15, "mobile": 1.2 }, "translate": { "desktop": { "x": 0, "y": 0 }, "tablet": { "x": 0, "y": -2 }, "mobile": { "x": 0, "y": -4 } } }
+          "placement": {
+            "position": "cover",
+            "objectFit": "cover",
+            "anchor": "center",
+            "scale": { "desktop": 1.1, "tablet": 1.15, "mobile": 1.2 },
+            "translate": {
+              "desktop": { "x": 0, "y": 0 },
+              "tablet": { "x": 0, "y": -2 },
+              "mobile": { "x": 0, "y": -4 }
+            }
+          }
         },
         {
           "type": "spiritual",
@@ -236,7 +272,17 @@
           "z_index": 20,
           "opacity": 1.0,
           "blend_mode": "normal",
-          "placement": { "position": "center", "objectFit": "contain", "anchor": "center", "scale": { "desktop": 1.0, "tablet": 0.95, "mobile": 0.90 }, "translate": { "desktop": { "x": 0, "y": 2 }, "tablet": { "x": 0, "y": 4 }, "mobile": { "x": 0, "y": 6 } } }
+          "placement": {
+            "position": "center",
+            "objectFit": "contain",
+            "anchor": "center",
+            "scale": { "desktop": 1.0, "tablet": 0.95, "mobile": 0.9 },
+            "translate": {
+              "desktop": { "x": 0, "y": 2 },
+              "tablet": { "x": 0, "y": 4 },
+              "mobile": { "x": 0, "y": 6 }
+            }
+          }
         }
       ],
 
@@ -273,11 +319,11 @@
 
       "safe_zones": {
         "text_left": { "x": 0.06, "y": 0.16, "w": 0.46, "h": 0.68 },
-        "cta_left": { "x": 0.06, "y": 0.72, "w": 0.40, "h": 0.20 }
+        "cta_left": { "x": 0.06, "y": 0.72, "w": 0.4, "h": 0.2 }
       },
 
       "render_hints": {
-        "scrim": { "enabled": true, "opacity": 0.60, "blend_mode": "normal" },
+        "scrim": { "enabled": true, "opacity": 0.6, "blend_mode": "normal" },
         "grain_overlay_svg": "KR-UI-036",
         "max_overlay_opacity_in_text_zone": 0.08,
         "edge_weighting": 0.75
@@ -290,9 +336,19 @@
           "src": null,
           "resolve": "manifest",
           "z_index": 0,
-          "opacity": 0.50,
+          "opacity": 0.5,
           "blend_mode": "normal",
-          "placement": { "position": "cover", "objectFit": "cover", "anchor": "center", "scale": { "desktop": 1.05, "tablet": 1.10, "mobile": 1.15 }, "translate": { "desktop": { "x": 0, "y": 0 }, "tablet": { "x": 0, "y": 2 }, "mobile": { "x": 0, "y": 4 } } },
+          "placement": {
+            "position": "cover",
+            "objectFit": "cover",
+            "anchor": "center",
+            "scale": { "desktop": 1.05, "tablet": 1.1, "mobile": 1.15 },
+            "translate": {
+              "desktop": { "x": 0, "y": 0 },
+              "tablet": { "x": 0, "y": 2 },
+              "mobile": { "x": 0, "y": 4 }
+            }
+          },
           "note": "Night pylon sunset substrate"
         },
         {
@@ -303,7 +359,17 @@
           "z_index": 10,
           "opacity": 0.18,
           "blend_mode": "multiply",
-          "placement": { "position": "cover", "objectFit": "cover", "anchor": "center", "scale": { "desktop": 1.12, "tablet": 1.16, "mobile": 1.20 }, "translate": { "desktop": { "x": 0, "y": -2 }, "tablet": { "x": 0, "y": -4 }, "mobile": { "x": 0, "y": -6 } } }
+          "placement": {
+            "position": "cover",
+            "objectFit": "cover",
+            "anchor": "center",
+            "scale": { "desktop": 1.12, "tablet": 1.16, "mobile": 1.2 },
+            "translate": {
+              "desktop": { "x": 0, "y": -2 },
+              "tablet": { "x": 0, "y": -4 },
+              "mobile": { "x": 0, "y": -6 }
+            }
+          }
         },
         {
           "type": "resistance",
@@ -313,7 +379,17 @@
           "z_index": 20,
           "opacity": 1.0,
           "blend_mode": "normal",
-          "placement": { "position": "right", "objectFit": "contain", "anchor": "bottom-right", "scale": { "desktop": 1.0, "tablet": 0.95, "mobile": 0.90 }, "translate": { "desktop": { "x": 8, "y": 6 }, "tablet": { "x": 4, "y": 6 }, "mobile": { "x": 0, "y": 8 } } }
+          "placement": {
+            "position": "right",
+            "objectFit": "contain",
+            "anchor": "bottom-right",
+            "scale": { "desktop": 1.0, "tablet": 0.95, "mobile": 0.9 },
+            "translate": {
+              "desktop": { "x": 8, "y": 6 },
+              "tablet": { "x": 4, "y": 6 },
+              "mobile": { "x": 0, "y": 8 }
+            }
+          }
         }
       ],
 
@@ -369,7 +445,17 @@
           "z_index": 0,
           "opacity": 0.45,
           "blend_mode": "normal",
-          "placement": { "position": "cover", "objectFit": "cover", "anchor": "center", "scale": { "desktop": 1.05, "tablet": 1.10, "mobile": 1.15 }, "translate": { "desktop": { "x": 0, "y": 0 }, "tablet": { "x": 0, "y": 2 }, "mobile": { "x": 0, "y": 4 } } },
+          "placement": {
+            "position": "cover",
+            "objectFit": "cover",
+            "anchor": "center",
+            "scale": { "desktop": 1.05, "tablet": 1.1, "mobile": 1.15 },
+            "translate": {
+              "desktop": { "x": 0, "y": 0 },
+              "tablet": { "x": 0, "y": 2 },
+              "mobile": { "x": 0, "y": 4 }
+            }
+          },
           "note": "Melbourne laneway substrate"
         },
         {
@@ -380,7 +466,17 @@
           "z_index": 10,
           "opacity": 0.26,
           "blend_mode": "overlay",
-          "placement": { "position": "cover", "objectFit": "cover", "anchor": "center", "scale": { "desktop": 1.12, "tablet": 1.16, "mobile": 1.20 }, "translate": { "desktop": { "x": 0, "y": -2 }, "tablet": { "x": 0, "y": -4 }, "mobile": { "x": 0, "y": -6 } } }
+          "placement": {
+            "position": "cover",
+            "objectFit": "cover",
+            "anchor": "center",
+            "scale": { "desktop": 1.12, "tablet": 1.16, "mobile": 1.2 },
+            "translate": {
+              "desktop": { "x": 0, "y": -2 },
+              "tablet": { "x": 0, "y": -4 },
+              "mobile": { "x": 0, "y": -6 }
+            }
+          }
         },
         {
           "type": "cultural",
@@ -390,7 +486,17 @@
           "z_index": 20,
           "opacity": 1.0,
           "blend_mode": "normal",
-          "placement": { "position": "right", "objectFit": "contain", "anchor": "bottom-right", "scale": { "desktop": 0.95, "tablet": 0.90, "mobile": 0.85 }, "translate": { "desktop": { "x": 6, "y": 8 }, "tablet": { "x": 2, "y": 8 }, "mobile": { "x": 0, "y": 10 } } }
+          "placement": {
+            "position": "right",
+            "objectFit": "contain",
+            "anchor": "bottom-right",
+            "scale": { "desktop": 0.95, "tablet": 0.9, "mobile": 0.85 },
+            "translate": {
+              "desktop": { "x": 6, "y": 8 },
+              "tablet": { "x": 2, "y": 8 },
+              "mobile": { "x": 0, "y": 10 }
+            }
+          }
         },
         {
           "type": "ui-kit",
@@ -399,7 +505,17 @@
           "z_index": 30,
           "opacity": 0.65,
           "blend_mode": "overlay",
-          "placement": { "position": "bottom", "objectFit": "contain", "anchor": "bottom-center", "scale": { "desktop": 1.0, "tablet": 1.0, "mobile": 1.0 }, "translate": { "desktop": { "x": 0, "y": 0 }, "tablet": { "x": 0, "y": 0 }, "mobile": { "x": 0, "y": 0 } } },
+          "placement": {
+            "position": "bottom",
+            "objectFit": "contain",
+            "anchor": "bottom-center",
+            "scale": { "desktop": 1.0, "tablet": 1.0, "mobile": 1.0 },
+            "translate": {
+              "desktop": { "x": 0, "y": 0 },
+              "tablet": { "x": 0, "y": 0 },
+              "mobile": { "x": 0, "y": 0 }
+            }
+          },
           "note": "Vine motif divider — keep out of CTA area"
         }
       ],

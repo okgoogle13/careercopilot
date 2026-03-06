@@ -1,56 +1,63 @@
 # kerala-rage Forbidden Fonts
 
-These fonts signal algorithmic defaults, not intentional design. Avoid using them unless paired with distinctive display fonts.
+These fonts signal algorithmic defaults, not intentional design. Using them is a design-system failure.
 
-## Forbidden Fonts List
+## ❌ Forbidden Fonts
 
-- ❌ **Inter** (unless paired with distinctive display font like Lora or Fraunces)
-- ❌ **Roboto** (corporate, overused in Material Design)
-- ❌ **Arial** (legacy, no personality)
-- ❌ **Helvetica** (bland, overused)
-- ❌ **Open Sans** (generic, dated)
-- ❌ **Lato** (clichéd)
-- ❌ **Space Grotesk** (now associated with AI-generated aesthetic)
-- ❌ **System fonts** (-apple-system, BlinkMacSystemFont, system-ui, Segoe UI)
+| Font | Reason |
+|---|---|
+| **Inter** | Overused, signals generic SaaS/AI-generated UI |
+| **Roboto** | Corporate Material Design default |
+| **Arial** | Legacy, no personality |
+| **Helvetica** | Bland, overused |
+| **Open Sans** | Generic, dated |
+| **Lato** | Clichéd |
+| **Lora** | Legacy KR v1 — superseded by Fraunces + Libre Bodoni |
+| **Crimson Text** | Legacy KR v1 — not part of the Solidarity Stack |
+| **Source Serif Pro** | Not in the Solidarity Stack |
+| **Inconsolata** | Superseded by JetBrains Mono |
+| **Courier Prime** | Not canonical |
+| **IBM Plex Mono** | Not canonical |
+| **Space Grotesk** | Associated with AI-generated aesthetics |
+| **Birthstone Bounce** | Legacy KR v1 — superseded by Caveat |
+| **System fonts** | `-apple-system`, `BlinkMacSystemFont`, `system-ui`, `Segoe UI` — all banned |
 
-## Why These Are Forbidden
+---
 
-These fonts represent computational defaults rather than intentional design choices. They signal:
+## ✅ Authorized KR Solidarity Stack
 
-- Algorithmic generation rather than human curation
-- Lack of attention to typography as meaning-making
-- Generic corporate aesthetics rather than kerala-rage craftsmanship
+These are the **only** authorized fonts. All must be loaded as variable font files (`.woff2`).
 
-## Acceptable kerala-rage Fonts
+### Workhorse (Body & UI)
 
-### Display Fonts
+- ✅ **Work Sans Variable** (`WorkSans[wght].woff2`) — `wght` 100–900
 
-- ✅ **Lora** - Hand-lettered precision, historical warmth
-- ✅ **Fraunces** - kerala-streetprint personality, decorative weight
-- ✅ **Crimson Text** - Refined formality, intellectual
+### Display & Expressive
 
-### Body Fonts
+- ✅ **Fraunces Variable** (`Fraunces[SOFT,WONK,opsz,wght].woff2`) — Hero headlines, solidarity voice
+- ✅ **Libre Bodoni** — Proclamation and declarative statements (static or variable)
 
-- ✅ **Crimson Text** - Refined serif, warm undertones
-- ✅ **Source Serif Pro** - Academic formality, high readability
-- ✅ **Lora** - Works as body in generous sizes
+### Technical / Mono
 
-### Monospace Fonts
+- ✅ **JetBrains Mono** — Code, data, technical annotations
 
-- ✅ **Inconsolata** - Personality with clarity
-- ✅ **Courier Prime** - Typewriter warmth
-- ✅ **IBM Plex Mono** - Professional + personality
+### Accent / Curator
 
-## Usage
+- ✅ **Caveat** — Handwritten curator notes, signatures, aside annotations
+- ✅ **Nabla (COLRv1)** — **Icon-scale only.** Decorative color glyphs, hero moments. MUST use `--nabla-solidarity` palette. NEVER as a headline-only font.
 
-Reference this file from both typography-strategy and visual-audit skills:
+---
 
-```markdown
-See [kerala-rage Forbidden Fonts](../shared-references/kerala-rage_FORBIDDEN_FONTS.md) for the complete list of generic fonts to avoid.
-```
+## Rules
+
+1. **Variable files only** — Never import static weight variants (e.g., `WorkSans-Bold.ttf`).
+2. **No system fallbacks as primary** — System fonts may appear in the CSS fallback chain ONLY after Work Sans.
+3. **Nabla is restricted** — Icon-scale decorative use only. It must complement the Solidarity Stack, never replace it.
+4. **Caveat replaces all legacy script fonts** — Birthstone Bounce, Pacifico, Dancing Script, etc. are all forbidden.
 
 ---
 
 **Maintained by:** kerala-rage Typography Strategy
-**Used by:** kerala-rage-typography-strategy, kerala-rage-visual-audit
-**Version:** 1.0.0
+**Used by:** kerala-rage-typography-strategy, kerala-rage-brand-enforcer, component-visual-audit, design-token-validator
+**Version:** 2.0.0
+**Updated:** 2026-03-06

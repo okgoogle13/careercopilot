@@ -61,6 +61,8 @@ export default [
       'docs/**',
       'functions/**',
       'dev-dist/**',
+      'playwright-report/**',
+      'test-results/**',
       '__mocks__/**',
     ],
   },

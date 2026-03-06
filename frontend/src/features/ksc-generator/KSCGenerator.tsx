@@ -444,7 +444,7 @@ interface STARInput {
  * Generate expert KSC response using:
  * - APS Integrated Leadership System (ILS) standards
  * - STAR methodology
- * - Australian Social Work context
+ * - Naarm Social Work context
  */
 function generateExpertResponse(criteria: string, star: STARInput): string {
   const { situation, task, action, result } = star;
@@ -481,7 +481,7 @@ function generateExpertResponse(criteria: string, star: STARInput): string {
 
       ---
 
-      ## Alignment with Australian Social Work Standards
+      ## Alignment with Naarm Social Work Standards
 
       This experience demonstrates my commitment to:
       - **Evidence-based practice:** Utilizing data and research to inform decision-making

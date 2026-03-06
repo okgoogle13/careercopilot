@@ -19,7 +19,7 @@ export const KrDarkFeed: React.FC = () => {
       company: 'Collective Reach',
       timestamp: '2m ago',
       match: 98,
-      desc: 'Coordinate the deployment of essential substrate across the Northcote sector. High-stacy involvement required.',
+      desc: 'Coordinate the deployment of essential substrate across the KeralaRage sector. High-stacy involvement required.',
     },
     {
       id: 'OPP_02',
@@ -133,7 +133,7 @@ export const KrDarkFeed: React.FC = () => {
         className="mt-12 text-center"
       >
         <span className="font-mono text-[8px] uppercase tracking-tighter text-paper-white/40">
-          Showing 3 of 152 tactical matches // Filter: NORTHCOTE_PR_7
+          Showing 3 of 152 tactical matches // Filter: KERALA-RAGE_PR_7
         </span>
       </motion.div>
     </div>

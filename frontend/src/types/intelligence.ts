@@ -29,7 +29,7 @@ export interface JobAnalysis {
   desirableAttributes: string[];
   /** Verified sources from Google Search grounding */
   sources?: GroundingSource[];
-  /** Australian sector-specific insights (APS, AASW, NDIS, WWCC) */
+  /** Naarm sector-specific insights (APS, AASW, NDIS, WWCC) */
   sectorInsights?: {
     framework?: string; // e.g., "APS Integrated Leadership System"
     compliance?: string[]; // e.g., ["WWCC Required", "NDIS Screening"]

@@ -49,7 +49,7 @@ repos:
         entry: bash -c 'cd frontend && yarn lint:fix'
         language: system
         files: ^frontend/.*\.(ts|tsx|js|jsx)$
-        exclude: ^frontend/(node_modules|dist|build)/
+        exclude: ^frontend/(node_modules|dist|build|playwright-report|test-results|dev-dist)/
         pass_filenames: false
 
       - id: eslint-functions
@@ -63,14 +63,6 @@ repos:
   # Frontend: Prettier for code formatting
   - repo: local
     hooks:
-      - id: prettier-frontend
-        name: Prettier (Frontend)
-        entry: bash -c 'cd frontend && yarn format'
-        language: system
-        files: ^frontend/.*\.(ts|tsx|js|jsx|css|scss|json|md|mdx|html|yml|yaml)$
-        exclude: ^frontend/(node_modules|dist|build|public/assets)/
-        pass_filenames: false
-
       - id: token-builder-validator
         name: Rebuild & Validate Design Tokens
         entry: bash -c 'echo "🔨 Rebuilding design tokens..." && python3 scripts/build-m3-tokens.py && echo "✅ Validating tokens..." && python3 scripts/design-validation/validate-tokens.py'
@@ -78,6 +70,14 @@ repos:
         files: ^frontend/src/design/tokens/tokens\.json$
         pass_filenames: false
         stages: [pre-commit]
+
+      - id: prettier-frontend
+        name: Prettier (Frontend)
+        entry: bash -c 'cd frontend && yarn format'
+        language: system
+        files: ^frontend/.*\.(ts|tsx|js|jsx|css|scss|json|md|mdx|html|yml|yaml)$
+        exclude: ^frontend/(node_modules|dist|build|public/assets|playwright-report|test-results|dev-dist)/
+        pass_filenames: false
 
   # General: Remove trailing whitespace and basic checks
   - repo: https://github.com/pre-commit/pre-commit-hooks

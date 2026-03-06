@@ -67,7 +67,7 @@ def generate_css_variables(tokens):
             var_name = f"--sys-{key}"
             content.append(f"  {var_name}: {value};\n")
     content.append("}\n")
-    
+
     # Utility classes based on actual Kerala Rage tokens
     content.extend([
         "\n/* ===== KERALA RAGE UTILITY CLASSES ===== */\n",
@@ -96,7 +96,7 @@ def generate_tailwind_patch(tokens):
     """Generates Tailwind config patch for Kerala Rage tokens."""
     print(f"Generating Tailwind patch at {TAILWIND_CONFIG_PATCH}...")
     os.makedirs(os.path.dirname(TAILWIND_CONFIG_PATCH), exist_ok=True)
-    
+
     # Build Tailwind color palette
     tw_colors = {}
     colors = tokens.get('color', {})
@@ -120,19 +120,19 @@ def generate_tailwind_patch(tokens):
         name: [value]
         for name, value in type_tokens.get('fontFamilies', {}).items()
     }
-    
+
     # Build Tailwind font sizes (scale)
     tw_font_sizes = {
         name: f"var(--sys-type-scale-{name})"
         for name in type_tokens.get('scale', {}).keys()
     }
-    
+
     # Build Tailwind border radius
     tw_radius = {
         name.replace('radius-', ''): f"var(--sys-shape-{name})"
         for name in tokens.get('shape', {}).keys()
     }
-    
+
     # Build Tailwind shadows
     tw_shadows = {
         name: f"var(--sys-shadow-{name})"
@@ -144,11 +144,11 @@ def generate_tailwind_patch(tokens):
 export default {{
   theme: {{
     extend: {{
-      colors: {json.dumps(tw_colors, indent=8)},
-      borderRadius: {json.dumps(tw_radius, indent=8)},
-      boxShadow: {json.dumps(tw_shadows, indent=8)},
-      fontFamily: {json.dumps(tw_fonts, indent=8)},
-      fontSize: {json.dumps(tw_font_sizes, indent=8)},
+      colors: {json.dumps(tw_colors, indent=2, sort_keys=True)},
+      borderRadius: {json.dumps(tw_radius, indent=2, sort_keys=True)},
+      boxShadow: {json.dumps(tw_shadows, indent=2, sort_keys=True)},
+      fontFamily: {json.dumps(tw_fonts, indent=2, sort_keys=True)},
+      fontSize: {json.dumps(tw_font_sizes, indent=2, sort_keys=True)},
       transitionTimingFunction: {{
         'm3-expressive': 'cubic-bezier(0.34, 1.56, 0.64, 1)',
         'standard': 'cubic-bezier(0.2, 0, 0, 1)',
@@ -163,7 +163,8 @@ export default {{
   }}
 }};"""
     with open(TAILWIND_CONFIG_PATCH, 'w') as f:
-        f.write(patch_content)
+        # Ensure deterministic trailing newline so EOF fixer does not mutate on every commit.
+        f.write(patch_content if patch_content.endswith('\n') else patch_content + '\n')
     print("✅ Tailwind config patch generated")
     return True
 

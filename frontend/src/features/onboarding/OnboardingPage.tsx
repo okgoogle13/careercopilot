@@ -4,51 +4,52 @@ import { PathSelectionCard } from '@/components/PathSelectionCard';
 import styles from './OnboardingPage.module.css';
 
 // Kr-Solidarity Icons for domains
+// Path format: /assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__ui--kr-ui-NNN--v1.svg
 const DOMAINS = [
   {
     id: 'social-work',
     name: 'Social Work',
-    icon: '/assets/kr-solidarity/ui-kit/svg/motifs/kr-solidarity__ui-kit__KR-UI-008__v1.svg',
+    icon: '/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__ui--kr-ui-008--v1.svg',
   },
   {
     id: 'healthcare',
     name: 'Healthcare',
-    icon: '/assets/kr-solidarity/ui-kit/svg/motifs/kr-solidarity__ui-kit__KR-UI-010__v1.svg',
+    icon: '/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__ui--kr-ui-010--v1.svg',
   },
   {
     id: 'education',
     name: 'Education',
-    icon: '/assets/kr-solidarity/ui-kit/svg/motifs/kr-solidarity__ui-kit__KR-UI-012__v1.svg',
+    icon: '/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__ui--kr-ui-012--v1.svg',
   },
   {
     id: 'government',
     name: 'Government',
-    icon: '/assets/kr-solidarity/ui-kit/svg/motifs/kr-solidarity__ui-kit__KR-UI-013__v1.svg',
+    icon: '/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__ui--kr-ui-013--v1.svg',
   },
   {
     id: 'community',
     name: 'Community Services',
-    icon: '/assets/kr-solidarity/ui-kit/svg/motifs/kr-solidarity__ui-kit__KR-UI-014__v1.svg',
+    icon: '/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__ui--kr-ui-014--v1.svg',
   },
   {
     id: 'nonprofit',
     name: 'Non-Profit',
-    icon: '/assets/kr-solidarity/ui-kit/svg/motifs/kr-solidarity__ui-kit__KR-UI-015__v1.svg',
+    icon: '/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__ui--kr-ui-015--v1.svg',
   },
   {
     id: 'mental-health',
     name: 'Mental Health',
-    icon: '/assets/kr-solidarity/ui-kit/svg/motifs/kr-solidarity__ui-kit__KR-UI-018__v1.svg',
+    icon: '/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__ui--kr-ui-018--v1.svg',
   },
   {
     id: 'disability',
     name: 'Disability Services',
-    icon: '/assets/kr-solidarity/ui-kit/svg/motifs/kr-solidarity__ui-kit__KR-UI-019__v1.svg',
+    icon: '/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__ui--kr-ui-019--v1.svg',
   },
   {
     id: 'youth',
     name: 'Youth Support',
-    icon: '/assets/kr-solidarity/ui-kit/svg/motifs/kr-solidarity__ui-kit__KR-UI-001__v1.svg',
+    icon: '/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__ui--kr-ui-001--v1.svg',
   },
 ];
 

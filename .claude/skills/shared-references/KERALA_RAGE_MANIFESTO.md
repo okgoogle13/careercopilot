@@ -1,63 +1,64 @@
 # Kerala Rage Design Manifesto
 
-**Philosophy**: Agit-Prop / Worker Solidarity / Viscous Fluidity.
+**Philosophy**: Agit-Prop / Migrant Worker Solidarity / Viscous Fluidity.
 **Core Tenet**: Design is a weapon. Aesthetics must serve the worker, not the colonial curator.
-**Visual Language**: Brutalist Typography, High-Contrast Palette (Charcoal/Red/Gold), [DEPRECATED_STYLE]/Torn Edges.
+**Visual Language**: Brutalist Typography, High-Contrast Palette (Charcoal/Solidarity Red/Ink Gold), Wheat-Paste/Torn Edges/Stencil.
 
-- **Contemporary digital accessibility**: Readable, inclusive, technically sound
+---
 
-### Typography as Meaning-Making Device
+## The KR Solidarity Migrant Rage Doctrine
 
-Typography is not decoration—it's declaration. Every font choice says:
+### Typography as Declaration
+
+Typography is not decoration — it's a proclamation. Every font choice says:
 
 > "Someone thought about this. Someone chose these fonts because they mean something."
 
-### Color as [DEPRECATED_STYLE] Storytelling
+The **Solidarity Stack** (Work Sans / Fraunces / Libre Bodoni / Caveat / JetBrains Mono / Nabla) is the only authorized voice. Variable axes are weapons: weight as pressure, width as breath, grade as pulse.
 
-Colors derive from **Australian [DEPRECATED_STYLE] palette**:
+### Color as Resistance
 
-- Sage, terracotta, ochre from native plants
-- Wattle Gold, [DEPRECATED_STYLE] Red from iconic flora
-- These aren't just colors—they're connections to place and ecology
+Colors derive from the **streets, not the bush**:
 
-### Layout as [DEPRECATED_STYLE] Rhythm
+- **Step 0** (#0F0F0F) — the dark before the march
+- **Solidarity Red** (#F14714) — screenprint ink, resistance heat, primary CTA
+- **Ink Gold** (#DAF674) — temple radiance, optimistic defiance, halo disks
+- **Stencil Yellow** (#F6E748) — economic critique, attention markers
+- **Charcoal** ramps — Melbourne asphalt, laneways, substrate depth
 
-Spacing and layout reflect natural patterns, not mechanical grids:
+No flora. No ochre-from-native-plants. No wattle. No Australian endemic palette.
 
-- [DEPRECATED_STYLE] spacing over uniform gaps
+### Layout as Collective Rhythm
+
+Spacing and layout reject corporate precision:
+
+- Asymmetric radii (Stone/Slab/Pebble) over perfect geometry
 - Intentional asymmetry over rigid symmetry
-- Visual hierarchy that guides the eye naturally
+- 8px grid with deliberate disruptions for poster-like hierarchy
 
-## The Three Dimensions
-
-### Primary Tone: Scholarly Rigor
-
-"Every design choice declares: I paid attention. I chose this deliberately."
-
-### Secondary Refine: Readable Warmth
-
-Contemporary clarity without coldness—accessible without being generic.
-
-### Tertiary Accent: Personality
-
-Character when appropriate—thinking distinctive, not system defaults.
-
-## What kerala-rage Is NOT
-
-- ❌ Generic corporate design (Inter, Roboto, blue gradients)
-- ❌ AI-generated aesthetics (purple gradients, Space Grotesk)
-- ❌ Mechanical patterns (uniform spacing, rigid grids)
-- ❌ Decorative without purpose (ornamental for ornament's sake)
+---
 
 ## What kerala-rage IS
 
-- ✅ Intentional and defensible design decisions
-- ✅ kerala-streetprint inspiration meeting digital accessibility
-- ✅ Typography that conveys meaning before words
-- ✅ Color palette rooted in Australian ecology
-- ✅ [DEPRECATED_STYLE], human-scaled spacing and rhythm
+- ✅ Migrant rage made visual — diaspora identity without apology
+- ✅ KR streetprint stencil aesthetic meets digital solidarity
+- ✅ Typography that conveys pressure and relief via variable axes
+- ✅ Palette rooted in Melbourne laneway and resistance portraiture
+- ✅ First Nations solidarity appearing only in situ (placards/posters) — never as appropriated decoration
+
+## What kerala-rage IS NOT
+
+- ❌ Generic corporate design (Inter, Roboto, blue gradients)
+- ❌ AI-generated aesthetics (purple gradients, Space Grotesk)
+- ❌ Australian endemic / flora / nature motifs (NO BOTANICAL ELEMENTS)
+- ❌ Light mode or white backgrounds
+- ❌ Perfect circles (`border-radius: 50%`)
+- ❌ Crown/monarchy symbols
+- ❌ Bureaucratic aesthetics (passports, visas, border gates, government forms)
+- ❌ Aboriginal art imitation or flag colors used as general decoration
 
 ---
 
 **Referenced by:** All kerala-rage skills
-**Version:** 1.0.0
+**Version:** 2.0.0
+**Updated:** 2026-03-06

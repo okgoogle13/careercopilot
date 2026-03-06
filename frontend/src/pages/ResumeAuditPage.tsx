@@ -8,8 +8,8 @@ export const ResumeAuditPage: React.FC = () => {
       <header className="mb-xl text-center">
         <h1 className="text-display-kr-dark text-4xl mb-md">Resume Knowledge Library</h1>
         <p className="text-body-medium text-concrete-grey-light max-w-2xl mx-auto">
-          Professional Australian resume auditing powered by Gemini 3.1 Pro. Align your career
-          profile with industry-standard rules for ATS and human readability.
+          Professional Naarm resume auditing powered by Gemini 3.1 Pro. Align your career profile
+          with industry-standard rules for ATS and human readability.
         </p>
       </header>
 

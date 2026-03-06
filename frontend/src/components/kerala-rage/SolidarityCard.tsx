@@ -18,16 +18,16 @@ export interface SolidarityCardProps extends HTMLMotionProps<'div'> {
 }
 
 /**
- * SolidarityCard (Jar Archetype)
+ * SolidarityCard (Slab Archetype)
  *
- * Kerala Rage kr-solidarity card component implementing the Jar archetype.
+ * Kerala Rage kr-solidarity card component implementing the Slab archetype.
  * Provides semantic color token support and M3 Expressive motion physics.
  *
  * Design Principles:
  * 1. Uses --sys-color-* semantic tokens (never hardcoded colors)
  * 2. Reduced-motion compliance (opacity-only fallback)
  * 3. Accessible focus-within treatment for keyboard navigation
- * 4. Asymmetric border radius per Jar archetype (32px 8px 28px 12px)
+ * 4. Asymmetric border radius per Slab archetype (var(--sys-shape-radius-slab))
  * 5. Spring physics with viscous-breeze easing
  */
 export const SolidarityCard: React.FC<SolidarityCardProps> = ({
@@ -83,7 +83,7 @@ export const SolidarityCard: React.FC<SolidarityCardProps> = ({
       style={{
         backgroundColor:
           variant === 'ghost' ? 'transparent' : 'var(--sys-color-charcoalBackground-base)',
-        borderRadius: '32px 8px 28px 12px', // Jar archetype asymmetric radius
+        borderRadius: 'var(--sys-shape-radius-slab)', // Slab archetype asymmetric radius
         boxShadow:
           variant === 'standard'
             ? '0 4px 16px rgba(0, 0, 0, 0.25)'

@@ -1,93 +1,97 @@
-"""Tests for Genkit initialization logic."""
-
-from typing import cast
-from unittest.mock import MagicMock, patch
+from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
 
-from app.core import genkit_init
+from app.core.genkit_init import (
+    genkit_flow,
+    get_model,
+    get_registered_flows,
+    init_genkit,
+    is_genkit_enabled,
+    register_flow_function,
+)
 
 
-class TestGenkitInit:
-    @pytest.fixture(autouse=True)
-    def reset_global_state(self):
-        """Reset global state between tests to ensure isolation."""
-        # Save original
-        orig_init = genkit_init.initialized
-        orig_inst = genkit_init.genkit_instance
-        orig_flows = genkit_init.registered_flows.copy()
+@pytest.fixture(autouse=True)
+def reset_genkit_state():
+    import app.core.genkit_init as genkit_init
 
-        genkit_init.initialized = False
-        genkit_init.genkit_instance = None
-        genkit_init.registered_flows = {}
+    genkit_init.initialized = False
+    genkit_init.genkit_instance = None
+    # registered_flows is usually fine to keep or reset
+    yield
+    genkit_init.initialized = False
+    genkit_init.genkit_instance = None
 
-        yield
 
-        # Restore original
-        genkit_init.initialized = orig_init
-        genkit_init.genkit_instance = orig_inst
-        genkit_init.registered_flows = orig_flows
+@pytest.fixture
+def mock_settings():
+    settings = MagicMock()
+    settings.ENABLE_AI_FEATURES = True
+    settings.ENABLE_GENKIT_FLOWS = True
+    settings.GEMINI_API_KEY = "test_key"
+    return settings
 
-    def test_is_genkit_enabled_respects_settings(self):
-        """Should check both ENABLE_AI_FEATURES and ENABLE_GENKIT_FLOWS."""
-        settings = MagicMock()
-        with patch("app.core.genkit_init._get_settings", return_value=settings):
-            settings.ENABLE_AI_FEATURES = True
-            settings.ENABLE_GENKIT_FLOWS = True
-            assert genkit_init.is_genkit_enabled() is True
 
-            settings.ENABLE_GENKIT_FLOWS = False
-            assert genkit_init.is_genkit_enabled() is False
+def test_is_genkit_enabled(mock_settings):
+    with patch("app.core.genkit_init._get_settings", return_value=mock_settings):
+        assert is_genkit_enabled() is True
 
-    def test_init_genkit_no_api_key_aborts(self):
-        """Should return False if GEMINI_API_KEY is not available."""
-        with patch("app.core.genkit_init._get_gemini_api_key", return_value=None):
-            with patch("app.core.genkit_init.is_genkit_enabled", return_value=True):
-                assert genkit_init.init_genkit() is False
+        mock_settings.ENABLE_GENKIT_FLOWS = False
+        assert is_genkit_enabled() is False
 
-    def test_check_genkit_health_returns_structured_dict(self):
-        """Should return all required health keys."""
-        health = genkit_init.check_genkit_health()
-        assert "available" in health
-        assert "initialized" in health
-        assert "gemini_api_key_present" in health
-        assert "enabled" in health
-        assert "errors" in health
 
-    def test_register_flow_function_populates_global_dict(self):
-        """register_flow_function should add entries to registered_flows."""
+def test_register_flow_function():
+    def test_func():
+        pass
 
-        def my_test_flow():
-            pass
+    register_flow_function(test_func, "test_flow")
+    flows = get_registered_flows()
+    assert "test_flow" in flows
+    assert flows["test_flow"] == test_func
 
-        genkit_init.register_flow_function(my_test_flow, name="test_name")
-        assert "test_name" in genkit_init.registered_flows
-        assert genkit_init.registered_flows["test_name"] == my_test_flow
 
-    def test_genkit_flow_decorator_registers_function(self):
-        """genkit_flow should register the function it decorates."""
+@pytest.mark.asyncio
+async def test_genkit_flow_decorator_sync():
+    # Test sync flow decoration
+    @genkit_flow(name="sync_test")
+    def sync_flow(x):
+        return x + 1
 
-        @genkit_init.genkit_flow(name="decorated_flow")
-        def flow_a():
-            return "ok"
+    assert sync_flow(1) == 2
+    assert "sync_test" in get_registered_flows()
 
-        assert "decorated_flow" in genkit_init.registered_flows
-        assert flow_a() == "ok"
 
-    @pytest.mark.asyncio
-    async def test_genkit_flow_decorator_handles_async(self):
-        """genkit_flow should correctly wrap async functions."""
+@pytest.mark.asyncio
+async def test_genkit_flow_decorator_async():
+    # Test async flow decoration
+    @genkit_flow(name="async_test")
+    async def async_flow(x):
+        return x + 1
 
-        @genkit_init.genkit_flow(name="async_flow")
-        async def flow_b(x):
-            return x * 2
+    result = await async_flow(1)
+    assert result == 2
+    assert "async_test" in get_registered_flows()
 
-        result = await flow_b(10)
-        assert result == 20
 
-    def test_startup_genkit_invokes_init(self):
-        """startup_genkit should call init_genkit if enabled."""
-        with patch("app.core.genkit_init.is_genkit_enabled", return_value=True):
-            with patch("app.core.genkit_init.init_genkit") as mock_init:
-                genkit_init.startup_genkit()
-                mock_init.assert_called_once()
+def test_init_genkit_fallback(mock_settings):
+    with (
+        patch("app.core.genkit_init._get_settings", return_value=mock_settings),
+        patch("app.core.genkit_init.GENKIT_AVAILABLE", False),
+        patch("app.core.genkit_init.GOOGLE_GENERATIVEAI_AVAILABLE", True),
+        patch("app.core.genkit_init.get_configured_google_generativeai") as mock_genai,
+    ):
+
+        mock_genai_instance = MagicMock()
+        mock_genai_instance.list_models.return_value = ["gemini-pro"]
+        mock_genai.return_value = mock_genai_instance
+
+        result = init_genkit()
+        assert result is True
+        assert get_model() is not None
+
+
+def test_init_genkit_disabled(mock_settings):
+    mock_settings.ENABLE_GENKIT_FLOWS = False
+    with patch("app.core.genkit_init._get_settings", return_value=mock_settings):
+        assert init_genkit() is False

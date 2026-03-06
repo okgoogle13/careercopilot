@@ -1,5 +1,5 @@
 /**
- * NORTHCOTE CURIO: TABS COMPONENT
+ * KERALA-RAGE SOLIDARITY: TABS COMPONENT
  * Tabs with sliding pill animation (layoutId="active-pill")
  */
 

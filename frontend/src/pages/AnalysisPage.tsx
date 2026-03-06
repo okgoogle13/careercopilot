@@ -11,10 +11,10 @@ import { composeHero } from '../lib/composeHero';
 import type { SolidarityManifest } from '../design/hero/heroTypes';
 
 // KrDark Assets
-const grindingStone =
-  '/assets/kr-solidarity/specimen/kr-solidarity__specimen__triage-natural-history__v1.png';
+const solidarityTexture =
+  '/assets/kr-solidarity/abstract/kr-solidarity__atmospheric__texture--solidarity-chatgpt-image-f--v1.png';
 const paperGrain =
-  '/assets/kr-solidarity/texture/kr-solidarity__substrate__kr-solidarity--texture--melbourne-laneway--v1__v1.png';
+  '/assets/kr-solidarity/texture/kr-solidarity__substrate__landmark--melbourne-laneway--v1.png';
 
 interface AtsResult {
   overallScore: number;
@@ -54,8 +54,8 @@ interface StrategyResult {
 /**
  * CareerCopilot Analysis Page ("The Audit Microscope")
  *
- * V3.1 KrDark Mode Implementation:
- * ✓ ASSET-05 Brass Compass Gauge Integration
+ * V5.0 KR Solidarity Implementation:
+ * ✓ KR-SOLID-031 Kerala Elephant Integration
  * ✓ 2x2 Stone Grid for Corporate Reporting
  * ✓ Precision typography and monospace annotations
  */

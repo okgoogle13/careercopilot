@@ -1,138 +1,156 @@
-import { motion } from 'framer-motion';
+import React from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
 
-type NativeVariant = 'solidarity' | 'bottlebrush' | 'KrFlower' | 'kangaroo' | 'gum' | 'fern';
-type AnchorPoint =
-  | 'hanging-left'
-  | 'hanging-right'
-  | 'floor-left'
-  | 'floor-right'
-  | 'center-stage'
-  | 'ceiling-left'
-  | 'ceiling-right';
+/**
+ * Register types for the symbolic anchors as defined in SOLIDARITY_SPEC_V5.md
+ */
+export type AnchorRegister =
+  | 'Solidarity'
+  | 'Defiance'
+  | 'Revelation'
+  | 'Trust'
+  | 'Gravity'
+  | 'Altitude';
 
-interface NativeAnchorProps {
-  variant: NativeVariant;
-  anchor: AnchorPoint;
+export interface NativeAnchorProps {
+  /**
+   * Canonical Asset ID (e.g., KR-SOLID-031, KR-SOLID-023)
+   */
+  assetId: string;
+  /**
+   * The emotional register of the screen, controlling visual atmosphere.
+   */
+  register?: AnchorRegister;
+  /**
+   * Optional custom name or label for the asset.
+   */
+  name?: string;
+  /**
+   * Optional height/width overrides or className.
+   */
   className?: string;
-  blurIntensity?: 'none' | 'low' | 'high';
+  /**
+   * Z-index override (0-3 as per spec).
+   */
+  zIndex?: number;
+  /**
+   * If true, shows a technical "Analytical Mode" overlay (blueprint grid).
+   */
+  analyticalMode?: boolean;
 }
 
 /**
- * Asset paths for Australian Native Plants
+ * NativeAnchor Component
+ *
+ * Implements the "Canonical Symbolic Anchors" from the KR Solidarity spec.
+ * Uses the "Stone" shape archetype and visual primitives (Halo, Grit, Grit).
  */
-const assets: Record<NativeVariant, string> = {
-  solidarity: '/assets/plants/native-solidarity-hanging.png',
-  bottlebrush: '/assets/plants/native-bottlebrush.png',
-  KrFlower: '/assets/plants/native-KrFlower.png',
-  kangaroo: '/assets/plants/native-kangaroo.png',
-  gum: '/assets/plants/native-gum-hanging.png',
-  fern: '/assets/kr-solidarity/specimen/kr-solidarity__specimen__triage-natural-history__v1.png',
-};
-
-/**
- * NativeAnchor - Australian Native Plant Decorative Component
- *
- * Renders plant illustrations with physics-based animations:
- * - Hanging plants (solidarity, gum): Gentle sway + bob
- * - Standing plants (others): Breathing animation
- *
- * Features:
- * - Absolute positioning via anchor prop
- * - Configurable blur for depth
- * - Framer Motion physics
- *
- * @component
- * @example
- * <NativeAnchor
- *   variant="gum"
- *   anchor="hanging-right"
- *   blurIntensity="none"
- *   className="z-20"
- * />
- */
-export const NativeAnchor = ({
-  variant,
-  anchor,
-  blurIntensity = 'none',
+export const NativeAnchor: React.FC<NativeAnchorProps> = ({
+  assetId,
+  register = 'Solidarity',
+  name,
   className = '',
-}: NativeAnchorProps) => {
-  // 1. Determine if plant is hanging or standing
-  const isHanging = variant === 'solidarity' || variant === 'gum';
+  zIndex,
+  analyticalMode = false,
+}) => {
+  const shouldReduceMotion = useReducedMotion() ?? false;
 
-  // 2. Define physics-based animations
-  const animations = {
-    hanging: {
-      rotate: [0, 1, 0, -1, 0], // Gentle sway like wind
-      y: [0, 2, 0], // Slight bob
-      transition: {
-        duration: 8,
-        repeat: Infinity,
-        ease: [0.42, 0, 0.58, 1] as const, // easeInOut
-      },
-    },
-    standing: {
-      y: [0, -5, 0], // Breathing growth
-      transition: {
-        duration: 6,
-        repeat: Infinity,
-        ease: [0.42, 0, 0.58, 1] as const, // easeInOut
-      },
-    },
+  // Asset Mapping (Simplified for UI component logic)
+  const assetPaths: Record<string, string> = {
+    'KR-SOLID-031':
+      '/assets/kr-solidarity/street/kr-solidarity__resistance__hero--treaty-now-poster--v1.png',
+    'KR-SOLID-023':
+      '/assets/kr-solidarity/portrait/kr-solidarity__resistance__hero--bhagat-singh--v1.png',
+    'KR-SOLID-033':
+      '/assets/kr-solidarity/symbol/kr-solidarity__cultural__symbol--kerala-elephant--v1.png',
+    'KR-SOLID-013':
+      '/assets/kr-solidarity/devotional/kr-solidarity__spiritual__devotional--shiva-statue-street--v1.png',
   };
 
-  // 3. Position mapping
-  const getPosition = (): React.CSSProperties => {
-    switch (anchor) {
-      case 'ceiling-left':
-        return { top: '-12%', left: '10%' };
-      case 'ceiling-right':
-        return { top: '-12%', right: '10%' };
-      case 'hanging-left':
-        return { top: '-10%', left: '5%' };
-      case 'hanging-right':
-        return { top: '-15%', right: '-5%' };
-      case 'floor-left':
-        return { bottom: '-5%', left: '-5%' };
-      case 'floor-right':
-        return { bottom: '-5%', right: '-5%' };
-      case 'center-stage':
-        return { bottom: '0%', left: '50%', transform: 'translateX(-50%)' };
-      default:
-        return {};
-    }
+  const currentAssetPath = assetPaths[assetId] || '';
+
+  // Motion Settings: The Solidarity Spring
+  const springTransition: any = {
+    type: 'spring',
+    stiffness: 100,
+    damping: 15,
+    mass: 1,
+    restDelta: 0.001,
   };
 
-  // 4. Blur intensity mapping
-  const getBlur = (): string => {
-    switch (blurIntensity) {
-      case 'high':
-        return 'blur(12px) brightness(0.8)';
-      case 'low':
-        return 'blur(4px) brightness(0.9)';
-      default:
-        return 'none';
-    }
-  };
+  // Archetype Radii
+  const stoneRadius = 'var(--sys-shape-radius-stone)';
+  const slabRadius = 'var(--sys-shape-radius-slab)';
+  const currentRadius = analyticalMode ? slabRadius : stoneRadius;
 
   return (
     <motion.div
-      className={`absolute pointer-events-none z-0 ${className}`}
-      style={{
-        ...getPosition(),
-        filter: getBlur(),
-      }}
-      animate={isHanging ? animations.hanging : animations.standing}
+      initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 20, scale: 0.98 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      transition={springTransition}
+      className={`relative group ${className}`}
+      style={{ zIndex: zIndex ?? 'auto' }}
     >
-      <img
-        src={assets[variant]}
-        alt={`Australian Native ${variant} plant`}
-        className={`
-          ${isHanging ? 'w-[280px] md:w-[350px]' : 'w-[200px] md:w-[250px]'}
-          drop-shadow-2xl
-        `}
-      />
+      {/* Visual Overlay Tiers */}
+
+      {/* 1. Halo Light (Z-2 focal point) for Defiance/Solidarity */}
+      {(register === 'Defiance' || register === 'Solidarity') && !analyticalMode && (
+        <div className="absolute inset-0 bg-ink-gold/5 blur-[80px] rounded-full scale-125 pointer-events-none transition-opacity group-hover:opacity-60" />
+      )}
+
+      {/* 2. Blueprint Grid (for Revelation/Analytical Mode) */}
+      {(analyticalMode || register === 'Revelation') && (
+        <div
+          className="absolute inset-0 pointer-events-none opacity-[0.08] z-10"
+          style={{
+            backgroundImage:
+              'url(/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__ui--kr-blueprint-grid--v1.svg)',
+            backgroundSize: '40px 40px',
+          }}
+        />
+      )}
+
+      {/* 3. The Core Media Container (The Stone) */}
+      <div
+        className="relative overflow-hidden shadow-elevation2"
+        style={{
+          borderRadius: currentRadius,
+          transition: 'border-radius 0.6s var(--sys-motion-m3Expressive)',
+          border: '1px solid rgba(218, 246, 179, 0.1)', // worker-ash at low opacity
+        }}
+      >
+        {/* Subtle Screenprint Grit Overlay */}
+        {!analyticalMode && (
+          <div className="absolute inset-0 z-20 pointer-events-none opacity-[0.15] mix-blend-overlay bg-[url('/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__ui--kr-screenprint-grit--v1.svg')]" />
+        )}
+
+        {/* Asset Image */}
+        <img
+          src={currentAssetPath}
+          alt={name || assetId}
+          className="w-full h-full object-cover grayscale-[0.2] contrast-[1.1] transition-transform duration-700 group-hover:scale-105"
+        />
+
+        {/* Bottom Label (Technical Metadata) */}
+        <div className="absolute bottom-4 left-4 z-30">
+          <span className="font-mono text-[9px] uppercase tracking-widest text-paper-white/30 group-hover:text-ink-gold/60 transition-colors">
+            REF: {assetId} {analyticalMode ? '[DATA_LOCKED]' : ''}
+          </span>
+        </div>
+      </div>
+
+      {/* 4. Torn Edge Decorative (Optional for specific registers) */}
+      {register === 'Solidarity' && !analyticalMode && (
+        <div
+          className="absolute -bottom-2 -left-2 w-12 h-12 z-40 opacity-40 pointer-events-none"
+          style={{
+            backgroundImage:
+              'url(/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__ui--kr-wheat-paste-tear--v1.svg)',
+            backgroundSize: 'contain',
+            backgroundRepeat: 'no-repeat',
+          }}
+        />
+      )}
     </motion.div>
   );
 };
-
-export default NativeAnchor;

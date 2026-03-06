@@ -32,6 +32,7 @@ export type { KrIconName, KrIconProps } from './KrIcon';
 
 export { AuroraHeader } from './AuroraHeader';
 export { Mark } from './Mark';
-export { NativeAnchor } from './NativeAnchor';
 export { SplitHeader } from './SplitHeader';
 export { Valve } from './Valve';
+export { NativeAnchor } from './NativeAnchor';
+export type { NativeAnchorProps, AnchorRegister } from './NativeAnchor';

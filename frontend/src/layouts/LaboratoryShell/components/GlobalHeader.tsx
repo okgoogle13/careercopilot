@@ -3,7 +3,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { KeralaRageButton } from '../../../components/ui/KeralaRageButton';
 
-const KR_LOGO_SRC = '/assets/kr-solidarity/ui-kit/svg/KR-LOGO-001-primary.svg';
+const KR_LOGO_SRC =
+  '/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__brand--careercopilot-primary-logo--v1.svg';
 
 export const GlobalHeader: React.FC = () => {
   const { mode, toggleMode } = useMode();
