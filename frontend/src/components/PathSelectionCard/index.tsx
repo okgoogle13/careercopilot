@@ -45,7 +45,7 @@ export const PathSelectionCard: React.FC<PathSelectionCardProps> = ({
       aria-pressed={isSelected}
     >
       {/* Blueprint Grid Background */}
-      <div className="absolute inset-0 opacity-[0.08] pointer-events-none bg-[url('/assets/blueprint-grid.svg')] z-0" />
+      <div className="absolute inset-0 opacity-[0.08] pointer-events-none bg-[url('/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__ui--kr-ui-018--v1.svg')] z-0" />
 
       <div className="relative z-10 flex flex-col gap-8 h-full">
         <h2

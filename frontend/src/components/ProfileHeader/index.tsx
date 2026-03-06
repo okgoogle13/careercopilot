@@ -63,7 +63,7 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({
             </div>
           )}
           {/* Grain texture overlay */}
-          <div className="absolute inset-0 opacity-20 pointer-events-none bg-[url('/assets/noise-texture.png')] mix-blend-overlay" />
+          <div className="absolute inset-0 opacity-20 pointer-events-none bg-[url('/assets/kr-solidarity/texture/kr-solidarity__atmospheric__texture--asphalt-grain--v2.png')] mix-blend-overlay" />
         </motion.div>
 
         <div className="flex-1 flex flex-col gap-4 text-center md:text-left">

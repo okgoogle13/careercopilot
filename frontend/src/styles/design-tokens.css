@@ -1,42 +1,21 @@
 :root {
-  /* Design tokens generated from tokens.json (DTCG format) */
+  /* Design tokens generated from frontend/src/design/tokens/tokens.json */
 
-  /* Sys Color Aboriginalflagblack */
   --sys-color-aboriginalFlagBlack-base: #000000;
-
-  /* Sys Color Aboriginalflagred */
   --sys-color-aboriginalFlagRed-base: #d81e05;
-
-  /* Sys Color Aboriginalflagyellow */
   --sys-color-aboriginalFlagYellow-base: #fcd116;
-
-  /* Sys Color Charcoalbackground */
-  --sys-color-charcoalBackground-base: #1a1a1a;
-
-  /* Sys Color Inkgold */
+  --sys-color-asphaltBlack-base: #1a1714;
+  --sys-color-charcoalBackground-base: #1a1714;
+  --sys-color-concreteGrey-base: #a39b8f;
   --sys-color-inkGold-base: #daf674;
-
-  /* Sys Color Kr Activistsmokegreen */
   --sys-color-kr-activistSmokeGreen-base: #48da8b;
-
-  /* Sys Color Kr Charcoalred */
   --sys-color-kr-charcoalRed-base: #f14844;
-
-  /* Sys Color Labwrenmetalblue */
-  --sys-color-labWrenMetalBlue-base: #48b3da;
-
-  /* Sys Color Signalgreen */
+  --sys-color-ochreEarth-base: #b8733d;
+  --sys-color-paperWhite-base: #f5f0e8;
+  --sys-color-protestMetalBlue-base: #48b3da;
   --sys-color-signalGreen-base: #48f0e5;
-
-  /* Sys Color Solidarityred */
   --sys-color-solidarityRed-base: #f14714;
-
-  /* Sys Color Solidaritysmokeorange */
   --sys-color-solidaritySmokeOrange-base: #da8b48;
-
-  /* Sys Color Stencilyellow */
   --sys-color-stencilYellow-base: #f6e748;
-
-  /* Sys Color Worker Ash */
   --sys-color-worker-ash-base: #daf6b3;
 }

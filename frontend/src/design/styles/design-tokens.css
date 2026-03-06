@@ -10,10 +10,10 @@
   --sys-spacing-xl: 24px;
   --sys-spacing-xxl: 32px;
   --sys-spacing-xxxl: 48px;
-  --sys-color-semantic-solidarity-gold: {sys.color.inkGold.base};
-  --sys-color-semantic-solidarity-crimson: {sys.color.solidarityRed.base};
-  --sys-color-semantic-ash-grey: {sys.color.concreteGrey.base};
-  --sys-color-semantic-parchment: {sys.color.paperWhite.base};
+  --sys-color-semantic-solidarity-gold: #DAF674;
+  --sys-color-semantic-solidarity-crimson: #F14714;
+  --sys-color-semantic-ash-grey: #A39B8F;
+  --sys-color-semantic-parchment: #F5F0E8;
   --sys-color-charcoalBackground-base: #1A1714;
   --sys-color-charcoalBackground-steps-0: #0F0F0F;
   --sys-color-charcoalBackground-steps-1: #1A1A1A;

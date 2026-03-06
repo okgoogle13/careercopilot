@@ -64,7 +64,7 @@ export const LoginCard: React.FC<LoginCardProps> = ({
         role="form"
       >
         {/* Screenprint Substrate Overlay */}
-        <div className="absolute inset-0 opacity-[0.08] pointer-events-none bg-[url('/assets/noise-texture.png')] mix-blend-overlay" />
+        <div className="absolute inset-0 opacity-[0.08] pointer-events-none bg-[url('/assets/kr-solidarity/texture/kr-solidarity__atmospheric__texture--asphalt-grain--v2.png')] mix-blend-overlay" />
 
         <h2 className="text-display-lg font-serif italic text-paper-white tracking-tighter">
           VERIFY IDENTITY

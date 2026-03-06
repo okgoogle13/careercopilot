@@ -11,7 +11,12 @@ import {
   Plus,
   Sprout,
 } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { LayeredHero } from '../../components/kerala-rage/LayeredHero';
+import type { SolidarityManifest } from '../../design/hero/heroTypes';
+import { loadHeroRegistry } from '../../design/hero/heroRegistry';
+import { resolvePageHeroComposition } from '../../design/hero/pageHeroMap';
+import { composeHero } from '../../lib/composeHero';
 import { PageHeader } from '../../components/shared/PageHeader';
 
 // Assets
@@ -86,9 +91,56 @@ const MOCK_APPLICATIONS: Application[] = [
  */
 export function ApplicationTracker() {
   const [applications] = useState<Application[]>(MOCK_APPLICATIONS);
+  const [heroData, setHeroData] = useState<{
+    layers: any[];
+    typography: any;
+    animation: any;
+    zIndexMap: any;
+  } | null>(null);
+
+  useEffect(() => {
+    async function loadHero() {
+      try {
+        const [manifest, registry] = await Promise.all([
+          fetch('/assets/kerala-rage-kr-solidarity-manifest.json').then((r) => r.json()),
+          loadHeroRegistry(),
+        ]);
+
+        const result = composeHero(
+          manifest as SolidarityManifest,
+          registry,
+          resolvePageHeroComposition('applications-board')
+        );
+
+        if (result.valid) {
+          setHeroData({
+            layers: result.resolvedLayers,
+            typography: result.typography,
+            animation: result.animation ?? result.motion,
+            zIndexMap: result.zIndexMap,
+          });
+        }
+      } catch (error) {
+        console.error('Failed to load application tracker hero:', error);
+      }
+    }
+    loadHero();
+  }, []);
 
   return (
     <div className="min-h-screen bg-asphalt-black relative overflow-hidden pb-12 w-full">
+      {heroData && (
+        <div className="absolute inset-0 pointer-events-none opacity-25 z-0">
+          <LayeredHero
+            layers={heroData.layers}
+            typography={{ ...heroData.typography, headline: '', supporting: '' }}
+            animation={heroData.animation}
+            zIndexMap={heroData.zIndexMap}
+            className="h-full"
+          />
+        </div>
+      )}
+
       {/* Dynamic Stagecraft: Greenhouse Glass & Vines */}
       <div
         className="absolute inset-0 opacity-5 pointer-events-none mix-blend-overlay"

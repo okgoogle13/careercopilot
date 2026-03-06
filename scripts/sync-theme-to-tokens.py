@@ -1,144 +1,140 @@
 #!/usr/bin/env python3
 """
-Sync Theme Colors to Design Tokens
+Sync Kerala Rage theme artifacts from frontend token source-of-truth.
 
-This script resolves the theme/token color mismatch by syncing colors from
-theme.ts (source of truth) to design-system/tokens.json.
+Source of truth:
+  - frontend/src/design/tokens/tokens.json
 
-Usage:
-    python3 scripts/sync-theme-to-tokens.py
+Generated outputs:
+  - frontend/src/design/styles/design-tokens.css
+  - frontend/tailwind-m3-patch.ts
+  - frontend/src/styles/design-tokens.css (legacy Storybook compatibility file)
 """
 
+from __future__ import annotations
+
 import json
-import os
+import subprocess
 import sys
 from pathlib import Path
+from typing import Any
 
-# Color mapping from theme.ts (Dark Mode)
-THEME_COLORS = {
-    # Primary palette (Purple)
-    "primary": "#A78BFA",
-    "primary_light": "#C084FC",
-    "primary_dark": "#7C3AED",
-    "primary_contrast": "#1E1B4B",
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+TOKENS_FILE = PROJECT_ROOT / "frontend" / "src" / "design" / "tokens" / "tokens.json"
+LEGACY_CSS_FILE = PROJECT_ROOT / "frontend" / "src" / "styles" / "design-tokens.css"
+BUILD_SCRIPT = PROJECT_ROOT / "scripts" / "build-m3-tokens.py"
 
-    # Secondary palette (Light Purple)
-    "secondary": "#C9C3DC",
-    "secondary_light": "#D8D4E6",  # Derived lighter
-    "secondary_dark": "#474459",
-    "secondary_contrast": "#312E41",
-
-    # Tertiary palette (Pink)
-    "tertiary": "#F472B6",
-    "tertiary_light": "#F9A8D4",  # Derived lighter
-    "tertiary_dark": "#EC4899",
-    "tertiary_contrast": "#831843",
-
-    # Error palette
-    "error": "#FFB4AB",
-    "error_light": "#FFC9C2",  # Derived lighter
-    "error_dark": "#93000A",
-    "error_contrast": "#690005",
-
-    # Success palette (keeping existing, adjusting to dark mode)
-    "success": "#86EFAC",  # Dark mode green
-    "success_light": "#BBF7D0",
-    "success_dark": "#22C55E",
-
-    # Warning palette (keeping existing, adjusting to dark mode)
-    "warning": "#FDE047",  # Dark mode yellow
-    "warning_light": "#FEF08A",
-    "warning_dark": "#FACC15",
-
-    # Info palette (keeping existing, adjusting to dark mode)
-    "info": "#67E8F9",  # Dark mode cyan
-    "info_light": "#A5F3FC",
-    "info_dark": "#06B6D4",
-
-    # Text colors (Dark Mode)
-    "text_primary": "#F8FAFC",
-    "text_secondary": "#E2E8F0",
-    "text_disabled": "#928F99",
-
-    # Background colors (Dark Mode)
-    "bg_default": "#131318",
-    "bg_paper": "#1E1E23",
-    "bg_elevated": "#262629",
-
-    # Divider and actions (Dark Mode)
-    "divider": "#48464F",
-    "action_active": "rgba(248, 250, 252, 0.54)",
-    "action_hover": "rgba(248, 250, 252, 0.04)",
-    "action_selected": "rgba(248, 250, 252, 0.08)",
-    "action_disabled": "rgba(248, 250, 252, 0.26)",
+REQUIRED_BRAND_COLORS = {
+    "charcoalBackground.base": "#1A1714",
+    "solidarityRed.base": "#F14714",
+    "inkGold.base": "#DAF674",
 }
+REQUIRED_FONT_FAMILIES = {"Work Sans", "Fraunces", "Caveat"}
+BANNED_FONT_NAMES = {"inter", "roboto", "arial"}
 
-def sync_tokens():
-    """Sync theme colors to tokens.json"""
 
-    # Paths
-    project_root = Path(__file__).parent.parent
-    tokens_file = project_root / "design-system" / "tokens.json"
+def _get_path(tree: dict[str, Any], path: str) -> Any:
+    node: Any = tree
+    for part in path.split("."):
+        if not isinstance(node, dict) or part not in node:
+            return None
+        node = node[part]
+    return node
 
-    print("🔄 Syncing theme colors to design tokens...")
-    print(f"📁 Token file: {tokens_file}")
 
-    # Read existing tokens
-    if not tokens_file.exists():
-        print(f"❌ Error: {tokens_file} not found")
-        sys.exit(1)
+def _value(node: Any) -> Any:
+    if isinstance(node, dict) and "$value" in node:
+        return node["$value"]
+    return node
 
-    with open(tokens_file, 'r') as f:
-        tokens = json.load(f)
 
-    print(f"✓ Loaded existing tokens (version: {tokens.get('version', 'unknown')})")
+def load_tokens() -> dict[str, Any]:
+    if not TOKENS_FILE.exists():
+        raise FileNotFoundError(f"Missing token source: {TOKENS_FILE}")
+    return json.loads(TOKENS_FILE.read_text())
 
-    # Backup original
-    backup_file = tokens_file.with_suffix('.json.backup')
-    with open(backup_file, 'w') as f:
-        json.dump(tokens, f, indent=2)
-    print(f"✓ Created backup: {backup_file}")
 
-    # Update color section
-    original_color_count = len(tokens.get('color', {}))
-    tokens['color'] = THEME_COLORS
-    tokens['version'] = "1.1.0-dark-mode"
-    tokens['description'] = "M3 Design System Token Definition (Dark Mode - Synced from theme.ts)"
+def validate_brand_identity(tokens: dict[str, Any]) -> None:
+    sys_tokens = tokens.get("sys", tokens)
+    color_root = sys_tokens.get("color", {})
+    type_root = sys_tokens.get("type", {})
+    font_root = type_root.get("fontFamilies", {})
 
-    print(f"✓ Updated {len(THEME_COLORS)} color tokens (was {original_color_count})")
+    violations: list[str] = []
 
-    # Write updated tokens
-    with open(tokens_file, 'w') as f:
-        json.dump(tokens, f, indent=2)
+    for rel_path, expected in REQUIRED_BRAND_COLORS.items():
+        actual = _value(_get_path(color_root, rel_path))
+        if not isinstance(actual, str):
+            violations.append(f"Missing required color token: sys.color.{rel_path}")
+            continue
+        if actual.upper() != expected.upper():
+            violations.append(
+                f"Brand color mismatch sys.color.{rel_path}: expected {expected}, found {actual}"
+            )
 
-    print(f"✓ Saved updated tokens to {tokens_file}")
+    font_values = []
+    for key, node in font_root.items():
+        value = _value(node)
+        if isinstance(value, str):
+            font_values.append(value)
+            lowered = value.lower()
+            if any(bad in lowered for bad in BANNED_FONT_NAMES):
+                violations.append(f"Banned font detected in sys.type.fontFamilies.{key}: {value}")
 
-    # Print summary
-    print("\n📊 Color Sync Summary:")
-    print("=" * 60)
-    print(f"Primary:   {THEME_COLORS['primary']} (Purple - Dark Mode)")
-    print(f"Secondary: {THEME_COLORS['secondary']} (Light Purple)")
-    print(f"Tertiary:  {THEME_COLORS['tertiary']} (Pink)")
-    print(f"Error:     {THEME_COLORS['error']} (Soft Red)")
-    print(f"Success:   {THEME_COLORS['success']} (Bright Green)")
-    print(f"Warning:   {THEME_COLORS['warning']} (Bright Yellow)")
-    print(f"Info:      {THEME_COLORS['info']} (Bright Cyan)")
-    print("=" * 60)
+    missing_required_fonts = sorted(f for f in REQUIRED_FONT_FAMILIES if f not in font_values)
+    if missing_required_fonts:
+        violations.append(
+            "Missing required brand fonts in sys.type.fontFamilies: "
+            + ", ".join(missing_required_fonts)
+        )
 
-    print("\n✅ Theme/token color mismatch RESOLVED!")
-    print("\n📋 Next steps:")
-    print("  1. Run: ./scripts/update-design-system.sh")
-    print("  2. Run: python3 scripts/validate-design-tokens.py")
-    print("  3. Commit changes")
+    if violations:
+        details = "\n - ".join(violations)
+        raise ValueError(f"Brand identity validation failed:\n - {details}")
 
-    return True
+
+def write_legacy_css(tokens: dict[str, Any]) -> None:
+    """Generate compact legacy CSS from current color base tokens."""
+    sys_tokens = tokens.get("sys", tokens)
+    color_root = sys_tokens.get("color", {})
+
+    lines = [
+        ":root {\n",
+        "  /* Design tokens generated from frontend/src/design/tokens/tokens.json */\n",
+        "\n",
+    ]
+
+    for name in sorted(color_root.keys()):
+        base = _value(_get_path(color_root, f"{name}.base"))
+        if isinstance(base, str):
+            lines.append(f"  --sys-color-{name}-base: {base};\n")
+
+    lines.append("}\n")
+    LEGACY_CSS_FILE.parent.mkdir(parents=True, exist_ok=True)
+    LEGACY_CSS_FILE.write_text("".join(lines))
+
+
+def run_build() -> None:
+    subprocess.run([sys.executable, str(BUILD_SCRIPT)], cwd=PROJECT_ROOT, check=True)
+
+
+def main() -> int:
+    try:
+        tokens = load_tokens()
+        validate_brand_identity(tokens)
+        run_build()
+        write_legacy_css(tokens)
+        print("✅ Theme/token sync complete.")
+        print(f"   Source: {TOKENS_FILE}")
+        print(f"   Updated: frontend/src/design/styles/design-tokens.css")
+        print(f"   Updated: frontend/tailwind-m3-patch.ts")
+        print(f"   Updated: {LEGACY_CSS_FILE}")
+        print("✅ Kerala Rage brand identity checks passed.")
+        return 0
+    except Exception as exc:  # pragma: no cover - CLI failure path
+        print(f"❌ {exc}")
+        return 1
+
 
 if __name__ == "__main__":
-    try:
-        success = sync_tokens()
-        sys.exit(0 if success else 1)
-    except Exception as e:
-        print(f"❌ Error: {e}")
-        import traceback
-        traceback.print_exc()
-        sys.exit(1)
+    raise SystemExit(main())

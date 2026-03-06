@@ -144,7 +144,9 @@ bash scripts/run_full_audit.sh
 - [ ] Step 1: Structure & schema (audit_structure.py)
 - [ ] Step 2: Palette compliance (validate_palette_mcp.py)
 - [ ] Step 3: Tailwind integration (audit_tailwind.py)
-- [ ] Step 4: Mode parity (check_mode_parity.py)
+### 4. Mode Parity (ABOLISHED)
+**Status**: This section has been moved to [references/MODE_PARITY.md](references/MODE_PARITY.md). Single Mode Enforced.
+- [x] Step 4: Mode parity (Abolished)
 - [ ] Step 5: Hardcoded values (analyze-m3-styling-consistency.sh)
 ```
 
@@ -162,7 +164,7 @@ bash scripts/run_full_audit.sh
    - If getValue() errors, see COMMON_FIXES.md
    - Fix and re-run until exit code = 0
 
-4. **Mode parity**: SKIPPED (Single Mode Enforced).
+4. **Mode parity**: SKIPPED (Abolished).
 
 5. **Hardcoded values**: `bash scripts/analyze-m3-styling-consistency.sh`
    - Review report and replace per HARDCODED_VALUES.md

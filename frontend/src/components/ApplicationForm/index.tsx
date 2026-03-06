@@ -44,7 +44,7 @@ export const ApplicationForm: React.FC<ApplicationFormProps> = ({
   return (
     <div className="max-w-3xl mx-auto p-12 bg-charcoal-100 rounded-slab border border-blueprint-grey/10 shadow-viscous relative overflow-hidden">
       {/* Blueprint Watermark */}
-      <div className="absolute inset-0 opacity-[0.06] pointer-events-none bg-[url('/assets/blueprint-grid.svg')] z-0" />
+      <div className="absolute inset-0 opacity-[0.06] pointer-events-none bg-[url('/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__ui--kr-ui-018--v1.svg')] z-0" />
 
       <h1 className="text-display-lg font-solidarity-900 text-ink-gold uppercase mb-12 relative z-10">
         DEPOSIT HISTORY

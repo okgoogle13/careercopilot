@@ -151,7 +151,7 @@ export const KeralaRageButton = React.forwardRef<HTMLButtonElement, KeralaRageBu
 
         {/* Subtle Screenprint Grit Hover Overlay */}
         {!disabled && (
-          <div className="absolute inset-0 opacity-0 group-hover:opacity-[0.05] pointer-events-none transition-opacity bg-[url('/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__ui--kr-screenprint-grit--v1.svg')]" />
+          <div className="absolute inset-0 opacity-0 group-hover:opacity-[0.05] pointer-events-none transition-opacity bg-[url('/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__ui--kr-ui-019--v1.svg')]" />
         )}
       </motion.button>
     );

@@ -3,6 +3,7 @@ import { KrDarkShell } from '../../layouts/KrDarkShell/KrDarkShell';
 import { LayeredHero } from '../../components/kerala-rage/LayeredHero';
 import type { SolidarityManifest } from '../../design/hero/heroTypes';
 import { loadHeroRegistry } from '../../design/hero/heroRegistry';
+import { resolvePageHeroComposition } from '../../design/hero/pageHeroMap';
 import { composeHero } from '../../lib/composeHero';
 import type { CompositionResult } from '../../lib/composeHero';
 
@@ -24,7 +25,7 @@ export const LandingPage: React.FC = () => {
         const result = composeHero(
           manifest as SolidarityManifest,
           registry,
-          'resistance-portrait-hero'
+          resolvePageHeroComposition('landing-page')
         );
 
         if (result.valid) {

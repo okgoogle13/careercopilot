@@ -104,7 +104,7 @@ export const NativeAnchor: React.FC<NativeAnchorProps> = ({
           className="absolute inset-0 pointer-events-none opacity-[0.08] z-10"
           style={{
             backgroundImage:
-              'url(/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__ui--kr-blueprint-grid--v1.svg)',
+              'url(/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__ui--kr-ui-018--v1.svg)',
             backgroundSize: '40px 40px',
           }}
         />
@@ -121,7 +121,7 @@ export const NativeAnchor: React.FC<NativeAnchorProps> = ({
       >
         {/* Subtle Screenprint Grit Overlay */}
         {!analyticalMode && (
-          <div className="absolute inset-0 z-20 pointer-events-none opacity-[0.15] mix-blend-overlay bg-[url('/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__ui--kr-screenprint-grit--v1.svg')]" />
+          <div className="absolute inset-0 z-20 pointer-events-none opacity-[0.15] mix-blend-overlay bg-[url('/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__ui--kr-ui-019--v1.svg')]" />
         )}
 
         {/* Asset Image */}
@@ -145,7 +145,7 @@ export const NativeAnchor: React.FC<NativeAnchorProps> = ({
           className="absolute -bottom-2 -left-2 w-12 h-12 z-40 opacity-40 pointer-events-none"
           style={{
             backgroundImage:
-              'url(/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__ui--kr-wheat-paste-tear--v1.svg)',
+              'url(/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__icons--wheat-paste-icon--v1.svg)',
             backgroundSize: 'contain',
             backgroundRepeat: 'no-repeat',
           }}
