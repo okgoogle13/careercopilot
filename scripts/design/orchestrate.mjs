@@ -193,6 +193,16 @@ async function visualAuditCheck() {
   try {
     if (server.error) {
       results.push({ targetId: 'frontend-server', passed: false, errors: [server.error] });
+      const failed = results.filter((r) => !r.passed);
+      return {
+        name: 'visual-audit',
+        passed: failed.length === 0,
+        details: {
+          checkedTargets: results.length,
+          failedTargets: failed.length,
+        },
+        results,
+      };
     }
     const playwright = await import('playwright');
     browser = await playwright.chromium.launch({ headless: true });
@@ -295,14 +305,43 @@ async function maybeStartFrontendServer(baseUrl) {
   if (alreadyUp) return { started: false };
 
   const child = spawn('yarn', ['workspace', 'careercopilot-frontend', 'dev', '--host', host, '--port', String(port)], {
-    stdio: 'ignore',
+    stdio: ['ignore', 'pipe', 'pipe'],
     detached: false,
   });
+
+  const maxLogLines = 50;
+  const stdoutLines = [];
+  const stderrLines = [];
+
+  const appendLines = (chunk, buffer) => {
+    const text = chunk.toString();
+    const lines = text.split(/\r?\n/);
+    for (const line of lines) {
+      if (line === '') continue;
+      buffer.push(line);
+      if (buffer.length > maxLogLines) {
+        buffer.splice(0, buffer.length - maxLogLines);
+      }
+    }
+  };
+
+  child.stdout?.on('data', (chunk) => appendLines(chunk, stdoutLines));
+  child.stderr?.on('data', (chunk) => appendLines(chunk, stderrLines));
 
   const up = await waitForPort(port, host, 60000);
   if (!up) {
     child.kill('SIGTERM');
-    return { started: false, error: `Unable to start frontend dev server on ${host}:${port}` };
+
+    let errorMessage = `Unable to start frontend dev server on ${host}:${port}`;
+    if (stdoutLines.length || stderrLines.length) {
+      errorMessage +=
+        '\n\n--- dev server stdout (last ' + stdoutLines.length + ' lines) ---\n' +
+        stdoutLines.join('\n') +
+        '\n\n--- dev server stderr (last ' + stderrLines.length + ' lines) ---\n' +
+        stderrLines.join('\n');
+    }
+
+    return { started: false, error: errorMessage };
   }
 
   return { started: true, child };
