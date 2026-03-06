@@ -1,0 +1,35 @@
+{
+  "targets": [
+    {
+      "targetId": "dashboard-overview",
+      "url": "http://127.0.0.1:5173/dashboard",
+      "checks": [
+        {
+          "type": "selectorExists",
+          "selector": "#root"
+        }
+      ]
+    },
+    {
+      "targetId": "analysis-dashboard",
+      "url": "http://127.0.0.1:5173/analysis",
+      "checks": [
+        {
+          "type": "selectorExists",
+          "selector": "#root"
+        }
+      ]
+    },
+    {
+      "targetId": "onboarding-screen",
+      "url": "http://127.0.0.1:5173/onboarding",
+      "checks": [
+        {
+          "type": "selectorExists",
+          "selector": "#root"
+        }
+      ]
+    }
+  ],
+  "note": "INITIAL_SCAFFOLD_TODO: Runtime probes are baseline checks only (selector existence); expand to Lens/Jar token and CSS assertions."
+}

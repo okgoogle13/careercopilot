@@ -1,0 +1,24 @@
+{
+  "baseUrl": "http://127.0.0.1:5173",
+  "targets": [
+    {
+      "id": "dashboard-overview",
+      "route": "/dashboard",
+      "component": "DashboardOverview",
+      "priority": "P0"
+    },
+    {
+      "id": "analysis-dashboard",
+      "route": "/analysis",
+      "component": "AnalysisDashboard",
+      "priority": "P0"
+    },
+    {
+      "id": "onboarding-screen",
+      "route": "/onboarding",
+      "component": "OnboardingScreen",
+      "priority": "P1"
+    }
+  ],
+  "note": "INITIAL_SCAFFOLD_TODO: Visual audit target set is a starter list and not yet full Lens/Jar coverage."
+}
