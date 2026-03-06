@@ -181,7 +181,7 @@ export const ProfileEditor: React.FC<ProfileEditorProps> = ({ onNext, onBack }) 
               <div className="absolute inset-0 border-[20px] border-bark-dark/5 pointer-events-none z-30" />
             </Stone>
 
-            <div className="p-6 bg-bark-light/5 border border-bark-base/10 rounded-sm">
+            <div className="p-6 bg-bark-light/5 border border-bark-base/10 rounded-stone">
               <h4 className="font-mono text-[10px] text-bark-base font-bold uppercase tracking-widest mb-4">
                 Metadata Integrity
               </h4>
@@ -378,12 +378,12 @@ export const ProfileEditor: React.FC<ProfileEditorProps> = ({ onNext, onBack }) 
                   {profile.skills.map((skill, index) => (
                     <div
                       key={index}
-                      className="font-mono text-[9px] uppercase tracking-widest bg-bark-light/10 text-bark-base border border-bark-base/20 px-3 py-1 rounded-sm"
+                      className="font-mono text-[9px] uppercase tracking-widest bg-bark-light/10 text-bark-base border border-bark-base/20 px-3 py-1 rounded-stone"
                     >
                       {skill}
                     </div>
                   ))}
-                  <button className="w-8 h-8 rounded-full border border-dashed border-bark-base/20 flex items-center justify-center text-bark-base/40 hover:border-leaf-base hover:text-leaf-base transition-colors">
+                  <button className="w-8 h-8 rounded-sentry border border-dashed border-bark-base/20 flex items-center justify-center text-bark-base/40 hover:border-leaf-base hover:text-leaf-base transition-colors">
                     <Plus size={14} />
                   </button>
                 </div>

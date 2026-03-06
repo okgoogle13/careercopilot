@@ -50,7 +50,7 @@ const buttonVariants = cva(
         default: 'h-11 px-6 py-2 has-[>svg]:px-4 rounded-pebble',
         sm: 'h-9 px-4 has-[>svg]:px-3 rounded-stone',
         lg: 'h-14 px-8 has-[>svg]:px-6 text-base rounded-pebble',
-        icon: 'size-11 rounded-full', // Symmetric circular for icon buttons
+        icon: 'size-11 rounded-sentry', // Symmetric circular for icon buttons
       },
     },
     defaultVariants: {

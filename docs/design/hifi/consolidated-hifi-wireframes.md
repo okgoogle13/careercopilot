@@ -4,7 +4,8 @@
 
 # HiFi Mockup: Analysis Dashboard Screen
 
-**Design System**: kerala-rage kr-solidarity V3.1
+**Design System**: KR Solidarity v6.0
+> **Part of the [KR Solidarity Design Canon](../../01_CANON.md)**
 **Mode**: kr-dark (Restrained, Data-Focused)
 **Target Score**: ≥360/400 (90% — Excellent)
 **Generated**: 2026-02-16
@@ -1056,7 +1057,8 @@ All design system standards met or exceeded. No blocking issues. Ready for imple
 
 # HiFi Mockup: Application Form Flow Screen
 
-**Design System**: kerala-rage kr-solidarity V3.1
+**Design System**: KR Solidarity v6.0
+> **Part of the [KR Solidarity Design Canon](../../01_CANON.md)**
 **Mode**: kr-dark (Functional, Guided)
 **Target Score**: ≥360/400 (90% — Excellent)
 **Generated**: 2026-02-16
@@ -1290,7 +1292,8 @@ interface FormContainerProps {
 
 # HiFi Mockup: Authentication Screen
 
-**Design System**: kerala-rage kr-solidarity V3.1
+**Design System**: KR Solidarity v6.0
+> **Part of the [KR Solidarity Design Canon](../../01_CANON.md)**
 **Mode**: kr-dark (Secure, Focused)
 **Target Score**: ≥360/400 (90% — Excellent)
 **Generated**: 2026-02-16
@@ -1504,7 +1507,8 @@ interface AuthContainerProps {
 
 # HiFi Mockup: Auth Screen (Landing)
 
-**Design System**: kerala-rage kr-solidarity V3.1
+**Design System**: KR Solidarity v6.0
+> **Part of the [KR Solidarity Design Canon](../../01_CANON.md)**
 **Mode**: kr-dark (Expressive, Gateway)
 **Target Score**: ≥360/400 (90% — Excellent)
 **Generated**: 2026-02-16
@@ -1682,7 +1686,8 @@ interface ManifestoCardProps {
 
 # HiFi Mockup: Dashboard Overview Screen
 
-**Design System**: kerala-rage kr-solidarity V3.1
+**Design System**: KR Solidarity v6.0
+> **Part of the [KR Solidarity Design Canon](../../01_CANON.md)**
 **Mode**: kr-dark (Restrained, Data-Focused)
 **Target Score**: ≥360/400 (90% — Excellent)
 **Generated**: 2026-02-16
@@ -2513,7 +2518,8 @@ All design system standards met or exceeded. No blocking issues. Ready for imple
 
 # HiFi Mockup: Ingestion Screen
 
-**Design System**: kerala-rage kr-solidarity V3.1
+**Design System**: KR Solidarity v6.0
+> **Part of the [KR Solidarity Design Canon](../../01_CANON.md)**
 **Mode**: kr-dark (Technical, Industrial)
 **Target Score**: ≥360/400 (90% — Excellent)
 **Generated**: 2026-02-16
@@ -2747,7 +2753,8 @@ interface DropzoneAreaProps {
 
 # HiFi Mockup: Job Search Flow Screen
 
-**Design System**: kerala-rage kr-solidarity V3.1
+**Design System**: KR Solidarity v6.0
+> **Part of the [KR Solidarity Design Canon](../../01_CANON.md)**
 **Mode**: kr-dark (Exploratory, Dense)
 **Target Score**: ≥360/400 (90% — Excellent)
 **Generated**: 2026-02-16
@@ -2950,7 +2957,8 @@ interface FilterSidebarProps {
 
 # HiFi Mockup: Kanban Board Screen
 
-**Design System**: kerala-rage kr-solidarity V3.1
+**Design System**: KR Solidarity v6.0
+> **Part of the [KR Solidarity Design Canon](../../01_CANON.md)**
 **Mode**: kr-dark (Restrained, Data-Focused)
 **Target Score**: ≥360/400 (90% — Excellent)
 **Generated**: 2026-02-16
@@ -4000,7 +4008,8 @@ All design system standards met or exceeded. No blocking issues. Ready for imple
 
 # HiFi Mockup: Onboarding Screen
 
-**Design System**: kerala-rage kr-solidarity V3.1
+**Design System**: KR Solidarity v6.0
+> **Part of the [KR Solidarity Design Canon](../../01_CANON.md)**
 **Mode**: kr-dark (Welcoming, Choice-Driven)
 **Target Score**: ≥360/400 (90% — Excellent)
 **Generated**: 2026-02-16
@@ -4169,7 +4178,8 @@ interface SelectionCardProps {
 
 # HiFi Mockup: Opportunity Feed Screen
 
-**Design System**: kerala-rage kr-solidarity V3.1
+**Design System**: KR Solidarity v6.0
+> **Part of the [KR Solidarity Design Canon](../../01_CANON.md)**
 **Mode**: kr-dark (Dynamic, High-Volume)
 **Target Score**: ≥360/400 (90% — Excellent)
 **Generated**: 2026-02-16
@@ -4362,7 +4372,8 @@ interface OpportunityItemProps {
 
 # HiFi Mockup: Profile Settings Screen
 
-**Design System**: kerala-rage kr-solidarity V3.1
+**Design System**: KR Solidarity v6.0
+> **Part of the [KR Solidarity Design Canon](../../01_CANON.md)**
 **Mode**: kr-dark (Personal, Informative)
 **Target Score**: ≥360/400 (90% — Excellent)
 **Generated**: 2026-02-16
@@ -4532,7 +4543,8 @@ interface InfoStoneProps {
 
 # HiFi Mockup: Settings Screen
 
-**Design System**: kerala-rage kr-solidarity V3.1
+**Design System**: KR Solidarity v6.0
+> **Part of the [KR Solidarity Design Canon](../../01_CANON.md)**
 **Mode**: kr-dark (Administrative, Control)
 **Target Score**: ≥360/400 (90% — Excellent)
 **Generated**: 2026-02-16
@@ -4725,7 +4737,8 @@ interface SettingsGroupProps {
 
 # HiFi Mockup: Solidarity Landing Screen
 
-**Design System**: kerala-rage kr-solidarity V3.1
+**Design System**: KR Solidarity v6.0
+> **Part of the [KR Solidarity Design Canon](../../01_CANON.md)**
 **Mode**: kr-dark (Expressive, Landing Page)
 **Target Score**: ≥360/400 (90% — Excellent)
 **Generated**: 2026-02-16
@@ -5318,7 +5331,8 @@ All design system standards met or exceeded. No blocking issues. Ready for imple
 
 # HiFi Mockup: Split-Screen Editor Screen
 
-**Design System**: kerala-rage kr-solidarity V3.1
+**Design System**: KR Solidarity v6.0
+> **Part of the [KR Solidarity Design Canon](../../01_CANON.md)**
 **Mode**: kr-dark (Restrained, Data-Focused)
 **Target Score**: ≥360/400 (90% — Excellent)
 **Generated**: 2026-02-16
@@ -6449,7 +6463,8 @@ All design system standards met or exceeded. No blocking issues. Ready for imple
 
 # HiFi Mockup: Studio Designer Screen
 
-**Design System**: kerala-rage kr-solidarity V3.1
+**Design System**: KR Solidarity v6.0
+> **Part of the [KR Solidarity Design Canon](../../01_CANON.md)**
 **Mode**: kr-dark (Creative, Tool-Dense)
 **Target Score**: ≥360/400 (90% — Excellent)
 **Generated**: 2026-02-16

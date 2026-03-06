@@ -14,8 +14,8 @@ class ManifestReconciler:
     def __init__(self):
         self.repo_root = Path(__file__).parent.parent.parent
         self.manifest_path = self.repo_root / 'frontend/public/assets/kerala-rage-kr-solidarity-manifest.json'
-        self.token_map_path = self.repo_root / 'frontend/public/assets/kr-solidarity-ui-token-map.json'
-        self.hero_registry_path = self.repo_root / 'frontend/public/assets/kr-solidarity/kr-solidarity.hero-registry.json'
+        self.token_map_path = self.repo_root / 'frontend/public/assets/kr-solidarity-hero-token-map.v2.json'
+        self.hero_registry_path = self.repo_root / 'frontend/public/assets/kr-solidarity-hero-registry.json'
 
     def load_json(self, path: Path) -> Dict:
         with open(path, 'r') as f:
@@ -46,22 +46,45 @@ class ManifestReconciler:
         return ids
 
     def validate_file_paths(self) -> List[str]:
-        """Check if all asset file paths in token map exist"""
+        """Check if all asset file paths in token map and manifest exist"""
         errors = []
         token_map = self.load_json(self.token_map_path)
-        
+        manifest_data = self.load_json(self.manifest_path)
+
+        # Check token map paths
         for token_name, token_data in token_map.get('tokens', {}).items():
             if token_data.get('status') == 'ready' and token_data.get('path'):
                 asset_path = self.repo_root / 'frontend/public' / token_data['path'].lstrip('/')
                 if not asset_path.exists():
-                    errors.append(f"Missing file: {token_data['path']}")
-        
+                    errors.append(f"Missing Token Map file: {token_data['path']} (Ref: {token_data.get('ref')})")
+
+        # Check manifest paths
+        for asset in manifest_data.get('assets', []):
+            asset_path = self.repo_root / 'frontend/public' / asset['file_path'].lstrip('/')
+            if not asset_path.exists():
+                errors.append(f"Missing Manifest file: {asset['file_path']} (ID: {asset['id']})")
+
         return errors
 
+    def get_disk_files(self) -> Set[str]:
+        """Get set of relative file paths from disk"""
+        asset_root = self.repo_root / 'frontend/public/assets/kr-solidarity'
+        paths = set()
+        for root, _, files in os.walk(asset_root):
+            for file in files:
+                if file.endswith(('.png', '.svg', '.jpg', '.jpeg', '.webp')):
+                    full_path = Path(root) / file
+                    rel_path = f"/assets/kr-solidarity/{full_path.relative_to(asset_root)}"
+                    paths.add(rel_path)
+        return paths
+
     def reconcile(self) -> Dict:
-        manifest_ids = self.get_manifest_ids()
+        manifest_data = self.load_json(self.manifest_path)
+        manifest_ids = {asset['id'] for asset in manifest_data.get('assets', [])}
+        manifest_paths = {asset['file_path'] for asset in manifest_data.get('assets', [])}
         token_map_ids = self.get_token_map_ids()
         hero_registry_ids = self.get_hero_registry_ids()
+        disk_paths = self.get_disk_files()
 
         result = {
             'timestamp': str(Path.cwd()),
@@ -101,6 +124,15 @@ class ManifestReconciler:
                 'type': 'missing_files',
                 'count': len(path_errors),
                 'items': path_errors,
+            })
+
+        # Orphaned files on disk
+        orphaned_files = disk_paths - manifest_paths
+        if orphaned_files:
+            result['issues'].append({
+                'type': 'orphaned_disk_files',
+                'count': len(orphaned_files),
+                'items': list(orphaned_files),
             })
 
         return result

@@ -25,7 +25,7 @@ export interface ValveProps extends Omit<
  *
  * **Kerala Rage Design Token Usage:**
  * - Colors: Kerala Rage kr-solidarity semantic palette (signalGreen, kr-activistSmokeGreen, inkGold, concreteGrey, worker-ash)
- * - Shape: Circular track and thumb (rounded-full)
+ * - Shape: Circular track and thumb (rounded-sentry)
  * - Motion: Spring physics cubic-bezier(0.34, 1.56, 0.64, 1)
  * - Typography: Work Sans (field-note font for labels)
  */
@@ -85,7 +85,7 @@ export const Valve = forwardRef<HTMLInputElement, ValveProps>(
             <div
               className={`
                         ${currentSize.track}
-                        rounded-full
+                        rounded-sentry
                         transition-all duration-300 var(--ease-viscous-breeze)
                         ${
                           isChecked
@@ -107,7 +107,7 @@ export const Valve = forwardRef<HTMLInputElement, ValveProps>(
                         absolute top-0.5 left-0.5
                         ${currentSize.thumb}
                         bg-[var(--sys-color-worker-ash-base)]
-                        rounded-full
+                        rounded-sentry
                         shadow-sm
                         transition-all duration-300 var(--ease-viscous-breeze)
                         ${isChecked ? currentSize.translate : 'translate-x-0'}

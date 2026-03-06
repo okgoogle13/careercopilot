@@ -92,10 +92,13 @@ const config: Config = {
         curator: ['"Caveat"', 'cursive'],
       },
       borderRadius: {
-        pebble: 'var(--radius-pebble)',
-        stone: 'var(--radius-stone)',
-        leaf: 'var(--radius-leaf)',
-        seed: 'var(--radius-seed)',
+        pebble: 'var(--sys-shape-radius-pebble)',
+        stone: 'var(--sys-shape-radius-stone)',
+        slab: 'var(--sys-shape-radius-slab)',
+        sentry: 'var(--sys-shape-sentryAvatar)',
+        full: '9999px',
+        tech: 'var(--sys-shape-radius-slab)',
+        gem: 'var(--sys-shape-radius-pebble)',
       },
       boxShadow: {
         rest: 'var(--shadow-rest)',

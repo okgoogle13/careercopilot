@@ -6,6 +6,10 @@ import { useEffect, useState } from 'react';
 import { M3ErrorAlert } from '../components/shared/M3ErrorAlert';
 import { PageHeader } from '../components/shared/PageHeader';
 import { API_ENDPOINTS } from '../config/api';
+import { LayeredHero } from '../components/kerala-rage/LayeredHero';
+import { loadHeroRegistry } from '../design/hero/heroRegistry';
+import { composeHero } from '../lib/composeHero';
+import type { SolidarityManifest } from '../design/hero/heroTypes';
 
 interface JobQueueItem {
   id: string;
@@ -50,6 +54,41 @@ export function JobQueue() {
   );
   const [showCoverLetterDialog, setShowCoverLetterDialog] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [heroData, setHeroData] = useState<{
+    layers: any[];
+    typography: any;
+    animation: any;
+    zIndexMap: any;
+  } | null>(null);
+
+  useEffect(() => {
+    async function loadHero() {
+      try {
+        const [manifest, registry] = await Promise.all([
+          fetch('/assets/kerala-rage-kr-solidarity-manifest.json').then((r) => r.json()),
+          loadHeroRegistry(),
+        ]);
+
+        const result = composeHero(
+          manifest as SolidarityManifest,
+          registry,
+          'layered-solidarity-hero'
+        );
+
+        if (result.valid) {
+          setHeroData({
+            layers: result.resolvedLayers,
+            typography: result.typography,
+            animation: result.animation,
+            zIndexMap: result.zIndexMap,
+          });
+        }
+      } catch (error) {
+        console.error('Failed to load job queue hero:', error);
+      }
+    }
+    loadHero();
+  }, []);
 
   useEffect(() => {
     fetchJobs();
@@ -154,7 +193,7 @@ export function JobQueue() {
         <div
           role="status"
           data-testid="job-queue-loader"
-          className="w-12 h-12 border-4 border-[var(--color-ink-gold)]/20 border-t-[var(--color-ink-gold)] rounded-full animate-spin"
+          className="w-12 h-12 border-4 border-[var(--color-ink-gold)]/20 border-t-[var(--color-ink-gold)] rounded-sentry animate-spin"
         />
         <p className="font-annotation text-xs tracking-widest text-[var(--color-concrete-grey-dark)] uppercase">
           Synchronizing Queue
@@ -164,7 +203,20 @@ export function JobQueue() {
   }
 
   return (
-    <div className="p-8 md:p-12 max-w-7xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-500">
+    <div className="p-8 md:p-12 max-w-7xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-500 relative">
+      {/* Hero Engine Integration */}
+      {heroData && (
+        <div className="absolute top-0 right-0 w-[400px] h-full pointer-events-none opacity-10 mask-gradient-to-left">
+          <LayeredHero
+            layers={heroData.layers}
+            typography={{ ...heroData.typography, headline: '', supporting: '' }}
+            animation={{ ...heroData.animation, scroll_behavior: 'none' }}
+            zIndexMap={heroData.zIndexMap}
+            className="h-full"
+          />
+        </div>
+      )}
+
       <PageHeader
         title="Intelligence Pipeline"
         highlightedWord="Pipeline"
@@ -182,7 +234,7 @@ export function JobQueue() {
 
       {jobs.length === 0 && !error ? (
         <div className="text-center py-32 opacity-60">
-          <div className="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-6 border border-white/10">
+          <div className="w-20 h-20 bg-white/5 rounded-sentry flex items-center justify-center mx-auto mb-6 border border-white/10">
             <Sparkles className="w-10 h-10 text-[var(--color-concrete-grey-dark)]" />
           </div>
           <h3 className="font-bloom text-3xl mb-2 text-[var(--color-paper-white)]">

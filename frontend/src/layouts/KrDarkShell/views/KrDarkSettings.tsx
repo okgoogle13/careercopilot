@@ -97,11 +97,11 @@ export const KrDarkSettings: React.FC = () => {
 
                     {/* Toggle Interaction */}
                     <div
-                      className={`w-14 h-7 rounded-full relative cursor-pointer transition-colors duration-500 pb-px ${setting.active ? 'bg-ink-gold' : 'bg-surface-KrDark-concrete-grey-high/10 border border-surface-KrDark-concrete-grey-high/20 shadow-inner'}`}
+                      className={`w-14 h-7 rounded-sentry relative cursor-pointer transition-colors duration-500 pb-px ${setting.active ? 'bg-ink-gold' : 'bg-surface-KrDark-concrete-grey-high/10 border border-surface-KrDark-concrete-grey-high/20 shadow-inner'}`}
                     >
                       <motion.div
                         animate={setting.active ? { x: 28 } : { x: 4 }}
-                        className={`absolute top-1 w-5 h-5 rounded-full shadow-viscous ${setting.active ? 'bg-asphalt-black' : 'bg-paper-white/20'}`}
+                        className={`absolute top-1 w-5 h-5 rounded-sentry shadow-viscous ${setting.active ? 'bg-asphalt-black' : 'bg-paper-white/20'}`}
                         transition={
                           shouldReduceMotion
                             ? { duration: 0 }

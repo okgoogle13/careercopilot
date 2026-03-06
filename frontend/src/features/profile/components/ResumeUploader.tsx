@@ -128,7 +128,7 @@ export default function ResumeUploader({ onUploadSuccess }: ResumeUploaderProps)
               exit={{ opacity: 0, y: -10 }}
               className="flex flex-col items-center"
             >
-              <div className="w-20 h-20 rounded-full bg-surface-container-high flex items-center justify-center mb-4 shadow-sm">
+              <div className="w-20 h-20 rounded-sentry bg-surface-container-high flex items-center justify-center mb-4 shadow-sm">
                 <Upload className="w-8 h-8 text-primary" />
               </div>
               <p className="text-title-medium font-bold text-on-surface mb-1">
@@ -163,7 +163,7 @@ export default function ResumeUploader({ onUploadSuccess }: ResumeUploaderProps)
               animate={{ opacity: 1, scale: 1 }}
               className="flex flex-col items-center"
             >
-              <div className="w-20 h-20 rounded-full bg-green-100 flex items-center justify-center mb-4">
+              <div className="w-20 h-20 rounded-sentry bg-green-100 flex items-center justify-center mb-4">
                 <CheckCircle2 className="w-10 h-10 text-green-600" />
               </div>
               <p className="text-title-medium font-bold text-green-700">Analysis Complete!</p>
@@ -187,7 +187,7 @@ export default function ResumeUploader({ onUploadSuccess }: ResumeUploaderProps)
               animate={{ opacity: 1 }}
               className="flex flex-col items-center"
             >
-              <div className="w-20 h-20 rounded-full bg-error-container flex items-center justify-center mb-4">
+              <div className="w-20 h-20 rounded-sentry bg-error-container flex items-center justify-center mb-4">
                 <AlertCircle className="w-10 h-10 text-error" />
               </div>
               <p className="text-title-medium font-bold text-error">Upload Failed</p>

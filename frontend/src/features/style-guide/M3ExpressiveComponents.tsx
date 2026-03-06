@@ -38,7 +38,7 @@ export function MorphPreviewer() {
         </h3>
         <button
           onClick={() => setState((s) => (s === 'rest' ? 'expressive' : 'rest'))}
-          className="px-4 py-2 bg-primary text-on-primary rounded-full font-bold uppercase text-sm hover:scale-105 transition-transform flex items-center gap-2"
+          className="px-4 py-2 bg-primary text-on-primary rounded-sentry font-bold uppercase text-sm hover:scale-105 transition-transform flex items-center gap-2"
         >
           {state === 'rest' ? <Play className="w-4 h-4" /> : <Pause className="w-4 h-4" />}
           {state === 'rest' ? 'Morph' : 'Reset'}
@@ -69,7 +69,7 @@ export function MorphPreviewer() {
               <button
                 key={shape}
                 onClick={() => setCurrentShape(shape)}
-                className={`px-3 py-1 rounded-full text-sm font-bold uppercase transition-all ${
+                className={`px-3 py-1 rounded-sentry text-sm font-bold uppercase transition-all ${
                   currentShape === shape
                     ? 'bg-primary text-on-primary'
                     : 'bg-surface-dim text-on-surface hover:bg-surface-container-high'
@@ -84,13 +84,13 @@ export function MorphPreviewer() {
         {/* Code Display */}
         <div className="space-y-4">
           <p className="text-sm text-on-surface-variant font-bold">Current clip-path:</p>
-          <div className="bg-surface-dim p-4 rounded-lg overflow-x-auto">
+          <div className="bg-surface-dim p-4 rounded-pebble overflow-x-auto">
             <pre className="text-xs font-mono text-primary">
               {clipPath === 'none' ? 'none (Rest State)' : clipPath}
             </pre>
           </div>
 
-          <div className="bg-tertiary-container/20 p-4 rounded-lg border border-tertiary">
+          <div className="bg-tertiary-container/20 p-4 rounded-pebble border border-tertiary">
             <p className="text-sm font-bold mb-2">Physics:</p>
             <div className="text-xs font-mono space-y-1 text-on-surface-variant">
               <div>stiffness: 500</div>
@@ -164,7 +164,7 @@ export function AxisVisualizer() {
                 {axes.wght}
               </span>
             </div>
-            <div className="h-2 bg-surface-dim rounded-full overflow-hidden">
+            <div className="h-2 bg-surface-dim rounded-sentry overflow-hidden">
               <motion.div
                 className="h-full bg-primary"
                 style={{ width: `${(axes.wght / 900) * 100}%` }}
@@ -184,7 +184,7 @@ export function AxisVisualizer() {
                 {axes.wdth}
               </span>
             </div>
-            <div className="h-2 bg-surface-dim rounded-full overflow-hidden">
+            <div className="h-2 bg-surface-dim rounded-sentry overflow-hidden">
               <motion.div
                 className="h-full bg-secondary"
                 animate={{ width: `${axes.wdth}%` }}
@@ -202,7 +202,7 @@ export function AxisVisualizer() {
                 {axes.GRAD}
               </span>
             </div>
-            <div className="h-2 bg-surface-dim rounded-full overflow-hidden">
+            <div className="h-2 bg-surface-dim rounded-sentry overflow-hidden">
               <motion.div
                 className="h-full bg-tertiary"
                 animate={{ width: `${(axes.GRAD / 200) * 100}%` }}
@@ -210,7 +210,7 @@ export function AxisVisualizer() {
             </div>
           </div>
 
-          <div className="bg-green-500/10 p-3 rounded-lg border border-green-500/30 mt-4">
+          <div className="bg-green-500/10 p-3 rounded-pebble border border-green-500/30 mt-4">
             <p className="text-xs font-bold text-green-700 dark:text-green-400">
               ✓ Parametric Pairing Active: Typography synced with shape morph
             </p>
@@ -284,14 +284,14 @@ export function SlopAuditor() {
           <button
             onClick={startTest}
             disabled={isMonitoring}
-            className="px-4 py-2 bg-primary text-on-primary rounded-full font-bold uppercase text-sm hover:scale-105 transition-transform disabled:opacity-50 disabled:hover:scale-100"
+            className="px-4 py-2 bg-primary text-on-primary rounded-sentry font-bold uppercase text-sm hover:scale-105 transition-transform disabled:opacity-50 disabled:hover:scale-100"
           >
             Start Monitor
           </button>
           <button
             onClick={stopTest}
             disabled={!isMonitoring}
-            className="px-4 py-2 bg-error text-on-error rounded-full font-bold uppercase text-sm hover:scale-105 transition-transform disabled:opacity-50 disabled:hover:scale-100"
+            className="px-4 py-2 bg-error text-on-error rounded-sentry font-bold uppercase text-sm hover:scale-105 transition-transform disabled:opacity-50 disabled:hover:scale-100"
           >
             Stop
           </button>
@@ -310,7 +310,7 @@ export function SlopAuditor() {
       <div className="flex gap-4">
         <button
           onClick={() => setTestType('correct')}
-          className={`px-4 py-2 rounded-lg font-bold text-sm ${
+          className={`px-4 py-2 rounded-pebble font-bold text-sm ${
             testType === 'correct' ? 'bg-green-500 text-white' : 'bg-surface-dim text-on-surface'
           }`}
         >
@@ -318,7 +318,7 @@ export function SlopAuditor() {
         </button>
         <button
           onClick={() => setTestType('wrong')}
-          className={`px-4 py-2 rounded-lg font-bold text-sm ${
+          className={`px-4 py-2 rounded-pebble font-bold text-sm ${
             testType === 'wrong' ? 'bg-error text-on-error' : 'bg-surface-dim text-on-surface'
           }`}
         >
@@ -368,7 +368,7 @@ export function SlopAuditor() {
         {/* Violations Display */}
         <div className="space-y-4">
           <div
-            className={`p-4 rounded-lg border-2 ${
+            className={`p-4 rounded-pebble border-2 ${
               violations.length > 0
                 ? 'bg-error/10 border-error'
                 : 'bg-green-500/10 border-green-500'
@@ -404,7 +404,7 @@ export function SlopAuditor() {
             )}
           </div>
 
-          <div className="bg-surface-dim p-4 rounded-lg">
+          <div className="bg-surface-dim p-4 rounded-pebble">
             <p className="text-xs font-bold mb-2">Anti-Slop Rule:</p>
             <p className="text-xs text-on-surface-variant leading-relaxed">
               <code className="text-error">font-weight</code> must remain <strong>constant</strong>{' '}

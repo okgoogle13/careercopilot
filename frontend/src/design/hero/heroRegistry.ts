@@ -1,13 +1,13 @@
 import type { HeroRegistry, HeroComposition } from './heroTypes';
 
 const FALLBACK_REGISTRY: HeroRegistry = {
-  version: '3.1.0',
+  version: '6.0.0',
   registry_name: 'kerala-rage-hero-compositions',
-  last_updated: '2026-03-05',
+  last_updated: '2026-03-06',
   compositions: [
     {
       id: 'fallback-hero',
-      name: 'Fallback Hero',
+      name: 'Solidarity Manifesto',
       landing_default: true,
       layers: [
         {
@@ -20,10 +20,10 @@ const FALLBACK_REGISTRY: HeroRegistry = {
         },
       ],
       typography: {
-        headline: 'Solidarity Across Borders',
-        supporting: 'First Nations, Kerala, Global Resistance',
+        headline: 'THE SOLIDARITY MANIFESTO',
+        supporting: 'Migrant Solidarity / Street Resistance / Urban Labor',
         pressure_state: { wght: 900, wdth: 75 },
-        solidarity_state: { wght: 800, wdth: 120 },
+        solidarity_state: { wght: 800, wdth: 125 },
         melancholy_state: { wght: 475, wdth: 97.5 },
       },
       motion: {

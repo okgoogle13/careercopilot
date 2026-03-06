@@ -1,6 +1,7 @@
 # HiFi Mockup: Settings Screen
 
-**Design System**: kerala-rage kr-solidarity V3.1
+**Design System**: KR Solidarity v6.0
+> **Part of the [KR Solidarity Design Canon](../../01_CANON.md)**
 **Mode**: kr-dark (Administrative, Control)
 **Target Score**: ≥360/400 (90% — Excellent)
 **Generated**: 2026-02-16
@@ -112,8 +113,8 @@ interface SettingsGroupProps {
 
 **Structure:**
 ```tsx
-<button 
-  role="switch" 
+<button
+  role="switch"
   aria-checked={isOn}
   onClick={toggle}
   className={`pebble-toggle ${isOn ? 'on' : 'off'}`}

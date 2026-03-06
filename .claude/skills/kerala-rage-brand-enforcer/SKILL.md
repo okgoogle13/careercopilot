@@ -1,30 +1,31 @@
 ---
-name: kerala-rage-brand-enforcer
-description: Auto-applies kerala-rage brand guidelines (KR solidarity migrant rage theme) to ensure design consistency.
+name: kr-solidarity-brand-enforcer
+description: Auto-applies KR Solidarity v6.0 brand guidelines (Migrant Rage theme).
 metadata:
-  legacy_frontmatter:
-    tags:
+  version: 6.0.0
+  tags:
     - brand
     - compliance
-    - kerala-rage
-    - design
-    version: 1.0.0
+    - kr-solidarity
+    - migrant-rage
 ---
 
-# kerala-rage Brand Enforcer skill
+# KR Solidarity: Brand Enforcer (v6.0)
+
 
 ## Purpose
 
-Guardrails to ensure all AI-generated content matches the KR solidarity migrant rage theme.
+Guardrails to ensure all content matches the **KR Solidarity (Migrant Rage)** theme and adheres to the [Design Canon](../../docs/design/01_CANON.md).
 
 ## Process
 
-1. **Review Output**: Analyze generated content (wireframes, specs, documentation)
-2. **Validate Colors**: Ensure **Step 0** bg (#0F0F0F), **Solidarity Red** (#F14714), **Ink Gold** (#DAF674).
-3. **Check Typography**: Verify **Work Sans** (Body/UI), **Fraunces** (Display), **Libre Bodoni** (Proclamation), **JetBrains Mono** (Mono), **Caveat** (Curator), and **Nabla** (Accent). NO Inter/Roboto/Arial.
-4. **Validate Layout**: Confirm "Stone/Slab" asymmetric radii, 8px grid, M3 shadows.
-5. **Verify Visual**: Ensure KR solidarity migrant rage aesthetic (Melbourne laneway substrate, resistance portraiture, wheat-paste posters, and stencil motifs). NO FLORA OR AUSTRALIAN ENDEMIC ELEMENTS.
-6. **Report Violations**: Flag non-compliant elements (e.g., perfect circles, white backgrounds).
+1. **Review Output**: Analyze generated content (wireframes, specs, code, logs).
+2. **Validate Colors**: Enforce **Solidarity Charcoal** (#1A1714), **Solidarity Crimson** (#F14714), and **Ink Gold** (#DAF674).
+3. **Check Typography**: Verify the **Solidarity Stack** from [02_SYSTEM.md](../../docs/design/02_SYSTEM.md). NO Inter/Roboto/Arial.
+4. **Validate Layout**: Confirm **Stone / Slab / Pebble** asymmetric radii and 8px grid.
+5. **Verify Visuals**: Enforce **STRICT ZERO-FLORA LOCKDOWN**. Confirm urban/human-centric motifs (laneways, posters, resistance portraiture).
+6. **Report Violations**: Flag non-compliant elements (e.g., perfect circles, white backgrounds, botanical motifs).
+
 
 ## When to Use
 
@@ -36,14 +37,15 @@ Guardrails to ensure all AI-generated content matches the KR solidarity migrant 
 ## Enforcement Rules
 
 - **Colors**:
-    - **Background**: Step 0 (#0F0F0F) / Step 1 (#1A1A1A). **NO WHITE BACKGROUNDS**.
-    - **Accents**: Solidarity Red (#F14714), Ink Gold (#DAF674), Stencil Yellow (#F6E748).
+    - **Background**: Solidarity Charcoal (#1A1714). **STRICT NO WHITE BACKGROUNDS**.
+    - **Accents**: Solidarity Crimson (#F14714), Ink Gold (#DAF674), Stencil Yellow (#F6E748), Activist Smoke (#48DA8B).
 - **Typography**:
-    - **Solidarity Stack**: Work Sans (Body), Fraunces (Display), Libre Bodoni (Proclamation), JetBrains Mono (Mono), Caveat (Curator).
-    - **Nabla (COLRv1)**: Authorized ONLY for decorative, icon-scale color glyphs/Hero moments. MUST use `--nabla-solidarity`.
-    - **Rules**: 9× weight ratio (100 vs 900), 6× size ratio.
-- **Layout**: Asymmetric radii (**Stone/Slab/Pebble** shapes). **BANNED**: `border-radius: 50%`.
-- **Visual**: Melbourne laneway/stencilled aesthetic, resistance portraiture (e.g., Bhagat Singh, Tipu Sultan), wheat-paste textures, and industrial motifs. **FORBIDDEN**: Flora, Australian endemic botanicals, or soft organic 'nature' elements.
+    - **Solidarity Stack**: Work Sans, Fraunces, Libre Bodoni, JetBrains Mono, Caveat.
+    - **Nabla (COLRv1)**: Authorized ONLY for icon-scale Hero hits. MUST use Solidarity palette.
+- **Layout**: Asymmetric radii (**Stone / Slab / Pebble** shapes). **BANNED**: `border-radius: 50%`.
+- **Visual**: Melbourne laneway/stencilled aesthetic, resistance portraiture, wheat-paste textures.
+- **FORBIDDEN**: Flora, Australian endemic botanicals, or soft organic 'nature' elements.
+
 
 ## Validates Outputs From
 

@@ -10,7 +10,7 @@ export const SidePanel: React.FC = () => {
         <div className="mb-6 relative">
           <div className="relative rounded-xl overflow-hidden shadow-lg border-2 border-surface-KrDark-slate-smoke-highest bg-surface-KrDark-charcoal-slate max-w-[120px] mx-auto"></div>
         </div>
-        <div className="p-4 border border-dashed border-secondary-flannel-dim rounded-lg text-secondary-flannel-dim text-sm font-annotation text-center opacity-60">
+        <div className="p-4 border border-dashed border-secondary-flannel-dim rounded-pebble text-secondary-flannel-dim text-sm font-annotation text-center opacity-60">
           [Context Properties Panel]
         </div>
       </div>

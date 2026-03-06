@@ -133,7 +133,7 @@ export function CoverLetterGenerator() {
             className="flex items-center"
           >
             <div
-              className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg transition-colors ${
+              className={`w-10 h-10 rounded-sentry flex items-center justify-center font-bold text-lg transition-colors ${
                 step >= s
                   ? 'bg-primary text-on-primary shadow-elevation-1'
                   : 'bg-surface-container-high text-on-surface-variant'
@@ -143,7 +143,7 @@ export function CoverLetterGenerator() {
             </div>
             {s < 4 && (
               <div
-                className={`w-12 h-1 mx-2 rounded-full ${
+                className={`w-12 h-1 mx-2 rounded-sentry ${
                   step > s ? 'bg-primary' : 'bg-surface-container-high'
                 }`}
               />

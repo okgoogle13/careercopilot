@@ -14,7 +14,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from '@careercopilot/ui';
 // Mock component to satisfy build until custom components are migrated
 const ATSScoreCircle = ({ score, size }: { score: number; size?: string }) => (
   <div
-    className={`p-2 rounded-full border-2 border-primary flex items-center justify-center font-bold ${size === 'small' ? 'w-10 h-10 text-xs' : 'w-20 h-20 text-lg'}`}
+    className={`p-2 rounded-sentry border-2 border-primary flex items-center justify-center font-bold ${size === 'small' ? 'w-10 h-10 text-xs' : 'w-20 h-20 text-lg'}`}
   >
     {score}
   </div>
@@ -277,7 +277,7 @@ export function ProfileComparison({
           </div>
           <Card className="p-6">
             <div className="flex items-center gap-4 mb-4">
-              <div className="w-16 h-16 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container text-xl font-bold">
+              <div className="w-16 h-16 rounded-sentry bg-primary-container flex items-center justify-center text-on-primary-container text-xl font-bold">
                 {leftProfile.name[0]}
               </div>
               <div>
@@ -318,7 +318,7 @@ export function ProfileComparison({
           </div>
           <Card className="p-6">
             <div className="flex items-center gap-4 mb-4">
-              <div className="w-16 h-16 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary text-xl font-bold">
+              <div className="w-16 h-16 rounded-sentry bg-secondary-container flex items-center justify-center text-on-secondary text-xl font-bold">
                 {rightProfile.name[0]}
               </div>
               <div>

@@ -54,7 +54,7 @@ export function MetricCard({
 
       <div className="relative z-10">
         <div className="flex items-center gap-3 mb-4">
-          <div className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center border border-white/10">
+          <div className="w-10 h-10 bg-white/5 rounded-sentry flex items-center justify-center border border-white/10">
             <Icon className={`w-5 h-5 ${iconColor}`} />
           </div>
           <span className="text-[0.7rem] font-annotation font-medium tracking-widest uppercase opacity-70">

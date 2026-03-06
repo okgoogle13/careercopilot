@@ -143,7 +143,7 @@ export function DocumentComparison({
         </Box>
 
         {/* Content */}
-        <Box className="bg-gray-50 p-4 rounded-lg max-h-96 overflow-y-auto">
+        <Box className="bg-gray-50 p-4 rounded-pebble max-h-96 overflow-y-auto">
           <Box className="space-y-1 font-mono text-sm">
             {getHighlightedContent(document.content, isLeft).map((line, index) => (
               <Box
@@ -221,7 +221,7 @@ export function DocumentComparison({
 
       {/* Legend */}
       {highlightDifferences && (
-        <Box className="flex gap-4 mb-4 p-3 bg-gray-50 rounded-lg">
+        <Box className="flex gap-4 mb-4 p-3 bg-gray-50 rounded-pebble">
           <Box className="flex items-center gap-2">
             <Box className="w-4 h-4 bg-red-100 border-l-2 border-red-400 rounded"></Box>
             <Typography variant="caption">Removed/Modified (Left)</Typography>

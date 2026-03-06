@@ -1,6 +1,7 @@
 # HiFi Mockup: Authentication Screen
 
-**Design System**: kerala-rage kr-solidarity V3.1
+**Design System**: KR Solidarity v6.0
+> **Part of the [KR Solidarity Design Canon](../../01_CANON.md)**
 **Mode**: kr-dark (Secure, Focused)
 **Target Score**: ≥360/400 (90% — Excellent)
 **Generated**: 2026-02-16
@@ -116,10 +117,10 @@ interface AuthContainerProps {
 ```tsx
 <div className="input-field-group">
   <label className="mono-label">{label}</label>
-  <input 
-    className="stone-input" 
-    type={type} 
-    placeholder={placeholder} 
+  <input
+    className="stone-input"
+    type={type}
+    placeholder={placeholder}
   />
   {error && <span className="error-msg">{error}</span>}
 </div>
@@ -187,7 +188,7 @@ interface AuthContainerProps {
 ## Accessibility (WCAG 2.2 AA)
 
 ### Validation Report
-- **Contrast**: 
+- **Contrast**:
   - Headlines (PaperWhite on Charcoal): 15:1 ✅ AAA
   - Placeholders (PaperWhite 50%): 4.5:1 ✅ AA
   - Error Text (Solidarity Red): 5.0:1 ✅ AA

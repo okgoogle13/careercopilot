@@ -203,12 +203,12 @@ const TimelineEventComponent: React.FC<TimelineEventComponentProps> = ({
 
       {/* Timeline Icon */}
       <div
-        className={`relative z-10 flex items-center justify-center w-12 h-12 rounded-full border-2 border-[var(--color-surface-container-high)] bg-[var(--color-surface-base)] flex-shrink-0 ${
+        className={`relative z-10 flex items-center justify-center w-12 h-12 rounded-sentry border-2 border-[var(--color-surface-container-high)] bg-[var(--color-surface-base)] flex-shrink-0 ${
           isLatest ? 'shadow-[0_0_0_4px_rgba(var(--bg-leaf-base)_/_0.2)]' : ''
         }`}
       >
         <div
-          className={`flex items-center justify-center w-8 h-8 rounded-full ${
+          className={`flex items-center justify-center w-8 h-8 rounded-sentry ${
             // Map colors to our design tokens simply
             event.color === 'primary'
               ? 'bg-[var(--color-leaf-base)]'
@@ -308,7 +308,7 @@ const TimelineEventComponent: React.FC<TimelineEventComponentProps> = ({
                 </button>
 
                 {isExpanded && (
-                  <div className="p-3 bg-[var(--color-surface-container-low)] rounded-md animate-in fade-in zoom-in-95 duration-200">
+                  <div className="p-3 bg-[var(--color-surface-container-low)] rounded-stone animate-in fade-in zoom-in-95 duration-200">
                     <div className="flex flex-col gap-3">
                       {event.details?.notes && (
                         <div>
@@ -435,9 +435,9 @@ export const TimelineView: React.FC<TimelineViewProps> = ({
         {/* Progress and Filters */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="flex items-center gap-4 flex-1">
-            <div className="w-full max-w-xs h-2 bg-[var(--color-surface-container-high)] rounded-full overflow-hidden">
+            <div className="w-full max-w-xs h-2 bg-[var(--color-surface-container-high)] rounded-sentry overflow-hidden">
               <div
-                className="h-full bg-[var(--color-leaf-base)] transition-all duration-500 rounded-full"
+                className="h-full bg-[var(--color-leaf-base)] transition-all duration-500 rounded-sentry"
                 style={{ width: `${getProgressPercentage()}%` }}
               />
             </div>
@@ -446,7 +446,7 @@ export const TimelineView: React.FC<TimelineViewProps> = ({
             </span>
           </div>
 
-          <div className="flex gap-2 bg-[var(--color-surface-container-low)] p-1 rounded-full">
+          <div className="flex gap-2 bg-[var(--color-surface-container-low)] p-1 rounded-sentry">
             {[
               { key: 'all', label: 'All' },
               { key: 'interviews', label: 'Interviews' },
@@ -455,7 +455,7 @@ export const TimelineView: React.FC<TimelineViewProps> = ({
               <button
                 key={key}
                 onClick={() => setFilter(key as any)}
-                className={`px-4 py-1.5 rounded-full text-label-small transition-colors ${
+                className={`px-4 py-1.5 rounded-sentry text-label-small transition-colors ${
                   filter === key
                     ? 'bg-[var(--color-surface-base)] shadow-sm text-[var(--color-text-primary)] font-medium'
                     : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]'

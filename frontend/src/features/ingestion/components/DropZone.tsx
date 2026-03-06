@@ -120,7 +120,7 @@ export const DropZone: React.FC<DropZoneProps> = ({
       {isProcessing ? (
         <div className="flex flex-col items-center gap-4">
           <motion.div
-            className="h-16 w-16 rounded-full border-4 border-sage border-t-transparent"
+            className="h-16 w-16 rounded-sentry border-4 border-sage border-t-transparent"
             animate={{ rotate: 360 }}
             transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
           />
@@ -165,7 +165,7 @@ export const DropZone: React.FC<DropZoneProps> = ({
         style={{ width: '120px', height: '120px' }}
       >
         {/* Placeholder for native-group.png */}
-        <div className="h-full w-full rounded-full bg-gradient-to-br from-sage/20 to-terracotta/20" />
+        <div className="h-full w-full rounded-sentry bg-gradient-to-br from-sage/20 to-terracotta/20" />
       </div>
     </motion.div>
   );

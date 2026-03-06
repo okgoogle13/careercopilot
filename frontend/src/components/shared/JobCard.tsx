@@ -99,7 +99,7 @@ export const JobCard: React.FC<JobCardProps> = ({
           {tags.map((tag) => (
             <span
               key={tag}
-              className="px-2.5 py-1 rounded-full bg-[var(--color-surface-container-high)] text-[var(--color-text-tertiary)] text-xs font-medium"
+              className="px-2.5 py-1 rounded-sentry bg-[var(--color-surface-container-high)] text-[var(--color-text-tertiary)] text-xs font-medium"
             >
               {tag}
             </span>

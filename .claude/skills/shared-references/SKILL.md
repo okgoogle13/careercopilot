@@ -1,43 +1,39 @@
 ---
 name: shared-references
-description: Common reference materials, templates, and utilities shared across multiple
-  skills
+description: Common reference materials, templates, and utilities for KR Solidarity v6.0.
 metadata:
   legacy_frontmatter:
-    version: 1.0.0
+    version: 6.0.0
     tags:
     - reference
     - templates
     - utilities
 ---
 
-# Shared References
+# KR Solidarity: Shared References (v6.0)
 
 ## Purpose
 
-Centralize shared templates, design philosophies, and forbidden patterns that must be respected across all design and generation skills.
+Centralize shared templates, design philosophies, and forbidden patterns that must be respected across all KR Solidarity skills and development cycles.
 
 ## Process
 
-1. **Locate Reference**: Identify the specific constraint or philosophy needed (e.g., "What fonts are forbidden?").
+1. **Locate Reference**: Identify the specific constraint (e.g., "Zero-Flora Lockdown" or "Authorized Font Stack").
 2. **Apply Constraint**: Weave the reference material into the current task's prompt or validation logic.
-3. **Validate**: Ensure the output complies with the shared reference.
-
-## When to Use
-
-- When multiple skills need common resources to stay aligned with the kerala-rage brand.
-- When looking for definitive lists of allowed/forbidden design patterns.
-- When onboarding a new skill that needs to respect established project boundaries.
+3. **Validate**: Ensure the output complies with the [Design Canon](../../docs/design/01_CANON.md).
 
 ## Contents
 
 ### Brand & Philosophy
 
-- [kerala-rage_DESIGN_PHILOSOPHY.md](file:///.claude/skills/shared-references/kerala-rage_DESIGN_PHILOSOPHY.md): The KR Solidarity Migrant Rage core aesthetic — streetprint stencil, resistance portraiture, diaspora identity. No flora, no Australian endemic elements.
-- [KERALA_RAGE_MANIFESTO.md](file:///.claude/skills/shared-references/KERALA_RAGE_MANIFESTO.md): Agit-prop manifesto declaring what kerala-rage IS and IS NOT. Hard bans and doctrine.
-- [kerala-rage_FORBIDDEN_FONTS.md](file:///.claude/skills/shared-references/kerala-rage_FORBIDDEN_FONTS.md): Deny-list of fonts that undermine the project's unique character.
+- [KERALA_RAGE_MANIFESTO.md](file:///.claude/skills/shared-references/KERALA_RAGE_MANIFESTO.md): The KR Solidarity Agit-Prop manifesto.
+- [kerala-rage_DESIGN_PHILOSOPHY.md](file:///.claude/skills/shared-references/kerala-rage_DESIGN_PHILOSOPHY.md): Visual core — streetprint, resistance portraiture, emotional states.
+- [kerala-rage_FORBIDDEN_FONTS.md](file:///.claude/skills/shared-references/kerala-rage_FORBIDDEN_FONTS.md): Deny-list of colonial/generic fonts.
 
-### Templates (Planned)
+### Core Canon Links
 
-- `prompt-base-structure.md`: Standard XML-style prompt foundations.
-- `component-anatomy.md`: Common structural patterns for React components.
+- [01_CANON](../../docs/design/01_CANON.md)
+- [02_SYSTEM](../../docs/design/02_SYSTEM.md)
+- [03_COMPONENTS](../../docs/design/03_COMPONENTS.md)
+- [04_ASSETS](../../docs/design/04_ASSETS.md)
+- [05_FLOWS](../../docs/design/05_FLOWS.md)

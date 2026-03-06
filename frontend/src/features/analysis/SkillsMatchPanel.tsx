@@ -78,9 +78,9 @@ export function SkillsMatchPanel({ skillsGap }: SkillsMatchPanelProps) {
           </span>
         </div>
         {/* Progress bar */}
-        <div className="w-full h-2 bg-surface-container-high rounded-full overflow-hidden">
+        <div className="w-full h-2 bg-surface-container-high rounded-sentry overflow-hidden">
           <div
-            className={`h-full rounded-full transition-all duration-500 ${barColor}`}
+            className={`h-full rounded-sentry transition-all duration-500 ${barColor}`}
             style={{ width: `${match_score}%` }}
             role="progressbar"
             aria-valuenow={match_score}

@@ -73,7 +73,7 @@ export const CustomClassName: Story = {
         name="wheat"
         size={48}
         ariaLabel="Wheat icon with framed wrapper"
-        className="rounded-full border border-ink-gold/30 bg-surface-KrDark-slate-smoke-highest p-2 shadow-sm"
+        className="rounded-sentry border border-ink-gold/30 bg-surface-KrDark-slate-smoke-highest p-2 shadow-sm"
       />
     </div>
   ),

@@ -277,7 +277,7 @@ export const InterviewPrep: React.FC<InterviewPrepProps> = ({ onBack }) => {
                       </Pebble>
 
                       {showSampleAnswer && (
-                        <div className="bg-[var(--color-surface-container-low)] border border-[var(--color-leaf-base)] rounded-lg p-4 animate-in fade-in slide-in-from-top-2">
+                        <div className="bg-[var(--color-surface-container-low)] border border-[var(--color-leaf-base)] rounded-pebble p-4 animate-in fade-in slide-in-from-top-2">
                           <span className="text-label-small font-bold text-[var(--color-leaf-base)] block mb-1">
                             SAMPLE ANSWER
                           </span>
@@ -326,9 +326,9 @@ export const InterviewPrep: React.FC<InterviewPrepProps> = ({ onBack }) => {
                     {currentQuestion.tips.map((tip, index) => (
                       <div
                         key={index}
-                        className="flex gap-3 items-start p-2 rounded-md hover:bg-[var(--color-surface-base)] transition-colors"
+                        className="flex gap-3 items-start p-2 rounded-stone hover:bg-[var(--color-surface-base)] transition-colors"
                       >
-                        <div className="w-2 h-2 rounded-full bg-[var(--color-leaf-base)] mt-2 flex-shrink-0" />
+                        <div className="w-2 h-2 rounded-sentry bg-[var(--color-leaf-base)] mt-2 flex-shrink-0" />
                         <p className="text-body-medium text-[var(--color-text-secondary)] leading-relaxed">
                           {tip}
                         </p>

@@ -1746,11 +1746,11 @@
     },
     {
       "id": "KR-ICON-001",
-      "name": "Endemic Leaf Icon",
+      "name": "Stencil Mark Icon",
       "category": "icons",
       "layer": "ui-kit",
       "aspect_ratio": "1:1",
-      "file_path": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__icons--endemic-leaf-icon--v1.svg",
+      "file_path": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__icons--stencil-mark--v1.svg",
       "priority": "MEDIUM",
       "semantics": {
         "functional_role": "icon-anchor",
@@ -1790,11 +1790,11 @@
     },
     {
       "id": "KR-ICON-003",
-      "name": "Kerala Lotus Icon",
+      "name": "Solidarity Seal Icon",
       "category": "icons",
       "layer": "ui-kit",
       "aspect_ratio": "1:1",
-      "file_path": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__icons--kerala-lotus-icon--v1.svg",
+      "file_path": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__icons--solidarity-seal--v1.svg",
       "priority": "MEDIUM",
       "semantics": {
         "functional_role": "icon-anchor",
