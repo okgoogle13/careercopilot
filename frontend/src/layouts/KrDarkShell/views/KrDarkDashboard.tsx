@@ -96,7 +96,7 @@ export const KrDarkDashboard: React.FC = () => {
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-ink-gold/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none" />
 
               <div className="absolute bottom-4 right-6 opacity-0 group-hover:opacity-10 transition-opacity">
-                <div className="w-12 h-12 rounded-full border border-current" />
+                <div className="w-12 h-12 rounded-sentry border border-current" />
               </div>
             </SolidarityCard>
           </motion.div>
@@ -113,7 +113,7 @@ export const KrDarkDashboard: React.FC = () => {
         <SolidarityCard className="w-full p-12 relative overflow-hidden bg-asphalt-black group">
           <div className="flex justify-between items-center mb-8 border-b border-surface-KrDark-concrete-grey-high/20 pb-6">
             <div className="flex items-center gap-4">
-              <div className="w-2 h-2 rounded-full bg-ink-gold animate-pulse" />
+              <div className="w-2 h-2 rounded-sentry bg-ink-gold animate-pulse" />
               <h3 className="font-proclamation text-2xl uppercase text-paper-white/80">
                 Live Archive Stream
               </h3>

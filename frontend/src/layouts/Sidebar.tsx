@@ -71,7 +71,7 @@ export function Sidebar() {
       >
         {/* Logo Area */}
         <div className="p-6 pb-8 flex flex-col items-start">
-          <div className="w-14 h-14 rounded-full flex items-center justify-center bg-primary-container text-3xl transition-transform hover:scale-110 shadow-lg mb-4">
+          <div className="w-14 h-14 rounded-sentry flex items-center justify-center bg-primary-container text-3xl transition-transform hover:scale-110 shadow-lg mb-4">
             🦄
           </div>
           <h4 className="text-primary text-xl font-black uppercase tracking-tight leading-none">
@@ -124,7 +124,7 @@ export function Sidebar() {
         {/* User Profile */}
         <div className="p-4 m-4 bg-surface-container rounded-2xl flex-shrink-0 border border-outline-variant">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full flex-shrink-0 bg-tertiary-container" />
+            <div className="w-10 h-10 rounded-sentry flex-shrink-0 bg-tertiary-container" />
             <div className="flex-1">
               <p className="text-sm text-on-surface font-bold">Nishant</p>
               <p className="text-xs text-primary uppercase tracking-wider font-mono">
@@ -134,7 +134,7 @@ export function Sidebar() {
           </div>
           <Link
             to={`/settings${appendQuery}`}
-            className="flex items-center justify-center mt-3 p-2 rounded-full hover:bg-surface-dim transition-colors"
+            className="flex items-center justify-center mt-3 p-2 rounded-sentry hover:bg-surface-dim transition-colors"
             title="Settings"
           >
             <Settings className="w-5 h-5 text-on-surface-variant" />

@@ -54,7 +54,7 @@ export const KrDarkAnalysis: React.FC = () => {
                     SRC_ID: {skill.ref}
                   </p>
                 </div>
-                <div className="w-8 h-8 rounded-full border border-surface-KrDark-concrete-grey-high/25 flex items-center justify-center">
+                <div className="w-8 h-8 rounded-sentry border border-surface-KrDark-concrete-grey-high/25 flex items-center justify-center">
                   <span className="font-mono text-[10px] text-ink-gold">{skill.mastery}</span>
                 </div>
               </div>
@@ -66,7 +66,7 @@ export const KrDarkAnalysis: React.FC = () => {
                   </span>
                   <span className="font-mono text-[9px] text-paper-white/30">{skill.mastery}%</span>
                 </div>
-                <div className="w-full bg-surface-KrDark-concrete-grey-high/20 h-1.5 rounded-full overflow-hidden">
+                <div className="w-full bg-surface-KrDark-concrete-grey-high/20 h-1.5 rounded-sentry overflow-hidden">
                   <motion.div
                     initial={{ width: 0 }}
                     animate={{ width: `${skill.mastery}%` }}

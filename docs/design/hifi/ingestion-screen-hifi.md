@@ -1,6 +1,7 @@
 # HiFi Mockup: Ingestion Screen
 
-**Design System**: kerala-rage kr-solidarity V3.1
+**Design System**: KR Solidarity v6.0
+> **Part of the [KR Solidarity Design Canon](../../01_CANON.md)**
 **Mode**: kr-dark (Technical, Industrial)
 **Target Score**: ≥360/400 (90% — Excellent)
 **Generated**: 2026-02-16
@@ -122,8 +123,8 @@ interface DropzoneAreaProps {
 ```tsx
 <div className="progress-container">
   <div className="progress-track">
-    <div 
-      className="progress-fill" 
+    <div
+      className="progress-fill"
       style={{ width: `${percentage}%` }}
     />
   </div>

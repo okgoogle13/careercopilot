@@ -134,7 +134,7 @@ export function ApplicationTracker() {
               </div>
 
               {/* Glass Column Shell */}
-              <div className="space-y-4 min-h-[500px] rounded-lg border border-dashed border-concrete-grey/5 bg-bark-light/[0.02] p-2">
+              <div className="space-y-4 min-h-[500px] rounded-pebble border border-dashed border-concrete-grey/5 bg-bark-light/[0.02] p-2">
                 {applications
                   .filter((app) => app.stage === stage.id)
                   .map((app) => (
@@ -145,7 +145,7 @@ export function ApplicationTracker() {
                   ))}
 
                 {/* Seedling Dispatch (Add Button) */}
-                <button className="w-full py-4 border border-dashed border-concrete-grey/10 rounded-sm flex items-center justify-center text-concrete-grey/30 hover:border-ink-gold/40 hover:text-ink-gold transition-all group">
+                <button className="w-full py-4 border border-dashed border-concrete-grey/10 rounded-stone flex items-center justify-center text-concrete-grey/30 hover:border-ink-gold/40 hover:text-ink-gold transition-all group">
                   <Plus className="w-5 h-5 group-hover:rotate-90 transition-transform" />
                 </button>
               </div>

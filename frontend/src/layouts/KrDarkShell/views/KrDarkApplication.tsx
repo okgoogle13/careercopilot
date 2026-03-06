@@ -64,9 +64,9 @@ export const KrDarkApplication: React.FC = () => {
                 SEQUENCE:
               </span>
               <div className="flex gap-3">
-                <div className="w-5 h-1 bg-ink-gold rounded-full shadow-ink-glow" />
-                <div className="w-5 h-1 bg-surface-KrDark-concrete-grey-high/25 rounded-full" />
-                <div className="w-5 h-1 bg-surface-KrDark-concrete-grey-high/25 rounded-full" />
+                <div className="w-5 h-1 bg-ink-gold rounded-sentry shadow-ink-glow" />
+                <div className="w-5 h-1 bg-surface-KrDark-concrete-grey-high/25 rounded-sentry" />
+                <div className="w-5 h-1 bg-surface-KrDark-concrete-grey-high/25 rounded-sentry" />
               </div>
               <span className="font-mono text-[10px] text-paper-white/40 ml-4 group-hover:text-ink-gold transition-colors">
                 01 / 03

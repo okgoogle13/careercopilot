@@ -41,7 +41,7 @@ export function StyleGuide() {
               <Leaf className="w-5 h-5 text-on-primary-container" />
             </div>
             <h3 className="text-headline-small font-bold mb-2">The Leaf</h3>
-            <code className="text-xs bg-surface-dim px-2 py-1 rounded-md font-mono text-tertiary">
+            <code className="text-xs bg-surface-dim px-2 py-1 rounded-stone font-mono text-tertiary">
               .rounded-leaf
             </code>
             <p className="mt-4 text-on-surface-variant">
@@ -57,11 +57,11 @@ export function StyleGuide() {
             className="p-8 bg-surface-container rounded-tech border border-outline-variant shadow-elevation-1 relative overflow-hidden group
                         transition-all duration-300 ease-spring hover:shadow-elevation-3 hover:-translate-y-1 hover:scale-[1.01]"
           >
-            <div className="absolute top-4 right-4 bg-secondary-container p-2 rounded-sm group-hover:-rotate-12 transition-transform duration-500 ease-spring">
+            <div className="absolute top-4 right-4 bg-secondary-container p-2 rounded-stone group-hover:-rotate-12 transition-transform duration-500 ease-spring">
               <Cpu className="w-5 h-5 text-on-secondary-container" />
             </div>
             <h3 className="text-headline-small font-bold mb-2">The Tech-Edge</h3>
-            <code className="text-xs bg-surface-dim px-2 py-1 rounded-md font-mono text-secondary">
+            <code className="text-xs bg-surface-dim px-2 py-1 rounded-stone font-mono text-secondary">
               .rounded-tech
             </code>
             <p className="mt-4 text-on-surface-variant">
@@ -107,7 +107,7 @@ export function StyleGuide() {
               Friendly, soft asymmetry. Used for interactive elements where touch physics is
               implied.
               <br />
-              <code className="text-xs bg-surface-dim px-2 py-1 rounded-md font-mono text-tertiary mt-2 inline-block">
+              <code className="text-xs bg-surface-dim px-2 py-1 rounded-stone font-mono text-tertiary mt-2 inline-block">
                 .rounded-pebble
               </code>
             </p>
@@ -122,7 +122,7 @@ export function StyleGuide() {
               <Gem className="w-6 h-6 text-white" />
             </div>
             <h3 className="text-display-medium font-black mb-2">The Gem</h3>
-            <code className="text-xs bg-black/20 px-2 py-1 rounded-md font-mono text-white/80">
+            <code className="text-xs bg-black/20 px-2 py-1 rounded-stone font-mono text-white/80">
               .rounded-gem
             </code>
             <p className="mt-4 text-lg font-medium max-w-md">

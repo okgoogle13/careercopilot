@@ -178,7 +178,7 @@ export function KSCGenerator() {
             className="flex items-center"
           >
             <div
-              className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg transition-all duration-300 ${
+              className={`w-10 h-10 rounded-sentry flex items-center justify-center font-bold text-lg transition-all duration-300 ${
                 step >= s
                   ? 'bg-primary text-on-primary shadow-elevation-2 scale-110'
                   : 'bg-surface-container-high text-on-surface-variant'
@@ -188,7 +188,7 @@ export function KSCGenerator() {
             </div>
             {s < 3 && (
               <div
-                className={`w-12 h-1 mx-2 rounded-full transition-colors duration-500 ${
+                className={`w-12 h-1 mx-2 rounded-sentry transition-colors duration-500 ${
                   step > s ? 'bg-primary' : 'bg-surface-container-high'
                 }`}
               />

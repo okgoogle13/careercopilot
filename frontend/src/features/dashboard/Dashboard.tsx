@@ -214,7 +214,7 @@ export function Dashboard() {
                   </span>
                 </div>
                 <div className="relative pt-4">
-                  <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+                  <div className="h-1.5 w-full bg-white/5 rounded-sentry overflow-hidden">
                     <motion.div
                       initial={{ width: 0 }}
                       animate={{ width: '75%' }}
@@ -340,7 +340,7 @@ export function Dashboard() {
           y: [0, -20, 0],
         }}
         transition={{ duration: 15, repeat: Infinity, ease: 'linear' }}
-        className="absolute -bottom-64 -right-64 w-[800px] h-[800px] rounded-full bg-gradient-to-tl from-concrete-grey/10 via-transparent to-transparent blur-3xl pointer-events-none"
+        className="absolute -bottom-64 -right-64 w-[800px] h-[800px] rounded-sentry bg-gradient-to-tl from-concrete-grey/10 via-transparent to-transparent blur-3xl pointer-events-none"
       />
     </div>
   );

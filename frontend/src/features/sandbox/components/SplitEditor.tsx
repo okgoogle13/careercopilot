@@ -67,10 +67,10 @@ export function SplitEditor({ activeTab, onTabChange, archetype }: SplitEditorPr
     <div className="h-full flex flex-col relative">
       {/* Toolbar */}
       <div className="h-14 flex items-center justify-between px-4 border-b border-outline-variant bg-surface-container-high/30 flex-none">
-        <div className="flex gap-1 bg-surface-container-high p-1 rounded-lg">
+        <div className="flex gap-1 bg-surface-container-high p-1 rounded-pebble">
           <button
             onClick={() => onTabChange('ksc')}
-            className={`px-4 py-1.5 rounded-md text-label-small font-bold transition-all ${
+            className={`px-4 py-1.5 rounded-stone text-label-small font-bold transition-all ${
               activeTab === 'ksc'
                 ? 'bg-surface shadow-sm text-on-surface'
                 : 'text-on-surface-variant hover:text-on-surface'
@@ -80,7 +80,7 @@ export function SplitEditor({ activeTab, onTabChange, archetype }: SplitEditorPr
           </button>
           <button
             onClick={() => onTabChange('resume')}
-            className={`px-4 py-1.5 rounded-md text-label-small font-bold transition-all ${
+            className={`px-4 py-1.5 rounded-stone text-label-small font-bold transition-all ${
               activeTab === 'resume'
                 ? 'bg-surface shadow-sm text-on-surface'
                 : 'text-on-surface-variant hover:text-on-surface'
@@ -93,7 +93,7 @@ export function SplitEditor({ activeTab, onTabChange, archetype }: SplitEditorPr
         <div className="flex items-center gap-2">
           <KeralaRageButton
             variant="secondary"
-            className="h-8 w-8 p-0 rounded-full"
+            className="h-8 w-8 p-0 rounded-sentry"
             title="Split View (Coming Soon)"
           >
             <SplitSquareHorizontal className="w-4 h-4 text-on-surface-variant" />
@@ -124,10 +124,10 @@ export function SplitEditor({ activeTab, onTabChange, archetype }: SplitEditorPr
             value={criteria}
             onChange={(e) => setCriteria(e.target.value)}
             placeholder="Paste the Key Selection Criteria here..."
-            className="flex-1 bg-surface-container-high p-3 rounded-md resize-none text-body-small outline-none focus:ring-1 ring-primary/50"
+            className="flex-1 bg-surface-container-high p-3 rounded-stone resize-none text-body-small outline-none focus:ring-1 ring-primary/50"
           />
 
-          <div className="mt-4 p-3 bg-secondary-container/20 rounded-md border border-secondary-container">
+          <div className="mt-4 p-3 bg-secondary-container/20 rounded-stone border border-secondary-container">
             <h4 className="text-label-medium font-bold text-secondary flex items-center gap-2">
               <Wand2 className="w-3 h-3" />
               Tip

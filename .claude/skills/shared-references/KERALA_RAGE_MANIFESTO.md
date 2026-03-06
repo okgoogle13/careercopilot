@@ -1,4 +1,6 @@
-# Kerala Rage Design Manifesto
+# KR Solidarity: Design Manifesto (v6.0)
+
+> **Part of the [KR Solidarity Design Canon](../../../docs/design/01_CANON.md)**
 
 **Philosophy**: Agit-Prop / Migrant Worker Solidarity / Viscous Fluidity.
 **Core Tenet**: Design is a weapon. Aesthetics must serve the worker, not the colonial curator.
@@ -20,11 +22,11 @@ The **Solidarity Stack** (Work Sans / Fraunces / Libre Bodoni / Caveat / JetBrai
 
 Colors derive from the **streets, not the bush**:
 
-- **Step 0** (#0F0F0F) — the dark before the march
-- **Solidarity Red** (#F14714) — screenprint ink, resistance heat, primary CTA
-- **Ink Gold** (#DAF674) — temple radiance, optimistic defiance, halo disks
-- **Stencil Yellow** (#F6E748) — economic critique, attention markers
-- **Charcoal** ramps — Melbourne asphalt, laneways, substrate depth
+- **Solidarity Charcoal** (#1A1714) — the substrate; never white.
+- **Solidarity Crimson** (#F14714) — screenprint ink, resistance heat, primary CTA.
+- **Ink Gold** (#DAF674) — temple radiance, optimistic defiance, halo disks.
+- **Stencil Yellow** (#F6E748) — attention markers.
+- **Activist Smoke** (#48DA8B) — growth and secondary highlights.
 
 No flora. No ochre-from-native-plants. No wattle. No Australian endemic palette.
 
@@ -32,33 +34,33 @@ No flora. No ochre-from-native-plants. No wattle. No Australian endemic palette.
 
 Spacing and layout reject corporate precision:
 
-- Asymmetric radii (Stone/Slab/Pebble) over perfect geometry
-- Intentional asymmetry over rigid symmetry
-- 8px grid with deliberate disruptions for poster-like hierarchy
+- Asymmetric radii (Stone / Slab / Pebble) over perfect geometry.
+- Intentional asymmetry over rigid symmetry.
+- 8px grid with deliberate disruptions for poster-like hierarchy.
 
 ---
 
-## What kerala-rage IS
+## What KR Solidarity IS
 
-- ✅ Migrant rage made visual — diaspora identity without apology
-- ✅ KR streetprint stencil aesthetic meets digital solidarity
-- ✅ Typography that conveys pressure and relief via variable axes
-- ✅ Palette rooted in Melbourne laneway and resistance portraiture
-- ✅ First Nations solidarity appearing only in situ (placards/posters) — never as appropriated decoration
+- ✅ Migrant rage made visual — diaspora identity without apology.
+- ✅ Streetprint stencil aesthetic meets digital solidarity.
+- ✅ Typography that conveys pressure and relief via variable axes.
+- ✅ Palette rooted in urban laneways and resistance portraiture.
+- ✅ First Nations solidarity appearing only in situ (placards/posters).
 
-## What kerala-rage IS NOT
+## What KR Solidarity IS NOT
 
-- ❌ Generic corporate design (Inter, Roboto, blue gradients)
-- ❌ AI-generated aesthetics (purple gradients, Space Grotesk)
-- ❌ Australian endemic / flora / nature motifs (NO BOTANICAL ELEMENTS)
-- ❌ Light mode or white backgrounds
-- ❌ Perfect circles (`border-radius: 50%`)
-- ❌ Crown/monarchy symbols
-- ❌ Bureaucratic aesthetics (passports, visas, border gates, government forms)
-- ❌ Aboriginal art imitation or flag colors used as general decoration
+- ❌ Generic corporate design (Inter, Roboto, blue gradients).
+- ❌ AI-generated aesthetics (purple gradients, Space Grotesk).
+- ❌ Australian endemic / flora / nature motifs (STRICT ZERO-FLORA LOCKDOWN).
+- ❌ Light mode or white backgrounds.
+- ❌ Perfect circles (`border-radius: 50%`).
+- ❌ Crown/monarchy symbols.
+- ❌ Bureaucratic aesthetics (passports, visas, border gates, forms).
+- ❌ Aboriginal art imitation or flag colors used as general decoration.
 
 ---
 
-**Referenced by:** All kerala-rage skills
-**Version:** 2.0.0
+**Referenced by:** All KR Solidarity skills
+**Version:** 6.0.0
 **Updated:** 2026-03-06

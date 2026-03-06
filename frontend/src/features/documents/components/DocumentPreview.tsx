@@ -154,11 +154,11 @@ export const DocumentPreview: React.FC<DocumentPreviewProps> = ({
                   Zoom Controls
                 </h3>
                 <div className="flex flex-col gap-3 items-center">
-                  <div className="flex items-center gap-2 bg-[var(--color-surface-container)] rounded-lg p-1">
+                  <div className="flex items-center gap-2 bg-[var(--color-surface-container)] rounded-pebble p-1">
                     <button
                       onClick={handleZoomOut}
                       disabled={zoomLevel <= 50}
-                      className="p-2 rounded-md hover:bg-[var(--color-surface-base)] disabled:opacity-50 transition-colors"
+                      className="p-2 rounded-stone hover:bg-[var(--color-surface-base)] disabled:opacity-50 transition-colors"
                     >
                       <ZoomOut size={16} />
                     </button>
@@ -168,7 +168,7 @@ export const DocumentPreview: React.FC<DocumentPreviewProps> = ({
                     <button
                       onClick={handleZoomIn}
                       disabled={zoomLevel >= 200}
-                      className="p-2 rounded-md hover:bg-[var(--color-surface-base)] disabled:opacity-50 transition-colors"
+                      className="p-2 rounded-stone hover:bg-[var(--color-surface-base)] disabled:opacity-50 transition-colors"
                     >
                       <ZoomIn size={16} />
                     </button>

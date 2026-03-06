@@ -58,7 +58,7 @@ export interface M3ButtonProps {
  * Supports all M3 button variants with proper semantic colors, motion, and accessibility.
  *
  * **M3 Design Token Usage:**
- * - Shape: pill shape using `rounded-full` token
+ * - Shape: pill shape using `rounded-sentry` token
  * - Colors: Semantic M3 color roles (primary, secondary, tertiary, error, warning)
  * - Motion: Spring easing with subtle scale on hover/active
  * - Typography: M3 label-large scale with proper font weight
@@ -108,7 +108,7 @@ export function M3Button({
   // Base classes for all variants
   const baseClasses = [
     'inline-flex items-center justify-center gap-2',
-    'rounded-full font-medium',
+    'rounded-sentry font-medium',
     'transition-all duration-medium-1 ease-spring',
     'focus:outline-none focus:ring-2 focus:ring-offset-2',
     disabled || loading ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer',
@@ -312,7 +312,7 @@ export function M3IconButton({
       type="button"
       className={`
         inline-flex items-center justify-center
-        rounded-full
+        rounded-sentry
         ${sizeClasses[size]}
         ${colorClasses[color]}
         ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:scale-110 active:scale-95'}

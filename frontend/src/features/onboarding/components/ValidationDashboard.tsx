@@ -334,7 +334,7 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
                     key={achievement.Achievement_ID}
                     className="relative pl-6 border-l border-white/10 pb-8 last:pb-0"
                   >
-                    <div className="absolute left-[-5px] top-0 w-[9px] h-[9px] rounded-full bg-[var(--color-ink-gold)] shadow-[0_0_8px_var(--color-ink-gold)]" />
+                    <div className="absolute left-[-5px] top-0 w-[9px] h-[9px] rounded-sentry bg-[var(--color-ink-gold)] shadow-[0_0_8px_var(--color-ink-gold)]" />
 
                     <div className="flex justify-between items-center mb-6">
                       <span className="text-[10px] text-[var(--color-concrete-grey-dark)] uppercase tracking-widest">
@@ -450,7 +450,7 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
 
         {/* Footer Validation */}
         <footer className="mt-20 pt-10 border-t border-white/5 flex justify-center pb-20">
-          <div className="flex items-center gap-3 px-6 py-3 bg-[var(--color-concrete-grey-base)]/10 text-[var(--color-concrete-grey-base)] rounded-full text-xs uppercase tracking-[0.2em] border border-[var(--color-concrete-grey-base)]/20 shadow-lg">
+          <div className="flex items-center gap-3 px-6 py-3 bg-[var(--color-concrete-grey-base)]/10 text-[var(--color-concrete-grey-base)] rounded-sentry text-xs uppercase tracking-[0.2em] border border-[var(--color-concrete-grey-base)]/20 shadow-lg">
             <ShieldCheck className="w-4 h-4" />
             Professional Vector Validated and Production Ready
           </div>

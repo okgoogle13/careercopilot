@@ -72,7 +72,7 @@ export function ImpactEnhancements({ suggestions }: ImpactEnhancementsProps) {
             {/* Type Badge */}
             <div className="mt-4">
               <span
-                className={`inline-flex px-3 py-1 rounded-full text-[10px] font-bold tracking-wider ${
+                className={`inline-flex px-3 py-1 rounded-sentry text-[10px] font-bold tracking-wider ${
                   suggestion.type === 'number'
                     ? 'bg-[var(--color-ink-gold)]/10 text-[var(--color-ink-gold)]'
                     : suggestion.type === 'percentage'

@@ -120,16 +120,16 @@ const DesignSidekick: React.FC = () => {
         {/* Toolbar */}
         <header className="h-16 border-b border-concrete-grey/10 flex items-center justify-between px-6 bg-asphalt-black z-10">
           <div className="flex items-center gap-6">
-            <div className="flex bg-black/40 rounded-full p-1 border border-concrete-grey/10">
+            <div className="flex bg-black/40 rounded-sentry p-1 border border-concrete-grey/10">
               <button
                 onClick={() => setViewMode('desktop')}
-                className={`p-1.5 rounded-full transition-colors ${viewMode === 'desktop' ? 'bg-ink-gold text-asphalt-black' : 'text-concrete-grey'}`}
+                className={`p-1.5 rounded-sentry transition-colors ${viewMode === 'desktop' ? 'bg-ink-gold text-asphalt-black' : 'text-concrete-grey'}`}
               >
                 <Monitor className="w-4 h-4" />
               </button>
               <button
                 onClick={() => setViewMode('mobile')}
-                className={`p-1.5 rounded-full transition-colors ${viewMode === 'mobile' ? 'bg-ink-gold text-asphalt-black' : 'text-concrete-grey'}`}
+                className={`p-1.5 rounded-sentry transition-colors ${viewMode === 'mobile' ? 'bg-ink-gold text-asphalt-black' : 'text-concrete-grey'}`}
               >
                 <Smartphone className="w-4 h-4" />
               </button>

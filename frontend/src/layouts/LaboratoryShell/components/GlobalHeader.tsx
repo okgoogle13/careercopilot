@@ -20,7 +20,7 @@ export const GlobalHeader: React.FC = () => {
           <img
             src={KR_LOGO_SRC}
             alt="Kerala Rage CareerCopilot"
-            className="h-auto max-h-10 w-auto rounded-lg"
+            className="h-auto max-h-10 w-auto rounded-pebble"
           />
           <div className="flex flex-col">
             <h1 className="font-proclamation text-xl text-ink-gold tracking-tight">
@@ -35,10 +35,10 @@ export const GlobalHeader: React.FC = () => {
 
       <div className="flex items-center gap-3">
         {/* Mode Toggle */}
-        <div className="flex items-center gap-2 bg-surface-KrDark-slate-smoke-highest p-1 rounded-lg">
+        <div className="flex items-center gap-2 bg-surface-KrDark-slate-smoke-highest p-1 rounded-pebble">
           <button
             onClick={() => mode !== 'KrDark' && toggleMode()}
-            className={`px-3 py-1 text-xs font-bold uppercase tracking-wider rounded-md transition-all ${
+            className={`px-3 py-1 text-xs font-bold uppercase tracking-wider rounded-stone transition-all ${
               mode === 'KrDark'
                 ? 'bg-surface-KrDark-concrete-grey-high text-ink-gold shadow-sm'
                 : 'text-secondary-flannel-dim hover:text-on-surface-paper-white'
@@ -48,7 +48,7 @@ export const GlobalHeader: React.FC = () => {
           </button>
           <button
             onClick={() => mode !== 'KrDark' && toggleMode()}
-            className={`px-3 py-1 text-xs font-bold uppercase tracking-wider rounded-md transition-all ${
+            className={`px-3 py-1 text-xs font-bold uppercase tracking-wider rounded-stone transition-all ${
               mode === 'KrDark'
                 ? 'bg-surface-KrDark-slate-smoke text-ink-gold shadow-sm'
                 : 'text-secondary-flannel-dim hover:text-on-surface-paper-white'

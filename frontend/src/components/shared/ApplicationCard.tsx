@@ -57,7 +57,7 @@ export function ApplicationCard({
           {onUpdateStatus && (
             <button
               onClick={onUpdateStatus}
-              className="bg-surface-container-high px-6 py-2 rounded-full text-on-surface hover:bg-surface-bright transition-all font-field-note text-sm uppercase tracking-wide"
+              className="bg-surface-container-high px-6 py-2 rounded-sentry text-on-surface hover:bg-surface-bright transition-all font-field-note text-sm uppercase tracking-wide"
             >
               Update
             </button>
@@ -75,7 +75,7 @@ export function ApplicationCard({
             <div
               key={idx}
               className={`
-                flex-1 px-4 py-3 rounded-full text-center transition-all duration-short-2 ease-spring
+                flex-1 px-4 py-3 rounded-sentry text-center transition-all duration-short-2 ease-spring
                 ${
                   isCurrent
                     ? 'bg-primary-container text-on-primary-container font-bold shadow-sm'

@@ -1,6 +1,7 @@
 # HiFi Mockup: Studio Designer Screen
 
-**Design System**: kerala-rage kr-solidarity V3.1
+**Design System**: KR Solidarity v6.0
+> **Part of the [KR Solidarity Design Canon](../../01_CANON.md)**
 **Mode**: kr-dark (Creative, Tool-Dense)
 **Target Score**: ≥360/400 (90% — Excellent)
 **Generated**: 2026-02-16
@@ -92,7 +93,7 @@
 .studio-canvas {
   flex: 1;
   background-color: var(--sys-color-charcoalBackground-base);
-  background-image: 
+  background-image:
     linear-gradient(var(--sys-color-inkGold-steps-10) 1px, transparent 1px),
     linear-gradient(90deg, var(--sys-color-inkGold-steps-10) 1px, transparent 1px);
   background-size: 20px 20px; /* Dynamic based on zoom */

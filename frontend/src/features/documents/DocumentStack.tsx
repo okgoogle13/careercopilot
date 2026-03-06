@@ -147,7 +147,7 @@ export const DocumentStack: React.FC = () => {
                 {/* Status Pill */}
                 <div
                   className={cn(
-                    'px-3 py-1 rounded-full border bg-surface-KrDark-slate-smoke-highest/30 text-xs font-bold uppercase tracking-wider flex items-center gap-2',
+                    'px-3 py-1 rounded-sentry border bg-surface-KrDark-slate-smoke-highest/30 text-xs font-bold uppercase tracking-wider flex items-center gap-2',
                     getStatusColor(doc.status),
                     doc.status === 'analyzed' && 'border-primary-ink-gold/20',
                     doc.status === 'pending' && 'border-secondary-flannel/20',
@@ -160,7 +160,7 @@ export const DocumentStack: React.FC = () => {
                 </div>
 
                 {/* Actions Menu */}
-                <button className="p-2 text-secondary-flannel-dim hover:text-on-surface-paper-white hover:bg-surface-KrDark-slate-smoke-highest rounded-full transition-colors">
+                <button className="p-2 text-secondary-flannel-dim hover:text-on-surface-paper-white hover:bg-surface-KrDark-slate-smoke-highest rounded-sentry transition-colors">
                   <MoreVertical className="w-5 h-5" />
                 </button>
               </div>

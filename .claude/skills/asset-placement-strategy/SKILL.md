@@ -1,33 +1,31 @@
 ---
 name: asset-placement-strategy
-description: Wireframe-driven placement strategy for Kerala Rage assets with strict semantic token usage and deterministic placement scoring. Use when implementing design wireframes, validating token compliance, or generating asset placement reports.
+description: Wireframe-driven placement strategy for KR Solidarity assets with strict semantic token usage and deterministic placement scoring.
 metadata:
-  version: 2.1.0
+  version: 6.0.0
   tags:
     - design-system
     - asset-management
-    - wireframe
-    - kerala-rage
-    - token-compliance
+    - kr-solidarity
+    - migrant-rage
 ---
 
-# Asset Placement Strategy
 
-**Deterministic placement validation for Kerala Rage design system assets.**
+# KR Solidarity: Asset Placement Strategy (v6.0)
+
+**Deterministic placement validation for KR Solidarity (Migrant Rage) design system assets.**
 
 ## Purpose
 
-Place Kerala Rage assets (motifs, symbols, hero compositions) against annotated wireframes with strict semantic token compliance and deterministic scoring. Validates z-index layering, token usage, and manifest integrity.
+Place KR Solidarity assets (motifs, symbols, hero compositions) against annotated screens from [05_FLOWS.md](../../docs/design/05_FLOWS.md) with strict semantic token compliance and deterministic scoring. Validates z-index layering and enforces the **Zero-Flora Lockdown**.
 
 ## When to Use
 
-- Implementing Kerala Rage assets from annotated wireframes into React components
-- Validating asset placement decisions against design system token compliance
-- Scoring placement decisions for design review and approval workflows
-- Auditing existing implementations for token violations or hardcoded colors
-- Generating placement reports for hero compositions and layered sections
-- Ensuring z-index and layering intent matches wireframe specifications
-- Verifying all assets reference valid manifest entries
+- Implementing KR Solidarity assets from screen matrix into React components.
+- Validating asset placement decisions against [04_ASSETS.md](../../docs/design/04_ASSETS.md).
+- Ensuring z-index and layering intent matches [05_FLOWS.md](../../docs/design/05_FLOWS.md) specifications.
+- Auditing existing implementations for "Flora" violations or hardcoded colors.
+
 
 ## Capabilities
 
@@ -43,13 +41,14 @@ Place Kerala Rage assets (motifs, symbols, hero compositions) against annotated 
 ## Inputs
 ```json
 {
-  "wireframe_doc": "docs/design/annotated-wireframes.md",
-  "status_doc": "docs/design/wireframe-status.md",
+  "canon_doc": "docs/design/01_CANON.md",
+  "flows_doc": "docs/design/05_FLOWS.md",
+  "assets_doc": "docs/design/04_ASSETS.md",
   "manifest": "frontend/public/assets/kerala-rage-kr-solidarity-manifest.json",
-  "hero_registry": "frontend/public/assets/kr-solidarity-hero-registry.json",
-  "target_screens": ["Landing", "Analysis", "Dashboard"]
+  "hero_registry": "frontend/public/assets/kr-solidarity-hero-registry.json"
 }
 ```
+
 
 ## Hard Placement Rules
 1. Use semantic tokens only:
@@ -426,4 +425,4 @@ Run full scoring check (score ≥90) before committing to production.
 
 ---
 
-**Last Updated**: 2026-02-23 | **Version**: 2.1.0
+**Last Updated**: 2026-03-06 | **Version**: 6.0.0

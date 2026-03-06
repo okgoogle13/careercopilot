@@ -1,38 +1,37 @@
 ---
-description: Unified Human + AI Design Workflow (2026 Best Practices)
+description: KR Solidarity Unified Design Workflow (v6.0)
 ---
 
-# Design Workflow 2026
+# KR Solidarity: Design Workflow 2026
 
-This workflow implements the "Iterative Chains" approach for AI-assisted UI/UX design, ensuring accessibility-by-default and machine-readable design intent.
+This workflow implements the "Solidarity Chain" approach for KR Solidarity development, ensuring 100% token compliance, Material 3 Expressive maturity, and strict adherence to the [Design Canon](../../docs/design/01_CANON.md).
 
 ## Step 1: Research & Briefing
 
-1. Use the [design-brief.md](file:///Users/okgoogle13/Projects/careercopilot/prompts/library/design-brief.md) template to turn raw insights into a structured brief.
-2. **Human Check**: Review the brief for equity, inclusion, and strategic alignment.
+1. Consult the [Design Canon](../../docs/design/01_CANON.md) for core identity and the [Zero-Flora Lockdown](../../docs/design/04_ASSETS.md).
+2. Use the `brand-brief-optimizer` skill to validate requirements against the Migrant Rage aesthetic.
 
-## Step 2: Ideation & Flows
+## Step 2: System Alignment
 
-1. Use the [user-flows.md](file:///Users/okgoogle13/Projects/careercopilot/prompts/library/user-flows.md) template to generate alternative journeys and edge cases.
-2. **Human Check**: Select the most ethical and feasible flow.
+1. Verify all proposed UI elements against the [System Infrastructure](../../docs/design/02_SYSTEM.md).
+2. Ensure variable axes (Work Sans, Fraunces) are mapped to emotional states (Solidarity, Pressure, Melancholy).
 
-## Step 3: Wireframing
+## Step 3: Wireframing & Flow Analysis
 
-1. Use the [wireframes-lowfi.md](../../prompts/library/wireframes-lowfi.md) template or the `wireframe-annotator` skill.
-2. Ensure the output includes `<layout>`, `<tokens>`, and `<accessibility>` blocks.
+1. Map user journeys to the [Screen Matrix](../../docs/design/05_FLOWS.md).
+2. Use `wireframe-annotator` to generate specs with `<layout>`, `<tokens>`, and `<accessibility>` blocks.
 
-## Step 4: UI Specification
+## Step 4: Asset & Component Implementation
 
-1. Use the [ui-spec-hifi.md](file:///Users/okgoogle13/Projects/careercopilot/prompts/library/ui-spec-hifi.md) template to translate wireframes into developer-ready specs.
-2. Apply the [Asset Generation Prompting Strategy](file:///Users/okgoogle13/Projects/careercopilot/Asset%20Generation%20Prompting%20Strategy.md) for refined visual assets.
+1. Slot assets using the [Asset Placement Strategy](../../docs/design/04_ASSETS.md).
+2. Build components using the `component-builder` skill, enforcing [Component Standards](../../docs/design/03_COMPONENTS.md).
 
-## Step 5: Accessibility Audit
+## Step 5: Visual Audit & Compliance
 
-1. Prompt the AI for a heuristic review:
-   > "Act as an accessibility specialist. Check this layout against WCAG 2.2 AA. List issues by severity and propose concrete fixes."
-2. Document fixes in the `<accessibility>` block of the design spec.
+1. Run `vision-scorer-mcp` to ensure compliance with the KR Solidarity visual bar (Score >= 90).
+2. Validate semantic token usage using `design-token-validator`.
 
-## Step 6: Handoff
+## Step 6: Handoff & Registry Sync
 
-1. Export design tokens and component specs to the development team.
-2. Include the structured XML blocks in the handoff documentation for automated verification.
+1. Update `kerala-rage-kr-solidarity-manifest.json` and `kr-solidarity-hero-registry.json`.
+2. Generate final documentation using the `design-system-doc-generator` skill.

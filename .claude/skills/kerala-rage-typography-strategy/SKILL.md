@@ -1,24 +1,27 @@
 ---
-name: kerala-rage-typography-strategy
-description: Apply "Solidarity Extension" kerala-rage kr-solidarity typography
-  using Variable and Color fonts. Orchestrates 3 interaction tiers (Workhorse, Expressive,
-  Accent) with dynamic axes (GRAD, WONK, SOFT) for KR streetprint-meets-Migrant-Rage
-  aesthetic.
+name: kr-solidarity-typography-strategy
+description: Apply KR Solidarity v6.0 typography using the Solidarity Stack (Work Sans, Fraunces, Libre Bodoni, JetBrains Mono, Caveat, Nabla).
 metadata:
-  legacy_frontmatter:
-    version: 1.0.0
-    tags: []
+  version: 6.0.0
+  tags:
+    - typography
+    - kr-solidarity
+    - design-system
 ---
+
+# KR Solidarity: Typography Strategy (v6.0)
+
 
 ## Purpose
 
-Orchestrates the kerala-rage kr-solidarity "Solidarity Extension" typography system using variable and color fonts across three interaction tiers (Workhorse, Expressive, Accent).
+Orchestrates the [KR Solidarity Typography Strategy](../../docs/design/02_SYSTEM.md) using the **Solidarity Stack** (Work Sans, Fraunces, Libre Bodoni, JetBrains Mono, Caveat, Nabla).
 
 ## When to Use
 
-- When designing or implementing UI sections that require the KR streetprint-meets-Migrant-Rage aesthetic.
+- When implementing UI sections that require the **Migrant Rage** aesthetic.
 - When applying dynamic font axes (GRAD, WONK, SOFT) for interactive or animated text.
-- When pairing script fonts with functional typography to balance readability and personality.
+- When pairing script fonts (Caveat) with functional typography (Work Sans/JetBrains Mono).
+
 
 ## Process
 
@@ -186,15 +189,16 @@ _KR-Solidarity Substrate -> Resistance Red._
 
 ## Typography-Voice Alignment
 
-Typography tiers reinforce the voice tier system defined in [DOC-006](file:///Users/okgoogle13/Projects/careercopilot/docs/archive/atomic-v2/DOC-006_Voice_and_Microcopy.md):
+Typography tiers reinforce the voice tiers defined in [05_FLOWS.md](../../docs/design/05_FLOWS.md):
 
 | Typography Tier           | Font                      | Voice Tier                      | Copy Style                  |
 | :------------------------ | :------------------------ | :------------------------------ | :-------------------------- |
 | **Workhorse**             | Work Sans                 | Tier 1 (Functional)             | Clear, direct labels        |
-| **Expressive**            | Fraunces / Libre Bodoni   | Tier 2-3 (Contextual/Character) | Solidarity, Resistance      |
-| **Accent (Curator)**      | Caveat / Nabla            | Tier 3 (Character)              | Hand-cut, stencil, icons    |
+| **Expressive**            | Fraunces / Libre Bodoni   | Tier 2-3 (Solidarity/Resistance)| Agit-Prop, Proclamation     |
+| **Accent / Technical**    | Caveat / JetBrains Mono   | Tier 4 (Curator/Metadata)       | Annotated, human-centered   |
 
-**Rule**: If the typography is Workhorse (Work Sans), the copy should be Tier 1 (functional). Personality flourishes belong with Expressive typography.
+**Rule**: Personality flourishes belong with Expressive typography. Technical data belongs with JetBrains Mono.
+
 
 ---
 

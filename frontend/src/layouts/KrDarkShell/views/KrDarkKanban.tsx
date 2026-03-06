@@ -90,13 +90,13 @@ export const KrDarkKanban: React.FC = () => {
 
                         {app.status === 'Offer' && (
                           <div className="absolute top-0 right-0">
-                            <div className="w-2 h-2 rounded-full bg-ink-gold animate-pulse shadow-ink-glow" />
+                            <div className="w-2 h-2 rounded-sentry bg-ink-gold animate-pulse shadow-ink-glow" />
                           </div>
                         )}
                       </div>
 
                       {/* TODO[asset]: Assembly Grid Motif substrate overlay (Z-1) */}
-                      <div className="absolute bottom-0 right-0 w-24 h-24 bg-surface-KrDark-concrete-grey-high/5 blur-3xl rounded-full -mr-12 -mb-12" />
+                      <div className="absolute bottom-0 right-0 w-24 h-24 bg-surface-KrDark-concrete-grey-high/5 blur-3xl rounded-sentry -mr-12 -mb-12" />
                     </SolidarityCard>
                   </motion.div>
                 ))}

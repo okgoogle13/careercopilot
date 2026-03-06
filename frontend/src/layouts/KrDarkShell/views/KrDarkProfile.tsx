@@ -28,7 +28,7 @@ export const KrDarkProfile: React.FC = () => {
       >
         <div className="relative group">
           {/* TODO[asset]: Profile Bio-Data Motif overlay (Z-1, 10% opacity) */}
-          <div className="w-56 h-56 rounded-full bg-asphalt-black border-4 border-surface-KrDark-concrete-grey-high/20 flex items-center justify-center overflow-hidden shadow-viscous group-hover:border-ink-gold/20 transition-all duration-700">
+          <div className="w-56 h-56 rounded-sentry bg-asphalt-black border-4 border-surface-KrDark-concrete-grey-high/20 flex items-center justify-center overflow-hidden shadow-viscous group-hover:border-ink-gold/20 transition-all duration-700">
             <div className="absolute inset-0 bg-gradient-to-tr from-ink-gold/5 via-transparent to-solidarity-red/5 opacity-40 group-hover:opacity-100 transition-opacity" />
             <span className="font-proclamation text-7xl text-paper-white/10 group-hover:text-ink-gold/20 transition-colors">
               NAT
@@ -65,7 +65,7 @@ export const KrDarkProfile: React.FC = () => {
               <span className={`text-5xl font-bloom ${stat.color} tracking-tight`}>
                 {stat.value}
               </span>
-              <div className="mt-2 h-0.5 w-8 rounded-full bg-surface-KrDark-concrete-grey-high/25" />
+              <div className="mt-2 h-0.5 w-8 rounded-sentry bg-surface-KrDark-concrete-grey-high/25" />
             </SolidarityCard>
           </motion.div>
         ))}
@@ -97,7 +97,7 @@ export const KrDarkProfile: React.FC = () => {
               >
                 <div className="w-10 h-10 bg-surface-KrDark-concrete-grey-high/15 rounded-pebble group-hover:bg-ink-gold/20 transition-colors flex items-center justify-center">
                   <div
-                    className={`w-4 h-4 rounded-full ${i % 2 === 0 ? 'bg-ink-gold/40' : 'bg-solidarity-red/40'} border border-surface-KrDark-concrete-grey-high/25`}
+                    className={`w-4 h-4 rounded-sentry ${i % 2 === 0 ? 'bg-ink-gold/40' : 'bg-solidarity-red/40'} border border-surface-KrDark-concrete-grey-high/25`}
                   />
                 </div>
               </motion.div>

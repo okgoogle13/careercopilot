@@ -44,7 +44,7 @@ export const KrDarkDesigner: React.FC = () => {
           <span className="font-mono text-[10px] uppercase tracking-widest text-paper-white/30">
             PROJECT_ID: KR_SOLIDARITY_01
           </span>
-          <div className="w-1.5 h-1.5 rounded-full bg-ink-gold animate-pulse" />
+          <div className="w-1.5 h-1.5 rounded-sentry bg-ink-gold animate-pulse" />
         </div>
 
         <div className="ml-auto flex gap-4">

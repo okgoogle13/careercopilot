@@ -5,8 +5,8 @@ export function NotFound() {
   return (
     <div className="min-h-screen flex items-center justify-center text-center px-6 relative overflow-hidden">
       {/* Background Ambience */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-[100px] pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-tertiary/10 rounded-full blur-[80px] pointer-events-none" />
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-sentry blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-tertiary/10 rounded-sentry blur-[80px] pointer-events-none" />
 
       <div className="max-w-xl relative z-10">
         <div className="text-[12rem] md:text-[16rem] font-extrabold text-primary opacity-[0.03] select-none blur-sm absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-[60%] pointer-events-none">
@@ -15,7 +15,7 @@ export function NotFound() {
 
         <div className="relative mb-8">
           <div className="flex justify-center mb-6">
-            <div className="p-4 bg-white/5 rounded-full ring-1 ring-white/10 animate-pulse">
+            <div className="p-4 bg-white/5 rounded-sentry ring-1 ring-white/10 animate-pulse">
               <Compass className="w-16 h-16 text-primary" />
             </div>
           </div>

@@ -204,7 +204,7 @@ export const MarkRadio = forwardRef<HTMLInputElement, MarkRadioProps>(
           className={`
         relative flex-shrink-0
         w-5 h-5
-        rounded-full
+        rounded-sentry
         border-2
         ${
           error
@@ -228,7 +228,7 @@ export const MarkRadio = forwardRef<HTMLInputElement, MarkRadioProps>(
               <div
                 className={`
               w-2.5 h-2.5
-             rounded-full
+             rounded-sentry
               ${error ? 'bg-[var(--sys-color-solidarityRed-base)]' : 'bg-[var(--sys-color-inkGold-base)]'}
               scale-100
             `}

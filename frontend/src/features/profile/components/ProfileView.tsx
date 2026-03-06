@@ -148,7 +148,7 @@ export function ProfileView() {
                 ).map((skill: string) => (
                   <div
                     key={skill}
-                    className="bg-concrete-grey/5 text-concrete-grey border border-concrete-grey/20 font-mono text-[9px] uppercase tracking-widest px-3 py-1 rounded-full"
+                    className="bg-concrete-grey/5 text-concrete-grey border border-concrete-grey/20 font-mono text-[9px] uppercase tracking-widest px-3 py-1 rounded-sentry"
                   >
                     {skill}
                   </div>
@@ -247,11 +247,11 @@ function TimelineItem({
 function Badge({ emoji, title }: { emoji: string; title: string }) {
   return (
     <div
-      className="aspect-square rounded-full bg-bark-light/5 border border-concrete-grey/10 flex items-center justify-center text-2xl hover:bg-ink-gold/10 hover:border-ink-gold/30 transition-all cursor-help relative group"
+      className="aspect-square rounded-sentry bg-bark-light/5 border border-concrete-grey/10 flex items-center justify-center text-2xl hover:bg-ink-gold/10 hover:border-ink-gold/30 transition-all cursor-help relative group"
       title={title}
     >
       {emoji}
-      <div className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-ink-gold opacity-0 group-hover:opacity-100 transition-opacity" />
+      <div className="absolute -top-1 -right-1 w-2 h-2 rounded-sentry bg-ink-gold opacity-0 group-hover:opacity-100 transition-opacity" />
     </div>
   );
 }

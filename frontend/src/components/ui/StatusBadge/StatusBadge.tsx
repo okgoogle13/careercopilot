@@ -62,7 +62,13 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({
     };
 
     // Solidarity mode color overrides using semantic tokens
-    if (base === 'neutral') {
+    if (base === 'primary') {
+      // Activist Smoke (Success)
+      styles.bg = 'rgba(72, 218, 139, 0.15)';
+      styles.text = 'var(--sys-color-kr-activistSmokeGreen-base)';
+      styles.dot = 'var(--sys-color-kr-activistSmokeGreen-base)';
+      styles.border = 'var(--sys-color-kr-activistSmokeGreen-steps-2)';
+    } else if (base === 'neutral') {
       styles.bg = 'var(--sys-color-concreteGrey-steps-0)';
       styles.text = 'var(--sys-color-concreteGrey-base)';
       styles.dot = 'var(--sys-color-concreteGrey-steps-4)';
@@ -90,7 +96,7 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({
                 ${className}
             `}
       style={{
-        borderRadius: 'var(--radius-seed)',
+        borderRadius: 'var(--sys-shape-radius-stone)',
         backgroundColor: currentStyle.bg,
         color: currentStyle.text,
         borderColor: currentStyle.border,
@@ -98,7 +104,7 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({
     >
       {showDot && (
         <div
-          className="w-2 h-2 rounded-full"
+          className="w-2 h-2 rounded-sentry"
           style={{ backgroundColor: currentStyle.dot }}
         />
       )}

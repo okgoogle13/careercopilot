@@ -6,13 +6,18 @@ import { CareerDatabase } from '@/types/api';
 import { m3Toast } from '@/utils/toast';
 import { AnimatePresence, motion } from 'framer-motion';
 import { CheckCircle, FileText, Fingerprint, Microscope } from 'lucide-react';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 // KrDark Assets
 const solidarityTexture =
   '/assets/kr-solidarity/abstract/kr-solidarity__atmospheric__texture--solidarity-chatgpt-image-f--v1.png';
 const paperGrain =
   '/assets/kr-solidarity/texture/kr-solidarity__substrate__landmark--melbourne-laneway--v1.png';
+
+import { LayeredHero } from '../components/kerala-rage/LayeredHero';
+import { loadHeroRegistry } from '../design/hero/heroRegistry';
+import { composeHero } from '../lib/composeHero';
+import type { SolidarityManifest } from '../design/hero/heroTypes';
 
 type UploadStage = 'idle' | 'uploading' | 'extracting' | 'processing' | 'embedding' | 'complete';
 
@@ -28,6 +33,41 @@ type UploadStage = 'idle' | 'uploading' | 'extracting' | 'processing' | 'embeddi
 export const IngestionPage: React.FC = () => {
   const { submitDocuments, updateCareerDatabase, isLoading, error } = useCareerIngestion();
   const [careerData, setCareerData] = useState<CareerDatabase | null>(null);
+  const [heroData, setHeroData] = useState<{
+    layers: any[];
+    typography: any;
+    animation: any;
+    zIndexMap: any;
+  } | null>(null);
+
+  useEffect(() => {
+    async function loadHero() {
+      try {
+        const [manifest, registry] = await Promise.all([
+          fetch('/assets/kerala-rage-kr-solidarity-manifest.json').then((r) => r.json()),
+          loadHeroRegistry(),
+        ]);
+
+        const result = composeHero(
+          manifest as SolidarityManifest,
+          registry,
+          'kr-hero-industrial-collective-005'
+        );
+
+        if (result.valid) {
+          setHeroData({
+            layers: result.resolvedLayers,
+            typography: result.typography,
+            animation: result.animation,
+            zIndexMap: result.zIndexMap,
+          });
+        }
+      } catch (error) {
+        console.error('Failed to load ingestion hero:', error);
+      }
+    }
+    loadHero();
+  }, []);
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const [uploadStage, setUploadStage] = useState<UploadStage>('idle');
   const [progress, setProgress] = useState(0);
@@ -108,14 +148,18 @@ export const IngestionPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-asphalt-black-darkest flex items-center justify-center p-6 relative overflow-hidden">
-      {/* Texture Layer: KrDark Paper White */}
-      <div
-        className="absolute inset-0 opacity-5 pointer-events-none mix-blend-overlay"
-        style={{ backgroundImage: `url(${paperGrain})`, backgroundRepeat: 'repeat' }}
-      />
-
-      {/* Background Motifs - RESTRICTED */}
-      <div className="absolute top-10 left-10 w-64 h-64 grayscale opacity-10 pointer-events-none border border-concrete-grey/20 rounded-stone" />
+      {/* Hero Engine Integration: Industrial Background */}
+      {heroData && (
+        <div className="absolute inset-0 pointer-events-none opacity-20">
+          <LayeredHero
+            layers={heroData.layers}
+            typography={{ ...heroData.typography, headline: '', supporting: '' }}
+            animation={{ ...heroData.animation, scroll_behavior: 'none' }}
+            zIndexMap={heroData.zIndexMap}
+            className="h-full"
+          />
+        </div>
+      )}
 
       <Stone
         elevation="floating"

@@ -24,7 +24,7 @@ export const LandingPage: React.FC = () => {
         const result = composeHero(
           manifest as SolidarityManifest,
           registry,
-          'devotional-anchor-hero'
+          'resistance-portrait-hero'
         );
 
         if (result.valid) {
