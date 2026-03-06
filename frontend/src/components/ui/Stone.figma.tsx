@@ -23,7 +23,7 @@ figma.connect(Stone, 'https://www.figma.com/design/YOUR_FILE_ID?node-id=YOUR_NOD
     hasFooter: figma.boolean('Show Footer'),
     content: figma.string('Content Text'),
   },
-  example: ({ mode, elevation, hasHeader, hasFooter, content }) => (
+  example: ({ mode: _mode, elevation, hasHeader, hasFooter, content }) => (
     <Stone
       elevation={elevation}
       header={hasHeader ? <h3>Header</h3> : undefined}

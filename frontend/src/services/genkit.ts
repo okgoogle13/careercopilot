@@ -156,7 +156,7 @@ const mockGenkitApi = {
     };
   },
 
-  async generateProfileSummary(data: ProfileSummaryRequest): Promise<ProfileSummaryResponse> {
+  async generateProfileSummary(_data: ProfileSummaryRequest): Promise<ProfileSummaryResponse> {
     await new Promise((resolve) => setTimeout(resolve, 2500));
     return {
       summary: `[Mock AI Summary] Innovative and mission-driven professional with expertise in community care and crisis intervention. Proven track record of delivering high-impact solutions in complex environments.`,

@@ -1,161 +1,143 @@
 ---
 name: m3-expressive-compliance-dashboard
-description: Track Material Design 3 Expressive adoption metrics across components.
-  Monitor no-generic-fonts percentage, extreme-contrasts percentage, spring-physics
-  percentage, vibrant-tokens percentage, and [DEPRECATED_STYLE]-asymmetry percentage.
-  Generate compliance reports and identify components needing expressiveness enhancement.
+description: Track KR Solidarity (Migrant Rage) M3 Expressive adoption metrics across
+  components. Monitor font stack compliance, extreme-contrasts, spring-physics,
+  vibrant-token, and kr-solidarity asymmetry percentages. Generate compliance reports
+  and identify components needing expressiveness enhancement.
 metadata:
-  legacy_frontmatter:
-    version: 1.0.0
-    tags: []
+  version: 6.0.0
+  tags:
+    - m3-expressive
+    - kr-solidarity
+    - compliance
+    - design-system
 ---
 
-# M3 Expressive Compliance Dashboard
+# KR Solidarity M3 Expressive Compliance Dashboard (v6.0)
 
 ## Purpose
 
-Track M3 Expressive adoption metrics across your component library. Identify gaps, monitor progress, and guide design system maturation from baseline M3 to M3 Expressive.
+Track M3 Expressive adoption metrics across your KR Solidarity component library. Identify gaps, monitor progress, and guide design system maturation from baseline M3 to fully expressive KR Solidarity compliance.
 
 ## When to Use
 
-Use this skill when you need to:
-
-- **Track M3 Expressive adoption** across component library
-- **Monitor compliance metrics** (no generic fonts %, extreme contrasts %, etc.)
+- **Track KR Solidarity adoption** across component library
+- **Monitor compliance metrics** (Solidarity Stack %, extreme contrasts %, etc.)
 - **Identify components needing enhancement** (which are still baseline M3?)
 - **Generate compliance reports** for stakeholders
 - **Visualize design system maturity** over time
 - **Prioritize refactoring work** (which components to upgrade first?)
 
-## Core Metrics (M3 Expressive Adoption)
+## Core Metrics (KR Solidarity M3 Expressive Adoption)
 
-### 1. No Generic Fonts (%)
+### 1. Solidarity Stack Compliance (%)
 
-**Definition**: Percentage of components using M3 Expressive variable fonts (Sora, Plus Jakarta Sans, Poppins) instead of generic fonts (Inter, Roboto, Arial).
+**Definition**: Percentage of components using the KR Solidarity font stack (Work Sans, Fraunces, Libre Bodoni, JetBrains Mono, Caveat) instead of forbidden fonts (Inter, Roboto, Arial, Sora, Plus Jakarta Sans, Poppins).
 
 **Calculation**:
-
 ```
-(Components with M3 Expressive fonts / Total components) × 100
+(Components with Solidarity Stack / Total components) × 100
 ```
 
-**Target**: 100% (zero generic fonts)
+**Target**: 100%
 
 **Red Flags**:
-
-- Inter alone (not paired with display font)
-- Roboto (baseline M3, not expressive)
-- Arial, system-ui (generic)
+- Inter alone (forbidden — generic corporate)
+- Roboto (baseline M3, not KR Solidarity)
+- Sora or Plus Jakarta Sans (banned in v6.0)
+- Arial, system-ui (forbidden)
 
 ### 2. Extreme Contrasts (%)
 
-**Definition**: Percentage of components using extreme weight/size contrasts (3x+ ratio) instead of timid contrasts (1.25x ratio).
+**Definition**: Percentage of components using extreme weight/size contrasts (9× ratio per the Solidarity Scale Mandate: `text-display`/`text-hero` at `font-black: 900` paired with `text-micro`/`text-small` at `300`) instead of timid contrasts.
 
 **Calculation**:
-
 ```
-(Components with 3x+ contrast / Total components) × 100
+(Components with 9× contrast / Total components) × 100
 ```
 
-**Target**: 100% (all components have dramatic hierarchy)
+**Target**: 100%
 
 **Red Flags**:
-
-- Weight contrast 400 vs 600 (1.5x, timid)
-- Size contrast 24px vs 16px (1.5x, timid)
-- No visual hierarchy (uniform weights)
+- Weight contrast 400 vs 600 (timid, not Solidarity)
+- Size contrast 24px vs 16px (1.5×, not 6× mandate)
+- No clear typographic hierarchy
 
 ### 3. Spring Physics (%)
 
-**Definition**: Percentage of interactive components using spring physics easing (cubic-bezier overshoot) instead of linear or standard easing.
+**Definition**: Percentage of interactive components using spring physics easing (`cubic-bezier(0.34, 1.56, 0.64, 1)` overshoot) instead of linear or standard easing.
 
 **Calculation**:
-
 ```
 (Components with spring physics / Total interactive components) × 100
 ```
 
-**Target**: 100% (all interactions feel alive)
+**Target**: 100%
 
 **Red Flags**:
-
-- Linear easing (feels stiff)
+- Linear easing (feels stiff and corporate)
 - Instant transitions (no motion)
-- Standard easing (not expressive)
+- Standard easing (expressive-neutral, not alive)
 
-### 4. Vibrant Tokens (%)
+### 4. Vibrant Solidarity Tokens (%)
 
-**Definition**: Percentage of components using M3 Expressive vibrant semantic tokens (40-80% saturation) instead of baseline M3 colors.
-
-**Calculation**:
-
-```
-(Components with vibrant tokens / Total components) × 100
-```
-
-**Target**: 100% (all colors are vibrant)
-
-**Red Flags**:
-
-- Baseline M3 colors (not vibrant)
-- Purple gradients (#7C4DFF → #9C27B0)
-- Generic blue (#2196F3)
-- Hardcoded hex values (not tokens)
-
-### 5. [DEPRECATED_STYLE] Asymmetry (%)
-
-**Definition**: Percentage of components using [DEPRECATED_STYLE] asymmetric shapes instead of mechanical uniform shapes.
+**Definition**: Percentage of components using KR Solidarity semantic tokens (`--sys-color-*`) instead of hardcoded hex or generic M3 baseline colors.
 
 **Calculation**:
-
 ```
-(Components with asymmetric shapes / Total components) × 100
+(Components with --sys-color-* tokens / Total components) × 100
 ```
 
-**Target**: 100% (all shapes feel intentional)
+**Target**: 100%
 
 **Red Flags**:
+- Hardcoded hex values (any `#` in CSS)
+- Purple gradients (#7C4DFF → #9C27B0) — banned
+- Generic blue (#2196F3) — banned
+- White backgrounds (#FFFFFF) — banned
+- `--nc-*` token prefix (legacy, replaced by `--sys-*`)
 
-- Uniform border-radius (8px all corners)
-- Grid-mechanical layouts (no asymmetry)
-- Flat backgrounds (no elevation)
+### 5. KR Solidarity Organic Asymmetry (%)
+
+**Definition**: Percentage of components using kr-solidarity asymmetric radii (Stone/Slab/Pebble shapes) instead of mechanical uniform shapes.
+
+**Calculation**:
+```
+(Components with kr-solidarity asymmetric shapes / Total components) × 100
+```
+
+**Target**: 100%
+
+**Red Flags**:
+- Uniform `border-radius: 8px` on all corners
+- `border-radius: 50%` (perfect circles — strictly banned)
+- Grid-mechanical layouts with no intentional asymmetry
+- Flat backgrounds (no elevation or texture)
 
 ## Dashboard Metrics
 
-### Overall M3 Expressive Score
+### Overall KR Solidarity Expressive Score
 
 **Calculation**:
-
 ```
-Average of 5 core metrics (No Generic Fonts + Extreme Contrasts + Spring Physics + Vibrant Tokens + [DEPRECATED_STYLE] Asymmetry) / 5
+Average of 5 core metrics / 5
 ```
 
 **Grade Scale**:
-
-- **A (90-100%)**: Exceptional - Production M3 Expressive
-- **B (75-89%)**: Good - Minor gaps
-- **C (60-74%)**: Acceptable - Needs work
-- **D (40-59%)**: Below standards - Significant gaps
-- **F (<40%)**: Critical - Mostly baseline M3
+- **A (90–100%)**: Production KR Solidarity — ship it
+- **B (75–89%)**: Good — minor gaps to close
+- **C (60–74%)**: Needs work before release
+- **D (40–59%)**: Significant non-compliance — refactor required
+- **F (<40%)**: Not KR Solidarity — considered baseline M3 or generic
 
 ### Component Maturity Distribution
 
 | Maturity Level           | Definition         | Count | %   |
 | ------------------------ | ------------------ | ----- | --- |
-| **M3 Expressive**        | All 5 metrics pass | X     | X%  |
+| **KR Solidarity**        | All 5 metrics pass | X     | X%  |
 | **Mostly Expressive**    | 4/5 metrics pass   | X     | X%  |
-| **Partially Expressive** | 2-3/5 metrics pass | X     | X%  |
-| **Baseline M3**          | 0-1/5 metrics pass | X     | X%  |
-
-### Trend Analysis (Over Time)
-
-Track metrics week-over-week to visualize progress:
-
-```
-Week 1: 45% → Week 2: 52% → Week 3: 61% → Week 4: 73%
-```
-
-**Insight**: "M3 Expressive adoption increased 28 percentage points in 4 weeks. At current pace, 100% adoption in 8 weeks."
+| **Partially Expressive** | 2–3/5 metrics pass | X     | X%  |
+| **Baseline M3**          | 0–1/5 metrics pass | X     | X%  |
 
 ## Dashboard Report Format
 
@@ -164,19 +146,20 @@ Week 1: 45% → Week 2: 52% → Week 3: 61% → Week 4: 73%
 ```json
 {
   "compliance_dashboard": {
-    "report_date": "2026-02-07T...",
-    "design_system": "Material Design 3 Expressive",
+    "report_date": "2026-03-07T...",
+    "design_system": "KR Solidarity (Migrant Rage) v6.0",
     "total_components": 42,
 
     "overall_score": 73,
     "grade": "C",
 
     "metrics": {
-      "no_generic_fonts": {
+      "solidarity_stack": {
         "percentage": 85,
         "compliant_count": 36,
         "non_compliant_count": 6,
-        "status": "good"
+        "status": "good",
+        "violations": ["LoginForm uses Inter alone", "DashboardCard uses Roboto"]
       },
       "extreme_contrasts": {
         "percentage": 68,
@@ -196,7 +179,7 @@ Week 1: 45% → Week 2: 52% → Week 3: 61% → Week 4: 73%
         "non_compliant_count": 9,
         "status": "good"
       },
-      "organic_asymmetry": {
+      "kr_solidarity_asymmetry": {
         "percentage": 61,
         "compliant_count": 26,
         "non_compliant_count": 16,
@@ -205,210 +188,123 @@ Week 1: 45% → Week 2: 52% → Week 3: 61% → Week 4: 73%
     },
 
     "maturity_distribution": {
-      "m3_expressive": {
-        "count": 18,
-        "percentage": 43,
-        "definition": "All 5 metrics pass"
-      },
-      "mostly_expressive": {
-        "count": 12,
-        "percentage": 29,
-        "definition": "4/5 metrics pass"
-      },
-      "partially_expressive": {
-        "count": 8,
-        "percentage": 19,
-        "definition": "2-3/5 metrics pass"
-      },
-      "baseline_m3": {
-        "count": 4,
-        "percentage": 9,
-        "definition": "0-1/5 metrics pass"
-      }
+      "kr_solidarity": { "count": 18, "percentage": 43 },
+      "mostly_expressive": { "count": 12, "percentage": 29 },
+      "partially_expressive": { "count": 8, "percentage": 19 },
+      "baseline_m3": { "count": 4, "percentage": 9 }
     },
 
     "components_needing_enhancement": [
       {
         "component": "LoginForm",
         "current_maturity": "baseline_m3",
-        "failing_metrics": ["no_generic_fonts", "extreme_contrasts", "spring_physics"],
+        "failing_metrics": ["solidarity_stack", "extreme_contrasts", "spring_physics"],
         "priority": "high"
       },
       {
         "component": "DashboardCard",
         "current_maturity": "partially_expressive",
-        "failing_metrics": ["organic_asymmetry", "extreme_contrasts"],
+        "failing_metrics": ["kr_solidarity_asymmetry", "extreme_contrasts"],
         "priority": "medium"
       }
     ],
 
-    "recommendations": ["Upgrade 6 components still using Inter font to Plus Jakarta Sans", "Increase weight contrasts in 13 components (400-600 → 300-900)", "Add spring physics easing to 12 interactive components", "Apply asymmetric border-radius to 16 components"],
-
-    "trend_analysis": {
-      "week_1": 45,
-      "week_2": 52,
-      "week_3": 61,
-      "week_4": 73,
-      "improvement": "+28 percentage points in 4 weeks",
-      "projection": "100% adoption in ~8 weeks at current pace"
-    }
+    "recommendations": [
+      "Replace Inter/Roboto with Work Sans Variable in 6 components",
+      "Upgrade weight contrasts to 9× ratio (wght 300 body vs 900 headline) in 13 components",
+      "Add spring physics cubic-bezier(0.34, 1.56, 0.64, 1) to 12 interactive components",
+      "Apply kr-solidarity asymmetric border-radius to 16 components"
+    ]
   }
 }
 ```
-
-### HTML Dashboard Artifact
-
-Generated dashboard includes:
-
-- Overall M3 Expressive score (0-100%)
-- 5 core metrics with progress bars
-- Component maturity distribution (pie chart)
-- Trend analysis (line chart)
-- Components needing enhancement (table)
-- Recommendations (actionable list)
-
-## Usage Examples
-
-### Example 1: Generate Compliance Report
-
-**Input**: "Generate M3 Expressive compliance dashboard for component library"
-
-**Output**:
-
-1. Overall score (0-100%)
-2. 5 core metrics with percentages
-3. Component maturity distribution
-4. Components needing enhancement
-5. Recommendations
-
-### Example 2: Track Progress Over Time
-
-**Input**: "Show M3 Expressive adoption trend over last 4 weeks"
-
-**Output**:
-
-1. Week-over-week metrics
-2. Improvement percentage
-3. Projection to 100% adoption
-4. Insights and recommendations
-
-### Example 3: Identify Priority Components
-
-**Input**: "Which components should we upgrade to M3 Expressive first?"
-
-**Output**:
-
-1. Components ranked by priority (high/medium/low)
-2. Failing metrics per component
-3. Estimated effort per component
-4. Recommended upgrade sequence
 
 ## Component Audit Checklist
 
 For each component, validate:
 
 ### Typography
-
-- [ ] Uses M3 Expressive fonts (Sora, Plus Jakarta Sans, Poppins)
-- [ ] No generic fonts (Inter, Roboto, Arial alone)
-- [ ] Weight contrast ≥ 3x (300 vs 900, not 400 vs 600)
-- [ ] Size contrast ≥ 3x (57px vs 12px, not 24px vs 16px)
+- [ ] Uses **Solidarity Stack** only: Work Sans Variable, Fraunces Variable, Libre Bodoni, JetBrains Mono, Caveat
+- [ ] No forbidden fonts: Inter, Roboto, Arial, Sora, Plus Jakarta Sans, Poppins, Montserrat, Space Grotesk
+- [ ] Weight contrast ≥ 9× ratio (wght 300 body vs 900 headline, per Scale Hierarchy Mandate)
+- [ ] Size contrast ≥ 6× ratio (72px display vs 12px micro)
+- [ ] Variable font axes used: `GRAD` for hover, `WONK`/`SOFT` for headers
 
 ### Color
-
-- [ ] Uses vibrant semantic tokens (40-80% saturation)
-- [ ] No purple gradients
-- [ ] No generic blue (#2196F3)
-- [ ] No hardcoded hex values
+- [ ] All colors via `--sys-color-*` tokens — zero hardcoded hex
+- [ ] Solidarity Charcoal background (#1A1714 via `--sys-color-charcoalBackground-base`)
+- [ ] No purple gradients (#7C4DFF → #9C27B0) — banned
+- [ ] No generic blue (#2196F3) — banned
+- [ ] No white backgrounds (#FFFFFF) — banned
 
 ### Motion
-
-- [ ] Uses spring physics easing (cubic-bezier overshoot)
-- [ ] Hover bloom effect (scale + elevation)
-- [ ] Duration tokens applied (50/250/500ms)
+- [ ] Spring physics easing: `cubic-bezier(0.34, 1.56, 0.64, 1)` on interactions
+- [ ] Hover bloom effect: scale(1.02–1.05) + elevation increase
+- [ ] Duration tokens applied (50ms / 250ms / 500ms)
+- [ ] `@media prefers-reduced-motion` respected
 
 ### Layout
-
-- [ ] [DEPRECATED_STYLE] asymmetry (not grid-mechanical)
-- [ ] Varied spacing rhythm (8px, 16px, 24px, 40px)
-- [ ] Dramatic elevation (layered depth)
+- [ ] KR Solidarity asymmetric border-radius (Stone/Slab/Pebble shapes)
+- [ ] No `border-radius: 50%` — strictly banned
+- [ ] Varied spacing rhythm (8px / 16px / 24px / 40px)
+- [ ] Layers: Z-0 substrate, Z-1–2 atmospheric, Z-3+ UI foreground
 
 ### Overall
-
-- [ ] Component feels M3 Expressive (personality-driven)
-- [ ] Not baseline M3 (restrained)
-- [ ] Not generic/slop (cookie-cutter)
+- [ ] Component feels KR Solidarity Expressive (personality-driven, resistance aesthetic)
+- [ ] Not baseline M3 (restrained, minimal, corporate)
+- [ ] Not generic/slop (cookie-cutter, purple gradients, AI-bland)
+- [ ] Zero-Flora Lockdown respected (no botanical motifs)
 
 ## Priority Scoring (Which Components to Upgrade First?)
 
 **High Priority** (upgrade immediately):
-
-- Components with 0-1/5 metrics passing (baseline M3)
-- High-visibility components (landing page, hero sections)
+- Components with 0–1/5 metrics passing (baseline M3)
+- High-visibility hero components (landing page, hero sections)
 - Frequently used components (buttons, inputs, cards)
 
 **Medium Priority** (upgrade next):
-
-- Components with 2-3/5 metrics passing (partially expressive)
-- Medium-visibility components (modals, dialogs)
-- Moderately used components (tabs, accordions)
+- Components with 2–3/5 metrics passing (partially expressive)
+- Modal, dialog, and drawer components
 
 **Low Priority** (upgrade later):
-
 - Components with 4/5 metrics passing (mostly expressive)
-- Low-visibility components (tooltips, badges)
-- Rarely used components (niche features)
+- Tooltips, badges, and rarely-used UI elements
 
-## Compliance Tracking Workflow
+## Scanning Commands
 
-### 1. Initial Audit
+```bash
+# Detect forbidden fonts in source
+rg -n "(Inter|Roboto|Arial|Sora|Plus Jakarta Sans|Poppins|Montserrat)" frontend/src/
 
-Run compliance dashboard to establish baseline.
+# Find hardcoded hex values (bypass token system)
+rg -n "#([0-9A-Fa-f]{3}|[0-9A-Fa-f]{6})\b" frontend/src/components frontend/src/layouts
 
-**Output**: Overall score, component maturity distribution, priority list.
+# Find perfect circles (border-radius: 50%)
+rg -n "border-radius:\s*50%" frontend/src/
 
-### 2. Set Goals
+# Find non-spring easing
+rg -n "ease-in|ease-out|linear" --type css frontend/src/
 
-Define target metrics and timeline.
-
-**Example**: "Achieve 90% M3 Expressive adoption in 8 weeks"
-
-### 3. Upgrade Components
-
-Work through priority list, upgrading components to M3 Expressive.
-
-**Track**: Components upgraded per week, metrics improving.
-
-### 4. Re-Audit Weekly
-
-Run compliance dashboard weekly to track progress.
-
-**Output**: Trend analysis, updated priority list, recommendations.
-
-### 5. Achieve 100% Adoption
-
-All components pass all 5 metrics.
-
-**Celebrate**: Design system is fully M3 Expressive!
+# Run token validator
+python3 scripts/design-validation/validate-tokens.py
+```
 
 ## Process
 
-1. **Dashboard Execution**: Run the compliance dashboard tool to generate adoption metrics.
-2. **Metric Analysis**: Review scores for fonts, contrasts, motion, tokens, and asymmetry.
-3. **Gap Identification**: Identify "Baseline M3" components needing enhancement.
-4. **Actionable Output**: Follow recommendations and priority lists to upgrade components.
-5. **Continuous Monitoring**: Re-audit weekly to track maturity trajectory.
+1. **Dashboard Execution**: Scan component library using commands above.
+2. **Metric Analysis**: Review scores across 5 KR Solidarity dimensions.
+3. **Gap Identification**: Find "Baseline M3" and generic components.
+4. **Actionable Output**: Follow priority list and scanning commands.
+5. **Continuous Monitoring**: Re-audit before each sprint end.
 
 ## Related Skills
 
-- [m3-visual-audit](../m3-visual-audit/SKILL.md) - Audit individual component screenshots
-- [m3-expressive-ui-evaluator](../m3-expressive-ui-evaluator/SKILL.md) - Evaluate designs with 400-point scoring
-- [m3-anti-slop-validator](../design-skills/m3-anti-slop-validator/SKILL.md) - Validate against slop patterns
-- [m3-expressive-design-token-validator](../m3-expressive-design-token-validator/SKILL.md) - Validate design tokens
+- [m3-visual-audit](../m3-visual-audit/SKILL.md) — Audit individual component screenshots
+- [kerala-rage-brand-enforcer](../kerala-rage-brand-enforcer/SKILL.md) — Brand compliance enforcement
+- [vision-scorer-mcp](../vision-scorer-mcp/SKILL.md) — Deterministic visual quality gate
 
 ---
 
-**Version:** 1.0.0 (M3 Expressive)
-**Status:** Production Ready
+**Version:** 6.0.0 | **Status:** Production Ready | **Updated:** 2026-03-07
 
-_The dashboard transforms M3 Expressive adoption from aspirational to measurable. Track progress, identify gaps, and guide your design system to full expressiveness._
+_Dashboard transforms KR Solidarity adoption from aspirational to measurable. Track progress, identify gaps, guide the system to full Solidarity Expressive compliance._

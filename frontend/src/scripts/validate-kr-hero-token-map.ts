@@ -37,13 +37,11 @@ function main() {
       let depth = 0;
       let curr = token;
       let targetKey = key;
-      let resolved = false;
 
       while (curr.alias_of) {
         if (depth >= 3) {
           console.error(`FAIL: Alias loop or max depth exceeded for ${key}`);
           failures++;
-          resolved = false;
           break;
         }
         targetKey = curr.alias_of;
@@ -51,7 +49,6 @@ function main() {
         if (!curr) {
           console.error(`FAIL: Alias target not found for ${key} -> ${targetKey}`);
           failures++;
-          resolved = false;
           break;
         }
         depth++;

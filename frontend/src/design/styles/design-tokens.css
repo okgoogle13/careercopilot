@@ -209,7 +209,7 @@
   --sys-type-scale-headline: 48px;
   --sys-type-scale-display: 72px;
   --sys-type-scale-hero: 144px;
-  --sys-type-emotionalPatterns-solidarityProtest-wght: 800;
+  --sys-type-emotionalPatterns-solidarityProtest-wght: 900;
   --sys-type-emotionalPatterns-solidarityProtest-wdth: 120;
   --sys-type-emotionalPatterns-solidarityProtest-letterSpacing: 0.02em;
   --sys-type-emotionalPatterns-solidarityProtest-usage: Declarative headers, street-poster slab words, moments of collective clarity.;
@@ -229,7 +229,8 @@
   --sys-type-emotionalPatterns-scrollPressure-wdth: 100;
   --sys-type-emotionalPatterns-scrollPressure-letterSpacing: dynamic;
   --sys-type-emotionalPatterns-scrollPressure-usage: Scroll-driven headers: weight builds with pressure;
-  --sys-type-emotionalPatterns-extremeVariableContrast-wght: 100;
+  --sys-type-emotionalPatterns-extremeVariableContrast-wght: 900;
+  --sys-type-emotionalPatterns-extremeVariableContrast-wghtSecondary: 100;
   --sys-type-emotionalPatterns-extremeVariableContrast-wdth: 100;
   --sys-type-emotionalPatterns-extremeVariableContrast-letterSpacing: -0.02em;
   --sys-type-emotionalPatterns-extremeVariableContrast-usage: Hero lines paired with micro ultra-black metadata for expressive tension.;

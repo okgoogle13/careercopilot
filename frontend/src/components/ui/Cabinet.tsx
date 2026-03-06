@@ -40,7 +40,7 @@ export const Cabinet: React.FC<CabinetProps> = ({
   title,
   children,
   maxWidth = 'md',
-  variant = 'standard',
+  variant: _variant = 'standard',
 }) => {
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {

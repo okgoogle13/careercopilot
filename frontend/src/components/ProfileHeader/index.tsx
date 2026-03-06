@@ -1,12 +1,5 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { clsx, type ClassValue } from 'clsx';
-import { twMerge } from 'tailwind-merge';
-
-/** Utility for Tailwind class merging */
-function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
-}
 
 export interface ProfileHeaderProps {
   /** User display name */

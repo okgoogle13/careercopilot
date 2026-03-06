@@ -9,7 +9,7 @@ export function NotFound() {
       <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-tertiary/10 rounded-sentry blur-[80px] pointer-events-none" />
 
       <div className="max-w-xl relative z-10">
-        <div className="text-[12rem] md:text-[16rem] font-extrabold text-primary opacity-[0.03] select-none blur-sm absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-[60%] pointer-events-none">
+        <div className="text-hero font-black text-primary opacity-[0.05] select-none blur-sm absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-[60%] pointer-events-none">
           404
         </div>
 
@@ -20,8 +20,10 @@ export function NotFound() {
             </div>
           </div>
 
-          <h1 className="text-4xl md:text-5xl font-bold text-on-surface mb-4">Lost in Space?</h1>
-          <p className="text-lg text-on-surface-variant mb-10 leading-relaxed">
+          <h1 className="text-display font-black text-[var(--sys-color-paperWhite-base)] mb-4 uppercase tracking-tighter">
+            Lost in Space?
+          </h1>
+          <p className="text-micro font-light text-[var(--sys-color-concreteGrey-steps-3)] mb-10 leading-relaxed uppercase tracking-widest">
             The page you are looking for has drifted into a black hole.
             <br className="hidden md:block" />
             Don't worry, we can navigate you back to safety.

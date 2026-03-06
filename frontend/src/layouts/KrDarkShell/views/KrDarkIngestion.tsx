@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
-import { ManifestoSlab, SolidarityCard, ActionButton } from '../../../components/kerala-rage';
+import { ManifestoSlab, ActionButton } from '../../../components/kerala-rage';
 
 /**
  * KrDarkIngestion (Hi-Fi)

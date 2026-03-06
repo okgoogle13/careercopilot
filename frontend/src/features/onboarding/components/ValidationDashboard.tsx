@@ -169,7 +169,7 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
         {/* Header */}
         <header className="flex flex-col md:flex-row justify-between items-start gap-8 mb-12">
           <div>
-            <h1 className="text-5xl font-bold text-[var(--sys-color-paperWhite-base)] tracking-tight">
+            <h1 className="text-display font-black text-[var(--sys-color-paperWhite-base)] tracking-tight uppercase">
               Professional Vector{' '}
               <span className="text-[var(--sys-color-inkGold-base)]">Audit</span>
             </h1>
@@ -222,10 +222,10 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
           >
             <Trophy className="w-10 h-10 text-[var(--sys-color-inkGold-base)]" />
             <div>
-              <span className="text-3xl font-bold text-[var(--sys-color-paperWhite-base)] block">
+              <span className="text-display font-black text-[var(--sys-color-paperWhite-base)] block leading-none">
                 {localData.Structured_Achievements.length}
               </span>
-              <span className="text-[10px] uppercase tracking-widest text-[var(--sys-color-concreteGrey-steps-3)]">
+              <span className="text-micro font-light uppercase tracking-widest text-[var(--sys-color-concreteGrey-steps-3)]">
                 Tactical Achievements
               </span>
             </div>
@@ -237,10 +237,10 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
           >
             <BrainCircuit className="w-10 h-10 text-[var(--sys-color-concreteGrey-base)]" />
             <div>
-              <span className="text-3xl font-bold text-[var(--sys-color-paperWhite-base)] block">
+              <span className="text-display font-black text-[var(--sys-color-paperWhite-base)] block leading-none">
                 {localData.KSC_Responses.length}
               </span>
-              <span className="text-[10px] uppercase tracking-widest text-[var(--sys-color-concreteGrey-steps-3)]">
+              <span className="text-micro font-light uppercase tracking-widest text-[var(--sys-color-concreteGrey-steps-3)]">
                 Core Competencies
               </span>
             </div>

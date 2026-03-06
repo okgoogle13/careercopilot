@@ -408,12 +408,13 @@ class TestDocumentExportService:
         with patch.object(
             document_export_service, "_get_storage_path", side_effect=Exception("Storage error")
         ):
-            with pytest.raises(Exception, match="Storage error"):
-                await document_export_service.export_cover_letter(
-                    content="Dear...",
-                    user_id="user123",
-                    job_title="Dev",
-                )
+            with patch.dict("sys.modules", {"app.core.document_pipeline": MagicMock()}):
+                with pytest.raises(Exception, match="Storage error"):
+                    await document_export_service.export_cover_letter(
+                        content="Dear...",
+                        user_id="user123",
+                        job_title="Dev",
+                    )
 
     @pytest.mark.asyncio
     async def test_export_resume_unsupported_format(
@@ -454,12 +455,13 @@ class TestDocumentExportService:
         with patch.object(
             document_export_service, "_get_storage_path", side_effect=Exception("Internal error")
         ):
-            with pytest.raises(Exception, match="Internal error"):
-                await document_export_service.export_resume(
-                    content={},
-                    user_id="user123",
-                    job_title="Dev",
-                )
+            with patch.dict("sys.modules", {"app.core.document_pipeline": MagicMock()}):
+                with pytest.raises(Exception, match="Internal error"):
+                    await document_export_service.export_resume(
+                        content={},
+                        user_id="user123",
+                        job_title="Dev",
+                    )
 
     @pytest.mark.asyncio
     async def test_export_ksc_unsupported_format(
@@ -501,12 +503,13 @@ class TestDocumentExportService:
         with patch.object(
             document_export_service, "_get_storage_path", side_effect=Exception("KSC error")
         ):
-            with pytest.raises(Exception, match="KSC error"):
-                await document_export_service.export_ksc_response(
-                    response_data={},
-                    user_id="user123",
-                    job_title="Dev",
-                )
+            with patch.dict("sys.modules", {"app.core.document_pipeline": MagicMock()}):
+                with pytest.raises(Exception, match="KSC error"):
+                    await document_export_service.export_ksc_response(
+                        response_data={},
+                        user_id="user123",
+                        job_title="Dev",
+                    )
 
     @pytest.mark.asyncio
     async def test_export_application_package_unsupported_format(

@@ -45,7 +45,8 @@ Place KR Solidarity assets (motifs, symbols, hero compositions) against annotate
   "flows_doc": "docs/design/05_FLOWS.md",
   "assets_doc": "docs/design/04_ASSETS.md",
   "manifest": "frontend/public/assets/kerala-rage-kr-solidarity-manifest.json",
-  "hero_registry": "frontend/public/assets/kr-solidarity-hero-registry.json"
+  "hero_registry": "frontend/public/assets/kr-solidarity-hero-registry.json",
+  "token_map": "frontend/public/assets/kr-solidarity-hero-token-map.v2.json"
 }
 ```
 
@@ -62,6 +63,7 @@ Place KR Solidarity assets (motifs, symbols, hero compositions) against annotate
 3. Every placed asset must map to a valid manifest entry.
 4. If wireframes include `TODO[asset]`, produce explicit tokenized replacements.
 5. Hero surfaces must include intentional depth and lighting/halo logic where specified.
+6. **Scale Hierarchy Compliance**: Hero focal text MUST use `text-display` or `text-hero` with `font-black` (900) and be paired with `text-micro` or `text-small` (300) for sub-captions/metadata to maintain the system's 9× contrast mandate.
 
 ## Placement Scoring (100)
 - Wireframe alignment and z-order correctness: 35
@@ -111,7 +113,7 @@ HERO_OVERLAY [Z-1]:
 HERO_ACCENT [Z-3]:
   - Layer: ui-kit
   - Asset: KR-UI-016
-  - Token: --sys-color-kr-ink-gold
+  - Token: --sys-color-inkGold-base
   - Placement: corner-accent
 ```
 
@@ -166,7 +168,7 @@ HERO_ACCENT [Z-3]:
       "z_index": 3,
       "layer": "ui-kit",
       "placement": "corner-accent",
-      "token_refs": ["--sys-color-kr-ink-gold"],
+      "token_refs": ["--sys-color-inkGold-base"],
       "status": "applied",
       "rationale": "SVG scales without quality loss; UI-kit layer doesn't conflict with hero composition"
     }
@@ -267,7 +269,7 @@ HERO_ACCENT [Z-3]:
    "token_refs": ["#D4A84B", "--sys-color-kr-ink-gold"]
 
    // ✅ Correct
-   "token_refs": ["--sys-color-kr-ink-gold"]
+   "token_refs": ["--sys-color-inkGold-base"]
    ```
 
 2. **Verify Manifest Entry**
@@ -425,4 +427,4 @@ Run full scoring check (score ≥90) before committing to production.
 
 ---
 
-**Last Updated**: 2026-03-06 | **Version**: 6.0.0
+**Last Updated**: 2026-03-07 | **Version**: 6.1.0

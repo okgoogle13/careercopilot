@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 
 interface EditorSplitPaneProps {
@@ -20,7 +19,7 @@ export const EditorSplitPane: React.FC<EditorSplitPaneProps> = ({
   initialSplit = 50,
   className,
 }) => {
-  const [split, setSplit] = useState(initialSplit);
+  const [split, _setSplit] = useState(initialSplit);
 
   return (
     <div

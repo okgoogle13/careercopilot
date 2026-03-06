@@ -27,7 +27,7 @@ class PersonalCache:
                 "max_size": 1000,
                 "enabled": True,
             }
-        } 
+        }
         logger.info("PersonalCache initialized with SQLAlchemy backend")
 
     def _get_store(self, db) -> SQLAlchemyCacheStore:
@@ -43,7 +43,7 @@ class PersonalCache:
             # Handle different signature styles
             category = "general"
             input_data = None
-            
+
             if len(args) >= 1:
                 # Check if 2nd arg is user_id or category
                 # If 3rd arg exists, then 1st is operation_type, 2nd is user_id, 3rd is input_data
@@ -58,7 +58,7 @@ class PersonalCache:
             else:
                 category = kwargs.get("category", "general")
                 full_key = f"{category}:{key}"
-            
+
             logger.debug(f"[PersonalCache] GET key: {full_key}")
             with get_db_session() as db:
                 store = self._get_store(db)
@@ -82,9 +82,11 @@ class PersonalCache:
         try:
             ttl = kwargs.get("ttl")
             category = "general"
-            
-            # Determine signature style
-            if len(args) >= 2: # Style: set(op_type, user_id, input_data, value, ttl)
+
+            # Determine signature style.
+            # AI-operation style uses: set(operation_type, user_id, input_data, value, ttl)
+            # where `value` (2nd positional arg in signature) is actually a user_id string.
+            if len(args) >= 2 and isinstance(value, str):
                 operation_type = key
                 user_id = value
                 input_data = args[0]
@@ -102,11 +104,11 @@ class PersonalCache:
                 else:
                     category = kwargs.get("category", "general")
                 full_key = f"{category}:{key}"
-            
+
             logger.debug(f"[PersonalCache] SET key: {full_key}")
             if ttl is None:
                 ttl = self.default_ttl
-            
+
             if isinstance(ttl, (int, float)):
                 ttl_seconds = int(ttl)
             else:
@@ -115,10 +117,7 @@ class PersonalCache:
             with get_db_session() as db:
                 store = self._get_store(db)
                 return store.set(
-                    key=full_key,
-                    value=value,
-                    operation_type=category,
-                    ttl_seconds=ttl_seconds
+                    key=full_key, value=value, operation_type=category, ttl_seconds=ttl_seconds
                 )
         except Exception as e:
             logger.error(f"Error writing to cache: {e}")
@@ -128,6 +127,7 @@ class PersonalCache:
         """Generate a consistent cache key"""
         import hashlib
         import json
+
         input_str = json.dumps(input_data, sort_keys=True, default=str)
         input_hash = hashlib.md5(input_str.encode()).hexdigest()[:16]
         return f"{operation_type}:{user_id}:{input_hash}"
@@ -154,6 +154,7 @@ class PersonalCache:
         try:
             with get_db_session() as db:
                 from sqlalchemy import text
+
                 result = db.execute(text("DELETE FROM cache"))
                 db.commit()
                 return result.rowcount
@@ -166,6 +167,7 @@ class PersonalCache:
         try:
             with get_db_session() as db:
                 from sqlalchemy import text
+
                 if categories:
                     # Specific categories
                     count = 0
@@ -194,10 +196,7 @@ class PersonalCache:
     async def get_cache_stats(self) -> dict[str, Any]:
         """Get cache statistics from PostgreSQL"""
         # Simplified stats for SQL
-        return {
-            "backend": "postgresql",
-            "status": "active"
-        }
+        return {"backend": "postgresql", "status": "active"}
 
     # Convenience methods for specific cache categories
 
@@ -223,15 +222,15 @@ class PersonalCache:
     ) -> bool:
         """Cache company research"""
         import hashlib
+
         url_hash = hashlib.md5(job_url.encode()).hexdigest()[:8]
         cache_key = f"company_{company_name}_{url_hash}"
         return await self.set(cache_key, research_data, ttl, "research")
 
-    async def get_company_research(
-        self, company_name: str, job_url: str
-    ) -> dict[str, Any] | None:
+    async def get_company_research(self, company_name: str, job_url: str) -> dict[str, Any] | None:
         """Get cached company research"""
         import hashlib
+
         url_hash = hashlib.md5(job_url.encode()).hexdigest()[:8]
         cache_key = f"company_{company_name}_{url_hash}"
         return await self.get(cache_key, "research")
@@ -270,6 +269,7 @@ class PersonalCache:
         """Cache AI operation result in PostgreSQL"""
         import hashlib
         import json
+
         input_str = json.dumps(input_data, sort_keys=True, default=str)
         input_hash = hashlib.md5(input_str.encode()).hexdigest()[:16]
         cache_key = f"{operation_type}_{user_id}_{input_hash}"
@@ -282,6 +282,7 @@ class PersonalCache:
         """Get cached AI operation result from PostgreSQL"""
         import hashlib
         import json
+
         input_str = json.dumps(input_data, sort_keys=True, default=str)
         input_hash = hashlib.md5(input_str.encode()).hexdigest()[:16]
         cache_key = f"{operation_type}_{user_id}_{input_hash}"
