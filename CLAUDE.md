@@ -14,7 +14,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 | State    | Zustand + TanStack Query               |
 | Backend  | FastAPI + SQLAlchemy + Genkit + Python 3.10+ |
 | Cloud    | GCP us-central1 · Firebase · Cloud Run |
-| Design   | **kerala-rage kr-solidarity** (M3 Expressive) |
+| Design   | **KR Solidarity v6.0** (M3 Expressive, Manifesto Canon) |
 | Tests    | Jest (frontend), Playwright (e2e), pytest (backend) |
 | DB       | PostgreSQL via SQLAlchemy + Alembic migrations |
 
@@ -128,6 +128,8 @@ frontend/src/design/   # M3 Expressive design tokens
   tokens/
     tokens.json        # Master token file (Kerala Rage: semantic colors, typography, motion, shapes, shadows)
 
+frontend/src/components/ui/NativeAnchor.tsx  # Symbolic anchor (Stone archetype)
+
 scripts/               # Root-level deployment & utility scripts
   deploy.sh
   lint-autofix.sh
@@ -137,9 +139,11 @@ scripts/               # Root-level deployment & utility scripts
 
 ---
 
-## Design System: kerala-rage kr-solidarity (M3 Expressive)
+## Design System: KR Solidarity v6.0 (M3 Expressive)
 
-**Single mode: Solidarity** (dark-only, unified product experience). Identity: Kerala diaspora + Naarm/Melbourne street aesthetics (screenprint + wheat-paste) + First Nations solidarity. No bureaucratic motifs, no white backgrounds.
+**Single mode: Solidarity** (dark-only, unified product experience). Identity: Kerala diaspora + Naarm/Melbourne street aesthetics (screenprint + wheat-paste) + First Nations solidarity. No bureaucratic motifs, no white backgrounds, **STRICT ZERO-FLORA LOCKDOWN**.
+
+> **Canon:** `docs/design/01_CANON.md` → `02_SYSTEM.md` → `03_COMPONENTS.md` → `04_ASSETS.md` → `05_FLOWS.md`
 
 ### Semantic Color Variables (The Truth)
 
@@ -152,13 +156,13 @@ All colors are **semantic** (usage-driven), not generic. **Truth lives in `front
 | **charcoalBackground** | `--sys-color-charcoalBackground-base` | Foundational canvas; all backgrounds. Never use white. | `#1A1A1A` |
 | **solidarityRed** | `--sys-color-solidarityRed-base` | Primary buttons, key icon hits, small glows | `#F14714` |
 | **kr-charcoalRed** | `--sys-color-kr-charcoalRed-base` | Errors, destructive actions, critical prompts | `#F14844` |
-| **kr-activistSmokeGreen** | `--sys-color-kr-activistSmokeGreen-base` | Backwater motifs, palm frames, calmer UI sections | `#48DA8B` |
+| **kr-activistSmokeGreen** | `--sys-color-kr-activistSmokeGreen-base` | Urban accents, map routes, reflective sections | `#48DA8B` |
 | **signalGreen** | `--sys-color-signalGreen-base` | Small accents, links, paint-splash moments | `#48F0E5` |
 | **inkGold** | `--sys-color-inkGold-base` | Halo/saint disks, ornament hits, celebratory states | `#DAF674` |
 | **stencilYellow** | `--sys-color-stencilYellow-base` | Large poster words, key UI warnings (non-bureaucratic) | `#F6E748` |
 | **worker-ash** | `--sys-color-worker-ash-base` | Primary readable ink on dark surfaces | `#DAF6B3` |
 | **solidaritySmokeOrange** | `--sys-color-solidaritySmokeOrange-base` | Portrait warmth, paper aging, earth layers | `#DA8B48` |
-| **labWrenMetalBlue** | `--sys-color-labWrenMetalBlue-base` | Ripples, quiet tech accents | `#48B3DA` |
+| **protestMetalBlue** | `--sys-color-protestMetalBlue-base` | Ripples, quiet tech accents, charts secondary | `#48B3DA` |
 | **aboriginalFlagRed** | `--sys-color-aboriginalFlagRed-base` | **Restricted** — First Nations solidarity contexts only | `#D81E05` |
 | **aboriginalFlagYellow** | `--sys-color-aboriginalFlagYellow-base` | **Restricted** — First Nations solidarity contexts only | `#FCD116` |
 | **aboriginalFlagBlack** | `--sys-color-aboriginalFlagBlack-base` | **Restricted** — First Nations solidarity contexts only | `#000000` |
@@ -176,30 +180,37 @@ All colors are **semantic** (usage-driven), not generic. **Truth lives in `front
 | **proclamation** | Libre Bodoni | Authoritative text, formal proclamation style |
 | **mono** | JetBrains Mono (wght 400–600) | Code, data, technical annotations |
 | **curator** | Caveat | Handwritten accents, curator notes |
-| **colorAccent** | Nabla | **Restricted** — hero moments only, color font |
+| **colorAccent** | Nabla | **Hero Hit** — Restricted: icon-scale hero moments only. One word per hero view. |
 
 No Inter, Roboto, or Arial. Extreme contrast typography is the M3 Expressive standard. Enable `font-optical-sizing: auto` globally.
 
 ### Gold Standard Components (Reference)
-These components are 100% compliant with `kr-solidarity` and should be used as the source of truth:
-- **ActionButton.tsx** (`Seed`): Atomic primary button with high-intensity motion.
-- **KeralaRageButton.tsx** (`Seed`): Standard UI button with loading and icon states.
-- **SolidarityCard.tsx** (`Jar`): Primary container for content sections.
-- **Jar.tsx** (`Jar`): Standard select/dropdown component.
-- **ManifestoSlab.tsx** (`Cabinet`): Complex layout container for text-heavy content.
-- **Stone.tsx** (`Stone`): Structural divider and spacing primitive.
-- **Lens.tsx** (`Lens`): Comprehensive text input and focal container.
+These components are 100% compliant with `kr-solidarity v6.0` and should be used as the source of truth:
+- **ActionButton.tsx** (`Pebble`): Atomic primary button with high-intensity motion.
+- **KeralaRageButton.tsx** (`Pebble`): Standard UI button with loading and icon states.
+- **SolidarityCard.tsx** (`Slab`): Primary container — asymmetric `radius-slab` archetype.
+- **NativeAnchor.tsx** (`Stone`): Symbolic anchor component with Halo/Grit/Blueprint overlays.
+- **ManifestoSlab.tsx** (`Slab`): Complex layout container for text-heavy content.
+- **Stone.tsx** (`Stone`): Expressive card / hero anchor.
+- **Lens.tsx** (`Lens`): Comprehensive text input and focal container (`TacticalInput`).
 - **Signal.tsx** (`Signal`): Status and notification indicator.
 
 **All archetypes MUST use `--sys-color-*` CSS variables, never hardcoded hex.**
 
 ### Design System Sources of Truth (Hierarchy)
 
-1. **Tokens**: `frontend/src/design/tokens/tokens.json` (DTCG, hand-authored, canonical)
-2. **CSS Variables**: `frontend/src/design/styles/design-tokens.css` (auto-generated, `--sys-*` prefix, rebuilt via `python3 scripts/build-m3-tokens.py` from repo root)
-3. **Components**: `frontend/src/components/ui/*` (consume CSS variables via `className="..."` or `getTokenValue()`)
-4. **Figma**: Figma variables synced via `node scripts/sync-tokens-to-figma-vars.mjs` (bi-directional)
-5. **Deprecated**: `design-system/tokens.json` (Material Design 3 only, incomplete — do not use)
+| Priority | Source | Path |
+|---|---|---|
+| **1 — Canon** | KR Solidarity Design Canon | `docs/design/01_CANON.md` |
+| **2 — System** | Palette, typography, motion specs | `docs/design/02_SYSTEM.md` |
+| **3 — Components** | Component catalog & archetypes | `docs/design/03_COMPONENTS.md` |
+| **4 — Assets** | Asset naming, manifest, IDs | `docs/design/04_ASSETS.md` |
+| **5 — Flows** | Page-level UX flows | `docs/design/05_FLOWS.md` |
+| **6 — Tokens** | DTCG token source | `frontend/src/design/tokens/tokens.json` |
+| **7 — CSS Vars** | Auto-generated CSS variables | `frontend/src/design/styles/design-tokens.css` |
+| **8 — Manifest** | Asset manifest (87 assets) | `frontend/public/assets/kerala-rage-kr-solidarity-manifest.json` |
+| **9 — Registry** | Hero registry (compositions) | `frontend/public/assets/kr-solidarity-hero-registry.json` |
+| **Deprecated** | Do not use | `design-system/tokens.json` |
 
 ### Legacy Constraints (Do NOT Expand)
 
@@ -209,18 +220,26 @@ These components are 100% compliant with `kr-solidarity` and should be used as t
 
 ### Anti-Patterns
 
-- ❌ Hardcoded colors like `#1A1A1A` (use `--sys-color-charcoalBackground-base` instead)
-- ❌ White or light backgrounds (Solidarity is dark-only; `charcoalBackground` is the canvas)
-- ❌ Generic shape radius (use asymmetric shapes per archetype design)
-- ❌ Purple gradients (Solidarity palette: red, gold, green, orange, blue)
-- ❌ Using Aboriginal Flag colors or Nabla font outside their restricted contexts
-- ❌ Uniform font weights (use variable fonts with semantic weights)
-- ❌ Button states without token variables
-- ✅ All colors from semantic tokens (`--sys-color-{name}-base`)
-- ✅ All fonts from {Work Sans, Fraunces, Libre Bodoni, JetBrains Mono, Caveat, Nabla}
-- ✅ Asymmetric spacing and border radius per archetype design spec
-- ✅ Extreme contrast typography (M3 Expressive standard)
+**Non-negotiable violations (NO_GO):**
+- ❌ Hardcoded colors like `#1A1A1A` → use `--sys-color-charcoalBackground-base`
+- ❌ White or light backgrounds — `charcoalBackground` is the only permitted canvas
+- ❌ Generic shape radius (`border-radius: 8px`) → use `radius-pebble`, `radius-stone`, `radius-slab`
+- ❌ Purple gradients, blue stock-photo palettes
+- ❌ Aboriginal Flag colors or Nabla font outside their strictly restricted contexts
+- ❌ Uniform font weights — use variable font axes intentionally
+- ❌ **STRICT ZERO-FLORA**: No flora (gum leaves, eucalyptus), no Australian endemic fauna
+- ❌ `labWrenMetalBlue` — deprecated, renamed to `protestMetalBlue`
+- ❌ `inter`, `Roboto`, `Arial`, `Sora`, `Plus Jakarta Sans` fonts
+- ❌ Bureaucratic / passport / visa / border motifs
+- ❌ Jar archetype on `SolidarityCard` — now uses `Slab`
+
+**Required (must-haves):**
+- ✅ All colors from `--sys-color-{name}-base` semantic tokens
+- ✅ Approved fonts: Work Sans, Fraunces, Libre Bodoni, JetBrains Mono, Caveat, Nabla
+- ✅ Asymmetric radii (Pebble / Stone / Slab) per component archetype
+- ✅ M3 Expressive spring physics (`cubic-bezier(0.34, 1.56, 0.64, 1)`)
 - ✅ `font-optical-sizing: auto` enabled globally
+- ✅ `prefers-reduced-motion` respected in all animation logic
 
 ---
 
@@ -264,11 +283,12 @@ These skills are optimized for the upcoming workflow:
 | Skill | Purpose | Input | Output |
 |---|---|---|---|
 | **figma-to-page** | Convert Figma inspect to React code | Figma design + inspect details | React `.tsx` file + hooks |
-| **kr-svg** | Generate Kerala Rage SVG primitives | Usage intent (e.g., "icon button") | SVG with semantic colors (`--sys-color-*` CSS vars) |
-| **ui-design-evaluator** | Audit UI against kr-solidarity standards | Component screenshot or code | Visual score + semantic color compliance |
+| **kr-svg** | Generate KR Solidarity SVG primitives | Usage intent (e.g., "icon button") | SVG with semantic colors (`--sys-color-*` CSS vars) |
+| **ui-design-evaluator** / **component-visual-audit** | Audit UI against kr-solidarity v6.0 | Component screenshot or code | Visual score + semantic color compliance |
 | **m3-expressive-ui-evaluator** | Check M3 Expressive compliance | Design mockup | Typography score, contrast score, spring physics usage |
-| **codebase-orchestrator** | Track design system health & deployment readiness | (queries MCP servers) | Status report: component migration %, token sync health, build readiness |
-| **wireframe-annotator** | Generate annotated ASCII wireframes | Feature brief + user flow | Wireframe with `<layout>`, `<tokens>`, `<accessibility>` blocks |
+| **kerala-rage-brand-enforcer** | Enforce Zero-Flora Lockdown + Canon compliance | Any component or asset | Pass/Fail with remediation steps |
+| **token-orchestrator** | DTCG compliance + KR Solidarity palette rules | `tokens.json` | Validated token set + CSS var rebuild |
+| **wireframe-annotator** | Generate annotated ASCII wireframes | Feature brief + `05_FLOWS.md` | Wireframe with `<layout>`, `<tokens>`, `<accessibility>` blocks |
 
 **Usage**: Invoke skills via `/skill-name` (e.g., `/figma-to-page`) in Claude Code prompts.
 
@@ -448,4 +468,17 @@ black app && isort app && mypy app
 
 ---
 
-_Tokens are law. Semantic color variables (`--sys-color-*`) are the source of truth. All components consume design tokens, never hardcoded colors. Solidarity mode only._
+## Design Canon Quick Links
+
+| Doc | Purpose |
+|---|---|
+| [`docs/design/01_CANON.md`](docs/design/01_CANON.md) | Identity, Manifesto, Cultural Safety, Zero-Flora Rule |
+| [`docs/design/02_SYSTEM.md`](docs/design/02_SYSTEM.md) | Palette, Typography, Shape Archetypes, Motion |
+| [`docs/design/03_COMPONENTS.md`](docs/design/03_COMPONENTS.md) | Component catalog (NativeAnchor, SolidarityCard, etc.) |
+| [`docs/design/04_ASSETS.md`](docs/design/04_ASSETS.md) | Asset IDs (KR-SOLID-XXX), manifest, naming convention |
+| [`docs/design/05_FLOWS.md`](docs/design/05_FLOWS.md) | Page-level UX flows and screen placement |
+| [`.claude/skills/SKILL_REGISTRY.md`](.claude/skills/SKILL_REGISTRY.md) | 67 agents — pipeline roles, priority tiers |
+
+---
+
+_Tokens are law. Semantic color variables (`--sys-color-*`) are the source of truth. All components consume design tokens, never hardcoded colors. KR Solidarity v6.0 mode only. Zero-Flora. No Jar archetype. No labWrenMetalBlue._

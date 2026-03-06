@@ -1,6 +1,6 @@
 # AGENTS.md
 
-Career Copilot is an AI-powered job application assistant built with React, FastAPI, Google Genkit, and Supabase/Postgres (with legacy Firestore artifacts still present). This document guides AI models and coding agents on project conventions, workflows, dependencies, code style, testing, security, and boundaries.
+Career Copilot is an AI-powered job application assistant built with React, FastAPI, Google Genkit, and Postgres (Firebase/Cloud Run hosted). This document guides AI models and coding agents on project conventions, workflows, dependencies, code style, testing, security, and boundaries.
 
 **Note**: This file complements README.md by providing detailed context for AI agents and coding assistants across multiple platforms (GitHub Copilot, OpenAI Codex, Claude, etc.).
 
@@ -69,25 +69,40 @@ cd frontend && yarn test:e2e
 
 ### Design System
 
-- **Name**: kerala-rage – Contemporary Australian Design System
-- **Foundation**: Material 3 Expressive, dark theme by default
-- **Palette**:
-  - Background/surface: Asphalt Black `#1A1714`
-  - Text: Paper White `#F5F0E8`
-  - Primary actions: Wattle Gold `#D4A84B`
-  - Alerts/urgency: [DEPRECATED_STYLE] Red `#C45C4B`
-  - Structural neutrals: Ochre Earth `#B8733D`, Concrete Grey `#A39B8F`
-  - Growth accents: Gum Leaf Green `#6B7F6E`
+- **Name**: KR Solidarity v6.0 – Manifesto-Driven Design System
+- **Foundation**: Material 3 Expressive, dark theme only ("Solidarity Mode")
+- **Canon Docs** (read these before any design work):
+  - [`docs/design/01_CANON.md`](docs/design/01_CANON.md) — Identity, Non-Negotiables, Zero-Flora Rule
+  - [`docs/design/02_SYSTEM.md`](docs/design/02_SYSTEM.md) — Palette, Typography, Shape Archetypes
+  - [`docs/design/03_COMPONENTS.md`](docs/design/03_COMPONENTS.md) — Component Catalog
+  - [`docs/design/04_ASSETS.md`](docs/design/04_ASSETS.md) — Asset IDs, Manifest, Naming
+  - [`docs/design/05_FLOWS.md`](docs/design/05_FLOWS.md) — Page-level UX Flows
+  - [`.claude/skills/SKILL_REGISTRY.md`](.claude/skills/SKILL_REGISTRY.md) — 67 agent skills
+- **Palette (v3.2):**
+  - Background/surface: **Solidarity Charcoal** `#1A1714` (`--sys-color-charcoalBackground-base`)
+  - Text: **Worker Ash** `#DAF6B3` (`--sys-color-worker-ash-base`)
+  - Primary actions: **Solidarity Crimson** `#F14714` (`--sys-color-solidarityRed-base`)
+  - Halo/focus: **Ink Gold** `#DAF674` (`--sys-color-inkGold-base`)
+  - Growth accents: **Activist Smoke** `#48DA8B` (`--sys-color-kr-activistSmokeGreen-base`)
+  - Attention: **Stencil Yellow** `#F6E748` (`--sys-color-stencilYellow-base`)
+  - Cool accents: **Protest Metal Blue** `#48B3DA` (`--sys-color-protestMetalBlue-base`)
+  - Structural: **Concrete Grey** `#A39B8F` (`--sys-color-concreteGrey-base`)
+  - **DEPRECATED/PURGED:** `labWrenMetalBlue`, `GumLeafGreen`, `WattleGold`, `inkGreen`
 - **Tokens**:
-  - Source of truth: `frontend/src/design/tokens/tokens.json` (complete Kerala Rage M3 Expressive system)
-  - CSS variables: `frontend/src/design/styles/design-tokens.css` (auto-generated)
-  - Deprecated legacy file: `design-system/tokens.json` (Material Design 3 only, incomplete — do not use)
-  - All UI must use semantic tokens (--sys-color-*); no hardcoded hex values
+  - Source of truth: `frontend/src/design/tokens/tokens.json` (complete KR Solidarity v6.0 system)
+  - CSS variables: `frontend/src/design/styles/design-tokens.css` (auto-generated via `python3 scripts/build-m3-tokens.py`)
+  - Deprecated legacy file: `design-system/tokens.json` (Material Design 3 only — do not use)
+  - All UI must use semantic tokens (`--sys-color-*`); no hardcoded hex values
 - **Aesthetic**:
-  - Contemporary Australian, Peter Drew street art influence
-  - Australian endemic species as living, present-day symbols
-  - Explicitly avoid kerala-streetprint kr-motif plates, museum-cabinet framing, or colonial nostalgia
-- **Target Users**: Transitioning to social work, community services, government/nonprofit roles
+  - Screenprint manifesto + street-art wheat-paste + Kerala diaspora identity
+  - **STRICT ZERO-FLORA LOCKDOWN**: No flora, no Australian endemic species, no gum leaves
+  - No bureaucratic motifs (passports, borders, visas, government seals)
+  - No perfect geometry (`border-radius: 50%` banned); use Pebble / Stone / Slab archetypes
+- **Components** (reference implementations):
+  - `KeralaRageButton` (`Pebble` archetype)
+  - `SolidarityCard` (`Slab` archetype — **not** Jar)
+  - `NativeAnchor` (`Stone` archetype, symbolic anchor with Halo/Grit/Blueprint)
+  - `ManifestoSlab`, `Lens`, `Signal`, `HaloPulses`
 
 ## Key Technologies
 
@@ -99,7 +114,7 @@ cd frontend && yarn test:e2e
 | Document Parsing       | pdfminer.six + python-docx (`IngestionService`)                | PDF/DOCX ingestion and chunking                            |
 | Backend API            | FastAPI                                                       | Type safety, async-first, auto OpenAPI docs                |
 | Frontend               | React 18 + TS                                                  | Component-driven, strict typing, kerala-rage design tokens  |
-| Design System          | kerala-rage Contemporary Australian                            | Material 3 Expressive, dark UI, Australian endemic palette |
+| Design System          | KR Solidarity v6.0 (Manifesto Canon)                           | M3 Expressive, Zero-Flora, dark-only                       |
 | State Management       | React Context + Zustand                                        | Auth context + lightweight global state                    |
 | Data Fetching          | TanStack Query + axios                                         | Server state, caching, async requests                      |
 | Data Persistence       | Postgres via SQLAlchemy (Supabase) + SQLite dev                | Primary DB with local dev fallback                         |
@@ -155,7 +170,7 @@ design-system/
 - ✅ Include confidence scores where the response schema supports it
 - ✅ Use async/await in FastAPI endpoints and Genkit flows
 - ✅ Use TypeScript strict mode (`tsconfig.json: "strict": true`)
-- ✅ Apply kerala-rage kr-solidarity design tokens for all UI (no hardcoded colors)
+- ✅ Apply KR Solidarity v6.0 design tokens for all UI (no hardcoded colors, **zero-flora**, Pebble/Stone/Slab archetypes only)
 - ✅ Validate all AI agent inputs before processing
 - ✅ Test AI agents with sample user data before deployment
 - ✅ Use environment variables for API keys, model configs, and secrets
@@ -172,7 +187,10 @@ design-system/
 - ❌ Do NOT query Supabase/Postgres/Firestore directly from React components (use API layer only)
 - ❌ Do NOT introduce new Firebase client usage (legacy server-side only)
 - ❌ Do NOT commit sensitive files (`.env.local`, API credentials)
-- ❌ Do NOT use Inter, Roboto, or Arial fonts (use Fraunces, Caveat, Work Sans from kerala-rage)
+- ❌ Do NOT use Inter, Roboto, Arial, Sora, or Plus Jakarta Sans (use only: Work Sans, Fraunces, JetBrains Mono, Libre Bodoni, Caveat, Nabla)
+- ❌ Do NOT use Australian flora/fauna motifs (STRICT ZERO-FLORA LOCKDOWN per `docs/design/01_CANON.md`)
+- ❌ Do NOT use `labWrenMetalBlue` token — deprecated; use `protestMetalBlue`
+- ❌ Do NOT use `Jar` or `Cabinet` archetype names in new components — use `Pebble`, `Stone`, `Slab`
 
 ## Git Workflow & Safety Boundaries
 
@@ -414,7 +432,9 @@ Include timing in agent metadata for monitoring.
 - [ ] Tests pass: `cd frontend && yarn test` and `cd backend && pytest`
 - [ ] Type check passes: `cd frontend && yarn type-check` and `cd backend && mypy .`
 - [ ] Linting passes: `cd frontend && yarn lint` and `cd backend && ruff check .`
-- [ ] Code follows kerala-rage design system (if UI changes)
+- [ ] Code follows KR Solidarity v6.0 design system (if UI changes) — check `docs/design/01_CANON.md`
+- [ ] Design: Zero-Flora confirmed — no botanical/endemic references
+- [ ] Design: Only semantic tokens used (`--sys-color-*`, `--sys-shape-*`, `--sys-type-*`)
 - [ ] AI agent I/O matches documented contracts
 - [ ] No secrets committed (check `.gitignore`)
 - [ ] Commit message format: `feat(scope): description` or `fix(scope): description`

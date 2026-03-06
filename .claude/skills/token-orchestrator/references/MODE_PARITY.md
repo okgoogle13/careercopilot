@@ -1,16 +1,16 @@
-# Gallery ↔ Laboratory Mode Parity
+# [ARCHIVE] Mode Parity (Abolished v6.0)
 
-The Northcote Curio design system operates in two modes representing different emotional states.
-
-## Contents
-- [Mode philosophy](#mode-philosophy)
-- [Required equivalents](#required-equivalents)
-- [Checking parity](#checking-parity)
-- [Common parity violations](#common-parity-violations)
+> [!CAUTION]
+> **ABOLISHED STATUS**: Mode Parity (Gallery vs Laboratory) was officially abolished in KR Solidarity v6.0.
+> The system now enforces a **Single Mode: Solidarity**.
+> This document remains for historical auditing purposes only.
 
 ---
 
-## Mode Philosophy
+## Historical Context
+The Northcote Curio design system previously operated in two modes representing different emotional states. This was replaced by the unified Kerala Rage "Agit-Prop" aesthetic.
+
+### 1. Mode Philosophy (Legacy)
 
 **Gallery Mode** ("The Front Parlour"):
 - Emotional, colorful, wonder-filled
@@ -26,28 +26,28 @@ The Northcote Curio design system operates in two modes representing different e
 - For: Resume Analysis, Skills Extraction, Document Parsing
 - Atmosphere: "The Audit"
 
-## Required Equivalents
+### 2. Required Equivalents (Legacy)
 
 For each semantic token in Gallery, a Laboratory equivalent must exist with:
 - Same semantic purpose
 - Different color temperature
 - Equivalent contrast ratios
 
-### Surface Parity Example
+#### Surface Parity Example
 
 ```json
 {
   "color": {
     "surface": {
       "gallery": {
-        "eucalyptSmoke": { 
+        "eucalyptSmoke": {
           "$value": "#2C2723",
           "$type": "color",
           "$description": "Primary card surface (warm)"
         }
       },
       "laboratory": {
-        "slateSmoke": { 
+        "slateSmoke": {
           "$value": "#252230",
           "$type": "color",
           "$description": "Primary card surface (cool)"
@@ -62,7 +62,7 @@ Both serve as "primary card surface" but differ in warmth.
 
 ---
 
-## Checking Parity
+### 3. Checking Parity (Legacy)
 
 ```bash
 python scripts/check_mode_parity.py
@@ -85,9 +85,9 @@ python scripts/check_mode_parity.py
 
 ---
 
-## Common Parity Violations
+### 4. Common Parity Violations (Legacy)
 
-### 1. Missing Laboratory Equivalent
+#### 1. Missing Laboratory Equivalent
 
 **Problem**:
 ```json
@@ -110,7 +110,7 @@ python scripts/check_mode_parity.py
 }
 ```
 
-### 2. Type Mismatch
+#### 2. Type Mismatch
 
 **Problem**:
 ```json
@@ -133,7 +133,7 @@ python scripts/check_mode_parity.py
 }
 ```
 
-### 3. Semantic Mismatch
+#### 3. Semantic Mismatch
 
 **Problem**: Gallery token represents "success" but Laboratory equivalent represents "warning"
 

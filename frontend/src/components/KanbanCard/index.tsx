@@ -97,7 +97,7 @@ export const KanbanCard: React.FC<KanbanCardProps> = ({
       </div>
 
       {/* Subtle screenprint substrate */}
-      <div className="absolute inset-0 opacity-[0.05] pointer-events-none bg-[url('/assets/noise-texture.png')] mix-blend-overlay" />
+      <div className="absolute inset-0 opacity-[0.05] pointer-events-none bg-[url('/assets/kr-solidarity/texture/kr-solidarity__atmospheric__texture--asphalt-grain--v2.png')] mix-blend-overlay" />
     </motion.div>
   );
 };

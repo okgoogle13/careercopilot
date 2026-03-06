@@ -69,6 +69,7 @@
     "tokens:figma:push": "node scripts/sync-tokens-to-figma-vars.mjs --push",
     "tokens:figma:pull": "node scripts/sync-tokens-to-figma-vars.mjs --pull",
     "tokens:figma:sync": "node scripts/sync-tokens-to-figma-vars.mjs --sync",
+    "design:orchestrate:all": "bash scripts/design-orchestrate-all.sh",
     "docs": "jsdoc -c jsdoc.config.json",
     "docs:serve": "serve docs/api",
     "docs:clean": "rimraf docs/api",

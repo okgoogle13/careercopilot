@@ -1,0 +1,24 @@
+{
+  "version": "1.0.0",
+  "generated_on": "2026-03-06",
+  "probes": [
+    {
+      "id": "hero_render_presence",
+      "description": "Verify hero rendering is wired for the five target pages.",
+      "command": "python3 scripts/check_hero_render_presence.py",
+      "success_condition": "unrendered_hero_pages == 0"
+    },
+    {
+      "id": "asset_404_rate",
+      "description": "Ensure runtime /assets references resolve on disk.",
+      "command": "python3 scripts/check_runtime_asset_paths.py",
+      "success_condition": "missing_count == 0"
+    },
+    {
+      "id": "dtcg_token_compliance",
+      "description": "Validate DTCG token compliance at 100%.",
+      "command": "python3 scripts/design-validation/validate-tokens.py",
+      "success_condition": "exit_code == 0"
+    }
+  ]
+}

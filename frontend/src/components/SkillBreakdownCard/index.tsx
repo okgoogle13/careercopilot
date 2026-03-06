@@ -40,7 +40,7 @@ export const SkillBreakdownCard: React.FC<SkillBreakdownCardProps> = ({
   return (
     <div className="p-8 bg-charcoal-100 rounded-stone shadow-viscous border border-blueprint-grey/10 relative overflow-hidden">
       {/* Blueprint Grid Background */}
-      <div className="absolute inset-0 opacity-[0.08] pointer-events-none bg-[url('/assets/blueprint-grid.svg')] z-0" />
+      <div className="absolute inset-0 opacity-[0.08] pointer-events-none bg-[url('/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__ui--kr-ui-018--v1.svg')] z-0" />
 
       <div className="relative z-10 flex flex-col gap-12">
         <div className="flex flex-col md:flex-row items-center gap-8">

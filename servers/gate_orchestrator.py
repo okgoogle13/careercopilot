@@ -150,7 +150,7 @@ async def _check_build() -> Dict[str, Any]:
     be_result = await loop.run_in_executor(
         executor,
         _run_command,
-        "cd backend && source venv/bin/activate && pytest --co -q",
+        "cd backend && . ../venv/bin/activate && pytest --co -q",
         None,
         120
     )
@@ -211,7 +211,7 @@ async def _check_test() -> Dict[str, Any]:
     be_result = await loop.run_in_executor(
         executor,
         _run_command,
-        "cd backend && source venv/bin/activate && pytest --cov=app --cov-report=term-missing 2>/dev/null | grep -E 'TOTAL|passed|failed' || echo 'tests_passed'",
+        "cd backend && . ../venv/bin/activate && pytest --cov=app --cov-report=term-missing 2>/dev/null | grep -E 'TOTAL|passed|failed' || echo 'tests_passed'",
         None,
         180
     )
@@ -274,7 +274,7 @@ async def _check_lint() -> Dict[str, Any]:
     be_result = await loop.run_in_executor(
         executor,
         _run_command,
-        "cd backend && source venv/bin/activate && mypy app --show-error-codes 2>&1 || true",
+        "cd backend && . ../venv/bin/activate && mypy app --show-error-codes 2>&1 || true",
         None,
         120
     )
@@ -337,7 +337,7 @@ async def _check_security() -> Dict[str, Any]:
     be_result = await loop.run_in_executor(
         executor,
         _run_command,
-        "cd backend && source venv/bin/activate && safety check 2>&1 || true",
+        "cd backend && . ../venv/bin/activate && safety check 2>&1 || true",
         None,
         120
     )

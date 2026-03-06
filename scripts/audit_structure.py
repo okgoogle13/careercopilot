@@ -16,6 +16,8 @@ except ImportError:
 TOKEN_SOURCE_FILE = 'frontend/src/design/tokens/tokens.json'
 TOKEN_SCHEMA = ['color', 'spacing', 'radius', 'typography', 'shadow', 'motion']
 REQUIRED_COLOR_ROLES = ['primary', 'secondary', 'tertiary', 'neutral', 'error']
+# Keys that are metadata on a color group, not DTCG token leaves
+METADATA_KEYS = {'steps', 'usage', 'tags', 'aliases', 'deprecated', 'description'}
 
 def hex_to_rgb(hex_code):
     """Converts #RRGGBB or #RGB to (r, g, b) tuple."""
@@ -66,9 +68,13 @@ def main():
 
     visited_aliases = {}
 
-    def walk(obj, path=""):
+    def walk(obj, path="", parent_key=""):
         nonlocal total_tokens, valid_tokens
         if isinstance(obj, dict):
+            # Skip known metadata keys that are NOT DTCG token leaves
+            if parent_key in METADATA_KEYS:
+                return
+
             # Check if it's a leaf/token
             is_token = "$value" in obj or "value" in obj
 
@@ -102,9 +108,13 @@ def main():
                     elif isinstance(val, str) and val.isdigit():
                          warnings.append(f"{path}\n   Value is numeric string (\"{val}\") instead of string with units (e.g., \"{val}px\")")
 
-                # Color format check
+                # Color format check — only on actual token $value, not metadata.
+                # Use $type=color OR path segment exactly equals 'color' (not substring like 'colorAccent').
                 obj_type = obj.get("$type")
-                if obj_type == "color" or "color" in path:
+                is_color_token = (obj_type == "color") or (
+                    obj_type is None and re.search(r'(^|\.)color(\.|$)', path)
+                )
+                if is_color_token:
                     if val and not is_color(val) and not (isinstance(val, str) and val.startswith("{")):
                         critical_issues.append(f"{path}\n   Invalid color format: {val}")
                         token_valid = False
@@ -114,7 +124,7 @@ def main():
 
             for key, val in obj.items():
                 if not key.startswith("$") and key != "value":
-                    walk(val, f"{path}.{key}" if path else key)
+                    walk(val, f"{path}.{key}" if path else key, parent_key=key)
 
     walk(tokens)
 

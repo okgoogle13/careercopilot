@@ -6,6 +6,7 @@ Build Kerala Rage design tokens into CSS variables and Tailwind configuration.
 import json
 import os
 import sys
+from typing import Any
 
 # Define I/O paths (Kerala Rage locations)
 TOKEN_SOURCE_FILE = 'frontend/src/design/tokens/tokens.json'
@@ -34,6 +35,38 @@ def resolve_values(node):
         return {k: resolve_values(v) for k, v in node.items() if not k.startswith('$')}
     elif isinstance(node, list):
         return [resolve_values(x) for x in node]
+    return node
+
+def get_by_path(node: dict[str, Any], path: str) -> Any:
+    """Resolve a dot-separated path from a nested dictionary."""
+    parts = path.split('.')
+    # Allow aliases that still reference the pre-unwrapped "sys" root.
+    if parts and parts[0] == 'sys' and isinstance(node, dict) and 'sys' not in node:
+        parts = parts[1:]
+
+    current: Any = node
+    for part in parts:
+        if not isinstance(current, dict) or part not in current:
+            return None
+        current = current[part]
+    return current
+
+def resolve_aliases(node: Any, root: dict[str, Any]) -> Any:
+    """Resolve token aliases like {sys.color.inkGold.base} into concrete values."""
+    if isinstance(node, dict):
+        return {k: resolve_aliases(v, root) for k, v in node.items()}
+    if isinstance(node, list):
+        return [resolve_aliases(item, root) for item in node]
+    if isinstance(node, str) and node.startswith('{') and node.endswith('}'):
+        alias_path = node[1:-1].strip()
+        alias_value = get_by_path(root, alias_path)
+        if alias_value is None:
+            return node
+        if isinstance(alias_value, dict) and '$value' in alias_value:
+            return resolve_aliases(resolve_values(alias_value), root)
+        if isinstance(alias_value, (dict, list)):
+            return resolve_aliases(alias_value, root)
+        return alias_value
     return node
 
 def flatten_dict(d, parent_key='', sep='-'):
@@ -184,6 +217,7 @@ def main():
     # Resolve $value references
     print("RESOLVING DTCG values...")
     tokens = resolve_values(root)
+    tokens = resolve_aliases(tokens, root)
     # Filter out top-level compliance or documentation keys
     if isinstance(tokens, dict):
         tokens = {k: v for k, v in tokens.items() if k not in ['compliance', 'documentation', 'metadata']}
