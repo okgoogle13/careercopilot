@@ -174,10 +174,11 @@ jobs:
   design-orchestrator:
     name: Design Orchestrator Gate
     runs-on: ubuntu-latest
-    if: >
-      (github.event_name == 'pull_request' || github.event_name == 'push' || github.event_name == 'workflow_dispatch')
-      && (github.event_name == 'workflow_dispatch' || needs.changes.outputs.design == 'true')
     needs: [changes]
+    if: >
+      always()
+      && (needs.changes.result == 'success' || needs.changes.result == 'skipped')
+      && (github.event_name == 'workflow_dispatch' || needs.changes.outputs.design == 'true')
     steps:
       - name: Checkout
         uses: actions/checkout@v4
