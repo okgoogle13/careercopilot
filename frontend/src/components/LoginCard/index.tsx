@@ -66,7 +66,7 @@ export const LoginCard: React.FC<LoginCardProps> = ({
         {/* Screenprint Substrate Overlay */}
         <div className="absolute inset-0 opacity-[0.08] pointer-events-none bg-[url('/assets/kr-solidarity/texture/kr-solidarity__atmospheric__texture--asphalt-grain--v2.png')] mix-blend-overlay" />
 
-        <h2 className="text-display-lg font-serif italic text-paper-white tracking-tighter">
+        <h2 className="text-display font-black text-paper-white tracking-widest text-center">
           VERIFY IDENTITY
         </h2>
 
@@ -74,7 +74,7 @@ export const LoginCard: React.FC<LoginCardProps> = ({
           <div className="space-y-2">
             <label
               htmlFor="email-input"
-              className="text-blueprint-grey font-jetbrains-mono text-xs uppercase tracking-widest"
+              className="text-blueprint-grey font-jetbrains-mono text-micro font-light uppercase tracking-widest"
             >
               Email Address
             </label>
@@ -95,7 +95,7 @@ export const LoginCard: React.FC<LoginCardProps> = ({
           <div className="space-y-2">
             <label
               htmlFor="password-input"
-              className="text-blueprint-grey font-jetbrains-mono text-xs uppercase tracking-widest"
+              className="text-blueprint-grey font-jetbrains-mono text-micro font-light uppercase tracking-widest"
             >
               Password
             </label>

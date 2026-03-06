@@ -1,9 +1,17 @@
 import React from 'react';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 // Mock framer-motion
 (jest as any).unstable_mockModule('framer-motion', () => ({
   motion: {
-    div: ({ children, onDragOver, onDragLeave, onDrop, className, animate, ...props }: any) => (
+    div: ({
+      children,
+      onDragOver,
+      onDragLeave,
+      onDrop,
+      className,
+      animate: _animate,
+      ...props
+    }: any) => (
       <div
         onDragOver={onDragOver}
         onDragLeave={onDragLeave}

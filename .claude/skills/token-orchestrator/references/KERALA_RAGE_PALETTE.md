@@ -2,9 +2,9 @@
 
 ## Primary (The Revolution)
 
-- **Charcoal (Background)**: `#1A1714` (The Void, The Night, The Coal)
-- **[DEPRECATED_STYLE] Red (Primary/Action)**: `#F14714` (Urgency, Blood, Heat, Agit-Prop)
-- **Baru Gold (Accent/Highlight)**: `#DAF674` (Wattle, Hope, Wealth, Solidarity)
+- **Charcoal (Background)**: `#1A1714` (The Void, The Night, The Coal) -> `--sys-color-charcoalBackground-base`
+- **Solidarity Red (Primary/Action)**: `#F14714` (Urgency, Blood, Heat, Agit-Prop) -> `--sys-color-solidarityRed-base`
+- **Ink Gold (Accent/Highlight)**: `#DAF674` (Temple Radiance, Hope, Wealth, Solidarity) -> `--sys-color-inkGold-base`
 
 ## Semantic Roles
 
@@ -17,9 +17,9 @@
 ### Typography
 
 - **Primary Text**: `#FFFFFF` (Pure White - Maximum Contrast on Charcoal).
-- **Secondary Text**: `#B0B0B0` (Light Grey - Utility).
-- **Accent Text**: `#DAF674` (Baru Gold - Links/Highlights).
-- **Destructive/Urgent Text**: `#F14714` ([DEPRECATED_STYLE] Red).
+- **Secondary Text**: `#DAF6B3` (Worker Ash - Readable linework).
+- **Accent Text**: `#DAF674` (Ink Gold - Links/Highlights).
+- **Destructive/Urgent Text**: `#F14844` (KR Charcoal Red).
 
 ### UI Elements
 

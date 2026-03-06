@@ -76,8 +76,10 @@ export function Register() {
           </div>
 
           <div className="text-center mb-10">
-            <h1 className="text-6xl text-bloom-ultra text-ink-gold mb-2">New KrMotif</h1>
-            <p className="text-curator-accent text-concrete-grey opacity-70">
+            <h1 className="text-display font-black text-ink-gold mb-2 uppercase tracking-tighter">
+              New Collective
+            </h1>
+            <p className="text-micro font-light text-concrete-grey opacity-[0.8] uppercase tracking-widest leading-none">
               Register with the station
             </p>
           </div>
@@ -100,7 +102,7 @@ export function Register() {
             <div className="group">
               <label
                 htmlFor="displayName"
-                className="block text-xs text-ink-gold mb-2 font-annotation tracking-widest uppercase"
+                className="block text-micro font-light text-ink-gold mb-2 font-annotation tracking-widest uppercase"
               >
                 Common Name (Display Name)
               </label>
@@ -121,7 +123,7 @@ export function Register() {
             <div className="group">
               <label
                 htmlFor="email"
-                className="block text-xs text-ink-gold mb-2 font-annotation tracking-widest uppercase"
+                className="block text-micro font-light text-ink-gold mb-2 font-annotation tracking-widest uppercase"
               >
                 Station ID (Email)
               </label>
@@ -144,7 +146,7 @@ export function Register() {
                 <label
                   htmlFor="password"
                   title="Keychain"
-                  className="block text-xs text-ink-gold mb-2 font-annotation tracking-widest uppercase overflow-hidden text-ellipsis whitespace-nowrap"
+                  className="block text-micro font-light text-ink-gold mb-2 font-annotation tracking-widest uppercase overflow-hidden text-ellipsis whitespace-nowrap"
                 >
                   Keychain
                 </label>
@@ -160,7 +162,7 @@ export function Register() {
                 <label
                   htmlFor="confirmPassword"
                   title="Verify"
-                  className="block text-xs text-ink-gold mb-2 font-annotation tracking-widest uppercase overflow-hidden text-ellipsis whitespace-nowrap"
+                  className="block text-micro font-light text-ink-gold mb-2 font-annotation tracking-widest uppercase overflow-hidden text-ellipsis whitespace-nowrap"
                 >
                   Verify
                 </label>

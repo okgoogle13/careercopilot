@@ -25,9 +25,9 @@ border: 1px solid rgba(212, 168, 75, 0.12);
 
 **After** (using tokens):
 ```css
-background: var(--sys-color-wattle-gold);
-color: var(--sys-color-kr-motif-night);
-border: 1px solid var(--sys-color-wattle-gold-container);
+background: var(--sys-color-inkGold-base);
+color: var(--sys-color-charcoalBackground-base);
+border: 1px solid var(--sys-color-inkGold-base); /* Using base as container alias */
 ```
 
 ---
@@ -106,11 +106,11 @@ height: 100vh;
 
 | CSS Property | Token Prefix | Example |
 |--------------|--------------|---------|
-| Colors | `--sys-color-` | `var(--sys-color-wattle-gold)` |
-| Spacing | `--sys-spacing-` | `var(--sys-spacing-4)` |
-| Shadows | `--sys-elevation-` | `var(--sys-elevation-rest)` |
-| Shapes | `--sys-shape-` | `var(--sys-shape-stone)` |
-| Typography | `--sys-font-` | `var(--sys-font-display-large)` |
+| Colors | `--sys-color-` | `var(--sys-color-inkGold-base)` |
+| Spacing | `--sys-spacing-` | `var(--sys-spacing-lg)` |
+| Shadows | `--sys-elevation-` | `var(--sys-elevation2-stone)` |
+| Shapes | `--sys-shape-` | `var(--sys-shape-radius-stone)` |
+| Typography | `--sys-font-` | `var(--sys-font-primary)` |
 | Motion | `--sys-duration-` | `var(--sys-duration-fast)` |
 
 ---

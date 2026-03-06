@@ -5,7 +5,7 @@ import { SkillBreakdownCard, type SkillCategory } from '../index';
 // Mock framer-motion
 jest.mock('framer-motion', () => ({
   motion: {
-    circle: ({ animate, initial, className }: any) => (
+    circle: ({ animate: _animate, initial: _initial, className }: any) => (
       <circle
         className={className}
         data-testid="motion-circle"

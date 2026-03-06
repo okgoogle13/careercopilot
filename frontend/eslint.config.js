@@ -64,6 +64,7 @@ export default [
       'playwright-report/**',
       'test-results/**',
       '__mocks__/**',
+      'coverage/**',
     ],
   },
   {

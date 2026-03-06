@@ -332,7 +332,7 @@ export const AnalysisPage: React.FC = () => {
                     {strategyResult.corporate_profile.core_values.slice(0, 2).map((v, i) => (
                       <span
                         key={i}
-                        className="text-[10px] font-annotation bg-white/5 px-1.5 py-0.5 rounded-stone text-concrete-grey"
+                        className="text-[10px] font-annotation bg-[var(--color-asphalt-black-light)] px-1.5 py-0.5 rounded-stone text-concrete-grey"
                       >
                         {v}
                       </span>

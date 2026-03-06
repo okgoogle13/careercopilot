@@ -234,7 +234,7 @@ export function JobQueue() {
 
       {jobs.length === 0 && !error ? (
         <div className="text-center py-32 opacity-60">
-          <div className="w-20 h-20 bg-white/5 rounded-sentry flex items-center justify-center mx-auto mb-6 border border-white/10">
+          <div className="w-20 h-20 bg-[var(--color-asphalt-black-light)] rounded-sentry flex items-center justify-center mx-auto mb-6 border border-[var(--color-concrete-grey-dark)]/20">
             <Sparkles className="w-10 h-10 text-[var(--color-concrete-grey-dark)]" />
           </div>
           <h3 className="font-bloom text-3xl mb-2 text-[var(--color-paper-white)]">
@@ -287,7 +287,7 @@ export function JobQueue() {
             </div>
           )}
 
-          <div className="bg-white/5 p-8 rounded-stone border border-white/5 shadow-inner">
+          <div className="bg-[var(--color-asphalt-black-dark)] p-8 rounded-stone border border-[var(--color-concrete-grey-dark)]/10 shadow-inner">
             <pre className="font-field-note text-base text-[var(--color-paper-white)]/90 whitespace-pre-wrap leading-relaxed">
               {coverLetter}
             </pre>

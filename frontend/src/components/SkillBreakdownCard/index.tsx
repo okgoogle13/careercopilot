@@ -1,12 +1,5 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { clsx, type ClassValue } from 'clsx';
-import { twMerge } from 'tailwind-merge';
-
-/** Utility for Tailwind class merging */
-function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
-}
+import React from 'react';
+import { motion } from 'framer-motion';
 
 export interface SkillCategory {
   label: string;
@@ -35,7 +28,7 @@ export const SkillBreakdownCard: React.FC<SkillBreakdownCardProps> = ({
   overallScore,
   categories,
   onAction,
-  isLoading = false,
+  isLoading: _isLoading = false,
 }) => {
   return (
     <div className="p-8 bg-charcoal-100 rounded-stone shadow-viscous border border-blueprint-grey/10 relative overflow-hidden">

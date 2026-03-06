@@ -37,7 +37,7 @@ export const KeralaRageButton = React.forwardRef<HTMLButtonElement, KeralaRageBu
     ref
   ) => {
     // Note: System is now dark-only as per spec. mode choice is purely for transition stability.
-    const { mode } = useMode();
+    const { mode: _mode } = useMode();
 
     // Size variants
     const sizeClasses = {

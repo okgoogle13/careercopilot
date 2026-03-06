@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
-import { ManifestoSlab, ManifestoCard, ActionButton } from '../../../components/kerala-rage';
+import { ManifestoCard } from '../../../components/kerala-rage';
 import { LayeredHero } from '../../../components/kerala-rage/LayeredHero';
 import { NativeAnchor } from '../../../components/ui';
 import type { SolidarityManifest } from '../../../design/hero/heroTypes';
 import { composeHero } from '../../../lib/composeHero';
-import type { CompositionResult } from '../../../lib/composeHero';
 import { loadHeroRegistry } from '../../../design/hero/heroRegistry';
 import {
   getDefaultVariant,
