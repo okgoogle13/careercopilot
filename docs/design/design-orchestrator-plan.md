@@ -80,3 +80,17 @@ After running either orchestrator command, check:
 - `docs/design/runs/<timestamp>.json`
 - `docs/design/generated/visual-audit-gallery.md`
 - `docs/design/generated/previews/<targetId>.png`
+
+
+## Entrypoint Policy
+
+- Primary top-level design automation entrypoint: orchestrator commands only.
+- Legacy one-off skills may execute only as orchestrator-internal wrappers (not as primary release gates).
+
+
+## Skill Invocation Policy (Cleanup Phase)
+
+- Skill lifecycle decisions are tracked in `docs/design/design-skill-lifecycle.md`.
+- Machine-readable lifecycle state is tracked in `design/contracts/skill-lifecycle.json`.
+- Orchestrator wrapper stage (`legacy-skill-wrapper-map`) validates WRAP skills are present before downstream stages execute.
+- Non-orchestrated direct skill usage is considered low-level/manual and should not be used as release gate authority.

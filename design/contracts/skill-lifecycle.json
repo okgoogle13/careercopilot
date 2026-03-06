@@ -1,0 +1,24 @@
+{
+  "version": "1.0.0",
+  "source": "docs/design/design-skill-lifecycle.md",
+  "skills": [
+    {"name": "component-spec-scaffolder", "state": "WRAP", "stage": "spec-generation"},
+    {"name": "wireframe-annotator", "state": "WRAP", "stage": "wireframe-generation"},
+    {"name": "asset-placement-strategy", "state": "WRAP", "stage": "asset-placement"},
+    {"name": "hifi-blueprint-linter", "state": "WRAP", "stage": "hifi-lint"},
+    {"name": "component-builder", "state": "WRAP", "stage": "component-generation"},
+    {"name": "component-transformer", "state": "WRAP", "stage": "component-migration"},
+    {"name": "design-system-doc-generator", "state": "WRAP", "stage": "docs-protocol-sync"},
+    {"name": "component-spec-generator", "state": "DEMOTE", "stage": "manual"},
+    {"name": "asset-token-replacer", "state": "WRAP", "stage": "token-safety-batch-linter"},
+    {"name": "asset-path-validator", "state": "WRAP", "stage": "path-normalizer"},
+    {"name": "token-orchestrator", "state": "WRAP", "stage": "token-safety-batch-linter"},
+    {"name": "design-token-validator", "state": "WRAP", "stage": "token-safety-batch-linter"},
+    {"name": "manifest-reconciler", "state": "WRAP", "stage": "asset-reconciliation"},
+    {"name": "vision-scorer-mcp", "state": "DEMOTE", "stage": "visual-audit-optional"},
+    {"name": "component-visual-audit", "state": "WRAP", "stage": "visual-audit"},
+    {"name": "compliance-dashboard", "state": "DEMOTE", "stage": "reporting"},
+    {"name": "storybook-scaffolder", "state": "DEMOTE", "stage": "manual"},
+    {"name": "jest-test-scaffolder", "state": "DEMOTE", "stage": "manual"}
+  ]
+}

@@ -48,3 +48,23 @@ The custom skills appear to have produced intermediate documentation artifacts, 
 - Added initial design contracts for visual targets and runtime probes under `design/contracts/`.
 - Added run/readiness artifacts and visual gallery outputs under `docs/design/generated/` and `docs/design/runs/`.
 - CI now includes a design orchestrator gate that fails on orchestrator `fail` status.
+
+
+## Legacy Workflow De-authorization
+
+The previous queue/stage-based automation tracking (e.g., old Kerala Rage queue documents) is no longer authoritative for release readiness.
+
+Authoritative readiness now comes from orchestrator artifacts:
+- `docs/design/generated/design-readiness.json`
+- `docs/design/design-readiness.md`
+- `docs/design/runs/<timestamp>.json`
+
+Legacy process documents should be treated as historical context and gradually archived/quarantined under legacy sections.
+
+
+## Skill Lifecycle + Registry Hygiene
+
+- Lifecycle decisions are now documented in `docs/design/design-skill-lifecycle.md` (WRAP / DEMOTE / RETIRE).
+- Added registry hygiene command: `yarn design:registry:hygiene` (script: `scripts/design/registry-hygiene.mjs`).
+- Hygiene report output: `docs/design/generated/skill-registry-hygiene.json`.
+- `SKILL_REGISTRY.md` summary was corrected to match active table count and now includes orchestrator-era lifecycle clusters.

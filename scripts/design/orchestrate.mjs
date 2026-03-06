@@ -58,6 +58,33 @@ function rel(p) {
   return path.relative(ROOT, p);
 }
 
+
+function legacySkillWrapperCheck() {
+  const lifecyclePath = path.join(ROOT, 'design/contracts/skill-lifecycle.json');
+  const missing = [];
+  const wrapped = [];
+
+  const lifecycle = fs.existsSync(lifecyclePath)
+    ? readJson(lifecyclePath)
+    : { skills: [] };
+
+  const wrappedSkills = (lifecycle.skills || []).filter((s) => s.state === 'WRAP').map((s) => s.name);
+
+  for (const skill of wrappedSkills) {
+    const skillPath = path.join(ROOT, '.claude/skills', skill, 'SKILL.md');
+    if (fs.existsSync(skillPath)) wrapped.push(skill);
+    else missing.push(skill);
+  }
+
+  return {
+    name: 'legacy-skill-wrapper-map',
+    passed: missing.length === 0,
+    details: { wrappedSkills: wrapped.length, missingSkills: missing.length },
+    violations: missing.map((skill) => ({ type: 'missing_wrapped_skill', skill })),
+    wrapped,
+  };
+}
+
 function pathNormalizerCheck() {
   const violations = [];
   const generatedSpecs = path.join(ROOT, 'docs/design/generated/specs');
@@ -335,6 +362,7 @@ async function main() {
 
   const stages = [];
   if (mode === 'all') {
+    stages.push(legacySkillWrapperCheck());
     stages.push(pathNormalizerCheck());
     stages.push(tokenSafetyCheck());
     stages.push(wireframeContractCheck());
