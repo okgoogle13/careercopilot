@@ -74,7 +74,8 @@
     "docs:clean": "rimraf docs/api",
     "docs:build": "yarn docs:clean && yarn docs",
     "design:orchestrate:all": "node scripts/design/orchestrate.mjs --mode=all",
-    "design:orchestrate:visual-audit": "node scripts/design/orchestrate.mjs --mode=visual-audit"
+    "design:orchestrate:visual-audit": "node scripts/design/orchestrate.mjs --mode=visual-audit",
+    "design:registry:hygiene": "node scripts/design/registry-hygiene.mjs"
   },
   "config": {
     "commitizen": {

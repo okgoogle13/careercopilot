@@ -3,10 +3,26 @@
 _Last updated: 2026-02-28_
 
 ## Summary
-- Active skills: **67**
+- Active skills: **65**
 - Legacy/placeholder cleanup applied: **yes**
 - Manifest v6.0.0 — 71 assets (32 PNG + 39 SVG), all validated ✅
 - Recommended asset audit combo: **vision-scorer-mcp + asset-placement-strategy + batch-processor**
+
+
+
+## Lifecycle Clusters (Orchestrator Era)
+
+- **Orchestrator + Batch (Primary entrypoints)**: `frontend-design-orchestrator` (repo command layer), `sprint-coordinator`, `batch-processor`, `project-health-checker`, `compliance-dashboard`.
+- **Design Skill Internals (WRAPPED by orchestrator)**: `component-spec-scaffolder`, `wireframe-annotator`, `asset-placement-strategy`, `hifi-blueprint-linter`, `component-builder`, `component-transformer`, `design-token-validator`, `token-orchestrator`, `asset-path-validator`, `asset-token-replacer`, `component-visual-audit`, `vision-scorer-mcp`, `manifest-reconciler`.
+- **Legacy/Low-level (DEMOTED)**: one-off scaffolders and direct generators not used as top-level workflow controls.
+- **Deprecated/Retired**: skills archived under `.claude/skills/_legacy_archive/`.
+
+### Registry Hygiene
+
+Use `node scripts/design/registry-hygiene.mjs` (or `yarn design:registry:hygiene`) to:
+1. Recompute active-skill counts from `.claude/skills/*/SKILL.md`
+2. Compare declared summary count vs parsed active count
+3. Emit orphaned/legacy skill diagnostics
 
 ## Asset Audit Workflow (>=90)
 1. Validate tokens and semantic variable usage (--sys-color-*, --sys-type-*).
