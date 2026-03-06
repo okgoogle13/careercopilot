@@ -40,21 +40,22 @@ jobs:
     name: Detect Code Changes
     runs-on: ubuntu-latest
     outputs:
-      frontend: ${{ steps.filter.outputs.frontend }}
-      backend: ${{ steps.filter.outputs.backend }}
-      functions: ${{ steps.filter.outputs.functions }}
-      firestore_rules: ${{ steps.filter.outputs.firestore_rules }}
-      e2e: ${{ steps.filter.outputs.e2e }}
-      performance: ${{ steps.filter.outputs.performance }}
-      extension: ${{ steps.filter.outputs.extension }}
-      design: ${{ steps.filter.outputs.design }}
-    if: github.event_name != 'workflow_dispatch'
+      frontend: ${{ github.event_name == 'workflow_dispatch' && 'true' || steps.filter.outputs.frontend }}
+      backend: ${{ github.event_name == 'workflow_dispatch' && 'true' || steps.filter.outputs.backend }}
+      functions: ${{ github.event_name == 'workflow_dispatch' && 'true' || steps.filter.outputs.functions }}
+      firestore_rules: ${{ github.event_name == 'workflow_dispatch' && 'true' || steps.filter.outputs.firestore_rules }}
+      e2e: ${{ github.event_name == 'workflow_dispatch' && 'true' || steps.filter.outputs.e2e }}
+      performance: ${{ github.event_name == 'workflow_dispatch' && 'true' || steps.filter.outputs.performance }}
+      extension: ${{ github.event_name == 'workflow_dispatch' && 'true' || steps.filter.outputs.extension }}
+      design: ${{ github.event_name == 'workflow_dispatch' && 'true' || steps.filter.outputs.design }}
     steps:
       - name: Checkout
+        if: github.event_name != 'workflow_dispatch'
         uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
         with:
           fetch-depth: 2
       - name: Calculate paths
+        if: github.event_name != 'workflow_dispatch'
         id: filter
         uses: dorny/paths-filter@v3 # v3.0.2
         with:
