@@ -47,6 +47,7 @@ jobs:
       e2e: ${{ steps.filter.outputs.e2e }}
       performance: ${{ steps.filter.outputs.performance }}
       extension: ${{ steps.filter.outputs.extension }}
+      design: ${{ steps.filter.outputs.design }}
     if: github.event_name != 'workflow_dispatch'
     steps:
       - name: Checkout
@@ -76,6 +77,11 @@ jobs:
               - *backend-paths
             performance:
               - *backend-paths
+            design:
+              - 'design/**'
+              - 'docs/design/**'
+              - 'scripts/design/**'
+              - 'package.json'
             extension:
               - 'chrome-extension/**'
 
@@ -163,6 +169,42 @@ jobs:
         uses: actions/checkout@v4
       - name: Run docs policy check
         run: ./scripts/check-docs.sh
+
+
+  design-orchestrator:
+    name: Design Orchestrator Gate
+    runs-on: ubuntu-latest
+    if: >
+      (github.event_name == 'pull_request' || github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+      && (github.event_name == 'workflow_dispatch' || needs.changes.outputs.design == 'true')
+    needs: [changes]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Enable Corepack for Yarn 4+
+        run: corepack enable
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "yarn"
+          cache-dependency-path: yarn.lock
+      - name: Install dependencies
+        run: yarn install --immutable
+      - name: Run design orchestrator
+        run: yarn design:orchestrate:all
+      - name: Upload design artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: design-orchestrator-artifacts
+          path: |
+            docs/design/generated/design-readiness.json
+            docs/design/design-readiness.md
+            docs/design/generated/visual-audit-gallery.md
+            docs/design/runs/
+            docs/design/generated/previews/
+          if-no-files-found: warn
 
   extension-build:
     name: Extension Build
