@@ -86,7 +86,7 @@ export const JobSearch = () => {
         </div>
 
         {/* Search & Filter Bar */}
-        <div className="bg-[var(--color-surface-container)] p-4 rounded-2xl shadow-sm mb-10 flex flex-col md:flex-row gap-4 items-center border border-[var(--color-surface-container-high)]">
+        <div className="bg-[var(--color-surface-container)] p-4 rounded-placard shadow-sm mb-10 flex flex-col md:flex-row gap-4 items-center border border-[var(--color-surface-container-high)]">
           <div className="flex-1 w-full relative">
             <Lens
               placeholder="Search by job title, company, or keywords..."
@@ -151,7 +151,7 @@ export const JobSearch = () => {
           </div>
 
           {filteredJobs.length === 0 && (
-            <div className="text-center py-20 border-2 border-dashed border-[var(--color-surface-container-high)] rounded-2xl">
+            <div className="text-center py-20 border-2 border-dashed border-[var(--color-surface-container-high)] rounded-placard">
               <Search
                 size={48}
                 className="mx-auto text-[var(--color-text-tertiary)] mb-4 opacity-50"

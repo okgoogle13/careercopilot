@@ -272,7 +272,7 @@ export const WorkflowDiagram: React.FC<WorkflowDiagramProps> = ({
 
   return (
     <div
-      className={`rounded-2xl border border-[var(--sys-color-concreteGrey)]/20 bg-[var(--sys-color-asphaltBlack)] overflow-hidden ${className}`}
+      className={`rounded-placard border border-[var(--sys-color-concreteGrey)]/20 bg-[var(--sys-color-asphaltBlack)] overflow-hidden ${className}`}
     >
       {/* Header */}
       <div className="px-6 py-4 border-b border-[var(--sys-color-concreteGrey)]/20">

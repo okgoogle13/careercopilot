@@ -1,4 +1,4 @@
-import { Cabinet, Pebble, StatusBadge, Stone, type StatusBadgeVariant } from '@/components/ui';
+import { Megaphone, Strike, StatusBadge, Placard, type StatusBadgeVariant } from '@/components/ui';
 import { KanbanCard } from '@/components/KanbanCard';
 import { m3Toast } from '@/utils/toast';
 import { CheckCircle, Clock, Copy, ExternalLink, FileText, Play, Sparkles } from 'lucide-react';
@@ -270,12 +270,11 @@ export function JobQueue() {
         </div>
       )}
 
-      <Cabinet
+      <Megaphone
         open={showCoverLetterDialog}
         onClose={() => setShowCoverLetterDialog(false)}
         title="Strategic Cover Letter"
         maxWidth="2xl"
-        variant="tech"
       >
         <div className="space-y-6">
           {coverLetterJob && (
@@ -294,22 +293,22 @@ export function JobQueue() {
           </div>
 
           <div className="flex justify-end gap-3 pt-4">
-            <Pebble
+            <Strike
               variant="ghost"
               onClick={() => setShowCoverLetterDialog(false)}
             >
               Refine Later
-            </Pebble>
-            <Pebble
+            </Strike>
+            <Strike
               variant="primary"
               iconLeft={<Copy className="w-4 h-4" />}
               onClick={handleCopy}
             >
               {copied ? 'Copied' : 'Secure to Clipboard'}
-            </Pebble>
+            </Strike>
           </div>
         </div>
-      </Cabinet>
+      </Megaphone>
     </div>
   );
 }

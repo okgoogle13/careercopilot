@@ -57,7 +57,7 @@ Incorporate vision feedback into a refined prompt and re-run.
 
 ### Aesthetic Markers
 - **Texture**: Melbourne laneway grit, wheat-paste ripples, stencilled spray-paint.
-- **Shape**: Asymmetric radii (`radius-stone`, `radius-slab`, `radius-pebble`). **BANNED: Perfect circles.**
+- **Shape**: Asymmetric radii (`megaphoneCut01`, `placardTorn01`, `pebbleSurge01`). **BANNED: Perfect circles.**
 - **Hierarchy**: Extreme variable contrast (9× weight ratio, 6× size ratio).
 
 ## Best Practices
@@ -79,7 +79,7 @@ Incorporate vision feedback into a refined prompt and re-run.
 > "**Prompt**: High-contrast stencil illustration of a classic Melbourne W-class tram, Melbourne laneway street art style. Colors: Background `--sys-color-charcoalBackground-base` (#0F0F0F), Accents `--sys-color-solidarityRed-base` (#F14714) and `--sys-color-inkGold-base` (#DAF674). Gritty spray-paint texture, overlapping geometric slabs with asymmetric stone radii. Sharp shadows, 'Solidarity Mode' disruptive aesthetic. Optimized for Nano Banana Pro, 16:9 aspect ratio, hyper-defined edges."
 
 ### Example 2: Workers Council Icon (1:1)
-> "**Prompt**: Industrial stencil-cut silhouette icon of a clenched fist holding a heavy-duty wrench. Style: Hand-stamped Melbourne urban activist aesthetic. Colors: Foreground `--sys-color-worker-ash-base` (#DAF6B3), Background #000000. Imperfect hand-cut 'radius-pebble' edges, slight ink bleed, high legibility at small scale. Optimized for Nano Banana Pro, 1:1."
+> "**Prompt**: Industrial stencil-cut silhouette icon of a clenched fist holding a heavy-duty wrench. Style: Hand-stamped Melbourne urban activist aesthetic. Colors: Foreground `--sys-color-worker-ash-base` (#DAF6B3), Background #000000. Imperfect hand-cut 'pebbleSurge01' edges, slight ink bleed, high legibility at small scale. Optimized for Nano Banana Pro, 1:1."
 
 ### Example 3: Wheat-Paste Texture (Background)
 > "**Prompt**: Abstract background texture of weathered wheat-paste posters over charcoal brick. Style: Melbourne laneway urban grit. Palette: Subtle gradients of `--sys-color-charcoalBackground-steps` (#0F0F0F to #323232). Aesthetic: Torn paper edges, heavy paper tooth, ink drip, zero focus points. Optimized for Nano Banana Pro, 2k resolution."

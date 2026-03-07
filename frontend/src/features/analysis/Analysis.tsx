@@ -399,7 +399,7 @@ export function Analysis() {
                 contentStyle={{
                   backgroundColor: CHART_COLORS.surface,
                   border: '1px solid #484649',
-                  borderRadius: '12px',
+                  borderRadius: 'var(--shape-blockRiot03)',
                   color: CHART_COLORS.onSurface,
                 }}
               />
@@ -445,7 +445,7 @@ export function Analysis() {
                   contentStyle={{
                     backgroundColor: CHART_COLORS.surface,
                     border: '1px solid #484649',
-                    borderRadius: '12px',
+                    borderRadius: 'var(--shape-blockRiot03)',
                     color: CHART_COLORS.onSurface,
                   }}
                 />
@@ -480,7 +480,7 @@ export function Analysis() {
                   contentStyle={{
                     backgroundColor: CHART_COLORS.surface,
                     border: '1px solid #484649',
-                    borderRadius: '12px',
+                    borderRadius: 'var(--shape-blockRiot03)',
                     color: CHART_COLORS.onSurface,
                   }}
                 />

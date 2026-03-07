@@ -1,6 +1,6 @@
-import { Lens, LensArea } from '@/components/ui/Lens';
-import { Pebble } from '@/components/ui/Pebble';
-import { Stone } from '@/components/ui/Stone';
+import { ScaffoldInput as Lens, ScaffoldArea as LensArea } from '@/components/ui/ScaffoldInput';
+import { Strike as Pebble } from '@/components/ui/Strike';
+import { Placard as Stone } from '@/components/ui/Placard';
 import {
   Archive,
   Award,

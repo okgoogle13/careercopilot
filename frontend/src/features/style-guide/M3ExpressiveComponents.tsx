@@ -30,7 +30,7 @@ export function MorphPreviewer() {
   const clipPath = state === 'expressive' ? shapes[currentShape] : 'none';
 
   return (
-    <div className="p-8 bg-surface-container rounded-xl border border-outline-variant space-y-6">
+    <div className="p-8 bg-surface-container rounded-strike border border-outline-variant space-y-6">
       <div className="flex items-center justify-between">
         <h3 className="text-title-large font-bold flex items-center gap-2">
           <Shapes className="w-6 h-6 text-primary" />
@@ -123,7 +123,7 @@ export function AxisVisualizer() {
   const fontVariationSettings = `'wght' ${axes.wght}, 'wdth' ${axes.wdth}, 'GRAD' ${axes.GRAD}`;
 
   return (
-    <div className="p-8 bg-surface-container rounded-xl border border-outline-variant space-y-6">
+    <div className="p-8 bg-surface-container rounded-strike border border-outline-variant space-y-6">
       <h3 className="text-title-large font-bold flex items-center gap-2">
         <Type className="w-6 h-6 text-secondary" />
         Axis Visualizer
@@ -132,7 +132,7 @@ export function AxisVisualizer() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Interactive Typography */}
         <div
-          className="h-64 bg-gradient-to-br from-secondary/10 to-tertiary/10 rounded-xl flex items-center justify-center cursor-pointer border-2 border-dashed border-secondary/30"
+          className="h-64 bg-gradient-to-br from-secondary/10 to-tertiary/10 rounded-strike flex items-center justify-center cursor-pointer border-2 border-dashed border-secondary/30"
           onMouseEnter={() => setIsHovering(true)}
           onMouseLeave={() => setIsHovering(false)}
         >
@@ -274,7 +274,7 @@ export function SlopAuditor() {
   };
 
   return (
-    <div className="p-8 bg-surface-container rounded-xl border border-outline-variant space-y-6">
+    <div className="p-8 bg-surface-container rounded-strike border border-outline-variant space-y-6">
       <div className="flex items-center justify-between">
         <h3 className="text-title-large font-bold flex items-center gap-2">
           <AlertTriangle className="w-6 h-6 text-warning" />
@@ -328,7 +328,7 @@ export function SlopAuditor() {
 
       {/* Test Element */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="h-64 bg-gradient-to-br from-warning/10 to-error/10 rounded-xl flex items-center justify-center border-2 border-dashed border-warning/30">
+        <div className="h-64 bg-gradient-to-br from-warning/10 to-error/10 rounded-strike flex items-center justify-center border-2 border-dashed border-warning/30">
           {testType === 'correct' ? (
             <motion.div
               ref={elementRef}

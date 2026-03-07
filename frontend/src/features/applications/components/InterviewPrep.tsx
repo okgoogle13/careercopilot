@@ -179,7 +179,7 @@ export const InterviewPrep: React.FC<InterviewPrepProps> = ({ onBack }) => {
                 >
                   <div className="p-6 flex flex-col items-center text-center h-full">
                     <div
-                      className="w-16 h-16 rounded-2xl flex items-center justify-center mb-4 transition-colors group-hover:scale-110 duration-300"
+                      className="w-16 h-16 rounded-placard flex items-center justify-center mb-4 transition-colors group-hover:scale-110 duration-300"
                       style={{ backgroundColor: `${category.color}20` }} /* 20 = 12% opacity hex */
                     >
                       <MessageSquare

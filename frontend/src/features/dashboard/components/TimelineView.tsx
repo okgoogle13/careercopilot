@@ -1,6 +1,6 @@
-import { Pebble } from '@/components/ui/Pebble';
+import { Strike } from '@/components/ui/Strike';
 import { StatusBadge } from '@/components/ui/StatusBadge/StatusBadge';
-import { Stone } from '@/components/ui/Stone';
+import { Placard } from '@/components/ui/Placard';
 import {
   AlertCircle,
   ArrowLeft,
@@ -230,7 +230,7 @@ const TimelineEventComponent: React.FC<TimelineEventComponentProps> = ({
 
       {/* Event Content */}
       <div className="flex-1">
-        <Stone
+        <Placard
           elevation={isLatest ? 'raised' : 'flat'}
           className={`${isLatest ? 'border-[var(--color-leaf-base)]' : ''}`}
         >
@@ -353,7 +353,7 @@ const TimelineEventComponent: React.FC<TimelineEventComponentProps> = ({
               </div>
             )}
           </div>
-        </Stone>
+        </Placard>
       </div>
     </div>
   );
@@ -403,13 +403,13 @@ export const TimelineView: React.FC<TimelineViewProps> = ({
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-4">
             {onBack && (
-              <Pebble
+              <Strike
                 variant="ghost"
                 iconLeft={<ArrowLeft size={16} />}
                 onClick={onBack}
               >
                 Back
-              </Pebble>
+              </Strike>
             )}
             <div>
               <h1 className="text-display-small font-bold text-[var(--color-text-primary)]">
@@ -423,13 +423,13 @@ export const TimelineView: React.FC<TimelineViewProps> = ({
               </div>
             </div>
           </div>
-          <Pebble
+          <Strike
             variant="primary"
             iconLeft={<Plus size={16} />}
             onClick={handleAddEvent}
           >
             Add Event
-          </Pebble>
+          </Strike>
         </div>
 
         {/* Progress and Filters */}
@@ -472,7 +472,7 @@ export const TimelineView: React.FC<TimelineViewProps> = ({
       <div className="p-6">
         <div className="max-w-3xl mx-auto">
           {filteredEvents.length === 0 ? (
-            <Stone className="p-12 text-center bg-[var(--color-surface-container-low)] border-dashed border-2 border-[var(--color-surface-container-high)]">
+            <Placard className="p-12 text-center bg-[var(--color-surface-container-low)] border-dashed border-2 border-[var(--color-surface-container-high)]">
               <MessageSquare
                 size={48}
                 className="mx-auto mb-4 text-[var(--color-text-tertiary)]"
@@ -485,14 +485,14 @@ export const TimelineView: React.FC<TimelineViewProps> = ({
                   ? 'No timeline events have been recorded yet.'
                   : `No ${filter} events found.`}
               </p>
-              <Pebble
+              <Strike
                 variant="secondary"
                 iconLeft={<Plus size={16} />}
                 onClick={handleAddEvent}
               >
                 Add First Event
-              </Pebble>
-            </Stone>
+              </Strike>
+            </Placard>
           ) : (
             <div>
               {filteredEvents.map((event, index) => (

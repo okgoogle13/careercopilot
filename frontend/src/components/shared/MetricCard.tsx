@@ -28,7 +28,7 @@ export function MetricCard({
   const [isHovered, setIsHovered] = React.useState(false);
 
   const cardStyle: React.CSSProperties = {
-    borderRadius: 'var(--radius-stone)',
+    borderRadius: 'var(--shape-megaphoneCut01)',
     padding: 'var(--spacing-lg)',
     backgroundColor: variant === 'filled' ? 'var(--color-asphalt-black)' : 'transparent',
     border: '1px solid rgba(240, 234, 214, 0.1)',

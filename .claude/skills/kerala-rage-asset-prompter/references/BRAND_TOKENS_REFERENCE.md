@@ -29,8 +29,8 @@ This reference maps natural language brand descriptions to the technical system 
 
 ## Shape & Aesthetic Tokens
 
-- **Radius (Stone)**: `--sys-shape-radius-stone` (Asymmetric, organic, rejects perfect geometry).
-- **Radius (Slab)**: `--sys-shape-radius-slab` (Heavy, grounded containers).
+- **Shape (Megaphone)**: `--shape-megaphoneCut01` (Asymmetric, organic, rejects perfect geometry).
+- **Shape (Placard)**: `--shape-placardTorn01` (Heavy, grounded containers).
 - **Motion (Expressive)**: `cubic-bezier(0.34, 1.56, 0.64, 1)` (M3 Expressive overshoot).
 
 ## Motif Strategy

@@ -49,7 +49,7 @@ export const LayoutShell: React.FC<{ children?: React.ReactNode }> = ({ children
             <img
               src={KR_LOGO_SRC}
               alt="Kerala Rage CareerCopilot"
-              className="h-auto max-h-[60px] w-auto rounded-xl"
+              className="h-auto max-h-[60px] w-auto rounded-strike"
             />
             <div className="flex flex-col">
               <span className="font-proclamation text-sm uppercase tracking-[0.2em] text-ink-gold">

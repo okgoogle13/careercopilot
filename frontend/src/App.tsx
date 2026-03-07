@@ -11,6 +11,7 @@ import {
 import { Toaster } from 'sonner';
 const texturePattern =
   '/assets/kr-solidarity/texture/kr-solidarity__substrate__landmark--melbourne-laneway--v1.png';
+import './design/styles/design-tokens.css';
 import { TokenTest } from './components/debug/TokenTest';
 import { getModeForRoute } from './config/routeModeMap';
 import { useAuth } from './context/AuthContext';

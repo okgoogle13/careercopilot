@@ -125,7 +125,7 @@
   backdrop-filter: blur(32px);
   -webkit-backdrop-filter: blur(32px);
   padding: 5rem 4rem;
-  border-radius: var(--radius-leaf, 24px 8px 20px 4px);
+  border-radius: var(--shape-pebbleSurge01, 20px 8px 12px 32px);
   text-align: center;
   max-width: 540px;
   width: 90%;
@@ -163,7 +163,7 @@
   background-color: var(--color-ink-gold);
   color: var(--color-asphalt-black-darkest);
   padding: 1.25rem 2.5rem;
-  border-radius: var(--radius-pebble);
+  border-radius: var(--shape-pebbleSurge01);
   font-family: var(--font-field-note);
   font-weight: 700;
   text-transform: uppercase;
@@ -183,7 +183,7 @@
   background-color: transparent;
   color: var(--color-ink-gold);
   padding: 1.25rem 2.5rem;
-  border-radius: var(--radius-pebble);
+  border-radius: var(--shape-pebbleSurge01);
   border: 2px solid var(--color-ink-gold);
   font-family: var(--font-field-note);
   font-weight: 700;

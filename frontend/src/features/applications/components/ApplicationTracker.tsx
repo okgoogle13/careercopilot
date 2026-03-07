@@ -138,7 +138,7 @@ export function ApplicationTracker() {
       </div>
 
       {/* Add New Application */}
-      <button className="mt-8 w-full py-8 border-2 border-dashed border-[var(--color-surface-container-high)] rounded-2xl text-[var(--color-text-secondary)] hover:border-[var(--color-leaf-base)] hover:text-[var(--color-leaf-base)] hover:bg-[var(--color-leaf-light)]/5 transition-all flex flex-col items-center justify-center gap-2 group">
+      <button className="mt-8 w-full py-8 border-2 border-dashed border-[var(--color-surface-container-high)] rounded-placard text-[var(--color-text-secondary)] hover:border-[var(--color-leaf-base)] hover:text-[var(--color-leaf-base)] hover:bg-[var(--color-leaf-light)]/5 transition-all flex flex-col items-center justify-center gap-2 group">
         <div className="p-3 bg-[var(--color-surface-container)] rounded-sentry group-hover:bg-[var(--color-leaf-base)] group-hover:text-white transition-colors">
           <Plus size={24} />
         </div>

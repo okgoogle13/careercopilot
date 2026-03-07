@@ -47,14 +47,14 @@ export function EcosystemSandbox() {
           </div>
         </div>
 
-        <div className="flex-1 flex gap-4 overflow-hidden min-h-0 bg-surface-scrim/30 backdrop-blur-xl rounded-2xl border border-white/10 p-1.5 shadow-2xl">
+        <div className="flex-1 flex gap-4 overflow-hidden min-h-0 bg-surface-scrim/30 backdrop-blur-xl rounded-placard border border-white/10 p-1.5 shadow-2xl">
           {/* Left: Evidence & Intelligence */}
           <div className="w-[320px] flex-none hidden lg:flex h-full overflow-hidden flex-col">
             <EvidenceSidebar />
           </div>
 
           {/* Right: The Editor */}
-          <div className="flex-1 h-full overflow-hidden bg-surface-container/90 rounded-xl border border-outline-variant flex flex-col shadow-inner backdrop-blur-sm">
+          <div className="flex-1 h-full overflow-hidden bg-surface-container/90 rounded-strike border border-outline-variant flex flex-col shadow-inner backdrop-blur-sm">
             <SplitEditor
               activeTab={activeTab}
               onTabChange={setActiveTab}
