@@ -1,6 +1,6 @@
 import { AlertCircle, AlertTriangle, CheckCircle, Info, X } from 'lucide-react';
 import React, { useState } from 'react';
-import { Pebble } from './Pebble';
+import { Strike } from './Strike';
 
 export type SignalSeverity = 'info' | 'success' | 'warning' | 'error';
 
@@ -74,7 +74,7 @@ export function Signal({
 
   const getStyles = () => {
     const styles: React.CSSProperties = {
-      borderRadius: 'var(--radius-stone)',
+      borderRadius: 'var(--shape-megaphoneCut01, 42% 58% 45% 55% / 48% 62% 38% 52%)',
       transition: 'all var(--duration-standard) var(--ease-viscous-breeze)',
     };
 
@@ -149,7 +149,7 @@ export function Signal({
         <div className="flex-shrink-0 flex items-start gap-2 -mt-1 -mr-1">
           {action}
           {onClose && (
-            <Pebble
+            <Strike
               variant="ghost"
               size="sm"
               onClick={handleClose}
@@ -157,7 +157,7 @@ export function Signal({
               className="h-6 w-6 p-0"
             >
               <X className="w-4 h-4" />
-            </Pebble>
+            </Strike>
           )}
         </div>
       )}

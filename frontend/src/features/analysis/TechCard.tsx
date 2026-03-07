@@ -53,7 +53,7 @@ const TechCard = React.forwardRef<HTMLDivElement, TechCardProps>(
         ref={ref}
         className={containerClasses}
         style={{
-          borderRadius: mode === 'KrDark' ? 'var(--radius-stone)' : '8px',
+          borderRadius: mode === 'KrDark' ? 'var(--shape-megaphoneCut01)' : '8px',
         }}
         whileHover={{
           y: -4,
@@ -132,7 +132,7 @@ const TechCard = React.forwardRef<HTMLDivElement, TechCardProps>(
                       : 'bg-surface-KrDark-slate-smoke-high border border-KrScreenprint-KrDark-border'
                   )}
                   style={{
-                    borderRadius: mode === 'KrDark' ? 'var(--radius-seed)' : '2px',
+                    borderRadius: mode === 'KrDark' ? 'var(--shape-pebbleSurge01)' : '2px',
                   }}
                   whileHover={{ scale: 1.05 }}
                   transition={{ type: 'spring', stiffness: 400, damping: 25 }}

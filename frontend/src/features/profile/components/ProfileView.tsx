@@ -194,7 +194,7 @@ export function ProfileView() {
               </div>
             </Stone>
 
-            <div className="p-6 border border-concrete-grey/5 rounded-2xl bg-ink-gold/5 flex flex-col items-center text-center">
+            <div className="p-6 border border-concrete-grey/5 rounded-placard bg-ink-gold/5 flex flex-col items-center text-center">
               <Archive className="w-8 h-8 text-ink-gold mb-4 opacity-40" />
               <p className="font-field-note text-sm text-paper-white opacity-60 italic leading-relaxed">
                 "This record is synchronized with the primary KrSolidarity node."

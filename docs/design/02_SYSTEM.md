@@ -42,17 +42,93 @@ Blending street-poster impact with Material 3 Expressive motion. All fonts use `
 
 ---
 
-## 3. Shape Archetypes (v5.1)
+## 3. Shape System (v6.1)
 
-Rejects machine-perfect geometry. Use specialized radii tokens for asymmetric defiance.
+Rejects machine-perfect geometry. All radii are drawn from the base scale or the shape library. **Never use hardcoded pixel values.** See `01_CANON.md §2.C` for the Four Laws.
 
-| Archetype | Token | Value (Asymmetric) | Application |
+---
+
+### 3.1 Base Shape Scale
+
+A neutral, non-semantic radius scale. These tokens are the atoms from which all `shape.*` tokens are composed.
+
+| Token | CSS Variable | Value | M3 Equivalent |
 | :--- | :--- | :--- | :--- |
-| **Pebble** | `radius-pebble` | `16px 8px 12px 20px` | Active buttons, pill tags, nav. |
-| **Stone** | `radius-stone` | `42% 58% 45% 55% / 48% 62% 38% 52%` | Expressive cards, hero anchors. |
-| **Slab** | `radius-slab` | `48% 52% 58% 42% / 55% 45% 60% 40%` | Large sections, foundational blocks. |
-| **Sentry** | `sentryAvatar` | `98%` | Avatars. **Banned:** `border-radius: 50%`. |
-| **Torn Edge** | `tornEdgeClipPath` | `polygon(0% 10px, 5% 0px, ...)` | Wheat-paste section breaks. |
+| `radius.none` | `--sys-radius-none` | `0` | None |
+| `radius.xs` | `--sys-radius-xs` | `2px` | Extra Small |
+| `radius.sm` | `--sys-radius-sm` | `4px` | Small |
+| `radius.md` | `--sys-radius-md` | `8px` | Medium |
+| `radius.lg` | `--sys-radius-lg` | `12px` | Large (lower) |
+| `radius.xl` | `--sys-radius-xl` | `20px` | Large |
+| `radius.xxl` | `--sys-radius-xxl` | `32px` | Extra Large |
+| `radius.xxxl` | `--sys-radius-xxxl` | `48px` | Extra Extra Large |
+| `radius.full` | `--sys-radius-full` | `9999px` | Full (pill). **Never use `50%`.** |
+
+---
+
+### 3.2 Non-Semantic Shape Library
+
+Reusable, named shapes. Each shape carries no inherent meaning — archetypes assign meaning. A shape may appear in multiple archetype contexts.
+
+| Token | CSS Variable | Border-Radius Definition | Allowed Tier |
+| :--- | :--- | :--- | :--- |
+| `shape.block01` | `--sys-shape-block01` | `radius.md radius.xs radius.md radius.xs` → `8px 2px 8px 2px` | **Core UI** |
+| `shape.block02` | `--sys-shape-block02` | `radius.xl radius.sm radius.lg radius.xs` → `20px 4px 12px 2px` | **Core UI** |
+| `shape.block03` | `--sys-shape-block03` | `radius.xxl radius.xs radius.xs radius.xs` → `32px 2px 2px 2px` | **Core UI** |
+| `shape.pill01` | `--sys-shape-pill01` | `radius.full` → `9999px` (all corners) | **Core UI** |
+| `shape.pebble01` | `--sys-shape-pebble01` | `radius.xl radius.md radius.lg radius.xxl` → `20px 8px 12px 32px` | **Core UI** |
+| `shape.stone01` | `--sys-shape-stone01` | `42% 58% 45% 55% / 48% 62% 38% 52%` (organic % radii) | **Core UI** |
+| `shape.slab01` | `--sys-shape-slab01` | `48% 52% 58% 42% / 55% 45% 60% 40%` (organic % radii) | **Core UI** |
+| `shape.blob01` | `--sys-shape-blob01` | `60% 40% 30% 70% / 60% 30% 70% 40%` | **Decorative** |
+| `shape.blob02` | `--sys-shape-blob02` | `40% 60% 70% 30% / 40% 50% 60% 50%` | **Decorative** |
+
+> **Tier rules:** **Core UI** shapes are available to all archetype contexts. **Decorative** shapes (`shape.blob*`) are restricted to Substrate archetype, avatar masks, and hero frame backgrounds. All other uses require explicit whitelist.
+
+**Legacy tokens** (`radius-stone`, `radius-slab`, `radius-pebble`, `sentryAvatar`, `tornEdgeClipPath`) remain valid. They map to their `shape.*` equivalents and will be gradually migrated.
+
+---
+
+### 3.3 Semantic Action Archetypes & Morph States
+
+Each archetype defines a shape palette (not a single locked shape) and morph states tied to interaction and environmental change. Shape is not semantic — it is contextual.
+
+| Archetype | Base Shape | Active / Selected | In-Progress | Ambient | Motion Coupling |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Strike** | `shape.block03` | `shape.block02` | `shape.pill01` | — | `typeSpringSlam` (600ms) |
+| **March** | `shape.block01` | `shape.pebble01` | `shape.block02` | — | `dragSettle` (800ms) |
+| **Megaphone** | `shape.stone01` | `shape.stone01` | `shape.slab01` | `shape.blob01` | `typeSpringSlam` (600ms) |
+| **Placard** | `shape.slab01` | `shape.block02` | `shape.block03` | — | `dragSettle` (800ms) |
+| **Scaffold** | `shape.block01` | `shape.block01` | `shape.block01` | — | none (static) |
+| **Substrate** | `shape.blob02` | — | — | `shape.blob01` | `waterRipple` (3000ms) |
+
+**Morph trigger rules (M3-aligned, KR-adapted):**
+- **Interaction morph**: Shape changes between `base` and `active` on press/hover (deliberate tension — sharp vs round).
+- **Progress morph**: Shape transitions to `inProgress` variant during loading or async operations. The container shows the work in motion.
+- **Ambient morph**: Background/atmospheric elements use `ambient` variant with slow `waterRipple` or `melancholyBreath` motion. Never blocking UI.
+- **Scaffold never morphs**: Layout structure is immutable. Only content elements carry shape energy.
+- **Substrate is the organic layer**: `shape.blob*` lives here. Environmental, not interactive.
+
+---
+
+### 3.4 Anti-Slop Rules for Shape
+
+- All `border-radius` values in component code **must** reference `--sys-radius-*` or `--sys-shape-*` CSS variables. No hardcoded `px` values.
+- `border-radius: 50%` is **banned**. Use `--sys-radius-full` or `sentryAvatar` (`98%`).
+- `shape.blob*` tokens are **banned** outside Substrate archetype, avatar masks, and hero frames, unless explicitly documented as a whitelist exception.
+- Scaffold (`shape.block01`) does **not** morph. If your layout element is changing shape on interaction, it is not a Scaffold — reassign its archetype.
+- No shape may have all four corners identical unless the shape token explicitly defines it (e.g., `shape.pill01`). Uniform corner-radius is the Institutional Squelch.
+
+---
+
+**Classic Named Geometries (retained for legacy and naming clarity):**
+
+| Name | Mapped Token | Shape Token Equivalent |
+| :--- | :--- | :--- |
+| **Pebble** | `radius-pebble` | `shape.pebble01` |
+| **Stone** | `radius-stone` | `shape.stone01` |
+| **Slab** | `radius-slab` | `shape.slab01` |
+| **Sentry Avatar** | `sentryAvatar` (`98%`) | No equivalent (use direct) |
+| **Torn Edge** | `tornEdgeClipPath` | No equivalent (clip-path, not radius) |
 
 ---
 
@@ -68,5 +144,5 @@ All transitions must respect `prefers-reduced-motion`.
 
 ---
 
-**Last Updated:** 2026-03-06
-**Registry Version:** v1.0.0 (Solidarity Mode)
+**Last Updated:** 2026-03-07
+**Registry Version:** v1.1.0 (Solidarity Mode — Shape System)

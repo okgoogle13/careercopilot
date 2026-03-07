@@ -43,7 +43,7 @@ Amplify visual expression across typography, motion, color, and shapes while adh
 - ✅ WCAG AA contrast validation (4.5:1 text, 3:1 large text)
 
 ### Shape & Shadow Amplification
-- ✅ Enforce organic asymmetry (`--radius-pebble`, `--radius-stone`, `--radius-slab`, `--radius-sentry`)
+- ✅ Enforce semantic geometry (`rounded-strike`, `rounded-placard`, `rounded-megaphone`, `rounded-sentry`)
 - ✅ Ban perfect circles (`border-radius: 50%` → `98%` sentry avatars)
 - ✅ Semantic shadow progression (`elevation1Pebble` → `elevation4Float`, `inkOffset`, `solidarityBleed`)
 
@@ -286,7 +286,7 @@ Coordinate color + scale + weight + shadow simultaneously:
     fontVariationSettings: '"wght" 600, "GRAD" 0',
     fontSize: '18px',
     padding: '16px 32px',
-    borderRadius: '16px 8px 12px 20px', // --radius-pebble (organic)
+    borderRadius: '32px 2px 2px 2px', // rounded-strike (base)
     backgroundColor: 'var(--sys-color-solidarityRed-steps-2)',
     color: 'var(--sys-color-worker-ash-base)',
     boxShadow: '0 2px 4px rgba(0, 0, 0, 0.25)' // elevation1Pebble
@@ -455,12 +455,12 @@ Colors have cultural/emotional meaning, not generic "primary/secondary":
 ```tsx
 // GOOD: Organic pebble radius (asymmetric)
 <button style={{
-  borderRadius: '16px 8px 12px 20px' // --radius-pebble ✅
+  borderRadius: '32px 2px 2px 2px' // rounded-strike ✅
 }} />
 
 // GOOD: Stone shape for cards (organic blob)
 <div style={{
-  borderRadius: '42% 58% 45% 55% / 48% 62% 38% 52%' // --radius-stone ✅
+  borderRadius: '42% 58% 45% 55% / 48% 62% 38% 52%' // rounded-megaphone ✅
 }} />
 
 // GOOD: Sentry avatar (imperfect circle)
@@ -475,13 +475,13 @@ Colors have cultural/emotional meaning, not generic "primary/secondary":
 
 // BAD: Uniform radius (generic)
 <button style={{
-  borderRadius: '8px' // ❌ Too generic, use --radius-pebble
+  borderRadius: '8px' // ❌ Too generic, use rounded-strike
 }} />
 ```
 
 **Enforcement**: Audit all components and replace:
 - `rounded-full` → `rounded-sentry` (98%)
-- `rounded-lg`, `rounded-xl` → `--radius-pebble` or `--radius-stone`
+- `rounded-lg`, `rounded-xl` → `rounded-strike` or `rounded-megaphone`
 - `border-radius: 50%` → `border-radius: 98%` (sentry avatars)
 
 ### 2. Semantic Shadow Progression
@@ -563,7 +563,7 @@ const solidarityBleed = '0 0 12px var(--sys-color-solidarityRed-steps-4)';
     letterSpacing: '0em',
     fontSize: '32px',
     padding: '24px 32px',
-    borderRadius: '16px 8px 12px 20px', // --radius-pebble
+    borderRadius: '32px 2px 2px 2px', // rounded-strike
     // Color: charcoalRed (warning without bureaucracy)
     backgroundColor: 'var(--sys-color-charcoalRed-steps-1)',
     color: 'var(--sys-color-worker-ash-base)',
@@ -712,7 +712,7 @@ const solidarityBleed = '0 0 12px var(--sys-color-solidarityRed-steps-4)';
   style={{
     backgroundColor: 'var(--sys-color-charcoalBackground-steps-2)',
     padding: '96px 64px',
-    borderRadius: '42% 58% 45% 55% / 48% 62% 38% 52%' // --radius-stone
+    borderRadius: '42% 58% 45% 55% / 48% 62% 38% 52%' // rounded-megaphone
   }}
   initial={{ opacity: 0 }}
   animate={{ opacity: 1 }}
@@ -758,7 +758,7 @@ const solidarityBleed = '0 0 12px var(--sys-color-solidarityRed-steps-4)';
 - ✅ Variable fonts: Fraunces (display), Work Sans (metadata)
 - ✅ Semantic colors: worker-ash (text), stencilYellow (attention)
 - ✅ Motion: typeSpringSlam entrance (600ms overshoot)
-- ✅ Organic shape: --radius-stone (blob container)
+- ✅ Organic shape: rounded-megaphone (blob container)
 - ✅ Glow effect: inkGold halo on hero text
 
 ### Example 2: Transforming a Button to Expressive CTA
@@ -784,7 +784,7 @@ const solidarityBleed = '0 0 12px var(--sys-color-solidarityRed-steps-4)';
     fontVariationSettings: '"wght" 600, "GRAD" 0',
     fontSize: '18px',
     padding: '16px 32px',
-    borderRadius: '16px 8px 12px 20px', // --radius-pebble (organic)
+    borderRadius: '32px 2px 2px 2px', // rounded-strike (base)
     backgroundColor: 'var(--sys-color-solidarityRed-steps-2)',
     color: 'var(--sys-color-worker-ash-base)',
     boxShadow: '0 2px 4px rgba(0, 0, 0, 0.25)', // elevation1Pebble
@@ -814,7 +814,7 @@ const solidarityBleed = '0 0 12px var(--sys-color-solidarityRed-steps-4)';
 - ✅ Variable font: Work Sans with GRAD axis (layout-safe hover)
 - ✅ Tonal stepping: solidarityRed-steps-2 → steps-3 (hover), → steps-1 (active)
 - ✅ Multi-axis morph: GRAD + scale + y-translate + shadow
-- ✅ Organic shape: --radius-pebble (asymmetric)
+- ✅ Semantic shape: rounded-strike (archetype)
 - ✅ Semantic motion: typeSpringSlam (600ms overshoot)
 - ✅ Shadow progression: elevation1Pebble → elevation3HoverLift
 

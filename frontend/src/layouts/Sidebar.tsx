@@ -39,7 +39,7 @@ export function Sidebar() {
       {/* Mobile Menu Button */}
       <button
         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        className="fixed top-6 left-6 z-50 lg:hidden bg-surface-container p-3 rounded-2xl text-on-surface hover:bg-surface-container-high transition-colors"
+        className="fixed top-6 left-6 z-50 lg:hidden bg-surface-container p-3 rounded-placard text-on-surface hover:bg-surface-container-high transition-colors"
         aria-label="Toggle menu"
       >
         {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -122,7 +122,7 @@ export function Sidebar() {
         </nav>
 
         {/* User Profile */}
-        <div className="p-4 m-4 bg-surface-container rounded-2xl flex-shrink-0 border border-outline-variant">
+        <div className="p-4 m-4 bg-surface-container rounded-placard flex-shrink-0 border border-outline-variant">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-sentry flex-shrink-0 bg-tertiary-container" />
             <div className="flex-1">

@@ -96,7 +96,7 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({
                 ${className}
             `}
       style={{
-        borderRadius: 'var(--sys-shape-radius-stone)',
+        borderRadius: 'var(--shape-megaphoneCut01)',
         backgroundColor: currentStyle.bg,
         color: currentStyle.text,
         borderColor: currentStyle.border,

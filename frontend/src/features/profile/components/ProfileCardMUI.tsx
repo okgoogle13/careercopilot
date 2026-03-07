@@ -59,7 +59,7 @@ export const ProfileCardMUI: React.FC<ProfileCardMUIProps> = ({
       className={cn('h-full flex flex-col transition-all', isSelected && 'ring-2 ring-primary')}
       style={{
         padding: 'var(--sys-space-6)',
-        borderRadius: 'var(--sys-shape-radius-card)',
+        borderRadius: 'var(--shape-placardTorn01)',
         backgroundColor: isSelected
           ? 'var(--sys-color-primary-container)'
           : 'var(--sys-color-surface-container)',
@@ -167,7 +167,7 @@ export const ProfileCardMUI: React.FC<ProfileCardMUIProps> = ({
           style={{
             padding: 'var(--sys-space-3)',
             backgroundColor: 'var(--sys-color-surface-container-low)',
-            borderRadius: 'var(--sys-shape-corner-medium)',
+            borderRadius: 'var(--shape-blockRiot01)',
             border: `1px solid var(--sys-color-outline-variant)`,
           }}
         >
@@ -214,7 +214,7 @@ export const ProfileCardMUI: React.FC<ProfileCardMUIProps> = ({
           style={{
             padding: 'var(--sys-space-3)',
             backgroundColor: 'var(--sys-color-surface-container-low)',
-            borderRadius: 'var(--sys-shape-corner-medium)',
+            borderRadius: 'var(--shape-blockRiot01)',
             border: `1px solid var(--sys-color-outline-variant)`,
           }}
         >

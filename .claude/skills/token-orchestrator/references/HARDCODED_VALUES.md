@@ -80,8 +80,8 @@ border-radius: 20px 6px 16px 28px;
 
 **After** (using tokens):
 ```css
-border-radius: var(--sys-shape-stone);
-border-radius: var(--sys-shape-pebble);
+border-radius: var(--shape-megaphoneCut01);
+border-radius: var(--shape-pebbleSurge01);
 ```
 
 ---
@@ -109,7 +109,7 @@ height: 100vh;
 | Colors | `--sys-color-` | `var(--sys-color-inkGold-base)` |
 | Spacing | `--sys-spacing-` | `var(--sys-spacing-lg)` |
 | Shadows | `--sys-elevation-` | `var(--sys-elevation2-stone)` |
-| Shapes | `--sys-shape-` | `var(--sys-shape-radius-stone)` |
+| Shapes | `--shape-` | `var(--shape-megaphoneCut01)` |
 | Typography | `--sys-font-` | `var(--sys-font-primary)` |
 | Motion | `--sys-duration-` | `var(--sys-duration-fast)` |
 

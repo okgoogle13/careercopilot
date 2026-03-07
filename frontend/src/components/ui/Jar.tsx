@@ -1,3 +1,8 @@
+/**
+ * @deprecated Jar is deprecated as of KR Solidarity v6.0.
+ * Use {@link March} from './March' instead. See docs/design/01_CANON.md §2.C
+ * Will be removed in v7.0.
+ */
 import { Check, ChevronDown } from 'lucide-react';
 import React, { useEffect, useRef, useState } from 'react';
 
@@ -46,31 +51,13 @@ export interface JarProps {
 }
 
 /**
- * Jar - Kerala Rage kr-solidarity Select Dropdown
+ * @deprecated Use March instead.
  *
- * A custom select component using Kerala Rage kr-solidarity semantic tokens with enhanced UX.
- * Features asymmetric shapes, proper elevation, and spring physics animations.
- * Archetype: Jar (simple frame container)
+ * Jar - Kerala Rage kr-solidarity Select Dropdown (legacy name)
  *
- * **Kerala Rage Design Token Usage:**
- * - Shape: Asymmetric 32px 8px 28px 12px (Jar archetype)
- * - Elevation: `--sys-shadow-elevation4Float` for dropdown menu
- * - Motion: Spring physics cubic-bezier(0.34, 1.56, 0.64, 1)
- * - Colors: Kerala Rage kr-solidarity semantic palette (inkGold, solidarityRed, worker-ash)
- * - Typography: Work Sans (field-note font family)
- *
- * @example
- * ```tsx
- * <Jar
- *   label="Country"
- *   options={[
- *     { value: 'au', label: 'Australia' },
- *     { value: 'us', label: 'United States' },
- *   ]}
- *   value={country}
- *   onChange={setCountry}
- * />
- * ```
+ * Replaced by March in KR Solidarity v6.0.
+ * Archetype was: Jar (simple frame container). Now: March (sequential selection).
+ * Shape: shape.block01 (base) → shape.pebble01 (open/active morph)
  */
 export function Jar({
   label,
@@ -135,7 +122,7 @@ export function Jar({
   };
 
   const buttonStyle: React.CSSProperties = {
-    borderRadius: '32px 8px 28px 12px', // Jar archetype asymmetric radius
+    borderRadius: 'var(--shape-blockRiot01)', // shape.blockRiot01 — March archetype
     backgroundColor: 'var(--sys-color-charcoalBackground-steps-3)',
     border: '2px solid',
     borderColor: error
@@ -207,7 +194,7 @@ export function Jar({
           ref={dropdownRef}
           className="absolute top-full left-0 right-0 mt-3 z-50 overflow-hidden"
           style={{
-            borderRadius: 'var(--radius-pebble)',
+            borderRadius: 'var(--shape-blockRiot02)', // shape.blockRiot02 — March dropdown
             backgroundColor: 'var(--sys-color-charcoalBackground-base)',
             border: '1px solid var(--sys-color-worker-ash-base)',
             boxShadow: 'var(--sys-shadow-elevation4Float)',

@@ -15,7 +15,7 @@ export const GlobalHeader: React.FC = () => {
         <Link
           to="/"
           aria-label="Kerala Rage CareerCopilot"
-          className="flex items-center gap-3 rounded-xl px-2 py-1 transition-colors hover:bg-surface-KrDark-slate-smoke-highest/70"
+          className="flex items-center gap-3 rounded-strike px-2 py-1 transition-colors hover:bg-surface-KrDark-slate-smoke-highest/70"
         >
           <img
             src={KR_LOGO_SRC}

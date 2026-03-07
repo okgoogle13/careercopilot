@@ -1,0 +1,199 @@
+/**
+ * KR Solidarity v6.1 — Archetypes Configuration
+ *
+ * Canonical mapping of semantic action archetypes to:
+ * - Shape token palette (base + morph states)
+ * - Motion coupling
+ *
+ * ALL shape tokens emit as CSS custom properties: `--shape-{tokenName}`
+ * Use `shapeVar()` or `shapeOf()` to reference them safely in React.
+ *
+ * @see docs/design/02_SYSTEM.md §3.3 Semantic Action Archetypes
+ * @see src/design/tokens/tokens.json → sys.shape
+ */
+
+// ─── Shape Token Registry ────────────────────────────────────────────────────
+
+/**
+ * Every v6.1 shape token name. These map 1:1 to CSS vars `--shape-{name}`.
+ * DO NOT add `50%` or uniform 4-corner values here.
+ */
+export const SHAPE_TOKENS = [
+  // Core UI — Block Riot series (Strike + Scaffold)
+  'blockRiot01',
+  'blockRiot01-pressed',
+  'blockRiot02',
+  'blockRiot03',
+  'blockRiot03-pressed',
+  'blockRiot03-loading',
+  // Core UI — Pill March series (March)
+  'pillMarch01',
+  'pillMarch01-pressed',
+  // Core UI — Pebble Surge series (March open)
+  'pebbleSurge01',
+  'pebbleSurge01-expanded',
+  // Core UI — Alert Shard (Strike error/selected)
+  'alertShard01',
+  'alertShard01-pressed',
+  // Core UI — Scaffold Slab (Scaffold — immutable)
+  'scaffoldSlab01',
+  'scaffoldSlab01-focus',
+  // Core UI — Megaphone Cut (Megaphone modal)
+  'megaphoneCut01',
+  'megaphoneCut01-loading',
+  // Core UI — Placard Torn (Placard content cards)
+  'placardTorn01',
+  'placardTorn01-selected',
+  // Decorative — Substrate Tile (Substrate/hero only)
+  'substrateTile01',
+  'substrateTile01-hover',
+  'substrateTile02',
+  // Tension shapes (high drama, selective)
+  'tearBanner01',
+  'brickWall01',
+  // Utility
+  'sentryAvatar',
+  'tornEdgeClipPath',
+] as const;
+
+export type ShapeToken = (typeof SHAPE_TOKENS)[number];
+
+// ─── Archetype Config ─────────────────────────────────────────────────────────
+
+/**
+ * Archetype → shape palette + motion coupling.
+ *
+ * `shapes` keys are semantic state names; the values are ShapeToken names.
+ * `motion` maps to a motion preset in motion-presets.ts.
+ */
+export const archetypes = {
+  Strike: {
+    shapes: {
+      base: 'blockRiot03', // 32px 2px 2px 2px — CTA default
+      pressed: 'blockRiot03-pressed', // = blockRiot02 on press
+      active: 'blockRiot02', // 20px 4px 12px 2px hover
+      selected: 'alertShard01', // 32px 2px 2px 32px error/selected
+      loading: 'blockRiot03-loading', // pill collapse during async
+    },
+    motion: 'typeSpringSlam',
+    motionDuration: '600ms',
+  },
+  March: {
+    shapes: {
+      base: 'pillMarch01', // 9999px full pill (closed)
+      pressed: 'pillMarch01-pressed', // pill w/ side notch
+      open: 'pebbleSurge01', // 20px 8px 12px 32px open
+      expanded: 'pebbleSurge01-expanded', // 32px 12px 8px 48px fully open
+    },
+    motion: 'dragSettle',
+    motionDuration: '800ms',
+  },
+  Megaphone: {
+    shapes: {
+      base: 'megaphoneCut01', // 42% 58% 45% 55% organic
+      loading: 'megaphoneCut01-loading', // morphs to placardTorn01 values
+      ambient: 'substrateTile01', // ambient background layer
+    },
+    motion: 'typeSpringSlam',
+    motionDuration: '600ms',
+  },
+  Placard: {
+    shapes: {
+      base: 'placardTorn01', // 48% 52% 58% organic
+      selected: 'placardTorn01-selected', // = blockRiot02 on select
+      loading: 'blockRiot03', // blockRiot03 loading morph
+    },
+    motion: 'dragSettle',
+    motionDuration: '800ms',
+  },
+  Scaffold: {
+    shapes: {
+      base: 'scaffoldSlab01', // 8px 2px 8px 2px — IMMUTABLE
+      focus: 'scaffoldSlab01-focus', // Unchanged — Scaffold invariance
+    },
+    motion: 'none',
+    motionDuration: '0ms',
+  },
+  Substrate: {
+    shapes: {
+      base: 'substrateTile02', // 40% 60% 70% 30% base canvas
+      ambient: 'substrateTile01', // 60% 40% 30% 70% ambient drift
+      hover: 'substrateTile01-hover', // 70% 30% 40% drift morph
+    },
+    motion: 'waterRipple',
+    motionDuration: '3000ms',
+  },
+} as const;
+
+export type ArchetypeName = keyof typeof archetypes;
+export type ArchetypeConfig = (typeof archetypes)[ArchetypeName];
+
+// ─── Token Helpers ────────────────────────────────────────────────────────────
+
+/**
+ * Returns the CSS custom property reference for a shape token.
+ * @example shapeVar('blockRiot03') → 'var(--shape-blockRiot03)'
+ */
+export const shapeVar = (token: ShapeToken | string): string => `var(--shape-${token})`;
+
+/**
+ * Returns the CSS custom property reference for a named archetype + state.
+ * Defaults to 'base' state if state is not found.
+ * @example shapeOf('Strike') → 'var(--shape-blockRiot03)'
+ * @example shapeOf('Strike', 'loading') → 'var(--shape-blockRiot03-loading)'
+ */
+export const shapeOf = (archetype: ArchetypeName, state: string = 'base'): string => {
+  const config = archetypes[archetype];
+  const shapes = config.shapes as Record<string, string>;
+  const token = shapes[state] ?? shapes['base'];
+  return shapeVar(token);
+};
+
+/**
+ * Returns the motion preset string for an archetype.
+ * @example motionOf('Strike') → 'typeSpringSlam'
+ */
+export const motionOf = (archetype: ArchetypeName): string => archetypes[archetype].motion;
+
+// ─── Docs Table ───────────────────────────────────────────────────────────────
+/**
+ * Shape token → archetype assignment (for documentation and validators).
+ *
+ * | Token              | Primary    | Secondary  | Tier       |
+ * |--------------------|------------|------------|------------|
+ * | blockRiot01        | Strike     | Scaffold   | Core UI    |
+ * | blockRiot02        | Strike     | March      | Core UI    |
+ * | blockRiot03        | Strike     | —          | Core UI    |
+ * | pillMarch01        | March      | Strike     | Core UI    |
+ * | pebbleSurge01      | March      | —          | Core UI    |
+ * | alertShard01       | Strike     | Signal     | Core UI    |
+ * | scaffoldSlab01     | Scaffold   | —          | Core UI    |
+ * | megaphoneCut01     | Megaphone  | —          | Core UI    |
+ * | placardTorn01      | Placard    | —          | Core UI    |
+ * | substrateTile01    | Substrate  | Megaphone  | Decorative |
+ * | substrateTile02    | Substrate  | —          | Decorative |
+ * | tearBanner01       | Tension    | —          | Tension    |
+ * | brickWall01        | Tension    | —          | Tension    |
+ */
+export const SHAPE_ARCHETYPE_MAP: Record<
+  string,
+  {
+    primary: ArchetypeName | 'Tension';
+    secondary?: ArchetypeName | 'Signal';
+    tier: 'Core UI' | 'Decorative' | 'Tension';
+  }
+> = {
+  blockRiot01: { primary: 'Strike', secondary: 'Scaffold', tier: 'Core UI' },
+  blockRiot02: { primary: 'Strike', secondary: 'March', tier: 'Core UI' },
+  blockRiot03: { primary: 'Strike', tier: 'Core UI' },
+  pillMarch01: { primary: 'March', secondary: 'Strike', tier: 'Core UI' },
+  pebbleSurge01: { primary: 'March', tier: 'Core UI' },
+  alertShard01: { primary: 'Strike', secondary: 'Signal', tier: 'Core UI' },
+  scaffoldSlab01: { primary: 'Scaffold', tier: 'Core UI' },
+  megaphoneCut01: { primary: 'Megaphone', tier: 'Core UI' },
+  placardTorn01: { primary: 'Placard', tier: 'Core UI' },
+  substrateTile01: { primary: 'Substrate', secondary: 'Megaphone', tier: 'Decorative' },
+  substrateTile02: { primary: 'Substrate', tier: 'Decorative' },
+  tearBanner01: { primary: 'Tension', tier: 'Tension' },
+  brickWall01: { primary: 'Tension', tier: 'Tension' },
+};

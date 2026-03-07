@@ -1,7 +1,7 @@
-# KR Solidarity: The User Journey (v6.0)
+# KR Solidarity: Flow Architecture (v6.1)
 
 > **Part of the [KR Solidarity Design Canon](01_CANON.md)**
-> **Topic:** Documentation of the page matrix, wireframe annotations, and content guide.
+> **Topic:** User journey architecture, screen states, and transition logic.
 
 ---
 
@@ -25,45 +25,7 @@ The application is structured into 11 core functional views, categorized by emot
 
 ---
 
-## 2. Core Screen Annotations
-
-Each screen follows the **Solidarity Layering Rules** (Substrate → Atmospheric → Cultural → Content → UI).
-
-### Page 01: Landing ("The Manifesto")
-- **Hero Title:** "THE SOLIDARITY MANIFESTO" (`Fraunces 900`).
-- **Subtext:** "Your professional history, re-documented for the collective future."
-- **Symbolic Anchor:** `KR-SOLID-023` (Bhagat Singh) - Absolute center-right at Z-2, opacity 100%, high contrast.
-- **Texture:** `KR-SOLID-009` (Grit) at 5%, `KR-SOLID-038` (Laneway) substrate.
-
-### Page 04: Ingestion ("The Deposit")
-- **Hero Title:** "DEPOSIT HISTORY" (`Libre Bodoni`).
-- **Surface:** Recycled industrial paper texture with `concrete-grey` borders.
-- **Microcopy:** "Upload your journey. We'll extract the evidence."
-- **Verification:** Success triggers the `VerificationStamp` (`onSuccess` slam).
-
-### Page 05: Analysis ("The Audit")
-- **Hero Title:** "THE AUDIT" (`Fraunces`).
-- **Metric Anchor:** Match Score (0/100) inside a `radius-stone` halo container (`inkGold`).
-- **Symbolic Anchor:** `KR-SOLID-012` (Shiva) - Right-side reflection at Z-2, opacity 35%.
-- **Technical Detail:** `blueprint-grid` (Z-1) major/minor lines shown.
-
----
-
-## 3. Global Content Directives
-
-### Tone & Voice Principle
-Our voice is **Peered, Grounded, and Defiant**. We reject corporate "care-washing" and enthusiastic marketing language.
-
-- **Forbidden Phrases:** "Empowering your career," "Unlock your potential," "Optimize," "AI-Powered."
-- **Preferred Phrases:** "Build your story," "Archive evidence," "Deposit history," "Verify integrity."
-
-### Language Guardrails (Symbolic Sync)
-- **Devotional Screens:** Use reflective, analytical, and technical copy (e.g., Analysis, Profile). NO protest slogans.
-- **Resistance Screens:** Use action-oriented, defiant, and collective copy (e.g., Landing, Dashboard). NO sacred/devotional language.
-
----
-
-## 4. Interaction Playbook
+## 3. Interaction Playbook
 
 | Interaction | Trigger | M3 Motion Name | Visual Effect |
 | :--- | :--- | :--- | :--- |
@@ -75,4 +37,29 @@ Our voice is **Peered, Grounded, and Defiant**. We reject corporate "care-washin
 ---
 
 **Wireframe Artifact:** `docs/design/Archive/wireframe-status.md` (Legacy Source)
-**Last Updated:** 2026-03-06
+---
+
+## 5. Archetype & Shape Flow Map
+
+Key screens annotated with dominant archetype and shape transitions as users move through the application.
+
+| Screen | Dominant Archetypes | Primary Flow Transition |
+| :--- | :--- | :--- |
+| **Landing / Onboarding** | Substrate (bg) + Strike (CTA) | Substrate `blob02` drift → Strike `block03` slam on tap |
+| **Job Search** | Scaffold (input) + March (filter) | ScaffoldInput static → March morph on open |
+| **Opportunity Feed** | Placard (cards) + Strike (apply) | Placard `slab01` → Strike `block03` on card CTA |
+| **Job Apply Flow** | Strike (submit) → Megaphone (confirm) | Strike `block03` → loading `pill01` → Megaphone slam |
+| **Resume Builder** | Scaffold (inputs) + Placard (sections) | All Scaffold immutable; Placard active morph to `block02` |
+| **Analysis Results** | Placard (tiles) + Strike (actions) | Placard swaps to `block02` on selected state |
+| **Profile Edit** | Scaffold (fields) + Strike (save) | Scaffold never morphs; Strike confirms with `typeSpringSlam` |
+
+**Shape morphing flow annotations:**
+- **Progress (async):** Strike morphs `block03` → `pill01` (loading) → `block02` (success). Shape morph is the loading indicator.
+- **Ambient (backgrounds):** Substrate blob drifts slowly via `waterRipple` (3000ms). Never blocks UI.
+- **Environmental change:** Megaphone entrance — Placard zooms via `typeSpringSlam` 600ms. Background Substrate ambient dims.
+- **Scaffold invariance:** Text inputs and form panels NEVER change shape. Users depend on structural stability for data entry.
+
+---
+
+**Last Updated:** 2026-03-07
+**Design System Version:** v6.1 (Shape System)

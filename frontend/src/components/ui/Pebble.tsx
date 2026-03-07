@@ -1,3 +1,8 @@
+/**
+ * @deprecated Pebble is deprecated as of KR Solidarity v6.0.
+ * Use {@link Strike} from './Strike' instead. See docs/design/01_CANON.md §2.C
+ * Will be removed in v7.0.
+ */
 import React from 'react';
 import { cn } from '../../lib/utils';
 import { Loader2 } from 'lucide-react';

@@ -150,7 +150,7 @@ export function SplitEditor({ activeTab, onTabChange, archetype }: SplitEditorPr
           onDrop={handleDrop}
         >
           {isDropping && (
-            <div className="absolute inset-0 flex items-center justify-center bg-primary/10 z-10 backdrop-blur-[1px] border-2 border-dashed border-primary rounded-xl m-4 animate-pulse">
+            <div className="absolute inset-0 flex items-center justify-center bg-primary/10 z-10 backdrop-blur-[1px] border-2 border-dashed border-primary rounded-strike m-4 animate-pulse">
               <div className="text-primary font-bold flex flex-col items-center">
                 <Sparkles className="w-8 h-8 mb-2" />
                 Drop Evidence to Scaffold
