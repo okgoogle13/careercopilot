@@ -12,6 +12,8 @@ yarn-error.log*
 .env.production.local
 .env.production
 .env.staging
+.env.mcp
+.env.mcp.*
 backend/.env
 backend/.env.*
 frontend/.env.production

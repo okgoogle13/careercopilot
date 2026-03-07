@@ -1,7 +1,7 @@
 # Deployment Guide — Vercel + Firebase
 
-> **Stack:** React + Vite (Vercel) + Firebase (Auth + Firestore + Functions with Genkit)  
-> **Branch:** `develop` → Vercel preview; `main` → Vercel production  
+> **Stack:** React + Vite (Vercel) + Firebase (Auth + Firestore + Functions with Genkit)
+> **Branch:** `develop` → Vercel preview; `main` → Vercel production
 > **Cost:** $0/month (all free tiers)
 
 ---
@@ -111,8 +111,8 @@ vercel --prod
 # 1. Build passes locally
 cd frontend && yarn build
 
-# 2. No Supabase references remain
-grep -r "supabase" frontend/src    # should return empty
+# 2. No deprecated provider references remain
+grep -rE "supabase|SUPABASE_" frontend/src    # should return empty
 
 # 3. No Docker files remain
 ls Dockerfile docker-compose*.yml  # should say "No such file"
@@ -139,8 +139,8 @@ curl https://us-central1-<project-id>.cloudfunctions.net/healthCheck
 ## 6. Secrets Management
 
 - **Local:** Use `frontend/.env.local` (gitignored)
-- **Vercel:** Project Settings → Environment Variables  
-- **Firebase Functions:** `firebase functions:config:set key=value` or Secret Manager  
+- **Vercel:** Project Settings → Environment Variables
+- **Firebase Functions:** `firebase functions:config:set key=value` or Secret Manager
 - **GitHub Actions:** Settings → Secrets → Actions → add `VITE_FIREBASE_*` for any CI steps that build the frontend
 
 ---

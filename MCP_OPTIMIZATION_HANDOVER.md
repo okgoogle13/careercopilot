@@ -164,7 +164,6 @@ class RateLimiter:
 ```bash
 GEMINI_API_KEY=<your-key>           # Required for Gemini API
 GITHUB_PAT=<new-pat>                # Set from gh settings (not in configs)
-SUPABASE_ACCESS_TOKEN=<token>       # If using Supabase
 PERPLEXITY_API_KEY=<key>            # If using Perplexity
 ```
 

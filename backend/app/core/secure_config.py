@@ -28,7 +28,13 @@ except ImportError:  # pragma: no cover - local fallback
     def get_database_url() -> str:
         return os.getenv("DATABASE_URL", "sqlite:///data/careercopilot-dev.db")
 
-    def get_secret(secret_id: str, default: Optional[str] = None, **_: Any) -> str:
+    def get_secret(
+        secret_id: str,
+        project_id: Optional[str] = None,
+        version: str = "latest",
+        default: Optional[str] = None,
+    ) -> str:
+        _ = (project_id, version)
         value = os.getenv(secret_id) or os.getenv(secret_id.upper().replace("-", "_"))
         if value:
             return value
@@ -60,12 +66,6 @@ class SecureSettings(BaseSettings):
     DB_PORT: int = 5432
     DB_NAME: str = "careercopilot"
     DB_USER: str = "careercopilot"
-
-    # Supabase
-    SUPABASE_URL: Optional[str] = None
-    SUPABASE_ANON_KEY: Optional[str] = None
-    SUPABASE_SERVICE_ROLE_KEY: Optional[str] = None
-    SUPABASE_STORAGE_BUCKET: str = "user_assets"
 
     # Cache configuration
     CACHE_COLLECTION: str = "redis_cache"
@@ -157,15 +157,6 @@ class SecureSettings(BaseSettings):
                 default=self.FIREBASE_CREDENTIALS_JSON,
             )
 
-            self.SUPABASE_URL = get_secret("SUPABASE_URL", default=self.SUPABASE_URL)
-            self.SUPABASE_ANON_KEY = get_secret(
-                "SUPABASE_ANON_KEY",
-                default=self.SUPABASE_ANON_KEY,
-            )
-            self.SUPABASE_SERVICE_ROLE_KEY = get_secret(
-                "SUPABASE_SERVICE_ROLE_KEY",
-                default=self.SUPABASE_SERVICE_ROLE_KEY,
-            )
         except Exception as exc:
             if self.ENV in ["production", "staging"]:
                 raise RuntimeError(f"Failed to load production configuration: {exc}") from exc

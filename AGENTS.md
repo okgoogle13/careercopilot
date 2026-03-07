@@ -63,9 +63,9 @@ cd frontend && yarn test:e2e
 
 ## Project Overview
 
-**Stack**: React 18 + TypeScript · FastAPI · Google Genkit · Supabase (Postgres/Auth/Storage) · GCP
+**Stack**: React 18 + TypeScript · FastAPI · Google Genkit · Firebase (Auth/Storage) + Postgres · GCP
 **Frontend**: `frontend/` (Vite, Tailwind v4, Zustand, TanStack Query, MUI)
-**Backend**: `backend/` (FastAPI, SQLAlchemy, Supabase/Postgres, async/await)
+**Backend**: `backend/` (FastAPI, SQLAlchemy/Postgres, async/await)
 
 ### Design System
 
@@ -117,9 +117,9 @@ cd frontend && yarn test:e2e
 | Design System          | KR Solidarity v6.0 (Manifesto Canon)                           | M3 Expressive, Zero-Flora, dark-only                       |
 | State Management       | React Context + Zustand                                        | Auth context + lightweight global state                    |
 | Data Fetching          | TanStack Query + axios                                         | Server state, caching, async requests                      |
-| Data Persistence       | Postgres via SQLAlchemy (Supabase) + SQLite dev                | Primary DB with local dev fallback                         |
+| Data Persistence       | Postgres via SQLAlchemy + SQLite dev                           | Primary DB with local dev fallback                         |
 | Vector Store           | pgvector + Gemini embeddings                                   | Semantic search over career artifacts                      |
-| File Storage           | Supabase Storage                                               | Scalable uploads and generated document storage            |
+| File Storage           | Firebase Storage                                               | Scalable uploads and generated document storage            |
 | Hosting                | Cloud Run (backend), Firebase Hosting (frontend)               | Serverless, auto-scaling                                   |
 
 ## Project Structure
@@ -129,8 +129,8 @@ backend/
 ├── app/
 │   ├── main.py                    # FastAPI setup, middleware, routes
 │   ├── api/endpoints/             # API route handlers (analysis, documents, workflows, genkit, job_scout, ingest)
-│   ├── core/                      # Auth (Supabase JWT), database, Genkit init, config
-│   ├── services/                  # Ingestion, vector_store, supabase client
+│   ├── core/                      # Auth, database, Genkit init, config
+│   ├── services/                  # Ingestion, vector_store
 │   ├── agents/                    # Job scout agent
 │   ├── genkit_flows/              # Import namespace for Genkit flows (must resolve for `app.genkit_flows.*` imports)
 │   └── tests/                     # Unit & integration tests
@@ -146,7 +146,7 @@ frontend/
 │   ├── pages/                     # AnalysisPage, IngestionPage, JobQueue
 │   ├── api/                       # API services + axios client
 │   ├── services/                  # Genkit/AI helpers, mock data
-│   ├── context/                   # AuthContext (Supabase)
+│   ├── context/                   # AuthContext (Firebase)
 │   ├── hooks/                     # Custom hooks
 │   └── design/                    # Token styles + presets
 
@@ -160,8 +160,8 @@ design-system/
 
 ### Do
 
-- ✅ Use Supabase client config from `frontend/src/config/supabase.ts` for auth/storage
-- ✅ Use Supabase auth helpers in `backend/app/core/auth.py` and `backend/app/core/dependencies.py`
+- ✅ Use Firebase client config from `frontend/src/config/firebase.ts` for auth/storage
+- ✅ Use backend auth helpers in `backend/app/core/auth.py` and `backend/app/core/dependencies.py`
 - ✅ Use Genkit flow decorators from `app.genkit_flows.flow_decorator` (`@genkit_flow`, `@async_genkit_flow`) and verify the `app.genkit_flows` import path resolves in your environment
 - ✅ Route high-volume tasks to Gemini Flash (runtime default: 3.0; service config in `ai/config/ai_config.json`)
 - ✅ Route complex reasoning to Gemini Pro (3.0/2.5 per service config)
@@ -184,7 +184,7 @@ design-system/
 - ❌ Do NOT use localStorage/sessionStorage in generated artifacts
 - ❌ Do NOT bypass authentication on protected routes
 - ❌ Do NOT store sensitive user data in client-side Zustand state
-- ❌ Do NOT query Supabase/Postgres/Firestore directly from React components (use API layer only)
+- ❌ Do NOT query Postgres/Firestore directly from React components (use API layer only)
 - ❌ Do NOT introduce new Firebase client usage (legacy server-side only)
 - ❌ Do NOT commit sensitive files (`.env.local`, API credentials)
 - ❌ Do NOT use Inter, Roboto, Arial, Sora, or Plus Jakarta Sans (use only: Work Sans, Fraunces, JetBrains Mono, Libre Bodoni, Caveat, Nabla)
@@ -207,7 +207,7 @@ design-system/
 ### 🤔 Ask First
 
 - Install new npm/pip dependencies
-- Modify Supabase RLS/policies, database migrations, or Firestore rules/indexes (legacy)
+- Modify database migrations, auth policies, or Firestore rules/indexes (legacy)
 - Change Genkit flow structure or AI model selection
 - Update environment variable requirements
 - Delete user data, documents, or collections
@@ -224,15 +224,15 @@ design-system/
 - Hard-code secrets in environment setup or configuration files
 - Bypass authentication checks or security rules
 - Access user data outside authorized endpoints (violates privacy)
-- Query Supabase/Postgres/Firestore directly from frontend code (centralize in API layer)
-- Store user passwords in plain text (always hash with bcrypt, use Supabase Auth)
+- Query Postgres/Firestore directly from frontend code (centralize in API layer)
+- Store user passwords in plain text (always hash with bcrypt or use Firebase Auth)
 - Log sensitive data (PII, API keys, auth tokens) to console or files
 
 **Security Gotchas**:
 
 - Pre-commit hooks verify no secrets leak; if hook fails, fix issues and recommit (never skip with `--no-verify`)
-- Genkit flows inherit request auth context; always validate user ownership via Supabase JWT claims and DB records
-- Supabase RLS/DB policies + API auth are primary defenses; Firestore rules apply only to legacy tests
+- Genkit flows inherit request auth context; always validate user ownership via JWT claims and DB records
+- API auth and DB least-privilege policies are primary defenses; Firestore rules apply only to legacy tests
 
 ## Token Efficiency & MCP Delegation
 
@@ -376,11 +376,11 @@ See [frontend/src/components/kerala-rage/ActionButton.tsx](frontend/src/componen
 
 ### Good: Auth Context
 
-See [frontend/src/context/AuthContext.tsx](frontend/src/context/AuthContext.tsx). Wraps Supabase auth, manages auth state, handles token refresh.
+See [frontend/src/context/AuthContext.tsx](frontend/src/context/AuthContext.tsx). Wraps Firebase auth, manages auth state, handles token refresh.
 
 ### Bad: Direct DB in Component
 
-❌ Avoid calling Supabase/Postgres directly in React components. Use the API layer for centralized auth, error handling, and logging.
+❌ Avoid calling Postgres directly in React components. Use the API layer for centralized auth, error handling, and logging.
 
 ### Bad: Monolithic Agent
 
@@ -438,7 +438,7 @@ Include timing in agent metadata for monitoring.
 - [ ] AI agent I/O matches documented contracts
 - [ ] No secrets committed (check `.gitignore`)
 - [ ] Commit message format: `feat(scope): description` or `fix(scope): description`
-- [ ] If Firestore legacy tests change: run emulator; if Supabase policies change: verify locally
+- [ ] If Firestore legacy tests change: run emulator; if auth/database policies change: verify locally
 
 ## When Stuck
 
@@ -446,7 +446,7 @@ Include timing in agent metadata for monitoring.
 - **Complex workflows**: Propose a plan before implementation; create draft PR for early feedback
 - **AI quality issues**: Add failing test reproducing the issue, then modify prompt/model to fix
 - **Performance problems**: Profile with monitoring; avoid speculative optimizations
-- **Supabase/auth issues**: Validate JWT flow and API dependencies; Firestore emulator only for legacy tests
+- **Auth issues**: Validate JWT/Firebase flow and API dependencies; Firestore emulator only for legacy tests
 
 ## Agent & Codex Compatibility
 
@@ -512,9 +512,9 @@ Key document requirements:
 - **Temperature config**: Use service defaults from `ai/config/ai_config.json` unless a flow requires overrides
 - **Response format**: Prefer Pydantic output schemas for structured responses
 
-### Supabase & Security
+### Firebase & Security
 
-- **Auth**: Validate Supabase JWTs in `backend/app/core/auth.py` and guard routes via dependencies
+- **Auth**: Validate auth tokens in `backend/app/core/auth.py` and guard routes via dependencies
 - **Database**: Enforce least-privilege access; avoid direct client DB access outside the API layer
 - **Legacy Firestore**: Keep confined to legacy tests; do not introduce new client usage
 - **Secrets**: Store in Google Cloud Secret Manager or `.env.local` (never commit)
@@ -596,17 +596,17 @@ Use these before deploy or when debugging build issues:
 4. **Hosting Emulator**:
    - `firebase emulators:start --only hosting` to replicate hosting behavior.
 
-## Supabase & Storage
+## Database & Storage
 
 ### Database
 
-- Primary DB: Postgres via SQLAlchemy (Supabase). See `backend/app/core/database.py` and `backend/app/models/database.py`.
+- Primary DB: Postgres via SQLAlchemy. See `backend/app/core/database.py` and `backend/app/models/database.py`.
 - Vector store: pgvector embeddings in `backend/app/models/document_embedding.py` and `backend/app/services/vector_store.py`.
 
 ### Storage
 
-- Supabase Storage bucket configured by `SUPABASE_STORAGE_BUCKET` (default: `user_assets`).
-- Client helpers live in `frontend/src/api/storageService.ts`.
+- Firebase Storage bucket configured by `FIREBASE_STORAGE_BUCKET`.
+- Client helpers live in `frontend/src/config/firebase.ts` and `frontend/src/api/storageService.ts`.
 
 ### Legacy Firestore
 
@@ -630,10 +630,9 @@ Use these before deploy or when debugging build issues:
 ```bash
 # backend/.env.local (never committed)
 DATABASE_URL=sqlite:///data/careercopilot-dev.db
-SUPABASE_URL=<your-supabase-url>
-SUPABASE_ANON_KEY=<your-supabase-anon-key>
-SUPABASE_SERVICE_ROLE_KEY=<your-supabase-service-role-key>
-SUPABASE_STORAGE_BUCKET=user_assets
+FIREBASE_PROJECT_ID=<your-project-id>
+FIREBASE_STORAGE_BUCKET=<your-project>.appspot.com
+FIREBASE_CREDENTIALS_JSON=<service-account-json>
 
 ENABLE_GENKIT_FLOWS=true
 ENABLE_NLP_PRELOAD=true
@@ -641,8 +640,12 @@ GEMINI_API_KEY=<your-key>
 
 # frontend/.env.local (never committed)
 VITE_API_URL=http://localhost:8000
-VITE_SUPABASE_URL=<your-supabase-url>
-VITE_SUPABASE_ANON_KEY=<your-supabase-anon-key>
+VITE_FIREBASE_API_KEY=<your-firebase-api-key>
+VITE_FIREBASE_AUTH_DOMAIN=<your-project>.firebaseapp.com
+VITE_FIREBASE_PROJECT_ID=<your-project-id>
+VITE_FIREBASE_STORAGE_BUCKET=<your-project>.appspot.com
+VITE_FIREBASE_MESSAGING_SENDER_ID=<your-messaging-sender-id>
+VITE_FIREBASE_APP_ID=<your-firebase-app-id>
 VITE_SENTRY_DSN=<your-sentry-dsn>
 # Provider API keys should stay backend-only in production.
 # Legacy/local-only fallback (avoid in production):

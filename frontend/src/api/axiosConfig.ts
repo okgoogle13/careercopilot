@@ -31,8 +31,8 @@ axiosInstance.interceptors.response.use(
   (response) => response,
   async (error: AxiosError) => {
     if (error.response?.status === 401) {
-      // 401 Unauthorized - could mean the Supabase token is expired or invalid
-      // Supabase-js usually handles refresh automatically, but if we get a 401,
+      // 401 Unauthorized - could mean the auth token is expired or invalid
+      // Firebase/JWT refresh should normally handle this, but if we get a 401,
       // we might want to trigger a sign-out or session check.
       console.warn('Backend returned 401 Unauthorized');
     }

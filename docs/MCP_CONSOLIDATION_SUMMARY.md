@@ -1,6 +1,6 @@
 # MCP Configuration Consolidation - Summary
 
-**Date**: 2026-02-15  
+**Date**: 2026-02-15
 **Status**: ✅ **COMPLETE**
 
 ---
@@ -88,7 +88,6 @@ cat ~/.gemini/antigravity/mcp_config.json | jq '.mcpServers | keys'
 - `github` - GitHub operations
 - `genkit` - Firebase Genkit flows
 - `perplexity-ask` - Web research
-- `supabase-mcp-server` - Supabase operations
 - `figma-dev-mode-mcp-server` - Figma Dev Mode
 
 ### Disabled Servers
@@ -100,11 +99,11 @@ cat ~/.gemini/antigravity/mcp_config.json | jq '.mcpServers | keys'
 
 ## Benefits
 
-✅ **Single source of truth** - No more configuration drift  
-✅ **Easier maintenance** - Edit one file, not two  
-✅ **Version control friendly** - Symlink tracked, config ignored  
-✅ **Antigravity native** - Uses Antigravity's config system  
-✅ **Backward compatible** - Symlink allows project-relative access  
+✅ **Single source of truth** - No more configuration drift
+✅ **Easier maintenance** - Edit one file, not two
+✅ **Version control friendly** - Symlink tracked, config ignored
+✅ **Antigravity native** - Uses Antigravity's config system
+✅ **Backward compatible** - Symlink allows project-relative access
 
 ---
 
@@ -141,6 +140,6 @@ mv /Users/okgoogle13/Projects/careercopilot/claude_desktop_config.json.backup \
 
 ---
 
-**Status**: ✅ **Configuration Consolidated Successfully**  
-**Primary Config**: `/Users/okgoogle13/.gemini/antigravity/mcp_config.json`  
+**Status**: ✅ **Configuration Consolidated Successfully**
+**Primary Config**: `/Users/okgoogle13/.gemini/antigravity/mcp_config.json`
 **Documentation**: `docs/MCP_CONFIG_CONSOLIDATION.md`

@@ -16,12 +16,6 @@ DISABLED_TOOLS = {
         "add_issue_comment", "update_issue", "update_pull_request_branch",
         "get_pull_request_comments", "get_pull_request_status", "list_pull_requests", "search_code"
     ],
-    "supabase-mcp-server": [
-        "list_organizations", "get_organization", "get_cost", "confirm_cost",
-        "list_projects", "get_project", "create_project", "pause_project",
-        "restore_project", "list_extensions", "list_migrations", "list_branches",
-        "delete_branch", "rebase_branch", "get_advisors", "get_project_url", "get_publishable_keys"
-    ],
     "playwright": [
         "resize", "drag", "hover", "press_key", "console_messages",
         "network_requests", "evaluate", "file_upload"
@@ -42,27 +36,24 @@ def optimize_configs():
         if not os.path.exists(path):
             print(f"Skipping missing config: {path}")
             continue
-            
+
         try:
             with open(path, 'r') as f:
                 config = json.load(f)
-            
+
             # Check if it's the personal/antigravity format or global VSCode format
             servers_key = "mcpServers" if "mcpServers" in config else "servers"
-            
+
             if servers_key in config:
                 for server_name, tools in DISABLED_TOOLS.items():
-                    # Handle naming variations (e.g. supabase-mcp-server vs supabase)
                     target_server = None
                     if server_name in config[servers_key]:
                         target_server = server_name
-                    elif "supabase" in server_name and "supabase" in config[servers_key]:
-                        target_server = "supabase"
-                    
+
                     if target_server:
                         print(f"Optimizing {target_server} in {os.path.basename(path)}...")
                         config[servers_key][target_server]["disabledTools"] = tools
-                
+
                 with open(path, 'w') as f:
                     json.dump(config, f, indent=2)
                 print(f"Successfully updated {path}")
