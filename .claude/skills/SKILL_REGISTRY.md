@@ -124,6 +124,7 @@ node scripts/kr/generate-hero-registry.mjs # → public/assets/...hero-registry.
 ### Design System & Asset Skills
 | Skill | Directory | Description |
 |---|---|---|
+| kr-shapes | .claude/skills/kr-shapes | KR Solidarity v6.1 shape system - M3 Expressive morphing tokens, archetype palettes, asymmetric-only geometry. |
 | token-orchestrator | .claude/skills/token-orchestrator | DTCG compliance + KR Solidarity palette validation. |
 | asset-placement-strategy | .claude/skills/asset-placement-strategy | Wireframe-driven placement for KR Solidarity assets. |
 | kerala-rage-brand-enforcer | .claude/skills/kerala-rage-brand-enforcer | Applies KR Solidarity v6.0.0 brand guidelines. |
