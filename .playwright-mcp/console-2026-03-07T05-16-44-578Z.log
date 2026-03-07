@@ -1,0 +1,1 @@
+[     847ms] [WARNING] [composeHero] Composition "resistance-portrait-hero" has warnings: [Compatibility warning: resistance not in can_overlay_with of atmospheric] @ http://localhost:5173/src/lib/composeHero.ts:130

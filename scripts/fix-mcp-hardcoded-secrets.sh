@@ -69,13 +69,6 @@ fix_config() {
         echo "✓ No hardcoded Perplexity keys found"
     fi
 
-    # Replace hardcoded Supabase tokens with environment variable
-    if grep -q "sbp_" "$config_file"; then
-        sed -i '' 's/"SUPABASE_ACCESS_TOKEN": "sbp_[^"]*"/"SUPABASE_ACCESS_TOKEN": "${SUPABASE_ACCESS_TOKEN}"/g' "$config_file"
-        echo "✅ Replaced hardcoded Supabase token with \${SUPABASE_ACCESS_TOKEN}"
-    else
-        echo "✓ No hardcoded Supabase tokens found"
-    fi
 }
 
 # Fix all config files

@@ -16,9 +16,6 @@ def test_secure_settings_loads_secrets(monkeypatch: pytest.MonkeyPatch) -> None:
             "FIREBASE_PROJECT_ID": "proj-1",
             "FIREBASE_STORAGE_BUCKET": "bucket-1",
             "FIREBASE_CREDENTIALS_JSON": '{"type":"service_account"}',
-            "SUPABASE_URL": "https://supabase.example",
-            "SUPABASE_ANON_KEY": "anon-key",
-            "SUPABASE_SERVICE_ROLE_KEY": "service-key",
         }
         return values.get(secret_id, default)
 
@@ -32,7 +29,6 @@ def test_secure_settings_loads_secrets(monkeypatch: pytest.MonkeyPatch) -> None:
     assert s.JWT_SECRET_KEY == "jwt-secret"
     assert s.SECRET_KEY == "jwt-secret"
     assert s.DATABASE_URL == "sqlite:///tmp/test.db"
-    assert s.SUPABASE_URL == "https://supabase.example"
     assert s.FIREBASE_PROJECT_ID == "proj-1"
 
 

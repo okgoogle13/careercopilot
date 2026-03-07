@@ -1,0 +1,10 @@
+[
+  {
+    "screen": "Landing",
+    "route": "/",
+    "score": 75,
+    "placements": [],
+    "unresolved": ["Multiple TODO[asset] tags in code"],
+    "notes": ["Static analysis fail"]
+  }
+]

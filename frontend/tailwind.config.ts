@@ -174,10 +174,10 @@ const config: Config = {
     function ({ addUtilities }: { addUtilities: any }) {
       addUtilities({
         '.focus-ring': {
-          '@apply': 'outline-none ring-2 ring-offset-2 ring-wattle-gold',
+          '@apply': 'outline-none ring-2 ring-offset-2 ring-primary',
         },
         '.focus-ring-offset-0': {
-          '@apply': 'outline-none ring-2 ring-offset-0 ring-wattle-gold',
+          '@apply': 'outline-none ring-2 ring-offset-0 ring-primary',
         },
       });
     },

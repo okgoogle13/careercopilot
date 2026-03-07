@@ -20,7 +20,7 @@ import { composeHero } from '../../lib/composeHero';
 import { PageHeader } from '../../components/shared/PageHeader';
 
 // Assets
-const leafFern =
+const atmosphericOverlay =
   '/assets/kr-solidarity/abstract/kr-solidarity__atmospheric__texture--solidarity-chatgpt-image-f--v1.png';
 const wallpaper =
   '/assets/kr-solidarity/texture/kr-solidarity__substrate__landmark--melbourne-laneway--v1.png';
@@ -147,10 +147,10 @@ export function ApplicationTracker() {
         style={{ backgroundImage: `url(${wallpaper})`, backgroundSize: '400px' }}
       />
 
-      {/* Decorative Fern Overlay */}
+      {/* Decorative Atmospheric Overlay */}
       <div className="absolute bottom-0 left-0 w-[600px] h-[600px] pointer-events-none z-0 opacity-10 select-none">
         <img
-          src={leafFern}
+          src={atmosphericOverlay}
           alt=""
           className="w-full h-full object-contain object-left-bottom grayscale brightness-200"
         />
