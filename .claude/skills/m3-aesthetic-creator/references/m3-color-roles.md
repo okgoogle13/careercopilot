@@ -2,6 +2,19 @@
 
 This reference provides comprehensive specifications for the Material 3 color system. Use this when developing color palettes in Step 2 of the creation process.
 
+## Table of Contents
+
+1. Overview
+2. Surface Colors (Backgrounds and Containers)
+3. Key Colors (Brand and Emphasis)
+4. Semantic Colors
+5. On-Colors and Content Contrast
+6. Tonal Palette Construction
+7. Dark Theme Guidance
+8. Accessibility Requirements
+9. Common Pitfalls
+10. Output Checklist
+
 ## Overview
 
 Material 3's color system uses **semantic color roles** rather than hardcoded colors. Each role has a specific purpose, ensuring consistency and accessibility across light and dark themes.

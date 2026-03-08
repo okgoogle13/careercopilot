@@ -1,8 +1,8 @@
 ---
 name: kr-solidarity-brand-enforcer
-description: Auto-applies KR Solidarity v6.0 brand guidelines (Migrant Rage theme).
+description: Enforce KR Solidarity brand compliance across design/code artifacts using deterministic rule checks and structured violation reporting.
 metadata:
-  version: 6.0.0
+  version: 6.1.0
   tags:
     - brand
     - compliance
@@ -10,49 +10,123 @@ metadata:
     - migrant-rage
 ---
 
-# KR Solidarity: Brand Enforcer (v6.0)
-
+# KR Solidarity Brand Enforcer (v6.1)
 
 ## Purpose
 
-Guardrails to ensure all content matches the **KR Solidarity (Migrant Rage)** theme and adheres to the [Design Canon](../../docs/design/01_CANON.md).
-
-## Process
-
-1. **Review Output**: Analyze generated content (wireframes, specs, code, logs).
-2. **Validate Colors**: Enforce **Solidarity Charcoal** (#1A1714), **Solidarity Crimson** (--sys-color-solidarity-red), and **Ink Gold** (--sys-color-ink-gold).
-3. **Check Typography**: Verify the **Solidarity Stack** from [02_SYSTEM.md](../../docs/design/02_SYSTEM.md). NO Work Sans/Work Sans/Work Sans.
-4. **Validate Layout**: Confirm **Stone / Slab / Pebble** asymmetric radii and 8px grid.
-5. **Verify Visuals**: Enforce **STRICT ZERO-FLORA LOCKDOWN**. Confirm urban/human-centric motifs (laneways, posters, resistance portraiture).
-6. **Report Violations**: Flag non-compliant elements (e.g., perfect circles, white backgrounds, botanical motifs).
-
+Apply deterministic KR Solidarity brand checks to wireframes, specs, and frontend code outputs before merge or release.
 
 ## When to Use
 
-- After wireframe annotation to validate brand compliance
-- Before component spec generation to ensure design consistency
-- When reviewing design system documentation
-- When auditing visual outputs for kerala-rage adherence
+- After wireframe/spec generation.
+- Before component implementation handoff.
+- During PR review for brand consistency.
+- During release readiness audits.
 
-## Enforcement Rules
+## Canon References
 
-- **Colors**:
-    - **Background**: Solidarity Charcoal (#1A1714). **STRICT NO WHITE BACKGROUNDS**.
-    - **Accents**: Solidarity Crimson (--sys-color-solidarity-red), Ink Gold (--sys-color-ink-gold), Stencil Yellow (--sys-color-stencil-yellow), Activist Smoke (--sys-color-kr-activist-smoke-green).
-- **Typography**:
-    - **Solidarity Stack**: Work Sans, Fraunces, Libre Bodoni, JetBrains Mono, Caveat.
-    - **Nabla (COLRv1)**: Authorized ONLY for icon-scale Hero hits. MUST use Solidarity palette.
-- **Layout**: Asymmetric radii (**Stone / Slab / Pebble** shapes). **BANNED**: `border-radius: 50%`.
-- **Visual**: Melbourne laneway/stencilled aesthetic, resistance portraiture, wheat-paste textures.
-- **FORBIDDEN**: Flora, Australian endemic botanicals, or soft organic 'nature' elements.
+- `docs/design/01_CANON.md`
+- `docs/design/02_SYSTEM.md`
+- `frontend/src/design/styles/design-tokens.css`
 
+## Core Enforcement Rules
+
+1. Color policy
+- Background baseline uses `--sys-color-charcoalBackground-base`.
+- Accent tokens must use canonical variables such as:
+  - `--sys-color-solidarityRed-base`
+  - `--sys-color-inkGold-base`
+  - `--sys-color-stencilYellow-base`
+  - `--sys-color-kr-activistSmokeGreen-base`
+- Hardcoded white backgrounds and arbitrary hex in implementation-facing output are violations.
+
+2. Typography policy
+- Allowed stack: `Work Sans`, `Fraunces`, `Libre Bodoni`, `JetBrains Mono`, `Caveat`, `Nabla` (restricted decorative use).
+- Banned defaults: `Inter`, `Roboto`, `Arial`, `Sora`, `Plus Jakarta Sans`.
+- Require clear hierarchy and expressive contrast.
+
+3. Shape/layout policy
+- Prefer Stone/Slab/Pebble asymmetric language.
+- `border-radius: 50%` is a violation.
+- Avoid uniform mechanical spacing/radius patterns.
+
+4. Visual motif policy
+- Zero-Flora lockdown: no floral/botanical motifs.
+- Favor urban/human-centered solidarity framing.
+
+## Deterministic Output Contract
+
+```json
+{
+  "brand_audit": {
+    "target": "string",
+    "status": "pass|needs_refinement|fail",
+    "score": 0,
+    "violations": [
+      {
+        "severity": "critical|high|medium|low",
+        "rule": "string",
+        "location": "string",
+        "evidence": "string",
+        "fix": "string"
+      }
+    ],
+    "summary": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "recommendations": []
+  }
+}
+```
+
+Status guide:
+- `pass`: score >= 90 and no critical violations.
+- `needs_refinement`: score 75-89 or any high violations.
+- `fail`: score < 75 or any critical violations.
+
+## Process
+
+1. Inspect target artifact(s).
+2. Apply rule checks by category (color, typography, shape/layout, motifs).
+3. Record violations with severity + concrete fix.
+4. Compute status + score.
+5. Emit JSON report.
+
+## Edge Cases
+
+- If token aliases are present, resolve to canonical `--sys-color-*` names before flagging.
+- If screenshot-only input is provided, mark uncertain findings as `medium` with `visual_inference` note.
+- If artifact contains mixed old/new brand terms, prioritize current canon and report legacy drift.
+
+## Troubleshooting
+
+### Token mismatch false positives
+
+- Confirm against `frontend/src/design/styles/design-tokens.css` canonical names.
+- Normalize hyphen/camel naming drift before final judgment.
+
+### Ambiguous typography detection
+
+- Request higher-resolution screenshot or source snippet.
+- Downgrade confidence and avoid critical flags without clear evidence.
+
+### Conflicting style guidance
+
+- Follow `docs/design/01_CANON.md` as highest precedence.
+- Treat legacy guidance as informational only.
 
 ## Validates Outputs From
 
-- wireframe-annotator
-- component-spec-generator
-- design-system-doc-generator
+- `wireframe-annotator`
+- `component-spec-generator`
+- `design-system-doc-generator`
+- frontend component/style diffs
 
 ## Usage
 
-"Check [File/Output] for brand compliance"
+`Check <file_or_output> for KR Solidarity brand compliance and return structured JSON violations.`
+
+Last Updated: 2026-03-08 | Version: 6.1.0

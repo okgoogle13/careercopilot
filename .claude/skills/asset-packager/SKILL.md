@@ -1,220 +1,164 @@
 ---
 name: asset-packager
-description: "Automated asset packaging\u2014converts validated PNG + IDF JSON into\
-  \ complete production bundle (context.md, tokens.json, usage.md). Eliminates 30\
-  \ manual file generations across 10 assets."
+description: Package validated KR assets into production-ready bundles (context.md, tokens.json, usage.md) with deterministic file outputs and compliance-safe metadata.
 metadata:
-  legacy_frontmatter:
-    version: 1.0.0
-    tags: []
+  version: 1.1.0
+  tags:
+    - assets
+    - packaging
+    - automation
+    - compliance
 ---
 
-# Asset-Packager Skill
+# Asset Packager
 
 ## Purpose
 
-Automates asset packaging after validation. Input: validated PNG + IDF. Output: complete directory with context/tokens/usage files + production file copy + git commit. Replaces 15 min manual work with 2 min automated execution.
+Create a standard production bundle for a validated asset:
+- `context.md`
+- `tokens.json`
+- `usage.md`
+- copied production PNG in the correct asset category path
+
+This skill standardizes packaging and removes repetitive manual formatting.
 
 ## When to Use
 
-- When a new asset has been validated and scored ≥90.
-- When generating the standard production bundle (context, tokens, usage) for a design asset.
-- When needing to automate git commits and file distribution for newly packaged assets.
+- After an asset passes validation threshold (recommended: >= 90).
+- When a new PNG must be integrated into the canonical asset structure.
+- When downstream teams need both human-readable context and machine-readable token metadata.
 
-## Input Requirements
+## Scope
+
+This skill covers:
+- Bundle file generation from validated inputs.
+- Compliance-safe metadata transformation.
+- Deterministic naming and path conventions.
+
+This skill does not cover:
+- Image generation.
+- Visual scoring itself.
+- Automatic git commit/push (optional and manual by default).
+
+## Inputs
+
+Required fields:
 
 ```json
 {
   "asset_id": "ASSET-3",
-  "asset_name": "Nocturnal Canopy Pattern",
-  "validated_png": "/downloads/asset-3-validated.png",
+  "asset_name": "Solidarity Mesh Tile",
+  "validated_png": "frontend/tmp/asset-3-validated.png",
   "compliance_score": 92,
   "idf_data": {
-    "colors": { "background": "#1A1714", "wattle_gold": "#D4A84B" },
-    "kr-motifs": ["kr-leafus", "Wattle", "kr-flower"],
+    "colors": {
+      "background": "#1A1714",
+      "primary": "#F14714",
+      "accent": "#DAF674"
+    },
+    "kr_motifs": ["anchor-signal", "solidarity-grid"],
     "dimensions": { "width": 512, "height": 512 },
-    "mode": "kr-dark",
-    "purpose": "Seamless background pattern"
+    "mode": "solidarity-dark",
+    "purpose": "seamless background texture"
   }
 }
 ```
 
-## Generated Files
+Validation rules:
+- `asset_id` must match `ASSET-[number]`.
+- `validated_png` must exist.
+- `compliance_score` should be numeric.
+- Metadata must not include banned flora/endemic terms.
 
-### 1. context.md
+## Outputs
 
-Narrative philosophy explaining kr-motif choices, geometric principles, mode context.
+For each packaged asset directory (`assets/ASSET-[N]-[slug]/`):
 
-**Template:**
+1. `context.md`
+- Narrative intent.
+- Motif rationale.
+- Mode context.
+- UI placement guidance.
 
-```markdown
-# Asset [N]: [Name]
+2. `tokens.json`
+- Asset id/name.
+- Color/tone metadata.
+- Dimensions and format.
+- Compliance score.
+- Semantic tags.
 
-## Narrative
+3. `usage.md`
+- CSS usage pattern.
+- Responsive behavior.
+- Recommended/avoid contexts.
 
-[kerala-streetprint [DEPRECATED_STYLE] discovery story based on kr-motifs]
-
-## kr-motifs
-
-[List with taxonomic significance]
-
-## Mode Context
-
-kr-dark: [Warm/theatrical interpretation]
-kr-dark: [Clinical/analytical interpretation]
-
-## Purpose
-
-[UI placement and compositional role]
-```
-
-### 2. tokens.json
-
-Machine-readable design specifications.
-
-**Structure:**
-
-```json
-{
-  "asset_id": "ASSET-3",
-  "background": "#1A1714",
-  "palette": {
-    "primary": ["#C45C4B", "#D4A84B"],
-    "accents": ["--sys-color-worker-ash", "--sys-color-solidarity-smoke-orange"]
-  },
-  "dimensions": {"width": 512, "height": 512, "format": "PNG"},
-  "density_zones": {
-    "upper_left": {"coverage": "18%"},
-    "central": {"coverage": "65%"}
-  },
-  "kr-motifs": [...],
-  "mode": "kr-dark",
-  "compliance_score": 92
-}
-```
-
-### 3. usage.md
-
-CSS implementation with responsive behavior, opacity ranges, placement guidelines.
-
-**Template:**
-
-```markdown
-# Usage Guidelines
-
-## CSS Implementation
-
-\`\`\`css
-.asset-[name] {
-background-image: url('/assets/[path]');
-background-size: [cover|contain|repeat];
-background-position: center;
-}
-
-/_ Opacity by context _/
-.kr-dark-hero { opacity: 0.85; }
-.kr-dark-content { opacity: 0.70; }
-.dashboard { opacity: 0.60; }
-\`\`\`
-
-## Responsive Behavior
-
-- Desktop: Full resolution
-- Tablet: Scale proportionally
-- Mobile: [Specific guidance]
-
-## Component Integration
-
-Recommended for: [Components list]
-Avoid for: [Contexts where inappropriate]
-```
+4. Production PNG copy
+- Copied to the appropriate category folder under `frontend/public/assets/...`.
 
 ## Process
 
-1. **Create Directory**
+1. Validate input contract.
+2. Normalize metadata to canon-safe vocabulary.
+3. Create target folder: `assets/ASSET-[N]-[slug]/`.
+4. Generate `context.md`.
+5. Generate `tokens.json`.
+6. Generate `usage.md`.
+7. Copy PNG to production category path.
+8. Emit packaging summary report.
 
-   ```bash
-   mkdir -p /assets/ASSET-[N]-[slug]/
-   ```
+## Compliance Rules
 
-2. **Generate context.md**
-   - Extract kr-motifs from IDF
-   - Build narrative using kr-motif → taxonomic significance mapping
-   - Insert mode context (kr-dark/kr-dark)
-
-3. **Generate tokens.json**
-   - Convert IDF to structured JSON
-   - Add compliance metadata
-   - Format for machine parsing
-
-4. **Generate usage.md**
-   - Build CSS template with asset path
-   - Add opacity recommendations based on mode
-   - List component integration targets
-
-5. **Copy Production File**
-
-   ```bash
-   cp [validated_png] /frontend/public/assets/[category]/[filename]
-   ```
-
-   Categories: wallpapers, patterns, kr-motifs, icons
-
-6. **Git Commit**
-   ```bash
-   git add /assets/ASSET-[N]-* /frontend/public/assets/[category]/
-   git commit -m "feat(assets): Add Asset [N] [name] - [score]/100"
-   ```
-
-## Integration Points
-
-**Flash-Sidekick:**
-
-- Call `generate_idf` on validated PNG → extract design tokens
-- Call `quick_summarize` on kr-motif list → generate narrative
-
-**Auto-Validator:**
-
-- Trigger: score ≥90 → auto-package
-- Input: validation JSON + PNG path
-
-**Claude Code:**
-
-- Delegates file operations and git commits
-- Verifies directory structure creation
+- Use semantic KR Solidarity vocabulary only.
+- Enforce zero-flora policy in generated content.
+- Prefer semantic token names over ad hoc color labels.
+- Do not emit deprecated token names.
 
 ## Usage Example
 
-```python
-# After auto-validation passes
-packager_result = asset_packager.run(
-    asset_id="ASSET-3",
-    validation_result=auto_validator_output,
-    png_path="/downloads/asset-3-validated.png"
-)
-
-# Output:
-# Created: /assets/ASSET-3-kr-wheat-paste/{context,tokens,usage}
-# Copied: /frontend/public/assets/patterns/kr-wheat-paste-tile-512.png
-# Committed: feat(assets): Add Asset 3 Nocturnal Canopy - 92/100
+```bash
+# Example invocation via local automation wrapper
+./scripts/package-asset.sh \
+  --asset-id ASSET-3 \
+  --asset-name "Solidarity Mesh Tile" \
+  --png frontend/tmp/asset-3-validated.png \
+  --score 92 \
+  --category patterns
 ```
 
-## Efficiency Gain
+Expected result (summary):
+- Created: `assets/ASSET-3-solidarity-mesh-tile/{context.md,tokens.json,usage.md}`
+- Copied: `frontend/public/assets/patterns/solidarity-mesh-tile-512.png`
 
-**Before:** 15 min per asset × 10 assets = 150 min
-**After:** 2 min per asset × 10 assets = 20 min
-**Savings:** 130 min (87% time reduction)
+## Edge Cases & Fallbacks
 
-## File Naming Convention
+- Missing PNG path: fail fast with file-not-found error.
+- Invalid asset id format: fail with required pattern.
+- Unknown category: route to `frontend/public/assets/misc/` and mark warning.
+- Partial metadata: generate files with explicit `TODO_REQUIRED_FIELD` markers.
 
-**Assets Directory:** `ASSET-[N]-[kebab-case-name]/`
-**Production Files:**
+## Troubleshooting
 
-- Wallpapers: `texture-[mode]-[name]-[width].png`
-- Patterns: `[name]-tile-[size].png`
-- kr-motifs: `kr-motif-[name]-[style]-[size].png`
-- Icons: `[name]-[purpose]-[size].png`
+### Generated files exist but metadata is incomplete
+- Confirm IDF payload includes dimensions, colors, and purpose.
+- Re-run with full validation output.
 
----
+### Output copied to wrong category
+- Validate category mapping rules in packaging wrapper.
+- Use explicit category flag.
 
-_Eliminates repetitive packaging work. Validated asset → production bundle in 2 minutes._
+### Content includes non-canonical language
+- Run brand/compliance enforcement before packaging.
+- Replace deprecated vocabulary and regenerate bundle files.
+
+## Best Practices
+
+- Keep generated bundle deterministic (same inputs -> same outputs).
+- Include compliance score and timestamp in `tokens.json` metadata.
+- Prefer manual review before any commit step.
+- Keep commit actions outside this skill unless explicitly requested.
+
+## Related Skills
+
+- `auto-validator` for pre-packaging compliance scoring.
+- `asset-metadata-enricher` for improved semantic metadata.
+- `manifest-reconciler` for post-packaging registry consistency.

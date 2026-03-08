@@ -1,0 +1,2122 @@
+{
+  "metadata": {
+    "generated_at": "2026-03-08T00:00:00Z",
+    "manifest_path": "/Users/okgoogle13/Projects/careercopilot/frontend/public/assets/kerala-rage-kr-solidarity-manifest.json",
+    "wireframes_dir": "/Users/okgoogle13/Projects/careercopilot/.claude/wireframes",
+    "assets_discovered": 41
+  },
+  "skill_chain": [
+    {
+      "skill": "kerala-rage-asset-cataloger",
+      "mode": "script",
+      "status": "executed"
+    },
+    {
+      "skill": "asset-placement-strategy",
+      "mode": "script",
+      "status": "executed",
+      "note": "Placement strategy completed"
+    },
+    {
+      "skill": "asset-metadata-enricher",
+      "mode": "governance_wrapper",
+      "status": "executed"
+    },
+    {
+      "skill": "manifest-reconciler",
+      "mode": "governance_wrapper",
+      "status": "executed"
+    },
+    {
+      "skill": "asset-path-validator",
+      "mode": "governance_wrapper",
+      "status": "executed"
+    },
+    {
+      "skill": "auto-validator",
+      "mode": "governance_wrapper",
+      "status": "executed"
+    }
+  ],
+  "catalog_summary": {
+    "total_requested": 41,
+    "total_analyzed": 41,
+    "total_skipped": 0
+  },
+  "placement_summary": {
+    "aggregate_score": 94.0,
+    "used_assets_count": 84,
+    "unused_assets_count": 3,
+    "token_compliance_pct": 1.0
+  },
+  "screens": [
+    {
+      "screen": "landing",
+      "wireframe": "01_landing.xml",
+      "placements": [
+        {
+          "slot": "hero_background",
+          "asset_id": "KR-SOLID-021",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-charcoalBackground-base"
+          ],
+          "z_layer": "Z-0",
+          "rationale": "Asset ID in requested range; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-SOLID-021",
+              "KR-SOLID-030"
+            ],
+            "id_range": [
+              "KR-SOLID-",
+              21,
+              30
+            ],
+            "aspect": "16:9",
+            "category": "spiritual",
+            "layer": "spiritual"
+          }
+        },
+        {
+          "slot": "hero_overlay",
+          "asset_id": "KR-SOLID-010",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-protestMetalBlue-base"
+          ],
+          "z_layer": "Z-1",
+          "rationale": "Compatible candidate selected",
+          "todo_constraints": {
+            "category": "atmospheric",
+            "layer": "atmospheric"
+          }
+        },
+        {
+          "slot": "hero_accent",
+          "asset_id": "KR-UI-016",
+          "status": "pre_existing",
+          "token_refs": [
+            "--sys-color-inkGold-base"
+          ],
+          "z_layer": "Z-3",
+          "rationale": "Existing valid manifest asset retained",
+          "todo_constraints": {}
+        },
+        {
+          "slot": "auto_kr_solid_002",
+          "asset_id": "KR-SOLID-002",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-protestMetalBlue-base"
+          ],
+          "z_layer": "Z-1",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-SOLID-002"
+            ],
+            "aspect": "1:1",
+            "category": "atmospheric",
+            "layer": "atmospheric",
+            "priority": "high"
+          }
+        },
+        {
+          "slot": "auto_kr_solid_036",
+          "asset_id": "KR-SOLID-036",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-protestMetalBlue-base"
+          ],
+          "z_layer": "Z-1",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-SOLID-036"
+            ],
+            "aspect": "1:1",
+            "category": "atmospheric",
+            "layer": "atmospheric",
+            "priority": "high"
+          }
+        },
+        {
+          "slot": "auto_kr_ui_008",
+          "asset_id": "KR-UI-008",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-inkGold-base"
+          ],
+          "z_layer": "Z-3",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-UI-008"
+            ],
+            "aspect": "1:1",
+            "category": "ui-kit",
+            "layer": "ui-kit",
+            "priority": "medium"
+          }
+        },
+        {
+          "slot": "auto_kr_ui_021",
+          "asset_id": "KR-UI-021",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-inkGold-base"
+          ],
+          "z_layer": "Z-3",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-UI-021"
+            ],
+            "aspect": "1:1",
+            "category": "ui-kit",
+            "layer": "ui-kit",
+            "priority": "medium"
+          }
+        },
+        {
+          "slot": "auto_kr_ui_017",
+          "asset_id": "KR-UI-017",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-inkGold-base"
+          ],
+          "z_layer": "Z-3",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-UI-017"
+            ],
+            "aspect": "1:1",
+            "category": "ui-kit",
+            "layer": "ui-kit",
+            "priority": "medium"
+          }
+        },
+        {
+          "slot": "auto_kr_solid_030",
+          "asset_id": "KR-SOLID-030",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-protestMetalBlue-base"
+          ],
+          "z_layer": "Z-1",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-SOLID-030"
+            ],
+            "aspect": "29:36",
+            "category": "resistance",
+            "layer": "resistance",
+            "priority": "critical"
+          }
+        },
+        {
+          "slot": "auto_kr_ui_031",
+          "asset_id": "KR-UI-031",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-inkGold-base"
+          ],
+          "z_layer": "Z-3",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-UI-031"
+            ],
+            "aspect": "1:1",
+            "category": "ui-kit",
+            "layer": "ui-kit",
+            "priority": "medium"
+          }
+        },
+        {
+          "slot": "auto_kr_icon_001",
+          "asset_id": "KR-ICON-001",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-inkGold-base"
+          ],
+          "z_layer": "Z-3",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Icon-compatible asset selected; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-ICON-001"
+            ],
+            "aspect": "1:1",
+            "category": "icons",
+            "layer": "ui-kit",
+            "priority": "medium",
+            "wants_icon": true
+          }
+        }
+      ],
+      "unresolved_slots": [],
+      "score": 94,
+      "score_breakdown": {
+        "wireframe_alignment_z_order": 29,
+        "token_compliance": 25,
+        "manifest_valid_mapping": 20,
+        "hero_depth_lighting": 20
+      },
+      "diagnostics": {
+        "invalid_tokens": [],
+        "invalid_assets": []
+      }
+    },
+    {
+      "screen": "auth",
+      "wireframe": "02_auth.xml",
+      "placements": [
+        {
+          "slot": "background_accent",
+          "asset_id": "KR-SOLID-011",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-protestMetalBlue-base"
+          ],
+          "z_layer": "Z-1",
+          "rationale": "Compatible candidate selected",
+          "todo_constraints": {
+            "category": "atmospheric",
+            "layer": "atmospheric"
+          }
+        },
+        {
+          "slot": "auto_kr_solid_003",
+          "asset_id": "KR-SOLID-003",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-protestMetalBlue-base"
+          ],
+          "z_layer": "Z-1",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-SOLID-003"
+            ],
+            "aspect": "1:1",
+            "category": "atmospheric",
+            "layer": "atmospheric",
+            "priority": "high"
+          }
+        },
+        {
+          "slot": "auto_kr_solid_037",
+          "asset_id": "KR-SOLID-037",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-protestMetalBlue-base"
+          ],
+          "z_layer": "Z-1",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-SOLID-037"
+            ],
+            "aspect": "1:1",
+            "category": "atmospheric",
+            "layer": "atmospheric",
+            "priority": "high"
+          }
+        },
+        {
+          "slot": "auto_kr_ui_009",
+          "asset_id": "KR-UI-009",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-inkGold-base"
+          ],
+          "z_layer": "Z-3",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-UI-009"
+            ],
+            "aspect": "1:1",
+            "category": "ui-kit",
+            "layer": "ui-kit",
+            "priority": "medium"
+          }
+        },
+        {
+          "slot": "auto_kr_ui_022",
+          "asset_id": "KR-UI-022",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-inkGold-base"
+          ],
+          "z_layer": "Z-3",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-UI-022"
+            ],
+            "aspect": "1:1",
+            "category": "ui-kit",
+            "layer": "ui-kit",
+            "priority": "medium"
+          }
+        },
+        {
+          "slot": "auto_kr_ui_008",
+          "asset_id": "KR-UI-008",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-inkGold-base"
+          ],
+          "z_layer": "Z-3",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-UI-008"
+            ],
+            "aspect": "1:1",
+            "category": "ui-kit",
+            "layer": "ui-kit",
+            "priority": "medium"
+          }
+        },
+        {
+          "slot": "auto_kr_solid_031",
+          "asset_id": "KR-SOLID-031",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-protestMetalBlue-base"
+          ],
+          "z_layer": "Z-1",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-SOLID-031"
+            ],
+            "aspect": "1:1",
+            "category": "resistance",
+            "layer": "resistance",
+            "priority": "critical"
+          }
+        },
+        {
+          "slot": "auto_kr_ui_032",
+          "asset_id": "KR-UI-032",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-inkGold-base"
+          ],
+          "z_layer": "Z-3",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-UI-032"
+            ],
+            "aspect": "1:1",
+            "category": "ui-kit",
+            "layer": "ui-kit",
+            "priority": "medium"
+          }
+        },
+        {
+          "slot": "auto_kr_icon_002",
+          "asset_id": "KR-ICON-002",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-inkGold-base"
+          ],
+          "z_layer": "Z-3",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Icon-compatible asset selected; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-ICON-002"
+            ],
+            "aspect": "1:1",
+            "category": "icons",
+            "layer": "ui-kit",
+            "priority": "medium",
+            "wants_icon": true
+          }
+        }
+      ],
+      "unresolved_slots": [],
+      "score": 97,
+      "score_breakdown": {
+        "wireframe_alignment_z_order": 32,
+        "token_compliance": 25,
+        "manifest_valid_mapping": 20,
+        "hero_depth_lighting": 20
+      },
+      "diagnostics": {
+        "invalid_tokens": [],
+        "invalid_assets": []
+      }
+    },
+    {
+      "screen": "onboarding",
+      "wireframe": "03_onboarding.xml",
+      "placements": [
+        {
+          "slot": "step1_accent",
+          "asset_id": "KR-SOLID-012",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-protestMetalBlue-base"
+          ],
+          "z_layer": "Z-1",
+          "rationale": "Compatible candidate selected",
+          "todo_constraints": {}
+        },
+        {
+          "slot": "role_icons",
+          "asset_id": "KR-LOGO-001",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-worker-ash-base"
+          ],
+          "z_layer": "Z-3",
+          "rationale": "Icon-compatible asset selected",
+          "todo_constraints": {
+            "wants_icon": true
+          }
+        },
+        {
+          "slot": "skill_icons",
+          "asset_id": "KR-LOGO-002",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-inkGold-base"
+          ],
+          "z_layer": "Z-3",
+          "rationale": "Icon-compatible asset selected",
+          "todo_constraints": {
+            "wants_icon": true
+          }
+        },
+        {
+          "slot": "auto_kr_solid_004",
+          "asset_id": "KR-SOLID-004",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-protestMetalBlue-base"
+          ],
+          "z_layer": "Z-1",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-SOLID-004"
+            ],
+            "aspect": "3:4",
+            "category": "atmospheric",
+            "layer": "atmospheric",
+            "priority": "high"
+          }
+        },
+        {
+          "slot": "auto_kr_solid_038",
+          "asset_id": "KR-SOLID-038",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-charcoalBackground-base"
+          ],
+          "z_layer": "Z-0",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-SOLID-038"
+            ],
+            "aspect": "1:1",
+            "category": "substrate",
+            "layer": "substrate",
+            "priority": "high"
+          }
+        },
+        {
+          "slot": "auto_kr_ui_010",
+          "asset_id": "KR-UI-010",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-inkGold-base"
+          ],
+          "z_layer": "Z-3",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-UI-010"
+            ],
+            "aspect": "1:1",
+            "category": "ui-kit",
+            "layer": "ui-kit",
+            "priority": "medium"
+          }
+        },
+        {
+          "slot": "auto_kr_ui_009",
+          "asset_id": "KR-UI-009",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-inkGold-base"
+          ],
+          "z_layer": "Z-3",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-UI-009"
+            ],
+            "aspect": "1:1",
+            "category": "ui-kit",
+            "layer": "ui-kit",
+            "priority": "medium"
+          }
+        },
+        {
+          "slot": "auto_kr_solid_032",
+          "asset_id": "KR-SOLID-032",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-protestMetalBlue-base"
+          ],
+          "z_layer": "Z-1",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-SOLID-032"
+            ],
+            "aspect": "24:43",
+            "category": "resistance",
+            "layer": "resistance",
+            "priority": "critical"
+          }
+        },
+        {
+          "slot": "auto_kr_ui_033",
+          "asset_id": "KR-UI-033",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-inkGold-base"
+          ],
+          "z_layer": "Z-3",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-UI-033"
+            ],
+            "aspect": "1:1",
+            "category": "ui-kit",
+            "layer": "ui-kit",
+            "priority": "medium"
+          }
+        },
+        {
+          "slot": "auto_kr_icon_003",
+          "asset_id": "KR-ICON-003",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-inkGold-base"
+          ],
+          "z_layer": "Z-3",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Icon-compatible asset selected; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-ICON-003"
+            ],
+            "aspect": "1:1",
+            "category": "icons",
+            "layer": "ui-kit",
+            "priority": "medium",
+            "wants_icon": true
+          }
+        }
+      ],
+      "unresolved_slots": [],
+      "score": 91,
+      "score_breakdown": {
+        "wireframe_alignment_z_order": 26,
+        "token_compliance": 25,
+        "manifest_valid_mapping": 20,
+        "hero_depth_lighting": 20
+      },
+      "diagnostics": {
+        "invalid_tokens": [],
+        "invalid_assets": []
+      }
+    },
+    {
+      "screen": "ingestion",
+      "wireframe": "04_ingestion.xml",
+      "placements": [
+        {
+          "slot": "icon_pdf",
+          "asset_id": "KR-UI-004",
+          "status": "pre_existing",
+          "token_refs": [
+            "--sys-color-solidarityRed-base"
+          ],
+          "z_layer": "Z-3",
+          "rationale": "Existing valid manifest asset retained",
+          "todo_constraints": {}
+        },
+        {
+          "slot": "icon_docx",
+          "asset_id": "KR-UI-005",
+          "status": "pre_existing",
+          "token_refs": [
+            "--sys-color-protestMetalBlue-base"
+          ],
+          "z_layer": "Z-3",
+          "rationale": "Existing valid manifest asset retained",
+          "todo_constraints": {}
+        },
+        {
+          "slot": "icon_upload",
+          "asset_id": "KR-UI-006",
+          "status": "pre_existing",
+          "token_refs": [
+            "--sys-color-inkGold-base"
+          ],
+          "z_layer": "Z-3",
+          "rationale": "Existing valid manifest asset retained",
+          "todo_constraints": {}
+        },
+        {
+          "slot": "auto_kr_solid_005",
+          "asset_id": "KR-SOLID-005",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-protestMetalBlue-base"
+          ],
+          "z_layer": "Z-1",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-SOLID-005"
+            ],
+            "aspect": "2:3",
+            "category": "atmospheric",
+            "layer": "atmospheric",
+            "priority": "high"
+          }
+        },
+        {
+          "slot": "auto_kr_solid_039",
+          "asset_id": "KR-SOLID-039",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-charcoalBackground-base"
+          ],
+          "z_layer": "Z-0",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-SOLID-039"
+            ],
+            "aspect": "3:2",
+            "category": "substrate",
+            "layer": "substrate",
+            "priority": "high"
+          }
+        },
+        {
+          "slot": "auto_kr_ui_011",
+          "asset_id": "KR-UI-011",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-inkGold-base"
+          ],
+          "z_layer": "Z-3",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-UI-011"
+            ],
+            "aspect": "1:1",
+            "category": "ui-kit",
+            "layer": "ui-kit",
+            "priority": "medium"
+          }
+        },
+        {
+          "slot": "auto_kr_ui_010",
+          "asset_id": "KR-UI-010",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-inkGold-base"
+          ],
+          "z_layer": "Z-3",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-UI-010"
+            ],
+            "aspect": "1:1",
+            "category": "ui-kit",
+            "layer": "ui-kit",
+            "priority": "medium"
+          }
+        },
+        {
+          "slot": "auto_kr_ui_023",
+          "asset_id": "KR-UI-023",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-inkGold-base"
+          ],
+          "z_layer": "Z-3",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-UI-023"
+            ],
+            "aspect": "1:1",
+            "category": "ui-kit",
+            "layer": "ui-kit",
+            "priority": "medium"
+          }
+        },
+        {
+          "slot": "auto_kr_ui_034",
+          "asset_id": "KR-UI-034",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-inkGold-base"
+          ],
+          "z_layer": "Z-3",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-UI-034"
+            ],
+            "aspect": "1:1",
+            "category": "ui-kit",
+            "layer": "ui-kit",
+            "priority": "medium"
+          }
+        },
+        {
+          "slot": "auto_kr_icon_004",
+          "asset_id": "KR-ICON-004",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-inkGold-base"
+          ],
+          "z_layer": "Z-3",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Icon-compatible asset selected; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-ICON-004"
+            ],
+            "aspect": "1:1",
+            "category": "icons",
+            "layer": "ui-kit",
+            "priority": "medium",
+            "wants_icon": true
+          }
+        }
+      ],
+      "unresolved_slots": [],
+      "score": 94,
+      "score_breakdown": {
+        "wireframe_alignment_z_order": 29,
+        "token_compliance": 25,
+        "manifest_valid_mapping": 20,
+        "hero_depth_lighting": 20
+      },
+      "diagnostics": {
+        "invalid_tokens": [],
+        "invalid_assets": []
+      }
+    },
+    {
+      "screen": "analysis",
+      "wireframe": "05_analysis.xml",
+      "placements": [
+        {
+          "slot": "auto_kr_solid_002",
+          "asset_id": "KR-SOLID-002",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-protestMetalBlue-base"
+          ],
+          "z_layer": "Z-1",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-SOLID-002"
+            ],
+            "aspect": "1:1",
+            "category": "atmospheric",
+            "layer": "atmospheric",
+            "priority": "high"
+          }
+        },
+        {
+          "slot": "auto_kr_solid_009",
+          "asset_id": "KR-SOLID-009",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-protestMetalBlue-base"
+          ],
+          "z_layer": "Z-1",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-SOLID-009"
+            ],
+            "aspect": "1:1",
+            "category": "atmospheric",
+            "layer": "atmospheric",
+            "priority": "high"
+          }
+        },
+        {
+          "slot": "auto_kr_solid_024",
+          "asset_id": "KR-SOLID-024",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-protestMetalBlue-base"
+          ],
+          "z_layer": "Z-1",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-SOLID-024"
+            ],
+            "aspect": "1:1",
+            "category": "resistance",
+            "layer": "resistance",
+            "priority": "critical"
+          }
+        },
+        {
+          "slot": "auto_kr_solid_006",
+          "asset_id": "KR-SOLID-006",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-protestMetalBlue-base"
+          ],
+          "z_layer": "Z-1",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-SOLID-006"
+            ],
+            "aspect": "1:1",
+            "category": "atmospheric",
+            "layer": "atmospheric",
+            "priority": "high"
+          }
+        },
+        {
+          "slot": "auto_kr_solid_040",
+          "asset_id": "KR-SOLID-040",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-charcoalBackground-base"
+          ],
+          "z_layer": "Z-0",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-SOLID-040"
+            ],
+            "aspect": "3:2",
+            "category": "substrate",
+            "layer": "substrate",
+            "priority": "high"
+          }
+        },
+        {
+          "slot": "auto_kr_ui_012",
+          "asset_id": "KR-UI-012",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-inkGold-base"
+          ],
+          "z_layer": "Z-3",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-UI-012"
+            ],
+            "aspect": "1:1",
+            "category": "ui-kit",
+            "layer": "ui-kit",
+            "priority": "medium"
+          }
+        },
+        {
+          "slot": "auto_kr_ui_011",
+          "asset_id": "KR-UI-011",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-inkGold-base"
+          ],
+          "z_layer": "Z-3",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-UI-011"
+            ],
+            "aspect": "1:1",
+            "category": "ui-kit",
+            "layer": "ui-kit",
+            "priority": "medium"
+          }
+        },
+        {
+          "slot": "auto_kr_ui_024",
+          "asset_id": "KR-UI-024",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-inkGold-base"
+          ],
+          "z_layer": "Z-3",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-UI-024"
+            ],
+            "aspect": "1:1",
+            "category": "ui-kit",
+            "layer": "ui-kit",
+            "priority": "medium"
+          }
+        },
+        {
+          "slot": "auto_kr_ui_035",
+          "asset_id": "KR-UI-035",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-inkGold-base"
+          ],
+          "z_layer": "Z-3",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-UI-035"
+            ],
+            "aspect": "1:1",
+            "category": "ui-kit",
+            "layer": "ui-kit",
+            "priority": "medium"
+          }
+        },
+        {
+          "slot": "auto_kr_solid_043",
+          "asset_id": "KR-SOLID-043",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-protestMetalBlue-base"
+          ],
+          "z_layer": "Z-1",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-SOLID-043"
+            ],
+            "aspect": "16:9",
+            "category": "heroes",
+            "layer": "cultural",
+            "priority": "critical"
+          }
+        }
+      ],
+      "unresolved_slots": [],
+      "score": 94,
+      "score_breakdown": {
+        "wireframe_alignment_z_order": 29,
+        "token_compliance": 25,
+        "manifest_valid_mapping": 20,
+        "hero_depth_lighting": 20
+      },
+      "diagnostics": {
+        "invalid_tokens": [],
+        "invalid_assets": []
+      }
+    },
+    {
+      "screen": "lookout",
+      "wireframe": "06_lookout.xml",
+      "placements": [
+        {
+          "slot": "auto_kr_solid_003",
+          "asset_id": "KR-SOLID-003",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-protestMetalBlue-base"
+          ],
+          "z_layer": "Z-1",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-SOLID-003"
+            ],
+            "aspect": "1:1",
+            "category": "atmospheric",
+            "layer": "atmospheric",
+            "priority": "high"
+          }
+        },
+        {
+          "slot": "auto_kr_solid_010",
+          "asset_id": "KR-SOLID-010",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-inkGold-base"
+          ],
+          "z_layer": "Z-3",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-SOLID-010"
+            ],
+            "aspect": "1:1",
+            "category": "spiritual",
+            "layer": "spiritual",
+            "priority": "critical"
+          }
+        },
+        {
+          "slot": "auto_kr_solid_025",
+          "asset_id": "KR-SOLID-025",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-protestMetalBlue-base"
+          ],
+          "z_layer": "Z-1",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-SOLID-025"
+            ],
+            "aspect": "3:2",
+            "category": "resistance",
+            "layer": "resistance",
+            "priority": "critical"
+          }
+        },
+        {
+          "slot": "auto_kr_solid_007",
+          "asset_id": "KR-SOLID-007",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-protestMetalBlue-base"
+          ],
+          "z_layer": "Z-1",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-SOLID-007"
+            ],
+            "aspect": "1:1",
+            "category": "atmospheric",
+            "layer": "atmospheric",
+            "priority": "high"
+          }
+        },
+        {
+          "slot": "auto_kr_brutalist_mask_001",
+          "asset_id": "KR-BRUTALIST-MASK-001",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-inkGold-base"
+          ],
+          "z_layer": "Z-3",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-BRUTALIST-MASK-001"
+            ],
+            "aspect": "1:1",
+            "category": "ui-kit",
+            "layer": "ui-kit",
+            "priority": "medium"
+          }
+        },
+        {
+          "slot": "auto_kr_ui_013",
+          "asset_id": "KR-UI-013",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-inkGold-base"
+          ],
+          "z_layer": "Z-3",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-UI-013"
+            ],
+            "aspect": "1:1",
+            "category": "ui-kit",
+            "layer": "ui-kit",
+            "priority": "medium"
+          }
+        },
+        {
+          "slot": "auto_kr_ui_025",
+          "asset_id": "KR-UI-025",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-inkGold-base"
+          ],
+          "z_layer": "Z-3",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-UI-025"
+            ],
+            "aspect": "1:1",
+            "category": "ui-kit",
+            "layer": "ui-kit",
+            "priority": "medium"
+          }
+        },
+        {
+          "slot": "auto_kr_ui_036",
+          "asset_id": "KR-UI-036",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-inkGold-base"
+          ],
+          "z_layer": "Z-3",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-UI-036"
+            ],
+            "aspect": "1:1",
+            "category": "ui-kit",
+            "layer": "ui-kit",
+            "priority": "medium"
+          }
+        },
+        {
+          "slot": "auto_kr_solid_044",
+          "asset_id": "KR-SOLID-044",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-protestMetalBlue-base"
+          ],
+          "z_layer": "Z-1",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-SOLID-044"
+            ],
+            "aspect": "16:9",
+            "category": "heroes",
+            "layer": "resistance",
+            "priority": "critical"
+          }
+        }
+      ],
+      "unresolved_slots": [],
+      "score": 94,
+      "score_breakdown": {
+        "wireframe_alignment_z_order": 29,
+        "token_compliance": 25,
+        "manifest_valid_mapping": 20,
+        "hero_depth_lighting": 20
+      },
+      "diagnostics": {
+        "invalid_tokens": [],
+        "invalid_assets": []
+      }
+    },
+    {
+      "screen": "kanban",
+      "wireframe": "07_kanban.xml",
+      "placements": [
+        {
+          "slot": "auto_kr_solid_004",
+          "asset_id": "KR-SOLID-004",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-protestMetalBlue-base"
+          ],
+          "z_layer": "Z-1",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-SOLID-004"
+            ],
+            "aspect": "3:4",
+            "category": "atmospheric",
+            "layer": "atmospheric",
+            "priority": "high"
+          }
+        },
+        {
+          "slot": "auto_kr_solid_011",
+          "asset_id": "KR-SOLID-011",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-inkGold-base"
+          ],
+          "z_layer": "Z-3",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-SOLID-011"
+            ],
+            "aspect": "16:9",
+            "category": "spiritual",
+            "layer": "spiritual",
+            "priority": "critical"
+          }
+        },
+        {
+          "slot": "auto_kr_solid_026",
+          "asset_id": "KR-SOLID-026",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-protestMetalBlue-base"
+          ],
+          "z_layer": "Z-1",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-SOLID-026"
+            ],
+            "aspect": "1:1",
+            "category": "resistance",
+            "layer": "resistance",
+            "priority": "critical"
+          }
+        },
+        {
+          "slot": "auto_kr_solid_009",
+          "asset_id": "KR-SOLID-009",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-protestMetalBlue-base"
+          ],
+          "z_layer": "Z-1",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-SOLID-009"
+            ],
+            "aspect": "1:1",
+            "category": "atmospheric",
+            "layer": "atmospheric",
+            "priority": "high"
+          }
+        },
+        {
+          "slot": "auto_kr_ui_017",
+          "asset_id": "KR-UI-017",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-inkGold-base"
+          ],
+          "z_layer": "Z-3",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-UI-017"
+            ],
+            "aspect": "1:1",
+            "category": "ui-kit",
+            "layer": "ui-kit",
+            "priority": "medium"
+          }
+        },
+        {
+          "slot": "auto_kr_ui_014",
+          "asset_id": "KR-UI-014",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-inkGold-base"
+          ],
+          "z_layer": "Z-3",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-UI-014"
+            ],
+            "aspect": "1:1",
+            "category": "ui-kit",
+            "layer": "ui-kit",
+            "priority": "medium"
+          }
+        },
+        {
+          "slot": "auto_kr_ui_026",
+          "asset_id": "KR-UI-026",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-inkGold-base"
+          ],
+          "z_layer": "Z-3",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-UI-026"
+            ],
+            "aspect": "1:1",
+            "category": "ui-kit",
+            "layer": "ui-kit",
+            "priority": "medium"
+          }
+        },
+        {
+          "slot": "auto_kr_ui_037",
+          "asset_id": "KR-UI-037",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-inkGold-base"
+          ],
+          "z_layer": "Z-3",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-UI-037"
+            ],
+            "aspect": "1:1",
+            "category": "ui-kit",
+            "layer": "ui-kit",
+            "priority": "medium"
+          }
+        },
+        {
+          "slot": "auto_kr_solid_045",
+          "asset_id": "KR-SOLID-045",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-charcoalBackground-base"
+          ],
+          "z_layer": "Z-0",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-SOLID-045"
+            ],
+            "aspect": "16:9",
+            "category": "heroes",
+            "layer": "substrate",
+            "priority": "critical"
+          }
+        }
+      ],
+      "unresolved_slots": [],
+      "score": 94,
+      "score_breakdown": {
+        "wireframe_alignment_z_order": 29,
+        "token_compliance": 25,
+        "manifest_valid_mapping": 20,
+        "hero_depth_lighting": 20
+      },
+      "diagnostics": {
+        "invalid_tokens": [],
+        "invalid_assets": []
+      }
+    },
+    {
+      "screen": "workbench",
+      "wireframe": "08_workbench.xml",
+      "placements": [
+        {
+          "slot": "auto_kr_solid_005",
+          "asset_id": "KR-SOLID-005",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-protestMetalBlue-base"
+          ],
+          "z_layer": "Z-1",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-SOLID-005"
+            ],
+            "aspect": "2:3",
+            "category": "atmospheric",
+            "layer": "atmospheric",
+            "priority": "high"
+          }
+        },
+        {
+          "slot": "auto_kr_solid_012",
+          "asset_id": "KR-SOLID-012",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-inkGold-base"
+          ],
+          "z_layer": "Z-3",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-SOLID-012"
+            ],
+            "aspect": "1:1",
+            "category": "spiritual",
+            "layer": "spiritual",
+            "priority": "critical"
+          }
+        },
+        {
+          "slot": "auto_kr_solid_027",
+          "asset_id": "KR-SOLID-027",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-protestMetalBlue-base"
+          ],
+          "z_layer": "Z-1",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-SOLID-027"
+            ],
+            "aspect": "2:3",
+            "category": "resistance",
+            "layer": "resistance",
+            "priority": "critical"
+          }
+        },
+        {
+          "slot": "auto_kr_solid_022",
+          "asset_id": "KR-SOLID-022",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-charcoalBackground-base"
+          ],
+          "z_layer": "Z-0",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-SOLID-022"
+            ],
+            "aspect": "1:1",
+            "category": "substrate",
+            "layer": "substrate",
+            "priority": "high"
+          }
+        },
+        {
+          "slot": "auto_kr_ui_001",
+          "asset_id": "KR-UI-001",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-inkGold-base"
+          ],
+          "z_layer": "Z-3",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-UI-001"
+            ],
+            "aspect": "1:1",
+            "category": "ui-kit",
+            "layer": "ui-kit",
+            "priority": "medium"
+          }
+        },
+        {
+          "slot": "auto_kr_ui_015",
+          "asset_id": "KR-UI-015",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-inkGold-base"
+          ],
+          "z_layer": "Z-3",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-UI-015"
+            ],
+            "aspect": "1:1",
+            "category": "ui-kit",
+            "layer": "ui-kit",
+            "priority": "medium"
+          }
+        },
+        {
+          "slot": "auto_kr_ui_027",
+          "asset_id": "KR-UI-027",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-inkGold-base"
+          ],
+          "z_layer": "Z-3",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-UI-027"
+            ],
+            "aspect": "1:1",
+            "category": "ui-kit",
+            "layer": "ui-kit",
+            "priority": "medium"
+          }
+        },
+        {
+          "slot": "auto_kr_ui_038",
+          "asset_id": "KR-UI-038",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-inkGold-base"
+          ],
+          "z_layer": "Z-3",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-UI-038"
+            ],
+            "aspect": "20:3",
+            "category": "ui-kit",
+            "layer": "ui-kit",
+            "priority": "medium"
+          }
+        },
+        {
+          "slot": "auto_kr_solid_046",
+          "asset_id": "KR-SOLID-046",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-protestMetalBlue-base"
+          ],
+          "z_layer": "Z-1",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-SOLID-046"
+            ],
+            "aspect": "16:9",
+            "category": "heroes",
+            "layer": "atmospheric",
+            "priority": "high"
+          }
+        }
+      ],
+      "unresolved_slots": [],
+      "score": 91,
+      "score_breakdown": {
+        "wireframe_alignment_z_order": 26,
+        "token_compliance": 25,
+        "manifest_valid_mapping": 20,
+        "hero_depth_lighting": 20
+      },
+      "diagnostics": {
+        "invalid_tokens": [],
+        "invalid_assets": []
+      }
+    },
+    {
+      "screen": "finalization",
+      "wireframe": "09_finalization.xml",
+      "placements": [
+        {
+          "slot": "auto_kr_solid_006",
+          "asset_id": "KR-SOLID-006",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-protestMetalBlue-base"
+          ],
+          "z_layer": "Z-1",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-SOLID-006"
+            ],
+            "aspect": "1:1",
+            "category": "atmospheric",
+            "layer": "atmospheric",
+            "priority": "high"
+          }
+        },
+        {
+          "slot": "auto_kr_solid_013",
+          "asset_id": "KR-SOLID-013",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-inkGold-base"
+          ],
+          "z_layer": "Z-3",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-SOLID-013"
+            ],
+            "aspect": "16:9",
+            "category": "spiritual",
+            "layer": "spiritual",
+            "priority": "critical"
+          }
+        },
+        {
+          "slot": "auto_kr_solid_028",
+          "asset_id": "KR-SOLID-028",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-protestMetalBlue-base"
+          ],
+          "z_layer": "Z-1",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-SOLID-028"
+            ],
+            "aspect": "2:3",
+            "category": "resistance",
+            "layer": "resistance",
+            "priority": "critical"
+          }
+        },
+        {
+          "slot": "auto_kr_solid_033",
+          "asset_id": "KR-SOLID-033",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-protestMetalBlue-base"
+          ],
+          "z_layer": "Z-1",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-SOLID-033"
+            ],
+            "aspect": "1:1",
+            "category": "cultural",
+            "layer": "cultural",
+            "priority": "high"
+          }
+        },
+        {
+          "slot": "auto_kr_ui_002",
+          "asset_id": "KR-UI-002",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-inkGold-base"
+          ],
+          "z_layer": "Z-3",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-UI-002"
+            ],
+            "aspect": "1:1",
+            "category": "ui-kit",
+            "layer": "ui-kit",
+            "priority": "medium"
+          }
+        },
+        {
+          "slot": "auto_kr_ui_018",
+          "asset_id": "KR-UI-018",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-inkGold-base"
+          ],
+          "z_layer": "Z-3",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-UI-018"
+            ],
+            "aspect": "1:1",
+            "category": "ui-kit",
+            "layer": "ui-kit",
+            "priority": "medium"
+          }
+        },
+        {
+          "slot": "auto_kr_ui_028",
+          "asset_id": "KR-UI-028",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-inkGold-base"
+          ],
+          "z_layer": "Z-3",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-UI-028"
+            ],
+            "aspect": "1:1",
+            "category": "ui-kit",
+            "layer": "ui-kit",
+            "priority": "medium"
+          }
+        },
+        {
+          "slot": "auto_kr_solid_041",
+          "asset_id": "KR-SOLID-041",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-protestMetalBlue-base"
+          ],
+          "z_layer": "Z-1",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-SOLID-041"
+            ],
+            "aspect": "16:9",
+            "category": "heroes",
+            "layer": "resistance",
+            "priority": "critical"
+          }
+        }
+      ],
+      "unresolved_slots": [],
+      "score": 94,
+      "score_breakdown": {
+        "wireframe_alignment_z_order": 29,
+        "token_compliance": 25,
+        "manifest_valid_mapping": 20,
+        "hero_depth_lighting": 20
+      },
+      "diagnostics": {
+        "invalid_tokens": [],
+        "invalid_assets": []
+      }
+    },
+    {
+      "screen": "settings",
+      "wireframe": "10_settings.xml",
+      "placements": [
+        {
+          "slot": "auto_kr_solid_007",
+          "asset_id": "KR-SOLID-007",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-protestMetalBlue-base"
+          ],
+          "z_layer": "Z-1",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-SOLID-007"
+            ],
+            "aspect": "1:1",
+            "category": "atmospheric",
+            "layer": "atmospheric",
+            "priority": "high"
+          }
+        },
+        {
+          "slot": "auto_kr_solid_014",
+          "asset_id": "KR-SOLID-014",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-inkGold-base"
+          ],
+          "z_layer": "Z-3",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-SOLID-014"
+            ],
+            "aspect": "16:9",
+            "category": "spiritual",
+            "layer": "spiritual",
+            "priority": "critical"
+          }
+        },
+        {
+          "slot": "auto_kr_solid_029",
+          "asset_id": "KR-SOLID-029",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-protestMetalBlue-base"
+          ],
+          "z_layer": "Z-1",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-SOLID-029"
+            ],
+            "aspect": "2:3",
+            "category": "resistance",
+            "layer": "resistance",
+            "priority": "critical"
+          }
+        },
+        {
+          "slot": "auto_kr_solid_034",
+          "asset_id": "KR-SOLID-034",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-protestMetalBlue-base"
+          ],
+          "z_layer": "Z-1",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-SOLID-034"
+            ],
+            "aspect": "16:9",
+            "category": "cultural",
+            "layer": "cultural",
+            "priority": "high"
+          }
+        },
+        {
+          "slot": "auto_kr_ui_003",
+          "asset_id": "KR-UI-003",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-inkGold-base"
+          ],
+          "z_layer": "Z-3",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-UI-003"
+            ],
+            "aspect": "1:1",
+            "category": "ui-kit",
+            "layer": "ui-kit",
+            "priority": "medium"
+          }
+        },
+        {
+          "slot": "auto_kr_ui_019",
+          "asset_id": "KR-UI-019",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-inkGold-base"
+          ],
+          "z_layer": "Z-3",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-UI-019"
+            ],
+            "aspect": "1:1",
+            "category": "ui-kit",
+            "layer": "ui-kit",
+            "priority": "medium"
+          }
+        },
+        {
+          "slot": "auto_kr_ui_029",
+          "asset_id": "KR-UI-029",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-inkGold-base"
+          ],
+          "z_layer": "Z-3",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-UI-029"
+            ],
+            "aspect": "1:1",
+            "category": "ui-kit",
+            "layer": "ui-kit",
+            "priority": "medium"
+          }
+        },
+        {
+          "slot": "auto_kr_solid_042",
+          "asset_id": "KR-SOLID-042",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-protestMetalBlue-base"
+          ],
+          "z_layer": "Z-1",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-SOLID-042"
+            ],
+            "aspect": "16:9",
+            "category": "heroes",
+            "layer": "resistance",
+            "priority": "critical"
+          }
+        }
+      ],
+      "unresolved_slots": [],
+      "score": 94,
+      "score_breakdown": {
+        "wireframe_alignment_z_order": 29,
+        "token_compliance": 25,
+        "manifest_valid_mapping": 20,
+        "hero_depth_lighting": 20
+      },
+      "diagnostics": {
+        "invalid_tokens": [],
+        "invalid_assets": []
+      }
+    },
+    {
+      "screen": "dashboard",
+      "wireframe": "11_dashboard.xml",
+      "placements": [
+        {
+          "slot": "auto_kr_solid_008",
+          "asset_id": "KR-SOLID-008",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-protestMetalBlue-base"
+          ],
+          "z_layer": "Z-1",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-SOLID-008"
+            ],
+            "aspect": "2:3",
+            "category": "atmospheric",
+            "layer": "atmospheric",
+            "priority": "high"
+          }
+        },
+        {
+          "slot": "auto_kr_solid_022",
+          "asset_id": "KR-SOLID-022",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-charcoalBackground-base"
+          ],
+          "z_layer": "Z-0",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-SOLID-022"
+            ],
+            "aspect": "1:1",
+            "category": "substrate",
+            "layer": "substrate",
+            "priority": "high"
+          }
+        },
+        {
+          "slot": "auto_kr_solid_035",
+          "asset_id": "KR-SOLID-035",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-protestMetalBlue-base"
+          ],
+          "z_layer": "Z-1",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-SOLID-035"
+            ],
+            "aspect": "1:1",
+            "category": "cultural",
+            "layer": "cultural",
+            "priority": "high"
+          }
+        },
+        {
+          "slot": "auto_kr_ui_007",
+          "asset_id": "KR-UI-007",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-inkGold-base"
+          ],
+          "z_layer": "Z-3",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-UI-007"
+            ],
+            "aspect": "1:1",
+            "category": "ui-kit",
+            "layer": "ui-kit",
+            "priority": "medium"
+          }
+        },
+        {
+          "slot": "auto_kr_ui_020",
+          "asset_id": "KR-UI-020",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-inkGold-base"
+          ],
+          "z_layer": "Z-3",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-UI-020"
+            ],
+            "aspect": "1:1",
+            "category": "ui-kit",
+            "layer": "ui-kit",
+            "priority": "medium"
+          }
+        },
+        {
+          "slot": "auto_kr_ui_030",
+          "asset_id": "KR-UI-030",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-inkGold-base"
+          ],
+          "z_layer": "Z-3",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-UI-030"
+            ],
+            "aspect": "1:1",
+            "category": "ui-kit",
+            "layer": "ui-kit",
+            "priority": "medium"
+          }
+        },
+        {
+          "slot": "auto_kr_logo_003",
+          "asset_id": "KR-LOGO-003",
+          "status": "applied",
+          "token_refs": [
+            "--sys-color-inkGold-base"
+          ],
+          "z_layer": "Z-3",
+          "rationale": "Layer matches TODO constraint; Category matches TODO constraint; Aspect ratio match; Priority level aligned; Asset ID explicitly requested",
+          "todo_constraints": {
+            "id_candidates": [
+              "KR-LOGO-003"
+            ],
+            "aspect": "1:1",
+            "category": "brand",
+            "layer": "ui-kit",
+            "priority": "medium"
+          }
+        }
+      ],
+      "unresolved_slots": [],
+      "score": 97,
+      "score_breakdown": {
+        "wireframe_alignment_z_order": 32,
+        "token_compliance": 25,
+        "manifest_valid_mapping": 20,
+        "hero_depth_lighting": 20
+      },
+      "diagnostics": {
+        "invalid_tokens": [],
+        "invalid_assets": []
+      }
+    }
+  ],
+  "summary": {
+    "manifest_coverage": 0.9655,
+    "token_compliance_pct": 1.0,
+    "pass": true
+  },
+  "decision_log": [
+    {
+      "step": "catalog_assets",
+      "status": "executed"
+    },
+    {
+      "step": "placement_strategy",
+      "status": "executed"
+    },
+    {
+      "step": "governance_wrappers_4a",
+      "status": "executed"
+    },
+    {
+      "step": "asset_foundation_contract",
+      "status": "executed"
+    }
+  ]
+}
