@@ -64,7 +64,7 @@ Accept multiple input types:
 
 Extract design intent:
 - Parse annotations and notes
-- Identify components needed — map to archetypes (Seed / Pebble / Lens / Jar / Cabinet / Stone)
+- Identify components needed — map to archetypes (Strike / March / Megaphone / Placard / Scaffold / Substrate)
 - Map user flows and interactions
 - Extract content hierarchy
 - Note accessibility requirements
@@ -80,7 +80,7 @@ Extract design intent:
 - ✅ Asymmetric shapes — no uniform border-radius
 - ✅ Solidarity color palette via `--sys-color-*` tokens only
 - ✅ Extreme weight contrast (wght 300 vs 900+, M3 Expressive standard)
-- ✅ Component archetype assigned (Seed/Pebble/Lens/Jar/Cabinet/Stone)
+- ✅ Component archetype assigned (Strike/March/Megaphone/Placard/Scaffold/Substrate)
 - ❌ Anti-Slop violations: Inter/Roboto, white (#FFF) backgrounds, hardcoded hex, purple gradients
 
 #### B. Accessibility (100 pts)
@@ -125,26 +125,26 @@ Extract design intent:
 #### Step 1: Component Mapping
 
 Map wireframe elements to kr-solidarity archetypes:
-- Atomic elements → **Seed** (button, chip, badge)
-- Sequential stacks → **Pebble** (progress, stacked items)
-- Focal overlays → **Lens** (modal, popover, drawer)
-- Framed containers → **Jar** (card, list item, panel)
-- Complex grids → **Cabinet** (dashboard, multi-column)
-- Structural dividers → **Stone** (divider, spacer)
+- Primary actions, decisive CTA → **Strike** (button, chip)
+- Sequential selection, flow elements → **March** (progress, step indicator, links)
+- Announcement, focal interruption → **Megaphone** (modal, popover, alert, drawer)
+- Content container, framing → **Placard** (card, list item, panel)
+- Layout structure, form input → **Scaffold** (divider, datatable, inputs)
+- Decorative background, atmospheric → **Substrate** (base texture, background)
 
 #### Step 2: Token Application
 
 **Colors — `--sys-color-*` only:**
 ```css
 /* Backgrounds */
-background: var(--sys-color-asphaltBlack);        /* #1A1714 */
+background: var(--sys-color-charcoalBackground-base);        /* #1A1714 */
 surface: var(--sys-color-primary-10);              /* Dark container */
 
 /* Brand */
-accent: var(--sys-color-kr-ink-gold);             /* #D4A84B */
-action: var(--sys-color-waratahRed);              /* #C45C4B */
+accent: var(--sys-color-inkGold-base);             /* #D4A84B */
+action: var(--sys-color-solidarityRed-base);              /* #C45C4B */
 grounded: var(--sys-color-ochreEarth);            /* #B8733D */
-natural: var(--sys-color-gumLeafGreen);           /* #6B7F6E */
+natural: var(--sys-color-kr-activistSmokeGreen);           /* #6B7F6E */
 neutral: var(--sys-color-concreteGrey);           /* #A39B8F */
 
 /* Text */
@@ -169,14 +169,14 @@ font-weight: 400;
 
 **Shapes — asymmetric kr-solidarity:**
 ```css
-/* Seed (button) */
-border-radius: 40px 12px 40px 12px;
+/* Strike (button) */
+border-radius: var(--sys-shape-blockRiot03);
 
-/* Jar (card) */
-border-radius: 32px 8px 28px 12px;
+/* Placard (card) */
+border-radius: var(--sys-shape-placardTorn01);
 
-/* Lens (modal) */
-border-radius: 24px 8px 20px 8px;
+/* Megaphone (modal) */
+border-radius: var(--sys-shape-megaphoneCut01);
 ```
 
 **Motion — spring physics:**
@@ -217,7 +217,7 @@ transition: all 250ms cubic-bezier(0.34, 1.56, 0.64, 1);
 // 100% --sys-color-* token compliance
 // ARIA accessibility built-in
 // Framer Motion spring physics
-// Archetype annotated (e.g., // Archetype: Jar)
+// Archetype annotated (e.g., // Archetype: Placard)
 ```
 
 **C. Evaluation Report**
@@ -244,14 +244,14 @@ transition: all 250ms cubic-bezier(0.34, 1.56, 0.64, 1);
 ```markdown
 ## Components Required
 
-1. HeroSection — Archetype: Cabinet
+1. HeroSection — Archetype: Scaffold
    - Fraunces wght 700 headline
    - KR asset hero background (Z-0), overlay (Z-1)
-   - SeedButton CTAs with --sys-color-kr-ink-gold
+   - Strike CTAs with --sys-color-inkGold-base
 
-2. MetricCard — Archetype: Jar
+2. MetricCard — Archetype: Placard
    - Work Sans body text
-   - Asymmetric radius (32px 8px 28px 12px)
+   - Asymmetric radius via var(--sys-shape-placardTorn01)
    - --sys-color-primary-10 surface
 ```
 
@@ -267,7 +267,7 @@ Before delivering a mockup, verify:
 - [ ] All shapes are asymmetric (no uniform border-radius)
 - [ ] All colors from `--sys-color-*` tokens — zero hardcoded hex
 - [ ] Motion uses spring physics (cubic-bezier(0.34, 1.56, 0.64, 1))
-- [ ] Component assigned to archetype (Seed/Pebble/Lens/Jar/Cabinet/Stone)
+- [ ] Component assigned to archetype (Strike/March/Megaphone/Placard/Scaffold/Substrate)
 
 ### Anti-Slop
 - [ ] NO white (#FFFFFF) backgrounds — use `--sys-color-paperWhite` on dark only

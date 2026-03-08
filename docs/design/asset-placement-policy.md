@@ -1,7 +1,7 @@
 # Asset Placement Strategy in Design Automation Workflow
 
-**Version**: 1.0.0
-**Last Updated**: 2026-03-02
+**Version**: 1.1.0
+**Last Updated**: 2026-03-07
 **Canonical Reference**: Design Workflow 2026 > Asset Placement
 
 ---
@@ -125,6 +125,47 @@ Asset selection uses a **100-point scoring rubric** to ensure deterministic, rep
 | **Hero Depth Intent** | 20 | • Composition uses 3+ layers (10 pts)<br>• Lighting/halo logic (accent + opacity create depth) (10 pts) |
 
 **Pass/Fail**: ≥90 points = PASS, <90 = FAIL (requires manual review)
+
+---
+
+## Full Manifest Coverage Policy (Hard Rule)
+
+This rule is **mandatory** for all runs of `asset-placement-strategy`.
+
+1. Every asset in `frontend/public/assets/kerala-rage-kr-solidarity-manifest.json` must be accounted for.
+2. An asset is accounted for only if it is either:
+   - placed in at least one `<slot>` across the 11 wireframes, or
+   - listed in `unused_assets` with an explicit reason.
+3. `TODO[asset]` resolution must prioritize compatible assets that have not yet been used.
+4. If unused assets still have compatible slots, the report must propose:
+   - additional placements in existing slots, or
+   - extra slot proposals for relevant wireframes.
+5. A run fails policy if any manifest asset is in neither `used_assets` nor `unused_assets`.
+
+Valid `unused_assets.reason` examples:
+- `No compatible slot at current scope`
+- `Compatible slot(s) exist but slot capacity is limited at current scope`
+- `Semantic mismatch with current wireframe intents`
+
+### Required Placement Report Fields
+
+The aggregate report must include:
+
+```json
+{
+  "total_assets": 87,
+  "used_assets": [{ "asset_id": "KR-SOLID-021", "placed_in": ["01_landing.xml::hero_background"] }],
+  "unused_assets": [{ "asset_id": "KR-SOLID-045", "reason": "No compatible slot at current scope" }],
+  "proposed_additional_placements": [{ "asset_id": "KR-SOLID-045", "candidate_slots": ["02_auth.xml::background_accent"] }]
+}
+```
+
+### Compliance Gate
+- Progressive manifest target: `Batch N: slots_filled * 1.44` (rounded) for interim batch pass checks.
+
+- `all_assets_accounted_for` must be `true`.
+- `used_assets.length + unused_assets.length` must equal `total_assets`.
+- If `all_assets_accounted_for=false`, placement output is non-compliant and cannot pass automation gates.
 
 ---
 

@@ -1,0 +1,113 @@
+{
+  "batch_id": "phase4-batch2-2026-03-07",
+  "source": "frontend/src/components/phase4-filled/ASSET-BATCH-REPORT.json",
+  "expansions": [
+    {
+      "component": "HeroLanding",
+      "target_file": "frontend/src/components/phase3-batch2/HeroLanding.tsx",
+      "new_slots": [
+        {
+          "name": "exp_hero_kr_solid_045",
+          "z_layer": "Z-1",
+          "token": "--sys-color-protestMetalBlue-base",
+          "asset_target": "KR-SOLID-045",
+          "asset_compat": "KR-SOLID-EXPAND"
+        },
+        {
+          "name": "exp_hero_kr_solid_046",
+          "z_layer": "Z-1",
+          "token": "--sys-color-protestMetalBlue-base",
+          "asset_target": "KR-SOLID-046",
+          "asset_compat": "KR-SOLID-EXPAND"
+        },
+        {
+          "name": "exp_hero_kr_solid_078",
+          "z_layer": "Z-1",
+          "token": "--sys-color-protestMetalBlue-base",
+          "asset_target": "KR-SOLID-041",
+          "asset_target_requested": "KR-SOLID-078",
+          "resolution": "requested id not in manifest; mapped to nearest available KR-SOLID-041",
+          "asset_compat": "KR-SOLID-EXPAND"
+        }
+      ]
+    },
+    {
+      "component": "AuthModal",
+      "target_file": "frontend/src/components/phase3-batch2/AuthModal.tsx",
+      "new_slots": [
+        {
+          "name": "exp_auth_kr_ui_023",
+          "z_layer": "Z-3",
+          "token": "--sys-color-inkGold-base",
+          "asset_target": "KR-UI-023",
+          "asset_compat": "KR-UI-EXPAND"
+        },
+        {
+          "name": "exp_auth_kr_ui_024",
+          "z_layer": "Z-3",
+          "token": "--sys-color-inkGold-base",
+          "asset_target": "KR-UI-024",
+          "asset_compat": "KR-UI-EXPAND"
+        },
+        {
+          "name": "exp_auth_kr_ui_025",
+          "z_layer": "Z-3",
+          "token": "--sys-color-inkGold-base",
+          "asset_target": "KR-UI-025",
+          "asset_compat": "KR-UI-EXPAND"
+        }
+      ]
+    },
+    {
+      "component": "OnboardFlow",
+      "target_file": "frontend/src/components/phase3-batch2/OnboardFlow.tsx",
+      "new_slots": [
+        {
+          "name": "exp_onboard_kr_solid_112",
+          "z_layer": "Z-1",
+          "token": "--sys-color-protestMetalBlue-base",
+          "asset_target": "KR-SOLID-042",
+          "asset_target_requested": "KR-SOLID-112",
+          "resolution": "requested id not in manifest; mapped to KR-SOLID-042",
+          "asset_compat": "KR-SOLID-EXPAND"
+        },
+        {
+          "name": "exp_onboard_kr_solid_113",
+          "z_layer": "Z-1",
+          "token": "--sys-color-protestMetalBlue-base",
+          "asset_target": "KR-SOLID-043",
+          "asset_target_requested": "KR-SOLID-113",
+          "resolution": "requested id not in manifest; mapped to KR-SOLID-043",
+          "asset_compat": "KR-SOLID-EXPAND"
+        },
+        {
+          "name": "exp_onboard_kr_solid_114",
+          "z_layer": "Z-1",
+          "token": "--sys-color-protestMetalBlue-base",
+          "asset_target": "KR-SOLID-044",
+          "asset_target_requested": "KR-SOLID-114",
+          "resolution": "requested id not in manifest; mapped to KR-SOLID-044",
+          "asset_compat": "KR-SOLID-EXPAND"
+        },
+        {
+          "name": "exp_onboard_kr_solid_115",
+          "z_layer": "Z-1",
+          "token": "--sys-color-protestMetalBlue-base",
+          "asset_target": "KR-SOLID-045",
+          "asset_target_requested": "KR-SOLID-115",
+          "resolution": "requested id not in manifest; mapped to KR-SOLID-045",
+          "asset_compat": "KR-SOLID-EXPAND"
+        },
+        {
+          "name": "exp_onboard_kr_solid_116",
+          "z_layer": "Z-1",
+          "token": "--sys-color-protestMetalBlue-base",
+          "asset_target": "KR-SOLID-046",
+          "asset_target_requested": "KR-SOLID-116",
+          "resolution": "requested id not in manifest; mapped to KR-SOLID-046",
+          "asset_compat": "KR-SOLID-EXPAND"
+        }
+      ]
+    }
+  ]
+}

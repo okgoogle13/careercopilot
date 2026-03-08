@@ -1,0 +1,15 @@
+{
+  "tool": "vision-scorer-mcp.score_asset_compliance",
+  "inputs": {
+    "image_path": "kr_landing.png",
+    "asset_id": "KR-SOLID-001",
+    "target_score": 90
+  },
+  "wireframe_path": "frontend/src/screens/01_landing/01_landing.wireframe.xml",
+  "tsx_path": "frontend/src/screens/01_landing/HeroLanding.tsx",
+  "note": "Current server signature does not accept tsx_path/wireframe as tool inputs; attached for correlation.",
+  "result": {
+    "decision": "MANUAL_REVIEW",
+    "error": "All vision tiers failed."
+  }
+}

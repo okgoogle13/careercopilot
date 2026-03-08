@@ -1,0 +1,14 @@
+{
+  "mode": "asset_audit_batch",
+  "batch_id": "phase4-batch2-2026-03-07",
+  "input_components": [
+    "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/phase3-batch2/HeroLanding.tsx",
+    "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/phase3-batch2/AuthModal.tsx",
+    "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/phase3-batch2/OnboardFlow.tsx"
+  ],
+  "output_dir": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/phase4-filled-batch2",
+  "manifest": "frontend/public/assets/kerala-rage-kr-solidarity-manifest.json",
+  "hero_registry": "frontend/public/assets/kr-solidarity-hero-registry.json",
+  "target_coverage": 75,
+  "target_score": 92
+}

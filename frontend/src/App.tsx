@@ -34,6 +34,11 @@ import { Layout } from './layouts/Layout';
 import { AnalysisPage } from './pages/AnalysisPage';
 import { IngestionPage } from './pages/IngestionPage';
 import { JobQueue } from './pages/JobQueue';
+import { AuthModal } from './components/phase3-batch2/AuthModal';
+import { HeroLanding } from './components/phase3-batch2/HeroLanding';
+import { OnboardFlow } from './components/phase3-batch2/OnboardFlow';
+import { AnalysisWorkbench } from './components/phase3-batch3/AnalysisWorkbench';
+import { DashboardOverview } from './components/phase3-batch3/DashboardOverview';
 import { useModeStore } from './stores/useModeStore';
 import DesignSidekick from './features/design-sidekick/DesignSidekick';
 
@@ -181,6 +186,26 @@ export default function App() {
           <Route
             path="/design-sidekick"
             element={<DesignSidekick />}
+          />
+          <Route
+            path="/kr/landing"
+            element={<HeroLanding className="m-6" />}
+          />
+          <Route
+            path="/kr/auth"
+            element={<AuthModal className="m-6" />}
+          />
+          <Route
+            path="/kr/onboarding"
+            element={<OnboardFlow className="m-6" />}
+          />
+          <Route
+            path="/kr/analysis"
+            element={<AnalysisWorkbench className="m-6" />}
+          />
+          <Route
+            path="/kr/dashboard"
+            element={<DashboardOverview className="m-6" />}
           />
           <Route
             path="*"

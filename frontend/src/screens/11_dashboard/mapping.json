@@ -1,0 +1,9 @@
+{
+  "wireframe_id": "11_dashboard",
+  "wireframe_path": ".claude/wireframes/11_dashboard.xml",
+  "source_component_path": "frontend/src/components/phase3-batch3/DashboardOverview.tsx",
+  "screen_component_path": "frontend/src/screens/11_dashboard/DashboardOverview.tsx",
+  "route": "/kr/dashboard",
+  "notes": "Paired package for wireframe-to-TSX comparison. Canonical source remains source_component_path.",
+  "local_wireframe_path": "frontend/src/screens/11_dashboard/11_dashboard.wireframe.xml"
+}
