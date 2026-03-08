@@ -52,7 +52,7 @@ Orchestrates the Kerala Migrant Rage "Agit-Prop" typography system using variabl
 **Strategy**:
 
 - **Clarity**: High legibility for tools and data.
-- **Urgency**: Use **Red (#F14714)** for active states.
+- **Urgency**: Use **Red (--sys-color-solidarity-red)** for active states.
 
 ### 3. Tertiary "Code" (Technical)
 
@@ -142,16 +142,16 @@ _kerala-streetprint Day -> Cyberpunk Night._
   font-family: "Nabla";
   base-palette: 0; /* Default */
   override-colors:
-    0 #4a3b32,
-    1 #d4c5b0; /* Brown/Cream */
+    0 --sys-color-asphalt-black,
+    1 --sys-color-paper-white; /* Brown/Cream */
 }
 
 @font-palette-values --kerala-rage-neon {
   font-family: "Nabla";
   base-palette: 1;
   override-colors:
-    0 #ff00ff,
-    1 #00ffff; /* Magenta/Cyan */
+    0 --sys-color-ink-primary,
+    1 --sys-color-signal-green; /* Magenta/Cyan */
 }
 
 .hero-accent {
@@ -169,7 +169,7 @@ _kerala-streetprint Day -> Cyberpunk Night._
 | --------------------- | ----------------------------------------------------------------- |
 | **Worker Power**      | `Inter`, `wght: 900`, `tight tracking` (Solid, Unmovable)         |
 | **Migrant Theory**    | `Recursive`, `CASL: 1`, `MONO: 0` (Intellectual, Human, Adaptive) |
-| **Urgent Revolution** | `Inter`, `slnt: -10`, `color: #F14714` (Shouting, Fast)           |
+| **Urgent Revolution** | `Inter`, `slnt: -10`, `color: --sys-color-solidarity-red` (Shouting, Fast)           |
 | **System Control**    | `Recursive`, `MONO: 1`, `wght: 400` (Technical, Precise)          |
 
 ---

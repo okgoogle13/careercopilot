@@ -38,7 +38,7 @@ Consolidates 3 design generator skills + WCAG validation into 1 unified workflow
   "style": "vibrant, minimal",
   "colorPalette": {
     "primary": "#1976d2",
-    "secondary": "#7c4dff",
+    "secondary": "--sys-color-ink-primary",
     "tertiary": "#f50057",
     "neutral": "#78909c"
   },
@@ -72,14 +72,14 @@ Consolidates 3 design generator skills + WCAG validation into 1 unified workflow
       "20": "#003a99",
       "30": "#0052cc",
       ...
-      "100": "#ffffff"
+      "100": "--sys-color-canvas"
     },
     "secondary": { /* 13 tones */ },
     "tertiary": { /* 13 tones */ },
     "error": { /* 13 tones */ },
     "neutral": { /* 13 tones */ },
-    "on-primary": "#ffffff",
-    "on-secondary": "#ffffff",
+    "on-primary": "--sys-color-canvas",
+    "on-secondary": "--sys-color-canvas",
     "surface": "#fafafa",
     "surface-variant": "#e8eef7"
   }
@@ -183,7 +183,7 @@ Consolidates 3 design generator skills + WCAG validation into 1 unified workflow
     "details": [
       {
         "foreground": "#1976d2",
-        "background": "#ffffff",
+        "background": "--sys-color-canvas",
         "contrast_ratio": "8.59:1",
         "aa_small": "pass",
         "aa_large": "pass",
@@ -218,7 +218,7 @@ Consolidates 3 design generator skills + WCAG validation into 1 unified workflow
   "style": "vibrant, minimal",
   "colorPalette": {
     "primary": "#1976d2",
-    "secondary": "#7c4dff",
+    "secondary": "--sys-color-ink-primary",
     "tertiary": "#f50057"
   },
   "fontPairing": {

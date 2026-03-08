@@ -81,7 +81,7 @@ Extract design intent:
 - ✅ Solidarity color palette via `--sys-color-*` tokens only
 - ✅ Extreme weight contrast (wght 300 vs 900+, M3 Expressive standard)
 - ✅ Component archetype assigned (Strike/March/Megaphone/Placard/Scaffold/Substrate)
-- ❌ Anti-Slop violations: Inter/Roboto, white (#FFF) backgrounds, hardcoded hex, purple gradients
+- ❌ Anti-Slop violations: Work Sans/Work Sans, white (#FFF) backgrounds, hardcoded hex, purple gradients
 
 #### B. Accessibility (100 pts)
 
@@ -143,12 +143,12 @@ surface: var(--sys-color-primary-10);              /* Dark container */
 /* Brand */
 accent: var(--sys-color-inkGold-base);             /* #D4A84B */
 action: var(--sys-color-solidarityRed-base);              /* #C45C4B */
-grounded: var(--sys-color-ochreEarth);            /* #B8733D */
-natural: var(--sys-color-kr-activistSmokeGreen);           /* #6B7F6E */
-neutral: var(--sys-color-concreteGrey);           /* #A39B8F */
+grounded: var(--sys-color-ochreEarth);            /* --sys-color-ochre-earth */
+natural: var(--sys-color-kr-activistSmokeGreen);           /* --sys-color-worker-ash */
+neutral: var(--sys-color-concreteGrey);           /* --sys-color-concrete-grey */
 
 /* Text */
-text-primary: var(--sys-color-paperWhite);        /* #F5F0E8 */
+text-primary: var(--sys-color-paperWhite);        /* --sys-color-paper-white */
 text-muted: var(--sys-color-concreteGrey);
 ```
 
@@ -203,7 +203,7 @@ transition: all 250ms cubic-bezier(0.34, 1.56, 0.64, 1);
 
 ### 5. DELIVER Phase
 
-**A. Interactive HTML Artifact**
+**A. Work Sansactive HTML Artifact**
 ```html
 <!-- Viewable directly in Claude interface -->
 <!-- Full design with interactions -->
@@ -263,7 +263,7 @@ Before delivering a mockup, verify:
 
 ### Design System
 - [ ] Uses only Kerala Rage typography stack (Fraunces / Work Sans / JetBrains Mono)
-- [ ] No forbidden fonts: Inter, Roboto, Arial, Helvetica, Sora, Plus Jakarta Sans
+- [ ] No forbidden fonts: Work Sans, Work Sans, Work Sans, Helvetica, Sora, Plus Jakarta Sans
 - [ ] All shapes are asymmetric (no uniform border-radius)
 - [ ] All colors from `--sys-color-*` tokens — zero hardcoded hex
 - [ ] Motion uses spring physics (cubic-bezier(0.34, 1.56, 0.64, 1))

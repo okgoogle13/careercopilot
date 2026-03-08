@@ -1,7 +1,9 @@
 #!/bin/bash
 
 # Antigravity Task Poller Control Script
-# Manages the background polling agent for autonomous task execution
+# DEPRECATED: This script and its associated background agent are obsolete.
+# Task delegation is now handled directly by the real-time model context protocol
+# via the `task-router` MCP server. Do not start this daemon.
 
 set -e
 

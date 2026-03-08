@@ -1,0 +1,1 @@
+[   80102ms] [WARNING] [LandingPage] ComposeHero failed: Compatibility fail: atmospheric cannot overlay atmospheric @ http://localhost:5174/src/features/landing/LandingPage.tsx?t=1772960408589:26

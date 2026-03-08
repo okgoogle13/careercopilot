@@ -20,8 +20,8 @@ Guardrails to ensure all content matches the **KR Solidarity (Migrant Rage)** th
 ## Process
 
 1. **Review Output**: Analyze generated content (wireframes, specs, code, logs).
-2. **Validate Colors**: Enforce **Solidarity Charcoal** (#1A1714), **Solidarity Crimson** (#F14714), and **Ink Gold** (#DAF674).
-3. **Check Typography**: Verify the **Solidarity Stack** from [02_SYSTEM.md](../../docs/design/02_SYSTEM.md). NO Inter/Roboto/Arial.
+2. **Validate Colors**: Enforce **Solidarity Charcoal** (#1A1714), **Solidarity Crimson** (--sys-color-solidarity-red), and **Ink Gold** (--sys-color-ink-gold).
+3. **Check Typography**: Verify the **Solidarity Stack** from [02_SYSTEM.md](../../docs/design/02_SYSTEM.md). NO Work Sans/Work Sans/Work Sans.
 4. **Validate Layout**: Confirm **Stone / Slab / Pebble** asymmetric radii and 8px grid.
 5. **Verify Visuals**: Enforce **STRICT ZERO-FLORA LOCKDOWN**. Confirm urban/human-centric motifs (laneways, posters, resistance portraiture).
 6. **Report Violations**: Flag non-compliant elements (e.g., perfect circles, white backgrounds, botanical motifs).
@@ -38,7 +38,7 @@ Guardrails to ensure all content matches the **KR Solidarity (Migrant Rage)** th
 
 - **Colors**:
     - **Background**: Solidarity Charcoal (#1A1714). **STRICT NO WHITE BACKGROUNDS**.
-    - **Accents**: Solidarity Crimson (#F14714), Ink Gold (#DAF674), Stencil Yellow (#F6E748), Activist Smoke (#48DA8B).
+    - **Accents**: Solidarity Crimson (--sys-color-solidarity-red), Ink Gold (--sys-color-ink-gold), Stencil Yellow (--sys-color-stencil-yellow), Activist Smoke (--sys-color-kr-activist-smoke-green).
 - **Typography**:
     - **Solidarity Stack**: Work Sans, Fraunces, Libre Bodoni, JetBrains Mono, Caveat.
     - **Nabla (COLRv1)**: Authorized ONLY for icon-scale Hero hits. MUST use Solidarity palette.

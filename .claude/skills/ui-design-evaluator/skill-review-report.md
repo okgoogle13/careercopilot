@@ -168,7 +168,7 @@ ui-design-evaluator/
 - ⚠️ Examples use deprecated terminology, making them non-functional
 - ⚠️ 400-point scoring system is abstract — no example of actual scoring calculation
 - ⚠️ No guidance on interpreting scores (e.g., "75% — what should I fix first?")
-- ✅ Interactive HTML artifact output is practical and useful
+- ✅ Work Sansactive HTML artifact output is practical and useful
 - ✅ React component code generation is clearly defined
 
 **Recommendations:**
@@ -177,7 +177,7 @@ ui-design-evaluator/
    - Token mismatches → validation against tokens.json
    - Accessibility failures → automated fixes vs manual review
    - Vision API rate limits → queue system or batch scheduling
-2. Add "Scoring Interpretation Guide":
+2. Add "Scoring Work Sanspretation Guide":
    - 90-100%: Ship it
    - 80-89%: Fix listed issues, then ship
    - 70-79%: Prioritize accessibility and token compliance
@@ -203,7 +203,7 @@ ui-design-evaluator/
 - ❌ References fonts that don't exist: "Curator, Proclamation, Bloom, Field Note, Annotation"
 - ❌ Uses deprecated color names: "Wattle Gold" → correct: `inkGold` or `solidarityRed`
 - ✅ Correctly advocates for asymmetric shapes
-- ✅ Correctly warns against Inter/Roboto fonts
+- ✅ Correctly warns against Work Sans/Work Sans fonts
 - ✅ Correctly warns against purple gradients
 
 **Actual Kerala Rage Tokens (from tokens.json):**
@@ -211,12 +211,12 @@ ui-design-evaluator/
 {
   "sys": {
     "color": {
-      "charcoalBackground": { "base": "#1A1A1A" },
-      "solidarityRed": { "base": "#F14714" },
-      "kr-charcoalRed": { "base": "#F14844" },
-      "kr-activistSmokeGreen": { "base": "#48DA8B" },
-      "signalGreen": { "base": "#48F0E5" },
-      "inkGold": { "base": "#DAF674" }
+      "charcoalBackground": { "base": "--sys-color-charcoal-background" },
+      "solidarityRed": { "base": "--sys-color-solidarity-red" },
+      "kr-charcoalRed": { "base": "--sys-color-kr-charcoal-red" },
+      "kr-activistSmokeGreen": { "base": "--sys-color-kr-activist-smoke-green" },
+      "signalGreen": { "base": "--sys-color-signal-green" },
+      "inkGold": { "base": "--sys-color-ink-gold" }
     },
     "typography": {
       "fraunces": { /* variable font */ },

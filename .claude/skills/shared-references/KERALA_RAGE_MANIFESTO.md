@@ -23,10 +23,10 @@ The **Solidarity Stack** (Work Sans / Fraunces / Libre Bodoni / Caveat / JetBrai
 Colors derive from the **streets, not the bush**:
 
 - **Solidarity Charcoal** (#1A1714) — the substrate; never white.
-- **Solidarity Crimson** (#F14714) — screenprint ink, resistance heat, primary CTA.
-- **Ink Gold** (#DAF674) — temple radiance, optimistic defiance, halo disks.
-- **Stencil Yellow** (#F6E748) — attention markers.
-- **Activist Smoke** (#48DA8B) — growth and secondary highlights.
+- **Solidarity Crimson** (--sys-color-solidarity-red) — screenprint ink, resistance heat, primary CTA.
+- **Ink Gold** (--sys-color-ink-gold) — temple radiance, optimistic defiance, halo disks.
+- **Stencil Yellow** (--sys-color-stencil-yellow) — attention markers.
+- **Activist Smoke** (--sys-color-kr-activist-smoke-green) — growth and secondary highlights.
 
 No flora. No ochre-from-native-plants. No wattle. No Australian endemic palette.
 

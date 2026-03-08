@@ -34,7 +34,7 @@ Before creating any aesthetic, **review `references/anti-slop-guide.md`** to und
 
 - ❌ Generic fonts (Inter, Roboto static, system fonts)
 - ❌ Purple gradients on white backgrounds
-- ❌ Generic Material Blue (#2196F3)
+- ❌ Generic Material Blue (--sys-color-accent-primary)
 - ❌ Timid, evenly-distributed color palettes
 - ❌ Solid backgrounds with no depth
 - ❌ Uniform spacing and centered layouts only

@@ -1,61 +1,172 @@
 ---
 name: asset-token-replacer
-description: Automated replacement of generic asset placeholders with canonical KR-SOLID
-  tokens across React components and markdown blueprints. Ensures visual compliance
-  with the Kerala Rage asset registry.
+description: Replace generic asset placeholders in code/docs with canonical KR Solidarity asset IDs and valid runtime paths using deterministic mapping and verification rules.
 metadata:
-  legacy_frontmatter:
-    version: 1.0.0
-    tags:
+  version: 1.1.0
+  tags:
     - design-system
     - automation
     - assets
 ---
 
-# Asset Token Replacer Skill
-
-## System Prompt
-
-> You are the **Asset Token Replacer** for the CareerCopilot / kerala-rage kr-solidarity codebase.
->
-> Responsibilities:
->
-> 1.  **Scan for Placeholders**: Identify generic strings (e.g., `TODO[asset]`, `placeholder.png`, `asset-ref-123`) in React components (`.tsx`, `.jsx`) and markdown blueprints (`.md`).
-> 2.  **Contextual Resolution**: Cross-reference placeholders against the `kr-solidarity-ui-token-map.json` and `kr-solidarity.hero-registry.json`.
-> 3.  **Strict Replacement**: Replace placeholders with canonical `KR-SOLID-XXX` tokens or direct paths from the public asset directory (`/public/assets/kr-solidarity/...`).
-> 4.  **Verification**: After replacement, verify that the referenced asset exists on the filesystem and adheres to the `LayerType` defined in the component's interface.
->
-> Rules:
->
-> - Never replace a token if multiple ambiguous candidates exist; instead, list candidates and request clarification.
-> - Maintain indentation and formatting of the surrounding code.
-> - For Markdown files, ensure links use the relative path or absolute `/public/assets` convention as per the `Asset Placement Guide`.
->
-> Output:
->
-> - Return a diff of modified files plus a summary of "Tokens Mapped" vs "Orphaned Placeholders".
+# Asset Token Replacer
 
 ## Purpose
 
-Automates the tedious task of swapping design-time placeholders for production-ready KR-SOLID assets. This removes the "placeholder drift" that often happens during handoff between wireframes and implementation.
+Replace placeholder asset references (for example `TODO[asset]`, `placeholder.png`, temporary IDs) with canonical KR Solidarity manifest-backed references across React source and markdown docs.
 
-## When to Use This Skill
+## When to Use
 
-- When a wireframe or component contains `TODO[asset]` or generic placeholder tags.
-- When bulk-syncing a page with the latest version of the asset playbook.
+- Components or docs still contain placeholder asset strings.
+- A feature branch needs manifest/registry sync before review.
+- You need deterministic reporting of mapped vs unresolved placeholders.
+
+## Canonical Data Sources
+
+Use these in order:
+
+1. `frontend/public/assets/kerala-rage-kr-solidarity-manifest.json`
+2. `frontend/public/assets/kr-solidarity-hero-registry.json`
+
+Notes:
+- Do not depend on `kr-solidarity-ui-token-map.json` (not canonical in this repo).
+- Prefer manifest IDs (`KR-SOLID-*`, `KR-UI-*`) as source of truth.
+
+## Scope
+
+In scope:
+- `.tsx`, `.jsx`, `.ts`, `.js`, `.md`, `.mdx`
+- Placeholder replacement and path normalization
+
+Out of scope:
+- New asset generation
+- Visual quality scoring
+- Ambiguous auto-selection without explicit confidence
+
+## Mapping Rules
+
+1. Detect placeholders:
+- `TODO[asset] ...`
+- `placeholder*.png`
+- temporary references like `asset-ref-*`
+
+2. Resolve mapping:
+- Prefer exact ID references if present in context.
+- Else match by explicit hint text (`category`, `layer`, semantic cues) against manifest metadata.
+- Use hero registry only to refine path/name where manifest match is already established.
+
+3. Path convention:
+- Runtime/public URL should use `/assets/...` (not `/public/assets/...`).
+- Preserve relative markdown links only where repository docs require relative paths.
+
+4. Ambiguity handling:
+- If multiple candidates are plausible and confidence < 0.85, do not replace.
+- Emit unresolved candidate list for manual decision.
+
+## Verification Rules
+
+After replacement:
+- Referenced asset ID exists in manifest.
+- Referenced runtime path resolves under `frontend/public/assets/...`.
+- Replaced file remains syntactically valid and formatting-preserving.
+- No destructive edits outside target placeholders.
+
+## Deterministic Output Contract
+
+Return a structured report with:
+
+```json
+{
+  "summary": {
+    "files_scanned": 0,
+    "files_modified": 0,
+    "placeholders_found": 0,
+    "mapped_count": 0,
+    "orphaned_count": 0
+  },
+  "mappings": [
+    {
+      "file": "frontend/src/components/Hero.tsx",
+      "placeholder": "TODO[asset] hero spiritual",
+      "resolved_asset_id": "KR-SOLID-022",
+      "resolved_path": "/assets/kr-solidarity/devotional/...png",
+      "confidence": 0.94,
+      "source": "manifest"
+    }
+  ],
+  "orphaned_placeholders": [
+    {
+      "file": "frontend/src/pages/Landing.tsx",
+      "placeholder": "asset-ref-123",
+      "candidates": ["KR-SOLID-021", "KR-SOLID-022"],
+      "reason": "ambiguous_match"
+    }
+  ]
+}
+```
 
 ## Process
 
-1.  **Inventory**: Read the `kr-solidarity.hero-registry.json` and `manifest.json`.
-2.  **Audit**: Run `grep` or `sed` patterns to find placeholder patterns.
-3.  **Map**: Build a local mapping between identified placeholders and canonical IDs.
-4.  **Execute**: Apply file modifications using targeted `replace_file_content`.
-5.  **Verify**: Log missing assets that were expected but not found.
+1. Inventory canonical datasets (manifest first, hero registry second).
+2. Scan target files for placeholder patterns.
+3. Build candidate matches with confidence scores.
+4. Apply only high-confidence replacements (`>= 0.85`).
+5. Verify ID/path existence and collect unresolved placeholders.
+6. Return diff + deterministic JSON summary.
+
+## Safety Constraints
+
+- Never auto-replace ambiguous placeholders.
+- Never rewrite unrelated strings that are not placeholder matches.
+- Never emit `/public/assets/...` runtime URLs in frontend code.
+- Maintain existing formatting and code style.
+
+## Troubleshooting
+
+### Missing manifest or registry
+
+- Confirm paths:
+  - `frontend/public/assets/kerala-rage-kr-solidarity-manifest.json`
+  - `frontend/public/assets/kr-solidarity-hero-registry.json`
+
+### Placeholder has no confident match
+
+- Keep unresolved.
+- Include candidate IDs and rationale in `orphaned_placeholders`.
+
+### Replaced path does not exist
+
+- Re-check `file_path` in manifest.
+- Normalize to runtime form by removing `/public` prefix.
+
+### Markdown vs frontend path mismatch
+
+- Frontend runtime: `/assets/...`
+- Markdown docs: use repo-relative links when required by doc context.
+
+### Large batch risk
+
+- Run in small batches by directory.
+- Re-run scan after replacement to confirm `placeholders_found == orphaned_count` (expected remaining unresolved only).
 
 ## Example
 
-**Input**:
-`<img src="placeholder-shiva.png" /> // TODO[asset]: Shiva spiritual`
+Input:
 
-**Output**:
-`<img src="/public/assets/kr-solidarity/spiritual/shiva-monolith.png" /> // KR-SOLID-009`
+```tsx
+<img src="placeholder-shiva.png" /> // TODO[asset]: Shiva spiritual
+```
+
+Output:
+
+```tsx
+<img src="/assets/kr-solidarity/devotional/kr-solidarity__spiritual__devotional---solidarity__v1.png" /> // KR-SOLID-022
+```
+
+## Related Skills
+
+- `asset-placement-strategy`
+- `manifest-reconciler`
+- `component-builder`
+
+Last Updated: 2026-03-08 | Version: 1.1.0

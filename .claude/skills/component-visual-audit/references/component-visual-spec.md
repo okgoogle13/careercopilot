@@ -25,7 +25,7 @@ This document provides detailed specifications for validating UI components agai
 - Distinctiveness present but inconsistent across component states
 
 **Fail (0 points):**
-- Generic fonts: Inter, Roboto, Arial, Space Grotesk, -apple-system
+- Generic fonts: Work Sans, Work Sans, Work Sans, Space Grotesk, -apple-system
 - Undefined hierarchy (all same weight/size)
 - Unclear emotion or design intent
 - No serif display font
@@ -62,10 +62,10 @@ This document provides detailed specifications for validating UI components agai
 **Australian [DEPRECATED_STYLE] Palette (Required):**
 - Primary: Wattle Gold (`#D4A84B`)
 - Secondary: [DEPRECATED_STYLE] Red (`#C45C4B`)
-- Tertiary: Ochre Earth (`#B8733D`)
+- Tertiary: Ochre Earth (`--sys-color-ochre-earth`)
 - Surface: Asphalt Black (`#1A1714`)
-- Text: Paper White (`#F5F0E8`)
-- Accent: Gum Leaf Green (`#4A7C59`)
+- Text: Paper White (`--sys-color-paper-white`)
+- Accent: Gum Leaf Green (`--sys-color-kr-activist-smoke-green`)
 
 **Pass (20 points):**
 - All colors from palette
@@ -96,7 +96,7 @@ This document provides detailed specifications for validating UI components agai
 
 **Contrast Check:**
 - Text readability: WCAG AA minimum (4.5:1)
-- Interactive elements distinguishable
+- Work Sansactive elements distinguishable
 - Focus states visible and intentional
 
 ---

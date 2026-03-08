@@ -64,11 +64,11 @@ Assign the component to a **Semantic Action Archetype (v6.0)**:
 | Legacy / Hardcoded | KR v6.1 Token | Role |
 |---|---|---|
 | `#1A1714` / `--sys-color-asphaltBlack` | `--sys-color-charcoal-bg` | Floor substrate |
-| `#DAF6B3` / `--sys-color-paperWhite` | `--sys-color-worker-ash` | Primary Ink |
-| `#DAF674` / `--sys-color-kr-ink-gold` | `--sys-color-solidarity-gold` | Radiance / Focus |
-| `#F14714` / `--sys-color-waratahRed` | `--sys-color-solidarity-crimson` | Resistance / Peak |
-| `#F6E748` / `--sys-color-stencilYellow` | `--sys-color-stencil-yellow` | Attention |
-| `#A39B8F` / `--sys-color-concreteGrey` | `--sys-color-concrete-grey` | The Grit |
+| `--sys-color-worker-ash` / `--sys-color-paperWhite` | `--sys-color-worker-ash` | Primary Ink |
+| `--sys-color-ink-gold` / `--sys-color-kr-ink-gold` | `--sys-color-solidarity-gold` | Radiance / Focus |
+| `--sys-color-solidarity-red` / `--sys-color-waratahRed` | `--sys-color-solidarity-crimson` | Resistance / Peak |
+| `--sys-color-stencil-yellow` / `--sys-color-stencilYellow` | `--sys-color-stencil-yellow` | Attention |
+| `--sys-color-concrete-grey` / `--sys-color-concreteGrey` | `--sys-color-concrete-grey` | The Grit |
 
 #### Typography Token Migration (v4.0)
 
@@ -104,7 +104,7 @@ Assign the component to a **Semantic Action Archetype (v6.0)**:
 export function NavButton({ label }) {
   return (
     <button style={{
-      backgroundColor: '#DAF674',
+      backgroundColor: '--sys-color-ink-gold',
       borderRadius: '8px',
       fontFamily: 'Inter'
     }}>

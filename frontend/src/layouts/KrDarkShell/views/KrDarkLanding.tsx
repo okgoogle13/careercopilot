@@ -26,6 +26,8 @@ export const KrDarkLanding: React.FC = () => {
     typography: any;
     animation: any;
     zIndexMap: any;
+    safeZones?: any;
+    renderHints?: any;
   } | null>(null);
   const [variant, setVariant] = useState<AbVariant>(() =>
     getDefaultVariant(LANDING_HERO_AB_CONFIG.testId)
@@ -52,6 +54,8 @@ export const KrDarkLanding: React.FC = () => {
             typography: result.typography,
             animation: result.animation,
             zIndexMap: result.zIndexMap,
+            safeZones: result.safeZones,
+            renderHints: result.renderHints,
           });
         }
       } catch (error) {
@@ -75,6 +79,8 @@ export const KrDarkLanding: React.FC = () => {
             typography={heroData.typography}
             animation={heroData.animation}
             zIndexMap={heroData.zIndexMap}
+            safeZones={heroData.safeZones}
+            renderHints={heroData.renderHints}
             className="mb-12"
           />
           {/* Debug Variant Toggle */}

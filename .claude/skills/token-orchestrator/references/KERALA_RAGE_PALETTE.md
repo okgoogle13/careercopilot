@@ -3,8 +3,8 @@
 ## Primary (The Revolution)
 
 - **Charcoal (Background)**: `#1A1714` (The Void, The Night, The Coal) -> `--sys-color-charcoalBackground-base`
-- **Solidarity Red (Primary/Action)**: `#F14714` (Urgency, Blood, Heat, Agit-Prop) -> `--sys-color-solidarityRed-base`
-- **Ink Gold (Accent/Highlight)**: `#DAF674` (Temple Radiance, Hope, Wealth, Solidarity) -> `--sys-color-inkGold-base`
+- **Solidarity Red (Primary/Action)**: `--sys-color-solidarity-red` (Urgency, Blood, Heat, Agit-Prop) -> `--sys-color-solidarityRed-base`
+- **Ink Gold (Accent/Highlight)**: `--sys-color-ink-gold` (Temple Radiance, Hope, Wealth, Solidarity) -> `--sys-color-inkGold-base`
 
 ## Semantic Roles
 
@@ -17,20 +17,20 @@
 ### Typography
 
 - **Primary Text**: `#FFFFFF` (Pure White - Maximum Contrast on Charcoal).
-- **Secondary Text**: `#DAF6B3` (Worker Ash - Readable linework).
-- **Accent Text**: `#DAF674` (Ink Gold - Links/Highlights).
-- **Destructive/Urgent Text**: `#F14844` (KR Charcoal Red).
+- **Secondary Text**: `--sys-color-worker-ash` (Worker Ash - Readable linework).
+- **Accent Text**: `--sys-color-ink-gold` (Ink Gold - Links/Highlights).
+- **Destructive/Urgent Text**: `--sys-color-kr-charcoal-red` (KR Charcoal Red).
 
 ### UI Elements
 
-- **Primary Button**: `#F14714` (Background) + `#FFFFFF` (Text).
-- **Secondary Button**: Transparent + `#DAF674` (Border/Text).
-- **Focus Ring**: `#DAF674` (Glow).
+- **Primary Button**: `--sys-color-solidarity-red` (Background) + `#FFFFFF` (Text).
+- **Secondary Button**: Transparent + `--sys-color-ink-gold` (Border/Text).
+- **Focus Ring**: `--sys-color-ink-gold` (Glow).
 
 ## Gradients (Viscous Fluidity)
 
 - **The Heat**: `linear-gradient(180deg, rgba(241, 71, 20, 0) 0%, rgba(241, 71, 20, 0.2) 100%)`
-- **The Gold**: `linear-gradient(90deg, #DAF674 0%, #F14714 100%)` (Solidarity Gradient)
+- **The Gold**: `linear-gradient(90deg, --sys-color-ink-gold 0%, --sys-color-solidarity-red 100%)` (Solidarity Gradient)
 
 ## Forbidden Colors
 
