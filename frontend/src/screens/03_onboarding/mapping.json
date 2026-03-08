@@ -1,0 +1,9 @@
+{
+  "wireframe_id": "03_onboarding",
+  "wireframe_path": ".claude/wireframes/03_onboarding.xml",
+  "source_component_path": "frontend/src/components/phase3-batch2/OnboardFlow.tsx",
+  "screen_component_path": "frontend/src/screens/03_onboarding/OnboardFlow.tsx",
+  "route": "/kr/onboarding",
+  "notes": "Paired package for wireframe-to-TSX comparison. Canonical source remains source_component_path.",
+  "local_wireframe_path": "frontend/src/screens/03_onboarding/03_onboarding.wireframe.xml"
+}

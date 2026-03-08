@@ -1,352 +1,114 @@
-# Kerala Rage Asset Generation — DALL-E Prompts
+# KR Solidarity Asset Generation (v6.1) — DALL-E Prompts
 
 > **Tool**: DALL-E 3
-> **Asset Count**: 5 assets
-> **Estimated Time**: 15-20 minutes
-> **Priority**: Mixed (2 CRITICAL, 3 HIGH)
+> **Asset Count**: 12 assets (across 4 batches)
+> **Priority**: CRITICAL (System Assets)
+> **Identity**: Screenprint Manifesto / Urban Resistance
 
 ---
 
-## Why DALL-E for These Assets
-
-DALL-E excels at:
-- ✅ Geometric precision (halo disks, gauge tick marks)
-- ✅ Transparent backgrounds (essential for UI overlays)
-- ✅ Controlled edge shapes (wheat-paste tears)
-- ✅ Batch consistency (grit particle sprites)
-- ✅ Fast iteration cycles
+## 🚨 SYSTEM RULES (V6.1)
+- **Substrate:** Solidarity Charcoal (#1A1714).
+- **Ink Palette:** Ink Gold (#DAF674), Solidarity Crimson (#F14714), Activist Smoke (#48DA8B), Worker Ash (#DAF6B3).
+- **Zero-Flora Rule:** No eucalyptus, gum leaves, or generic greenery.
+- **Screenprint Logic:** Visible ink grain, gritty registration, matte paper textures.
 
 ---
 
-## Generation Order (Recommended)
+# BATCH 1 — DEVOTIONAL + RESISTANCE PORTRAITS
 
-1. **Halo Disk Plain** (CRITICAL) → Blocks all 11 pages
-2. **Halo Disk Gauge** (CRITICAL) → Blocks Page 5 (Analysis Dashboard)
-3. **Wheat-Paste Tear Corner** (HIGH) → Blocks 6 pages
-4. **Wheat-Paste Header Strip** (HIGH) → Blocks Page 7 (Kanban)
-5. **Grit Particles Pack** (HIGH) → Blocks 6 pages
-
----
-
-## Asset 1: Halo Disk Plain
-
-**Manifest ID**: `KR-SOLID-036`
-**Priority**: CRITICAL
-**File path**: `/assets/kr-solidarity/ui/kr-asset-halo-disk-plain.png`
-
-### DALL-E Prompt
-```
-Minimal halo disk graphic in screenprint style, imperfect circular form
-with hand-drawn quality, muted gold ink color #DAF674, subtle grain texture,
-no religious iconography, no text, no symbols inside circle, transparent
-background, 1:1 square format, simple radiant glow effect,
-contemporary Australian design aesthetic
-```
-
-### Generation Settings
-- **Aspect ratio**: 1:1 (square)
-- **Style**: Natural (not vivid)
-- **Quality**: Standard
-- **Output**: Download as PNG
-
-### Post-Generation Checklist
-- [ ] Transparent background (no white halo artifacts)
-- [ ] Gold color matches `inkGold` token (#DAF674 ±10%)
-- [ ] Circle is imperfect (not perfect geometry)
-- [ ] No religious symbols visible
-- [ ] Scales well 60px-300px (test at both extremes)
-
-### Usage Context
-- **Pages**: 2 (Auth), 4 (Ingestion), 11 (Dashboard)
-- **Opacity**: 30-100% depending on page
-- **Z-index**: Z-1 or Z-2
-- **Behavior**: Static anchor or subtle rotation on focus
-
----
-
-## Asset 2: Halo Disk Gauge
-
-**Manifest ID**: `KR-SOLID-037`
-**Priority**: CRITICAL
-**File path**: `/assets/kr-solidarity/ui/kr-asset-halo-disk-gauge.png`
-
-### DALL-E Prompt
-```
-Minimal halo disk gauge in screenprint style, imperfect ring with
-simple tick marks around perimeter, muted gold ink #DAF674, subtle grain,
-no numbers, no text, transparent background, 1:1 square, designed for
-needle rotation animation 0-100 degrees, contemporary minimalist gauge design
-```
-
-### Generation Settings
+### Asset 1: Shiva Statue
+- **Manifest ID**: `KR-SOLID-012`
+- **File path**: `/assets/kr-solidarity/devotional/kr-solidarity__devotional__shiva-statue__v1.png`
 - **Aspect ratio**: 1:1
-- **Style**: Natural
-- **Quality**: Standard
-- **Output**: Download as PNG
+- **Prompt**:
+  Reverent Shiva statue in stone-like weight. High-contrast screenprint style on Solidarity Charcoal (#1A1714) substrate. A muted Ink Gold (#DAF674) halo disk radiates behind the head. Heavy ink texture, no text.
 
-### Post-Generation Checklist
-- [ ] Transparent background
-- [ ] Tick marks evenly distributed (8-12 marks ideal)
-- [ ] Center point clear for needle pivot
-- [ ] Works as functional gauge at 180-200px diameter
-- [ ] No numbers or text on tick marks
+### Asset 2: Tipu Sultan
+- **Manifest ID**: `KR-SOLID-024`
+- **File path**: `/assets/kr-solidarity/portrait/kr-solidarity__portrait__tipu-sultan__v1.png`
+- **Aspect ratio**: 3:4
+- **Prompt**:
+  Screenprint portrait of Tipu Sultan. Solidarity Crimson (#F14714) and Activist Smoke (#48DA8B) ink layers. Visible registration errors and ink bleed. Subtle geometric tiger motif shapes in background using Stencil Yellow (#F6E748). No text.
 
-### Usage Context
-- **Pages**: 5 (Analysis Dashboard) — FUNCTIONAL GAUGE
-- **Size**: 200px diameter
-- **Z-index**: Z-2
-- **Behavior**: Needle rotation animated based on score value (0-100° range)
-
-### Implementation Note
-You'll need to create a separate needle SVG overlay (CSS-driven rotation). The halo disk gauge is the static background.
+### Asset 3: Bhagat Singh
+- **Manifest ID**: `KR-SOLID-023`
+- **File path**: `/assets/kr-solidarity/portrait/kr-solidarity__portrait__bhagat-singh__v1.png`
+- **Aspect ratio**: 3:4
+- **Prompt**:
+  High-contrast screenprint of Bhagat Singh in iconic profile with hat. Ink Gold (#DAF674) martyr-style halo disk. Bold stencil typography included: “INQUILAB ZINDABAD” (Latin script only). Gritty paper texture.
 
 ---
 
-## Asset 3: Wheat-Paste Tear Corner
+# BATCH 2 — KERALA SYMBOLS & EMOTION
 
-**Manifest ID**: `KR-SOLID-038`
-**Priority**: HIGH
-**File path**: `/assets/kr-solidarity/motif/kr-asset-wheat-paste-tear-corner.png`
-
-### DALL-E Prompt
-```
-Torn wheat-paste poster corner edge, irregular ripped paper silhouette
-with visible layered paper fibers, screenprint aesthetic, limited palette
-of off-white aged paper with faint red and gold ink residue, no readable text,
-transparent background, large corner framing element, 1:1 square format,
-street art poster texture, Melbourne laneway aesthetic
-```
-
-### Generation Settings
+### Asset 1: Kerala Elephant
+- **Manifest ID**: `KR-SOLID-033`
+- **File path**: `/assets/kr-solidarity/symbol/kr-solidarity__symbol__kerala-elephant__v1.png`
 - **Aspect ratio**: 1:1
-- **Style**: Natural
-- **Quality**: HD (this needs to be large)
-- **Output**: Download as PNG
+- **Prompt**:
+  Kerala elephant as a symbolic anchor. Simplified temple ornaments in Ink Gold (#DAF674). Stylized, high-contrast palm frond silhouettes (graphic only, NO naturalistic flora). Solidarity Crimson (#F14714) halo disk. Screenprint logic.
 
-### Post-Generation Checklist
-- [ ] Transparent background
-- [ ] Torn edge looks [DEPRECATED_STYLE] (not cut with scissors)
-- [ ] Paper layers visible at edges
-- [ ] No readable text or recognizable symbols
-- [ ] Scales well at 320-400px width
-- [ ] Ink residue subtle (not dominant)
+### Asset 2: Kerala Landscape
+- **Manifest ID**: `KR-SOLID-034`
+- **File path**: `/assets/kr-solidarity/symbol/kr-solidarity__symbol__kerala-landscape__v1.png`
+- **Aspect ratio**: 16:9
+- **Prompt**:
+  Kerala backwater landscape treated as an urban mural. High-contrast silhouettes of coconut palms against a Solidarity Charcoal (#1A1714) sky. Matte paper texture, weathered edges. Strictly urban/cultural vibe. No text.
 
-### Usage Context
-- **Pages**: 1 (Landing), 6 (Opportunity Feed), 11 (Dashboard)
-- **Position**: Top-right or bottom-left corners
-- **Size**: 320-400px width
-- **Z-index**: Z-2
-- **Behavior**: Parallax on scroll (0.1-0.15x speed)
-
-### Variation Strategy
-Generate once, then create 2 variations by:
-- Flipping horizontally for opposite corner
-- Rotating slightly for visual variety
+### Asset 3: Paint Splash
+- **Manifest ID**: `KR-SOLID-010`
+- **File path**: `/assets/kr-solidarity/abstract/kr-solidarity__abstract__paint-splash__v1.png`
+- **Aspect ratio**: 2:1
+- **Prompt**:
+  Abstract liquid ink splashes and drips. High-salience collision of Solidarity Crimson (#F14714) and Ink Gold (#DAF674) over Solidarity Charcoal (#1A1714). Visible screenprint grain and wet ink expansion. No text.
 
 ---
 
-## Asset 4: Wheat-Paste Header Strip
+# BATCH 3 — AUSTRALIAN STREET & SOLIDARITY
 
-**Manifest ID**: `KR-SOLID-039`
-**Priority**: HIGH
-**File path**: `/assets/kr-solidarity/motif/kr-asset-wheat-paste-strip.png`
-
-### DALL-E Prompt
-```
-Horizontal torn wheat-paste strip, 60px visual height, irregular torn
-top and bottom edges, subtle paper grain, no text, transparent background,
-designed as repeating column header decoration, 4:1 wide aspect ratio,
-aged poster paper texture, minimal ink residue, street art aesthetic
-```
-
-### Generation Settings
-- **Aspect ratio**: Custom (request landscape/wide)
-- **Style**: Natural
-- **Quality**: Standard
-- **Output**: Download as PNG
-
-### Post-Generation Checklist
-- [ ] Transparent background
-- [ ] Horizontal orientation
-- [ ] Top AND bottom edges both torn
-- [ ] Can tile horizontally without obvious seams
-- [ ] Works at 60px height
-- [ ] No text or symbols
-
-### Usage Context
-- **Pages**: 7 (Kanban Board) — column headers
-- **Position**: Top of each Kanban column (4 columns total)
-- **Size**: 60px height, full column width
-- **Z-index**: Z-2
-- **Behavior**: Static column header decoration
-
-### Implementation Note
-You may need to generate 2-3 variations to avoid repetition across 4 columns.
-
----
-
-## Asset 5: Grit Particles Sprite Pack
-
-**Manifest ID**: `KR-SOLID-040`
-**Priority**: HIGH
-**File path**: `/assets/kr-solidarity/ui/kr-asset-grit-particles.png`
-
-### DALL-E Prompt
-```
-Set of 12 small screenprint grit particles arranged in grid,
-black and gold ink flecks and specks, transparent background,
-designed for UI particle animation, minimal and subtle, no symbols,
-no text, various sizes 8-16px, authentic screenprint press debris,
-square format with particles evenly distributed
-```
-
-### Generation Settings
+### Asset 1: Anti-Colonial Graffiti
+- **Manifest ID**: `KR-SOLID-031`
+- **File path**: `/assets/kr-solidarity/street/kr-solidarity__street__anti-colonial-graffiti__v1.png`
 - **Aspect ratio**: 1:1
-- **Style**: Natural
-- **Quality**: Standard
-- **Output**: Download as PNG
+- **Prompt**:
+  Brutalist anti-colonial graffiti on a weathered Melbourne brick wall. Stencil style. Background uses Concrete Grey (#A39B8F) and Solidarity Charcoal (#1A1714). Text: “NO PRIDE IN GENOCIDE”.
 
-### Post-Generation Checklist
-- [ ] Transparent background
-- [ ] 8-12 distinct particles visible
-- [ ] Variety in size and shape
-- [ ] No recognizable symbols or text
-- [ ] Each particle works at 8-16px scale
-- [ ] Evenly distributed in grid
+### Asset 2: Melbourne Laneway
+- **Manifest ID**: `KR-SOLID-038`
+- **File path**: `/assets/kr-solidarity/texture/kr-solidarity__texture__melbourne-laneway__v1.png`
+- **Aspect ratio**: 16:9
+- **Prompt**:
+  Close-up of a Melbourne laneway wall. Overlapping torn wheat-paste posters, visible glue residue, and torn paper fibers. Matte urban texture. Palette: Worker Ash (#DAF6B3) and Concrete Grey (#A39B8F). No readable text.
 
-### Usage Context
-- **Pages**: 1 (Landing), 2 (Auth), 6 (Opportunity Feed), 7 (Kanban), 11 (Dashboard)
-- **Size**: 8-16px per particle
-- **Instances**: 6-16 particles per page
-- **Z-index**: Z-3
-- **Behavior**: Float + opacity pulse animation (8-12s loop, staggered)
-
-### Post-Processing Required
-After generation:
-1. Open in image editor (Photoshop/Figma)
-2. Slice into 8-12 individual sprite PNGs
-3. Name as `grit-particle-01.png` through `grit-particle-12.png`
-4. Optimize each file to <5KB
-
-### Animation Reference
-```css
-@keyframes gritFloat {
-  0%, 100% { transform: translate(0, 0); opacity: 0.4; }
-  50% { transform: translate(var(--drift-x), var(--drift-y)); opacity: 0.8; }
-}
-
-.grit-particle {
-  animation: gritFloat 8s ease-in-out infinite;
-  animation-delay: calc(var(--particle-index) * 0.3s);
-}
-```
+### Asset 3: First Nations Placard
+- **Manifest ID**: `KR-SOLID-030`
+- **File path**: `/assets/kr-solidarity/street/kr-solidarity__street__first-nations-placard__v1.png`
+- **Aspect ratio**: 1:1
+- **Prompt**:
+  Street placard shown in situ during a march. Aboriginal flag colours ONLY on the placard. Required Text: “ALWAYS WAS ALWAYS WILL BE”. Background is blurred urban Melbourne grit.
 
 ---
 
-## Batch Workflow for DALL-E
+# BATCH 4 — SYSTEM & ABSTRACTION
 
-### Step 1: Generate All 5 Assets
-Open DALL-E, generate in order listed above (15-20 min total)
+### Asset 1: Mythic Mural
+- **Manifest ID**: `KR-SOLID-042`
+- **File path**: `/assets/kr-solidarity/abstract/kr-solidarity__abstract__mythic-mural__v1.png`
+- **Aspect ratio**: 16:9
+- **Prompt**:
+  Narrative mural illustration. Layered screenprint silhouettes of Kerala diaspora history and urban resistance. Symbolic composition with Solidarity Crimson (#F14714) accents. Gritty, high-contrast ink layers. No text.
 
-### Step 2: Download & Organize
-```
-/assets/kr-solidarity/
-├── ui/
-│   ├── kr-asset-halo-disk-plain.png
-│   ├── kr-asset-halo-disk-gauge.png
-│   └── kr-asset-grit-particles.png
-└── motif/
-    ├── kr-asset-wheat-paste-tear-corner.png
-    └── kr-asset-wheat-paste-strip.png
-```
+### Asset 2: Typography Pressure
+- **Manifest ID**: `KR-SOLID-043`
+- **File path**: `/assets/kr-solidarity/abstract/kr-solidarity__abstract__typography-pressure__v1.png`
+- **Aspect ratio**: 2:1
+- **Prompt**:
+  Abstract fragments of variable-weight typography (Fraunces and Work Sans style). Extreme contrast between ultra-thin hairline strokes and ultra-bold blocks. No readable words. High contrast Solidarity Charcoal (#1A1714) and Worker Ash (#DAF6B3).
 
-### Step 3: Optimize File Sizes
-```bash
-# PNG optimization (target <50KB for UI elements)
-pngquant --quality=85-95 *.png --ext .png --force
-```
-
-### Step 4: Validate Transparency
-- Open each PNG in preview/browser
-- Check for white halo artifacts around edges
-- Re-export with alpha channel if needed
-
----
-
-## Common DALL-E Issues & Fixes
-
-### Issue 1: Text appears in wheat-paste tears
-**Fix**: Regenerate with emphasis on "no readable text, no symbols"
-
-### Issue 2: Halo disk too perfect/digital
-**Fix**: Add "hand-drawn quality, imperfect circle" to prompt
-
-### Issue 3: Grit particles too large
-**Fix**: Specify "8-16px scale" more explicitly, regenerate
-
-### Issue 4: Transparent background has white halo
-**Fix**: Download as PNG, manually remove white in Photoshop using "Select > Color Range"
-
-### Issue 5: Colors don't match tokens
-**Fix**: Color-correct in post-processing:
-- Gold: #DAF674
-- Red: #F14714
-- Off-white: #F5F2EB
-
----
-
-## Quality Gates (Before Approval)
-
-Each asset must pass:
-
-### Visual QA
-- [ ] Matches Kerala Rage screenprint aesthetic
-- [ ] No bureaucratic elements
-- [ ] Colors align with design tokens
-
-### Technical QA
-- [ ] File size <50KB (UI elements)
-- [ ] Transparent background clean
-- [ ] Correct aspect ratio
-
-### Functional QA
-- [ ] Scales appropriately (test min/max sizes)
-- [ ] Works at specified opacity
-- [ ] No visual artifacts
-
----
-
-## Manifest Update Template
-
-After generating, add to `kerala-rage-kr-solidarity-manifest.json`:
-
-```json
-{
-  "id": "KR-SOLID-0XX",
-  "name": "[Asset Name]",
-  "category": "ui|motif",
-  "layer": "atmospheric",
-  "aspect_ratio": "1:1",
-  "file_path": "/assets/kr-solidarity/[category]/kr-asset-[name].png",
-  "priority": "CRITICAL|HIGH",
-  "semantics": {
-    "functional_role": "[role]",
-    "semantic_weight": "geometric|expressive",
-    "layering_role": "overlay|mid-layer"
-  },
-  "usage_rules": {
-    "scale_suitability": ["hero", "section", "card"],
-    "small_ui_safe": true
-  },
-  "layering_compatibility": {
-    "can_overlay_with": ["substrate", "atmospheric"],
-    "cannot_overlay_with": []
-  }
-}
-```
-
----
-
-**Total DALL-E Assets**: 5
-**Estimated Time**: 15-20 minutes
-**Next Step**: See `asset-generation-imagen3.md` for texture assets
+### Asset 3: Street Poster Portrait
+- **Manifest ID**: `KR-SOLID-044`
+- **File path**: `/assets/kr-solidarity/portrait/kr-solidarity__portrait__street-poster__v1.png`
+- **Aspect ratio**: 3:4
+- **Prompt**:
+  Authentic street poster portrait. Screenprint ink on wheat-paste paper. Weathered, hand-cut edges (shape.placardTorn01 style). Visible paper grain and registration errors. No slogans.

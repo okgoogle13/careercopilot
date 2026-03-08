@@ -1,0 +1,22 @@
+{
+  "mode": "component_batch",
+  "batch_id": "phase3-batch3-2026-03-07",
+  "input_wireframes": [
+    ".claude/wireframes/04_ingestion.xml",
+    ".claude/wireframes/05_analysis.xml",
+    ".claude/wireframes/06_lookout.xml",
+    ".claude/wireframes/07_kanban.xml",
+    ".claude/wireframes/08_workbench.xml",
+    ".claude/wireframes/09_finalization.xml",
+    ".claude/wireframes/10_settings.xml",
+    ".claude/wireframes/11_dashboard.xml"
+  ],
+  "output_dir": "frontend/src/components/phase3-batch3/",
+  "tokens_file": "frontend/src/design/tokens/tokens.json",
+  "skills_pipeline": [
+    "component-spec-generator",
+    "component-spec-scaffolder",
+    "component-builder|component-transformer"
+  ],
+  "target_compliance": 95
+}

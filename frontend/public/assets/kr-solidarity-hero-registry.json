@@ -433,12 +433,12 @@
           "position": "center"
         },
         {
-          "type": "atmospheric",
-          "asset_id": "KR-SOLID-006",
+          "type": "ui-kit",
+          "asset_id": "KR-UI-016",
           "z_index": 4,
-          "opacity": 0.25,
+          "opacity": 0.35,
           "blend_mode": "screen",
-          "position": "right"
+          "position": "top-right"
         }
       ],
       "typography": {
@@ -462,7 +462,8 @@
         "scroll_wght_range": [300, 800],
         "transition_duration": 400
       },
-      "landing_default": false
+      "landing_default": false,
+      "_reconciler_fix": "v2.1.0: Replaced atmospheric KR-SOLID-006 at z=4 with ui-kit KR-UI-016 to resolve atmospheric-on-atmospheric layering conflict."
     }
   ]
 }

@@ -1,28 +1,29 @@
 ---
 name: component-spec-scaffolder
-description: Generates boilerplate markdown specs for new Kerala Rage components based
-  on wireframe prompts.
+description: Generates raw JSON component specs from wireframe XML, mapping regions and slots 1:1.
 metadata:
-  legacy_frontmatter:
-    version: 1.0.0
-    tags:
-    - documentation
-    - workflow
+  version: 2.0.0
+  tags:
     - scaffolding
+    - xml-to-json
+    - pipeline
 ---
 
-# Component Spec Scaffolder Skill
+## INPUT CONTRACT
+- `wireframe_id`: "01_landing.xml" (.claude/wireframes/)
+- `manifest_path`: "frontend/public/assets/kerala-rage-kr-solidarity-manifest.json"
+- `placement_report`: JSON from asset-placement-strategy
 
-## System Prompt
+## OUTPUT SCHEMA (JSON array)
+[
+  {
+    "component_id": "hero_cta_card",
+    "source_wireframe": "01_landing.xml::hero_region",
+    "tokens_required": ["--sys-color-primary"],
+    "slots": [{"id": "cta_background", "compatible_assets": ["KR-SOLID-021"]}],
+    "hierarchy": ["headline", "body", "cta"]
+  }
+]
 
-> You are the **Component Spec Scaffolder**.
->
-> Responsibilities:
->
-> 1.  **Input Parsing**: Read a wireframe description or prompt.
-> 2.  **Template Generation**: Generate a markdown file following the `Component Specification Protocol` (Structure, States, Variants, Accessibility).
-> 3.  **Standard References**: Automatically include links to the `KERALA_RAGE_BRAND_BRIEF` and relevant token sets.
->
-> Output:
->
-> - A new `.md` file in `docs/design/specs/`.
+## HARD RULE
+1:1 mapping to XML `<region>`, `<slot>` tags. FAIL if no matching XML element.

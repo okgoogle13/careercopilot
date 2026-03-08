@@ -1,55 +1,138 @@
 ---
 name: asset-placement-strategy
-description: Wireframe-driven placement strategy for KR Solidarity assets with strict semantic token usage and deterministic placement scoring.
+description: Wireframe-driven placement strategy for KR Solidarity assets. Takes wireframe XML from wireframe-annotator, resolves TODO[asset] slots using manifest and hero registries, validates layering and tokens, and emits updated wireframes alongside a placement report with deterministic 100-point scoring.
 metadata:
-  version: 6.0.0
+  version: 6.3.0
   tags:
     - design-system
     - asset-management
     - kr-solidarity
-    - migrant-rage
+    - wireframe-automation
 ---
 
 
-# KR Solidarity: Asset Placement Strategy (v6.0)
+# KR Solidarity: Asset Placement Strategy (v6.3.0)
 
-**Deterministic placement validation for KR Solidarity (Migrant Rage) design system assets.**
+**Deterministic, wireframe-driven asset placement validation for the KR Solidarity design system.**
 
 ## Purpose
 
-Place KR Solidarity assets (motifs, symbols, hero compositions) against annotated screens from [05_FLOWS.md](../../docs/design/05_FLOWS.md) with strict semantic token compliance and deterministic scoring. Validates z-index layering and enforces the **Zero-Flora Lockdown**.
+This skill automates the transition from wireframes to high-fidelity assets. It takes **wireframe XML** produced by `wireframe-annotator` (which contains `<assets>` blocks mapped to `<slot>` elements). Each `<slot>` defines the layering (`z_layer`), brand token (`token`), and asset hints (`TODO[asset]...`).
+
+The skill resolves these `TODO[asset]` hints to concrete `asset:<id>` strings based on the manifest or hero registries. It ensures strict semantic token compliance, z-index validation, and enforces the Zero-Flora Lockdown, outputting both the updated wireframe XML and a detailed JSON placement report.
 
 ## When to Use
 
+- Resolving asset placeholders into concrete manifest IDs during the automated design handoff.
 - Implementing KR Solidarity assets from screen matrix into React components.
 - Validating asset placement decisions against [04_ASSETS.md](../../docs/design/04_ASSETS.md).
 - Ensuring z-index and layering intent matches [05_FLOWS.md](../../docs/design/05_FLOWS.md) specifications.
 - Auditing existing implementations for "Flora" violations or hardcoded colors.
 
-
 ## Capabilities
 
-- **Wireframe Slot Parsing**: Extract asset placement slots from annotated wireframes
+- **Wireframe Slot Parsing**: Extract asset placement slots directly from `wireframe-annotator` XML output.
 - **Manifest Validation**: Verify all `asset_id` references exist in canonical manifest
 - **Token Compliance Checking**: Enforce `--sys-*` semantic variable usage only
 - **Z-Index Validation**: Verify layer assignments (Z-0 through Z-3+) match wireframe intent
 - **Hero Composition Analysis**: Validate depth and lighting logic for hero surfaces
 - **Deterministic Scoring**: 100-point scale with clear rubric and ≥90 pass threshold
-- **Machine-Readable Output**: JSON schema for integration with build pipelines
-- **Unresolved Tracking**: Flag TODO[asset] markers and missing asset mappings
+- **Machine-Readable Output**: Both JSON placement report and updated Wireframe XML
+- **Unresolved Tracking**: Flag missing asset mappings and unresolvable slots
+- **Full Manifest Coverage Validation** (**HARD RULE**): Ensure EVERY asset in `kerala-rage-kr-solidarity-manifest.json` is either (1) placed in at least one `<slot>` across all 11 wireframes OR (2) explicitly listed in `unused_assets` with a clear reason (e.g., "Incompatible scale", "Semantic mismatch", "Reserved for future use"). Zero assets left unaccounted for.
+- **Unused-First Placement Priority** (**HARD RULE**): While resolving `TODO[asset]`, rank compatible candidates so not-yet-used assets are selected before previously-used assets.
+- **Compatible-Slot Escalation** (**HARD RULE**): If assets remain unused and compatible slots exist, report must include proposed additional placements (or extra slot proposals) instead of defaulting to unused-only status.
 
 ## Inputs
+
 ```json
 {
+  "wireframe_xml": "path/to/wireframe.xml",
   "canon_doc": "docs/design/01_CANON.md",
   "flows_doc": "docs/design/05_FLOWS.md",
   "assets_doc": "docs/design/04_ASSETS.md",
+  "asset_root": "frontend/public/assets/kr-solidarity",
   "manifest": "frontend/public/assets/kerala-rage-kr-solidarity-manifest.json",
   "hero_registry": "frontend/public/assets/kr-solidarity-hero-registry.json",
   "token_map": "frontend/public/assets/kr-solidarity-hero-token-map.v2.json"
 }
 ```
 
+## Wireframe Slot Contract
+
+The skill consumes the `<assets>` block within the wireframe.
+
+### Example `<assets>` Block
+
+```xml
+<assets>
+  <slot
+    name="hero_background"
+    z_layer="Z-0"
+    token="--sys-color-charcoalBackground-base"
+    status="todo"
+  >
+    TODO[asset] category=spiritual;scale=hero-only;aspect=16:9;priority=CRITICAL
+  </slot>
+
+  <slot
+    name="hero_overlay"
+    z_layer="Z-1"
+    token="--sys-color-primary-70"
+    status="todo"
+  >
+    TODO[asset] category=atmospheric;scale=hero;aspect=1:1;layering_role=overlay
+  </slot>
+
+  <slot
+    name="hero_accent"
+    z_layer="Z-3"
+    token="--sys-color-inkGold-base"
+    status="resolved"
+  >
+    asset:KR-UI-016
+  </slot>
+</assets>
+```
+
+### TODO Hint Format
+- Hints are passed as a semicolon-separated list of key-value pairs: `TODO[asset] key1=value1;key2=value2;...`
+- **Keys that match against manifest fields:**
+  - `category`
+  - `layer`
+  - `scale` (maps to `usage_rules.scale_suitability`)
+  - `aspect` (maps to `aspect_ratio`)
+  - `priority`
+  - `semantic_weight` (maps to `semantics.semantic_weight`)
+  - `functional_role`
+  - `layering_role`
+
+## Process
+
+1. **Parse Wireframe XML**: Read all 11 wireframe XMLs and identify all `<slot>` elements inside the `<assets>` block.
+2. **Resolve Slots**:
+   - For `status="todo"` or inner text starting with `TODO[asset]`:
+     - Strip the prefix, parse `key=value` pairs split by `;`.
+     - Filter `manifest.assets` (and hero registries) by these constraints, combined with `z_layer` and layer compatibility rules.
+     - **Prioritize assets not yet used in any wireframe** to maximize coverage.
+     - Choose the best candidate (e.g. highest priority, closest aspect ratio, not-yet-placed).
+     - Rewrite the slot's inner text to `asset:<id>` and set `status="resolved"`.
+3. **Track Decisions**:
+   - Save the choice in a `placements` array (per slot, per screen).
+   - Track `used_assets` (manifest IDs placed in at least one slot across all wireframes).
+   - Track `unused_assets` (manifest IDs NOT placed anywhere) with explicit reasons (incompatible scale, semantic mismatch, reserved for future, etc.).
+   - Track `unresolved_slots` (when no suitable asset is found matching constraints).
+4. **Full Manifest Coverage Validation** (**HARD RULE**):
+   - Verify that every asset in the manifest is either (a) in `used_assets` OR (b) in `unused_assets` with documented reason.
+   - **Zero assets should be left unaccounted for.**
+   - If any asset falls into neither category, flag as validation failure and mark the run as `pass=false`.
+5. **Compute Placement Score**: Generate the 100-point score matrix against the **resolved** slots (layer intent, token matching, depth logic, manifest validity).
+6. **Generate Aggregate Report**: Produce summary of all placements, used vs unused assets, coverage percentage, and compliance status.
+   - Report MUST include:
+     - `total_assets` (integer from manifest)
+     - `used_assets` (array of objects)
+     - `unused_assets` (array of objects with reasons)
+     - `proposed_additional_placements` (array when compatible slots exist for unused assets)
 
 ## Hard Placement Rules
 1. Use semantic tokens only:
@@ -74,69 +157,13 @@ Place KR Solidarity assets (motifs, symbols, hero compositions) against annotate
 Pass threshold: `>= 90`.
 
 ## Output Contract
-```json
-{
-  "screen": "Landing",
-  "score": 93,
-  "placements": [
-    {
-      "slot": "hero_background",
-      "asset_id": "KR-SOLID-034",
-      "z_index": 0,
-      "token_refs": ["--sys-color-charcoalBackground-base"],
-      "status": "applied"
-    }
-  ],
-  "unresolved": [],
-  "notes": []
-}
-```
 
-## Example: Landing Page Hero Placement
+The skill produces **THREE** outputs upon completion:
 
-### Input Wireframe Annotation
+**(1) Updated Wireframe XML**
+With all successfully handled `<slot>` inner texts changed to `asset:<id>` and updated to `status="resolved"`.
 
-```markdown
-<!-- Landing page hero section -->
-HERO_BACKGROUND [Z-0]:
-  - Layer: substrate
-  - Asset: Devotional composition
-  - Token: --sys-color-charcoalBackground-base
-  - TODO[asset]: Select from KR-SOLID-021 to KR-SOLID-025
-
-HERO_OVERLAY [Z-1]:
-  - Layer: atmospheric
-  - Asset: Abstract texture
-  - Token: --sys-color-primary-70
-  - Opacity: 0.8
-
-HERO_ACCENT [Z-3]:
-  - Layer: ui-kit
-  - Asset: KR-UI-016
-  - Token: --sys-color-inkGold-base
-  - Placement: corner-accent
-```
-
-### Placement Decision
-
-**Selected Assets**:
-1. **Background**: `KR-SOLID-022` (Devotional -solidarity, 16:9 aspect ratio)
-   - Matches hero container dimensions
-   - Aligns with spiritual layer intent
-   - Proper substrate positioning
-
-2. **Overlay**: `KR-SOLID-003` (Abstract composition, 3:4 aspect ratio)
-   - Adds atmospheric depth
-   - Token-compliant opacity overlay
-   - Non-conflicting z-index
-
-3. **Accent**: `KR-UI-016` (UI Element, SVG)
-   - Corner placement enhances focal point
-   - Maintains UI-kit layer separation
-   - Decorative role without blocking content
-
-### Output
-
+**(2) JSON Placement Report (Per-Screen)**
 ```json
 {
   "screen": "Landing",
@@ -150,7 +177,7 @@ HERO_ACCENT [Z-3]:
       "aspect_ratio": "16:9",
       "token_refs": ["--sys-color-charcoalBackground-base"],
       "status": "applied",
-      "rationale": "Aspect ratio matches hero container; spiritual layer fulfills devotional intent"
+      "rationale": "Aspect ratio matches; category=spiritual maps to devotional intent"
     },
     {
       "slot": "hero_overlay",
@@ -160,7 +187,7 @@ HERO_ACCENT [Z-3]:
       "opacity": 0.8,
       "token_refs": ["--sys-color-primary-70"],
       "status": "applied",
-      "rationale": "Adds layered depth; token-compliant opacity overlay"
+      "rationale": "Matches layering_role=overlay and aspect_ratio=1:1"
     },
     {
       "slot": "hero_accent",
@@ -170,21 +197,104 @@ HERO_ACCENT [Z-3]:
       "placement": "corner-accent",
       "token_refs": ["--sys-color-inkGold-base"],
       "status": "applied",
-      "rationale": "SVG scales without quality loss; UI-kit layer doesn't conflict with hero composition"
+      "rationale": "UI-kit layer doesn't conflict with hero composition"
     }
   ],
-  "unresolved": [],
-  "notes": ["All placements pass token compliance check", "Z-index layering aligns with wireframe intent"]
+  "unused_assets_on_screen": [
+    "KR-UI-042", "KR-SOLID-099"
+  ],
+  "unresolved_slots": [],
+  "notes": [
+    "All placements pass token compliance check",
+    "Z-index layering aligns with wireframe intent"
+  ]
 }
 ```
 
-### Verification Steps
+**(3) Aggregate Placement Report (Full Manifest Coverage)**
+```json
+{
+  "metadata": {
+    "timestamp": "2026-03-07T14:32:00Z",
+    "wireframes_processed": ["01_landing.xml", "02_auth.xml", "...", "11_dashboard.xml"],
+    "total_slots": 12,
+    "total_resolved_slots": 12,
+    "coverage_status": "COMPLETE"
+  },
+  "total_assets": 87,
+  "manifest_coverage": {
+    "used_assets_count": 12,
+    "unused_assets_count": 75,
+    "coverage_percentage": 13.8
+  },
+  "used_assets": [
+    {
+      "asset_id": "KR-SOLID-022",
+      "placed_in": ["01_landing.xml::hero_background"],
+      "category": "devotional",
+      "z_layer": "Z-0",
+      "aspect_ratio": "16:9"
+    },
+    {
+      "asset_id": "KR-UI-016",
+      "placed_in": ["01_landing.xml::hero_accent"],
+      "category": "ui-kit",
+      "z_layer": "Z-3",
+      "aspect_ratio": "1:1"
+    }
+  ],
+  "unused_assets": [
+    {
+      "asset_id": "KR-SOLID-045",
+      "reason": "Incompatible scale (hero-only); no hero slots require this exact aspect ratio",
+      "category": "abstract",
+      "proposed_use": "Available for future dashboard refresh"
+    },
+    {
+      "asset_id": "KR-UI-042",
+      "reason": "Semantic mismatch; design system uses different icon treatment",
+      "category": "ui-kit",
+      "proposed_use": "Legacy component; consider deprecating"
+    },
+    {
+      "asset_id": "KR-SOLID-099",
+      "reason": "Reserved for future A/B testing; not included in current roadmap",
+      "category": "experimental",
+      "proposed_use": "On-hold for Q2 2026"
+    }
+  ],
+  "proposed_additional_placements": [
+    {
+      "asset_id": "KR-SOLID-045",
+      "candidate_slots": ["03_onboarding.xml::step1_accent", "02_auth.xml::background_accent"],
+      "proposal_type": "reuse_existing_slot",
+      "reason": "Compatible atmospheric slot exists but was not selected in primary pass"
+    },
+    {
+      "asset_id": "KR-SOLID-099",
+      "candidate_slots": ["11_dashboard.xml::hero_overlay_extra"],
+      "proposal_type": "add_extra_slot",
+      "reason": "No current slot in dashboard wireframe; optional atmospheric slot can absorb unused asset"
+    }
+  ],
+  "compliance": {
+    "all_assets_accounted_for": true,
+    "no_unresolved_slots": true,
+    "all_placed_assets_valid": true,
+    "zero_flora_lockdown": true,
+    "token_compliance": "100%",
+    "pass": true
+  }
+}
+```
 
-1. ✅ **Token Compliance**: All 3 assets reference only `--sys-color-*` variables
-2. ✅ **Manifest Validation**: KR-SOLID-022, KR-SOLID-003, KR-UI-016 all present
-3. ✅ **Z-Index Ordering**: 0 → 1 → 3 respects wireframe layer hierarchy
+## Verification Steps
+
+1. ✅ **Token Compliance**: All assets reference only `--sys-color-*` variables
+2. ✅ **Manifest Validation**: Selected asset IDs all present in canonical JSON
+3. ✅ **Z-Index Ordering**: Substrate (0) → Atmospheric (1) → Accents (3) respects wireframe layer hierarchy
 4. ✅ **Hero Depth**: Substrate + atmospheric overlay creates intentional depth
-5. ✅ **Score**: 93/100 (passes ≥90 threshold)
+5. ✅ **Score**: Passes ≥90 threshold
 
 ---
 
@@ -295,13 +405,13 @@ HERO_ACCENT [Z-3]:
 
 **Solutions**:
 
-1. **Check Wireframe Aspect**
-   - Is slot 16:9 or 1:1?
+1. **Check Wireframe Aspect Constraints inside TODO[asset]**
+   - Did the `TODO` explicitly ask for `aspect=16:9`?
    - Is asset flexible or fixed?
 
 2. **Select Matching Asset**
    ```json
-   // Hero slot is 16:9
+   // Hero slot asks for 16:9
    // Available assets:
    // - KR-SOLID-022: 16:9 ✓
    // - KR-SOLID-026: 1:1 ✗
@@ -310,44 +420,39 @@ HERO_ACCENT [Z-3]:
 
 3. **Document Scaling**
    ```json
-   "scaling_note": "Asset 16:9 matches hero container; no cropping needed"
+   "rationale": "Asset 16:9 matches hero container; no cropping needed"
    ```
 
 ### Issue: Unresolved TODO[asset] Markers
 
-**Symptoms**: `unresolved` array contains pending assignments
+**Symptoms**: `unresolved_slots` array contains pending assignments
 
 **Causes**:
 - Multiple valid candidates (ambiguous choice)
-- No matching asset in manifest (gap)
+- No matching asset in manifest for the given constraints (gap)
 - Wireframe slot under-specified
 
 **Solutions**:
 
-1. **For Ambiguous Choices**: Review confidence levels
+1. **For Ambiguous Choices**: Resolve via highest appropriate priority
    ```json
-   "candidates": [
-     { "id": "KR-SOLID-022", "confidence": "HIGH", "reason": "16:9, devotional" },
-     { "id": "KR-SOLID-021", "confidence": "MEDIUM", "reason": "1:1, devotional" }
-   ]
-   "selected": "KR-SOLID-022"  // Highest confidence
+   // Among candidates KR-SOLID-022 and KR-SOLID-021, choose highest priority relative to layout
+   "status": "applied", "asset_id": "KR-SOLID-022"
    ```
 
-2. **For Missing Assets**: File gap in task queue
+2. **For Missing Assets**: Flag gap in the resulting JSON
    ```json
-   "unresolved": [
+   "unresolved_slots": [
      {
        "slot": "hero_decorative",
-       "reason": "No 2:1 landscape asset in manifest",
-       "action": "Create new asset in KR-SOLID-038 slot"
+       "reason": "No asset in manifest matched criteria: aspect=2:1, category=abstract",
+       "action": "Needs new asset design"
      }
    ]
    ```
 
-3. **For Under-Specified Slots**: Add wireframe clarity
-   - Work with design team to clarify slot intent
-   - Update wireframe with more specific guidance
-   - Re-evaluate placement after clarification
+3. **For Under-Specified Slots**: Return with notes to update the wireframe upstream
+   - The `<slot>` needs more specific `TODO[asset]` hints.
 
 ### Issue: Token Variable Not Found
 
@@ -369,11 +474,6 @@ HERO_ACCENT [Z-3]:
    "token_refs": ["--sys-color-primary-70"]
    ```
 
-3. **For New Tokens**: File design system update
-   - Submit token proposal to design team
-   - Add to tokens.json and CSS variables
-   - Update skill after approval
-
 ---
 
 ## Best Practices
@@ -381,50 +481,39 @@ HERO_ACCENT [Z-3]:
 ### 1. Start with Substrate Layer
 Always place Z-0 substrate first, then build atmospheric overlays (Z-1–2), then UI accents (Z-3+).
 
-### 2. Token-First Approach
-Choose tokens before selecting assets. This ensures visual cohesion and system compliance.
+### 2. Match Constraints Carefully
+Use the hint string to find highly accurate asset pairings rather than dropping random assets into slots.
 
 ### 3. Progressive Disclosure
 Build layered depth intentionally—each layer should add value without obscuring content.
 
 ### 4. Manifest as Source of Truth
-If an asset isn't in the manifest, don't use it. Request new asset creation instead.
+If an asset isn't in the manifest or hero registry, don't invent it. Output it into `unresolved_slots`.
 
 ### 5. Document Rationale
-Always include rationale for placement choices. This aids design review and future updates.
+Always include rationale for placement choices in the report. This aids design review and future updates.
 
-### 6. Confidence Scoring
-Use HIGH/MEDIUM/LOW confidence to flag decisions needing design team approval.
-
-### 7. Test at Multiple Breakpoints
-Verify placement strategy works at mobile, tablet, and desktop scales.
-
-### 8. Validate Before Integration
-Run full scoring check (score ≥90) before committing to production.
+### 6. Test at Multiple Breakpoints
+Ensure the placement strategy works at mobile, tablet, and desktop scales, or specify scale overrides in the XML mapping.
 
 ---
 
-## Validation Checklist
+## Integration
 
-- [ ] No hardcoded hex values in token_refs (only `--sys-color-*`)
-- [ ] All referenced asset_id entries exist in manifest
-- [ ] All unresolved TODO[asset] markers have assignments
-- [ ] Hero sections include layered depth with documented intent
-- [ ] Z-index ordering respects wireframe layer hierarchy
-- [ ] Final score ≥ 90
-- [ ] All rationales documented for audit trail
-- [ ] Design team approval obtained (if MEDIUM/LOW confidence)
+**Workflow chain:**
+`wireframe-annotator` → `asset-placement-strategy` → `ui-design-evaluator` → `component-builder`
 
----
+- **Upstream (`wireframe-annotator`)**: Provides the initial `wireframe_xml` with `<assets>` blocks, containing `<slot>` items and `TODO[asset]` hints.
+- **This Skill (`asset-placement-strategy`)**: Resolves the hints using the manifest and hero registries, validates tokens/layering, computes the compliance score, and emits the **updated wireframe_xml** + **placement_report**.
+- **Downstream (`ui-design-evaluator`, `component-builder`, etc.)**: Consumes the resolved wireframe XML directly without ambiguity.
 
 ## Related Skills
 
-- [wireframe-annotator](../wireframe-annotator/SKILL.md) – Generate annotated wireframes with asset slot specifications
-- [token-orchestrator](../token-orchestrator/SKILL.md) – Validate design tokens for DTCG compliance
-- [manifest-reconciler](../manifest-reconciler/SKILL.md) – Audit asset manifest for gaps and orphans
-- [ui-design-evaluator](../ui-design-evaluator/SKILL.md) – Visual compliance audits for Kerala Rage components
-- [component-builder](../component-builder/SKILL.md) – Create production React components with proper asset integration
+- [wireframe-annotator](../wireframe-annotator/SKILL.md) – Upstream skill that generates the annotated wireframes and `<slot>` markers
+- [manifest-reconciler](../manifest-reconciler/SKILL.md) – Audits asset manifest for gaps/orphans
+- [ui-design-evaluator](../ui-design-evaluator/SKILL.md) – Visual compliance audits scoring
+- [component-builder](../component-builder/SKILL.md) – Production component generator
 
 ---
 
-**Last Updated**: 2026-03-07 | **Version**: 6.1.0
+**Last Updated**: 2026-03-07 | **Version**: 6.3.0

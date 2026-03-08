@@ -22,7 +22,7 @@ function show_help() {
 
 function validate() {
     echo "🔍 Validating MCP Setup..."
-    
+
     if [ ! -f "$CONFIG_FILE" ]; then
         echo "❌ Error: $CONFIG_FILE not found."
         exit 1
@@ -32,6 +32,11 @@ function validate() {
     if [[ -f "$WORKSPACE_ROOT/.env" ]]; then
         # shellcheck source=/dev/null
         source "$WORKSPACE_ROOT/.env"
+    fi
+
+    # Load from Keychain (overriding .env if found in Keychain for security)
+    if [[ -f "$WORKSPACE_ROOT/tools/scripts/load-mcp-env.sh" ]]; then
+        source "$WORKSPACE_ROOT/tools/scripts/load-mcp-env.sh" > /dev/null
     fi
 
     if [ -z "${PERPLEXITY_API_KEY:-}" ]; then
@@ -58,7 +63,7 @@ function validate() {
 
 function deploy() {
     echo "🚀 Deploying unified MCP config to Claude Desktop..."
-    
+
     if [ ! -f "$CONFIG_FILE" ]; then
         echo "❌ Error: Source config $CONFIG_FILE not found."
         exit 1

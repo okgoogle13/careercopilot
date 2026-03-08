@@ -1,0 +1,784 @@
+diff -ru motion-audit/before/AnalysisWorkbench.tsx motion-audit/after/AnalysisWorkbench.tsx
+--- motion-audit/before/AnalysisWorkbench.tsx	2026-03-08 13:26:12
++++ motion-audit/after/AnalysisWorkbench.tsx	2026-03-08 13:27:01
+@@ -46,9 +46,9 @@
+   onSecondaryAction?: () => void;
+ }
+
+-const springHero = { type: 'spring', stiffness: 280, damping: 26 } as const;
+-const springCard = { type: 'spring', stiffness: 220, damping: 24 } as const;
+-const springButton = { type: 'spring', stiffness: 320, damping: 28 } as const;
++const springHero = { type: 'spring', stiffness: 450, damping: 28 } as const;
++const springCard = { type: 'spring', stiffness: 300, damping: 35 } as const;
++const springButton = { type: 'spring', stiffness: 450, damping: 28 } as const;
+
+ export const AnalysisWorkbench = memo(function AnalysisWorkbench({
+   className,
+@@ -69,7 +69,7 @@
+       role="main"
+       initial={{ opacity: 0, y: 8 }}
+       animate={{ opacity: 1, y: 0 }}
+-      transition={springHero}
++      transition={undefined}
+       className={clsx('relative overflow-hidden rounded-[var(--sys-shape-blockRiot03)] p-6 md:p-8', className)}
+       style={{
+         backgroundColor: 'var(--sys-color-charcoalBackground-base)',
+@@ -78,7 +78,19 @@
+       }}
+       data-mode={mode}
+       data-testid="analysisworkbench"
++      data-motion-audit="true"
+     >
++      <style>{`
++         (prefers-reduced-motion: reduce) {
++          [data-motion-audit="true"] *,
++          [data-motion-audit="true"]::before,
++          [data-motion-audit="true"]::after {
++            transition: none !important;
++            animation: none !important;
++          }
++        }
++      `}</style>
++
+       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+         {SLOT_DEFS.map((slot) => (
+           <div
+@@ -95,7 +107,7 @@
+       <motion.header
+         initial={{ opacity: 0, y: 6 }}
+         animate={{ opacity: 1, y: 0 }}
+-        transition={{ ...springCard, delay: 0.04 }}
++        transition={{ ...springHero, delay: 0.04 }}
+         className="relative z-10"
+       >
+         <h1 className="text-3xl font-black md:text-5xl" style={{ fontFamily: 'var(--sys-type-font-fraunces)', color: 'var(--sys-color-paperWhite)' }}>{title}</h1>
+@@ -105,14 +117,14 @@
+       <motion.div
+         initial={{ opacity: 0, y: 10 }}
+         animate={{ opacity: 1, y: 0 }}
+-        transition={{ ...springCard, delay: 0.08 }}
++        transition={undefined}
+         className="relative z-10 mt-6 flex flex-wrap gap-3"
+       >
+         <motion.button type="button" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} transition={springButton} onClick={onPrimaryAction} className="rounded-[var(--sys-shape-blockRiot03)] px-5 py-3 font-semibold" style={{ fontFamily: 'var(--sys-type-font-work-sans)', backgroundColor: 'var(--sys-color-inkGold-base)', color: 'var(--sys-color-charcoalBackground-base)' }}>{primaryLabel}</motion.button>
+         <motion.button type="button" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} transition={springButton} onClick={onSecondaryAction} className="rounded-[var(--sys-shape-blockRiot01)] border px-5 py-3 font-medium" style={{ fontFamily: 'var(--sys-type-font-work-sans)', borderColor: 'var(--sys-color-protestMetalBlue-base)', color: isKrDark ? 'var(--sys-color-worker-ash-base)' : 'var(--sys-color-paperWhite)', backgroundColor: 'transparent' }}>{secondaryLabel}</motion.button>
+       </motion.div>
+
+-      <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ...springCard, delay: 0.12 }} className="relative z-10 mt-6 text-xs" style={{ fontFamily: 'var(--sys-type-font-mono)', color: 'var(--sys-color-concreteGrey-base)' }}>
++      <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={undefined} className="relative z-10 mt-6 text-xs" style={{ fontFamily: 'var(--sys-type-font-mono)', color: 'var(--sys-color-concreteGrey-base)' }}>
+         Slots: {SLOT_DEFS.length} | Motion: spring-only | Tokens: --sys-* | Zustand: useModeStore
+       </motion.p>
+     </motion.section>
+diff -ru motion-audit/before/ApplicationFinalization.tsx motion-audit/after/ApplicationFinalization.tsx
+--- motion-audit/before/ApplicationFinalization.tsx	2026-03-08 13:26:12
++++ motion-audit/after/ApplicationFinalization.tsx	2026-03-08 13:27:01
+@@ -42,9 +42,9 @@
+   onSecondaryAction?: () => void;
+ }
+
+-const springHero = { type: 'spring', stiffness: 280, damping: 26 } as const;
+-const springCard = { type: 'spring', stiffness: 220, damping: 24 } as const;
+-const springButton = { type: 'spring', stiffness: 320, damping: 28 } as const;
++const springHero = { type: 'spring', stiffness: 450, damping: 28 } as const;
++const springCard = { type: 'spring', stiffness: 300, damping: 35 } as const;
++const springButton = { type: 'spring', stiffness: 450, damping: 28 } as const;
+
+ export const ApplicationFinalization = memo(function ApplicationFinalization({
+   className,
+@@ -65,7 +65,7 @@
+       role="main"
+       initial={{ opacity: 0, y: 8 }}
+       animate={{ opacity: 1, y: 0 }}
+-      transition={springHero}
++      transition={undefined}
+       className={clsx('relative overflow-hidden rounded-[var(--sys-shape-blockRiot03)] p-6 md:p-8', className)}
+       style={{
+         backgroundColor: 'var(--sys-color-charcoalBackground-base)',
+@@ -74,7 +74,19 @@
+       }}
+       data-mode={mode}
+       data-testid="applicationfinalization"
++      data-motion-audit="true"
+     >
++      <style>{`
++         (prefers-reduced-motion: reduce) {
++          [data-motion-audit="true"] *,
++          [data-motion-audit="true"]::before,
++          [data-motion-audit="true"]::after {
++            transition: none !important;
++            animation: none !important;
++          }
++        }
++      `}</style>
++
+       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+         {SLOT_DEFS.map((slot) => (
+           <div
+@@ -91,7 +103,7 @@
+       <motion.header
+         initial={{ opacity: 0, y: 6 }}
+         animate={{ opacity: 1, y: 0 }}
+-        transition={{ ...springCard, delay: 0.04 }}
++        transition={{ ...springHero, delay: 0.04 }}
+         className="relative z-10"
+       >
+         <h1 className="text-3xl font-black md:text-5xl" style={{ fontFamily: 'var(--sys-type-font-fraunces)', color: 'var(--sys-color-paperWhite)' }}>{title}</h1>
+@@ -101,14 +113,14 @@
+       <motion.div
+         initial={{ opacity: 0, y: 10 }}
+         animate={{ opacity: 1, y: 0 }}
+-        transition={{ ...springCard, delay: 0.08 }}
++        transition={undefined}
+         className="relative z-10 mt-6 flex flex-wrap gap-3"
+       >
+         <motion.button type="button" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} transition={springButton} onClick={onPrimaryAction} className="rounded-[var(--sys-shape-blockRiot03)] px-5 py-3 font-semibold" style={{ fontFamily: 'var(--sys-type-font-work-sans)', backgroundColor: 'var(--sys-color-inkGold-base)', color: 'var(--sys-color-charcoalBackground-base)' }}>{primaryLabel}</motion.button>
+         <motion.button type="button" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} transition={springButton} onClick={onSecondaryAction} className="rounded-[var(--sys-shape-blockRiot01)] border px-5 py-3 font-medium" style={{ fontFamily: 'var(--sys-type-font-work-sans)', borderColor: 'var(--sys-color-protestMetalBlue-base)', color: isKrDark ? 'var(--sys-color-worker-ash-base)' : 'var(--sys-color-paperWhite)', backgroundColor: 'transparent' }}>{secondaryLabel}</motion.button>
+       </motion.div>
+
+-      <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ...springCard, delay: 0.12 }} className="relative z-10 mt-6 text-xs" style={{ fontFamily: 'var(--sys-type-font-mono)', color: 'var(--sys-color-concreteGrey-base)' }}>
++      <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={undefined} className="relative z-10 mt-6 text-xs" style={{ fontFamily: 'var(--sys-type-font-mono)', color: 'var(--sys-color-concreteGrey-base)' }}>
+         Slots: {SLOT_DEFS.length} | Motion: spring-only | Tokens: --sys-* | Zustand: useModeStore
+       </motion.p>
+     </motion.section>
+diff -ru motion-audit/before/AuthModal.tsx motion-audit/after/AuthModal.tsx
+--- motion-audit/before/AuthModal.tsx	2026-03-08 13:26:12
++++ motion-audit/after/AuthModal.tsx	2026-03-08 13:27:01
+@@ -55,9 +55,9 @@
+   onSecondaryAction?: () => void;
+ }
+
+-const springHero = { type: 'spring', stiffness: 280, damping: 26 } as const;
+-const springCard = { type: 'spring', stiffness: 220, damping: 24 } as const;
+-const springButton = { type: 'spring', stiffness: 320, damping: 28 } as const;
++const springHero = { type: 'spring', stiffness: 450, damping: 28 } as const;
++const springCard = { type: 'spring', stiffness: 300, damping: 35 } as const;
++const springButton = { type: 'spring', stiffness: 450, damping: 28 } as const;
+
+ export const AuthModal = memo(function AuthModal({
+   className,
+@@ -78,7 +78,7 @@
+       role="main"
+       initial={{ opacity: 0, y: 8 }}
+       animate={{ opacity: 1, y: 0 }}
+-      transition={springHero}
++      transition={undefined}
+       className={clsx(
+         "relative overflow-hidden rounded-[var(--sys-shape-blockRiot03)] p-6 md:p-8 font-['Work_Sans'] text-base",
+         className
+@@ -90,7 +90,19 @@
+       }}
+       data-mode={mode}
+       data-testid="authmodal"
++      data-motion-audit="true"
+     >
++      <style>{`
++         (prefers-reduced-motion: reduce) {
++          [data-motion-audit="true"] *,
++          [data-motion-audit="true"]::before,
++          [data-motion-audit="true"]::after {
++            transition: none !important;
++            animation: none !important;
++          }
++        }
++      `}</style>
++
+       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+         {SLOT_DEFS.map((slot) => (
+           <div
+@@ -107,7 +119,7 @@
+       <motion.header
+         initial={{ opacity: 0, y: 6 }}
+         animate={{ opacity: 1, y: 0 }}
+-        transition={{ ...springCard, delay: 0.04 }}
++        transition={{ ...springHero, delay: 0.04 }}
+         className="relative z-10"
+       >
+         <h1
+@@ -127,7 +139,7 @@
+       <motion.div
+         initial={{ opacity: 0, y: 10 }}
+         animate={{ opacity: 1, y: 0 }}
+-        transition={{ ...springCard, delay: 0.08 }}
++        transition={undefined}
+         className="relative z-10 mt-6 flex flex-wrap gap-3"
+       >
+         <motion.button
+@@ -167,7 +179,7 @@
+       <motion.p
+         initial={{ opacity: 0 }}
+         animate={{ opacity: 1 }}
+-        transition={{ ...springCard, delay: 0.12 }}
++        transition={undefined}
+         className="relative z-10 mt-6 font-['JetBrains_Mono'] text-sm opacity-80"
+         style={{ color: 'var(--sys-color-concreteGrey-base)' }}
+       >
+diff -ru motion-audit/before/DashboardOverview.tsx motion-audit/after/DashboardOverview.tsx
+--- motion-audit/before/DashboardOverview.tsx	2026-03-08 13:26:12
++++ motion-audit/after/DashboardOverview.tsx	2026-03-08 13:27:01
+@@ -40,9 +40,9 @@
+   onSecondaryAction?: () => void;
+ }
+
+-const springHero = { type: 'spring', stiffness: 280, damping: 26 } as const;
+-const springCard = { type: 'spring', stiffness: 220, damping: 24 } as const;
+-const springButton = { type: 'spring', stiffness: 320, damping: 28 } as const;
++const springHero = { type: 'spring', stiffness: 450, damping: 28 } as const;
++const springCard = { type: 'spring', stiffness: 300, damping: 35 } as const;
++const springButton = { type: 'spring', stiffness: 450, damping: 28 } as const;
+
+ export const DashboardOverview = memo(function DashboardOverview({
+   className,
+@@ -63,7 +63,7 @@
+       role="main"
+       initial={{ opacity: 0, y: 8 }}
+       animate={{ opacity: 1, y: 0 }}
+-      transition={springHero}
++      transition={undefined}
+       className={clsx('relative overflow-hidden rounded-[var(--sys-shape-blockRiot03)] p-6 md:p-8', className)}
+       style={{
+         backgroundColor: 'var(--sys-color-charcoalBackground-base)',
+@@ -72,7 +72,19 @@
+       }}
+       data-mode={mode}
+       data-testid="dashboardoverview"
++      data-motion-audit="true"
+     >
++      <style>{`
++         (prefers-reduced-motion: reduce) {
++          [data-motion-audit="true"] *,
++          [data-motion-audit="true"]::before,
++          [data-motion-audit="true"]::after {
++            transition: none !important;
++            animation: none !important;
++          }
++        }
++      `}</style>
++
+       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+         {SLOT_DEFS.map((slot) => (
+           <div
+@@ -89,7 +101,7 @@
+       <motion.header
+         initial={{ opacity: 0, y: 6 }}
+         animate={{ opacity: 1, y: 0 }}
+-        transition={{ ...springCard, delay: 0.04 }}
++        transition={{ ...springHero, delay: 0.04 }}
+         className="relative z-10"
+       >
+         <h1 className="text-3xl font-black md:text-5xl" style={{ fontFamily: 'var(--sys-type-font-fraunces)', color: 'var(--sys-color-paperWhite)' }}>{title}</h1>
+@@ -99,14 +111,14 @@
+       <motion.div
+         initial={{ opacity: 0, y: 10 }}
+         animate={{ opacity: 1, y: 0 }}
+-        transition={{ ...springCard, delay: 0.08 }}
++        transition={undefined}
+         className="relative z-10 mt-6 flex flex-wrap gap-3"
+       >
+         <motion.button type="button" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} transition={springButton} onClick={onPrimaryAction} className="rounded-[var(--sys-shape-blockRiot03)] px-5 py-3 font-semibold" style={{ fontFamily: 'var(--sys-type-font-work-sans)', backgroundColor: 'var(--sys-color-inkGold-base)', color: 'var(--sys-color-charcoalBackground-base)' }}>{primaryLabel}</motion.button>
+         <motion.button type="button" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} transition={springButton} onClick={onSecondaryAction} className="rounded-[var(--sys-shape-blockRiot01)] border px-5 py-3 font-medium" style={{ fontFamily: 'var(--sys-type-font-work-sans)', borderColor: 'var(--sys-color-protestMetalBlue-base)', color: isKrDark ? 'var(--sys-color-worker-ash-base)' : 'var(--sys-color-paperWhite)', backgroundColor: 'transparent' }}>{secondaryLabel}</motion.button>
+       </motion.div>
+
+-      <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ...springCard, delay: 0.12 }} className="relative z-10 mt-6 text-xs" style={{ fontFamily: 'var(--sys-type-font-mono)', color: 'var(--sys-color-concreteGrey-base)' }}>
++      <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={undefined} className="relative z-10 mt-6 text-xs" style={{ fontFamily: 'var(--sys-type-font-mono)', color: 'var(--sys-color-concreteGrey-base)' }}>
+         Slots: {SLOT_DEFS.length} | Motion: spring-only | Tokens: --sys-* | Zustand: useModeStore
+       </motion.p>
+     </motion.section>
+diff -ru motion-audit/before/DocumentWorkbench.tsx motion-audit/after/DocumentWorkbench.tsx
+--- motion-audit/before/DocumentWorkbench.tsx	2026-03-08 13:26:12
++++ motion-audit/after/DocumentWorkbench.tsx	2026-03-08 13:27:01
+@@ -44,9 +44,9 @@
+   onSecondaryAction?: () => void;
+ }
+
+-const springHero = { type: 'spring', stiffness: 280, damping: 26 } as const;
+-const springCard = { type: 'spring', stiffness: 220, damping: 24 } as const;
+-const springButton = { type: 'spring', stiffness: 320, damping: 28 } as const;
++const springHero = { type: 'spring', stiffness: 450, damping: 28 } as const;
++const springCard = { type: 'spring', stiffness: 300, damping: 35 } as const;
++const springButton = { type: 'spring', stiffness: 450, damping: 28 } as const;
+
+ export const DocumentWorkbench = memo(function DocumentWorkbench({
+   className,
+@@ -67,7 +67,7 @@
+       role="main"
+       initial={{ opacity: 0, y: 8 }}
+       animate={{ opacity: 1, y: 0 }}
+-      transition={springHero}
++      transition={undefined}
+       className={clsx('relative overflow-hidden rounded-[var(--sys-shape-blockRiot03)] p-6 md:p-8', className)}
+       style={{
+         backgroundColor: 'var(--sys-color-charcoalBackground-base)',
+@@ -76,7 +76,19 @@
+       }}
+       data-mode={mode}
+       data-testid="documentworkbench"
++      data-motion-audit="true"
+     >
++      <style>{`
++         (prefers-reduced-motion: reduce) {
++          [data-motion-audit="true"] *,
++          [data-motion-audit="true"]::before,
++          [data-motion-audit="true"]::after {
++            transition: none !important;
++            animation: none !important;
++          }
++        }
++      `}</style>
++
+       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+         {SLOT_DEFS.map((slot) => (
+           <div
+@@ -93,7 +105,7 @@
+       <motion.header
+         initial={{ opacity: 0, y: 6 }}
+         animate={{ opacity: 1, y: 0 }}
+-        transition={{ ...springCard, delay: 0.04 }}
++        transition={{ ...springHero, delay: 0.04 }}
+         className="relative z-10"
+       >
+         <h1 className="text-3xl font-black md:text-5xl" style={{ fontFamily: 'var(--sys-type-font-fraunces)', color: 'var(--sys-color-paperWhite)' }}>{title}</h1>
+@@ -103,14 +115,14 @@
+       <motion.div
+         initial={{ opacity: 0, y: 10 }}
+         animate={{ opacity: 1, y: 0 }}
+-        transition={{ ...springCard, delay: 0.08 }}
++        transition={undefined}
+         className="relative z-10 mt-6 flex flex-wrap gap-3"
+       >
+         <motion.button type="button" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} transition={springButton} onClick={onPrimaryAction} className="rounded-[var(--sys-shape-blockRiot03)] px-5 py-3 font-semibold" style={{ fontFamily: 'var(--sys-type-font-work-sans)', backgroundColor: 'var(--sys-color-inkGold-base)', color: 'var(--sys-color-charcoalBackground-base)' }}>{primaryLabel}</motion.button>
+         <motion.button type="button" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} transition={springButton} onClick={onSecondaryAction} className="rounded-[var(--sys-shape-blockRiot01)] border px-5 py-3 font-medium" style={{ fontFamily: 'var(--sys-type-font-work-sans)', borderColor: 'var(--sys-color-protestMetalBlue-base)', color: isKrDark ? 'var(--sys-color-worker-ash-base)' : 'var(--sys-color-paperWhite)', backgroundColor: 'transparent' }}>{secondaryLabel}</motion.button>
+       </motion.div>
+
+-      <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ...springCard, delay: 0.12 }} className="relative z-10 mt-6 text-xs" style={{ fontFamily: 'var(--sys-type-font-mono)', color: 'var(--sys-color-concreteGrey-base)' }}>
++      <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={undefined} className="relative z-10 mt-6 text-xs" style={{ fontFamily: 'var(--sys-type-font-mono)', color: 'var(--sys-color-concreteGrey-base)' }}>
+         Slots: {SLOT_DEFS.length} | Motion: spring-only | Tokens: --sys-* | Zustand: useModeStore
+       </motion.p>
+     </motion.section>
+diff -ru motion-audit/before/HeroLanding.tsx motion-audit/after/HeroLanding.tsx
+--- motion-audit/before/HeroLanding.tsx	2026-03-08 13:26:12
++++ motion-audit/after/HeroLanding.tsx	2026-03-08 13:27:01
+@@ -53,9 +53,9 @@
+   onSecondaryAction?: () => void;
+ }
+
+-const springHero = { type: 'spring', stiffness: 280, damping: 26 } as const;
+-const springCard = { type: 'spring', stiffness: 220, damping: 24 } as const;
+-const springButton = { type: 'spring', stiffness: 320, damping: 28 } as const;
++const springHero = { type: 'spring', stiffness: 450, damping: 28 } as const;
++const springCard = { type: 'spring', stiffness: 300, damping: 35 } as const;
++const springButton = { type: 'spring', stiffness: 450, damping: 28 } as const;
+
+ export const HeroLanding = memo(function HeroLanding({
+   className,
+@@ -76,7 +76,7 @@
+       role="main"
+       initial={{ opacity: 0, y: 8 }}
+       animate={{ opacity: 1, y: 0 }}
+-      transition={springHero}
++      transition={undefined}
+       className={clsx(
+         "relative overflow-hidden rounded-[var(--sys-shape-blockRiot03)] p-6 md:p-8 font-['Work_Sans'] text-base",
+         className
+@@ -88,7 +88,19 @@
+       }}
+       data-mode={mode}
+       data-testid="herolanding"
++      data-motion-audit="true"
+     >
++      <style>{`
++         (prefers-reduced-motion: reduce) {
++          [data-motion-audit="true"] *,
++          [data-motion-audit="true"]::before,
++          [data-motion-audit="true"]::after {
++            transition: none !important;
++            animation: none !important;
++          }
++        }
++      `}</style>
++
+       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+         {SLOT_DEFS.map((slot) => (
+           <div
+@@ -105,7 +117,7 @@
+       <motion.header
+         initial={{ opacity: 0, y: 6 }}
+         animate={{ opacity: 1, y: 0 }}
+-        transition={{ ...springCard, delay: 0.04 }}
++        transition={{ ...springHero, delay: 0.04 }}
+         className="relative z-10"
+       >
+         <h1
+@@ -125,7 +137,7 @@
+       <motion.div
+         initial={{ opacity: 0, y: 10 }}
+         animate={{ opacity: 1, y: 0 }}
+-        transition={{ ...springCard, delay: 0.08 }}
++        transition={undefined}
+         className="relative z-10 mt-6 flex flex-wrap gap-3"
+       >
+         <motion.button
+@@ -165,7 +177,7 @@
+       <motion.p
+         initial={{ opacity: 0 }}
+         animate={{ opacity: 1 }}
+-        transition={{ ...springCard, delay: 0.12 }}
++        transition={undefined}
+         className="relative z-10 mt-6 font-['JetBrains_Mono'] text-sm opacity-80"
+         style={{ color: 'var(--sys-color-concreteGrey-base)' }}
+       >
+diff -ru motion-audit/before/IngestionFlow.tsx motion-audit/after/IngestionFlow.tsx
+--- motion-audit/before/IngestionFlow.tsx	2026-03-08 13:26:12
++++ motion-audit/after/IngestionFlow.tsx	2026-03-08 13:27:01
+@@ -48,9 +48,9 @@
+   onSecondaryAction?: () => void;
+ }
+
+-const springHero = { type: 'spring', stiffness: 280, damping: 26 } as const;
+-const springCard = { type: 'spring', stiffness: 220, damping: 24 } as const;
+-const springButton = { type: 'spring', stiffness: 320, damping: 28 } as const;
++const springHero = { type: 'spring', stiffness: 450, damping: 28 } as const;
++const springCard = { type: 'spring', stiffness: 300, damping: 35 } as const;
++const springButton = { type: 'spring', stiffness: 450, damping: 28 } as const;
+
+ export const IngestionFlow = memo(function IngestionFlow({
+   className,
+@@ -71,7 +71,7 @@
+       role="main"
+       initial={{ opacity: 0, y: 8 }}
+       animate={{ opacity: 1, y: 0 }}
+-      transition={springHero}
++      transition={undefined}
+       className={clsx('relative overflow-hidden rounded-[var(--sys-shape-blockRiot03)] p-6 md:p-8', className)}
+       style={{
+         backgroundColor: 'var(--sys-color-charcoalBackground-base)',
+@@ -80,7 +80,19 @@
+       }}
+       data-mode={mode}
+       data-testid="ingestionflow"
++      data-motion-audit="true"
+     >
++      <style>{`
++         (prefers-reduced-motion: reduce) {
++          [data-motion-audit="true"] *,
++          [data-motion-audit="true"]::before,
++          [data-motion-audit="true"]::after {
++            transition: none !important;
++            animation: none !important;
++          }
++        }
++      `}</style>
++
+       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+         {SLOT_DEFS.map((slot) => (
+           <div
+@@ -97,7 +109,7 @@
+       <motion.header
+         initial={{ opacity: 0, y: 6 }}
+         animate={{ opacity: 1, y: 0 }}
+-        transition={{ ...springCard, delay: 0.04 }}
++        transition={{ ...springHero, delay: 0.04 }}
+         className="relative z-10"
+       >
+         <h1 className="text-3xl font-black md:text-5xl" style={{ fontFamily: 'var(--sys-type-font-fraunces)', color: 'var(--sys-color-paperWhite)' }}>{title}</h1>
+@@ -107,14 +119,14 @@
+       <motion.div
+         initial={{ opacity: 0, y: 10 }}
+         animate={{ opacity: 1, y: 0 }}
+-        transition={{ ...springCard, delay: 0.08 }}
++        transition={undefined}
+         className="relative z-10 mt-6 flex flex-wrap gap-3"
+       >
+         <motion.button type="button" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} transition={springButton} onClick={onPrimaryAction} className="rounded-[var(--sys-shape-blockRiot03)] px-5 py-3 font-semibold" style={{ fontFamily: 'var(--sys-type-font-work-sans)', backgroundColor: 'var(--sys-color-inkGold-base)', color: 'var(--sys-color-charcoalBackground-base)' }}>{primaryLabel}</motion.button>
+         <motion.button type="button" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} transition={springButton} onClick={onSecondaryAction} className="rounded-[var(--sys-shape-blockRiot01)] border px-5 py-3 font-medium" style={{ fontFamily: 'var(--sys-type-font-work-sans)', borderColor: 'var(--sys-color-protestMetalBlue-base)', color: isKrDark ? 'var(--sys-color-worker-ash-base)' : 'var(--sys-color-paperWhite)', backgroundColor: 'transparent' }}>{secondaryLabel}</motion.button>
+       </motion.div>
+
+-      <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ...springCard, delay: 0.12 }} className="relative z-10 mt-6 text-xs" style={{ fontFamily: 'var(--sys-type-font-mono)', color: 'var(--sys-color-concreteGrey-base)' }}>
++      <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={undefined} className="relative z-10 mt-6 text-xs" style={{ fontFamily: 'var(--sys-type-font-mono)', color: 'var(--sys-color-concreteGrey-base)' }}>
+         Slots: {SLOT_DEFS.length} | Motion: spring-only | Tokens: --sys-* | Zustand: useModeStore
+       </motion.p>
+     </motion.section>
+diff -ru motion-audit/before/KanbanTracker.tsx motion-audit/after/KanbanTracker.tsx
+--- motion-audit/before/KanbanTracker.tsx	2026-03-08 13:26:12
++++ motion-audit/after/KanbanTracker.tsx	2026-03-08 13:27:01
+@@ -44,9 +44,9 @@
+   onSecondaryAction?: () => void;
+ }
+
+-const springHero = { type: 'spring', stiffness: 280, damping: 26 } as const;
+-const springCard = { type: 'spring', stiffness: 220, damping: 24 } as const;
+-const springButton = { type: 'spring', stiffness: 320, damping: 28 } as const;
++const springHero = { type: 'spring', stiffness: 450, damping: 28 } as const;
++const springCard = { type: 'spring', stiffness: 300, damping: 35 } as const;
++const springButton = { type: 'spring', stiffness: 450, damping: 28 } as const;
+
+ export const KanbanTracker = memo(function KanbanTracker({
+   className,
+@@ -67,7 +67,7 @@
+       role="main"
+       initial={{ opacity: 0, y: 8 }}
+       animate={{ opacity: 1, y: 0 }}
+-      transition={springHero}
++      transition={undefined}
+       className={clsx('relative overflow-hidden rounded-[var(--sys-shape-blockRiot03)] p-6 md:p-8', className)}
+       style={{
+         backgroundColor: 'var(--sys-color-charcoalBackground-base)',
+@@ -76,7 +76,19 @@
+       }}
+       data-mode={mode}
+       data-testid="kanbantracker"
++      data-motion-audit="true"
+     >
++      <style>{`
++         (prefers-reduced-motion: reduce) {
++          [data-motion-audit="true"] *,
++          [data-motion-audit="true"]::before,
++          [data-motion-audit="true"]::after {
++            transition: none !important;
++            animation: none !important;
++          }
++        }
++      `}</style>
++
+       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+         {SLOT_DEFS.map((slot) => (
+           <div
+@@ -93,7 +105,7 @@
+       <motion.header
+         initial={{ opacity: 0, y: 6 }}
+         animate={{ opacity: 1, y: 0 }}
+-        transition={{ ...springCard, delay: 0.04 }}
++        transition={{ ...springHero, delay: 0.04 }}
+         className="relative z-10"
+       >
+         <h1 className="text-3xl font-black md:text-5xl" style={{ fontFamily: 'var(--sys-type-font-fraunces)', color: 'var(--sys-color-paperWhite)' }}>{title}</h1>
+@@ -103,14 +115,14 @@
+       <motion.div
+         initial={{ opacity: 0, y: 10 }}
+         animate={{ opacity: 1, y: 0 }}
+-        transition={{ ...springCard, delay: 0.08 }}
++        transition={undefined}
+         className="relative z-10 mt-6 flex flex-wrap gap-3"
+       >
+         <motion.button type="button" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} transition={springButton} onClick={onPrimaryAction} className="rounded-[var(--sys-shape-blockRiot03)] px-5 py-3 font-semibold" style={{ fontFamily: 'var(--sys-type-font-work-sans)', backgroundColor: 'var(--sys-color-inkGold-base)', color: 'var(--sys-color-charcoalBackground-base)' }}>{primaryLabel}</motion.button>
+         <motion.button type="button" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} transition={springButton} onClick={onSecondaryAction} className="rounded-[var(--sys-shape-blockRiot01)] border px-5 py-3 font-medium" style={{ fontFamily: 'var(--sys-type-font-work-sans)', borderColor: 'var(--sys-color-protestMetalBlue-base)', color: isKrDark ? 'var(--sys-color-worker-ash-base)' : 'var(--sys-color-paperWhite)', backgroundColor: 'transparent' }}>{secondaryLabel}</motion.button>
+       </motion.div>
+
+-      <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ...springCard, delay: 0.12 }} className="relative z-10 mt-6 text-xs" style={{ fontFamily: 'var(--sys-type-font-mono)', color: 'var(--sys-color-concreteGrey-base)' }}>
++      <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={undefined} className="relative z-10 mt-6 text-xs" style={{ fontFamily: 'var(--sys-type-font-mono)', color: 'var(--sys-color-concreteGrey-base)' }}>
+         Slots: {SLOT_DEFS.length} | Motion: spring-only | Tokens: --sys-* | Zustand: useModeStore
+       </motion.p>
+     </motion.section>
+diff -ru motion-audit/before/LookoutDiscovery.tsx motion-audit/after/LookoutDiscovery.tsx
+--- motion-audit/before/LookoutDiscovery.tsx	2026-03-08 13:26:12
++++ motion-audit/after/LookoutDiscovery.tsx	2026-03-08 13:27:01
+@@ -44,9 +44,9 @@
+   onSecondaryAction?: () => void;
+ }
+
+-const springHero = { type: 'spring', stiffness: 280, damping: 26 } as const;
+-const springCard = { type: 'spring', stiffness: 220, damping: 24 } as const;
+-const springButton = { type: 'spring', stiffness: 320, damping: 28 } as const;
++const springHero = { type: 'spring', stiffness: 450, damping: 28 } as const;
++const springCard = { type: 'spring', stiffness: 300, damping: 35 } as const;
++const springButton = { type: 'spring', stiffness: 450, damping: 28 } as const;
+
+ export const LookoutDiscovery = memo(function LookoutDiscovery({
+   className,
+@@ -67,7 +67,7 @@
+       role="main"
+       initial={{ opacity: 0, y: 8 }}
+       animate={{ opacity: 1, y: 0 }}
+-      transition={springHero}
++      transition={undefined}
+       className={clsx('relative overflow-hidden rounded-[var(--sys-shape-blockRiot03)] p-6 md:p-8', className)}
+       style={{
+         backgroundColor: 'var(--sys-color-charcoalBackground-base)',
+@@ -76,7 +76,19 @@
+       }}
+       data-mode={mode}
+       data-testid="lookoutdiscovery"
++      data-motion-audit="true"
+     >
++      <style>{`
++         (prefers-reduced-motion: reduce) {
++          [data-motion-audit="true"] *,
++          [data-motion-audit="true"]::before,
++          [data-motion-audit="true"]::after {
++            transition: none !important;
++            animation: none !important;
++          }
++        }
++      `}</style>
++
+       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+         {SLOT_DEFS.map((slot) => (
+           <div
+@@ -93,7 +105,7 @@
+       <motion.header
+         initial={{ opacity: 0, y: 6 }}
+         animate={{ opacity: 1, y: 0 }}
+-        transition={{ ...springCard, delay: 0.04 }}
++        transition={{ ...springHero, delay: 0.04 }}
+         className="relative z-10"
+       >
+         <h1 className="text-3xl font-black md:text-5xl" style={{ fontFamily: 'var(--sys-type-font-fraunces)', color: 'var(--sys-color-paperWhite)' }}>{title}</h1>
+@@ -103,14 +115,14 @@
+       <motion.div
+         initial={{ opacity: 0, y: 10 }}
+         animate={{ opacity: 1, y: 0 }}
+-        transition={{ ...springCard, delay: 0.08 }}
++        transition={undefined}
+         className="relative z-10 mt-6 flex flex-wrap gap-3"
+       >
+         <motion.button type="button" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} transition={springButton} onClick={onPrimaryAction} className="rounded-[var(--sys-shape-blockRiot03)] px-5 py-3 font-semibold" style={{ fontFamily: 'var(--sys-type-font-work-sans)', backgroundColor: 'var(--sys-color-inkGold-base)', color: 'var(--sys-color-charcoalBackground-base)' }}>{primaryLabel}</motion.button>
+         <motion.button type="button" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} transition={springButton} onClick={onSecondaryAction} className="rounded-[var(--sys-shape-blockRiot01)] border px-5 py-3 font-medium" style={{ fontFamily: 'var(--sys-type-font-work-sans)', borderColor: 'var(--sys-color-protestMetalBlue-base)', color: isKrDark ? 'var(--sys-color-worker-ash-base)' : 'var(--sys-color-paperWhite)', backgroundColor: 'transparent' }}>{secondaryLabel}</motion.button>
+       </motion.div>
+
+-      <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ...springCard, delay: 0.12 }} className="relative z-10 mt-6 text-xs" style={{ fontFamily: 'var(--sys-type-font-mono)', color: 'var(--sys-color-concreteGrey-base)' }}>
++      <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={undefined} className="relative z-10 mt-6 text-xs" style={{ fontFamily: 'var(--sys-type-font-mono)', color: 'var(--sys-color-concreteGrey-base)' }}>
+         Slots: {SLOT_DEFS.length} | Motion: spring-only | Tokens: --sys-* | Zustand: useModeStore
+       </motion.p>
+     </motion.section>
+diff -ru motion-audit/before/OnboardFlow.tsx motion-audit/after/OnboardFlow.tsx
+--- motion-audit/before/OnboardFlow.tsx	2026-03-08 13:26:12
++++ motion-audit/after/OnboardFlow.tsx	2026-03-08 13:27:01
+@@ -57,9 +57,9 @@
+   onSecondaryAction?: () => void;
+ }
+
+-const springHero = { type: 'spring', stiffness: 280, damping: 26 } as const;
+-const springCard = { type: 'spring', stiffness: 220, damping: 24 } as const;
+-const springButton = { type: 'spring', stiffness: 320, damping: 28 } as const;
++const springHero = { type: 'spring', stiffness: 450, damping: 28 } as const;
++const springCard = { type: 'spring', stiffness: 300, damping: 35 } as const;
++const springButton = { type: 'spring', stiffness: 450, damping: 28 } as const;
+
+ export const OnboardFlow = memo(function OnboardFlow({
+   className,
+@@ -80,7 +80,7 @@
+       role="main"
+       initial={{ opacity: 0, y: 8 }}
+       animate={{ opacity: 1, y: 0 }}
+-      transition={springHero}
++      transition={undefined}
+       className={clsx(
+         "relative overflow-hidden rounded-[var(--sys-shape-blockRiot03)] p-6 md:p-8 font-['Work_Sans'] text-base",
+         className
+@@ -92,7 +92,19 @@
+       }}
+       data-mode={mode}
+       data-testid="onboardflow"
++      data-motion-audit="true"
+     >
++      <style>{`
++         (prefers-reduced-motion: reduce) {
++          [data-motion-audit="true"] *,
++          [data-motion-audit="true"]::before,
++          [data-motion-audit="true"]::after {
++            transition: none !important;
++            animation: none !important;
++          }
++        }
++      `}</style>
++
+       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+         {SLOT_DEFS.map((slot) => (
+           <div
+@@ -109,7 +121,7 @@
+       <motion.header
+         initial={{ opacity: 0, y: 6 }}
+         animate={{ opacity: 1, y: 0 }}
+-        transition={{ ...springCard, delay: 0.04 }}
++        transition={{ ...springHero, delay: 0.04 }}
+         className="relative z-10"
+       >
+         <h1
+@@ -129,7 +141,7 @@
+       <motion.div
+         initial={{ opacity: 0, y: 10 }}
+         animate={{ opacity: 1, y: 0 }}
+-        transition={{ ...springCard, delay: 0.08 }}
++        transition={undefined}
+         className="relative z-10 mt-6 flex flex-wrap gap-3"
+       >
+         <motion.button
+@@ -169,7 +181,7 @@
+       <motion.p
+         initial={{ opacity: 0 }}
+         animate={{ opacity: 1 }}
+-        transition={{ ...springCard, delay: 0.12 }}
++        transition={undefined}
+         className="relative z-10 mt-6 font-['JetBrains_Mono'] text-sm opacity-80"
+         style={{ color: 'var(--sys-color-concreteGrey-base)' }}
+       >
+diff -ru motion-audit/before/SettingsControl.tsx motion-audit/after/SettingsControl.tsx
+--- motion-audit/before/SettingsControl.tsx	2026-03-08 13:26:12
++++ motion-audit/after/SettingsControl.tsx	2026-03-08 13:27:01
+@@ -42,9 +42,9 @@
+   onSecondaryAction?: () => void;
+ }
+
+-const springHero = { type: 'spring', stiffness: 280, damping: 26 } as const;
+-const springCard = { type: 'spring', stiffness: 220, damping: 24 } as const;
+-const springButton = { type: 'spring', stiffness: 320, damping: 28 } as const;
++const springHero = { type: 'spring', stiffness: 450, damping: 28 } as const;
++const springCard = { type: 'spring', stiffness: 300, damping: 35 } as const;
++const springButton = { type: 'spring', stiffness: 450, damping: 28 } as const;
+
+ export const SettingsControl = memo(function SettingsControl({
+   className,
+@@ -65,7 +65,7 @@
+       role="main"
+       initial={{ opacity: 0, y: 8 }}
+       animate={{ opacity: 1, y: 0 }}
+-      transition={springHero}
++      transition={undefined}
+       className={clsx('relative overflow-hidden rounded-[var(--sys-shape-blockRiot03)] p-6 md:p-8', className)}
+       style={{
+         backgroundColor: 'var(--sys-color-charcoalBackground-base)',
+@@ -74,7 +74,19 @@
+       }}
+       data-mode={mode}
+       data-testid="settingscontrol"
++      data-motion-audit="true"
+     >
++      <style>{`
++         (prefers-reduced-motion: reduce) {
++          [data-motion-audit="true"] *,
++          [data-motion-audit="true"]::before,
++          [data-motion-audit="true"]::after {
++            transition: none !important;
++            animation: none !important;
++          }
++        }
++      `}</style>
++
+       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+         {SLOT_DEFS.map((slot) => (
+           <div
+@@ -91,7 +103,7 @@
+       <motion.header
+         initial={{ opacity: 0, y: 6 }}
+         animate={{ opacity: 1, y: 0 }}
+-        transition={{ ...springCard, delay: 0.04 }}
++        transition={{ ...springHero, delay: 0.04 }}
+         className="relative z-10"
+       >
+         <h1 className="text-3xl font-black md:text-5xl" style={{ fontFamily: 'var(--sys-type-font-fraunces)', color: 'var(--sys-color-paperWhite)' }}>{title}</h1>
+@@ -101,14 +113,14 @@
+       <motion.div
+         initial={{ opacity: 0, y: 10 }}
+         animate={{ opacity: 1, y: 0 }}
+-        transition={{ ...springCard, delay: 0.08 }}
++        transition={undefined}
+         className="relative z-10 mt-6 flex flex-wrap gap-3"
+       >
+         <motion.button type="button" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} transition={springButton} onClick={onPrimaryAction} className="rounded-[var(--sys-shape-blockRiot03)] px-5 py-3 font-semibold" style={{ fontFamily: 'var(--sys-type-font-work-sans)', backgroundColor: 'var(--sys-color-inkGold-base)', color: 'var(--sys-color-charcoalBackground-base)' }}>{primaryLabel}</motion.button>
+         <motion.button type="button" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} transition={springButton} onClick={onSecondaryAction} className="rounded-[var(--sys-shape-blockRiot01)] border px-5 py-3 font-medium" style={{ fontFamily: 'var(--sys-type-font-work-sans)', borderColor: 'var(--sys-color-protestMetalBlue-base)', color: isKrDark ? 'var(--sys-color-worker-ash-base)' : 'var(--sys-color-paperWhite)', backgroundColor: 'transparent' }}>{secondaryLabel}</motion.button>
+       </motion.div>
+
+-      <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ...springCard, delay: 0.12 }} className="relative z-10 mt-6 text-xs" style={{ fontFamily: 'var(--sys-type-font-mono)', color: 'var(--sys-color-concreteGrey-base)' }}>
++      <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={undefined} className="relative z-10 mt-6 text-xs" style={{ fontFamily: 'var(--sys-type-font-mono)', color: 'var(--sys-color-concreteGrey-base)' }}>
+         Slots: {SLOT_DEFS.length} | Motion: spring-only | Tokens: --sys-* | Zustand: useModeStore
+       </motion.p>
+     </motion.section>

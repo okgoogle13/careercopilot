@@ -1,0 +1,93 @@
+{
+  "generated_at": "2026-03-08T04:51:59.387Z",
+  "screens": {
+    "01_landing": {
+      "wireframe": ".claude/wireframes/01_landing.xml",
+      "component": "frontend/src/screens/01_landing/HeroLanding.tsx",
+      "source_component": "frontend/src/components/phase3-batch2/HeroLanding.tsx",
+      "route": "/kr/landing",
+      "mapping": "frontend/src/screens/01_landing/mapping.json",
+      "local_wireframe": "frontend/src/screens/01_landing/01_landing.wireframe.xml"
+    },
+    "02_auth": {
+      "wireframe": ".claude/wireframes/02_auth.xml",
+      "component": "frontend/src/screens/02_auth/AuthModal.tsx",
+      "source_component": "frontend/src/components/phase3-batch2/AuthModal.tsx",
+      "route": "/kr/auth",
+      "mapping": "frontend/src/screens/02_auth/mapping.json",
+      "local_wireframe": "frontend/src/screens/02_auth/02_auth.wireframe.xml"
+    },
+    "03_onboarding": {
+      "wireframe": ".claude/wireframes/03_onboarding.xml",
+      "component": "frontend/src/screens/03_onboarding/OnboardFlow.tsx",
+      "source_component": "frontend/src/components/phase3-batch2/OnboardFlow.tsx",
+      "route": "/kr/onboarding",
+      "mapping": "frontend/src/screens/03_onboarding/mapping.json",
+      "local_wireframe": "frontend/src/screens/03_onboarding/03_onboarding.wireframe.xml"
+    },
+    "04_ingestion": {
+      "wireframe": ".claude/wireframes/04_ingestion.xml",
+      "component": "frontend/src/screens/04_ingestion/IngestionFlow.tsx",
+      "source_component": "frontend/src/components/phase3-batch3/IngestionFlow.tsx",
+      "route": "/kr/ingestion",
+      "mapping": "frontend/src/screens/04_ingestion/mapping.json",
+      "local_wireframe": "frontend/src/screens/04_ingestion/04_ingestion.wireframe.xml"
+    },
+    "05_analysis": {
+      "wireframe": ".claude/wireframes/05_analysis.xml",
+      "component": "frontend/src/screens/05_analysis/AnalysisWorkbench.tsx",
+      "source_component": "frontend/src/components/phase3-batch3/AnalysisWorkbench.tsx",
+      "route": "/kr/analysis",
+      "mapping": "frontend/src/screens/05_analysis/mapping.json",
+      "local_wireframe": "frontend/src/screens/05_analysis/05_analysis.wireframe.xml"
+    },
+    "06_lookout": {
+      "wireframe": ".claude/wireframes/06_lookout.xml",
+      "component": "frontend/src/screens/06_lookout/LookoutDiscovery.tsx",
+      "source_component": "frontend/src/components/phase3-batch3/LookoutDiscovery.tsx",
+      "route": "/kr/lookout",
+      "mapping": "frontend/src/screens/06_lookout/mapping.json",
+      "local_wireframe": "frontend/src/screens/06_lookout/06_lookout.wireframe.xml"
+    },
+    "07_kanban": {
+      "wireframe": ".claude/wireframes/07_kanban.xml",
+      "component": "frontend/src/screens/07_kanban/KanbanTracker.tsx",
+      "source_component": "frontend/src/components/phase3-batch3/KanbanTracker.tsx",
+      "route": "/kr/kanban",
+      "mapping": "frontend/src/screens/07_kanban/mapping.json",
+      "local_wireframe": "frontend/src/screens/07_kanban/07_kanban.wireframe.xml"
+    },
+    "08_workbench": {
+      "wireframe": ".claude/wireframes/08_workbench.xml",
+      "component": "frontend/src/screens/08_workbench/DocumentWorkbench.tsx",
+      "source_component": "frontend/src/components/phase3-batch3/DocumentWorkbench.tsx",
+      "route": "/kr/workbench",
+      "mapping": "frontend/src/screens/08_workbench/mapping.json",
+      "local_wireframe": "frontend/src/screens/08_workbench/08_workbench.wireframe.xml"
+    },
+    "09_finalization": {
+      "wireframe": ".claude/wireframes/09_finalization.xml",
+      "component": "frontend/src/screens/09_finalization/ApplicationFinalization.tsx",
+      "source_component": "frontend/src/components/phase3-batch3/ApplicationFinalization.tsx",
+      "route": "/kr/finalization",
+      "mapping": "frontend/src/screens/09_finalization/mapping.json",
+      "local_wireframe": "frontend/src/screens/09_finalization/09_finalization.wireframe.xml"
+    },
+    "10_settings": {
+      "wireframe": ".claude/wireframes/10_settings.xml",
+      "component": "frontend/src/screens/10_settings/SettingsControl.tsx",
+      "source_component": "frontend/src/components/phase3-batch3/SettingsControl.tsx",
+      "route": "/kr/settings",
+      "mapping": "frontend/src/screens/10_settings/mapping.json",
+      "local_wireframe": "frontend/src/screens/10_settings/10_settings.wireframe.xml"
+    },
+    "11_dashboard": {
+      "wireframe": ".claude/wireframes/11_dashboard.xml",
+      "component": "frontend/src/screens/11_dashboard/DashboardOverview.tsx",
+      "source_component": "frontend/src/components/phase3-batch3/DashboardOverview.tsx",
+      "route": "/kr/dashboard",
+      "mapping": "frontend/src/screens/11_dashboard/mapping.json",
+      "local_wireframe": "frontend/src/screens/11_dashboard/11_dashboard.wireframe.xml"
+    }
+  }
+}
