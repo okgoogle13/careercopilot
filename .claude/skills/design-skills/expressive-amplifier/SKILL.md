@@ -348,7 +348,7 @@ All color families have tonal steps (shadow → base → highlight):
 const solidarityRedSteps = [
   '#A02F0F', // steps-0: Shadow (darkest)
   '#C03811', // steps-1: Dark
-  '#F14714', // steps-2: Base (canonical red)
+  '--sys-color-solidarity-red', // steps-2: Base (canonical red)
   '#FF6B3D', // steps-3: Highlight
   '#FF9470', // steps-4: Light
   '#FFB999'  // steps-5: Glow (lightest)
@@ -421,8 +421,8 @@ Colors have cultural/emotional meaning, not generic "primary/secondary":
 ```tsx
 // GOOD: worker-ash (light) on charcoalBackground (dark) = ~12:1 ✅
 <p style={{
-  color: 'var(--sys-color-worker-ash-base)', // #DAF6B3
-  backgroundColor: 'var(--sys-color-charcoalBackground-base)' // #1A1A1A
+  color: 'var(--sys-color-worker-ash-base)', // --sys-color-worker-ash
+  backgroundColor: 'var(--sys-color-charcoalBackground-base)' // --sys-color-charcoal-background
 }}>
   High contrast, readable text.
 </p>
@@ -695,7 +695,7 @@ const solidarityBleed = '0 0 12px var(--sys-color-solidarityRed-steps-4)';
 
 **Before (Conservative)**:
 ```tsx
-<div className="hero" style={{ backgroundColor: '#1A1A1A', padding: '64px' }}>
+<div className="hero" style={{ backgroundColor: '--sys-color-charcoal-background', padding: '64px' }}>
   <h1 style={{ fontSize: '48px', fontWeight: 700 }}>
     Find Your Dream Job
   </h1>
@@ -766,7 +766,7 @@ const solidarityBleed = '0 0 12px var(--sys-color-solidarityRed-steps-4)';
 **Before**:
 ```tsx
 <button style={{
-  backgroundColor: '#F14714',
+  backgroundColor: '--sys-color-solidarity-red',
   color: '#FFFFFF',
   padding: '12px 24px',
   borderRadius: '8px',
@@ -915,7 +915,7 @@ Don't apply hero-level expression to data-heavy UIs.
 Never hardcode colors:
 ```tsx
 // BAD
-backgroundColor: '#F14714' ❌
+backgroundColor: '--sys-color-solidarity-red' ❌
 
 // GOOD
 backgroundColor: 'var(--sys-color-solidarityRed-base)' ✅
@@ -952,7 +952,7 @@ If variable fonts fail to load, provide static font-weight fallbacks:
 - ❌ Aggressive scale hover (`scale: 1.2`) → Keep subtle (1.03 max)
 
 ### Color
-- ❌ Hardcoded colors (`#F14714`) → Use `--sys-color-solidarityRed-base`
+- ❌ Hardcoded colors (`--sys-color-solidarity-red`) → Use `--sys-color-solidarityRed-base`
 - ❌ Flat color usage (base only) → Use tonal steps for depth
 - ❌ Generic color roles ("primary", "secondary") → Use semantic names (solidarityRed, inkGold)
 - ❌ Low contrast text → Validate WCAG AA (4.5:1 minimum)

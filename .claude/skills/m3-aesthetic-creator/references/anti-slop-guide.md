@@ -22,8 +22,8 @@ Never suggest these fonts:
 
 Never suggest these color combinations:
 
-- **Purple gradient on white** (#7C4DFF → #9C27B0 on #FFFFFF) - The ultimate AI slop cliché
-- **Generic Material Blue** (#2196F3, #1976D2) - Overused, lacks personality
+- **Purple gradient on white** (--sys-color-ink-primary → --sys-color-ink-primary on #FFFFFF) - The ultimate AI slop cliché
+- **Generic Material Blue** (--sys-color-accent-primary, #1976D2) - Overused, lacks personality
 - **Timid palettes** (< 20% saturation) - Boring, lacks emotional impact
 - **Evenly distributed colors** (5+ colors with equal weight) - Chaotic, no hierarchy
 

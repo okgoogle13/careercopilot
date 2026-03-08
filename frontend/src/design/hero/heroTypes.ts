@@ -65,6 +65,7 @@ export interface LayerPlacement {
 export interface HeroLayer {
   type: LayerType;
   asset_id: string; // 'auto' allowed
+  asset_token?: string; // semantic alias (v3.2+)
   z_index: number;
   opacity: number; // 0..1
   blend_mode: BlendMode;
@@ -185,12 +186,27 @@ export interface HeroComposition {
   kinetic?: KineticLayerConfig;
 }
 
+export interface HeroAssetToken {
+  ref: string; // asset_id
+  layer: LayerType;
+  status: string;
+  tags: string[];
+  defaults?: {
+    blend_mode?: BlendMode;
+    opacity?: number;
+    position?: PositionMode;
+  };
+  description?: string;
+  alias_of?: string;
+}
+
 export interface HeroRegistry {
   version: string;
   registry_name: string;
   last_updated: string;
   manifest_version?: string;
   compositions: HeroComposition[];
+  tokens?: Record<string, HeroAssetToken>;
 }
 
 export type AssetCategory =

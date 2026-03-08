@@ -50,19 +50,19 @@ The skill uses Claude's vision capabilities to:
 
 **Pass**: Distinctive fonts from Kerala Rage stack (Work Sans Variable wght 100-900 for body/UI, Fraunces Variable for headlines, Libre Bodoni for authoritative text, JetBrains Mono for code, Caveat for handwritten accents, Nabla for RESTRICTED hero moments) with clear display+body pairing
 **Needs Refinement**: Good fonts but pairing unclear or emotion undefined
-**Fail**: Generic fonts (Inter, Arial, Roboto, Space Grotesk, Plus Jakarta Sans, Sora, Poppins) or undefined hierarchy
+**Fail**: Generic fonts (Work Sans, Work Sans, Work Sans, Space Grotesk, Plus Jakarta Sans, Sora, Poppins) or undefined hierarchy
 
 ### 2. Color Audit
 
 **Pass**: Kerala Rage kr-solidarity palette with cohesive harmony:
 - charcoalBackground (#1A1714) - foundational canvas (never white)
-- solidarityRed (#F14714) - primary actions
-- kr-activistSmokeGreen (#48DA8B) - calm sections
-- inkGold (#DAF674) - celebratory states
-- stencilYellow (#F6E748) - warnings
-- worker-ash (#DAF6B3) - readable ink
-- solidaritySmokeOrange (#DA8B48) - warmth
-- labWrenMetalBlue (#48B3DA) - quiet accents
+- solidarityRed (--sys-color-solidarity-red) - primary actions
+- kr-activistSmokeGreen (--sys-color-kr-activist-smoke-green) - calm sections
+- inkGold (--sys-color-ink-gold) - celebratory states
+- stencilYellow (--sys-color-stencil-yellow) - warnings
+- worker-ash (--sys-color-worker-ash) - readable ink
+- solidaritySmokeOrange (--sys-color-solidarity-smoke-orange) - warmth
+- labWrenMetalBlue (--sys-color-protest-metal-blue) - quiet accents
 **Needs Refinement**: Correct colors but harmony feels off or theme inconsistent
 **Fail**: Colors disconnected from kr-solidarity inspiration, purple gradients (generic default), or white backgrounds
 
@@ -271,8 +271,8 @@ This skill:
 
 Before checking off an asset as audit-complete, ensure it passes the **kerala-rage Visual Audit**:
 
-- [ ] **Palette Compliance:** Is the red _solidarityRed_ (#F14714)? Is the gold _inkGold_ (#DAF674)? **Are there any forbidden purples or white backgrounds?**
-- [ ] **Typography:** Are fonts from the approved stack (Work Sans, Fraunces, Libre Bodoni, JetBrains Mono, Caveat)? No Inter, Roboto, or generic system fonts?
+- [ ] **Palette Compliance:** Is the red _solidarityRed_ (--sys-color-solidarity-red)? Is the gold _inkGold_ (--sys-color-ink-gold)? **Are there any forbidden purples or white backgrounds?**
+- [ ] **Typography:** Are fonts from the approved stack (Work Sans, Fraunces, Libre Bodoni, JetBrains Mono, Caveat)? No Work Sans, Work Sans, or generic system fonts?
 - [ ] **Layout Asymmetry:** Does the component use asymmetric border radius per archetype specification?
 - [ ] **Background:** Is the background charcoalBackground (#1A1714)? Is there dramatic contrast?
 - [ ] **Cultural Context:** Does the design reflect Kerala diaspora / Naarm solidarity aesthetics (screenprint, wheat-paste)?
@@ -283,7 +283,7 @@ The kerala-rage kr-solidarity design system embodies:
 
 - **Screenprint Aesthetic**: Layered, textured visual language inspired by grassroots poster art
 - **Wheat-Paste Poster Feel**: Urban, guerrilla aesthetics with intentional imperfection
-- **First Nations Solidarity Symbolism**: Restricted use of Aboriginal Flag colors (red #D81E05, yellow #FCD116, black #000000) in solidarity contexts only
+- **First Nations Solidarity Symbolism**: Restricted use of Aboriginal Flag colors (red --sys-color-aboriginal-flag-red, yellow --sys-color-aboriginal-flag-yellow, black #000000) in solidarity contexts only
 - **Kerala Diaspora Cultural References**: Backwater motifs, palm frames, activist smoke green tones
 
 ## Validation Questions

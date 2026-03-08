@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """
 Antigravity Task Poller
-Continuously polls the task queue and auto-executes tasks assigned to Gemini.
-Enables fully autonomous agent operation without manual intervention.
+DEPRECATED: Continuously polls the task queue and auto-executes tasks assigned to Gemini.
+This agent is perfectly functional but has been superseded by the `task-router` MCP server.
+Task delegation now flows through the standard MCP protocol rather than local JSON queues.
 """
 
 import json

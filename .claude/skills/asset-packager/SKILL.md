@@ -80,7 +80,7 @@ Machine-readable design specifications.
   "background": "#1A1714",
   "palette": {
     "primary": ["#C45C4B", "#D4A84B"],
-    "accents": ["#7A9E82", "#D4885C"]
+    "accents": ["--sys-color-worker-ash", "--sys-color-solidarity-smoke-orange"]
   },
   "dimensions": {"width": 512, "height": 512, "format": "PNG"},
   "density_zones": {

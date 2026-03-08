@@ -8,6 +8,7 @@ import type {
   KineticLayerConfig,
 } from '../../design/hero/heroTypes';
 import { calculatePressure } from '../../utils/typographyPressure';
+import type { SafeZones, RenderHints, ResponsiveNumber } from '../../design/hero/heroTypes';
 
 interface LayeredHeroProps {
   layers: ResolvedLayer[];
@@ -17,6 +18,8 @@ interface LayeredHeroProps {
   className?: string;
   colorBleed?: ColorBleedConfig;
   kinetic?: KineticLayerConfig;
+  safeZones?: SafeZones;
+  renderHints?: RenderHints;
 }
 
 const DEFAULT_M3_BEZIER = 'cubic-bezier(0.34, 1.56, 0.64, 1)';
@@ -38,9 +41,26 @@ export const LayeredHero: React.FC<LayeredHeroProps> = ({
   className = '',
   colorBleed,
   kinetic,
+  safeZones,
+  renderHints,
 }) => {
   const [scrollProgress, setScrollProgress] = useState(0);
   const heroRef = useRef<HTMLDivElement>(null);
+  const [windowSize, setWindowSize] = useState({
+    width: typeof window !== 'undefined' ? window.innerWidth : 1200,
+  });
+
+  useEffect(() => {
+    const handleResize = () => setWindowSize({ width: window.innerWidth });
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const device = useMemo<keyof ResponsiveNumber>(() => {
+    if (windowSize.width < 768) return 'mobile';
+    if (windowSize.width < 1024) return 'tablet';
+    return 'desktop';
+  }, [windowSize.width]);
 
   // Resolve color bleed CSS variable from substrate layer semantic weight
   const bleedStyle = useMemo(() => {
@@ -88,6 +108,24 @@ export const LayeredHero: React.FC<LayeredHeroProps> = ({
     ? `cubic-bezier(${animLegacy.bezier.join(',')})`
     : DEFAULT_M3_BEZIER;
 
+  // Typography positioning based on Safe Zones
+  const typographyContainerStyle = useMemo<React.CSSProperties>(() => {
+    if (!safeZones?.text_left) return { alignItems: 'center', justifyContent: 'center' };
+    const { x, y, w, h } = safeZones.text_left;
+    return {
+      position: 'absolute',
+      left: `${x * 100}%`,
+      top: `${y * 100}%`,
+      width: `${w * 100}%`,
+      height: `${h * 100}%`,
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'flex-start',
+      textAlign: 'left',
+    };
+  }, [safeZones]);
+
   const typographyStyle: React.CSSProperties = {
     fontVariationSettings: `'wght' ${interpolatedWght}, 'wdth' ${interpolatedWdth}`,
     fontOpticalSizing: 'auto',
@@ -100,17 +138,32 @@ export const LayeredHero: React.FC<LayeredHeroProps> = ({
       className={`relative w-full h-screen overflow-hidden ${colorBleed?.enabled ? 'hero-color-bleed' : ''} ${className}`}
       style={{ backgroundColor: BASE_MATTE, ...bleedStyle }}
     >
-      {/* Render layers */}
+      {/* 1. Rendering Layers */}
       {layers.map((layer, index) => {
         const zIndex = zIndexMap ? zIndexMap[layer.type] || layer.zIndex : layer.zIndex;
 
-        // Calculate parallax offset — kinetic layers move at multiplied speed
+        // Calculate parallax offset
         const isKineticTarget = kinetic?.enabled && layer.type === 'atmospheric';
         const speedMultiplier = isKineticTarget ? (kinetic.speed_multiplier ?? 1) : 1;
-        const parallaxOffset =
-          animLegacy?.parallax && layer.type !== 'substrate'
-            ? index * 50 * scrollProgress * speedMultiplier
-            : 0;
+
+        let parallaxOffset = 0;
+        if (animLegacy?.parallax && layer.type !== 'substrate') {
+          parallaxOffset = index * 50 * scrollProgress * speedMultiplier;
+        }
+
+        // Apply v3.1 Placement logic
+        const placementStyle: React.CSSProperties = {};
+        if (layer.placement) {
+          const { scale, translate, objectFit, anchor } = layer.placement;
+          const s = scale[device];
+          const t = translate[device];
+
+          placementStyle.objectFit = objectFit;
+          placementStyle.transformOrigin = anchor;
+          placementStyle.transform = `translate(${t.x}%, ${t.y + parallaxOffset}px) scale(${s})`;
+        } else {
+          placementStyle.transform = `translateY(${parallaxOffset}px)`;
+        }
 
         return (
           <div
@@ -120,15 +173,18 @@ export const LayeredHero: React.FC<LayeredHeroProps> = ({
               zIndex,
               opacity: layer.opacity,
               mixBlendMode: layer.blendMode as any,
-              transform: `translateY(${parallaxOffset}px)`,
               transition: isKineticTarget ? 'transform 80ms linear' : 'transform 100ms linear',
+              ...placementStyle,
             }}
           >
             <img
               src={layer.assetUrl}
               alt=""
-              className={`w-full h-full object-${layer.position === 'cover' ? 'cover' : 'contain'}`}
+              className="w-full h-full"
               style={{
+                objectFit:
+                  (layer.placement?.objectFit as any) ||
+                  (layer.position === 'cover' ? 'cover' : 'contain'),
                 objectPosition: layer.position === 'cover' ? 'center' : layer.position,
               }}
             />
@@ -136,38 +192,62 @@ export const LayeredHero: React.FC<LayeredHeroProps> = ({
         );
       })}
 
-      {/* Typography overlay */}
+      {/* 2. Global Render Hints: Scrim */}
+      {renderHints?.scrim?.enabled && (
+        <div
+          className="absolute inset-0 z-[45] pointer-events-none"
+          style={{
+            background: `linear-gradient(to right, rgba(0,0,0,${renderHints.scrim.opacity}) 0%, transparent 100%)`,
+            mixBlendMode: renderHints.scrim.blend_mode as any,
+          }}
+        />
+      )}
+
+      {/* 3. Global Render Hints: Grain */}
+      {renderHints?.grain_overlay_svg && (
+        <div
+          className="absolute inset-0 z-[48] pointer-events-none opacity-20 mix-blend-overlay"
+          style={{
+            backgroundImage: `url(/assets/kr-solidarity/ui-kit/svg/${renderHints.grain_overlay_svg}.svg)`,
+            backgroundRepeat: 'repeat',
+          }}
+        />
+      )}
+
+      {/* 4. Typography overlay with Safe Zone support */}
       <div
-        className="hero-typography absolute inset-0 flex flex-col items-center justify-center z-50 text-center px-4"
-        style={typographyStyle}
+        className={`hero-typography z-50 px-4 ${!safeZones?.text_left ? 'absolute inset-0 flex flex-col items-center justify-center text-center' : ''}`}
+        style={typographyContainerStyle}
       >
-        <h1
-          className={`text-6xl md:text-8xl font-bold mb-4 leading-tight ${
-            (typography as any).font_family === 'nabla' ? 'font-nabla' : 'font-proclamation'
-          }`}
-          style={{
-            color:
-              (typography as any).font_family === 'nabla'
-                ? 'inherit'
-                : 'var(--sys-color-stencilYellow-base)',
-            textShadow: '0 4px 16px rgba(0, 0, 0, 0.8)',
-            transform:
-              animLegacy?.scroll_behavior === 'scale_expansion'
-                ? `scale(${1 + scrollProgress * 0.2})`
-                : 'none',
-          }}
-        >
-          {typography.headline}
-        </h1>
-        <p
-          className="text-xl md:text-2xl font-body leading-relaxed max-w-2xl"
-          style={{
-            color: 'var(--sys-color-worker-ash-base)',
-            textShadow: '0 2px 8px rgba(0, 0, 0, 0.6)',
-          }}
-        >
-          {typography.supporting}
-        </p>
+        <div style={typographyStyle}>
+          <h1
+            className={`text-6xl md:text-8xl font-bold mb-4 leading-tight ${
+              (typography as any).font_family === 'nabla' ? 'font-nabla' : 'font-proclamation'
+            }`}
+            style={{
+              color:
+                (typography as any).font_family === 'nabla'
+                  ? 'inherit'
+                  : 'var(--sys-color-stencilYellow-base)',
+              textShadow: '0 4px 16px rgba(0, 0, 0, 0.8)',
+              transform:
+                animLegacy?.scroll_behavior === 'scale_expansion'
+                  ? `scale(${1 + scrollProgress * 0.2})`
+                  : 'none',
+            }}
+          >
+            {typography.headline}
+          </h1>
+          <p
+            className="text-xl md:text-2xl font-body leading-relaxed max-w-2xl"
+            style={{
+              color: 'var(--sys-color-worker-ash-base)',
+              textShadow: '0 2px 8px rgba(0, 0, 0, 0.6)',
+            }}
+          >
+            {typography.supporting}
+          </p>
+        </div>
       </div>
     </div>
   );

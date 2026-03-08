@@ -277,17 +277,17 @@ M3 Expressive uses semantic token theming to switch between vibrant and reduced-
 
 ### Pattern: Dark Mode with Vibrant Tokens
 
-M3 Expressive is dark-first. Body background is dark (#1A1714), text is light (#F5F0E8).
+M3 Expressive is dark-first. Body background is dark (#1A1714), text is light (--sys-color-paper-white).
 
 ```css
 :root {
   /* M3 Expressive Dark Mode (Default) */
   --sys-color-primary: #6750a4; /* Vibrant purple */
   --sys-color-primary-container: #e5d5ff; /* Light variant for contrast */
-  --sys-color-on-primary: #ffffff; /* White text on vibrant primary */
+  --sys-color-on-primary: --sys-color-canvas; /* White text on vibrant primary */
 
   --sys-color-surface: #1a1714; /* Dark background (asphalt black) */
-  --sys-color-on-surface: #f5f0e8; /* Light text (paper white) */
+  --sys-color-on-surface: --sys-color-paper-white; /* Light text (paper white) */
 }
 ```
 
@@ -299,7 +299,7 @@ For users with reduced-motion or high-contrast preferences:
 @media (prefers-contrast: more) {
   :root {
     --sys-color-primary: #3d1e6d; /* Even darker primary */
-    --sys-color-on-surface: #ffffff; /* Pure white text */
+    --sys-color-on-surface: --sys-color-canvas; /* Pure white text */
   }
 }
 ```

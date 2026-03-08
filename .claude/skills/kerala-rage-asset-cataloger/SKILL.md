@@ -1,212 +1,145 @@
 ---
 name: kerala-rage-asset-cataloger
-description: Analyzes uncategorized kerala-rage assets against the kr-solidarity manifest to generate executable triage plans with gap analysis and compliance validation.
+description: Catalogs uncategorized asset files against the KR Solidarity manifest and emits deterministic metadata for safe manual triage.
 metadata:
-  version: 1.1.0
+  version: 1.2.0
   mode_support: solidarity-only
 ---
 
-# kerala-rage Asset Cataloger
+# Kerala Rage Asset Cataloger
 
-**Manifest-driven triage and gap analysis for kerala-rage kr-solidarity assets.**
+Deterministic manifest-aware cataloging for KR Solidarity asset intake.
 
 ## Purpose
 
-Analyze assets in `assets/uncategorized/` against the canonical manifest and generate an executable JSON action plan for cataloging, cleanup, and manual review.
+This skill processes image files from uncategorized intake folders, validates the canonical manifest, and emits structured JSON metadata for manual triage and downstream tooling. It does not perform vision-based semantic classification.
 
 ## Supported Mode
 
-`kerala-rage-solidarity` is the only supported mode.
+`kerala-rage-solidarity` only.
 
-## Process
-
-1. **Gap Analysis**: Load the manifest and detect unresolved IDs.
-2. **Visual Triage**: Classify uncategorized assets as manifest match, duplicate, variant, candidate, or discard.
-3. **Action Mapping**: Produce executable move/delete instructions.
-4. **Output Generation**: Write structured JSON for downstream automation.
+Hard policy:
+- Zero-Flora lockdown is active.
+- Do not propose flora/endemic botanical motifs.
 
 ## When To Use
 
-- Triage `assets/uncategorized/` batches.
-- Fill documented manifest gaps.
-- Detect duplicates before catalog ingestion.
-- Validate candidate assets against solidarity compliance rules.
-- Generate deterministic action plans for scripted execution.
+- Intake and normalize small/medium asset batches before curation.
+- Generate deterministic IDs and processing metadata for reviewers.
+- Preflight image files before packaging workflows.
+- Validate manifest structure and duplicate-ID integrity.
 
-## Triage Categories
+## Capabilities
 
-### 1. MANIFEST_MATCH (Priority: CRITICAL)
+- Manifest validation (`exists`, parseable JSON, `assets[]` shape, duplicate ID rejection).
+- Batch file validation (exists + supported extension).
+- Deterministic suggested ID generation (`KR-SOLID-*` progression or legacy fallback).
+- Structured output with analyzed entries and skipped-file reasons.
+- Optional batch payload generation for large runs via `flash_batch.py`.
+- PNG standardization and packaging via companion scripts.
 
-Visually fulfills a documented missing manifest slot.
+## Non-Goals
+
+- No automated visual triage classes (`MANIFEST_MATCH`, `DUPLICATE`, etc.).
+- No automatic `mv` / `rm` execution plans.
+- No autonomous compliance scoring of composition/aesthetics.
+
+## Inputs
+
+Required:
+- Manifest path: `frontend/public/assets/kerala-rage-kr-solidarity-manifest.json`
+- Output JSON path (caller-defined)
+- One or more image file paths
+
+Supported image extensions:
+- `.png`, `.jpg`, `.jpeg`, `.webp`
+
+## Primary Script
+
+```bash
+python3 .claude/skills/kerala-rage-asset-cataloger/scripts/catalog_assets.py \
+  frontend/public/assets/kerala-rage-kr-solidarity-manifest.json \
+  /tmp/catalog.json \
+  assets/uncategorized/*.png
+```
+
+## Output Contract
+
+`catalog_assets.py` writes:
 
 ```json
 {
-  "asset": "assets/uncategorized/phase3-015.png",
-  "status": "MANIFEST_MATCH",
-  "target_id": "KR-SOLID-015",
-  "target_category": "ui-kit",
-  "proposed_name": "kr-solidarity__ui-kit__navigation-compass__v1.png",
-  "visual_description": "Brass compass motif with solidarity-compatible linework",
-  "confidence": "HIGH",
-  "instruction": "mv assets/uncategorized/phase3-015.png assets/kr-solidarity/ui-kit/kr-solidarity__ui-kit__navigation-compass__v1.png"
+  "cataloger_version": "2.1.0",
+  "source_manifest": "...",
+  "timestamp": "ISO-8601",
+  "mode": "kerala-rage-solidarity",
+  "total_requested": 0,
+  "total_analyzed": 0,
+  "total_skipped": 0,
+  "entries": [
+    {
+      "filename": "...",
+      "suggested_asset_id": "KR-SOLID-###",
+      "analysis_timestamp": "ISO-8601",
+      "manifest_compliant": true,
+      "validation_notes": []
+    }
+  ],
+  "skipped": [
+    {"path": "...", "reason": "missing_file|unsupported_extension"}
+  ]
 }
 ```
 
-### 2. DUPLICATE (Priority: REMOVE)
+If output path already exists, timestamp suffix is added to avoid overwrite.
 
-Visually identical to an existing canonical file.
+## Safe Review Workflow
 
-```json
-{
-  "asset": "assets/uncategorized/phase3-002.png",
-  "status": "DUPLICATE",
-  "visual_description": "Identical to existing canonical symbol asset",
-  "confidence": "HIGH",
-  "instruction": "rm assets/uncategorized/phase3-002.png"
-}
-```
+1. Run `catalog_assets.py` to produce metadata.
+2. Manually review `entries[]` and `skipped[]`.
+3. Use reviewer-approved move/delete actions in a separate curated step.
+4. Keep destructive actions out of automatic pipelines.
 
-### 3. VARIANT (Priority: MEDIUM)
+## Companion Scripts
 
-Useful alternative with meaningful, intentional differences.
-
-```json
-{
-  "asset": "assets/uncategorized/phase3-003.png",
-  "status": "VARIANT",
-  "target_category": "symbol",
-  "proposed_name": "kr-solidarity__cultural__lyrebird-display__v2.png",
-  "visual_description": "Alternate pose and composition; preserves motif intent",
-  "confidence": "HIGH",
-  "instruction": "mv assets/uncategorized/phase3-003.png assets/kr-solidarity/symbol/kr-solidarity__cultural__lyrebird-display__v2.png"
-}
-```
-
-### 4. NEW_CANDIDATE (Priority: LOW)
-
-Novel asset with potential value that does not map to existing manifest entries.
-
-```json
-{
-  "asset": "assets/uncategorized/phase3-042.png",
-  "status": "NEW_CANDIDATE",
-  "target_category": "abstract",
-  "proposed_name": "kr-solidarity__atmospheric__lyrebird-street-mural__v1.png",
-  "visual_description": "Solidarity-aligned atmospheric composition featuring endemic motif",
-  "confidence": "MEDIUM",
-  "instruction": "mv assets/uncategorized/phase3-042.png assets/kr-solidarity/abstract/kr-solidarity__atmospheric__lyrebird-street-mural__v1.png"
-}
-```
-
-### 5. DISCARD (Priority: REMOVE)
-
-Low-quality or non-compliant asset with no clear production use.
-
-```json
-{
-  "asset": "assets/uncategorized/phase3-005.png",
-  "status": "DISCARD",
-  "visual_description": "Low resolution screenshot with UI chrome and compression artifacts",
-  "confidence": "HIGH",
-  "instruction": "rm assets/uncategorized/phase3-005.png"
-}
-```
-
-## Manifest Integration
-
-- **Primary manifest**: `frontend/public/assets/kerala-rage-kr-solidarity-manifest.json`
-- **Gap source**: `references/doc008-gaps.md`
-- **Compatibility note**: legacy `ASSET-*` aliases are informational only; canonical IDs are `KR-SOLID-*` / `KR-UI-*`.
-
-## Naming Convention
-
-Pattern: `kr-solidarity__{layer}__{slug}__v{N}.{ext}`
-
-Use the manifest category/layer and keep slugs semantic, short, and deterministic.
-
-## Compliance Rules (Solidarity)
-
-- `PASS`: Contemporary Australian framing, solidarity-forward composition, endemic motifs, readable hierarchy.
-- `CONDITIONAL`: Usable core subject but weak hierarchy/palette fit; requires remix.
-- `FAIL`: Off-mode visuals (clinical/lab, colonial nostalgia, generic cyberpunk), poor quality, or noncompliant palette/typography.
-
-See: `references/mode-compliance.md` for full matrix and prompt template.
-
-## Required Output
-
-Write: `assets/asset_triage_plan.json`
-
-```json
-{
-  "metadata": {
-    "analysis_date": "ISO-8601",
-    "total_assets_analyzed": 49
-  },
-  "summary": {
-    "MANIFEST_MATCH": 8,
-    "DUPLICATE": 12,
-    "VARIANT": 6,
-    "NEW_CANDIDATE": 15,
-    "DISCARD": 8
-  },
-  "triage_actions": [],
-  "manifest_gaps_filled": [],
-  "manifest_gaps_remaining": [],
-  "manual_review_required": []
-}
-```
-
-## Confidence Calibration
-
-- `HIGH`: Clear structural match to manifest entry or duplicate, no material ambiguity.
-- `MEDIUM`: Plausible match with one uncertainty (framing, quality, or category fit).
-- `LOW`: Ambiguous asset identity or weak signal quality; requires manual review.
-
-## Execution Phases
-
-- `HIGH` confidence:
-  `jq -r '.triage_actions[] | select(.confidence == "HIGH") | .instruction' assets/asset_triage_plan.json | bash`
-- `MEDIUM/LOW` confidence: route to review queue before execution.
+- `scripts/flash_batch.py`: build payload for Flash Sidekick routing when valid image count is `>= 20`.
+- `scripts/standardize_png.py`: convert to PNG and validate size constraints from `usage_specs`.
+- `scripts/package_assets.py`: package manifest assets by category and emit audit JSON.
 
 ## Troubleshooting
 
-### Manifest file not found
+### Manifest not found
 
-- Verify path: `frontend/public/assets/kerala-rage-kr-solidarity-manifest.json`.
-- Use absolute path in scripts when running outside repo root.
+- Confirm path: `frontend/public/assets/kerala-rage-kr-solidarity-manifest.json`.
 
 ### Malformed manifest JSON
 
-- Validate JSON syntax before running scripts.
-- Re-run after fixing trailing commas, bad escapes, or broken object shape.
+- Fix JSON syntax and rerun.
 
-### Empty uncategorized directory
+### Duplicate manifest IDs
 
-- Expected behavior: graceful exit with `No assets to catalog`.
-- Confirm you passed actual input files and correct working directory.
+- Remove duplicates in `assets[].id` before running catalog.
 
-### Non-image or unsupported files in batch
+### Empty or invalid image input set
 
-- Only image files are analyzed.
-- Unsupported files are skipped with warnings.
+- Expected: graceful zero-analysis result with skip reasons.
 
-### Ambiguous matches / low confidence
+### Unsupported file types
 
-- Keep out of automation path.
-- Use manual review with `references/doc008-gaps.md` and `references/mode-compliance.md`.
+- Only `.png`, `.jpg`, `.jpeg`, `.webp` are accepted.
 
-## Scripts And References
+## References
 
-- **Scripts**: `scripts/catalog_assets.py`, `scripts/standardize_png.py`, `scripts/flash_batch.py`, `scripts/package_assets.py`
-- **References**: `references/doc008-gaps.md`, `references/asset-inventory.md`, `references/mode-compliance.md`
-- **Workflows**: `MANIFEST-WORKFLOW.md`, `INTEGRATION.md`
+- `references/mode-compliance.md`
+- `references/doc008-gaps.md`
+- `references/asset-inventory.md`
+- `MANIFEST-WORKFLOW.md`
+- `INTEGRATION.md`
 
 ## Related Skills
 
-- `vision-scorer-mcp`: deterministic visual scoring gate.
-- `manifest-reconciler`: manifest gap/orphan verification.
-- `batch-processor`: parallel packaging and deployment routing.
+- `manifest-reconciler`
+- `vision-scorer-mcp`
+- `batch-processor`
 
----
-
-_Curatorial precision for kerala-rage kr-solidarity design assets_
+Last Updated: 2026-03-08 | Version: 1.2.0

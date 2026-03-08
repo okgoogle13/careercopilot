@@ -38,9 +38,9 @@ Output: Updated stylesheets with CSS variables
 {
   "background": "#1A1714",
   "palette": {
-    "solidarity_red": "#F14714",
-    "ink_gold": "#DAF674",
-    "activist_green": "#48DA8B"
+    "solidarity_red": "--sys-color-solidarity-red",
+    "ink_gold": "--sys-color-ink-gold",
+    "activist_green": "--sys-color-kr-activist-smoke-green"
   }
 }
 ```
@@ -50,9 +50,9 @@ Output: Updated stylesheets with CSS variables
 ```css
 :root {
   --color-asphalt-black: #1a1714;
-  --color-solidarity-red: #f14714;
-  --color-ink-gold: #daf674;
-  --color-activist-green: #48da8b;
+  --color-solidarity-red: --sys-color-solidarity-red;
+  --color-ink-gold: --sys-color-ink-gold;
+  --color-activist-green: --sys-color-kr-activist-smoke-green;
 }
 ```
 

@@ -58,10 +58,10 @@ Ensure vibrant saturation and no forbidden patterns.
 **Checks**:
 - ✅ Saturation 40–80% for brand accents (vibrant, not muted)
 - ✅ Solidarity Charcoal background (#1A1714)
-- ✅ Solidarity Crimson (#F14714) as primary CTA
-- ✅ Ink Gold (#DAF674) as primary accent
-- ❌ No purple gradients (#7C4DFF → #9C27B0) — banned
-- ❌ No generic blue (#2196F3) — banned
+- ✅ Solidarity Crimson (--sys-color-solidarity-red) as primary CTA
+- ✅ Ink Gold (--sys-color-ink-gold) as primary accent
+- ❌ No purple gradients (--sys-color-ink-primary → --sys-color-ink-primary) — banned
+- ❌ No generic blue (--sys-color-accent-primary) — banned
 - ❌ No white backgrounds (#FFFFFF) — banned
 
 ### 4. Detect Hardcoded Values
@@ -69,7 +69,7 @@ Ensure vibrant saturation and no forbidden patterns.
 Find non-token CSS in components.
 
 **Patterns to Detect**:
-- `color: #FF5733` (hardcoded hex — must use `--sys-color-*`)
+- `color: --sys-color-solidarity-red` (hardcoded hex — must use `--sys-color-*`)
 - `font-size: 16px` (hardcoded — should use `--sys-type-*` token)
 - `padding: 12px` (hardcoded — should use spacing token)
 
@@ -105,12 +105,12 @@ Ensure `tokens.json` ↔ CSS ↔ TypeScript are in sync.
 | Token | Value | Usage |
 | --- | --- | --- |
 | **charcoalBackground-base** | `#1A1714` | Global floor; never white |
-| **solidarityCrimson-base** | `#F14714` | Primary action, screenprint heat |
-| **inkGold-base** | `#DAF674` | Temple radiance, halo disks |
-| **stencilYellow-base** | `#F6E748` | Attention markers |
-| **activistSmoke-base** | `#48DA8B` | Growth, secondary highlights |
-| **paperWhite** | `#F5F0E8` | Primary text on dark surfaces |
-| **concreteGrey** | `#A39B8F` | Neutral / disabled |
+| **solidarityCrimson-base** | `--sys-color-solidarity-red` | Primary action, screenprint heat |
+| **inkGold-base** | `--sys-color-ink-gold` | Temple radiance, halo disks |
+| **stencilYellow-base** | `--sys-color-stencil-yellow` | Attention markers |
+| **activistSmoke-base** | `--sys-color-kr-activist-smoke-green` | Growth, secondary highlights |
+| **paperWhite** | `--sys-color-paper-white` | Primary text on dark surfaces |
+| **concreteGrey** | `--sys-color-concrete-grey` | Neutral / disabled |
 
 **KR Solidarity Rule**: Background MUST be `charcoalBackground`. NO white (`#FFFFFF`) backgrounds. All semantic tokens use `--sys-color-*` namespace.
 
@@ -127,7 +127,7 @@ Ensure `tokens.json` ↔ CSS ↔ TypeScript are in sync.
 | **Code / Data** | **JetBrains Mono** | 400 | Technical data, code |
 | **Annotation** | **Caveat** | 400–700 | Human notes, metadata |
 
-**KR Solidarity Rule**: ONLY Solidarity Stack (`Fraunces Variable`, `Work Sans Variable`, `Libre Bodoni`, `JetBrains Mono`, `Caveat`). **Forbidden**: Inter, Roboto, Arial, Sora, Plus Jakarta Sans, Poppins, Montserrat, Space Grotesk.
+**KR Solidarity Rule**: ONLY Solidarity Stack (`Fraunces Variable`, `Work Sans Variable`, `Libre Bodoni`, `JetBrains Mono`, `Caveat`). **Forbidden**: Work Sans, Work Sans, Work Sans, Sora, Plus Jakarta Sans, Poppins, Montserrat, Space Grotesk.
 
 **Variable Axis Strategy**:
 - `GRAD` for hover (avoid weight reflow)
@@ -181,15 +181,15 @@ Ensure `tokens.json` ↔ CSS ↔ TypeScript are in sync.
 
 ### KR Solidarity Palette Validation
 - [ ] Background uses `charcoalBackground-base` (#1A1714)
-- [ ] Primary CTA uses `solidarityCrimson-base` (#F14714)
-- [ ] Accent uses `inkGold-base` (#DAF674)
+- [ ] Primary CTA uses `solidarityCrimson-base` (--sys-color-solidarity-red)
+- [ ] Accent uses `inkGold-base` (--sys-color-ink-gold)
 - [ ] No purple gradients
-- [ ] No generic blue (#2196F3)
+- [ ] No generic blue (--sys-color-accent-primary)
 - [ ] No white (#FFFFFF)
 
 ### Typography Validation
 - [ ] All type tokens use Solidarity Stack (Fraunces / Work Sans / JetBrains Mono)
-- [ ] No forbidden fonts (Inter, Roboto, Arial, Sora, Plus Jakarta Sans)
+- [ ] No forbidden fonts (Work Sans, Work Sans, Work Sans, Sora, Plus Jakarta Sans)
 - [ ] Weight ranges 300–900 defined
 - [ ] Optical sizing tokens present (`opsz: auto`)
 - [ ] Variable axis tokens defined (GRAD, WONK, SOFT)
@@ -219,7 +219,7 @@ python3 scripts/validate_palette_mcp.py
 rg -n "#([0-9A-Fa-f]{3}|[0-9A-Fa-f]{6})\b" frontend/src/components frontend/src/layouts frontend/src/pages
 
 # Scan for forbidden fonts
-rg -n "(Inter|Roboto|Arial|Sora|Plus Jakarta Sans|Poppins)" frontend/src/
+rg -n "(Work Sans|Work Sans|Work Sans|Sora|Plus Jakarta Sans|Poppins)" frontend/src/
 
 # Find perfect circles (banned)
 rg -n "border-radius:\s*50%" frontend/src/
@@ -244,14 +244,14 @@ node frontend/scripts/kr/validate-manifest.mjs
       "solidarityCrimson": {
         "base": {
           "$type": "color",
-          "$value": "#F14714",
+          "$value": "--sys-color-solidarity-red",
           "$description": "Screenprint ink, resistance heat, primary CTA"
         }
       },
       "inkGold": {
         "base": {
           "$type": "color",
-          "$value": "#DAF674",
+          "$value": "--sys-color-ink-gold",
           "$description": "Temple radiance, optimistic defiance, halo disks"
         }
       }

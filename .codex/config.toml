@@ -10,23 +10,40 @@
 # Required scopes: repo, workflow, read:org
 bearer_token_env_var = "CODEX_GITHUB_PERSONAL_ACCESS_TOKEN"
 
-# Flash Sidekick MCP Server (Optional)
-# Provides token-efficient code analysis using Gemini 2.5 Pro/Flash
-# [mcp_servers.flash-sidekick]
-# command = "python3"
-# args = ["servers/flash_sidekick.py"]
-# env = { GEMINI_API_KEY = "GEMINI_API_KEY" }
+# Flash Sidekick MCP Server
+[mcp_servers.flash-sidekick]
+command = "python3"
+args = ["servers/flash_sidekick.py"]
+env = { GEMINI_API_KEY = "GEMINI_API_KEY" }
 
-# Design System Sidekick MCP Server (Optional)
-# Provides Kerala Rage design system validation and asset workflows
-# [mcp_servers.design-system-sidekick]
-# command = "python3"
-# args = ["servers/design_system_sidekick.py"]
-# env = { GEMINI_API_KEY = "GEMINI_API_KEY" }
+# Design System Sidekick
+[mcp_servers.design-system-sidekick]
+command = "python3"
+args = ["servers/design_system_sidekick.py"]
+env = { GEMINI_API_KEY = "GEMINI_API_KEY" }
 
-# Playwright MCP Server (Optional)
-# Provides browser automation and E2E testing capabilities
-# [mcp_servers.playwright]
+# Vision Scorer MCP (v3.1)
+[mcp_servers.vision-scorer-mcp]
+command = "python3"
+args = ["servers/vision_scorer_mcp.py"]
+env = { GEMINI_API_KEY = "GEMINI_API_KEY" }
+
+# Test Coverage Sprint (Saturation Gate)
+[mcp_servers.test-coverage-sprint]
+command = "python3"
+args = ["servers/test_coverage_sprint.py"]
+
+# Playwright (Efficiency Audit Only)
+[mcp_servers.playwright]
+command = "npx"
+args = ["-y", "@modelcontextprotocol/server-playwright"]
+disabled_tools = ["resize", "drag", "hover", "press_key", "console_messages", "network_requests", "file_upload"]
+
+# --- DEPRIORITIZED (Commented out to reduce noise) ---
+# [mcp_servers.firebase-mcp-server]
 # command = "npx"
-# args = ["-y", "@modelcontextprotocol/server-playwright"]
-# env = { PLAYWRIGHT_BROWSERS_PATH = "0" }
+# args = ["-y", "firebase-tools@latest", "mcp"]
+
+# [mcp_servers.genkit]
+# command = "npx"
+# args = ["-y", "genkit", "mcp"]

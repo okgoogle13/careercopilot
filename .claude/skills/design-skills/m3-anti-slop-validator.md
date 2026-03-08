@@ -95,8 +95,8 @@ function hasDistinctiveDisplayFont(code: string): boolean {
 
 **Forbidden Color Patterns:**
 
-- ❌ **Purple gradient on white** (#7C4DFF → #9C27B0 on #FFFFFF)
-- ❌ **Generic blue** (#2196F3, #1976D2 - Material Blue)
+- ❌ **Purple gradient on white** (--sys-color-ink-primary → --sys-color-ink-primary on #FFFFFF)
+- ❌ **Generic blue** (--sys-color-accent-primary, #1976D2 - Material Blue)
 - ❌ **Timid palettes** (all colors < 20% saturation)
 - ❌ **Evenly distributed colors** (no dominant color, 5+ colors with equal weight)
 
@@ -166,7 +166,7 @@ function isPurpleGradient(color1: string, color2: string): boolean {
 }
 
 function isGenericBlue(color: string): boolean {
-  const genericBlues = ["#2196F3", "#1976D2", "#1E88E5", "#42A5F5"];
+  const genericBlues = ["--sys-color-accent-primary", "#1976D2", "#1E88E5", "#42A5F5"];
   return genericBlues.some((blue) => color.toUpperCase() === blue.toUpperCase());
 }
 
@@ -553,7 +553,7 @@ function getRecommendation(total: number, breakdown: Record<string, number>): st
       "pattern": "Purple gradient on white",
       "severity": "critical",
       "details": {
-        "colors": ["#7C4DFF", "#9C27B0", "#FFFFFF"],
+        "colors": ["--sys-color-ink-primary", "--sys-color-ink-primary", "#FFFFFF"],
         "suggestion": "Use vibrant, personalized palette (teal/coral, magenta/cyan)."
       }
     },
@@ -567,7 +567,7 @@ function getRecommendation(total: number, breakdown: Record<string, number>): st
       }
     }
   ],
-  "remediationSteps": ["1. Replace Inter with Plus Jakarta Sans Variable (m3-expressive-typography-enhancer)", "2. Use vibrant color palette: teal (#00897B) + coral (#FF6F61) + purple (#7C4DFF)", "3. Add layered background gradients (m3-atmospheric-backgrounds)", "4. Apply elevation tokens for depth (var(--sys-elevation-level2))", "5. Add spring-physics hover effects (m3-spring-motion-choreography)"]
+  "remediationSteps": ["1. Replace Inter with Plus Jakarta Sans Variable (m3-expressive-typography-enhancer)", "2. Use vibrant color palette: teal (#00897B) + coral (#FF6F61) + purple (--sys-color-ink-primary)", "3. Add layered background gradients (m3-atmospheric-backgrounds)", "4. Apply elevation tokens for depth (var(--sys-elevation-level2))", "5. Add spring-physics hover effects (m3-spring-motion-choreography)"]
 }
 ```
 

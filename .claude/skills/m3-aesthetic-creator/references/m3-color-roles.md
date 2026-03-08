@@ -125,7 +125,7 @@ primary-80: #bd8fff     ← Use as `primary` in dark mode
 primary-90: #d7b0ff
 primary-95: #ebd9ff
 primary-99: #fdf8ff
-primary-100: #ffffff    (white)
+primary-100: --sys-color-canvas    (white)
 ```
 
 ## Color Harmony Strategies

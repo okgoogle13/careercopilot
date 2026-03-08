@@ -99,7 +99,7 @@ Add to Design System Sidekick MCP server. Provides programmatic asset validation
   "colors": {
     "background": "#1A1714",
     "dominant": ["#C45C4B", "#D4A84B"],
-    "accents": ["#7A9E82", "#D4885C"]
+    "accents": ["--sys-color-worker-ash", "--sys-color-solidarity-smoke-orange"]
   },
   "kr-motifs": [
     { "name": "[DEPRECATED_STYLE]", "size_cm": 15, "position": "upper_right" },
@@ -233,7 +233,7 @@ Output: Updated stylesheets with CSS variables
   "palette": {
     "waratah_crimson": "#C45C4B",
     "wattle_gold": "#D4A84B",
-    "kr-leafus_sage": "#7A9E82"
+    "kr-leafus_sage": "--sys-color-worker-ash"
   }
 }
 ```
@@ -245,7 +245,7 @@ Output: Updated stylesheets with CSS variables
   --color-kr-motif-night: #1a1714;
   --color-[DEPRECATED_STYLE]-crimson: #c45c4b;
   --color-wattle-gold: #d4a84b;
-  --color-kr-leafus-sage: #7a9e82;
+  --color-kr-leafus-sage: --sys-color-worker-ash;
 }
 ```
 

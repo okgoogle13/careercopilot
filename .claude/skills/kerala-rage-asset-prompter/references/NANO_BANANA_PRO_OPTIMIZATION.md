@@ -6,7 +6,7 @@ This guide defines specific patterns for getting the best results from the **Nan
 
 **Nano Banana Pro** excels at:
 - High-contrast, graphic styles (stencils, linocut).
-- Deep blacks (#0F0F0F) and vibrant, flat colors.
+- Deep blacks (--sys-color-charcoal-background) and vibrant, flat colors.
 - Complex geometric compositions with sharp edges.
 - Textural "grit" and "spray-paint" effects.
 
@@ -23,9 +23,9 @@ This guide defines specific patterns for getting the best results from the **Nan
 
 ### 2. Color Specs (Mandatory)
 Always specify the exact hex codes:
-- `Base: #0F0F0F (Matte Black)`
-- `Accents: #F14714 (Solidarity Red), #DAF674 (Ink Gold), #F6E748 (Stencil Yellow)`
-- `UI/Secondary: #1A1A1A (Deep Ash)`
+- `Base: --sys-color-charcoal-background (Matte Black)`
+- `Accents: --sys-color-solidarity-red (Solidarity Red), --sys-color-ink-gold (Ink Gold), --sys-color-stencil-yellow (Stencil Yellow)`
+- `UI/Secondary: --sys-color-charcoal-background (Deep Ash)`
 
 ### 3. Aesthetic Details
 - `Asymmetric radii: Stone, Slab, and Pebble shapes`
@@ -41,7 +41,7 @@ Always specify the exact hex codes:
 ## Gold Standard Prompts
 
 ### The "Workers Council" Tram Motif
-> "Melbourne laneway street art stencil illustration of a classic W-class tram silhouette. Style: Kerala Rage Solidarity Mode. Colors: Deep matte black background #0F0F0F, chassis in Solidarity Red #F14714, industrial highlights in Stencil Yellow #F6E748. Sharp, stencilled edges, gritty spray-paint texture, overlapping geometric slabs as secondary layers. Asymmetric stone radii. Optimized for Nano Banana Pro, 1:1 aspect ratio."
+> "Melbourne laneway street art stencil illustration of a classic W-class tram silhouette. Style: Kerala Rage Solidarity Mode. Colors: Deep matte black background --sys-color-charcoal-background, chassis in Solidarity Red --sys-color-solidarity-red, industrial highlights in Stencil Yellow --sys-color-stencil-yellow. Sharp, stencilled edges, gritty spray-paint texture, overlapping geometric slabs as secondary layers. Asymmetric stone radii. Optimized for Nano Banana Pro, 1:1 aspect ratio."
 
 ### The "Disruptive" Abstract Hero
-> "Abstract composition of overlapping industrial metal slabs and stencilled textures. Style: Contemporary Melbourne urban grit. Colors: #0F0F0F base, highlight elements in #DAF674 (Ink Gold) and #F14714. Sharp shadows, high-contrast silhouette. Asymmetric radii (pebble and slab). Incorporate subtle JetBrains Mono decorative code markers. Optimized for Nano Banana Pro, 16:9 hero layout."
+> "Abstract composition of overlapping industrial metal slabs and stencilled textures. Style: Contemporary Melbourne urban grit. Colors: --sys-color-charcoal-background base, highlight elements in --sys-color-ink-gold (Ink Gold) and --sys-color-solidarity-red. Sharp shadows, high-contrast silhouette. Asymmetric radii (pebble and slab). Incorporate subtle JetBrains Mono decorative code markers. Optimized for Nano Banana Pro, 16:9 hero layout."

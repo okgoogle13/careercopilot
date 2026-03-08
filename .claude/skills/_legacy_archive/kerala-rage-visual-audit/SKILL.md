@@ -51,7 +51,7 @@ The skill uses Claude's vision capabilities to:
 
 ### 2. Color Audit
 
-**Pass**: Kerala Rage palette (#1A1714 Charcoal, #F14714 [DEPRECATED_STYLE], #DAF674 Gold). High contrast.
+**Pass**: Kerala Rage palette (#1A1714 Charcoal, --sys-color-solidarity-red [DEPRECATED_STYLE], --sys-color-ink-gold Gold). High contrast.
 **Needs Refinement**: Correct colors but insufficient contrast or "muddy" tones.
 **Fail**: White backgrounds, blue primary buttons, or pastel/soft palettes.
 
@@ -262,7 +262,7 @@ This skill:
 
 Before checking off an asset as audit-complete, ensure it passes the **kerala-rage Visual Audit**:
 
-- [ ] **Palette Compliance:** Is the red _Waratah Red_ (#F14714)? Is the gold _Baru Gold_ (#DAF674)? **Are there any forbidden blues/purples?**
+- [ ] **Palette Compliance:** Is the red _Waratah Red_ (--sys-color-solidarity-red)? Is the gold _Baru Gold_ (--sys-color-ink-gold)? **Are there any forbidden blues/purples?**
 - [ ] **Background:** Is the background pure Charcoal (#1A1714)? **No White Backgrounds.**
 - [ ] **Typography:** Is it Inter Display Black (900)? Is Recursive used for code/theory?
 - [ ] **Motifs:** Are there Solidarity motifs (Stars, Fists)? **No Flowers/Birds.**

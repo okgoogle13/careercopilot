@@ -146,16 +146,16 @@ _KR-Solidarity Substrate -> Resistance Red._
   font-family: "Nabla";
   base-palette: 0; /* Default */
   override-colors:
-    0 #4a3b32,
-    1 #d4c5b0; /* Brown/Cream */
+    0 --sys-color-asphalt-black,
+    1 --sys-color-paper-white; /* Brown/Cream */
 }
 
 @font-palette-values --kerala-rage-neon {
   font-family: "Nabla";
   base-palette: 1;
   override-colors:
-    0 #ff00ff,
-    1 #00ffff; /* Magenta/Cyan */
+    0 --sys-color-ink-primary,
+    1 --sys-color-signal-green; /* Magenta/Cyan */
 }
 
 .hero-accent {

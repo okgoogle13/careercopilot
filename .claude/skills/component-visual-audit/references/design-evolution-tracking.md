@@ -70,7 +70,7 @@ Tracking this progression reveals:
   },
   "overall": 67,
   "status": "NEEDS_REFINEMENT",
-  "narrative": "Palette shift successful. Color now aligns with [DEPRECATED_STYLE] inspiration. Typography still generic (Inter). Layout slightly more [DEPRECATED_STYLE]. Coherence improving but design intent still unclear.",
+  "narrative": "Palette shift successful. Color now aligns with [DEPRECATED_STYLE] inspiration. Typography still generic (Work Sans). Layout slightly more [DEPRECATED_STYLE]. Coherence improving but design intent still unclear.",
   "stage": "Palette Shift"
 }
 ```

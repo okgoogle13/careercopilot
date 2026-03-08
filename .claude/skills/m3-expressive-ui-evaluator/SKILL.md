@@ -180,12 +180,12 @@ Apply kr-solidarity tokens and M3 Expressive principles to generate mockup.
 /* Brand */
 --sys-color-kr-ink-gold: #D4A84B;        /* Primary accent */
 --sys-color-waratahRed: #C45C4B;         /* Action / urgent */
---sys-color-ochreEarth: #B8733D;         /* Tertiary grounded */
---sys-color-gumLeafGreen: #6B7F6E;       /* Natural accent */
---sys-color-concreteGrey: #A39B8F;       /* Neutral / disabled */
+--sys-color-ochreEarth: --sys-color-ochre-earth;         /* Tertiary grounded */
+--sys-color-gumLeafGreen: --sys-color-worker-ash;       /* Natural accent */
+--sys-color-concreteGrey: --sys-color-concrete-grey;       /* Neutral / disabled */
 
 /* Text */
---sys-color-paperWhite: #F5F0E8;         /* Primary text on dark */
+--sys-color-paperWhite: --sys-color-paper-white;         /* Primary text on dark */
 ```
 
 ### Typography Tokens
@@ -246,8 +246,8 @@ Before delivering a mockup:
 ### Color
 - [ ] All colors via `--sys-color-*` tokens — zero hardcoded hex
 - [ ] Kerala Rage palette only (no generic M3 purple, no --nc-* prefix)
-- [ ] No purple gradients (#7C4DFF → #9C27B0)
-- [ ] No generic Material Blue (#2196F3)
+- [ ] No purple gradients (--sys-color-ink-primary → --sys-color-ink-primary)
+- [ ] No generic Material Blue (--sys-color-accent-primary)
 
 ### Motion
 - [ ] Spring physics: `cubic-bezier(0.34, 1.56, 0.64, 1)`

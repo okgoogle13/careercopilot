@@ -8,8 +8,7 @@ set_secret() {
   local label=$1
   local account=$2
   local value=$3
-  security add-generic-password -a "$account" -s "careercopilot" -l "$label" -w "$value" 2>/dev/null || \
-  security update-generic-password -a "$account" -s "careercopilot" -w "$value"
+  security add-generic-password -U -a "$account" -s "careercopilot" -l "$label" -w "$value"
 }
 
 # GitHub Token

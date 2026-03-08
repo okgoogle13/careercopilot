@@ -23,7 +23,7 @@ Enforce Material Design 3 Expressive aesthetic standards by detecting and preven
 - ✅ Spring physics interactions (hover bloom/lift with overshoot easing)
 - ✅ Vibrant semantic tokens (M3 Expressive tones, not baseline)
 - ✅ [DEPRECATED_STYLE] asymmetry (no mechanical grid, no uniform border-radius)
-- ✅ No purple gradients, no generic blue (#2196F3)
+- ✅ No purple gradients, no generic blue (--sys-color-accent-primary)
 
 ## When to Use
 
@@ -73,8 +73,8 @@ Scans code for forbidden font families. If found alone (without distinctive disp
 
 **Forbidden Color Patterns:**
 
-- ❌ Purple gradient on white (#7C4DFF → #9C27B0 on #FFFFFF)
-- ❌ Generic Material Blue (#2196F3, #1976D2)
+- ❌ Purple gradient on white (--sys-color-ink-primary → --sys-color-ink-primary on #FFFFFF)
+- ❌ Generic Material Blue (--sys-color-accent-primary, #1976D2)
 - ❌ Timid palettes (all colors < 20% saturation)
 - ❌ Evenly distributed colors (no dominant color)
 
@@ -190,7 +190,7 @@ if (validation.aestheticQuality.total < 80) {
 - [ ] Weight contrast ratio ≥ 3x (100 vs 900, not 400 vs 600)
 - [ ] Size contrast ratio ≥ 3x (57px vs 12px, not 24px vs 16px)
 - [ ] No purple gradients on any background
-- [ ] No generic Material Blue (#2196F3) without context
+- [ ] No generic Material Blue (--sys-color-accent-primary) without context
 - [ ] Vibrant semantic tokens used (M3 Expressive, not baseline)
 - [ ] Spring physics on hover (cubic-bezier overshoot, not linear)
 - [ ] Bloom/lift effect on interactions (scale + elevation)
@@ -214,7 +214,7 @@ if (validation.aestheticQuality.total < 80) {
 
 - Check for dominant color (avoid evenly distributed colors)
 - Ensure 40-80% saturation range
-- Avoid generic Material Blue (#2196F3)
+- Avoid generic Material Blue (--sys-color-accent-primary)
 
 ### Issue: Layout Score Low Despite Using Elevation
 

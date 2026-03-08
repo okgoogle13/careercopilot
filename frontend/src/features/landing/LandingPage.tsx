@@ -12,6 +12,8 @@ export const LandingPage: React.FC = () => {
     layers: any[];
     typography: any;
     animation: any;
+    safeZones?: any;
+    renderHints?: any;
   } | null>(null);
 
   useEffect(() => {
@@ -28,11 +30,17 @@ export const LandingPage: React.FC = () => {
           resolvePageHeroComposition('landing-page')
         );
 
+        if (!result.valid) {
+          console.warn('[LandingPage] ComposeHero failed:', result.error);
+        }
+
         if (result.valid) {
           setHeroData({
             layers: result.resolvedLayers,
             typography: result.typography,
             animation: result.animation ?? result.motion,
+            safeZones: result.safeZones,
+            renderHints: result.renderHints,
           });
         }
       } catch (error) {
@@ -47,14 +55,15 @@ export const LandingPage: React.FC = () => {
   }
 
   return (
-    <>
+    <KrDarkShell>
       <LayeredHero
         layers={heroData.layers}
         typography={heroData.typography}
         animation={heroData.animation}
+        safeZones={heroData.safeZones}
+        renderHints={heroData.renderHints}
       />
-      <KrDarkShell />
-    </>
+    </KrDarkShell>
   );
 };
 

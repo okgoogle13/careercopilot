@@ -67,8 +67,8 @@ This document provides concrete examples of components that would **pass**, **ne
 **Component Name:** Button - "Click Here"
 
 **Screenshot Analysis:**
-- **Typography:** Inter 500 + Roboto 400. Generic, no personality. Hierarchy unclear.
-- **Color:** Generic Material Design blue (#1F88E5). Not in [DEPRECATED_STYLE] palette. Purple gradients on hover.
+- **Typography:** Work Sans 500 + Work Sans 400. Generic, no personality. Hierarchy unclear.
+- **Color:** Generic Material Design blue (--sys-color-protest-metal-blue). Not in [DEPRECATED_STYLE] palette. Purple gradients on hover.
 - **Layout:** Perfect 8px grid alignment. Mechanical and predictable.
 - **[DEPRECATED_STYLE] Elements:** None present.
 - **Coherence:** Feels like Material Design default, not kerala-rage. No intentionality.
@@ -102,7 +102,7 @@ This document provides concrete examples of components that would **pass**, **ne
 
 **Screenshot Analysis:**
 - **Typography:** Fraunces 600 heading (Expressive mode) + Crimson Text body. Clear semantic distinction.
-- **Color:** Sage primary accent (#4A7C59), Ochre Earth secondary (#B8733D), Asphalt Black background.
+- **Color:** Sage primary accent (--sys-color-kr-activist-smoke-green), Ochre Earth secondary (--sys-color-ochre-earth), Asphalt Black background.
 - **Layout:** Asymmetric card layout. Heading in upper-left, description offset lower. [DEPRECATED_STYLE] spacing 20-24px.
 - **[DEPRECATED_STYLE] Elements:** Echidna spine cluster watermark behind text (19% opacity). Supports visual hierarchy without obscuring content.
 - **Coherence:** Card tells visual story about opportunity. Feels intentional, part of larger system.
@@ -139,7 +139,7 @@ This document provides concrete examples of components that would **pass**, **ne
 **Component Name:** Generic Material Card
 
 **Screenshot Analysis:**
-- **Typography:** Roboto 500 + Roboto 400 (both sans, no hierarchy).
+- **Typography:** Work Sans 500 + Work Sans 400 (both sans, no hierarchy).
 - **Color:** Generic Material blue + gray. No [DEPRECATED_STYLE] palette adherence.
 - **Layout:** Perfect rectangular container, uniform 16px padding everywhere. Grid-rigid.
 - **[DEPRECATED_STYLE] Elements:** None.
@@ -191,7 +191,7 @@ This document provides concrete examples of components that would **pass**, **ne
 
 ### FAIL (<60) Components Share:
 
-❌ Generic fonts (Inter, Roboto, Arial)
+❌ Generic fonts (Work Sans, Work Sans, Work Sans)
 ❌ Generic Material Design colors (blue, purple gradients)
 ❌ Grid-rigid layout (no [DEPRECATED_STYLE] spacing)
 ❌ No [DEPRECATED_STYLE] elements or generic florals

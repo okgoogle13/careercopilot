@@ -48,7 +48,7 @@ const colors = {
 const getValue = (path: string): any => {
   const keys = path.split('.')
   let value: any = tokens
-  
+
   for (const key of keys) {
     if (!value?.[key]) {
       console.warn(`⚠️  Token not found: ${path}`)
@@ -56,7 +56,7 @@ const getValue = (path: string): any => {
     }
     value = value[key]
   }
-  
+
   // Extract $value if DTCG format
   return value?.$value ?? value
 }
@@ -161,7 +161,7 @@ Run `analyze-m3-styling-consistency.sh` to find all hardcoded values.
     "status": {
       "kr-dark": {
         "ghostGum": {
-          "$value": "#7A9E82",
+          "$value": "--sys-color-worker-ash",
           "$type": "color",
           "$description": "Success state (Corymbia aparrerinja)"
         }

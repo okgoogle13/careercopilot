@@ -32,13 +32,13 @@ Use when:
 - Body/UI: Work Sans (wght 400-600) for modern legibility
 - Code/Data: JetBrains Mono (wght 400-600) for technical clarity
 - Extreme contrast between headline and body weights
-- Violations: Inter, Roboto, Arial, uniform weights, missing variable font axes
+- Violations: Work Sans, Work Sans, Work Sans, uniform weights, missing variable font axes
 
 **Dimension 3: Color Palette Compliance (0-20)**
 - Only approved Kerala Rage kr-solidarity colors:
-  - asphaltBlack `#1A1714`, paperWhite `#F5F0E8`
+  - asphaltBlack `#1A1714`, paperWhite `--sys-color-paper-white`
   - kr-ink-gold `#D4A84B`, waratahRed `#C45C4B`
-  - ochreEarth `#B8733D`, gumLeafGreen `#6B7F6E`, concreteGrey `#A39B8F`
+  - ochreEarth `--sys-color-ochre-earth`, gumLeafGreen `--sys-color-worker-ash`, concreteGrey `--sys-color-concrete-grey`
 - Proper tonal palette usage (primary-0 through primary-100)
 - Violations: Purple, generic blues, off-palette colors
 

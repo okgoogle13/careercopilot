@@ -32,10 +32,10 @@ Typography is not decoration — it's declaration. The **Solidarity Stack** is t
 The palette is grounded in **streets and struggle**, not Australian ecology:
 
 - **Solidarity Charcoal** `#1A1714` — substrate; never white.
-- **Solidarity Crimson** `#F14714` — primary CTA, resistance heat.
-- **Ink Gold** `#DAF674` — temple radiance, halo disks, optimism.
-- **Stencil Yellow** `#F6E748` — attention markers, poster type.
-- **Activist Smoke** `#48DA8B` — growth and secondary highlights.
+- **Solidarity Crimson** `--sys-color-solidarity-red` — primary CTA, resistance heat.
+- **Ink Gold** `--sys-color-ink-gold` — temple radiance, halo disks, optimism.
+- **Stencil Yellow** `--sys-color-stencil-yellow` — attention markers, poster type.
+- **Activist Smoke** `--sys-color-kr-activist-smoke-green` — growth and secondary highlights.
 
 **STRICT ZERO-FLORA LOCKDOWN**: No flora, ochre-from-native-plants, wattle, sage, terracotta, Australian endemic palette.
 

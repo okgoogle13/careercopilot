@@ -28,9 +28,9 @@ kerala-streetprint [DEPRECATED_STYLE] Field Station • Australian [DEPRECATED_S
 ## Status Colors
 
 ### kr-dark Mode ([DEPRECATED_STYLE])
-- `ghostGum`: `#7A9E82` - Success (Corymbia aparrerinja)
+- `ghostGum`: `--sys-color-worker-ash` - Success (Corymbia aparrerinja)
 - `nativeViolet`: `#9B8AAD` - Progress (Viola hederacea)
-- `kr-flowerOrange`: `#D4885C` - Warning (kr-flower serrata)
+- `kr-flowerOrange`: `--sys-color-solidarity-smoke-orange` - Warning (kr-flower serrata)
 
 ### kr-dark Mode (Clinical)
 - `clinicalSage`: `#6B9E7A` - Success (cooler diagnostic)
@@ -49,17 +49,17 @@ kerala-streetprint [DEPRECATED_STYLE] Field Station • Australian [DEPRECATED_S
 - `slateSmoke`: `#252230` - Cool card surface
 
 ### Shared
-- `paper-white`: `#F5F0E8` - Primary text on dark
+- `paper-white`: `--sys-color-paper-white` - Primary text on dark
 - `flannelFlower`: `#A8A097` - Secondary text (Actinotus helianthi)
 
 ---
 
 ## Forbidden Colors
 
-❌ **Electric Blue**: `#0080FF` and variants  
-❌ **Neon Purple**: `#9D4EDD` and variants  
-❌ **Cyan**: `#00FFFF` and variants  
-❌ **Pure Black**: `#000000` (use `kr-charcoal`)  
+❌ **Electric Blue**: `#0080FF` and variants
+❌ **Neon Purple**: `#9D4EDD` and variants
+❌ **Cyan**: `--sys-color-signal-green` and variants
+❌ **Pure Black**: `#000000` (use `kr-charcoal`)
 ❌ **Pure White**: `#FFFFFF` (use `paper-white`)
 
 ---
