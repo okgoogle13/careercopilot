@@ -1,12 +1,9 @@
 ---
 name: artifact-bundler
-description: Bundles a React component or mini-app into a single, self-contained HTML
-  file. Use this to create shareable prototypes of Kerala Rage components that can
-  be run independently in a browser.
+description: Bundle a React component or app entry into one shareable HTML artifact with inlined assets for isolated browser review.
 metadata:
-  legacy_frontmatter:
-    version: 1.0.0
-    tags:
+  version: 1.1.0
+  tags:
     - bundling
     - prototype
     - html
@@ -16,29 +13,105 @@ metadata:
 # Artifact Bundler
 
 ## Purpose
-Wraps a specific React component or entry point into a standalone HTML file with all CSS (Tailwind/Kerala Rage) and JS inlined. This allows for easy sharing and testing of components outside the main application environment.
+
+Create a single self-contained HTML artifact from a component or entry file so reviewers can open and test the UI without running the full app.
 
 ## When to Use
-- **Prototyping**: You want to share a specific "ManifestoCard" or "Pebble" implementation with the user as a single file.
-- **Testing**: You want to verify a component's behavior in isolation without running the full dev server.
-- **Archiving**: You want to save a snapshot of a component's state.
+
+- Share a component prototype with non-technical reviewers.
+- Validate isolated visual behavior outside the main dev server.
+- Archive deterministic snapshots for design audits or approvals.
+
+## Scope
+
+This skill covers:
+- Bundling from `--component` (auto-scaffolded wrapper entry).
+- Bundling from `--entry` (existing `.html`, `.tsx`, `.ts`, `.jsx`, or `.js`).
+- Inlining built CSS/JS into one output HTML file.
+
+This skill does not cover:
+- Pixel-perfect screenshot automation.
+- Multi-page app packaging.
+- SSR output generation.
+
+## Prerequisites
+
+- `node` + `npx` available.
+- Project dependencies required by target entry/component.
+- Script path: `.claude/skills/artifact-bundler/scripts/bundle.sh`.
 
 ## Usage
 
 ```bash
-# Bundle a specific component (scaffolds a temporary entry point)
-./scripts/bundle.sh --component src/components/ui/Pebble.tsx --output dist/pebble-prototype.html
+# Bundle a specific component (auto-creates temp wrapper)
+.claude/skills/artifact-bundler/scripts/bundle.sh \
+  --component frontend/src/components/kerala-rage/KeralaRageButton.tsx \
+  --output /tmp/kerala-rage-button.html
 
-# Bundle an existing entry point
-./scripts/bundle.sh --entry src/prototypes/dashboard-v2.tsx --output dist/dashboard.html
+# Bundle an existing TS/TSX/JS/JSX entry
+.claude/skills/artifact-bundler/scripts/bundle.sh \
+  --entry frontend/src/main.tsx \
+  --output /tmp/frontend-main.html
+
+# Bundle an existing HTML entry directly
+.claude/skills/artifact-bundler/scripts/bundle.sh \
+  --entry frontend/index.html \
+  --output /tmp/frontend-index.html
 ```
 
-## How It Works
-1.  **Scaffolding**: If a component is provided, it creates a temporary `_entry.tsx` wrapper that imports the component and renders it with the `KeralaRage` theme providers.
-2.  **Building**: Uses `parcel` to build the entry point.
-3.  **Inlining**: Uses `html-inline` (or similar logic) to embed all scripts and styles into a single HTML file.
-4.  **Cleanup**: Removes temporary build files.
+## Behavior Details
 
-## Dependencies
-- `parcel`
-- `html-inline` (or equivalent in-script logic)
+1. Input validation:
+- Requires exactly one of `--component` or `--entry`.
+- Fails fast when files are missing.
+
+2. Component mode:
+- Scaffolds a temporary entry file.
+- Resolves component via `default` export first, then named export matching file stem.
+- Applies KR base stylesheet import.
+
+3. Entry mode:
+- Uses provided `.html` directly, or scaffolds temporary HTML for script/module entries.
+
+4. Build + inline:
+- Builds with Parcel.
+- Inlines final built assets to a single HTML output.
+
+5. Cleanup:
+- Always removes temporary build directory via shell `trap`.
+
+## Edge Cases & Fallbacks
+
+- Component export mismatch: script throws explicit error with expected export forms.
+- Missing `npx`: script fails with actionable dependency error.
+- Output directory absent: script creates parent directory automatically.
+- Relative import resolution: script computes portable paths via `python3` `os.path.relpath`.
+
+## Troubleshooting
+
+### Build fails with module resolution errors
+- Run from repo root so aliases/config resolve consistently.
+- Confirm project dependencies are installed.
+
+### Output file generated but styles look wrong
+- Verify the target entry imports required global styles/tokens.
+- In component mode, ensure KR styles path is valid for your repo layout.
+
+### Component does not render
+- Confirm the component is either a default export or named export matching filename.
+- If component requires props/providers, create an explicit `--entry` wrapper that supplies them.
+
+### Inline step fails
+- Confirm `html-inline` is resolvable through `npx`.
+- Re-run after clearing transient npm cache issues.
+
+## Best Practices
+
+- Prefer `--entry` when component needs app providers/router/context.
+- Use absolute output paths for CI artifacts.
+- Keep bundle runs deterministic by pinning Node/package-lock in CI.
+
+## Related Skills
+
+- `component-builder` for generating new KR components.
+- `component-visual-audit` for post-bundle visual QA.

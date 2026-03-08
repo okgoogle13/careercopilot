@@ -1,5 +1,17 @@
 # Design Evolution Tracking Methodology
 
+## Table of Contents
+
+- [How to Document Component Maturity Over Time](#how-to-document-component-maturity-over-time)
+- [Why Track Evolution?](#why-track-evolution)
+- [The Evolution Audit Format](#the-evolution-audit-format)
+- [Portfolio-Level Evolution Tracking](#portfolio-level-evolution-tracking)
+- [Evolution Audit Checklist](#evolution-audit-checklist)
+- [Example: Slow Progression Deep Dive](#example-slow-progression-deep-dive)
+- [Communicating Evolution to Stakeholders](#communicating-evolution-to-stakeholders)
+- [Tools & Integration](#tools--integration)
+- [Summary](#summary)
+
 ## How to Document Component Maturity Over Time
 
 This guide explains how to track component visual evolution from first iteration through kerala-rage coherence, using the component visual audit as a measurement tool.
@@ -62,15 +74,15 @@ Tracking this progression reveals:
   "changes": ["Color palette updated to Wattle Gold", "Minor spacing adjustments"],
   "audit": {
     "typography": 8,
-    "color": 16,      // ← Major improvement: now [DEPRECATED_STYLE] palette
-    "layout": 11,     // ← Minor improvement: [DEPRECATED_STYLE] padding added
+    "color": 16,      // ← Major improvement: now KR Solidarity palette
+    "layout": 11,     // ← Minor improvement: KR Solidarity padding added
     "botanical_elements": 6,   // ← First motif experiment
     "coherence": 12,  // ← Personality emerging
     "microcopy": 14
   },
   "overall": 67,
   "status": "NEEDS_REFINEMENT",
-  "narrative": "Palette shift successful. Color now aligns with [DEPRECATED_STYLE] inspiration. Typography still generic (Work Sans). Layout slightly more [DEPRECATED_STYLE]. Coherence improving but design intent still unclear.",
+  "narrative": "Palette shift successful. Color now aligns with KR Solidarity inspiration. Typography still generic (Work Sans). Layout slightly more KR Solidarity. Coherence improving but design intent still unclear.",
   "stage": "Palette Shift"
 }
 ```
@@ -92,7 +104,7 @@ Tracking this progression reveals:
   },
   "overall": 75,
   "status": "NEEDS_REFINEMENT",
-  "narrative": "Typography transformation. Crimson + Work Sans creates strong display/body hierarchy. Layout becoming more [DEPRECATED_STYLE]. [DEPRECATED_STYLE] elements still experimental. Component starting to feel intentional.",
+  "narrative": "Typography transformation. Crimson + Work Sans creates strong display/body hierarchy. Layout becoming more KR Solidarity. KR Solidarity elements still experimental. Component starting to feel intentional.",
   "stage": "Typography Awakening"
 }
 ```
@@ -103,10 +115,10 @@ Tracking this progression reveals:
 {
   "iteration": "v4",
   "date": "2026-01-30",
-  "changes": ["[DEPRECATED_STYLE] motif: sage leaf now integrated purposefully", "Layout: refined asymmetry", "Microcopy: 'Let's Build Your Story' replaces generic 'Save'"],
+  "changes": ["KR Solidarity motif: sage leaf now integrated purposefully", "Layout: refined asymmetry", "Microcopy: 'Let's Build Your Story' replaces generic 'Save'"],
   "audit": {
     "typography": 18,
-    "color": 19,       // ← Full [DEPRECATED_STYLE] harmony
+    "color": 19,       // ← Full KR Solidarity harmony
     "layout": 17,      // ← Clear asymmetric hierarchy
     "botanical_elements": 17, // ← Motif now meaningful, not decorative
     "coherence": 17,   // ← Design story emerging
@@ -114,7 +126,7 @@ Tracking this progression reveals:
   },
   "overall": 81,
   "status": "PASS",
-  "narrative": "Component reaches PASS threshold. Every design choice feels motivated. [DEPRECATED_STYLE] motif supports visual hierarchy. Personality shines through without obscuring clarity. Component embodies kerala-rage vision.",
+  "narrative": "Component reaches PASS threshold. Every design choice feels motivated. KR Solidarity motif supports visual hierarchy. Personality shines through without obscuring clarity. Component embodies kerala-rage vision.",
   "stage": "Intentionality Emerges",
   "design_story": "The button journey: from generic Material default to distinctive Kerala-rage artifact. Sage leaf guides user focus. Cremson/Work Sans pairing creates warmth and clarity."
 }
@@ -126,18 +138,18 @@ Tracking this progression reveals:
 {
   "iteration": "v5",
   "date": "2026-02-05",
-  "changes": ["Hover state: [DEPRECATED_STYLE] motif animates (spring physics)", "Focus state: warm secondary color", "Component now supports Gallery/[DEPRECATED_MODE] switching"],
+  "changes": ["Hover state: KR Solidarity motif animates (spring physics)", "Focus state: warm secondary color", "Component now supports Gallery/Solidarity switching"],
   "audit": {
     "typography": 19,  // ← Subtle variable font axis tweaks
-    "color": 20,       // ← Perfect [DEPRECATED_STYLE] harmony
+    "color": 20,       // ← Perfect KR Solidarity harmony
     "layout": 19,      // ← Mastery of asymmetric spacing
     "botanical_elements": 19, // ← Motif integrated across all states
     "coherence": 19,   // ← Design tells complete story
-    "microcopy": 18    // ← [DEPRECATED_MODE]: personality. Lab mode: clarity.
+    "microcopy": 18    // ← Solidarity: personality. Lab mode: clarity.
   },
   "overall": 88,
   "status": "PASS",
-  "narrative": "Component reaches excellence. Multi-state design consistency. [DEPRECATED_STYLE] motif tells story across interactions. Gallery/Lab mode switching shows design maturity. Ready for portfolio showcase.",
+  "narrative": "Component reaches excellence. Multi-state design consistency. KR Solidarity motif tells story across interactions. Gallery/Lab mode switching shows design maturity. Ready for portfolio showcase.",
   "stage": "Cohesive Personality",
   "design_story": "Mastery phase. Button responds to context (Gallery warmth vs. Lab clarity). Sage motif becomes signature, not decoration. Users feel the design intent."
 }
@@ -155,21 +167,21 @@ Create a summary spreadsheet:
 |-----------|----------|----------|----------|----------|----------|--------------|--------|-------|
 | Pebble | 42 | 67 | 75 | 81 | 88 | 80+ | ✅ PASS | Stable progression |
 | Lens | 45 | 62 | 71 | 79 | - | 80+ | ⚠️ CLOSE | One more iteration |
-| Seed | 38 | 55 | 68 | 72 | 78 | 80+ | ⚠️ SLOW | Needs design direction |
-| Jar | 40 | 58 | 74 | 83 | - | 80+ | ✅ PASS | Quick progression |
+| Pebble | 38 | 55 | 68 | 72 | 78 | 80+ | ⚠️ SLOW | Needs design direction |
+| Slab | 40 | 58 | 74 | 83 | - | 80+ | ✅ PASS | Quick progression |
 | Cabinet | 44 | 61 | 70 | 77 | 82 | 80+ | ✅ PASS | - |
 
 ### Identify Patterns
 
 **What's Working (Stable Progression):**
-- Pebble, Jar, Cabinet: 40-50 point progression
+- Pebble, Slab, Cabinet: 40-50 point progression
 - Consistent upward trajectory
 - Design direction clear
 
 **What Needs Attention (Slow Progression):**
-- Seed: Only 40-point gain after 4 iterations (below median)
-- Issue: [DEPRECATED_STYLE] element integration unclear
-- Action: Revisit design brief, refine [DEPRECATED_STYLE] metaphor
+- Pebble: Only 40-point gain after 4 iterations (below median)
+- Issue: KR Solidarity element integration unclear
+- Action: Revisit design brief, refine KR Solidarity metaphor
 
 **Portfolio Maturity:**
 - Current average: 76/100 (NEEDS_REFINEMENT threshold)
@@ -200,14 +212,14 @@ Create a summary spreadsheet:
 ✅ Overall score ≥80
 ✅ No dimension below 15/20
 ✅ Design narrative is clear and coherent
-✅ [DEPRECATED_STYLE] elements meaningfully integrated
+✅ KR Solidarity elements meaningfully integrated
 ✅ Component would be recognizable in portfolio
 
 ---
 
 ## Example: Slow Progression Deep Dive
 
-### Component: Seed (Badge/Overlay)
+### Component: Pebble (Badge/Overlay)
 
 **Evolution so far:**
 - v1: 38/100 (Material Design default)
@@ -218,15 +230,15 @@ Create a summary spreadsheet:
 **Problem:** Only 34-point progression in 4 iterations. Lagging behind peer components.
 
 **Root Cause Analysis:**
-- [DEPRECATED_STYLE] elements score stuck at 8-10 (design direction unclear)
+- KR Solidarity elements score stuck at 8-10 (design direction unclear)
 - Coherence stuck at 14-16 (component purpose ambiguous in design system)
 - Microcopy score lowest dimension (generic labels like "New", "Alert")
 
 **Recommendation:**
-1. **Clarify design brief for Seed**: What role does it play in kr-solidarity system?
-2. **[DEPRECATED_STYLE] metaphor**: Find specific seed archetype (wattle seed? native wildflower?)
+1. **Clarify design brief for Pebble**: What role does it play in kr-solidarity system?
+2. **KR Solidarity metaphor**: Find specific seed archetype (wattle seed? native wildflower?)
 3. **Microcopy personality**: Replace "New" with kr-solidarity-specific copy ("Newly Posted", "Opportunity Unlocked")
-4. **Next iteration focus**: [DEPRECATED_STYLE] integration + coherence narrative
+4. **Next iteration focus**: KR Solidarity integration + coherence narrative
 
 **Expected outcome:** v5 should jump to 78-82 (unified design direction)
 
@@ -258,23 +270,23 @@ Create a summary spreadsheet:
 ## Standout Components (Ready for Showcase)
 
 ✅ **Pebble (88/100)** – Button mastery, multi-state consistency
-✅ **Jar (83/100)** – Modal coherence, [DEPRECATED_STYLE] sophistication
+✅ **Slab (83/100)** – Modal coherence, KR Solidarity sophistication
 ✅ **Cabinet (82/100)** – Drawer refinement, intentional typography
 
 ## Components Needing Attention
 
-⚠️ **Seed (72/100)** – [DEPRECATED_STYLE] direction unclear, needs brief clarity
+⚠️ **Pebble (72/100)** – KR Solidarity direction unclear, needs brief clarity
 ⚠️ **Lens (79/100)** – Close to PASS, one iteration away
 
 ## Next Iterations
 
-- Seed: Focus on [DEPRECATED_STYLE] archetype + microcopy personality
+- Pebble: Focus on KR Solidarity archetype + microcopy personality
 - Lens: Refine coherence narrative, strengthen hierarchy
-- Stone: Evaluate multi-state complexity, [DEPRECATED_STYLE] integration
+- Stone: Evaluate multi-state complexity, KR Solidarity integration
 
 ## Recommendation
 
-Continue current pace (1-2 iterations per component/week). Seed and Lens should reach PASS by end of February.
+Continue current pace (1-2 iterations per component/week). Pebble and Lens should reach PASS by end of February.
 ```
 
 ---
@@ -290,7 +302,7 @@ Evolution audit results feed into compliance dashboard:
 
 ### With Design Team Workflows
 
-1. **Sprint Planning:** "Seed needs [DEPRECATED_STYLE] direction – assign design brief refinement"
+1. **Sprint Planning:** "Pebble needs KR Solidarity direction – assign design brief refinement"
 2. **Design Review:** Compare v_n → v_n+1 scores, discuss improvements
 3. **Handoff to Dev:** Only PASS (80+) components ready for implementation
 

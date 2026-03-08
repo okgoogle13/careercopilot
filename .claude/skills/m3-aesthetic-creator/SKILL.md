@@ -1,187 +1,193 @@
 ---
 name: m3-aesthetic-creator
-description: Create comprehensive design aesthetic systems using Material 3 Expressive
-  Design principles, including color palettes, typography hierarchies, shape language,
-  depth strategies, and motion principles. Use this skill when users request design
-  systems, visual aesthetics, brand design directions, M3-based design specifications,
-  or need to establish a cohesive visual language for a product. Trigger phrases include
-  "create a design aesthetic", "build a design system", "develop visual language",
-  "design direction using M3", or "expressive design aesthetic".
+description: Create comprehensive Material 3 Expressive aesthetic systems with explicit anti-slop safeguards, implementation tokens, and validation criteria.
 metadata:
-  legacy_frontmatter:
-    version: 2.0.0
-    tags:
+  version: 2.1.0
+  tags:
     - design-system
     - m3-expressive
-    - aesthetic
-    - generation
-    - visual-design
+    - aesthetics
+    - visual-language
 ---
 
 # M3 Aesthetic Creator
 
-This skill creates comprehensive design aesthetic systems using **Material 3 Expressive Design** principles. You develop complete visual languages that are emotionally resonant, visually cohesive, and expressively bold—avoiding generic "AI slop" aesthetics.
+## Purpose
+
+Design a complete visual language using Material 3 Expressive principles, from concept through implementation notes.
+
+Outputs should be expressive, intentional, and production-usable, not generic template aesthetics.
+
+## When to Use
+
+- User asks for a design aesthetic or visual direction.
+- Team needs a new product/page-level visual language.
+- Existing UI needs expressiveness uplift with M3 structure.
+- You need a token-ready spec that engineers can implement.
+
+## Scope
+
+This skill covers:
+- concept and emotional intent
+- color, typography, shape, depth, and motion systems
+- anti-slop quality gates
+- implementation-ready token guidance
+
+This skill does not cover:
+- final production code for entire apps
+- image generation prompts as the primary deliverable
+- replacement of project-specific design canon
+
+## Required References
+
+Read before producing output:
+- `references/anti-slop-guide.md`
+- `references/m3-color-roles.md`
+- `references/typography-guidelines.md`
 
 ## Core Principles
 
-### Emotional Resonance First
+1. Emotional resonance first
+- Every system needs a clear metaphor and intended emotional tone.
 
-Every design decision should evoke a specific emotional response. Design should tell a story or express a concept through a **central visual metaphor** (e.g., "Worker Solidarity", "Viscous Struggle").
+2. Distinctiveness over defaults
+- Avoid generic font/color/layout choices that flatten brand identity.
 
-### Anti-Slop Protection (Critical)
+3. Structured expressiveness
+- Use M3 role architecture; do not improvise random tokens.
 
-Before creating any aesthetic, **review `references/anti-slop-guide.md`** to understand forbidden patterns. Key prohibitions:
+4. Accessibility is non-negotiable
+- Meet WCAG AA minimum contrast in practical usage.
 
-- ❌ Generic fonts (Inter, Roboto static, system fonts)
-- ❌ Purple gradients on white backgrounds
-- ❌ Generic Material Blue (--sys-color-accent-primary)
-- ❌ Timid, evenly-distributed color palettes
-- ❌ Solid backgrounds with no depth
-- ❌ Uniform spacing and centered layouts only
+## Anti-Slop Guardrails
 
-Always create distinctive, memorable designs with intentional contrast and personality.
+Never ship output with:
+- generic default font stacks
+- purple-on-white cliche gradients
+- low-saturation timid palettes without intent
+- symmetric, flat, center-only layouts for all contexts
+- no depth/layering strategy
 
-## The Creation Process
+Must include:
+- one explicit visual metaphor
+- dominant color strategy
+- hierarchy with strong type contrast
+- differentiated shape language
+- meaningful motion system
 
-Follow this systematic workflow:
+## Process
 
-### Step 1: Discovery & Conceptualization
+1. Discovery
+- Define product context, user profile, and emotional target.
 
-**Understand the context:**
+2. Concept framing
+- Name the aesthetic and write a one-line metaphor.
 
-- What is the product/project?
-- Who is the target audience?
-- What emotions should the design evoke?
-- Are there brand constraints or existing elements to respect?
+3. Color system
+- Define M3 color roles and tonal structure.
+- Include rationale for emotional impact.
 
-**Define the visual metaphor:**
-Choose a central concept that will unify all aesthetic decisions. This metaphor informs colors, typography, shapes, and motion.
+4. Typography system
+- Choose display/body/supporting families.
+- Specify role-based scale, weight ranges, and variable axes.
 
-### Step 2: Color Palette Development
+5. Shape language
+- Define corner strategy, asymmetry policy, and component shape rules.
 
-Create a comprehensive M3 color system. **Read `references/m3-color-roles.md` for complete specifications.**
+6. Depth and texture
+- Define elevation/layer model and background texture guidance.
 
-**Essential color roles to define:**
+7. Motion language
+- Define durations, easing, and interaction feedback patterns.
 
-- **Surface colors**: surface, surface-variant, surface-container (lowest to highest), surface-dim/bright
-- **Key colors**: primary, secondary, tertiary (with containers)
-- **Semantic colors**: error, outline, scrim, shadow
-- **On-colors**: on-surface, on-primary, on-secondary (text/icons on backgrounds)
+8. Validation
+- Run anti-slop checklist and accessibility checks.
 
-**Requirements:**
+## Output Contract
 
-- Average saturation ≥ 30% (vibrant, not timid)
-- Define a dominant color strategy (1-2 primary, 1-2 accents)
-- Use distinctive hues aligned with visual metaphor
-- Ensure WCAG AA accessibility minimum
-- Provide rationale explaining emotional intent
+Deliver sections in this order:
 
-### Step 3: Typography System
+1. Aesthetic Overview
+- name
+- visual metaphor
+- emotional intent
+- audience/context
 
-**Read `references/typography-guidelines.md` for detailed specifications.**
+2. Color System
+- M3 semantic roles
+- tonal values
+- contrast notes
 
-Define a complete type system:
+3. Typography System
+- font families and fallbacks
+- type scale and hierarchy
+- variable axis policy
 
-- **Display font**: For hero moments, large headlines (MUST be distinctive)
-- **Body font**: For readable text
-- **Optional monospace**: For code/data if needed
+4. Shape Language
+- core geometry rules
+- component archetype mapping
 
-**Key requirements:**
+5. Depth and Texture
+- elevation model
+- layering map
+- texture guidance
 
-- Specify variable font axes to leverage (wdth, slnt, GRAD, etc.)
-- Create dramatic hierarchies with extreme contrast (weight ≥ 3x, size ≥ 3x)
-- Define type scale with clear roles (display, headline, title, body, label, caption)
-- Ensure high-contrast pairing (display ≠ body font family)
+6. Motion Language
+- easing curves
+- duration scale
+- interaction patterns
 
-### Step 4: Shape Language
+7. Implementation Notes
+- CSS variable structure
+- token mapping guidance
+- rollout sequence
 
-Define geometric principles:
+8. Validation Summary
+- anti-slop pass/fail notes
+- identified risks and mitigations
 
-- Corner radius strategy (subtle vs. friendly vs. playful)
-- Aspect ratios for cards/containers
-- [DEPRECATED_STYLE] vs. structural balance
-- Component-specific shapes (buttons, cards, inputs, modals)
+## Edge Cases & Fallbacks
 
-**Requirements:**
+- No brand direction provided:
+  Propose 2 contrasting concepts and request decision.
 
-- Include asymmetric or playful elements (rotation, negative margins)
-- Define intentional corner radius strategy (not generic 8px everywhere)
+- Existing design system constraints conflict with proposal:
+  Preserve existing semantics and map expressiveness within constraints.
 
-### Step 5: Depth & Texture Strategy
+- Accessibility conflicts with high-expression palette:
+  Keep metaphor, adjust tone/value to restore contrast compliance.
 
-Create visual richness:
+- Team cannot adopt variable fonts immediately:
+  Provide static fallback weights while retaining hierarchy logic.
 
-- **Elevation system**: Shadow values for different levels (0-5)
-- **kr-screenprint**: Backdrop blur, transparency levels
-- **Layering principles**: Background, content, floating, decorative layers
-- **Textures**: Subtle gradients, patterns for depth
+## Troubleshooting
 
-**Requirements:**
+### Output feels generic
+- Increase contrast between display/body type.
+- Reduce palette sprawl to stronger dominant/accent roles.
+- Add asymmetric layout rules and depth patterns.
 
-- Must have layered backgrounds (not solid colors only)
-- Define elevation system with shadows or transparency
-- Specify varied spacing rhythm (8px, 16px, 24px, 40px, 64px)
+### Output looks expressive but hard to implement
+- Convert prose rules into explicit tokens and role mappings.
+- Add component-level examples for buttons/cards/forms.
 
-### Step 6: Motion Principles
+### Contrast failures in dark surfaces
+- Rebalance on-colors and container tones.
+- Retest critical states (hover/focus/disabled/error).
 
-Define animation language:
+### Motion feels noisy
+- Reduce animated properties per interaction.
+- Limit expressive easing to high-value transitions.
 
-- **Easing curves**: Spring physics parameters or custom cubic-bezier
-- **Duration scale**: Micro (100-200ms), short (200-300ms), medium (300-500ms), long (500ms+)
-- **Interaction patterns**: Hover, active, focus states with micro-interactions
+## Best Practices
 
-**Requirements:**
+- Keep concept narrative short and actionable.
+- Use explicit constraints, not stylistic adjectives alone.
+- Tie every expressive choice to user impact.
+- Prefer tokenized decisions over one-off visual tweaks.
 
-- Specify spring physics or custom easing (not linear ease-in-out)
-- Define hover states for all interactive elements
+## Related Skills
 
-## Output Format
-
-Provide a complete design aesthetic specification:
-
-1. **Aesthetic Overview**
-   - Name and core visual metaphor
-   - Emotional intent (2-3 adjectives)
-   - Target audience/use case
-
-2. **Color System**
-   - All M3 color roles with hex/HSL/oklch values
-   - Tonal palettes (0-100 scale)
-   - Rationale for emotional intent
-
-3. **Typography System**
-   - Font families with variable axes
-   - Complete type scale with sizes, weights, line heights
-   - Parametric usage rules
-
-4. **Shape Language**
-   - Core geometric principles
-   - Component-specific shapes
-
-5. **Depth & Texture**
-   - Elevation/shadow system
-   - kr-screenprint specifications
-   - Layering strategy
-
-6. **Motion Language**
-   - Easing curves
-   - Duration scale
-   - Interaction patterns
-
-7. **Implementation Notes**
-   - CSS custom properties structure
-   - Key design tokens
-   - Integration recommendations
-
-8. **Anti-Slop Validation**
-   - Verify against checklist in `references/anti-slop-guide.md`
-
-## Implementation Approach
-
-1. **Discover**: Understand project context and requirements
-2. **Conceptualize**: Define visual metaphor and emotional intent
-3. **Design**: Systematically develop each aesthetic aspect
-4. **Document**: Provide comprehensive specifications
-5. **Validate**: Check against anti-slop requirements
-
-Remember: You're crafting an **emotional experience** and building a **cohesive visual language** that defines the product's personality—not just picking colors and fonts.
+- `m3-anti-slop-validator`
+- `m3-expressive-ui-evaluator`
+- `kerala-rage-typography-strategy`

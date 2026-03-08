@@ -2,6 +2,15 @@
 
 This reference contains comprehensive guidelines for avoiding generic AI patterns in design aesthetics. Review this before creating any aesthetic system.
 
+## Table of Contents
+
+1. Forbidden Fonts
+2. Forbidden Color Patterns
+3. Forbidden Layout Patterns
+4. Forbidden Motion Patterns
+5. Positive Design Patterns
+6. Validation Checklist
+
 ## 🚫 Forbidden Fonts
 
 Never suggest these fonts:

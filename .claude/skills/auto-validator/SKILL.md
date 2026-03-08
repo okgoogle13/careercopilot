@@ -1,170 +1,138 @@
 ---
 name: auto-validator
-description: "Programmatic asset compliance validation using vision analysis and Kerala Rage\
-  \ scorecard. Eliminates manual validation loops\u2014upload image, receive scored\
-  \ JSON with correction prompts in 30 seconds."
+description: Programmatic visual compliance validation for KR Solidarity assets with deterministic scoring, decision gates, and correction prompts.
+metadata:
+  version: 1.1.0
+  tags:
+    - assets
+    - ai
+    - accessibility
+    - visual-validation
 ---
 
-# Auto-Validator Skill
+# Auto-Validator
 
 ## Purpose
 
-Automates Kerala Rage asset validation. Upload generated image → receive compliance JSON with scores, violations, and auto-generated correction prompt. Replaces 10-minute conversational validation with 30-second programmatic assessment.
+Automate pre-manifest visual validation for generated KR Solidarity assets. Input an asset image and receive a deterministic score, violations list, and correction prompt.
 
-## Trigger Conditions
+## When to Use
 
-Use when:
-- Gemini/DALL-E generates asset attempt
-- Need compliance score (0-100 across 6 dimensions)
-- Require iteration decision (≥90 package | <90 regenerate)
-- Want correction prompt for next attempt
+- After Gemini/DALL-E asset generation attempts.
+- Before promoting assets into manifest/registry workflows.
+- During rapid iteration loops where manual review is too slow.
 
-## Validation Scorecard
+## Decision Gate
 
-**Dimension 1: Semantic Token Usage (0-25)**
-- All colors use CSS variables (`--sys-color-*`)
-- No hardcoded hex values in UI elements
-- Proper token hierarchy (primitives → semantic → component)
-- Violations: Direct hex codes, missing token references
+- `PACKAGE` when score >= 90 and no critical violations.
+- `REGENERATE` when score < 90 or critical violations exist.
 
-**Dimension 2: M3 Expressive Typography (0-20)**
-- Headlines: Fraunces (wght 700, wdth 100) for expressive warmth
-- Body/UI: Work Sans (wght 400-600) for modern legibility
-- Code/Data: JetBrains Mono (wght 400-600) for technical clarity
-- Extreme contrast between headline and body weights
-- Violations: Work Sans, Work Sans, Work Sans, uniform weights, missing variable font axes
+## Validation Scorecard (100)
 
-**Dimension 3: Color Palette Compliance (0-20)**
-- Only approved Kerala Rage kr-solidarity colors:
-  - asphaltBlack `#1A1714`, paperWhite `--sys-color-paper-white`
-  - kr-ink-gold `#D4A84B`, waratahRed `#C45C4B`
-  - ochreEarth `--sys-color-ochre-earth`, gumLeafGreen `--sys-color-worker-ash`, concreteGrey `--sys-color-concrete-grey`
-- Proper tonal palette usage (primary-0 through primary-100)
-- Violations: Purple, generic blues, off-palette colors
+1. Semantic Token Alignment (25)
+- Palette intent aligns to canonical KR Solidarity tokens.
+- Reject hardcoded off-canon color behavior in UI-oriented outputs.
 
-**Dimension 4: Asymmetric Composition (0-15)**
-- Organic shapes and non-uniform border radius per archetype
-- Asymmetric spacing (not rigid grid)
-- Natural hierarchy through size variation (1.5-3× between levels)
-- Violations: Uniform radius, perfectly symmetrical layouts, rigid Material grid
+2. M3 Expressive Typography (20)
+- Expressive hierarchy and contrast.
+- Approved families only: `Work Sans`, `Fraunces`, `JetBrains Mono`, `Libre Bodoni`, `Caveat`, `Nabla` (restricted decorative use).
+- Banned defaults: `Inter`, `Roboto`, `Arial`, `Sora`, `Plus Jakarta Sans`.
 
-**Dimension 5: Accessibility (0-10)**
-- WCAG 2.2 AA contrast ratios minimum (4.5:1 text, 3:1 UI)
-- Focus indicators visible and distinct
-- Touch targets ≥44×44px
-- Violations: Low contrast, missing focus states, small touch targets
+3. Color Palette Compliance (20)
+- Canonical references include:
+  - `--sys-color-asphaltBlack-base`
+  - `--sys-color-paperWhite-base`
+  - `--sys-color-solidarityRed-base`
+  - `--sys-color-inkGold-base`
+  - `--sys-color-stencilYellow-base`
+  - `--sys-color-kr-activistSmokeGreen-base`
+  - `--sys-color-worker-ash-base`
+  - `--sys-color-concreteGrey-base`
+- Reject purple-generic drift and white-first expressive surfaces.
 
-**Dimension 6: Kerala Diaspora Identity & Social Responsibility (0-10)**
-- Naarm/Melbourne laneway aesthetics (urban, layered, multicultural)
-- Kerala diaspora cultural markers (without stereotypes)
-- Social justice and political activism visibility (equity, inclusion, solidarity)
-- Community-centered design language
-- Violations: Bureaucratic motifs, corporate sterility, apolitical neutrality, cultural appropriation
+4. Asymmetric Composition (15)
+- Shape language aligns to expressive asymmetry.
+- Reject rigid symmetry and `border-radius: 50%` dependency for core forms.
+
+5. Accessibility (10)
+- WCAG 2.2 AA contrast targets (4.5:1 text, 3:1 UI elements).
+- Focus visibility and touch target expectations.
+
+6. Identity & Social Framing (10)
+- Urban solidarity framing and culturally respectful representation.
+- Reject bureaucratic/corporate sterility and appropriation patterns.
 
 ## Workflow
 
-**Input:** Image file path or upload
-**Process:**
-1. Extract color palette (sample 50+ points across UI elements)
-2. Detect CSS variable usage vs hardcoded hex (OCR + color matching)
-3. Identify font families and weights (Vision API text analysis)
-4. Measure contrast ratios (WCAG 2.2 computation)
-5. Analyze composition symmetry (spatial distribution analysis)
-6. Assess cultural/political markers (Vision API semantic analysis)
-7. Score each dimension
-8. Generate violation list
-9. Build correction prompt
+Input:
+- image path
+- asset id
+- target score (default 90)
 
-**Output:** JSON structure
+Process:
+1. Extract palette and composition signals.
+2. Infer typography and hierarchy quality.
+3. Evaluate contrast and accessibility signals.
+4. Score each dimension.
+5. Generate violations and correction prompt.
+
+Output:
 
 ```json
 {
   "asset_id": "KR-SOLID-HERO-001",
   "overall_score": 87,
-  "decision": "REGENERATE | PACKAGE",
+  "decision": "REGENERATE|PACKAGE",
   "dimensions": {
-    "semantic_token_usage": {"score": 20, "violations": ["Hardcoded #1A1714 in button background"]},
-    "m3_expressive_typography": {"score": 18, "violations": ["Work Sans missing wdth axis"]},
+    "semantic_token_alignment": {"score": 20, "violations": []},
+    "m3_expressive_typography": {"score": 18, "violations": []},
     "color_palette_compliance": {"score": 19, "violations": []},
-    "asymmetric_composition": {"score": 14, "violations": ["Uniform 8px border radius on all cards"]},
-    "accessibility": {"score": 8, "violations": ["Text contrast 3.2:1 (minimum 4.5:1)"]},
-    "kerala_diaspora_identity": {"score": 8, "violations": ["Missing solidarity/activism markers"]}
+    "asymmetric_composition": {"score": 14, "violations": []},
+    "accessibility": {"score": 8, "violations": []},
+    "identity_social_framing": {"score": 8, "violations": []}
   },
-  "correction_prompt": "CRITICAL FIXES:\n- Replace hardcoded #1A1714 with --sys-color-asphaltBlack\n- Add wdth:100 to Work Sans font-variation-settings\n- Increase text contrast to 4.5:1 minimum (use --sys-color-paperWhite)\n- Vary border radius: hero-card (12px 4px 16px 8px), buttons (asymmetric per archetype)\n- Add subtle solidarity visual marker (waratahRed accent, social justice iconography)",
-  "iteration_priority": "high"
+  "critical_violations": [],
+  "correction_prompt": "string",
+  "iteration_priority": "high|medium|low"
 }
 ```
 
-## Integration Points
+## Integration
 
-**With Flash-Sidekick:**
-- Call `analyze_code_quality` on generated prompt → identify vague language
-- Call `web_research_synthesis` for specimen geographic validation
+- With `prompt-composer`: apply correction prompt for next attempt.
+- With `asset-packager`: pass through only when `decision=PACKAGE`.
+- With `vision-scorer-mcp`: final post-manifest validation after integration.
 
-**With Context7:**
-- Call `query-docs` to verify implementation patterns against the latest documentation for libraries like Genkit, Supabase, and Radix UI.
-- Use resolved library IDs from `context7-reference.md` for fast lookups.
+## Troubleshooting
 
-**With Gemini:**
-- Auto-validator output → correction_prompt → paste directly into next generation
+### Low-resolution image
 
-**With Claude Desktop:**
-- Decision gate: score ≥90 triggers Asset-Packager skill
-- Score <90 triggers Prompt-Composer with corrections
+- Return `needs_more_evidence` note and avoid critical typography judgments.
 
-## Usage Example
+### OCR/font ambiguity
 
-```python
-# Pseudo-workflow
-result = auto_validator.validate(
-    image_path="/downloads/kr-solid-hero-001-attempt-2.png",
-    asset_id="KR-SOLID-HERO-001",
-    target_score=90
-)
+- Downgrade confidence and avoid hard fails unless corroborated by multiple signals.
 
-if result['decision'] == 'PACKAGE':
-    # Asset meets quality threshold, ready for manifest addition
-    asset_packager.run(result)
-else:
-    # Regenerate with corrections
-    corrected_prompt = prompt_composer.apply_corrections(
-        base_prompt=original_prompt,
-        corrections=result['correction_prompt']
-    )
-    # Send to Gemini for regeneration with Kerala Rage kr-solidarity corrections
-```
+### Contrast calculation uncertainty
 
-## Efficiency Gain
+- Re-run with cleaner screenshot and explicit foreground/background surfaces.
 
-**Before:** 10-15 min manual validation per attempt
-**After:** 30 sec programmatic validation
-**Savings:** 20× faster validation, 95% time reduction
-**Scale Impact:** 10 assets × 2-3 attempts = 3-5 hours saved
+### False positives on palette drift
 
-## Implementation Notes
+- Compare against canonical token intent in `frontend/src/design/styles/design-tokens.css`.
 
-- **Vision API**: Color palette extraction, font family detection, cultural marker analysis
-- **CSS Variable Detection**: Pattern matching for `--sys-color-*` vs hardcoded hex codes
-- **WCAG 2.2 Computation**: Automated contrast ratio calculation (text, UI elements)
-- **Composition Analysis**: Spatial distribution metrics for asymmetry detection
-- **OCR + Font Analysis**: Font family identification (Fraunces, Work Sans, JetBrains Mono)
-- **Deterministic Scoring**: Rule-based evaluation (not subjective)
-- **Context7 Lookups**: Validate complex implementation patterns (e.g., Genkit flows, Radix primitives) against real-world, high-reputation documentation to ensure compliance.
+### Missing model or vision service
 
-## Critical Differences from vision-scorer-mcp
+- Return deterministic failure object with `service_unavailable` and no scoring.
 
-**auto-validator**: Pre-manifest quality gate
-- Focus: Visual design compliance (tokens, typography, composition, accessibility, identity)
-- Input: New asset image file (not yet in system)
-- No manifest integrity checks
-- Fast feedback loop for iterative generation
+## Important Limits
 
-**vision-scorer-mcp**: Post-manifest comprehensive validation
-- Focus: System integration (token usage, wireframe alignment, manifest integrity, hero composition)
-- Input: Asset already in manifest/registry
-- Includes manifest + registry validation (15 points)
-- Final quality gate before packaging/deployment
+- Vision-based checks are inference-driven and should be human-reviewed for final approvals.
+- This skill does not validate manifest integrity or registry linkage.
 
----
+## Critical Difference vs `vision-scorer-mcp`
 
-*Replaces conversational validation with programmatic compliance measurement. Critical path acceleration for high-volume Kerala Rage kr-solidarity asset generation.*
+- `auto-validator`: pre-manifest generation loop optimizer.
+- `vision-scorer-mcp`: post-manifest deterministic system gate.
+
+Last Updated: 2026-03-08 | Version: 1.1.0

@@ -1,5 +1,18 @@
 # Component Visual Specification
 
+## Table of Contents
+
+- [Comprehensive Audit Criteria for kerala-rage kr-solidarity Components](#comprehensive-audit-criteria-for-kerala-rage-kr-solidarity-components)
+- [1. Typography Audit Specification](#1-typography-audit-specification)
+- [2. Color Audit Specification](#2-color-audit-specification)
+- [3. Layout Audit Specification](#3-layout-audit-specification)
+- [4. Cultural Motif Integration Audit Specification](#4-cultural-motif-integration-audit-specification)
+- [5. Overall Aesthetic Coherence Specification](#5-overall-aesthetic-coherence-specification)
+- [6. Microcopy Audit Specification](#6-microcopy-audit-specification)
+- [Audit Scoring Formula](#audit-scoring-formula)
+- [Validation Checklist](#validation-checklist)
+- [References](#references)
+
 ## Comprehensive Audit Criteria for kerala-rage kr-solidarity Components
 
 This document provides detailed specifications for validating UI components against kerala-rage kr-solidarity visual standards.
@@ -59,9 +72,9 @@ This document provides detailed specifications for validating UI components agai
 
 ### Palette Adherence
 
-**Australian [DEPRECATED_STYLE] Palette (Required):**
+**Australian KR Solidarity Palette (Required):**
 - Primary: Wattle Gold (`#D4A84B`)
-- Secondary: [DEPRECATED_STYLE] Red (`#C45C4B`)
+- Secondary: KR Solidarity Red (`#C45C4B`)
 - Tertiary: Ochre Earth (`--sys-color-ochre-earth`)
 - Surface: Asphalt Black (`#1A1714`)
 - Text: Paper White (`--sys-color-paper-white`)
@@ -82,9 +95,9 @@ This document provides detailed specifications for validating UI components agai
 - Color choices correct but feeling muted (saturation <40%)
 
 **Fail (0 points):**
-- Colors disconnected from [DEPRECATED_STYLE] inspiration
+- Colors disconnected from KR Solidarity inspiration
 - Purple gradients present (generic Material Design default)
-- Generic Material Design blue (not [DEPRECATED_STYLE]-inspired)
+- Generic Material Design blue (not KR Solidarity-inspired)
 - Desaturated or washed-out (saturation <30%)
 - More than 2 colors outside palette
 
@@ -92,7 +105,7 @@ This document provides detailed specifications for validating UI components agai
 
 **Unity Check:**
 - Do the colors feel cohesive when viewed together?
-- Is the color story clear (e.g., "[DEPRECATED_STYLE] + sage" vs. "random colors")?
+- Is the color story clear (e.g., "KR Solidarity + sage" vs. "random colors")?
 
 **Contrast Check:**
 - Text readability: WCAG AA minimum (4.5:1)
@@ -106,7 +119,7 @@ This document provides detailed specifications for validating UI components agai
 ### Spacing Quality
 
 **Pass (20 points):**
-- Spacing appears [DEPRECATED_STYLE], not grid-rigid
+- Spacing appears KR Solidarity, not grid-rigid
 - Intentional asymmetry present (not uniform padding)
 - Visual weight distribution is balanced
 - Breathing room around interactive elements
@@ -115,7 +128,7 @@ This document provides detailed specifications for validating UI components agai
 **Needs Refinement (10 points):**
 - Good spacing but feels slightly mechanical
 - Hierarchy present but ambiguous
-- Mostly [DEPRECATED_STYLE] but some predictable patterns
+- Mostly KR Solidarity but some predictable patterns
 - Adequate breathing room but not intentional
 
 **Fail (0 points):**
@@ -141,16 +154,16 @@ This document provides detailed specifications for validating UI components agai
 
 ---
 
-## 4. [DEPRECATED_STYLE] Elements Audit Specification
+## 4. Cultural Motif Integration Audit Specification
 
 ### Motif Integration
 
 **Pass (20 points):**
-- [DEPRECATED_STYLE] motifs present and meaningful
+- KR Solidarity motifs present and meaningful
 - Motifs support visual hierarchy or information clarity
 - Integration feels intentional, not decorative
 - Motifs don't compete with primary content
-- [DEPRECATED_STYLE] inspiration is recognizable
+- KR Solidarity inspiration is recognizable
 
 **Needs Refinement (10 points):**
 - Motifs present but purpose unclear
@@ -165,7 +178,7 @@ This document provides detailed specifications for validating UI components agai
 - Generic florals (not Australian endemic)
 - Motifs feel bolted-on or cosmetic
 
-### [DEPRECATED_STYLE] Authenticity
+### Cultural Authenticity
 
 - Are motifs Australian endemic (not European florals)?
 - Do they align with kr-solidarity manifesto?
@@ -260,7 +273,7 @@ This document provides detailed specifications for validating UI components agai
 Typography:          (score/20) × 16 = ___ / 16
 Color:               (score/20) × 16 = ___ / 16
 Layout:              (score/20) × 16 = ___ / 16
-[DEPRECATED_STYLE] Elements:  (score/20) × 16 = ___ / 16
+KR Solidarity Elements:  (score/20) × 16 = ___ / 16
 Coherence:           (score/20) × 16 = ___ / 16
 Microcopy:           (score/20) × 18 = ___ / 18
 ────────────────────────────────
