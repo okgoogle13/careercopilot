@@ -7,6 +7,7 @@ import { loadHeroRegistry } from '../../design/hero/heroRegistry';
 import { composeHero } from '../../lib/composeHero';
 import type { CompositionResult } from '../../lib/composeHero';
 import type { SolidarityManifest } from '../../design/hero/heroTypes';
+import { OnboardingChecklist, CHECKLIST_DISMISSED_KEY } from './OnboardingChecklist';
 
 // ============================================================================
 // TYPE DEFINITIONS
@@ -45,6 +46,14 @@ export function Dashboard() {
     animation: any;
     zIndexMap: any;
   } | null>(null);
+  const [showChecklist, setShowChecklist] = useState(() => {
+    // Show checklist unless user has explicitly dismissed it
+    try {
+      return localStorage.getItem(CHECKLIST_DISMISSED_KEY) !== 'true';
+    } catch {
+      return true;
+    }
+  });
 
   useEffect(() => {
     async function loadHero() {
@@ -74,6 +83,15 @@ export function Dashboard() {
     }
     loadHero();
   }, []);
+
+  const handleChecklistDismiss = () => {
+    try {
+      localStorage.setItem(CHECKLIST_DISMISSED_KEY, 'true');
+    } catch {
+      // ignore
+    }
+    setShowChecklist(false);
+  };
 
   const container = {
     hidden: { opacity: 0 },
@@ -230,6 +248,13 @@ export function Dashboard() {
             </div>
           </Placard>
         </motion.div>
+
+        {/* Onboarding Activation Checklist (shown until dismissed) */}
+        {showChecklist && (
+          <motion.div variants={item as any}>
+            <OnboardingChecklist onDismiss={handleChecklistDismiss} />
+          </motion.div>
+        )}
 
         {/* Global Action Drawer */}
         <motion.div

@@ -17,9 +17,9 @@ import { Link, useLocation } from 'react-router-dom';
 const mainNavItems = [
   { path: '/dashboard', icon: Home, label: 'Dashboard' },
   { path: '/tracker', icon: ClipboardList, label: 'Applications' },
-  { path: '/documents', icon: FileText, label: 'Documents' },
-  { path: '/analysis', icon: BarChart3, label: 'Analysis' },
-  { path: '/opportunities', icon: Briefcase, label: 'Opportunities' },
+  { path: '/documents', icon: FileText, label: 'My Documents' },
+  { path: '/analysis', icon: BarChart3, label: 'ATS Score & Optimise' },
+  { path: '/opportunities', icon: Briefcase, label: 'Job Scout' },
   { path: '/cover-letter-generator', icon: Sparkles, label: 'Cover Letter Genius' },
   { path: '/ksc-generator', icon: Inbox, label: 'KSC Generator' },
   { path: '/asset-library', icon: FolderOpen, label: 'Asset Library' },

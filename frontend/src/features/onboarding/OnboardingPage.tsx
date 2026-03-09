@@ -6,7 +6,10 @@ import type { SolidarityManifest } from '../../design/hero/heroTypes';
 import { loadHeroRegistry } from '../../design/hero/heroRegistry';
 import { resolvePageHeroComposition } from '../../design/hero/pageHeroMap';
 import { composeHero } from '../../lib/composeHero';
+import { OnboardingProgress } from './OnboardingProgress';
 import styles from './OnboardingPage.module.css';
+
+const ONBOARDING_STEPS = ['Choose field', 'Upload resume', 'Review'];
 
 const DOMAINS = [
   {
@@ -116,6 +119,13 @@ export function OnboardingPage() {
 
       <div className="relative z-10 w-full">
         <header className={styles.header}>
+          <div className="mb-6">
+            <OnboardingProgress
+              currentStep={1}
+              totalSteps={3}
+              steps={ONBOARDING_STEPS}
+            />
+          </div>
           <h1 className="text-display-ultra">Choose Your Focus Area</h1>
           <p className="text-curator-accent">
             Select your domain to personalize job matching and drafting quality.

@@ -1,6 +1,7 @@
 import { Pebble, Signal, Stone } from '@/components/ui';
 import { ApplicationForm } from '@/components/ApplicationForm';
 import { ValidationDashboard } from '@/features/onboarding/components/ValidationDashboard';
+import { OnboardingProgress } from '@/features/onboarding/OnboardingProgress';
 import { useCareerIngestion } from '@/hooks/useCareerIngestion';
 import { CareerDatabase } from '@/types/api';
 import { m3Toast } from '@/utils/toast';
@@ -184,6 +185,13 @@ export const IngestionPage: React.FC = () => {
 
         {/* Header: Clinical Focus */}
         <header className="text-center mb-12">
+          <div className="mb-8">
+            <OnboardingProgress
+              currentStep={2}
+              totalSteps={3}
+              steps={['Choose field', 'Upload resume', 'Review']}
+            />
+          </div>
           <div className="w-24 h-24 bg-ink-gold/5 rounded-megaphone flex items-center justify-center mx-auto mb-6 border border-ink-gold/10 relative">
             <div className="absolute inset-0 animate-pulse border border-ink-gold/5 rounded-megaphone scale-110" />
             <Microscope className="w-12 h-12 text-ink-gold" />
