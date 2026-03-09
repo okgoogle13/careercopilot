@@ -68,11 +68,11 @@ export const Strike = React.forwardRef<HTMLButtonElement, StrikeProps>(
       'relative overflow-hidden inline-flex items-center justify-center font-body font-medium transition-colors duration-short disabled:opacity-50 disabled:pointer-events-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2';
 
     const variants = {
-      primary: 'bg-primary text-primary-foreground shadow-ink-rest rounded-leaf',
+      primary: 'bg-primary text-primary-foreground shadow-ink-rest rounded-strike',
       secondary:
-        'bg-surface-elevated text-secondary border border-white/10 shadow-sm rounded-pebble',
-      ghost: 'hover:bg-surface-elevated hover:text-primary rounded-petal',
-      destructive: 'bg-accent text-white rounded-leaf shadow-ink-rest',
+        'bg-surface-elevated text-secondary border border-white/10 shadow-sm rounded-scaffold',
+      ghost: 'hover:bg-surface-elevated hover:text-primary rounded-scaffold',
+      destructive: 'bg-accent text-white rounded-strike shadow-ink-rest',
     };
 
     const sizes = {
