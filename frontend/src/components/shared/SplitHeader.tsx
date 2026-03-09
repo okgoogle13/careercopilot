@@ -45,7 +45,7 @@ const SplitHeader: React.FC<SplitHeaderProps> = ({
         {/* Top Layer: Bloom (Fraunces with WONK) */}
         <motion.span
           className={cn(
-            'font-bloom absolute text-ink-gold',
+            'font-display absolute text-ink-gold',
             mode === 'KrDark' ? 'text-5xl md:text-6xl' : 'text-4xl md:text-5xl'
           )}
           style={{
@@ -79,7 +79,7 @@ const SplitHeader: React.FC<SplitHeaderProps> = ({
       {subtitle && (
         <motion.p
           className={cn(
-            'font-field-note text-secondary-worker-ash max-w-2xl',
+            'font-primary text-secondary-worker-ash max-w-2xl',
             mode === 'KrDark' ? 'text-lg' : 'text-base'
           )}
           initial={{ opacity: 0 }}

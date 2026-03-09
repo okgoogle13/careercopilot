@@ -96,7 +96,7 @@ const TechCard = React.forwardRef<HTMLDivElement, TechCardProps>(
               <h3
                 className={cn(
                   'font-semibold',
-                  mode === 'KrDark' ? 'font-bloom text-xl' : 'font-field-note text-lg'
+                  mode === 'KrDark' ? 'font-display text-xl' : 'font-primary text-lg'
                 )}
               >
                 {title}
@@ -104,10 +104,7 @@ const TechCard = React.forwardRef<HTMLDivElement, TechCardProps>(
             </div>
             {level && (
               <span
-                className={cn(
-                  'text-xs uppercase tracking-wider font-annotation',
-                  levelColors[level]
-                )}
+                className={cn('text-xs uppercase tracking-wider font-mono', levelColors[level])}
               >
                 {level}
               </span>
@@ -128,7 +125,7 @@ const TechCard = React.forwardRef<HTMLDivElement, TechCardProps>(
                 <motion.span
                   key={index}
                   className={cn(
-                    'px-2 py-1 text-xs font-annotation uppercase tracking-wider',
+                    'px-2 py-1 text-xs font-mono uppercase tracking-wider',
                     mode === 'KrDark'
                       ? 'bg-[var(--sys-color-concreteGrey)]/20 border border-[var(--sys-color-concreteGrey)]'
                       : 'bg-[var(--sys-color-concreteGrey)]/10 border border-[var(--sys-color-concreteGrey)]'

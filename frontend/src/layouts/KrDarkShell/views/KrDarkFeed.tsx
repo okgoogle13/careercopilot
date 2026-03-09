@@ -54,7 +54,7 @@ export const KrDarkFeed: React.FC = () => {
           className="w-full"
         />
         <div className="flex items-center gap-3 pb-4">
-          <div className="w-2 h-2 rounded-sentry bg-ink-gold animate-pulse shadow-ink-glow" />
+          <div className="w-2 h-2 rounded-march bg-ink-gold animate-pulse shadow-ink-glow" />
           <span className="font-mono text-[9px] uppercase tracking-[0.4em] text-paper-white/30">
             Live_Broadcast
           </span>
@@ -76,7 +76,7 @@ export const KrDarkFeed: React.FC = () => {
               <div className="flex flex-col md:flex-row gap-10 relative z-10">
                 {/* Visual Anchor */}
                 <div className="shrink-0 flex items-center justify-center">
-                  <div className="w-16 h-16 rounded-sentry border border-surface-KrDark-concrete-grey-high/20 bg-asphalt-black flex items-center justify-center group-hover:border-ink-gold/30 transition-colors">
+                  <div className="w-16 h-16 rounded-march border border-surface-KrDark-concrete-grey-high/20 bg-asphalt-black flex items-center justify-center group-hover:border-ink-gold/30 transition-colors">
                     <span className="font-mono text-[10px] text-paper-white/20">{item.match}%</span>
                   </div>
                 </div>
@@ -88,7 +88,7 @@ export const KrDarkFeed: React.FC = () => {
                       <h3 className="font-proclamation text-3xl uppercase text-paper-white group-hover:text-ink-gold transition-colors duration-500">
                         {item.title}
                       </h3>
-                      <p className="font-annotation text-[10px] uppercase tracking-widest text-paper-white/30">
+                      <p className="font-mono text-[10px] uppercase tracking-widest text-paper-white/30">
                         {item.company} · {item.timestamp}
                       </p>
                     </div>

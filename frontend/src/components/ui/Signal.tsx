@@ -158,9 +158,9 @@ export function Signal(props: SignalProps) {
 
       <div className="flex-grow">
         {title && typeof title === 'string' && (
-          <h4 className="font-bold mb-1 font-bloom">{title}</h4>
+          <h4 className="font-bold mb-1 font-display">{title}</h4>
         )}
-        <div className="font-field-note text-sm leading-relaxed">
+        <div className="font-primary text-sm leading-relaxed">
           {typeof children === 'object' && children !== null && !React.isValidElement(children)
             ? 'Invalid child node'
             : children}
@@ -189,9 +189,9 @@ export function Signal(props: SignalProps) {
 
 // Component sub-parts for composition
 export const SignalTitle: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-  <h4 className="font-bold mb-1 font-bloom">{children}</h4>
+  <h4 className="font-bold mb-1 font-display">{children}</h4>
 );
 
 export const SignalDescription: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-  <div className="font-field-note text-sm leading-relaxed">{children}</div>
+  <div className="font-primary text-sm leading-relaxed">{children}</div>
 );

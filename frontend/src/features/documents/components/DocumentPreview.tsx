@@ -158,7 +158,7 @@ export const DocumentPreview: React.FC<DocumentPreviewProps> = ({
                     <button
                       onClick={handleZoomOut}
                       disabled={zoomLevel <= 50}
-                      className="p-2 rounded-stone hover:bg-[var(--color-surface-base)] disabled:opacity-50 transition-colors"
+                      className="p-2 rounded-megaphone hover:bg-[var(--color-surface-base)] disabled:opacity-50 transition-colors"
                     >
                       <ZoomOut size={16} />
                     </button>
@@ -168,7 +168,7 @@ export const DocumentPreview: React.FC<DocumentPreviewProps> = ({
                     <button
                       onClick={handleZoomIn}
                       disabled={zoomLevel >= 200}
-                      className="p-2 rounded-stone hover:bg-[var(--color-surface-base)] disabled:opacity-50 transition-colors"
+                      className="p-2 rounded-megaphone hover:bg-[var(--color-surface-base)] disabled:opacity-50 transition-colors"
                     >
                       <ZoomIn size={16} />
                     </button>

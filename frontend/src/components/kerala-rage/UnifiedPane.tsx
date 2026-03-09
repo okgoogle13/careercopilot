@@ -38,7 +38,7 @@ export const UnifiedPane = React.forwardRef<HTMLElement, UnifiedPaneProps>(
         {/* Optional Sidebar */}
         {sidebar && (
           <aside className="w-full md:w-64 flex-shrink-0">
-            <div className="bg-asphalt-black/50 border border-white/5 rounded-stone p-4 h-full">
+            <div className="bg-asphalt-black/50 border border-white/5 rounded-megaphone p-4 h-full">
               {sidebar}
             </div>
           </aside>
@@ -48,14 +48,14 @@ export const UnifiedPane = React.forwardRef<HTMLElement, UnifiedPaneProps>(
         <div
           className={cn(
             'flex-1 relative overflow-hidden',
-            'bg-asphalt-black border border-white/5 rounded-stone shadow-viscous',
+            'bg-asphalt-black border border-white/5 rounded-megaphone shadow-viscous',
             'flex flex-col'
           )}
         >
           {/* Header */}
           {title && (
             <div className="p-6 border-b border-white/5 flex items-center justify-between bg-white/[0.02]">
-              <h2 className="font-bloom text-2xl text-ink-gold tracking-wide">{title}</h2>
+              <h2 className="font-display text-2xl text-ink-gold tracking-wide">{title}</h2>
               {/* TODO[asset]: Human to add optional texture embellishment here. */}
             </div>
           )}

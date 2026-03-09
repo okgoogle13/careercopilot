@@ -11,7 +11,7 @@ export const DocumentStackAnchor: React.FC = () => {
   return (
     <div className="flex flex-col h-full bg-surface-KrDark-glass-low border border-white/5 rounded-pebble p-4 backdrop-blur-sm">
       <div className="flex justify-between items-center mb-4 border-b border-white/5 pb-2">
-        <h3 className="font-field-note text-sm text-secondary-concrete-grey uppercase tracking-wider">
+        <h3 className="font-primary text-sm text-secondary-concrete-grey uppercase tracking-wider">
           Evidence Locker
         </h3>
         <KeralaRageButton

@@ -79,7 +79,7 @@ export const JobCard: React.FC<JobCardProps> = ({
       {/* Status Pill */}
       <div className="mb-4 flex items-center gap-2">
         <span
-          className={`inline-block rounded-sentry px-3 py-1 font-leaf text-xs font-medium capitalize ${getStatusColor()}`}
+          className={`inline-block rounded-march px-3 py-1 font-leaf text-xs font-medium capitalize ${getStatusColor()}`}
         >
           {status}
         </span>

@@ -129,7 +129,7 @@ export const Lens = forwardRef<HTMLInputElement, LensProps>(
     placeholder:opacity-50
     focus:outline-none
     disabled:cursor-not-allowed
-    font-field-note
+    font-primary
     ${className}
   `;
 
@@ -329,7 +329,7 @@ export const LensArea = forwardRef<HTMLTextAreaElement, LensAreaProps>(
           placeholder:opacity-50
           focus:outline-none
           resize-vertical
-          font-field-note
+          font-primary
           ${isFocused && !error ? 'shadow-[0_0_15px_var(--sys-color-inkGold)]' : ''}
           ${containerClassName}
           ${className}

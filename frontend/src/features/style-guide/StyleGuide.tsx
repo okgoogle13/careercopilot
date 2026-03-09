@@ -987,7 +987,7 @@ export function StyleGuide() {
             title="SYSTEM ANNOUNCEMENT"
           >
             <div className="space-y-6">
-              <p className="text-lg font-bloom leading-snug text-worker-ash-base">
+              <p className="text-lg font-display leading-snug text-worker-ash-base">
                 This modal demonstrates the <strong>Megaphone archetype</strong> using{' '}
                 <em>typeSpringSlam</em> entry physics.
               </p>

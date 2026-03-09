@@ -45,7 +45,7 @@ export function HaloPulses({
         >
           {pulse.hasTrail && (
             <motion.div
-              className="absolute rounded-sentry opacity-30"
+              className="absolute rounded-march opacity-30"
               style={{
                 width: pulse.size * 2,
                 height: 4,
@@ -66,7 +66,7 @@ export function HaloPulses({
             />
           )}
           <motion.div
-            className="absolute rounded-sentry"
+            className="absolute rounded-march"
             style={{
               width: pulse.size,
               height: pulse.size,

@@ -95,7 +95,7 @@ export const NativeAnchor: React.FC<NativeAnchorProps> = ({
 
       {/* 1. Halo Light (Z-2 focal point) for Defiance/Solidarity */}
       {(register === 'Defiance' || register === 'Solidarity') && !analyticalMode && (
-        <div className="absolute inset-0 bg-ink-gold/5 blur-[80px] rounded-sentry scale-125 pointer-events-none transition-opacity group-hover:opacity-60" />
+        <div className="absolute inset-0 bg-ink-gold/5 blur-[80px] rounded-march scale-125 pointer-events-none transition-opacity group-hover:opacity-60" />
       )}
 
       {/* 2. Blueprint Grid (for Revelation/Analytical Mode) */}
