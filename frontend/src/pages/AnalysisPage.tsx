@@ -9,6 +9,8 @@ import { LayeredHero } from '../components/kerala-rage/LayeredHero';
 import { loadHeroRegistry } from '../design/hero/heroRegistry';
 import { composeHero } from '../lib/composeHero';
 import type { SolidarityManifest } from '../design/hero/heroTypes';
+import { useAnalytics } from '../hooks/useAnalytics';
+import { PostGenerationCTA } from '../components/ui/PostGenerationCTA';
 
 // KrDark Assets
 const solidarityTexture =
@@ -103,6 +105,7 @@ export const AnalysisPage: React.FC = () => {
   const [strategyResult, setStrategyResult] = useState<StrategyResult | null>(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [isGeneratingStrategy, setIsGeneratingStrategy] = useState(false);
+  const { track } = useAnalytics();
 
   const handleAnalysis = async () => {
     if (!resumeText || !jobDescription) {
@@ -120,6 +123,7 @@ export const AnalysisPage: React.FC = () => {
       if (!response.ok) throw new Error('Analysis failed');
       const result = await response.json();
       setAtsResult(result);
+      track('ats_score_run', { score: result?.overall_score });
       m3Toast.success('Success', 'ATS Analysis complete!');
     } catch (error) {
       m3Toast.error('Error', 'Analysis failed.');
@@ -367,6 +371,13 @@ export const AnalysisPage: React.FC = () => {
                 }
               }}
             />
+          )}
+
+          {/* M3: Post-ATS next step prompt */}
+          {atsResult && (
+            <div className="mt-4">
+              <PostGenerationCTA context="ats" jobUrl={jobUrl} />
+            </div>
           )}
         </aside>
       </div>

@@ -12,6 +12,8 @@ import { useState, useEffect } from 'react';
 import { toast } from 'sonner';
 import { motion, AnimatePresence } from 'framer-motion';
 import { PageHeader } from '../../components/shared/PageHeader';
+import { PostGenerationCTA } from '../../components/ui/PostGenerationCTA';
+import { useAnalytics } from '../../hooks/useAnalytics';
 import { api } from '../../services/api';
 import { genkitApi } from '../../services/genkit';
 import { exportToPdf } from '../../utils/exportEngine';
@@ -21,6 +23,7 @@ export function KSCGenerator() {
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
   const [isInitialLoading, setIsInitialLoading] = useState(true);
+  const { track } = useAnalytics();
 
   // Form State
   const [jobUrl, setJobUrl] = useState('');
@@ -119,6 +122,7 @@ export function KSCGenerator() {
       const finalResponse = await generatePromise;
       setResponse(finalResponse);
       setStep(3);
+      track('ksc_generated');
     } catch (error) {
       console.error('KSC Generation Error:', error);
       toast.error('Generation failed. Please try again.');
@@ -130,6 +134,7 @@ export function KSCGenerator() {
   const handleDownloadPdf = async () => {
     try {
       await exportToPdf('ksc-response-content', 'KSC_Response.pdf');
+      track('document_exported', { type: 'ksc', format: 'pdf' });
       toast.success('KSC Response downloaded as PDF!');
     } catch (error) {
       console.error('Failed to download PDF:', error);
@@ -428,6 +433,9 @@ export function KSCGenerator() {
                   <Copy className="w-4 h-4" /> Copy to Clipboard
                 </Button>
               </div>
+
+              {/* M3: Post-generation next step prompt */}
+              <PostGenerationCTA context="ksc" />
             </motion.div>
           )}
         </AnimatePresence>

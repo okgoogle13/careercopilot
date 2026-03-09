@@ -41,6 +41,10 @@ export type { VesselProps } from './Vessel';
 export { StatusBadge } from './StatusBadge';
 export type { StatusBadgeProps, StatusBadgeVariant } from './StatusBadge';
 
+/** EmptyState — contextual empty-data placeholder with optional CTA */
+export { EmptyState } from './EmptyState';
+export type { EmptyStateProps } from './EmptyState';
+
 export { KeralaRageButton } from './KeralaRageButton';
 export type { KeralaRageButtonProps } from './KeralaRageButton';
 export { KrIcon } from './KrIcon';

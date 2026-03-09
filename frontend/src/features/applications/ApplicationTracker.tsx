@@ -1,6 +1,8 @@
 import { Strike, StatusBadge, Placard } from '@/components/ui';
+import { EmptyState } from '../../components/ui/EmptyState';
 import { motion } from 'framer-motion';
 import {
+  Briefcase,
   Calendar,
   ChevronRight,
   Flower2,
@@ -163,8 +165,21 @@ export function ApplicationTracker() {
           description="Cultivate your career opportunities through every stage of growth."
         />
 
-        {/* The Kanban Trellis */}
-        <div className="flex gap-6 overflow-x-auto pb-8 snap-x">
+        {/* M2: Empty state when no applications exist */}
+        {applications.length === 0 ? (
+          <EmptyState
+            icon={Briefcase}
+            title="No applications tracked yet"
+            description="Track every job you apply to — see your progress from first contact to offer. Add your first application to get started."
+            ctaLabel="Add first application +"
+            onCta={() => {
+              // TODO: open the add-application modal or navigate to a creation form
+              // when that feature is built. For now the button is a placeholder.
+            }}
+          />
+        ) : (
+          /* The Kanban Trellis */
+          <div className="flex gap-6 overflow-x-auto pb-8 snap-x">
           {STAGES.map((stage) => (
             <div
               key={stage.id}
@@ -203,7 +218,8 @@ export function ApplicationTracker() {
               </div>
             </div>
           ))}
-        </div>
+          </div>
+        )}
       </div>
     </div>
   );

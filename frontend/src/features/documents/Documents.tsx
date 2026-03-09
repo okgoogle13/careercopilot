@@ -2,6 +2,7 @@ import { Calendar, Download, FileText, Search } from 'lucide-react';
 import { useState } from 'react';
 
 import { PageHeader } from '../../components/shared/PageHeader';
+import { EmptyState } from '../../components/ui/EmptyState';
 import { exportToPdf } from '../../utils/exportEngine';
 
 // ============================================================================
@@ -164,7 +165,13 @@ export function Documents() {
             ))}
           </div>
         ) : (
-          <EmptyState />
+          <EmptyState
+            icon={FileText}
+            title="No documents here yet"
+            description="Your generated cover letters, KSC responses, and optimised resumes will appear here."
+            ctaLabel="Create a cover letter →"
+            ctaHref="/cover-letter-generator"
+          />
         )}
       </div>
     </div>
@@ -240,13 +247,4 @@ function DocumentCard({ document }: DocumentCardProps) {
   );
 }
 
-function EmptyState() {
-  return (
-    <div className="bg-surface-container rounded-leaf p-16 flex flex-col items-center justify-center border border-dashed border-outline">
-      <FileText className="w-16 h-16 text-outline mb-4" />
-      <p className="text-on-surface-variant text-center text-body-large">
-        No documents found in this category
-      </p>
-    </div>
-  );
-}
+// EmptyState is now imported from ../../components/ui/EmptyState

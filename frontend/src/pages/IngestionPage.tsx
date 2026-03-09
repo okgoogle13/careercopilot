@@ -3,11 +3,16 @@ import { ApplicationForm } from '@/components/ApplicationForm';
 import { ValidationDashboard } from '@/features/onboarding/components/ValidationDashboard';
 import { OnboardingProgress } from '@/features/onboarding/OnboardingProgress';
 import { useCareerIngestion } from '@/hooks/useCareerIngestion';
+import { useAnalytics } from '@/hooks/useAnalytics';
 import { CareerDatabase } from '@/types/api';
 import { m3Toast } from '@/utils/toast';
 import { AnimatePresence, motion } from 'framer-motion';
 import { CheckCircle, FileText, Fingerprint, Microscope } from 'lucide-react';
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+/** localStorage key tracking whether user skipped the ingestion step */
+export const INGESTION_SKIPPED_KEY = 'cc_ingestion_skipped';
 
 // KrDark Assets
 const solidarityTexture =
@@ -34,6 +39,8 @@ type UploadStage = 'idle' | 'uploading' | 'extracting' | 'processing' | 'embeddi
 export const IngestionPage: React.FC = () => {
   const { submitDocuments, updateCareerDatabase, isLoading, error } = useCareerIngestion();
   const [careerData, setCareerData] = useState<CareerDatabase | null>(null);
+  const navigate = useNavigate();
+  const { track } = useAnalytics();
   const [heroData, setHeroData] = useState<{
     layers: any[];
     typography: any;
@@ -83,6 +90,7 @@ export const IngestionPage: React.FC = () => {
     if (selectedFiles.length === 0) return;
 
     try {
+      track('resume_ingestion_started', { fileCount: selectedFiles.length });
       setUploadStage('uploading');
       setProgress(20);
       await new Promise((resolve) => setTimeout(resolve, 500));
@@ -103,6 +111,7 @@ export const IngestionPage: React.FC = () => {
       setUploadStage('complete');
       setProgress(100);
       setCareerData(result);
+      track('resume_ingestion_completed');
       m3Toast.success('Ingestion Complete', 'Professional data archived successfully.');
     } catch (err) {
       console.error('Upload failed:', err);
@@ -119,6 +128,17 @@ export const IngestionPage: React.FC = () => {
     } catch (err) {
       console.error('Failed to update career data:', err);
     }
+  };
+
+  /** M1: Skip ingestion and go directly to dashboard. Sets a reminder flag. */
+  const handleSkip = () => {
+    try {
+      localStorage.setItem(INGESTION_SKIPPED_KEY, 'true');
+    } catch {
+      // localStorage may be unavailable in private browsing; the skip flag is non-critical
+    }
+    track('resume_ingestion_skipped');
+    navigate('/dashboard');
   };
 
   if (careerData) {
@@ -187,9 +207,9 @@ export const IngestionPage: React.FC = () => {
         <header className="text-center mb-12">
           <div className="mb-8">
             <OnboardingProgress
-              currentStep={2}
-              totalSteps={3}
-              steps={['Choose field', 'Upload resume', 'Review']}
+              currentStep={3}
+              totalSteps={4}
+              steps={['Welcome', 'Choose field', 'Your background', 'Upload resume']}
             />
           </div>
           <div className="w-24 h-24 bg-ink-gold/5 rounded-stone flex items-center justify-center mx-auto mb-6 border border-ink-gold/10 relative">
@@ -236,6 +256,18 @@ export const IngestionPage: React.FC = () => {
         >
           {isLoading ? getStageMessage() : 'Initialize Archival'}
         </Pebble>
+
+        {/* M1: Skip escape hatch */}
+        {!isLoading && (
+          <div className="text-center mt-4">
+            <button
+              onClick={handleSkip}
+              className="font-annotation text-xs text-concrete-grey/40 uppercase tracking-widest hover:text-concrete-grey/70 transition-colors"
+            >
+              I don't have my resume ready — skip for now →
+            </button>
+          </div>
+        )}
 
         {/* KrDark Technical Audit */}
         <div className="mt-12 p-6 bg-asphalt-black/40 rounded-stone border border-concrete-grey/10 flex gap-5">

@@ -1,13 +1,15 @@
 import { Strike, StatusBadge, Placard } from '@/components/ui';
-import { motion } from 'framer-motion';
-import { FileText, Layout, Plus, Sparkles, Target, Zap } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { FileText, Layout, Plus, Sparkles, Target, UploadCloud, X, Zap } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { LayeredHero } from '../../components/kerala-rage/LayeredHero';
 import { loadHeroRegistry } from '../../design/hero/heroRegistry';
 import { composeHero } from '../../lib/composeHero';
 import type { CompositionResult } from '../../lib/composeHero';
 import type { SolidarityManifest } from '../../design/hero/heroTypes';
 import { OnboardingChecklist, CHECKLIST_DISMISSED_KEY } from './OnboardingChecklist';
+import { INGESTION_SKIPPED_KEY } from '../../pages/IngestionPage';
 
 // ============================================================================
 // TYPE DEFINITIONS
@@ -54,6 +56,15 @@ export function Dashboard() {
       return true;
     }
   });
+  // M1: resume reminder banner — shown when user skipped ingestion
+  const [showResumeBanner, setShowResumeBanner] = useState(() => {
+    try {
+      return localStorage.getItem(INGESTION_SKIPPED_KEY) === 'true';
+    } catch {
+      return false;
+    }
+  });
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function loadHero() {
@@ -91,6 +102,15 @@ export function Dashboard() {
       // ignore
     }
     setShowChecklist(false);
+  };
+
+  const handleDismissResumeBanner = () => {
+    try {
+      localStorage.removeItem(INGESTION_SKIPPED_KEY);
+    } catch {
+      // ignore
+    }
+    setShowResumeBanner(false);
   };
 
   const container = {
@@ -138,6 +158,41 @@ export function Dashboard() {
         animate="show"
         className="max-w-[1440px] mx-auto relative z-10 space-y-12"
       >
+        {/* M1: Resume reminder banner (shown when user skipped ingestion) */}
+        <AnimatePresence>
+          {showResumeBanner && (
+            <motion.div
+              initial={{ opacity: 0, y: -12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              className="flex items-center justify-between gap-4 p-4 rounded-[8px] border border-ink-gold/30 bg-ink-gold/5"
+            >
+              <div className="flex items-center gap-3">
+                <UploadCloud className="w-5 h-5 text-ink-gold flex-shrink-0" />
+                <p className="font-primary text-sm text-paper-white">
+                  <strong className="text-ink-gold">Add your resume</strong> to unlock personalised
+                  insights and auto-fill your cover letters.
+                </p>
+              </div>
+              <div className="flex items-center gap-3 flex-shrink-0">
+                <button
+                  onClick={() => navigate('/career/ingest')}
+                  className="font-annotation text-[10px] text-ink-gold uppercase tracking-widest hover:text-paper-white transition-colors whitespace-nowrap"
+                >
+                  Upload now →
+                </button>
+                <button
+                  onClick={handleDismissResumeBanner}
+                  aria-label="Dismiss resume reminder"
+                  className="text-concrete-grey/40 hover:text-concrete-grey transition-colors"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
         {/* Header Section */}
         <header className="flex flex-col md:flex-row md:items-end justify-between gap-8 border-b border-concrete-grey/10 pb-12">
           <motion.div

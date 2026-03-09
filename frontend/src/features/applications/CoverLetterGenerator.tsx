@@ -15,6 +15,8 @@ import {
 import { useState } from 'react';
 import { toast } from 'sonner';
 import { PageHeader } from '../../components/shared/PageHeader';
+import { PostGenerationCTA } from '../../components/ui/PostGenerationCTA';
+import { useAnalytics } from '../../hooks/useAnalytics';
 import { api } from '../../services/api';
 import { genkitApi } from '../../services/genkit';
 import { exportToPdf } from '../../utils/exportEngine';
@@ -29,6 +31,7 @@ const stepMotionProps = {
 export function CoverLetterGenerator() {
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
+  const { track } = useAnalytics();
 
   // Form State
   const [jobUrl, setJobUrl] = useState('');
@@ -97,6 +100,7 @@ export function CoverLetterGenerator() {
 
       setGeneratedLetter(result.letter_content);
       setStep(4);
+      track('cover_letter_generated');
       toast.success('Cover Letter generated successfully!');
     } catch (error) {
       console.error('Cover Letter Generation Error:', error);
@@ -109,6 +113,7 @@ export function CoverLetterGenerator() {
   const handleDownloadPdf = async () => {
     try {
       await exportToPdf('cover-letter-content', 'Cover_Letter.pdf');
+      track('document_exported', { type: 'cover_letter', format: 'pdf' });
       toast.success('Cover Letter downloaded as PDF!');
     } catch (error) {
       console.error('Failed to download PDF:', error);
@@ -421,6 +426,9 @@ export function CoverLetterGenerator() {
                   <Copy className="w-4 h-4 mr-2" /> Copy Text
                 </Button>
               </div>
+
+              {/* M3: Post-generation next step prompt */}
+              <PostGenerationCTA context="cover-letter" jobUrl={jobUrl} />
             </motion.div>
           )}
         </AnimatePresence>
