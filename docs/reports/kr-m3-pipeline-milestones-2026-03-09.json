@@ -1,0 +1,54 @@
+{
+  "project_id": "7716eb86-c9c4-4a53-807f-075b391b8ac6",
+  "generated_at": "2026-03-09T03:01:00Z",
+  "milestones": [
+    {
+      "milestone_id": "aee602c7-b759-4567-9586-d51d4f7077f1",
+      "phase_id": "d9dcde1b-b8a7-4c30-afef-2637b9e646c8",
+      "name": "CoverLetterGenerator expressive conversion",
+      "status": "PENDING",
+      "target_date": "2026-03-13",
+      "assigned_to": "frontend-feature-squad",
+      "dependencies": [
+        "909a49d0-317a-4c9d-93e3-6aefb69f9c5b"
+      ],
+      "exit_criteria": [
+        "Component uses semantic KR tokens only",
+        "Expressive motion behavior passes review",
+        "No high-severity accessibility regressions"
+      ]
+    },
+    {
+      "milestone_id": "8269e916-9f4b-4fc0-a102-291821171744",
+      "phase_id": "d9dcde1b-b8a7-4c30-afef-2637b9e646c8",
+      "name": "KSCGenerator expressive conversion",
+      "status": "PENDING",
+      "target_date": "2026-03-18",
+      "assigned_to": "frontend-feature-squad",
+      "dependencies": [
+        "aee602c7-b759-4567-9586-d51d4f7077f1"
+      ],
+      "exit_criteria": [
+        "Component passes story-driven visual review",
+        "A11y checks pass for keyboard and focus",
+        "bundleImpact remains within accepted threshold"
+      ]
+    },
+    {
+      "milestone_id": "48ac2eb9-33c2-475e-a386-8d071a58bcf1",
+      "phase_id": "d9dcde1b-b8a7-4c30-afef-2637b9e646c8",
+      "name": "DesignSidekick hero conversion and LayeredHero injection",
+      "status": "PENDING",
+      "target_date": "2026-03-23",
+      "assigned_to": "frontend-platform",
+      "dependencies": [
+        "8269e916-9f4b-4fc0-a102-291821171744"
+      ],
+      "exit_criteria": [
+        "Placard-based floating structure implemented",
+        "KeralaRageButton triggers spring physics interactions",
+        "Canvas substrate overlays and hero composition integrated"
+      ]
+    }
+  ]
+}

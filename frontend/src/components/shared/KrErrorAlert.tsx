@@ -1,5 +1,5 @@
 import { AlertCircle, RefreshCw } from 'lucide-react';
-import { Pebble } from '../ui';
+import { Strike } from '../ui/Strike';
 
 interface ErrorAlertProps {
   message: string;
@@ -9,7 +9,7 @@ interface ErrorAlertProps {
   className?: string;
 }
 
-export function M3ErrorAlert({
+export function KrErrorAlert({
   message,
   onRetry,
   onDismiss,
@@ -19,43 +19,43 @@ export function M3ErrorAlert({
   return (
     <div
       className={`
-        mb-6 p-4 rounded-pebble
-        bg-error-container text-on-error-container
-        border border-error
-        flex items-start gap-3
+        mb-6 p-4
+        bg-[var(--sys-color-kr-charcoalRed)] text-[var(--sys-color-paperWhite)]
+        flex items-start gap-3 shadow-sm
         ${className}
       `}
+      style={{ borderRadius: 'var(--shape-alertShard01)' }}
       role="alert"
     >
       <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
 
       <div className="flex-1">
-        <p className="font-medium">{message}</p>
+        <p className="font-body font-medium">{message}</p>
       </div>
 
       {(onRetry || onDismiss) && (
         <div className="flex gap-2 flex-shrink-0">
           {onRetry && (
-            <Pebble
+            <Strike
               variant="secondary"
               size="sm"
               iconLeft={<RefreshCw className="w-4 h-4" />}
               onClick={onRetry}
-              className="border-error text-on-error-container hover:bg-error/10"
+              className="bg-[var(--sys-color-charcoalBackground)] border-none text-[var(--sys-color-paperWhite)] hover:bg-[var(--sys-color-kr-charcoalRed)]"
             >
               {retryLabel}
-            </Pebble>
+            </Strike>
           )}
 
           {onDismiss && (
-            <Pebble
+            <Strike
               variant="ghost"
               size="sm"
               onClick={onDismiss}
-              className="text-on-error-container hover:bg-error/10"
+              className="text-[var(--sys-color-paperWhite)] hover:bg-[var(--sys-color-charcoalBackground)] hover:text-[var(--sys-color-paperWhite)] border border-transparent"
             >
               Dismiss
-            </Pebble>
+            </Strike>
           )}
         </div>
       )}

@@ -1,0 +1,123 @@
+{
+  "project_id": "7716eb86-c9c4-4a53-807f-075b391b8ac6",
+  "name": "KR/M3 Frontend Pipeline - Phase 5 to Phase 6 Delivery",
+  "status": "IN_PROGRESS",
+  "start_date": "2026-03-09T03:01:00Z",
+  "target_end_date": "2026-03-30T23:59:59Z",
+  "actual_end_date": null,
+  "objective": "Convert prioritized higher-order organisms to KR Solidarity expressive implementations and pass release gates with measurable quality signals.",
+  "source_evidence": {
+    "input_path": "/Users/okgoogle13/.gemini/antigravity/brain/c691beee-d2d7-49f1-b811-0fe3ed5f1670/walkthrough.md.resolved",
+    "phase4_status": "COMPLETE",
+    "completed_signals": [
+      "Expressive pass completed for target atoms/molecules",
+      "Storybook design system overview delivered",
+      "Weekly pipeline ritual script established",
+      "Success metrics expanded: hasA11yPassed, bundleImpact, visualRegression"
+    ]
+  },
+  "phases": [
+    {
+      "phase_id": "909a49d0-317a-4c9d-93e3-6aefb69f9c5b",
+      "name": "Phase 4 Closure - Rendering and Integration",
+      "sequence": 4,
+      "owner": "frontend-platform-lead",
+      "status": "COMPLETE",
+      "goals": [
+        "Close rendering and integration roadmap",
+        "Publish migration status surface in Storybook"
+      ],
+      "gates_required": [
+        "expressive_status_done_for_target_components",
+        "story_overview_exists",
+        "weekly_pipeline_ritual_script_exists"
+      ],
+      "gates_met": [true, true, true],
+      "metrics": {
+        "progress_percent": 100,
+        "estimated_hours_remaining": 0
+      },
+      "dependencies": []
+    },
+    {
+      "phase_id": "d9dcde1b-b8a7-4c30-afef-2637b9e646c8",
+      "name": "Phase 5 Execution - Higher-order Organism Migration",
+      "sequence": 5,
+      "owner": "frontend-feature-squad",
+      "status": "IN_PROGRESS",
+      "goals": [
+        "Migrate CoverLetterGenerator to KR/M3 expressive patterns",
+        "Migrate KSCGenerator to KR/M3 expressive patterns",
+        "Implement DesignSidekick hero conversion proposal"
+      ],
+      "gates_required": [
+        "phase4.status == COMPLETE",
+        "component_inventory_metrics_report_generated",
+        "visual_regression_baseline_defined"
+      ],
+      "gates_met": [true, true, false],
+      "metrics": {
+        "progress_percent": 20,
+        "estimated_hours_remaining": 88
+      },
+      "dependencies": [
+        "909a49d0-317a-4c9d-93e3-6aefb69f9c5b"
+      ]
+    },
+    {
+      "phase_id": "43e67ffd-336d-4bab-98c0-91263526915d",
+      "name": "Phase 6 Gate - Release Readiness and Deployment",
+      "sequence": 6,
+      "owner": "release-engineering",
+      "status": "PENDING",
+      "goals": [
+        "Pass full frontend and backend test gates",
+        "Pass lint and type-check gates",
+        "Publish deployment-ready dashboard status"
+      ],
+      "gates_required": [
+        "phase5.status == COMPLETE",
+        "frontend_build == SUCCESS",
+        "test_gate == PASS",
+        "design_compliance_gate == PASS"
+      ],
+      "gates_met": [false, false, false, false],
+      "metrics": {
+        "progress_percent": 0,
+        "estimated_hours_remaining": 40
+      },
+      "dependencies": [
+        "d9dcde1b-b8a7-4c30-afef-2637b9e646c8"
+      ]
+    }
+  ],
+  "teams": [
+    {
+      "name": "Frontend Platform",
+      "lead": "frontend.platform@careercopilot.local",
+      "capacity_hours": 120
+    },
+    {
+      "name": "Feature Delivery",
+      "lead": "feature.delivery@careercopilot.local",
+      "capacity_hours": 100
+    },
+    {
+      "name": "Release Engineering",
+      "lead": "release.ops@careercopilot.local",
+      "capacity_hours": 60
+    }
+  ],
+  "blockers": [
+    {
+      "blocker_id": "06267c74-f763-43f2-83e6-32a5d57a2265",
+      "title": "Visual regression baseline not finalized for prioritized organisms",
+      "severity": "HIGH",
+      "status": "OPEN",
+      "impact": "Phase 5 cannot clear gate into Phase 6 without deterministic diff baseline.",
+      "mitigation_plan": "Generate Playwright snapshot baselines for CoverLetterGenerator, KSCGenerator, and DesignSidekick and lock approval in CI.",
+      "escalation_timeout_hours": 24,
+      "owner": "qa-automation"
+    }
+  ]
+}

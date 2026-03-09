@@ -108,7 +108,3 @@ export const Cabinet: React.FC<CabinetProps> = ({
     document.body
   );
 };
-
-// Legacy M3 exports for backward compatibility
-export { Cabinet as M3Modal };
-export type { CabinetProps as M3ModalProps };

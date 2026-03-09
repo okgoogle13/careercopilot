@@ -1,4 +1,5 @@
 import { Button, Input, Textarea } from '@careercopilot/ui';
+import { AnimatePresence, motion } from 'framer-motion';
 import {
   ArrowLeft,
   ArrowRight,
@@ -17,6 +18,13 @@ import { PageHeader } from '../../components/shared/PageHeader';
 import { api } from '../../services/api';
 import { genkitApi } from '../../services/genkit';
 import { exportToPdf } from '../../utils/exportEngine';
+
+const stepMotionProps = {
+  initial: { opacity: 0, x: 24 },
+  animate: { opacity: 1, x: 0 },
+  exit: { opacity: 0, x: -24 },
+  transition: { duration: 0.22, ease: 'easeOut' as const },
+};
 
 export function CoverLetterGenerator() {
   const [step, setStep] = useState(1);
@@ -153,243 +161,270 @@ export function CoverLetterGenerator() {
       </div>
 
       {/* Main Card */}
-      <div className="bg-surface-container rounded-leaf p-8 border border-outline-variant shadow-elevation-1 relative overflow-hidden">
-        {/* Step 1: Job Details */}
-        {step === 1 && (
-          <div className="space-y-6 animate-in slide-in-from-right-8 duration-300">
-            <div className="flex items-center gap-2 mb-2">
-              <FileText className="text-primary w-6 h-6" />
-              <h2 className="text-title-large font-bold text-on-surface">Job Details</h2>
-            </div>
-
-            {/* URL Import Section */}
-            <div className="p-4 bg-secondary-container/20 rounded-tech border border-secondary-container">
-              <label className="block text-on-surface mb-2 text-label-large font-bold">
-                Import from URL (Optional)
-              </label>
-              <div className="flex gap-2">
-                <Input
-                  value={jobUrl}
-                  onChange={(e) => setJobUrl(e.target.value)}
-                  placeholder="Paste job listing URL (e.g. LinkedIn, Seek, Indeed)..."
-                  className="bg-surface"
-                />
-                <Button
-                  onClick={handleAnalyzeUrl}
-                  disabled={!jobUrl || isAnalyzing}
-                  className="bg-secondary-container text-on-secondary-container hover:bg-secondary hover:text-on-secondary whitespace-nowrap"
-                >
-                  {isAnalyzing ? (
-                    <>
-                      <RefreshCw className="w-4 h-4 mr-2 animate-spin" /> Scanning...
-                    </>
-                  ) : (
-                    <>
-                      <Sparkles className="w-4 h-4 mr-2" /> Auto-Fill
-                    </>
-                  )}
-                </Button>
+      <motion.div
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ type: 'spring', stiffness: 210, damping: 24 }}
+        className="bg-surface-container rounded-leaf p-8 border border-outline-variant shadow-elevation-1 relative overflow-hidden"
+      >
+        <AnimatePresence mode="wait">
+          {/* Step 1: Job Details */}
+          {step === 1 && (
+            <motion.div
+              key="step-1"
+              {...stepMotionProps}
+              className="space-y-6"
+            >
+              <div className="flex items-center gap-2 mb-2">
+                <FileText className="text-primary w-6 h-6" />
+                <h2 className="text-title-large font-bold text-on-surface">Job Details</h2>
               </div>
-              <p className="text-body-small text-on-surface-variant mt-2">
-                Scanning a URL will automatically fill the job description and company details
-                below.
-              </p>
-            </div>
 
-            <div className="relative">
-              <div className="absolute inset-0 flex items-center">
-                <span className="w-full border-t border-outline-variant" />
-              </div>
-              <div className="relative flex justify-center text-xs uppercase">
-                <span className="bg-surface px-2 text-on-surface-variant">Or paste manually</span>
-              </div>
-            </div>
-
-            <div>
-              <label className="block text-on-surface mb-3 text-label-large font-bold">
-                Paste Job Description
-              </label>
-              <Textarea
-                value={jobDescription}
-                onChange={(e) => setJobDescription(e.target.value)}
-                placeholder="Paste the full job description here..."
-                className="bg-surface-container-high border-outline-variant text-on-surface rounded-tech resize-none h-64 focus:ring-primary focus:border-primary font-body text-body-medium"
-              />
-            </div>
-            <div className="flex justify-end">
-              <Button
-                onClick={handleNext}
-                disabled={!jobDescription.trim()}
-                className="bg-primary-container text-on-primary-container hover:bg-primary hover:text-on-primary rounded-pebble px-8 h-12 flex items-center gap-2 font-bold transition-all shadow-sm"
-              >
-                Next Step <ArrowRight className="w-4 h-4" />
-              </Button>
-            </div>
-          </div>
-        )}
-
-        {/* Step 2: Company Info */}
-        {step === 2 && (
-          <div className="space-y-6 animate-in slide-in-from-right-8 duration-300">
-            <div className="flex items-center gap-2 mb-2">
-              <Building className="text-secondary w-6 h-6" />
-              <h2 className="text-title-large font-bold text-on-surface">Company Insights</h2>
-            </div>
-
-            <div className="grid grid-cols-1 gap-6">
-              <div>
+              {/* URL Import Section */}
+              <div className="p-4 bg-secondary-container/20 rounded-tech border border-secondary-container">
                 <label className="block text-on-surface mb-2 text-label-large font-bold">
-                  Company Name
+                  Import from URL (Optional)
                 </label>
-                <Input
-                  value={companyName}
-                  onChange={(e) => setCompanyName(e.target.value)}
-                  placeholder="e.g. Acme Corp"
-                  className="bg-surface-container-high"
-                />
+                <div className="flex gap-2">
+                  <Input
+                    value={jobUrl}
+                    onChange={(e) => setJobUrl(e.target.value)}
+                    placeholder="Paste job listing URL (e.g. LinkedIn, Seek, Indeed)..."
+                    className="bg-surface"
+                  />
+                  <Button
+                    onClick={handleAnalyzeUrl}
+                    disabled={!jobUrl || isAnalyzing}
+                    className="bg-secondary-container text-on-secondary-container hover:bg-secondary hover:text-on-secondary whitespace-nowrap"
+                  >
+                    {isAnalyzing ? (
+                      <>
+                        <RefreshCw className="w-4 h-4 mr-2 animate-spin" /> Scanning...
+                      </>
+                    ) : (
+                      <>
+                        <Sparkles className="w-4 h-4 mr-2" /> Auto-Fill
+                      </>
+                    )}
+                  </Button>
+                </div>
+                <p className="text-body-small text-on-surface-variant mt-2">
+                  Scanning a URL will automatically fill the job description and company details
+                  below.
+                </p>
               </div>
 
-              <div>
-                <label className="block text-on-surface mb-2 text-label-large font-bold">
-                  Company Values / Culture (Optional)
-                </label>
-                <Textarea
-                  value={companyValues}
-                  onChange={(e) => setCompanyValues(e.target.value)}
-                  placeholder="e.g. Innovation, Sustainability, Customer Obsession..."
-                  className="bg-surface-container-high border-outline-variant h-32"
-                />
-              </div>
-            </div>
-
-            <div className="flex justify-between pt-4">
-              <Button
-                onClick={handleBack}
-                variant="text"
-                className="text-on-surface-variant hover:text-on-surface"
-              >
-                <ArrowLeft className="w-4 h-4 mr-2" /> Back
-              </Button>
-              <Button
-                onClick={handleNext}
-                disabled={!companyName.trim()}
-                className="bg-primary-container text-on-primary-container hover:bg-primary hover:text-on-primary rounded-pebble px-8 h-12 flex items-center gap-2 font-bold"
-              >
-                Next Step <ArrowRight className="w-4 h-4" />
-              </Button>
-            </div>
-          </div>
-        )}
-
-        {/* Step 3: Customization */}
-        {step === 3 && (
-          <div className="space-y-6 animate-in slide-in-from-right-8 duration-300">
-            <div className="flex items-center gap-2 mb-2">
-              <Settings className="text-tertiary w-6 h-6" />
-              <h2 className="text-title-large font-bold text-on-surface">Final Touches</h2>
-            </div>
-
-            <div className="space-y-6">
-              <div>
-                <label className="block text-on-surface mb-3 text-label-large font-bold">
-                  Tone & Style
-                </label>
-                <div className="grid grid-cols-3 gap-4">
-                  {['professional', 'bold', 'creative'].map((s) => (
-                    <button
-                      key={s}
-                      onClick={() => setStyle(s)}
-                      className={`p-4 rounded-tech border-2 capitalize font-bold transition-all ${
-                        style === s
-                          ? 'border-primary bg-primary-container text-on-primary-container'
-                          : 'border-outline-variant hover:border-outline'
-                      }`}
-                    >
-                      {s}
-                    </button>
-                  ))}
+              <div className="relative">
+                <div className="absolute inset-0 flex items-center">
+                  <span className="w-full border-t border-outline-variant" />
+                </div>
+                <div className="relative flex justify-center text-xs uppercase">
+                  <span className="bg-surface px-2 text-on-surface-variant">Or paste manually</span>
                 </div>
               </div>
 
               <div>
-                <label className="block text-on-surface mb-2 text-label-large font-bold">
-                  Special Instructions (Optional)
+                <label className="block text-on-surface mb-3 text-label-large font-bold">
+                  Paste Job Description
                 </label>
                 <Textarea
-                  value={instructions}
-                  onChange={(e) => setInstructions(e.target.value)}
-                  placeholder="e.g. Emphasize my leadership experience, keep it under 300 words..."
-                  className="bg-surface-container-high border-outline-variant h-32"
+                  value={jobDescription}
+                  onChange={(e) => setJobDescription(e.target.value)}
+                  placeholder="Paste the full job description here..."
+                  className="bg-surface-container-high border-outline-variant text-on-surface rounded-tech resize-none h-64 focus:ring-primary focus:border-primary font-body text-body-medium"
                 />
               </div>
-            </div>
-
-            <div className="flex justify-between pt-4">
-              <Button
-                onClick={handleBack}
-                variant="text"
-                className="text-on-surface-variant hover:text-on-surface"
-              >
-                <ArrowLeft className="w-4 h-4 mr-2" /> Back
-              </Button>
-              <Button
-                onClick={handleGenerate}
-                disabled={loading}
-                className="bg-tertiary-container text-on-tertiary-container hover:bg-tertiary hover:text-on-tertiary rounded-pebble px-8 h-12 flex items-center gap-2 font-bold shadow-elevation-1"
-              >
-                <Sparkles className="w-5 h-5" />
-                {loading ? 'Generating...' : 'Generate Letter'}
-              </Button>
-            </div>
-          </div>
-        )}
-
-        {/* Step 4: Result */}
-        {step === 4 && (
-          <div className="space-y-6 animate-in slide-in-from-right-8 duration-300">
-            <div className="flex items-center justify-between">
-              <h2 className="text-title-large font-bold text-on-surface flex items-center gap-2">
-                <Sparkles className="w-6 h-6 text-tertiary" /> Your Cover Letter
-              </h2>
-              <div className="flex gap-2">
+              <div className="flex justify-end">
                 <Button
-                  onClick={resetForm}
-                  variant="text"
-                  className="text-on-surface-variant hover:text-error"
+                  onClick={handleNext}
+                  disabled={!jobDescription.trim()}
+                  className="bg-primary-container text-on-primary-container hover:bg-primary hover:text-on-primary rounded-pebble px-8 h-12 flex items-center gap-2 font-bold transition-all shadow-sm"
                 >
-                  <RefreshCw className="w-4 h-4 mr-2" /> New
+                  Next Step <ArrowRight className="w-4 h-4" />
                 </Button>
               </div>
-            </div>
+            </motion.div>
+          )}
 
-            <div
-              id="cover-letter-content"
-              className="bg-surface-container-low rounded-tech p-8 text-on-surface whitespace-pre-wrap border border-outline-variant shadow-inner font-serif text-body-large leading-relaxed max-h-[600px] overflow-y-auto"
+          {/* Step 2: Company Info */}
+          {step === 2 && (
+            <motion.div
+              key="step-2"
+              {...stepMotionProps}
+              className="space-y-6"
             >
-              {generatedLetter}
-            </div>
+              <div className="flex items-center gap-2 mb-2">
+                <Building className="text-secondary w-6 h-6" />
+                <h2 className="text-title-large font-bold text-on-surface">Company Insights</h2>
+              </div>
 
-            <div className="flex justify-end gap-4 pt-4">
-              <Button
-                onClick={handleDownloadPdf}
-                variant="outlined"
-                className="border-tertiary text-tertiary hover:bg-tertiary hover:text-on-tertiary"
+              <div className="grid grid-cols-1 gap-6">
+                <div>
+                  <label className="block text-on-surface mb-2 text-label-large font-bold">
+                    Company Name
+                  </label>
+                  <Input
+                    value={companyName}
+                    onChange={(e) => setCompanyName(e.target.value)}
+                    placeholder="e.g. Acme Corp"
+                    className="bg-surface-container-high"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-on-surface mb-2 text-label-large font-bold">
+                    Company Values / Culture (Optional)
+                  </label>
+                  <Textarea
+                    value={companyValues}
+                    onChange={(e) => setCompanyValues(e.target.value)}
+                    placeholder="e.g. Innovation, Sustainability, Customer Obsession..."
+                    className="bg-surface-container-high border-outline-variant h-32"
+                  />
+                </div>
+              </div>
+
+              <div className="flex justify-between pt-4">
+                <Button
+                  onClick={handleBack}
+                  variant="text"
+                  className="text-on-surface-variant hover:text-on-surface"
+                >
+                  <ArrowLeft className="w-4 h-4 mr-2" /> Back
+                </Button>
+                <Button
+                  onClick={handleNext}
+                  disabled={!companyName.trim()}
+                  className="bg-primary-container text-on-primary-container hover:bg-primary hover:text-on-primary rounded-pebble px-8 h-12 flex items-center gap-2 font-bold"
+                >
+                  Next Step <ArrowRight className="w-4 h-4" />
+                </Button>
+              </div>
+            </motion.div>
+          )}
+
+          {/* Step 3: Customization */}
+          {step === 3 && (
+            <motion.div
+              key="step-3"
+              {...stepMotionProps}
+              className="space-y-6"
+            >
+              <div className="flex items-center gap-2 mb-2">
+                <Settings className="text-tertiary w-6 h-6" />
+                <h2 className="text-title-large font-bold text-on-surface">Final Touches</h2>
+              </div>
+
+              <div className="space-y-6">
+                <div>
+                  <label className="block text-on-surface mb-3 text-label-large font-bold">
+                    Tone & Style
+                  </label>
+                  <div className="grid grid-cols-3 gap-4">
+                    {['professional', 'bold', 'creative'].map((s) => (
+                      <button
+                        type="button"
+                        key={s}
+                        onClick={() => setStyle(s)}
+                        aria-pressed={style === s}
+                        className={`p-4 rounded-tech border-2 capitalize font-bold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--sys-color-inkGold-base)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--sys-color-charcoalBackground-base)] ${
+                          style === s
+                            ? 'border-primary bg-primary-container text-on-primary-container'
+                            : 'border-outline-variant hover:border-outline'
+                        }`}
+                      >
+                        {s}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-on-surface mb-2 text-label-large font-bold">
+                    Special Instructions (Optional)
+                  </label>
+                  <Textarea
+                    value={instructions}
+                    onChange={(e) => setInstructions(e.target.value)}
+                    placeholder="e.g. Emphasize my leadership experience, keep it under 300 words..."
+                    className="bg-surface-container-high border-outline-variant h-32"
+                  />
+                </div>
+              </div>
+
+              <div className="flex justify-between pt-4">
+                <Button
+                  onClick={handleBack}
+                  variant="text"
+                  className="text-on-surface-variant hover:text-on-surface"
+                >
+                  <ArrowLeft className="w-4 h-4 mr-2" /> Back
+                </Button>
+                <Button
+                  onClick={handleGenerate}
+                  disabled={loading}
+                  className="bg-tertiary-container text-on-tertiary-container hover:bg-tertiary hover:text-on-tertiary rounded-pebble px-8 h-12 flex items-center gap-2 font-bold shadow-elevation-1"
+                >
+                  <Sparkles className="w-5 h-5" />
+                  {loading ? 'Generating...' : 'Generate Letter'}
+                </Button>
+              </div>
+            </motion.div>
+          )}
+
+          {/* Step 4: Result */}
+          {step === 4 && (
+            <motion.div
+              key="step-4"
+              {...stepMotionProps}
+              className="space-y-6"
+            >
+              <div className="flex items-center justify-between">
+                <h2 className="text-title-large font-bold text-on-surface flex items-center gap-2">
+                  <Sparkles className="w-6 h-6 text-tertiary" /> Your Cover Letter
+                </h2>
+                <div className="flex gap-2">
+                  <Button
+                    onClick={resetForm}
+                    variant="text"
+                    className="text-on-surface-variant hover:text-error"
+                  >
+                    <RefreshCw className="w-4 h-4 mr-2" /> New
+                  </Button>
+                </div>
+              </div>
+
+              <div
+                id="cover-letter-content"
+                aria-live="polite"
+                className="bg-surface-container-low rounded-tech p-8 text-on-surface whitespace-pre-wrap border border-outline-variant shadow-inner font-serif text-body-large leading-relaxed max-h-[600px] overflow-y-auto"
               >
-                <Download className="w-4 h-4 mr-2" /> Download PDF
-              </Button>
-              <Button
-                onClick={() => {
-                  navigator.clipboard.writeText(generatedLetter);
-                  toast.success('Copied to clipboard');
-                }}
-                className="bg-secondary-container text-on-secondary-container hover:bg-secondary hover:text-on-secondary"
-              >
-                <Copy className="w-4 h-4 mr-2" /> Copy Text
-              </Button>
-            </div>
-          </div>
-        )}
-      </div>
+                {generatedLetter}
+              </div>
+
+              <div className="flex justify-end gap-4 pt-4">
+                <Button
+                  onClick={handleDownloadPdf}
+                  variant="outlined"
+                  className="border-tertiary text-tertiary hover:bg-tertiary hover:text-on-tertiary"
+                >
+                  <Download className="w-4 h-4 mr-2" /> Download PDF
+                </Button>
+                <Button
+                  onClick={() => {
+                    navigator.clipboard.writeText(generatedLetter);
+                    toast.success('Copied to clipboard');
+                  }}
+                  aria-label="Copy generated cover letter text"
+                  className="bg-secondary-container text-on-secondary-container hover:bg-secondary hover:text-on-secondary"
+                >
+                  <Copy className="w-4 h-4 mr-2" /> Copy Text
+                </Button>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.div>
     </div>
   );
 }

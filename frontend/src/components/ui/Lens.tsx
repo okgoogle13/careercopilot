@@ -91,8 +91,8 @@ export const Lens = forwardRef<HTMLInputElement, LensProps>(
         adornment: 'text-sm',
       },
       medium: {
-        input: 'px-4 py-3 text-base',
-        adornment: 'text-base',
+        input: 'px-4 py-3 text',
+        adornment: 'text',
       },
       large: {
         input: 'px-5 py-4 text-lg',
@@ -103,22 +103,21 @@ export const Lens = forwardRef<HTMLInputElement, LensProps>(
     // Variant-specific styles (KeralaRage KrSolidarity)
     const containerStyle = {
       borderRadius: 'var(--shape-blockRiot02, 20px 4px 12px 2px)', // shape.block02 — Scaffold archetype (was: Lens)
-      backgroundColor:
-        variant === 'filled' ? 'var(--sys-color-charcoalBackground-steps-3)' : 'transparent',
+      backgroundColor: variant === 'filled' ? 'var(--sys-color-charcoalBackground)' : 'transparent',
       border: '2px solid',
       borderColor: error
-        ? 'var(--sys-color-solidarityRed-base)'
+        ? 'var(--sys-color-solidarityRed)'
         : isFocused
-          ? 'var(--sys-color-inkGold-base)'
-          : 'var(--sys-color-concreteGrey-base)',
-      color: 'var(--sys-color-worker-ash-base)',
-      transition: 'all 300ms cubic-bezier(0.34, 1.56, 0.64, 1)',
+          ? 'var(--sys-color-inkGold)'
+          : 'var(--sys-color-concreteGrey)',
+      color: 'var(--sys-color-worker-ash)',
+      transition: 'all var(--sys-motion-duration-medium2) cubic-bezier(0.34, 1.56, 0.64, 1)',
     };
 
     const containerClasses = `
     ${fullWidth ? 'w-full' : 'w-auto'}
     ${disabled ? 'opacity-50 cursor-not-allowed' : ''}
-    ${isFocused && !error ? 'shadow-[0_0_15px_var(--sys-color-inkGold-steps-0)]' : ''}
+    ${isFocused && !error ? 'shadow-[0_0_15px_var(--sys-color-inkGold)]' : ''}
     ${containerClassName}
   `;
 
@@ -144,12 +143,12 @@ export const Lens = forwardRef<HTMLInputElement, LensProps>(
           <label
             className={`
           mb-2 text-sm font-medium transition-colors duration-200
-          ${error ? 'text-[var(--sys-color-solidarityRed-base)]' : 'text-[var(--sys-color-concreteGrey-base)]'}
-          ${isFocused && !error ? 'text-[var(--sys-color-inkGold-base)]' : ''}
+          ${error ? 'text-[var(--sys-color-solidarityRed)]' : 'text-[var(--sys-color-concreteGrey)]'}
+          ${isFocused && !error ? 'text-[var(--sys-color-inkGold)]' : ''}
         `}
           >
             {label}
-            {required && <span className="text-[var(--sys-color-solidarityRed-base)] ml-1">*</span>}
+            {required && <span className="text-[var(--sys-color-solidarityRed)] ml-1">*</span>}
           </label>
         )}
 
@@ -164,7 +163,7 @@ export const Lens = forwardRef<HTMLInputElement, LensProps>(
               <div
                 className={`
               flex-shrink-0 ml-3 ${sizeClasses[size].adornment}
-              ${error ? 'text-[var(--sys-color-solidarityRed-base)]' : 'text-[var(--sys-color-concreteGrey-base-dark)]'}
+              ${error ? 'text-[var(--sys-color-solidarityRed)]' : 'text-[var(--sys-color-concreteGrey)]'}
             `}
               >
                 {startAdornment}
@@ -191,7 +190,7 @@ export const Lens = forwardRef<HTMLInputElement, LensProps>(
               <div
                 className={`
               flex-shrink-0 mr-3 ${sizeClasses[size].adornment}
-              ${error ? 'text-[var(--sys-color-solidarityRed-base)]' : 'text-[var(--sys-color-concreteGrey-base-dark)]'}
+              ${error ? 'text-[var(--sys-color-solidarityRed)]' : 'text-[var(--sys-color-concreteGrey)]'}
             `}
               >
                 {endAdornment}
@@ -208,7 +207,7 @@ export const Lens = forwardRef<HTMLInputElement, LensProps>(
                 id={`${props.id}-helper-text`}
                 className={`
                 text-xs
-                ${error ? 'text-[var(--sys-color-solidarityRed-base)]' : 'text-[var(--sys-color-concreteGrey-base-dark)]'}
+                ${error ? 'text-[var(--sys-color-solidarityRed)]' : 'text-[var(--sys-color-concreteGrey)]'}
               `}
               >
                 {displayHelperText}
@@ -219,7 +218,7 @@ export const Lens = forwardRef<HTMLInputElement, LensProps>(
               <p
                 className={`
               text-xs
-              ${charCount > maxLength ? 'text-[var(--sys-color-solidarityRed-base)]' : 'text-[var(--sys-color-concreteGrey-base-dark)]'}
+              ${charCount > maxLength ? 'text-[var(--sys-color-solidarityRed)]' : 'text-[var(--sys-color-concreteGrey)]'}
               ml-auto
             `}
               >
@@ -287,16 +286,15 @@ export const LensArea = forwardRef<HTMLTextAreaElement, LensAreaProps>(
 
     const containerStyle = {
       borderRadius: 'var(--shape-blockRiot02, 20px 4px 12px 2px)', // shape.block02 — Scaffold archetype (was: Lens)
-      backgroundColor:
-        variant === 'filled' ? 'var(--sys-color-charcoalBackground-steps-3)' : 'transparent',
+      backgroundColor: variant === 'filled' ? 'var(--sys-color-charcoalBackground)' : 'transparent',
       border: '2px solid',
       borderColor: error
-        ? 'var(--sys-color-solidarityRed-base)'
+        ? 'var(--sys-color-solidarityRed)'
         : isFocused
-          ? 'var(--sys-color-inkGold-base)'
-          : 'var(--sys-color-concreteGrey-base)',
-      color: 'var(--sys-color-worker-ash-base)',
-      transition: 'all 300ms cubic-bezier(0.34, 1.56, 0.64, 1)',
+          ? 'var(--sys-color-inkGold)'
+          : 'var(--sys-color-concreteGrey)',
+      color: 'var(--sys-color-worker-ash)',
+      transition: 'all var(--sys-motion-duration-medium2) cubic-bezier(0.34, 1.56, 0.64, 1)',
     };
 
     const showError = error && errorMessage;
@@ -308,12 +306,12 @@ export const LensArea = forwardRef<HTMLTextAreaElement, LensAreaProps>(
           <label
             className={`
           mb-2 text-sm font-medium transition-colors duration-200
-          ${error ? 'text-[var(--sys-color-solidarityRed-base)]' : 'text-[var(--sys-color-concreteGrey-base)]'}
-          ${isFocused && !error ? 'text-[var(--sys-color-inkGold-base)]' : ''}
+          ${error ? 'text-[var(--sys-color-solidarityRed)]' : 'text-[var(--sys-color-concreteGrey)]'}
+          ${isFocused && !error ? 'text-[var(--sys-color-inkGold)]' : ''}
         `}
           >
             {label}
-            {required && <span className="text-[var(--sys-color-solidarityRed-base)] ml-1">*</span>}
+            {required && <span className="text-[var(--sys-color-solidarityRed)] ml-1">*</span>}
           </label>
         )}
 
@@ -325,14 +323,14 @@ export const LensArea = forwardRef<HTMLTextAreaElement, LensAreaProps>(
           ${fullWidth ? 'w-full' : 'w-auto'}
           ${disabled ? 'opacity-50 cursor-not-allowed' : ''}
           px-4 py-3
-          text-base
+          text
           bg-transparent
           text-inherit
           placeholder:opacity-50
           focus:outline-none
           resize-vertical
           font-field-note
-          ${isFocused && !error ? 'shadow-[0_0_15px_var(--sys-color-inkGold-steps-0)]' : ''}
+          ${isFocused && !error ? 'shadow-[0_0_15px_var(--sys-color-inkGold)]' : ''}
           ${containerClassName}
           ${className}
         `}
@@ -354,7 +352,7 @@ export const LensArea = forwardRef<HTMLTextAreaElement, LensAreaProps>(
                 id={`${props.id}-helper-text`}
                 className={`
                 text-xs
-                ${error ? 'text-[var(--sys-color-solidarityRed-base)]' : 'text-[var(--sys-color-concreteGrey-base-dark)]'}
+                ${error ? 'text-[var(--sys-color-solidarityRed)]' : 'text-[var(--sys-color-concreteGrey)]'}
               `}
               >
                 {displayHelperText}
@@ -365,7 +363,7 @@ export const LensArea = forwardRef<HTMLTextAreaElement, LensAreaProps>(
               <p
                 className={`
               text-xs
-              ${charCount > maxLength ? 'text-[var(--sys-color-solidarityRed-base)]' : 'text-[var(--sys-color-concreteGrey-base-dark)]'}
+              ${charCount > maxLength ? 'text-[var(--sys-color-solidarityRed)]' : 'text-[var(--sys-color-concreteGrey)]'}
               ml-auto
             `}
               >
@@ -380,7 +378,3 @@ export const LensArea = forwardRef<HTMLTextAreaElement, LensAreaProps>(
 );
 
 LensArea.displayName = 'LensArea';
-
-// Legacy M3 exports for backward compatibility
-export { LensArea as M3TextArea, Lens as M3TextField };
-export type { LensAreaProps as M3TextAreaProps, LensProps as M3TextFieldProps };

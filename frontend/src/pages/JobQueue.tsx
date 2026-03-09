@@ -3,7 +3,7 @@ import { KanbanCard } from '@/components/KanbanCard';
 import { m3Toast } from '@/utils/toast';
 import { CheckCircle, Clock, Copy, ExternalLink, FileText, Play, Sparkles } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import { M3ErrorAlert } from '../components/shared/M3ErrorAlert';
+import { KrErrorAlert } from '../components/shared/KrErrorAlert';
 import { PageHeader } from '../components/shared/PageHeader';
 import { API_ENDPOINTS } from '../config/api';
 import { LayeredHero } from '../components/kerala-rage/LayeredHero';
@@ -193,9 +193,9 @@ export function JobQueue() {
         <div
           role="status"
           data-testid="job-queue-loader"
-          className="w-12 h-12 border-4 border-[var(--color-ink-gold)]/20 border-t-[var(--color-ink-gold)] rounded-sentry animate-spin"
+          className="w-12 h-12 border-4 border-[var(--sys-color-inkGold)]/20 border-t-[var(--sys-color-inkGold)] rounded-sentry animate-spin"
         />
-        <p className="font-annotation text-xs tracking-widest text-[var(--color-concrete-grey-dark)] uppercase">
+        <p className="font-annotation text-xs tracking-widest text-[var(--sys-color-concreteGrey)] uppercase">
           Synchronizing Queue
         </p>
       </div>
@@ -224,7 +224,7 @@ export function JobQueue() {
       />
 
       {error && (
-        <M3ErrorAlert
+        <KrErrorAlert
           message={error}
           onRetry={fetchJobs}
           onDismiss={() => setError(null)}
@@ -234,13 +234,13 @@ export function JobQueue() {
 
       {jobs.length === 0 && !error ? (
         <div className="text-center py-32 opacity-60">
-          <div className="w-20 h-20 bg-[var(--color-asphalt-black-light)] rounded-sentry flex items-center justify-center mx-auto mb-6 border border-[var(--color-concrete-grey-dark)]/20">
-            <Sparkles className="w-10 h-10 text-[var(--color-concrete-grey-dark)]" />
+          <div className="w-20 h-20 bg-[var(--sys-color-charcoalBackground)] rounded-sentry flex items-center justify-center mx-auto mb-6 border border-[var(--sys-color-concreteGrey)]/20">
+            <Sparkles className="w-10 h-10 text-[var(--sys-color-concreteGrey)]" />
           </div>
-          <h3 className="font-bloom text-3xl mb-2 text-[var(--color-paper-white)]">
+          <h3 className="font-bloom text-3xl mb-2 text-[var(--sys-color-paperWhite)]">
             Empty Pipeline
           </h3>
-          <p className="font-field-note text-lg text-[var(--color-concrete-grey-dark)]">
+          <p className="font-field-note text-lg text-[var(--sys-color-concreteGrey)]">
             Clip opportunities from Seek or LinkedIn to populate your queue.
           </p>
         </div>
@@ -278,16 +278,16 @@ export function JobQueue() {
       >
         <div className="space-y-6">
           {coverLetterJob && (
-            <div className="p-4 bg-[var(--color-ink-gold)]/10 rounded-stone border border-[var(--color-ink-gold)]/20">
-              <p className="font-field-note text-sm text-[var(--color-ink-gold)]">
+            <div className="p-4 bg-[var(--sys-color-inkGold)]/10 rounded-stone border border-[var(--sys-color-inkGold)]/20">
+              <p className="font-field-note text-sm text-[var(--sys-color-inkGold)]">
                 Optimized for <span className="font-bold">{coverLetterJob.title}</span> at{' '}
                 <span className="font-bold">{coverLetterJob.company}</span>
               </p>
             </div>
           )}
 
-          <div className="bg-[var(--color-asphalt-black-dark)] p-8 rounded-stone border border-[var(--color-concrete-grey-dark)]/10 shadow-inner">
-            <pre className="font-field-note text-base text-[var(--color-paper-white)]/90 whitespace-pre-wrap leading-relaxed">
+          <div className="bg-[var(--sys-color-asphaltBlack)] p-8 rounded-stone border border-[var(--sys-color-concreteGrey)]/10 shadow-inner">
+            <pre className="font-field-note text-base text-[var(--sys-color-paperWhite)]/90 whitespace-pre-wrap leading-relaxed">
               {coverLetter}
             </pre>
           </div>

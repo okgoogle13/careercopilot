@@ -1,5 +1,5 @@
 import React, { Component, ErrorInfo, ReactNode } from 'react';
-import { Warning, Refresh, Home } from '@mui/icons-material';
+import { AlertTriangle as Warning, RefreshCw as Refresh, Home } from 'lucide-react';
 
 interface Props {
   children: ReactNode;

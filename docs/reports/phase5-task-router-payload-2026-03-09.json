@@ -1,0 +1,86 @@
+{
+  "generated_at": "2026-03-09T03:24:00Z",
+  "sprint_id": "Phase5-Execution-S1",
+  "phase_gate_input": {
+    "phase4_gate_status": "PASS",
+    "evidence": [
+      "frontend/public/assets/ASSET-REPORT.json",
+      "frontend/public/assets/VISUAL-REPORT.json",
+      "frontend/public/assets/batch4c-hero.json"
+    ]
+  },
+  "tasks": [
+    {
+      "task_id": "P5-T1-coverletter-migration",
+      "assigned_to": "codex-cli",
+      "priority": "high",
+      "inputs": {
+        "target": "CoverLetterGenerator",
+        "acceptance": [
+          "semantic KR tokens only",
+          "expressive motion integrated",
+          "a11y keyboard/focus pass"
+        ]
+      }
+    },
+    {
+      "task_id": "P5-T2-ksc-migration",
+      "assigned_to": "codex-cli",
+      "priority": "high",
+      "inputs": {
+        "target": "KSCGenerator",
+        "depends_on": ["P5-T1-coverletter-migration"],
+        "acceptance": [
+          "semantic KR tokens only",
+          "STAR workflow interaction parity",
+          "a11y keyboard/focus pass"
+        ]
+      }
+    },
+    {
+      "task_id": "P5-T3-designsidekick-hero",
+      "assigned_to": "gemini-design-sidekick",
+      "priority": "high",
+      "inputs": {
+        "target": "DesignSidekick",
+        "depends_on": ["P5-T2-ksc-migration"],
+        "acceptance": [
+          "Placard-based floating structure",
+          "KeralaRageButton expressive triggers",
+          "LayeredHero + substrate overlays integrated"
+        ]
+      }
+    },
+    {
+      "task_id": "P5-T4-visual-regression-baselines",
+      "assigned_to": "gemini-code-executor",
+      "priority": "high",
+      "inputs": {
+        "depends_on": [
+          "P5-T1-coverletter-migration",
+          "P5-T2-ksc-migration",
+          "P5-T3-designsidekick-hero"
+        ],
+        "targets": ["CoverLetterGenerator", "KSCGenerator", "DesignSidekick"],
+        "acceptance": [
+          "snapshots approved",
+          "CI visual diff gate green"
+        ]
+      }
+    },
+    {
+      "task_id": "P5-T5-phase5-gate-audit",
+      "assigned_to": "codebase-orchestrator",
+      "priority": "high",
+      "inputs": {
+        "depends_on": ["P5-T4-visual-regression-baselines"],
+        "criteria": {
+          "build": "SUCCESS",
+          "tests": "PASS",
+          "type_check": "PASS",
+          "phase5_acceptance": "PASS"
+        }
+      }
+    }
+  ]
+}

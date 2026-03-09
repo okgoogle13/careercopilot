@@ -1,4 +1,4 @@
-import { Pebble, StatusBadge, Stone } from '@/components/ui';
+import { Strike, StatusBadge, Placard } from '@/components/ui';
 import { motion } from 'framer-motion';
 import {
   Calendar,
@@ -197,7 +197,7 @@ export function ApplicationTracker() {
                   ))}
 
                 {/* Seedling Dispatch (Add Button) */}
-                <button className="w-full py-4 border border-dashed border-concrete-grey/10 rounded-stone flex items-center justify-center text-concrete-grey/30 hover:border-ink-gold/40 hover:text-ink-gold transition-all group">
+                <button className="w-full py-4 border border-dashed border-[var(--sys-color-concreteGrey-steps-1)] rounded-[var(--shape-megaphoneCut01)] flex items-center justify-center text-[var(--sys-color-concreteGrey-base)]/50 hover:border-[var(--sys-color-inkGold-base)]/40 hover:text-[var(--sys-color-inkGold-base)] transition-all group">
                   <Plus className="w-5 h-5 group-hover:rotate-90 transition-transform" />
                 </button>
               </div>
@@ -220,9 +220,9 @@ function ApplicationLeaf({ application }: { application: Application }) {
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
     >
-      <Stone
+      <Placard
         elevation="floating"
-        className="p-5 border-concrete-grey/10 bg-asphalt-black/40 backdrop-blur-sm group relative overflow-hidden"
+        className="p-5 border-[var(--sys-color-concreteGrey-steps-1)] bg-[var(--sys-color-charcoalBackground-steps-2)]/40 backdrop-blur-sm group relative overflow-hidden"
       >
         {/* Stage Indicator Notch */}
         <div className="absolute top-0 left-0 w-1 h-full bg-ink-gold opacity-40 group-hover:opacity-100 transition-opacity" />
@@ -258,19 +258,19 @@ function ApplicationLeaf({ application }: { application: Application }) {
           </div>
 
           <div className="pt-3 flex justify-between items-center border-t border-concrete-grey/5">
-            <span className="font-mono text-[8px] text-concrete-grey/30 uppercase tracking-[0.2em]">
+            <span className="font-mono text-[8px] text-[var(--sys-color-concreteGrey-base)]/50 uppercase tracking-[0.2em]">
               KrMotif_ID: {application.id.toString().padStart(3, '0')}
             </span>
-            <Pebble
+            <Strike
               variant="ghost"
               size="sm"
-              className="h-6 text-[10px] uppercase font-bold tracking-tighter hover:text-ink-gold"
+              className="h-6 text-[10px] uppercase font-bold tracking-tighter hover:text-[var(--sys-color-inkGold-base)]"
             >
               DETAILS
-            </Pebble>
+            </Strike>
           </div>
         </div>
-      </Stone>
+      </Placard>
     </motion.div>
   );
 }

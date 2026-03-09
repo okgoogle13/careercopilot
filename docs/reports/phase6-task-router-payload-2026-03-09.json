@@ -1,0 +1,107 @@
+{
+  "generated_at": "2026-03-09T15:20:00Z",
+  "phase": "P6-Release-Readiness",
+  "sprint_id": "S6-Deploy-Candidate-1",
+  "entry_gate": {
+    "phase5_go_report": "docs/reports/phase5-gate-audit-2026-03-09-r2.md",
+    "status": "PASS"
+  },
+  "tasks": [
+    {
+      "task_id": "P6-T1-release-preflight",
+      "assigned_to": "codebase-orchestrator",
+      "priority": "critical",
+      "inputs": {
+        "criteria": {
+          "type_check": "PASS",
+          "build": "PASS",
+          "tests": "PASS",
+          "visual_evidence": "PASS"
+        }
+      },
+      "next_task": "P6-T2-staging-deploy",
+      "next_assigned_to": "deployment-manager"
+    },
+    {
+      "task_id": "P6-T2-staging-deploy",
+      "assigned_to": "deployment-manager",
+      "priority": "critical",
+      "inputs": {
+        "target_environment": "staging"
+      },
+      "next_task": "P6-T3-staging-smoke",
+      "next_assigned_to": "gemini-code-executor"
+    },
+    {
+      "task_id": "P6-T3-staging-smoke",
+      "assigned_to": "gemini-code-executor",
+      "priority": "critical",
+      "inputs": {
+        "environment": "staging",
+        "routes": [
+          "/cover-letter-generator?demo=true",
+          "/ksc-generator?demo=true",
+          "/design-sidekick",
+          "/dashboard?demo=true"
+        ]
+      },
+      "next_task": "P6-T4-observability-check",
+      "next_assigned_to": "backend-specialist"
+    },
+    {
+      "task_id": "P6-T4-observability-check",
+      "assigned_to": "backend-specialist",
+      "priority": "high",
+      "inputs": {
+        "environment": "staging",
+        "checks": ["critical_errors", "latency_baseline", "error_rate_baseline"]
+      },
+      "next_task": "P6-T5-prod-readiness-review",
+      "next_assigned_to": "project-manager"
+    },
+    {
+      "task_id": "P6-T5-prod-readiness-review",
+      "assigned_to": "project-manager",
+      "priority": "critical",
+      "inputs": {
+        "decision_modes": ["GO", "GO_WITH_CONDITIONS", "NO_GO"]
+      },
+      "next_task": "P6-T6-production-deploy",
+      "next_assigned_to": "deployment-manager"
+    },
+    {
+      "task_id": "P6-T6-production-deploy",
+      "assigned_to": "deployment-manager",
+      "priority": "critical",
+      "inputs": {
+        "target_environment": "production"
+      },
+      "next_task": "P6-T7-post-deploy-smoke",
+      "next_assigned_to": "gemini-code-executor"
+    },
+    {
+      "task_id": "P6-T7-post-deploy-smoke",
+      "assigned_to": "gemini-code-executor",
+      "priority": "critical",
+      "inputs": {
+        "environment": "production",
+        "routes": [
+          "/cover-letter-generator?demo=true",
+          "/ksc-generator?demo=true",
+          "/design-sidekick",
+          "/dashboard?demo=true"
+        ]
+      },
+      "next_task": "P6-T8-phase6-closeout",
+      "next_assigned_to": "project-manager"
+    },
+    {
+      "task_id": "P6-T8-phase6-closeout",
+      "assigned_to": "project-manager",
+      "priority": "high",
+      "inputs": {
+        "output": "phase6-closeout-report"
+      }
+    }
+  ]
+}

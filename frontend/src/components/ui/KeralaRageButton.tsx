@@ -87,7 +87,7 @@ export const KeralaRageButton = React.forwardRef<HTMLButtonElement, KeralaRageBu
         className={cn(
           // Base styles
           'font-bold uppercase inline-flex items-center justify-center relative overflow-hidden',
-          'transition-all duration-300',
+          'transition-all duration-300 ease-viscous',
           'disabled:opacity-40 disabled:grayscale disabled:cursor-not-allowed',
 
           // Size/Radius

@@ -91,7 +91,7 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({
                 inline-flex items-center gap-2
                 px-3 py-1
                 border
-                transition-all duration-300 var(--ease-viscous-breeze)
+                transition-all duration-300 ease-viscous var(--ease-viscous-breeze)
                 hover:scale-105 hover:brightness-110
                 ${className}
             `}
