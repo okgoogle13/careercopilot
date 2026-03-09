@@ -51,6 +51,7 @@ export interface ScaffoldInputProps extends Omit<
 export const ScaffoldInput = forwardRef<HTMLInputElement, ScaffoldInputProps>(
   (
     {
+      id,
       label,
       helperText,
       error = false,
@@ -71,6 +72,7 @@ export const ScaffoldInput = forwardRef<HTMLInputElement, ScaffoldInputProps>(
     },
     ref
   ) => {
+    const reactId = React.useId();
     const [isFocused, setIsFocused] = React.useState(false);
     const [charCount, setCharCount] = React.useState(value ? String(value).length : 0);
 
@@ -86,7 +88,7 @@ export const ScaffoldInput = forwardRef<HTMLInputElement, ScaffoldInputProps>(
     };
 
     const containerStyle = {
-      borderRadius: 'var(--shape-blockRiot02)', // shape.blockRiot02 — Scaffold archetype
+      borderRadius: 'var(--sys-shape-blockRiot02)', // shape.blockRiot02 — Scaffold archetype
       backgroundColor:
         variant === 'filled' ? 'var(--sys-color-charcoalBackground-steps-3)' : 'transparent',
       border: '2px solid',
@@ -96,8 +98,7 @@ export const ScaffoldInput = forwardRef<HTMLInputElement, ScaffoldInputProps>(
           ? 'var(--sys-color-inkGold-base)'
           : 'var(--sys-color-concreteGrey-base)',
       color: 'var(--sys-color-worker-ash-base)',
-      transition:
-        'border-color var(--sys-motion-duration-medium2) cubic-bezier(0.34, 1.56, 0.64, 1)',
+      transition: 'border-color var(--duration-standard) cubic-bezier(0.34, 1.56, 0.64, 1)',
     };
 
     const containerClasses = `
@@ -116,11 +117,14 @@ export const ScaffoldInput = forwardRef<HTMLInputElement, ScaffoldInputProps>(
 
     const showError = error && errorMessage;
     const displayHelperText = showError ? errorMessage : helperText;
+    const inputId = id ?? `scaffold-input-${reactId}`;
+    const helperId = displayHelperText ? `${inputId}-helper-text` : undefined;
 
     return (
       <div className={`flex flex-col ${fullWidth ? 'w-full' : 'w-auto'}`}>
         {label && (
           <label
+            htmlFor={inputId}
             className={`
           mb-2 text-sm font-medium transition-colors duration-200
           ${error ? 'text-[var(--sys-color-solidarityRed-base)]' : 'text-[var(--sys-color-concreteGrey-base)]'}
@@ -133,7 +137,7 @@ export const ScaffoldInput = forwardRef<HTMLInputElement, ScaffoldInputProps>(
         )}
 
         <div
-          className={containerClasses}
+          className={`${containerClasses} group relative`}
           style={containerStyle}
           data-archetype="scaffold"
         >
@@ -142,7 +146,7 @@ export const ScaffoldInput = forwardRef<HTMLInputElement, ScaffoldInputProps>(
               <div
                 className={`
               flex-shrink-0 ml-3 ${sizeClasses[size].adornment}
-              ${error ? 'text-[var(--sys-color-solidarityRed-base)]' : 'text-[var(--sys-color-concreteGrey-base-dark)]'}
+              ${error ? 'text-[var(--sys-color-solidarityRed-base)]' : 'text-[var(--sys-color-concreteGrey-steps-4)]'}
             `}
               >
                 {startAdornment}
@@ -150,6 +154,7 @@ export const ScaffoldInput = forwardRef<HTMLInputElement, ScaffoldInputProps>(
             )}
             <input
               ref={ref}
+              id={inputId}
               className={inputClasses}
               disabled={disabled}
               maxLength={maxLength}
@@ -158,14 +163,14 @@ export const ScaffoldInput = forwardRef<HTMLInputElement, ScaffoldInputProps>(
               onFocus={() => setIsFocused(true)}
               onBlur={() => setIsFocused(false)}
               aria-invalid={error}
-              aria-describedby={displayHelperText ? `${props.id}-helper-text` : undefined}
+              aria-describedby={helperId}
               {...props}
             />
             {endAdornment && (
               <div
                 className={`
               flex-shrink-0 mr-3 ${sizeClasses[size].adornment}
-              ${error ? 'text-[var(--sys-color-solidarityRed-base)]' : 'text-[var(--sys-color-concreteGrey-base-dark)]'}
+              ${error ? 'text-[var(--sys-color-solidarityRed-base)]' : 'text-[var(--sys-color-concreteGrey-steps-4)]'}
             `}
               >
                 {endAdornment}
@@ -176,7 +181,7 @@ export const ScaffoldInput = forwardRef<HTMLInputElement, ScaffoldInputProps>(
             {!disabled && (
               <div
                 className="absolute inset-0 opacity-0 group-focus-within:opacity-[0.05] pointer-events-none transition-opacity bg-[url('/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__ui--kr-ui-019--v1.svg')]"
-                style={{ borderRadius: 'var(--shape-blockRiot02)' }}
+                style={{ borderRadius: 'var(--sys-shape-blockRiot02)' }}
               />
             )}
           </div>
@@ -186,10 +191,10 @@ export const ScaffoldInput = forwardRef<HTMLInputElement, ScaffoldInputProps>(
           <div className="flex justify-between mt-1 px-1">
             {displayHelperText && (
               <p
-                id={`${props.id}-helper-text`}
+                id={helperId}
                 className={`
                 text-xs
-                ${error ? 'text-[var(--sys-color-solidarityRed-base)]' : 'text-[var(--sys-color-concreteGrey-base-dark)]'}
+                ${error ? 'text-[var(--sys-color-solidarityRed-base)]' : 'text-[var(--sys-color-concreteGrey-steps-4)]'}
               `}
               >
                 {displayHelperText}
@@ -199,7 +204,7 @@ export const ScaffoldInput = forwardRef<HTMLInputElement, ScaffoldInputProps>(
               <p
                 className={`
               text-xs
-              ${charCount > maxLength ? 'text-[var(--sys-color-solidarityRed-base)]' : 'text-[var(--sys-color-concreteGrey-base-dark)]'}
+              ${charCount > maxLength ? 'text-[var(--sys-color-solidarityRed-base)]' : 'text-[var(--sys-color-concreteGrey-steps-4)]'}
               ml-auto
             `}
               >
@@ -237,6 +242,7 @@ export interface ScaffoldAreaProps extends Omit<
 export const ScaffoldArea = forwardRef<HTMLTextAreaElement, ScaffoldAreaProps>(
   (
     {
+      id,
       label,
       helperText,
       error = false,
@@ -255,6 +261,7 @@ export const ScaffoldArea = forwardRef<HTMLTextAreaElement, ScaffoldAreaProps>(
     },
     ref
   ) => {
+    const reactId = React.useId();
     const [isFocused, setIsFocused] = React.useState(false);
     const [charCount, setCharCount] = React.useState(value ? String(value).length : 0);
 
@@ -264,7 +271,7 @@ export const ScaffoldArea = forwardRef<HTMLTextAreaElement, ScaffoldAreaProps>(
     };
 
     const containerStyle = {
-      borderRadius: 'var(--shape-blockRiot02)', // shape.blockRiot02 — Scaffold archetype
+      borderRadius: 'var(--sys-shape-blockRiot02)', // shape.blockRiot02 — Scaffold archetype
       backgroundColor:
         variant === 'filled' ? 'var(--sys-color-charcoalBackground-steps-3)' : 'transparent',
       border: '2px solid',
@@ -274,17 +281,19 @@ export const ScaffoldArea = forwardRef<HTMLTextAreaElement, ScaffoldAreaProps>(
           ? 'var(--sys-color-inkGold-base)'
           : 'var(--sys-color-concreteGrey-base)',
       color: 'var(--sys-color-worker-ash-base)',
-      transition:
-        'border-color var(--sys-motion-duration-medium2) cubic-bezier(0.34, 1.56, 0.64, 1)',
+      transition: 'border-color var(--duration-standard) cubic-bezier(0.34, 1.56, 0.64, 1)',
     };
 
     const showError = error && errorMessage;
     const displayHelperText = showError ? errorMessage : helperText;
+    const areaId = id ?? `scaffold-area-${reactId}`;
+    const helperId = displayHelperText ? `${areaId}-helper-text` : undefined;
 
     return (
       <div className={`flex flex-col ${fullWidth ? 'w-full' : 'w-auto'}`}>
         {label && (
           <label
+            htmlFor={areaId}
             className={`
           mb-2 text-sm font-medium transition-colors duration-200
           ${error ? 'text-[var(--sys-color-solidarityRed-base)]' : 'text-[var(--sys-color-concreteGrey-base)]'}
@@ -298,6 +307,7 @@ export const ScaffoldArea = forwardRef<HTMLTextAreaElement, ScaffoldAreaProps>(
 
         <textarea
           ref={ref}
+          id={areaId}
           rows={rows}
           style={containerStyle}
           data-archetype="scaffold"
@@ -317,7 +327,7 @@ export const ScaffoldArea = forwardRef<HTMLTextAreaElement, ScaffoldAreaProps>(
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
           aria-invalid={error}
-          aria-describedby={displayHelperText ? `${props.id}-helper-text` : undefined}
+          aria-describedby={helperId}
           {...props}
         />
 
@@ -325,10 +335,10 @@ export const ScaffoldArea = forwardRef<HTMLTextAreaElement, ScaffoldAreaProps>(
           <div className="flex justify-between mt-1 px-1">
             {displayHelperText && (
               <p
-                id={`${props.id}-helper-text`}
+                id={helperId}
                 className={`
                 text-xs
-                ${error ? 'text-[var(--sys-color-solidarityRed-base)]' : 'text-[var(--sys-color-concreteGrey-base-dark)]'}
+                ${error ? 'text-[var(--sys-color-solidarityRed-base)]' : 'text-[var(--sys-color-concreteGrey-steps-4)]'}
               `}
               >
                 {displayHelperText}
@@ -338,7 +348,7 @@ export const ScaffoldArea = forwardRef<HTMLTextAreaElement, ScaffoldAreaProps>(
               <p
                 className={`
               text-xs
-              ${charCount > maxLength ? 'text-[var(--sys-color-solidarityRed-base)]' : 'text-[var(--sys-color-concreteGrey-base-dark)]'}
+              ${charCount > maxLength ? 'text-[var(--sys-color-solidarityRed-base)]' : 'text-[var(--sys-color-concreteGrey-steps-4)]'}
               ml-auto
             `}
               >

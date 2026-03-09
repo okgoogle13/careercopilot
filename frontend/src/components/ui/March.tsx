@@ -1,5 +1,5 @@
 import { Check, ChevronDown } from 'lucide-react';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useId, useMemo, useRef, useState } from 'react';
 
 export interface MarchOption {
   value: string;
@@ -8,6 +8,8 @@ export interface MarchOption {
 }
 
 export interface MarchProps {
+  /** Optional id for ARIA linkage */
+  id?: string;
   /** Select label */
   label?: string;
   /** Helper text below select */
@@ -55,6 +57,7 @@ export interface MarchProps {
  * />
  */
 export function March({
+  id,
   label,
   helperText,
   error = false,
@@ -68,13 +71,19 @@ export function March({
   fullWidth = false,
   className = '',
 }: MarchProps) {
+  const reactId = useId();
+  const selectId = id ?? `march-${reactId}`;
+  const labelId = `${selectId}-label`;
+  const listboxId = `${selectId}-listbox`;
   const [isOpen, setIsOpen] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(-1);
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
         setIsOpen(false);
+        setActiveIndex(-1);
       }
     };
     if (isOpen) {
@@ -86,6 +95,7 @@ export function March({
   useEffect(() => {
     const handleEscape = (event: KeyboardEvent) => {
       if (event.key === 'Escape') setIsOpen(false);
+      if (event.key === 'Escape') setActiveIndex(-1);
     };
     if (isOpen) {
       document.addEventListener('keydown', handleEscape);
@@ -94,24 +104,95 @@ export function March({
   }, [isOpen]);
 
   const selectedOption = options.find((opt) => opt.value === value);
+  const selectedIndex = options.findIndex((opt) => opt.value === value);
   const showError = error && errorMessage;
   const displayHelperText = showError ? errorMessage : helperText;
+  const helperId = displayHelperText ? `${selectId}-helper-text` : undefined;
+  const enabledIndices = useMemo(
+    () => options.map((opt, index) => ({ opt, index })).filter(({ opt }) => !opt.disabled),
+    [options]
+  );
 
   const handleSelect = (optionValue: string) => {
     onChange?.(optionValue);
     setIsOpen(false);
+    setActiveIndex(-1);
   };
 
-  const handleKeyDown = (event: React.KeyboardEvent, optionValue: string) => {
+  const getNextEnabledIndex = (start: number, direction: 1 | -1): number => {
+    if (enabledIndices.length === 0) {
+      return -1;
+    }
+    let cursor = start;
+    for (let i = 0; i < options.length; i += 1) {
+      cursor = (cursor + direction + options.length) % options.length;
+      if (!options[cursor]?.disabled) {
+        return cursor;
+      }
+    }
+    return -1;
+  };
+
+  const handleButtonKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>) => {
+    if (disabled) {
+      return;
+    }
+    if (event.key === 'ArrowDown') {
+      event.preventDefault();
+      if (!isOpen) {
+        setIsOpen(true);
+        setActiveIndex(selectedIndex >= 0 ? selectedIndex : (enabledIndices[0]?.index ?? -1));
+      } else {
+        setActiveIndex((prev) => getNextEnabledIndex(prev < 0 ? selectedIndex : prev, 1));
+      }
+    } else if (event.key === 'ArrowUp') {
+      event.preventDefault();
+      if (!isOpen) {
+        setIsOpen(true);
+        setActiveIndex(
+          selectedIndex >= 0
+            ? selectedIndex
+            : (enabledIndices[enabledIndices.length - 1]?.index ?? -1)
+        );
+      } else {
+        setActiveIndex((prev) => getNextEnabledIndex(prev < 0 ? selectedIndex : prev, -1));
+      }
+    } else if ((event.key === 'Enter' || event.key === ' ') && isOpen && activeIndex >= 0) {
+      event.preventDefault();
+      const activeOption = options[activeIndex];
+      if (activeOption && !activeOption.disabled) {
+        handleSelect(activeOption.value);
+      }
+    } else if (event.key === 'Escape') {
+      setIsOpen(false);
+      setActiveIndex(-1);
+    }
+  };
+
+  const handleOptionKeyDown = (
+    event: React.KeyboardEvent,
+    optionValue: string,
+    optionIndex: number
+  ) => {
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault();
       handleSelect(optionValue);
+      return;
+    }
+    if (event.key === 'ArrowDown') {
+      event.preventDefault();
+      setActiveIndex(getNextEnabledIndex(optionIndex, 1));
+      return;
+    }
+    if (event.key === 'ArrowUp') {
+      event.preventDefault();
+      setActiveIndex(getNextEnabledIndex(optionIndex, -1));
     }
   };
 
   // Shape morphs: block01 (closed) → pebble01 (open) — March archetype interaction morph
   const buttonStyle: React.CSSProperties = {
-    borderRadius: isOpen ? 'var(--shape-pebbleSurge01)' : 'var(--shape-blockRiot01)',
+    borderRadius: isOpen ? 'var(--sys-shape-pebbleSurge01)' : 'var(--sys-shape-blockRiot01)',
     backgroundColor: 'var(--sys-color-charcoalBackground-steps-3)',
     border: '2px solid',
     borderColor: error
@@ -130,6 +211,7 @@ export function March({
     >
       {label && (
         <label
+          id={labelId}
           className={`
           mb-2 text-sm font-medium transition-colors duration-[var(--duration-standard)]
           ${error ? 'text-[var(--sys-color-solidarityRed-base)]' : 'text-[var(--sys-color-worker-ash-base)]'}
@@ -143,6 +225,7 @@ export function March({
 
       <button
         type="button"
+        id={selectId}
         style={buttonStyle}
         data-archetype="march"
         className={`
@@ -153,10 +236,25 @@ export function March({
           ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:border-[var(--sys-color-concreteGrey-steps-4)]'}
           ${className}
         `}
-        onClick={() => !disabled && setIsOpen(!isOpen)}
+        onClick={() => {
+          if (disabled) {
+            return;
+          }
+          setIsOpen((prev) => {
+            const next = !prev;
+            setActiveIndex(
+              next ? (selectedIndex >= 0 ? selectedIndex : (enabledIndices[0]?.index ?? -1)) : -1
+            );
+            return next;
+          });
+        }}
+        onKeyDown={handleButtonKeyDown}
         disabled={disabled}
         aria-haspopup="listbox"
         aria-expanded={isOpen}
+        aria-controls={listboxId}
+        aria-labelledby={label ? `${labelId} ${selectId}` : undefined}
+        aria-describedby={helperId}
       >
         <span
           className={
@@ -180,32 +278,39 @@ export function March({
         <div
           className="absolute top-full left-0 right-0 mt-3 z-50 overflow-hidden"
           style={{
-            borderRadius: 'var(--shape-blockRiot02)', // shape.block02 for dropdown
+            borderRadius: 'var(--sys-shape-blockRiot02)', // shape.block02 for dropdown
             backgroundColor: 'var(--sys-color-charcoalBackground-base)',
             border: '1px solid var(--sys-color-worker-ash-base)',
             boxShadow: 'var(--sys-shadow-elevation4Float)',
             animation: 'fadeIn 0.2s cubic-bezier(0.34, 1.56, 0.64, 1)',
           }}
+          id={listboxId}
           role="listbox"
+          aria-labelledby={label ? labelId : undefined}
+          aria-activedescendant={activeIndex >= 0 ? `${selectId}-option-${activeIndex}` : undefined}
         >
           <div className="max-h-64 overflow-y-auto">
-            {options.map((option) => {
+            {options.map((option, index) => {
               const isSelected = option.value === value;
               const isDisabled = option.disabled || disabled;
+              const isActive = activeIndex === index;
               return (
                 <div
                   key={option.value}
+                  id={`${selectId}-option-${index}`}
                   role="option"
                   aria-selected={isSelected}
                   tabIndex={isDisabled ? -1 : 0}
                   className={`
                     px-4 py-3 flex items-center justify-between gap-2 cursor-pointer
                     ${isSelected ? 'bg-white/10 text-[var(--sys-color-inkGold-base)]' : 'text-[var(--sys-color-worker-ash-base)]'}
+                    ${isActive ? 'outline-none ring-1 ring-[var(--sys-color-inkGold-base)]' : ''}
                     ${isDisabled ? 'opacity-50 cursor-not-allowed' : 'hover:bg-white/5'}
                     transition-colors duration-[var(--duration-fast)]
                   `}
                   onClick={() => !isDisabled && handleSelect(option.value)}
-                  onKeyDown={(e) => !isDisabled && handleKeyDown(e, option.value)}
+                  onMouseEnter={() => !isDisabled && setActiveIndex(index)}
+                  onKeyDown={(e) => !isDisabled && handleOptionKeyDown(e, option.value, index)}
                 >
                   <span className="font-field-note">{option.label}</span>
                   {isSelected && (
@@ -220,6 +325,7 @@ export function March({
 
       {displayHelperText && (
         <p
+          id={helperId}
           className={`
           mt-1 px-1 text-xs
           ${error ? 'text-[var(--sys-color-solidarityRed-base)]' : 'text-[var(--sys-color-worker-ash-base)]'}
