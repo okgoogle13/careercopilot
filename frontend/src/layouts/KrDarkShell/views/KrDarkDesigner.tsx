@@ -44,7 +44,7 @@ export const KrDarkDesigner: React.FC = () => {
           <span className="font-mono text-[10px] uppercase tracking-widest text-paper-white/30">
             PROJECT_ID: KR_SOLIDARITY_01
           </span>
-          <div className="w-1.5 h-1.5 rounded-sentry bg-ink-gold animate-pulse" />
+          <div className="w-1.5 h-1.5 rounded-march bg-ink-gold animate-pulse" />
         </div>
 
         <div className="ml-auto flex gap-4">
@@ -66,7 +66,7 @@ export const KrDarkDesigner: React.FC = () => {
           className="w-80 bg-asphalt-black border-r border-surface-KrDark-concrete-grey-high/20 p-8 flex flex-col gap-8 overflow-y-auto custom-scrollbar"
         >
           <div className="space-y-2">
-            <h4 className="text-[10px] font-annotation uppercase tracking-[0.4em] text-paper-white/40">
+            <h4 className="text-[10px] font-mono uppercase tracking-[0.4em] text-paper-white/40">
               Asset Reservoir
             </h4>
             <div className="h-px w-full bg-surface-KrDark-concrete-grey-high/20" />
@@ -77,7 +77,7 @@ export const KrDarkDesigner: React.FC = () => {
               <motion.div
                 key={i}
                 whileHover={shouldReduceMotion ? {} : { scale: 1.05 }}
-                className="aspect-square bg-surface-KrDark-concrete-grey-high/10 rounded-stone border border-surface-KrDark-concrete-grey-high/20 hover:border-ink-gold/30 flex items-center justify-center cursor-move transition-all duration-300 group shadow-viscous"
+                className="aspect-square bg-surface-KrDark-concrete-grey-high/10 rounded-megaphone border border-surface-KrDark-concrete-grey-high/20 hover:border-ink-gold/30 flex items-center justify-center cursor-move transition-all duration-300 group shadow-viscous"
               >
                 <div className="w-10 h-10 bg-surface-KrDark-concrete-grey-high/15 rounded-pebble group-hover:bg-ink-gold/10 transition-colors flex items-center justify-center">
                   <span className="font-mono text-[8px] text-paper-white/20 select-none">
@@ -101,7 +101,7 @@ export const KrDarkDesigner: React.FC = () => {
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-paper-white/[0.02] via-transparent to-transparent pointer-events-none" />
 
           <SolidarityCard className="w-full h-full max-w-5xl max-h-[90%] border-dashed border-surface-KrDark-concrete-grey-high/25 flex flex-col items-center justify-center bg-asphalt-black/40 backdrop-blur-[2px] relative cursor-crosshair">
-            <div className="absolute inset-4 border border-surface-KrDark-concrete-grey-high/20 rounded-stone border-dashed pointer-events-none opacity-40" />
+            <div className="absolute inset-4 border border-surface-KrDark-concrete-grey-high/20 rounded-megaphone border-dashed pointer-events-none opacity-40" />
 
             <div className="text-center space-y-6">
               <span className="font-proclamation text-6xl uppercase tracking-tighter text-paper-white/5 select-none">

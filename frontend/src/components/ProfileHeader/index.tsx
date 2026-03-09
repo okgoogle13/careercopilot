@@ -42,7 +42,7 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({
         <motion.div
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
-          className="relative w-48 h-48 rounded-stone overflow-hidden border-2 border-blueprint-grey/30 bg-charcoal-200"
+          className="relative w-48 h-48 rounded-megaphone overflow-hidden border-2 border-blueprint-grey/30 bg-charcoal-200"
         >
           {avatarUrl ? (
             <img

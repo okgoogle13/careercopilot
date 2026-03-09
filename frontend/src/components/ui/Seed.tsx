@@ -27,7 +27,7 @@ export interface SeedProps {
  *
  * **Kerala Rage Design Token Usage:**
  * - Colors: Kerala Rage kr-solidarity semantic palette (solidarityRed, inkGold, signalGreen, stencilYellow)
- * - Shape: Circular (rounded-sentry)
+ * - Shape: Circular (rounded-march)
  * - Motion: Spring physics cubic-bezier(0.34, 1.56, 0.64, 1) with zoom-in animation
  * - Typography: Work Sans (annotation font)
  */
@@ -69,7 +69,7 @@ export const Seed: React.FC<SeedProps> = ({
         className={`
                     absolute z-10
                     flex items-center justify-center
-                    rounded-sentry font-bold font-annotation
+                    rounded-march font-bold font-mono
                     ${colorClasses[color]}
                     ${sizeClasses[size]}
                     ${overlapClasses}

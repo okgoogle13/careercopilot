@@ -37,12 +37,12 @@ export function Settings() {
         defaultValue="profile"
         className="w-full"
       >
-        <TabsList className="bg-surface-container border border-outline-variant mb-8 p-1 rounded-tech h-auto shadow-sm">
+        <TabsList className="bg-surface-container border border-outline-variant mb-8 p-1 rounded-placard h-auto shadow-sm">
           {['Profile', 'Preferences', 'Notifications', 'Security'].map((tab) => (
             <TabsTrigger
               key={tab}
               value={tab.toLowerCase()}
-              className="rounded-pebble data-[state=active]:bg-primary-container data-[state=active]:text-on-primary-container data-[state=active]:shadow-sm text-on-surface-variant hover:text-on-surface transition-all px-6 py-2 ease-spring duration-300"
+              className="rounded-march data-[state=active]:bg-primary-container data-[state=active]:text-on-primary-container data-[state=active]:shadow-sm text-on-surface-variant hover:text-on-surface transition-all px-6 py-2 ease-spring duration-300"
             >
               {tab}
             </TabsTrigger>
@@ -52,7 +52,7 @@ export function Settings() {
         {/* Profile Tab */}
         <TabsContent value="profile">
           <div
-            className="bg-surface-container rounded-tech p-8 border border-outline-variant shadow-elevation-1"
+            className="bg-surface-container rounded-placard p-8 border border-outline-variant shadow-elevation-1"
             style={cardStyle}
           >
             <h3 className="text-on-surface mb-6 text-headline-small font-bold">Profile Settings</h3>
@@ -65,7 +65,7 @@ export function Settings() {
                   <Input
                     value={firstName}
                     onChange={(e) => setFirstName(e.target.value)}
-                    className="bg-surface-container-high border-outline-variant text-on-surface rounded-pebble h-12 focus:ring-primary focus:border-primary transition-all ease-spring"
+                    className="bg-surface-container-high border-outline-variant text-on-surface rounded-scaffold h-12 focus:ring-primary focus:border-primary transition-all ease-spring"
                   />
                 </div>
                 <div>
@@ -75,7 +75,7 @@ export function Settings() {
                   <Input
                     value={lastName}
                     onChange={(e) => setLastName(e.target.value)}
-                    className="bg-surface-container-high border-outline-variant text-on-surface rounded-pebble h-12 focus:ring-primary focus:border-primary transition-all ease-spring"
+                    className="bg-surface-container-high border-outline-variant text-on-surface rounded-scaffold h-12 focus:ring-primary focus:border-primary transition-all ease-spring"
                   />
                 </div>
               </div>
@@ -88,7 +88,7 @@ export function Settings() {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="bg-surface-container-high border-outline-variant text-on-surface rounded-pebble h-12 focus:ring-primary focus:border-primary transition-all ease-spring"
+                  className="bg-surface-container-high border-outline-variant text-on-surface rounded-scaffold h-12 focus:ring-primary focus:border-primary transition-all ease-spring"
                 />
               </div>
 
@@ -101,11 +101,11 @@ export function Settings() {
                   onChange={(e) => setBio(e.target.value)}
                   placeholder="Tell us about yourself..."
                   rows={4}
-                  className="bg-surface-container-high border-outline-variant text-on-surface rounded-tech focus:ring-primary focus:border-primary resize-none transition-all ease-spring"
+                  className="bg-surface-container-high border-outline-variant text-on-surface rounded-scaffold focus:ring-primary focus:border-primary resize-none transition-all ease-spring"
                 />
               </div>
 
-              <Button className="bg-primary text-on-primary hover:bg-primary/90 rounded-gem px-8 h-12 shadow-sm hover:shadow-elevation-1 transition-all ease-spring">
+              <Button className="bg-primary text-on-primary hover:bg-primary/90 rounded-strike px-8 h-12 shadow-sm hover:shadow-elevation-1 transition-all ease-spring">
                 Save Changes
               </Button>
             </div>
@@ -115,7 +115,7 @@ export function Settings() {
         {/* Preferences Tab */}
         <TabsContent value="preferences">
           <div
-            className="bg-surface-container rounded-tech p-8 border border-outline-variant shadow-elevation-1"
+            className="bg-surface-container rounded-placard p-8 border border-outline-variant shadow-elevation-1"
             style={cardStyle}
           >
             <h3 className="text-on-surface mb-6 text-headline-small font-bold">Preferences</h3>
@@ -152,7 +152,7 @@ export function Settings() {
         {/* Notifications Tab */}
         <TabsContent value="notifications">
           <div
-            className="bg-surface-container rounded-tech p-8 border border-outline-variant shadow-elevation-1"
+            className="bg-surface-container rounded-placard p-8 border border-outline-variant shadow-elevation-1"
             style={cardStyle}
           >
             <h3 className="text-on-surface mb-6 text-headline-small font-bold">
@@ -191,7 +191,7 @@ export function Settings() {
         {/* Security Tab */}
         <TabsContent value="security">
           <div
-            className="bg-surface-container rounded-tech p-8 border border-outline-variant shadow-elevation-1"
+            className="bg-surface-container rounded-placard p-8 border border-outline-variant shadow-elevation-1"
             style={cardStyle}
           >
             <h3 className="text-on-surface mb-6 text-headline-small font-bold">
@@ -205,7 +205,7 @@ export function Settings() {
                 <Input
                   type="password"
                   placeholder="••••••••"
-                  className="bg-surface-container-high border-outline-variant text-on-surface rounded-pebble h-12 focus:ring-primary focus:border-primary transition-all ease-spring"
+                  className="bg-surface-container-high border-outline-variant text-on-surface rounded-scaffold h-12 focus:ring-primary focus:border-primary transition-all ease-spring"
                 />
               </div>
 
@@ -216,7 +216,7 @@ export function Settings() {
                 <Input
                   type="password"
                   placeholder="••••••••"
-                  className="bg-surface-container-high border-outline-variant text-on-surface rounded-pebble h-12 focus:ring-primary focus:border-primary transition-all ease-spring"
+                  className="bg-surface-container-high border-outline-variant text-on-surface rounded-scaffold h-12 focus:ring-primary focus:border-primary transition-all ease-spring"
                 />
               </div>
 
@@ -227,11 +227,11 @@ export function Settings() {
                 <Input
                   type="password"
                   placeholder="••••••••"
-                  className="bg-surface-container-high border-outline-variant text-on-surface rounded-pebble h-12 focus:ring-primary focus:border-primary transition-all ease-spring"
+                  className="bg-surface-container-high border-outline-variant text-on-surface rounded-scaffold h-12 focus:ring-primary focus:border-primary transition-all ease-spring"
                 />
               </div>
 
-              <Button className="bg-primary text-on-primary hover:bg-primary/90 rounded-gem px-8 h-12 shadow-sm hover:shadow-elevation-1 transition-all ease-spring">
+              <Button className="bg-primary text-on-primary hover:bg-primary/90 rounded-strike px-8 h-12 shadow-sm hover:shadow-elevation-1 transition-all ease-spring">
                 Update Password
               </Button>
             </div>

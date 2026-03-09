@@ -52,7 +52,7 @@ export function ArchetypeMorphPreviewer({ onInteraction }: { onInteraction?: () 
         <button
           type="button"
           onClick={handleToggle}
-          className="px-4 py-2 bg-primary text-on-primary rounded-sentry font-bold uppercase text-xs"
+          className="px-4 py-2 bg-primary text-on-primary rounded-march font-bold uppercase text-xs"
         >
           {isActive ? 'Reset Base' : 'Activate'}
         </button>
@@ -83,7 +83,7 @@ export function ArchetypeMorphPreviewer({ onInteraction }: { onInteraction?: () 
                 key={name}
                 type="button"
                 onClick={() => setCurrentArchetype(name)}
-                className={`px-3 py-1 rounded-sentry text-xs font-bold uppercase transition-all ${
+                className={`px-3 py-1 rounded-march text-xs font-bold uppercase transition-all ${
                   currentArchetype === name
                     ? 'bg-primary text-on-primary shadow-glow-gold'
                     : 'bg-surface-dim text-on-surface hover:bg-surface-container-high border border-outline/20'
@@ -96,7 +96,7 @@ export function ArchetypeMorphPreviewer({ onInteraction }: { onInteraction?: () 
         </div>
 
         <div className="space-y-3">
-          <p className="text-sm font-bold text-ink-gold font-bloom">Active Contract</p>
+          <p className="text-sm font-bold text-ink-gold font-display">Active Contract</p>
           <div className="bg-surface-dim p-4 rounded-pebble text-[10px] font-mono space-y-2 border border-outline/20">
             <div className="flex justify-between border-b border-outline/10 pb-1">
               <span className="opacity-50">easing</span>
@@ -333,7 +333,7 @@ export function LayoutSlopAuditor({ onInteraction }: { onInteraction?: () => voi
           {testType === 'correct' ? (
             <motion.div
               ref={elementRef}
-              className="text-2xl font-bloom text-worker-ash cursor-help"
+              className="text-2xl font-display text-worker-ash cursor-help"
               style={{ fontVariationSettings: "'wght' 400, 'GRAD' 0" }}
               animate={{
                 fontVariationSettings: isHovered
@@ -347,7 +347,7 @@ export function LayoutSlopAuditor({ onInteraction }: { onInteraction?: () => voi
           ) : (
             <motion.div
               ref={elementRef}
-              className="text-2xl font-bloom text-solidarity-crimson cursor-help"
+              className="text-2xl font-display text-solidarity-crimson cursor-help"
               initial={{ fontWeight: 400 }}
               animate={{ fontWeight: isHovered ? 800 : 400 }}
               transition={{ type: 'spring', stiffness: 200, damping: 10 }}

@@ -177,7 +177,7 @@ export const IngestionPage: React.FC = () => {
               <img
                 src={solidarityTexture}
                 alt="Verified"
-                className="w-full h-full object-contain rounded-stone border-4 border-ink-gold"
+                className="w-full h-full object-contain rounded-megaphone border-4 border-ink-gold"
               />
             </motion.div>
           )}
@@ -192,14 +192,14 @@ export const IngestionPage: React.FC = () => {
               steps={['Choose field', 'Upload resume', 'Review']}
             />
           </div>
-          <div className="w-24 h-24 bg-ink-gold/5 rounded-stone flex items-center justify-center mx-auto mb-6 border border-ink-gold/10 relative">
-            <div className="absolute inset-0 animate-pulse border border-ink-gold/5 rounded-stone scale-110" />
+          <div className="w-24 h-24 bg-ink-gold/5 rounded-megaphone flex items-center justify-center mx-auto mb-6 border border-ink-gold/10 relative">
+            <div className="absolute inset-0 animate-pulse border border-ink-gold/5 rounded-megaphone scale-110" />
             <Microscope className="w-12 h-12 text-ink-gold" />
           </div>
-          <h1 className="text-5xl font-bloom font-bold text-paper-white tracking-tighter uppercase">
+          <h1 className="text-5xl font-display font-bold text-paper-white tracking-tighter uppercase">
             Deposit Identity
           </h1>
-          <p className="font-annotation text-xs text-concrete-grey-dark mt-3 tracking-[0.3em] uppercase opacity-60">
+          <p className="font-mono text-xs text-concrete-grey-dark mt-3 tracking-[0.3em] uppercase opacity-60">
             [ PHASE.01: SEMANTIC_ARCHIVAL ]
           </p>
         </header>
@@ -211,7 +211,7 @@ export const IngestionPage: React.FC = () => {
             variant="tonal"
             className="mb-8 border-l-4"
           >
-            <span className="font-annotation uppercase text-[10px] mr-2">Core Fault:</span> {error}
+            <span className="font-mono uppercase text-[10px] mr-2">Core Fault:</span> {error}
           </Signal>
         )}
 
@@ -232,16 +232,16 @@ export const IngestionPage: React.FC = () => {
           disabled={isLoading || selectedFiles.length === 0}
           isLoading={isLoading}
           size="lg"
-          className="w-full h-20 text-xl font-black rounded-stone"
+          className="w-full h-20 text-xl font-black rounded-megaphone"
         >
           {isLoading ? getStageMessage() : 'Initialize Archival'}
         </Pebble>
 
         {/* KrDark Technical Audit */}
-        <div className="mt-12 p-6 bg-asphalt-black/40 rounded-stone border border-concrete-grey/10 flex gap-5">
+        <div className="mt-12 p-6 bg-asphalt-black/40 rounded-megaphone border border-concrete-grey/10 flex gap-5">
           <Microscope className="w-8 h-8 text-ink-gold/40 shrink-0" />
-          <p className="font-field-note text-[11px] text-paper-white/50 leading-relaxed italic">
-            <strong className="text-paper-white font-annotation uppercase tracking-wider not-italic">
+          <p className="font-primary text-[11px] text-paper-white/50 leading-relaxed italic">
+            <strong className="text-paper-white font-mono uppercase tracking-wider not-italic">
               Compliance Audit:
             </strong>{' '}
             Professional vectors are extracted via industrial-grade LLM processing. This process

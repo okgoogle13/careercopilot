@@ -32,7 +32,7 @@ export const KrDarkOnboarding: React.FC = () => {
         <h1 className="font-proclamation text-5xl md:text-7xl uppercase text-paper-white tracking-widest">
           Welcome, Field Agent.
         </h1>
-        <p className="font-annotation text-[10px] uppercase tracking-[0.4em] text-solidarity-red/80">
+        <p className="font-mono text-[10px] uppercase tracking-[0.4em] text-solidarity-red/80">
           Initializing Induction Protocol
         </p>
       </motion.div>
@@ -51,7 +51,7 @@ export const KrDarkOnboarding: React.FC = () => {
                 <span className="font-mono text-[10px] text-paper-white/20">STEP_0{idx + 1}</span>
                 <div className="mx-4 h-px flex-1 bg-surface-KrDark-concrete-grey-high/20" />
                 <div
-                  className={`w-2 h-2 rounded-sentry ${idx === 0 ? 'bg-ink-gold shadow-ink-glow' : 'bg-surface-KrDark-concrete-grey-high/30'}`}
+                  className={`w-2 h-2 rounded-march ${idx === 0 ? 'bg-ink-gold shadow-ink-glow' : 'bg-surface-KrDark-concrete-grey-high/30'}`}
                 />
               </div>
 

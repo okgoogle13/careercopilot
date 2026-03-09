@@ -129,8 +129,8 @@ export function CoverLetterGenerator() {
     <div className="p-6 md:p-12 max-w-5xl mx-auto animate-in fade-in zoom-in-95 duration-500 ease-spring">
       <PageHeader
         title="Cover Letter Generator"
-        highlightedWord="Genius"
-        description="Create tailored, high-impact cover letters in seconds"
+        highlightedWord="Workbench"
+        description="Create role-specific cover letters with clear, guided steps."
       />
 
       {/* Progress Stepper */}
@@ -141,7 +141,7 @@ export function CoverLetterGenerator() {
             className="flex items-center"
           >
             <div
-              className={`w-10 h-10 rounded-sentry flex items-center justify-center font-bold text-lg transition-colors ${
+              className={`w-10 h-10 rounded-march flex items-center justify-center font-bold text-lg transition-colors ${
                 step >= s
                   ? 'bg-primary text-on-primary shadow-elevation-1'
                   : 'bg-surface-container-high text-on-surface-variant'
@@ -151,7 +151,7 @@ export function CoverLetterGenerator() {
             </div>
             {s < 4 && (
               <div
-                className={`w-12 h-1 mx-2 rounded-sentry ${
+                className={`w-12 h-1 mx-2 rounded-march ${
                   step > s ? 'bg-primary' : 'bg-surface-container-high'
                 }`}
               />
@@ -159,13 +159,16 @@ export function CoverLetterGenerator() {
           </div>
         ))}
       </div>
+      <p className="mb-6 text-center text-label-small font-mono uppercase tracking-wider text-on-surface-variant">
+        Step {step} of 4 · Estimated time: {step < 4 ? '2–4 min' : 'Complete'}
+      </p>
 
       {/* Main Card */}
       <motion.div
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ type: 'spring', stiffness: 210, damping: 24 }}
-        className="bg-surface-container rounded-leaf p-8 border border-outline-variant shadow-elevation-1 relative overflow-hidden"
+        className="bg-surface-container rounded-placard p-8 border border-outline-variant shadow-elevation-1 relative overflow-hidden"
       >
         <AnimatePresence mode="wait">
           {/* Step 1: Job Details */}
@@ -181,7 +184,7 @@ export function CoverLetterGenerator() {
               </div>
 
               {/* URL Import Section */}
-              <div className="p-4 bg-secondary-container/20 rounded-tech border border-secondary-container">
+              <div className="p-4 bg-secondary-container/20 rounded-megaphone border border-secondary-container">
                 <label className="block text-on-surface mb-2 text-label-large font-bold">
                   Import from URL (Optional)
                 </label>
@@ -189,7 +192,7 @@ export function CoverLetterGenerator() {
                   <Input
                     value={jobUrl}
                     onChange={(e) => setJobUrl(e.target.value)}
-                    placeholder="Paste job listing URL (e.g. LinkedIn, Seek, Indeed)..."
+                    placeholder="Paste a job listing URL (LinkedIn, Seek, Indeed)..."
                     className="bg-surface"
                   />
                   <Button
@@ -203,7 +206,7 @@ export function CoverLetterGenerator() {
                       </>
                     ) : (
                       <>
-                        <Sparkles className="w-4 h-4 mr-2" /> Auto-Fill
+                        <Sparkles className="w-4 h-4 mr-2" /> Extract Details
                       </>
                     )}
                   </Button>
@@ -219,7 +222,7 @@ export function CoverLetterGenerator() {
                   <span className="w-full border-t border-outline-variant" />
                 </div>
                 <div className="relative flex justify-center text-xs uppercase">
-                  <span className="bg-surface px-2 text-on-surface-variant">Or paste manually</span>
+                  <span className="bg-surface px-2 text-on-surface-variant">Or enter manually</span>
                 </div>
               </div>
 
@@ -231,14 +234,14 @@ export function CoverLetterGenerator() {
                   value={jobDescription}
                   onChange={(e) => setJobDescription(e.target.value)}
                   placeholder="Paste the full job description here..."
-                  className="bg-surface-container-high border-outline-variant text-on-surface rounded-tech resize-none h-64 focus:ring-primary focus:border-primary font-body text-body-medium"
+                  className="bg-surface-container-high border-outline-variant text-on-surface rounded-scaffold resize-none h-64 focus:ring-primary focus:border-primary font-body text-body-medium"
                 />
               </div>
               <div className="flex justify-end">
                 <Button
                   onClick={handleNext}
                   disabled={!jobDescription.trim()}
-                  className="bg-primary-container text-on-primary-container hover:bg-primary hover:text-on-primary rounded-pebble px-8 h-12 flex items-center gap-2 font-bold transition-all shadow-sm"
+                  className="bg-primary-container text-on-primary-container hover:bg-primary hover:text-on-primary rounded-strike px-8 h-12 flex items-center gap-2 font-bold transition-all shadow-sm"
                 >
                   Next Step <ArrowRight className="w-4 h-4" />
                 </Button>
@@ -295,7 +298,7 @@ export function CoverLetterGenerator() {
                 <Button
                   onClick={handleNext}
                   disabled={!companyName.trim()}
-                  className="bg-primary-container text-on-primary-container hover:bg-primary hover:text-on-primary rounded-pebble px-8 h-12 flex items-center gap-2 font-bold"
+                  className="bg-primary-container text-on-primary-container hover:bg-primary hover:text-on-primary rounded-strike px-8 h-12 flex items-center gap-2 font-bold"
                 >
                   Next Step <ArrowRight className="w-4 h-4" />
                 </Button>
@@ -327,7 +330,7 @@ export function CoverLetterGenerator() {
                         key={s}
                         onClick={() => setStyle(s)}
                         aria-pressed={style === s}
-                        className={`p-4 rounded-tech border-2 capitalize font-bold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--sys-color-inkGold-base)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--sys-color-charcoalBackground-base)] ${
+                        className={`p-4 rounded-scaffold border-2 capitalize font-bold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--sys-color-inkGold-base)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--sys-color-charcoalBackground-base)] ${
                           style === s
                             ? 'border-primary bg-primary-container text-on-primary-container'
                             : 'border-outline-variant hover:border-outline'
@@ -346,8 +349,8 @@ export function CoverLetterGenerator() {
                   <Textarea
                     value={instructions}
                     onChange={(e) => setInstructions(e.target.value)}
-                    placeholder="e.g. Emphasize my leadership experience, keep it under 300 words..."
-                    className="bg-surface-container-high border-outline-variant h-32"
+                    placeholder="e.g. Emphasize stakeholder engagement and keep under 300 words."
+                    className="bg-surface-container-high border-outline-variant h-32 rounded-scaffold"
                   />
                 </div>
               </div>
@@ -363,10 +366,10 @@ export function CoverLetterGenerator() {
                 <Button
                   onClick={handleGenerate}
                   disabled={loading}
-                  className="bg-tertiary-container text-on-tertiary-container hover:bg-tertiary hover:text-on-tertiary rounded-pebble px-8 h-12 flex items-center gap-2 font-bold shadow-elevation-1"
+                  className="bg-tertiary-container text-on-tertiary-container hover:bg-tertiary hover:text-on-tertiary rounded-strike px-8 h-12 flex items-center gap-2 font-bold shadow-elevation-1"
                 >
                   <Sparkles className="w-5 h-5" />
-                  {loading ? 'Generating...' : 'Generate Letter'}
+                  {loading ? 'Generating...' : 'Generate Cover Letter'}
                 </Button>
               </div>
             </motion.div>
@@ -397,7 +400,7 @@ export function CoverLetterGenerator() {
               <div
                 id="cover-letter-content"
                 aria-live="polite"
-                className="bg-surface-container-low rounded-tech p-8 text-on-surface whitespace-pre-wrap border border-outline-variant shadow-inner font-serif text-body-large leading-relaxed max-h-[600px] overflow-y-auto"
+                className="bg-surface-container-low rounded-megaphone p-8 text-on-surface whitespace-pre-wrap border border-outline-variant shadow-inner font-serif text-body-large leading-relaxed max-h-[600px] overflow-y-auto"
               >
                 {generatedLetter}
               </div>

@@ -144,14 +144,14 @@ export function Dashboard() {
             variants={item as any}
             className="space-y-2"
           >
-            <p className="font-annotation text-xs text-ink-gold tracking-[0.6em] uppercase opacity-60">
+            <p className="font-mono text-xs text-ink-gold tracking-[0.6em] uppercase opacity-60">
               [ SOLIDARITY.REPORT_SUMMARY ]
             </p>
             <h1 className="font-display text-7xl font-black text-paper-white tracking-tighter uppercase leading-[0.9]">
               SOLIDARITY <span className="text-ink-gold">HUB</span>
             </h1>
             <p className="font-primary text-lg text-concrete-grey opacity-70 italic">
-              "Archival synthesis reveals multiple resistance pathways."
+              "Track your current application pipeline and next best actions."
             </p>
           </motion.div>
 
@@ -161,15 +161,15 @@ export function Dashboard() {
             className="flex gap-6"
           >
             <div className="text-right">
-              <span className="block font-annotation text-[10px] text-concrete-grey-dark uppercase tracking-widest">
-                Growth Rate
+              <span className="block font-mono text-[10px] text-concrete-grey-dark uppercase tracking-widest">
+                Match Trend
               </span>
               <span className="text-2xl font-black text-paper-white">+14%</span>
             </div>
             <div className="w-px bg-concrete-grey/20 h-10" />
             <div className="text-right">
-              <span className="block font-annotation text-[10px] text-concrete-grey-dark uppercase tracking-widest">
-                KrMotifs Found
+              <span className="block font-mono text-[10px] text-concrete-grey-dark uppercase tracking-widest">
+                Roles Tracked
               </span>
               <span className="text-2xl font-black text-paper-white">42</span>
             </div>
@@ -190,7 +190,7 @@ export function Dashboard() {
               <div className="space-y-1">
                 <div className="flex items-center gap-3 text-ink-gold mb-3">
                   <FileText className="w-6 h-6" />
-                  <span className="font-annotation text-[10px] uppercase tracking-[0.3em] font-bold">
+                  <span className="font-mono text-[10px] uppercase tracking-[0.3em] font-bold">
                     Active Inquiries
                   </span>
                 </div>
@@ -209,7 +209,7 @@ export function Dashboard() {
               <div className="space-y-1">
                 <div className="flex items-center gap-3 text-concrete-grey mb-3">
                   <Target className="w-6 h-6" />
-                  <span className="font-annotation text-[10px] uppercase tracking-[0.3em] font-bold">
+                  <span className="font-mono text-[10px] uppercase tracking-[0.3em] font-bold">
                     High Calibration
                   </span>
                 </div>
@@ -217,7 +217,7 @@ export function Dashboard() {
                   <span className="text-7xl font-black text-paper-white leading-none tracking-tighter">
                     03
                   </span>
-                  <span className="text-[10px] font-annotation text-ink-gold uppercase opacity-50 tracking-widest leading-none">
+                  <span className="text-[10px] font-mono text-ink-gold uppercase opacity-50 tracking-widest leading-none">
                     ≥ 90% Match
                   </span>
                 </div>
@@ -227,12 +227,12 @@ export function Dashboard() {
               <div className="space-y-1">
                 <div className="flex items-center gap-3 text-tertiary mb-3">
                   <Zap className="w-6 h-6" />
-                  <span className="font-annotation text-[10px] uppercase tracking-[0.3em] font-bold">
+                  <span className="font-mono text-[10px] uppercase tracking-[0.3em] font-bold">
                     Synthesis Velocity
                   </span>
                 </div>
                 <div className="relative pt-4">
-                  <div className="h-1.5 w-full bg-white/5 rounded-sentry overflow-hidden">
+                  <div className="h-1.5 w-full bg-white/5 rounded-march overflow-hidden">
                     <motion.div
                       initial={{ width: 0 }}
                       animate={{ width: '75%' }}
@@ -240,7 +240,7 @@ export function Dashboard() {
                       className="h-full bg-gradient-to-r from-ink-gold to-concrete-grey shadow-[0_0_10px_rgba(var(--color-ink-gold),0.5)]"
                     />
                   </div>
-                  <p className="text-[9px] font-annotation text-paper-white opacity-40 mt-3 uppercase tracking-widest text-right">
+                  <p className="text-[9px] font-mono text-paper-white opacity-40 mt-3 uppercase tracking-widest text-right">
                     Optimal throughput maintained
                   </p>
                 </div>
@@ -266,7 +266,7 @@ export function Dashboard() {
             size="lg"
             className="h-16 px-10 font-bold uppercase tracking-wider shadow-glow-gold"
           >
-            <Plus className="w-5 h-5 mr-3" /> Deposit KrMotif
+            <Plus className="w-5 h-5 mr-3" /> Add Application
           </Strike>
           <Strike
             variant="secondary"
@@ -284,15 +284,15 @@ export function Dashboard() {
           </Strike>
         </motion.div>
 
-        {/* 2x2 KrMotif Grid: Optimized Application Profiles */}
+        {/* 2x2 Grid: Recent Application Profiles */}
         <section className="space-y-8">
           <div className="flex items-baseline gap-4">
             <h2 className="font-display text-3xl font-bold text-paper-white uppercase tracking-tight">
               RECENT <span className="text-ink-gold">SYNTHESIS</span>
             </h2>
             <div className="flex-1 h-px bg-concrete-grey/10" />
-            <span className="font-annotation text-[9px] text-concrete-grey opacity-50 uppercase tracking-[0.4em]">
-              KrMotif.LOG
+            <span className="font-mono text-[9px] text-concrete-grey opacity-50 uppercase tracking-[0.4em]">
+              RECENT_LOG
             </span>
           </div>
 
@@ -314,7 +314,7 @@ export function Dashboard() {
                   <div className="relative z-10 flex justify-between items-start">
                     <div className="space-y-4">
                       <div>
-                        <p className="font-annotation text-[10px] text-ink-gold uppercase tracking-[0.2em] opacity-80 mb-1">
+                        <p className="font-mono text-[10px] text-ink-gold uppercase tracking-[0.2em] opacity-80 mb-1">
                           {profile.company}
                         </p>
                         <h3 className="font-display text-2xl font-black text-paper-white tracking-tight leading-tight uppercase group-hover:text-ink-gold transition-colors">
@@ -328,7 +328,7 @@ export function Dashboard() {
                           variant={profile.status === 'EXCELLENT' ? 'success' : 'warning'}
                           showDot
                         />
-                        <span className="font-annotation text-[9px] text-concrete-grey opacity-40 uppercase tracking-widest leading-none">
+                        <span className="font-mono text-[9px] text-concrete-grey opacity-40 uppercase tracking-widest leading-none">
                           Last Audit: 2m ago
                         </span>
                       </div>
@@ -338,14 +338,14 @@ export function Dashboard() {
                       <div className="text-6xl font-black text-paper-white tracking-tighter leading-none mb-1 tabular-nums group-hover:scale-110 transition-transform origin-right">
                         {profile.score}
                       </div>
-                      <p className="font-annotation text-[9px] text-ink-gold uppercase tracking-widest font-bold opacity-60">
+                      <p className="font-mono text-[9px] text-ink-gold uppercase tracking-widest font-bold opacity-60">
                         Calibration
                       </p>
                     </div>
                   </div>
 
                   <div className="mt-8 pt-6 border-t border-concrete-grey/5 flex justify-between items-center relative z-10">
-                    <button className="text-[10px] font-annotation text-concrete-grey uppercase tracking-widest hover:text-paper-white transition-colors">
+                    <button className="text-[10px] font-mono text-concrete-grey uppercase tracking-widest hover:text-paper-white transition-colors">
                       Generate Artifacts →
                     </button>
                   </div>
@@ -365,7 +365,7 @@ export function Dashboard() {
           y: [0, -20, 0],
         }}
         transition={{ duration: 15, repeat: Infinity, ease: 'linear' }}
-        className="absolute -bottom-64 -right-64 w-[800px] h-[800px] rounded-sentry bg-gradient-to-tl from-concrete-grey/10 via-transparent to-transparent blur-3xl pointer-events-none"
+        className="absolute -bottom-64 -right-64 w-[800px] h-[800px] rounded-march bg-gradient-to-tl from-concrete-grey/10 via-transparent to-transparent blur-3xl pointer-events-none"
       />
     </div>
   );

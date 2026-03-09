@@ -17,6 +17,8 @@ export interface PathSelectionCardProps {
   onSelect: () => void;
   /** Selection status for active styling */
   isSelected?: boolean;
+  /** Optional class overrides for layout composition */
+  className?: string;
 }
 
 /**
@@ -30,6 +32,7 @@ export const PathSelectionCard: React.FC<PathSelectionCardProps> = ({
   description,
   onSelect,
   isSelected = false,
+  className,
 }) => {
   return (
     <motion.div
@@ -38,8 +41,9 @@ export const PathSelectionCard: React.FC<PathSelectionCardProps> = ({
       onClick={onSelect}
       className={cn(
         'relative w-full p-8 bg-charcoal-100 border-2 transition-all flex flex-col min-h-[400px]',
-        'rounded-stone shadow-viscous cursor-pointer overflow-hidden',
-        isSelected ? 'border-ink-gold ring-4 ring-ink-gold/20' : 'border-blueprint-grey/20'
+        'rounded-megaphone shadow-viscous cursor-pointer overflow-hidden',
+        isSelected ? 'border-ink-gold ring-4 ring-ink-gold/20' : 'border-blueprint-grey/20',
+        className
       )}
       role="button"
       aria-pressed={isSelected}

@@ -14,7 +14,7 @@ import { cn } from './utils';
  * - Colors: Kerala Rage kr-solidarity semantic palette (inkGold, solidarityRed, concreteGrey, worker-ash)
  * - Typography: Work Sans (field-note font family)
  * - Motion: Spring physics cubic-bezier(0.34, 1.56, 0.64, 1) with scale transforms
- * - Shape: Asymmetric border radius via rounded-pebble/rounded-stone utilities
+ * - Shape: Asymmetric border radius via rounded-pebble/rounded-megaphone utilities
  *
  * **Variants:**
  * - default: inkGold background (primary CTA)
@@ -31,7 +31,7 @@ import { cn } from './utils';
  * - icon: Circular (size-11)
  */
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-field-note font-semibold transition-all duration-standard var(--ease-viscous-breeze) disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:ring-2 focus-visible:ring-[var(--sys-color-inkGold-base)] active:scale-95 hover:scale-105",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-primary font-semibold transition-all duration-standard var(--ease-viscous-breeze) disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:ring-2 focus-visible:ring-[var(--sys-color-inkGold-base)] active:scale-95 hover:scale-105",
   {
     variants: {
       variant: {
@@ -48,9 +48,9 @@ const buttonVariants = cva(
       },
       size: {
         default: 'h-11 px-6 py-2 has-[>svg]:px-4 rounded-pebble',
-        sm: 'h-9 px-4 has-[>svg]:px-3 rounded-stone',
+        sm: 'h-9 px-4 has-[>svg]:px-3 rounded-megaphone',
         lg: 'h-14 px-8 has-[>svg]:px-6 text-base rounded-pebble',
-        icon: 'size-11 rounded-sentry', // Symmetric circular for icon buttons
+        icon: 'size-11 rounded-march', // Symmetric circular for icon buttons
       },
     },
     defaultVariants: {

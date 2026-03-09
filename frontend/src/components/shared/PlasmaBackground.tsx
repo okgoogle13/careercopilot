@@ -85,7 +85,7 @@ const PlasmaBlob = ({ blob, smoothX, smoothY }: PlasmaBlobProps) => {
       className="absolute top-0 left-0 w-full h-full pointer-events-none"
     >
       <motion.div
-        className={`absolute rounded-sentry ${blob.size}`}
+        className={`absolute rounded-march ${blob.size}`}
         style={{
           left: blob.initialPosition.x,
           top: blob.initialPosition.y,

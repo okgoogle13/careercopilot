@@ -31,7 +31,7 @@ export const SkillBreakdownCard: React.FC<SkillBreakdownCardProps> = ({
   isLoading: _isLoading = false,
 }) => {
   return (
-    <div className="p-8 bg-charcoal-100 rounded-stone shadow-viscous border border-blueprint-grey/10 relative overflow-hidden">
+    <div className="p-8 bg-charcoal-100 rounded-megaphone shadow-viscous border border-blueprint-grey/10 relative overflow-hidden">
       {/* Blueprint Grid Background */}
       <div className="absolute inset-0 opacity-[0.08] pointer-events-none bg-[url('/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__ui--kr-ui-018--v1.svg')] z-0" />
 
