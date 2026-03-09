@@ -73,7 +73,7 @@ export const EditableField: React.FC<EditableFieldProps> = ({
           {suggestion && (
             <button
               onClick={handleApplySuggestion}
-              className="flex items-center gap-2 px-4 py-2 bg-[var(--color-concrete-grey-base)]/10 text-[var(--color-concrete-grey-base)] rounded-sentry text-xs font-bold hover:bg-[var(--color-concrete-grey-base)] hover:text-white transition-all duration-300 border border-[var(--color-concrete-grey-base)]/20"
+              className="flex items-center gap-2 px-4 py-2 bg-[var(--color-concrete-grey-base)]/10 text-[var(--color-concrete-grey-base)] rounded-march text-xs font-bold hover:bg-[var(--color-concrete-grey-base)] hover:text-white transition-all duration-300 border border-[var(--color-concrete-grey-base)]/20"
             >
               <Sparkles className="w-3 h-3" />
               Seed AI Suggestion
@@ -82,7 +82,7 @@ export const EditableField: React.FC<EditableFieldProps> = ({
         </div>
 
         {suggestion && (
-          <div className="mt-4 p-3 bg-[var(--color-ink-gold)]/5 border border-[var(--color-ink-gold)]/10 rounded-stone">
+          <div className="mt-4 p-3 bg-[var(--color-ink-gold)]/5 border border-[var(--color-ink-gold)]/10 rounded-megaphone">
             <p className="text-xs text-[var(--color-ink-gold)]/70 italic leading-relaxed">
               💡 Concept: {suggestion}
             </p>

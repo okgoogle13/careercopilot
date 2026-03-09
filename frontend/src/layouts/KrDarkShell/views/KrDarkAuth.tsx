@@ -36,7 +36,7 @@ export const KrDarkAuth: React.FC = () => {
             <h2 className="font-proclamation text-4xl uppercase text-paper-white tracking-widest">
               Secure Station
             </h2>
-            <p className="font-annotation text-[10px] uppercase tracking-[0.3em] text-paper-white/40">
+            <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-paper-white/40">
               Identity Verification Required
             </p>
           </div>
@@ -49,7 +49,7 @@ export const KrDarkAuth: React.FC = () => {
               <input
                 type="text"
                 placeholder="PROX_IDENTIFIER"
-                className="w-full bg-asphalt-black/50 border border-surface-KrDark-concrete-grey-high/20 rounded-stone px-6 py-4 font-mono text-sm text-paper-white focus:outline-none focus:border-ink-gold/40 transition-colors"
+                className="w-full bg-asphalt-black/50 border border-surface-KrDark-concrete-grey-high/20 rounded-megaphone px-6 py-4 font-mono text-sm text-paper-white focus:outline-none focus:border-ink-gold/40 transition-colors"
               />
             </div>
 
@@ -60,7 +60,7 @@ export const KrDarkAuth: React.FC = () => {
               <input
                 type="password"
                 placeholder="••••••••"
-                className="w-full bg-asphalt-black/50 border border-surface-KrDark-concrete-grey-high/20 rounded-stone px-6 py-4 font-mono text-sm text-paper-white focus:outline-none focus:border-ink-gold/40 transition-colors"
+                className="w-full bg-asphalt-black/50 border border-surface-KrDark-concrete-grey-high/20 rounded-megaphone px-6 py-4 font-mono text-sm text-paper-white focus:outline-none focus:border-ink-gold/40 transition-colors"
               />
             </div>
 

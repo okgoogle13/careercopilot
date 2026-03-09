@@ -53,7 +53,7 @@ export const NexusInput = React.forwardRef<HTMLInputElement, NexusInputProps>(
             aria-label={label}
             className={cn(
               // Base Styles
-              'w-full bg-asphalt-black text-paper-white font-field-note',
+              'w-full bg-asphalt-black text-paper-white font-primary',
               'border-2 border-white/10 rounded-pebble',
               'placeholder:text-white/30',
 
@@ -72,7 +72,7 @@ export const NexusInput = React.forwardRef<HTMLInputElement, NexusInputProps>(
             )}
             style={{
               // Ensure we don't accidentally inherit display fonts
-              fontFamily: 'var(--font-field-note)',
+              fontFamily: 'var(--font-primary)',
             }}
             {...props}
           />

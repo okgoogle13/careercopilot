@@ -77,7 +77,7 @@ export const ApplicationForm: React.FC<ApplicationFormProps> = ({
               exit={{ opacity: 0 }}
               className="flex flex-col items-center gap-4"
             >
-              <div className="w-12 h-12 border-4 border-ink-gold border-t-transparent rounded-sentry animate-spin" />
+              <div className="w-12 h-12 border-4 border-ink-gold border-t-transparent rounded-march animate-spin" />
               <span className="font-jetbrains-mono text-xs uppercase text-ink-gold">
                 Verifying Integrity...
               </span>

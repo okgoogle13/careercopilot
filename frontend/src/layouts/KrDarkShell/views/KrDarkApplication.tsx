@@ -37,7 +37,7 @@ export const KrDarkApplication: React.FC = () => {
 
           <div className="space-y-4">
             <div className="flex justify-between items-baseline">
-              <label className="font-annotation text-[10px] uppercase tracking-[0.4em] text-paper-white/40">
+              <label className="font-mono text-[10px] uppercase tracking-[0.4em] text-paper-white/40">
                 Statement of Collective Intent
               </label>
               <span className="font-mono text-[9px] text-paper-white/20 uppercase">
@@ -47,7 +47,7 @@ export const KrDarkApplication: React.FC = () => {
 
             <div className="relative">
               <textarea
-                className="w-full h-64 bg-asphalt-black/50 border border-surface-KrDark-concrete-grey-high/20 rounded-stone p-8 font-body text-lg leading-relaxed text-paper-white placeholder:text-paper-white/10 focus:outline-none focus:border-ink-gold/40 focus:ring-1 focus:ring-ink-gold/10 transition-all duration-500 resize-none shadow-viscous"
+                className="w-full h-64 bg-asphalt-black/50 border border-surface-KrDark-concrete-grey-high/20 rounded-megaphone p-8 font-body text-lg leading-relaxed text-paper-white placeholder:text-paper-white/10 focus:outline-none focus:border-ink-gold/40 focus:ring-1 focus:ring-ink-gold/10 transition-all duration-500 resize-none shadow-viscous"
                 placeholder="Declare why your extracted mastery aligns with this specific tactical front line..."
               />
               <div className="absolute bottom-4 right-6 pointer-events-none opacity-20">
@@ -64,9 +64,9 @@ export const KrDarkApplication: React.FC = () => {
                 SEQUENCE:
               </span>
               <div className="flex gap-3">
-                <div className="w-5 h-1 bg-ink-gold rounded-sentry shadow-ink-glow" />
-                <div className="w-5 h-1 bg-surface-KrDark-concrete-grey-high/25 rounded-sentry" />
-                <div className="w-5 h-1 bg-surface-KrDark-concrete-grey-high/25 rounded-sentry" />
+                <div className="w-5 h-1 bg-ink-gold rounded-march shadow-ink-glow" />
+                <div className="w-5 h-1 bg-surface-KrDark-concrete-grey-high/25 rounded-march" />
+                <div className="w-5 h-1 bg-surface-KrDark-concrete-grey-high/25 rounded-march" />
               </div>
               <span className="font-mono text-[10px] text-paper-white/40 ml-4 group-hover:text-ink-gold transition-colors">
                 01 / 03

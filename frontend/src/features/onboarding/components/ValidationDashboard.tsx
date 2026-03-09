@@ -335,7 +335,7 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
                     key={achievement.Achievement_ID}
                     className="relative pl-6 border-l border-white/10 pb-8 last:pb-0"
                   >
-                    <div className="absolute left-[-5px] top-0 w-[9px] h-[9px] rounded-sentry bg-[var(--sys-color-inkGold-base)] shadow-[0_0_8px_var(--sys-color-inkGold-base)]" />
+                    <div className="absolute left-[-5px] top-0 w-[9px] h-[9px] rounded-march bg-[var(--sys-color-inkGold-base)] shadow-[0_0_8px_var(--sys-color-inkGold-base)]" />
 
                     <div className="flex justify-between items-center mb-6">
                       <span className="text-[10px] text-[var(--sys-color-concreteGrey-steps-3)] uppercase tracking-widest">
@@ -414,7 +414,7 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
                     </div>
 
                     {ksc.Needs_Review_Flag && ksc.STAR_Feedback && (
-                      <div className="bg-[var(--sys-color-inkGold-steps-0)] border border-[var(--sys-color-inkGold-steps-2)] rounded-stone p-4 mb-8 flex gap-4">
+                      <div className="bg-[var(--sys-color-inkGold-steps-0)] border border-[var(--sys-color-inkGold-steps-2)] rounded-megaphone p-4 mb-8 flex gap-4">
                         <BrainCircuit className="w-5 h-5 text-[var(--sys-color-inkGold-base)] shrink-0" />
                         <div className="text-xs text-[var(--sys-color-paperWhite-base)]/80 leading-relaxed">
                           <span className="font-bold text-[var(--sys-color-inkGold-base)] uppercase tracking-tighter block mb-1">
@@ -451,7 +451,7 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
 
         {/* Footer Validation */}
         <footer className="mt-20 pt-10 border-t border-white/5 flex justify-center pb-20">
-          <div className="flex items-center gap-3 px-6 py-3 bg-[var(--sys-color-concreteGrey-base)]/10 text-[var(--sys-color-concreteGrey-base)] rounded-sentry text-xs uppercase tracking-[0.2em] border border-[var(--sys-color-concreteGrey-base)]/20 shadow-lg">
+          <div className="flex items-center gap-3 px-6 py-3 bg-[var(--sys-color-concreteGrey-base)]/10 text-[var(--sys-color-concreteGrey-base)] rounded-march text-xs uppercase tracking-[0.2em] border border-[var(--sys-color-concreteGrey-base)]/20 shadow-lg">
             <ShieldCheck className="w-4 h-4" />
             Professional Vector Validated and Production Ready
           </div>

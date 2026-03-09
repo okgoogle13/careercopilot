@@ -7,7 +7,7 @@
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  font-family: var(--font-field-note, sans-serif);
+  font-family: var(--font-primary, sans-serif);
   color: var(--color-paper-white, #f0ead6);
 }
 
@@ -139,7 +139,7 @@
 }
 
 .heroTagline {
-  font-family: var(--font-bloom);
+  font-family: var(--font-display);
   font-size: 1.5rem;
   font-style: italic;
   font-variation-settings:
@@ -164,7 +164,7 @@
   color: var(--color-asphalt-black-darkest);
   padding: 1.25rem 2.5rem;
   border-radius: var(--shape-pebbleSurge01);
-  font-family: var(--font-field-note);
+  font-family: var(--font-primary);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -185,7 +185,7 @@
   padding: 1.25rem 2.5rem;
   border-radius: var(--shape-pebbleSurge01);
   border: 2px solid var(--color-ink-gold);
-  font-family: var(--font-field-note);
+  font-family: var(--font-primary);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -200,7 +200,7 @@
 
 .btnLink {
   color: var(--color-concrete-grey-dark);
-  font-family: var(--font-annotation);
+  font-family: var(--font-mono);
   text-decoration: underline;
   text-underline-offset: 4px;
   font-size: 0.8rem;

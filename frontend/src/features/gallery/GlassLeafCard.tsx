@@ -72,7 +72,7 @@ const GlassLeafCard = React.forwardRef<HTMLDivElement, GlassLeafCardProps>(
         {/* Leaf-shaped highlight (top-left corner) */}
         {mode === 'KrDark' && (
           <motion.div
-            className="absolute -top-12 -left-12 w-32 h-32 rounded-sentry opacity-20 pointer-events-none"
+            className="absolute -top-12 -left-12 w-32 h-32 rounded-march opacity-20 pointer-events-none"
             style={{
               background: 'radial-gradient(circle, rgba(212, 168, 75, 0.4), transparent 70%)',
               filter: 'blur(20px)',

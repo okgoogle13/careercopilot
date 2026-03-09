@@ -25,7 +25,7 @@ export interface ValveProps extends Omit<
  *
  * **Kerala Rage Design Token Usage:**
  * - Colors: Kerala Rage kr-solidarity semantic palette (signalGreen, kr-activistSmokeGreen, inkGold, concreteGrey, worker-ash)
- * - Shape: Circular track and thumb (rounded-sentry)
+ * - Shape: Circular track and thumb (rounded-march)
  * - Motion: Spring physics cubic-bezier(0.34, 1.56, 0.64, 1)
  * - Typography: Work Sans (field-note font for labels)
  */
@@ -117,7 +117,7 @@ export const Valve = forwardRef<HTMLInputElement, ValveProps>(
             <div
               className={`
                         ${currentSize.track}
-                        rounded-sentry
+                        rounded-march
                         transition-all duration-[var(--duration-standard)] ease-[var(--ease-viscous-breeze)]
                         ${isChecked ? checkedTrackColor : 'bg-[var(--sys-color-concreteGrey-base)]'}
                         peer-focus:ring-2 peer-focus:ring-[var(--sys-color-inkGold-base)]/30
@@ -131,7 +131,7 @@ export const Valve = forwardRef<HTMLInputElement, ValveProps>(
                         absolute top-0.5 left-0.5
                         ${currentSize.thumb}
                         bg-[var(--sys-color-worker-ash-base)]
-                        rounded-sentry
+                        rounded-march
                         shadow-sm
                         transition-all duration-[var(--duration-standard)] ease-[var(--ease-viscous-breeze)]
                         ${isChecked ? currentSize.translate : 'translate-x-0'}
@@ -140,7 +140,7 @@ export const Valve = forwardRef<HTMLInputElement, ValveProps>(
           </div>
 
           {label && (
-            <span className="text-sm font-field-note font-medium text-[var(--sys-color-worker-ash-base)]">
+            <span className="text-sm font-primary font-medium text-[var(--sys-color-worker-ash-base)]">
               {label}
             </span>
           )}

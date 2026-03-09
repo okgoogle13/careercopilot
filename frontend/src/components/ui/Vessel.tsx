@@ -28,7 +28,7 @@ export const Vessel: React.FC<VesselProps> = ({
       >
         <div className="flex items-center gap-4">
           {icon && <div className="text-[var(--sys-color-inkGold-base)]">{icon}</div>}
-          <h3 className="font-bloom text-lg font-bold text-[var(--sys-color-worker-ash-base)]">
+          <h3 className="font-display text-lg font-bold text-[var(--sys-color-worker-ash-base)]">
             {title}
           </h3>
         </div>

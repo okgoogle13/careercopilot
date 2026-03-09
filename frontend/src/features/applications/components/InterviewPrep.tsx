@@ -326,9 +326,9 @@ export const InterviewPrep: React.FC<InterviewPrepProps> = ({ onBack }) => {
                     {currentQuestion.tips.map((tip, index) => (
                       <div
                         key={index}
-                        className="flex gap-3 items-start p-2 rounded-stone hover:bg-[var(--color-surface-base)] transition-colors"
+                        className="flex gap-3 items-start p-2 rounded-megaphone hover:bg-[var(--color-surface-base)] transition-colors"
                       >
-                        <div className="w-2 h-2 rounded-sentry bg-[var(--color-leaf-base)] mt-2 flex-shrink-0" />
+                        <div className="w-2 h-2 rounded-march bg-[var(--color-leaf-base)] mt-2 flex-shrink-0" />
                         <p className="text-body-medium text-[var(--color-text-secondary)] leading-relaxed">
                           {tip}
                         </p>
