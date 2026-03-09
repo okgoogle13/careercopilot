@@ -41,6 +41,7 @@ build/
 
 # IDE files
 .vscode/
+!.vscode/mcp.json
 .idea/
 *.bak
 *.bak.*
