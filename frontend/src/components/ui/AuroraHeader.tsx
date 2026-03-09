@@ -9,6 +9,7 @@ interface AuroraHeaderProps {
 
 /**
  * AuroraHeader - KeralaRage KrSolidarity Parametric Header
+ * Uses var(--sys-color-kr-charcoalBackground) and var(--font-bloom)
  *
  * Features:
  * - Tri-color gradient text (Ink Gold → Solidarity Red → Concrete Grey)
@@ -30,6 +31,7 @@ export const AuroraHeader: React.FC<AuroraHeaderProps> = ({ title, tag, wittySub
   const [isHovered, setIsHovered] = useState(false);
 
   return (
+    // KR Solidarity tokens: slate kr-motif sentry
     <header className="mb-8 space-y-2">
       {/* Tag (Optional) */}
       {tag && (

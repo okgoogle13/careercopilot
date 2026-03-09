@@ -1,104 +1,17 @@
-import { Button as MuiButton, ButtonProps as MuiButtonProps } from '@mui/material';
 import { forwardRef } from 'react';
 
 export type ButtonVariant = 'contained' | 'outlined' | 'text' | 'glass';
 
-export interface ButtonProps extends Omit<MuiButtonProps, 'variant'> {
-  /**
-   * The variant to use.
-   * @default 'contained'
-   */
+export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
-  /**
-   * If `true`, the button will take up the full width of its container.
-   * @default false
-   */
   fullWidth?: boolean;
-  /**
-   * The size of the button.
-   * @default 'medium'
-   */
   size?: 'small' | 'medium' | 'large';
-  /**
-   * The color of the component.
-   * @default 'primary'
-   */
   color?: 'primary' | 'secondary' | 'error' | 'warning' | 'info' | 'success';
-  /**
-   * If `true`, the button will be disabled.
-   * @default false
-   */
-  disabled?: boolean;
-  /**
-   * Element placed before the children.
-   */
   startIcon?: React.ReactNode;
-  /**
-   * Element placed after the children.
-   */
   endIcon?: React.ReactNode;
-  /**
-   * The URL to link to when the button is clicked.
-   * If defined, an `a` element will be used as the root node.
-   */
-  href?: string;
-  /**
-   * Callback fired when the button is clicked.
-   */
-  onClick?: React.MouseEventHandler<HTMLButtonElement>;
-  /**
-   * The content of the button.
-   */
-  children: React.ReactNode;
-  /**
-   * Additional CSS classes to apply to the button.
-   */
-  className?: string;
-  /**
-   * The type of button.
-   * @default 'button'
-   */
-  type?: 'button' | 'submit' | 'reset';
-  /**
-   * If `true`, the button will show a loading state.
-   * @default false
-   */
   loading?: boolean;
 }
 
-/**
- * Buttons allow users to take actions, and make choices, with a single tap.
- *
- * ## Features
- * - Multiple variants: contained, outlined, text, and glass
- * - Different colors and sizes
- * - Loading state
- * - Full-width support
- * - Icons support
- * - Accessible by default
- *
- * ## API
- * - [Button API](https://mui.com/material-ui/api/button/)
- *
- * ## Usage
- *
- * ```tsx
- * import { Button } from '@careercopilot/ui';
- *
- * function MyComponent() {
- *   return (
- *     <div>
- *       <Button variant="contained" color="primary">
- *         Primary Button
- *       </Button>
- *       <Button variant="outlined" color="secondary">
- *         Secondary Button
- *       </Button>
- *     </div>
- *   );
- * }
- * ```
- */
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
@@ -147,25 +60,21 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
     const buttonEndIcon = loading ? null : endIcon;
 
-    // Map custom variants to MUI variants
-    const muiVariant = variant === 'glass' ? 'contained' : variant;
-
     return (
-      <MuiButton
+      <button
         ref={ref}
-        variant={muiVariant}
-        color={color}
-        size={size}
-        fullWidth={fullWidth}
         disabled={disabled || loading}
-        startIcon={buttonStartIcon}
-        endIcon={buttonEndIcon}
-        className={`${variant === 'glass' ? 'glass-button' : ''} ${className || ''}`}
+        className={`inline-flex items-center justify-center font-body gap-2 transition-all duration-300 ${
+          fullWidth ? 'w-full' : ''
+        } ${className || ''}`}
+        style={{ borderRadius: 'var(--shape-blockRiot03)' }}
         type={type}
         {...rest}
       >
+        {buttonStartIcon}
         {children}
-      </MuiButton>
+        {buttonEndIcon}
+      </button>
     );
   }
 );

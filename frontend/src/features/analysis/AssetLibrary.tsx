@@ -39,7 +39,7 @@ export function AssetLibrary() {
         {assets.map((asset) => (
           <div
             key={asset.id}
-            className="bg-surface-KrDark-concrete-grey rounded-[var(--radius-organic)] p-8 border border-outline-variant/30 hover:bg-surface-KrDark-concrete-grey-high transition-all duration-500 cursor-pointer group shadow-[var(--elevation-shadow-rest)] hover:shadow-[var(--elevation-shadow-glow-gold)] hover:-translate-y-1"
+            className="bg-surface-KrDark-concrete-grey rounded-[var(--radius-organic)] p-8 border border-outline-variant/30 hover:bg-surface-KrDark-concrete-grey-high transition-all duration-300 ease-viscous cursor-pointer group shadow-[var(--elevation-shadow-rest)] hover:shadow-[var(--elevation-shadow-glow-gold)] hover:-translate-y-1"
           >
             {/* Icon */}
             <div className="flex items-center justify-center mb-6">
@@ -59,11 +59,11 @@ export function AssetLibrary() {
             </p>
 
             {/* Actions */}
-            <div className="flex gap-3 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
-              <button className="flex-1 bg-surface-KrDark-concrete-grey-highest hover:bg-ink-gold hover:text-primary-on-primary text-ink-gold rounded-[var(--radius-compact)] py-2.5 flex items-center justify-center transition-all duration-300 border border-primary-ink-gold/20">
+            <div className="flex gap-3 opacity-0 group-hover:opacity-100 transition-all duration-300 ease-viscous translate-y-2 group-hover:translate-y-0">
+              <button className="flex-1 bg-surface-KrDark-concrete-grey-highest hover:bg-ink-gold hover:text-primary-on-primary text-ink-gold rounded-[var(--radius-compact)] py-2.5 flex items-center justify-center transition-all duration-300 ease-viscous border border-primary-ink-gold/20">
                 <Download className="w-4 h-4" />
               </button>
-              <button className="flex-1 bg-surface-KrDark-concrete-grey-highest hover:bg-error hover:text-on-error text-error rounded-[var(--radius-compact)] py-2.5 flex items-center justify-center transition-all duration-300 border border-error/20">
+              <button className="flex-1 bg-surface-KrDark-concrete-grey-highest hover:bg-error hover:text-on-error text-error rounded-[var(--radius-compact)] py-2.5 flex items-center justify-center transition-all duration-300 ease-viscous border border-error/20">
                 <Trash2 className="w-4 h-4" />
               </button>
             </div>

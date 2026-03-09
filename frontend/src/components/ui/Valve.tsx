@@ -135,7 +135,3 @@ export const Valve = forwardRef<HTMLInputElement, ValveProps>(
 );
 
 Valve.displayName = 'Valve';
-
-// Legacy M3 exports for backward compatibility
-export { Valve as M3Switch };
-export type { ValveProps as M3SwitchProps };

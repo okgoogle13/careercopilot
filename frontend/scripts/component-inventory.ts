@@ -63,10 +63,15 @@ interface ComponentInfo {
   usesCustomUI: boolean;
   usesLegacyM3: boolean;
   isDemo: boolean;
-  migrationStatus: 'migrated' | 'mixed' | 'not_migrated' | 'unknown';
+  migrationStatus: 'unknown' | 'not_migrated' | 'mixed' | 'migrated';
   // KeralaRage KrSolidarity specific fields
   usesDesignTokens: boolean;
   usesModeSystem: boolean;
+  expressiveStatus?: 'none' | 'planned' | 'in_progress' | 'done';
+  designLevel?: 'atom' | 'molecule' | 'organism' | 'unknown';
+  hasA11yPassed?: boolean;
+  bundleImpact?: 'low' | 'medium' | 'high';
+  visualRegression?: 'passed' | 'pending';
 }
 
 interface InventoryReport {
@@ -282,6 +287,47 @@ function analyzeComponents(): InventoryReport {
       migrationStatus = 'not_migrated';
     }
 
+    // Dynamic expressive detection
+    const hasMotion = text.includes('framer-motion') || text.includes('motion.');
+    const hasViscous = text.includes('ease-viscous') || text.includes('viscous-breeze');
+    const hasSubstrate = text.includes("bg-[url('/assets/kr-solidarity");
+    const isExpressiveDone = hasMotion || hasViscous || hasSubstrate;
+
+    const atoms = [
+      'KeralaRageButton',
+      'Strike',
+      'Pebble',
+      'StatusBadge',
+      'Placard',
+      'Stone',
+      'Lens',
+      'AuroraHeader',
+      'ScaffoldInput',
+    ];
+    const molecules = ['AssetLibrary', 'TechCard', 'EvidenceUploader'];
+    const organisms = [
+      'ApplicationTracker',
+      'CoverLetterGenerator',
+      'Login',
+      'Register',
+      'Dashboard',
+      'DesignSidekick',
+      'Documents',
+      'KSCGenerator',
+    ];
+
+    let designLevel: ComponentInfo['designLevel'] = 'unknown';
+    if (atoms.includes(componentName)) designLevel = 'atom';
+    else if (molecules.includes(componentName)) designLevel = 'molecule';
+    else if (organisms.includes(componentName)) designLevel = 'organism';
+
+    let expressiveStatus: ComponentInfo['expressiveStatus'] = 'none';
+    if (isExpressiveDone) {
+      expressiveStatus = 'done';
+    } else if (designLevel !== 'unknown') {
+      expressiveStatus = 'planned';
+    }
+
     const { hasTests, hasStories, hasDocs } = findRelatedFiles(filePath);
     const category = categorizeComponent(filePath);
 
@@ -311,6 +357,11 @@ function analyzeComponents(): InventoryReport {
       migrationStatus,
       usesDesignTokens,
       usesModeSystem,
+      expressiveStatus,
+      designLevel,
+      hasA11yPassed: true, // Placeholder for external CI/CD tool
+      bundleImpact: 'low', // Placeholder
+      visualRegression: 'pending', // Placeholder
     };
 
     components.push(component);

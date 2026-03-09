@@ -1,21 +1,32 @@
 {
-  "generatedAt": "2026-01-25T07:05:31.243Z",
-  "totalComponents": 171,
-  "nonDemoCount": 171,
+  "generatedAt": "2026-03-09T02:04:37.657Z",
+  "totalComponents": 221,
+  "nonDemoCount": 221,
   "migrationSummary": {
-    "migrated": 83,
-    "mixed": 24,
-    "not_migrated": 4,
+    "migrated": 221,
+    "mixed": 0,
+    "not_migrated": 0,
     "expressive": 0,
-    "unknown": 60
+    "unknown": 0
   },
   "topEssential": [
     {
-      "name": "kerala-rageButton",
-      "path": "src/components/ui/kerala-rageButton.tsx",
+      "name": "KeralaRageButton",
+      "path": "src/components/ui/KeralaRageButton.tsx",
       "category": "ui",
-      "usageCount": 11,
-      "migrationStatus": "mixed",
+      "usageCount": 9,
+      "migrationStatus": "migrated",
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "hasTests": false,
+      "hasStories": true
+    },
+    {
+      "name": "Strike",
+      "path": "src/components/ui/Strike.tsx",
+      "category": "ui",
+      "usageCount": 6,
+      "migrationStatus": "migrated",
       "usesMUI": false,
       "usesCustomUI": false,
       "hasTests": false,
@@ -25,8 +36,8 @@
       "name": "Pebble",
       "path": "src/components/ui/Pebble.tsx",
       "category": "ui",
-      "usageCount": 2,
-      "migrationStatus": "mixed",
+      "usageCount": 5,
+      "migrationStatus": "migrated",
       "usesMUI": false,
       "usesCustomUI": false,
       "hasTests": false,
@@ -36,7 +47,7 @@
       "name": "StatusBadge",
       "path": "src/components/ui/StatusBadge/StatusBadge.tsx",
       "category": "ui",
-      "usageCount": 2,
+      "usageCount": 5,
       "migrationStatus": "migrated",
       "usesMUI": false,
       "usesCustomUI": false,
@@ -44,15 +55,37 @@
       "hasStories": false
     },
     {
-      "name": "GlassLeafCard",
-      "path": "src/features/kr-dark/GlassLeafCard.tsx",
-      "category": "features",
-      "usageCount": 2,
+      "name": "Placard",
+      "path": "src/components/ui/Placard.tsx",
+      "category": "ui",
+      "usageCount": 4,
       "migrationStatus": "migrated",
       "usesMUI": false,
       "usesCustomUI": false,
       "hasTests": false,
       "hasStories": false
+    },
+    {
+      "name": "Stone",
+      "path": "src/components/ui/Stone.tsx",
+      "category": "ui",
+      "usageCount": 4,
+      "migrationStatus": "migrated",
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "hasTests": false,
+      "hasStories": false
+    },
+    {
+      "name": "Lens",
+      "path": "src/components/ui/Lens.tsx",
+      "category": "ui",
+      "usageCount": 2,
+      "migrationStatus": "migrated",
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "hasTests": false,
+      "hasStories": true
     },
     {
       "name": "AuroraHeader",
@@ -66,22 +99,11 @@
       "hasStories": false
     },
     {
-      "name": "NativeAnchor",
-      "path": "src/components/ui/NativeAnchor.tsx",
+      "name": "ScaffoldInput",
+      "path": "src/components/ui/ScaffoldInput.tsx",
       "category": "ui",
       "usageCount": 1,
       "migrationStatus": "migrated",
-      "usesMUI": false,
-      "usesCustomUI": false,
-      "hasTests": false,
-      "hasStories": false
-    },
-    {
-      "name": "Stone",
-      "path": "src/components/ui/Stone.tsx",
-      "category": "ui",
-      "usageCount": 1,
-      "migrationStatus": "mixed",
       "usesMUI": false,
       "usesCustomUI": false,
       "hasTests": false,
@@ -103,7 +125,7 @@
       "path": "src/features/analysis/TechCard.tsx",
       "category": "features",
       "usageCount": 1,
-      "migrationStatus": "mixed",
+      "migrationStatus": "migrated",
       "usesMUI": false,
       "usesCustomUI": false,
       "hasTests": false,
@@ -112,6 +134,17 @@
     {
       "name": "ApplicationTracker",
       "path": "src/features/applications/ApplicationTracker.tsx",
+      "category": "features",
+      "usageCount": 1,
+      "migrationStatus": "migrated",
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "hasTests": false,
+      "hasStories": false
+    },
+    {
+      "name": "CoverLetterGenerator",
+      "path": "src/features/applications/CoverLetterGenerator.tsx",
       "category": "features",
       "usageCount": 1,
       "migrationStatus": "migrated",
@@ -149,7 +182,18 @@
       "usageCount": 1,
       "migrationStatus": "migrated",
       "usesMUI": false,
-      "usesCustomUI": false,
+      "usesCustomUI": true,
+      "hasTests": false,
+      "hasStories": false
+    },
+    {
+      "name": "DesignSidekick",
+      "path": "src/features/design-sidekick/DesignSidekick.tsx",
+      "category": "features",
+      "usageCount": 1,
+      "migrationStatus": "migrated",
+      "usesMUI": false,
+      "usesCustomUI": true,
       "hasTests": false,
       "hasStories": false
     },
@@ -185,318 +229,8 @@
       "usesCustomUI": true,
       "hasTests": false,
       "hasStories": false
-    },
-    {
-      "name": "LandingPage",
-      "path": "src/features/landing/LandingPage.tsx",
-      "category": "features",
-      "usageCount": 1,
-      "migrationStatus": "unknown",
-      "usesMUI": false,
-      "usesCustomUI": false,
-      "hasTests": false,
-      "hasStories": false
-    },
-    {
-      "name": "NotFound",
-      "path": "src/features/not-found/NotFound.tsx",
-      "category": "features",
-      "usageCount": 1,
-      "migrationStatus": "migrated",
-      "usesMUI": false,
-      "usesCustomUI": false,
-      "hasTests": false,
-      "hasStories": false
-    },
-    {
-      "name": "ValidationDashboard",
-      "path": "src/features/onboarding/components/ValidationDashboard.tsx",
-      "category": "features",
-      "usageCount": 1,
-      "migrationStatus": "migrated",
-      "usesMUI": false,
-      "usesCustomUI": true,
-      "hasTests": false,
-      "hasStories": false
-    },
-    {
-      "name": "Opportunities",
-      "path": "src/features/opportunities/Opportunities.tsx",
-      "category": "features",
-      "usageCount": 1,
-      "migrationStatus": "migrated",
-      "usesMUI": false,
-      "usesCustomUI": true,
-      "hasTests": false,
-      "hasStories": false
     }
   ],
-  "topNotMigrated": [
-    {
-      "name": "Button",
-      "path": "packages/ui/src/components/Button/Button.tsx",
-      "category": "ui_package",
-      "usageCount": 2,
-      "migrationStatus": "not_migrated",
-      "usesMUI": true,
-      "usesCustomUI": false,
-      "hasTests": false,
-      "hasStories": true
-    },
-    {
-      "name": "chart",
-      "path": "src/legacy/ui/chart.tsx",
-      "category": "legacy",
-      "usageCount": 0,
-      "migrationStatus": "not_migrated",
-      "usesMUI": false,
-      "usesCustomUI": false,
-      "hasTests": false,
-      "hasStories": false
-    },
-    {
-      "name": "collapsible",
-      "path": "src/legacy/ui/collapsible.tsx",
-      "category": "legacy",
-      "usageCount": 0,
-      "migrationStatus": "not_migrated",
-      "usesMUI": false,
-      "usesCustomUI": false,
-      "hasTests": false,
-      "hasStories": false
-    },
-    {
-      "name": "metric-card",
-      "path": "src/legacy/ui/metric-card.tsx",
-      "category": "legacy",
-      "usageCount": 0,
-      "migrationStatus": "not_migrated",
-      "usesMUI": false,
-      "usesCustomUI": false,
-      "hasTests": false,
-      "hasStories": false
-    }
-  ],
-  "topMixed": [
-    {
-      "name": "kerala-rageButton",
-      "path": "src/components/ui/kerala-rageButton.tsx",
-      "category": "ui",
-      "usageCount": 11,
-      "migrationStatus": "mixed",
-      "usesMUI": false,
-      "usesCustomUI": false,
-      "hasTests": false,
-      "hasStories": false
-    },
-    {
-      "name": "Pebble",
-      "path": "src/components/ui/Pebble.tsx",
-      "category": "ui",
-      "usageCount": 2,
-      "migrationStatus": "mixed",
-      "usesMUI": false,
-      "usesCustomUI": false,
-      "hasTests": false,
-      "hasStories": false
-    },
-    {
-      "name": "EditableField",
-      "path": "src/components/shared/EditableField.tsx",
-      "category": "shared",
-      "usageCount": 1,
-      "migrationStatus": "mixed",
-      "usesMUI": false,
-      "usesCustomUI": true,
-      "hasTests": false,
-      "hasStories": false
-    },
-    {
-      "name": "M3ErrorAlert",
-      "path": "src/components/shared/M3ErrorAlert.tsx",
-      "category": "shared",
-      "usageCount": 1,
-      "migrationStatus": "mixed",
-      "usesMUI": false,
-      "usesCustomUI": true,
-      "hasTests": false,
-      "hasStories": false
-    },
-    {
-      "name": "Stone",
-      "path": "src/components/ui/Stone.tsx",
-      "category": "ui",
-      "usageCount": 1,
-      "migrationStatus": "mixed",
-      "usesMUI": false,
-      "usesCustomUI": false,
-      "hasTests": false,
-      "hasStories": false
-    },
-    {
-      "name": "TechCard",
-      "path": "src/features/analysis/TechCard.tsx",
-      "category": "features",
-      "usageCount": 1,
-      "migrationStatus": "mixed",
-      "usesMUI": false,
-      "usesCustomUI": false,
-      "hasTests": false,
-      "hasStories": false
-    },
-    {
-      "name": "M3Button",
-      "path": "src/legacy/ui/M3Button.tsx",
-      "category": "legacy",
-      "usageCount": 1,
-      "migrationStatus": "mixed",
-      "usesMUI": false,
-      "usesCustomUI": false,
-      "hasTests": false,
-      "hasStories": false
-    },
-    {
-      "name": "M3Card",
-      "path": "src/legacy/ui/M3Card.tsx",
-      "category": "legacy",
-      "usageCount": 1,
-      "migrationStatus": "mixed",
-      "usesMUI": false,
-      "usesCustomUI": false,
-      "hasTests": false,
-      "hasStories": false
-    },
-    {
-      "name": "AnalysisPage",
-      "path": "src/pages/AnalysisPage.tsx",
-      "category": "pages",
-      "usageCount": 1,
-      "migrationStatus": "mixed",
-      "usesMUI": false,
-      "usesCustomUI": true,
-      "hasTests": false,
-      "hasStories": false
-    },
-    {
-      "name": "JobQueue",
-      "path": "src/pages/JobQueue.tsx",
-      "category": "pages",
-      "usageCount": 1,
-      "migrationStatus": "mixed",
-      "usesMUI": false,
-      "usesCustomUI": true,
-      "hasTests": true,
-      "hasStories": false
-    },
-    {
-      "name": "Cabinet",
-      "path": "src/components/ui/Cabinet.tsx",
-      "category": "ui",
-      "usageCount": 0,
-      "migrationStatus": "mixed",
-      "usesMUI": false,
-      "usesCustomUI": false,
-      "hasTests": false,
-      "hasStories": false
-    },
-    {
-      "name": "Jar",
-      "path": "src/components/ui/Jar.tsx",
-      "category": "ui",
-      "usageCount": 0,
-      "migrationStatus": "mixed",
-      "usesMUI": false,
-      "usesCustomUI": false,
-      "hasTests": false,
-      "hasStories": false
-    },
-    {
-      "name": "Lens",
-      "path": "src/components/ui/Lens.tsx",
-      "category": "ui",
-      "usageCount": 0,
-      "migrationStatus": "mixed",
-      "usesMUI": false,
-      "usesCustomUI": false,
-      "hasTests": false,
-      "hasStories": false
-    },
-    {
-      "name": "Mark",
-      "path": "src/components/ui/Mark.tsx",
-      "category": "ui",
-      "usageCount": 0,
-      "migrationStatus": "mixed",
-      "usesMUI": false,
-      "usesCustomUI": false,
-      "hasTests": false,
-      "hasStories": false
-    },
-    {
-      "name": "Seed",
-      "path": "src/components/ui/Seed.tsx",
-      "category": "ui",
-      "usageCount": 0,
-      "migrationStatus": "mixed",
-      "usesMUI": false,
-      "usesCustomUI": false,
-      "hasTests": false,
-      "hasStories": false
-    },
-    {
-      "name": "Signal",
-      "path": "src/components/ui/Signal.tsx",
-      "category": "ui",
-      "usageCount": 0,
-      "migrationStatus": "mixed",
-      "usesMUI": false,
-      "usesCustomUI": false,
-      "hasTests": false,
-      "hasStories": false
-    },
-    {
-      "name": "Valve",
-      "path": "src/components/ui/Valve.tsx",
-      "category": "ui",
-      "usageCount": 0,
-      "migrationStatus": "mixed",
-      "usesMUI": false,
-      "usesCustomUI": false,
-      "hasTests": false,
-      "hasStories": false
-    },
-    {
-      "name": "Vessel",
-      "path": "src/components/ui/Vessel.tsx",
-      "category": "ui",
-      "usageCount": 0,
-      "migrationStatus": "mixed",
-      "usesMUI": false,
-      "usesCustomUI": false,
-      "hasTests": false,
-      "hasStories": false
-    },
-    {
-      "name": "AuroraHeader",
-      "path": "src/legacy/ui/AuroraHeader.tsx",
-      "category": "legacy",
-      "usageCount": 0,
-      "migrationStatus": "mixed",
-      "usesMUI": false,
-      "usesCustomUI": false,
-      "hasTests": false,
-      "hasStories": false
-    },
-    {
-      "name": "M3Alert",
-      "path": "src/legacy/ui/M3Alert.tsx",
-      "category": "legacy",
-      "usageCount": 0,
-      "migrationStatus": "mixed",
-      "usesMUI": false,
-      "usesCustomUI": false,
-      "hasTests": false,
-      "hasStories": false
-    }
-  ]
+  "topNotMigrated": [],
+  "topMixed": []
 }

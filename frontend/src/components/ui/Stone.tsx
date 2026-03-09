@@ -54,7 +54,7 @@ export const Stone = React.forwardRef<HTMLDivElement, StoneProps>(
           boxShadow: elevations[elevation],
         }}
         className={cn(
-          'relative overflow-hidden transition-all duration-300 backdrop-blur-xl',
+          'relative overflow-hidden transition-all duration-300 ease-viscous backdrop-blur-xl',
           className
         )}
         {...props}

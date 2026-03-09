@@ -9,7 +9,7 @@ export interface VesselProps {
   className?: string;
 }
 
-export const M3Accordion: React.FC<VesselProps> = ({
+export const Vessel: React.FC<VesselProps> = ({
   title,
   icon,
   children,
@@ -48,6 +48,4 @@ export const M3Accordion: React.FC<VesselProps> = ({
   );
 };
 
-export { M3Accordion as Vessel };
-
-M3Accordion.displayName = 'Vessel';
+Vessel.displayName = 'Vessel';

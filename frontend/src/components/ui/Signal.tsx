@@ -33,7 +33,6 @@ export interface SignalProps {
   fullWidth?: boolean;
 }
 
-export type M3AlertSeverity = 'info' | 'success' | 'warning' | 'error';
 export type SignalVariant = 'filled' | 'outlined' | 'tonal';
 
 /**
@@ -63,7 +62,7 @@ export function Signal({
     onClose?.();
   };
 
-  const icons: Record<M3AlertSeverity, React.ComponentType<{ className?: string }>> = {
+  const icons: Record<SignalSeverity, React.ComponentType<{ className?: string }>> = {
     info: Info,
     success: CheckCircle,
     warning: AlertTriangle,
@@ -79,7 +78,7 @@ export function Signal({
     };
 
     // Kerala Rage kr-solidarity semantic color mapping
-    const semanticColorMap: Record<M3AlertSeverity, { bg: string; text: string; border?: string }> =
+    const semanticColorMap: Record<SignalSeverity, { bg: string; text: string; border?: string }> =
       {
         info: {
           bg: 'var(--sys-color-signalGreen-base)',
@@ -173,7 +172,3 @@ export const SignalTitle: React.FC<{ children: React.ReactNode }> = ({ children 
 export const SignalDescription: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   <div className="font-field-note text-sm leading-relaxed">{children}</div>
 );
-
-// Legacy M3 exports for backward compatibility
-export { Signal as M3Alert, SignalDescription as M3AlertDescription, SignalTitle as M3AlertTitle };
-export type { SignalProps as M3AlertProps };

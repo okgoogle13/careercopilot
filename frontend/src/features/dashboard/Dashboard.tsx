@@ -1,4 +1,4 @@
-import { Pebble, StatusBadge, Stone } from '@/components/ui';
+import { Strike, StatusBadge, Placard } from '@/components/ui';
 import { motion } from 'framer-motion';
 import { FileText, Layout, Plus, Sparkles, Target, Zap } from 'lucide-react';
 import { useEffect, useState } from 'react';
@@ -160,7 +160,7 @@ export function Dashboard() {
 
         {/* Hero Metric Bar: High Fidelity Calibration */}
         <motion.div variants={item as any}>
-          <Stone
+          <Placard
             elevation="raised"
             className="p-8 md:p-12 bg-asphalt-black/40 border-ink-gold/20 flex flex-col md:flex-row items-center gap-12 overflow-hidden relative"
           >
@@ -228,7 +228,7 @@ export function Dashboard() {
                 </div>
               </div>
             </div>
-          </Stone>
+          </Placard>
         </motion.div>
 
         {/* Global Action Drawer */}
@@ -236,27 +236,27 @@ export function Dashboard() {
           variants={item as any}
           className="flex flex-wrap gap-4"
         >
-          <Pebble
+          <Strike
             variant="primary"
             size="lg"
             className="h-16 px-10 font-bold uppercase tracking-wider shadow-glow-gold"
           >
             <Plus className="w-5 h-5 mr-3" /> Deposit KrMotif
-          </Pebble>
-          <Pebble
+          </Strike>
+          <Strike
             variant="secondary"
             size="lg"
             className="h-16 px-10 font-bold uppercase tracking-wider backdrop-blur-md"
           >
             <Layout className="w-5 h-5 mr-3" /> View Archive
-          </Pebble>
-          <Pebble
+          </Strike>
+          <Strike
             variant="ghost"
             size="lg"
             className="h-16 px-10 font-bold uppercase tracking-wider border-concrete-grey/20 hover:bg-concrete-grey/5"
           >
             <Sparkles className="w-5 h-5 mr-3 text-ink-gold" /> Automated Synthesis
-          </Pebble>
+          </Strike>
         </motion.div>
 
         {/* 2x2 KrMotif Grid: Optimized Application Profiles */}
@@ -279,7 +279,7 @@ export function Dashboard() {
                 whileHover={{ y: -5 }}
                 className="group"
               >
-                <Stone
+                <Placard
                   elevation="floating"
                   className="p-8 border-concrete-grey/10 bg-asphalt-black/20 group-hover:bg-asphalt-black/40 group-hover:border-ink-gold/30 transition-all duration-500 overflow-hidden relative"
                 >
@@ -324,7 +324,7 @@ export function Dashboard() {
                       Generate Artifacts →
                     </button>
                   </div>
-                </Stone>
+                </Placard>
               </motion.div>
             ))}
           </div>

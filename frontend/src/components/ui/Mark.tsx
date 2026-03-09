@@ -255,7 +255,3 @@ export const MarkRadio = forwardRef<HTMLInputElement, MarkRadioProps>(
 );
 
 MarkRadio.displayName = 'MarkRadio';
-
-// Legacy M3 exports for backward compatibility
-export { Mark as M3Checkbox, MarkRadio as M3Radio };
-export type { MarkProps as M3CheckboxProps, MarkRadioProps as M3RadioProps };

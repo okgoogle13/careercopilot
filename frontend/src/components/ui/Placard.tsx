@@ -57,7 +57,7 @@ export const Placard = React.forwardRef<HTMLDivElement, PlacardProps>(
           boxShadow: elevationShadows[elevation],
         }}
         className={cn(
-          'relative overflow-hidden transition-all duration-300 backdrop-blur-xl',
+          'relative overflow-hidden transition-all duration-300 ease-viscous backdrop-blur-xl',
           className
         )}
         {...props}

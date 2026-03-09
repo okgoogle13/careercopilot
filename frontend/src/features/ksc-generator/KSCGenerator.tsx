@@ -8,7 +8,7 @@ import {
   RefreshCw,
   Sparkles,
 } from 'lucide-react';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import { toast } from 'sonner';
 import { motion, AnimatePresence } from 'framer-motion';
 import { PageHeader } from '../../components/shared/PageHeader';
@@ -171,13 +171,17 @@ export function KSCGenerator() {
       <motion.div
         transition={KrDarkSpring}
         className="flex items-center justify-center mb-8 gap-4"
+        role="list"
+        aria-label="KSC generation progress"
       >
         {[1, 2, 3].map((s) => (
           <div
             key={s}
             className="flex items-center"
+            role="listitem"
           >
             <div
+              aria-current={step === s ? 'step' : undefined}
               className={`w-10 h-10 rounded-sentry flex items-center justify-center font-bold text-lg transition-all duration-300 ${
                 step >= s
                   ? 'bg-primary text-on-primary shadow-elevation-2 scale-110'
@@ -202,7 +206,7 @@ export function KSCGenerator() {
         transition={KrDarkSpring}
         className="bg-surface-container rounded-leaf p-8 border border-outline-variant shadow-elevation-1 relative overflow-hidden"
       >
-        <AnimatePresence>
+        <AnimatePresence mode="wait">
           {/* Step 1: Criteria Input */}
           {step === 1 && (
             <motion.div
@@ -298,7 +302,8 @@ export function KSCGenerator() {
                 Step 2: The STAR Method
               </h2>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <fieldset className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <legend className="sr-only">STAR response input fields</legend>
                 <div className="space-y-2">
                   <label className="text-primary font-bold text-label-large font-body">
                     S — Situation
@@ -343,7 +348,7 @@ export function KSCGenerator() {
                     className="bg-surface-container-high border-outline-variant text-on-surface rounded-tech h-32 focus:ring-error focus:border-error font-body"
                   />
                 </div>
-              </div>
+              </fieldset>
 
               <div className="flex justify-between pt-4">
                 <Button
@@ -398,6 +403,7 @@ export function KSCGenerator() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
                 id="ksc-response-content"
+                aria-live="polite"
                 className="bg-surface-container-low rounded-tech p-6 text-on-surface whitespace-pre-wrap border border-outline-variant shadow-inner font-body text-body-medium leading-relaxed"
               >
                 {response}
@@ -416,6 +422,7 @@ export function KSCGenerator() {
                     navigator.clipboard.writeText(response);
                     toast.success('Copied to clipboard');
                   }}
+                  aria-label="Copy generated KSC response"
                   className="bg-secondary-container text-on-secondary-container hover:bg-secondary hover:text-on-secondary rounded-pebble px-8 h-12 flex items-center gap-2 font-bold shadow-sm font-body"
                 >
                   <Copy className="w-4 h-4" /> Copy to Clipboard

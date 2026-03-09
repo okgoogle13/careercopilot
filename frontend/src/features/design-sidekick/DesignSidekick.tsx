@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
 import { LayeredHero } from '../../components/kerala-rage/LayeredHero';
 import { loadHeroRegistry } from '../../design/hero/heroRegistry';
 import { composeHero } from '../../lib/composeHero';
 import type { CompositionResult } from '../../lib/composeHero';
-import { Stone, Pebble, StatusBadge } from '@/components/ui';
+import { Placard, KeralaRageButton, StatusBadge } from '@/components/ui';
 import {
   Box,
   Code,
@@ -135,12 +134,15 @@ const DesignSidekick: React.FC = () => {
               </button>
             </div>
 
-            <button
+            <KeralaRageButton
               onClick={() => setShowOverlay(!showOverlay)}
-              className={`flex items-center gap-2 text-xs font-annotation uppercase tracking-wider ${showOverlay ? 'text-ink-gold' : 'text-concrete-grey'}`}
+              variant={showOverlay ? 'primary' : 'tertiary'}
+              size="sm"
+              className="font-annotation uppercase tracking-wider h-9 px-3"
+              startIcon={<Box className="w-4 h-4" />}
             >
-              <Box className="w-4 h-4" /> Negative Space {showOverlay ? '[ON]' : '[OFF]'}
-            </button>
+              Negative Space {showOverlay ? '[ON]' : '[OFF]'}
+            </KeralaRageButton>
           </div>
 
           <div className="flex items-center gap-3">
@@ -156,6 +158,9 @@ const DesignSidekick: React.FC = () => {
         <div
           className={`flex-1 relative overflow-hidden transition-all duration-500 mx-auto w-full ${viewMode === 'mobile' ? 'max-w-[390px] border-x border-concrete-grey/20 my-8 rounded-[40px] shadow-2xl overflow-hidden' : ''}`}
         >
+          {/* Substrate base layer for composition depth */}
+          <div className="absolute inset-0 pointer-events-none z-0 bg-[radial-gradient(circle_at_15%_15%,var(--sys-color-charcoalBackground-steps-2),transparent_55%),radial-gradient(circle_at_85%_10%,var(--sys-color-charcoalBackground-steps-1),transparent_50%)] opacity-70" />
+
           {compositionResult?.valid ? (
             <LayeredHero
               layers={compositionResult.resolvedLayers}
@@ -190,30 +195,37 @@ const DesignSidekick: React.FC = () => {
 
         {/* Bottom Inspector */}
         <div className="h-64 border-t border-concrete-grey/10 bg-asphalt-black overflow-y-auto p-6 z-10">
-          <div className="flex items-center gap-2 mb-4">
-            <Code className="w-4 h-4 text-concrete-grey" />
-            <span className="text-xs font-annotation text-concrete-grey uppercase tracking-widest">
-              Composition Context
-            </span>
-          </div>
-          <div className="grid grid-cols-2 gap-8">
-            <div>
-              <h4 className="text-[10px] font-annotation text-ink-gold uppercase mb-2">
-                Resolved Manifest
-              </h4>
-              <pre className="text-[10px] font-mono text-paper-white/60 bg-black/40 p-4 rounded border border-concrete-grey/5 overflow-x-auto">
-                {JSON.stringify(compositionResult, null, 2)}
-              </pre>
+          <Placard
+            elevation="floating"
+            className="h-full"
+            header={
+              <div className="flex items-center gap-2">
+                <Code className="w-4 h-4 text-concrete-grey" />
+                <span className="text-xs font-annotation text-concrete-grey uppercase tracking-widest">
+                  Composition Context
+                </span>
+              </div>
+            }
+          >
+            <div className="grid grid-cols-2 gap-8">
+              <div>
+                <h4 className="text-[10px] font-annotation text-ink-gold uppercase mb-2">
+                  Resolved Manifest
+                </h4>
+                <pre className="text-[10px] font-mono text-paper-white/60 bg-black/40 p-4 rounded border border-concrete-grey/5 overflow-x-auto">
+                  {JSON.stringify(compositionResult, null, 2)}
+                </pre>
+              </div>
+              <div>
+                <h4 className="text-[10px] font-annotation text-ink-gold uppercase mb-2">
+                  Original Data
+                </h4>
+                <pre className="text-[10px] font-mono text-paper-white/60 bg-black/40 p-4 rounded border border-concrete-grey/5 overflow-x-auto">
+                  {JSON.stringify(selectedHero, null, 2)}
+                </pre>
+              </div>
             </div>
-            <div>
-              <h4 className="text-[10px] font-annotation text-ink-gold uppercase mb-2">
-                Original Data
-              </h4>
-              <pre className="text-[10px] font-mono text-paper-white/60 bg-black/40 p-4 rounded border border-concrete-grey/5 overflow-x-auto">
-                {JSON.stringify(selectedHero, null, 2)}
-              </pre>
-            </div>
-          </div>
+          </Placard>
         </div>
       </main>
     </div>

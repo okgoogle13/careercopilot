@@ -249,7 +249,3 @@ export function Jar({
     </div>
   );
 }
-
-// Legacy M3 exports for backward compatibility
-export { Jar as M3Select };
-export type { JarOption as M3SelectOption, JarProps as M3SelectProps };

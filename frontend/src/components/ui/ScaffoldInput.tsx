@@ -96,7 +96,8 @@ export const ScaffoldInput = forwardRef<HTMLInputElement, ScaffoldInputProps>(
           ? 'var(--sys-color-inkGold-base)'
           : 'var(--sys-color-concreteGrey-base)',
       color: 'var(--sys-color-worker-ash-base)',
-      transition: 'border-color 300ms cubic-bezier(0.34, 1.56, 0.64, 1)',
+      transition:
+        'border-color var(--sys-motion-duration-medium2) cubic-bezier(0.34, 1.56, 0.64, 1)',
     };
 
     const containerClasses = `
@@ -169,6 +170,14 @@ export const ScaffoldInput = forwardRef<HTMLInputElement, ScaffoldInputProps>(
               >
                 {endAdornment}
               </div>
+            )}
+
+            {/* Subtle Screenprint Grit Overlay */}
+            {!disabled && (
+              <div
+                className="absolute inset-0 opacity-0 group-focus-within:opacity-[0.05] pointer-events-none transition-opacity bg-[url('/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__ui--kr-ui-019--v1.svg')]"
+                style={{ borderRadius: 'var(--shape-blockRiot02)' }}
+              />
             )}
           </div>
         </div>
@@ -265,7 +274,8 @@ export const ScaffoldArea = forwardRef<HTMLTextAreaElement, ScaffoldAreaProps>(
           ? 'var(--sys-color-inkGold-base)'
           : 'var(--sys-color-concreteGrey-base)',
       color: 'var(--sys-color-worker-ash-base)',
-      transition: 'border-color 300ms cubic-bezier(0.34, 1.56, 0.64, 1)',
+      transition:
+        'border-color var(--sys-motion-duration-medium2) cubic-bezier(0.34, 1.56, 0.64, 1)',
     };
 
     const showError = error && errorMessage;

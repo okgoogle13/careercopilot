@@ -130,4 +130,5 @@ node scripts/kr/generate-hero-registry.mjs # → public/assets/...hero-registry.
 | kerala-rage-brand-enforcer | .claude/skills/kerala-rage-brand-enforcer | Applies KR Solidarity v6.0.0 brand guidelines. |
 | vision-scorer-mcp | .claude/skills/vision-scorer-mcp | Visual compliance scoring for KR Solidarity assets. |
 | manifest-reconciler | .claude/skills/manifest-reconciler | Reconcile KR asset files against registries. |
+| phase4-pipeline-orchestrator | .claude/skills/phase4-pipeline-orchestrator | Deterministic phase4a->phase4b->phase4c orchestration with contract-gated outputs and failure codes. |
 | m3-expressive-ui-evaluator | .claude/skills/m3-expressive-ui-evaluator | UI audit against Material Design 3 Expressive standards. |
