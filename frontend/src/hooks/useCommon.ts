@@ -4,7 +4,7 @@
  * Eliminates duplication of common state management patterns across components.
  */
 
-import { useState, useCallback, ChangeEvent } from 'react';
+import { useState, useCallback, useEffect, ChangeEvent } from 'react';
 
 /**
  * Hook for managing form field state with validation
@@ -158,7 +158,7 @@ export function useAsync<T = any>(options: UseAsyncOptions<T> = {}) {
 export function useDebounce<T>(value: T, delay: number = 300): T {
   const [debouncedValue, setDebouncedValue] = useState<T>(value);
 
-  useCallback(() => {
+  useEffect(() => {
     const handler = setTimeout(() => {
       setDebouncedValue(value);
     }, delay);
