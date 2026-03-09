@@ -9,7 +9,7 @@ interface AuroraHeaderProps {
 
 /**
  * AuroraHeader - KeralaRage KrSolidarity Parametric Header
- * Uses var(--sys-color-kr-charcoalBackground) and var(--font-bloom)
+ * Uses var(--sys-color-kr-charcoalBackground) and var(--font-display)
  *
  * Features:
  * - Tri-color gradient text (Ink Gold → Solidarity Red → Concrete Grey)

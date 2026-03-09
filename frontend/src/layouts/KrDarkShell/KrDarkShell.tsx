@@ -113,7 +113,7 @@ export const KrDarkShell: React.FC<{ children?: React.ReactNode }> = ({ children
         <div className="fixed top-4 right-4 z-50 opacity-50 hover:opacity-100 transition-opacity">
           <Link
             to="/lab"
-            className="text-xs font-annotation text-secondary-ash-dim hover:text-ink-gold"
+            className="text-xs font-mono text-secondary-ash-dim hover:text-ink-gold"
           >
             Switch to KrDark →
           </Link>

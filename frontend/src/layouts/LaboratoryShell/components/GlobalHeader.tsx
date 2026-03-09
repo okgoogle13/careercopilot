@@ -23,7 +23,7 @@ export const GlobalHeader: React.FC = () => {
             <h1 className="font-proclamation text-xl text-ink-gold tracking-tight">
               KeralaRage KrSolidarity
             </h1>
-            <span className="text-[10px] font-annotation uppercase tracking-widest text-secondary-flannel-dim opacity-70">
+            <span className="text-[10px] font-mono uppercase tracking-widest text-secondary-flannel-dim opacity-70">
               Field Station Alpha
             </span>
           </div>
@@ -31,7 +31,7 @@ export const GlobalHeader: React.FC = () => {
       </div>
 
       <div className="flex items-center gap-3">
-        <div className="px-3 py-1 text-[10px] font-bold uppercase tracking-wider rounded-stone bg-surface-KrDark-concrete-grey-high text-ink-gold shadow-sm">
+        <div className="px-3 py-1 text-[10px] font-bold uppercase tracking-wider rounded-megaphone bg-surface-KrDark-concrete-grey-high text-ink-gold shadow-sm">
           Solidarity Mode
         </div>
 

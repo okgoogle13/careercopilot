@@ -112,7 +112,7 @@ export const KrDarkLanding: React.FC = () => {
         >
           <ManifestoCard
             title="Career Resurrection"
-            content="Your professional history is a KrMotif awaiting audit. Secure the past to claim the future through deliberate craft and street-print defiance. Join the collective front line today."
+            content="Your professional history is ready for structured review. Build stronger applications with clear evidence, targeted analysis, and deliberate drafting."
             actionLabel="SECURE ACCESS"
             onAction={() => (window.location.href = '/login')}
             className="w-full"

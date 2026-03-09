@@ -21,7 +21,7 @@ const wallpaper =
   '/assets/kr-solidarity/texture/kr-solidarity__substrate__landmark--melbourne-laneway--v1.png';
 
 /**
- * CareerCopilot Profile View ("The KrMotif Archive")
+ * CareerCopilot Profile View
  *
  * V3.1 KrDark Mode View implementation.
  */
@@ -44,7 +44,7 @@ export function ProfileView() {
       <div className="h-64 md:h-80 relative overflow-hidden">
         <img
           src={starfishCage}
-          alt="KrMotif Archive"
+          alt="Profile archive"
           className="w-full h-full object-cover brightness-50 contrast-125 saturate-50"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-asphalt-black via-asphalt-black/40 to-transparent" />
@@ -79,7 +79,7 @@ export function ProfileView() {
 
             <section className="space-y-8">
               <div className="flex items-baseline gap-4">
-                <h2 className="font-bloom text-3xl font-bold text-paper-white uppercase tracking-tight flex items-center gap-3">
+                <h2 className="font-display text-3xl font-bold text-paper-white uppercase tracking-tight flex items-center gap-3">
                   <Briefcase className="w-6 h-6 text-ink-gold" />
                   STRATUM <span className="text-ink-gold">CHRONOLOGY</span>
                 </h2>
@@ -113,7 +113,7 @@ export function ProfileView() {
                       role="Metadata Architect"
                       company="StartUp Studio"
                       date="2020 - 2022"
-                      description="Designed core taxonomies for career data ingestion. Managed a team of 4 KrMotif auditors."
+                      description="Designed core taxonomies for career data ingestion. Managed a team of 4 application quality auditors."
                     />
                   </>
                 )}
@@ -129,8 +129,8 @@ export function ProfileView() {
             >
               <div className="flex items-center gap-3 mb-6">
                 <Fingerprint className="w-5 h-5 text-ink-gold" />
-                <h3 className="font-annotation text-[10px] font-bold text-paper-white uppercase tracking-[0.3em]">
-                  Extracted Filaments
+                <h3 className="font-mono text-[10px] font-bold text-paper-white uppercase tracking-[0.3em]">
+                  Extracted Skills
                 </h3>
               </div>
               <div className="flex flex-wrap gap-2">
@@ -141,14 +141,14 @@ export function ProfileView() {
                     'Neural.sys',
                     'Tailwind',
                     'GraphQL',
-                    'KrMotif.Audit',
+                    'Quality.Audit',
                     'Python',
                     'Archival.Design',
                   ]
                 ).map((skill: string) => (
                   <div
                     key={skill}
-                    className="bg-concrete-grey/5 text-concrete-grey border border-concrete-grey/20 font-mono text-[9px] uppercase tracking-widest px-3 py-1 rounded-sentry"
+                    className="bg-concrete-grey/5 text-concrete-grey border border-concrete-grey/20 font-mono text-[9px] uppercase tracking-widest px-3 py-1 rounded-march"
                   >
                     {skill}
                   </div>
@@ -162,7 +162,7 @@ export function ProfileView() {
             >
               <div className="flex items-center gap-3 mb-6">
                 <Award className="w-5 h-5 text-ink-gold" />
-                <h3 className="font-annotation text-[10px] font-bold text-paper-white uppercase tracking-[0.3em]">
+                <h3 className="font-mono text-[10px] font-bold text-paper-white uppercase tracking-[0.3em]">
                   Validation Badges
                 </h3>
               </div>
@@ -196,8 +196,8 @@ export function ProfileView() {
 
             <div className="p-6 border border-concrete-grey/5 rounded-placard bg-ink-gold/5 flex flex-col items-center text-center">
               <Archive className="w-8 h-8 text-ink-gold mb-4 opacity-40" />
-              <p className="font-field-note text-sm text-paper-white opacity-60 italic leading-relaxed">
-                "This record is synchronized with the primary KrSolidarity node."
+              <p className="font-primary text-sm text-paper-white opacity-60 italic leading-relaxed">
+                "This profile is synced and ready for drafting workflows."
               </p>
             </div>
           </div>
@@ -225,18 +225,18 @@ function TimelineItem({
     >
       <div className="absolute inset-y-0 left-0 w-1 bg-ink-gold opacity-20 group-hover:opacity-100 transition-opacity" />
       <div className="flex justify-between items-start mb-2">
-        <h3 className="font-bloom text-xl font-bold text-paper-white uppercase tracking-tight">
+        <h3 className="font-display text-xl font-bold text-paper-white uppercase tracking-tight">
           {role}
         </h3>
         <span className="font-mono text-[9px] text-ink-gold opacity-60 tracking-widest uppercase">
           {date}
         </span>
       </div>
-      <p className="font-annotation text-[10px] text-ink-gold uppercase tracking-[0.2em] mb-4 opacity-80">
+      <p className="font-mono text-[10px] text-ink-gold uppercase tracking-[0.2em] mb-4 opacity-80">
         {company}
       </p>
       {description && (
-        <p className="font-field-note text-sm text-concrete-grey italic opacity-70 leading-relaxed">
+        <p className="font-primary text-sm text-concrete-grey italic opacity-70 leading-relaxed">
           {description}
         </p>
       )}
@@ -247,11 +247,11 @@ function TimelineItem({
 function Badge({ emoji, title }: { emoji: string; title: string }) {
   return (
     <div
-      className="aspect-square rounded-sentry bg-bark-light/5 border border-concrete-grey/10 flex items-center justify-center text-2xl hover:bg-ink-gold/10 hover:border-ink-gold/30 transition-all cursor-help relative group"
+      className="aspect-square rounded-march bg-bark-light/5 border border-concrete-grey/10 flex items-center justify-center text-2xl hover:bg-ink-gold/10 hover:border-ink-gold/30 transition-all cursor-help relative group"
       title={title}
     >
       {emoji}
-      <div className="absolute -top-1 -right-1 w-2 h-2 rounded-sentry bg-ink-gold opacity-0 group-hover:opacity-100 transition-opacity" />
+      <div className="absolute -top-1 -right-1 w-2 h-2 rounded-march bg-ink-gold opacity-0 group-hover:opacity-100 transition-opacity" />
     </div>
   );
 }

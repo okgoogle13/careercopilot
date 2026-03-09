@@ -82,7 +82,7 @@ export const EvidenceCard: React.FC<EvidenceCardProps> = ({
           animate={{ scale: 1 }}
           transition={{ type: 'spring', stiffness: 500, damping: 20 }}
         >
-          <div className="flex h-6 w-6 items-center justify-center rounded-sentry bg-sage">
+          <div className="flex h-6 w-6 items-center justify-center rounded-march bg-sage">
             <svg
               className="h-4 w-4 text-surface"
               fill="none"

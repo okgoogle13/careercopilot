@@ -14,7 +14,7 @@ export function EvidenceSidebar() {
           <input
             type="text"
             placeholder="Search STARs..."
-            className="w-full bg-surface-container-high rounded-sentry pl-9 pr-4 py-2 text-label-small text-on-surface outline-none focus:ring-1 ring-primary/50 placeholder:text-on-surface-variant/50"
+            className="w-full bg-surface-container-high rounded-march pl-9 pr-4 py-2 text-label-small text-on-surface outline-none focus:ring-1 ring-primary/50 placeholder:text-on-surface-variant/50"
           />
         </div>
       </div>
@@ -66,7 +66,7 @@ export function EvidenceSidebar() {
             className="group bg-surface-container border border-outline-variant rounded-leaf p-3 hover:border-primary hover:shadow-sm cursor-grab active:cursor-grabbing transition-all hover:scale-[1.02]"
           >
             <div className="flex items-center justify-between mb-2">
-              <span className="text-[10px] font-bold uppercase tracking-wider text-tertiary bg-tertiary-container px-2 py-0.5 rounded-sentry">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-tertiary bg-tertiary-container px-2 py-0.5 rounded-march">
                 {item.tags[0]}
               </span>
               <Star className="w-3 h-3 text-on-surface-variant group-hover:text-secondary opacity-0 group-hover:opacity-100 transition-opacity" />

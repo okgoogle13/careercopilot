@@ -50,7 +50,7 @@ export const JobList: React.FC<JobListProps> = ({ jobs, onJobSelect, isLoading =
             [...Array(3)].map((_, i) => (
               <div
                 key={i}
-                className="h-40 bg-charcoal-200/50 rounded-stone animate-pulse"
+                className="h-40 bg-charcoal-200/50 rounded-megaphone animate-pulse"
               />
             ))
           : jobs.map((job, index) => (
@@ -62,7 +62,7 @@ export const JobList: React.FC<JobListProps> = ({ jobs, onJobSelect, isLoading =
                 whileHover={{ y: -4, boxShadow: '0 20px 40px rgba(0,0,0,0.6)' }}
                 className={cn(
                   'p-8 bg-charcoal-100 border border-blueprint-grey/20',
-                  'rounded-stone shadow-viscous cursor-pointer group transition-all'
+                  'rounded-megaphone shadow-viscous cursor-pointer group transition-all'
                 )}
                 onClick={() => onJobSelect(job.id)}
                 role="listitem"

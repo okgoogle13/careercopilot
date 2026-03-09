@@ -112,6 +112,9 @@ const ProtectedLayout = () => {
 
 // Public Layout (Login/Register/Landing)
 const PublicLayout = () => {
+  const showSentryTestButton =
+    import.meta.env.DEV && import.meta.env.VITE_SHOW_SENTRY_TEST_BUTTON === 'true';
+
   return (
     <div className="min-h-screen bg-[#1A1714] relative">
       {/* Textured Background */}
@@ -125,7 +128,7 @@ const PublicLayout = () => {
       />
       <div className="relative z-10">
         {/* Temporary Sentry Test Button */}
-        {import.meta.env.DEV && (
+        {showSentryTestButton && (
           <button
             onClick={() => {
               throw new Error('Sentry Frontend Test Error');

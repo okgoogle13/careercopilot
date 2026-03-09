@@ -1,4 +1,4 @@
-import { Pebble, StatusBadge, Stone } from '@/components/ui';
+import { Pebble, Placard } from '@/components/ui';
 import { JobList } from '@/components/JobList';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Briefcase, Compass, ExternalLink, MapPin, Search, Sparkles } from 'lucide-react';
@@ -71,7 +71,7 @@ export function Opportunities() {
       />
 
       {/* Sentry Mascot: The KrShiva Lookout */}
-      <div className="absolute top-0 right-0 w-1/2 h-full pointer-events-none z-0 overflow-hidden opacity-30 select-none font-bloom">
+      <div className="absolute top-0 right-0 w-1/2 h-full pointer-events-none z-0 overflow-hidden opacity-30 select-none">
         <motion.img
           initial={{ x: 200, opacity: 0 }}
           animate={{ x: 0, opacity: 0.3 }}
@@ -90,13 +90,10 @@ export function Opportunities() {
         />
 
         {/* Lookout Controls: The Search Deck */}
-        <Stone
-          elevation="raised"
-          className="mb-12 p-8 border-concrete-grey/10 bg-asphalt-black/40 backdrop-blur-md"
-        >
+        <Placard className="mb-12 p-8 border-concrete-grey/10 bg-asphalt-black/40 backdrop-blur-md">
           <div className="flex flex-col lg:flex-row gap-6 items-end">
             <div className="flex-1 space-y-3 w-full">
-              <label className="text-xs font-annotation text-ink-gold uppercase tracking-[0.3em] flex items-center gap-2">
+              <label className="text-xs font-mono text-ink-gold uppercase tracking-[0.3em] flex items-center gap-2">
                 <Compass className="w-3 h-3" /> Target Trajectory
               </label>
               <div className="relative">
@@ -104,21 +101,21 @@ export function Opportunities() {
                   type="search"
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
-                  className="w-full bg-bark-light/5 border-b border-concrete-grey/20 font-bloom text-xl text-paper-white p-3 focus:border-ink-gold outline-none transition-all placeholder:text-concrete-grey/30"
+                  className="w-full bg-bark-light/5 border-b border-concrete-grey/20 font-primary text-xl text-paper-white p-3 focus:border-ink-gold outline-none transition-all placeholder:text-concrete-grey/30"
                   placeholder="e.g. SOFTWARE ARCHITECT"
                 />
               </div>
             </div>
 
             <div className="flex-1 space-y-3 w-full">
-              <label className="text-xs font-annotation text-ink-gold uppercase tracking-[0.3em] flex items-center gap-2">
+              <label className="text-xs font-mono text-ink-gold uppercase tracking-[0.3em] flex items-center gap-2">
                 <MapPin className="w-3 h-3" /> Geographical Node
               </label>
               <input
                 type="text"
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
-                className="w-full bg-bark-light/5 border-b border-concrete-grey/20 font-bloom text-xl text-paper-white p-3 focus:border-ink-gold outline-none transition-all placeholder:text-concrete-grey/30"
+                className="w-full bg-bark-light/5 border-b border-concrete-grey/20 font-primary text-xl text-paper-white p-3 focus:border-ink-gold outline-none transition-all placeholder:text-concrete-grey/30"
                 placeholder="e.g. MELBOURNE, VIC"
               />
             </div>
@@ -141,7 +138,7 @@ export function Opportunities() {
               )}
             </Pebble>
           </div>
-        </Stone>
+        </Placard>
 
         {/* Scouting Intelligence: The Feed */}
         <div className="space-y-6">
@@ -152,7 +149,7 @@ export function Opportunities() {
                 animate={{ opacity: 1, y: 0 }}
                 className="flex items-center gap-4 text-[10px] font-mono text-concrete-grey border-l-2 border-ink-gold pl-4 py-2 bg-ink-gold/5"
               >
-                <div className="w-2 h-2 rounded-sentry bg-ink-gold animate-pulse" />
+                <div className="w-2 h-2 rounded-march bg-ink-gold animate-pulse" />
                 <span className="uppercase tracking-[0.2em]">
                   {'>'} SCOUT DISPATCH: {scoutMessage}
                 </span>
@@ -176,14 +173,48 @@ export function Opportunities() {
               />
             ) : (
               !isLoading && (
-                <div className="text-center py-32 opacity-20 flex flex-col items-center">
-                  <Compass className="w-24 h-24 mb-6 text-concrete-grey animate-pulse" />
-                  <p className="font-bloom text-2xl text-paper-white uppercase tracking-tighter">
-                    Lookout Deck Clear
-                  </p>
-                  <p className="font-annotation text-xs text-concrete-grey uppercase tracking-[0.4em] mt-2">
-                    Awaiting Target Dispatches
-                  </p>
+                <div className="space-y-6">
+                  <div className="text-center py-12 opacity-70 flex flex-col items-center">
+                    <Compass className="w-24 h-24 mb-6 text-concrete-grey animate-pulse" />
+                    <p className="font-display text-2xl text-paper-white uppercase tracking-tight drop-shadow-[0_1px_0_rgba(0,0,0,0.5)]">
+                      Lookout Deck Clear
+                    </p>
+                    <p className="font-mono text-xs text-concrete-grey-light uppercase tracking-[0.4em] mt-2">
+                      Awaiting Target Dispatches
+                    </p>
+                  </div>
+
+                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <Placard className="p-6 bg-ink-gold/10 border border-ink-gold/25 shadow-glow-gold">
+                      <p className="text-[10px] font-mono uppercase tracking-[0.3em] text-ink-gold mb-3">
+                        Dispatch Prep
+                      </p>
+                      <p className="font-primary text-concrete-grey">
+                        Refine trajectory keywords with role seniority, service domain, and contract
+                        type for stronger scout precision.
+                      </p>
+                    </Placard>
+
+                    <Placard className="p-6 bg-asphalt-black/30 border border-concrete-grey/15">
+                      <p className="text-[10px] font-mono uppercase tracking-[0.3em] text-ink-gold mb-3">
+                        Signal Coverage
+                      </p>
+                      <p className="font-primary text-concrete-grey">
+                        Keep location broad first, then narrow to metro nodes after initial
+                        high-match results appear.
+                      </p>
+                    </Placard>
+
+                    <Placard className="p-6 bg-asphalt-black/30 border border-concrete-grey/15">
+                      <p className="text-[10px] font-mono uppercase tracking-[0.3em] text-ink-gold mb-3">
+                        Tactical Next Step
+                      </p>
+                      <p className="font-primary text-concrete-grey">
+                        Run KSC and cover-letter generators against top 3 matches to keep
+                        application velocity high.
+                      </p>
+                    </Placard>
+                  </div>
                 </div>
               )
             )}

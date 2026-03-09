@@ -34,11 +34,11 @@ export const KrDarkIngestion: React.FC = () => {
       >
         <div className="relative group cursor-pointer">
           {/* Z-0: TODO[asset]: Blueprint Grid Substrate overlay (12% opacity) */}
-          <div className="absolute inset-0 bg-solidarity-red/5 blur-[80px] rounded-sentry opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
+          <div className="absolute inset-0 bg-solidarity-red/5 blur-[80px] rounded-march opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
 
-          <div className="flex flex-col items-center justify-center p-24 border-2 border-dashed border-surface-KrDark-concrete-grey-high/25 rounded-stone bg-asphalt-black/40 backdrop-blur-sm group-hover:border-solidarity-red/40 transition-all duration-700 shadow-viscous group-hover:shadow-ink-glow">
+          <div className="flex flex-col items-center justify-center p-24 border-2 border-dashed border-surface-KrDark-concrete-grey-high/25 rounded-megaphone bg-asphalt-black/40 backdrop-blur-sm group-hover:border-solidarity-red/40 transition-all duration-700 shadow-viscous group-hover:shadow-ink-glow">
             <div className="mb-8 relative">
-              <div className="w-20 h-20 rounded-sentry border border-surface-KrDark-concrete-grey-high/30 flex items-center justify-center text-paper-white/20 group-hover:text-solidarity-red group-hover:border-solidarity-red/40 transition-colors duration-500">
+              <div className="w-20 h-20 rounded-march border border-surface-KrDark-concrete-grey-high/30 flex items-center justify-center text-paper-white/20 group-hover:text-solidarity-red group-hover:border-solidarity-red/40 transition-colors duration-500">
                 <svg
                   className="w-10 h-10"
                   fill="none"

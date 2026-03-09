@@ -115,7 +115,7 @@ export const ScaffoldInput = forwardRef<HTMLInputElement, ScaffoldInputProps>(
     const inputClasses = `
     ${sizeClasses[size].input}
     w-full bg-transparent text-inherit placeholder:opacity-50
-    focus:outline-none disabled:cursor-not-allowed font-field-note
+    focus:outline-none disabled:cursor-not-allowed font-primary
     ${className}
   `;
 
@@ -323,7 +323,7 @@ export const ScaffoldArea = forwardRef<HTMLTextAreaElement, ScaffoldAreaProps>(
           ${fullWidth ? 'w-full' : 'w-auto'}
           ${disabled ? 'opacity-50 cursor-not-allowed' : ''}
           px-4 py-3 text-base bg-transparent text-inherit
-          placeholder:opacity-50 focus:outline-none resize-vertical font-field-note
+          placeholder:opacity-50 focus:outline-none resize-vertical font-primary
           ${isFocused && !error ? 'shadow-[0_0_15px_var(--sys-color-inkGold-steps-0)]' : ''}
           ${containerClassName}
           ${className}

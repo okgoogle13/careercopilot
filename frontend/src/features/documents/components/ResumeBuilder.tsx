@@ -230,7 +230,7 @@ export const ResumeBuilder: React.FC<ResumeBuilderProps> = ({ onBack, onNext, pr
                 {resumeData.skills.map((skill, index) => (
                   <div
                     key={index}
-                    className="flex items-center gap-1 px-3 py-1 rounded-sentry bg-[var(--color-surface-container)] text-[var(--color-text-primary)] text-sm"
+                    className="flex items-center gap-1 px-3 py-1 rounded-march bg-[var(--color-surface-container)] text-[var(--color-text-primary)] text-sm"
                   >
                     <span>{skill}</span>
                     <button

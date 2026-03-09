@@ -323,7 +323,7 @@ export function March({
                   onMouseEnter={() => !isDisabled && setActiveIndex(index)}
                   onKeyDown={(e) => !isDisabled && handleOptionKeyDown(e, option.value, index)}
                 >
-                  <span className="font-field-note">{option.label}</span>
+                  <span className="font-primary">{option.label}</span>
                   {isSelected && (
                     <Check className="w-5 h-5 flex-shrink-0 text-[var(--sys-color-inkGold-base)]" />
                   )}

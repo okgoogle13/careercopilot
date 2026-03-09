@@ -31,7 +31,7 @@ export function IconBadge({
     <div
       className={`
       ${sizeClasses[size]} ${background}
-      rounded-sentry flex items-center justify-center
+      rounded-march flex items-center justify-center
       flex-shrink-0
       ${className}
     `}

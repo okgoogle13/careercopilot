@@ -162,9 +162,9 @@ export function KSCGenerator() {
       className="p-6 md:p-12 max-w-5xl mx-auto"
     >
       <PageHeader
-        title="KSC Generator"
-        highlightedWord="Wizard"
-        description="Craft perfect selection criteria responses using the STAR method"
+        title="Key Selection Criteria"
+        highlightedWord="Workbench"
+        description="Draft structured KSC responses using the STAR method."
       />
 
       {/* Progress Stepper */}
@@ -182,7 +182,7 @@ export function KSCGenerator() {
           >
             <div
               aria-current={step === s ? 'step' : undefined}
-              className={`w-10 h-10 rounded-sentry flex items-center justify-center font-bold text-lg transition-all duration-300 ${
+              className={`w-10 h-10 rounded-march flex items-center justify-center font-bold text-lg transition-all duration-300 ${
                 step >= s
                   ? 'bg-primary text-on-primary shadow-elevation-2 scale-110'
                   : 'bg-surface-container-high text-on-surface-variant'
@@ -192,7 +192,7 @@ export function KSCGenerator() {
             </div>
             {s < 3 && (
               <div
-                className={`w-12 h-1 mx-2 rounded-sentry transition-colors duration-500 ${
+                className={`w-12 h-1 mx-2 rounded-march transition-colors duration-500 ${
                   step > s ? 'bg-primary' : 'bg-surface-container-high'
                 }`}
               />
@@ -200,11 +200,14 @@ export function KSCGenerator() {
           </div>
         ))}
       </motion.div>
+      <p className="mb-6 text-center text-label-small font-mono uppercase tracking-wider text-on-surface-variant">
+        Step {step} of 3 · Estimated time: {step < 3 ? '3–5 min' : 'Complete'}
+      </p>
 
       {/* Main Card */}
       <motion.div
         transition={KrDarkSpring}
-        className="bg-surface-container rounded-leaf p-8 border border-outline-variant shadow-elevation-1 relative overflow-hidden"
+        className="bg-surface-container rounded-placard p-8 border border-outline-variant shadow-elevation-1 relative overflow-hidden"
       >
         <AnimatePresence mode="wait">
           {/* Step 1: Criteria Input */}
@@ -222,7 +225,7 @@ export function KSCGenerator() {
               </h2>
 
               {/* URL Import Section */}
-              <div className="p-4 bg-secondary-container/20 rounded-tech border border-secondary-container">
+              <div className="p-4 bg-secondary-container/20 rounded-megaphone border border-secondary-container">
                 <label className="block text-on-surface mb-2 text-label-large font-bold font-body">
                   Import from URL (Optional)
                 </label>
@@ -236,7 +239,7 @@ export function KSCGenerator() {
                   <Button
                     onClick={handleAnalyzeUrl}
                     disabled={!jobUrl || isAnalyzing}
-                    className="bg-secondary-container text-on-secondary-container hover:bg-secondary hover:text-on-secondary whitespace-nowrap rounded-pebble"
+                    className="bg-secondary-container text-on-secondary-container hover:bg-secondary hover:text-on-secondary whitespace-nowrap rounded-strike"
                   >
                     {isAnalyzing ? (
                       <>
@@ -273,14 +276,14 @@ export function KSCGenerator() {
                   value={criteria}
                   onChange={(e) => setCriteria(e.target.value)}
                   placeholder="e.g. Demonstrated ability to lead complex projects..."
-                  className="bg-surface-container-high border-outline-variant text-on-surface rounded-tech resize-none h-48 focus:ring-primary focus:border-primary font-body text-body-medium"
+                  className="bg-surface-container-high border-outline-variant text-on-surface rounded-scaffold resize-none h-48 focus:ring-primary focus:border-primary font-body text-body-medium"
                 />
               </div>
               <div className="flex justify-end">
                 <Button
                   onClick={handleNext}
                   disabled={!criteria.trim()}
-                  className="bg-primary-container text-on-primary-container hover:bg-primary hover:text-on-primary rounded-pebble px-8 h-12 flex items-center gap-2 font-bold transition-all shadow-sm"
+                  className="bg-primary-container text-on-primary-container hover:bg-primary hover:text-on-primary rounded-strike px-8 h-12 flex items-center gap-2 font-bold transition-all shadow-sm"
                 >
                   Next Step <ArrowRight className="w-4 h-4" />
                 </Button>
@@ -312,7 +315,7 @@ export function KSCGenerator() {
                     value={star.situation}
                     onChange={(e) => setStar({ ...star, situation: e.target.value })}
                     placeholder="Describe the context or challenge..."
-                    className="bg-surface-container-high border-outline-variant text-on-surface rounded-tech h-32 focus:ring-secondary focus:border-secondary font-body"
+                    className="bg-surface-container-high border-outline-variant text-on-surface rounded-scaffold h-32 focus:ring-secondary focus:border-secondary font-body"
                   />
                 </div>
                 <div className="space-y-2">
@@ -323,7 +326,7 @@ export function KSCGenerator() {
                     value={star.task}
                     onChange={(e) => setStar({ ...star, task: e.target.value })}
                     placeholder="What was your responsibility?"
-                    className="bg-surface-container-high border-outline-variant text-on-surface rounded-tech h-32 focus:ring-secondary focus:border-secondary font-body"
+                    className="bg-surface-container-high border-outline-variant text-on-surface rounded-scaffold h-32 focus:ring-secondary focus:border-secondary font-body"
                   />
                 </div>
                 <div className="space-y-2">
@@ -334,7 +337,7 @@ export function KSCGenerator() {
                     value={star.action}
                     onChange={(e) => setStar({ ...star, action: e.target.value })}
                     placeholder="What specific steps did you take?"
-                    className="bg-surface-container-high border-outline-variant text-on-surface rounded-tech h-32 focus:ring-tertiary focus:border-tertiary font-body"
+                    className="bg-surface-container-high border-outline-variant text-on-surface rounded-scaffold h-32 focus:ring-tertiary focus:border-tertiary font-body"
                   />
                 </div>
                 <div className="space-y-2">
@@ -345,7 +348,7 @@ export function KSCGenerator() {
                     value={star.result}
                     onChange={(e) => setStar({ ...star, result: e.target.value })}
                     placeholder="What was the outcome? Quantify if possible."
-                    className="bg-surface-container-high border-outline-variant text-on-surface rounded-tech h-32 focus:ring-error focus:border-error font-body"
+                    className="bg-surface-container-high border-outline-variant text-on-surface rounded-scaffold h-32 focus:ring-error focus:border-error font-body"
                   />
                 </div>
               </fieldset>
@@ -354,7 +357,7 @@ export function KSCGenerator() {
                 <Button
                   onClick={handleBack}
                   variant="text"
-                  className="text-on-surface-variant hover:text-on-surface rounded-pebble px-6 font-body"
+                  className="text-on-surface-variant hover:text-on-surface rounded-march px-6 font-body"
                 >
                   <ArrowLeft className="w-4 h-4 mr-2" /> Back
                 </Button>
@@ -363,7 +366,7 @@ export function KSCGenerator() {
                   disabled={
                     !star.situation || !star.task || !star.action || !star.result || loading
                   }
-                  className="bg-primary-container text-on-primary-container hover:bg-primary hover:text-on-primary rounded-pebble px-8 h-12 flex items-center gap-2 font-bold shadow-elevation-1 transition-all group"
+                  className="bg-primary-container text-on-primary-container hover:bg-primary hover:text-on-primary rounded-strike px-8 h-12 flex items-center gap-2 font-bold shadow-elevation-1 transition-all group"
                 >
                   <Sparkles
                     className={`w-5 h-5 ${loading ? 'animate-pulse text-tertiary' : 'group-hover:rotate-12 transition-transform'}`}
@@ -391,7 +394,7 @@ export function KSCGenerator() {
                   <Button
                     onClick={resetForm}
                     variant="text"
-                    className="text-on-surface-variant hover:text-error rounded-pebble font-body"
+                    className="text-on-surface-variant hover:text-error rounded-march font-body"
                   >
                     <RefreshCw className="w-4 h-4 mr-2" /> New
                   </Button>
@@ -404,7 +407,7 @@ export function KSCGenerator() {
                 transition={{ delay: 0.2 }}
                 id="ksc-response-content"
                 aria-live="polite"
-                className="bg-surface-container-low rounded-tech p-6 text-on-surface whitespace-pre-wrap border border-outline-variant shadow-inner font-body text-body-medium leading-relaxed"
+                className="bg-surface-container-low rounded-megaphone p-6 text-on-surface whitespace-pre-wrap border border-outline-variant shadow-inner font-body text-body-medium leading-relaxed"
               >
                 {response}
               </motion.div>
@@ -413,7 +416,7 @@ export function KSCGenerator() {
                 <Button
                   onClick={handleDownloadPdf}
                   variant="outlined"
-                  className="border-tertiary text-tertiary hover:bg-tertiary hover:text-on-tertiary rounded-pebble px-8 h-12 flex items-center gap-2 font-bold font-body"
+                  className="border-tertiary text-tertiary hover:bg-tertiary hover:text-on-tertiary rounded-strike px-8 h-12 flex items-center gap-2 font-bold font-body"
                 >
                   <Download className="w-4 h-4" /> Download PDF
                 </Button>
@@ -423,7 +426,7 @@ export function KSCGenerator() {
                     toast.success('Copied to clipboard');
                   }}
                   aria-label="Copy generated KSC response"
-                  className="bg-secondary-container text-on-secondary-container hover:bg-secondary hover:text-on-secondary rounded-pebble px-8 h-12 flex items-center gap-2 font-bold shadow-sm font-body"
+                  className="bg-secondary-container text-on-secondary-container hover:bg-secondary hover:text-on-secondary rounded-strike px-8 h-12 flex items-center gap-2 font-bold shadow-sm font-body"
                 >
                   <Copy className="w-4 h-4" /> Copy to Clipboard
                 </Button>
@@ -437,7 +440,7 @@ export function KSCGenerator() {
 }
 
 // ============================================================================
-// EXPERT RESPONSE GENERATOR - Brain Transplant from MiniMe
+// EXPERT RESPONSE GENERATOR
 // ============================================================================
 
 interface STARInput {

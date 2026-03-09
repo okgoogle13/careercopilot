@@ -83,7 +83,7 @@ export const DocumentStack: React.FC = () => {
           <h1 className="text-display-medium font-display text-on-surface-paper-white mb-2">
             Document Stack
           </h1>
-          <p className="text-body-large text-secondary-flannel-dim font-field-note">
+          <p className="text-body-large text-secondary-flannel-dim font-primary">
             Manage your source materials. Upload resumes, cover letters, and raw career data.
           </p>
         </div>
@@ -147,7 +147,7 @@ export const DocumentStack: React.FC = () => {
                 {/* Status Pill */}
                 <div
                   className={cn(
-                    'px-3 py-1 rounded-sentry border bg-surface-KrDark-slate-smoke-highest/30 text-xs font-bold uppercase tracking-wider flex items-center gap-2',
+                    'px-3 py-1 rounded-march border bg-surface-KrDark-slate-smoke-highest/30 text-xs font-bold uppercase tracking-wider flex items-center gap-2',
                     getStatusColor(doc.status),
                     doc.status === 'analyzed' && 'border-primary-ink-gold/20',
                     doc.status === 'pending' && 'border-secondary-flannel/20',
@@ -160,7 +160,7 @@ export const DocumentStack: React.FC = () => {
                 </div>
 
                 {/* Actions Menu */}
-                <button className="p-2 text-secondary-flannel-dim hover:text-on-surface-paper-white hover:bg-surface-KrDark-slate-smoke-highest rounded-sentry transition-colors">
+                <button className="p-2 text-secondary-flannel-dim hover:text-on-surface-paper-white hover:bg-surface-KrDark-slate-smoke-highest rounded-march transition-colors">
                   <MoreVertical className="w-5 h-5" />
                 </button>
               </div>

@@ -96,6 +96,13 @@ export function OnboardingPage() {
     }
   };
 
+  const getCardSpan = (index: number): string => {
+    // Enforce 2-3-2-2 cadence on desktop (lg:grid-cols-6).
+    if (index <= 1) return 'lg:col-span-3';
+    if (index <= 4) return 'lg:col-span-2';
+    return 'lg:col-span-3';
+  };
+
   return (
     <div className={styles.container}>
       {heroData && (
@@ -119,18 +126,21 @@ export function OnboardingPage() {
               steps={ONBOARDING_STEPS}
             />
           </div>
-          <h1 className="text-bloom-ultra">Choosing the Soil</h1>
-          <p className="text-curator-accent">Select your professional domain to personalize your experience.</p>
+          <h1 className="text-display-ultra">Choose Your Focus Area</h1>
+          <p className="text-curator-accent">
+            Select your domain to personalize job matching and drafting quality.
+          </p>
         </header>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-12 max-w-7xl mx-auto">
-          {DOMAINS.map((domain) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8 p-12 max-w-7xl mx-auto">
+          {DOMAINS.map((domain, index) => (
             <PathSelectionCard
               key={domain.id}
               title={domain.name}
-              description={`Specialize in ${domain.name} through the lens of Kerala Rage autonomy.`}
+              description={`Build role-specific context for ${domain.name} applications.`}
               isSelected={selected === domain.id}
               onSelect={() => setSelected(domain.id)}
+              className={getCardSpan(index)}
             />
           ))}
         </div>
@@ -141,7 +151,7 @@ export function OnboardingPage() {
             disabled={!selected}
             onClick={handleProceed}
           >
-            Fertilize Selection
+            Continue to Document Setup
           </button>
         </footer>
       </div>

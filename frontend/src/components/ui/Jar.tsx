@@ -224,7 +224,7 @@ export function Jar({
                   onClick={() => !isDisabled && handleSelect(option.value)}
                   onKeyDown={(e) => !isDisabled && handleKeyDown(e, option.value)}
                 >
-                  <span className="font-field-note">{option.label}</span>
+                  <span className="font-primary">{option.label}</span>
                   {isSelected && (
                     <Check className="w-5 h-5 flex-shrink-0 text-[var(--sys-color-inkGold-base)]" />
                   )}

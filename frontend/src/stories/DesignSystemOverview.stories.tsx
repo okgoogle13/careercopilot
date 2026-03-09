@@ -37,7 +37,7 @@ export const Phase4Showcase: Story = {
           <h1 className="text-4xl font-display font-black text-[var(--sys-color-inkGold-base)] uppercase tracking-tighter mb-2">
             KR Solidarity Frontend Pipeline
           </h1>
-          <p className="text-lg text-[var(--sys-color-concreteGrey-base)] font-field-note italic">
+          <p className="text-lg text-[var(--sys-color-concreteGrey-base)] font-primary italic">
             Phase 4: Expressive rendering & Hero integration
           </p>
         </div>
@@ -47,7 +47,7 @@ export const Phase4Showcase: Story = {
           elevation="raised"
           className="p-6 bg-[var(--sys-color-charcoalBackground-steps-1)] border-[var(--sys-color-inkGold-base)]/30 min-w-[300px]"
         >
-          <h3 className="font-annotation text-xs uppercase tracking-[0.3em] text-[var(--sys-color-protestMetalBlue-base)] mb-4">
+          <h3 className="font-mono text-xs uppercase tracking-[0.3em] text-[var(--sys-color-protestMetalBlue-base)] mb-4">
             Pipeline Analytics
           </h3>
           <div className="space-y-4">
@@ -70,7 +70,7 @@ export const Phase4Showcase: Story = {
               </span>
             </div>
             <div className="pt-2">
-              <span className="block text-[10px] uppercase font-annotation text-white/40 tracking-widest text-right">
+              <span className="block text-[10px] uppercase font-mono text-white/40 tracking-widest text-right">
                 Base Migration: {migrated}/{totalComponents} (100%)
               </span>
             </div>
@@ -80,7 +80,7 @@ export const Phase4Showcase: Story = {
 
       <section className="space-y-16">
         <div>
-          <h2 className="text-2xl font-bloom font-bold uppercase mb-6 text-[var(--sys-color-concreteGrey-base)]">
+          <h2 className="text-2xl font-display font-bold uppercase mb-6 text-[var(--sys-color-concreteGrey-base)]">
             Design Tokens (Atoms)
           </h2>
           <div className="flex flex-wrap gap-6 p-8 bg-black/20 rounded-xl border border-white/5 items-center">
@@ -97,7 +97,7 @@ export const Phase4Showcase: Story = {
         </div>
 
         <div>
-          <h2 className="text-2xl font-bloom font-bold uppercase mb-6 text-[var(--sys-color-concreteGrey-base)]">
+          <h2 className="text-2xl font-display font-bold uppercase mb-6 text-[var(--sys-color-concreteGrey-base)]">
             Showcase: Dashboard Hero
           </h2>
           <div className="h-[800px] border-2 border-[var(--sys-color-inkGold-base)]/20 rounded-3xl overflow-hidden relative shadow-2xl">
@@ -106,7 +106,7 @@ export const Phase4Showcase: Story = {
         </div>
 
         <div>
-          <h2 className="text-2xl font-bloom font-bold uppercase mb-6 text-[var(--sys-color-concreteGrey-base)]">
+          <h2 className="text-2xl font-display font-bold uppercase mb-6 text-[var(--sys-color-concreteGrey-base)]">
             Showcase: Application Tracker Hero
           </h2>
           <div className="h-[800px] border-2 border-[var(--sys-color-kr-activistSmokeGreen-base)]/20 rounded-3xl overflow-hidden relative shadow-2xl">
