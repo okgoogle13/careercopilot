@@ -49,7 +49,7 @@ export const KrDarkSearch: React.FC = () => {
         >
           <div className="space-y-10">
             <div className="space-y-4">
-              <label className="font-annotation text-[9px] uppercase tracking-[0.4em] text-paper-white/30">
+              <label className="font-mono text-[9px] uppercase tracking-[0.4em] text-paper-white/30">
                 Sector Density
               </label>
               <div className="flex flex-wrap gap-2">
@@ -65,10 +65,10 @@ export const KrDarkSearch: React.FC = () => {
             </div>
 
             <div className="space-y-4">
-              <label className="font-annotation text-[9px] uppercase tracking-[0.4em] text-paper-white/30">
+              <label className="font-mono text-[9px] uppercase tracking-[0.4em] text-paper-white/30">
                 Match Minimum
               </label>
-              <div className="relative h-1 rounded-sentry overflow-hidden bg-surface-KrDark-concrete-grey-high/20">
+              <div className="relative h-1 rounded-march overflow-hidden bg-surface-KrDark-concrete-grey-high/20">
                 <div className="absolute left-0 top-0 h-full w-3/4 bg-ink-gold/40" />
               </div>
               <div className="flex justify-between font-mono text-[10px] text-paper-white/20">
@@ -110,7 +110,7 @@ export const KrDarkSearch: React.FC = () => {
                       className="px-6 py-2 text-[10px] tracking-widest"
                     />
                     <div className="flex gap-2">
-                      <div className="w-1.5 h-1.5 rounded-sentry bg-ink-gold animate-pulse" />
+                      <div className="w-1.5 h-1.5 rounded-march bg-ink-gold animate-pulse" />
                       <span className="font-mono text-[9px] text-paper-white/20 uppercase">
                         Active Broadcast
                       </span>
@@ -119,7 +119,7 @@ export const KrDarkSearch: React.FC = () => {
                 </div>
 
                 {/* Internal Decorative element */}
-                <div className="absolute top-0 right-0 w-32 h-32 bg-ink-gold/5 blur-[60px] rounded-sentry -mr-16 -mt-16 opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
+                <div className="absolute top-0 right-0 w-32 h-32 bg-ink-gold/5 blur-[60px] rounded-march -mr-16 -mt-16 opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
               </SolidarityCard>
             </motion.div>
           ))}

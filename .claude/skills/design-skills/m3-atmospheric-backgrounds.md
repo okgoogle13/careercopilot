@@ -28,7 +28,7 @@ This skill implements M3 Expressive background principles:
 ```css
 /* ❌ Solid color - no depth */
 .page-background {
-  background-color: #ffffff;
+  background-color: --sys-color-canvas;
 }
 ```
 
@@ -112,7 +112,7 @@ This skill implements M3 Expressive background principles:
     /* Bold gradient overlay */
     linear-gradient(135deg, rgba(233, 30, 99, 0.15) 0%, /* Magenta */ rgba(0, 188, 212, 0.15) 100% /* Cyan */),
     /* Dot pattern */ radial-gradient(circle, rgba(205, 220, 57, 0.1) 2px, /* Lime */ transparent 2px),
-    /* Base */ #ffffff;
+    /* Base */ --sys-color-canvas;
   background-size:
     auto,
     32px 32px;

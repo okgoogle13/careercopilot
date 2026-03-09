@@ -1,3 +1,8 @@
+/**
+ * @deprecated Stone is deprecated as of KR Solidarity v6.0.
+ * Use {@link Placard} from './Placard' instead. See docs/design/01_CANON.md §2.C
+ * Will be removed in v7.0.
+ */
 import React from 'react';
 import { cn } from '../../lib/utils';
 
@@ -22,17 +27,12 @@ export interface StoneProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 /**
- * Stone (Stone Archetype)
+ * @deprecated Use Placard instead.
  *
- * Kerala Rage kr-solidarity structural container component.
- * Fundamental divider/spacer/border primitive with semantic token support.
+ * Stone (Placard Archetype — Legacy Name)
  *
- * Design Principles:
- * 1. Uses --sys-color-* semantic tokens (never hardcoded colors)
- * 2. Minimal border radius (Stone archetype is structural)
- * 3. Solidarity mode only (no mode-switching)
- * 4. Backdrop blur for glassmorphism effect
- * 5. Elevation variants with semantic shadows
+ * Kerala Rage kr-solidarity structural container.
+ * Replaced by Placard in v6.0. See docs/design/01_CANON.md §2.C
  */
 export const Stone = React.forwardRef<HTMLDivElement, StoneProps>(
   ({ className, elevation = 'raised', header, footer, children, ...props }, ref) => {
@@ -47,14 +47,14 @@ export const Stone = React.forwardRef<HTMLDivElement, StoneProps>(
         ref={ref}
         style={{
           backgroundColor: 'var(--sys-color-charcoalBackground-steps-2)',
-          borderRadius: '16px 4px 12px 24px', // Stone archetype asymmetric
+          borderRadius: 'var(--shape-megaphoneCut01)', // Megaphone archetype asymmetric
           borderColor: 'var(--sys-color-concreteGrey-steps-2)',
           borderWidth: '1px',
           borderStyle: 'solid',
           boxShadow: elevations[elevation],
         }}
         className={cn(
-          'relative overflow-hidden transition-all duration-300 backdrop-blur-xl',
+          'relative overflow-hidden transition-all duration-300 ease-viscous backdrop-blur-xl',
           className
         )}
         {...props}

@@ -3,6 +3,7 @@ node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+.yarn/install-state.gz
 
 # Environment variables (CRITICAL: NEVER commit these)
 .env
@@ -12,6 +13,8 @@ yarn-error.log*
 .env.production.local
 .env.production
 .env.staging
+.env.mcp
+.env.mcp.*
 backend/.env
 backend/.env.*
 frontend/.env.production

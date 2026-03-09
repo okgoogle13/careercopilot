@@ -19,12 +19,12 @@ This guide specifies technical differences in prompt engineering required to max
 Nano Banana Pro responds best to **technical descriptors** and **direct visual commands**.
 
 ### Key Patterns:
-- **Direct Hex Injection**: Use `--sys-color-solidarityRed-base (#F14714)` explicitly.
+- **Direct Hex Injection**: Use `--sys-color-solidarityRed-base (--sys-color-solidarity-red)` explicitly.
 - **Texture Stacking**: Mention "Gritty spray-paint", "stencil overspray", and "wheat-paste ripple" early in the prompt.
 - **Sharp Edges**: Use terms like "Razor-sharp stencil cut", "Vector-like definition", and "Zero-blur".
 
 ### Example Prompt Logic:
-> "Stencil art of [Subject]. Melbourne laneway style. Base #0F0F0F, Accents #F14714 and #DAF674. Asymmetric radii. 16:9 Aspect Ratio."
+> "Stencil art of [Subject]. Melbourne laneway style. Base --sys-color-charcoal-background, Accents --sys-color-solidarity-red and --sys-color-ink-gold. Asymmetric radii. 16:9 Aspect Ratio."
 
 ---
 

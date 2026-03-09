@@ -1,303 +1,66 @@
 ---
 name: ui-design-evaluator
-description: Evaluate design assets, analyze annotated wireframes, and create high-fidelity
-  interactive mockups with kerala-rage kr-solidarity compliance. Use when evaluating
-  designs, analyzing wireframes, creating mockups from annotations, scoring design
-  system compliance, or generating interactive prototypes.
+description: Evaluate wireframes/design assets against KR Solidarity standards and generate deterministic high-fidelity guidance.
 metadata:
-  version: 2.0.0
+  version: 6.2.0
   tags:
-    - design
-    - research
-    - ui
-    - ux
-    - kerala-rage-kr-solidarity
+    - design-evaluation
+    - wireframes
+    - hifi-guidance
 ---
 
-# UI Design Evaluator & HiFi Mockup Creator
-
-**Version:** 2.0
-**Purpose:** Design evaluation, wireframe analysis, and high-fidelity mockup generation
-**Design System:** Kerala Rage — Solidarity Mode Only
-
----
+# UI Design Evaluator
 
 ## Purpose
 
-Evaluate design assets, analyze annotated wireframes, and create high-fidelity interactive mockups with kerala-rage kr-solidarity compliance.
-
-This skill enables comprehensive UI design workflows:
-
-1. **Evaluate** existing designs against kerala-rage kr-solidarity standards
-2. **Analyze** annotated wireframes to extract components and flows
-3. **Design** high-fidelity mockups with design token compliance
-4. **Deliver** interactive prototypes, React components, and evaluation reports
-
----
+Assess UI design artifacts (wireframes, mockups, screenshots) and produce deterministic, implementation-ready guidance aligned with KR Solidarity.
 
 ## When to Use
 
-- Evaluating existing designs against kerala-rage kr-solidarity standards
-- Creating high-fidelity mockups from annotated wireframes
-- Scoring design system compliance (400-point system)
-- Generating interactive prototypes or React component specifications
-- Validating asset placement before component build
+- Before component build from wireframes.
+- During handoff from design to implementation.
+- During quality gates for new page-level experiences.
 
----
+## Shared References
+
+- `../shared-references/BRAND_CANON.md`
+- `../shared-references/STATUS_THRESHOLDS.md`
+- `../shared-references/AUDIT_OUTPUT_CONTRACT.md`
+
+## Scope
+
+This skill covers:
+- visual compliance scoring
+- hi-fi guidance from low/medium fidelity artifacts
+- token/archetype recommendations
+
+This skill does not cover:
+- direct code generation for all components
+- runtime performance validation
 
 ## Process
 
-```
-INPUT → ANALYZE → EVALUATE → DESIGN → DELIVER
-```
+1. Parse artifact intent and layout.
+2. Map regions to KR archetypes/tokens.
+3. Score compliance and identify drift.
+4. Emit implementation guidance and prioritized fixes.
 
-### 1. INPUT Phase
+## Output Contract
 
-Accept multiple input types:
-- Screenshots of existing designs
-- Annotated wireframes (image or text description)
-- Figma/Sketch export images
-- Markdown wireframe descriptions (from `wireframe-annotator`)
-- Component requirement lists
+Use shared audit contract shape with wrapper key `ui_design_evaluation` plus:
+- `hifi_guidance[]`
+- `token_recommendations[]`
 
-### 2. ANALYZE Phase
+## Troubleshooting
 
-Extract design intent:
-- Parse annotations and notes
-- Identify components needed — map to archetypes (Seed / Pebble / Lens / Jar / Cabinet / Stone)
-- Map user flows and interactions
-- Extract content hierarchy
-- Note accessibility requirements
-- Identify asset placement slots (Z-0 through Z-3+)
+### Low-fidelity source
+- Mark uncertain findings and request higher-fidelity references.
 
-### 3. EVALUATE Phase
-
-**Score Against 4 Criteria (400 points total):**
-
-#### A. Kerala Rage kr-solidarity Compliance (100 pts)
-
-- ✅ Uses Kerala Rage Typography Stack (Fraunces, Work Sans, JetBrains Mono)
-- ✅ Asymmetric shapes — no uniform border-radius
-- ✅ Solidarity color palette via `--sys-color-*` tokens only
-- ✅ Extreme weight contrast (wght 300 vs 900+, M3 Expressive standard)
-- ✅ Component archetype assigned (Seed/Pebble/Lens/Jar/Cabinet/Stone)
-- ❌ Anti-Slop violations: Inter/Roboto, white (#FFF) backgrounds, hardcoded hex, purple gradients
-
-#### B. Accessibility (100 pts)
-
-- ✅ WCAG AA contrast ratios (4.5:1 minimum)
-- ✅ ARIA labels on interactive elements
-- ✅ Keyboard navigation support
-- ✅ Focus states visible
-- ✅ Screen reader friendly structure
-- ✅ Color not sole indicator
-
-#### C. User Flow Logic (100 pts)
-
-- ✅ Clear information hierarchy
-- ✅ Logical interaction patterns
-- ✅ Consistent navigation
-- ✅ Error state handling
-- ✅ Loading state design
-- ✅ Empty state design
-
-#### D. Visual Hierarchy & Typography (100 pts)
-
-- ✅ Clear typographic scale (Fraunces → Work Sans → JetBrains Mono)
-- ✅ Extreme weight contrasts (M3 Expressive — not subtle)
-- ✅ Visual weight guides attention
-- ✅ Spacing creates rhythm
-- ✅ Alignment and grid consistency
-
-**Grade Scale:**
-- **360+ (90%)**: Excellent — Production ready
-- **320–359 (80–89%)**: Good — Minor refinements
-- **280–319 (70–79%)**: Satisfactory — Needs work
-- **240–279 (60–69%)**: Needs significant improvement
-- **<240 (<60%)**: Does not meet standards
-
----
-
-### 4. DESIGN Phase
-
-**Generate High-Fidelity Mockup:**
-
-#### Step 1: Component Mapping
-
-Map wireframe elements to kr-solidarity archetypes:
-- Atomic elements → **Seed** (button, chip, badge)
-- Sequential stacks → **Pebble** (progress, stacked items)
-- Focal overlays → **Lens** (modal, popover, drawer)
-- Framed containers → **Jar** (card, list item, panel)
-- Complex grids → **Cabinet** (dashboard, multi-column)
-- Structural dividers → **Stone** (divider, spacer)
-
-#### Step 2: Token Application
-
-**Colors — `--sys-color-*` only:**
-```css
-/* Backgrounds */
-background: var(--sys-color-asphaltBlack);        /* #1A1714 */
-surface: var(--sys-color-primary-10);              /* Dark container */
-
-/* Brand */
-accent: var(--sys-color-kr-ink-gold);             /* #D4A84B */
-action: var(--sys-color-waratahRed);              /* #C45C4B */
-grounded: var(--sys-color-ochreEarth);            /* #B8733D */
-natural: var(--sys-color-gumLeafGreen);           /* #6B7F6E */
-neutral: var(--sys-color-concreteGrey);           /* #A39B8F */
-
-/* Text */
-text-primary: var(--sys-color-paperWhite);        /* #F5F0E8 */
-text-muted: var(--sys-color-concreteGrey);
-```
-
-**Typography:**
-```css
-/* Hero / headline — Fraunces variable */
-font-family: var(--sys-type-font-fraunces);
-font-variation-settings: "wght" 700, "SOFT" 50, "WONK" 0;
-
-/* Body / UI — Work Sans */
-font-family: var(--sys-type-font-work-sans);
-font-weight: 400; /* to 600 */
-
-/* Code / data — JetBrains Mono */
-font-family: var(--sys-type-font-mono);
-font-weight: 400;
-```
-
-**Shapes — asymmetric kr-solidarity:**
-```css
-/* Seed (button) */
-border-radius: 40px 12px 40px 12px;
-
-/* Jar (card) */
-border-radius: 32px 8px 28px 12px;
-
-/* Lens (modal) */
-border-radius: 24px 8px 20px 8px;
-```
-
-**Motion — spring physics:**
-```css
-transition: all 250ms cubic-bezier(0.34, 1.56, 0.64, 1);
-/* Or Framer Motion: type: 'spring', stiffness: 400, damping: 20 */
-```
-
-#### Step 3: Layout Construction
-
-- Build responsive HTML structure
-- Apply CSS with `--sys-color-*` design tokens
-- Add interactive states (hover, focus, active)
-- Implement accessibility attributes
-
-#### Step 4: Asset Integration
-
-- Place Kerala Rage assets using `asset-placement-strategy` z-index rules
-- Z-0: substrate/base texture
-- Z-1–2: atmospheric overlays
-- Z-3+: UI foreground accents
-
----
-
-### 5. DELIVER Phase
-
-**A. Interactive HTML Artifact**
-```html
-<!-- Viewable directly in Claude interface -->
-<!-- Full design with interactions -->
-<!-- Uses --sys-color-* tokens via CSS custom properties -->
-<!-- Fraunces + Work Sans + JetBrains Mono only -->
-```
-
-**B. React Component Code**
-```tsx
-// Production-ready TypeScript/React
-// 100% --sys-color-* token compliance
-// ARIA accessibility built-in
-// Framer Motion spring physics
-// Archetype annotated (e.g., // Archetype: Jar)
-```
-
-**C. Evaluation Report**
-```markdown
-## Design Evaluation Report
-
-- kr-solidarity Compliance: 95/100 (A)
-- Accessibility: 88/100 (B)
-- User Flow Logic: 92/100 (A)
-- Visual Hierarchy: 90/100 (A)
-- **Overall:** 365/400 (91% — Excellent)
-
-### Strengths
-- Correct Kerala Rage typography stack (Fraunces headlines)
-- Asymmetric shapes on all archetypes
-- --sys-color-* tokens throughout
-
-### Improvements Needed
-- Add focus states to form inputs
-- Increase contrast on secondary text
-```
-
-**D. Component Specifications**
-```markdown
-## Components Required
-
-1. HeroSection — Archetype: Cabinet
-   - Fraunces wght 700 headline
-   - KR asset hero background (Z-0), overlay (Z-1)
-   - SeedButton CTAs with --sys-color-kr-ink-gold
-
-2. MetricCard — Archetype: Jar
-   - Work Sans body text
-   - Asymmetric radius (32px 8px 28px 12px)
-   - --sys-color-primary-10 surface
-```
-
----
-
-## Compliance Checklist
-
-Before delivering a mockup, verify:
-
-### Design System
-- [ ] Uses only Kerala Rage typography stack (Fraunces / Work Sans / JetBrains Mono)
-- [ ] No forbidden fonts: Inter, Roboto, Arial, Helvetica, Sora, Plus Jakarta Sans
-- [ ] All shapes are asymmetric (no uniform border-radius)
-- [ ] All colors from `--sys-color-*` tokens — zero hardcoded hex
-- [ ] Motion uses spring physics (cubic-bezier(0.34, 1.56, 0.64, 1))
-- [ ] Component assigned to archetype (Seed/Pebble/Lens/Jar/Cabinet/Stone)
-
-### Anti-Slop
-- [ ] NO white (#FFFFFF) backgrounds — use `--sys-color-paperWhite` on dark only
-- [ ] NO purple or blue gradients
-- [ ] NO generic SaaS aesthetic
-- [ ] NO uniform corners (e.g., `rounded-lg` on everything)
-
-### Accessibility
-- [ ] 4.5:1 contrast ratio minimum (7:1 for AAA)
-- [ ] ARIA labels on all interactive elements
-- [ ] Keyboard navigation support
-- [ ] Focus states visible
-- [ ] No color-only indicators
-
----
+### Conflicting signals
+- Prioritize canon documents over ambiguous stylistic cues.
 
 ## Related Skills
 
-**Workflow chain:**
-```
-wireframe-annotator → ui-design-evaluator → component-builder → jest-test-scaffolder
-```
-
-- `wireframe-annotator` — Upstream annotated wireframe source
-- `asset-placement-strategy` — Asset slot and z-index validation
-- `component-builder` — Convert mockup specs to production code
-- `component-transformer` — Migrate legacy components to kr-solidarity
-- `component-visual-audit` — Screenshot-based compliance audit
-- `hifi-blueprint-linter` — Validate wireframe document correctness
-
----
-
-**Status:** Production Ready | **Version:** 2.0.0 | **Last Updated:** 2026-02-28
+- `component-visual-audit`
+- `asset-placement-strategy`
+- `kerala-rage-brand-enforcer`

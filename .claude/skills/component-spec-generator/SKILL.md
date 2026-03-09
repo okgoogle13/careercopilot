@@ -57,5 +57,15 @@ Wireframe markdown files from `wireframe-annotator`
 
 ## Validation
 
-Checks token validity using `design-token-validator`. 
+Checks token validity using `design-token-validator`.
 If `design-token-validator` is not available, perform manual review against `TERMINOLOGY_GUIDE.md` or use `m3-expressive-ui-evaluator` scoring as a proxy for compliance.
+
+## INPUT
+- `raw_spec`: JSON array from scaffolder
+- `tokens_path`: "frontend/src/design/tokens/tokens.json"
+
+## ENHANCEMENTS REQUIRED
+Each spec gains:
+- `"motion": {"type": "spring", "stiffness": "--sys-motion-stiffness-hero"}`
+- `"shapes": {"pebble_variance": ">0.2", "asymmetric": true}`
+- `"typography": ["Fraunces 700+", "Work Sans", "JetBrains Mono"]`

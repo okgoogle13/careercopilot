@@ -21,7 +21,7 @@ This unified skill applies three related visual token transformations in sequenc
 
 ### Detection Patterns
 
-- **Hex colors:** `#1976d2`, `#ffffff`
+- **Hex colors:** `#1976d2`, `--sys-color-canvas`
 - **RGB/RGBA:** `rgb(25, 118, 210)`, `rgba(0, 0, 0, 0.12)`
 - **Named colors:** `blue`, `white`, `black`, `gray`
 - **Material-UI:** `theme.palette.primary.main`, `primary.light`
@@ -62,9 +62,9 @@ function mapColorToToken(hexOrRgb, context) {
 | Original               | Context       | M3 Token                           |
 | ---------------------- | ------------- | ---------------------------------- |
 | `#1976d2` (blue)       | Button bg     | `var(--sys-color-primary)`         |
-| `#ffffff` (white)      | Text on color | `var(--sys-color-on-primary)`      |
+| `--sys-color-canvas` (white)      | Text on color | `var(--sys-color-on-primary)`      |
 | `#000000` (black)      | Text on light | `var(--sys-color-on-surface)`      |
-| `#f5f5f5` (light gray) | Surface       | `var(--sys-color-surface)`         |
+| `--sys-color-surface-light` (light gray) | Surface       | `var(--sys-color-surface)`         |
 | `rgba(0,0,0,0.12)`     | Divider       | `var(--sys-color-outline-variant)` |
 | `#d32f2f` (red)        | Error         | `var(--sys-color-error)`           |
 
@@ -74,7 +74,7 @@ function mapColorToToken(hexOrRgb, context) {
 // Before
 <Button sx={{
   backgroundColor: '#1976d2',
-  color: '#ffffff',
+  color: '--sys-color-canvas',
   borderColor: '#e0e0e0'
 }} />
 
@@ -225,7 +225,7 @@ const elevationMap = {
 ```tsx
 // Before
 const Card = styled.div`
-  background-color: #ffffff;
+  background-color: --sys-color-canvas;
   color: #000000;
   border: 1px solid #e0e0e0;
   border-radius: 12px;

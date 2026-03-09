@@ -6,13 +6,13 @@ This reference maps natural language brand descriptions to the technical system 
 
 | Brand Name | Hex Code | System Token Variable | Usage Context |
 |------------|----------|-----------------------|---------------|
-| **Charcoal Base** | `#0F0F0F` | `--sys-color-charcoalBackground-base` | Fondational canvas, matte surfaces. |
-| **Solidarity Red** | `#F14714` | `--sys-color-solidarityRed-base` | Resistance energy, primary CTA, ink hits. |
-| **Ink Gold** | `#DAF674` | `--sys-color-inkGold-base` | Temple radiance, ornamental highlights. |
-| **Stencil Yellow** | `#F6E748` | `--sys-color-stencilYellow-base` | High-salience UI markers, attention phrases. |
-| **Worker Ash** | `#DAF6B3` | `--sys-color-worker-ash-base` | Readability on dark, body text outlines. |
-| **Activist Smoke Green**| `#48DA8B` | `--sys-color-kr-activistSmokeGreen-base` | Kerala backwaters, landscape accents. |
-| **Signal Green** | `#48F0E5` | `--sys-color-signalGreen-base` | Hybrid identity pop, ink splash moments. |
+| **Charcoal Base** | `--sys-color-charcoal-background` | `--sys-color-charcoalBackground-base` | Fondational canvas, matte surfaces. |
+| **Solidarity Red** | `--sys-color-solidarity-red` | `--sys-color-solidarityRed-base` | Resistance energy, primary CTA, ink hits. |
+| **Ink Gold** | `--sys-color-ink-gold` | `--sys-color-inkGold-base` | Temple radiance, ornamental highlights. |
+| **Stencil Yellow** | `--sys-color-stencil-yellow` | `--sys-color-stencilYellow-base` | High-salience UI markers, attention phrases. |
+| **Worker Ash** | `--sys-color-worker-ash` | `--sys-color-worker-ash-base` | Readability on dark, body text outlines. |
+| **Activist Smoke Green**| `--sys-color-kr-activist-smoke-green` | `--sys-color-kr-activistSmokeGreen-base` | Kerala backwaters, landscape accents. |
+| **Signal Green** | `--sys-color-signal-green` | `--sys-color-signalGreen-base` | Hybrid identity pop, ink splash moments. |
 
 > [!IMPORTANT]
 > **BANNED**: Never use white backgrounds (`#FFFFFF`). Always anchor on Charcoal steps.
@@ -29,8 +29,8 @@ This reference maps natural language brand descriptions to the technical system 
 
 ## Shape & Aesthetic Tokens
 
-- **Radius (Stone)**: `--sys-shape-radius-stone` (Asymmetric, organic, rejects perfect geometry).
-- **Radius (Slab)**: `--sys-shape-radius-slab` (Heavy, grounded containers).
+- **Shape (Megaphone)**: `--shape-megaphoneCut01` (Asymmetric, organic, rejects perfect geometry).
+- **Shape (Placard)**: `--shape-placardTorn01` (Heavy, grounded containers).
 - **Motion (Expressive)**: `cubic-bezier(0.34, 1.56, 0.64, 1)` (M3 Expressive overshoot).
 
 ## Motif Strategy

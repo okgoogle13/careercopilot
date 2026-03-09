@@ -179,7 +179,7 @@ export const InterviewPrep: React.FC<InterviewPrepProps> = ({ onBack }) => {
                 >
                   <div className="p-6 flex flex-col items-center text-center h-full">
                     <div
-                      className="w-16 h-16 rounded-2xl flex items-center justify-center mb-4 transition-colors group-hover:scale-110 duration-300"
+                      className="w-16 h-16 rounded-placard flex items-center justify-center mb-4 transition-colors group-hover:scale-110 duration-300"
                       style={{ backgroundColor: `${category.color}20` }} /* 20 = 12% opacity hex */
                     >
                       <MessageSquare
@@ -326,9 +326,9 @@ export const InterviewPrep: React.FC<InterviewPrepProps> = ({ onBack }) => {
                     {currentQuestion.tips.map((tip, index) => (
                       <div
                         key={index}
-                        className="flex gap-3 items-start p-2 rounded-stone hover:bg-[var(--color-surface-base)] transition-colors"
+                        className="flex gap-3 items-start p-2 rounded-megaphone hover:bg-[var(--color-surface-base)] transition-colors"
                       >
-                        <div className="w-2 h-2 rounded-sentry bg-[var(--color-leaf-base)] mt-2 flex-shrink-0" />
+                        <div className="w-2 h-2 rounded-march bg-[var(--color-leaf-base)] mt-2 flex-shrink-0" />
                         <p className="text-body-medium text-[var(--color-text-secondary)] leading-relaxed">
                           {tip}
                         </p>

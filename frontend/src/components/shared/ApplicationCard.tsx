@@ -40,10 +40,10 @@ export function ApplicationCard({
       <div className="flex items-start justify-between mb-8">
         <div className="flex-1">
           <h3 className="text-bloom-KrDark text-xl mb-1">{title}</h3>
-          <p className="text-on-surface-variant font-field-note italic text-lg">{company}</p>
+          <p className="text-on-surface-variant font-primary italic text-lg">{company}</p>
           <div className="flex items-center gap-2 mt-2">
             <span className="text-curator-annotation text-sm">→ {location}</span>
-            <span className="text-on-surface-variant/50 text-[10px] font-annotation uppercase tracking-widest pl-2">
+            <span className="text-on-surface-variant/50 text-[10px] font-mono uppercase tracking-widest pl-2">
               Applied {appliedDate}
             </span>
           </div>
@@ -57,7 +57,7 @@ export function ApplicationCard({
           {onUpdateStatus && (
             <button
               onClick={onUpdateStatus}
-              className="bg-surface-container-high px-6 py-2 rounded-sentry text-on-surface hover:bg-surface-bright transition-all font-field-note text-sm uppercase tracking-wide"
+              className="bg-surface-container-high px-6 py-2 rounded-march text-on-surface hover:bg-surface-bright transition-all font-primary text-sm uppercase tracking-wide"
             >
               Update
             </button>
@@ -75,7 +75,7 @@ export function ApplicationCard({
             <div
               key={idx}
               className={`
-                flex-1 px-4 py-3 rounded-sentry text-center transition-all duration-short-2 ease-spring
+                flex-1 px-4 py-3 rounded-march text-center transition-all duration-short-2 ease-spring
                 ${
                   isCurrent
                     ? 'bg-primary-container text-on-primary-container font-bold shadow-sm'

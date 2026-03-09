@@ -1,5 +1,5 @@
 import React, { Component, ErrorInfo, ReactNode } from 'react';
-import { Warning, Refresh, Home } from '@mui/icons-material';
+import { AlertTriangle as Warning, RefreshCw as Refresh, Home } from 'lucide-react';
 
 interface Props {
   children: ReactNode;
@@ -93,14 +93,14 @@ class ErrorBoundary extends Component<Props, State> {
             <div className="flex flex-col sm:flex-row gap-3">
               <button
                 onClick={this.handleRefresh}
-                className="flex-1 inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-stone text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors"
+                className="flex-1 inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-megaphone text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors"
               >
                 <Refresh className="w-4 h-4 mr-2" />
                 Try Again
               </button>
               <button
                 onClick={this.handleGoHome}
-                className="flex-1 inline-flex items-center justify-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-stone text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors"
+                className="flex-1 inline-flex items-center justify-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-megaphone text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors"
               >
                 <Home className="w-4 h-4 mr-2" />
                 Go Home

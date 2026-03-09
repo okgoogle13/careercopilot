@@ -1,7 +1,7 @@
-# KR Solidarity: Asset & Visual Strategy (v6.0)
+# KR Solidarity: Asset Strategy (v6.1)
 
 > **Part of the [KR Solidarity Design Canon](01_CANON.md)**
-> **Topic:** Documentation of symbolic anchors, asset registry, and placement rules.
+> **Topic:** Definition, placement and governance rules for visual assets.
 
 ---
 
@@ -67,4 +67,25 @@ When a symbolic anchor (e.g., Shiva or Elephant) is used, it must be accompanied
 ---
 
 **Registry Reference:** `frontend/public/assets/kerala-rage-kr-solidarity-manifest.json`
-**Last Updated:** 2026-03-06
+---
+
+## 5. Decorative Shape Assets
+
+Shape tokens used as decorative visual elements (not structural UI). All belong to **Substrate** archetype tier.
+
+| Shape Token | CSS Variable | Use Case | Archetype Tier |
+| :--- | :--- | :--- | :--- |
+| `shape.blob01` | `--sys-shape-blob01` | Hero frame backgrounds, ambient animation masks | Substrate |
+| `shape.blob02` | `--sys-shape-blob02` | Avatar mask frames, atmospheric background shapes | Substrate |
+| `shape.stone01` | `--sys-shape-stone01` | Large hero canvas shapes, Megaphone backing frame | Core UI |
+| `sentryAvatar` | `--sys-shape-sentryAvatar` | All user avatars (98%, never 50%) | Utility |
+| `tornEdgeClipPath` | `--sys-shape-tornEdge` | Wheat-paste section breaks, poster bleeds | Decorative |
+
+**Blob governance:**
+- `shape.blob*` tokens are restricted to Substrate archetype and explicitly whitelisted contexts (avatar mask frames, hero canvases).
+- Any Placard, Strike, Scaffold, or March component using `shape.blob*` is a compliance violation.
+
+---
+
+**Last Updated:** 2026-03-07
+**Design System Version:** v6.1 (Shape System)

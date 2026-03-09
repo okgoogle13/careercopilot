@@ -1,0 +1,150 @@
+version: 1.0.0
+generated_at: '2026-03-09T15:20:00Z'
+generated_by: sprint-coordinator
+
+sprint:
+  id: S6-Deploy-Candidate-1
+  name: Phase 6 Release Readiness and Deployment
+  phase: phase-6
+  start_date: '2026-03-10'
+  end_date: '2026-03-14'
+  duration_days: 5
+  environment: staging-production
+  owner: release-engineering
+  notes: Execute release gates in strict sequence with explicit go/no-go decisioning.
+
+goals:
+  - id: G1
+    title: Deployment preflight evidence
+    description: Consolidate readiness checks and artifact lock before any deployment.
+    priority: critical
+    owner: codebase-orchestrator
+  - id: G2
+    title: Staging validation
+    description: Deploy to staging and validate smoke paths + observability.
+    priority: critical
+    owner: deployment-manager
+  - id: G3
+    title: Production release gate and deployment
+    description: Run go/no-go review and deploy with post-deploy checks.
+    priority: critical
+    owner: project-manager
+
+milestones:
+  - id: M1
+    name: Preflight and artifact lock
+    target_date: '2026-03-10'
+    acceptance_criteria:
+      - Type-check, build, tests, and visual evidence captured
+      - Release candidate artifact list frozen
+    dependencies: []
+    status: pending
+  - id: M2
+    name: Staging deploy verified
+    target_date: '2026-03-11'
+    acceptance_criteria:
+      - Staging deploy successful
+      - Smoke tests pass for updated phase 5 pages
+      - No critical observability alerts
+    dependencies: [M1]
+    status: pending
+  - id: M3
+    name: Production decision and deploy
+    target_date: '2026-03-13'
+    acceptance_criteria:
+      - Go/no-go artifact published
+      - Production deploy successful
+      - Post-deploy smoke checks pass
+    dependencies: [M2]
+    status: pending
+
+tasks:
+  - id: P6-T1-release-preflight
+    title: Run release preflight checks
+    milestone: M1
+    priority: critical
+    effort_hours: 3
+    assigned_to: codebase-orchestrator
+    dependencies: []
+    acceptance_criteria:
+      - frontend type-check/build pass
+      - required tests pass
+      - visual check evidence attached
+    status: pending
+  - id: P6-T2-staging-deploy
+    title: Deploy candidate to staging
+    milestone: M2
+    priority: critical
+    effort_hours: 2
+    assigned_to: deployment-manager
+    dependencies: [P6-T1-release-preflight]
+    acceptance_criteria:
+      - deployment completes without rollback
+    status: pending
+  - id: P6-T3-staging-smoke
+    title: Run staging smoke checks
+    milestone: M2
+    priority: critical
+    effort_hours: 2
+    assigned_to: gemini-code-executor
+    dependencies: [P6-T2-staging-deploy]
+    acceptance_criteria:
+      - cover-letter-generator, ksc-generator, design-sidekick, dashboard healthy
+    status: pending
+  - id: P6-T4-observability-check
+    title: Verify logs, errors, and baseline health
+    milestone: M2
+    priority: high
+    effort_hours: 2
+    assigned_to: backend-specialist
+    dependencies: [P6-T2-staging-deploy]
+    acceptance_criteria:
+      - no critical sentry/log alerts
+      - error-rate and latency within baseline
+    status: pending
+  - id: P6-T5-prod-readiness-review
+    title: Publish production go/no-go decision
+    milestone: M3
+    priority: critical
+    effort_hours: 2
+    assigned_to: project-manager
+    dependencies: [P6-T3-staging-smoke, P6-T4-observability-check]
+    acceptance_criteria:
+      - release decision documented with blockers/actions
+    status: pending
+  - id: P6-T6-production-deploy
+    title: Deploy to production
+    milestone: M3
+    priority: critical
+    effort_hours: 1
+    assigned_to: deployment-manager
+    dependencies: [P6-T5-prod-readiness-review]
+    acceptance_criteria:
+      - production deployment successful
+    status: pending
+  - id: P6-T7-post-deploy-smoke
+    title: Run post-deploy smoke checks
+    milestone: M3
+    priority: critical
+    effort_hours: 2
+    assigned_to: gemini-code-executor
+    dependencies: [P6-T6-production-deploy]
+    acceptance_criteria:
+      - all key routes and flows healthy in production
+    status: pending
+  - id: P6-T8-phase6-closeout
+    title: Publish phase closeout and handoff
+    milestone: M3
+    priority: high
+    effort_hours: 1
+    assigned_to: project-manager
+    dependencies: [P6-T7-post-deploy-smoke]
+    acceptance_criteria:
+      - closeout report published with final status and next recommendation
+    status: pending
+
+readiness_policy:
+  go_threshold: 95
+  go_with_conditions_threshold: 85
+  no_go_below: 85
+  critical_blocker_rule: any critical blocker => NO_GO

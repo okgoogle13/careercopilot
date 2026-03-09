@@ -114,7 +114,7 @@ export const Mark = forwardRef<HTMLInputElement, MarkProps>(
         transition-all duration-standard var(--ease-viscous-breeze)
         ${className}
       `}
-          style={{ borderRadius: 'var(--radius-seed)' }}
+          style={{ borderRadius: 'var(--shape-pebbleSurge01)' }}
         >
           {/* Checkmark or Dash Icon */}
           {isChecked && (
@@ -142,7 +142,7 @@ export const Mark = forwardRef<HTMLInputElement, MarkProps>(
         {label && (
           <span
             className={`
-          text-sm font-field-note font-medium
+          text-sm font-primary font-medium
           ${error ? 'text-[var(--sys-color-solidarityRed-base)]' : 'text-[var(--sys-color-worker-ash-base)]'}
           select-none
         `}
@@ -204,7 +204,7 @@ export const MarkRadio = forwardRef<HTMLInputElement, MarkRadioProps>(
           className={`
         relative flex-shrink-0
         w-5 h-5
-        rounded-sentry
+        rounded-march
         border-2
         ${
           error
@@ -228,7 +228,7 @@ export const MarkRadio = forwardRef<HTMLInputElement, MarkRadioProps>(
               <div
                 className={`
               w-2.5 h-2.5
-             rounded-sentry
+             rounded-march
               ${error ? 'bg-[var(--sys-color-solidarityRed-base)]' : 'bg-[var(--sys-color-inkGold-base)]'}
               scale-100
             `}
@@ -241,7 +241,7 @@ export const MarkRadio = forwardRef<HTMLInputElement, MarkRadioProps>(
         {label && (
           <span
             className={`
-          text-sm font-field-note font-medium
+          text-sm font-primary font-medium
           ${error ? 'text-[var(--sys-color-solidarityRed-base)]' : 'text-[var(--sys-color-worker-ash-base)]'}
           select-none
         `}
@@ -255,7 +255,3 @@ export const MarkRadio = forwardRef<HTMLInputElement, MarkRadioProps>(
 );
 
 MarkRadio.displayName = 'MarkRadio';
-
-// Legacy M3 exports for backward compatibility
-export { Mark as M3Checkbox, MarkRadio as M3Radio };
-export type { MarkProps as M3CheckboxProps, MarkRadioProps as M3RadioProps };

@@ -51,7 +51,7 @@ export const ManifestoSlab: React.FC<ManifestoSlabProps> = ({
       style={{
         backgroundColor: 'var(--sys-color-charcoalBackground-base)',
         borderLeft: '6px solid var(--sys-color-solidarityRed-steps-2)',
-        borderRadius: '8px 0 8px 0', // Cabinet archetype minimal structural radius
+        borderRadius: 'var(--shape-scaffoldSlab01)', // Cabinet archetype minimal structural radius
         boxShadow: '0 12px 32px rgba(0, 0, 0, 0.35)',
       }}
       className={cn('p-10 md:p-16 relative overflow-hidden z-20', className)}

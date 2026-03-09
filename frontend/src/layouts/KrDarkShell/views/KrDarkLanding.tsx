@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
-import { ManifestoSlab, ManifestoCard, ActionButton } from '../../../components/kerala-rage';
+import { ManifestoCard } from '../../../components/kerala-rage';
 import { LayeredHero } from '../../../components/kerala-rage/LayeredHero';
 import { NativeAnchor } from '../../../components/ui';
 import type { SolidarityManifest } from '../../../design/hero/heroTypes';
 import { composeHero } from '../../../lib/composeHero';
-import type { CompositionResult } from '../../../lib/composeHero';
 import { loadHeroRegistry } from '../../../design/hero/heroRegistry';
 import {
   getDefaultVariant,
@@ -27,6 +26,8 @@ export const KrDarkLanding: React.FC = () => {
     typography: any;
     animation: any;
     zIndexMap: any;
+    safeZones?: any;
+    renderHints?: any;
   } | null>(null);
   const [variant, setVariant] = useState<AbVariant>(() =>
     getDefaultVariant(LANDING_HERO_AB_CONFIG.testId)
@@ -53,6 +54,8 @@ export const KrDarkLanding: React.FC = () => {
             typography: result.typography,
             animation: result.animation,
             zIndexMap: result.zIndexMap,
+            safeZones: result.safeZones,
+            renderHints: result.renderHints,
           });
         }
       } catch (error) {
@@ -76,6 +79,8 @@ export const KrDarkLanding: React.FC = () => {
             typography={heroData.typography}
             animation={heroData.animation}
             zIndexMap={heroData.zIndexMap}
+            safeZones={heroData.safeZones}
+            renderHints={heroData.renderHints}
             className="mb-12"
           />
           {/* Debug Variant Toggle */}
@@ -107,7 +112,7 @@ export const KrDarkLanding: React.FC = () => {
         >
           <ManifestoCard
             title="Career Resurrection"
-            content="Your professional history is a KrMotif awaiting audit. Secure the past to claim the future through deliberate craft and street-print defiance. Join the collective front line today."
+            content="Your professional history is ready for structured review. Build stronger applications with clear evidence, targeted analysis, and deliberate drafting."
             actionLabel="SECURE ACCESS"
             onAction={() => (window.location.href = '/login')}
             className="w-full"

@@ -1,9 +1,6 @@
 #!/usr/bin/env python3
 """
-MCP Design System Sidekick -  Validation & Asset Orchestration
-
-Specialized MCP server bridging Claude Desktop's creative direction with
-programmatic asset validation and implementation synthesis.
+MCP Design System Sidekick - Validation & Asset Orchestration (KR Solidarity)
 """
 
 import warnings
@@ -17,8 +14,6 @@ import logging
 import base64
 import sentry_sdk
 import google.generativeai as genai
-import openai
-from openai import AsyncOpenAI
 from concurrent.futures import ThreadPoolExecutor
 
 try:
@@ -52,53 +47,48 @@ if os.getenv("SENTRY_DSN"):
     )
     logger.info("Sentry SDK initialized")
 
-GEMINI_VISION_CANDIDATES = [
-    os.getenv("GEMINI_VISION_MODEL_PRIMARY", "gemini-2.0-flash"),     # Nano Banana / 2.0 Flash
-    os.getenv("GEMINI_VISION_MODEL_FALLBACK", "gemini-flash-latest"),     # 1.5/2.5 Flash
-    "gemini-2.0-flash-lite",
-]
+# Model Tiers (March 2026)
+MODEL_TIERS = {
+    "Frontier": "gemini-3.1-pro",
+    "Performance": "gemini-3.1-flash",
+    "Utility": "gemini-3.1-flash-lite",
+    "LTS": "gemini-1.5-pro"
+}
 
 class DesignSystemSidekickServer:
     def __init__(self):
         self.gemini_key = os.getenv("GEMINI_API_KEY", "")
         self.github_token = os.getenv("GITHUB_TOKEN", os.getenv("GH_TOKEN", ""))
+        self.executor = ThreadPoolExecutor(max_workers=5)
 
-        # Initialize Gemini
         if self.gemini_key:
             genai.configure(api_key=self.gemini_key)
-            # Use 2.0-flash as primary for this project config
-            self.gemini_model = genai.GenerativeModel('gemini-2.0-flash')
+            # Default to Performance for routine tasks
+            self.pro_model = genai.GenerativeModel(MODEL_TIERS["Frontier"])
+            self.flash_model = genai.GenerativeModel(MODEL_TIERS["Performance"])
         else:
-            self.gemini_model = None
+            self.pro_model = None
+            self.flash_model = None
 
-        # Initialize GitHub Models (via GITHUB_TOKEN)
-        self.openai_client = None
-        if self.github_token:
-            self.openai_client = AsyncOpenAI(
-                api_key=self.github_token,
-                base_url="https://models.inference.ai.azure.com"
-            )
-
-        self.executor = ThreadPoolExecutor(max_workers=5)
-        logger.info("Design System Sidekick initialized with Gemini and OpenAI fallback")
+        logger.info("Design System Sidekick (KR Solidarity) initialized")
 
     def list_tools(self):
         return [
             {
                 "name": "validate_asset_compliance",
-                "description": "Validate DALL-E output against Northcote compliance scorecard",
+                "description": "Validate asset output against KR Solidarity compliance scorecard",
                 "inputSchema": {
                     "type": "object",
                     "properties": {
                         "asset_id": {"type": "string"},
                         "image_path": {"type": "string"}
                     },
-                    "required": ["asset_id"]
+                    "required": ["asset_id", "image_path"]
                 }
             },
             {
                 "name": "generate_implementation_package",
-                "description": "Generate Implementation Package for validated asset",
+                "description": "Generate Implementation Package for validated KR asset",
                 "inputSchema": {
                     "type": "object",
                     "properties": {
@@ -109,23 +99,6 @@ class DesignSystemSidekickServer:
                 }
             }
         ]
-
-    def _get_vision_model(self):
-        if not self.gemini_key:
-            return None
-        import google.generativeai as genai
-        try:
-            genai.configure(api_key=self.gemini_key)
-            for name in GEMINI_VISION_CANDIDATES:
-                try:
-                    # Quick check to see if model exists
-                    model = genai.GenerativeModel(name)
-                    return model
-                except Exception:
-                    continue
-        except Exception as e:
-            logger.error(f"Gemini configuration error: {e}")
-        return None
 
     async def _call_gh_vision_async(self, prompt, image_path):
         """Fallback to GitHub Models vision."""
@@ -158,62 +131,48 @@ class DesignSystemSidekickServer:
             ]
 
             def sync_gh_call():
-                return client.complete(
-                    messages=messages,
-                    model="gpt-4o-mini"
-                )
+                return client.complete(messages=messages, model="gpt-4o-mini")
 
             loop = asyncio.get_event_loop()
             resp = await loop.run_in_executor(self.executor, sync_gh_call)
             return resp.choices[0].message.content
         except Exception as e:
             logger.error(f"GitHub Models vision fallback failed: {e}")
-            sentry_sdk.capture_exception(e)
             return None
 
     async def _call_llm_async(self, prompt, json_mode=False):
         """Standard text fallback (Gemini -> GitHub Models)."""
-        # --- Gemini Try ---
-        if self.gemini_model:
+        if self.flash_model:
             try:
                 loop = asyncio.get_event_loop()
                 def sync_call():
-                    config = {}
-                    if json_mode:
-                        config = {"response_mime_type": "application/json"}
-                    resp = self.gemini_model.generate_content(prompt, generation_config=config if config else None)
+                    config = {"response_mime_type": "application/json"} if json_mode else None
+                    resp = self.flash_model.generate_content(prompt, generation_config=config)
                     return resp.text if resp else None
 
                 result = await loop.run_in_executor(self.executor, sync_call)
-                if result:
-                    return result
+                if result: return result
             except Exception as e:
-                logger.warning(f"Gemini failed in DesignSidekick, trying GitHub Models... Error: {e}")
-                sentry_sdk.capture_message("Gemini failed in DesignSidekick, falling back", level="warning")
+                logger.warning(f"Gemini Performance failed, trying GitHub... Error: {e}")
 
-        # --- GitHub Models Fallback ---
+        # GitHub Models Fallback
         if self.github_token and ChatCompletionsClient:
             try:
                 client = ChatCompletionsClient(
                     endpoint="https://models.github.ai/inference",
                     credential=AzureKeyCredential(self.github_token),
                 )
-
-                def sync_gh_text_call():
-                    return client.complete(
-                        messages=[{"role": "user", "content": prompt}],
-                        model="gpt-4o-mini"
-                    )
-
                 loop = asyncio.get_event_loop()
-                resp = await loop.run_in_executor(self.executor, sync_gh_text_call)
+                resp = await loop.run_in_executor(self.executor, lambda: client.complete(
+                    messages=[{"role": "user", "content": prompt}],
+                    model="gpt-4o-mini"
+                ))
                 return resp.choices[0].message.content
             except Exception as e:
-                logger.error(f"GitHub Models fallback failed in DesignSidekick: {e}")
-                sentry_sdk.capture_exception(e)
-                return f"Error: LLM engines failed. Gemini unavailable and GitHub Models error: {str(e)}"
+                logger.error(f"Fallback failed: {e}")
+                return f"Error: All LLM engines failed."
 
-        return "Error: No LLM engines available (missing keys or initialization failure)."
+        return "Error: No LLM engines available."
 
     async def call_tool(self, name, args):
         if name == "validate_asset_compliance":
@@ -221,79 +180,47 @@ class DesignSystemSidekickServer:
             image_path = args.get("image_path")
 
             if not image_path or not os.path.exists(image_path):
-                return [{"type": "text", "text": json.dumps({"error": f"Image path not found: {image_path}"})}]
+                return [{"type": "text", "text": json.dumps({"error": f"Image path missing: {image_path}"})}]
 
             prompt = f"""
-            Validate the following asset for Northcote compliance:
+            Validate the following asset for KR Solidarity compliance:
             Asset ID: {asset_id}
-
-            Focus on: Palette consistency, geometric precision, lighting balance, and typography.
-
-            Return ONLY a JSON object with:
-            - compliance: boolean
-            - score: integer (0-100)
-            - issues: list of strings
-            - summary: string
+            Standards: Strictly verify for --sys-color tokens, asymmetric geometry, and Solidarity (Sage/Red/Gold) palette.
+            Return ONLY JSON:
+            {{ "compliance": boolean, "score": 0-100, "issues": [], "summary": "" }}
             """
 
-            backend = "gemini"
-            result_text = None
-
-            # 1. Try Gemini Vision Cascade
-            model = self._get_vision_model()
-            if model:
+            # Tiered Vision Cascade
+            for tier_name in ["Performance", "Frontier", "LTS"]:
                 try:
+                    model = genai.GenerativeModel(MODEL_TIERS[tier_name])
                     with open(image_path, "rb") as f:
                         img_bytes = f.read()
 
                     loop = asyncio.get_event_loop()
                     def sync_gemini_vision():
                         config = {"response_mime_type": "application/json"}
-                        # Handle different model types if needed, but genai library usually handles binary well
                         resp = model.generate_content([prompt, {"mime_type": "image/jpeg", "data": img_bytes}], generation_config=config)
                         return resp.text
 
                     result_text = await loop.run_in_executor(self.executor, sync_gemini_vision)
+                    if result_text:
+                        data = json.loads(result_text)
+                        return [{"type": "text", "text": json.dumps({**data, "asset_id": asset_id, "tier": tier_name})}]
                 except Exception as e:
-                    logger.warning(f"Gemini vision failed: {e}")
+                    logger.warning(f"Tier {tier_name} failed: {e}")
 
-            # 2. Fallback to GitHub Models Vision
-            if not result_text:
-                backend = "openai-github-models"
-                result_text = await self._call_gh_vision_async(prompt, image_path)
+            # Fallback to GitHub Models
+            gh_result = await self._call_gh_vision_async(prompt, image_path)
+            if gh_result:
+                return [{"type": "text", "text": gh_result}]
 
-            if not result_text:
-                return [{"type": "text", "text": json.dumps({"error": "All vision models failed"})}]
-
-            try:
-                # Normalize result
-                data = json.loads(result_text)
-                final_output = {
-                    "asset_id": asset_id,
-                    "backend": backend,
-                    "compliance": data.get("compliance", data.get("compliant", False)),
-                    "score": data.get("score", 0),
-                    "issues": data.get("issues", data.get("violations", [])),
-                    "summary": data.get("summary", data.get("recommendations", ["No summary provided"])[0] if data.get("recommendations") else "Validated")
-                }
-                return [{"type": "text", "text": json.dumps(final_output)}]
-            except Exception as e:
-                return [{"type": "text", "text": json.dumps({"error": "Failed to parse LLM response", "raw": result_text, "exception": str(e)})}]
+            return [{"type": "text", "text": json.dumps({"error": "All vision models failed"})}]
 
         elif name == "generate_implementation_package":
             asset_id = args.get("asset_id")
             metadata = args.get("asset_metadata", {})
-
-            prompt = f"""
-            Generate an implementation package for Asset {asset_id}.
-            Metadata: {json.dumps(metadata)}
-
-            Provide a detailed plan covering:
-            1. CSS Tokens required
-            2. React Component structure
-            3. Animation specs
-            """
-
+            prompt = f"Generate KR Solidarity implementation package for {asset_id}. Metadata: {json.dumps(metadata)}"
             result_text = await self._call_llm_async(prompt)
             return [{"type": "text", "text": result_text}]
 
@@ -303,46 +230,38 @@ async def handle_request(server, line):
     try:
         req = json.loads(line)
         resp = {"jsonrpc": "2.0", "id": req.get("id")}
-
         if req.get("method") == "initialize":
             resp["result"] = {
                 "protocolVersion": "2024-11-05",
                 "capabilities": {"tools": {}},
-                "serverInfo": {"name": "design-system-sidekick", "version": "1.0.0"}
+                "serverInfo": {"name": "design-system-sidekick", "version": "1.1.0"}
             }
         elif req.get("method") == "tools/list":
             resp["result"] = {"tools": server.list_tools()}
         elif req.get("method") == "tools/call":
-            content = await server.call_tool(
-                req["params"]["name"],
-                req["params"]["arguments"]
-            )
+            content = await server.call_tool(req["params"]["name"], req["params"]["arguments"])
             resp["result"] = {"content": content}
-        else:
-            return None
+        else: return None
         return resp
     except Exception as e:
-        logger.error(f"Error: {e}")
+        logger.error(f"Error handling request: {e}")
         return None
 
 async def main():
     server = DesignSystemSidekickServer()
-    logger.info("Server started")
+    logger.info("Server started (KR Solidarity v1.1.0)")
     loop = asyncio.get_event_loop()
-
     while True:
         try:
             line = await loop.run_in_executor(None, sys.stdin.readline)
             if not line: break
-
             resp = await handle_request(server, line)
             if resp:
                 print(json.dumps(resp))
                 sys.stdout.flush()
-        except KeyboardInterrupt:
-            break
+        except KeyboardInterrupt: break
         except Exception as e:
-            logger.error(f"Fatal: {e}")
+            logger.error(f"Fatal error in main loop: {e}")
             break
 
 if __name__ == "__main__":

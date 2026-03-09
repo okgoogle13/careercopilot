@@ -53,7 +53,7 @@ export function PageHeader({
       )}
 
       {description && (
-        <p className="text-on-surface-variant text-lg font-field-note italic opacity-80">
+        <p className="text-on-surface-variant text-lg font-primary italic opacity-80">
           {description}
         </p>
       )}

@@ -22,7 +22,7 @@ export interface StatusBadgeProps {
  * Supports both KrDark (warm) and KrLight (clinical, precise) modes.
  *
  * **KeralaRage Token Usage:**
- * - Typography: `font-annotation` (Uppercase, tracked)
+ * - Typography: `font-mono` (Uppercase, tracked)
  * - Color: Semantic status colors (success, warning, error, info)
  * - Shape: `radius-seed` (subtle asymmetry for badges)
  * - Motion: `ease-viscous` (Hover animation)
@@ -91,12 +91,12 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({
                 inline-flex items-center gap-2
                 px-3 py-1
                 border
-                transition-all duration-300 var(--ease-viscous-breeze)
+                transition-all duration-300 ease-viscous var(--ease-viscous-breeze)
                 hover:scale-105 hover:brightness-110
                 ${className}
             `}
       style={{
-        borderRadius: 'var(--sys-shape-radius-stone)',
+        borderRadius: 'var(--shape-megaphoneCut01)',
         backgroundColor: currentStyle.bg,
         color: currentStyle.text,
         borderColor: currentStyle.border,
@@ -104,11 +104,11 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({
     >
       {showDot && (
         <div
-          className="w-2 h-2 rounded-sentry"
+          className="w-2 h-2 rounded-march"
           style={{ backgroundColor: currentStyle.dot }}
         />
       )}
-      <span className="text-xs font-annotation font-bold tracking-widest uppercase">{label}</span>
+      <span className="text-xs font-mono font-bold tracking-widest uppercase">{label}</span>
     </div>
   );
 };

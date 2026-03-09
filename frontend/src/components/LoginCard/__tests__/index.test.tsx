@@ -15,7 +15,15 @@ import { render, screen, fireEvent } from '@testing-library/react';
         {children}
       </form>
     ),
-    button: ({ children, whileHover, whileTap, className, type, disabled, ...props }: any) => (
+    button: ({
+      children,
+      whileHover: _whileHover,
+      whileTap: _whileTap,
+      className,
+      type,
+      disabled,
+      ...props
+    }: any) => (
       <button
         className={className}
         type={type}

@@ -1,5 +1,4 @@
 import { axiosInstance } from '../api/axiosConfig';
-import { auth } from '../config/firebase';
 
 export interface AuditRequest {
   resumeText: string;

@@ -21,10 +21,10 @@ export function EcosystemSandbox() {
           />
 
           {/* DOC-007 Archetype Selector */}
-          <div className="bg-surface-container-high/50 p-1 rounded-sentry flex gap-1 border border-white/10 shadow-sm backdrop-blur-md">
+          <div className="bg-surface-container-high/50 p-1 rounded-march flex gap-1 border border-white/10 shadow-sm backdrop-blur-md">
             <button
               onClick={() => setArchetype('gov')}
-              className={`flex items-center gap-2 px-4 py-2 rounded-sentry text-label-small font-bold transition-all ${
+              className={`flex items-center gap-2 px-4 py-2 rounded-march text-label-small font-bold transition-all ${
                 archetype === 'gov'
                   ? 'bg-primary text-on-primary shadow-md'
                   : 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest'
@@ -35,7 +35,7 @@ export function EcosystemSandbox() {
             </button>
             <button
               onClick={() => setArchetype('corp')}
-              className={`flex items-center gap-2 px-4 py-2 rounded-sentry text-label-small font-bold transition-all ${
+              className={`flex items-center gap-2 px-4 py-2 rounded-march text-label-small font-bold transition-all ${
                 archetype === 'corp'
                   ? 'bg-secondary text-on-secondary shadow-md'
                   : 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest'
@@ -47,14 +47,14 @@ export function EcosystemSandbox() {
           </div>
         </div>
 
-        <div className="flex-1 flex gap-4 overflow-hidden min-h-0 bg-surface-scrim/30 backdrop-blur-xl rounded-2xl border border-white/10 p-1.5 shadow-2xl">
+        <div className="flex-1 flex gap-4 overflow-hidden min-h-0 bg-surface-scrim/30 backdrop-blur-xl rounded-placard border border-white/10 p-1.5 shadow-2xl">
           {/* Left: Evidence & Intelligence */}
           <div className="w-[320px] flex-none hidden lg:flex h-full overflow-hidden flex-col">
             <EvidenceSidebar />
           </div>
 
           {/* Right: The Editor */}
-          <div className="flex-1 h-full overflow-hidden bg-surface-container/90 rounded-xl border border-outline-variant flex flex-col shadow-inner backdrop-blur-sm">
+          <div className="flex-1 h-full overflow-hidden bg-surface-container/90 rounded-strike border border-outline-variant flex flex-col shadow-inner backdrop-blur-sm">
             <SplitEditor
               activeTab={activeTab}
               onTabChange={setActiveTab}

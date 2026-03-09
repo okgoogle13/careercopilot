@@ -11,6 +11,7 @@ import {
 import { Toaster } from 'sonner';
 const texturePattern =
   '/assets/kr-solidarity/texture/kr-solidarity__substrate__landmark--melbourne-laneway--v1.png';
+import './design/styles/design-tokens.css';
 import { TokenTest } from './components/debug/TokenTest';
 import { getModeForRoute } from './config/routeModeMap';
 import { useAuth } from './context/AuthContext';
@@ -33,6 +34,11 @@ import { Layout } from './layouts/Layout';
 import { AnalysisPage } from './pages/AnalysisPage';
 import { IngestionPage } from './pages/IngestionPage';
 import { JobQueue } from './pages/JobQueue';
+import { AuthModal } from './components/phase3-batch2/AuthModal';
+import { HeroLanding } from './components/phase3-batch2/HeroLanding';
+import { OnboardFlow } from './components/phase3-batch2/OnboardFlow';
+import { AnalysisWorkbench } from './components/phase3-batch3/AnalysisWorkbench';
+import { DashboardOverview } from './components/phase3-batch3/DashboardOverview';
 import { useModeStore } from './stores/useModeStore';
 import DesignSidekick from './features/design-sidekick/DesignSidekick';
 
@@ -106,6 +112,9 @@ const ProtectedLayout = () => {
 
 // Public Layout (Login/Register/Landing)
 const PublicLayout = () => {
+  const showSentryTestButton =
+    import.meta.env.DEV && import.meta.env.VITE_SHOW_SENTRY_TEST_BUTTON === 'true';
+
   return (
     <div className="min-h-screen bg-[#1A1714] relative">
       {/* Textured Background */}
@@ -119,7 +128,7 @@ const PublicLayout = () => {
       />
       <div className="relative z-10">
         {/* Temporary Sentry Test Button */}
-        {import.meta.env.DEV && (
+        {showSentryTestButton && (
           <button
             onClick={() => {
               throw new Error('Sentry Frontend Test Error');
@@ -182,6 +191,30 @@ export default function App() {
             element={<DesignSidekick />}
           />
           <Route
+            path="/style-guide"
+            element={<StyleGuide />}
+          />
+          <Route
+            path="/kr/landing"
+            element={<HeroLanding className="m-6" />}
+          />
+          <Route
+            path="/kr/auth"
+            element={<AuthModal className="m-6" />}
+          />
+          <Route
+            path="/kr/onboarding"
+            element={<OnboardFlow className="m-6" />}
+          />
+          <Route
+            path="/kr/analysis"
+            element={<AnalysisWorkbench className="m-6" />}
+          />
+          <Route
+            path="/kr/dashboard"
+            element={<DashboardOverview className="m-6" />}
+          />
+          <Route
             path="*"
             element={<NotFound />}
           />
@@ -240,10 +273,6 @@ export default function App() {
           <Route
             path="/job-queue"
             element={<JobQueue />}
-          />
-          <Route
-            path="/style-guide"
-            element={<StyleGuide />}
           />
           <Route
             path="/test-tokens"

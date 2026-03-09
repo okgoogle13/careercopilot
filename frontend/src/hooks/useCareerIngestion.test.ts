@@ -8,7 +8,6 @@ const mockUseAuth = jest.fn();
 
 const mockSession = { access_token: 'test-token', user: { email: 'test@example.com' } };
 
-import React from 'react';
 import { renderHook, act } from '@testing-library/react';
 
 // Mock global fetch
@@ -33,15 +32,6 @@ const mockCareerData = {
 };
 
 // Create a wrapper component
-const mockGetIdToken = jest.fn();
-const mockUser = { getIdToken: mockGetIdToken };
-const mockContextValue = {
-  user: mockUser,
-  loading: false,
-  login: jest.fn(),
-  register: jest.fn(),
-  logout: jest.fn(),
-} as any;
 
 describe('useCareerIngestion', () => {
   let useCareerIngestion: any;

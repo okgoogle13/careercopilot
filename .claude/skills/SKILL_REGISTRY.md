@@ -3,7 +3,7 @@
 _Last updated: 2026-03-06_
 
 ## Summary
-- Active skills: **69** (added test-coverage-sprint, test-automation-specialist)
+- Active skills: **70** (added ux-copy-writer)
 - Manifest v6.0.0 — 87 assets (PNG + SVG), all validated via KR Solidarity Canon ✅
 - Backend Coverage: **Module-Saturation Approach** — 10 modules (95% target), 53+ test specs ready
 - Design Docs: **Streamlined to 5 Core Docs** for faster iteration and AI-driven implementation
@@ -121,12 +121,19 @@ node scripts/kr/generate-hero-registry.mjs # → public/assets/...hero-registry.
 | pytest-test-scaffolder | .claude/skills/pytest-test-scaffolder | Scaffolds pytest tests for FastAPI endpoints. |
 | jest-test-scaffolder | .claude/skills/jest-test-scaffolder | Scaffolds Jest tests for React components. |
 
+### UX Copy & Content Quality Skills
+| Skill | Directory | Description |
+|---|---|---|
+| ux-copy-writer | .claude/skills/ux-copy-writer | Generates and audits UX microcopy for clarity, actionability, accessibility wording, and terminology consistency. |
+
 ### Design System & Asset Skills
 | Skill | Directory | Description |
 |---|---|---|
+| kr-shapes | .claude/skills/kr-shapes | KR Solidarity v6.1 shape system - M3 Expressive morphing tokens, archetype palettes, asymmetric-only geometry. |
 | token-orchestrator | .claude/skills/token-orchestrator | DTCG compliance + KR Solidarity palette validation. |
 | asset-placement-strategy | .claude/skills/asset-placement-strategy | Wireframe-driven placement for KR Solidarity assets. |
 | kerala-rage-brand-enforcer | .claude/skills/kerala-rage-brand-enforcer | Applies KR Solidarity v6.0.0 brand guidelines. |
 | vision-scorer-mcp | .claude/skills/vision-scorer-mcp | Visual compliance scoring for KR Solidarity assets. |
 | manifest-reconciler | .claude/skills/manifest-reconciler | Reconcile KR asset files against registries. |
+| phase4-pipeline-orchestrator | .claude/skills/phase4-pipeline-orchestrator | Deterministic phase4a->phase4b->phase4c orchestration with contract-gated outputs and failure codes. |
 | m3-expressive-ui-evaluator | .claude/skills/m3-expressive-ui-evaluator | UI audit against Material Design 3 Expressive standards. |

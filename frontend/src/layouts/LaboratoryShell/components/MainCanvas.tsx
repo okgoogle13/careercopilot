@@ -8,8 +8,8 @@ export const MainCanvas: React.FC = () => {
       <div className="max-w-7xl mx-auto flex flex-col gap-8">
         {/* Intro / Breadcrumbs */}
         <div className="mb-4">
-          <h2 className="font-bloom text-2xl text-ink-gold">Active Analysis</h2>
-          <p className="font-field-note text-secondary-concrete-grey opacity-80">
+          <h2 className="font-display text-2xl text-ink-gold">Active Analysis</h2>
+          <p className="font-primary text-secondary-concrete-grey opacity-80">
             Session ID: #L-ALPHA-01
           </p>
         </div>

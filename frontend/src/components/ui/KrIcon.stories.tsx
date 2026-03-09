@@ -39,7 +39,7 @@ export const AllIcons: Story = {
             ariaLabel={`${name} icon`}
             size={24}
           />
-          <span className="font-annotation text-xs uppercase tracking-widest">{name}</span>
+          <span className="font-mono text-xs uppercase tracking-widest">{name}</span>
         </div>
       ))}
     </div>
@@ -59,7 +59,7 @@ export const SizeVariants: Story = {
             size={size}
             ariaLabel={`Seal icon ${size}px`}
           />
-          <span className="font-annotation text-xs uppercase tracking-widest">{size}px</span>
+          <span className="font-mono text-xs uppercase tracking-widest">{size}px</span>
         </div>
       ))}
     </div>
@@ -73,7 +73,7 @@ export const CustomClassName: Story = {
         name="wheat"
         size={48}
         ariaLabel="Wheat icon with framed wrapper"
-        className="rounded-sentry border border-ink-gold/30 bg-surface-KrDark-slate-smoke-highest p-2 shadow-sm"
+        className="rounded-march border border-ink-gold/30 bg-surface-KrDark-slate-smoke-highest p-2 shadow-sm"
       />
     </div>
   ),

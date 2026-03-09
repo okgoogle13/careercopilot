@@ -1,39 +1,66 @@
 ---
 name: asset-path-validator
-description: Deep-scan validator for all asset paths in the codebase. Ensures all
-  src/url attributes in components and markdown point to valid public assets.
+description: Validate asset references across code/docs and report broken, orphaned, and non-canonical paths with deterministic fix guidance.
 metadata:
-  legacy_frontmatter:
-    version: 1.0.0
-    tags:
+  version: 6.2.0
+  tags:
     - assets
     - validation
-    - quality
+    - paths
 ---
 
-# Asset Path Validator Skill
+# Asset Path Validator
 
-## System Prompt
+## Purpose
 
-> You are the **Asset Path Validator** for the CareerCopilot project.
->
-> Responsibilities:
->
-> 1.  **URL Extraction**: Parse `.tsx`, `.md`, and `.json` files for strings that look like asset paths (starting with `/public/assets`, `/src/assets`, or containing `KR-SOLID`).
-> 2.  **Filesystem Check**: Verify that every extracted path corresponds to an actual file on disk.
-> 3.  **Broken Link Report**: Identifying 404-prone references.
-> 4.  **Redirect Suggestion**: If an asset was moved (e.g., renamed from `[DEPRECATED_STYLE]` to `urban`), suggest the updated path using the `Asset Placement Strategy`.
->
-> Rules:
->
-> - Do not flag external URLs (https://...).
-> - Distinguish between absolute `/` paths and relative `./` paths.
->
-> Output:
->
-> - A table of "File Location" -> "Broken Path" -> "Suggested Fix".
+Detect broken/non-canonical asset references and produce fix-ready diagnostics.
 
-## When to Use This Skill
+## When to Use
 
-- After refactoring the asset folder structure.
-- Before a production build to prevent broken images.
+- Before merge when asset paths changed.
+- During release readiness checks.
+- After bulk token/path migration.
+
+## Shared References
+
+- `../shared-references/BRAND_CANON.md`
+- `../shared-references/STATUS_THRESHOLDS.md`
+
+## Scope
+
+Checks include:
+- missing file targets
+- broken relative paths
+- path style drift between docs and frontend runtime
+- non-canonical asset roots
+
+## Deterministic Process
+
+1. Scan configured file patterns.
+2. Extract candidate paths from known attributes/markdown links.
+3. Resolve filesystem targets.
+4. Emit structured findings with exact fix suggestions.
+
+## Output Contract
+
+```json
+{
+  "path_audit": {
+    "status": "pass|needs_refinement|fail",
+    "score": 0,
+    "broken_paths": [],
+    "orphaned_assets": [],
+    "recommendations": []
+  }
+}
+```
+
+## Usage
+
+`Validate asset references under frontend + docs and return deterministic path fixes.`
+
+## Related Skills
+
+- `asset-token-replacer`
+- `manifest-reconciler`
+- `asset-placement-strategy`

@@ -55,7 +55,7 @@ export const KanbanCard: React.FC<KanbanCardProps> = ({
       onClick={onSelect}
       className={cn(
         'p-6 bg-charcoal-100 border border-blueprint-grey/20',
-        'rounded-stone shadow-viscous cursor-grab active:cursor-grabbing',
+        'rounded-megaphone shadow-viscous cursor-grab active:cursor-grabbing',
         'relative flex flex-col gap-4 overflow-hidden'
       )}
       role="listitem"

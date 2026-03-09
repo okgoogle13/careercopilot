@@ -20,8 +20,15 @@ interface ComponentInfo {
   isReusable: boolean;
   usesMUI: boolean;
   usesCustomUI: boolean;
+  usesDesignTokens: boolean;
+  usesModeSystem: boolean;
   isDemo: boolean;
   migrationStatus: 'migrated' | 'mixed' | 'not_migrated' | 'expressive' | 'unknown';
+  expressiveStatus?: 'none' | 'planned' | 'in_progress' | 'done';
+  designLevel?: 'atom' | 'molecule' | 'organism' | 'unknown';
+  hasA11yPassed?: boolean;
+  bundleImpact?: string;
+  visualRegression?: string;
 }
 
 interface InventoryReport {

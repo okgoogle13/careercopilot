@@ -40,7 +40,7 @@ export function MetricCard({
   return (
     <div
       className={`
-      rounded-stone p-6
+      rounded-megaphone p-6
       ${
         variant === 'outlined'
           ? 'bg-transparent border border-concrete-grey/10'
@@ -59,11 +59,11 @@ export function MetricCard({
         >
           <Icon className={`w-5 h-5`} />
         </motion.div>
-        <span className="text-concrete-grey/60 uppercase tracking-[0.04em] text-[0.7rem] font-annotation">
+        <span className="text-concrete-grey/60 uppercase tracking-[0.04em] text-[0.7rem] font-mono">
           {label}
         </span>
       </div>
-      <p className="text-3xl text-paper-white font-annotation tabular-nums">{value}</p>
+      <p className="text-3xl text-paper-white font-mono tabular-nums">{value}</p>
     </div>
   );
 }

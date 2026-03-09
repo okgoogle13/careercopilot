@@ -62,7 +62,7 @@ export const ResumeAuditor: React.FC = () => {
           Resume Text *
         </label>
         <textarea
-          className="w-full min-h-[300px] p-md bg-asphalt-black-light text-body text-concrete-grey-lightest border border-concrete-grey-dark rounded-stone font-mono text-sm"
+          className="w-full min-h-[300px] p-md bg-asphalt-black-light text-body text-concrete-grey-lightest border border-concrete-grey-dark rounded-megaphone font-mono text-sm"
           placeholder="Paste your resume text here (minimum 100 characters)..."
           value={resumeText}
           onChange={(e) => setResumeText(e.target.value)}
@@ -76,7 +76,7 @@ export const ResumeAuditor: React.FC = () => {
           Job Description (optional)
         </label>
         <textarea
-          className="w-full min-h-[150px] p-md bg-asphalt-black-light text-body text-concrete-grey-lightest border border-concrete-grey-dark rounded-stone font-mono text-sm"
+          className="w-full min-h-[150px] p-md bg-asphalt-black-light text-body text-concrete-grey-lightest border border-concrete-grey-dark rounded-megaphone font-mono text-sm"
           placeholder="Paste target job description for keyword optimization..."
           value={jobDescription}
           onChange={(e) => setJobDescription(e.target.value)}

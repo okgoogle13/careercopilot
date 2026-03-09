@@ -65,7 +65,7 @@ Use when:
 **Dimension 6: Typography (0-10)**
 
 - Serif font (Crimson Text style)
-- Cream #F5F0E8 at 85% opacity
+- Cream --sys-color-paper-white at 85% opacity
 - 5-6 labels maximum
 - Format: "Fig. X. Scientific name (Common)"
 

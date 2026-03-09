@@ -75,7 +75,7 @@ export const KrDarkDashboard: React.FC = () => {
           >
             <SolidarityCard className="flex flex-col justify-between aspect-square p-10 group hover:border-ink-gold/20 transition-all duration-500 relative overflow-hidden shadow-viscous">
               <div className="space-y-1">
-                <span className="font-annotation text-xs uppercase tracking-[0.4em] text-paper-white/30 group-hover:text-paper-white/50 transition-colors">
+                <span className="font-mono text-xs uppercase tracking-[0.4em] text-paper-white/30 group-hover:text-paper-white/50 transition-colors">
                   {m.label}
                 </span>
                 <p className="font-mono text-[10px] text-paper-white/10 uppercase tracking-widest">
@@ -84,7 +84,7 @@ export const KrDarkDashboard: React.FC = () => {
               </div>
 
               <div
-                className={`text-5xl font-bloom ${m.color} tracking-tighter group-hover:scale-105 transition-transform duration-700 relative z-10`}
+                className={`text-5xl font-display ${m.color} tracking-tighter group-hover:scale-105 transition-transform duration-700 relative z-10`}
               >
                 <ValueReveal
                   value={m.value}
@@ -96,7 +96,7 @@ export const KrDarkDashboard: React.FC = () => {
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-ink-gold/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none" />
 
               <div className="absolute bottom-4 right-6 opacity-0 group-hover:opacity-10 transition-opacity">
-                <div className="w-12 h-12 rounded-sentry border border-current" />
+                <div className="w-12 h-12 rounded-march border border-current" />
               </div>
             </SolidarityCard>
           </motion.div>
@@ -113,7 +113,7 @@ export const KrDarkDashboard: React.FC = () => {
         <SolidarityCard className="w-full p-12 relative overflow-hidden bg-asphalt-black group">
           <div className="flex justify-between items-center mb-8 border-b border-surface-KrDark-concrete-grey-high/20 pb-6">
             <div className="flex items-center gap-4">
-              <div className="w-2 h-2 rounded-sentry bg-ink-gold animate-pulse" />
+              <div className="w-2 h-2 rounded-march bg-ink-gold animate-pulse" />
               <h3 className="font-proclamation text-2xl uppercase text-paper-white/80">
                 Live Archive Stream
               </h3>

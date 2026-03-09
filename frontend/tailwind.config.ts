@@ -92,13 +92,24 @@ const config: Config = {
         curator: ['"Caveat"', 'cursive'],
       },
       borderRadius: {
-        pebble: 'var(--sys-shape-radius-pebble)',
-        stone: 'var(--sys-shape-radius-stone)',
-        slab: 'var(--sys-shape-radius-slab)',
-        sentry: 'var(--sys-shape-sentryAvatar)',
+        // ─── v6.1 Archetype Aliases (use these in new code) ─────────────
+        // Replace rounded-2xl → rounded-placard, rounded-xl → rounded-strike, etc.
+        strike: 'var(--shape-archetype-strike)', // = blockRiot03: 32px 2px 2px 2px
+        march: 'var(--shape-archetype-march)', // = pillMarch01:  9999px
+        scaffold: 'var(--shape-archetype-scaffold)', // = scaffoldSlab01: 8px 2px 8px 2px
+        placard: 'var(--shape-archetype-placard)', // = placardTorn01: 48% 52% 58% organic
+        megaphone: 'var(--shape-archetype-megaphone)', // = megaphoneCut01: 42% 58% 45% organic
+        substrate: 'var(--shape-archetype-substrate)', // = substrateTile02: 40% 60% 70%
+        // Radius scale aliases
+        shard: 'var(--shape-alertShard01)', // 32px 2px 2px 32px — error/selected
+        sentry: 'var(--shape-sentryAvatar)', // 98% — avatar imperfect circle
         full: '9999px',
-        tech: 'var(--sys-shape-radius-slab)',
-        gem: 'var(--sys-shape-radius-pebble)',
+        // ─── DEPRECATED (v6.0 compat — use archetype aliases above) ─────
+        pebble: 'var(--shape-pebbleSurge01)',
+        stone: 'var(--shape-megaphoneCut01)',
+        slab: 'var(--shape-placardTorn01)',
+        tech: 'var(--shape-placardTorn01)',
+        gem: 'var(--shape-pebbleSurge01)',
       },
       boxShadow: {
         rest: 'var(--shadow-rest)',
@@ -163,10 +174,10 @@ const config: Config = {
     function ({ addUtilities }: { addUtilities: any }) {
       addUtilities({
         '.focus-ring': {
-          '@apply': 'outline-none ring-2 ring-offset-2 ring-wattle-gold',
+          '@apply': 'outline-none ring-2 ring-offset-2 ring-primary',
         },
         '.focus-ring-offset-0': {
-          '@apply': 'outline-none ring-2 ring-offset-0 ring-wattle-gold',
+          '@apply': 'outline-none ring-2 ring-offset-0 ring-primary',
         },
       });
     },

@@ -90,13 +90,13 @@ export const KrDarkKanban: React.FC = () => {
 
                         {app.status === 'Offer' && (
                           <div className="absolute top-0 right-0">
-                            <div className="w-2 h-2 rounded-sentry bg-ink-gold animate-pulse shadow-ink-glow" />
+                            <div className="w-2 h-2 rounded-march bg-ink-gold animate-pulse shadow-ink-glow" />
                           </div>
                         )}
                       </div>
 
                       {/* TODO[asset]: Assembly Grid Motif substrate overlay (Z-1) */}
-                      <div className="absolute bottom-0 right-0 w-24 h-24 bg-surface-KrDark-concrete-grey-high/5 blur-3xl rounded-sentry -mr-12 -mb-12" />
+                      <div className="absolute bottom-0 right-0 w-24 h-24 bg-surface-KrDark-concrete-grey-high/5 blur-3xl rounded-march -mr-12 -mb-12" />
                     </SolidarityCard>
                   </motion.div>
                 ))}
@@ -105,12 +105,12 @@ export const KrDarkKanban: React.FC = () => {
                   <motion.div
                     initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 10 }}
                     animate={{ opacity: 0.15, y: 0 }}
-                    className="h-64 border border-dashed border-surface-KrDark-concrete-grey-high/25 rounded-stone flex flex-col items-center justify-center text-center p-8"
+                    className="h-64 border border-dashed border-surface-KrDark-concrete-grey-high/25 rounded-megaphone flex flex-col items-center justify-center text-center p-8"
                   >
                     <span className="font-proclamation text-3xl text-paper-white/20 -rotate-3 mb-4 uppercase">
                       Silent Station...
                     </span>
-                    <span className="text-[10px] font-annotation uppercase tracking-widest text-paper-white/40">
+                    <span className="text-[10px] font-mono uppercase tracking-widest text-paper-white/40">
                       Waiting for mission data
                     </span>
                   </motion.div>

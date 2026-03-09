@@ -28,23 +28,25 @@ const TechCard = React.forwardRef<HTMLDivElement, TechCardProps>(
     const levelColors = {
       beginner:
         mode === 'KrDark'
-          ? 'text-status-KrDark-solidarity-green'
-          : 'text-status-KrDark-clinical-sage',
-      intermediate: mode === 'KrDark' ? 'text-ink-gold' : 'text-ink-gold',
+          ? 'text-[var(--sys-color-kr-activistSmokeGreen)]'
+          : 'text-[var(--sys-color-kr-activistSmokeGreen)]',
+      intermediate: 'text-[var(--sys-color-inkGold)]',
       advanced:
         mode === 'KrDark'
-          ? 'text-status-KrDark-KrFlower-orange'
-          : 'text-status-KrDark-KrFlower-orange',
+          ? 'text-[var(--sys-color-solidaritySmokeOrange)]'
+          : 'text-[var(--sys-color-solidaritySmokeOrange)]',
       expert:
-        mode === 'KrDark' ? 'text-tertiary-solidarity-red' : 'text-status-KrDark-clinical-alert',
+        mode === 'KrDark'
+          ? 'text-[var(--sys-color-solidarityRed)]'
+          : 'text-[var(--sys-color-kr-charcoalRed)]',
     };
 
-    // Styles derived from M3Card glass variant logic
+    // Styles derived from glass variant logic
     const containerClasses = cn(
       'relative overflow-hidden transition-all duration-300 border backdrop-blur-md',
       mode === 'KrDark'
-        ? 'bg-surface-KrDark-glass-medium border-white/10 text-on-surface-KrDark-paper-white'
-        : 'bg-surface-KrDark-glass-medium border-white/5 text-on-surface-KrDark-paper-white',
+        ? 'bg-[var(--sys-color-charcoalBackground)] border-white/10 text-[var(--sys-color-paperWhite)]'
+        : 'bg-[var(--sys-color-charcoalBackground)] border-white/5 text-[var(--sys-color-paperWhite)]',
       className
     );
 
@@ -53,7 +55,7 @@ const TechCard = React.forwardRef<HTMLDivElement, TechCardProps>(
         ref={ref}
         className={containerClasses}
         style={{
-          borderRadius: mode === 'KrDark' ? 'var(--radius-stone)' : '8px',
+          borderRadius: mode === 'KrDark' ? 'var(--shape-megaphoneCut01)' : '8px',
         }}
         whileHover={{
           y: -4,
@@ -94,7 +96,7 @@ const TechCard = React.forwardRef<HTMLDivElement, TechCardProps>(
               <h3
                 className={cn(
                   'font-semibold',
-                  mode === 'KrDark' ? 'font-bloom text-xl' : 'font-field-note text-lg'
+                  mode === 'KrDark' ? 'font-display text-xl' : 'font-primary text-lg'
                 )}
               >
                 {title}
@@ -102,10 +104,7 @@ const TechCard = React.forwardRef<HTMLDivElement, TechCardProps>(
             </div>
             {level && (
               <span
-                className={cn(
-                  'text-xs uppercase tracking-wider font-annotation',
-                  levelColors[level]
-                )}
+                className={cn('text-xs uppercase tracking-wider font-mono', levelColors[level])}
               >
                 {level}
               </span>
@@ -126,13 +125,13 @@ const TechCard = React.forwardRef<HTMLDivElement, TechCardProps>(
                 <motion.span
                   key={index}
                   className={cn(
-                    'px-2 py-1 text-xs font-annotation uppercase tracking-wider',
+                    'px-2 py-1 text-xs font-mono uppercase tracking-wider',
                     mode === 'KrDark'
-                      ? 'bg-surface-KrDark-concrete-grey-high border border-KrScreenprint-KrDark-border'
-                      : 'bg-surface-KrDark-slate-smoke-high border border-KrScreenprint-KrDark-border'
+                      ? 'bg-[var(--sys-color-concreteGrey)]/20 border border-[var(--sys-color-concreteGrey)]'
+                      : 'bg-[var(--sys-color-concreteGrey)]/10 border border-[var(--sys-color-concreteGrey)]'
                   )}
                   style={{
-                    borderRadius: mode === 'KrDark' ? 'var(--radius-seed)' : '2px',
+                    borderRadius: mode === 'KrDark' ? 'var(--shape-pebbleSurge01)' : '2px',
                   }}
                   whileHover={{ scale: 1.05 }}
                   transition={{ type: 'spring', stiffness: 400, damping: 25 }}

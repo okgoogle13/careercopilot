@@ -1,4 +1,4 @@
-import type { HeroRegistry, HeroComposition } from './heroTypes';
+import type { HeroRegistry } from './heroTypes';
 
 const FALLBACK_REGISTRY: HeroRegistry = {
   version: '6.0.0',

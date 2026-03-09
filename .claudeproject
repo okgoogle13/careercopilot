@@ -6,7 +6,8 @@
     "CLAUDE.md",
     "agents.md",
     "plans.md",
-    "DOCUMENTATION.md"
+    "DOCUMENTATION.md",
+    ".claude/TOKEN_GUARDIAN.md"
   ],
   "settings": {
     "primaryGuide": "agents.md",

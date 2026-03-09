@@ -1,8 +1,13 @@
+/**
+ * @deprecated Cabinet is deprecated as of KR Solidarity v6.0.
+ * Use {@link Megaphone} from './Megaphone' instead. See docs/design/01_CANON.md §2.C
+ * Will be removed in v7.0.
+ */
 import { X } from 'lucide-react';
 import React, { useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import { Pebble } from './Pebble';
-import { Stone } from './Stone';
+import { Strike } from './Strike';
+import { Placard } from './Placard';
 
 export interface CabinetProps {
   /** Show/hide modal */
@@ -25,14 +30,12 @@ export interface CabinetProps {
 }
 
 /**
- * Cabinet - KeralaRage KrSolidarity Modal Component
+ * @deprecated Use Megaphone instead.
  *
- * Modal dialog component with KeralaRage design system styling.
- * Features:
- * - Managed focus and ESC key support
- * - KeralaRage [DEPRECATED_STYLE] palette and [DEPRECATED_STYLE] shapes
- * - Stone card wrapper with KrScreenprint
- * - Portal rendering for proper z-index layering
+ * Cabinet - KeralaRage KrSolidarity Modal Component (legacy name)
+ *
+ * Replaced by Megaphone in KR Solidarity v6.0.
+ * Archetype was: Cabinet. Now: Megaphone (focal interruption).
  */
 export const Cabinet: React.FC<CabinetProps> = ({
   open,
@@ -40,7 +43,7 @@ export const Cabinet: React.FC<CabinetProps> = ({
   title,
   children,
   maxWidth = 'md',
-  variant = 'standard',
+  variant: _variant = 'standard',
 }) => {
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
@@ -74,20 +77,20 @@ export const Cabinet: React.FC<CabinetProps> = ({
         className="fixed inset-0"
         onClick={onClose}
       />
-      <Stone
+      <Placard
         elevation="floating"
         className={`relative w-full ${maxWidthClasses[maxWidth]} shadow-2xl animate-in zoom-in-95 duration-300`}
       >
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-white/5">
           {title ? (
-            <h3 className="font-bloom text-2xl font-bold text-[var(--sys-color-worker-ash-base)]">
+            <h3 className="font-display text-2xl font-bold text-[var(--sys-color-worker-ash-base)]">
               {title}
             </h3>
           ) : (
             <div />
           )}
-          <Pebble
+          <Strike
             variant="ghost"
             size="sm"
             onClick={onClose}
@@ -95,17 +98,13 @@ export const Cabinet: React.FC<CabinetProps> = ({
             className="h-8 w-8 p-0 hover:rotate-90 transition-transform duration-300"
           >
             <X className="w-5 h-5" />
-          </Pebble>
+          </Strike>
         </div>
 
         {/* Content */}
         <div className="p-8">{children}</div>
-      </Stone>
+      </Placard>
     </div>,
     document.body
   );
 };
-
-// Legacy M3 exports for backward compatibility
-export { Cabinet as M3Modal };
-export type { CabinetProps as M3ModalProps };

@@ -1,6 +1,6 @@
-import { Lens, LensArea } from '@/components/ui/Lens';
-import { Pebble } from '@/components/ui/Pebble';
-import { Stone } from '@/components/ui/Stone';
+import { ScaffoldInput as Lens, ScaffoldArea as LensArea } from '@/components/ui/ScaffoldInput';
+import { Strike as Pebble } from '@/components/ui/Strike';
+import { Placard as Stone } from '@/components/ui/Placard';
 import {
   Archive,
   Award,
@@ -33,10 +33,10 @@ export interface ProfileEditorProps {
 }
 
 /**
- * CareerCopilot Profile Editor ("The KrMotif Archive")
+ * CareerCopilot Profile Editor
  *
  * V3.1 KrDark Mode Implementation:
- * ✓ ASSET-07 Starfish Cage (Glass KrMotif Case backdrop)
+ * ✓ ASSET-07 Starfish Cage backdrop
  * ✓ Clinical Typography (Monospace metadata, Serif descriptors)
  * ✓ Paper Texture & Grid Overlays
  * ✓ Local-First Persistence
@@ -131,14 +131,14 @@ export const ProfileEditor: React.FC<ProfileEditorProps> = ({ onNext, onBack }) 
         >
           <div>
             <p className="font-mono text-[10px] text-bark-base opacity-40 uppercase tracking-[0.5em] mb-2">
-              [ BIOMETRIC_ARCHIVE.v3 ]
+              [ PROFILE_ARCHIVE.v3 ]
             </p>
             <h1 className="font-serif text-5xl text-bark-base tracking-tight italic">
-              The KrMotif <span className="text-leaf-dark">Archive</span>
+              Profile <span className="text-leaf-dark">Archive</span>
             </h1>
-            <p className="font-field-note text-lg text-bark-base/60 mt-2 max-w-2xl">
-              Review and recalibrate the extracted metadata from your career KrMotifs. Precision is
-              mandatory for successful synthesis.
+            <p className="font-primary text-lg text-bark-base/60 mt-2 max-w-2xl">
+              Review and calibrate extracted profile data. Better profile quality improves drafting
+              and analysis outputs.
             </p>
           </div>
           <div className="flex items-center gap-4 text-bark-base/40 font-mono text-[10px] uppercase tracking-widest pb-2">
@@ -160,7 +160,7 @@ export const ProfileEditor: React.FC<ProfileEditorProps> = ({ onNext, onBack }) 
               <div className="absolute inset-0 bg-bark-dark/10 mix-blend-multiply opacity-40 z-10 pointer-events-none" />
               <img
                 src={starfishCage}
-                alt="KrMotif Container"
+                alt="Profile container"
                 className="w-full h-full object-cover scale-110 group-hover:scale-100 transition-transform duration-[5s] ease-out brightness-90 saturate-[0.8]"
               />
               <div className="absolute bottom-0 inset-x-0 p-6 bg-gradient-to-t from-bark-dark/80 to-transparent z-20">
@@ -173,15 +173,15 @@ export const ProfileEditor: React.FC<ProfileEditorProps> = ({ onNext, onBack }) 
                     ASSET-07 | CASE_GLASS
                   </span>
                 </div>
-                <p className="font-field-note text-white/60 text-sm italic">
-                  "Protective encasement for sensitive career filaments."
+                <p className="font-primary text-white/60 text-sm italic">
+                  "Reference backdrop for profile review."
                 </p>
               </div>
               {/* Forensic Overlay */}
               <div className="absolute inset-0 border-[20px] border-bark-dark/5 pointer-events-none z-30" />
             </Stone>
 
-            <div className="p-6 bg-bark-light/5 border border-bark-base/10 rounded-stone">
+            <div className="p-6 bg-bark-light/5 border border-bark-base/10 rounded-megaphone">
               <h4 className="font-mono text-[10px] text-bark-base font-bold uppercase tracking-widest mb-4">
                 Metadata Integrity
               </h4>
@@ -216,22 +216,22 @@ export const ProfileEditor: React.FC<ProfileEditorProps> = ({ onNext, onBack }) 
                   className="text-bark-base opacity-40"
                 />
                 <h3 className="font-mono text-xs font-bold text-bark-base uppercase tracking-widest">
-                  Personal Identification
+                  Personal Details
                 </h3>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <Lens
-                  label="IDENTIFIER (NAME)"
-                  value={profile.name}
-                  onChange={(e) => handleUpdate({ name: e.target.value })}
-                  className="w-full font-mono text-sm"
-                />
-                <Lens
-                  label="COMM_NODE (EMAIL)"
-                  value={profile.email}
-                  onChange={(e) => handleUpdate({ email: e.target.value })}
-                  type="email"
+                  <Lens
+                    label="FULL NAME"
+                    value={profile.name}
+                    onChange={(e) => handleUpdate({ name: e.target.value })}
+                    className="w-full font-mono text-sm"
+                  />
+                  <Lens
+                    label="EMAIL"
+                    value={profile.email}
+                    onChange={(e) => handleUpdate({ email: e.target.value })}
+                    type="email"
                   className="w-full font-mono text-sm"
                 />
               </div>
@@ -242,7 +242,7 @@ export const ProfileEditor: React.FC<ProfileEditorProps> = ({ onNext, onBack }) 
                     className="absolute left-3 top-10 text-bark-base/40"
                   />
                   <Lens
-                    label="LOCAL_COORD (LOCATION)"
+                    label="LOCATION"
                     value={profile.location}
                     onChange={(e) => handleUpdate({ location: e.target.value })}
                     className="w-full font-mono text-sm pl-8"
@@ -254,7 +254,7 @@ export const ProfileEditor: React.FC<ProfileEditorProps> = ({ onNext, onBack }) 
                     className="absolute left-3 top-10 text-bark-base/40"
                   />
                   <Lens
-                    label="NETWORK_URI (WEBSITE)"
+                    label="WEBSITE"
                     value={profile.website}
                     onChange={(e) => handleUpdate({ website: e.target.value })}
                     className="w-full font-mono text-sm pl-8"
@@ -378,12 +378,12 @@ export const ProfileEditor: React.FC<ProfileEditorProps> = ({ onNext, onBack }) 
                   {profile.skills.map((skill, index) => (
                     <div
                       key={index}
-                      className="font-mono text-[9px] uppercase tracking-widest bg-bark-light/10 text-bark-base border border-bark-base/20 px-3 py-1 rounded-stone"
+                      className="font-mono text-[9px] uppercase tracking-widest bg-bark-light/10 text-bark-base border border-bark-base/20 px-3 py-1 rounded-megaphone"
                     >
                       {skill}
                     </div>
                   ))}
-                  <button className="w-8 h-8 rounded-sentry border border-dashed border-bark-base/20 flex items-center justify-center text-bark-base/40 hover:border-leaf-base hover:text-leaf-base transition-colors">
+                  <button className="w-8 h-8 rounded-march border border-dashed border-bark-base/20 flex items-center justify-center text-bark-base/40 hover:border-leaf-base hover:text-leaf-base transition-colors">
                     <Plus size={14} />
                   </button>
                 </div>

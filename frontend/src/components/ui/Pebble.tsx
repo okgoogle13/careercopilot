@@ -1,8 +1,16 @@
+/**
+ * @deprecated Pebble is deprecated as of KR Solidarity v6.0.
+ * Use {@link Strike} from './Strike' instead. See docs/design/01_CANON.md §2.C
+ * Will be removed in v7.0.
+ */
 import React from 'react';
 import { cn } from '../../lib/utils';
 import { Loader2 } from 'lucide-react';
+import { motion, HTMLMotionProps } from 'framer-motion';
 
-export interface PebbleProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface PebbleProps extends HTMLMotionProps<'button'> {
+  children?: React.ReactNode;
+
   /**
    * The visual style variant.
    * - Primary: Ink Gold (Action)
@@ -59,16 +67,15 @@ export const Pebble = React.forwardRef<HTMLButtonElement, PebbleProps>(
   ) => {
     // Base structural classes (Layout & Physics)
     const baseStyles =
-      'inline-flex items-center justify-center font-body font-medium transition-all duration-short ease-viscous disabled:opacity-50 disabled:pointer-events-none ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2';
+      'relative overflow-hidden inline-flex items-center justify-center font-body font-medium transition-colors duration-short disabled:opacity-50 disabled:pointer-events-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2';
 
     // Token-mapped variants (The Skin comes from tokens.json via tailwind config)
     const variants = {
-      primary:
-        'bg-primary text-primary-foreground hover:bg-primary-bright hover:-translate-y-0.5 shadow-ink-rest hover:shadow-glow-gold rounded-leaf',
+      primary: 'bg-primary text-primary-foreground shadow-ink-rest rounded-leaf',
       secondary:
-        'bg-surface-elevated text-secondary border border-white/10 hover:bg-surface-elevated/80 hover:text-primary hover:-translate-y-0.5 shadow-sm rounded-pebble',
+        'bg-surface-elevated text-secondary border border-white/10 shadow-sm rounded-pebble',
       ghost: 'hover:bg-surface-elevated hover:text-primary rounded-petal',
-      destructive: 'bg-accent text-white hover:bg-accent-dim rounded-leaf shadow-ink-rest',
+      destructive: 'bg-accent text-white rounded-leaf shadow-ink-rest',
     };
 
     const sizes = {
@@ -78,17 +85,38 @@ export const Pebble = React.forwardRef<HTMLButtonElement, PebbleProps>(
     };
 
     return (
-      <button
+      <motion.button
         ref={ref}
         className={cn(baseStyles, variants[variant], sizes[size], className)}
         disabled={disabled || isLoading}
+        whileHover={
+          !disabled && !isLoading
+            ? {
+                scale: 1.03,
+                boxShadow: variant === 'primary' ? 'var(--sys-shadow-glow-gold)' : undefined,
+                transition: { type: 'spring', stiffness: 400, damping: 15, mass: 1 },
+              }
+            : undefined
+        }
+        whileTap={
+          !disabled && !isLoading
+            ? {
+                scale: 0.96,
+              }
+            : undefined
+        }
         {...props}
       >
         {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-        {!isLoading && iconLeft && <span className="mr-2">{iconLeft}</span>}
-        {children}
-        {!isLoading && iconRight && <span className="ml-2">{iconRight}</span>}
-      </button>
+        {!isLoading && iconLeft && <span className="mr-2 relative z-10">{iconLeft}</span>}
+        <span className="relative z-10">{children}</span>
+        {!isLoading && iconRight && <span className="ml-2 relative z-10">{iconRight}</span>}
+
+        {/* Subtle Screenprint Grit Hover Overlay */}
+        {!disabled && (
+          <div className="absolute inset-0 opacity-0 hover:opacity-[0.05] pointer-events-none transition-opacity bg-[url('/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__ui--kr-ui-019--v1.svg')]" />
+        )}
+      </motion.button>
     );
   }
 );

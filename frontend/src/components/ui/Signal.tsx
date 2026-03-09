@@ -1,6 +1,6 @@
 import { AlertCircle, AlertTriangle, CheckCircle, Info, X } from 'lucide-react';
 import React, { useState } from 'react';
-import { Pebble } from './Pebble';
+import { Strike } from './Strike';
 
 export type SignalSeverity = 'info' | 'success' | 'warning' | 'error';
 
@@ -33,7 +33,6 @@ export interface SignalProps {
   fullWidth?: boolean;
 }
 
-export type M3AlertSeverity = 'info' | 'success' | 'warning' | 'error';
 export type SignalVariant = 'filled' | 'outlined' | 'tonal';
 
 /**
@@ -43,17 +42,19 @@ export type SignalVariant = 'filled' | 'outlined' | 'tonal';
  * Supports info, success, warning, and error states with filled, outlined, or tonal variants.
  * Archetype: Signal (status indicator)
  */
-export function Signal({
-  title,
-  severity = 'info',
-  variant = 'tonal',
-  onClose,
-  action,
-  icon,
-  children,
-  className = '',
-  fullWidth = true,
-}: SignalProps) {
+export function Signal(props: SignalProps) {
+  const {
+    title,
+    severity = 'info',
+    variant = 'tonal',
+    onClose,
+    action,
+    icon,
+    children,
+    className = '',
+    fullWidth = true,
+  } = props;
+
   const [isVisible, setIsVisible] = useState(true);
 
   if (!isVisible) return null;
@@ -63,7 +64,7 @@ export function Signal({
     onClose?.();
   };
 
-  const icons: Record<M3AlertSeverity, React.ComponentType<{ className?: string }>> = {
+  const icons: Record<SignalSeverity, any> = {
     info: Info,
     success: CheckCircle,
     warning: AlertTriangle,
@@ -74,12 +75,12 @@ export function Signal({
 
   const getStyles = () => {
     const styles: React.CSSProperties = {
-      borderRadius: 'var(--radius-stone)',
+      borderRadius: 'var(--shape-megaphoneCut01, 42% 58% 45% 55% / 48% 62% 38% 52%)',
       transition: 'all var(--duration-standard) var(--ease-viscous-breeze)',
     };
 
     // Kerala Rage kr-solidarity semantic color mapping
-    const semanticColorMap: Record<M3AlertSeverity, { bg: string; text: string; border?: string }> =
+    const semanticColorMap: Record<SignalSeverity, { bg: string; text: string; border?: string }> =
       {
         info: {
           bg: 'var(--sys-color-signalGreen-base)',
@@ -103,7 +104,7 @@ export function Signal({
         },
       };
 
-    const colors = semanticColorMap[severity];
+    const colors = semanticColorMap[severity] || semanticColorMap.info;
 
     if (variant === 'filled') {
       styles.backgroundColor = colors.bg;
@@ -122,6 +123,26 @@ export function Signal({
     return styles;
   };
 
+  const renderIcon = () => {
+    if (!IconComponent) return null;
+
+    // If it's a function or an object that looks like a component (forwardRef, etc)
+    if (
+      typeof IconComponent === 'function' ||
+      (typeof IconComponent === 'object' && IconComponent !== null && '$$typeof' in IconComponent)
+    ) {
+      try {
+        const Component = IconComponent as React.ComponentType<any>;
+        return <Component className="w-5 h-5" />;
+      } catch (e) {
+        return null;
+      }
+    }
+
+    // Default to rendering as a node
+    return IconComponent;
+  };
+
   return (
     <div
       style={getStyles()}
@@ -130,26 +151,27 @@ export function Signal({
                 ${fullWidth ? 'w-full' : 'w-auto'}
                 ${className}
             `}
-      role="alert"
+      role="status"
+      aria-live="polite"
     >
-      <div className="flex-shrink-0 mt-0.5">
-        {typeof IconComponent === 'function' ? (
-          <IconComponent className="w-5 h-5" />
-        ) : (
-          IconComponent
-        )}
-      </div>
+      <div className="flex-shrink-0 mt-0.5">{renderIcon()}</div>
 
       <div className="flex-grow">
-        {title && <h4 className="font-bold mb-1 font-bloom">{title}</h4>}
-        <div className="font-field-note text-sm leading-relaxed">{children}</div>
+        {title && typeof title === 'string' && (
+          <h4 className="font-bold mb-1 font-display">{title}</h4>
+        )}
+        <div className="font-primary text-sm leading-relaxed">
+          {typeof children === 'object' && children !== null && !React.isValidElement(children)
+            ? 'Invalid child node'
+            : children}
+        </div>
       </div>
 
       {(action || onClose) && (
         <div className="flex-shrink-0 flex items-start gap-2 -mt-1 -mr-1">
           {action}
           {onClose && (
-            <Pebble
+            <Strike
               variant="ghost"
               size="sm"
               onClick={handleClose}
@@ -157,7 +179,7 @@ export function Signal({
               className="h-6 w-6 p-0"
             >
               <X className="w-4 h-4" />
-            </Pebble>
+            </Strike>
           )}
         </div>
       )}
@@ -167,13 +189,9 @@ export function Signal({
 
 // Component sub-parts for composition
 export const SignalTitle: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-  <h4 className="font-bold mb-1 font-bloom">{children}</h4>
+  <h4 className="font-bold mb-1 font-display">{children}</h4>
 );
 
 export const SignalDescription: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-  <div className="font-field-note text-sm leading-relaxed">{children}</div>
+  <div className="font-primary text-sm leading-relaxed">{children}</div>
 );
-
-// Legacy M3 exports for backward compatibility
-export { Signal as M3Alert, SignalDescription as M3AlertDescription, SignalTitle as M3AlertTitle };
-export type { SignalProps as M3AlertProps };

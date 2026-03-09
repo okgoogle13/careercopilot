@@ -1,60 +1,44 @@
 ---
 name: manifest-reconciler
-description: Reconcile KR asset files against manifest and hero registries; report gaps, orphans, and hero coverage metrics.
+description: Reconcile assets across filesystem, manifest, and hero registry and report deterministic integrity gaps.
 metadata:
-  legacy_frontmatter:
-    version: 2.0.0
-    tags:
+  version: 2.3.0
+  tags:
+    - assets
     - manifest
     - integrity
-    - hero
 ---
 
 # Manifest Reconciler
 
 ## Purpose
-Guarantee that assets on disk, manifest entries, and hero registry references are synchronized before packaging or deployment.
 
-## Inputs
-```json
-{
-  "asset_root": "frontend/public/assets/kr-solidarity",
-  "manifest": "frontend/public/assets/kerala-rage-kr-solidarity-manifest.json",
-  "hero_registry": "frontend/public/assets/kr-solidarity-hero-registry.json"
-}
-```
+Detect mismatches between on-disk assets, manifest entries, and hero registry references.
 
-## Checks
-1. Filesystem -> manifest reconciliation
-- Orphans: file exists, not in manifest
-- Broken refs: manifest path missing on disk
-- Duplicates: duplicate ids or file paths
+## When to Use
 
-2. Hero reconciliation
-- Hero layer asset IDs resolve to manifest IDs
-- No missing IDs in hero compositions
-- Hero depth metrics are reported (`layers >= 4` coverage)
+- Before packaging/deploy.
+- After bulk asset edits.
 
-3. Coverage summary
-- Total assets
-- Per-layer counts
-- Hero composition count
-- Unique hero assets used
+## Shared References
+
+- `../shared-references/ASSET_WORKFLOW_CANON.md`
+- `../shared-references/STATUS_THRESHOLDS.md`
+
+## Scope
+
+Checks:
+- missing or orphaned assets
+- unresolved manifest references
+- hero-registry/manifest drift
+- layering compatibility consistency
 
 ## Output Contract
-```json
-{
-  "status": "PASS",
-  "manifest_total": 56,
-  "orphans": [],
-  "broken_references": [],
-  "hero_missing_assets": [],
-  "hero_depth_ratio": 0.50,
-  "notes": []
-}
-```
 
-## Safety Rules
-- Never delete automatically.
-- Emit proposed `git rm` commands only for reviewed orphan candidates.
-- Fail if manifest or hero registry cannot be parsed.
+Use deterministic shape with wrapper key `manifest_reconciliation_audit`.
+
+## Related Skills
+
+- `asset-path-validator`
+- `asset-packager`
+- `phase4-pipeline-orchestrator`

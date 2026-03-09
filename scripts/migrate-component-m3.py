@@ -16,30 +16,50 @@ Usage:
 import re
 import sys
 import os
+import json
 from pathlib import Path
 
 # Color mappings (hex → token)
 COLOR_MAP = {
-    '#A78BFA': 'var(--sys-color-primary)',
-    '#C084FC': 'var(--sys-color-primary-light)',
-    '#7C3AED': 'var(--sys-color-primary-dark)',
-    '#C9C3DC': 'var(--sys-color-secondary)',
-    '#F472B6': 'var(--sys-color-tertiary)',
-    '#EC4899': 'var(--sys-color-tertiary-dark)',
-    '#FFB4AB': 'var(--sys-color-error)',
-    '#86EFAC': 'var(--sys-color-success)',
-    '#BBF7D0': 'var(--sys-color-success-light)',
-    '#22C55E': 'var(--sys-color-success-dark)',
-    '#FDE047': 'var(--sys-color-warning)',
-    '#FEF08A': 'var(--sys-color-warning-light)',
-    '#FACC15': 'var(--sys-color-warning-dark)',
-    '#67E8F9': 'var(--sys-color-info)',
-    '#A5F3FC': 'var(--sys-color-info-light)',
-    '#06B6D4': 'var(--sys-color-info-dark)',
-    '#60a5fa': 'var(--sys-color-info-light)',  # Common variant
-    '#F8FAFC': 'var(--sys-color-text-primary)',
-    '#E2E8F0': 'var(--sys-color-text-secondary)',
-    '#928F99': 'var(--sys-color-text-disabled)',
+    # Legacy generic colors mapped to nearest KR Solidarity equivalents
+    '#A78BFA': 'var(--sys-color-inkGold)',
+    '#C084FC': 'var(--sys-color-inkGold)',
+    '#7C3AED': 'var(--sys-color-inkGold)',
+    '#C9C3DC': 'var(--sys-color-concreteGrey)',
+    '#F472B6': 'var(--sys-color-solidaritySmokeOrange)',
+    '#EC4899': 'var(--sys-color-solidaritySmokeOrange)',
+    '#FFB4AB': 'var(--sys-color-kr-charcoalRed)',
+    '#86EFAC': 'var(--sys-color-kr-activistSmokeGreen)',
+    '#BBF7D0': 'var(--sys-color-kr-activistSmokeGreen)',
+    '#22C55E': 'var(--sys-color-kr-activistSmokeGreen)',
+    '#FDE047': 'var(--sys-color-stencilYellow)',
+    '#FEF08A': 'var(--sys-color-stencilYellow)',
+    '#FACC15': 'var(--sys-color-stencilYellow)',
+    '#67E8F9': 'var(--sys-color-protestMetalBlue)',
+    '#A5F3FC': 'var(--sys-color-protestMetalBlue)',
+    '#06B6D4': 'var(--sys-color-protestMetalBlue)',
+    '#60a5fa': 'var(--sys-color-protestMetalBlue)',
+    '#F8FAFC': 'var(--sys-color-paperWhite)',
+    '#E2E8F0': 'var(--sys-color-worker-ash)',
+    '#928F99': 'var(--sys-color-concreteGrey)',
+
+    # Hardcoded KR Solidarity hexes to semantic tokens
+    '#1A1714': 'var(--sys-color-charcoalBackground)',
+    '#F14714': 'var(--sys-color-solidarityRed)',
+    '#F14844': 'var(--sys-color-kr-charcoalRed)',
+    '#48DA8B': 'var(--sys-color-kr-activistSmokeGreen)',
+    '#48F0E5': 'var(--sys-color-signalGreen)',
+    '#DAF674': 'var(--sys-color-inkGold)',
+    '#F6E748': 'var(--sys-color-stencilYellow)',
+    '#DAF6B3': 'var(--sys-color-worker-ash)',
+    '#DA8B48': 'var(--sys-color-solidaritySmokeOrange)',
+    '#48B3DA': 'var(--sys-color-protestMetalBlue)',
+    '#D81E05': 'var(--sys-color-aboriginalFlagRed)',
+    '#FCD116': 'var(--sys-color-aboriginalFlagYellow)',
+    '#000000': 'var(--sys-color-aboriginalFlagBlack)',
+    '#A39B8F': 'var(--sys-color-concreteGrey)',
+    '#B8733D': 'var(--sys-color-ochreEarth)',
+    '#F5F0E8': 'var(--sys-color-paperWhite)',
 }
 
 # Spacing mappings (px → token)
@@ -56,15 +76,27 @@ SPACING_MAP = {
 
 # Border radius mappings (px → token)
 RADIUS_MAP = {
+    # Basic tokens
     '0px': 'var(--sys-shape-radius-none)',
+    '2px': 'var(--sys-shape-radius-xs)',
     '4px': 'var(--sys-shape-radius-sm)',
     '8px': 'var(--sys-shape-radius-md)',
     '0.5rem': 'var(--sys-shape-radius-md)',
     '0.25rem': 'var(--sys-shape-radius-sm)',
     '12px': 'var(--sys-shape-radius-lg)',
     '16px': 'var(--sys-shape-radius-xl)',
+    '20px': 'var(--sys-shape-radius-xl)',
+    '32px': 'var(--sys-shape-radius-xxl)',
+    '48px': 'var(--sys-shape-radius-xxxl)',
     '9999px': 'var(--sys-shape-radius-full)',
     '50%': 'var(--sys-shape-radius-full)',
+
+    # KR Solidarity v6.1 Semantic Shapes
+    '8px 2px 8px 2px': 'var(--shape-blockRiot01)',
+    '12px 0 8px 20px': 'var(--shape-blockRiot01-pressed)',
+    '20px 4px 12px 2px': 'var(--shape-blockRiot02)',
+    '32px 2px 2px 2px': 'var(--shape-blockRiot03)',
+    '20px 8px 12px 32px': 'var(--shape-pebbleSurge01)',
 }
 
 # Animation duration mappings (ms → token)
@@ -168,7 +200,25 @@ def migrate_animations(content):
     return content, changes
 
 
-def migrate_component(file_path):
+def migrate_expressive(content):
+    """Pass 2: Inject expressive motion and substrate noise."""
+    changes = 0
+
+    # 1. Inject framer-motion if not present but we are making changes
+    has_motion = 'framer-motion' in content
+
+    # 2. Upgrade css transitions to viscous
+    pattern_transition = r"transition-all duration-(?:300|500)"
+    new_content = re.sub(pattern_transition, "transition-all duration-300 ease-viscous", content)
+    if new_content != content:
+        changes += len(re.findall(pattern_transition, content))
+    content = new_content
+
+    # 3. If we made expressive changes and need framer-motion, we could inject it here
+    # For MVP, we'll just track if we applied the viscous easing.
+    return content, changes
+
+def migrate_component(file_path, run_expressive=False):
     """Migrate a component file to M3 design tokens."""
 
     if not os.path.exists(file_path):
@@ -205,27 +255,72 @@ def migrate_component(file_path):
     if animation_changes > 0:
         print(f"  ✓ Replaced {animation_changes} hardcoded animation value(s)")
 
-    if total_changes == 0:
+    if total_changes == 0 and not run_expressive:
         print(f"  ℹ️  No hardcoded values found (already M3 compliant)")
-        return True
+        return True, False
 
-    # Write updated content
+    expressive_changes = 0
+    if run_expressive:
+        content, expressive_changes = migrate_expressive(content)
+        total_changes += expressive_changes
+        if expressive_changes > 0:
+            print(f"  ✨ Pass 2: Applied {expressive_changes} expressive transforms")
+
+    if total_changes == 0:
+        print(f"  ℹ️  No changes needed.")
+        return True, False    # Write updated content
     with open(file_path, 'w', encoding='utf-8') as f:
         f.write(content)
 
     print(f"✅ Migration complete: {total_changes} change(s) made")
-    return True
+    return True, (expressive_changes > 0)
 
 
 def main():
+    if len(sys.argv) > 1 and sys.argv[1] == '--auto':
+        design_level = None
+        if len(sys.argv) > 3 and sys.argv[2] == '--design-level':
+            design_level = sys.argv[3]
+
+        inventory_path = Path("frontend/component-inventory.json")
+        if not inventory_path.exists():
+            print("❌ Error: component-inventory.json not found. Run inventory script first.")
+            sys.exit(1)
+
+        with open(inventory_path, 'r') as f:
+            inventory = json.load(f)
+
+        planned_components = [c for c in inventory.get('components', [])
+                              if c.get('expressiveStatus') == 'planned']
+
+        if design_level:
+            planned_components = [c for c in planned_components if c.get('designLevel') == design_level]
+
+        if not planned_components:
+            level_msg = f" for level '{design_level}'" if design_level else ""
+            print(f"ℹ️ No planned components found{level_msg} for expressive transformation.")
+            sys.exit(0)
+
+        print(f"🚀 Found {len(planned_components)} components planned for expressive upgrade.")
+        upgraded_count = 0
+        for comp in planned_components:
+            file_path = Path("frontend") / comp['relativePath']
+            success, made_expressive = migrate_component(str(file_path), run_expressive=True)
+            if made_expressive:
+                upgraded_count += 1
+
+        print(f"\n✨ Updated {upgraded_count} components to expressive=done")
+        sys.exit(0)
+
     if len(sys.argv) < 2:
-        print("Usage: python3 scripts/migrate-component-m3.py <component-path>")
+        print("Usage: python3 scripts/migrate-component-m3.py <component-path> | --auto [--design-level <level>]")
         print("Example: python3 scripts/migrate-component-m3.py frontend/src/components/ui/button.tsx")
+        print("Example: python3 scripts/migrate-component-m3.py --auto --design-level atom")
         sys.exit(1)
 
     file_path = sys.argv[1]
 
-    success = migrate_component(file_path)
+    success, _ = migrate_component(file_path, run_expressive=True)
     sys.exit(0 if success else 1)
 
 

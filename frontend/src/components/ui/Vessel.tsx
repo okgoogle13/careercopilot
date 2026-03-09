@@ -9,7 +9,7 @@ export interface VesselProps {
   className?: string;
 }
 
-export const M3Accordion: React.FC<VesselProps> = ({
+export const Vessel: React.FC<VesselProps> = ({
   title,
   icon,
   children,
@@ -28,7 +28,7 @@ export const M3Accordion: React.FC<VesselProps> = ({
       >
         <div className="flex items-center gap-4">
           {icon && <div className="text-[var(--sys-color-inkGold-base)]">{icon}</div>}
-          <h3 className="font-bloom text-lg font-bold text-[var(--sys-color-worker-ash-base)]">
+          <h3 className="font-display text-lg font-bold text-[var(--sys-color-worker-ash-base)]">
             {title}
           </h3>
         </div>
@@ -48,6 +48,4 @@ export const M3Accordion: React.FC<VesselProps> = ({
   );
 };
 
-export { M3Accordion as Vessel };
-
-M3Accordion.displayName = 'Vessel';
+Vessel.displayName = 'Vessel';

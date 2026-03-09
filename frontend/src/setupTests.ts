@@ -81,18 +81,18 @@ import React from 'react';
         if (!motionComponents.has(prop)) {
           const Component = React.forwardRef(({ children, ...props }: any, ref: any) => {
             const {
-              transition,
-              animate,
-              initial,
-              whileHover,
-              whileTap,
-              whileInView,
-              variants,
-              layout,
-              exit,
-              onAnimationStart,
-              onAnimationComplete,
-              onUpdate,
+              transition: _transition,
+              animate: _animate,
+              initial: _initial,
+              whileHover: _whileHover,
+              whileTap: _whileTap,
+              whileInView: _whileInView,
+              variants: _variants,
+              layout: _layout,
+              exit: _exit,
+              onAnimationStart: _onAnimationStart,
+              onAnimationComplete: _onAnimationComplete,
+              onUpdate: _onUpdate,
               ...domProps
             } = props;
             return React.createElement(prop, { ...domProps, ref }, children);

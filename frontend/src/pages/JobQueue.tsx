@@ -1,9 +1,9 @@
-import { Cabinet, Pebble, StatusBadge, Stone, type StatusBadgeVariant } from '@/components/ui';
+import { Megaphone, Strike, StatusBadge, Placard, type StatusBadgeVariant } from '@/components/ui';
 import { KanbanCard } from '@/components/KanbanCard';
 import { m3Toast } from '@/utils/toast';
 import { CheckCircle, Clock, Copy, ExternalLink, FileText, Play, Sparkles } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import { M3ErrorAlert } from '../components/shared/M3ErrorAlert';
+import { KrErrorAlert } from '../components/shared/KrErrorAlert';
 import { PageHeader } from '../components/shared/PageHeader';
 import { API_ENDPOINTS } from '../config/api';
 import { LayeredHero } from '../components/kerala-rage/LayeredHero';
@@ -20,6 +20,36 @@ interface JobQueueItem {
   date_clipped: string;
   notes?: string;
 }
+
+const MOCK_JOB_QUEUE: JobQueueItem[] = [
+  {
+    id: 'mock-001',
+    title: 'Community Services Coordinator',
+    company: 'Union House',
+    url: 'https://example.org/jobs/community-services-coordinator',
+    status: 'pending_analysis',
+    date_clipped: new Date().toISOString(),
+    notes: 'Mocked visual-audit card state',
+  },
+  {
+    id: 'mock-002',
+    title: 'Family Support Practitioner',
+    company: 'Care Collective',
+    url: 'https://example.org/jobs/family-support-practitioner',
+    status: 'ready_to_apply',
+    date_clipped: new Date(Date.now() - 1000 * 60 * 60 * 24).toISOString(),
+    notes: 'Mocked ready state',
+  },
+  {
+    id: 'mock-003',
+    title: 'Youth Case Worker',
+    company: 'Northside Services',
+    url: 'https://example.org/jobs/youth-case-worker',
+    status: 'applied',
+    date_clipped: new Date(Date.now() - 1000 * 60 * 60 * 24 * 2).toISOString(),
+    notes: 'Mocked applied state',
+  },
+];
 
 const statusConfig: Record<
   JobQueueItem['status'],
@@ -95,6 +125,9 @@ export function JobQueue() {
   }, []);
 
   const fetchJobs = async () => {
+    const isOfflineAudit =
+      import.meta.env.VITE_OFFLINE_MODE === 'true' || import.meta.env.VITE_USE_MOCK_API === 'true';
+
     try {
       setLoading(true);
       const response = await fetch(API_ENDPOINTS.jobQueue);
@@ -108,7 +141,12 @@ export function JobQueue() {
       setError(null);
     } catch (err) {
       console.error('Error fetching jobs:', err);
-      setError('Failed to load job queue. Ensure backend is running.');
+      if (isOfflineAudit) {
+        setJobs(MOCK_JOB_QUEUE);
+        setError(null);
+      } else {
+        setError('Failed to load job queue. Ensure backend is running.');
+      }
     } finally {
       setLoading(false);
     }
@@ -193,9 +231,9 @@ export function JobQueue() {
         <div
           role="status"
           data-testid="job-queue-loader"
-          className="w-12 h-12 border-4 border-[var(--color-ink-gold)]/20 border-t-[var(--color-ink-gold)] rounded-sentry animate-spin"
+          className="w-12 h-12 border-4 border-[var(--sys-color-inkGold)]/20 border-t-[var(--sys-color-inkGold)] rounded-march animate-spin"
         />
-        <p className="font-annotation text-xs tracking-widest text-[var(--color-concrete-grey-dark)] uppercase">
+        <p className="font-mono text-xs tracking-widest text-[var(--sys-color-concreteGrey)] uppercase">
           Synchronizing Queue
         </p>
       </div>
@@ -224,7 +262,7 @@ export function JobQueue() {
       />
 
       {error && (
-        <M3ErrorAlert
+        <KrErrorAlert
           message={error}
           onRetry={fetchJobs}
           onDismiss={() => setError(null)}
@@ -234,13 +272,13 @@ export function JobQueue() {
 
       {jobs.length === 0 && !error ? (
         <div className="text-center py-32 opacity-60">
-          <div className="w-20 h-20 bg-white/5 rounded-sentry flex items-center justify-center mx-auto mb-6 border border-white/10">
-            <Sparkles className="w-10 h-10 text-[var(--color-concrete-grey-dark)]" />
+          <div className="w-20 h-20 bg-[var(--sys-color-charcoalBackground)] rounded-march flex items-center justify-center mx-auto mb-6 border border-[var(--sys-color-concreteGrey)]/20">
+            <Sparkles className="w-10 h-10 text-[var(--sys-color-concreteGrey)]" />
           </div>
-          <h3 className="font-bloom text-3xl mb-2 text-[var(--color-paper-white)]">
+          <h3 className="font-display text-3xl mb-2 text-[var(--sys-color-paperWhite)]">
             Empty Pipeline
           </h3>
-          <p className="font-field-note text-lg text-[var(--color-concrete-grey-dark)]">
+          <p className="font-primary text-lg text-[var(--sys-color-concreteGrey)]">
             Clip opportunities from Seek or LinkedIn to populate your queue.
           </p>
         </div>
@@ -270,46 +308,45 @@ export function JobQueue() {
         </div>
       )}
 
-      <Cabinet
+      <Megaphone
         open={showCoverLetterDialog}
         onClose={() => setShowCoverLetterDialog(false)}
         title="Strategic Cover Letter"
         maxWidth="2xl"
-        variant="tech"
       >
         <div className="space-y-6">
           {coverLetterJob && (
-            <div className="p-4 bg-[var(--color-ink-gold)]/10 rounded-stone border border-[var(--color-ink-gold)]/20">
-              <p className="font-field-note text-sm text-[var(--color-ink-gold)]">
+            <div className="p-4 bg-[var(--sys-color-inkGold)]/10 rounded-megaphone border border-[var(--sys-color-inkGold)]/20">
+              <p className="font-primary text-sm text-[var(--sys-color-inkGold)]">
                 Optimized for <span className="font-bold">{coverLetterJob.title}</span> at{' '}
                 <span className="font-bold">{coverLetterJob.company}</span>
               </p>
             </div>
           )}
 
-          <div className="bg-white/5 p-8 rounded-stone border border-white/5 shadow-inner">
-            <pre className="font-field-note text-base text-[var(--color-paper-white)]/90 whitespace-pre-wrap leading-relaxed">
+          <div className="bg-[var(--sys-color-asphaltBlack)] p-8 rounded-megaphone border border-[var(--sys-color-concreteGrey)]/10 shadow-inner">
+            <pre className="font-primary text-base text-[var(--sys-color-paperWhite)]/90 whitespace-pre-wrap leading-relaxed">
               {coverLetter}
             </pre>
           </div>
 
           <div className="flex justify-end gap-3 pt-4">
-            <Pebble
+            <Strike
               variant="ghost"
               onClick={() => setShowCoverLetterDialog(false)}
             >
               Refine Later
-            </Pebble>
-            <Pebble
+            </Strike>
+            <Strike
               variant="primary"
               iconLeft={<Copy className="w-4 h-4" />}
               onClick={handleCopy}
             >
               {copied ? 'Copied' : 'Secure to Clipboard'}
-            </Pebble>
+            </Strike>
           </div>
         </div>
-      </Cabinet>
+      </Megaphone>
     </div>
   );
 }

@@ -88,9 +88,7 @@ python scripts/audit_structure.py --palette-only # Direct validation
 - Political Authenticity (Agit-Prop, Worker Solidarity)
 - Viscous Physics (Spring easing, fluid transitions)
 - Scale Hierarchy (Display Black → Body)
-- Political Authenticity (Agit-Prop, Worker Solidarity)
-- Viscous Physics (Spring easing, fluid transitions)
-- Scale Hierarchy (Display Black → Body)
+- Density Zones (Distribution of saturation/ink)
 - Background Color (#1A1714 Charcoal mandatory)
 - Typography (Inter Variable, Recursive)
 
@@ -141,13 +139,11 @@ bash scripts/run_full_audit.sh
 **Validation checklist**:
 
 ```
-- [ ] Step 1: Structure & schema (audit_structure.py)
-- [ ] Step 2: Palette compliance (validate_palette_mcp.py)
-- [ ] Step 3: Tailwind integration (audit_tailwind.py)
-### 4. Mode Parity (ABOLISHED)
-**Status**: This section has been moved to [references/MODE_PARITY.md](references/MODE_PARITY.md). Single Mode Enforced.
+- [x] Step 1: Structure & schema (`audit_structure.py`)
+- [x] Step 2: Palette compliance (`validate_palette_mcp.py`)
+- [x] Step 3: Tailwind integration (`audit_tailwind.py`)
 - [x] Step 4: Mode parity (Abolished)
-- [ ] Step 5: Hardcoded values (analyze-m3-styling-consistency.sh)
+- [ ] Step 5: Hardcoded values (`analyze-m3-styling-consistency.sh`)
 ```
 
 **Step-by-step**:
@@ -208,18 +204,14 @@ All scripts return standardized exit codes:
 - `1` = Critical errors (build will fail)
 - `2` = Warnings (review recommended)
 
-**Existing scripts** (keep as-is):
+**Existing scripts**:
 
 - `verify-m3-token-consistency.sh` - Component token usage
 - `analyze-m3-styling-consistency.sh` - Hardcoded value detection
 - `build-m3-tokens.py` - Artifact generation
 - `sync-theme-to-tokens.py` - Cross-system sync
-
-**New scripts** (to be created):
-
-- `audit_structure.py` - Enhanced schema validator
+- `audit_structure.py` - Enhanced schema validator (v6.0)
 - `audit_tailwind.py` - getValue() path resolver
-- `check_mode_parity.py` - ABOLISHED.
 - `validate_palette_mcp.py` - MCP tool wrapper
 - `run_full_audit.sh` - Master orchestrator
 
@@ -230,3 +222,5 @@ All scripts return standardized exit codes:
 3. **Kerala Rage compliance**: Agit-Prop aesthetic is non-negotiable
 4. **Single Mode**: "Solidarity" is the ONLY valid mode.
 5. **Progressive disclosure**: Reference files loaded only when needed
+6. **MCP Integration**: This skill leverages the `design-system-sidekick` and `manifest-reconciler` MCP tools for high-level validation.
+7. **Visual Verification**: Results should be visually verified in `frontend/docs/design/generated/previews/COMPLETE_VISUAL_AUDIT.md`.

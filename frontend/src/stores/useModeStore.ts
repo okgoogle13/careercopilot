@@ -1,9 +1,8 @@
 /**
  * Kerala Rage Mode Store (Zustand)
  *
- * Manages KrDark ↔ KrLight mode switching with persistence.
- * KrDark: User-facing, emotional, high wallpaper opacity (formerly gallery)
- * KrLight: Clinical tools, restrained, low wallpaper opacity (formerly laboratory)
+ * Dark-mode-only store with persistence.
+ * KR Solidarity is locked to KrDark across all routes.
  */
 
 import { create } from 'zustand';
@@ -40,27 +39,38 @@ export const useModeStore = create<ModeState>()(
       isKrLightMode: false,
 
       // Actions
-      setMode: (mode: AppMode) => {
+      setMode: (_mode: AppMode) => {
+        const mode: AppMode = 'KrDark';
         set({
           mode,
-          isKrDarkMode: mode === 'KrDark',
-          isKrLightMode: mode === 'KrLight',
+          isKrDarkMode: true,
+          isKrLightMode: false,
         });
         // Side effect: Update DOM data attributes for CSS token switching
         document.body.dataset.mode = mode;
         document.documentElement.setAttribute('data-mode', mode);
       },
 
-      // Action: toggleMode
+      // Action: toggleMode (locked; no-op outside KrDark)
       toggleMode: () => {
-        const currentMode = get().mode;
-        const newMode: AppMode = currentMode === 'KrDark' ? 'KrLight' : 'KrDark';
-        get().setMode(newMode);
+        get().setMode('KrDark');
       },
     }),
     {
       name: 'mode-storage', // localStorage key
-      partialize: (state) => ({ mode: state.mode }), // Only persist mode
+      partialize: (state) => ({ mode: state.mode }), // Kept for backward compatibility
+      merge: (_persistedState, currentState) => ({
+        ...currentState,
+        mode: 'KrDark',
+        isKrDarkMode: true,
+        isKrLightMode: false,
+      }),
+      onRehydrateStorage: () => (state) => {
+        if (!state) {
+          return;
+        }
+        state.setMode('KrDark');
+      },
     }
   )
 );

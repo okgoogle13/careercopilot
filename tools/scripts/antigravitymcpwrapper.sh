@@ -22,7 +22,7 @@ function show_help() {
 
 function validate() {
     echo "🔍 Validating MCP Setup..."
-    
+
     if [ ! -f "$CONFIG_FILE" ]; then
         echo "❌ Error: $CONFIG_FILE not found."
         exit 1
@@ -58,7 +58,7 @@ function validate() {
 
 function deploy() {
     echo "🚀 Deploying unified MCP config to Claude Desktop..."
-    
+
     if [ ! -f "$CONFIG_FILE" ]; then
         echo "❌ Error: Source config $CONFIG_FILE not found."
         exit 1

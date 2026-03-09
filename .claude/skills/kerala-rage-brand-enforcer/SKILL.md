@@ -1,58 +1,67 @@
 ---
 name: kr-solidarity-brand-enforcer
-description: Auto-applies KR Solidarity v6.0 brand guidelines (Migrant Rage theme).
+description: Enforce KR Solidarity brand compliance across code and design artifacts with deterministic rule IDs and structured JSON output.
 metadata:
-  version: 6.0.0
+  version: 6.2.0
   tags:
     - brand
     - compliance
     - kr-solidarity
-    - migrant-rage
 ---
 
-# KR Solidarity: Brand Enforcer (v6.0)
-
+# KR Solidarity Brand Enforcer
 
 ## Purpose
 
-Guardrails to ensure all content matches the **KR Solidarity (Migrant Rage)** theme and adheres to the [Design Canon](../../docs/design/01_CANON.md).
-
-## Process
-
-1. **Review Output**: Analyze generated content (wireframes, specs, code, logs).
-2. **Validate Colors**: Enforce **Solidarity Charcoal** (#1A1714), **Solidarity Crimson** (#F14714), and **Ink Gold** (#DAF674).
-3. **Check Typography**: Verify the **Solidarity Stack** from [02_SYSTEM.md](../../docs/design/02_SYSTEM.md). NO Inter/Roboto/Arial.
-4. **Validate Layout**: Confirm **Stone / Slab / Pebble** asymmetric radii and 8px grid.
-5. **Verify Visuals**: Enforce **STRICT ZERO-FLORA LOCKDOWN**. Confirm urban/human-centric motifs (laneways, posters, resistance portraiture).
-6. **Report Violations**: Flag non-compliant elements (e.g., perfect circles, white backgrounds, botanical motifs).
-
+Run deterministic brand-policy checks and emit actionable violations before merge/release.
 
 ## When to Use
 
-- After wireframe annotation to validate brand compliance
-- Before component spec generation to ensure design consistency
-- When reviewing design system documentation
-- When auditing visual outputs for kerala-rage adherence
+- PR review for UI/style changes.
+- Design artifact compliance audits.
+- Release-readiness checks.
 
-## Enforcement Rules
+## Shared References
 
-- **Colors**:
-    - **Background**: Solidarity Charcoal (#1A1714). **STRICT NO WHITE BACKGROUNDS**.
-    - **Accents**: Solidarity Crimson (#F14714), Ink Gold (#DAF674), Stencil Yellow (#F6E748), Activist Smoke (#48DA8B).
-- **Typography**:
-    - **Solidarity Stack**: Work Sans, Fraunces, Libre Bodoni, JetBrains Mono, Caveat.
-    - **Nabla (COLRv1)**: Authorized ONLY for icon-scale Hero hits. MUST use Solidarity palette.
-- **Layout**: Asymmetric radii (**Stone / Slab / Pebble** shapes). **BANNED**: `border-radius: 50%`.
-- **Visual**: Melbourne laneway/stencilled aesthetic, resistance portraiture, wheat-paste textures.
-- **FORBIDDEN**: Flora, Australian endemic botanicals, or soft organic 'nature' elements.
+- `../shared-references/BRAND_CANON.md`
+- `../shared-references/STATUS_THRESHOLDS.md`
+- `../shared-references/AUDIT_OUTPUT_CONTRACT.md`
 
+## Rule Engine
 
-## Validates Outputs From
+Primary executable:
+- `scripts/enforce_brand.py`
 
-- wireframe-annotator
-- component-spec-generator
-- design-system-doc-generator
+Severity configuration:
+- `references/severity-map.json`
+
+Deterministic rule IDs:
+- `BR-COLOR-001` hardcoded hex values
+- `BR-COLOR-002` disallowed white background usage
+- `BR-TYPE-001` banned fonts
+- `BR-SHAPE-001` disallowed `border-radius: 50%`
+- `BR-MOTIF-001` flora motif drift
+
+## Process
+
+1. Scan target files/directories.
+2. Emit violations with rule_id, severity, location, evidence, fix.
+3. Compute score/status via severity map.
+4. Return structured JSON.
 
 ## Usage
 
-"Check [File/Output] for brand compliance"
+```bash
+python3 .claude/skills/kerala-rage-brand-enforcer/scripts/enforce_brand.py frontend/src --context code --min-score 90
+```
+
+## Edge Cases
+
+- Markdown policy docs are de-noised to reduce false positives.
+- Screenshot context lowers confidence to `medium` by default.
+
+## Related Skills
+
+- `component-visual-audit`
+- `m3-visual-audit`
+- `ui-design-evaluator`

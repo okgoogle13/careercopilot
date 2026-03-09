@@ -1,15 +1,15 @@
-import { Pebble, StatusBadge, Stone } from '@/components/ui';
+import { Strike, StatusBadge, Placard } from '@/components/ui';
 import { motion } from 'framer-motion';
 import {
   Calendar,
   ChevronRight,
-  Flower2,
+  Clock3,
+  FileText,
   Home,
-  Leaf,
+  CheckCircle2,
   MapPin,
   MoreHorizontal,
   Plus,
-  Sprout,
 } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { LayeredHero } from '../../components/kerala-rage/LayeredHero';
@@ -20,7 +20,7 @@ import { composeHero } from '../../lib/composeHero';
 import { PageHeader } from '../../components/shared/PageHeader';
 
 // Assets
-const leafFern =
+const atmosphericOverlay =
   '/assets/kr-solidarity/abstract/kr-solidarity__atmospheric__texture--solidarity-chatgpt-image-f--v1.png';
 const wallpaper =
   '/assets/kr-solidarity/texture/kr-solidarity__substrate__landmark--melbourne-laneway--v1.png';
@@ -35,16 +35,16 @@ interface Application {
 }
 
 const STAGES = [
-  { id: 'nursery', name: 'The Nursery', description: 'Freshly Applied', icon: Sprout },
-  { id: 'sunlight', name: 'The Sunlight', description: 'Initial Screening', icon: Flower2 },
+  { id: 'queued', name: 'Queued', description: 'Application lodged', icon: FileText },
+  { id: 'screening', name: 'Screening', description: 'Initial review underway', icon: Clock3 },
   {
-    id: 'transplant',
-    name: 'The Transplant',
-    description: 'Active Interviews',
+    id: 'interview',
+    name: 'Interview',
+    description: 'Interview sequence active',
     icon: ChevronRight,
   },
-  { id: 'harvest', name: 'The Harvest', description: 'Offer Received', icon: Leaf },
-  { id: 'archive', name: 'The Archive', description: 'Closed / Finalized', icon: Home },
+  { id: 'offer', name: 'Offer', description: 'Offer received', icon: CheckCircle2 },
+  { id: 'closed', name: 'Closed', description: 'Finalized outcome', icon: Home },
 ];
 
 const MOCK_APPLICATIONS: Application[] = [
@@ -54,7 +54,7 @@ const MOCK_APPLICATIONS: Application[] = [
     company: 'TechCorp',
     location: 'San Francisco, CA',
     appliedDate: '2 days ago',
-    stage: 'transplant',
+    stage: 'interview',
   },
   {
     id: 2,
@@ -62,7 +62,7 @@ const MOCK_APPLICATIONS: Application[] = [
     company: 'DesignHub',
     location: 'Remote',
     appliedDate: '5 days ago',
-    stage: 'sunlight',
+    stage: 'screening',
   },
   {
     id: 3,
@@ -70,7 +70,7 @@ const MOCK_APPLICATIONS: Application[] = [
     company: 'StartupXYZ',
     location: 'New York, NY',
     appliedDate: '1 week ago',
-    stage: 'nursery',
+    stage: 'queued',
   },
   {
     id: 4,
@@ -78,16 +78,15 @@ const MOCK_APPLICATIONS: Application[] = [
     company: 'CodeFactory',
     location: 'Austin, TX',
     appliedDate: '3 days ago',
-    stage: 'sunlight',
+    stage: 'screening',
   },
 ];
 
 /**
- * The Greenhouse (Application Tracker / Kanban Board)
+ * Application Tracker (Kanban Board)
  *
  * V3.1 Mixed Mode implementation.
- * A KeralaStreetprint greenhouse aesthetic where job applications are treated
- * as KrMotifs in various growth stages.
+ * Status-first workflow for tracking role progress from submission to outcome.
  */
 export function ApplicationTracker() {
   const [applications] = useState<Application[]>(MOCK_APPLICATIONS);
@@ -141,16 +140,16 @@ export function ApplicationTracker() {
         </div>
       )}
 
-      {/* Dynamic Stagecraft: Greenhouse Glass & Vines */}
+      {/* Dynamic stagecraft */}
       <div
         className="absolute inset-0 opacity-5 pointer-events-none mix-blend-overlay"
         style={{ backgroundImage: `url(${wallpaper})`, backgroundSize: '400px' }}
       />
 
-      {/* Decorative Fern Overlay */}
+      {/* Decorative Atmospheric Overlay */}
       <div className="absolute bottom-0 left-0 w-[600px] h-[600px] pointer-events-none z-0 opacity-10 select-none">
         <img
-          src={leafFern}
+          src={atmosphericOverlay}
           alt=""
           className="w-full h-full object-contain object-left-bottom grayscale brightness-200"
         />
@@ -158,12 +157,12 @@ export function ApplicationTracker() {
 
       <div className="relative z-10 p-6 md:p-12 max-w-[1600px] mx-auto">
         <PageHeader
-          title="The Greenhouse"
+          title="Application"
           highlightedWord="Tracker"
-          description="Cultivate your career opportunities through every stage of growth."
+          description="Track every application stage from submission to final outcome."
         />
 
-        {/* The Kanban Trellis */}
+        {/* Kanban lanes */}
         <div className="flex gap-6 overflow-x-auto pb-8 snap-x">
           {STAGES.map((stage) => (
             <div
@@ -172,21 +171,20 @@ export function ApplicationTracker() {
             >
               <div className="mb-6 px-2">
                 <div className="flex items-center justify-between mb-1">
-                  <h3 className="font-bloom text-lg font-black text-paper-white uppercase tracking-tighter flex items-center gap-2">
+                  <h3 className="font-display text-lg font-black text-paper-white uppercase tracking-tighter flex items-center gap-2">
                     <stage.icon className="w-4 h-4 text-ink-gold" />
                     {stage.name}
                   </h3>
-                  <span className="font-annotation text-[9px] text-concrete-grey bg-concrete-grey/5 px-2 py-0.5 border border-concrete-grey/10">
+                  <span className="font-mono text-[9px] text-concrete-grey bg-concrete-grey/5 px-2 py-0.5 border border-concrete-grey/10">
                     {applications.filter((a) => a.stage === stage.id).length} UNITS
                   </span>
                 </div>
-                <p className="font-annotation text-[10px] text-concrete-grey uppercase tracking-[0.2em] opacity-60">
+                <p className="font-mono text-[10px] text-concrete-grey uppercase tracking-[0.2em] opacity-60">
                   {stage.description}
                 </p>
               </div>
 
-              {/* Glass Column Shell */}
-              <div className="space-y-4 min-h-[500px] rounded-pebble border border-dashed border-concrete-grey/5 bg-bark-light/[0.02] p-2">
+              <div className="space-y-4 min-h-[500px] rounded-placard border border-dashed border-concrete-grey/5 bg-bark-light/[0.02] p-2">
                 {applications
                   .filter((app) => app.stage === stage.id)
                   .map((app) => (
@@ -196,8 +194,7 @@ export function ApplicationTracker() {
                     />
                   ))}
 
-                {/* Seedling Dispatch (Add Button) */}
-                <button className="w-full py-4 border border-dashed border-concrete-grey/10 rounded-stone flex items-center justify-center text-concrete-grey/30 hover:border-ink-gold/40 hover:text-ink-gold transition-all group">
+                <button className="w-full py-4 border border-dashed border-[var(--sys-color-concreteGrey-steps-1)] rounded-megaphone flex items-center justify-center text-[var(--sys-color-concreteGrey-base)]/50 hover:border-[var(--sys-color-inkGold-base)]/40 hover:text-[var(--sys-color-inkGold-base)] transition-all group">
                   <Plus className="w-5 h-5 group-hover:rotate-90 transition-transform" />
                 </button>
               </div>
@@ -210,8 +207,7 @@ export function ApplicationTracker() {
 }
 
 /**
- * ApplicationLeaf component
- * A single job application card styled as a KrMotif leaf.
+ * Application card row.
  */
 function ApplicationLeaf({ application }: { application: Application }) {
   return (
@@ -220,9 +216,9 @@ function ApplicationLeaf({ application }: { application: Application }) {
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
     >
-      <Stone
+      <Placard
         elevation="floating"
-        className="p-5 border-concrete-grey/10 bg-asphalt-black/40 backdrop-blur-sm group relative overflow-hidden"
+        className="p-5 border-[var(--sys-color-concreteGrey-steps-1)] bg-[var(--sys-color-charcoalBackground-steps-2)]/40 backdrop-blur-sm group relative overflow-hidden"
       >
         {/* Stage Indicator Notch */}
         <div className="absolute top-0 left-0 w-1 h-full bg-ink-gold opacity-40 group-hover:opacity-100 transition-opacity" />
@@ -240,37 +236,35 @@ function ApplicationLeaf({ application }: { application: Application }) {
           </div>
 
           <div>
-            <h4 className="font-bloom text-base font-bold text-paper-white uppercase leading-none mb-1">
+            <h4 className="font-display text-base font-bold text-paper-white uppercase leading-none mb-1">
               {application.title}
             </h4>
-            <p className="font-field-note italic text-xs text-concrete-grey">
-              {application.company}
-            </p>
+            <p className="font-primary italic text-xs text-concrete-grey">{application.company}</p>
           </div>
 
           <div className="pt-2 space-y-2">
-            <div className="flex items-center gap-2 text-[10px] font-annotation text-concrete-grey/60 uppercase tracking-widest">
+            <div className="flex items-center gap-2 text-[10px] font-mono text-concrete-grey/60 uppercase tracking-widest">
               <MapPin className="w-3 h-3" /> {application.location}
             </div>
-            <div className="flex items-center gap-2 text-[10px] font-annotation text-concrete-grey/40 uppercase tracking-widest">
+            <div className="flex items-center gap-2 text-[10px] font-mono text-concrete-grey/40 uppercase tracking-widest">
               <Calendar className="w-3 h-3" /> {application.appliedDate}
             </div>
           </div>
 
           <div className="pt-3 flex justify-between items-center border-t border-concrete-grey/5">
-            <span className="font-mono text-[8px] text-concrete-grey/30 uppercase tracking-[0.2em]">
-              KrMotif_ID: {application.id.toString().padStart(3, '0')}
+            <span className="font-mono text-[8px] text-[var(--sys-color-concreteGrey-base)]/50 uppercase tracking-[0.2em]">
+              App ID: {application.id.toString().padStart(3, '0')}
             </span>
-            <Pebble
+            <Strike
               variant="ghost"
               size="sm"
-              className="h-6 text-[10px] uppercase font-bold tracking-tighter hover:text-ink-gold"
+              className="h-6 text-[10px] uppercase font-bold tracking-tighter hover:text-[var(--sys-color-inkGold-base)]"
             >
               DETAILS
-            </Pebble>
+            </Strike>
           </div>
         </div>
-      </Stone>
+      </Placard>
     </motion.div>
   );
 }

@@ -40,7 +40,7 @@ export const LoginCard: React.FC<LoginCardProps> = ({
       {/* Halo Disk Radiance */}
       <div
         className={cn(
-          'absolute inset-0 -z-10 bg-ink-gold/20 blur-3xl rounded-sentry scale-150 transition-opacity',
+          'absolute inset-0 -z-10 bg-ink-gold/20 blur-3xl rounded-march scale-150 transition-opacity',
           isLoading ? 'animate-pulse opacity-60' : 'opacity-0 group-hover:opacity-40'
         )}
       />
@@ -51,7 +51,7 @@ export const LoginCard: React.FC<LoginCardProps> = ({
         animate={{ scale: 1, opacity: 1 }}
         className={cn(
           'w-[480px] p-12 bg-[var(--sys-color-charcoalBackground-base)]/90 backdrop-blur-md',
-          'border border-blueprint-grey/30 rounded-stone shadow-viscous',
+          'border border-blueprint-grey/30 rounded-megaphone shadow-viscous',
           'flex flex-col gap-8 relative overflow-hidden'
         )}
         aria-label="Verification Gateway"
@@ -60,7 +60,7 @@ export const LoginCard: React.FC<LoginCardProps> = ({
         {/* Screenprint Substrate Overlay */}
         <div className="absolute inset-0 opacity-[0.08] pointer-events-none bg-[url('/assets/kr-solidarity/texture/kr-solidarity__atmospheric__texture--asphalt-grain--v2.png')] mix-blend-overlay" />
 
-        <h2 className="text-display-lg font-serif italic text-paper-white tracking-tighter">
+        <h2 className="text-display font-black text-paper-white tracking-widest text-center">
           VERIFY IDENTITY
         </h2>
 
@@ -68,7 +68,7 @@ export const LoginCard: React.FC<LoginCardProps> = ({
           <div className="space-y-2">
             <label
               htmlFor="email-input"
-              className="text-blueprint-grey font-jetbrains-mono text-xs uppercase tracking-widest"
+              className="text-blueprint-grey font-jetbrains-mono text-micro font-light uppercase tracking-widest"
             >
               Email Address
             </label>
@@ -89,7 +89,7 @@ export const LoginCard: React.FC<LoginCardProps> = ({
           <div className="space-y-2">
             <label
               htmlFor="password-input"
-              className="text-blueprint-grey font-jetbrains-mono text-xs uppercase tracking-widest"
+              className="text-blueprint-grey font-jetbrains-mono text-micro font-light uppercase tracking-widest"
             >
               Password
             </label>
@@ -113,13 +113,17 @@ export const LoginCard: React.FC<LoginCardProps> = ({
           whileTap={{ scale: 0.98 }}
           type="submit"
           className={cn(
-            'mt-4 py-5 bg-ink-gold text-charcoal font-bold uppercase tracking-[0.2em]',
-            'rounded-pebble shadow-hover-rise text-lg'
+            'mt-4 py-5 bg-[var(--sys-color-inkGold-base)] text-[var(--sys-color-asphaltBlack-base)] font-bold uppercase tracking-[0.2em]',
+            'rounded-pebble shadow-hover-rise text-lg border border-[var(--sys-color-inkGold-base)]/70 shadow-glow-gold hover:brightness-105'
           )}
           disabled={isLoading}
         >
           {isLoading ? 'VERIFYING...' : 'ENTER ARCHIVE'}
         </motion.button>
+
+        <p className="text-center font-mono text-[10px] uppercase tracking-[0.3em] text-ink-gold/70 -mt-3">
+          Primary Entry Action
+        </p>
 
         <button
           type="button"

@@ -1,0 +1,19 @@
+{
+  "mode": "asset_audit_batch",
+  "batch_id": "phase4-batch3-2026-03-07",
+  "input_components": [
+    "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/phase3-batch3/AnalysisWorkbench.tsx",
+    "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/phase3-batch3/ApplicationFinalization.tsx",
+    "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/phase3-batch3/DashboardOverview.tsx",
+    "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/phase3-batch3/DocumentWorkbench.tsx",
+    "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/phase3-batch3/IngestionFlow.tsx",
+    "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/phase3-batch3/KanbanTracker.tsx",
+    "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/phase3-batch3/LookoutDiscovery.tsx",
+    "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/phase3-batch3/SettingsControl.tsx"
+  ],
+  "output_dir": "frontend/src/components/phase4-filled-batch3/",
+  "manifest": "frontend/public/assets/kerala-rage-kr-solidarity-manifest.json",
+  "hero_registry": "frontend/public/assets/kr-solidarity-hero-registry.json",
+  "target_coverage": 75,
+  "target_score": 92
+}

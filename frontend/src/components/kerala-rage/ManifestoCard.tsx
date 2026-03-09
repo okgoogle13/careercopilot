@@ -60,7 +60,7 @@ export const ManifestoCard: React.FC<ManifestoCardProps> = ({
       {...motionProps}
       className={cn(
         'relative p-8 md:p-12 max-w-2xl overflow-hidden',
-        'bg-asphalt-black rounded-stone border shadow-viscous',
+        'bg-asphalt-black rounded-megaphone border shadow-viscous',
         toneStyles[tone],
         className
       )}

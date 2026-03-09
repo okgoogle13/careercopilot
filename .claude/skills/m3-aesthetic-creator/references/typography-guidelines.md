@@ -2,6 +2,19 @@
 
 This reference provides comprehensive specifications for creating expressive typography systems. Use this when developing typography in Step 3 of the creation process.
 
+## Table of Contents
+
+1. Font Selection Principles
+2. Display Font Guidance
+3. Body Font Guidance
+4. Variable Axes Strategy
+5. Type Scale and Role Mapping
+6. Hierarchy and Contrast Rules
+7. Accessibility Constraints
+8. Pairing Patterns
+9. Anti-Patterns
+10. Output Checklist
+
 ## Font Selection Principles
 
 ### Display Font (Large Headlines, Hero Moments)
@@ -234,7 +247,7 @@ Display and body fonts MUST be different families to create visual interest:
 :root {
   /* Display: Fraunces (variable serif) */
   --font-display: 'Fraunces', serif;
-  
+
   /* Body: Work Sans (variable sans) */
   --font-body: 'Work Sans', sans-serif;
 }
@@ -242,7 +255,7 @@ Display and body fonts MUST be different families to create visual interest:
 .hero-headline {
   font-family: var(--font-display);
   font-size: 57px;
-  font-variation-settings: 
+  font-variation-settings:
     'wght' 900,     /* Maximum weight */
     'SOFT' 100,     /* Maximum softness */
     'WONK' 1;       /* Enable wonky alternates */
@@ -252,7 +265,7 @@ Display and body fonts MUST be different families to create visual interest:
 .body-text {
   font-family: var(--font-body);
   font-size: 16px;
-  font-variation-settings: 
+  font-variation-settings:
     'wght' 400,     /* Regular weight */
     'wdth' 100;     /* Normal width */
   line-height: 1.5;

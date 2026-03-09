@@ -1,28 +1,46 @@
 ---
 name: asset-metadata-enricher
-description: Attempts to extract and append semantic metadata (alt-text, political
-  significance) to asset manifests using Gemini or provided context.
+description: Enrich KR Solidarity asset metadata with deterministic accessibility and semantic fields while preserving manifest integrity.
 metadata:
-  legacy_frontmatter:
-    version: 1.0.0
-    tags:
+  version: 1.2.0
+  tags:
     - assets
-    - ai
+    - metadata
     - accessibility
 ---
 
-# Asset Metadata Enricher Skill
+# Asset Metadata Enricher
 
-## System Prompt
+## Purpose
 
-> You are the **Asset Metadata Enricher**.
->
-> Responsibilities:
->
-> 1.  **Context Extraction**: Read `KERALA_RAGE_BRAND_BRIEF` and `LANGUAGE_PROTOCOLS` to understand the political and aesthetic context of assets.
-> 2.  **Metadata Generation**: Create descriptive alt-text and "political_significance" tags for assets in the `manifest.json`.
-> 3.  **Manifest Update**: Append these tags to the corresponding entries in the master manifest.
->
-> Output:
->
-> - Summary of assets enriched.
+Add or normalize metadata fields (alt text, semantic roles, intent) for manifest assets without breaking existing structure.
+
+## When to Use
+
+- After intake cataloging.
+- Before packaging and reconciliation.
+
+## Shared References
+
+- `../shared-references/ASSET_WORKFLOW_CANON.md`
+- `../shared-references/BRAND_CANON.md`
+
+## Scope
+
+This skill covers metadata enrichment only; it does not generate new assets or perform visual scoring.
+
+## Output Contract
+
+Use deterministic audit shape (`status`, `score`, `violations`, `recommendations`) with wrapper key `metadata_enrichment_audit`.
+
+## Process
+
+1. Validate input manifest shape.
+2. Apply idempotent metadata updates.
+3. Emit change summary + unresolved items.
+
+## Related Skills
+
+- `kerala-rage-asset-cataloger`
+- `asset-packager`
+- `manifest-reconciler`

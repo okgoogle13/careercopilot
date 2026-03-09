@@ -1,0 +1,87 @@
+flowchart TD
+    START([🚀 First Visit]) --> LANDING
+
+    subgraph AUTH["Auth & Onboarding"]
+        LANDING[Landing Page /] -->|"Register CTA"| REGISTER[Register /register\nName · Email · Password]
+        LANDING -->|"Existing user"| LOGIN[Login /login\nEmail · Password]
+        LOGIN -->|"Auth success"| ONBOARDING
+        REGISTER -->|"Auth success"| ONBOARDING
+
+        ONBOARDING["OnboardingPage /onboarding\n'Choosing the Soil'\n9 Domain cards"]
+        ONBOARDING -->|"Domain selected\n→ Fertilize Selection"| INGEST
+    end
+
+    subgraph INTAKE["Profile & Data Intake"]
+        INGEST["IngestionPage /career/ingest\n'Deposit Identity'\nPDF / DOCX upload"]
+        INGEST --> STAGE_UP{Upload stage}
+        STAGE_UP -->|"uploading → extracting\n→ processing → embedding"| STAGE_COMP
+        STAGE_UP -->|"Error / unsupported file"| INGEST_ERR[Error toast\nRetry prompt]
+        INGEST_ERR --> INGEST
+        STAGE_COMP["Stage: complete\nValidationDashboard\nReview extracted profile"]
+        STAGE_COMP -->|"Confirm data"| DASHBOARD
+        STAGE_COMP -->|"Edit extracted fields"| STAGE_COMP
+    end
+
+    subgraph HUB["Dashboard Hub"]
+        DASHBOARD["Dashboard /dashboard\n'Solidarity Hub'\nMetrics · Recent Synthesis grid\n3 global action CTAs"]
+        DASHBOARD -->|"Deposit KrMotif"| INGEST2[IngestionPage\n/career/ingest]
+        DASHBOARD -->|"View Archive"| DOCS
+        DASHBOARD -->|"Automated Synthesis"| OPPS
+        DASHBOARD -->|"Generate Artifacts →\n(card CTA)"| ANALYSIS
+    end
+
+    subgraph CORE["AI Generation & Iteration"]
+        ANALYSIS["AnalysisPage /analysis\nATS Score + Resume Optimise\nPaste resume · Paste/URL job ad"]
+        ANALYSIS -->|"Run analysis"| ATS_API[POST /api/v1/analysis/ats-score\nKeyword match · Category scores]
+        ATS_API -->|"Score returned"| ATS_RESULT[ATS Result\nScore 0-100 · Matched / Missing\nSkillBreakdownCard]
+        ATS_RESULT -->|"Iterate / edit"| ANALYSIS
+
+        CL["Cover Letter Generator\n/cover-letter-generator\n4-step wizard"]
+        CL_S1["Step 1: Job Details\nURL import or manual"]
+        CL_S2["Step 2: Company Insights\nName · Culture"]
+        CL_S3["Step 3: Final Touches\nTone · Instructions"]
+        CL_S4["Step 4: Result\nGenerated letter"]
+        CL --> CL_S1 --> CL_S2 --> CL_S3 --> CL_S4
+        CL_S1 -->|"Auto-fill from URL\ngenkitApi.analyzeJobFromUrl"| CL_S1
+
+        KSC["KSC Generator\n/ksc-generator\n3-step wizard"]
+        KSC_S1["Step 1: Selection Criteria\nURL or manual paste"]
+        KSC_S2["Step 2: STAR Method\nSituation · Task · Action · Result"]
+        KSC_S3["Step 3: Review\nAPS ILS-aligned response"]
+        KSC --> KSC_S1 --> KSC_S2 --> KSC_S3
+
+        OPPS["Opportunities /opportunities\nJob Scout\nAutonomous agent"]
+        DOCS["Documents /documents\nResumes · Letters · KSC"]
+        TRACKER["Application Tracker /tracker\nJob pipeline management"]
+        PROFILE["Profile /profile\nUser details · Resume"]
+    end
+
+    subgraph EXPORT["Export & Integration"]
+        CL_S4 -->|"Copy to clipboard"| COPY_CL[📋 Copied]
+        CL_S4 -->|"Download PDF\nexportToPdf()"| PDF_CL[📄 PDF downloaded]
+        KSC_S3 -->|"Copy to clipboard"| COPY_KSC[📋 Copied]
+        KSC_S3 -->|"Download PDF"| PDF_KSC[📄 PDF downloaded]
+        KSC_S3 -->|"Save draft\napi.saveKSCDraft()"| DRAFT_SAVED[💾 Draft saved]
+        ATS_RESULT -->|"Optimise resume"| POST_OPT[POST /api/v1/analysis/strategy\nOptimised resume text]
+        POST_OPT -->|"Download / copy"| COPY_RES[📋 Optimised resume]
+    end
+
+    subgraph NAV["Sidebar Navigation (always available)"]
+        SIDEBAR["Sidebar\nDashboard · Applications · Documents\nAnalysis · Opportunities\nCover Letter Genius · KSC Generator\nAsset Library · Settings · Profile"]
+    end
+
+    DASHBOARD --> SIDEBAR
+    SIDEBAR --> TRACKER
+    SIDEBAR --> DOCS
+    SIDEBAR --> ANALYSIS
+    SIDEBAR --> OPPS
+    SIDEBAR --> CL
+    SIDEBAR --> KSC
+    SIDEBAR --> PROFILE
+
+    INGEST2 --> INTAKE
+
+    END_SUCCESS([✅ Application submitted\nwith tailored cover letter,\nATS-optimised resume &\nKSC responses])
+    CL_S4 --> END_SUCCESS
+    KSC_S3 --> END_SUCCESS
+    ATS_RESULT --> END_SUCCESS

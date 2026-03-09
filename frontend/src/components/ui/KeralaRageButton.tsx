@@ -37,7 +37,7 @@ export const KeralaRageButton = React.forwardRef<HTMLButtonElement, KeralaRageBu
     ref
   ) => {
     // Note: System is now dark-only as per spec. mode choice is purely for transition stability.
-    const { mode } = useMode();
+    const { mode: _mode } = useMode();
 
     // Size variants
     const sizeClasses = {
@@ -87,7 +87,7 @@ export const KeralaRageButton = React.forwardRef<HTMLButtonElement, KeralaRageBu
         className={cn(
           // Base styles
           'font-bold uppercase inline-flex items-center justify-center relative overflow-hidden',
-          'transition-all duration-300',
+          'transition-all duration-300 ease-viscous',
           'disabled:opacity-40 disabled:grayscale disabled:cursor-not-allowed',
 
           // Size/Radius
@@ -137,7 +137,7 @@ export const KeralaRageButton = React.forwardRef<HTMLButtonElement, KeralaRageBu
             transition={{ repeat: Infinity, duration: 1, ease: 'linear' }}
             className="mr-2"
           >
-            <span className="block w-4 h-4 border-2 border-current border-t-transparent rounded-sentry" />
+            <span className="block w-4 h-4 border-2 border-current border-t-transparent rounded-march" />
           </motion.div>
         ) : startIcon ? (
           <span className="mr-2 flex items-center">{startIcon}</span>

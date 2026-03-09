@@ -17,9 +17,9 @@ import { Link, useLocation } from 'react-router-dom';
 const mainNavItems = [
   { path: '/dashboard', icon: Home, label: 'Dashboard' },
   { path: '/tracker', icon: ClipboardList, label: 'Applications' },
-  { path: '/documents', icon: FileText, label: 'Documents' },
-  { path: '/analysis', icon: BarChart3, label: 'Analysis' },
-  { path: '/opportunities', icon: Briefcase, label: 'Opportunities' },
+  { path: '/documents', icon: FileText, label: 'My Documents' },
+  { path: '/analysis', icon: BarChart3, label: 'ATS Score & Optimise' },
+  { path: '/opportunities', icon: Briefcase, label: 'Job Scout' },
   { path: '/cover-letter-generator', icon: Sparkles, label: 'Cover Letter Genius' },
   { path: '/ksc-generator', icon: Inbox, label: 'KSC Generator' },
   { path: '/asset-library', icon: FolderOpen, label: 'Asset Library' },
@@ -39,7 +39,7 @@ export function Sidebar() {
       {/* Mobile Menu Button */}
       <button
         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        className="fixed top-6 left-6 z-50 lg:hidden bg-surface-container p-3 rounded-2xl text-on-surface hover:bg-surface-container-high transition-colors"
+        className="fixed top-6 left-6 z-50 lg:hidden bg-surface-container p-3 rounded-placard text-on-surface hover:bg-surface-container-high transition-colors"
         aria-label="Toggle menu"
       >
         {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -71,7 +71,7 @@ export function Sidebar() {
       >
         {/* Logo Area */}
         <div className="p-6 pb-8 flex flex-col items-start">
-          <div className="w-14 h-14 rounded-sentry flex items-center justify-center bg-primary-container text-3xl transition-transform hover:scale-110 shadow-lg mb-4">
+          <div className="w-14 h-14 rounded-march flex items-center justify-center bg-primary-container text-3xl transition-transform hover:scale-110 shadow-lg mb-4">
             🦄
           </div>
           <h4 className="text-primary text-xl font-black uppercase tracking-tight leading-none">
@@ -122,9 +122,9 @@ export function Sidebar() {
         </nav>
 
         {/* User Profile */}
-        <div className="p-4 m-4 bg-surface-container rounded-2xl flex-shrink-0 border border-outline-variant">
+        <div className="p-4 m-4 bg-surface-container rounded-placard flex-shrink-0 border border-outline-variant">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-sentry flex-shrink-0 bg-tertiary-container" />
+            <div className="w-10 h-10 rounded-march flex-shrink-0 bg-tertiary-container" />
             <div className="flex-1">
               <p className="text-sm text-on-surface font-bold">Nishant</p>
               <p className="text-xs text-primary uppercase tracking-wider font-mono">
@@ -134,7 +134,7 @@ export function Sidebar() {
           </div>
           <Link
             to={`/settings${appendQuery}`}
-            className="flex items-center justify-center mt-3 p-2 rounded-sentry hover:bg-surface-dim transition-colors"
+            className="flex items-center justify-center mt-3 p-2 rounded-march hover:bg-surface-dim transition-colors"
             title="Settings"
           >
             <Settings className="w-5 h-5 text-on-surface-variant" />

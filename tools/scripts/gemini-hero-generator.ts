@@ -19,39 +19,45 @@ const genAI = new GoogleGenerativeAI(apiKey);
 const githubToken = process.env.GITHUB_TOKEN || process.env.GH_PAT;
 const GITHUB_MODELS_ENDPOINT = "https://models.inference.ai.azure.com/chat/completions";
 
+// Model Tiers (March 2026)
+const MODEL_TIERS: Record<string, string> = {
+  Frontier: 'gemini-3.1-pro',
+  Performance: 'gemini-3.1-flash',
+  Utility: 'gemini-3.1-flash-lite',
+  LTS: 'gemini-1.5-pro'
+};
+
 const MODEL_CANDIDATES = [
-  { provider: 'google', model: 'gemini-3-flash-preview' }, // Newest/Fastest
-  { provider: 'google', model: 'gemini-3-pro-preview' },   // Newest/Smartest
-  { provider: 'google', model: 'gemini-2.5-flash' },       // Production Stable
-  { provider: 'google', model: 'gemini-2.5-pro' },         // Production Smart
-  { provider: 'google', model: 'gemini-2.0-flash' },       // Previous Flash
-  { provider: 'google', model: 'gemini-2.0-flash-lite' },  // Ultra-lite fallback
-  { provider: 'github', model: 'gpt-4o' },                 // GitHub Fallback 1
-  { provider: 'github', model: 'Meta-Llama-3-70B-Instruct' } // GitHub Fallback 2
+  { provider: 'google', model: MODEL_TIERS.Frontier, tier: 'Frontier' },
+  { provider: 'google', model: MODEL_TIERS.Performance, tier: 'Performance' },
+  { provider: 'google', model: MODEL_TIERS.Utility, tier: 'Utility' },
+  { provider: 'google', model: MODEL_TIERS.LTS, tier: 'LTS' },
+  { provider: 'github', model: 'gpt-4o', tier: 'External-Fallback' },
+  { provider: 'github', model: 'Meta-Llama-3-70B-Instruct', tier: 'External-Fallback' }
 ];
 
 // Path resolution based on process.cwd() (Project Root)
 const PROJECT_ROOT = process.cwd();
 
 const PROMPTS_PATH = path.resolve(PROJECT_ROOT, 'scripts/gemini-prompts/hero-composer.json');
-const REGISTRY_PATH = path.resolve(PROJECT_ROOT, 'frontend/public/assets/kr-solidarity/kr-solidarity.hero-registry.json');
+const REGISTRY_PATH = path.resolve(PROJECT_ROOT, 'frontend/public/assets/kr-solidarity-hero-registry.json');
 const MANIFEST_PATH = path.resolve(PROJECT_ROOT, 'frontend/public/assets/kerala-rage-kr-solidarity-manifest.json');
 
 async function generateHero(promptId: string, context = '') {
   const promptsData = JSON.parse(fs.readFileSync(PROMPTS_PATH, 'utf-8'));
   const template = promptsData.templates.find((t: any) => t.id === promptId);
-  
+
   if (!template) {
     throw new Error(`Prompt template not found: ${promptId}`);
   }
 
   const manifest = JSON.parse(fs.readFileSync(MANIFEST_PATH, 'utf-8'));
-  
+
   const fullPrompt = `
     ${template.prompt}
-    
+
     CONTEXT: ${context || template.register_context}
-    
+
     AVAILABLE ASSETS:
     ${JSON.stringify(manifest.assets.map((a: any) => ({ id: a.id, name: a.name, layer: a.layer })), null, 2)}
   `;
@@ -60,17 +66,17 @@ async function generateHero(promptId: string, context = '') {
 
   for (const candidate of MODEL_CANDIDATES) {
     console.log(`🤖 Attempting generation with ${candidate.provider}:${candidate.model}...`);
-    
+
     try {
       let text = '';
-      
+
       if (candidate.provider === 'google') {
         const MAX_RETRIES = 5;
         let retries = 0;
-        
+
         while (retries < MAX_RETRIES) {
             try {
-                const model = genAI.getGenerativeModel({ 
+                const model = genAI.getGenerativeModel({
                     model: candidate.model,
                     generationConfig: { responseMimeType: 'application/json' }
                 });
@@ -84,7 +90,7 @@ async function generateHero(promptId: string, context = '') {
                     const message = err.message || '';
                     const match = message.match(/retry in ([0-9.]+)s/);
                     if (match && match[1]) delay = Math.ceil(parseFloat(match[1]) * 1000) + 1000;
-                    
+
                     console.log(`⏳ ${candidate.model} rate limited. Waiting ${delay/1000}s (Retry ${retries + 1}/${MAX_RETRIES})...`);
                     await new Promise(resolve => setTimeout(resolve, delay));
                     retries++;
@@ -94,13 +100,13 @@ async function generateHero(promptId: string, context = '') {
             }
         }
         if (!text) throw new Error(`Failed to generate with ${candidate.model} after ${MAX_RETRIES} retries.`);
-        
+
       } else if (candidate.provider === 'github') {
         if (!githubToken) {
             console.log('⚠️ Skipping GitHub Model (no token)');
             continue;
         }
-        
+
         const response = await fetch(GITHUB_MODELS_ENDPOINT, {
             method: 'POST',
             headers: {
@@ -130,7 +136,7 @@ async function generateHero(promptId: string, context = '') {
       if (!jsonMatch) {
          throw new Error('No JSON found in response');
       }
-      
+
       const heroData = JSON.parse(jsonMatch[0]);
       console.log(`✅ Success with ${candidate.model}`);
       return heroData;
@@ -147,7 +153,7 @@ async function generateHero(promptId: string, context = '') {
 
 async function updateRegistry(newHero: any) {
   const registry = JSON.parse(fs.readFileSync(REGISTRY_PATH, 'utf-8'));
-  
+
   // Check for duplicates
   const index = registry.compositions.findIndex((c: any) => c.id === newHero.id);
   if (index !== -1) {
@@ -155,7 +161,7 @@ async function updateRegistry(newHero: any) {
   } else {
     registry.compositions.push(newHero);
   }
-  
+
   fs.writeFileSync(REGISTRY_PATH, JSON.stringify(registry, null, 2));
 }
 
@@ -165,11 +171,11 @@ async function main() {
   const customContext = args[1] || '';
 
   console.log(`🚀 Starting Gemini Hero Generation with template: ${promptId}`);
-  
+
   try {
     const hero = await generateHero(promptId, customContext);
     console.log(`✅ Generated Hero: ${hero.name} (${hero.id})`);
-    
+
     await updateRegistry(hero);
     console.log(`💾 Registry updated at: ${REGISTRY_PATH}`);
   } catch (error) {

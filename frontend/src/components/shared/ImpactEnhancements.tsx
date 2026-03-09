@@ -15,10 +15,12 @@ export function ImpactEnhancements({ suggestions }: ImpactEnhancementsProps) {
   }
 
   return (
-    <div className="bg-[var(--color-asphalt-black-light)] rounded-stone p-8 border border-white/10 shadow-elevation-1">
+    <div className="bg-[var(--color-asphalt-black-light)] rounded-megaphone p-8 border border-white/10 shadow-elevation-1">
       <div className="flex items-center gap-3 mb-6">
         <Lightbulb className="w-6 h-6 text-[var(--color-ink-gold)]" />
-        <h2 className="text-3xl font-bloom text-[var(--color-paper-white)]">Impact Enhancements</h2>
+        <h2 className="text-3xl font-display text-[var(--color-paper-white)]">
+          Impact Enhancements
+        </h2>
       </div>
 
       <p className="text-field-note text-[var(--color-concrete-grey-dark)] mb-6">
@@ -34,7 +36,7 @@ export function ImpactEnhancements({ suggestions }: ImpactEnhancementsProps) {
           >
             {/* Original Text */}
             <div className="mb-4">
-              <span className="text-[10px] text-[var(--color-concrete-grey-dark)] uppercase tracking-widest font-annotation">
+              <span className="text-[10px] text-[var(--color-concrete-grey-dark)] uppercase tracking-widest font-mono">
                 Original
               </span>
               <p className="text-[15px] text-[var(--color-concrete-grey-dark)] line-through opacity-60 mt-1">
@@ -63,7 +65,7 @@ export function ImpactEnhancements({ suggestions }: ImpactEnhancementsProps) {
                 <span className="text-[10px] text-[var(--color-concrete-grey)] uppercase tracking-wider font-bold">
                   💡 Why This Works:
                 </span>
-                <p className="text-sm text-[var(--color-concrete-grey)]/80 mt-2 font-field-note">
+                <p className="text-sm text-[var(--color-concrete-grey)]/80 mt-2 font-primary">
                   {suggestion.contextualWhy}
                 </p>
               </div>
@@ -72,7 +74,7 @@ export function ImpactEnhancements({ suggestions }: ImpactEnhancementsProps) {
             {/* Type Badge */}
             <div className="mt-4">
               <span
-                className={`inline-flex px-3 py-1 rounded-sentry text-[10px] font-bold tracking-wider ${
+                className={`inline-flex px-3 py-1 rounded-march text-[10px] font-bold tracking-wider ${
                   suggestion.type === 'number'
                     ? 'bg-[var(--color-ink-gold)]/10 text-[var(--color-ink-gold)]'
                     : suggestion.type === 'percentage'

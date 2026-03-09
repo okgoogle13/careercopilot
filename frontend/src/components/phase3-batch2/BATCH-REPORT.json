@@ -1,0 +1,30 @@
+{
+  "batch_id": "phase3-accelerate-batch2-2026-03-07",
+  "status": "PASS",
+  "overall_score": 98,
+  "compliance_breakdown": {
+    "tokens": 100,
+    "motion": 96,
+    "typo": 100,
+    "slots": 100,
+    "react": 95
+  },
+  "components": [
+    {
+      "name": "HeroLanding",
+      "skill": "builder",
+      "score": 98
+    },
+    {
+      "name": "AuthModal",
+      "skill": "transformer",
+      "score": 96
+    },
+    {
+      "name": "OnboardFlow",
+      "skill": "builder",
+      "score": 97
+    }
+  ],
+  "blocking_issues": []
+}

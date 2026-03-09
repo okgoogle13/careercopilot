@@ -28,7 +28,7 @@ export function MetricCard({
   const [isHovered, setIsHovered] = React.useState(false);
 
   const cardStyle: React.CSSProperties = {
-    borderRadius: 'var(--radius-stone)',
+    borderRadius: 'var(--shape-megaphoneCut01)',
     padding: 'var(--spacing-lg)',
     backgroundColor: variant === 'filled' ? 'var(--color-asphalt-black)' : 'transparent',
     border: '1px solid rgba(240, 234, 214, 0.1)',
@@ -54,16 +54,16 @@ export function MetricCard({
 
       <div className="relative z-10">
         <div className="flex items-center gap-3 mb-4">
-          <div className="w-10 h-10 bg-white/5 rounded-sentry flex items-center justify-center border border-white/10">
+          <div className="w-10 h-10 bg-white/5 rounded-march flex items-center justify-center border border-white/10">
             <Icon className={`w-5 h-5 ${iconColor}`} />
           </div>
-          <span className="text-[0.7rem] font-annotation font-medium tracking-widest uppercase opacity-70">
+          <span className="text-[0.7rem] font-mono font-medium tracking-widest uppercase opacity-70">
             {label}
           </span>
         </div>
 
         <div className="flex items-baseline gap-2">
-          <p className="text-3xl font-annotation font-black text-on-surface shadow-layered-ink">
+          <p className="text-3xl font-mono font-black text-on-surface shadow-layered-ink">
             {value}
           </p>
           {annotation && (

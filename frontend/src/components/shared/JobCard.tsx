@@ -36,7 +36,7 @@ export const JobCard: React.FC<JobCardProps> = ({
     >
       <div className="flex justify-between items-start mb-4">
         <div className="flex gap-4">
-          <div className="w-12 h-12 rounded-stone bg-[var(--color-surface-container-high)] flex items-center justify-center overflow-hidden border border-white/5">
+          <div className="w-12 h-12 rounded-megaphone bg-[var(--color-surface-container-high)] flex items-center justify-center overflow-hidden border border-white/5">
             {logo ? (
               <img
                 src={logo}
@@ -99,7 +99,7 @@ export const JobCard: React.FC<JobCardProps> = ({
           {tags.map((tag) => (
             <span
               key={tag}
-              className="px-2.5 py-1 rounded-sentry bg-[var(--color-surface-container-high)] text-[var(--color-text-tertiary)] text-xs font-medium"
+              className="px-2.5 py-1 rounded-march bg-[var(--color-surface-container-high)] text-[var(--color-text-tertiary)] text-xs font-medium"
             >
               {tag}
             </span>

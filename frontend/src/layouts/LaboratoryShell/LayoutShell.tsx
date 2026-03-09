@@ -16,7 +16,7 @@ const KR_LOGO_SRC =
  */
 export const LayoutShell: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
   return (
-    <div className="flex h-screen w-screen overflow-hidden bg-surface-KrDark-slate-smoke-high text-on-surface-paper-white font-field-note antialiased">
+    <div className="flex h-screen w-screen overflow-hidden bg-surface-KrDark-slate-smoke-high text-on-surface-paper-white font-primary antialiased">
       {/* Nav Rail - Fixed Width Left */}
       <div className="flex-none z-30">
         <NavRail />
@@ -49,13 +49,13 @@ export const LayoutShell: React.FC<{ children?: React.ReactNode }> = ({ children
             <img
               src={KR_LOGO_SRC}
               alt="Kerala Rage CareerCopilot"
-              className="h-auto max-h-[60px] w-auto rounded-xl"
+              className="h-auto max-h-[60px] w-auto rounded-strike"
             />
             <div className="flex flex-col">
               <span className="font-proclamation text-sm uppercase tracking-[0.2em] text-ink-gold">
                 Built with Solidarity
               </span>
-              <span className="text-[10px] font-annotation uppercase tracking-widest text-secondary-flannel-dim">
+              <span className="text-[10px] font-mono uppercase tracking-widest text-secondary-flannel-dim">
                 Navigation and workspace shell branding
               </span>
             </div>

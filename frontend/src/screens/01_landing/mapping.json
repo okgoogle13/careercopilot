@@ -1,0 +1,9 @@
+{
+  "wireframe_id": "01_landing",
+  "wireframe_path": ".claude/wireframes/01_landing.xml",
+  "source_component_path": "frontend/src/components/phase3-batch2/HeroLanding.tsx",
+  "screen_component_path": "frontend/src/screens/01_landing/HeroLanding.tsx",
+  "route": "/kr/landing",
+  "notes": "Paired package for wireframe-to-TSX comparison. Canonical source remains source_component_path.",
+  "local_wireframe_path": "frontend/src/screens/01_landing/01_landing.wireframe.xml"
+}

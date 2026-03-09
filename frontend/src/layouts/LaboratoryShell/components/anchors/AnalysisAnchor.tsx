@@ -43,8 +43,8 @@ export const AnalysisAnchor: React.FC = () => {
         >
           <RefreshCw className="w-8 h-8 text-ink-gold opacity-50" />
         </motion.div>
-        <p className="font-field-note text-secondary-concrete-grey animate-pulse">
-          Parsing KrMotifs...
+        <p className="font-primary text-secondary-concrete-grey animate-pulse">
+          Analyzing resume context...
         </p>
       </div>
     );
@@ -82,7 +82,7 @@ export const AnalysisAnchor: React.FC = () => {
       {/* Detailed Breakdown */}
       <div className="flex-1 bg-surface-KrDark-glass-low border border-white/5 rounded-pebble p-6 backdrop-blur-sm flex flex-col gap-4">
         <div className="flex justify-between items-end border-b border-white/10 pb-2">
-          <h3 className="font-field-note text-lg text-ink-gold">Analysis Insights</h3>
+          <h3 className="font-primary text-lg text-ink-gold">Analysis Insights</h3>
           <span className="text-xs font-mono text-secondary-concrete-grey opacity-50">
             {results.insights.length} Findings
           </span>
@@ -100,7 +100,7 @@ export const AnalysisAnchor: React.FC = () => {
                 className="flex items-start gap-3 p-3 rounded bg-surface-KrDark-plate/30 border border-white/5 group hover:border-white/10 transition-colors"
               >
                 <span
-                  className={`mt-1.5 w-2 h-2 rounded-sentry shrink-0 ${
+                  className={`mt-1.5 w-2 h-2 rounded-march shrink-0 ${
                     insight.type === 'strength'
                       ? 'bg-status-KrDark-clinical-sage shadow-[0_0_8px_rgba(74,222,128,0.4)]'
                       : insight.type === 'warning'

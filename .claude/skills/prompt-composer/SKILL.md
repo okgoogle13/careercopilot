@@ -80,7 +80,7 @@ Central: 60-80% Wunderkammer density
 
 ```
 FONT: Crimson Text or period-appropriate serif
-COLOR: Cream #F5F0E8 at 85% opacity
+COLOR: Cream --sys-color-paper-white at 85% opacity
 COUNT: 5-6 labels MAXIMUM (reduce for clarity)
 FORMAT: "Fig. X. Scientific name (Common name)"
 ```
@@ -134,7 +134,7 @@ Central: 60-80% Wunderkammer organic composition
 
 Count: 5-6 labels maximum
 Font: Crimson Text serif
-Color: Cream #F5F0E8 at 85% opacity
+Color: Cream --sys-color-paper-white at 85% opacity
 Format: "Fig. 1. Eucalyptus camaldulensis (River Red Gum)"
 
 ## SECTION 7: TECHNICAL OUTPUT
