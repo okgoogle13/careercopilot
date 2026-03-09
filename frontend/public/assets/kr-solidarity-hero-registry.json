@@ -1,1013 +1,277 @@
 {
-  "version": "3.2.0",
-  "registry_name": "kerala-rage-kr-solidarity-local-hero-registry",
-  "description": "Local hero composition registry for kr-solidarity asset layer. Sources from manifest v6.0.0. Updated for deterministic rendering (safe zones, placement, render hints). Integrated asset tokens from token-map.v2.",
-  "last_updated": "2026-03-06",
+  "version": "2.0.0",
+  "registry_name": "kerala-rage-hero-compositions",
+  "last_updated": "2026-03-09",
   "manifest_version": "6.0.0",
-  "total_assets_in_manifest": 71,
   "m3_expressive_bezier": [0.34, 1.56, 0.64, 1],
-  "resolver": {
-    "assets_base_path": "/assets/kr-solidarity/",
-    "ui_kit_base_path": "/assets/kr-solidarity/ui-kit/",
-    "strategy": "manifest-first",
-    "notes": [
-      "If layer.src is null, resolve by asset_id via manifest (v6.0.0) and prepend assets_base_path.",
-      "This registry intentionally avoids guessing file paths not present in the provided registry snippet."
-    ]
-  },
-  "global_defaults": {
-    "layout": {
-      "grid": "12-col",
-      "max_width_px": 1360,
-      "hero_height_vh": {
-        "desktop": 82,
-        "tablet": 72,
-        "mobile": 64
-      }
-    },
-    "text_safety": {
-      "scrim": {
-        "enabled": true,
-        "opacity": 0.55,
-        "blend_mode": "normal"
-      },
-      "max_overlay_opacity_in_text_zone": 0.08
-    },
-    "motion": {
-      "easing": [0.34, 1.56, 0.64, 1],
-      "reduced_motion": {
-        "disable_parallax": true,
-        "disable_continuous": true
-      }
-    }
-  },
-  "layer_inventory": {
-    "substrate": 4,
-    "atmospheric": 9,
-    "cultural": 2,
-    "resistance": 12,
-    "spiritual": 5,
-    "ui_kit": 39,
-    "total": 71
-  },
-  "asset_overrides": {
-    "KR-SOLID-007": {
-      "name": "Solidarity Light Burst (Atmospheric)",
-      "src": "/assets/kr-solidarity/abstract/kr-solidarity__atmospheric__abstract--solidarity-light-burst--v2.png"
-    },
-    "KR-SOLID-018": {
-      "name": "Collective Uprising Hero (Resistance)",
-      "src": "/assets/kr-solidarity/heroes/kr-solidarity__resistance__hero--collective-uprising--v5.png"
-    },
-    "KR-SOLID-037": {
-      "name": "Woven Linen Fiber Texture (Substrate)",
-      "src": "/assets/kr-solidarity/texture/kr-solidarity__substrate__texture--woven-linen-fiber--v3.png"
-    },
-    "KR-UI-036": {
-      "name": "Substrate Grain Overlay",
-      "src": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__KR-UI-036__v1.svg",
-      "kind": "svg"
-    },
-    "KR-UI-037": {
-      "name": "Hero Anchor Halo — Solidarity Fist",
-      "src": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__KR-UI-037__v1.svg",
-      "kind": "svg"
-    },
-    "KR-UI-038": {
-      "name": "Cultural Binding Border — Kerala Vine Scroll",
-      "src": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__KR-UI-038__v1.svg",
-      "kind": "svg"
-    }
-  },
   "compositions": [
     {
-      "id": "collective-uprising-hero",
-      "name": "Collective Uprising",
-      "description": "Feature hero using collective uprising resistance image with atmospheric light burst overlay and solidarity fist halo primitive.",
-      "emotional_register": "defiance",
-      "intended_layout": "editorial_split_rightPortrait",
-      "landing_default": false,
-      "safe_zones": {
-        "text_left": {
-          "x": 0.06,
-          "y": 0.16,
-          "w": 0.44,
-          "h": 0.68
-        },
-        "cta_left": {
-          "x": 0.06,
-          "y": 0.72,
-          "w": 0.4,
-          "h": 0.2
-        },
-        "quiet_margin": {
-          "x": 0,
-          "y": 0,
-          "w": 0.06,
-          "h": 1
-        }
-      },
-      "render_hints": {
-        "scrim": {
-          "enabled": true,
-          "opacity": 0.58,
-          "blend_mode": "normal"
-        },
-        "grain_overlay_svg": "KR-UI-036",
-        "max_overlay_opacity_in_text_zone": 0.08,
-        "edge_weighting": 0.7
-      },
+      "id": "devotional-anchor-hero-1",
+      "name": "Devotional Anchor Hero 1",
+      "description": "Hero composition featuring Devotional Cultural-anchor V1",
       "layers": [
         {
           "type": "substrate",
-          "asset_id": "KR-SOLID-020",
-          "src": null,
-          "resolve": "manifest",
-          "z_index": 0,
-          "opacity": 0.45,
-          "blend_mode": "normal",
-          "placement": {
-            "position": "cover",
-            "objectFit": "cover",
-            "anchor": "center",
-            "scale": {
-              "desktop": 1.05,
-              "tablet": 1.1,
-              "mobile": 1.15
-            },
-            "translate": {
-              "desktop": {
-                "x": 0,
-                "y": 0
-              },
-              "tablet": {
-                "x": 0,
-                "y": 2
-              },
-              "mobile": {
-                "x": 0,
-                "y": 4
-              }
-            }
-          },
-          "note": "Flinders Street Station night — Melbourne ground layer"
-        },
-        {
-          "type": "atmospheric",
-          "asset_id": "KR-SOLID-007",
-          "src": "/assets/kr-solidarity/abstract/kr-solidarity__atmospheric__abstract--solidarity-light-burst--v2.png",
-          "z_index": 10,
-          "opacity": 0.24,
-          "blend_mode": "screen",
-          "placement": {
-            "position": "cover",
-            "objectFit": "cover",
-            "anchor": "center",
-            "scale": {
-              "desktop": 1.1,
-              "tablet": 1.15,
-              "mobile": 1.2
-            },
-            "translate": {
-              "desktop": {
-                "x": 2,
-                "y": 0
-              },
-              "tablet": {
-                "x": 2,
-                "y": -2
-              },
-              "mobile": {
-                "x": 2,
-                "y": -4
-              }
-            }
-          },
-          "note": "Solidarity light burst — tuned opacity to preserve silhouette/readability"
-        },
-        {
-          "type": "resistance",
-          "asset_id": "KR-SOLID-018",
-          "src": "/assets/kr-solidarity/heroes/kr-solidarity__resistance__hero--collective-uprising--v5.png",
-          "z_index": 20,
-          "opacity": 1,
-          "blend_mode": "normal",
-          "placement": {
-            "position": "right",
-            "objectFit": "contain",
-            "anchor": "bottom-right",
-            "scale": {
-              "desktop": 1,
-              "tablet": 0.95,
-              "mobile": 0.9
-            },
-            "translate": {
-              "desktop": {
-                "x": 6,
-                "y": 6
-              },
-              "tablet": {
-                "x": 4,
-                "y": 6
-              },
-              "mobile": {
-                "x": 0,
-                "y": 8
-              }
-            }
-          },
-          "note": "Collective uprising hero — primary anchor"
-        },
-        {
-          "type": "ui-kit",
-          "asset_id": "KR-UI-037",
-          "src": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__KR-UI-037__v1.svg",
-          "z_index": 30,
-          "opacity": 0.45,
-          "blend_mode": "overlay",
-          "placement": {
-            "position": "right",
-            "objectFit": "contain",
-            "anchor": "center-right",
-            "scale": {
-              "desktop": 1.1,
-              "tablet": 1.05,
-              "mobile": 0.95
-            },
-            "translate": {
-              "desktop": {
-                "x": 4,
-                "y": -2
-              },
-              "tablet": {
-                "x": 2,
-                "y": -2
-              },
-              "mobile": {
-                "x": 0,
-                "y": -2
-              }
-            }
-          },
-          "note": "Hero halo SVG — keep subtle; avoid text zone overlap"
-        }
-      ],
-      "typography": {
-        "headline": "The Rage Never Dies",
-        "supporting": "Collective resistance — Kerala, Naarm, Global",
-        "font_family": "Fraunces",
-        "pressure_state": {
-          "wght": 900,
-          "wdth": 75
-        },
-        "solidarity_state": {
-          "wght": 700,
-          "wdth": 100
-        },
-        "melancholy_state": {
-          "wght": 300,
-          "wdth": 125
-        }
-      },
-      "animation_profile": {
-        "easing": [0.34, 1.56, 0.64, 1],
-        "parallax_layers": [
-          {
-            "layer_type": "substrate",
-            "speed": 0.2,
-            "direction": "down"
-          },
-          {
-            "layer_type": "atmospheric",
-            "speed": 0.5,
-            "direction": "up"
-          },
-          {
-            "layer_type": "resistance",
-            "speed": 0.85,
-            "direction": "up"
-          }
-        ],
-        "scroll_reveal": {
-          "opacity_start": 0,
-          "transform_start": "translateY(24px)",
-          "duration_ms": 600
-        }
-      }
-    },
-    {
-      "id": "devotional-anchor-hero",
-      "name": "Devotional Anchor",
-      "description": "Spiritual foreground with woven linen substrate and atmospheric overlay.",
-      "emotional_register": "reflection",
-      "intended_layout": "center_masthead",
-      "landing_default": false,
-      "safe_zones": {
-        "text_left": {
-          "x": 0.08,
-          "y": 0.18,
-          "w": 0.5,
-          "h": 0.62
-        },
-        "cta_left": {
-          "x": 0.08,
-          "y": 0.72,
-          "w": 0.42,
-          "h": 0.2
-        }
-      },
-      "render_hints": {
-        "scrim": {
-          "enabled": true,
-          "opacity": 0.52,
-          "blend_mode": "normal"
-        },
-        "grain_overlay_svg": "KR-UI-036",
-        "max_overlay_opacity_in_text_zone": 0.08
-      },
-      "layers": [
-        {
-          "type": "substrate",
-          "asset_id": "KR-SOLID-037",
-          "src": "/assets/kr-solidarity/texture/kr-solidarity__substrate__texture--woven-linen-fiber--v3.png",
-          "z_index": 0,
+          "asset_id": "KR-SOLID-021",
+          "z_index": 1,
           "opacity": 0.4,
           "blend_mode": "normal",
-          "placement": {
-            "position": "cover",
-            "objectFit": "cover",
-            "anchor": "center",
-            "scale": {
-              "desktop": 1.05,
-              "tablet": 1.1,
-              "mobile": 1.15
-            },
-            "translate": {
-              "desktop": {
-                "x": 0,
-                "y": 0
-              },
-              "tablet": {
-                "x": 0,
-                "y": 0
-              },
-              "mobile": {
-                "x": 0,
-                "y": 2
-              }
-            }
-          },
-          "note": "Woven linen fiber — substrate"
+          "position": "cover"
         },
         {
           "type": "atmospheric",
-          "asset_id": "KR-SOLID-002",
-          "src": null,
-          "resolve": "manifest",
-          "z_index": 10,
-          "opacity": 0.22,
+          "asset_id": "auto",
+          "z_index": 2,
+          "opacity": 0.3,
           "blend_mode": "overlay",
-          "placement": {
-            "position": "cover",
-            "objectFit": "cover",
-            "anchor": "center",
-            "scale": {
-              "desktop": 1.1,
-              "tablet": 1.15,
-              "mobile": 1.2
-            },
-            "translate": {
-              "desktop": {
-                "x": 0,
-                "y": 0
-              },
-              "tablet": {
-                "x": 0,
-                "y": -2
-              },
-              "mobile": {
-                "x": 0,
-                "y": -4
-              }
-            }
-          }
+          "position": "center"
         },
         {
           "type": "spiritual",
           "asset_id": "KR-SOLID-009",
-          "src": null,
-          "resolve": "manifest",
-          "z_index": 20,
+          "z_index": 3,
           "opacity": 1,
           "blend_mode": "normal",
-          "placement": {
-            "position": "center",
-            "objectFit": "contain",
-            "anchor": "center",
-            "scale": {
-              "desktop": 1,
-              "tablet": 0.95,
-              "mobile": 0.9
-            },
-            "translate": {
-              "desktop": {
-                "x": 0,
-                "y": 2
-              },
-              "tablet": {
-                "x": 0,
-                "y": 4
-              },
-              "mobile": {
-                "x": 0,
-                "y": 6
-              }
-            }
-          }
+          "position": "center"
         }
       ],
       "typography": {
         "headline": "Solidarity Across Borders",
         "supporting": "First Nations, Kerala, Global Resistance",
-        "font_family": "Fraunces",
         "pressure_state": {
           "wght": 900,
           "wdth": 75
         },
         "solidarity_state": {
-          "wght": 700,
-          "wdth": 100
+          "wght": 800,
+          "wdth": 120
         },
         "melancholy_state": {
-          "wght": 300,
-          "wdth": 125
+          "wght": 475,
+          "wdth": 97.5
         }
       },
-      "animation_profile": {
-        "easing": [0.34, 1.56, 0.64, 1],
-        "parallax_layers": [
-          {
-            "layer_type": "substrate",
-            "speed": 0.15,
-            "direction": "down"
-          },
-          {
-            "layer_type": "spiritual",
-            "speed": 0.75,
-            "direction": "up"
-          }
-        ],
-        "scroll_reveal": {
-          "opacity_start": 0,
-          "transform_start": "translateY(16px)",
-          "duration_ms": 450
-        }
+      "motion": {
+        "bezier": [0.34, 1.56, 0.64, 1],
+        "scroll_wght_range": [300, 800],
+        "transition_duration": 400
       }
     },
     {
-      "id": "resistance-portrait-hero",
-      "name": "Resistance Portrait",
-      "description": "Editorial resistance hero with subtle atmosphere — best default for product landing pages.",
-      "emotional_register": "defiance",
-      "intended_layout": "editorial_split_rightPortrait",
-      "landing_default": true,
-      "safe_zones": {
-        "text_left": {
-          "x": 0.06,
-          "y": 0.16,
-          "w": 0.46,
-          "h": 0.68
-        },
-        "cta_left": {
-          "x": 0.06,
-          "y": 0.72,
-          "w": 0.4,
-          "h": 0.2
-        }
-      },
-      "render_hints": {
-        "scrim": {
-          "enabled": true,
-          "opacity": 0.6,
-          "blend_mode": "normal"
-        },
-        "grain_overlay_svg": "KR-UI-036",
-        "max_overlay_opacity_in_text_zone": 0.08,
-        "edge_weighting": 0.75
-      },
+      "id": "devotional-anchor-hero-2",
+      "name": "Devotional Anchor Hero 2",
+      "description": "Hero composition featuring Devotional Shiva-statue V1",
       "layers": [
         {
           "type": "substrate",
-          "asset_id": "KR-SOLID-036",
-          "src": null,
-          "resolve": "manifest",
-          "z_index": 0,
-          "opacity": 0.5,
+          "asset_id": "KR-SOLID-021",
+          "z_index": 1,
+          "opacity": 0.4,
           "blend_mode": "normal",
-          "placement": {
-            "position": "cover",
-            "objectFit": "cover",
-            "anchor": "center",
-            "scale": {
-              "desktop": 1.05,
-              "tablet": 1.1,
-              "mobile": 1.15
-            },
-            "translate": {
-              "desktop": {
-                "x": 0,
-                "y": 0
-              },
-              "tablet": {
-                "x": 0,
-                "y": 2
-              },
-              "mobile": {
-                "x": 0,
-                "y": 4
-              }
-            }
-          },
-          "note": "Night pylon sunset substrate"
+          "position": "cover"
         },
         {
           "type": "atmospheric",
-          "asset_id": "KR-SOLID-003",
-          "src": null,
-          "resolve": "manifest",
-          "z_index": 10,
-          "opacity": 0.18,
-          "blend_mode": "multiply",
-          "placement": {
-            "position": "cover",
-            "objectFit": "cover",
-            "anchor": "center",
-            "scale": {
-              "desktop": 1.12,
-              "tablet": 1.16,
-              "mobile": 1.2
-            },
-            "translate": {
-              "desktop": {
-                "x": 0,
-                "y": -2
-              },
-              "tablet": {
-                "x": 0,
-                "y": -4
-              },
-              "mobile": {
-                "x": 0,
-                "y": -6
-              }
-            }
-          }
+          "asset_id": "auto",
+          "z_index": 2,
+          "opacity": 0.3,
+          "blend_mode": "overlay",
+          "position": "center"
         },
         {
-          "type": "resistance",
-          "asset_id": "KR-SOLID-019",
-          "src": null,
-          "resolve": "manifest",
-          "z_index": 20,
+          "type": "spiritual",
+          "asset_id": "KR-SOLID-010",
+          "z_index": 3,
           "opacity": 1,
           "blend_mode": "normal",
-          "placement": {
-            "position": "right",
-            "objectFit": "contain",
-            "anchor": "bottom-right",
-            "scale": {
-              "desktop": 1,
-              "tablet": 0.95,
-              "mobile": 0.9
-            },
-            "translate": {
-              "desktop": {
-                "x": 8,
-                "y": 6
-              },
-              "tablet": {
-                "x": 4,
-                "y": 6
-              },
-              "mobile": {
-                "x": 0,
-                "y": 8
-              }
-            }
-          }
+          "position": "center"
         }
       ],
       "typography": {
-        "headline": "The Rage Never Dies",
-        "supporting": "Legacy of Resistance",
-        "font_family": "Fraunces",
+        "headline": "Solidarity Across Borders",
+        "supporting": "First Nations, Kerala, Global Resistance",
         "pressure_state": {
           "wght": 900,
           "wdth": 75
         },
         "solidarity_state": {
-          "wght": 700,
-          "wdth": 100
+          "wght": 800,
+          "wdth": 120
         },
         "melancholy_state": {
-          "wght": 300,
-          "wdth": 125
+          "wght": 475,
+          "wdth": 97.5
         }
       },
-      "animation_profile": {
-        "easing": [0.34, 1.56, 0.64, 1],
-        "parallax_layers": [
-          {
-            "layer_type": "substrate",
-            "speed": 0.2,
-            "direction": "down"
-          },
-          {
-            "layer_type": "resistance",
-            "speed": 0.9,
-            "direction": "up"
-          }
-        ],
-        "scroll_reveal": {
-          "opacity_start": 0,
-          "transform_start": "translateY(20px)",
-          "duration_ms": 500
-        }
+      "motion": {
+        "bezier": [0.34, 1.56, 0.64, 1],
+        "scroll_wght_range": [300, 800],
+        "transition_duration": 400
       }
     },
     {
-      "id": "cultural-symbol-hero",
-      "name": "Cultural Symbol",
-      "description": "Kerala cultural icon with vine border — best used as section hero or narrative band.",
-      "emotional_register": "discovery",
-      "intended_layout": "section_banner",
-      "landing_default": false,
-      "safe_zones": {
-        "text_left": {
-          "x": 0.08,
-          "y": 0.18,
-          "w": 0.56,
-          "h": 0.56
-        },
-        "cta_left": {
-          "x": 0.08,
-          "y": 0.76,
-          "w": 0.46,
-          "h": 0.18
-        }
-      },
-      "render_hints": {
-        "scrim": {
-          "enabled": true,
-          "opacity": 0.52,
-          "blend_mode": "normal"
-        },
-        "grain_overlay_svg": "KR-UI-036",
-        "max_overlay_opacity_in_text_zone": 0.08,
-        "decorative_border": {
-          "asset_id": "KR-UI-038",
-          "position": "bottom"
-        }
-      },
+      "id": "layered-solidarity-hero",
+      "name": "Layered Solidarity Hero",
+      "description": "Multi-layer composite with resistance and atmospheric layers",
       "layers": [
         {
           "type": "substrate",
-          "asset_id": "KR-SOLID-035",
-          "src": null,
-          "resolve": "manifest",
-          "z_index": 0,
-          "opacity": 0.45,
+          "asset_id": "KR-SOLID-021",
+          "z_index": 1,
+          "opacity": 0.6,
           "blend_mode": "normal",
-          "placement": {
-            "position": "cover",
-            "objectFit": "cover",
-            "anchor": "center",
-            "scale": {
-              "desktop": 1.05,
-              "tablet": 1.1,
-              "mobile": 1.15
-            },
-            "translate": {
-              "desktop": {
-                "x": 0,
-                "y": 0
-              },
-              "tablet": {
-                "x": 0,
-                "y": 2
-              },
-              "mobile": {
-                "x": 0,
-                "y": 4
-              }
-            }
-          },
-          "note": "Melbourne laneway substrate"
+          "position": "cover"
         },
         {
           "type": "atmospheric",
-          "asset_id": "KR-SOLID-004",
-          "src": null,
-          "resolve": "manifest",
-          "z_index": 10,
-          "opacity": 0.26,
+          "asset_id": "auto",
+          "z_index": 2,
+          "opacity": 0.25,
+          "blend_mode": "screen",
+          "position": "center"
+        },
+        {
+          "type": "resistance",
+          "asset_id": "auto",
+          "z_index": 3,
+          "opacity": 0.7,
+          "blend_mode": "normal",
+          "position": "left"
+        },
+        {
+          "type": "atmospheric",
+          "asset_id": "auto",
+          "z_index": 4,
+          "opacity": 0.3,
+          "blend_mode": "color-dodge",
+          "position": "right"
+        }
+      ],
+      "typography": {
+        "headline": "Intersectional Resistance",
+        "supporting": "Solidarity is Our Weapon",
+        "pressure_state": {
+          "wght": 900,
+          "wdth": 75
+        },
+        "solidarity_state": {
+          "wght": 800,
+          "wdth": 120
+        },
+        "melancholy_state": {
+          "wght": 475,
+          "wdth": 97.5
+        }
+      },
+      "motion": {
+        "bezier": [0.34, 1.56, 0.64, 1],
+        "scroll_wght_range": [300, 800],
+        "transition_duration": 400
+      }
+    },
+    {
+      "id": "cultural-symbol-hero-1",
+      "name": "Cultural Symbol Hero 1",
+      "description": "Hero composition featuring Hero Cultural-anchor V3",
+      "layers": [
+        {
+          "type": "substrate",
+          "asset_id": "KR-SOLID-021",
+          "z_index": 1,
+          "opacity": 0.45,
+          "blend_mode": "normal",
+          "position": "cover"
+        },
+        {
+          "type": "atmospheric",
+          "asset_id": "auto",
+          "z_index": 2,
+          "opacity": 0.35,
           "blend_mode": "overlay",
-          "placement": {
-            "position": "cover",
-            "objectFit": "cover",
-            "anchor": "center",
-            "scale": {
-              "desktop": 1.12,
-              "tablet": 1.16,
-              "mobile": 1.2
-            },
-            "translate": {
-              "desktop": {
-                "x": 0,
-                "y": -2
-              },
-              "tablet": {
-                "x": 0,
-                "y": -4
-              },
-              "mobile": {
-                "x": 0,
-                "y": -6
-              }
-            }
-          }
+          "position": "center"
         },
         {
           "type": "cultural",
-          "asset_id": "KR-SOLID-034",
-          "src": null,
-          "resolve": "manifest",
-          "z_index": 20,
+          "asset_id": "KR-SOLID-015",
+          "z_index": 3,
           "opacity": 1,
           "blend_mode": "normal",
-          "placement": {
-            "position": "right",
-            "objectFit": "contain",
-            "anchor": "bottom-right",
-            "scale": {
-              "desktop": 0.95,
-              "tablet": 0.9,
-              "mobile": 0.85
-            },
-            "translate": {
-              "desktop": {
-                "x": 6,
-                "y": 8
-              },
-              "tablet": {
-                "x": 2,
-                "y": 8
-              },
-              "mobile": {
-                "x": 0,
-                "y": 10
-              }
-            }
-          }
-        },
-        {
-          "type": "ui-kit",
-          "asset_id": "KR-UI-038",
-          "src": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__KR-UI-038__v1.svg",
-          "z_index": 30,
-          "opacity": 0.65,
-          "blend_mode": "overlay",
-          "placement": {
-            "position": "bottom",
-            "objectFit": "contain",
-            "anchor": "bottom-center",
-            "scale": {
-              "desktop": 1,
-              "tablet": 1,
-              "mobile": 1
-            },
-            "translate": {
-              "desktop": {
-                "x": 0,
-                "y": 0
-              },
-              "tablet": {
-                "x": 0,
-                "y": 0
-              },
-              "mobile": {
-                "x": 0,
-                "y": 0
-              }
-            }
-          },
-          "note": "Vine motif divider — keep out of CTA area"
+          "position": "center"
         }
       ],
       "typography": {
         "headline": "Cultural Roots, Global Struggle",
         "supporting": "Heritage as Resistance",
-        "font_family": "Fraunces",
         "pressure_state": {
           "wght": 900,
           "wdth": 75
         },
         "solidarity_state": {
-          "wght": 700,
-          "wdth": 100
+          "wght": 800,
+          "wdth": 120
         },
         "melancholy_state": {
-          "wght": 300,
-          "wdth": 125
+          "wght": 475,
+          "wdth": 97.5
         }
       },
-      "animation_profile": {
-        "easing": [0.34, 1.56, 0.64, 1],
-        "parallax_layers": [
-          {
-            "layer_type": "substrate",
-            "speed": 0.15,
-            "direction": "down"
-          },
-          {
-            "layer_type": "cultural",
-            "speed": 0.8,
-            "direction": "up"
-          }
-        ],
-        "scroll_reveal": {
-          "opacity_start": 0,
-          "transform_start": "translateY(20px)",
-          "duration_ms": 550
+      "motion": {
+        "bezier": [0.34, 1.56, 0.64, 1],
+        "scroll_wght_range": [300, 800],
+        "transition_duration": 400
+      }
+    },
+    {
+      "id": "cultural-symbol-hero-2",
+      "name": "Cultural Symbol Hero 2",
+      "description": "Hero composition featuring Symbol Kerala-elephant V1",
+      "layers": [
+        {
+          "type": "substrate",
+          "asset_id": "KR-SOLID-021",
+          "z_index": 1,
+          "opacity": 0.45,
+          "blend_mode": "normal",
+          "position": "cover"
+        },
+        {
+          "type": "atmospheric",
+          "asset_id": "auto",
+          "z_index": 2,
+          "opacity": 0.35,
+          "blend_mode": "overlay",
+          "position": "center"
+        },
+        {
+          "type": "cultural",
+          "asset_id": "KR-SOLID-034",
+          "z_index": 3,
+          "opacity": 1,
+          "blend_mode": "normal",
+          "position": "center"
         }
+      ],
+      "typography": {
+        "headline": "Cultural Roots, Global Struggle",
+        "supporting": "Heritage as Resistance",
+        "pressure_state": {
+          "wght": 900,
+          "wdth": 75
+        },
+        "solidarity_state": {
+          "wght": 800,
+          "wdth": 120
+        },
+        "melancholy_state": {
+          "wght": 475,
+          "wdth": 97.5
+        }
+      },
+      "motion": {
+        "bezier": [0.34, 1.56, 0.64, 1],
+        "scroll_wght_range": [300, 800],
+        "transition_duration": 400
       }
     }
-  ],
-  "gap_closure_summary": {
-    "assets_renamed_from_uncategorized": 3,
-    "new_svg_primitives_added": 3,
-    "hero_compositions_total": 4,
-    "manifest_version": "6.0.0",
-    "manifest_total_assets": 71,
-    "manifest_validated": true,
-    "duplicate_ids_resolved": true,
-    "category_mapping_fixed": true,
-    "generator_bugs_fixed": [
-      "CATEGORY_TO_LAYER missing direct layer mappings",
-      "parseUiKitFilename wrong naming convention",
-      "SVG subdirectory duplicate IDs"
-    ],
-    "registry_v3_1_0_changes": [
-      "Added resolver strategy and global defaults",
-      "Added safe zones for text/CTA placement",
-      "Added render hints (scrim/grain/overlay caps)",
-      "Added responsive placement metadata per layer",
-      "Added landing_default flag (set to resistance-portrait-hero)",
-      "Avoided fabricating unknown file paths by using src:null + resolve:manifest"
-    ]
-  },
-  "tokens": {
-    "kr.hero.substrate.flinders-night": {
-      "ref": "KR-SOLID-021",
-      "layer": "substrate",
-      "status": "ready",
-      "tags": ["hero", "substrate", "melbourne", "night"],
-      "defaults": {
-        "blend_mode": "normal",
-        "opacity": 0.5,
-        "position": "cover"
-      },
-      "description": "Flinders Street Station night substrate (3:2). Strong structure, low distraction."
-    },
-    "kr.hero.atmospheric.light-burst": {
-      "ref": "KR-SOLID-008",
-      "layer": "atmospheric",
-      "status": "ready",
-      "tags": ["hero", "atmospheric", "radiance"],
-      "defaults": {
-        "blend_mode": "screen",
-        "opacity": 0.22,
-        "position": "cover"
-      },
-      "description": "Solidarity light burst overlay. Keep opacity <= 0.28 for text contrast."
-    },
-    "kr.hero.atmospheric.embers": {
-      "ref": "KR-SOLID-007",
-      "layer": "atmospheric",
-      "status": "ready",
-      "tags": ["hero", "atmospheric", "embers"],
-      "defaults": {
-        "blend_mode": "overlay",
-        "opacity": 0.18,
-        "position": "cover"
-      },
-      "description": "Embers overlay for depth and agitation without washing blacks."
-    },
-    "kr.hero.spiritual.shiva-statue": {
-      "ref": "KR-SOLID-012",
-      "layer": "spiritual",
-      "status": "ready",
-      "tags": ["hero", "spiritual", "anchor"],
-      "defaults": {
-        "blend_mode": "normal",
-        "opacity": 1,
-        "position": "center"
-      },
-      "description": "Shiva statue anchor (foreground dominant). Avoid stacking with resistance per manifest compatibility."
-    },
-    "kr.hero.spiritual.solidarity-banner": {
-      "ref": "KR-SOLID-011",
-      "layer": "spiritual",
-      "status": "ready",
-      "tags": ["hero", "spiritual", "banner"],
-      "defaults": {
-        "blend_mode": "normal",
-        "opacity": 1,
-        "position": "center"
-      },
-      "description": "Devotional solidarity banner (16:9). Use with quiet substrate + minimal atmospheric."
-    },
-    "kr.hero.resistance.collective-uprising": {
-      "ref": "KR-SOLID-019",
-      "layer": "resistance",
-      "status": "ready",
-      "tags": ["hero", "resistance", "editorial", "foreground"],
-      "defaults": {
-        "blend_mode": "normal",
-        "opacity": 1,
-        "position": "center"
-      },
-      "description": "Collective Uprising hero foreground (v5). Strong editorial silhouette and focal weight."
-    },
-    "kr.hero.resistance.resistance-portrait": {
-      "ref": "KR-SOLID-020",
-      "layer": "resistance",
-      "status": "ready",
-      "tags": ["hero", "resistance", "portrait", "editorial"],
-      "defaults": {
-        "blend_mode": "normal",
-        "opacity": 1,
-        "position": "center"
-      },
-      "description": "Resistance portrait hero foreground. Default landing hero candidate."
-    },
-    "kr.hero.cultural.elephant": {
-      "ref": "KR-SOLID-035",
-      "layer": "cultural",
-      "status": "ready",
-      "tags": ["hero", "cultural", "symbol"],
-      "defaults": {
-        "blend_mode": "overlay",
-        "opacity": 0.7,
-        "position": "bottom"
-      },
-      "description": "Kerala elephant symbol. Use as base divider or accent; keep out of text safe zone."
-    },
-    "kr.ui.overlay.blueprint-grid": {
-      "ref": "KR-UI-004",
-      "layer": "ui_kit",
-      "status": "ready",
-      "tags": ["ui-kit", "overlay", "grid"],
-      "defaults": {
-        "blend_mode": "overlay",
-        "opacity": 0.1,
-        "position": "cover"
-      },
-      "description": "Blueprint grid overlay. Use sparingly for technical editorial treatment."
-    },
-    "kr.ui.overlay.blueprint-layout": {
-      "ref": "KR-UI-006",
-      "layer": "ui_kit",
-      "status": "ready",
-      "tags": ["ui-kit", "overlay", "layout"],
-      "defaults": {
-        "blend_mode": "overlay",
-        "opacity": 0.08,
-        "position": "cover"
-      },
-      "description": "Blueprint layout watermark overlay. Low opacity only."
-    },
-    "kr.ui.overlay.screenprint-grit": {
-      "ref": "KR-UI-003",
-      "layer": "ui_kit",
-      "status": "ready",
-      "tags": ["ui-kit", "overlay", "grit"],
-      "defaults": {
-        "blend_mode": "soft-light",
-        "opacity": 0.14,
-        "position": "cover"
-      },
-      "description": "Screenprint grit particle overlay. Adds tactile noise; keep under text contrast threshold."
-    },
-    "kr.ui.overlay.field-grid": {
-      "alias_of": "kr.ui.overlay.blueprint-grid",
-      "status": "ready",
-      "description": "Alias for blueprint grid overlay."
-    },
-    "kr.ui.overlay.field-layout": {
-      "alias_of": "kr.ui.overlay.blueprint-layout",
-      "status": "ready",
-      "description": "Alias for blueprint layout overlay."
-    }
-  }
+  ]
 }

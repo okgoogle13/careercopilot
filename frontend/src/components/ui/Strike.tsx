@@ -86,7 +86,9 @@ export const Strike = React.forwardRef<HTMLButtonElement, StrikeProps>(
         ref={ref}
         className={cn(baseStyles, variants[variant], sizes[size], className)}
         data-archetype="strike"
+        type={props.type ?? 'button'}
         disabled={disabled || isLoading}
+        aria-busy={isLoading}
         whileHover={
           !disabled && !isLoading
             ? {
@@ -107,7 +109,12 @@ export const Strike = React.forwardRef<HTMLButtonElement, StrikeProps>(
         }
         {...props}
       >
-        {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+        {isLoading && (
+          <Loader2
+            className="mr-2 h-4 w-4 animate-spin"
+            aria-hidden="true"
+          />
+        )}
         {!isLoading && iconLeft && <span className="mr-2 relative z-10">{iconLeft}</span>}
         <span className="relative z-10">{children}</span>
         {!isLoading && iconRight && <span className="ml-2 relative z-10">{iconRight}</span>}

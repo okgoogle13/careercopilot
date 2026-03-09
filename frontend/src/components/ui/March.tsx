@@ -113,6 +113,17 @@ export function March({
     [options]
   );
 
+  useEffect(() => {
+    if (!isOpen) {
+      return;
+    }
+    if (selectedIndex >= 0 && !options[selectedIndex]?.disabled) {
+      setActiveIndex(selectedIndex);
+      return;
+    }
+    setActiveIndex(enabledIndices[0]?.index ?? -1);
+  }, [enabledIndices, isOpen, options, selectedIndex]);
+
   const handleSelect = (optionValue: string) => {
     onChange?.(optionValue);
     setIsOpen(false);

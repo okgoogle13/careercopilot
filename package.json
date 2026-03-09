@@ -18,7 +18,7 @@
     "write-file-atomic": "^6.0.0",
     "strip-ansi": "6.0.1",
     "pretty-format": "^30.0.0",
-    "minimatch": "^5.1.6",
+    "minimatch": "^9.0.3",
     "esbuild": "^0.18.20",
     "@vitest/utils": "^4.0.6",
     "@vitest/pretty-format": "^4.0.6",

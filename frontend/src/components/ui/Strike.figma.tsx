@@ -1,13 +1,14 @@
 import React from 'react';
-import { Pebble } from './Pebble';
+import { Strike } from './Strike';
 import figma from '@figma/code-connect';
 
 /**
  * -- FIGMA CODE CONNECT --
- * Component: Pebble (Action)
- * Figma Node: [Paste Figma Component URL Here]
+ * Archetype: Strike (v6.1)
+ * Successor to Pebble / KeralaRageButton.
+ * Represents defiance, finality, and primary CTAs.
  */
-figma.connect(Pebble, 'https://www.figma.com/design/YOUR_FILE_ID?node-id=YOUR_NODE_ID', {
+figma.connect(Strike, 'https://www.figma.com/design/YOUR_FILE_ID?node-id=YOUR_NODE_ID', {
   props: {
     variant: figma.enum('Variant', {
       Primary: 'primary',
@@ -23,12 +24,11 @@ figma.connect(Pebble, 'https://www.figma.com/design/YOUR_FILE_ID?node-id=YOUR_NO
     children: figma.string('Label'),
     isLoading: figma.boolean('Loading'),
     disabled: figma.boolean('Disabled'),
-    // Icons act as booleans in this schema, or slots if complex
-    iconLeft: figma.boolean('Icon Left'),
-    iconRight: figma.boolean('Icon Right'),
+    iconLeft: figma.boolean('Show Icon Left'),
+    iconRight: figma.boolean('Show Icon Right'),
   },
   example: ({ variant, size, children, isLoading, disabled, iconLeft, iconRight }) => (
-    <Pebble
+    <Strike
       variant={variant}
       size={size}
       isLoading={isLoading}
@@ -37,6 +37,6 @@ figma.connect(Pebble, 'https://www.figma.com/design/YOUR_FILE_ID?node-id=YOUR_NO
       iconRight={iconRight ? <span>→</span> : undefined}
     >
       {children}
-    </Pebble>
+    </Strike>
   ),
 });

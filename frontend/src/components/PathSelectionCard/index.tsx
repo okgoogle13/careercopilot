@@ -50,7 +50,7 @@ export const PathSelectionCard: React.FC<PathSelectionCardProps> = ({
       <div className="relative z-10 flex flex-col gap-8 h-full">
         <h2
           className={cn(
-            'text-4xl xl:text-5xl leading-[0.85] font-solidarity-900 uppercase tracking-tighter',
+            'text-[1.9rem] md:text-3xl xl:text-[2rem] leading-[1.08] font-solidarity-900 tracking-tight [overflow-wrap:anywhere]',
             isSelected ? 'text-ink-gold' : 'text-signal-green transition-colors'
           )}
         >
@@ -71,21 +71,6 @@ export const PathSelectionCard: React.FC<PathSelectionCardProps> = ({
             {isSelected ? 'SELECTED' : 'CHOOSE THIS PATH'}
           </div>
         </div>
-      </div>
-
-      {/* Kerala Palm Tree Motif in background */}
-      <div className="absolute bottom-[-10%] right-[-10%] opacity-10 pointer-events-none grayscale z-0">
-        <svg
-          className="w-40 h-40 fill-paper-white"
-          viewBox="0 0 100 100"
-        >
-          <path
-            d="M50,90 L50,40 M50,45 C70,45 80,30 80,20 M50,45 C30,45 20,30 20,20 M50,55 C75,55 85,45 85,35"
-            stroke="currentColor"
-            strokeWidth="2"
-            fill="none"
-          />
-        </svg>
       </div>
     </motion.div>
   );

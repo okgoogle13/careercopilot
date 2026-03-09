@@ -59,11 +59,11 @@ export function Register() {
         style={{ backgroundImage: `url(${paperWhiteGrid})`, backgroundRepeat: 'repeat' }}
       />
 
-      <div className="w-full max-w-md relative z-10">
+      <div className="w-full max-w-lg relative z-10">
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
-          className="bg-concrete-grey/80 backdrop-blur-xl rounded-stone p-10 border border-concrete-grey/10 shadow-maximum overflow-hidden relative"
+          className="bg-concrete-grey/80 backdrop-blur-xl rounded-stone p-10 border border-concrete-grey/10 shadow-maximum relative"
         >
           {/* KrMotif Decoration */}
           <div className="absolute top-[-40px] left-[-40px] w-32 h-32 opacity-20 pointer-events-none transform rotate-180">
@@ -76,7 +76,7 @@ export function Register() {
           </div>
 
           <div className="text-center mb-10">
-            <h1 className="text-display font-black text-ink-gold mb-2 uppercase tracking-tighter">
+            <h1 className="text-[clamp(2.75rem,7vw,4.75rem)] leading-[0.9] font-black text-ink-gold mb-2 uppercase tracking-tight">
               New Collective
             </h1>
             <p className="text-micro font-light text-concrete-grey opacity-[0.8] uppercase tracking-widest leading-none">

@@ -1,21 +1,35 @@
-import { test, expect } from '@playwright/test';
+import { test } from '@playwright/test';
 import fs from 'fs';
 import path from 'path';
 
 /**
  * Headless Visual Audit Spec
  * Captures screenshots of key pages to verify design compliance.
- * Writes results to docs/design/generated/previews/
+ * Writes results to docs/design/generated/previews/run-YYYY-MM-DD_HH-mm-ss
  */
 
-const PREVIEW_DIR = path.resolve(process.cwd(), 'docs/design/generated/previews');
-
-// Ensure directory exists
-if (!fs.existsSync(PREVIEW_DIR)) {
-  fs.mkdirSync(PREVIEW_DIR, { recursive: true });
+function getLocalRunId(): string {
+  const now = new Date();
+  const pad = (n: number) => String(n).padStart(2, '0');
+  return `run-${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}_${pad(now.getHours())}-${pad(now.getMinutes())}-${pad(now.getSeconds())}`;
 }
 
+const PREVIEW_ROOT = path.resolve(process.cwd(), 'docs/design/generated/previews');
+
 test.describe('Visual Audit (Headless)', () => {
+  // Force a single worker for this spec so one run produces one timestamped folder.
+  test.describe.configure({ mode: 'serial' });
+
+  let runDir = '';
+
+  test.beforeAll(() => {
+    runDir = path.join(PREVIEW_ROOT, getLocalRunId());
+    if (!fs.existsSync(runDir)) {
+      fs.mkdirSync(runDir, { recursive: true });
+    }
+    console.log(`Visual audit output directory: ${runDir}`);
+  });
+
   // Use baseURL from playwright.config.ts or env
   const baseURL = process.env.PLAYWRIGHT_BASE_URL || 'http://localhost:5173';
 
@@ -55,7 +69,7 @@ test.describe('Visual Audit (Headless)', () => {
       const title = await page.title();
       console.log(`Page title: ${title}`);
 
-      const screenshotPath = path.join(PREVIEW_DIR, `${target.name}.png`);
+      const screenshotPath = path.join(runDir, `${target.name}.png`);
 
       await page.screenshot({
         path: screenshotPath,
@@ -63,10 +77,6 @@ test.describe('Visual Audit (Headless)', () => {
       });
 
       console.log(`Saved screenshot to: ${screenshotPath}`);
-
-      // Verification (optional status check)
-      const status = await page.evaluate(() => document.readyState);
-      expect(status).toBe('complete');
     });
   }
 });

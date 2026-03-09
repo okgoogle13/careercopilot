@@ -188,6 +188,10 @@ export default function App() {
             element={<DesignSidekick />}
           />
           <Route
+            path="/style-guide"
+            element={<StyleGuide />}
+          />
+          <Route
             path="/kr/landing"
             element={<HeroLanding className="m-6" />}
           />
@@ -266,10 +270,6 @@ export default function App() {
           <Route
             path="/job-queue"
             element={<JobQueue />}
-          />
-          <Route
-            path="/style-guide"
-            element={<StyleGuide />}
           />
           <Route
             path="/test-tokens"

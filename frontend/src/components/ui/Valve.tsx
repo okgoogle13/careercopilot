@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useId, useMemo, useState } from 'react';
 
 export interface ValveProps extends Omit<
   React.InputHTMLAttributes<HTMLInputElement>,
@@ -32,19 +32,27 @@ export interface ValveProps extends Omit<
 export const Valve = forwardRef<HTMLInputElement, ValveProps>(
   (
     {
+      id,
       label,
       size = 'medium',
       color = 'primary',
       checked,
+      defaultChecked,
       disabled = false,
       className = '',
       error = false,
       helperText,
+      onChange,
       ...props
     },
     ref
   ) => {
-    const isChecked = checked;
+    const reactId = useId();
+    const inputId = id ?? `valve-${reactId}`;
+    const helperId = helperText ? `${inputId}-helper-text` : undefined;
+    const isControlled = checked !== undefined;
+    const [uncontrolledChecked, setUncontrolledChecked] = useState(Boolean(defaultChecked));
+    const isChecked = isControlled ? Boolean(checked) : uncontrolledChecked;
 
     // Size mapping
     const sizes = {
@@ -61,10 +69,27 @@ export const Valve = forwardRef<HTMLInputElement, ValveProps>(
     };
 
     const currentSize = sizes[size];
+    const checkedTrackColor = useMemo(() => {
+      if (color === 'primary') {
+        return 'bg-[var(--sys-color-signalGreen-base)]';
+      }
+      if (color === 'secondary') {
+        return 'bg-[var(--sys-color-kr-activistSmokeGreen-base)]';
+      }
+      return 'bg-[var(--sys-color-inkGold-base)]';
+    }, [color]);
+
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+      if (!isControlled) {
+        setUncontrolledChecked(event.target.checked);
+      }
+      onChange?.(event);
+    };
 
     return (
       <div className={`flex flex-col gap-1 ${className}`}>
         <label
+          htmlFor={inputId}
           className={`
                 inline-flex items-center gap-3
                 ${disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'}
@@ -74,10 +99,17 @@ export const Valve = forwardRef<HTMLInputElement, ValveProps>(
             {/* Hidden Native Checkbox */}
             <input
               ref={ref}
+              id={inputId}
               type="checkbox"
-              checked={checked}
+              role="switch"
+              checked={isControlled ? checked : undefined}
+              defaultChecked={!isControlled ? defaultChecked : undefined}
               disabled={disabled}
               className="sr-only peer"
+              onChange={handleChange}
+              aria-checked={isChecked}
+              aria-invalid={error}
+              aria-describedby={helperId}
               {...props}
             />
 
@@ -86,16 +118,8 @@ export const Valve = forwardRef<HTMLInputElement, ValveProps>(
               className={`
                         ${currentSize.track}
                         rounded-sentry
-                        transition-all duration-300 var(--ease-viscous-breeze)
-                        ${
-                          isChecked
-                            ? color === 'primary'
-                              ? 'bg-[var(--sys-color-signalGreen-base)]'
-                              : color === 'secondary'
-                                ? 'bg-[var(--sys-color-kr-activistSmokeGreen-base)]'
-                                : 'bg-[var(--sys-color-inkGold-base)]'
-                            : 'bg-[var(--sys-color-concreteGrey-base)]'
-                        }
+                        transition-all duration-[var(--duration-standard)] ease-[var(--ease-viscous-breeze)]
+                        ${isChecked ? checkedTrackColor : 'bg-[var(--sys-color-concreteGrey-base)]'}
                         peer-focus:ring-2 peer-focus:ring-[var(--sys-color-inkGold-base)]/30
                         border border-white/10
                     `}
@@ -109,7 +133,7 @@ export const Valve = forwardRef<HTMLInputElement, ValveProps>(
                         bg-[var(--sys-color-worker-ash-base)]
                         rounded-sentry
                         shadow-sm
-                        transition-all duration-300 var(--ease-viscous-breeze)
+                        transition-all duration-[var(--duration-standard)] ease-[var(--ease-viscous-breeze)]
                         ${isChecked ? currentSize.translate : 'translate-x-0'}
                     `}
             />
@@ -124,6 +148,7 @@ export const Valve = forwardRef<HTMLInputElement, ValveProps>(
 
         {helperText && (
           <p
+            id={helperId}
             className={`text-xs px-1 ${error ? 'text-[var(--sys-color-solidarityRed-base)]' : 'text-[var(--sys-color-concreteGrey-steps-4)]'}`}
           >
             {helperText}
