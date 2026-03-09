@@ -71,5 +71,25 @@ async def perplexity_deep_research(query: str) -> str:
         system_prompt="You are a detailed research assistant. Provide comprehensive analysis with citations."
     )
 
+@mcp.tool()
+async def perplexity_summarize_with_citations(
+    query: str,
+    max_sources: int = 5
+) -> str:
+    """
+    Research a topic and return a concise summary with numbered citations.
+    Useful for quickly gathering sourced facts without long-form reasoning.
+    """
+    system_prompt = (
+        f"You are a concise research assistant. "
+        f"Summarize the topic in no more than 3 paragraphs and include up to {max_sources} "
+        "numbered citations at the end. Format citations as: [N] URL or title."
+    )
+    return await perplexity_chat(
+        query=query,
+        model="sonar-pro",
+        system_prompt=system_prompt,
+    )
+
 if __name__ == "__main__":
     mcp.run()
