@@ -6,7 +6,10 @@ import type { SolidarityManifest } from '../../design/hero/heroTypes';
 import { loadHeroRegistry } from '../../design/hero/heroRegistry';
 import { resolvePageHeroComposition } from '../../design/hero/pageHeroMap';
 import { composeHero } from '../../lib/composeHero';
+import { OnboardingProgress } from './OnboardingProgress';
 import styles from './OnboardingPage.module.css';
+
+const ONBOARDING_STEPS = ['Choose field', 'Upload resume', 'Review'];
 
 const DOMAINS = [
   {
@@ -109,8 +112,15 @@ export function OnboardingPage() {
 
       <div className="relative z-10 w-full">
         <header className={styles.header}>
+          <div className="mb-6">
+            <OnboardingProgress
+              currentStep={1}
+              totalSteps={3}
+              steps={ONBOARDING_STEPS}
+            />
+          </div>
           <h1 className="text-bloom-ultra">Choosing the Soil</h1>
-          <p className="text-curator-accent">Select your domain to begin the resurrection.</p>
+          <p className="text-curator-accent">Select your professional domain to personalize your experience.</p>
         </header>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-12 max-w-7xl mx-auto">
