@@ -76,6 +76,10 @@ export const ScaffoldInput = forwardRef<HTMLInputElement, ScaffoldInputProps>(
     const [isFocused, setIsFocused] = React.useState(false);
     const [charCount, setCharCount] = React.useState(value ? String(value).length : 0);
 
+    React.useEffect(() => {
+      setCharCount(value ? String(value).length : 0);
+    }, [value]);
+
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       setCharCount(e.target.value.length);
       props.onChange?.(e);
@@ -264,6 +268,10 @@ export const ScaffoldArea = forwardRef<HTMLTextAreaElement, ScaffoldAreaProps>(
     const reactId = React.useId();
     const [isFocused, setIsFocused] = React.useState(false);
     const [charCount, setCharCount] = React.useState(value ? String(value).length : 0);
+
+    React.useEffect(() => {
+      setCharCount(value ? String(value).length : 0);
+    }, [value]);
 
     const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
       setCharCount(e.target.value.length);

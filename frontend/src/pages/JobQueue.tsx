@@ -21,6 +21,36 @@ interface JobQueueItem {
   notes?: string;
 }
 
+const MOCK_JOB_QUEUE: JobQueueItem[] = [
+  {
+    id: 'mock-001',
+    title: 'Community Services Coordinator',
+    company: 'Union House',
+    url: 'https://example.org/jobs/community-services-coordinator',
+    status: 'pending_analysis',
+    date_clipped: new Date().toISOString(),
+    notes: 'Mocked visual-audit card state',
+  },
+  {
+    id: 'mock-002',
+    title: 'Family Support Practitioner',
+    company: 'Care Collective',
+    url: 'https://example.org/jobs/family-support-practitioner',
+    status: 'ready_to_apply',
+    date_clipped: new Date(Date.now() - 1000 * 60 * 60 * 24).toISOString(),
+    notes: 'Mocked ready state',
+  },
+  {
+    id: 'mock-003',
+    title: 'Youth Case Worker',
+    company: 'Northside Services',
+    url: 'https://example.org/jobs/youth-case-worker',
+    status: 'applied',
+    date_clipped: new Date(Date.now() - 1000 * 60 * 60 * 24 * 2).toISOString(),
+    notes: 'Mocked applied state',
+  },
+];
+
 const statusConfig: Record<
   JobQueueItem['status'],
   { label: string; variant: StatusBadgeVariant; icon: typeof Clock }
@@ -95,6 +125,9 @@ export function JobQueue() {
   }, []);
 
   const fetchJobs = async () => {
+    const isOfflineAudit =
+      import.meta.env.VITE_OFFLINE_MODE === 'true' || import.meta.env.VITE_USE_MOCK_API === 'true';
+
     try {
       setLoading(true);
       const response = await fetch(API_ENDPOINTS.jobQueue);
@@ -108,7 +141,12 @@ export function JobQueue() {
       setError(null);
     } catch (err) {
       console.error('Error fetching jobs:', err);
-      setError('Failed to load job queue. Ensure backend is running.');
+      if (isOfflineAudit) {
+        setJobs(MOCK_JOB_QUEUE);
+        setError(null);
+      } else {
+        setError('Failed to load job queue. Ensure backend is running.');
+      }
     } finally {
       setLoading(false);
     }

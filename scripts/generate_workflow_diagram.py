@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+now #!/usr/bin/env python3
 """
 generate_workflow_diagram.py
 

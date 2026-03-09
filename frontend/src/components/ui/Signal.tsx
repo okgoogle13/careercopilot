@@ -42,17 +42,19 @@ export type SignalVariant = 'filled' | 'outlined' | 'tonal';
  * Supports info, success, warning, and error states with filled, outlined, or tonal variants.
  * Archetype: Signal (status indicator)
  */
-export function Signal({
-  title,
-  severity = 'info',
-  variant = 'tonal',
-  onClose,
-  action,
-  icon,
-  children,
-  className = '',
-  fullWidth = true,
-}: SignalProps) {
+export function Signal(props: SignalProps) {
+  const {
+    title,
+    severity = 'info',
+    variant = 'tonal',
+    onClose,
+    action,
+    icon,
+    children,
+    className = '',
+    fullWidth = true,
+  } = props;
+
   const [isVisible, setIsVisible] = useState(true);
 
   if (!isVisible) return null;
@@ -62,7 +64,7 @@ export function Signal({
     onClose?.();
   };
 
-  const icons: Record<SignalSeverity, React.ComponentType<{ className?: string }>> = {
+  const icons: Record<SignalSeverity, any> = {
     info: Info,
     success: CheckCircle,
     warning: AlertTriangle,
@@ -102,7 +104,7 @@ export function Signal({
         },
       };
 
-    const colors = semanticColorMap[severity];
+    const colors = semanticColorMap[severity] || semanticColorMap.info;
 
     if (variant === 'filled') {
       styles.backgroundColor = colors.bg;
@@ -121,6 +123,26 @@ export function Signal({
     return styles;
   };
 
+  const renderIcon = () => {
+    if (!IconComponent) return null;
+
+    // If it's a function or an object that looks like a component (forwardRef, etc)
+    if (
+      typeof IconComponent === 'function' ||
+      (typeof IconComponent === 'object' && IconComponent !== null && '$$typeof' in IconComponent)
+    ) {
+      try {
+        const Component = IconComponent as React.ComponentType<any>;
+        return <Component className="w-5 h-5" />;
+      } catch (e) {
+        return null;
+      }
+    }
+
+    // Default to rendering as a node
+    return IconComponent;
+  };
+
   return (
     <div
       style={getStyles()}
@@ -129,19 +151,20 @@ export function Signal({
                 ${fullWidth ? 'w-full' : 'w-auto'}
                 ${className}
             `}
-      role="alert"
+      role="status"
+      aria-live="polite"
     >
-      <div className="flex-shrink-0 mt-0.5">
-        {typeof IconComponent === 'function' ? (
-          <IconComponent className="w-5 h-5" />
-        ) : (
-          IconComponent
-        )}
-      </div>
+      <div className="flex-shrink-0 mt-0.5">{renderIcon()}</div>
 
       <div className="flex-grow">
-        {title && <h4 className="font-bold mb-1 font-bloom">{title}</h4>}
-        <div className="font-field-note text-sm leading-relaxed">{children}</div>
+        {title && typeof title === 'string' && (
+          <h4 className="font-bold mb-1 font-bloom">{title}</h4>
+        )}
+        <div className="font-field-note text-sm leading-relaxed">
+          {typeof children === 'object' && children !== null && !React.isValidElement(children)
+            ? 'Invalid child node'
+            : children}
+        </div>
       </div>
 
       {(action || onClose) && (

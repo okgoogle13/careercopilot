@@ -3,7 +3,7 @@
 _Last updated: 2026-03-06_
 
 ## Summary
-- Active skills: **69** (added test-coverage-sprint, test-automation-specialist)
+- Active skills: **70** (added ux-copy-writer)
 - Manifest v6.0.0 — 87 assets (PNG + SVG), all validated via KR Solidarity Canon ✅
 - Backend Coverage: **Module-Saturation Approach** — 10 modules (95% target), 53+ test specs ready
 - Design Docs: **Streamlined to 5 Core Docs** for faster iteration and AI-driven implementation
@@ -120,6 +120,11 @@ node scripts/kr/generate-hero-registry.mjs # → public/assets/...hero-registry.
 | test-automation-specialist | backend/app/agents/ | Autonomous agent for test generation (pytest, Jest, Playwright). |
 | pytest-test-scaffolder | .claude/skills/pytest-test-scaffolder | Scaffolds pytest tests for FastAPI endpoints. |
 | jest-test-scaffolder | .claude/skills/jest-test-scaffolder | Scaffolds Jest tests for React components. |
+
+### UX Copy & Content Quality Skills
+| Skill | Directory | Description |
+|---|---|---|
+| ux-copy-writer | .claude/skills/ux-copy-writer | Generates and audits UX microcopy for clarity, actionability, accessibility wording, and terminology consistency. |
 
 ### Design System & Asset Skills
 | Skill | Directory | Description |

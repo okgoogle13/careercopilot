@@ -40,8 +40,8 @@ export const Placard = React.forwardRef<HTMLDivElement, PlacardProps>(
   ({ className, elevation = 'raised', header, footer, children, ...props }, ref) => {
     const elevationShadows = {
       flat: 'none',
-      raised: '0 4px 16px rgba(0, 0, 0, 0.25)',
-      floating: '0 12px 32px rgba(0, 0, 0, 0.35)',
+      raised: 'var(--sys-elevation2Stone)',
+      floating: 'var(--sys-elevation4Float)',
     };
 
     return (

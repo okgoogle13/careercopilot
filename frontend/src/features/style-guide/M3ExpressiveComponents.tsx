@@ -1,219 +1,224 @@
-/**
- * M3 Expressive Interactive Components
- *
- * Live demonstrations of M3 Expressive principles:
- * - Morph Previewer: Toggle between Rest/Expressive states
- * - Axis Visualizer: Real-time font-variation-settings display
- * - Slop Auditor: Detect layout reflows during morphs
- */
-
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Play, Pause, AlertTriangle, CheckCircle, Shapes, Type } from 'lucide-react';
+import { AlertTriangle, CheckCircle, Shapes, Type, Waves } from 'lucide-react';
+import { Strike } from '../../components/ui/Strike';
+import { cn } from '../../lib/utils';
 
-/**
- * Mor Previewer Component
- *
- * Demonstrates shape morphing with live clip-path display
- */
-export function MorphPreviewer() {
-  const [state, setState] = useState<'rest' | 'expressive'>('rest');
-  const [currentShape, setCurrentShape] = useState<'pebble' | 'leaf' | 'gem'>('pebble');
+const MOTION_CONTRACTS = {
+  easing: 'cubic-bezier(0.34, 1.56, 0.64, 1)',
+  strike: '600ms',
+  march: '800ms',
+  substrate: '3000ms',
+};
 
-  const shapes = {
-    pebble:
-      'polygon(8% 20%, 28% 8%, 48% 8%, 68% 8%, 88% 20%, 96% 40%, 96% 60%, 88% 80%, 68% 92%, 48% 92%, 28% 92%, 8% 80%, 4% 60%, 4% 40%)',
-    leaf: 'polygon(5% 15%, 25% 5%, 45% 5%, 65% 5%, 85% 15%, 95% 35%, 95% 55%, 85% 75%, 65% 95%, 45% 95%, 25% 95%, 5% 75%, 5% 55%, 5% 35%)',
-    gem: 'polygon(20% 0%, 50% 10%, 80% 0%, 95% 30%, 90% 60%, 70% 85%, 50% 100%, 30% 85%, 10% 60%, 5% 30%)',
+export function ArchetypeMorphPreviewer({ onInteraction }: { onInteraction?: () => void }) {
+  const [state, setState] = useState<'base' | 'active'>('base');
+  const [currentArchetype, setCurrentArchetype] = useState<'strike' | 'march' | 'placard'>(
+    'strike'
+  );
+
+  const handleToggle = () => {
+    setState((s) => (s === 'base' ? 'active' : 'base'));
+    onInteraction?.();
   };
 
-  const clipPath = state === 'expressive' ? shapes[currentShape] : 'none';
+  const shapes = {
+    strike: {
+      base: 'var(--shape-blockRiot03)',
+      active: 'var(--shape-blockRiot02)',
+    },
+    march: {
+      base: 'var(--shape-pillMarch01)',
+      active: 'var(--shape-pebbleSurge01)',
+    },
+    placard: {
+      base: 'var(--shape-placardTorn01)',
+      active: 'var(--shape-placardTorn01-selected)',
+    },
+  };
+
+  const isActive = state === 'active';
+  const clipPath = isActive ? shapes[currentArchetype].active : shapes[currentArchetype].base;
+  const contractDuration =
+    currentArchetype === 'march' ? MOTION_CONTRACTS.march : MOTION_CONTRACTS.strike;
 
   return (
     <div className="p-8 bg-surface-container rounded-strike border border-outline-variant space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-wrap items-center justify-between gap-3">
         <h3 className="text-title-large font-bold flex items-center gap-2">
           <Shapes className="w-6 h-6 text-primary" />
-          Morph Previewer
+          Archetype Morph Previewer
         </h3>
         <button
-          onClick={() => setState((s) => (s === 'rest' ? 'expressive' : 'rest'))}
-          className="px-4 py-2 bg-primary text-on-primary rounded-sentry font-bold uppercase text-sm hover:scale-105 transition-transform flex items-center gap-2"
+          type="button"
+          onClick={handleToggle}
+          className="px-4 py-2 bg-primary text-on-primary rounded-sentry font-bold uppercase text-xs"
         >
-          {state === 'rest' ? <Play className="w-4 h-4" /> : <Pause className="w-4 h-4" />}
-          {state === 'rest' ? 'Morph' : 'Reset'}
+          {isActive ? 'Reset Base' : 'Activate'}
         </button>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Live Preview */}
         <div className="space-y-4">
-          <p className="text-sm text-on-surface-variant font-mono">
-            Current State: {state.toUpperCase()}
-          </p>
-          <motion.div
-            className="h-64 bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center"
-            style={{ clipPath }}
-            animate={{ clipPath }}
-            transition={{ type: 'spring', stiffness: 500, damping: 27 }}
-          >
-            <div className="text-center">
-              <div className="text-6xl font-black">M3</div>
-              <div className="text-sm font-mono opacity-70 mt-2">{currentShape}</div>
-            </div>
-          </motion.div>
-
-          {/* Shape Selector */}
-          <div className="flex gap-2">
-            {(['pebble', 'leaf', 'gem'] as const).map((shape) => (
+          <div className="relative group">
+            <motion.div
+              className="h-56 bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center border border-outline/30"
+              style={{ borderRadius: clipPath }}
+              animate={{ borderRadius: clipPath }}
+              transition={{ type: 'spring', stiffness: 120, damping: 20 }}
+            >
+              <div className="text-center p-6 bg-charcoalBackground/40 backdrop-blur-sm rounded-lg border border-white/5">
+                <div className="text-3xl font-black uppercase tracking-tighter text-worker-ash">
+                  {currentArchetype}
+                </div>
+                <div className="text-[10px] font-mono opacity-70 mt-2 py-1 px-2 bg-primary/20 rounded uppercase tracking-widest">
+                  {isActive ? 'active' : 'base'} state
+                </div>
+              </div>
+            </motion.div>
+          </div>
+          <div className="flex gap-2 flex-wrap">
+            {(['strike', 'march', 'placard'] as const).map((name) => (
               <button
-                key={shape}
-                onClick={() => setCurrentShape(shape)}
-                className={`px-3 py-1 rounded-sentry text-sm font-bold uppercase transition-all ${
-                  currentShape === shape
-                    ? 'bg-primary text-on-primary'
-                    : 'bg-surface-dim text-on-surface hover:bg-surface-container-high'
+                key={name}
+                type="button"
+                onClick={() => setCurrentArchetype(name)}
+                className={`px-3 py-1 rounded-sentry text-xs font-bold uppercase transition-all ${
+                  currentArchetype === name
+                    ? 'bg-primary text-on-primary shadow-glow-gold'
+                    : 'bg-surface-dim text-on-surface hover:bg-surface-container-high border border-outline/20'
                 }`}
               >
-                {shape}
+                {name}
               </button>
             ))}
           </div>
         </div>
 
-        {/* Code Display */}
-        <div className="space-y-4">
-          <p className="text-sm text-on-surface-variant font-bold">Current clip-path:</p>
-          <div className="bg-surface-dim p-4 rounded-pebble overflow-x-auto">
-            <pre className="text-xs font-mono text-primary">
-              {clipPath === 'none' ? 'none (Rest State)' : clipPath}
-            </pre>
-          </div>
-
-          <div className="bg-tertiary-container/20 p-4 rounded-pebble border border-tertiary">
-            <p className="text-sm font-bold mb-2">Physics:</p>
-            <div className="text-xs font-mono space-y-1 text-on-surface-variant">
-              <div>stiffness: 500</div>
-              <div>damping: 27</div>
-              <div>damping ratio (ζ): 0.6</div>
+        <div className="space-y-3">
+          <p className="text-sm font-bold text-ink-gold font-bloom">Active Contract</p>
+          <div className="bg-surface-dim p-4 rounded-pebble text-[10px] font-mono space-y-2 border border-outline/20">
+            <div className="flex justify-between border-b border-outline/10 pb-1">
+              <span className="opacity-50">easing</span>
+              <span className="text-primary truncate ml-4">{MOTION_CONTRACTS.easing}</span>
+            </div>
+            <div className="flex justify-between border-b border-outline/10 pb-1">
+              <span className="opacity-50">duration</span>
+              <span className="text-primary">{contractDuration}</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="opacity-50">physics</span>
+              <span className="text-primary">stiffness 120 / damping 20</span>
             </div>
           </div>
+          <p className="text-[10px] text-on-surface-variant leading-relaxed">
+            * Strike and Placard use <strong>typeSpringSlam</strong>; March uses{' '}
+            <strong>dragSettle</strong>.
+          </p>
         </div>
       </div>
     </div>
   );
 }
 
-/**
- * Axis Visualizer Component
- *
- * Shows real-time font-variation-settings during hover
- */
-export function AxisVisualizer() {
-  const [isHovering, setIsHovering] = useState(false);
+export function TypographyAxisValidator({ onInteraction }: { onInteraction?: () => void }) {
   const [axes, setAxes] = useState({ wght: 400, wdth: 100, GRAD: 0 });
 
-  const restAxes = { wght: 400, wdth: 100, GRAD: 0 };
-  const morphAxes = { wght: 400, wdth: 110, GRAD: 150 }; // Pebble morph state
+  const handleAxisChange = (axis: keyof typeof axes, value: number) => {
+    setAxes((prev) => ({ ...prev, [axis]: value }));
+    onInteraction?.();
+  };
 
-  useEffect(() => {
-    setAxes(isHovering ? morphAxes : restAxes);
-  }, [isHovering]);
-
-  const fontVariationSettings = `'wght' ${axes.wght}, 'wdth' ${axes.wdth}, 'GRAD' ${axes.GRAD}`;
+  const settings = `'wght' ${axes.wght}, 'wdth' ${axes.wdth}, 'GRAD' ${axes.GRAD}`;
 
   return (
     <div className="p-8 bg-surface-container rounded-strike border border-outline-variant space-y-6">
       <h3 className="text-title-large font-bold flex items-center gap-2">
         <Type className="w-6 h-6 text-secondary" />
-        Axis Visualizer
+        Typography Axis Validator
       </h3>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Interactive Typography */}
-        <div
-          className="h-64 bg-gradient-to-br from-secondary/10 to-tertiary/10 rounded-strike flex items-center justify-center cursor-pointer border-2 border-dashed border-secondary/30"
-          onMouseEnter={() => setIsHovering(true)}
-          onMouseLeave={() => setIsHovering(false)}
-        >
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="h-64 bg-surface-dim rounded-strike flex flex-col items-center justify-center border border-outline relative overflow-hidden">
+          <div className="absolute top-2 left-3 text-[10px] font-mono opacity-30 uppercase tracking-widest">
+            Live Output
+          </div>
           <motion.h2
             className="text-6xl text-center px-4"
             style={{
-              fontFamily: '"Work Sans", sans-serif',
-              fontWeight: axes.wght,
-              fontVariationSettings,
+              fontFamily: 'var(--sys-type-fontFamilies-primary)',
+              fontVariationSettings: settings,
             }}
-            animate={{ fontVariationSettings }}
-            transition={{ type: 'spring', stiffness: 500, damping: 27 }}
+            animate={{ fontVariationSettings: settings }}
+            transition={{ type: 'spring', stiffness: 200, damping: 25 }}
           >
-            Hover Me
+            KR Type
           </motion.h2>
+          <div className="absolute bottom-4 text-[10px] font-mono text-primary/60 border border-primary/20 px-2 py-0.5 rounded">
+            {settings}
+          </div>
         </div>
 
-        {/* Real-Time Axes Display */}
-        <div className="space-y-4">
-          <p className="text-sm text-on-surface-variant font-bold">Live font-variation-settings:</p>
-
-          {/* wght Axis */}
-          <div className="space-y-2">
-            <div className="flex justify-between items-center">
-              <span className="text-sm font-mono">wght (Weight)</span>
-              <span
-                className={`text-lg font-bold ${axes.wght === restAxes.wght ? 'text-green-500' : 'text-yellow-500'}`}
-              >
-                {axes.wght}
-              </span>
-            </div>
-            <div className="h-2 bg-surface-dim rounded-sentry overflow-hidden">
-              <motion.div
-                className="h-full bg-primary"
-                style={{ width: `${(axes.wght / 900) * 100}%` }}
-                animate={{ width: `${(axes.wght / 900) * 100}%` }}
+        <div className="space-y-6 bg-surface-dim/50 p-6 rounded-pebble border border-outline/20">
+          <div className="space-y-4">
+            <div className="space-y-2">
+              <div className="flex justify-between text-[10px] font-mono uppercase tracking-tighter">
+                <span className="text-secondary font-bold">Weight (wght)</span>
+                <span className="text-worker-ash bg-charcoalBackground-steps-3 px-1 rounded">
+                  {axes.wght}
+                </span>
+              </div>
+              <input
+                type="range"
+                min="100"
+                max="900"
+                step="1"
+                value={axes.wght}
+                onChange={(e) => handleAxisChange('wght', parseInt(e.target.value))}
+                className="w-full h-1.5 bg-outline-variant rounded-lg appearance-none cursor-pointer accent-secondary"
               />
             </div>
-            <p className="text-xs text-on-surface-variant">✅ Constant (Anti-Slop Rule)</p>
-          </div>
 
-          {/* wdth Axis */}
-          <div className="space-y-2">
-            <div className="flex justify-between items-center">
-              <span className="text-sm font-mono">wdth (Width)</span>
-              <span
-                className={`text-lg font-bold ${isHovering ? 'text-secondary' : 'text-on-surface'}`}
-              >
-                {axes.wdth}
-              </span>
-            </div>
-            <div className="h-2 bg-surface-dim rounded-sentry overflow-hidden">
-              <motion.div
-                className="h-full bg-secondary"
-                animate={{ width: `${axes.wdth}%` }}
+            <div className="space-y-2">
+              <div className="flex justify-between text-[10px] font-mono uppercase tracking-tighter">
+                <span className="text-secondary font-bold">Width (wdth)</span>
+                <span className="text-worker-ash bg-charcoalBackground-steps-3 px-1 rounded">
+                  {axes.wdth}
+                </span>
+              </div>
+              <input
+                type="range"
+                min="50"
+                max="150"
+                step="1"
+                value={axes.wdth}
+                onChange={(e) => handleAxisChange('wdth', parseInt(e.target.value))}
+                className="w-full h-1.5 bg-outline-variant rounded-lg appearance-none cursor-pointer accent-secondary"
               />
             </div>
-          </div>
 
-          {/* GRAD Axis */}
-          <div className="space-y-2">
-            <div className="flex justify-between items-center">
-              <span className="text-sm font-mono">GRAD (Optical Grade)</span>
-              <span
-                className={`text-lg font-bold ${isHovering ? 'text-tertiary' : 'text-on-surface'}`}
-              >
-                {axes.GRAD}
-              </span>
-            </div>
-            <div className="h-2 bg-surface-dim rounded-sentry overflow-hidden">
-              <motion.div
-                className="h-full bg-tertiary"
-                animate={{ width: `${(axes.GRAD / 200) * 100}%` }}
+            <div className="space-y-2">
+              <div className="flex justify-between text-[10px] font-mono uppercase tracking-tighter">
+                <span className="text-secondary font-bold">Grade (GRAD)</span>
+                <span className="text-worker-ash bg-charcoalBackground-steps-3 px-1 rounded">
+                  {axes.GRAD}
+                </span>
+              </div>
+              <input
+                type="range"
+                min="-200"
+                max="200"
+                step="1"
+                value={axes.GRAD}
+                onChange={(e) => handleAxisChange('GRAD', parseInt(e.target.value))}
+                className="w-full h-1.5 bg-outline-variant rounded-lg appearance-none cursor-pointer accent-secondary"
               />
             </div>
           </div>
 
-          <div className="bg-green-500/10 p-3 rounded-pebble border border-green-500/30 mt-4">
-            <p className="text-xs font-bold text-green-700 dark:text-green-400">
-              ✓ Parametric Pairing Active: Typography synced with shape morph
-            </p>
+          <div className="pt-4 border-t border-outline/10 text-[10px] text-on-surface-variant italic leading-relaxed">
+            * Variable axes allow for fluid transition between "Pressure" and "Relief" states in the
+            KR narrative.
           </div>
         </div>
       </div>
@@ -221,18 +226,14 @@ export function AxisVisualizer() {
   );
 }
 
-/**
- * Slop Auditor Component
- *
- * Detects layout shifts during typography morphs (Anti-Slop Rule validation)
- */
-export function SlopAuditor() {
+export function LayoutSlopAuditor({ onInteraction }: { onInteraction?: () => void }) {
   const [isMonitoring, setIsMonitoring] = useState(false);
   const [violations, setViolations] = useState<string[]>([]);
+  const [currentDelta, setCurrentDelta] = useState({ dw: 0, dh: 0 });
   const [testType, setTestType] = useState<'correct' | 'wrong'>('correct');
-
+  const [isHovered, setIsHovered] = useState(false);
   const elementRef = useRef<HTMLDivElement>(null);
-  const initialSizeRef = useRef<{ width: number; height: number } | null>(null);
+  const baselineRef = useRef<{ width: number; height: number } | null>(null);
 
   useEffect(() => {
     if (!isMonitoring || !elementRef.current) return;
@@ -241,179 +242,203 @@ export function SlopAuditor() {
       for (const entry of entries) {
         const { width, height } = entry.contentRect;
 
-        if (!initialSizeRef.current) {
-          initialSizeRef.current = { width, height };
+        if (!baselineRef.current) {
+          baselineRef.current = { width, height };
           return;
         }
 
-        if (
-          Math.abs(width - initialSizeRef.current.width) > 2 ||
-          Math.abs(height - initialSizeRef.current.height) > 2
-        ) {
-          setViolations((prev) => [
-            ...prev,
-            `Layout shift detected! ${width} x ${height} (was ${initialSizeRef.current?.width} x ${initialSizeRef.current?.height})`,
-          ]);
+        const dW = Math.abs(width - baselineRef.current.width);
+        const dH = Math.abs(height - baselineRef.current.height);
+
+        setCurrentDelta({ dw: dW, dh: dH });
+
+        if (dW > 0.5 || dH > 0.5) {
+          const timestamp = new Date().toLocaleTimeString([], {
+            hour12: false,
+            minute: '2-digit',
+            second: '2-digit',
+          });
+          setViolations((prev) => {
+            const msg = `[${timestamp}] SLOP: ${dW.toFixed(1)}px width | ${dH.toFixed(1)}px height`;
+            if (prev[0]?.split('] ')[1] === msg.split('] ')[1]) return prev; // Avoid duplicates
+            return [msg, ...prev].slice(0, 5);
+          });
         }
       }
     });
 
     observer.observe(elementRef.current);
-
     return () => observer.disconnect();
-  }, [isMonitoring]);
+  }, [isMonitoring, testType]);
 
-  const startTest = () => {
+  const start = () => {
+    baselineRef.current = null;
     setViolations([]);
-    initialSizeRef.current = null;
+    setCurrentDelta({ dw: 0, dh: 0 });
     setIsMonitoring(true);
-  };
-
-  const stopTest = () => {
-    setIsMonitoring(false);
+    onInteraction?.();
   };
 
   return (
-    <div className="p-8 bg-surface-container rounded-strike border border-outline-variant space-y-6">
-      <div className="flex items-center justify-between">
+    <div className="p-8 bg-surface-container rounded-strike border border-outline-variant space-y-6 shadow-xl">
+      <div className="flex flex-wrap items-center justify-between gap-4">
         <h3 className="text-title-large font-bold flex items-center gap-2">
           <AlertTriangle className="w-6 h-6 text-warning" />
-          Slop Auditor
+          Layout Slop Auditor
         </h3>
-        <div className="flex gap-2">
-          <button
-            onClick={startTest}
-            disabled={isMonitoring}
-            className="px-4 py-2 bg-primary text-on-primary rounded-sentry font-bold uppercase text-sm hover:scale-105 transition-transform disabled:opacity-50 disabled:hover:scale-100"
-          >
-            Start Monitor
-          </button>
-          <button
-            onClick={stopTest}
-            disabled={!isMonitoring}
-            className="px-4 py-2 bg-error text-on-error rounded-sentry font-bold uppercase text-sm hover:scale-105 transition-transform disabled:opacity-50 disabled:hover:scale-100"
-          >
-            Stop
-          </button>
-        </div>
+        <Strike
+          variant={isMonitoring ? 'destructive' : 'primary'}
+          size="sm"
+          onClick={isMonitoring ? () => setIsMonitoring(false) : start}
+          className={cn(isMonitoring && 'animate-pulse')}
+        >
+          {isMonitoring ? 'STOP / RESET' : 'START AUDIT'}
+        </Strike>
       </div>
 
-      <p className="text-sm text-on-surface-variant">
-        This component monitors for layout reflows during typography morphs.
-        <strong className="text-on-surface">
-          {' '}
-          Hover the test element while monitoring to see if it triggers layout shifts.
-        </strong>
-      </p>
-
-      {/* Test Type Selector */}
-      <div className="flex gap-4">
+      <div className="flex gap-2 p-1 bg-surface-dim rounded-pebble border border-outline/20 w-fit">
         <button
-          onClick={() => setTestType('correct')}
-          className={`px-4 py-2 rounded-pebble font-bold text-sm ${
-            testType === 'correct' ? 'bg-green-500 text-white' : 'bg-surface-dim text-on-surface'
-          }`}
+          type="button"
+          onClick={() => {
+            setTestType('correct');
+            setViolations([]);
+            baselineRef.current = null;
+          }}
+          className={`px-4 py-1.5 rounded-pebble text-[10px] font-bold uppercase transition-all ${testType === 'correct' ? 'bg-primary text-on-primary shadow-sm' : 'text-on-surface/60 hover:text-on-surface'}`}
         >
-          ✓ Correct (GRAD only)
+          Optimal (GRAD)
         </button>
         <button
-          onClick={() => setTestType('wrong')}
-          className={`px-4 py-2 rounded-pebble font-bold text-sm ${
-            testType === 'wrong' ? 'bg-error text-on-error' : 'bg-surface-dim text-on-surface'
-          }`}
+          type="button"
+          onClick={() => {
+            setTestType('wrong');
+            setViolations([]);
+            baselineRef.current = null;
+          }}
+          className={`px-4 py-1.5 rounded-pebble text-[10px] font-bold uppercase transition-all ${testType === 'wrong' ? 'bg-error text-on-error shadow-sm' : 'text-on-surface/60 hover:text-on-surface'}`}
         >
-          ✗ Wrong (Changes font-weight)
+          Sloppy (Weight)
         </button>
       </div>
 
-      {/* Test Element */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="h-64 bg-gradient-to-br from-warning/10 to-error/10 rounded-strike flex items-center justify-center border-2 border-dashed border-warning/30">
+        <div
+          className="h-44 bg-surface-dim rounded-strike border-2 border-dashed border-outline/40 flex items-center justify-center relative overflow-hidden group hover:border-primary/40 transition-colors"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
+          <div className="absolute top-2 left-3 text-[9px] font-mono opacity-20 uppercase tracking-[0.2em]">
+            Interaction Zone
+          </div>
           {testType === 'correct' ? (
             <motion.div
               ref={elementRef}
-              className="text-center px-4"
-              style={{
-                fontFamily: '"Work Sans", sans-serif',
-                fontWeight: 400,
-                fontVariationSettings: "'wght' 400, 'GRAD' 0",
+              className="text-2xl font-bloom text-worker-ash cursor-help"
+              style={{ fontVariationSettings: "'wght' 400, 'GRAD' 0" }}
+              animate={{
+                fontVariationSettings: isHovered
+                  ? "'wght' 400, 'GRAD' 150'"
+                  : "'wght' 400, 'GRAD' 0'",
               }}
-              whileHover={{
-                fontVariationSettings: "'wght' 400, 'GRAD' 150", // Only GRAD changes
-              }}
-              transition={{ type: 'spring', stiffness: 500, damping: 27 }}
+              transition={{ type: 'spring', stiffness: 200, damping: 25 }}
             >
-              <div className="text-4xl font-bold">Correct Method</div>
-              <div className="text-sm text-on-surface-variant mt-2">Uses GRAD axis only</div>
+              Stable Layout
             </motion.div>
           ) : (
             <motion.div
               ref={elementRef}
-              className="text-center px-4"
-              style={{
-                fontFamily: '"Work Sans", sans-serif',
-              }}
+              className="text-2xl font-bloom text-solidarity-crimson cursor-help"
               initial={{ fontWeight: 400 }}
-              whileHover={{ fontWeight: 700 }} // WRONG: Changes font-weight
-              transition={{ type: 'spring', stiffness: 500, damping: 27 }}
+              animate={{ fontWeight: isHovered ? 800 : 400 }}
+              transition={{ type: 'spring', stiffness: 200, damping: 10 }}
             >
-              <div className="text-4xl font-bold">Wrong Method</div>
-              <div className="text-sm text-on-surface-variant mt-2">
-                Changes font-weight (causes reflow)
-              </div>
+              Reflow Risk
             </motion.div>
+          )}
+          {isHovered && (
+            <div className="absolute bottom-2 text-[8px] font-mono text-primary animate-bounce">
+              INTERACTING...
+            </div>
           )}
         </div>
 
-        {/* Violations Display */}
-        <div className="space-y-4">
-          <div
-            className={`p-4 rounded-pebble border-2 ${
-              violations.length > 0
-                ? 'bg-error/10 border-error'
-                : 'bg-green-500/10 border-green-500'
-            }`}
-          >
-            <div className="flex items-center gap-2 mb-2">
-              {violations.length > 0 ? (
-                <>
-                  <AlertTriangle className="w-5 h-5 text-error" />
-                  <span className="font-bold text-error">Layout Shifts Detected!</span>
-                </>
+        <div
+          className={cn(
+            'p-5 rounded-pebble border transition-all duration-500 flex flex-col gap-4',
+            violations.length
+              ? 'bg-error/5 border-error/40'
+              : isMonitoring
+                ? 'bg-primary/5 border-primary/40'
+                : 'bg-surface-dim border-outline/20'
+          )}
+        >
+          <div className="flex justify-between items-center">
+            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider">
+              {violations.length ? (
+                <div className="w-2 h-2 rounded-full bg-error animate-ping" />
               ) : (
-                <>
-                  <CheckCircle className="w-5 h-5 text-green-500" />
-                  <span className="font-bold text-green-700 dark:text-green-400">
-                    {isMonitoring ? 'Monitoring...' : 'No Violations'}
-                  </span>
-                </>
+                <div
+                  className={`w-2 h-2 rounded-full ${isMonitoring ? 'bg-primary animate-pulse' : 'bg-outline'}`}
+                />
               )}
+              {violations.length
+                ? 'Violations Logged'
+                : isMonitoring
+                  ? 'Monitoring Active'
+                  : 'Auditor Idle'}
             </div>
-
-            {violations.length > 0 && (
-              <div className="space-y-1 mt-3">
-                {violations.map((v, i) => (
-                  <div
-                    key={i}
-                    className="text-xs font-mono text-error bg-error/5 p-2 rounded"
-                  >
-                    {v}
-                  </div>
-                ))}
+            {isMonitoring && (
+              <div className="text-[10px] font-mono opacity-60">
+                ΔW: {currentDelta.dw.toFixed(1)}px
               </div>
             )}
           </div>
 
-          <div className="bg-surface-dim p-4 rounded-pebble">
-            <p className="text-xs font-bold mb-2">Anti-Slop Rule:</p>
-            <p className="text-xs text-on-surface-variant leading-relaxed">
-              <code className="text-error">font-weight</code> must remain <strong>constant</strong>{' '}
-              during morphs. Use <code className="text-green-500">GRAD</code> and{' '}
-              <code className="text-green-500">wdth</code> axes instead. This prevents expensive
-              layout recalculations and visual jank.
-            </p>
+          <div className="flex-grow space-y-2 text-[10px] font-mono overflow-y-auto max-h-24 custom-scrollbar">
+            {violations.length ? (
+              violations.map((v, i) => (
+                <div
+                  key={i}
+                  className="flex gap-2 text-error animate-in fade-in slide-in-from-left-1 border-b border-error/10 pb-1"
+                >
+                  <span className="opacity-40">!</span>
+                  {v}
+                </div>
+              ))
+            ) : (
+              <div className="text-on-surface-variant/50 leading-relaxed italic">
+                {isMonitoring
+                  ? "Move cursor over the Interaction Zone. Stable layouts use 'GRAD' (0px shift); sloppy layouts shift bounding box width via standard 'wght'."
+                  : "Click 'Start Audit' to initialize baseline dimensions."}
+              </div>
+            )}
           </div>
         </div>
+      </div>
+    </div>
+  );
+}
+
+export function MotionContractPanel() {
+  return (
+    <div className="p-8 bg-surface-container rounded-strike border border-outline-variant space-y-4">
+      <h3 className="text-title-large font-bold flex items-center gap-2">
+        <Waves className="w-6 h-6 text-tertiary" />
+        Canonical Motion Contracts
+      </h3>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs font-mono">
+        <div className="bg-surface-dim p-3 rounded-pebble border border-outline">
+          typeSpringSlam: 600ms
+        </div>
+        <div className="bg-surface-dim p-3 rounded-pebble border border-outline">
+          dragSettle: 800ms
+        </div>
+        <div className="bg-surface-dim p-3 rounded-pebble border border-outline">
+          waterRipple: 3000ms
+        </div>
+      </div>
+      <div className="bg-surface-dim p-3 rounded-pebble border border-outline text-xs font-mono">
+        easing: {MOTION_CONTRACTS.easing}
       </div>
     </div>
   );
