@@ -119,6 +119,9 @@ class User(Base):
     agent_sessions: Mapped[list["AgentSession"]] = relationship(
         "AgentSession", back_populates="user", cascade="all, delete-orphan"
     )
+    master_versions: Mapped[list["MasterVersion"]] = relationship(
+        "MasterVersion", back_populates="user", cascade="all, delete-orphan"
+    )
 
     def __repr__(self) -> str:
         return f"<User {self.email}>"
@@ -276,6 +279,48 @@ class Job(Base):
             str: A string in the format '<Job [title] at [company]>'
         """
         return f"<Job {self.title} at {self.company}>"
+
+
+class MasterVersion(Base):
+    """Tracks versions of the user's master resume/profile context."""
+
+    __tablename__ = "master_versions"
+
+    user_id: Mapped[str] = mapped_column(
+        String(36),
+        ForeignKey("users.id", ondelete="CASCADE"),
+        nullable=False,
+        index=True,
+        comment="Reference to the user who owns this master resume version",
+    )
+    version_number: Mapped[int] = mapped_column(
+        Integer, nullable=False, default=1, comment="Monotonic version number for master resume"
+    )
+    is_active: Mapped[bool] = mapped_column(
+        Boolean, nullable=False, default=True, comment="Marks the currently active master version"
+    )
+    source: Mapped[str] = mapped_column(
+        String(64),
+        nullable=False,
+        default="ingestion",
+        comment="Source pipeline that created this version",
+    )
+    content_snapshot: Mapped[dict[str, Any]] = mapped_column(
+        JSON,
+        nullable=False,
+        default=dict,
+        comment="Serialized snapshot of career database/master profile",
+    )
+
+    user: Mapped["User"] = relationship("User", back_populates="master_versions", lazy="selectin")
+
+    __table_args__ = (
+        Index("ix_master_versions_user_active", "user_id", "is_active"),
+        Index("ix_master_versions_user_version", "user_id", "version_number"),
+    )
+
+    def __repr__(self) -> str:
+        return f"<MasterVersion {self.user_id} v{self.version_number}>"
 
 
 class Application(Base):

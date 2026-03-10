@@ -1,12 +1,12 @@
 from typing import Literal
 
+from google.cloud.firestore_v1.base_vector_query import DistanceMeasure
+from google.cloud.firestore_v1.vector import Vector
 from pydantic import BaseModel
-from sqlalchemy import select
 
-from app.core.database import get_db_session
+from app.core.firebase import get_firestore
 from app.core.google_genai_compat import get_configured_google_generativeai
 from app.core.secure_config import settings
-from app.models.document_embedding import DocumentEmbedding
 
 
 class CareerArtifact(BaseModel):
@@ -19,13 +19,13 @@ class CareerArtifact(BaseModel):
 
 class VectorStore:
     """
-    Manages the Supabase vector store for the user's career artifacts.
-    Uses Google Gemini text-embedding-004 for embeddings and pgvector for storage.
+    Manages the Firestore vector store for the user's career artifacts.
+    Uses Google Gemini text-embedding-004 for embeddings and Firestore for storage.
     """
 
     def __init__(self):
-        # Connection managed via app.core.database
         self.embedding_model = "models/text-embedding-004"
+        self.collection_name = "document_embeddings"
 
     def _generate_embeddings(self, texts: list[str]) -> list[list[float]]:
         """Generates embeddings using Gemini API."""
@@ -62,17 +62,20 @@ class VectorStore:
             "skills": artifact.derived_skills,
         }
 
-        with get_db_session() as db:
-            doc = DocumentEmbedding(
-                user_id=user_id,
-                content=artifact.content,
-                embedding=embedding_vector,
-                metadata_json=metadata,
-            )
-            db.add(doc)
-            # Commit handled by context manager
+        db = get_firestore()
+        col = db.collection(self.collection_name)
 
-        print(f"DEBUG: Added artifact {artifact.source_filename} to Supabase VectorStore.")
+        doc_ref = col.document()
+        doc_ref.set(
+            {
+                "user_id": user_id,
+                "content": artifact.content,
+                "embedding": Vector(embedding_vector),
+                "metadata_json": metadata,
+            }
+        )
+
+        print(f"DEBUG: Added artifact {artifact.source_filename} to Firestore VectorStore.")
 
     def query_similar(
         self,
@@ -84,39 +87,44 @@ class VectorStore:
         """Queries the vector store for similar artifacts."""
         query_embedding = self._generate_query_embedding(query)
 
-        with get_db_session() as db:
-            # Cosine distance operator is <=>
-            stmt = (
-                select(DocumentEmbedding)
-                .order_by(DocumentEmbedding.embedding.cosine_distance(query_embedding))
-                .limit(n_results)
+        db = get_firestore()
+        col = db.collection(self.collection_name)
+
+        # Base query to filter by user_id
+        base_query = col.where("user_id", "==", user_id)
+
+        if filter_source:
+            # Firestore nested filtering
+            base_query = base_query.where("metadata_json.source_type", "==", filter_source)
+
+        # Vector search
+        vector_query = base_query.find_nearest(
+            vector_field="embedding",
+            query_vector=Vector(query_embedding),
+            distance_measure=DistanceMeasure.COSINE,
+            limit=n_results,
+            distance_result_field="distance",
+        )
+
+        docs = vector_query.stream()
+
+        output = []
+        for doc in docs:
+            doc_data = doc.to_dict()
+            output.append(
+                {
+                    "id": doc.id,
+                    "content": doc_data.get("content", ""),
+                    "metadata": doc_data.get("metadata_json", {}),
+                    "distance": doc_data.get("distance", 0.0),
+                }
             )
 
-            if filter_source:
-                # Generic JSON filtering
-                stmt = stmt.filter(
-                    DocumentEmbedding.metadata_json["source_type"].as_string() == filter_source
-                )
-
-            if user_id:
-                stmt = stmt.filter(DocumentEmbedding.user_id == user_id)
-
-            results = db.execute(stmt).scalars().all()
-
-            output = []
-            for doc in results:
-                output.append(
-                    {
-                        "id": doc.id,
-                        "content": doc.content,
-                        "metadata": doc.metadata_json,
-                        "distance": 0.0,  # Distance calculation requires modification to select clause to return it
-                    }
-                )
-
-            return output
+        return output
 
     def clear_database(self, user_id: str = "legacy_user"):
         """Clears data for a user."""
-        with get_db_session() as db:
-            db.query(DocumentEmbedding).filter(DocumentEmbedding.user_id == user_id).delete()
+        db = get_firestore()
+        docs = db.collection(self.collection_name).where("user_id", "==", user_id).stream()
+        for doc in docs:
+            doc.reference.delete()

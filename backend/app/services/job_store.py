@@ -1,26 +1,22 @@
 import logging
 from datetime import datetime
 
-from fastapi import Depends
-from sqlalchemy.orm import Session
-
-from app.core.database import get_db
-from app.models.database import Job
+from app.core.firebase import get_firestore
 
 logger = logging.getLogger(__name__)
 
 
-class SQLAlchemyJobStore:
+class FirestoreJobStore:
     """
-    Job storage service using SQLAlchemy (PostgreSQL/Supabase).
-    Replaces FirestoreJobStore.
+    Job storage service using Firestore.
+    Replaces SQLAlchemyJobStore.
     """
 
-    def __init__(self, db: Session):
+    def __init__(self):
         """
-        Initialize the job store with a DB session.
+        Initialize the job store with Firestore.
         """
-        self.db = db
+        self.collection_name = "jobs"
 
     async def add_job(self, job_data: dict) -> str:
         """
@@ -34,109 +30,104 @@ class SQLAlchemyJobStore:
         if "date_clipped" not in job_data:
             job_data["date_clipped"] = datetime.utcnow().isoformat()
 
-        # Map fields to Job model
-        # Note: Firestore used camelCase/snake_case mix, SQLAlchemy model uses snake_case
-        job = Job(
-            user_id=job_data.get("user_id"),
-            title=job_data.get("title", "Unknown Title"),
-            company=job_data.get("company", "Unknown Company"),
-            location=job_data.get("location"),
-            description=job_data.get("description"),
-            requirements=job_data.get("requirements", []),
-            preferred_qualifications=job_data.get("preferred_qualifications", []),
-            skill_requirements=job_data.get("skill_requirements", []),
-            salary_min=job_data.get("salary_min"),
-            salary_max=job_data.get("salary_max"),
-            salary_text=job_data.get("salary_text"),
-            job_type=job_data.get("job_type"),
-            experience_level=job_data.get("experience_level"),
-            remote_ok=job_data.get("remote_ok", False),
-            application_url=job_data.get("application_url"),
-            source=job_data.get("source"),
-            source_id=job_data.get("source_id"),
-            url=job_data.get("url"),
-            posted_date=(
-                datetime.fromisoformat(job_data["posted_date"])
-                if job_data.get("posted_date")
-                else None
-            ),
-            job_metadata=job_data.get("metadata", {}),
-            match_score=job_data.get("match_score"),
-            analysis_summary=job_data.get("analysis_summary"),
-        )
+        if "created_at" not in job_data:
+            job_data["created_at"] = datetime.utcnow().isoformat()
 
-        self.db.add(job)
-        self.db.commit()
-        self.db.refresh(job)
+        db = get_firestore()
+        col = db.collection(self.collection_name)
 
-        logger.info(f"[JobStore] Added job {job.id} to PostgreSQL")
-        return str(job.id)
+        # Determine ID or let Firestore generate it
+        if "id" in job_data and job_data["id"]:
+            doc_ref = col.document(job_data["id"])
+        else:
+            doc_ref = col.document()
+            job_data["id"] = doc_ref.id
+
+        doc_ref.set(job_data)
+        logger.info(f"[JobStore] Added job {doc_ref.id} to Firestore")
+        return doc_ref.id
 
     async def get_all_jobs(self, user_id: str | None = None, limit: int = 100) -> list[dict]:
         """
         Retrieve all jobs.
         """
-        query = self.db.query(Job)
+        db = get_firestore()
+        col = db.collection(self.collection_name)
+
+        query = col
         if user_id:
-            query = query.filter(Job.user_id == user_id)
+            query = query.where("user_id", "==", user_id)
 
-        query = query.order_by(Job.created_at.desc()).limit(limit)
-        jobs = query.all()
+        # Optional ordering, Firestore needs compound indexes for where+order_by sometimes,
+        # so let's just retrieve and sort. Or rely on index if existing.
+        query = query.limit(limit)
 
-        return [job.to_dict() for job in jobs]
+        docs = query.stream()
+        jobs = []
+        for doc in docs:
+            d = doc.to_dict()
+            d["id"] = doc.id
+            jobs.append(d)
+
+        # Sort in memory as fallback for lacking compound indexes
+        jobs.sort(key=lambda x: x.get("created_at", ""), reverse=True)
+        return jobs
 
     async def get_job(self, job_id: str) -> dict | None:
         """
         Retrieve a specific job by ID.
         """
-        job = self.db.query(Job).filter(Job.id == job_id).first()
-        return job.to_dict() if job else None
+        db = get_firestore()
+        doc = db.collection(self.collection_name).document(job_id).get()
+        if doc.exists:
+            d = doc.to_dict()
+            d["id"] = doc.id
+            return d
+        return None
 
     async def update_job(self, job_id: str, updates: dict) -> bool:
         """
         Update a job with new data.
         """
-        job = self.db.query(Job).filter(Job.id == job_id).first()
-        if not job:
+        db = get_firestore()
+        doc_ref = db.collection(self.collection_name).document(job_id)
+        if not doc_ref.get().exists:
             return False
 
-        for key, value in updates.items():
-            if hasattr(job, key):
-                setattr(job, key, value)
-            elif key == "metadata":
-                job.job_metadata = value
-
-        self.db.commit()
+        doc_ref.update(updates)
         return True
 
     async def delete_job(self, job_id: str) -> bool:
         """
         Delete a job from storage.
         """
-        job = self.db.query(Job).filter(Job.id == job_id).first()
-        if not job:
+        db = get_firestore()
+        doc_ref = db.collection(self.collection_name).document(job_id)
+        if not doc_ref.get().exists:
             return False
 
-        self.db.delete(job)
-        self.db.commit()
+        doc_ref.delete()
         return True
 
     def get_storage_mode(self) -> str:
         """Return the active backing store identifier."""
-        return "postgresql"
+        return "firestore"
 
     def get_stats(self) -> dict[str, int | str]:
         """Return lightweight storage metadata for monitoring endpoints."""
+        db = get_firestore()
+        # count is expensive but we can use aggregate query if needed
+        # Fallback to rough estimate or simply fetch
+        aggregation = db.collection(self.collection_name).count()
+        query = aggregation.get()
+        count_val = query[0][0].value if query else "unknown"
+
         return {
             "mode": self.get_storage_mode(),
-            "count": self.db.query(Job).count(),
+            "count": count_val,
         }
 
 
 # Helper for dependency injection
-def get_job_store(db: Session = Depends(get_db)) -> SQLAlchemyJobStore:
-    return SQLAlchemyJobStore(db)
-
-
-# Note: The singleton pattern with global _job_store is harder with DB sessions.
-# Recommended to use get_job_store as a FastAPI dependency.
+def get_job_store() -> FirestoreJobStore:
+    return FirestoreJobStore()

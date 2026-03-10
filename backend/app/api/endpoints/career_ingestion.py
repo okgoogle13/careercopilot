@@ -14,6 +14,7 @@ from app.core.database import get_db
 from app.core.dependencies import get_current_user
 from app.genkit_flows.ingestion_flow import ingest_career_history
 from app.models import User
+from app.models.database import MasterVersion
 from app.schemas.career_master import CareerDatabase
 from app.services.profile_persistence import persist_user_profile_snapshot
 
@@ -40,8 +41,31 @@ async def ingest_career_documents(
 
         career_db = ingest_career_history(full_text)
 
+        # Persist a versioned master snapshot for fast "has master" checks and quick-apply retrieval.
+        latest_version = (
+            db.query(MasterVersion)
+            .filter(MasterVersion.user_id == current_user.id)
+            .order_by(MasterVersion.version_number.desc())
+            .first()
+        )
+        next_version = (latest_version.version_number + 1) if latest_version else 1
+
+        db.query(MasterVersion).filter(MasterVersion.user_id == current_user.id).update(
+            {MasterVersion.is_active: False}, synchronize_session=False
+        )
+        db.add(
+            MasterVersion(
+                user_id=current_user.id,
+                version_number=next_version,
+                is_active=True,
+                source="career_ingestion",
+                content_snapshot=career_db.model_dump(by_alias=True),
+            )
+        )
+        db.commit()
+
         await persist_user_profile_snapshot(
-            db=db,
+            db=None,
             user_id=current_user.id,
             field_name="career_database",
             payload=career_db.model_dump(by_alias=True),

@@ -2,22 +2,21 @@ import hashlib
 import time
 
 from fastapi import APIRouter, Depends, HTTPException
-from sqlalchemy.orm import Session
 
-from app.core.database import get_db
 from app.core.dependencies import get_current_user_optional
+from app.core.firebase import get_firestore
 from app.genkit_flows.resume_audit import resumeAuditRKL
-from app.models.database import ResumeAudit, User
+from app.models.database import User
 from app.models.resume_audit_schemas import AuditRequest, AuditResponse, AuditResult
 
 router = APIRouter()
+COLLECTION_NAME = "resume_audits"
 
 
 @router.post("/evaluate", response_model=AuditResponse)
 async def evaluate_resume(
     request: AuditRequest,
     current_user: User | None = Depends(get_current_user_optional),
-    db: Session = Depends(get_db),
 ):
     """
     Evaluates a resume against the Resume Knowledge Library (RKL) using Gemini.
@@ -37,15 +36,20 @@ async def evaluate_resume(
         # Save to database
         resume_hash = hashlib.sha256(request.resumeText.encode("utf-8")).hexdigest()
 
-        audit_record = ResumeAudit(
-            user_id=current_user.id if current_user else None,
-            resume_hash=resume_hash,
-            audit_result=result.model_dump(),
-            strictness_mode=request.strictnessMode,
-            processing_time_ms=processing_time,
-        )
-        db.add(audit_record)
-        db.commit()
+        audit_record = {
+            "user_id": current_user.id if current_user else None,
+            "resume_hash": resume_hash,
+            "audit_result": result.model_dump(),
+            "strictness_mode": request.strictnessMode,
+            "processing_time_ms": processing_time,
+            "created_at": time.strftime("%Y-%m-%dT%H:%M:%S%z"),
+        }
+
+        db = get_firestore()
+        col = db.collection(COLLECTION_NAME)
+        doc_ref = col.document()
+        audit_record["id"] = doc_ref.id
+        doc_ref.set(audit_record)
 
         return AuditResponse(
             success=True,

@@ -1,5 +1,4 @@
 from fastapi import APIRouter, Depends, File, HTTPException, UploadFile
-from sqlalchemy.orm import Session
 
 from app.api.endpoints._shared import collect_uploaded_text, run_endpoint_operation
 from app.core.database import get_db
@@ -16,7 +15,6 @@ router = APIRouter()
 async def ingest_documents_endpoint(
     files: list[UploadFile] = File(...),
     current_user: User = Depends(get_current_user),
-    db: Session = Depends(get_db),
 ):
     """Upload PDFs, extract text, and structure the user's career data."""
 
@@ -26,7 +24,7 @@ async def ingest_documents_endpoint(
         result = await ingest_career_docs(IngestInput(raw_text=full_text))
 
         await persist_user_profile_snapshot(
-            db=db,
+            db=None,
             user_id=current_user.id,
             field_name="career_profile",
             payload=result.model_dump(),

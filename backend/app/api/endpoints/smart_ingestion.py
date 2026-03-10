@@ -108,7 +108,6 @@ async def upload_and_tag(
 async def extract_and_save(
     request: ExtractAndSaveRequest,
     current_user=Depends(get_current_user),
-    db: Session = Depends(get_db),
 ) -> ExtractAndSaveResponse:
     """Extract structured data from document and save to asset library."""
     user_id = str(current_user.id)
@@ -118,7 +117,7 @@ async def extract_and_save(
     )
 
     async def operation() -> ExtractAndSaveResponse:
-        asset_id, label = await extract_and_store_document(request, user_id, db)
+        asset_id, label = await extract_and_store_document(request, user_id)
 
         return ExtractAndSaveResponse(
             status="success",
