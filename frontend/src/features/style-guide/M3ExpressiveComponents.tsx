@@ -29,7 +29,7 @@ export function ArchetypeMorphPreviewer({ onInteraction }: { onInteraction?: () 
     },
     march: {
       base: 'var(--shape-pillMarch01)',
-      active: 'var(--shape-pebbleSurge01)',
+      active: 'var(--shape-marchSurge01)',
     },
     placard: {
       base: 'var(--shape-placardTorn01)',

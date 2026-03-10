@@ -1,11 +1,11 @@
-# Foundational Component Specs: Stone, Pebble, Slab
+# Foundational Component Specs: Megaphone Base, March Open, Placard Base
 
 This document defines the technical specifications for the three core geometric primitives of the Kerala Rage design system.
 
-## 1. The Stone (radius-stone)
+## 1. Megaphone Base (radius-megaphoneBase)
 The workhorse container for data, content cards, and navigation items.
 
-- **Geometry**: `border-radius: 12px` (radius-stone)
+- **Geometry**: `border-radius: 12px` (radius-megaphoneBase)
 - **Background**: `surface.container` (#2C2723) or `surface.containerLow` (#211F1C)
 - **Border**: `1px solid outline.variant` (#49454F)
 - **Elevation**: `shadow.viscous` (Custom multi-layered shadow using gumLeafGreen tint)
@@ -14,20 +14,20 @@ The workhorse container for data, content cards, and navigation items.
   - **Ghost**: Transparent background, 1px gold border.
   - **Active**: Scale 105%, inkGold border-glow.
 
-## 2. The Pebble (radius-pebble)
+## 2. March Open (radius-marchOpen)
 Small, interactive elements like buttons, chips, and inputs.
 
-- **Geometry**: `border-radius: 24px` (radius-pebble / Capsule)
+- **Geometry**: `border-radius: 24px` (radius-marchOpen / Capsule)
 - **Background**: `primary.DEFAULT` (#D4A84B / Ink Gold) for primary actions.
 - **Typography**: `Recursive 800 Solidarity` (14px-16px).
 - **Interactions**:
   - **Hover**: 2px solidarityRed underline or glow disk expansion.
   - **Active**: 4px inkGold halo shadow.
 
-## 3. The Slab (radius-slab)
+## 3. Placard Base (radius-placardBase)
 Large structural blocks for headlines, hero sections, and category headers.
 
-- **Geometry**: `border-radius: 4px` (radius-slab / Sharp but softened)
+- **Geometry**: `border-radius: 4px` (radius-placardBase / Sharp but softened)
 - **Background**: `surface.containerHighest` (#41403B)
 - **Typography**: `Display Hero` (Recursive 900 Slam, 72px-144px).
 - **Z-Layering**: Always Z-1.

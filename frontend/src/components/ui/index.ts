@@ -7,7 +7,7 @@
 export { Strike } from './Strike';
 export type { StrikeProps } from './Strike';
 
-/** Placard — Content container, framing. Solidarity structure. shape.slab01 */
+/** Placard — Content container, framing. Solidarity structure. shape.placardBase01 */
 export { Placard } from './Placard';
 export type { PlacardProps } from './Placard';
 
@@ -20,11 +20,11 @@ export type {
   ScaffoldInputSize,
 } from './ScaffoldInput';
 
-/** March — Sequential selection, collective flow. shape.block01 → shape.pebble01 morphs on open */
+/** March — Sequential selection, collective flow. shape.block01 → shape.marchOpen01 morphs on open */
 export { March } from './March';
 export type { MarchProps, MarchOption } from './March';
 
-/** Megaphone — Focal interruption, announcement. shape.stone01 → typeSpringSlam */
+/** Megaphone — Focal interruption, announcement. shape.megaphoneBase01 → typeSpringSlam */
 export { Megaphone } from './Megaphone';
 export type { MegaphoneProps } from './Megaphone';
 

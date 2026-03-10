@@ -79,8 +79,8 @@ export const NativeAnchor: React.FC<NativeAnchorProps> = ({
   };
 
   // Archetype Radii
-  const stoneRadius = 'var(--sys-shape-radius-stone)';
-  const slabRadius = 'var(--sys-shape-radius-slab)';
+  const stoneRadius = 'var(--sys-shape-radius-megaphoneBase)';
+  const slabRadius = 'var(--sys-shape-radius-placardBase)';
   const currentRadius = analyticalMode ? slabRadius : stoneRadius;
 
   return (

@@ -30,9 +30,9 @@ Backgrounds are never a "void"; they are the urban substrate. Surfaces must feel
 
 ### B. Defensive Geometries (The Hand-Cut Edge)
 Rejection of perfect geometry. We use asymmetric radii drawn from the base `radius.*` scale and the `shape.*` library. No uniform corner radius. No `border-radius: 50%`. The classic named geometries remain:
-- **Pebble** — `shape.pebbleSurge01` — `radius.xl radius.md radius.lg radius.xxl` — Active buttons, pill tags, nav chips.
-- **Stone** — `shape.megaphoneCut01` — `42% 58% 45% 55% / 48% 62% 38% 52%` — Expressive cards, hero anchors.
-- **Slab** — `shape.placardTorn01` — `48% 52% 58% 42% / 55% 45% 60% 40%` — Large sections, foundational blocks.
+- **March Open** — `shape.marchSurge01` — `radius.xl radius.md radius.lg radius.xxl` — Active buttons, pill tags, nav chips.
+- **Megaphone Base** — `shape.megaphoneCut01` — `42% 58% 45% 55% / 48% 62% 38% 52%` — Expressive cards, hero anchors.
+- **Placard Base** — `shape.placardTorn01` — `48% 52% 58% 42% / 55% 45% 60% 40%` — Large sections, foundational blocks.
 
 ### C. Shape & Protest Geometry
 
@@ -60,7 +60,7 @@ Six archetypes define the emotional and political role of UI elements:
 | Archetype | Role | Emotional Register | Shape Palette |
 | :--- | :--- | :--- | :--- |
 | **Strike** | Primary action, decisive CTA | Defiance, finality | `shape.blockRiot03` → `shape.blockRiot02` (active) |
-| **March** | Sequential progress, flow elements | Collective momentum | `shape.blockRiot01` → `shape.pebbleSurge01` (active) |
+| **March** | Sequential progress, flow elements | Collective momentum | `shape.blockRiot01` → `shape.marchSurge01` (active) |
 | **Megaphone** | Announcement, focal emphasis | Urgency, voice | `shape.megaphoneCut01` → `shape.substrateTile01` (ambient) |
 | **Placard** | Content container, framing | Solidarity structure | `shape.placardTorn01` → `shape.blockRiot02` (active) |
 | **Scaffold** | Layout structure, navigation | Neutral, load-bearing | `shape.blockRiot01` (immutable — no morph) |

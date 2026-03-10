@@ -51,7 +51,7 @@ const ARCHETYPE_MATRIX = [
     archetype: 'March',
     purpose: 'Sequential selection and progression controls',
     base: 'shape.blockRiot01',
-    active: 'shape.pebbleSurge01',
+    active: 'shape.marchSurge01',
     loading: 'shape.blockRiot02',
     ambient: '—',
     motion: 'dragSettle (800ms)',
@@ -80,7 +80,7 @@ const ARCHETYPE_MATRIX = [
   {
     archetype: 'Scaffold',
     purpose: 'Structural layout and form infrastructure',
-    base: 'shape.scaffoldSlab01 / shape.blockRiot02',
+    base: 'shape.scaffoldFrame01 / shape.blockRiot02',
     active: 'immutable',
     loading: 'immutable',
     ambient: '—',
@@ -150,7 +150,7 @@ const SHAPE_TOKENS = [
   '--sys-shape-blockRiot01',
   '--sys-shape-blockRiot02',
   '--sys-shape-blockRiot03',
-  '--sys-shape-pebbleSurge01',
+  '--sys-shape-marchSurge01',
   '--sys-shape-megaphoneCut01',
   '--sys-shape-placardTorn01',
 ] as const;
@@ -828,7 +828,7 @@ export function StyleGuide() {
                     </span>
                   </Placard>
                   <div className="text-[10px] font-mono space-y-1 px-2">
-                    <p className="text-primary font-bold">--sys-elevation2Stone</p>
+                    <p className="text-primary font-bold">--sys-elevation2Placard</p>
                     <p className="opacity-40 italic text-on-surface">
                       Standard interactive focus. Stone-like presence.
                     </p>

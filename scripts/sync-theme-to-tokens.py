@@ -24,6 +24,21 @@ TOKENS_FILE = PROJECT_ROOT / "frontend" / "src" / "design" / "tokens" / "tokens.
 LEGACY_CSS_FILE = PROJECT_ROOT / "frontend" / "src" / "styles" / "design-tokens.css"
 BUILD_SCRIPT = PROJECT_ROOT / "scripts" / "build-m3-tokens.py"
 
+LEGACY_SHAPE_ALIASES = {
+    "pebbleSurge01": "marchSurge01",
+    "pebbleSurge01-expanded": "marchSurge01-expanded",
+    "scaffoldSlab01": "scaffoldFrame01",
+    "scaffoldSlab01-focus": "scaffoldFrame01-focus",
+    "radius-pebble": "radius-marchOpen",
+    "radius-stone": "radius-megaphoneBase",
+    "radius-slab": "radius-placardBase",
+}
+
+LEGACY_SHADOW_ALIASES = {
+    "elevation1Pebble": "elevation1Strike",
+    "elevation2Stone": "elevation2Placard",
+}
+
 REQUIRED_BRAND_COLORS = {
     "charcoalBackground.base": "#1A1714",
     "solidarityRed.base": "#F14714",
@@ -108,6 +123,22 @@ def write_legacy_css(tokens: dict[str, Any]) -> None:
         base = _value(_get_path(color_root, f"{name}.base"))
         if isinstance(base, str):
             lines.append(f"  --sys-color-{name}-base: {base};\n")
+
+    lines.extend(
+        [
+            "\n",
+            "  /* One-release legacy archetype aliases */\n",
+            "  --shape-pebbleSurge01: var(--shape-marchSurge01);\n",
+            "  --shape-pebbleSurge01-expanded: var(--shape-marchSurge01-expanded);\n",
+            "  --shape-scaffoldSlab01: var(--shape-scaffoldFrame01);\n",
+            "  --shape-scaffoldSlab01-focus: var(--shape-scaffoldFrame01-focus);\n",
+            "  --radius-pebble: var(--shape-radius-marchOpen);\n",
+            "  --radius-stone: var(--shape-radius-megaphoneBase);\n",
+            "  --radius-slab: var(--shape-radius-placardBase);\n",
+            "  --sys-shadow-elevation1Pebble: var(--sys-shadow-elevation1Strike);\n",
+            "  --sys-shadow-elevation2Stone: var(--sys-shadow-elevation2Placard);\n",
+        ]
+    )
 
     lines.append("}\n")
     LEGACY_CSS_FILE.parent.mkdir(parents=True, exist_ok=True)

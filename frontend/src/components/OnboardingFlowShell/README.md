@@ -59,7 +59,7 @@ export interface OnboardingFlowShellProps {
 
 - Color tokens: `--sys-color-charcoalBackground-base`, `--sys-color-concreteGrey`, `--sys-color-inkGold-base`, `--sys-color-paperWhite`, `--sys-color-worker-ash-base`
 - Typography tokens: `--sys-type-font-fraunces`, `--sys-type-font-work-sans`
-- Shape tokens: `--sys-shape-blockRiot01`, `--sys-shape-blockRiot03`, `--sys-shape-scaffoldSlab01`, `--sys-shape-substrateTile02`
+- Shape tokens: `--sys-shape-blockRiot01`, `--sys-shape-blockRiot03`, `--sys-shape-scaffoldFrame01`, `--sys-shape-substrateTile02`
 - Z layers: `Z-0`, `Z-1`, `Z-2`, `Z-3`
 - Asset slots (present): `step1_background`, `step1_accent`, `role_icons`, `skill_icons`, `auto_kr_solid_004`, `auto_kr_solid_038`, `auto_kr_ui_010`, `auto_kr_ui_009`, `auto_kr_solid_032`, `auto_kr_ui_033`, `auto_kr_icon_003`
 

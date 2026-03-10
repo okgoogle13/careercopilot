@@ -25,10 +25,10 @@ export interface PlacardProps extends React.HTMLAttributes<HTMLDivElement> {
  * **THE PLACARD**
  *
  * Archetype: Placard — Content container and framing. Solidarity structure.
- * Shape palette: `shape.slab01` (base) → `shape.block02` (active/selected)
+ * Shape palette: `shape.placardBase01` (base) → `shape.block02` (active/selected)
  * Motion coupling: `dragSettle` (800ms, viscous-breeze)
  *
- * KR Shape Token: `--sys-shape-slab01` (organic % radii: `48% 52% 58% 42% / 55% 45% 60% 40%`)
+ * KR Shape Token: `--sys-shape-placardBase01` (organic % radii: `48% 52% 58% 42% / 55% 45% 60% 40%`)
  * A placard is held up in defiance. It contains a truth. It frames a demand.
  *
  * @example
@@ -40,7 +40,7 @@ export const Placard = React.forwardRef<HTMLDivElement, PlacardProps>(
   ({ className, elevation = 'raised', header, footer, children, ...props }, ref) => {
     const elevationShadows = {
       flat: 'none',
-      raised: 'var(--sys-elevation2Stone)',
+      raised: 'var(--sys-shadow-elevation2Placard)',
       floating: 'var(--sys-elevation4Float)',
     };
 

@@ -114,7 +114,7 @@ export const Mark = forwardRef<HTMLInputElement, MarkProps>(
         transition-all duration-standard var(--ease-viscous-breeze)
         ${className}
       `}
-          style={{ borderRadius: 'var(--shape-pebbleSurge01)' }}
+          style={{ borderRadius: 'var(--shape-marchSurge01)' }}
         >
           {/* Checkmark or Dash Icon */}
           {isChecked && (

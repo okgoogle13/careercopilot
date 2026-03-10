@@ -57,7 +57,7 @@ export interface KanbanBoardShellProps {
 
 - Color tokens: `--sys-color-charcoalBackground-base`
 - Typography tokens: `--sys-type-font-work-sans`
-- Shape tokens: `--sys-shape-megaphoneCut01`, `--sys-shape-placardTorn01`, `--sys-shape-scaffoldSlab01`
+- Shape tokens: `--sys-shape-megaphoneCut01`, `--sys-shape-placardTorn01`, `--sys-shape-scaffoldFrame01`
 - Z layers: `Z-0`, `Z-1`, `Z-2`, `Z-3`
 - Asset slots (present): `auto_kr_solid_004`, `auto_kr_solid_011`, `auto_kr_solid_026`, `auto_kr_solid_009`, `auto_kr_ui_017`, `auto_kr_ui_014`, `auto_kr_ui_026`, `auto_kr_ui_037`, `auto_kr_solid_045`
 

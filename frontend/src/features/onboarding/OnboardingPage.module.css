@@ -32,7 +32,7 @@
 .leafCard {
   background: rgba(44, 39, 35, 0.4);
   border: 1px solid rgba(230, 225, 214, 0.1);
-  border-radius: var(--shape-pebbleSurge01);
+  border-radius: var(--shape-marchSurge01);
   padding: 2rem;
   display: flex;
   flex-direction: column;

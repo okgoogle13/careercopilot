@@ -15,7 +15,7 @@ export const KrDarkDock: React.FC<KrDarkDockProps> = ({ currentView, onViewChang
 
   return (
     <motion.nav
-      className="fixed bottom-8 left-1/2 z-50 flex -translate-x-1/2 items-center gap-4 rounded-[var(--radius-pebble)] border border-ink-gold/25 bg-surface-KrDark-slate-smoke-high/80 px-6 py-3 backdrop-blur-3xl"
+      className="fixed bottom-8 left-1/2 z-50 flex -translate-x-1/2 items-center gap-4 rounded-[var(--radius-march-open)] border border-ink-gold/25 bg-surface-KrDark-slate-smoke-high/80 px-6 py-3 backdrop-blur-3xl"
       initial={{ y: 100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{
@@ -31,7 +31,7 @@ export const KrDarkDock: React.FC<KrDarkDockProps> = ({ currentView, onViewChang
             key={item.id}
             onClick={() => onViewChange(item.id)}
             className={`
-              px-4 py-2 text-sm font-primary font-medium rounded-[var(--radius-pebble)] transition-all
+              px-4 py-2 text-sm font-primary font-medium rounded-[var(--radius-march-open)] transition-all
               ${
                 isActive
                   ? 'bg-ink-gold text-surface-asphalt-black-base shadow-elevated'

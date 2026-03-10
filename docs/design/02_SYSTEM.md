@@ -76,15 +76,15 @@ Reusable, named shapes. Each shape carries no inherent meaning — archetypes as
 | `shape.block02` | `--sys-shape-block02` | `radius.xl radius.sm radius.lg radius.xs` → `20px 4px 12px 2px` | **Core UI** |
 | `shape.block03` | `--sys-shape-block03` | `radius.xxl radius.xs radius.xs radius.xs` → `32px 2px 2px 2px` | **Core UI** |
 | `shape.pill01` | `--sys-shape-pill01` | `radius.full` → `9999px` (all corners) | **Core UI** |
-| `shape.pebble01` | `--sys-shape-pebble01` | `radius.xl radius.md radius.lg radius.xxl` → `20px 8px 12px 32px` | **Core UI** |
-| `shape.stone01` | `--sys-shape-stone01` | `42% 58% 45% 55% / 48% 62% 38% 52%` (organic % radii) | **Core UI** |
-| `shape.slab01` | `--sys-shape-slab01` | `48% 52% 58% 42% / 55% 45% 60% 40%` (organic % radii) | **Core UI** |
+| `shape.marchOpen01` | `--sys-shape-marchOpen01` | `radius.xl radius.md radius.lg radius.xxl` → `20px 8px 12px 32px` | **Core UI** |
+| `shape.megaphoneBase01` | `--sys-shape-megaphoneBase01` | `42% 58% 45% 55% / 48% 62% 38% 52%` (organic % radii) | **Core UI** |
+| `shape.placardBase01` | `--sys-shape-placardBase01` | `48% 52% 58% 42% / 55% 45% 60% 40%` (organic % radii) | **Core UI** |
 | `shape.blob01` | `--sys-shape-blob01` | `60% 40% 30% 70% / 60% 30% 70% 40%` | **Decorative** |
 | `shape.blob02` | `--sys-shape-blob02` | `40% 60% 70% 30% / 40% 50% 60% 50%` | **Decorative** |
 
 > **Tier rules:** **Core UI** shapes are available to all archetype contexts. **Decorative** shapes (`shape.blob*`) are restricted to Substrate archetype, avatar masks, and hero frame backgrounds. All other uses require explicit whitelist.
 
-**Legacy tokens** (`radius-stone`, `radius-slab`, `radius-pebble`, `sentryAvatar`, `tornEdgeClipPath`) remain valid. They map to their `shape.*` equivalents and will be gradually migrated.
+**Compatibility aliases** remain valid for one release only. Prefer `radius-megaphoneBase`, `radius-placardBase`, `radius-marchOpen`, `sentryAvatar`, and `tornEdgeClipPath`.
 
 ---
 
@@ -95,9 +95,9 @@ Each archetype defines a shape palette (not a single locked shape) and morph sta
 | Archetype | Base Shape | Active / Selected | In-Progress | Ambient | Motion Coupling |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **Strike** | `shape.block03` | `shape.block02` | `shape.pill01` | — | `typeSpringSlam` (600ms) |
-| **March** | `shape.block01` | `shape.pebble01` | `shape.block02` | — | `dragSettle` (800ms) |
-| **Megaphone** | `shape.stone01` | `shape.stone01` | `shape.slab01` | `shape.blob01` | `typeSpringSlam` (600ms) |
-| **Placard** | `shape.slab01` | `shape.block02` | `shape.block03` | — | `dragSettle` (800ms) |
+| **March** | `shape.block01` | `shape.marchOpen01` | `shape.block02` | — | `dragSettle` (800ms) |
+| **Megaphone** | `shape.megaphoneBase01` | `shape.megaphoneBase01` | `shape.placardBase01` | `shape.blob01` | `typeSpringSlam` (600ms) |
+| **Placard** | `shape.placardBase01` | `shape.block02` | `shape.block03` | — | `dragSettle` (800ms) |
 | **Scaffold** | `shape.block01` | `shape.block01` | `shape.block01` | — | none (static) |
 | **Substrate** | `shape.blob02` | — | — | `shape.blob01` | `waterRipple` (3000ms) |
 
@@ -124,9 +124,9 @@ Each archetype defines a shape palette (not a single locked shape) and morph sta
 
 | Name | Mapped Token | Shape Token Equivalent |
 | :--- | :--- | :--- |
-| **Pebble** | `radius-pebble` | `shape.pebble01` |
-| **Stone** | `radius-stone` | `shape.stone01` |
-| **Slab** | `radius-slab` | `shape.slab01` |
+| **March Open** | `radius-marchOpen` | `shape.marchOpen01` |
+| **Megaphone Base** | `radius-megaphoneBase` | `shape.megaphoneBase01` |
+| **Placard Base** | `radius-placardBase` | `shape.placardBase01` |
 | **Sentry Avatar** | `sentryAvatar` (`98%`) | No equivalent (use direct) |
 | **Torn Edge** | `tornEdgeClipPath` | No equivalent (clip-path, not radius) |
 

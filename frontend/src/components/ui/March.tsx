@@ -40,11 +40,11 @@ export interface MarchProps {
  * **THE MARCH**
  *
  * Archetype: March — Sequential selection, collective choice, flow elements.
- * Shape palette: `shape.block01` (base) → `shape.pebble01` (active/open)
+ * Shape palette: `shape.block01` (base) → `shape.marchOpen01` (active/open)
  * Motion coupling: `dragSettle` (800ms, viscous-breeze)
  *
  * KR Shape Token: `--sys-shape-block01` (`8px 2px 8px 2px`) closed
- * → `--sys-shape-pebble01` (`20px 8px 12px 32px`) when open (shape morph on interaction)
+ * → `--sys-shape-marchOpen01` (`20px 8px 12px 32px`) when open (shape morph on interaction)
  *
  * A march moves through orderly progression. Each option is a comrade in sequence.
  *
@@ -201,9 +201,9 @@ export function March({
     }
   };
 
-  // Shape morphs: block01 (closed) → pebble01 (open) — March archetype interaction morph
+  // Shape morphs: block01 (closed) → marchOpen01 (open) — March archetype interaction morph
   const buttonStyle: React.CSSProperties = {
-    borderRadius: isOpen ? 'var(--sys-shape-pebbleSurge01)' : 'var(--sys-shape-blockRiot01)',
+    borderRadius: isOpen ? 'var(--sys-shape-marchSurge01)' : 'var(--sys-shape-blockRiot01)',
     backgroundColor: 'var(--sys-color-charcoalBackground-steps-3)',
     border: '2px solid',
     borderColor: error

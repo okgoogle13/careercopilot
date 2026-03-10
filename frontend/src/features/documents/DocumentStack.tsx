@@ -104,10 +104,10 @@ export const DocumentStack: React.FC = () => {
           return (
             <div
               key={doc.id}
-              className="p-4 flex items-center gap-6 rounded-[var(--radius-stone)] border border-outline-variant/30 bg-surface-KrDark-slate-smoke-low/20 group hover:bg-surface-KrDark-slate-smoke-low/50 transition-colors"
+              className="p-4 flex items-center gap-6 rounded-[var(--radius-megaphone-base)] border border-outline-variant/30 bg-surface-KrDark-slate-smoke-low/20 group hover:bg-surface-KrDark-slate-smoke-low/50 transition-colors"
             >
               {/* Icon Container */}
-              <div className="w-12 h-12 rounded-[var(--radius-stone)] bg-surface-KrDark-slate-smoke-highest flex items-center justify-center border border-outline-variant/30">
+              <div className="w-12 h-12 rounded-[var(--radius-megaphone-base)] bg-surface-KrDark-slate-smoke-highest flex items-center justify-center border border-outline-variant/30">
                 <Icon className="w-6 h-6 text-on-surface-paper-white opacity-70" />
               </div>
 
@@ -170,7 +170,7 @@ export const DocumentStack: React.FC = () => {
       </div>
 
       {/* Upload Drop Zone Placeholder */}
-      <div className="border-2 border-dashed border-outline-variant/20 rounded-[var(--radius-stone)] p-12 flex flex-col items-center justify-center text-secondary-flannel-dim hover:border-primary-ink-gold/30 hover:bg-surface-KrDark-slate-smoke-low/20 transition-all cursor-pointer">
+      <div className="border-2 border-dashed border-outline-variant/20 rounded-[var(--radius-megaphone-base)] p-12 flex flex-col items-center justify-center text-secondary-flannel-dim hover:border-primary-ink-gold/30 hover:bg-surface-KrDark-slate-smoke-low/20 transition-all cursor-pointer">
         <Upload className="w-12 h-12 mb-4 opacity-50" />
         <p className="text-title-medium font-bold text-on-surface-paper-white">
           Drag and drop files here

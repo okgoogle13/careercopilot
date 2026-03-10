@@ -685,15 +685,15 @@
         "description": "Morph: pillMarch01 press state. CSS: --shape-pillMarch01-pressed"
       },
 
-      "pebbleSurge01": {
+      "marchSurge01": {
         "value": "20px 8px 12px 32px",
         "type": "dimension",
-        "description": "Tier:Core UI. March (open/active morph). Composed: xl md lg xxl. CSS: --shape-pebbleSurge01"
+        "description": "Tier:Core UI. March (open/active morph). Composed: xl md lg xxl. CSS: --shape-marchSurge01"
       },
-      "pebbleSurge01-expanded": {
+      "marchSurge01-expanded": {
         "value": "32px 12px 8px 48px",
         "type": "dimension",
-        "description": "Morph: pebbleSurge01 fully expanded. CSS: --shape-pebbleSurge01-expanded"
+        "description": "Morph: marchSurge01 fully expanded. CSS: --shape-marchSurge01-expanded"
       },
 
       "alertShard01": {
@@ -707,15 +707,15 @@
         "description": "Morph: alertShard01 on press. CSS: --shape-alertShard01-pressed"
       },
 
-      "scaffoldSlab01": {
+      "scaffoldFrame01": {
         "value": "8px 2px 8px 2px",
         "type": "dimension",
-        "description": "Tier:Core UI. Scaffold archetype (inputs, structural elements). IMMUTABLE — never morphs. CSS: --shape-scaffoldSlab01"
+        "description": "Tier:Core UI. Scaffold archetype (inputs, structural elements). IMMUTABLE — never morphs. CSS: --shape-scaffoldFrame01"
       },
-      "scaffoldSlab01-focus": {
+      "scaffoldFrame01-focus": {
         "value": "8px 2px 8px 2px",
         "type": "dimension",
-        "description": "Morph: scaffoldSlab01 focus (unchanged — Scaffold invariance). CSS: --shape-scaffoldSlab01-focus"
+        "description": "Morph: scaffoldFrame01 focus (unchanged — Scaffold invariance). CSS: --shape-scaffoldFrame01-focus"
       },
 
       "megaphoneCut01": {
@@ -791,17 +791,17 @@
         "type": "dimension",
         "description": "[DEPRECATED v6.1: use pillMarch01]"
       },
-      "pebble01": {
+      "marchOpen01": {
         "value": "20px 8px 12px 32px",
         "type": "dimension",
-        "description": "[DEPRECATED v6.1: use pebbleSurge01]"
+        "description": "[DEPRECATED v6.1: use marchSurge01]"
       },
-      "stone01": {
+      "megaphoneBase01": {
         "value": "42% 58% 45% 55% / 48% 62% 38% 52%",
         "type": "dimension",
         "description": "[DEPRECATED v6.1: use megaphoneCut01]"
       },
-      "slab01": {
+      "placardBase01": {
         "value": "48% 52% 58% 42% / 55% 45% 60% 40%",
         "type": "dimension",
         "description": "[DEPRECATED v6.1: use placardTorn01]"
@@ -816,20 +816,20 @@
         "type": "dimension",
         "description": "[DEPRECATED v6.1: use substrateTile02]"
       },
-      "radius-stone": {
+      "radius-megaphoneBase": {
         "value": "42% 58% 45% 55% / 48% 62% 38% 52%",
         "type": "dimension",
         "description": "[DEPRECATED v6.0: use megaphoneCut01]"
       },
-      "radius-slab": {
+      "radius-placardBase": {
         "value": "48% 52% 58% 42% / 55% 45% 60% 40%",
         "type": "dimension",
         "description": "[DEPRECATED v6.0: use placardTorn01]"
       },
-      "radius-pebble": {
+      "radius-marchOpen": {
         "value": "20px 8px 12px 32px",
         "type": "dimension",
-        "description": "[DEPRECATED v6.0: use pebbleSurge01]"
+        "description": "[DEPRECATED v6.0: use marchSurge01]"
       },
       "sentryAvatar": {
         "value": "98%",
@@ -885,12 +885,12 @@
           "description": "pill w/ side notch on press"
         },
         "shape.open": {
-          "value": "pebbleSurge01",
+          "value": "marchSurge01",
           "type": "string",
           "description": "20px 8px 12px 32px open morph"
         },
         "shape.expanded": {
-          "value": "pebbleSurge01-expanded",
+          "value": "marchSurge01-expanded",
           "type": "string",
           "description": "32px 12px 8px 48px fully open"
         },
@@ -937,12 +937,12 @@
       },
       "scaffold": {
         "shape.base": {
-          "value": "scaffoldSlab01",
+          "value": "scaffoldFrame01",
           "type": "string",
           "description": "8px 2px 8px 2px — IMMUTABLE"
         },
         "shape.focus": {
-          "value": "scaffoldSlab01-focus",
+          "value": "scaffoldFrame01-focus",
           "type": "string",
           "description": "Unchanged — Scaffold invariance"
         },
@@ -970,15 +970,15 @@
       }
     },
     "shadow": {
-      "elevation1Pebble": {
+      "elevation1Strike": {
         "value": "0 2px 4px rgba(0, 0, 0, 0.25)",
         "type": "shadow",
-        "description": "Small interactive elements (chips, small buttons)."
+        "description": "Strike depth for small interactive elements (chips, small buttons)."
       },
-      "elevation2Stone": {
+      "elevation2Placard": {
         "value": "0 4px 8px rgba(0, 0, 0, 0.35)",
         "type": "shadow",
-        "description": "Default card/panel depth."
+        "description": "Placard depth for default cards and panels."
       },
       "elevation3HoverLift": {
         "value": "0 8px 16px rgba(0, 0, 0, 0.45)",

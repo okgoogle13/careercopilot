@@ -53,7 +53,7 @@ export interface FinalizationPageShellProps {
 
 - Color tokens: `--sys-color-charcoalBackground-base`, `--sys-color-inkGold-base`, `--sys-color-worker-ash-base`
 - Typography tokens: `--sys-type-font-work-sans`
-- Shape tokens: `--sys-shape-blockRiot03`, `--sys-shape-placardTorn01`, `--sys-shape-scaffoldSlab01`
+- Shape tokens: `--sys-shape-blockRiot03`, `--sys-shape-placardTorn01`, `--sys-shape-scaffoldFrame01`
 - Z layers: `Z-1`, `Z-2`, `Z-3`
 - Asset slots (present): `auto_kr_solid_006`, `auto_kr_solid_013`, `auto_kr_solid_028`, `auto_kr_solid_033`, `auto_kr_ui_002`, `auto_kr_ui_018`, `auto_kr_ui_028`, `auto_kr_solid_041`
 

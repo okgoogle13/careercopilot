@@ -21,10 +21,10 @@ export interface MegaphoneProps {
  * **THE MEGAPHONE**
  *
  * Archetype: Megaphone — Announcement, focal interruption, urgency.
- * Shape palette: `shape.stone01` (base) → ambient `shape.blob01` on background
+ * Shape palette: `shape.megaphoneBase01` (base) → ambient `shape.blob01` on background
  * Motion coupling: `typeSpringSlam` (600ms) on entrance
  *
- * KR Shape Token: Uses `Placard` (shape.slab01) as the inner container.
+ * KR Shape Token: Uses `Placard` (shape.placardBase01) as the inner container.
  * The Megaphone cuts through the noise. It demands attention.
  * It does not ask — it announces.
  *

@@ -53,7 +53,7 @@ export interface IngestionPageShellProps {
 
 - Color tokens: `--sys-color-charcoalBackground-base`, `--sys-color-inkGold-base`, `--sys-color-paperWhite`
 - Typography tokens: `--sys-type-font-fraunces`, `--sys-type-font-work-sans`
-- Shape tokens: `--sys-shape-blockRiot03`, `--sys-shape-placardTorn01`, `--sys-shape-scaffoldSlab01`
+- Shape tokens: `--sys-shape-blockRiot03`, `--sys-shape-placardTorn01`, `--sys-shape-scaffoldFrame01`
 - Z layers: `Z-0`, `Z-1`, `Z-2`, `Z-3`
 - Asset slots (present): `background`, `icon_pdf`, `icon_docx`, `icon_upload`, `auto_kr_solid_005`, `auto_kr_solid_039`, `auto_kr_ui_011`, `auto_kr_ui_010`, `auto_kr_ui_023`, `auto_kr_ui_034`, `auto_kr_icon_004`
 
