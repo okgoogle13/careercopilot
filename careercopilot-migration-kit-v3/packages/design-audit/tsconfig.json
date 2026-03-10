@@ -1,0 +1,9 @@
+{
+  "extends": "../shared-config/tsconfig.base.json",
+  "compilerOptions": {
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "lib": ["ES2022"]
+  },
+  "include": ["src", "../../tools/design-audit/bin/**/*.ts"]
+}

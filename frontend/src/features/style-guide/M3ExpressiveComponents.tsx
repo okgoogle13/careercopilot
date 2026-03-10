@@ -97,7 +97,7 @@ export function ArchetypeMorphPreviewer({ onInteraction }: { onInteraction?: () 
 
         <div className="space-y-3">
           <p className="text-sm font-bold text-ink-gold font-display">Active Contract</p>
-          <div className="bg-surface-dim p-4 rounded-pebble text-[10px] font-mono space-y-2 border border-outline/20">
+          <div className="bg-surface-dim p-4 rounded-strike text-[10px] font-mono space-y-2 border border-outline/20">
             <div className="flex justify-between border-b border-outline/10 pb-1">
               <span className="opacity-50">easing</span>
               <span className="text-primary truncate ml-4">{MOTION_CONTRACTS.easing}</span>
@@ -159,7 +159,7 @@ export function TypographyAxisValidator({ onInteraction }: { onInteraction?: () 
           </div>
         </div>
 
-        <div className="space-y-6 bg-surface-dim/50 p-6 rounded-pebble border border-outline/20">
+        <div className="space-y-6 bg-surface-dim/50 p-6 rounded-strike border border-outline/20">
           <div className="space-y-4">
             <div className="space-y-2">
               <div className="flex justify-between text-[10px] font-mono uppercase tracking-tighter">
@@ -296,7 +296,7 @@ export function LayoutSlopAuditor({ onInteraction }: { onInteraction?: () => voi
         </Strike>
       </div>
 
-      <div className="flex gap-2 p-1 bg-surface-dim rounded-pebble border border-outline/20 w-fit">
+      <div className="flex gap-2 p-1 bg-surface-dim rounded-strike border border-outline/20 w-fit">
         <button
           type="button"
           onClick={() => {
@@ -304,7 +304,7 @@ export function LayoutSlopAuditor({ onInteraction }: { onInteraction?: () => voi
             setViolations([]);
             baselineRef.current = null;
           }}
-          className={`px-4 py-1.5 rounded-pebble text-[10px] font-bold uppercase transition-all ${testType === 'correct' ? 'bg-primary text-on-primary shadow-sm' : 'text-on-surface/60 hover:text-on-surface'}`}
+          className={`px-4 py-1.5 rounded-strike text-[10px] font-bold uppercase transition-all ${testType === 'correct' ? 'bg-primary text-on-primary shadow-sm' : 'text-on-surface/60 hover:text-on-surface'}`}
         >
           Optimal (GRAD)
         </button>
@@ -315,7 +315,7 @@ export function LayoutSlopAuditor({ onInteraction }: { onInteraction?: () => voi
             setViolations([]);
             baselineRef.current = null;
           }}
-          className={`px-4 py-1.5 rounded-pebble text-[10px] font-bold uppercase transition-all ${testType === 'wrong' ? 'bg-error text-on-error shadow-sm' : 'text-on-surface/60 hover:text-on-surface'}`}
+          className={`px-4 py-1.5 rounded-strike text-[10px] font-bold uppercase transition-all ${testType === 'wrong' ? 'bg-error text-on-error shadow-sm' : 'text-on-surface/60 hover:text-on-surface'}`}
         >
           Sloppy (Weight)
         </button>
@@ -364,7 +364,7 @@ export function LayoutSlopAuditor({ onInteraction }: { onInteraction?: () => voi
 
         <div
           className={cn(
-            'p-5 rounded-pebble border transition-all duration-500 flex flex-col gap-4',
+            'p-5 rounded-strike border transition-all duration-500 flex flex-col gap-4',
             violations.length
               ? 'bg-error/5 border-error/40'
               : isMonitoring
@@ -427,17 +427,17 @@ export function MotionContractPanel() {
         Canonical Motion Contracts
       </h3>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs font-mono">
-        <div className="bg-surface-dim p-3 rounded-pebble border border-outline">
+        <div className="bg-surface-dim p-3 rounded-strike border border-outline">
           typeSpringSlam: 600ms
         </div>
-        <div className="bg-surface-dim p-3 rounded-pebble border border-outline">
+        <div className="bg-surface-dim p-3 rounded-strike border border-outline">
           dragSettle: 800ms
         </div>
-        <div className="bg-surface-dim p-3 rounded-pebble border border-outline">
+        <div className="bg-surface-dim p-3 rounded-strike border border-outline">
           waterRipple: 3000ms
         </div>
       </div>
-      <div className="bg-surface-dim p-3 rounded-pebble border border-outline text-xs font-mono">
+      <div className="bg-surface-dim p-3 rounded-strike border border-outline text-xs font-mono">
         easing: {MOTION_CONTRACTS.easing}
       </div>
     </div>

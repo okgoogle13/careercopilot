@@ -1,0 +1,19 @@
+{
+  "name": "careercopilot-migration-kit-v3",
+  "private": true,
+  "workspaces": ["apps/*", "packages/*"],
+  "scripts": {
+    "dev": "node ../node_modules/turbo/bin/turbo run dev",
+    "build": "node ../node_modules/vite/bin/vite.js build apps/web --config apps/web/vite.config.ts",
+    "lint": "node ../node_modules/eslint/bin/eslint.js apps/web/src tools tools/design-audit/bin packages/design-audit/src packages/eslint-plugin-kerala-rage --config eslint.config.mjs --max-warnings 0",
+    "type-check": "node ../node_modules/typescript/bin/tsc -p apps/web/tsconfig.json --noEmit && node ../node_modules/typescript/bin/tsc -p packages/design-audit/tsconfig.json --noEmit",
+    "design-audit": "node --import ../node_modules/tsx/dist/loader.mjs tools/design-audit/bin/audit-design-compliance.ts --root .",
+    "audit:legacy": "node --import ../node_modules/tsx/dist/loader.mjs tools/design-audit/bin/audit-legacy.ts --root .",
+    "test:factory": "node --import ../node_modules/tsx/dist/loader.mjs --test tools/*.test.js",
+    "test": "node ../node_modules/vitest/vitest.mjs run --config vitest.config.ts && node --test packages/eslint-plugin-kerala-rage/tests/*.test.js && node --import ../node_modules/tsx/dist/loader.mjs --test tools/*.test.js",
+    "verify": "npm run lint && npm run type-check && npm run test && npm run design-audit",
+    "migrate:screen": "node tools/migrate-screen.js",
+    "generate:wireframe": "node tools/generate-wireframe.js"
+  },
+  "packageManager": "yarn@4.10.3"
+}

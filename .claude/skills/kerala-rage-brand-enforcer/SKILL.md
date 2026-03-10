@@ -1,6 +1,10 @@
 ---
-name: kr-solidarity-brand-enforcer
+name: kerala-rage-brand-enforcer
 description: Enforce KR Solidarity brand compliance across code and design artifacts with deterministic rule IDs and structured JSON output.
+commands:
+  - /brand-check
+  - /enforce-brand
+  - /kr-check
 metadata:
   version: 6.2.0
   tags:
@@ -54,6 +58,27 @@ Deterministic rule IDs:
 ```bash
 python3 .claude/skills/kerala-rage-brand-enforcer/scripts/enforce_brand.py frontend/src --context code --min-score 90
 ```
+
+### Via slash command
+
+```bash
+/brand-check frontend/src
+/kr-check frontend/src/components --min-score 95
+/enforce-brand . --fail-on high
+```
+
+### Via skill tool
+
+```bash
+claude-code --skill kerala-rage-brand-enforcer --path frontend/src
+```
+
+Arguments:
+- `path` required: file or directory to scan
+- `--min-score`: minimum passing score, default `90`
+- `--fail-on`: `critical | high | medium | low`, default `high`
+- `--output`: optional output file path, default `brand-enforcement-report.json`
+- `--context`: `code | screenshot | markdown`, default `code`
 
 ## Edge Cases
 
