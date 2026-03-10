@@ -18,6 +18,7 @@ import { loadHeroRegistry } from '../../design/hero/heroRegistry';
 import { resolvePageHeroComposition } from '../../design/hero/pageHeroMap';
 import { composeHero } from '../../lib/composeHero';
 import { PageHeader } from '../../components/shared/PageHeader';
+import { EmptyState } from '@/components/ui/EmptyState';
 
 // Assets
 const atmosphericOverlay =
@@ -163,44 +164,55 @@ export function ApplicationTracker() {
         />
 
         {/* Kanban lanes */}
-        <div className="flex gap-6 overflow-x-auto pb-8 snap-x">
-          {STAGES.map((stage) => (
-            <div
-              key={stage.id}
-              className="flex-shrink-0 w-80 snap-start"
-            >
-              <div className="mb-6 px-2">
-                <div className="flex items-center justify-between mb-1">
-                  <h3 className="font-display text-lg font-black text-paper-white uppercase tracking-tighter flex items-center gap-2">
-                    <stage.icon className="w-4 h-4 text-ink-gold" />
-                    {stage.name}
-                  </h3>
-                  <span className="font-mono text-[9px] text-concrete-grey bg-concrete-grey/5 px-2 py-0.5 border border-concrete-grey/10">
-                    {applications.filter((a) => a.stage === stage.id).length} UNITS
-                  </span>
+        {applications.length === 0 ? (
+          <EmptyState
+            icon={FileText}
+            title="No applications yet"
+            description="Track every role you apply to. Start by generating your first application pack."
+            ctaLabel="Add your first application →"
+            ctaHref="/apply/quick"
+            className="border-concrete-grey/25 bg-asphalt-black/35"
+          />
+        ) : (
+          <div className="flex gap-6 overflow-x-auto pb-8 snap-x">
+            {STAGES.map((stage) => (
+              <div
+                key={stage.id}
+                className="flex-shrink-0 w-80 snap-start"
+              >
+                <div className="mb-6 px-2">
+                  <div className="flex items-center justify-between mb-1">
+                    <h3 className="font-display text-lg font-black text-paper-white uppercase tracking-tighter flex items-center gap-2">
+                      <stage.icon className="w-4 h-4 text-ink-gold" />
+                      {stage.name}
+                    </h3>
+                    <span className="font-mono text-[9px] text-concrete-grey bg-concrete-grey/5 px-2 py-0.5 border border-concrete-grey/10">
+                      {applications.filter((a) => a.stage === stage.id).length} UNITS
+                    </span>
+                  </div>
+                  <p className="font-mono text-[10px] text-concrete-grey uppercase tracking-[0.2em] opacity-60">
+                    {stage.description}
+                  </p>
                 </div>
-                <p className="font-mono text-[10px] text-concrete-grey uppercase tracking-[0.2em] opacity-60">
-                  {stage.description}
-                </p>
-              </div>
 
-              <div className="space-y-4 min-h-[500px] rounded-placard border border-dashed border-concrete-grey/5 bg-bark-light/[0.02] p-2">
-                {applications
-                  .filter((app) => app.stage === stage.id)
-                  .map((app) => (
-                    <ApplicationLeaf
-                      key={app.id}
-                      application={app}
-                    />
-                  ))}
+                <div className="space-y-4 min-h-[500px] rounded-placard border border-dashed border-concrete-grey/5 bg-bark-light/[0.02] p-2">
+                  {applications
+                    .filter((app) => app.stage === stage.id)
+                    .map((app) => (
+                      <ApplicationLeaf
+                        key={app.id}
+                        application={app}
+                      />
+                    ))}
 
-                <button className="w-full py-4 border border-dashed border-[var(--sys-color-concreteGrey-steps-1)] rounded-megaphone flex items-center justify-center text-[var(--sys-color-concreteGrey-base)]/50 hover:border-[var(--sys-color-inkGold-base)]/40 hover:text-[var(--sys-color-inkGold-base)] transition-all group">
-                  <Plus className="w-5 h-5 group-hover:rotate-90 transition-transform" />
-                </button>
+                  <button className="w-full py-4 border border-dashed border-[var(--sys-color-concreteGrey-steps-1)] rounded-megaphone flex items-center justify-center text-[var(--sys-color-concreteGrey-base)]/50 hover:border-[var(--sys-color-inkGold-base)]/40 hover:text-[var(--sys-color-inkGold-base)] transition-all group">
+                    <Plus className="w-5 h-5 group-hover:rotate-90 transition-transform" />
+                  </button>
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

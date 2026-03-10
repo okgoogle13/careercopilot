@@ -45,7 +45,14 @@ export function OnboardingProgress({ currentStep, totalSteps, steps }: Onboardin
                 `}
                 aria-current={isActive ? 'step' : undefined}
               >
-                {isComplete ? <Check className="w-4 h-4" strokeWidth={3} /> : stepNumber}
+                {isComplete ? (
+                  <Check
+                    className="w-4 h-4"
+                    strokeWidth={3}
+                  />
+                ) : (
+                  stepNumber
+                )}
               </div>
               <span
                 className={`

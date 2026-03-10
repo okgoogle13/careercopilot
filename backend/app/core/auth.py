@@ -3,16 +3,13 @@ Authentication system using Firebase ID tokens.
 """
 
 import logging
-import os
 from datetime import datetime, timedelta
 from typing import Any
 
 from fastapi import Depends, HTTPException, status
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
-from sqlalchemy.orm import Session
 
-from app.core.database import get_db
-from app.core.firebase import verify_id_token
+from app.core.firebase import get_firestore, verify_id_token
 from app.models import User
 
 logger = logging.getLogger(__name__)
@@ -35,11 +32,10 @@ auth_manager = AuthManager()
 
 async def get_current_user(
     credentials: HTTPAuthorizationCredentials | None = Depends(security),
-    db: Session = Depends(get_db),
 ) -> User:
     """
     FastAPI dependency to get current authenticated user from Firebase ID token.
-    Validates the Firebase Token and ensures the user exists in our local cache (users table).
+    Validates the Firebase Token and ensures the user exists in Firestore.
     """
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
@@ -61,32 +57,32 @@ async def get_current_user(
         if not isinstance(user_id, str):
             raise credentials_exception
 
-        # Sync user with local database (Just-In-Time Provisioning)
-        user = db.query(User).filter(User.id == user_id).first()
-        if user is None:
-            # Extract metadata for JIT provisioning
-            email = payload.get("email")
-            # Firebase stores name directly or in 'name'
-            name = payload.get("name") or email.split("@")[0] if email else "Firebase User"
+        email = payload.get("email")
+        if not email:
+            logger.error(f"Token for {user_id} missing email, required for provisioning")
+            raise credentials_exception
 
-            if not email:
-                logger.error(f"Token for {user_id} missing email, required for provisioning")
-                raise credentials_exception
+        name = payload.get("name") or email.split("@")[0] if email else "Firebase User"
 
+        db = get_firestore()
+        col = db.collection("users")
+        doc_ref = col.document(user_id)
+        doc = doc_ref.get()
+
+        if not doc.exists:
             logger.info(f"Provisioning new user record for {email} ({user_id})")
-            user = User(id=user_id, email=email, name=name)
-            db.add(user)
-            try:
-                db.commit()
-                db.refresh(user)
-            except Exception as e:
-                db.rollback()
-                logger.error(f"Failed to provision user {user_id}: {e}")
-                # Possible race condition if multiple requests come in at once
-                user = db.query(User).filter(User.id == user_id).first()
-                if not user:
-                    raise credentials_exception
+            user_data = {
+                "id": user_id,
+                "email": email,
+                "name": name,
+                "created_at": datetime.utcnow().isoformat(),
+            }
+            doc_ref.set(user_data)
+        else:
+            user_data = doc.to_dict()
 
+        # Instantiate a mock or real User object to satisfy dot-notation in endpoints
+        user = User(id=user_id, email=email, name=user_data.get("name", name))
         return user
 
     except HTTPException:
@@ -97,7 +93,6 @@ async def get_current_user(
 
 
 async def get_current_user_optional(
-    db: Session = Depends(get_db),
     credentials: HTTPAuthorizationCredentials | None = Depends(security),
 ) -> User | None:
     """Optional authentication"""
@@ -105,7 +100,7 @@ async def get_current_user_optional(
         return None
 
     try:
-        return await get_current_user(credentials, db)
+        return await get_current_user(credentials)
     except HTTPException:
         return None
 

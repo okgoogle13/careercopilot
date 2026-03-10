@@ -2,9 +2,12 @@ import { Lens, LensArea, Pebble, StatusBadge, Stone } from '@/components/ui';
 import { SkillBreakdownCard } from '@/components/SkillBreakdownCard';
 import { EvidenceUploader } from '@/features/ingestion/components/EvidenceUploader';
 import { m3Toast } from '@/utils/toast';
+import { useAnalytics } from '@/hooks/useAnalytics';
+import { EmptyState } from '@/components/ui/EmptyState';
 import { motion } from 'framer-motion';
 import { Building, Compass, Copy, Gauge, Sparkles, Target } from 'lucide-react';
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { LayeredHero } from '../components/kerala-rage/LayeredHero';
 import { loadHeroRegistry } from '../design/hero/heroRegistry';
 import { composeHero } from '../lib/composeHero';
@@ -51,15 +54,9 @@ interface StrategyResult {
   };
 }
 
-/**
- * CareerCopilot Analysis Page ("The Audit Microscope")
- *
- * V5.0 KR Solidarity Implementation:
- * ✓ KR-SOLID-031 Kerala Elephant Integration
- * ✓ 2x2 Stone Grid for Corporate Reporting
- * ✓ Precision typography and monospace annotations
- */
+/** CareerCopilot Analysis Page */
 export const AnalysisPage: React.FC = () => {
+  const { track } = useAnalytics();
   const [heroData, setHeroData] = useState<{
     layers: any[];
     typography: any;
@@ -110,6 +107,10 @@ export const AnalysisPage: React.FC = () => {
       return;
     }
     setIsAnalyzing(true);
+    track('ats_score_run', {
+      has_job_description: Boolean(jobDescription),
+      has_resume: Boolean(resumeText),
+    });
     setAtsResult(null);
     try {
       const response = await fetch('/api/v1/analysis/ats-score', {
@@ -149,7 +150,7 @@ export const AnalysisPage: React.FC = () => {
       if (!response.ok) throw new Error('Strategy Generation failed');
       const result = await response.json();
       setStrategyResult(result);
-      m3Toast.success('Done', 'Holistic Strategy Generated!');
+      m3Toast.success('Done', 'Resume strategy generated.');
       if (result.job_details) {
         const jdText = `Company: ${result.corporate_profile?.name || 'Unknown'}\nRole: ${result.job_details.role_title}\nTasks: ${(result.job_details.key_responsibilities || []).join(', ')}`;
         setJobDescription(jdText);
@@ -164,7 +165,7 @@ export const AnalysisPage: React.FC = () => {
 
   return (
     <div className="p-8 max-w-[1440px] mx-auto min-h-screen bg-asphalt-black-darkest relative overflow-hidden">
-      {/* Texture Layer: Lab Overlay */}
+      {/* Texture Layer */}
       <div
         className="absolute inset-0 opacity-5 pointer-events-none mix-blend-screen"
         style={{ backgroundImage: `url(${paperGrain})`, backgroundRepeat: 'repeat' }}
@@ -184,7 +185,7 @@ export const AnalysisPage: React.FC = () => {
         </div>
       )}
 
-      {/* Header: Analytical Focus */}
+      {/* Header */}
       <header className="mb-12 flex items-center justify-between border-b border-concrete-grey/10 pb-8 relative z-10">
         <div className="flex items-center gap-6">
           <div className="w-20 h-20 rounded-megaphone bg-ink-gold/5 flex items-center justify-center border border-ink-gold/20 shadow-inner">
@@ -192,10 +193,10 @@ export const AnalysisPage: React.FC = () => {
           </div>
           <div>
             <h1 className="font-display text-6xl font-black text-paper-white tracking-tighter uppercase">
-              Audit Microscope
+              ATS Analyzer
             </h1>
             <p className="font-mono text-xs text-concrete-grey tracking-[0.4em] uppercase opacity-50">
-              [ SYSTEM.ANALYSIS_ENGINE_V3.1 ]
+              [ ROLE MATCH ANALYSIS ]
             </p>
           </div>
         </div>
@@ -203,9 +204,9 @@ export const AnalysisPage: React.FC = () => {
         {/* Score/Gauge Summary (Replaced by SkillBreakdownCard in sidebar) */}
       </header>
 
-      {/* Main Grid: Lab Inputs and Evidence */}
+      {/* Main Grid: Inputs and Evidence */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 relative z-10">
-        {/* Step 1: Tactical Inputs */}
+        {/* Step 1: Inputs */}
         <section className="lg:col-span-2 space-y-8">
           <EvidenceUploader />
 
@@ -214,13 +215,13 @@ export const AnalysisPage: React.FC = () => {
             className="border-concrete-grey/10 p-10 bg-asphalt-black/20"
           >
             <h2 className="font-display text-2xl font-bold text-ink-gold mb-8 flex items-center gap-3 uppercase tracking-tight">
-              <Target className="w-6 h-6" /> Tactical Inputs
+              <Target className="w-6 h-6" /> Application Inputs
             </h2>
 
             <div className="grid grid-cols-1 gap-8">
               <Lens
-                label="Job ID (Listing URL)"
-                placeholder="https://station-records.net/listing/..."
+                label="Job URL"
+                placeholder="https://example.com/job-posting"
                 value={jobUrl}
                 onChange={(e) => setJobUrl(e.target.value)}
                 variant="filled"
@@ -229,7 +230,7 @@ export const AnalysisPage: React.FC = () => {
 
               <LensArea
                 rows={8}
-                label="Primary Resume Context"
+                label="Resume Text"
                 value={resumeText}
                 onChange={(e) => setResumeText(e.target.value)}
                 placeholder="Paste your current resume text here..."
@@ -239,17 +240,17 @@ export const AnalysisPage: React.FC = () => {
               <div className="flex items-center gap-4">
                 <div className="h-px bg-concrete-grey/10 flex-1"></div>
                 <span className="font-mono text-[9px] text-concrete-grey opacity-30 uppercase tracking-[0.5em]">
-                  Diagnostic Override
+                  OR
                 </span>
                 <div className="h-px bg-concrete-grey/10 flex-1"></div>
               </div>
 
               <LensArea
                 rows={5}
-                label="Secondary Context (Manual JD)"
+                label="Job Description"
                 value={jobDescription}
                 onChange={(e) => setJobDescription(e.target.value)}
-                placeholder="Enter requirements if station URL is unreachable..."
+                placeholder="Paste the job description if URL analysis is unavailable..."
                 className={`w-full font-primary text-sm ${jobUrl ? 'opacity-40 grayscale' : ''}`}
               />
             </div>
@@ -263,7 +264,7 @@ export const AnalysisPage: React.FC = () => {
                 className="flex-1 h-14 uppercase font-black"
                 size="lg"
               >
-                Synthesize Strategy
+                Generate Resume Strategy
               </Pebble>
               <Pebble
                 variant="secondary"
@@ -273,13 +274,13 @@ export const AnalysisPage: React.FC = () => {
                 className="flex-1 h-14 uppercase font-black"
                 size="lg"
               >
-                Calibration Check
+                Run ATS Check
               </Pebble>
             </div>
           </Stone>
         </section>
 
-        {/* Intelligence Sidebar / Reporting */}
+        {/* Company Snapshot / Reporting */}
         <aside className="space-y-8">
           {strategyResult && strategyResult.corporate_profile && (
             <Stone
@@ -293,7 +294,7 @@ export const AnalysisPage: React.FC = () => {
                     {strategyResult.corporate_profile.name}
                   </h3>
                   <span className="text-[9px] font-mono text-concrete-grey opacity-50 uppercase tracking-widest">
-                    Corporate DNA Map
+                    Company Snapshot
                   </span>
                 </div>
               </div>
@@ -324,7 +325,7 @@ export const AnalysisPage: React.FC = () => {
                 </div>
                 <div className="p-6">
                   <h4 className="font-mono text-[10px] text-ink-gold/60 uppercase mb-2">
-                    Core Ethos
+                    Company Values
                   </h4>
                   <div className="flex flex-wrap gap-1">
                     {strategyResult.corporate_profile.core_values.slice(0, 2).map((v, i) => (
@@ -341,7 +342,7 @@ export const AnalysisPage: React.FC = () => {
 
               <div className="p-6 border-t border-concrete-grey/10 bg-black/20">
                 <h4 className="font-mono text-[10px] text-concrete-grey-dark uppercase mb-3 tracking-widest">
-                  Mission Protocol
+                  Mission
                 </h4>
                 <p className="font-primary text-[11px] leading-relaxed text-paper-white/60 italic">
                   "{strategyResult.corporate_profile.mission_statement}"
@@ -369,6 +370,44 @@ export const AnalysisPage: React.FC = () => {
         </aside>
       </div>
 
+      {!strategyResult && !atsResult && (
+        <div className="mt-8 relative z-10">
+          <EmptyState
+            icon={Gauge}
+            title="Ready to run ATS scoring"
+            description="Paste your resume and a job ad to see ATS alignment, missing keywords, and optimization guidance."
+            className="border-concrete-grey/15 bg-asphalt-black/35"
+          />
+        </div>
+      )}
+
+      {atsResult && (
+        <div className="mt-8 relative z-10">
+          <Stone
+            elevation="floating"
+            className="p-6 border-outline-variant bg-surface-container-high/40"
+          >
+            <p className="text-label-small font-mono uppercase tracking-wider text-on-surface-variant mb-2">
+              What's next?
+            </p>
+            <div className="flex flex-wrap gap-3">
+              <Link
+                to={`/cover-letter-generator${jobDescription ? `?jobDescription=${encodeURIComponent(jobDescription)}` : ''}`}
+                className="inline-flex items-center rounded-march bg-primary-container text-on-primary-container px-4 py-2 text-sm font-bold"
+              >
+                Generate a tailored cover letter
+              </Link>
+              <Link
+                to="/ksc-generator"
+                className="inline-flex items-center rounded-march border border-outline px-4 py-2 text-sm font-semibold text-on-surface"
+              >
+                Draft KSC responses
+              </Link>
+            </div>
+          </Stone>
+        </div>
+      )}
+
       {/* Results Output: Optimized Resume */}
       {(strategyResult || atsResult) && (
         <div className="mt-8 relative z-10 animate-in fade-in slide-in-from-bottom-8 duration-700">
@@ -382,7 +421,7 @@ export const AnalysisPage: React.FC = () => {
                     <Sparkles className="w-6 h-6 text-ink-gold" /> Optimized Output
                   </h3>
                   <p className="text-[10px] font-mono text-concrete-grey-dark mt-1 uppercase tracking-widest">
-                    Ready for archival submission
+                    Ready for export
                   </p>
                 </div>
                 <Pebble
@@ -405,7 +444,7 @@ export const AnalysisPage: React.FC = () => {
             <div className="font-primary text-sm text-paper-white/90 bg-black/40 p-10 whitespace-pre-wrap leading-relaxed shadow-inner font-mono">
               {strategyResult
                 ? strategyResult.optimized_resume.resume_text
-                : 'Pending manual calibration...'}
+                : 'Waiting for generated output...'}
             </div>
           </Stone>
         </div>

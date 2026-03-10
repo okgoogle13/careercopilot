@@ -221,17 +221,17 @@ export const ProfileEditor: React.FC<ProfileEditorProps> = ({ onNext, onBack }) 
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <Lens
-                    label="FULL NAME"
-                    value={profile.name}
-                    onChange={(e) => handleUpdate({ name: e.target.value })}
-                    className="w-full font-mono text-sm"
-                  />
-                  <Lens
-                    label="EMAIL"
-                    value={profile.email}
-                    onChange={(e) => handleUpdate({ email: e.target.value })}
-                    type="email"
+                <Lens
+                  label="FULL NAME"
+                  value={profile.name}
+                  onChange={(e) => handleUpdate({ name: e.target.value })}
+                  className="w-full font-mono text-sm"
+                />
+                <Lens
+                  label="EMAIL"
+                  value={profile.email}
+                  onChange={(e) => handleUpdate({ email: e.target.value })}
+                  type="email"
                   className="w-full font-mono text-sm"
                 />
               </div>

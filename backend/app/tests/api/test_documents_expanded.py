@@ -42,12 +42,17 @@ def client():
 
 
 def test_get_documents_success(client):
-    mock_db = MagicMock()
-    mock_db.query.return_value.filter.return_value.all.return_value = [
-        MockUserAsset(id="1", document_type="resume", file_name="resume.docx"),
-        MockUserAsset(id="2", document_type="ksc", file_name="ksc.docx"),
-    ]
-    app.dependency_overrides[get_db] = lambda: mock_db
+    from app.tests.conftest import _mock_db
+
+    _mock_db.collection("user_assets")._data = {
+        "1": {
+            "id": "1",
+            "document_type": "resume",
+            "file_name": "resume.docx",
+            "user_id": "test_uid",
+        },
+        "2": {"id": "2", "document_type": "ksc", "file_name": "ksc.docx", "user_id": "test_uid"},
+    }
 
     response = client.get("/api/documents/")
     assert response.status_code == 200
@@ -56,9 +61,16 @@ def test_get_documents_success(client):
 
 
 def test_get_documents_exception(client):
-    mock_db = MagicMock()
-    mock_db.query.side_effect = Exception("DB Error")
-    app.dependency_overrides[get_db] = lambda: mock_db
+    from app.tests.conftest import _mock_db
+
+    class FailingQuery:
+        def where(self, *args, **kwargs):
+            return self
+
+        def stream(self):
+            raise Exception("DB Error")
+
+    _mock_db.collection("user_assets").where = FailingQuery().where
 
     response = client.get("/api/documents/")
     assert response.status_code == 200

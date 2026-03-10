@@ -25,6 +25,26 @@ if (import.meta.env.VITE_SENTRY_DSN) {
   });
 }
 
+const gaMeasurementId = import.meta.env.VITE_GA_MEASUREMENT_ID as string | undefined;
+if (gaMeasurementId && typeof window !== 'undefined' && typeof document !== 'undefined') {
+  const existing = document.querySelector(`script[data-ga-id="${gaMeasurementId}"]`);
+  if (!existing) {
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = `https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`;
+    script.dataset.gaId = gaMeasurementId;
+    document.head.appendChild(script);
+  }
+
+  const win = window as Window & { dataLayer?: unknown[]; gtag?: (...args: unknown[]) => void };
+  win.dataLayer = win.dataLayer || [];
+  win.gtag = function gtag(...args: unknown[]) {
+    win.dataLayer?.push(args);
+  };
+  win.gtag('js', new Date());
+  win.gtag('config', gaMeasurementId, { send_page_view: true });
+}
+
 const root = document.getElementById('root');
 
 if (root) {

@@ -26,6 +26,7 @@ import { KSCGenerator } from './features/ksc-generator/KSCGenerator';
 import { LandingPage } from './features/landing/LandingPage';
 import { NotFound } from './features/not-found/NotFound';
 import { OnboardingPage } from './features/onboarding/OnboardingPage';
+import { WelcomeScreen } from './features/onboarding/WelcomeScreen';
 import { Opportunities } from './features/opportunities/Opportunities';
 import { ProfileView } from './features/profile/components/ProfileView';
 import { Settings } from './features/settings/Settings';
@@ -34,12 +35,14 @@ import { Layout } from './layouts/Layout';
 import { AnalysisPage } from './pages/AnalysisPage';
 import { IngestionPage } from './pages/IngestionPage';
 import { JobQueue } from './pages/JobQueue';
+import { ApplyQuick } from './pages/ApplyQuick';
 import { AuthModal } from './components/phase3-batch2/AuthModal';
 import { HeroLanding } from './components/phase3-batch2/HeroLanding';
 import { OnboardFlow } from './components/phase3-batch2/OnboardFlow';
 import { AnalysisWorkbench } from './components/phase3-batch3/AnalysisWorkbench';
 import { DashboardOverview } from './components/phase3-batch3/DashboardOverview';
 import { useModeStore } from './stores/useModeStore';
+import { useUserStore } from './stores/userStore';
 import DesignSidekick from './features/design-sidekick/DesignSidekick';
 
 /**
@@ -108,6 +111,19 @@ const ProtectedLayout = () => {
       </AnimatePresence>
     </Layout>
   );
+};
+
+const OnboardingRoute = () => {
+  const isNewUser = useUserStore((state) => state.isNewUser);
+  if (isNewUser) {
+    return (
+      <Navigate
+        to="/welcome"
+        replace
+      />
+    );
+  }
+  return <OnboardingPage />;
 };
 
 // Public Layout (Login/Register/Landing)
@@ -228,7 +244,11 @@ export default function App() {
           />
           <Route
             path="/onboarding"
-            element={<OnboardingPage />}
+            element={<OnboardingRoute />}
+          />
+          <Route
+            path="/welcome"
+            element={<WelcomeScreen />}
           />
           <Route
             path="/tracker"
@@ -273,6 +293,10 @@ export default function App() {
           <Route
             path="/job-queue"
             element={<JobQueue />}
+          />
+          <Route
+            path="/apply/quick"
+            element={<ApplyQuick />}
           />
           <Route
             path="/test-tokens"

@@ -49,7 +49,7 @@ class TestSmartIngestionExpanded:
                 confirmedTags={"roleType": "Dev", "subsectors": []},
             )
 
-            response = await extract_and_save(request, current_user=mock_user, db=MagicMock())
+            response = await extract_and_save(request, current_user=mock_user)
             assert response.status == "success"
             assert response.assetId == "asset_456"
 
@@ -67,7 +67,7 @@ class TestSmartIngestionExpanded:
                 confirmedTags={"roleType": "Dev", "subsectors": []},
             )
             with pytest.raises(HTTPException) as exc:
-                await extract_and_save(request, current_user=mock_user, db=MagicMock())
+                await extract_and_save(request, current_user=mock_user)
             assert exc.value.status_code == 500
             assert "Failed to extract and save document" in exc.value.detail
 

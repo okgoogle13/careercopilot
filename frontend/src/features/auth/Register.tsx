@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { z } from 'zod';
 import { KeralaRageButton } from '../../components/ui/KeralaRageButton';
 import { useAuth } from '../../context/AuthContext';
+import { useUserStore } from '@/stores/userStore';
 
 // KeralaRage Assets
 const KrMotifGrid =
@@ -30,6 +31,7 @@ type RegisterValues = z.infer<typeof registerSchema>;
 export function Register() {
   const [authError, setAuthError] = useState('');
   const { register: registerAuth } = useAuth();
+  const setIsNewUser = useUserStore((state) => state.setIsNewUser);
   const navigate = useNavigate();
 
   const {
@@ -44,7 +46,8 @@ export function Register() {
     setAuthError('');
     try {
       await registerAuth(data.email, data.password, data.displayName);
-      navigate('/onboarding');
+      setIsNewUser(true);
+      navigate('/welcome');
     } catch (err: any) {
       console.error('Registration error:', err);
       setAuthError(err?.message || 'Failed to create account. Please try again.');
@@ -77,10 +80,10 @@ export function Register() {
 
           <div className="text-center mb-10">
             <h1 className="text-[clamp(2.5rem,6.2vw,4rem)] leading-[0.95] font-black text-ink-gold mb-2 uppercase tracking-tight break-words">
-              New Collective
+              Create Account
             </h1>
             <p className="text-micro font-light text-concrete-grey opacity-[0.8] uppercase tracking-widest leading-none">
-              Register with the station
+              Start your CareerCopilot workspace
             </p>
           </div>
 
@@ -90,7 +93,7 @@ export function Register() {
               animate={{ x: 0, opacity: 1 }}
               className="mb-8 p-4 rounded-pebble bg-solidarity-red/20 text-solidarity-red border border-solidarity-red/30 font-mono text-xs"
             >
-              ⚠️ [FAILED_REG]: {authError}
+              {authError}
             </motion.div>
           )}
 
@@ -104,12 +107,12 @@ export function Register() {
                 htmlFor="displayName"
                 className="block text-micro font-light text-ink-gold mb-2 font-mono tracking-widest uppercase"
               >
-                Common Name (Display Name)
+                Full Name
               </label>
               <input
                 id="displayName"
                 type="text"
-                placeholder="Field Investigator Jones"
+                placeholder="Jane Doe"
                 className="w-full px-6 bg-asphalt-black/50 border border-concrete-grey/20 text-paper-white rounded-megaphone h-12 focus:outline-none focus:border-ink-gold transition-all font-primary"
                 {...register('displayName')}
               />
@@ -125,12 +128,12 @@ export function Register() {
                 htmlFor="email"
                 className="block text-micro font-light text-ink-gold mb-2 font-mono tracking-widest uppercase"
               >
-                Station ID (Email)
+                Email
               </label>
               <input
                 id="email"
                 type="email"
-                placeholder="investigator@station.net"
+                placeholder="you@example.com"
                 className="w-full px-6 bg-asphalt-black/50 border border-concrete-grey/20 text-paper-white rounded-megaphone h-12 focus:outline-none focus:border-ink-gold transition-all font-primary"
                 {...register('email')}
               />
@@ -145,10 +148,10 @@ export function Register() {
               <div className="flex-1">
                 <label
                   htmlFor="password"
-                  title="Keychain"
+                  title="Password"
                   className="block text-micro font-light text-ink-gold mb-2 font-mono tracking-widest uppercase overflow-hidden text-ellipsis whitespace-nowrap"
                 >
-                  Keychain
+                  Password
                 </label>
                 <input
                   id="password"
@@ -161,10 +164,10 @@ export function Register() {
               <div className="flex-1">
                 <label
                   htmlFor="confirmPassword"
-                  title="Verify"
+                  title="Confirm Password"
                   className="block text-micro font-light text-ink-gold mb-2 font-mono tracking-widest uppercase overflow-hidden text-ellipsis whitespace-nowrap"
                 >
-                  Verify
+                  Confirm
                 </label>
                 <input
                   id="confirmPassword"
@@ -188,7 +191,7 @@ export function Register() {
               disabled={isSubmitting}
               className="w-full mt-4"
             >
-              {isSubmitting ? 'Recording...' : 'Register'}
+              {isSubmitting ? 'Creating account...' : 'Create Account'}
             </KeralaRageButton>
           </form>
 
@@ -197,7 +200,7 @@ export function Register() {
               to="/login"
               className="text-curator-accent text-sm text-concrete-grey hover:text-ink-gold transition-colors"
             >
-              Already registered? Sign in.
+              Already have an account? Sign in.
             </Link>
           </div>
         </motion.div>

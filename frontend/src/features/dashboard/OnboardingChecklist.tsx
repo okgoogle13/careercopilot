@@ -3,10 +3,12 @@ import { CheckCircle2, Circle, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Placard } from '@/components/ui';
+import { useUserStore } from '@/stores/userStore';
 
 const STORAGE_KEY = 'cc_onboarding_checklist';
 /** Single key that stores both progress and dismissed flag. */
 export const CHECKLIST_DISMISSED_KEY = 'cc_onboarding_checklist_dismissed';
+const MILESTONE_PREFIX = 'cc_milestone_';
 
 interface ChecklistItem {
   id: string;
@@ -86,6 +88,7 @@ interface OnboardingChecklistProps {
 export function OnboardingChecklist({ onDismiss }: OnboardingChecklistProps) {
   const [progress, setProgress] = useState<Record<string, boolean>>(loadProgress);
   const [dismissed, setDismissed] = useState(false);
+  const { hasCompletedIngestion, hasMaster } = useUserStore();
   const navigate = useNavigate();
 
   const completedCount = CHECKLIST_ITEMS.filter((item) => progress[item.id]).length;
@@ -94,6 +97,24 @@ export function OnboardingChecklist({ onDismiss }: OnboardingChecklistProps) {
   useEffect(() => {
     saveProgress(progress);
   }, [progress]);
+
+  useEffect(() => {
+    const nextProgress: Record<string, boolean> = {
+      ...progress,
+      upload_resume: hasCompletedIngestion || hasMaster || progress.upload_resume,
+    };
+
+    for (const id of ['run_ats', 'generate_cover_letter', 'create_ksc']) {
+      if (!nextProgress[id] && localStorage.getItem(`${MILESTONE_PREFIX}${id}`) === 'true') {
+        nextProgress[id] = true;
+      }
+    }
+
+    const changed = Object.keys(nextProgress).some((key) => nextProgress[key] !== progress[key]);
+    if (changed) {
+      setProgress(nextProgress);
+    }
+  }, [hasCompletedIngestion, hasMaster, progress]);
 
   const markComplete = (id: string) => {
     setProgress((prev) => ({ ...prev, [id]: true }));
@@ -146,7 +167,7 @@ export function OnboardingChecklist({ onDismiss }: OnboardingChecklistProps) {
               </h2>
               <p className="font-primary text-sm text-concrete-grey opacity-70 mt-1">
                 {allComplete
-                  ? 'All done — you\'re fully set up! 🎉'
+                  ? "All done — you're fully set up! 🎉"
                   : `${completedCount} of ${CHECKLIST_ITEMS.length} complete`}
               </p>
             </div>
