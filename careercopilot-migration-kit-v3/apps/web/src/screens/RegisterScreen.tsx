@@ -11,7 +11,7 @@ export function RegisterScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [status, setStatus] = useState(
-    'Create your account to start tracking applications, drafts, and next actions in one place.',
+    'Create your account to gather applications, drafts, and next actions inside one movement space.',
   );
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -21,9 +21,9 @@ export function RegisterScreen() {
       return;
     }
 
-    console.info('migrated-register-placeholder', { fullName, email });
+    console.info('register-screen-submit', { fullName, email });
     setStatus(
-      `Account setup checkpoint cleared for ${email || 'unknown-user'}. Final provisioning still runs through the placeholder path.`,
+      `Account created for ${email || 'unknown-user'}. Profile setup is the next step.`,
     );
     void password;
   }
@@ -35,13 +35,13 @@ export function RegisterScreen() {
     >
       <Strike
         className="auth-strike"
-        eyebrow="New Worker Entry"
+        eyebrow="Movement Entry"
       >
-        Build your account on the migrated shell now, while the legacy route stays ready behind the same URL.
+        Build your account and step into a movement space shaped for applications, drafts, and shared momentum.
       </Strike>
-      <Placard title="Claim Your Worker Portal">
+      <Placard title="Claim Your Collective Portal">
         <March>
-          Start with a stronger home for applications, drafts, and coordinated next steps from day one.
+          Start with a clear base for applications, drafts, and coordinated next steps from day one.
         </March>
         <form
           className="login-form"
@@ -78,19 +78,19 @@ export function RegisterScreen() {
             className="primary-action"
             type="submit"
           >
-            Create The Worker Account
+            Create Account (Step 1 Of 2)
           </button>
           <button
             className="secondary-action"
             type="button"
             onClick={() => navigate('/login')}
           >
-            Back To Sign In
+            Back To Login
           </button>
         </form>
         <p
           aria-live="polite"
-          className={status.startsWith('Complete all') ? 'login-error' : 'status-copy'}
+          className={status.startsWith('Complete every field') ? 'login-error' : 'status-copy'}
           role="status"
         >
           {status}

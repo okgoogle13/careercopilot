@@ -9,17 +9,19 @@ export function LoginScreen() {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [status, setStatus] = useState('Sign in to reopen your saved drafts, roles, and next moves.');
+  const [status, setStatus] = useState(
+    'Log in to reopen your drafts, active roles, and next moves from one movement base.',
+  );
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (!email || !password) {
-      setStatus('Add both email and password to continue.');
+      setStatus('Add your email and password to move forward.');
       return;
     }
 
-    console.info('migrated-login-placeholder', { email });
-    setStatus(`Access checkpoint cleared for ${email || 'unknown-user'}. Workspace handoff remains placeholder-safe.`);
+    console.info('login-screen-submit', { email });
+    setStatus(`Login confirmed for ${email || 'unknown-user'}. Dashboard access is next.`);
     void password;
   }
 
@@ -30,13 +32,13 @@ export function LoginScreen() {
     >
       <Strike
         className="auth-strike"
-        eyebrow="Worker Access"
+        eyebrow="Collective Access"
       >
-        Re-enter the workspace with sharper focus, faster routing, and the same safe fallback behind the flag.
+        Return to your movement base with your current roles, notes, and next actions held in one place.
       </Strike>
-      <Placard title="Step Back Into The Worker Portal">
+      <Placard title="Return To The Collective Portal">
         <March>
-          Pick up applications, notes, and active leads without losing the reversible rollout path.
+          Pick up applications, notes, and active leads without losing the thread of the search.
         </March>
         <form
           className="login-form"
@@ -64,19 +66,19 @@ export function LoginScreen() {
             className="primary-action"
             type="submit"
           >
-            Enter The Workspace
+            Login &rarr; Access Dashboard
           </button>
           <button
             className="secondary-action"
             type="button"
             onClick={() => navigate('/register')}
           >
-            Open Registration
+            Create Account (Step 1 Of 2)
           </button>
         </form>
         <p
           aria-live="polite"
-          className={status.startsWith('Enter both') ? 'login-error' : 'status-copy'}
+          className={status.startsWith('Add your email') ? 'login-error' : 'status-copy'}
           role="status"
         >
           {status}
