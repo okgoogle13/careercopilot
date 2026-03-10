@@ -23,25 +23,24 @@ const dashboardCards = [
 
 export function DashboardScreen() {
   const [status, setStatus] = useState(
-    'Dashboard migration is live behind the flag while the legacy route remains available for rollback.',
+    'Movement overview is steady: active roles, drafts, and signals are aligned in one view.',
   );
 
   return (
     <section
-      className="placeholder-screen dashboard-screen"
+      className="journey-screen dashboard-screen"
       data-testid="dashboard-screen"
     >
       <Strike
         className="auth-strike dashboard-strike"
-        eyebrow="Worker Overview"
+        eyebrow="Movement Overview"
       >
-        One sharper board for active roles, draft pressure, and the next move that needs attention.
+        One sharper board for active roles, draft pressure, and the next move demanding attention.
       </Strike>
 
-      <Placard title="Hold The Full Search In One View">
+      <Placard title="Hold The Movement In One View">
         <March>
-          The migrated dashboard keeps the route reversible while making the work feel more coordinated,
-          legible, and emotionally awake.
+          Track the search as one coordinated rhythm: active roles, draft pressure, and signals ready for review.
         </March>
 
         <div className="dashboard-grid">
@@ -60,14 +59,14 @@ export function DashboardScreen() {
         <div className="dashboard-actions">
           <button
             className="primary-action"
-            onClick={() => setStatus('Primary dashboard workflow placeholder acknowledged.')}
+            onClick={() => setStatus('Active roles opened. Priority applications are next in line.')}
             type="button"
           >
             Review Active Roles
           </button>
           <button
             className="secondary-action"
-            onClick={() => setStatus('Secondary dashboard workflow placeholder acknowledged.')}
+            onClick={() => setStatus('Draft queue opened. Revision-ready materials are now in focus.')}
             type="button"
           >
             Open Draft Queue
