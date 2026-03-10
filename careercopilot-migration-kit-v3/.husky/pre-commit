@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+set -e
+
+cd "$(dirname "$0")/.."
+
+yarn lint
+yarn type-check
+yarn design-audit

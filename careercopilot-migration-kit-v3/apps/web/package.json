@@ -1,0 +1,12 @@
+{
+  "name": "@careercopilot/web",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint src --max-warnings 0",
+    "type-check": "tsc --noEmit",
+    "test": "vitest run --config ../../vitest.config.ts"
+  }
+}

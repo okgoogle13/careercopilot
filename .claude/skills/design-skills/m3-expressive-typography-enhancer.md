@@ -25,7 +25,27 @@ This skill enhances M3 typography with M3 Expressive principles:
 
 **Why:** Variable fonts enable smooth animations between weights, creating "alive" typography that responds to user interactions.
 
-**Recommended Variable Fonts:**
+**KR Solidarity Canonical Typography Stack (MANDATORY):**
+
+For `kr-solidarity` projects, the following font stack is strict. **Do not use any other fonts.**
+
+- **UI/Primary**: `Work Sans` (Variable 100-900)
+- **Display/Expressive**: `Fraunces` (Variable opsz, wght, SOFT, WONK)
+- **Proclamation**: `Libre Bodoni`
+- **Technical/Data**: `JetBrains Mono`
+- **Curator Notes**: `Caveat` (Handwritten)
+- **Hero Accent**: `Nabla`
+
+**KR Solidarity Pressure/Relief Mechanic:**
+
+Typography in `kr-solidarity` is not static; it responds to emotional states via variable axes:
+
+- **Solidarity/Protest**: Max expansion (`wght: 900`, `wdth: 120`).
+- **Labor Pressure**: Compressed intensity (`wght: 900`, `wdth: 75`).
+- **Melancholy**: Mid-weight breathing (`wght: 475`, `wdth: 98`).
+- **Assertion**: Firm stance (`wght: 700`, `wdth: 110`).
+
+**Standard M3 Expressive Variable Fonts (Non-KR Projects):**
 
 - **Plus Jakarta Sans** (Weight: 200-800, modern, professional)
 - **Poppins** (Weight: 100-900, elegant, versatile)
@@ -126,6 +146,37 @@ This skill enhances M3 typography with M3 Expressive principles:
 
 ---
 
+### 3. Beyond Weight: The Dimensionality of Emotion
+
+Variable fonts in `kr-solidarity` (specifically **Fraunces** and **Work Sans**) provide advanced axes to amplify emotional tone beyond simple weight.
+
+#### Optical Size (`opsz`) — *Clarity of Scale*
+- **Hero/Poster**: Set `opsz` to maximum (e.g., `72`+) for hairline serifs and high detail.
+- **Micro-labels**: Set `opsz` to minimum (e.g., `12`) to thicken thin strokes and maintain legibility under visual pressure.
+
+#### Softness (`SOFT`) — *Gentleness vs. Harshness*
+Available in **Fraunces**.
+- **`'SOFT' 0`**: Sharp, aggressive terminals. Use for **Protest**, **Urgency**, or **Structural Critique**.
+- **`'SOFT' 100`**: Fluid, rounded forms. Use for **Backwater Reflection**, **Trauma-Informed Support**, or **Community Solidarity**.
+
+#### Wonkiness (`WONK`) — *Humanized Effort*
+Available in **Fraunces**.
+- **`'WONK' 1`**: Enables "wonky" alternates (slanted vertical serifs). Use for **Identity Assertion** or **Wheat-paste energy**. It breaks the "corporate grid" and feels hand-printed.
+
+#### Grade (`GRAD`) — *Visual Density (No Reflow)*
+- **Hover States**: Use `GRAD` to "embolden" text on hover without changing the physical width of the element. This avoids "layout jitter" while providing a satisfying response to interaction.
+
+#### Emotional Axis Mapping:
+
+| Emotion | Axes Configuration | Archetype |
+| :--- | :--- | :--- |
+| **Aggressive Protest** | `'wght' 900, 'SOFT' 0, 'WONK' 1` | Strike |
+| **Reflective Longing** | `'wght' 300, 'SOFT' 100, 'opsz' 12` | Pebble |
+| **Institutional Critique**| `'wght' 100, 'SOFT' 0, 'opsz' 72` | Slab |
+| **Community Pulse** | `'wght' 700, 'SOFT' 80, 'WONK' 0` | March |
+
+---
+
 ### 3. Emotional Tone Mapping
 
 Typography conveys personality. Map type choices to emotional goals:
@@ -211,12 +262,14 @@ Typography conveys personality. Map type choices to emotional goals:
 
 ### 4. Anti-Slop Validation (Reject Generic Fonts)
 
-**FORBIDDEN FONTS (Generic AI Slop):**
+**FORBIDDEN FONTS (Generic AI Slop & KR Bans):**
 
-- ❌ **Inter** (alone, without distinctive display font)
-- ❌ **Roboto** (corporate, boring, overused)
+- ❌ **Inter** (STRICT BAN: do not use in `kr-solidarity`)
+- ❌ **Roboto** (STRICT BAN: do not use in `kr-solidarity`)
+- ❌ **Arial** (STRICT BAN: do not use in `kr-solidarity`)
+- ❌ **Sora** (STRICT BAN: do not use in `kr-solidarity`)
+- ❌ **Plus Jakarta Sans** (STRICT BAN: do not use in `kr-solidarity`)
 - ❌ **Open Sans** (generic, dated)
-- ❌ **Arial** (legacy, no personality)
 - ❌ **Helvetica** (overused, bland)
 - ❌ **System fonts** (-apple-system, BlinkMacSystemFont, etc.)
 - ❌ **Lato** (clichéd)
@@ -229,10 +282,10 @@ function validateTypography(fontFamily) {
 
   const isForbidden = forbiddenFonts.some((forbidden) => fontFamily.toLowerCase().includes(forbidden));
 
-  if (isForbidden && !hasDistinctiveDisplayFont()) {
+  if (isForbidden) {
     return {
       valid: false,
-      error: `Generic font detected: ${fontFamily}. Use distinctive fonts like Plus Jakarta Sans, Poppins, Montserrat, or Sora.`,
+      error: `Forbidden font detected: ${fontFamily}. For KR Solidarity, use Work Sans (UI) or Fraunces (Display).`,
       suggestion: getAlternativeFont(fontFamily),
     };
   }
@@ -242,14 +295,16 @@ function validateTypography(fontFamily) {
 
 function getAlternativeFont(genericFont) {
   const alternatives = {
-    inter: "Plus Jakarta Sans Variable",
-    roboto: "Poppins",
-    "open sans": "Nunito",
-    arial: "Montserrat",
-    helvetica: "Sora Variable",
+    inter: "Work Sans",
+    roboto: "Work Sans",
+    "plus jakarta sans": "Work Sans",
+    sora: "Work Sans",
+    "open sans": "Work Sans",
+    arial: "Work Sans",
+    helvetica: "Fraunces",
   };
 
-  return alternatives[genericFont.toLowerCase()] || "Plus Jakarta Sans Variable";
+  return alternatives[genericFont.toLowerCase()] || "Work Sans";
 }
 ```
 

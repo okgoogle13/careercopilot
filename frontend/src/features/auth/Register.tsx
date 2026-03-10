@@ -79,10 +79,24 @@ export function Register() {
           </div>
 
           <div className="text-center mb-10">
-            <h1 className="text-[clamp(2.5rem,6.2vw,4rem)] leading-[0.95] font-black text-ink-gold mb-2 uppercase tracking-tight break-words">
+            <h1
+              className="text-display font-black text-ink-gold mb-2 uppercase tracking-tight break-words"
+              style={{
+                fontSize: 'clamp(2.5rem, 6.2vw, 4rem)',
+                lineHeight: 0.95,
+                fontFamily: 'var(--sys-type-fontFamilies-display)',
+                fontVariationSettings: "'wght' 900, 'SOFT' 0, 'WONK' 1, 'opsz' 72",
+              }}
+            >
               Create Account
             </h1>
-            <p className="text-micro font-light text-concrete-grey opacity-[0.8] uppercase tracking-widest leading-none">
+            <p
+              className="text-micro text-concrete-grey opacity-[0.8] uppercase tracking-widest leading-none"
+              style={{
+                fontFamily: 'var(--sys-type-fontFamilies-primary)',
+                fontVariationSettings: "'wght' 300, 'opsz' 12",
+              }}
+            >
               Start your CareerCopilot workspace
             </p>
           </div>
@@ -91,7 +105,11 @@ export function Register() {
             <motion.div
               initial={{ x: -10, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
-              className="mb-8 p-4 rounded-pebble bg-solidarity-red/20 text-solidarity-red border border-solidarity-red/30 font-mono text-xs"
+              className="mb-8 p-4 rounded-pebble bg-solidarity-red/20 text-solidarity-red border border-solidarity-red/30 text-xs"
+              style={{
+                fontFamily: 'var(--sys-type-fontFamilies-mono)',
+                fontVariationSettings: "'wght' 400",
+              }}
             >
               {authError}
             </motion.div>
@@ -105,7 +123,11 @@ export function Register() {
             <div className="group">
               <label
                 htmlFor="displayName"
-                className="block text-micro font-light text-ink-gold mb-2 font-mono tracking-widest uppercase"
+                className="block text-micro text-ink-gold mb-2 tracking-widest uppercase"
+                style={{
+                  fontFamily: 'var(--sys-type-fontFamilies-primary)',
+                  fontVariationSettings: "'wght' 500, 'opsz' 12",
+                }}
               >
                 Full Name
               </label>
@@ -113,11 +135,21 @@ export function Register() {
                 id="displayName"
                 type="text"
                 placeholder="Jane Doe"
-                className="w-full px-6 bg-asphalt-black/50 border border-concrete-grey/20 text-paper-white rounded-megaphone h-12 focus:outline-none focus:border-ink-gold transition-all font-primary"
+                className="w-full px-6 bg-asphalt-black/50 border border-concrete-grey/20 text-paper-white rounded-megaphone h-12 focus:outline-none focus:border-ink-gold transition-all"
+                style={{
+                  fontFamily: 'var(--sys-type-fontFamilies-primary)',
+                  fontVariationSettings: "'wght' 400, 'opsz' 16",
+                }}
                 {...register('displayName')}
               />
               {errors.displayName && (
-                <p className="text-solidarity-red text-[10px] mt-1 font-mono uppercase">
+                <p
+                  className="text-solidarity-red text-[10px] mt-1 uppercase"
+                  style={{
+                    fontFamily: 'var(--sys-type-fontFamilies-mono)',
+                    fontVariationSettings: "'wght' 500",
+                  }}
+                >
                   {errors.displayName.message}
                 </p>
               )}
@@ -126,7 +158,11 @@ export function Register() {
             <div className="group">
               <label
                 htmlFor="email"
-                className="block text-micro font-light text-ink-gold mb-2 font-mono tracking-widest uppercase"
+                className="block text-micro text-ink-gold mb-2 tracking-widest uppercase"
+                style={{
+                  fontFamily: 'var(--sys-type-fontFamilies-primary)',
+                  fontVariationSettings: "'wght' 500, 'opsz' 12",
+                }}
               >
                 Email
               </label>
@@ -134,11 +170,21 @@ export function Register() {
                 id="email"
                 type="email"
                 placeholder="you@example.com"
-                className="w-full px-6 bg-asphalt-black/50 border border-concrete-grey/20 text-paper-white rounded-megaphone h-12 focus:outline-none focus:border-ink-gold transition-all font-primary"
+                className="w-full px-6 bg-asphalt-black/50 border border-concrete-grey/20 text-paper-white rounded-megaphone h-12 focus:outline-none focus:border-ink-gold transition-all"
+                style={{
+                  fontFamily: 'var(--sys-type-fontFamilies-primary)',
+                  fontVariationSettings: "'wght' 400, 'opsz' 16",
+                }}
                 {...register('email')}
               />
               {errors.email && (
-                <p className="text-solidarity-red text-[10px] mt-1 font-mono uppercase">
+                <p
+                  className="text-solidarity-red text-[10px] mt-1 uppercase"
+                  style={{
+                    fontFamily: 'var(--sys-type-fontFamilies-mono)',
+                    fontVariationSettings: "'wght' 500",
+                  }}
+                >
                   {errors.email.message}
                 </p>
               )}
@@ -149,7 +195,11 @@ export function Register() {
                 <label
                   htmlFor="password"
                   title="Password"
-                  className="block text-micro font-light text-ink-gold mb-2 font-mono tracking-widest uppercase overflow-hidden text-ellipsis whitespace-nowrap"
+                  className="block text-micro text-ink-gold mb-2 tracking-widest uppercase overflow-hidden text-ellipsis whitespace-nowrap"
+                  style={{
+                    fontFamily: 'var(--sys-type-fontFamilies-primary)',
+                    fontVariationSettings: "'wght' 500, 'opsz' 12",
+                  }}
                 >
                   Password
                 </label>
@@ -157,7 +207,11 @@ export function Register() {
                   id="password"
                   type="password"
                   placeholder="••••••••"
-                  className="w-full px-4 bg-asphalt-black/50 border border-concrete-grey/20 text-paper-white rounded-megaphone h-12 focus:outline-none focus:border-ink-gold transition-all font-primary"
+                  className="w-full px-4 bg-asphalt-black/50 border border-concrete-grey/20 text-paper-white rounded-megaphone h-12 focus:outline-none focus:border-ink-gold transition-all"
+                  style={{
+                    fontFamily: 'var(--sys-type-fontFamilies-mono)',
+                    fontVariationSettings: "'wght' 400",
+                  }}
                   {...register('password')}
                 />
               </div>
@@ -165,7 +219,11 @@ export function Register() {
                 <label
                   htmlFor="confirmPassword"
                   title="Confirm Password"
-                  className="block text-micro font-light text-ink-gold mb-2 font-mono tracking-widest uppercase overflow-hidden text-ellipsis whitespace-nowrap"
+                  className="block text-micro text-ink-gold mb-2 tracking-widest uppercase overflow-hidden text-ellipsis whitespace-nowrap"
+                  style={{
+                    fontFamily: 'var(--sys-type-fontFamilies-primary)',
+                    fontVariationSettings: "'wght' 500, 'opsz' 12",
+                  }}
                 >
                   Confirm
                 </label>
@@ -173,13 +231,23 @@ export function Register() {
                   id="confirmPassword"
                   type="password"
                   placeholder="••••••••"
-                  className="w-full px-4 bg-asphalt-black/50 border border-concrete-grey/20 text-paper-white rounded-megaphone h-12 focus:outline-none focus:border-ink-gold transition-all font-primary"
+                  className="w-full px-4 bg-asphalt-black/50 border border-concrete-grey/20 text-paper-white rounded-megaphone h-12 focus:outline-none focus:border-ink-gold transition-all"
+                  style={{
+                    fontFamily: 'var(--sys-type-fontFamilies-mono)',
+                    fontVariationSettings: "'wght' 400",
+                  }}
                   {...register('confirmPassword')}
                 />
               </div>
             </div>
             {(errors.password || errors.confirmPassword) && (
-              <p className="text-solidarity-red text-[10px] font-mono uppercase">
+              <p
+                className="text-solidarity-red text-[10px] uppercase"
+                style={{
+                  fontFamily: 'var(--sys-type-fontFamilies-mono)',
+                  fontVariationSettings: "'wght' 500",
+                }}
+              >
                 {errors.password?.message || errors.confirmPassword?.message}
               </p>
             )}
@@ -198,7 +266,11 @@ export function Register() {
           <div className="text-center mt-10 pt-6 border-t border-concrete-grey/10">
             <Link
               to="/login"
-              className="text-curator-accent text-sm text-concrete-grey hover:text-ink-gold transition-colors"
+              className="text-sm text-concrete-grey hover:text-ink-gold transition-colors"
+              style={{
+                fontFamily: 'var(--sys-type-fontFamilies-primary)',
+                fontVariationSettings: "'wght' 400, 'opsz' 14",
+              }}
             >
               Already have an account? Sign in.
             </Link>

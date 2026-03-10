@@ -60,7 +60,14 @@ export const LoginCard: React.FC<LoginCardProps> = ({
         {/* Screenprint Substrate Overlay */}
         <div className="absolute inset-0 opacity-[0.08] pointer-events-none bg-[url('/assets/kr-solidarity/texture/kr-solidarity__atmospheric__texture--asphalt-grain--v2.png')] mix-blend-overlay" />
 
-        <h2 className="text-display font-black text-paper-white tracking-widest text-center">
+        <h2
+          className="text-display font-black text-paper-white tracking-widest text-center"
+          style={{
+            fontFamily: 'var(--sys-type-fontFamilies-display)',
+            fontVariationSettings: "'wght' 900, 'SOFT' 0, 'WONK' 1, 'opsz' 72",
+            lineHeight: 0.9,
+          }}
+        >
           VERIFY IDENTITY
         </h2>
 
@@ -68,7 +75,11 @@ export const LoginCard: React.FC<LoginCardProps> = ({
           <div className="space-y-2">
             <label
               htmlFor="email-input"
-              className="text-blueprint-grey font-jetbrains-mono text-micro font-light uppercase tracking-widest"
+              className="text-blueprint-grey font-mono text-micro uppercase tracking-widest block"
+              style={{
+                fontFamily: 'var(--sys-type-fontFamilies-primary)',
+                fontVariationSettings: "'wght' 500, 'opsz' 12",
+              }}
             >
               Email Address
             </label>
@@ -80,8 +91,12 @@ export const LoginCard: React.FC<LoginCardProps> = ({
               onChange={(e) => setEmail(e.target.value)}
               className={cn(
                 'w-full bg-[var(--sys-color-charcoalBackground-base)]/40 border border-blueprint-grey/20 p-4 rounded-slab',
-                'text-paper-white font-jetbrains-mono focus:border-ink-gold focus:outline-none transition-colors'
+                'text-paper-white focus:border-ink-gold focus:outline-none transition-all'
               )}
+              style={{
+                fontFamily: 'var(--sys-type-fontFamilies-mono)',
+                fontVariationSettings: "'wght' 400",
+              }}
               required
             />
           </div>
@@ -89,7 +104,11 @@ export const LoginCard: React.FC<LoginCardProps> = ({
           <div className="space-y-2">
             <label
               htmlFor="password-input"
-              className="text-blueprint-grey font-jetbrains-mono text-micro font-light uppercase tracking-widest"
+              className="text-blueprint-grey font-mono text-micro uppercase tracking-widest block"
+              style={{
+                fontFamily: 'var(--sys-type-fontFamilies-primary)',
+                fontVariationSettings: "'wght' 500, 'opsz' 12",
+              }}
             >
               Password
             </label>
@@ -101,34 +120,52 @@ export const LoginCard: React.FC<LoginCardProps> = ({
               onChange={(e) => setPassword(e.target.value)}
               className={cn(
                 'w-full bg-[var(--sys-color-charcoalBackground-base)]/40 border border-blueprint-grey/20 p-4 rounded-slab',
-                'text-paper-white font-jetbrains-mono focus:border-ink-gold focus:outline-none transition-colors'
+                'text-paper-white focus:border-ink-gold focus:outline-none transition-all'
               )}
+              style={{
+                fontFamily: 'var(--sys-type-fontFamilies-mono)',
+                fontVariationSettings: "'wght' 400",
+              }}
               required
             />
           </div>
         </div>
 
         <motion.button
-          whileHover={{ scale: 1.02, y: -2 }}
-          whileTap={{ scale: 0.98 }}
+          whileHover={{ scale: 1.01, y: -1 }}
+          whileTap={{ scale: 0.99 }}
           type="submit"
           className={cn(
             'mt-4 py-5 bg-[var(--sys-color-inkGold-base)] text-[var(--sys-color-asphaltBlack-base)] font-bold uppercase tracking-[0.2em]',
-            'rounded-pebble shadow-hover-rise text-lg border border-[var(--sys-color-inkGold-base)]/70 shadow-glow-gold hover:brightness-105'
+            'rounded-pebble shadow-hover-rise text-lg border border-[var(--sys-color-inkGold-base)]/70 shadow-glow-gold hover:brightness-105 transition-all'
           )}
+          style={{
+            fontFamily: 'var(--sys-type-fontFamilies-primary)',
+            fontVariationSettings: "'wght' 700, 'opsz' 24",
+          }}
           disabled={isLoading}
         >
           {isLoading ? 'VERIFYING...' : 'ENTER ARCHIVE'}
         </motion.button>
 
-        <p className="text-center font-mono text-[10px] uppercase tracking-[0.3em] text-ink-gold/70 -mt-3">
+        <p
+          className="text-center text-[10px] uppercase tracking-[0.3em] text-ink-gold/70 -mt-3"
+          style={{
+            fontFamily: 'var(--sys-type-fontFamilies-mono)',
+            fontVariationSettings: "'wght' 300",
+          }}
+        >
           Primary Entry Action
         </p>
 
         <button
           type="button"
           onClick={onRegisterClick}
-          className="text-center text-paper-white/60 font-mono text-[10px] uppercase tracking-widest hover:text-ink-gold transition-colors"
+          className="text-center text-paper-white/60 text-[10px] uppercase tracking-widest hover:text-ink-gold transition-colors"
+          style={{
+            fontFamily: 'var(--sys-type-fontFamilies-mono)',
+            fontVariationSettings: "'wght' 400",
+          }}
         >
           Create Collective ID
         </button>

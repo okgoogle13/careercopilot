@@ -326,15 +326,15 @@ export function StyleGuide() {
               phases.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-[10px] font-mono uppercase tracking-widest">
-              <div className="bg-surface-dim border border-outline rounded-pebble p-4 flex flex-col gap-1">
+              <div className="bg-surface-dim border border-outline rounded-strike p-4 flex flex-col gap-1">
                 <span className="opacity-40">Contract A</span>
                 <span className="text-primary font-bold">typeSpringSlam = 600ms</span>
               </div>
-              <div className="bg-surface-dim border border-outline rounded-pebble p-4 flex flex-col gap-1">
+              <div className="bg-surface-dim border border-outline rounded-strike p-4 flex flex-col gap-1">
                 <span className="opacity-40">Contract B</span>
                 <span className="text-secondary font-bold">dragSettle = 800ms</span>
               </div>
-              <div className="bg-surface-dim border border-outline rounded-pebble p-4 flex flex-col gap-1">
+              <div className="bg-surface-dim border border-outline rounded-strike p-4 flex flex-col gap-1">
                 <span className="opacity-40">Contract C</span>
                 <span className="text-tertiary font-bold">waterRipple = 3000ms</span>
               </div>
@@ -550,6 +550,35 @@ export function StyleGuide() {
               <Placard
                 elevation="raised"
                 header={
+                  <h3 className="text-title-medium font-black uppercase">Scaffold Error States</h3>
+                }
+              >
+                <div className="space-y-6">
+                  <ScaffoldInput
+                    id="style-guide-error-input"
+                    label="Required field"
+                    value=""
+                    error={true}
+                    errorMessage="This field is required"
+                    helperText="Scaffold shows error state with red border and alert message"
+                    fullWidth
+                  />
+                  <ScaffoldArea
+                    id="style-guide-error-area"
+                    label="Narrative content"
+                    value=""
+                    error={true}
+                    errorMessage="Please provide at least 20 characters"
+                    helperText="Text areas support error states for validation feedback"
+                    fullWidth
+                    rows={4}
+                  />
+                </div>
+              </Placard>
+
+              <Placard
+                elevation="raised"
+                header={
                   <h3 className="text-title-medium font-black uppercase">March and Megaphone</h3>
                 }
                 footer={
@@ -578,7 +607,7 @@ export function StyleGuide() {
                     {['stencil', 'tram', 'seal', 'wheat'].map((name) => (
                       <div
                         key={name}
-                        className="flex flex-col items-center gap-2 p-3 bg-surface-dim rounded-pebble border border-outline/10 group hover:border-primary/40 transition-colors"
+                        className="flex flex-col items-center gap-2 p-3 bg-surface-dim rounded-strike border border-outline/10 group hover:border-primary/40 transition-colors"
                       >
                         <KrIcon
                           name={name as any}

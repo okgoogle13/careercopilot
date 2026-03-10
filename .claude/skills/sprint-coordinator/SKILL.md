@@ -13,10 +13,11 @@ Use this skill to manage sprint-sized delivery work. Keep it focused on executio
 2. Break goals into milestones, then into tasks with explicit acceptance criteria, effort, priority, and dependencies.
 3. Preserve parallelism: keep tasks concurrent unless a real dependency forces sequencing.
 4. Pull evidence from specialist skills instead of inventing status. Use `project-health-checker`, `codebase-orchestrator`, `compliance-dashboard`, `audit-agent`, `deployment-manager`, and `task-router-mcp` as the source of truth for health and execution state.
-5. Record blockers with severity, owner, impact radius, mitigation, and an escalation clock.
-6. Recompute velocity and ETA from completed and in-progress work whenever generating standups or readiness reports.
-7. Emit a single sprint artifact for the current need: plan, standup, readiness dashboard, or delegation payload.
-8. When a sprint reaches 100% task completion or deployment readiness is scored, proactively provide:
+5. When coordinating migration-kit quality work, treat `migration-audit` as the canonical worker per target and split its evidence-acquisition and sub-audit stages into parallel child tasks where dependencies allow it.
+6. Record blockers with severity, owner, impact radius, mitigation, and an escalation clock.
+7. Recompute velocity and ETA from completed and in-progress work whenever generating standups or readiness reports.
+8. Emit a single sprint artifact for the current need: plan, standup, readiness dashboard, or delegation payload.
+9. When a sprint reaches 100% task completion or deployment readiness is scored, proactively provide:
    - Sprint completion summary (tasks completed, velocity achieved, blockers resolved)
    - Celebration acknowledgment (recognize sprint success and team velocity)
    - Concrete next-step recommendations:
@@ -31,10 +32,12 @@ Use this skill to manage sprint-sized delivery work. Keep it focused on executio
 - For daily standups, summarize completed, in-progress, blocked, and next tasks, then include current velocity and the most urgent blocker.
 - For release readiness, score each signal, state `GO`, `GO_WITH_CONDITIONS`, or `NO_GO`, and list the blocking actions.
 - For delegation, emit task-router style payloads with `task_id`, `assigned_to`, `priority`, `inputs`, and optional sequencing fields.
+- For migration audit batches, emit one parent task per target and child tasks for screenshot capture, code/token audit, asset validation, visual scoring, copy review, and final aggregation.
 
 ## Use The Existing Scoring Rules
 
 - Score readiness against concrete signals only.
+- When used with `migration-audit`, use the audit report as the target-level readiness source of truth.
 - Use this weighted default unless the user provides overrides:
   - Test coverage >= 90: 20
   - Build passing: 15
@@ -46,7 +49,57 @@ Use this skill to manage sprint-sized delivery work. Keep it focused on executio
 - Apply these thresholds:
   - `GO` at 95 or above with no critical blockers
   - `GO_WITH_CONDITIONS` at 85 to 94 with only medium or low blockers
-  - `NO_GO` below 85 or with any critical blocker
+- `NO_GO` below 85 or with any critical blocker
+
+## Tandem Workflow With Migration Audit
+
+Use this workflow when auditing `careercopilot-migration-kit-v3` in parallel.
+
+### Parent Task Per Target
+
+Create one parent task for each route or screen target such as:
+- `/login`
+- `/register`
+- `auth-benchmark-v1`
+
+### Parallel Child Tasks
+
+Run these as child tasks when dependencies allow:
+- route and screen resolution
+- screenshot acquisition via Playwright
+- migration/code audit
+- token enforcement
+- asset placement
+- manifest reconciliation
+- UX copy review
+
+These depend on screenshots for full-confidence output:
+- component visual audit
+- page-level M3 visual audit
+- anti-slop review
+
+These depend on the rest:
+- final target aggregation
+- sprint readiness scoring
+- remediation packet generation
+
+### Preferred Execution Backends
+
+1. `task-router-mcp` for queue-style parallel execution
+2. `task-delegator` for lighter batched concurrency
+3. direct/manual execution with the same dependency graph when the queue backend is not available
+
+### Target-Level Readiness Rules
+
+- `PASS` only if the orchestrator score is `>= 90` and there are no critical violations
+- `NEEDS_REFINEMENT` if score is `75-89` or any high-severity issues exist
+- `FAIL` if score is `< 75` or any critical issue exists
+
+### Sprint-Level Readiness Rules
+
+- `GO` only if all in-scope targets are `PASS`
+- `GO_WITH_CONDITIONS` only if no target is `FAIL` and the remaining issues are explicitly accepted
+- `NO_GO` if any target is `FAIL`, any benchmark validation fails, or required screenshot evidence is missing
 
 ## Use The Bundled Examples
 
@@ -65,3 +118,4 @@ Use this skill to manage sprint-sized delivery work. Keep it focused on executio
 - Provide concrete, actionable next steps—not vague suggestions (e.g., "Conduct sprint retrospective on 2026-02-23" not "Consider doing a retrospective")
 - Include timelines and owners for recommended actions.
 - Prioritize recommendations (Immediate → Short-term → Long-term).
+- When using tandem migration audits, never collapse the parent/child task graph into a narrative-only update; preserve explicit dependencies and owners.

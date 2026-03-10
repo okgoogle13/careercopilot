@@ -1,0 +1,30 @@
+{
+  "benchmarkId": "dashboard-benchmark-v1",
+  "benchmarkClass": "dashboard_screen",
+  "route": "/dashboard",
+  "sourceFile": "apps/web/src/screens/DashboardScreen.tsx",
+  "wireframeArtifact": "docs/design-system/wireframes/dashboard.json",
+  "screenshots": [
+    "frontend/docs/design/generated/previews/dashboard.png",
+    "frontend/docs/design/generated/previews/run-2026-03-10_13-22-12/dashboard.png"
+  ],
+  "expectedScore": {
+    "overallMin": 90,
+    "dimensionFloors": {
+      "typography": 10,
+      "shapes": 10,
+      "colour": 10,
+      "motion": 6,
+      "m3_expressive": 10,
+      "asset_usage": 12,
+      "proportions": 8,
+      "anti_slop": 6,
+      "ux_copy": 8
+    }
+  },
+  "notes": [
+    "Dashboard benchmark calibrates migration-audit for the first non-auth migrated route.",
+    "Evidence references repo-root Playwright screenshots rather than copied local assets.",
+    "Legacy fallback remains required even when the migrated route benchmarks cleanly."
+  ]
+}
