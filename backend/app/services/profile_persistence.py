@@ -12,7 +12,7 @@ from app.services.user_profile_service import user_profile_service
 
 async def persist_user_profile_snapshot(
     *,
-    db: Session,
+    db: Any,
     user_id: str,
     field_name: str,
     payload: Any,

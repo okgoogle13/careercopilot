@@ -4,7 +4,6 @@ Documents API Endpoints (Revised for Supabase Alignment)
 FastAPI endpoints for document generation including:
 - Document retrieval (Safe)
 - Redlining (Safe)
-- Cover letter/KSC generation (Disabled due to Genkit 0.4.0 migration)
 """
 
 import json
@@ -18,37 +17,29 @@ from fastapi.responses import FileResponse
 
 from app.api.endpoints._shared import run_endpoint_operation
 from app.core.dependencies import get_current_user
+from app.core.firebase import get_firestore
 from app.services.doc_intelligence import DocumentIntelligenceService
-
-# Legacy Genkit flows disabled
-# from app.genkit_flows.cover_letter_generator import generate_tailored_cover_letter
-# from app.genkit_flows.ksc_generator import generateKscResponse
 
 router = APIRouter()
 logger = logging.getLogger(__name__)
 
-
-# ============================================================================
-# Endpoints
-# ============================================================================
-
-from sqlalchemy.orm import Session
-
-from app.core.database import get_db
 from app.models.database import User
-from app.models.user_asset import UserAsset
 
 
 @router.get("/", status_code=status.HTTP_200_OK)
-async def get_documents(
-    current_user: User = Depends(get_current_user), db: Session = Depends(get_db)
-):
+async def get_documents(current_user: User = Depends(get_current_user)):
     """
     Get all documents for the current user.
     """
     try:
-        assets = db.query(UserAsset).filter(UserAsset.user_id == current_user.id).all()
-        return [asset.to_dict() for asset in assets]
+        db = get_firestore()
+        docs = db.collection("user_assets").where("user_id", "==", current_user.id).stream()
+        assets = []
+        for doc in docs:
+            d = doc.to_dict()
+            d["id"] = doc.id
+            assets.append(d)
+        return assets
     except Exception as e:
         logger.error("Error fetching documents: %s", e, exc_info=True)
         return []
@@ -58,11 +49,6 @@ async def get_documents(
 async def redline_document(file: UploadFile = File(...), edits: str = Form(...)):
     """
     Apply tracked changes (redlines) to a DOCX file.
-
-    Args:
-        file: The DOCX file to process.
-        edits: A JSON string representing a list of edits.
-               Example: '[{"original": "old text", "replacement": "new text"}]'
     """
     service = DocumentIntelligenceService()
 

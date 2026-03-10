@@ -262,40 +262,44 @@ def build_asset_document(
     )
 
 
-async def save_asset_document(asset_doc: AssetDocument, user_id: str, db: Session) -> str:
-    """Persist an extracted asset to PostgreSQL."""
+async def save_asset_document(asset_doc: AssetDocument, user_id: str) -> str:
+    """Persist an extracted asset to Firestore."""
     try:
-        db_asset = UserAsset(
-            user_id=user_id,
-            document_type=asset_doc.documentType,
-            extracted_data=asset_doc.extractedData,
-            role_type=asset_doc.tags.roleType,
-            subsectors=asset_doc.tags.subsectors,
-            file_name=asset_doc.metadata.fileName,
-            file_type=asset_doc.metadata.fileType,
-            storage_uri=asset_doc.metadata.storageUri,
-            file_size_bytes=asset_doc.metadata.fileSizeBytes,
-            schema_version=asset_doc.schemaVersion,
-        )
+        from app.core.firebase import get_firestore
 
-        db.add(db_asset)
-        db.commit()
-        db.refresh(db_asset)
+        db = get_firestore()
+        col = db.collection("user_assets")
+        doc_ref = col.document()
 
-        logger.info("Asset saved to Database: id=%s", db_asset.id)
-        return str(db_asset.id)
+        asset_data = {
+            "id": doc_ref.id,
+            "user_id": user_id,
+            "document_type": asset_doc.documentType,
+            "extracted_data": asset_doc.extractedData,
+            "role_type": asset_doc.tags.roleType,
+            "subsectors": asset_doc.tags.subsectors,
+            "file_name": asset_doc.metadata.fileName,
+            "file_type": asset_doc.metadata.fileType,
+            "storage_uri": asset_doc.metadata.storageUri,
+            "file_size_bytes": asset_doc.metadata.fileSizeBytes,
+            "schema_version": asset_doc.schemaVersion,
+        }
+
+        doc_ref.set(asset_data)
+
+        logger.info("Asset saved to Firestore: id=%s", doc_ref.id)
+        return doc_ref.id
     except Exception as exc:
-        logger.error("Failed to save to database: %s", exc, exc_info=True)
+        logger.error("Failed to save to Firestore: %s", exc, exc_info=True)
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Failed to save asset to database: {exc!s}",
+            detail=f"Failed to save asset to Firestore: {exc!s}",
         ) from exc
 
 
 async def extract_and_store_document(
     request: ExtractAndSaveRequest,
     user_id: str,
-    db: Session,
 ) -> tuple[str, str]:
     """Run the extract-and-save workflow and return ``(asset_id, document_label)``."""
     document_text = await read_document_from_storage(request.fileId)
@@ -314,5 +318,5 @@ async def extract_and_store_document(
         storage_uri=permanent_uri,
         extracted_data=extracted_data,
     )
-    asset_id = await save_asset_document(asset_doc, user_id, db)
+    asset_id = await save_asset_document(asset_doc, user_id)
     return asset_id, document_label

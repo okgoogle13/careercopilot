@@ -1,37 +1,41 @@
 from datetime import datetime, timezone
 
 from fastapi import APIRouter, Depends, HTTPException, status
-from sqlalchemy.orm import Session
 
-from app.core.database import get_db
 from app.core.dependencies import get_current_user
+from app.core.firebase import get_firestore
 from app.models.application_schemas import ApplicationCreate, ApplicationResponse
-from app.models.database import Application, User
+from app.models.database import User
 
 router = APIRouter()
+COLLECTION_NAME = "applications"
 
 
 @router.post("/", response_model=ApplicationResponse, status_code=status.HTTP_201_CREATED)
 async def create_application(
     application: ApplicationCreate,
     current_user: User = Depends(get_current_user),
-    db: Session = Depends(get_db),
 ):
     """Create a new job application for the current user."""
 
     app_data = application.model_dump(by_alias=False)
 
-    new_application = Application(user_id=current_user.id, status="draft", source="manual")
+    # Defaults
+    app_data["user_id"] = current_user.id
+    app_data["status"] = "draft"
+    app_data["source"] = "manual"
+    app_data["created_at"] = datetime.now(timezone.utc).isoformat()
+    app_data["updated_at"] = datetime.now(timezone.utc).isoformat()
 
-    for key, value in app_data.items():
-        if hasattr(new_application, key):
-            setattr(new_application, key, value)
+    db = get_firestore()
+    col = db.collection(COLLECTION_NAME)
 
-    db.add(new_application)
-    db.commit()
-    db.refresh(new_application)
+    doc_ref = col.document()
+    app_data["id"] = doc_ref.id
 
-    return new_application
+    doc_ref.set(app_data)
+
+    return app_data
 
 
 @router.get(
@@ -42,19 +46,18 @@ async def create_application(
 async def get_application(
     application_id: str,
     current_user: User = Depends(get_current_user),
-    db: Session = Depends(get_db),
 ):
     """Retrieve a specific job application by its ID."""
-    application = (
-        db.query(Application)
-        .filter(Application.id == application_id, Application.user_id == current_user.id)
-        .first()
-    )
+    db = get_firestore()
+    doc_ref = db.collection(COLLECTION_NAME).document(application_id)
+    doc = doc_ref.get()
 
-    if not application:
+    if not doc.exists or doc.to_dict().get("user_id") != current_user.id:
         raise HTTPException(status_code=404, detail="Application not found.")
 
-    return application
+    app_data = doc.to_dict()
+    app_data["id"] = doc.id
+    return app_data
 
 
 @router.get(
@@ -64,18 +67,25 @@ async def get_application(
 )
 async def get_all_applications(
     current_user: User = Depends(get_current_user),
-    db: Session = Depends(get_db),
     skip: int = 0,
     limit: int = 100,
 ):
     """Retrieve all job applications for the current user with pagination."""
-    applications = (
-        db.query(Application)
-        .filter(Application.user_id == current_user.id)
-        .offset(skip)
+    db = get_firestore()
+    query = (
+        db.collection(COLLECTION_NAME)
+        .where("user_id", "==", current_user.id)
         .limit(limit)
-        .all()
+        .offset(skip)
     )
+
+    docs = query.stream()
+
+    applications = []
+    for doc in docs:
+        d = doc.to_dict()
+        d["id"] = doc.id
+        applications.append(d)
 
     return applications
 
@@ -89,44 +99,37 @@ async def update_application(
     application_id: str,
     application: ApplicationCreate,
     current_user: User = Depends(get_current_user),
-    db: Session = Depends(get_db),
 ):
     """Update an existing job application."""
-    db_application = (
-        db.query(Application)
-        .filter(Application.id == application_id, Application.user_id == current_user.id)
-        .first()
-    )
+    db = get_firestore()
+    doc_ref = db.collection(COLLECTION_NAME).document(application_id)
+    doc = doc_ref.get()
 
-    if not db_application:
+    if not doc.exists or doc.to_dict().get("user_id") != current_user.id:
         raise HTTPException(status_code=404, detail="Application not found.")
 
     update_data = application.model_dump(by_alias=False, exclude_unset=True)
-    for key, value in update_data.items():
-        if hasattr(db_application, key):
-            setattr(db_application, key, value)
+    update_data["updated_at"] = datetime.now(timezone.utc).isoformat()
 
-    db.commit()
-    db.refresh(db_application)
-    return db_application
+    doc_ref.update(update_data)
+
+    updated_doc = doc_ref.get().to_dict()
+    updated_doc["id"] = doc.id
+    return updated_doc
 
 
 @router.delete("/{application_id}", status_code=status.HTTP_204_NO_CONTENT)
 async def delete_application(
     application_id: str,
     current_user: User = Depends(get_current_user),
-    db: Session = Depends(get_db),
 ):
     """Delete a job application."""
-    db_application = (
-        db.query(Application)
-        .filter(Application.id == application_id, Application.user_id == current_user.id)
-        .first()
-    )
+    db = get_firestore()
+    doc_ref = db.collection(COLLECTION_NAME).document(application_id)
+    doc = doc_ref.get()
 
-    if not db_application:
+    if not doc.exists or doc.to_dict().get("user_id") != current_user.id:
         raise HTTPException(status_code=404, detail="Application not found.")
 
-    db.delete(db_application)
-    db.commit()
+    doc_ref.delete()
     return None
